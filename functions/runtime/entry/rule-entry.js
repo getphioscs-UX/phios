@@ -67,20 +67,20 @@ const QUESTIONS = Object.freeze({
     zh: '你直接观察到哪些证据，可以支持目前对这项变化的描述？'
   },
   counter_evidence: {
-    en: 'What have you observed that does not fit, or could weaken, your current explanation?',
-    zh: '你观察到哪些内容不符合、或可能削弱目前的解释？'
+    en: 'Have you noticed any occasion when this pattern did not happen, or when things went differently from your current explanation?',
+    zh: '有没有哪一次，这种情况并没有发生，或者事情的发展和你目前的解释不一样？'
   },
   dependency: {
-    en: 'Which parts depend on each other, and what is directly known about that dependency?',
-    zh: '哪些部分彼此依赖？对于这种依赖，目前有哪些可以直接确认的内容？'
+    en: 'When one part of this situation changes, does another part seem to change with it? Please give one example you have actually noticed. You may also say you are not sure.',
+    zh: '这件事里，当其中一个部分发生变化时，另一个部分会不会也跟着变化？请举一个你实际观察过的例子；不确定也可以直接说明。'
   },
   current_tension: {
     en: 'What competing pressures or unresolved tension are most active now?',
     zh: '目前最明显的相互拉扯、压力或未解决张力是什么？'
   },
   desired_transition: {
-    en: 'What would you like to become different, without assuming the path or outcome?',
-    zh: '你希望什么变得不同？暂时不假定实现路径或最终结果。'
+    en: 'If this situation began to improve, what is the first concrete difference you would most want to notice? You do not need to explain how to achieve it.',
+    zh: '如果这段情况开始改善，你最希望先看到哪一个具体变化？暂时不需要说明应该怎样做到。'
   }
 });
 
@@ -403,11 +403,16 @@ export function evaluateEntryRuleFirst(input = {}) {
   const completion = completeness(fieldCompleteness);
   const minimumRoundsMet = entryRound >= depth.minimum;
   const maximumRoundsReached = entryRound >= depth.maximum;
-  const entryComplete = maximumRoundsReached || (minimumRoundsMet && completion.entryComplete);
   const unaskedCandidates = questionCandidates(
     fieldCompleteness,
     language,
     askedTargets
+  );
+  const noQuestionRemaining = unaskedCandidates.length === 0;
+  const entryComplete = noQuestionRemaining || maximumRoundsReached || (
+    minimumRoundsMet && (
+      completion.entryComplete
+    )
   );
   const nextQuestionTarget = entryComplete
     ? 'none'
@@ -448,6 +453,7 @@ export function evaluateEntryRuleFirst(input = {}) {
       maximumRoundsReached,
       entryCompleteness: completion.entryCompleteness,
       entryComplete,
+      noQuestionRemaining,
       nextQuestionTarget,
       answeredTarget,
       askedTargets,

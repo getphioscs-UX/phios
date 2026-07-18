@@ -293,7 +293,6 @@ function mergeProviderEnrichment(ruleEntry, providerResult, entryInput) {
   const entryRound = ruleEntry.assessment.entryRound;
   const minimumRoundsMet = entryRound >= ruleEntry.assessment.minimumRounds;
   const maximumRoundsReached = entryRound >= ruleEntry.assessment.maximumRounds;
-  const entryComplete = maximumRoundsReached || (minimumRoundsMet && completion.entryComplete);
   const missingFields = FIELD_NAMES.filter(field => fieldCompleteness[field] < THRESH[field]);
   const unknownReality = missingFields.map(field => `${field.replaceAll('_', ' ')} remains unestablished.`);
   extracted.unknownReality = unknownReality;
@@ -301,6 +300,15 @@ function mergeProviderEnrichment(ruleEntry, providerResult, entryInput) {
   const askedTargets = list(ruleEntry.assessment?.askedTargets);
   const questions = providerQuestions(enrichment, missingFields)
     .filter(item => !askedTargets.includes(item.target));
+  const ruleQuestions = list(ruleEntry.questionCandidates)
+    .filter(item => !askedTargets.includes(cleanText(item?.target)));
+  const availableQuestions = questions.length ? questions : ruleQuestions;
+  const noQuestionRemaining = availableQuestions.length === 0;
+  const entryComplete = noQuestionRemaining || maximumRoundsReached || (
+    minimumRoundsMet && (
+      completion.entryComplete
+    )
+  );
   const nextQuestionTarget = entryComplete
     ? 'none'
     : questions[0]?.target ||
@@ -314,10 +322,7 @@ function mergeProviderEnrichment(ruleEntry, providerResult, entryInput) {
       entryMethod: `rule_first+${providerResult.provider}`,
       acknowledgement: cleanText(enrichment.acknowledgement) || ruleEntry.acknowledgement,
       fieldCompleteness,
-      questionCandidates: questions.length
-        ? questions
-        : list(ruleEntry.questionCandidates)
-            .filter(item => !askedTargets.includes(cleanText(item?.target))),
+      questionCandidates: availableQuestions,
       extractedFields: extracted,
       evidenceBoundary: {
         observedEvidence: [...list(ruleEntry.evidenceBoundary?.observedEvidence)],
@@ -336,6 +341,7 @@ function mergeProviderEnrichment(ruleEntry, providerResult, entryInput) {
         maximumRoundsReached,
         entryCompleteness: completion.entryCompleteness,
         entryComplete,
+        noQuestionRemaining,
         nextQuestionTarget,
         missingFields
       },

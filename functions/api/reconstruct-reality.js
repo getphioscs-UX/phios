@@ -445,8 +445,7 @@ function chooseReply(entry, language) {
   return [
     cleanText(entry?.acknowledgement),
 
-    cleanText(candidate?.question) ||
-      message(language, 'fallbackQuestion')
+    cleanText(candidate?.question)
   ]
     .filter(Boolean)
     .join('\n\n');
