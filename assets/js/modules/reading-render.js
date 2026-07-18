@@ -713,6 +713,31 @@ function renderInspector(response) {
     );
   }
 
+  const patternEstablished =
+    reading?.patternAssessment?.established === true;
+
+  setText(
+    '#readingPatternBoundary',
+    patternEstablished
+      ? t('reading.inspector.established')
+      : t('reading.inspector.possibleReading')
+  );
+
+  setText(
+    '#readingNavigationBoundary',
+    reading?.navigationReadiness?.ready === true
+      ? t('reading.inspector.allowed')
+      : t('reading.inspector.blocked')
+  );
+
+  const allowedSources = qs('#readingAllowedSources');
+
+  if (allowedSources) {
+    allowedSources.textContent = String(
+      list(reading?.evidenceAudit?.patternSources).length
+    );
+  }
+
   setText(
     '#readingInterfaceCount',
     interfaceCount > 0
