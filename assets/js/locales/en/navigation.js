@@ -248,6 +248,27 @@ const navigation = Object.freeze({
     continueButton:
       'Continue to Review',
 
+    choiceGuideEyebrow:
+      'Compare your available paths',
+
+    choiceGuideTitle:
+      'Different paths answer different needs',
+
+    choiceGuideText:
+      'Review when each path fits, its first step, and its boundary. The order is a starting point, not a decision made for you.',
+
+    shownFirst:
+      'Shown first',
+
+    pathBoundary:
+      'What this path does not decide',
+
+    boundaryFallback:
+      'This path remains bounded and does not decide the outcome for you.',
+
+    viewPathDetails:
+      'View evidence and review details',
+
     noNavigation:
       'No Reality Navigation is available for this Journey.'
   }

@@ -107,7 +107,7 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
   const normalized = list(paths);
 
   if (normalized.length === 0) {
-    container.innerHTML = `<p>${escapeHTML(
+    container.innerHTML = `<p class="navigation-path-empty">${escapeHTML(
       t('navigation.noNavigation')
     )}</p>`;
     return;
@@ -121,149 +121,100 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
       const direction = cleanText(path?.direction);
       const boundary = cleanText(path?.boundary);
       const description = cleanText(path?.description || path?.rationale);
-      const suitableWhen = list(path?.suitableWhen)
-        .map(cleanText)
-        .filter(Boolean);
-      const reviewConditions = list(path?.reviewConditions)
-        .map(cleanText)
-        .filter(Boolean);
+      const suitableWhen = list(path?.suitableWhen).map(cleanText).filter(Boolean);
+      const reviewConditions = list(path?.reviewConditions).map(cleanText).filter(Boolean);
       const firstStep = cleanText(path?.firstStep || path?.nextStep);
       const evidenceWatch = list(path?.evidenceWatch || path?.evidenceBasis)
-        .map(cleanText)
-        .filter(Boolean);
+        .map(cleanText).filter(Boolean);
       const requiresProfessionalReview =
         path?.requiresProfessionalReview === true ||
         cleanText(path?.pathType) === 'professional_review';
-      const availability = cleanText(path?.availability);
-      const actionSteps = list(path?.actionSteps)
-        .map(cleanText)
-        .filter(Boolean);
+      const actionSteps = list(path?.actionSteps).map(cleanText).filter(Boolean);
       const observationWindow = cleanText(path?.observationWindow);
-      const stopConditions = list(path?.stopConditions)
-        .map(cleanText)
-        .filter(Boolean);
-      const completionSignals = list(path?.completionSignals)
-        .map(cleanText)
-        .filter(Boolean);
+      const stopConditions = list(path?.stopConditions).map(cleanText).filter(Boolean);
+      const completionSignals = list(path?.completionSignals).map(cleanText).filter(Boolean);
       const recommended = id === cleanText(recommendedPathId);
       const selected = id === cleanText(selectedPathId);
 
+      const detailBlocks = [
+        evidenceWatch.length > 0 ? `
+          <div>
+            <span>${escapeHTML(t('navigation.evidenceWatch'))}</span>
+            <ul>${evidenceWatch.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>
+          </div>` : '',
+        actionSteps.length > 0 ? `
+          <div>
+            <span>${escapeHTML(t('navigation.actionSteps'))}</span>
+            <ol>${actionSteps.map(step => `<li>${escapeHTML(step)}</li>`).join('')}</ol>
+          </div>` : '',
+        observationWindow ? `
+          <div>
+            <span>${escapeHTML(t('navigation.observationWindow'))}</span>
+            <p>${escapeHTML(observationWindow)}</p>
+          </div>` : '',
+        completionSignals.length > 0 ? `
+          <div>
+            <span>${escapeHTML(t('navigation.completionSignals'))}</span>
+            <ul>${completionSignals.map(signal => `<li>${escapeHTML(signal)}</li>`).join('')}</ul>
+          </div>` : '',
+        stopConditions.length > 0 ? `
+          <div>
+            <span>${escapeHTML(t('navigation.stopConditions'))}</span>
+            <ul>${stopConditions.map(condition => `<li>${escapeHTML(condition)}</li>`).join('')}</ul>
+          </div>` : '',
+        reviewConditions.length > 0 ? `
+          <div>
+            <span>${escapeHTML(t('navigation.reviewSignals'))}</span>
+            <ul>${reviewConditions.map(condition => `<li>${escapeHTML(condition)}</li>`).join('')}</ul>
+          </div>` : ''
+      ].filter(Boolean).join('');
+
       return `
         <article
-          class="navigation-path-item${
-            recommended ? ' is-recommended' : ''
-          }${selected ? ' is-selected' : ''}"
+          class="navigation-path-item${recommended ? ' is-recommended' : ''}${selected ? ' is-selected' : ''}"
           data-path-id="${escapeHTML(id)}"
           data-path-type="${escapeHTML(cleanText(path?.pathType))}"
         >
-          <span class="navigation-path-number">
-            ${String(index + 1).padStart(2, '0')}
-          </span>
-          <h3>${escapeHTML(title)}</h3>
+          <header class="navigation-path-header">
+            <span class="navigation-path-number">${String(index + 1).padStart(2, '0')}</span>
+            <div>
+              ${recommended ? `<mark>${escapeHTML(t('navigation.shownFirst'))}</mark>` : ''}
+              <h3>${escapeHTML(title)}</h3>
+            </div>
+          </header>
 
-          ${recommended ? `
-            <mark>${escapeHTML(
-              t('navigation.suggestedStartingPath')
-            )}</mark>
-          ` : ''}
+          ${direction ? `<p class="navigation-path-purpose">${escapeHTML(direction)}</p>` : ''}
+          ${description ? `<p class="navigation-path-rationale">${escapeHTML(description)}</p>` : ''}
 
-          ${availability === 'planned' ? `
-            <mark class="navigation-path-planned">
-              ${escapeHTML(t('navigation.pathPlanned'))}
-            </mark>
-          ` : ''}
-
-          ${direction ? `<p>${escapeHTML(direction)}</p>` : ''}
-          ${description ? `
-            <p class="navigation-path-rationale">
-              ${escapeHTML(description)}
-            </p>
-          ` : ''}
-
-          ${suitableWhen.length > 0 ? `
-            <div class="navigation-path-suitable">
+          <div class="navigation-path-customer-grid">
+            <section>
               <span>${escapeHTML(t('navigation.suitableWhen'))}</span>
-              <ul>
-                ${suitableWhen
-                  .map(item => `<li>${escapeHTML(item)}</li>`)
-                  .join('')}
-              </ul>
-            </div>
-          ` : ''}
+              ${suitableWhen.length > 0
+                ? `<ul>${suitableWhen.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>`
+                : `<p>${escapeHTML(t('navigation.notEstablished'))}</p>`}
+            </section>
 
-          ${firstStep ? `
-            <div class="navigation-path-next-step">
+            <section>
               <span>${escapeHTML(t('navigation.firstStep'))}</span>
-              <strong>${escapeHTML(firstStep)}</strong>
-            </div>
-          ` : ''}
+              <p>${escapeHTML(firstStep || t('navigation.notEstablished'))}</p>
+            </section>
 
-          ${evidenceWatch.length > 0 ? `
-            <div class="navigation-path-evidence">
-              <span>${escapeHTML(t('navigation.evidenceWatch'))}</span>
-              <ul>
-                ${evidenceWatch
-                  .map(item => `<li>${escapeHTML(item)}</li>`)
-                  .join('')}
-              </ul>
-            </div>
-          ` : ''}
-
-          ${actionSteps.length > 0 ? `
-            <div class="navigation-path-actions">
-              <span>${escapeHTML(t('navigation.actionSteps'))}</span>
-              <ol>
-                ${actionSteps
-                  .map(step => `<li>${escapeHTML(step)}</li>`)
-                  .join('')}
-              </ol>
-            </div>
-          ` : ''}
-
-          ${observationWindow ? `
-            <div class="navigation-path-window">
-              <span>${escapeHTML(t('navigation.observationWindow'))}</span>
-              <p>${escapeHTML(observationWindow)}</p>
-            </div>
-          ` : ''}
-
-          ${completionSignals.length > 0 ? `
-            <div class="navigation-path-completion">
-              <span>${escapeHTML(t('navigation.completionSignals'))}</span>
-              <ul>
-                ${completionSignals
-                  .map(signal => `<li>${escapeHTML(signal)}</li>`)
-                  .join('')}
-              </ul>
-            </div>
-          ` : ''}
-
-          ${stopConditions.length > 0 ? `
-            <div class="navigation-path-stop">
-              <span>${escapeHTML(t('navigation.stopConditions'))}</span>
-              <ul>
-                ${stopConditions
-                  .map(condition => `<li>${escapeHTML(condition)}</li>`)
-                  .join('')}
-              </ul>
-            </div>
-          ` : ''}
-
-          ${boundary ? `<small>${escapeHTML(boundary)}</small>` : ''}
+            <section>
+              <span>${escapeHTML(t('navigation.pathBoundary'))}</span>
+              <p>${escapeHTML(boundary || t('navigation.boundaryFallback'))}</p>
+            </section>
+          </div>
 
           ${requiresProfessionalReview ? `
             <p class="navigation-path-professional">
               ${escapeHTML(t('navigation.requiresProfessionalReview'))}
-            </p>
-          ` : ''}
+            </p>` : ''}
 
-          ${reviewConditions.length > 0 ? `
-            <ul class="navigation-path-review">
-              ${reviewConditions
-                .map(condition => `<li>${escapeHTML(condition)}</li>`)
-                .join('')}
-            </ul>
-          ` : ''}
+          ${detailBlocks ? `
+            <details class="navigation-path-details">
+              <summary>${escapeHTML(t('navigation.viewPathDetails'))}</summary>
+              <div class="navigation-path-detail-grid">${detailBlocks}</div>
+            </details>` : ''}
 
           <div class="navigation-path-choice">
             <button
@@ -272,11 +223,7 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
               data-select-path="${escapeHTML(id)}"
               ${selected ? 'disabled aria-pressed="true"' : 'aria-pressed="false"'}
             >
-              ${escapeHTML(
-                selected
-                  ? t('navigation.pathSelected')
-                  : t('navigation.chooseThisPath')
-              )}
+              ${escapeHTML(selected ? t('navigation.pathSelected') : t('navigation.chooseThisPath'))}
             </button>
           </div>
         </article>
@@ -397,35 +344,6 @@ export function renderRealityNavigation(response) {
   );
 
   renderList('#navigationConstraints', navigation.constraints);
-  setText('#navigationPriority', priority.focus);
-  setText('#navigationPriorityReason', priority.reason);
-  setText(
-    '#navigationRecommendedDirection',
-    recommendedDirection.summary || recommendedDirection.label
-  );
-  setText('#navigationRecommendedReason', recommendedDirection.reason);
-  setText(
-    '#navigationUserChoiceNotice',
-    recommendedDirection.userChoiceNotice
-  );
-  setText('#navigationNextStep', actionGuidance.nextStep);
-  renderList('#navigationActionSteps', actionGuidance.steps);
-  setText(
-    '#navigationObservationWindow',
-    actionGuidance.observationWindow
-  );
-  renderList(
-    '#navigationCompletionSignals',
-    actionGuidance.completionSignals
-  );
-  renderList(
-    '#navigationStopConditions',
-    actionGuidance.stopConditions
-  );
-  setText(
-    '#navigationContinuityInstruction',
-    actionGuidance.continuityInstruction
-  );
 
   const primaryRegion =
     currentPosition.primaryRuntimeRegion ||

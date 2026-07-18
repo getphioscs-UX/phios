@@ -137,3 +137,8 @@ The customer Reading layer now enforces sentence ownership, separates user-repor
 ## Step 2.5.3B — Navigation Path Generation Rules
 
 The Reading → Navigation handoff now generates two to four bounded path options only when Navigation readiness is established. Paths are ordered for presentation but never selected automatically. Unknown Reality remains visible but its content is excluded from inference; professional boundaries suppress reversible experiments and keep qualified review available. The path engine is deterministic and makes no Workers AI or OpenAI request.
+
+
+## Step 2.5.3C — Navigation Customer View Simplification
+
+Navigation now presents bounded paths as comparable customer cards. Each card keeps only purpose, suitable conditions, first step, and boundary visible; evidence, review, completion, and stop conditions move into optional details. Legacy priority and directive action-guidance blocks are removed from the customer view, while path ordering remains non-binding and user choice remains required.

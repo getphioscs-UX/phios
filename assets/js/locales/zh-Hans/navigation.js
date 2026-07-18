@@ -248,6 +248,27 @@ const navigation = Object.freeze({
     continueButton:
       '继续进入审阅',
 
+    choiceGuideEyebrow:
+      '比较目前可选择的路径',
+
+    choiceGuideTitle:
+      '不同路径回应不同需要',
+
+    choiceGuideText:
+      '请比较每条路径何时适用、第一步是什么，以及它不会替你决定什么。排列顺序只是起点，不是系统已经替你作出的选择。',
+
+    shownFirst:
+      '优先显示',
+
+    pathBoundary:
+      '这条路径不会替你决定什么',
+
+    boundaryFallback:
+      '这条路径保持明确边界，不会替你决定最终结果。',
+
+    viewPathDetails:
+      '查看证据与审阅细节',
+
     noNavigation:
       '本次旅程没有可用的现实导航结果。'
   }

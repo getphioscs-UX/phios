@@ -165,3 +165,105 @@
     padding: 0.35rem 0.5rem;
   }
 }
+
+
+/* Step 2.5.3C — simplified customer path comparison */
+.navigation-choice-guide {
+  display: grid;
+  gap: .55rem;
+}
+
+.navigation-choice-guide > * {
+  margin: 0;
+}
+
+.navigation-path {
+  display: grid;
+  gap: 1rem;
+}
+
+.navigation-path-item {
+  display: grid;
+  gap: 1rem;
+}
+
+.navigation-path-header {
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+}
+
+.navigation-path-header h3 {
+  margin: .35rem 0 0;
+}
+
+.navigation-path-purpose,
+.navigation-path-rationale {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.navigation-path-customer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+}
+
+.navigation-path-customer-grid > section {
+  min-width: 0;
+  padding: .85rem;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: .8rem;
+  background: rgba(255,255,255,.025);
+}
+
+.navigation-path-customer-grid span,
+.navigation-path-detail-grid span {
+  display: block;
+  margin-bottom: .45rem;
+  color: #d9bd7c;
+  font-size: .72rem;
+  letter-spacing: .05em;
+}
+
+.navigation-path-customer-grid p,
+.navigation-path-customer-grid ul,
+.navigation-path-detail-grid p,
+.navigation-path-detail-grid ul,
+.navigation-path-detail-grid ol {
+  margin: 0;
+}
+
+.navigation-path-details {
+  border-top: 1px solid rgba(255,255,255,.09);
+  padding-top: .75rem;
+}
+
+.navigation-path-details > summary {
+  width: fit-content;
+  color: #7cd8d4;
+  cursor: pointer;
+}
+
+.navigation-path-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .85rem;
+  margin-top: .85rem;
+}
+
+.navigation-path-detail-grid > div {
+  padding: .8rem;
+  border-left: 2px solid rgba(124,216,212,.3);
+}
+
+.navigation-path-empty {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .navigation-path-customer-grid,
+  .navigation-path-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
