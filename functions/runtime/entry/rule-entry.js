@@ -364,7 +364,7 @@ export function evaluateEntryRuleFirst(input = {}) {
     observedChange: observedEvidence[0] || messages[0] || '',
     time,
     trigger: triggerCandidates[0] || '',
-    context: unique(allSentences.slice(1, 6)),
+    context: [],
     affectedRealities: domains,
     evidence: observedEvidence,
     counterEvidence,
@@ -375,7 +375,7 @@ export function evaluateEntryRuleFirst(input = {}) {
     })),
     reportedExperience,
     interpretations,
-    currentTension: reportedExperience[0] || '',
+    currentTension: '',
     desiredTransition: desiredCandidates[0] || '',
     unknownReality: []
   };

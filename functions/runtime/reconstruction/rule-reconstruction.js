@@ -36,7 +36,7 @@ const COORDINATE_REGISTRY = Object.freeze([
     zh: '神经系统',
     words: [
       'nervous system', 'neurological', 'nerve', 'heart racing', 'panic',
-      '神经系统', '神经', '心跳', '紧张', '惊慌'
+      '神经系统', '神经', '心跳', '惊慌'
     ]
   },
   {
@@ -212,13 +212,13 @@ function isSubstantiveAnswer(value){
 function runtimeMaterial(runtimeEntry){
   const boundary = runtimeEntry?.evidenceBoundary || {};
   const observed = uniqueText([
-    runtimeEntry?.realityChange?.rawStatement,
-    runtimeEntry?.realityChange?.normalizedStatement,
     ...arr(runtimeEntry?.entryEvidence),
     ...arr(runtimeEntry?.knownReality),
     ...arr(boundary.observedEvidence)
   ]);
   const reported = uniqueText([
+    runtimeEntry?.realityChange?.rawStatement,
+    runtimeEntry?.realityChange?.normalizedStatement,
     ...arr(boundary.reportedExperience),
     ...reconstructionEvidence(runtimeEntry),
     runtimeEntry?.emergingTension?.summary
@@ -295,8 +295,12 @@ function domainLabel(value, language){
 }
 
 function createCarrier(runtimeEntry, material, language){
+  const coordinateAnswer = answerFor(runtimeEntry, 'carrier_coordinates');
+  const coordinateSources = isSubstantiveAnswer(coordinateAnswer)
+    ? [coordinateAnswer]
+    : [];
   const initializationCoordinates = COORDINATE_REGISTRY.map(coordinate=>{
-    const evidence = firstMatching(material.all, coordinate.words);
+    const evidence = firstMatching(coordinateSources, coordinate.words);
     return reportedSignal({
       label: coordinate.label,
       zhLabel: coordinate.zh,
@@ -306,30 +310,23 @@ function createCarrier(runtimeEntry, material, language){
     });
   });
 
-  const domains = arr(runtimeEntry?.affectedDomains)
-    .map(item=>domainLabel(item?.domain || item, language))
-    .filter(Boolean);
-  const domainEvidence = domains.join(' · ');
-  const relationalEvidence = firstMatching(material.all, [
+  const directSignatureEvidence = answerFor(runtimeEntry, 'carrier_signatures');
+  const relationalEvidence = firstMatching([directSignatureEvidence], [
     'relationship', 'partner', 'husband', 'wife', 'family', 'team',
     '关系', '伴侣', '丈夫', '妻子', '家庭', '团队'
   ]);
-  const resourceEvidence = firstMatching(material.all, [
+  const resourceEvidence = firstMatching([directSignatureEvidence], [
     'money', 'income', 'salary', 'saving', 'spend', 'resource', 'business', 'work',
     '钱', '收入', '薪水', '储蓄', '花钱', '资源', '生意', '工作'
   ]);
-  const forces = uniqueText(arr(runtimeEntry?.emergingTension?.competingForces));
-  const directionalEvidence = forces.length > 1 ? forces.at(-1) : '';
+  const directionalEvidence = text(runtimeEntry?.desiredTransition);
   const temporalEvidence =
     runtimeEntry?.timing?.normalizedTiming ||
     runtimeEntry?.timing?.statedTiming ||
     '';
-  const navigationEvidence = runtimeEntry?.reconstructionDirection?.focus || '';
-  const directSignatureEvidence = answerFor(runtimeEntry, 'carrier_signatures');
-
   const signatureInputs = [
-    ['Structural Signature', '结构签名', isSubstantiveAnswer(directSignatureEvidence) ? directSignatureEvidence : domainEvidence, 0.62, 'reported_experience'],
-    ['Navigational Signature', '导航签名', navigationEvidence, 0.46, 'interpretation'],
+    ['Structural Signature', '结构签名', isSubstantiveAnswer(directSignatureEvidence) ? directSignatureEvidence : '', 0.62, 'reported_experience'],
+    ['Navigational Signature', '导航签名', '', 0, 'unknown_reality'],
     ['Relational Signature', '关系签名', relationalEvidence, 0.56, 'reported_experience'],
     ['Resource Signature', '资源签名', resourceEvidence, 0.6, 'reported_experience'],
     ['Directional Signature', '方向签名', directionalEvidence, 0.54, 'reported_experience'],
@@ -478,12 +475,12 @@ export function reconstructRuntime(runtimeEntry, options = {}){
   activate(grammarStates,"G7",0.60,
     copy(language,"Runtime sequence emerging.","运行顺序正在形成。"));
 
-  if(runtimeEntry?.emergingTension){
+  if(text(runtimeEntry?.emergingTension?.summary)){
     activate(grammarStates,"G8",0.81,
       copy(language,"Experience layer visible.","经验层已经开始显现。"));
   }
 
-  if(runtimeEntry?.userInterpretation){
+  if(text(runtimeEntry?.userInterpretation?.summary)){
     activate(grammarStates,"G9",0.76,
       copy(language,"Compression into meaning detected.","已经识别到经验被压缩为意义。"));
   }
@@ -579,10 +576,29 @@ export function reconstructRuntime(runtimeEntry, options = {}){
         ...arr(runtimeEntry?.evidenceBoundary?.interpretation),
         runtimeEntry?.userInterpretation
       ]),
+      counterEvidence:uniqueText([
+        ...arr(runtimeEntry?.counterEvidence),
+        ...arr(runtimeEntry?.evidenceBoundary?.counterEvidence)
+      ]),
+      dependencies:arr(runtimeEntry?.dependencies).length
+        ? arr(runtimeEntry.dependencies)
+        : arr(runtimeEntry?.evidenceBoundary?.dependencies),
       unknownReality:uniqueText([
         ...arr(runtimeEntry?.unknownReality),
         ...arr(runtimeEntry?.evidenceBoundary?.unknownReality)
       ])
+    },
+
+    dependency: {
+      summary: uniqueText(
+        (arr(runtimeEntry?.dependencies).length
+          ? runtimeEntry.dependencies
+          : arr(runtimeEntry?.evidenceBoundary?.dependencies))
+      ).join(language === 'zh-Hans' ? '；' : '; '),
+      status: (arr(runtimeEntry?.dependencies).length ||
+        arr(runtimeEntry?.evidenceBoundary?.dependencies).length)
+        ? 'reported'
+        : 'unclear'
     },
 
     nextStage:{

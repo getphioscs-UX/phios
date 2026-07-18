@@ -539,9 +539,11 @@ function normalizeEvidenceBoundary(
             ),
 
     dependency:
-      isPlainObject(
-        legacyEvidence?.dependency
-      )
+      isPlainObject(reconstruction?.dependency)
+        ? reconstruction.dependency
+        : isPlainObject(
+          legacyEvidence?.dependency
+        )
         ? legacyEvidence.dependency
         : {
             summary:

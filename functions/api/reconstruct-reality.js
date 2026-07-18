@@ -2,8 +2,19 @@ import { sanitizeConversation } from '../_lib/utils.js';
 import { buildRuntimeEntry } from '../_lib/runtime-entry.js';
 import routeRuntimeEntry from '../runtime/entry/provider-router.js';
 
-const MIN_ENTRY_ROUNDS = 3;
-const MAX_ENTRY_ROUNDS = 4;
+const EVIDENCE_DEPTHS = Object.freeze({
+  quick: Object.freeze({ minimum: 3, maximum: 4 }),
+  guided: Object.freeze({ minimum: 5, maximum: 7 }),
+  deep: Object.freeze({ minimum: 7, maximum: 10 })
+});
+
+function evidenceDepth(value) {
+  const key = cleanText(value).toLowerCase();
+  return {
+    key: EVIDENCE_DEPTHS[key] ? key : 'guided',
+    ...(EVIDENCE_DEPTHS[key] || EVIDENCE_DEPTHS.guided)
+  };
+}
 
 const FIELD_LABELS = Object.freeze({
   observed_change: {
@@ -62,8 +73,13 @@ function respond(payload, status = 200, headers = {}) {
 
 function cleanText(value) {
   return typeof value === 'string'
-    ? value.trim()
+    ? value.replace(/```(?:\w+)?/g, '').replace(/\s+/g, ' ').trim()
     : '';
+}
+
+function cleanStatement(value) {
+  const cleaned = cleanText(value).replace(/^(?:有|yes)[。.!]?\s*/i, '');
+  return /^(?:有|yes)[。.!]?$/i.test(cleaned) ? '' : cleaned;
 }
 
 function isPlainObject(value) {
@@ -274,6 +290,20 @@ function mergeRuntimeEntry(previous, current, language, options = {}) {
       )
     },
 
+    desiredTransition:
+      cleanStatement(current.desiredTransition) ||
+      cleanStatement(previous.desiredTransition),
+
+    counterEvidence: mergeUniqueItems(
+      previous.counterEvidence,
+      current.counterEvidence
+    ).map(itemText),
+
+    dependencies: mergeUniqueItems(
+      previous.dependencies,
+      current.dependencies
+    ),
+
     emergingTension: {
       ...previous.emergingTension,
       ...current.emergingTension,
@@ -307,6 +337,14 @@ function mergeRuntimeEntry(previous, current, language, options = {}) {
       professionalAssessment: mergeUniqueItems(
         previousBoundary.professionalAssessment,
         currentBoundary.professionalAssessment
+      ),
+      counterEvidence: mergeUniqueItems(
+        previousBoundary.counterEvidence,
+        currentBoundary.counterEvidence
+      ).map(itemText),
+      dependencies: mergeUniqueItems(
+        previousBoundary.dependencies,
+        currentBoundary.dependencies
       ),
       unknownReality: preserveCompletion
         ? list(previousBoundary.unknownReality)
@@ -455,22 +493,35 @@ function runtimeEvidenceBoundary(entry, language) {
   const missingFields =
     entry?.assessment?.missingFields || [];
 
+  const fields = entry?.extractedFields || {};
+  const cleanList = value => mergeUniqueItems(value).map(itemText).map(cleanStatement).filter(Boolean);
+
   return {
-    observedEvidence: [
-      ...(entry?.evidenceBoundary?.observedEvidence || [])
-    ],
+    observedEvidence: cleanList(
+      entry?.evidenceBoundary?.observedEvidence
+    ),
 
-    reportedExperience: [
-      ...(entry?.evidenceBoundary?.reportedExperience || [])
-    ],
+    reportedExperience: cleanList(
+      entry?.evidenceBoundary?.reportedExperience
+    ),
 
-    interpretation: [
-      ...(entry?.evidenceBoundary?.interpretation || [])
-    ],
+    interpretation: cleanList(
+      entry?.evidenceBoundary?.interpretation
+    ),
 
-    professionalAssessment: [
-      ...(entry?.evidenceBoundary?.professionalAssessment || [])
-    ],
+    professionalAssessment: cleanList(
+      entry?.evidenceBoundary?.professionalAssessment
+    ),
+
+    counterEvidence: cleanList(fields.counterEvidence),
+
+    dependencies: list(fields.dependencies)
+      .map(item => ({
+        source: cleanStatement(itemText(item)),
+        effect: cleanText(item?.effect),
+        status: cleanText(item?.status) || 'reported'
+      }))
+      .filter(item => item.source),
 
     unknownReality:
       missingFields.map(field =>
@@ -572,6 +623,30 @@ function buildCompatibleRuntimeEntry({
 
     evidenceBoundary:
       boundary,
+
+    counterEvidence:
+      boundary.counterEvidence,
+
+    dependencies:
+      boundary.dependencies,
+
+    desiredTransition:
+      cleanStatement(
+        routedEntry?.extractedFields?.desiredTransition
+      ),
+
+    emergingTension: {
+      summary: cleanStatement(
+        routedEntry?.extractedFields?.currentTension
+      ),
+      competingForces: [
+        cleanStatement(routedEntry?.extractedFields?.currentTension),
+        cleanStatement(routedEntry?.extractedFields?.desiredTransition)
+      ].filter(Boolean),
+      confidence: routedEntry?.extractedFields?.currentTension
+        ? routedEntry.fieldCompleteness.current_tension
+        : 0
+    },
 
     entryMethod:
       routedEntry.entryMethod,
@@ -680,10 +755,10 @@ export function onRequestGet() {
     ],
 
     minimumEntryRounds:
-      MIN_ENTRY_ROUNDS,
+      EVIDENCE_DEPTHS.quick.minimum,
 
     maximumEntryRounds:
-      MAX_ENTRY_ROUNDS,
+      EVIDENCE_DEPTHS.deep.maximum,
 
     status:
       'ready'
@@ -771,9 +846,11 @@ export async function onRequestPost({
           item.role === 'user'
       ).length;
 
+    const depth = evidenceDepth(body.evidenceDepth);
+
     const entryRound =
       Math.min(
-        MAX_ENTRY_ROUNDS,
+        depth.maximum,
 
         Math.max(
           0,
@@ -796,6 +873,7 @@ export async function onRequestPost({
           : 'guided',
 
       language,
+      evidenceDepth: depth.key,
 
       answerTarget:
         cleanText(

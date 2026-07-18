@@ -102,6 +102,7 @@ const shared = Object.freeze({
     spiritual: 'Spiritual',
     community: 'Community',
     organization: 'Organization',
+    environment: 'Environment',
     unknown: 'Unknown',
     other: 'Other'
   },

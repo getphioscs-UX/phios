@@ -102,6 +102,7 @@ const shared = Object.freeze({
     spiritual: '精神与灵性',
     community: '社群',
     organization: '组织',
+    environment: '环境',
     unknown: '未知',
     other: '其他'
   },
