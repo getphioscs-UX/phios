@@ -128,3 +128,7 @@ npm run check:reading-dedup
 ## Step 2.5.3A — Reading → Navigation Contract
 
 Reading now emits a bounded `navigationHandoff` contract. The handoff carries readiness, blockers, current Reality, direction, constraints, evidence boundary, evidence watch, unknown Reality, and professional boundary. It intentionally keeps `availablePaths` and `recommendedPriority` empty and `selectedPath` null; path generation belongs to Step 2.5.3B and user selection belongs to Step 2.5.3D.
+
+## Step 2.5.2F — Reading Customer Language & Progressive Disclosure
+
+The customer Reading layer now enforces sentence ownership, separates user-reported material from PHI OS interpretation, pairs technical meaning with customer language, and summarizes long statements before optional expansion. Technical evidence classes and the Reading → Navigation handoff remain unchanged.

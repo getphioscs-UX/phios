@@ -887,3 +887,59 @@
     text-align: left;
   }
 }
+
+/* Step 2.5.2F — customer language and progressive disclosure */
+.reading-customer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reading-customer-list > li + li {
+  margin-top: .75rem;
+}
+
+.reading-customer-statement {
+  min-width: 0;
+}
+
+.reading-customer-statement p {
+  margin: .45rem 0 0;
+  line-height: 1.65;
+}
+
+.reading-source-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: .24rem .52rem;
+  border: 1px solid rgba(124, 216, 212, .25);
+  border-radius: 999px;
+  color: #7cd8d4;
+  background: rgba(124, 216, 212, .05);
+  font-size: .66rem;
+  letter-spacing: .06em;
+}
+
+.reading-full-answer {
+  margin-top: .55rem;
+  padding-top: .55rem;
+  border-top: 1px solid rgba(255, 255, 255, .09);
+}
+
+.reading-full-answer > summary {
+  width: fit-content;
+  color: #d9bd7c;
+  cursor: pointer;
+  font-size: .76rem;
+}
+
+.reading-full-answer > p {
+  color: #c5c9d1;
+  white-space: pre-wrap;
+}
+
+.runtime-pattern-map > .reading-source-label + strong {
+  display: block;
+  margin-top: .7rem;
+}

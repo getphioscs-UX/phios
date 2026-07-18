@@ -80,6 +80,70 @@ const CONSCIOUS_KEYS = Object.freeze({
   C5: 'reading.runtimeLabels.conscious.identity'
 });
 
+
+const CUSTOMER_SUMMARY_LIMIT = 220;
+
+function normalizedStatement(value) {
+  return cleanText(value)
+    .toLowerCase()
+    .replace(/[\s\u00a0]+/g, ' ')
+    .replace(/[.!?。！？]+$/g, '')
+    .trim();
+}
+
+function uniqueStatements(values, owned = new Set()) {
+  const output = [];
+
+  for (const value of list(values)) {
+    const statement = cleanText(value);
+    const key = normalizedStatement(statement);
+
+    if (!statement || !key || owned.has(key)) continue;
+
+    owned.add(key);
+    output.push(statement);
+  }
+
+  return output;
+}
+
+function customerTextBlock(value, sourceKey) {
+  const text = translatedKnownText(value);
+  const source = t(sourceKey);
+
+  if (text.length <= CUSTOMER_SUMMARY_LIMIT) {
+    return `
+      <div class="reading-customer-statement">
+        <span class="reading-source-label">${escapeHTML(source)}</span>
+        <p>${escapeHTML(text)}</p>
+      </div>
+    `;
+  }
+
+  const summary = `${text.slice(0, CUSTOMER_SUMMARY_LIMIT).trim()}…`;
+
+  return `
+    <div class="reading-customer-statement">
+      <span class="reading-source-label">${escapeHTML(source)}</span>
+      <p>${escapeHTML(summary)}</p>
+      <details class="reading-full-answer">
+        <summary>${escapeHTML(t('reading.customer.expandFull'))}</summary>
+        <p>${escapeHTML(text)}</p>
+      </details>
+    </div>
+  `;
+}
+
+function renderCustomerList(selector, values, sourceKey, fallbackKey) {
+  const element = qs(selector);
+  if (!element) return;
+
+  const items = uniqueStatements(values);
+  element.classList.add('reading-customer-list');
+  element.innerHTML = items.length
+    ? items.map(value => `<li>${customerTextBlock(value, sourceKey)}</li>`).join('')
+    : `<li>${escapeHTML(t(fallbackKey))}</li>`;
+}
 const EVIDENCE_KEYS = Object.freeze({
   observed_evidence: 'evidence.observed',
   reported_experience: 'evidence.reported',
@@ -461,15 +525,27 @@ function renderIntegrated(reading) {
     ? reading.integratedReading
     : {};
 
-  renderList(
-    '#readingKnownReality',
+  const sentenceOwnership = new Set();
+  const observedEvidence = uniqueStatements(
     integrated.observedEvidence,
+    sentenceOwnership
+  );
+  const unknownReality = uniqueStatements(
+    integrated.unknownReality,
+    sentenceOwnership
+  );
+
+  renderCustomerList(
+    '#readingKnownReality',
+    observedEvidence,
+    'reading.customer.sourceReported',
     'reading.dynamic.noObservedEvidence'
   );
 
-  renderList(
+  renderCustomerList(
     '#readingUnknownReality',
-    integrated.unknownReality,
+    unknownReality,
+    'reading.customer.sourceUnconfirmed',
     'reading.dynamic.noUnknownReality'
   );
 
@@ -483,21 +559,21 @@ function renderIntegrated(reading) {
 
   if (patternElement) {
     patternElement.innerHTML = `
+      <span class="reading-source-label">${escapeHTML(
+        t('reading.customer.sourceSystem')
+      )}</span>
       <strong>${escapeHTML(
         translatedKnownText(
           pattern.name,
           'reading.integratedSection.patternNotEstablished'
         )
       )}</strong>
-
-      <p>${escapeHTML(
-        translatedKnownText(pattern.summary)
-      )}</p>
-
+      ${customerTextBlock(
+        pattern.summary,
+        'reading.customer.sourceSystem'
+      )}
       <small>
-        ${escapeHTML(
-          t('reading.dynamic.interpretation')
-        )}
+        ${escapeHTML(t('reading.customer.customerMeaningLabel'))}
         ·
         ${escapeHTML(
           t('reading.dynamic.confidenceLabel', {
@@ -527,13 +603,13 @@ function renderIntegrated(reading) {
       .join(' · ');
 
     alternativeElement.innerHTML = `
-      <p>${escapeHTML(
+      ${customerTextBlock(
         translatedKnownText(
           alternative.summary,
           'reading.integratedSection.noAlternative'
-        )
-      )}</p>
-
+        ),
+        'reading.customer.sourcePossible'
+      )}
       <small>${escapeHTML(
         t('reading.dynamic.evidenceNeeded', {
           evidence:
@@ -618,9 +694,11 @@ function renderIntegrated(reading) {
     integrated.currentTransition
   );
 
-  renderList(
+  renderCustomerList(
     '#readingEvidenceWatch',
-    integrated.evidenceWatch
+    uniqueStatements(integrated.evidenceWatch, sentenceOwnership),
+    'reading.customer.sourceNextEvidence',
+    'reading.dynamic.notEstablished'
   );
 }
 

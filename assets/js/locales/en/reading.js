@@ -67,7 +67,15 @@ const reading = Object.freeze({
       nextBoundary: 'Before entering Navigation',
       evidenceWatch: 'Evidence that may change the reading',
       inspectorTitle: 'View Reading Inspector',
-      inspectorDescription: 'Runtime IDs, inference provider, storage, and model status'
+      inspectorDescription: 'Runtime IDs, inference provider, storage, and model status',
+      sourceReported: 'You reported',
+      sourceSystem: 'PHI OS currently reads',
+      sourceUnconfirmed: 'Still unconfirmed',
+      sourcePossible: 'Another possible reading',
+      sourceNextEvidence: 'What to observe next',
+      customerMeaningLabel: 'Current possible meaning',
+      expandFull: 'Expand full answer',
+      collapseFull: 'Collapse full answer'
     },
     stack: {
       coordinateTitle: 'Initialization Coordinate',

@@ -67,7 +67,15 @@ const reading = Object.freeze({
       nextBoundary: '进入导航之前',
       evidenceWatch: '哪些证据可能改变当前读取',
       inspectorTitle: '查看 Reading Inspector',
-      inspectorDescription: 'Runtime ID、推理 Provider、储存与模型状态'
+      inspectorDescription: 'Runtime ID、推理 Provider、储存与模型状态',
+      sourceReported: '你所报告的资料',
+      sourceSystem: 'PHI OS 目前的读取',
+      sourceUnconfirmed: '仍待确认',
+      sourcePossible: '另一种可能的理解',
+      sourceNextEvidence: '接下来可观察的资料',
+      customerMeaningLabel: '目前可能代表的意思',
+      expandFull: '展开完整内容',
+      collapseFull: '收起完整内容'
     },
     stack: {
       coordinateTitle: '初始化坐标',
