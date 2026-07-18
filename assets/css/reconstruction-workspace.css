@@ -3,6 +3,130 @@
   color:#f5f2e9;
 }
 
+/* Step 2.5.2A — customer-facing five-block reconstruction */
+.reconstruction-workspace{
+  grid-template-columns:minmax(0,1fr);
+  width:min(1100px,100%);
+  margin-inline:auto;
+}
+
+.customer-reconstruction{
+  padding:clamp(1.25rem,3vw,2.2rem);
+  border-top:1px solid rgba(255,255,255,.11);
+}
+
+.customer-reconstruction-heading{
+  max-width:760px;
+  margin-bottom:1.4rem;
+}
+
+.customer-reconstruction-heading h3{
+  margin:.45rem 0 .65rem;
+  font:400 clamp(1.75rem,4vw,2.7rem)/1.08 Georgia,serif;
+}
+
+.customer-reconstruction-heading>p:last-child{
+  margin:0;
+  color:#a7adba;
+  line-height:1.6;
+}
+
+.customer-reconstruction-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.8rem;
+}
+
+.customer-summary-card{
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr);
+  gap:.9rem;
+  min-height:180px;
+  padding:1.25rem;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:19px;
+  background:rgba(255,255,255,.025);
+}
+
+.customer-summary-card--change{
+  grid-column:1/-1;
+  min-height:0;
+  border-color:rgba(217,189,124,.3);
+  background:rgba(217,189,124,.045);
+}
+
+.customer-summary-card--confirmed{
+  border-color:rgba(124,216,212,.25);
+  background:rgba(124,216,212,.035);
+}
+
+.customer-summary-card--unknown{
+  border-color:rgba(255,255,255,.14);
+}
+
+.customer-summary-card>span{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:50%;
+  color:#d9bd7c;
+  font-size:.67rem;
+}
+
+.customer-summary-card h4{
+  margin:.3rem 0 .75rem;
+  font:400 1.3rem/1.2 Georgia,serif;
+}
+
+.customer-summary-card p,
+.customer-summary-card ul{
+  margin:0;
+  color:#d8dbe2;
+  line-height:1.65;
+}
+
+.customer-summary-card ul{
+  padding-left:1.1rem;
+}
+
+.customer-summary-card li+li{
+  margin-top:.55rem;
+}
+
+.reconstruction-next-stage{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:2rem;
+  padding:1.4rem 1.5rem;
+  border-top:1px solid rgba(255,255,255,.11);
+}
+
+.reconstruction-next-stage h3{
+  margin:.35rem 0 .45rem;
+  font:400 clamp(1.35rem,3vw,1.9rem)/1.15 Georgia,serif;
+}
+
+.reconstruction-next-stage>div:first-child>p:last-child{
+  max-width:650px;
+  margin:0;
+  color:#a7adba;
+}
+
+.reconstruction-next-stage .reconstruction-actions{
+  flex:0 0 auto;
+  justify-content:flex-end;
+}
+
+@media(max-width:760px){
+  .customer-reconstruction-grid{grid-template-columns:1fr}
+  .customer-summary-card--change{grid-column:auto}
+  .reconstruction-next-stage{align-items:stretch;flex-direction:column}
+  .reconstruction-next-stage .reconstruction-actions{justify-content:flex-start}
+}
+
 .reconstruction-header{
   position:sticky;
   top:0;
@@ -993,4 +1117,18 @@
     align-items:stretch;
     flex-direction:column;
   }
+}
+
+/* Keep the customer workspace single-column after legacy responsive rules. */
+.reconstruction-workspace{
+  grid-template-columns:minmax(0,1fr);
+  width:min(1100px,100%);
+  margin-inline:auto;
+}
+
+@media(max-width:760px){
+  .customer-reconstruction-grid{grid-template-columns:1fr}
+  .customer-summary-card--change{grid-column:auto}
+  .reconstruction-next-stage{align-items:stretch;flex-direction:column}
+  .reconstruction-next-stage .reconstruction-actions{justify-content:flex-start}
 }

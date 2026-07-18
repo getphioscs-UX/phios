@@ -227,9 +227,6 @@ function entryUnderstanding(entry = {}) {
       : []),
     ...(Array.isArray(entry.initialContext?.relevantConditions)
       ? entry.initialContext.relevantConditions
-      : []),
-    ...(Array.isArray(entry.evidenceBoundary?.reportedExperience)
-      ? entry.evidenceBoundary.reportedExperience
       : [])
   ];
 

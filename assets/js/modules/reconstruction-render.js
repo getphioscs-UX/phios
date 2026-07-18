@@ -525,6 +525,16 @@ function normalizeEvidenceBoundary(
             ? [runtimeEntry.userInterpretation]
             : [],
 
+    counterEvidence:
+      arrayValue(directBoundary?.counterEvidence).length > 0
+        ? directBoundary.counterEvidence
+        : arrayValue(runtimeEntry?.counterEvidence),
+
+    dependencies:
+      arrayValue(directBoundary?.dependencies).length > 0
+        ? directBoundary.dependencies
+        : arrayValue(runtimeEntry?.dependencies),
+
     unknownReality:
       arrayValue(
         directBoundary?.unknownReality
@@ -552,6 +562,99 @@ function normalizeEvidenceBoundary(
               'unclear'
           }
   };
+}
+
+
+function reconstructionAnswer(runtimeEntry, target) {
+  return arrayValue(runtimeEntry?.reconstructionEvidence)
+    .filter(item => cleanText(item?.target) === target)
+    .map(normalizeListItem)
+    .filter(Boolean)
+    .at(-1) || '';
+}
+
+
+function labeledAnswer(runtimeEntry, target) {
+  const answer = reconstructionAnswer(runtimeEntry, target);
+  if (!answer) return '';
+  return `${t(`reconstruction.inquiryTargets.${target}`)}: ${answer}`;
+}
+
+
+export function customerReconstructionViewModel(
+  reconstruction,
+  runtimeEntry
+) {
+  const evidence = normalizeEvidenceBoundary(
+    reconstruction,
+    runtimeEntry
+  );
+  const change = cleanText(
+    runtimeEntry?.realityChange?.normalizedStatement ||
+    runtimeEntry?.realityChange?.rawStatement
+  );
+  const timing = cleanText(
+    runtimeEntry?.timing?.normalizedTiming ||
+    runtimeEntry?.timing?.statedTiming
+  );
+  const process = uniqueTextList([
+    timing ? `${t('reconstruction.timing')}: ${timing}` : '',
+    labeledAnswer(runtimeEntry, 'carrier_coordinates'),
+    labeledAnswer(runtimeEntry, 'experience_style'),
+    labeledAnswer(runtimeEntry, 'expression_style'),
+    labeledAnswer(runtimeEntry, 'agency_style'),
+    labeledAnswer(runtimeEntry, 'identity_style')
+  ]);
+
+  const dependencyConditions = arrayValue(evidence.dependencies)
+    .map(item => cleanText(item?.source) || normalizeListItem(item));
+  const conditions = uniqueTextList([
+    ...arrayValue(runtimeEntry?.initialContext?.relevantConditions),
+    labeledAnswer(runtimeEntry, 'carrier_signatures'),
+    ...dependencyConditions
+  ]);
+  const confirmed = uniqueTextList([
+    ...evidence.knownReality,
+    ...evidence.counterEvidence
+  ]);
+  const unclear = uniqueTextList([
+    ...evidence.unknownReality,
+    ...arrayValue(evidence.interpretation).map(item => {
+      const value = normalizeListItem(item);
+      return value
+        ? `${t('reconstruction.interpretations')}: ${value}`
+        : '';
+    })
+  ]);
+
+  return { change, process, conditions, confirmed, unclear };
+}
+
+
+export function renderCustomerReconstruction(
+  reconstruction,
+  runtimeEntry
+) {
+  const view = customerReconstructionViewModel(
+    reconstruction,
+    runtimeEntry
+  );
+
+  safeSetText('#customerChange', view.change);
+
+  const targets = [
+    ['#customerProcess', view.process, 'reconstruction.customerNoProcess'],
+    ['#customerConditions', view.conditions, 'reconstruction.customerNoConditions'],
+    ['#customerConfirmed', view.confirmed, 'reconstruction.customerNoConfirmed'],
+    ['#customerUnclear', view.unclear, 'reconstruction.customerNoUnknown']
+  ];
+
+  for (const [selector, values, fallbackKey] of targets) {
+    const element = qs(selector);
+    if (element) {
+      element.innerHTML = renderListHTML(values, t(fallbackKey));
+    }
+  }
 }
 
 
@@ -1213,6 +1316,11 @@ export function renderReconstructionResult(
     result.reconstruction ||
     {};
 
+  renderCustomerReconstruction(
+    reconstruction,
+    runtimeEntry
+  );
+
   renderRuntimeEntry(
     runtimeEntry
   );
@@ -1279,9 +1387,10 @@ export function getReconstructionRendererStatus() {
       'PHI OS Reality Reconstruction Renderer',
 
     version:
-      '1.0.0',
+      '2.5.2A',
 
     sections: [
+      'customer_reconstruction_five_block',
       'runtime_entry',
       'formation_grammar',
       'carrier_runtime',

@@ -84,7 +84,7 @@
     </section>
 
     <section class="reconstruction-workspace hidden" id="workspace">
-      <aside class="runtime-chain" aria-label="Current Runtime Chain" data-i18n-aria-label="reconstruction.chainAriaLabel">
+      <aside class="runtime-chain" hidden aria-label="Current Runtime Chain" data-i18n-aria-label="reconstruction.chainAriaLabel">
         <header>
           <p data-i18n="reconstruction.chainLabel">Current Runtime Chain</p>
           <h2 data-i18n="reconstruction.chainTitle">How this Reality is being reconstructed</h2>
@@ -123,7 +123,7 @@
             <p class="workspace-kicker" data-i18n="reconstruction.workspaceKicker">Canonical Runtime Reconstruction</p>
             <h2 data-i18n="reconstruction.workspaceTitle">Reconstructing your current Reality</h2>
           </div>
-          <div class="reconstruction-score">
+          <div class="reconstruction-score" hidden>
             <span data-i18n="reconstruction.maturityLabel">Reconstruction maturity</span>
             <strong id="reconstructionScore">—</strong>
           </div>
@@ -170,17 +170,34 @@
         </section>
 
         <div class="hidden" id="reconstructionSections">
-          <section class="reconstruction-section" id="entrySection">
-            <div class="section-index">01</div>
-            <div class="section-content">
-              <p class="section-label" data-i18n="reconstruction.chain.entry">Reality Entry</p>
-              <h3 data-i18n="reconstruction.observedChangeTitle">What started to change</h3>
-              <p class="large-reading" id="observedChange" data-i18n="reconstruction.notEstablished">Not yet established.</p>
-              <div class="entry-facts">
-                <div><span data-i18n="reconstruction.timing">Timing</span><strong id="entryTiming" data-i18n="reconstruction.notEstablished">Not established</strong></div>
-                <div><span data-i18n="reconstruction.primaryDomains">Primary domains</span><strong id="entryDomains" data-i18n="reconstruction.notEstablished">Not established</strong></div>
-                <div><span data-i18n="reconstruction.emergingTension">Emerging tension</span><strong id="entryTension" data-i18n="reconstruction.notEstablished">Not established</strong></div>
-              </div>
+          <section class="customer-reconstruction" id="entrySection" aria-labelledby="customerReconstructionTitle">
+            <header class="customer-reconstruction-heading">
+              <p class="section-label" data-i18n="reconstruction.customerViewKicker">Your reconstruction</p>
+              <h3 id="customerReconstructionTitle" data-i18n="reconstruction.customerViewTitle">What we can currently establish</h3>
+              <p data-i18n="reconstruction.customerViewIntro">This view keeps confirmed material, reported conditions and unresolved parts separate.</p>
+            </header>
+
+            <div class="customer-reconstruction-grid">
+              <article class="customer-summary-card customer-summary-card--change">
+                <span>01</span>
+                <div><h4 data-i18n="reconstruction.customerChangeTitle">The change taking place</h4><p id="customerChange"></p></div>
+              </article>
+              <article class="customer-summary-card">
+                <span>02</span>
+                <div><h4 data-i18n="reconstruction.customerProcessTitle">How it has developed</h4><ul id="customerProcess"></ul></div>
+              </article>
+              <article class="customer-summary-card">
+                <span>03</span>
+                <div><h4 data-i18n="reconstruction.customerConditionsTitle">Conditions affecting it</h4><ul id="customerConditions"></ul></div>
+              </article>
+              <article class="customer-summary-card customer-summary-card--confirmed">
+                <span>04</span>
+                <div><h4 data-i18n="reconstruction.customerConfirmedTitle">What has been established</h4><ul id="customerConfirmed"></ul></div>
+              </article>
+              <article class="customer-summary-card customer-summary-card--unknown">
+                <span>05</span>
+                <div><h4 data-i18n="reconstruction.customerUnknownTitle">What remains unclear</h4><ul id="customerUnclear"></ul></div>
+              </article>
             </div>
           </section>
 
@@ -256,34 +273,33 @@
             </div>
           </details>
 
-          <section class="reconstruction-section" id="directionSection">
-            <div class="section-index">06</div>
-            <div class="section-content">
-              <p class="section-label" data-i18n="reconstruction.chain.readiness">Reading Readiness</p>
-              <h3 data-i18n="reconstruction.directionTitle">What must be reconstructed next</h3>
-              <div class="direction-card">
+          <section class="reconstruction-next-stage" id="directionSection">
+            <div>
+              <p class="section-label" data-i18n="reconstruction.nextStageLabel">Next stage</p>
+              <h3 data-i18n="reconstruction.readingReadyTitle">Continue when this reconstruction feels accurate</h3>
+              <p data-i18n="reconstruction.readingReadyText">Reality Reading will interpret your current position without changing the evidence recorded here.</p>
+              <div class="direction-card hidden" aria-hidden="true">
                 <div><span data-i18n="reconstruction.focusLabel">Current reconstruction focus</span><strong id="reconstructionFocus" data-i18n="reconstruction.notEstablished">Not yet established.</strong></div>
                 <div><span data-i18n="reconstruction.rationaleLabel">Why it matters</span><strong id="reconstructionRationale" data-i18n="reconstruction.notEstablished">Not yet established.</strong></div>
               </div>
-              <section class="evidence-request-list">
+              <section class="evidence-request-list hidden" aria-hidden="true">
                 <h4 data-i18n="reconstruction.priorityEvidence">Priority evidence requests</h4>
                 <ol id="priorityEvidence"></ol>
               </section>
-              <div class="reconstruction-actions">
+            </div>
+            <div class="reconstruction-actions">
                 <button class="btn primary" id="continueToReading" type="button" disabled data-i18n="reconstruction.continueButton">Continue to Reality Reading →</button>
                 <a
                   class="btn"
                   href="/reality-entry?mode=revise"
                   data-i18n="reconstruction.returnToEntryButton"
                 >Return to Entry &amp; Revise</a>
-              </div>
-              <p class="action-note" data-i18n="reconstruction.actionNote">The next stage will apply the Figure 13B Reading Stack. Interpretive reading systems remain separate from verified evidence.</p>
             </div>
           </section>
         </div>
       </section>
 
-      <aside class="reconstruction-inspector" aria-label="Runtime Inspector" data-i18n-aria-label="reconstruction.inspectorAriaLabel">
+      <aside class="reconstruction-inspector" hidden aria-label="Runtime Inspector" data-i18n-aria-label="reconstruction.inspectorAriaLabel">
         <header>
           <p data-i18n="reconstruction.inspectorLabel">Runtime Inspector</p>
           <h2 data-i18n="reconstruction.inspectorTitle">Evidence and status</h2>
