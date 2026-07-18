@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';
+const state=await fs.readFile('assets/js/modules/navigation-state.js','utf8');
+const selection=await fs.readFile('assets/js/modules/navigation-path-selection.js','utf8');
+const controller=await fs.readFile('assets/js/navigation.js','utf8');
+const render=await fs.readFile('assets/js/modules/navigation-render.js','utf8');
+const en=await fs.readFile('assets/js/locales/en/navigation.js','utf8');
+const zh=await fs.readFile('assets/js/locales/zh-Hans/navigation.js','utf8');
+for(const token of ['phi-os.navigation-state.v1','restoreNavigationState','clearNavigationPath','validateReviewReadiness','prepareNavigationForReview','automaticSelection:false','path_selection_required'])if(!state.includes(token))throw new Error(`Missing Navigation state rule: ${token}`);
+if(!selection.includes('data-prepare-review')||!selection.includes('clearNavigationPath'))throw new Error('Navigation controls not wired.');
+if(!controller.includes('restoreNavigationState'))throw new Error('Navigation state not restored.');
+for(const key of ['continueToReview','reviewPrepared','selectionSavedNotice'])if(!en.includes(key)||!zh.includes(key))throw new Error(`Missing bilingual key: ${key}`);
+if(!render.includes('navigationReviewPrepared'))throw new Error('Review readiness not rendered.');
+console.log('Navigation state, restore, change, and Review gate: passed');

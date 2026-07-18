@@ -142,3 +142,7 @@ The Reading → Navigation handoff now generates two to four bounded path option
 ## Step 2.5.3C — Navigation Customer View Simplification
 
 Navigation now presents bounded paths as comparable customer cards. Each card keeps only purpose, suitable conditions, first step, and boundary visible; evidence, review, completion, and stop conditions move into optional details. Legacy priority and directive action-guidance blocks are removed from the customer view, while path ordering remains non-binding and user choice remains required.
+
+## Step 2.5.3D — Navigation State
+
+Navigation now persists an explicit user-selected path in session state, restores it only when the Runtime Entity, Runtime Entry, and Navigation Input identity still match, allows the user to clear and change the choice, and exposes a Review readiness gate. Review cannot be prepared until a valid available path has been selected. Automatic selection remains prohibited.

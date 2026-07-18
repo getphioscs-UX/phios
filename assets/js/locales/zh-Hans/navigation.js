@@ -167,6 +167,15 @@ const navigation = Object.freeze({
     changePath:
       '更改路径',
 
+    continueToReview:
+      '继续进入审阅',
+
+    reviewPrepared:
+      '已准备进入审阅',
+
+    selectionSavedNotice:
+      '你选择的路径已在本次使用期间保存；进入审阅前仍可更改。',
+
     pathSelected:
       '已选择路径',
 

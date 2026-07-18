@@ -267,3 +267,7 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Step 2.5.3D — Navigation state */
+.navigation-review-ready[disabled]{opacity:.72;cursor:default}
+.selected-path-card[data-selection-state="selected"]::after{content:attr(data-state-notice);display:block;margin-top:.85rem;color:#9da5b3;font-size:.78rem;line-height:1.5}

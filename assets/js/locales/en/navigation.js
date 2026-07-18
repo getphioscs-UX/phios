@@ -167,6 +167,15 @@ const navigation = Object.freeze({
     changePath:
       'Change Path',
 
+    continueToReview:
+      'Continue to Review',
+
+    reviewPrepared:
+      'Ready for Review',
+
+    selectionSavedNotice:
+      'Your selected path is saved for this session. You can change it before Review.',
+
     pathSelected:
       'Path Selected',
 

@@ -7,11 +7,8 @@
  * the user activates its Choose This Path control.
  */
 
-import {
-  SESSION,
-  setSession,
-  cleanText
-} from '../shared.js';
+import { cleanText } from '../shared.js';
+import { persistNavigationState, clearNavigationPath, prepareNavigationForReview } from './navigation-state.js';
 
 function isObject(value) {
   return value !== null &&
@@ -79,10 +76,6 @@ function responseWithSelection(response, selectedPath) {
   };
 }
 
-function saveNavigation(response) {
-  setSession(SESSION.navigation, response);
-  return response;
-}
 
 export function selectNavigationPath(response, pathId) {
   if (!isObject(response?.navigation)) {
@@ -98,7 +91,7 @@ export function selectNavigationPath(response, pathId) {
     throw new Error('The selected Navigation path is unavailable.');
   }
 
-  return saveNavigation(
+  return persistNavigationState(
     responseWithSelection(
       response,
       selectedPathFrom(path)
@@ -125,7 +118,7 @@ export function preserveNavigationPathSelection(
 
   if (!path) return response;
 
-  return saveNavigation(
+  return persistNavigationState(
     responseWithSelection(
       response,
       selectedPathFrom(path, previousSelection)
@@ -143,13 +136,25 @@ export function bindNavigationPathSelection({
 
     if (changeButton) {
       event.preventDefault();
-      document.querySelector('#navigationPath')?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-      document.querySelector('[data-select-path]:not([disabled])')?.focus({
-        preventScroll: true
-      });
+      try {
+        const currentResponse = typeof getResponse === 'function' ? getResponse() : getResponse;
+        const updatedResponse = clearNavigationPath(currentResponse);
+        onSelectionChange?.(updatedResponse);
+        requestAnimationFrame(() => {
+          document.querySelector('#navigationPath')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.querySelector('[data-select-path]:not([disabled])')?.focus({ preventScroll: true });
+        });
+      } catch (error) { console.error('PHI OS Navigation path change failed:', error); }
+      return;
+    }
+
+    const reviewButton = event.target?.closest?.('[data-prepare-review]');
+    if (reviewButton) {
+      event.preventDefault();
+      try {
+        const currentResponse = typeof getResponse === 'function' ? getResponse() : getResponse;
+        onSelectionChange?.(prepareNavigationForReview(currentResponse));
+      } catch (error) { console.error('PHI OS Navigation review preparation failed:', error); }
       return;
     }
 

@@ -241,6 +241,7 @@ function renderSelectedPath(selectedPath) {
   const selected = isObject(selectedPath) ? selectedPath : null;
 
   panel.dataset.selectionState = selected ? 'selected' : 'empty';
+  panel.dataset.stateNotice = selected ? t('navigation.selectionSavedNotice') : '';
 
   if (!selected) {
     setText('#navigationSelectedPathTitle', '');
@@ -264,14 +265,10 @@ function renderSelectedPath(selectedPath) {
     selected.direction
   );
   if (actions) {
+    const prepared = document.documentElement.dataset.navigationReviewPrepared === 'true';
     actions.innerHTML = `
-      <button
-        class="btn navigation-change-path"
-        type="button"
-        data-change-path
-      >
-        ${escapeHTML(t('navigation.changePath'))}
-      </button>
+      <button class="btn navigation-change-path" type="button" data-change-path>${escapeHTML(t('navigation.changePath'))}</button>
+      <button class="btn navigation-review-ready" type="button" data-prepare-review ${prepared ? 'disabled aria-pressed="true"' : 'aria-pressed="false"'}>${escapeHTML(prepared ? t('navigation.reviewPrepared') : t('navigation.continueToReview'))}</button>
     `;
   }
 }
@@ -368,6 +365,7 @@ export function renderRealityNavigation(response) {
     recommendedDirection.pathId,
     selectedPath?.id
   );
+  document.documentElement.dataset.navigationReviewPrepared = cleanText(response?.navigationState?.reviewGate?.preparedAt) ? 'true' : 'false';
   renderSelectedPath(selectedPath);
   setText('#navigationReviewReason', professionalReview.reason);
 
