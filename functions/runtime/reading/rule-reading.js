@@ -16,6 +16,13 @@ import {
   SCHEMA_IDS,
   isAcceptedSchema
 } from '../shared/schema-registry.js';
+import {
+  normalizeReadingEvidenceBoundary,
+  allowedEvidenceFor,
+  buildReadingEvidenceAudit
+} from './reading-evidence-boundary.js';
+import { assessPatternThreshold } from './pattern-threshold.js';
+import { assessNavigationReadiness } from './navigation-readiness.js';
 const SUPPORTED_OUTPUT_LANGUAGES = Object.freeze([
   'en',
   'zh'
@@ -408,13 +415,7 @@ function normalizeEvidenceBoundary(readingInput) {
     ? readingInput.evidenceBoundary
     : {};
 
-  return {
-    observedEvidence: uniqueText(boundary.observedEvidence),
-    reportedExperience: uniqueText(boundary.reportedExperience),
-    interpretation: uniqueText(boundary.interpretation),
-    professionalAssessment: uniqueText(boundary.professionalAssessment),
-    unknownReality: uniqueText(boundary.unknownReality)
-  };
+  return normalizeReadingEvidenceBoundary(boundary);
 }
 
 const DERIVED_UNKNOWN_FIELDS = Object.freeze({
@@ -574,22 +575,11 @@ function normalizeSignatures(readingInput, language) {
 }
 
 function createRuntimeRegions(readingInput, boundary, language) {
-  const entry = isObject(readingInput?.runtimeEntry)
-    ? readingInput.runtimeEntry
-    : {};
-
-  const affectedDomains = list(entry.affectedDomains).map(itemText);
-  const corpus = [
-    entry?.realityChange?.rawStatement,
-    entry?.realityChange?.normalizedStatement,
-    entry?.initialContext?.summary,
-    entry?.emergingTension?.summary,
-    entry?.desiredTransition?.summary,
-    ...affectedDomains,
-    ...boundary.observedEvidence,
-    ...boundary.reportedExperience,
-    ...boundary.interpretation
-  ].filter(Boolean).join(' ');
+  const regionEvidence = allowedEvidenceFor(
+    boundary,
+    'maySupportRegion'
+  ).map(item => item.statement);
+  const corpus = regionEvidence.filter(Boolean).join(' ');
 
   const primaryArc = cleanText(
     readingInput?.reconstruction?.primaryArc
@@ -601,10 +591,7 @@ function createRuntimeRegions(readingInput, boundary, language) {
     const hits = matchingWords(corpus, region.words);
     const arcHint = arcHints.includes(region.id);
 
-    const score = clamp(
-      Math.min(0.72, hits.length * 0.22) +
-      (arcHint ? 0.12 : 0)
-    );
+    const score = clamp(Math.min(0.72, hits.length * 0.22));
 
     const status = score >= 0.55
       ? 'active'
@@ -627,11 +614,17 @@ function createRuntimeRegions(readingInput, boundary, language) {
         `Entry material contains signals associated with ${label}. The classification remains provisional and does not prove cause or stability.`,
         `现实入口材料中出现了与${label}有关的信号；这一分类仍属暂定，不代表成因或稳定性已经得到证明。`
       );
+    } else if (arcHint) {
+      summary = copy(
+        language,
+        `The Formation Arc suggests ${label} may deserve attention, but it cannot establish a Runtime Region without direct allowed evidence.`,
+        `现实形成弧提示${label}可能值得关注，但没有直接且获准使用的证据时，不能据此建立 Runtime Region。`
+      );
     } else {
       summary = copy(
         language,
-        `The primary Formation Arc provides a provisional connection to ${label}. Direct supporting material remains limited.`,
-        `主要现实形成弧与${label}存在暂定关联，但直接支持材料仍然有限。`
+        `The current allowed evidence does not establish a material ${label} signal.`,
+        `当前获准参与读取的证据尚不足以建立明确的${label}信号。`
       );
     }
 
@@ -684,15 +677,14 @@ function configurationResult({
 }
 
 function createConfigurations(readingInput, boundary, language) {
-  const domains = list(readingInput?.runtimeEntry?.affectedDomains)
-    .map(itemText)
-    .filter(Boolean);
+  const configurationEvidence = allowedEvidenceFor(
+    boundary,
+    'maySupportConfiguration'
+  ).map(item => item.statement);
 
-  const corpus = [
-    ...domains,
-    ...boundary.observedEvidence,
-    ...boundary.reportedExperience
-  ].join(' ').toLocaleLowerCase();
+  const corpus = configurationEvidence
+    .join(' ')
+    .toLocaleLowerCase();
 
   const relational = matchingWords(corpus, [
     'relationship',
@@ -732,7 +724,9 @@ function createConfigurations(readingInput, boundary, language) {
     }),
     contextual: configurationResult({
       label: 'Multi-domain context',
-      matches: domains,
+      matches: relational.length > 0 && organizational.length > 0
+        ? [...relational, ...organizational]
+        : [],
       language,
       configurationName: copy(
         language,
@@ -1018,14 +1012,6 @@ function createStrengths(grammarStates, boundary, language) {
     ));
   }
 
-  if (boundary.unknownReality.length > 0) {
-    strengths.push(copy(
-      language,
-      'Unknown Reality remains explicit instead of being filled with assumptions.',
-      '未知现实被明确保留，没有被假设性内容填补。'
-    ));
-  }
-
   return strengths;
 }
 
@@ -1047,16 +1033,6 @@ function createRisks(boundary, language) {
       language,
       'Interpretive material currently outweighs Observed Evidence and may over-shape the apparent pattern.',
       '当前解释性材料多于观察证据，可能过度塑造目前呈现的模式。'
-    ));
-  }
-
-  if (boundary.unknownReality.length > 0) {
-    const count = boundary.unknownReality.length;
-
-    risks.push(copy(
-      language,
-      `${count} unresolved item${count === 1 ? '' : 's'} may materially change the Reading.`,
-      `仍有 ${count} 项关键内容尚未解决，后续证据可能实质改变本次读取。`
     ));
   }
 
@@ -1098,6 +1074,10 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
   ).toLowerCase() || 'formation';
 
   const strongestGrammar = selectStrongestGrammar(grammarStates);
+  const patternAssessment = assessPatternThreshold(
+    boundary,
+    strongestGrammar
+  );
 
   const runtimeRegions = createRuntimeRegions(
     readingInput,
@@ -1135,10 +1115,13 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     outputLanguage
   );
 
-  const evidenceWatch = uniqueText([
-    ...boundary.unknownReality,
-    ...localizedPriorityEvidence
-  ]).slice(0, 8);
+  const normalizedUnknown = new Set(
+    boundary.unknownReality.map(item => cleanText(item).toLowerCase())
+  );
+
+  const evidenceWatch = uniqueText(localizedPriorityEvidence)
+    .filter(item => !normalizedUnknown.has(cleanText(item).toLowerCase()))
+    .slice(0, 8);
 
   const knownCount = boundary.observedEvidence.length;
   const interpretationCount = boundary.interpretation.length;
@@ -1158,21 +1141,32 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     outputLanguage
   );
 
+  const grammarName = strongestGrammar
+    ? `${strongestGrammar.code} ${localizedGrammarLabel(
+        strongestGrammar,
+        outputLanguage
+      )}`
+    : '';
+
   const primaryPattern = {
-    name: strongestGrammar
-      ? `${strongestGrammar.code} ${localizedGrammarLabel(
-          strongestGrammar,
-          outputLanguage
-        )}`
+    name: patternAssessment.established
+      ? grammarName
       : copy(
           outputLanguage,
-          'Pattern not established',
-          '尚未建立模式'
+          grammarName
+            ? `Possible reading · ${grammarName}`
+            : 'Pattern not established',
+          grammarName
+            ? `可能的读取 · ${grammarName}`
+            : '尚未建立模式'
         ),
-    summary: grammarSummary(
-      strongestGrammar,
-      outputLanguage
-    ),
+    summary: patternAssessment.established
+      ? grammarSummary(strongestGrammar, outputLanguage)
+      : copy(
+          outputLanguage,
+          'The current material may point toward this Runtime signal, but it has not met the minimum evidence threshold required to establish a Primary Pattern.',
+          '当前材料可能指向这一 Runtime 信号，但尚未达到建立主要模式所需的最低证据门槛。'
+        ),
     confidence: strongestGrammar
       ? Number(
           Math.min(
@@ -1181,7 +1175,15 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
           ).toFixed(2)
         )
       : 0,
-    evidenceClass: 'interpretation'
+    evidenceClass: 'interpretation',
+    classification: patternAssessment.classification,
+    established: patternAssessment.established,
+    blockers: patternAssessment.blockers,
+    sourceClasses: [
+      'observed_evidence',
+      'reported_experience',
+      'rule_engine'
+    ]
   };
 
   const strengths = createStrengths(
@@ -1195,13 +1197,16 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     outputLanguage
   );
 
-  const navigationScore = clamp(
-    (confidence * 0.7) +
-    (primaryRegion ? 0.15 : 0) +
-    (knownCount > 0 ? 0.15 : 0)
-  );
+  const navigationReadiness = assessNavigationReadiness({
+    readingInput,
+    boundary,
+    patternAssessment,
+    primaryRegion,
+    confidence,
+    language: outputLanguage
+  });
 
-  const navigationReady = navigationScore >= 0.45;
+  const evidenceAudit = buildReadingEvidenceAudit(boundary);
 
   return {
     schemaVersion: SCHEMA_IDS.REALITY_READING,
@@ -1212,12 +1217,16 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     readingMode:
       cleanText(readingInput.readingMode) ||
       'initial_integrated_reading',
-    status: confidence >= 0.62 ? 'ready' : 'partial',
+    status: confidence >= 0.62 && patternAssessment.established
+      ? 'ready'
+      : 'partial',
     confidence: Number(confidence.toFixed(2)),
     locale,
     outputLanguage,
     primaryArc,
     evidenceBoundary: boundary,
+    evidenceAudit,
+    patternAssessment,
     initializationCoordinates: coordinates,
     carrierSignatures: signatures,
     strongestSignature: signatureState.strongestSignature,
@@ -1261,14 +1270,15 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
       ),
       strengths,
       risks,
-      currentRuntime: strongestGrammar
+      currentRuntime: patternAssessment.established && strongestGrammar
         ? `${strongestGrammar.code} ${localizedGrammarLabel(
             strongestGrammar,
             outputLanguage
           )}`
-        : localizedArcLabel(
-            primaryArc,
-            outputLanguage
+        : copy(
+            outputLanguage,
+            'Current possible reading',
+            '当前可能的读取'
           ),
       currentTransition: transitionLabel(
         primaryArc,
@@ -1276,21 +1286,7 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
       ),
       evidenceWatch
     },
-    navigationReadiness: {
-      ready: navigationReady,
-      score: Number(navigationScore.toFixed(2)),
-      reason: navigationReady
-        ? copy(
-            outputLanguage,
-            'The Reading contains a bounded transition and explicit evidence to watch.',
-            '本次读取已经形成有边界的转变方向，并明确保留了需要继续观察的证据。'
-          )
-        : copy(
-            outputLanguage,
-            'More evidence is required before Navigation can identify a stable transition.',
-            '在现实导航识别稳定转变之前，仍需要更多证据。'
-          )
-    },
+    navigationReadiness,
     routingHints: {
       modelInferenceUseful:
         confidence >= 0.42 &&
@@ -1299,7 +1295,6 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
           boundary.reportedExperience.length >= 2 &&
         boundary.unknownReality.length > 0,
       professionalReviewUseful:
-        risks.length >= 2 ||
         boundary.professionalAssessment.length > 0
     }
   };

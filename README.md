@@ -101,3 +101,26 @@ Run the complete validation suite with:
 ```bash
 npm run check
 ```
+
+## Step 2.5.2E — Reading De-duplication
+
+Reading customer outputs now keep each item in one primary role:
+
+- `unknownReality` contains unresolved facts or conditions only;
+- `evidenceWatch` contains future observations that may change the Reading and
+  excludes items already shown as Unknown Reality;
+- `alternativeReading.evidenceNeeded` reuses only the de-duplicated Evidence
+  Watch list;
+- Reading reliability foundations and limitations no longer repeat Unknown
+  Reality statements already visible in the customer uncertainty section;
+- Evidence Trail remains available as a technical source audit and is not
+  treated as a duplicate customer conclusion.
+
+The Reading Contract remains backward compatible. No Entry, Reconstruction,
+provider-routing, Pattern-threshold, or Navigation-boundary rule was relaxed.
+
+Run the dedicated check with:
+
+```bash
+npm run check:reading-dedup
+```
