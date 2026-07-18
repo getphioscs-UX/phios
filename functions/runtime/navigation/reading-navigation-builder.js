@@ -1,8 +1,10 @@
-/** Build the bounded Reading → Navigation handoff without generating paths. */
+/** Build the bounded Reading → Navigation handoff and attach rule-generated path options. */
 import {
   createReadingNavigationContract,
   validateReadingNavigationContract
 } from './reading-navigation-contract.js';
+
+import generateNavigationPaths from './navigation-path-rules.js';
 
 function cleanText(value) {
   return typeof value === 'string'
@@ -35,7 +37,7 @@ function constraintsFromInput(readingInput = {}) {
   ];
 }
 
-export function buildReadingNavigationContract({ reading, readingInput }) {
+export function buildReadingNavigationContract({ reading, readingInput, options = {} }) {
   const integrated = reading?.integratedReading || {};
   const boundary = reading?.evidenceBoundary || {};
 
@@ -73,12 +75,28 @@ export function buildReadingNavigationContract({ reading, readingInput }) {
     }
   });
 
-  const validation = validateReadingNavigationContract(contract);
+  const generated = generateNavigationPaths(contract, {
+    outputLanguage:
+      options.outputLanguage ||
+      options.language ||
+      readingInput?.languageContract?.outputLanguage ||
+      readingInput?.outputLanguage ||
+      readingInput?.locale
+  });
+
+  const enrichedContract = createReadingNavigationContract({
+    ...contract,
+    availablePaths: generated.availablePaths,
+    recommendedPriority: generated.recommendedPriority,
+    pathGeneration: generated.pathGeneration
+  });
+
+  const validation = validateReadingNavigationContract(enrichedContract);
   if (!validation.valid) {
     throw new Error(`Reading → Navigation contract invalid: ${validation.errors.join(' ')}`);
   }
 
-  return contract;
+  return enrichedContract;
 }
 
 export default buildReadingNavigationContract;

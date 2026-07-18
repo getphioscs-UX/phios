@@ -132,3 +132,8 @@ Reading now emits a bounded `navigationHandoff` contract. The handoff carries re
 ## Step 2.5.2F — Reading Customer Language & Progressive Disclosure
 
 The customer Reading layer now enforces sentence ownership, separates user-reported material from PHI OS interpretation, pairs technical meaning with customer language, and summarizes long statements before optional expansion. Technical evidence classes and the Reading → Navigation handoff remain unchanged.
+
+
+## Step 2.5.3B — Navigation Path Generation Rules
+
+The Reading → Navigation handoff now generates two to four bounded path options only when Navigation readiness is established. Paths are ordered for presentation but never selected automatically. Unknown Reality remains visible but its content is excluded from inference; professional boundaries suppress reversible experiments and keep qualified review available. The path engine is deterministic and makes no Workers AI or OpenAI request.

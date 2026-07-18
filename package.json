@@ -3,12 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs",
+    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs && node scripts/check-navigation-path-rules.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
     "dev": "wrangler pages dev .",
     "check:reading-boundary": "node scripts/check-reading-evidence-boundary.mjs",
     "check:reading-dedup": "node scripts/check-reading-dedup.mjs",
-    "check:navigation-contract": "node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs"
+    "check:navigation-contract": "node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs",
+    "check:navigation-paths": "node scripts/check-navigation-path-rules.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
