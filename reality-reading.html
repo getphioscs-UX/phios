@@ -197,7 +197,7 @@
       id="readingWorkspaceBody"
     >
       <aside
-        class="reading-stack"
+        class="reading-stack reading-technical-only"
         aria-label="PHI OS Reality Reading Stack"
         data-i18n-aria-label="reading.stackAriaLabel"
       >
@@ -355,6 +355,13 @@
           class="reading-sections hidden"
           id="readingSections"
         >
+          <details class="reading-technical-disclosure">
+            <summary>
+              <span data-i18n="reading.customer.technicalTitle">View PHI OS technical model</span>
+              <small data-i18n="reading.customer.technicalDescription">Coordinates, signatures, regions, configurations, and optional interfaces</small>
+            </summary>
+
+            <div class="reading-technical-sections">
           <article
             class="reading-section"
             id="coordinateSection"
@@ -829,6 +836,9 @@
             </div>
           </article>
 
+            </div>
+          </details>
+
           <article
             class="reading-section"
             id="integratedSection"
@@ -836,192 +846,97 @@
             <div class="section-index">06</div>
 
             <div class="section-content">
-              <p class="section-label">
-                Figure 13B · Layer 6
+              <p class="section-label" data-i18n="reading.customer.label">
+                Customer Reading
               </p>
 
-              <h3 data-i18n="reading.integratedSection.title">
-                Integrated Reality Reading
+              <h3 data-i18n="reading.customer.title">
+                What the current evidence allows us to understand
               </h3>
 
-              <p
-                class="section-note"
-                data-i18n="reading.integratedSection.note"
-              >
-                The Reading explains the current Runtime structure.
-                It does not replace Reality, evidence, professional
-                judgment, or user choice.
+              <p class="section-note" data-i18n="reading.customer.note">
+                This view keeps confirmed information, interpretation, alternatives, and unknowns separate.
               </p>
 
-              <section class="integrated-reading-card">
+              <section class="integrated-reading-card customer-reading-card">
                 <header>
                   <span>01</span>
                   <div>
-                    <p data-i18n="reading.integratedSection.confirmed">
-                      Currently confirmed
-                    </p>
-                    <h4 data-i18n="evidence.observed">
-                      Observed Evidence
-                    </h4>
+                    <p data-i18n="reading.customer.confirmedKicker">Evidence foundation</p>
+                    <h4 data-i18n="reading.customer.confirmedTitle">What we can currently see</h4>
                   </div>
                 </header>
-
                 <ul id="readingKnownReality">
-                  <li data-i18n="entry.notYetEstablished">
-                    Not yet established.
-                  </li>
+                  <li data-i18n="entry.notYetEstablished">Not yet established.</li>
                 </ul>
               </section>
 
-              <section class="integrated-reading-card">
+              <section class="integrated-reading-card customer-reading-card">
                 <header>
                   <span>02</span>
                   <div>
-                    <p data-i18n="reading.integratedSection.unresolved">
-                      Still unresolved
-                    </p>
-                    <h4 data-i18n="evidence.unknown">
-                      Unknown Reality
-                    </h4>
+                    <p data-i18n="reading.customer.patternKicker">Current interpretation</p>
+                    <h4 data-i18n="reading.customer.patternTitle">What this may mean</h4>
                   </div>
                 </header>
-
-                <ul id="readingUnknownReality">
-                  <li data-i18n="entry.notYetEstablished">
-                    Not yet established.
-                  </li>
-                </ul>
+                <div class="runtime-pattern-map" id="primaryRuntimePattern">
+                  <p data-i18n="entry.notYetEstablished">Not yet established.</p>
+                </div>
               </section>
 
-              <section class="integrated-reading-card">
+              <section class="integrated-reading-card customer-reading-card">
                 <header>
                   <span>03</span>
                   <div>
-                    <p data-i18n="reading.integratedSection.highestConfidence">
-                      Highest-confidence current reading
-                    </p>
-                    <h4 data-i18n="reading.integratedSection.primaryPattern">
-                      Primary Runtime Pattern
-                    </h4>
+                    <p data-i18n="reading.customer.alternativesKicker">Uncertainty remains visible</p>
+                    <h4 data-i18n="reading.customer.alternativesTitle">What is still unclear or may be different</h4>
                   </div>
                 </header>
-
-                <div
-                  class="runtime-pattern-map"
-                  id="primaryRuntimePattern"
-                >
-                  <p data-i18n="entry.notYetEstablished">
-                    Not yet established.
-                  </p>
+                <div class="customer-unknown-grid">
+                  <div>
+                    <strong data-i18n="reading.customer.unknownTitle">Still unclear</strong>
+                    <ul id="readingUnknownReality">
+                      <li data-i18n="entry.notYetEstablished">Not yet established.</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <strong data-i18n="reading.customer.alternativeTitle">Another possible reading</strong>
+                    <div id="alternativeReading">
+                      <p data-i18n="reading.integratedSection.noAlternative">No alternative reading has been established.</p>
+                    </div>
+                  </div>
                 </div>
               </section>
 
-              <section class="integrated-reading-card">
-                <header>
-                  <span>04</span>
-                  <div>
-                    <p data-i18n="reading.integratedSection.competing">
-                      Competing interpretation
-                    </p>
-                    <h4 data-i18n="reading.integratedSection.alternativeReading">
-                      Alternative Reading
-                    </h4>
-                  </div>
-                </header>
-
-                <div id="alternativeReading">
-                  <p data-i18n="reading.integratedSection.noAlternative">
-                    No alternative reading has been established.
-                  </p>
+              <details class="reading-technical-disclosure reading-evidence-disclosure">
+                <summary>
+                  <span data-i18n="reading.customer.evidenceTitle">View evidence basis and reading limits</span>
+                  <small data-i18n="reading.customer.evidenceDescription">Evidence trail, conscious style, reliability foundation, and reading limitations</small>
+                </summary>
+                <div class="reading-technical-evidence">
+                  <section class="integrated-reading-card">
+                    <header><span>T1</span><div><p data-i18n="reading.integratedSection.why">Why PHI OS reads it this way</p><h4 data-i18n="reading.integratedSection.evidenceTrail">Evidence Trail</h4></div></header>
+                    <ol class="evidence-trail" id="readingEvidenceTrail"><li data-i18n="entry.notYetEstablished">Not yet established.</li></ol>
+                  </section>
+                  <section class="integrated-reading-card">
+                    <header><span>T2</span><div><p data-i18n="reading.integratedSection.consciousDescription">Experience, expression, action, and identity</p><h4 data-i18n="reading.integratedSection.consciousStyle">Conscious Runtime Style</h4></div></header>
+                    <div class="conscious-reading-grid" id="consciousReadingGrid"></div>
+                  </section>
+                  <section class="integrated-reading-card">
+                    <header><span>T3</span><div><p data-i18n="reading.customer.reliabilityKicker">What supports this reading</p><h4 data-i18n="reading.customer.reliabilityTitle">Reading reliability foundation</h4></div></header>
+                    <ul id="readingStrengths"><li data-i18n="entry.notYetEstablished">Not yet established.</li></ul>
+                  </section>
+                  <section class="integrated-reading-card">
+                    <header><span>T4</span><div><p data-i18n="reading.customer.limitsKicker">What may weaken this reading</p><h4 data-i18n="reading.customer.limitsTitle">Reading limitations</h4></div></header>
+                    <ul id="readingRisks"><li data-i18n="entry.notYetEstablished">Not yet established.</li></ul>
+                  </section>
                 </div>
-              </section>
-
-              <section class="integrated-reading-card">
-                <header>
-                  <span>05</span>
-                  <div>
-                    <p data-i18n="reading.integratedSection.why">
-                      Why PHI OS reads it this way
-                    </p>
-                    <h4 data-i18n="reading.integratedSection.evidenceTrail">
-                      Evidence Trail
-                    </h4>
-                  </div>
-                </header>
-
-                <ol
-                  class="evidence-trail"
-                  id="readingEvidenceTrail"
-                >
-                  <li data-i18n="entry.notYetEstablished">
-                    Not yet established.
-                  </li>
-                </ol>
-              </section>
-
-              <section class="integrated-reading-card">
-                <header>
-                  <span>06</span>
-                  <div>
-                    <p data-i18n="reading.integratedSection.consciousDescription">
-                      Experience, expression, action, and identity
-                    </p>
-                    <h4 data-i18n="reading.integratedSection.consciousStyle">
-                      Conscious Runtime Style
-                    </h4>
-                  </div>
-                </header>
-
-                <div
-                  class="conscious-reading-grid"
-                  id="consciousReadingGrid"
-                ></div>
-              </section>
-
-              <section class="integrated-reading-card">
-                <header>
-                  <span>07</span>
-                  <div>
-                    <p data-i18n="reading.integratedSection.usableCapacity">
-                      Current usable capacity
-                    </p>
-                    <h4 data-i18n="reading.integratedSection.strengths">
-                      Potentials and Strengths
-                    </h4>
-                  </div>
-                </header>
-
-                <ul id="readingStrengths">
-                  <li data-i18n="entry.notYetEstablished">
-                    Not yet established.
-                  </li>
-                </ul>
-              </section>
-
-              <section class="integrated-reading-card">
-                <header>
-                  <span>08</span>
-                  <div>
-                    <p data-i18n="reading.integratedSection.fragility">
-                      Current fragility and uncertainty
-                    </p>
-                    <h4 data-i18n="reading.integratedSection.risks">
-                      Challenges and Risks
-                    </h4>
-                  </div>
-                </header>
-
-                <ul id="readingRisks">
-                  <li data-i18n="entry.notYetEstablished">
-                    Not yet established.
-                  </li>
-                </ul>
-              </section>
+              </details>
 
               <section class="current-transition-card">
                 <div>
-                  <span data-i18n="reading.integratedSection.currentRuntime">
-                    Current Runtime
+                  <span data-i18n="reading.customer.currentUnderstanding">
+                    Current understanding
                   </span>
 
                   <strong
@@ -1040,8 +955,8 @@
                 </div>
 
                 <div>
-                  <span data-i18n="reading.integratedSection.currentTransition">
-                    Current Transition
+                  <span data-i18n="reading.customer.nextClarification">
+                    What needs clarification next
                   </span>
 
                   <strong
@@ -1057,13 +972,13 @@
                 <div>
                   <p
                     class="section-label"
-                    data-i18n="reading.integratedSection.navigationBoundary"
+                    data-i18n="reading.customer.nextBoundary"
                   >
                     Navigation boundary
                   </p>
 
-                  <h4 data-i18n="reading.integratedSection.evidenceWatch">
-                    Evidence to Watch
+                  <h4 data-i18n="reading.customer.evidenceWatch">
+                    Evidence that may change the reading
                   </h4>
                 </div>
 
@@ -1110,8 +1025,13 @@
         </div>
       </section>
 
+      <details class="reading-inspector-disclosure">
+        <summary>
+          <span data-i18n="reading.customer.inspectorTitle">View Reading Inspector</span>
+          <small data-i18n="reading.customer.inspectorDescription">Runtime IDs, inference provider, storage, and model status</small>
+        </summary>
       <aside
-        class="reading-inspector"
+        class="reading-inspector reading-inspector-inline"
         aria-label="Reading Inspector"
         data-i18n-aria-label="reading.inspector.ariaLabel"
       >
@@ -1227,6 +1147,7 @@
           </strong>
         </div>
       </aside>
+      </details>
     </section>
   </main>
 

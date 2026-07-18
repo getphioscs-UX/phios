@@ -766,3 +766,124 @@
     transition: none;
   }
 }
+
+/* Step 2.5.2C — customer-first Reading view */
+.reading-workspace {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.reading-technical-only {
+  display: none;
+}
+
+.reading-technical-disclosure,
+.reading-inspector-disclosure {
+  margin: 1rem 1.5rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, .11);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .025);
+  overflow: hidden;
+}
+
+.reading-technical-disclosure > summary,
+.reading-inspector-disclosure > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 1.15rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.reading-technical-disclosure > summary::-webkit-details-marker,
+.reading-inspector-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.reading-technical-disclosure > summary span,
+.reading-inspector-disclosure > summary span {
+  font-weight: 700;
+}
+
+.reading-technical-disclosure > summary small,
+.reading-inspector-disclosure > summary small {
+  color: #8f97a5;
+  text-align: right;
+}
+
+.reading-technical-disclosure[open] > summary,
+.reading-inspector-disclosure[open] > summary {
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.reading-technical-sections .reading-section {
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.customer-reading-card {
+  border-color: rgba(124, 216, 212, .17);
+}
+
+.customer-unknown-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.customer-unknown-grid > div {
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .025);
+}
+
+.customer-unknown-grid > div > strong {
+  display: block;
+  margin-bottom: .65rem;
+  color: #d9bd7c;
+}
+
+.reading-evidence-disclosure {
+  margin: 1.25rem 0;
+}
+
+.reading-technical-evidence {
+  padding: 1rem;
+}
+
+.reading-technical-evidence .integrated-reading-card:last-child {
+  margin-bottom: 0;
+}
+
+.reading-inspector-disclosure {
+  max-width: 1120px;
+  margin: 1rem auto 0;
+}
+
+.reading-inspector-inline {
+  position: static;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+@media (max-width: 760px) {
+  .customer-unknown-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reading-technical-disclosure > summary,
+  .reading-inspector-disclosure > summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .reading-technical-disclosure > summary small,
+  .reading-inspector-disclosure > summary small {
+    text-align: left;
+  }
+}
