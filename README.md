@@ -48,3 +48,56 @@ The Reality Reading customer view is now organised into four primary sections:
 4. What needs clarification next
 
 The PHI OS technical model, evidence trail, conscious runtime view, reading reliability information, limitations, and Reading Inspector remain available through collapsed disclosures. The Reading Contract, Rule Engine, provider routing, evidence classification, and Navigation readiness logic were not changed in this step.
+
+## Step 2.5.2D — Reading Evidence Boundary
+
+Implemented a rule-owned Reading evidence boundary without changing the
+Adaptive Entry or Reconstruction customer flow.
+
+### Evidence permissions
+
+- `observed_evidence` may support facts, Patterns, Runtime Regions,
+  Configurations, and Navigation.
+- `reported_experience` may support bounded interpretive structures, but never
+  becomes a fact.
+- `interpretation`, `professional_assessment`, `ai_interpretation`, and
+  `unknown_reality` cannot establish a Pattern, Runtime Region, Configuration,
+  or Navigation readiness.
+- Unknown Reality remains visible and is excluded from inference.
+
+### Pattern threshold
+
+A Primary Pattern now requires at least:
+
+- 2 Observed Evidence items;
+- 1 Reported Experience item; and
+- Grammar confidence of 0.55 or higher.
+
+Below the threshold, the output is explicitly classified as
+`possible_reading` rather than `primary_pattern`.
+
+### Navigation boundary
+
+Navigation requires all of the following:
+
+- Pattern established;
+- at least 2 Observed Evidence items;
+- at least 1 Reported Experience item;
+- explicit desired direction; and
+- an established Runtime Region.
+
+A numeric confidence score alone can no longer open Navigation.
+
+### Added modules
+
+- `functions/runtime/reading/reading-evidence-contract.js`
+- `functions/runtime/reading/reading-evidence-boundary.js`
+- `functions/runtime/reading/pattern-threshold.js`
+- `functions/runtime/reading/navigation-readiness.js`
+- `scripts/check-reading-evidence-boundary.mjs`
+
+Run the complete validation suite with:
+
+```bash
+npm run check
+```
