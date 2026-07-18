@@ -1,0 +1,84 @@
+/** Build the bounded Reading → Navigation handoff without generating paths. */
+import {
+  createReadingNavigationContract,
+  validateReadingNavigationContract
+} from './reading-navigation-contract.js';
+
+function cleanText(value) {
+  return typeof value === 'string'
+    ? value.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+    : '';
+}
+
+function list(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function directionFromInput(readingInput = {}) {
+  const entry = readingInput.runtimeEntry || {};
+  const direction = entry.desiredTransition || entry.desiredDirection || {};
+  return cleanText(
+    direction.summary ||
+    direction.statement ||
+    direction.rawStatement ||
+    readingInput.reconstruction?.direction?.summary ||
+    readingInput.reconstruction?.direction?.nextDirection
+  );
+}
+
+function constraintsFromInput(readingInput = {}) {
+  const entry = readingInput.runtimeEntry || {};
+  return [
+    ...list(entry.activeConstraints),
+    ...list(entry.constraints),
+    ...list(readingInput.reconstruction?.context?.constraints)
+  ];
+}
+
+export function buildReadingNavigationContract({ reading, readingInput }) {
+  const integrated = reading?.integratedReading || {};
+  const boundary = reading?.evidenceBoundary || {};
+
+  const contract = createReadingNavigationContract({
+    runtimeEntityId: reading?.runtimeEntityId,
+    runtimeEntryId: reading?.runtimeEntryId,
+    readingSchemaVersion: reading?.schemaVersion,
+    readingStatus: reading?.status,
+    navigationReadiness: reading?.navigationReadiness,
+    currentReality: {
+      primaryPattern: integrated.primaryPattern || null,
+      primaryRuntimeRegion: reading?.primaryRuntimeRegion || null,
+      connectedRuntimeRegions: list(reading?.connectedRuntimeRegions),
+      confidence: Number(reading?.confidence) || 0
+    },
+    currentTransition: integrated.currentTransition,
+    desiredDirection: directionFromInput(readingInput),
+    constraints: constraintsFromInput(readingInput),
+    evidenceBoundary: {
+      observedEvidenceCount: list(boundary.observedEvidence).length,
+      reportedExperienceCount: list(boundary.reportedExperience).length,
+      interpretationExcluded: true,
+      professionalAssessmentExcluded: true,
+      aiInterpretationExcluded: true,
+      unknownRealityExcluded: true
+    },
+    evidenceWatch: integrated.evidenceWatch,
+    unknownReality: boundary.unknownReality,
+    professionalBoundary: {
+      escalationNeeded: reading?.routingHints?.professionalReviewUseful === true,
+      domains: [],
+      reasons: reading?.routingHints?.professionalReviewUseful === true
+        ? ['professional_assessment_present']
+        : []
+    }
+  });
+
+  const validation = validateReadingNavigationContract(contract);
+  if (!validation.valid) {
+    throw new Error(`Reading → Navigation contract invalid: ${validation.errors.join(' ')}`);
+  }
+
+  return contract;
+}
+
+export default buildReadingNavigationContract;

@@ -23,6 +23,7 @@ import {
 } from './reading-evidence-boundary.js';
 import { assessPatternThreshold } from './pattern-threshold.js';
 import { assessNavigationReadiness } from './navigation-readiness.js';
+import { buildReadingNavigationContract } from '../navigation/reading-navigation-builder.js';
 const SUPPORTED_OUTPUT_LANGUAGES = Object.freeze([
   'en',
   'zh'
@@ -1208,7 +1209,7 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
 
   const evidenceAudit = buildReadingEvidenceAudit(boundary);
 
-  return {
+  const reading = {
     schemaVersion: SCHEMA_IDS.REALITY_READING,
     createdAt: new Date().toISOString(),
     runtimeEntityId: cleanText(readingInput.runtimeEntityId),
@@ -1298,6 +1299,13 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
         boundary.professionalAssessment.length > 0
     }
   };
+
+  reading.navigationHandoff = buildReadingNavigationContract({
+    reading,
+    readingInput
+  });
+
+  return reading;
 }
 
 export default readRuntimeRuleFirst;

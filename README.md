@@ -124,3 +124,7 @@ Run the dedicated check with:
 ```bash
 npm run check:reading-dedup
 ```
+
+## Step 2.5.3A — Reading → Navigation Contract
+
+Reading now emits a bounded `navigationHandoff` contract. The handoff carries readiness, blockers, current Reality, direction, constraints, evidence boundary, evidence watch, unknown Reality, and professional boundary. It intentionally keeps `availablePaths` and `recommendedPriority` empty and `selectedPath` null; path generation belongs to Step 2.5.3B and user selection belongs to Step 2.5.3D.
