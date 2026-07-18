@@ -70,6 +70,17 @@ export function buildRuntimeEntry({ model = {}, scores = {}, request = {}, force
   const unknown = uniqueText(fields.unknownReality);
   const tension = cleanText(fields.currentTension);
   const desiredTransition = cleanText(fields.desiredTransition);
+  const reconstructionEvidence = array(fields.reconstructionEvidence)
+    .map((item, index) => ({
+      evidenceId: `entry_re_${String(index + 1).padStart(3, '0')}`,
+      evidenceType: 'reported_experience',
+      source: 'entry_adaptive_evidence',
+      confidence: 1,
+      target: cleanText(item?.target),
+      statement: itemText(item),
+      answeredAt: now
+    }))
+    .filter(item => item.target && item.statement);
 
   return {
     schemaVersion: SCHEMA_IDS.RUNTIME_ENTRY,
@@ -132,6 +143,10 @@ export function buildRuntimeEntry({ model = {}, scores = {}, request = {}, force
     desiredTransition,
     counterEvidence,
     dependencies,
+    reconstructionEvidence,
+    reconstructionEvidenceCoverage:
+      model.reconstructionEvidenceCoverage || {},
+    entryEvidenceAcquisitionComplete: complete,
     evidenceBoundary: {
       observedEvidence,
       reportedExperience,

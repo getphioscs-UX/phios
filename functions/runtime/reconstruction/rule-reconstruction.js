@@ -406,19 +406,23 @@ function createInquiry(runtimeEntry, language){
   const answers = reconstructionEvidence(runtimeEntry);
   const answeredTargets = new Set(answers.map(item=>text(item.target)));
   const remaining = INQUIRY_REGISTRY.filter(item=>!answeredTargets.has(item.target));
-  const current = remaining[0] || null;
+  const collectedInEntry = runtimeEntry?.entryEvidenceAcquisitionComplete === true;
+  const current = collectedInEntry ? null : (remaining[0] || null);
+  const complete = collectedInEntry || !current;
   const languageIndex = language === 'zh-Hans' ? 1 : 0;
 
   return {
-    schemaVersion: 'phi-os.reconstruction-inquiry.v1',
-    status: current ? 'collecting' : 'complete',
-    complete: !current,
+    schemaVersion: 'phi-os.reconstruction-inquiry.v2',
+    status: complete ? 'complete' : 'collecting',
+    complete,
+    collectedInEntry,
     answeredCount: answeredTargets.size,
     totalTargets: INQUIRY_REGISTRY.length,
     currentTarget: current?.target || 'none',
     currentLabel: current?.label?.[languageIndex] || '',
     currentQuestion: current?.question?.[languageIndex] || '',
     remainingTargets: remaining.map(item=>item.target),
+    coverage: runtimeEntry?.reconstructionEvidenceCoverage || {},
     answers
   };
 }

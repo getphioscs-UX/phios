@@ -16,6 +16,14 @@ const entry = Object.freeze({
     depthGuidedText: '5–7 balanced questions · recommended',
     depthDeepTitle: 'Deep',
     depthDeepText: '7–10 questions with optional carrier check',
+    evidenceTargets: {
+      carrierCoordinates: 'Body and rhythm changes',
+      carrierSignatures: 'Recurring conditions',
+      experienceStyle: 'Direct experience',
+      expressionStyle: 'Expression pattern',
+      agencyStyle: 'Action pattern',
+      identityStyle: 'Role and identity'
+    },
     liveRuntimeRepresentation: 'Live Runtime Representation',
     runtimeEntryTitle: 'Runtime Entry',
     maturityLabel: 'Entry maturity',

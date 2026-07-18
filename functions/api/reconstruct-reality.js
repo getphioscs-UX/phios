@@ -304,6 +304,20 @@ function mergeRuntimeEntry(previous, current, language, options = {}) {
       current.dependencies
     ),
 
+    reconstructionEvidence: mergeUniqueItems(
+      previous.reconstructionEvidence,
+      current.reconstructionEvidence
+    ),
+
+    reconstructionEvidenceCoverage: {
+      ...(previous.reconstructionEvidenceCoverage || {}),
+      ...(current.reconstructionEvidenceCoverage || {})
+    },
+
+    entryEvidenceAcquisitionComplete:
+      preserveCompletion ||
+      current.entryEvidenceAcquisitionComplete === true,
+
     emergingTension: {
       ...previous.emergingTension,
       ...current.emergingTension,
@@ -496,6 +510,24 @@ function runtimeEvidenceBoundary(entry, language) {
   const fields = entry?.extractedFields || {};
   const cleanList = value => mergeUniqueItems(value).map(itemText).map(cleanStatement).filter(Boolean);
 
+  const reconstructionCoverage = entry?.reconstructionEvidenceCoverage || {};
+  const unestablishedTargets = Object.entries(reconstructionCoverage)
+    .filter(([, status]) => ['not_asked', 'skipped', 'uncertain'].includes(status))
+    .map(([target]) => target);
+  const evidenceLabels = {
+    carrier_coordinates: { en: 'body and rhythm changes', 'zh-Hans': '身体与节律变化' },
+    carrier_signatures: { en: 'recurring conditions', 'zh-Hans': '反复出现的条件' },
+    experience_style: { en: 'direct experience', 'zh-Hans': '直接感受与内在张力' },
+    expression_style: { en: 'expression pattern', 'zh-Hans': '表达与回避方式' },
+    agency_style: { en: 'repeated action pattern', 'zh-Hans': '反复行动方式' },
+    identity_style: { en: 'role and identity description', 'zh-Hans': '角色与身份描述' }
+  };
+  const unestablishedEvidence = unestablishedTargets.length
+    ? [language === 'zh-Hans'
+      ? `本次入口尚未进一步查验：${unestablishedTargets.map(target => evidenceLabels[target]?.['zh-Hans'] || target).join('、')}。`
+      : `This Entry did not further establish: ${unestablishedTargets.map(target => evidenceLabels[target]?.en || target).join(', ')}.`]
+    : [];
+
   return {
     observedEvidence: cleanList(
       entry?.evidenceBoundary?.observedEvidence
@@ -523,10 +555,10 @@ function runtimeEvidenceBoundary(entry, language) {
       }))
       .filter(item => item.source),
 
-    unknownReality:
-      missingFields.map(field =>
-        unknownStatement(field, language)
-      )
+    unknownReality: [
+      ...missingFields.map(field => unknownStatement(field, language)),
+      ...unestablishedEvidence
+    ]
   };
 }
 

@@ -116,6 +116,11 @@ export function renderReconstructionDialogue(result = state.result) {
 
   if (!els.panel || !inquiry) return false;
 
+  if (inquiry.collectedInEntry === true) {
+    els.panel.classList.add('hidden');
+    return true;
+  }
+
   els.panel.classList.remove('hidden');
 
   const answers = Array.isArray(inquiry.answers)

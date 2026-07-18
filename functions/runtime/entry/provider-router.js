@@ -120,7 +120,8 @@ function mergeProviderEnrichment(ruleEntry, providerResult, entryInput) {
     counterEvidence: [...list(ruleEntry.extractedFields?.counterEvidence)],
     dependencies: [...list(ruleEntry.extractedFields?.dependencies)],
     reportedExperience: [...list(ruleEntry.extractedFields?.reportedExperience)],
-    interpretations: [...list(ruleEntry.extractedFields?.interpretations)]
+    interpretations: [...list(ruleEntry.extractedFields?.interpretations)],
+    reconstructionEvidence: [...list(ruleEntry.extractedFields?.reconstructionEvidence)]
   };
   const fieldCompleteness = { ...ruleEntry.fieldCompleteness };
   let acceptedCandidateCount = 0;

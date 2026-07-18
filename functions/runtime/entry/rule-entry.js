@@ -24,6 +24,54 @@ const EVIDENCE_DEPTHS = Object.freeze({
   deep: Object.freeze({ minimum: 7, maximum: 10 })
 });
 
+const RECONSTRUCTION_EVIDENCE_REGISTRY = Object.freeze([
+  {
+    target: 'carrier_coordinates',
+    modes: ['deep'],
+    en: 'Since this change began, have you noticed any observable change in sleep, energy, physical rhythm, senses or the body? “None” and “uncertain” are valid answers.',
+    zh: '这段变化开始后，你是否观察到睡眠、精力、生理节律、感官或身体出现变化？没有或不确定都可以直接说明。'
+  },
+  {
+    target: 'carrier_signatures',
+    modes: ['guided', 'deep'],
+    en: 'When is this pattern most noticeable—for example at a certain time, under resource pressure, during an interaction, or in a particular environment?',
+    zh: '这种情况通常在什么时候最明显？例如某个时间、资源压力、关系互动或特定环境出现时。'
+  },
+  {
+    target: 'experience_style',
+    modes: ['guided', 'deep'],
+    en: 'When this happens, what do you most directly feel or experience inside?',
+    zh: '这种情况发生时，你最直接的感受或内在体验是什么？'
+  },
+  {
+    target: 'expression_style',
+    modes: ['deep'],
+    en: 'How does this situation appear in what you say, do not say, communicate, or avoid discussing?',
+    zh: '这种情况会怎样出现在你的表达里——包括说出的、没有说出的、沟通的或回避讨论的部分？'
+  },
+  {
+    target: 'agency_style',
+    modes: ['guided', 'deep'],
+    en: 'Because of this situation, what do you repeatedly start, stop, delay, avoid, choose or protect?',
+    zh: '因为这种情况，你会反复开始、停止、拖延、回避、选择或保护什么？'
+  },
+  {
+    target: 'identity_style',
+    modes: ['deep'],
+    en: 'Has this situation changed how you describe your role, responsibility, belonging, or who you believe you must be?',
+    zh: '这种情况是否改变了你对自己角色、责任、归属，或“自己必须成为什么样的人”的描述？'
+  }
+]);
+
+const RECONSTRUCTION_EVIDENCE_TARGETS = Object.freeze(
+  RECONSTRUCTION_EVIDENCE_REGISTRY.map(item => item.target)
+);
+
+const ALL_ENTRY_TARGETS = Object.freeze([
+  ...FIELD_NAMES,
+  ...RECONSTRUCTION_EVIDENCE_TARGETS
+]);
+
 function evidenceDepth(value) {
   const key = cleanText(value).toLowerCase();
   return {
@@ -188,7 +236,7 @@ function buildScores({ messages, allSentences, time, domains, extracted }) {
 
 function normalizeTarget(value) {
   const target = cleanText(value).toLowerCase();
-  return FIELD_NAMES.includes(target) ? target : '';
+  return ALL_ENTRY_TARGETS.includes(target) ? target : '';
 }
 
 function normalizeAskedTargets(value) {
@@ -209,6 +257,28 @@ function questionCandidates(fieldScores, language, askedTargets = []) {
     .sort((a, b) => (THRESH[b] - fieldScores[b]) - (THRESH[a] - fieldScores[a]))
     .slice(0, 3)
     .map(target => ({ target, question: QUESTIONS[target][language] }));
+}
+
+function reconstructionEvidenceCandidates(depthKey, language, askedTargets, entryRound) {
+  if (depthKey === 'quick' || entryRound < 3) return [];
+  const asked = new Set(normalizeAskedTargets(askedTargets));
+  return RECONSTRUCTION_EVIDENCE_REGISTRY
+    .filter(item => item.modes.includes(depthKey) && !asked.has(item.target))
+    .map(item => ({ target: item.target, question: item[language] }));
+}
+
+function reconstructionEvidenceCoverage(bindings) {
+  const values = Array.isArray(bindings) ? bindings : [];
+  return Object.fromEntries(RECONSTRUCTION_EVIDENCE_TARGETS.map(target => {
+    const binding = [...values].reverse().find(item => normalizeTarget(item?.target) === target);
+    if (!binding) return [target, { status: 'not_asked' }];
+    const answer = cleanText(binding.content).toLowerCase();
+    let status = 'answered';
+    if (/^(?:skip|pass|不答|跳过|暂不回答)$/i.test(answer)) status = 'skipped';
+    else if (/^(?:not sure|uncertain|unknown|不知道|不确定|不清楚)$/i.test(answer)) status = 'uncertain';
+    else if (/^(?:no change|none|nothing|没有变化|无变化|没有|无)$/i.test(answer)) status = 'no_change';
+    return [target, { status }];
+  }));
 }
 
 function evidenceCoverage(fieldScores, askedTargets, answerBindings) {
@@ -273,6 +343,16 @@ function bindAnswer(extracted, targetValue, answerValue, revision, time, domains
     extracted.currentTension = extracted.currentTension || answer;
   } else if (target === 'desired_transition') {
     extracted.desiredTransition = extracted.desiredTransition || answer;
+  } else if (RECONSTRUCTION_EVIDENCE_TARGETS.includes(target)) {
+    extracted.reconstructionEvidence = [
+      ...extracted.reconstructionEvidence.filter(item => item.target !== target),
+      {
+        target,
+        statement: answer,
+        source: 'entry_adaptive_evidence',
+        evidenceClass: 'reported_experience'
+      }
+    ];
   }
 
   return target;
@@ -377,6 +457,7 @@ export function evaluateEntryRuleFirst(input = {}) {
     interpretations,
     currentTension: '',
     desiredTransition: desiredCandidates[0] || '',
+    reconstructionEvidence: [],
     unknownReality: []
   };
 
@@ -403,15 +484,25 @@ export function evaluateEntryRuleFirst(input = {}) {
   const completion = completeness(fieldCompleteness);
   const minimumRoundsMet = entryRound >= depth.minimum;
   const maximumRoundsReached = entryRound >= depth.maximum;
-  const unaskedCandidates = questionCandidates(
+  const baseCandidates = questionCandidates(
     fieldCompleteness,
     language,
     askedTargets
   );
+  const evidenceCandidates = reconstructionEvidenceCandidates(
+    depth.key,
+    language,
+    askedTargets,
+    entryRound
+  );
+  const unaskedCandidates = entryRound >= 3
+    ? [...evidenceCandidates, ...baseCandidates].slice(0, 6)
+    : baseCandidates;
   const noQuestionRemaining = unaskedCandidates.length === 0;
+  const plannedEvidenceComplete = evidenceCandidates.length === 0;
   const entryComplete = noQuestionRemaining || maximumRoundsReached || (
     minimumRoundsMet && (
-      completion.entryComplete
+      completion.entryComplete && plannedEvidenceComplete
     )
   );
   const nextQuestionTarget = entryComplete
@@ -433,6 +524,9 @@ export function evaluateEntryRuleFirst(input = {}) {
     evidenceCoverage: evidenceCoverage(
       fieldCompleteness,
       askedTargets,
+      input.answerBindings
+    ),
+    reconstructionEvidenceCoverage: reconstructionEvidenceCoverage(
       input.answerBindings
     ),
     questionCandidates: unaskedCandidates,

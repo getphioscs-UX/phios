@@ -46,6 +46,12 @@ const TARGET_TRANSLATION_KEYS = Object.freeze({
   current_tension: 'fields.currentTension',
   desired_transition: 'fields.desiredTransition',
   unknown_reality: 'fields.unknownReality',
+  carrier_coordinates: 'entry.evidenceTargets.carrierCoordinates',
+  carrier_signatures: 'entry.evidenceTargets.carrierSignatures',
+  experience_style: 'entry.evidenceTargets.experienceStyle',
+  expression_style: 'entry.evidenceTargets.expressionStyle',
+  agency_style: 'entry.evidenceTargets.agencyStyle',
+  identity_style: 'entry.evidenceTargets.identityStyle',
   revision: 'entry.correctOrClarify',
   ready: 'status.complete',
   none: 'status.complete'
