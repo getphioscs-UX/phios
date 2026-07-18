@@ -1,0 +1,1 @@
+import{json}from'../_lib/utils.js';export function onRequestGet(){return json({success:true,service:'PHI OS Platform v2',status:'healthy'})}
