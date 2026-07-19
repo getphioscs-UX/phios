@@ -243,3 +243,25 @@ Check with:
 ```bash
 npm run check:runtime-lineage
 ```
+
+## Step 2.5.4I — Runtime Persistence & Recovery
+
+PHI OS now persists a versioned Runtime Snapshot through a storage adapter boundary. Active session contracts are captured into localStorage, validated with a checksum, and restored into sessionStorage after browser closure or restart when no active session exists.
+
+Key module:
+
+- `assets/js/modules/runtime-persistence.js`
+
+Guardrails:
+
+- unsupported schemas are not restored;
+- checksum failures are rejected;
+- restoration never creates a new Runtime automatically;
+- historical contracts remain append-only;
+- reported experience is not promoted to verified evidence.
+
+Checks:
+
+```bash
+npm run check:runtime-persistence
+```

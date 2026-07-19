@@ -1,4 +1,5 @@
 import { SESSION_KEYS } from './core/session.js';
+import { initializeRuntimePersistence, scheduleRuntimeSnapshot, removePersistedContract } from './modules/runtime-persistence.js';
 
 export const SESSION={
   initial:SESSION_KEYS.initialMessage,
@@ -45,10 +46,17 @@ export function setSession(key,value){
     key,
     typeof value==='string' ? value : JSON.stringify(value)
   );
+  scheduleRuntimeSnapshot(`set:${key}`);
 }
 
 export function getSession(key){
   return sessionStorage.getItem(key);
+}
+
+export function removeSession(key){
+  sessionStorage.removeItem(key);
+  removePersistedContract(key);
+  scheduleRuntimeSnapshot(`remove:${key}`);
 }
 
 export function escapeHTML(s=''){
@@ -101,4 +109,5 @@ export function initNav(){
     });
 }
 
+initializeRuntimePersistence();
 document.addEventListener('DOMContentLoaded',initNav);
