@@ -10,6 +10,8 @@ import {
   createId
 } from './shared.js';
 
+import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
+
 import {
   initializeI18n,
   onLocaleChange,
@@ -58,6 +60,7 @@ const TARGET_TRANSLATION_KEYS = Object.freeze({
 });
 
 initializeI18n();
+initializeRuntimeWorkspace({ currentStage: 'entry' });
 
 const els = {
   chat: qs('#chat'),

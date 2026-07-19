@@ -23,10 +23,9 @@ import {
   renderRealityNavigation
 } from './modules/navigation-render.js';
 
-import {
-  bindNavigationPathSelection,
-  preserveNavigationPathSelection
-} from './modules/navigation-path-selection.js';
+import { bindNavigationPathSelection } from './modules/navigation-path-selection.js';
+import { restoreNavigationState } from './modules/navigation-state.js';
+import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
 
 const state = {
   input: null,
@@ -54,10 +53,7 @@ async function runNavigation({
     state.input = result.navigationInput || null;
 
     if (result.success) {
-      state.response = preserveNavigationPathSelection(
-        result.response,
-        state.response
-      );
+      state.response = restoreNavigationState(result.response, state.response || result.response);
       renderRealityNavigation(state.response);
     }
   } finally {
@@ -91,6 +87,7 @@ async function initializeNavigationPage() {
 
   initializeI18n();
   bindLocaleControls();
+  initializeRuntimeWorkspace({ currentStage: 'navigation' });
   bindLanguageUpdates();
   state.removePathSelectionListener = bindNavigationPathSelection({
     getResponse: () => state.response,

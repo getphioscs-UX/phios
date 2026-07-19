@@ -59,6 +59,8 @@ import {
   escapeHTML
 } from './shared.js';
 
+import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
+
 import {
   initializeI18n,
   onLocaleChange,
@@ -570,6 +572,7 @@ export async function initializeRealityReconstructionPage() {
   pageState.initialized = true;
 
   initializeI18n();
+  initializeRuntimeWorkspace({ currentStage: 'reconstruction' });
 
   onLocaleChange(async () => {
     /*

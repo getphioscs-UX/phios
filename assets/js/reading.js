@@ -27,6 +27,8 @@ import {
   bindContinueToNavigation
 } from './modules/reading-navigation.js';
 
+import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
+
 import {
   getLanguage,
   getLocale,
@@ -237,6 +239,7 @@ export async function initializeRealityReadingPage() {
   state.initialized = true;
 
   initializeI18n();
+  initializeRuntimeWorkspace({ currentStage: 'reading' });
   bindReadingLanguageUpdates();
 
   bindReadingRetry(
