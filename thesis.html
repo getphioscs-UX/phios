@@ -102,7 +102,7 @@
       .thesis-layout h2{font-size:clamp(2.1rem,3.2vw,3.2rem)}
       .thesis-statement{font-size:clamp(1.5rem,2vw,2.08rem);max-width:620px}
     }
-    @media(max-width:1050px){
+    @media(max-width:1120px){
       .nav-links{display:none}
       .thesis-route{grid-template-columns:repeat(2,minmax(0,1fr))}
       .thesis-layout{grid-template-columns:1fr;gap:32px}
@@ -137,7 +137,7 @@
         <a href="/academy" data-i18n="nav.academy">ACADEMY</a>
         <a href="/about" data-i18n="nav.about">ABOUT</a>
       </nav>
-      <div class="language-switch" aria-label="Language">
+      <div class="language-switch" aria-label="Language" data-language-switch>
         <button type="button" data-language="en">EN</button><span>·</span>
         <button type="button" data-language="zh-Hans">中文</button>
       </div>
@@ -272,7 +272,7 @@
 </footer>
 
 <script type="module" src="/assets/js/shared.js"></script>
-<script type="module" src="/assets/js/pages/thesis.js"></script>
+<script defer src="/assets/js/pages/thesis.js?v=23"></script>
 
 </body>
 </html>

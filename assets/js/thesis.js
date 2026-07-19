@@ -1,4 +1,6 @@
-(() => {
+(function () {
+  "use strict";
+
   const dictionaries = {
     en: {
       "nav.home":"HOME","nav.start":"START","nav.myReality":"MY REALITY","nav.explore":"EXPLORE","nav.services":"SERVICES","nav.academy":"ACADEMY","nav.about":"ABOUT",
@@ -25,36 +27,71 @@
       "reader.eyebrow":"完整研究文件","reader.title":"阅读论文。","reader.open":"打开 PDF","reader.download":"下载 PDF","reader.fallback":"若内嵌阅读器没有显示，请使用上方“打开 PDF”。","footer.copy":"现实导航论文 · PHI OS 研究基础"
     }
   };
+  const STORAGE_KEY = "phios_locale";
 
-  const KEY = "phios_locale";
-  const normalize = value => String(value || "").toLowerCase().startsWith("zh") ? "zh-Hans" : "en";
+  function normalize(value) {
+    return String(value || "").toLowerCase().startsWith("zh") ? "zh-Hans" : "en";
+  }
 
-  function applyLanguage(language) {
-    const lang = normalize(language);
-    const dict = dictionaries[lang];
-    document.documentElement.lang = lang;
-    document.title = lang === "zh-Hans" ? "现实导航论文 — PHI OS" : "Reality Navigation Thesis — PHI OS";
+  function applyLanguage(requestedLanguage) {
+    const language = normalize(requestedLanguage);
+    const dictionary = dictionaries[language];
+    if (!dictionary) return;
 
-    document.querySelectorAll("[data-i18n]").forEach(node => {
-      const value = dict[node.dataset.i18n];
-      if (value !== undefined) node.textContent = value;
+    document.documentElement.lang = language;
+    document.documentElement.dataset.i18nReady = "true";
+    document.title = language === "zh-Hans"
+      ? "现实导航论文 — PHI OS"
+      : "Reality Navigation Thesis — PHI OS";
+
+    document.querySelectorAll("[data-i18n]").forEach(function (node) {
+      const key = node.getAttribute("data-i18n");
+      if (Object.prototype.hasOwnProperty.call(dictionary, key)) {
+        node.textContent = dictionary[key];
+      }
     });
-    document.querySelectorAll("[data-i18n-html]").forEach(node => {
-      const value = dict[node.dataset.i18nHtml];
-      if (value !== undefined) node.innerHTML = value;
+
+    document.querySelectorAll("[data-i18n-html]").forEach(function (node) {
+      const key = node.getAttribute("data-i18n-html");
+      if (Object.prototype.hasOwnProperty.call(dictionary, key)) {
+        node.innerHTML = dictionary[key];
+      }
     });
-    document.querySelectorAll("[data-language]").forEach(button => {
-      const active = button.dataset.language === lang;
+
+    document.querySelectorAll("[data-language]").forEach(function (button) {
+      const active = button.getAttribute("data-language") === language;
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", String(active));
     });
 
-    localStorage.setItem(KEY, lang);
+    try {
+      localStorage.setItem(STORAGE_KEY, language);
+    } catch (error) {
+      console.warn("PHI OS language preference could not be saved.", error);
+    }
   }
 
-  document.querySelectorAll("[data-language]").forEach(button => {
-    button.addEventListener("click", () => applyLanguage(button.dataset.language));
-  });
+  function initialize() {
+    document.addEventListener("click", function (event) {
+      const button = event.target.closest("[data-language]");
+      if (!button) return;
+      event.preventDefault();
+      applyLanguage(button.getAttribute("data-language"));
+    });
 
-  applyLanguage(localStorage.getItem(KEY) || navigator.language || "en");
+    let savedLanguage = "";
+    try {
+      savedLanguage = localStorage.getItem(STORAGE_KEY) || "";
+    } catch (error) {
+      console.warn("PHI OS language preference could not be read.", error);
+    }
+
+    applyLanguage(savedLanguage || navigator.language || "en");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initialize, { once: true });
+  } else {
+    initialize();
+  }
 })();
