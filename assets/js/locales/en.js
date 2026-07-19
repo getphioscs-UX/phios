@@ -7,6 +7,8 @@ import reconstruction from './en/reconstruction.js';
 import reading from './en/reading.js';
 import navigation from './en/navigation.js';
 import review from './en/review.js';
+import about from './en/about.js';
+import thesis from './en/thesis.js';
 
 const dictionary = Object.freeze({
   ...shared,
@@ -16,7 +18,9 @@ const dictionary = Object.freeze({
   ...reconstruction,
   ...reading,
   ...navigation,
-  ...review
+  ...review,
+  ...about,
+  ...thesis
 });
 
 export default dictionary;
