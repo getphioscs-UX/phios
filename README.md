@@ -163,3 +163,18 @@ Review cannot re-run Reading, reinterpret historical evidence, overwrite the
 Reading or Navigation result, automatically select an outcome, or convert a
 customer report into established fact. Professional paths require accepted
 boundary consent before the Navigation → Review handoff is valid.
+
+## Step 2.5.4B — Runtime Memory Contract
+
+A completed Review can now produce an append-only Runtime Memory record only
+after the customer report is dated, the Review outcome is assessed, and the
+next Runtime state has been explicitly chosen by the user. Runtime Memory keeps
+customer-reported changes as `reported_experience`, stores verified or observed
+evidence in separate evidence classes, preserves Unknown Reality as unresolved,
+and snapshots the selected Navigation path and accepted professional boundary.
+
+Memory links the previous and current Runtime but never creates or identifies a
+next Runtime automatically. The Continuity handoff remains closed until a later
+explicit user choice. Historical Entry, Reading, Navigation, and Review
+contracts are never overwritten, and no sensitive professional data or
+professional conclusion is inferred.

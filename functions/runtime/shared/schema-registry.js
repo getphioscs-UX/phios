@@ -14,6 +14,7 @@ export const SCHEMA_IDS = Object.freeze({
   NAVIGATION_INPUT: 'phi-os.navigation-input.v1',
   NAVIGATION: 'phi-os.navigation.v1',
   REVIEW: 'phi-os.review.v1',
+  RUNTIME_MEMORY: 'phi-os.runtime-memory.v1',
   CONTINUITY: 'phi-os.continuity.v1',
   RUNTIME_SCOPE: 'phi-os.runtime-scope.v1'
 });
@@ -35,6 +36,7 @@ export const SCHEMA_REGISTRY = Object.freeze({
   navigationInput: defineSchema(SCHEMA_IDS.NAVIGATION_INPUT),
   navigation: defineSchema(SCHEMA_IDS.NAVIGATION),
   review: defineSchema(SCHEMA_IDS.REVIEW),
+  runtimeMemory: defineSchema(SCHEMA_IDS.RUNTIME_MEMORY),
   continuity: defineSchema(SCHEMA_IDS.CONTINUITY),
   runtimeScope: defineSchema(SCHEMA_IDS.RUNTIME_SCOPE)
 });
