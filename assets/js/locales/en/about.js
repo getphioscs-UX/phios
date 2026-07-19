@@ -12,6 +12,8 @@ const about = Object.freeze({
     "hero": {
       "eyebrow": "About PHI OS · Reality Navigation",
       "title": "Intelligence can answer.<br><em>Navigation must continue.</em>",
+      "titleLine1": "Intelligence can answer.",
+      "titleLine2": "Navigation must continue.",
       "lead": "PHI OS is being developed as a Reality Navigation system: a unified way to understand how a specific reality is forming, changing and continuing through time.",
       "begin": "Begin Reality Navigation",
       "thesis": "Read the Thesis",

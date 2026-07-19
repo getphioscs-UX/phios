@@ -13,6 +13,8 @@ const thesis = Object.freeze({
       "back": "← About PHI OS",
       "eyebrow": "Research Foundation · Reality Navigation",
       "title": "The Reality Navigation <em>Thesis</em>",
+      "titlePrefix": "The Reality Navigation ",
+      "titleEmphasis": "Thesis",
       "lead": "A research foundation for representing, reading and navigating realities that continue to change — and the theoretical origin of PHI OS.",
       "read": "Read the full thesis",
       "atlas": "Enter the Reality Atlas",
