@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs && node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs && node scripts/check-navigation-state.mjs && node scripts/check-professional-boundary.mjs",
+    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs && node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs && node scripts/check-navigation-state.mjs && node scripts/check-professional-boundary.mjs && node scripts/check-review-contract.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
     "dev": "wrangler pages dev .",
     "check:reading-boundary": "node scripts/check-reading-evidence-boundary.mjs",
@@ -11,7 +11,8 @@
     "check:navigation-contract": "node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs",
     "check:navigation-paths": "node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs",
     "check:navigation-state": "node scripts/check-navigation-state.mjs",
-    "check:professional-boundary": "node scripts/check-professional-boundary.mjs"
+    "check:professional-boundary": "node scripts/check-professional-boundary.mjs",
+    "check:review-contract": "node scripts/check-review-contract.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

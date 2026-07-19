@@ -150,3 +150,16 @@ Navigation now persists an explicit user-selected path in session state, restore
 ## Step 2.5.3E — Professional Boundary Layer (Financial Domain v1)
 
 Navigation can now attach a domain-neutral professional boundary contract to a professional-review path. Financial Domain v1 explains when qualified review may help, which existing summaries may be prepared voluntarily, what PHI OS cannot confirm, and which investment, tax, legal, accounting, or licensed-advice conclusions are excluded. It collects no complete sensitive financial data, enables no upload or intake, and requires explicit user boundary consent before Review readiness.
+
+## Step 2.5.4A — Reality Review Contract
+
+Review now begins from an explicitly selected and prepared Navigation path. The
+contract snapshots the selected path, observation window, evidence watch,
+completion and stop signals, inherited Unknown Reality, and any accepted
+professional boundary. It creates empty customer-report, Runtime Drift, Review
+Outcome, and Runtime Memory handoff fields without filling them by inference.
+
+Review cannot re-run Reading, reinterpret historical evidence, overwrite the
+Reading or Navigation result, automatically select an outcome, or convert a
+customer report into established fact. Professional paths require accepted
+boundary consent before the Navigation → Review handoff is valid.
