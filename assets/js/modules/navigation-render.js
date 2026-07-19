@@ -208,7 +208,16 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
           ${requiresProfessionalReview ? `
             <p class="navigation-path-professional">
               ${escapeHTML(t('navigation.requiresProfessionalReview'))}
-            </p>` : ''}
+            </p>
+            ${isObject(path?.professionalBoundary) ? `
+              <section class="professional-boundary-card">
+                <h4>${escapeHTML(path.professionalBoundary.domainName || t('navigation.financialProfessionalTitle'))}</h4>
+                <div><span>${escapeHTML(t('navigation.professionalWhenHelpful'))}</span><ul>${list(path.professionalBoundary.entryCriteria).map(item=>`<li>${escapeHTML(cleanText(item))}</li>`).join('')}</ul></div>
+                <div><span>${escapeHTML(t('navigation.professionalPrepare'))}</span><ul>${list(path.professionalBoundary.preparationChecklist).map(item=>`<li>${escapeHTML(cleanText(item))}</li>`).join('')}</ul></div>
+                <div><span>${escapeHTML(t('navigation.professionalUnknown'))}</span><ul>${list(path.professionalBoundary.unknownReality).map(item=>`<li>${escapeHTML(cleanText(item))}</li>`).join('')}</ul></div>
+                <div><span>${escapeHTML(t('navigation.professionalExcluded'))}</span><ul>${list(path.professionalBoundary.excludedServices).map(item=>`<li>${escapeHTML(cleanText(item))}</li>`).join('')}</ul></div>
+                <p>${escapeHTML(t('navigation.noSensitiveFinancialData'))}</p>
+              </section>` : ''}` : ''}
 
           ${detailBlocks ? `
             <details class="navigation-path-details">
@@ -266,14 +275,18 @@ function renderSelectedPath(selectedPath) {
   );
   if (actions) {
     const prepared = document.documentElement.dataset.navigationReviewPrepared === 'true';
+    const professional = selected.pathType === 'professional_review';
+    const consentAccepted = document.documentElement.dataset.professionalConsentAccepted === 'true';
     actions.innerHTML = `
       <button class="btn navigation-change-path" type="button" data-change-path>${escapeHTML(t('navigation.changePath'))}</button>
-      <button class="btn navigation-review-ready" type="button" data-prepare-review ${prepared ? 'disabled aria-pressed="true"' : 'aria-pressed="false"'}>${escapeHTML(prepared ? t('navigation.reviewPrepared') : t('navigation.continueToReview'))}</button>
+      ${professional && !consentAccepted ? `<button class="btn professional-consent" type="button" data-accept-professional-boundary>${escapeHTML(t('navigation.professionalConsentButton'))}</button>` : ''}
+      <button class="btn navigation-review-ready" type="button" data-prepare-review ${(prepared || (professional && !consentAccepted)) ? 'disabled aria-pressed="true"' : 'aria-pressed="false"'}>${escapeHTML(prepared ? t('navigation.reviewPrepared') : t('navigation.continueToReview'))}</button>
     `;
   }
 }
 
 export function renderRealityNavigation(response) {
+  document.documentElement.dataset.professionalConsentAccepted = response?.navigationState?.professionalConsent?.accepted === true ? 'true' : 'false';
   const navigation = isObject(response?.navigation)
     ? response.navigation
     : {};

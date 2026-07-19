@@ -8,7 +8,7 @@
  */
 
 import { cleanText } from '../shared.js';
-import { persistNavigationState, clearNavigationPath, prepareNavigationForReview } from './navigation-state.js';
+import { persistNavigationState, clearNavigationPath, prepareNavigationForReview, acceptProfessionalBoundary } from './navigation-state.js';
 
 function isObject(value) {
   return value !== null &&
@@ -147,6 +147,9 @@ export function bindNavigationPathSelection({
       } catch (error) { console.error('PHI OS Navigation path change failed:', error); }
       return;
     }
+
+    const consentButton = event.target?.closest?.('[data-accept-professional-boundary]');
+    if (consentButton) { event.preventDefault(); try { const currentResponse=typeof getResponse==='function'?getResponse():getResponse; onSelectionChange?.(acceptProfessionalBoundary(currentResponse)); } catch(error){ console.error('PHI OS professional consent failed:',error); } return; }
 
     const reviewButton = event.target?.closest?.('[data-prepare-review]');
     if (reviewButton) {

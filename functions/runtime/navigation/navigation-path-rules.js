@@ -1,3 +1,4 @@
+import { createFinancialProfessionalDomain } from './professional-domains-financial.js';
 /**
  * Step 2.5.3B — bounded Navigation path generation.
  *
@@ -231,7 +232,11 @@ export function generateNavigationPaths(handoff = {}, options = {}) {
       candidates,
       path('professional-review', 'professional_review', copy.professional, professional.reasons, {
         professionalDomains: uniqueText(professional.domains, 6),
-        requiresProfessionalReview: true
+        requiresProfessionalReview: true,
+        professionalBoundary: createFinancialProfessionalDomain({
+          language,
+          reasons: professional.reasons
+        })
       }),
       100,
       'professional_boundary_present'

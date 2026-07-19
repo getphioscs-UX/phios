@@ -278,6 +278,27 @@ const navigation = Object.freeze({
     viewPathDetails:
       '查看证据与审阅细节',
 
+    financialProfessionalTitle:
+      '财务专业审阅',
+
+    professionalWhenHelpful:
+      '何时适合专业审阅',
+
+    professionalPrepare:
+      '可预先准备的现有资料（自愿）',
+
+    professionalUnknown:
+      'PHI OS 无法确认的内容',
+
+    professionalExcluded:
+      'PHI OS 不提供的内容',
+
+    noSensitiveFinancialData:
+      '请勿在这里输入或上传完整财务敏感资料。这条路径只用于准备有边界的专业审阅。',
+
+    professionalConsentButton:
+      '我理解并同意专业边界',
+
     noNavigation:
       '本次旅程没有可用的现实导航结果。'
   }

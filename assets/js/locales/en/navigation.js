@@ -278,6 +278,27 @@ const navigation = Object.freeze({
     viewPathDetails:
       'View evidence and review details',
 
+    financialProfessionalTitle:
+      'Financial professional review',
+
+    professionalWhenHelpful:
+      'When professional review may help',
+
+    professionalPrepare:
+      'Existing information to prepare (optional)',
+
+    professionalUnknown:
+      'What PHI OS cannot confirm',
+
+    professionalExcluded:
+      'What PHI OS does not provide',
+
+    noSensitiveFinancialData:
+      'Do not enter or upload complete sensitive financial records here. This path only prepares a bounded professional review.',
+
+    professionalConsentButton:
+      'I Understand the Professional Boundary',
+
     noNavigation:
       'No Reality Navigation is available for this Journey.'
   }

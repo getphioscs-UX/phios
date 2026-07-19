@@ -147,33 +147,6 @@ Navigation now presents bounded paths as comparable customer cards. Each card ke
 
 Navigation now persists an explicit user-selected path in session state, restores it only when the Runtime Entity, Runtime Entry, and Navigation Input identity still match, allows the user to clear and change the choice, and exposes a Review readiness gate. Review cannot be prepared until a valid available path has been selected. Automatic selection remains prohibited.
 
-STEP — THESIS V2 CONNECTED
+## Step 2.5.3E — Professional Boundary Layer (Financial Domain v1)
 
-Replace these files in the root of your local phios repository:
-
-1. thesis.html
-2. about.html
-
-Do not add assets/js/pages/thesis.js.
-This patch intentionally removes that missing dependency and uses the existing:
-- /assets/css/styles.css
-- /assets/js/shared.js
-- /assets/docs/reality-navigation-thesis.pdf
-
-Expected routes after Cloudflare deployment:
-- /about
-- /thesis
-- /thesis.html
-
-Suggested commit message:
-Connect Thesis v2 to PHI OS website
-
-Verification:
-1. Open /about
-2. Click Read the Thesis
-3. On /thesis, test:
-   - About PHI OS back link
-   - Reality Atlas
-   - Begin a Reality Journey
-   - Open PDF
-   - Download PDF
+Navigation can now attach a domain-neutral professional boundary contract to a professional-review path. Financial Domain v1 explains when qualified review may help, which existing summaries may be prepared voluntarily, what PHI OS cannot confirm, and which investment, tax, legal, accounting, or licensed-advice conclusions are excluded. It collects no complete sensitive financial data, enables no upload or intake, and requires explicit user boundary consent before Review readiness.
