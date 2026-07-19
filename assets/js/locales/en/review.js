@@ -1,22 +1,6 @@
-/* PHI OS en review translations. Keep keys aligned with the matching locale module. */
+/* PHI OS en review and Runtime Workspace translations. */
 const review = Object.freeze({
-  review: {
-    eyebrow: 'Runtime Experience · Review',
-    title: 'Reality Review',
-    subtitle: 'Review what was observed, what was inferred, what direction was selected, and what remains unresolved.',
-    journeySummary: 'Runtime Journey Summary',
-    entrySummary: 'Entry Summary',
-    reconstructionSummary: 'Reconstruction Summary',
-    readingSummary: 'Reading Summary',
-    navigationSummary: 'Navigation Summary',
-    unresolvedReality: 'Unresolved Reality',
-    selectedDirection: 'Selected Direction',
-    nextReview: 'Next Review',
-    completeButton: 'Complete Journey',
-    startNewButton: 'Begin a New Journey',
-    completedTitle: 'Runtime Journey completed',
-    completedMessage: 'This Journey has been closed without treating unresolved Reality as settled fact.'
-  }
+  workspace: { sidebarAria:'Runtime Journey stages', runtimeLabel:'Runtime Workspace', languageAria:'Language', currentStage:'Current stage', completedStage:'Completed', upcomingStage:'Upcoming', boundaryTitle:'Continuity without overwrite', boundaryText:'Each stage adds a new contract. Earlier evidence, Reading and decisions remain preserved.', stage:{ entry:'Entry', reconstruction:'Reconstruction', reading:'Reading', navigation:'Navigation', review:'Review', memory:'Memory', continuity:'Continuity' } },
+  review: { eyebrow:'Runtime Experience · Review', title:'Reality Review', subtitle:'Record what actually changed without rewriting the earlier Reading.', backNavigation:'Back to Navigation', emptyTitle:'Review is not ready yet', emptyMessage:'Choose a Navigation path and prepare it for Review first.', returnNavigation:'Return to Navigation', customerReportTitle:'What happened after choosing this path?', pathStatusLabel:'Path status', statusNotStarted:'Not started', statusInProgress:'In progress', statusPaused:'Paused', statusCompleted:'Completed', statusChanged:'Changed path', statusWithdrawn:'Withdrawn', observedChangesLabel:'Observed changes', observedChangesPlaceholder:'One observed change per line', noChangeLabel:'What did not change?', noChangePlaceholder:'One unchanged condition per line', unexpectedLabel:'Unexpected reality', unexpectedPlaceholder:'What appeared that the earlier Reading did not establish?', difficultiesLabel:'Difficulties or constraints', difficultiesPlaceholder:'One difficulty or constraint per line', notesLabel:'Additional notes', notesPlaceholder:'Optional customer notes', selectedPathTitle:'Selected path', firstStepTitle:'First step', reviewScopeTitle:'Evidence to review', unknownTitle:'Still unknown', outcomeTitle:'What should happen next?', outcomeLabel:'Choose the next runtime state', outcomePending:'Not chosen', outcomeContinueObservation:'Continue observation', outcomeContinuePath:'Continue selected path', outcomeReturnReading:'Return to Reading', outcomeChoosePath:'Choose another path', outcomeNewEntry:'Start a new Entry', outcomeProfessional:'Professional review', outcomeRemainOpen:'Remain open', outcomeReasonLabel:'Why?', outcomeReasonPlaceholder:'One reason per line', saveButton:'Save Review', prepareMemoryButton:'Prepare Runtime Memory', boundaryNote:'Your report remains reported experience. It does not overwrite the earlier Reading or become verified evidence automatically.', memoryReady:'Review is ready for Runtime Memory.', memoryBlocked:'Memory handoff is waiting for {count} requirement(s).', memoryPrepared:'Runtime Memory prepared. Continuity still requires a separate user choice.', notEstablished:'Not established', noneRecorded:'None recorded', contractStatus:{ awaiting_customer_report:'Awaiting report', customer_reported:'Report saved', ready_for_memory:'Ready for memory' } }
 });
-
 export default review;

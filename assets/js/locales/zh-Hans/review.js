@@ -1,22 +1,6 @@
-/* PHI OS zh-Hans review translations. Keep keys aligned with the matching locale module. */
+/* PHI OS zh-Hans review and Runtime Workspace translations. */
 const review = Object.freeze({
-  review: {
-    eyebrow: '运行体验 · 回顾',
-    title: '现实回顾',
-    subtitle: '回顾观察到了什么、推断了什么、选择了什么方向，以及哪些部分仍未解决。',
-    journeySummary: '运行旅程摘要',
-    entrySummary: '入口摘要',
-    reconstructionSummary: '重建摘要',
-    readingSummary: '读取摘要',
-    navigationSummary: '导航摘要',
-    unresolvedReality: '尚未解决的现实',
-    selectedDirection: '已选择的方向',
-    nextReview: '下一次回顾',
-    completeButton: '完成本次旅程',
-    startNewButton: '开始新的旅程',
-    completedTitle: '运行旅程已经完成',
-    completedMessage: '本次旅程已经结束，尚未解决的现实不会被当成已经确定的事实。'
-  }
+  workspace: { sidebarAria:'现实旅程阶段', runtimeLabel:'运行工作区', languageAria:'语言', currentStage:'当前阶段', completedStage:'已完成', upcomingStage:'尚未进入', boundaryTitle:'连续而不覆盖', boundaryText:'每个阶段都会新增一份 Contract；早期证据、Reading 与选择继续保留。', stage:{ entry:'入口', reconstruction:'现实重建', reading:'现实读取', navigation:'现实导航', review:'现实回顾', memory:'运行记忆', continuity:'现实延续' } },
+  review: { eyebrow:'运行体验 · 回顾', title:'现实回顾', subtitle:'记录选择路径后实际发生的变化，而不改写先前 Reading。', backNavigation:'返回现实导航', emptyTitle:'尚未准备进入 Review', emptyMessage:'请先在 Navigation 选择路径并明确准备进入 Review。', returnNavigation:'返回现实导航', customerReportTitle:'选择这条路径后，实际发生了什么？', pathStatusLabel:'路径状态', statusNotStarted:'尚未开始', statusInProgress:'进行中', statusPaused:'已暂停', statusCompleted:'已完成', statusChanged:'已更改路径', statusWithdrawn:'已退出', observedChangesLabel:'观察到的变化', observedChangesPlaceholder:'每行填写一项观察到的变化', noChangeLabel:'哪些部分没有变化？', noChangePlaceholder:'每行填写一项没有变化的情况', unexpectedLabel:'意外出现的现实', unexpectedPlaceholder:'出现了哪些先前 Reading 尚未建立的情况？', difficultiesLabel:'困难或限制', difficultiesPlaceholder:'每行填写一项困难或限制', notesLabel:'补充说明', notesPlaceholder:'客户可选说明', selectedPathTitle:'已选择路径', firstStepTitle:'第一步', reviewScopeTitle:'需要回顾的证据', unknownTitle:'仍然未知', outcomeTitle:'接下来应该如何继续？', outcomeLabel:'选择下一运行状态', outcomePending:'尚未选择', outcomeContinueObservation:'继续观察', outcomeContinuePath:'继续当前路径', outcomeReturnReading:'返回 Reading', outcomeChoosePath:'重新选择路径', outcomeNewEntry:'开启新的 Entry', outcomeProfessional:'进入专业审阅', outcomeRemainOpen:'暂时保持开放', outcomeReasonLabel:'为什么？', outcomeReasonPlaceholder:'每行填写一个原因', saveButton:'保存 Review', prepareMemoryButton:'准备 Runtime Memory', boundaryNote:'你的回答仍属于 reported experience，不会覆盖原 Reading，也不会自动成为已验证证据。', memoryReady:'Review 已满足 Runtime Memory 的准备条件。', memoryBlocked:'Memory Handoff 仍等待 {count} 项条件。', memoryPrepared:'Runtime Memory 已准备；Continuity 仍需要客户再次选择。', notEstablished:'尚未建立', noneRecorded:'没有记录', contractStatus:{ awaiting_customer_report:'等待客户报告', customer_reported:'客户报告已保存', ready_for_memory:'可进入运行记忆' } }
 });
-
 export default review;

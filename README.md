@@ -193,3 +193,10 @@ Returning to Reading creates a new revision rather than modifying the historical
 Reading. Starting a new Entry only prepares the destination and still requires a
 separate explicit Runtime creation action. Professional continuity preserves the
 accepted boundary and continues to collect no sensitive data or infer conclusions.
+
+## Step 2.5.4D — Runtime Workspace + Review Customer View
+
+- Added a reusable Runtime Journey sidebar shared by Navigation and Review.
+- Added `reality-review.html` with customer report, Unexpected Reality, next-state choice and Memory readiness.
+- Review reports remain `reported_experience`; they do not overwrite Reading or become verified facts.
+- Integrated About and Thesis into the native `phiOSLocale` i18n runtime.

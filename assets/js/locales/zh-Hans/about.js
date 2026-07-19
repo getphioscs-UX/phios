@@ -11,6 +11,8 @@ const about = Object.freeze({
     },
     "hero": {
       "eyebrow": "关于 PHI OS · 现实导航",
+      "titleLine1": "智能可以回答。",
+      "titleLine2": "导航必须继续。",
       "title": "智能可以回答。<br><em>导航必须继续。</em>",
       "lead": "PHI OS 正在被发展为一个 Reality Navigation 系统：以统一方式理解一个具体的现实如何形成、改变，并随时间继续运行。",
       "begin": "开始现实导航",
