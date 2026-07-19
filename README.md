@@ -224,3 +224,12 @@ Supported execution behavior:
 - remain open → remain in Runtime Memory
 
 Workspace checker consolidation: `scripts/check-runtime-workspace.mjs` is the single canonical checker. The temporary `check-runtime-workspace-completion.mjs` checker was merged into it and removed.
+
+## Step 2.5.4G — Runtime Revision & New Entry Initialization
+
+- `return_to_reading` now initializes a new Reading revision from an append-only revision request.
+- The prior Reading and downstream Navigation/Review/Memory/Continuity contracts are archived before active downstream state is reset.
+- Unresolved Reality enters the revision only as `continuity_reference`; it is not inherited as fact.
+- `start_new_entry` now initializes a new Runtime Entry from the continuity handoff with new Runtime and Entry IDs.
+- The Runtime Entity can remain continuous across runtimes while the previous Runtime remains append-only in history.
+- Neither flow auto-submits Entry content, auto-selects a conclusion, or overwrites historical contracts.

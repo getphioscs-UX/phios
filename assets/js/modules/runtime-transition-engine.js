@@ -136,6 +136,7 @@ function prepareNewEntry(continuity) {
     handoffId: createId('entry_handoff'),
     createdAt: new Date().toISOString(),
     previousRuntimeId: continuity.sourceRuntimeId,
+    previousRuntimeEntityId: continuity.runtimeEntityId,
     previousRuntimeEntryId: continuity.sourceRuntimeEntryId,
     sourceMemoryId: continuity.sourceMemoryId,
     unresolvedReality: continuity.sourceMemory?.unresolvedReality || [],

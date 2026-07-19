@@ -28,6 +28,7 @@ import {
 } from './modules/reading-navigation.js';
 
 import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
+import { initializeReadingRevision } from './modules/runtime-revision-initializer.js';
 
 import {
   getLanguage,
@@ -229,6 +230,7 @@ function destroyRealityReadingPage() {
 ========================================================= */
 
 export async function initializeRealityReadingPage() {
+  initializeReadingRevision();
   if (state.initialized) {
     return {
       initialized: true,

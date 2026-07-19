@@ -11,6 +11,7 @@ import {
 } from './shared.js';
 
 import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
+import { initializeNewRuntimeEntry } from './modules/runtime-revision-initializer.js';
 
 import {
   initializeI18n,
@@ -61,6 +62,7 @@ const TARGET_TRANSLATION_KEYS = Object.freeze({
 
 initializeI18n();
 initializeRuntimeWorkspace({ currentStage: 'entry' });
+const entryInitialization = initializeNewRuntimeEntry();
 
 const els = {
   chat: qs('#chat'),
@@ -103,8 +105,10 @@ function createInitialState() {
     askedTargets: ['observed_change'],
     answerBindings: [],
     evidenceDepth: 'guided',
-    runtimeEntityId: createId('rt'),
-    runtimeEntryId: createId('entry')
+    runtimeEntityId: entryInitialization?.runtimeEntityId || createId('rt'),
+    runtimeEntryId: entryInitialization?.runtimeEntryId || createId('entry'),
+    runtimeId: entryInitialization?.runtimeId || createId('runtime'),
+    continuityHandoff: entryInitialization?.continuityContext || null
   };
 }
 
@@ -120,7 +124,9 @@ function persistEntryState() {
     answerBindings: state.answerBindings,
     evidenceDepth: state.evidenceDepth,
     runtimeEntityId: state.runtimeEntityId,
-    runtimeEntryId: state.runtimeEntryId
+    runtimeEntryId: state.runtimeEntryId,
+    runtimeId: state.runtimeId,
+    continuityHandoff: state.continuityHandoff
   });
 }
 
@@ -652,7 +658,8 @@ async function submit(rawMessage) {
       lastQuestionTarget: state.lastQuestionTarget,
       askedTargets: state.askedTargets,
       answerBindings: state.answerBindings,
-      evidenceDepth: state.evidenceDepth
+      evidenceDepth: state.evidenceDepth,
+      continuityContext: state.continuityHandoff
     }, message);
 
     const result = await postJSON(
@@ -799,7 +806,16 @@ function restoreEntryState() {
     runtimeEntryId:
       saved?.runtimeEntryId ||
       result?.runtimeEntry?.runtimeEntryId ||
+      entryInitialization?.runtimeEntryId ||
       createId('entry'),
+    runtimeId:
+      saved?.runtimeId ||
+      entryInitialization?.runtimeId ||
+      createId('runtime'),
+    continuityHandoff:
+      saved?.continuityHandoff ||
+      entryInitialization?.continuityContext ||
+      null,
     round:
       Number(saved?.round ?? result?.entry_round ?? 0),
     askedTargets:
