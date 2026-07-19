@@ -12,8 +12,6 @@ const thesis = Object.freeze({
     "hero": {
       "back": "← 返回 PHI OS 简介",
       "eyebrow": "研究基础 · 现实导航",
-      "titlePrefix": "现实导航",
-      "titleEmphasis": "论文",
       "title": "<em>现实导航论文</em>",
       "lead": "为持续变化的现实建立可表征、可读取与可导航的研究基础，也是 PHI OS 的理论起点。",
       "read": "阅读完整论文",
