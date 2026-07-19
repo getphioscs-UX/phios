@@ -208,3 +208,19 @@ accepted boundary and continues to collect no sensitive data or infer conclusion
 - Locked unavailable stages instead of implying they are complete or directly accessible.
 - Added the My Reality Memory and Continuity workspace.
 - Continuity must match the Review outcome, requires user confirmation, and never creates or overwrites a Runtime automatically.
+
+## Step 2.5.4F — Runtime Transition Engine
+
+`assets/js/modules/runtime-transition-engine.js` executes only an explicitly confirmed Continuity choice. It creates an append-only execution record and never auto-selects a route, overwrites historical contracts, or automatically creates a new Runtime.
+
+Supported execution behavior:
+
+- continue observation → preserve the observation scope and return to Review
+- continue selected path → preserve the selected path and return to Navigation
+- return to Reading → create a new Reading revision request
+- choose another path → archive the old selection and clear only the active selection
+- start new Entry → archive the current Runtime and prepare an Entry continuity handoff
+- professional review → return to the preserved professional boundary path
+- remain open → remain in Runtime Memory
+
+Workspace checker consolidation: `scripts/check-runtime-workspace.mjs` is the single canonical checker. The temporary `check-runtime-workspace-completion.mjs` checker was merged into it and removed.

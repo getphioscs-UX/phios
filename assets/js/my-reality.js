@@ -2,6 +2,7 @@ import { initializeI18n, onLocaleChange, t } from '../i18n.js';
 import { initializeRuntimeWorkspace } from '../modules/runtime-workspace.js';
 import { MEMORY_KEY, CONTINUITY_KEY, getWorkspaceOptions } from '../modules/runtime-workspace-state.js';
 import { getSession, safeJSON, setSession, cleanText } from '../shared.js';
+import { executeRuntimeTransition, getRuntimeTransitionExecution } from '../modules/runtime-transition-engine.js';
 
 const $=id=>document.getElementById(id);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -26,7 +27,9 @@ function render(){
   const existing=readContinuity();
   const selected=existing?.userChoice?.nextRuntimeState||memory.outcomeMemory?.nextRuntimeState||'';
   document.querySelectorAll('[name="continuityChoice"]').forEach(input=>input.checked=input.value===selected);
-  $('continuityStatus').textContent=existing?.userChoice?.confirmed?t('memory.continuityConfirmed'):t('memory.continuityWaiting');
+  const execution=getRuntimeTransitionExecution();
+  $('continuityStatus').textContent=execution?.continuityId===existing?.continuityId?t('memory.transitionExecuted'):existing?.userChoice?.confirmed?t('memory.continuityConfirmed'):t('memory.continuityWaiting');
+  $('executeTransition')?.classList.toggle('hidden',!existing?.userChoice?.confirmed||execution?.continuityId===existing?.continuityId);
 }
 function confirmContinuity(){
   const memory=readMemory();
@@ -38,5 +41,14 @@ function confirmContinuity(){
   setSession(CONTINUITY_KEY,contract);render();location.hash='continuity';
 }
 function destination(choice){return ({continue_observation:'review',continue_selected_path:'navigation',return_to_reading:'reading',choose_another_path:'navigation',start_new_entry:'entry',professional_review:'navigation',remain_open:'memory'})[choice]||'memory'}
-function boot(){initializeI18n();render();$('confirmContinuity')?.addEventListener('click',confirmContinuity);onLocaleChange(render);window.addEventListener('hashchange',render)}
+function executeTransition(){
+  const continuity=readContinuity();
+  if(!continuity)return;
+  try{
+    const execution=executeRuntimeTransition(continuity,{userInitiated:true});
+    if(execution.route&&execution.route!==location.pathname+location.hash) location.assign(execution.route);
+    else render();
+  }catch(error){$('continuityStatus').textContent=error?.message||t('memory.transitionFailed');}
+}
+function boot(){initializeI18n();render();$('confirmContinuity')?.addEventListener('click',confirmContinuity);$('executeTransition')?.addEventListener('click',executeTransition);onLocaleChange(render);window.addEventListener('hashchange',render)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
