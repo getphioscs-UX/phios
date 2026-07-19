@@ -1,9 +1,7 @@
 import { initializeI18n, onLocaleChange, t } from '../i18n.js';
-import { initializeRuntimeWorkspace } from '../modules/runtime-workspace.js';
-import { MEMORY_KEY, CONTINUITY_KEY, getWorkspaceOptions } from '../modules/runtime-workspace-state.js';
+import { MEMORY_KEY, CONTINUITY_KEY } from '../modules/runtime-workspace-state.js';
 import { getSession, safeJSON, setSession, cleanText } from '../shared.js';
-import { executeRuntimeTransition, getRuntimeTransitionExecution } from '../modules/runtime-transition-engine.js';
-import { buildRuntimeLineage } from '../modules/runtime-lineage.js';
+import { RuntimeKernel } from '../runtime/index.js';
 
 const $=id=>document.getElementById(id);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -30,7 +28,7 @@ function renderRuntimeTimeline(){
   const target=$('runtimeTimeline');
   const empty=$('timelineEmpty');
   if(!target||!empty)return;
-  const lineage=buildRuntimeLineage();
+  const lineage=RuntimeKernel.lineage.timeline();
   $('lineageEntityId').textContent=lineage.runtimeEntityId||t('lineage.notEstablished');
   $('lineageRuntimeCount').textContent=String(lineage.runtimeCount||0);
   empty.classList.toggle('hidden',lineage.runtimes.length>0);
@@ -47,7 +45,7 @@ function renderRuntimeTimeline(){
 function render(){
   const memory=readMemory();
   renderRuntimeTimeline();
-  initializeRuntimeWorkspace({currentStage:location.hash==='#continuity'?'continuity':'memory'});
+  RuntimeKernel.workspace.mount({currentStage:location.hash==='#continuity'?'continuity':'memory'});
   $('memoryEmpty').classList.toggle('hidden',Boolean(memory));
   $('memoryWorkspace').classList.toggle('hidden',!memory);
   if(!memory)return;
@@ -62,7 +60,7 @@ function render(){
   const existing=readContinuity();
   const selected=existing?.userChoice?.nextRuntimeState||memory.outcomeMemory?.nextRuntimeState||'';
   document.querySelectorAll('[name="continuityChoice"]').forEach(input=>input.checked=input.value===selected);
-  const execution=getRuntimeTransitionExecution();
+  const execution=RuntimeKernel.transition.current();
   $('continuityStatus').textContent=execution?.continuityId===existing?.continuityId?t('memory.transitionExecuted'):existing?.userChoice?.confirmed?t('memory.continuityConfirmed'):t('memory.continuityWaiting');
   $('executeTransition')?.classList.toggle('hidden',!existing?.userChoice?.confirmed||execution?.continuityId===existing?.continuityId);
 }
@@ -80,10 +78,12 @@ function executeTransition(){
   const continuity=readContinuity();
   if(!continuity)return;
   try{
-    const execution=executeRuntimeTransition(continuity,{userInitiated:true});
+    const result=RuntimeKernel.transition.execute(continuity,{userInitiated:true});
+    if(!result.executed) throw new Error(`Runtime transition invalid: ${result.readiness.blockers.join(', ')}`);
+    const execution=result.execution;
     if(execution.route&&execution.route!==location.pathname+location.hash) location.assign(execution.route);
     else render();
   }catch(error){$('continuityStatus').textContent=error?.message||t('memory.transitionFailed');}
 }
-function boot(){initializeI18n();render();$('confirmContinuity')?.addEventListener('click',confirmContinuity);$('executeTransition')?.addEventListener('click',executeTransition);onLocaleChange(render);window.addEventListener('hashchange',render)}
+function boot(){RuntimeKernel.start();initializeI18n();render();$('confirmContinuity')?.addEventListener('click',confirmContinuity);$('executeTransition')?.addEventListener('click',executeTransition);onLocaleChange(render);window.addEventListener('hashchange',render)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();

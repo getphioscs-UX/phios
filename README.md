@@ -244,24 +244,13 @@ Check with:
 npm run check:runtime-lineage
 ```
 
-## Step 2.5.4I — Runtime Persistence & Recovery
+## Step 2.5.4J — Runtime Kernel
 
-PHI OS now persists a versioned Runtime Snapshot through a storage adapter boundary. Active session contracts are captured into localStorage, validated with a checksum, and restored into sessionStorage after browser closure or restart when no active session exists.
+The browser Runtime modules now expose one public boundary through `assets/js/runtime/index.js`.
+The kernel coordinates contract access, workspace state, persistence and recovery, confirmed transitions, lineage, and runtime events while preserving the existing PHI OS guardrails.
 
-Key module:
-
-- `assets/js/modules/runtime-persistence.js`
-
-Guardrails:
-
-- unsupported schemas are not restored;
-- checksum failures are rejected;
-- restoration never creates a new Runtime automatically;
-- historical contracts remain append-only;
-- reported experience is not promoted to verified evidence.
-
-Checks:
+Run:
 
 ```bash
-npm run check:runtime-persistence
+npm run check:runtime-kernel
 ```

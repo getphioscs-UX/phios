@@ -20,7 +20,7 @@ const checks = [
   ['navigation selection history', lineage.includes('selectionHistory') && lineage.includes("type: 'path_changed'")],
   ['append only guardrail', lineage.includes('appendOnlyHistory: true') && lineage.includes('historicalOverwriteAllowed: false')],
   ['reported experience boundary', lineage.includes('reportedExperienceRemainsUnverified: true')],
-  ['timeline rendering', page.includes('buildRuntimeLineage') && page.includes('renderRuntimeTimeline')],
+  ['timeline rendering', (page.includes('buildRuntimeLineage') || page.includes('RuntimeKernel.lineage.timeline')) && page.includes('renderRuntimeTimeline')],
   ['timeline markup', html.includes('id="runtimeTimeline"') && html.includes('data-i18n="lineage.title"')],
   ['timeline styles', css.includes('.runtime-timeline') && css.includes('.runtime-lineage-card')]
 ];

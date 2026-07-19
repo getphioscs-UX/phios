@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs && node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs && node scripts/check-navigation-state.mjs && node scripts/check-professional-boundary.mjs && node scripts/check-review-contract.mjs && node scripts/check-runtime-memory-contract.mjs && node scripts/check-reality-continuity-contract.mjs && node scripts/check-runtime-workspace.mjs && node scripts/check-runtime-revision-initialization.mjs && node scripts/check-runtime-lineage-timeline.mjs && node scripts/check-runtime-persistence-recovery.mjs",
+    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs && node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs && node scripts/check-navigation-state.mjs && node scripts/check-professional-boundary.mjs && node scripts/check-review-contract.mjs && node scripts/check-runtime-memory-contract.mjs && node scripts/check-reality-continuity-contract.mjs && node scripts/check-runtime-workspace.mjs && node scripts/check-runtime-revision-initialization.mjs && node scripts/check-runtime-lineage-timeline.mjs && node scripts/check-runtime-persistence-recovery.mjs && node scripts/check-runtime-kernel.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
     "dev": "wrangler pages dev .",
     "check:reading-boundary": "node scripts/check-reading-evidence-boundary.mjs",
@@ -18,7 +18,8 @@
     "check:runtime-engine": "node scripts/check-runtime-workspace.mjs",
     "check:runtime-revision": "node scripts/check-runtime-revision-initialization.mjs",
     "check:runtime-lineage": "node scripts/check-runtime-lineage-timeline.mjs",
-    "check:runtime-persistence": "node scripts/check-runtime-persistence-recovery.mjs"
+    "check:runtime-persistence": "node scripts/check-runtime-persistence-recovery.mjs",
+    "check:runtime-kernel": "node scripts/check-runtime-kernel.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

@@ -31,8 +31,11 @@ for (const token of ['reported_experience','readingOverwriteAllowed:false','auto
 }
 
 const memory = fs.readFileSync('assets/js/pages/my-reality.js', 'utf8');
-for (const token of ['phi-os.continuity.v1','automaticSelection:false','createsNextRuntime:false','executeRuntimeTransition']) {
+for (const token of ['phi-os.continuity.v1','automaticSelection:false','createsNextRuntime:false']) {
   if (!memory.includes(token)) throw new Error(`Memory/Continuity view missing ${token}`);
+}
+if (!memory.includes('executeRuntimeTransition') && !memory.includes('RuntimeKernel.transition.execute')) {
+  throw new Error('Memory/Continuity view missing Runtime transition execution boundary');
 }
 
 const engine = fs.readFileSync('assets/js/modules/runtime-transition-engine.js', 'utf8');
