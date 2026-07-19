@@ -178,3 +178,18 @@ next Runtime automatically. The Continuity handoff remains closed until a later
 explicit user choice. Historical Entry, Reading, Navigation, and Review
 contracts are never overwritten, and no sensitive professional data or
 professional conclusion is inferred.
+
+
+## Step 2.5.4C — Reality Continuity Contract
+
+A completed Runtime Memory can now prepare a bounded Continuity transition only
+after the user explicitly confirms the Review outcome. Continuity maps the seven
+allowed outcomes to a continuation, Reading revision, Navigation reselection, new
+Entry request, professional boundary, or remain-open route. It never creates a
+next Runtime automatically, never assigns `nextRuntimeId`, and never overwrites
+the source Entry, Reading, Navigation, Review, or Memory.
+
+Returning to Reading creates a new revision rather than modifying the historical
+Reading. Starting a new Entry only prepares the destination and still requires a
+separate explicit Runtime creation action. Professional continuity preserves the
+accepted boundary and continues to collect no sensitive data or infer conclusions.
