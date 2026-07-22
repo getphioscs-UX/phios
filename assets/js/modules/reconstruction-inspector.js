@@ -60,13 +60,14 @@ const GRAMMAR_LABELS = Object.freeze({
   G6: 'Carrier',
   G7: 'Runtime',
   G8: 'Experience',
-  G9: 'Compression',
-  G10: 'Action',
-  G11: 'Feedback',
-  G12: 'Settlement',
-  G13: 'Reconfiguration',
-  G14: 'Emergence',
-  G15: 'Continuity'
+  G9: 'Expression',
+  G10: 'Agency',
+  G11: 'Identity',
+  G12: 'Feedback',
+  G13: 'Settlement',
+  G14: 'Reconfiguration',
+  G15: 'Emergence',
+  G16: 'Continuity'
 });
 
 

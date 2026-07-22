@@ -55,7 +55,7 @@ const reading = Object.freeze({
       unknownTitle: '仍然不清楚',
       alternativeTitle: '另一种可能的读取',
       technicalTitle: '查看 PHI OS 技术模型',
-      technicalDescription: '坐标、签名、区域、配置与可选读取接口',
+      technicalDescription: '坐标、区域、配置与可选读取接口',
       evidenceTitle: '查看证据依据与读取限制',
       evidenceDescription: '证据路径、意识方式、可靠基础与读取限制',
       reliabilityKicker: '什么支持这次读取',
@@ -248,7 +248,7 @@ const reading = Object.freeze({
       }
     },
     footerEvidence: '现实先于智能。',
-    footerFlow: '坐标 → 签名 → 区域 → 配置 → 读取 → 转变'
+    footerFlow: '坐标 → 区域 → 配置 → 读取 → 转变'
   }
 });
 

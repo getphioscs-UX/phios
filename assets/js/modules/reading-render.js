@@ -855,7 +855,6 @@ export function renderRealityReading(response) {
   }
 
   renderCoordinates(reading);
-  renderSignatures(reading);
   renderRegions(reading);
   renderConfigurations(reading);
   renderInterfaces(reading);

@@ -310,47 +310,7 @@ function createCarrier(runtimeEntry, material, language){
     });
   });
 
-  const directSignatureEvidence = answerFor(runtimeEntry, 'carrier_signatures');
-  const relationalEvidence = firstMatching([directSignatureEvidence], [
-    'relationship', 'partner', 'husband', 'wife', 'family', 'team',
-    '关系', '伴侣', '丈夫', '妻子', '家庭', '团队'
-  ]);
-  const resourceEvidence = firstMatching([directSignatureEvidence], [
-    'money', 'income', 'salary', 'saving', 'spend', 'resource', 'business', 'work',
-    '钱', '收入', '薪水', '储蓄', '花钱', '资源', '生意', '工作'
-  ]);
-  const directionalEvidence = text(runtimeEntry?.desiredTransition);
-  const temporalEvidence =
-    runtimeEntry?.timing?.normalizedTiming ||
-    runtimeEntry?.timing?.statedTiming ||
-    '';
-  const signatureInputs = [
-    ['Structural Signature', '结构签名', isSubstantiveAnswer(directSignatureEvidence) ? directSignatureEvidence : '', 0.62, 'reported_experience'],
-    ['Navigational Signature', '导航签名', '', 0, 'unknown_reality'],
-    ['Relational Signature', '关系签名', relationalEvidence, 0.56, 'reported_experience'],
-    ['Resource Signature', '资源签名', resourceEvidence, 0.6, 'reported_experience'],
-    ['Directional Signature', '方向签名', directionalEvidence, 0.54, 'reported_experience'],
-    ['Temporal Signature', '时间签名', temporalEvidence, 0.64, 'reported_experience']
-  ];
-
-  const carrierSignatures = signatureInputs.map(([
-    label,
-    zhLabel,
-    evidence,
-    confidence,
-    evidenceClass
-  ])=>{
-    const signal = reportedSignal({
-      label,
-      zhLabel,
-      evidence,
-      language,
-      confidence
-    });
-    return evidence ? {...signal, evidenceClass} : signal;
-  });
-
-  return {initializationCoordinates, carrierSignatures};
+  return {initializationCoordinates};
 }
 
 function createConscious(runtimeEntry, material, carrier, language){
@@ -484,9 +444,9 @@ export function reconstructRuntime(runtimeEntry, options = {}){
       copy(language,"Experience layer visible.","经验层已经开始显现。"));
   }
 
-  if(text(runtimeEntry?.userInterpretation?.summary)){
+  if(isSubstantiveAnswer(answerFor(runtimeEntry, 'expression_style'))){
     activate(grammarStates,"G9",0.76,
-      copy(language,"Compression into meaning detected.","已经识别到经验被压缩为意义。"));
+      copy(language,"Expression pattern detected.","已经识别到表达方式。"));
   }
 
   if(contains(corpus,[
@@ -494,32 +454,37 @@ export function reconstructRuntime(runtimeEntry, options = {}){
     "开始","停止","离职"
   ])){
     activate(grammarStates,"G10",0.70,
-      copy(language,"Behavioural transition reported.","用户报告了行为层面的转变。"));
+      copy(language,"Agency transition reported.","用户报告了行动主体层面的转变。"));
+  }
+
+  if(isSubstantiveAnswer(answerFor(runtimeEntry, 'identity_style'))){
+    activate(grammarStates,"G11",0.72,
+      copy(language,"Identity organization reported.","用户报告了身份组织的变化。"));
   }
 
   if(
     arr(runtimeEntry?.entryEvidence).length +
     reconstructionEvidence(runtimeEntry).length > 1
   ){
-    activate(grammarStates,"G11",0.58,
+    activate(grammarStates,"G12",0.58,
       copy(language,"Feedback relationship possible.","目前可能存在反馈关系。"));
   }
 
   if(contains(corpus,[
     "continue","still","长期","持续"
   ])){
-    activate(grammarStates,"G12",0.66,
+    activate(grammarStates,"G13",0.66,
       copy(language,"Settlement detected.","已经识别到沉降状态。"));
-    activate(grammarStates,"G15",0.55,
+    activate(grammarStates,"G16",0.55,
       copy(language,"Continuity candidate.","已经出现可能持续的运行模式。"));
   }
 
   if(contains(corpus,[
     "new","transition","重新","改变"
   ])){
-    activate(grammarStates,"G13",0.60,
+    activate(grammarStates,"G14",0.60,
       copy(language,"Reconfiguration candidate.","已经出现重新配置的迹象。"));
-    activate(grammarStates,"G14",0.55,
+    activate(grammarStates,"G15",0.55,
       copy(language,"Emergence candidate.","已经出现新状态涌现的迹象。"));
   }
 

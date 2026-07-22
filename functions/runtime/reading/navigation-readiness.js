@@ -14,6 +14,17 @@ function list(value) {
   return Array.isArray(value) ? value : [];
 }
 
+function evidenceUnitCount(value) {
+  return list(value).reduce((count, item) => {
+    const text = typeof item === 'string'
+      ? item
+      : item?.statement || item?.summary || item?.sourceText || '';
+    const units = String(text).split(/[.!?。！？；;]+/)
+      .map(unit => unit.trim()).filter(unit => unit.length >= 8);
+    return count + Math.max(1, units.length);
+  }, 0);
+}
+
 function hasDirection(readingInput) {
   const entry = readingInput?.runtimeEntry || {};
   const direction = entry.desiredTransition || entry.desiredDirection || {};
@@ -36,7 +47,7 @@ export function assessNavigationReadiness({
   language = 'en'
 }) {
   const blockers = [];
-  const observedCount = list(boundary?.observedEvidence).length;
+  const observedCount = evidenceUnitCount(boundary?.observedEvidence);
   const experienceCount = list(boundary?.reportedExperience).length;
   const directionEstablished = hasDirection(readingInput);
 

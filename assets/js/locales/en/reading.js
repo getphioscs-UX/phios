@@ -55,7 +55,7 @@ const reading = Object.freeze({
       unknownTitle: 'Still unclear',
       alternativeTitle: 'Another possible reading',
       technicalTitle: 'View PHI OS technical model',
-      technicalDescription: 'Coordinates, signatures, regions, configurations, and optional interfaces',
+      technicalDescription: 'Coordinates, regions, configurations, and optional interfaces',
       evidenceTitle: 'View evidence basis and reading limits',
       evidenceDescription: 'Evidence trail, conscious style, reliability foundation, and reading limitations',
       reliabilityKicker: 'What supports this reading',
@@ -248,7 +248,7 @@ const reading = Object.freeze({
       }
     },
     footerEvidence: 'Reality before intelligence.',
-    footerFlow: 'Coordinate → Signature → Region → Configuration → Reading → Transition'
+    footerFlow: 'Coordinate → Region → Configuration → Reading → Transition'
   }
 });
 

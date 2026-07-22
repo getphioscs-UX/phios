@@ -5,7 +5,7 @@
  * Purpose
  * -------
  * This file is the canonical registry for Figure 0A:
- * Reality Formation Grammar (G1–G15).
+ * Reality Formation Grammar (G1–G16).
  *
  * It does not perform AI inference by itself.
  * It defines the stable runtime grammar that other modules use for:
@@ -33,7 +33,7 @@
    VERSION
 ========================================================= */
 
-export const RUNTIME_GRAMMAR_VERSION = '1.0.0';
+export const RUNTIME_GRAMMAR_VERSION = '1.1.0';
 
 export const RUNTIME_GRAMMAR_SCHEMA = 'phi-os.runtime-grammar.v1';
 
@@ -122,7 +122,7 @@ export const FORMATION_ARCS = Object.freeze({
     question: 'Reality 如何成为体验、意义、行动与反馈？',
     description:
       'Runtime enters experience, becomes compressed into meaning, produces action, and receives feedback.',
-    grammars: ['G8', 'G9', 'G10', 'G11'],
+    grammars: ['G8', 'G9', 'G10', 'G11', 'G12'],
     outputObject: 'internalization_state'
   },
 
@@ -133,7 +133,7 @@ export const FORMATION_ARCS = Object.freeze({
     question: 'Reality 如何沉淀、重新配置，并形成新的结构？',
     description:
       'Repeated action and feedback settle into an existing state, reorganize prior structure, and allow new organization to emerge.',
-    grammars: ['G12', 'G13', 'G14'],
+    grammars: ['G13', 'G14', 'G15'],
     outputObject: 'reorganization_state'
   },
 
@@ -144,7 +144,7 @@ export const FORMATION_ARCS = Object.freeze({
     question: 'Reality 如何跨时间、载体、关系与系统继续？',
     description:
       'Runtime continues beyond a single event, action, identity, or carrier and becomes part of a longer continuous cycle.',
-    grammars: ['G15'],
+    grammars: ['G16'],
     outputObject: 'continuity_state'
   }
 });
@@ -862,9 +862,9 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
   G9: {
     code: 'G9',
-    slug: 'compression',
-    label: 'Compression',
-    chineseLabel: '压缩',
+    slug: 'expression',
+    label: 'Expression',
+    chineseLabel: '表达',
     arc: GRAMMAR_ARC.INTERNALIZATION,
     order: 9,
 
@@ -936,9 +936,9 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
   G10: {
     code: 'G10',
-    slug: 'action',
-    label: 'Action',
-    chineseLabel: '行动',
+    slug: 'agency',
+    label: 'Agency',
+    chineseLabel: '行动主体',
     arc: GRAMMAR_ARC.INTERNALIZATION,
     order: 10,
 
@@ -1013,9 +1013,9 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
   G11: {
     code: 'G11',
-    slug: 'feedback',
-    label: 'Feedback',
-    chineseLabel: '反馈',
+    slug: 'identity',
+    label: 'Identity',
+    chineseLabel: '身份',
     arc: GRAMMAR_ARC.INTERNALIZATION,
     order: 11,
 
@@ -1090,10 +1090,10 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
   G12: {
     code: 'G12',
-    slug: 'settlement',
-    label: 'Settlement',
-    chineseLabel: '沉淀',
-    arc: GRAMMAR_ARC.REORGANIZATION,
+    slug: 'feedback',
+    label: 'Feedback',
+    chineseLabel: '反馈',
+    arc: GRAMMAR_ARC.INTERNALIZATION,
     order: 12,
 
     coreQuestion: 'What has become settled, repeated, normalized, or structurally retained?',
@@ -1167,9 +1167,9 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
   G13: {
     code: 'G13',
-    slug: 'reconfiguration',
-    label: 'Reconfiguration',
-    chineseLabel: '重新配置',
+    slug: 'settlement',
+    label: 'Settlement',
+    chineseLabel: '沉降',
     arc: GRAMMAR_ARC.REORGANIZATION,
     order: 13,
 
@@ -1243,9 +1243,9 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
   G14: {
     code: 'G14',
-    slug: 'emergence',
-    label: 'Emergence',
-    chineseLabel: '涌现',
+    slug: 'reconfiguration',
+    label: 'Reconfiguration',
+    chineseLabel: '重组',
     arc: GRAMMAR_ARC.REORGANIZATION,
     order: 14,
 
@@ -1318,10 +1318,10 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
   G15: {
     code: 'G15',
-    slug: 'continuity',
-    label: 'Continuity',
-    chineseLabel: '持续',
-    arc: GRAMMAR_ARC.CONTINUITY,
+    slug: 'emergence',
+    label: 'Emergence',
+    chineseLabel: '涌现',
+    arc: GRAMMAR_ARC.REORGANIZATION,
     order: 15,
 
     coreQuestion: 'What continues beyond this event, state, or carrier?',
@@ -1383,7 +1383,7 @@ export const GRAMMAR_REGISTRY = Object.freeze({
     ],
 
     previous: ['G4', 'G6', 'G11', 'G12', 'G13', 'G14'],
-    next: ['G1'],
+    next: ['G16'],
 
     readingLayers: [
       READING_LAYER.CONTINUITY,
@@ -1393,6 +1393,30 @@ export const GRAMMAR_REGISTRY = Object.freeze({
 
     navigationUse:
       'Defines review, persistence, carrier transition, and the opening of the next Runtime cycle.'
+  },
+
+  G16: {
+    code: 'G16',
+    slug: 'continuity',
+    label: 'Continuity',
+    chineseLabel: '持续',
+    arc: GRAMMAR_ARC.CONTINUITY,
+    order: 16,
+    coreQuestion: 'What continues beyond this event, state, or carrier?',
+    definition: 'Continuity is the persistence, transfer, repetition, memory, versioning, or reappearance of Runtime across time, contexts, systems, and carriers.',
+    does: 'Tracks what continues, transfers, drifts, closes, or reappears across Runtime cycles.',
+    doesNot: 'Does not claim continuity or transfer without evidence and explicit boundaries.',
+    acceptedInputs: ['repeated pattern across time', 'runtime memory', 'system migration', 'carrier transition', 'review history'],
+    expectedOutputs: ['continuity_pattern', 'continuity_scope', 'version_history', 'transfer_status', 'next_review_condition'],
+    preferredEvidence: [EVIDENCE_CLASS.OBSERVED, EVIDENCE_CLASS.DOCUMENTARY, EVIDENCE_CLASS.TRANSACTIONAL, EVIDENCE_CLASS.REPORTED],
+    weakEvidence: [EVIDENCE_CLASS.INTERPRETIVE],
+    questions: QUESTION_LIBRARY.continuity,
+    completionConditions: ['A persistence, transfer, drift, or recurrence pattern is identified.', 'Carrier and Runtime remain distinct.', 'A review condition is defined.'],
+    unknownsToPreserve: ['whether the current carrier will continue', 'whether closure, transfer, or new emergence is occurring'],
+    previous: ['G4', 'G6', 'G12', 'G13', 'G14', 'G15'],
+    next: ['G1'],
+    readingLayers: [READING_LAYER.CONTINUITY, READING_LAYER.NAVIGATION, READING_LAYER.READING],
+    navigationUse: 'Defines review, persistence, carrier transition, and the next Runtime cycle.'
   }
 });
 

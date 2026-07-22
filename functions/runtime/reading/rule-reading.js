@@ -156,38 +156,7 @@ const COORDINATE_REGISTRY = Object.freeze([
   }
 ]);
 
-const SIGNATURE_REGISTRY = Object.freeze([
-  {
-    label: 'Structural Signature',
-    chineseLabel: '结构签名',
-    aliases: ['structural signature', 'structural', '结构签名', '结构']
-  },
-  {
-    label: 'Relational Signature',
-    chineseLabel: '关系签名',
-    aliases: ['relational signature', 'relational', '关系签名', '关系']
-  },
-  {
-    label: 'Resource Signature',
-    chineseLabel: '资源签名',
-    aliases: ['resource signature', 'resource', '资源签名', '资源']
-  },
-  {
-    label: 'Temporal Signature',
-    chineseLabel: '时间签名',
-    aliases: ['temporal signature', 'temporal', '时间签名', '时间']
-  },
-  {
-    label: 'Directional Signature',
-    chineseLabel: '方向签名',
-    aliases: ['directional signature', 'directional', '方向签名', '方向']
-  },
-  {
-    label: 'Positional Signature',
-    chineseLabel: '位置签名',
-    aliases: ['positional signature', 'positional', '位置签名', '位置']
-  }
-]);
+const SIGNATURE_REGISTRY = Object.freeze([]);
 
 const CONSCIOUS_REGISTRY = Object.freeze({
   C1: {
@@ -221,13 +190,14 @@ const GRAMMAR_LABELS = Object.freeze({
   G6: { en: 'Carrier', zh: '载体' },
   G7: { en: 'Runtime', zh: '运行' },
   G8: { en: 'Experience', zh: '体验' },
-  G9: { en: 'Compression', zh: '压缩' },
-  G10: { en: 'Action', zh: '行动' },
-  G11: { en: 'Feedback', zh: '反馈' },
-  G12: { en: 'Settlement', zh: '沉降' },
-  G13: { en: 'Reconfiguration', zh: '重组' },
-  G14: { en: 'Emergence', zh: '涌现' },
-  G15: { en: 'Continuity', zh: '持续' }
+  G9: { en: 'Expression', zh: '表达' },
+  G10: { en: 'Agency', zh: '行动主体' },
+  G11: { en: 'Identity', zh: '身份' },
+  G12: { en: 'Feedback', zh: '反馈' },
+  G13: { en: 'Settlement', zh: '沉降' },
+  G14: { en: 'Reconfiguration', zh: '重组' },
+  G15: { en: 'Emergence', zh: '涌现' },
+  G16: { en: 'Continuity', zh: '持续' }
 });
 
 const ARC_LABELS = Object.freeze({
@@ -1132,16 +1102,6 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     outputLanguage
   );
 
-  const signatures = normalizeSignatures(
-    readingInput,
-    outputLanguage
-  );
-
-  const signatureState = signatureSummary(
-    signatures,
-    outputLanguage
-  );
-
   const grammarName = strongestGrammar
     ? `${strongestGrammar.code} ${localizedGrammarLabel(
         strongestGrammar,
@@ -1229,9 +1189,6 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     evidenceAudit,
     patternAssessment,
     initializationCoordinates: coordinates,
-    carrierSignatures: signatures,
-    strongestSignature: signatureState.strongestSignature,
-    signatureStability: signatureState.signatureStability,
     runtimeRegions,
     primaryRuntimeRegion: primaryRegion,
     connectedRuntimeRegions: connectedRegions,

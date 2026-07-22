@@ -12,6 +12,17 @@ function clamp(value) {
   return Math.max(0, Math.min(1, Number(value) || 0));
 }
 
+function evidenceUnitCount(value) {
+  return list(value).reduce((count, item) => {
+    const text = typeof item === 'string'
+      ? item
+      : item?.statement || item?.summary || item?.sourceText || '';
+    const units = String(text).split(/[.!?。！？；;]+/)
+      .map(unit => unit.trim()).filter(unit => unit.length >= 8);
+    return count + Math.max(1, units.length);
+  }, 0);
+}
+
 export const PATTERN_THRESHOLD = Object.freeze({
   minimumObservedEvidence: 2,
   minimumReportedExperience: 1,
@@ -19,7 +30,7 @@ export const PATTERN_THRESHOLD = Object.freeze({
 });
 
 export function assessPatternThreshold(boundary, grammar) {
-  const observedCount = list(boundary?.observedEvidence).length;
+  const observedCount = evidenceUnitCount(boundary?.observedEvidence);
   const experienceCount = list(boundary?.reportedExperience).length;
   const grammarConfidence = clamp(grammar?.confidence);
   const blockers = [];

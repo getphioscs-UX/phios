@@ -6,8 +6,8 @@
  * Responsibilities
  * ----------------
  * - Render Runtime Entry summary.
- * - Render Figure 0A Formation Arcs and G1–G15 states.
- * - Render Figure 4A Initialization Coordinates and Carrier Signatures.
+ * - Render Figure 0A Formation Arcs and G1–G16 states.
+ * - Render Figure 4A Initialization Coordinates.
  * - Render Figure 5E Conscious Runtime stages C1–C5.
  * - Render Evidence Boundary.
  * - Render Reconstruction Direction.
@@ -50,19 +50,19 @@ const ARC_ORDER = Object.freeze([
     id: 'internalization',
     label: 'Internalization Arc',
     chineseLabel: '现实内化弧',
-    grammars: ['G8', 'G9', 'G10', 'G11']
+    grammars: ['G8', 'G9', 'G10', 'G11', 'G12']
   },
   {
     id: 'reorganization',
     label: 'Reorganization Arc',
     chineseLabel: '现实重组弧',
-    grammars: ['G12', 'G13', 'G14']
+    grammars: ['G13', 'G14', 'G15']
   },
   {
     id: 'continuity',
     label: 'Continuity Arc',
     chineseLabel: '现实持续弧',
-    grammars: ['G15']
+    grammars: ['G16']
   }
 ]);
 
@@ -76,13 +76,14 @@ const GRAMMAR_NAMES = Object.freeze({
   G6: 'Carrier',
   G7: 'Runtime',
   G8: 'Experience',
-  G9: 'Compression',
-  G10: 'Action',
-  G11: 'Feedback',
-  G12: 'Settlement',
-  G13: 'Reconfiguration',
-  G14: 'Emergence',
-  G15: 'Continuity'
+  G9: 'Expression',
+  G10: 'Agency',
+  G11: 'Identity',
+  G12: 'Feedback',
+  G13: 'Settlement',
+  G14: 'Reconfiguration',
+  G15: 'Emergence',
+  G16: 'Continuity'
 });
 
 
@@ -918,16 +919,8 @@ export function renderCarrierRuntime(
   const coordinateGrid =
     qs('#coordinateGrid');
 
-  const signatureGrid =
-    qs('#signatureGrid');
-
   const coordinates =
     normalizeCoordinates(
-      reconstruction
-    );
-
-  const signatures =
-    normalizeSignatures(
       reconstruction
     );
 
@@ -965,39 +958,6 @@ export function renderCarrierRuntime(
         .join('');
   }
 
-  if (signatureGrid) {
-    signatureGrid.innerHTML =
-      signatures
-        .map(item => `
-          <article class="signature-card">
-            <span>
-              ${escapeHTML(
-                localizedSignature(item?.label) ||
-                t('reconstruction.signaturesTitle')
-              )}
-            </span>
-
-            <strong>
-              ${escapeHTML(
-                getText(
-                  item?.summary,
-                  t('reconstruction.insufficientEvidence')
-                )
-              )}
-            </strong>
-
-            <span class="state-badge">
-              ${escapeHTML(
-                localizedStatus(
-                  item?.status ||
-                  'unobserved'
-                )
-              )}
-            </span>
-          </article>
-        `)
-        .join('');
-  }
 }
 
 
