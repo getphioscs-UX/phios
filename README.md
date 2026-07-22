@@ -13,6 +13,6 @@
 - M0-W5：Research Registry
 - M0-W6：Foundation Validation 已建立；总冻结须等待三册、Thesis 与 Blueprint v4.0 完成总验收
 
-`data/` 内的 JSON 是网站、Reality Atlas、搜索、阅读引擎与未来 API 的共同数据源；`content/glossary/` 提供网站语言层；`assets/images/figures/` 是正式图像资产入口。任何界面文案可以改变，但不得绕过 `concepts.json` 与 `synonym-policy.json` 自行创造核心术语。
+`content/registry/` 是网站、Reality Atlas、搜索、阅读引擎与未来 API 的研究单一真源；`content/glossary/` 提供网站语言层；`assets/images/figures/` 是正式图像资产入口。`data/` 只保留 Schema、迁移或运行数据。任何界面文案可以改变，但不得绕过 `concepts.json` 与 `synonym-policy.json` 自行创造核心术语。
 
 运行 `node scripts/validate-foundation.mjs` 可执行 M0 基础验证。

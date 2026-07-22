@@ -1,2 +1,4 @@
-# Book 3 Covers
-第三册平面封面。
+# Book 3 Figures
+
+第三册完成后登记。
+

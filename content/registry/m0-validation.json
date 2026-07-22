@@ -1,0 +1,19 @@
+{
+  "validation_version":"1.0.0",
+  "milestone":"M0 Research Foundation Stable",
+  "as_of":"2026-07-22",
+  "criteria":[
+    {"criterion":"三册边界稳定","status":"passed","evidence":["books.json","book-1-manifest.json","book-2-manifest.json","book-3-manifest.json"]},
+    {"criterion":"十四部归属稳定","status":"passed","evidence":["parts.json"],"note":"Part 13 归属已稳定，但正式名称仍为 provisional。"},
+    {"criterion":"Thesis 核心架构稳定","status":"conditional","evidence":["thesis.json","sources.json"],"blocker":"正式 PDF 已登记，仍缺版本号与 changelog。"},
+    {"criterion":"Glossary 建立","status":"passed","evidence":["../glossary/zh-Hans.json","../glossary/en.json","concepts.json","synonym-policy.json"]},
+    {"criterion":"Figure Registry 建立","status":"passed-for-current-sources","evidence":["figures.json"],"note":"第一册 16 张图已登记；第二、三册只建立资产入口，不虚构未完成 Figure。"},
+    {"criterion":"Blueprint v4.0 有正式版本号","status":"conditional","evidence":["blueprints.json"],"blocker":"4.0 已登记，但仍缺正式源文件与 changelog，状态为 in-development。"},
+    {"criterion":"Core Language 无未解释漂移","status":"passed","evidence":["concepts.json","synonym-policy.json"]},
+    {"criterion":"单一 Registry 路径","status":"passed","evidence":["index.json"],"note":"content/registry/ 是唯一研究登记入口。"}
+  ],
+  "result":"conditional-pass",
+  "m0_freeze":"blocked",
+  "blocking_items":["thesis-version-and-changelog","blueprint-v4-source-and-changelog","part-13-canonical-name"],
+  "next_allowed_action":"完成三项 blocker 后重新运行验证；在此之前不进入 M1 Runtime Engine Freeze。"
+}

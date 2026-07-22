@@ -1,2 +1,4 @@
-# Book 2 Covers
-第二册平面封面。
+# Book 2 Figures
+
+第二册完成后登记。
+
