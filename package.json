@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs && node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs && node scripts/check-navigation-state.mjs && node scripts/check-professional-boundary.mjs && node scripts/check-review-contract.mjs && node scripts/check-runtime-memory-contract.mjs && node scripts/check-reality-continuity-contract.mjs && node scripts/check-runtime-workspace.mjs && node scripts/check-runtime-revision-initialization.mjs && node scripts/check-runtime-lineage-timeline.mjs && node scripts/check-runtime-persistence-recovery.mjs && node scripts/check-runtime-kernel.mjs && node scripts/check-runtime-inventory.mjs && node scripts/check-runtime-contracts.mjs && node scripts/check-runtime-gap-closure.mjs && node scripts/check-runtime-freeze.mjs && node scripts/check-provider-closure.mjs && node scripts/check-bug-fix-closure.mjs",
+    "check": "node check.mjs && node scripts/check-i18n.mjs && node scripts/check-reading-evidence-boundary.mjs && node scripts/check-reading-dedup.mjs && node scripts/check-reading-navigation-contract.mjs && node scripts/check-reading-customer-language.mjs && node scripts/check-navigation-path-rules.mjs && node scripts/check-navigation-customer-view.mjs && node scripts/check-navigation-state.mjs && node scripts/check-professional-boundary.mjs && node scripts/check-review-contract.mjs && node scripts/check-runtime-memory-contract.mjs && node scripts/check-reality-continuity-contract.mjs && node scripts/check-runtime-workspace.mjs && node scripts/check-runtime-revision-initialization.mjs && node scripts/check-runtime-lineage-timeline.mjs && node scripts/check-runtime-persistence-recovery.mjs && node scripts/check-runtime-kernel.mjs && node scripts/check-runtime-inventory.mjs && node scripts/check-runtime-contracts.mjs && node scripts/check-runtime-gap-closure.mjs && node scripts/check-runtime-freeze.mjs && node scripts/check-provider-closure.mjs && node scripts/check-bug-fix-closure.mjs && node scripts/check-full-journey-acceptance.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
     "dev": "wrangler pages dev .",
     "check:reading-boundary": "node scripts/check-reading-evidence-boundary.mjs",
@@ -25,7 +25,8 @@
     "check:runtime-gap-closure": "node scripts/check-runtime-gap-closure.mjs",
     "check:runtime-freeze": "node scripts/check-runtime-freeze.mjs",
     "check:provider-closure": "node scripts/check-provider-closure.mjs",
-    "check:bug-fix-closure": "node scripts/check-bug-fix-closure.mjs"
+    "check:bug-fix-closure": "node scripts/check-bug-fix-closure.mjs",
+    "check:full-journey": "node scripts/check-full-journey-acceptance.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
