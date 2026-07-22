@@ -55,6 +55,7 @@ export function createReadingNavigationContract(source = {}) {
         ready: input.navigationReady === true,
         score: input.readinessScore,
         blockers: input.blockers,
+        advisories: input.advisories,
         reason: input.readinessReason,
         requirements: input.requirements
       };
@@ -71,6 +72,7 @@ export function createReadingNavigationContract(source = {}) {
       ? Number(Number(readiness.score).toFixed(2))
       : 0,
     blockers: uniqueText(readiness.blockers, 12),
+    advisories: uniqueText(readiness.advisories, 12),
     readinessReason: cleanText(readiness.reason),
     requirements: isObject(readiness.requirements)
       ? { ...readiness.requirements }
@@ -142,6 +144,7 @@ export function validateReadingNavigationContract(value) {
   if (!cleanText(value.runtimeEntityId)) errors.push('runtimeEntityId is required.');
   if (!cleanText(value.runtimeEntryId)) errors.push('runtimeEntryId is required.');
   if (!Array.isArray(value.blockers)) errors.push('blockers must be an array.');
+  if (!Array.isArray(value.advisories)) errors.push('advisories must be an array.');
   if (!Array.isArray(value.availablePaths)) errors.push('availablePaths must be an array.');
   if (!Array.isArray(value.recommendedPriority)) errors.push('recommendedPriority must be an array.');
   if (!Array.isArray(value.runtimeCapabilities)) errors.push('runtimeCapabilities must be an array.');

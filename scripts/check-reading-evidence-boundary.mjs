@@ -109,13 +109,52 @@ const noDirection = readRuntimeRuleFirst(baseInput({
 }));
 
 assert.equal(noDirection.patternAssessment.established, true);
-assert.equal(noDirection.navigationReadiness.ready, false);
+assert.equal(noDirection.navigationReadiness.ready, true);
 assert.equal(
-  noDirection.navigationReadiness.blockers.includes(
+  noDirection.navigationReadiness.advisories.includes(
     'direction_not_established'
   ),
   true
 );
+assert.equal(noDirection.navigationReadiness.requirements.directionRequired, false);
+
+const englishUiWithChineseDerivedUnknowns = readRuntimeRuleFirst(baseInput({
+  languageContract: { locale: 'en', outputLanguage: 'en' },
+  evidenceBoundary: {
+    observedEvidence: [
+      'Three planned purchases did not occur; two gatherings were cancelled; the balance was checked before each payment.'
+    ],
+    reportedExperience: ['The user reports fear before spending.'],
+    interpretation: [],
+    professionalAssessment: [],
+    unknownReality: [
+      '触发条件仍未建立。',
+      '反向证据仍未建立。',
+      '依赖关系仍未建立。',
+      '期望转变仍未建立。'
+    ]
+  }
+}), { outputLanguage: 'en' });
+
+assert.deepEqual(
+  englishUiWithChineseDerivedUnknowns.evidenceBoundary.unknownReality,
+  [
+    'Trigger condition remains unestablished.',
+    'Counter-evidence remains unestablished.',
+    'Dependency remains unestablished.',
+    'Desired transition remains unestablished.'
+  ]
+);
+assert.equal(
+  englishUiWithChineseDerivedUnknowns.integratedReading.unknownReality
+    .some(value => /[\u3400-\u9fff]/u.test(value)),
+  false
+);
+assert.equal(
+  englishUiWithChineseDerivedUnknowns.integratedReading.evidenceWatch.length,
+  4
+);
+assert.equal(englishUiWithChineseDerivedUnknowns.navigationReadiness.ready, true);
 
 const unknownExcluded = readRuntimeRuleFirst(baseInput({
   evidenceBoundary: {

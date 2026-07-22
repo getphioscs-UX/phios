@@ -1,6 +1,6 @@
 {
   "$schema": "phi-os.runtime-bug-register.v1",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "closed",
   "severityOrder": ["P0", "P1", "P2", "P3", "P4"],
   "openCounts": {"P0":0,"P1":0,"P2":0,"P3":0,"P4":0},
@@ -22,10 +22,13 @@
     {"id":"READ-003","severity":"P2","area":"reading","title":"Reading page omitted customer fields","status":"closed","evidence":"assets/js/modules/reading-render.js"},
     {"id":"READ-004","severity":"P1","area":"reading","title":"Reading language contract drift","status":"closed","evidence":"functions/api/read-runtime.js"},
     {"id":"READ-005","severity":"P2","area":"reading","title":"Reading loading state not released","status":"closed","evidence":"assets/js/reading.js"},
+    {"id":"READ-006","severity":"P1","area":"reading","title":"English UI leaked Chinese system-derived Unknown Reality placeholders","status":"closed","evidence":"functions/runtime/reading/rule-reading.js"},
     {"id":"NAV-001","severity":"P2","area":"navigation","title":"Path source unclear","status":"closed","evidence":"assets/js/modules/navigation-render.js"},
     {"id":"NAV-002","severity":"P1","area":"navigation","title":"Evidence disconnected from action","status":"closed","evidence":"functions/runtime/navigation/rule-navigation.js"},
     {"id":"NAV-003","severity":"P1","area":"navigation","title":"Selected path save failure","status":"closed","evidence":"assets/js/modules/navigation-state.js"},
     {"id":"NAV-004","severity":"P1","area":"navigation","title":"Review preparation does not navigate","status":"closed","evidence":"assets/js/modules/navigation-path-selection.js"},
+    {"id":"NAV-005","severity":"P1","area":"navigation","title":"Established Reading blocked by unresolved optional direction or Runtime Region","status":"closed","evidence":"functions/runtime/reading/navigation-readiness.js"},
+    {"id":"NAV-006","severity":"P2","area":"navigation","title":"System-derived missing fields produced an empty Evidence Watch","status":"closed","evidence":"functions/runtime/reading/rule-reading.js"},
     {"id":"CONT-001","severity":"P0","area":"continuity","title":"Continuity contract missing or unchecked","status":"closed","evidence":"functions/runtime/continuity/reality-continuity-contract.js"}
   ]
 }

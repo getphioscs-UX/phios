@@ -1,7 +1,7 @@
 /*
  * PHI OS Reading Navigation Readiness Boundary
  * File: functions/runtime/reading/navigation-readiness.js
- * Version: 1.0.0
+ * Version: 1.1.0
  */
 
 function cleanText(value) {
@@ -38,6 +38,13 @@ function hasDirection(readingInput) {
   ));
 }
 
+function hasBoundedFocus(readingInput) {
+  return hasDirection(readingInput) || Boolean(cleanText(
+    readingInput?.reconstruction?.primaryArc ||
+    readingInput?.primaryArc
+  ));
+}
+
 export function assessNavigationReadiness({
   readingInput,
   boundary,
@@ -47,9 +54,11 @@ export function assessNavigationReadiness({
   language = 'en'
 }) {
   const blockers = [];
+  const advisories = [];
   const observedCount = evidenceUnitCount(boundary?.observedEvidence);
   const experienceCount = list(boundary?.reportedExperience).length;
   const directionEstablished = hasDirection(readingInput);
+  const boundedFocusEstablished = hasBoundedFocus(readingInput);
 
   if (!patternAssessment?.established) {
     blockers.push('pattern_not_established');
@@ -63,12 +72,14 @@ export function assessNavigationReadiness({
     blockers.push('insufficient_reported_experience');
   }
 
-  if (!directionEstablished) {
-    blockers.push('direction_not_established');
+  if (!boundedFocusEstablished) {
+    blockers.push('navigation_focus_not_established');
+  } else if (!directionEstablished) {
+    advisories.push('direction_not_established');
   }
 
   if (!primaryRegion) {
-    blockers.push('runtime_region_not_established');
+    advisories.push('runtime_region_not_established');
   }
 
   const ready = blockers.length === 0;
@@ -81,8 +92,12 @@ export function assessNavigationReadiness({
 
   const reason = ready
     ? language === 'zh'
-      ? '本次读取已达到最低证据门槛，并建立了明确方向；可以进入有边界的现实导航。'
-      : 'The Reading meets the minimum evidence threshold and has an explicit direction, so bounded Navigation may begin.'
+      ? advisories.length
+        ? '本次读取已达到最低证据门槛；现实导航可以先采用观察路径，同时保留尚未确认的方向或 Runtime 区域。'
+        : '本次读取已达到最低证据门槛，并建立了明确方向；可以进入有边界的现实导航。'
+      : advisories.length
+        ? 'The Reading meets the minimum evidence threshold. Navigation may begin with an observation-first path while the direction or Runtime Region remains unresolved.'
+        : 'The Reading meets the minimum evidence threshold and has an explicit direction, so bounded Navigation may begin.'
     : language === 'zh'
       ? '本次读取尚未达到进入现实导航所需的证据与方向门槛。'
       : 'The Reading does not yet meet the evidence and direction thresholds required for Navigation.';
@@ -92,12 +107,16 @@ export function assessNavigationReadiness({
     score: Number(score.toFixed(2)),
     reason,
     blockers,
+    advisories,
     requirements: {
       minimumObservedEvidence: 2,
       minimumReportedExperience: 1,
       patternEstablished: true,
-      directionEstablished: true,
-      runtimeRegionEstablished: true
+      boundedFocusEstablished,
+      directionEstablished,
+      directionRequired: false,
+      runtimeRegionEstablished: Boolean(primaryRegion),
+      runtimeRegionRequired: false
     }
   };
 }

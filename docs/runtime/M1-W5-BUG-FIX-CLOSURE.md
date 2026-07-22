@@ -14,11 +14,11 @@ The Continue button is permanently present and enabled only by Reading readiness
 
 ## Reading
 
-Reading Input accepts only canonical or registered compatible schema identifiers. The renderer consumes the current integrated Reading instead of a separate legacy map. Customer fields, bilingual labels, language refresh and loading cleanup remain covered by existing checks.
+Reading Input accepts only canonical or registered compatible schema identifiers. The renderer consumes the current integrated Reading instead of a separate legacy map. Customer fields, bilingual labels, language refresh and loading cleanup remain covered by existing checks. System-derived Unknown Reality placeholders are localized again whenever the UI language changes; user-authored evidence remains unchanged.
 
 ## Navigation
 
-Each actionable path now records a Reading source and an explicit evidence-to-action link, both rendered to the customer. Navigation state persists before rendering or Review. “Continue to Review” prepares the Review Gate, saves it, and then navigates to `/reality-review.html`.
+Each actionable path now records a Reading source and an explicit evidence-to-action link, both rendered to the customer. Navigation state persists before rendering or Review. “Continue to Review” prepares the Review Gate, saves it, and then navigates to `/reality-review.html`. An established Reading may enter an observation-first Navigation path when the user direction or Runtime Region remains unresolved; those optional gaps are advisories rather than hard blockers. System-derived missing fields become bounded Evidence Watch items without being used as inference data.
 
 ## Continuity
 

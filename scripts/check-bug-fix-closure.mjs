@@ -26,12 +26,12 @@ for (const token of ['createReadingInput','evidenceBoundary','updateContinueToRe
 const readingLoader = read('assets/js/modules/reading-loader.js');
 const readingController = read('assets/js/reading.js');
 const readingRenderer = read('assets/js/modules/reading-render.js');
-if (!/isAcceptedSchema\s*\(\s*['"]readingInput['"]/.test(readingLoader)) {
-  throw new Error('Reading schema fallback is not registry-bound.');
-}
+if (!/isAcceptedSchema\(\s*['"]readingInput['"]/.test(readingLoader)) throw new Error('Reading schema fallback is not registry-bound.');
 for (const token of ['integratedReading','readingKnownReality','readingUnknownReality','sentenceOwnership']) if (!readingRenderer.includes(token)) throw new Error(`Reading render field missing: ${token}`);
 if (!readingController.includes('finally') || !/classList\.remove\(\s*['"]is-reading['"]/.test(readingController)) throw new Error('Reading loading state is not released.');
 if (!read('functions/api/read-runtime.js').includes('outputLanguage')) throw new Error('Reading language contract is missing.');
+const readingRule = read('functions/runtime/reading/rule-reading.js');
+for (const token of ['Trigger condition remains unestablished.','Desired transition remains unestablished.','evidenceWatchFromUnknownReality']) if (!readingRule.includes(token)) throw new Error(`Reading language/evidence-watch closure missing: ${token}`);
 
 const navigationRule = read('functions/runtime/navigation/rule-navigation.js');
 const navigationRender = read('assets/js/modules/navigation-render.js');
@@ -41,6 +41,8 @@ for (const token of ['source: {','evidenceActionLink']) if (!navigationRule.incl
 for (const token of ['navigation.pathSource','navigation.evidenceAction']) if (!navigationRender.includes(token)) throw new Error(`Navigation provenance not rendered: ${token}`);
 if (!navigationState.includes('setSession(SESSION.navigation')) throw new Error('Navigation state is not saved.');
 if (!navigationSelection.includes("window.location.assign('/reality-review.html')")) throw new Error('Review navigation is not wired.');
+const navigationReadiness = read('functions/runtime/reading/navigation-readiness.js');
+for (const token of ['advisories','directionRequired: false','runtimeRegionRequired: false','observation-first path']) if (!navigationReadiness.includes(token)) throw new Error(`Observation-first Navigation closure missing: ${token}`);
 
 const continuity = 'functions/runtime/continuity/reality-continuity-contract.js';
 if (!fs.existsSync(path.join(root, continuity))) throw new Error('Reality Continuity Contract is missing.');

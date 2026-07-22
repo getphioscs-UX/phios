@@ -55,7 +55,8 @@ const blocked = readRuntimeRuleFirst({
 }, { outputLanguage: 'en' }).navigationHandoff;
 
 assert.equal(blocked.navigationReady, false);
-assert.equal(blocked.blockers.includes('direction_not_established'), true);
+assert.equal(blocked.blockers.includes('pattern_not_established'), true);
+assert.equal(blocked.advisories.includes('direction_not_established'), true);
 assert.equal(blocked.availablePaths.length, 0);
 
 console.log('Reading → Navigation contract checks passed.');

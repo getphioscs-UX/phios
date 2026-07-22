@@ -45,4 +45,20 @@ const readiness = assessNavigationReadiness({
 });
 assert.equal(readiness.ready, true, readiness.blockers.join(', '));
 
+const observationFirstReadiness = assessNavigationReadiness({
+  readingInput: { reconstruction: { primaryArc: 'formation' }, runtimeEntry: {} },
+  boundary,
+  patternAssessment: pattern,
+  primaryRegion: null,
+  confidence: 0.84,
+  language: 'en'
+});
+assert.equal(observationFirstReadiness.ready, true);
+assert.deepEqual(
+  observationFirstReadiness.advisories,
+  ['direction_not_established', 'runtime_region_not_established']
+);
+assert.equal(observationFirstReadiness.requirements.directionRequired, false);
+assert.equal(observationFirstReadiness.requirements.runtimeRegionRequired, false);
+
 console.log('✓ Book 1 G1–G16, removed Signature families, and Navigation evidence-unit alignment passed.');

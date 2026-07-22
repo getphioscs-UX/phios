@@ -394,37 +394,131 @@ function normalizeEvidenceBoundary(readingInput) {
 }
 
 const DERIVED_UNKNOWN_FIELDS = Object.freeze({
+  observed_change: Object.freeze({
+    en: 'Observed change remains unestablished.',
+    zh: '可观察变化仍未建立。',
+    watch: Object.freeze({
+      en: 'Which observable change can be verified.',
+      zh: '哪些可观察变化能够得到核实。'
+    }),
+    aliases: ['observed change', '可观察变化']
+  }),
+  timeline: Object.freeze({
+    en: 'Timeline remains unestablished.',
+    zh: '时间线仍未建立。',
+    watch: Object.freeze({
+      en: 'When the reported change first became observable.',
+      zh: '报告的变化最早在什么时候变得可观察。'
+    }),
+    aliases: ['timeline', '时间线']
+  }),
+  trigger: Object.freeze({
+    en: 'Trigger condition remains unestablished.',
+    zh: '触发条件仍未建立。',
+    watch: Object.freeze({
+      en: 'Whether a repeatable trigger condition can be observed.',
+      zh: '是否能够观察到可重复的触发条件。'
+    }),
+    aliases: ['trigger condition', 'trigger', '触发条件']
+  }),
+  context: Object.freeze({
+    en: 'Reality context remains unestablished.',
+    zh: '现实情境仍未建立。',
+    watch: Object.freeze({
+      en: 'Which context is present when the pattern appears or does not appear.',
+      zh: '模式出现或没有出现时，哪些现实情境同时存在。'
+    }),
+    aliases: ['reality context', 'context', '现实情境']
+  }),
+  affected_realities: Object.freeze({
+    en: 'Affected Reality remains unestablished.',
+    zh: '受影响的现实领域仍未建立。',
+    watch: Object.freeze({
+      en: 'Which Reality domain shows an observable effect.',
+      zh: '哪些现实领域呈现了可观察影响。'
+    }),
+    aliases: ['affected reality', 'affected realities', '受影响的现实领域']
+  }),
+  evidence: Object.freeze({
+    en: 'Supporting evidence remains unestablished.',
+    zh: '支持证据仍未建立。',
+    watch: Object.freeze({
+      en: 'Which additional observed evidence supports or changes the current reading.',
+      zh: '哪些新增观察证据会支持或改变当前读取。'
+    }),
+    aliases: ['supporting evidence', 'evidence', '支持证据']
+  }),
   counter_evidence: Object.freeze({
     en: 'Counter-evidence remains unestablished.',
     zh: '反向证据仍未建立。',
+    watch: Object.freeze({
+      en: 'Whether a counter-example or different outcome can be observed.',
+      zh: '是否能够观察到反例或不同结果。'
+    }),
     aliases: ['counter evidence', 'counter-evidence', '反向证据']
   }),
   dependency: Object.freeze({
     en: 'Dependency remains unestablished.',
     zh: '依赖关系仍未建立。',
+    watch: Object.freeze({
+      en: 'Whether one part changes consistently when another part changes.',
+      zh: '当一个部分改变时，另一个部分是否也持续发生改变。'
+    }),
     aliases: ['dependency', 'dependencies', '依赖关系']
+  }),
+  current_tension: Object.freeze({
+    en: 'Current tension remains unestablished.',
+    zh: '当前张力仍未建立。',
+    watch: Object.freeze({
+      en: 'Which competing pressures remain active in the current situation.',
+      zh: '当前情境中哪些相互竞争的压力仍然活跃。'
+    }),
+    aliases: ['current tension', '当前张力']
+  }),
+  desired_transition: Object.freeze({
+    en: 'Desired transition remains unestablished.',
+    zh: '期望转变仍未建立。',
+    watch: Object.freeze({
+      en: 'Which first concrete difference the user confirms as the desired transition.',
+      zh: '用户将哪一个最先出现的具体差异确认为期望转变。'
+    }),
+    aliases: ['desired transition', '期望转变']
   })
 });
 
+function derivedUnknownField(value) {
+  const normalized = cleanText(value)
+    .toLocaleLowerCase()
+    .replace(/[。.!！]/g, '');
+
+  if (!(
+    normalized.includes('remain') ||
+    normalized.includes('unestablished') ||
+    normalized.includes('not established') ||
+    normalized.includes('仍未建立') ||
+    normalized.includes('尚未建立')
+  )) {
+    return null;
+  }
+
+  return Object.values(DERIVED_UNKNOWN_FIELDS).find(candidate => (
+    candidate.aliases.some(alias => normalized.includes(alias))
+  )) || null;
+}
+
 function localizeDerivedUnknownReality(values, language) {
   return uniqueText(values).map(value => {
-    const normalized = cleanText(value)
-      .toLocaleLowerCase()
-      .replace(/[。.!！]/g, '');
-
-    const field = Object.values(DERIVED_UNKNOWN_FIELDS).find(candidate => (
-      candidate.aliases.some(alias => normalized.includes(alias)) &&
-      (
-        normalized.includes('remain') ||
-        normalized.includes('unestablished') ||
-        normalized.includes('not established') ||
-        normalized.includes('仍未建立') ||
-        normalized.includes('尚未建立')
-      )
-    ));
+    const field = derivedUnknownField(value);
 
     return field?.[language] || value;
   });
+}
+
+function evidenceWatchFromUnknownReality(values, language) {
+  return uniqueText(values).map(value => {
+    const field = derivedUnknownField(value);
+    return field?.watch?.[language] || '';
+  }).filter(Boolean);
 }
 
 function normalizeGrammarStates(readingInput) {
@@ -437,7 +531,7 @@ function normalizeGrammarStates(readingInput) {
       confidence: clamp(state.confidence),
       summary: cleanText(state.summary)
     }))
-    .filter(state => /^G(?:[1-9]|1[0-5])$/.test(state.code))
+    .filter(state => /^G(?:[1-9]|1[0-6])$/.test(state.code))
     .sort((a, b) => b.confidence - a.confidence);
 }
 
@@ -1111,8 +1205,14 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     boundary.unknownReality.map(item => cleanText(item).toLowerCase())
   );
 
-  const evidenceWatch = uniqueText(localizedPriorityEvidence)
-    .filter(item => !normalizedUnknown.has(cleanText(item).toLowerCase()))
+  const evidenceWatch = uniqueText([
+    ...uniqueText(localizedPriorityEvidence)
+      .filter(item => !normalizedUnknown.has(cleanText(item).toLowerCase())),
+    ...evidenceWatchFromUnknownReality(
+      boundary.unknownReality,
+      outputLanguage
+    )
+  ])
     .slice(0, 8);
 
   const knownCount = boundary.observedEvidence.length;
