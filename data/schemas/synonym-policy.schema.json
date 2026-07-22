@@ -1,0 +1,8 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://getphios.com/schemas/synonym-policy.schema.json",
+  "type":"object",
+  "required":["policy_version","mode","rule","policies","validation"],
+  "properties":{"mode":{"const":"strict"},"policies":{"type":"array","items":{"type":"object","required":["concept","canonical","accepted_aliases","forbidden_replacements"]}}}
+}
+

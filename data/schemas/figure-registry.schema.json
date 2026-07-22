@@ -1,0 +1,8 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://getphios.com/schemas/figure-registry.schema.json",
+  "type":"object",
+  "required":["registry_version","naming_freeze","figures"],
+  "properties":{"figures":{"type":"array","minItems":1,"items":{"type":"object","required":["figure_id","figure_number","title","book","part","chapter","version","language","source_file","web_file","status"],"properties":{"status":{"enum":["registered","source-pending","ready","deprecated"]}}}}}
+}
+
