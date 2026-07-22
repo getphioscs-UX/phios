@@ -877,6 +877,17 @@ function actionablePath({
       cleanText(nextStep) ||
       cleanText(path.direction),
 
+    source: {
+      stage: 'reading',
+      evidenceBasis: unique(path.evidenceBasis, 6)
+    },
+
+    evidenceActionLink: {
+      evidence: firstText(path.evidenceBasis, evidence),
+      action: cleanText(nextStep) || cleanText(path.direction),
+      explicit: true
+    },
+
     actionSteps:
       unique(actionSteps, 5),
 

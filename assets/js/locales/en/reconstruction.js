@@ -1,6 +1,7 @@
 /* PHI OS en reconstruction translations. Keep keys aligned with the matching locale module. */
 const reconstruction = Object.freeze({
   reconstruction: {
+    editSource: 'Edit source',
     eyebrow: 'Runtime Experience · Reconstruction',
     title: 'Reality Reconstruction',
     subtitle: 'Reconstruct the reported sequence while preserving the boundary between evidence, experience, interpretation, and the unknown.',

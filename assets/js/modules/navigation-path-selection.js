@@ -156,7 +156,9 @@ export function bindNavigationPathSelection({
       event.preventDefault();
       try {
         const currentResponse = typeof getResponse === 'function' ? getResponse() : getResponse;
-        onSelectionChange?.(prepareNavigationForReview(currentResponse));
+        const preparedResponse = prepareNavigationForReview(currentResponse);
+        onSelectionChange?.(preparedResponse);
+        window.location.assign('/reality-review.html');
       } catch (error) { console.error('PHI OS Navigation review preparation failed:', error); }
       return;
     }

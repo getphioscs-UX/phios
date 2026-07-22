@@ -854,7 +854,10 @@ function restoreEntryState() {
   }
 
   if (revisionRequested) {
-    state.lastQuestionTarget = 'revision';
+    const requestedTarget = cleanText(
+      new URLSearchParams(location.search).get('target')
+    );
+    state.lastQuestionTarget = requestedTarget || 'revision';
     const lastMessage = state.messages.at(-1);
     if (lastMessage?.translationKey !== 'entry.correctionQuestion') {
       addMessage('assistant', '', true, 'entry.correctionQuestion');
@@ -862,7 +865,7 @@ function restoreEntryState() {
     els.form.classList.remove('hidden');
     els.input.disabled = false;
     els.send.disabled = false;
-    renderTarget('revision');
+    renderTarget(state.lastQuestionTarget);
   }
 
   if (result && state.ready) {

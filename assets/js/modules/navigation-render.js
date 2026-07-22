@@ -133,6 +133,10 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
       const observationWindow = cleanText(path?.observationWindow);
       const stopConditions = list(path?.stopConditions).map(cleanText).filter(Boolean);
       const completionSignals = list(path?.completionSignals).map(cleanText).filter(Boolean);
+      const sourceStage = cleanText(path?.source?.stage);
+      const evidenceAction = isObject(path?.evidenceActionLink)
+        ? path.evidenceActionLink
+        : null;
       const recommended = id === cleanText(recommendedPathId);
       const selected = id === cleanText(selectedPathId);
 
@@ -185,6 +189,8 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
 
           ${direction ? `<p class="navigation-path-purpose">${escapeHTML(direction)}</p>` : ''}
           ${description ? `<p class="navigation-path-rationale">${escapeHTML(description)}</p>` : ''}
+          ${sourceStage ? `<p class="navigation-path-source"><strong>${escapeHTML(t('navigation.pathSource'))}</strong> ${escapeHTML(t('navigation.pathSourceReading'))}</p>` : ''}
+          ${evidenceAction ? `<div class="navigation-evidence-action"><span>${escapeHTML(t('navigation.evidenceAction'))}</span><p>${escapeHTML(cleanText(evidenceAction.evidence) || t('navigation.notEstablished'))} → ${escapeHTML(cleanText(evidenceAction.action) || t('navigation.notEstablished'))}</p></div>` : ''}
 
           <div class="navigation-path-customer-grid">
             <section>

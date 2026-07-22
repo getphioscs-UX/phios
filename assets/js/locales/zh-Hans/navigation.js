@@ -185,6 +185,15 @@ const navigation = Object.freeze({
     firstStep:
       '第一步',
 
+    pathSource:
+      '路径来源：',
+
+    pathSourceReading:
+      '当前现实读取',
+
+    evidenceAction:
+      '证据 → 行动连接',
+
     requiresProfessionalReview:
       '这条路径需要专业审阅。',
 

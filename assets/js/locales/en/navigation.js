@@ -185,6 +185,15 @@ const navigation = Object.freeze({
     firstStep:
       'First Step',
 
+    pathSource:
+      'Path source:',
+
+    pathSourceReading:
+      'Current Reality Reading',
+
+    evidenceAction:
+      'Evidence → action connection',
+
     requiresProfessionalReview:
       'Professional review is required for this path.',
 

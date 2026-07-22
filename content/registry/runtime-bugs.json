@@ -1,0 +1,31 @@
+{
+  "$schema": "phi-os.runtime-bug-register.v1",
+  "version": "1.0.0",
+  "status": "closed",
+  "severityOrder": ["P0", "P1", "P2", "P3", "P4"],
+  "openCounts": {"P0":0,"P1":0,"P2":0,"P3":0,"P4":0},
+  "bugs": [
+    {"id":"ENTRY-001","severity":"P1","area":"entry","title":"Duplicate questions","status":"closed","evidence":"functions/runtime/entry/rule-entry.js"},
+    {"id":"ENTRY-002","severity":"P1","area":"entry","title":"Answer bound to wrong target","status":"closed","evidence":"assets/js/reality-entry.js"},
+    {"id":"ENTRY-003","severity":"P1","area":"entry","title":"Home input not counted as round one","status":"closed","evidence":"functions/api/reconstruct-reality.js"},
+    {"id":"ENTRY-004","severity":"P2","area":"entry","title":"Date generated without explicit source","status":"closed","evidence":"functions/runtime/entry/rule-entry.js"},
+    {"id":"ENTRY-005","severity":"P2","area":"entry","title":"Entry language inconsistent","status":"closed","evidence":"assets/js/reality-entry.js"},
+    {"id":"ENTRY-006","severity":"P1","area":"entry","title":"Return to Entry loses history","status":"closed","evidence":"assets/js/reality-entry.js"},
+    {"id":"ENTRY-007","severity":"P2","area":"entry","title":"Correct Entry behaves like Exit","status":"closed","evidence":"assets/js/reality-entry.js"},
+    {"id":"RECON-001","severity":"P1","area":"reconstruction","title":"Continue button missing or never enabled","status":"closed","evidence":"assets/js/modules/reconstruction-reading.js"},
+    {"id":"RECON-002","severity":"P2","area":"reconstruction","title":"Source fields incomplete","status":"closed","evidence":"assets/js/modules/reconstruction-render.js"},
+    {"id":"RECON-003","severity":"P2","area":"reconstruction","title":"Customer view lacks edit controls","status":"closed","evidence":"reality-reconstruction.html"},
+    {"id":"RECON-004","severity":"P1","area":"reconstruction","title":"Return to Entry does not restore state","status":"closed","evidence":"assets/js/reality-entry.js"},
+    {"id":"RECON-005","severity":"P1","area":"reconstruction","title":"Entry evidence mapping incomplete","status":"closed","evidence":"assets/js/modules/reconstruction-reading.js"},
+    {"id":"READ-001","severity":"P1","area":"reading","title":"Schema fallback rejected compatible input","status":"closed","evidence":"assets/js/modules/reading-loader.js"},
+    {"id":"READ-002","severity":"P2","area":"reading","title":"Legacy Reading Map mixed into current Reading","status":"closed","evidence":"assets/js/modules/reading-render.js"},
+    {"id":"READ-003","severity":"P2","area":"reading","title":"Reading page omitted customer fields","status":"closed","evidence":"assets/js/modules/reading-render.js"},
+    {"id":"READ-004","severity":"P1","area":"reading","title":"Reading language contract drift","status":"closed","evidence":"functions/api/read-runtime.js"},
+    {"id":"READ-005","severity":"P2","area":"reading","title":"Reading loading state not released","status":"closed","evidence":"assets/js/reading.js"},
+    {"id":"NAV-001","severity":"P2","area":"navigation","title":"Path source unclear","status":"closed","evidence":"assets/js/modules/navigation-render.js"},
+    {"id":"NAV-002","severity":"P1","area":"navigation","title":"Evidence disconnected from action","status":"closed","evidence":"functions/runtime/navigation/rule-navigation.js"},
+    {"id":"NAV-003","severity":"P1","area":"navigation","title":"Selected path save failure","status":"closed","evidence":"assets/js/modules/navigation-state.js"},
+    {"id":"NAV-004","severity":"P1","area":"navigation","title":"Review preparation does not navigate","status":"closed","evidence":"assets/js/modules/navigation-path-selection.js"},
+    {"id":"CONT-001","severity":"P0","area":"continuity","title":"Continuity contract missing or unchecked","status":"closed","evidence":"functions/runtime/continuity/reality-continuity-contract.js"}
+  ]
+}

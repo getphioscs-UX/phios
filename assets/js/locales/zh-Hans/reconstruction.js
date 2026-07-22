@@ -1,6 +1,7 @@
 /* PHI OS zh-Hans reconstruction translations. Keep keys aligned with the matching locale module. */
 const reconstruction = Object.freeze({
   reconstruction: {
+    editSource: '修改来源',
     eyebrow: '运行体验 · 重建',
     title: '现实重建',
     subtitle: '重建用户所报告的事件顺序，同时保留证据、经验、解释与未知之间的边界。',
