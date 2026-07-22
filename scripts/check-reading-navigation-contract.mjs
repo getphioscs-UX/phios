@@ -34,8 +34,8 @@ assert.equal(validation.valid, true, validation.errors.join('\n'));
 assert.equal(handoff.runtimeEntityId, 'entity-test');
 assert.equal(handoff.runtimeEntryId, 'entry-test');
 assert.equal(Array.isArray(handoff.availablePaths), true);
-assert.equal(handoff.availablePaths.length, 0);
-assert.equal(handoff.recommendedPriority.length, 0);
+assert.equal(handoff.availablePaths.length > 0, true);
+assert.equal(handoff.recommendedPriority.length, handoff.availablePaths.length);
 assert.equal(handoff.selectedPath, null);
 assert.equal(handoff.desiredDirection.length > 0, true);
 assert.equal(handoff.constraints.includes('Limited time'), true);
@@ -55,7 +55,8 @@ const blocked = readRuntimeRuleFirst({
 }, { outputLanguage: 'en' }).navigationHandoff;
 
 assert.equal(blocked.navigationReady, false);
-assert.equal(blocked.blockers.includes('pattern_not_established'), true);
+assert.equal(blocked.blockers.includes('insufficient_observed_evidence'), true);
+assert.equal(blocked.advisories.includes('pattern_not_established'), true);
 assert.equal(blocked.advisories.includes('direction_not_established'), true);
 assert.equal(blocked.availablePaths.length, 0);
 

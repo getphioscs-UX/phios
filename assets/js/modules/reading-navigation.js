@@ -502,6 +502,17 @@ export function bindContinueToNavigation(
         ?.ready ===
       true;
 
+    const blockers = list(
+      response?.reading?.navigationReadiness?.blockers
+    ).map(cleanText).filter(Boolean);
+    const advisories = list(
+      response?.reading?.navigationReadiness?.advisories
+    ).map(cleanText).filter(Boolean);
+
+    button.dataset.navigationReady = ready ? 'true' : 'false';
+    button.dataset.navigationBlockers = blockers.join(',');
+    button.dataset.navigationAdvisories = advisories.join(',');
+
     button.disabled =
       !ready;
 

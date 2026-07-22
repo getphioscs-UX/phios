@@ -97,16 +97,6 @@ const COORDINATE_LABELS = Object.freeze([
 ]);
 
 
-const SIGNATURE_LABELS = Object.freeze([
-  'Structural Signature',
-  'Navigational Signature',
-  'Relational Signature',
-  'Resource Signature',
-  'Directional Signature',
-  'Temporal Signature'
-]);
-
-
 const CONSCIOUS_STAGE_LABELS = Object.freeze({
   C1: 'Carrier Runtime Style',
   C2: 'Experience Style',
@@ -206,19 +196,6 @@ function localizedCoordinate(label) {
   return key ? t(`reconstruction.coordinates.${key}`) : cleanText(label);
 }
 
-function localizedSignature(label) {
-  const keys = {
-    'Structural Signature': 'structural',
-    'Navigational Signature': 'navigational',
-    'Relational Signature': 'relational',
-    'Resource Signature': 'resource',
-    'Directional Signature': 'directional',
-    'Temporal Signature': 'temporal'
-  };
-  const key = keys[cleanText(label)];
-  return key ? t(`reconstruction.signatures.${key}`) : cleanText(label);
-}
-
 function localizedConsciousStage(code, fallback = '') {
   return t(`reconstruction.consciousStages.${code}`, {}, fallback || CONSCIOUS_STAGE_LABELS[code] || code);
 }
@@ -286,6 +263,43 @@ function uniqueTextList(value) {
       seen.add(key);
       return true;
     });
+}
+
+const DERIVED_UNKNOWN_FIELDS = Object.freeze([
+  { key: 'observedChange', aliases: ['observed change', '可观察变化'] },
+  { key: 'timeline', aliases: ['timeline', '时间线'] },
+  { key: 'trigger', aliases: ['trigger condition', 'trigger', '触发条件'] },
+  { key: 'context', aliases: ['reality context', 'context', '现实情境'] },
+  { key: 'affectedReality', aliases: ['affected reality', 'affected realities', '受影响的现实领域'] },
+  { key: 'evidence', aliases: ['supporting evidence', 'evidence', '支持证据'] },
+  { key: 'counterEvidence', aliases: ['counter evidence', 'counter-evidence', '反向证据'] },
+  { key: 'dependency', aliases: ['dependency', 'dependencies', '依赖关系'] },
+  { key: 'currentTension', aliases: ['current tension', '当前张力'] },
+  { key: 'desiredTransition', aliases: ['desired transition', '期望转变'] }
+]);
+
+function localizedDerivedUnknownReality(value) {
+  const source = normalizeListItem(value);
+  const normalized = source.toLowerCase().replace(/[。.!！]/g, '');
+  const isPlaceholder = [
+    'remain', 'unestablished', 'not established', '仍未建立', '尚未建立'
+  ].some(marker => normalized.includes(marker));
+
+  if (!isPlaceholder) return source;
+
+  const field = DERIVED_UNKNOWN_FIELDS.find(candidate => (
+    candidate.aliases.some(alias => normalized.includes(alias))
+  ));
+
+  return field
+    ? t(`reconstruction.unknownFields.${field.key}`, {}, source)
+    : source;
+}
+
+function localizedUnknownRealityList(value) {
+  return arrayValue(value)
+    .map(localizedDerivedUnknownReality)
+    .filter(Boolean);
 }
 
 
@@ -429,27 +443,6 @@ function normalizeCoordinates(reconstruction) {
     status: 'not_established',
     summary:
       t('reconstruction.noSupportingEvidence')
-  }));
-}
-
-
-function normalizeSignatures(reconstruction) {
-  const direct =
-    arrayValue(
-      reconstruction
-        ?.carrier
-        ?.carrierSignatures
-    );
-
-  if (direct.length > 0) {
-    return direct;
-  }
-
-  return SIGNATURE_LABELS.map(label => ({
-    label,
-    status: 'unobserved',
-    summary:
-      t('reconstruction.insufficientEvidence')
   }));
 }
 
@@ -617,7 +610,7 @@ export function customerReconstructionViewModel(
     ...evidence.counterEvidence
   ]);
   const unclear = uniqueTextList([
-    ...evidence.unknownReality,
+    ...localizedUnknownRealityList(evidence.unknownReality),
     ...arrayValue(evidence.interpretation).map(item => {
       const value = normalizeListItem(item);
       return value
@@ -1092,7 +1085,7 @@ export function renderEvidenceBoundary(
   if (unknownReality) {
     unknownReality.innerHTML =
       renderListHTML(
-        evidence.unknownReality,
+        localizedUnknownRealityList(evidence.unknownReality),
         t('reconstruction.noUnknownReality')
       );
   }

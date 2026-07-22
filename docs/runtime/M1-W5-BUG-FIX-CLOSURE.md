@@ -10,7 +10,7 @@ Adaptive target tracking and `answerBindings` prevent duplicate questions and bi
 
 ## Reconstruction
 
-The Continue button is permanently present and enabled only by Reading readiness. Five customer-view cards expose source-edit controls. Source extraction and Evidence Mapping remain in the reconstruction renderer and Reading bridge. Returning to Entry uses revision mode and preserves prior conversation and Runtime IDs.
+The Continue button is permanently present and enabled only by Reading readiness. Five customer-view cards expose source-edit controls. Source extraction and Evidence Mapping remain in the reconstruction renderer and Reading bridge. Returning to Entry uses revision mode and preserves prior conversation and Runtime IDs. System-derived Unknown Reality placeholders follow the selected UI language while user-authored source evidence remains unchanged.
 
 ## Reading
 
@@ -18,7 +18,7 @@ Reading Input accepts only canonical or registered compatible schema identifiers
 
 ## Navigation
 
-Each actionable path now records a Reading source and an explicit evidence-to-action link, both rendered to the customer. Navigation state persists before rendering or Review. “Continue to Review” prepares the Review Gate, saves it, and then navigates to `/reality-review.html`. An established Reading may enter an observation-first Navigation path when the user direction or Runtime Region remains unresolved; those optional gaps are advisories rather than hard blockers. System-derived missing fields become bounded Evidence Watch items without being used as inference data.
+Each actionable path now records a Reading source and an explicit evidence-to-action link, both rendered to the customer. Navigation state persists before rendering or Review. “Continue to Review” prepares the Review Gate, saves it, and then navigates to `/reality-review.html`. An evidence-backed Reading may enter an observation-first Navigation path when the pattern, reported experience, user direction, or Runtime Region remains unresolved; those optional gaps are advisories rather than hard blockers. Insufficient observed evidence remains a hard blocker. System-derived missing fields become bounded Evidence Watch items without being used as inference data.
 
 ## Continuity
 

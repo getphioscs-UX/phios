@@ -42,7 +42,9 @@ for (const token of ['navigation.pathSource','navigation.evidenceAction']) if (!
 if (!navigationState.includes('setSession(SESSION.navigation')) throw new Error('Navigation state is not saved.');
 if (!navigationSelection.includes("window.location.assign('/reality-review.html')")) throw new Error('Review navigation is not wired.');
 const navigationReadiness = read('functions/runtime/reading/navigation-readiness.js');
-for (const token of ['advisories','directionRequired: false','runtimeRegionRequired: false','observation-first path']) if (!navigationReadiness.includes(token)) throw new Error(`Observation-first Navigation closure missing: ${token}`);
+for (const token of ['advisories','directionRequired: false','runtimeRegionRequired: false','patternRequiredForObservation: false','reportedExperienceRequiredForObservation: false','observation-first path']) if (!navigationReadiness.includes(token)) throw new Error(`Observation-first Navigation closure missing: ${token}`);
+const reconstructionRenderer = read('assets/js/modules/reconstruction-render.js');
+for (const token of ['localizedDerivedUnknownReality','reconstruction.unknownFields.']) if (!reconstructionRenderer.includes(token)) throw new Error(`Reconstruction language closure missing: ${token}`);
 
 const continuity = 'functions/runtime/continuity/reality-continuity-contract.js';
 if (!fs.existsSync(path.join(root, continuity))) throw new Error('Reality Continuity Contract is missing.');

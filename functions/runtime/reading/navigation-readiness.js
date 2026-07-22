@@ -61,7 +61,7 @@ export function assessNavigationReadiness({
   const boundedFocusEstablished = hasBoundedFocus(readingInput);
 
   if (!patternAssessment?.established) {
-    blockers.push('pattern_not_established');
+    advisories.push('pattern_not_established');
   }
 
   if (observedCount < 2) {
@@ -69,7 +69,7 @@ export function assessNavigationReadiness({
   }
 
   if (experienceCount < 1) {
-    blockers.push('insufficient_reported_experience');
+    advisories.push('insufficient_reported_experience');
   }
 
   if (!boundedFocusEstablished) {
@@ -111,13 +111,21 @@ export function assessNavigationReadiness({
     requirements: {
       minimumObservedEvidence: 2,
       minimumReportedExperience: 1,
-      patternEstablished: true,
+      patternEstablished: patternAssessment?.established === true,
+      patternRequiredForObservation: false,
+      reportedExperienceEstablished: experienceCount >= 1,
+      reportedExperienceRequiredForObservation: false,
       boundedFocusEstablished,
       directionEstablished,
       directionRequired: false,
       runtimeRegionEstablished: Boolean(primaryRegion),
       runtimeRegionRequired: false
-    }
+    },
+    navigationMode: ready
+      ? advisories.length > 0
+        ? 'observation_first'
+        : 'bounded_transition'
+      : 'blocked'
   };
 }
 

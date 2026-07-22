@@ -118,6 +118,28 @@ assert.equal(
 );
 assert.equal(noDirection.navigationReadiness.requirements.directionRequired, false);
 
+const observationFirstWithoutReportedExperience = readRuntimeRuleFirst(baseInput({
+  evidenceBoundary: {
+    observedEvidence: [
+      'Three purchases were postponed; two gatherings were cancelled; the balance was checked before every payment.'
+    ],
+    reportedExperience: [],
+    interpretation: [],
+    professionalAssessment: [],
+    unknownReality: ['reported experience remains unestablished.']
+  }
+}));
+assert.equal(observationFirstWithoutReportedExperience.navigationReadiness.ready, true);
+assert.equal(observationFirstWithoutReportedExperience.navigationReadiness.navigationMode, 'observation_first');
+assert.equal(
+  observationFirstWithoutReportedExperience.navigationReadiness.advisories.includes('insufficient_reported_experience'),
+  true
+);
+assert.equal(
+  observationFirstWithoutReportedExperience.navigationReadiness.advisories.includes('pattern_not_established'),
+  true
+);
+
 const englishUiWithChineseDerivedUnknowns = readRuntimeRuleFirst(baseInput({
   languageContract: { locale: 'en', outputLanguage: 'en' },
   evidenceBoundary: {

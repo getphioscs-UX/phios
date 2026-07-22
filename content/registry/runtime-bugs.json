@@ -1,6 +1,6 @@
 {
   "$schema": "phi-os.runtime-bug-register.v1",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "status": "closed",
   "severityOrder": ["P0", "P1", "P2", "P3", "P4"],
   "openCounts": {"P0":0,"P1":0,"P2":0,"P3":0,"P4":0},
@@ -17,6 +17,7 @@
     {"id":"RECON-003","severity":"P2","area":"reconstruction","title":"Customer view lacks edit controls","status":"closed","evidence":"reality-reconstruction.html"},
     {"id":"RECON-004","severity":"P1","area":"reconstruction","title":"Return to Entry does not restore state","status":"closed","evidence":"assets/js/reality-entry.js"},
     {"id":"RECON-005","severity":"P1","area":"reconstruction","title":"Entry evidence mapping incomplete","status":"closed","evidence":"assets/js/modules/reconstruction-reading.js"},
+    {"id":"RECON-006","severity":"P1","area":"reconstruction","title":"English UI leaked Chinese system-derived Unknown Reality placeholders","status":"closed","evidence":"assets/js/modules/reconstruction-render.js"},
     {"id":"READ-001","severity":"P1","area":"reading","title":"Schema fallback rejected compatible input","status":"closed","evidence":"assets/js/modules/reading-loader.js"},
     {"id":"READ-002","severity":"P2","area":"reading","title":"Legacy Reading Map mixed into current Reading","status":"closed","evidence":"assets/js/modules/reading-render.js"},
     {"id":"READ-003","severity":"P2","area":"reading","title":"Reading page omitted customer fields","status":"closed","evidence":"assets/js/modules/reading-render.js"},
@@ -29,6 +30,7 @@
     {"id":"NAV-004","severity":"P1","area":"navigation","title":"Review preparation does not navigate","status":"closed","evidence":"assets/js/modules/navigation-path-selection.js"},
     {"id":"NAV-005","severity":"P1","area":"navigation","title":"Established Reading blocked by unresolved optional direction or Runtime Region","status":"closed","evidence":"functions/runtime/reading/navigation-readiness.js"},
     {"id":"NAV-006","severity":"P2","area":"navigation","title":"System-derived missing fields produced an empty Evidence Watch","status":"closed","evidence":"functions/runtime/reading/rule-reading.js"},
+    {"id":"NAV-007","severity":"P1","area":"navigation","title":"Evidence-backed partial Reading could not enter observation-first Navigation","status":"closed","evidence":"functions/runtime/reading/navigation-readiness.js"},
     {"id":"CONT-001","severity":"P0","area":"continuity","title":"Continuity contract missing or unchecked","status":"closed","evidence":"functions/runtime/continuity/reality-continuity-contract.js"}
   ]
 }
