@@ -1,0 +1,50 @@
+{
+  "$schema": "phi-os.runtime-contract-registry.v1",
+  "version": "1.0.0",
+  "status": "closed",
+  "baselineCommit": "8123e0a",
+  "breakingChangePolicy": "new_schema_id_and_migration_required",
+  "contracts": [
+    {"id":"runtime-entry","schemaId":"phi-os.runtime-entry.v1","owner":"entry","kind":"stage-output","validator":"functions/runtime/shared/schema-registry.js","requiredBoundaryFields":["schemaVersion","evidenceBoundary","assessment"]},
+    {"id":"reconstruction","schemaId":"phi-os.reconstruction.v1","owner":"reconstruction","kind":"stage-output","validator":"functions/runtime/shared/schema-registry.js","requiredBoundaryFields":["schemaVersion","grammarStates","evidenceBoundary"]},
+    {"id":"reading-input","schemaId":"phi-os.reading-input.v1","owner":"reading","kind":"stage-input","validator":"functions/runtime/shared/schema-registry.js","requiredBoundaryFields":["schemaVersion","runtimeEntityId","runtimeEntryId"]},
+    {"id":"reality-reading","schemaId":"phi-os.reality-reading.v1","owner":"reading","kind":"stage-output","validator":"functions/runtime/shared/schema-registry.js","requiredBoundaryFields":["schemaVersion","evidenceBoundary","navigationReadiness"]},
+    {"id":"reading-navigation","schemaId":"phi-os.reading-navigation-contract.v2","owner":"navigation","kind":"handoff","validator":"functions/runtime/navigation/reading-navigation-contract.js","requiredBoundaryFields":["schemaVersion","readingSchemaVersion","navigationReady","evidenceBoundary","unknownReality"]},
+    {"id":"navigation-input","schemaId":"phi-os.navigation-input.v1","owner":"navigation","kind":"stage-input","validator":"functions/runtime/shared/schema-registry.js","requiredBoundaryFields":["schemaVersion","runtimeEntityId","runtimeEntryId"]},
+    {"id":"navigation","schemaId":"phi-os.navigation.v1","owner":"navigation","kind":"stage-output","validator":"functions/runtime/navigation/navigation-contract.js","requiredBoundaryFields":["schemaVersion","availablePaths","navigationState"]},
+    {"id":"review","schemaId":"phi-os.review.v1","owner":"review","kind":"stage-output","validator":"functions/runtime/review/review-contract.js","requiredBoundaryFields":["schemaVersion","sourceNavigation","customerReport","reviewOutcome"]},
+    {"id":"runtime-memory","schemaId":"phi-os.runtime-memory.v1","owner":"memory","kind":"stage-output","validator":"functions/runtime/memory/runtime-memory-contract.js","requiredBoundaryFields":["schemaVersion","sourceReview","reportedMemory","outcomeMemory"]},
+    {"id":"continuity","schemaId":"phi-os.continuity.v1","owner":"continuity","kind":"stage-output","validator":"functions/runtime/continuity/reality-continuity-contract.js","requiredBoundaryFields":["schemaVersion","sourceMemory","userChoice","transition","guardrails"]},
+    {"id":"runtime-transition-execution","schemaId":"phi-os.runtime-transition-execution.v1","owner":"transition","kind":"service-output","validator":"assets/js/modules/runtime-transition-engine.js","requiredBoundaryFields":["schemaVersion","continuityId","status","action","userInitiated","automaticExecution"]},
+    {"id":"reading-revision-request","schemaId":"phi-os.reading-revision-request.v1","owner":"revision","kind":"handoff","validator":"assets/js/modules/runtime-revision-initializer.js","requiredBoundaryFields":["schemaVersion","requestId","sourceRuntimeId"]},
+    {"id":"reading-revision-initialization","schemaId":"phi-os.reading-revision-initialization.v1","owner":"revision","kind":"service-output","validator":"assets/js/modules/runtime-revision-initializer.js","requiredBoundaryFields":["schemaVersion","sourceId","status"]},
+    {"id":"entry-continuity-handoff","schemaId":"phi-os.entry-continuity-handoff.v1","owner":"transition","kind":"handoff","validator":"assets/js/modules/runtime-revision-initializer.js","requiredBoundaryFields":["schemaVersion","handoffId","previousRuntimeId","userInitiated"]},
+    {"id":"entry-initialization","schemaId":"phi-os.entry-initialization.v1","owner":"revision","kind":"service-output","validator":"assets/js/modules/runtime-revision-initializer.js","requiredBoundaryFields":["schemaVersion","runtimeId","runtimeEntryId","historicalOverwrite"]},
+    {"id":"runtime-lineage","schemaId":"phi-os.runtime-lineage.v1","owner":"lineage","kind":"service-output","validator":"assets/js/modules/runtime-lineage.js","requiredBoundaryFields":["schemaVersion","runtimeEntityId","runtimes","guardrails"]},
+    {"id":"runtime-snapshot","schemaId":"phi-os.runtime-snapshot.v1","owner":"persistence","kind":"service-output","validator":"assets/js/modules/runtime-persistence.js","requiredBoundaryFields":["schemaVersion","contracts","integrity"]},
+    {"id":"runtime-recovery-state","schemaId":"phi-os.runtime-recovery-state.v1","owner":"recovery","kind":"service-output","validator":"assets/js/modules/runtime-persistence.js","requiredBoundaryFields":["schemaVersion","status"]},
+    {"id":"runtime-workspace-state","schemaId":"phi-os.runtime-workspace-state.v1","owner":"workspace","kind":"service-output","validator":"assets/js/modules/runtime-workspace-state.js","requiredBoundaryFields":["schemaVersion","currentStage","completedStages","availableStages"]},
+    {"id":"runtime-kernel","schemaId":"phi-os.runtime-kernel.v1","owner":"kernel","kind":"boundary-status","validator":"assets/js/runtime/kernel/kernel.js","requiredBoundaryFields":["schemaVersion","started","managers","guardrails"]}
+  ],
+  "handoffs": [
+    {"from":"entry","to":"reconstruction","contract":"runtime-entry","automaticAdvance":false},
+    {"from":"reconstruction","to":"reading","contract":"reading-input","automaticAdvance":false},
+    {"from":"reading","to":"navigation","contract":"reading-navigation","automaticAdvance":false},
+    {"from":"navigation","to":"review","contract":"navigation","gate":"user_path_selection"},
+    {"from":"review","to":"memory","contract":"review","gate":"review_outcome_confirmed"},
+    {"from":"memory","to":"continuity","contract":"runtime-memory","gate":"next_runtime_state_available"},
+    {"from":"continuity","to":"transition","contract":"continuity","gate":"explicit_user_confirmation"},
+    {"from":"transition","to":"reading","contract":"reading-revision-request","mode":"new_revision"},
+    {"from":"transition","to":"entry","contract":"entry-continuity-handoff","mode":"new_runtime"}
+  ],
+  "guardrails": [
+    {"id":"no-new-runtime-stage","appliesTo":["kernel","workspace"],"requiredValue":true},
+    {"id":"no-automatic-path-selection","appliesTo":["navigation"],"requiredValue":true},
+    {"id":"no-automatic-transition","appliesTo":["continuity","transition"],"requiredValue":true},
+    {"id":"no-automatic-runtime-creation","appliesTo":["transition","revision"],"requiredValue":true},
+    {"id":"historical-overwrite-prohibited","appliesTo":["revision","lineage","persistence"],"requiredValue":true},
+    {"id":"unknown-reality-preserved","appliesTo":["reading","navigation","review","memory","continuity"],"requiredValue":true},
+    {"id":"reported-experience-not-verified","appliesTo":["review","memory","lineage"],"requiredValue":true},
+    {"id":"professional-boundary-consent-required","appliesTo":["navigation","continuity"],"requiredValue":true}
+  ]
+}
