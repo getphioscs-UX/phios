@@ -15,6 +15,28 @@ const registry = JSON.parse(fs.readFileSync('content/registry/book-1-runtime-ali
 assert.equal(registry.status, 'closed');
 assert.equal(registry.changeClass, 'contract_closure_and_bug_fix');
 assert.deepEqual(registry.newRuntimeStages, []);
+assert.deepEqual(
+  Object.keys(registry.figures),
+  ['1A', '1B', '2A', '3A', '3B', '3C', '4A', '4B', '4C', '4D', '5A', '5B', '5C', '5D', '5E']
+);
+assert.equal(registry.guardrails.figuresAreConceptualReferencesNotRuntimeStages, true);
+assert.equal(registry.guardrails.runtimeRegionIsNotRuntimeCapability, true);
+assert.equal(registry.guardrails.compressionIsMechanismWithinExpression, true);
+assert.equal(registry.guardrails.agencyIsCanonicalActionStyleIsDisplayCompatibility, true);
+assert.equal(registry.guardrails.identityRuntimeSignatureIsNotCarrierSignatureFamily, true);
+assert.equal(registry.guardrails.projectionCannotOverwriteObservedEvidence, true);
+assert.equal(registry.conceptualMappings.runtimeRegion.contractField, 'runtimeRegions');
+assert.equal(registry.conceptualMappings.runtimeCapability.contractField, 'runtimeCapabilities');
+assert.notEqual(
+  registry.conceptualMappings.runtimeRegion.contractField,
+  registry.conceptualMappings.runtimeCapability.contractField
+);
+assert.equal(registry.conceptualMappings.compression.runtimeStage, null);
+assert.equal(registry.conceptualMappings.compression.grammarContext, 'G9 Expression');
+assert.equal(registry.conceptualMappings.agency.canonicalTerm, 'Agency');
+assert.equal(registry.conceptualMappings.agency.contractField, 'agency_style');
+assert.equal(registry.conceptualMappings.identityRuntimeSignature.removedCarrierSignatureFamily, false);
+assert.equal(registry.conceptualMappings.projection.observedEvidenceMutableByProvider, false);
 assert.deepEqual(RUNTIME_COORDINATES.map(item => item.id), registry.contracts.runtimeCoordinates);
 assert.deepEqual(CARRIER_ORGANIZATION_LAYERS.map(item => item.id), registry.contracts.carrierOrganization);
 assert.deepEqual(CARRIER_CONFIGURATION_LAYERS.map(item => item.id), registry.contracts.carrierConfiguration);
@@ -65,6 +87,9 @@ const reading = readRuntimeRuleFirst({
 }, { outputLanguage: 'en' });
 
 assert.equal(reading.runtimeCapabilities.length, 9);
+assert.equal(reading.runtimeRegions.length, 9);
+assert.ok(reading.runtimeCapabilities.every(item => item.representation === 'capability'));
+assert.ok(reading.runtimeRegions.every(item => item.representation !== 'capability'));
 assert.ok(reading.decisionContext.activeQuestion?.id.startsWith('Q'));
 assert.equal(reading.decisionContext.drivers.length, 12);
 assert.deepEqual(reading.decisionContext.driverPriority, []);
@@ -78,4 +103,7 @@ const entrySource = fs.readFileSync('functions/runtime/entry/rule-entry.js', 'ut
 assert.equal(entrySource.includes("target: 'carrier_signatures'"), false);
 assert.equal(entrySource.includes("target: 'runtime_conditions'"), true);
 
-console.log('✓ M1-W7 Figures 3A–4D Runtime representation and handoff alignment passed.');
+const reconstructionSource = fs.readFileSync('functions/runtime/reconstruction/rule-reconstruction.js', 'utf8');
+assert.match(reconstructionSource, /carrier_signatures[\s\S]*runtime_conditions/);
+
+console.log('✓ M1-W7 Book 1 Figures 1A–5E conceptual boundaries, Runtime representation, and handoff alignment passed.');

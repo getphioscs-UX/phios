@@ -1,17 +1,25 @@
 {
   "id": "m1-w7-book-1-figure-runtime-alignment",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "closed",
   "changeClass": "contract_closure_and_bug_fix",
   "newRuntimeStages": [],
   "figures": {
+    "1A": ["structural_formation", "runtime_region", "structural_network", "human_carrier_reference"],
+    "1B": ["structure", "connectivity", "network", "direction", "position", "navigation_potential"],
+    "2A": ["reality_input", "projection", "meaning", "perspective", "shared_reality", "runtime_entry", "provider_boundary"],
     "3A": ["entry", "grammar", "active_question", "capability", "driver", "driver_priority", "navigation_handoff"],
     "3B": ["runtime_coordinate", "motion", "activation", "reality_state", "temporal_closure"],
     "3C": ["formation", "execution", "feedback", "recomposition", "new_question", "continuity"],
     "4A": ["carrier_entry", "carrier_organization", "carrier_architecture"],
     "4B": ["reality_intake", "environment_runtime", "perceptual_interface", "cognition_connectivity", "biological_runtime", "runtime_regulation"],
     "4C": ["carrier_stability", "maintenance", "recovery", "drift", "failure", "continuous_runtime"],
-    "4D": ["carrier_pipeline", "biological_processing", "organization", "continuity"]
+    "4D": ["carrier_pipeline", "biological_processing", "organization", "continuity"],
+    "5A": ["experience_selection", "experience_stabilization", "perspective", "motivation", "reading"],
+    "5B": ["expression", "cognitive_translation", "compression_mechanism", "expression_architecture", "expression_medium"],
+    "5C": ["agency", "decision", "choice", "responsibility", "commitment", "navigation", "review"],
+    "5D": ["identity", "identity_continuity", "reconfiguration", "memory", "continuity"],
+    "5E": ["carrier", "experience", "expression", "agency", "identity", "full_journey"]
   },
   "contracts": {
     "entryTarget": "runtime_conditions",
@@ -25,8 +33,48 @@
   "guardrails": {
     "carrierSignatureFamiliesRemoved": true,
     "directionalCoordinateIsNotDirectionalSignature": true,
+    "runtimeRegionIsNotRuntimeCapability": true,
+    "compressionIsMechanismWithinExpression": true,
+    "agencyIsCanonicalActionStyleIsDisplayCompatibility": true,
+    "identityRuntimeSignatureIsNotCarrierSignatureFamily": true,
+    "projectionCannotOverwriteObservedEvidence": true,
+    "figuresAreConceptualReferencesNotRuntimeStages": true,
     "automaticDriverInferenceAllowed": false,
     "driverPriorityRequiredForNavigation": false,
     "unknownRealityPreserved": true
+  },
+  "conceptualMappings": {
+    "runtimeRegion": {
+      "sourceFigure": "1A",
+      "contractField": "runtimeRegions",
+      "meaning": "where Reality is structurally organized or operating"
+    },
+    "runtimeCapability": {
+      "sourceFigure": "3A",
+      "contractField": "runtimeCapabilities",
+      "meaning": "which response capacity is currently available"
+    },
+    "compression": {
+      "sourceFigures": ["1A", "5B", "5D"],
+      "role": "mechanism",
+      "grammarContext": "G9 Expression",
+      "runtimeStage": null
+    },
+    "agency": {
+      "sourceFigures": ["5C", "5E"],
+      "canonicalTerm": "Agency",
+      "contractField": "agency_style",
+      "displayCompatibilityTerms": ["Action Style", "行动风格"]
+    },
+    "identityRuntimeSignature": {
+      "sourceFigure": "5D",
+      "role": "identity output descriptor",
+      "removedCarrierSignatureFamily": false
+    },
+    "projection": {
+      "sourceFigure": "2A",
+      "contractBoundaries": ["evidenceBoundary", "providerRouter"],
+      "observedEvidenceMutableByProvider": false
+    }
   }
 }

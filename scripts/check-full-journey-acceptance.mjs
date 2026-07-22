@@ -72,7 +72,7 @@ function runtimeEntry(fixture, language, observedChange) {
     },
     reconstructionEvidence: [
       { target: 'carrier_coordinates', statement: 'No verified physical change has been established.' },
-      { target: 'carrier_signatures', statement: fixture.observedEvidence[0] },
+      { target: 'runtime_conditions', statement: fixture.observedEvidence[0] },
       { target: 'experience_style', statement: fixture.reportedExperience[0] },
       { target: 'expression_style', statement: observedChange },
       { target: 'agency_style', statement: fixture.observedEvidence[1] },
