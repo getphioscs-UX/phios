@@ -3,6 +3,7 @@ import {
   ENTRY_PROVIDER_SYSTEM_PROMPT,
   buildEntryProviderInput
 } from '../provider-contract.js';
+import { createProviderResult } from '../../shared/provider-interface.js';
 
 const DEFAULT_MODEL = '@cf/meta/llama-3.1-8b-instruct-fp8-fast';
 
@@ -93,18 +94,16 @@ export async function runWorkersAIEntry(env, entryInput, ruleEntry) {
 
   const enrichment = assertContractShape(parseProviderResponse(response));
 
-  return {
-    provider: 'workers_ai',
-    model,
-    workersAIUsed: true,
-    openAIUsed: false,
-    billing: {
-      metered: true,
-      freeAllocationMayApply: true
-    },
-    enrichment,
-    usage: usageFrom(response)
-  };
+  return createProviderResult({
+    provider: 'workers_ai', model, stage: 'entry', output: enrichment,
+    confidence: ruleEntry?.assessment?.entryCompleteness,
+    missingEvidence: ruleEntry?.assessment?.missingFields,
+    usage: usageFrom(response),
+    extra: {
+      workersAIUsed: true, openAIUsed: false,
+      billing: { metered: true, freeAllocationMayApply: true }
+    }
+  });
 }
 
 export default runWorkersAIEntry;

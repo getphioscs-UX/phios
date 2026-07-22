@@ -575,7 +575,12 @@ function baseInference({
       runtimeOptions.outputLanguage,
 
     reason,
-    attempts
+    attempts,
+    warnings: attempts.filter(attempt => attempt.success === false).map(attempt => ({
+      provider: attempt.provider,
+      code: 'provider_failed',
+      message: attempt.error
+    }))
   };
 }
 
@@ -630,7 +635,12 @@ function providerInference({
       runtimeOptions.outputLanguage,
 
     reason,
-    attempts
+    attempts,
+    warnings: attempts.filter(attempt => attempt.success === false).map(attempt => ({
+      provider: attempt.provider,
+      code: 'provider_failed',
+      message: attempt.error
+    }))
   };
 }
 

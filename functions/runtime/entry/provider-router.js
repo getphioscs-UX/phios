@@ -367,7 +367,12 @@ function ruleInference(ruleEntry, reason, attempts = []) {
     openAIUsed: false,
     externalInferenceUsed: false,
     reason,
-    attempts
+    attempts,
+    warnings: attempts.filter(attempt => attempt.success === false).map(attempt => ({
+      provider: attempt.provider,
+      code: 'provider_failed',
+      message: attempt.error
+    }))
   };
 }
 

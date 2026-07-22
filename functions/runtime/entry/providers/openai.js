@@ -3,6 +3,7 @@ import {
   ENTRY_PROVIDER_SYSTEM_PROMPT,
   buildEntryProviderInput
 } from '../provider-contract.js';
+import { createProviderResult } from '../../shared/provider-interface.js';
 
 const OPENAI_RESPONSES_ENDPOINT = 'https://api.openai.com/v1/responses';
 const DEFAULT_MODEL = 'gpt-4.1-mini';
@@ -139,18 +140,17 @@ export async function runOpenAIEntry(
     throw new Error(data?.error?.message || `OpenAI Entry request failed (${response.status}).`);
   }
 
-  return {
-    provider: 'openai',
-    model,
-    workersAIUsed: routingContext?.workersAIAttempted === true,
-    openAIUsed: true,
-    billing: {
-      metered: true,
-      freeAllocationMayApply: false
-    },
-    enrichment: parseEnrichment(data),
-    usage: usageFrom(data)
-  };
+  return createProviderResult({
+    provider: 'openai', model, stage: 'entry', output: parseEnrichment(data),
+    confidence: ruleEntry?.assessment?.entryCompleteness,
+    missingEvidence: ruleEntry?.assessment?.missingFields,
+    usage: usageFrom(data),
+    extra: {
+      workersAIUsed: routingContext?.workersAIAttempted === true,
+      openAIUsed: true,
+      billing: { metered: true, freeAllocationMayApply: false }
+    }
+  });
 }
 
 export default runOpenAIEntry;

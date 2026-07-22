@@ -3,6 +3,7 @@ import {
   READING_PROVIDER_SYSTEM_PROMPT,
   buildReadingProviderInput
 } from '../provider-contract.js';
+import { createProviderResult } from '../../shared/provider-interface.js';
 
 function outputText(data) {
   if (typeof data?.output_text === 'string' && data.output_text.trim()) {
@@ -78,11 +79,13 @@ export async function runOpenAIReading(env, readingInput, ruleReading) {
     throw new Error(data?.error?.message || `OpenAI request failed (${response.status}).`);
   }
 
-  return {
-    provider: 'openai',
-    model,
-    enrichment: JSON.parse(outputText(data))
-  };
+  const enrichment = JSON.parse(outputText(data));
+  return createProviderResult({
+    provider: 'openai', model, stage: 'reading', output: enrichment,
+    confidence: ruleReading?.confidence,
+    missingEvidence: ruleReading?.evidenceBoundary?.unknownReality,
+    usage: data?.usage || null
+  });
 }
 
 export default runOpenAIReading;

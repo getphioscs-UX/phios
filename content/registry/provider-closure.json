@@ -1,0 +1,35 @@
+{
+  "$schema": "phi-os.provider-closure.v1",
+  "version": "1.0.0",
+  "status": "closed",
+  "priority": ["rule_engine", "workers_ai", "openai", "professional_review"],
+  "interface": {
+    "schemaId": "phi-os.provider-result.v1",
+    "requiredFields": ["success", "provider", "model", "stage", "output", "confidence", "missing_evidence", "warnings", "usage"]
+  },
+  "callBoundary": {
+    "page": "api_only",
+    "api": "router_only",
+    "router": "provider_only",
+    "providerMayPersistRuntime": false,
+    "providerMayRouteProvider": false
+  },
+  "fallback": {
+    "preserveRuleEngineOutput": true,
+    "appendWarning": true,
+    "destroySession": false,
+    "continuePriorityOrder": true,
+    "finalEscalation": "professional_review"
+  },
+  "stages": {
+    "entry": {
+      "router": "functions/runtime/entry/provider-router.js",
+      "providers": ["functions/runtime/entry/providers/workers-ai.js", "functions/runtime/entry/providers/openai.js"]
+    },
+    "reading": {
+      "router": "functions/runtime/reading/provider-router.js",
+      "providers": ["functions/runtime/reading/providers/workers-ai.js", "functions/runtime/reading/providers/openai.js"]
+    }
+  },
+  "failureFixtures": ["timeout", "invalid_json", "empty_output", "schema_mismatch", "quota_exceeded", "provider_unavailable"]
+}

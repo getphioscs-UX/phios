@@ -8,6 +8,7 @@
  * Evidence Boundary, decide Navigation readiness, route another provider, or
  * persist Runtime material.
  */
+import { createProviderResult } from '../../shared/provider-interface.js';
 
 import {
   READING_PROVIDER_ENRICHMENT_SCHEMA,
@@ -409,19 +410,20 @@ export async function runWorkersAIReading(
     languageContract
   );
 
-  return {
-    provider: 'workers_ai',
-    model,
-    enrichment,
-
-    metadata: {
-      structuredOutputRequested: true,
-      evidenceGroundingApplied: true,
-      locale: languageContract.locale,
-      outputLanguage: languageContract.outputLanguage,
-      persistencePerformed: false
+  return createProviderResult({
+    provider: 'workers_ai', model, stage: 'reading', output: enrichment,
+    confidence: ruleReading?.confidence,
+    missingEvidence: ruleReading?.evidenceBoundary?.unknownReality,
+    extra: {
+      metadata: {
+        structuredOutputRequested: true,
+        evidenceGroundingApplied: true,
+        locale: languageContract.locale,
+        outputLanguage: languageContract.outputLanguage,
+        persistencePerformed: false
+      }
     }
-  };
+  });
 }
 
 export default runWorkersAIReading;
