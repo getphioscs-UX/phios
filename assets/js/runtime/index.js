@@ -5,4 +5,4 @@ export { RuntimeLineageManager } from './kernel/lineage-manager.js';
 export { RuntimePersistenceManager } from './kernel/persistence-manager.js';
 export { RuntimeRecoveryManager } from './kernel/recovery-manager.js';
 export { RuntimeTransitionManager } from './kernel/transition-manager.js';
-export { RuntimeWorkspaceManager } from './kernel/workspace-manager.js';
+export { RuntimeWorkspaceManager } from './kernel/workspace-manager.js'; 
