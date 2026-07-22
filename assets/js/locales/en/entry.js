@@ -18,7 +18,7 @@ const entry = Object.freeze({
     depthDeepText: '7–10 questions with optional carrier check',
     evidenceTargets: {
       carrierCoordinates: 'Body and rhythm changes',
-      carrierSignatures: 'Recurring conditions',
+      runtimeConditions: 'Runtime conditions',
       experienceStyle: 'Direct experience',
       expressionStyle: 'Expression pattern',
       agencyStyle: 'Action pattern',

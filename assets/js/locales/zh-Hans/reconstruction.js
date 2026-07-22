@@ -99,7 +99,7 @@ const reconstruction = Object.freeze({
     inquiryRequiredBeforeReading: '进入现实读取前，请先完成有边界的现实重建问题。',
     inquiryTargets: {
       carrier_coordinates: '载体坐标',
-      carrier_signatures: '载体签名',
+      runtime_conditions: '运行条件',
       experience_style: '经验方式',
       expression_style: '表达方式',
       agency_style: '行动方式',
@@ -107,7 +107,7 @@ const reconstruction = Object.freeze({
     },
     inquiryQuestions: {
       carrier_coordinates: '这段变化开始后，你的身体、睡眠、精力、感官或生理节律出现了哪些可观察的变化？如果没有或不确定，也请直接说明。',
-      carrier_signatures: '这种模式通常在什么情况下最明显？请说明反复出现的时间规律、资源压力、关系互动或环境条件。',
+      runtime_conditions: '这个 Runtime 通常在什么时间、资源、关系或环境条件下最明显？',
       experience_style: '当你经历这个现实时，最直接的感受、情绪或内在张力是什么？',
       expression_style: '这个现实会如何出现在你的表达中——包括你说出的、没有说出的、沟通的或回避的部分？',
       agency_style: '因为这个现实，你会反复开始、停止、选择、拖延、回避或保护什么？',
@@ -122,7 +122,9 @@ const reconstruction = Object.freeze({
     formationNote: '语法状态是暂时性的重建标记，不是最终解释。',
     carrierLabel: 'Figure 4A · 人类运行初始化',
     carrierTitle: '现实可能从哪里进入载体',
-    coordinatesTitle: '初始化坐标',
+    coordinatesTitle: '运行坐标',
+    carrierOrganizationTitle: '载体组织',
+    carrierConfigurationTitle: '载体配置',
     signaturesTitle: '正在形成的载体签名',
     carrierBoundaryText: '除非得到用户报告、文件、感测资料或专业证据支持，否则生物坐标会继续标记为“尚未建立”。',
     consciousLabel: 'Figure 5E · 意识运行引擎',

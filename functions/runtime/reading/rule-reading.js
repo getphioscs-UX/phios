@@ -24,6 +24,10 @@ import {
 import { assessPatternThreshold } from './pattern-threshold.js';
 import { assessNavigationReadiness } from './navigation-readiness.js';
 import { buildReadingNavigationContract } from '../navigation/reading-navigation-builder.js';
+import {
+  RUNTIME_CAPABILITIES,
+  buildDecisionContext
+} from '../formation/book-1-runtime-model.js';
 const SUPPORTED_OUTPUT_LANGUAGES = Object.freeze([
   'en',
   'zh'
@@ -1069,6 +1073,23 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     region.confidence >= 0.22
   ));
 
+  const runtimeCapabilities = RUNTIME_CAPABILITIES.map(capability => {
+    const region = runtimeRegions.find(item => item.id === capability.id);
+    return {
+      ...region,
+      id: capability.id,
+      label: outputLanguage === 'zh' ? capability.zh : capability.label,
+      canonicalLabel: capability.label,
+      representation: 'capability'
+    };
+  });
+
+  const decisionContext = buildDecisionContext({
+    strongestGrammar,
+    primaryCapability: primaryRegion,
+    language: outputLanguage
+  });
+
   const configurations = createConfigurations(
     readingInput,
     boundary,
@@ -1189,9 +1210,15 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
     evidenceAudit,
     patternAssessment,
     initializationCoordinates: coordinates,
+    runtimeCoordinate: list(readingInput?.reconstruction?.runtimeCoordinate),
+    carrierOrganization: list(readingInput?.reconstruction?.carrierOrganization),
+    carrierConfiguration: list(readingInput?.reconstruction?.carrierConfiguration),
     runtimeRegions,
+    runtimeCapabilities,
     primaryRuntimeRegion: primaryRegion,
+    primaryCapability: decisionContext.primaryCapability,
     connectedRuntimeRegions: connectedRegions,
+    decisionContext,
     configurations,
     interpretiveInterfaces: {
       enabled:

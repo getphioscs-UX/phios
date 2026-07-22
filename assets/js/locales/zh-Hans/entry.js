@@ -18,7 +18,7 @@ const entry = Object.freeze({
     depthDeepText: '7–10 个问题，可选择载体查验',
     evidenceTargets: {
       carrierCoordinates: '身体与节律变化',
-      carrierSignatures: '反复出现的条件',
+      runtimeConditions: '运行条件',
       experienceStyle: '直接经验',
       expressionStyle: '表达方式',
       agencyStyle: '行动方式',

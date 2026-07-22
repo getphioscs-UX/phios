@@ -92,8 +92,8 @@ const reading = Object.freeze({
       integratedDescription: 'Current Runtime understanding'
     },
     coordinateSection: {
-      title: 'Initialization Coordinate',
-      note: 'This layer identifies where Reality may have entered the carrier. It does not infer biological facts without supporting evidence.',
+      title: 'Runtime Coordinate',
+      note: 'This layer identifies the temporal, conditional, directional, carrier, and relational position of the current Runtime.',
       boundaryText: 'Biological coordinates remain not established unless supported by reported, documentary, sensor, biological, or professional evidence.'
     },
     signatureSection: {
@@ -103,10 +103,13 @@ const reading = Object.freeze({
       stability: 'Signature stability'
     },
     regionSection: {
-      title: 'Runtime Region',
-      note: 'PHI OS identifies where the current Reality is operating. One Entry may involve multiple connected Regions.',
-      primary: 'Primary Region',
-      connected: 'Connected Regions'
+      title: 'Runtime Capability',
+      note: 'PHI OS identifies which capability is currently available to respond to the active question.',
+      primary: 'Primary Capability',
+      connected: 'Connected Capabilities',
+      activeQuestion: 'Active Question',
+      driverPriority: 'Driver Priority',
+      driverPending: 'Not established without explicit Reader evidence.'
     },
     regions: {
       direction: 'Direction',

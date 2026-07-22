@@ -296,7 +296,9 @@ function renderCoordinates(reading) {
   if (!container) return;
 
   const coordinates = list(
-    reading.initializationCoordinates
+    list(reading.runtimeCoordinate).length
+      ? reading.runtimeCoordinate
+      : reading.initializationCoordinates
   ).filter(isObject);
 
   container.innerHTML = coordinates.map(item => {
@@ -370,7 +372,7 @@ function renderRegions(reading) {
   });
 
   for (
-    const region of list(reading.runtimeRegions).filter(isObject)
+    const region of list(reading.runtimeCapabilities || reading.runtimeRegions).filter(isObject)
   ) {
     const regionId = cleanText(region.id).toUpperCase();
 
@@ -401,7 +403,7 @@ function renderRegions(reading) {
 
   setText(
     '#primaryRuntimeRegion',
-    translatedRegion(reading.primaryRuntimeRegion)
+    translatedRegion(reading.primaryCapability || reading.primaryRuntimeRegion)
   );
 
   setText(
@@ -411,6 +413,20 @@ function renderRegions(reading) {
       .map(translatedRegion)
       .filter(Boolean)
       .join(' · ')
+  );
+
+  setText(
+    '#readingActiveQuestion',
+    reading?.decisionContext?.activeQuestion?.question
+  );
+
+  setText(
+    '#readingDriverPriority',
+    list(reading?.decisionContext?.driverPriority)
+      .map(item => cleanText(item?.label || item?.id || item))
+      .filter(Boolean)
+      .join(' · '),
+    t('reading.regionSection.driverPending')
   );
 }
 

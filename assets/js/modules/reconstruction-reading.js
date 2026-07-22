@@ -698,8 +698,7 @@ export function createReadingInput(
         )
           ? reconstruction.carrier
           : {
-              initializationCoordinates: [],
-              carrierSignatures: []
+              initializationCoordinates: []
             },
 
       conscious:

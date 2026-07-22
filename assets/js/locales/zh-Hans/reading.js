@@ -92,8 +92,8 @@ const reading = Object.freeze({
       integratedDescription: '目前对 Runtime 的理解'
     },
     coordinateSection: {
-      title: '初始化坐标',
-      note: '这一层识别现实可能从哪里进入载体；在缺乏支持证据时，系统不会推断生物事实。',
+      title: '运行坐标',
+      note: '这一层识别当前 Runtime 的时间、条件、方向、载体与关系位置。',
       boundaryText: '除非得到用户报告、文件、感测器、生物资料或专业证据支持，否则生物坐标会继续保留为尚未建立。'
     },
     signatureSection: {
@@ -103,10 +103,13 @@ const reading = Object.freeze({
       stability: '签名稳定度'
     },
     regionSection: {
-      title: 'Runtime 区域',
-      note: 'PHI OS 会识别当前现实正在什么区域运行；同一个现实入口可以同时涉及多个相互连接的区域。',
-      primary: '主要区域',
-      connected: '关联区域'
+      title: '运行能力',
+      note: 'PHI OS 会识别当前有哪些能力可以回应正在运行的核心问题。',
+      primary: '主要能力',
+      connected: '关联能力',
+      activeQuestion: '当前核心问题',
+      driverPriority: '驱动优先级',
+      driverPending: '没有明确 Reader 证据时不会建立。'
     },
     regions: {
       direction: '方向',

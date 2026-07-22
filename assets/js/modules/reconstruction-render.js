@@ -417,9 +417,7 @@ function normalizePrimaryArc(reconstruction) {
 function normalizeCoordinates(reconstruction) {
   const direct =
     arrayValue(
-      reconstruction
-        ?.carrier
-        ?.initializationCoordinates
+      reconstruction?.runtimeCoordinate
     );
 
   if (direct.length > 0) {
@@ -611,7 +609,7 @@ export function customerReconstructionViewModel(
     .map(item => cleanText(item?.source) || normalizeListItem(item));
   const conditions = uniqueTextList([
     ...arrayValue(runtimeEntry?.initialContext?.relevantConditions),
-    labeledAnswer(runtimeEntry, 'carrier_signatures'),
+    labeledAnswer(runtimeEntry, 'runtime_conditions') || labeledAnswer(runtimeEntry, 'carrier_signatures'),
     ...dependencyConditions
   ]);
   const confirmed = uniqueTextList([
@@ -924,6 +922,20 @@ export function renderCarrierRuntime(
       reconstruction
     );
 
+  const organizationGrid = qs('#carrierOrganizationGrid');
+  const configurationGrid = qs('#carrierConfigurationGrid');
+
+  const renderModelGrid = (element, values) => {
+    if (!element) return;
+    element.innerHTML = arrayValue(values).map(item => `
+      <article class="coordinate-card">
+        <span>${escapeHTML(cleanText(item?.label))}</span>
+        <strong>${escapeHTML(getText(item?.evidence, t('reconstruction.noSupportingEvidence')))}</strong>
+        <span class="state-badge">${escapeHTML(localizedStatus(item?.status || 'not_established'))}</span>
+      </article>
+    `).join('');
+  };
+
   if (coordinateGrid) {
     coordinateGrid.innerHTML =
       coordinates
@@ -957,6 +969,9 @@ export function renderCarrierRuntime(
         `)
         .join('');
   }
+
+  renderModelGrid(organizationGrid, reconstruction?.carrierOrganization);
+  renderModelGrid(configurationGrid, reconstruction?.carrierConfiguration);
 
 }
 

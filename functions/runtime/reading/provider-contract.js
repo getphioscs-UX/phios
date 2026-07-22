@@ -307,11 +307,14 @@ export function buildReadingProviderInput(
       initializationCoordinates: list(
         ruleReading?.initializationCoordinates
       ).slice(0, 12),
-      carrierSignatures: list(ruleReading?.carrierSignatures).slice(0, 12),
-      strongestSignature: ruleReading?.strongestSignature || null,
-      signatureStability: ruleReading?.signatureStability || null,
-      runtimeRegions: list(ruleReading?.runtimeRegions).slice(0, 9),
-      primaryRuntimeRegion: ruleReading?.primaryRuntimeRegion || null,
+      runtimeCoordinate: list(ruleReading?.runtimeCoordinate).slice(0, 5),
+      carrierOrganization: list(ruleReading?.carrierOrganization).slice(0, 6),
+      carrierConfiguration: list(ruleReading?.carrierConfiguration).slice(0, 6),
+      runtimeCapabilities: list(ruleReading?.runtimeCapabilities).slice(0, 9),
+      primaryCapability: ruleReading?.primaryCapability || null,
+      decisionContext: isObject(ruleReading?.decisionContext)
+        ? ruleReading.decisionContext
+        : {},
       connectedRuntimeRegions: list(
         ruleReading?.connectedRuntimeRegions
       ).slice(0, 8),

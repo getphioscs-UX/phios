@@ -32,10 +32,10 @@ const RECONSTRUCTION_EVIDENCE_REGISTRY = Object.freeze([
     zh: '这段变化开始后，你是否观察到睡眠、精力、生理节律、感官或身体出现变化？没有或不确定都可以直接说明。'
   },
   {
-    target: 'carrier_signatures',
+    target: 'runtime_conditions',
     modes: ['guided', 'deep'],
-    en: 'When is this pattern most noticeable—for example at a certain time, under resource pressure, during an interaction, or in a particular environment?',
-    zh: '这种情况通常在什么时候最明显？例如某个时间、资源压力、关系互动或特定环境出现时。'
+    en: 'Under which timing, resource, relationship or environmental conditions does this situation become most noticeable?',
+    zh: '这种情况通常在什么时间、资源、关系或环境条件下最明显？'
   },
   {
     target: 'experience_style',

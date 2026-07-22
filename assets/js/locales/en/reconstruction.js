@@ -99,7 +99,7 @@ const reconstruction = Object.freeze({
     inquiryRequiredBeforeReading: 'Complete the bounded Reconstruction questions before Reality Reading.',
     inquiryTargets: {
       carrier_coordinates: 'Carrier coordinates',
-      carrier_signatures: 'Carrier signatures',
+      runtime_conditions: 'Runtime conditions',
       experience_style: 'Experience style',
       expression_style: 'Expression style',
       agency_style: 'Agency style',
@@ -107,7 +107,7 @@ const reconstruction = Object.freeze({
     },
     inquiryQuestions: {
       carrier_coordinates: 'After this change began, what observable changes appeared in your body, sleep, energy, senses, or physical rhythms? If none or uncertain, say so directly.',
-      carrier_signatures: 'When does this pattern become most visible? Describe any recurring timing, resource pressure, relationship interaction, or environmental condition.',
+      runtime_conditions: 'Under which timing, resource, relationship, or environmental conditions does this Runtime become most visible?',
       experience_style: 'When you experience this Reality, what is the most immediate feeling, emotion, or inner tension?',
       expression_style: 'How does this Reality show up in what you say, do not say, communicate, or withdraw from?',
       agency_style: 'What do you repeatedly start, stop, choose, delay, avoid, or protect because of this Reality?',
@@ -122,7 +122,9 @@ const reconstruction = Object.freeze({
     formationNote: 'Grammar states are provisional reconstruction markers, not final interpretations.',
     carrierLabel: 'Figure 4A · Human Runtime Initialization',
     carrierTitle: 'Where Reality appears to have entered the carrier',
-    coordinatesTitle: 'Initialization coordinates',
+    coordinatesTitle: 'Runtime coordinates',
+    carrierOrganizationTitle: 'Carrier organization',
+    carrierConfigurationTitle: 'Carrier configuration',
     signaturesTitle: 'Emerging carrier signatures',
     carrierBoundaryText: 'Biological coordinates remain “not established” unless supported by user reports, documents, sensors, or professional evidence.',
     consciousLabel: 'Figure 5E · Conscious Runtime Engine',

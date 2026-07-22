@@ -2422,6 +2422,24 @@ export function navigateRuntimeRuleFirst(
   return {
     ...contract,
 
+    decisionContext:
+      isObject(reading.decisionContext)
+        ? reading.decisionContext
+        : {},
+
+    activeQuestion:
+      isObject(reading.decisionContext?.activeQuestion)
+        ? reading.decisionContext.activeQuestion
+        : null,
+
+    primaryCapability:
+      isObject(reading.primaryCapability)
+        ? reading.primaryCapability
+        : null,
+
+    driverPriority:
+      list(reading.decisionContext?.driverPriority),
+
     createdAt:
       new Date().toISOString(),
 

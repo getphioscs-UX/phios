@@ -54,6 +54,14 @@ export function buildReadingNavigationContract({ reading, readingInput, options 
       confidence: Number(reading?.confidence) || 0
     },
     currentTransition: integrated.currentTransition,
+    decisionContext: reading?.decisionContext,
+    activeQuestion: reading?.decisionContext?.activeQuestion,
+    primaryCapability: reading?.primaryCapability,
+    runtimeCapabilities: reading?.runtimeCapabilities,
+    driverPriority: reading?.decisionContext?.driverPriority,
+    runtimeCoordinate: readingInput?.reconstruction?.runtimeCoordinate,
+    carrierOrganization: readingInput?.reconstruction?.carrierOrganization,
+    carrierConfiguration: readingInput?.reconstruction?.carrierConfiguration,
     desiredDirection: directionFromInput(readingInput),
     constraints: constraintsFromInput(readingInput),
     evidenceBoundary: {

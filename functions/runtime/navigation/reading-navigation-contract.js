@@ -79,6 +79,30 @@ export function createReadingNavigationContract(source = {}) {
       ? { ...input.currentReality }
       : {},
     currentTransition: cleanText(input.currentTransition),
+    decisionContext: isObject(input.decisionContext)
+      ? { ...input.decisionContext }
+      : {},
+    activeQuestion: isObject(input.activeQuestion)
+      ? { ...input.activeQuestion }
+      : null,
+    primaryCapability: isObject(input.primaryCapability)
+      ? { ...input.primaryCapability }
+      : null,
+    runtimeCapabilities: list(input.runtimeCapabilities)
+      .filter(isObject)
+      .map(item => ({ ...item })),
+    driverPriority: list(input.driverPriority)
+      .filter(isObject)
+      .map(item => ({ ...item })),
+    runtimeCoordinate: list(input.runtimeCoordinate)
+      .filter(isObject)
+      .map(item => ({ ...item })),
+    carrierOrganization: list(input.carrierOrganization)
+      .filter(isObject)
+      .map(item => ({ ...item })),
+    carrierConfiguration: list(input.carrierConfiguration)
+      .filter(isObject)
+      .map(item => ({ ...item })),
     desiredDirection: cleanText(input.desiredDirection),
     constraints: uniqueText(input.constraints, 12),
     evidenceBoundary: isObject(input.evidenceBoundary)
@@ -120,6 +144,8 @@ export function validateReadingNavigationContract(value) {
   if (!Array.isArray(value.blockers)) errors.push('blockers must be an array.');
   if (!Array.isArray(value.availablePaths)) errors.push('availablePaths must be an array.');
   if (!Array.isArray(value.recommendedPriority)) errors.push('recommendedPriority must be an array.');
+  if (!Array.isArray(value.runtimeCapabilities)) errors.push('runtimeCapabilities must be an array.');
+  if (!Array.isArray(value.driverPriority)) errors.push('driverPriority must be an array.');
   if (value.selectedPath !== null) errors.push('selectedPath must remain null in the handoff contract.');
   const pathIds = list(value.availablePaths)
     .map(path => cleanText(path?.id))

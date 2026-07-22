@@ -21,6 +21,11 @@ import {
   createGrammarState,
   GRAMMAR_STATUS
 } from "../formation/grammar-registry.js";
+import {
+  buildRuntimeCoordinate,
+  buildCarrierOrganization,
+  buildCarrierConfiguration
+} from '../formation/book-1-runtime-model.js';
 
 const text = v => typeof v === "string" ? v.trim() : "";
 const arr = v => Array.isArray(v) ? v : [];
@@ -85,11 +90,11 @@ const INQUIRY_REGISTRY = Object.freeze([
     ]
   },
   {
-    target: 'carrier_signatures',
-    label: ['Carrier signatures', '载体签名'],
+    target: 'runtime_conditions',
+    label: ['Runtime conditions', '运行条件'],
     question: [
-      'When does this pattern become most visible? Describe any recurring timing, resource pressure, relationship interaction, or environmental condition.',
-      '这种模式通常在什么情况下最明显？请说明反复出现的时间规律、资源压力、关系互动或环境条件。'
+      'Under which timing, resource, relationship, or environmental conditions does this Runtime become most visible?',
+      '这个 Runtime 通常在什么时间、资源、关系或环境条件下最明显？'
     ]
   },
   {
@@ -190,7 +195,13 @@ function firstMatching(sources, words){
 
 function reconstructionEvidence(runtimeEntry){
   return arr(runtimeEntry?.reconstructionEvidence)
-    .filter(item=>item && typeof item === 'object' && text(item.target) && text(item.statement));
+    .filter(item=>item && typeof item === 'object' && text(item.target) && text(item.statement))
+    .map(item=>({
+      ...item,
+      target: text(item.target) === 'carrier_signatures'
+        ? 'runtime_conditions'
+        : text(item.target)
+    }));
 }
 
 function answerFor(runtimeEntry, target){
@@ -510,7 +521,10 @@ export function reconstructRuntime(runtimeEntry, options = {}){
     language
   );
   const inquiry = createInquiry(runtimeEntry, language);
-  const grammarMaturity = Math.min(1, grammarStates.length/15);
+  const runtimeCoordinate = buildRuntimeCoordinate(runtimeEntry, language);
+  const carrierOrganization = buildCarrierOrganization(runtimeEntry, language);
+  const carrierConfiguration = buildCarrierConfiguration(runtimeEntry, language);
+  const grammarMaturity = Math.min(1, grammarStates.length/16);
   const inquiryMaturity = inquiry.answeredCount/inquiry.totalTargets;
 
   return {
@@ -521,6 +535,9 @@ export function reconstructRuntime(runtimeEntry, options = {}){
     arcScores,
     grammarStates,
     carrier,
+    runtimeCoordinate,
+    carrierOrganization,
+    carrierConfiguration,
     conscious,
     inquiry,
 

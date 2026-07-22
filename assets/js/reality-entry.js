@@ -50,7 +50,7 @@ const TARGET_TRANSLATION_KEYS = Object.freeze({
   desired_transition: 'fields.desiredTransition',
   unknown_reality: 'fields.unknownReality',
   carrier_coordinates: 'entry.evidenceTargets.carrierCoordinates',
-  carrier_signatures: 'entry.evidenceTargets.carrierSignatures',
+  runtime_conditions: 'entry.evidenceTargets.runtimeConditions',
   experience_style: 'entry.evidenceTargets.experienceStyle',
   expression_style: 'entry.evidenceTargets.expressionStyle',
   agency_style: 'entry.evidenceTargets.agencyStyle',

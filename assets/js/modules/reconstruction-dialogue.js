@@ -30,7 +30,7 @@ const state = {
 
 const TARGETS = Object.freeze([
   'carrier_coordinates',
-  'carrier_signatures',
+  'runtime_conditions',
   'experience_style',
   'expression_style',
   'agency_style',
