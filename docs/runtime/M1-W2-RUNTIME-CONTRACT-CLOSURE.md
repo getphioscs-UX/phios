@@ -17,7 +17,7 @@ Twenty contracts are registered across four classes:
 | Runtime service | Transition Execution, Revision Initialization, Entry Initialization, Lineage, Snapshot, Recovery State, Workspace State |
 | Public boundary | Runtime Kernel status |
 
-Each registry entry freezes its schema identifier, owner, contract class, validator/authority, and required boundary fields.
+Each registry entry freezes `id`, `version`, `status`, `input`, `output`, `required_fields`, `optional_fields`, `errors`, `dependencies`, its schema identifier, owner, contract class, and validator authority.
 
 ## T02 — Schema ID and Version Freeze
 

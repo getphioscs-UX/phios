@@ -1,6 +1,6 @@
 import { initializeI18n, onLocaleChange, t } from '../i18n.js';
 import { MEMORY_KEY, CONTINUITY_KEY } from '../modules/runtime-workspace-state.js';
-import { getSession, safeJSON, setSession, cleanText } from '../shared.js';
+import { getSession, safeJSON, cleanText } from '../shared.js';
 import { RuntimeKernel } from '../runtime/index.js';
 
 const $=id=>document.getElementById(id);
@@ -71,7 +71,7 @@ function confirmContinuity(){
   if(!memory||!selected)return;
   if(selected!==expected){$('continuityStatus').textContent=t('memory.continuityMismatch');return;}
   const contract={schemaVersion:'phi-os.continuity.v1',continuityId:`continuity_${crypto.randomUUID().slice(0,8)}`,createdAt:new Date().toISOString(),runtimeEntityId:memory.runtimeEntityId,sourceRuntimeId:memory.lineage?.currentRuntimeId||memory.runtimeEntryId,sourceRuntimeEntryId:memory.runtimeEntryId,sourceMemoryId:memory.memoryId,userChoice:{nextRuntimeState:selected,confirmed:true,confirmedAt:new Date().toISOString(),selectionSource:'user_confirmation',automaticSelection:false},transition:{createsNextRuntime:false,nextRuntimeId:null,preservesSourceRuntime:true},destination:{stage:destination(selected),historicalOverwrite:false},guardrails:{historicalContractOverwriteAllowed:false,readingOverwriteAllowed:false,navigationOverwriteAllowed:false,memoryOverwriteAllowed:false,appendOnly:true}};
-  setSession(CONTINUITY_KEY,contract);render();location.hash='continuity';
+  RuntimeKernel.contracts.save(CONTINUITY_KEY,contract);render();location.hash='continuity';
 }
 function destination(choice){return ({continue_observation:'review',continue_selected_path:'navigation',return_to_reading:'reading',choose_another_path:'navigation',start_new_entry:'entry',professional_review:'navigation',remain_open:'memory'})[choice]||'memory'}
 function executeTransition(){

@@ -30,7 +30,7 @@ for (const contract of contracts.values()) {
   if (schemaIds.has(contract.schemaId)) throw new Error(`Duplicate schema authority: ${contract.schemaId}`);
   schemaIds.add(contract.schemaId);
   if (!fs.existsSync(path.join(root, contract.validator))) throw new Error(`Missing contract authority: ${contract.validator}`);
-  if (!contract.requiredBoundaryFields?.includes('schemaVersion')) throw new Error(`${contract.id} does not freeze schemaVersion.`);
+  if (!contract.required_fields?.includes('schemaVersion')) throw new Error(`${contract.id} does not freeze schemaVersion.`);
 }
 
 for (const handoff of registry.handoffs || []) {

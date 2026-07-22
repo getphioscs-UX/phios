@@ -1,0 +1,67 @@
+{
+  "$schema": "phi-os.runtime-freeze-closure.v1",
+  "version": "1.0.0",
+  "status": "closed",
+  "moduleStatusVocabulary": ["stable", "partial", "experimental", "deprecated", "missing"],
+  "canonicalFieldStyle": "camelCase",
+  "canonicalIdentityFields": [
+    "sessionId",
+    "runtimeId",
+    "runtimeEntityId",
+    "runtimeEntryId",
+    "readingId",
+    "navigationId",
+    "revisionId",
+    "lineageId"
+  ],
+  "canonicalStageStates": [
+    "entry_collecting",
+    "entry_complete",
+    "reconstruction_ready",
+    "reading_ready",
+    "navigation_ready",
+    "review_ready",
+    "continuity_active"
+  ],
+  "kernelContract": {
+    "entryPoint": "assets/js/runtime/index.js",
+    "capabilities": {
+      "initializeRuntime": "RuntimeKernel.initializeRuntime",
+      "loadRuntime": "RuntimeKernel.loadRuntime",
+      "applyTransition": "RuntimeKernel.applyTransition",
+      "commitRevision": "RuntimeKernel.commitRevision",
+      "appendEvent": "RuntimeKernel.appendEvent",
+      "recoverRuntime": "RuntimeKernel.recoverRuntime"
+    }
+  },
+  "deprecatedFields": [
+    {"oldName":"session_id","newName":"sessionId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"runtime_id","newName":"runtimeId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"runtimeID","newName":"runtimeId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"runtime_entity_id","newName":"runtimeEntityId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"entry_id","newName":"runtimeEntryId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"reading_id","newName":"readingId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"navigation_id","newName":"navigationId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"revision_id","newName":"revisionId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"},
+    {"oldName":"lineage_id","newName":"lineageId","deprecatedSince":"1.0.0","removalVersion":"2.0.0"}
+  ],
+  "contractMetadataStandard": {
+    "requiredKeys": ["id", "version", "status", "input", "output", "required_fields", "optional_fields", "errors", "dependencies"],
+    "status": "stable",
+    "unknownFieldPolicy": "ignore_unless_contract_validator_rejects",
+    "backwardCompatibilityPolicy": "deprecated_fields_normalized_before_validation"
+  },
+  "contractTestMatrix": [
+    "valid_input",
+    "missing_required_field",
+    "invalid_field_type",
+    "unknown_field",
+    "backward_compatible_input"
+  ],
+  "duplicateResponsibilityAudit": [
+    {"area":"api_state_creation","status":"closed","finding":"API and provider routes return contracts; browser persistence owns session state."},
+    {"area":"page_runtime_derivation","status":"closed","finding":"Landing initialization and My Reality continuity writes route through RuntimeKernel."},
+    {"area":"reading_navigation_parsing","status":"closed","finding":"Reading owns evidence interpretation; Navigation consumes the Reading-Navigation handoff and owns path generation."},
+    {"area":"memory_continuity_persistence","status":"closed","finding":"Memory and Continuity own distinct contracts; Kernel Contract Manager and Persistence own storage."}
+  ]
+}

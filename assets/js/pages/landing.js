@@ -1,11 +1,8 @@
 import {
-  SESSION_KEYS,
-  setSessionJson
+  SESSION_KEYS
 } from '../core/session.js';
 
-import {
-  createRuntimeEntity
-} from '../core/runtime.js';
+import { RuntimeKernel } from '../runtime/index.js';
 
 import {
   initializeI18n,
@@ -131,10 +128,7 @@ form?.addEventListener('submit', event => {
     message
   );
 
-  setSessionJson(
-    SESSION_KEYS.runtimeEntity,
-    createRuntimeEntity()
-  );
+  RuntimeKernel.initializeRuntime({ createEntity: true, userInitiated: true });
 
   window.location.assign('/reality-entry');
 });

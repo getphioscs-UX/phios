@@ -1,0 +1,32 @@
+{
+  "$schema": "phi-os.runtime-freeze-audit.v1",
+  "version": "1.0.0",
+  "status": "passed",
+  "decision": "freeze_ready",
+  "allowedPostFreezeChanges": ["kernel_migration", "contract_closure", "bug_fix"],
+  "newRuntimeStagesAllowed": false,
+  "auditResults": [
+    {"id":"inventory-complete","status":"passed","evidence":"content/registry/runtime-modules.json"},
+    {"id":"module-statuses-closed","status":"passed","evidence":"scripts/check-runtime-gap-closure.mjs"},
+    {"id":"duplicate-implementations-closed","status":"passed","evidence":"scripts/check-runtime-inventory.mjs"},
+    {"id":"kernel-entry-canonical","status":"passed","evidence":"assets/js/runtime/index.js"},
+    {"id":"kernel-capabilities-closed","status":"passed","evidence":"content/registry/runtime-freeze-closure.json"},
+    {"id":"page-kernel-boundary","status":"passed","evidence":"scripts/check-runtime-gap-closure.mjs"},
+    {"id":"contracts-closed","status":"passed","evidence":"content/registry/runtime-contracts.json"},
+    {"id":"schema-drift-guarded","status":"passed","evidence":"scripts/check-runtime-contracts.mjs"},
+    {"id":"persistence-recovery-passed","status":"passed","evidence":"scripts/check-runtime-persistence-recovery.mjs"},
+    {"id":"revision-lineage-append-only","status":"passed","evidence":"scripts/check-runtime-lineage-timeline.mjs"},
+    {"id":"full-regression-suite","status":"passed","evidence":"npm run check"}
+  ],
+  "knownNonBlockers": [
+    "Legacy implementation modules remain behind Kernel manager facades.",
+    "Lifecycle state identifiers coexist with short workspace route IDs by design."
+  ],
+  "reopenConditions": [
+    "new_runtime_stage_requested",
+    "breaking_contract_change_requested",
+    "canonical_kernel_boundary_changed",
+    "historical_overwrite_enabled",
+    "automatic_transition_or_runtime_creation_enabled"
+  ]
+}
