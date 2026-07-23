@@ -1,0 +1,39 @@
+PHI OS — M2-W2 Persistence Contract
+
+BASELINE
+Install only after the reviewed M2-W1 Registry Layer has been deployed.
+
+INSTALL
+1. Extract this ZIP.
+2. Copy the CONTENTS of M2-W2-Persistence-Contract into the phios repo root.
+3. Allow package.json to be replaced.
+4. Run:
+
+   npm run check:runtime-persistence-contract
+   npm run check
+
+EXPECTED
+✓ M2-W2 Persistence Contract, Router, Memory, Local, D1, and environment selection checks passed.
+
+FILES
+- functions/runtime/persistence/persistence-contract.js
+- functions/runtime/persistence/persistence-router.js
+- functions/runtime/persistence/index.js
+- functions/runtime/persistence/drivers/memory-driver.js
+- functions/runtime/persistence/drivers/local-driver.js
+- functions/runtime/persistence/drivers/d1-driver.js
+- scripts/check-runtime-persistence-contract.mjs
+- docs/runtime/M2-W2-PERSISTENCE-CONTRACT.md
+- package.json
+
+COMMIT
+git add functions/runtime/persistence scripts/check-runtime-persistence-contract.mjs docs/runtime/M2-W2-PERSISTENCE-CONTRACT.md package.json
+git commit -m "Complete M2-W2 Persistence Contract"
+git push origin main
+
+BOUNDARY
+- No new Runtime Stage.
+- Existing browser persistence remains in place as a compatibility layer.
+- No placeholder D1 database ID is added.
+- D1 tables and the real RUNTIME_DB binding are M2-W3 work.
+- No Reading or Navigation product logic is changed.
