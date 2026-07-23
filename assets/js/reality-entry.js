@@ -141,7 +141,8 @@ function addMessage(
   role,
   message,
   includeInConversation = true,
-  translationKey = ''
+  translationKey = '',
+  tone = ''
 ) {
   const value = translationKey
     ? t(translationKey)
@@ -153,7 +154,8 @@ function addMessage(
     role,
     message: value,
     includeInConversation,
-    translationKey
+    translationKey,
+    tone
   });
 
   renderChat();
@@ -167,16 +169,25 @@ function renderedMessage(item) {
 }
 
 function renderChat() {
-  els.chat.innerHTML = state.messages.map(item => `
-    <article class="message ${item.role}">
+  els.chat.innerHTML = state.messages.map(item => {
+    const tone = item.tone === 'error' ? ' is-error' : '';
+    const alert = item.tone === 'error'
+      ? ' role="alert" aria-atomic="true"'
+      : '';
+
+    return `
+    <article class="message ${item.role}${tone}"${alert}>
       <div class="role">
-        ${item.role === 'assistant'
+        ${item.tone === 'error'
+          ? escapeHTML(t('entry.errorLabel'))
+          : item.role === 'assistant'
           ? escapeHTML(t('entry.assistantRole'))
           : escapeHTML(t('entry.userRole'))}
       </div>
       ${escapeHTML(renderedMessage(item))}
     </article>
-  `).join('');
+  `;
+  }).join('');
 
   els.chat.scrollTop = els.chat.scrollHeight;
 }
@@ -195,6 +206,7 @@ function setBusy(value, text = '') {
   els.input.disabled = value || state.ready;
   els.send.disabled = value || state.ready;
   els.load.textContent = text;
+  els.load.dataset.tone = value && text ? 'loading' : '';
 }
 
 function normalizedText(
@@ -629,8 +641,15 @@ async function submit(rawMessage) {
 
   if (!message) {
     els.load.textContent = t('entry.emptyMessage');
+    els.load.dataset.tone = 'error';
+    els.input.setAttribute('aria-invalid', 'true');
+    els.input.focus();
     return;
   }
+
+  els.load.dataset.tone = '';
+  els.input.removeAttribute('aria-invalid');
+  state.messages = state.messages.filter(item => item.tone !== 'error');
 
   state.answerBindings.push({
     target: state.lastQuestionTarget,
@@ -677,7 +696,8 @@ async function submit(rawMessage) {
       'assistant',
       '',
       false,
-      'entry.requestFailed'
+      'entry.requestFailed',
+      'error'
     );
   } finally {
     setBusy(false);
@@ -694,6 +714,13 @@ els.input.addEventListener('keydown', event => {
     event.preventDefault();
     els.form.requestSubmit();
   }
+});
+
+els.input.addEventListener('input', () => {
+  if (els.load.dataset.tone !== 'error') return;
+  els.load.textContent = '';
+  els.load.dataset.tone = '';
+  els.input.removeAttribute('aria-invalid');
 });
 
 els.new.addEventListener('click', reset);

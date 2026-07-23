@@ -8,6 +8,12 @@
     content="PHI OS Reality Entry Workspace — begin from what has recently started to change."
   >
   <title data-i18n="entry.metaTitle">Reality Entry Workspace — PHI OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap"
+    rel="stylesheet"
+  >
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/design/foundation.css">
   <link rel="stylesheet" href="/assets/css/design/typography.css">
@@ -15,10 +21,11 @@
   <link rel="stylesheet" href="/assets/css/design/components.css">
   <link rel="stylesheet" href="/assets/css/design/motion.css">
   <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/entry-workspace.css">
-    <link rel="stylesheet" href="/assets/css/evidence-depth.css">
+  <link rel="stylesheet" href="/assets/css/entry-workspace.css">
+  <link rel="stylesheet" href="/assets/css/evidence-depth.css">
   <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
   <link rel="stylesheet" href="/assets/css/design/visual-acceptance.css">
+  <link rel="stylesheet" href="/assets/css/entry-visual-alignment.css">
 </head>
 
 <body class="entry-workspace-page runtime-workspace-page">
@@ -50,8 +57,8 @@
           data-i18n="journey.label"
         >Runtime Journey</span>
 
-        <ol class="runtime-progress">
-          <li class="active">
+        <ol class="runtime-progress" data-current-stage="entry">
+          <li class="active" aria-current="step">
             <span>01</span>
             <data value="entry" data-i18n="journey.entry">Entry</data>
           </li>
@@ -70,6 +77,14 @@
           <li>
             <span>05</span>
             <data value="review" data-i18n="journey.review">Review</data>
+          </li>
+          <li>
+            <span>06</span>
+            <data value="memory" data-i18n="entry.progressMemory">Memory</data>
+          </li>
+          <li>
+            <span>07</span>
+            <data value="continuity" data-i18n="entry.progressContinuity">Continuity</data>
           </li>
         </ol>
       </div>
@@ -189,6 +204,7 @@
             rows="3"
             placeholder="Describe what you noticed…"
             data-i18n-placeholder="entry.inputPlaceholder"
+            aria-describedby="loadingText roundIndicator"
             required
           ></textarea>
 
@@ -198,6 +214,7 @@
               class="entry-loading"
               role="status"
               aria-live="polite"
+              aria-atomic="true"
             ></p>
 
             <div class="composer-actions">
@@ -206,7 +223,7 @@
               </span>
 
               <button
-                class="entry-send-button"
+                class="entry-send-button phi-button phi-button--primary"
                 id="sendButton"
                 type="submit"
               >
@@ -400,7 +417,7 @@
 
         <div class="entry-ready-actions">
           <button
-            class="entry-primary-action"
+            class="entry-primary-action phi-button phi-button--primary"
             id="continueButton"
             type="button"
           >
@@ -411,14 +428,14 @@
           </button>
 
           <button
-            class="entry-secondary-action"
+            class="entry-secondary-action phi-button phi-button--secondary"
             id="reviseButton"
             type="button"
             data-i18n="entry.correctOrClarify"
           >Correct or clarify</button>
 
           <a
-            class="entry-secondary-action"
+            class="entry-secondary-action phi-button phi-button--secondary"
             href="/"
             data-i18n="entry.endForNow"
           >End for now</a>
