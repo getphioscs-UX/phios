@@ -1,0 +1,136 @@
+/* M3A-W1 Production visual acceptance fixes
+   Loaded after legacy page styles so accessibility guarantees remain final. */
+
+/* Skip links stay available to keyboard users without appearing in layout. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: var(--phi-space-4, 1rem);
+  z-index: var(--phi-z-skip-link, 1000);
+  padding: var(--phi-space-3, 0.75rem) var(--phi-space-4, 1rem);
+  border-radius: var(--phi-radius-sm, 0.65rem);
+  background: var(--phi-text-primary, #11141a);
+  color: var(--phi-text-inverse, #fff);
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-100% - var(--phi-space-4, 1rem)));
+  transition:
+    opacity var(--phi-duration-fast, 160ms) var(--phi-ease-standard, ease),
+    transform var(--phi-duration-fast, 160ms) var(--phi-ease-standard, ease);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(var(--phi-space-4, 1rem));
+}
+
+/* Entry progress uses bounded grid tracks instead of overlapping fixed widths. */
+.entry-site-header .nav {
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+}
+
+.entry-header-center {
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
+  gap: clamp(0.75rem, 1.5vw, 2rem);
+}
+
+.runtime-progress {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(88px, 1fr));
+  width: min(620px, 48vw);
+}
+
+.runtime-progress li {
+  min-width: 0;
+  padding: 22px 0.6rem 0 0;
+  line-height: 1.2;
+}
+
+.runtime-progress li data {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.entry-header-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--phi-space-3, 0.75rem);
+}
+
+@media (min-width: 1121px) and (max-width: 1320px) {
+  .entry-header-center .journey-label {
+    display: none;
+  }
+
+  .runtime-progress {
+    width: min(580px, 52vw);
+  }
+}
+
+/* Runtime sidebar owns an explicit dark-surface contrast contract. */
+.runtime-workspace-sidebar {
+  background: rgba(7, 12, 20, 0.97);
+  color: #f5f2e9;
+}
+
+.runtime-workspace-sidebar .runtime-workspace-brand,
+.runtime-workspace-sidebar li a,
+.runtime-workspace-sidebar li.is-locked > div,
+.runtime-workspace-sidebar .runtime-workspace-boundary {
+  color: #f5f2e9;
+}
+
+.runtime-workspace-sidebar .runtime-workspace-brand small,
+.runtime-workspace-sidebar li a small,
+.runtime-workspace-sidebar .runtime-workspace-boundary p {
+  color: #c4cad3;
+  opacity: 1;
+}
+
+.runtime-workspace-sidebar li a > span {
+  color: #d7dce4;
+  opacity: 0.82;
+}
+
+.runtime-workspace-sidebar li.is-locked {
+  opacity: 0.68;
+}
+
+/* Public and Runtime controls meet the 44px minimum touch target. */
+.language-option,
+.navigation-header .language-button,
+.entry-header-actions .workspace-text-button,
+.domain-prompts button,
+.atlas-filters button {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.language-option,
+.navigation-header .language-button,
+.entry-header-actions .workspace-text-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.domain-prompts button,
+.atlas-filters button {
+  padding-block: 0.625rem;
+}
+
+.evidence-depth label {
+  min-height: 44px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "milestone": "M3A-W1-Visual-Acceptance-Fixes",
+  "version": "1.0.0",
+  "status": "implementation-ready-for-production-retest",
+  "repository": "getphioscs-UX/phios",
+  "codeBaseline": {
+    "branch": "main",
+    "commit": "96f98c1e1d0c5395fb55f27e5a44ee8c3d9545b8"
+  },
+  "visualBaseline": {
+    "commit": "ad5de1cd11a72ef71550d165d444436b81a99314",
+    "pages": [
+      "Home",
+      "About",
+      "Atlas",
+      "Entry",
+      "Reading",
+      "Navigation"
+    ]
+  },
+  "fixes": [
+    "Hide legacy skip links until keyboard focus",
+    "Prevent Entry five-stage progress labels from overlapping",
+    "Restore explicit high-contrast Runtime sidebar text",
+    "Raise audited language, filter, domain, and evidence controls to a 44px minimum touch target"
+  ],
+  "implementation": {
+    "stylesheet": "assets/css/design/visual-acceptance.css",
+    "loadedBy": [
+      "index.html",
+      "about.html",
+      "explore.html",
+      "reality-entry.html",
+      "reality-reading.html",
+      "reality-navigation.html"
+    ],
+    "automatedCheck": "scripts/check-m3a-visual-acceptance-fixes.mjs"
+  },
+  "immutableBoundaries": [
+    "element id",
+    "translation key",
+    "sessionStorage key",
+    "localStorage key",
+    "API route",
+    "runtime state"
+  ],
+  "productionAcceptanceRequired": true
+}
