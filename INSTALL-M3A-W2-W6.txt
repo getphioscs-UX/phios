@@ -1,0 +1,44 @@
+PHI OS · M3A-W2–W6 Public Experience
+=====================================
+
+Baseline
+--------
+GitHub repository: getphioscs-UX/phios
+Expected branch: main
+Expected starting commit: cc1e000fe36411796dfcb2a464e8bbbab31fa0cb
+
+Install with Visual Studio Code and GitHub Desktop
+--------------------------------------------------
+1. Confirm GitHub Desktop has pulled the latest main branch.
+2. Extract this ZIP.
+3. Copy the extracted files into the root of your local phios repository.
+4. Allow Windows to merge folders and replace files with the same names.
+5. In the VS Code terminal, run:
+
+   npm run check:m3a-public-experience
+   npm run check
+
+6. Review the changes in GitHub Desktop.
+7. Commit with a message such as:
+
+   M3A-W2-W6 Public Experience
+
+8. Push main and wait for Cloudflare Pages deployment.
+
+Production verification
+-----------------------
+Open:
+
+https://phios-github.pages.dev/
+https://phios-github.pages.dev/about
+https://phios-github.pages.dev/reality-demo
+https://phios-github.pages.dev/privacy
+https://phios-github.pages.dev/terms
+
+Verify English and Chinese, then test the mobile menu at a narrow browser
+width. The Reality Demo Light Try must not create or update My Reality.
+
+Infrastructure boundary
+-----------------------
+This package does not replace wrangler.jsonc, D1 migrations, Runtime APIs or
+the RUNTIME_DB production binding.
