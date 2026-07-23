@@ -20,6 +20,10 @@ import {
 } from '../shared/schema-registry.js';
 
 import {
+  getGrammar
+} from '../formation/grammar-registry.js';
+
+import {
   resolveNavigationRuntimeCopy,
   resolveRuntimeLanguageContract
 } from '../locales/locale-resolver.js';
@@ -126,6 +130,238 @@ function regionText(region) {
     region.code ||
     region.id
   );
+}
+
+
+/* =========================================================
+   SYSTEM-DERIVED LANGUAGE NORMALIZATION
+========================================================= */
+
+const DERIVED_UNKNOWN_FIELDS = Object.freeze([
+  {
+    aliases: ['observed change', '可观察变化'],
+    en: 'Observed change remains unestablished.',
+    zh: '可观察变化仍未建立。',
+    watchEn: 'Which observable change can be verified.',
+    watchZh: '哪些可观察变化能够得到核实。'
+  },
+  {
+    aliases: ['timeline', '时间线'],
+    en: 'Timeline remains unestablished.',
+    zh: '时间线仍未建立。',
+    watchEn: 'When the reported change first became observable.',
+    watchZh: '报告的变化最早在什么时候变得可观察。'
+  },
+  {
+    aliases: ['trigger condition', 'trigger', '触发条件'],
+    en: 'Trigger condition remains unestablished.',
+    zh: '触发条件仍未建立。',
+    watchEn: 'Whether a repeatable trigger condition can be observed.',
+    watchZh: '是否能够观察到可重复的触发条件。'
+  },
+  {
+    aliases: ['reality context', 'context', '现实情境'],
+    en: 'Reality context remains unestablished.',
+    zh: '现实情境仍未建立。',
+    watchEn: 'Which context is present when the pattern appears or does not appear.',
+    watchZh: '模式出现或没有出现时，哪些现实情境同时存在。'
+  },
+  {
+    aliases: ['affected reality', 'affected realities', '受影响的现实领域'],
+    en: 'Affected Reality remains unestablished.',
+    zh: '受影响的现实领域仍未建立。',
+    watchEn: 'Which Reality domain shows an observable effect.',
+    watchZh: '哪些现实领域呈现了可观察影响。'
+  },
+  {
+    aliases: ['supporting evidence', '支持证据'],
+    en: 'Supporting evidence remains unestablished.',
+    zh: '支持证据仍未建立。',
+    watchEn: 'Which additional observed evidence supports or changes the current reading.',
+    watchZh: '哪些新增观察证据会支持或改变当前读取。'
+  },
+  {
+    aliases: ['counter evidence', 'counter-evidence', '反向证据'],
+    en: 'Counter-evidence remains unestablished.',
+    zh: '反向证据仍未建立。',
+    watchEn: 'Whether a counter-example or different outcome can be observed.',
+    watchZh: '是否能够观察到反例或不同结果。'
+  },
+  {
+    aliases: ['dependency', 'dependencies', '依赖关系'],
+    en: 'Dependency remains unestablished.',
+    zh: '依赖关系仍未建立。',
+    watchEn: 'Whether one part changes consistently when another part changes.',
+    watchZh: '当一个部分改变时，另一个部分是否也持续发生改变。'
+  },
+  {
+    aliases: ['current tension', '当前张力'],
+    en: 'Current tension remains unestablished.',
+    zh: '当前张力仍未建立。',
+    watchEn: 'Which competing pressures remain active in the current situation.',
+    watchZh: '当前情境中哪些相互竞争的压力仍然活跃。'
+  },
+  {
+    aliases: ['desired transition', '期望转变'],
+    en: 'Desired transition remains unestablished.',
+    zh: '期望转变仍未建立。',
+    watchEn: 'Which first concrete difference the user confirms as the desired transition.',
+    watchZh: '用户将哪一个最先出现的具体差异确认为期望转变。'
+  }
+]);
+
+const TRANSITION_LABELS = Object.freeze({
+  formation: Object.freeze({
+    en: 'Clarify which forming structure is supported by evidence and which parts remain unknown.',
+    zh: '厘清正在形成的结构中，哪些部分已有证据支持，哪些部分仍属于未知。'
+  }),
+  activation: Object.freeze({
+    en: 'Clarify what has begun to operate, when it became active, and what remains unverified about its cause.',
+    zh: '厘清什么已经开始运行、何时被激活，以及关于成因的哪些部分仍未得到验证。'
+  }),
+  internalization: Object.freeze({
+    en: 'Separate reported experience from the interpretation currently organizing that experience.',
+    zh: '将报告的经验与目前用来组织这些经验的解释清楚分开。'
+  }),
+  reorganization: Object.freeze({
+    en: 'Observe which roles, resources, boundaries, or positions are actually being redistributed.',
+    zh: '继续观察哪些角色、资源、边界或位置正在发生实际重组。'
+  }),
+  continuity: Object.freeze({
+    en: 'Test what is genuinely continuing across time and what only appears persistent because evidence remains incomplete.',
+    zh: '检验哪些模式确实跨时间持续，哪些持续性只是因证据尚不完整而暂时呈现。'
+  })
+});
+
+function normalizedComparable(value) {
+  return cleanText(value)
+    .toLocaleLowerCase()
+    .replace(/["'“”‘’。.!！?？:：,，]/g, '')
+    .trim();
+}
+
+function derivedUnknownDefinition(value) {
+  const comparable = normalizedComparable(value);
+
+  if (!(
+    comparable.includes('remain') ||
+    comparable.includes('unestablished') ||
+    comparable.includes('not established') ||
+    comparable.includes('仍未建立') ||
+    comparable.includes('尚未建立')
+  )) {
+    return null;
+  }
+
+  return DERIVED_UNKNOWN_FIELDS.find(definition =>
+    definition.aliases.some(alias =>
+      comparable.includes(normalizedComparable(alias))
+    )
+  ) || null;
+}
+
+function localizedUnknownReality(values, language) {
+  return unique(
+    list(values).map(value => {
+      const text = cleanText(value?.question || value?.statement || value);
+      const definition = derivedUnknownDefinition(text);
+
+      return definition
+        ? definition[language]
+        : text;
+    }),
+    12
+  );
+}
+
+function localizedEvidenceWatch(values, language) {
+  return unique(
+    list(values).map(value => {
+      const text = cleanText(value?.question || value?.statement || value);
+      const comparable = normalizedComparable(text);
+      const definition = DERIVED_UNKNOWN_FIELDS.find(item =>
+        [item.watchEn, item.watchZh]
+          .map(normalizedComparable)
+          .includes(comparable)
+      );
+
+      if (!definition) return text;
+
+      return language === 'zh'
+        ? definition.watchZh
+        : definition.watchEn;
+    }),
+    12
+  );
+}
+
+function localizedCurrentRuntime(value, language, fallback) {
+  const text = cleanText(value);
+  const match = text.match(/\b(G(?:[1-9]|1[0-6]))\b/i);
+  const grammar = match
+    ? getGrammar(match[1].toUpperCase())
+    : null;
+
+  if (!grammar) return text || fallback;
+
+  return `${grammar.code} ${language === 'zh'
+    ? grammar.chineseLabel
+    : grammar.label}`;
+}
+
+function localizedTransitionLabel(value, primaryArc, language, fallback) {
+  const text = cleanText(value);
+  const comparable = normalizedComparable(text);
+  const suppliedDefinition = Object.values(TRANSITION_LABELS)
+    .find(definition =>
+      [definition.en, definition.zh]
+        .map(normalizedComparable)
+        .includes(comparable)
+    );
+  const definition = TRANSITION_LABELS[cleanText(primaryArc).toLowerCase()] ||
+    suppliedDefinition;
+
+  if (!definition || (text && !suppliedDefinition)) {
+    return text || fallback;
+  }
+
+  return definition[language];
+}
+
+function localizedAlternativeSummary(value, unknownReality, language) {
+  const text = cleanText(value);
+  const comparable = normalizedComparable(text);
+  const unresolvedTemplate =
+    comparable.startsWith('a different reading remains possible because this material question is unresolved') ||
+    comparable.startsWith('由于以下关键问题仍未解决另一种读取依然成立');
+  const interpretationTemplate = [
+    'The current interpretation may be accurate, but it remains separate from Observed Evidence and should be tested against future material.',
+    '目前的解释可能成立，但它仍须与观察证据分开，并由后续材料继续检验。'
+  ].map(normalizedComparable).includes(comparable);
+  const coverageTemplate = [
+    'The apparent pattern may reflect limited Entry coverage rather than a stable Runtime structure.',
+    '目前呈现的模式也可能来自现实入口覆盖不足，而不是已经稳定的 Runtime 结构。'
+  ].map(normalizedComparable).includes(comparable);
+
+  if (unresolvedTemplate && unknownReality[0]) {
+    return language === 'zh'
+      ? `由于以下关键问题仍未解决，另一种读取依然成立：“${unknownReality[0]}”`
+      : `A different reading remains possible because this material question is unresolved: “${unknownReality[0]}”`;
+  }
+
+  if (interpretationTemplate) {
+    return language === 'zh'
+      ? '目前的解释可能成立，但它仍须与观察证据分开，并由后续材料继续检验。'
+      : 'The current interpretation may be accurate, but it remains separate from Observed Evidence and should be tested against future material.';
+  }
+
+  if (coverageTemplate) {
+    return language === 'zh'
+      ? '目前呈现的模式也可能来自现实入口覆盖不足，而不是已经稳定的 Runtime 结构。'
+      : 'The apparent pattern may reflect limited Entry coverage rather than a stable Runtime structure.';
+  }
+
+  return text;
 }
 
 
@@ -2016,7 +2252,8 @@ function selectContextualPaths({
 ========================================================= */
 
 export function navigateRuntimeRuleFirst(
-  navigationInput
+  navigationInput,
+  options = {}
 ) {
   if (
     !isObject(navigationInput) ||
@@ -2032,12 +2269,14 @@ export function navigateRuntimeRuleFirst(
 
   const languageContract =
     resolveRuntimeLanguageContract(
-      navigationInput
+      navigationInput,
+      options
     );
 
   const copy =
     resolveNavigationRuntimeCopy(
-      navigationInput
+      navigationInput,
+      options
     );
 
   const reading =
@@ -2080,12 +2319,14 @@ export function navigateRuntimeRuleFirst(
       : {};
 
   /*
-   * Unknown Reality remains unchanged and in its source language.
+   * User-authored Unknown Reality remains unchanged. Only recognized
+   * Runtime-generated missing-field placeholders follow the requested
+   * output language.
    */
   const unknownReality =
-    unique(
+    localizedUnknownReality(
       boundary.unknownReality,
-      12
+      languageContract.outputLanguage
     );
 
   /*
@@ -2093,7 +2334,7 @@ export function navigateRuntimeRuleFirst(
    * Unknown Reality is not copied into this list automatically.
    */
   const evidenceWatch =
-    unique([
+    localizedEvidenceWatch([
       ...list(
         transition.evidenceWatch
       ),
@@ -2105,25 +2346,28 @@ export function navigateRuntimeRuleFirst(
       ...list(
         navigationContext.priorityEvidence
       )
-    ], 12);
+    ], languageContract.outputLanguage);
 
   const primaryRegion =
     reading.primaryRuntimeRegion ||
     null;
 
   const currentRuntime =
-    cleanText(
+    localizedCurrentRuntime(
       transition.currentRuntime ||
-      integrated.currentRuntime
-    ) ||
-    copy.defaults.currentRuntime;
+      integrated.currentRuntime,
+      languageContract.outputLanguage,
+      copy.defaults.currentRuntime
+    );
 
   const transitionLabel =
-    cleanText(
+    localizedTransitionLabel(
       transition.currentTransition ||
-      integrated.currentTransition
-    ) ||
-    copy.defaults.transitionLabel;
+      integrated.currentTransition,
+      reading.primaryArc,
+      languageContract.outputLanguage,
+      copy.defaults.transitionLabel
+    );
 
   const currentSituation =
     cleanText(
@@ -2167,12 +2411,22 @@ export function navigateRuntimeRuleFirst(
       )
     ], 12);
 
-  const alternativeReading =
+  const sourceAlternativeReading =
     isObject(
       integrated.alternativeReading
     )
       ? integrated.alternativeReading
       : {};
+
+  const alternativeReading = {
+    ...sourceAlternativeReading,
+    summary:
+      localizedAlternativeSummary(
+        sourceAlternativeReading.summary,
+        unknownReality,
+        languageContract.outputLanguage
+      )
+  };
 
   const readingConfidence =
     clamp(

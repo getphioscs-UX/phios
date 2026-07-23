@@ -28,6 +28,7 @@ import { t } from '../i18n.js';
 const NAVIGATION_INPUT_KEY = SESSION.navigationInput;
 const NAVIGATION_RESPONSE_KEY = SESSION.navigation;
 const API_ENDPOINT = '/api/navigate-runtime';
+const NAVIGATION_RUNTIME_COPY_VERSION = '1.1.0';
 
 function isObject(value) {
   return value !== null &&
@@ -177,6 +178,18 @@ export function canReuseStoredNavigation(
       cleanText(input.runtimeEntityId) ||
     cleanText(response.runtimeEntryId) !==
       cleanText(input.runtimeEntryId)
+  ) {
+    return false;
+  }
+
+  /*
+   * Do not reuse a response generated before the Navigation language
+   * normalization boundary was introduced. This refreshes an existing
+   * browser session once after deployment without deleting user evidence.
+   */
+  if (
+    cleanText(response.runtimeCopyVersion) !==
+    NAVIGATION_RUNTIME_COPY_VERSION
   ) {
     return false;
   }

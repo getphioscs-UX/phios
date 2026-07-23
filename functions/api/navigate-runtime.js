@@ -23,6 +23,9 @@ import {
   validateNavigationContract
 } from '../runtime/navigation/navigation-contract.js';
 
+const NAVIGATION_RUNTIME_COPY_VERSION =
+  '1.1.0';
+
 function isObject(value) {
   return value !== null &&
     typeof value === 'object' &&
@@ -656,7 +659,8 @@ export async function onRequestPost({
   try {
     const navigation =
       navigateRuntimeRuleFirst(
-        navigationInput
+        navigationInput,
+        runtimeOptions
       );
 
     const contractValidation =
@@ -711,6 +715,9 @@ export async function onRequestPost({
         outputLanguage:
           runtimeOptions.outputLanguage
       },
+
+      runtimeCopyVersion:
+        NAVIGATION_RUNTIME_COPY_VERSION,
 
       navigationInput,
 

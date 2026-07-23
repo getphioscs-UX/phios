@@ -34,10 +34,15 @@ const readingRule = read('functions/runtime/reading/rule-reading.js');
 for (const token of ['Trigger condition remains unestablished.','Desired transition remains unestablished.','evidenceWatchFromUnknownReality']) if (!readingRule.includes(token)) throw new Error(`Reading language/evidence-watch closure missing: ${token}`);
 
 const navigationRule = read('functions/runtime/navigation/rule-navigation.js');
+const navigationApi = read('functions/api/navigate-runtime.js');
+const navigationLoader = read('assets/js/modules/navigation-loader.js');
 const navigationRender = read('assets/js/modules/navigation-render.js');
 const navigationSelection = read('assets/js/modules/navigation-path-selection.js');
 const navigationState = read('assets/js/modules/navigation-state.js');
 for (const token of ['source: {','evidenceActionLink']) if (!navigationRule.includes(token)) throw new Error(`Navigation provenance missing: ${token}`);
+for (const token of ['localizedCurrentRuntime','localizedTransitionLabel','localizedUnknownReality','localizedEvidenceWatch','localizedAlternativeSummary']) if (!navigationRule.includes(token)) throw new Error(`Navigation language closure missing: ${token}`);
+if (!/navigateRuntimeRuleFirst\(\s*navigationInput,\s*runtimeOptions\s*\)/.test(navigationApi)) throw new Error('Navigation API does not forward the requested Runtime language.');
+if (!navigationApi.includes('runtimeCopyVersion') || !navigationLoader.includes('NAVIGATION_RUNTIME_COPY_VERSION')) throw new Error('Old mixed-language Navigation session responses are not invalidated.');
 for (const token of ['navigation.pathSource','navigation.evidenceAction']) if (!navigationRender.includes(token)) throw new Error(`Navigation provenance not rendered: ${token}`);
 if (!navigationState.includes('setSession(SESSION.navigation')) throw new Error('Navigation state is not saved.');
 if (!navigationSelection.includes("window.location.assign('/reality-review.html')")) throw new Error('Review navigation is not wired.');
