@@ -4,6 +4,7 @@ import {
   defaultPersistenceClock,
   defaultPersistenceId,
   normalizeListQuery,
+  normalizeEventQuery,
   normalizeRuntimeEvent,
   normalizeRuntimePatch,
   normalizeRuntimeRecord,
@@ -55,6 +56,18 @@ function snapshotFromRow(row) {
     stage: row.stage,
     state: parseJson(row.state, 'snapshot.state'),
     schema_version: row.schema_version,
+    created_at: row.created_at
+  };
+}
+
+function eventFromRow(row) {
+  if (!row) return null;
+  return {
+    event_id: row.event_id,
+    runtime_id: row.runtime_id,
+    event_type: row.event_type,
+    payload: parseJson(row.payload, 'event.payload'),
+    event_version: row.event_version,
     created_at: row.created_at
   };
 }
@@ -232,6 +245,41 @@ export function createD1Driver(options = {}) {
         'appendEvent'
       );
       return event;
+    },
+
+    async listEvents(runtimeId, input = {}) {
+      const id = String(runtimeId || '').trim();
+      const query = normalizeEventQuery(input);
+      const clauses = ['runtime_id = ?1'];
+      const values = [id];
+      if (query.after) {
+        values.push(query.after);
+        clauses.push(`created_at > ?${values.length}`);
+      }
+      if (query.event_type) {
+        values.push(query.event_type);
+        clauses.push(`event_type = ?${values.length}`);
+      }
+      values.push(query.limit);
+      const limitParameter = `?${values.length}`;
+
+      try {
+        const result = await db.prepare(`
+          SELECT event_id, runtime_id, event_type, payload, event_version,
+                 created_at
+          FROM runtime_events
+          WHERE ${clauses.join(' AND ')}
+          ORDER BY created_at ASC, event_id ASC
+          LIMIT ${limitParameter}
+        `).bind(...values).all();
+        return (result?.results || []).map(eventFromRow);
+      } catch {
+        throw new PersistenceContractError(
+          PERSISTENCE_ERROR_CODES.DRIVER_FAILURE,
+          'D1 persistence operation failed: listEvents',
+          { operation: 'listEvents' }
+        );
+      }
     },
 
     async saveSnapshot(input) {

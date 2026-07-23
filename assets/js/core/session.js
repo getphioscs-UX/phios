@@ -7,8 +7,10 @@ export const SESSION_KEYS = Object.freeze({
   reconstructionInquiry: 'phiOSReconstructionInquiry',
   readingInput: 'phiOSRealityReadingInput',
   reading: 'phiOSRealityReading',
+  readingRequestState: 'phiOSReadingRequestState',
   navigationInput: 'phiOSNavigationInput',
-  navigation: 'phiOSRealityNavigation'
+  navigation: 'phiOSRealityNavigation',
+  navigationRequestState: 'phiOSNavigationRequestState'
 });
 
 export function setSessionJson(key, value) {

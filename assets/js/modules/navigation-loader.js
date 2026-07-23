@@ -27,6 +27,7 @@ import { t } from '../i18n.js';
 
 const NAVIGATION_INPUT_KEY = SESSION.navigationInput;
 const NAVIGATION_RESPONSE_KEY = SESSION.navigation;
+const NAVIGATION_REQUEST_KEY = SESSION.navigationRequestState;
 const API_ENDPOINT = '/api/navigate-runtime';
 const NAVIGATION_RUNTIME_COPY_VERSION = '1.1.0';
 
@@ -108,6 +109,23 @@ export function readStoredNavigationResponse() {
   );
 
   return isObject(response) ? response : null;
+}
+
+function requestFingerprint(input, options = {}) {
+  const contract = languageContract(options);
+  return JSON.stringify({
+    input,
+    locale: contract.locale,
+    outputLanguage: contract.outputLanguage
+  });
+}
+
+function readRequestState() {
+  const state = safeJSON(
+    getSession(NAVIGATION_REQUEST_KEY),
+    null
+  );
+  return isObject(state) ? state : null;
 }
 
 export function validateNavigationInput(input) {
@@ -274,6 +292,29 @@ export function showNavigationError(error) {
   hide(qs('#navigationSections'));
 }
 
+export function showNavigationRecoveryState() {
+  const loading = qs('#navigationLoadingState');
+
+  if (!loading) return;
+
+  loading.innerHTML = `
+    <div class="navigation-error-state">
+      <strong>${escapeHTML(
+        t('navigation.errorTitle')
+      )}</strong>
+      <p>${escapeHTML(
+        t('navigation.generationFailed')
+      )}</p>
+      <button class="btn" id="retryNavigation" type="button">
+        ${escapeHTML(t('reading.dynamic.retry'))}
+      </button>
+    </div>
+  `;
+
+  show(loading);
+  hide(qs('#navigationSections'));
+}
+
 export async function requestRealityNavigation(
   navigationInput,
   options = {}
@@ -312,6 +353,11 @@ export async function loadRealityNavigation(options = {}) {
   const contract = languageContract(options);
   const localizedInput = withLanguageContract(input, contract);
   const storedResponse = readStoredNavigationResponse();
+  const fingerprint = requestFingerprint(
+    localizedInput,
+    contract
+  );
+  const requestState = readRequestState();
 
   setSession(NAVIGATION_INPUT_KEY, localizedInput);
   showNavigationWorkspace();
@@ -335,10 +381,32 @@ export async function loadRealityNavigation(options = {}) {
     };
   }
 
+  if (
+    options.forceRefresh !== true &&
+    requestState?.status === 'pending' &&
+    requestState?.fingerprint === fingerprint
+  ) {
+    showNavigationRecoveryState();
+
+    return {
+      success: false,
+      reason: 'navigation_request_interrupted',
+      navigationInput: localizedInput,
+      providerCalled: false,
+      regenerated: false
+    };
+  }
+
   showNavigationLoading(
     options.loadingTitle,
     options.loadingMessage
   );
+  setSession(NAVIGATION_REQUEST_KEY, {
+    status: 'pending',
+    fingerprint,
+    startedAt: new Date().toISOString(),
+    automaticRetry: false
+  });
 
   try {
     const result = await requestRealityNavigation(
@@ -354,6 +422,12 @@ export async function loadRealityNavigation(options = {}) {
 
     setSession(NAVIGATION_INPUT_KEY, result.localizedInput);
     setSession(NAVIGATION_RESPONSE_KEY, result.response);
+    setSession(NAVIGATION_REQUEST_KEY, {
+      status: 'completed',
+      fingerprint,
+      completedAt: new Date().toISOString(),
+      automaticRetry: false
+    });
     hide(qs('#navigationLoadingState'));
     show(qs('#navigationSections'));
 
@@ -364,6 +438,12 @@ export async function loadRealityNavigation(options = {}) {
       response: result.response
     };
   } catch (error) {
+    setSession(NAVIGATION_REQUEST_KEY, {
+      status: 'failed',
+      fingerprint,
+      failedAt: new Date().toISOString(),
+      automaticRetry: false
+    });
     showNavigationError(error);
 
     return {
@@ -394,6 +474,8 @@ export function getNavigationLoaderStatus() {
     endpoint: API_ENDPOINT,
     defaultProvider: 'rule_engine',
     sessionCacheEnabled: true,
-    languageContractForwarded: true
+    languageContractForwarded: true,
+    requestRecoveryEnabled: true,
+    automaticRetry: false
   };
 }

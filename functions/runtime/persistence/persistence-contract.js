@@ -2,7 +2,7 @@
  * M2-W2 Runtime Persistence Contract.
  *
  * This is an infrastructure boundary, not a new Runtime Stage. All drivers
- * must implement the same eight asynchronous operations and return canonical
+ * must implement the same nine asynchronous operations and return canonical
  * snake_case records.
  */
 
@@ -15,6 +15,7 @@ export const PERSISTENCE_METHODS = Object.freeze([
   'delete',
   'list',
   'appendEvent',
+  'listEvents',
   'saveSnapshot',
   'loadSnapshot'
 ]);
@@ -135,6 +136,17 @@ export function normalizeRuntimeEvent(input = {}, options = {}) {
     payload: clone(input.payload || {}),
     event_version: cleanText(input.event_version) || '1.0.0',
     created_at: cleanText(input.created_at) || timestamp
+  });
+}
+
+export function normalizeEventQuery(query = {}) {
+  const parsedLimit = Number.parseInt(query.limit, 10);
+  return Object.freeze({
+    after: cleanText(query.after),
+    event_type: cleanText(query.event_type),
+    limit: Number.isFinite(parsedLimit)
+      ? Math.min(Math.max(parsedLimit, 1), 1000)
+      : 250
   });
 }
 

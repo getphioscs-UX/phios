@@ -9,6 +9,7 @@ export {
   normalizeRuntimePatch,
   normalizeRuntimeEvent,
   normalizeRuntimeSnapshot,
+  normalizeEventQuery,
   normalizeListQuery
 } from './persistence-contract.js';
 export {

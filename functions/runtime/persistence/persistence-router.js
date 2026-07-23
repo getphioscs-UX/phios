@@ -93,6 +93,7 @@ export function createPersistenceRouter(options = {}) {
     delete: runtimeId => driver.delete(runtimeId),
     list: input => driver.list(input),
     appendEvent: input => driver.appendEvent(input),
+    listEvents: (runtimeId, input) => driver.listEvents(runtimeId, input),
     saveSnapshot: input => driver.saveSnapshot(input),
     loadSnapshot: (runtimeId, input) =>
       driver.loadSnapshot(runtimeId, input)

@@ -10,8 +10,10 @@ export const SESSION={
   reconstructionInquiry:SESSION_KEYS.reconstructionInquiry,
   readingInput:SESSION_KEYS.readingInput,
   reading:SESSION_KEYS.reading,
+  readingRequestState:SESSION_KEYS.readingRequestState,
   navigationInput:SESSION_KEYS.navigationInput,
-  navigation:SESSION_KEYS.navigation
+  navigation:SESSION_KEYS.navigation,
+  navigationRequestState:SESSION_KEYS.navigationRequestState
 };
 
 export function cleanText(v){

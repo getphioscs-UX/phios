@@ -130,7 +130,9 @@ function renderCurrentReading() {
    READING RUNNER
 ========================================================= */
 
-export async function runRealityReading() {
+export async function runRealityReading({
+  forceRefresh = false
+} = {}) {
   if (state.loading) {
     return {
       success: false,
@@ -149,7 +151,10 @@ export async function runRealityReading() {
   try {
     const result =
       await loadRealityReading(
-        readingOptions()
+        {
+          ...readingOptions(),
+          forceRefresh
+        }
       );
 
     if (!result.success) {
@@ -206,7 +211,9 @@ function bindReadingLanguageUpdates() {
        * server-generated prose. Re-run the Reading so that prose follows the
        * newly selected language instead of re-rendering the old response.
        */
-      await runRealityReading();
+      await runRealityReading({
+        forceRefresh: true
+      });
     });
 }
 
@@ -244,9 +251,9 @@ export async function initializeRealityReadingPage() {
   initializeRuntimeWorkspace({ currentStage: 'reading' });
   bindReadingLanguageUpdates();
 
-  bindReadingRetry(
-    runRealityReading
-  );
+  bindReadingRetry(() => runRealityReading({
+    forceRefresh: true
+  }));
 
   window.addEventListener(
     'beforeunload',

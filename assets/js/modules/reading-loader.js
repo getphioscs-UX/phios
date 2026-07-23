@@ -23,6 +23,8 @@ import {
 import { t } from '../i18n.js';
 
 const READING_INPUT_KEY = SESSION.readingInput;
+const READING_RESPONSE_KEY = SESSION.reading;
+const READING_REQUEST_KEY = SESSION.readingRequestState;
 const API_ENDPOINT = '/api/read-runtime';
 
 function isObject(value) {
@@ -64,6 +66,56 @@ function normalizeOutputLanguage(value, locale) {
 export function readStoredReadingInput() {
   const input = safeJSON(getSession(READING_INPUT_KEY), null);
   return isObject(input) ? input : null;
+}
+
+export function readStoredReadingResponse() {
+  const response = safeJSON(getSession(READING_RESPONSE_KEY), null);
+  return isObject(response) ? response : null;
+}
+
+function requestFingerprint(input, options = {}) {
+  return JSON.stringify({
+    input,
+    provider: cleanText(options.provider) || 'auto',
+    deepReading: options.deepReading === true,
+    locale: normalizeLocale(options.locale),
+    outputLanguage: normalizeOutputLanguage(
+      options.outputLanguage,
+      options.locale
+    )
+  });
+}
+
+function readRequestState() {
+  const state = safeJSON(getSession(READING_REQUEST_KEY), null);
+  return isObject(state) ? state : null;
+}
+
+export function canReuseStoredReading(input, response, options = {}) {
+  if (!isObject(input) || !isObject(response) || !isObject(response.reading)) {
+    return false;
+  }
+  if (
+    cleanText(response.runtimeEntityId) !== cleanText(input.runtimeEntityId) ||
+    cleanText(response.runtimeEntryId) !== cleanText(input.runtimeEntryId)
+  ) return false;
+  const expectedLocale = normalizeLocale(options.locale);
+  const expectedLanguage = normalizeOutputLanguage(
+    options.outputLanguage,
+    expectedLocale
+  );
+  if (
+    normalizeLocale(response.languageContract?.locale) !== expectedLocale ||
+    normalizeOutputLanguage(
+      response.languageContract?.outputLanguage,
+      response.languageContract?.locale
+    ) !== expectedLanguage
+  ) return false;
+  if (
+    Boolean(response.inference?.deepReadingRequested) !==
+    (options.deepReading === true)
+  ) return false;
+  return JSON.stringify(response.readingInput || null) === JSON.stringify(input);
 }
 
 export function validateReadingInput(input) {
@@ -162,6 +214,22 @@ export function showReadingError(error) {
   hide(qs('#readingSections'));
 }
 
+export function showReadingRecoveryState() {
+  const loading = qs('#readingLoadingState');
+  if (!loading) return;
+  loading.innerHTML = `
+    <div class="reading-error-state">
+      <strong>${escapeHTML(t('reading.generationFailed'))}</strong>
+      <p>${escapeHTML(t('reading.dynamic.unknownError'))}</p>
+      <button class="btn" id="retryReading" type="button">
+        ${escapeHTML(t('reading.dynamic.retry'))}
+      </button>
+    </div>
+  `;
+  show(loading);
+  hide(qs('#readingSections'));
+}
+
 export async function requestRealityReading(readingInput, options = {}) {
   const locale = normalizeLocale(options.locale);
   const outputLanguage = normalizeOutputLanguage(
@@ -200,10 +268,49 @@ export async function loadRealityReading(options = {}) {
   }
 
   showReadingWorkspace();
+
+  const storedResponse = readStoredReadingResponse();
+  if (
+    options.forceRefresh !== true &&
+    canReuseStoredReading(readingInput, storedResponse, options)
+  ) {
+    hide(qs('#readingLoadingState'));
+    show(qs('#readingSections'));
+    return {
+      success: true,
+      source: 'session_cache',
+      readingInput,
+      response: storedResponse
+    };
+  }
+
+  const fingerprint = requestFingerprint(readingInput, options);
+  const priorRequest = readRequestState();
+  if (
+    options.forceRefresh !== true &&
+    priorRequest?.status === 'pending' &&
+    priorRequest?.fingerprint === fingerprint
+  ) {
+    showReadingRecoveryState();
+    return {
+      success: false,
+      reason: 'reading_request_interrupted',
+      readingInput,
+      automaticRetry: false
+    };
+  }
+
   showReadingLoading(
     options.loadingTitle,
     options.loadingMessage
   );
+  setSession(READING_REQUEST_KEY, {
+    schemaVersion: 'phi-os.runtime-provider-request.v1',
+    status: 'pending',
+    fingerprint,
+    startedAt: new Date().toISOString(),
+    automaticRetry: false
+  });
 
   try {
     const response = await requestRealityReading(readingInput, options);
@@ -212,7 +319,14 @@ export async function loadRealityReading(options = {}) {
       throw new Error('The Reading API returned no Reality Reading.');
     }
 
-    setSession(SESSION.reading, response);
+    setSession(READING_RESPONSE_KEY, response);
+    setSession(READING_REQUEST_KEY, {
+      schemaVersion: 'phi-os.runtime-provider-request.v1',
+      status: 'completed',
+      fingerprint,
+      completedAt: new Date().toISOString(),
+      automaticRetry: false
+    });
     hide(qs('#readingLoadingState'));
     show(qs('#readingSections'));
 
@@ -222,6 +336,13 @@ export async function loadRealityReading(options = {}) {
       response
     };
   } catch (error) {
+    setSession(READING_REQUEST_KEY, {
+      schemaVersion: 'phi-os.runtime-provider-request.v1',
+      status: 'failed',
+      fingerprint,
+      failedAt: new Date().toISOString(),
+      automaticRetry: false
+    });
     showReadingError(error);
 
     return {
@@ -248,8 +369,11 @@ export function getReadingLoaderStatus() {
   return {
     module: 'PHI OS Reality Reading Loader',
     inputFound: Boolean(readStoredReadingInput()),
+    cachedResponseFound: Boolean(readStoredReadingResponse()),
     endpoint: API_ENDPOINT,
     defaultProvider: 'rule_engine',
+    refreshCacheEnabled: true,
+    automaticProviderRetry: false,
     languageContractForwarded: true
   };
 }

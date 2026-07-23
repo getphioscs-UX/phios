@@ -73,6 +73,11 @@ async function exerciseDriver(driver) {
   });
   assert.equal(event.runtime_id, 'runtime_a');
   assert.equal(event.event_version, '1.0.0');
+  const events = await driver.listEvents('runtime_a', {
+    event_type: 'reading.generated'
+  });
+  assert.equal(events.length, 1);
+  assert.equal(events[0].event_id, event.event_id);
 
   const firstSnapshot = await driver.saveSnapshot({
     runtime_id: 'runtime_a',
@@ -101,6 +106,7 @@ async function exerciseDriver(driver) {
 
   assert.equal(await driver.delete('runtime_a'), true);
   assert.equal(await driver.read('runtime_a'), null);
+  assert.deepEqual(await driver.listEvents('runtime_a'), []);
   assert.equal(await driver.loadSnapshot('runtime_a'), null);
   assert.equal(await driver.delete('runtime_a'), false);
 }

@@ -5,6 +5,7 @@ import {
   defaultPersistenceClock,
   defaultPersistenceId,
   normalizeListQuery,
+  normalizeEventQuery,
   normalizeRuntimeEvent,
   normalizeRuntimePatch,
   normalizeRuntimeRecord,
@@ -130,6 +131,20 @@ export function createMemoryDriver(options = {}) {
       events.set(event.event_id, clonePersistenceValue(event));
       changed();
       return clonePersistenceValue(event);
+    },
+
+    async listEvents(runtimeId, input = {}) {
+      const id = String(runtimeId || '').trim();
+      const query = normalizeEventQuery(input);
+      return clonePersistenceValue(
+        [...events.values()]
+          .filter(event => event.runtime_id === id)
+          .filter(event => !query.after || event.created_at > query.after)
+          .filter(event => !query.event_type ||
+            event.event_type === query.event_type)
+          .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)))
+          .slice(0, query.limit)
+      );
     },
 
     async saveSnapshot(input) {
