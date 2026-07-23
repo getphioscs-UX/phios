@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "phi-os.m3c-public-journey-acceptance-fixtures.v1",
+  "locales": [
+    "en",
+    "zh-Hans"
+  ],
+  "viewports": [
+    {
+      "id": "mobile",
+      "width": 360,
+      "height": 800
+    },
+    {
+      "id": "desktop",
+      "width": 1440,
+      "height": 1000
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "first-time-user",
+      "hasActiveJourney": false,
+      "workspace": {},
+      "snapshot": "missing",
+      "recoveryState": null,
+      "expected": {
+        "currentStage": "entry",
+        "resumeRoute": "/reality-entry.html",
+        "recoveryCode": "empty",
+        "automaticRuntimeCreation": false
+      }
+    },
+    {
+      "id": "returning-user",
+      "hasActiveJourney": true,
+      "workspace": {
+        "currentStage": "continuity",
+        "completedStages": [
+          "entry",
+          "reconstruction",
+          "reading",
+          "navigation",
+          "review",
+          "memory"
+        ],
+        "availableStages": [
+          "entry",
+          "reconstruction",
+          "reading",
+          "navigation",
+          "review",
+          "memory",
+          "continuity"
+        ]
+      },
+      "snapshot": "valid",
+      "recoveryState": {
+        "status": "saved",
+        "savedAt": "2026-07-23T11:30:00.000Z"
+      },
+      "expected": {
+        "currentStage": "continuity",
+        "resumeRoute": "/my-reality.html#continuity",
+        "recoveryCode": "protected",
+        "completedCount": 6
+      }
+    },
+    {
+      "id": "interrupted-session",
+      "hasActiveJourney": true,
+      "workspace": {
+        "currentStage": "reading",
+        "completedStages": [
+          "entry",
+          "reconstruction"
+        ],
+        "availableStages": [
+          "entry",
+          "reconstruction",
+          "reading"
+        ]
+      },
+      "snapshot": "valid",
+      "recoveryState": {
+        "status": "saved",
+        "savedAt": "2026-07-23T11:35:00.000Z"
+      },
+      "expected": {
+        "currentStage": "reading",
+        "resumeRoute": "/reality-reading.html",
+        "recoveryCode": "protected",
+        "completedCount": 2
+      }
+    },
+    {
+      "id": "provider-failure",
+      "hasActiveJourney": true,
+      "workspace": {
+        "currentStage": "reading",
+        "completedStages": [
+          "entry",
+          "reconstruction"
+        ],
+        "availableStages": [
+          "entry",
+          "reconstruction",
+          "reading"
+        ]
+      },
+      "snapshot": "valid",
+      "recoveryState": {
+        "status": "saved",
+        "savedAt": "2026-07-23T11:40:00.000Z"
+      },
+      "providerFailure": "timeout",
+      "expected": {
+        "currentStage": "reading",
+        "resumeRoute": "/reality-reading.html",
+        "recoveryCode": "protected",
+        "statePreserved": true,
+        "automaticRetry": false
+      }
+    },
+    {
+      "id": "language-switching",
+      "hasActiveJourney": true,
+      "workspace": {
+        "currentStage": "navigation",
+        "completedStages": [
+          "entry",
+          "reconstruction",
+          "reading"
+        ],
+        "availableStages": [
+          "entry",
+          "reconstruction",
+          "reading",
+          "navigation"
+        ]
+      },
+      "snapshot": "valid",
+      "recoveryState": {
+        "status": "saved",
+        "savedAt": "2026-07-23T11:45:00.000Z"
+      },
+      "expected": {
+        "currentStage": "navigation",
+        "resumeRoute": "/reality-navigation.html",
+        "recoveryCode": "protected",
+        "runtimeIdentityPreserved": true
+      }
+    },
+    {
+      "id": "mobile-use",
+      "hasActiveJourney": true,
+      "workspace": {
+        "currentStage": "entry",
+        "completedStages": [],
+        "availableStages": [
+          "entry"
+        ]
+      },
+      "snapshot": "valid",
+      "recoveryState": {
+        "status": "saved",
+        "savedAt": "2026-07-23T11:50:00.000Z"
+      },
+      "expected": {
+        "currentStage": "entry",
+        "resumeRoute": "/reality-entry.html?mode=resume",
+        "recoveryCode": "protected",
+        "mobileBreakpointCovered": true
+      }
+    },
+    {
+      "id": "slow-network",
+      "hasActiveJourney": true,
+      "workspace": {
+        "currentStage": "reconstruction",
+        "completedStages": [
+          "entry"
+        ],
+        "availableStages": [
+          "entry",
+          "reconstruction"
+        ]
+      },
+      "snapshot": "valid",
+      "recoveryState": {
+        "status": "saved",
+        "savedAt": "2026-07-23T11:55:00.000Z"
+      },
+      "networkProfile": "slow",
+      "expected": {
+        "currentStage": "reconstruction",
+        "resumeRoute": "/reality-reconstruction.html",
+        "recoveryCode": "protected",
+        "loadingStateVisible": true,
+        "retryAvailable": true,
+        "statePreserved": true
+      }
+    },
+    {
+      "id": "expired-session",
+      "hasActiveJourney": true,
+      "workspace": {
+        "currentStage": "review",
+        "completedStages": [
+          "entry",
+          "reconstruction",
+          "reading",
+          "navigation"
+        ],
+        "availableStages": [
+          "entry",
+          "reconstruction",
+          "reading",
+          "navigation",
+          "review"
+        ]
+      },
+      "snapshot": "valid",
+      "recoveryState": {
+        "status": "restored",
+        "savedAt": "2026-07-23T11:20:00.000Z",
+        "restoredAt": "2026-07-23T12:00:00.000Z"
+      },
+      "expected": {
+        "currentStage": "review",
+        "resumeRoute": "/reality-review.html",
+        "recoveryCode": "restored",
+        "recoveredFromSnapshot": true,
+        "lineagePreserved": true
+      }
+    }
+  ]
+}
+
