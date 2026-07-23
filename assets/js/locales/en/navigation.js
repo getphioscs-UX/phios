@@ -257,6 +257,9 @@ const navigation = Object.freeze({
     unresolvedReality:
       'What Must Remain Open',
 
+    unknownRealityTitle:
+      'Unknown Reality',
+
     actionGuidance:
       'Action Guidance',
 

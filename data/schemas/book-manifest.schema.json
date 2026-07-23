@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/book-manifest.schema.json",
+  "title": "PHI OS Content-Complete Book Manifest",
+  "description": "Canonical manifest schema for a content-complete PHI OS volume.",
+  "type": "object",
+  "required": [
+    "manifest_version",
+    "content_freeze",
+    "book_id",
+    "series_id",
+    "volume",
+    "status",
+    "canonical_title",
+    "display_title",
+    "author",
+    "language",
+    "page_count",
+    "source_file",
+    "subtitle",
+    "chapters",
+    "preview_sections",
+    "publication_version",
+    "scope",
+    "entry_concepts",
+    "parts",
+    "grammar",
+    "figure_count",
+    "canonical_data"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "manifest_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "content_freeze": {
+      "type": "string",
+      "format": "date"
+    },
+    "book_id": {
+      "type": "string",
+      "pattern": "^phios-volume-[1-9][0-9]*$"
+    },
+    "series_id": {
+      "const": "phios"
+    },
+    "volume": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "content-complete",
+        "frozen",
+        "published"
+      ]
+    },
+    "canonical_title": {
+      "$ref": "#/$defs/localized_text"
+    },
+    "display_title": {
+      "$ref": "#/$defs/localized_text"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "page_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_file": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subtitle": {
+      "$ref": "#/$defs/localized_text"
+    },
+    "chapters": {
+      "type": "string",
+      "minLength": 1
+    },
+    "preview_sections": {
+      "$ref": "#/$defs/non_empty_string_array"
+    },
+    "publication_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entry_concepts": {
+      "$ref": "#/$defs/non_empty_string_array"
+    },
+    "parts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/part"
+      }
+    },
+    "grammar": {
+      "$ref": "#/$defs/grammar"
+    },
+    "figure_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "canonical_data": {
+      "type": "object",
+      "required": [
+        "concepts",
+        "synonym_policy",
+        "figures"
+      ],
+      "properties": {
+        "concepts": {
+          "type": "string",
+          "minLength": 1
+        },
+        "synonym_policy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "figures": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "localized_text": {
+      "type": "object",
+      "required": [
+        "zh-Hans",
+        "en"
+      ],
+      "properties": {
+        "zh-Hans": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "non_empty_string_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "part": {
+      "type": "object",
+      "required": [
+        "id",
+        "number",
+        "title",
+        "purpose",
+        "primary_concepts",
+        "figures"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^part-[0-9]+$"
+        },
+        "number": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "title": {
+          "$ref": "#/$defs/localized_text"
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "primary_concepts": {
+          "$ref": "#/$defs/non_empty_string_array"
+        },
+        "figures": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^figure-[0-9]+[a-z]$"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "grammar_stage": {
+      "type": "object",
+      "required": [
+        "code",
+        "concept",
+        "zh-Hans",
+        "en"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^G(?:[1-9]|1[0-6])$"
+        },
+        "concept": {
+          "type": "string",
+          "minLength": 1
+        },
+        "zh-Hans": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "grammar_arc": {
+      "type": "object",
+      "required": [
+        "id",
+        "range",
+        "zh-Hans",
+        "en"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "formation",
+            "activation",
+            "internalization",
+            "reorganization",
+            "continuity"
+          ]
+        },
+        "range": {
+          "type": "string",
+          "pattern": "^G(?:[1-9]|1[0-6])-G(?:[1-9]|1[0-6])$"
+        },
+        "zh-Hans": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "grammar": {
+      "type": "object",
+      "required": [
+        "id",
+        "stages",
+        "arcs"
+      ],
+      "properties": {
+        "id": {
+          "const": "reality-grammar-g1-g16"
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 16,
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/grammar_stage"
+          }
+        },
+        "arcs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/grammar_arc"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

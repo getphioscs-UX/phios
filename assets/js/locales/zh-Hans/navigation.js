@@ -257,6 +257,9 @@ const navigation = Object.freeze({
     unresolvedReality:
       '必须保持开放的部分',
 
+    unknownRealityTitle:
+      '未知现实',
+
     actionGuidance:
       '行动指引',
 

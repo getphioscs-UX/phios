@@ -10,13 +10,13 @@ for (const removed of ['navigationPriority', 'navigationRecommendedDirection', '
   if (html.includes(`id="${removed}"`)) throw new Error(`Legacy directive block remains: ${removed}`);
 }
 
-for (const required of ['navigation-choice-guide', 'navigation-path-customer-grid', 'navigation-path-details', 'navigation.pathBoundary', 'navigation.viewPathDetails', 'navigation.shownFirst']) {
+for (const required of ['navigation-choice-guide', 'navigation-path-customer-grid', 'navigation-path-details', 'navigation.pathBoundary', 'navigation.viewPathDetails', 'navigation.shownFirst', 'navigation.unknownRealityTitle']) {
   if (!html.includes(required) && !render.includes(required) && !css.includes(required)) {
     throw new Error(`Missing simplified Navigation customer rule: ${required}`);
   }
 }
 
-for (const key of ['choiceGuideTitle', 'choiceGuideText', 'shownFirst', 'pathBoundary', 'boundaryFallback', 'viewPathDetails']) {
+for (const key of ['choiceGuideTitle', 'choiceGuideText', 'shownFirst', 'pathBoundary', 'boundaryFallback', 'viewPathDetails', 'unknownRealityTitle']) {
   if (!en.includes(key) || !zh.includes(key)) throw new Error(`Missing bilingual Navigation customer key: ${key}`);
 }
 
