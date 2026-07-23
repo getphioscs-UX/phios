@@ -78,6 +78,7 @@ const atlas = Object.freeze({
       showingBookThree: 'Showing Book III · Parts 10–14'
     },
     parts: {
+      openCompleteFigure: 'Open the complete figure',
       part1: {
         title: 'Reality Physics',
         description: 'How differences, constraints, structures and fields make Reality observable.'
@@ -88,11 +89,37 @@ const atlas = Object.freeze({
       },
       part3: {
         title: 'Reality Dynamics',
-        description: 'How Reality enters time and becomes continuous Runtime.'
+        description: 'How Reality locates its present position, selects a question and capability, moves through activation, forms a state and carries retained legacy into the next cycle.',
+        figure3aTitle: 'Runtime Decision Stack',
+        figure3aDescription: 'Reality identifies its current grammar position and active question before selecting capabilities and weighting drivers. Driver priority remains contextual and must not be inferred without evidence.',
+        figure3aStep1: 'Entry',
+        figure3aStep2: 'Grammar',
+        figure3aStep3: 'Question',
+        figure3aStep4: 'Capability',
+        figure3aStep5: 'Driver priority',
+        figure3aStep6: 'Reality state',
+        figure3bTitle: 'Runtime State Formation Architecture',
+        figure3bDescription: 'Five coordinate dimensions bound possibility; motion transforms position, activation admits change into Reality, and temporal closure retains legacy for the next cycle.',
+        figure3bStep1: 'Coordinate',
+        figure3bStep2: 'Motion',
+        figure3bStep3: 'Activation',
+        figure3bStep4: 'Reality state',
+        figure3bStep5: 'Temporal closure',
+        figure3bStep6: 'New cycle',
+        figure3bCoordinates: 'Coordinates: temporal · condition · directional · carrier · relational'
       },
       part4: {
         title: 'Human Runtime Carrier',
-        description: 'How Runtime enters a human carrier and forms an initialization state.'
+        description: 'How Reality passes through media, carrier configuration, perception, biological processing and stabilization to become a continuous Human Runtime.',
+        figure4dTitle: 'Continuous Human Runtime',
+        figure4dDescription: 'Reality reaches the human carrier through media, becomes perceptual and biological processing, stabilizes as organized Runtime, and continues through adaptation, maintenance, recovery, drift or failure.',
+        figure4dStep1: 'Runtime medium',
+        figure4dStep2: 'Carrier',
+        figure4dStep3: 'Reality intake',
+        figure4dStep4: 'Biological Runtime',
+        figure4dStep5: 'Stabilization',
+        figure4dStep6: 'Continuity',
+        figure4dContinuity: 'Continuity modes: adaptation · maintenance · recovery · drift · failure'
       },
       part5: {
         title: 'Conscious Runtime',

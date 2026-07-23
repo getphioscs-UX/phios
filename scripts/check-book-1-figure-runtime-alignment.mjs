@@ -12,6 +12,7 @@ import {
 import { validateReadingNavigationContract } from '../functions/runtime/navigation/reading-navigation-contract.js';
 
 const registry = JSON.parse(fs.readFileSync('content/registry/book-1-runtime-alignment.json', 'utf8'));
+const figureRegistry = JSON.parse(fs.readFileSync('content/registry/figures.json', 'utf8'));
 assert.equal(registry.status, 'closed');
 assert.equal(registry.changeClass, 'contract_closure_and_bug_fix');
 assert.deepEqual(registry.newRuntimeStages, []);
@@ -37,6 +38,27 @@ assert.equal(registry.conceptualMappings.agency.canonicalTerm, 'Agency');
 assert.equal(registry.conceptualMappings.agency.contractField, 'agency_style');
 assert.equal(registry.conceptualMappings.identityRuntimeSignature.removedCarrierSignatureFamily, false);
 assert.equal(registry.conceptualMappings.projection.observedEvidenceMutableByProvider, false);
+
+for (const figureNumber of ['3A', '3B', '4D']) {
+  const figure = figureRegistry.figures.find(item => item.figure_number === figureNumber);
+  assert.ok(figure, `Figure ${figureNumber} must be registered`);
+  assert.equal(figure.status, 'available');
+  assert.equal(figure.source_file, `${figureNumber}.pdf`);
+  assert.equal(figure.web_file, `assets/images/figures/book-1/${figureNumber}.png`);
+  assert.ok(fs.existsSync(figure.web_file), `Figure ${figureNumber} web asset must exist`);
+  assert.ok(fs.statSync(figure.web_file).size > 100_000, `Figure ${figureNumber} must use the complete rendered asset`);
+}
+
+const atlasSource = fs.readFileSync('explore.html', 'utf8');
+for (const figureNumber of ['3A', '3B', '4D']) {
+  assert.ok(
+    atlasSource.includes(`/assets/images/figures/book-1/${figureNumber}.png`),
+    `Atlas must expose complete Figure ${figureNumber}`
+  );
+}
+assert.match(atlasSource, /atlas\.parts\.part3\.figure3aTitle/);
+assert.match(atlasSource, /atlas\.parts\.part3\.figure3bTitle/);
+assert.match(atlasSource, /atlas\.parts\.part4\.figure4dTitle/);
 assert.deepEqual(RUNTIME_COORDINATES.map(item => item.id), registry.contracts.runtimeCoordinates);
 assert.deepEqual(CARRIER_ORGANIZATION_LAYERS.map(item => item.id), registry.contracts.carrierOrganization);
 assert.deepEqual(CARRIER_CONFIGURATION_LAYERS.map(item => item.id), registry.contracts.carrierConfiguration);

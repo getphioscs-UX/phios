@@ -693,6 +693,135 @@ html[lang="zh-Hans"] .book-card h3 {
   color: var(--success);
 }
 
+.atlas-node--figure-rich[open] {
+  grid-column: 1 / -1;
+}
+
+.atlas-figure-bridges {
+  display: grid;
+  gap: 1rem;
+  margin: 1.25rem 0 1rem;
+}
+
+.atlas-figure-bridge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 0.52fr);
+  gap: 1.25rem;
+  padding: 1.25rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.atlas-figure-bridge--gold {
+  border-color: rgba(190, 145, 22, 0.28);
+  background: linear-gradient(135deg, rgba(218, 174, 42, 0.08), rgba(255, 255, 255, 0.5));
+}
+
+.atlas-figure-bridge--violet {
+  border-color: rgba(101, 83, 166, 0.25);
+  background: linear-gradient(135deg, rgba(101, 83, 166, 0.07), rgba(255, 255, 255, 0.5));
+}
+
+.atlas-figure-bridge--cyan {
+  margin: 1.25rem 0 1rem;
+  border-color: rgba(0, 139, 160, 0.25);
+  background: linear-gradient(135deg, rgba(0, 139, 160, 0.07), rgba(255, 255, 255, 0.5));
+}
+
+.atlas-figure-copy {
+  min-width: 0;
+}
+
+.atlas-node-content .atlas-figure-label {
+  margin-bottom: 0.35rem;
+  color: var(--knowledge);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.atlas-figure-copy h4 {
+  margin: 0 0 0.65rem;
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.atlas-node-content .atlas-figure-copy > p:not(.atlas-figure-label) {
+  max-width: 760px;
+  margin-bottom: 0.85rem;
+}
+
+.atlas-figure-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.atlas-figure-flow li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.atlas-figure-flow li:not(:last-child)::after {
+  content: '→';
+  color: var(--ink-soft);
+}
+
+.atlas-node-content .atlas-figure-note {
+  margin: 0.9rem 0 0;
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.atlas-figure-preview {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.atlas-figure-preview a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid rgba(16, 25, 39, 0.12);
+  border-radius: 0.85rem;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(16, 25, 39, 0.09);
+}
+
+.atlas-figure-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 0.704 / 1;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 180ms ease;
+}
+
+.atlas-figure-preview a:hover img,
+.atlas-figure-preview a:focus-visible img {
+  transform: scale(1.025);
+}
+
+.atlas-figure-preview figcaption {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  text-align: center;
+}
+
 /* ==========================================================================
    Knowledge formats and handoff
    ========================================================================== */
@@ -978,6 +1107,16 @@ html[lang="zh-Hans"] .atlas-return-panel h2 {
 
   .atlas-node-content {
     padding: 0 1rem 1.15rem 3.85rem;
+  }
+
+  .atlas-figure-bridge {
+    grid-template-columns: 1fr;
+    margin-left: -2.85rem;
+    padding: 1rem;
+  }
+
+  .atlas-figure-preview {
+    max-width: 340px;
   }
 
   .knowledge-format {

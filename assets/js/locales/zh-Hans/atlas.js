@@ -78,6 +78,7 @@ const atlas = Object.freeze({
       showingBookThree: '正在显示第三册 · 第 10–14 部'
     },
     parts: {
+      openCompleteFigure: '打开完整图像',
       part1: {
         title: '现实物理 Reality Physics',
         description: '差异、约束、结构与场域如何使现实变得可以被观察。'
@@ -88,11 +89,37 @@ const atlas = Object.freeze({
       },
       part3: {
         title: '现实动力学 Reality Dynamics',
-        description: '现实如何进入时间，并成为持续的 Runtime。'
+        description: '现实如何定位当前所在位置，选择问题与能力，经过运动和激活形成状态，并把遗留带入下一轮循环。',
+        figure3aTitle: '运行时决策堆栈',
+        figure3aDescription: '现实先辨认当前语法位置与核心问题，再选择需要调用的能力，并依据现实条件排列驱动权重；缺少证据时，系统不会自动推断驱动优先级。',
+        figure3aStep1: '现实入口',
+        figure3aStep2: '现实语法',
+        figure3aStep3: '核心问题',
+        figure3aStep4: '能力选择',
+        figure3aStep5: '驱动优先级',
+        figure3aStep6: '现实状态',
+        figure3bTitle: '运行状态形成架构',
+        figure3bDescription: '五个坐标维度限定可能性范围，运动改变位置，激活让变化真正进入现实，时间闭合则保留遗留并启动下一轮循环。',
+        figure3bStep1: '运行坐标',
+        figure3bStep2: '运动变化',
+        figure3bStep3: '现实激活',
+        figure3bStep4: '现实状态',
+        figure3bStep5: '时间闭合',
+        figure3bStep6: '新循环',
+        figure3bCoordinates: '五维坐标：时间 · 条件 · 方向 · 载体 · 关系'
       },
       part4: {
         title: '人类运行载体 Human Runtime Carrier',
-        description: 'Runtime 如何进入人类载体，并形成初始化状态。'
+        description: '现实如何经过运行介质、载体配置、感知、生物处理与稳定化，成为持续的人类运行。',
+        figure4dTitle: '持续的人类运行',
+        figure4dDescription: '现实通过介质进入载体，成为感知与生物处理，在载体组织中稳定，并通过适应、维护、恢复、漂移或失效继续演变。',
+        figure4dStep1: '运行介质',
+        figure4dStep2: '载体',
+        figure4dStep3: '现实输入',
+        figure4dStep4: '生物运行',
+        figure4dStep5: '载体稳定',
+        figure4dStep6: '运行连续性',
+        figure4dContinuity: '连续性模式：适应 · 维护 · 恢复 · 漂移 · 失效'
       },
       part5: {
         title: '意识运行 Conscious Runtime',
