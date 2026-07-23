@@ -1,0 +1,225 @@
+/* M3C-W3.1 Guided Entry. Client-side orientation only; Runtime contracts stay frozen. */
+
+.guided-entry {
+  display: grid;
+  gap: var(--phi-space-5);
+  margin: var(--phi-space-5) var(--phi-space-6) 0;
+  padding: clamp(var(--phi-space-5), 3vw, var(--phi-space-7));
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-md);
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      color-mix(in srgb, var(--phi-action-primary) 8%, transparent),
+      transparent 42%
+    ),
+    var(--phi-surface-subtle, #f8f7f3);
+}
+
+.guided-entry-heading {
+  display: grid;
+  gap: var(--phi-space-2);
+  max-width: 48rem;
+}
+
+.guided-entry-heading h3 {
+  margin: 0;
+  color: var(--phi-text-primary);
+  font-family: var(--phi-font-display);
+  font-size: clamp(1.65rem, 3vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.guided-entry-heading > p:last-child {
+  max-width: 42rem;
+  margin: 0;
+  color: var(--phi-text-secondary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-sm);
+  line-height: 1.65;
+}
+
+.reality-coordinate-fieldset {
+  display: grid;
+  gap: var(--phi-space-4);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.reality-coordinate-fieldset legend {
+  display: grid;
+  gap: var(--phi-space-1);
+  width: 100%;
+  margin: 0 0 var(--phi-space-3);
+  padding: 0;
+}
+
+.reality-coordinate-fieldset legend > span {
+  color: var(--phi-action-primary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-xs);
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reality-coordinate-fieldset legend strong {
+  color: var(--phi-text-primary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-base);
+  font-weight: 650;
+}
+
+.reality-coordinate-fieldset legend small {
+  color: var(--phi-text-secondary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-xs);
+}
+
+.reality-coordinate-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--phi-space-2);
+}
+
+.reality-coordinate-options label {
+  position: relative;
+  display: inline-flex;
+  min-height: 2.75rem;
+  cursor: pointer;
+}
+
+.reality-coordinate-options input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.reality-coordinate-options label > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--phi-space-2) var(--phi-space-4);
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: 999px;
+  background: var(--phi-surface-primary, #fff);
+  color: var(--phi-text-secondary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-sm);
+  font-weight: 500;
+  line-height: 1.25;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.reality-coordinate-options label:hover > span {
+  border-color: color-mix(
+    in srgb,
+    var(--phi-action-primary) 50%,
+    var(--phi-border-subtle)
+  );
+  color: var(--phi-text-primary);
+  transform: translateY(-1px);
+}
+
+.reality-coordinate-options input:focus-visible + span {
+  outline: 3px solid color-mix(
+    in srgb,
+    var(--phi-action-primary) 28%,
+    transparent
+  );
+  outline-offset: 2px;
+}
+
+.reality-coordinate-options label.is-selected > span {
+  border-color: var(--phi-action-primary);
+  background: var(--phi-action-primary);
+  color: var(--phi-action-on-primary, #fff);
+}
+
+.reality-coordinate-options label.is-disabled {
+  cursor: not-allowed;
+}
+
+.reality-coordinate-options label.is-disabled > span {
+  opacity: 0.46;
+  transform: none;
+}
+
+.coordinate-status {
+  min-height: 1.25rem;
+  margin: 0;
+  color: var(--phi-text-secondary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-xs);
+}
+
+.coordinate-status[data-tone="limit"] {
+  color: var(--phi-state-danger);
+  font-weight: 600;
+}
+
+.guided-entry-boundary {
+  display: flex;
+  gap: var(--phi-space-2);
+  align-items: start;
+  margin: 0;
+  padding-top: var(--phi-space-4);
+  border-top: 1px solid var(--phi-border-subtle);
+  color: var(--phi-text-secondary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-xs);
+  line-height: 1.55;
+}
+
+.guided-entry-boundary > span[aria-hidden="true"] {
+  color: var(--phi-action-primary);
+  font-weight: 650;
+}
+
+.entry-question-label {
+  display: block;
+  margin-bottom: var(--phi-space-3);
+  color: var(--phi-text-primary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-base);
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  .guided-entry {
+    margin-inline: var(--phi-space-4);
+    padding: var(--phi-space-5) var(--phi-space-4);
+  }
+
+  .reality-coordinate-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reality-coordinate-options label,
+  .reality-coordinate-options label > span {
+    width: 100%;
+  }
+}
+
+@media (max-width: 440px) {
+  .reality-coordinate-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reality-coordinate-options label > span {
+    transition: none;
+  }
+}

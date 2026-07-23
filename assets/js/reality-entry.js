@@ -26,6 +26,20 @@ const EVIDENCE_DEPTHS = Object.freeze({
   deep: { minimum: 7, maximum: 10 }
 });
 
+const REALITY_COORDINATES = Object.freeze([
+  'body_health',
+  'relationships_family',
+  'work_career',
+  'money_resources',
+  'learning_growth',
+  'meaning_purpose',
+  'environment_place',
+  'unsure'
+]);
+
+const REALITY_COORDINATE_MAXIMUM = 2;
+const REALITY_COORDINATE_UNSURE = 'unsure';
+
 function currentDepth() {
   return EVIDENCE_DEPTHS[state?.evidenceDepth] || EVIDENCE_DEPTHS.guided;
 }
@@ -76,6 +90,10 @@ const els = {
   target: qs('#nextTarget'),
   round: qs('#roundIndicator'),
   depth: qs('#evidenceDepth'),
+  guided: qs('#guidedEntry'),
+  coordinates: qs('#realityCoordinates'),
+  coordinateStatus: qs('#coordinateStatus'),
+  sendLabel: qs('#sendButtonLabel'),
   card: qs('#entryCard'),
   cardBody: qs('#entryCardBody'),
   continue: qs('#continueButton'),
@@ -105,6 +123,7 @@ function createInitialState() {
     askedTargets: ['observed_change'],
     answerBindings: [],
     evidenceDepth: 'guided',
+    realityCoordinates: [],
     runtimeEntityId: entryInitialization?.runtimeEntityId || createId('rt'),
     runtimeEntryId: entryInitialization?.runtimeEntryId || createId('entry'),
     runtimeId: entryInitialization?.runtimeId || createId('runtime'),
@@ -123,6 +142,7 @@ function persistEntryState() {
     askedTargets: state.askedTargets,
     answerBindings: state.answerBindings,
     evidenceDepth: state.evidenceDepth,
+    realityCoordinates: state.realityCoordinates,
     runtimeEntityId: state.runtimeEntityId,
     runtimeEntryId: state.runtimeEntryId,
     runtimeId: state.runtimeId,
@@ -207,6 +227,116 @@ function setBusy(value, text = '') {
   els.send.disabled = value || state.ready;
   els.load.textContent = text;
   els.load.dataset.tone = value && text ? 'loading' : '';
+  renderRealityCoordinates();
+}
+
+function normalizeRealityCoordinates(values) {
+  const normalized = Array.isArray(values)
+    ? [...new Set(values.map(cleanText))]
+        .filter(value => REALITY_COORDINATES.includes(value))
+    : [];
+
+  if (normalized.includes(REALITY_COORDINATE_UNSURE)) {
+    return [REALITY_COORDINATE_UNSURE];
+  }
+
+  return normalized.slice(0, REALITY_COORDINATE_MAXIMUM);
+}
+
+function renderPrimaryAction() {
+  if (!els.sendLabel) return;
+
+  els.sendLabel.textContent =
+    state.round === 0 && !state.revision
+      ? t('entry.guided.beginAction')
+      : t('common.continue');
+}
+
+function renderRealityCoordinates(notice = '') {
+  if (!els.coordinates) return;
+
+  const selected = new Set(state.realityCoordinates);
+  const unsureSelected = selected.has(REALITY_COORDINATE_UNSURE);
+  const maximumReached =
+    selected.size >= REALITY_COORDINATE_MAXIMUM &&
+    !unsureSelected;
+  const locked =
+    state.round > 0 ||
+    state.processing ||
+    state.revision ||
+    state.ready;
+
+  els.coordinates
+    .querySelectorAll('input[name="realityCoordinate"]')
+    .forEach(input => {
+      const isSelected = selected.has(input.value);
+      const unavailable =
+        locked ||
+        (unsureSelected && input.value !== REALITY_COORDINATE_UNSURE) ||
+        (maximumReached && !isSelected);
+
+      input.checked = isSelected;
+      input.disabled = unavailable;
+      input.closest('label')?.classList.toggle('is-selected', isSelected);
+      input.closest('label')?.classList.toggle('is-disabled', unavailable);
+    });
+
+  els.guided?.classList.toggle(
+    'hidden',
+    state.round > 0 || state.revision || state.ready
+  );
+
+  if (!els.coordinateStatus) return;
+
+  els.coordinateStatus.dataset.tone = notice === 'limit' ? 'limit' : '';
+
+  if (notice === 'limit') {
+    els.coordinateStatus.textContent = t('entry.guided.limitStatus', {
+      max: REALITY_COORDINATE_MAXIMUM
+    });
+  } else if (unsureSelected) {
+    els.coordinateStatus.textContent = t('entry.guided.unsureStatus');
+  } else if (selected.size > 0) {
+    els.coordinateStatus.textContent = t('entry.guided.selectedStatus', {
+      count: selected.size,
+      max: REALITY_COORDINATE_MAXIMUM
+    });
+  } else {
+    els.coordinateStatus.textContent = t('entry.guided.optionalStatus');
+  }
+}
+
+function updateRealityCoordinate(input) {
+  const value = cleanText(input?.value);
+  if (!REALITY_COORDINATES.includes(value)) return;
+
+  if (value === REALITY_COORDINATE_UNSURE && input.checked) {
+    state.realityCoordinates = [REALITY_COORDINATE_UNSURE];
+  } else {
+    const selected = new Set(
+      state.realityCoordinates.filter(
+        coordinate => coordinate !== REALITY_COORDINATE_UNSURE
+      )
+    );
+
+    if (input.checked) selected.add(value);
+    else selected.delete(value);
+
+    if (selected.size > REALITY_COORDINATE_MAXIMUM) {
+      input.checked = false;
+      renderRealityCoordinates('limit');
+      return;
+    }
+
+    state.realityCoordinates = [...selected];
+  }
+
+  /*
+   * Client-only reported orientation. It is intentionally excluded from
+   * the Runtime Entry API payload, answer bindings and Entry question count.
+   */
+  renderRealityCoordinates();
+  persistEntryState();
 }
 
 function normalizedText(
@@ -393,6 +523,8 @@ function renderRound() {
     current: state.round,
     max: currentDepth().maximum
   });
+  renderPrimaryAction();
+  renderRealityCoordinates();
 }
 
 function renderTarget(target = 'observed_change') {
@@ -733,6 +865,13 @@ els.depth?.addEventListener('change', event => {
   persistEntryState();
 });
 
+els.coordinates?.addEventListener('change', event => {
+  const input = event.target.closest(
+    'input[name="realityCoordinate"]'
+  );
+  if (input) updateRealityCoordinate(input);
+});
+
 els.revise.addEventListener('click', () => {
   state.ready = false;
   state.revision = true;
@@ -751,6 +890,8 @@ els.revise.addEventListener('click', () => {
   els.input.disabled = false;
   els.send.disabled = false;
   renderTarget('revision');
+  renderPrimaryAction();
+  renderRealityCoordinates();
   els.input.focus();
   persistEntryState();
 });
@@ -763,6 +904,8 @@ els.continue.addEventListener('click', () => {
 onLocaleChange(() => {
   renderChat();
   renderRound();
+  renderPrimaryAction();
+  renderRealityCoordinates();
 
   if (state.latest) {
     renderResultState(state.latest);
@@ -853,6 +996,9 @@ function restoreEntryState() {
       Array.isArray(saved?.answerBindings)
         ? saved.answerBindings
         : [],
+    realityCoordinates: normalizeRealityCoordinates(
+      saved?.realityCoordinates
+    ),
     processing: false,
     revision: revisionRequested,
     ready: revisionRequested ? false : Boolean(result?.entryComplete)

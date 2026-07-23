@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
   <link rel="stylesheet" href="/assets/css/design/visual-acceptance.css">
   <link rel="stylesheet" href="/assets/css/entry-visual-alignment.css">
+  <link rel="stylesheet" href="/assets/css/guided-entry.css">
 </head>
 
 <body class="entry-workspace-page runtime-workspace-page">
@@ -178,6 +179,145 @@
           >Start a new Entry</button>
         </header>
 
+        <section
+          class="guided-entry"
+          id="guidedEntry"
+          aria-labelledby="guidedEntryTitle"
+        >
+          <header class="guided-entry-heading">
+            <p
+              class="workspace-kicker"
+              data-i18n="entry.guided.eyebrow"
+            >Guided Entry</p>
+            <h3
+              id="guidedEntryTitle"
+              data-i18n="entry.guided.title"
+            >Begin with one sentence.</h3>
+            <p data-i18n="entry.guided.instruction">
+              Describe only what has recently started to change. You do not
+              need to explain why yet.
+            </p>
+          </header>
+
+          <fieldset
+            class="reality-coordinate-fieldset"
+            id="realityCoordinates"
+            data-evidence-class="reported_orientation"
+            data-runtime-effect="none"
+          >
+            <legend>
+              <span data-i18n="entry.guided.coordinateLegend">
+                Reality Coordinate
+              </span>
+              <strong data-i18n="entry.guided.coordinateQuestion">
+                Where is the change most noticeable?
+              </strong>
+              <small data-i18n="entry.guided.coordinateHelp">
+                Optional · choose up to two.
+              </small>
+            </legend>
+
+            <div class="reality-coordinate-options">
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="body_health"
+                >
+                <span data-i18n="entry.guided.coordinates.bodyHealth">
+                  Body &amp; Health
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="relationships_family"
+                >
+                <span data-i18n="entry.guided.coordinates.relationshipsFamily">
+                  Relationships &amp; Family
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="work_career"
+                >
+                <span data-i18n="entry.guided.coordinates.workCareer">
+                  Work &amp; Career
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="money_resources"
+                >
+                <span data-i18n="entry.guided.coordinates.moneyResources">
+                  Money &amp; Resources
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="learning_growth"
+                >
+                <span data-i18n="entry.guided.coordinates.learningGrowth">
+                  Learning &amp; Growth
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="meaning_purpose"
+                >
+                <span data-i18n="entry.guided.coordinates.meaningPurpose">
+                  Meaning &amp; Purpose
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="environment_place"
+                >
+                <span data-i18n="entry.guided.coordinates.environmentPlace">
+                  Environment &amp; Place
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="unsure"
+                >
+                <span data-i18n="entry.guided.coordinates.unsure">
+                  I’m not sure yet
+                </span>
+              </label>
+            </div>
+
+            <p
+              class="coordinate-status"
+              id="coordinateStatus"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            ></p>
+          </fieldset>
+
+          <p class="guided-entry-boundary">
+            <span aria-hidden="true">○</span>
+            <span data-i18n="entry.guided.boundary">
+              Orientation only. This selection does not classify evidence,
+              choose a path, or route you to a professional service.
+            </span>
+          </p>
+        </section>
+
         <fieldset class="evidence-depth" id="evidenceDepth">
           <legend data-i18n="entry.depthLegend">How much would you like PHI OS to ask?</legend>
           <label><input type="radio" name="evidenceDepth" value="quick"><span><strong data-i18n="entry.depthQuickTitle">Quick</strong><small data-i18n="entry.depthQuickText">3–4 essential questions</small></span></label>
@@ -194,10 +334,10 @@
 
         <form class="entry-composer" id="chatForm">
           <label
-            class="sr-only"
+            class="entry-question-label"
             for="messageInput"
-            data-i18n="entry.inputLabel"
-          >Your response</label>
+            data-i18n="entry.guided.question"
+          >What has recently started to change?</label>
 
           <textarea
             id="messageInput"
@@ -227,7 +367,10 @@
                 id="sendButton"
                 type="submit"
               >
-                <span data-i18n="common.continue">Continue</span>
+                <span
+                  id="sendButtonLabel"
+                  data-i18n="entry.guided.beginAction"
+                >Begin Guided Entry</span>
                 <span aria-hidden="true">→</span>
               </button>
             </div>
