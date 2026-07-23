@@ -142,7 +142,10 @@ export function createMemoryDriver(options = {}) {
           .filter(event => !query.after || event.created_at > query.after)
           .filter(event => !query.event_type ||
             event.event_type === query.event_type)
-          .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)))
+          .sort((a, b) =>
+            String(a.created_at).localeCompare(String(b.created_at)) ||
+            String(a.event_id).localeCompare(String(b.event_id))
+          )
           .slice(0, query.limit)
       );
     },

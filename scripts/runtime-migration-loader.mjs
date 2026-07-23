@@ -36,11 +36,30 @@ export function createSqliteD1Adapter(database) {
     }
 
     async run() {
-      return database.prepare(this.sql).run(...this.bindings);
+      const result = database.prepare(this.sql).run(...this.bindings);
+      const changes = Number(result.changes || 0);
+      return {
+        success: true,
+        changes,
+        meta: {
+          changes,
+          last_row_id:
+            result.lastInsertRowid === undefined
+              ? null
+              : Number(result.lastInsertRowid)
+        }
+      };
     }
 
     async all() {
-      return { results: database.prepare(this.sql).all(...this.bindings) };
+      return {
+        success: true,
+        results: database.prepare(this.sql).all(...this.bindings)
+      };
+    }
+
+    async first() {
+      return database.prepare(this.sql).get(...this.bindings) || null;
     }
   }
 

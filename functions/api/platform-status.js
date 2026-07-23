@@ -1,4 +1,4 @@
-export async function onRequestGet({ env }) {
+export async function onRequestGet({ env = {} }) {
   return Response.json({
     success: true,
     platform: 'PHI OS',
@@ -6,7 +6,8 @@ export async function onRequestGet({ env }) {
     currentImplementation: 'foundation-and-landing',
     services: {
       openaiConfigured: Boolean(env.OPENAI_API_KEY),
-      databaseBound: Boolean(env.DB),
+      databaseBound: Boolean(env.RUNTIME_DB || env.DB),
+      runtimeDatabaseBound: Boolean(env.RUNTIME_DB),
       objectStorageBound: Boolean(env.REPORTS),
       sessionCacheBound: Boolean(env.SESSIONS)
     }
