@@ -9,6 +9,8 @@ import {
   normalizeRecoveryRequest,
   requireRecoveryText
 } from './recovery-contract.js';
+import { createEventAppendService } from
+  '../timeline/event-append-service.js';
 
 const EVENT_STAGE = Object.freeze({
   'entry.completed': 'entry_complete',
@@ -129,6 +131,11 @@ export function createRecoveryService(options = {}) {
   }
   const clock = options.clock || defaultPersistenceClock;
   const createId = options.createId || defaultPersistenceId;
+  const timeline = createEventAppendService({
+    persistence,
+    clock,
+    createId
+  });
 
   async function requireRuntime(runtimeId) {
     const runtime = await persistence.read(runtimeId);
@@ -230,7 +237,7 @@ export function createRecoveryService(options = {}) {
       }
     };
 
-    await persistence.appendEvent({
+    await timeline.append({
       event_id: auditEventId,
       runtime_id: runtime.runtime_id,
       event_type: 'runtime.partial_write_recovered',
@@ -336,7 +343,7 @@ export function createRecoveryService(options = {}) {
       current_stage: request.stage || runtime.current_stage,
       state: nextState
     });
-    await persistence.appendEvent({
+    await timeline.append({
       runtime_id: runtime.runtime_id,
       event_type: 'provider.completed',
       payload: {
@@ -381,7 +388,7 @@ export function createRecoveryService(options = {}) {
     const updated = await persistence.update(runtime.runtime_id, {
       state: nextState
     });
-    await persistence.appendEvent({
+    await timeline.append({
       runtime_id: runtime.runtime_id,
       event_type: 'provider.failed',
       payload: {
