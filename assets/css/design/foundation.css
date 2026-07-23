@@ -1,0 +1,68 @@
+/* PHI OS Design System — Foundation v1
+   Intentionally low-specificity so legacy page CSS remains authoritative. */
+
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+:where(html) {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+}
+
+:where(body) {
+  min-width: 320px;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(img, svg, video, canvas) {
+  display: block;
+  max-width: 100%;
+}
+
+:where(button, input, textarea, select) {
+  font: inherit;
+}
+
+:where(button, a) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where([hidden]) {
+  display: none !important;
+}
+
+:where(:focus-visible) {
+  outline: 2px solid var(--phi-action-primary);
+  outline-offset: 4px;
+}
+
+.phi-sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.phi-skip-link {
+  position: fixed;
+  top: var(--phi-space-2);
+  left: var(--phi-space-4);
+  z-index: var(--phi-z-skip-link);
+  padding: var(--phi-space-3) var(--phi-space-4);
+  border-radius: var(--phi-radius-sm);
+  background: var(--phi-text-primary);
+  color: var(--phi-text-inverse);
+  transform: translateY(calc(-100% - var(--phi-space-4)));
+}
+
+.phi-skip-link:focus-visible {
+  transform: translateY(0);
+}

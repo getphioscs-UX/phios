@@ -1,0 +1,60 @@
+/* PHI OS Design System — Layout v1 */
+
+.phi-container,
+.phi-container--content,
+.phi-container--wide,
+.phi-container--workspace {
+  width: calc(100% - (2 * var(--phi-gutter)));
+  margin-inline: auto;
+}
+
+.phi-container {
+  max-width: var(--phi-container-content);
+}
+
+.phi-container--content {
+  max-width: var(--phi-container-reading);
+}
+
+.phi-container--wide {
+  max-width: var(--phi-container-wide);
+}
+
+.phi-container--workspace {
+  max-width: var(--phi-container-workspace);
+}
+
+.phi-section {
+  padding-block: clamp(var(--phi-space-12), 8vw, var(--phi-space-24));
+}
+
+.phi-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--phi-stack-gap, var(--phi-space-6));
+}
+
+.phi-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--phi-cluster-gap, var(--phi-space-3));
+}
+
+.phi-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--phi-grid-min, 17rem)), 1fr)
+  );
+  gap: var(--phi-grid-gap, var(--phi-space-6));
+}
+
+@media (max-width: 40rem) {
+  .phi-container,
+  .phi-container--content,
+  .phi-container--wide,
+  .phi-container--workspace {
+    width: calc(100% - (2 * var(--phi-space-4)));
+  }
+}

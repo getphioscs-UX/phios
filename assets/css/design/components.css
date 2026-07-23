@@ -1,0 +1,73 @@
+/* PHI OS Design System — Components v1 */
+
+.phi-button,
+.btn {
+  min-height: 44px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.phi-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--phi-space-2);
+  padding: 0.75rem 1.15rem;
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-pill);
+  background: transparent;
+  color: var(--phi-text-primary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-sm);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+}
+
+.phi-button--primary {
+  border-color: var(--phi-action-primary);
+  background: var(--phi-action-primary);
+  color: var(--phi-text-inverse);
+}
+
+.phi-button--secondary {
+  background: var(--phi-surface-raised);
+}
+
+.phi-button--quiet {
+  border-color: transparent;
+}
+
+.phi-button:disabled,
+.phi-button[aria-disabled="true"],
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.phi-card {
+  padding: clamp(var(--phi-space-5), 3vw, var(--phi-space-8));
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-raised);
+  box-shadow: var(--phi-shadow-sm);
+}
+
+.phi-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding-inline: var(--phi-space-3);
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-pill);
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+  font-weight: 700;
+}
+
+.phi-divider {
+  border: 0;
+  border-top: 1px solid var(--phi-border-subtle);
+}

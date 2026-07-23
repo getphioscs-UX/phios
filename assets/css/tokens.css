@@ -1,4 +1,115 @@
 :root {
+  color-scheme: light;
+
+  /* Primitive palette */
+  --phi-color-neutral-0: #ffffff;
+  --phi-color-neutral-50: #faf9f6;
+  --phi-color-neutral-100: #f5f3ed;
+  --phi-color-neutral-200: #ece9e0;
+  --phi-color-neutral-300: #d8d5cd;
+  --phi-color-neutral-500: #737984;
+  --phi-color-neutral-700: #3f4652;
+  --phi-color-neutral-900: #11141a;
+  --phi-color-reality-500: #a94f31;
+  --phi-color-knowledge-500: #6553a6;
+  --phi-color-platform-500: #1f6c73;
+  --phi-color-accent-600: #242f7a;
+  --phi-color-success-600: #25755e;
+  --phi-color-warning-600: #9b6a18;
+  --phi-color-danger-600: #a23c37;
+
+  /* Semantic colors */
+  --phi-surface-canvas: var(--phi-color-neutral-100);
+  --phi-surface-raised: rgba(255, 255, 255, 0.66);
+  --phi-surface-solid: var(--phi-color-neutral-0);
+  --phi-surface-subtle: var(--phi-color-neutral-200);
+  --phi-text-primary: var(--phi-color-neutral-900);
+  --phi-text-secondary: #515866;
+  --phi-text-inverse: var(--phi-color-neutral-0);
+  --phi-border-subtle: rgba(17, 20, 26, 0.16);
+  --phi-border-strong: rgba(17, 20, 26, 0.30);
+  --phi-action-primary: var(--phi-color-accent-600);
+  --phi-action-reality: var(--phi-color-reality-500);
+  --phi-action-knowledge: var(--phi-color-knowledge-500);
+  --phi-action-platform: var(--phi-color-platform-500);
+  --phi-state-success: var(--phi-color-success-600);
+  --phi-state-warning: var(--phi-color-warning-600);
+  --phi-state-danger: var(--phi-color-danger-600);
+  --phi-focus-ring: rgba(36, 47, 122, 0.38);
+
+  /* Spacing: 4px base */
+  --phi-space-0: 0;
+  --phi-space-1: 0.25rem;
+  --phi-space-2: 0.5rem;
+  --phi-space-3: 0.75rem;
+  --phi-space-4: 1rem;
+  --phi-space-5: 1.25rem;
+  --phi-space-6: 1.5rem;
+  --phi-space-8: 2rem;
+  --phi-space-10: 2.5rem;
+  --phi-space-12: 3rem;
+  --phi-space-16: 4rem;
+  --phi-space-20: 5rem;
+  --phi-space-24: 6rem;
+
+  /* Typography */
+  --phi-font-display: "Newsreader", Georgia, serif;
+  --phi-font-body: "Inter", Arial, sans-serif;
+  --phi-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --phi-text-xs: 0.75rem;
+  --phi-text-sm: 0.875rem;
+  --phi-text-base: 1rem;
+  --phi-text-lg: 1.125rem;
+  --phi-text-xl: 1.25rem;
+  --phi-text-2xl: 1.5rem;
+  --phi-text-3xl: clamp(1.875rem, 3vw, 2.5rem);
+  --phi-text-4xl: clamp(2.5rem, 6vw, 5.5rem);
+  --phi-leading-tight: 1.08;
+  --phi-leading-body: 1.6;
+  --phi-leading-relaxed: 1.75;
+  --phi-tracking-tight: -0.03em;
+  --phi-tracking-label: 0.12em;
+
+  /* Containers */
+  --phi-container-reading: 46rem;
+  --phi-container-content: 72rem;
+  --phi-container-wide: 77.5rem;
+  --phi-container-workspace: 93.75rem;
+  --phi-gutter: clamp(1rem, 4vw, 4.5rem);
+
+  /* Radius */
+  --phi-radius-xs: 0.4rem;
+  --phi-radius-sm: 0.65rem;
+  --phi-radius-md: 1.2rem;
+  --phi-radius-lg: 2rem;
+  --phi-radius-pill: 999px;
+
+  /* Elevation */
+  --phi-shadow-sm: 0 8px 30px rgba(20, 24, 33, 0.05);
+  --phi-shadow-md: 0 18px 50px rgba(20, 24, 33, 0.08);
+  --phi-shadow-lg: 0 24px 80px rgba(25, 27, 33, 0.09);
+  --phi-shadow-overlay: 0 40px 120px rgba(17, 20, 26, 0.22);
+
+  /* Motion */
+  --phi-duration-instant: 100ms;
+  --phi-duration-fast: 160ms;
+  --phi-duration-base: 240ms;
+  --phi-duration-slow: 420ms;
+  --phi-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --phi-ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --phi-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* Z-index */
+  --phi-z-base: 0;
+  --phi-z-raised: 10;
+  --phi-z-sticky: 30;
+  --phi-z-dropdown: 100;
+  --phi-z-overlay: 500;
+  --phi-z-modal: 800;
+  --phi-z-toast: 900;
+  --phi-z-skip-link: 1000;
+
+  /* Legacy aliases: frozen until all pages migrate */
   --ink: #11141a;
   --ink-soft: #515866;
   --paper: #f5f3ed;
