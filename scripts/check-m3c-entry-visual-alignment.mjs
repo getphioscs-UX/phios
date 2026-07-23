@@ -23,8 +23,11 @@ async function exists(relativePath) {
 }
 
 async function sha256(relativePath) {
-  const buffer = await fs.readFile(path.join(root, relativePath));
-  return crypto.createHash('sha256').update(buffer).digest('hex');
+  const source = await fs.readFile(path.join(root, relativePath), 'utf8');
+  const normalized = source
+    .replace(/^\uFEFF/, '')
+    .replace(/\r\n?/g, '\n');
+  return crypto.createHash('sha256').update(normalized, 'utf8').digest('hex');
 }
 
 const requiredFiles = [
@@ -177,6 +180,12 @@ assert.deepEqual(
 assert.equal(registry.progress.automaticAdvance, false);
 assert.equal(registry.errorState.retryPreservesEntry, true);
 assert.equal(registry.errorState.providerFailureClearsRuntime, false);
+assert.deepEqual(registry.hashPolicy, {
+  algorithm: 'sha256',
+  encoding: 'utf8',
+  textNormalization: 'lf',
+  byteOrderMarkIgnored: true
+});
 
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   assert.equal(
