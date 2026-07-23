@@ -168,6 +168,11 @@
   font-weight: 600;
 }
 
+.coordinate-status[data-tone="error"] {
+  color: var(--phi-state-danger);
+  font-weight: 600;
+}
+
 .guided-entry-boundary {
   display: flex;
   gap: var(--phi-space-2);
@@ -186,6 +191,11 @@
   font-weight: 650;
 }
 
+.guided-entry-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .entry-question-label {
   display: block;
   margin-bottom: var(--phi-space-3);
@@ -193,6 +203,38 @@
   font-family: var(--phi-font-body);
   font-size: var(--phi-text-base);
   font-weight: 650;
+}
+
+.light-try__step {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.light-try__step[hidden] {
+  display: none;
+}
+
+.light-try__step .reality-coordinate-fieldset {
+  max-width: 64rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-primary, rgba(255, 255, 255, 0.58));
+}
+
+.light-try__orientation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: baseline;
+  margin: 0;
+  color: var(--phi-text-secondary);
+  font-family: var(--phi-font-body);
+  font-size: var(--phi-text-sm);
+}
+
+.light-try__orientation strong {
+  color: var(--phi-text-primary);
 }
 
 @media (max-width: 760px) {
@@ -208,6 +250,15 @@
 
   .reality-coordinate-options label,
   .reality-coordinate-options label > span {
+    width: 100%;
+  }
+
+  .guided-entry-actions {
+    justify-content: stretch;
+  }
+
+  .guided-entry-actions .phi-button {
+    justify-content: space-between;
     width: 100%;
   }
 }

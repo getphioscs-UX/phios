@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/assets/css/design/components.css">
   <link rel="stylesheet" href="/assets/css/design/motion.css">
   <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/guided-entry.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
 </head>
 <body class="public-page" data-page="reality-demo" data-public-section="reality">
@@ -47,7 +48,7 @@
             <span aria-hidden="true">↓</span>
           </a>
           <a class="public-button" href="#light-try">
-            <span data-i18n="demo.hero.try">Try one sentence</span>
+            <span data-i18n="demo.hero.try">Try the guided opening</span>
             <span aria-hidden="true">↓</span>
           </a>
         </div>
@@ -171,31 +172,125 @@
       <div class="public-container">
         <p class="public-eyebrow" data-i18n="demo.light.eyebrow">Light Try</p>
         <h2 class="public-title" data-i18n="demo.light.title">
-          Begin with one sentence.
+          Start with where change is most noticeable.
         </h2>
         <p class="public-lead" data-i18n="demo.light.lead">
-          Describe only what has recently started to change. The browser will
-          generate a lightweight orientation—not a diagnosis, recommendation
-          or saved Runtime.
+          Choose a Reality Coordinate first. Then describe the change in one
+          sentence. Nothing is sent or saved.
         </p>
         <form id="light-try-form" class="light-try" novalidate>
-          <label for="light-change" data-i18n="demo.light.label">
-            What has recently started to change?
-          </label>
-          <textarea
-            id="light-change"
-            name="change"
-            maxlength="480"
-            required
-            data-i18n-placeholder="demo.light.placeholder"
-            placeholder="For example: Important decisions in my team are now happening without me."
-          ></textarea>
-          <p id="light-try-error" class="form-message" role="alert" hidden></p>
-          <div class="public-actions">
-            <button class="public-button public-button--primary" type="submit">
-              <span data-i18n="demo.light.action">Generate light orientation</span>
-              <span aria-hidden="true">→</span>
-            </button>
+          <div
+            class="light-try__step"
+            id="light-coordinate-step"
+            data-step="coordinate"
+          >
+            <p class="public-eyebrow" data-i18n="demo.light.step1">
+              Step 1 of 2
+            </p>
+            <fieldset
+              class="reality-coordinate-fieldset"
+              id="light-reality-coordinates"
+              aria-describedby="light-coordinate-status"
+            >
+              <legend>
+                <strong data-i18n="demo.light.coordinateQuestion">
+                  Where is the change most noticeable?
+                </strong>
+                <small data-i18n="demo.light.coordinateHelp">
+                  Choose one, or up to two.
+                </small>
+              </legend>
+              <div class="reality-coordinate-options">
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="body_health">
+                  <span data-i18n="demo.light.coordinates.bodyHealth">Body &amp; Health</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="relationships_family">
+                  <span data-i18n="demo.light.coordinates.relationshipsFamily">Relationships &amp; Family</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="work_career">
+                  <span data-i18n="demo.light.coordinates.workCareer">Work &amp; Career</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="money_resources">
+                  <span data-i18n="demo.light.coordinates.moneyResources">Money &amp; Resources</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="learning_growth">
+                  <span data-i18n="demo.light.coordinates.learningGrowth">Learning &amp; Growth</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="meaning_purpose">
+                  <span data-i18n="demo.light.coordinates.meaningPurpose">Meaning &amp; Purpose</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="environment_place">
+                  <span data-i18n="demo.light.coordinates.environmentPlace">Environment &amp; Place</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="lightRealityCoordinate" value="unsure">
+                  <span data-i18n="demo.light.coordinates.unsure">I’m not sure yet</span>
+                </label>
+              </div>
+              <p
+                class="coordinate-status"
+                id="light-coordinate-status"
+                role="alert"
+                aria-live="polite"
+              ></p>
+            </fieldset>
+            <div class="public-actions">
+              <button
+                class="public-button public-button--primary"
+                id="light-coordinate-continue"
+                type="button"
+              >
+                <span data-i18n="demo.light.coordinateAction">
+                  Continue
+                </span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="light-try__step"
+            id="light-observation-step"
+            data-step="observation"
+            hidden
+          >
+            <p class="public-eyebrow" data-i18n="demo.light.step2">
+              Step 2 of 2
+            </p>
+            <p class="light-try__orientation">
+              <span data-i18n="demo.light.coordinateSummary">
+                Selected Reality Coordinate:
+              </span>
+              <strong id="light-coordinate-summary"></strong>
+            </p>
+            <label for="light-change" data-i18n="demo.light.label">
+              What has recently started to change?
+            </label>
+            <textarea
+              id="light-change"
+              name="change"
+              maxlength="480"
+              required
+              data-i18n-placeholder="demo.light.placeholder"
+              placeholder="For example: Important decisions in my team are now happening without me."
+            ></textarea>
+            <p id="light-try-error" class="form-message" role="alert" hidden></p>
+            <div class="public-actions">
+              <button class="public-button" id="light-coordinate-back" type="button">
+                <span data-i18n="demo.light.back">Change selection</span>
+              </button>
+              <button class="public-button public-button--primary" type="submit">
+                <span data-i18n="demo.light.action">Generate light orientation</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
           </div>
         </form>
 

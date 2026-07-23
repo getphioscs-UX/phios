@@ -12,6 +12,11 @@ import {
 
 import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
 import { initializeNewRuntimeEntry } from './modules/runtime-revision-initializer.js';
+import {
+  RUNTIME_PERSISTENCE_KEYS,
+  clearPersistedRuntime,
+  loadRuntimeSnapshot
+} from './modules/runtime-persistence.js';
 
 import {
   initializeI18n,
@@ -39,6 +44,22 @@ const REALITY_COORDINATES = Object.freeze([
 
 const REALITY_COORDINATE_MAXIMUM = 2;
 const REALITY_COORDINATE_UNSURE = 'unsure';
+const EXPLICIT_ENTRY_MODES = new Set([
+  'resume',
+  'revise',
+  'new-runtime'
+]);
+
+const REALITY_COORDINATE_TRANSLATION_KEYS = Object.freeze({
+  body_health: 'entry.guided.coordinates.bodyHealth',
+  relationships_family: 'entry.guided.coordinates.relationshipsFamily',
+  work_career: 'entry.guided.coordinates.workCareer',
+  money_resources: 'entry.guided.coordinates.moneyResources',
+  learning_growth: 'entry.guided.coordinates.learningGrowth',
+  meaning_purpose: 'entry.guided.coordinates.meaningPurpose',
+  environment_place: 'entry.guided.coordinates.environmentPlace',
+  unsure: 'entry.guided.coordinates.unsure'
+});
 
 function currentDepth() {
   return EVIDENCE_DEPTHS[state?.evidenceDepth] || EVIDENCE_DEPTHS.guided;
@@ -93,7 +114,14 @@ const els = {
   guided: qs('#guidedEntry'),
   coordinates: qs('#realityCoordinates'),
   coordinateStatus: qs('#coordinateStatus'),
+  coordinateContinue: qs('#coordinateContinueButton'),
   sendLabel: qs('#sendButtonLabel'),
+  questionLabel: qs('#entryQuestionLabel'),
+  recoveryGate: qs('#entryRecoveryGate'),
+  recoverySavedAt: qs('#entryRecoverySavedAt'),
+  resumeEntry: qs('#resumeEntryButton'),
+  startFreshEntry: qs('#startFreshEntryButton'),
+  runtimeWorkspaceLayout: qs('#runtimeWorkspaceLayout'),
   card: qs('#entryCard'),
   cardBody: qs('#entryCardBody'),
   continue: qs('#continueButton'),
@@ -110,6 +138,7 @@ const els = {
 };
 
 let state = createInitialState();
+let entryBooted = false;
 
 function createInitialState() {
   return {
@@ -124,6 +153,8 @@ function createInitialState() {
     answerBindings: [],
     evidenceDepth: 'guided',
     realityCoordinates: [],
+    guidedStep: 'coordinate',
+    pendingObservation: '',
     runtimeEntityId: entryInitialization?.runtimeEntityId || createId('rt'),
     runtimeEntryId: entryInitialization?.runtimeEntryId || createId('entry'),
     runtimeId: entryInitialization?.runtimeId || createId('runtime'),
@@ -143,6 +174,8 @@ function persistEntryState() {
     answerBindings: state.answerBindings,
     evidenceDepth: state.evidenceDepth,
     realityCoordinates: state.realityCoordinates,
+    guidedStep: state.guidedStep,
+    pendingObservation: state.pendingObservation,
     runtimeEntityId: state.runtimeEntityId,
     runtimeEntryId: state.runtimeEntryId,
     runtimeId: state.runtimeId,
@@ -155,6 +188,70 @@ function clearEntrySession() {
   sessionStorage.removeItem(SESSION.entry);
   sessionStorage.removeItem(SESSION.reconstruction);
   sessionStorage.removeItem(SESSION.reconstructionInquiry);
+}
+
+function clearBrowserRuntimeRecovery() {
+  RUNTIME_PERSISTENCE_KEYS.forEach(key => {
+    sessionStorage.removeItem(key);
+  });
+  clearPersistedRuntime();
+}
+
+function currentEntryMode() {
+  return cleanText(
+    new URLSearchParams(location.search).get('mode')
+  );
+}
+
+function hasRecoverableEntry() {
+  return Boolean(
+    getSession(SESSION.entryState) ||
+    getSession(SESSION.entry)
+  );
+}
+
+function recoverySavedAt() {
+  const snapshot = loadRuntimeSnapshot();
+  return cleanText(snapshot?.updatedAt || snapshot?.savedAt);
+}
+
+function formatRecoveryDate(value) {
+  const date = new Date(value);
+  if (!value || Number.isNaN(date.getTime())) {
+    return t('entry.recoveryGate.savedUnknown');
+  }
+
+  return t('entry.recoveryGate.savedAt', {
+    date: new Intl.DateTimeFormat(
+      document.documentElement.lang || 'en',
+      {
+        dateStyle: 'medium',
+        timeStyle: 'short'
+      }
+    ).format(date)
+  });
+}
+
+function renderRecoveryGate() {
+  if (els.recoverySavedAt) {
+    els.recoverySavedAt.textContent = formatRecoveryDate(
+      recoverySavedAt()
+    );
+  }
+}
+
+function showRecoveryGate() {
+  document.body.dataset.entryRecovery = 'awaiting-consent';
+  els.recoveryGate?.classList.remove('hidden');
+  els.runtimeWorkspaceLayout?.setAttribute('aria-hidden', 'true');
+  renderRecoveryGate();
+  els.resumeEntry?.focus();
+}
+
+function openEntryWorkspace() {
+  document.body.dataset.entryRecovery = 'ready';
+  els.recoveryGate?.classList.add('hidden');
+  els.runtimeWorkspaceLayout?.removeAttribute('aria-hidden');
 }
 
 function addMessage(
@@ -252,6 +349,40 @@ function renderPrimaryAction() {
       : t('common.continue');
 }
 
+function realityCoordinateName(value) {
+  const key = REALITY_COORDINATE_TRANSLATION_KEYS[value];
+  return key
+    ? t(key)
+    : '';
+}
+
+function renderEntryQuestion() {
+  if (!els.questionLabel) return;
+
+  const coordinates = state.realityCoordinates
+    .filter(value => value !== REALITY_COORDINATE_UNSURE)
+    .map(realityCoordinateName)
+    .filter(Boolean)
+    .join(' · ');
+
+  els.questionLabel.textContent = coordinates
+    ? t('entry.guided.questionWithCoordinate', { coordinates })
+    : t('entry.guided.question');
+}
+
+function renderEntryPhase() {
+  const opening =
+    state.guidedStep === 'coordinate' &&
+    state.round === 0 &&
+    !state.revision &&
+    !state.ready;
+
+  els.guided?.classList.toggle('hidden', !opening);
+  els.depth?.classList.toggle('hidden', opening);
+  els.chat?.classList.toggle('hidden', opening);
+  els.form?.classList.toggle('hidden', opening || state.ready);
+}
+
 function renderRealityCoordinates(notice = '') {
   if (!els.coordinates) return;
 
@@ -260,11 +391,12 @@ function renderRealityCoordinates(notice = '') {
   const maximumReached =
     selected.size >= REALITY_COORDINATE_MAXIMUM &&
     !unsureSelected;
+  const legacyRoundLock =
+    state.round > 0 || state.revision || state.ready;
   const locked =
-    state.round > 0 ||
-    state.processing ||
-    state.revision ||
-    state.ready;
+    state.guidedStep !== 'coordinate' ||
+    legacyRoundLock ||
+    state.processing;
 
   els.coordinates
     .querySelectorAll('input[name="realityCoordinate"]')
@@ -281,16 +413,21 @@ function renderRealityCoordinates(notice = '') {
       input.closest('label')?.classList.toggle('is-disabled', unavailable);
     });
 
-  els.guided?.classList.toggle(
-    'hidden',
-    state.round > 0 || state.revision || state.ready
-  );
+  renderEntryPhase();
+  renderEntryQuestion();
 
   if (!els.coordinateStatus) return;
 
-  els.coordinateStatus.dataset.tone = notice === 'limit' ? 'limit' : '';
+  els.coordinateStatus.dataset.tone =
+    notice === 'required' ? 'error' :
+    notice === 'limit' ? 'limit' :
+    '';
 
-  if (notice === 'limit') {
+  if (notice === 'required') {
+    els.coordinateStatus.textContent = t(
+      'entry.guided.requiredStatus'
+    );
+  } else if (notice === 'limit') {
     els.coordinateStatus.textContent = t('entry.guided.limitStatus', {
       max: REALITY_COORDINATE_MAXIMUM
     });
@@ -337,6 +474,37 @@ function updateRealityCoordinate(input) {
    */
   renderRealityCoordinates();
   persistEntryState();
+}
+
+function continueFromRealityCoordinate() {
+  if (!state.realityCoordinates.length) {
+    renderRealityCoordinates('required');
+    els.coordinates
+      ?.querySelector('input[name="realityCoordinate"]')
+      ?.focus();
+    return;
+  }
+
+  state.guidedStep = 'observation';
+  renderRealityCoordinates();
+
+  if (!state.messages.length) {
+    addMessage(
+      'assistant',
+      '',
+      true,
+      'entry.firstQuestion'
+    );
+  }
+
+  if (state.pendingObservation) {
+    els.input.value = state.pendingObservation;
+  }
+
+  renderEntryQuestion();
+  renderEntryPhase();
+  persistEntryState();
+  els.input.focus();
 }
 
 function normalizedText(
@@ -741,12 +909,12 @@ function applyResult(result) {
   );
 }
 
-function reset() {
+function reset(pendingObservation = '') {
   clearEntrySession();
   state = createInitialState();
+  state.pendingObservation = cleanText(pendingObservation);
 
   els.card.classList.remove('show');
-  els.form.classList.remove('hidden');
   els.meter.style.width = '0%';
   els.score.textContent = '0%';
   els.input.value = '';
@@ -755,19 +923,17 @@ function reset() {
   els.load.textContent = '';
 
   renderTarget('observed_change');
+  renderChat();
   renderRound();
   emptyLiveEntry();
-
-  addMessage(
-    'assistant',
-    '',
-    true,
-    'entry.firstQuestion'
-  );
 }
 
 async function submit(rawMessage) {
   if (state.processing || state.ready) return;
+  if (state.guidedStep === 'coordinate') {
+    continueFromRealityCoordinate();
+    return;
+  }
 
   const message = cleanText(rawMessage);
 
@@ -782,6 +948,7 @@ async function submit(rawMessage) {
   els.load.dataset.tone = '';
   els.input.removeAttribute('aria-invalid');
   state.messages = state.messages.filter(item => item.tone !== 'error');
+  state.pendingObservation = '';
 
   state.answerBindings.push({
     target: state.lastQuestionTarget,
@@ -855,7 +1022,10 @@ els.input.addEventListener('input', () => {
   els.input.removeAttribute('aria-invalid');
 });
 
-els.new.addEventListener('click', reset);
+els.new.addEventListener('click', () => {
+  clearBrowserRuntimeRecovery();
+  location.replace('/reality-entry');
+});
 
 els.depth?.addEventListener('change', event => {
   const value = cleanText(event.target?.value);
@@ -870,6 +1040,21 @@ els.coordinates?.addEventListener('change', event => {
     'input[name="realityCoordinate"]'
   );
   if (input) updateRealityCoordinate(input);
+});
+
+els.coordinateContinue?.addEventListener(
+  'click',
+  continueFromRealityCoordinate
+);
+
+els.resumeEntry?.addEventListener('click', () => {
+  openEntryWorkspace();
+  bootEntry();
+});
+
+els.startFreshEntry?.addEventListener('click', () => {
+  clearBrowserRuntimeRecovery();
+  location.replace('/reality-entry');
 });
 
 els.revise.addEventListener('click', () => {
@@ -902,6 +1087,11 @@ els.continue.addEventListener('click', () => {
 });
 
 onLocaleChange(() => {
+  if (!entryBooted) {
+    renderRecoveryGate();
+    return;
+  }
+
   renderChat();
   renderRound();
   renderPrimaryAction();
@@ -919,16 +1109,21 @@ onLocaleChange(() => {
   }
 });
 
-const initial = cleanText(
-  getSession(SESSION.initial) || ''
-);
+function bootEntry() {
+  if (entryBooted) return;
+  entryBooted = true;
+  openEntryWorkspace();
 
-if (initial) {
-  sessionStorage.removeItem(SESSION.initial);
-  reset();
-  submit(initial);
-} else if (!restoreEntryState()) {
-  reset();
+  const initial = cleanText(
+    getSession(SESSION.initial) || ''
+  );
+
+  if (initial) {
+    sessionStorage.removeItem(SESSION.initial);
+    reset(initial);
+  } else if (!restoreEntryState()) {
+    reset();
+  }
 }
 
 function restoreEntryState() {
@@ -962,7 +1157,20 @@ function restoreEntryState() {
           }))
         : []);
 
-  if (!result && restoredConversation.length === 0) return false;
+  const hasOpeningState = Boolean(
+    saved &&
+    (
+      Array.isArray(saved.realityCoordinates) ||
+      saved.guidedStep ||
+      cleanText(saved.pendingObservation)
+    )
+  );
+
+  if (
+    !result &&
+    restoredConversation.length === 0 &&
+    !hasOpeningState
+  ) return false;
 
   state = {
     ...createInitialState(),
@@ -999,6 +1207,14 @@ function restoreEntryState() {
     realityCoordinates: normalizeRealityCoordinates(
       saved?.realityCoordinates
     ),
+    guidedStep:
+      revisionRequested ||
+      result ||
+      Number(saved?.round || 0) > 0 ||
+      saved?.guidedStep === 'observation'
+        ? 'observation'
+        : 'coordinate',
+    pendingObservation: cleanText(saved?.pendingObservation),
     processing: false,
     revision: revisionRequested,
     ready: revisionRequested ? false : Boolean(result?.entryComplete)
@@ -1010,8 +1226,10 @@ function restoreEntryState() {
   if (depthInput) depthInput.checked = true;
 
   els.card.classList.remove('show');
-  els.form.classList.toggle('hidden', state.ready);
-  els.input.value = '';
+  els.input.value =
+    state.guidedStep === 'observation'
+      ? state.pendingObservation
+      : '';
   els.input.disabled = state.ready;
   els.send.disabled = state.ready;
   els.load.textContent = '';
@@ -1047,4 +1265,13 @@ function restoreEntryState() {
 
   persistEntryState();
   return true;
+}
+
+if (
+  hasRecoverableEntry() &&
+  !EXPLICIT_ENTRY_MODES.has(currentEntryMode())
+) {
+  showRecoveryGate();
+} else {
+  bootEntry();
 }

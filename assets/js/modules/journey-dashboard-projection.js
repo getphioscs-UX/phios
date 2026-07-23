@@ -96,7 +96,13 @@ export function buildJourneyDashboardProjection({
     hasActiveJourney,
     currentStage,
     currentStageNumber: current.number,
-    resumeRoute: hasActiveJourney ? current.route : '/reality-entry.html',
+    resumeRoute: hasActiveJourney
+      ? (
+          currentStage === 'entry'
+            ? `${current.route}?mode=resume`
+            : current.route
+        )
+      : '/reality-entry.html',
     completedCount: JOURNEY_DASHBOARD_STAGES.filter(stage => completed.has(stage.id)).length,
     completedStages: JOURNEY_DASHBOARD_STAGES.filter(stage => completed.has(stage.id)).map(stage => stage.id),
     nextStepStage: currentStage,

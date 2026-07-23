@@ -200,7 +200,7 @@ const publicExperience = Object.freeze({
       title: '观看一个变化如何变得可以导航。',
       lead: '探索固定案例、检查证据边界，并尝试一条轻量输入。本页不会建立正式 Runtime，也不会写入 Runtime Memory。',
       watch: '观看案例',
-      try: '尝试一句话'
+      try: '尝试引导式开场'
     },
     watch: {
       eyebrow: '观看 Demo',
@@ -233,8 +233,28 @@ const publicExperience = Object.freeze({
     },
     light: {
       eyebrow: '轻量尝试',
-      title: '从一句话开始。',
-      lead: '只描述最近开始发生的变化。浏览器会生成轻量定位，而不是诊断、建议或被保存的 Runtime。',
+      title: '先从变化最明显的方面开始。',
+      lead: '先选择现实坐标，再用一句话描述变化。所有内容都不会被发送或保存。',
+      step1: '第 1 步，共 2 步',
+      step2: '第 2 步，共 2 步',
+      coordinateQuestion: '变化主要在哪些方面最明显？',
+      coordinateHelp: '选择一个，或最多两个。',
+      coordinateAction: '继续',
+      coordinateRequired: '请至少选择一个现实坐标。',
+      coordinateLimit: '最多选择 {max} 个现实坐标。',
+      selectedStatus: '已选择 {count}/{max}',
+      coordinateSummary: '已选择的现实坐标：',
+      back: '更改选择',
+      coordinates: {
+        bodyHealth: '身体与健康',
+        relationshipsFamily: '关系与家庭',
+        workCareer: '工作与事业',
+        moneyResources: '金钱与资源',
+        learningGrowth: '学习与成长',
+        meaningPurpose: '意义与目的',
+        environmentPlace: '环境与地点',
+        unsure: '暂时不确定'
+      },
       label: '最近有什么开始发生变化？',
       placeholder: '例如：团队的重要决定现在开始在没有我的情况下发生。',
       action: '生成轻量定位',
@@ -247,7 +267,7 @@ const publicExperience = Object.freeze({
       readingCopy: '某种转移可能正在形成，但其原因与持续性仍然未知。',
       navigationTitle: '导航',
       navigationCopy: '在判断变化意味着什么之前，先选择一个小型证据收集步骤。',
-      boundary: 'Demo 边界：结果只停留在当前页面。它不会被发送到 API、保存到会话存储或写入 Runtime Memory。'
+      boundary: 'Demo 边界：选择与结果都只停留在当前页面，不会发送到 API、保存到浏览器储存或写入 Runtime Memory。'
     },
     conversion: {
       eyebrow: '由你决定是否继续',

@@ -285,5 +285,5 @@ assert.equal(
 );
 assert.match(packageJson.scripts.check, /check-m3c-guided-entry\.mjs/);
 
-console.log('✓ M3C-W3.1 Guided Entry passed: one-sentence start and optional Reality Coordinate are bilingual and mobile-ready.');
-console.log('  Coordinate remains reported orientation only: no Runtime payload, question count, path selection or Professional routing.');
+console.log('✓ M3C-W3.1 Guided Entry baseline passed: Reality Coordinate is bilingual, mobile-ready and evidence-bounded.');
+console.log('  Its historical optional opening is superseded by the required coordinate-first M3C-W3.2 interface; the Runtime boundary is unchanged.');

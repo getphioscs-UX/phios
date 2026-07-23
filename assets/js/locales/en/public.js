@@ -200,7 +200,7 @@ const publicExperience = Object.freeze({
       title: 'Watch how a change becomes navigable.',
       lead: 'Explore a fixed example, inspect the evidence boundary and try one lightweight input. Nothing on this page creates a formal Runtime or writes to Runtime Memory.',
       watch: 'Watch the case',
-      try: 'Try one sentence'
+      try: 'Try the guided opening'
     },
     watch: {
       eyebrow: 'Watch Demo',
@@ -233,8 +233,28 @@ const publicExperience = Object.freeze({
     },
     light: {
       eyebrow: 'Light Try',
-      title: 'Begin with one sentence.',
-      lead: 'Describe only what has recently started to change. The browser will generate a lightweight orientation—not a diagnosis, recommendation or saved Runtime.',
+      title: 'Start with where change is most noticeable.',
+      lead: 'Choose a Reality Coordinate first. Then describe the change in one sentence. Nothing is sent or saved.',
+      step1: 'Step 1 of 2',
+      step2: 'Step 2 of 2',
+      coordinateQuestion: 'Where is the change most noticeable?',
+      coordinateHelp: 'Choose one, or up to two.',
+      coordinateAction: 'Continue',
+      coordinateRequired: 'Choose at least one Reality Coordinate.',
+      coordinateLimit: 'Choose up to {max} Reality Coordinates.',
+      selectedStatus: '{count} of {max} selected',
+      coordinateSummary: 'Selected Reality Coordinate:',
+      back: 'Change selection',
+      coordinates: {
+        bodyHealth: 'Body & Health',
+        relationshipsFamily: 'Relationships & Family',
+        workCareer: 'Work & Career',
+        moneyResources: 'Money & Resources',
+        learningGrowth: 'Learning & Growth',
+        meaningPurpose: 'Meaning & Purpose',
+        environmentPlace: 'Environment & Place',
+        unsure: 'I’m not sure yet'
+      },
       label: 'What has recently started to change?',
       placeholder: 'For example: Important decisions in my team are now happening without me.',
       action: 'Generate light orientation',
@@ -247,7 +267,7 @@ const publicExperience = Object.freeze({
       readingCopy: 'A shift may be forming, but its cause and permanence remain unknown.',
       navigationTitle: 'Navigation',
       navigationCopy: 'Choose one small evidence-gathering step before deciding what the change means.',
-      boundary: 'Demo boundary: this result stays in the page only. It is not sent to an API, saved to session storage or written to Runtime Memory.'
+      boundary: 'Demo boundary: both selections and results stay in this page only. They are not sent to an API, saved to browser storage or written to Runtime Memory.'
     },
     conversion: {
       eyebrow: 'Continue when you choose',

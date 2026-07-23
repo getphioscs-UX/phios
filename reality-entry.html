@@ -27,9 +27,13 @@
   <link rel="stylesheet" href="/assets/css/design/visual-acceptance.css">
   <link rel="stylesheet" href="/assets/css/entry-visual-alignment.css">
   <link rel="stylesheet" href="/assets/css/guided-entry.css">
+  <link rel="stylesheet" href="/assets/css/entry-recovery-consent.css">
 </head>
 
-<body class="entry-workspace-page runtime-workspace-page">
+<body
+  class="entry-workspace-page runtime-workspace-page"
+  data-entry-recovery="checking"
+>
   <a
     class="skip-link"
     href="#entryWorkspace"
@@ -125,7 +129,76 @@
     </div>
   </header>
 
-  <div class="runtime-workspace-layout"><div data-runtime-workspace></div><div class="runtime-workspace-main">
+  <section
+    class="entry-recovery-gate hidden"
+    id="entryRecoveryGate"
+    aria-labelledby="entryRecoveryTitle"
+  >
+    <div class="entry-recovery-gate__card">
+      <p
+        class="workspace-kicker"
+        data-i18n="entry.recoveryGate.eyebrow"
+      >Protected recovery</p>
+      <h1
+        id="entryRecoveryTitle"
+        data-i18n="entry.recoveryGate.title"
+      >A previous Reality Entry is available.</h1>
+      <p data-i18n="entry.recoveryGate.copy">
+        PHI OS found a protected browser recovery copy. Its personal content
+        will remain hidden until you explicitly choose to resume it.
+      </p>
+
+      <div class="entry-recovery-gate__status">
+        <span data-i18n="entry.recoveryGate.savedLabel">
+          Browser recovery copy
+        </span>
+        <strong
+          id="entryRecoverySavedAt"
+          data-i18n="entry.recoveryGate.savedUnknown"
+        >Saved time unavailable</strong>
+      </div>
+
+      <div class="entry-recovery-gate__actions">
+        <button
+          class="phi-button phi-button--primary"
+          id="resumeEntryButton"
+          type="button"
+        >
+          <span data-i18n="entry.recoveryGate.resume">
+            Resume previous Entry
+          </span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <button
+          class="phi-button phi-button--secondary"
+          id="startFreshEntryButton"
+          type="button"
+        >
+          <span data-i18n="entry.recoveryGate.startFresh">
+            Start a new Entry
+          </span>
+        </button>
+        <a
+          class="workspace-text-button"
+          href="/reality-dashboard"
+          data-i18n="entry.recoveryGate.dashboard"
+        >Open Journey Dashboard</a>
+      </div>
+
+      <p class="entry-recovery-gate__boundary">
+        <span aria-hidden="true">○</span>
+        <span data-i18n="entry.recoveryGate.boundary">
+          Starting new removes only this browser recovery copy. It does not
+          delete a server-side Runtime or rewrite historical lineage.
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <div
+    class="runtime-workspace-layout"
+    id="runtimeWorkspaceLayout"
+  ><div data-runtime-workspace></div><div class="runtime-workspace-main">
   <main id="entryWorkspace" class="entry-workspace-shell">
     <section class="entry-intro-bar" aria-labelledby="entryTitle">
       <div>
@@ -187,15 +260,15 @@
           <header class="guided-entry-heading">
             <p
               class="workspace-kicker"
-              data-i18n="entry.guided.eyebrow"
-            >Guided Entry</p>
+              data-i18n="entry.guided.stepLabel"
+            >Opening step 1 of 2</p>
             <h3
               id="guidedEntryTitle"
               data-i18n="entry.guided.title"
-            >Begin with one sentence.</h3>
+            >Where is the change most noticeable?</h3>
             <p data-i18n="entry.guided.instruction">
-              Describe only what has recently started to change. You do not
-              need to explain why yet.
+              Choose one, or up to two, Reality Coordinates. No typing is
+              required in this first step.
             </p>
           </header>
 
@@ -204,6 +277,7 @@
             id="realityCoordinates"
             data-evidence-class="reported_orientation"
             data-runtime-effect="none"
+            aria-describedby="coordinateStatus guidedEntryBoundary"
           >
             <legend>
               <span data-i18n="entry.guided.coordinateLegend">
@@ -213,7 +287,7 @@
                 Where is the change most noticeable?
               </strong>
               <small data-i18n="entry.guided.coordinateHelp">
-                Optional · choose up to two.
+                Required · choose one or up to two.
               </small>
             </legend>
 
@@ -309,16 +383,29 @@
             ></p>
           </fieldset>
 
-          <p class="guided-entry-boundary">
+          <p class="guided-entry-boundary" id="guidedEntryBoundary">
             <span aria-hidden="true">○</span>
             <span data-i18n="entry.guided.boundary">
-              Orientation only. This selection does not classify evidence,
-              choose a path, or route you to a professional service.
+              This is the first orientation question. It does not diagnose,
+              select a professional service or call AI.
             </span>
           </p>
+
+          <div class="guided-entry-actions">
+            <button
+              class="phi-button phi-button--primary"
+              id="coordinateContinueButton"
+              type="button"
+            >
+              <span data-i18n="entry.guided.coordinateAction">
+                Continue to describe the change
+              </span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </section>
 
-        <fieldset class="evidence-depth" id="evidenceDepth">
+        <fieldset class="evidence-depth hidden" id="evidenceDepth">
           <legend data-i18n="entry.depthLegend">How much would you like PHI OS to ask?</legend>
           <label><input type="radio" name="evidenceDepth" value="quick"><span><strong data-i18n="entry.depthQuickTitle">Quick</strong><small data-i18n="entry.depthQuickText">3–4 essential questions</small></span></label>
           <label><input type="radio" name="evidenceDepth" value="guided" checked><span><strong data-i18n="entry.depthGuidedTitle">Guided</strong><small data-i18n="entry.depthGuidedText">5–7 balanced questions · recommended</small></span></label>
@@ -326,15 +413,16 @@
         </fieldset>
 
         <div
-          class="conversation-stage"
+          class="conversation-stage hidden"
           id="chat"
           aria-live="polite"
           aria-relevant="additions text"
         ></div>
 
-        <form class="entry-composer" id="chatForm">
+        <form class="entry-composer hidden" id="chatForm">
           <label
             class="entry-question-label"
+            id="entryQuestionLabel"
             for="messageInput"
             data-i18n="entry.guided.question"
           >What has recently started to change?</label>
