@@ -1,10 +1,10 @@
 {
   "id": "m3b-knowledge-release",
-  "version": "1.0.0-foundation",
-  "status": "foundation-ready-with-explicit-release-blockers",
+  "version": "1.1.0-free-preview-stripe-selection",
+  "status": "knowledge-release-ready-commerce-safely-locked",
   "baseline": {
     "branch": "main",
-    "commit": "b636895",
+    "commit": "941c650",
     "m3aProductionVerified": true
   },
   "bookOne": {
@@ -13,6 +13,9 @@
     "amountMinor": 8900,
     "displayPrice": "RM89",
     "manifest": "content/registry/book-1-manifest.json",
+    "freePreviewManifest": "content/registry/book-1-free-preview.json",
+    "freePreviewPages": 48,
+    "freePreviewSourceVerified": true,
     "manuscriptSourceAvailableInRepository": false,
     "fullReadingContentPublished": false
   },
@@ -44,12 +47,16 @@
       "chapterList": "awaiting-approved-manuscript"
     },
     "M3B-W3": {
-      "status": "structured-preview-ready-source-excerpt-pending",
+      "status": "official-48-page-web-preview-ready",
       "page": "book-one-preview.html",
-      "verbatimManuscriptExcerpt": false,
+      "source": "content/registry/book-1-free-preview.json",
+      "verbatimManuscriptExcerpt": true,
+      "pageCount": 48,
+      "publicFormat": "webp",
+      "sourcePdfPubliclyServed": false,
       "fullPdfDownloadExposed": false,
       "readingProgress": "preview-only-local-storage",
-      "figures": 5
+      "browserProgressCanGrantAccess": false
     },
     "M3B-W4": {
       "status": "contract-and-locked-route-ready",
@@ -85,18 +92,24 @@
       "englishTranslation": "content/knowledge/glossary-en.json"
     },
     "M3B-W8": {
-      "status": "owner-decision-required",
+      "status": "provider-selected-production-integration-pending",
       "comparison": "docs/knowledge/M3B-W8-PAYMENT-PROVIDER-COMPARISON.md",
       "checkoutAcceptsMoney": false,
-      "provider": null,
+      "provider": "stripe-malaysia",
+      "providerSelectedAt": "2026-07-23",
+      "paymentMethodsPlanned": [
+        "card",
+        "fpx"
+      ],
       "merchantCredentialsConfigured": false,
       "webhookConfigured": false,
+      "privateFullBookDeliveryConfigured": false,
       "receiptSenderConfigured": false
     }
   },
   "releaseBlockers": [
-    "Approved Book I manuscript is not present in the repository or supplied files.",
-    "Production payment provider and merchant account have not been selected.",
-    "Webhook secret, purchase persistence and receipt sender are not configured."
+    "The complete 109 MB Book I file is not connected to private authenticated delivery.",
+    "Stripe Malaysia merchant credentials are not configured.",
+    "Verified webhook processing, purchase persistence and receipt delivery are not configured."
   ]
 }

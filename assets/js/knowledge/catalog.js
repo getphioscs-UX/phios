@@ -33,12 +33,12 @@ export const LIBRARY_RESOURCES = Object.freeze([
     status: 'preview',
     href: '/book-one-preview',
     title: {
-      en: 'Book I · Structured Preview',
-      'zh-Hans': '第一册 · 结构试读'
+      en: 'Book I · Official 48-page Preview',
+      'zh-Hans': '第一册 · 官方 48 页试读'
     },
     description: {
-      en: 'A source-bounded preview built from the canonical Manifest, concepts and figures.',
-      'zh-Hans': '基于 Canonical Manifest、概念与图示建立的来源有边界试读。'
+      en: 'The approved first 48 pages of Book I in a protected web-reading format.',
+      'zh-Hans': '第一册获批公开的前 48 页，以受控网页阅读形式呈现。'
     }
   },
   {

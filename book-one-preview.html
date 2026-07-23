@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index,follow,noarchive">
-  <meta name="description" content="A free, source-bounded structured preview of Book I: How Reality Forms.">
+  <meta name="description" content="Read the official first 48 pages of Book I: How Reality Forms.">
   <title data-i18n="knowledge.preview.metaTitle">Book I Preview — How Reality Forms</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,11 +21,16 @@
   <main id="preview-main">
     <section class="knowledge-hero">
       <div class="knowledge-shell">
-        <p class="knowledge-eyebrow" data-i18n="knowledge.preview.eyebrow">Free structured preview</p>
-        <h1 data-i18n="knowledge.preview.title">Begin with the architecture of Reality formation.</h1>
+        <p class="knowledge-eyebrow" data-i18n="knowledge.preview.eyebrow">Official 48-page free preview</p>
+        <h1 data-i18n="knowledge.preview.title">Read the opening of How Reality Forms.</h1>
         <p class="knowledge-hero__lead" data-i18n="knowledge.preview.lead">
-          This preview uses the registered Book I Manifest, concepts and public figures. It is not presented as a verbatim extract from the 462-page manuscript.
+          The approved first 48 pages of Book I, presented as a web reader without exposing the original PDF.
         </p>
+        <div class="knowledge-chip-row preview-hero__meta">
+          <span class="knowledge-chip" data-i18n="knowledge.preview.pageCount">48 pages</span>
+          <span class="knowledge-chip" data-i18n="knowledge.preview.sourceLanguage">Original language · Chinese</span>
+          <span class="knowledge-chip">Teresa Lee</span>
+        </div>
       </div>
     </section>
 
@@ -33,50 +38,30 @@
       <div class="knowledge-shell preview-layout">
         <aside class="preview-toc">
           <strong data-i18n="knowledge.preview.toc">On this preview</strong>
-          <ol>
-            <li><a href="#preview-introduction" data-i18n="knowledge.preview.intro">Introduction</a></li>
-            <li><a href="#preview-why" data-i18n="knowledge.preview.why">Why Reality Navigation</a></li>
-            <li><a href="#preview-opening" data-i18n="knowledge.preview.opening">Part I opening</a></li>
-            <li><a href="#preview-grammar" data-i18n="knowledge.preview.grammar">Reality Grammar</a></li>
-            <li><a href="#preview-figures" data-i18n="knowledge.preview.figures">Selected figures</a></li>
-          </ol>
+          <ol data-preview-toc></ol>
           <div class="preview-progress">
             <span><span data-i18n="knowledge.preview.progress">Reading progress</span> · <strong data-preview-progress-value>0%</strong></span>
             <progress data-preview-progress max="100" value="0">0%</progress>
           </div>
+          <button class="knowledge-link-button preview-resume" type="button" data-preview-resume hidden>
+            <span data-i18n="knowledge.preview.resume">Continue from page</span>
+            <span data-preview-resume-page></span>
+          </button>
+          <p class="preview-source-note" data-i18n="knowledge.preview.sourceNotice">
+            The original preview PDF and the complete Book I PDF are not served publicly.
+          </p>
         </aside>
         <article class="preview-article">
-          <section class="preview-section" id="preview-introduction">
-            <p class="knowledge-eyebrow" data-i18n="knowledge.preview.intro">Introduction</p>
-            <h2 data-i18n="knowledge.preview.introTitle">Reality is not a static object.</h2>
-            <p data-i18n="knowledge.preview.introBody">The canonical scope describes Reality as forming through difference, constraint, structure, projection, time, Runtime, embodiment and conscious continuity.</p>
-          </section>
-          <section class="preview-section" id="preview-why">
-            <p class="knowledge-eyebrow" data-i18n="knowledge.preview.why">Why Reality Navigation</p>
-            <h2 data-i18n="knowledge.preview.whyTitle">Why Reality Navigation</h2>
-            <p data-i18n="knowledge.preview.whyBody">Navigation begins when a changing Reality can be located without confusing evidence, interpretation and certainty.</p>
-          </section>
-          <section class="preview-section" id="preview-opening">
-            <p class="knowledge-eyebrow" data-i18n="knowledge.preview.opening">Part I opening</p>
-            <h2 data-i18n="knowledge.preview.openingTitle">Part I · Reality Physics</h2>
-            <p data-i18n="knowledge.preview.openingBody">Part I organizes difference, constraint, structure, field, coordinate and navigation.</p>
-          </section>
-          <section class="preview-section" id="preview-grammar">
-            <p class="knowledge-eyebrow" data-i18n="knowledge.preview.grammar">Reality Grammar</p>
-            <h2 data-i18n="knowledge.preview.grammarTitle">From Difference to Continuity</h2>
-            <p data-i18n="knowledge.preview.grammarBody">Sixteen registered stages connect formation, activation, internalization and reorganization.</p>
-            <div class="knowledge-chip-row" data-reality-grammar></div>
-          </section>
-          <section class="preview-section" id="preview-figures">
-            <p class="knowledge-eyebrow" data-i18n="knowledge.preview.figures">Selected figures</p>
-            <h2 data-i18n="knowledge.preview.figuresTitle">Five public figures</h2>
-            <p data-i18n="knowledge.preview.figuresBody">Web-resolution figures provide visual orientation.</p>
-            <div class="figure-grid" data-preview-figures></div>
-          </section>
+          <nav class="preview-page-controls" aria-label="Preview page navigation" data-i18n-aria-label="knowledge.preview.navigationLabel">
+            <button class="knowledge-link-button" type="button" data-preview-previous data-i18n="knowledge.preview.previous">Previous</button>
+            <strong data-preview-page-status>Page 1 of 48</strong>
+            <button class="knowledge-link-button" type="button" data-preview-next data-i18n="knowledge.preview.next">Next</button>
+          </nav>
+          <div class="preview-pages" data-preview-pages aria-live="polite"></div>
           <section class="access-panel">
             <p class="knowledge-eyebrow" data-i18n="knowledge.common.paid">Paid book</p>
             <h2 data-i18n="knowledge.preview.boundaryTitle">Continue in the complete Book I</h2>
-            <p data-i18n="knowledge.preview.boundaryBody">The full reading route remains protected.</p>
+            <p data-i18n="knowledge.preview.boundaryBody">The free preview ends at page 48. Complete Book I remains protected by verified purchase access.</p>
             <div class="knowledge-actions">
               <a class="knowledge-action knowledge-action--primary" href="/book-one" data-i18n="knowledge.preview.productAction">View Book I · RM89</a>
               <a class="knowledge-action" href="/read/book-one/" data-i18n="knowledge.preview.fullAction">Go to protected reading</a>

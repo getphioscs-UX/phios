@@ -1,40 +1,42 @@
-const PREVIEW_KEY = 'phios:book-one:preview-progress:v1';
+const PREVIEW_KEY = 'phios:book-one:preview-progress:v2';
 
-function safeRead(key) {
+function normalizePage(value, pageCount) {
+  const page = Number.parseInt(value, 10);
+  return Number.isFinite(page)
+    ? Math.min(pageCount, Math.max(1, page))
+    : 1;
+}
+
+export function readPreviewProgress(pageCount = 48) {
   try {
-    const value = Number.parseInt(window.localStorage.getItem(key) || '0', 10);
-    return Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : 0;
+    const stored = JSON.parse(window.localStorage.getItem(PREVIEW_KEY) || '{}');
+    return {
+      page: normalizePage(stored.page, pageCount),
+      furthestPage: normalizePage(stored.furthestPage, pageCount)
+    };
   } catch {
-    return 0;
+    return { page: 1, furthestPage: 1 };
   }
 }
 
-function safeWrite(key, value) {
+export function savePreviewProgress(page, pageCount = 48) {
+  const current = readPreviewProgress(pageCount);
+  const normalizedPage = normalizePage(page, pageCount);
+  const state = {
+    page: normalizedPage,
+    furthestPage: Math.max(current.furthestPage, normalizedPage)
+  };
+
   try {
-    window.localStorage.setItem(key, String(value));
+    window.localStorage.setItem(PREVIEW_KEY, JSON.stringify(state));
   } catch {
     // Reading progress is optional and never controls access.
   }
+
+  return state;
 }
 
-export function initializePreviewProgress() {
-  const meter = document.querySelector('[data-preview-progress]');
-  const output = document.querySelector('[data-preview-progress-value]');
-
-  if (!meter || !output) return;
-
-  const update = () => {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = scrollable > 0
-      ? Math.round((window.scrollY / scrollable) * 100)
-      : 100;
-    const value = Math.max(safeRead(PREVIEW_KEY), Math.min(100, progress));
-
-    meter.value = value;
-    output.textContent = `${value}%`;
-    safeWrite(PREVIEW_KEY, value);
-  };
-
-  update();
-  window.addEventListener('scroll', update, { passive: true });
+export function previewProgressPercent(page, pageCount = 48) {
+  const normalizedPage = normalizePage(page, pageCount);
+  return Math.round((normalizedPage / pageCount) * 100);
 }

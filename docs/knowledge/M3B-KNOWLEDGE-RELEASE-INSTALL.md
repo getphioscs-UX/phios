@@ -39,10 +39,24 @@ Expected access response:
 }
 ```
 
-This locked response is intentional until the owner selects and configures a real payment provider.
+This locked response is intentional. Stripe Malaysia is selected, but checkout
+must remain disabled until the production prerequisites are configured.
 
 ## Content and payment blockers
 
-- The canonical Manifest references a 462-page Book I source PDF, but that file is not present in the repository or supplied package.
-- Therefore the preview is explicitly a registered-structure preview, not fabricated or verbatim manuscript text.
-- Checkout does not accept money until the provider, merchant account, webhook secret, D1 purchase storage and receipt sender are configured.
+- The supplied 48-page free-preview PDF is rendered as 48 WebP page images.
+- Neither the supplied preview PDF nor the complete Book I PDF is deployed as a public download.
+- The complete 109 MB Book I file still needs private authenticated delivery.
+- Checkout does not accept money until Stripe credentials, verified webhooks,
+  D1 purchase storage, private delivery and receipt sending are configured.
+
+## Preview acceptance
+
+After deployment, open:
+
+```text
+https://phios-github.pages.dev/book-one-preview
+```
+
+Confirm page 1 and page 48 load, the bilingual directory changes language,
+Previous / Next navigation works, and a refresh preserves reading progress.
