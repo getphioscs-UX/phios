@@ -1,0 +1,59 @@
+PHI OS — M2-W4 Migration System
+
+BASELINE
+Install only after M2-W3 Cloudflare D1 Schema has been deployed.
+
+INSTALL
+1. Extract this ZIP.
+2. Copy the CONTENTS of M2-W4-Migration-System into the phios repo root.
+3. Allow package.json and the M2-W3 documentation file to be replaced.
+4. Run:
+
+   npm run migrate:check
+   npm run check:runtime-migrations
+   npm run check
+
+EXPECTED
+✓ M2-W4 immutable migrations, history, checksums, ordering, runner, and schema drift checks passed.
+
+IMPORTANT
+- db/migrations/0001_platform_foundation.sql remains unchanged.
+- 0002_initial_runtime.sql is the new Runtime migration.
+- After deployment, never edit 0001 or 0002; add 0003 for the next change.
+- A successful Pages deployment does not apply a D1 migration automatically.
+- Do not add a fake database_id.
+- No Reading, Navigation, or Runtime Stage logic is changed.
+
+LOCAL OPTIONAL
+Apply the migrations only to an explicitly named local SQLite file:
+
+   npm run migrate:local -- .local/runtime-development.sqlite
+
+CLOUDFLARE D1
+After creating or identifying the real D1 database, put its real database_id
+under binding RUNTIME_DB in wrangler.jsonc. Then inspect and apply:
+
+   npx wrangler d1 migrations list phios-runtime --remote
+   npx wrangler d1 migrations apply phios-runtime --remote
+
+Replace phios-runtime if the actual D1 database has a different name.
+
+FILES
+- db/migrations/0002_initial_runtime.sql
+- db/schema/runtime-migration-history.sql
+- content/registry/runtime-migrations.json
+- functions/runtime/migrations/index.js
+- functions/runtime/migrations/migration-runner.js
+- functions/runtime/migrations/migration-validation.js
+- scripts/runtime-migration-loader.mjs
+- scripts/run-runtime-migrations.mjs
+- scripts/check-runtime-migrations.mjs
+- docs/runtime/M2-W4-MIGRATION-SYSTEM.md
+- docs/runtime/M2-W3-CLOUDFLARE-D1-SCHEMA.md
+- package.json
+
+COMMIT
+git add db/migrations/0002_initial_runtime.sql db/schema/runtime-migration-history.sql content/registry/runtime-migrations.json functions/runtime/migrations scripts/runtime-migration-loader.mjs scripts/run-runtime-migrations.mjs scripts/check-runtime-migrations.mjs docs/runtime/M2-W4-MIGRATION-SYSTEM.md docs/runtime/M2-W3-CLOUDFLARE-D1-SCHEMA.md package.json
+git commit -m "Complete M2-W4 migration system"
+git push origin main
+

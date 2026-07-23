@@ -1,0 +1,35 @@
+{
+  "registry_id": "phi-os.runtime-migrations.v1",
+  "version": "1.0.0",
+  "status": "active",
+  "checksum_algorithm": "sha256-sql-canonical-v1",
+  "history_table": "runtime_migration_history",
+  "wrangler_history_table": "d1_migrations",
+  "migrations_directory": "db/migrations",
+  "rules": {
+    "immutable_after_deployment": true,
+    "strictly_sequential": true,
+    "missing_versions_forbidden": true,
+    "duplicate_versions_forbidden": true,
+    "checksum_drift_forbidden": true,
+    "schema_mismatch_forbidden": true
+  },
+  "migrations": [
+    {
+      "version": 1,
+      "name": "platform_foundation",
+      "file": "db/migrations/0001_platform_foundation.sql",
+      "checksum": "d17048dd73fa981937f33df590393a04a24773097dac0b880dd1327e5812c8ea",
+      "schema_id": "phi-os.platform-foundation.v1",
+      "immutable": true
+    },
+    {
+      "version": 2,
+      "name": "initial_runtime",
+      "file": "db/migrations/0002_initial_runtime.sql",
+      "checksum": "7119713356a032b414f7815bb35dd49330f65465122ec810e5061ecca059a930",
+      "schema_id": "phi-os.runtime-d1-schema.v1",
+      "immutable": true
+    }
+  ]
+}

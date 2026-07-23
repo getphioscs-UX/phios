@@ -75,9 +75,10 @@ The production binding remains:
 RUNTIME_DB
 ```
 
-No `database_id` is added to `wrangler.jsonc` in M2-W3. M2-W4 will create the
-real D1 database, add the real binding configuration, and apply the numbered
-migration.
+No placeholder `database_id` is added to `wrangler.jsonc`. M2-W4 supplies the
+numbered migration, Runner, and deployment checks. Creating the real D1
+database, adding its real ID, and applying the migration remain explicit
+Cloudflare production actions.
 
 ## Verification
 
