@@ -8,7 +8,7 @@ import {
 const NAVIGATION = Object.freeze([
   { id: 'discover', href: '/', key: 'publicShell.nav.discover' },
   { id: 'knowledge', href: '/library', key: 'publicShell.nav.knowledge' },
-  { id: 'reality', href: '/reality-demo', key: 'publicShell.nav.realityJourney' },
+  { id: 'reality', href: '/reality-journey', key: 'publicShell.nav.realityJourney' },
   { id: 'professional', href: '/services', key: 'publicShell.nav.professional' },
   { id: 'about', href: '/about', key: 'publicShell.nav.about' }
 ]);
@@ -17,7 +17,7 @@ const FOOTER_LINKS = Object.freeze([
   { href: '/thesis', key: 'publicShell.footer.thesis' },
   { href: '/explore#books', key: 'publicShell.footer.books' },
   { href: '/explore', key: 'publicShell.footer.atlas' },
-  { href: '/reality-demo', key: 'publicShell.footer.realityJourney' },
+  { href: '/reality-journey', key: 'publicShell.footer.realityJourney' },
   { href: '/services', key: 'publicShell.footer.services' },
   { href: '/privacy', key: 'publicShell.footer.privacy' },
   { href: '/terms', key: 'publicShell.footer.terms' },
@@ -176,7 +176,7 @@ function activeSectionFromPage() {
     path === '/checkout' ||
     path.startsWith('/read/book-one')
   ) return 'knowledge';
-  if (path.startsWith('/reality-demo')) return 'reality';
+  if (path === '/reality-journey' || path === '/reality-demo') return 'reality';
   if (path === '/services' || path === '/professional-boundary') return 'professional';
   if (path === '/about') return 'about';
 

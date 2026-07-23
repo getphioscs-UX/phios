@@ -1,0 +1,112 @@
+{
+  "id": "m3c-public-journey",
+  "version": "1.0.0-w1",
+  "status": "w1-journey-overview-ready",
+  "baseline": {
+    "branch": "main",
+    "commit": "b5ac9b188d3bd065575551cbf4d7573f14099c98",
+    "runtimeContractsFrozen": true,
+    "runtimeInfrastructureVerified": true,
+    "m3aPublicExperienceReady": true,
+    "m3bKnowledgeReleaseState": "commerce-pending"
+  },
+  "overview": {
+    "page": "reality-journey.html",
+    "publicRoute": "/reality-journey",
+    "startRoute": "/reality-entry",
+    "demoRoute": "/reality-demo",
+    "writesRuntime": false,
+    "storesJourneyContent": false,
+    "callsRuntimeApi": false,
+    "bilingual": [
+      "en",
+      "zh-Hans"
+    ]
+  },
+  "stages": [
+    {
+      "id": "entry",
+      "number": "01",
+      "route": "/reality-entry",
+      "contractId": "runtime-entry",
+      "contractVersion": "1.0.0",
+      "customerRole": "Report the observed change and what remains unclear.",
+      "automaticAdvance": false
+    },
+    {
+      "id": "reconstruction",
+      "number": "02",
+      "route": "/reality-reconstruction",
+      "contractId": "reconstruction",
+      "contractVersion": "1.0.0",
+      "customerRole": "Complete the bounded evidence reconstruction.",
+      "automaticAdvance": false
+    },
+    {
+      "id": "reading",
+      "number": "03",
+      "route": "/reality-reading",
+      "contractId": "reality-reading",
+      "contractVersion": "1.0.0",
+      "customerRole": "Review evidence-bounded interpretation and Unknown Reality.",
+      "automaticAdvance": false
+    },
+    {
+      "id": "navigation",
+      "number": "04",
+      "route": "/reality-navigation",
+      "contractId": "navigation",
+      "contractVersion": "1.0.0",
+      "customerRole": "Select a bounded direction and its review conditions.",
+      "automaticAdvance": false
+    },
+    {
+      "id": "review",
+      "number": "05",
+      "route": "/reality-review",
+      "contractId": "review",
+      "contractVersion": "1.0.0",
+      "customerRole": "Report what changed after the selected direction.",
+      "automaticAdvance": false
+    },
+    {
+      "id": "memory",
+      "number": "06",
+      "route": "/my-reality#memory",
+      "contractId": "runtime-memory",
+      "contractVersion": "1.0.0",
+      "customerRole": "Inspect the reported outcome and unresolved Reality prepared for memory.",
+      "automaticAdvance": false
+    },
+    {
+      "id": "continuity",
+      "number": "07",
+      "route": "/my-reality#continuity",
+      "contractId": "continuity",
+      "contractVersion": "1.0.0",
+      "customerRole": "Explicitly choose how the Runtime continues.",
+      "automaticAdvance": false
+    }
+  ],
+  "boundaries": {
+    "evidenceInterpretationSeparated": true,
+    "unknownRealityPreserved": true,
+    "providerOutputCanBecomeObservedEvidence": false,
+    "aiAuthorityClaimed": false,
+    "medicalDiagnosisProvided": false,
+    "legalAdviceProvided": false,
+    "financialRecommendationProvided": false,
+    "emergencyServiceProvided": false,
+    "userChoiceRequiredForTransition": true,
+    "lineageRewritten": false
+  },
+  "acceptance": {
+    "runtimeContractsChanged": false,
+    "runtimeSchemasChanged": false,
+    "d1BindingChanged": false,
+    "runtimeMigrationsChanged": false,
+    "publicNavigationPointsToOverview": true,
+    "mobileContractsPresent": true,
+    "publicOverviewStoresJourneyContent": false
+  }
+}

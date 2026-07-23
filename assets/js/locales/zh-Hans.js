@@ -11,6 +11,7 @@ import about from './zh-Hans/about.js';
 import thesis from './zh-Hans/thesis.js';
 import publicExperience from './zh-Hans/public.js';
 import knowledgeRelease from './zh-Hans/knowledge.js';
+import journeyPublic from './zh-Hans/journey.js';
 
 const dictionary = Object.freeze({
   ...shared,
@@ -24,7 +25,8 @@ const dictionary = Object.freeze({
   ...about,
   ...thesis,
   ...publicExperience,
-  ...knowledgeRelease
+  ...knowledgeRelease,
+  ...journeyPublic
 });
 
 export default dictionary;
