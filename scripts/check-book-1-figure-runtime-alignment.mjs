@@ -50,15 +50,43 @@ for (const figureNumber of ['3A', '3B', '4D']) {
 }
 
 const atlasSource = fs.readFileSync('explore.html', 'utf8');
+const atlasScript = fs.readFileSync('assets/js/pages/atlas.js', 'utf8');
 for (const figureNumber of ['3A', '3B', '4D']) {
   assert.ok(
-    atlasSource.includes(`/assets/images/figures/book-1/${figureNumber}.png`),
-    `Atlas must expose complete Figure ${figureNumber}`
+    atlasScript.includes(
+      `/assets/images/figures/book-1/web/${figureNumber}.webp`
+    ),
+    `Atlas must expose public WebP Figure ${figureNumber}`
+  );
+  const publicFigure = `assets/images/figures/book-1/web/${figureNumber}.webp`;
+  assert.ok(
+    fs.existsSync(publicFigure),
+    `Atlas public Figure ${figureNumber} asset must exist`
+  );
+  assert.ok(
+    fs.statSync(publicFigure).size > 0,
+    `Atlas public Figure ${figureNumber} asset must not be empty`
   );
 }
-assert.match(atlasSource, /atlas\.parts\.part3\.figure3aTitle/);
-assert.match(atlasSource, /atlas\.parts\.part3\.figure3bTitle/);
-assert.match(atlasSource, /atlas\.parts\.part4\.figure4dTitle/);
+for (const part of [1, 2, 3, 4, 5]) {
+  assert.match(
+    atlasSource,
+    new RegExp(`data-atlas-figures=["']${part}["']`),
+    `Atlas Part ${part} must expose its Figure container`
+  );
+}
+for (const key of ['figure3a', 'figure3b', 'figure4d']) {
+  assert.match(
+    atlasScript,
+    new RegExp(`["']${key}["']`),
+    `Atlas Figure configuration must include ${key}`
+  );
+}
+assert.ok(
+  atlasScript.indexOf('const atlasFigureConfig') <
+    atlasScript.indexOf('renderAtlasFigures();'),
+  'Atlas Figure configuration must be initialized before the first render'
+);
 assert.deepEqual(RUNTIME_COORDINATES.map(item => item.id), registry.contracts.runtimeCoordinates);
 assert.deepEqual(CARRIER_ORGANIZATION_LAYERS.map(item => item.id), registry.contracts.carrierOrganization);
 assert.deepEqual(CARRIER_CONFIGURATION_LAYERS.map(item => item.id), registry.contracts.carrierConfiguration);

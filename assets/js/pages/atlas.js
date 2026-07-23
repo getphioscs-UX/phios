@@ -131,8 +131,6 @@ updateHeaderState();
 window.addEventListener('hashchange', openHashLayer);
 window.addEventListener('scroll', updateHeaderState, { passive: true });
 
-renderAtlasFigures();
-
 const atlasFigureConfig = Object.freeze({
   1: [
     ['1A', '/assets/images/figures/book-1/web/1A.webp', 'figure1a'],
@@ -215,6 +213,7 @@ function renderAtlasFigures() {
   });
 }
 
+renderAtlasFigures();
 
 onLocaleChange(() => {
   updateFilterStatus();
