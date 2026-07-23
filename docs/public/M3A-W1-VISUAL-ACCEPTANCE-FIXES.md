@@ -2,7 +2,7 @@
 
 ## Baselines
 
-- Code baseline: `main` at `96f98c1e1d0c5395fb55f27e5a44ee8c3d9545b8`
+- Round 2 code baseline: `main` at `a17e5276c7010f45b1da1b8e0ad4fe1b25a8ff14`
 - Production visual baseline: `ad5de1cd11a72ef71550d165d444436b81a99314`
 - Audited pages: Home, About, Atlas, Entry, Reading, Navigation
 
@@ -14,6 +14,8 @@ This patch adds a final compatibility stylesheet to the six audited pages. It:
 - converts the Entry stage indicator to five bounded grid tracks;
 - gives the Runtime sidebar an explicit high-contrast dark-surface palette;
 - enforces a 44px minimum target on the audited compact controls.
+- explicitly covers the page-specific About language buttons after the
+  1363px Production retest found them at approximately 24–31px by 33px.
 
 The patch does not change Runtime JavaScript, APIs, storage keys, state,
 element IDs, or translation keys.

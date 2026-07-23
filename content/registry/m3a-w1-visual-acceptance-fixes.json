@@ -1,11 +1,11 @@
 {
   "milestone": "M3A-W1-Visual-Acceptance-Fixes",
   "version": "1.0.0",
-  "status": "implementation-ready-for-production-retest",
+  "status": "round-2-implementation-ready-for-production-retest",
   "repository": "getphioscs-UX/phios",
   "codeBaseline": {
     "branch": "main",
-    "commit": "96f98c1e1d0c5395fb55f27e5a44ee8c3d9545b8"
+    "commit": "a17e5276c7010f45b1da1b8e0ad4fe1b25a8ff14"
   },
   "visualBaseline": {
     "commit": "ad5de1cd11a72ef71550d165d444436b81a99314",
@@ -22,7 +22,8 @@
     "Hide legacy skip links until keyboard focus",
     "Prevent Entry five-stage progress labels from overlapping",
     "Restore explicit high-contrast Runtime sidebar text",
-    "Raise audited language, filter, domain, and evidence controls to a 44px minimum touch target"
+    "Raise audited language, filter, domain, and evidence controls to a 44px minimum touch target",
+    "Include About's page-specific language-switch buttons in the 44px touch-target contract"
   ],
   "implementation": {
     "stylesheet": "assets/css/design/visual-acceptance.css",
@@ -44,5 +45,23 @@
     "API route",
     "runtime state"
   ],
+  "productionRetest": {
+    "viewport": "1363px",
+    "result": "failed",
+    "passed": [
+      "Skip link default and keyboard-focus states",
+      "Entry five-stage label spacing",
+      "Runtime sidebar contrast",
+      "Atlas filter and domain controls",
+      "Entry evidence controls",
+      "English and Chinese switching",
+      "No page-level horizontal overflow",
+      "No PHI OS console errors"
+    ],
+    "failed": [
+      "About language buttons below 44px"
+    ],
+    "environmentLimitation": "The controlled browser could not set exact 360px, 768px, and 1440px viewports."
+  },
   "productionAcceptanceRequired": true
 }

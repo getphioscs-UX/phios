@@ -4,7 +4,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const baseline = "96f98c1";
+const baseline = "a17e527";
 const pages = [
   "index.html",
   "about.html",
@@ -53,6 +53,10 @@ const required = [
 ];
 for (const [needle, label] of required) {
   if (!css.includes(needle)) fail(`Missing ${label}`);
+}
+
+if (!/\.language-switch button,[\s\S]*?min-height:\s*44px/.test(css)) {
+  fail("About language buttons are not covered by the 44px touch-target contract");
 }
 
 const changed = execFileSync("git", ["diff", "--name-only", baseline], {
