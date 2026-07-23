@@ -6,10 +6,16 @@ import { pathToFileURL } from 'node:url';
 
 const root = process.cwd();
 
-async function read(relativePath) {
-  return (await fs.readFile(path.join(root, relativePath), 'utf8'))
+function normalizeText(source) {
+  return source
     .replace(/^\uFEFF/, '')
     .replace(/\r\n?/g, '\n');
+}
+
+async function read(relativePath) {
+  return normalizeText(
+    await fs.readFile(path.join(root, relativePath), 'utf8')
+  );
 }
 
 async function readJson(relativePath) {
@@ -26,8 +32,10 @@ async function exists(relativePath) {
 }
 
 async function sha256(relativePath) {
-  const bytes = await fs.readFile(path.join(root, relativePath));
-  return crypto.createHash('sha256').update(bytes).digest('hex');
+  return crypto
+    .createHash('sha256')
+    .update(await read(relativePath), 'utf8')
+    .digest('hex');
 }
 
 const requiredFiles = [
@@ -62,6 +70,12 @@ const fixtures = await readJson(
 );
 const registry = await readJson(
   'content/registry/m3c-public-journey-acceptance.json'
+);
+
+assert.equal(
+  crypto.createHash('sha256').update(normalizeText('a\r\nb\r\n')).digest('hex'),
+  crypto.createHash('sha256').update(normalizeText('a\nb\n')).digest('hex'),
+  'Frozen artifact hashes must be stable across Windows and Unix line endings'
 );
 
 assert.equal(fixtures.schemaVersion, 'phi-os.m3c-public-journey-acceptance-fixtures.v1');
