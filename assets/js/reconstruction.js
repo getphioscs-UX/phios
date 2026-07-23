@@ -54,6 +54,10 @@ import {
 } from './modules/reconstruction-dialogue.js';
 
 import {
+  renderReconstructionVisualAlignment
+} from './modules/reconstruction-visual-alignment.js';
+
+import {
   qs,
   cleanText,
   escapeHTML
@@ -199,6 +203,11 @@ function renderLoadedReconstruction(
       result
     );
 
+  const visualAlignment =
+    renderReconstructionVisualAlignment(
+      result
+    );
+
   const inspector =
     renderReconstructionInspector(
       result
@@ -270,6 +279,7 @@ function renderLoadedReconstruction(
             '',
 
           rendered,
+          visualAlignment,
           inspector,
           readingState
         }
@@ -280,6 +290,7 @@ function renderLoadedReconstruction(
   return {
     rendered: true,
     renderedResult: rendered,
+    visualAlignment,
     inspectorResult: inspector,
     readingState
   };

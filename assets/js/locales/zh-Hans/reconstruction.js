@@ -2,6 +2,32 @@
 const reconstruction = Object.freeze({
   reconstruction: {
     editSource: '修改来源',
+    editAnswer: '修改回答',
+    evidenceSummaryAria: '现实重建的证据来源、置信度与缺失证据摘要',
+    evidenceSourceLabel: '证据来源',
+    evidenceSourceDetail: '说明当前显示资料来自哪里。',
+    confidenceLabel: '置信度',
+    confidenceDetail: '表示结构覆盖程度，不代表事实确定性。',
+    missingEvidenceLabel: '缺失证据',
+    missingEvidenceDetail: '未知项会继续保持可见，不会由假设填补。',
+    missingEvidenceTitle: '仍需要哪些支持资料',
+    missingEvidenceIntro: '以下项目仍未解决。PHI OS 会将其作为缺失证据继续保留，而不会转换为事实。',
+    missingCount: '{count} 项待补充',
+    noMissingEvidence: '目前没有记录其他缺失证据项目。',
+    evidenceSources: {
+      runtimeEntry: '现实入口',
+      reconstructionAnswers: '现实重建回答',
+      observedEvidence: '观察证据',
+      ruleReconstruction: '规则优先重建',
+      unknownReality: '未知现实'
+    },
+    confidenceStates: {
+      reported: '用户报告',
+      provisional: '暂定',
+      evidenceSupported: '有证据支持',
+      unresolved: '尚未解决',
+      notEstablished: '尚未建立'
+    },
     eyebrow: '运行体验 · 重建',
     title: '现实重建',
     subtitle: '重建用户所报告的事件顺序，同时保留证据、经验、解释与未知之间的边界。',
@@ -147,7 +173,8 @@ const reconstruction = Object.freeze({
     focusLabel: '当前重建重点',
     rationaleLabel: '为什么这很重要',
     priorityEvidence: '优先补充的证据',
-    returnToEntryButton: '返回现实入口并修正',
+    returnToEntryButton: '返回现实入口',
+    actionBoundary: '修改操作会返回现实入口，并保留现有 Runtime lineage。',
     actionNote: '下一阶段会应用 Figure 13B 读取堆栈。解释性读取系统仍会与经过确认的证据保持分离。',
     inspectorAriaLabel: '运行检查器',
     inspectorLabel: '运行检查器',

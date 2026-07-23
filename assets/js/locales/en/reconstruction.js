@@ -2,6 +2,32 @@
 const reconstruction = Object.freeze({
   reconstruction: {
     editSource: 'Edit source',
+    editAnswer: 'Edit answer',
+    evidenceSummaryAria: 'Reconstruction evidence, confidence and missing-evidence summary',
+    evidenceSourceLabel: 'Evidence source',
+    evidenceSourceDetail: 'Shows where the displayed material came from.',
+    confidenceLabel: 'Confidence',
+    confidenceDetail: 'Structural coverage, not factual certainty.',
+    missingEvidenceLabel: 'Missing evidence',
+    missingEvidenceDetail: 'Unknowns remain visible and are never filled by assumption.',
+    missingEvidenceTitle: 'What still needs support',
+    missingEvidenceIntro: 'These items remain unresolved. PHI OS will carry them forward as missing evidence rather than convert them into facts.',
+    missingCount: '{count} open',
+    noMissingEvidence: 'No additional missing-evidence item is currently recorded.',
+    evidenceSources: {
+      runtimeEntry: 'Runtime Entry',
+      reconstructionAnswers: 'Reconstruction answers',
+      observedEvidence: 'Observed evidence',
+      ruleReconstruction: 'Rule-first reconstruction',
+      unknownReality: 'Unknown Reality'
+    },
+    confidenceStates: {
+      reported: 'Reported',
+      provisional: 'Provisional',
+      evidenceSupported: 'Evidence-supported',
+      unresolved: 'Unresolved',
+      notEstablished: 'Not established'
+    },
     eyebrow: 'Runtime Experience · Reconstruction',
     title: 'Reality Reconstruction',
     subtitle: 'Reconstruct the reported sequence while preserving the boundary between evidence, experience, interpretation, and the unknown.',
@@ -147,7 +173,8 @@ const reconstruction = Object.freeze({
     focusLabel: 'Current reconstruction focus',
     rationaleLabel: 'Why it matters',
     priorityEvidence: 'Priority evidence requests',
-    returnToEntryButton: 'Return to Entry & Revise',
+    returnToEntryButton: 'Return to Entry',
+    actionBoundary: 'Editing returns to Entry and preserves the existing Runtime lineage.',
     actionNote: 'The next stage will apply the Figure 13B Reading Stack. Interpretive reading systems remain separate from verified evidence.',
     inspectorAriaLabel: 'Runtime Inspector',
     inspectorLabel: 'Runtime Inspector',
