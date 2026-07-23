@@ -311,6 +311,83 @@ const navigation = Object.freeze({
     professionalConsentButton:
       '我理解并同意专业边界',
 
+    visual: {
+      viewsAria:
+        '六块客户现实导航视图',
+
+      directionKicker:
+        '目前可选择的路径',
+
+      directionTitle:
+        '可用方向',
+
+      directionDescription:
+        '比较每条有边界的路径在什么情况下适用；排列顺序不会替你选择。',
+
+      reasonKicker:
+        '为什么会显示这些路径',
+
+      reasonTitle:
+        '理由',
+
+      evidenceKicker:
+        '什么能够确认或改变路径',
+
+      evidenceTitle:
+        '证据',
+
+      evidenceDescription:
+        '这些是从当前现实读取带入的可观察信号。',
+
+      constraintKicker:
+        '什么限制当前行动',
+
+      constraintTitle:
+        '约束',
+
+      actionKicker:
+        '第一项有边界的行动',
+
+      actionTitle:
+        '第一步行动',
+
+      reviewKicker:
+        '什么时候需要重新读取 Runtime',
+
+      reviewTitle:
+        '审阅点',
+
+      reviewDescription:
+        '审阅条件保持明确，并会返回同一条 Runtime lineage。',
+
+      pathCount:
+        '{count} 条路径',
+
+      userChoiceRequired:
+        '必须由你选择',
+
+      userSelected:
+        '你已选择路径',
+
+      currentReadingSource:
+        '当前现实读取',
+
+      selectedPathSource:
+        '你所选择的路径',
+
+      selectBeforeAction:
+        '请先选择一个可用方向，系统才会建立第一步行动。',
+
+      actionPending:
+        '正在等待你的选择',
+
+      actionEstablished:
+        '根据你所选择的路径建立',
+
+      noReviewPoint:
+        '尚未建立审阅点。'
+    },
+
     noNavigation:
       '本次旅程没有可用的现实导航结果。'
   }

@@ -1,0 +1,94 @@
+{
+  "id": "m3c-reading-visual-alignment",
+  "version": "1.0.0-w5",
+  "status": "w5-reading-visual-alignment-ready",
+  "baseline": {
+    "branch": "main",
+    "commit": "8efaae557b05f0187f514798b5a592fbaebbe171",
+    "githubMilestone": "M3C-W4 Reconstruction Visual Alignment",
+    "runtimeContractsFrozen": true,
+    "readingContractVersion": "1.0.0",
+    "readingSchemaId": "phi-os.reality-reading.v1"
+  },
+  "scope": {
+    "page": "reality-reading.html",
+    "route": "/reality-reading.html",
+    "stylesheet": "assets/css/reading-visual-alignment.css",
+    "pageController": "assets/js/reading.js",
+    "customerProjection": "assets/js/modules/reading-customer-projection.js",
+    "visualRenderer": "assets/js/modules/reading-visual-alignment.js",
+    "bilingual": [
+      "en",
+      "zh-Hans"
+    ]
+  },
+  "customerViews": [
+    "observed-reality",
+    "runtime-pattern",
+    "evidence",
+    "interpretation",
+    "reading-boundary"
+  ],
+  "viewMapping": {
+    "observed-reality": [
+      "integratedReading.observedEvidence",
+      "evidenceBoundary.observedEvidence"
+    ],
+    "runtime-pattern": [
+      "integratedReading.primaryPattern"
+    ],
+    "evidence": [
+      "integratedReading.evidenceTrail",
+      "integratedReading.strengths"
+    ],
+    "interpretation": [
+      "integratedReading.currentRuntime",
+      "integratedReading.alternativeReading"
+    ],
+    "reading-boundary": [
+      "integratedReading.unknownReality",
+      "integratedReading.risks",
+      "integratedReading.evidenceWatch",
+      "navigationReadiness"
+    ]
+  },
+  "projectionGuardrails": {
+    "readOnlyProjection": true,
+    "storageAccess": false,
+    "apiAccess": false,
+    "runtimeMutationAllowed": false,
+    "evidenceReclassificationAllowed": false,
+    "navigationReadinessDecisionOwned": false,
+    "confidenceRepresentsFactProbability": false
+  },
+  "hashPolicy": {
+    "algorithm": "sha256",
+    "encoding": "utf8",
+    "textNormalization": "lf",
+    "byteOrderMarkIgnored": true
+  },
+  "frozenArtifacts": {
+    "functions/api/read-runtime.js": "52b2b83bea8334b534ac4fae6c16cb617bf746182da52bb7298fb948574bd2ec",
+    "functions/runtime/reading/rule-reading.js": "8cee236d4035b11393a366061e675a28f25a235f762216a2d22ac5f90f32fa3e",
+    "functions/runtime/reading/reading-evidence-contract.js": "eb52b681592dc9eb3f2cecb082c3385b38db05188b81ba2d2e69e6ea73a488d9",
+    "functions/runtime/reading/reading-evidence-boundary.js": "c8f45b85280ad959abd87e65e61b3fc05926d09098c9c043e5e611e3faf32dcd",
+    "functions/runtime/reading/navigation-readiness.js": "974a9cd27616aac887c9dde055bb105b5fc0936f349638342ede84decf84d749",
+    "assets/js/modules/reading-loader.js": "e7c28a8ac849b68f27042508780274964660137affbdb2b666b71e8c609b4e7b",
+    "assets/js/modules/reading-render.js": "28f05c72d0f91f637d04dec31cb624aab263c4687da298920fd21e79f37f8984",
+    "assets/js/modules/reading-navigation.js": "ebe4845003c7c35b5dd168a552a47c90dadb9a50a5d87656ec23058ea9d521f3",
+    "content/registry/runtime-contracts.json": "32a630972e4978725e7efe1a0bdc58d96fb7a6bb1145f5c5b7f308d9909745d2",
+    "wrangler.jsonc": "fd7d7e06f14509bc13216f3999bb4e21efb2cdcdb6efd14f7724153b15808ae0"
+  },
+  "acceptance": {
+    "readingContractChanged": false,
+    "readingSchemaChanged": false,
+    "readingApiChanged": false,
+    "evidenceBoundaryChanged": false,
+    "patternThresholdChanged": false,
+    "navigationReadinessChanged": false,
+    "navigationHandoffChanged": false,
+    "persistenceContractChanged": false,
+    "languageParityRequired": true,
+    "mobileContractsPresent": true
+  }
+}

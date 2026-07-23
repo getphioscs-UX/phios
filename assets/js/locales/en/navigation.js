@@ -311,6 +311,83 @@ const navigation = Object.freeze({
     professionalConsentButton:
       'I Understand the Professional Boundary',
 
+    visual: {
+      viewsAria:
+        'Six customer Navigation views',
+
+      directionKicker:
+        'Paths currently available',
+
+      directionTitle:
+        'Available Direction',
+
+      directionDescription:
+        'Compare when each bounded path fits. Their order does not select one for you.',
+
+      reasonKicker:
+        'Why these paths are visible',
+
+      reasonTitle:
+        'Reason',
+
+      evidenceKicker:
+        'What can confirm or change the path',
+
+      evidenceTitle:
+        'Evidence',
+
+      evidenceDescription:
+        'These are observable signals carried forward from the current Reading.',
+
+      constraintKicker:
+        'What limits the current move',
+
+      constraintTitle:
+        'Constraint',
+
+      actionKicker:
+        'The first bounded move',
+
+      actionTitle:
+        'First Action',
+
+      reviewKicker:
+        'When to read the Runtime again',
+
+      reviewTitle:
+        'Review Point',
+
+      reviewDescription:
+        'Review conditions remain explicit and return to the same Runtime lineage.',
+
+      pathCount:
+        '{count} paths',
+
+      userChoiceRequired:
+        'Your choice is required',
+
+      userSelected:
+        'Path selected by you',
+
+      currentReadingSource:
+        'Current Reality Reading',
+
+      selectedPathSource:
+        'Your selected path',
+
+      selectBeforeAction:
+        'Select an Available Direction before an action is established.',
+
+      actionPending:
+        'Waiting for your selection',
+
+      actionEstablished:
+        'Established from your selected path',
+
+      noReviewPoint:
+        'No Review Point has been established.'
+    },
+
     noNavigation:
       'No Reality Navigation is available for this Journey.'
   }

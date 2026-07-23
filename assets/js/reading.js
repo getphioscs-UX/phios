@@ -19,6 +19,10 @@ import {
 } from './modules/reading-render.js';
 
 import {
+  renderReadingVisualAlignment
+} from './modules/reading-visual-alignment.js';
+
+import {
   initializeReadingSidebar,
   destroyReadingSidebar
 } from './modules/reading-sidebar.js';
@@ -106,6 +110,11 @@ function renderCurrentReading() {
       state.response
     );
 
+  const customerProjection =
+    renderReadingVisualAlignment(
+      state.response
+    );
+
   if (!state.sidebarInitialized) {
     initializeReadingSidebar();
 
@@ -122,7 +131,10 @@ function renderCurrentReading() {
       ?.refresh?.();
   }
 
-  return rendered;
+  return {
+    ...rendered,
+    customerProjection
+  };
 }
 
 

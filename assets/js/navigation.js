@@ -23,6 +23,10 @@ import {
   renderRealityNavigation
 } from './modules/navigation-render.js';
 
+import {
+  renderNavigationVisualAlignment
+} from './modules/navigation-visual-alignment.js';
+
 import { bindNavigationPathSelection } from './modules/navigation-path-selection.js';
 import { restoreNavigationState } from './modules/navigation-state.js';
 import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
@@ -55,6 +59,7 @@ async function runNavigation({
     if (result.success) {
       state.response = restoreNavigationState(result.response, state.response || result.response);
       renderRealityNavigation(state.response);
+      renderNavigationVisualAlignment(state.response);
     }
   } finally {
     state.loading = false;
@@ -94,6 +99,7 @@ async function initializeNavigationPage() {
     onSelectionChange: updatedResponse => {
       state.response = updatedResponse;
       renderRealityNavigation(updatedResponse);
+      renderNavigationVisualAlignment(updatedResponse);
     }
   });
   bindNavigationRetry(() => {
