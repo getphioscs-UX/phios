@@ -176,7 +176,11 @@ function activeSectionFromPage() {
     path === '/checkout' ||
     path.startsWith('/read/book-one')
   ) return 'knowledge';
-  if (path === '/reality-journey' || path === '/reality-demo') return 'reality';
+  if (
+    path === '/reality-journey' ||
+    path === '/reality-dashboard' ||
+    path === '/reality-demo'
+  ) return 'reality';
   if (path === '/services' || path === '/professional-boundary') return 'professional';
   if (path === '/about') return 'about';
 

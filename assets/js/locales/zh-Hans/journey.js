@@ -8,6 +8,7 @@ const journeyPublic = Object.freeze({
       title: '理解发生了什么。保留重要内容。导航下一步。',
       lead: 'PHI OS 现实旅程把一个正在变化的情境转化为可回顾、可恢复的 Runtime，同时保持证据、解释与不确定性的清晰边界。',
       start: '开始现实旅程',
+      resume: '继续旅程',
       demo: '先体验轻量 Demo',
       stages: '7 个有边界阶段',
       runtime: '1 个带版本 Runtime',
@@ -92,6 +93,111 @@ const journeyPublic = Object.freeze({
       action: '开始现实旅程',
       demo: '先使用不保存的 Demo',
       note: '提交前你可以随时停止。请勿输入紧急信息或高度敏感的身份资料。'
+    }
+  },
+  journeyDashboard: {
+    metaTitle: '旅程面板 — PHI OS',
+    skip: '跳到旅程面板',
+    hero: {
+      eyebrow: 'M3C · 旅程面板',
+      title: '从你已经建立的现实继续。',
+      lead: '在决定继续、修订或开始独立的新旅程之前，先查看当前阶段、恢复状态与历史时间线。',
+      overview: '查看旅程概览',
+      readOnly: '打开此面板不会改变你的 Runtime。'
+    },
+    loading: '正在读取可恢复的旅程状态…',
+    error: {
+      eyebrow: '状态不可用',
+      title: '面板无法安全读取这个旅程。',
+      copy: '没有任何 Runtime 被更改。请返回上一个旅程页面，或在浏览器存储可用后重试。',
+      action: '返回旅程概览'
+    },
+    empty: {
+      eyebrow: '没有进行中的旅程',
+      title: '当一项变化值得理解时，再开始。',
+      copy: '此浏览器中没有可恢复的 Runtime。入口会开始一个新旅程，不会创造并不存在的过往历史。',
+      start: '开始现实旅程',
+      overview: '了解七个阶段'
+    },
+    summary: {
+      eyebrow: '可恢复的 Runtime',
+      title: '快速查看你的旅程。',
+      runtime: 'Runtime',
+      currentStage: '当前阶段',
+      completedStages: '已完成阶段',
+      completedValue: '已完成 {completed} / {total}',
+      nextStep: '下一步',
+      latestUpdate: '最近更新',
+      recoveryStatus: '恢复状态',
+      notEstablished: '尚未建立'
+    },
+    resume: {
+      title: '继续当前阶段',
+      copy: '继续会使用现有 Runtime，不会建立新的修订版本。',
+      action: '继续旅程'
+    },
+    progress: {
+      eyebrow: '旅程进度',
+      title: '七个阶段，一个明确的下一步。',
+      lead: '已完成阶段会继续可见。“可进入”不代表自动选择或自动完成。',
+      label: '现实旅程阶段进度'
+    },
+    stageStatus: {
+      current: '当前',
+      completed: '已完成',
+      available: '可进入',
+      upcoming: '未开放'
+    },
+    next: {
+      entry: '继续入口',
+      reconstruction: '继续重建',
+      reading: '继续读取',
+      navigation: '继续导航',
+      review: '继续回顾',
+      memory: '查看 Runtime Memory',
+      continuity: '确认持续选择'
+    },
+    recovery: {
+      restored: '已在此浏览器恢复',
+      protected: '已保存供浏览器恢复',
+      sessionOnly: '当前会话可用',
+      recoverable: '有已保存的旅程',
+      attention: '已保存状态需要检查',
+      empty: '没有已保存旅程'
+    },
+    decisions: {
+      eyebrow: '行动边界',
+      title: '继续、修订与开始新旅程是不同的行动。',
+      lead: '面板不会把这些选择当成同一件事，也不会删除来源 Runtime。',
+      resume: {
+        title: '继续',
+        copy: '使用相同 Runtime 与既有证据继续当前阶段。',
+        action: '继续当前旅程'
+      },
+      revise: {
+        title: '修订',
+        copy: '通过持续阶段返回，建立连接至来源 Reading 的追加式修订。',
+        action: '查看修订选择'
+      },
+      newJourney: {
+        title: '开始新旅程',
+        copy: '通过持续阶段确认新的入口，让先前 Runtime 保留在谱系中。',
+        action: '查看新旅程选择'
+      },
+      boundary: '修订与新 Runtime 都需要明确的持续确认。此面板不会执行任何一种转变。'
+    },
+    timeline: {
+      eyebrow: '旅程时间线',
+      title: '最近的 Runtime 更新。',
+      lead: '事件来自现有的追加式谱系。它们作为历史参考显示，不会因此成为已验证证据。',
+      empty: '尚未记录阶段事件。你仍然可以继续进行中的入口。',
+      boundary: '打开时间线不会改写、提升或删除任何早期记录。',
+      runtime: 'Runtime',
+      update: 'Runtime 更新',
+      unknownDate: '日期不可用',
+      revision: '修订 {number}',
+      path: '路径',
+      outcome: '结果'
     }
   }
 });

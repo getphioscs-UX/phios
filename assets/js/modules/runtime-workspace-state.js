@@ -12,7 +12,7 @@ export const STAGE_ORDER = Object.freeze([
 const present = key => Boolean(getSession(key));
 const json = key => safeJSON(getSession(key), null);
 
-export function deriveRuntimeWorkspaceState(currentStage = '') {
+export function inspectRuntimeWorkspaceState(currentStage = '') {
   const entryState = json(SESSION.entryState);
   const entry = json(SESSION.entry);
   const reconstruction = json(SESSION.reconstruction);
@@ -40,7 +40,7 @@ export function deriveRuntimeWorkspaceState(currentStage = '') {
     reconstruction ? 'reconstruction' : 'entry'
   );
 
-  const state = {
+  return {
     schemaVersion: 'phi-os.runtime-workspace-state.v1',
     runtimeEntityId: entry?.runtimeEntityId || navigation?.runtimeEntityId || review?.runtimeEntityId || memory?.runtimeEntityId || '',
     runtimeEntryId: entry?.runtimeEntryId || navigation?.runtimeEntryId || review?.runtimeEntryId || memory?.runtimeEntryId || '',
@@ -58,6 +58,10 @@ export function deriveRuntimeWorkspaceState(currentStage = '') {
     }),
     updatedAt: new Date().toISOString()
   };
+}
+
+export function deriveRuntimeWorkspaceState(currentStage = '') {
+  const state = inspectRuntimeWorkspaceState(currentStage);
   setSession(WORKSPACE_STATE_KEY, state);
   return state;
 }

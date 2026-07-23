@@ -1,4 +1,9 @@
-import { deriveRuntimeWorkspaceState, getWorkspaceOptions, markWorkspaceStage } from '../../modules/runtime-workspace-state.js';
+import {
+  deriveRuntimeWorkspaceState,
+  getWorkspaceOptions,
+  inspectRuntimeWorkspaceState,
+  markWorkspaceStage
+} from '../../modules/runtime-workspace-state.js';
 import { initializeRuntimeWorkspace } from '../../modules/runtime-workspace.js';
 import { emitRuntimeEvent } from './event-bus.js';
 
@@ -20,6 +25,7 @@ export function goToRuntimeStage(stage) {
 
 export const RuntimeWorkspaceManager = Object.freeze({
   current: getRuntimeWorkspaceState,
+  inspect: inspectRuntimeWorkspaceState,
   options: getWorkspaceOptions,
   mount: mountRuntimeWorkspace,
   goto: goToRuntimeStage
