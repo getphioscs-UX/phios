@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "phi-os.m4a-w7-data-governance-scenarios.v1",
+  "syntheticOnly": true,
+  "scenarios": [
+    {
+      "id": "financial-minimization",
+      "input": {
+        "financial_item_id": "financial_item_test_1",
+        "data_subject_id": "subject_test_1",
+        "category": "bank_balance",
+        "institution": "Test Financial Institution",
+        "account_number": "TESTACCT5678",
+        "policy_number": "TESTPOLICY2468",
+        "exact_address": "Unit 99, Test Avenue",
+        "general_property_location": "Test District",
+        "required_financial_value": 5000,
+        "currency": "myr",
+        "evidence_date": "2026-07-20T00:00:00.000Z",
+        "ownership": "subject_test_1",
+        "source_type": "user_entered",
+        "verification_status": "unverified",
+        "raw_document_text": "must not be copied"
+      }
+    },
+    {
+      "id": "confirmed-memory-summary",
+      "input": {
+        "explicit_action": true,
+        "client_confirmed": true,
+        "client_id": "client_test_1",
+        "service_id": "financial_stamina_analysis",
+        "retention_consent_id": "retention_test_1",
+        "retention_mode": "selected_summaries_only",
+        "confirmed_at": "2026-07-23T13:00:00.000Z",
+        "summary": {
+          "financial_position_date": "July 2026",
+          "income_range": "RM 5k–10k monthly",
+          "expense_range": "RM 3k–5k monthly",
+          "net_worth_range": "Positive range",
+          "major_liabilities": [
+            "Home financing",
+            "Vehicle financing"
+          ],
+          "primary_goals": [
+            "Emergency reserve",
+            "Retirement readiness"
+          ],
+          "professional_review_date": "July 2026"
+        }
+      }
+    },
+    {
+      "id": "human-design-service-record",
+      "input": {
+        "record_id": "human_design_record_test_1",
+        "data_subject_id": "subject_test_2",
+        "consent_id": "consent_test_2",
+        "selected_fields": [
+          "birth_date",
+          "birth_time",
+          "birth_place",
+          "chart_pdf",
+          "professional_interpretation"
+        ],
+        "chart_file_references": [
+          "file_test_chart_1"
+        ],
+        "future_session_retention_authorised": false
+      }
+    },
+    {
+      "id": "annual-retention",
+      "input": {
+        "explicit_action": true,
+        "retention_decision_id": "retention_test_1",
+        "consent_id": "consent_test_1",
+        "data_subject_id": "subject_test_1",
+        "service_id": "financial_stamina_analysis",
+        "retention_mode": "scheduled_annual_reviews",
+        "retention_expires_at": "2027-07-23T12:00:00.000Z",
+        "record_classes": [
+          "intake_data",
+          "source_document",
+          "professional_working_file",
+          "final_report"
+        ],
+        "delete_source_documents_after_report": true
+      }
+    },
+    {
+      "id": "secure-financial-file",
+      "input": {
+        "file_id": "file_test_financial_1",
+        "data_subject_id": "subject_test_1",
+        "consent_id": "consent_test_1",
+        "service_id": "financial_stamina_analysis",
+        "domain": "financial",
+        "extension": "pdf",
+        "mime_type": "application/pdf",
+        "size_bytes": 1048576,
+        "upload_channel": "secure_private_upload",
+        "private_storage": true,
+        "encryption_at_rest": true,
+        "encryption_in_transit": true,
+        "malware_scan_status": "clean",
+        "original_filename": "must-not-be-retained.pdf",
+        "public_url": "must-not-be-copied"
+      }
+    },
+    {
+      "id": "separated-professional-note",
+      "input": {
+        "note_id": "note_test_1",
+        "client_id": "client_test_1",
+        "service_id": "financial_stamina_analysis",
+        "author_id": "professional_test_1",
+        "note_type": "financial_fact_note",
+        "content_class": "client_provided_fact",
+        "content_classes": [
+          "client_provided_fact"
+        ],
+        "content": "Client reports that income timing recently changed.",
+        "source_references": [
+          "evidence_test_1"
+        ]
+      }
+    },
+    {
+      "id": "report-governance",
+      "input": {
+        "report_id": "report_test_1",
+        "client_id": "client_test_1",
+        "service_id": "financial_stamina_analysis",
+        "report_type": "financial_stamina_analysis",
+        "version": "1.0.0",
+        "data_date": "2026-07-20T00:00:00.000Z",
+        "source_references": [
+          "evidence_test_1"
+        ],
+        "assumptions": [
+          "Illustrative inflation assumption"
+        ],
+        "review_status": "professional_review_required",
+        "reviewed_by": ""
+      }
+    },
+    {
+      "id": "data-rights-export",
+      "input": {
+        "explicit_action": true,
+        "request_id": "rights_request_test_1",
+        "client_id": "client_test_1",
+        "data_subject_id": "subject_test_1",
+        "action": "export_financial_data",
+        "resource_ids": [
+          "financial_item_test_1",
+          "report_test_1"
+        ]
+      }
+    },
+    {
+      "id": "legal-retention-exception",
+      "input": {
+        "explicit_authorisation": true,
+        "exception_id": "legal_exception_test_1",
+        "legal_basis": "Recorded test accounting retention basis",
+        "record_classes": [
+          "phi_os_accounting_record"
+        ],
+        "expires_at": "2033-12-31T23:59:59.000Z",
+        "approved_by_role": "privacy_officer",
+        "review_at": "2027-07-23T12:00:00.000Z",
+        "client_source_documents_included": false
+      }
+    }
+  ]
+}
