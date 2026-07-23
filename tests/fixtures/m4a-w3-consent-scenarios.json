@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "phi-os.m4a-w3-consent-scenarios.v1",
+  "generalAcknowledgements": {
+    "scope_selected": true,
+    "data_accuracy": true,
+    "future_access_revocable": true
+  },
+  "humanDesignAcknowledgements": {
+    "scope_selected": true,
+    "data_accuracy": true,
+    "future_access_revocable": true,
+    "birth_data_voluntarily_submitted": true,
+    "birth_time_accuracy_affects_result": true,
+    "interpretive_not_diagnostic": true,
+    "future_access_revocation_understood": true
+  },
+  "financialAcknowledgements": {
+    "scope_selected": true,
+    "data_accuracy": true,
+    "future_access_revocable": true,
+    "information_and_date_basis": true,
+    "missing_or_incorrect_data_affects_analysis": true,
+    "projections_use_assumptions": true,
+    "future_results_not_guaranteed": true,
+    "client_retains_final_decision": true,
+    "regulated_professional_may_be_required": true
+  },
+  "scenarios": [
+    {
+      "id": "runtime-explicit-scope",
+      "input": {
+        "consent_id": "consent_runtime_1",
+        "client_id": "client_test_1",
+        "professional_id": "professional_test_1",
+        "service_id": "professional_runtime_reading",
+        "purpose": "Review one selected Runtime",
+        "consent_version": "1.0",
+        "explicit_action": true,
+        "duration": "seven_days",
+        "runtime_ids": [
+          "runtime_test_1"
+        ],
+        "resource_scopes": [
+          "entry",
+          "reconstruction",
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "financial-selected-scope",
+      "input": {
+        "consent_id": "consent_financial_1",
+        "client_id": "client_test_1",
+        "professional_id": "professional_test_1",
+        "service_id": "financial_reality_snapshot",
+        "purpose": "Prepare a facts-only Financial Reality Snapshot",
+        "consent_version": "1.0",
+        "explicit_action": true,
+        "duration": "thirty_days",
+        "financial_data_scopes": [
+          "income",
+          "expenses",
+          "liabilities"
+        ]
+      }
+    },
+    {
+      "id": "human-design-specific-scope",
+      "input": {
+        "consent_id": "consent_human_design_1",
+        "client_id": "client_test_1",
+        "professional_id": "professional_test_2",
+        "service_id": "human_design_foundation_report",
+        "purpose": "Review voluntarily supplied chart information",
+        "consent_version": "1.0",
+        "explicit_action": true,
+        "duration": "seven_days",
+        "resource_scopes": [
+          "birth_information",
+          "human_design_chart"
+        ],
+        "human_design_scopes": [
+          "birth_date",
+          "birth_time",
+          "birth_place",
+          "chart_image"
+        ]
+      }
+    },
+    {
+      "id": "one-time-consent",
+      "input": {
+        "consent_id": "consent_once_1",
+        "client_id": "client_test_1",
+        "professional_id": "professional_test_1",
+        "service_id": "professional_runtime_reading",
+        "purpose": "One-time report review",
+        "consent_version": "1.0",
+        "explicit_action": true,
+        "duration": "one_time",
+        "runtime_ids": [
+          "runtime_test_1"
+        ],
+        "resource_scopes": [
+          "reading"
+        ]
+      }
+    },
+    {
+      "id": "until-service-completion",
+      "input": {
+        "consent_id": "consent_service_1",
+        "client_id": "client_test_1",
+        "professional_id": "professional_test_1",
+        "service_id": "navigation_follow_up",
+        "purpose": "Follow up the selected Navigation",
+        "consent_version": "1.0",
+        "explicit_action": true,
+        "duration": "until_service_completion",
+        "runtime_ids": [
+          "runtime_test_1"
+        ],
+        "resource_scopes": [
+          "navigation",
+          "runtime_memory"
+        ]
+      }
+    },
+    {
+      "id": "partial-revocation",
+      "revocationScopes": [
+        "financial_data_access"
+      ]
+    },
+    {
+      "id": "full-revocation",
+      "revocationScopes": [
+        "all_professional_access"
+      ]
+    },
+    {
+      "id": "joint-household-separate-adults",
+      "participants": [
+        {
+          "participant_id": "participant_main_1",
+          "data_subject_id": "subject_main_1",
+          "role": "main_client",
+          "is_adult": true,
+          "explicit_action": true,
+          "financial_data_scopes": [
+            "income",
+            "expenses"
+          ]
+        },
+        {
+          "participant_id": "participant_joint_1",
+          "data_subject_id": "subject_joint_1",
+          "role": "joint_client",
+          "is_adult": true,
+          "explicit_action": true,
+          "financial_data_scopes": [
+            "liabilities",
+            "insurance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recommendation-acknowledgement",
+      "required": [
+        "information_and_date_basis",
+        "missing_or_incorrect_data_affects_analysis",
+        "projections_use_assumptions",
+        "future_results_not_guaranteed",
+        "client_retains_final_decision",
+        "regulated_professional_may_be_required"
+      ]
+    }
+  ]
+}
