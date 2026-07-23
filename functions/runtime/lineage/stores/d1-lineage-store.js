@@ -201,6 +201,32 @@ export function createD1LineageStore(options = {}) {
     );
   }
 
+  async function deleteRuntimeData(runtimeId) {
+    const id = String(runtimeId || '').trim();
+    const lineageResult = await run(
+      db.prepare(`
+        DELETE FROM runtime_lineages
+        WHERE parent_runtime_id = ?1 OR child_runtime_id = ?1
+      `).bind(id),
+      LINEAGE_ERROR_CODES.INVALID_INPUT,
+      'Could not delete Runtime Lineage relationships.'
+    );
+    const revisionResult = await run(
+      db.prepare(`
+        DELETE FROM runtime_revisions
+        WHERE runtime_id = ?1
+      `).bind(id),
+      LINEAGE_ERROR_CODES.INVALID_INPUT,
+      'Could not delete Runtime Revision chain.'
+    );
+    return Object.freeze({
+      revisions_deleted:
+        Number(revisionResult?.meta?.changes || 0),
+      lineages_deleted:
+        Number(lineageResult?.meta?.changes || 0)
+    });
+  }
+
   return Object.freeze({
     name: 'd1',
     createRevision,
@@ -208,7 +234,8 @@ export function createD1LineageStore(options = {}) {
     createLineage,
     listParentLinks,
     listChildLinks,
-    listLineages
+    listLineages,
+    deleteRuntimeData
   });
 }
 

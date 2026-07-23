@@ -125,6 +125,32 @@ export function createMemoryLineageStore(options = {}) {
       .map(cloneLineageValue);
   }
 
+  async function deleteRuntimeData(runtimeId) {
+    const id = String(runtimeId || '').trim();
+    let revisionsDeleted = 0;
+    let lineagesDeleted = 0;
+    for (const [revisionId, revision] of revisions) {
+      if (revision.runtime_id === id) {
+        revisions.delete(revisionId);
+        revisionsDeleted += 1;
+      }
+    }
+    for (const [lineageId, lineage] of lineages) {
+      if (
+        lineage.parent_runtime_id === id ||
+        lineage.child_runtime_id === id
+      ) {
+        lineages.delete(lineageId);
+        lineagesDeleted += 1;
+      }
+    }
+    if (revisionsDeleted || lineagesDeleted) changed();
+    return Object.freeze({
+      revisions_deleted: revisionsDeleted,
+      lineages_deleted: lineagesDeleted
+    });
+  }
+
   return Object.freeze({
     name: 'memory',
     createRevision,
@@ -133,6 +159,7 @@ export function createMemoryLineageStore(options = {}) {
     listParentLinks,
     listChildLinks,
     listLineages,
+    deleteRuntimeData,
     exportState
   });
 }

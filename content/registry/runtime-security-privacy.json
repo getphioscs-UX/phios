@@ -1,0 +1,52 @@
+{
+  "id": "phi-os.runtime-security-privacy.v1",
+  "milestone": "M2-W8",
+  "status": "closed",
+  "classifications": [
+    "public",
+    "private",
+    "sensitive",
+    "professional",
+    "research-consented"
+  ],
+  "default_classification": "private",
+  "logging": {
+    "full_sensitive_text_allowed": false,
+    "raw_runtime_state_allowed": false,
+    "raw_event_payload_allowed": false,
+    "structured_redaction_required": true
+  },
+  "user_operations": {
+    "delete_session": "explicit_user_action",
+    "delete_runtime": "owner_only",
+    "delete_account": "exact_confirmation_required",
+    "export_data": "owner_only"
+  },
+  "professional_boundary": {
+    "automatic_account_access": false,
+    "user_wide_grant_allowed": false,
+    "explicit_runtime_ids_required": true,
+    "purpose_required": true,
+    "consent_version_required": true,
+    "revocation_supported": true
+  },
+  "research_boundary": {
+    "private_runtime_used_by_default": false,
+    "community_use_used_by_default": false,
+    "explicit_runtime_ids_required": true,
+    "purpose_required": true,
+    "consent_version_required": true,
+    "withdrawal_supported": true
+  },
+  "storage": {
+    "old_migration_modified": false,
+    "new_migration_required": false,
+    "d1_runtime_delete_uses_existing_cascade": true
+  },
+  "guardrails": {
+    "professional_access_is_not_ownership": true,
+    "research_consent_is_not_publication": true,
+    "branch_content_is_not_automatically_research_consented": true,
+    "account_deletion_is_not_implicit": true
+  }
+}
