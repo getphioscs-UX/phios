@@ -15,6 +15,7 @@ import {
   SCHEMA_IDS,
   isAcceptedSchema
 } from '../runtime/shared/schema-registry.js';
+import '../runtime/registry/index.js';
 
 import navigateRuntimeRuleFirst from
   '../runtime/navigation/rule-navigation.js';

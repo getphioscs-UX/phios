@@ -1,6 +1,7 @@
 import { sanitizeConversation } from '../_lib/utils.js';
 import { buildRuntimeEntry } from '../_lib/runtime-entry.js';
 import routeRuntimeEntry from '../runtime/entry/provider-router.js';
+import '../runtime/registry/index.js';
 
 const EVIDENCE_DEPTHS = Object.freeze({
   quick: Object.freeze({ minimum: 3, maximum: 4 }),

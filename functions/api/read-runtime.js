@@ -15,6 +15,7 @@ import {
   isAcceptedSchema
 } from '../runtime/shared/schema-registry.js';
 import routeRealityReading from '../runtime/reading/provider-router.js';
+import '../runtime/registry/index.js';
 
 const ALLOWED_PROVIDERS = Object.freeze([
   'auto',
