@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phios.cs/schemas/book-access.schema.json",
+  "title": "PHI OS Book Access Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "productId",
+    "currency",
+    "amountMinor",
+    "purchaseState",
+    "accessGranted"
+  ],
+  "properties": {
+    "contractVersion": {
+      "const": "1.0.0"
+    },
+    "productId": {
+      "const": "phios-book-one"
+    },
+    "currency": {
+      "const": "MYR"
+    },
+    "amountMinor": {
+      "const": 8900
+    },
+    "purchaseState": {
+      "enum": [
+        "not_purchased",
+        "payment_pending",
+        "purchased",
+        "refunded",
+        "revoked"
+      ]
+    },
+    "accessGranted": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "accessGranted": {
+            "const": true
+          }
+        },
+        "required": [
+          "accessGranted"
+        ]
+      },
+      "then": {
+        "properties": {
+          "purchaseState": {
+            "const": "purchased"
+          }
+        }
+      }
+    }
+  ]
+}

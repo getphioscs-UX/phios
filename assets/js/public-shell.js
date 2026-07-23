@@ -7,7 +7,7 @@ import {
 
 const NAVIGATION = Object.freeze([
   { id: 'discover', href: '/', key: 'publicShell.nav.discover' },
-  { id: 'knowledge', href: '/explore', key: 'publicShell.nav.knowledge' },
+  { id: 'knowledge', href: '/library', key: 'publicShell.nav.knowledge' },
   { id: 'reality', href: '/reality-demo', key: 'publicShell.nav.realityJourney' },
   { id: 'professional', href: '/services', key: 'publicShell.nav.professional' },
   { id: 'about', href: '/about', key: 'publicShell.nav.about' }
@@ -163,7 +163,19 @@ function activeSectionFromPage() {
   const path = window.location.pathname.replace(/\.html$/, '');
 
   if (path === '' || path === '/') return 'discover';
-  if (path === '/explore' || path === '/thesis' || path === '/academy') return 'knowledge';
+  if (
+    path === '/explore' ||
+    path === '/thesis' ||
+    path === '/academy' ||
+    path === '/library' ||
+    path === '/book-one' ||
+    path === '/book-one-preview' ||
+    path === '/figures' ||
+    path === '/figure' ||
+    path === '/glossary' ||
+    path === '/checkout' ||
+    path.startsWith('/read/book-one')
+  ) return 'knowledge';
   if (path.startsWith('/reality-demo')) return 'reality';
   if (path === '/services' || path === '/professional-boundary') return 'professional';
   if (path === '/about') return 'about';

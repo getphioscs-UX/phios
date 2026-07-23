@@ -10,6 +10,7 @@ import review from './en/review.js';
 import about from './en/about.js';
 import thesis from './en/thesis.js';
 import publicExperience from './en/public.js';
+import knowledgeRelease from './en/knowledge.js';
 
 const dictionary = Object.freeze({
   ...shared,
@@ -22,7 +23,8 @@ const dictionary = Object.freeze({
   ...review,
   ...about,
   ...thesis,
-  ...publicExperience
+  ...publicExperience,
+  ...knowledgeRelease
 });
 
 export default dictionary;

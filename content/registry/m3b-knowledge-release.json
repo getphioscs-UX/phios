@@ -1,0 +1,102 @@
+{
+  "id": "m3b-knowledge-release",
+  "version": "1.0.0-foundation",
+  "status": "foundation-ready-with-explicit-release-blockers",
+  "baseline": {
+    "branch": "main",
+    "commit": "b636895",
+    "m3aProductionVerified": true
+  },
+  "bookOne": {
+    "productId": "phios-book-one",
+    "currency": "MYR",
+    "amountMinor": 8900,
+    "displayPrice": "RM89",
+    "manifest": "content/registry/book-1-manifest.json",
+    "manuscriptSourceAvailableInRepository": false,
+    "fullReadingContentPublished": false
+  },
+  "workstreams": {
+    "M3B-W1": {
+      "status": "ready",
+      "page": "library.html",
+      "categories": [
+        "Research",
+        "Books",
+        "Atlas",
+        "Figures",
+        "Glossary",
+        "Downloads"
+      ],
+      "states": [
+        "available",
+        "preview",
+        "development",
+        "later"
+      ],
+      "frontEndSearchAndFilter": true
+    },
+    "M3B-W2": {
+      "status": "product-page-ready",
+      "page": "book-one.html",
+      "verifiedReviewsOnly": true,
+      "readerReviewsPublished": false,
+      "chapterList": "awaiting-approved-manuscript"
+    },
+    "M3B-W3": {
+      "status": "structured-preview-ready-source-excerpt-pending",
+      "page": "book-one-preview.html",
+      "verbatimManuscriptExcerpt": false,
+      "fullPdfDownloadExposed": false,
+      "readingProgress": "preview-only-local-storage",
+      "figures": 5
+    },
+    "M3B-W4": {
+      "status": "contract-and-locked-route-ready",
+      "route": "/read/book-one/",
+      "states": [
+        "not_purchased",
+        "payment_pending",
+        "purchased",
+        "refunded",
+        "revoked"
+      ],
+      "browserStateCanGrantAccess": false,
+      "serverPurchaseRecordRequired": true,
+      "fullReader": "awaiting-approved-manuscript-and-commerce"
+    },
+    "M3B-W5": {
+      "status": "ready",
+      "page": "explore.html",
+      "freeAtlasPaidBookBoundary": true
+    },
+    "M3B-W6": {
+      "status": "ready",
+      "page": "figures.html",
+      "detailPage": "figure.html",
+      "publicFormat": "webp",
+      "printResolutionDownloadExposed": false
+    },
+    "M3B-W7": {
+      "status": "ready-with-transparent-editorial-translation",
+      "page": "glossary.html",
+      "source": "content/registry/concepts.json",
+      "canonicalLanguage": "zh-Hans",
+      "englishTranslation": "content/knowledge/glossary-en.json"
+    },
+    "M3B-W8": {
+      "status": "owner-decision-required",
+      "comparison": "docs/knowledge/M3B-W8-PAYMENT-PROVIDER-COMPARISON.md",
+      "checkoutAcceptsMoney": false,
+      "provider": null,
+      "merchantCredentialsConfigured": false,
+      "webhookConfigured": false,
+      "receiptSenderConfigured": false
+    }
+  },
+  "releaseBlockers": [
+    "Approved Book I manuscript is not present in the repository or supplied files.",
+    "Production payment provider and merchant account have not been selected.",
+    "Webhook secret, purchase persistence and receipt sender are not configured."
+  ]
+}

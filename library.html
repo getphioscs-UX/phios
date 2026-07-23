@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse PHI OS research, books, Atlas routes, figures, glossary terms and public downloads.">
+  <title data-i18n="knowledge.library.metaTitle">Library — PHI OS Knowledge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-release.css">
+</head>
+<body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-library">
+  <a class="skip-link" href="#library-main" data-i18n="knowledge.common.skip">Skip to main content</a>
+  <header data-public-header-placeholder></header>
+  <main id="library-main">
+    <section class="knowledge-hero">
+      <div class="knowledge-shell">
+        <p class="knowledge-eyebrow" data-i18n="knowledge.library.eyebrow">M3B · Knowledge Release</p>
+        <h1 data-i18n="knowledge.library.title">A library for navigating Reality knowledge.</h1>
+        <p class="knowledge-hero__lead" data-i18n="knowledge.library.lead">
+          Research, books, Atlas routes, figures, glossary terms and public downloads—organized by source and release state.
+        </p>
+      </div>
+    </section>
+
+    <section class="knowledge-section knowledge-section--paper" aria-label="Library resources">
+      <div class="knowledge-shell">
+        <div class="knowledge-controls">
+          <div class="knowledge-field">
+            <label for="library-search" data-i18n="knowledge.library.searchLabel">Search the Library</label>
+            <input id="library-search" type="search" data-i18n-placeholder="knowledge.library.searchPlaceholder" placeholder="Search titles, descriptions or categories" autocomplete="off">
+          </div>
+          <div class="knowledge-field">
+            <label for="library-category" data-i18n="knowledge.library.categoryLabel">Category</label>
+            <select id="library-category">
+              <option value="all" data-i18n="knowledge.library.allCategories">All categories</option>
+              <option value="research" data-i18n="knowledge.library.research">Research</option>
+              <option value="books" data-i18n="knowledge.library.books">Books</option>
+              <option value="atlas" data-i18n="knowledge.library.atlas">Atlas</option>
+              <option value="figures" data-i18n="knowledge.library.figures">Figures</option>
+              <option value="glossary" data-i18n="knowledge.library.glossary">Glossary</option>
+              <option value="downloads" data-i18n="knowledge.library.downloads">Downloads</option>
+            </select>
+          </div>
+          <div class="knowledge-field">
+            <label for="library-status" data-i18n="knowledge.library.statusLabel">Status</label>
+            <select id="library-status">
+              <option value="all" data-i18n="knowledge.library.allStatuses">All statuses</option>
+              <option value="available" data-i18n="knowledge.common.available">Available</option>
+              <option value="preview" data-i18n="knowledge.common.preview">Preview</option>
+              <option value="development" data-i18n="knowledge.common.development">In Development</option>
+              <option value="later" data-i18n="knowledge.common.later">Coming Later</option>
+            </select>
+          </div>
+        </div>
+        <p class="knowledge-results" aria-live="polite" data-library-results></p>
+        <div class="knowledge-grid" data-library-grid></div>
+        <p class="knowledge-empty" hidden data-library-empty data-i18n="knowledge.library.empty">No resources match these filters.</p>
+        <p class="knowledge-boundary" data-i18n="knowledge.library.boundary">
+          Availability reflects public access. “Preview” does not mean the complete source is downloadable.
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer data-public-footer-placeholder></footer>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/library.js"></script>
+</body>
+</html>
