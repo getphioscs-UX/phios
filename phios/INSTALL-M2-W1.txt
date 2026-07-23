@@ -1,0 +1,43 @@
+PHI OS — M2-W1 Registry Layer (reviewed package)
+
+IMPORTANT
+This package is based on the current M1 repository state. The three API files
+preserve the recent Reading/Navigation language fixes and add only the Registry
+startup import. It does not use the stale API versions from the original ZIP.
+
+INSTALL
+1. Extract this ZIP.
+2. Copy the CONTENTS of M2-W1-Registry-Layer into the root of the phios repo.
+3. Allow the listed files and package.json to be replaced.
+4. Run:
+
+   npm run check:runtime-registry
+   npm run check
+
+EXPECTED
+✓ M2-W1 Contract, Schema, Version, Migration Registries, M1 parity, and startup validation passed.
+
+FILES
+- functions/runtime/registry/contract-registry.js
+- functions/runtime/registry/schema-registry.js
+- functions/runtime/registry/version-registry.js
+- functions/runtime/registry/migration-registry.js
+- functions/runtime/registry/registry-validation.js
+- functions/runtime/registry/index.js
+- functions/api/reconstruct-reality.js
+- functions/api/read-runtime.js
+- functions/api/navigate-runtime.js
+- scripts/check-runtime-registry-layer.mjs
+- docs/runtime/M2-W1-REGISTRY-LAYER.md
+- package.json
+
+COMMIT
+git add functions/runtime/registry functions/api/reconstruct-reality.js functions/api/read-runtime.js functions/api/navigate-runtime.js scripts/check-runtime-registry-layer.mjs docs/runtime/M2-W1-REGISTRY-LAYER.md package.json
+git commit -m "Complete M2-W1 Runtime Registry Layer"
+git push origin main
+
+BOUNDARY
+- No new Runtime Stage.
+- No database or persistence implementation yet.
+- Baseline Migration declarations are non-executable; SQL migrations begin in M2-W4.
+- This package does not create or change runtime-engine-v1.0.0.

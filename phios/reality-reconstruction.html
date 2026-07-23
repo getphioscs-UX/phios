@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="PHI OS Reality Reconstruction Workspace — rebuild the current Runtime structure before interpretation.">
+  <title data-i18n="reconstruction.metaTitle">Reality Reconstruction Workspace — PHI OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/design/motion.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/reconstruction-workspace.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
+  <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
+  <link rel="stylesheet" href="/assets/css/reconstruction-visual-alignment.css">
+</head>
+<body class="reconstruction-page runtime-workspace-page">
+  <a class="skip-link" href="#reconstructionWorkspace" data-i18n="reconstruction.skipLink">Skip to reconstruction</a>
+
+  <header class="site-header reconstruction-header">
+    <div class="shell nav">
+      <a class="brand" href="/" aria-label="PHI OS Home" data-i18n-aria-label="accessibility.phiOSHome">
+        <span class="phi">Φ</span>
+        <span>PHI OS</span>
+      </a>
+
+      <div class="reconstruction-progress" aria-label="Runtime Journey progress" data-i18n-aria-label="accessibility.journeyProgress">
+        <span data-i18n="journey.label">Runtime Journey</span>
+        <ol data-current-stage="reconstruction">
+          <li class="complete">
+            <b>01</b><data value="entry" data-i18n="journey.entry">Entry</data>
+          </li>
+          <li class="active" aria-current="step">
+            <b>02</b><data value="reconstruction" data-i18n="journey.reconstruction">Reconstruction</data>
+          </li>
+          <li>
+            <b>03</b><data value="reading" data-i18n="journey.reading">Reading</data>
+          </li>
+          <li>
+            <b>04</b><data value="navigation" data-i18n="journey.navigation">Navigation</data>
+          </li>
+          <li>
+            <b>05</b><data value="review" data-i18n="journey.review">Review</data>
+          </li>
+          <li>
+            <b>06</b><data value="memory" data-i18n="entry.progressMemory">Memory</data>
+          </li>
+          <li>
+            <b>07</b><data value="continuity" data-i18n="entry.progressContinuity">Continuity</data>
+          </li>
+        </ol>
+      </div>
+
+      <div class="reconstruction-header-actions platform-header-actions">
+        <span
+          class="language-switcher"
+          role="group"
+          aria-label="Select interface language"
+          data-i18n-aria-label="accessibility.languageSelector"
+        >
+          <button
+            class="language-option"
+            type="button"
+            data-locale="en"
+            aria-label="Switch to English"
+            data-i18n-aria-label="language.switchToEnglish"
+          >EN</button>
+
+          <span aria-hidden="true">·</span>
+
+          <button
+            class="language-option"
+            type="button"
+            data-locale="zh-Hans"
+            aria-label="切换至中文"
+            data-i18n-aria-label="language.switchToChinese"
+          >中文</button>
+        </span>
+
+        <a class="entry-exit" href="/" data-i18n="common.exit">Exit</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="runtime-workspace-layout"><div data-runtime-workspace></div><div class="runtime-workspace-main">
+  <main id="reconstructionWorkspace" class="reconstruction-shell">
+    <section class="reconstruction-intro" aria-labelledby="reconstructionTitle">
+      <div>
+        <p class="eyebrow" data-i18n="reconstruction.stageLabel">Runtime Journey · Stage 02</p>
+        <h1 id="reconstructionTitle" data-i18n="reconstruction.title">Reality Reconstruction</h1>
+        <p data-i18n="reconstruction.introduction">Before PHI OS interprets your Reality, it reconstructs how the change formed, where it entered, how it became experience, and which evidence remains missing.</p>
+      </div>
+
+      <div class="reconstruction-boundary">
+        <span class="status-dot" aria-hidden="true"></span>
+        <div>
+          <strong data-i18n="reconstruction.boundaryTitle">Reconstruction before interpretation</strong>
+          <small data-i18n="reconstruction.boundaryText">This stage does not diagnose, predict, or prescribe.</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="reconstruction-empty hidden" id="emptyState" aria-live="polite">
+      <p data-i18n="reconstruction.noEntry">No Runtime Entry was found in this browser session.</p>
+      <a class="btn primary" href="/reality-entry" data-i18n="reconstruction.beginEntry">Begin Reality Entry</a>
+    </section>
+
+    <section class="reconstruction-workspace hidden" id="workspace">
+      <aside class="runtime-chain" hidden aria-label="Current Runtime Chain" data-i18n-aria-label="reconstruction.chainAriaLabel">
+        <header>
+          <p data-i18n="reconstruction.chainLabel">Current Runtime Chain</p>
+          <h2 data-i18n="reconstruction.chainTitle">How this Reality is being reconstructed</h2>
+        </header>
+        <ol>
+          <li class="is-active" data-stage-link="entry">
+            <span>01</span>
+            <div><strong data-i18n="reconstruction.chain.entry">Reality Entry</strong><small data-i18n="reconstruction.chain.entryDetail">What changed</small></div>
+          </li>
+          <li data-stage-link="formation">
+            <span>02</span>
+            <div><strong data-i18n="reconstruction.chain.formation">Formation Grammar</strong><small>Figure 0A · G1–G15</small></div>
+          </li>
+          <li data-stage-link="carrier">
+            <span>03</span>
+            <div><strong data-i18n="reconstruction.chain.carrier">Carrier Entry</strong><small data-i18n="reconstruction.chain.carrierDetail">Figure 4A · RIS coordinates</small></div>
+          </li>
+          <li data-stage-link="conscious">
+            <span>04</span>
+            <div><strong data-i18n="reconstruction.chain.conscious">Conscious Runtime</strong><small>Figure 5E · C1–C5</small></div>
+          </li>
+          <li data-stage-link="evidence">
+            <span>05</span>
+            <div><strong data-i18n="reconstruction.chain.evidence">Evidence Structure</strong><small data-i18n="reconstruction.chain.evidenceDetail">Observed · Reported · Interpreted · Unknown</small></div>
+          </li>
+          <li data-stage-link="direction">
+            <span>06</span>
+            <div><strong data-i18n="reconstruction.chain.readiness">Reading Readiness</strong><small data-i18n="reconstruction.chain.readinessDetail">What can be read next</small></div>
+          </li>
+        </ol>
+      </aside>
+
+      <section class="reconstruction-main">
+        <header class="workspace-heading">
+          <div>
+            <p class="workspace-kicker" data-i18n="reconstruction.workspaceKicker">Canonical Runtime Reconstruction</p>
+            <h2 data-i18n="reconstruction.workspaceTitle">Reconstructing your current Reality</h2>
+          </div>
+          <div class="reconstruction-score" hidden>
+            <span data-i18n="reconstruction.maturityLabel">Reconstruction maturity</span>
+            <strong id="reconstructionScore">—</strong>
+          </div>
+        </header>
+
+        <section
+          class="reconstruction-evidence-summary hidden"
+          id="reconstructionEvidenceSummary"
+          aria-label="Reconstruction evidence summary"
+          data-i18n-aria-label="reconstruction.evidenceSummaryAria"
+          aria-busy="true"
+        >
+          <article>
+            <span data-i18n="reconstruction.evidenceSourceLabel">
+              Evidence source
+            </span>
+            <strong id="reconstructionEvidenceSource">—</strong>
+            <small data-i18n="reconstruction.evidenceSourceDetail">
+              Shows where the displayed material came from.
+            </small>
+          </article>
+          <article>
+            <span data-i18n="reconstruction.confidenceLabel">
+              Confidence
+            </span>
+            <strong id="reconstructionConfidence">—</strong>
+            <small data-i18n="reconstruction.confidenceDetail">
+              Structural coverage, not factual certainty.
+            </small>
+          </article>
+          <article>
+            <span data-i18n="reconstruction.missingEvidenceLabel">
+              Missing evidence
+            </span>
+            <strong id="reconstructionMissingCount">—</strong>
+            <small data-i18n="reconstruction.missingEvidenceDetail">
+              Unknowns remain visible and are never filled by assumption.
+            </small>
+          </article>
+        </section>
+
+        <div class="reconstruction-loading" id="loadingState" role="status" aria-live="polite">
+          <span class="reconstruction-spinner" aria-hidden="true"></span>
+          <div>
+            <strong data-i18n="reconstruction.loading">PHI OS is rebuilding the current Runtime structure.</strong>
+            <p data-i18n="reconstruction.loadingDetail">Rule-based reconstruction is running first. No OpenAI call is required for this stage.</p>
+          </div>
+        </div>
+
+        <section class="reconstruction-inquiry hidden" id="reconstructionInquiry" aria-labelledby="inquiryTitle">
+          <header class="inquiry-heading">
+            <div>
+              <p class="section-label" data-i18n="reconstruction.inquiryLabel">Evidence acquisition</p>
+              <h3 id="inquiryTitle" data-i18n="reconstruction.inquiryTitle">Complete the Reality Reconstruction</h3>
+              <p data-i18n="reconstruction.inquiryIntro">Answer one bounded question at a time. Each answer is attached to a specific Runtime target before Reading begins.</p>
+            </div>
+            <strong id="inquiryProgress">0 / 6</strong>
+          </header>
+
+          <div class="inquiry-steps" id="inquirySteps" aria-label="Reconstruction progress"></div>
+
+          <details class="inquiry-history-details">
+            <summary data-i18n="reconstruction.previousAnswers">Previous answers</summary>
+            <div class="inquiry-history" id="inquiryHistory"></div>
+          </details>
+
+          <div class="inquiry-current">
+            <span id="inquiryTarget" data-i18n="reconstruction.inquiryCurrentTarget">Current target</span>
+            <p id="inquiryQuestion" data-i18n="reconstruction.inquiryFallbackQuestion">What still needs to be reconstructed?</p>
+          </div>
+
+          <form class="inquiry-form" id="inquiryForm">
+            <label for="inquiryAnswer" data-i18n="reconstruction.inquiryAnswerLabel">Your reported experience</label>
+            <textarea id="inquiryAnswer" rows="4" maxlength="2000" data-i18n-placeholder="reconstruction.inquiryPlaceholder"></textarea>
+            <div class="inquiry-form-actions">
+              <p id="inquiryStatus" aria-live="polite"></p>
+              <button class="btn primary" id="submitInquiryAnswer" type="submit" data-i18n="reconstruction.inquirySubmit">Add to Reconstruction</button>
+            </div>
+          </form>
+        </section>
+
+        <div class="hidden" id="reconstructionSections">
+          <section class="customer-reconstruction" id="entrySection" aria-labelledby="customerReconstructionTitle">
+            <header class="customer-reconstruction-heading">
+              <p class="section-label" data-i18n="reconstruction.customerViewKicker">Your reconstruction</p>
+              <h3 id="customerReconstructionTitle" data-i18n="reconstruction.customerViewTitle">What we can currently establish</h3>
+              <p data-i18n="reconstruction.customerViewIntro">This view keeps confirmed material, reported conditions and unresolved parts separate.</p>
+            </header>
+
+            <div class="customer-reconstruction-grid">
+              <article class="customer-summary-card customer-summary-card--change">
+                <span>01</span>
+                <div>
+                  <h4 data-i18n="reconstruction.customerChangeTitle">
+                    The change taking place
+                  </h4>
+                  <p id="customerChange"></p>
+                  <dl class="customer-summary-meta">
+                    <div>
+                      <dt data-i18n="reconstruction.evidenceSourceLabel">
+                        Evidence source
+                      </dt>
+                      <dd id="customerChangeSource">—</dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="reconstruction.confidenceLabel">
+                        Confidence
+                      </dt>
+                      <dd id="customerChangeConfidence">—</dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="customer-summary-edit"
+                    href="/reality-entry?mode=revise&amp;target=observed_change"
+                    data-i18n="reconstruction.editAnswer"
+                  >Edit answer</a>
+                </div>
+              </article>
+              <article class="customer-summary-card">
+                <span>02</span>
+                <div>
+                  <h4 data-i18n="reconstruction.customerProcessTitle">
+                    How it has developed
+                  </h4>
+                  <ul id="customerProcess"></ul>
+                  <dl class="customer-summary-meta">
+                    <div>
+                      <dt data-i18n="reconstruction.evidenceSourceLabel">
+                        Evidence source
+                      </dt>
+                      <dd id="customerProcessSource">—</dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="reconstruction.confidenceLabel">
+                        Confidence
+                      </dt>
+                      <dd id="customerProcessConfidence">—</dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="customer-summary-edit"
+                    href="/reality-entry?mode=revise&amp;target=timing"
+                    data-i18n="reconstruction.editAnswer"
+                  >Edit answer</a>
+                </div>
+              </article>
+              <article class="customer-summary-card">
+                <span>03</span>
+                <div>
+                  <h4 data-i18n="reconstruction.customerConditionsTitle">
+                    Conditions affecting it
+                  </h4>
+                  <ul id="customerConditions"></ul>
+                  <dl class="customer-summary-meta">
+                    <div>
+                      <dt data-i18n="reconstruction.evidenceSourceLabel">
+                        Evidence source
+                      </dt>
+                      <dd id="customerConditionsSource">—</dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="reconstruction.confidenceLabel">
+                        Confidence
+                      </dt>
+                      <dd id="customerConditionsConfidence">—</dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="customer-summary-edit"
+                    href="/reality-entry?mode=revise&amp;target=context"
+                    data-i18n="reconstruction.editAnswer"
+                  >Edit answer</a>
+                </div>
+              </article>
+              <article class="customer-summary-card customer-summary-card--confirmed">
+                <span>04</span>
+                <div>
+                  <h4 data-i18n="reconstruction.customerConfirmedTitle">
+                    What has been established
+                  </h4>
+                  <ul id="customerConfirmed"></ul>
+                  <dl class="customer-summary-meta">
+                    <div>
+                      <dt data-i18n="reconstruction.evidenceSourceLabel">
+                        Evidence source
+                      </dt>
+                      <dd id="customerConfirmedSource">—</dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="reconstruction.confidenceLabel">
+                        Confidence
+                      </dt>
+                      <dd id="customerConfirmedConfidence">—</dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="customer-summary-edit"
+                    href="/reality-entry?mode=revise&amp;target=evidence"
+                    data-i18n="reconstruction.editAnswer"
+                  >Edit answer</a>
+                </div>
+              </article>
+              <article class="customer-summary-card customer-summary-card--unknown">
+                <span>05</span>
+                <div>
+                  <h4 data-i18n="reconstruction.customerUnknownTitle">
+                    What remains unclear
+                  </h4>
+                  <ul id="customerUnclear"></ul>
+                  <dl class="customer-summary-meta">
+                    <div>
+                      <dt data-i18n="reconstruction.evidenceSourceLabel">
+                        Evidence source
+                      </dt>
+                      <dd id="customerUnclearSource">—</dd>
+                    </div>
+                    <div>
+                      <dt data-i18n="reconstruction.confidenceLabel">
+                        Confidence
+                      </dt>
+                      <dd id="customerUnclearConfidence">—</dd>
+                    </div>
+                  </dl>
+                  <a
+                    class="customer-summary-edit"
+                    href="/reality-entry?mode=revise&amp;target=unknown_reality"
+                    data-i18n="reconstruction.editAnswer"
+                  >Edit answer</a>
+                </div>
+              </article>
+            </div>
+
+            <section
+              class="customer-missing-evidence"
+              id="missingEvidencePanel"
+              aria-labelledby="missingEvidenceTitle"
+            >
+              <header>
+                <div>
+                  <p
+                    class="section-label"
+                    data-i18n="reconstruction.missingEvidenceLabel"
+                  >Missing evidence</p>
+                  <h3
+                    id="missingEvidenceTitle"
+                    data-i18n="reconstruction.missingEvidenceTitle"
+                  >What still needs support</h3>
+                </div>
+                <strong id="customerMissingCount">—</strong>
+              </header>
+              <p data-i18n="reconstruction.missingEvidenceIntro">
+                These items remain unresolved. PHI OS will carry them forward
+                as missing evidence rather than convert them into facts.
+              </p>
+              <ul id="customerMissingEvidence"></ul>
+            </section>
+          </section>
+
+          <details class="technical-record">
+            <summary>
+              <span data-i18n="reconstruction.technicalRecord">Technical Record</span>
+              <small data-i18n="reconstruction.technicalRecordDetail">Grammar, carrier, conscious Runtime and evidence details</small>
+            </summary>
+            <div class="technical-record-body">
+
+          <section class="reconstruction-section" id="formationSection">
+            <div class="section-index">02</div>
+            <div class="section-content">
+              <p class="section-label" data-i18n="reconstruction.formationLabel">Figure 0A · Reality Formation Grammar</p>
+              <h3 data-i18n="reconstruction.formationTitle">How this Reality appears to be forming</h3>
+              <p class="section-note" data-i18n="reconstruction.formationNote">Grammar states are provisional reconstruction markers, not final interpretations.</p>
+              <div class="formation-arc-grid" id="formationArcs"></div>
+            </div>
+          </section>
+
+          <section class="reconstruction-section" id="carrierSection">
+            <div class="section-index">03</div>
+            <div class="section-content">
+              <p class="section-label" data-i18n="reconstruction.carrierLabel">Figure 4A · Human Runtime Initialization</p>
+              <h3 data-i18n="reconstruction.carrierTitle">Where Reality appears to have entered the carrier</h3>
+              <div class="carrier-layout">
+                <section>
+                  <h4 data-i18n="reconstruction.coordinatesTitle">Runtime coordinates</h4>
+                  <div class="coordinate-grid" id="coordinateGrid"></div>
+                </section>
+                <section>
+                  <h4 data-i18n="reconstruction.carrierOrganizationTitle">Carrier organization</h4>
+                  <div class="coordinate-grid" id="carrierOrganizationGrid"></div>
+                </section>
+                <section>
+                  <h4 data-i18n="reconstruction.carrierConfigurationTitle">Carrier configuration</h4>
+                  <div class="coordinate-grid" id="carrierConfigurationGrid"></div>
+                </section>
+              </div>
+              <div class="boundary-note">
+                <strong data-i18n="reconstruction.evidenceBoundary">Evidence boundary</strong>
+                <p data-i18n="reconstruction.carrierBoundaryText">Biological coordinates remain “not established” unless supported by user reports, documents, sensors, or professional evidence.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="reconstruction-section" id="consciousSection">
+            <div class="section-index">04</div>
+            <div class="section-content">
+              <p class="section-label" data-i18n="reconstruction.consciousLabel">Figure 5E · Conscious Runtime Engine</p>
+              <h3 data-i18n="reconstruction.consciousTitle">How Reality is becoming experience, expression, action and identity</h3>
+              <div class="conscious-pipeline" id="consciousPipeline"></div>
+            </div>
+          </section>
+
+          <section class="reconstruction-section" id="evidenceSection">
+            <div class="section-index">05</div>
+            <div class="section-content">
+              <p class="section-label" data-i18n="reconstruction.chain.evidence">Evidence Structure</p>
+              <h3 data-i18n="reconstruction.evidenceTitle">What is observed, reported, interpreted and still unknown</h3>
+              <div class="evidence-columns">
+                <section><h4 data-i18n="reconstruction.availableEvidence">Observed Evidence</h4><ul id="knownReality"></ul></section>
+                <section><h4 data-i18n="reconstruction.reportedExperience">Reported Experience</h4><ul id="reportedExperience"></ul></section>
+                <section><h4 data-i18n="reconstruction.interpretations">Interpretation</h4><ul id="interpretiveMaterial"></ul></section>
+                <section><h4 data-i18n="reconstruction.professionalAssessments">Professional Assessment</h4><ul id="professionalAssessment"></ul></section>
+                <section><h4 data-i18n="reconstruction.unknownReality">Unknown Reality</h4><ul id="unknownReality"></ul></section>
+              </div>
+              <div class="dependency-panel">
+                <div>
+                  <p class="section-label" data-i18n="reconstruction.dependencyHypothesis">Current dependency hypothesis</p>
+                  <h4 id="dependencySummary" data-i18n="reconstruction.notEstablished">Not yet established.</h4>
+                </div>
+                <span id="dependencyStatus" data-i18n="reconstruction.unclearSequence">Unclear</span>
+              </div>
+            </div>
+          </section>
+            </div>
+          </details>
+
+          <section class="reconstruction-next-stage" id="directionSection">
+            <div>
+              <p class="section-label" data-i18n="reconstruction.nextStageLabel">Next stage</p>
+              <h3 data-i18n="reconstruction.readingReadyTitle">Continue when this reconstruction feels accurate</h3>
+              <p data-i18n="reconstruction.readingReadyText">Reality Reading will interpret your current position without changing the evidence recorded here.</p>
+              <div class="direction-card hidden" aria-hidden="true">
+                <div><span data-i18n="reconstruction.focusLabel">Current reconstruction focus</span><strong id="reconstructionFocus" data-i18n="reconstruction.notEstablished">Not yet established.</strong></div>
+                <div><span data-i18n="reconstruction.rationaleLabel">Why it matters</span><strong id="reconstructionRationale" data-i18n="reconstruction.notEstablished">Not yet established.</strong></div>
+              </div>
+              <section class="evidence-request-list hidden" aria-hidden="true">
+                <h4 data-i18n="reconstruction.priorityEvidence">Priority evidence requests</h4>
+                <ol id="priorityEvidence"></ol>
+              </section>
+            </div>
+            <div class="reconstruction-actions">
+                <button
+                  class="btn primary phi-button phi-button--primary reconstruction-primary-action"
+                  id="continueToReading"
+                  type="button"
+                  disabled
+                  data-i18n="reconstruction.continueButton"
+                >Continue to Reality Reading →</button>
+                <a
+                  class="btn phi-button phi-button--secondary reconstruction-secondary-action"
+                  href="/reality-entry?mode=revise"
+                  data-i18n="reconstruction.returnToEntryButton"
+                >Return to Entry</a>
+                <small data-i18n="reconstruction.actionBoundary">
+                  Editing returns to Entry and preserves the existing Runtime
+                  lineage.
+                </small>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <aside class="reconstruction-inspector" hidden aria-label="Runtime Inspector" data-i18n-aria-label="reconstruction.inspectorAriaLabel">
+        <header>
+          <p data-i18n="reconstruction.inspectorLabel">Runtime Inspector</p>
+          <h2 data-i18n="reconstruction.inspectorTitle">Evidence and status</h2>
+        </header>
+        <div class="inspector-block"><span data-i18n="reconstruction.runtimeEntity">Runtime Entity</span><strong id="runtimeEntityId">—</strong></div>
+        <div class="inspector-block"><span data-i18n="reconstruction.runtimeEntry">Runtime Entry</span><strong id="runtimeEntryId">—</strong></div>
+        <div class="inspector-block"><span data-i18n="reconstruction.methodLabel">Reconstruction method</span><strong id="reconstructionMethod" data-i18n="reconstruction.ruleFirst">Rule-first</strong></div>
+        <div class="inspector-block"><span data-i18n="reconstruction.primaryArcLabel">Current formation arc</span><strong id="primaryArc" data-i18n="reconstruction.notEstablished">Not established</strong></div>
+        <div class="inspector-block"><span data-i18n="reconstruction.strongestSignalLabel">Strongest current signal</span><strong id="strongestSignal" data-i18n="reconstruction.notEstablished">Not established</strong></div>
+        <div class="inspector-block"><span data-i18n="reconstruction.unknownItemsLabel">Unknown items preserved</span><strong id="unknownCount">0</strong></div>
+        <div class="inspector-block"><span data-i18n="reconstruction.storageLabel">Persistent storage</span><strong data-i18n="reconstruction.storageDisabled">Disabled</strong></div>
+        <div id="runtimeInspectorDetails"></div>
+      </aside>
+    </section>
+  </main>
+  </div></div>
+
+  <footer class="reconstruction-footer">
+    <div class="shell">
+      <span data-i18n="reconstruction.footerPrinciple">Reality before intelligence.</span>
+      <span data-i18n="reconstruction.footerFlow">Formation → Reconstruction → Reading → Navigation → Continuity</span>
+    </div>
+  </footer>
+
+  <script type="module" src="/assets/js/reconstruction.js"></script>
+</body>
+</html>

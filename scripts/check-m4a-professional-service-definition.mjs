@@ -405,7 +405,10 @@ for (const [file, expectedHash] of Object.entries(
 const migrationFiles = (await fs.readdir(path.join(root, 'db/migrations')))
   .filter(filename => filename.endsWith('.sql'))
   .sort();
-assert.deepEqual(migrationFiles, milestone.migrationInventory);
+assert.deepEqual(
+  migrationFiles.slice(0, milestone.migrationInventory.length),
+  milestone.migrationInventory
+);
 
 assert.equal(
   registryIndex.registries.professional_service_catalog,

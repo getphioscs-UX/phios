@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse the sixteen registered PHI OS Book I figures by Part.">
+  <title data-i18n="knowledge.figures.metaTitle">Figures — PHI OS Knowledge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-release.css">
+</head>
+<body class="knowledge-page" data-public-section="knowledge" data-page="figures">
+  <a class="skip-link" href="#figures-main" data-i18n="knowledge.common.skip">Skip to main content</a>
+  <header data-public-header-placeholder></header>
+  <main id="figures-main">
+    <section class="knowledge-hero">
+      <div class="knowledge-shell">
+        <p class="knowledge-eyebrow" data-i18n="knowledge.figures.eyebrow">Figure Gallery</p>
+        <h1 data-i18n="knowledge.figures.title">Visual maps for Book I.</h1>
+        <p class="knowledge-hero__lead" data-i18n="knowledge.figures.lead">Browse public WebP editions by Part.</p>
+      </div>
+    </section>
+    <section class="knowledge-section knowledge-section--paper">
+      <div class="knowledge-shell">
+        <div class="knowledge-field">
+          <label for="figure-part" data-i18n="knowledge.figures.filterLabel">Filter by Part</label>
+          <select id="figure-part">
+            <option value="all" data-i18n="knowledge.figures.all">All Parts</option>
+            <option value="0">Part 0</option>
+            <option value="1">Part 1</option>
+            <option value="2">Part 2</option>
+            <option value="3">Part 3</option>
+            <option value="4">Part 4</option>
+            <option value="5">Part 5</option>
+          </select>
+        </div>
+        <p class="knowledge-results" aria-live="polite" data-figure-results></p>
+        <div class="figure-grid" data-figure-grid></div>
+        <p class="knowledge-boundary" data-i18n="knowledge.figures.webNotice">Public pages use web-resolution WebP.</p>
+      </div>
+    </section>
+  </main>
+  <footer data-public-footer-placeholder></footer>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/figures.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+PHI OS — M2-W4 Canonical SQL Checksum Hotfix v2
+
+CAUSE
+The actual 0001 SQL was verified line by line and matches the registered
+Migration structure. Invisible encoding, whitespace, and formatting
+differences caused the text-level SHA-256 check to report false drift.
+
+INSTALL
+1. Extract this ZIP.
+2. Copy the CONTENTS of M2-W4-Checksum-Hotfix into the phios repo root.
+3. Allow the included files to replace the existing versions.
+4. Run:
+
+   npm run check:runtime-migrations
+   npm run check
+
+EXPECTED
+✓ M2-W4 immutable migrations, history, checksums, ordering, runner, and schema drift checks passed.
+
+BOUNDARY
+- Do not edit 0001_platform_foundation.sql.
+- Do not edit 0002_initial_runtime.sql.
+- The Registry now declares sha256-sql-canonical-v1.
+- BOM, LF/CRLF, indentation, trailing whitespace, and comments are ignored.
+- Any real SQL content change remains a checksum failure.
+
+COMMIT
+git add content/registry/runtime-migrations.json functions/runtime/migrations/migration-runner.js functions/runtime/migrations/index.js scripts/check-runtime-migrations.mjs docs/runtime/M2-W4-MIGRATION-SYSTEM.md
+git commit -m "Canonicalize migration SQL checksums"
+git push origin main

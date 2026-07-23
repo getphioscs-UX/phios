@@ -1,0 +1,19 @@
+M3A-W1 Visual Acceptance Fixes
+================================
+
+Baseline:
+  main a17e5276c7010f45b1da1b8e0ad4fe1b25a8ff14
+
+Apply:
+  Extract this archive into the repository root while preserving paths.
+
+Verify:
+  node scripts/check-m3a-visual-acceptance-fixes.mjs
+  npm run check
+
+Then commit, push, wait for Production deployment, and visually retest:
+  Home, About, Atlas, Entry, Reading, Navigation
+  at 360px, 768px, and 1440px.
+
+This package contains no Runtime JavaScript, API, schema, migration, or
+package.json changes.

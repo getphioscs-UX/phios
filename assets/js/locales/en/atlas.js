@@ -81,49 +81,53 @@ const atlas = Object.freeze({
       openCompleteFigure: 'Open the complete figure',
       part1: {
         title: 'Reality Physics',
-        description: 'How differences, constraints, structures and fields make Reality observable.'
+        description: 'How differences, constraints, structures and fields make Reality observable.',
+        figure1aTitle: 'Master Diagram of Reality Structure Formation',
+        figure1aDescription: 'Difference enters constraints, becomes structure, organizes fields and connections, and forms the observable architecture from which navigation becomes possible.',
+        figure1bTitle: 'Reality Navigation Physics',
+        figure1bDescription: 'Direction, position, coordinates and constraints establish the physical logic required to navigate Reality without collapsing uncertainty into certainty.'
       },
       part2: {
         title: 'Projection System',
-        description: 'How Reality becomes meaning, experience and world.'
+        description: 'How Reality becomes meaning, experience and world.',
+        figure2aTitle: 'PHI OS Projection Pipeline',
+        figure2aDescription: 'Reality passes through observation, compression, meaning, conditions, collective coordination and synthetic projection before it becomes an experienced world.'
       },
       part3: {
         title: 'Reality Dynamics',
         description: 'How Reality locates its present position, selects a question and capability, moves through activation, forms a state and carries retained legacy into the next cycle.',
         figure3aTitle: 'Runtime Decision Stack',
-        figure3aDescription: 'Reality identifies its current grammar position and active question before selecting capabilities and weighting drivers. Driver priority remains contextual and must not be inferred without evidence.',
-        figure3aStep1: 'Entry',
-        figure3aStep2: 'Grammar',
-        figure3aStep3: 'Question',
-        figure3aStep4: 'Capability',
-        figure3aStep5: 'Driver priority',
-        figure3aStep6: 'Reality state',
+        figure3aDescription: 'Reality identifies its current grammar position and active question before selecting capabilities and weighting drivers; priority remains contextual and evidence-bound.',
         figure3bTitle: 'Runtime State Formation Architecture',
-        figure3bDescription: 'Five coordinate dimensions bound possibility; motion transforms position, activation admits change into Reality, and temporal closure retains legacy for the next cycle.',
-        figure3bStep1: 'Coordinate',
-        figure3bStep2: 'Motion',
-        figure3bStep3: 'Activation',
-        figure3bStep4: 'Reality state',
-        figure3bStep5: 'Temporal closure',
-        figure3bStep6: 'New cycle',
-        figure3bCoordinates: 'Coordinates: temporal · condition · directional · carrier · relational'
+        figure3bDescription: 'Coordinates bound possibility, motion transforms position, activation admits change into Reality, and temporal closure retains legacy for the next cycle.',
+        figure3cTitle: 'Continuous Runtime Architecture',
+        figure3cDescription: 'State, outcome, feedback, settlement and reconfiguration connect one Runtime cycle to the emergence of the next.'
       },
       part4: {
         title: 'Human Runtime Carrier',
         description: 'How Reality passes through media, carrier configuration, perception, biological processing and stabilization to become a continuous Human Runtime.',
+        figure4aTitle: 'Human Runtime Carrier Architecture',
+        figure4aDescription: 'Reality Initialization State enters a living carrier through biological, sensory, cognitive and environmental conditions.',
+        figure4bTitle: 'Carrier Runtime Configuration Architecture',
+        figure4bDescription: 'Sensory, cognitive, neural, physiological and environmental configurations shape how the carrier receives and organizes Reality.',
+        figure4cTitle: 'Human Runtime Stabilization and Continuity Architecture',
+        figure4cDescription: 'Carrier organization, stabilization, maintenance, recovery, drift and failure determine whether Human Runtime can remain continuous.',
         figure4dTitle: 'Continuous Human Runtime',
-        figure4dDescription: 'Reality reaches the human carrier through media, becomes perceptual and biological processing, stabilizes as organized Runtime, and continues through adaptation, maintenance, recovery, drift or failure.',
-        figure4dStep1: 'Runtime medium',
-        figure4dStep2: 'Carrier',
-        figure4dStep3: 'Reality intake',
-        figure4dStep4: 'Biological Runtime',
-        figure4dStep5: 'Stabilization',
-        figure4dStep6: 'Continuity',
-        figure4dContinuity: 'Continuity modes: adaptation · maintenance · recovery · drift · failure'
+        figure4dDescription: 'Runtime media, initialization, Reality intake, biological processing and carrier stabilization continue through adaptation, maintenance, recovery, drift or failure.'
       },
       part5: {
         title: 'Conscious Runtime',
-        description: 'How biological Runtime becomes conscious experience, agency and identity.'
+        description: 'How biological Runtime becomes conscious experience, agency and identity.',
+        figure5aTitle: 'Experience Configuration Engine',
+        figure5aDescription: 'Reality is selected, compressed and stabilized into a characteristic mode of conscious experience.',
+        figure5bTitle: 'Expression Configuration Architecture',
+        figure5bDescription: 'Experience passes through cognition, compression, thresholds and media before becoming spoken, withheld or enacted expression.',
+        figure5cTitle: 'Agency Configuration Architecture',
+        figure5cDescription: 'Expression becomes intention, choice, responsibility, commitment and action within real constraints.',
+        figure5dTitle: 'Identity Continuity Engine',
+        figure5dDescription: 'Memory, self-model, narrative and repeated action stabilize identity across changing Runtime states.',
+        figure5eTitle: 'Conscious Runtime Integration',
+        figure5eDescription: 'Experience, awareness, emotion, expression, agency and identity are integrated into a continuous conscious Runtime.'
       },
       part6: {
         title: 'Relational Runtime',

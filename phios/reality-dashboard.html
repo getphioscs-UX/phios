@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="description"
+    content="Resume a PHI OS Reality Journey, inspect its recovery state, and review its append-only timeline."
+  >
+  <meta name="robots" content="noindex,follow">
+  <title data-i18n="journeyDashboard.metaTitle">Journey Dashboard — PHI OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/design/motion.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/reality-dashboard.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
+</head>
+<body class="public-page journey-dashboard-page" data-page="reality-dashboard" data-public-section="reality">
+  <a class="phi-skip-link" href="#dashboard-main" data-i18n="journeyDashboard.skip">
+    Skip to Journey Dashboard
+  </a>
+  <div data-public-header-placeholder></div>
+
+  <main id="dashboard-main">
+    <section class="journey-dashboard-hero" aria-labelledby="dashboard-title">
+      <div class="public-container journey-dashboard-hero__grid">
+        <div>
+          <p class="public-eyebrow" data-i18n="journeyDashboard.hero.eyebrow">
+            M3C · Journey Dashboard
+          </p>
+          <h1 id="dashboard-title" class="public-display" data-i18n="journeyDashboard.hero.title">
+            Continue from the Reality you already established.
+          </h1>
+          <p class="public-lead" data-i18n="journeyDashboard.hero.lead">
+            See the current stage, recovery state and historical timeline before
+            deciding whether to resume, revise or begin a separate Journey.
+          </p>
+        </div>
+        <div class="journey-dashboard-hero__actions">
+          <a class="public-button" href="/reality-journey">
+            <span data-i18n="journeyDashboard.hero.overview">View Journey Overview</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <p data-i18n="journeyDashboard.hero.readOnly">
+            Opening this dashboard does not change your Runtime.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="dashboardLoading"
+      class="public-section journey-dashboard-state"
+      aria-live="polite"
+    >
+      <div class="public-container">
+        <p data-i18n="journeyDashboard.loading">Reading the recoverable Journey state…</p>
+      </div>
+    </section>
+
+    <section
+      id="dashboardError"
+      class="public-section journey-dashboard-state hidden"
+      role="alert"
+    >
+      <div class="public-container journey-dashboard-message">
+        <p class="public-eyebrow" data-i18n="journeyDashboard.error.eyebrow">State unavailable</p>
+        <h2 class="public-title" data-i18n="journeyDashboard.error.title">
+          The dashboard could not safely read this Journey.
+        </h2>
+        <p class="public-lead" data-i18n="journeyDashboard.error.copy">
+          No Runtime was changed. Return to the last Journey page or try again
+          after browser storage becomes available.
+        </p>
+        <a class="public-button" href="/reality-journey">
+          <span data-i18n="journeyDashboard.error.action">Return to Journey Overview</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section
+      id="dashboardEmpty"
+      class="public-section journey-dashboard-state hidden"
+      aria-labelledby="dashboard-empty-title"
+    >
+      <div class="public-container journey-dashboard-message">
+        <p class="public-eyebrow" data-i18n="journeyDashboard.empty.eyebrow">
+          No active Journey
+        </p>
+        <h2 id="dashboard-empty-title" class="public-title" data-i18n="journeyDashboard.empty.title">
+          Start when one change is ready to be examined.
+        </h2>
+        <p class="public-lead" data-i18n="journeyDashboard.empty.copy">
+          No recoverable Runtime is available in this browser. Entry begins a
+          new Journey without inventing earlier history.
+        </p>
+        <div class="public-actions">
+          <a class="public-button public-button--primary" href="/reality-entry">
+            <span data-i18n="journeyDashboard.empty.start">Start Reality Journey</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="public-button" href="/reality-journey">
+            <span data-i18n="journeyDashboard.empty.overview">Understand the seven stages</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div id="dashboardWorkspace" class="hidden">
+      <section class="public-section journey-dashboard-summary" aria-labelledby="dashboard-summary-title">
+        <div class="public-container">
+          <div class="journey-dashboard-summary__head">
+            <div>
+              <p class="public-eyebrow" data-i18n="journeyDashboard.summary.eyebrow">
+                Recoverable Runtime
+              </p>
+              <h2 id="dashboard-summary-title" class="public-title" data-i18n="journeyDashboard.summary.title">
+                Your Journey at a glance.
+              </h2>
+            </div>
+            <div class="journey-dashboard-runtime">
+              <small data-i18n="journeyDashboard.summary.runtime">Runtime</small>
+              <strong id="runtimeId">Not established</strong>
+            </div>
+          </div>
+
+          <div class="journey-dashboard-summary__grid">
+            <article class="journey-dashboard-metric journey-dashboard-metric--primary">
+              <span id="currentStageNumber">01</span>
+              <small data-i18n="journeyDashboard.summary.currentStage">Current Stage</small>
+              <strong id="currentStage">Entry</strong>
+            </article>
+            <article class="journey-dashboard-metric">
+              <span aria-hidden="true">✓</span>
+              <small data-i18n="journeyDashboard.summary.completedStages">Completed Stages</small>
+              <strong id="completedStages">0 of 7</strong>
+            </article>
+            <article class="journey-dashboard-metric">
+              <span aria-hidden="true">→</span>
+              <small data-i18n="journeyDashboard.summary.nextStep">Next Step</small>
+              <strong id="nextStep">Continue Entry</strong>
+            </article>
+            <article class="journey-dashboard-metric">
+              <span aria-hidden="true">↻</span>
+              <small data-i18n="journeyDashboard.summary.latestUpdate">Latest Update</small>
+              <strong id="latestUpdate">Date unavailable</strong>
+            </article>
+            <article class="journey-dashboard-metric">
+              <span aria-hidden="true">◇</span>
+              <small data-i18n="journeyDashboard.summary.recoveryStatus">Recovery Status</small>
+              <strong id="recoveryStatus">Available in this session</strong>
+            </article>
+          </div>
+
+          <div class="journey-dashboard-resume">
+            <div>
+              <h3 data-i18n="journeyDashboard.resume.title">Continue the current stage</h3>
+              <p data-i18n="journeyDashboard.resume.copy">
+                Resume uses the existing Runtime and does not create a new revision.
+              </p>
+            </div>
+            <a id="resumeJourney" class="public-button public-button--primary" href="/reality-entry.html">
+              <span data-i18n="journeyDashboard.resume.action">Resume Journey</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="public-section journey-dashboard-progress" aria-labelledby="dashboard-progress-title">
+        <div class="public-container">
+          <p class="public-eyebrow" data-i18n="journeyDashboard.progress.eyebrow">
+            Journey Progress
+          </p>
+          <h2 id="dashboard-progress-title" class="public-title" data-i18n="journeyDashboard.progress.title">
+            Seven stages. One explicit next step.
+          </h2>
+          <p class="public-lead" data-i18n="journeyDashboard.progress.lead">
+            Completed stages remain visible. Available does not mean
+            automatically selected or completed.
+          </p>
+          <ol
+            id="dashboardStages"
+            class="journey-dashboard-stages"
+            aria-label="Journey stage progress"
+            data-i18n-aria-label="journeyDashboard.progress.label"
+          ></ol>
+        </div>
+      </section>
+
+      <section class="public-section journey-dashboard-decisions" aria-labelledby="dashboard-decisions-title">
+        <div class="public-container">
+          <p class="public-eyebrow" data-i18n="journeyDashboard.decisions.eyebrow">
+            Action Boundary
+          </p>
+          <h2 id="dashboard-decisions-title" class="public-title" data-i18n="journeyDashboard.decisions.title">
+            Resume, revise and start new are different actions.
+          </h2>
+          <p class="public-lead" data-i18n="journeyDashboard.decisions.lead">
+            The dashboard never treats these choices as interchangeable and
+            never erases the source Runtime.
+          </p>
+
+          <div class="journey-dashboard-decision-grid">
+            <article>
+              <span>01</span>
+              <h3 data-i18n="journeyDashboard.decisions.resume.title">Resume</h3>
+              <p data-i18n="journeyDashboard.decisions.resume.copy">
+                Continue the current stage using the same Runtime and existing evidence.
+              </p>
+              <a id="resumeBoundaryAction" class="public-button" href="/reality-entry.html">
+                <span data-i18n="journeyDashboard.decisions.resume.action">Resume current Journey</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </article>
+            <article>
+              <span>02</span>
+              <h3 data-i18n="journeyDashboard.decisions.revise.title">Revise</h3>
+              <p data-i18n="journeyDashboard.decisions.revise.copy">
+                Return through Continuity to create an append-only revision linked to the source Reading.
+              </p>
+              <a id="reviseBoundaryAction" class="public-button" href="/my-reality.html#continuity">
+                <span data-i18n="journeyDashboard.decisions.revise.action">Review revision choice</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+            <article>
+              <span>03</span>
+              <h3 data-i18n="journeyDashboard.decisions.newJourney.title">Start New Journey</h3>
+              <p data-i18n="journeyDashboard.decisions.newJourney.copy">
+                Confirm a new Entry through Continuity so the earlier Runtime remains in lineage.
+              </p>
+              <a id="newJourneyBoundaryAction" class="public-button" href="/my-reality.html#continuity">
+                <span data-i18n="journeyDashboard.decisions.newJourney.action">Review new Journey choice</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+          </div>
+
+          <p class="journey-dashboard-boundary" data-i18n="journeyDashboard.decisions.boundary">
+            Revision and new Runtime creation require explicit Continuity
+            confirmation. This dashboard does not execute either transition.
+          </p>
+        </div>
+      </section>
+
+      <section class="public-section journey-dashboard-timeline" aria-labelledby="dashboard-timeline-title">
+        <div class="public-container journey-dashboard-timeline__grid">
+          <header>
+            <p class="public-eyebrow" data-i18n="journeyDashboard.timeline.eyebrow">
+              Journey Timeline
+            </p>
+            <h2 id="dashboard-timeline-title" class="public-title" data-i18n="journeyDashboard.timeline.title">
+              Latest Runtime updates.
+            </h2>
+            <p class="public-lead" data-i18n="journeyDashboard.timeline.lead">
+              Events are read from the existing append-only lineage. They are
+              shown as historical references, not verified evidence.
+            </p>
+          </header>
+          <div>
+            <p id="timelineEmpty" class="journey-dashboard-timeline__empty hidden" data-i18n="journeyDashboard.timeline.empty">
+              No stage event has been recorded yet. Your in-progress Entry can still be resumed.
+            </p>
+            <ol id="journeyTimeline" class="journey-dashboard-events"></ol>
+            <p class="journey-dashboard-boundary" data-i18n="journeyDashboard.timeline.boundary">
+              Opening the timeline does not rewrite, promote or delete earlier records.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div data-public-footer-placeholder></div>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/reality-dashboard.js"></script>
+</body>
+</html>

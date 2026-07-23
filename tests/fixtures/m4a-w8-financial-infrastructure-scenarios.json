@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "phi-os.m4a-w8-financial-infrastructure-scenarios.v1",
+  "syntheticOnly": true,
+  "now": "2026-07-23T13:00:00.000Z",
+  "assumptions": [
+    {
+      "assumption_id": "assumption_test_inflation",
+      "assumption_type": "inflation_rate",
+      "version": "1.0.0",
+      "value_numeric": 3,
+      "unit": "percent_per_year",
+      "source": "Synthetic professional scenario",
+      "jurisdiction": "MY",
+      "effective_at": "2026-07-01T00:00:00.000Z",
+      "review_at": "2027-07-01T00:00:00.000Z",
+      "created_by": "professional_test_1",
+      "review_status": "reviewed"
+    },
+    {
+      "assumption_id": "assumption_test_return",
+      "assumption_type": "investment_return",
+      "version": "1.0.0",
+      "value_numeric": 5,
+      "unit": "percent_per_year",
+      "source": "Synthetic professional scenario",
+      "jurisdiction": "MY",
+      "effective_at": "2026-07-01T00:00:00.000Z",
+      "review_at": "2027-07-01T00:00:00.000Z",
+      "created_by": "professional_test_1",
+      "review_status": "reviewed"
+    }
+  ],
+  "evidence": {
+    "evidence_value_id": "evidence_value_test_1",
+    "household_id": "household_test_1",
+    "data_subject_id": "subject_test_1",
+    "record_type": "income_item",
+    "record_id": "income_test_1",
+    "field": "amount_minor",
+    "value_numeric": 800000,
+    "unit": "currency_minor",
+    "currency": "MYR",
+    "source_type": "document_extracted",
+    "source_reference_id": "file_test_income_1",
+    "evidence_date": "2026-07-20T00:00:00.000Z",
+    "verification_status": "verified",
+    "verified_by": "professional_test_1",
+    "assumption_ids": [],
+    "input_evidence_ids": []
+  },
+  "formulaCases": [
+    {
+      "formula_id": "liquidity_ratio",
+      "values": {
+        "liquid_assets_minor": 1800000,
+        "monthly_expenses_minor": 300000
+      },
+      "expected": 6
+    },
+    {
+      "formula_id": "debt_to_income_ratio",
+      "values": {
+        "monthly_debt_repayments_minor": 200000,
+        "monthly_gross_income_minor": 800000
+      },
+      "expected": 25
+    },
+    {
+      "formula_id": "current_ratio",
+      "values": {
+        "liquid_assets_minor": 1000000,
+        "current_liabilities_minor": 500000
+      },
+      "expected": 2
+    },
+    {
+      "formula_id": "leverage_ratio",
+      "values": {
+        "total_liabilities_minor": 4000000,
+        "total_assets_minor": 10000000
+      },
+      "expected": 40
+    },
+    {
+      "formula_id": "savings_ratio",
+      "values": {
+        "monthly_surplus_minor": 120000,
+        "monthly_net_income_minor": 600000
+      },
+      "expected": 20
+    },
+    {
+      "formula_id": "net_worth",
+      "values": {
+        "total_assets_minor": 10000000,
+        "total_liabilities_minor": 4000000
+      },
+      "expected": 6000000
+    },
+    {
+      "formula_id": "cash_flow_surplus",
+      "values": {
+        "total_income_minor": 800000,
+        "total_expenses_minor": 680000
+      },
+      "expected": 120000
+    },
+    {
+      "formula_id": "retirement_gap",
+      "values": {
+        "required_retirement_fund_minor": 20000000,
+        "existing_retirement_assets_minor": 8000000
+      },
+      "expected": 12000000
+    },
+    {
+      "formula_id": "education_gap",
+      "values": {
+        "projected_education_cost_minor": 5000000,
+        "existing_education_fund_minor": 1000000
+      },
+      "expected": 4000000
+    },
+    {
+      "formula_id": "insurance_gap",
+      "values": {
+        "required_coverage_minor": 10000000,
+        "existing_coverage_minor": 4000000
+      },
+      "expected": 6000000
+    }
+  ],
+  "riskPolicy": {
+    "policy_id": "risk_policy_test_my_1",
+    "version": "1.0.0",
+    "jurisdiction": "MY",
+    "effective_at": "2026-07-01T00:00:00.000Z",
+    "review_at": "2027-07-01T00:00:00.000Z",
+    "reviewed_by": "professional_test_1",
+    "thresholds": {
+      "minimum_liquidity_months": 3,
+      "maximum_debt_to_income_percent": 40,
+      "minimum_savings_ratio_percent": 10,
+      "maximum_investment_concentration_percent": 50,
+      "maximum_property_concentration_percent": 70,
+      "maximum_currency_exposure_percent": 30,
+      "valuation_max_age_days": 365
+    }
+  },
+  "authority": {
+    "authority_record_id": "authority_test_1",
+    "professional_id": "professional_test_1",
+    "professional_qualification": "Synthetic financial planning qualification",
+    "licence_or_registration": "TEST-REGISTRATION",
+    "jurisdiction": "MY",
+    "permitted_service_scopes": [
+      "financial_fact_finding",
+      "financial_position_reconstruction",
+      "financial_stamina_analysis",
+      "financial_risk_review",
+      "goal_prioritisation",
+      "product_neutral_navigation"
+    ],
+    "restricted_product_advice": true,
+    "insurance_scope": "review_only",
+    "investment_scope": "review_only",
+    "tax_scope": "referral_only",
+    "estate_scope": "referral_only",
+    "expiry_date": "2027-07-23T13:00:00.000Z",
+    "status": "active"
+  },
+  "positionGate": {
+    "gate_id": "position_gate_test_1",
+    "household_id": "household_test_1",
+    "sections": {
+      "current_financial_position": {
+        "complete": true,
+        "evidence_references": ["position_test_1"]
+      },
+      "confirmed_risks": {
+        "complete": true,
+        "evidence_references": ["risk_test_1"]
+      },
+      "goal_constraints": {
+        "complete": true,
+        "evidence_references": ["constraint_test_1"]
+      },
+      "missing_data": {
+        "complete": true,
+        "evidence_references": ["gap_test_1"]
+      },
+      "available_options": {
+        "complete": true,
+        "evidence_references": ["option_test_1"]
+      }
+    }
+  }
+}

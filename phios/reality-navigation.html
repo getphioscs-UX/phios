@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="PHI OS Reality Navigation Workspace — bounded transition, priority, evidence watch and review conditions."
+  >
+
+  <title>
+    Reality Navigation Workspace — PHI OS
+  </title>
+
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/design/motion.css">
+  <link
+    rel="stylesheet"
+    href="/assets/css/styles.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/assets/css/navigation-workspace.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="/assets/css/i18n.css"
+  >
+  <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
+  <link rel="stylesheet" href="/assets/css/design/visual-acceptance.css">
+  <link rel="stylesheet" href="/assets/css/navigation-visual-alignment.css">
+</head>
+
+<body class="navigation-page">
+  <a
+    class="skip-link"
+    href="#navigationWorkspace"
+    data-i18n="navigation.skipLink"
+  >
+    Skip to Reality Navigation
+  </a>
+
+  <header
+    class="site-header navigation-header"
+    data-i18n-aria-label="navigation.headerAria"
+    aria-label="Reality Navigation header"
+  >
+    <div class="shell nav">
+      <a
+        class="brand"
+        href="/"
+        data-i18n-aria-label="navigation.homeAria"
+        aria-label="PHI OS Home"
+      >
+        <span class="phi" aria-hidden="true">Φ</span>
+        <span>PHI OS</span>
+      </a>
+
+      <div
+        class="navigation-progress"
+        data-i18n-aria-label="navigation.progressAria"
+        aria-label="Runtime Journey progress"
+      >
+        <span data-i18n="navigation.journey">
+          Reality Journey
+        </span>
+
+        <ol data-current-stage="navigation">
+          <li class="complete">
+            <b>01</b>
+            <data value="entry" data-i18n="navigation.stageEntry">
+              Entry
+            </data>
+          </li>
+
+          <li class="complete">
+            <b>02</b>
+            <data value="reconstruction" data-i18n="navigation.stageReconstruction">
+              Reconstruction
+            </data>
+          </li>
+
+          <li class="complete">
+            <b>03</b>
+            <data value="reading" data-i18n="navigation.stageReading">
+              Understanding
+            </data>
+          </li>
+
+          <li class="active" aria-current="step">
+            <b>04</b>
+            <data value="navigation" data-i18n="navigation.stageNavigation">
+              Transition
+            </data>
+          </li>
+
+          <li>
+            <b>05</b>
+            <data value="review" data-i18n="navigation.stageReview">
+              Review
+            </data>
+          </li>
+
+          <li>
+            <b>06</b>
+            <data value="memory" data-i18n="entry.progressMemory">
+              Memory
+            </data>
+          </li>
+
+          <li>
+            <b>07</b>
+            <data value="continuity" data-i18n="entry.progressContinuity">
+              Continuity
+            </data>
+          </li>
+        </ol>
+      </div>
+
+      <div
+        class="header-actions"
+        aria-label="Language and navigation controls"
+      >
+        <div
+          class="language-switcher"
+          role="group"
+          data-i18n-aria-label="navigation.languageAria"
+          aria-label="Language"
+        >
+          <button
+            type="button"
+            class="language-button"
+            data-locale="en"
+            aria-pressed="false"
+          >
+            EN
+          </button>
+
+          <button
+            type="button"
+            class="language-button"
+            data-locale="zh-Hans"
+            aria-pressed="false"
+          >
+            中文
+          </button>
+        </div>
+
+        <a
+          class="entry-exit"
+          href="/reality-reading.html"
+          data-i18n="navigation.backButton"
+        >
+          Back
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="runtime-workspace-layout">
+    <div data-runtime-workspace></div>
+  <main
+    class="runtime-workspace-main navigation-shell"
+    id="navigationWorkspace"
+  >
+    <section
+      class="navigation-intro"
+      aria-labelledby="navigationPageTitle"
+    >
+      <div>
+        <p
+          class="eyebrow"
+          data-i18n="navigation.stageEyebrow"
+        >
+          Runtime Journey · Stage 04
+        </p>
+
+        <h1
+          id="navigationPageTitle"
+          data-i18n="navigation.title"
+        >
+          Reality Navigation
+        </h1>
+
+        <p data-i18n="navigation.workspaceSubtitle">
+          Navigation converts the current Reading into a bounded transition,
+          one priority, evidence to watch, and explicit review conditions.
+        </p>
+      </div>
+
+      <div class="navigation-boundary">
+        <span
+          class="status-dot"
+          aria-hidden="true"
+        ></span>
+
+        <div>
+          <strong data-i18n="navigation.boundaryTitle">
+            Direction without prescription
+          </strong>
+
+          <small data-i18n="navigation.boundaryText">
+            User choice and professional judgment remain separate.
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="navigation-empty hidden"
+      id="navigationEmptyState"
+      aria-live="polite"
+    >
+      <p data-i18n="navigation.emptyMessage">
+        No Navigation Input was found in this browser session.
+      </p>
+
+      <a
+        class="btn primary"
+        href="/reality-reading.html"
+        data-i18n="navigation.returnReading"
+      >
+        Return to Reality Reading
+      </a>
+    </section>
+
+    <section
+      class="navigation-workspace hidden"
+      id="navigationWorkspaceBody"
+    >
+      <section
+        class="navigation-main"
+        aria-labelledby="navigationWorkspaceTitle"
+      >
+        <header class="navigation-heading">
+          <div>
+            <p data-i18n="navigation.workspaceEyebrow">
+              Bounded Runtime Navigation
+            </p>
+
+            <h2
+              id="navigationWorkspaceTitle"
+              data-i18n="navigation.workspaceTitle"
+            >
+              From Reading to transition
+            </h2>
+          </div>
+        </header>
+
+        <div
+          class="navigation-loading"
+          id="navigationLoadingState"
+          role="status"
+          aria-live="polite"
+        >
+          <span
+            class="navigation-spinner"
+            aria-hidden="true"
+          ></span>
+
+          <div>
+            <strong data-i18n="navigation.loadingTitle">
+              PHI OS is preparing bounded Navigation paths.
+            </strong>
+
+            <p data-i18n="navigation.loadingMessage">
+              Rule-first Navigation does not call OpenAI.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="hidden"
+          id="navigationSections"
+        >
+          <div class="navigation-customer-views" aria-label="Six customer Navigation views" data-i18n-aria-label="navigation.visual.viewsAria">
+            <section class="navigation-customer-view" data-navigation-view="available-direction">
+              <header>
+                <span class="navigation-view-index">01</span>
+                <div>
+                  <p data-i18n="navigation.visual.directionKicker">Paths currently available</p>
+                  <h2 data-i18n="navigation.visual.directionTitle">Available Direction</h2>
+                </div>
+                <div class="navigation-view-status">
+                  <strong id="navigationDirectionStatus">0 paths</strong>
+                  <small id="navigationChoiceBoundary">Your choice is required</small>
+                </div>
+              </header>
+              <p class="navigation-view-intro" data-i18n="navigation.visual.directionDescription">
+                Compare when each bounded path fits. Their order does not select one for you.
+              </p>
+              <div class="navigation-path" id="navigationPath"></div>
+            </section>
+
+            <section class="navigation-customer-view" data-navigation-view="reason">
+              <header>
+                <span class="navigation-view-index">02</span>
+                <div>
+                  <p data-i18n="navigation.visual.reasonKicker">Why these paths are visible</p>
+                  <h2 data-i18n="navigation.visual.reasonTitle">Reason</h2>
+                </div>
+                <div class="navigation-view-status">
+                  <small id="navigationReasonSource">Current Reality Reading</small>
+                </div>
+              </header>
+              <p class="navigation-view-intro" id="navigationReason">Not established</p>
+              <div class="navigation-transition">
+                <div>
+                  <span data-i18n="navigation.currentRuntime">Current Runtime</span>
+                  <strong id="navigationCurrentRuntime">Not established</strong>
+                </div>
+                <b aria-hidden="true">→</b>
+                <div>
+                  <span data-i18n="navigation.currentTransition">Current Transition</span>
+                  <strong id="navigationCurrentTransition">Not established</strong>
+                </div>
+              </div>
+              <div class="navigation-map-grid">
+                <article>
+                  <span data-i18n="navigation.currentPosition">Current Position</span>
+                  <strong id="navigationCurrentPosition">Not established</strong>
+                </article>
+                <b aria-hidden="true">→</b>
+                <article>
+                  <span data-i18n="navigation.desiredDirection">Desired Direction</span>
+                  <strong id="navigationDesiredDirection">Not established</strong>
+                </article>
+              </div>
+            </section>
+
+            <section class="navigation-customer-view" data-navigation-view="evidence">
+              <header>
+                <span class="navigation-view-index">03</span>
+                <div>
+                  <p data-i18n="navigation.visual.evidenceKicker">What can confirm or change the path</p>
+                  <h2 data-i18n="navigation.visual.evidenceTitle">Evidence</h2>
+                </div>
+              </header>
+              <p class="navigation-view-intro" data-i18n="navigation.visual.evidenceDescription">
+                These are observable signals carried forward from the current Reading.
+              </p>
+              <ul id="navigationEvidenceWatch"></ul>
+            </section>
+
+            <section class="navigation-customer-view" data-navigation-view="constraint">
+              <header>
+                <span class="navigation-view-index">04</span>
+                <div>
+                  <p data-i18n="navigation.visual.constraintKicker">What limits the current move</p>
+                  <h2 data-i18n="navigation.visual.constraintTitle">Constraint</h2>
+                </div>
+              </header>
+              <div class="navigation-constraint-grid">
+                <div>
+                  <strong data-i18n="navigation.activeConstraints">Active Constraints</strong>
+                  <ul id="navigationConstraints"></ul>
+                </div>
+                <div>
+                  <strong data-i18n="navigation.unknownRealityTitle">Unknown Reality</strong>
+                  <ul id="navigationUnknownReality"></ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="navigation-customer-view" data-navigation-view="first-action">
+              <header>
+                <span class="navigation-view-index">05</span>
+                <div>
+                  <p data-i18n="navigation.visual.actionKicker">The first bounded move</p>
+                  <h2 data-i18n="navigation.visual.actionTitle">First Action</h2>
+                </div>
+                <div class="navigation-view-status">
+                  <small id="navigationFirstActionStatus">Waiting for your selection</small>
+                </div>
+              </header>
+              <p class="navigation-first-action" id="navigationFirstAction">
+                Select an Available Direction before an action is established.
+              </p>
+              <section
+                class="selected-path-card"
+                id="navigationSelectedPathPanel"
+                aria-labelledby="navigationSelectedPathLabel"
+              >
+                <p id="navigationSelectedPathLabel" data-i18n="navigation.suggestedStartingPath">
+                  Selected Path
+                </p>
+                <div class="selected-path-empty" id="navigationSelectedPathEmpty">
+                  <h2 id="navigationSelectedPathTitle">No path selected</h2>
+                  <p id="navigationSelectedPathSummary">
+                    Choose one bounded path before continuing to Review.
+                  </p>
+                </div>
+                <div class="selected-path-actions" id="navigationSelectedPathActions"></div>
+              </section>
+            </section>
+
+            <section class="navigation-customer-view navigation-review-view" data-navigation-view="review-point">
+              <header>
+                <span class="navigation-view-index">06</span>
+                <div>
+                  <p data-i18n="navigation.visual.reviewKicker">When to read the Runtime again</p>
+                  <h2 data-i18n="navigation.visual.reviewTitle">Review Point</h2>
+                </div>
+              </header>
+              <p class="navigation-view-intro" data-i18n="navigation.visual.reviewDescription">
+                Review conditions remain explicit and return to the same Runtime lineage.
+              </p>
+              <ul id="navigationReviewConditions"></ul>
+              <div class="navigation-professional-boundary">
+                <strong data-i18n="navigation.professionalBoundary">Professional Review Boundary</strong>
+                <p id="navigationReviewReason">Not established</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <aside
+        class="navigation-inspector"
+        data-i18n-aria-label="navigation.inspector"
+        aria-label="Navigation Inspector"
+      >
+        <header>
+          <p data-i18n="navigation.inspector">
+            Navigation Inspector
+          </p>
+
+          <h2 data-i18n="navigation.transitionStatus">
+            Transition status
+          </h2>
+        </header>
+
+        <div>
+          <span data-i18n="navigation.runtimeEntity">
+            Runtime Entity
+          </span>
+
+          <strong id="navigationRuntimeEntityId">—</strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.runtimeEntry">
+            Runtime Entry
+          </span>
+
+          <strong id="navigationRuntimeEntryId">—</strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.primaryRegion">
+            Primary Runtime Region
+          </span>
+
+          <strong id="navigationRegion">
+            Not established
+          </strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.navigationMethod">
+            Navigation method
+          </span>
+
+          <strong data-i18n="navigation.ruleFirst">
+            Rule-first
+          </strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.paidAI">
+            Paid AI used
+          </span>
+
+          <strong data-i18n="navigation.no">
+            No
+          </strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.professionalReview">
+            Professional Review
+          </span>
+
+          <strong id="navigationProfessionalReview">
+            Not established
+          </strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.persistence">
+            Persistent storage
+          </span>
+
+          <strong data-i18n="navigation.disabled">
+            Disabled
+          </strong>
+        </div>
+      </aside>
+    </section>
+  </main>
+  </div>
+
+  <footer class="navigation-footer">
+    <div class="shell">
+      <span data-i18n="navigation.footerBoundary">
+        Direction before recommendation.
+      </span>
+
+      <span data-i18n="navigation.footerSequence">
+        Transition → Evidence → Review → Continuity
+      </span>
+    </div>
+  </footer>
+
+  <script
+    type="module"
+    src="/assets/js/navigation.js"
+  ></script>
+</body>
+</html>

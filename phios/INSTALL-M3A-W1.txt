@@ -1,0 +1,38 @@
+M3A-W1 Design System Foundation
+================================
+
+Required baseline
+-----------------
+Repository: getphioscs-UX/phios
+Branch: main
+Commit: 1df74566174ee18457ce8a095fd7a61b14da649f
+
+Install
+-------
+Extract this ZIP at the repository root and preserve all paths.
+
+Validate
+--------
+npm run check
+node scripts/check-m3a-design-foundation.mjs
+
+Scope
+-----
+- Expands assets/css/tokens.css.
+- Adds Foundation, Typography, Layout, Components and Motion CSS.
+- Loads the new layers before legacy page CSS on six baseline pages.
+- Supports both legacy .btn and canonical .phi-button.
+- Freezes element IDs, translation keys, storage keys, API routes and Runtime
+  state boundaries during Design System migration.
+
+Visual acceptance
+-----------------
+Production screenshots remain pending because the current browser session
+explicitly prevents access to phios-github.pages.dev. Complete deployed visual
+acceptance after deployment; do not mark screenshot capture complete before
+the six pages have been reviewed.
+
+Parallel M2 work
+----------------
+This package does not modify package.json or Runtime implementation files, so
+it can be applied without replacing the M2 check command or Runtime work.

@@ -1,0 +1,23 @@
+PHI OS M2-W9 | Infrastructure Tests
+
+1. Extract this ZIP at the repository root and replace matching files.
+2. Do not modify either existing migration.
+3. Run local acceptance:
+
+   npm run check:runtime-infrastructure
+   npm run check
+
+4. In Cloudflare, create or select the production D1 database, apply the two
+   existing db/migrations files in order, and bind it to the Pages project
+   with the exact variable name RUNTIME_DB.
+5. Upload this change with GitHub Desktop and wait for the deployment to
+   complete.
+6. Run the read-only Production Smoke in PowerShell:
+
+   $env:PHIOS_SMOKE_BASE_URL="https://phios-github.pages.dev"
+   npm run check:runtime-production-smoke
+   Remove-Item Env:PHIOS_SMOKE_BASE_URL
+
+M2 is complete only after both local acceptance and the deployed live smoke
+pass. A local pass does not replace the Cloudflare D1 binding or remote
+migration step.

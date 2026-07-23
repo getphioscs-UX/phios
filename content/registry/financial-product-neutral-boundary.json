@@ -1,0 +1,42 @@
+{
+  "id": "phi-os.financial-product-neutral-boundary",
+  "version": "1.0.0",
+  "milestone": "M4A-W8",
+  "status": "product-neutral-gate-frozen",
+  "authority": "functions/professional/financial/financial-product-neutral-boundary.js",
+  "requiredBeforeDirection": [
+    "current_financial_position",
+    "confirmed_risks",
+    "goal_constraints",
+    "missing_data",
+    "available_options"
+  ],
+  "productNeutralDirections": [
+    "cash_flow_stabilisation",
+    "emergency_reserve",
+    "debt_restructuring_review",
+    "expense_adjustment",
+    "insurance_gap_review",
+    "investment_allocation_review",
+    "property_exposure_review",
+    "tax_planning_review",
+    "retirement_funding",
+    "education_funding",
+    "estate_preparation",
+    "business_continuity"
+  ],
+  "prohibitedBeforeSeparateRegulatedStep": [
+    "specific_insurance_purchase",
+    "specific_fund_purchase",
+    "specific_property_sale",
+    "specific_loan_application"
+  ],
+  "rules": {
+    "riskFlagAutomaticallyCreatesRecommendation": false,
+    "directionAutomaticallyCreatesTransaction": false,
+    "clientDecisionRequired": true,
+    "productSpecificStepEnabled": false,
+    "conflictDisclosureRequired": true,
+    "commissionDisclosureRequired": true
+  }
+}

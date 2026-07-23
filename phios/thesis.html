@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="The Reality Navigation Thesis — the research foundation behind PHI OS." name="description"/>
+<title>Reality Navigation Thesis — PHI OS</title>
+<link href="/assets/css/tokens.css" rel="stylesheet"/>
+<link href="/assets/css/design/foundation.css" rel="stylesheet"/>
+<link href="/assets/css/styles.css" rel="stylesheet"/>
+<link href="/assets/css/public-experience.css" rel="stylesheet"/>
+<style>
+    :root{--thesis-max:1180px}
+    body{overflow-x:hidden}
+    .thesis-shell{width:min(calc(100% - 36px),var(--thesis-max));margin:auto}
+    .thesis-nav-tools{display:flex;align-items:center;gap:18px}
+    .language-switch{display:flex;align-items:center;gap:5px;white-space:nowrap}
+    .language-switch button{
+      appearance:none;border:0;background:transparent;color:var(--muted);
+      padding:7px 3px;cursor:pointer;font-size:.75rem;font-weight:700;
+      letter-spacing:.06em
+    }
+    .language-switch button.active{color:var(--gold);text-decoration:underline;text-underline-offset:5px}
+    .language-switch span{color:rgba(255,255,255,.28)}
+    .thesis-hero{padding:94px 0 72px}
+    .thesis-hero h1{
+      max-width:1000px;margin:20px 0 28px;
+      font-family:Georgia,"Times New Roman","Noto Serif SC","Songti SC",serif;
+      font-size:clamp(3.4rem,7.2vw,6.8rem);font-weight:400;
+      line-height:.96;letter-spacing:-.04em
+    }
+    .thesis-hero h1 em{font-style:normal;color:var(--cyan)}
+    .thesis-lead{max-width:820px;color:var(--muted);font-size:1.16rem}
+    .thesis-route{
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;margin-top:48px
+    }
+    .route-item{
+      min-width:0;border-top:1px solid var(--line);
+      padding:18px 4px 4px;color:var(--muted)
+    }
+    .route-item span{display:block;color:var(--gold);font-size:.72rem;letter-spacing:.16em;margin-bottom:8px}
+    .route-item strong{
+      display:block;color:var(--text);
+      font-family:Georgia,"Noto Serif SC","Songti SC",serif;
+      font-size:1.08rem;font-weight:400;line-height:1.3
+    }
+    .thesis-section{padding:88px 0;border-top:1px solid var(--line);scroll-margin-top:92px}
+    .thesis-layout{
+      display:grid;grid-template-columns:minmax(270px,.82fr) minmax(0,1.18fr);
+      gap:clamp(64px,7vw,104px);align-items:start
+    }
+    .thesis-layout>*{min-width:0}
+    .thesis-layout h2{
+      max-width:390px;margin:8px 0 20px;
+      font-family:Georgia,"Times New Roman","Noto Serif SC","Songti SC",serif;
+      font-size:clamp(2.2rem,3.45vw,3.55rem);font-weight:400;
+      line-height:1.05;letter-spacing:-.025em;
+      overflow-wrap:normal;word-break:normal
+    }
+    .section-copy{max-width:440px;color:var(--muted);font-size:1rem}
+    .thesis-copy{min-width:0;color:#d7dbe3;font-size:1.02rem}
+    .thesis-copy p{margin:0 0 20px}
+    .thesis-statement{
+      max-width:680px;margin:0 0 38px;
+      font-family:Georgia,"Times New Roman","Noto Serif SC","Songti SC",serif;
+      font-size:clamp(1.55rem,2.15vw,2.35rem);
+      line-height:1.28;letter-spacing:-.01em;
+      overflow-wrap:break-word
+    }
+    .layer-stack{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+    .layer{
+      display:grid;grid-template-columns:165px minmax(0,1fr);
+      gap:24px;padding:24px 26px;background:rgba(255,255,255,.025)
+    }
+    .layer+.layer{border-top:1px solid var(--line)}
+    .layer-label{color:var(--gold);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+    .layer h3{
+      margin:0 0 5px;font-family:Georgia,"Noto Serif SC","Songti SC",serif;
+      font-size:1.45rem;font-weight:400;line-height:1.25
+    }
+    .layer p{margin:0;color:var(--muted)}
+    .runtime-flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-top:36px}
+    .runtime-step{min-width:0;min-height:180px;border:1px solid var(--line);border-radius:18px;padding:19px;background:rgba(255,255,255,.025)}
+    .runtime-step small{display:block;color:var(--gold);margin-bottom:42px}
+    .runtime-step strong{display:block;font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:1.18rem;font-weight:400;line-height:1.25}
+    .runtime-step p{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+    .book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:35px}
+    .book-card{display:flex;flex-direction:column;min-width:0;min-height:340px}
+    .book-card h3{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:1.82rem;font-weight:400;line-height:1.16;margin:34px 0 15px}
+    .book-status{margin-top:auto;padding-top:26px;border-top:1px solid var(--line);color:var(--gold);font-size:.8rem}
+    .platform-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:34px}
+    .platform-grid .card{min-height:190px}
+    .reader-panel{padding:34px;border:1px solid rgba(124,216,212,.25);background:rgba(124,216,212,.035);border-radius:30px}
+    .pdf-frame{display:block;width:100%;height:76vh;min-height:620px;border:0;border-radius:18px;background:#fff;margin-top:25px}
+    .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--muted);margin-bottom:28px}
+    .back-link:hover{color:var(--text)}
+    html[lang="zh-Hans"] .eyebrow,
+    html[lang="zh-Hans"] .layer-label{letter-spacing:.08em;text-transform:none}
+    html[lang="zh-Hans"] .thesis-hero h1{letter-spacing:-.01em;line-height:1.12}
+    html[lang="zh-Hans"] .thesis-layout h2{letter-spacing:-.01em;line-height:1.2}
+    html[lang="zh-Hans"] .thesis-statement{letter-spacing:0;line-height:1.45}
+    @media(max-width:1180px){
+      .thesis-layout{grid-template-columns:minmax(240px,.78fr) minmax(0,1.12fr);gap:58px}
+      .thesis-layout h2{font-size:clamp(2.1rem,3.2vw,3.2rem)}
+      .thesis-statement{font-size:clamp(1.5rem,2vw,2.08rem);max-width:620px}
+    }
+    @media(max-width:1120px){
+      .nav-links{display:none}
+      .thesis-route{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .thesis-layout{grid-template-columns:1fr;gap:32px}
+      .thesis-layout h2,.section-copy{max-width:760px}
+      .runtime-flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+    }
+    @media(max-width:720px){
+      .thesis-hero{padding-top:66px}
+      .thesis-route,.book-grid,.platform-grid{grid-template-columns:1fr}
+      .runtime-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .layer{grid-template-columns:1fr;gap:8px}
+      .pdf-frame{height:65vh;min-height:470px}
+      .reader-panel{padding:20px}
+    }
+    @media(max-width:460px){
+      .runtime-flow{grid-template-columns:1fr}
+      .thesis-nav-tools{gap:10px}
+    }
+  </style>
+</head>
+<body data-public-section="knowledge">
+<header class="site-header">
+<div class="thesis-shell nav">
+<a class="brand" href="/"><span class="phi">Φ</span><span>PHI OS</span></a>
+<div class="thesis-nav-tools">
+<nav aria-label="Primary navigation" class="nav-links">
+<a data-i18n="thesis.nav.home" href="/">HOME</a>
+<a data-i18n="thesis.nav.start" href="/reality-entry">START</a>
+<a data-i18n="thesis.nav.myReality" href="/my-reality">MY REALITY</a>
+<a data-i18n="thesis.nav.explore" href="/explore">EXPLORE</a>
+<a data-i18n="thesis.nav.services" href="/services">SERVICES</a>
+<a data-i18n="thesis.nav.academy" href="/academy">ACADEMY</a>
+<a data-i18n="thesis.nav.about" href="/about">ABOUT</a>
+</nav>
+<div aria-label="Language" class="language-switch" data-language-switch="">
+<button data-locale="en" type="button">EN</button><span>·</span>
+<button data-locale="zh-Hans" type="button">中文</button>
+</div>
+</div>
+</div>
+</header>
+<main>
+<section class="thesis-shell thesis-hero">
+<a class="back-link" data-i18n="thesis.hero.back" href="/about">← About PHI OS</a>
+<div class="eyebrow" data-i18n="thesis.hero.eyebrow">Research Foundation · Reality Navigation</div>
+<h1><span data-i18n="thesis.hero.titlePrefix">The Reality Navigation </span><em data-i18n="thesis.hero.titleEmphasis">Thesis</em></h1>
+<p class="thesis-lead" data-i18n="thesis.hero.lead">A research foundation for representing, reading and navigating realities that continue to change — and the theoretical origin of PHI OS.</p>
+<div class="actions">
+<a class="btn primary" data-i18n="thesis.hero.read" href="#read">Read the full thesis</a>
+<a class="btn gold" data-i18n="thesis.hero.atlas" href="/explore">Enter the Reality Atlas</a>
+<a class="btn" data-i18n="thesis.hero.begin" href="/reality-entry">Begin a Reality Journey</a>
+</div>
+<div class="thesis-route">
+<a class="route-item" href="#position"><span>01</span><strong data-i18n="thesis.route.position">Research Position</strong></a>
+<a class="route-item" href="#runtime"><span>02</span><strong data-i18n="thesis.route.runtime">Runtime Layer</strong></a>
+<a class="route-item" href="#journey"><span>03</span><strong data-i18n="thesis.route.journey">Reality Journey</strong></a>
+<a class="route-item" href="#implementation"><span>04</span><strong data-i18n="thesis.route.implementation">PHI OS Implementation</strong></a>
+</div>
+</section>
+<section class="thesis-section" id="position">
+<div class="thesis-shell thesis-layout">
+<div>
+<div class="eyebrow" data-i18n="thesis.position.eyebrow">01 · Research Position</div>
+<h2 data-i18n="thesis.position.title">From category to implementation.</h2>
+<p class="section-copy" data-i18n="thesis.position.copy">The thesis establishes the research category. PHI OS turns that category into a readable and operational environment.</p>
+</div>
+<div>
+<p class="thesis-statement" data-i18n="thesis.position.statement">Reality Navigation is the computational category. The Unified Runtime Framework is its theoretical architecture. PHI OS is its integrated reference implementation.</p>
+<div class="layer-stack">
+<article class="layer"><div class="layer-label" data-i18n="thesis.position.l1.label">Computational Category</div><div><h3>Reality Navigation</h3><p data-i18n="thesis.position.l1.copy">Maintaining coherent orientation while reality continues to change.</p></div></article>
+<article class="layer"><div class="layer-label" data-i18n="thesis.position.l2.label">Research Foundation</div><div><h3>Reality Navigation Thesis</h3><p data-i18n="thesis.position.l2.copy">Explains why the category is required and how evolving reality can become observable and computable.</p></div></article>
+<article class="layer"><div class="layer-label" data-i18n="thesis.position.l3.label">Theoretical Architecture</div><div><h3>Unified Runtime Framework</h3><p data-i18n="thesis.position.l3.copy">Provides a shared language for reality, runtime, evidence, state, transition and continuity.</p></div></article>
+<article class="layer"><div class="layer-label" data-i18n="thesis.position.l4.label">Reference Implementation</div><div><h3>PHI OS</h3><p data-i18n="thesis.position.l4.copy">Connects the books, Reality Atlas, Reality Journey, runtime services and future platform infrastructure.</p></div></article>
+</div>
+</div>
+</div>
+</section>
+<section class="thesis-section" id="runtime">
+<div class="thesis-shell thesis-layout">
+<div>
+<div class="eyebrow" data-i18n="thesis.runtime.eyebrow">02 · The Missing Layer</div>
+<h2 data-i18n="thesis.runtime.title">The Runtime Layer.</h2>
+<p class="section-copy" data-i18n="thesis.runtime.copy">Intelligence can produce answers. Navigation requires a persistent representation of the reality those answers are meant to serve.</p>
+</div>
+<div class="thesis-copy">
+<p class="thesis-statement" data-i18n="thesis.runtime.statement">A person, organization or society does not operate as a single prompt. Reality accumulates history, constraints, resources, relationships, residues and unfinished transitions.</p>
+<p data-i18n="thesis.runtime.body">Without a Runtime Layer, each interaction begins from a partial snapshot. A system may reason well while still losing the continuity of the reality it is meant to support.</p>
+<div class="quote-panel" style="margin-top:34px"><blockquote data-i18n="thesis.runtime.quote">Reality becomes navigable when change leaves evidence that can be reconstructed, read, acted upon and reviewed over time.</blockquote></div>
+</div>
+</div>
+</section>
+<section class="thesis-section" id="journey">
+<div class="thesis-shell">
+<div class="section-head">
+<div><div class="eyebrow" data-i18n="thesis.journey.eyebrow">03 · Operational Route</div><h2 data-i18n="thesis.journey.title">The Reality Journey</h2></div>
+<p class="section-copy" data-i18n="thesis.journey.copy">The platform translates the thesis into a continuous route rather than a one-time answer.</p>
+</div>
+<div class="runtime-flow">
+<article class="runtime-step"><small>01</small><strong>Entry</strong><p data-i18n="thesis.journey.s1">Capture what started to change and what remains unclear.</p></article>
+<article class="runtime-step"><small>02</small><strong>Reconstruction</strong><p data-i18n="thesis.journey.s2">Organize sequence, conditions, evidence and gaps.</p></article>
+<article class="runtime-step"><small>03</small><strong>Reading</strong><p data-i18n="thesis.journey.s3">Interpret the current Runtime without treating interpretation as fact.</p></article>
+<article class="runtime-step"><small>04</small><strong>Navigation</strong><p data-i18n="thesis.journey.s4">Identify position, priority, constraints and viable movement.</p></article>
+<article class="runtime-step"><small>05</small><strong>Review</strong><p data-i18n="thesis.journey.s5">Compare expectation, action and observed change.</p></article>
+<article class="runtime-step"><small>06</small><strong>Continuity</strong><p data-i18n="thesis.journey.s6">Preserve learning and update the Runtime over time.</p></article>
+</div>
+</div>
+</section>
+<section class="thesis-section" id="books">
+<div class="thesis-shell">
+<div class="section-head">
+<div><div class="eyebrow" data-i18n="thesis.books.eyebrow">Human Reading Route</div><h2 data-i18n="thesis.books.title">Three books. One architecture.</h2></div>
+<p class="section-copy" data-i18n="thesis.books.copy">The three books form the human-readable route through the fourteen-part PHI OS architecture.</p>
+</div>
+<div class="book-grid">
+<article class="card book-card"><span class="num" data-i18n="thesis.books.b1.no">BOOK I · PARTS 1–5</span><h3 data-i18n="thesis.books.b1.title">How Reality Forms</h3><p data-i18n="thesis.books.b1.copy">From structure, field and projection to temporal dynamics, initialization and conscious Runtime.</p><div class="book-status" data-i18n="thesis.books.b1.status">Foundation completed · Current figures available</div></article>
+<article class="card book-card"><span class="num" data-i18n="thesis.books.b2.no">BOOK II · PARTS 6–9</span><h3 data-i18n="thesis.books.b2.title">How Humans and Worlds Operate Together</h3><p data-i18n="thesis.books.b2.copy">From relational and collective Runtime to governance, maintenance and shared reality.</p><div class="book-status" data-i18n="thesis.books.b2.status">Architecture in development</div></article>
+<article class="card book-card"><span class="num" data-i18n="thesis.books.b3.no">BOOK III · PARTS 10–14</span><h3 data-i18n="thesis.books.b3.title">How the World Will Continue</h3><p data-i18n="thesis.books.b3.copy">From civilization dynamics and ecology to diagnostics, reading architecture and continuity mechanics.</p><div class="book-status" data-i18n="thesis.books.b3.status">Structural route established</div></article>
+</div>
+</div>
+</section>
+<section class="thesis-section" id="implementation">
+<div class="thesis-shell thesis-layout">
+<div>
+<div class="eyebrow" data-i18n="thesis.implementation.eyebrow">04 · Reference Implementation</div>
+<h2 data-i18n="thesis.implementation.title">From thesis to PHI OS.</h2>
+<p class="section-copy" data-i18n="thesis.implementation.copy">PHI OS does not reduce the research to a chatbot. It builds a connected Reality Navigation environment.</p>
+</div>
+<div class="platform-grid">
+<article class="card"><span class="num">01</span><h3>Reality Atlas</h3><p data-i18n="thesis.implementation.a1">A scrollable and explorable map of the fourteen-part knowledge architecture.</p></article>
+<article class="card"><span class="num">02</span><h3>Reality Journey</h3><p data-i18n="thesis.implementation.a2">The operational route from Entry through Reconstruction, Reading, Navigation, Review and Continuity.</p></article>
+<article class="card"><span class="num">03</span><h3>Runtime Memory</h3><p data-i18n="thesis.implementation.a3">Persistent evidence, state versions, reviews and evolving reality records.</p></article>
+<article class="card"><span class="num">04</span><h3 data-i18n="thesis.implementation.a4.title">Services and Infrastructure</h3><p data-i18n="thesis.implementation.a4.copy">Rule, AI and professional layers operating under a shared evidence contract.</p></article>
+</div>
+</div>
+</section>
+<section class="thesis-section" id="read">
+<div class="thesis-shell">
+<div class="reader-panel">
+<div class="section-head">
+<div><div class="eyebrow" data-i18n="thesis.reader.eyebrow">Full Research Document</div><h2 data-i18n="thesis.reader.title">Read the thesis.</h2></div>
+<div class="actions" style="margin-top:0">
+<a class="btn primary" data-i18n="thesis.reader.open" href="/docs/reality-navigation-thesis.pdf" rel="noopener" target="_blank">Open PDF</a>
+<a class="btn gold" data-i18n="thesis.reader.download" download="" href="/docs/reality-navigation-thesis.pdf">Download PDF</a>
+</div>
+</div>
+<object class="pdf-frame" data="/docs/reality-navigation-thesis.pdf#view=FitH" type="application/pdf">
+<iframe class="pdf-frame" src="/docs/reality-navigation-thesis.pdf#view=FitH" title="Reality Navigation Thesis PDF"></iframe>
+</object>
+<p class="small" data-i18n="thesis.reader.fallback">If the embedded reader does not appear, use “Open PDF” above.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="thesis-shell footer-inner">
+<div>Φ PHI OS</div>
+<div data-i18n="thesis.footer.copy">Reality Navigation Thesis · Research Foundation</div>
+</div>
+</footer>
+<script src="/assets/js/shared.js" type="module"></script>
+
+<script src="/assets/js/public-shell.js" type="module"></script>
+<script src="/assets/js/pages/thesis.js" type="module"></script></body>
+</html>

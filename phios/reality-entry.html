@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta
+    name="description"
+    content="PHI OS Reality Entry Workspace — begin from what has recently started to change."
+  >
+  <title data-i18n="entry.metaTitle">Reality Entry Workspace — PHI OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/design/motion.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/entry-workspace.css">
+  <link rel="stylesheet" href="/assets/css/evidence-depth.css">
+  <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
+  <link rel="stylesheet" href="/assets/css/design/visual-acceptance.css">
+  <link rel="stylesheet" href="/assets/css/entry-visual-alignment.css">
+  <link rel="stylesheet" href="/assets/css/guided-entry.css">
+  <link rel="stylesheet" href="/assets/css/entry-recovery-consent.css">
+</head>
+
+<body
+  class="entry-workspace-page runtime-workspace-page"
+  data-entry-recovery="checking"
+>
+  <a
+    class="skip-link"
+    href="#entryWorkspace"
+    data-i18n="accessibility.skipToEntry"
+  >Skip to Reality Entry</a>
+
+  <header class="site-header entry-site-header">
+    <div class="shell nav">
+      <a
+        class="brand"
+        href="/"
+        aria-label="PHI OS Home"
+        data-i18n-aria-label="accessibility.phiOSHome"
+      >
+        <span class="phi">Φ</span>
+        <span>PHI OS</span>
+      </a>
+
+      <div
+        class="entry-header-center"
+        aria-label="Runtime Journey progress"
+        data-i18n-aria-label="accessibility.journeyProgress"
+      >
+        <span
+          class="journey-label"
+          data-i18n="journey.label"
+        >Runtime Journey</span>
+
+        <ol class="runtime-progress" data-current-stage="entry">
+          <li class="active" aria-current="step">
+            <span>01</span>
+            <data value="entry" data-i18n="journey.entry">Entry</data>
+          </li>
+          <li>
+            <span>02</span>
+            <data value="reconstruction" data-i18n="journey.reconstruction">Reconstruction</data>
+          </li>
+          <li>
+            <span>03</span>
+            <data value="reading" data-i18n="journey.reading">Reading</data>
+          </li>
+          <li>
+            <span>04</span>
+            <data value="navigation" data-i18n="journey.navigation">Navigation</data>
+          </li>
+          <li>
+            <span>05</span>
+            <data value="review" data-i18n="journey.review">Review</data>
+          </li>
+          <li>
+            <span>06</span>
+            <data value="memory" data-i18n="entry.progressMemory">Memory</data>
+          </li>
+          <li>
+            <span>07</span>
+            <data value="continuity" data-i18n="entry.progressContinuity">Continuity</data>
+          </li>
+        </ol>
+      </div>
+
+      <div class="entry-header-actions">
+        <span
+          class="language-switcher"
+          role="group"
+          aria-label="Select interface language"
+          data-i18n-aria-label="accessibility.languageSelector"
+        >
+          <button
+            class="workspace-text-button entry-exit"
+            type="button"
+            data-locale="en"
+            aria-label="Switch to English"
+            data-i18n-aria-label="language.switchToEnglish"
+          >EN</button>
+
+          <span aria-hidden="true">·</span>
+
+          <button
+            class="workspace-text-button entry-exit"
+            type="button"
+            data-locale="zh-Hans"
+            aria-label="切换至中文"
+            data-i18n-aria-label="language.switchToChinese"
+          >中文</button>
+        </span>
+
+        <a
+          class="entry-exit"
+          href="/"
+          data-i18n="common.exit"
+        >Exit</a>
+      </div>
+    </div>
+  </header>
+
+  <section
+    class="entry-recovery-gate hidden"
+    id="entryRecoveryGate"
+    aria-labelledby="entryRecoveryTitle"
+  >
+    <div class="entry-recovery-gate__card">
+      <p
+        class="workspace-kicker"
+        data-i18n="entry.recoveryGate.eyebrow"
+      >Protected recovery</p>
+      <h1
+        id="entryRecoveryTitle"
+        data-i18n="entry.recoveryGate.title"
+      >A previous Reality Entry is available.</h1>
+      <p data-i18n="entry.recoveryGate.copy">
+        PHI OS found a protected browser recovery copy. Its personal content
+        will remain hidden until you explicitly choose to resume it.
+      </p>
+
+      <div class="entry-recovery-gate__status">
+        <span data-i18n="entry.recoveryGate.savedLabel">
+          Browser recovery copy
+        </span>
+        <strong
+          id="entryRecoverySavedAt"
+          data-i18n="entry.recoveryGate.savedUnknown"
+        >Saved time unavailable</strong>
+      </div>
+
+      <div class="entry-recovery-gate__actions">
+        <button
+          class="phi-button phi-button--primary"
+          id="resumeEntryButton"
+          type="button"
+        >
+          <span data-i18n="entry.recoveryGate.resume">
+            Resume previous Entry
+          </span>
+          <span aria-hidden="true">→</span>
+        </button>
+        <button
+          class="phi-button phi-button--secondary"
+          id="startFreshEntryButton"
+          type="button"
+        >
+          <span data-i18n="entry.recoveryGate.startFresh">
+            Start a new Entry
+          </span>
+        </button>
+        <a
+          class="workspace-text-button"
+          href="/reality-dashboard"
+          data-i18n="entry.recoveryGate.dashboard"
+        >Open Journey Dashboard</a>
+      </div>
+
+      <p class="entry-recovery-gate__boundary">
+        <span aria-hidden="true">○</span>
+        <span data-i18n="entry.recoveryGate.boundary">
+          Starting new removes only this browser recovery copy. It does not
+          delete a server-side Runtime or rewrite historical lineage.
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <div
+    class="runtime-workspace-layout"
+    id="runtimeWorkspaceLayout"
+  ><div data-runtime-workspace></div><div class="runtime-workspace-main">
+  <main id="entryWorkspace" class="entry-workspace-shell">
+    <section class="entry-intro-bar" aria-labelledby="entryTitle">
+      <div>
+        <p class="eyebrow" data-i18n="entry.eyebrow">
+          Runtime Experience · Entry
+        </p>
+        <h1 id="entryTitle" data-i18n="entry.title">
+          Reality Entry
+        </h1>
+        <p data-i18n="entry.subtitle">
+          Establish what changed, when it became noticeable, what it affects,
+          and what remains unclear.
+        </p>
+      </div>
+
+      <div class="session-boundary">
+        <span class="status-dot" aria-hidden="true"></span>
+        <div>
+          <strong data-i18n="entry.sessionOnlyTitle">
+            Session-only Runtime
+          </strong>
+          <small data-i18n="entry.sessionOnlyText">
+            Persistent storage is not enabled.
+          </small>
+        </div>
+      </div>
+    </section>
+
+    <section class="entry-workspace-grid">
+      <section
+        class="conversation-workspace"
+        aria-label="Reality Entry conversation"
+        data-i18n-aria-label="accessibility.entryConversation"
+      >
+        <header class="workspace-heading">
+          <div>
+            <p
+              class="workspace-kicker"
+              data-i18n="entry.observationWorkspace"
+            >Observation Workspace</p>
+            <h2 data-i18n="entry.workspaceQuestion">
+              What is changing in your Reality?
+            </h2>
+          </div>
+
+          <button
+            class="workspace-text-button"
+            id="newSessionButton"
+            type="button"
+            data-i18n="entry.newSessionButton"
+          >Start a new Entry</button>
+        </header>
+
+        <section
+          class="guided-entry"
+          id="guidedEntry"
+          aria-labelledby="guidedEntryTitle"
+        >
+          <header class="guided-entry-heading">
+            <p
+              class="workspace-kicker"
+              data-i18n="entry.guided.stepLabel"
+            >Opening step 1 of 2</p>
+            <h3
+              id="guidedEntryTitle"
+              data-i18n="entry.guided.title"
+            >Where is the change most noticeable?</h3>
+            <p data-i18n="entry.guided.instruction">
+              Choose one, or up to two, Reality Coordinates. No typing is
+              required in this first step.
+            </p>
+          </header>
+
+          <fieldset
+            class="reality-coordinate-fieldset"
+            id="realityCoordinates"
+            data-evidence-class="reported_orientation"
+            data-runtime-effect="none"
+            aria-describedby="coordinateStatus guidedEntryBoundary"
+          >
+            <legend>
+              <span data-i18n="entry.guided.coordinateLegend">
+                Reality Coordinate
+              </span>
+              <strong data-i18n="entry.guided.coordinateQuestion">
+                Where is the change most noticeable?
+              </strong>
+              <small data-i18n="entry.guided.coordinateHelp">
+                Required · choose one or up to two.
+              </small>
+            </legend>
+
+            <div class="reality-coordinate-options">
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="body_health"
+                >
+                <span data-i18n="entry.guided.coordinates.bodyHealth">
+                  Body &amp; Health
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="relationships_family"
+                >
+                <span data-i18n="entry.guided.coordinates.relationshipsFamily">
+                  Relationships &amp; Family
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="work_career"
+                >
+                <span data-i18n="entry.guided.coordinates.workCareer">
+                  Work &amp; Career
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="money_resources"
+                >
+                <span data-i18n="entry.guided.coordinates.moneyResources">
+                  Money &amp; Resources
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="learning_growth"
+                >
+                <span data-i18n="entry.guided.coordinates.learningGrowth">
+                  Learning &amp; Growth
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="meaning_purpose"
+                >
+                <span data-i18n="entry.guided.coordinates.meaningPurpose">
+                  Meaning &amp; Purpose
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="environment_place"
+                >
+                <span data-i18n="entry.guided.coordinates.environmentPlace">
+                  Environment &amp; Place
+                </span>
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  name="realityCoordinate"
+                  value="unsure"
+                >
+                <span data-i18n="entry.guided.coordinates.unsure">
+                  I’m not sure yet
+                </span>
+              </label>
+            </div>
+
+            <p
+              class="coordinate-status"
+              id="coordinateStatus"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            ></p>
+          </fieldset>
+
+          <p class="guided-entry-boundary" id="guidedEntryBoundary">
+            <span aria-hidden="true">○</span>
+            <span data-i18n="entry.guided.boundary">
+              This is the first orientation question. It does not diagnose,
+              select a professional service or call AI.
+            </span>
+          </p>
+
+          <div class="guided-entry-actions">
+            <button
+              class="phi-button phi-button--primary"
+              id="coordinateContinueButton"
+              type="button"
+            >
+              <span data-i18n="entry.guided.coordinateAction">
+                Continue to describe the change
+              </span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </section>
+
+        <fieldset class="evidence-depth hidden" id="evidenceDepth">
+          <legend data-i18n="entry.depthLegend">How much would you like PHI OS to ask?</legend>
+          <label><input type="radio" name="evidenceDepth" value="quick"><span><strong data-i18n="entry.depthQuickTitle">Quick</strong><small data-i18n="entry.depthQuickText">3–4 essential questions</small></span></label>
+          <label><input type="radio" name="evidenceDepth" value="guided" checked><span><strong data-i18n="entry.depthGuidedTitle">Guided</strong><small data-i18n="entry.depthGuidedText">5–7 balanced questions · recommended</small></span></label>
+          <label><input type="radio" name="evidenceDepth" value="deep"><span><strong data-i18n="entry.depthDeepTitle">Deep</strong><small data-i18n="entry.depthDeepText">7–10 questions with optional carrier check</small></span></label>
+        </fieldset>
+
+        <div
+          class="conversation-stage hidden"
+          id="chat"
+          aria-live="polite"
+          aria-relevant="additions text"
+        ></div>
+
+        <form class="entry-composer hidden" id="chatForm">
+          <label
+            class="entry-question-label"
+            id="entryQuestionLabel"
+            for="messageInput"
+            data-i18n="entry.guided.question"
+          >What has recently started to change?</label>
+
+          <textarea
+            id="messageInput"
+            rows="3"
+            placeholder="Describe what you noticed…"
+            data-i18n-placeholder="entry.inputPlaceholder"
+            aria-describedby="loadingText roundIndicator"
+            required
+          ></textarea>
+
+          <div class="composer-footer">
+            <p
+              id="loadingText"
+              class="entry-loading"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            ></p>
+
+            <div class="composer-actions">
+              <span class="round-indicator" id="roundIndicator">
+                Entry question 0 of up to 4
+              </span>
+
+              <button
+                class="entry-send-button phi-button phi-button--primary"
+                id="sendButton"
+                type="submit"
+              >
+                <span
+                  id="sendButtonLabel"
+                  data-i18n="entry.guided.beginAction"
+                >Begin Guided Entry</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <aside
+        class="runtime-entry-workspace"
+        aria-label="Live Runtime Entry"
+        data-i18n-aria-label="accessibility.liveRuntimeEntry"
+      >
+        <header class="workspace-heading runtime-heading">
+          <div>
+            <p
+              class="workspace-kicker"
+              data-i18n="entry.liveRuntimeRepresentation"
+            >Live Runtime Representation</p>
+            <h2 data-i18n="entry.runtimeEntryTitle">
+              Runtime Entry
+            </h2>
+          </div>
+
+          <span class="schema-badge">Schema v1.0</span>
+        </header>
+
+        <section class="entry-maturity-card">
+          <div class="maturity-copy">
+            <span data-i18n="entry.maturityLabel">
+              Entry maturity
+            </span>
+            <strong id="maturityScore">0%</strong>
+          </div>
+
+          <div class="entry-meter" aria-hidden="true">
+            <span id="maturityMeter"></span>
+          </div>
+
+          <p>
+            <span data-i18n="entry.nextGapLabel">
+              Next material gap:
+            </span>
+            <strong id="nextTarget">Observed Change</strong>
+          </p>
+        </section>
+
+        <div class="live-entry-sections" id="liveEntrySections">
+          <article
+            class="live-entry-block is-empty"
+            data-live-field="change"
+          >
+            <div class="live-entry-label">
+              <span>01</span>
+              <h3 data-i18n="entry.card.observedChange">
+                What Started to Change
+              </h3>
+            </div>
+            <p id="liveChange" data-i18n="entry.waitingForObservation">
+              Waiting for your first observation.
+            </p>
+          </article>
+
+          <article
+            class="live-entry-block is-empty"
+            data-live-field="timing"
+          >
+            <div class="live-entry-label">
+              <span>02</span>
+              <h3 data-i18n="entry.card.timeSignal">
+                When It Became Noticeable
+              </h3>
+            </div>
+            <p id="liveTiming" data-i18n="entry.notYetEstablished">
+              Not yet established.
+            </p>
+          </article>
+
+          <article
+            class="live-entry-block is-empty"
+            data-live-field="domains"
+          >
+            <div class="live-entry-label">
+              <span>03</span>
+              <h3 data-i18n="entry.card.affectedReality">
+                Affected Reality
+              </h3>
+            </div>
+            <div class="domain-tags" id="liveDomains">
+              <span data-i18n="entry.notYetEstablished">
+                Not yet established.
+              </span>
+            </div>
+          </article>
+
+          <article
+            class="live-entry-block is-empty"
+            data-live-field="known"
+          >
+            <div class="live-entry-label">
+              <span>04</span>
+              <h3 data-i18n="entry.card.currentUnderstanding">
+                What We Currently Understand
+              </h3>
+            </div>
+            <div id="liveKnown">
+              <p data-i18n="entry.unclassifiedEvidence">
+                Evidence has not yet been classified.
+              </p>
+            </div>
+          </article>
+
+          <article
+            class="live-entry-block is-empty"
+            data-live-field="unknown"
+          >
+            <div class="live-entry-label">
+              <span>05</span>
+              <h3 data-i18n="entry.card.unresolvedReality">
+                What Remains Unclear
+              </h3>
+            </div>
+            <div id="liveUnknown">
+              <p data-i18n="entry.unresolvedPreserved">
+                Unresolved Reality will be preserved here.
+              </p>
+            </div>
+          </article>
+
+          <article
+            class="live-entry-block is-empty"
+            data-live-field="tension"
+          >
+            <div class="live-entry-label">
+              <span>06</span>
+              <h3 data-i18n="entry.card.emergingTension">
+                Emerging Tension
+              </h3>
+            </div>
+            <p id="liveTension" data-i18n="entry.notYetEstablished">
+              Not yet established.
+            </p>
+          </article>
+
+          <article
+            class="live-entry-block is-empty"
+            data-live-field="direction"
+          >
+            <div class="live-entry-label">
+              <span>07</span>
+              <h3 data-i18n="entry.card.nextDirection">
+                Next Reconstruction Direction
+              </h3>
+            </div>
+            <p id="liveDirection" data-i18n="entry.directionPending">
+              A direction will appear once the Entry becomes stable.
+            </p>
+          </article>
+        </div>
+      </aside>
+    </section>
+
+    <section
+      class="entry-ready-overlay"
+      id="entryCard"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="entryReadyTitle"
+    >
+      <div class="entry-ready-panel">
+        <p class="eyebrow" data-i18n="entry.readyEyebrow">
+          Runtime Entry Ready
+        </p>
+
+        <h2 id="entryReadyTitle" data-i18n="entry.readyHeading">
+          Your Reality has begun to take shape.
+        </h2>
+
+        <p
+          class="entry-ready-intro"
+          data-i18n="entry.readyIntroduction"
+        >
+          The Entry is stable enough to continue. Unresolved information
+          remains visible rather than being filled with assumptions.
+        </p>
+
+        <div class="entry-ready-content" id="entryCardBody"></div>
+
+        <div class="entry-ready-actions">
+          <button
+            class="entry-primary-action phi-button phi-button--primary"
+            id="continueButton"
+            type="button"
+          >
+            <span data-i18n="entry.continueButton">
+              Continue to Reality Reconstruction
+            </span>
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <button
+            class="entry-secondary-action phi-button phi-button--secondary"
+            id="reviseButton"
+            type="button"
+            data-i18n="entry.correctOrClarify"
+          >Correct or clarify</button>
+
+          <a
+            class="entry-secondary-action phi-button phi-button--secondary"
+            href="/"
+            data-i18n="entry.endForNow"
+          >End for now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  </div></div>
+
+  <footer class="entry-footer">
+    <div class="shell">
+      <span data-i18n="entry.footerEvidenceBoundary">
+        Evidence before interpretation.
+      </span>
+      <span data-i18n="entry.footerRuntimeBoundary">
+        Storage allowed: false · Reconstruction allowed: true
+      </span>
+    </div>
+  </footer>
+
+  <script
+    type="module"
+    src="/assets/js/reality-entry.js"
+  ></script>
+</body>
+</html>

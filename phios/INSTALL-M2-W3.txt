@@ -1,0 +1,36 @@
+PHI OS — M2-W3 Cloudflare D1 Schema
+
+BASELINE
+Install only after M2-W2 Persistence Contract has been deployed.
+
+INSTALL
+1. Extract this ZIP.
+2. Copy the CONTENTS of M2-W3-Cloudflare-D1-Schema into the phios repo root.
+3. Allow package.json to be replaced.
+4. Run:
+
+   npm run check:runtime-d1-schema
+   npm run check
+
+EXPECTED
+✓ M2-W3 Runtime D1 tables, JSON constraints, foreign keys, cascades, Driver alignment, and indexes passed.
+
+FILES
+- db/schema/runtime-schema-v1.sql
+- content/registry/runtime-d1-schema.json
+- scripts/check-runtime-d1-schema.mjs
+- docs/runtime/M2-W3-CLOUDFLARE-D1-SCHEMA.md
+- package.json
+
+COMMIT
+git add db/schema/runtime-schema-v1.sql content/registry/runtime-d1-schema.json scripts/check-runtime-d1-schema.mjs docs/runtime/M2-W3-CLOUDFLARE-D1-SCHEMA.md package.json
+git commit -m "Complete M2-W3 Cloudflare D1 schema"
+git push origin main
+
+IMPORTANT MIGRATION BOUNDARY
+- Do not rename or edit db/migrations/0001_platform_foundation.sql.
+- Do not create a second migration numbered 0001.
+- M2-W4 must create db/migrations/0002_initial_runtime.sql.
+- Do not add a placeholder database_id to wrangler.jsonc.
+- The actual D1 database and RUNTIME_DB binding are created in M2-W4.
+- No Reading or Navigation product logic is changed.

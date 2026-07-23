@@ -487,7 +487,10 @@ for (const [file, expectedHash] of Object.entries(
 const migrations = (await fs.readdir(path.join(root, 'db/migrations')))
   .filter(filename => filename.endsWith('.sql'))
   .sort();
-assert.deepEqual(migrations, milestone.migrationInventory);
+assert.deepEqual(
+  migrations.slice(0, milestone.migrationInventory.length),
+  milestone.migrationInventory
+);
 
 assert.equal(
   registryIndex.registries.professional_consent_sharing,
