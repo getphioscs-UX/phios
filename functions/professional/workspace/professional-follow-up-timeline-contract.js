@@ -27,6 +27,23 @@ export const PROFESSIONAL_FOLLOW_UP_EVENT_TYPES = Object.freeze([
   'scheduled_review_completed'
 ]);
 
+export const FINANCIAL_FOLLOW_UP_EVENT_TYPES = Object.freeze([
+  'financial_intake_started',
+  'financial_data_submitted',
+  'document_uploaded',
+  'document_verified',
+  'financial_position_calculated',
+  'risk_flag_raised',
+  'professional_review_completed',
+  'consultation_completed',
+  'navigation_plan_delivered',
+  'client_decision_recorded',
+  'implementation_started',
+  'implementation_confirmed',
+  'financial_data_updated',
+  'scheduled_review_completed'
+]);
+
 function cleanText(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -116,6 +133,15 @@ export function appendProfessionalFollowUpEvent(
       input.source_record_id,
       'source_record_id'
     ),
+    financial_event:
+      FINANCIAL_FOLLOW_UP_EVENT_TYPES.includes(eventType),
+    data_date: input.data_date
+      ? isoDate(input.data_date, 'data_date')
+      : null,
+    revision_id: cleanText(input.revision_id) || null,
+    calculation_id: cleanText(input.calculation_id) || null,
+    recommendation_id: cleanText(input.recommendation_id) || null,
+    previous_event_id: cleanText(input.previous_event_id) || null,
     client_visible: input.client_visible === true
   });
   return Object.freeze({
@@ -127,7 +153,32 @@ export function appendProfessionalFollowUpEvent(
   });
 }
 
+export function projectProfessionalFollowUpTimeline(
+  timeline,
+  filter = {}
+) {
+  if (!timeline?.timeline_id || !Array.isArray(timeline.events)) {
+    throw new TypeError('A Professional Follow-up Timeline is required.');
+  }
+  const financialOnly = filter.financial_only === true;
+  const eventType = cleanText(filter.event_type);
+  const events = timeline.events.filter(event => (
+    (!financialOnly || event.financial_event === true) &&
+    (!eventType || event.event_type === eventType)
+  ));
+  return Object.freeze({
+    ...timeline,
+    events: Object.freeze([...events]),
+    filter: Object.freeze({
+      financial_only: financialOnly,
+      event_type: eventType || null
+    }),
+    append_only: true
+  });
+}
+
 export default Object.freeze({
   createProfessionalFollowUpTimeline,
-  appendProfessionalFollowUpEvent
+  appendProfessionalFollowUpEvent,
+  projectProfessionalFollowUpTimeline
 });

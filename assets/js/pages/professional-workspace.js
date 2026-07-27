@@ -310,7 +310,20 @@ function renderQueue() {
 function renderReadingRevisions() {
   const root = document.querySelector('#professionalReadingRevisions');
   if (!root) return;
-  const revisions = list(payload?.reading_revisions);
+  const financialOnly =
+    document.querySelector('#professionalFinancialRevisionsOnly')
+      ?.checked === true;
+  const readingRevisions = list(payload?.reading_revisions).map(item => ({
+    ...item,
+    financial_revision: false
+  }));
+  const financialRevisions = list(payload?.financial_revisions).map(item => ({
+    ...item,
+    financial_revision: true
+  }));
+  const revisions = financialOnly
+    ? financialRevisions
+    : [...readingRevisions, ...financialRevisions];
   if (!revisions.length) {
     root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noReadingRevisions'))}</p>`;
     return;
@@ -327,23 +340,34 @@ function renderReadingRevisions() {
           revised: Number(revision.revised_version) || 2
         }))}</strong>
       </header>
+      ${revision.financial_revision ? `
+        <p class="professional-information-class">${escapeHTML(t('professionalWorkspace.financialRevision'))}</p>
+        <dl class="professional-meta-grid">
+          <div><dt>${escapeHTML(t('professionalWorkspace.financialDataDate'))}</dt><dd>${date(revision.data_date)}</dd></div>
+          <div><dt>${escapeHTML(t('professionalWorkspace.sourceDocument'))}</dt><dd>${display(revision.source_document)}</dd></div>
+          <div><dt>${escapeHTML(t('professionalWorkspace.calculationImpact'))}</dt><dd>${display(revision.calculation_impact)}</dd></div>
+          <div><dt>${escapeHTML(t('professionalWorkspace.recommendationImpact'))}</dt><dd>${display(revision.recommendation_impact)}</dd></div>
+        </dl>
+      ` : ''}
       <div class="professional-comparison">
         <section>
           <h3>${escapeHTML(t('professionalWorkspace.originalVersion'))}</h3>
-          <p>${display(revision.original_text)}</p>
+          <p>${display(revision.original_text ?? revision.previous_value)}</p>
         </section>
         <section>
           <h3>${escapeHTML(t('professionalWorkspace.revisedVersion'))}</h3>
-          <p>${display(revision.revised_text)}</p>
+          <p>${display(revision.revised_text ?? revision.updated_value)}</p>
         </section>
       </div>
       <dl class="professional-meta-grid">
-        <div><dt>${escapeHTML(t('professionalWorkspace.changedBy'))}</dt><dd>${display(revision.changed_by_label)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.changedBy'))}</dt><dd>${display(revision.changed_by_label || revision.changed_by)}</dd></div>
         <div><dt>${escapeHTML(t('professionalWorkspace.changedAt'))}</dt><dd>${dateTime(revision.changed_at)}</dd></div>
         <div><dt>${escapeHTML(t('professionalWorkspace.reason'))}</dt><dd>${display(revision.reason)}</dd></div>
         <div><dt>${escapeHTML(t('professionalWorkspace.clientVisibility'))}</dt><dd>${escapeHTML(revision.client_visible ? t('professionalWorkspace.noteClientVisible') : t('professionalWorkspace.notePrivate'))}</dd></div>
       </dl>
-      <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.readingOverlayBoundary'))}</p>
+      <p class="professional-contract-boundary">${escapeHTML(t(revision.financial_revision
+        ? 'professionalWorkspace.financialRevisionBoundary'
+        : 'professionalWorkspace.readingOverlayBoundary'))}</p>
     </article>
   `).join('')}</div>`;
 }
@@ -363,12 +387,40 @@ function renderNavigationConsiderations() {
     '#professionalNavigationConsiderations'
   );
   if (!root) return;
-  const considerations = list(payload?.navigation_considerations);
-  if (!considerations.length) {
+  const financialOnly =
+    document.querySelector('#professionalFinancialNavigationOnly')
+      ?.checked === true;
+  const considerations = financialOnly
+    ? []
+    : list(payload?.navigation_considerations);
+  const financialRecommendations = list(
+    payload?.financial_navigation_recommendations
+  );
+  if (!considerations.length && !financialRecommendations.length) {
     root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noNavigationConsiderations'))}</p>`;
     return;
   }
-  root.innerHTML = `<div class="professional-consideration-list">${considerations.map(item => `
+  root.innerHTML = `
+    ${financialRecommendations.length ? `<section class="professional-financial-navigation">
+      <h2>${escapeHTML(t('professionalWorkspace.financialNavigation'))}</h2>
+      <div class="professional-consideration-list">${financialRecommendations.map(item => `
+        <article>
+          <header><div><span>${escapeHTML(t('professionalWorkspace.financialDomain'))}</span><h2>${escapeHTML(t(`professionalWorkspace.financialDomains.${item.domain}`))}</h2></div><strong>${display(item.status)}</strong></header>
+          <div class="professional-consideration-grid">
+            ${labelledList('professionalWorkspace.currentCondition', [item.current_condition])}
+            ${labelledList('professionalWorkspace.confirmedEvidence', item.confirmed_evidence)}
+            ${labelledList('professionalWorkspace.targetCondition', [item.target_condition])}
+            ${labelledList('professionalWorkspace.recommendedAction', [item.recommended_action])}
+            ${labelledList('professionalWorkspace.alternativeOptions', item.alternative_options)}
+            ${labelledList('professionalWorkspace.requiredResources', item.required_resources)}
+            ${labelledList('professionalWorkspace.risks', item.risks)}
+            ${labelledList('professionalWorkspace.dependencies', item.dependencies)}
+            ${labelledList('professionalWorkspace.reviewTrigger', [item.review_trigger])}
+          </div>
+          <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.financialNavigationBoundary'))}</p>
+        </article>`).join('')}</div>
+    </section>` : ''}
+    ${considerations.length ? `<div class="professional-consideration-list">${considerations.map(item => `
     <article>
       <header>
         <div>
@@ -390,13 +442,18 @@ function renderNavigationConsiderations() {
       </div>
       <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.navigationChoiceBoundary'))}</p>
     </article>
-  `).join('')}</div>`;
+  `).join('')}</div>` : ''}`;
 }
 
 function renderFollowUpTimeline() {
   const root = document.querySelector('#professionalFollowUpTimeline');
   if (!root) return;
-  const events = list(payload?.follow_up_timeline?.events);
+  const financialOnly =
+    document.querySelector('#professionalFinancialTimelineOnly')
+      ?.checked === true;
+  const events = list(payload?.follow_up_timeline?.events).filter(event =>
+    !financialOnly || event.financial_event === true
+  );
   if (!events.length) {
     root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noFollowUpEvents'))}</p>`;
     return;
@@ -412,6 +469,10 @@ function renderFollowUpTimeline() {
         <p>${escapeHTML(event.client_visible
           ? t('professionalWorkspace.noteClientVisible')
           : t('professionalWorkspace.professionalRecord'))}</p>
+        ${event.data_date ? `<p><strong>${escapeHTML(t('professionalWorkspace.financialDataDate'))}:</strong> ${date(event.data_date)}</p>` : ''}
+        ${event.revision_id ? `<p><strong>${escapeHTML(t('professionalWorkspace.financialRevision'))}:</strong> ${display(event.revision_id)}</p>` : ''}
+        ${event.calculation_id ? `<p><strong>${escapeHTML(t('professionalWorkspace.calculationReference'))}:</strong> ${display(event.calculation_id)}</p>` : ''}
+        ${event.recommendation_id ? `<p><strong>${escapeHTML(t('professionalWorkspace.recommendationReference'))}:</strong> ${display(event.recommendation_id)}</p>` : ''}
       </article>
     </li>
   `).join('')}</ol>
@@ -616,6 +677,15 @@ function bindOperationalFilters() {
     }
     if (event.target.matches('#professionalFinancialQueueOnly')) {
       renderQueue();
+    }
+    if (event.target.matches('#professionalFinancialRevisionsOnly')) {
+      renderReadingRevisions();
+    }
+    if (event.target.matches('#professionalFinancialNavigationOnly')) {
+      renderNavigationConsiderations();
+    }
+    if (event.target.matches('#professionalFinancialTimelineOnly')) {
+      renderFollowUpTimeline();
     }
   });
 }
