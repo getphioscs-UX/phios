@@ -489,6 +489,64 @@ body.public-menu-open {
   box-shadow: var(--phi-shadow-md, 0 18px 50px rgba(20, 24, 33, 0.08));
 }
 
+.professional-service-grid,
+.professional-detail-grid,
+.external-reader-public-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+.professional-service-grid article,
+.professional-detail-grid article,
+.external-reader-public-grid article,
+.external-reader-public-grid a {
+  min-width: 0;
+  padding: clamp(1.3rem, 3vw, 2rem);
+  border: 1px solid var(--phi-border-subtle, rgba(17, 20, 26, .16));
+  border-radius: var(--phi-radius-md, 1.2rem);
+  background: rgba(255,255,255,.66);
+  color: inherit;
+  text-decoration: none;
+}
+.professional-service-grid h3,
+.professional-detail-grid h2,
+.external-reader-public-grid h2 {
+  margin: .5rem 0 1rem;
+  font-family: var(--phi-font-display, Newsreader, Georgia, serif);
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  line-height: 1.15;
+}
+.professional-service-grid p,
+.professional-detail-grid p,
+.external-reader-public-grid p { line-height: 1.7; }
+.external-reader-public-grid span {
+  color: var(--phi-text-secondary, #515866);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.professional-comparison-wrap { margin-top: 2rem; overflow-x: auto; outline-offset: .3rem; }
+.professional-public-comparison { width: 100%; min-width: 760px; border-collapse: collapse; background: #fff; }
+.professional-public-comparison th,
+.professional-public-comparison td { padding: 1rem; border: 1px solid var(--phi-border-subtle, rgba(17,20,26,.16)); text-align: left; vertical-align: top; }
+.professional-public-comparison thead th { background: var(--phi-ink, #171a21); color: #fff; }
+.professional-public-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+.professional-public-disclaimer { border-top: 1px solid var(--phi-border-subtle, rgba(17,20,26,.16)); }
+.professional-public-disclaimer p { max-width: 54rem; font-size: clamp(1.1rem, 2vw, 1.4rem); line-height: 1.6; }
+.professional-public-disclaimer .public-button { margin-top: 1rem; }
+
+@media (max-width: 768px) {
+  .professional-service-grid,
+  .professional-detail-grid,
+  .external-reader-public-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  .professional-service-grid,
+  .professional-detail-grid,
+  .external-reader-public-grid { grid-template-columns: 1fr; }
+}
+
 .entry-card p,
 .ecosystem-card p,
 .trust-card p {
