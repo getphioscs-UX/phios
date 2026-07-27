@@ -19,6 +19,12 @@ export const FINANCIAL_EVIDENCE_VERIFICATION_STATUSES = Object.freeze([
   'superseded'
 ]);
 
+export const FINANCIAL_EVIDENCE_SUBJECTS = Object.freeze([
+  'income', 'expenses', 'bank_cash', 'investments', 'properties',
+  'liabilities', 'insurance', 'tax', 'retirement', 'education', 'estate',
+  'objectives', 'client_household'
+]);
+
 function cleanText(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -144,4 +150,48 @@ export function createFinancialEvidenceValue(input = {}, options = {}) {
   });
 }
 
-export default createFinancialEvidenceValue;
+export function createFinancialEvidenceMap(input = {}, options = {}) {
+  const sourceType = cleanText(input.source_type);
+  if (!FINANCIAL_EVIDENCE_SOURCE_TYPES.includes(sourceType)) {
+    throw new TypeError('A supported Financial evidence source is required.');
+  }
+  const fieldPath = requiredText(input.field_path, 'field_path');
+  const subject = fieldPath.split('.')[0];
+  if (!FINANCIAL_EVIDENCE_SUBJECTS.includes(subject)) {
+    throw new TypeError('field_path must target a Financial Intake subject.');
+  }
+  if (
+    ['estimated', 'projected'].includes(sourceType) &&
+    uniqueReferences(input.assumption_ids, 'assumption_ids').length === 0
+  ) {
+    throw new TypeError(
+      'Estimated or projected mappings require explicit assumptions.'
+    );
+  }
+  return Object.freeze({
+    contract: 'phi-os.financial-evidence-map.v1',
+    evidence_map_id: requiredText(input.evidence_map_id, 'evidence_map_id'),
+    intake_id: requiredText(input.intake_id, 'intake_id'),
+    field_path: fieldPath,
+    source_type: sourceType,
+    source_reference_id: cleanText(input.source_reference_id),
+    evidence_date: isoDate(input.evidence_date, 'evidence_date'),
+    verification_status: cleanText(input.verification_status) || 'unverified',
+    verified_by: cleanText(input.verified_by),
+    assumption_ids: Object.freeze(
+      uniqueReferences(input.assumption_ids, 'assumption_ids')
+    ),
+    created_at: isoDate(
+      options.now || input.created_at || new Date().toISOString(),
+      'created_at'
+    ),
+    runtime_evidence: false,
+    creates_recommendation: false,
+    raw_document_content_embedded: false
+  });
+}
+
+export default Object.freeze({
+  createFinancialEvidenceValue,
+  createFinancialEvidenceMap
+});
