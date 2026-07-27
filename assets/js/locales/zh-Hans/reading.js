@@ -1,6 +1,8 @@
 /* PHI OS zh-Hans reading translations. Keep keys aligned with the matching locale module. */
 const reading = Object.freeze({
   reading: {
+    reconstructionStaleTitle: '这份现实读取建立在较早的现实重建版本上。',
+    reconstructionStaleDetail: '当前现实重建已经发生重要修订；这份现实读取会作为历史记录保留，但需要重新生成后，才能代表当前版本。',
     metaTitle: '现实读取工作区 — PHI OS',
     skipLink: '跳至现实读取',
     eyebrow: '运行体验 · 读取',

@@ -2,6 +2,8 @@
 
 const navigation = Object.freeze({
   navigation: {
+    reconstructionStaleTitle: '这份现实导航建立在较早的现实重建版本上。',
+    reconstructionStaleDetail: '当前现实重建已经发生重要修订；这份现实导航会作为历史记录保留，并需要在新的现实读取完成后重新生成。',
     skipLink:
       '跳至现实导航',
 

@@ -117,6 +117,33 @@ function sanitizeObject(value, maximumLength = 100000) {
   }
 }
 
+function sanitizeCorrection(value) {
+  const source = sanitizeObject(value, 20000);
+  if (!source) return null;
+  return {
+    revision_id: cleanText(source.revision_id),
+    target_type: cleanText(source.target_type),
+    target_id: cleanText(source.target_id),
+    field: cleanText(source.field),
+    previous_value: source.previous_value ?? null,
+    new_value: source.new_value ?? null,
+    reason: cleanText(source.reason),
+    source: cleanText(source.source) || 'customer_inline_correction'
+  };
+}
+
+function sanitizeDownstreamArtifacts(value) {
+  return Array.isArray(value)
+    ? value.filter(isPlainObject).slice(0, 20).map(item => ({
+        artifact_type: cleanText(item.artifact_type),
+        artifact_id: cleanText(item.artifact_id),
+        status: cleanText(item.status) || 'current',
+        based_on_reconstruction_version:
+          Number(item.based_on_reconstruction_version || 0)
+      }))
+    : [];
+}
+
 
 function sanitizeConversation(conversation) {
   if (!Array.isArray(conversation)) {
@@ -619,11 +646,34 @@ export async function onRequestPost(context) {
     createRequestMetadata(request);
 
   try {
+    const previousReconstruction = sanitizeObject(
+      body.previousReconstruction ||
+      body.previous_reconstruction
+    );
+    const correction = sanitizeCorrection(
+      body.correction ||
+      body.inlineCorrection ||
+      body.inline_correction
+    );
+    const downstreamArtifacts = sanitizeDownstreamArtifacts(
+      body.downstreamArtifacts ||
+      body.downstream_artifacts
+    );
     const reconstruction =
       reconstructRuntime(
         normalizedEntry,
-        { language }
+        {
+          language,
+          previousReconstruction:
+            previousReconstruction?.reconstructionExperience ||
+            previousReconstruction,
+          correction,
+          downstreamArtifacts
+        }
       );
+    const responseRuntimeEntry =
+      reconstruction.runtimeEntry ||
+      normalizedEntry;
 
     const responsePayload = {
       success: true,
@@ -639,10 +689,10 @@ export async function onRequestPost(context) {
         normalizedEntry.runtimeEntityId,
 
       runtimeEntryId:
-        normalizedEntry.runtimeEntryId,
+        responseRuntimeEntry.runtimeEntryId,
 
       runtimeEntry:
-        normalizedEntry,
+        responseRuntimeEntry,
 
       language,
 
@@ -697,7 +747,7 @@ export async function onRequestPost(context) {
           false,
 
         reason:
-          'Sprint 3 Reconstruction is session-only and does not persist Runtime data.'
+          'The API returns the complete version and revision contract; the configured Runtime persistence adapter owns durable storage.'
       },
 
       requestMetadata

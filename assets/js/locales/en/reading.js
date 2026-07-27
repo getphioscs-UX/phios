@@ -1,6 +1,8 @@
 /* PHI OS en reading translations. Keep keys aligned with the matching locale module. */
 const reading = Object.freeze({
   reading: {
+    reconstructionStaleTitle: 'This Reading is based on an earlier Reconstruction version.',
+    reconstructionStaleDetail: 'The current Reconstruction has a material revision. This Reading remains available as history and needs to be regenerated before it represents the current version.',
     metaTitle: 'Reality Reading Workspace — PHI OS',
     skipLink: 'Skip to Reality Reading',
     eyebrow: 'Runtime Experience · Reading',

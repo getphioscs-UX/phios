@@ -56,6 +56,9 @@ import {
 import {
   renderReconstructionVisualAlignment
 } from './modules/reconstruction-visual-alignment.js';
+import {
+  renderReconstructionExperience
+} from './modules/reconstruction-experience-render.js';
 
 import {
   qs,
@@ -203,6 +206,22 @@ function renderLoadedReconstruction(
       result
     );
 
+  const reconstructionExperience =
+    renderReconstructionExperience(
+      result,
+      {
+        onUpdated(updatedResult) {
+          pageState.result = updatedResult;
+          renderLoadedReconstruction({
+            success: true,
+            result: updatedResult,
+            runtimeEntry: updatedResult.runtimeEntry,
+            conversation: pageState.conversation
+          });
+        }
+      }
+    );
+
   const visualAlignment =
     renderReconstructionVisualAlignment(
       result
@@ -279,6 +298,7 @@ function renderLoadedReconstruction(
             '',
 
           rendered,
+          reconstructionExperience,
           visualAlignment,
           inspector,
           readingState
@@ -290,6 +310,7 @@ function renderLoadedReconstruction(
   return {
     rendered: true,
     renderedResult: rendered,
+    reconstructionExperience,
     visualAlignment,
     inspectorResult: inspector,
     readingState

@@ -10,7 +10,8 @@ import {
   bindLocaleControls,
   getLocale,
   getLanguage,
-  onLocaleChange
+  onLocaleChange,
+  t
 } from './i18n.js';
 
 import {
@@ -60,6 +61,27 @@ async function runNavigation({
       state.response = restoreNavigationState(result.response, state.response || result.response);
       renderRealityNavigation(state.response);
       renderNavigationVisualAlignment(state.response);
+      let staleNotice = document.querySelector(
+        '[data-reconstruction-stale-notice]'
+      );
+      if (
+        state.response?.status === 'stale' ||
+        state.response?.staleness?.status === 'stale'
+      ) {
+        if (!staleNotice) {
+          staleNotice = document.createElement('aside');
+          staleNotice.dataset.reconstructionStaleNotice = 'true';
+          staleNotice.className = 'runtime-stale-notice';
+          staleNotice.setAttribute('role', 'status');
+          document.querySelector('main')?.prepend(staleNotice);
+        }
+        staleNotice.innerHTML = `
+          <strong>${t('navigation.reconstructionStaleTitle')}</strong>
+          <p>${t('navigation.reconstructionStaleDetail')}</p>
+        `;
+      } else {
+        staleNotice?.remove();
+      }
     }
   } finally {
     state.loading = false;

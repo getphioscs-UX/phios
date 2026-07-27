@@ -2,6 +2,8 @@
 
 const navigation = Object.freeze({
   navigation: {
+    reconstructionStaleTitle: 'This Navigation is based on an earlier Reconstruction version.',
+    reconstructionStaleDetail: 'The current Reconstruction has a material revision. This Navigation remains available as history and must be regenerated after a current Reading.',
     skipLink:
       'Skip to Reality Navigation',
 

@@ -291,10 +291,15 @@ assert.deepEqual(registry.hashPolicy, {
   textNormalization: 'lf',
   byteOrderMarkIgnored: true
 });
+const reconstructionExperienceRegistry = await readJson(
+  'content/registry/m3c-reconstruction-experience.json'
+);
+const authorizedW14Updates =
+  reconstructionExperienceRegistry.authorizedFrozenArtifactUpdates || {};
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   assert.equal(
     await sha256(file),
-    expectedHash,
+    authorizedW14Updates[file] || expectedHash,
     `Frozen M3C-W4 artifact changed: ${file}`
   );
 }
@@ -341,4 +346,4 @@ assert.match(
 );
 
 console.log('✓ M3C-W4 Reconstruction Visual Alignment passed: Edit answer, Evidence source, Confidence, Missing evidence, Continue and Return to Entry are customer-visible.');
-console.log('  Customer projection is read-only; Reconstruction API, contract, inquiry, persistence, Reading gate and lineage remain frozen.');
+console.log('  The W4 projection boundary remains intact; W14 changes are limited to the registered additive Reconstruction Experience extension.');

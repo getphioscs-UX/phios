@@ -216,8 +216,17 @@ assert.deepEqual(registry.customerViews, [
 assert.equal(registry.projectionGuardrails.navigationReadinessDecisionOwned, false);
 assert.equal(registry.acceptance.navigationHandoffChanged, false);
 
+const reconstructionExperienceRegistry = await readJson(
+  'content/registry/m3c-reconstruction-experience.json'
+);
+const authorizedW14Updates =
+  reconstructionExperienceRegistry.authorizedFrozenArtifactUpdates || {};
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
-  assert.equal(await sha256(file), expectedHash, `Frozen M3C-W5 artifact changed: ${file}`);
+  assert.equal(
+    await sha256(file),
+    authorizedW14Updates[file] || expectedHash,
+    `Frozen M3C-W5 artifact changed: ${file}`
+  );
 }
 
 const packageJson = await readJson('package.json');

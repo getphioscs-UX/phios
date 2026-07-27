@@ -115,6 +115,30 @@ function renderCurrentReading() {
       state.response
     );
 
+  let staleNotice =
+    document.querySelector(
+      '[data-reconstruction-stale-notice]'
+    );
+
+  if (
+    state.response?.status === 'stale' ||
+    state.response?.staleness?.status === 'stale'
+  ) {
+    if (!staleNotice) {
+      staleNotice = document.createElement('aside');
+      staleNotice.dataset.reconstructionStaleNotice = 'true';
+      staleNotice.className = 'runtime-stale-notice';
+      staleNotice.setAttribute('role', 'status');
+      document.querySelector('main')?.prepend(staleNotice);
+    }
+    staleNotice.innerHTML = `
+      <strong>${t('reading.reconstructionStaleTitle')}</strong>
+      <p>${t('reading.reconstructionStaleDetail')}</p>
+    `;
+  } else {
+    staleNotice?.remove();
+  }
+
   if (!state.sidebarInitialized) {
     initializeReadingSidebar();
 

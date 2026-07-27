@@ -468,7 +468,8 @@ export function showLoaderError(
 export async function requestRuntimeReconstruction({
   runtimeEntry,
   conversation = [],
-  reconstructionAnswers = []
+  reconstructionAnswers = [],
+  previousReconstruction = null
 }) {
   const validation =
     validateRuntimeEntryForReconstruction(
@@ -486,7 +487,8 @@ export async function requestRuntimeReconstruction({
     withLanguageContract({
       runtimeEntry,
       conversation,
-      reconstructionAnswers
+      reconstructionAnswers,
+      previousReconstruction
     }, runtimeEntry?.realityChange?.rawStatement || '')
   );
 }
@@ -654,7 +656,11 @@ export async function loadRuntimeReconstruction(
   });
 
   try {
-      const result =
+    const previousResult = safeJSON(
+      getSession(SESSION.reconstruction),
+      null
+    );
+    const result =
       await requestRuntimeReconstruction({
         runtimeEntry:
           sessionState.runtimeEntry,
@@ -662,7 +668,11 @@ export async function loadRuntimeReconstruction(
         conversation:
           sessionState.conversation,
 
-        reconstructionAnswers
+        reconstructionAnswers,
+
+        previousReconstruction:
+          previousResult?.reconstruction?.reconstructionExperience ||
+          null
       });
 
     const resultValidation =

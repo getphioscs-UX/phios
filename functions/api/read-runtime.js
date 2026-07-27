@@ -109,7 +109,7 @@ function validationIssue(code, field, language, english, chinese) {
   };
 }
 
-function validateReadingInput(input, language = 'en') {
+export function validateReadingInput(input, language = 'en') {
   const errors = [];
 
   if (!isObject(input)) {
@@ -172,6 +172,27 @@ function validateReadingInput(input, language = 'en') {
       language,
       'Reality Reconstruction is required.',
       '缺少现实重建资料。'
+    ));
+  }
+
+  const readingGate =
+    input?.reconstruction?.readingGate ||
+    input?.reconstruction?.reading_gate;
+
+  if (
+    isObject(readingGate) &&
+    (
+      readingGate.allowed !== true ||
+      cleanText(readingGate.status) === 'blocked' ||
+      cleanText(readingGate.status) === 'stale_dependency'
+    )
+  ) {
+    errors.push(validationIssue(
+      'reconstruction_reading_gate_blocked',
+      'reconstruction.readingGate',
+      language,
+      'The current Reconstruction Reading Gate does not allow a new Reading.',
+      '当前现实重建的读取门槛不允许生成新的现实读取。'
     ));
   }
 

@@ -344,6 +344,36 @@ export function evaluateReadingReadiness(
   const reconstruction =
     result.reconstruction || {};
 
+  const authoritativeGate =
+    reconstruction.readingGate ||
+    reconstruction.reconstructionExperience?.reading_gate;
+
+  if (
+    isPlainObject(authoritativeGate) &&
+    typeof authoritativeGate.allowed === 'boolean'
+  ) {
+    return {
+      ready: authoritativeGate.allowed === true,
+      status: cleanText(authoritativeGate.status) || (
+        authoritativeGate.allowed ? 'ready' : 'blocked'
+      ),
+      score: clampScore(
+        reconstruction?.explainableConfidence?.score ||
+        reconstruction?.reconstructionExperience?.confidence?.score
+      ),
+      reasons: [
+        ...arrayValue(authoritativeGate.blocking_reasons),
+        ...arrayValue(authoritativeGate.warnings)
+      ],
+      blockingReasons: arrayValue(authoritativeGate.blocking_reasons),
+      warnings: arrayValue(authoritativeGate.warnings),
+      requiredQuestions: arrayValue(authoritativeGate.required_questions),
+      reconstructionVersion:
+        authoritativeGate.reconstruction_version,
+      authority: 'runtime_reading_gate'
+    };
+  }
+
   const runtimeEntry =
     result.runtimeEntry ||
     readStoredRuntimeEntry() ||
@@ -691,6 +721,20 @@ export function createReadingInput(
         clampScore(
           reconstruction.maturityScore
         ),
+
+      reconstructionVersion:
+        Number(
+          reconstruction?.summary?.reconstruction_version ||
+          reconstruction?.reconstructionExperience?.reconstruction_version ||
+          1
+        ),
+
+      readingGate:
+        isPlainObject(reconstruction.readingGate)
+          ? reconstruction.readingGate
+          : isPlainObject(reconstruction?.reconstructionExperience?.reading_gate)
+            ? reconstruction.reconstructionExperience.reading_gate
+            : null,
 
       carrier:
         isPlainObject(

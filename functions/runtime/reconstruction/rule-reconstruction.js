@@ -26,6 +26,9 @@ import {
   buildCarrierOrganization,
   buildCarrierConfiguration
 } from '../formation/book-1-runtime-model.js';
+import {
+  buildReconstructionExperience
+} from './reconstruction-experience.js';
 
 const text = v => typeof v === "string" ? v.trim() : "";
 const arr = v => Array.isArray(v) ? v : [];
@@ -527,7 +530,7 @@ export function reconstructRuntime(runtimeEntry, options = {}){
   const grammarMaturity = Math.min(1, grammarStates.length/16);
   const inquiryMaturity = inquiry.answeredCount/inquiry.totalTargets;
 
-  return {
+  const legacyReconstruction = {
     schemaVersion: SCHEMA_IDS.RECONSTRUCTION,
     reconstructionMethod:"rule_first",
     language,
@@ -597,6 +600,45 @@ export function reconstructRuntime(runtimeEntry, options = {}){
         : inquiry.complete
           ? copy(language,"More formation evidence is required before reading.","进入现实读取之前，仍需要补充形成证据。")
           : copy(language,"Answer the remaining Reconstruction questions before Reality Reading.","进入现实读取前，请先完成剩余的现实重建问题。")
+    }
+  };
+
+  const { runtimeEntry: correctedRuntimeEntry, experience } =
+    buildReconstructionExperience(
+      runtimeEntry,
+      legacyReconstruction,
+      {
+        previousReconstruction: options.previousReconstruction,
+        correction: options.correction,
+        downstreamArtifacts: options.downstreamArtifacts,
+        now: options.now
+      }
+    );
+
+  return {
+    ...legacyReconstruction,
+    runtimeEntry: correctedRuntimeEntry,
+    reconstructionExperience: experience,
+    summary: experience.summary,
+    timeline: experience.timeline,
+    conditions: experience.conditions,
+    influenceMap: experience.influence_map,
+    evidenceClassification: experience.evidence,
+    conflicts: experience.conflicts,
+    missingEvidenceMaturity: experience.missing_evidence,
+    unknownQuestions: experience.unknown_questions,
+    explainableConfidence: experience.confidence,
+    readingGate: experience.reading_gate,
+    revision: experience.revision,
+    revisionHistory: experience.revision_history,
+    previousVersions: experience.previous_versions,
+    downstreamStaleness: experience.downstream_staleness,
+    views: experience.views,
+    nextStage: {
+      ...legacyReconstruction.nextStage,
+      ready: experience.reading_gate.allowed,
+      status: experience.reading_gate.status,
+      blockingReasons: experience.reading_gate.blocking_reasons
     }
   };
 }
