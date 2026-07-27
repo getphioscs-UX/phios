@@ -12,6 +12,18 @@ const professional = Object.freeze({
     viewsAria: '专业工作区视图',
     clientList: '客户列表',
     runtimeView: 'Runtime 查看',
+    financialReality: '财务现实',
+    noFinancialReality: '当前没有已授权的财务现实资料。',
+    financialDataDate: '财务资料日期',
+    financialEvidenceBoundary: '财务证据与计算结果均保留明确来源。',
+    financialBoundary: '财务事实、计算、专业评估与建议彼此分开，也不与现实证据或外部解释系统混合。',
+    financialSections: {
+      overview: '概览', objectives: '目标', income: '收入', expenses: '支出',
+      assets: '资产', liabilities: '负债', cash_flow: '现金流', net_worth: '净资产',
+      insurance: '保险', investments: '投资', properties: '物业', tax: '税务',
+      retirement: '退休', education: '教育', estate: '传承', ratios: '比率',
+      risks: '风险', recommendations: '建议', documents: '文件'
+    },
     notes: '专业记录',
     reviewQueue: '审阅队列',
     readingRevisions: 'Reading 修订',
@@ -258,6 +270,27 @@ const professional = Object.freeze({
       missing_intake: '尚未完成资料填写', missing_consent: '尚未完成授权', missing_chart: '尚未提供图表',
       report_ready: '报告已经完成', follow_up: '后续跟进'
     }
+  },
+  financialPublic: {
+    metaTitle: '财务现实导航 — PHI OS',
+    skip: '跳至财务现实导航', eyebrow: '专业财务服务',
+    title: '测量并重建现实运行中的财务条件。',
+    lead: '财务现实导航整理可核实的财务资料，计算当前承受力，并支持可问责的专业导航。',
+    serviceName: '财务现实导航',
+    serviceCopy: '使用注明日期的证据、计算结果与可问责的专业审阅，重建当前财务条件。',
+    whatTitle: '什么是财务现实导航',
+    whatCopy: '以注明日期与来源的资料，重建目标、现金流、资产、负债、保障、风险暴露与未来资金条件。',
+    forTitle: '适合谁使用', forCopy: '适合需要在作出财务决定以前看清整体位置的个人、伴侣、家庭与企业经营者。',
+    reviewTitle: '审阅哪些内容', reviewCopy: '收入、支出、现金、投资、物业、负债、保险、税务、退休、教育、传承准备与支持文件。',
+    differenceTitle: '与产品销售有何不同', differenceCopy: '证据、计算、专业评估与建议分别记录，系统不会自动选择任何产品。',
+    optionsTitle: '服务选择', optionsCopy: '财务现实快照、财务承受力分析、咨询、导航计划、执行跟进与年度运行审阅。',
+    informationTitle: '所需资料', informationCopy: '当前目标、家庭范围，以及支持各项财务条件与规划领域的注明日期资料。',
+    processTitle: '服务过程', processCopy: '授权、安全资料填写、证据审阅、计算、专业评估、咨询、客户决定与定期复核。',
+    privacyTitle: '隐私与保密', privacyCopy: '敏感识别资料会被最小化，报告不会显示不必要的完整账户、身份、保单与地址资料。',
+    limitTitle: '假设与限制', limitCopy: '计算与预测取决于资料日期、现有证据及已记录的假设。',
+    boundaryTitle: '专业服务边界',
+    boundary: 'PHI OS 财务现实导航协助整理、分析与审阅当前财务位置，不保证投资、保险、物业或未来财务结果。',
+    book: '预约服务'
   },
   externalReaderPrivacy: {
     metaTitle: '外部解释系统资料与隐私 — PHI OS', skip: '跳至资料与隐私',

@@ -409,6 +409,34 @@ function renderExternalReaders() {
   `;
 }
 
+function renderFinancialReality() {
+  const root = document.querySelector('#professionalFinancialReality');
+  if (!root) return;
+  const financial = payload?.financial_reality;
+  if (!financial) {
+    root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noFinancialReality'))}</p>`;
+    return;
+  }
+  const sections = [
+    'overview', 'objectives', 'income', 'expenses', 'assets', 'liabilities',
+    'cash_flow', 'net_worth', 'insurance', 'investments', 'properties', 'tax',
+    'retirement', 'education', 'estate', 'ratios', 'risks',
+    'recommendations', 'documents'
+  ];
+  root.innerHTML = `
+    <header class="professional-reader-heading">
+      <div><p>${escapeHTML(t('professionalWorkspace.financialDataDate'))}</p><h2>${display(financial.data_date)}</h2></div>
+      <strong>${escapeHTML(t('professionalWorkspace.financialEvidenceBoundary'))}</strong>
+    </header>
+    <div class="professional-reader-grid">${sections.map(section => `
+      <article>
+        <h3>${escapeHTML(t(`professionalWorkspace.financialSections.${section}`))}</h3>
+        <p>${display(financial.sections?.[section]?.summary || financial.sections?.[section])}</p>
+      </article>`).join('')}</div>
+    <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.financialBoundary'))}</p>
+  `;
+}
+
 function renderAll() {
   document.body.dataset.workspaceStatus = payload
     ? 'authorised-projection'
@@ -417,6 +445,7 @@ function renderAll() {
   if (unavailable) unavailable.hidden = Boolean(payload);
   renderClients();
   renderRuntime();
+  renderFinancialReality();
   renderNotes();
   renderQueue();
   renderReadingRevisions();

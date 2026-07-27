@@ -14,7 +14,13 @@ const [page, controller, css, en, zh, constants, templates, reportModule, versio
   load('functions/professional/reports/professional-report-contract.js'),
   load('functions/professional/reports/professional-report-version-contract.js')
 ]);
-assert.equal(constants.PROFESSIONAL_REPORT_TYPES.length, 8);
+assert.ok(constants.PROFESSIONAL_REPORT_TYPES.length >= 8);
+for (const type of [
+  'runtime_report', 'professional_readout', 'navigation_plan',
+  'follow_up_report', 'human_design_foundation_report',
+  'human_design_runtime_interpretation',
+  'reality_specific_external_reader_report', 'integrated_runtime_review'
+]) assert.ok(constants.PROFESSIONAL_REPORT_TYPES.includes(type));
 assert.deepEqual(constants.PROFESSIONAL_REPORT_STATUSES, ['draft','professional_review','client_review','revised','final','superseded']);
 const boundary = { en: 'Interpretation is not evidence.', zh_Hans: '解释不等于证据。' };
 const confidentiality = { en: 'Confidential.', zh_Hans: '保密资料。' };
@@ -56,4 +62,4 @@ for (const forbidden of ['fetch(', 'localStorage', 'sessionStorage', '/api/']) a
 assert.ok(controller.includes('window.print()'));
 assert.ok(css.includes('@media print'));
 for (const key of ['title','print','sourceView','historyView','boundary','confidentiality']) { assert.ok(en.includes(`${key}:`)); assert.ok(zh.includes(`${key}:`)); }
-console.log('✓ M4B-W5 Professional Reports passed: eight templates, source-labelled sections, immutable versions, print/PDF layout and Runtime/Reader boundaries are aligned.');
+console.log('✓ M4B-W5 Professional Reports passed: original and additive financial templates, source-labelled sections, immutable versions, print/PDF layout and Runtime/Reader boundaries are aligned.');

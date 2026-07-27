@@ -9,7 +9,18 @@ export const PROFESSIONAL_TASK_TYPES = Object.freeze([
   'consultation_required',
   'client_clarification_required',
   'revision_requested',
-  'follow_up_due'
+  'follow_up_due',
+  'financial_intake_received',
+  'bank_records_pending',
+  'income_evidence_pending',
+  'expense_evidence_pending',
+  'insurance_documents_pending',
+  'investment_statements_pending',
+  'property_documents_pending',
+  'liability_details_pending',
+  'calculation_review_required',
+  'financial_recommendation_review',
+  'annual_review_due'
 ]);
 
 export const PROFESSIONAL_TASK_STATUSES = Object.freeze([

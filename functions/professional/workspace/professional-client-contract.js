@@ -10,6 +10,13 @@ export const PROFESSIONAL_CLIENT_STATUSES = Object.freeze([
   'archived'
 ]);
 
+export const FINANCIAL_CLIENT_FILTERS = Object.freeze([
+  'awaiting_financial_intake', 'awaiting_documents',
+  'financial_analysis_in_progress', 'professional_review_required',
+  'financial_consultation_pending', 'navigation_plan_pending',
+  'implementation_review_due', 'annual_review_due'
+]);
+
 function cleanText(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -52,6 +59,27 @@ export function createProfessionalClientIndex(input = {}) {
     ),
     report_status: cleanText(input.report_status) || 'not_started',
     follow_up_at: isoDate(input.follow_up_at, 'follow_up_at', true),
+    financial_service_type: cleanText(input.financial_service_type) || null,
+    financial_data_date: isoDate(
+      input.financial_data_date,
+      'financial_data_date',
+      true
+    ),
+    household_type: cleanText(input.household_type) || null,
+    financial_intake_status:
+      cleanText(input.financial_intake_status) || 'not_started',
+    documents_status: cleanText(input.documents_status) || 'not_started',
+    financial_review_status:
+      cleanText(input.financial_review_status) || 'not_started',
+    financial_risk_level:
+      cleanText(input.financial_risk_level) || 'not_assessed',
+    next_financial_review: isoDate(
+      input.next_financial_review,
+      'next_financial_review',
+      true
+    ),
+    assigned_financial_professional:
+      cleanText(input.assigned_financial_professional) || null,
     index_only: true,
     sensitive_birth_data_embedded: false,
     uploaded_files_embedded: false,

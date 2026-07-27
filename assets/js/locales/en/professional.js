@@ -12,6 +12,18 @@ const professional = Object.freeze({
     viewsAria: 'Professional Workspace views',
     clientList: 'Client List',
     runtimeView: 'Runtime View',
+    financialReality: 'Financial Reality',
+    noFinancialReality: 'No authorised Financial Reality projection is available.',
+    financialDataDate: 'Financial data date',
+    financialEvidenceBoundary: 'Financial evidence and calculations remain source-labelled.',
+    financialBoundary: 'Financial facts, calculations, professional assessments and recommendations remain separate from Runtime Evidence and External Reader interpretation.',
+    financialSections: {
+      overview: 'Overview', objectives: 'Objectives', income: 'Income', expenses: 'Expenses',
+      assets: 'Assets', liabilities: 'Liabilities', cash_flow: 'Cash Flow', net_worth: 'Net Worth',
+      insurance: 'Insurance', investments: 'Investments', properties: 'Properties', tax: 'Tax',
+      retirement: 'Retirement', education: 'Education', estate: 'Estate', ratios: 'Ratios',
+      risks: 'Risks', recommendations: 'Recommendations', documents: 'Documents'
+    },
     notes: 'Professional Notes',
     reviewQueue: 'Review Queue',
     readingRevisions: 'Reading Revisions',
@@ -258,6 +270,27 @@ const professional = Object.freeze({
       missing_intake: 'Missing intake', missing_consent: 'Missing consent', missing_chart: 'Missing chart',
       report_ready: 'Report ready', follow_up: 'Follow-up'
     }
+  },
+  financialPublic: {
+    metaTitle: 'Financial Reality Navigation — PHI OS',
+    skip: 'Skip to Financial Reality Navigation', eyebrow: 'Professional financial service',
+    title: 'Measure and reconstruct the financial conditions within a Runtime.',
+    lead: 'Financial Reality Navigation organises verifiable financial information, calculates current capacity and supports accountable professional navigation.',
+    serviceName: 'Financial Reality Navigation',
+    serviceCopy: 'Reconstruct current financial conditions using dated evidence, calculations and accountable professional review.',
+    whatTitle: 'What Financial Reality Navigation Is',
+    whatCopy: 'A dated, source-labelled reconstruction of objectives, cash flow, assets, liabilities, protection, exposure and future funding conditions.',
+    forTitle: 'Who It Is For', forCopy: 'Individuals, couples, families and business owners who need a coherent view before making financial decisions.',
+    reviewTitle: 'What It Reviews', reviewCopy: 'Income, expenses, cash, investments, properties, liabilities, insurance, tax, retirement, education, estate readiness and supporting documents.',
+    differenceTitle: 'How It Differs from Product Sales', differenceCopy: 'Evidence, calculation, professional assessment and recommendation remain separate. No product is selected automatically.',
+    optionsTitle: 'Service Options', optionsCopy: 'Snapshot, Stamina Analysis, Consultation, Navigation Plan, Implementation Follow-up and Annual Runtime Review.',
+    informationTitle: 'Required Information', informationCopy: 'Current objectives, household scope and dated evidence for financial conditions and planning areas.',
+    processTitle: 'Process', processCopy: 'Consent, secure intake, evidence review, calculation, professional assessment, consultation, client decision and scheduled review.',
+    privacyTitle: 'Privacy and Confidentiality', privacyCopy: 'Sensitive identifiers are minimised. Reports exclude unnecessary full account, identity, policy and address details.',
+    limitTitle: 'Assumptions and Limitations', limitCopy: 'Calculations and projections depend on the information date, available evidence and recorded assumptions.',
+    boundaryTitle: 'Professional boundary',
+    boundary: 'PHI OS Financial Reality Navigation helps organise, analyse and review a current financial position. It does not guarantee investment, insurance, property or future financial outcomes.',
+    book: 'Book Service'
   },
   externalReaderPrivacy: {
     metaTitle: 'External Reader Data and Privacy — PHI OS', skip: 'Skip to data and privacy',

@@ -17,7 +17,17 @@ export const PROFESSIONAL_NOTE_TYPES = Object.freeze([
   'human_design_observation',
   'possible_runtime_correspondence',
   'unverified_interpretation',
-  'client_confirmation'
+  'client_confirmation',
+  'financial_fact_note',
+  'document_verification_note',
+  'assumption_note',
+  'calculation_note',
+  'risk_observation',
+  'product_neutral_recommendation',
+  'regulated_advice_note',
+  'client_decision',
+  'implementation_note',
+  'review_note'
 ]);
 
 const PRIVATE_TYPES = new Set([

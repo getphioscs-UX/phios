@@ -11,7 +11,20 @@ export const PROFESSIONAL_FOLLOW_UP_EVENT_TYPES = Object.freeze([
   'follow_up_evidence_added',
   'report_revised',
   'access_revoked',
-  'service_completed'
+  'service_completed',
+  'financial_intake_started',
+  'financial_data_submitted',
+  'document_uploaded',
+  'document_verified',
+  'financial_position_calculated',
+  'risk_flag_raised',
+  'professional_review_completed',
+  'navigation_plan_delivered',
+  'client_decision_recorded',
+  'implementation_started',
+  'implementation_confirmed',
+  'financial_data_updated',
+  'scheduled_review_completed'
 ]);
 
 function cleanText(value) {

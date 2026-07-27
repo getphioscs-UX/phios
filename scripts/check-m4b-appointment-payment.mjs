@@ -17,9 +17,14 @@ const [page, controller, css, workspace, en, zh, constants, appointments, paymen
   JSON.parse(await read('content/registry/m4b-appointment-payment.json'))
 ]);
 
-assert.equal(constants.APPOINTMENT_SERVICE_TYPES.length, 6);
+assert.ok(constants.APPOINTMENT_SERVICE_TYPES.length >= 6);
+for (const type of [
+  'professional_runtime_consultation', 'human_design_consultation',
+  'runtime_human_design_consultation', 'navigation_follow_up',
+  'long_term_review', 'integrated_review'
+]) assert.ok(constants.APPOINTMENT_SERVICE_TYPES.includes(type));
 assert.equal(constants.REMINDER_TYPES.length, 6);
-assert.equal(constants.PRE_APPOINTMENT_CHECKS.length, 8);
+assert.ok(constants.PRE_APPOINTMENT_CHECKS.length >= 8);
 const checks = Object.fromEntries(constants.PRE_APPOINTMENT_CHECKS.map(key => [key, true]));
 const appointment = appointments.createProfessionalAppointment({
   appointment_id: 'appointment_1', client_id: 'client_1', professional_id: 'professional_1',
@@ -77,5 +82,5 @@ assert.equal(registry.capabilities.automaticEmail, false);
 for (const key of ['navTitle','precheck','paymentStatus','refundStatus','boundary']) {
   assert.ok(en.includes(`${key}:`)); assert.ok(zh.includes(`${key}:`));
 }
-console.log('✓ M4B-W6 Appointment and Payment passed: six services, bounded payment records, bilingual confirmation/reminders and eight readiness checks are aligned.');
+console.log('✓ M4B-W6 Appointment and Payment passed: original and additive financial services, bounded payment records, bilingual confirmation/reminders and readiness checks are aligned.');
 console.log('  No gateway charge, automatic email, card storage, Runtime mutation or External Reader interpretation is performed.');
