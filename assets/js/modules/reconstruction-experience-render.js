@@ -172,6 +172,73 @@ function questionForm(question, conflict) {
   });
 }
 
+function sourceLabel(sourceKey) {
+  return t(`reconstruction.w14.sources.${text(sourceKey) || 'otherEvidence'}`);
+}
+
+function evidenceCardHTML(item) {
+  const sources = list(item.source_types).map(sourceLabel).filter(Boolean);
+  const lineage = list(item.lineage);
+  const revisions = list(item.revisions);
+  const pair = item.statement_pair;
+  return `
+    <article data-canonical-evidence-id="${escapeHTML(item.canonical_evidence_id)}">
+      <p>${escapeHTML(item.canonical_text)}</p>
+      <dl>
+        <div><dt>${escapeHTML(t('reconstruction.w14.classification'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.classifications.${item.classification}`))}</dd></div>
+        <div><dt>${escapeHTML(t('reconstruction.w14.maturity'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.maturityStates.${item.maturity}`))}</dd></div>
+        <div><dt>${escapeHTML(t('reconstruction.w14.sourceSummary'))}</dt><dd>${escapeHTML(t('reconstruction.w14.sourceCount', { count: item.source_count }))}${sources.length ? ` · ${escapeHTML(sources.join('、'))}` : ''}</dd></div>
+      </dl>
+      ${revisions.length ? `
+        <p class="w14-revision-state">${escapeHTML(t('reconstruction.w14.revised'))}</p>
+        <details class="w14-evidence-details">
+          <summary>${escapeHTML(t('reconstruction.w14.viewRevision'))}</summary>
+          ${revisions.map(revision => `
+            <dl>
+              <div><dt>${escapeHTML(t('reconstruction.w14.previousValue'))}</dt><dd>${escapeHTML(String(revision.previous_value ?? '—'))}</dd></div>
+              <div><dt>${escapeHTML(t('reconstruction.w14.newValue'))}</dt><dd>${escapeHTML(String(revision.new_value ?? '—'))}</dd></div>
+              <div><dt>${escapeHTML(t('reconstruction.w14.revisionTime'))}</dt><dd>${escapeHTML(revision.created_at || '—')}</dd></div>
+            </dl>
+          `).join('')}
+        </details>
+      ` : ''}
+      ${pair ? `
+        <details class="w14-evidence-details">
+          <summary>${escapeHTML(t('reconstruction.w14.viewOriginalRecord'))}</summary>
+          <dl>
+            <div><dt>${escapeHTML(t('reconstruction.w14.originalExpression'))}</dt><dd>${escapeHTML(pair.raw_text || '—')}</dd></div>
+            <div><dt>${escapeHTML(t('reconstruction.w14.normalizedExpression'))}</dt><dd>${escapeHTML(pair.normalized_text || item.canonical_text)}</dd></div>
+          </dl>
+        </details>
+      ` : ''}
+      <details class="w14-evidence-details">
+        <summary>${escapeHTML(t('reconstruction.w14.viewSources'))}</summary>
+        <ul>
+          ${lineage.map(source => `
+            <li>
+              <strong>${escapeHTML(sourceLabel(source.source_label_key))}</strong>
+              ${source.source_round !== null && source.source_round !== undefined
+                ? ` · ${escapeHTML(t('reconstruction.w14.sourceRound', { round: source.source_round }))}`
+                : ''}
+            </li>
+          `).join('')}
+        </ul>
+      </details>
+      ${selectCorrectionForm({
+        targetType: 'evidence',
+        targetId: item.primary_evidence_id,
+        field: 'confirmation_status',
+        previousValue: item.confirmation_status,
+        options: [
+          { value: 'confirmed', label: t('reconstruction.w14.confirmed') },
+          { value: 'tentative', label: t('reconstruction.w14.tentative') },
+          { value: 'contradicted', label: t('reconstruction.w14.contradicted') }
+        ]
+      })}
+    </article>
+  `;
+}
+
 function customerHTML(experience) {
   const customer = experience.views?.customer || {};
   const questions = list(experience.unknown_questions);
@@ -217,27 +284,7 @@ function customerHTML(experience) {
     <div data-w14-view="evidence" hidden>
       <h4>${escapeHTML(t('reconstruction.w14.evidenceView'))}</h4>
       <div class="w14-evidence-list">
-        ${list(experience.views?.evidence?.items).map(item => `
-          <article>
-            <p>${escapeHTML(item.raw_text)}</p>
-            <dl>
-              <div><dt>${escapeHTML(t('reconstruction.w14.classification'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.classifications.${item.classification}`))}</dd></div>
-              <div><dt>${escapeHTML(t('reconstruction.w14.source'))}</dt><dd>${escapeHTML(item.source_field)}</dd></div>
-              <div><dt>${escapeHTML(t('reconstruction.w14.maturity'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.maturityStates.${item.maturity}`))}</dd></div>
-            </dl>
-            ${selectCorrectionForm({
-              targetType: 'evidence',
-              targetId: item.evidence_id,
-              field: 'confirmation_status',
-              previousValue: item.confirmation_status,
-              options: [
-                { value: 'confirmed', label: t('reconstruction.w14.confirmed') },
-                { value: 'tentative', label: t('reconstruction.w14.tentative') },
-                { value: 'contradicted', label: t('reconstruction.w14.contradicted') }
-              ]
-            })}
-          </article>
-        `).join('')}
+        ${list(experience.views?.evidence?.items).map(evidenceCardHTML).join('')}
       </div>
     </div>
     <div data-w14-view="technical" hidden>
@@ -248,6 +295,14 @@ function customerHTML(experience) {
         <div><dt>${escapeHTML(t('reconstruction.w14.confidence'))}</dt><dd>${escapeHTML(`${experience.confidence?.level || 'low'} · ${experience.confidence?.score ?? 0}`)}</dd></div>
         <div><dt>${escapeHTML(t('reconstruction.w14.conflicts'))}</dt><dd>${escapeHTML(String(experience.conflicts?.length || 0))}</dd></div>
       </dl>
+      <details class="w14-technical-evidence">
+        <summary>${escapeHTML(t('reconstruction.w14.technicalEvidenceMetadata'))}</summary>
+        <ul>
+          ${list(experience.views?.technical?.evidence_items).map(item => `
+            <li><code>${escapeHTML(item.source_field)}</code> · ${escapeHTML(item.evidence_id)} · ${escapeHTML(item.raw_text)}</li>
+          `).join('')}
+        </ul>
+      </details>
     </div>
   `;
 }

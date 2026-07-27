@@ -337,6 +337,162 @@ assert.equal(productionClassification('对工作能力的信心下降。'), 'rep
 assert.equal(productionClassification('希望根据财务资料作决定。'), 'reported_intention');
 assert.equal(productionClassification('安全感与发展之间存在张力。'), 'reported_experience');
 
+// D08-D14: Evidence View renders canonical evidence cards, not source rows.
+const repeatedSocial = '我减少了社交活动，也对工作能力没有以前那么有信心。';
+const repeatedPurchase = '我会反复查询价格，但迟迟不购买，并反复检查余额。';
+const repeatedCounter = '家庭仍有储蓄，丈夫也有收入。';
+const evidenceViewEntry = {
+  runtimeEntityId: 'runtime_evidence_view_defect',
+  runtimeEntryId: 'entry_evidence_view_defect',
+  entryVersion: 3,
+  evidenceVersion: 4,
+  realityChange: {
+    rawStatement: '离开固定工作后，我开始害怕花钱。',
+    normalizedStatement: '离开固定工作后，对花钱的紧张增加。'
+  },
+  entryEvidence: [
+    { evidenceId: 'ev_social', statement: repeatedSocial, sourceRound: 2 },
+    { evidenceId: 'ev_purchase', statement: repeatedPurchase, sourceRound: 3 }
+  ],
+  knownReality: [repeatedSocial, repeatedPurchase],
+  reconstructionEvidence: [
+    { evidenceId: 're_purchase', target: 'agency_style', statement: repeatedPurchase },
+    { evidenceId: 're_counter', target: 'runtime_conditions', statement: repeatedCounter }
+  ],
+  counterEvidence: [repeatedCounter],
+  evidenceBoundary: {
+    observedEvidence: [repeatedSocial, repeatedPurchase],
+    counterEvidence: [repeatedCounter]
+  },
+  reconstructionCorrections: [
+    {
+      evidenceId: 'revision_yes',
+      statement: 'yes',
+      target_type: 'evidence',
+      target_id: 'ev_purchase',
+      field: 'confirmation_status',
+      previous_value: 'reported',
+      new_value: 'yes',
+      created_at: '2026-07-27T03:30:00.000Z'
+    },
+    {
+      evidenceId: 'revision_count',
+      statement: '数目超过100',
+      target_type: 'evidence',
+      target_id: 'ev_purchase',
+      field: 'answer',
+      previous_value: '',
+      new_value: '数目超过100',
+      created_at: '2026-07-27T03:31:00.000Z'
+    }
+  ]
+};
+const evidenceViewExperience = buildReconstructionExperience(
+  evidenceViewEntry,
+  {},
+  { now: '2026-07-27T03:40:00.000Z' }
+).experience;
+const evidenceCards = evidenceViewExperience.views.evidence.items;
+const canonicalFor = value => evidenceCards.find(item =>
+  item.lineage.some(source => source.raw_text === value)
+);
+
+// 1, 3, 7, 8 and 9: source buckets consolidate while complete lineage remains.
+assert.equal(evidenceCards.filter(item => item.canonical_text === repeatedSocial).length, 1);
+assert.equal(evidenceCards.filter(item => item.canonical_text === repeatedPurchase).length, 1);
+assert.equal(evidenceCards.filter(item => item.canonical_text === repeatedCounter).length, 1);
+assert.equal(canonicalFor(repeatedSocial).lineage.length, 3);
+assert.equal(canonicalFor(repeatedPurchase).lineage.length, 4);
+assert.equal(canonicalFor(repeatedCounter).lineage.length, 3);
+assert.equal(
+  evidenceViewExperience.views.evidence.card_count,
+  evidenceViewExperience.views.evidence.unique_canonical_count
+);
+assert.equal(evidenceCards.length, evidenceViewExperience.evidence.canonical.length);
+assert.equal(
+  new Set(evidenceCards.map(item => item.canonical_semantic_key)).size,
+  evidenceCards.length
+);
+
+// 2: raw and normalized statements are one canonical card with one expandable pair.
+const changeCard = evidenceCards.find(item => item.statement_pair);
+assert.ok(changeCard);
+assert.equal(changeCard.statement_pair.raw_text, evidenceViewEntry.realityChange.rawStatement);
+assert.equal(changeCard.statement_pair.normalized_text, evidenceViewEntry.realityChange.normalizedStatement);
+assert.equal(evidenceCards.filter(item =>
+  item.lineage.some(source => [
+    'realityChange.rawStatement',
+    'realityChange.normalizedStatement'
+  ].includes(source.source_path))
+).length, 1);
+
+// 4 and 10: correction artifacts attach to the original card and never create cards.
+assert.equal(evidenceCards.some(item => ['yes', '数目超过100'].includes(item.canonical_text)), false);
+assert.equal(evidenceViewExperience.evidence.correction_artifacts.length, 2);
+assert.equal(canonicalFor(repeatedPurchase).revisions.length, 2);
+assert.equal(canonicalFor(repeatedPurchase).revision_state, 'revised');
+const evidenceCardCountBeforeCorrection = evidenceCards.length;
+const correctedEvidenceView = buildReconstructionExperience(evidenceViewEntry, {}, {
+  previousReconstruction: evidenceViewExperience,
+  correction: {
+    revision_id: 'revision_confirm_purchase',
+    target_type: 'evidence',
+    target_id: 'ev_purchase',
+    field: 'confirmation_status',
+    previous_value: 'reported',
+    new_value: 'confirmed'
+  },
+  now: '2026-07-27T03:45:00.000Z'
+}).experience;
+assert.equal(correctedEvidenceView.views.evidence.items.length, evidenceCardCountBeforeCorrection);
+assert.equal(
+  correctedEvidenceView.views.evidence.items.find(item =>
+    item.merged_evidence_ids.includes('ev_purchase')
+  ).confirmation_status,
+  'confirmed'
+);
+
+// 5 and 6: customer-facing Evidence uses translated labels; Technical retains paths.
+const evidenceRendererBlock = rendererSource.slice(
+  rendererSource.indexOf('function evidenceCardHTML'),
+  rendererSource.indexOf('function customerHTML')
+);
+assert.equal(evidenceRendererBlock.includes('item.source_field'), false);
+assert.equal(evidenceRendererBlock.includes('sourceLabel('), true);
+assert.equal(rendererSource.includes('experience.views?.technical?.evidence_items'), true);
+assert.equal(rendererSource.includes('item.source_field'), true);
+assert.deepEqual(
+  new Set(canonicalFor(repeatedSocial).merged_source_paths),
+  new Set(['entryEvidence', 'knownReality', 'evidenceBoundary.observedEvidence'])
+);
+assert.deepEqual(
+  new Set(canonicalFor(repeatedCounter).merged_source_paths),
+  new Set(['counterEvidence', 'evidenceBoundary.counterEvidence', 'reconstructionEvidence'])
+);
+for (const localePath of [
+  '../assets/js/locales/en/reconstruction.js',
+  '../assets/js/locales/zh-Hans/reconstruction.js'
+]) {
+  const localeSource = await readFile(new URL(localePath, import.meta.url), 'utf8');
+  for (const customerSourceKey of [
+    'entryEvidence:',
+    'knownReality:',
+    'observedEvidence:',
+    'reportedExperience:',
+    'counterEvidence:',
+    'reconstructionEvidence:',
+    'reconstructionCorrections:',
+    'rawChangeStatement:',
+    'normalizedChangeStatement:'
+  ]) {
+    assert.equal(
+      localeSource.includes(customerSourceKey),
+      true,
+      `Missing customer-readable Evidence source label: ${localePath} ${customerSourceKey}`
+    );
+  }
+}
+
 // The real API refuses to route a new Reading while the server Gate is blocked.
 const productionReadingInput = {
   schemaVersion: 'phi-os.reading-input.v1',
@@ -369,4 +525,5 @@ assert.equal(apiPayload.validationErrors.some(issue =>
   issue.code === 'reconstruction_reading_gate_blocked'
 ), true);
 
-console.log('✓ M3C-W14 Reconstruction Experience contracts, fixture, revision, staleness, views and Reading Gate passed.');
+console.log(`✓ M3C-W14 Reconstruction Experience contracts, fixture, revision, staleness, views and Reading Gate passed.`);
+console.log(`  Evidence View production fixture: ${evidenceViewExperience.evidence.items.length} source evidence rows → ${evidenceCards.length} canonical cards.`);

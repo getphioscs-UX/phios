@@ -94,6 +94,30 @@ function stableId(prefix, index) {
   return `${prefix}_${String(index + 1).padStart(3, '0')}`;
 }
 
+const SOURCE_LABEL_KEYS = Object.freeze({
+  entryEvidence: 'entryEvidence',
+  knownReality: 'knownReality',
+  'evidenceBoundary.observedEvidence': 'observedEvidence',
+  'evidenceBoundary.reportedExperience': 'reportedExperience',
+  'evidenceBoundary.counterEvidence': 'counterEvidence',
+  counterEvidence: 'counterEvidence',
+  'evidenceBoundary.dependencies': 'dependencyEvidence',
+  dependencies: 'dependencyEvidence',
+  reconstructionEvidence: 'reconstructionEvidence',
+  reconstructionCorrections: 'reconstructionCorrections',
+  'realityChange.rawStatement': 'rawChangeStatement',
+  'realityChange.normalizedStatement': 'normalizedChangeStatement',
+  'timing.statedTiming': 'reportedTiming',
+  'timing.normalizedTiming': 'normalizedTiming',
+  'initialContext.summary': 'initialContext',
+  'emergingTension.summary': 'emergingTension',
+  'userInterpretation.summary': 'userInterpretation'
+});
+
+function sourceLabelKey(sourceField) {
+  return SOURCE_LABEL_KEYS[sourceField] || 'otherEvidence';
+}
+
 function sourceItems(runtimeEntry) {
   const boundary = asObject(runtimeEntry?.evidenceBoundary);
   const rows = [];
@@ -119,7 +143,16 @@ function sourceItems(runtimeEntry) {
   add(boundary.dependencies, 'evidenceBoundary.dependencies');
   add(runtimeEntry?.dependencies, 'dependencies');
   add(runtimeEntry?.reconstructionEvidence, 'reconstructionEvidence');
-  add(runtimeEntry?.reconstructionCorrections, 'reconstructionCorrections');
+  asArray(runtimeEntry?.reconstructionCorrections).forEach(value => {
+    const raw = itemText(value) || clean(String(value?.new_value ?? value?.statement ?? ''));
+    if (!raw) return;
+    rows.push({
+      raw,
+      value: asObject(value),
+      sourceField: 'reconstructionCorrections',
+      sourceRound: value?.sourceRound ?? value?.round ?? null
+    });
+  });
 
   const direct = [
     [runtimeEntry?.realityChange?.rawStatement, 'realityChange.rawStatement'],
@@ -213,11 +246,14 @@ function semanticSimilarity(left, right) {
 
 function canonicalSemanticKey(value, dimensions = {}) {
   return [
-    semanticConcept(value) || normalizedDuplicateKey(value),
+    clean(dimensions.normalized_meaning) ||
+      semanticConcept(value) ||
+      normalizedDuplicateKey(value),
     clean(dimensions.classification),
-    clean(dimensions.condition_type),
-    clean(dimensions.relation_type),
-    clean(dimensions.canonical_target)
+    clean(dimensions.canonical_subject),
+    clean(dimensions.canonical_predicate),
+    clean(dimensions.canonical_object),
+    clean(dimensions.temporal_scope)
   ].join('|');
 }
 
@@ -237,34 +273,62 @@ function buildEvidence(runtimeEntry) {
       classification,
       confirmation_status: clean(source.value?.confirmationStatus) || 'reported',
       maturity: clean(source.value?.maturity) || 'candidate_identified',
-      applicable_views: ['customer', 'evidence', 'technical'],
+      artifact_type: source.sourceField === 'reconstructionCorrections'
+        ? 'correction_artifact'
+        : 'evidence',
+      applicable_views: source.sourceField === 'reconstructionCorrections'
+        ? ['technical']
+        : ['customer', 'evidence', 'technical'],
       lineage: {
         source_evidence_id: clean(source.value?.evidenceId),
-        source: clean(source.value?.source) || source.sourceField
-      }
+        source: clean(source.value?.source) || source.sourceField,
+        source_path: source.sourceField,
+        source_label_key: sourceLabelKey(source.sourceField),
+        source_round: source.sourceRound
+      },
+      correction: source.sourceField === 'reconstructionCorrections'
+        ? {
+            revision_id: clean(source.value?.revision_id || source.value?.evidenceId),
+            target_type: clean(source.value?.target_type),
+            target_id: clean(source.value?.target_id),
+            field: clean(source.value?.field),
+            previous_value: source.value?.previous_value ?? null,
+            new_value: source.value?.new_value ?? source.value?.statement ?? null,
+            created_at: clean(source.value?.created_at || source.value?.timestamp)
+          }
+        : null
     };
   });
 }
 
 function consolidateDuplicates(evidence) {
+  const evidenceItems = evidence.filter(item => item.artifact_type !== 'correction_artifact');
+  const correctionArtifacts = evidence.filter(item => item.artifact_type === 'correction_artifact');
   const groups = [];
-  evidence.forEach(item => {
+  evidenceItems.forEach(item => {
+    const statementPair = groups.find(group =>
+      item.source_field === 'realityChange.normalizedStatement' &&
+      group.items.some(candidate => candidate.source_field === 'realityChange.rawStatement')
+    );
     const exact = groups.find(group => group.items.some(candidate =>
-      candidate.classification === item.classification &&
       candidate.raw_text === item.raw_text
     ));
     const normalized = groups.find(group => group.items.some(candidate =>
-      candidate.classification === item.classification &&
       normalizedDuplicateKey(candidate.raw_text) === normalizedDuplicateKey(item.raw_text)
     ));
     const semantic = groups.find(group => group.items.some(candidate =>
-      candidate.classification === item.classification &&
-      semanticSimilarity(candidate.raw_text, item.raw_text) >= 0.72
+      semanticSimilarity(candidate.raw_text, item.raw_text) >= 0.72 &&
+      (
+        semanticConcept(candidate.raw_text) === semanticConcept(item.raw_text) ||
+        candidate.classification === item.classification
+      )
     ));
-    const group = exact || normalized || semantic;
+    const group = statementPair || exact || normalized || semantic;
     if (group) {
       group.items.push(item);
-      group.duplicate_type = exact
+      group.duplicate_type = statementPair
+        ? 'normalized_duplicate'
+        : exact
         ? 'exact_duplicate'
         : normalized
           ? 'normalized_duplicate'
@@ -274,16 +338,73 @@ function consolidateDuplicates(evidence) {
     }
   });
 
-  return groups.map((group, index) => ({
-    canonical_evidence_id: stableId('canonical', index),
-    merged_evidence_ids: group.items.map(item => item.evidence_id),
-    duplicate_type: group.duplicate_type,
-    canonical_text: group.items[0].raw_text,
-    canonical_semantic_key: canonicalSemanticKey(group.items[0].raw_text, {
-      classification: group.items[0].classification
-    }),
-    source_count: group.items.length
-  }));
+  return groups.map((group, index) => {
+    const normalizedStatement = group.items.find(item =>
+      item.source_field === 'realityChange.normalizedStatement'
+    );
+    const rawStatement = group.items.find(item =>
+      item.source_field === 'realityChange.rawStatement'
+    );
+    const representative = normalizedStatement || group.items[0];
+    const concept = semanticConcept(representative.raw_text);
+    const semantics = {
+      normalized_meaning: concept || normalizedDuplicateKey(representative.raw_text),
+      classification: representative.classification,
+      canonical_subject: concept ? concept.split('_')[0] : '',
+      canonical_predicate: concept || representative.classification,
+      canonical_object: concept ? concept.split('_').slice(1).join('_') : '',
+      temporal_scope: representative.classification === 'reported_time'
+        ? normalizedDuplicateKey(representative.raw_text)
+        : ''
+    };
+    const mergedEvidenceIds = [...new Set(group.items.map(item => item.evidence_id))];
+    const revisions = correctionArtifacts
+      .filter(item =>
+        mergedEvidenceIds.includes(item.correction?.target_id) ||
+        item.correction?.target_id === stableId('canonical', index)
+      )
+      .map(item => ({
+        ...item.correction,
+        source_path: item.source_field,
+        source_label_key: item.lineage.source_label_key
+      }));
+    const lineage = group.items.map(item => ({
+      evidence_id: item.evidence_id,
+      source_evidence_id: item.lineage.source_evidence_id,
+      source_path: item.source_field,
+      source_label_key: item.lineage.source_label_key,
+      source_round: item.source_round,
+      raw_text: item.raw_text,
+      classification: item.classification,
+      confirmation_status: item.confirmation_status,
+      maturity: item.maturity
+    }));
+    return {
+      canonical_evidence_id: stableId('canonical', index),
+      primary_evidence_id: representative.evidence_id,
+      merged_evidence_ids: mergedEvidenceIds,
+      duplicate_type: group.duplicate_type,
+      canonical_text: representative.raw_text,
+      canonical_semantic_key: canonicalSemanticKey(representative.raw_text, semantics),
+      canonical_semantics: semantics,
+      classification: representative.classification,
+      confirmation_status: representative.confirmation_status,
+      maturity: representative.maturity,
+      source_count: group.items.length,
+      source_types: [...new Set(group.items.map(item => item.lineage.source_label_key))],
+      merged_source_paths: [...new Set(group.items.map(item => item.source_field))],
+      source_rounds: [...new Set(group.items.map(item => item.source_round).filter(value => value !== null && value !== undefined))],
+      statement_pair: rawStatement || normalizedStatement
+        ? {
+            raw_text: rawStatement?.raw_text || '',
+            normalized_text: normalizedStatement?.raw_text || representative.raw_text
+          }
+        : null,
+      revisions,
+      revision_state: revisions.length ? 'revised' : 'current',
+      lineage
+    };
+  });
 }
 
 function parseReportedTime(value) {
@@ -782,7 +903,7 @@ function materialityForCorrection(correction) {
     : 'non_material';
 }
 
-function applyCorrection(runtimeEntry, correction) {
+function applyCorrection(runtimeEntry, correction, timestamp = '') {
   const copy = JSON.parse(JSON.stringify(runtimeEntry || {}));
   const targetType = clean(correction?.target_type);
   const value = correction?.new_value;
@@ -799,6 +920,8 @@ function applyCorrection(runtimeEntry, correction) {
         target_type: targetType,
         target_id: clean(correction?.target_id),
         field: clean(correction?.field),
+        previous_value: correction?.previous_value ?? null,
+        created_at: clean(correction?.created_at) || clean(timestamp),
         new_value: value
       }
     ];
@@ -822,6 +945,8 @@ function applyCorrection(runtimeEntry, correction) {
         target_type: targetType,
         target_id: clean(correction?.target_id),
         field: clean(correction?.field),
+        previous_value: correction?.previous_value ?? null,
+        created_at: clean(correction?.created_at) || clean(timestamp),
         new_value: value
       }
     ];
@@ -906,31 +1031,32 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
   const correction = asObject(options.correction);
   const timestamp = now(options);
   const correctedEntry = Object.keys(correction).length
-    ? applyCorrection(runtimeEntry, correction)
+    ? applyCorrection(runtimeEntry, correction, timestamp)
     : runtimeEntry;
   const previousVersion = Number(previous.reconstruction_version || 0);
   const version = Math.max(1, previousVersion + (Object.keys(correction).length ? 1 : 0));
   const evidence = buildEvidence(correctedEntry);
+  const traceableEvidence = evidence.filter(item => item.artifact_type === 'evidence');
   const timeline = buildTimeline(evidence);
   timeline.temporal_conflicts.forEach(conflict => { conflict.created_at = timestamp; });
-  const conditions = buildConditions(evidence);
-  const influenceMap = buildInfluenceMap(correctedEntry, evidence, conditions);
+  const conditions = buildConditions(traceableEvidence);
+  const influenceMap = buildInfluenceMap(correctedEntry, traceableEvidence, conditions);
   const unknownQuestions = buildUnknownQuestions(timeline, conditions);
   applyStructuredCorrections({
     runtimeEntry: correctedEntry,
     correction,
-    evidence,
+    evidence: traceableEvidence,
     conditions,
     influenceMap,
     unknownQuestions
   });
   const canonicalEvidence = consolidateDuplicates(evidence);
-  const confidence = explainConfidence(evidence, timeline, conditions);
+  const confidence = explainConfidence(traceableEvidence, timeline, conditions);
   const sourceEntryVersion = Number(correctedEntry?.entryVersion || correctedEntry?.version || 1);
   const sourceEvidenceVersion = Number(correctedEntry?.evidenceVersion || 1);
   const readingGate = evaluateReadingGate({
     runtimeEntry: correctedEntry,
-    evidence,
+    evidence: traceableEvidence,
     timeline,
     unknownQuestions,
     version,
@@ -969,7 +1095,7 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
     timeline_status: timeline.timeline_status,
     condition_status: conditions.status,
     influence_status: influenceMap.status,
-    confirmed_count: evidence.filter(item => item.confirmation_status === 'confirmed').length,
+    confirmed_count: traceableEvidence.filter(item => item.confirmation_status === 'confirmed').length,
     candidate_count: conditions.all.length + influenceMap.relations.filter(item => item.confirmation_status === 'tentative').length,
     unknown_count: unknownQuestions.length,
     conflict_count: conflicts.length,
@@ -987,6 +1113,9 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
       figure_5E: legacyReconstruction?.conscious || {}
     },
     evidence_structure: legacyReconstruction?.evidenceBoundary || {},
+    evidence_items: evidence,
+    canonical_evidence: canonicalEvidence,
+    correction_artifacts: evidence.filter(item => item.artifact_type === 'correction_artifact'),
     confidence_components: confidence.components,
     conflicts,
     revision_metadata: revision,
@@ -1017,7 +1146,7 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
   const customerConfirmed = uniqueProjection(
     canonicalEvidence.filter(item =>
       item.merged_evidence_ids.some(id => {
-        const candidate = evidence.find(value => value.evidence_id === id);
+        const candidate = traceableEvidence.find(value => value.evidence_id === id);
         return candidate?.confirmation_status === 'confirmed' ||
           ['confirmed', 'supported'].includes(candidate?.maturity);
       })
@@ -1032,7 +1161,7 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
         (semanticConcept(item.canonical_text) || normalizedDuplicateKey(item.canonical_text))
       ) &&
       item.merged_evidence_ids.some(id => {
-        const candidate = evidence.find(value => value.evidence_id === id);
+        const candidate = traceableEvidence.find(value => value.evidence_id === id);
         return ['reported', 'tentative'].includes(candidate?.confirmation_status) ||
           ['signal_detected', 'candidate_identified', 'partially_supported'].includes(candidate?.maturity);
       })
@@ -1047,7 +1176,11 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
     timeline,
     conditions,
     influence_map: influenceMap,
-    evidence: { items: evidence, canonical: canonicalEvidence },
+    evidence: {
+      items: traceableEvidence,
+      canonical: canonicalEvidence,
+      correction_artifacts: evidence.filter(item => item.artifact_type === 'correction_artifact')
+    },
     conflicts,
     missing_evidence: unknownQuestions.map(question => ({
       unknown_type: question.unknown_type,
@@ -1103,8 +1236,10 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
         confidence: { level: confidence.level, explanation_keys: confidence.explanation_keys }
       },
       evidence: {
-        items: evidence,
+        items: canonicalEvidence,
         canonical: canonicalEvidence,
+        card_count: canonicalEvidence.length,
+        unique_canonical_count: canonicalEvidence.length,
         timeline_links: timeline.events,
         condition_links: conditions.all,
         influence_links: influenceMap.relations,
