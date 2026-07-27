@@ -173,6 +173,31 @@ const professional = Object.freeze({
     handoffBoundary: 'This preview prepares a handoff only. No client data has been transmitted.',
     footerBoundary: 'No chart or Reader interpretation becomes Runtime Evidence.',
     footerCopy: 'Professional review remains required. No chart calculation, report, Runtime Memory write or Navigation action is created.'
+  },
+  consentSharing: {
+    metaTitle: 'Consent and Sharing — PHI OS', skip: 'Skip to Consent and Sharing',
+    eyebrow: 'M4B Consent and Sharing', title: 'Choose exactly what a professional may access.',
+    lead: 'Nothing is selected by default. Every resource, duration and acknowledgement remains explicit and revocable.',
+    memoryOnly: 'Current-page preview only', resources: 'Resources to share',
+    entry: 'Entry', reconstruction: 'Reconstruction', reading: 'Reading', navigation: 'Navigation',
+    memory: 'Runtime Memory', files: 'Uploaded Files', birth: 'Birth Information',
+    chart: 'External Reader Chart', reports: 'Previous Reports', duration: 'Sharing duration',
+    durationChoice: 'Duration', oneTime: 'One-time access', sevenDays: '7 days',
+    thirtyDays: '30 days', ninetyDays: '90 days', untilComplete: 'Until service completion',
+    customDate: 'Custom date', expiry: 'Custom expiry', acknowledgements: 'External Reader boundaries',
+    ackBirth: 'Birth data is voluntarily submitted.', ackAccuracy: 'Birth-time error may affect a chart.',
+    ackDiagnostic: 'External Readers are not medical, psychological or scientific diagnosis.',
+    ackCause: 'A Reader does not prove real-world causation.', ackEvidence: 'Correspondence requires Runtime Evidence.',
+    ackAdvice: 'This does not replace licensed professional advice.', ackPrediction: 'Interpretation is not deterministic prediction.',
+    ackDecision: 'I retain the final decision.', ackService: 'Professional access is limited to this service.',
+    ackRevoke: 'Future access can be revoked.', ackRetention: 'Completed work and audit records may be retained by policy.',
+    ackReport: 'A report does not prove the cause of an event.', grant: 'Grant selected access',
+    required: 'Select at least one resource and confirm every boundary.', active: 'Selected access is active.',
+    sharedCount: '{count} resource scopes granted.', auditNotice: 'Access events record who accessed what, when, why and under which consent.',
+    revokedCount: '{count} access categories revoked.', revokeTitle: 'Revoke access',
+    revokeRuntime: 'Professional Runtime Access', revokeBirth: 'Birth Data Access', revokeChart: 'Chart Access',
+    revokeFiles: 'Uploaded File Access', revokeReports: 'Report Sharing', revokeFollowup: 'Follow-up Access',
+    revoke: 'Revoke selected access', footer: 'Consent permits access only. It never converts interpretation into Runtime Evidence.'
   }
 });
 

@@ -173,6 +173,31 @@ const professional = Object.freeze({
     handoffBoundary: '这只是交接预览，本页面没有传送客户资料。',
     footerBoundary: '任何图表或解释都不会成为现实证据。',
     footerCopy: '专业审阅始终是必要步骤；不会自动排盘、生成报告、写入运行记忆或选择导航行动。'
+  },
+  consentSharing: {
+    metaTitle: '授权与分享 — PHI OS', skip: '跳至授权与分享',
+    eyebrow: 'M4B 授权与分享', title: '准确选择专业人士可以查看的资料。',
+    lead: '系统不会默认勾选任何资料；每一项资源、期限与确认都必须由你明确选择，并可随时撤销未来访问。',
+    memoryOnly: '仅为当前页面预览', resources: '选择分享资料',
+    entry: '现实入口', reconstruction: '现实重建', reading: '现实读取', navigation: '现实导航',
+    memory: '运行记忆', files: '上传文件', birth: '出生资料',
+    chart: '外部解释系统图表', reports: '以往报告', duration: '分享期限',
+    durationChoice: '授权期限', oneTime: '单次访问', sevenDays: '七天',
+    thirtyDays: '三十天', ninetyDays: '九十天', untilComplete: '直至服务完成',
+    customDate: '自定义日期', expiry: '到期日期', acknowledgements: '外部解释系统边界',
+    ackBirth: '出生资料由我自愿提交。', ackAccuracy: '出生时间误差可能影响图表结果。',
+    ackDiagnostic: '外部解释系统不属于医疗、心理或科学诊断。',
+    ackCause: '解释系统不能证明现实事件的原因。', ackEvidence: '任何对应关系都需要现实证据进一步验证。',
+    ackAdvice: '报告不能替代持牌专业意见。', ackPrediction: '解释不构成确定性命运预测。',
+    ackDecision: '最终决定仍由我作出。', ackService: '专业人士只能在本次服务范围内访问资料。',
+    ackRevoke: '我可以撤销未来访问。', ackRetention: '已完成工作与审计记录可能按政策保留。',
+    ackReport: '报告不会证明现实事件的原因。', grant: '授权所选资料',
+    required: '请至少选择一项资料，并确认全部解释边界。', active: '所选访问权限已经生效。',
+    sharedCount: '已授权 {count} 项资料。', auditNotice: '访问记录会保存谁在何时、为何目的、依据哪一项授权查看了什么资料。',
+    revokedCount: '已撤销 {count} 类访问权限。', revokeTitle: '撤销访问',
+    revokeRuntime: '专业 Runtime 访问', revokeBirth: '出生资料访问', revokeChart: '图表访问',
+    revokeFiles: '上传文件访问', revokeReports: '报告分享', revokeFollowup: '后续跟进访问',
+    revoke: '撤销所选访问', footer: '授权只允许查看资料，绝不会把解释转换成现实证据。'
   }
 });
 

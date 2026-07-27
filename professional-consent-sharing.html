@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-i18n="consentSharing.metaTitle">Consent and Sharing — PHI OS</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css"><link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/professional-workspace.css"><link rel="stylesheet" href="/assets/css/i18n.css">
+</head>
+<body class="professional-workspace-page">
+  <a class="phi-skip-link" href="#consentMain" data-i18n="consentSharing.skip">Skip to consent</a>
+  <header class="professional-workspace-header"><a href="/" class="professional-workspace-brand">Φ <span>PHI OS</span></a><div class="professional-workspace-language"><button type="button" data-locale="en">EN</button><button type="button" data-locale="zh-Hans">中文</button></div></header>
+  <main id="consentMain" class="professional-workspace-shell consent-shell">
+    <header class="professional-workspace-hero consent-hero"><div><p data-i18n="consentSharing.eyebrow">M4B Consent and Sharing</p><h1 data-i18n="consentSharing.title">Choose exactly what a professional may access.</h1><p data-i18n="consentSharing.lead">Nothing is selected by default. Every resource, duration and acknowledgement remains explicit and revocable.</p></div><span data-i18n="consentSharing.memoryOnly">Current-page preview only</span></header>
+    <form id="consentSharingForm" class="intake-form">
+      <section class="intake-section"><h2 data-i18n="consentSharing.resources">Resources to share</h2><div class="consent-scope-grid">
+        <label><input type="checkbox" name="scope" value="entry"><span data-i18n="consentSharing.entry">Entry</span></label>
+        <label><input type="checkbox" name="scope" value="reconstruction"><span data-i18n="consentSharing.reconstruction">Reconstruction</span></label>
+        <label><input type="checkbox" name="scope" value="reading"><span data-i18n="consentSharing.reading">Reading</span></label>
+        <label><input type="checkbox" name="scope" value="navigation"><span data-i18n="consentSharing.navigation">Navigation</span></label>
+        <label><input type="checkbox" name="scope" value="runtime_memory"><span data-i18n="consentSharing.memory">Runtime Memory</span></label>
+        <label><input type="checkbox" name="scope" value="uploaded_files"><span data-i18n="consentSharing.files">Uploaded Files</span></label>
+        <label><input type="checkbox" name="scope" value="birth_information"><span data-i18n="consentSharing.birth">Birth Information</span></label>
+        <label><input type="checkbox" name="scope" value="external_reader_chart"><span data-i18n="consentSharing.chart">External Reader Chart</span></label>
+        <label><input type="checkbox" name="scope" value="previous_reports"><span data-i18n="consentSharing.reports">Previous Reports</span></label>
+      </div></section>
+      <section class="intake-section"><h2 data-i18n="consentSharing.duration">Sharing duration</h2><div class="intake-grid"><label><span data-i18n="consentSharing.durationChoice">Duration</span><select id="consentDuration" name="duration"><option value="one_time" data-i18n="consentSharing.oneTime">One-time access</option><option value="seven_days" data-i18n="consentSharing.sevenDays">7 days</option><option value="thirty_days" data-i18n="consentSharing.thirtyDays">30 days</option><option value="ninety_days" data-i18n="consentSharing.ninetyDays">90 days</option><option value="until_service_completion" data-i18n="consentSharing.untilComplete">Until service completion</option><option value="custom_date" data-i18n="consentSharing.customDate">Custom date</option></select></label><label id="customExpiryField" hidden><span data-i18n="consentSharing.expiry">Custom expiry</span><input type="date" name="expires_at"></label></div></section>
+      <section class="intake-section"><h2 data-i18n="consentSharing.acknowledgements">External Reader boundaries</h2><div class="consent-list">
+        <label><input type="checkbox" name="ack" value="birth_data_voluntarily_submitted"><span data-i18n="consentSharing.ackBirth">Birth data is voluntarily submitted.</span></label>
+        <label><input type="checkbox" name="ack" value="birth_time_accuracy_affects_result"><span data-i18n="consentSharing.ackAccuracy">Birth-time error may affect a chart.</span></label>
+        <label><input type="checkbox" name="ack" value="interpretive_not_diagnostic"><span data-i18n="consentSharing.ackDiagnostic">External Readers are not medical, psychological or scientific diagnosis.</span></label>
+        <label><input type="checkbox" name="ack" value="reader_does_not_prove_causation"><span data-i18n="consentSharing.ackCause">A Reader does not prove real-world causation.</span></label>
+        <label><input type="checkbox" name="ack" value="correspondence_requires_runtime_evidence"><span data-i18n="consentSharing.ackEvidence">Correspondence requires Runtime Evidence.</span></label>
+        <label><input type="checkbox" name="ack" value="not_licensed_professional_advice"><span data-i18n="consentSharing.ackAdvice">This does not replace licensed advice.</span></label>
+        <label><input type="checkbox" name="ack" value="not_deterministic_prediction"><span data-i18n="consentSharing.ackPrediction">Interpretation is not deterministic prediction.</span></label>
+        <label><input type="checkbox" name="ack" value="client_retains_final_decision"><span data-i18n="consentSharing.ackDecision">I retain the final decision.</span></label>
+        <label><input type="checkbox" name="ack" value="professional_access_is_service_bound"><span data-i18n="consentSharing.ackService">Professional access is limited to this service.</span></label>
+        <label><input type="checkbox" name="ack" value="future_access_revocable"><span data-i18n="consentSharing.ackRevoke">Future access can be revoked.</span></label>
+        <label><input type="checkbox" name="ack" value="policy_retention_understood"><span data-i18n="consentSharing.ackRetention">Completed work and audit records may be retained by policy.</span></label>
+        <label><input type="checkbox" name="ack" value="report_does_not_prove_cause"><span data-i18n="consentSharing.ackReport">A report does not prove the cause of an event.</span></label>
+      </div></section>
+      <div class="intake-actions"><button type="submit" data-i18n="consentSharing.grant">Grant selected access</button></div><p id="consentError" role="alert" hidden></p>
+    </form>
+    <section id="consentStatus" class="intake-handoff" hidden></section>
+    <section class="intake-section"><h2 data-i18n="consentSharing.revokeTitle">Revoke access</h2><div class="consent-scope-grid" id="revocationScopes">
+      <label><input type="checkbox" value="professional_runtime_access"><span data-i18n="consentSharing.revokeRuntime">Professional Runtime Access</span></label><label><input type="checkbox" value="birth_data_access"><span data-i18n="consentSharing.revokeBirth">Birth Data Access</span></label><label><input type="checkbox" value="chart_access"><span data-i18n="consentSharing.revokeChart">Chart Access</span></label><label><input type="checkbox" value="uploaded_file_access"><span data-i18n="consentSharing.revokeFiles">Uploaded File Access</span></label><label><input type="checkbox" value="report_sharing"><span data-i18n="consentSharing.revokeReports">Report Sharing</span></label><label><input type="checkbox" value="follow_up_access"><span data-i18n="consentSharing.revokeFollowup">Follow-up Access</span></label>
+    </div><button type="button" id="revokeAccess" disabled data-i18n="consentSharing.revoke">Revoke selected access</button></section>
+    <footer class="professional-workspace-boundary"><strong data-i18n="consentSharing.footer">Consent permits access only. It never converts interpretation into Runtime Evidence.</strong></footer>
+  </main>
+  <script type="module" src="/assets/js/pages/professional-consent-sharing.js"></script>
+</body></html>
