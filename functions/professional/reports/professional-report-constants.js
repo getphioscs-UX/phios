@@ -40,6 +40,26 @@ export const FINANCIAL_REPORT_REDACTED_FIELDS = Object.freeze([
   'full_identity_number', 'full_bank_account', 'full_policy_number',
   'full_home_address', 'unauthorised_household_member_data'
 ]);
+export const FINANCIAL_REPORT_TYPES = Object.freeze([
+  'financial_reality_snapshot',
+  'financial_stamina_analysis',
+  'financial_navigation_plan',
+  'financial_follow_up_report',
+  'annual_financial_runtime_review',
+  'integrated_runtime_financial_review'
+]);
+export const FINANCIAL_REPORT_SOURCE_TYPES = Object.freeze([
+  'client_declared',
+  'document_supported',
+  'professionally_verified',
+  'calculated',
+  'estimated',
+  'projected',
+  'assumption',
+  'professional_recommendation',
+  'client_decision',
+  'implementation_result'
+]);
 export const PROFESSIONAL_REPORT_CONFIDENCE = Object.freeze([
   'low', 'moderate', 'high', 'not_assessed'
 ]);

@@ -31,6 +31,7 @@ function section(input = {}) {
     source_reference: requiredText(input.source_reference, 'source_reference'),
     registry_version: cleanText(input.registry_version) || null,
     professional_id: cleanText(input.professional_id) || null,
+    household_member_id: cleanText(input.household_member_id) || null,
     confidence: allowed(input.confidence || 'not_assessed', PROFESSIONAL_REPORT_CONFIDENCE, 'confidence'),
     correspondence_status: correspondence,
     client_visible: input.client_visible !== false

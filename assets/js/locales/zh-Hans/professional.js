@@ -311,7 +311,19 @@ const professional = Object.freeze({
     readerType: '解释系统', registryVersion: 'Registry 版本', source: '资料来源',
     confidence: '置信状态', sourceReference: '来源记录', correspondence: '对应关系状态',
     noHistory: '当前没有已授权的版本历史。', boundary: '解释边界',
-    confidentiality: '保密声明'
+    confidentiality: '保密声明',
+    sourceLabels: {
+      client_declared: '客户申报',
+      document_supported: '文件支持',
+      professionally_verified: '专业核实',
+      calculated: '系统计算',
+      estimated: '估算',
+      projected: '预测',
+      assumption: '假设',
+      professional_recommendation: '专业建议',
+      client_decision: '客户决定',
+      implementation_result: '执行结果'
+    }
   },
   professionalAppointments: {
     metaTitle: '预约与付款 — PHI OS', skip: '跳至预约资料',

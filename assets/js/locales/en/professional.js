@@ -311,7 +311,19 @@ const professional = Object.freeze({
     readerType: 'Reader type', registryVersion: 'Registry version', source: 'Source',
     confidence: 'Confidence', sourceReference: 'Source reference', correspondence: 'Correspondence status',
     noHistory: 'No authorised version history is available.', boundary: 'Interpretation Boundary',
-    confidentiality: 'Confidentiality Notice'
+    confidentiality: 'Confidentiality Notice',
+    sourceLabels: {
+      client_declared: 'Client-declared',
+      document_supported: 'Document-supported',
+      professionally_verified: 'Professionally verified',
+      calculated: 'Calculated',
+      estimated: 'Estimated',
+      projected: 'Projected',
+      assumption: 'Assumption',
+      professional_recommendation: 'Professional recommendation',
+      client_decision: 'Client decision',
+      implementation_result: 'Implementation result'
+    }
   },
   professionalAppointments: {
     metaTitle: 'Appointments and Payments — PHI OS', skip: 'Skip to appointment',
