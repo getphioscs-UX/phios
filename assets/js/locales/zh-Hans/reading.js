@@ -289,6 +289,67 @@ const reading = Object.freeze({
         identity: '身份'
       }
     },
+    experience: {
+      viewsAria: '现实读取视图',
+      customerView: '客户视图',
+      evidenceView: '证据视图',
+      technicalView: '技术视图',
+      oneSentence: '一句话读取',
+      boundary: '这是有边界的解释，不是诊断、预测或行动指令。',
+      chainTitle: '这一模式目前如何运作',
+      priorityTitle: '目前权重最高的证据',
+      alternativeTitle: '另一种可能的读取',
+      confidenceTitle: '为什么置信度处于这一等级',
+      questionsTitle: '可能改变本次读取的问题',
+      evidenceTitle: '优先 canonical 证据',
+      evidenceNote: 'canonical 证据默认保持精简；每一项内均可查看完整来源 lineage。',
+      technicalTitle: '读取合同与 lineage',
+      technicalNote: 'Runtime 标识、schema、置信度组件、lineage、revision metadata 与储存状态。',
+      priorityNumber: '优先级 {count}',
+      confirmation: '确认状态',
+      sourceSummary: '来源摘要',
+      sourceCount: '合并 {count} 个来源',
+      supports: '支持内容',
+      viewLineage: '查看完整 lineage',
+      noOpenQuestions: '目前没有记录会实质影响本次读取的开放问题。',
+      navigationTitle: '现实导航交接',
+      navigationReady: '可以准备有边界的现实导航选项',
+      navigationBlocked: '现实导航仍保持阻断',
+      summary: {
+        what_changed: '发生了什么变化',
+        operating_pattern: '当前运作模式',
+        protective_function: '保护性功能',
+        current_cost: '当前代价',
+        current_tension: '当前张力',
+        one_sentence_reading: '一句话读取',
+        runtime_chain_reinforcement: '运行链 · 强化方式',
+        runtime_chain_spread: '运行链 · 影响扩散'
+      },
+      classification: {
+        observed_evidence: '观察证据',
+        reported_experience: '用户报告经验',
+        interpretation: '解释',
+        professional_assessment: '专业评估',
+        reported_behavior: '用户报告行为',
+        reported_identity: '用户报告身份',
+        reported_intention: '用户报告意图',
+        reported_emotion: '用户报告情绪'
+      },
+      alternativeStatus: {
+        compatible: '与当前证据相容',
+        unlikely: '目前较不可能',
+        blocked: '目前无法评估'
+      },
+      confidenceLevel: {
+        high: '证据覆盖较强',
+        moderate: '证据覆盖中等',
+        limited: '证据覆盖有限'
+      },
+      materiality: {
+        blocking: '进入下一阶段前必须回答',
+        advisory: '可能实质修正本次读取'
+      }
+    },
     footerEvidence: '现实先于智能。',
     footerFlow: '坐标 → 区域 → 配置 → 读取 → 转变'
   }

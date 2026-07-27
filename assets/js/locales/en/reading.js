@@ -289,6 +289,67 @@ const reading = Object.freeze({
         identity: 'Identity'
       }
     },
+    experience: {
+      viewsAria: 'Reading views',
+      customerView: 'Customer view',
+      evidenceView: 'Evidence view',
+      technicalView: 'Technical view',
+      oneSentence: 'One-sentence Reading',
+      boundary: 'This is a bounded interpretation, not a diagnosis, prediction, or instruction.',
+      chainTitle: 'How this pattern currently operates',
+      priorityTitle: 'Evidence carrying the most weight',
+      alternativeTitle: 'Another possible Reading',
+      confidenceTitle: 'Why confidence is at this level',
+      questionsTitle: 'Questions that could change this Reading',
+      evidenceTitle: 'Prioritized canonical evidence',
+      evidenceNote: 'Canonical evidence stays concise; complete source lineage is available inside each item.',
+      technicalTitle: 'Reading contract and lineage',
+      technicalNote: 'Runtime identifiers, schemas, confidence components, lineage, revision metadata, and storage state.',
+      priorityNumber: 'Priority {count}',
+      confirmation: 'Confirmation',
+      sourceSummary: 'Source summary',
+      sourceCount: '{count} merged source(s)',
+      supports: 'Supports',
+      viewLineage: 'View complete lineage',
+      noOpenQuestions: 'No material open question is currently recorded.',
+      navigationTitle: 'Navigation handoff',
+      navigationReady: 'Ready to prepare bounded Navigation options',
+      navigationBlocked: 'Navigation remains blocked',
+      summary: {
+        what_changed: 'What changed',
+        operating_pattern: 'Current operating pattern',
+        protective_function: 'Protective function',
+        current_cost: 'Current cost',
+        current_tension: 'Current tension',
+        one_sentence_reading: 'One-sentence Reading',
+        runtime_chain_reinforcement: 'Runtime chain · reinforcement',
+        runtime_chain_spread: 'Runtime chain · spread'
+      },
+      classification: {
+        observed_evidence: 'Observed evidence',
+        reported_experience: 'Reported experience',
+        interpretation: 'Interpretation',
+        professional_assessment: 'Professional assessment',
+        reported_behavior: 'Reported behavior',
+        reported_identity: 'Reported identity',
+        reported_intention: 'Reported intention',
+        reported_emotion: 'Reported emotion'
+      },
+      alternativeStatus: {
+        compatible: 'Compatible with the current evidence',
+        unlikely: 'Currently less likely',
+        blocked: 'Cannot be evaluated yet'
+      },
+      confidenceLevel: {
+        high: 'Stronger evidence coverage',
+        moderate: 'Moderate evidence coverage',
+        limited: 'Limited evidence coverage'
+      },
+      materiality: {
+        blocking: 'Must be answered before progression',
+        advisory: 'Could materially refine this Reading'
+      }
+    },
     footerEvidence: 'Reality before intelligence.',
     footerFlow: 'Coordinate → Region → Configuration → Reading → Transition'
   }

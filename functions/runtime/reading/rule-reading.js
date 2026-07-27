@@ -24,6 +24,7 @@ import {
 import { assessPatternThreshold } from './pattern-threshold.js';
 import { assessNavigationReadiness } from './navigation-readiness.js';
 import { buildReadingNavigationContract } from '../navigation/reading-navigation-builder.js';
+import { buildReadingExperience } from './reading-experience.js';
 import {
   RUNTIME_CAPABILITIES,
   buildDecisionContext
@@ -1385,6 +1386,10 @@ export function readRuntimeRuleFirst(readingInput, options = {}) {
   };
 
   reading.navigationHandoff = buildReadingNavigationContract({
+    reading,
+    readingInput
+  });
+  reading.readingExperience = buildReadingExperience({
     reading,
     readingInput
   });

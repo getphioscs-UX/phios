@@ -818,6 +818,60 @@
                 This view keeps confirmed information, interpretation, alternatives, and unknowns separate.
               </p>
 
+              <div class="reading-experience" data-reading-experience hidden>
+                <div class="reading-experience-tabs" role="tablist" aria-label="Reading views" data-i18n-aria-label="reading.experience.viewsAria">
+                  <button type="button" role="tab" aria-selected="true" data-reading-experience-tab="customer" data-i18n="reading.experience.customerView">Customer view</button>
+                  <button type="button" role="tab" aria-selected="false" data-reading-experience-tab="evidence" data-i18n="reading.experience.evidenceView">Evidence view</button>
+                  <button type="button" role="tab" aria-selected="false" data-reading-experience-tab="technical" data-i18n="reading.experience.technicalView">Technical view</button>
+                </div>
+
+                <section class="reading-experience-panel is-active" role="tabpanel" data-reading-experience-panel="customer">
+                  <header class="reading-experience-lead">
+                    <span data-i18n="reading.experience.oneSentence">One-sentence Reading</span>
+                    <h4 data-reading-experience-field="one_sentence_reading"></h4>
+                    <p data-i18n="reading.experience.boundary">This is a bounded interpretation, not a diagnosis, prediction, or instruction.</p>
+                  </header>
+                  <div class="reading-summary-grid" data-reading-summary></div>
+                  <section class="reading-experience-section">
+                    <h4 data-i18n="reading.experience.chainTitle">How this pattern currently operates</h4>
+                    <ol class="reading-runtime-chain" data-reading-runtime-chain></ol>
+                  </section>
+                  <section class="reading-experience-section">
+                    <h4 data-i18n="reading.experience.priorityTitle">Evidence carrying the most weight</h4>
+                    <ol class="reading-priority-list" data-reading-priority-customer></ol>
+                  </section>
+                  <details class="reading-experience-disclosure">
+                    <summary data-i18n="reading.experience.alternativeTitle">Another possible Reading</summary>
+                    <div data-reading-alternative></div>
+                  </details>
+                  <details class="reading-experience-disclosure">
+                    <summary data-i18n="reading.experience.confidenceTitle">Why confidence is at this level</summary>
+                    <div data-reading-confidence-explanation></div>
+                  </details>
+                  <section class="reading-experience-section">
+                    <h4 data-i18n="reading.experience.questionsTitle">Questions that could change this Reading</h4>
+                    <ol class="reading-question-list" data-reading-unknown-questions></ol>
+                  </section>
+                  <section class="reading-navigation-rationale" data-reading-navigation-rationale></section>
+                </section>
+
+                <section class="reading-experience-panel" role="tabpanel" data-reading-experience-panel="evidence" hidden>
+                  <header>
+                    <h4 data-i18n="reading.experience.evidenceTitle">Prioritized canonical evidence</h4>
+                    <p data-i18n="reading.experience.evidenceNote">Canonical evidence stays concise; complete source lineage is available inside each item.</p>
+                  </header>
+                  <div class="reading-evidence-cards" data-reading-priority-evidence></div>
+                </section>
+
+                <section class="reading-experience-panel reading-experience-technical" role="tabpanel" data-reading-experience-panel="technical" hidden>
+                  <header>
+                    <h4 data-i18n="reading.experience.technicalTitle">Reading contract and lineage</h4>
+                    <p data-i18n="reading.experience.technicalNote">Runtime identifiers, schemas, confidence components, lineage, revision metadata, and storage state.</p>
+                  </header>
+                  <div class="reading-technical-grid" data-reading-technical-grid></div>
+                </section>
+              </div>
+
               <div class="reading-customer-views" aria-label="Five customer Reading views" data-i18n-aria-label="reading.visual.viewsAria">
                 <section class="reading-customer-view" data-reading-view="observed-reality">
                   <header>

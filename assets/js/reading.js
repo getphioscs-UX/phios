@@ -21,6 +21,9 @@ import {
 import {
   renderReadingVisualAlignment
 } from './modules/reading-visual-alignment.js';
+import {
+  renderReadingExperience
+} from './modules/reading-experience-render.js';
 
 import {
   initializeReadingSidebar,
@@ -114,6 +117,10 @@ function renderCurrentReading() {
     renderReadingVisualAlignment(
       state.response
     );
+  const readingExperience =
+    renderReadingExperience(
+      state.response
+    );
 
   let staleNotice =
     document.querySelector(
@@ -157,7 +164,8 @@ function renderCurrentReading() {
 
   return {
     ...rendered,
-    customerProjection
+    customerProjection,
+    readingExperience
   };
 }
 

@@ -221,10 +221,15 @@ const reconstructionExperienceRegistry = await readJson(
 );
 const authorizedW14Updates =
   reconstructionExperienceRegistry.authorizedFrozenArtifactUpdates || {};
+const readingExperienceRegistry = await readJson(
+  'content/registry/m3c-reading-experience.json'
+);
+const authorizedW13Updates =
+  readingExperienceRegistry.authorizedFrozenArtifactUpdates || {};
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   assert.equal(
     await sha256(file),
-    authorizedW14Updates[file] || expectedHash,
+    authorizedW13Updates[file] || authorizedW14Updates[file] || expectedHash,
     `Frozen M3C-W5 artifact changed: ${file}`
   );
 }
@@ -241,3 +246,5 @@ assert.equal(
 
 console.log('✓ M3C-W5 Reading Visual Alignment passed: Observed Reality, Runtime Pattern, Evidence, Interpretation and Reading Boundary are customer-visible.');
 console.log('  Reading API, evidence classes, pattern threshold, Navigation readiness, handoff, persistence and lineage remain frozen.');
+
+await import('./check-m3c-reading-experience-visual.mjs');
