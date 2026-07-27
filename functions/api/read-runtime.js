@@ -196,6 +196,36 @@ export function validateReadingInput(input, language = 'en') {
     ));
   }
 
+  if (
+    isObject(readingGate) &&
+    Number.isFinite(Number(readingGate.reconstruction_version)) &&
+    Number(readingGate.reconstruction_version) !==
+      Number(input?.reconstruction?.reconstructionVersion)
+  ) {
+    errors.push(validationIssue(
+      'reconstruction_version_mismatch',
+      'reconstruction.reconstructionVersion',
+      language,
+      'The Reconstruction version does not match the evaluated Reading Gate.',
+      '现实重建版本与已评估的读取门槛不一致。'
+    ));
+  }
+
+  if (
+    Number.isFinite(Number(input?.runtimeEntry?.evidenceVersion)) &&
+    Number.isFinite(Number(input?.reconstruction?.evidenceVersion)) &&
+    Number(input.runtimeEntry.evidenceVersion) !==
+      Number(input.reconstruction.evidenceVersion)
+  ) {
+    errors.push(validationIssue(
+      'evidence_version_mismatch',
+      'reconstruction.evidenceVersion',
+      language,
+      'The Reconstruction evidence version does not match the Runtime Entry.',
+      '现实重建的证据版本与现实入口不一致。'
+    ));
+  }
+
   if (!isObject(input.evidenceBoundary)) {
     errors.push(validationIssue(
       'evidence_boundary_required',

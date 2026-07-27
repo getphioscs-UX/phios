@@ -729,6 +729,22 @@ export function createReadingInput(
           1
         ),
 
+      sourceEntryVersion:
+        Number(
+          reconstruction?.summary?.source_entry_version ||
+          reconstruction?.reconstructionExperience?.source_entry_version ||
+          runtimeEntry?.entryVersion ||
+          1
+        ),
+
+      evidenceVersion:
+        Number(
+          reconstruction?.summary?.evidence_version ||
+          reconstruction?.reconstructionExperience?.evidence_version ||
+          runtimeEntry?.evidenceVersion ||
+          1
+        ),
+
       readingGate:
         isPlainObject(reconstruction.readingGate)
           ? reconstruction.readingGate

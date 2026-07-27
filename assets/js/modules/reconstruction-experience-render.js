@@ -63,6 +63,115 @@ function correctionOptions(question, conflict) {
   ].filter(option => option.value);
 }
 
+function selectCorrectionForm({
+  targetType,
+  targetId,
+  field,
+  previousValue,
+  options,
+  labelKey = 'reconstruction.w14.correct'
+}) {
+  return `
+    <details class="w14-inline-editor">
+      <summary>${escapeHTML(t(labelKey))}</summary>
+      <form
+        data-inline-correction
+        data-target-type="${escapeHTML(targetType)}"
+        data-target-id="${escapeHTML(targetId)}"
+        data-field="${escapeHTML(field)}"
+        data-previous-value="${escapeHTML(previousValue || '')}"
+      >
+        <label>
+          <span>${escapeHTML(t('reconstruction.w14.newValue'))}</span>
+          <select name="correction" required>
+            <option value="">${escapeHTML(t('reconstruction.w14.choose'))}</option>
+            ${options.map(option => `
+              <option value="${escapeHTML(option.value)}">${escapeHTML(option.label)}</option>
+            `).join('')}
+          </select>
+        </label>
+        <label data-custom-correction hidden>
+          <span>${escapeHTML(t('reconstruction.w14.customCorrection'))}</span>
+          <input type="text" name="customCorrection">
+        </label>
+        <label>
+          <span>${escapeHTML(t('reconstruction.w14.correctionReason'))}</span>
+          <input type="text" name="reason">
+        </label>
+        <div>
+          <button class="btn primary" type="submit">${escapeHTML(t('reconstruction.w14.saveCorrection'))}</button>
+          <button class="btn" type="reset">${escapeHTML(t('reconstruction.w14.cancel'))}</button>
+        </div>
+        <p data-correction-status aria-live="polite"></p>
+      </form>
+    </details>
+  `;
+}
+
+function conditionListHTML(values) {
+  const items = list(values);
+  if (!items.length) return listHTML([]);
+  return items.map(item => `
+    <li>
+      <span>${escapeHTML(item.label)}</span>
+      ${selectCorrectionForm({
+        targetType: 'condition',
+        targetId: item.condition_id,
+        field: 'condition_type',
+        previousValue: item.condition_type,
+        options: [
+          { value: 'enhancing_condition', label: t('reconstruction.w14.enhancingCondition') },
+          { value: 'counter_condition', label: t('reconstruction.w14.counterCondition') },
+          { value: 'protective_condition', label: t('reconstruction.w14.protectiveCondition') }
+        ]
+      })}
+    </li>
+  `).join('');
+}
+
+function influenceListHTML(values) {
+  const items = list(values);
+  if (!items.length) return listHTML([]);
+  return items.map(item => `
+    <li>
+      <span>${escapeHTML(item.explanation)}</span>
+      ${selectCorrectionForm({
+        targetType: 'influence_relation',
+        targetId: item.relation_id,
+        field: 'relation_type',
+        previousValue: item.relation_type,
+        options: ['amplifies', 'reduces', 'maintains', 'constrains', 'spreads_to', 'correlates_with']
+          .map(value => ({ value, label: t(`reconstruction.w14.relations.${value}`) }))
+      })}
+    </li>
+  `).join('');
+}
+
+function questionForm(question, conflict) {
+  if (question.unknown_type === 'temporal_conflict') {
+    return selectCorrectionForm({
+      targetType: 'timeline_event',
+      targetId: conflict?.conflict_id || question.question_id,
+      field: 'reported_time',
+      previousValue: (conflict?.values || []).join(' | '),
+      options: correctionOptions(question, conflict)
+    });
+  }
+  const options = list(question.options).length
+    ? list(question.options).map(value => ({
+        value,
+        label: t(`reconstruction.w14.answers.${value}`, {}, value)
+      }))
+    : [{ value: 'custom', label: t('reconstruction.w14.enterAnswer') }];
+  return selectCorrectionForm({
+    targetType: 'unknown_question',
+    targetId: question.question_id,
+    field: 'answer',
+    previousValue: '',
+    options
+  });
+}
+
 function customerHTML(experience) {
   const customer = experience.views?.customer || {};
   const questions = list(experience.unknown_questions);
@@ -84,9 +193,9 @@ function customerHTML(experience) {
       <div class="w14-customer-grid">
         <article><h4>${escapeHTML(t('reconstruction.w14.currentChange'))}</h4><p>${escapeHTML(customer.primary_change || t('reconstruction.w14.none'))}</p></article>
         <article><h4>${escapeHTML(t('reconstruction.w14.timeline'))}</h4><ol>${listHTML(customer.timeline)}</ol></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.enhancingConditions'))}</h4><ul>${listHTML(customer.enhancing_conditions)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.reducingConditions'))}</h4><ul>${listHTML(customer.reducing_conditions)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.influenceSpread'))}</h4><ul>${listHTML(customer.influence_spread)}</ul></article>
+        <article><h4>${escapeHTML(t('reconstruction.w14.enhancingConditions'))}</h4><ul>${conditionListHTML(customer.enhancing_conditions)}</ul></article>
+        <article><h4>${escapeHTML(t('reconstruction.w14.reducingConditions'))}</h4><ul>${conditionListHTML(customer.reducing_conditions)}</ul></article>
+        <article><h4>${escapeHTML(t('reconstruction.w14.influenceSpread'))}</h4><ul>${influenceListHTML(customer.influence_spread)}</ul></article>
         <article><h4>${escapeHTML(t('reconstruction.w14.confirmed'))}</h4><ul>${listHTML(customer.confirmed)}</ul></article>
         <article><h4>${escapeHTML(t('reconstruction.w14.tentative'))}</h4><ul>${listHTML(customer.tentative)}</ul></article>
         <article><h4>${escapeHTML(t('reconstruction.w14.unknown'))}</h4><ul>${listHTML(customer.unknown.map(question => ({ label: localizedQuestion(question, conflicts.find(conflict => question.related_conflict_ids?.includes(conflict.conflict_id))) })))}</ul></article>
@@ -97,28 +206,10 @@ function customerHTML(experience) {
         ${questions.map(question => {
           const conflict = conflicts.find(item => question.related_conflict_ids?.includes(item.conflict_id));
           return `
-            <form data-inline-correction data-question-id="${escapeHTML(question.question_id)}">
+            <div data-question-id="${escapeHTML(question.question_id)}">
               <p>${escapeHTML(localizedQuestion(question, conflict))}</p>
-              ${correctionOptions(question, conflict).map((option, index) => `
-                <label>
-                  <input type="radio" name="correction" value="${escapeHTML(option.value)}" ${index === 0 ? 'required' : ''}>
-                  ${escapeHTML(option.label)}
-                </label>
-              `).join('')}
-              <label data-custom-correction hidden>
-                <span>${escapeHTML(t('reconstruction.w14.customCorrection'))}</span>
-                <input type="text" name="customCorrection">
-              </label>
-              <label>
-                <span>${escapeHTML(t('reconstruction.w14.correctionReason'))}</span>
-                <input type="text" name="reason">
-              </label>
-              <div>
-                <button class="btn primary" type="submit">${escapeHTML(t('reconstruction.w14.saveCorrection'))}</button>
-                <button class="btn" type="reset">${escapeHTML(t('reconstruction.w14.cancel'))}</button>
-              </div>
-              <p data-correction-status aria-live="polite"></p>
-            </form>
+              ${questionForm(question, conflict)}
+            </div>
           `;
         }).join('')}
       </section>
@@ -134,6 +225,17 @@ function customerHTML(experience) {
               <div><dt>${escapeHTML(t('reconstruction.w14.source'))}</dt><dd>${escapeHTML(item.source_field)}</dd></div>
               <div><dt>${escapeHTML(t('reconstruction.w14.maturity'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.maturityStates.${item.maturity}`))}</dd></div>
             </dl>
+            ${selectCorrectionForm({
+              targetType: 'evidence',
+              targetId: item.evidence_id,
+              field: 'confirmation_status',
+              previousValue: item.confirmation_status,
+              options: [
+                { value: 'confirmed', label: t('reconstruction.w14.confirmed') },
+                { value: 'tentative', label: t('reconstruction.w14.tentative') },
+                { value: 'contradicted', label: t('reconstruction.w14.contradicted') }
+              ]
+            })}
           </article>
         `).join('')}
       </div>
@@ -175,7 +277,7 @@ function downstreamArtifacts() {
 
 async function submitCorrection(form, result, experience, onUpdated) {
   const status = form.querySelector('[data-correction-status]');
-  const selected = form.querySelector('input[name="correction"]:checked')?.value || '';
+  const selected = text(form.elements.correction?.value);
   const custom = text(form.elements.customCorrection?.value);
   const newValue = selected === 'custom'
     ? custom
@@ -192,10 +294,10 @@ async function submitCorrection(form, result, experience, onUpdated) {
     previousReconstruction: experience,
     downstreamArtifacts: downstreamArtifacts(),
     correction: {
-      target_type: 'timeline_event',
-      target_id: experience.timeline?.events?.[0]?.event_id || '',
-      field: 'reported_time',
-      previous_value: experience.timeline?.events?.[0]?.reported_time || '',
+      target_type: text(form.dataset.targetType),
+      target_id: text(form.dataset.targetId),
+      field: text(form.dataset.field),
+      previous_value: text(form.dataset.previousValue),
       new_value: newValue,
       reason: text(form.elements.reason?.value),
       source: 'customer_inline_correction'
@@ -245,7 +347,7 @@ export function renderReconstructionExperience(result, options = {}) {
       });
     });
   });
-  root.querySelectorAll('input[name="correction"]').forEach(input => {
+  root.querySelectorAll('[name="correction"]').forEach(input => {
     input.addEventListener('change', event => {
       const custom = event.target.form.querySelector('[data-custom-correction]');
       custom.hidden = event.target.value !== 'custom';

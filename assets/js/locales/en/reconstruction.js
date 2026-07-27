@@ -29,6 +29,32 @@ const reconstruction = Object.freeze({
       savingCorrection: 'Saving correction…',
       correctionSaved: 'Correction saved. The Reconstruction has been recalculated.',
       correctionFailed: 'The correction could not be saved.',
+      correct: 'Correct this item',
+      newValue: 'Corrected value',
+      choose: 'Choose',
+      enterAnswer: 'Enter an answer',
+      contradicted: 'Contradicted',
+      enhancingCondition: 'Enhancing condition',
+      counterCondition: 'Reducing / counter-condition',
+      protectiveCondition: 'Protective condition',
+      questions: {
+        spendingScope: 'Which kinds of spending most often lead to repeated checking?',
+        noPartnerPressure: 'When there is no pressure from your partner, does the tension become noticeably lower?'
+      },
+      answers: {
+        yes: 'Yes',
+        partly: 'Partly',
+        no: 'No',
+        uncertain: 'Uncertain'
+      },
+      relations: {
+        amplifies: 'Amplifies',
+        reduces: 'Reduces',
+        maintains: 'Maintains',
+        constrains: 'Constrains',
+        spreads_to: 'Spreads to',
+        correlates_with: 'Correlates with'
+      },
       readingBlocked: 'New Reading is blocked',
       readingBlockedDetail: 'Resolve the questions below before generating a new Reading. Earlier Reading and Navigation remain available with their prior-version status.',
       readingReady: 'Ready for Reading',
@@ -250,7 +276,7 @@ const reconstruction = Object.freeze({
     rationaleLabel: 'Why it matters',
     priorityEvidence: 'Priority evidence requests',
     returnToEntryButton: 'Return to Entry',
-    actionBoundary: 'Editing returns to Entry and preserves the existing Runtime lineage.',
+    actionBoundary: 'Use inline correction for individual items. Return to Entry only when the source account itself needs broader revision.',
     actionNote: 'The next stage will apply the Figure 13B Reading Stack. Interpretive reading systems remain separate from verified evidence.',
     inspectorAriaLabel: 'Runtime Inspector',
     inspectorLabel: 'Runtime Inspector',

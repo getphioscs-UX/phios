@@ -29,6 +29,32 @@ const reconstruction = Object.freeze({
       savingCorrection: '正在保存修正……',
       correctionSaved: '修正已保存，现实重建已经重新计算。',
       correctionFailed: '无法保存这项修正。',
+      correct: '修正这一项',
+      newValue: '修正后的内容',
+      choose: '请选择',
+      enterAnswer: '输入回答',
+      contradicted: '存在反向资料',
+      enhancingCondition: '增强条件',
+      counterCondition: '减弱／反向条件',
+      protectiveCondition: '保护条件',
+      questions: {
+        spendingScope: '哪些支出最容易引发反复检查？',
+        noPartnerPressure: '当没有伴侣催促时，这种紧张是否明显降低？'
+      },
+      answers: {
+        yes: '是',
+        partly: '部分如此',
+        no: '不是',
+        uncertain: '尚不确定'
+      },
+      relations: {
+        amplifies: '增强',
+        reduces: '减弱',
+        maintains: '维持',
+        constrains: '约束',
+        spreads_to: '扩散至',
+        correlates_with: '与其相关'
+      },
       readingBlocked: '新的现实读取暂时受阻',
       readingBlockedDetail: '请先解决以下问题，再生成新的现实读取；较早的现实读取与导航仍会保留，并显示原有版本状态。',
       readingReady: '可以进入现实读取',
@@ -250,7 +276,7 @@ const reconstruction = Object.freeze({
     rationaleLabel: '为什么这很重要',
     priorityEvidence: '优先补充的证据',
     returnToEntryButton: '返回现实入口',
-    actionBoundary: '修改操作会返回现实入口，并保留现有 Runtime lineage。',
+    actionBoundary: '单项资料可以在本页直接修正；只有原始叙述需要整体修改时，才返回现实入口。',
     actionNote: '下一阶段会应用 Figure 13B 读取堆栈。解释性读取系统仍会与经过确认的证据保持分离。',
     inspectorAriaLabel: '运行检查器',
     inspectorLabel: '运行检查器',
