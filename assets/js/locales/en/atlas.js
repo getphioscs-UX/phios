@@ -178,8 +178,8 @@ const atlas = Object.freeze({
         description: 'How civilization patterns can be compared without deterministic prediction.'
       },
       part13: {
-        title: 'Reality Reading Architecture',
-        description: 'How evidence is identified, correlated, diagnosed and translated into navigation.'
+        title: 'Reality Reading Science',
+        description: 'Why reality can be observed, how evidence forms, how interpretive interfaces contribute, and how PHI OS creates a unified reading.'
       },
       part14: {
         title: 'Continuity Mechanics',

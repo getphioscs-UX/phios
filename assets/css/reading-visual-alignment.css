@@ -196,6 +196,12 @@
   line-height: 1.65;
 }
 
+.reading-intro .reading-science-statement {
+  margin-top: var(--phi-space-4);
+  color: var(--phi-action-platform);
+  font-weight: 650;
+}
+
 .reading-boundary {
   min-width: min(100%, 22rem);
   padding: var(--phi-space-5);
@@ -253,6 +259,40 @@
 
 .reading-confidence strong {
   color: var(--phi-action-platform);
+}
+
+.reading-confidence > small {
+  display: block;
+  margin-top: var(--phi-space-2);
+  color: var(--phi-text-secondary);
+}
+
+.reading-confidence-components {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(9rem, 1fr));
+  gap: var(--phi-space-2) var(--phi-space-4);
+  width: min(36rem, 100%);
+  margin: var(--phi-space-4) 0 0;
+}
+
+.reading-confidence-components div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--phi-space-3);
+  padding-top: var(--phi-space-2);
+  border-top: 1px solid var(--phi-border-subtle);
+}
+
+.reading-confidence-components dt {
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+}
+
+.reading-confidence-components dd {
+  margin: 0;
+  color: var(--phi-text-primary);
+  font-family: var(--phi-font-mono);
+  font-size: var(--phi-text-xs);
 }
 
 .reading-sections {
@@ -542,6 +582,58 @@
   color: var(--phi-text-primary);
 }
 
+.reading-customer-unknowns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--phi-space-4);
+}
+
+.reading-customer-unknowns article,
+.reading-evidence-summary {
+  padding: var(--phi-space-5);
+  border: 1px solid var(--phi-border-subtle);
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-subtle);
+}
+
+.reading-customer-unknowns h4,
+.reading-evidence-summary h4 {
+  margin-top: 0;
+  color: var(--phi-text-primary);
+  font-size: var(--phi-text-base);
+}
+
+.reading-customer-unknowns ul {
+  margin-bottom: 0;
+  padding-left: 1.25rem;
+  color: var(--phi-text-secondary);
+}
+
+.reading-evidence-summary dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--phi-space-3);
+  margin-bottom: 0;
+}
+
+.reading-evidence-summary dl div {
+  padding: var(--phi-space-4);
+  border-radius: var(--phi-radius-sm);
+  background: var(--phi-surface-raised);
+}
+
+.reading-evidence-summary dt {
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+}
+
+.reading-evidence-summary dd {
+  margin: var(--phi-space-2) 0 0;
+  color: var(--phi-action-platform);
+  font-family: var(--phi-font-display);
+  font-size: var(--phi-text-xl);
+}
+
 .reading-evidence-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -623,6 +715,36 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--phi-space-4);
+}
+
+.reading-figure-index {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--phi-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reading-figure-index li {
+  min-width: 0;
+  padding: var(--phi-space-4);
+  border: 1px solid var(--reading-technical-border);
+  border-radius: var(--phi-radius-sm);
+  background: var(--reading-technical-surface);
+}
+
+.reading-figure-index strong,
+.reading-figure-index span {
+  display: block;
+  color: var(--reading-technical-text);
+}
+
+.reading-figure-index strong {
+  margin-bottom: var(--phi-space-2);
+  color: var(--reading-technical-muted);
+  font-family: var(--phi-font-mono);
+  font-size: var(--phi-text-xs);
 }
 
 .reading-technical-grid article {
@@ -894,8 +1016,13 @@ html[lang="zh-Hans"] .reading-customer-view header p {
   }
 
   .reading-evidence-cards,
-  .reading-technical-grid {
+  .reading-technical-grid,
+  .reading-customer-unknowns {
     grid-template-columns: 1fr;
+  }
+
+  .reading-figure-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -955,6 +1082,12 @@ html[lang="zh-Hans"] .reading-customer-view header p {
 
   .reading-experience-tabs button {
     flex: 1 0 auto;
+  }
+
+  .reading-confidence-components,
+  .reading-evidence-summary dl,
+  .reading-figure-index {
+    grid-template-columns: 1fr;
   }
 
   .reading-actions {

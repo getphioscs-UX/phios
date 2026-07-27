@@ -163,7 +163,7 @@ const publicExperience = Object.freeze({
       civilizationTitle: 'Parts 10–12 · Civilization',
       civilizationCopy: 'Civilization Dynamics, Ecology and Atlas.',
       continuityTitle: 'Parts 13–14 · Reading & Continuity',
-      continuityCopy: 'Reality Reading Architecture and Continuity Mechanics.',
+      continuityCopy: 'Reality Reading Science and Continuity Mechanics.',
       action: 'Explore all fourteen Parts'
     },
     platform: {

@@ -98,6 +98,58 @@ function renderPriority(experience) {
   `).join(''));
 }
 
+function percent(value) {
+  const normalized = Math.max(0, Math.min(1, Number(value) || 0));
+  return `${Math.round(normalized * 100)}%`;
+}
+
+function renderConfidenceComponents(experience) {
+  const components = experience.confidence?.components || {};
+  const values = [
+    components.evidence_coverage,
+    components.pattern_consistency,
+    1 - (Number(components.interpretation_ratio) || 0),
+    components.unknown_penalty
+  ];
+  const rows = document.querySelectorAll(
+    '[data-reading-confidence-components] dd'
+  );
+  rows.forEach((row, index) => {
+    row.textContent = percent(values[index]);
+  });
+}
+
+function renderCustomerUnknowns(experience) {
+  const priority = list(experience.priority_evidence);
+  const unconfirmed = priority.filter(item =>
+    !['confirmed', 'verified'].includes(cleanText(item.confirmation_status))
+  );
+  const observeNext = list(experience.alternative_reading?.evidence_needed);
+  const mayChange = priority.filter(item => item.counter_evidence === true);
+  const render = (selector, values, text) => {
+    setHTML(selector, values.length
+      ? values.map(item => `<li>${escapeHTML(cleanText(text(item)))}</li>`).join('')
+      : `<li>${escapeHTML(t('reading.dynamic.notEstablished'))}</li>`);
+  };
+  render('[data-reading-unconfirmed]', unconfirmed, item => item.canonical_text);
+  render('[data-reading-observe-next]', observeNext, item => item);
+  render('[data-reading-may-change]', mayChange, item => item.canonical_text);
+}
+
+function renderEvidenceSummary(response) {
+  const boundary = response?.reading?.evidenceBoundary || {};
+  const values = [
+    list(boundary.observedEvidence).length,
+    list(boundary.reportedExperience).length,
+    list(boundary.interpretation).length,
+    list(boundary.unknownReality).length
+  ];
+  document.querySelectorAll('[data-reading-evidence-summary] dd')
+    .forEach((row, index) => {
+      row.textContent = String(values[index]);
+    });
+}
+
 function renderInterpretation(experience) {
   const alternative = experience.alternative_reading || {};
   setHTML('[data-reading-alternative]', `
@@ -148,26 +200,30 @@ function renderTechnical(response, experience) {
   const reading = response.reading || {};
   const inference = response.inference || {};
   const blocks = [
-    ['Schema', {
+    ['Reading Contract', {
       reading: reading.schemaVersion,
       experience: experience.schema_version,
-      source_versions: experience.source_versions
+      source_versions: experience.source_versions,
+      boundary: experience.boundary
     }],
-    ['Runtime', {
+    ['Runtime Metadata', {
       runtime_entity_id: reading.runtimeEntityId,
       runtime_entry_id: reading.runtimeEntryId,
       reading_method: reading.readingMethod,
       provider: inference.provider,
-      paid_inference_used: inference.paidInferenceUsed
+      paid_inference_used: inference.paidInferenceUsed,
+      storage: response.persistence
+    }],
+    ['Evidence Model', {
+      priority_evidence: experience.priority_evidence,
+      unknown_questions: experience.unknown_questions
     }],
     ['Confidence Components', experience.confidence?.components],
-    ['Revision Metadata', experience.revision],
+    ['Revision History', experience.revision],
     ['Navigation Handoff', {
       rationale: experience.navigation_rationale,
       frozen_contract: reading.navigationHandoff
-    }],
-    ['Storage', response.persistence],
-    ['Boundary', experience.boundary]
+    }]
   ];
   setHTML('[data-reading-technical-grid]', blocks.map(([title, value]) => `
     <article>
@@ -205,6 +261,9 @@ export function renderReadingExperience(response) {
   renderSummary(experience);
   renderChain(experience);
   renderPriority(experience);
+  renderConfidenceComponents(experience);
+  renderCustomerUnknowns(experience);
+  renderEvidenceSummary(response);
   renderInterpretation(experience);
   renderQuestions(experience);
   renderNavigation(experience);

@@ -14,9 +14,9 @@ const reading = Object.freeze({
     loadingDetail: 'Rule-first reading is applied before model inference. Paid AI is used only when necessary.',
     mapTitle: 'Reality Reading Map',
     stackAriaLabel: 'PHI OS Reality Reading Stack',
-    workspaceKicker: 'Canonical Runtime Interpretation',
+    workspaceKicker: 'PHI OS does not explain reality; it reads how reality forms.',
     workspaceTitle: 'Reading the current Runtime',
-    summary: 'Reading Summary',
+    summary: 'Current Reading maturity',
     observedReality: 'Observed Reality',
     runtimeShift: 'Runtime Shift',
     grammar: 'Reality Grammar',
@@ -207,7 +207,7 @@ const reading = Object.freeze({
       navigationBoundary: 'Navigation boundary',
       evidenceWatch: 'Evidence to Watch',
       reviewReconstruction: 'Review Reconstruction',
-      actionNote: 'Navigation identifies the current transition, priority, evidence to watch, and review conditions without producing an unrestricted recommendation list.'
+      actionNote: 'Reading is frozen. Navigation references the Reading Contract, Evidence, Unknown, and Current Tension without reinterpreting the Reading.'
     },
     inspector: {
       ariaLabel: 'Reading Inspector',

@@ -14,9 +14,9 @@ const reading = Object.freeze({
     loadingDetail: '系统会先执行规则读取，再考虑模型推理；仅在确有必要时使用付费 AI。',
     mapTitle: '现实读取地图',
     stackAriaLabel: 'PHI OS 现实读取堆栈',
-    workspaceKicker: '规范化 Runtime 解读',
+    workspaceKicker: 'PHI OS 并不解释现实，而是读取现实如何形成。',
     workspaceTitle: '读取当前 Runtime',
-    summary: '读取摘要',
+    summary: '当前读取成熟度',
     observedReality: '观察到的现实',
     runtimeShift: '运行变化',
     grammar: '现实语法',
@@ -207,7 +207,7 @@ const reading = Object.freeze({
       navigationBoundary: '导航边界',
       evidenceWatch: '需要继续观察的证据',
       reviewReconstruction: '查看现实重建',
-      actionNote: '现实导航会识别当前转变、优先事项、需要观察的证据与回顾条件，而不会生成没有边界的建议清单。'
+      actionNote: 'Reading 已冻结。Navigation 将引用 Reading Contract、Evidence、Unknown 与 Current Tension，不会重新解释 Reading。'
     },
     inspector: {
       ariaLabel: '现实读取检查器',

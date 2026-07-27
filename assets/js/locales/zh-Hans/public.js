@@ -163,7 +163,7 @@ const publicExperience = Object.freeze({
       civilizationTitle: '第 10–12 部 · 文明',
       civilizationCopy: '文明动力学、文明生态与文明地图集。',
       continuityTitle: '第 13–14 部 · 读取与连续性',
-      continuityCopy: '现实读取架构与连续性机制。',
+      continuityCopy: '现实读取科学与连续性机制。',
       action: '探索全部十四部'
     },
     platform: {

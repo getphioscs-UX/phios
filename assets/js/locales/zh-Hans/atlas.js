@@ -178,8 +178,8 @@ const atlas = Object.freeze({
         description: '如何在不作确定性预测的前提下比较文明模式。'
       },
       part13: {
-        title: '现实读取架构 Reality Reading Architecture',
-        description: '证据如何被识别、关联、诊断，并转化为导航。'
+        title: '现实读取科学 Reality Reading Science',
+        description: '现实为何能够被观察，证据如何形成，解释接口如何参与，以及 PHI OS 如何形成统一 Reading。'
       },
       part14: {
         title: '持续机制 Continuity Mechanics',
