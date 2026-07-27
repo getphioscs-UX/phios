@@ -1,0 +1,29 @@
+{
+  "id": "phi-os.m4b-external-reader-data-privacy",
+  "version": "1.0.0",
+  "milestone": "M4B-W8",
+  "baseline": "841759f8812dee650ea526433f795a9d24031092",
+  "retentionCategories": {
+    "active_service_retention": "Limited to the active service and authorised processing.",
+    "post_service_retention": "Requires a disclosed period and purpose.",
+    "client_requested_deletion": "Creates a verified deletion request and legal-retention review.",
+    "legal_accounting_retention": "Limited to records required by applicable obligations; source materials are not included by default.",
+    "professional_notes_retention": "Professional notes remain separately classified and reviewable."
+  },
+  "capabilities": {
+    "exportRequestContract": true,
+    "deletionRequestContract": true,
+    "notesReviewRequestContract": true,
+    "liveExportWorker": false,
+    "liveDeletionWorker": false,
+    "privateFileStorage": false,
+    "malwareScanner": false,
+    "signedAccessService": false
+  },
+  "runtimeBoundary": {
+    "birthDataWrittenByDefault": false,
+    "chartWrittenByDefault": false,
+    "readerInterpretationWrittenByDefault": false,
+    "explicitRetentionChoiceRequired": true
+  }
+}

@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="externalReaderPrivacy.metaTitle">External Reader Data and Privacy — PHI OS</title>
+<link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/css/design/foundation.css"><link rel="stylesheet" href="/assets/css/design/typography.css"><link rel="stylesheet" href="/assets/css/design/components.css"><link rel="stylesheet" href="/assets/css/professional-workspace.css"><link rel="stylesheet" href="/assets/css/i18n.css">
+</head><body class="professional-workspace-page privacy-choice-page">
+<a class="phi-skip-link" href="#privacyMain" data-i18n="externalReaderPrivacy.skip">Skip to data and privacy</a>
+<header class="professional-workspace-header"><a href="/" class="professional-workspace-brand">Φ <span>PHI OS</span></a><div class="professional-workspace-language"><button type="button" data-locale="en">EN</button><button type="button" data-locale="zh-Hans">中文</button></div></header>
+<main id="privacyMain" class="professional-workspace-shell privacy-choice-shell">
+<header class="professional-workspace-hero"><div><p data-i18n="externalReaderPrivacy.eyebrow">M4B External Reader Privacy</p><h1 data-i18n="externalReaderPrivacy.title">Your chart and birth data do not become Runtime Memory by default.</h1><p data-i18n="externalReaderPrivacy.lead">Choose retention explicitly and request export, review or deletion without changing Runtime Evidence.</p></div></header>
+<section class="privacy-choice-card"><h2 data-i18n="externalReaderPrivacy.retentionTitle">Retention choice</h2><fieldset id="retentionChoices"><legend data-i18n="externalReaderPrivacy.retentionLegend">Choose one option</legend>
+  <label><input type="radio" name="retention" value="service_only"><span data-i18n="externalReaderPrivacy.serviceOnly">Save for this service only</span></label>
+  <label><input type="radio" name="retention" value="future_professional_sessions"><span data-i18n="externalReaderPrivacy.futureSessions">Save for future professional sessions</span></label>
+  <label><input type="radio" name="retention" value="do_not_retain_after_completion"><span data-i18n="externalReaderPrivacy.noRetention">Do not retain after completion</span></label>
+</fieldset><button type="button" id="confirmRetention" data-i18n="externalReaderPrivacy.confirm">Confirm retention choice</button><p id="retentionStatus" role="status"></p></section>
+<section class="privacy-choice-card"><h2 data-i18n="externalReaderPrivacy.rightsTitle">Export, deletion and review requests</h2><div class="privacy-rights-grid">
+  <button type="button" data-rights-action="export_birth_data" data-i18n="externalReaderPrivacy.exportBirth">Export Birth Data</button>
+  <button type="button" data-rights-action="export_uploaded_chart" data-i18n="externalReaderPrivacy.exportChart">Export Uploaded Chart</button>
+  <button type="button" data-rights-action="export_reports" data-i18n="externalReaderPrivacy.exportReports">Export Reports</button>
+  <button type="button" data-rights-action="delete_uploaded_chart" data-i18n="externalReaderPrivacy.deleteChart">Delete Uploaded Chart</button>
+  <button type="button" data-rights-action="request_professional_notes_review" data-i18n="externalReaderPrivacy.reviewNotes">Request Professional Notes Review</button>
+  <button type="button" data-rights-action="request_account_deletion" data-i18n="externalReaderPrivacy.deleteAccount">Request Account Deletion</button>
+</div><p id="rightsStatus" role="status"></p></section>
+<section class="privacy-choice-card"><h2 data-i18n="externalReaderPrivacy.securityTitle">Uploaded-file security requirements</h2><ul><li data-i18n="externalReaderPrivacy.fileTypes">PNG, JPG, WEBP and PDF only</li><li data-i18n="externalReaderPrivacy.maxSize">Maximum 25 MB</li><li data-i18n="externalReaderPrivacy.scan">Malware scan is required before access</li><li data-i18n="externalReaderPrivacy.privateStorage">Private storage and expiring signed access are required</li><li data-i18n="externalReaderPrivacy.deletionWorkflow">Deletion follows a verified workflow and is never claimed before completion</li></ul></section>
+<footer class="professional-workspace-boundary"><strong data-i18n="externalReaderPrivacy.boundary">Birth data, charts and Reader interpretation are not written to long-term Runtime Memory by default.</strong><p data-i18n="externalReaderPrivacy.preview">This page demonstrates explicit choices only. It does not upload, export or delete data automatically.</p></footer>
+</main><script type="module" src="/assets/js/pages/professional-data-privacy.js"></script></body></html>

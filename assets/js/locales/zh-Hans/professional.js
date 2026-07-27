@@ -258,6 +258,30 @@ const professional = Object.freeze({
       missing_intake: '尚未完成资料填写', missing_consent: '尚未完成授权', missing_chart: '尚未提供图表',
       report_ready: '报告已经完成', follow_up: '后续跟进'
     }
+  },
+  externalReaderPrivacy: {
+    metaTitle: '外部解释系统资料与隐私 — PHI OS', skip: '跳至资料与隐私',
+    navTitle: '资料与隐私', eyebrow: 'M4B 外部解释系统隐私',
+    title: '你的图表与出生资料不会默认进入长期运行记忆。',
+    lead: '主动选择保存方式，并在不改变现实证据的前提下提出导出、审阅或删除请求。',
+    retentionTitle: '资料保存选择', retentionLegend: '请选择一项',
+    serviceOnly: '只保留至本次服务完成',
+    futureSessions: '保留供未来专业服务使用',
+    noRetention: '服务完成后不继续保留', confirm: '确认保存选择',
+    choiceRecorded: '你的主动保存选择已经准备写入本次服务记录。',
+    chooseRequired: '请先选择一项保存方式。',
+    rightsTitle: '导出、删除与审阅请求',
+    exportBirth: '导出出生资料', exportChart: '导出已上传图表',
+    exportReports: '导出报告', deleteChart: '删除已上传图表',
+    reviewNotes: '申请审阅专业记录', deleteAccount: '申请删除账户',
+    requestPrepared: '请求已经建立；仍需完成身份核实与适用的资料保留审查。',
+    securityTitle: '上传文件安全要求',
+    fileTypes: '只允许 PNG、JPG、WEBP 与 PDF', maxSize: '文件上限为 25 MB',
+    scan: '文件必须经过恶意程序扫描后才能访问',
+    privateStorage: '必须使用私有储存与限时签名访问',
+    deletionWorkflow: '删除必须经过核实流程，完成以前不得宣称已经删除',
+    boundary: '出生资料、图表与解释内容不会默认写入长期运行记忆。',
+    preview: '本页面只展示主动选择流程，不会自动上传、导出或删除资料。'
   }
 });
 

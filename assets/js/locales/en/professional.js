@@ -258,6 +258,30 @@ const professional = Object.freeze({
       missing_intake: 'Missing intake', missing_consent: 'Missing consent', missing_chart: 'Missing chart',
       report_ready: 'Report ready', follow_up: 'Follow-up'
     }
+  },
+  externalReaderPrivacy: {
+    metaTitle: 'External Reader Data and Privacy — PHI OS', skip: 'Skip to data and privacy',
+    navTitle: 'Data and Privacy', eyebrow: 'M4B External Reader Privacy',
+    title: 'Your chart and birth data do not become Runtime Memory by default.',
+    lead: 'Choose retention explicitly and request export, review or deletion without changing Runtime Evidence.',
+    retentionTitle: 'Retention choice', retentionLegend: 'Choose one option',
+    serviceOnly: 'Save for this service only',
+    futureSessions: 'Save for future professional sessions',
+    noRetention: 'Do not retain after completion', confirm: 'Confirm retention choice',
+    choiceRecorded: 'Your explicit retention choice is prepared for the service record.',
+    chooseRequired: 'Choose one retention option first.',
+    rightsTitle: 'Export, deletion and review requests',
+    exportBirth: 'Export Birth Data', exportChart: 'Export Uploaded Chart',
+    exportReports: 'Export Reports', deleteChart: 'Delete Uploaded Chart',
+    reviewNotes: 'Request Professional Notes Review', deleteAccount: 'Request Account Deletion',
+    requestPrepared: 'The request is prepared. Identity verification and applicable retention review remain required.',
+    securityTitle: 'Uploaded-file security requirements',
+    fileTypes: 'PNG, JPG, WEBP and PDF only', maxSize: 'Maximum 25 MB',
+    scan: 'Malware scan is required before access',
+    privateStorage: 'Private storage and expiring signed access are required',
+    deletionWorkflow: 'Deletion follows a verified workflow and is never claimed before completion',
+    boundary: 'Birth data, charts and Reader interpretation are not written to long-term Runtime Memory by default.',
+    preview: 'This page demonstrates explicit choices only. It does not upload, export or delete data automatically.'
   }
 });
 
