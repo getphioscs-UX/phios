@@ -65,6 +65,15 @@ function date(value) {
   }).format(parsed);
 }
 
+function dateTime(value) {
+  const parsed = new Date(value);
+  if (!value || Number.isNaN(parsed.getTime())) return '—';
+  return new Intl.DateTimeFormat(getLocale(), {
+    dateStyle: 'medium',
+    timeStyle: 'short'
+  }).format(parsed);
+}
+
 function sourceLabel(reference = {}) {
   const key = SOURCE_TRANSLATION_KEYS[reference.source_type];
   return key ? t(key) : t('professionalWorkspace.source');
@@ -190,6 +199,117 @@ function renderQueue() {
   `).join('')}</div>`;
 }
 
+function renderReadingRevisions() {
+  const root = document.querySelector('#professionalReadingRevisions');
+  if (!root) return;
+  const revisions = list(payload?.reading_revisions);
+  if (!revisions.length) {
+    root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noReadingRevisions'))}</p>`;
+    return;
+  }
+  root.innerHTML = `<div class="professional-revision-list">${revisions.map(revision => `
+    <article>
+      <header>
+        <div>
+          <span>${escapeHTML(t('professionalWorkspace.revisionAction'))}</span>
+          <h2>${display(revision.action_label)}</h2>
+        </div>
+        <strong>${escapeHTML(t('professionalWorkspace.versionTransition', {
+          original: Number(revision.original_version) || 1,
+          revised: Number(revision.revised_version) || 2
+        }))}</strong>
+      </header>
+      <div class="professional-comparison">
+        <section>
+          <h3>${escapeHTML(t('professionalWorkspace.originalVersion'))}</h3>
+          <p>${display(revision.original_text)}</p>
+        </section>
+        <section>
+          <h3>${escapeHTML(t('professionalWorkspace.revisedVersion'))}</h3>
+          <p>${display(revision.revised_text)}</p>
+        </section>
+      </div>
+      <dl class="professional-meta-grid">
+        <div><dt>${escapeHTML(t('professionalWorkspace.changedBy'))}</dt><dd>${display(revision.changed_by_label)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.changedAt'))}</dt><dd>${dateTime(revision.changed_at)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.reason'))}</dt><dd>${display(revision.reason)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.clientVisibility'))}</dt><dd>${escapeHTML(revision.client_visible ? t('professionalWorkspace.noteClientVisible') : t('professionalWorkspace.notePrivate'))}</dd></div>
+      </dl>
+      <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.readingOverlayBoundary'))}</p>
+    </article>
+  `).join('')}</div>`;
+}
+
+function labelledList(labelKey, values) {
+  const items = list(values);
+  return `<section>
+    <h3>${escapeHTML(t(labelKey))}</h3>
+    ${items.length
+      ? `<ul>${items.map(value => `<li>${display(value)}</li>`).join('')}</ul>`
+      : `<p class="professional-workspace-empty">—</p>`}
+  </section>`;
+}
+
+function renderNavigationConsiderations() {
+  const root = document.querySelector(
+    '#professionalNavigationConsiderations'
+  );
+  if (!root) return;
+  const considerations = list(payload?.navigation_considerations);
+  if (!considerations.length) {
+    root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noNavigationConsiderations'))}</p>`;
+    return;
+  }
+  root.innerHTML = `<div class="professional-consideration-list">${considerations.map(item => `
+    <article>
+      <header>
+        <div>
+          <span>${escapeHTML(t('professionalWorkspace.currentRuntimePosition'))}</span>
+          <h2>${display(item.current_runtime_position)}</h2>
+        </div>
+        ${item.includes_external_reader
+          ? `<strong class="professional-interpretation-badge">${escapeHTML(t('professionalWorkspace.interpretationOnly'))}</strong>`
+          : ''}
+      </header>
+      <div class="professional-consideration-grid">
+        ${labelledList('professionalWorkspace.availablePaths', item.available_paths)}
+        ${labelledList('professionalWorkspace.constraints', item.constraints)}
+        ${labelledList('professionalWorkspace.requiredEvidence', item.required_evidence)}
+        ${labelledList('professionalWorkspace.lowRiskNextStep', [item.low_risk_next_step])}
+        ${labelledList('professionalWorkspace.reviewPoint', [item.review_point])}
+        ${labelledList('professionalWorkspace.stopCondition', [item.stop_condition])}
+        ${labelledList('professionalWorkspace.escalationCondition', [item.escalation_condition])}
+      </div>
+      <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.navigationChoiceBoundary'))}</p>
+    </article>
+  `).join('')}</div>`;
+}
+
+function renderFollowUpTimeline() {
+  const root = document.querySelector('#professionalFollowUpTimeline');
+  if (!root) return;
+  const events = list(payload?.follow_up_timeline?.events);
+  if (!events.length) {
+    root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noFollowUpEvents'))}</p>`;
+    return;
+  }
+  root.innerHTML = `<ol class="professional-follow-up-list">${events.map(event => `
+    <li>
+      <span class="professional-follow-up-dot" aria-hidden="true"></span>
+      <article>
+        <header>
+          <h2>${display(event.event_label)}</h2>
+          <time datetime="${display(event.occurred_at)}">${dateTime(event.occurred_at)}</time>
+        </header>
+        <p>${escapeHTML(event.client_visible
+          ? t('professionalWorkspace.noteClientVisible')
+          : t('professionalWorkspace.professionalRecord'))}</p>
+      </article>
+    </li>
+  `).join('')}</ol>
+  <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.timelineBoundary'))}</p>`;
+}
+
 function renderAll() {
   document.body.dataset.workspaceStatus = payload
     ? 'authorised-projection'
@@ -200,6 +320,9 @@ function renderAll() {
   renderRuntime();
   renderNotes();
   renderQueue();
+  renderReadingRevisions();
+  renderNavigationConsiderations();
+  renderFollowUpTimeline();
 }
 
 function bindViews() {

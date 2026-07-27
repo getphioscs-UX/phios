@@ -1,0 +1,73 @@
+{
+  "id": "phi-os.m4b-w2c-professional-revision-navigation-follow-up",
+  "version": "1.0.0",
+  "milestone": "M4B-W2C",
+  "status": "contract-and-read-only-projection-ready-auth-and-persistence-pending",
+  "baseline": {
+    "commit": "6dc1dce5ef9918d155074c82ba08d274c9e75dbb",
+    "foundation": "M4B-W2A",
+    "views": "M4B-W2B"
+  },
+  "route": "/professional-workspace",
+  "views": [
+    "reading_revisions",
+    "navigation_considerations",
+    "follow_up_timeline"
+  ],
+  "contracts": {
+    "readingRevision": "phi-os.professional-reading-revision.v1",
+    "navigationConsideration": "phi-os.professional-navigation-consideration.v1",
+    "followUpTimeline": "phi-os.professional-follow-up-timeline.v1",
+    "projection": "phi-os.professional-w2c-projection.v1"
+  },
+  "readingRevisionActions": [
+    "approve",
+    "revise",
+    "add_clarification",
+    "mark_unverified",
+    "request_more_evidence",
+    "remove_unsupported_inference"
+  ],
+  "navigationFields": [
+    "current_runtime_position",
+    "available_paths",
+    "constraints",
+    "required_evidence",
+    "low_risk_next_step",
+    "review_point",
+    "stop_condition",
+    "escalation_condition"
+  ],
+  "followUpEvents": [
+    "runtime_entry_created",
+    "professional_access_granted",
+    "human_design_chart_uploaded",
+    "report_drafted",
+    "consultation_completed",
+    "navigation_chosen",
+    "follow_up_evidence_added",
+    "report_revised",
+    "access_revoked",
+    "service_completed"
+  ],
+  "boundaries": {
+    "authenticatedDataLoaderImplemented": false,
+    "realClientDataIncluded": false,
+    "apiCalled": false,
+    "browserRuntimeStorageUsed": false,
+    "d1WorkspacePersistenceEnabled": false,
+    "professionalActionsEnabledInUi": false,
+    "runtimeReadingOverwriteAllowed": false,
+    "navigationContractOverwriteAllowed": false,
+    "runtimeTimelineOverwriteAllowed": false,
+    "externalReaderMergedIntoRuntimeEvidence": false,
+    "externalReaderRequiredActionAllowed": false,
+    "clientNavigationChoiceRequired": true
+  },
+  "responsiveAcceptance": [
+    360,
+    768,
+    1440
+  ],
+  "nextWorkPackage": "M4B-W2D Human Design Intake and External Reader Layer"
+}

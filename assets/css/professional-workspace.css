@@ -162,7 +162,9 @@ body.professional-workspace-page {
 .professional-client-card,
 .professional-runtime-grid article,
 .professional-note-list article,
-.professional-queue-list article {
+.professional-queue-list article,
+.professional-revision-list > article,
+.professional-consideration-list > article {
   min-width: 0;
   padding: 1.2rem;
   border: 1px solid var(--professional-line);
@@ -227,7 +229,9 @@ body.professional-workspace-page {
 }
 
 .professional-note-list,
-.professional-queue-list {
+.professional-queue-list,
+.professional-revision-list,
+.professional-consideration-list {
   display: grid;
   gap: 1rem;
 }
@@ -254,6 +258,134 @@ body.professional-workspace-page {
   color: var(--professional-warning);
 }
 
+.professional-revision-list header,
+.professional-consideration-list header,
+.professional-follow-up-list header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.professional-revision-list header span,
+.professional-consideration-list header span,
+.professional-meta-grid dt,
+.professional-follow-up-list time {
+  color: var(--professional-muted);
+  font-size: 0.78rem;
+}
+
+.professional-revision-list h2,
+.professional-consideration-list h2,
+.professional-follow-up-list h2 {
+  margin: 0.25rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.professional-comparison,
+.professional-consideration-grid,
+.professional-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.professional-comparison section,
+.professional-consideration-grid section {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--professional-line);
+  border-radius: 0.8rem;
+}
+
+.professional-comparison h3,
+.professional-consideration-grid h3 {
+  margin: 0 0 0.6rem;
+  font-size: 0.84rem;
+}
+
+.professional-comparison p,
+.professional-consideration-grid li {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.professional-meta-grid div {
+  min-width: 0;
+}
+
+.professional-meta-grid dd {
+  margin: 0.2rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.professional-interpretation-badge {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #a98b58;
+  border-radius: 999px;
+  color: #674b1f;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.professional-contract-boundary {
+  margin: 1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--professional-line);
+  color: var(--professional-muted);
+  line-height: 1.6;
+}
+
+.professional-follow-up-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.professional-follow-up-list li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2rem minmax(0, 1fr);
+  gap: 0.8rem;
+  padding-bottom: 1.2rem;
+}
+
+.professional-follow-up-list li::before {
+  position: absolute;
+  top: 1rem;
+  bottom: -0.2rem;
+  left: 0.34rem;
+  width: 1px;
+  background: var(--professional-line);
+  content: '';
+}
+
+.professional-follow-up-list li:last-child::before {
+  display: none;
+}
+
+.professional-follow-up-dot {
+  position: relative;
+  z-index: 1;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: 0.35rem;
+  border: 2px solid var(--professional-accent);
+  border-radius: 50%;
+  background: var(--professional-surface);
+}
+
+.professional-follow-up-list article {
+  min-width: 0;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--professional-line);
+}
+
+.professional-follow-up-list article p {
+  color: var(--professional-muted);
+}
+
 .professional-workspace-empty {
   color: var(--professional-muted);
 }
@@ -269,7 +401,10 @@ body.professional-workspace-page {
   }
 
   .professional-client-grid,
-  .professional-runtime-grid {
+  .professional-runtime-grid,
+  .professional-comparison,
+  .professional-consideration-grid,
+  .professional-meta-grid {
     grid-template-columns: 1fr;
   }
 
@@ -301,7 +436,10 @@ body.professional-workspace-page {
 
   .professional-note-list header,
   .professional-note-list footer,
-  .professional-queue-list header {
+  .professional-queue-list header,
+  .professional-revision-list header,
+  .professional-consideration-list header,
+  .professional-follow-up-list header {
     align-items: flex-start;
     flex-direction: column;
   }
