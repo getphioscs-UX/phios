@@ -34,7 +34,9 @@ async function sha256(relativePath) {
 
 const requiredFiles = [
   'reality-reconstruction.html',
+  'assets/css/runtime-workspace.css',
   'assets/css/reconstruction-visual-alignment.css',
+  'assets/css/reconstruction-experience.css',
   'assets/js/reconstruction.js',
   'assets/js/modules/reconstruction-customer-projection.js',
   'assets/js/modules/reconstruction-visual-alignment.js',
@@ -51,6 +53,7 @@ for (const file of requiredFiles) {
 const page = await read('reality-reconstruction.html');
 for (const contract of [
   '/assets/css/reconstruction-visual-alignment.css',
+  '/assets/css/reconstruction-experience.css',
   'id="reconstructionEvidenceSummary"',
   'id="reconstructionEvidenceSource"',
   'id="reconstructionConfidence"',
@@ -78,6 +81,12 @@ assert.equal(
     page.indexOf('/assets/css/runtime-workspace.css'),
   true,
   'M3C-W4 stylesheet must load after the frozen Reconstruction layers'
+);
+assert.equal(
+  page.indexOf('/assets/css/reconstruction-experience.css') >
+    page.indexOf('/assets/css/reconstruction-visual-alignment.css'),
+  true,
+  'M3C-W14 contrast stylesheet must load after all frozen Reconstruction layers'
 );
 assert.equal(
   (page.match(/data-i18n="reconstruction\.editAnswer"/g) || []).length,
@@ -260,6 +269,165 @@ for (const token of [
   '--phi-state-warning'
 ]) {
   assert.equal(css.includes(token), true, `M3C-W4 must use Design Token: ${token}`);
+}
+
+const experienceCss = await read('assets/css/reconstruction-experience.css');
+const runtimeCss = await read('assets/css/runtime-workspace.css');
+
+for (const token of [
+  '--technical-bg',
+  '--technical-surface',
+  '--technical-surface-elevated',
+  '--technical-text-primary',
+  '--technical-text-secondary',
+  '--technical-text-muted',
+  '--technical-border',
+  '--technical-accent'
+]) {
+  assert.equal(
+    experienceCss.includes(token),
+    true,
+    `M3C-W14 Technical View token is missing: ${token}`
+  );
+}
+
+for (const contract of [
+  '[data-w14-view="technical"]',
+  '.technical-record-body',
+  '.technical-record-body .formation-arc',
+  '.technical-record-body .coordinate-card',
+  '.technical-record-body .conscious-stage',
+  '.technical-record-body .evidence-columns section',
+  '.technical-record-body .lineage-section',
+  '.technical-record-body .conflict-details',
+  '.technical-record-body .confidence-components',
+  '.technical-record-body .revision-metadata',
+  '.reconstruction-page .runtime-workspace-sidebar',
+  '.runtime-workspace-brand strong',
+  'li.is-current a',
+  'li.is-complete a',
+  'li.is-locked',
+  ':focus-visible',
+  '@media (max-width: 768px)',
+  '@media (max-width: 360px)'
+]) {
+  assert.equal(
+    experienceCss.includes(contract),
+    true,
+    `M3C-W14 contrast contract is missing: ${contract}`
+  );
+}
+
+assert.match(
+  experienceCss,
+  /\[data-w14-view="technical"\][\s\S]*?color:\s*var\(--technical-text-primary\)/,
+  'Technical View primary text must use the light Technical token'
+);
+assert.match(
+  experienceCss,
+  /\.technical-record-body[\s\S]*?background:\s*var\(--technical-bg\)/,
+  'Technical Record must use the dark Technical surface token'
+);
+assert.match(
+  experienceCss,
+  /\.reconstruction-page \.runtime-workspace-sidebar[\s\S]*?color:\s*var\(--runtime-sidebar-text-primary\)/,
+  'Runtime Sidebar must override the light-page inherited text color'
+);
+assert.match(
+  runtimeCss,
+  /\.runtime-workspace-sidebar\{[^}]*background:rgba\(7,12,20,\.92\)/,
+  'Runtime Sidebar baseline must remain a dark surface'
+);
+
+for (const lightView of ['customer', 'evidence']) {
+  assert.match(
+    experienceCss,
+    new RegExp(
+      `\\[data-w14-view="${lightView}"\\][\\s\\S]*?color:\\s*var\\(--phi-text-primary`
+    ),
+    `${lightView} View must retain an explicit light-theme text contract`
+  );
+}
+
+assert.doesNotMatch(
+  experienceCss,
+  /(?:technical-record-body|data-w14-view="technical")[^{]*\{[^}]*(?:color:\s*var\(--(?:ink|text-primary|text-muted)\)|opacity:\s*(?:0?\.[0-6]\d?|0))/,
+  'Technical body text must not reuse light-page text tokens or low opacity'
+);
+assert.match(
+  experienceCss,
+  /(?:button:disabled|aria-disabled)[\s\S]*?opacity:\s*\.72/,
+  'Disabled Technical controls must keep a readable opacity floor'
+);
+assert.match(
+  experienceCss,
+  /li\.is-locked[\s\S]*?opacity:\s*1/,
+  'Sidebar locked stages must use a muted color without parent opacity loss'
+);
+
+function hexToRgb(value) {
+  const match = /^#([0-9a-f]{6})$/i.exec(value);
+  assert.ok(match, `Expected six-digit hex color, received: ${value}`);
+  return [0, 2, 4].map(offset => Number.parseInt(match[1].slice(offset, offset + 2), 16));
+}
+
+function relativeLuminance(value) {
+  const channels = hexToRgb(value).map(channel => {
+    const normalized = channel / 255;
+    return normalized <= 0.04045
+      ? normalized / 12.92
+      : ((normalized + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+}
+
+function contrastRatio(foreground, background) {
+  const light = Math.max(relativeLuminance(foreground), relativeLuminance(background));
+  const dark = Math.min(relativeLuminance(foreground), relativeLuminance(background));
+  return (light + 0.05) / (dark + 0.05);
+}
+
+function technicalToken(name) {
+  const match = new RegExp(`${name}:\\s*(#[0-9a-f]{6})`, 'i').exec(experienceCss);
+  assert.ok(match, `Unable to resolve Technical token: ${name}`);
+  return match[1];
+}
+
+const technicalColors = Object.fromEntries(
+  [
+    '--technical-bg',
+    '--technical-surface',
+    '--technical-surface-elevated',
+    '--technical-text-primary',
+    '--technical-text-secondary',
+    '--technical-text-muted',
+    '--technical-border',
+    '--technical-accent',
+    '--technical-positive'
+  ].map(name => [name, technicalToken(name)])
+);
+
+for (const background of [
+  '--technical-bg',
+  '--technical-surface',
+  '--technical-surface-elevated'
+]) {
+  for (const foreground of [
+    '--technical-text-primary',
+    '--technical-text-secondary',
+    '--technical-text-muted',
+    '--technical-accent',
+    '--technical-positive'
+  ]) {
+    assert.ok(
+      contrastRatio(technicalColors[foreground], technicalColors[background]) >= 4.5,
+      `${foreground} on ${background} must meet WCAG AA for normal text`
+    );
+  }
+  assert.ok(
+    contrastRatio(technicalColors['--technical-border'], technicalColors[background]) >= 3,
+    `--technical-border on ${background} must meet the 3:1 non-text contrast threshold`
+  );
 }
 
 const registry = await readJson(

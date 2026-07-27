@@ -114,3 +114,321 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* M3C-W14 Production visual acceptance
+   Technical surfaces and the Runtime Sidebar use explicit dark-theme tokens.
+   Customer and Evidence projections remain on the light Reconstruction theme. */
+.reconstruction-page {
+  --technical-bg: #0b1118;
+  --technical-surface: #121b25;
+  --technical-surface-elevated: #1a2733;
+  --technical-text-primary: #f5f7f4;
+  --technical-text-secondary: #cbd5d1;
+  --technical-text-muted: #aebdb7;
+  --technical-border: #60736c;
+  --technical-accent: #e4c27d;
+  --technical-positive: #95d6af;
+}
+
+[data-w14-view="customer"],
+[data-w14-view="evidence"] {
+  color: var(--phi-text-primary, #11141a);
+  background: var(--phi-surface-canvas, #f5f3ed);
+}
+
+[data-w14-view="customer"] article,
+[data-w14-view="evidence"] article {
+  color: var(--phi-text-primary, #11141a);
+  background: var(--phi-surface-solid, #fff);
+}
+
+[data-w14-view="customer"] p,
+[data-w14-view="customer"] small,
+[data-w14-view="customer"] dt,
+[data-w14-view="evidence"] p,
+[data-w14-view="evidence"] small,
+[data-w14-view="evidence"] dt {
+  color: var(--phi-text-secondary, #5d6470);
+}
+
+[data-w14-view="technical"],
+.technical-record-body {
+  color: var(--technical-text-primary);
+  background: var(--technical-bg);
+}
+
+[data-w14-view="technical"] {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--technical-border);
+  border-radius: 1rem;
+}
+
+[data-w14-view="technical"] h1,
+[data-w14-view="technical"] h2,
+[data-w14-view="technical"] h3,
+[data-w14-view="technical"] h4,
+[data-w14-view="technical"] h5,
+[data-w14-view="technical"] h6,
+[data-w14-view="technical"] dd,
+[data-w14-view="technical"] strong,
+.technical-record-body h1,
+.technical-record-body h2,
+.technical-record-body h3,
+.technical-record-body h4,
+.technical-record-body h5,
+.technical-record-body h6,
+.technical-record-body strong {
+  color: var(--technical-text-primary);
+}
+
+[data-w14-view="technical"] p,
+[data-w14-view="technical"] li,
+[data-w14-view="technical"] dt,
+[data-w14-view="technical"] small,
+[data-w14-view="technical"] .description,
+[data-w14-view="technical"] .metadata,
+[data-w14-view="technical"] .empty-state,
+.technical-record-body p,
+.technical-record-body li,
+.technical-record-body dt,
+.technical-record-body small,
+.technical-record-body .section-note,
+.technical-record-body .description,
+.technical-record-body .metadata,
+.technical-record-body .empty-state {
+  color: var(--technical-text-secondary);
+  opacity: 1;
+}
+
+[data-w14-view="technical"] dl > div,
+[data-w14-view="technical"] article,
+[data-w14-view="technical"] .runtime-card,
+.technical-record-body .formation-arc,
+.technical-record-body .coordinate-card,
+.technical-record-body .signature-card,
+.technical-record-body .conscious-stage,
+.technical-record-body .evidence-columns section,
+.technical-record-body .runtime-card,
+.technical-record-body .lineage-section,
+.technical-record-body .runtime-lineage-card,
+.technical-record-body .conflict-details,
+.technical-record-body .confidence-components,
+.technical-record-body .revision-metadata {
+  min-width: 0;
+  border-color: var(--technical-border);
+  background: var(--technical-surface);
+  color: var(--technical-text-primary);
+}
+
+.technical-record-body .formation-arc:hover {
+  border-color: var(--technical-accent);
+  background: var(--technical-surface-elevated);
+}
+
+.technical-record-body .formation-arc.is-primary,
+.technical-record-body .dependency-panel,
+.technical-record-body .boundary-note {
+  border-color: var(--technical-accent);
+  background: var(--technical-surface-elevated);
+}
+
+.technical-record-body .section-index,
+.technical-record-body .section-label,
+.technical-record-body .formation-arc > span,
+.technical-record-body .conscious-stage > span,
+.technical-record-body .state-badge,
+.technical-record-body .dependency-panel > span {
+  color: var(--technical-accent) !important;
+  opacity: 1;
+}
+
+.technical-record-body .coordinate-card span,
+.technical-record-body .signature-card span,
+.technical-record-body .conscious-stage p,
+.technical-record-body .boundary-note p,
+.technical-record-body .grammar-tag,
+.technical-record-body .runtime-lineage-meta,
+.technical-record-body .runtime-timeline-event time,
+.technical-record-body .runtime-timeline-event p,
+.technical-record-body .runtime-timeline-empty {
+  color: var(--technical-text-muted);
+  opacity: 1;
+}
+
+.technical-record-body .evidence-columns ul,
+.technical-record-body .evidence-columns li {
+  color: var(--technical-text-secondary);
+}
+
+.technical-record-body .grammar-tag,
+.technical-record-body .state-badge,
+.technical-record-body .runtime-lineage-status {
+  border-color: var(--technical-border);
+  background: var(--technical-surface-elevated);
+}
+
+.technical-record-body .grammar-tag.is-active,
+.technical-record-body .runtime-lineage-card.is-active {
+  border-color: var(--technical-accent);
+  color: var(--technical-text-primary);
+}
+
+[data-w14-view="technical"] a,
+[data-w14-view="technical"] button,
+.technical-record-body a,
+.technical-record-body button {
+  color: var(--technical-text-primary);
+  border-color: var(--technical-border);
+}
+
+[data-w14-view="technical"] a:hover,
+[data-w14-view="technical"] button:hover:not(:disabled),
+[data-w14-view="technical"] [aria-selected="true"],
+[data-w14-view="technical"] [aria-pressed="true"],
+.technical-record-body a:hover,
+.technical-record-body button:hover:not(:disabled),
+.technical-record-body [aria-selected="true"],
+.technical-record-body [aria-pressed="true"] {
+  color: var(--technical-bg);
+  border-color: var(--technical-accent);
+  background: var(--technical-accent);
+}
+
+[data-w14-view="technical"] a:focus-visible,
+[data-w14-view="technical"] button:focus-visible,
+[data-w14-view="technical"] input:focus-visible,
+[data-w14-view="technical"] select:focus-visible,
+.technical-record > summary:focus-visible,
+.technical-record-body a:focus-visible,
+.technical-record-body button:focus-visible,
+.technical-record-body input:focus-visible,
+.technical-record-body select:focus-visible {
+  outline: 3px solid var(--technical-accent);
+  outline-offset: 3px;
+}
+
+[data-w14-view="technical"] button:disabled,
+[data-w14-view="technical"] [aria-disabled="true"],
+.technical-record-body button:disabled,
+.technical-record-body [aria-disabled="true"],
+.technical-record-body .is-tentative,
+.technical-record-body .is-missing {
+  color: var(--technical-text-muted);
+  border-color: var(--technical-border);
+  opacity: .72;
+}
+
+.reconstruction-page .runtime-workspace-sidebar {
+  --runtime-sidebar-bg: var(--technical-bg);
+  --runtime-sidebar-surface: var(--technical-surface-elevated);
+  --runtime-sidebar-text-primary: var(--technical-text-primary);
+  --runtime-sidebar-text-secondary: var(--technical-text-secondary);
+  --runtime-sidebar-text-muted: var(--technical-text-muted);
+  --runtime-sidebar-border: var(--technical-border);
+  --runtime-sidebar-accent: var(--technical-accent);
+  background: var(--runtime-sidebar-bg);
+  color: var(--runtime-sidebar-text-primary);
+}
+
+.reconstruction-page .runtime-workspace-sidebar .runtime-workspace-brand,
+.reconstruction-page .runtime-workspace-sidebar .runtime-workspace-brand > span,
+.reconstruction-page .runtime-workspace-sidebar .runtime-workspace-brand strong,
+.reconstruction-page .runtime-workspace-sidebar li a,
+.reconstruction-page .runtime-workspace-sidebar li a strong,
+.reconstruction-page .runtime-workspace-sidebar li.is-locked > div,
+.reconstruction-page .runtime-workspace-sidebar li.is-locked strong,
+.reconstruction-page .runtime-workspace-sidebar .runtime-workspace-boundary,
+.reconstruction-page .runtime-workspace-sidebar .runtime-workspace-boundary strong {
+  color: var(--runtime-sidebar-text-primary);
+}
+
+.reconstruction-page .runtime-workspace-sidebar .runtime-workspace-brand small,
+.reconstruction-page .runtime-workspace-sidebar li a small,
+.reconstruction-page .runtime-workspace-sidebar .runtime-workspace-boundary p {
+  color: var(--runtime-sidebar-text-secondary);
+  opacity: 1;
+}
+
+.reconstruction-page .runtime-workspace-sidebar li a > span,
+.reconstruction-page .runtime-workspace-sidebar li.is-locked span,
+.reconstruction-page .runtime-workspace-sidebar li.is-locked small {
+  color: var(--runtime-sidebar-text-muted);
+  opacity: 1;
+}
+
+.reconstruction-page .runtime-workspace-sidebar li.is-locked {
+  color: var(--runtime-sidebar-text-muted);
+  opacity: 1;
+}
+
+.reconstruction-page .runtime-workspace-sidebar li.is-current a {
+  border-color: var(--runtime-sidebar-accent);
+  background: var(--runtime-sidebar-surface);
+  color: var(--runtime-sidebar-text-primary);
+}
+
+.reconstruction-page .runtime-workspace-sidebar li.is-current a > span,
+.reconstruction-page .runtime-workspace-sidebar li.is-current a small {
+  color: var(--runtime-sidebar-accent);
+}
+
+.reconstruction-page .runtime-workspace-sidebar li.is-complete a > span,
+.reconstruction-page .runtime-workspace-sidebar li.is-complete a small {
+  color: var(--technical-positive);
+}
+
+.reconstruction-page .runtime-workspace-sidebar li a:hover {
+  border-color: var(--runtime-sidebar-border);
+  background: var(--runtime-sidebar-surface);
+  color: var(--runtime-sidebar-text-primary);
+}
+
+.reconstruction-page .runtime-workspace-sidebar li a:active {
+  border-color: var(--runtime-sidebar-accent);
+}
+
+.reconstruction-page .runtime-workspace-sidebar li a:focus-visible {
+  outline: 3px solid var(--runtime-sidebar-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .reconstruction-page .runtime-workspace-sidebar ol {
+    scrollbar-color: var(--runtime-sidebar-border) var(--runtime-sidebar-bg);
+  }
+
+  .reconstruction-page .runtime-workspace-sidebar li a,
+  .reconstruction-page .runtime-workspace-sidebar li.is-locked > div {
+    min-width: 145px;
+  }
+}
+
+@media (max-width: 768px) {
+  [data-w14-view="technical"],
+  .technical-record-body,
+  .technical-record-body .reconstruction-section,
+  .technical-record-body .section-content,
+  .technical-record-body .formation-arc,
+  .technical-record-body .coordinate-card,
+  .technical-record-body .conscious-stage,
+  .technical-record-body .evidence-columns section {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 360px) {
+  .technical-record > summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .technical-record-body .dependency-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .reconstruction-page .runtime-workspace-sidebar {
+    padding-inline: .75rem;
+  }
+}
