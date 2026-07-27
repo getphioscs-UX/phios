@@ -343,6 +343,34 @@ export function renderRealityNavigation(response) {
   setText('#navigationRuntimeEntityId', response.runtimeEntityId);
   setText('#navigationRuntimeEntryId', response.runtimeEntryId);
   setText(
+    '#navigationReadingReference',
+    response?.navigationInput?.readingId ||
+      response?.readingReference?.reading_id
+  );
+  setText(
+    '#navigationVersion',
+    response?.navigationVersion ||
+      response?.navigation?.version ||
+      response?.navigationExecution?.version ||
+      '1'
+  );
+  setText(
+    '#navigationStorageCapability',
+    response?.navigationExecution?.storage_capability?.local_recovery
+      ? 'local_recovery=true · cross_device_recovery=false'
+      : 'not_established'
+  );
+  setText(
+    '#navigationLineage',
+    [
+      response.runtimeEntityId,
+      response.runtimeEntryId,
+      response?.navigationInput?.readingId
+    ].filter(Boolean).join(' → ')
+  );
+  const rawContract = qs('#navigationRawContract');
+  if (rawContract) rawContract.textContent = JSON.stringify(response, null, 2);
+  setText(
     '#navigationCurrentRuntime',
     currentPosition.runtime ||
     navigation.currentRuntime ||

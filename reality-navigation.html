@@ -258,6 +258,27 @@
           </div>
         </header>
 
+        <nav class="navigation-view-switch" aria-label="Navigation view" data-i18n-aria-label="navigation.viewSwitchAria">
+          <button type="button" class="btn is-selected" data-navigation-mode="customer" aria-pressed="true" data-i18n="navigation.customerView">Customer View</button>
+          <button type="button" class="btn" data-navigation-mode="technical" aria-pressed="false" data-i18n="navigation.technicalView">Technical View</button>
+        </nav>
+
+        <section class="navigation-customer-status" aria-labelledby="navigationCustomerStatusTitle">
+          <header>
+            <p data-i18n="navigation.customerStatusEyebrow">Navigation status</p>
+            <h2 id="navigationCustomerStatusTitle" data-i18n="navigation.customerStatusTitle">Your current action</h2>
+          </header>
+          <dl>
+            <div><dt data-i18n="navigation.customerCurrentPath">Current path</dt><dd id="navigationCustomerPath">—</dd></div>
+            <div><dt data-i18n="navigation.customerExecutionStatus">Execution status</dt><dd id="navigationCustomerExecution">—</dd></div>
+            <div><dt data-i18n="navigation.customerRecordProgress">Record progress</dt><dd id="navigationCustomerProgress">—</dd></div>
+            <div><dt data-i18n="navigation.customerNextRecord">Next record</dt><dd id="navigationCustomerNext">—</dd></div>
+            <div><dt data-i18n="navigation.customerReviewNeed">Review needed</dt><dd id="navigationCustomerReview">—</dd></div>
+            <div><dt data-i18n="navigation.customerSaveStatus">Save status</dt><dd id="navigationCustomerSave">—</dd></div>
+          </dl>
+          <p id="navigationDeviceStorageNotice" class="navigation-device-storage" hidden></p>
+        </section>
+
         <div
           class="navigation-loading"
           id="navigationLoadingState"
@@ -429,9 +450,17 @@
 
       <aside
         class="navigation-inspector"
+        data-navigation-technical
+        hidden
         data-i18n-aria-label="navigation.inspector"
         aria-label="Navigation Inspector"
       >
+        <details>
+          <summary>
+            <span data-i18n="navigation.inspector">Navigation Inspector</span>
+            <strong data-i18n="navigation.inspectorCollapsed">Technical metadata · Collapsed</strong>
+          </summary>
+          <div class="navigation-inspector__content">
         <header>
           <p data-i18n="navigation.inspector">
             Navigation Inspector
@@ -456,6 +485,16 @@
           </span>
 
           <strong id="navigationRuntimeEntryId">—</strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.readingReference">Reading Reference</span>
+          <strong id="navigationReadingReference">—</strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.navigationVersion">Navigation Version</span>
+          <strong id="navigationVersion">—</strong>
         </div>
 
         <div>
@@ -507,6 +546,23 @@
             Disabled
           </strong>
         </div>
+
+        <div>
+          <span data-i18n="navigation.storageCapability">Storage Capability</span>
+          <strong id="navigationStorageCapability">—</strong>
+        </div>
+
+        <div>
+          <span data-i18n="navigation.lineage">Lineage</span>
+          <strong id="navigationLineage">—</strong>
+        </div>
+
+        <div class="navigation-inspector__raw">
+          <span data-i18n="navigation.rawContract">Raw Contract</span>
+          <pre id="navigationRawContract">{}</pre>
+        </div>
+          </div>
+        </details>
       </aside>
     </section>
   </main>

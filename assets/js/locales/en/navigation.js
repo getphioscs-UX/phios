@@ -115,6 +115,42 @@ const navigation = Object.freeze({
     inspector:
       'Navigation Inspector',
 
+    inspectorCollapsed:
+      'Technical metadata · Collapsed',
+
+    viewSwitchAria:
+      'Navigation view',
+
+    customerView:
+      'Customer View',
+
+    technicalView:
+      'Technical View',
+
+    customerStatusEyebrow:
+      'Navigation status',
+
+    customerStatusTitle:
+      'Your current action',
+
+    customerCurrentPath:
+      'Current path',
+
+    customerExecutionStatus:
+      'Execution status',
+
+    customerRecordProgress:
+      'Record progress',
+
+    customerNextRecord:
+      'Next record',
+
+    customerReviewNeed:
+      'Review needed',
+
+    customerSaveStatus:
+      'Save status',
+
     transitionStatus:
       'Transition status',
 
@@ -123,6 +159,21 @@ const navigation = Object.freeze({
 
     runtimeEntry:
       'Runtime Entry',
+
+    readingReference:
+      'Reading Reference',
+
+    navigationVersion:
+      'Navigation Version',
+
+    storageCapability:
+      'Storage Capability',
+
+    lineage:
+      'Lineage',
+
+    rawContract:
+      'Raw Contract',
 
     primaryRegion:
       'Primary Runtime Region',
@@ -391,6 +442,19 @@ const navigation = Object.freeze({
     },
 
     execution: {
+      notStarted: 'Not started',
+      noRecords: 'No records yet',
+      recordCount: '{count} records',
+      notScheduled: 'Not scheduled',
+      reviewNeeded: 'Yes',
+      reviewNotNeeded: 'Not yet',
+      deviceStorage: 'Your current records are stored on this device. Cross-device recovery is not yet available.',
+      saveStatus: {
+        notStarted: 'Not started',
+        saved: 'Saved',
+        recording: 'Recording',
+        review: 'Review needed'
+      },
       selectedPath: 'Selected path',
       objective: 'Objective',
       signal: 'Selected signal',

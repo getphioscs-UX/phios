@@ -19,6 +19,57 @@ function stateLabel(state) {
   return label(`state.${state}`, state);
 }
 
+function setText(selector, value) {
+  const node = document.querySelector(selector);
+  if (node) node.textContent = value || '—';
+}
+
+function renderCustomerStatus(response, action) {
+  const state = action?.execution?.state || 'available';
+  const progressValue = action?.progress || {};
+  const hasRecords = Number(progressValue.log_count) > 0;
+  const reviewNeeded = action?.review_gate?.review_payload_ready === true;
+  const hasSavedAction = Boolean(action);
+  const saveKey = reviewNeeded
+    ? 'saveStatus.review'
+    : state === 'active'
+      ? 'saveStatus.recording'
+      : hasSavedAction
+        ? 'saveStatus.saved'
+        : 'saveStatus.notStarted';
+  setText(
+    '#navigationCustomerPath',
+    cleanText(response?.navigation?.selectedPath?.label || action?.path?.path_id) ||
+      label('notStarted', 'Not started')
+  );
+  setText('#navigationCustomerExecution', stateLabel(state));
+  setText(
+    '#navigationCustomerProgress',
+    hasRecords
+      ? label('recordCount', '{count} records').replace('{count}', progressValue.log_count)
+      : label('noRecords', 'No records yet')
+  );
+  setText(
+    '#navigationCustomerNext',
+    cleanText(progressValue.next_record_at) || label('notScheduled', 'Not scheduled')
+  );
+  setText(
+    '#navigationCustomerReview',
+    label(reviewNeeded ? 'reviewNeeded' : 'reviewNotNeeded', reviewNeeded ? 'Yes' : 'Not yet')
+  );
+  setText('#navigationCustomerSave', label(saveKey, 'Not started'));
+  const notice = document.querySelector('#navigationDeviceStorageNotice');
+  if (notice) {
+    notice.hidden = !hasSavedAction;
+    notice.textContent = hasSavedAction
+      ? label(
+          'deviceStorage',
+          'Your current records are stored on this device. Cross-device recovery is not yet available.'
+        )
+      : '';
+  }
+}
+
 function values(form) {
   return Object.fromEntries(new FormData(form).entries());
 }
@@ -187,6 +238,7 @@ export function renderNavigationExecution(response) {
   const root = document.querySelector('[data-navigation-execution]');
   if (!root) return { rendered: false };
   const action = activeNavigationAction(response);
+  renderCustomerStatus(response, action);
   if (!action) {
     root.hidden = true;
     root.replaceChildren();

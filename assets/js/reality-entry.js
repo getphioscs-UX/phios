@@ -1114,7 +1114,10 @@ function bootEntry() {
   entryBooted = true;
   openEntryWorkspace();
 
-  const initial = cleanText(
+  const draft = cleanText(
+    new URLSearchParams(location.search).get('draft')
+  );
+  const initial = draft || cleanText(
     getSession(SESSION.initial) || ''
   );
 

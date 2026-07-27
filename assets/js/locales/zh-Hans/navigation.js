@@ -115,6 +115,42 @@ const navigation = Object.freeze({
     inspector:
       '现实导航检查器',
 
+    inspectorCollapsed:
+      '技术资料 · 默认折叠',
+
+    viewSwitchAria:
+      '现实导航视图',
+
+    customerView:
+      '客户视图',
+
+    technicalView:
+      '技术视图',
+
+    customerStatusEyebrow:
+      '导航状态',
+
+    customerStatusTitle:
+      '当前行动',
+
+    customerCurrentPath:
+      '当前路径',
+
+    customerExecutionStatus:
+      '执行状态',
+
+    customerRecordProgress:
+      '记录进度',
+
+    customerNextRecord:
+      '下一次记录',
+
+    customerReviewNeed:
+      '是否需要审阅',
+
+    customerSaveStatus:
+      '保存状态',
+
     transitionStatus:
       '转变状态',
 
@@ -123,6 +159,21 @@ const navigation = Object.freeze({
 
     runtimeEntry:
       '现实进入记录',
+
+    readingReference:
+      '读取引用',
+
+    navigationVersion:
+      '导航版本',
+
+    storageCapability:
+      '储存能力',
+
+    lineage:
+      '运行谱系',
+
+    rawContract:
+      '原始契约',
 
     primaryRegion:
       '主要现实运行区域',
@@ -391,6 +442,19 @@ const navigation = Object.freeze({
     },
 
     execution: {
+      notStarted: '未开始',
+      noRecords: '尚无记录',
+      recordCount: '已记录 {count} 条',
+      notScheduled: '尚未安排',
+      reviewNeeded: '需要',
+      reviewNotNeeded: '暂不需要',
+      deviceStorage: '当前记录保存在此设备。跨设备恢复尚未开放。',
+      saveStatus: {
+        notStarted: '未开始',
+        saved: '已保存',
+        recording: '正在记录',
+        review: '需要审阅'
+      },
       selectedPath: '已选路径',
       objective: '目标',
       signal: '选择要观察的信号',

@@ -2,12 +2,18 @@ import {
   onLocaleChange,
   t
 } from '../i18n.js';
+import {
+  createEntryDraftUrl,
+  deriveEvidenceLab
+} from '../modules/evidence-boundary-lab.js';
 
 const evidenceCards = Array.from(
   document.querySelectorAll('[data-evidence-title]')
 );
-const evidenceTitle = document.querySelector('#evidence-explanation-title');
-const evidenceCopy = document.querySelector('#evidence-explanation-copy');
+const evidenceReading = document.querySelector('#evidence-reading-summary');
+const evidenceConfidence = document.querySelector('#evidence-confidence');
+const evidenceNavigation = document.querySelector('#evidence-navigation-direction');
+const evidenceUnknowns = document.querySelector('#evidence-unknowns');
 const lightTryForm = document.querySelector('#light-try-form');
 const lightInput = document.querySelector('#light-change');
 const lightError = document.querySelector('#light-try-error');
@@ -20,8 +26,11 @@ const lightCoordinateStatus = document.querySelector('#light-coordinate-status')
 const lightCoordinateContinue = document.querySelector('#light-coordinate-continue');
 const lightCoordinateBack = document.querySelector('#light-coordinate-back');
 const lightCoordinateSummary = document.querySelector('#light-coordinate-summary');
+const lightReset = document.querySelector('#light-reset');
+const lightReroute = document.querySelector('#light-reroute');
+const lightContinue = document.querySelector('#light-continue');
 
-let activeEvidence = null;
+let selectedEvidence = ['meeting', 'approvals', 'notice'];
 let selectedCoordinates = [];
 let coordinateNotice = '';
 
@@ -38,31 +47,46 @@ const COORDINATE_KEYS = Object.freeze({
   unsure: 'unsure'
 });
 
-function renderEvidence(card) {
-  activeEvidence = card || null;
-
-  evidenceCards.forEach(candidate => {
-    candidate.setAttribute(
-      'aria-pressed',
-      String(candidate === activeEvidence)
-    );
+function renderEvidence() {
+  const result = deriveEvidenceLab(selectedEvidence);
+  evidenceCards.forEach(card => {
+    const enabled = result.selected.includes(card.dataset.evidenceId);
+    card.setAttribute('aria-pressed', String(enabled));
+    const toggle = card.querySelector('.evidence-card__toggle');
+    if (toggle) {
+      toggle.textContent = t(
+        enabled ? 'demo.evidence.enabled' : 'demo.evidence.disabled'
+      );
+    }
   });
-
-  if (!evidenceTitle || !evidenceCopy) {
-    return;
+  if (evidenceReading) {
+    evidenceReading.textContent = t(
+      `demo.evidence.dynamic.reading.${result.readingKey}`
+    );
   }
-
-  evidenceTitle.textContent = activeEvidence
-    ? t(activeEvidence.dataset.evidenceTitle)
-    : t('demo.evidence.defaultTitle');
-
-  evidenceCopy.textContent = activeEvidence
-    ? t(activeEvidence.dataset.evidenceExplanation)
-    : t('demo.evidence.defaultCopy');
+  if (evidenceConfidence) {
+    evidenceConfidence.textContent = `${result.confidence}%`;
+  }
+  if (evidenceNavigation) {
+    evidenceNavigation.textContent = t(
+      `demo.evidence.dynamic.navigation.${result.navigationKey}`
+    );
+  }
+  if (evidenceUnknowns) {
+    evidenceUnknowns.textContent = t(
+      `demo.evidence.dynamic.unknown.${result.unknownKey}`
+    );
+  }
 }
 
 evidenceCards.forEach(card => {
-  card.addEventListener('click', () => renderEvidence(card));
+  card.addEventListener('click', () => {
+    const id = card.dataset.evidenceId;
+    selectedEvidence = selectedEvidence.includes(id)
+      ? selectedEvidence.filter(item => item !== id)
+      : [...selectedEvidence, id];
+    renderEvidence();
+  });
 });
 
 function coordinateName(value) {
@@ -207,6 +231,9 @@ lightTryForm?.addEventListener('submit', event => {
   if (lightObserved) {
     lightObserved.textContent = observation;
   }
+  if (lightContinue) {
+    lightContinue.href = createEntryDraftUrl(observation);
+  }
 
   if (lightResult) {
     lightResult.hidden = false;
@@ -214,8 +241,21 @@ lightTryForm?.addEventListener('submit', event => {
   }
 });
 
+lightReset?.addEventListener('click', () => {
+  lightTryForm?.reset();
+  selectedCoordinates = [];
+  if (lightResult) lightResult.hidden = true;
+  if (lightObservationStep) lightObservationStep.hidden = true;
+  if (lightCoordinateStep) lightCoordinateStep.hidden = false;
+  renderLightCoordinates('');
+});
+
+lightReroute?.addEventListener('click', () => {
+  lightTryForm?.requestSubmit();
+});
+
 onLocaleChange(() => {
-  renderEvidence(activeEvidence);
+  renderEvidence();
   renderLightCoordinates();
 
   if (lightError && !lightError.hidden) {
@@ -224,3 +264,4 @@ onLocaleChange(() => {
 });
 
 renderLightCoordinates('');
+renderEvidence();

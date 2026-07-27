@@ -45,7 +45,8 @@ const state = {
   initialized: false,
   removeLocaleListener: null,
   removePathSelectionListener: null,
-  removeExecutionListener: null
+  removeExecutionListener: null,
+  removeViewListener: null
 };
 
 async function runNavigation({
@@ -108,13 +109,39 @@ function bindLanguageUpdates() {
   });
 }
 
+function setNavigationMode(mode = 'customer') {
+  const technical = mode === 'technical';
+  document.documentElement.dataset.navigationView = technical
+    ? 'technical'
+    : 'customer';
+  document.querySelectorAll('[data-navigation-mode]').forEach(button => {
+    const selected = button.dataset.navigationMode === mode;
+    button.classList.toggle('is-selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+  const inspector = document.querySelector('[data-navigation-technical]');
+  if (inspector) inspector.hidden = !technical;
+}
+
+function bindNavigationViewMode() {
+  const listener = event => {
+    const button = event.target.closest('[data-navigation-mode]');
+    if (button) setNavigationMode(button.dataset.navigationMode);
+  };
+  document.addEventListener('click', listener);
+  setNavigationMode('customer');
+  return () => document.removeEventListener('click', listener);
+}
+
 function destroyNavigationPage() {
   state.removeLocaleListener?.();
   state.removePathSelectionListener?.();
   state.removeExecutionListener?.();
+  state.removeViewListener?.();
   state.removeLocaleListener = null;
   state.removePathSelectionListener = null;
   state.removeExecutionListener = null;
+  state.removeViewListener = null;
 }
 
 async function initializeNavigationPage() {
@@ -126,6 +153,7 @@ async function initializeNavigationPage() {
   bindLocaleControls();
   initializeRuntimeWorkspace({ currentStage: 'navigation' });
   bindLanguageUpdates();
+  state.removeViewListener = bindNavigationViewMode();
   state.removePathSelectionListener = bindNavigationPathSelection({
     getResponse: () => state.response,
     onSelectionChange: updatedResponse => {
