@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title data-i18n="externalReaderIntake.metaTitle">External Reader Intake — PHI OS</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/professional-workspace.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
+</head>
+<body class="professional-workspace-page external-reader-intake-page">
+  <a class="phi-skip-link" href="#externalReaderIntakeMain" data-i18n="externalReaderIntake.skip">Skip to intake</a>
+  <header class="professional-workspace-header">
+    <a href="/" class="professional-workspace-brand">Φ <span>PHI OS</span></a>
+    <div class="professional-workspace-language" role="group">
+      <span data-i18n="professionalWorkspace.language">Language</span>
+      <button type="button" data-locale="en">EN</button>
+      <button type="button" data-locale="zh-Hans">中文</button>
+    </div>
+  </header>
+  <main id="externalReaderIntakeMain" class="professional-workspace-shell intake-shell">
+    <header class="professional-workspace-hero intake-hero">
+      <div>
+        <p data-i18n="externalReaderIntake.eyebrow">M4B External Reader Intake</p>
+        <h1 data-i18n="externalReaderIntake.title">Bring an existing chart into professional review.</h1>
+        <p data-i18n="externalReaderIntake.lead">No chart calculation, automatic interpretation or Runtime Evidence write occurs here.</p>
+      </div>
+      <span data-i18n="externalReaderIntake.memoryOnly">Current-page draft only</span>
+    </header>
+    <aside class="intake-notice">
+      <strong data-i18n="externalReaderIntake.noticeTitle">Before you continue</strong>
+      <p data-i18n="externalReaderIntake.noticeCopy">The selected file is previewed only. Nothing is uploaded or saved by this page.</p>
+    </aside>
+    <form id="externalReaderIntakeForm" class="intake-form" novalidate>
+      <section class="intake-section">
+        <h2 data-i18n="externalReaderIntake.readerSection">Reader and service</h2>
+        <div class="intake-grid">
+          <label><span data-i18n="externalReaderIntake.readerType">Reader</span>
+            <select name="reader_type" id="externalReaderType">
+              <option value="human_design" data-i18n="externalReaderIntake.readerHumanDesign">Human Design</option>
+              <option value="bazi" data-i18n="externalReaderIntake.readerBazi">BaZi</option>
+              <option value="ziwei" data-i18n="externalReaderIntake.readerZiwei">Zi Wei</option>
+              <option value="gene_keys" data-i18n="externalReaderIntake.readerGeneKeys">Gene Keys</option>
+              <option value="astrology" data-i18n="externalReaderIntake.readerAstrology">Astrology</option>
+            </select>
+          </label>
+          <label><span data-i18n="externalReaderIntake.service">Service</span>
+            <select name="service_id"><option value="runtime_interpretation" data-i18n="externalReaderIntake.serviceRuntime">Runtime interpretation</option><option value="foundation_report" data-i18n="externalReaderIntake.serviceFoundation">Foundation report</option></select>
+          </label>
+          <label><span data-i18n="externalReaderIntake.displayName">Display name</span><input name="display_name" required></label>
+        </div>
+        <p id="externalReaderAvailability" class="intake-status" role="status"></p>
+      </section>
+      <section class="intake-section">
+        <h2 data-i18n="externalReaderIntake.birthSection">Shared Birth Data</h2>
+        <div class="intake-grid">
+          <label><span data-i18n="externalReaderIntake.birthDate">Birth date</span><input type="date" name="birth_date"></label>
+          <label><span data-i18n="externalReaderIntake.birthTime">Birth time</span><input type="time" name="birth_time"></label>
+          <label><span data-i18n="externalReaderIntake.birthPlace">Birth place</span><input name="birth_place"></label>
+          <label><span data-i18n="externalReaderIntake.birthTimezone">Timezone</span><input name="birth_timezone" placeholder="Asia/Kuala_Lumpur"></label>
+          <label><span data-i18n="externalReaderIntake.birthAccuracy">Accuracy</span><select name="birth_time_accuracy"><option value="exact" data-i18n="externalReaderIntake.accuracyExact">Exact</option><option value="documented" data-i18n="externalReaderIntake.accuracyDocumented">Documented</option><option value="approximate" data-i18n="externalReaderIntake.accuracyApproximate">Approximate</option><option value="unknown" data-i18n="externalReaderIntake.accuracyUnknown">Unknown</option><option value="rectified" data-i18n="externalReaderIntake.accuracyRectified">Rectified</option></select></label>
+        </div>
+      </section>
+      <section class="intake-section">
+        <h2 data-i18n="externalReaderIntake.chartSection">Existing chart or known fields</h2>
+        <div class="intake-grid">
+          <label><span data-i18n="externalReaderIntake.chartFile">Chart file</span><input type="file" name="chart_file" id="externalReaderChartFile" accept=".png,.jpg,.jpeg,.webp,.pdf,image/png,image/jpeg,image/webp,application/pdf"></label>
+          <label><span data-i18n="externalReaderIntake.sourcePlatform">Source platform</span><input name="source_platform"></label>
+          <label><span data-i18n="externalReaderIntake.schoolLineage">School or lineage</span><input name="school_or_lineage"></label>
+        </div>
+        <div id="externalReaderFilePreview" class="file-preview" aria-live="polite"></div>
+        <fieldset id="humanDesignFields"><legend data-i18n="externalReaderIntake.humanDesignFields">Known Human Design fields</legend><div class="intake-grid">
+          <label><span data-i18n="externalReaderIntake.hdType">Type</span><input name="known_type"></label>
+          <label><span data-i18n="externalReaderIntake.hdAuthority">Authority</span><input name="known_authority"></label>
+          <label><span data-i18n="externalReaderIntake.hdProfile">Profile</span><input name="known_profile"></label>
+          <label><span data-i18n="externalReaderIntake.hdDefinition">Definition</span><input name="known_definition"></label>
+        </div></fieldset>
+        <fieldset id="genericReaderFields" hidden><legend data-i18n="externalReaderIntake.genericFields">Known chart fields</legend><textarea name="known_generic_fields" rows="5" placeholder="Field: value"></textarea></fieldset>
+      </section>
+      <section class="intake-section">
+        <h2 data-i18n="externalReaderIntake.questionSection">Reality question and retention</h2>
+        <label><span data-i18n="externalReaderIntake.realityQuestion">Current Reality question</span><textarea name="current_reality_question" rows="5" required></textarea></label>
+        <label><span data-i18n="externalReaderIntake.retentionChoice">Retention</span><select name="retention_choice"><option value="service_only" data-i18n="externalReaderIntake.retentionService">This service only</option><option value="future_professional_sessions" data-i18n="externalReaderIntake.retentionFuture">Future sessions</option><option value="delete_after_service" data-i18n="externalReaderIntake.retentionDelete">Delete after service</option></select></label>
+      </section>
+      <section class="intake-section">
+        <h2 data-i18n="externalReaderIntake.consentSection">Confirmation and boundary</h2>
+        <div class="consent-list">
+          <label><input type="checkbox" name="data_submission_confirmed" required><span data-i18n="externalReaderIntake.consentData">I voluntarily provide these data.</span></label>
+          <label><input type="checkbox" name="interpretation_boundary_acknowledged" required><span data-i18n="externalReaderIntake.consentBoundary">External Readers are interpretive perspectives, not evidence or diagnosis.</span></label>
+          <label><input type="checkbox" name="professional_access_confirmed" required><span data-i18n="externalReaderIntake.consentProfessional">The assigned professional may review this material.</span></label>
+        </div>
+      </section>
+      <div class="intake-actions"><button type="reset" data-i18n="externalReaderIntake.reset">Clear</button><button type="submit" data-i18n="externalReaderIntake.prepareHandoff">Prepare handoff</button></div>
+      <p id="externalReaderIntakeError" role="alert" hidden></p>
+    </form>
+    <section id="externalReaderHandoff" class="intake-handoff" hidden></section>
+    <footer class="professional-workspace-boundary"><strong data-i18n="externalReaderIntake.footerBoundary">No chart or interpretation becomes Runtime Evidence.</strong><p data-i18n="externalReaderIntake.footerCopy">Professional review remains required.</p></footer>
+  </main>
+  <script type="module" src="/assets/js/pages/external-reader-intake.js"></script>
+</body>
+</html>

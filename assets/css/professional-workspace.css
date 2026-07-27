@@ -486,6 +486,53 @@ body.professional-workspace-page {
   overflow-wrap: anywhere;
 }
 
+.intake-shell { max-width: 1120px; }
+.intake-hero h1 { max-width: 16ch; font-size: clamp(2.8rem, 6vw, 5.6rem); }
+.intake-notice, .intake-section, .intake-handoff {
+  margin: 1.25rem 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid var(--professional-line);
+  border-radius: 1.1rem;
+  background: var(--professional-surface);
+}
+.intake-notice { border-color: #a98b58; background: #fff8e9; }
+.intake-notice p { color: var(--professional-muted); line-height: 1.6; }
+.intake-section h2 { margin-top: 0; font-family: Newsreader, Georgia, serif; font-size: 2rem; font-weight: 500; }
+.intake-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.intake-form label { display: grid; gap: .45rem; min-width: 0; font-weight: 600; }
+.intake-form input, .intake-form select, .intake-form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: .75rem;
+  border: 1px solid #918b80;
+  border-radius: .65rem;
+  background: #fff;
+  color: var(--professional-ink);
+  font: inherit;
+  font-weight: 400;
+}
+.intake-form textarea { resize: vertical; line-height: 1.55; }
+.intake-form input:focus-visible, .intake-form select:focus-visible,
+.intake-form textarea:focus-visible, .intake-actions button:focus-visible {
+  outline: 3px solid #1c68b3;
+  outline-offset: 3px;
+}
+.intake-status, .file-preview, .intake-form fieldset {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--professional-line);
+  border-radius: .8rem;
+  color: var(--professional-muted);
+}
+.intake-form fieldset[hidden], .intake-handoff[hidden] { display: none; }
+.consent-list { display: grid; gap: .75rem; }
+.consent-list label { grid-template-columns: 1.5rem minmax(0, 1fr); padding: .9rem; border: 1px solid var(--professional-line); border-radius: .7rem; font-weight: 400; }
+.consent-list input { width: 1.25rem; min-height: 1.25rem; }
+.intake-actions { display: flex; justify-content: flex-end; gap: .75rem; }
+.intake-actions button { min-height: 48px; padding: .75rem 1rem; border: 1px solid var(--professional-accent); border-radius: 999px; background: var(--professional-accent); color: #fff; cursor: pointer; }
+.intake-handoff { border-color: #6c896c; background: #f7fbf5; }
+.intake-handoff p, .intake-handoff li { overflow-wrap: anywhere; line-height: 1.6; }
+
 @media (max-width: 768px) {
   .professional-workspace-hero {
     display: block;
@@ -507,6 +554,8 @@ body.professional-workspace-page {
   .professional-reader-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .intake-grid { grid-template-columns: 1fr; }
 
   .professional-runtime-external {
     grid-column: auto;
@@ -552,4 +601,6 @@ body.professional-workspace-page {
   .professional-reader-grid article header {
     flex-direction: column;
   }
+
+  .intake-actions { align-items: stretch; flex-direction: column; }
 }

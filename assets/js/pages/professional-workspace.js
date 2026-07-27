@@ -363,7 +363,10 @@ function renderExternalReaders() {
         <p>${escapeHTML(t('professionalWorkspace.readerRegistry'))}</p>
         <h2>${escapeHTML(t('professionalWorkspace.readerWorkspace'))}</h2>
       </div>
-      <strong>${escapeHTML(t('professionalWorkspace.interpretationOnly'))}</strong>
+      <div>
+        <strong>${escapeHTML(t('professionalWorkspace.interpretationOnly'))}</strong>
+        <a href="/external-reader-intake">${escapeHTML(t('professionalWorkspace.openReaderIntake'))}</a>
+      </div>
     </header>
     <div class="professional-reader-grid">
       ${readers.map(reader => `

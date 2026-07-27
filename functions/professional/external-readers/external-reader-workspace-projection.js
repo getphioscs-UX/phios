@@ -47,6 +47,12 @@ export function buildExternalReaderWorkspaceProjection(
       input.interpretations,
       'interpretations'
     ),
+    intakes: workspaceRecords(workspace, input.intakes, 'intakes'),
+    intake_handoffs: workspaceRecords(
+      workspace,
+      input.intake_handoffs,
+      'intake_handoffs'
+    ),
     correspondences: workspaceRecords(
       workspace,
       input.correspondences,
