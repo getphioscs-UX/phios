@@ -345,7 +345,18 @@ const professional = Object.freeze({
       human_design_consultation: 'Human Design Consultation',
       runtime_human_design_consultation: 'Runtime + Human Design Consultation',
       navigation_follow_up: 'Navigation Follow-up', long_term_review: 'Long-term Review',
-      integrated_review: 'Integrated Review'
+      integrated_review: 'Integrated Review',
+      financial_discovery_meeting: 'Financial Discovery Meeting',
+      financial_stamina_review: 'Financial Stamina Review',
+      cash_flow_consultation: 'Cash Flow Consultation',
+      insurance_review: 'Insurance Review',
+      investment_review: 'Investment Review',
+      property_exposure_review: 'Property Exposure Review',
+      retirement_planning: 'Retirement Planning',
+      education_planning: 'Education Planning',
+      estate_planning_preparation: 'Estate Planning Preparation',
+      financial_navigation_follow_up: 'Financial Navigation Follow-up',
+      annual_review: 'Annual Review'
     },
     statuses: {
       requested: 'Requested', pending_payment: 'Pending payment', confirmed: 'Confirmed',
@@ -363,12 +374,37 @@ const professional = Object.freeze({
       consent_completed: 'Consent completed', birth_data_complete: 'Birth data complete',
       birth_time_reliability_recorded: 'Birth-time reliability recorded', chart_uploaded: 'Chart uploaded',
       chart_verified: 'Chart verified', reality_question_submitted: 'Reality question submitted',
-      report_type_confirmed: 'Report type confirmed', professional_assigned: 'Professional assigned'
+      report_type_confirmed: 'Report type confirmed', professional_assigned: 'Professional assigned',
+      household_scope_confirmed: 'Household scope confirmed',
+      objectives_submitted: 'Objectives submitted',
+      income_data_complete: 'Income data complete',
+      expense_data_complete: 'Expense data complete',
+      assets_submitted: 'Assets submitted',
+      liabilities_submitted: 'Liabilities submitted',
+      insurance_documents_submitted: 'Insurance documents submitted',
+      investment_statements_submitted: 'Investment statements submitted',
+      property_information_submitted: 'Property information submitted',
+      tax_information_submitted: 'Tax information submitted',
+      missing_evidence_identified: 'Missing evidence identified'
     },
     reminders: {
       confirmation: 'Booking confirmation', appointment: 'Appointment reminder',
       missing_intake: 'Missing intake', missing_consent: 'Missing consent', missing_chart: 'Missing chart',
       report_ready: 'Report ready', follow_up: 'Follow-up'
+    },
+    financialMaterialsTitle: 'Prepare through the secure upload portal',
+    secureUploadOnly: 'Do not send sensitive financial files by ordinary email.',
+    materials: {
+      recent_income_evidence: 'Recent income evidence',
+      recent_bank_or_cash_balance: 'Recent bank or cash balance information',
+      loan_statement: 'Loan statement',
+      insurance_policy_summary: 'Insurance policy summary',
+      investment_statement: 'Investment statement',
+      property_and_loan_information: 'Property and loan information',
+      tax_information: 'Tax information',
+      retirement_account_information: 'Retirement account information',
+      education_planning_information: 'Education planning information',
+      will_or_nomination_overview: 'Will or nomination overview'
     }
   },
   financialPublic: {

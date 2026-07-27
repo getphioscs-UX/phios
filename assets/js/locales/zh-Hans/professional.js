@@ -345,7 +345,18 @@ const professional = Object.freeze({
       human_design_consultation: '人类图咨询',
       runtime_human_design_consultation: '现实运行与人类图咨询',
       navigation_follow_up: '现实导航跟进', long_term_review: '长期现实审阅',
-      integrated_review: '综合现实审阅'
+      integrated_review: '综合现实审阅',
+      financial_discovery_meeting: '财务探索会议',
+      financial_stamina_review: '财务承受力审阅',
+      cash_flow_consultation: '现金流咨询',
+      insurance_review: '保险保障审阅',
+      investment_review: '投资组合审阅',
+      property_exposure_review: '物业风险暴露审阅',
+      retirement_planning: '退休规划',
+      education_planning: '教育规划',
+      estate_planning_preparation: '遗产规划准备',
+      financial_navigation_follow_up: '财务导航跟进',
+      annual_review: '年度审阅'
     },
     statuses: {
       requested: '已提出预约', pending_payment: '等待付款', confirmed: '预约已确认',
@@ -363,12 +374,37 @@ const professional = Object.freeze({
       consent_completed: '授权已经完成', birth_data_complete: '出生资料完整',
       birth_time_reliability_recorded: '出生时间可靠度已记录', chart_uploaded: '图表已经上传',
       chart_verified: '图表已经核实', reality_question_submitted: '现实问题已经提交',
-      report_type_confirmed: '报告类型已经确认', professional_assigned: '专业人士已经委派'
+      report_type_confirmed: '报告类型已经确认', professional_assigned: '专业人士已经委派',
+      household_scope_confirmed: '家庭资料范围已经确认',
+      objectives_submitted: '财务目标已经提交',
+      income_data_complete: '收入资料完整',
+      expense_data_complete: '支出资料完整',
+      assets_submitted: '资产资料已经提交',
+      liabilities_submitted: '负债资料已经提交',
+      insurance_documents_submitted: '保险文件已经提交',
+      investment_statements_submitted: '投资结单已经提交',
+      property_information_submitted: '物业资料已经提交',
+      tax_information_submitted: '税务资料已经提交',
+      missing_evidence_identified: '缺失证据已经识别'
     },
     reminders: {
       confirmation: '预约确认', appointment: '预约提醒',
       missing_intake: '尚未完成资料填写', missing_consent: '尚未完成授权', missing_chart: '尚未提供图表',
       report_ready: '报告已经完成', follow_up: '后续跟进'
+    },
+    financialMaterialsTitle: '请通过安全上传入口准备资料',
+    secureUploadOnly: '请勿通过普通电子邮件发送敏感财务文件。',
+    materials: {
+      recent_income_evidence: '最近收入证明',
+      recent_bank_or_cash_balance: '最近银行或现金余额资料',
+      loan_statement: '贷款结单',
+      insurance_policy_summary: '保险保单摘要',
+      investment_statement: '投资结单',
+      property_and_loan_information: '物业与贷款资料',
+      tax_information: '税务资料',
+      retirement_account_information: '退休账户资料',
+      education_planning_information: '教育规划资料',
+      will_or_nomination_overview: '遗嘱或提名概况'
     }
   },
   financialPublic: {

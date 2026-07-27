@@ -38,7 +38,7 @@ function render() {
   ]);
   const messages = Array.isArray(payload.notifications) ? payload.notifications : [];
   document.querySelector('#appointmentNotifications').innerHTML = messages.length
-    ? `<ol class="appointment-message-list">${messages.map(item => `<li><strong>${esc(t(`professionalAppointments.reminders.${item.reminder_type || 'confirmation'}`))}</strong><p>${esc(localized(item.message) || item.scheduled_for || '')}</p><small>${esc(item.delivery_status || 'draft')}</small></li>`).join('')}</ol>`
+    ? `<ol class="appointment-message-list">${messages.map(item => `<li><strong>${esc(localized(item.subject) || t(`professionalAppointments.reminders.${item.reminder_type || 'confirmation'}`))}</strong><p>${esc(localized(item.message) || localized(item.introduction) || item.scheduled_for || '')}</p>${Array.isArray(item.requested_materials) ? `<h3>${esc(t('professionalAppointments.financialMaterialsTitle'))}</h3><ul>${item.requested_materials.map(material => `<li>${esc(t(`professionalAppointments.materials.${material}`))}</li>`).join('')}</ul><p class="appointment-secure-upload">${esc(localized(item.secure_upload_notice) || t('professionalAppointments.secureUploadOnly'))}</p>` : ''}<small>${esc(item.delivery_status || 'draft')}</small></li>`).join('')}</ol>`
     : `<p>${esc(t('professionalAppointments.noMessages'))}</p>`;
 }
 
