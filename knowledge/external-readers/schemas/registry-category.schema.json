@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/registry-category.v1.json",
+  "title": "PHI OS External Reader Registry Category",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reader_type", "categories"],
+  "properties": {
+    "reader_type": {"enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]},
+    "categories": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    }
+  }
+}

@@ -212,6 +212,52 @@ const professional = Object.freeze({
     confidence: 'Confidence', sourceReference: 'Source reference', correspondence: 'Correspondence status',
     noHistory: 'No authorised version history is available.', boundary: 'Interpretation Boundary',
     confidentiality: 'Confidentiality Notice'
+  },
+  professionalAppointments: {
+    metaTitle: 'Appointments and Payments — PHI OS', skip: 'Skip to appointment',
+    navTitle: 'Appointments and Payments', eyebrow: 'M4B Appointments and Payments',
+    title: 'Prepare the service before the appointment begins.',
+    lead: 'Booking, payment status, consent and required materials remain separate and visible.',
+    unavailableTitle: 'No authorised appointment is loaded',
+    unavailableCopy: 'This page does not create a booking, charge a payment method or send a message automatically.',
+    overview: 'Overview', precheck: 'Pre-appointment check', payment: 'Payment record', notifications: 'Messages',
+    appointmentId: 'Appointment ID', professional: 'Professional', consent: 'Consent reference',
+    readiness: 'Appointment readiness', ready: 'Ready', needsAttention: 'Needs attention',
+    service: 'Service', currency: 'Currency', amount: 'Amount', tax: 'Tax', discount: 'Discount',
+    total: 'Total', paymentStatus: 'Payment status', refundStatus: 'Refund status', invoiceId: 'Invoice ID',
+    noMessages: 'No confirmation or reminder is available.',
+    boundaryTitle: 'Professional boundary',
+    boundary: 'An appointment or payment does not turn interpretation into Runtime Evidence and does not authorise work outside the agreed service and consent scope.',
+    services: {
+      professional_runtime_consultation: 'Professional Runtime Consultation',
+      human_design_consultation: 'Human Design Consultation',
+      runtime_human_design_consultation: 'Runtime + Human Design Consultation',
+      navigation_follow_up: 'Navigation Follow-up', long_term_review: 'Long-term Review',
+      integrated_review: 'Integrated Review'
+    },
+    statuses: {
+      requested: 'Requested', pending_payment: 'Pending payment', confirmed: 'Confirmed',
+      reschedule_requested: 'Reschedule requested', cancelled: 'Cancelled', completed: 'Completed', no_show: 'No-show'
+    },
+    paymentStatuses: {
+      not_required: 'Not required', pending: 'Pending', authorised: 'Authorised',
+      paid: 'Paid', failed: 'Failed', cancelled: 'Cancelled'
+    },
+    refundStatuses: {
+      not_requested: 'Not requested', requested: 'Requested', processing: 'Processing',
+      partially_refunded: 'Partially refunded', refunded: 'Refunded', declined: 'Declined'
+    },
+    checks: {
+      consent_completed: 'Consent completed', birth_data_complete: 'Birth data complete',
+      birth_time_reliability_recorded: 'Birth-time reliability recorded', chart_uploaded: 'Chart uploaded',
+      chart_verified: 'Chart verified', reality_question_submitted: 'Reality question submitted',
+      report_type_confirmed: 'Report type confirmed', professional_assigned: 'Professional assigned'
+    },
+    reminders: {
+      confirmation: 'Booking confirmation', appointment: 'Appointment reminder',
+      missing_intake: 'Missing intake', missing_consent: 'Missing consent', missing_chart: 'Missing chart',
+      report_ready: 'Report ready', follow_up: 'Follow-up'
+    }
   }
 });
 

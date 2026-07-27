@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/source-label.v1.json",
+  "title": "PHI OS External Reader Source Label",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_label", "source_reference_id"],
+  "properties": {
+    "source_label": {
+      "enum": [
+        "user_provided",
+        "uploaded_chart",
+        "uploaded_external_chart",
+        "manually_entered_chart_data",
+        "phi_os_generated",
+        "third_party_api",
+        "registry_source",
+        "rule_inference",
+        "professional_interpretation",
+        "ai_draft",
+        "ai_assisted_draft",
+        "client_confirmed_correspondence",
+        "professionally_supported_correspondence",
+        "unverified_correspondence"
+      ]
+    },
+    "source_reference_id": {"type": "string", "minLength": 1},
+    "source_version": {"type": ["string", "null"]},
+    "created_by": {"type": ["string", "null"]},
+    "created_at": {"type": ["string", "null"], "format": "date-time"},
+    "verified_by": {"type": ["string", "null"]},
+    "verified_at": {"type": ["string", "null"], "format": "date-time"},
+    "display_label": {
+      "type": "object",
+      "properties": {
+        "en": {"type": "string", "minLength": 1},
+        "zh-Hans": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

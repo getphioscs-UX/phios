@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/external-readers/registry-entry.v1.json",
+  "title": "PHI OS Bilingual External Reader Registry Entry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "registry_id",
+    "reader_type",
+    "category",
+    "element_key",
+    "canonical_name",
+    "localized_names",
+    "english_source",
+    "chinese_source",
+    "source_concept",
+    "runtime_language",
+    "professional_notes",
+    "boundary",
+    "runtime_domains",
+    "version"
+  ],
+  "properties": {
+    "registry_id": {"type": "string", "minLength": 1},
+    "reader_type": {
+      "enum": ["human_design", "bazi", "ziwei", "gene_keys", "astrology"]
+    },
+    "category": {"type": "string", "minLength": 1},
+    "element_key": {"type": "string", "minLength": 1},
+    "canonical_name": {"type": "string", "minLength": 1},
+    "localized_names": {"$ref": "#/$defs/localizedText"},
+    "english_source": {"$ref": "#/$defs/sourceLocation"},
+    "chinese_source": {"$ref": "#/$defs/sourceLocation"},
+    "source_concept": {"$ref": "#/$defs/localizedText"},
+    "runtime_language": {"$ref": "#/$defs/localizedText"},
+    "professional_notes": {"$ref": "#/$defs/localizedText"},
+    "boundary": {"$ref": "#/$defs/localizedText"},
+    "runtime_domains": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "interpretation.schema.json#/$defs/runtimeDomain"}
+    },
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"}
+  },
+  "$defs": {
+    "localizedText": {
+      "type": "object",
+      "required": ["en", "zh_Hans"],
+      "properties": {
+        "en": {"type": "string", "minLength": 1},
+        "zh_Hans": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "sourceLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["workbook", "sheet", "range"],
+      "properties": {
+        "workbook": {"type": "string", "minLength": 1},
+        "sheet": {"type": "string", "minLength": 1},
+        "range": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

@@ -212,6 +212,52 @@ const professional = Object.freeze({
     confidence: '置信状态', sourceReference: '来源记录', correspondence: '对应关系状态',
     noHistory: '当前没有已授权的版本历史。', boundary: '解释边界',
     confidentiality: '保密声明'
+  },
+  professionalAppointments: {
+    metaTitle: '预约与付款 — PHI OS', skip: '跳至预约资料',
+    navTitle: '预约与付款', eyebrow: 'M4B 预约与付款',
+    title: '在预约开始以前，让服务所需资料准备完整。',
+    lead: '预约、付款状态、授权与所需材料各自记录，并保持清楚可见。',
+    unavailableTitle: '当前没有已授权的预约',
+    unavailableCopy: '本页面不会自动建立预约、扣款或发送信息。',
+    overview: '预约概览', precheck: '预约前检查', payment: '付款记录', notifications: '确认与提醒',
+    appointmentId: '预约编号', professional: '专业人士', consent: '授权编号',
+    readiness: '预约准备状态', ready: '已经就绪', needsAttention: '仍需处理',
+    service: '服务', currency: '币种', amount: '金额', tax: '税项', discount: '折扣',
+    total: '总额', paymentStatus: '付款状态', refundStatus: '退款状态', invoiceId: '发票编号',
+    noMessages: '当前没有确认信息或提醒。',
+    boundaryTitle: '专业服务边界',
+    boundary: '预约或付款不会把解释转化为现实证据，也不会授权专业人士执行约定服务与授权范围以外的工作。',
+    services: {
+      professional_runtime_consultation: '专业现实运行咨询',
+      human_design_consultation: '人类图咨询',
+      runtime_human_design_consultation: '现实运行与人类图咨询',
+      navigation_follow_up: '现实导航跟进', long_term_review: '长期现实审阅',
+      integrated_review: '综合现实审阅'
+    },
+    statuses: {
+      requested: '已提出预约', pending_payment: '等待付款', confirmed: '预约已确认',
+      reschedule_requested: '已申请改期', cancelled: '已经取消', completed: '已经完成', no_show: '未出席'
+    },
+    paymentStatuses: {
+      not_required: '无需付款', pending: '等待付款', authorised: '已经授权',
+      paid: '已经付款', failed: '付款失败', cancelled: '已经取消'
+    },
+    refundStatuses: {
+      not_requested: '未申请退款', requested: '已申请退款', processing: '退款处理中',
+      partially_refunded: '部分退款', refunded: '已经退款', declined: '退款申请未通过'
+    },
+    checks: {
+      consent_completed: '授权已经完成', birth_data_complete: '出生资料完整',
+      birth_time_reliability_recorded: '出生时间可靠度已记录', chart_uploaded: '图表已经上传',
+      chart_verified: '图表已经核实', reality_question_submitted: '现实问题已经提交',
+      report_type_confirmed: '报告类型已经确认', professional_assigned: '专业人士已经委派'
+    },
+    reminders: {
+      confirmation: '预约确认', appointment: '预约提醒',
+      missing_intake: '尚未完成资料填写', missing_consent: '尚未完成授权', missing_chart: '尚未提供图表',
+      report_ready: '报告已经完成', follow_up: '后续跟进'
+    }
   }
 });
 

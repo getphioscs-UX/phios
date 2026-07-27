@@ -570,6 +570,21 @@ body.professional-workspace-page {
 .report-source-list { display: grid; gap: .8rem; }
 .report-boundaries { margin-top: 2rem; padding: 1rem; border: 1px solid #a98b58; border-radius: .8rem; background: #fff8e9; }
 .report-boundaries p { line-height: 1.65; }
+.appointment-shell { max-width: 1120px; }
+.professional-appointment { margin-top: 2rem; padding: clamp(1rem, 4vw, 3rem); border: 1px solid var(--professional-line); border-radius: 1.25rem; background: #fff; }
+.appointment-summary { display: flex; justify-content: space-between; gap: 1rem; }
+.appointment-summary h2 { margin: .25rem 0; font-family: Newsreader, Georgia, serif; font-size: clamp(1.8rem, 4vw, 3.4rem); overflow-wrap: anywhere; }
+.appointment-summary p { color: var(--professional-muted); }
+.appointment-detail-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.appointment-detail-list div { min-width: 0; padding: .9rem; border: 1px solid var(--professional-line); border-radius: .75rem; }
+.appointment-detail-list dt { color: var(--professional-muted); font-size: .8rem; }
+.appointment-detail-list dd { margin: .25rem 0 0; overflow-wrap: anywhere; }
+.appointment-check-list, .appointment-message-list { display: grid; gap: .75rem; padding: 0; list-style: none; }
+.appointment-check-list li, .appointment-message-list li { padding: 1rem; border: 1px solid var(--professional-line); border-radius: .75rem; }
+.appointment-check-list li { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); align-items: center; }
+.appointment-check-list li[data-complete="true"] { border-color: #6c896c; background: #f7fbf5; }
+.appointment-boundary { margin-top: 2rem; padding: 1rem; border: 1px solid #a98b58; border-radius: .8rem; background: #fff8e9; }
+.appointment-boundary p { line-height: 1.65; }
 
 @media (max-width: 768px) {
   .professional-workspace-hero {
@@ -596,6 +611,7 @@ body.professional-workspace-page {
   .intake-grid { grid-template-columns: 1fr; }
   .consent-scope-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .report-metadata, .report-source-list dl { grid-template-columns: 1fr; }
+  .appointment-detail-list { grid-template-columns: 1fr; }
 
   .professional-runtime-external {
     grid-column: auto;
@@ -645,6 +661,7 @@ body.professional-workspace-page {
   .intake-actions { align-items: stretch; flex-direction: column; }
   .consent-scope-grid { grid-template-columns: 1fr; }
   .report-document-header, .report-hero { flex-direction: column; }
+  .appointment-summary { flex-direction: column; }
 }
 
 @media print {

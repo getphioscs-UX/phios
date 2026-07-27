@@ -1,0 +1,25 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="professionalAppointments.metaTitle">Appointments and Payments — PHI OS</title>
+<link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/css/design/foundation.css"><link rel="stylesheet" href="/assets/css/design/typography.css"><link rel="stylesheet" href="/assets/css/design/components.css"><link rel="stylesheet" href="/assets/css/professional-workspace.css"><link rel="stylesheet" href="/assets/css/i18n.css">
+</head><body class="professional-workspace-page appointment-page">
+<a class="phi-skip-link" href="#appointmentMain" data-i18n="professionalAppointments.skip">Skip to appointment</a>
+<header class="professional-workspace-header"><a href="/" class="professional-workspace-brand">Φ <span>PHI OS</span></a><div class="professional-workspace-language"><button type="button" data-locale="en">EN</button><button type="button" data-locale="zh-Hans">中文</button></div></header>
+<main id="appointmentMain" class="professional-workspace-shell appointment-shell">
+<header class="professional-workspace-hero"><div><p data-i18n="professionalAppointments.eyebrow">M4B Appointments and Payments</p><h1 data-i18n="professionalAppointments.title">Prepare the service before the appointment begins.</h1><p data-i18n="professionalAppointments.lead">Booking, payment status, consent and required materials remain separate and visible.</p></div></header>
+<aside id="appointmentUnavailable" class="professional-workspace-unavailable"><strong data-i18n="professionalAppointments.unavailableTitle">No authorised appointment is loaded</strong><p data-i18n="professionalAppointments.unavailableCopy">This page does not create a booking, charge a payment method or send a message automatically.</p></aside>
+<article id="professionalAppointment" class="professional-appointment" hidden>
+  <header class="appointment-summary"><div><p id="appointmentService"></p><h2 id="appointmentTime"></h2><p id="appointmentMethod"></p></div><strong id="appointmentStatus"></strong></header>
+  <nav class="report-view-tabs" aria-label="Appointment views">
+    <button type="button" data-appointment-view="overview" aria-pressed="true" data-i18n="professionalAppointments.overview">Overview</button>
+    <button type="button" data-appointment-view="precheck" aria-pressed="false" data-i18n="professionalAppointments.precheck">Pre-appointment check</button>
+    <button type="button" data-appointment-view="payment" aria-pressed="false" data-i18n="professionalAppointments.payment">Payment record</button>
+    <button type="button" data-appointment-view="notifications" aria-pressed="false" data-i18n="professionalAppointments.notifications">Messages</button>
+  </nav>
+  <section id="appointmentOverview" data-appointment-panel="overview"></section>
+  <section id="appointmentPrecheck" data-appointment-panel="precheck" hidden></section>
+  <section id="appointmentPayment" data-appointment-panel="payment" hidden></section>
+  <section id="appointmentNotifications" data-appointment-panel="notifications" hidden></section>
+  <footer class="appointment-boundary"><strong data-i18n="professionalAppointments.boundaryTitle">Professional boundary</strong><p data-i18n="professionalAppointments.boundary">An appointment or payment does not turn interpretation into Runtime Evidence and does not authorise work outside the agreed service and consent scope.</p></footer>
+</article>
+</main><script type="module" src="/assets/js/pages/professional-appointments.js"></script></body></html>
