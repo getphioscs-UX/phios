@@ -31,6 +31,22 @@ const RESOURCE_CAPABILITY_MAP = Object.freeze({
   previous_reports: 'view_previous_reports'
 });
 
+const FINANCIAL_CAPABILITY_MAP = Object.freeze({
+  income: 'view_income',
+  expenses: 'view_expenses',
+  bank_balances: 'view_bank_cash',
+  investments: 'view_investments',
+  properties: 'view_properties',
+  liabilities: 'view_liabilities',
+  insurance: 'view_insurance',
+  tax_information: 'view_tax',
+  retirement_information: 'view_retirement',
+  education_information: 'view_education',
+  estate_information: 'view_estate',
+  uploaded_documents: 'view_financial_documents',
+  previous_financial_reports: 'view_previous_financial_reports'
+});
+
 function cleanText(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -53,6 +69,17 @@ function consentCapabilities(consent) {
   const capabilities = { ...disabledCapabilities() };
   for (const scope of consent.resource_scopes || []) {
     const key = RESOURCE_CAPABILITY_MAP[scope];
+    if (key) capabilities[key] = true;
+  }
+  return Object.freeze(capabilities);
+}
+
+function financialCapabilities(consent) {
+  const capabilities = Object.fromEntries(
+    Object.values(FINANCIAL_CAPABILITY_MAP).map(key => [key, false])
+  );
+  for (const scope of consent.financial_data_scopes || []) {
+    const key = FINANCIAL_CAPABILITY_MAP[scope];
     if (key) capabilities[key] = true;
   }
   return Object.freeze(capabilities);
@@ -89,6 +116,8 @@ export function createProfessionalWorkspace(input = {}) {
     current_runtime_id: cleanText(input.current_runtime_id) || null,
     status,
     capabilities: disabledCapabilities(),
+    financial_capabilities: financialCapabilities({}),
+    view_financial_reality: false,
     consent_validated: false,
     runtime_write_allowed: false,
     external_reader_to_runtime_evidence_allowed: false,
@@ -118,6 +147,9 @@ export function activateProfessionalWorkspace(
     consent_id: consent.consent_id,
     status: 'awaiting_materials',
     capabilities: consentCapabilities(consent),
+    financial_capabilities: financialCapabilities(consent),
+    view_financial_reality:
+      (consent.financial_data_scopes || []).length > 0,
     consent_validated: true
   });
 }
@@ -133,6 +165,8 @@ export function revokeProfessionalWorkspaceAccess(
     ...workspace,
     status: 'access_revoked',
     capabilities: disabledCapabilities(),
+    financial_capabilities: financialCapabilities({}),
+    view_financial_reality: false,
     consent_validated: false,
     revoked_at: requiredText(revocation.revoked_at, 'revoked_at'),
     revocation_reason: requiredText(revocation.reason, 'reason')

@@ -40,6 +40,7 @@
     <nav class="professional-workspace-tabs" data-i18n-aria-label="professionalWorkspace.viewsAria" aria-label="Professional Workspace views">
       <button type="button" data-professional-view="clients" aria-pressed="true" data-i18n="professionalWorkspace.clientList">Client List</button>
       <button type="button" data-professional-view="runtime" aria-pressed="false" data-i18n="professionalWorkspace.runtimeView">Runtime View</button>
+      <button type="button" data-professional-view="human-design" aria-pressed="false" data-i18n="professionalWorkspace.humanDesignView">Human Design</button>
       <button type="button" data-professional-view="financial" aria-pressed="false" data-i18n="professionalWorkspace.financialReality">Financial Reality</button>
       <button type="button" data-professional-view="notes" aria-pressed="false" data-i18n="professionalWorkspace.notes">Professional Notes</button>
       <button type="button" data-professional-view="queue" aria-pressed="false" data-i18n="professionalWorkspace.reviewQueue">Review Queue</button>
@@ -49,22 +50,60 @@
       <button type="button" data-professional-view="readers" aria-pressed="false" data-i18n="professionalWorkspace.readerWorkspace">External Readers</button>
       <a href="/professional-reports" data-i18n="professionalReports.title">Professional Reports</a>
       <a href="/professional-appointments" data-i18n="professionalAppointments.navTitle">Appointments and Payments</a>
+      <a href="/professional-consent-sharing" data-i18n="consentSharing.title">Consent</a>
       <a href="/professional-data-privacy" data-i18n="externalReaderPrivacy.navTitle">Data and Privacy</a>
     </nav>
 
     <section class="professional-workspace-panel" data-professional-panel="clients">
+      <div class="professional-workspace-controls">
+        <label><span data-i18n="professionalWorkspace.financialClientFilter">Financial workflow</span>
+          <select id="professionalFinancialClientFilter">
+            <option value="" data-i18n="professionalWorkspace.allFinancialClients">All financial clients</option>
+            <option value="awaiting_financial_intake" data-i18n="professionalWorkspace.financialFilters.awaiting_financial_intake">Awaiting Financial Intake</option>
+            <option value="awaiting_documents" data-i18n="professionalWorkspace.financialFilters.awaiting_documents">Awaiting Documents</option>
+            <option value="financial_analysis_in_progress" data-i18n="professionalWorkspace.financialFilters.financial_analysis_in_progress">Financial Analysis In Progress</option>
+            <option value="professional_review_required" data-i18n="professionalWorkspace.financialFilters.professional_review_required">Professional Review Required</option>
+            <option value="financial_consultation_pending" data-i18n="professionalWorkspace.financialFilters.financial_consultation_pending">Financial Consultation Pending</option>
+            <option value="navigation_plan_pending" data-i18n="professionalWorkspace.financialFilters.navigation_plan_pending">Navigation Plan Pending</option>
+            <option value="implementation_review_due" data-i18n="professionalWorkspace.financialFilters.implementation_review_due">Implementation Review Due</option>
+            <option value="annual_review_due" data-i18n="professionalWorkspace.financialFilters.annual_review_due">Annual Review Due</option>
+          </select>
+        </label>
+        <output id="professionalClientResultCount" aria-live="polite"></output>
+      </div>
       <div id="professionalClientList"></div>
     </section>
     <section class="professional-workspace-panel" data-professional-panel="runtime" hidden>
       <div id="professionalRuntimeView"></div>
     </section>
+    <section class="professional-workspace-panel" data-professional-panel="human-design" hidden>
+      <div id="professionalHumanDesign"></div>
+    </section>
     <section class="professional-workspace-panel" data-professional-panel="financial" hidden>
       <div id="professionalFinancialReality"></div>
     </section>
     <section class="professional-workspace-panel" data-professional-panel="notes" hidden>
+      <div class="professional-workspace-controls">
+        <label><span data-i18n="professionalWorkspace.noteInformationClass">Information class</span>
+          <select id="professionalNoteClassFilter">
+            <option value="" data-i18n="professionalWorkspace.allNoteClasses">All note classes</option>
+            <option value="client_fact" data-i18n="professionalWorkspace.noteClasses.client_fact">Client-provided fact</option>
+            <option value="document_verification" data-i18n="professionalWorkspace.noteClasses.document_verification">Document verification</option>
+            <option value="calculation_result" data-i18n="professionalWorkspace.noteClasses.calculation_result">Calculation result</option>
+            <option value="assumption" data-i18n="professionalWorkspace.noteClasses.assumption">Assumption</option>
+            <option value="professional_opinion" data-i18n="professionalWorkspace.noteClasses.professional_opinion">Professional opinion</option>
+            <option value="professional_recommendation" data-i18n="professionalWorkspace.noteClasses.professional_recommendation">Professional recommendation</option>
+            <option value="client_decision" data-i18n="professionalWorkspace.noteClasses.client_decision">Client decision</option>
+            <option value="implementation_result" data-i18n="professionalWorkspace.noteClasses.implementation_result">Implementation result</option>
+          </select>
+        </label>
+      </div>
       <div id="professionalNotes"></div>
     </section>
     <section class="professional-workspace-panel" data-professional-panel="queue" hidden>
+      <div class="professional-workspace-controls">
+        <label class="professional-workspace-check"><input type="checkbox" id="professionalFinancialQueueOnly"><span data-i18n="professionalWorkspace.financialQueueOnly">Financial queue only</span></label>
+      </div>
       <div id="professionalReviewQueue"></div>
     </section>
     <section class="professional-workspace-panel" data-professional-panel="revisions" hidden>

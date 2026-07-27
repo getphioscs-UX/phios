@@ -593,6 +593,87 @@ body.professional-workspace-page {
 .privacy-choice-card button { min-height: 48px; padding: .7rem 1rem; border: 1px solid var(--professional-accent); border-radius: 999px; background: var(--professional-surface); color: var(--professional-accent); cursor: pointer; }
 .privacy-rights-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .75rem; }
 .privacy-choice-card li { margin: .6rem 0; line-height: 1.55; }
+.professional-workspace-controls {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--professional-line);
+  border-radius: .9rem;
+  background: var(--professional-surface);
+}
+.professional-workspace-controls label {
+  display: grid;
+  gap: .45rem;
+  min-width: min(100%, 19rem);
+  color: var(--professional-muted);
+  font-size: .84rem;
+}
+.professional-workspace-controls select {
+  min-height: 48px;
+  max-width: 100%;
+  padding: .65rem 2.25rem .65rem .75rem;
+  border: 1px solid var(--professional-line);
+  border-radius: .65rem;
+  background: #fff;
+  color: var(--professional-ink);
+  font: inherit;
+}
+.professional-workspace-controls select:focus-visible,
+.professional-workspace-controls input:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--professional-accent) 55%, #fff);
+  outline-offset: 2px;
+}
+.professional-workspace-controls output {
+  color: var(--professional-muted);
+  font-size: .9rem;
+}
+.professional-workspace-check {
+  grid-template-columns: 1.25rem minmax(0, 1fr) !important;
+  align-items: center;
+  min-height: 48px;
+}
+.professional-workspace-check input { width: 1.15rem; height: 1.15rem; }
+.professional-information-class {
+  display: inline-flex;
+  margin: .5rem 0 0;
+  padding: .28rem .55rem;
+  border: 1px solid var(--professional-line);
+  border-radius: 999px;
+  color: var(--professional-muted);
+  font-size: .78rem;
+}
+.professional-financial-records {
+  display: grid;
+  gap: .75rem;
+  margin-top: .75rem;
+}
+.professional-financial-records dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .5rem;
+  margin: 0;
+  padding: .75rem;
+  border: 1px solid var(--professional-line);
+  border-radius: .65rem;
+}
+.professional-financial-records dl div { min-width: 0; }
+.professional-financial-records dt {
+  color: var(--professional-muted);
+  font-size: .75rem;
+}
+.professional-financial-records dd {
+  margin: .2rem 0 0;
+  overflow-wrap: anywhere;
+}
+.professional-reader-grid details summary {
+  min-height: 44px;
+  padding: .7rem 0;
+  color: var(--professional-accent);
+  cursor: pointer;
+}
 
 @media (max-width: 768px) {
   .professional-workspace-hero {
@@ -621,6 +702,7 @@ body.professional-workspace-page {
   .report-metadata, .report-source-list dl { grid-template-columns: 1fr; }
   .appointment-detail-list { grid-template-columns: 1fr; }
   .privacy-rights-grid { grid-template-columns: 1fr; }
+  .professional-workspace-controls { align-items: stretch; flex-direction: column; }
 
   .professional-runtime-external {
     grid-column: auto;
@@ -671,6 +753,7 @@ body.professional-workspace-page {
   .consent-scope-grid { grid-template-columns: 1fr; }
   .report-document-header, .report-hero { flex-direction: column; }
   .appointment-summary { flex-direction: column; }
+  .professional-financial-records dl { grid-template-columns: 1fr; }
 }
 
 @media print {

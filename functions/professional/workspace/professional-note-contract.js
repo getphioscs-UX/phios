@@ -36,6 +36,19 @@ const PRIVATE_TYPES = new Set([
   'birth_time_reliability'
 ]);
 
+export const FINANCIAL_NOTE_INFORMATION_CLASS = Object.freeze({
+  financial_fact_note: 'client_fact',
+  document_verification_note: 'document_verification',
+  assumption_note: 'assumption',
+  calculation_note: 'calculation_result',
+  risk_observation: 'professional_observation',
+  product_neutral_recommendation: 'professional_recommendation',
+  regulated_advice_note: 'regulated_advice',
+  client_decision: 'client_decision',
+  implementation_note: 'implementation_result',
+  review_note: 'professional_opinion'
+});
+
 function cleanText(value) {
   return typeof value === 'string' ? value.trim() : '';
 }
@@ -94,6 +107,34 @@ export function createProfessionalNote(
   if (privateNote && input.client_visible === true) {
     throw new TypeError('A private Professional Note cannot be client-visible.');
   }
+  const expectedInformationClass =
+    FINANCIAL_NOTE_INFORMATION_CLASS[noteType] || null;
+  const informationClass = cleanText(input.information_class) || null;
+  if (
+    expectedInformationClass &&
+    informationClass !== expectedInformationClass
+  ) {
+    throw new TypeError(
+      `Financial ${noteType} requires information_class ${expectedInformationClass}.`
+    );
+  }
+  if (
+    noteType === 'regulated_advice_note' &&
+    workspace.regulated_advice_activated !== true
+  ) {
+    throw new TypeError(
+      'Regulated Advice Note requires separately activated professional authority.'
+    );
+  }
+  if (
+    expectedInformationClass &&
+    Array.isArray(input.information_classes) &&
+    new Set(input.information_classes).size > 1
+  ) {
+    throw new TypeError(
+      'Financial facts, calculations, opinions, recommendations and inferences cannot be mixed in one note.'
+    );
+  }
   return Object.freeze({
     schema_version: PROFESSIONAL_NOTE_CONTRACT_VERSION,
     note_id: requiredText(input.note_id, 'note_id'),
@@ -104,6 +145,9 @@ export function createProfessionalNote(
     note_type: noteType,
     content: requiredText(input.content, 'content'),
     source_reference: source,
+    information_class: informationClass,
+    financial_note: Boolean(expectedInformationClass),
+    mixed_information_classes: false,
     client_visible: privateNote ? false : input.client_visible === true,
     version: 1,
     previous_note_id: null,

@@ -103,6 +103,25 @@ function dateTime(value) {
   }).format(parsed);
 }
 
+function selectedValue(selector) {
+  return cleanText(document.querySelector(selector)?.value);
+}
+
+function humanizeKey(value) {
+  return cleanText(value).replaceAll('_', ' ').replace(/\b\w/g, letter =>
+    letter.toUpperCase()
+  );
+}
+
+function financialStatus(value) {
+  const status = cleanText(value);
+  if (!status) return '—';
+  const translated = t(`professionalWorkspace.financialStatuses.${status}`);
+  return translated === `professionalWorkspace.financialStatuses.${status}`
+    ? humanizeKey(status)
+    : translated;
+}
+
 function sourceLabel(reference = {}) {
   const key = SOURCE_TRANSLATION_KEYS[reference.source_type];
   return key ? t(key) : t('professionalWorkspace.source');
@@ -118,7 +137,35 @@ function externalSourceLabel(reference = {}) {
 function renderClients() {
   const root = document.querySelector('#professionalClientList');
   if (!root) return;
-  const clients = list(payload?.clients);
+  const financialFilter = selectedValue('#professionalFinancialClientFilter');
+  const clients = list(payload?.clients).filter(client => {
+    if (!financialFilter) return true;
+    const matches = {
+      awaiting_financial_intake:
+        ['not_started', 'awaiting'].includes(client.financial_intake_status),
+      awaiting_documents:
+        ['not_started', 'awaiting', 'partial'].includes(client.documents_status),
+      financial_analysis_in_progress:
+        client.financial_review_status === 'analysis_in_progress',
+      professional_review_required:
+        client.financial_review_status === 'professional_review_required',
+      financial_consultation_pending:
+        client.financial_review_status === 'consultation_pending',
+      navigation_plan_pending:
+        client.financial_review_status === 'navigation_plan_pending',
+      implementation_review_due:
+        client.financial_review_status === 'implementation_review_due',
+      annual_review_due:
+        client.financial_review_status === 'annual_review_due'
+    };
+    return matches[financialFilter] === true;
+  });
+  const count = document.querySelector('#professionalClientResultCount');
+  if (count) {
+    count.textContent = t('professionalWorkspace.clientResultCount', {
+      count: clients.length
+    });
+  }
   if (!clients.length) {
     root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noClients'))}</p>`;
     return;
@@ -138,6 +185,15 @@ function renderClients() {
         <div><dt>${escapeHTML(t('professionalWorkspace.pendingMaterials'))}</dt><dd>${Number(client.pending_material_count) || 0}</dd></div>
         <div><dt>${escapeHTML(t('professionalWorkspace.reportStatus'))}</dt><dd>${display(client.report_status_label)}</dd></div>
         <div><dt>${escapeHTML(t('professionalWorkspace.followUp'))}</dt><dd>${date(client.follow_up_at)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.financialServiceType'))}</dt><dd>${display(client.financial_service_label || client.financial_service_type)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.financialDataDate'))}</dt><dd>${date(client.financial_data_date)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.householdType'))}</dt><dd>${escapeHTML(financialStatus(client.household_type))}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.financialIntakeStatus'))}</dt><dd>${escapeHTML(financialStatus(client.financial_intake_status))}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.documentsStatus'))}</dt><dd>${escapeHTML(financialStatus(client.documents_status))}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.financialReviewStatus'))}</dt><dd>${escapeHTML(financialStatus(client.financial_review_status))}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.financialRiskLevel'))}</dt><dd>${escapeHTML(financialStatus(client.financial_risk_level))}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.nextFinancialReview'))}</dt><dd>${date(client.next_financial_review)}</dd></div>
+        <div><dt>${escapeHTML(t('professionalWorkspace.assignedFinancialProfessional'))}</dt><dd>${display(client.assigned_financial_professional_label || client.assigned_financial_professional)}</dd></div>
       </dl>
     </article>
   `).join('')}</div>`;
@@ -188,7 +244,10 @@ function renderRuntime() {
 function renderNotes() {
   const root = document.querySelector('#professionalNotes');
   if (!root) return;
-  const notes = list(payload?.notes);
+  const noteClass = selectedValue('#professionalNoteClassFilter');
+  const notes = list(payload?.notes).filter(note =>
+    !noteClass || note.information_class === noteClass
+  );
   if (!notes.length) {
     root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noNotes'))}</p>`;
     return;
@@ -202,6 +261,7 @@ function renderNotes() {
           : t('professionalWorkspace.notePrivate'))}</span>
       </header>
       <p>${display(note.content)}</p>
+      ${note.information_class ? `<p class="professional-information-class">${escapeHTML(t(`professionalWorkspace.noteClasses.${note.information_class}`))}</p>` : ''}
       <footer>
         <span>${escapeHTML(t('professionalWorkspace.source'))}: ${escapeHTML(sourceLabel(note.source_reference))}</span>
         <span>v${Number(note.version) || 1}</span>
@@ -213,7 +273,19 @@ function renderNotes() {
 function renderQueue() {
   const root = document.querySelector('#professionalReviewQueue');
   if (!root) return;
-  const tasks = list(payload?.tasks);
+  const financialOnly =
+    document.querySelector('#professionalFinancialQueueOnly')?.checked === true;
+  const financialTypes = new Set([
+    'financial_intake_received', 'bank_records_pending',
+    'income_evidence_pending', 'expense_evidence_pending',
+    'insurance_documents_pending', 'investment_statements_pending',
+    'property_documents_pending', 'liability_details_pending',
+    'calculation_review_required', 'financial_recommendation_review',
+    'client_clarification_required', 'annual_review_due'
+  ]);
+  const tasks = list(payload?.tasks).filter(task =>
+    !financialOnly || financialTypes.has(task.task_type)
+  );
   if (!tasks.length) {
     root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noTasks'))}</p>`;
     return;
@@ -409,6 +481,39 @@ function renderExternalReaders() {
   `;
 }
 
+function renderHumanDesign() {
+  const root = document.querySelector('#professionalHumanDesign');
+  if (!root) return;
+  const framework = payload?.external_reader_framework;
+  const reader = list(framework?.readers).find(item =>
+    item.reader_id === 'human_design' || item.reader_type === 'human_design'
+  );
+  const interpretations = list(framework?.interpretations).filter(item =>
+    item.reader_type === 'human_design'
+  );
+  if (!reader) {
+    root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noHumanDesign'))}</p>`;
+    return;
+  }
+  root.innerHTML = `
+    <header class="professional-reader-heading">
+      <div><p>${escapeHTML(t('professionalWorkspace.humanDesignView'))}</p><h2>${display(localized(reader.reader_name))}</h2></div>
+      <strong>${escapeHTML(t('professionalWorkspace.interpretationOnly'))}</strong>
+    </header>
+    <dl class="professional-meta-grid">
+      <div><dt>${escapeHTML(t('professionalWorkspace.readerVersion'))}</dt><dd>${display(reader.reader_version)}</dd></div>
+      <div><dt>${escapeHTML(t('professionalWorkspace.interpretationStatus'))}</dt><dd>${display(reader.interpretation_status)}</dd></div>
+    </dl>
+    <section class="professional-reader-records">
+      <h2>${escapeHTML(t('professionalWorkspace.interpretationDrafts'))}</h2>
+      ${interpretations.length
+        ? `<ul>${interpretations.map(item => `<li><strong>${display(item.chart_element)}</strong><p>${display(item.interpretation)}</p></li>`).join('')}</ul>`
+        : `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noInterpretations'))}</p>`}
+    </section>
+    <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.externalReaderBoundary'))}</p>
+  `;
+}
+
 function renderFinancialReality() {
   const root = document.querySelector('#professionalFinancialReality');
   if (!root) return;
@@ -423,6 +528,35 @@ function renderFinancialReality() {
     'retirement', 'education', 'estate', 'ratios', 'risks',
     'recommendations', 'documents'
   ];
+  const recordValue = value => {
+    if (value === null || value === undefined || value === '') return '—';
+    if (typeof value === 'number') {
+      return new Intl.NumberFormat(getLocale(), {
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+    if (typeof value === 'boolean') return value ? '✓' : '—';
+    return display(String(value));
+  };
+  const sectionContent = section => {
+    const value = financial.sections?.[section];
+    if (value?.accessible === false) {
+      return `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.notAuthorised'))}</p>`;
+    }
+    const records = Array.isArray(value) ? value : list(value?.records);
+    const summary = cleanText(value?.summary);
+    if (!records.length && !summary) {
+      return `<p class="professional-workspace-empty">—</p>`;
+    }
+    return `${summary ? `<p>${display(summary)}</p>` : ''}
+      ${records.length ? `<details>
+        <summary>${escapeHTML(t('professionalWorkspace.financialRecordCount', { count: records.length }))}</summary>
+        <div class="professional-financial-records">${records.map(record => `
+          <dl>${Object.entries(record || {}).map(([key, item]) => `
+            <div><dt>${escapeHTML(humanizeKey(key))}</dt><dd>${recordValue(item)}</dd></div>
+          `).join('')}</dl>`).join('')}</div>
+      </details>` : ''}`;
+  };
   root.innerHTML = `
     <header class="professional-reader-heading">
       <div><p>${escapeHTML(t('professionalWorkspace.financialDataDate'))}</p><h2>${display(financial.data_date)}</h2></div>
@@ -431,7 +565,7 @@ function renderFinancialReality() {
     <div class="professional-reader-grid">${sections.map(section => `
       <article>
         <h3>${escapeHTML(t(`professionalWorkspace.financialSections.${section}`))}</h3>
-        <p>${display(financial.sections?.[section]?.summary || financial.sections?.[section])}</p>
+        ${sectionContent(section)}
       </article>`).join('')}</div>
     <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.financialBoundary'))}</p>
   `;
@@ -445,6 +579,7 @@ function renderAll() {
   if (unavailable) unavailable.hidden = Boolean(payload);
   renderClients();
   renderRuntime();
+  renderHumanDesign();
   renderFinancialReality();
   renderNotes();
   renderQueue();
@@ -471,8 +606,23 @@ function bindViews() {
   });
 }
 
+function bindOperationalFilters() {
+  document.addEventListener('change', event => {
+    if (event.target.matches('#professionalFinancialClientFilter')) {
+      renderClients();
+    }
+    if (event.target.matches('#professionalNoteClassFilter')) {
+      renderNotes();
+    }
+    if (event.target.matches('#professionalFinancialQueueOnly')) {
+      renderQueue();
+    }
+  });
+}
+
 initializeI18n();
 bindLocaleControls();
 bindViews();
+bindOperationalFilters();
 renderAll();
 onLocaleChange(renderAll);

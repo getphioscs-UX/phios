@@ -552,7 +552,9 @@ for (const token of [
 ]) {
   assert.ok(controller.includes(token), `Workspace controller missing ${token}`);
 }
-assert.equal(controller.includes('human_design'), false);
+assert.ok(controller.includes('renderHumanDesign'));
+assert.ok(controller.includes("item.reader_id === 'human_design'"));
+assert.ok(controller.includes('renderExternalReaders'));
 for (const forbidden of [
   'fetch(',
   'sessionStorage',
