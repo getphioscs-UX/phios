@@ -13,6 +13,7 @@ import publicExperience from './en/public.js';
 import knowledgeRelease from './en/knowledge.js';
 import journeyPublic from './en/journey.js';
 import professional from './en/professional.js';
+import account from './en/account.js';
 
 const dictionary = Object.freeze({
   ...shared,
@@ -28,7 +29,8 @@ const dictionary = Object.freeze({
   ...publicExperience,
   ...knowledgeRelease,
   ...journeyPublic,
-  ...professional
+  ...professional,
+  ...account
 });
 
 export default dictionary;
