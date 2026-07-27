@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Consent-gated PHI OS Professional Workspace.">
+  <title data-i18n="professionalWorkspace.metaTitle">Professional Workspace — PHI OS</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/professional-workspace.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
+</head>
+<body class="professional-workspace-page" data-workspace-status="unavailable">
+  <a class="phi-skip-link" href="#professionalWorkspaceMain" data-i18n="professionalWorkspace.skip">Skip to Professional Workspace</a>
+  <header class="professional-workspace-header">
+    <a href="/" class="professional-workspace-brand" aria-label="PHI OS Home">Φ <span>PHI OS</span></a>
+    <div class="professional-workspace-language" role="group" data-i18n-aria-label="accessibility.languageSelector" aria-label="Select interface language">
+      <span data-i18n="professionalWorkspace.language">Language</span>
+      <button type="button" data-locale="en">EN</button>
+      <button type="button" data-locale="zh-Hans">中文</button>
+    </div>
+  </header>
+  <main id="professionalWorkspaceMain" class="professional-workspace-shell">
+    <header class="professional-workspace-hero">
+      <div>
+        <p data-i18n="professionalWorkspace.eyebrow">M4B Professional Workspace</p>
+        <h1 data-i18n="professionalWorkspace.title">Evidence-bounded professional work.</h1>
+        <p data-i18n="professionalWorkspace.lead">Client information, Runtime material, professional observations and external interpretive perspectives remain separately labelled.</p>
+      </div>
+      <span data-i18n="professionalWorkspace.readOnly">Read-only contract projection</span>
+    </header>
+
+    <aside class="professional-workspace-unavailable" data-workspace-unavailable role="status">
+      <strong data-i18n="professionalWorkspace.unavailableTitle">No authorised professional session is loaded</strong>
+      <p data-i18n="professionalWorkspace.unavailableCopy">This interface does not search browser Runtime data or load client information without an authenticated, consent-gated Workspace payload.</p>
+    </aside>
+
+    <nav class="professional-workspace-tabs" data-i18n-aria-label="professionalWorkspace.viewsAria" aria-label="Professional Workspace views">
+      <button type="button" data-professional-view="clients" aria-pressed="true" data-i18n="professionalWorkspace.clientList">Client List</button>
+      <button type="button" data-professional-view="runtime" aria-pressed="false" data-i18n="professionalWorkspace.runtimeView">Runtime View</button>
+      <button type="button" data-professional-view="notes" aria-pressed="false" data-i18n="professionalWorkspace.notes">Professional Notes</button>
+      <button type="button" data-professional-view="queue" aria-pressed="false" data-i18n="professionalWorkspace.reviewQueue">Review Queue</button>
+    </nav>
+
+    <section class="professional-workspace-panel" data-professional-panel="clients">
+      <div id="professionalClientList"></div>
+    </section>
+    <section class="professional-workspace-panel" data-professional-panel="runtime" hidden>
+      <div id="professionalRuntimeView"></div>
+    </section>
+    <section class="professional-workspace-panel" data-professional-panel="notes" hidden>
+      <div id="professionalNotes"></div>
+    </section>
+    <section class="professional-workspace-panel" data-professional-panel="queue" hidden>
+      <div id="professionalReviewQueue"></div>
+    </section>
+
+    <footer class="professional-workspace-boundary">
+      <strong data-i18n="professionalWorkspace.boundary">Professional interpretation is not observed evidence. Human Design and other External Readers remain interpretation-only.</strong>
+      <p data-i18n="professionalWorkspace.localBoundary">No API, browser Runtime storage or D1 Workspace persistence is used by this page.</p>
+    </footer>
+  </main>
+  <script type="module" src="/assets/js/pages/professional-workspace.js"></script>
+</body>
+</html>
