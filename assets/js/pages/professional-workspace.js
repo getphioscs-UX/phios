@@ -34,6 +34,27 @@ const SOURCE_TRANSLATION_KEYS = Object.freeze({
   external_reader_interpretation: 'professionalWorkspace.sourceExternal'
 });
 
+const EXTERNAL_SOURCE_TRANSLATION_KEYS = Object.freeze({
+  user_provided: 'professionalWorkspace.readerSourceUser',
+  uploaded_chart: 'professionalWorkspace.readerSourceChart',
+  uploaded_external_chart: 'professionalWorkspace.readerSourceChart',
+  manually_entered_chart_data: 'professionalWorkspace.readerSourceManual',
+  phi_os_generated: 'professionalWorkspace.readerSourcePhiOS',
+  third_party_api: 'professionalWorkspace.readerSourceAPI',
+  registry_source: 'professionalWorkspace.readerSourceRegistry',
+  rule_inference: 'professionalWorkspace.sourceRule',
+  professional_interpretation:
+    'professionalWorkspace.sourceProfessional',
+  ai_draft: 'professionalWorkspace.readerSourceAI',
+  ai_assisted_draft: 'professionalWorkspace.readerSourceAI',
+  client_confirmed_correspondence:
+    'professionalWorkspace.readerSourceClientConfirmed',
+  professionally_supported_correspondence:
+    'professionalWorkspace.readerSourceProfessionalSupported',
+  unverified_correspondence:
+    'professionalWorkspace.readerSourceUnverified'
+});
+
 const STAGE_TRANSLATION_KEYS = Object.freeze({
   entry: 'professionalWorkspace.stageEntry',
   reconstruction: 'professionalWorkspace.stageReconstruction',
@@ -57,6 +78,14 @@ function display(value, fallback = '—') {
   return escapeHTML(cleanText(value) || fallback);
 }
 
+function localized(value = {}) {
+  const locale = getLocale();
+  const normalized = locale === 'zh-Hans' ? 'zh_Hans' : locale;
+  return cleanText(value[locale]) ||
+    cleanText(value[normalized]) ||
+    cleanText(value.en);
+}
+
 function date(value) {
   const parsed = new Date(value);
   if (!value || Number.isNaN(parsed.getTime())) return '—';
@@ -77,6 +106,13 @@ function dateTime(value) {
 function sourceLabel(reference = {}) {
   const key = SOURCE_TRANSLATION_KEYS[reference.source_type];
   return key ? t(key) : t('professionalWorkspace.source');
+}
+
+function externalSourceLabel(reference = {}) {
+  const key = EXTERNAL_SOURCE_TRANSLATION_KEYS[
+    reference.source_label
+  ];
+  return key ? t(key) : t('professionalWorkspace.sourceExternal');
 }
 
 function renderClients() {
@@ -310,6 +346,66 @@ function renderFollowUpTimeline() {
   <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.timelineBoundary'))}</p>`;
 }
 
+function renderExternalReaders() {
+  const root = document.querySelector('#professionalExternalReaders');
+  if (!root) return;
+  const framework = payload?.external_reader_framework;
+  if (!framework) {
+    root.innerHTML = `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noReaderRegistry'))}</p>`;
+    return;
+  }
+  const readers = list(framework.readers);
+  const interpretations = list(framework.interpretations);
+  const correspondences = list(framework.correspondences);
+  root.innerHTML = `
+    <header class="professional-reader-heading">
+      <div>
+        <p>${escapeHTML(t('professionalWorkspace.readerRegistry'))}</p>
+        <h2>${escapeHTML(t('professionalWorkspace.readerWorkspace'))}</h2>
+      </div>
+      <strong>${escapeHTML(t('professionalWorkspace.interpretationOnly'))}</strong>
+    </header>
+    <div class="professional-reader-grid">
+      ${readers.map(reader => `
+        <article>
+          <header>
+            <h3>${display(localized(reader.reader_name))}</h3>
+            <span data-reader-active="${String(reader.active === true)}">${escapeHTML(reader.active
+              ? t('professionalWorkspace.readerAvailable')
+              : t('professionalWorkspace.readerInfrastructureReady'))}</span>
+          </header>
+          <dl>
+            <div><dt>${escapeHTML(t('professionalWorkspace.readerVersion'))}</dt><dd>${display(reader.reader_version)}</dd></div>
+            <div><dt>${escapeHTML(t('professionalWorkspace.rendererStatus'))}</dt><dd>${display(reader.renderer_status)}</dd></div>
+            <div><dt>${escapeHTML(t('professionalWorkspace.interpretationStatus'))}</dt><dd>${display(reader.interpretation_status)}</dd></div>
+          </dl>
+          ${reader.active ? '' : `<p>${escapeHTML(t('professionalWorkspace.readerNotAvailable'))}</p>`}
+        </article>
+      `).join('')}
+    </div>
+    <section class="professional-reader-records">
+      <h2>${escapeHTML(t('professionalWorkspace.interpretationDrafts'))}</h2>
+      ${interpretations.length
+        ? `<ul>${interpretations.map(item => `
+          <li>
+            <strong>${display(item.chart_element)}</strong>
+            <p>${display(item.interpretation)}</p>
+            <small>${escapeHTML(t('professionalWorkspace.source'))}: ${escapeHTML(externalSourceLabel(item.source_reference))}</small>
+          </li>`).join('')}</ul>`
+        : `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noInterpretations'))}</p>`}
+    </section>
+    <section class="professional-reader-records">
+      <h2>${escapeHTML(t('professionalWorkspace.correspondenceReview'))}</h2>
+      ${correspondences.length
+        ? `<ul>${correspondences.map(item => `
+          <li><strong>${display(item.status_label || item.status)}</strong><p>${display(item.summary)}</p></li>
+        `).join('')}</ul>`
+        : `<p class="professional-workspace-empty">${escapeHTML(t('professionalWorkspace.noCorrespondences'))}</p>`}
+    </section>
+    <p class="professional-contract-boundary">${escapeHTML(t('professionalWorkspace.externalReaderBoundary'))}</p>
+  `;
+}
+
 function renderAll() {
   document.body.dataset.workspaceStatus = payload
     ? 'authorised-projection'
@@ -323,6 +419,7 @@ function renderAll() {
   renderReadingRevisions();
   renderNavigationConsiderations();
   renderFollowUpTimeline();
+  renderExternalReaders();
 }
 
 function bindViews() {

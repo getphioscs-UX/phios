@@ -390,6 +390,102 @@ body.professional-workspace-page {
   color: var(--professional-muted);
 }
 
+.professional-reader-heading,
+.professional-reader-grid article header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.professional-reader-heading {
+  margin-bottom: 1.25rem;
+}
+
+.professional-reader-heading p,
+.professional-reader-heading h2,
+.professional-reader-grid h3 {
+  margin: 0;
+}
+
+.professional-reader-heading p {
+  color: var(--professional-muted);
+  font-size: 0.78rem;
+}
+
+.professional-reader-heading > strong,
+.professional-reader-grid article header span {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid #a98b58;
+  border-radius: 999px;
+  color: #674b1f;
+  font-size: 0.76rem;
+}
+
+.professional-reader-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.professional-reader-grid article {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--professional-line);
+  border-radius: 1rem;
+}
+
+.professional-reader-grid article header span[data-reader-active="false"] {
+  border-color: var(--professional-line);
+  color: var(--professional-muted);
+}
+
+.professional-reader-grid dl {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.professional-reader-grid dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.professional-reader-grid dt,
+.professional-reader-grid article > p,
+.professional-reader-records small {
+  color: var(--professional-muted);
+}
+
+.professional-reader-grid dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.professional-reader-records {
+  margin-top: 1.5rem;
+}
+
+.professional-reader-records ul {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.professional-reader-records li {
+  padding: 1rem;
+  border: 1px solid var(--professional-line);
+  border-radius: 0.8rem;
+}
+
+.professional-reader-records li p {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 768px) {
   .professional-workspace-hero {
     display: block;
@@ -406,6 +502,10 @@ body.professional-workspace-page {
   .professional-consideration-grid,
   .professional-meta-grid {
     grid-template-columns: 1fr;
+  }
+
+  .professional-reader-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .professional-runtime-external {
@@ -441,6 +541,15 @@ body.professional-workspace-page {
   .professional-consideration-list header,
   .professional-follow-up-list header {
     align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .professional-reader-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .professional-reader-heading,
+  .professional-reader-grid article header {
     flex-direction: column;
   }
 }

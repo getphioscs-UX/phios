@@ -14,7 +14,9 @@ export const EXTERNAL_READER_TYPES = Object.freeze([
   'human_design',
   'astrology',
   'bazi',
+  'ziwei',
   'zi_wei',
+  'gene_keys',
   'i_ching',
   'tarot',
   'other_professional_system'
