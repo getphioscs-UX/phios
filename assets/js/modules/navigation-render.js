@@ -281,18 +281,27 @@ function renderSelectedPath(selectedPath) {
   );
   if (actions) {
     const prepared = document.documentElement.dataset.navigationReviewPrepared === 'true';
+    const executionReviewReady =
+      document.documentElement.dataset.navigationExecutionReviewReady === 'true';
     const professional = selected.pathType === 'professional_review';
     const consentAccepted = document.documentElement.dataset.professionalConsentAccepted === 'true';
     actions.innerHTML = `
       <button class="btn navigation-change-path" type="button" data-change-path>${escapeHTML(t('navigation.changePath'))}</button>
-      ${professional && !consentAccepted ? `<button class="btn professional-consent" type="button" data-accept-professional-boundary>${escapeHTML(t('navigation.professionalConsentButton'))}</button>` : ''}
-      <button class="btn navigation-review-ready" type="button" data-prepare-review ${(prepared || (professional && !consentAccepted)) ? 'disabled aria-pressed="true"' : 'aria-pressed="false"'}>${escapeHTML(prepared ? t('navigation.reviewPrepared') : t('navigation.continueToReview'))}</button>
+      ${professional ? '' : `<button class="btn navigation-review-ready" type="button" data-prepare-review ${(!executionReviewReady || prepared) ? 'disabled aria-pressed="true"' : 'aria-pressed="false"'}>${escapeHTML(prepared ? t('navigation.reviewPrepared') : t('navigation.continueToReview'))}</button>`}
     `;
   }
 }
 
 export function renderRealityNavigation(response) {
   document.documentElement.dataset.professionalConsentAccepted = response?.navigationState?.professionalConsent?.accepted === true ? 'true' : 'false';
+  const executionAction = list(response?.navigationExecution?.actions).find(
+    item => item?.navigation_action_id ===
+      response?.navigationExecution?.active_action_id
+  );
+  document.documentElement.dataset.navigationExecutionReviewReady =
+    executionAction?.review_gate?.review_payload_ready === true
+      ? 'true'
+      : 'false';
   const navigation = isObject(response?.navigation)
     ? response.navigation
     : {};

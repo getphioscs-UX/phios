@@ -29,8 +29,14 @@ import {
 } from './modules/navigation-visual-alignment.js';
 
 import { bindNavigationPathSelection } from './modules/navigation-path-selection.js';
+import {
+  bindNavigationExecution,
+  renderNavigationExecution
+} from './modules/navigation-execution-render.js';
 import { restoreNavigationState } from './modules/navigation-state.js';
 import { initializeRuntimeWorkspace } from './modules/runtime-workspace.js';
+
+const refreshNavigationAlignment = renderNavigationVisualAlignment;
 
 const state = {
   input: null,
@@ -38,7 +44,8 @@ const state = {
   loading: false,
   initialized: false,
   removeLocaleListener: null,
-  removePathSelectionListener: null
+  removePathSelectionListener: null,
+  removeExecutionListener: null
 };
 
 async function runNavigation({
@@ -61,6 +68,7 @@ async function runNavigation({
       state.response = restoreNavigationState(result.response, state.response || result.response);
       renderRealityNavigation(state.response);
       renderNavigationVisualAlignment(state.response);
+      renderNavigationExecution(state.response);
       let staleNotice = document.querySelector(
         '[data-reconstruction-stale-notice]'
       );
@@ -103,8 +111,10 @@ function bindLanguageUpdates() {
 function destroyNavigationPage() {
   state.removeLocaleListener?.();
   state.removePathSelectionListener?.();
+  state.removeExecutionListener?.();
   state.removeLocaleListener = null;
   state.removePathSelectionListener = null;
+  state.removeExecutionListener = null;
 }
 
 async function initializeNavigationPage() {
@@ -121,7 +131,17 @@ async function initializeNavigationPage() {
     onSelectionChange: updatedResponse => {
       state.response = updatedResponse;
       renderRealityNavigation(updatedResponse);
+      refreshNavigationAlignment(updatedResponse);
+      renderNavigationExecution(updatedResponse);
+    }
+  });
+  state.removeExecutionListener = bindNavigationExecution({
+    getResponse: () => state.response,
+    onChange: updatedResponse => {
+      state.response = updatedResponse;
+      renderRealityNavigation(updatedResponse);
       renderNavigationVisualAlignment(updatedResponse);
+      renderNavigationExecution(updatedResponse);
     }
   });
   bindNavigationRetry(() => {

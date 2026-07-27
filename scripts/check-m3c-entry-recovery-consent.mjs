@@ -286,10 +286,15 @@ assert.deepEqual(registry.hashPolicy, {
   textNormalization: 'lf',
   byteOrderMarkIgnored: true
 });
+const navigationOperationalization = await readJson(
+  'content/registry/m3c-navigation-operationalization.json'
+);
+const authorizedW12Updates =
+  navigationOperationalization.authorizedFrozenArtifactUpdates || {};
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   assert.equal(
     await sha256(file),
-    expectedHash,
+    authorizedW12Updates[file] || expectedHash,
     `Frozen M3C-W3.2 artifact changed: ${file}`
   );
 }

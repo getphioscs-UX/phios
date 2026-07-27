@@ -15,6 +15,7 @@ export const RUNTIME_PERSISTENCE_KEYS = Object.freeze([
   'phiOSReadingRequestState',
   'phiOSNavigationInput',
   'phiOSRealityNavigation',
+  'phiOSNavigationReviewHandoff',
   'phiOSNavigationRequestState',
   'phiOSRealityReview',
   'phiOSRuntimeMemory',

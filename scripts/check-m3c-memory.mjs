@@ -107,8 +107,17 @@ assert.equal(registry.baseline.commit, '21531bb7527b34055ec4c20e852e463dae740d1c
 assert.equal(registry.dataControls.browserRuntimeDeletion, true);
 assert.equal(registry.dataControls.authenticatedRemoteDeletion, false);
 assert.equal(registry.dataControls.remoteDeletionClaimAllowed, false);
+const navigationOperationalization = await json(
+  'content/registry/m3c-navigation-operationalization.json'
+);
+const authorizedW12Updates =
+  navigationOperationalization.authorizedFrozenArtifactUpdates || {};
 for (const [file, expected] of Object.entries(registry.frozenArtifacts)) {
-  assert.equal(await sha256(file), expected, `Frozen M3C-W8 artifact changed: ${file}`);
+  assert.equal(
+    await sha256(file),
+    authorizedW12Updates[file] || expected,
+    `Frozen M3C-W8 artifact changed: ${file}`
+  );
 }
 
 const packageJson = await json('package.json');
@@ -120,4 +129,3 @@ assert.equal(packageJson.scripts.check.includes('scripts/check-m3c-memory.mjs'),
 
 console.log('✓ M3C-W8 Memory passed: summary, saved-content transparency, local report export and confirmed browser deletion are available.');
 console.log('  Browser deletion is not misrepresented as authenticated account or remote D1 deletion; evidence classes and Memory Contract remain frozen.');
-

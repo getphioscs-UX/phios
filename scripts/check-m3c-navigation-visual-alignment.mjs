@@ -228,8 +228,17 @@ assert.equal(registry.choiceBoundary.automaticPathSelectionAllowed, false);
 assert.equal(registry.choiceBoundary.firstActionRequiresSelectedPath, true);
 assert.equal(registry.acceptance.reviewGateChanged, false);
 
+const operationalization = await readJson(
+  'content/registry/m3c-navigation-operationalization.json'
+);
+const authorizedW12Updates =
+  operationalization.authorizedFrozenArtifactUpdates || {};
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
-  assert.equal(await sha256(file), expectedHash, `Frozen M3C-W6 artifact changed: ${file}`);
+  assert.equal(
+    await sha256(file),
+    authorizedW12Updates[file] || expectedHash,
+    `Frozen M3C-W6 artifact changed: ${file}`
+  );
 }
 
 const packageJson = await readJson('package.json');

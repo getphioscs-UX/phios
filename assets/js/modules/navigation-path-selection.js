@@ -7,8 +7,13 @@
  * the user activates its Choose This Path control.
  */
 
-import { cleanText } from '../shared.js';
+import { cleanText, setSession } from '../shared.js';
 import { persistNavigationState, clearNavigationPath, prepareNavigationForReview, acceptProfessionalBoundary } from './navigation-state.js';
+import {
+  selectExecutionPath,
+  cancelNavigationAction,
+  buildReviewHandoff
+} from './navigation-execution.js';
 
 function isObject(value) {
   return value !== null &&
@@ -138,7 +143,10 @@ export function bindNavigationPathSelection({
       event.preventDefault();
       try {
         const currentResponse = typeof getResponse === 'function' ? getResponse() : getResponse;
-        const updatedResponse = clearNavigationPath(currentResponse);
+        const cancelledResponse = cancelNavigationAction(currentResponse, {
+          reason: 'user_requested_path_change'
+        });
+        const updatedResponse = clearNavigationPath(cancelledResponse);
         onSelectionChange?.(updatedResponse);
         requestAnimationFrame(() => {
           document.querySelector('#navigationPath')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -157,6 +165,8 @@ export function bindNavigationPathSelection({
       try {
         const currentResponse = typeof getResponse === 'function' ? getResponse() : getResponse;
         const preparedResponse = prepareNavigationForReview(currentResponse);
+        const handoff = buildReviewHandoff(preparedResponse);
+        setSession('phiOSNavigationReviewHandoff', handoff);
         onSelectionChange?.(preparedResponse);
         window.location.assign('/reality-review.html');
       } catch (error) { console.error('PHI OS Navigation review preparation failed:', error); }
@@ -171,9 +181,14 @@ export function bindNavigationPathSelection({
       const currentResponse = typeof getResponse === 'function'
         ? getResponse()
         : getResponse;
-      const updatedResponse = selectNavigationPath(
+      const selectedResponse = selectNavigationPath(
         currentResponse,
         chooseButton.dataset.selectPath
+      );
+      const selectedPath = selectedResponse?.navigation?.selectedPath;
+      const updatedResponse = selectExecutionPath(
+        selectedResponse,
+        selectedPath
       );
 
       onSelectionChange?.(updatedResponse);

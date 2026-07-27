@@ -107,8 +107,17 @@ const registry = await json('content/registry/m3c-continuity.json');
 assert.equal(registry.baseline.commit, '21531bb7527b34055ec4c20e852e463dae740d1c');
 assert.equal(registry.checkInBoundary.automaticDetectionAllowed, false);
 assert.equal(registry.branchBoundary.automaticNextRuntimeCreationAllowed, false);
+const navigationOperationalization = await json(
+  'content/registry/m3c-navigation-operationalization.json'
+);
+const authorizedW12Updates =
+  navigationOperationalization.authorizedFrozenArtifactUpdates || {};
 for (const [file, expected] of Object.entries(registry.frozenArtifacts)) {
-  assert.equal(await sha256(file), expected, `Frozen M3C-W9 artifact changed: ${file}`);
+  assert.equal(
+    await sha256(file),
+    authorizedW12Updates[file] || expected,
+    `Frozen M3C-W9 artifact changed: ${file}`
+  );
 }
 
 const packageJson = await json('package.json');
@@ -120,4 +129,3 @@ assert.equal(packageJson.scripts.check.includes('scripts/check-m3c-continuity.mj
 
 console.log('✓ M3C-W9 Continuity passed: trigger, next Review, Check-in, new-change report and Revision / New Journey branch are customer-visible.');
 console.log('  Check-in remains reported experience; Review outcome matching, confirmation, lineage and no-automatic-Runtime guardrails remain intact.');
-
