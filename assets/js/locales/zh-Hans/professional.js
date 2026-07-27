@@ -198,6 +198,20 @@ const professional = Object.freeze({
     revokeRuntime: '专业 Runtime 访问', revokeBirth: '出生资料访问', revokeChart: '图表访问',
     revokeFiles: '上传文件访问', revokeReports: '报告分享', revokeFollowup: '后续跟进访问',
     revoke: '撤销所选访问', footer: '授权只允许查看资料，绝不会把解释转换成现实证据。'
+  },
+  professionalReports: {
+    metaTitle: '专业报告 — PHI OS', skip: '跳至专业报告',
+    eyebrow: 'M4B 专业报告', title: '让证据、解释与未知始终保持可见。',
+    lead: '每个章节都会保留资料来源、置信状态、对应关系状态与报告版本。',
+    print: '打印／保存 PDF', unavailableTitle: '当前没有已授权的报告',
+    unavailableCopy: '本页面不会搜索浏览器 Runtime，也不会自动生成报告。',
+    contentView: '报告', sourceView: '资料来源', historyView: '版本历史',
+    reportId: '报告编号', version: '版本', generated: '生成日期',
+    professional: '专业人士', serviceScope: '服务范围', consent: '授权编号',
+    readerType: '解释系统', registryVersion: 'Registry 版本', source: '资料来源',
+    confidence: '置信状态', sourceReference: '来源记录', correspondence: '对应关系状态',
+    noHistory: '当前没有已授权的版本历史。', boundary: '解释边界',
+    confidentiality: '保密声明'
   }
 });
 

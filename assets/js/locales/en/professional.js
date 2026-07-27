@@ -198,6 +198,20 @@ const professional = Object.freeze({
     revokeRuntime: 'Professional Runtime Access', revokeBirth: 'Birth Data Access', revokeChart: 'Chart Access',
     revokeFiles: 'Uploaded File Access', revokeReports: 'Report Sharing', revokeFollowup: 'Follow-up Access',
     revoke: 'Revoke selected access', footer: 'Consent permits access only. It never converts interpretation into Runtime Evidence.'
+  },
+  professionalReports: {
+    metaTitle: 'Professional Reports — PHI OS', skip: 'Skip to Professional Report',
+    eyebrow: 'M4B Professional Reports', title: 'Evidence, interpretation and uncertainty remain visible.',
+    lead: 'Every section preserves its source, confidence, correspondence status and report version.',
+    print: 'Print / Save PDF', unavailableTitle: 'No authorised report is loaded',
+    unavailableCopy: 'This page does not search browser Runtime data or generate a report automatically.',
+    contentView: 'Report', sourceView: 'Sources', historyView: 'Version History',
+    reportId: 'Report ID', version: 'Version', generated: 'Generated date',
+    professional: 'Professional', serviceScope: 'Service scope', consent: 'Consent reference',
+    readerType: 'Reader type', registryVersion: 'Registry version', source: 'Source',
+    confidence: 'Confidence', sourceReference: 'Source reference', correspondence: 'Correspondence status',
+    noHistory: 'No authorised version history is available.', boundary: 'Interpretation Boundary',
+    confidentiality: 'Confidentiality Notice'
   }
 });
 
