@@ -9,6 +9,7 @@ import { getLocale, t, withLanguageContract } from '../i18n.js';
 
 const list = value => Array.isArray(value) ? value : [];
 const text = value => typeof value === 'string' ? cleanText(value) : '';
+const technicalJSON = value => escapeHTML(JSON.stringify(value ?? null, null, 2));
 const itemText = value => text(
   typeof value === 'string'
     ? value
@@ -186,6 +187,7 @@ function evidenceCardHTML(item) {
       <p>${escapeHTML(item.canonical_text)}</p>
       <dl>
         <div><dt>${escapeHTML(t('reconstruction.w14.classification'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.classifications.${item.classification}`))}</dd></div>
+        ${list(item.secondary_classifications).length ? `<div><dt>${escapeHTML(t('reconstruction.w14.secondaryClassification'))}</dt><dd>${list(item.secondary_classifications).map(value => escapeHTML(t(`reconstruction.w14.classifications.${value}`))).join(' · ')}</dd></div>` : ''}
         <div><dt>${escapeHTML(t('reconstruction.w14.maturity'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.maturityStates.${item.maturity}`))}</dd></div>
         <div><dt>${escapeHTML(t('reconstruction.w14.sourceSummary'))}</dt><dd>${escapeHTML(t('reconstruction.w14.sourceCount', { count: item.source_count }))}${sources.length ? ` · ${escapeHTML(sources.join('、'))}` : ''}</dd></div>
       </dl>
@@ -212,7 +214,7 @@ function evidenceCardHTML(item) {
         </details>
       ` : ''}
       <details class="w14-evidence-details">
-        <summary>${escapeHTML(t('reconstruction.w14.viewSources'))}</summary>
+        <summary>${escapeHTML(t('reconstruction.w14.viewSourcesCount', { count: lineage.length }))}</summary>
         <ul>
           ${lineage.map(source => `
             <li>
@@ -220,6 +222,13 @@ function evidenceCardHTML(item) {
               ${source.source_round !== null && source.source_round !== undefined
                 ? ` · ${escapeHTML(t('reconstruction.w14.sourceRound', { round: source.source_round }))}`
                 : ''}
+              <dl>
+                <div><dt>${escapeHTML(t('reconstruction.w14.sourcePath'))}</dt><dd><code>${escapeHTML(source.source_path)}</code></dd></div>
+                <div><dt>${escapeHTML(t('reconstruction.w14.sourceEvidenceId'))}</dt><dd>${escapeHTML(source.source_evidence_id || source.evidence_id || '—')}</dd></div>
+                <div><dt>${escapeHTML(t('reconstruction.w14.originalText'))}</dt><dd>${escapeHTML(source.raw_text || '—')}</dd></div>
+                ${source.revision_version ? `<div><dt>${escapeHTML(t('reconstruction.w14.revisionVersion'))}</dt><dd>${escapeHTML(String(source.revision_version))}</dd></div>` : ''}
+                ${source.created_at ? `<div><dt>${escapeHTML(t('reconstruction.w14.createdTime'))}</dt><dd>${escapeHTML(source.created_at)}</dd></div>` : ''}
+              </dl>
             </li>
           `).join('')}
         </ul>
@@ -264,8 +273,8 @@ function customerHTML(experience) {
         <article><h4>${escapeHTML(t('reconstruction.w14.reducingConditions'))}</h4><ul>${conditionListHTML(customer.reducing_conditions)}</ul></article>
         <article><h4>${escapeHTML(t('reconstruction.w14.influenceSpread'))}</h4><ul>${influenceListHTML(customer.influence_spread)}</ul></article>
         <article><h4>${escapeHTML(t('reconstruction.w14.confirmed'))}</h4><ul>${listHTML(customer.confirmed)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.tentative'))}</h4><ul>${listHTML(customer.tentative)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.unknown'))}</h4><ul>${listHTML(customer.unknown.map(question => ({ label: localizedQuestion(question, conflicts.find(conflict => question.related_conflict_ids?.includes(conflict.conflict_id))) })))}</ul></article>
+        <article><h4>${escapeHTML(t('reconstruction.w14.tentative'))}</h4><ul>${listHTML(list(customer.tentative_summary_keys).map(key => ({ label: t(key) })))}</ul></article>
+        <article><h4>${escapeHTML(t('reconstruction.w14.unknown'))}</h4><p>${escapeHTML(customer.unknown_summary_key ? t(customer.unknown_summary_key, { count: list(customer.unknown).length }) : t('reconstruction.w14.none'))}</p></article>
       </div>
       ${gateHTML(experience.reading_gate)}
       <section class="w14-confirmation" ${questions.length ? '' : 'hidden'}>
@@ -302,6 +311,26 @@ function customerHTML(experience) {
             <li><code>${escapeHTML(item.source_field)}</code> · ${escapeHTML(item.evidence_id)} · ${escapeHTML(item.raw_text)}</li>
           `).join('')}
         </ul>
+      </details>
+      <details class="w14-technical-metadata evidence-structure-metadata">
+        <summary>${escapeHTML(t('reconstruction.w14.technicalEvidenceStructure'))}</summary>
+        <pre>${technicalJSON(experience.views?.technical?.evidence_structure)}</pre>
+      </details>
+      <details class="w14-technical-metadata lineage-metadata">
+        <summary>${escapeHTML(t('reconstruction.w14.technicalLineage'))}</summary>
+        <pre>${technicalJSON(experience.views?.technical?.lineage)}</pre>
+      </details>
+      <details class="w14-technical-metadata revision-metadata">
+        <summary>${escapeHTML(t('reconstruction.w14.technicalRevisionMetadata'))}</summary>
+        <pre>${technicalJSON(experience.views?.technical?.revision_metadata)}</pre>
+      </details>
+      <details class="w14-technical-metadata confidence-components">
+        <summary>${escapeHTML(t('reconstruction.w14.technicalConfidenceComponents'))}</summary>
+        <pre>${technicalJSON(experience.views?.technical?.confidence_components)}</pre>
+      </details>
+      <details class="w14-technical-metadata conflict-details">
+        <summary>${escapeHTML(t('reconstruction.w14.technicalConflictDetails'))}</summary>
+        <pre>${technicalJSON(experience.views?.technical?.conflicts)}</pre>
       </details>
     </div>
   `;
@@ -354,6 +383,7 @@ async function submitCorrection(form, result, experience, onUpdated) {
       field: text(form.dataset.field),
       previous_value: text(form.dataset.previousValue),
       new_value: newValue,
+      resolution_mode: selected === 'progressive_onset' ? 'progressive_onset' : '',
       reason: text(form.elements.reason?.value),
       source: 'customer_inline_correction'
     },
@@ -391,17 +421,25 @@ export function renderReconstructionExperience(result, options = {}) {
   const root = qs('#entrySection');
   if (!experience || !root) return { rendered: false, reason: 'experience_unavailable' };
   root.innerHTML = customerHTML(experience);
+  const technicalRecord = document.querySelector('.technical-record');
+  if (technicalRecord) technicalRecord.hidden = true;
   root.querySelectorAll('[data-reconstruction-view]').forEach(button => {
     button.addEventListener('click', () => {
       const selected = button.dataset.reconstructionView;
+      root.dataset.activeReconstructionView = selected;
       root.querySelectorAll('[data-reconstruction-view]').forEach(item =>
         item.setAttribute('aria-pressed', String(item === button))
       );
       root.querySelectorAll('[data-w14-view]').forEach(view => {
         view.hidden = view.dataset.w14View !== selected;
       });
+      if (technicalRecord) {
+        technicalRecord.hidden = selected !== 'technical';
+        technicalRecord.open = selected === 'technical';
+      }
     });
   });
+  root.dataset.activeReconstructionView = 'customer';
   root.querySelectorAll('[name="correction"]').forEach(input => {
     input.addEventListener('change', event => {
       const custom = event.target.form.querySelector('[data-custom-correction]');
@@ -414,6 +452,18 @@ export function renderReconstructionExperience(result, options = {}) {
       submitCorrection(form, result, experience, options.onUpdated).catch(error => {
         form.querySelector('[data-correction-status]').textContent =
           error?.message || t('reconstruction.w14.correctionFailed');
+      });
+    });
+    form.addEventListener('reset', () => {
+      const editor = form.closest('.w14-inline-editor');
+      if (editor) editor.open = false;
+    });
+  });
+  root.querySelectorAll('.w14-inline-editor').forEach(editor => {
+    editor.addEventListener('toggle', () => {
+      if (!editor.open) return;
+      root.querySelectorAll('.w14-inline-editor[open]').forEach(other => {
+        if (other !== editor) other.open = false;
       });
     });
   });

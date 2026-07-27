@@ -109,8 +109,9 @@ const corrected = buildReconstructionExperience(entry, legacy, {
     target_type: 'timeline_event',
     target_id: relative.event_id,
     field: 'reported_time',
-    previous_value: '三个月前',
+    previous_value: '三个月前 | 2 年前',
     new_value: '两年前已有迹象，三个月前明显加重',
+    resolution_mode: 'progressive_onset',
     reason: 'Customer clarified progressive onset'
   },
   downstreamArtifacts: [
@@ -128,6 +129,11 @@ assert.equal(corrected.downstream_staleness.some(item => item.artifact_type === 
 assert.equal(corrected.downstream_staleness.some(item => item.artifact_type === 'navigation'), true);
 assert.equal(corrected.conflicts.length, 0);
 assert.equal(corrected.reading_gate.allowed, true);
+assert.deepEqual(
+  corrected.timeline.events.map(event => event.reported_time),
+  ['2 年前', '三个月前'],
+  'An explicit progressive correction must preserve both reported source times'
+);
 
 const nonMaterial = buildReconstructionExperience(entry, legacy, {
   previousReconstruction: result,
@@ -330,6 +336,29 @@ assert.ok(production.views.customer.enhancing_conditions.length <= 8);
 assert.ok(production.views.customer.reducing_conditions.length <= 8);
 assert.ok(production.views.customer.influence_spread.length <= 12);
 
+// D15: Customer projection separates narrative, conditions and downstream influence.
+assert.equal(production.views.customer.tentative_summary_keys.length > 0, true);
+assert.equal(
+  production.views.customer.influence_spread.every(relation =>
+    !production.conditions.all.some(condition =>
+      condition.canonical_concept === relation.source_id
+    )
+  ),
+  true,
+  'Customer influence must exclude condition → primary-response relations'
+);
+const reducingRelations = production.influence_map.relations.filter(relation =>
+  relation.relation_type === 'reduces'
+);
+assert.equal(reducingRelations.length > 0, true);
+assert.equal(reducingRelations.every(relation =>
+  /减弱|reduces/i.test(relation.explanation)
+), true, 'Reducing relations must state their direction');
+assert.equal(production.views.customer.confirmed.some(item =>
+  /^(?:yes|no|true|false|数目超过100)$/i.test(item.canonical_text)
+), false);
+assert.equal(production.views.customer.unknown_summary_key, 'reconstruction.w14.unknownSummary');
+
 // Evidence classifications remain distinct in the evidence projection.
 const productionClassification = raw => production.evidence.items.find(item => item.raw_text === raw)?.classification;
 assert.equal(productionClassification('社交活动减少。'), 'reported_behavior');
@@ -461,6 +490,13 @@ assert.equal(evidenceRendererBlock.includes('item.source_field'), false);
 assert.equal(evidenceRendererBlock.includes('sourceLabel('), true);
 assert.equal(rendererSource.includes('experience.views?.technical?.evidence_items'), true);
 assert.equal(rendererSource.includes('item.source_field'), true);
+assert.equal(rendererSource.includes('listHTML(customer.tentative)'), false);
+assert.equal(rendererSource.includes('tentative_summary_keys'), true);
+assert.equal(rendererSource.includes('unknown_summary_key'), true);
+assert.equal(rendererSource.includes(".w14-inline-editor[open]"), true);
+assert.equal(rendererSource.includes("other.open = false"), true);
+assert.equal(rendererSource.includes("technicalRecord.hidden = selected !== 'technical'"), true);
+assert.equal(rendererSource.includes("resolution_mode: selected === 'progressive_onset'"), true);
 assert.deepEqual(
   new Set(canonicalFor(repeatedSocial).merged_source_paths),
   new Set(['entryEvidence', 'knownReality', 'evidenceBoundary.observedEvidence'])
@@ -492,6 +528,79 @@ for (const localePath of [
     );
   }
 }
+
+// D18 and D23: a confirmed progressive choice binds to one revision and two
+// explicit source times; no unconfirmed compromise is invented.
+const progressiveTimeline = buildReconstructionExperience(entry, legacy, {
+  previousReconstruction: result,
+  correction: {
+    revision_id: 'revision_progressive_timeline',
+    target_type: 'timeline_event',
+    target_id: result.conflicts[0].conflict_id,
+    field: 'reported_time',
+    previous_value: '三个月前 | 2 年前',
+    new_value: '两年前已有迹象，三个月前明显加重',
+    resolution_mode: 'progressive_onset',
+    source: 'customer_inline_correction'
+  },
+  now: '2026-07-27T04:00:00.000Z'
+}).experience;
+assert.deepEqual(
+  progressiveTimeline.timeline.events.map(event => event.reported_time),
+  ['2 年前', '三个月前']
+);
+assert.equal(progressiveTimeline.timeline.events.every(event =>
+  event.confirmation_status === 'confirmed' &&
+  event.resolution_revision_id === 'revision_progressive_timeline'
+), true);
+assert.equal(progressiveTimeline.conflicts.length, 0);
+assert.equal(progressiveTimeline.reading_gate.allowed, true);
+assert.equal(
+  production.timeline.events.some(event => event.normalized_time.type === 'progressive_range'),
+  false
+);
+
+// D17/D19: semantic keys carry classification family, SPO, time, polarity and direction.
+assert.equal(evidenceCards.every(item => {
+  const semantic = item.canonical_semantics;
+  return [
+    'normalized_meaning',
+    'classification_family',
+    'canonical_subject',
+    'canonical_predicate',
+    'canonical_object',
+    'temporal_scope',
+    'polarity',
+    'condition_direction'
+  ].every(key => Object.hasOwn(semantic, key));
+}), true);
+
+const semanticBoundary = buildReconstructionExperience({
+  runtimeEntityId: 'runtime_semantic_boundary',
+  runtimeEntryId: 'entry_semantic_boundary',
+  realityChange: { normalizedStatement: '财务状态发生变化。' },
+  entryEvidence: [
+    { evidenceId: 'income_uncertain_1', statement: '收入不确定。' },
+    { evidenceId: 'income_uncertain_2', statement: '个人业务收入确定性下降。' },
+    { evidenceId: 'income_absent', statement: '家庭完全没有收入。' }
+  ],
+  reconstructionCorrections: [
+    {
+      evidenceId: 'empty_revision',
+      target_type: 'evidence',
+      target_id: 'income_uncertain_1',
+      field: 'confirmation_status',
+      new_value: ''
+    }
+  ]
+}, {}, { now: '2026-07-27T04:10:00.000Z' }).experience;
+assert.equal(semanticBoundary.views.evidence.items.filter(item =>
+  item.canonical_semantics.normalized_meaning === 'income_uncertainty'
+).length, 1);
+assert.equal(semanticBoundary.views.evidence.items.some(item =>
+  item.canonical_text === '家庭完全没有收入。'
+), true, 'Related but distinct intensity must remain a separate card');
+assert.equal(semanticBoundary.evidence.correction_artifacts.length, 0);
 
 // The real API refuses to route a new Reading while the server Gate is blocked.
 const productionReadingInput = {

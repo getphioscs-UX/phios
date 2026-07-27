@@ -38,6 +38,8 @@ const requiredFiles = [
   'assets/css/reconstruction-visual-alignment.css',
   'assets/css/reconstruction-experience.css',
   'assets/js/reconstruction.js',
+  'assets/js/modules/reconstruction-render.js',
+  'assets/js/modules/reconstruction-experience-render.js',
   'assets/js/modules/reconstruction-customer-projection.js',
   'assets/js/modules/reconstruction-visual-alignment.js',
   'assets/js/locales/en/reconstruction.js',
@@ -137,6 +139,11 @@ assert.deepEqual(
   ['entry', 'reconstruction', 'reading', 'navigation', 'review', 'memory', 'continuity']
 );
 assert.match(progressBlock, /aria-current="step"/);
+assert.match(
+  page,
+  /<details class="technical-record" hidden>/,
+  'Technical Figure record must be hidden until Technical View is selected'
+);
 
 const controller = await read('assets/js/reconstruction.js');
 for (const behavior of [
@@ -273,6 +280,8 @@ for (const token of [
 
 const experienceCss = await read('assets/css/reconstruction-experience.css');
 const runtimeCss = await read('assets/css/runtime-workspace.css');
+const technicalRenderer = await read('assets/js/modules/reconstruction-render.js');
+const experienceRenderer = await read('assets/js/modules/reconstruction-experience-render.js');
 
 for (const token of [
   '--technical-bg',
@@ -309,7 +318,15 @@ for (const contract of [
   'li.is-locked',
   ':focus-visible',
   '@media (max-width: 768px)',
-  '@media (max-width: 360px)'
+  '@media (max-width: 360px)',
+  '@media print',
+  '.w14-evidence-list',
+  'grid-template-columns: repeat(2',
+  '.technical-summary',
+  '-webkit-line-clamp: 3',
+  '.technical-missing-summary',
+  '.w14-technical-metadata',
+  '.w14-inline-editor'
 ]) {
   assert.equal(
     experienceCss.includes(contract),
@@ -364,6 +381,58 @@ assert.match(
   /li\.is-locked[\s\S]*?opacity:\s*1/,
   'Sidebar locked stages must use a muted color without parent opacity loss'
 );
+
+assert.match(
+  experienceCss,
+  /@media print[\s\S]*?\.w14-inline-editor[\s\S]*?display:\s*none\s*!important/,
+  'Correction editors must not expand the printed/PDF projection'
+);
+assert.match(
+  experienceCss,
+  /@media print[\s\S]*?\[data-w14-view\]\[hidden\][\s\S]*?display:\s*none\s*!important/,
+  'Hidden Reconstruction views must stay out of print/PDF output'
+);
+assert.match(
+  experienceCss,
+  /\.w14-inline-editor summary\s*\{[\s\S]*?min-height:\s*44px/,
+  'Compact correction controls must preserve a 44px touch target'
+);
+assert.equal(
+  technicalRenderer.includes("t('reconstruction.noSupportingEvidence')"),
+  false,
+  'Figure 4A cards must not repeat the full missing-evidence template'
+);
+assert.equal(
+  technicalRenderer.includes("t('reconstruction.noConsciousPattern')"),
+  false,
+  'Figure 5E cards must not repeat the full missing-stage template'
+);
+for (const densityContract of [
+  'technicalEvidenceMarkup',
+  'renderMissingTechnicalSummary',
+  'technical-full-evidence',
+  'technical-evidence-count'
+]) {
+  assert.equal(
+    technicalRenderer.includes(densityContract),
+    true,
+    `Technical density renderer is missing: ${densityContract}`
+  );
+}
+for (const isolationContract of [
+  "root.dataset.activeReconstructionView = 'customer'",
+  "technicalRecord.hidden = selected !== 'technical'",
+  "technicalRecord.open = selected === 'technical'",
+  ".w14-inline-editor[open]",
+  'other.open = false',
+  'w14-technical-metadata'
+]) {
+  assert.equal(
+    experienceRenderer.includes(isolationContract),
+    true,
+    `Reconstruction view/interaction isolation is missing: ${isolationContract}`
+  );
+}
 
 function hexToRgb(value) {
   const match = /^#([0-9a-f]{6})$/i.exec(value);

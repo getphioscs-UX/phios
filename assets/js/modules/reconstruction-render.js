@@ -441,8 +441,7 @@ function normalizeCoordinates(reconstruction) {
   return COORDINATE_LABELS.map(label => ({
     label,
     status: 'not_established',
-    summary:
-      t('reconstruction.noSupportingEvidence')
+    summary: ''
   }));
 }
 
@@ -465,8 +464,7 @@ function normalizeConsciousStages(reconstruction) {
     code,
     label,
     status: 'not_established',
-    summary:
-      t('reconstruction.noConsciousPattern')
+    summary: ''
   }));
 }
 
@@ -904,6 +902,43 @@ export function renderFormationArcs(
    CARRIER RENDERING
 ========================================================= */
 
+function technicalEvidenceMarkup(value) {
+  const source = cleanText(value);
+  if (!source) {
+    return `<span class="technical-evidence-count">${escapeHTML(t('reconstruction.technicalEvidenceNone'))}</span>`;
+  }
+  if (source.length <= 180) {
+    return `
+      <p class="technical-summary">${escapeHTML(source)}</p>
+      <span class="technical-evidence-count">${escapeHTML(t('reconstruction.technicalEvidenceCount', { count: 1 }))}</span>
+    `;
+  }
+  return `
+    <p class="technical-summary">${escapeHTML(source.slice(0, 180))}…</p>
+    <details class="technical-full-evidence">
+      <summary>${escapeHTML(t('reconstruction.expandFullEvidence'))}</summary>
+      <p>${escapeHTML(source)}</p>
+    </details>
+    <span class="technical-evidence-count">${escapeHTML(t('reconstruction.technicalEvidenceCount', { count: 1 }))}</span>
+  `;
+}
+
+function renderMissingTechnicalSummary(element, values, textGetter) {
+  if (!element) return;
+  const marker = `technical-missing-${element.id}`;
+  element.parentElement?.querySelector(`[data-technical-missing="${marker}"]`)?.remove();
+  const missing = arrayValue(values)
+    .filter(item => !cleanText(textGetter(item)))
+    .map(item => cleanText(item?.label))
+    .filter(Boolean);
+  if (!missing.length) return;
+  element.insertAdjacentHTML('beforebegin', `
+    <p class="technical-missing-summary" data-technical-missing="${escapeHTML(marker)}">
+      ${escapeHTML(t('reconstruction.technicalMissingSummary', { items: missing.join('、') }))}
+    </p>
+  `);
+}
+
 export function renderCarrierRuntime(
   reconstruction
 ) {
@@ -920,16 +955,18 @@ export function renderCarrierRuntime(
 
   const renderModelGrid = (element, values) => {
     if (!element) return;
+    renderMissingTechnicalSummary(element, values, item => item?.evidence);
     element.innerHTML = arrayValue(values).map(item => `
       <article class="coordinate-card">
         <span>${escapeHTML(cleanText(item?.label))}</span>
-        <strong>${escapeHTML(getText(item?.evidence, t('reconstruction.noSupportingEvidence')))}</strong>
+        ${technicalEvidenceMarkup(item?.evidence)}
         <span class="state-badge">${escapeHTML(localizedStatus(item?.status || 'not_established'))}</span>
       </article>
     `).join('');
   };
 
   if (coordinateGrid) {
+    renderMissingTechnicalSummary(coordinateGrid, coordinates, item => item?.summary);
     coordinateGrid.innerHTML =
       coordinates
         .map(item => `
@@ -941,14 +978,7 @@ export function renderCarrierRuntime(
               )}
             </span>
 
-            <strong>
-              ${escapeHTML(
-                getText(
-                  item?.summary,
-                  t('reconstruction.noSupportingEvidence')
-                )
-              )}
-            </strong>
+            ${technicalEvidenceMarkup(item?.summary)}
 
             <span class="state-badge">
               ${escapeHTML(
@@ -988,6 +1018,7 @@ export function renderConsciousRuntime(
       reconstruction
     );
 
+  renderMissingTechnicalSummary(container, stages, stage => stage?.summary);
   container.innerHTML =
     stages
       .map(stage => {
@@ -1008,14 +1039,7 @@ export function renderConsciousRuntime(
               ${escapeHTML(label)}
             </h4>
 
-            <p>
-              ${escapeHTML(
-                getText(
-                  stage?.summary,
-                  t('reconstruction.noConsciousPattern')
-                )
-              )}
-            </p>
+            ${technicalEvidenceMarkup(stage?.summary)}
 
             <span class="state-badge">
               ${escapeHTML(

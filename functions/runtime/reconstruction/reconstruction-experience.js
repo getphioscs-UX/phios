@@ -249,12 +249,22 @@ function canonicalSemanticKey(value, dimensions = {}) {
     clean(dimensions.normalized_meaning) ||
       semanticConcept(value) ||
       normalizedDuplicateKey(value),
-    clean(dimensions.classification),
+    clean(dimensions.classification_family || dimensions.classification),
     clean(dimensions.canonical_subject),
     clean(dimensions.canonical_predicate),
     clean(dimensions.canonical_object),
-    clean(dimensions.temporal_scope)
+    clean(dimensions.temporal_scope),
+    clean(dimensions.polarity),
+    clean(dimensions.condition_direction)
   ].join('|');
+}
+
+function classificationFamily(classification) {
+  const value = clean(classification);
+  if (value === 'reported_counter_condition') return 'reported_condition';
+  if (value.startsWith('reported_')) return 'reported';
+  if (['direct_observation', 'documented_fact'].includes(value)) return 'observed';
+  return value || 'unknown';
 }
 
 function buildEvidence(runtimeEntry) {
@@ -284,7 +294,9 @@ function buildEvidence(runtimeEntry) {
         source: clean(source.value?.source) || source.sourceField,
         source_path: source.sourceField,
         source_label_key: sourceLabelKey(source.sourceField),
-        source_round: source.sourceRound
+        source_round: source.sourceRound,
+        revision_version: Number(source.value?.revision_version || source.value?.version || 0) || null,
+        created_at: clean(source.value?.created_at || source.value?.timestamp)
       },
       correction: source.sourceField === 'reconstructionCorrections'
         ? {
@@ -292,6 +304,7 @@ function buildEvidence(runtimeEntry) {
             target_type: clean(source.value?.target_type),
             target_id: clean(source.value?.target_id),
             field: clean(source.value?.field),
+            resolution_mode: clean(source.value?.resolution_mode),
             previous_value: source.value?.previous_value ?? null,
             new_value: source.value?.new_value ?? source.value?.statement ?? null,
             created_at: clean(source.value?.created_at || source.value?.timestamp)
@@ -350,11 +363,18 @@ function consolidateDuplicates(evidence) {
     const semantics = {
       normalized_meaning: concept || normalizedDuplicateKey(representative.raw_text),
       classification: representative.classification,
+      classification_family: classificationFamily(representative.classification),
       canonical_subject: concept ? concept.split('_')[0] : '',
       canonical_predicate: concept || representative.classification,
       canonical_object: concept ? concept.split('_').slice(1).join('_') : '',
       temporal_scope: representative.classification === 'reported_time'
         ? normalizedDuplicateKey(representative.raw_text)
+        : '',
+      polarity: representative.classification === 'reported_counter_condition'
+        ? 'counter'
+        : 'reported',
+      condition_direction: representative.classification === 'reported_counter_condition'
+        ? 'reduces'
         : ''
     };
     const mergedEvidenceIds = [...new Set(group.items.map(item => item.evidence_id))];
@@ -374,6 +394,8 @@ function consolidateDuplicates(evidence) {
       source_path: item.source_field,
       source_label_key: item.lineage.source_label_key,
       source_round: item.source_round,
+      revision_version: item.lineage.revision_version,
+      created_at: item.lineage.created_at,
       raw_text: item.raw_text,
       classification: item.classification,
       confirmation_status: item.confirmation_status,
@@ -388,6 +410,9 @@ function consolidateDuplicates(evidence) {
       canonical_semantic_key: canonicalSemanticKey(representative.raw_text, semantics),
       canonical_semantics: semantics,
       classification: representative.classification,
+      secondary_classifications: [...new Set(group.items
+        .map(item => item.classification)
+        .filter(value => value !== representative.classification))],
       confirmation_status: representative.confirmation_status,
       maturity: representative.maturity,
       source_count: group.items.length,
@@ -466,6 +491,25 @@ function timeComparable(normalized) {
   return `${normalized.type}:${normalized.value}`;
 }
 
+function correctionTimeValues(item) {
+  if (
+    item.source_field !== 'reconstructionCorrections' ||
+    item.correction?.resolution_mode !== 'progressive_onset'
+  ) {
+    return [];
+  }
+  return clean(String(item.correction.previous_value ?? ''))
+    .split('|')
+    .map(clean)
+    .filter(value => Boolean(reportedTimeText(value)));
+}
+
+function relativeDurationWeight(normalized) {
+  if (normalized.type !== 'relative_duration') return 0;
+  const multiplier = { day: 1, week: 7, month: 30, year: 365 }[normalized.unit] || 0;
+  return Number(normalized.value || 0) * multiplier;
+}
+
 function buildTimeline(evidence) {
   const classifiedTime = evidence.filter(item =>
     item.classification === 'reported_time' &&
@@ -475,7 +519,10 @@ function buildTimeline(evidence) {
       item.source_field === 'reconstructionCorrections' ||
       ['carrier_signatures', 'runtime_conditions'].includes(item.source_target)
     ) &&
-    Boolean(reportedTimeText(item.raw_text))
+    (
+      Boolean(reportedTimeText(item.raw_text)) ||
+      correctionTimeValues(item).length > 1
+    )
   );
   const correctedTime = classifiedTime.filter(item =>
     item.source_field === 'reconstructionCorrections' &&
@@ -485,27 +532,35 @@ function buildTimeline(evidence) {
   const timeEvidence = correctedTime.length ? correctedTime : classifiedTime;
   const eventGroups = [];
   timeEvidence.forEach(item => {
-    const expressions = reportedTimeExpressions(item.raw_text);
-    const isConfirmedProgressive =
-      item.source_field === 'reconstructionCorrections' &&
-      item.lineage?.source === 'customer_inline_correction' &&
-      item.confirmation_status === 'confirmed' &&
-      expressions.length > 1;
-    const reported = isConfirmedProgressive ? item.raw_text : expressions[0];
-    const normalized = isConfirmedProgressive
-      ? {
-          type: 'progressive_range',
-          values: expressions.map(parseReportedTime)
-        }
-      : parseReportedTime(reported);
-    const key = timeComparable(normalized);
-    const existing = eventGroups.find(group => group.key === key);
-    if (existing) {
-      existing.evidence.push(item);
-    } else {
-      eventGroups.push({ key, reported, normalized, evidence: [item] });
-    }
+    const progressiveValues = correctionTimeValues(item);
+    const expressions = progressiveValues.length > 1
+      ? progressiveValues
+      : reportedTimeExpressions(item.raw_text).slice(0, 1);
+    expressions.forEach((reported, progressiveIndex) => {
+      const normalized = parseReportedTime(reported);
+      const key = timeComparable(normalized);
+      const existing = eventGroups.find(group => group.key === key);
+      if (existing) {
+        existing.evidence.push(item);
+      } else {
+        eventGroups.push({
+          key,
+          reported,
+          normalized,
+          evidence: [item],
+          resolution_revision_id: progressiveValues.length > 1
+            ? clean(item.correction?.revision_id || item.evidence_id)
+            : '',
+          progressive_stage: progressiveValues.length > 1
+            ? (progressiveIndex === 0 ? 'reported_value_a' : 'reported_value_b')
+            : ''
+        });
+      }
+    });
   });
+  eventGroups.sort((left, right) =>
+    relativeDurationWeight(right.normalized) - relativeDurationWeight(left.normalized)
+  );
   const events = eventGroups.map((group, index) => {
     const normalized_time = group.normalized;
     return {
@@ -523,13 +578,21 @@ function buildTimeline(evidence) {
         : 'reported',
       confidence: normalized_time.type === 'unresolved_expression' ? 0.45 : 0.72,
       conflict_ids: [],
-      sequence_order: index + 1
+      sequence_order: index + 1,
+      resolution_revision_id: group.resolution_revision_id || null,
+      progressive_stage: group.progressive_stage || null
     };
   });
   const conflicts = [];
   for (let left = 0; left < events.length; left += 1) {
     for (let right = left + 1; right < events.length; right += 1) {
       if (timeComparable(events[left].normalized_time) === timeComparable(events[right].normalized_time)) continue;
+      if (
+        events[left].resolution_revision_id &&
+        events[left].resolution_revision_id === events[right].resolution_revision_id
+      ) {
+        continue;
+      }
       const conflict = {
         conflict_id: stableId('conflict_temporal', conflicts.length),
         conflict_type: 'temporal_conflict',
@@ -659,6 +722,13 @@ function buildInfluenceMap(runtimeEntry, evidence, conditions) {
     reduced_work_confidence: ['Reduced work confidence', '工作信心下降']
   };
   const label = id => labels[id]?.[language === 'zh-Hans' ? 1 : 0] || id;
+  const relationLabel = type => ({
+    amplifies: language === 'zh-Hans' ? '增强' : 'amplifies',
+    reduces: language === 'zh-Hans' ? '减弱' : 'reduces',
+    maintains: language === 'zh-Hans' ? '维持' : 'maintains',
+    constrains: language === 'zh-Hans' ? '限制' : 'constrains',
+    spreads_to: language === 'zh-Hans' ? '扩散至' : 'spreads to'
+  })[type] || type;
   const nodes = new Map();
   const addNode = (id, type, displayLabel, evidenceIds = []) => {
     if (!nodes.has(id)) {
@@ -681,8 +751,12 @@ function buildInfluenceMap(runtimeEntry, evidence, conditions) {
   const relations = [];
   const addRelation = ({ sourceId, targetId, type, evidenceIds, classification = 'reported_relation' }) => {
     const key = canonicalSemanticKey(sourceId, {
-      relation_type: type,
-      canonical_target: targetId
+      classification_family: 'reported_relation',
+      canonical_subject: sourceId,
+      canonical_predicate: type,
+      canonical_object: targetId,
+      polarity: type === 'reduces' ? 'reducing' : 'affirming',
+      condition_direction: type
     });
     const existing = relations.find(item => item.canonical_semantic_key === key);
     if (existing) {
@@ -705,7 +779,9 @@ function buildInfluenceMap(runtimeEntry, evidence, conditions) {
       classification,
       confirmation_status: 'tentative',
       confidence: classification === 'reported_relation' ? 0.64 : 0.5,
-      explanation: `${source.label} → ${target.label}`
+      explanation: language === 'zh-Hans'
+        ? `${source.label} → ${relationLabel(type)}${target.label}`
+        : `${source.label} — ${relationLabel(type)} → ${target.label}`
     });
   };
   conditions.all.forEach(condition => {
@@ -920,6 +996,7 @@ function applyCorrection(runtimeEntry, correction, timestamp = '') {
         target_type: targetType,
         target_id: clean(correction?.target_id),
         field: clean(correction?.field),
+        resolution_mode: clean(correction?.resolution_mode),
         previous_value: correction?.previous_value ?? null,
         created_at: clean(correction?.created_at) || clean(timestamp),
         new_value: value
@@ -945,6 +1022,7 @@ function applyCorrection(runtimeEntry, correction, timestamp = '') {
         target_type: targetType,
         target_id: clean(correction?.target_id),
         field: clean(correction?.field),
+        resolution_mode: clean(correction?.resolution_mode),
         previous_value: correction?.previous_value ?? null,
         created_at: clean(correction?.created_at) || clean(timestamp),
         new_value: value
@@ -1005,6 +1083,27 @@ function uniqueProjection(items, keyBuilder, limit = 12) {
     seen.add(key);
     return true;
   }).slice(0, limit);
+}
+
+function isIndependentRealityStatement(value) {
+  const source = clean(value);
+  const normalized = normalizedDuplicateKey(source);
+  if (!normalized) return false;
+  if (/^(?:yes|no|true|false|null|undefined|confirmed|tentative|reported|unknown|是|否|对|不对|确认|暂定|未知)$/i.test(source)) {
+    return false;
+  }
+  if (/^(?:数目|数量|count|number).{0,12}\d+$/i.test(source)) return false;
+  if (/^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$/i.test(source)) return false;
+  return normalized.length >= 4;
+}
+
+function statementCoveredByNarrative(statement, narrative) {
+  const left = normalizedDuplicateKey(statement);
+  const right = normalizedDuplicateKey(narrative);
+  if (!left || !right) return false;
+  if (right.includes(left) || left.includes(right)) return true;
+  const concept = semanticConcept(statement);
+  return Boolean(concept) && concept === semanticConcept(narrative);
 }
 
 function stalenessRecords(artifacts, materiality, version, revision, timestamp) {
@@ -1139,12 +1238,15 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
     )
   };
   const customerInfluence = uniqueProjection(
-    influenceMap.relations,
+    influenceMap.relations.filter(relation =>
+      !conditions.all.some(condition => condition.canonical_concept === relation.source_id)
+    ),
     item => item.canonical_semantic_key,
     12
   );
   const customerConfirmed = uniqueProjection(
     canonicalEvidence.filter(item =>
+      isIndependentRealityStatement(item.canonical_text) &&
       item.merged_evidence_ids.some(id => {
         const candidate = traceableEvidence.find(value => value.evidence_id === id);
         return candidate?.confirmation_status === 'confirmed' ||
@@ -1156,6 +1258,8 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
   );
   const customerTentative = uniqueProjection(
     canonicalEvidence.filter(item =>
+      isIndependentRealityStatement(item.canonical_text) &&
+      !statementCoveredByNarrative(item.canonical_text, primaryChange) &&
       !customerConfirmed.some(confirmed =>
         (semanticConcept(confirmed.canonical_text) || normalizedDuplicateKey(confirmed.canonical_text)) ===
         (semanticConcept(item.canonical_text) || normalizedDuplicateKey(item.canonical_text))
@@ -1169,6 +1273,21 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
     item => semanticConcept(item.canonical_text) || normalizedDuplicateKey(item.canonical_text),
     8
   );
+  const tentativeSummaryKeys = [
+    ...(conditions.enhancing.length
+      ? ['reconstruction.w14.tentativeSummaries.conditions']
+      : []),
+    ...(influenceMap.relations.some(item =>
+      ['balance_checking', 'purchase_delay'].includes(item.target_id)
+    )
+      ? ['reconstruction.w14.tentativeSummaries.behavior']
+      : []),
+    ...(influenceMap.relations.some(item =>
+      ['reduced_social_activity', 'reduced_work_confidence'].includes(item.target_id)
+    )
+      ? ['reconstruction.w14.tentativeSummaries.spread']
+      : [])
+  ];
   const experience = {
     schema_version: 'phi-os.reconstruction-experience.v1',
     ...summary,
@@ -1227,11 +1346,15 @@ export function buildReconstructionExperience(runtimeEntry, legacyReconstruction
         influence_spread: customerInfluence,
         confirmed: customerConfirmed,
         tentative: customerTentative,
+        tentative_summary_keys: tentativeSummaryKeys,
         unknown: uniqueProjection(
           unknownQuestions.filter(question => question.status !== 'answered'),
           item => `${item.unknown_type}|${item.question_key}`,
           6
         ),
+        unknown_summary_key: unknownQuestions.some(question => question.status !== 'answered')
+          ? 'reconstruction.w14.unknownSummary'
+          : '',
         reading_gate: readingGate,
         confidence: { level: confidence.level, explanation_keys: confidence.explanation_keys }
       },

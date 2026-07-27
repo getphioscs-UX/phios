@@ -65,6 +65,9 @@
   display: inline-flex;
   align-items: center;
   color: var(--link, #315c4b);
+  font-size: .82rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
   cursor: pointer;
 }
 .w14-inline-editor form {
@@ -89,7 +92,12 @@
 }
 .w14-evidence-list {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .75rem;
+}
+.w14-evidence-list article {
+  min-width: 0;
+  align-self: start;
 }
 .w14-evidence-list article > p:first-child {
   margin-top: 0;
@@ -116,6 +124,78 @@
   border-radius: 999px;
   font-size: .78rem;
 }
+
+.technical-missing-summary {
+  margin: 0 0 .65rem;
+  padding: .65rem .8rem;
+  border-left: 3px solid var(--technical-accent);
+  color: var(--technical-text-secondary);
+  background: var(--technical-surface-elevated);
+  font-size: .78rem;
+}
+
+.technical-summary {
+  display: -webkit-box;
+  margin: .55rem 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  color: var(--technical-text-secondary);
+}
+
+.technical-full-evidence {
+  margin: .45rem 0;
+}
+
+.technical-full-evidence summary {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--technical-accent);
+  cursor: pointer;
+}
+
+.technical-evidence-count {
+  display: block;
+  margin-top: .45rem;
+  color: var(--technical-text-muted);
+  font-size: .72rem;
+}
+
+.technical-record-body .coordinate-card,
+.technical-record-body .conscious-stage {
+  min-height: 0;
+}
+
+.w14-technical-evidence,
+.w14-technical-metadata {
+  margin-top: .75rem;
+  border: 1px solid var(--technical-border);
+  border-radius: .75rem;
+  background: var(--technical-surface);
+}
+
+.w14-technical-evidence > summary,
+.w14-technical-metadata > summary {
+  min-height: 44px;
+  padding: .7rem .85rem;
+  color: var(--technical-text-primary);
+  cursor: pointer;
+}
+
+.w14-technical-evidence > ul,
+.w14-technical-metadata > pre {
+  margin: 0;
+  padding: 0 .85rem .85rem;
+  color: var(--technical-text-secondary);
+}
+
+.w14-technical-metadata > pre {
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .w14-evidence-list dl,
 [data-w14-view="technical"] dl {
   display: grid;
@@ -137,6 +217,39 @@
   .w14-evidence-list dl div,
   [data-w14-view="technical"] dl div {
     grid-template-columns: 1fr;
+  }
+  .w14-evidence-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .w14-view-tabs,
+  .w14-inline-editor,
+  [data-w14-view][hidden],
+  .technical-record[hidden] {
+    display: none !important;
+  }
+
+  [data-w14-view]:not([hidden]) {
+    display: block !important;
+  }
+
+  .w14-evidence-details:not([open]) > :not(summary),
+  .w14-technical-evidence:not([open]) > :not(summary),
+  .technical-full-evidence:not([open]) > :not(summary) {
+    display: none !important;
+  }
+
+  .w14-evidence-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .w14-evidence-list article,
+  .technical-record-body .formation-arc,
+  .technical-record-body .coordinate-card,
+  .technical-record-body .conscious-stage {
+    break-inside: avoid;
   }
 }
 
