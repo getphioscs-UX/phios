@@ -27,12 +27,16 @@ assert.equal(registry.status, 'active');
 assert.equal(registry.history_table, 'runtime_migration_history');
 assert.equal(registry.rules.immutable_after_deployment, true);
 assert.equal(registry.rules.schema_mismatch_forbidden, true);
-assert.equal(migrations.length, 3);
+assert.equal(migrations.length, 4);
 assert.equal(migrations[0].file, 'db/migrations/0001_platform_foundation.sql');
 assert.equal(migrations[1].file, 'db/migrations/0002_initial_runtime.sql');
 assert.equal(
   migrations[2].file,
   'db/migrations/0003_financial_professional_infrastructure.sql'
+);
+assert.equal(
+  migrations[3].file,
+  'db/migrations/0004_book_commerce.sql'
 );
 assert.equal(migrations.every(migration => migration.immutable), true);
 
@@ -80,7 +84,8 @@ const migrationFiles = fs.readdirSync(path.join(root, 'db/migrations'))
 assert.deepEqual(migrationFiles, [
   '0001_platform_foundation.sql',
   '0002_initial_runtime.sql',
-  '0003_financial_professional_infrastructure.sql'
+  '0003_financial_professional_infrastructure.sql',
+  '0004_book_commerce.sql'
 ]);
 
 const migratedDatabase = new DatabaseSync(':memory:');
@@ -92,11 +97,11 @@ const firstRun = await applyRuntimeMigrations({
   now: () => '2026-07-23T00:00:00.000Z'
 });
 assert.equal(firstRun.status, 'migrated');
-assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3]);
+assert.deepEqual(firstRun.applied.map(item => item.version), [1, 2, 3, 4]);
 
 const history = await loadMigrationHistory(migratedAdapter);
-assert.equal(history.length, 3);
-assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3]);
+assert.equal(history.length, 4);
+assert.deepEqual(history.map(row => Number(row.version)), [1, 2, 3, 4]);
 assert.deepEqual(history.map(row => row.checksum), migrations.map(item => item.checksum));
 assert.equal(planPendingMigrations(migrations, history).length, 0);
 
@@ -193,6 +198,11 @@ const financialManifest = JSON.parse(
 );
 assert.equal(financialManifest.migration, migrations[2].file);
 assert.equal(financialManifest.schemaId, migrations[2].schema_id);
+const commerceManifest = JSON.parse(
+  read('content/registry/book-commerce-schema.json')
+);
+assert.equal(commerceManifest.migration, migrations[3].file);
+assert.equal(commerceManifest.schemaId, migrations[3].schema_id);
 
 const packageJson = JSON.parse(read('package.json'));
 assert(packageJson.scripts.check.includes('check-runtime-migrations.mjs'));

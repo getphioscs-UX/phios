@@ -8,12 +8,13 @@ import { BILLING_INTERVALS, SUBSCRIPTION_ACTIONS, SUBSCRIPTION_STATUSES, createS
 
 const root = process.cwd();
 const read = file => fs.readFile(path.join(root, file), 'utf8');
-const [accountPage, realityPage, membershipPage, css, en, zh, registry, checkout] = await Promise.all([
+const [accountPage, realityPage, membershipPage, css, en, zh, registry, checkout, checkoutScript] = await Promise.all([
   read('account.html'), read('account-my-reality.html'), read('membership.html'),
   read('assets/css/account-membership.css'), read('assets/js/locales/en/account.js'),
   read('assets/js/locales/zh-Hans/account.js'),
   read('content/registry/m4c-account-payment-membership.json').then(JSON.parse),
-  read('checkout.html')
+  read('checkout.html'),
+  read('assets/js/pages/checkout.js')
 ]);
 
 assert.equal(registry.baseline, 'e06cbae98ec16b26773f56e9cbbacecaee10262d');
@@ -62,7 +63,9 @@ for (const [page, keys] of [
 }
 assert.ok(accountPage.includes('Account services are not connected'));
 assert.ok(en.includes('Checkout and payment collection are not enabled'));
-assert.ok(checkout.includes('checkout') && checkout.includes('not'));
+assert.ok(checkout.includes('data-checkout-form'));
+assert.ok(checkoutScript.includes('/api/book-one-checkout'));
+assert.ok(en.includes('Checkout and payment collection are not enabled'));
 assert.ok(css.includes('@media (max-width: 900px)'));
 assert.ok(css.includes('@media (max-width: 600px)'));
 assert.deepEqual(registry.responsive_viewports, [360, 768, 1440]);

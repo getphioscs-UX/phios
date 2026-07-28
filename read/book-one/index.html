@@ -18,15 +18,29 @@
   <a class="skip-link" href="#reader-main" data-i18n="knowledge.common.skip">Skip to main content</a>
   <header data-public-header-placeholder></header>
   <main id="reader-main">
-    <section class="access-panel" data-access-guard>
+    <section class="access-panel" data-access-guard data-access-granted="false">
       <p class="knowledge-eyebrow" data-i18n="knowledge.access.eyebrow">Protected reading route</p>
-      <h1 data-i18n="knowledge.access.title">Book I access is locked.</h1>
-      <p data-i18n="knowledge.access.body">This route never trusts a browser-only purchase flag.</p>
-      <p><span data-i18n="knowledge.access.current">Current access state</span>: <strong class="access-state" data-access-state data-i18n="knowledge.access.state">not_purchased</strong></p>
+      <h1 data-access-title data-i18n="knowledge.access.title">Book I access is locked.</h1>
+      <p data-access-body data-i18n="knowledge.access.body">This route never trusts a browser-only purchase flag.</p>
+      <p><span data-i18n="knowledge.access.current">Current access state</span>:
+        <strong class="access-state" data-access-state>not_purchased</strong>
+      </p>
       <p class="knowledge-boundary" data-i18n="knowledge.access.progress">Reading progress never grants access by itself.</p>
+
+      <div class="protected-delivery" data-protected-delivery hidden>
+        <h2 data-i18n="knowledge.access.deliveryTitle">Your protected Book I copy</h2>
+        <p data-delivery-message data-i18n="knowledge.access.preparing">Your purchaser-watermarked PDF is being prepared.</p>
+        <dl class="checkout-facts" data-access-receipt hidden>
+          <div><dt data-i18n="knowledge.paymentSuccess.receipt">Receipt</dt><dd data-access-receipt-number></dd></div>
+          <div><dt data-i18n="knowledge.paymentSuccess.amount">Amount</dt><dd data-access-receipt-amount></dd></div>
+        </dl>
+        <button class="knowledge-action knowledge-action--primary" type="button" data-download-book hidden data-i18n="knowledge.access.download">Create secure download link</button>
+        <p class="checkout-status" data-download-status role="status" aria-live="polite"></p>
+      </div>
+
       <div class="knowledge-actions">
         <a class="knowledge-action" href="/book-one" data-i18n="knowledge.access.product">View Book I</a>
-        <a class="knowledge-action knowledge-action--primary" href="/checkout" data-i18n="knowledge.access.readiness">View checkout readiness</a>
+        <a class="knowledge-action knowledge-action--primary" href="/checkout" data-checkout-action data-i18n="knowledge.access.checkout">Purchase Book I · RM89</a>
       </div>
     </section>
   </main>

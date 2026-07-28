@@ -637,7 +637,14 @@ for (const [file, expectedHash] of Object.entries(
 const migrations = (await fs.readdir(path.join(root, 'db/migrations')))
   .filter(filename => filename.endsWith('.sql'))
   .sort();
-assert.deepEqual(migrations, milestone.migrationInventory);
+assert.deepEqual(
+  migrations.slice(0, milestone.migrationInventory.length),
+  milestone.migrationInventory
+);
+assert.equal(
+  migrations.includes('0003_financial_professional_infrastructure.sql'),
+  true
+);
 
 for (const [key, target] of [
   ['financial_schema_registry', './financial-schema-registry.json'],

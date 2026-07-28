@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title data-i18n="knowledge.paymentSuccess.metaTitle">Payment status — PHI OS</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-release.css">
+</head>
+<body class="knowledge-page" data-public-section="knowledge" data-page="payment-success">
+  <a class="skip-link" href="#payment-main" data-i18n="knowledge.common.skip">Skip to main content</a>
+  <header data-public-header-placeholder></header>
+  <main id="payment-main">
+    <section class="access-panel" data-payment-result>
+      <p class="knowledge-eyebrow" data-i18n="knowledge.paymentSuccess.eyebrow">Server-verified payment status</p>
+      <h1 data-payment-title data-i18n="knowledge.paymentSuccess.checkingTitle">Verifying your payment…</h1>
+      <p data-payment-message data-i18n="knowledge.paymentSuccess.checkingBody">Please keep this page open while PHI OS verifies the Stripe Checkout Session.</p>
+      <p><span data-i18n="knowledge.access.current">Current access state</span>:
+        <strong class="access-state" data-payment-state>payment_pending</strong>
+      </p>
+      <dl class="checkout-facts" data-receipt hidden>
+        <div><dt data-i18n="knowledge.paymentSuccess.receipt">Receipt</dt><dd data-receipt-number></dd></div>
+        <div><dt data-i18n="knowledge.paymentSuccess.amount">Amount</dt><dd data-receipt-amount></dd></div>
+        <div><dt data-i18n="knowledge.paymentSuccess.delivery">Delivery</dt><dd data-delivery-state></dd></div>
+      </dl>
+      <div class="knowledge-actions">
+        <a class="knowledge-action knowledge-action--primary" href="/read/book-one/" data-read-action hidden data-i18n="knowledge.paymentSuccess.readAction">Open protected Book I access</a>
+        <a class="knowledge-action" href="/checkout" data-retry-action hidden data-i18n="knowledge.paymentSuccess.retryAction">Retry payment</a>
+        <a class="knowledge-action" href="/contact" data-i18n="knowledge.paymentSuccess.supportAction">Contact support</a>
+      </div>
+    </section>
+  </main>
+  <footer data-public-footer-placeholder></footer>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/payment-success.js"></script>
+</body>
+</html>

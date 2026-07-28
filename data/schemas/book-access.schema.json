@@ -14,10 +14,10 @@
   ],
   "properties": {
     "contractVersion": {
-      "const": "1.0.0"
+      "const": "2.0.0"
     },
     "productId": {
-      "const": "phios-book-one"
+      "const": "phios-book-one-zh-pdf"
     },
     "currency": {
       "const": "MYR"
@@ -35,6 +35,18 @@
       ]
     },
     "accessGranted": {
+      "type": "boolean"
+    },
+    "deliveryState": {
+      "enum": [
+        "unavailable",
+        "pending",
+        "processing",
+        "ready",
+        "failed"
+      ]
+    },
+    "downloadReady": {
       "type": "boolean"
     }
   },

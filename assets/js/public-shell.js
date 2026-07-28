@@ -174,6 +174,9 @@ function activeSectionFromPage() {
     path === '/figure' ||
     path === '/glossary' ||
     path === '/checkout' ||
+    path === '/payment-success' ||
+    path === '/payment-failure' ||
+    path === '/digital-product-policy' ||
     path.startsWith('/read/book-one')
   ) return 'knowledge';
   if (

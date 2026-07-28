@@ -19,13 +19,18 @@ export function canAccessBook(state) {
 }
 
 export const BOOK_ONE_ACCESS_CONTRACT = Object.freeze({
-  contractVersion: '1.0.0',
-  productId: 'phios-book-one',
+  contractVersion: '2.0.0',
+  productId: 'phios-book-one-zh-pdf',
+  legacyProductId: 'phios-book-one',
   currency: 'MYR',
   amountMinor: 8900,
   authoritativeSource: 'server_purchase_record',
   browserStorageCanGrantAccess: false,
   progressStorageCanGrantAccess: false,
+  redirectCanGrantAccess: false,
+  verifiedWebhookOrStripeSessionRequired: true,
+  activeEntitlementRequired: true,
+  unwatermarkedDownloadAllowed: false,
   permittedStateTransitions: Object.freeze({
     not_purchased: Object.freeze(['payment_pending']),
     payment_pending: Object.freeze(['purchased', 'not_purchased']),

@@ -8,7 +8,8 @@ export async function onRequestGet({ env = {} }) {
       openaiConfigured: Boolean(env.OPENAI_API_KEY),
       databaseBound: Boolean(env.RUNTIME_DB || env.DB),
       runtimeDatabaseBound: Boolean(env.RUNTIME_DB),
-      objectStorageBound: Boolean(env.REPORTS),
+      objectStorageBound: Boolean(env.REPORTS || env.BOOKS),
+      privateBookStorageBound: Boolean(env.BOOKS),
       sessionCacheBound: Boolean(env.SESSIONS)
     }
   }, { headers: { 'Cache-Control': 'no-store' } });

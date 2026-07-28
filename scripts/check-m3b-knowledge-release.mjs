@@ -55,6 +55,16 @@ const requiredFiles = [
   'data/schemas/book-access.schema.json',
   'docs/knowledge/M3B-W8-PAYMENT-PROVIDER-COMPARISON.md',
   'docs/knowledge/M3B-W8-STRIPE-MALAYSIA-READINESS.md',
+  'docs/knowledge/M3B-W8-PRODUCTION-RUNBOOK.md',
+  'docs/knowledge/M3B-W8-WATERMARK-SERVICE-CONTRACT.md',
+  'content/registry/book-products.json',
+  'content/registry/book-commerce-schema.json',
+  'db/migrations/0004_book_commerce.sql',
+  'functions/api/book-one-checkout.js',
+  'functions/api/book-one-payment-status.js',
+  'functions/api/stripe-webhook.js',
+  'functions/api/book-one-download-token.js',
+  'functions/api/book-one-download.js',
   'functions/api/book-one-access.js'
 ];
 
@@ -185,6 +195,18 @@ assert.equal(releaseRegistry.workstreams['M3B-W6'].publicFormat, 'webp');
 assert.equal(releaseRegistry.workstreams['M3B-W8'].checkoutAcceptsMoney, false);
 assert.equal(releaseRegistry.workstreams['M3B-W8'].provider, 'stripe-malaysia');
 assert.equal(
+  releaseRegistry.workstreams['M3B-W8'].checkoutImplementationReady,
+  true
+);
+assert.equal(
+  releaseRegistry.workstreams['M3B-W8'].webhookImplementationReady,
+  true
+);
+assert.equal(
+  releaseRegistry.workstreams['M3B-W8'].digitalEntitlementImplemented,
+  true
+);
+assert.equal(
   releaseRegistry.workstreams['M3B-W8'].privateFullBookDeliveryConfigured,
   false
 );
@@ -222,4 +244,4 @@ const atlasHtml = await read('explore.html');
 assert.match(atlasHtml, /atlas-knowledge-upgrade\.js/);
 
 console.log('✓ M3B Knowledge Release passed: Library → Book I → 48-page Preview → Access → Atlas → Figures → Glossary.');
-console.log('  Stripe Malaysia is selected; commerce remains safely locked until every production gate passes.');
+console.log('  Stripe/R2 commerce is implemented and remains production-gated until external acceptance passes.');

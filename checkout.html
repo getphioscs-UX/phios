@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title data-i18n="knowledge.checkout.metaTitle">Book I Checkout Readiness — PHI OS</title>
+  <title data-i18n="knowledge.checkout.metaTitle">Book I Checkout — PHI OS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
@@ -14,22 +14,49 @@
   <link rel="stylesheet" href="/assets/css/public-experience.css">
   <link rel="stylesheet" href="/assets/css/knowledge-release.css">
 </head>
-<body class="knowledge-page" data-public-section="knowledge" data-page="checkout-readiness">
+<body class="knowledge-page" data-public-section="knowledge" data-page="checkout">
   <a class="skip-link" href="#checkout-main" data-i18n="knowledge.common.skip">Skip to main content</a>
   <header data-public-header-placeholder></header>
   <main id="checkout-main">
-    <section class="access-panel">
-      <p class="knowledge-eyebrow" data-i18n="knowledge.checkout.eyebrow">Payment boundary</p>
-      <h1 data-i18n="knowledge.checkout.title">Checkout is not live yet.</h1>
-      <p data-i18n="knowledge.checkout.lead">Stripe Malaysia is selected for the RM89 product. Checkout remains disabled until every production boundary is ready.</p>
-      <strong class="access-state" data-i18n="knowledge.checkout.amount">Book I · RM89</strong>
-      <dl>
-        <dt data-i18n="knowledge.checkout.provider">Provider status</dt>
-        <dd data-i18n="knowledge.checkout.providerState">Stripe Malaysia selected</dd>
+    <section class="access-panel checkout-panel">
+      <p class="knowledge-eyebrow" data-i18n="knowledge.checkout.eyebrow">Secure checkout</p>
+      <h1 data-i18n="knowledge.checkout.title">Purchase Book I.</h1>
+      <p data-i18n="knowledge.checkout.lead">Payment is completed on Stripe’s hosted Checkout. PHI OS never receives your card or online-banking credentials.</p>
+
+      <div class="checkout-product" aria-labelledby="checkout-product-title">
+        <div>
+          <h2 id="checkout-product-title" data-i18n="knowledge.checkout.productTitle">《世界如何形成》第一册</h2>
+          <p data-i18n="knowledge.checkout.productMeta">Chinese · 462 pages · purchaser-watermarked PDF</p>
+        </div>
+        <strong>RM89</strong>
+      </div>
+
+      <dl class="checkout-facts">
+        <div>
+          <dt data-i18n="knowledge.checkout.provider">Payment provider</dt>
+          <dd data-i18n="knowledge.checkout.providerState">Stripe Malaysia · Card &amp; FPX</dd>
+        </div>
+        <div>
+          <dt data-i18n="knowledge.checkout.deliveryLabel">Delivery</dt>
+          <dd data-i18n="knowledge.checkout.delivery">Secure reader access, receipt email &amp; limited-use PDF link</dd>
+        </div>
+        <div>
+          <dt data-i18n="knowledge.checkout.licenseLabel">Licence</dt>
+          <dd data-i18n="knowledge.checkout.license">One purchaser · personal use · no redistribution</dd>
+        </div>
       </dl>
-      <p class="knowledge-boundary" data-i18n="knowledge.checkout.safety">No card, bank or identity data is collected on this page.</p>
-      <h2 data-i18n="knowledge.checkout.compareTitle">Stripe integration status</h2>
-      <p data-i18n="knowledge.checkout.compareBody">Hosted Checkout, cards and FPX will be enabled only after the full production boundary passes acceptance.</p>
+
+      <form class="checkout-form" data-checkout-form>
+        <label class="checkout-consent">
+          <input type="checkbox" name="acceptDigitalPolicy" required>
+          <span data-i18n="knowledge.checkout.acceptPolicy">I have read and accept the digital product, delivery and refund policy.</span>
+        </label>
+        <p><a href="/digital-product-policy" data-i18n="knowledge.checkout.policyLink">Read the digital product policy</a></p>
+        <button class="knowledge-action knowledge-action--primary" type="submit" data-checkout-submit disabled data-i18n="knowledge.checkout.payAction">Continue to secure payment · RM89</button>
+      </form>
+
+      <p class="checkout-status" data-checkout-status role="status" aria-live="polite" data-i18n="knowledge.checkout.checking">Checking checkout readiness…</p>
+      <p class="knowledge-boundary" data-i18n="knowledge.checkout.safety">The success redirect never grants access by itself. Purchase and entitlement are verified by the server.</p>
       <div class="knowledge-actions">
         <a class="knowledge-action" href="/book-one" data-i18n="knowledge.checkout.returnBook">Return to Book I</a>
       </div>
@@ -37,5 +64,6 @@
   </main>
   <footer data-public-footer-placeholder></footer>
   <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/checkout.js"></script>
 </body>
 </html>

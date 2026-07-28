@@ -577,6 +577,121 @@
   font-size: 0.78rem;
 }
 
+.checkout-panel {
+  width: min(820px, calc(100% - 2.5rem));
+  text-align: left;
+}
+
+.checkout-product {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid rgba(17, 20, 26, 0.12);
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.checkout-product h2,
+.protected-delivery h2,
+.policy-document h2 {
+  margin-top: 0;
+  font-family: var(--phi-font-display, Newsreader, Georgia, serif);
+  font-weight: 450;
+}
+
+.checkout-product strong {
+  flex: 0 0 auto;
+  color: #755f36;
+  font-family: var(--phi-font-display, Newsreader, Georgia, serif);
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  font-weight: 450;
+}
+
+.checkout-facts {
+  display: grid;
+  gap: 0;
+  margin: 1.5rem 0;
+  border-top: 1px solid rgba(17, 20, 26, 0.12);
+}
+
+.checkout-facts > div {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.4fr) 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(17, 20, 26, 0.12);
+}
+
+.checkout-facts dt {
+  color: #686d76;
+  font-weight: 600;
+}
+
+.checkout-facts dd {
+  margin: 0;
+}
+
+.checkout-form {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: #f2efe7;
+}
+
+.checkout-consent {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.checkout-consent input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.12rem;
+}
+
+.checkout-form button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.checkout-status {
+  min-height: 1.5em;
+  margin-top: 1rem;
+  color: #5a4c32;
+  font-weight: 600;
+}
+
+.protected-delivery {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid rgba(92, 122, 92, 0.32);
+  border-radius: 1rem;
+  background: #f1f6ef;
+  text-align: left;
+}
+
+.policy-document {
+  width: min(820px, calc(100% - 2.5rem));
+}
+
+.policy-document h1 {
+  max-width: 18ch;
+}
+
+.policy-document h2 {
+  margin-top: 2.5rem;
+}
+
+.checkout-disclosures {
+  margin-top: 1.5rem;
+}
+
 .knowledge-empty[hidden] {
   display: none;
 }
@@ -654,6 +769,15 @@
 
   .preview-page-controls strong {
     font-size: 0.65rem;
+  }
+
+  .checkout-product,
+  .checkout-facts > div {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-product {
+    display: grid;
   }
 }
 
