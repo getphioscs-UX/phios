@@ -1,0 +1,223 @@
+{
+  "milestone": "PDS-W1",
+  "contractVersion": "1.0.0",
+  "schemaVersion": "phi-os.pds-experience-contract.v1",
+  "status": "experience-contract-frozen",
+  "frozenAt": "2026-07-28",
+  "purpose": "Freeze the public experience language and information boundaries above the existing Runtime architecture without changing Runtime behavior.",
+  "experiencePrinciples": [
+    "reality-before-theory",
+    "understanding-before-analysis",
+    "journey-before-knowledge",
+    "progressive-disclosure",
+    "one-page-one-mission",
+    "one-primary-action-per-view",
+    "unknown-is-not-failure",
+    "customer-language-before-system-language"
+  ],
+  "journey": {
+    "publicStageOrder": [
+      "enter",
+      "describe",
+      "discover",
+      "understand",
+      "choose",
+      "continue"
+    ],
+    "stages": [
+      {
+        "id": "enter",
+        "publicName": { "en": "Enter", "zh-Hans": "进入" },
+        "mission": { "en": "Recognize that PHI OS can help with a current change.", "zh-Hans": "让使用者确认 PHI OS 能够帮助理解当前变化。" },
+        "systemSurfaces": ["index.html", "reality-journey.html"]
+      },
+      {
+        "id": "describe",
+        "publicName": { "en": "Describe", "zh-Hans": "描述" },
+        "mission": { "en": "Describe what has been changing without learning system terminology.", "zh-Hans": "在不需要学习系统术语的情况下，说清楚正在发生的变化。" },
+        "systemSurfaces": ["reality-entry.html"]
+      },
+      {
+        "id": "discover",
+        "publicName": { "en": "Discover", "zh-Hans": "发现" },
+        "mission": { "en": "Confirm how the situation developed and correct misunderstandings.", "zh-Hans": "确认事情如何发展，并修正系统的误解。" },
+        "systemSurfaces": ["reality-reconstruction.html"]
+      },
+      {
+        "id": "understand",
+        "publicName": { "en": "Understand", "zh-Hans": "理解" },
+        "mission": { "en": "See the current reality structure in a clear customer view.", "zh-Hans": "以清楚的客户视图看见当前现实结构。" },
+        "systemSurfaces": ["reality-reading.html"]
+      },
+      {
+        "id": "choose",
+        "publicName": { "en": "Choose", "zh-Hans": "选择" },
+        "mission": { "en": "Choose one practical direction that can be observed and reviewed.", "zh-Hans": "选择一个能够执行、观察与回看的实际方向。" },
+        "systemSurfaces": ["reality-navigation.html"]
+      },
+      {
+        "id": "continue",
+        "publicName": { "en": "Continue", "zh-Hans": "继续" },
+        "mission": { "en": "Review what changed and decide how the journey continues.", "zh-Hans": "回看发生了什么变化，并决定旅程如何继续。" },
+        "systemSurfaces": ["reality-review.html", "my-reality.html"]
+      }
+    ]
+  },
+  "terminology": {
+    "rule": "System identifiers remain stable; public labels may change by locale and audience layer.",
+    "mappings": [
+      { "system": "Reality Entry", "public": { "en": "Describe what is changing", "zh-Hans": "描述正在发生的变化" } },
+      { "system": "Reality Reconstruction", "public": { "en": "See how it developed", "zh-Hans": "看见事情如何发展" } },
+      { "system": "Reality Reading", "public": { "en": "Your Reality Map", "zh-Hans": "你的现实地图" } },
+      { "system": "Reality Navigation", "public": { "en": "Where to begin next", "zh-Hans": "下一步可以从哪里开始" } },
+      { "system": "Reality Review", "public": { "en": "Review this change", "zh-Hans": "回看这段变化" } },
+      { "system": "Evidence", "public": { "en": "Analysis basis", "zh-Hans": "分析依据" } },
+      { "system": "Missing Evidence", "public": { "en": "What still needs understanding", "zh-Hans": "仍需要了解的部分" } },
+      { "system": "Conflict", "public": { "en": "Information that does not yet align", "zh-Hans": "目前还不一致的内容" } },
+      { "system": "Confidence", "public": { "en": "How certain this is so far", "zh-Hans": "目前可以确定到什么程度" } },
+      { "system": "Unknown", "public": { "en": "Not yet clear", "zh-Hans": "目前还不能确定" } }
+    ]
+  },
+  "pageMissions": [
+    {
+      "id": "home",
+      "path": "index.html",
+      "mission": "move-the-user-to-reality-entry",
+      "primaryAction": "start-describing",
+      "allowedSecondaryActions": ["see-how-it-works"],
+      "mustNotCompeteWith": ["knowledge", "books", "atlas", "professional", "about"]
+    },
+    {
+      "id": "entry",
+      "path": "reality-entry.html",
+      "mission": "describe-current-change",
+      "primaryAction": "continue-entry",
+      "allowedSecondaryActions": ["save-and-exit", "edit-confirmed-content"],
+      "forbiddenPrimaryActions": ["open-reading", "open-navigation", "open-technical-view"]
+    },
+    {
+      "id": "reconstruction",
+      "path": "reality-reconstruction.html",
+      "mission": "confirm-development-sequence",
+      "primaryAction": "confirm-and-continue",
+      "allowedSecondaryActions": ["edit-content", "return-to-entry"],
+      "forbiddenPrimaryActions": ["choose-navigation", "open-professional-workspace"]
+    },
+    {
+      "id": "reading",
+      "path": "reality-reading.html",
+      "mission": "understand-current-reality-map",
+      "primaryAction": "continue-to-next-direction",
+      "allowedSecondaryActions": ["view-analysis-basis", "edit-source-content"],
+      "requiredCustomerSections": [
+        "what-is-changing",
+        "how-it-developed",
+        "influencing-conditions",
+        "what-is-confirmed",
+        "what-remains-unclear"
+      ]
+    },
+    {
+      "id": "navigation",
+      "path": "reality-navigation.html",
+      "mission": "choose-one-observable-direction",
+      "primaryAction": "choose-direction",
+      "allowedSecondaryActions": ["change-direction", "return-to-reading"],
+      "maximumCustomerDirections": 3
+    },
+    {
+      "id": "review",
+      "path": "reality-review.html",
+      "mission": "compare-change-over-time",
+      "primaryAction": "continue-or-adjust",
+      "allowedSecondaryActions": ["return-to-navigation", "view-history"],
+      "requiredCustomerQuestions": [
+        "what-changed",
+        "what-did-not-change",
+        "what-new-question-appeared",
+        "whether-to-continue-current-direction"
+      ]
+    }
+  ],
+  "informationLayers": [
+    {
+      "id": "customer-primary",
+      "order": 1,
+      "defaultVisibility": "visible",
+      "audience": "customer",
+      "contains": ["what-happened", "why-it-matters", "what-happens-next"]
+    },
+    {
+      "id": "customer-confirmation",
+      "order": 2,
+      "defaultVisibility": "visible",
+      "audience": "customer",
+      "contains": ["sequence", "conditions", "confirmed-facts", "unclear-parts"]
+    },
+    {
+      "id": "professional-analysis",
+      "order": 3,
+      "defaultVisibility": "collapsed",
+      "audience": "professional",
+      "contains": ["evidence-source", "conflict", "duplicate", "inference-boundary", "maturity", "confidence"]
+    },
+    {
+      "id": "technical-record",
+      "order": 4,
+      "defaultVisibility": "restricted",
+      "audience": "technical",
+      "contains": ["source-path", "schema", "bucket", "provider", "raw-statement", "normalized-statement", "runtime-contract"]
+    }
+  ],
+  "viewBoundaries": {
+    "customer": {
+      "default": true,
+      "mayShow": ["customer-primary", "customer-confirmation"],
+      "mayExpand": ["professional-analysis"],
+      "mustNotShowByDefault": ["technical-record"]
+    },
+    "professional": {
+      "default": false,
+      "mayShow": ["customer-primary", "customer-confirmation", "professional-analysis"],
+      "mayExpand": ["technical-record"]
+    },
+    "technical": {
+      "default": false,
+      "mayShow": ["customer-primary", "customer-confirmation", "professional-analysis", "technical-record"]
+    }
+  },
+  "contentRules": {
+    "tone": ["stable", "clear", "non-judgmental", "bounded", "non-mystifying"],
+    "questionRule": "Each visible question asks for one main dimension while extraction may reuse all information already supplied.",
+    "unknownRule": "Unknown, incomplete, or low-confidence information must not be styled or worded as user failure.",
+    "certaintyRule": "The interface must distinguish observed, reported, inferred, and unknown information.",
+    "localeRule": "English and Simplified Chinese share the same intent, action hierarchy, visibility, and state meaning; wording need not be literal translation."
+  },
+  "immutableBoundaries": [
+    "runtime route",
+    "runtime state",
+    "runtime schema",
+    "storage key",
+    "element id during PDS-W1",
+    "translation key during PDS-W1",
+    "provider contract",
+    "persistence behavior",
+    "lineage behavior"
+  ],
+  "acceptance": {
+    "requiredChecks": [
+      "six-stage-order-is-frozen",
+      "all-stages-have-bilingual-public-names",
+      "all-core-pages-have-one-mission",
+      "all-core-pages-have-one-primary-action",
+      "four-information-layers-are-ordered",
+      "customer-view-is-default",
+      "technical-record-is-not-customer-default",
+      "unknown-is-not-failure",
+      "runtime-boundaries-remain-immutable",
+      "contract-is-registered-and-script-validated"
+    ],
+    "implementationStatus": "contract-only",
+    "pageMigrationBeginsAt": "PDS-W4"
+  }
+}
