@@ -82,6 +82,7 @@ function headerMarkup(activeSection) {
           type="button"
           aria-expanded="false"
           aria-controls="public-navigation"
+          aria-haspopup="true"
           data-i18n-aria-label="publicShell.nav.openMenu"
           aria-label="Open navigation"
         >
@@ -193,29 +194,71 @@ function activeSectionFromPage() {
 function bindMobileNavigation(header) {
   const toggle = header.querySelector('.public-menu-toggle');
   const navigation = header.querySelector('.public-nav');
+  const focusableSelector = [
+    'a[href]',
+    'button:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
 
-  function setOpen(open) {
-    toggle?.setAttribute('aria-expanded', String(open));
+  function setOpen(open, { restoreFocus = false } = {}) {
+    const nextOpen = Boolean(open && window.innerWidth <= 1000);
+
+    toggle?.setAttribute('aria-expanded', String(nextOpen));
     toggle?.setAttribute(
       'aria-label',
-      t(open ? 'publicShell.nav.closeMenu' : 'publicShell.nav.openMenu')
+      t(nextOpen ? 'publicShell.nav.closeMenu' : 'publicShell.nav.openMenu')
     );
-    navigation?.setAttribute('data-open', String(open));
-    document.body.classList.toggle('public-menu-open', open);
+    navigation?.setAttribute('data-open', String(nextOpen));
+    document.body.classList.toggle('public-menu-open', nextOpen);
+
+    if (nextOpen) {
+      navigation?.querySelector(focusableSelector)?.focus();
+    } else if (restoreFocus) {
+      toggle?.focus();
+    }
   }
 
   toggle?.addEventListener('click', () => {
     setOpen(toggle.getAttribute('aria-expanded') !== 'true');
   });
 
-  navigation?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => setOpen(false));
+  navigation?.querySelectorAll('a, [data-locale]').forEach(control => {
+    control.addEventListener('click', () => setOpen(false));
   });
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      setOpen(false, { restoreFocus: true });
+    }
+  });
+
+  header.addEventListener('keydown', event => {
+    if (
+      event.key !== 'Tab' ||
+      toggle?.getAttribute('aria-expanded') !== 'true'
+    ) {
+      return;
+    }
+
+    const controls = [toggle, ...navigation.querySelectorAll(focusableSelector)];
+    const first = controls[0];
+    const last = controls.at(-1);
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (
+      toggle?.getAttribute('aria-expanded') === 'true' &&
+      !header.contains(event.target)
+    ) {
       setOpen(false);
-      toggle.focus();
     }
   });
 

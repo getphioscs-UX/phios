@@ -39,12 +39,32 @@
   border-color: transparent;
 }
 
+.phi-button:not(:disabled):not([aria-disabled="true"]):hover {
+  border-color: var(--phi-border-strong);
+}
+
+.phi-button:not(:disabled):not([aria-disabled="true"]):active {
+  transform: translateY(0);
+}
+
 .phi-button:disabled,
 .phi-button[aria-disabled="true"],
 .btn:disabled,
 .btn[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.5;
+}
+
+.phi-link {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+.phi-link:hover {
+  text-decoration-thickness: 0.12em;
 }
 
 .phi-card {

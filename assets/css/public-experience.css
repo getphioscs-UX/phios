@@ -8,9 +8,9 @@
   top: 0;
   z-index: 300;
   width: 100%;
-  border-bottom: 1px solid rgba(17, 20, 26, 0.12);
-  background: rgba(250, 249, 246, 0.9);
-  color: #11141a;
+  border-bottom: 1px solid var(--phi-border-subtle);
+  background: var(--phi-surface-shell);
+  color: var(--phi-text-primary);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
@@ -18,7 +18,7 @@
 .public-header__inner,
 .public-footer__inner,
 .public-container {
-  width: min(1180px, calc(100% - 2.5rem));
+  width: min(var(--phi-container-shell), calc(100% - (2 * var(--phi-space-5))));
   margin-inline: auto;
 }
 
@@ -26,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 74px;
+  min-height: var(--phi-shell-header-height);
   gap: 1.5rem;
 }
 
@@ -35,7 +35,7 @@
   align-items: center;
   flex: 0 0 auto;
   gap: 0.7rem;
-  min-height: 44px;
+  min-height: var(--phi-control-target-min);
   color: inherit;
   font-family: var(--phi-font-body, Inter, Arial, sans-serif);
   font-size: 0.8rem;
@@ -63,10 +63,10 @@
 .public-nav__link {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: var(--phi-control-target-min);
   padding: 0.45rem 0.55rem;
   border-radius: 999px;
-  color: #515866;
+  color: var(--phi-text-secondary);
   font-family: var(--phi-font-body, Inter, Arial, sans-serif);
   font-size: 0.78rem;
   font-weight: 600;
@@ -89,10 +89,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  min-height: 44px;
+  min-height: var(--phi-control-target-min);
   padding: 0 0.55rem;
-  border-left: 1px solid rgba(17, 20, 26, 0.14);
-  color: #515866;
+  border-left: 1px solid var(--phi-border-subtle);
+  color: var(--phi-text-secondary);
   font-family: var(--phi-font-body, Inter, Arial, sans-serif);
 }
 
@@ -105,8 +105,8 @@
 }
 
 .public-language button {
-  min-width: 36px;
-  min-height: 44px;
+  min-width: var(--phi-control-target-min);
+  min-height: var(--phi-control-target-min);
   padding: 0;
   border: 0;
   border-radius: 999px;
@@ -132,10 +132,10 @@
   display: none;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  width: var(--phi-control-target-min);
+  height: var(--phi-control-target-min);
   padding: 0;
-  border: 1px solid rgba(17, 20, 26, 0.16);
+  border: 1px solid var(--phi-border-subtle);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.65);
   color: #11141a;
@@ -186,8 +186,8 @@ body.public-menu-open {
 .public-footer {
   width: 100%;
   border-top: 1px solid rgba(17, 20, 26, 0.14);
-  background: #11141a;
-  color: #f7f6f1;
+  background: var(--phi-text-primary);
+  color: var(--phi-text-inverse);
   font-family: var(--phi-font-body, Inter, Arial, sans-serif);
 }
 
@@ -346,7 +346,7 @@ body.public-menu-open {
   align-items: center;
   justify-content: space-between;
   gap: 1.25rem;
-  min-height: 48px;
+  min-height: var(--phi-control-target-min);
   padding: 0.78rem 1.15rem;
   border: 1px solid var(--phi-border-strong, rgba(17, 20, 26, 0.3));
   border-radius: 999px;
@@ -371,7 +371,7 @@ body.public-menu-open {
 }
 
 .public-button:hover {
-  transform: translateY(-1px);
+  transform: translateY(var(--phi-motion-lift));
 }
 
 .public-actions {
@@ -1123,10 +1123,10 @@ html[lang="zh-Hans"] .public-title {
 
   .public-nav {
     position: fixed;
-    inset: 74px 0 auto;
+    inset: var(--phi-shell-header-height) 0 auto;
     z-index: 290;
     display: none;
-    max-height: calc(100svh - 74px);
+    max-height: calc(100svh - var(--phi-shell-header-height));
     padding: 1rem 1.25rem 1.5rem;
     overflow-y: auto;
     border-bottom: 1px solid rgba(17, 20, 26, 0.16);
@@ -1171,7 +1171,7 @@ html[lang="zh-Hans"] .public-title {
   .public-header__inner,
   .public-footer__inner,
   .public-container {
-    width: min(100% - 1.5rem, 1180px);
+    width: min(100% - (2 * var(--phi-space-3)), var(--phi-container-shell));
   }
 
   .public-footer__inner,
