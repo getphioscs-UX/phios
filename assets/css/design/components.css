@@ -2,7 +2,7 @@
 
 .phi-button,
 .btn {
-  min-height: 44px;
+  min-height: var(--phi-control-target-min);
   cursor: pointer;
   touch-action: manipulation;
 }
@@ -20,7 +20,7 @@
   font-family: var(--phi-font-body);
   font-size: var(--phi-text-sm);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: var(--phi-leading-control);
   text-align: center;
   text-decoration: none;
 }
@@ -58,7 +58,7 @@
 .phi-badge {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
+  min-height: var(--phi-control-badge-min);
   padding-inline: var(--phi-space-3);
   border: 1px solid var(--phi-border-subtle);
   border-radius: var(--phi-radius-pill);

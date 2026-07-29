@@ -1,3 +1,6 @@
+/* PHI OS Design System — Unified Design Tokens v1.0
+   Interface tokens only. Runtime objects, states and operations are not CSS tokens. */
+
 :root {
   color-scheme: light;
 
@@ -8,6 +11,7 @@
   --phi-color-neutral-200: #ece9e0;
   --phi-color-neutral-300: #d8d5cd;
   --phi-color-neutral-500: #737984;
+  --phi-color-neutral-600: #515866;
   --phi-color-neutral-700: #3f4652;
   --phi-color-neutral-900: #11141a;
   --phi-color-reality-500: #a94f31;
@@ -24,7 +28,7 @@
   --phi-surface-solid: var(--phi-color-neutral-0);
   --phi-surface-subtle: var(--phi-color-neutral-200);
   --phi-text-primary: var(--phi-color-neutral-900);
-  --phi-text-secondary: #515866;
+  --phi-text-secondary: var(--phi-color-neutral-600);
   --phi-text-inverse: var(--phi-color-neutral-0);
   --phi-border-subtle: rgba(17, 20, 26, 0.16);
   --phi-border-strong: rgba(17, 20, 26, 0.30);
@@ -36,6 +40,9 @@
   --phi-state-warning: var(--phi-color-warning-600);
   --phi-state-danger: var(--phi-color-danger-600);
   --phi-focus-ring: rgba(36, 47, 122, 0.38);
+  --phi-state-success-subtle: rgba(37, 117, 94, 0.10);
+  --phi-state-warning-subtle: rgba(155, 106, 24, 0.12);
+  --phi-state-danger-subtle: rgba(162, 60, 55, 0.10);
 
   /* Spacing: 4px base */
   --phi-space-0: 0;
@@ -65,6 +72,8 @@
   --phi-text-3xl: clamp(1.875rem, 3vw, 2.5rem);
   --phi-text-4xl: clamp(2.5rem, 6vw, 5.5rem);
   --phi-leading-tight: 1.08;
+  --phi-leading-display: 0.98;
+  --phi-leading-control: 1.2;
   --phi-leading-body: 1.6;
   --phi-leading-relaxed: 1.75;
   --phi-tracking-tight: -0.03em;
@@ -76,6 +85,14 @@
   --phi-container-wide: 77.5rem;
   --phi-container-workspace: 93.75rem;
   --phi-gutter: clamp(1rem, 4vw, 4.5rem);
+  --phi-grid-min-card: 17rem;
+
+  /* Interaction and accessibility */
+  --phi-control-target-min: 2.75rem;
+  --phi-control-badge-min: 1.75rem;
+  --phi-focus-width: 2px;
+  --phi-focus-offset: 4px;
+  --phi-motion-lift: -1px;
 
   /* Radius */
   --phi-radius-xs: 0.4rem;
@@ -109,24 +126,24 @@
   --phi-z-toast: 900;
   --phi-z-skip-link: 1000;
 
-  /* Legacy aliases: frozen until all pages migrate */
-  --ink: #11141a;
-  --ink-soft: #515866;
-  --paper: #f5f3ed;
-  --paper-elevated: rgba(255,255,255,.66);
-  --line: rgba(17,20,26,.16);
-  --line-strong: rgba(17,20,26,.30);
-  --reality: #a94f31;
-  --knowledge: #6553a6;
-  --platform: #1f6c73;
-  --accent: #242f7a;
-  --success: #25755e;
-  --danger: #a23c37;
-  --radius-sm: .65rem;
-  --radius-md: 1.2rem;
-  --radius-lg: 2rem;
-  --shadow: 0 24px 80px rgba(25,27,33,.09);
-  --max: 1240px;
-  --serif: "Newsreader", Georgia, serif;
-  --sans: "Inter", Arial, sans-serif;
+  /* Legacy aliases: compatibility-only until page migration is complete. */
+  --ink: var(--phi-text-primary);
+  --ink-soft: var(--phi-text-secondary);
+  --paper: var(--phi-surface-canvas);
+  --paper-elevated: var(--phi-surface-raised);
+  --line: var(--phi-border-subtle);
+  --line-strong: var(--phi-border-strong);
+  --reality: var(--phi-action-reality);
+  --knowledge: var(--phi-action-knowledge);
+  --platform: var(--phi-action-platform);
+  --accent: var(--phi-action-primary);
+  --success: var(--phi-state-success);
+  --danger: var(--phi-state-danger);
+  --radius-sm: var(--phi-radius-sm);
+  --radius-md: var(--phi-radius-md);
+  --radius-lg: var(--phi-radius-lg);
+  --shadow: var(--phi-shadow-lg);
+  --max: var(--phi-container-wide);
+  --serif: var(--phi-font-display);
+  --sans: var(--phi-font-body);
 }

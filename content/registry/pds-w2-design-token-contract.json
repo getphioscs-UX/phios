@@ -1,0 +1,79 @@
+{
+  "milestone": "PDS-W2",
+  "contractVersion": "1.0.0",
+  "schemaVersion": "phi-os.pds-design-token-contract.v1",
+  "status": "design-variables-unified",
+  "frozenAt": "2026-07-29",
+  "purpose": "Create one interface design-variable source without changing page structure or Runtime semantics.",
+  "source": {
+    "canonicalFile": "assets/css/tokens.css",
+    "loadPosition": "before-design-foundation-and-page-styles",
+    "prefix": "--phi-",
+    "legacyAliasesAllowed": true,
+    "legacyAliasPolicy": "Aliases must reference canonical --phi-* tokens and must not duplicate literal values."
+  },
+  "categories": [
+    { "id": "color", "families": ["primitive", "surface", "text", "border", "action", "state", "focus"] },
+    { "id": "spacing", "basePx": 4, "steps": [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24] },
+    { "id": "typography", "families": ["font", "text-size", "line-height", "letter-spacing"] },
+    { "id": "layout", "families": ["container", "gutter", "grid"] },
+    { "id": "shape", "families": ["radius", "shadow"] },
+    { "id": "interaction", "families": ["touch-target", "focus", "motion"] },
+    { "id": "layer", "families": ["z-index"] }
+  ],
+  "responsiveContract": {
+    "acceptanceViewportsPx": [360, 768, 1440],
+    "cssBreakpoints": {
+      "compactMax": "40rem",
+      "contentMin": "48rem",
+      "wideMin": "90rem"
+    },
+    "rule": "Breakpoints describe interface adaptation only and must not create or infer Runtime state."
+  },
+  "accessibilityContract": {
+    "minimumTouchTargetToken": "--phi-control-target-min",
+    "minimumTouchTargetValue": "2.75rem",
+    "focusWidthToken": "--phi-focus-width",
+    "focusOffsetToken": "--phi-focus-offset",
+    "reducedMotionRequired": true,
+    "colorAloneMayExpressState": false
+  },
+  "statePresentation": {
+    "semanticStates": ["success", "warning", "danger"],
+    "rule": "State tokens style an already supplied state; CSS must not calculate or promote Runtime status.",
+    "requiredNonColorSignals": ["text", "icon-or-shape", "accessible-name"]
+  },
+  "compatibility": {
+    "visualValueChangeIntended": false,
+    "pageMarkupChange": false,
+    "localeChange": false,
+    "runtimeChange": false,
+    "apiChange": false,
+    "legacyAliases": [
+      "--ink",
+      "--ink-soft",
+      "--paper",
+      "--paper-elevated",
+      "--line",
+      "--line-strong",
+      "--reality",
+      "--knowledge",
+      "--platform",
+      "--accent",
+      "--success",
+      "--danger",
+      "--radius-sm",
+      "--radius-md",
+      "--radius-lg",
+      "--shadow",
+      "--max",
+      "--serif",
+      "--sans"
+    ]
+  },
+  "downstream": {
+    "nextMilestone": "PDS-W3",
+    "nextPurpose": "Build the core component contract from the unified variables.",
+    "pageMigrationBeginsAt": "PDS-W4"
+  }
+}
