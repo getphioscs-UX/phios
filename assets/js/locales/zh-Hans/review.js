@@ -21,6 +21,7 @@ const review = Object.freeze({
     }
   },
   review: {
+    skipLink: '跳到现实回顾',
     eyebrow: '运行体验 · 回顾',
     title: '现实回顾',
     subtitle: '记录选择路径后实际发生的变化，而不改写先前 Reading。',
@@ -151,6 +152,7 @@ const review = Object.freeze({
     }
   },
   memory: {
+    skipLink: '跳到我的现实',
     backReview: '返回现实回顾',
     emptyTitle: '运行记忆尚未准备好',
     emptyText: '请先完成现实回顾并准备运行记忆。',

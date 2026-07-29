@@ -21,6 +21,7 @@ const review = Object.freeze({
     }
   },
   review: {
+    skipLink: 'Skip to Review',
     eyebrow: 'Runtime Experience · Review',
     title: 'Reality Review',
     subtitle: 'Record what actually changed without rewriting the earlier Reading.',
@@ -151,6 +152,7 @@ const review = Object.freeze({
     }
   },
   memory: {
+    skipLink: 'Skip to My Reality',
     backReview: 'Back to Review',
     emptyTitle: 'Runtime Memory is not ready',
     emptyText: 'Complete Reality Review and prepare Runtime Memory first.',

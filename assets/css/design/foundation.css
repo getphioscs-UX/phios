@@ -66,3 +66,36 @@
 .phi-skip-link:focus-visible {
   transform: translateY(0);
 }
+
+/* PDS-W10 acceptance guardrails.
+   Keep dense editorial copy intact while ensuring controls and explicit
+   inline actions meet the 44px touch contract on touch-sized layouts. */
+@media (max-width: 768px), (pointer: coarse) {
+  :where(
+    button,
+    input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+    select,
+    textarea,
+    summary,
+    [role="button"]
+  ) {
+    min-inline-size: var(--phi-control-target-min, 44px);
+    min-block-size: var(--phi-control-target-min, 44px);
+  }
+
+  :where(
+    p,
+    li,
+    dd,
+    dt,
+    .public-footer__meta,
+    .entry-exit,
+    .workspace-text-button,
+    .continuity-branch-panel
+  ) > a[href] {
+    display: inline-flex;
+    align-items: center;
+    min-inline-size: var(--phi-control-target-min, 44px);
+    min-block-size: var(--phi-control-target-min, 44px);
+  }
+}

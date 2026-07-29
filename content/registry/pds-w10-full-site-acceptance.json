@@ -1,0 +1,55 @@
+{
+  "id": "pds-w10-full-site-acceptance",
+  "status": "implementation-complete-production-revalidation-required",
+  "baseline": {
+    "branch": "main",
+    "commit": "1daa1bb7c3a379e77c866a6532cdc56fdd4dc027",
+    "prerequisite": "pds-w9-knowledge-professional"
+  },
+  "scope": {
+    "presentationOnly": true,
+    "viewports": [360, 768, 1440],
+    "locales": ["en", "zh-Hans"],
+    "minimumTouchTargetPx": 44,
+    "keyboardOperationRequired": true,
+    "focusVisibilityRequired": true,
+    "horizontalPageScrollAllowed": false,
+    "productionConsoleErrorsAllowed": false,
+    "stateCoverage": ["loading", "empty", "failure", "blocked", "recovery"]
+  },
+  "implementedCorrections": [
+    "Review and My Reality now expose bilingual Skip Links with valid main targets.",
+    "Touch-sized layouts enforce the 44px contract for form controls and explicit inline actions.",
+    "Public Footer metadata links expose a 44px interactive height."
+  ],
+  "runtimeBoundary": {
+    "principlesChanged": false,
+    "sdkChanged": false,
+    "contractsChanged": false,
+    "providersChanged": false,
+    "storageChanged": false,
+    "knownBaselineBlocker": {
+      "id": "runtime-migration-registry-count",
+      "command": "npm run check",
+      "expected": 4,
+      "actual": 3,
+      "resolutionBoundary": "separate Runtime migration governance fix recorded by PDS-W0"
+    }
+  },
+  "productionEvidence": {
+    "url": "https://phios-github.pages.dev/",
+    "w9StylesheetObserved": true,
+    "sampledWidthPx": 1363,
+    "sampledPages": 8,
+    "pageHorizontalOverflowObserved": false,
+    "phiOsPageConsoleErrorsObserved": false,
+    "remainingGate": "Deploy this W10 delta, then repeat the complete production matrix at 360px, 768px and 1440px in both locales."
+  },
+  "protectedArtifacts": {
+    "content/registry/runtime-migrations.json": "06f0508c9c9406c3b8bb4889a45a58c6afc9c6ceeb95fe61e33d9b6005d6bde3",
+    "db/migrations/0001_platform_foundation.sql": "7f45b5572409ded3a22f3914ae881fcb13ea04e13a1ea2fc35086587ac88b0cb",
+    "db/migrations/0002_initial_runtime.sql": "4effec4fbe6f572151cecfc8d5683f5309f002df20b0f5f4441113ec68706d5a",
+    "db/migrations/0003_financial_professional_infrastructure.sql": "c06bc6498be1bcde3819d305e93289ff428fef33dfd06e5b2f8fe80d109d6016",
+    "db/migrations/0004_book_commerce.sql": "b82154e7a3c3b7267ded9bdc24162476c5441d9cca53c0390847c4f691217da1"
+  }
+}
