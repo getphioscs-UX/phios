@@ -101,7 +101,8 @@
     "migrate:check": "node --no-warnings scripts/run-runtime-migrations.mjs --check",
     "migrate:local": "node --no-warnings scripts/run-runtime-migrations.mjs --apply-local",
     "book:r2:create": "wrangler r2 bucket create phios-private-books",
-    "book:r2:upload": "node scripts/upload-private-book.mjs"
+    "book:r2:upload": "node scripts/upload-private-book.mjs",
+    "check:pws-w1a-revenue": "node scripts/check-pws-w1a-revenue-architecture.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

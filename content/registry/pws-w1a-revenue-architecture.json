@@ -1,0 +1,147 @@
+{
+  "id": "phi-os.pws-w1a-revenue-architecture",
+  "version": "1.0.0",
+  "milestone": "PWS-W1A-preparation",
+  "status": "extension-defined-implementation-pending",
+  "purpose": {
+    "en": "Separate scalable knowledge products, professional interpretation, regulated planning and experiential reflective services while preserving one PHI OS Runtime boundary.",
+    "zh-Hans": "把可规模化知识产品、专业解读、受监管规划与体验式反思服务分开管理，同时维持统一的 PHI OS Runtime 边界。"
+  },
+  "architectureRule": "A purchase creates an entitlement. Only an eligible human service creates a professional service, assignment, consent scope and professional responsibility.",
+  "revenueFamilies": [
+    {
+      "familyId": "knowledge_products",
+      "name": {
+        "en": "Knowledge Products",
+        "zh-Hans": "知识产品收入"
+      },
+      "professionalServiceRequired": false,
+      "runtimeRelationship": "knowledge_journey",
+      "revenueModels": [
+        "one_time_purchase",
+        "bundle",
+        "membership_inclusion",
+        "institutional_license"
+      ],
+      "offers": [
+        "book_one_digital",
+        "future_books",
+        "audio_learning",
+        "video_learning",
+        "self_paced_course",
+        "live_course",
+        "professional_workshop"
+      ]
+    },
+    {
+      "familyId": "runtime_professional_services",
+      "name": {
+        "en": "Runtime Professional Services",
+        "zh-Hans": "现实运行专业服务收入"
+      },
+      "professionalServiceRequired": true,
+      "runtimeRelationship": "reality_journey",
+      "revenueModels": [
+        "fixed_fee",
+        "session_fee",
+        "package_fee",
+        "periodic_review",
+        "membership_service_credit"
+      ],
+      "offers": [
+        "professional_runtime_reading",
+        "reading_consultation",
+        "navigation_design",
+        "navigation_follow_up",
+        "long_term_runtime_review"
+      ]
+    },
+    {
+      "familyId": "interpretive_readers",
+      "name": {
+        "en": "Interpretive Reader Services",
+        "zh-Hans": "解释性读取服务收入"
+      },
+      "professionalServiceRequired": true,
+      "runtimeRelationship": "secondary_interpretive_layer",
+      "revenueModels": [
+        "report_fee",
+        "session_fee",
+        "integrated_package"
+      ],
+      "offers": [
+        "human_design_interpretation",
+        "iching_reflection",
+        "tarot_reflection"
+      ]
+    },
+    {
+      "familyId": "experiential_reconstruction",
+      "name": {
+        "en": "Experiential Reconstruction Services",
+        "zh-Hans": "体验式重建服务收入"
+      },
+      "professionalServiceRequired": true,
+      "runtimeRelationship": "facilitated_experience_layer",
+      "revenueModels": [
+        "facilitated_session",
+        "multi_session_package",
+        "workshop"
+      ],
+      "offers": [
+        "sandtray_simulation",
+        "guided_consciousness_exploration",
+        "angelic_reiki_restorative_session"
+      ]
+    },
+    {
+      "familyId": "regulated_financial_planning",
+      "name": {
+        "en": "Regulated Financial Planning",
+        "zh-Hans": "受监管理财规划收入"
+      },
+      "professionalServiceRequired": true,
+      "runtimeRelationship": "financial_runtime",
+      "revenueModels": [
+        "planning_fee",
+        "review_fee",
+        "implementation_fee_where_permitted",
+        "disclosed_commission_where_permitted",
+        "hybrid_fee_with_disclosure"
+      ],
+      "offers": [
+        "financial_planning",
+        "insurance_planning",
+        "investment_planning",
+        "annual_financial_review"
+      ]
+    }
+  ],
+  "commerceSeparation": {
+    "knowledgeProductPurchaseCreates": "product_entitlement",
+    "sessionPurchaseCreates": "booking_and_pending_service_eligibility",
+    "professionalServiceCreates": "service_contract_after_scope_consent_and_assignment",
+    "membershipCreates": "entitlement_and_service_credits_only",
+    "paymentNeverCreates": [
+      "formal_reading",
+      "client_confirmation",
+      "navigation_acceptance",
+      "action_start",
+      "professional_signature"
+    ]
+  },
+  "portfolioRules": [
+    "Every offer belongs to exactly one primary revenue family.",
+    "Integrated packages preserve each modality source label and boundary.",
+    "Regulated financial recommendations require jurisdiction, licence, suitability and disclosure gates.",
+    "Symbolic, guided and restorative modalities never become objective evidence by default.",
+    "Knowledge products do not create professional duty unless a separate professional service is activated."
+  ],
+  "registries": {
+    "offerCatalog": "content/registry/pws-w1a-offer-catalog.json",
+    "modalityBoundaries": "content/registry/pws-w1a-modality-boundaries.json",
+    "existingProfessionalServices": "content/registry/professional-service-catalog.json",
+    "existingPricingPolicy": "content/registry/professional-pricing-policy.json",
+    "existingBookCommerce": "functions/commerce/book-product-registry.js"
+  }
+}
