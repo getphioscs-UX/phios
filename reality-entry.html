@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="/assets/css/entry-visual-alignment.css">
   <link rel="stylesheet" href="/assets/css/guided-entry.css">
   <link rel="stylesheet" href="/assets/css/entry-recovery-consent.css">
+  <link rel="stylesheet" href="/assets/css/entry-experience.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
 </head>
 
@@ -420,7 +421,7 @@
           aria-relevant="additions text"
         ></div>
 
-        <form class="entry-composer hidden" id="chatForm">
+        <form class="entry-composer hidden" id="chatForm" data-entry-composer-state="idle">
           <label
             class="entry-question-label"
             id="entryQuestionLabel"
@@ -436,6 +437,19 @@
             aria-describedby="loadingText roundIndicator"
             required
           ></textarea>
+
+          <div class="entry-experience-status" aria-live="polite" aria-atomic="true">
+            <span class="entry-experience-status__indicator" aria-hidden="true"></span>
+            <span id="entryExperienceStatus" data-i18n="entry.experience.idle">
+              Ready when you are. Your words stay editable until you send them.
+            </span>
+            <button
+              class="entry-experience-status__return hidden"
+              id="entryReturnToInput"
+              type="button"
+              data-i18n="entry.experience.returnToInput"
+            >Return to your response</button>
+          </div>
 
           <div class="composer-footer">
             <p
@@ -483,7 +497,9 @@
             </h2>
           </div>
 
-          <span class="schema-badge">Schema v1.0</span>
+          <span class="entry-clarity-legend" data-i18n="entry.experience.clarityLegend">
+            Updated as you answer
+          </span>
         </header>
 
         <section class="entry-maturity-card">
@@ -692,6 +708,7 @@
     type="module"
     src="/assets/js/reality-entry.js"
   ></script>
+  <script type="module" src="/assets/js/entry-experience.js"></script>
   <script type="module" src="/assets/js/journey-shell.js"></script>
 </body>
 </html>
