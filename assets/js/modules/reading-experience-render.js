@@ -75,26 +75,29 @@ function renderPriority(experience) {
   `).join(''));
 
   setHTML('[data-reading-priority-evidence]', items.map(item => `
-    <article class="reading-evidence-card">
-      <header>
+    <details class="reading-evidence-card">
+      <summary>
         <span>${escapeHTML(t('reading.experience.priorityNumber', { count: item.priority }))}</span>
-        <strong>${escapeHTML(t(
+        <strong>${escapeHTML(cleanText(item.canonical_text))}</strong>
+        <small>${escapeHTML(t(
           `reading.experience.classification.${item.classification}`,
           {},
           cleanText(item.classification)
-        ))}</strong>
-      </header>
-      <p>${escapeHTML(cleanText(item.canonical_text))}</p>
-      <dl>
-        <div><dt>${escapeHTML(t('reading.experience.confirmation'))}</dt><dd>${escapeHTML(cleanText(item.confirmation_status))}</dd></div>
-        <div><dt>${escapeHTML(t('reading.experience.sourceSummary'))}</dt><dd>${escapeHTML(t('reading.experience.sourceCount', { count: item.source_count }))}</dd></div>
-        <div><dt>${escapeHTML(t('reading.experience.supports'))}</dt><dd>${escapeHTML(list(item.supports).map(label).join(' · '))}</dd></div>
-      </dl>
-      <details>
-        <summary>${escapeHTML(t('reading.experience.viewLineage'))}</summary>
-        <pre>${json({ source_ids: item.source_ids, lineage: item.lineage })}</pre>
-      </details>
-    </article>
+        ))}</small>
+      </summary>
+      <div class="reading-evidence-card-body">
+        <p>${escapeHTML(cleanText(item.reason_selected))}</p>
+        <dl>
+          <div><dt>${escapeHTML(t('reading.experience.confirmation'))}</dt><dd>${escapeHTML(cleanText(item.confirmation_status))}</dd></div>
+          <div><dt>${escapeHTML(t('reading.experience.sourceSummary'))}</dt><dd>${escapeHTML(t('reading.experience.sourceCount', { count: item.source_count }))}</dd></div>
+          <div><dt>${escapeHTML(t('reading.experience.supports'))}</dt><dd>${escapeHTML(list(item.supports).map(label).join(' · '))}</dd></div>
+        </dl>
+        <details>
+          <summary>${escapeHTML(t('reading.experience.viewLineage'))}</summary>
+          <pre>${json({ source_ids: item.source_ids, lineage: item.lineage })}</pre>
+        </details>
+      </div>
+    </details>
   `).join(''));
 }
 
@@ -126,12 +129,17 @@ function renderCustomerUnknowns(experience) {
   );
   const observeNext = list(experience.alternative_reading?.evidence_needed);
   const mayChange = priority.filter(item => item.counter_evidence === true);
+  const known = priority.filter(item =>
+    ['confirmed', 'verified'].includes(cleanText(item.confirmation_status))
+  );
   const render = (selector, values, text) => {
     setHTML(selector, values.length
       ? values.map(item => `<li>${escapeHTML(cleanText(text(item)))}</li>`).join('')
       : `<li>${escapeHTML(t('reading.dynamic.notEstablished'))}</li>`);
   };
+  render('[data-reading-known]', known, item => item.canonical_text);
   render('[data-reading-unconfirmed]', unconfirmed, item => item.canonical_text);
+  render('[data-reading-conflicts]', mayChange, item => item.canonical_text);
   render('[data-reading-observe-next]', observeNext, item => item);
   render('[data-reading-may-change]', mayChange, item => item.canonical_text);
 }
@@ -161,6 +169,14 @@ function renderInterpretation(experience) {
   `);
   const confidence = experience.confidence || {};
   setHTML('[data-reading-confidence-explanation]', `
+    <strong>${escapeHTML(t(
+      `reading.experience.confidenceLevel.${confidence.customer_level}`,
+      {},
+      cleanText(confidence.customer_level)
+    ))}</strong>
+    <p>${escapeHTML(cleanText(confidence.customer_explanation))}</p>
+  `);
+  setHTML('[data-reading-confidence-summary]', `
     <strong>${escapeHTML(t(
       `reading.experience.confidenceLevel.${confidence.customer_level}`,
       {},

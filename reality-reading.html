@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
   <link rel="stylesheet" href="/assets/css/design/visual-acceptance.css">
   <link rel="stylesheet" href="/assets/css/reading-visual-alignment.css">
+  <link rel="stylesheet" href="/assets/css/reading-pds-w7.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
 </head>
 
@@ -343,12 +344,15 @@
 
             <small data-i18n="reading.summary">Current Reading maturity</small>
 
-            <dl class="reading-confidence-components" data-reading-confidence-components>
-              <div><dt>Evidence Coverage</dt><dd>—</dd></div>
-              <div><dt>Pattern Stability</dt><dd>—</dd></div>
-              <div><dt>Interpretation Boundary</dt><dd>—</dd></div>
-              <div><dt>Unknown Penalty</dt><dd>—</dd></div>
-            </dl>
+            <details class="reading-confidence-detail">
+              <summary data-i18n="reading.experience.confidenceComponentsTitle">View confidence detail</summary>
+              <dl class="reading-confidence-components" data-reading-confidence-components>
+                <div><dt data-i18n="reading.experience.evidenceCoverage">Evidence Coverage</dt><dd>—</dd></div>
+                <div><dt data-i18n="reading.experience.patternStability">Pattern Stability</dt><dd>—</dd></div>
+                <div><dt data-i18n="reading.experience.interpretationBoundary">Interpretation Boundary</dt><dd>—</dd></div>
+                <div><dt data-i18n="reading.experience.unknownPenalty">Unknown Penalty</dt><dd>—</dd></div>
+              </dl>
+            </details>
           </div>
         </header>
 
@@ -824,12 +828,12 @@
                 Customer Reading
               </p>
 
-              <h3 data-i18n="reading.customer.title">
-                What the current evidence allows us to understand
+              <h3 data-i18n="reading.experience.currentUnderstandingTitle">
+                What we currently understand
               </h3>
 
-              <p class="section-note" data-i18n="reading.customer.note">
-                This view keeps confirmed information, interpretation, alternatives, and unknowns separate.
+              <p class="section-note" data-i18n="reading.experience.currentUnderstandingNote">
+                Start with the clearest current understanding, then open supporting detail only when you need it.
               </p>
 
               <div class="reading-experience" data-reading-experience hidden>
@@ -841,18 +845,39 @@
 
                 <section class="reading-experience-panel is-active" role="tabpanel" data-reading-experience-panel="customer">
                   <header class="reading-experience-lead">
-                    <span data-i18n="reading.experience.oneSentence">One-sentence Reading</span>
+                    <span data-i18n="reading.experience.oneSentence">What we currently understand</span>
                     <h4 data-reading-experience-field="one_sentence_reading"></h4>
                     <p data-i18n="reading.experience.boundary">This is a bounded interpretation, not a diagnosis, prediction, or instruction.</p>
                   </header>
-                  <div class="reading-summary-grid" data-reading-summary></div>
-                  <section class="reading-experience-section">
-                    <h4 data-i18n="reading.experience.chainTitle">How this pattern currently operates</h4>
-                    <ol class="reading-runtime-chain" data-reading-runtime-chain></ol>
-                  </section>
-                  <section class="reading-experience-section">
-                    <h4 data-i18n="reading.experience.priorityTitle">Evidence carrying the most weight</h4>
-                    <ol class="reading-priority-list" data-reading-priority-customer></ol>
+                  <details class="reading-experience-disclosure reading-core-findings">
+                    <summary data-i18n="reading.experience.coreFindingsTitle">Explore the core findings</summary>
+                    <div class="reading-summary-grid" data-reading-summary></div>
+                    <section class="reading-experience-section">
+                      <h4 data-i18n="reading.experience.chainTitle">How this pattern currently operates</h4>
+                      <ol class="reading-runtime-chain" data-reading-runtime-chain></ol>
+                    </section>
+                    <section class="reading-experience-section">
+                      <h4 data-i18n="reading.experience.priorityTitle">Evidence carrying the most weight</h4>
+                      <ol class="reading-priority-list" data-reading-priority-customer></ol>
+                    </section>
+                  </details>
+                  <section class="reading-certainty-grid" aria-label="Reading certainty" data-i18n-aria-label="reading.experience.certaintyAria">
+                    <article class="is-known">
+                      <h4 data-i18n="reading.experience.knownTitle">What is known</h4>
+                      <ul data-reading-known></ul>
+                    </article>
+                    <article class="is-unknown">
+                      <h4 data-i18n="reading.experience.unknownTitle">What remains unclear</h4>
+                      <ul data-reading-unconfirmed></ul>
+                    </article>
+                    <article class="is-conflict">
+                      <h4 data-i18n="reading.experience.conflictTitle">What may conflict</h4>
+                      <ul data-reading-conflicts></ul>
+                    </article>
+                    <article class="is-confidence">
+                      <h4 data-i18n="reading.experience.certaintyTitle">How certain this is</h4>
+                      <div data-reading-confidence-summary></div>
+                    </article>
                   </section>
                   <details class="reading-experience-disclosure">
                     <summary data-i18n="reading.experience.alternativeTitle">Another possible Reading</summary>
@@ -867,10 +892,6 @@
                     <ol class="reading-question-list" data-reading-unknown-questions></ol>
                   </section>
                   <section class="reading-customer-unknowns">
-                    <article>
-                      <h4 data-i18n="reading.customer.sourceUnconfirmed">Still unconfirmed</h4>
-                      <ul data-reading-unconfirmed></ul>
-                    </article>
                     <article>
                       <h4 data-i18n="reading.customer.sourceNextEvidence">What to observe next</h4>
                       <ul data-reading-observe-next></ul>
@@ -889,12 +910,12 @@
                     <p data-i18n="reading.experience.evidenceNote">Canonical evidence stays concise; complete source lineage is available inside each item.</p>
                   </header>
                   <section class="reading-evidence-summary">
-                    <h4>Evidence Summary</h4>
+                    <h4 data-i18n="reading.experience.evidenceSummaryTitle">Evidence Summary</h4>
                     <dl data-reading-evidence-summary>
-                      <div><dt>Observed</dt><dd>0</dd></div>
-                      <div><dt>Reported</dt><dd>0</dd></div>
-                      <div><dt>Interpretation</dt><dd>0</dd></div>
-                      <div><dt>Unknown</dt><dd>0</dd></div>
+                      <div><dt data-i18n="reading.experience.observed">Observed</dt><dd>0</dd></div>
+                      <div><dt data-i18n="reading.experience.reported">Reported</dt><dd>0</dd></div>
+                      <div><dt data-i18n="reading.experience.interpretation">Interpretation</dt><dd>0</dd></div>
+                      <div><dt data-i18n="reading.experience.unknown">Unknown</dt><dd>0</dd></div>
                     </dl>
                   </section>
                   <div class="reading-evidence-cards" data-reading-priority-evidence></div>
@@ -1111,8 +1132,8 @@
 
       <details class="reading-inspector-disclosure">
         <summary>
-          <span data-i18n="reading.customer.inspectorTitle">View Reading Inspector</span>
-          <small data-i18n="reading.customer.inspectorDescription">Runtime IDs, inference provider, storage, and model status</small>
+          <span data-i18n="reading.experience.inspectorTitle">How this Reading was formed</span>
+          <small data-i18n="reading.experience.inspectorDescription">Optional system detail for review and traceability</small>
         </summary>
       <aside
         class="reading-inspector reading-inspector-inline"

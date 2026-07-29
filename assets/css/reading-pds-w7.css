@@ -1,0 +1,172 @@
+/* PDS-W7 Reading Experience — projection and interaction only. */
+.reading-page #integratedSection {
+  scroll-margin-top: 7rem;
+}
+
+.reading-page .reading-experience-tabs {
+  position: sticky;
+  top: 6.25rem;
+  z-index: 4;
+  background: color-mix(in srgb, var(--phi-surface-raised) 94%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.reading-page .reading-experience-lead {
+  border: 1px solid color-mix(in srgb, var(--phi-action-platform) 28%, var(--phi-border-subtle));
+}
+
+.reading-confidence-detail {
+  margin-top: var(--phi-space-3);
+  text-align: start;
+}
+
+.reading-confidence-detail > summary {
+  color: var(--phi-action-platform);
+  cursor: pointer;
+  font-size: var(--phi-text-xs);
+  font-weight: 650;
+}
+
+.reading-core-findings > div {
+  display: grid;
+  gap: var(--phi-space-5);
+}
+
+.reading-certainty-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--phi-space-4);
+}
+
+.reading-certainty-grid article {
+  padding: var(--phi-space-5);
+  border: 1px solid var(--phi-border-subtle);
+  border-inline-start-width: 4px;
+  border-radius: var(--phi-radius-md);
+  background: var(--phi-surface-subtle);
+}
+
+.reading-certainty-grid .is-known { border-inline-start-color: var(--phi-state-success); }
+.reading-certainty-grid .is-unknown { border-inline-start-color: var(--phi-state-warning); }
+.reading-certainty-grid .is-conflict { border-inline-start-color: var(--phi-state-danger); }
+.reading-certainty-grid .is-confidence { border-inline-start-color: var(--phi-action-platform); }
+
+.reading-certainty-grid h4 {
+  margin: 0 0 var(--phi-space-3);
+  color: var(--phi-text-primary);
+  font-size: var(--phi-text-base);
+}
+
+.reading-certainty-grid ul {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  color: var(--phi-text-secondary);
+}
+
+.reading-certainty-grid strong {
+  color: var(--phi-text-primary);
+}
+
+.reading-certainty-grid p {
+  margin-bottom: 0;
+  color: var(--phi-text-secondary);
+}
+
+.reading-evidence-cards {
+  grid-template-columns: 1fr;
+}
+
+.reading-evidence-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.reading-evidence-card > summary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--phi-space-4);
+  align-items: start;
+  padding: var(--phi-space-5);
+  cursor: pointer;
+}
+
+.reading-evidence-card > summary strong {
+  color: var(--phi-text-primary);
+  line-height: 1.55;
+}
+
+.reading-evidence-card > summary span,
+.reading-evidence-card > summary small {
+  color: var(--phi-action-platform);
+}
+
+.reading-evidence-card-body {
+  padding: 0 var(--phi-space-5) var(--phi-space-5);
+  border-top: 1px solid var(--phi-border-subtle);
+}
+
+.reading-experience-technical {
+  --reading-technical-bg: #162231;
+  --reading-technical-surface: #203247;
+  --reading-technical-muted: #d5deea;
+  --reading-technical-border: #8ca2ba;
+}
+
+.reading-inspector-disclosure > summary {
+  min-height: 48px;
+  padding: var(--phi-space-4) var(--phi-space-5);
+}
+
+.reading-inspector-disclosure > summary small {
+  color: var(--phi-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .reading-page .reading-experience-tabs {
+    top: 4.75rem;
+    width: 100%;
+  }
+
+  .reading-page .reading-experience-tabs button {
+    flex: 1 0 auto;
+  }
+
+  .reading-certainty-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reading-evidence-card > summary {
+    grid-template-columns: 1fr;
+    gap: var(--phi-space-2);
+  }
+
+  .reading-page .reading-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    padding: var(--phi-space-3);
+    border: 1px solid var(--phi-border-subtle);
+    background: color-mix(in srgb, var(--phi-surface-raised) 94%, transparent);
+    backdrop-filter: blur(12px);
+  }
+}
+
+@media (max-width: 360px) {
+  .reading-page .reading-experience-panel,
+  .reading-page .reading-experience-lead {
+    padding: var(--phi-space-4);
+  }
+}
+
+@media (min-width: 1440px) {
+  .reading-page .reading-experience-panel {
+    padding: var(--phi-space-10);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-page .reading-experience-tabs,
+  .reading-page .reading-actions {
+    backdrop-filter: none;
+  }
+}
