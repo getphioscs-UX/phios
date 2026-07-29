@@ -16,8 +16,20 @@ const itemText = value => text(
     : value?.canonical_text || value?.label || value?.description ||
       value?.reported_time || value?.raw_text || value?.explanation
 );
+const presentationKey = value => itemText(value)
+  .toLocaleLowerCase()
+  .replace(/[，。！？；：、,.!?;:'"“”‘’()\[\]\s]+/g, '');
+const uniquePresentationItems = values => {
+  const seen = new Set();
+  return list(values).filter(value => {
+    const key = presentationKey(value);
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+};
 const listHTML = (values, fallbackKey = 'reconstruction.w14.none') => {
-  const items = list(values).map(itemText).filter(Boolean);
+  const items = uniquePresentationItems(values).map(itemText).filter(Boolean);
   return items.length
     ? items.map(item => `<li>${escapeHTML(item)}</li>`).join('')
     : `<li>${escapeHTML(t(fallbackKey))}</li>`;
@@ -110,7 +122,7 @@ function selectCorrectionForm({
 }
 
 function conditionListHTML(values) {
-  const items = list(values);
+  const items = uniquePresentationItems(values);
   if (!items.length) return listHTML([]);
   return items.map(item => `
     <li>
@@ -131,7 +143,7 @@ function conditionListHTML(values) {
 }
 
 function influenceListHTML(values) {
-  const items = list(values);
+  const items = uniquePresentationItems(values);
   if (!items.length) return listHTML([]);
   return items.map(item => `
     <li>
@@ -178,19 +190,23 @@ function sourceLabel(sourceKey) {
 }
 
 function evidenceCardHTML(item) {
-  const sources = list(item.source_types).map(sourceLabel).filter(Boolean);
-  const lineage = list(item.lineage);
+  const sources = [...new Set(
+    list(item.source_types).map(sourceKey => sourceLabel(sourceKey)).filter(Boolean)
+  )];
   const revisions = list(item.revisions);
-  const pair = item.statement_pair;
   return `
     <article data-canonical-evidence-id="${escapeHTML(item.canonical_evidence_id)}">
       <p>${escapeHTML(item.canonical_text)}</p>
-      <dl>
-        <div><dt>${escapeHTML(t('reconstruction.w14.classification'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.classifications.${item.classification}`))}</dd></div>
-        ${list(item.secondary_classifications).length ? `<div><dt>${escapeHTML(t('reconstruction.w14.secondaryClassification'))}</dt><dd>${list(item.secondary_classifications).map(value => escapeHTML(t(`reconstruction.w14.classifications.${value}`))).join(' · ')}</dd></div>` : ''}
-        <div><dt>${escapeHTML(t('reconstruction.w14.maturity'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.maturityStates.${item.maturity}`))}</dd></div>
-        <div><dt>${escapeHTML(t('reconstruction.w14.sourceSummary'))}</dt><dd>${escapeHTML(t('reconstruction.w14.sourceCount', { count: item.source_count }))}${sources.length ? ` · ${escapeHTML(sources.join('、'))}` : ''}</dd></div>
-      </dl>
+      <p class="w14-evidence-kind">${escapeHTML(t(`reconstruction.w14.classifications.${item.classification}`))}</p>
+      <details class="w14-evidence-details">
+        <summary>${escapeHTML(t('reconstruction.w14.evidenceWhyShown'))}</summary>
+        <dl>
+          <div><dt>${escapeHTML(t('reconstruction.w14.classification'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.classifications.${item.classification}`))}</dd></div>
+          ${list(item.secondary_classifications).length ? `<div><dt>${escapeHTML(t('reconstruction.w14.secondaryClassification'))}</dt><dd>${list(item.secondary_classifications).map(value => escapeHTML(t(`reconstruction.w14.classifications.${value}`))).join(' · ')}</dd></div>` : ''}
+          <div><dt>${escapeHTML(t('reconstruction.w14.maturity'))}</dt><dd>${escapeHTML(t(`reconstruction.w14.maturityStates.${item.maturity}`))}</dd></div>
+          <div><dt>${escapeHTML(t('reconstruction.w14.sourceSummary'))}</dt><dd>${escapeHTML(t('reconstruction.w14.sourceCount', { count: item.source_count }))}${sources.length ? ` · ${escapeHTML(sources.join('、'))}` : ''}</dd></div>
+        </dl>
+      </details>
       ${revisions.length ? `
         <p class="w14-revision-state">${escapeHTML(t('reconstruction.w14.revised'))}</p>
         <details class="w14-evidence-details">
@@ -204,35 +220,6 @@ function evidenceCardHTML(item) {
           `).join('')}
         </details>
       ` : ''}
-      ${pair ? `
-        <details class="w14-evidence-details">
-          <summary>${escapeHTML(t('reconstruction.w14.viewOriginalRecord'))}</summary>
-          <dl>
-            <div><dt>${escapeHTML(t('reconstruction.w14.originalExpression'))}</dt><dd>${escapeHTML(pair.raw_text || '—')}</dd></div>
-            <div><dt>${escapeHTML(t('reconstruction.w14.normalizedExpression'))}</dt><dd>${escapeHTML(pair.normalized_text || item.canonical_text)}</dd></div>
-          </dl>
-        </details>
-      ` : ''}
-      <details class="w14-evidence-details">
-        <summary>${escapeHTML(t('reconstruction.w14.viewSourcesCount', { count: lineage.length }))}</summary>
-        <ul>
-          ${lineage.map(source => `
-            <li>
-              <strong>${escapeHTML(sourceLabel(source.source_label_key))}</strong>
-              ${source.source_round !== null && source.source_round !== undefined
-                ? ` · ${escapeHTML(t('reconstruction.w14.sourceRound', { round: source.source_round }))}`
-                : ''}
-              <dl>
-                <div><dt>${escapeHTML(t('reconstruction.w14.sourcePath'))}</dt><dd><code>${escapeHTML(source.source_path)}</code></dd></div>
-                <div><dt>${escapeHTML(t('reconstruction.w14.sourceEvidenceId'))}</dt><dd>${escapeHTML(source.source_evidence_id || source.evidence_id || '—')}</dd></div>
-                <div><dt>${escapeHTML(t('reconstruction.w14.originalText'))}</dt><dd>${escapeHTML(source.raw_text || '—')}</dd></div>
-                ${source.revision_version ? `<div><dt>${escapeHTML(t('reconstruction.w14.revisionVersion'))}</dt><dd>${escapeHTML(String(source.revision_version))}</dd></div>` : ''}
-                ${source.created_at ? `<div><dt>${escapeHTML(t('reconstruction.w14.createdTime'))}</dt><dd>${escapeHTML(source.created_at)}</dd></div>` : ''}
-              </dl>
-            </li>
-          `).join('')}
-        </ul>
-      </details>
       ${selectCorrectionForm({
         targetType: 'evidence',
         targetId: item.primary_evidence_id,
@@ -252,13 +239,14 @@ function customerHTML(experience) {
   const customer = experience.views?.customer || {};
   const questions = list(experience.unknown_questions);
   const conflicts = list(experience.conflicts);
+  const evidenceItems = uniquePresentationItems(
+    experience.views?.evidence?.items
+  );
   return `
     <header class="customer-reconstruction-heading">
       <p class="section-label">${escapeHTML(t('reconstruction.w14.customerView'))}</p>
       <h3>${escapeHTML(t('reconstruction.w14.currentReconstruction'))}</h3>
-      <p>${escapeHTML(t('reconstruction.w14.version', {
-        version: experience.reconstruction_version
-      }))}</p>
+      <p>${escapeHTML(t('reconstruction.w14.customerIntro'))}</p>
     </header>
     <nav class="w14-view-tabs" aria-label="${escapeHTML(t('reconstruction.w14.viewSelector'))}">
       <button type="button" data-reconstruction-view="customer" aria-pressed="true">${escapeHTML(t('reconstruction.w14.customerView'))}</button>
@@ -267,14 +255,35 @@ function customerHTML(experience) {
     </nav>
     <div data-w14-view="customer">
       <div class="w14-customer-grid">
-        <article><h4>${escapeHTML(t('reconstruction.w14.currentChange'))}</h4><p>${escapeHTML(customer.primary_change || t('reconstruction.w14.none'))}</p></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.timeline'))}</h4><ol>${listHTML(customer.timeline)}</ol></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.enhancingConditions'))}</h4><ul>${conditionListHTML(customer.enhancing_conditions)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.reducingConditions'))}</h4><ul>${conditionListHTML(customer.reducing_conditions)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.influenceSpread'))}</h4><ul>${influenceListHTML(customer.influence_spread)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.confirmed'))}</h4><ul>${listHTML(customer.confirmed)}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.tentative'))}</h4><ul>${listHTML(list(customer.tentative_summary_keys).map(key => ({ label: t(key) })))}</ul></article>
-        <article><h4>${escapeHTML(t('reconstruction.w14.unknown'))}</h4><p>${escapeHTML(customer.unknown_summary_key ? t(customer.unknown_summary_key, { count: list(customer.unknown).length }) : t('reconstruction.w14.none'))}</p></article>
+        <article class="w14-customer-card w14-customer-card--change">
+          <span>01</span>
+          <div><h4>${escapeHTML(t('reconstruction.customerChangeTitle'))}</h4><p>${escapeHTML(customer.primary_change || t('reconstruction.w14.none'))}</p></div>
+        </article>
+        <article class="w14-customer-card">
+          <span>02</span>
+          <div><h4>${escapeHTML(t('reconstruction.customerProcessTitle'))}</h4><ol>${listHTML(customer.timeline)}</ol></div>
+        </article>
+        <article class="w14-customer-card">
+          <span>03</span>
+          <div>
+            <h4>${escapeHTML(t('reconstruction.customerConditionsTitle'))}</h4>
+            <section class="w14-condition-group"><h5>${escapeHTML(t('reconstruction.w14.enhancingConditions'))}</h5><ul>${conditionListHTML(customer.enhancing_conditions)}</ul></section>
+            <section class="w14-condition-group"><h5>${escapeHTML(t('reconstruction.w14.reducingConditions'))}</h5><ul>${conditionListHTML(customer.reducing_conditions)}</ul></section>
+            <section class="w14-condition-group"><h5>${escapeHTML(t('reconstruction.w14.influenceSpread'))}</h5><ul>${influenceListHTML(customer.influence_spread)}</ul></section>
+          </div>
+        </article>
+        <article class="w14-customer-card w14-customer-card--confirmed">
+          <span>04</span>
+          <div><h4>${escapeHTML(t('reconstruction.customerConfirmedTitle'))}</h4><ul>${listHTML(customer.confirmed)}</ul></div>
+        </article>
+        <article class="w14-customer-card w14-customer-card--unknown">
+          <span>05</span>
+          <div>
+            <h4>${escapeHTML(t('reconstruction.customerUnknownTitle'))}</h4>
+            <p>${escapeHTML(customer.unknown_summary_key ? t(customer.unknown_summary_key, { count: list(customer.unknown).length }) : t('reconstruction.w14.none'))}</p>
+            <ul>${listHTML(list(customer.tentative_summary_keys).map(key => ({ label: t(key) })))}</ul>
+          </div>
+        </article>
       </div>
       ${gateHTML(experience.reading_gate)}
       <section class="w14-confirmation" ${questions.length ? '' : 'hidden'}>
@@ -292,8 +301,9 @@ function customerHTML(experience) {
     </div>
     <div data-w14-view="evidence" hidden>
       <h4>${escapeHTML(t('reconstruction.w14.evidenceView'))}</h4>
+      <p class="w14-view-intro">${escapeHTML(t('reconstruction.w14.evidenceIntro'))}</p>
       <div class="w14-evidence-list">
-        ${list(experience.views?.evidence?.items).map(evidenceCardHTML).join('')}
+        ${evidenceItems.map(evidenceCardHTML).join('')}
       </div>
     </div>
     <div data-w14-view="technical" hidden>
@@ -413,6 +423,12 @@ async function submitCorrection(form, result, experience, onUpdated) {
     runtimeEntry: response.runtimeEntry
   });
   status.textContent = t('reconstruction.w14.correctionSaved');
+  const updateNotice = qs('#reconstructionUpdateNotice');
+  if (updateNotice) {
+    updateNotice.textContent = t('reconstruction.w14.correctionSaved');
+    updateNotice.hidden = false;
+    updateNotice.focus();
+  }
   onUpdated?.(response);
 }
 
