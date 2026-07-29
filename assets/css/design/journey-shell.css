@@ -1,0 +1,169 @@
+/* PHI OS Design System — Reality Journey Shell v1 */
+
+.pds-journey-shell {
+  position: relative;
+  z-index: 15;
+  border-bottom: 1px solid var(--phi-border-subtle);
+  background: var(--phi-surface-canvas);
+  color: var(--phi-text-primary);
+  font-family: var(--phi-font-body);
+}
+
+.pds-journey-shell__inner {
+  width: min(var(--phi-container-workspace), calc(100% - (2 * var(--phi-gutter))));
+  margin-inline: auto;
+  padding-block: var(--phi-space-4);
+}
+
+.pds-journey-shell__header,
+.pds-journey-shell__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--phi-space-4);
+}
+
+.pds-journey-shell__eyebrow,
+.pds-journey-shell__status,
+.pds-journey-shell__handoff {
+  margin: 0;
+}
+
+.pds-journey-shell__eyebrow {
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+  font-weight: 700;
+  letter-spacing: var(--phi-tracking-label);
+  text-transform: uppercase;
+}
+
+.pds-journey-shell__status {
+  margin-top: var(--phi-space-1);
+  font-size: var(--phi-text-sm);
+  font-weight: 700;
+}
+
+.pds-journey-shell__progress {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--phi-space-2);
+  padding: 0;
+  margin: var(--phi-space-4) 0;
+  list-style: none;
+}
+
+.pds-journey-shell__progress li {
+  min-width: 0;
+  padding-top: var(--phi-space-2);
+  border-top: 2px solid var(--phi-border-subtle);
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+}
+
+.pds-journey-shell__progress li[aria-current="step"] {
+  border-color: var(--phi-action-reality);
+  color: var(--phi-text-primary);
+  font-weight: 800;
+}
+
+.pds-journey-shell__progress li.is-complete {
+  border-color: var(--phi-state-success);
+}
+
+.pds-journey-shell__actions {
+  align-items: flex-end;
+}
+
+.pds-journey-shell__action-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--phi-space-2);
+}
+
+.pds-journey-shell__action {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--phi-control-target-min);
+  padding-inline: var(--phi-space-3);
+  border: 0;
+  border-radius: var(--phi-radius-pill);
+  background: transparent;
+  color: var(--phi-text-secondary);
+  cursor: pointer;
+  font-size: var(--phi-text-xs);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.pds-journey-shell__action--primary {
+  border: 1px solid var(--phi-action-primary);
+  background: var(--phi-action-primary);
+  color: var(--phi-text-inverse);
+  text-decoration: none;
+}
+
+.pds-journey-shell__handoff {
+  max-width: 30rem;
+  color: var(--phi-text-secondary);
+  font-size: var(--phi-text-xs);
+  text-align: right;
+}
+
+.pds-journey-shell[data-journey-state="loading"] .pds-journey-shell__status {
+  color: var(--phi-action-primary);
+}
+
+.pds-journey-shell[data-journey-state="error"] .pds-journey-shell__status,
+.pds-journey-shell[data-journey-state="blocked"] .pds-journey-shell__status {
+  color: var(--phi-state-danger);
+}
+
+@media (max-width: 48rem) {
+  .pds-journey-shell__inner {
+    width: calc(100% - (2 * var(--phi-space-4)));
+  }
+
+  .pds-journey-shell__progress {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pds-journey-shell__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .pds-journey-shell__handoff {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+@media (max-width: 30rem) {
+  .pds-journey-shell__progress {
+    display: flex;
+    gap: var(--phi-space-2);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+
+  .pds-journey-shell__progress li {
+    flex: 0 0 6.25rem;
+    scroll-snap-align: start;
+  }
+
+  .pds-journey-shell__action-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pds-journey-shell__action {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pds-journey-shell__progress {
+    scroll-behavior: auto;
+  }
+}

@@ -66,6 +66,44 @@ const shared = Object.freeze({
     sessionRestored: '已恢复你的运行旅程。',
     missingSession: '未找到正在进行的运行旅程。'
   },
+  journeyShell: {
+    label: '你的现实旅程',
+    progressLabel: '现实旅程进度',
+    stages: {
+      enter: '进入',
+      describe: '描述',
+      discover: '发现',
+      understand: '理解',
+      choose: '选择',
+      continue: '继续'
+    },
+    status: {
+      enter: '确认这段旅程是否适合你想理解的变化。',
+      describe: '用自己的语言描述正在发生的变化。',
+      discover: '确认事情如何发展，并修正系统的误解。',
+      understand: '以清楚的客户视图看见当前现实地图。',
+      choose: '选择一个能够执行、观察与回看的实际方向。',
+      continue: '回看发生了什么变化，并决定旅程如何继续。',
+      loading: 'PHI OS 正在准备当前阶段。',
+      empty: '当前阶段仍需要上一阶段的资料。',
+      error: '当前阶段暂时无法准备；此前资料不会因此改变。',
+      blocked: '请先完成或确认当前步骤，再继续前进。'
+    },
+    actions: {
+      back: '返回',
+      modify: '修改之前的资料',
+      pause: '暂停并稍后继续',
+      primary: '前往主要行动'
+    },
+    handoff: {
+      enter: '下一步：描述最近开始发生的变化。',
+      describe: '下一步：确认事情如何发展。',
+      discover: '下一步：理解当前现实地图。',
+      understand: '下一步：选择一个可以观察的方向。',
+      choose: '下一步：回看实际发生了什么变化。',
+      continue: '从最近确认的位置继续。'
+    }
+  },
   fields: {
     observedChange: '观察到的变化',
     timeSignal: '时间信号',

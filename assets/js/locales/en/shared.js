@@ -66,6 +66,44 @@ const shared = Object.freeze({
     sessionRestored: 'Your Runtime Journey has been restored.',
     missingSession: 'No active Runtime Journey was found.'
   },
+  journeyShell: {
+    label: 'Your Reality Journey',
+    progressLabel: 'Reality Journey progress',
+    stages: {
+      enter: 'Enter',
+      describe: 'Describe',
+      discover: 'Discover',
+      understand: 'Understand',
+      choose: 'Choose',
+      continue: 'Continue'
+    },
+    status: {
+      enter: 'See whether this journey fits the change you want to understand.',
+      describe: 'Describe what is changing in your own words.',
+      discover: 'Confirm how the situation developed and correct misunderstandings.',
+      understand: 'See your current Reality Map in a clear customer view.',
+      choose: 'Choose one practical direction that can be observed and reviewed.',
+      continue: 'Review what changed and decide how the journey continues.',
+      loading: 'PHI OS is preparing this stage.',
+      empty: 'This stage needs information from the previous step.',
+      error: 'This stage could not be prepared. Your earlier information remains unchanged.',
+      blocked: 'Complete or confirm the current step before continuing.'
+    },
+    actions: {
+      back: 'Back',
+      modify: 'Modify earlier information',
+      pause: 'Pause and return later',
+      primary: 'Go to the main action'
+    },
+    handoff: {
+      enter: 'Next: describe what has started to change.',
+      describe: 'Next: confirm how the situation developed.',
+      discover: 'Next: understand the current Reality Map.',
+      understand: 'Next: choose one observable direction.',
+      choose: 'Next: review what actually changed.',
+      continue: 'Continue from the latest confirmed point.'
+    }
+  },
   fields: {
     observedChange: 'Observed Change',
     timeSignal: 'Time Signal',
