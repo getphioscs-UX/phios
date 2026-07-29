@@ -97,6 +97,11 @@ const review = Object.freeze({
     prepareMemoryButton: '准备 Runtime Memory',
     openMemoryButton: '打开 Runtime Memory',
     boundaryNote: '你的回答仍属于 reported experience，不会覆盖原 Reading，也不会自动成为已验证证据。',
+    w8: {
+      unknownLabel: '什么仍然未知？',
+      pauseTitle: '还没有准备好决定？',
+      pauseNote: '先保存现实回顾，之后再回来；在你明确选择前，系统不会选定下一状态。'
+    },
     memoryReady: 'Review 已满足 Runtime Memory 的准备条件。',
     memoryBlocked: 'Memory Handoff 仍等待 {count} 项条件。',
     memoryPrepared: 'Runtime Memory 已准备；Continuity 仍需要客户再次选择。',
@@ -254,6 +259,13 @@ const review = Object.freeze({
       professional: '现有专业同意边界必须继续有效。',
       close: '这次行动周期关闭，但 Runtime 与 Memory 继续保留。',
       pending: '请先回到 Review 选择下一运行状态。'
+    },
+    w8: {
+      sameJourneyTitle: '继续当前 Journey',
+      sameJourneyText: '继续连接当前 Runtime、证据与历史。',
+      newJourneyTitle: '建立独立的新 Journey',
+      newJourneyText: '先保留当前 Journey，再由你明确确认是否开始新的 Reality Entry。',
+      resumeNote: '你可以在这里暂停，之后从同一个已确认状态恢复。'
     },
     outcome: {
       continue_observation: '继续观察',

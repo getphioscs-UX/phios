@@ -183,6 +183,7 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
             <span class="navigation-path-number">${String(index + 1).padStart(2, '0')}</span>
             <div>
               ${recommended ? `<mark>${escapeHTML(t('navigation.shownFirst'))}</mark>` : ''}
+              ${selected ? `<mark class="navigation-selected-mark">${escapeHTML(t('navigation.pathSelected'))}</mark>` : ''}
               <h3>${escapeHTML(title)}</h3>
             </div>
           </header>

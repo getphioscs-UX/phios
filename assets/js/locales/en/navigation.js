@@ -469,7 +469,7 @@ const navigation = Object.freeze({
       reviewCondition: 'Review condition',
       saveConfiguration: 'Save configuration',
       configurationSaved: 'Configuration saved',
-      start: 'Start',
+      start: 'Begin observing',
       clarificationStructure: 'Clarification structure',
       known: 'Known',
       reported: 'Reported experience',
@@ -511,10 +511,20 @@ const navigation = Object.freeze({
       counterExamples: 'counter-examples',
       nextRecord: 'Next record',
       progressBoundary: 'Progress measures execution only; it does not claim that Reality has improved.',
-      endForReview: 'End and prepare Review',
-      completionMet: 'Completion condition met',
-      stopTriggered: 'Stop condition triggered',
+      endForReview: 'Review what is here now',
+      completionMet: 'I have enough to review',
+      stopTriggered: 'Something changed — review now',
       reviewReady: 'Execution evidence is ready for Review.',
+      evidenceLogTitle: 'Your observation record',
+      evidenceLogBoundary: 'These are your records. They remain reported experience until separately verified.',
+      recordedSignal: 'Recorded signal',
+      recordSaved: 'Record saved',
+      counterExampleCustomer: 'A different result was also noticed',
+      reviewGateTitle: 'Review readiness',
+      reviewGateReady: 'Ready to review',
+      reviewGateWaiting: 'Not ready yet',
+      reviewGateReadyText: 'You can now review what changed, what did not change and what remains unknown.',
+      reviewGateWaitingText: 'Keep the selected path and its observation conditions visible. Review opens only when the existing gate is satisfied.',
       state: {
         available: 'Available',
         selected: 'Selected',
@@ -533,6 +543,14 @@ const navigation = Object.freeze({
         child_need: 'Child-related need',
         other: 'Other'
       }
+    },
+
+    w8: {
+      compareTitle: 'Compare before choosing',
+      compareNote: 'Each path is an available direction, not an instruction. You decide whether any path fits the Reality already understood.',
+      pauseTitle: 'Pause without losing your place',
+      pauseNote: 'You can leave this page and resume the same saved Journey on this device. Pausing does not complete the path or open Review.',
+      pauseAction: 'Pause and return to Journey'
     },
 
     noNavigation:

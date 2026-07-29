@@ -469,7 +469,7 @@ const navigation = Object.freeze({
       reviewCondition: '审阅条件',
       saveConfiguration: '保存配置',
       configurationSaved: '配置已保存',
-      start: '开始执行',
+      start: '开始观察',
       clarificationStructure: '澄清结构',
       known: '已知',
       reported: '用户报告经验',
@@ -511,10 +511,20 @@ const navigation = Object.freeze({
       counterExamples: '个反例',
       nextRecord: '下一次记录',
       progressBoundary: '进度只表示执行情况，不表示 Reality 已改善。',
-      endForReview: '主动结束并准备审阅',
-      completionMet: '完成条件已满足',
-      stopTriggered: '停止条件已触发',
+      endForReview: '回看目前已有内容',
+      completionMet: '已有足够内容可以回看',
+      stopTriggered: '情况有变，现在回看',
       reviewReady: '执行证据已经可以进入 Review。',
+      evidenceLogTitle: '你的观察记录',
+      evidenceLogBoundary: '这些是你的记录；在经过独立核实前，仍属于客户报告经验。',
+      recordedSignal: '已记录信号',
+      recordSaved: '记录已保存',
+      counterExampleCustomer: '同时注意到不同结果',
+      reviewGateTitle: '是否可以进入回看',
+      reviewGateReady: '可以开始回看',
+      reviewGateWaiting: '目前还未准备好',
+      reviewGateReadyText: '现在可以分别回看发生了什么变化、什么没有变化，以及什么仍然未知。',
+      reviewGateWaitingText: '请继续保留已选路径与观察条件；只有原有 Review Gate 满足后，回看才会开放。',
       state: {
         available: '可选择',
         selected: '已选择',
@@ -533,6 +543,14 @@ const navigation = Object.freeze({
         child_need: '孩子用品',
         other: '其他'
       }
+    },
+
+    w8: {
+      compareTitle: '先比较，再选择',
+      compareNote: '每条路径都是可考虑的方向，不是行动命令。是否符合已经理解的现实，由你决定。',
+      pauseTitle: '暂停而不失去当前位置',
+      pauseNote: '你可以离开本页，之后在同一设备恢复这段已保存的 Journey。暂停不会完成路径，也不会直接开启 Review。',
+      pauseAction: '暂停并返回 Journey'
     },
 
     noNavigation:

@@ -97,6 +97,11 @@ const review = Object.freeze({
     prepareMemoryButton: 'Prepare Runtime Memory',
     openMemoryButton: 'Open Runtime Memory',
     boundaryNote: 'Your report remains reported experience. It does not overwrite the earlier Reading or become verified evidence automatically.',
+    w8: {
+      unknownLabel: 'What is still unknown?',
+      pauseTitle: 'Not ready to decide?',
+      pauseNote: 'Save the Review and return later. No next state is selected until you choose it yourself.'
+    },
     memoryReady: 'Review is ready for Runtime Memory.',
     memoryBlocked: 'Memory handoff is waiting for {count} requirement(s).',
     memoryPrepared: 'Runtime Memory prepared. Continuity still requires a separate user choice.',
@@ -254,6 +259,13 @@ const review = Object.freeze({
       professional: 'The existing professional consent boundary must remain accepted.',
       close: 'The action cycle closes while the Runtime and its Memory remain preserved.',
       pending: 'Return to Review and choose the next Runtime state first.'
+    },
+    w8: {
+      sameJourneyTitle: 'Continue this Journey',
+      sameJourneyText: 'Keep the current Runtime, evidence and history connected.',
+      newJourneyTitle: 'Start a separate Journey',
+      newJourneyText: 'Preserve this Journey first, then begin a new Entry only after your explicit confirmation.',
+      resumeNote: 'You may pause here and resume from this same confirmed state later.'
     },
     outcome: {
       continue_observation: 'Continue observation',

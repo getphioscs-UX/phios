@@ -234,6 +234,45 @@ function progress(action) {
   `;
 }
 
+function evidenceLog(action) {
+  const logs = list(action.evidence_logs);
+  return `
+    <details class="navigation-evidence-log">
+      <summary>
+        <span>${escapeHTML(label('evidenceLogTitle', 'Your observation record'))}</span>
+        <strong>${escapeHTML(label('recordCount', '{count} records').replace('{count}', logs.length))}</strong>
+      </summary>
+      <p>${escapeHTML(label('evidenceLogBoundary', 'These are your records. They remain reported experience until separately verified.'))}</p>
+      ${logs.length ? `
+        <ol>${logs.map(log => `
+          <li>
+            <time>${escapeHTML(cleanText(log.recorded_at).slice(0, 10))}</time>
+            <strong>${escapeHTML(cleanText(log.signal) || label('recordedSignal', 'Recorded signal'))}</strong>
+            <span>${escapeHTML(cleanText(String(log.value ?? '')) || cleanText(log.user_note) || label('recordSaved', 'Record saved'))}</span>
+            ${log.counter_example ? `<small>${escapeHTML(label('counterExampleCustomer', 'A different result was also noticed'))}</small>` : ''}
+          </li>
+        `).join('')}</ol>
+      ` : `<p>${escapeHTML(label('noRecords', 'No records yet'))}</p>`}
+    </details>
+  `;
+}
+
+function reviewGate(action) {
+  const ready = action.review_gate?.review_payload_ready === true;
+  return `
+    <section class="navigation-review-gate${ready ? ' is-ready' : ' is-waiting'}" role="status">
+      <span>${escapeHTML(label('reviewGateTitle', 'Review readiness'))}</span>
+      <strong>${escapeHTML(label(ready ? 'reviewGateReady' : 'reviewGateWaiting', ready ? 'Ready to review' : 'Not ready yet'))}</strong>
+      <p>${escapeHTML(label(
+        ready ? 'reviewGateReadyText' : 'reviewGateWaitingText',
+        ready
+          ? 'You can now review what changed, what did not change and what remains unknown.'
+          : 'Keep the selected path and its observation conditions visible. Review opens only when the existing gate is satisfied.'
+      ))}</p>
+    </section>
+  `;
+}
+
 export function renderNavigationExecution(response) {
   const root = document.querySelector('[data-navigation-execution]');
   if (!root) return { rendered: false };
@@ -273,14 +312,14 @@ export function renderNavigationExecution(response) {
         <button class="btn primary" type="button" data-start-navigation>${escapeHTML(label('start', 'Start'))}</button>
       </section>
     ` : ''}
-    ${state === 'active' ? `${progress(action)}${observationRecorder(action)}
+    ${state === 'active' ? `${progress(action)}${observationRecorder(action)}${evidenceLog(action)}${reviewGate(action)}
       <div class="navigation-execution-actions">
         <button class="btn" type="button" data-complete-navigation>${escapeHTML(label('completionMet', 'Completion condition met'))}</button>
         <button class="btn" type="button" data-stop-navigation>${escapeHTML(label('stopTriggered', 'Stop condition triggered'))}</button>
         <button class="btn" type="button" data-end-navigation>${escapeHTML(label('endForReview', 'End and prepare Review'))}</button>
       </div>` : ''}
     ${['completed', 'review_due'].includes(state) ? `
-      ${progress(action)}
+      ${progress(action)}${evidenceLog(action)}${reviewGate(action)}
       <p class="navigation-review-ready-note">${escapeHTML(label('reviewReady', 'Execution evidence is ready for Review.'))}</p>
     ` : ''}
   `;

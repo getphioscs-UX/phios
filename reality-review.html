@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
   <link rel="stylesheet" href="/assets/css/review-memory-continuity.css">
+  <link rel="stylesheet" href="/assets/css/pds-w8-navigation-review-continuity.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
 </head>
 <body class="review-page">
@@ -69,16 +70,16 @@
                 <p class="eyebrow" data-i18n="review.changeEyebrow">02 · Change Since Reading</p>
                 <h2 data-i18n="review.changeTitle">What changed since the Reading?</h2>
                 <p class="review-section-intro" data-i18n="review.changeText">Report only what you observed. A report is not promoted to verified evidence.</p>
-                <label>
+                <label class="review-change-state is-changed">
                   <span data-i18n="review.observedChangesLabel">Observed changes</span>
                   <textarea id="reviewObserved" data-i18n-placeholder="review.observedChangesPlaceholder"></textarea>
                 </label>
-                <label>
+                <label class="review-change-state is-unchanged">
                   <span data-i18n="review.noChangeLabel">What did not change?</span>
                   <textarea id="reviewNoChange" data-i18n-placeholder="review.noChangePlaceholder"></textarea>
                 </label>
-                <label>
-                  <span data-i18n="review.unexpectedLabel">Unexpected reality</span>
+                <label class="review-change-state is-unknown">
+                  <span data-i18n="review.w8.unknownLabel">What is still unknown?</span>
                   <textarea id="reviewUnexpected" data-i18n-placeholder="review.unexpectedPlaceholder"></textarea>
                 </label>
               </section>
@@ -171,6 +172,10 @@
                   <a class="btn hidden" id="openMemory" href="/my-reality.html#memory" data-i18n="review.openMemoryButton">Open Runtime Memory</a>
                 </div>
                 <p class="review-note" data-i18n="review.boundaryNote">Your report remains reported experience. It does not overwrite the earlier Reading or become verified evidence automatically.</p>
+                <aside class="review-pause-resume" role="note">
+                  <strong data-i18n="review.w8.pauseTitle">Not ready to decide?</strong>
+                  <p data-i18n="review.w8.pauseNote">Save the Review and return later. No next state is selected until you choose it yourself.</p>
+                </aside>
               </section>
             </aside>
           </div>

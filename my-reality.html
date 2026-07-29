@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/runtime-workspace.css">
   <link rel="stylesheet" href="/assets/css/review-memory-continuity.css">
+  <link rel="stylesheet" href="/assets/css/pds-w8-navigation-review-continuity.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
 </head>
 <body class="runtime-workspace-page">
@@ -205,6 +206,16 @@
                 <p class="eyebrow" data-i18n="memory.branchEyebrow">02 · Revision or New Journey</p>
                 <h3 data-i18n="memory.branchTitle">Confirm the branch selected in Review</h3>
                 <p data-i18n="memory.branchIntro">Continuity may prepare a transition, but it cannot change the Review outcome or create a new Runtime automatically.</p>
+                <div class="continuity-branch-explainer">
+                  <article>
+                    <strong data-i18n="memory.w8.sameJourneyTitle">Continue this Journey</strong>
+                    <p data-i18n="memory.w8.sameJourneyText">Keep the current Runtime, evidence and history connected.</p>
+                  </article>
+                  <article>
+                    <strong data-i18n="memory.w8.newJourneyTitle">Start a separate Journey</strong>
+                    <p data-i18n="memory.w8.newJourneyText">Preserve this Journey first, then begin a new Entry only after your explicit confirmation.</p>
+                  </article>
+                </div>
                 <div class="continuity-choice-grid">
                   <label class="continuity-choice"><input type="radio" name="continuityChoice" value="continue_observation"><span data-i18n="review.outcomeContinueObservation">Continue observation</span></label>
                   <label class="continuity-choice"><input type="radio" name="continuityChoice" value="continue_selected_path"><span data-i18n="review.outcomeContinuePath">Continue selected path</span></label>
@@ -224,6 +235,7 @@
                   <button class="btn primary hidden" id="executeTransition" type="button" data-i18n="memory.executeTransition">Continue to the next stage</button>
                 </div>
                 <p id="continuityStatus" class="review-memory-status" role="status" aria-live="polite"></p>
+                <p class="continuity-resume-note" data-i18n="memory.w8.resumeNote">You may pause here and resume from this same confirmed state later.</p>
               </section>
             </div>
           </section>
