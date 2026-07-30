@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+
+import './check-master-governance.mjs';
 import { execFileSync } from 'node:child_process';
 
 const root = process.cwd();
