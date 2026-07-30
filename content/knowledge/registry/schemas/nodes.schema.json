@@ -1,39 +1,69 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://getphios.com/schemas/pkr/nodes.schema.json",
-  "title": "PHI OS PKR Nodes Registry",
+  "$id": "nodes.schema.json",
+  "title": "PKR Canonical Knowledge Nodes",
   "type": "object",
-  "required": ["version", "nodes"],
+  "required": [
+    "version",
+    "nodes"
+  ],
   "properties": {
-    "version": { "type": "string" },
+    "version": {
+      "type": "string"
+    },
     "nodes": {
       "type": "array",
       "items": {
         "type": "object",
         "required": [
-          "nodeCode", "collectionCode", "themeCode", "canonicalQuestionKey",
-          "nodeType", "knowledgeLevel", "productionTier", "primaryAssetType",
-          "canonicalLanguage", "requiredPublicLanguages", "registryStatus", "version"
+          "nodeCode",
+          "collectionCode",
+          "themeCode",
+          "canonicalQuestionKey",
+          "productionTier",
+          "supportingQuestionCodes",
+          "relationships",
+          "version"
         ],
         "properties": {
-          "nodeCode": { "type": "string", "pattern": "^KN-[A-Z0-9-]+$" },
-          "collectionCode": { "type": "string" },
-          "themeCode": { "type": "string" },
-          "canonicalQuestionKey": { "type": "string" },
-          "nodeType": {
-            "enum": ["foundation_question", "concept_question", "mechanism_question", "comparison_question", "misunderstanding_question", "observation_question", "application_question", "boundary_question"]
+          "nodeCode": {
+            "type": "string",
+            "pattern": "^KN-[A-Z0-9-]+$"
           },
-          "knowledgeLevel": { "enum": ["introductory", "foundational", "intermediate", "advanced", "research"] },
-          "productionTier": { "enum": ["tier_a", "tier_b", "tier_c"] },
-          "primaryAssetType": { "enum": ["article", "figure", "video", "audio", "atlas_entry"] },
-          "canonicalLanguage": { "const": "zh-Hans" },
-          "requiredPublicLanguages": {
+          "collectionCode": {
+            "type": "string"
+          },
+          "themeCode": {
+            "type": "string"
+          },
+          "canonicalQuestionKey": {
+            "type": "string"
+          },
+          "productionTier": {
+            "enum": [
+              "tier_a",
+              "tier_b",
+              "tier_c"
+            ]
+          },
+          "supportingQuestionCodes": {
             "type": "array",
-            "items": { "enum": ["zh-Hans", "en"] },
-            "uniqueItems": true
+            "items": {
+              "type": "string"
+            }
           },
-          "registryStatus": { "enum": ["proposed", "structured", "frozen", "deprecated"] },
-          "version": { "type": "string" }
+          "legacyNodeCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "relationships": {
+            "type": "object"
+          },
+          "version": {
+            "type": "string"
+          }
         },
         "additionalProperties": true
       }
