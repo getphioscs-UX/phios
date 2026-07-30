@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phios-github.pages.dev/schemas/claim-review-record.schema.json",
+  "title": "PHI OS Article Claim Review Record",
+  "description": "Governance-only review record. It cannot supply or replace public article body content.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claimId",
+    "statement",
+    "claimType",
+    "sourceRequired",
+    "sourceCodes",
+    "qualification",
+    "articleSection",
+    "reviewStatus",
+    "reviewedBy",
+    "reviewedAt"
+  ],
+  "properties": {
+    "claimId": {
+      "type": "string",
+      "pattern": "^CLM-[A-Z0-9-]+$"
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claimType": {
+      "enum": [
+        "externally_verifiable",
+        "phi_os_interpretation",
+        "editorial_inference",
+        "canonical_transition",
+        "boundary_statement"
+      ]
+    },
+    "sourceRequired": {
+      "type": "boolean"
+    },
+    "sourceCodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^SRC-[A-Z0-9-]+$"
+      }
+    },
+    "qualification": {
+      "type": "string"
+    },
+    "articleSection": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewStatus": {
+      "enum": [
+        "not_reviewed",
+        "changes_required",
+        "conditionally_approved",
+        "approved"
+      ]
+    },
+    "reviewedBy": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reviewedAt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

@@ -8,6 +8,12 @@ const REGISTRY_PATHS = Object.freeze({
 
 const ARTICLE_ROUTE_PREFIX = '/articles/';
 const SAVE_STORAGE_KEY = 'phiOSPublicKnowledgeSaves.v1';
+const VISUAL_ASSET_TYPES = Object.freeze([
+  'hero_illustration',
+  'mechanism_diagram',
+  'timeline_diagram',
+  'decorative_image'
+]);
 const cache = new Map();
 
 async function fetchJson(path) {
@@ -62,7 +68,37 @@ function articleAssetFor(assets, localized) {
   ));
 }
 
-function publicArticle(content, node, localized, asset) {
+function localizedVisualText(value, locale) {
+  if (typeof value === 'string') {
+    return value;
+  }
+
+  return value?.[locale] || value?.['zh-Hans'] || '';
+}
+
+function visualAssetsFor(assets, nodeCode, locale) {
+  return assets
+    .filter(asset => (
+      asset.nodeCode === nodeCode &&
+      VISUAL_ASSET_TYPES.includes(asset.assetType) &&
+      (
+        asset.localeDependency === 'none' ||
+        asset.localeDependency === locale ||
+        asset.locale === locale
+      ) &&
+      typeof asset.contentPath === 'string' &&
+      isApprovedPublication(asset)
+    ))
+    .map(asset => Object.freeze({
+      assetCode: asset.assetCode,
+      assetType: asset.assetType,
+      publicSrc: `/${asset.contentPath.replace(/^\/+/, '')}`,
+      altText: localizedVisualText(asset.altText, locale),
+      caption: localizedVisualText(asset.caption, locale)
+    }));
+}
+
+function publicArticle(content, node, localized, asset, assets) {
   return Object.freeze({
     ...content,
     node: Object.freeze({
@@ -77,6 +113,9 @@ function publicArticle(content, node, localized, asset) {
       locale: localized.locale,
       slug: localized.slug
     }),
+    visualAssets: Object.freeze(
+      visualAssetsFor(assets, node.nodeCode, localized.locale)
+    ),
     publicHref: asset.publicHref || `${ARTICLE_ROUTE_PREFIX}${localized.slug}`
   });
 }
@@ -139,7 +178,8 @@ async function loadLocale(locale) {
         content,
         candidate.node,
         candidate.localized,
-        candidate.asset
+        candidate.asset,
+        assetRegistry.assets
       );
     }));
 

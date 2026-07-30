@@ -31,6 +31,150 @@ function linkList(items = []) {
   `).join('');
 }
 
+function renderBlock(block, article, publishedArticles) {
+  if (!block || typeof block !== 'object') {
+    return '';
+  }
+
+  switch (block.type) {
+    case 'paragraph':
+      return `<p class="knowledge-block knowledge-block--paragraph">${escapeHtml(block.text)}</p>`;
+
+    case 'lead':
+      return `<p class="knowledge-block knowledge-block--lead">${escapeHtml(block.text)}</p>`;
+
+    case 'question':
+      return `
+        <aside class="knowledge-block knowledge-block--question">
+          <p class="knowledge-block__question">${escapeHtml(block.question)}</p>
+          ${block.answer
+            ? `<p class="knowledge-block__answer">${escapeHtml(block.answer)}</p>`
+            : ''}
+        </aside>
+      `;
+
+    case 'insight':
+      return `
+        <aside class="knowledge-block knowledge-block--insight">
+          ${block.heading
+            ? `<p class="knowledge-block__label">${escapeHtml(block.heading)}</p>`
+            : ''}
+          <p>${escapeHtml(block.statement)}</p>
+        </aside>
+      `;
+
+    case 'mechanism':
+      return `
+        <div class="knowledge-block knowledge-block--mechanism">
+          <h3>${escapeHtml(block.heading)}</h3>
+          <ol>
+            ${(block.steps || []).map(step => `
+              <li>
+                <strong>${escapeHtml(step.label)}</strong>
+                <span>${escapeHtml(step.description)}</span>
+              </li>
+            `).join('')}
+          </ol>
+        </div>
+      `;
+
+    case 'timeline':
+      return `
+        <div class="knowledge-block knowledge-block--timeline">
+          ${block.heading ? `<h3>${escapeHtml(block.heading)}</h3>` : ''}
+          <ol>
+            ${(block.entries || []).map(entry => `
+              <li>
+                <span class="knowledge-block__period">${escapeHtml(entry.period)}</span>
+                <strong>${escapeHtml(entry.title)}</strong>
+                <p>${escapeHtml(entry.description)}</p>
+              </li>
+            `).join('')}
+          </ol>
+        </div>
+      `;
+
+    case 'comparison':
+      return `
+        <div class="knowledge-block knowledge-block--comparison">
+          ${block.heading ? `<h3>${escapeHtml(block.heading)}</h3>` : ''}
+          <div class="knowledge-block__comparison-grid">
+            ${[block.left, block.right].map(side => `
+              <section>
+                <h4>${escapeHtml(side?.heading)}</h4>
+                <ul>
+                  ${(side?.items || []).map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+                </ul>
+              </section>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+    case 'figure': {
+      const visual = article.visualAssets?.find(asset => (
+        asset.assetCode === block.assetCode
+      ));
+
+      if (!visual) {
+        return '';
+      }
+
+      return `
+        <figure class="knowledge-block knowledge-block--figure">
+          <img src="${escapeHtml(visual.publicSrc)}" alt="${escapeHtml(visual.altText)}" loading="lazy">
+          ${visual.caption
+            ? `<figcaption>${escapeHtml(visual.caption)}</figcaption>`
+            : ''}
+        </figure>
+      `;
+    }
+
+    case 'transition':
+      return `<p class="knowledge-block knowledge-block--transition">${escapeHtml(block.text)}</p>`;
+
+    case 'next_node': {
+      const nextArticle = publishedArticles.find(candidate => (
+        candidate.nodeCode === block.nodeCode
+      ));
+
+      if (!nextArticle) {
+        return '';
+      }
+
+      return `
+        <aside class="knowledge-block knowledge-block--next-node">
+          <p class="knowledge-block__label">${escapeHtml(block.label)}</p>
+          ${block.description ? `<p>${escapeHtml(block.description)}</p>` : ''}
+          <a class="knowledge-connection-link" href="${escapeHtml(articleHref(nextArticle))}">
+            ${escapeHtml(nextArticle.title)}
+          </a>
+        </aside>
+      `;
+    }
+
+    default:
+      return '';
+  }
+}
+
+function renderSection(section, article, publishedArticles) {
+  const legacyParagraphs = Array.isArray(section.paragraphs)
+    ? section.paragraphs
+    : [];
+  const blocks = Array.isArray(section.blocks)
+    ? section.blocks
+    : [];
+
+  return `
+    <section>
+      <h2>${escapeHtml(section.heading)}</h2>
+      ${legacyParagraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}
+      ${blocks.map(block => renderBlock(block, article, publishedArticles)).join('')}
+    </section>
+  `;
+}
+
 function articleMarkup(article, publishedArticles) {
   const related = publishedArticles.filter(candidate => (
     article.connections.relatedArticles.includes(candidate.nodeCode)
@@ -55,12 +199,9 @@ function articleMarkup(article, publishedArticles) {
 
       <div class="knowledge-article__layout">
         <div class="knowledge-article__body">
-          ${article.sections.map(section => `
-            <section>
-              <h2>${escapeHtml(section.heading)}</h2>
-              ${section.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}
-            </section>
-          `).join('')}
+          ${article.sections.map(section => (
+            renderSection(section, article, publishedArticles)
+          )).join('')}
         </div>
 
         <aside class="knowledge-article__aside">
