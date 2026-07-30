@@ -1,9 +1,16 @@
 import { normalizeLocale } from '../i18n.js';
+import {
+  createPublicArticleProjection
+} from './article-projection.js';
+import {
+  safeInternalHref
+} from './article-links.js';
 
 const REGISTRY_PATHS = Object.freeze({
   nodes: '/content/knowledge/registry/nodes.json',
   localizedContent: '/content/knowledge/registry/localized-content.json',
-  assets: '/content/knowledge/registry/assets.json'
+  assets: '/content/knowledge/registry/assets.json',
+  sources: '/content/knowledge/registry/sources.json'
 });
 
 const ARTICLE_ROUTE_PREFIX = '/articles/';
@@ -94,29 +101,31 @@ function visualAssetsFor(assets, nodeCode, locale) {
       assetType: asset.assetType,
       publicSrc: `/${asset.contentPath.replace(/^\/+/, '')}`,
       altText: localizedVisualText(asset.altText, locale),
-      caption: localizedVisualText(asset.caption, locale)
+      caption: localizedVisualText(asset.caption, locale),
+      width: asset.width || asset.dimensions?.width,
+      height: asset.height || asset.dimensions?.height,
+      publicProjection: true
     }));
 }
 
-function publicArticle(content, node, localized, asset, assets) {
-  return Object.freeze({
-    ...content,
-    node: Object.freeze({
-      nodeCode: node.nodeCode,
-      canonicalLanguage: node.canonicalLanguage,
-      requiredPublicLanguages: [...node.requiredPublicLanguages],
-      themeCode: node.themeCode,
-      productionTier: node.productionTier
-    }),
-    localizedRecord: Object.freeze({
-      contentRole: localized.contentRole,
-      locale: localized.locale,
-      slug: localized.slug
-    }),
-    visualAssets: Object.freeze(
-      visualAssetsFor(assets, node.nodeCode, localized.locale)
+function publicArticle(
+  content,
+  node,
+  localized,
+  asset,
+  assets,
+  sources
+) {
+  return createPublicArticleProjection(content, {
+    node,
+    localized,
+    articleAsset: asset,
+    visualAssets: visualAssetsFor(
+      assets,
+      node.nodeCode,
+      localized.locale
     ),
-    publicHref: asset.publicHref || `${ARTICLE_ROUTE_PREFIX}${localized.slug}`
+    registeredSources: sources
   });
 }
 
@@ -130,8 +139,14 @@ async function loadLocale(locale) {
   const promise = Promise.all([
     fetchJson(REGISTRY_PATHS.nodes),
     fetchJson(REGISTRY_PATHS.localizedContent),
-    fetchJson(REGISTRY_PATHS.assets)
-  ]).then(async ([nodeRegistry, localizedRegistry, assetRegistry]) => {
+    fetchJson(REGISTRY_PATHS.assets),
+    fetchJson(REGISTRY_PATHS.sources)
+  ]).then(async ([
+    nodeRegistry,
+    localizedRegistry,
+    assetRegistry,
+    sourceRegistry
+  ]) => {
     const localizedByNode = new Map(
       localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
     );
@@ -179,7 +194,8 @@ async function loadLocale(locale) {
         candidate.node,
         candidate.localized,
         candidate.asset,
-        assetRegistry.assets
+        assetRegistry.assets,
+        sourceRegistry.sources
       );
     }));
 
@@ -207,7 +223,9 @@ export async function loadPublishedArticleBySlug(slug, locale) {
 }
 
 export function articleHref(article) {
-  return article?.publicHref || `${ARTICLE_ROUTE_PREFIX}${article?.slug || ''}`;
+  return safeInternalHref(article?.publicHref) ||
+    safeInternalHref(`${ARTICLE_ROUTE_PREFIX}${article?.slug || ''}`) ||
+    '/articles';
 }
 
 function readSavedNodeCodes() {
