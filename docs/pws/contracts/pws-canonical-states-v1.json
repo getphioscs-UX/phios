@@ -1,0 +1,373 @@
+{
+  "contractId": "phi-os.pws.canonical-states.v1",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "78e3c4a46b02adc6fb637e7f4a761bc61dd7d619",
+    "prerequisiteContracts": [
+      "phi-os.pws.canonical-object-registry.v1",
+      "phi-os.pws.schema-version.v1"
+    ]
+  },
+  "rules": {
+    "freeStringStatesAllowed": false,
+    "stateCodesAreCaseSensitive": true,
+    "stateCodesUseSnakeCase": true,
+    "initialStateRequired": true,
+    "explicitTransitionRequired": true,
+    "illegalTransitionRejected": true,
+    "illegalTransitionHasSideEffects": false,
+    "uiMayCreateState": false,
+    "apiMayCreateState": false,
+    "aiMayCreateState": false,
+    "providerMayCreateState": false,
+    "paymentMayCreateJourneyState": false,
+    "providerSuccessMayPromoteCandidate": false,
+    "legacyReadAdaptersAllowed": true,
+    "legacyWriteStatesAllowed": false
+  },
+  "stateFamilies": [
+    {
+      "stateId":"pws.state.professional",
+      "stateName":"Professional State",
+      "objectName":"Professional",
+      "initialState":"pending_verification",
+      "allowedStates":["pending_verification","active","suspended","revoked"],
+      "terminalStates":["revoked"],
+      "transitions":{
+        "pending_verification":["active","revoked"],
+        "active":["suspended","revoked"],
+        "suspended":["active","revoked"],
+        "revoked":[]
+      }
+    },
+    {
+      "stateId":"pws.state.capability",
+      "stateName":"Capability State",
+      "objectName":"Capability",
+      "initialState":"active",
+      "allowedStates":["active","suspended","expired","revoked"],
+      "terminalStates":["expired","revoked"],
+      "transitions":{
+        "active":["suspended","expired","revoked"],
+        "suspended":["active","expired","revoked"],
+        "expired":[],
+        "revoked":[]
+      }
+    },
+    {
+      "stateId":"pws.state.registry",
+      "stateName":"Registry State",
+      "objectName":"Registry",
+      "initialState":"draft",
+      "allowedStates":["draft","active","frozen","deprecated","retired"],
+      "terminalStates":["retired"],
+      "transitions":{
+        "draft":["active","retired"],
+        "active":["frozen","deprecated"],
+        "frozen":["deprecated"],
+        "deprecated":["retired"],
+        "retired":[]
+      }
+    },
+    {
+      "stateId":"pws.state.product",
+      "stateName":"Product State",
+      "objectName":"Product",
+      "initialState":"draft",
+      "allowedStates":["draft","active","suspended","retired"],
+      "terminalStates":["retired"],
+      "transitions":{
+        "draft":["active","retired"],
+        "active":["suspended","retired"],
+        "suspended":["active","retired"],
+        "retired":[]
+      }
+    },
+    {
+      "stateId":"pws.state.offer",
+      "stateName":"Offer State",
+      "objectName":"Offer",
+      "initialState":"draft",
+      "allowedStates":["draft","scheduled","active","paused","expired","withdrawn"],
+      "terminalStates":["expired","withdrawn"],
+      "transitions":{
+        "draft":["scheduled","active","withdrawn"],
+        "scheduled":["active","withdrawn"],
+        "active":["paused","expired","withdrawn"],
+        "paused":["active","expired","withdrawn"],
+        "expired":[],
+        "withdrawn":[]
+      }
+    },
+    {
+      "stateId":"pws.state.order",
+      "stateName":"Order State",
+      "objectName":"Order",
+      "initialState":"draft",
+      "allowedStates":["draft","pending_payment","confirmed","fulfilled","cancelled","expired","refunded"],
+      "terminalStates":["cancelled","expired","refunded"],
+      "transitions":{
+        "draft":["pending_payment","cancelled"],
+        "pending_payment":["confirmed","cancelled","expired"],
+        "confirmed":["fulfilled","cancelled","refunded"],
+        "fulfilled":["refunded"],
+        "cancelled":[],
+        "expired":[],
+        "refunded":[]
+      }
+    },
+    {
+      "stateId":"pws.state.payment",
+      "stateName":"Payment State",
+      "objectName":"Payment",
+      "initialState":"pending",
+      "allowedStates":["pending","processing","succeeded","failed","cancelled","partially_refunded","refunded","disputed"],
+      "terminalStates":["failed","cancelled","refunded"],
+      "transitions":{
+        "pending":["processing","succeeded","failed","cancelled"],
+        "processing":["succeeded","failed","cancelled"],
+        "succeeded":["partially_refunded","refunded","disputed"],
+        "failed":[],
+        "cancelled":[],
+        "partially_refunded":["partially_refunded","refunded","disputed"],
+        "refunded":[],
+        "disputed":["succeeded","partially_refunded","refunded"]
+      }
+    },
+    {
+      "stateId":"pws.state.entitlement",
+      "stateName":"Entitlement State",
+      "objectName":"Entitlement",
+      "initialState":"pending",
+      "allowedStates":["pending","active","suspended","expired","revoked","consumed"],
+      "terminalStates":["expired","revoked","consumed"],
+      "transitions":{
+        "pending":["active","revoked"],
+        "active":["suspended","expired","revoked","consumed"],
+        "suspended":["active","expired","revoked"],
+        "expired":[],
+        "revoked":[],
+        "consumed":[]
+      }
+    },
+    {
+      "stateId":"pws.state.consent",
+      "stateName":"Consent State",
+      "objectName":"Consent",
+      "initialState":"draft",
+      "allowedStates":["draft","granted","partially_revoked","revoked","expired"],
+      "terminalStates":["revoked","expired"],
+      "transitions":{
+        "draft":["granted","revoked"],
+        "granted":["partially_revoked","revoked","expired"],
+        "partially_revoked":["partially_revoked","revoked","expired"],
+        "revoked":[],
+        "expired":[]
+      }
+    },
+    {
+      "stateId":"pws.state.journey",
+      "stateName":"Journey State",
+      "objectName":"Journey",
+      "initialState":"draft",
+      "allowedStates":["draft","active","paused","completed","closed","cancelled"],
+      "terminalStates":["closed","cancelled"],
+      "transitions":{
+        "draft":["active","cancelled"],
+        "active":["paused","completed","cancelled"],
+        "paused":["active","cancelled"],
+        "completed":["active","closed"],
+        "closed":[],
+        "cancelled":[]
+      }
+    },
+    {
+      "stateId":"pws.state.assignment",
+      "stateName":"Assignment State",
+      "objectName":"Assignment",
+      "initialState":"proposed",
+      "allowedStates":["proposed","active","suspended","closed","revoked"],
+      "terminalStates":["closed","revoked"],
+      "transitions":{
+        "proposed":["active","revoked"],
+        "active":["suspended","closed","revoked"],
+        "suspended":["active","closed","revoked"],
+        "closed":[],
+        "revoked":[]
+      }
+    },
+    {
+      "stateId":"pws.state.workspace",
+      "stateName":"Workspace State",
+      "objectName":"Workspace",
+      "initialState":"awaiting_consent",
+      "allowedStates":["awaiting_consent","awaiting_materials","ready_for_review","in_professional_review","client_clarification_required","report_draft","delivered","revision_requested","follow_up_due","completed","access_revoked"],
+      "terminalStates":["completed","access_revoked"],
+      "transitions":{
+        "awaiting_consent":["awaiting_materials","access_revoked"],
+        "awaiting_materials":["ready_for_review","access_revoked"],
+        "ready_for_review":["in_professional_review","client_clarification_required","access_revoked"],
+        "in_professional_review":["client_clarification_required","report_draft","access_revoked"],
+        "client_clarification_required":["ready_for_review","in_professional_review","access_revoked"],
+        "report_draft":["delivered","client_clarification_required","access_revoked"],
+        "delivered":["revision_requested","follow_up_due","completed","access_revoked"],
+        "revision_requested":["in_professional_review","access_revoked"],
+        "follow_up_due":["in_professional_review","completed","access_revoked"],
+        "completed":[],
+        "access_revoked":[]
+      }
+    },
+    {
+      "stateId":"pws.state.candidate",
+      "stateName":"Candidate State",
+      "objectName":"Candidate",
+      "initialState":"captured",
+      "allowedStates":["captured","validating","accepted","rejected","withdrawn","superseded"],
+      "terminalStates":["rejected","withdrawn","superseded"],
+      "transitions":{
+        "captured":["validating","withdrawn"],
+        "validating":["accepted","rejected","withdrawn"],
+        "accepted":["superseded"],
+        "rejected":[],
+        "withdrawn":[],
+        "superseded":[]
+      }
+    },
+    {
+      "stateId":"pws.state.journey-report",
+      "stateName":"Journey Report State",
+      "objectName":"Journey Report",
+      "initialState":"draft",
+      "allowedStates":["draft","professional_review_required","approved","delivered","superseded","withdrawn"],
+      "terminalStates":["superseded","withdrawn"],
+      "transitions":{
+        "draft":["professional_review_required","withdrawn"],
+        "professional_review_required":["draft","approved","withdrawn"],
+        "approved":["delivered","superseded","withdrawn"],
+        "delivered":["superseded","withdrawn"],
+        "superseded":[],
+        "withdrawn":[]
+      }
+    },
+    {
+      "stateId":"pws.state.professional-readiness",
+      "stateName":"Professional Readiness State",
+      "objectName":"Professional Readiness",
+      "initialState":"not_ready",
+      "allowedStates":["not_ready","evaluating","ready","blocked","expired"],
+      "terminalStates":["expired"],
+      "transitions":{
+        "not_ready":["evaluating","blocked"],
+        "evaluating":["ready","not_ready","blocked"],
+        "ready":["evaluating","blocked","expired"],
+        "blocked":["evaluating","expired"],
+        "expired":[]
+      }
+    },
+    {
+      "stateId":"pws.state.professional-response",
+      "stateName":"Professional Response State",
+      "objectName":"Professional Response",
+      "initialState":"draft",
+      "allowedStates":["draft","submitted","accepted","superseded","withdrawn"],
+      "terminalStates":["superseded","withdrawn"],
+      "transitions":{
+        "draft":["submitted","withdrawn"],
+        "submitted":["draft","accepted","withdrawn"],
+        "accepted":["superseded","withdrawn"],
+        "superseded":[],
+        "withdrawn":[]
+      }
+    },
+    {
+      "stateId":"pws.state.deliverable",
+      "stateName":"Deliverable State",
+      "objectName":"Deliverable",
+      "initialState":"draft",
+      "allowedStates":["draft","review_required","approved","signed","released","superseded","withdrawn"],
+      "terminalStates":["superseded","withdrawn"],
+      "transitions":{
+        "draft":["review_required","withdrawn"],
+        "review_required":["draft","approved","withdrawn"],
+        "approved":["signed","withdrawn"],
+        "signed":["released","superseded","withdrawn"],
+        "released":["superseded","withdrawn"],
+        "superseded":[],
+        "withdrawn":[]
+      }
+    },
+    {
+      "stateId":"pws.state.knowledge-resource",
+      "stateName":"Knowledge Resource State",
+      "objectName":"Knowledge Resource",
+      "initialState":"draft",
+      "allowedStates":["draft","review_required","published","deprecated","withdrawn","archived"],
+      "terminalStates":["archived"],
+      "transitions":{
+        "draft":["review_required","withdrawn"],
+        "review_required":["draft","published","withdrawn"],
+        "published":["deprecated","withdrawn"],
+        "deprecated":["archived","withdrawn"],
+        "withdrawn":["archived"],
+        "archived":[]
+      }
+    },
+    {
+      "stateId":"pws.state.observation",
+      "stateName":"Observation State",
+      "objectName":"Observation",
+      "initialState":"reported",
+      "allowedStates":["reported","under_review","corroborated","disputed","withdrawn"],
+      "terminalStates":["withdrawn"],
+      "transitions":{
+        "reported":["under_review","withdrawn"],
+        "under_review":["corroborated","disputed","withdrawn"],
+        "corroborated":["disputed","withdrawn"],
+        "disputed":["under_review","withdrawn"],
+        "withdrawn":[]
+      }
+    },
+    {
+      "stateId":"pws.state.provider-operation",
+      "stateName":"Provider Operation State",
+      "objectName":"Provider Operation",
+      "initialState":"queued",
+      "allowedStates":["queued","running","succeeded","failed","cancelled","timed_out"],
+      "terminalStates":["succeeded","failed","cancelled","timed_out"],
+      "transitions":{
+        "queued":["running","cancelled","timed_out"],
+        "running":["succeeded","failed","cancelled","timed_out"],
+        "succeeded":[],
+        "failed":[],
+        "cancelled":[],
+        "timed_out":[]
+      }
+    }
+  ],
+  "legacyCompatibility": [
+    {"family":"Professional State","path":"functions/professional/access/professional-identity-contract.js","handling":"exact_enum_compatible"},
+    {"family":"Capability State","path":"functions/professional/access/professional-eligibility-contract.js","handling":"shared_eligibility_enum_compatible"},
+    {"family":"Assignment State","path":"functions/professional/access/professional-assignment-contract.js","handling":"exact_enum_compatible"},
+    {"family":"Workspace State","path":"functions/professional/workspace/professional-workspace-contract.js","handling":"exact_enum_compatible"},
+    {"family":"Consent State","path":"functions/professional/consent/professional-consent-contract.js","handling":"granted_and_revoked_read_adapter"},
+    {"family":"Journey Report State","path":"functions/professional/privacy/professional-records-rights-contract.js","handling":"professional_report_status_adapter"},
+    {"family":"Order State","path":"functions/commerce/book-commerce-store.js","handling":"book_commerce_owner_preserved"},
+    {"family":"Payment State","path":"functions/commerce/book-commerce-store.js","handling":"gateway_fact_adapter"},
+    {"family":"Entitlement State","path":"db/migrations/0004_book_commerce.sql","handling":"immutable_book_entitlement_schema"},
+    {"family":"Journey State","path":"functions/runtime","handling":"runtime_stage_and_continuity_states_remain_separate"},
+    {"family":"Provider Operation State","path":"functions/runtime/reading/provider-router.js","handling":"provider_result_never_promotes_formal_object"}
+  ],
+  "semanticBoundaries": {
+    "journeyStateIsNotJourneyStage": true,
+    "workspaceStateIsNotPermission": true,
+    "paymentStateIsNotEntitlement": true,
+    "entitlementStateIsNotConsent": true,
+    "consentStateIsNotAssignment": true,
+    "observationStateIsNotEvidenceClass": true,
+    "providerOperationStateIsNotCandidateDecision": true,
+    "deliverableStateIsNotSignature": true
+  }
+}
