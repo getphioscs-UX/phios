@@ -10,6 +10,10 @@ import {
   loadPublishedArticles,
   toggleArticleSaved
 } from '../knowledge/published-content.js';
+import {
+  prepareArticleBlockForRendering,
+  prepareArticleSectionForRendering
+} from '../knowledge/article-blocks.js';
 
 const root = document.querySelector('[data-article-slug]');
 const slug = root?.dataset.articleSlug || '';
@@ -32,7 +36,9 @@ function linkList(items = []) {
 }
 
 function renderBlock(block, article, publishedArticles) {
-  if (!block || typeof block !== 'object') {
+  block = prepareArticleBlockForRendering(block);
+
+  if (!block) {
     return '';
   }
 
@@ -65,16 +71,20 @@ function renderBlock(block, article, publishedArticles) {
 
     case 'mechanism':
       return `
-        <div class="knowledge-block knowledge-block--mechanism">
+        <div class="knowledge-block knowledge-block--mechanism knowledge-block--${escapeHtml(block.orientation)}">
           <h3>${escapeHtml(block.heading)}</h3>
+          ${block.intro ? `<p>${escapeHtml(block.intro)}</p>` : ''}
           <ol>
             ${(block.steps || []).map(step => `
               <li>
                 <strong>${escapeHtml(step.label)}</strong>
-                <span>${escapeHtml(step.description)}</span>
+                ${step.description
+                  ? `<span>${escapeHtml(step.description)}</span>`
+                  : ''}
               </li>
             `).join('')}
           </ol>
+          ${block.conclusion ? `<p>${escapeHtml(block.conclusion)}</p>` : ''}
         </div>
       `;
 
@@ -99,7 +109,7 @@ function renderBlock(block, article, publishedArticles) {
         <div class="knowledge-block knowledge-block--comparison">
           ${block.heading ? `<h3>${escapeHtml(block.heading)}</h3>` : ''}
           <div class="knowledge-block__comparison-grid">
-            ${[block.left, block.right].map(side => `
+            ${(block.columns || [block.left, block.right]).map(side => `
               <section>
                 <h4>${escapeHtml(side?.heading)}</h4>
                 <ul>
@@ -120,11 +130,21 @@ function renderBlock(block, article, publishedArticles) {
         return '';
       }
 
+      const figureAltText = block.altText
+        ? escapeHtml(block.altText)
+        : escapeHtml(visual.altText);
+      const figureCaption = block.caption
+        ? escapeHtml(block.caption)
+        : escapeHtml(visual.caption);
+
       return `
-        <figure class="knowledge-block knowledge-block--figure">
-          <img src="${escapeHtml(visual.publicSrc)}" alt="${escapeHtml(visual.altText)}" loading="lazy">
-          ${visual.caption
-            ? `<figcaption>${escapeHtml(visual.caption)}</figcaption>`
+        <figure class="knowledge-block knowledge-block--figure knowledge-block--figure-${escapeHtml(block.displayMode)}">
+          <img src="${escapeHtml(visual.publicSrc)}" alt="${figureAltText}" loading="lazy">
+          ${block.caption || visual.caption
+            ? `<figcaption>${figureCaption}</figcaption>`
+            : ''}
+          ${block.creditLabel
+            ? `<p class="knowledge-block__credit">${escapeHtml(block.creditLabel)}</p>`
             : ''}
         </figure>
       `;
@@ -159,6 +179,12 @@ function renderBlock(block, article, publishedArticles) {
 }
 
 function renderSection(section, article, publishedArticles) {
+  section = prepareArticleSectionForRendering(section);
+
+  if (!section) {
+    return '';
+  }
+
   const legacyParagraphs = Array.isArray(section.paragraphs)
     ? section.paragraphs
     : [];
@@ -173,6 +199,14 @@ function renderSection(section, article, publishedArticles) {
       ${blocks.map(block => renderBlock(block, article, publishedArticles)).join('')}
     </section>
   `;
+}
+
+function conceptText(concept) {
+  return typeof concept === 'string' ? concept : concept?.label || '';
+}
+
+function boundaryText(boundary) {
+  return typeof boundary === 'string' ? boundary : boundary?.text || '';
 }
 
 function articleMarkup(article, publishedArticles) {
@@ -208,7 +242,7 @@ function articleMarkup(article, publishedArticles) {
           <section>
             <p class="knowledge-eyebrow">${escapeHtml(t('knowledge.articles.keyConcepts'))}</p>
             <ul>
-              ${article.keyConcepts.map(concept => `<li>${escapeHtml(concept)}</li>`).join('')}
+              ${article.keyConcepts.map(concept => `<li>${escapeHtml(conceptText(concept))}</li>`).join('')}
             </ul>
           </section>
           <section>
@@ -222,7 +256,7 @@ function articleMarkup(article, publishedArticles) {
         <p class="knowledge-eyebrow">${escapeHtml(t('knowledge.articles.boundary'))}</p>
         <h2 id="article-boundary">${escapeHtml(t('knowledge.articles.boundaryTitle'))}</h2>
         <ul>
-          ${article.knowledgeBoundary.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+          ${article.knowledgeBoundary.map(item => `<li>${escapeHtml(boundaryText(item))}</li>`).join('')}
         </ul>
       </section>
 
