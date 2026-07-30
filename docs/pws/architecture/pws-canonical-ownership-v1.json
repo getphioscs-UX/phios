@@ -1,0 +1,590 @@
+{
+  "registryId": "phi-os.pws-canonical-ownership.v1",
+  "schemaVersion": "1.0.0",
+  "status": "canonical-ownership-v1-frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "39c45784994f36630cad62c368149c1cb99e9b13",
+    "includesUncommittedPrerequisite": "PWS-ENTRY-W1"
+  },
+  "rules": {
+    "oneWriteSourcePerObject": true,
+    "legacyWritesAllowed": false,
+    "duplicateObjectCreationAllowed": false,
+    "canonicalPathIsLogicalOwnerModule": true,
+    "physicalMovesPerformed": false,
+    "migrationExecuted": false,
+    "pageBehaviorChanged": false,
+    "runtimeRegistryChanged": false,
+    "contentRegistryChanged": false
+  },
+  "objects": [
+    {
+      "object": "Professional",
+      "canonicalPath": "runtime/professional",
+      "legacyPaths": [
+        "functions/professional/access/professional-identity-contract.js",
+        "functions/professional/financial/financial-professional-authority.js",
+        "functions/professional/consent/professional-consent-contract.js"
+      ],
+      "readSource": "runtime/professional/queries",
+      "writeSource": "runtime/professional/commands",
+      "migrationOwner": "runtime/professional/migrations",
+      "deprecationPlan": {
+        "mode": "adapter_then_retire",
+        "targetStage": "PWS-IDENTITY-PERSISTENCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.professional.v1",
+      "registryId": "phi-os.ownership.professional.v1"
+    },
+    {
+      "object": "Capability",
+      "canonicalPath": "runtime/capability",
+      "legacyPaths": [
+        "functions/professional/access/professional-eligibility-contract.js",
+        "functions/professional/workspace/professional-workspace-contract.js",
+        "functions/professional/financial/financial-professional-authority.js"
+      ],
+      "readSource": "runtime/capability/queries",
+      "writeSource": "runtime/capability/commands",
+      "migrationOwner": "runtime/capability/migrations",
+      "deprecationPlan": {
+        "mode": "namespace_and_adapter",
+        "targetStage": "PWS-ELIGIBILITY-PERSISTENCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.professional-capability.v1",
+      "registryId": "phi-os.ownership.capability.v1"
+    },
+    {
+      "object": "Credential",
+      "canonicalPath": "runtime/credential",
+      "legacyPaths": [
+        "functions/professional/access/professional-eligibility-contract.js",
+        "functions/professional/financial/financial-professional-authority.js"
+      ],
+      "readSource": "runtime/credential/queries",
+      "writeSource": "runtime/credential/commands",
+      "migrationOwner": "runtime/credential/migrations",
+      "deprecationPlan": {
+        "mode": "normalize_by_reference",
+        "targetStage": "PWS-ELIGIBILITY-PERSISTENCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.professional-credential.v1",
+      "registryId": "phi-os.ownership.credential.v1"
+    },
+    {
+      "object": "Certification",
+      "canonicalPath": "runtime/certification",
+      "legacyPaths": [
+        "functions/professional/access/professional-eligibility-contract.js",
+        "functions/professional/financial/financial-professional-authority.js"
+      ],
+      "readSource": "runtime/certification/queries",
+      "writeSource": "runtime/certification/commands",
+      "migrationOwner": "runtime/certification/migrations",
+      "deprecationPlan": {
+        "mode": "normalize_by_reference",
+        "targetStage": "PWS-ELIGIBILITY-PERSISTENCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.professional-certification.v1",
+      "registryId": "phi-os.ownership.certification.v1"
+    },
+    {
+      "object": "Method",
+      "canonicalPath": "runtime/method",
+      "legacyPaths": [
+        "content/registry/professional-service-catalog.json",
+        "knowledge/external-readers/registry/readers.json",
+        "functions/professional/external-readers/reader-adapter-contract.js"
+      ],
+      "readSource": "runtime/method/queries",
+      "writeSource": "runtime/method/commands",
+      "migrationOwner": "runtime/method/migrations",
+      "deprecationPlan": {
+        "mode": "catalog_reference_adapter",
+        "targetStage": "PWS-METHOD-CATALOG",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.method.v1",
+      "registryId": "phi-os.ownership.method.v1"
+    },
+    {
+      "object": "Service",
+      "canonicalPath": "runtime/service",
+      "legacyPaths": [
+        "content/registry/professional-service-catalog.json",
+        "content/registry/professional-service-levels.json",
+        "functions/professional/appointments/professional-appointment-constants.js"
+      ],
+      "readSource": "runtime/service/queries",
+      "writeSource": "runtime/service/commands",
+      "migrationOwner": "runtime/service/migrations",
+      "deprecationPlan": {
+        "mode": "versioned_catalog_adapter",
+        "targetStage": "PWS-SERVICE-CATALOG",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.service.v1",
+      "registryId": "phi-os.ownership.service.v1"
+    },
+    {
+      "object": "Product",
+      "canonicalPath": "runtime/product",
+      "legacyPaths": [
+        "content/registry/book-products.json",
+        "functions/commerce/book-product-registry.js",
+        "content/registry/pws-w1a-revenue-architecture.json"
+      ],
+      "readSource": "runtime/product/queries",
+      "writeSource": "runtime/product/commands",
+      "migrationOwner": "runtime/product/migrations",
+      "deprecationPlan": {
+        "mode": "preserve_book_product_adapter",
+        "targetStage": "PWS-COMMERCIAL-CORE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.product.v1",
+      "registryId": "phi-os.ownership.product.v1"
+    },
+    {
+      "object": "Offer",
+      "canonicalPath": "runtime/commercial",
+      "legacyPaths": [
+        "content/registry/pws-w1a-revenue-architecture.json",
+        "content/registry/professional-service-levels.json",
+        "content/registry/professional-pricing-policy.json"
+      ],
+      "readSource": "runtime/commercial/offer/queries",
+      "writeSource": "runtime/commercial/offer/commands",
+      "migrationOwner": "runtime/commercial/migrations",
+      "deprecationPlan": {
+        "mode": "offer_reference_adapter",
+        "targetStage": "PWS-COMMERCIAL-CORE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.offer.v1",
+      "registryId": "phi-os.ownership.offer.v1"
+    },
+    {
+      "object": "Price",
+      "canonicalPath": "runtime/commercial",
+      "legacyPaths": [
+        "content/registry/professional-pricing-policy.json",
+        "content/registry/book-products.json",
+        "content/registry/pws-w1a-revenue-architecture.json"
+      ],
+      "readSource": "runtime/commercial/price/queries",
+      "writeSource": "runtime/commercial/price/commands",
+      "migrationOwner": "runtime/commercial/migrations",
+      "deprecationPlan": {
+        "mode": "versioned_price_adapter",
+        "targetStage": "PWS-COMMERCIAL-CORE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.price.v1",
+      "registryId": "phi-os.ownership.price.v1"
+    },
+    {
+      "object": "Order",
+      "canonicalPath": "runtime/commercial",
+      "legacyPaths": [
+        "functions/api/book-one-checkout.js",
+        "functions/commerce/book-commerce-store.js",
+        "db/migrations/0004_book_commerce.sql"
+      ],
+      "readSource": "runtime/commercial/order/queries",
+      "writeSource": "runtime/commercial/order/commands",
+      "migrationOwner": "runtime/commercial/migrations",
+      "deprecationPlan": {
+        "mode": "preserve_book_order_history",
+        "targetStage": "PWS-COMMERCIAL-CORE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.order.v1",
+      "registryId": "phi-os.ownership.order.v1"
+    },
+    {
+      "object": "Payment",
+      "canonicalPath": "runtime/commercial",
+      "legacyPaths": [
+        "functions/api/stripe-webhook.js",
+        "functions/api/book-one-payment-status.js",
+        "functions/professional/appointments/professional-payment-record-contract.js",
+        "db/migrations/0004_book_commerce.sql"
+      ],
+      "readSource": "runtime/commercial/payment/queries",
+      "writeSource": "runtime/commercial/payment/commands",
+      "migrationOwner": "runtime/commercial/migrations",
+      "deprecationPlan": {
+        "mode": "gateway_fact_adapter",
+        "targetStage": "PWS-COMMERCIAL-CORE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.payment.v1",
+      "registryId": "phi-os.ownership.payment.v1"
+    },
+    {
+      "object": "Entitlement",
+      "canonicalPath": "runtime/entitlement",
+      "legacyPaths": [
+        "functions/api/book-one-access.js",
+        "functions/api/book-one-download-token.js",
+        "assets/js/knowledge/purchase-state.js",
+        "account.html"
+      ],
+      "readSource": "runtime/entitlement/queries",
+      "writeSource": "runtime/entitlement/commands",
+      "migrationOwner": "runtime/entitlement/migrations",
+      "deprecationPlan": {
+        "mode": "resource_typed_adapter",
+        "targetStage": "PWS-ENTITLEMENT-CORE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.entitlement.v1",
+      "registryId": "phi-os.ownership.entitlement.v1"
+    },
+    {
+      "object": "Consent",
+      "canonicalPath": "runtime/consent",
+      "legacyPaths": [
+        "functions/professional/consent/professional-consent-contract.js",
+        "functions/professional/consent/external-reader-consent-contract.js",
+        "functions/professional/consent/joint-household-consent.js",
+        "content/registry/professional-consent-sharing.json"
+      ],
+      "readSource": "runtime/consent/queries",
+      "writeSource": "runtime/consent/commands",
+      "migrationOwner": "runtime/consent/migrations",
+      "deprecationPlan": {
+        "mode": "scope_preserving_adapter",
+        "targetStage": "PWS-CONSENT-PERSISTENCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.consent.v1",
+      "registryId": "phi-os.ownership.consent.v1"
+    },
+    {
+      "object": "Assignment",
+      "canonicalPath": "runtime/assignment",
+      "legacyPaths": [
+        "functions/professional/access/professional-assignment-contract.js",
+        "functions/professional/workspace/professional-task-contract.js",
+        "functions/professional/workspace/professional-client-contract.js"
+      ],
+      "readSource": "runtime/assignment/queries",
+      "writeSource": "runtime/assignment/commands",
+      "migrationOwner": "runtime/assignment/migrations",
+      "deprecationPlan": {
+        "mode": "adapter_then_retire",
+        "targetStage": "PWS-ASSIGNMENT-PERSISTENCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.assignment.v1",
+      "registryId": "phi-os.ownership.assignment.v1"
+    },
+    {
+      "object": "Workspace",
+      "canonicalPath": "runtime/workspace",
+      "legacyPaths": [
+        "functions/professional/workspace/professional-workspace-contract.js",
+        "functions/professional/financial/financial-workspace-contract.js",
+        "functions/professional/access/authorised-professional-data-loader.js",
+        "assets/js/modules/runtime-workspace.js"
+      ],
+      "readSource": "runtime/workspace/queries",
+      "writeSource": "runtime/workspace/commands",
+      "migrationOwner": "runtime/workspace/migrations",
+      "deprecationPlan": {
+        "mode": "projection_adapter",
+        "targetStage": "PWS-WORKSPACE-PERSISTENCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.workspace.v1",
+      "registryId": "phi-os.ownership.workspace.v1"
+    },
+    {
+      "object": "Evidence",
+      "canonicalPath": "runtime/evidence",
+      "legacyPaths": [
+        "functions/runtime/reading/reading-evidence-contract.js",
+        "functions/professional/financial/financial-evidence-contract.js",
+        "functions/professional/workspace/professional-source-contract.js"
+      ],
+      "readSource": "runtime/evidence/queries",
+      "writeSource": "runtime/evidence/commands",
+      "migrationOwner": "runtime/evidence/migrations",
+      "deprecationPlan": {
+        "mode": "source_class_adapter",
+        "targetStage": "RUNTIME-EVIDENCE-CANONICALIZATION",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.evidence.v1",
+      "registryId": "phi-os.ownership.evidence.v1"
+    },
+    {
+      "object": "Journey",
+      "canonicalPath": "runtime/journey",
+      "legacyPaths": [
+        "assets/js/modules/runtime-workspace-state.js",
+        "assets/js/modules/runtime-transition-engine.js",
+        "assets/js/pages/reality-dashboard.js"
+      ],
+      "readSource": "runtime/journey/queries",
+      "writeSource": "runtime/journey/commands",
+      "migrationOwner": "runtime/journey/migrations",
+      "deprecationPlan": {
+        "mode": "runtime_adapter",
+        "targetStage": "RUNTIME-JOURNEY-CANONICALIZATION",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.journey.v1",
+      "registryId": "phi-os.ownership.journey.v1"
+    },
+    {
+      "object": "Reading",
+      "canonicalPath": "runtime/reading",
+      "legacyPaths": [
+        "functions/runtime/reading/reading-experience.js",
+        "functions/runtime/reading/rule-reading.js",
+        "functions/api/read-runtime.js",
+        "assets/js/modules/reading-render.js"
+      ],
+      "readSource": "runtime/reading/queries",
+      "writeSource": "runtime/reading/commands",
+      "migrationOwner": "runtime/reading/migrations",
+      "deprecationPlan": {
+        "mode": "existing_runtime_owner_adapter",
+        "targetStage": "RUNTIME-NAMESPACE-ALIGNMENT",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.reading.v1",
+      "registryId": "phi-os.ownership.reading.v1"
+    },
+    {
+      "object": "Navigation",
+      "canonicalPath": "runtime/navigation",
+      "legacyPaths": [
+        "functions/runtime/navigation/navigation-contract.js",
+        "functions/runtime/navigation/navigation-path-rules.js",
+        "functions/api/navigate-runtime.js",
+        "assets/js/modules/navigation-state.js"
+      ],
+      "readSource": "runtime/navigation/queries",
+      "writeSource": "runtime/navigation/commands",
+      "migrationOwner": "runtime/navigation/migrations",
+      "deprecationPlan": {
+        "mode": "existing_runtime_owner_adapter",
+        "targetStage": "RUNTIME-NAMESPACE-ALIGNMENT",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.navigation.v1",
+      "registryId": "phi-os.ownership.navigation.v1"
+    },
+    {
+      "object": "Deliverable",
+      "canonicalPath": "runtime/deliverable",
+      "legacyPaths": [
+        "functions/professional/reports/professional-report-contract.js",
+        "functions/professional/reports/financial-report-contract.js",
+        "professional-reports.html"
+      ],
+      "readSource": "runtime/deliverable/queries",
+      "writeSource": "runtime/deliverable/commands",
+      "migrationOwner": "runtime/deliverable/migrations",
+      "deprecationPlan": {
+        "mode": "compose_by_reference",
+        "targetStage": "PWS-DELIVERABLE-LIFECYCLE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.deliverable.v1",
+      "registryId": "phi-os.ownership.deliverable.v1"
+    },
+    {
+      "object": "Professional Response",
+      "canonicalPath": "runtime/deliverable/professional-response",
+      "legacyPaths": [
+        "functions/professional/workspace/professional-note-contract.js",
+        "functions/professional/workspace/professional-reading-revision-contract.js",
+        "functions/professional/workspace/professional-follow-up-timeline-contract.js"
+      ],
+      "readSource": "runtime/deliverable/professional-response/queries",
+      "writeSource": "runtime/deliverable/professional-response/commands",
+      "migrationOwner": "runtime/deliverable/migrations",
+      "deprecationPlan": {
+        "mode": "compose_by_reference",
+        "targetStage": "PWS-PROFESSIONAL-RESPONSE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.professional-response.v1",
+      "registryId": "phi-os.ownership.professional-response.v1"
+    },
+    {
+      "object": "Knowledge Resource",
+      "canonicalPath": "runtime/knowledge",
+      "legacyPaths": [
+        "Content/registry/books.json",
+        "Content/registry/parts.json",
+        "assets/js/knowledge/catalog.js",
+        "content/registry/m3b-knowledge-release.json"
+      ],
+      "readSource": "runtime/knowledge/queries",
+      "writeSource": "runtime/knowledge/commands",
+      "migrationOwner": "runtime/knowledge/migrations",
+      "deprecationPlan": {
+        "mode": "catalog_adapter",
+        "targetStage": "KNOWLEDGE-RESOURCE-CANONICALIZATION",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.knowledge-resource.v1",
+      "registryId": "phi-os.ownership.knowledge-resource.v1"
+    },
+    {
+      "object": "Question Route",
+      "canonicalPath": "runtime/intelligence/routing",
+      "legacyPaths": [
+        "functions/runtime/entry/rule-entry.js",
+        "functions/runtime/entry/provider-router.js",
+        "assets/js/modules/reconstruction-dialogue.js"
+      ],
+      "readSource": "runtime/intelligence/routing/queries",
+      "writeSource": "runtime/intelligence/routing/commands",
+      "migrationOwner": "runtime/intelligence/migrations",
+      "deprecationPlan": {
+        "mode": "decision_adapter",
+        "targetStage": "RUNTIME-INTELLIGENCE-ROUTING",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.question-route.v1",
+      "registryId": "phi-os.ownership.question-route.v1"
+    },
+    {
+      "object": "Provider Usage",
+      "canonicalPath": "runtime/intelligence/usage",
+      "legacyPaths": [
+        "functions/runtime/shared/provider-interface.js",
+        "functions/runtime/entry/provider-router.js",
+        "functions/runtime/reading/provider-router.js"
+      ],
+      "readSource": "runtime/intelligence/usage/queries",
+      "writeSource": "runtime/intelligence/usage/commands",
+      "migrationOwner": "runtime/intelligence/migrations",
+      "deprecationPlan": {
+        "mode": "append_event_adapter",
+        "targetStage": "PROVIDER-USAGE-LEDGER",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.provider-usage.v1",
+      "registryId": "phi-os.ownership.provider-usage.v1"
+    },
+    {
+      "object": "Provider Budget",
+      "canonicalPath": "runtime/intelligence/cost",
+      "legacyPaths": [
+        "content/registry/provider-closure.json",
+        "functions/runtime/entry/provider-router.js",
+        "functions/runtime/reading/provider-router.js"
+      ],
+      "readSource": "runtime/intelligence/cost/queries",
+      "writeSource": "runtime/intelligence/cost/commands",
+      "migrationOwner": "runtime/intelligence/migrations",
+      "deprecationPlan": {
+        "mode": "policy_adapter",
+        "targetStage": "PROVIDER-BUDGET-CONTROL",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.provider-budget.v1",
+      "registryId": "phi-os.ownership.provider-budget.v1"
+    },
+    {
+      "object": "Follow-up",
+      "canonicalPath": "runtime/operations",
+      "legacyPaths": [
+        "functions/professional/workspace/professional-follow-up-timeline-contract.js",
+        "functions/runtime/continuity/reality-continuity-contract.js",
+        "assets/js/pages/professional-workspace.js"
+      ],
+      "readSource": "runtime/operations/follow-up/queries",
+      "writeSource": "runtime/operations/follow-up/commands",
+      "migrationOwner": "runtime/operations/migrations",
+      "deprecationPlan": {
+        "mode": "append_only_adapter",
+        "targetStage": "PWS-OPERATIONS",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.follow-up.v1",
+      "registryId": "phi-os.ownership.follow-up.v1"
+    },
+    {
+      "object": "Governance",
+      "canonicalPath": "runtime/governance",
+      "legacyPaths": [
+        "GOVERNANCE.md",
+        "content/registry/professional-data-governance.json",
+        "functions/professional/privacy"
+      ],
+      "readSource": "runtime/governance/queries",
+      "writeSource": "runtime/governance/commands",
+      "migrationOwner": "runtime/governance/migrations",
+      "deprecationPlan": {
+        "mode": "versioned_policy_adapter",
+        "targetStage": "RUNTIME-GOVERNANCE",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.governance.v1",
+      "registryId": "phi-os.ownership.governance.v1"
+    },
+    {
+      "object": "Security",
+      "canonicalPath": "runtime/security",
+      "legacyPaths": [
+        "functions/runtime/security/security-contract.js",
+        "functions/runtime/security/access-boundary.js",
+        "functions/professional/access/professional-authorisation-decision.js",
+        "functions/professional/privacy"
+      ],
+      "readSource": "runtime/security/queries",
+      "writeSource": "runtime/security/commands",
+      "migrationOwner": "runtime/security/migrations",
+      "deprecationPlan": {
+        "mode": "guard_adapter",
+        "targetStage": "RUNTIME-SECURITY-CANONICALIZATION",
+        "newWritesAllowed": false,
+        "preserveHistory": true
+      },
+      "schemaVersion": "phi-os.security.v1",
+      "registryId": "phi-os.ownership.security.v1"
+    }
+  ]
+}
