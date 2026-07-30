@@ -47,6 +47,14 @@ for (const file of deliverables) {
 
 const contract = await readJson(deliverables[0]);
 const fixture = await readJson(deliverables[1]);
+const runtimeMigrationRegistry = await readJson(
+  'content/registry/runtime-migrations.json'
+);
+const authorisedAdditiveMigrations = new Set(
+  runtimeMigrationRegistry.migrations
+    .filter(migration => migration.immutable === true)
+    .map(migration => migration.file)
+);
 
 assert.equal(contract.milestone, 'PDS-W0');
 assert.equal(contract.contractVersion, '1.0.0');
@@ -111,6 +119,18 @@ for (const protectedPath of fixture.protectedPaths) {
         }
       });
     if (exactBaselineRecovery) changed = '';
+    const authorisedPostPdsMigration = changedFiles.length > 0 &&
+      changedFiles.every(file => {
+        if (!file.startsWith('db/migrations/')) return false;
+        if (!authorisedAdditiveMigrations.has(file)) return false;
+        try {
+          git(['cat-file', '-e', `${contract.baseline.commit}:${file}`]);
+          return false;
+        } catch {
+          return true;
+        }
+      });
+    if (authorisedPostPdsMigration) changed = '';
   }
   assert.equal(changed, '', `Protected PDS-W0 path changed: ${protectedPath}`);
 }
