@@ -1,5 +1,9 @@
 # PWS-I1-T05 Canonical Operations and T06 Canonical Events
 
+> T06 is superseded by
+> `PWS-I1-T06-T07-EVENTS-ERRORS.md` at
+> `main@1a032cdf851d71060ddb2d0033b9d65b75e35254`. T05 remains frozen.
+
 Status: **Frozen v1**  
 Schema version: `pws-v1`  
 Baseline: `main@7a99bda47c7a32f7e490ca95e06e4fa4574443c7`.

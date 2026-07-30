@@ -80,13 +80,36 @@ for (const protectedPath of fixture.protectedPaths) {
   ]).split('\n').filter(Boolean);
   assert.ok(baselineFiles.length > 0, `Protected path missing from baseline: ${protectedPath}`);
 
-  const changed = git([
+  let changed = git([
     'diff',
     '--name-only',
     contract.baseline.commit,
     '--',
     protectedPath
   ]);
+  // A protected file deleted by an intermediate commit may be restored as an
+  // untracked working-tree file before it is staged. `git diff <baseline>`
+  // reports the historical deletion and ignores the byte-identical restored
+  // file. Accept that recovery only when every reported file exists and its
+  // current blob is exactly the frozen baseline blob.
+  if (changed) {
+    const changedFiles = changed.split('\n').filter(Boolean);
+    const exactBaselineRecovery = changedFiles.length > 0 &&
+      changedFiles.every(file => {
+        if (!baselineFiles.includes(file)) return false;
+        try {
+          const baselineBlob = git([
+            'rev-parse',
+            `${contract.baseline.commit}:${file}`
+          ]);
+          const currentBlob = git(['hash-object', file]);
+          return baselineBlob === currentBlob;
+        } catch {
+          return false;
+        }
+      });
+    if (exactBaselineRecovery) changed = '';
+  }
   assert.equal(changed, '', `Protected PDS-W0 path changed: ${protectedPath}`);
 }
 
