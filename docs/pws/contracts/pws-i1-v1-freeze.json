@@ -1,0 +1,112 @@
+{
+  "freezeId": "PWS-I1-v1.0.0-Frozen",
+  "programme": "PWS-I1 Contract Foundation",
+  "version": "1.0.0",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "4fd426aa87664e58073432d9c3654d35d8f2a820"
+  },
+  "scope": {
+    "from": "PWS-I1-T00",
+    "through": "PWS-I1-T08",
+    "nextPhase": "PWS-I2 Registry Foundation"
+  },
+  "acceptanceConditions": [
+    {
+      "condition": "Glossary complete",
+      "evidence": [
+        "docs/pws/contracts/pws-canonical-glossary-v1.json",
+        "docs/pws/contracts/pws-canonical-identifiers-v1.json"
+      ]
+    },
+    {
+      "condition": "Object Registry complete",
+      "evidence": [
+        "docs/pws/contracts/pws-canonical-object-registry-v1.json",
+        "docs/pws/contracts/pws-schema-version-v1.json"
+      ]
+    },
+    {
+      "condition": "No free-form State",
+      "evidence": [
+        "docs/pws/contracts/pws-canonical-states-v1.json"
+      ]
+    },
+    {
+      "condition": "Operation and Event aligned",
+      "evidence": [
+        "docs/pws/contracts/pws-canonical-operations-v1.json",
+        "docs/pws/contracts/pws-canonical-events-v1.json"
+      ]
+    },
+    {
+      "condition": "Error Families complete",
+      "evidence": [
+        "docs/pws/contracts/pws-canonical-errors-v1.json"
+      ]
+    },
+    {
+      "condition": "Legacy Aliases recorded",
+      "evidence": [
+        "docs/pws/contracts/pws-canonical-glossary-v1.json",
+        "docs/pws/contracts/pws-canonical-identifiers-v1.json",
+        "docs/pws/contracts/pws-canonical-object-registry-v1.json"
+      ]
+    },
+    {
+      "condition": "Directory Blueprint complete",
+      "evidence": [
+        "docs/pws/contracts/pws-directory-blueprint-v1.json"
+      ]
+    },
+    {
+      "condition": "Full repository check passes",
+      "command": "npm run check"
+    }
+  ],
+  "frozenContracts": [
+    {"step":"T01","contractId":"phi-os.pws.canonical-glossary.v1","path":"docs/pws/contracts/pws-canonical-glossary-v1.json"},
+    {"step":"T02","contractId":"phi-os.pws.canonical-identifiers.v1","path":"docs/pws/contracts/pws-canonical-identifiers-v1.json"},
+    {"step":"T02/T03","contractId":"phi-os.pws.canonical-object-registry.v1","path":"docs/pws/contracts/pws-canonical-object-registry-v1.json"},
+    {"step":"T03","contractId":"phi-os.pws.schema-version.v1","path":"docs/pws/contracts/pws-schema-version-v1.json"},
+    {"step":"T04","contractId":"phi-os.pws.canonical-states.v1","path":"docs/pws/contracts/pws-canonical-states-v1.json"},
+    {"step":"T05","contractId":"phi-os.pws.canonical-operations.v1","path":"docs/pws/contracts/pws-canonical-operations-v1.json"},
+    {"step":"T06","contractId":"phi-os.pws.canonical-events.v1","path":"docs/pws/contracts/pws-canonical-events-v1.json"},
+    {"step":"T07","contractId":"phi-os.pws.canonical-errors.v1","path":"docs/pws/contracts/pws-canonical-errors-v1.json"},
+    {"step":"T08","contractId":"phi-os.pws.directory-blueprint.v1","path":"docs/pws/contracts/pws-directory-blueprint-v1.json"}
+  ],
+  "changeControl": {
+    "silentBehaviouralChangeAllowed": false,
+    "directMutationAllowed": false,
+    "newFreeStringStateAllowed": false,
+    "newUnregisteredOperationAllowed": false,
+    "newUnregisteredEventAllowed": false,
+    "legacyAliasWriteAllowed": false,
+    "secondSourceOfTruthAllowed": false,
+    "allowedChangeReasons": [
+      "bug_fix",
+      "security_fix",
+      "accessibility_fix",
+      "migration_fix",
+      "acceptance_fix",
+      "explicit_contract_version_upgrade"
+    ],
+    "requiredForChange": [
+      "explicit_version",
+      "compatibility_decision",
+      "migration_decision",
+      "updated_automated_acceptance"
+    ]
+  },
+  "preservedBoundaries": [
+    "No Core Runtime behaviour change",
+    "No API or Provider behaviour change",
+    "No Migration or D1 change",
+    "No page or customer journey change",
+    "No Legacy deletion",
+    "No PWS-I2 implementation"
+  ]
+}
