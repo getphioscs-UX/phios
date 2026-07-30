@@ -28,12 +28,12 @@
     "contractsChanged": false,
     "providersChanged": false,
     "storageChanged": false,
-    "knownBaselineBlocker": {
+    "resolvedBaselineBlocker": {
       "id": "runtime-migration-registry-count",
       "command": "npm run check",
       "expected": 4,
-      "actual": 3,
-      "resolutionBoundary": "separate Runtime migration governance fix recorded by PDS-W0"
+      "actual": 4,
+      "resolution": "PWS-W0 registered the existing immutable 0004 migration with its canonical checksum; no migration SQL or Runtime principle changed."
     }
   },
   "productionEvidence": {
@@ -46,7 +46,7 @@
     "remainingGate": "Deploy this W10 delta, then repeat the complete production matrix at 360px, 768px and 1440px in both locales."
   },
   "protectedArtifacts": {
-    "content/registry/runtime-migrations.json": "06f0508c9c9406c3b8bb4889a45a58c6afc9c6ceeb95fe61e33d9b6005d6bde3",
+    "content/registry/runtime-migrations.json": "34f9f13e0f9dc0ba7ebe5a4eb1dce6f349566e000b9defab35e47f10487c0de5",
     "db/migrations/0001_platform_foundation.sql": "7f45b5572409ded3a22f3914ae881fcb13ea04e13a1ea2fc35086587ac88b0cb",
     "db/migrations/0002_initial_runtime.sql": "4effec4fbe6f572151cecfc8d5683f5309f002df20b0f5f4441113ec68706d5a",
     "db/migrations/0003_financial_professional_infrastructure.sql": "c06bc6498be1bcde3819d305e93289ff428fef33dfd06e5b2f8fe80d109d6016",

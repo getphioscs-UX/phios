@@ -73,4 +73,4 @@ for (const locale of ['en', 'zh-Hans']) {
 
 console.log(`PDS-W10 static acceptance passed for ${htmlFiles.length} HTML documents.`);
 console.log('Runtime protected artifacts remain byte-stable.');
-console.log('Production revalidation and the separately governed Runtime migration blocker remain explicit gates.');
+console.log('The Runtime migration registry blocker is governance-closed; Production revalidation remains an explicit gate.');

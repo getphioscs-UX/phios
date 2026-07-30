@@ -20,15 +20,13 @@ errors; Runtime freeze tests; and the complete repository check.
   page console errors at the available 1363px browser viewport.
 - Full Production W10 matrix: requires revalidation after this delta is
   committed, pushed and deployed.
-- `npm run check`: blocked at `scripts/check-runtime-migrations.mjs` because
-  the frozen migration test expects four registered migrations while
-  `content/registry/runtime-migrations.json` registers three.
+- The Runtime migration registry blocker was resolved in PWS-W0 by registering
+  the existing immutable `0004_book_commerce.sql` migration with its canonical
+  checksum. No migration SQL or frozen Runtime principle changed.
 
-The Runtime mismatch is the pre-existing `runtime-migration-registry-count`
-blocker recorded in PDS-W0. W10 does not change the Runtime registry, migration
-SQL, Runtime SDK, providers, contracts or storage behaviour. It must be resolved
-through the separate Runtime migration governance boundary before W10 can be
-declared Passed.
+The mismatch was the pre-existing `runtime-migration-registry-count` blocker
+recorded in PDS-W0. Its governance closure does not change the Runtime SDK,
+providers, contracts or storage behaviour.
 
 Run:
 

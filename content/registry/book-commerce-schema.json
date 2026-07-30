@@ -1,0 +1,30 @@
+{
+  "id": "phi-os.book-commerce-schema",
+  "version": "1.0.0",
+  "status": "schema-and-migration-ready",
+  "schemaId": "phi-os.book-commerce-schema.v1",
+  "authority": "db/migrations/0004_book_commerce.sql",
+  "migration": "db/migrations/0004_book_commerce.sql",
+  "binding": "RUNTIME_DB",
+  "tables": [
+    {"name": "commerce_products", "primaryKey": "product_id"},
+    {"name": "commerce_checkout_attempts", "primaryKey": "checkout_attempt_id"},
+    {"name": "commerce_purchases", "primaryKey": "purchase_id"},
+    {"name": "digital_entitlements", "primaryKey": "entitlement_id"},
+    {"name": "commerce_webhook_events", "primaryKey": "stripe_event_id"},
+    {"name": "commerce_download_tokens", "primaryKey": "token_id"},
+    {"name": "commerce_download_events", "primaryKey": "download_event_id"},
+    {"name": "commerce_receipts", "primaryKey": "receipt_id"},
+    {"name": "commerce_delivery_messages", "primaryKey": "delivery_message_id"},
+    {"name": "commerce_watermark_jobs", "primaryKey": "watermark_job_id"}
+  ],
+  "rules": {
+    "moneyUsesIntegerMinorUnits": true,
+    "currencyFrozenToMyr": true,
+    "buyerEmailEncryptedAtApplicationLayer": true,
+    "subjectLookupUsesKeyedIrreversibleHash": true,
+    "verifiedPurchaseRequiredForEntitlement": true,
+    "browserStorageCannotGrantEntitlement": true,
+    "migrationImmutableAfterDeployment": true
+  }
+}
