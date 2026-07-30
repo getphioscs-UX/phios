@@ -1,0 +1,139 @@
+{
+  "$schema": "./schemas/canonical-extraction-policy.schema.json",
+  "contract": "PHI-OS-PKR-Canonical-Extraction-Scaling-v1.2.0",
+  "version": "1.2.0",
+  "status": "frozen",
+  "effectiveFrom": "KH-W3.5F",
+  "unitOfRegistration": "independent_reusable_mechanism",
+  "hierarchy": [
+    "knowledge_domain",
+    "knowledge_theme",
+    "canonical_knowledge_node",
+    "supporting_question",
+    "search_alias"
+  ],
+  "prohibitedMappings": [
+    "one_page_one_node",
+    "one_heading_one_node",
+    "one_question_one_node",
+    "one_paragraph_one_node",
+    "one_section_one_node",
+    "one_search_phrase_one_node"
+  ],
+  "admissionTests": [
+    "mechanism_independence",
+    "causal_or_operational_sequence",
+    "reusability",
+    "source_boundary",
+    "non_duplication",
+    "production_viability",
+    "boundary_safety"
+  ],
+  "classifications": [
+    "canonical_node",
+    "supporting_question",
+    "search_alias",
+    "source_note",
+    "terminology_entry",
+    "deferred_candidate",
+    "rejected_duplicate"
+  ],
+  "nodeIdentity": [
+    "core_claim",
+    "mechanism_sequence",
+    "knowledge_boundary",
+    "source_boundary"
+  ],
+  "languagePolicy": {
+    "knowledgeCore": "language_neutral",
+    "canonicalArticleLanguage": "zh-Hans",
+    "localizedLanguages": ["en"],
+    "englishMayIntroduceNewTheory": false
+  },
+  "scaling": {
+    "partThresholds": {
+      "softReview": 18,
+      "mandatoryAudit": 24,
+      "hardFreeze": 30
+    },
+    "planningRanges": [
+      {
+        "maxPages": 30,
+        "canonicalNodesMin": 4,
+        "canonicalNodesMax": 8,
+        "supportingQuestionsMin": 8,
+        "supportingQuestionsMax": 20
+      },
+      {
+        "minPages": 31,
+        "maxPages": 60,
+        "canonicalNodesMin": 6,
+        "canonicalNodesMax": 12,
+        "supportingQuestionsMin": 15,
+        "supportingQuestionsMax": 35
+      },
+      {
+        "minPages": 61,
+        "maxPages": 100,
+        "canonicalNodesMin": 10,
+        "canonicalNodesMax": 18,
+        "supportingQuestionsMin": 25,
+        "supportingQuestionsMax": 55
+      },
+      {
+        "minPages": 101,
+        "maxPages": 180,
+        "canonicalNodesMin": 16,
+        "canonicalNodesMax": 28,
+        "supportingQuestionsMin": 40,
+        "supportingQuestionsMax": 90
+      }
+    ],
+    "volumePlanning": {
+      "canonicalNodesMin": 60,
+      "canonicalNodesMax": 100,
+      "supportingQuestionsMin": 150,
+      "supportingQuestionsMax": 350
+    },
+    "threeVolumePlanning": {
+      "canonicalNodesMin": 180,
+      "canonicalNodesMax": 280,
+      "supportingQuestionsMin": 450,
+      "supportingQuestionsMax": 1000
+    },
+    "densityReview": {
+      "canonicalDensityReviewAbove": 0.3,
+      "questionDensityReviewBelow": 1.0,
+      "metricsAreAutomaticDeletionRules": false
+    }
+  },
+  "productionQueue": {
+    "tierCActiveMin": 1,
+    "tierCActiveMax": 3,
+    "tierBActiveMin": 2,
+    "tierBActiveMax": 5,
+    "tierAActiveMin": 0,
+    "tierAActiveMax": 5,
+    "totalActiveArticleMaximum": 8,
+    "registryPresenceImpliesProduction": false
+  },
+  "reviewGates": [
+    "source_coverage",
+    "canonical_admission",
+    "duplicate_comparison",
+    "supporting_question_mapping",
+    "boundary_review",
+    "scaling_review",
+    "production_tier_review"
+  ],
+  "changeActions": [
+    "clarify",
+    "expand_boundary",
+    "merge",
+    "split",
+    "deprecate",
+    "supersede"
+  ],
+  "runtimeImpact": "none",
+  "publicPageImpact": "none"
+}
