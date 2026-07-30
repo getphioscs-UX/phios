@@ -1,0 +1,11 @@
+{
+  "baseFixture": "valid-publication-ready-article.json",
+  "operations": [
+    {
+      "op": "replace",
+      "path": "/claims/0/sourceSupport/0/sourceCode",
+      "value": "SRC-NOT-FOUND-001"
+    }
+  ],
+  "expectedFailure": "source_code_not_found"
+}

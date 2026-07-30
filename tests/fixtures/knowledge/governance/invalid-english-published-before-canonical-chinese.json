@@ -1,0 +1,96 @@
+{
+  "baseFixture": "valid-publication-ready-article.json",
+  "operations": [
+    {
+      "op": "replace",
+      "path": "/article/locale",
+      "value": "en"
+    },
+    {
+      "op": "replace",
+      "path": "/article/contentRole",
+      "value": "localized"
+    },
+    {
+      "op": "add",
+      "path": "/article/localizationSourceLocale",
+      "value": "zh-Hans"
+    },
+    {
+      "op": "add",
+      "path": "/article/localizationSourceVersion",
+      "value": "0.0.1"
+    },
+    {
+      "op": "add",
+      "path": "/article/terminologyReviewStatus",
+      "value": "approved"
+    },
+    {
+      "op": "add",
+      "path": "/article/semanticParityStatus",
+      "value": "approved"
+    },
+    {
+      "op": "replace",
+      "path": "/article/publicationStatus",
+      "value": "published"
+    },
+    {
+      "op": "replace",
+      "path": "/article/publishedAt",
+      "value": "2000-01-01"
+    },
+    {
+      "op": "replace",
+      "path": "/article/publicationOrder",
+      "value": 1
+    },
+    {
+      "op": "replace",
+      "path": "/claims/0/locale",
+      "value": "en"
+    },
+    {
+      "op": "replace",
+      "path": "/claims/1/locale",
+      "value": "en"
+    },
+    {
+      "op": "replace",
+      "path": "/claims/2/locale",
+      "value": "en"
+    },
+    {
+      "op": "replace",
+      "path": "/claims/3/locale",
+      "value": "en"
+    },
+    {
+      "op": "replace",
+      "path": "/claims/4/locale",
+      "value": "en"
+    },
+    {
+      "op": "replace",
+      "path": "/review/locale",
+      "value": "en"
+    },
+    {
+      "op": "replace",
+      "path": "/review/reviewCode",
+      "value": "REV-KN-PREFACE-001-EN-001"
+    },
+    {
+      "op": "replace",
+      "path": "/review/lifecycleStatus",
+      "value": "published"
+    },
+    {
+      "op": "replace",
+      "path": "/canonicalChineseApproval/status",
+      "value": "not_reviewed"
+    }
+  ],
+  "expectedFailure": "english_before_canonical_chinese"
+}

@@ -1,0 +1,323 @@
+{
+  "fixtureOnly": true,
+  "productionAuthority": false,
+  "reviewerIdsAreSyntheticTestValues": true,
+  "schemaVersion": "PHI-OS-KNOWLEDGE-CLAIM-DOSSIER-FIXTURE-v1.0.0",
+  "nodeCode": "KN-PREFACE-001",
+  "locale": "zh-Hans",
+  "claimSetVersion": "0.1.0",
+  "claims": [
+    {
+      "schemaVersion": "PHI-OS-KNOWLEDGE-CLAIM-v1.0.0",
+      "claimCode": "CLM-KN-PREFACE-001-001",
+      "claimSetVersion": "0.1.0",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "statement": "人工智能的发展依赖长期积累的计算基础设施、算法研究与数字资料。",
+      "claimType": "externally_verifiable",
+      "scope": {
+        "articleSectionCode": "S01",
+        "articleBlockCode": "S01-B01",
+        "usage": "direct",
+        "materiality": "high"
+      },
+      "supportRequirement": {
+        "sourceRequired": true,
+        "minimumIndependentSources": 1,
+        "primarySourcePreferred": true,
+        "qualificationRequired": false
+      },
+      "sourceSupport": [
+        {
+          "sourceCode": "SRC-AI-FIXTURE-001",
+          "supportType": "direct",
+          "supportScope": "测试直接支持关系；不代表真实来源或真实事实审核。",
+          "supportLevel": "strong",
+          "locator": {
+            "pageRange": null,
+            "section": "Fixture section"
+          },
+          "reviewStatus": "approved"
+        }
+      ],
+      "canonicalSourceCodes": [],
+      "contrarySourceCodes": [],
+      "conflictAssessment": {
+        "status": "not_applicable",
+        "conflictType": null,
+        "resolution": "",
+        "reviewerType": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      },
+      "supportAssessment": {
+        "status": "approved",
+        "supportLevel": "strong",
+        "notes": "仅为验证 Publication Gate 的合成测试状态。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "editorialAssessment": {
+        "status": "approved",
+        "wordingRisk": "medium",
+        "qualification": "正式生产时必须由真实来源重新核实。",
+        "notes": "仅为测试。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "status": {
+        "claimStatus": "approved",
+        "reviewStatus": "approved"
+      }
+    },
+    {
+      "schemaVersion": "PHI-OS-KNOWLEDGE-CLAIM-v1.0.0",
+      "claimCode": "CLM-KN-PREFACE-001-002",
+      "claimSetVersion": "0.1.0",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "statement": "文明的发展可以被理解为部分能力不断被外部载体承接。",
+      "claimType": "phi_os_interpretation",
+      "scope": {
+        "articleSectionCode": "S01",
+        "articleBlockCode": "S01-B02",
+        "usage": "paraphrased",
+        "materiality": "high"
+      },
+      "supportRequirement": {
+        "sourceRequired": false,
+        "minimumIndependentSources": 0,
+        "primarySourcePreferred": false,
+        "qualificationRequired": true
+      },
+      "sourceSupport": [],
+      "canonicalSourceCodes": [
+        "SRC-PHIOS-FIXTURE-001"
+      ],
+      "contrarySourceCodes": [],
+      "conflictAssessment": {
+        "status": "not_applicable",
+        "conflictType": null,
+        "resolution": "",
+        "reviewerType": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      },
+      "supportAssessment": {
+        "status": "not_applicable",
+        "supportLevel": "not_assessed",
+        "notes": "外部事实支持不适用；仍需 Canonical Review。",
+        "reviewerType": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      },
+      "editorialAssessment": {
+        "status": "approved",
+        "wordingRisk": "medium",
+        "qualification": "明确标记为 PHI OS 的理论理解，不表述为外部共识。",
+        "notes": "合成测试状态。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "status": {
+        "claimStatus": "approved",
+        "reviewStatus": "approved"
+      }
+    },
+    {
+      "schemaVersion": "PHI-OS-KNOWLEDGE-CLAIM-v1.0.0",
+      "claimCode": "CLM-KN-PREFACE-001-003",
+      "claimSetVersion": "0.1.0",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "statement": "人工智能学习的是文明留下并被数字化、选择与组织的表达，而不是完整文明。",
+      "claimType": "mixed",
+      "scope": {
+        "articleSectionCode": "S01",
+        "articleBlockCode": "S01-B01",
+        "usage": "direct",
+        "materiality": "high"
+      },
+      "supportRequirement": {
+        "sourceRequired": true,
+        "minimumIndependentSources": 1,
+        "primarySourcePreferred": true,
+        "qualificationRequired": true
+      },
+      "sourceSupport": [
+        {
+          "sourceCode": "SRC-AI-FIXTURE-001",
+          "supportType": "partial",
+          "supportScope": "只测试数字资料与表达范围的部分支持。",
+          "supportLevel": "moderate",
+          "locator": {
+            "pageRange": null,
+            "section": "Fixture section"
+          },
+          "reviewStatus": "approved"
+        },
+        {
+          "sourceCode": "SRC-AI-FIXTURE-009",
+          "supportType": "contradictory",
+          "supportScope": "测试相反资料可被保留且不计入最低支持数量。",
+          "supportLevel": "moderate",
+          "locator": {
+            "pageRange": null,
+            "section": "Contrary fixture section"
+          },
+          "reviewStatus": "approved"
+        }
+      ],
+      "canonicalSourceCodes": [
+        "SRC-PHIOS-FIXTURE-001"
+      ],
+      "contrarySourceCodes": [
+        "SRC-AI-FIXTURE-009"
+      ],
+      "conflictAssessment": {
+        "status": "resolved",
+        "conflictType": "scope_difference",
+        "resolution": "测试限定为数字化与被选择的表达，不扩展为完整文明。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "supportAssessment": {
+        "status": "approved",
+        "supportLevel": "moderate",
+        "notes": "合成测试状态，不代表真实来源审核。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "editorialAssessment": {
+        "status": "approved",
+        "wordingRisk": "high",
+        "qualification": "事实部分与 PHI OS 解释部分保持分离，并保留范围限定。",
+        "notes": "合成测试状态。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "mixedAssessment": {
+        "factualPortion": "人工智能训练材料来自被数字化、选择与组织的表达。",
+        "interpretivePortion": "这些表达不等同于完整文明。"
+      },
+      "status": {
+        "claimStatus": "approved",
+        "reviewStatus": "approved"
+      }
+    },
+    {
+      "schemaVersion": "PHI-OS-KNOWLEDGE-CLAIM-v1.0.0",
+      "claimCode": "CLM-KN-PREFACE-001-004",
+      "claimSetVersion": "0.1.0",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "statement": "知识处理能力扩大，不等于现实方向自动形成。",
+      "claimType": "canonical_transition",
+      "scope": {
+        "articleSectionCode": "S01",
+        "articleBlockCode": "S01-B03",
+        "usage": "transitional",
+        "materiality": "high"
+      },
+      "supportRequirement": {
+        "sourceRequired": false,
+        "minimumIndependentSources": 0,
+        "primarySourcePreferred": false,
+        "qualificationRequired": false
+      },
+      "sourceSupport": [],
+      "canonicalSourceCodes": [
+        "SRC-PHIOS-FIXTURE-001"
+      ],
+      "contrarySourceCodes": [],
+      "conflictAssessment": {
+        "status": "not_applicable",
+        "conflictType": null,
+        "resolution": "",
+        "reviewerType": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      },
+      "supportAssessment": {
+        "status": "not_applicable",
+        "supportLevel": "not_assessed",
+        "notes": "外部事实支持不适用；连续性由 Canonical Review 审核。",
+        "reviewerType": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      },
+      "editorialAssessment": {
+        "status": "approved",
+        "wordingRisk": "medium",
+        "qualification": "只进入 KN-PREFACE-002，不在当前节点完整回答下一机制。",
+        "notes": "合成测试状态。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "status": {
+        "claimStatus": "approved",
+        "reviewStatus": "approved"
+      }
+    },
+    {
+      "schemaVersion": "PHI-OS-KNOWLEDGE-CLAIM-v1.0.0",
+      "claimCode": "CLM-KN-PREFACE-001-005",
+      "claimSetVersion": "0.1.0",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "statement": "人工智能已经理解整个人类文明。",
+      "claimType": "externally_verifiable",
+      "scope": {
+        "articleSectionCode": "S01",
+        "articleBlockCode": null,
+        "usage": "direct",
+        "materiality": "critical"
+      },
+      "supportRequirement": {
+        "sourceRequired": true,
+        "minimumIndependentSources": 1,
+        "primarySourcePreferred": true,
+        "qualificationRequired": true
+      },
+      "sourceSupport": [],
+      "canonicalSourceCodes": [],
+      "contrarySourceCodes": [],
+      "conflictAssessment": {
+        "status": "not_assessed",
+        "conflictType": null,
+        "resolution": "",
+        "reviewerType": null,
+        "reviewedBy": null,
+        "reviewedAt": null
+      },
+      "supportAssessment": {
+        "status": "rejected",
+        "supportLevel": "none",
+        "notes": "过度断言，且无可支持完整范围的来源。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "editorialAssessment": {
+        "status": "rejected",
+        "wordingRisk": "critical",
+        "qualification": "不得进入 Article。",
+        "notes": "明确的 rejected fixture。",
+        "reviewerType": "human",
+        "reviewedBy": "TEST-HUMAN-001",
+        "reviewedAt": "2000-01-01T00:00:00Z"
+      },
+      "status": {
+        "claimStatus": "rejected",
+        "reviewStatus": "rejected"
+      }
+    }
+  ]
+}

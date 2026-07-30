@@ -1,0 +1,11 @@
+{
+  "baseFixture": "valid-publication-ready-article.json",
+  "operations": [
+    {
+      "op": "replace",
+      "path": "/sources/0/publicationStatus",
+      "value": "deprecated"
+    }
+  ],
+  "expectedFailure": "deprecated_source_used"
+}

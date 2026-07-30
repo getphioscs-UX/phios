@@ -1,0 +1,11 @@
+{
+  "baseFixture": "valid-publication-ready-article.json",
+  "operations": [
+    {
+      "op": "replace",
+      "path": "/review/overallDecision/approvedAt",
+      "value": null
+    }
+  ],
+  "expectedFailure": "approval_timestamp_missing"
+}

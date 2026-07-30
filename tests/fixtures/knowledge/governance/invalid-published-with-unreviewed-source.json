@@ -1,0 +1,30 @@
+{
+  "baseFixture": "invalid-published-with-open-critical-finding.json",
+  "operations": [
+    {
+      "op": "remove",
+      "path": "/review/reviews/factualReview/findings/0"
+    },
+    {
+      "op": "replace",
+      "path": "/sources/0/review/status",
+      "value": "not_reviewed"
+    },
+    {
+      "op": "replace",
+      "path": "/sources/0/review/reviewerType",
+      "value": null
+    },
+    {
+      "op": "replace",
+      "path": "/sources/0/review/reviewedBy",
+      "value": null
+    },
+    {
+      "op": "replace",
+      "path": "/sources/0/review/reviewedAt",
+      "value": null
+    }
+  ],
+  "expectedFailure": "unreviewed_required_source"
+}

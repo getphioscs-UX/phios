@@ -1,0 +1,11 @@
+{
+  "baseFixture": "invalid-published-with-open-critical-finding.json",
+  "operations": [
+    {
+      "op": "replace",
+      "path": "/review/reviews/factualReview/findings/0/severity",
+      "value": "major"
+    }
+  ],
+  "expectedFailure": "open_major_finding"
+}
