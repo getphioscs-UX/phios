@@ -1,0 +1,65 @@
+{
+  "contractId": "phi-os.pws-entry.payment-boundary.v1",
+  "contractVersion": "1.0.0",
+  "status": "pws-entry-w0-frozen",
+  "frozenAt": "2026-07-30",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "2e19922f57a8ff208f48988085761fa28cfbd099"
+  },
+  "changeControl": {
+    "changeClass": "explicit-contract-version-upgrade",
+    "affectedContracts": ["phi-os.master-governance.v1", "phi-os.pws-entry.payment-boundary.v1"],
+    "versionImpact": "Introduces PWS-ENTRY-W0 v1 without changing the frozen Core Runtime.",
+    "preservedBoundaries": ["Core Runtime", "Evidence Boundary", "Provider Contract", "Persistence", "Professional Responsibility"]
+  },
+  "operatingLayers": {
+    "beforePayment": {
+      "purpose": "Public orientation, bounded preparation and non-individual exploration.",
+      "available": ["public-knowledge", "service-information", "pricing", "service-boundaries", "samples", "preparation", "free-rule-based-exploration", "checkout"],
+      "forbiddenCreations": ["formal-journey", "formal-evidence", "reconstruction", "individual-reading", "journey-report", "professional-assignment", "professional-queue", "paid-individual-provider-invocation"],
+      "freeExploration": {
+        "formalJourneyIdentityCreated": false,
+        "formalEvidenceWritten": false,
+        "runtimePersistenceUsed": false,
+        "paidProviderUsed": false,
+        "individualConclusionGenerated": false,
+        "professionalResponsibilityCreated": false,
+        "mayUse": ["static-content", "preset-options", "client-side-rules", "non-individual-service-orientation"]
+      }
+    },
+    "afterPayment": {
+      "purpose": "Entitled formal Journey and eligible Professional Service delivery.",
+      "eligibleCapabilities": ["formal-journey-identity", "formal-persistence", "paid-provider-access", "journey-report", "eligible-professional-service-handoff"],
+      "minimumActivationGates": ["order-created", "payment-confirmed", "entitlement-active", "customer-identity-matched", "service-boundary-consent-confirmed"],
+      "professionalHandoffAdditionalGates": ["service-eligible-for-human-review", "professional-capability-verified", "assignment-created", "professional-consent-active"]
+    }
+  },
+  "transitionRules": {
+    "paymentRedirectCreatesEntitlement": false,
+    "clientClaimCreatesEntitlement": false,
+    "verifiedPaymentEventRequired": true,
+    "activeEntitlementRequiredForFormalJourney": true,
+    "activeEntitlementRequiredForIndividualConclusion": true,
+    "activeEntitlementRequiredForPaidProvider": true,
+    "activeEntitlementRequiredForJourneyReport": true,
+    "purchaseAloneCreatesProfessionalResponsibility": false,
+    "entitlementAloneCreatesProfessionalAssignment": false,
+    "prePaymentDataMayBePromotedSilently": false,
+    "explicitAuthorisedTransitionRequired": true
+  },
+  "acceptance": {
+    "publicBrowsingUsableWithoutPayment": true,
+    "freeExplorationBecomesHiddenPaidJourney": false,
+    "serviceIsOnlyExit": false,
+    "individualConclusionBeforeEntitlement": false,
+    "publicExitFamilies": ["knowledge", "free-exploration", "service-information", "leave-without-purchase"],
+    "pageChangeInThisStep": false,
+    "visualAcceptance": {
+      "status": "not-applicable",
+      "reason": "Contract-only boundary freeze; no page or customer-visible behaviour changes."
+    },
+    "productionVerificationRequiredAfterImplementation": true
+  }
+}

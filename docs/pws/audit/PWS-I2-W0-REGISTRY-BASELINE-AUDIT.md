@@ -30,12 +30,12 @@ Event Outbox or Registry Query API.
 | D1 | 1 `RUNTIME_DB` binding; 4 executable migrations | Extend only through a new authorised Migration |
 | Migration | 4 executable SQL records plus 20 non-executable schema baseline declarations | Keep both meanings explicitly separated |
 | Read Model | Runtime, account, professional and specialist projections are distributed | Add Registry-specific reads; do not merge customer projections |
-| Static JSON | 110 `content/registry` files; 48 legacy index entries | The legacy index is not universal |
+| Static JSON | 111 `content/registry` files; 48 legacy index entries | The legacy index is not universal |
 | PKR | 12 data files and 12 schemas | Preserve Canonical Knowledge ownership |
 | PWS Contracts | 10 frozen canonical JSON Contracts | Consume as upstream authority |
 
-`content/registry/index.json` lists 48 of the 110 JSON files in its directory.
-After excluding the index itself, 61 JSON files remain outside it. Many are
+`content/registry/index.json` lists 48 of the 111 JSON files in its directory.
+After excluding the index itself, 62 JSON files remain outside it. The added unindexed file is the frozen Master Governance contract. Many are
 acceptance, milestone and implementation records added after the original
 content index. This is a coverage gap, but it must not be repaired by treating
 every audit record as a runtime Registry entry.

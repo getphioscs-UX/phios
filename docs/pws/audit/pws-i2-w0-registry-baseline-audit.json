@@ -48,9 +48,9 @@
       "decision": "extend_only_through_authorised_migration"
     },
     "staticJson": {
-      "contentRegistryFiles": 110,
+      "contentRegistryFiles": 111,
       "contentRegistryIndexEntries": 48,
-      "contentRegistryUnindexedFilesExcludingIndex": 61,
+      "contentRegistryUnindexedFilesExcludingIndex": 62,
       "knowledgeRegistryDataFiles": 12,
       "knowledgeRegistrySchemaFiles": 12,
       "pwsCanonicalContractFiles": 10
@@ -114,8 +114,8 @@
       "id": "I2-W0-F07",
       "area": "Static JSON",
       "severity": "coverage_gap",
-      "finding": "content/registry contains 110 JSON files while content/registry/index.json lists 48; 61 files are outside the index after excluding index.json.",
-      "decision": "Treat index.json as a legacy content index, not a complete Registry inventory."
+      "finding": "content/registry contains 111 JSON files while content/registry/index.json lists 48; 62 files are outside the index after excluding index.json. The additional unindexed file is the frozen Master Governance contract.",
+      "decision": "Treat index.json as a legacy content index, not a complete Registry inventory. Keep Master Governance unindexed so it cannot be mistaken for a Runtime Registry entry."
     },
     {
       "id": "I2-W0-F08",
