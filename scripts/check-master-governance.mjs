@@ -11,9 +11,12 @@ const pds = await readJson('content/registry/pds-w1-experience-contract.json');
 const shell = await readJson('content/registry/pds-w4-reality-journey-shell-contract.json');
 
 assert.equal(contract.contractId, 'phi-os.master-governance.v1');
-assert.equal(contract.contractVersion, '1.0.0');
+assert.equal(contract.contractVersion, '1.1.0');
 assert.equal(contract.status, 'frozen');
-assert.equal(contract.baseline.commit, '4fd426aa87664e58073432d9c3654d35d8f2a820');
+assert.equal(
+  contract.baseline.commit,
+  '5136c471cbd897511ac38ccc83a4e06f31f0c745'
+);
 
 assert.deepEqual(contract.sourceOfTruthPriority, [
   'reality-integrity-evidence-boundary-safety-law',
@@ -107,13 +110,91 @@ assert.equal(contract.journeyRules.technicalRouteNamesMayRemainUnchanged, true);
 assert.equal(contract.journeyRules.customerFacingLanguageUsesExperienceStage, true);
 assert.equal(contract.journeyRules.journeyStateIsNotJourneyStage, true);
 assert.equal(contract.journeyRules.mappingMayCreateSecondJourney, false);
+
+assert.equal(contract.writeSourceRule.pageMayCreateSecondSourceOfTruth, false);
+assert.equal(contract.writeSourceRule.pageWritesCanonicalData, false);
+assert.equal(contract.writeSourceRule.pageProjectionMayBecomeCanonical, false);
+assert.equal(contract.writeSourceRule.staticJsonMayOverrideCanonicalOwner, false);
+assert.equal(contract.writeSourceRule.legacyConfigurationMayAcceptNewWrites, false);
+assert.equal(contract.writeSourceRule.readModelsAreReadOnly, true);
+
+const expectedWriteSources = [
+  { objects: ['Journey'], owner: 'Core Runtime' },
+  { objects: ['Knowledge Node', 'Supporting Question'], owner: 'PKR' },
+  { objects: ['Book I Planning'], owner: 'KH-W3.5G Blueprint' },
+  {
+    objects: ['Product', 'Offer', 'Price', 'Entitlement'],
+    owner: 'PWS-I2 / PWS-I4'
+  },
+  { objects: ['Consent', 'Privacy'], owner: 'PWS-I8' },
+  { objects: ['Provider', 'Prompt', 'Budget'], owner: 'PWS-I9' },
+  {
+    objects: ['Professional Identity', 'Capability'],
+    owner: 'PWS-I3'
+  },
+  {
+    objects: ['Assignment', 'Workspace', 'Deliverable'],
+    owner: 'PWS-I5'
+  },
+  { objects: ['Queue', 'Continuity'], owner: 'PWS-I6' },
+  { objects: ['Governance', 'Quality'], owner: 'PWS-I7' }
+];
+assert.deepEqual(
+  contract.writeSourceRule.writeSourceMap.map(({ objects, owner }) => ({
+    objects,
+    owner
+  })),
+  expectedWriteSources
+);
+const canonicalObjects = contract.writeSourceRule.writeSourceMap.flatMap(
+  entry => entry.objects
+);
+assert.equal(
+  new Set(canonicalObjects).size,
+  canonicalObjects.length,
+  'Every governed object must have exactly one write-source owner'
+);
+for (const writeSource of contract.writeSourceRule.writeSourceMap) {
+  assert(writeSource.canonicalPaths.length > 0);
+  for (const canonicalPath of writeSource.canonicalPaths) {
+    await fs.access(path.join(root, canonicalPath));
+  }
+}
+
+assert.equal(contract.changeControl.appliesAfterPhaseFreeze, true);
+assert.deepEqual(contract.changeControl.allowedChangeClasses, [
+  'bug-fix',
+  'security-fix',
+  'accessibility-fix',
+  'migration-fix',
+  'acceptance-fix',
+  'explicit-contract-version-upgrade'
+]);
+assert.equal(contract.changeControl.silentBehaviouralChangeAllowed, false);
+assert.equal(contract.changeControl.unclassifiedChangeAllowed, false);
+for (const requiredDeclaration of [
+  'changeClassDeclarationRequired',
+  'affectedContractDeclarationRequired',
+  'versionImpactDeclarationRequired',
+  'acceptanceEvidenceRequired',
+  'preservedBoundaryDeclarationRequired'
+]) {
+  assert.equal(
+    contract.changeControl[requiredDeclaration],
+    true,
+    `Missing change-control declaration: ${requiredDeclaration}`
+  );
+}
+
 const governanceDoc = await read('docs/pws/contracts/PWS-MASTER-GOVERNANCE-V1.md');
 for (const phrase of [
   'Reality Integrity / Evidence Boundary / Safety / Law',
   'PDS v1.1 Experience and Design Requirements',
   '360 px / 768 px / 1440 px visual acceptance',
   'Automated checks cannot substitute for visual acceptance',
-  'Journey lifecycle state remains separate from Journey stage'
+  'Journey lifecycle state remains separate from Journey stage',
+  'No page, customer view, professional view or technical view may create a second source of truth',
+  'Silent behavioural change and unclassified change are prohibited'
 ]) {
   assert(governanceDoc.includes(phrase), `Governance document missing: ${phrase}`);
 }
@@ -129,7 +210,9 @@ assert(
   'The first PDS precheck must enforce Master Governance'
 );
 
-console.log('✓ PHI OS Master Governance v1 frozen.');
+console.log('✓ PHI OS Master Governance v1.1.0 frozen.');
 console.log('  Source-of-truth priority and conflict rules are closed.');
 console.log('  PDS mandatory principles and implementation gates are closed.');
 console.log('  Six customer stages match PDS-W1 and the shared Journey shell.');
+console.log('  Ten canonical domains have one traceable write-source owner.');
+console.log('  Six post-freeze change classes are closed; silent behaviour is prohibited.');

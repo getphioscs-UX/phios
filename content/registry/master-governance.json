@@ -1,12 +1,12 @@
 {
   "contractId": "phi-os.master-governance.v1",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "status": "frozen",
   "frozenAt": "2026-07-30",
   "baseline": {
     "repository": "getphioscs-UX/phios",
     "branch": "main",
-    "commit": "4fd426aa87664e58073432d9c3654d35d8f2a820",
+    "commit": "5136c471cbd897511ac38ccc83a4e06f31f0c745",
     "productionDeployment": "https://18013142.phios-github.pages.dev",
     "productionUrl": "https://phios-github.pages.dev"
   },
@@ -71,6 +71,109 @@
     "customerFacingLanguageUsesExperienceStage": true,
     "journeyStateIsNotJourneyStage": true,
     "mappingMayCreateSecondJourney": false
+  },
+  "writeSourceRule": {
+    "pageMayCreateSecondSourceOfTruth": false,
+    "pageWritesCanonicalData": false,
+    "pageProjectionMayBecomeCanonical": false,
+    "staticJsonMayOverrideCanonicalOwner": false,
+    "legacyConfigurationMayAcceptNewWrites": false,
+    "readModelsAreReadOnly": true,
+    "writeSourceMap": [
+      {
+        "objects": ["Journey"],
+        "owner": "Core Runtime",
+        "canonicalPaths": ["functions/runtime"]
+      },
+      {
+        "objects": ["Knowledge Node", "Supporting Question"],
+        "owner": "PKR",
+        "canonicalPaths": [
+          "content/knowledge/registry/nodes.json",
+          "content/knowledge/registry/supporting-questions.json"
+        ]
+      },
+      {
+        "objects": ["Book I Planning"],
+        "owner": "KH-W3.5G Blueprint",
+        "canonicalPaths": ["content/knowledge/blueprints/book-1-knowledge-blueprint.json"]
+      },
+      {
+        "objects": ["Product", "Offer", "Price", "Entitlement"],
+        "owner": "PWS-I2 / PWS-I4",
+        "canonicalPaths": [
+          "content/registry/book-products.json",
+          "content/registry/professional-service-catalog.json",
+          "functions/commerce",
+          "functions/membership"
+        ]
+      },
+      {
+        "objects": ["Consent", "Privacy"],
+        "owner": "PWS-I8",
+        "canonicalPaths": [
+          "functions/professional/consent",
+          "functions/professional/privacy",
+          "functions/runtime/security"
+        ]
+      },
+      {
+        "objects": ["Provider", "Prompt", "Budget"],
+        "owner": "PWS-I9",
+        "canonicalPaths": [
+          "functions/runtime/entry/providers",
+          "functions/runtime/reading/providers",
+          "functions/_lib/prompts.js"
+        ]
+      },
+      {
+        "objects": ["Professional Identity", "Capability"],
+        "owner": "PWS-I3",
+        "canonicalPaths": ["functions/professional/access"]
+      },
+      {
+        "objects": ["Assignment", "Workspace", "Deliverable"],
+        "owner": "PWS-I5",
+        "canonicalPaths": [
+          "functions/professional/workspace",
+          "functions/professional/reports"
+        ]
+      },
+      {
+        "objects": ["Queue", "Continuity"],
+        "owner": "PWS-I6",
+        "canonicalPaths": [
+          "functions/professional/appointments",
+          "functions/runtime/continuity"
+        ]
+      },
+      {
+        "objects": ["Governance", "Quality"],
+        "owner": "PWS-I7",
+        "canonicalPaths": [
+          "content/registry/professional-data-governance.json",
+          "GOVERNANCE.md"
+        ]
+      }
+    ]
+  },
+  "changeControl": {
+    "appliesAfterPhaseFreeze": true,
+    "allowedChangeClasses": [
+      "bug-fix",
+      "security-fix",
+      "accessibility-fix",
+      "migration-fix",
+      "acceptance-fix",
+      "explicit-contract-version-upgrade"
+    ],
+    "silentBehaviouralChangeAllowed": false,
+    "unclassifiedChangeAllowed": false,
+    "changeClassDeclarationRequired": true,
+    "affectedContractDeclarationRequired": true,
+    "versionImpactDeclarationRequired": true,
+    "acceptanceEvidenceRequired": true,
+    "preservedBoundaryDeclarationRequired": true
   },
   "protectedBoundaries": [
     "reality-integrity",

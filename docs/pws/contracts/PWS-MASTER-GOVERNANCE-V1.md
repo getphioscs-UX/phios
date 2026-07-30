@@ -1,7 +1,8 @@
 # PHI OS Master Governance and Conflict Resolution
 
-Status: **Frozen v1**  
-Baseline: `getphioscs-UX/phios` `main@4fd426aa87664e58073432d9c3654d35d8f2a820`
+Status: **Frozen v1.1.0**
+
+Baseline: `getphioscs-UX/phios` `main@5136c471cbd897511ac38ccc83a4e06f31f0c745`
 
 ## 0.1 Source-of-Truth Priority
 
@@ -46,6 +47,31 @@ A contract-only change may mark visual acceptance as not applicable only when it
 
 Technical routes and stable identifiers may remain unchanged. Customer-facing language follows the experience stage. Journey lifecycle state remains separate from Journey stage, and this presentation mapping cannot create a second Journey source of truth.
 
+## 0.4 Write-Source Rule
+
+No page, customer view, professional view or technical view may create a second source of truth. Pages may read canonical data and render bounded projections, but they cannot own canonical writes, promote a read model into the canonical record, allow static JSON to override the owning Runtime, or continue writing into a Legacy configuration.
+
+| Canonical object | Sole write-source owner |
+|---|---|
+| Journey | Core Runtime |
+| Knowledge Node / Supporting Question | PKR |
+| Book I planning | KH-W3.5G Blueprint |
+| Product / Offer / Price / Entitlement | PWS-I2 / PWS-I4 |
+| Consent / Privacy | PWS-I8 |
+| Provider / Prompt / Budget | PWS-I9 |
+| Professional Identity / Capability | PWS-I3 |
+| Assignment / Workspace / Deliverable | PWS-I5 |
+| Queue / Continuity | PWS-I6 |
+| Governance / Quality | PWS-I7 |
+
+Every owner has a traceable current path in the machine-readable contract. A physical page, read model, static Registry projection or Legacy path cannot acquire ownership merely because it contains a copy of the data.
+
+## 0.5 Change Control
+
+After a phase is frozen, it may change only through a Bug Fix, Security Fix, Accessibility Fix, Migration Fix, Acceptance Fix or Explicit Contract Version Upgrade. Every accepted change declares its class, affected contract, version impact, preserved boundaries and acceptance evidence.
+
+Silent behavioural change and unclassified change are prohibited. A wording, page, Registry, migration or implementation adjustment that changes behaviour must therefore enter one of the six authorised classes or wait for an explicit contract version upgrade.
+
 ## Scope of this freeze
 
-This step adds governance and automated conflict guards only. It changes no Runtime, API, Provider, migration, persistence, lineage or page behaviour. Consequently, visual, touch, keyboard and bilingual page acceptance are recorded as not applicable to this contract-only revision; they remain mandatory for every later page implementation.
+This v1.1.0 Explicit Contract Version Upgrade adds write-source and change-control guards only. It changes no Runtime, API, Provider, migration, persistence, lineage or page behaviour. Consequently, visual, touch, keyboard and bilingual page acceptance are recorded as not applicable to this contract-only revision; they remain mandatory for every later page implementation.
