@@ -1,0 +1,61 @@
+{
+  "contractId": "phi-os.pws.directory-blueprint.v1",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "d2dcb2dc2a07428a10e3b1c0b0f8658dfebb1fdc"
+  },
+  "roots": {
+    "logicalRuntimeRoot": "runtime",
+    "currentRuntimeRoot": "functions/runtime",
+    "currentProfessionalRoot": "functions/professional",
+    "rule": "The logical blueprint defines ownership; it does not authorise a bulk move of the frozen Core Runtime."
+  },
+  "standardModuleDirectories": [
+    "schema",
+    "registry",
+    "operations",
+    "permissions",
+    "states",
+    "events",
+    "tests"
+  ],
+  "modules": [
+    {"module":"professional","owner":"PWS-I3","currentPaths":["functions/professional"],"phase":"PWS-I3","writeSource":"Professional Identity and Capability"},
+    {"module":"capability","owner":"PWS-I3","currentPaths":["functions/professional/access"],"phase":"PWS-I3","writeSource":"Capability and Professional Access"},
+    {"module":"credential","owner":"PWS-I3","currentPaths":["functions/professional/access"],"phase":"PWS-I3","writeSource":"Credential and Verification"},
+    {"module":"method","owner":"PWS-I2","currentPaths":["content/registry/professional-service-catalog.json"],"phase":"PWS-I2","writeSource":"Method Registry"},
+    {"module":"service","owner":"PWS-I2/PWS-I4","currentPaths":["content/registry/professional-service-catalog.json","content/registry/professional-service-boundaries.json"],"phase":"PWS-I2","writeSource":"Service Definition and Activation"},
+    {"module":"product","owner":"PWS-I2/PWS-I4","currentPaths":["content/registry/book-products.json","content/registry/professional-service-catalog.json"],"phase":"PWS-I2","writeSource":"Product and Offer Registry"},
+    {"module":"commercial","owner":"PWS-I4","currentPaths":["functions/commerce","functions/account","functions/professional/appointments/professional-payment-record-contract.js"],"phase":"PWS-I4","writeSource":"Order, Payment, Refund and Settlement"},
+    {"module":"entitlement","owner":"PWS-I4","currentPaths":["functions/membership","functions/api/book-one-access.js"],"phase":"PWS-I4","writeSource":"Entitlement Runtime"},
+    {"module":"consent","owner":"PWS-I8","currentPaths":["functions/professional/consent","functions/runtime/security"],"phase":"PWS-I8","writeSource":"Consent, Privacy and Purpose"},
+    {"module":"journey","owner":"Core Runtime","currentPaths":["functions/runtime/entry","functions/runtime/reconstruction","functions/runtime/review","functions/runtime/continuity"],"phase":"preserved","writeSource":"Frozen Core Runtime"},
+    {"module":"assignment","owner":"PWS-I5","currentPaths":["functions/professional/workspace"],"phase":"PWS-I5","writeSource":"Professional Assignment"},
+    {"module":"workspace","owner":"PWS-I5","currentPaths":["functions/professional/workspace"],"phase":"PWS-I5","writeSource":"Professional Workspace"},
+    {"module":"evidence","owner":"Core Runtime/PWS-I5","currentPaths":["functions/runtime/lineage","functions/professional/workspace"],"phase":"preserved","writeSource":"Core Evidence plus Professional Evidence Projection"},
+    {"module":"reading","owner":"Core Runtime","currentPaths":["functions/runtime/reading"],"phase":"preserved","writeSource":"Frozen Core Runtime Reading"},
+    {"module":"navigation","owner":"Core Runtime","currentPaths":["functions/runtime/navigation"],"phase":"preserved","writeSource":"Frozen Core Runtime Navigation"},
+    {"module":"deliverable","owner":"PWS-I5","currentPaths":["functions/professional/reports"],"phase":"PWS-I5","writeSource":"Deliverable Assembly and Release"},
+    {"module":"signature","owner":"PWS-I5","currentPaths":["functions/professional/reports"],"phase":"PWS-I5","writeSource":"Deliverable Signature"},
+    {"module":"knowledge","owner":"PKR/PWS-I2","currentPaths":["content/knowledge/registry","knowledge"],"phase":"preserved","writeSource":"PKR Canonical Nodes; PWS-I2 Asset Types"},
+    {"module":"intelligence","owner":"PWS-I9","currentPaths":["functions/runtime/entry/providers","functions/runtime/reading/providers"],"phase":"PWS-I9","writeSource":"Provider, Prompt and Budget"},
+    {"module":"operations","owner":"PWS-I6","currentPaths":["functions/professional/appointments"],"phase":"PWS-I6","writeSource":"Queue, Notification and Continuity Operations"},
+    {"module":"governance","owner":"PWS-I7","currentPaths":["functions/runtime/security","functions/professional/privacy"],"phase":"PWS-I7","writeSource":"Governance and Quality Decision"},
+    {"module":"security","owner":"PWS-I8","currentPaths":["functions/runtime/security","functions/professional/privacy"],"phase":"preserved","writeSource":"Security, Privacy and Data Boundary"},
+    {"module":"integration","owner":"PWS-X1-PJA","currentPaths":["functions/runtime/shared","functions/professional/external-readers"],"phase":"PWS-X1-PJA","writeSource":"Cross-system Adapters"}
+  ],
+  "rules": {
+    "secondSourceOfTruthAllowed": false,
+    "bulkRuntimeMoveAllowed": false,
+    "emptyScaffoldCreationRequired": false,
+    "legacyDeletionAllowed": false,
+    "phaseEarlyImplementationAllowed": false,
+    "physicalPathDefinesOwnership": false,
+    "moduleOwnerRequired": true,
+    "currentPathTraceabilityRequired": true,
+    "standardDirectorySetClosed": true
+  }
+}
