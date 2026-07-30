@@ -1,0 +1,78 @@
+{
+  "contractId": "phi-os.pws.canonical-events.v1",
+  "schemaVersion": "pws-v1",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7a99bda47c7a32f7e490ca95e06e4fa4574443c7"
+  },
+  "operationContractId": "phi-os.pws.canonical-operations.v1",
+  "rules": {
+    "freeStringEventsAllowed": false,
+    "eventIsPastFact": true,
+    "eventMayExecuteOperation": false,
+    "eventMayChangeState": false,
+    "eventMayContainPayload": false,
+    "eventMayContainSensitiveData": false,
+    "eventIdRequired": true,
+    "occurredAtRequired": true,
+    "actorReferenceRequired": true,
+    "objectReferenceRequired": true,
+    "operationIdRequired": true,
+    "previousStateRequired": true,
+    "resultingStateRequired": true,
+    "appendOnly": true,
+    "immutable": true,
+    "providerOutputIsEventAllowed": false,
+    "uiTelemetryIsCanonicalEventAllowed": false,
+    "legacyEventWritesAllowed": false
+  },
+  "eventEnvelope": {
+    "requiredFields": [
+      "event_id",
+      "event_code",
+      "schema_version",
+      "occurred_at",
+      "actor_ref",
+      "object_ref",
+      "operation_id",
+      "previous_state",
+      "resulting_state",
+      "correlation_id"
+    ],
+    "forbiddenFields": ["payload","content","customer_data","provider_output","card_data","document_body"]
+  },
+  "events": [
+    {"eventId":"pws.event.payment.confirmed","eventCode":"payment.confirmed","operationCode":"payment.confirm","objectName":"Payment"},
+    {"eventId":"pws.event.payment.failed","eventCode":"payment.failed","operationCode":"payment.fail","objectName":"Payment"},
+    {"eventId":"pws.event.payment.refunded","eventCode":"payment.refunded","operationCode":"payment.refund","objectName":"Payment"},
+    {"eventId":"pws.event.entitlement.activated","eventCode":"entitlement.activated","operationCode":"entitlement.activate","objectName":"Entitlement"},
+    {"eventId":"pws.event.entitlement.revoked","eventCode":"entitlement.revoked","operationCode":"entitlement.revoke","objectName":"Entitlement"},
+    {"eventId":"pws.event.consent.confirmed","eventCode":"consent.confirmed","operationCode":"consent.confirm","objectName":"Consent"},
+    {"eventId":"pws.event.consent.withdrawn","eventCode":"consent.withdrawn","operationCode":"consent.withdraw","objectName":"Consent"},
+    {"eventId":"pws.event.journey.activated","eventCode":"journey.activated","operationCode":"journey.activate","objectName":"Journey"},
+    {"eventId":"pws.event.journey.paused","eventCode":"journey.paused","operationCode":"journey.pause","objectName":"Journey"},
+    {"eventId":"pws.event.journey.resumed","eventCode":"journey.resumed","operationCode":"journey.resume","objectName":"Journey"},
+    {"eventId":"pws.event.assignment.created","eventCode":"assignment.created","operationCode":"assignment.create","objectName":"Assignment"},
+    {"eventId":"pws.event.assignment.accepted","eventCode":"assignment.accepted","operationCode":"assignment.accept","objectName":"Assignment"},
+    {"eventId":"pws.event.assignment.cancelled","eventCode":"assignment.cancelled","operationCode":"assignment.cancel","objectName":"Assignment"},
+    {"eventId":"pws.event.assignment.completed","eventCode":"assignment.completed","operationCode":"assignment.complete","objectName":"Assignment"},
+    {"eventId":"pws.event.readiness.evaluation_started","eventCode":"readiness.evaluation_started","operationCode":"readiness.evaluate","objectName":"Professional Readiness"},
+    {"eventId":"pws.event.professionalResponse.confirmed","eventCode":"professionalResponse.confirmed","operationCode":"professionalResponse.confirm","objectName":"Professional Response"},
+    {"eventId":"pws.event.professionalResponse.refined","eventCode":"professionalResponse.refined","operationCode":"professionalResponse.refine","objectName":"Professional Response"},
+    {"eventId":"pws.event.professionalResponse.challenged","eventCode":"professionalResponse.challenged","operationCode":"professionalResponse.challenge","objectName":"Professional Response"},
+    {"eventId":"pws.event.professionalResponse.extended","eventCode":"professionalResponse.extended","operationCode":"professionalResponse.extend","objectName":"Professional Response"},
+    {"eventId":"pws.event.deliverable.frozen","eventCode":"deliverable.frozen","operationCode":"deliverable.freeze","objectName":"Deliverable"},
+    {"eventId":"pws.event.deliverable.signed","eventCode":"deliverable.signed","operationCode":"deliverable.sign","objectName":"Deliverable"},
+    {"eventId":"pws.event.deliverable.released","eventCode":"deliverable.released","operationCode":"deliverable.release","objectName":"Deliverable"},
+    {"eventId":"pws.event.capability.activated","eventCode":"capability.activated","operationCode":"capability.activate","objectName":"Capability"},
+    {"eventId":"pws.event.capability.suspended","eventCode":"capability.suspended","operationCode":"capability.suspend","objectName":"Capability"},
+    {"eventId":"pws.event.professional.verified","eventCode":"professional.verified","operationCode":"professional.verify","objectName":"Professional"}
+  ],
+  "existingEventBoundaries": [
+    {"scope":"Customer Runtime timeline","paths":["functions/runtime/timeline/event-types.js","functions/runtime/timeline/event-append-service.js"],"handling":"preserve as Runtime-owned event family; no renaming or replacement"},
+    {"scope":"Professional access audit","paths":["functions/professional/access/professional-access-audit.js"],"handling":"preserve payload-free access decision audit; not a canonical state-change event"},
+    {"scope":"Gateway webhook records","paths":["functions/api","functions/_lib","functions/commerce"],"handling":"external input must be verified before an authorised operation emits a PWS event"}
+  ]
+}
