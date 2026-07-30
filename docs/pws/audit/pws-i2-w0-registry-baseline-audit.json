@@ -1,0 +1,216 @@
+{
+  "auditId": "phi-os.pws-i2-w0.registry-baseline-audit.v1",
+  "status": "audit_complete",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "025f06ef5b18e54f2ad22f6883d1cf30d6288c44",
+    "prerequisite": "PWS-I1-v1.0.0-Frozen"
+  },
+  "scope": [
+    "Registry",
+    "Persistence",
+    "D1",
+    "Migration",
+    "Read Model",
+    "Static JSON",
+    "Legacy Configuration",
+    "Multiple Source of Truth"
+  ],
+  "inventory": {
+    "runtimeRegistryModules": {
+      "count": 6,
+      "root": "functions/runtime/registry",
+      "contracts": 20,
+      "schemas": 20,
+      "versions": 20,
+      "baselineMigrationDeclarations": 20,
+      "owner": "Frozen Core Runtime",
+      "decision": "preserve"
+    },
+    "persistence": {
+      "contract": "phi-os.runtime-persistence.v1",
+      "root": "functions/runtime/persistence",
+      "methods": 9,
+      "drivers": ["memory", "local", "d1"],
+      "productionDriver": "d1",
+      "owner": "Frozen Core Runtime",
+      "decision": "preserve"
+    },
+    "d1": {
+      "bindings": 1,
+      "binding": "RUNTIME_DB",
+      "databaseName": "phios-runtime-production",
+      "migrationsDirectory": "db/migrations",
+      "executableMigrations": 4,
+      "migrationCreateTableStatements": 42,
+      "schemaSnapshotFiles": 4,
+      "decision": "extend_only_through_authorised_migration"
+    },
+    "staticJson": {
+      "contentRegistryFiles": 110,
+      "contentRegistryIndexEntries": 48,
+      "contentRegistryUnindexedFilesExcludingIndex": 61,
+      "knowledgeRegistryDataFiles": 12,
+      "knowledgeRegistrySchemaFiles": 12,
+      "pwsCanonicalContractFiles": 10
+    },
+    "professionalRegistryModules": {
+      "count": 7,
+      "areas": [
+        "external_reader",
+        "financial_schema",
+        "financial_formula",
+        "financial_assumption",
+        "financial_risk",
+        "report_template"
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "I2-W0-F01",
+      "area": "Registry",
+      "severity": "boundary",
+      "finding": "Core Runtime already owns executable Contract, Schema, Version and baseline Migration declarations.",
+      "decision": "PWS-I2 must reference them and must not replace or absorb them."
+    },
+    {
+      "id": "I2-W0-F02",
+      "area": "Registry",
+      "severity": "gap",
+      "finding": "No Universal PWS Registry Schema, Version Store, Relationship Store, Restriction Store, Audit Store, Event Outbox or Registry Query API exists.",
+      "decision": "Create only in PWS-I2-W1 after this audit; do not represent the existing content index as universal."
+    },
+    {
+      "id": "I2-W0-F03",
+      "area": "Persistence",
+      "severity": "boundary",
+      "finding": "Core Runtime persistence has a nine-method contract and memory, local and D1 drivers.",
+      "decision": "Reuse its infrastructure boundary where compatible; do not make PWS-I2 a new Runtime persistence owner."
+    },
+    {
+      "id": "I2-W0-F04",
+      "area": "D1",
+      "severity": "boundary",
+      "finding": "One production D1 binding and four immutable executable migrations already exist.",
+      "decision": "Any future Registry tables require a new sequential migration; existing SQL and checksums remain immutable."
+    },
+    {
+      "id": "I2-W0-F05",
+      "area": "Migration",
+      "severity": "naming_risk",
+      "finding": "Twenty non-executable Core Runtime schema baseline declarations coexist with four executable D1 SQL migrations.",
+      "decision": "Keep both, but distinguish schema baseline declarations from executable storage migrations in PWS-I2."
+    },
+    {
+      "id": "I2-W0-F06",
+      "area": "Read Model",
+      "severity": "gap",
+      "finding": "Runtime, account, professional, financial and external-reader projections exist independently; there is no Universal Registry Read Model or Query API.",
+      "decision": "PWS-I2-W1 may add registry-specific reads without merging customer or professional projections."
+    },
+    {
+      "id": "I2-W0-F07",
+      "area": "Static JSON",
+      "severity": "coverage_gap",
+      "finding": "content/registry contains 110 JSON files while content/registry/index.json lists 48; 61 files are outside the index after excluding index.json.",
+      "decision": "Treat index.json as a legacy content index, not a complete Registry inventory."
+    },
+    {
+      "id": "I2-W0-F08",
+      "area": "Static JSON",
+      "severity": "boundary",
+      "finding": "PKR Knowledge data and schemas form an independent canonical knowledge source.",
+      "decision": "PWS-I2 registers published asset and deliverable types only; it must not duplicate Canonical Knowledge Nodes."
+    },
+    {
+      "id": "I2-W0-F09",
+      "area": "Legacy Configuration",
+      "severity": "reconciliation_required",
+      "finding": "Professional Service, Offer, Pricing, Book Product and specialist Registries are spread across content JSON and executable JavaScript.",
+      "decision": "Record source authority and compatibility before any migration; preserve current reads and writes until the owning W2-W7 step."
+    },
+    {
+      "id": "I2-W0-F10",
+      "area": "Multiple Source of Truth",
+      "severity": "confirmed_risk",
+      "finding": "Book product fields are duplicated in content/registry/book-products.json and functions/commerce/book-product-registry.js; service and offer concepts overlap across multiple legacy catalogs.",
+      "decision": "PWS-I2 must select one canonical write source and retain explicit read adapters; no silent deletion or bulk rewrite."
+    }
+  ],
+  "protectedSources": [
+    {"source":"functions/runtime/registry","owner":"Frozen Core Runtime","action":"preserve"},
+    {"source":"functions/runtime/persistence","owner":"Frozen Core Runtime","action":"preserve"},
+    {"source":"db/migrations/0001_platform_foundation.sql","owner":"Migration Registry","action":"immutable"},
+    {"source":"db/migrations/0002_initial_runtime.sql","owner":"Migration Registry","action":"immutable"},
+    {"source":"db/migrations/0003_financial_professional_infrastructure.sql","owner":"Migration Registry","action":"immutable"},
+    {"source":"db/migrations/0004_book_commerce.sql","owner":"Migration Registry","action":"immutable"},
+    {"source":"content/knowledge/registry","owner":"PKR","action":"preserve"},
+    {"source":"docs/pws/contracts/pws-i1-v1-freeze.json","owner":"PWS-I1","action":"consume_only"}
+  ],
+  "legacyReconciliationQueue": [
+    {
+      "scope": "Book Product",
+      "sources": [
+        "content/registry/book-products.json",
+        "functions/commerce/book-product-registry.js"
+      ],
+      "targetStep": "PWS-I2-W5",
+      "status": "unresolved"
+    },
+    {
+      "scope": "Professional Service",
+      "sources": [
+        "content/registry/professional-service-catalog.json",
+        "content/registry/professional-service-levels.json",
+        "content/registry/professional-service-boundaries.json",
+        "content/registry/m4a-w1-professional-service-definition.json"
+      ],
+      "targetStep": "PWS-I2-W4",
+      "status": "unresolved"
+    },
+    {
+      "scope": "Offer and Revenue Configuration",
+      "sources": [
+        "content/registry/pws-w1a-offer-catalog.json",
+        "content/registry/pws-w1a-revenue-architecture.json",
+        "content/registry/professional-pricing-policy.json"
+      ],
+      "targetStep": "PWS-I2-W5",
+      "status": "unresolved"
+    },
+    {
+      "scope": "Financial Type Registries",
+      "sources": [
+        "content/registry/financial-schema-registry.json",
+        "content/registry/financial-formula-registry.json",
+        "content/registry/financial-assumption-registry.json",
+        "content/registry/financial-risk-registry.json",
+        "functions/professional/financial"
+      ],
+      "targetStep": "PWS-I2-W7",
+      "status": "authority_declared_reconciliation_pending"
+    },
+    {
+      "scope": "External Reader Registry",
+      "sources": [
+        "knowledge/external-readers/registry",
+        "functions/professional/external-readers"
+      ],
+      "targetStep": "PWS-I2-W7",
+      "status": "data_and_validator_pair_preserve"
+    }
+  ],
+  "w0Boundaries": {
+    "businessCodeChanged": false,
+    "registryEntryCountChanged": false,
+    "migrationAdded": false,
+    "migrationModified": false,
+    "d1SchemaChanged": false,
+    "legacyDeleted": false,
+    "pageBehaviourChanged": false,
+    "universalRegistryImplemented": false
+  },
+  "nextGate": "PWS-I2-W1 Universal Registry Core"
+}
