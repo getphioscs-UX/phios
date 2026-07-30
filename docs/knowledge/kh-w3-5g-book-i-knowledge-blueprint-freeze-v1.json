@@ -1,0 +1,87 @@
+{
+  "completionId": "KH-W3.5G-Completed",
+  "version": "1.0.0",
+  "status": "knowledge_hub_planning_frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7dc7235"
+  },
+  "blueprint": {
+    "contract": "PHI-OS-BOOK-I-KNOWLEDGE-BLUEPRINT-v1.3.0",
+    "path": "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
+    "sha256": "121afea4ae160636c2a2544fefa27bc2ee0da33f666a533d47153045fb6c0a5b",
+    "canonicalLanguage": "zh-Hans"
+  },
+  "canonicalNodePlan": [
+    {
+      "partCode": "P0",
+      "label": "Preface",
+      "status": "registered",
+      "canonicalNodes": 13
+    },
+    {
+      "partCode": "P1",
+      "label": "Part 1",
+      "status": "planned",
+      "canonicalNodes": 12
+    },
+    {
+      "partCode": "P2",
+      "label": "Part 2",
+      "status": "planned",
+      "canonicalNodes": 13
+    },
+    {
+      "partCode": "P3",
+      "label": "Part 3",
+      "status": "planned",
+      "canonicalNodes": 15
+    },
+    {
+      "partCode": "P4",
+      "label": "Part 4",
+      "status": "planned",
+      "canonicalNodes": 12
+    },
+    {
+      "partCode": "P5",
+      "label": "Part 5",
+      "status": "planned",
+      "canonicalNodes": 13
+    }
+  ],
+  "totals": {
+    "prefaceRegisteredNodes": 13,
+    "plannedNodesBeyondPreface": 65,
+    "bookICanonicalNodes": 78,
+    "maximumActiveArticles": 8,
+    "activeArticlesInWave1": 8,
+    "articleCandidatesMarkedRequiredNow": 13
+  },
+  "reusePurposes": [
+    "article_planning",
+    "zh_hans_and_english_content_positioning",
+    "books_atlas_figures_media_reuse",
+    "reality_journey_concept_connection",
+    "professional_service_boundary_explanation",
+    "future_ai_knowledge_retrieval"
+  ],
+  "frozenBoundaries": {
+    "newKnowledgeRegistryLayerAllowed": false,
+    "generateAll78ArticlesNow": false,
+    "generateAllEnglishVideoAudioNow": false,
+    "knowledgeHubBlocksPaidJourney": false,
+    "knowledgeHubBlocksProfessionalWorkspace": false,
+    "blueprintCreatesProductionRequirement": false
+  },
+  "handoff": {
+    "knowledgeHubPlanning": "frozen",
+    "returnTo": [
+      "PWS",
+      "PJA"
+    ]
+  },
+  "acceptanceCommand": "npm run check:kh-w3.5g",
+  "nextGate": "PWS-I2 Acceptance and Freeze"
+}

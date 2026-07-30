@@ -58,6 +58,22 @@ export const DEFAULT_PRODUCT_DEFINITIONS = Object.freeze([
       amount_minor: 500,
       currency: 'MYR'
     })
+  }),
+  Object.freeze({
+    product_code: 'phios-book-one-zh-pdf',
+    display_name: '《世界如何形成》第一册',
+    product_type_code: 'book',
+    method_code: 'knowledge_routing',
+    journey_type: null,
+    professional_review_included: false,
+    legacy_product_ids: Object.freeze(['phios-book-one']),
+    fulfilment_code: 'watermarked_pdf',
+    knowledge_asset_id: 'BOOK-I',
+    offer: Object.freeze({
+      code: 'phios-book-one-zh-pdf-myr',
+      amount_minor: 8900,
+      currency: 'MYR'
+    })
   })
 ]);
 
@@ -284,6 +300,9 @@ export function createProductOfferRegistry(options = {}) {
         'product_type_code'
       );
       const methodCode = canonicalCode(input.method_code, 'method_code');
+      const journeyType = input.journey_type == null
+        ? null
+        : canonicalCode(input.journey_type, 'journey_type');
       const productTypeId = `pws.product-type.${productTypeCode}`;
       const methodId = `pws.method.${methodCode}`;
       await requireObject(
@@ -303,6 +322,23 @@ export function createProductOfferRegistry(options = {}) {
           { field: 'professional_review_included' }
         );
       }
+      if (productTypeCode === 'reality_journey_pass' && journeyType === null) {
+        throw new RegistryValidationError(
+          'Reality Journey Pass requires a journey_type.',
+          { field: 'journey_type' }
+        );
+      }
+      if (productTypeCode !== 'reality_journey_pass' && journeyType !== null) {
+        throw new RegistryValidationError(
+          'Only a Reality Journey Pass may declare journey_type.',
+          { field: 'journey_type', product_type_code: productTypeCode }
+        );
+      }
+      const legacyProductIds = [
+        ...new Set((input.legacy_product_ids || []).map(value =>
+          commercialCode(value, 'legacy_product_id')
+        ))
+      ];
       const product = await ensureObject(objectInput({
         id: `pws.product.${productCode}`,
         code: productCode,
@@ -313,7 +349,14 @@ export function createProductOfferRegistry(options = {}) {
           product_code: productCode,
           display_name: requiredText(input.display_name, 'display_name'),
           product_type_code: productTypeCode,
-          journey_type: canonicalCode(input.journey_type, 'journey_type'),
+          journey_type: journeyType,
+          fulfilment_code: input.fulfilment_code == null
+            ? null
+            : canonicalCode(input.fulfilment_code, 'fulfilment_code'),
+          knowledge_asset_id: input.knowledge_asset_id == null
+            ? null
+            : requiredText(input.knowledge_asset_id, 'knowledge_asset_id'),
+          legacy_product_ids: legacyProductIds,
           professional_review_included: professionalReviewIncluded,
           price_held_by_offer: true,
           requires_order: true,

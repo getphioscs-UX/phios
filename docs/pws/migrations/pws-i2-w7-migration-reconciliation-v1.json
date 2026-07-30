@@ -1,0 +1,166 @@
+{
+  "migrationId": "PWS-I2-W7-Migration-and-Reconciliation-v1",
+  "version": "1.0.0",
+  "status": "reconciled",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7dc7235",
+    "productionDeployment": "https://58674bd8.phios-github.pages.dev",
+    "productionUrl": "https://phios-github.pages.dev"
+  },
+  "runtimeContract": "phi-os.pws.migration-reconciliation.v1",
+  "scopes": [
+    {
+      "scope": "ServiceProduct",
+      "legacyShape": "ServiceProduct / service_product_id",
+      "canonicalTarget": "Product + required Service reference",
+      "disposition": "mapped_read_compatibility",
+      "legacyWriteAllowed": false,
+      "legacyDeleted": false
+    },
+    {
+      "scope": "ServiceEntitlement",
+      "legacyShape": "ServiceEntitlement / service_entitlement_id",
+      "canonicalTarget": "Entitlement + required Service reference",
+      "disposition": "mapped_read_compatibility",
+      "legacyWriteAllowed": false,
+      "legacyDeleted": false
+    },
+    {
+      "scope": "Legacy Method",
+      "legacyShape": "service and modality method labels",
+      "canonicalTarget": "PWS Method Registry",
+      "disposition": "canonical_id_mapping",
+      "mappedDefinitions": 7,
+      "legacyWriteAllowed": false,
+      "legacyDeleted": false
+    },
+    {
+      "scope": "Legacy Capability",
+      "legacyShape": "professional eligibility capability labels",
+      "canonicalTarget": "PWS Capability Registry",
+      "disposition": "canonical_id_mapping",
+      "mappedDefinitions": 7,
+      "legacyWriteAllowed": false,
+      "legacyDeleted": false
+    },
+    {
+      "scope": "Legacy Report Type",
+      "legacyShape": "functions/professional/reports/professional-report-constants.js",
+      "canonicalTarget": "PWS Deliverable Type Registry",
+      "disposition": "many_to_canonical_type_mapping",
+      "legacyTypes": 14,
+      "canonicalTargets": 5,
+      "legacyWriteAllowed": false,
+      "legacyDeleted": false
+    },
+    {
+      "scope": "Static Product Configuration",
+      "legacyShape": "Book Product JSON and commerce module",
+      "canonicalTarget": "PWS Product and Offer Registry",
+      "disposition": "canonical_product_offer_with_operational_read_adapter",
+      "approvedProducts": 2,
+      "approvedOffers": 2,
+      "legacyWriteAllowed": false,
+      "legacyDeleted": false
+    },
+    {
+      "scope": "Legacy Price Configuration",
+      "legacyShape": "professional pricing profiles and static display configuration",
+      "canonicalTarget": "PWS Offer Registry",
+      "disposition": "approved_amounts_migrated_unapproved_amounts_deferred",
+      "approvedAmounts": [
+        {
+          "offerId": "reality-journey-pass-v1-myr",
+          "currency": "MYR",
+          "amountMinor": 500
+        },
+        {
+          "offerId": "phios-book-one-zh-pdf-myr",
+          "currency": "MYR",
+          "amountMinor": 8900
+        }
+      ],
+      "professionalAmountsPublished": false,
+      "professionalCheckoutEnabled": false,
+      "legacyWriteAllowed": false,
+      "legacyDeleted": false
+    },
+    {
+      "scope": "Legacy Knowledge Configuration",
+      "legacyShape": "content/knowledge/registry and Book I blueprint",
+      "canonicalTarget": "PKR-owned Knowledge Registry",
+      "disposition": "preserve_authority_reference_only",
+      "pwsRegistersOnly": [
+        "PublishedAssetType",
+        "DeliverableType"
+      ],
+      "canonicalNodesCopiedIntoPws": false,
+      "supportingQuestionsCopiedIntoPws": false,
+      "legacyDeleted": false
+    }
+  ],
+  "serviceReconciliation": {
+    "source": "content/registry/professional-service-catalog.json",
+    "sourceServices": 18,
+    "canonicalServices": 18,
+    "sourceBecomesWriteAuthority": false,
+    "methodsAndCapabilitiesRequired": true,
+    "activationCreatedByMigration": false,
+    "professionalResponsibilityCreatedByMigration": false
+  },
+  "sourceIntegrity": [
+    {
+      "path": "content/registry/professional-service-catalog.json",
+      "sha256": "9f6bc92cdd40d1af3aed8673f90fa9a1b85e6dcd7e050b80e00678a4853a8f6c"
+    },
+    {
+      "path": "content/registry/professional-deliverable-catalog.json",
+      "sha256": "e9bab57d3c8ece0d4e00244aab30d1a7455c1c0ab5eb55671aeefecc4492f80d"
+    },
+    {
+      "path": "content/registry/professional-pricing-policy.json",
+      "sha256": "c1e84e150115a5f8b1236f96d9bb4601c5c7763f941135806185be1dca75604c"
+    },
+    {
+      "path": "content/registry/pws-w1a-offer-catalog.json",
+      "sha256": "557bf3c6a067685ad280811fe6bfe1c61348a8e614c26f2420630bab54bb1981"
+    },
+    {
+      "path": "content/registry/pws-w1a-revenue-architecture.json",
+      "sha256": "e9373e2e61c79ef5a671e278df68ec1117fce869e3e9f93d3189c696d3be73a6"
+    },
+    {
+      "path": "content/registry/book-products.json",
+      "sha256": "1496128dfd818c44afd7335b6a081e3fbc0a04036b4a6574bc0320a342bd6f5c"
+    },
+    {
+      "path": "functions/professional/reports/professional-report-constants.js",
+      "sha256": "e2e1ac43c04625aed67fe1ac563dd4377d51dd3934da1a9cb7808b17dd98337f"
+    }
+  ],
+  "idempotency": {
+    "repeatedRunCreatesDuplicates": false,
+    "identityConflictFailsClosed": true,
+    "relationshipConflictFailsClosed": true,
+    "unmappedServiceFailsClosed": true,
+    "unmappedReportTypeFailsClosed": true,
+    "unapprovedPriceFailsClosed": true
+  },
+  "storage": {
+    "existingMigrationCount": 5,
+    "newD1MigrationAdded": false,
+    "reason": "PWS Universal Registry tables already exist in immutable migration 0005; W7 performs governed data reconciliation only."
+  },
+  "boundaries": {
+    "coreRuntimeChanged": false,
+    "pageBehaviourChanged": false,
+    "paymentActivatesJourney": false,
+    "paymentCreatesProfessionalAssignment": false,
+    "registryPresenceCreatesProductionRequirement": false,
+    "legacySourceDeleted": false
+  },
+  "acceptanceCommand": "npm run check:pws-i2-w7",
+  "nextGate": "PWS-I2 Acceptance and Freeze"
+}

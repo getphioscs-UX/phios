@@ -57,7 +57,10 @@ const knowledgeSchemas = await listFiles(
 const pwsContracts = await listFiles('docs/pws/contracts', '.json');
 assert.equal(knowledgeData.length, 12);
 assert.equal(knowledgeSchemas.length, 12);
-assert.equal(pwsContracts.length, 10);
+assert.equal(
+  pwsContracts.filter(file => file !== 'pws-i2-v1-freeze.json').length,
+  10
+);
 
 const runtimeContracts = await import(
   '../functions/runtime/registry/contract-registry.js'

@@ -57,15 +57,15 @@ await createMethodServiceRegistry({ universalRegistry }).seedDefaults(context);
 const registry = createProductOfferRegistry({ universalRegistry });
 assert.deepEqual(await registry.seedDefaults(context), {
   product_types: { created: 6, existing: 0, total: 6 },
-  products: { created: 1, existing: 0, total: 1 },
-  offers: { created: 1, existing: 0, total: 1 },
-  relationships: { created: 3, existing: 0, total: 3 }
+  products: { created: 2, existing: 0, total: 2 },
+  offers: { created: 2, existing: 0, total: 2 },
+  relationships: { created: 6, existing: 0, total: 6 }
 });
 assert.deepEqual(await registry.seedDefaults(context), {
   product_types: { created: 0, existing: 6, total: 6 },
-  products: { created: 0, existing: 1, total: 1 },
-  offers: { created: 0, existing: 1, total: 1 },
-  relationships: { created: 0, existing: 3, total: 3 }
+  products: { created: 0, existing: 2, total: 2 },
+  offers: { created: 0, existing: 2, total: 2 },
+  relationships: { created: 0, existing: 6, total: 6 }
 });
 
 const productTypes = await registry.listProductTypes();
@@ -81,7 +81,9 @@ assert(
   )
 );
 
-const [product] = await registry.listProducts();
+const product = (await registry.listProducts()).find(
+  item => item.object_code === 'reality-journey-pass-v1'
+);
 assert.equal(product.object_code, 'reality-journey-pass-v1');
 assert.equal(product.canonical_name, 'Reality Journey Pass');
 assert.equal(product.metadata.journey_type, 'personal_reality_journey');
@@ -93,7 +95,9 @@ assert.equal(product.metadata.creates_professional_entitlement, false);
 assert.equal(product.metadata.creates_professional_assignment, false);
 assert.equal(product.metadata.creates_professional_responsibility, false);
 
-const [offer] = await registry.listOffers();
+const offer = (await registry.listOffers()).find(
+  item => item.object_code === 'PWS-OFFER-REALITY-JOURNEY-PASS-V1-MYR'
+);
 assert.equal(offer.object_code, 'PWS-OFFER-REALITY-JOURNEY-PASS-V1-MYR');
 assert.equal(offer.metadata.amount_minor, 500);
 assert.equal(offer.metadata.currency, 'MYR');
@@ -101,6 +105,19 @@ assert.equal(offer.metadata.price_source, 'pws_product_offer_registry');
 assert.equal(offer.metadata.html_is_write_source, false);
 assert.equal(offer.metadata.creates_entitlement, false);
 assert.equal(offer.metadata.activates_journey, false);
+
+const bookProduct = (await registry.listProducts()).find(
+  item => item.object_code === 'phios-book-one-zh-pdf'
+);
+const bookOffer = (await registry.listOffers()).find(
+  item => item.object_code === 'PWS-OFFER-PHIOS-BOOK-ONE-ZH-PDF-MYR'
+);
+assert.equal(bookProduct.metadata.product_type_code, 'book');
+assert.equal(bookProduct.metadata.journey_type, null);
+assert.equal(bookProduct.metadata.knowledge_asset_id, 'BOOK-I');
+assert.deepEqual(bookProduct.metadata.legacy_product_ids, ['phios-book-one']);
+assert.equal(bookOffer.metadata.amount_minor, 8900);
+assert.equal(bookOffer.metadata.currency, 'MYR');
 
 const relationships = database.prepare(`
   SELECT relationship_type, attributes_json
@@ -173,7 +190,7 @@ for (const file of htmlFiles) {
 assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 5);
 database.close();
 console.log('✓ PWS-I2-W5 Product and Offer Registry passed.');
-console.log('  Six Product Types and the Reality Journey Pass v1 registered.');
-console.log('  RM5 is held canonically as 500 MYR minor units by its Offer, not HTML.');
+console.log('  Six Product Types, Reality Journey Pass v1 and Book I registered.');
+console.log('  RM5 and RM89 are held canonically as MYR minor-unit Offers.');
 console.log('  Payment and Product alone create no Journey or Professional entitlement.');
 console.log('  W1 Universal Registry and W4 Reality Journey Method reused; no Migration added.');

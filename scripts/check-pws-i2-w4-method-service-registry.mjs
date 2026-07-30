@@ -50,12 +50,12 @@ await createCapabilityCredentialRegistry({
 
 const registry = createMethodServiceRegistry({ universalRegistry });
 assert.deepEqual(await registry.seedDefaults(context), {
-  methods: { created: 5, existing: 0, total: 5 },
-  relationships: { created: 4, existing: 0, total: 4 }
+  methods: { created: 6, existing: 0, total: 6 },
+  relationships: { created: 5, existing: 0, total: 5 }
 });
 assert.deepEqual(await registry.seedDefaults(context), {
-  methods: { created: 0, existing: 5, total: 5 },
-  relationships: { created: 0, existing: 4, total: 4 }
+  methods: { created: 0, existing: 6, total: 6 },
+  relationships: { created: 0, existing: 5, total: 5 }
 });
 
 const methods = await registry.listMethods();
@@ -66,7 +66,7 @@ assert.deepEqual(
 const professionalMethods = methods.filter(
   item => item.metadata.execution_authority === 'professional'
 );
-assert.equal(professionalMethods.length, 3);
+assert.equal(professionalMethods.length, 4);
 assert(
   professionalMethods.every(item =>
     item.metadata.requires_active_professional === true &&
@@ -95,7 +95,7 @@ const methodCapabilities = database.prepare(`
   SELECT * FROM pws_registry_relationships
   WHERE relationship_type = 'method_requires_capability'
 `).all();
-assert.equal(methodCapabilities.length, 4);
+assert.equal(methodCapabilities.length, 5);
 
 const serviceResult = await registry.registerServiceDefinition({
   code: 'professional_runtime_reading',
@@ -154,7 +154,7 @@ await assert.rejects(
 assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 5);
 database.close();
 console.log('✓ PWS-I2-W4 Method and Service Registry passed.');
-console.log('  Five Method Definitions registered; professional methods require W3 Capability.');
+console.log('  Six Method Definitions registered; professional methods require W3 Capability.');
 console.log('  System methods preserve routing, Runtime, payment and responsibility boundaries.');
 console.log('  Service API requires Method, capability and contract mappings; legacy catalog is read-only.');
 console.log('  W1 Universal Registry and W3 Capability Registry reused; no Migration added.');

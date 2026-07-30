@@ -41,6 +41,20 @@ export const DEFAULT_METHOD_DEFINITIONS = Object.freeze([
     ])
   }),
   Object.freeze({
+    code: 'human_design_foundation',
+    name: 'Human Design Foundation Method',
+    domain: 'human_design',
+    execution_authority: 'professional',
+    definition:
+      'Explain Human Design foundation material within its declared interpretive and source boundary.',
+    capability_codes: Object.freeze(['human_design_foundation']),
+    boundaries: Object.freeze([
+      'source_and_method_labels_required',
+      'interpretation_is_not_verified_reality_fact',
+      'assignment_and_separate_consent_required'
+    ])
+  }),
+  Object.freeze({
     code: 'financial_reality_review',
     name: 'Financial Reality Review Method',
     domain: 'financial',
