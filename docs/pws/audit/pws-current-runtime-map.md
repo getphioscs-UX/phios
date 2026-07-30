@@ -1,6 +1,6 @@
 # PWS Current Runtime Map
 
-Baseline: `main@7546538b3418c715392eca38dc2738e2a9512679`
+Baseline: `main@af22a12be4f466dfe4649c1432fa9e4234608a43`
 
 ## 1. Active Core Runtime
 
@@ -31,6 +31,9 @@ The seven-stage sequence is frozen in
 | Persistence | memory, local and D1 drivers with router/recovery | active/driver-dependent |
 | Security/privacy | access boundary, classification, privacy logger/service | active for Runtime |
 | Provider routing | Rule Engine, Workers AI and OpenAI routes for Entry/Reading | active/configuration-dependent |
+| Provider policy | closed priority, call-boundary and fallback registry | active |
+| Provider usage | per-call usage payload in provider results | partial; no ledger or persistence |
+| Provider budget | not found | missing |
 | API | reconstruct, read, navigate and infrastructure health endpoints | active |
 | PWS authorised loader | not found | missing |
 | PWS persistence | explicitly disabled | inactive |
@@ -50,6 +53,12 @@ This flow is implemented through `functions/commerce/`,
 `functions/api/book-one-*.js`, `functions/api/stripe-webhook.js` and the ten
 tables in `db/migrations/0004_book_commerce.sql`. It is a Book One knowledge
 commerce runtime, not a generic PWS Order/Payment runtime.
+
+`commerce_receipts` is a canonical Book One Receipt store.
+`functions/api/book-one-payment-status.js` exposes payment/fulfillment state,
+and `functions/api/book-one-receipt.js` exposes a receipt only after verified
+book access. Neither is a generic Professional Service Order/Payment/Receipt
+runtime.
 
 ## 4. Current Professional path
 
@@ -105,7 +114,7 @@ signature.
 
 ## 6. State ownership risks
 
-| Risk | Evidence | Required treatment in STEP 0.2 |
+| Risk | Evidence | Required treatment in PWS-ENTRY-W1 |
 | --- | --- | --- |
 | Migration registry terminology | executable registry JSON has versions 1–4; JS registry contains version-0 schema declarations | preserve both; rename/define roles before any count change |
 | Service vs Offer | separate catalogs with overlapping entries | choose canonical identities and references |
@@ -115,4 +124,5 @@ signature.
 | Generic Report vs Journey/Specialist reports | report contract contains multiple types | define report identities and composition before release |
 | Runtime Capability vs Professional Capability | same word, different meaning | namespace and owner separation |
 | Entry/Reading Provider contracts | intentional stage-specific pair | share usage ledger, not output authority |
-
+| Provider result usage / Provider Usage ledger | adapters return token counts, but no durable usage object exists | preserve result metadata; add accounting only under a future authorized contract |
+| Adapter token caps / Provider Budget | per-call output limits are technical safeguards, not commercial budgets | do not treat constants as an entitlement or budget |

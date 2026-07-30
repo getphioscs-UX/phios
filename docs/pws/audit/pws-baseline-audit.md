@@ -1,153 +1,154 @@
 # PWS-ENTRY-W0 Runtime Baseline Audit
 
-Audit date: 2026-07-30  
-Code baseline: `getphioscs-UX/phios main@7546538b3418c715392eca38dc2738e2a9512679`  
-Source package: `PHIOS(12).zip`  
-Mode: read-only inventory; documentation additions only
+Audit date: 2026-07-30
+
+Repository: `getphioscs-UX/phios`
+
+Branch: `main`
+
+Unique baseline: `af22a12be4f466dfe4649c1432fa9e4234608a43`
+
+Production deployment: `https://62ddca6b.phios-github.pages.dev`
+
+Production URL: `https://phios-github.pages.dev`
+
+Mode: read-only audit; five audit documents only
 
 ## 1. Result
 
-**Conditional Failed — inventory complete, but STEP 0.2 is not yet allowed.**
+**Failed.**
 
-All requested objects and pages have been classified. Suspected duplicates and
-semantic overlaps are recorded in `pws-current-object-map.md` and
-`pws-gap-matrix.md`. The sole completion blocker is the pre-existing tracked
-root file `PDS-W10-DELETE-MANIFEST.txt`, which the repository's own PWS-W0 check
-requires to be absent. Removing it is outside this read-only audit.
+The requested Runtime, PWS, PJA, Commercial, Knowledge, Provider and
+Professional inventory is complete. The mandatory `npm run check` condition
+cannot pass because the baseline contains tracked
+`PDS-W10-DELETE-MANIFEST.txt`, while
+`scripts/check-pws-w0-baseline-responsibility-boundary.mjs` requires that file
+to be absent. The failure was reproduced before editing these documents.
+Deleting it is outside this Ticket's authorization.
 
-The baseline contains a mature Core Runtime, active public Reality Journey,
-active Book One commerce, and extensive Professional contracts/read-only
-projections. It does **not** yet contain an authoritative PWS identity,
-capability/credential/certification, assignment, authorised data-loader,
-professional-service order, professional entitlement, Provider usage/cost, or
-operational Professional Workspace persistence.
+PWS-ENTRY-W1 is therefore **not allowed**.
 
-## 2. Audit boundary
+## 2. Audit method
 
-The audit treated an object as implemented only when code or a canonical
-registry defines its identity and lifecycle. A page label, locale key, roadmap
-statement, test fixture, or generic word match was not treated as a formal
-object.
+An object is counted only when code or a canonical registry defines at least
+part of its identity or lifecycle. Page copy, locale keys, roadmap text and
+generic word matches are not treated as formal objects.
 
-Classification:
-
-- `exists`: canonical object/contract and usable operation are present.
-- `partial`: some contract, registry, view, operation, state or persistence
-  exists, but the authoritative lifecycle is incomplete.
+- `exists`: canonical identity/contract and usable operation exist.
+- `partial`: only some schema, state, operation, event, permission, API or
+  persistence exists.
 - `missing`: no formal object implementation was found.
-- `legacy`: an older or substitute implementation exists but is not the target
-  canonical object.
-- `productionActive`: `yes`, `no`, or `conditional`; `conditional` means the
-  route exists but depends on bindings/configuration or is explicitly
-  non-authoritative.
+- `legacy`: an older or substitute implementation is present.
+- `productionActive`: `yes`, `no`, or `conditional`. Conditional means a
+  deployed route exists but bindings/readiness or authority are incomplete.
 
-## 3. Frozen ownership observed
+Detailed field-by-field evidence is in `pws-current-object-map.md`; current
+Runtime topology is in `pws-current-runtime-map.md`; gaps and duplicates are in
+`pws-gap-matrix.md`; pages are in `pws-pja-current-coverage.md`.
+
+## 3. Baseline findings
+
+1. Core Runtime has seven frozen stages: Entry, Reconstruction, Reading,
+   Navigation, Review, Memory and Continuity. Registry, events, lineage,
+   revision, recovery, security and persistence are implemented around them.
+2. Book One commerce is the only end-to-end commercial implementation:
+   Product, checkout attempt, Stripe payment, Purchase, Receipt, Entitlement,
+   delivery and download persistence.
+3. `Receipt` is canonical for Book One commerce. `Payment Status` is a deployed
+   page/API state, not a generic PWS lifecycle.
+4. Professional Service, Offer, Price, Workspace, reports, consent,
+   appointments, financial modules and external-reader modules have extensive
+   registries/contracts, but operational PWS identity, assignment, authorised
+   loader, actions and persistence remain disabled or absent.
+5. Professional, Capability, Method, Service, Price, Consent, Workspace,
+   Specialist Report, Deliverable, Signature, Follow-up, Policy, Restriction,
+   Governance, Permission and Audit are partial.
+6. Credential, Certification, Assignment, Journey Report, Professional
+   Response, Complaint, Incident, Organization and Provider Budget are missing.
+7. Provider Policy exists through `content/registry/provider-closure.json` and
+   the Entry/Reading routers. Provider Usage is returned by provider adapters,
+   but no authoritative ledger, event stream, cost attribution or persistence
+   exists.
+8. Knowledge is active through Books, Thesis, Figures, Glossary, Library,
+   Explore and Academy, but no single Knowledge Resource lifecycle exists.
+   Articles and Videos have no dedicated production page/catalog.
+9. Review Queue is an embedded deterministic read-only projection. Deliverable
+   View is a report projection/print surface without authoritative signature
+   and release persistence.
+
+## 4. Current ownership
 
 | Owner | Existing responsibility |
 | --- | --- |
-| Core Runtime | Journey identity, Entry, Reconstruction, Reading, Navigation, Review, Memory, Continuity, Evidence, events, revisions, lineage and persistence |
-| PWS | Professional contracts, consent boundaries, workspace/read-only projections, external-reader contracts, financial contracts, report contracts and professional service catalogs |
-| PJA/Public | Public pages, Knowledge surfaces, Reality Journey UI, Book One checkout UI, account previews and cross-system presentation |
-| Commerce | Book product registry, Stripe checkout/webhook, purchase, receipt, digital entitlement and delivery |
+| Core Runtime | Journey identity; Entry through Continuity; Evidence; Candidate; events; revision; lineage; recovery; persistence |
+| Commerce | Book Product, checkout, Payment, Purchase, Receipt, Entitlement, delivery and download |
+| PWS | Professional registries/contracts, consent boundaries, workspace projections, specialist/financial modules, report projections |
+| PJA/Public | Public and Knowledge pages, Reality Journey UI, Book checkout/status UI, Account and Workspace projections |
+| Provider layer | Rule Engine, Workers AI, OpenAI and professional-review fallback policy for Entry/Reading |
 
-The current code already freezes these rules:
+## 5. Must-preserve implementations
 
-- A purchase or entitlement does not create professional responsibility.
-- Professional access requires authentication, assignment, active explicit
-  consent, resource scope, purpose and consent version.
-- Runtime View is read-only.
-- Professional notes, observations, external-reader interpretations and
-  candidate revisions do not automatically become formal Runtime Evidence or
-  overwrite a Reading.
-- Workspace authentication, real payload loading and workspace/note
-  persistence remain disabled.
+- The seven-stage Runtime sequence and shared Journey identity.
+- Runtime Evidence class/permission and non-promotion boundaries.
+- Append-only Runtime events, revisions and lineage.
+- Rule-first Provider order and failure fallback.
+- The prohibition on Provider persistence and Provider-created formal truth.
+- Book commerce Product/Purchase/Receipt/Entitlement tables and idempotent
+  webhook/fulfillment flow.
+- Separation of customer originals, formal Runtime records, professional
+  working notes, candidate revisions and signed outputs.
+- PWS consent, assignment-required, resource-scope and purpose boundaries.
+- Read-only Professional Runtime View and disabled automatic signing.
+- External-reader interpretation and Professional Observation separation from
+  Runtime Evidence.
+- Existing legacy/facade paths until a separately authorized migration exists.
 
-## 4. Baseline evidence
+## 6. Production observation
 
-| Area | Canonical evidence |
-| --- | --- |
-| Runtime stages | `content/registry/runtime-modules.json`, `functions/runtime/` |
-| Runtime registry | `functions/runtime/registry/`, `content/registry/runtime-*.json` |
-| Runtime persistence | `functions/runtime/persistence/`, `db/migrations/0002_initial_runtime.sql` |
-| Professional boundary | `content/registry/pws-w0-baseline-responsibility-boundary.json` |
-| Revenue/offer preparation | `content/registry/pws-w1a-*.json` |
-| Professional workspace | `functions/professional/workspace/`, `professional-workspace.html` |
-| Professional consent | `functions/professional/consent/` |
-| Professional reports | `functions/professional/reports/`, `professional-reports.html` |
-| Financial specialist layer | `functions/professional/financial/`, `db/migrations/0003_financial_professional_infrastructure.sql` |
-| Book commerce | `functions/commerce/`, `functions/api/book-one-*.js`, `functions/api/stripe-webhook.js`, `db/migrations/0004_book_commerce.sql` |
-| Public Journey | `reality-*.html`, `assets/js/modules/*customer-projection.js` |
+On 2026-07-30, the supplied deployment returned HTTP `200` for `/`.
+`/api/health` returned:
 
-## 5. Migration and registry finding
+```json
+{"success":true,"service":"PHI OS Platform v2","status":"healthy"}
+```
 
-`content/registry/runtime-migrations.json` registers versions 1–4, including
-the already-existing immutable `db/migrations/0004_book_commerce.sql`. No new
-migration is required or permitted in STEP 0.1. The separate
-`functions/runtime/registry/migration-registry.js` contains schema baseline
-declarations at version `0`; this is an intentional registry-layer distinction,
-but the shared term “migration registry” remains a naming risk and is recorded
-for STEP 0.2 governance clarification.
+This proves deployment availability only. Feature-level `productionActive`
+values also respect code readiness, bindings and authority boundaries.
 
-No Migration, SQL, migration count or Runtime Registry implementation was
-changed by this audit.
+## 7. Frozen counts and prohibited-change verification
 
-## 6. Principal findings
+| Frozen surface | Before | After |
+| --- | ---: | ---: |
+| SQL migrations | 4 | 4 |
+| Executable migration entries | 4 | 4 |
+| Runtime contract entries | 20 | 20 |
+| Runtime module entries | 19 | 19 |
+| Content registry index entries | 48 | 48 |
 
-1. Book commerce is the only end-to-end commercial implementation with Product,
-   checkout/payment processing, purchase, receipt, entitlement and delivery
-   persistence.
-2. Professional services, offers and pricing mostly exist as registries and
-   contracts. Published amounts and professional checkout are disabled.
-3. Professional Workspace has detailed contracts and UI projections, but the
-   repository explicitly states that authentication, authorised payload
-   loading, real client data, actions and persistence are pending.
-4. Assignment is a required gate in policy but has no canonical Assignment
-   schema, state machine, operation, event or persistence model.
-5. Capability exists in the Runtime formation model, while Professional
-   Capability is not a canonical PWS object. Credential and Certification are
-   absent.
-6. Journey Report and Professional Response are absent as formal objects.
-   Generic professional report contracts do not safely substitute for either.
-7. Provider routing is active for Entry and Reading, but Provider Usage and
-   Provider Cost are absent.
-8. Complaint, Incident and Organization are absent. Governance, Policy,
-   Restriction, Permission and Audit are present only as distributed rules or
-   partial contracts.
-9. Knowledge is implemented as several public registries/pages; Articles and
-   Videos do not have dedicated production pages.
-10. Review Queue and Deliverable View are embedded/read-only projections, not
-    operational standalone resources.
+No business code, Contract, Migration, Registry, page, Legacy or page behavior
+was changed. Only the five required files under `docs/pws/audit/` differ.
 
-## 7. Verification
+## 8. Check result
 
-The required verification command is:
+Command:
 
 ```text
 npm run check
 ```
 
-Final execution result: **FAILED at the pre-existing PWS-W0 boundary check**:
+All checks before the following baseline assertion passed:
 
 ```text
 AssertionError: Misplaced W9 artifact remains:
 PDS-W10-DELETE-MANIFEST.txt
 ```
 
-All checks executed before that assertion passed. The same failure occurs on a
-clean clone of the embedded `main@7546538` with only these five audit documents
-added, proving that it is part of the tracked baseline rather than an extraction
-artifact or audit change.
+Because the Ticket forbids deleting existing/Legacy material and requires a
+green full check, the correct final status is `Failed`, not
+`Conditional Passed`.
 
-No business code, Migration, Registry count, page or Legacy implementation was
-modified. The audit also did not delete the offending file because deletion is
-outside STEP 0.1.
+## 9. Entry decision
 
-## 8. STEP 0.2 entry decision
-
-STEP 0.2 is **not yet allowed** because the required `npm run check` completion
-condition is not met. A separate minimal baseline-cleanup ticket must first
-remove the misplaced tracked `PDS-W10-DELETE-MANIFEST.txt` and rerun
-`npm run check`. After that independent closure, STEP 0.2 should begin with
-Professional Identity, Capability/Credential/Certification, Assignment,
-Service Entitlement, authorised Workspace access and the boundary between
-Journey Report, Professional Response, Specialist Report and Deliverable.
+PWS-ENTRY-W1 is not allowed. A separate authorized baseline-cleanup Ticket must
+remove the misplaced tracked manifest and obtain a complete green
+`npm run check`. That cleanup must remain independent from PWS-ENTRY-W1.

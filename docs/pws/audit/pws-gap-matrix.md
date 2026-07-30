@@ -1,12 +1,12 @@
 # PWS Gap Matrix
 
-Baseline: `main@7546538b3418c715392eca38dc2738e2a9512679`
+Baseline: `main@af22a12be4f466dfe4649c1432fa9e4234608a43`
 
 ## 1. Critical canonical gaps
 
-| Priority | Gap | Current evidence | Consequence | STEP 0.2 requirement |
+| Priority | Gap | Current evidence | Consequence | PWS-ENTRY-W1 requirement |
 | ---: | --- | --- | --- | --- |
-| Blocker | Baseline check inconsistency | tracked `PDS-W10-DELETE-MANIFEST.txt` is forbidden by `check-pws-w0-baseline-responsibility-boundary.mjs` | `npm run check` cannot pass under STEP 0.1 read-only rules | close in a separate cleanup ticket before STEP 0.2 |
+| Blocker | Baseline check inconsistency | tracked `PDS-W10-DELETE-MANIFEST.txt` is forbidden by `check-pws-w0-baseline-responsibility-boundary.mjs` | `npm run check` cannot pass under PWS-ENTRY-W0 read-only rules | close in a separate cleanup Ticket before PWS-ENTRY-W1 |
 | P0 | Professional identity | role/authority fragments only | access and signature cannot bind to one accountable person | define canonical Professional and identifiers |
 | P0 | Capability/Credential/Certification | no PWS lifecycle; Runtime capability is unrelated | eligibility cannot be evaluated | define separate objects, issuer/evidence/status/expiry |
 | P0 | Assignment | required by PWS-W0 but absent | purchase cannot safely activate responsibility or Workspace access | define assignment lifecycle, events and persistence |
@@ -25,6 +25,7 @@ Baseline: `main@7546538b3418c715392eca38dc2738e2a9512679`
 | Professional Price | partial | fields frozen, amounts pending | checkout cannot quote a valid service |
 | Order | legacy/partial | checkout attempts and purchases | no generic order identity or service scope |
 | Professional Payment | partial | payment-record contract, gateway disabled | payment record may be mistaken for verified settlement |
+| Generic Receipt | missing outside Book One | canonical Book One `commerce_receipts` | book receipt may be incorrectly generalized to Journey/Professional services |
 | Professional Entitlement | missing | M4C preview entitlement labels | client-side state could be mistaken as authoritative |
 | Refund/dispute linkage | partial | status constants only | no lifecycle across order, payment and entitlement |
 
@@ -44,8 +45,8 @@ Baseline: `main@7546538b3418c715392eca38dc2738e2a9512679`
 
 | Gap | Current state | Required boundary |
 | --- | --- | --- |
-| Provider Usage | missing | append-only call identity, provider/model, operation, tokens/units, outcome and Journey/service reference |
-| Provider Cost | missing | priced usage, currency, pricing version, budget owner and cost attribution |
+| Provider Policy | exists for Core Runtime; PWS paid-use scope missing | preserve rule-first priority, call boundaries, fallback and non-persistence |
+| Provider Usage | partial per-call payload only | append-only call identity, provider/model, operation, tokens/units, outcome and Journey/service reference |
 | Provider Budget | missing | hard/soft limits and authorization; must not change Runtime truth |
 | Professional paid-use policy | registry statement only | entitlement/assignment may authorize use; Provider must never create formal Reading directly |
 
@@ -80,10 +81,11 @@ These are suspected overlaps, not deletion candidates:
 | Review Queue | embedded projection only |
 | Deliverable View | report page/print projection only; no signed release resource |
 
-## 7. STEP 0.2 sequencing recommendation
+## 7. PWS-ENTRY-W1 sequencing recommendation
 
 0. In a separate authorized cleanup ticket, remove the misplaced tracked
-   `PDS-W10-DELETE-MANIFEST.txt` and obtain a full green `npm run check`.
+   `PDS-W10-DELETE-MANIFEST.txt` and obtain a full green `npm run check`;
+   until then, PWS-ENTRY-W1 is not allowed.
 1. Freeze canonical identifiers and ownership for Professional, Capability,
    Credential, Certification, Service, Product, Offer, Price, Order, Payment,
    Entitlement and Assignment.
@@ -92,7 +94,8 @@ These are suspected overlaps, not deletion candidates:
 3. Define authorised Workspace resource loading and Permission evaluation.
 4. Define Record/Candidate/Journey Report/Professional Response/Specialist
    Report/Deliverable/Signature composition.
-5. Define Provider Usage/Cost and audit events.
+5. Define Provider Usage/Budget and audit events without changing Provider
+   output authority.
 6. Define Complaint, Incident, Restriction, Organization and Governance
    lifecycles.
 7. Only after these contracts are frozen should PJA Checkout, Account, Client

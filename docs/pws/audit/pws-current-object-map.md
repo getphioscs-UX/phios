@@ -1,6 +1,6 @@
 # PWS Current Object Map
 
-Baseline: `main@7546538b3418c715392eca38dc2738e2a9512679`
+Baseline: `main@af22a12be4f466dfe4649c1432fa9e4234608a43`
 
 `—` means no implementation was located. `productionActive=conditional` means
 the code path exists but is configuration-dependent or explicitly
@@ -21,6 +21,7 @@ non-authoritative.
 | Price |  | yes |  |  | conditional | Commerce / PWS | Book price is active; professional amounts are pending |
 | Order |  | yes |  | yes | conditional | Commerce / PWS pending | `commerce_purchases` and checkout attempts substitute for a canonical Order |
 | Payment |  | yes |  |  | conditional | Commerce / PWS | Book Stripe flow active when configured; professional payment is contract-only |
+| Receipt | yes |  |  |  | conditional | Commerce | Canonical for Book One only; it is not a generic PWS receipt |
 | Entitlement | yes |  |  |  | yes | Commerce | M4C client entitlement preview is non-authoritative |
 | Consent |  | yes |  |  | conditional | Core Runtime / PWS | Journey consent, professional consent and external-reader consent are scoped variants |
 | Journey | yes |  |  |  | yes | Core Runtime | `journeys.json`, runtime records and browser Journey state must remain projections of one identity |
@@ -46,8 +47,9 @@ non-authoritative.
 | Observation |  | yes |  |  | conditional | Core Runtime / PWS | customer observation, professional observation and symbolic observation are intentionally distinct |
 | Professional Readiness |  | yes |  |  | no | PWS | pre-appointment checks and navigation readiness do not form one object |
 | Provider | yes |  |  |  | yes | Core Runtime | Entry/Reading provider contracts duplicate shape intentionally by stage |
-| Provider Usage |  |  | yes |  | no | PWS pending | no metering object/event/persistence found |
-| Provider Cost |  |  | yes |  | no | PWS pending | no budget/cost object found |
+| Provider Policy | yes |  |  |  | yes | Core Runtime | closed registry plus stage routers; no separate PWS paid-use policy |
+| Provider Usage |  | yes |  |  | conditional | Core Runtime / PWS pending | token usage is returned in provider results but has no ledger/event/persistence |
+| Provider Budget |  |  | yes |  | no | PWS pending | per-call token limits are not a budget object |
 | Registry | yes |  |  |  | yes | Core Runtime / Platform | multiple domain registries are expected; migration naming is ambiguous |
 | Permission |  | yes |  |  | conditional | Core Runtime / PWS | evidence permissions and access boundaries exist without one permission grant object |
 | State Machine |  | yes |  |  | yes | Core Runtime / PWS | Runtime transition engine is active; PWS uses local status arrays |
@@ -73,6 +75,7 @@ Each row records all required location fields. Multiple paths are separated by
 | Price | `content/registry/professional-pricing-policy.json`; book product registry | locale/page amounts | pricing policy/book product schema | active dates / product active | checkout amount validation | checkout/webhook events | pricing rules | book checkout/product API | commerce tables | M3B/M4A checks |
 | Order | PWS pending | `commerce_checkout_attempts`; `commerce_purchases` | `db/migrations/0004_book_commerce.sql` | checkout/purchase states | book commerce store/fulfillment | webhook events | commerce readiness | checkout/status/webhook APIs | D1 commerce tables | M3B payment check |
 | Payment | commerce book flow; professional payment contract | appointment UI confirmation | commerce schema; payment record contract | payment/refund status arrays | Stripe client/webhook; payment record creator | webhook event | checkout readiness | Stripe webhook/book status | commerce purchases/webhook events | M3B/M4B payment checks |
+| Receipt | `commerce_receipts` / `functions/commerce/book-commerce-store.js` | receipt display in payment success and reader pages | `db/migrations/0004_book_commerce.sql`; `content/registry/book-commerce-schema.json` | issued receipt / delivery state | fulfillment and `sendReceiptAndDelivery` | commerce webhook/delivery event | verified book access session | `functions/api/book-one-receipt.js`; payment status/access APIs | D1 `commerce_receipts` | `scripts/check-m3b-book-access-payment.mjs` |
 | Entitlement | `digital_entitlements` / book commerce store | M4C account preview | commerce schema | entitlement status | fulfillment/access APIs | download/access events | book access checks | book access/download APIs | D1 digital_entitlements | M3B/M4C checks |
 | Consent | `functions/professional/consent/` plus Runtime journey consent | page/session consent | consent contracts | grant/revoke/expire status | contract creators/evaluators | access event contracts | PWS-W0 boundary | no authoritative PWS API | no PWS consent table | M4A/M4B/PWS checks |
 | Journey | `functions/runtime/` | `content/registry/journeys.json`; browser session shapes | runtime schemas/contracts | runtime and stage states | seven stage operations | runtime timeline | runtime access boundary | reconstruct/read/navigate APIs | runtimes/events/snapshots | Runtime and M3C checks |
@@ -98,12 +101,12 @@ Each row records all required location fields. Multiple paths are separated by
 | Observation | Core Runtime evidence; PWS source contract | UI observation copy | evidence/source contracts | confirmed/unverified status | classification/review | follow-up/runtime events | no automatic evidence promotion | Runtime APIs | Runtime active/PWS disabled | evidence and PWS checks |
 | Professional Readiness | PWS pending | navigation readiness; pre-appointment checks | appointment constants/domain contract | check results | pre-appointment projection | appointment events | authority/consent gates | — | — | M4B appointment checks |
 | Provider | Entry/Reading provider contracts and routers | `functions/_lib/openai.js` older shared helper | provider contracts/shared interface | provider result/fallback state | routers and provider adapters | failure/audit outputs | provider/evidence boundary | reconstruct/read APIs | no usage ledger | provider closure checks |
-| Provider Usage | — | provider metadata on outputs | — | — | — | — | — | — | — | — |
-| Provider Cost | — | — | — | — | — | — | — | — | — | — |
+| Provider Policy | `content/registry/provider-closure.json` | stage-specific router comments/options | provider result interface and closure registry | priority/fallback/failure state | Entry/Reading routers | provider failures/warnings | API-only/router-only/provider non-persistence rules | reconstruct/read APIs | — | `scripts/check-provider-closure.mjs`; provider-failure fixtures |
+| Provider Usage | provider-result `usage` field | provider metadata on Reading/Entry outputs | `functions/runtime/shared/provider-interface.js` | per-call usage payload only | OpenAI/Workers AI adapters and routers | warnings/failure result only | provider call boundary | reconstruct/read APIs | — | provider closure/full-journey checks |
+| Provider Budget | — | adapter `max_tokens`/`max_output_tokens` constants | — | — | — | — | — | — | — | quota-exceeded fixture only |
 | Registry | `functions/runtime/registry/`; `content/registry/` | dual migration-registry terminology | registry schemas/contracts | version/freeze status | lookup/validation | migration history | registry validation | infrastructure health | JSON + D1 migration history | registry/migration checks |
 | Permission | evidence permission and PWS access boundary | browser visibility flags | reading evidence permissions/security contracts | allowed/blocked/revoked | access/evidence evaluators | access/privacy events | canonical rules are distributed | Runtime APIs | privacy logs | security/consent checks |
 | State Machine | Runtime transition engine | page-local states and PWS status arrays | transition/contracts | runtime/task/commerce statuses | transition managers/task transition | Runtime event bus/timeline | gates in contracts | Runtime APIs | Runtime persistence | navigation/runtime/PWS checks |
 | Event | `functions/runtime/timeline/` | browser event bus | timeline/event contracts | append/version state | append/read/project services | canonical runtime event types | access boundary | Runtime APIs | runtime_events | timeline/infrastructure checks |
 | Audit | evidence audit/privacy logger/migration history | milestone check output | audit fragments | pass/fail/log state | builders/loggers | runtime/privacy events | security governance | infrastructure health | runtime events/migration history | audit/security/migration checks |
 | Persistence | `functions/runtime/persistence/` | browser local/session storage and legacy platform tables | persistence contract/D1 schema | driver/recovery state | routers/drivers | runtime events | access/security boundary | Runtime infrastructure API | D1 + local/memory drivers | persistence/D1/recovery checks |
-
