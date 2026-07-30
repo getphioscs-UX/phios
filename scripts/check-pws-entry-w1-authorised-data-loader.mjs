@@ -6,6 +6,7 @@ import path from 'node:path';
 import './check-pws-entry-w0-payment-boundary.mjs';
 import './check-pws-entry-public-w1-navigation-boundary.mjs';
 import './check-pws-entry-paid-w2-journey-activation-boundary.mjs';
+import './check-pws-entry-professional-w3-handoff-boundary.mjs';
 import {
   createProfessionalConsent
 } from '../functions/professional/consent/professional-consent-contract.js';
