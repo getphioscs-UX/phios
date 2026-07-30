@@ -1,0 +1,505 @@
+{
+  "freezeId": "PJA-W0-v1.0.0-Frozen",
+  "programme": "PJA Public Architecture",
+  "step": "PJA-W0",
+  "version": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "fbd136e6d53de37bad2fd53fcc8c6c1753b3830b"
+  },
+  "role": {
+    "definition": "PJA composes customer-facing projections from canonical PWS, PKR and Core Runtime decisions.",
+    "allowedCapabilities": [
+      "read",
+      "render",
+      "route",
+      "link"
+    ],
+    "pjaWriteSources": [],
+    "mayCreateCanonicalObjects": false,
+    "mayPromoteProjectionToCanonicalState": false
+  },
+  "dependencies": [
+    {
+      "objectSet": [
+        "Knowledge Resource"
+      ],
+      "owner": "PWS-I2 + KH-W3.5G Book I Blueprint",
+      "contentAuthority": "PKR",
+      "contractState": "frozen_available",
+      "currentSources": [
+        "functions/pws/registry/knowledge-deliverable-type-registry.js",
+        "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
+        "content/knowledge/registry/nodes.json"
+      ],
+      "pjaAccess": [
+        "read",
+        "render",
+        "link"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "Registry presence does not require publication; Book I remains capped at 8 Active Articles."
+    },
+    {
+      "objectSet": [
+        "Question Route"
+      ],
+      "owner": "PWS-I9",
+      "contentAuthority": "PWS-I9 Rule Engine",
+      "contractState": "planned_dependency",
+      "currentSources": [
+        "functions/runtime/entry/rule-entry.js",
+        "functions/runtime/entry/provider-router.js",
+        "docs/pws/architecture/pws-canonical-ownership-v1.json"
+      ],
+      "pjaAccess": [
+        "read",
+        "route",
+        "render"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "Until PWS-I9 is accepted, PJA preserves existing Core Runtime routing and may not persist a canonical Question Route."
+    },
+    {
+      "objectSet": [
+        "Product",
+        "Offer",
+        "Price"
+      ],
+      "owner": "PWS-I2 / PWS-I4",
+      "contentAuthority": "PWS-I2 registration; PWS-I4 commercial activation",
+      "contractState": "registry_frozen_activation_planned",
+      "currentSources": [
+        "functions/pws/registry/product-offer-registry.js",
+        "docs/pws/contracts/pws-i2-v1-freeze.json",
+        "functions/commerce/book-product-registry.js"
+      ],
+      "pjaAccess": [
+        "read",
+        "render",
+        "link"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "Only an active PWS-I4 Offer and Price may appear as purchasable; existing Book One commerce remains scope-qualified."
+    },
+    {
+      "objectSet": [
+        "Payment",
+        "Entitlement"
+      ],
+      "owner": "PWS-I4",
+      "contentAuthority": "PWS-I4 Commercial and Entitlement Runtime",
+      "contractState": "planned_dependency_with_book_one_adapter",
+      "currentSources": [
+        "functions/commerce/book-commerce-store.js",
+        "functions/api/book-one-payment-status.js",
+        "functions/api/book-one-access.js"
+      ],
+      "pjaAccess": [
+        "read",
+        "render",
+        "route"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "A redirect, page state or client claim never confirms Payment or creates Entitlement; Book One facts remain Book One only."
+    },
+    {
+      "objectSet": [
+        "Consent"
+      ],
+      "owner": "PWS-I8",
+      "contentAuthority": "PWS-I8 Consent and Privacy",
+      "contractState": "planned_dependency_with_preserved_contracts",
+      "currentSources": [
+        "functions/professional/consent/professional-consent-contract.js",
+        "functions/professional/consent/external-reader-consent-contract.js",
+        "functions/runtime/security"
+      ],
+      "pjaAccess": [
+        "read",
+        "render",
+        "route"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "PJA may present a consent request, but validity, scope, purpose, revocation and persistence remain PWS-I8 decisions."
+    },
+    {
+      "objectSet": [
+        "Journey"
+      ],
+      "owner": "Core Runtime",
+      "contentAuthority": "Frozen Core Runtime",
+      "contractState": "frozen_available",
+      "currentSources": [
+        "assets/js/runtime/index.js",
+        "functions/runtime",
+        "content/registry/runtime-freeze-closure.json"
+      ],
+      "pjaAccess": [
+        "read",
+        "render",
+        "route",
+        "link"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "Every Journey mutation must pass through the frozen Runtime contract; PJA stage labels are projections only."
+    },
+    {
+      "objectSet": [
+        "Provider"
+      ],
+      "owner": "PWS-I9",
+      "contentAuthority": "PWS-I9 Provider, Prompt and Cost governance; Core Runtime execution adapters preserved",
+      "contractState": "planned_governance_with_preserved_runtime_adapters",
+      "currentSources": [
+        "functions/runtime/shared/provider-interface.js",
+        "functions/runtime/entry/providers",
+        "functions/runtime/reading/providers",
+        "content/registry/provider-closure.json"
+      ],
+      "pjaAccess": [
+        "read",
+        "render"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "PJA cannot invoke a paid Provider, maintain Provider Cost, or promote Provider output; PWS-I9 governs authorisation and accounting."
+    },
+    {
+      "objectSet": [
+        "Assignment",
+        "Workspace"
+      ],
+      "owner": "PWS-I5",
+      "contentAuthority": "PWS-I5 Workspace and Readiness",
+      "contractState": "planned_dependency_with_inactive_projections",
+      "currentSources": [
+        "functions/professional/access/professional-assignment-contract.js",
+        "functions/professional/workspace/professional-workspace-contract.js",
+        "functions/professional/access/authorised-professional-data-loader.js"
+      ],
+      "pjaAccess": [
+        "read",
+        "render",
+        "route"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "Workspace pages remain inactive projections until PWS-I5 supplies authorised Assignment and Workspace read models."
+    },
+    {
+      "objectSet": [
+        "Queue"
+      ],
+      "owner": "PWS-I6",
+      "contentAuthority": "PWS-I6 Operations",
+      "contractState": "planned_dependency_with_read_only_preview",
+      "currentSources": [
+        "functions/professional/workspace/professional-task-contract.js",
+        "professional-workspace.html",
+        "docs/pws/audit/pws-pja-duplication-map.md"
+      ],
+      "pjaAccess": [
+        "read",
+        "render"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "Queue is an operations projection, not a client-side canonical object; PJA cannot enqueue, reorder, accept or complete work."
+    },
+    {
+      "objectSet": [
+        "Deliverable"
+      ],
+      "owner": "PWS-I5",
+      "contentAuthority": "PWS-I5 Deliverable Assembly and Release",
+      "contractState": "planned_dependency_with_preview_contracts",
+      "currentSources": [
+        "functions/professional/reports/professional-report-contract.js",
+        "functions/professional/reports/professional-report-version-contract.js",
+        "professional-reports.html"
+      ],
+      "pjaAccess": [
+        "read",
+        "render",
+        "link"
+      ],
+      "pjaWriteSource": null,
+      "activationRule": "A report preview, print layout or download link is not a released Deliverable without the PWS-I5 lifecycle and signature decision."
+    }
+  ],
+  "duplicateAuthorityGuards": {
+    "product": {
+      "soleOwners": [
+        "PWS-I2",
+        "PWS-I4"
+      ],
+      "pjaDefinesObject": false,
+      "pjaWriteSource": false
+    },
+    "entitlement": {
+      "soleOwner": "PWS-I4",
+      "pjaDefinesObject": false,
+      "pjaWriteSource": false
+    },
+    "providerCost": {
+      "soleOwner": "PWS-I9",
+      "pjaDefinesObject": false,
+      "pjaWriteSource": false,
+      "existingProviderBudgetIsNotPjaCostAuthority": true
+    }
+  },
+  "runtimePreservation": {
+    "journeyIdentityPreserved": true,
+    "stageStatesPreserved": true,
+    "transitionAuthorityPreserved": true,
+    "evidenceBoundaryPreserved": true,
+    "readingAuthorityPreserved": true,
+    "navigationAuthorityPreserved": true,
+    "reviewMemoryContinuityPreserved": true,
+    "timelineLineageRevisionPreserved": true,
+    "persistenceRecoveryPreserved": true,
+    "providerExecutionBoundaryPreserved": true
+  },
+  "pageCapabilities": [
+    {
+      "capabilityId": "public-orientation",
+      "pages": [
+        "index.html",
+        "about.html",
+        "contact.html"
+      ],
+      "sourceObjects": [
+        "Knowledge Resource",
+        "Journey"
+      ],
+      "dependencyOwners": [
+        "PWS-I2 + KH-W3.5G Book I Blueprint",
+        "Core Runtime"
+      ],
+      "activationState": "production_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "knowledge-discovery",
+      "pages": [
+        "academy.html",
+        "explore.html",
+        "glossary.html",
+        "library.html",
+        "thesis.html"
+      ],
+      "sourceObjects": [
+        "Knowledge Resource"
+      ],
+      "dependencyOwners": [
+        "PWS-I2 + KH-W3.5G Book I Blueprint"
+      ],
+      "activationState": "production_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "knowledge-atlas",
+      "pages": [
+        "figures.html",
+        "figure.html"
+      ],
+      "sourceObjects": [
+        "Knowledge Resource"
+      ],
+      "dependencyOwners": [
+        "PWS-I2 + KH-W3.5G Book I Blueprint"
+      ],
+      "activationState": "production_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "book-one-discovery",
+      "pages": [
+        "book-one.html",
+        "book-one-preview.html"
+      ],
+      "sourceObjects": [
+        "Knowledge Resource",
+        "Product",
+        "Offer",
+        "Price"
+      ],
+      "dependencyOwners": [
+        "PWS-I2 + KH-W3.5G Book I Blueprint",
+        "PWS-I2 / PWS-I4"
+      ],
+      "activationState": "production_book_one_scope",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "book-one-commerce-status",
+      "pages": [
+        "checkout.html",
+        "payment-success.html",
+        "payment-failure.html",
+        "digital-product-policy.html"
+      ],
+      "sourceObjects": [
+        "Product",
+        "Offer",
+        "Price",
+        "Payment",
+        "Entitlement"
+      ],
+      "dependencyOwners": [
+        "PWS-I2 / PWS-I4",
+        "PWS-I4"
+      ],
+      "activationState": "conditional_book_one_adapter",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "account-membership-projection",
+      "pages": [
+        "account.html",
+        "account-my-reality.html",
+        "membership.html"
+      ],
+      "sourceObjects": [
+        "Entitlement",
+        "Journey",
+        "Workspace"
+      ],
+      "dependencyOwners": [
+        "PWS-I4",
+        "Core Runtime",
+        "PWS-I5"
+      ],
+      "activationState": "inactive_or_partial_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "journey-orientation",
+      "pages": [
+        "reality-journey.html",
+        "reality-demo.html"
+      ],
+      "sourceObjects": [
+        "Journey",
+        "Question Route"
+      ],
+      "dependencyOwners": [
+        "Core Runtime",
+        "PWS-I9"
+      ],
+      "activationState": "production_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "journey-runtime-projection",
+      "pages": [
+        "reality-entry.html",
+        "reality-reconstruction.html",
+        "reality-reading.html",
+        "reality-navigation.html",
+        "reality-review.html",
+        "reality-dashboard.html",
+        "my-reality.html"
+      ],
+      "sourceObjects": [
+        "Journey",
+        "Question Route",
+        "Provider"
+      ],
+      "dependencyOwners": [
+        "Core Runtime",
+        "PWS-I9"
+      ],
+      "activationState": "core_runtime_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "professional-discovery",
+      "pages": [
+        "services.html",
+        "professional-boundary.html",
+        "professional-appointments.html"
+      ],
+      "sourceObjects": [
+        "Product",
+        "Offer",
+        "Price",
+        "Assignment"
+      ],
+      "dependencyOwners": [
+        "PWS-I2 / PWS-I4",
+        "PWS-I5"
+      ],
+      "activationState": "catalog_and_preview_only",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "professional-operations-projection",
+      "pages": [
+        "professional-workspace.html",
+        "professional-reports.html",
+        "external-reader-intake.html"
+      ],
+      "sourceObjects": [
+        "Consent",
+        "Assignment",
+        "Workspace",
+        "Queue",
+        "Deliverable"
+      ],
+      "dependencyOwners": [
+        "PWS-I8",
+        "PWS-I5",
+        "PWS-I6"
+      ],
+      "activationState": "inactive_read_only_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "policy-and-consent-orientation",
+      "pages": [
+        "professional-consent-sharing.html",
+        "professional-data-privacy.html",
+        "privacy.html",
+        "ai-disclosure.html",
+        "terms.html"
+      ],
+      "sourceObjects": [
+        "Consent",
+        "Provider"
+      ],
+      "dependencyOwners": [
+        "PWS-I8",
+        "PWS-I9"
+      ],
+      "activationState": "policy_projection",
+      "writeAuthority": "none"
+    }
+  ],
+  "requiredDocuments": [
+    "docs/pja/pja-system-boundary.md",
+    "docs/pja/pja-pws-dependency-map.md",
+    "docs/pja/pja-runtime-preservation-map.md",
+    "docs/pja/pja-canonical-object-usage.md",
+    "docs/pja/pja-page-to-capability-map.md"
+  ],
+  "changeScope": {
+    "contractOnly": true,
+    "pageBehaviourChanged": false,
+    "runtimeChanged": false,
+    "providerBehaviourChanged": false,
+    "apiChanged": false,
+    "persistenceChanged": false,
+    "migrationChanged": false,
+    "contentRegistryChanged": false,
+    "knowledgeRegistryLayerAdded": false
+  },
+  "acceptance": {
+    "pjaWriteSourceConflict": false,
+    "secondEntitlement": false,
+    "secondProduct": false,
+    "secondProviderCost": false,
+    "dependencyMapComplete": true,
+    "command": "npm run check:pja-w0"
+  }
+}
