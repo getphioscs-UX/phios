@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/pkr/nodes.schema.json",
+  "title": "PHI OS PKR Nodes Registry",
+  "type": "object",
+  "required": ["version", "nodes"],
+  "properties": {
+    "version": { "type": "string" },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "nodeCode", "collectionCode", "themeCode", "canonicalQuestionKey",
+          "nodeType", "knowledgeLevel", "productionTier", "primaryAssetType",
+          "canonicalLanguage", "requiredPublicLanguages", "registryStatus", "version"
+        ],
+        "properties": {
+          "nodeCode": { "type": "string", "pattern": "^KN-[A-Z0-9-]+$" },
+          "collectionCode": { "type": "string" },
+          "themeCode": { "type": "string" },
+          "canonicalQuestionKey": { "type": "string" },
+          "nodeType": {
+            "enum": ["foundation_question", "concept_question", "mechanism_question", "comparison_question", "misunderstanding_question", "observation_question", "application_question", "boundary_question"]
+          },
+          "knowledgeLevel": { "enum": ["introductory", "foundational", "intermediate", "advanced", "research"] },
+          "productionTier": { "enum": ["tier_a", "tier_b", "tier_c"] },
+          "primaryAssetType": { "enum": ["article", "figure", "video", "audio", "atlas_entry"] },
+          "canonicalLanguage": { "const": "zh-Hans" },
+          "requiredPublicLanguages": {
+            "type": "array",
+            "items": { "enum": ["zh-Hans", "en"] },
+            "uniqueItems": true
+          },
+          "registryStatus": { "enum": ["proposed", "structured", "frozen", "deprecated"] },
+          "version": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
