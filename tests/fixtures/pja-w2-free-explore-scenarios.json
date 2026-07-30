@@ -1,0 +1,78 @@
+{
+  "version": "1.0.0",
+  "ruleScenarios": [
+    {
+      "id": "published-article-zh",
+      "questionKey": "phi_os_needed",
+      "locale": "zh-Hans",
+      "question": "为什么需要 PHI OS？",
+      "expectedBoundary": "public_knowledge",
+      "expectedResourceNodeCode": "KN-PREFACE-004"
+    },
+    {
+      "id": "planned-node-en",
+      "questionKey": "computation_direction",
+      "locale": "en",
+      "question": "Why can computation not automatically create direction?",
+      "expectedBoundary": "free_observation",
+      "expectedResourceCount": 0
+    },
+    {
+      "id": "individual-boundary-zh",
+      "questionKey": "personal_decision_boundary",
+      "locale": "zh-Hans",
+      "question": "我该怎么选择对自己最合适的方向？",
+      "expectedBoundary": "individual_analysis_required",
+      "individualAnalysisRequired": true,
+      "professionalResponsibilityRequired": false
+    },
+    {
+      "id": "unclassified-fails-open-to-free-navigation",
+      "questionKey": null,
+      "locale": "en",
+      "question": "An unrelated qzxwvu object.",
+      "expectedBoundary": "unclassified",
+      "expectedResourceCount": 0
+    }
+  ],
+  "localSaveScenarios": [
+    {
+      "id": "partial-draft",
+      "currentStage": 0,
+      "selection": {
+        "question": "",
+        "theme": "",
+        "context": "",
+        "contentPreference": "",
+        "depth": "",
+        "reflection": ""
+      },
+      "routeSummary": null
+    },
+    {
+      "id": "complete-published-route",
+      "currentStage": 5,
+      "selection": {
+        "question": "phi_os_needed",
+        "theme": "TH-PREFACE-02",
+        "context": "learning",
+        "contentPreference": "article",
+        "depth": "working",
+        "reflection": "concept_clearer"
+      },
+      "routeSummary": {
+        "routingBoundary": "public_knowledge",
+        "detectedThemes": [
+          "TH-PREFACE-02"
+        ],
+        "matchedConcepts": [
+          "reality",
+          "navigation"
+        ],
+        "matchedResourceNodeCodes": [
+          "KN-PREFACE-004"
+        ]
+      }
+    }
+  ]
+}

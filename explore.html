@@ -31,15 +31,16 @@
   <link rel="stylesheet" href="/assets/css/public-experience.css">
   <link rel="stylesheet" href="/assets/css/knowledge-release.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
+  <link rel="stylesheet" href="/assets/css/free-explore.css">
 </head>
 
 <body data-page="atlas" data-public-section="explore">
   <a
     class="skip-link"
-    href="#atlas-overview"
-    data-i18n="atlas.skipLink"
+    href="#free-explore"
+    data-i18n="freeExplore.skip"
   >
-    Skip to the Reality Atlas
+    Skip to Free Explore
   </a>
 
   <header
@@ -109,6 +110,600 @@
   </header>
 
   <main class="atlas-main">
+    <section
+      id="free-explore"
+      class="free-explore"
+      aria-labelledby="free-explore-title"
+      data-pja-w2-version="1.0.0"
+      data-rule-engine="PWS-I9"
+      data-storage-boundary="browser-local-only"
+    >
+      <div class="free-explore__shell">
+        <div class="free-explore__hero">
+          <div>
+            <p class="eyebrow" data-i18n="freeExplore.hero.eyebrow">
+              PJA-W2 · Free Explore
+            </p>
+            <h1 id="free-explore-title" data-i18n="freeExplore.hero.title">
+              Start with a question. Keep the route yours.
+            </h1>
+            <p class="free-explore__lead" data-i18n="freeExplore.hero.lead">
+              Choose broad, non-sensitive presets. PHI OS can connect a
+              question to public knowledge or a bounded next step without
+              opening a formal Journey.
+            </p>
+            <div class="free-explore__hero-actions">
+              <a class="free-explore__button is-primary" href="#free-explore-workspace">
+                <span data-i18n="freeExplore.hero.start">
+                  Start free exploration
+                </span>
+                <span aria-hidden="true">↓</span>
+              </a>
+              <a class="free-explore__text-link" href="#atlas-overview">
+                <span data-i18n="freeExplore.hero.atlas">
+                  Continue to the Reality Atlas
+                </span>
+                <span aria-hidden="true">↘</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="free-explore__boundary" aria-labelledby="free-explore-boundary-title">
+            <span class="free-explore__boundary-mark" aria-hidden="true">○</span>
+            <h2
+              id="free-explore-boundary-title"
+              data-i18n="freeExplore.boundary.title"
+            >
+              Free before payment
+            </h2>
+            <p data-i18n="freeExplore.boundary.body">
+              No life story, formal Evidence, Reconstruction, individual
+              Reading, Provider request or Professional Assignment is
+              created here.
+            </p>
+            <p class="free-explore__local-note" data-i18n="freeExplore.boundary.local">
+              Your choices stay in this browser and are saved only when you
+              choose “Later”.
+            </p>
+          </aside>
+        </div>
+
+        <div
+          id="free-explore-workspace"
+          class="free-explore__workspace"
+          data-free-explore-workspace
+        >
+          <nav
+            class="free-explore__progress"
+            aria-label="Free Explore stages"
+            data-i18n-aria-label="freeExplore.progress.label"
+          >
+            <ol>
+              <li class="is-current" data-stage-marker="0">
+                <span>01</span>
+                <strong data-i18n="freeExplore.progress.question">Question</strong>
+              </li>
+              <li data-stage-marker="1">
+                <span>02</span>
+                <strong data-i18n="freeExplore.progress.context">Context</strong>
+              </li>
+              <li data-stage-marker="2">
+                <span>03</span>
+                <strong data-i18n="freeExplore.progress.concept">Concept</strong>
+              </li>
+              <li data-stage-marker="3">
+                <span>04</span>
+                <strong data-i18n="freeExplore.progress.example">Example</strong>
+              </li>
+              <li data-stage-marker="4">
+                <span>05</span>
+                <strong data-i18n="freeExplore.progress.reflection">Reflection</strong>
+              </li>
+              <li data-stage-marker="5">
+                <span>06</span>
+                <strong data-i18n="freeExplore.progress.navigation">Navigation</strong>
+              </li>
+            </ol>
+            <p class="sr-only" aria-live="polite" data-free-stage-status></p>
+          </nav>
+
+          <form class="free-explore__form" data-free-explore-form novalidate>
+            <section
+              class="free-explore__stage is-active"
+              data-free-stage="0"
+              aria-labelledby="free-explore-question-title"
+            >
+              <p class="eyebrow" data-i18n="freeExplore.question.eyebrow">
+                01 · Question
+              </p>
+              <h2 id="free-explore-question-title" data-i18n="freeExplore.question.title">
+                Which question would you like to explore?
+              </h2>
+              <p data-i18n="freeExplore.question.lead">
+                Select one published or planned knowledge question. No free
+                text or personal history is collected.
+              </p>
+              <fieldset class="free-explore__choices">
+                <legend data-i18n="freeExplore.question.legend">
+                  Choose a question
+                </legend>
+                <label>
+                  <input type="radio" name="question" value="phi_os_needed">
+                  <span data-i18n="freeExplore.question.options.phi_os_needed">
+                    Why is PHI OS needed?
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="question" value="explanation_reality">
+                  <span data-i18n="freeExplore.question.options.explanation_reality">
+                    Why does explanation not equal understanding Reality?
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="question" value="navigation_position">
+                  <span data-i18n="freeExplore.question.options.navigation_position">
+                    Why must navigation begin by identifying Reality position?
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="question" value="computation_direction">
+                  <span data-i18n="freeExplore.question.options.computation_direction">
+                    Why can computation not automatically create direction?
+                  </span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="question"
+                    value="personal_decision_boundary"
+                  >
+                  <span
+                    data-i18n="freeExplore.question.options.personal_decision_boundary"
+                  >
+                    How should I decide what is best for me?
+                  </span>
+                </label>
+              </fieldset>
+            </section>
+
+            <section
+              class="free-explore__stage"
+              data-free-stage="1"
+              aria-labelledby="free-explore-context-title"
+              hidden
+            >
+              <p class="eyebrow" data-i18n="freeExplore.context.eyebrow">
+                02 · Context
+              </p>
+              <h2 id="free-explore-context-title" data-i18n="freeExplore.context.title">
+                Set a light exploration context.
+              </h2>
+              <p data-i18n="freeExplore.context.lead">
+                These choices shape presentation only. They do not classify
+                you, judge a case or create evidence.
+              </p>
+
+              <label class="free-explore__select-label" for="free-explore-theme">
+                <span data-i18n="freeExplore.context.themeLabel">Theme</span>
+                <select id="free-explore-theme" name="theme" required>
+                  <option value="" data-i18n="freeExplore.context.themePlaceholder">
+                    Choose a knowledge theme
+                  </option>
+                </select>
+              </label>
+
+              <div class="free-explore__context-grid">
+                <fieldset class="free-explore__choices is-compact">
+                  <legend data-i18n="freeExplore.context.contextLegend">
+                    Situation
+                  </legend>
+                  <label>
+                    <input type="radio" name="context" value="orientation">
+                    <span data-i18n="freeExplore.context.contexts.orientation">
+                      I am orienting
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="context" value="learning">
+                    <span data-i18n="freeExplore.context.contexts.learning">
+                      I am learning a concept
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="context" value="change">
+                    <span data-i18n="freeExplore.context.contexts.change">
+                      I am noticing change
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="context" value="decision_boundary">
+                    <span data-i18n="freeExplore.context.contexts.decision_boundary">
+                      I am locating a decision boundary
+                    </span>
+                  </label>
+                </fieldset>
+
+                <fieldset class="free-explore__choices is-compact">
+                  <legend data-i18n="freeExplore.context.preferenceLegend">
+                    Content preference
+                  </legend>
+                  <label>
+                    <input type="radio" name="contentPreference" value="article">
+                    <span data-i18n="freeExplore.context.preferences.article">
+                      Articles
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="contentPreference" value="visual">
+                    <span data-i18n="freeExplore.context.preferences.visual">
+                      Figures and Atlas
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="contentPreference" value="book">
+                    <span data-i18n="freeExplore.context.preferences.book">
+                      Books
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="contentPreference" value="mixed">
+                    <span data-i18n="freeExplore.context.preferences.mixed">
+                      Mixed formats
+                    </span>
+                  </label>
+                </fieldset>
+
+                <fieldset class="free-explore__choices is-compact">
+                  <legend data-i18n="freeExplore.context.depthLegend">
+                    Understanding depth
+                  </legend>
+                  <label>
+                    <input type="radio" name="depth" value="orientation">
+                    <span data-i18n="freeExplore.context.depths.orientation">
+                      Quick orientation
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="depth" value="working">
+                    <span data-i18n="freeExplore.context.depths.working">
+                      Working understanding
+                    </span>
+                  </label>
+                  <label>
+                    <input type="radio" name="depth" value="extended">
+                    <span data-i18n="freeExplore.context.depths.extended">
+                      Deeper reading
+                    </span>
+                  </label>
+                </fieldset>
+              </div>
+            </section>
+
+            <section
+              class="free-explore__stage"
+              data-free-stage="2"
+              aria-labelledby="free-explore-concept-title"
+              hidden
+            >
+              <p class="eyebrow" data-i18n="freeExplore.concept.eyebrow">
+                03 · Concept
+              </p>
+              <h2 id="free-explore-concept-title" data-i18n="freeExplore.concept.title">
+                See what the rule engine can connect.
+              </h2>
+              <p data-i18n="freeExplore.concept.lead">
+                This is deterministic topic routing from frozen registries,
+                not a diagnosis, recommendation or case judgment.
+              </p>
+              <div class="free-explore__rule-state" role="status" data-free-rule-state>
+                <span class="free-explore__pulse" aria-hidden="true"></span>
+                <span data-i18n="freeExplore.state.loading">
+                  Loading frozen knowledge registries…
+                </span>
+              </div>
+              <div class="free-explore__concept-grid" data-free-concept-result hidden>
+                <article>
+                  <p data-i18n="freeExplore.concept.themes">Detected themes</p>
+                  <div class="free-explore__tags" data-free-detected-themes></div>
+                </article>
+                <article>
+                  <p data-i18n="freeExplore.concept.concepts">Matched concepts</p>
+                  <div class="free-explore__tags" data-free-matched-concepts></div>
+                </article>
+                <article>
+                  <p data-i18n="freeExplore.concept.complexity">
+                    Routing complexity
+                  </p>
+                  <strong data-free-complexity></strong>
+                </article>
+                <article class="free-explore__boundary-result">
+                  <p data-i18n="freeExplore.concept.boundary">Boundary</p>
+                  <strong data-free-routing-boundary></strong>
+                </article>
+              </div>
+            </section>
+
+            <section
+              class="free-explore__stage"
+              data-free-stage="3"
+              aria-labelledby="free-explore-example-title"
+              hidden
+            >
+              <p class="eyebrow" data-i18n="freeExplore.example.eyebrow">
+                04 · Example
+              </p>
+              <h2 id="free-explore-example-title" data-i18n="freeExplore.example.title">
+                Use a general observation prompt.
+              </h2>
+              <p data-i18n="freeExplore.example.lead">
+                Prompts stay general and non-sensitive. They do not interpret
+                causes or generate a personal Reading.
+              </p>
+              <div class="free-explore__prompt-panel">
+                <p data-i18n="freeExplore.example.label">Rule-selected prompts</p>
+                <ol data-free-observation-prompts></ol>
+                <p class="free-explore__context-line" data-free-context-line></p>
+              </div>
+              <p class="free-explore__unknown" data-i18n="freeExplore.example.unknown">
+                Unknowns remain unknown until evidence is deliberately
+                established outside Free Explore.
+              </p>
+            </section>
+
+            <section
+              class="free-explore__stage"
+              data-free-stage="4"
+              aria-labelledby="free-explore-reflection-title"
+              hidden
+            >
+              <p class="eyebrow" data-i18n="freeExplore.reflection.eyebrow">
+                05 · Reflection
+              </p>
+              <h2
+                id="free-explore-reflection-title"
+                data-i18n="freeExplore.reflection.title"
+              >
+                What changed in your understanding?
+              </h2>
+              <p data-i18n="freeExplore.reflection.lead">
+                Choose a broad reflection. Do not enter names, health,
+                financial, identity or other sensitive information.
+              </p>
+              <fieldset class="free-explore__choices">
+                <legend data-i18n="freeExplore.reflection.legend">
+                  Choose one reflection
+                </legend>
+                <label>
+                  <input type="radio" name="reflection" value="concept_clearer">
+                  <span data-i18n="freeExplore.reflection.options.concept_clearer">
+                    The concept is clearer
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="reflection" value="observe_more">
+                  <span data-i18n="freeExplore.reflection.options.observe_more">
+                    I want to observe further
+                  </span>
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="reflection"
+                    value="uncertainty_remains"
+                  >
+                  <span
+                    data-i18n="freeExplore.reflection.options.uncertainty_remains"
+                  >
+                    Important uncertainty remains
+                  </span>
+                </label>
+                <label>
+                  <input type="radio" name="reflection" value="revisit_later">
+                  <span data-i18n="freeExplore.reflection.options.revisit_later">
+                    I want to revisit later
+                  </span>
+                </label>
+              </fieldset>
+            </section>
+
+            <section
+              class="free-explore__stage"
+              data-free-stage="5"
+              aria-labelledby="free-explore-navigation-title"
+              hidden
+            >
+              <p class="eyebrow" data-i18n="freeExplore.navigation.eyebrow">
+                06 · Navigation
+              </p>
+              <h2
+                id="free-explore-navigation-title"
+                data-i18n="freeExplore.navigation.title"
+              >
+                Choose a route without losing the free path.
+              </h2>
+              <p data-i18n="freeExplore.navigation.lead">
+                Knowledge and observation routes come first. Journey and
+                professional routes remain optional information, never a
+                default recommendation.
+              </p>
+
+              <div class="free-explore__matched">
+                <h3 data-i18n="freeExplore.navigation.matched">
+                  Matched public articles
+                </h3>
+                <div class="free-explore__routes" data-free-matched-resources></div>
+              </div>
+
+              <div class="free-explore__general">
+                <h3 data-i18n="freeExplore.navigation.general">
+                  Other available routes
+                </h3>
+                <div class="free-explore__routes">
+                  <a class="free-explore__route" href="/articles" data-route-type="articles">
+                    <span aria-hidden="true">Aa</span>
+                    <strong data-i18n="freeExplore.navigation.articles.title">
+                      Articles
+                    </strong>
+                    <p data-i18n="freeExplore.navigation.articles.body">
+                      Read reviewed and published canonical knowledge.
+                    </p>
+                  </a>
+                  <a class="free-explore__route" href="/figures" data-route-type="figures">
+                    <span aria-hidden="true">◇</span>
+                    <strong data-i18n="freeExplore.navigation.figures.title">
+                      Figures
+                    </strong>
+                    <p data-i18n="freeExplore.navigation.figures.body">
+                      Use visual maps to inspect relationships.
+                    </p>
+                  </a>
+                  <a class="free-explore__route" href="/book-one-preview" data-route-type="books">
+                    <span aria-hidden="true">Ⅰ</span>
+                    <strong data-i18n="freeExplore.navigation.books.title">
+                      Books
+                    </strong>
+                    <p data-i18n="freeExplore.navigation.books.body">
+                      Follow the longer Book I reading path.
+                    </p>
+                  </a>
+                  <a
+                    class="free-explore__route"
+                    href="#atlas-overview"
+                    data-route-type="atlas"
+                  >
+                    <span aria-hidden="true">◎</span>
+                    <strong data-i18n="freeExplore.navigation.atlas.title">
+                      Atlas
+                    </strong>
+                    <p data-i18n="freeExplore.navigation.atlas.body">
+                      Explore the architecture without entering a formal Journey.
+                    </p>
+                  </a>
+                  <a
+                    class="free-explore__route"
+                    href="/free-observation"
+                    data-route-type="free-observation"
+                  >
+                    <span aria-hidden="true">○</span>
+                    <strong data-i18n="freeExplore.navigation.observation.title">
+                      Free Observation
+                    </strong>
+                    <p data-i18n="freeExplore.navigation.observation.body">
+                      Save a separate, bounded local observation with no free text.
+                    </p>
+                  </a>
+                  <a
+                    class="free-explore__route is-information"
+                    href="/reality-journey"
+                    data-route-type="reality-journey-pass-information"
+                  >
+                    <span aria-hidden="true">→</span>
+                    <strong data-i18n="freeExplore.navigation.journey.title">
+                      Reality Journey Pass
+                    </strong>
+                    <p data-i18n="freeExplore.navigation.journey.body">
+                      Read information about the formal Journey before choosing.
+                    </p>
+                  </a>
+                  <a
+                    class="free-explore__route is-information"
+                    href="/services"
+                    data-route-type="professional-service-information"
+                  >
+                    <span aria-hidden="true">i</span>
+                    <strong data-i18n="freeExplore.navigation.professional.title">
+                      Professional Service Information
+                    </strong>
+                    <p data-i18n="freeExplore.navigation.professional.body">
+                      Review scope and boundaries; no assignment is created.
+                    </p>
+                  </a>
+                </div>
+              </div>
+
+              <p class="free-explore__unknown" data-i18n="freeExplore.navigation.boundaryNote">
+                A route is information, not a determination of what you must do.
+              </p>
+            </section>
+
+            <div class="free-explore__form-controls">
+              <button
+                class="free-explore__button"
+                type="button"
+                data-free-back
+                disabled
+              >
+                <span aria-hidden="true">←</span>
+                <span data-i18n="freeExplore.controls.back">Back</span>
+              </button>
+              <p
+                class="free-explore__validation"
+                data-free-validation
+                aria-live="polite"
+              ></p>
+              <button
+                class="free-explore__button is-primary"
+                type="button"
+                data-free-next
+              >
+                <span data-i18n="freeExplore.controls.next">Continue</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </form>
+
+          <div
+            class="free-explore__always"
+            aria-label="Always available choices"
+            data-i18n-aria-label="freeExplore.controls.alwaysLabel"
+          >
+            <button
+              class="free-explore__always-action"
+              type="button"
+              data-free-restart
+            >
+              <span aria-hidden="true">↺</span>
+              <span data-i18n="freeExplore.controls.restart">
+                Continue free exploration
+              </span>
+            </button>
+            <a class="free-explore__always-action" href="/">
+              <span aria-hidden="true">↖</span>
+              <span data-i18n="freeExplore.controls.leave">Leave</span>
+            </a>
+            <button
+              class="free-explore__always-action"
+              type="button"
+              data-free-save
+            >
+              <span aria-hidden="true">⌁</span>
+              <span data-i18n="freeExplore.controls.later">Later</span>
+            </button>
+          </div>
+          <p class="free-explore__save-status" data-free-save-status aria-live="polite"></p>
+
+          <details class="free-explore__saved">
+            <summary data-i18n="freeExplore.saved.title">
+              Saved for later in this browser
+            </summary>
+            <div class="free-explore__saved-body">
+              <p data-i18n="freeExplore.saved.lead">
+                These anonymous preset choices are not synced or uploaded.
+              </p>
+              <div data-free-saved-list></div>
+              <button
+                class="free-explore__text-button"
+                type="button"
+                data-free-clear-all
+              >
+                <span data-i18n="freeExplore.saved.clearAll">Clear all</span>
+              </button>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="atlas-hero" aria-labelledby="atlas-title">
       <div class="atlas-hero-orbit" aria-hidden="true">
         <span></span>
@@ -744,6 +1339,7 @@
   </footer>
 
   <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/free-explore.js"></script>
   <script type="module" src="/assets/js/pages/atlas.js"></script>
   <script type="module" src="/assets/js/pages/atlas-knowledge-upgrade.js"></script>
   <script type="module" src="/assets/js/pages/knowledge-connections.js"></script>

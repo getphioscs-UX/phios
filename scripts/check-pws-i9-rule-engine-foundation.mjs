@@ -25,7 +25,8 @@ const [
   blueprint,
   fixtures,
   packageJson,
-  engineSource
+  engineWrapperSource,
+  engineCoreSource
 ] = await Promise.all([
   readJson('docs/pws/contracts/pws-i9-rule-engine-foundation-v1.json'),
   readJson('docs/pws/contracts/pws-i8-free-observation-privacy-foundation-v1.json'),
@@ -40,7 +41,8 @@ const [
   readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json'),
   readJson('tests/fixtures/pws-i9-rule-engine-scenarios.json'),
   readJson('package.json'),
-  read('functions/pws/intelligence/rule-engine.js')
+  read('functions/pws/intelligence/rule-engine.js'),
+  read('assets/js/modules/pws-i9-rule-engine-core.js')
 ]);
 
 assert.equal(
@@ -185,6 +187,13 @@ for (const value of Object.values(evidence.formalSystemSeparation)) {
 for (const value of Object.values(evidence.preservation)) {
   assert.equal(value, false);
 }
+
+assert(
+  engineWrapperSource.includes(
+    '../../../assets/js/modules/pws-i9-rule-engine-core.js'
+  )
+);
+const engineSource = `${engineWrapperSource}\n${engineCoreSource}`;
 
 for (const forbidden of [
   'fetch(',

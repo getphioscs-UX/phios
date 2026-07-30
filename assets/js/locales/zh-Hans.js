@@ -15,6 +15,7 @@ import journeyPublic from './zh-Hans/journey.js';
 import professional from './zh-Hans/professional.js';
 import account from './zh-Hans/account.js';
 import freeObservation from './zh-Hans/free-observation.js';
+import freeExplore from './zh-Hans/free-explore.js';
 
 const dictionary = Object.freeze({
   ...shared,
@@ -32,7 +33,8 @@ const dictionary = Object.freeze({
   ...journeyPublic,
   ...professional,
   ...account,
-  ...freeObservation
+  ...freeObservation,
+  ...freeExplore
 });
 
 export default dictionary;

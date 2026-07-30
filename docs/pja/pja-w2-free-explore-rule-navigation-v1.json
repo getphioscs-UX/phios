@@ -1,0 +1,160 @@
+{
+  "contractId": "phi-os.pja.free-explore-rule-navigation.v1",
+  "contractVersion": "1.0.0",
+  "programme": "PJA-W2 Free Explore and Rule Navigation",
+  "status": "implemented",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "0ad53eeb2461ff36b3e993841e162cecc9b15de6"
+  },
+  "prerequisites": [
+    "PWS-I8-Free-Observation-Privacy-Foundation-v1.0.0-Frozen",
+    "PWS-I9-Rule-Engine-Foundation-v1.0.0-Frozen",
+    "KH-W3.5F-Frozen",
+    "KH-W3.5G-Completed"
+  ],
+  "surface": {
+    "route": "/explore",
+    "page": "explore.html",
+    "newTopLevelPageAdded": false,
+    "realityAtlasPreserved": true,
+    "freeExplorePosition": "before-reality-atlas"
+  },
+  "stages": [
+    "Question",
+    "Context",
+    "Concept",
+    "Example",
+    "Reflection",
+    "Navigation"
+  ],
+  "allowedBeforePayment": [
+    "select-question",
+    "select-theme",
+    "select-context",
+    "select-content-preference",
+    "select-understanding-depth",
+    "save-local-observation"
+  ],
+  "prohibitedBeforePayment": {
+    "collectCompleteLifeStory": false,
+    "createFormalEvidence": false,
+    "createReconstruction": false,
+    "generateIndividualReading": false,
+    "invokeIndividualProvider": false,
+    "createProfessionalAssignment": false
+  },
+  "inputBoundary": {
+    "presetSelectionsOnly": true,
+    "freeTextFieldPresent": false,
+    "fileFieldPresent": false,
+    "identityCollected": false,
+    "sensitiveDataRequested": false,
+    "themeSelectionChangesRuleAuthority": false,
+    "preferenceSelectionMayChangePresentationOrder": true,
+    "depthSelectionMayChangeResourceDisplayLimit": true
+  },
+  "ruleProjection": {
+    "canonicalImport": "functions/pws/intelligence/rule-engine.js",
+    "sharedBrowserNeutralCore": "assets/js/modules/pws-i9-rule-engine-core.js",
+    "publicController": "assets/js/pages/free-explore.js",
+    "mode": "deterministic-rule-first",
+    "knowledgeRegistriesReadOnly": true,
+    "publishedResourcesOnly": true,
+    "forcedClassificationAllowed": false,
+    "providerInvoked": false,
+    "formalRoutePersisted": false,
+    "failureMode": "unavailable-with-free-exits"
+  },
+  "localSave": {
+    "module": "assets/js/modules/free-explore-local.js",
+    "schemaVersion": "phi-os.pja.free-explore.local.v1",
+    "storageKey": "phiOSFreeExploreSessions.v1",
+    "storageLocation": "browser-local-only",
+    "explicitSaveActionRequired": true,
+    "partialDraftAllowed": true,
+    "maximumRecords": 8,
+    "retentionDays": 30,
+    "clearOneAvailable": true,
+    "clearAllAvailable": true,
+    "serverSync": false,
+    "silentFormalization": false
+  },
+  "navigation": {
+    "allowedRouteFamilies": [
+      {
+        "routeType": "articles",
+        "availability": "published-only",
+        "rendered": true
+      },
+      {
+        "routeType": "videos",
+        "availability": "published-only",
+        "rendered": false
+      },
+      {
+        "routeType": "figures",
+        "availability": "published-only",
+        "rendered": true
+      },
+      {
+        "routeType": "books",
+        "availability": "published-or-preview",
+        "rendered": true
+      },
+      {
+        "routeType": "atlas",
+        "availability": "published",
+        "rendered": true
+      },
+      {
+        "routeType": "free-observation",
+        "availability": "bounded-rule-based",
+        "rendered": true
+      },
+      {
+        "routeType": "reality-journey-pass-information",
+        "availability": "informational",
+        "rendered": true
+      },
+      {
+        "routeType": "professional-service-information",
+        "availability": "informational",
+        "rendered": true
+      }
+    ],
+    "videosReasonNotRendered": "No reviewed, approved and published video is registered for the selectable questions.",
+    "knowledgeAndObservationBeforeCommercialInformation": true,
+    "specificPaidServiceDefault": false,
+    "professionalServiceInformationLast": true,
+    "alwaysAvailable": [
+      "continue-free-explore",
+      "leave",
+      "save-return-later"
+    ]
+  },
+  "preservation": {
+    "coreRuntimeChanged": false,
+    "runtimeSchemaChanged": false,
+    "d1MigrationAdded": false,
+    "apiEndpointAdded": false,
+    "productChanged": false,
+    "offerChanged": false,
+    "priceChanged": false,
+    "entitlementChanged": false,
+    "consentChanged": false,
+    "providerAdapterChanged": false
+  },
+  "acceptance": {
+    "fixtures": "tests/fixtures/pja-w2-free-explore-scenarios.json",
+    "command": "npm run check:pja-w2",
+    "pageChangeInThisStep": true,
+    "bilingual": true,
+    "responsiveWidths": [
+      360,
+      768,
+      1440
+    ]
+  }
+}
