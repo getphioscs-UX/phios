@@ -1,0 +1,198 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+const root = process.cwd();
+const read = file => fs.readFile(path.join(root, file), 'utf8');
+const readJson = async file => JSON.parse(await read(file));
+const hash = source => crypto
+  .createHash('sha256')
+  .update(source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n'), 'utf8')
+  .digest('hex');
+const listJson = async directory => (await fs.readdir(path.join(root, directory), {
+  withFileTypes: true
+}))
+  .filter(entry => entry.isFile() && entry.name.endsWith('.json'))
+  .map(entry => entry.name)
+  .sort();
+
+const contract = await readJson(
+  'docs/knowledge/phase-2-5-kh-w3-5a-d-pkr-foundation-freeze-v1.json'
+);
+const sources = await readJson('content/knowledge/registry/sources.json');
+const nodes = await readJson('content/knowledge/registry/nodes.json');
+const questions = await readJson(
+  'content/knowledge/registry/supporting-questions.json'
+);
+const extraction = await readJson(
+  'content/knowledge/registry/canonical-extraction-policy.json'
+);
+const blueprint = await readJson(
+  'content/knowledge/blueprints/book-1-knowledge-blueprint.json'
+);
+
+assert.equal(
+  contract.contractId,
+  'phi-os.knowledge.phase-2-5.pkr-foundation-freeze.v1'
+);
+assert.equal(contract.contractVersion, '1.0.0');
+assert.equal(contract.phase, 'PHASE 2.5');
+assert.equal(contract.step, 'STEP 2.10');
+assert.equal(contract.workstream, 'KH-W3.5A-D');
+assert.equal(contract.status, 'completed');
+assert.equal(
+  contract.supersessionStatus,
+  'superseded-where-applicable-by-kh-w3.5e'
+);
+assert.equal(
+  contract.baseline.commit,
+  'b11c7fdc85a3fd0e4aea60f64ed3b8285f877b07'
+);
+
+for (const rule of [
+  'knowledgeRegistryExpansionAllowed',
+  'newRegistryLevelAllowed',
+  'newCanonicalNodeAllowed',
+  'newSupportingQuestionAllowed',
+  'newPublicPageAllowed',
+  'articleProductionStartedByThisStep',
+  'businessRuntimeChanged',
+  'migrationChanged',
+  'blocksProfessionalWorkspace',
+  'blocksPayment',
+  'blocksJourney',
+  'blocksCustomerDelivery'
+]) {
+  assert.equal(contract.phaseBoundary[rule], false, rule);
+}
+
+assert.deepEqual(
+  contract.completedFoundation.flatMap(item => item.deliverables),
+  [
+    'Source Inventory',
+    'Knowledge Node Inventory',
+    'Relationship Audit',
+    'Inventory Freeze',
+    'PKR Canonical Data Model',
+    'Content Production and ChatGPT Instruction',
+    'Preface Registry Population'
+  ]
+);
+assert(contract.completedFoundation.every(item => item.status === 'completed'));
+assert.equal(
+  contract.completedFoundation.at(-1).authorityAfterConsolidation,
+  'historical-population-superseded-by-kh-w3.5e'
+);
+
+assert.equal(sources.sources.length, 12);
+assert.equal(nodes.nodes.length, 13);
+assert.equal(questions.supportingQuestions.length, 23);
+assert(nodes.nodes.every(node => node.registryStatus === 'frozen'));
+assert(questions.supportingQuestions.every(item => item.status === 'frozen'));
+assert.equal(nodes.version, '1.1.0');
+assert.equal(questions.version, '1.1.0');
+assert.equal(extraction.version, '1.2.0');
+assert.equal(extraction.status, 'frozen');
+
+const consolidation = contract.canonicalConsolidation;
+assert.equal(consolidation.originalPrefaceQuestions, 36);
+assert.equal(consolidation.canonicalKnowledgeNodes, 13);
+assert.equal(consolidation.supportingQuestions, 23);
+assert.equal(consolidation.preservedQuestions, 36);
+assert.equal(
+  consolidation.canonicalKnowledgeNodes + consolidation.supportingQuestions,
+  consolidation.preservedQuestions
+);
+assert.equal(consolidation.duplicateDeletionCount, 0);
+assert.equal(consolidation.rules.onePageEqualsOneNode, false);
+assert.equal(consolidation.rules.oneHeadingEqualsOneNode, false);
+assert.equal(consolidation.rules.oneQuestionEqualsOneArticle, false);
+assert.equal(
+  consolidation.rules.independentMechanismRequiredForCanonicalNode,
+  true
+);
+
+assert.equal(blueprint.contract, 'PHI-OS-BOOK-I-KNOWLEDGE-BLUEPRINT-v1.3.0');
+assert.equal(blueprint.status, 'planning-freeze');
+assert.equal(blueprint.parts.length, 6);
+assert.equal(blueprint.prefaceCanonicalNodes, 13);
+assert.equal(blueprint.plannedCanonicalNodes, 78);
+assert.equal(blueprint.newNodesBeyondPreface, 65);
+assert.equal(blueprint.activeProductionLimit, 8);
+assert.equal(blueprint.nodes.length, 78);
+assert.equal(
+  blueprint.parts.reduce((sum, part) => sum + part.canonicalNodeCount, 0),
+  78
+);
+assert.equal(
+  new Set(blueprint.nodes.map(node => node.nodeCode)).size,
+  78
+);
+
+const topLevelRegistryFiles = await listJson('content/knowledge/registry');
+const schemaFiles = await listJson('content/knowledge/registry/schemas');
+assert.equal(topLevelRegistryFiles.length, 12);
+assert.equal(schemaFiles.length, 12);
+assert.equal(
+  contract.currentRegistrySnapshot.topLevelJsonFiles,
+  topLevelRegistryFiles.length
+);
+assert.equal(
+  contract.currentRegistrySnapshot.schemaFiles,
+  schemaFiles.length
+);
+
+for (const evidence of contract.frozenEvidence) {
+  assert.equal(
+    hash(await read(evidence.path)),
+    evidence.sha256,
+    `Frozen knowledge evidence changed: ${evidence.path}`
+  );
+}
+
+assert.deepEqual(contract.changeControl.allowed, [
+  'bug-fix',
+  'security-fix',
+  'accessibility-fix',
+  'migration-fix',
+  'acceptance-fix',
+  'explicit-contract-version-upgrade'
+]);
+assert.equal(contract.changeControl.silentExpansionAllowed, false);
+assert.equal(
+  contract.changeControl.futureKnowledgeProductionRequiresSeparateStep,
+  true
+);
+
+assert.equal(contract.acceptance.completedDeliverableCount, 7);
+assert.equal(contract.acceptance.supersessionRecorded, true);
+assert.equal(contract.acceptance.registryFilesChangedByThisStep, 0);
+assert.equal(contract.acceptance.pageChangeInThisStep, false);
+assert.equal(contract.acceptance.visualAcceptance.status, 'not-applicable');
+assert.equal(contract.acceptance.languageAcceptance.status, 'not-applicable');
+assert.equal(
+  contract.acceptance.keyboardFocusAcceptance.status,
+  'not-applicable'
+);
+assert.equal(contract.acceptance.touchTargetAcceptance.status, 'not-applicable');
+assert.equal(contract.acceptance.runtimeRegressionRequired, true);
+
+const document = await read(
+  'docs/knowledge/PHASE-2.5-STEP-2.10-KH-W3.5A-D-PKR-FOUNDATION-FREEZE.md'
+);
+for (const phrase of [
+  'does not continue expanding the Knowledge Registry',
+  'does not become a prerequisite or blocking gate',
+  '13 Canonical Knowledge Nodes and 23 Supporting Questions',
+  '78 planned Canonical Nodes in total',
+  'no more than 8 simultaneously active first-round articles'
+]) {
+  assert(document.includes(phrase), `Knowledge freeze document missing: ${phrase}`);
+}
+
+console.log('✓ PHASE 2.5 STEP 2.10 KH-W3.5A–D PKR Foundation frozen.');
+console.log('  Seven foundation deliverables remain Completed; KH-W3.5E supersession is explicit.');
+console.log('  Registry remains 12+12 files, 12 sources, 13 nodes and 23 supporting questions.');
+console.log('  Book I remains 78 planned nodes with an active production limit of 8.');
+console.log('  Professional Workspace, Payment, Journey and customer delivery remain unblocked.');
