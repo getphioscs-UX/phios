@@ -1,0 +1,29 @@
+{
+  "auditId": "phi-os.pws-i1-t00-baseline-contract-audit.v1",
+  "schemaVersion": "1.0.0",
+  "status": "audited_not_implemented",
+  "baseline": "56cb46aaa2695693525e20901022d06b126b5a89",
+  "categories": [
+    {"category":"Glossary","status":"partial","canonicalSources":["Content/glossary/en.json","Content/glossary/zh-Hans.json"],"finding":"Bilingual term sources exist; PWS/PJA canonical terminology is not yet consolidated.","freezeDecision":"Audit only; consolidate in PWS-I1."},
+    {"category":"Objects","status":"partial","canonicalSources":["docs/pws/architecture/pws-canonical-ownership-v1.json"],"finding":"28 logical owners are frozen; several physical owner modules do not yet exist.","freezeDecision":"W2 ownership remains authoritative."},
+    {"category":"Identifiers","status":"partial","canonicalSources":["assets/js/core/ids.js","assets/js/shared.js"],"finding":"Multiple identifier generators and field conventions coexist.","freezeDecision":"Do not introduce another generator before PWS-I1."},
+    {"category":"Schema Version","status":"partial","canonicalSources":["functions/runtime/shared/schema-registry.js","content/registry/runtime-contracts.json"],"finding":"Runtime schema resolution exists, while feature contracts also embed independent version constants.","freezeDecision":"Inventory first; no version rewrite in T00."},
+    {"category":"States","status":"partial","canonicalSources":["functions/runtime/navigation/navigation-contract.js","functions/runtime/review/review-contract.js","functions/professional/access/professional-assignment-contract.js"],"finding":"State definitions are distributed by bounded context; no PWS-wide state index exists.","freezeDecision":"Preserve domain state ownership."},
+    {"category":"Operations","status":"partial","canonicalSources":["functions/api","functions/runtime","functions/professional"],"finding":"Operations span API handlers, Runtime services and Professional contracts.","freezeDecision":"API must not create canonical state."},
+    {"category":"Events","status":"partial","canonicalSources":["functions/runtime/timeline/event-types.js","functions/runtime/timeline/event-append-service.js","functions/professional/access/professional-access-audit.js"],"finding":"Runtime timeline is versioned; Professional access audit is payload-free and separately bounded.","freezeDecision":"No provider output or UI event becomes a formal object directly."},
+    {"category":"Errors","status":"partial","canonicalSources":["functions/runtime/security/security-contract.js","functions/runtime/persistence/persistence-contract.js","functions/runtime/lineage/lineage-contract.js","functions/runtime/recovery/recovery-contract.js"],"finding":"Typed error families exist but there is no single error catalogue.","freezeDecision":"Preserve family ownership and audit aliases in PWS-I1."},
+    {"category":"Directories","status":"partial","canonicalSources":["functions/runtime","functions/professional","docs/pws/architecture/pws-canonical-ownership-v1.json"],"finding":"Physical implementation remains legacy-first while W2 freezes logical owners.","freezeDecision":"No parallel runtime tree in T00."},
+    {"category":"Contract IDs","status":"partial","canonicalSources":["content/registry/runtime-contracts.json","functions/runtime/registry/contract-registry.js"],"finding":"20 Runtime contracts are registered; unregistered feature contract constants also exist.","freezeDecision":"Registry count remains 20."},
+    {"category":"Permissions","status":"partial","canonicalSources":["functions/runtime/security/access-boundary.js","functions/professional/access/professional-authorisation-decision.js"],"finding":"Runtime security and Professional authorised-read decisions coexist with explicit boundaries.","freezeDecision":"Professional order remains identity, capability, credential, certification, assignment, consent, scope, purpose."},
+    {"category":"Tests","status":"partial","canonicalSources":["scripts","package.json"],"finding":"106 check scripts exist; W3 adds a freeze checker without changing production behaviour.","freezeDecision":"All frozen checks must pass."},
+    {"category":"Legacy JPR and PJA Terms","status":"partial","canonicalSources":["docs/pws/audit/pws-pja-duplication-map.md","docs/pws/architecture/PWS-ENTRY-W2-CANONICAL-OWNERSHIP-FREEZE.md"],"finding":"PJA appears as architecture/programme terminology; no active JPR token was found outside audit material.","freezeDecision":"Do not create PJA-owned duplicates of PWS or Runtime objects."}
+  ],
+  "invariants": {
+    "contentRegistryCount": 48,
+    "runtimeContractCount": 20,
+    "migrationCount": 4,
+    "ownershipObjectCount": 28,
+    "pageBehaviorChanged": false,
+    "productionBehaviorChanged": false
+  }
+}
