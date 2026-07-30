@@ -1,0 +1,139 @@
+{
+  "contractId": "phi-os.pws-entry.paid-journey-activation-boundary.v1",
+  "contractVersion": "1.0.0",
+  "displayStep": "PWS-ENTRY-W2",
+  "sequenceKey": "PWS-ENTRY-ACTIVATION-W2",
+  "status": "paid-journey-activation-boundary-frozen",
+  "frozenAt": "2026-07-30",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "877cc11b44396c7f13716b7b48bdeb0bb4f2dcbc"
+  },
+  "namingCompatibility": {
+    "legacyDisplayStep": "PWS-ENTRY-W2",
+    "legacyContractPurpose": "Canonical ownership and one-write-source freeze",
+    "legacyCheck": "scripts/check-pws-entry-w2-canonical-ownership.mjs",
+    "replacementAllowed": false,
+    "uniqueSequenceKeyRequired": true
+  },
+  "activationPolicy": {
+    "evaluation": "all-gates-required",
+    "defaultDecision": "blocked",
+    "partialActivationAllowed": false,
+    "clientClaimMaySatisfyGate": false,
+    "paymentRedirectMaySatisfyGate": false,
+    "missingOrUnknownGateRemainsVisible": true,
+    "failedGateMustNameBlockingReason": true,
+    "activationOperation": "journey.activate",
+    "activationEvent": "journey.activated"
+  },
+  "requiredGates": [
+    {
+      "gate": "identity",
+      "requiredState": "verified-and-order-matched",
+      "writeSource": "identity-authority"
+    },
+    {
+      "gate": "order",
+      "requiredState": "confirmed-and-journey-eligible",
+      "writeSource": "runtime/commercial"
+    },
+    {
+      "gate": "payment-confirmation",
+      "requiredState": "verified-succeeded",
+      "writeSource": "runtime/commercial"
+    },
+    {
+      "gate": "active-entitlement",
+      "requiredState": "active-and-in-scope",
+      "writeSource": "runtime/entitlement"
+    },
+    {
+      "gate": "purpose-consent",
+      "requiredState": "explicit-active-and-in-scope",
+      "writeSource": "runtime/consent"
+    },
+    {
+      "gate": "data-consent",
+      "requiredState": "explicit-active-and-in-scope",
+      "writeSource": "runtime/consent"
+    },
+    {
+      "gate": "governance-not-blocking",
+      "requiredState": "no-active-block",
+      "writeSource": "governance-authority"
+    },
+    {
+      "gate": "journey-identity",
+      "requiredState": "formal-draft-identity-exists",
+      "writeSource": "core-runtime"
+    },
+    {
+      "gate": "provider-budget",
+      "requiredState": "configured-and-not-blocked",
+      "writeSource": "runtime/intelligence/cost"
+    }
+  ],
+  "paymentBoundary": {
+    "paymentAloneCreatesFormalJourney": false,
+    "paymentAloneActivatesJourney": false,
+    "paymentAloneCreatesProfessionalAssignment": false,
+    "paymentAloneCreatesProfessionalResponsibility": false,
+    "paymentAloneCreatesConfirmedReading": false,
+    "paymentAloneCreatesSignedDeliverable": false,
+    "verifiedPaymentIsNecessaryButNotSufficient": true
+  },
+  "responsibilitySeparation": {
+    "professionalAssignmentRequiresSeparateOperation": true,
+    "professionalAssignmentOperation": "assignment.create",
+    "professionalResponsibilityRequiresAcceptedEligibleAssignment": true,
+    "confirmedReadingRequiresEvidenceAndReadingGates": true,
+    "signedDeliverableRequiresFrozenContentAndAuthorisedSignature": true,
+    "journeyActivationMayInvokeProfessionalHandoff": false,
+    "journeyActivationMaySignDeliverable": false
+  },
+  "failureBehaviour": {
+    "journeyStateWhenBlocked": "draft",
+    "formalEvidenceCollectionMayStartWhenBlocked": false,
+    "paidIndividualProviderMayRunWhenBlocked": false,
+    "individualReadingMayBeConfirmedWhenBlocked": false,
+    "professionalQueueMayBeCreatedWhenBlocked": false,
+    "retryAfterCorrectableGateChangeAllowed": true,
+    "priorGateEvidenceMustRemainAuditable": true
+  },
+  "sourceContracts": [
+    "phi-os.pws-entry.payment-boundary.v1",
+    "phi-os.pws-entry.public-navigation-boundary.v1",
+    "phi-os.pws.canonical-operations.v1",
+    "phi-os.pws.canonical-states.v1"
+  ],
+  "acceptance": {
+    "requiredGateCount": 9,
+    "paymentOnlyOutcomeCount": 4,
+    "allGatesRequired": true,
+    "unknownsRemainVisible": true,
+    "paymentAloneCreatesProfessionalAssignment": false,
+    "paymentAloneCreatesProfessionalResponsibility": false,
+    "paymentAloneCreatesConfirmedReading": false,
+    "paymentAloneCreatesSignedDeliverable": false,
+    "pageChangeInThisStep": false,
+    "visualAcceptance": {
+      "status": "not-applicable",
+      "reason": "Contract-only activation freeze; no customer-visible page or interaction changed."
+    },
+    "languageAcceptance": {
+      "status": "not-applicable",
+      "reason": "No customer-facing copy changed."
+    },
+    "keyboardFocusAcceptance": {
+      "status": "not-applicable",
+      "reason": "No interactive surface changed."
+    },
+    "touchTargetAcceptance": {
+      "status": "not-applicable",
+      "reason": "No interactive surface changed."
+    },
+    "productionVerificationRequiredAfterImplementation": true
+  }
+}
