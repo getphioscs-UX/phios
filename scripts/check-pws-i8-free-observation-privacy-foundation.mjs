@@ -377,11 +377,15 @@ assert.equal(
   packageJson.scripts['check:pws-i8-free-observation'],
   'node scripts/check-pws-i8-free-observation-privacy-foundation.mjs'
 );
+const pwsI8Precheck =
+  'node scripts/check-pws-i8-free-observation-privacy-foundation.mjs';
+const pwsI9Precheck =
+  'node scripts/check-pws-i9-rule-engine-foundation.mjs';
 assert(
-  packageJson.scripts.precheck.endsWith(
-    'node scripts/check-pws-i8-free-observation-privacy-foundation.mjs'
-  ),
-  'PWS-I8 Free Observation acceptance must close precheck.'
+  packageJson.scripts.precheck.includes(pwsI8Precheck) &&
+  packageJson.scripts.precheck.indexOf(pwsI8Precheck) <
+    packageJson.scripts.precheck.indexOf(pwsI9Precheck),
+  'PWS-I8 Free Observation acceptance must precede PWS-I9.'
 );
 assert.deepEqual(evidence.acceptance, {
   anonymousObservationDefaultsToLocalStorage: true,

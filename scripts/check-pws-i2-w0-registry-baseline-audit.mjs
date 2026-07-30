@@ -59,7 +59,8 @@ assert.equal(knowledgeData.length, 12);
 assert.equal(knowledgeSchemas.length, 12);
 const postAuditContracts = new Set([
   'pws-i2-v1-freeze.json',
-  'pws-i8-free-observation-privacy-foundation-v1.json'
+  'pws-i8-free-observation-privacy-foundation-v1.json',
+  'pws-i9-rule-engine-foundation-v1.json'
 ]);
 assert.equal(
   pwsContracts.filter(file => !postAuditContracts.has(file)).length,
