@@ -9,6 +9,7 @@ const publicPages = [
   'explore.html',
   'thesis.html',
   'academy.html',
+  'articles.html',
   'services.html',
   'reality-journey.html',
   'reality-demo.html',
@@ -36,8 +37,8 @@ const shell = read('assets/js/public-shell.js');
 const navOrder = [
   "'discover'",
   "'knowledge'",
-  "'reality'",
-  "'professional'",
+  "'explore'",
+  "'services'",
   "'about'"
 ];
 let cursor = -1;
@@ -48,11 +49,14 @@ for (const label of navOrder) {
 }
 
 const footerOrder = [
+  "'/library'",
+  "'/articles'",
   "'/thesis'",
-  "'/explore#books'",
+  "'/book-one'",
   "'/explore'",
   "'/reality-journey'",
   "'/services'",
+  "'/about'",
   "'/privacy'",
   "'/terms'",
   "'/contact'"
@@ -73,6 +77,11 @@ for (const contract of [
 ]) {
   assert.ok(shell.includes(contract), `Public shell is missing ${contract}`);
 }
+assert.ok(shell.includes('href="/account"'), 'Public shell is missing Sign In');
+assert.ok(
+  shell.includes('class="public-nav__journey" href="/reality-journey"'),
+  'Public shell is missing the auxiliary Reality Journey route'
+);
 
 const home = read('index.html');
 for (const statement of [

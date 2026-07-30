@@ -10,7 +10,7 @@ has `writeAuthority: none`.
 | PJA capability | Pages | Canonical dependencies | Current activation boundary |
 | --- | --- | --- | --- |
 | Public orientation | `index.html`, `about.html`, `contact.html` | Knowledge Resource; Journey | production projection; links only |
-| Knowledge discovery | `academy.html`, `explore.html`, `glossary.html`, `library.html`, `thesis.html` | Knowledge Resource | production projection; KH-W3.5G planning does not require publication |
+| Knowledge discovery | `academy.html`, `articles.html`, `explore.html`, `glossary.html`, `library.html`, `thesis.html` | Knowledge Resource | production projection; PJA-W1 adds a published-only Articles projection without creating a write source |
 | Knowledge Atlas | `figures.html`, `figure.html` | Knowledge Resource | production projection; source-labelled reuse |
 | Book One discovery | `book-one.html`, `book-one-preview.html` | Knowledge Resource; Product / Offer / Price | Book One scope only |
 | Book One commerce status | `checkout.html`, `payment-success.html`, `payment-failure.html`, `digital-product-policy.html` | Product / Offer / Price; Payment / Entitlement | conditional Book One adapter; redirect is not Payment authority |

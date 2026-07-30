@@ -22,6 +22,9 @@ const tokens = await read('assets/css/tokens.css');
 const foundation = await read('assets/css/design/foundation.css');
 const components = await read('assets/css/design/components.css');
 const layout = await read('assets/css/design/layout.css');
+const pjaW1 = await readJson(
+  'docs/pja/pja-w1-blueprint-led-public-knowledge-ecosystem-v1.json'
+);
 
 assert.equal(contract.milestone, 'PDS-W3');
 assert.equal(contract.status, 'core-component-shell-aligned');
@@ -35,15 +38,30 @@ assert.equal(contract.boundaries.runtimeSdkChanged, false);
 assert.equal(contract.boundaries.apiChanged, false);
 assert.equal(contract.boundaries.storageKeysChanged, false);
 
+assert.equal(pjaW1.freezeId, 'PJA-W1-v1.1.0-Blueprint-led');
+const activeNavigationIds = pjaW1.publicInformationArchitecture.mainNavigation
+  .map(item => item.id);
 let cursor = shell.indexOf('const NAVIGATION');
-for (const id of fixture.primaryNavigationIds) {
+for (const id of activeNavigationIds) {
   const index = shell.indexOf(`id: '${id}'`, cursor + 1);
   assert.ok(index > cursor, `Primary navigation order changed at ${id}`);
   cursor = index;
 }
 
 cursor = shell.indexOf('const FOOTER_LINKS');
-for (const href of fixture.footerHrefs) {
+for (const href of [
+  '/library',
+  '/articles',
+  '/thesis',
+  '/book-one',
+  '/explore',
+  '/reality-journey',
+  '/services',
+  '/about',
+  '/privacy',
+  '/terms',
+  '/contact'
+]) {
   const index = shell.indexOf(`href: '${href}'`, cursor + 1);
   assert.ok(index > cursor, `Footer order changed at ${href}`);
   cursor = index;
@@ -114,7 +132,7 @@ assert.equal(
 );
 
 console.log('✓ PDS-W3 Core Component Contract and Global Shell aligned');
-console.log('  Navigation and Footer information architecture preserved');
+console.log('  Historical shell behavior preserved; PJA-W1 navigation override validated');
 console.log('  Mobile focus, Escape, outside-click and locale-close behavior validated');
 console.log('  Responsive contracts: 360px, 768px, 1440px');
 console.log('  Runtime, Runtime SDK, APIs and storage keys unchanged');

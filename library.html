@@ -26,6 +26,10 @@
         <p class="knowledge-hero__lead" data-i18n="knowledge.library.lead">
           Research, books, Atlas routes, figures, glossary terms and public downloads—organized by source and release state.
         </p>
+        <div class="knowledge-hero__actions">
+          <a class="knowledge-action knowledge-action--primary" href="/articles" data-i18n="knowledge.articles.allArticles">All articles</a>
+          <a class="knowledge-action" href="/book-one" data-i18n="knowledge.common.bookOne">Book I · How Reality Forms</a>
+        </div>
       </div>
     </section>
 
@@ -40,6 +44,7 @@
             <label for="library-category" data-i18n="knowledge.library.categoryLabel">Category</label>
             <select id="library-category">
               <option value="all" data-i18n="knowledge.library.allCategories">All categories</option>
+              <option value="articles" data-i18n="knowledge.library.articles">Articles</option>
               <option value="research" data-i18n="knowledge.library.research">Research</option>
               <option value="books" data-i18n="knowledge.library.books">Books</option>
               <option value="atlas" data-i18n="knowledge.library.atlas">Atlas</option>
@@ -52,10 +57,9 @@
             <label for="library-status" data-i18n="knowledge.library.statusLabel">Status</label>
             <select id="library-status">
               <option value="all" data-i18n="knowledge.library.allStatuses">All statuses</option>
+              <option value="published" data-i18n="knowledge.articles.published">Published</option>
               <option value="available" data-i18n="knowledge.common.available">Available</option>
               <option value="preview" data-i18n="knowledge.common.preview">Preview</option>
-              <option value="development" data-i18n="knowledge.common.development">In Development</option>
-              <option value="later" data-i18n="knowledge.common.later">Coming Later</option>
             </select>
           </div>
         </div>
@@ -67,9 +71,25 @@
         </p>
       </div>
     </section>
+
+    <section class="knowledge-section" data-knowledge-article-section>
+      <div class="knowledge-shell">
+        <div class="knowledge-section__heading">
+          <div>
+            <p class="knowledge-eyebrow" data-i18n="knowledge.articles.hubEyebrow">Published articles</p>
+            <h2 data-i18n="knowledge.articles.hubTitle">Start with three canonical questions.</h2>
+          </div>
+          <p class="knowledge-section__copy" data-i18n="knowledge.articles.hubLead">
+            These articles are drawn from registered Book I nodes and remain separate from personal or professional work.
+          </p>
+        </div>
+        <div class="knowledge-grid" data-knowledge-article-grid data-limit="3"></div>
+      </div>
+    </section>
   </main>
   <footer data-public-footer-placeholder></footer>
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/library.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-connections.js"></script>
 </body>
 </html>

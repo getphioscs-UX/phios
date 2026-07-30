@@ -1,0 +1,207 @@
+import { normalizeLocale } from '../i18n.js';
+
+const REGISTRY_PATHS = Object.freeze({
+  nodes: '/content/knowledge/registry/nodes.json',
+  localizedContent: '/content/knowledge/registry/localized-content.json',
+  assets: '/content/knowledge/registry/assets.json'
+});
+
+const ARTICLE_ROUTE_PREFIX = '/articles/';
+const SAVE_STORAGE_KEY = 'phiOSPublicKnowledgeSaves.v1';
+const cache = new Map();
+
+async function fetchJson(path) {
+  const response = await fetch(path, {
+    credentials: 'same-origin',
+    headers: {
+      Accept: 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Unable to load published Knowledge content: ${path}`);
+  }
+
+  return response.json();
+}
+
+function isApprovedPublication(record) {
+  return (
+    record?.contentStatus === 'content_reviewed' &&
+    record?.reviewStatus === 'approved' &&
+    record?.publicationStatus === 'published'
+  );
+}
+
+function publishedLocaleRecord(localizedRecord, locale) {
+  const localized = localizedRecord?.locales?.[locale];
+
+  if (!isApprovedPublication(localized)) {
+    return null;
+  }
+
+  if (
+    locale === 'en' &&
+    (
+      localized.terminologyReviewStatus !== 'approved' ||
+      localized.semanticParityStatus !== 'approved'
+    )
+  ) {
+    return null;
+  }
+
+  return localized;
+}
+
+function articleAssetFor(assets, localized) {
+  return assets.find(asset => (
+    asset.assetCode === localized.articleAssetCode &&
+    asset.assetType === 'article' &&
+    asset.locale === localized.locale &&
+    isApprovedPublication(asset)
+  ));
+}
+
+function publicArticle(content, node, localized, asset) {
+  return Object.freeze({
+    ...content,
+    node: Object.freeze({
+      nodeCode: node.nodeCode,
+      canonicalLanguage: node.canonicalLanguage,
+      requiredPublicLanguages: [...node.requiredPublicLanguages],
+      themeCode: node.themeCode,
+      productionTier: node.productionTier
+    }),
+    localizedRecord: Object.freeze({
+      contentRole: localized.contentRole,
+      locale: localized.locale,
+      slug: localized.slug
+    }),
+    publicHref: asset.publicHref || `${ARTICLE_ROUTE_PREFIX}${localized.slug}`
+  });
+}
+
+async function loadLocale(locale) {
+  const normalizedLocale = normalizeLocale(locale);
+
+  if (cache.has(normalizedLocale)) {
+    return cache.get(normalizedLocale);
+  }
+
+  const promise = Promise.all([
+    fetchJson(REGISTRY_PATHS.nodes),
+    fetchJson(REGISTRY_PATHS.localizedContent),
+    fetchJson(REGISTRY_PATHS.assets)
+  ]).then(async ([nodeRegistry, localizedRegistry, assetRegistry]) => {
+    const localizedByNode = new Map(
+      localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
+    );
+
+    const candidates = nodeRegistry.nodes.flatMap(node => {
+      if (
+        node.registryStatus !== 'frozen' ||
+        !node.requiredPublicLanguages.includes(normalizedLocale)
+      ) {
+        return [];
+      }
+
+      const localized = publishedLocaleRecord(
+        localizedByNode.get(node.nodeCode),
+        normalizedLocale
+      );
+
+      if (!localized) {
+        return [];
+      }
+
+      const asset = articleAssetFor(assetRegistry.assets, localized);
+
+      if (!asset?.contentPath) {
+        return [];
+      }
+
+      return [{ node, localized, asset }];
+    });
+
+    const loaded = await Promise.all(candidates.map(async candidate => {
+      const content = await fetchJson(`/${candidate.asset.contentPath}`);
+
+      if (
+        content.nodeCode !== candidate.node.nodeCode ||
+        content.locale !== normalizedLocale ||
+        content.assetCode !== candidate.asset.assetCode ||
+        !isApprovedPublication(content)
+      ) {
+        return null;
+      }
+
+      return publicArticle(
+        content,
+        candidate.node,
+        candidate.localized,
+        candidate.asset
+      );
+    }));
+
+    return Object.freeze(
+      loaded
+        .filter(Boolean)
+        .sort((left, right) => (
+          left.publicationOrder - right.publicationOrder
+        ))
+    );
+  });
+
+  cache.set(normalizedLocale, promise);
+
+  return promise;
+}
+
+export function loadPublishedArticles(locale) {
+  return loadLocale(locale);
+}
+
+export async function loadPublishedArticleBySlug(slug, locale) {
+  const articles = await loadLocale(locale);
+  return articles.find(article => article.slug === slug) || null;
+}
+
+export function articleHref(article) {
+  return article?.publicHref || `${ARTICLE_ROUTE_PREFIX}${article?.slug || ''}`;
+}
+
+function readSavedNodeCodes() {
+  try {
+    const stored = JSON.parse(window.localStorage.getItem(SAVE_STORAGE_KEY) || '[]');
+    return Array.isArray(stored)
+      ? stored.filter(value => typeof value === 'string')
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+export function isArticleSaved(nodeCode) {
+  return readSavedNodeCodes().includes(nodeCode);
+}
+
+export function toggleArticleSaved(nodeCode) {
+  const saved = new Set(readSavedNodeCodes());
+
+  if (saved.has(nodeCode)) {
+    saved.delete(nodeCode);
+  } else {
+    saved.add(nodeCode);
+  }
+
+  try {
+    window.localStorage.setItem(
+      SAVE_STORAGE_KEY,
+      JSON.stringify([...saved])
+    );
+  } catch {
+    // Saving is a browser convenience and never a Runtime dependency.
+  }
+
+  return saved.has(nodeCode);
+}

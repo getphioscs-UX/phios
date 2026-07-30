@@ -114,10 +114,23 @@ const footerBlock = shell.slice(
   shell.indexOf('const FOOTER_LINKS'),
   shell.indexOf('function navigationMarkup')
 );
-assert.match(navigationBlock, /id: 'reality', href: '\/reality-journey'/);
+assert.doesNotMatch(navigationBlock, /id: 'reality'/);
+assert.match(
+  shell,
+  /class="public-nav__journey" href="\/reality-journey"/
+);
 assert.match(footerBlock, /href: '\/reality-journey'/);
-assert.match(shell, /path === '\/reality-journey'/);
-assert.match(shell, /path === '\/reality-demo'/);
+
+const pjaW1 = await readJson(
+  'docs/pja/pja-w1-blueprint-led-public-knowledge-ecosystem-v1.json'
+);
+assert.equal(pjaW1.freezeId, 'PJA-W1-v1.1.0-Blueprint-led');
+assert(
+  pjaW1.publicInformationArchitecture.auxiliaryNavigation.some(item => (
+    item.id === 'start-reality-journey' &&
+    item.href === '/reality-journey'
+  ))
+);
 
 const registry = await readJson('content/registry/m3c-public-journey.json');
 assert.equal(registry.status, 'w1-journey-overview-ready');

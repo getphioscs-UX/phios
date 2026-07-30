@@ -4,6 +4,10 @@ import {
   t
 } from '../i18n.js';
 import { LIBRARY_RESOURCES } from '../knowledge/catalog.js';
+import {
+  articleHref,
+  loadPublishedArticles
+} from '../knowledge/published-content.js';
 
 const search = document.querySelector('#library-search');
 const category = document.querySelector('#library-category');
@@ -13,6 +17,7 @@ const results = document.querySelector('[data-library-results]');
 const empty = document.querySelector('[data-library-empty]');
 
 const CATEGORY_KEYS = Object.freeze({
+  articles: 'knowledge.library.articles',
   research: 'knowledge.library.research',
   books: 'knowledge.library.books',
   atlas: 'knowledge.library.atlas',
@@ -22,11 +27,13 @@ const CATEGORY_KEYS = Object.freeze({
 });
 
 const STATUS_KEYS = Object.freeze({
+  published: 'knowledge.articles.published',
   available: 'knowledge.common.available',
-  preview: 'knowledge.common.preview',
-  development: 'knowledge.common.development',
-  later: 'knowledge.common.later'
+  preview: 'knowledge.common.preview'
 });
+
+const RELEASED_RESOURCE_STATUSES = new Set(['available', 'preview']);
+let publishedArticles = [];
 
 function escapeHtml(value) {
   return String(value)
@@ -37,13 +44,37 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function publishedArticleResources(locale) {
+  return publishedArticles.map(article => ({
+    id: article.nodeCode,
+    category: 'articles',
+    status: 'published',
+    href: articleHref(article),
+    title: {
+      [locale]: article.title,
+      en: article.title
+    },
+    description: {
+      [locale]: article.summary,
+      en: article.summary
+    }
+  }));
+}
+
 function render() {
   const locale = getLocale();
   const query = String(search?.value || '').trim().toLocaleLowerCase(locale);
   const selectedCategory = category?.value || 'all';
   const selectedStatus = status?.value || 'all';
 
-  const visible = LIBRARY_RESOURCES.filter(resource => {
+  const publicResources = [
+    ...publishedArticleResources(locale),
+    ...LIBRARY_RESOURCES.filter(resource => (
+      RELEASED_RESOURCE_STATUSES.has(resource.status)
+    ))
+  ];
+
+  const visible = publicResources.filter(resource => {
     const localizedTitle = resource.title[locale] || resource.title.en;
     const localizedDescription = resource.description[locale] || resource.description.en;
     const searchText = `${localizedTitle} ${localizedDescription} ${resource.category}`.toLocaleLowerCase(locale);
@@ -76,5 +107,15 @@ function render() {
   control?.addEventListener('change', render);
 });
 
-onLocaleChange(render);
-render();
+async function loadAndRender() {
+  try {
+    publishedArticles = await loadPublishedArticles(getLocale());
+  } catch {
+    publishedArticles = [];
+  }
+
+  render();
+}
+
+onLocaleChange(loadAndRender);
+loadAndRender();

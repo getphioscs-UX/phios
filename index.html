@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/assets/css/design/components.css">
   <link rel="stylesheet" href="/assets/css/design/motion.css">
   <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-release.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
 </head>
@@ -255,6 +256,23 @@
       </div>
     </section>
 
+    <section class="public-section" aria-labelledby="home-knowledge-title" data-knowledge-article-section hidden>
+      <div class="public-container">
+        <p class="public-eyebrow" data-i18n="knowledge.articles.homeEyebrow">Public Knowledge</p>
+        <h2 id="home-knowledge-title" class="public-title" data-i18n="knowledge.articles.homeTitle">
+          Begin with a question that can be examined.
+        </h2>
+        <p class="public-lead" data-i18n="knowledge.articles.homeLead">
+          The first release keeps the Knowledge ecosystem small: three reviewed questions, each connected to its registered source.
+        </p>
+        <div class="knowledge-grid" data-knowledge-article-grid data-limit="3"></div>
+        <div class="public-actions">
+          <a class="public-button" href="/articles" data-i18n="knowledge.articles.allArticles">All articles</a>
+          <a class="public-button" href="/library" data-i18n="knowledge.library.title">Knowledge Hub</a>
+        </div>
+      </div>
+    </section>
+
     <section class="public-section public-section--soft" aria-labelledby="book-preview-title">
       <div class="public-container book-preview">
         <div class="book-preview__visual">
@@ -297,5 +315,6 @@
 
   <div data-public-footer-placeholder></div>
   <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-connections.js"></script>
 </body>
 </html>

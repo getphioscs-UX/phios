@@ -8,17 +8,20 @@ import {
 const NAVIGATION = Object.freeze([
   { id: 'discover', href: '/', key: 'publicShell.nav.discover' },
   { id: 'knowledge', href: '/library', key: 'publicShell.nav.knowledge' },
-  { id: 'reality', href: '/reality-journey', key: 'publicShell.nav.realityJourney' },
-  { id: 'professional', href: '/services', key: 'publicShell.nav.professional' },
+  { id: 'explore', href: '/explore', key: 'publicShell.nav.explore' },
+  { id: 'services', href: '/services', key: 'publicShell.nav.services' },
   { id: 'about', href: '/about', key: 'publicShell.nav.about' }
 ]);
 
 const FOOTER_LINKS = Object.freeze([
+  { href: '/library', key: 'publicShell.footer.knowledgeHub' },
+  { href: '/articles', key: 'publicShell.footer.articles' },
   { href: '/thesis', key: 'publicShell.footer.thesis' },
-  { href: '/explore#books', key: 'publicShell.footer.books' },
+  { href: '/book-one', key: 'publicShell.footer.books' },
   { href: '/explore', key: 'publicShell.footer.atlas' },
   { href: '/reality-journey', key: 'publicShell.footer.realityJourney' },
   { href: '/services', key: 'publicShell.footer.services' },
+  { href: '/about', key: 'publicShell.footer.about' },
   { href: '/privacy', key: 'publicShell.footer.privacy' },
   { href: '/terms', key: 'publicShell.footer.terms' },
   { href: '/contact', key: 'publicShell.footer.contact' }
@@ -64,6 +67,15 @@ function languageMarkup() {
   `;
 }
 
+function auxiliaryMarkup() {
+  return `
+    <div class="public-nav__actions">
+      <a class="public-nav__auxiliary" href="/account" data-i18n="publicShell.nav.signIn"></a>
+      <a class="public-nav__journey" href="/reality-journey" data-i18n="publicShell.nav.startJourney"></a>
+    </div>
+  `;
+}
+
 function headerMarkup(activeSection) {
   return `
     <header class="public-header" data-public-header>
@@ -96,6 +108,7 @@ function headerMarkup(activeSection) {
           aria-label="Primary navigation"
         >
           ${navigationMarkup(activeSection)}
+          ${auxiliaryMarkup()}
           ${languageMarkup()}
         </nav>
       </div>
@@ -165,10 +178,10 @@ function activeSectionFromPage() {
 
   if (path === '' || path === '/') return 'discover';
   if (
-    path === '/explore' ||
-    path === '/thesis' ||
     path === '/academy' ||
     path === '/library' ||
+    path === '/articles' ||
+    path.startsWith('/articles/') ||
     path === '/book-one' ||
     path === '/book-one-preview' ||
     path === '/figures' ||
@@ -180,12 +193,13 @@ function activeSectionFromPage() {
     path === '/digital-product-policy' ||
     path.startsWith('/read/book-one')
   ) return 'knowledge';
+  if (path === '/explore' || path === '/thesis') return 'explore';
   if (
     path === '/reality-journey' ||
     path === '/reality-dashboard' ||
     path === '/reality-demo'
   ) return 'reality';
-  if (path === '/services' || path === '/professional-boundary') return 'professional';
+  if (path === '/services' || path === '/professional-boundary') return 'services';
   if (path === '/about') return 'about';
 
   return '';
