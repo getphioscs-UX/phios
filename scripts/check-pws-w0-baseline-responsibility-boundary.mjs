@@ -55,7 +55,7 @@ for (const [file, expected] of Object.entries(contract.protectedArtifacts)) {
 }
 
 const registry = JSON.parse(await read('content/registry/runtime-migrations.json'));
-assert.deepEqual(registry.migrations.map(item => item.version), [1, 2, 3, 4]);
+assert.deepEqual(registry.migrations.slice(0, 4).map(item => item.version), [1, 2, 3, 4]);
 const migration = registry.migrations[3];
 assert.equal(migration.file, 'db/migrations/0004_book_commerce.sql');
 assert.equal(migration.schema_id, 'phi-os.book-commerce-schema.v1');

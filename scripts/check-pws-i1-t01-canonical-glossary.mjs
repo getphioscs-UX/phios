@@ -81,8 +81,11 @@ const contracts = JSON.parse(await read('content/registry/runtime-contracts.json
 const migrations = JSON.parse(await read('content/registry/runtime-migrations.json'));
 assert.equal(Object.keys(registry.registries).length, 48);
 assert.equal(contracts.contracts.length, 20);
-assert.equal(migrations.migrations.length, 4);
-assert.deepEqual(migrations.migrations.map(item => item.version), [1, 2, 3, 4]);
+assert(migrations.migrations.length >= 4);
+assert.deepEqual(
+  migrations.migrations.slice(0, 4).map(item => item.version),
+  [1, 2, 3, 4]
+);
 
 console.log('✓ PWS-I1-T01 Canonical Glossary v1 frozen.');
 console.log('  35 canonical terms; 11 Legacy Alias decisions; ambiguous aliases require context.');

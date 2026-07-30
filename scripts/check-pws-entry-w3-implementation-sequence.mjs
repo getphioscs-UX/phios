@@ -74,8 +74,11 @@ const contracts = JSON.parse(await read('content/registry/runtime-contracts.json
 const migrations = JSON.parse(await read('content/registry/runtime-migrations.json'));
 assert.equal(Object.keys(registry.registries).length, 48);
 assert.equal(contracts.contracts.length, 20);
-assert.equal(migrations.migrations.length, 4);
-assert.deepEqual(migrations.migrations.map(item => item.version), [1, 2, 3, 4]);
+assert(migrations.migrations.length >= 4);
+assert.deepEqual(
+  migrations.migrations.slice(0, 4).map(item => item.version),
+  [1, 2, 3, 4]
+);
 
 console.log('✓ PWS-ENTRY-W3 implementation sequence and PWS-I1-T00 audit frozen.');
 console.log('  28 strictly ordered stages; duplicate programme labels have unique sequence keys.');

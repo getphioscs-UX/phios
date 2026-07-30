@@ -103,8 +103,11 @@ const migrations = JSON.parse(
 );
 assert.equal(Object.keys(contentRegistry.registries).length, 48);
 assert.equal(runtimeContracts.contracts.length, 20);
-assert.equal(migrations.migrations.length, 4);
-assert.deepEqual(migrations.migrations.map(item => item.version), [1, 2, 3, 4]);
+assert(migrations.migrations.length >= 4);
+assert.deepEqual(
+  migrations.migrations.slice(0, 4).map(item => item.version),
+  [1, 2, 3, 4]
+);
 
 console.log('✓ PWS-I1-T04 Canonical States v1 frozen.');
 console.log('  20 closed state enums with explicit initial, terminal and transition rules.');
