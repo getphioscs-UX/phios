@@ -15,6 +15,7 @@ has `writeAuthority: none`.
 | Book One discovery | `book-one.html`, `book-one-preview.html` | Knowledge Resource; Product / Offer / Price | Book One scope only |
 | Book One commerce status | `checkout.html`, `payment-success.html`, `payment-failure.html`, `digital-product-policy.html` | Product / Offer / Price; Payment / Entitlement | conditional Book One adapter; redirect is not Payment authority |
 | Account and membership projection | `account.html`, `account-my-reality.html`, `membership.html` | Entitlement; Journey; Workspace | inactive/partial until authoritative read models exist |
+| Free Observation privacy | `free-observation.html` | Consent | local-only PWS-I8 projection; no canonical Consent, server write or formal Journey |
 | Journey orientation | `reality-journey.html`, `reality-demo.html` | Journey; Question Route | orientation and demo; no formal identity from demo |
 | Journey Runtime projection | `reality-entry.html`, `reality-reconstruction.html`, `reality-reading.html`, `reality-navigation.html`, `reality-review.html`, `reality-dashboard.html`, `my-reality.html` | Journey; Question Route; Provider | Core Runtime projection; all mutations stay in Runtime |
 | Professional discovery | `services.html`, `professional-boundary.html`, `professional-appointments.html` | Product / Offer / Price; Assignment | catalog and preview only; no professional activation |

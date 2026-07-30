@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use a local-only, anonymous and clearable PHI OS Free Observation without starting a formal Journey.">
+  <title data-i18n="freeObservation.metaTitle">Free Observation — PHI OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/free-observation.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
+</head>
+<body class="public-page free-observation-page" data-page="free-observation">
+  <a class="phi-skip-link" href="#free-observation-main" data-i18n="freeObservation.skip">
+    Skip to Free Observation
+  </a>
+  <div data-public-header-placeholder></div>
+
+  <main id="free-observation-main">
+    <section class="free-observation-hero">
+      <div class="public-container">
+        <p class="public-eyebrow" data-i18n="freeObservation.hero.eyebrow">
+          Free Explore · Privacy by default
+        </p>
+        <h1 class="public-display" data-i18n="freeObservation.hero.title">
+          Observe a change without starting a formal Journey.
+        </h1>
+        <p class="public-lead" data-i18n="freeObservation.hero.lead">
+          Choose only from broad, non-sensitive options. Nothing is sent to a
+          server, no identity is requested and no professional queue is created.
+        </p>
+        <div class="public-actions">
+          <a class="public-button public-button--primary" href="#observe">
+            <span data-i18n="freeObservation.hero.start">Begin a local observation</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a class="public-button" href="#privacy-boundary">
+            <span data-i18n="freeObservation.hero.privacy">Review the privacy boundary</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy-boundary" class="public-section public-section--soft" aria-labelledby="privacy-boundary-title">
+      <div class="public-container">
+        <p class="public-eyebrow" data-i18n="freeObservation.privacy.eyebrow">PWS-I8 privacy foundation</p>
+        <h2 id="privacy-boundary-title" class="public-title" data-i18n="freeObservation.privacy.title">
+          Local first. Anonymous. Clearable.
+        </h2>
+        <p class="public-lead" data-i18n="freeObservation.privacy.lead">
+          Free Observation is a non-formal browser tool. It is not a Runtime,
+          Reading, diagnosis, professional intake or evidence record.
+        </p>
+        <div class="free-observation-privacy-grid">
+          <article class="free-observation-privacy-card">
+            <h3 data-i18n="freeObservation.privacy.localTitle">Browser-local only</h3>
+            <p data-i18n="freeObservation.privacy.localCopy">A record is saved only when you choose Save locally. It remains in this browser.</p>
+          </article>
+          <article class="free-observation-privacy-card">
+            <h3 data-i18n="freeObservation.privacy.anonymousTitle">No account or identity</h3>
+            <p data-i18n="freeObservation.privacy.anonymousCopy">No name, email, account, Journey ID or professional reference is collected.</p>
+          </article>
+          <article class="free-observation-privacy-card">
+            <h3 data-i18n="freeObservation.privacy.sensitiveTitle">No sensitive input</h3>
+            <p data-i18n="freeObservation.privacy.sensitiveCopy">The form has no free-text or file field.</p>
+          </article>
+          <article class="free-observation-privacy-card">
+            <h3 data-i18n="freeObservation.privacy.clearTitle">Clear whenever you choose</h3>
+            <p data-i18n="freeObservation.privacy.clearCopy">Delete one record or clear every locally saved observation.</p>
+          </article>
+          <article class="free-observation-privacy-card free-observation-privacy-card--wide">
+            <h3 data-i18n="freeObservation.privacy.separationTitle">Outside formal systems</h3>
+            <p data-i18n="freeObservation.privacy.separationCopy">Saving does not create a Journey, Formal Evidence, Runtime Memory, Assignment or Professional Queue entry.</p>
+          </article>
+        </div>
+        <p class="free-observation-retention" data-free-observation-privacy-status>
+          Local records expire automatically after 30 days.
+        </p>
+      </div>
+    </section>
+
+    <section id="observe" class="public-section" aria-labelledby="observe-title">
+      <div class="public-container">
+        <p class="public-eyebrow" data-i18n="freeObservation.form.eyebrow">Bounded observation</p>
+        <h2 id="observe-title" class="public-title" data-i18n="freeObservation.form.title">Select three broad signals.</h2>
+        <p class="public-lead" data-i18n="freeObservation.form.lead">
+          These presets support orientation without collecting a personal history.
+        </p>
+
+        <form id="free-observation-form" class="free-observation-form" novalidate>
+          <fieldset class="free-observation-fieldset">
+            <legend data-i18n="freeObservation.form.focusLegend">What would you like to notice?</legend>
+            <div class="free-observation-options">
+              <label><input type="radio" name="observationFocus" value="change"><span data-i18n="freeObservation.options.focus.change">Change</span></label>
+              <label><input type="radio" name="observationFocus" value="direction"><span data-i18n="freeObservation.options.focus.direction">Direction</span></label>
+              <label><input type="radio" name="observationFocus" value="constraint"><span data-i18n="freeObservation.options.focus.constraint">Constraint</span></label>
+              <label><input type="radio" name="observationFocus" value="continuity"><span data-i18n="freeObservation.options.focus.continuity">Continuity</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="free-observation-fieldset">
+            <legend data-i18n="freeObservation.form.signalLegend">What kind of signal is present?</legend>
+            <div class="free-observation-options">
+              <label><input type="radio" name="observationSignal" value="new_difference"><span data-i18n="freeObservation.options.signal.new_difference">A new difference</span></label>
+              <label><input type="radio" name="observationSignal" value="unclear_context"><span data-i18n="freeObservation.options.signal.unclear_context">Context is unclear</span></label>
+              <label><input type="radio" name="observationSignal" value="competing_priorities"><span data-i18n="freeObservation.options.signal.competing_priorities">Priorities compete</span></label>
+              <label><input type="radio" name="observationSignal" value="repeating_pattern"><span data-i18n="freeObservation.options.signal.repeating_pattern">A pattern repeats</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="free-observation-fieldset">
+            <legend data-i18n="freeObservation.form.horizonLegend">What time horizon is useful?</legend>
+            <div class="free-observation-options">
+              <label><input type="radio" name="observationHorizon" value="today"><span data-i18n="freeObservation.options.horizon.today">Today</span></label>
+              <label><input type="radio" name="observationHorizon" value="this_week"><span data-i18n="freeObservation.options.horizon.this_week">This week</span></label>
+              <label><input type="radio" name="observationHorizon" value="this_month"><span data-i18n="freeObservation.options.horizon.this_month">This month</span></label>
+            </div>
+          </fieldset>
+
+          <p class="free-observation-status" data-free-observation-status aria-live="polite"></p>
+          <div class="public-actions">
+            <button class="public-button public-button--primary" type="submit">
+              <span data-i18n="freeObservation.form.action">Create local orientation</span>
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </form>
+
+        <section class="free-observation-result" data-free-observation-result aria-labelledby="free-observation-result-title" hidden>
+          <p class="public-eyebrow" data-i18n="freeObservation.result.eyebrow">Local orientation</p>
+          <h3 id="free-observation-result-title" class="public-title" data-i18n="freeObservation.result.title">A bounded place to begin.</h3>
+          <div class="free-observation-result__summary">
+            <span class="free-observation-chip"><span data-i18n="freeObservation.result.focus">Focus</span>:&nbsp;<strong data-result-focus></strong></span>
+            <span class="free-observation-chip"><span data-i18n="freeObservation.result.signal">Signal</span>:&nbsp;<strong data-result-signal></strong></span>
+            <span class="free-observation-chip"><span data-i18n="freeObservation.result.horizon">Horizon</span>:&nbsp;<strong data-result-horizon></strong></span>
+          </div>
+          <div class="free-observation-result-grid">
+            <article class="free-observation-result-card">
+              <h3 data-i18n="freeObservation.result.orientation">Observation</h3>
+              <p data-result-orientation></p>
+            </article>
+            <article class="free-observation-result-card">
+              <h3 data-i18n="freeObservation.result.evidence">Evidence boundary</h3>
+              <p data-result-evidence></p>
+            </article>
+            <article class="free-observation-result-card">
+              <h3 data-i18n="freeObservation.result.next">Small next step</h3>
+              <p data-result-next></p>
+            </article>
+          </div>
+          <p class="free-observation-result__boundary" data-i18n="freeObservation.result.boundary">
+            This is general orientation. Causes, meaning and permanence remain unknown.
+          </p>
+          <div class="public-actions">
+            <button class="public-button public-button--primary" type="button" data-save-observation data-i18n="freeObservation.form.save">Save locally</button>
+            <button class="public-button" type="button" data-reset-observation data-i18n="freeObservation.form.reset">Start another</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="public-section public-section--soft" aria-labelledby="saved-observations-title">
+      <div class="public-container">
+        <div class="free-observation-saved-header">
+          <div>
+            <p class="public-eyebrow" data-i18n="freeObservation.saved.eyebrow">Saved in this browser</p>
+            <h2 id="saved-observations-title" class="public-title" data-i18n="freeObservation.saved.title">Your local observations.</h2>
+            <p class="public-lead" data-i18n="freeObservation.saved.lead">These records are not synced or uploaded.</p>
+            <p data-free-observation-count aria-live="polite">0 local records</p>
+          </div>
+          <button class="free-observation-clear" type="button" data-free-observation-clear-all data-confirming="false" hidden>
+            Clear all local records
+          </button>
+        </div>
+        <div class="free-observation-saved-list" data-free-observation-saved-list></div>
+        <p class="free-observation-empty" data-free-observation-empty data-i18n="freeObservation.saved.empty">
+          No local observations are saved.
+        </p>
+      </div>
+    </section>
+
+    <section class="public-section free-observation-upload" aria-labelledby="upload-boundary-title">
+      <div class="public-container">
+        <p class="public-eyebrow" data-i18n="freeObservation.upload.eyebrow">Server upload boundary</p>
+        <h2 id="upload-boundary-title" class="public-title" data-i18n="freeObservation.upload.title">
+          Server upload is not active in this foundation.
+        </h2>
+        <p class="public-lead" data-i18n="freeObservation.upload.lead">
+          A future upload cannot be inferred from local saving.
+        </p>
+        <div class="free-observation-upload-grid">
+          <article class="free-observation-upload-card"><h3>01</h3><p data-i18n="freeObservation.upload.purpose">Purpose must be stated before consent.</p></article>
+          <article class="free-observation-upload-card"><h3>02</h3><p data-i18n="freeObservation.upload.scope">Only the selected preset fields may be in scope.</p></article>
+          <article class="free-observation-upload-card"><h3>03</h3><p data-i18n="freeObservation.upload.retention">Retention and deletion terms must be visible.</p></article>
+        </div>
+        <div class="free-observation-upload-state">
+          <span data-i18n="freeObservation.upload.action">No upload request is made on this page.</span>
+          <strong data-i18n="freeObservation.upload.state">Capability unavailable · local-only state preserved</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="public-section" aria-labelledby="free-observation-exits-title">
+      <div class="public-container">
+        <p class="public-eyebrow" data-i18n="freeObservation.exits.eyebrow">Continue by choice</p>
+        <h2 id="free-observation-exits-title" class="public-title" data-i18n="freeObservation.exits.title">Free Observation does not force a service route.</h2>
+        <nav class="free-observation-exit-grid" aria-label="Free Observation exits">
+          <a href="/articles" data-i18n="freeObservation.exits.articles">Read published articles</a>
+          <a href="/reality-demo" data-i18n="freeObservation.exits.demo">View the Reality Demo</a>
+          <a href="/reality-journey" data-i18n="freeObservation.exits.journey">Understand the Reality Journey</a>
+          <a href="/" data-i18n="freeObservation.exits.leave">Return to Discover</a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <div data-public-footer-placeholder></div>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/free-observation.js"></script>
+</body>
+</html>

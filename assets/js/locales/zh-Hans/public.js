@@ -205,7 +205,8 @@ const publicExperience = Object.freeze({
       title: '观看一个变化如何变得可以导航。',
       lead: '探索固定案例、检查证据边界，并尝试一条轻量输入。本页不会建立正式 Runtime，也不会写入 Runtime Memory。',
       watch: '观看案例',
-      try: '尝试引导式开场'
+      try: '尝试引导式开场',
+      freeObservation: '使用免费观察'
     },
     watch: {
       eyebrow: '观看 Demo',
@@ -329,7 +330,8 @@ const publicExperience = Object.freeze({
       eyebrow: '由你决定是否继续',
       title: '准备建立一个完整、可回顾的 Runtime 吗？',
       lead: '完整现实旅程能够在 Runtime 契约下保留证据、重建、读取、导航与后续回顾。',
-      action: '开始完整现实旅程'
+      action: '开始完整现实旅程',
+      freeObservation: '继续使用纯本地免费观察'
     }
   },
   servicesPublic: {

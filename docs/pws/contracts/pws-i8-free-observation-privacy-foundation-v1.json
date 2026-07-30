@@ -1,0 +1,116 @@
+{
+  "freezeId": "PWS-I8-Free-Observation-Privacy-Foundation-v1.0.0-Frozen",
+  "programme": "PHASE 4 Free Explore Foundation",
+  "step": "STEP 4.1",
+  "sequenceKey": "PWS-I8-FREE-PRIVACY-FOUNDATION",
+  "version": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "1c59299a64f7ddcd5dd2cbfe4ee56beff5f04d72"
+  },
+  "ownership": {
+    "consentOwner": "PWS-I8",
+    "privacyOwner": "PWS-I8",
+    "pageWriteAuthority": "none",
+    "createsSecondSourceOfTruth": false
+  },
+  "localObservation": {
+    "schemaVersion": "phi-os.free-observation.local.v1",
+    "storageKey": "phiOSFreeObservations.v1",
+    "storageLocation": "browser_local_only",
+    "saveTrigger": "explicit_user_action",
+    "anonymous": true,
+    "identityFieldsStored": false,
+    "freeTextAccepted": false,
+    "filesAccepted": false,
+    "sensitiveDataStored": false,
+    "retentionDays": 30,
+    "maximumRecords": 12,
+    "expiredRecordsPruned": true,
+    "userCanDeleteOne": true,
+    "userCanClearAll": true
+  },
+  "allowedRecordFields": [
+    "schemaVersion",
+    "observationId",
+    "createdAt",
+    "expiresAt",
+    "selection.focus",
+    "selection.signal",
+    "selection.horizon",
+    "orientation.focusKey",
+    "orientation.signalKey",
+    "orientation.nextStepKey",
+    "boundary"
+  ],
+  "prohibitedData": [
+    "free_text",
+    "name",
+    "email",
+    "account_identifier",
+    "journey_identifier",
+    "contact_details",
+    "government_identifiers",
+    "health_records",
+    "financial_records",
+    "account_credentials",
+    "files"
+  ],
+  "serverUpload": {
+    "available": false,
+    "fetchPerformed": false,
+    "endpointCreated": false,
+    "explicitConsentRequired": true,
+    "requirements": [
+      "separate_affirmative_action",
+      "stated_purpose",
+      "exact_field_scope",
+      "retention_and_deletion_terms",
+      "revocation_path"
+    ],
+    "browserDraftCreatesCanonicalConsent": false,
+    "owner": "PWS-I8"
+  },
+  "formalSystemSeparation": {
+    "formalJourneyCreated": false,
+    "formalEvidenceCreated": false,
+    "runtimeMemoryWritten": false,
+    "professionalQueueWritten": false,
+    "assignmentCreated": false,
+    "providerInvoked": false,
+    "entitlementRequired": false,
+    "serviceDefault": false
+  },
+  "surfaces": {
+    "primaryPage": "free-observation.html",
+    "localContract": "assets/js/modules/free-observation-local.js",
+    "pageController": "assets/js/pages/free-observation.js",
+    "realityDemoEntry": "reality-demo.html",
+    "locales": [
+      "en",
+      "zh-Hans"
+    ]
+  },
+  "preservation": {
+    "coreRuntimeChanged": false,
+    "runtimeSchemaChanged": false,
+    "runtimePersistenceChanged": false,
+    "d1MigrationAdded": false,
+    "apiEndpointAdded": false,
+    "productChanged": false,
+    "entitlementChanged": false,
+    "professionalQueueChanged": false,
+    "providerChanged": false
+  },
+  "acceptance": {
+    "anonymousObservationDefaultsToLocalStorage": true,
+    "serverUploadRequiresExplicitConsent": true,
+    "freeObservationCreatesFormalJourney": false,
+    "freeObservationCreatesProfessionalQueueEntry": false,
+    "userCanClear": true,
+    "sensitiveDataStored": false,
+    "command": "npm run check:pws-i8-free-observation"
+  }
+}

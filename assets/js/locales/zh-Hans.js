@@ -14,6 +14,7 @@ import knowledgeRelease from './zh-Hans/knowledge.js';
 import journeyPublic from './zh-Hans/journey.js';
 import professional from './zh-Hans/professional.js';
 import account from './zh-Hans/account.js';
+import freeObservation from './zh-Hans/free-observation.js';
 
 const dictionary = Object.freeze({
   ...shared,
@@ -30,7 +31,8 @@ const dictionary = Object.freeze({
   ...knowledgeRelease,
   ...journeyPublic,
   ...professional,
-  ...account
+  ...account,
+  ...freeObservation
 });
 
 export default dictionary;

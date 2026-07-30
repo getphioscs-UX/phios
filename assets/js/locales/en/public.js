@@ -205,7 +205,8 @@ const publicExperience = Object.freeze({
       title: 'Watch how a change becomes navigable.',
       lead: 'Explore a fixed example, inspect the evidence boundary and try one lightweight input. Nothing on this page creates a formal Runtime or writes to Runtime Memory.',
       watch: 'Watch the case',
-      try: 'Try the guided opening'
+      try: 'Try the guided opening',
+      freeObservation: 'Use Free Observation'
     },
     watch: {
       eyebrow: 'Watch Demo',
@@ -329,7 +330,8 @@ const publicExperience = Object.freeze({
       eyebrow: 'Continue when you choose',
       title: 'Ready to build a full, reviewable Runtime?',
       lead: 'The full Reality Journey can preserve evidence, reconstruction, reading, navigation and later review under the Runtime contracts.',
-      action: 'Start Full Reality Journey'
+      action: 'Start Full Reality Journey',
+      freeObservation: 'Stay local with Free Observation'
     }
   },
   servicesPublic: {

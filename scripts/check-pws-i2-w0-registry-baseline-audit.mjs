@@ -57,8 +57,12 @@ const knowledgeSchemas = await listFiles(
 const pwsContracts = await listFiles('docs/pws/contracts', '.json');
 assert.equal(knowledgeData.length, 12);
 assert.equal(knowledgeSchemas.length, 12);
+const postAuditContracts = new Set([
+  'pws-i2-v1-freeze.json',
+  'pws-i8-free-observation-privacy-foundation-v1.json'
+]);
 assert.equal(
-  pwsContracts.filter(file => file !== 'pws-i2-v1-freeze.json').length,
+  pwsContracts.filter(file => !postAuditContracts.has(file)).length,
   10
 );
 
