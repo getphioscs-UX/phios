@@ -116,3 +116,8 @@ Publication Status：
 - published
 - unpublished
 - archived
+
+
+## v1.1 Granularity rule
+
+The registry separates canonical knowledge nodes, supporting questions, and search aliases. A public question is not automatically a canonical node. Canonical nodes are mechanism-based and are the only units that may require independent bilingual production. Supporting questions remain searchable and publishable inside canonical content without generating a separate asset obligation.
