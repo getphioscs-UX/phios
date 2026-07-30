@@ -27,6 +27,7 @@ const [
   contract,
   pwsI8,
   pwsI9,
+  pjaW2c,
   fixtures,
   concepts,
   themes,
@@ -42,6 +43,7 @@ const [
   engineWrapper,
   engineCore,
   style,
+  publishedLoader,
   packageJson
 ] = await Promise.all([
   readJson('docs/pja/pja-w2-free-explore-rule-navigation-v1.json'),
@@ -49,6 +51,10 @@ const [
     'docs/pws/contracts/pws-i8-free-observation-privacy-foundation-v1.json'
   ),
   readJson('docs/pws/contracts/pws-i9-rule-engine-foundation-v1.json'),
+  readJson(
+    'content/knowledge/governance/policies/' +
+    'pja-w2c-claim-source-review-policy.json'
+  ),
   readJson('tests/fixtures/pja-w2-free-explore-scenarios.json'),
   readJson('content/registry/concepts.json'),
   readJson('content/knowledge/registry/themes.json'),
@@ -64,6 +70,7 @@ const [
   read('functions/pws/intelligence/rule-engine.js'),
   read('assets/js/modules/pws-i9-rule-engine-core.js'),
   read('assets/css/free-explore.css'),
+  read('assets/js/knowledge/published-content.js'),
   readJson('package.json')
 ]);
 
@@ -81,6 +88,33 @@ assert.deepEqual(contract.baseline, {
 });
 assert(contract.prerequisites.includes(pwsI8.freezeId));
 assert(contract.prerequisites.includes(pwsI9.freezeId));
+assert(contract.prerequisites.includes(pjaW2c.contractId));
+assert.deepEqual(contract.reconciliation, {
+  baseline: {
+    repository: 'getphioscs-UX/phios',
+    branch: 'main',
+    commit: '7ef2c237211635c037be4b636e2b5807023e69ef'
+  },
+  acceptanceOrder: [
+    'PJA-W2C',
+    'PWS-I8',
+    'PWS-I9',
+    'PJA-W2'
+  ],
+  legacyPjaW1PublicationGatePreserved: true,
+  newStructuredPublicationRemainsOwnedByPjaW2c: true,
+  governanceAuthorityDuplicated: false,
+  internalClaimSourceReviewFieldsRendered: false
+});
+assert.equal(
+  pjaW2c.publicationGate
+    .legacyPjaW1ArticlesRemainOnFrozenW1GateUntilExplicitHumanMigration,
+  true
+);
+assert.equal(
+  pjaW2c.publicationGate.missingGovernanceRecordBlocksNewStructuredPublication,
+  true
+);
 
 assert.deepEqual(contract.stages, [
   'Question',
@@ -115,6 +149,10 @@ assert.equal(contract.inputBoundary.fileFieldPresent, false);
 assert.equal(contract.ruleProjection.forcedClassificationAllowed, false);
 assert.equal(contract.ruleProjection.providerInvoked, false);
 assert.equal(contract.ruleProjection.formalRoutePersisted, false);
+assert.equal(
+  contract.ruleProjection.governanceRegistryReadByPublicController,
+  false
+);
 
 assert.equal(
   contract.localSave.schemaVersion,
@@ -388,6 +426,34 @@ for (const forbidden of [
     `Free Explore controller contains forbidden dependency: ${forbidden}`
   );
 }
+
+assert.equal(
+  fixtures.governanceProjection.legacyPublicationGate,
+  'PJA-W1'
+);
+assert.equal(
+  fixtures.governanceProjection.newStructuredPublicationGate,
+  'PJA-W2C'
+);
+assert.deepEqual(
+  fixtures.governanceProjection.forbiddenFields,
+  pjaW2c.publicProjection.forbidden
+);
+const publicProjectionSources = [
+  controller,
+  localModule,
+  engineCore,
+  publishedLoader
+].join('\n').toLowerCase();
+for (const forbiddenField of fixtures.governanceProjection.forbiddenFields) {
+  assert.equal(
+    publicProjectionSources.includes(forbiddenField),
+    false,
+    `Free Explore exposes PJA-W2C governance field: ${forbiddenField}`
+  );
+}
+assert.equal(controller.includes('/knowledge/governance/'), false);
+assert.equal(controller.includes('/governance/'), false);
 for (const registryPath of pwsI9.knowledgeSources) {
   assert(
     controller.includes(`/${registryPath}`),
@@ -451,6 +517,22 @@ assert(
     'scripts/check-pja-w2-free-explore-rule-navigation.mjs'
   )
 );
+const acceptanceScripts = [
+  'scripts/check-pja-w2c-claim-source-review-governance.mjs',
+  'scripts/check-pws-i8-free-observation-privacy-foundation.mjs',
+  'scripts/check-pws-i9-rule-engine-foundation.mjs',
+  'scripts/check-pja-w2-free-explore-rule-navigation.mjs'
+];
+for (const script of acceptanceScripts) {
+  assert(packageJson.scripts.precheck.includes(script));
+}
+for (let index = 1; index < acceptanceScripts.length; index += 1) {
+  assert(
+    packageJson.scripts.precheck.indexOf(acceptanceScripts[index - 1]) <
+    packageJson.scripts.precheck.indexOf(acceptanceScripts[index]),
+    `Invalid PJA-W2 acceptance order at ${acceptanceScripts[index]}`
+  );
+}
 
 console.log(
   '✓ PJA-W2 Free Explore passed: six-stage bilingual rule navigation, ' +

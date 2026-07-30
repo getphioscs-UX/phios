@@ -17,6 +17,27 @@ Question
 The existing Reality Atlas remains on the same page below Free Explore. No new
 top-level route, second Knowledge Source or formal Runtime entry is introduced.
 
+## Merged baseline reconciliation
+
+The implementation is reconciled on `main@7ef2c23`, where PJA-W2C governance
+already exists. Free Explore does not duplicate or read Claim, Source or
+Editorial Review governance objects in the public browser.
+
+The six legacy PJA-W1 Articles remain on their frozen W1 publication gate until
+an explicit human migration. Any new structured Article remains subject to the
+PJA-W2C publication gate. Internal Claim Codes, support assessments, Findings,
+reviewer identities, accepted risk and private source locations are not
+projected into Free Explore.
+
+The acceptance order is:
+
+```text
+PJA-W2C
+→ PWS-I8
+→ PWS-I9
+→ PJA-W2
+```
+
 ## Rule authority
 
 Free Explore projects the frozen PWS-I9 deterministic rule engine. The
@@ -104,5 +125,6 @@ Run:
 ```bash
 npm run check:pja-w2
 npm run check:pws-i9-rule-engine
+npm run check:pja-w2c
 npm run check:i18n
 ```
