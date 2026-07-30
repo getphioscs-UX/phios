@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import './check-pws-entry-w0-payment-boundary.mjs';
+import './check-pws-entry-public-w1-navigation-boundary.mjs';
 import {
   createProfessionalConsent
 } from '../functions/professional/consent/professional-consent-contract.js';
@@ -266,10 +267,10 @@ const migrations = JSON.parse(
 );
 assert.equal(Object.keys(registryIndex.registries).length, 48);
 assert.equal(runtimeContracts.contracts.length, 20);
-assert.equal(migrations.migrations.length, 4);
+assert.equal(migrations.migrations.length, 5);
 assert.deepEqual(
   migrations.migrations.map(item => item.version),
-  [1, 2, 3, 4]
+  [1, 2, 3, 4, 5]
 );
 
 for (const file of [

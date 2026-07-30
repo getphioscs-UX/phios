@@ -97,8 +97,8 @@ const migrationRegistry = await readJson(
   'content/registry/runtime-migrations.json'
 );
 const migrationFiles = await listFiles('db/migrations', '.sql');
-assert.equal(migrationRegistry.migrations.length, 4);
-assert.equal(migrationFiles.length, 4);
+assert.equal(migrationRegistry.migrations.length, 5);
+assert.equal(migrationFiles.length, 5);
 for (const migration of migrationRegistry.migrations) {
   assert(await exists(migration.file));
   assert.equal(migration.immutable, true);
@@ -151,6 +151,6 @@ assert(
 
 console.log('✓ PWS-I2-W0 Registry Baseline Audit passed.');
 console.log('  Registry 6 modules; Runtime Contracts/Schemas/Versions 20 each.');
-console.log('  Persistence 9 methods; D1 1 binding; executable Migrations 4.');
+console.log('  Persistence 9 methods; D1 1 binding; executable Migrations 5.');
 console.log('  Static JSON 111; legacy index 48; unindexed excluding index 62.');
 console.log('  Multiple-source risks recorded; no Registry or Migration changed.');

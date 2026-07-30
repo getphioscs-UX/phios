@@ -42,8 +42,8 @@
       "binding": "RUNTIME_DB",
       "databaseName": "phios-runtime-production",
       "migrationsDirectory": "db/migrations",
-      "executableMigrations": 4,
-      "migrationCreateTableStatements": 42,
+      "executableMigrations": 5,
+      "migrationCreateTableStatements": 48,
       "schemaSnapshotFiles": 4,
       "decision": "extend_only_through_authorised_migration"
     },
@@ -93,7 +93,7 @@
       "id": "I2-W0-F04",
       "area": "D1",
       "severity": "boundary",
-      "finding": "One production D1 binding and four immutable executable migrations already exist.",
+      "finding": "One production D1 binding and five immutable executable migrations already exist, including the authorised Universal Registry migration.",
       "decision": "Any future Registry tables require a new sequential migration; existing SQL and checksums remain immutable."
     },
     {
@@ -146,6 +146,7 @@
     {"source":"db/migrations/0002_initial_runtime.sql","owner":"Migration Registry","action":"immutable"},
     {"source":"db/migrations/0003_financial_professional_infrastructure.sql","owner":"Migration Registry","action":"immutable"},
     {"source":"db/migrations/0004_book_commerce.sql","owner":"Migration Registry","action":"immutable"},
+    {"source":"db/migrations/0005_pws_universal_registry.sql","owner":"Migration Registry","action":"immutable"},
     {"source":"content/knowledge/registry","owner":"PKR","action":"preserve"},
     {"source":"docs/pws/contracts/pws-i1-v1-freeze.json","owner":"PWS-I1","action":"consume_only"}
   ],

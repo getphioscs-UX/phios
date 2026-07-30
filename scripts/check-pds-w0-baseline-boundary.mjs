@@ -47,14 +47,6 @@ for (const file of deliverables) {
 
 const contract = await readJson(deliverables[0]);
 const fixture = await readJson(deliverables[1]);
-const runtimeMigrationRegistry = await readJson(
-  'content/registry/runtime-migrations.json'
-);
-const authorisedAdditiveMigrations = new Set(
-  runtimeMigrationRegistry.migrations
-    .filter(migration => migration.immutable === true)
-    .map(migration => migration.file)
-);
 
 assert.equal(contract.milestone, 'PDS-W0');
 assert.equal(contract.contractVersion, '1.0.0');
@@ -119,18 +111,27 @@ for (const protectedPath of fixture.protectedPaths) {
         }
       });
     if (exactBaselineRecovery) changed = '';
-    const authorisedPostPdsMigration = changedFiles.length > 0 &&
-      changedFiles.every(file => {
-        if (!file.startsWith('db/migrations/')) return false;
-        if (!authorisedAdditiveMigrations.has(file)) return false;
-        try {
-          git(['cat-file', '-e', `${contract.baseline.commit}:${file}`]);
-          return false;
-        } catch {
-          return true;
-        }
-      });
-    if (authorisedPostPdsMigration) changed = '';
+
+    // Later phases may add a new immutable Migration through the canonical
+    // Migration Registry. Preserve every PDS-baseline Migration byte-for-byte
+    // and accept only newly added, registered, immutable files. The dedicated
+    // Migration checks verify sequence and checksum after this boundary check.
+    if (changed && protectedPath === 'db/migrations') {
+      const migrationRegistry = await readJson(
+        'content/registry/runtime-migrations.json'
+      );
+      const registeredImmutableFiles = new Set(
+        migrationRegistry.migrations
+          .filter(migration => migration.immutable === true)
+          .map(migration => migration.file)
+      );
+      const authorisedAdditions = changedFiles.length > 0 &&
+        changedFiles.every(file =>
+          !baselineFiles.includes(file) &&
+          registeredImmutableFiles.has(file)
+        );
+      if (authorisedAdditions) changed = '';
+    }
   }
   assert.equal(changed, '', `Protected PDS-W0 path changed: ${protectedPath}`);
 }

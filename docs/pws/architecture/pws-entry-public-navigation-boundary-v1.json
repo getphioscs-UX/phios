@@ -1,0 +1,93 @@
+{
+  "contractId": "phi-os.pws-entry.public-navigation-boundary.v1",
+  "contractVersion": "1.0.0",
+  "displayStep": "PWS-ENTRY-W1",
+  "sequenceKey": "PWS-ENTRY-PUBLIC-W1",
+  "status": "public-knowledge-free-navigation-frozen",
+  "frozenAt": "2026-07-30",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "d92761e78a81bd9a73bb5c010c8d8813b2eab362"
+  },
+  "namingCompatibility": {
+    "legacyDisplayStep": "PWS-ENTRY-W1",
+    "legacyContractPurpose": "Professional authorisation and authorised data loading",
+    "legacyCheck": "scripts/check-pws-entry-w1-authorised-data-loader.mjs",
+    "replacementAllowed": false,
+    "uniqueSequenceKeyRequired": true
+  },
+  "publicRoutes": [
+    {"routeType":"articles","availability":"published-only","individualised":false},
+    {"routeType":"books","availability":"published-or-preview","individualised":false},
+    {"routeType":"thesis","availability":"published","individualised":false},
+    {"routeType":"atlas","availability":"published","individualised":false},
+    {"routeType":"figures","availability":"published-only","individualised":false},
+    {"routeType":"free-observation","availability":"bounded-rule-based","individualised":false},
+    {"routeType":"reality-journey-pass-information","availability":"informational","individualised":false},
+    {"routeType":"professional-service-information","availability":"informational","individualised":false},
+    {"routeType":"leave-save-return-later","availability":"always-valid","individualised":false}
+  ],
+  "freeObservationBoundary": {
+    "usesStaticOrPresetContent": true,
+    "usesBoundedRules": true,
+    "collectsCompletePersonalHistory": false,
+    "createsFormalJourney": false,
+    "createsFormalEvidence": false,
+    "createsIndividualReading": false,
+    "createsProfessionalResponsibility": false,
+    "usesHighCostIndividualProvider": false,
+    "maySavePublicNavigationPreference": true,
+    "maySavePersonalHistory": false,
+    "savedStateMayBecomeFormalRuntimeSilently": false
+  },
+  "routingRules": {
+    "specificPaidServiceIsDefault": false,
+    "paidServiceRankingByPersonalVulnerabilityAllowed": false,
+    "serviceInformationMayBeOneOption": true,
+    "nonCommercialExitRequired": true,
+    "leaveWithoutPurchaseAllowed": true,
+    "saveAndReturnWithoutPurchaseAllowed": true,
+    "publishedAvailabilityMustBeHonest": true,
+    "unpublishedFigureMayBePresentedAsPublished": false
+  },
+  "understandingBoundary": {
+    "predictionPresentedAsUnderstanding": false,
+    "symbolicProjectionPresentedAsFact": false,
+    "serviceSuitabilityPresentedAsIndividualConclusion": false,
+    "observationLanguageRequired": true,
+    "unknownsRemainVisible": true,
+    "evidenceBoundaryRequired": true
+  },
+  "prohibitedBehaviours": [
+    "default-to-specific-paid-service",
+    "collect-complete-personal-history",
+    "create-professional-responsibility",
+    "call-high-cost-individual-provider",
+    "present-prediction-as-understanding"
+  ],
+  "surfaceReferences": {
+    "books": ["library.html", "book-one.html", "book-one-preview.html"],
+    "thesis": ["thesis.html"],
+    "figures": ["figures.html", "figure.html"],
+    "freeObservation": ["reality-demo.html"],
+    "journeyPassInformation": ["reality-journey.html"],
+    "professionalServiceInformation": ["services.html"],
+    "checkout": ["checkout.html"]
+  },
+  "acceptance": {
+    "routeFamiliesCount": 9,
+    "prohibitedBehavioursCount": 5,
+    "paymentRequiredForPublicKnowledge": false,
+    "serviceIsOnlyExit": false,
+    "personalHistoryCollectionRequired": false,
+    "professionalResponsibilityBeforeAssignment": false,
+    "highCostProviderBeforeEntitlement": false,
+    "predictionMayReplaceUnderstanding": false,
+    "pageChangeInThisStep": false,
+    "visualAcceptance": {
+      "status": "not-applicable",
+      "reason": "Contract-only freeze; no page or customer-visible behaviour changed."
+    }
+  }
+}

@@ -11,7 +11,7 @@ Prerequisite: `PWS-I1-v1.0.0-Frozen`
 PHI OS already contains several valid Registry systems, but they do not form
 one Universal PWS Registry. The Frozen Core Runtime owns its executable
 Contract, Schema, Version and baseline declaration Registries. PKR owns
-Canonical Knowledge Nodes and their schemas. D1 owns four immutable executable
+Canonical Knowledge Nodes and their schemas. D1 owns five immutable executable
 migrations through the existing Migration Registry. These sources must remain
 separate and must be consumed rather than replaced by PWS-I2.
 
@@ -27,8 +27,8 @@ Event Outbox or Registry Query API.
 | --- | --- | --- |
 | Core Runtime Registry | 6 modules; 20 Contracts, Schemas, Versions and non-executable baseline declarations | Preserve |
 | Persistence | 9-method contract; memory, local and D1 drivers | Preserve |
-| D1 | 1 `RUNTIME_DB` binding; 4 executable migrations | Extend only through a new authorised Migration |
-| Migration | 4 executable SQL records plus 20 non-executable schema baseline declarations | Keep both meanings explicitly separated |
+| D1 | 1 `RUNTIME_DB` binding; 5 executable migrations | Extend only through a new authorised Migration |
+| Migration | 5 executable SQL records plus 20 non-executable schema baseline declarations | Keep both meanings explicitly separated |
 | Read Model | Runtime, account, professional and specialist projections are distributed | Add Registry-specific reads; do not merge customer projections |
 | Static JSON | 111 `content/registry` files; 48 legacy index entries | The legacy index is not universal |
 | PKR | 12 data files and 12 schemas | Preserve Canonical Knowledge ownership |
