@@ -166,7 +166,9 @@
     "check:pja-w2f-c1": "npm run check:pja-w2f-b2b && node scripts/check-pja-w2f-c1-article-production-pilot.mjs",
     "knowledge:plan-articles": "node scripts/produce-canonical-articles-batch.mjs",
     "knowledge:produce-articles": "node scripts/produce-canonical-articles-batch.mjs",
-    "check:pja-w2f-c2": "npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs"
+    "check:pja-w2f-c2": "npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs",
+    "knowledge:produce-ready": "node scripts/produce-registered-ready-nodes.mjs",
+    "check:pja-w2f-c3": "npm run check:pja-w2f-c2 && node scripts/check-pja-w2f-c3-registered-production-ready-node-production.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
