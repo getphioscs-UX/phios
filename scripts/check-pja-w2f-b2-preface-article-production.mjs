@@ -95,8 +95,14 @@ function checkPackageCommands() {
 async function checkRealEligibility() {
   const knowledge = await loadKnowledgeInventory(root);
   const selection = resolveKnowledgeScope(knowledge, { scope: 'PREFACE' });
+  const allInventory = resolveKnowledgeScope(knowledge, { scope: 'ALL' });
   const schema = await compileReadinessSchema(root);
-  assert.equal(selection.length, knowledge.inventory.length);
+  assert(selection.length > 0, 'Preface production scope must not be empty.');
+  assert(selection.length <= allInventory.length);
+  assert(
+    selection.every(item => item.partCode === 'P0'),
+    'PREFACE scope must contain only P0 Nodes.'
+  );
   let eligible = 0;
   let blocked = 0;
   for (const item of selection) {
