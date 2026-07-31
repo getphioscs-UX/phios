@@ -1,4 +1,4 @@
-# PJA-W2F-A Canonical Readiness Inventory
+﻿# PJA-W2F-A Canonical Readiness Inventory
 
 Generated projection only. Registry, Blueprint, Localized Content and node
 Readiness records remain authoritative. Blueprint-planned nodes without a
@@ -23,6 +23,6 @@ Registry identity are reported as not registered and never receive readiness.
 ## Registry and Blueprint Coverage
 
 - Registered Canonical Nodes: 13
-- Blueprint-planned, not registered: 65
+- Registry-present, production-deferred: 65
 - Part 1–14 readiness is created only after Registry identity exists.
 - Future Book/Part patterns are supported by the same resolver and Schema.

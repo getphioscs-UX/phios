@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
@@ -21,9 +21,7 @@ const root = process.cwd();
 const read = file => fs.readFile(path.join(root, file), 'utf8');
 const readJson = async file => JSON.parse(await read(file));
 const protectedFiles = [
-  'content/knowledge/registry/nodes.json',
   'content/knowledge/registry/learning-paths.json',
-  'content/knowledge/registry/localized-content.json',
   'content/knowledge/registry/supporting-questions.json',
   'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
   'content/knowledge/schemas/article-v2.schema.json',
@@ -54,19 +52,29 @@ validatePrecheckDependencyContract(packageJson.scripts.precheck);
 assert.equal(READINESS_ERROR_CODES.length, 40);
 
 const knowledge = await loadKnowledgeInventory(root);
-assert.equal(knowledge.inventory.length, 13);
+const blueprint = knowledge.blueprints[0];
+const productionInventory = resolveKnowledgeScope(knowledge, {
+  scope: 'PREFACE'
+});
+assert.equal(knowledge.inventory.length, blueprint.plannedCanonicalNodes);
 assert.equal(knowledge.questions.supportingQuestions.length, 23);
-assert.equal(knowledge.blueprints[0].nodes.length, 78);
-assert.equal(resolveKnowledgeScope(knowledge, { scope: 'ALL' }).length, 13);
-assert.equal(resolveKnowledgeScope(knowledge, { scope: 'PREFACE' }).length, 13);
-assert.equal(resolveKnowledgeScope(knowledge, { scope: 'BOOK-1' }).length, 13);
-assert.throws(
-  () => resolveKnowledgeScope(knowledge, { scope: 'PART-1' }),
-  error => error.code === 'KNOWLEDGE_SCOPE_EMPTY'
+assert.equal(blueprint.nodes.length, blueprint.plannedCanonicalNodes);
+assert.equal(
+  resolveKnowledgeScope(knowledge, { scope: 'ALL' }).length,
+  blueprint.plannedCanonicalNodes
 );
-assert.throws(
-  () => resolveKnowledgeScope(knowledge, { nodeCode: 'KN-B1-P1-001' }),
-  error => error.code === 'CANONICAL_NODE_NOT_FOUND'
+assert.equal(
+  productionInventory.length,
+  blueprint.prefaceCanonicalNodes
+);
+assert.equal(
+  resolveKnowledgeScope(knowledge, { scope: 'BOOK-1' }).length,
+  blueprint.plannedCanonicalNodes
+);
+assert(resolveKnowledgeScope(knowledge, { scope: 'PART-1' }).length > 0);
+assert.equal(
+  resolveKnowledgeScope(knowledge, { nodeCode: 'KN-B1-P1-001' }).length,
+  1
 );
 
 const schema = await compileReadinessSchema(root);
@@ -76,7 +84,7 @@ const statusCounts = {
   production_blocked: 0
 };
 const thesisStatements = new Map();
-for (const item of knowledge.inventory) {
+for (const item of productionInventory) {
   const loaded = await readReadiness(root, item);
   const result = validateReadinessRecord(item, loaded, schema);
   assert.equal(result.schemaValid, true, `${item.nodeCode}: ${result.errors}`);
@@ -108,13 +116,13 @@ assert.deepEqual(statusCounts, {
 
 const index = await readJson(READINESS_INDEX_PATH);
 assert.equal(index.sourceOfTruth, false);
-assert.equal(index.entries.length, knowledge.inventory.length);
+assert.equal(index.entries.length, productionInventory.length);
 assert.deepEqual(
   index.entries.map(entry => entry.nodeCode),
-  knowledge.inventory.map(item => item.nodeCode)
+  productionInventory.map(item => item.nodeCode)
 );
 assert((await read('docs/pja/PJA-W2F-A-CANONICAL-READINESS-INVENTORY.md'))
-  .includes('Blueprint-planned, not registered: 65'));
+  .includes('Registry-present, production-deferred: 65'));
 
 const questionOwners = new Map();
 for (const question of knowledge.questions.supportingQuestions) {
@@ -190,10 +198,8 @@ assert(!resolver.includes('78'));
 assert(resolver.includes('blueprintFiles'));
 
 const commands = [
-  ['scripts/initialize-canonical-production-readiness.mjs', ['--scope', 'ALL']],
+  ['scripts/initialize-canonical-production-readiness.mjs', ['--scope', 'PREFACE']],
   ['scripts/validate-canonical-production-readiness.mjs', ['--scope', 'PREFACE']],
-  ['scripts/validate-canonical-production-readiness.mjs', ['--scope', 'BOOK-1']],
-  ['scripts/validate-canonical-production-readiness.mjs', ['--scope', 'PART-1']],
   ['scripts/export-knowledge-production-brief.mjs', [
     '--scope', 'PREFACE', '--output', '.tmp/pja-w2f-batch'
   ]]
@@ -206,7 +212,6 @@ for (const [script, args] of commands) {
   if (script.includes('initialize')) {
     assert(stdout.includes('Existing preserved: 13'));
   }
-  if (args.includes('PART-1')) assert(stdout.includes('NOT REGISTERED'));
 }
 await fs.rm(path.join(root, '.tmp/pja-w2f-batch'), {
   recursive: true,

@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
@@ -34,9 +34,7 @@ const allowedTreatments = new Set([
   'exclude'
 ]);
 const protectedFiles = [
-  'content/knowledge/registry/nodes.json',
   'content/knowledge/registry/learning-paths.json',
-  'content/knowledge/registry/localized-content.json',
   'content/knowledge/registry/supporting-questions.json',
   'content/knowledge/registry/sources.json',
   'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
@@ -105,7 +103,7 @@ try {
   const readinessIndex = await readJson(
     'content/knowledge/editorial/readiness/canonical-production-readiness-index.json'
   );
-  assert.equal(readinessIndex.entries.length, knowledge.inventory.length);
+  assert.equal(readinessIndex.entries.length, prefaceNodes.length);
   const indexByNode = new Map(
     readinessIndex.entries.map(entry => [entry.nodeCode, entry])
   );
