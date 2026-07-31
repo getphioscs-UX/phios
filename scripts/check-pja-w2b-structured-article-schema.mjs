@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import Ajv2020 from 'ajv/dist/2020.js';
@@ -89,6 +89,7 @@ async function materializeInvalidFixture(file) {
 
 const [
   schema,
+  blueprint,
   nodesRegistry,
   themesRegistry,
   localizedRegistry,
@@ -105,6 +106,7 @@ const [
   readiness
 ] = await Promise.all([
   readJson(schemaPath),
+  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json'),
   readJson('content/knowledge/registry/nodes.json'),
   readJson('content/knowledge/registry/themes.json'),
   readJson('content/knowledge/registry/localized-content.json'),
@@ -464,8 +466,16 @@ for (const file of productionArticleFiles) {
   );
 }
 
-assert.equal(nodesRegistry.nodes.length, 13);
-assert.equal(themesRegistry.themes.length, 6);
+assert.equal(nodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
+assert.equal(
+  nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  blueprint.prefaceCanonicalNodes
+);
+assert.equal(
+  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length,
+  6
+);
+assert.equal(themesRegistry.themes.length, 6 + blueprint.sourceParts);
 assert.equal(
   (await fs.readdir(path.join(root, 'content/knowledge/registry')))
     .filter(file => file.endsWith('.json')).length,

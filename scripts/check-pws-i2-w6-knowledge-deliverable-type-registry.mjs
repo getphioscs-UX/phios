@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { DatabaseSync } from 'node:sqlite';
 import {
@@ -119,9 +119,13 @@ const [nodesAfter, questionsAfter, blueprintAfter] = await Promise.all([
 assert.deepEqual(nodesAfter, nodesBefore);
 assert.deepEqual(questionsAfter, questionsBefore);
 assert.deepEqual(blueprintAfter, blueprintBefore);
-assert.equal(nodesAfter.nodes.length, 13);
+assert.equal(nodesAfter.nodes.length, blueprintAfter.plannedCanonicalNodes);
+assert.equal(
+  nodesAfter.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  blueprintAfter.prefaceCanonicalNodes
+);
 assert.equal(questionsAfter.supportingQuestions.length, 23);
-assert.equal(blueprintAfter.nodes.length, 78);
+assert.equal(blueprintAfter.nodes.length, blueprintAfter.plannedCanonicalNodes);
 assert.equal(blueprintAfter.activeProductionLimit, 8);
 
 assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 5);

@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -49,6 +49,7 @@ const [
   articleSchema,
   claimSchema,
   pjaW1,
+  blueprint,
   nodesRegistry,
   localizedRegistry,
   assetsRegistry,
@@ -63,6 +64,7 @@ const [
   readJson(articleSchemaPath),
   readJson(claimSchemaPath),
   readJson('docs/pja/pja-w1-blueprint-led-public-knowledge-ecosystem-v1.json'),
+  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json'),
   readJson('content/knowledge/registry/nodes.json'),
   readJson('content/knowledge/registry/localized-content.json'),
   readJson('content/knowledge/registry/assets.json'),
@@ -161,13 +163,18 @@ assert.deepEqual(contract.baseline, {
 });
 assert.equal(pjaW1.freezeId, contract.baseline.prerequisite);
 
+const registryPopulationEvolutionFiles = new Set([
+  'content/knowledge/registry/nodes.json',
+  'content/knowledge/registry/localized-content.json'
+]);
 for (const [file, expectedHash] of Object.entries(
   contract.preservation.baselineHashes
 )) {
+  if (registryPopulationEvolutionFiles.has(file)) continue;
   assert.equal(
     await sha256(file),
     expectedHash,
-    `Frozen PJA-W1 content changed: ${file}`
+    `Frozen PJA-W1 publication content changed: ${file}`
   );
 }
 
@@ -181,18 +188,38 @@ const migrationFiles = (await fs.readdir(
   path.join(root, 'db/migrations')
 )).filter(file => file.endsWith('.sql'));
 
-assert.equal(nodesRegistry.nodes.length, 13);
-assert.equal(themesRegistry.themes.length, 6);
+assert.equal(nodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
+assert.equal(
+  nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  contract.preservation.canonicalNodeCount
+);
+assert.equal(
+  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length,
+  contract.preservation.canonicalThemeCount
+);
+assert.equal(themesRegistry.themes.length, contract.preservation.canonicalThemeCount + blueprint.sourceParts);
 assert.equal(registryFiles.length, 12);
 assert.equal(registrySchemas.length, 12);
 assert.equal(migrationFiles.length, 5);
-assert.equal(contract.preservation.canonicalNodeCount, 13);
+assert.equal(contract.preservation.canonicalNodeCount, blueprint.prefaceCanonicalNodes);
 assert.equal(contract.preservation.canonicalThemeCount, 6);
 assert.equal(contract.preservation.knowledgeRegistryFileCount, 12);
 assert.equal(contract.preservation.knowledgeRegistrySchemaCount, 12);
 assert.equal(contract.preservation.canonicalRegistryChanged, false);
 assert.equal(contract.preservation.localizedRegistryChanged, false);
 assert.equal(contract.preservation.assetRegistryChanged, false);
+assert.equal(
+  nodesRegistry.nodes.every(node => blueprint.nodes.some(item => item.nodeCode === node.nodeCode)),
+  true,
+  'Canonical Node Registry contains an identity outside the Book I Blueprint.'
+);
+assert.equal(
+  localizedRegistry.localizedContent.every(record => (
+    nodesRegistry.nodes.some(node => node.nodeCode === record.nodeCode)
+  )),
+  true,
+  'Localized Registry contains an identity outside the Canonical Node Registry.'
+);
 assert.equal(contract.preservation.d1MigrationAdded, false);
 
 const articleFiles = (await filesIn('content/knowledge/articles')).sort();

@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -90,8 +90,19 @@ const localizedByCode = new Map(
 const assetByCode = new Map(
   assetsRegistry.assets.map(asset => [asset.assetCode, asset])
 );
-assert.equal(nodesRegistry.nodes.length, 13);
-assert.equal(themesRegistry.themes.length, 6);
+assert.equal(nodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
+assert.equal(
+  nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  blueprint.prefaceCanonicalNodes
+);
+assert.equal(
+  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length,
+  6
+);
+assert.equal(
+  themesRegistry.themes.length,
+  6 + blueprint.sourceParts
+);
 
 const publishedLocaleRecords = [];
 for (const article of active) {
@@ -173,11 +184,19 @@ assert(
   assetsRegistry.assets.every(asset => asset.publicationStatus === 'published')
 );
 for (const code of deferredCodes) {
-  assert.equal(nodeByCode.has(code), false);
-  assert.equal(localizedByCode.has(code), false);
+  const node = nodeByCode.get(code);
+  const localizedRecord = localizedByCode.get(code);
+  assert(node, `Deferred Wave 1 node is not registered: ${code}`);
+  assert(localizedRecord, `Deferred Wave 1 node has no localized identity: ${code}`);
   assert.equal(
     assetsRegistry.assets.some(asset => asset.nodeCode === code),
     false
+  );
+  assert(
+    Object.values(localizedRecord.locales || {}).every(locale => (
+      locale.publicationStatus !== 'published'
+    )),
+    `Deferred Wave 1 node became publicly published: ${code}`
   );
 }
 
@@ -319,7 +338,7 @@ assert.deepEqual(evidence.acceptance, {
 
 console.log('✓ PJA-W1 Blueprint-led Public Knowledge Ecosystem passed.');
 console.log('  3 frozen Canonical Nodes publish 3 Chinese articles and 3 required English localizations.');
-console.log('  5 planned Wave 1 Nodes remain deferred; no Registry identity was created by PJA.');
+console.log('  5 Wave 1 Nodes remain publication-deferred; their Registry identities are supplied by PKR population, not PJA.');
 console.log('  Home, Hub, Articles, Book I, Thesis, Atlas and shared navigation use published-only projections.');
 console.log('  No case Provider, personal judgment, default service recommendation, Runtime write or Entitlement substitute exists.');
 console.log('  State: PJA-W1-v1.1.0-Blueprint-led.');
