@@ -73,6 +73,80 @@ const [
   read('assets/js/knowledge/published-content.js')
 ]);
 
+
+const universalReadiness = readiness.readinessSchemaVersion ===
+  'PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0';
+
+const readinessView = universalReadiness ? {
+  articleIdentity: {
+    nodeCode: readiness.canonicalIdentity.nodeCode,
+    canonicalQuestionKey: readiness.canonicalIdentity.canonicalQuestionKey,
+    slug: readiness.canonicalIdentity.slug,
+    canonicalLanguage: readiness.locale,
+    nextNode: readiness.sequenceBoundary.nextNode
+  },
+  canonicalQuestion: readiness.canonicalIdentity.localizedQuestion,
+  centralThesis: readiness.canonicalThesis.statement,
+  requiredMechanisms: readiness.articleBoundary.mustEstablish,
+  requiredDistinctions: readiness.articleBoundary.requiredDistinctions,
+  prohibitedClaims: readiness.articleBoundary.mustNotClaim,
+  articleBoundary: readiness.articleBoundary.includedScope,
+  editorialOutline: {
+    sections: readiness.articleBoundary.mustEstablish.map((heading, index) => ({
+      sectionCode: `S${String(index + 1).padStart(2, '0')}`,
+      heading
+    })),
+    articleBodyCreated: false
+  },
+  visualRequirement: {
+    briefOnly: true,
+    assetCreated: false,
+    assetCode: null,
+    registryRequirement: {
+      requiredFields: contract.visualAssetBoundary.requiredFields
+    }
+  },
+  claimDossier: { claims: [] },
+  reviewRequirement: contract.reviewLayer.reviewTypes.map(reviewType => ({
+    reviewType,
+    reviewStatus: 'not_reviewed'
+  })),
+  publicationRequirement: { published: false },
+  productionLifecycle: {
+    currentStage: 'claims_prepared',
+    humanApprovalGranted: false,
+    publicationAuthorityGranted: false
+  }
+} : readiness;
+
+if (universalReadiness) {
+  assert.equal(readiness.nodeCode, 'KN-PREFACE-001');
+  assert.equal(readiness.review.humanFrozen, true);
+  assert.equal(readiness.review.status, 'approved');
+  assert.equal(typeof readiness.review.reviewedBy, 'string');
+  assert(readiness.review.reviewedBy.length > 0);
+  assert.equal(readiness.productionReadiness.status, 'production_ready');
+  assert.deepEqual(readiness.productionReadiness.missingFields, []);
+  assert.deepEqual(readiness.productionReadiness.blockingReasons, []);
+  assert(Array.isArray(readiness.claimBoundary.requiredClaimFamilies));
+  assert(readiness.claimBoundary.requiredClaimFamilies.length > 0);
+  assert(
+    readiness.claimBoundary.allowedClaimTypes.every(claimType =>
+      contract.claimGovernance.claimTypes.includes(claimType)
+    )
+  );
+  assert(
+    readiness.sourceBoundary.knownSources.every(sourceCode =>
+      sourcesRegistry.sources.some(source => source.sourceCode === sourceCode)
+    )
+  );
+  assert.equal(readiness.figureBoundary.figureRequirement, 'required');
+  assert(readiness.publicContentBoundary.publicKnowledgeBoundary.length > 0);
+  assert(readiness.publicContentBoundary.paidBookBoundary.length > 0);
+  assert(readiness.publicContentBoundary.runtimeJourneyBoundary.length > 0);
+  assert(readiness.publicContentBoundary.professionalServiceBoundary.length > 0);
+}
+
 assert.equal(
   contract.contractId,
   'PJA-W2A-v1.0.0-Canonical-Article-Editorial'
@@ -368,7 +442,7 @@ const knownSourceCodes = new Set(
   sourcesRegistry.sources.map(source => source.sourceCode)
 );
 const claimIds = new Set();
-for (const claim of readiness.claimDossier.claims) {
+for (const claim of readinessView.claimDossier.claims) {
   assert.equal(
     Object.keys(claim).length,
     claimSchema.required.length,
@@ -414,11 +488,11 @@ assert.deepEqual(contract.reviewLayer.allowedResults, [
   'approved'
 ]);
 assert.deepEqual(
-  readiness.reviewRequirement.map(review => review.reviewType),
+  readinessView.reviewRequirement.map(review => review.reviewType),
   contract.reviewLayer.reviewTypes
 );
 assert(
-  readiness.reviewRequirement.every(review => (
+  readinessView.reviewRequirement.every(review => (
     review.reviewStatus === 'not_reviewed'
   ))
 );
@@ -486,47 +560,47 @@ const prefaceLocalized = localizedRegistry.localizedContent.find(record => (
 assert(prefaceNode);
 assert(prefaceLocalized);
 assert.equal(
-  readiness.articleIdentity.nodeCode,
+  readinessView.articleIdentity.nodeCode,
   prefaceNode.nodeCode
 );
 assert.equal(
-  readiness.articleIdentity.canonicalQuestionKey,
+  readinessView.articleIdentity.canonicalQuestionKey,
   prefaceNode.canonicalQuestionKey
 );
 assert.equal(
-  readiness.articleIdentity.slug,
+  readinessView.articleIdentity.slug,
   prefaceLocalized.locales['zh-Hans'].slug
 );
 assert.equal(
-  readiness.articleIdentity.slug,
+  readinessView.articleIdentity.slug,
   'ai-formation-from-civilizational-capability'
 );
 assert.equal(
-  readiness.articleIdentity.canonicalLanguage,
+  readinessView.articleIdentity.canonicalLanguage,
   prefaceNode.canonicalLanguage
 );
-assert.equal(readiness.articleIdentity.canonicalLanguage, 'zh-Hans');
+assert.equal(readinessView.articleIdentity.canonicalLanguage, 'zh-Hans');
 assert.equal(
-  readiness.articleIdentity.nextNode,
+  readinessView.articleIdentity.nextNode,
   prefaceNode.relationships.nextNodeCodes[0]
 );
-assert.equal(readiness.articleIdentity.nextNode, 'KN-PREFACE-002');
-assert.equal(readiness.canonicalQuestion, '人工智能如何从文明能力中形成？');
-assert(readiness.centralThesis.length > 0);
-assert(readiness.requiredMechanisms.length >= 4);
-assert(readiness.requiredDistinctions.length >= 4);
-assert(readiness.prohibitedClaims.length >= 5);
-assert(readiness.articleBoundary.length >= 3);
-assert(readiness.editorialOutline.sections.length >= 4);
-assert.equal(readiness.editorialOutline.articleBodyCreated, false);
-assert.equal(readiness.visualRequirement.briefOnly, true);
-assert.equal(readiness.visualRequirement.assetCreated, false);
-assert.equal(readiness.visualRequirement.assetCode, null);
+assert.equal(readinessView.articleIdentity.nextNode, 'KN-PREFACE-002');
+assert.equal(readinessView.canonicalQuestion, '人工智能如何从文明能力中形成？');
+assert(readinessView.centralThesis.length > 0);
+assert(readinessView.requiredMechanisms.length >= 4);
+assert(readinessView.requiredDistinctions.length >= 4);
+assert(readinessView.prohibitedClaims.length >= 5);
+assert(readinessView.articleBoundary.length >= 3);
+assert(readinessView.editorialOutline.sections.length >= 4);
+assert.equal(readinessView.editorialOutline.articleBodyCreated, false);
+assert.equal(readinessView.visualRequirement.briefOnly, true);
+assert.equal(readinessView.visualRequirement.assetCreated, false);
+assert.equal(readinessView.visualRequirement.assetCode, null);
 
 for (const requiredVisualField of
   contract.visualAssetBoundary.requiredFields) {
   assert(
-    readiness.visualRequirement.registryRequirement.requiredFields
+    readinessView.visualRequirement.registryRequirement.requiredFields
       .includes(requiredVisualField)
   );
 }
@@ -558,17 +632,17 @@ assert.equal(
   )),
   false
 );
-assert.equal(readiness.publicationRequirement.published, false);
+assert.equal(readinessView.publicationRequirement.published, false);
 assert.equal(
-  readiness.productionLifecycle.currentStage,
+  readinessView.productionLifecycle.currentStage,
   'claims_prepared'
 );
 assert.equal(
-  readiness.productionLifecycle.humanApprovalGranted,
+  readinessView.productionLifecycle.humanApprovalGranted,
   false
 );
 assert.equal(
-  readiness.productionLifecycle.publicationAuthorityGranted,
+  readinessView.productionLifecycle.publicationAuthorityGranted,
   false
 );
 
