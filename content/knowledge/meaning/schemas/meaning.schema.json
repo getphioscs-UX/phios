@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/meaning.schema.json",
+  "title": "PHI OS Canonical Meaning Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meaningId", "nodeCode", "canonicalLanguage", "canonicalMeaning", "meaningBoundary", "authorityStatus", "version"],
+  "properties": {
+    "meaningId": { "type": "string", "pattern": "^KM-[A-Z0-9-]+$" },
+    "nodeCode": { "type": "string", "pattern": "^KN-[A-Z0-9-]+$" },
+    "canonicalLanguage": { "enum": ["zh-Hans", "en"] },
+    "canonicalMeaning": { "type": "string", "minLength": 1 },
+    "meaningBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["includes", "excludes"],
+      "properties": {
+        "includes": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "excludes": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      }
+    },
+    "authorityStatus": { "enum": ["candidate", "human_frozen", "retired"] },
+    "sourceVersion": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+  }
+}
