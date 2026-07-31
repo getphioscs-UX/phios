@@ -169,7 +169,8 @@
     "check:pja-w2f-c2": "npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs",
     "knowledge:produce-ready": "node scripts/produce-registered-ready-nodes.mjs",
     "check:pja-w2f-c3": "npm run check:pja-w2f-c2 && node scripts/check-pja-w2f-c3-registered-production-ready-node-production.mjs",
-    "check:kpr-w0": "npm run check:pja-w2f-c3 && node scripts/check-kpr-w0-compatibility-boundary.mjs"
+    "knowledge:validate-bindings": "node scripts/validate-canonical-manuscript-bindings.mjs",
+    "check:canonical-manuscript-binding": "npm run knowledge:validate-bindings"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
