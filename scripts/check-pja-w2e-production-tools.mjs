@@ -156,10 +156,16 @@ try {
   assert(result.errors.some(error => error.code === 'PACKAGE_UNKNOWN_FILE'));
   await fs.rm(securityRoot, { recursive: true, force: true });
   await fs.mkdir(securityRoot, { recursive: true });
-  await fs.symlink(path.join(fixtures, 'valid-complete-package/article.zh-Hans.json'), path.join(securityRoot, 'article.zh-Hans.json'));
-  result = await validatePackage(root, 'KN-PREFACE-001', securityRoot);
-  assert.equal(result.valid, false);
-  assert(result.errors.some(error => error.code === 'PACKAGE_SYMLINK_NOT_ALLOWED'));
+  try {
+    await fs.symlink(path.join(fixtures, 'valid-complete-package/article.zh-Hans.json'), path.join(securityRoot, 'article.zh-Hans.json'));
+    result = await validatePackage(root, 'KN-PREFACE-001', securityRoot);
+    assert.equal(result.valid, false);
+    assert(result.errors.some(error => error.code === 'PACKAGE_SYMLINK_NOT_ALLOWED'));
+  } catch (error) {
+    if (!['EPERM', 'EACCES', 'UNKNOWN'].includes(error.code)) throw error;
+    // Windows and OneDrive may deny symlink creation without Developer Mode.
+    // The archive-based symlink fixture below remains mandatory on every platform.
+  }
   const traversalZip = path.join(temporary, 'path-traversal.zip');
   await fs.writeFile(traversalZip, storedZip('../escape.json', Buffer.from('{}')));
   result = await validatePackage(root, 'KN-PREFACE-001', traversalZip);

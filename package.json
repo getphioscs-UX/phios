@@ -163,7 +163,10 @@
     "check:pds-w4": "node scripts/check-pds-w4-reality-journey-shell.mjs",
     "check:pja-w2f-b2a": "npm run check:pja-w2f-b2 && node scripts/check-pja-w2f-b2a-first-human-frozen-pilot.mjs",
     "check:pja-w2f-b2b": "npm run check:pja-w2f-b2a && node scripts/check-pja-w2f-b2b-schema-validator-alignment.mjs",
-    "check:pja-w2f-c1": "npm run check:pja-w2f-b2b && node scripts/check-pja-w2f-c1-article-production-pilot.mjs"
+    "check:pja-w2f-c1": "npm run check:pja-w2f-b2b && node scripts/check-pja-w2f-c1-article-production-pilot.mjs",
+    "knowledge:plan-articles": "node scripts/produce-canonical-articles-batch.mjs",
+    "knowledge:produce-articles": "node scripts/produce-canonical-articles-batch.mjs",
+    "check:pja-w2f-c2": "npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
