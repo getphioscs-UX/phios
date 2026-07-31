@@ -101,10 +101,19 @@ try {
   assert.notEqual(command.code, 0);
   assert(command.stderr.includes('CANONICAL_THESIS_NOT_READY'));
   assert.equal(await exists(path.join(temporary, 'briefs/KN-PREFACE-002-production-brief.md')), false);
-  assert.equal(
-    await exists(path.join(root, 'content/knowledge/editorial/readiness/kn-preface-002-production-readiness.json')),
-    false
+  const blockedReadinessPath = path.join(
+    root,
+    'content/knowledge/editorial/readiness/kn-preface-002-production-readiness.json'
   );
+  if (await exists(blockedReadinessPath)) {
+    const blockedReadiness = JSON.parse(await fs.readFile(blockedReadinessPath, 'utf8'));
+    assert.equal(blockedReadiness.centralThesis, undefined);
+    assert.equal(blockedReadiness.canonicalThesis?.statement ?? null, null);
+    assert.notEqual(
+      blockedReadiness.productionReadiness?.status,
+      'production_ready'
+    );
+  }
 
   for (const name of [
     'valid-minimal-package',

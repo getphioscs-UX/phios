@@ -100,7 +100,14 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
       throw error;
     }
   }
-  if (requireReadiness && (!readiness?.centralThesis?.trim())) {
+  const canonicalThesis = (
+    readiness?.centralThesis ??
+    readiness?.canonicalThesis?.statement
+  );
+  if (
+    requireReadiness &&
+    (typeof canonicalThesis !== 'string' || !canonicalThesis.trim())
+  ) {
     throw new ProductionError(
       'CANONICAL_THESIS_NOT_READY',
       `${nodeCode} has no complete Canonical Thesis.`,
@@ -108,10 +115,26 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
     );
   }
   if (
+    requireReadiness &&
+    readiness?.readinessSchemaVersion &&
+    readiness.productionReadiness?.status !== 'production_ready'
+  ) {
+    throw new ProductionError(
+      'NODE_NOT_PRODUCTION_READY',
+      `${nodeCode}/${locale} is not production_ready.`,
+      'Resolve Blocking Findings and obtain the required human editorial freeze.'
+    );
+  }
+  const readinessIdentity = readiness?.articleIdentity ?? readiness?.canonicalIdentity;
+  const readinessLocale = (
+    readiness?.articleIdentity?.canonicalLanguage ??
+    readiness?.locale
+  );
+  if (
     readiness &&
     (
-      readiness.articleIdentity?.nodeCode !== nodeCode ||
-      readiness.articleIdentity?.canonicalLanguage !== locale
+      readinessIdentity?.nodeCode !== nodeCode ||
+      readinessLocale !== locale
     )
   ) {
     throw new ProductionError(
