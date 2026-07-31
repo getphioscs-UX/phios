@@ -169,7 +169,9 @@
     "check:pja-w2f-c2": "npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-universal-scope-batch-production.mjs",
     "knowledge:produce-ready": "node scripts/produce-registered-ready-nodes.mjs",
     "check:pja-w2f-c3": "npm run check:pja-w2f-c2 && node scripts/check-pja-w2f-c3-registered-production-ready-node-production.mjs",
-    "check:kmr-w0": "npm run check:pja-w2f-c3 && node scripts/check-kmr-w0-meaning-runtime-baseline.mjs"
+    "check:kmr-w0": "npm run check:pja-w2f-c3 && node scripts/check-kmr-w0-meaning-runtime-baseline.mjs",
+    "knowledge:inventory-book-i": "node scripts/build-kmr-w1-book-i-meaning-inventory.mjs",
+    "check:kmr-w1": "npm run check:kmr-w0 && npm run knowledge:inventory-book-i && node scripts/check-kmr-w1-book-i-meaning-inventory.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
