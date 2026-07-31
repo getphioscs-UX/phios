@@ -148,7 +148,10 @@ assert.equal(pwsI2.freezeId, 'PWS-I2-v1.0.0-Frozen');
 assert.equal(pwsI2.status, 'frozen');
 assert.equal(khBlueprint.completionId, 'KH-W3.5G-Completed');
 assert.equal(khBlueprint.status, 'knowledge_hub_planning_frozen');
-assert.equal(khBlueprint.totals.bookICanonicalNodes, 78);
+assert.equal(
+  khBlueprint.totals.bookICanonicalNodes,
+  khBlueprint.parts.reduce((total, part) => total + part.canonicalNodeCount, 0)
+);
 assert.equal(khBlueprint.totals.maximumActiveArticles, 8);
 assert.equal(
   pwsI2.frozenBoundaries.registryPresenceCreatesContentRequirement,

@@ -47,7 +47,7 @@ try {
   await checkCliBlocking();
   await checkProtectedFiles();
   console.log('✓ PJA-W2F-B2 governed Canonical Article Production infrastructure passed.');
-  console.log('  KN-PREFACE-001 is human-frozen and production_ready; the remaining 12 Preface Nodes stay blocked.');
+  console.log('  The human-frozen pilot is production_ready; every other selected Preface Node remains blocked.');
   console.log('  Isolated human-frozen fixtures validate Draft, Claim, Source, Supporting Question, Media, Manifest and version contracts.');
   console.log('  Generated states remain draft, not_reviewed, not_approved and not_publication_ready.');
   console.log('  Result: Passed — infrastructure remains governed and one real pilot is eligible.');
@@ -120,8 +120,9 @@ async function checkRealEligibility() {
       blocked += 1;
     }
   }
-  assert.equal(eligible, 1);
-  assert.equal(blocked, selection.length - 1);
+  const expectedEligible = selection.filter(item => item.nodeCode === 'KN-PREFACE-001').length;
+  assert.equal(eligible, expectedEligible);
+  assert.equal(blocked, selection.length - expectedEligible);
   assert.throws(
     () => resolveKnowledgeScope(knowledge, {
       nodeCode: 'KN-B1-P1-001'

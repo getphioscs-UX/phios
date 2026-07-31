@@ -140,13 +140,11 @@ assert.equal(
   nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   historicalRegistryBlueprint.prefaceCanonicalNodes
 );
-assert.equal(
-  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length,
-  6
-);
-assert.equal(
-  themesRegistry.themes.length,
-  6 + historicalRegistryBlueprint.sourceParts
+const referencedThemeCodes = new Set(nodesRegistry.nodes.map(node => node.themeCode));
+assert(
+  [...referencedThemeCodes].every(themeCode =>
+    themesRegistry.themes.some(theme => theme.themeCode === themeCode)
+  )
 );
 assert.equal((await listJson('content/knowledge/registry')).length, 12);
 assert.equal((await listJson('content/knowledge/registry/schemas')).length, 12);

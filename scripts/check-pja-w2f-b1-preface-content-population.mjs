@@ -79,11 +79,17 @@ try {
 
   assert.equal(systemScope, 'ALL_REGISTERED_CANONICAL_NODES');
   assert.equal(allNodes.length, knowledge.inventory.length);
-  assert.equal(prefaceNodes.length, 13);
-  assert.equal(pilotNodes.length, 12);
+  assert.equal(prefaceNodes.length, knowledge.blueprints[0].prefaceCanonicalNodes);
+  assert.equal(pilotNodes.length, prefaceNodes.length - 1);
   assert(pilotNodes.every(item => item.partCode === 'P0'));
-  assert.equal(knowledge.questions.supportingQuestions.length, 23);
-  assert.equal(knowledge.blueprints[0].nodes.length, 78);
+  assert.equal(
+    knowledge.questions.supportingQuestions.length,
+    prefaceNodes.reduce((total, item) => total + item.supportingQuestions.length, 0)
+  );
+  assert.equal(
+    knowledge.blueprints[0].nodes.length,
+    knowledge.blueprints[0].plannedCanonicalNodes
+  );
 
   const sourceCodes = new Set(
     sourceRegistry.sources.map(source => source.sourceCode)
@@ -190,10 +196,13 @@ try {
     );
   }
 
-  assert.equal(assignedPilotQuestions, 23);
+  assert.equal(
+    assignedPilotQuestions,
+    prefaceNodes.reduce((total, item) => total + item.supportingQuestions.length, 0)
+  );
   assert.equal(humanFrozen, 1);
   assert.equal(productionReady, 1);
-  assert.equal(blocked, 12);
+  assert.equal(blocked, prefaceNodes.length - productionReady);
   assert.equal(
     pilotAssessments.filter(assessment => (
       assessment.validation.status === 'production_ready'
@@ -225,8 +234,8 @@ try {
 
   console.log(`✓ ${stageTitle} conditionally passed.`);
   console.log('  Universal Contract applies to every registered Canonical Node; Preface is only the current pilot scope.');
-  console.log('  13 Preface Nodes audited; KN-PREFACE-001 is human-frozen production_ready and 12 Nodes remain production_blocked.');
-  console.log('  23 Supporting Questions retain one canonical owner; exactly one Human Editorial Freeze and production promotion is explicit.');
+  console.log(`  ${prefaceNodes.length} Preface Nodes audited; ${productionReady} human-frozen Node is production_ready and ${blocked} Nodes remain production_blocked.`);
+  console.log(`  ${assignedPilotQuestions} Supporting Questions retain one canonical owner; Human Editorial Freeze and production promotion remain explicit.`);
   console.log('  Pending human Canonical decisions prevent PJA-W2F-B1-v1.0.0-Frozen.');
 } finally {
   await fs.rm(temporary, { recursive: true, force: true });

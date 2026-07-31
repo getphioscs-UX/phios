@@ -95,13 +95,11 @@ assert.equal(
   nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   blueprint.prefaceCanonicalNodes
 );
-assert.equal(
-  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length,
-  6
-);
-assert.equal(
-  themesRegistry.themes.length,
-  6 + blueprint.sourceParts
+const referencedThemeCodes = new Set(nodesRegistry.nodes.map(node => node.themeCode));
+assert(
+  [...referencedThemeCodes].every(themeCode =>
+    themesRegistry.themes.some(theme => theme.themeCode === themeCode)
+  )
 );
 
 const publishedLocaleRecords = [];

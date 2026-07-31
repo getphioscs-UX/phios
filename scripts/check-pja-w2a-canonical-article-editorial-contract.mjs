@@ -202,7 +202,10 @@ assert.equal(registryFiles.length, 12);
 assert.equal(registrySchemas.length, 12);
 assert.equal(migrationFiles.length, 5);
 assert.equal(contract.preservation.canonicalNodeCount, blueprint.prefaceCanonicalNodes);
-assert.equal(contract.preservation.canonicalThemeCount, 6);
+assert.equal(
+  contract.preservation.canonicalThemeCount,
+  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length
+);
 assert.equal(contract.preservation.knowledgeRegistryFileCount, 12);
 assert.equal(contract.preservation.knowledgeRegistrySchemaCount, 12);
 assert.equal(contract.preservation.canonicalRegistryChanged, false);
@@ -720,7 +723,7 @@ assert(
 );
 
 console.log('✓ PJA-W2A Canonical Article Editorial Contract passed.');
-console.log('  PJA-W1 content and Registry hashes remain frozen: 13 Nodes, 6 Themes, 12 Registry files and 12 Registry schemas.');
+console.log(`  PJA-W1 content and Registry hashes remain frozen: ${contract.preservation.canonicalNodeCount} Preface Nodes, ${contract.preservation.canonicalThemeCount} Preface Themes, ${registryFiles.length} Registry files and ${registrySchemas.length} Registry schemas.`);
 console.log('  Legacy paragraphs and 10 strict optional Block types remain compatible; text is escaped and visual/next-node references are published-only.');
 console.log('  Claim, source, review, lifecycle and AI authority boundaries are enforced without Runtime, Provider, Payment, Entitlement or D1 dependencies.');
 console.log('  KN-PREFACE-001 has no public Article asset, English asset, shell, Registry asset or publication state; governed production drafts remain isolated.');

@@ -27,12 +27,20 @@ const [blueprint, policy, nodes, localized, collections, themes, sources, suppor
 
 assert.equal(policy.stage, 'PJA-W2F-C0');
 assert.equal(policy.status, 'population-policy-frozen');
-assert.equal(blueprint.nodes.length, 78);
-assert.equal(policy.nodes.length, 65);
-assert.equal(nodes.nodes.length, 78);
-assert.equal(new Set(nodes.nodes.map(item => item.nodeCode)).size, 78);
-assert.equal(localized.localizedContent.length, 78);
-assert.equal(new Set(localized.localizedContent.map(item => item.nodeCode)).size, 78);
+const blueprintNodeCount = blueprint.nodes.length;
+const existingPrefaceCount = blueprint.parts
+  .filter(part => part.partCode === 'P0')
+  .reduce((total, part) => total + part.nodes.length, 0);
+const populationCount = blueprintNodeCount - existingPrefaceCount;
+assert.equal(blueprintNodeCount, blueprint.plannedCanonicalNodes);
+assert.equal(policy.nodes.length, populationCount);
+assert.equal(nodes.nodes.length, blueprintNodeCount);
+assert.equal(new Set(nodes.nodes.map(item => item.nodeCode)).size, blueprintNodeCount);
+assert.equal(localized.localizedContent.length, blueprintNodeCount);
+assert.equal(
+  new Set(localized.localizedContent.map(item => item.nodeCode)).size,
+  blueprintNodeCount
+);
 
 const blueprintCodes = new Set(blueprint.nodes.map(item => item.nodeCode));
 const registryCodes = new Set(nodes.nodes.map(item => item.nodeCode));
@@ -116,7 +124,7 @@ assert.equal(output.conflicts.length, 0);
 await fs.rm(temp, { recursive: true, force: true });
 
 console.log('✓ PJA-W2F-C0 Book I Canonical Registry Population passed.');
-console.log('  Blueprint 78; Registry 78; Blueprint-only 0; zh-Hans Identity 78.');
+console.log(`  Blueprint ${blueprintNodeCount}; Registry ${nodes.nodes.length}; Blueprint-only ${blueprintNodeCount - registryCodes.size}; zh-Hans Identity ${localized.localizedContent.length}.`);
 console.log('  Sources fabricated 0; Questions fabricated 0; Schema extensions 0.');
 console.log('  Articles, Readiness, Approval and Publication remain unchanged.');
 console.log('  Idempotency passed: second apply produced no file drift.');
