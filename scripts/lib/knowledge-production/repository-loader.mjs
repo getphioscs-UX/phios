@@ -167,25 +167,22 @@ function adaptUniversalReadiness(record) {
     canonicalQuestion: record.canonicalIdentity.localizedQuestion,
     publicTitle: record.canonicalIdentity.localizedTitle,
     centralThesis: record.canonicalThesis.statement,
-    requiredMechanisms: record.canonicalThesis.mechanism
-      ? [{
-          label: 'Canonical mechanism',
-          requirement: record.canonicalThesis.mechanism
-        }]
-      : [],
-    requiredDistinctions: (record.articleBoundary.requiredDistinctions || []).map(item => (
-      typeof item === 'string'
-        ? { left: item, right: 'must remain distinct', reason: item }
-        : item
-    )),
-    prohibitedClaims: [
-      ...record.articleBoundary.mustNotClaim,
-      ...record.claimBoundary.prohibitedClaims
-    ],
+    whyThisNodeExists:
+      record.canonicalThesis.necessity || record.canonicalThesis.systemRole,
+    requiredMechanisms: (record.articleBoundary.mustEstablish || []).map(
+      requirement => ({ label: null, requirement })
+    ),
+    requiredDistinctions: record.articleBoundary.requiredDistinctions || [],
+    prohibitedClaims: [...new Set([
+      ...(record.articleBoundary.mustNotClaim || []),
+      ...(record.claimBoundary.prohibitedClaims || [])
+    ])],
     articleBoundary: [
-      ...record.articleBoundary.includedScope,
-      ...record.articleBoundary.excludedScope
+      ...(record.articleBoundary.includedScope || []),
+      ...(record.articleBoundary.excludedScope || [])
     ],
+    includedScope: record.articleBoundary.includedScope || [],
+    excludedScope: record.articleBoundary.excludedScope || [],
     sourceRequirement: {
       internalCanonicalSources: record.sourceBoundary.internalCanonicalSources,
       externalSourceNeeds: record.sourceBoundary.researchNeeded,

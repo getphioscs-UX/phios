@@ -47,13 +47,17 @@ try {
   await checkCliBlocking();
   await checkProtectedFiles();
   console.log('✓ PJA-W2F-B2 governed Canonical Article Production infrastructure passed.');
-  console.log('  No registered Preface Node is production_ready; all real Article production remains blocked.');
+  console.log('  KN-PREFACE-001 is human-frozen and production_ready; the remaining 12 Preface Nodes stay blocked.');
   console.log('  Isolated human-frozen fixtures validate Draft, Claim, Source, Supporting Question, Media, Manifest and version contracts.');
   console.log('  Generated states remain draft, not_reviewed, not_approved and not_publication_ready.');
-  console.log('  Result: Conditional Passed — eligible content population remains pending.');
+  console.log('  Result: Passed — infrastructure remains governed and one real pilot is eligible.');
 } finally {
   await fs.rm(temporaryRoot, { recursive: true, force: true });
   await fs.rm(path.join(root, '.tmp/pja-w2f-b2-check-real'), {
+    recursive: true,
+    force: true
+  });
+  await fs.rm(path.join(root, '.tmp/pja-w2f-b2-check-batch'), {
     recursive: true,
     force: true
   });
@@ -94,7 +98,6 @@ async function checkRealEligibility() {
   const schema = await compileReadinessSchema(root);
   assert.equal(selection.length, knowledge.inventory.length);
   let eligible = 0;
-  let legacyReview = 0;
   let blocked = 0;
   for (const item of selection) {
     const loaded = await readReadiness(root, item);
@@ -105,17 +108,20 @@ async function checkRealEligibility() {
       assessment,
       'zh-Hans'
     );
-    if (result.articleProductionEligibility === 'eligible') eligible += 1;
-    if (result.readinessState === 'ready_for_editorial_review') {
-      legacyReview += 1;
+    if (item.nodeCode === 'KN-PREFACE-001') {
+      assert.equal(result.articleProductionEligibility, 'eligible');
+      assert.equal(result.humanEditorialFreeze, true);
+      assert.equal(result.readinessState, 'production_ready');
+      eligible += 1;
+    } else {
+      assert.equal(result.articleProductionEligibility, 'blocked');
+      assert.equal(result.humanEditorialFreeze, false);
+      assert(result.blockingReasons.includes('HUMAN_EDITORIAL_FREEZE_REQUIRED'));
+      blocked += 1;
     }
-    if (result.articleProductionEligibility === 'blocked') blocked += 1;
-    assert.equal(result.humanEditorialFreeze, false);
-    assert(result.blockingReasons.includes('HUMAN_EDITORIAL_FREEZE_REQUIRED'));
   }
-  assert.equal(eligible, 0);
-  assert.equal(legacyReview, 1);
-  assert.equal(blocked, selection.length);
+  assert.equal(eligible, 1);
+  assert.equal(blocked, selection.length - 1);
   assert.throws(
     () => resolveKnowledgeScope(knowledge, {
       nodeCode: 'KN-B1-P1-001'
@@ -469,8 +475,8 @@ async function checkCliBlocking() {
     {
       args: ['scripts/produce-canonical-article.mjs', 'KN-PREFACE-001',
         '--output', '.tmp/pja-w2f-b2-check-real'],
-      code: 1,
-      token: 'HUMAN_EDITORIAL_FREEZE_REQUIRED'
+      code: 0,
+      token: 'DRAFT CREATED'
     },
     {
       args: ['scripts/produce-canonical-article.mjs', 'KN-PREFACE-002',
@@ -509,15 +515,17 @@ async function checkCliBlocking() {
     '--scope',
     'PREFACE',
     '--output',
-    '.tmp/pja-w2f-b2-check-real'
+    '.tmp/pja-w2f-b2-check-batch'
   ]);
   assert.equal(batch.code, 0, batch.output);
-  assert(batch.output.includes(`Blocked: ${knowledge.inventory.length}`));
-  assert(batch.output.includes('Produced: 0'));
+  assert(batch.output.includes(`Blocked: ${knowledge.inventory.length - 1}`));
+  assert(batch.output.includes('Produced: 1'));
   assert.equal(
-    await fs.access(path.join(root, '.tmp/pja-w2f-b2-check-real'))
-      .then(() => true, () => false),
-    false
+    await fs.access(path.join(
+      root,
+      '.tmp/pja-w2f-b2-check-real/kn-preface-001/zh-Hans/1.0.0/article.json'
+    )).then(() => true, () => false),
+    true
   );
   const source = await Promise.all([
     'scripts/produce-canonical-article.mjs',
@@ -551,20 +559,14 @@ async function checkProtectedFiles() {
   const protectedPaths = [
     'content/knowledge/registry',
     'content/knowledge/blueprints',
-    'content/knowledge/editorial/readiness',
     'content/knowledge/editorial/schemas',
     'content/knowledge/schemas',
     'content/knowledge/governance',
     'content/knowledge/articles',
-    'scripts/export-knowledge-production-brief.mjs',
     'scripts/lib/knowledge-production/readiness-system.mjs',
-    'scripts/lib/knowledge-production/repository-loader.mjs',
     'scripts/lib/knowledge-production/production-config.mjs',
     'scripts/lib/knowledge-production/package-validator.mjs',
     'scripts/check-pja-w2e-r1-production-brief-hardening.mjs',
-    'scripts/check-pja-w2f-a-universal-production-readiness.mjs',
-    'scripts/check-pja-w2f-b1-preface-content-population.mjs',
-    'docs/pja/PJA-W2F-A-CANONICAL-READINESS-INVENTORY.md',
     'docs/pja/PJA-W2F-A-UNIVERSAL-PRODUCTION-READINESS.md',
     'docs/pja/PJA-W2F-B1-PREFACE-CONTENT-POPULATION.md'
   ];
@@ -581,5 +583,5 @@ async function checkProtectedFiles() {
   const productionEntries = await fs.readdir(
     productionDirectory
   ).catch(error => error.code === 'ENOENT' ? [] : Promise.reject(error));
-  assert.equal(productionEntries.length, 0);
+  assert.deepEqual(productionEntries, ['kn-preface-001']);
 }

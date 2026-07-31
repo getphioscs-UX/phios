@@ -89,14 +89,20 @@ for (const item of knowledge.inventory) {
     thesisStatements.set(statement, item.nodeCode);
   }
   if (!loaded.legacy) {
-    assert.equal(loaded.record.review.humanFrozen, false);
-    assert.equal(loaded.record.productionReadiness.status, 'production_blocked');
-    assert.equal(loaded.record.canonicalThesis.statement, null);
+    if (item.nodeCode === 'KN-PREFACE-001') {
+      assert.equal(loaded.record.review.humanFrozen, true);
+      assert.equal(loaded.record.productionReadiness.status, 'production_ready');
+      assert(loaded.record.canonicalThesis.statement.length > 0);
+    } else {
+      assert.equal(loaded.record.review.humanFrozen, false);
+      assert.equal(loaded.record.productionReadiness.status, 'production_blocked');
+      assert.equal(loaded.record.canonicalThesis.statement, null);
+    }
   }
 }
 assert.deepEqual(statusCounts, {
-  production_ready: 0,
-  ready_for_editorial_review: 1,
+  production_ready: 1,
+  ready_for_editorial_review: 0,
   production_blocked: 12
 });
 

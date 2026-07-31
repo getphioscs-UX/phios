@@ -510,8 +510,14 @@ assert.equal(
   await exists('articles/ai-formation-from-civilizational-capability.html'),
   false
 );
-assert.equal(readiness.editorialOutline.articleBodyCreated, false);
-assert.equal(readiness.publicationRequirement.published, false);
+if (readiness.readinessSchemaVersion) {
+  assert.equal(readiness.review.humanFrozen, true);
+  assert.equal(readiness.productionReadiness.status, 'production_ready');
+  assert.equal(readiness.review.status, 'approved');
+} else {
+  assert.equal(readiness.editorialOutline.articleBodyCreated, false);
+  assert.equal(readiness.publicationRequirement.published, false);
+}
 
 for (const type of allowedBlockTypes) {
   assert(

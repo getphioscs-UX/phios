@@ -204,10 +204,8 @@ export function parseProductionBrief(markdown) {
       subsection(markdown, 'Required Distinctions')
     ),
     mustNotClaim: bulletValues(subsection(markdown, 'Must Not Claim')),
-    includedScope: bulletValues(
-      subsection(markdown, 'Included / Excluded Scope')
-    ),
-    excludedScope: []
+    includedScope: bulletValues(subsection(markdown, 'Included Scope')),
+    excludedScope: bulletValues(subsection(markdown, 'Excluded Scope'))
   };
   const boundaryJson = subsection(
     markdown,
@@ -224,22 +222,19 @@ export function parseProductionBrief(markdown) {
       );
     }
   }
-  const scopeValues = articleBoundary.includedScope;
-  const included = [];
-  const excluded = [];
-  for (const value of scopeValues) {
-    const mixed = value.match(/^(.*?)(?:，|；)\s*((?:不|不得|No |not |without).*)$/i);
-    if (mixed && mixed[1].trim()) {
-      included.push(mixed[1].trim());
-      excluded.push(mixed[2].trim());
-    } else if (/(?:不|不得|No |not |without)/i.test(value)) {
-      excluded.push(value);
-    } else {
-      included.push(value);
+  if (!articleBoundary.includedScope.length && !articleBoundary.excludedScope.length) {
+    const legacyScopeValues = bulletValues(
+      subsection(markdown, 'Included / Excluded Scope')
+    );
+    const included = [];
+    const excluded = [];
+    for (const value of legacyScopeValues) {
+      if (/(?:不|不得|No |not |without)/i.test(value)) excluded.push(value);
+      else included.push(value);
     }
+    articleBoundary.includedScope = included;
+    articleBoundary.excludedScope = excluded;
   }
-  articleBoundary.includedScope = included;
-  articleBoundary.excludedScope = excluded;
   const supportingQuestions = (
     sequenceBoundary.supportingQuestions ||
     nodeInputs.supportingQuestions ||
@@ -267,6 +262,7 @@ export function parseProductionBrief(markdown) {
     },
     canonicalProposition,
     whyThisNodeExists:
+      nodeInputs.whyThisNodeExists ||
       localizedIdentity.localizedQuestion ||
       canonicalIdentity.canonicalQuestion,
     mechanism,
@@ -311,7 +307,7 @@ export function parseProductionBrief(markdown) {
     },
     packageManifestContract: outputContract.packageManifestContract
   };
-  normalized.productionBriefHash = sha256(Buffer.from(markdown));
+  normalized.productionBriefHash = sha256(Buffer.from(stableJson(normalized)));
   validateProductionBriefContract(normalized);
   return normalized;
 }

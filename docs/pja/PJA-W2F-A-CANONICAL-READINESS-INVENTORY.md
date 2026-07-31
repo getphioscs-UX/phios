@@ -6,7 +6,7 @@ Registry identity are reported as not registered and never receive readiness.
 
 | Book | Part | Node | Question | Thesis | Boundary | Questions | Review | Production | Exportability | Blocking reason |
 | --- | --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- |
-| BOOK-I | P0 | KN-PREFACE-001 | 人工智能如何从文明能力中形成？ | ready_for_editorial_review | ready_for_editorial_review | 2 | human_review_required | ready_for_editorial_review | single_node_legacy_exportable | HUMAN_EDITORIAL_FREEZE_REQUIRED |
+| BOOK-I | P0 | KN-PREFACE-001 | 人工智能如何从文明能力中形成？ | ready_for_editorial_review | ready_for_editorial_review | 2 | human_frozen | production_ready | exportable | none |
 | BOOK-I | P0 | KN-PREFACE-002 | 为什么计算能力不能自动产生方向？ | not_ready | not_ready | 0 | human_review_required | production_blocked | blocked | The initializer populated deterministic identity only. |
 | BOOK-I | P0 | KN-PREFACE-003 | 为什么知识专业化会削弱整体理解？ | not_ready | not_ready | 1 | human_review_required | production_blocked | blocked | The initializer populated deterministic identity only. |
 | BOOK-I | P0 | KN-PREFACE-004 | 为什么需要 PHI OS？ | not_ready | not_ready | 2 | human_review_required | production_blocked | blocked | The initializer populated deterministic identity only. |

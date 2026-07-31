@@ -156,22 +156,28 @@ ${readiness.centralThesis}
 ### Must Establish
 
 ${bullet(readiness.requiredMechanisms.map(
-    item => `${item.label}: ${item.requirement}`
+    item => item.label ? `${item.label}: ${item.requirement}` : item.requirement
   ))}
 
 ### Required Distinctions
 
-${bullet(readiness.requiredDistinctions.map(
-    item => `${item.left} ≠ ${item.right}: ${item.reason}`
-  ))}
+${bullet(readiness.requiredDistinctions.map(item => (
+    typeof item === 'string'
+      ? item
+      : `${item.left} ≠ ${item.right}: ${item.reason}`
+  )))}
 
 ### Must Not Claim
 
 ${bullet(readiness.prohibitedClaims)}
 
-### Included / Excluded Scope
+### Included Scope
 
-${bullet(readiness.articleBoundary)}
+${bullet(readiness.includedScope || readiness.articleBoundary)}
+
+### Excluded Scope
+
+${bullet(readiness.excludedScope || [])}
 
 ### Previous / Next / Supporting Question Boundary
 
@@ -277,6 +283,7 @@ ${jsonBlock({
       node.sourceReferences,
       context.availableSources
     ),
+    whyThisNodeExists: readiness.whyThisNodeExists || localized.localizedQuestion,
     knownUnresolvedQuestions: readiness.sourceRequirement.externalSourceNeeds,
     requiredFigures: readiness.visualRequirement.visualRequired
       ? [readiness.visualRequirement]

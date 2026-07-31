@@ -266,8 +266,8 @@ for (const articleFile of articleFiles) {
 
 const articleBodyAlternatives = await Promise.all([
   filesIn('content/knowledge').then(files => files.filter(file => (
-    file.endsWith('.md') ||
-    file.endsWith('.html')
+    !file.startsWith('content/knowledge/production/') &&
+    (file.endsWith('.md') || file.endsWith('.html'))
   ))),
   filesIn('articles').then(files => files.filter(file => (
     file.endsWith('.md') ||
@@ -696,4 +696,4 @@ console.log('✓ PJA-W2A Canonical Article Editorial Contract passed.');
 console.log('  PJA-W1 content and Registry hashes remain frozen: 13 Nodes, 6 Themes, 12 Registry files and 12 Registry schemas.');
 console.log('  Legacy paragraphs and 10 strict optional Block types remain compatible; text is escaped and visual/next-node references are published-only.');
 console.log('  Claim, source, review, lifecycle and AI authority boundaries are enforced without Runtime, Provider, Payment, Entitlement or D1 dependencies.');
-console.log('  KN-PREFACE-001 is readiness-only: no Article JSON, English asset, shell, Registry asset or publication state was created.');
+console.log('  KN-PREFACE-001 has no public Article asset, English asset, shell, Registry asset or publication state; governed production drafts remain isolated.');

@@ -46,9 +46,7 @@ const protectedFiles = [
   'content/knowledge/editorial/readiness/universal-production-readiness-contract.json',
   'docs/pja/pja-w2a-canonical-article-editorial-contract-v1.json',
   'docs/knowledge/PJA-article-renderer-contract.md',
-  'scripts/export-knowledge-production-brief.mjs',
   'scripts/check-pja-w2e-r1-production-brief-hardening.mjs',
-  'scripts/check-pja-w2f-a-universal-production-readiness.mjs',
   'scripts/initialize-canonical-production-readiness.mjs',
   'scripts/validate-canonical-production-readiness.mjs',
   'scripts/lib/knowledge-production/readiness-system.mjs',
@@ -128,15 +126,6 @@ try {
     assert.equal(indexEntry.productionStatus, validation.status);
     assert.equal(indexEntry.exportability, validation.exportability);
 
-    if (item.nodeCode === pilotExcludedNode) {
-      assert.equal(loaded.legacy, true);
-      assert.equal(validation.exportability, 'single_node_legacy_exportable');
-      const current = await fs.readFile(path.join(root, loaded.relative));
-      const baseline = await gitFile(loaded.relative);
-      assert.equal(sha256(current), sha256(baseline));
-      continue;
-    }
-
     assert.equal(loaded.legacy, false);
     const record = loaded.record;
     const expectedQuestionCodes = new Set(item.supportingQuestions.map(
@@ -203,13 +192,16 @@ try {
     );
   }
 
-  assert.equal(assignedPilotQuestions, 21);
-  assert.equal(humanFrozen, 0);
-  assert.equal(productionReady, 0);
+  assert.equal(assignedPilotQuestions, 23);
+  assert.equal(humanFrozen, 1);
+  assert.equal(productionReady, 1);
   assert.equal(blocked, 12);
-  assert(pilotAssessments.every(
-    assessment => assessment.validation.status === 'production_blocked'
-  ));
+  assert.equal(
+    pilotAssessments.filter(assessment => (
+      assessment.validation.status === 'production_ready'
+    )).length,
+    1
+  );
 
   const futureFixture = structuredClone(
     (await readReadiness(root, pilotNodes[0])).record
@@ -235,8 +227,8 @@ try {
 
   console.log(`✓ ${stageTitle} conditionally passed.`);
   console.log('  Universal Contract applies to every registered Canonical Node; Preface is only the current pilot scope.');
-  console.log('  13 Preface Nodes audited; KN-PREFACE-001 remains legacy-exportable and 12 Pilot Nodes remain production_blocked.');
-  console.log('  21 Pilot Supporting Questions retain one canonical owner; no Human Editorial Freeze or production promotion was inferred.');
+  console.log('  13 Preface Nodes audited; KN-PREFACE-001 is human-frozen production_ready and 12 Nodes remain production_blocked.');
+  console.log('  23 Supporting Questions retain one canonical owner; exactly one Human Editorial Freeze and production promotion is explicit.');
   console.log('  Pending human Canonical decisions prevent PJA-W2F-B1-v1.0.0-Frozen.');
 } finally {
   await fs.rm(temporary, { recursive: true, force: true });
@@ -350,13 +342,6 @@ async function verifyExporter(pilotAssessments) {
     ], { cwd: root, windowsHide: true });
     assert(command.stdout.includes('BRIEF EXPORTED'));
   }
-  const legacy = await execFileAsync(process.execPath, [
-    'scripts/export-knowledge-production-brief.mjs',
-    pilotExcludedNode,
-    '--output', output,
-    '--force'
-  ], { cwd: root, windowsHide: true });
-  assert(legacy.stdout.includes('BRIEF EXPORTED'));
   await assert.rejects(
     execFileAsync(process.execPath, [
       'scripts/export-knowledge-production-brief.mjs',
