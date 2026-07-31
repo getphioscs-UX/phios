@@ -1,16 +1,15 @@
 {
   "readinessSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0",
-  "recordType": "canonical_production_readiness",
   "nodeCode": "KN-PREFACE-008",
   "locale": "zh-Hans",
   "canonicalIdentity": {
     "nodeCode": "KN-PREFACE-008",
     "canonicalQuestionKey": "how-system-speed-mismatch-creates-pressure",
-    "canonicalTitle": "系统速度失配如何形成现实压力",
-    "canonicalQuestion": "系统速度失配如何形成现实压力？",
-    "nodeType": "mechanism_question",
+    "slug": "how-system-speed-mismatch-creates-pressure",
+    "localizedTitle": "系统速度失配如何形成现实压力",
+    "localizedQuestion": "系统速度失配如何形成现实压力？",
     "registryStatus": "frozen",
-    "registryVersion": "1.1.0"
+    "blueprintStatus": "registered"
   },
   "hierarchy": {
     "bookCode": "BOOK-I",
@@ -23,7 +22,7 @@
     "nodeType": "mechanism_question"
   },
   "canonicalThesis": {
-    "thesisVersion": null,
+    "thesisVersion": "0.1.0",
     "statement": null,
     "mechanism": null,
     "necessity": null,
@@ -34,14 +33,9 @@
     }
   },
   "articleBoundary": {
-    "boundaryVersion": null,
+    "boundaryVersion": "0.1.0",
     "mustEstablish": [],
-    "requiredDistinctions": [],
-    "mustNotClaim": {
-      "global": [],
-      "partSpecific": [],
-      "nodeSpecific": []
-    },
+    "mustNotClaim": [],
     "includedScope": [],
     "excludedScope": [],
     "assumptions": [],
@@ -54,14 +48,10 @@
       "primaryNodeCode": "KN-PREFACE-008",
       "relatedNodeCodes": [],
       "relationshipType": "supporting_question",
-      "coverageRole": null,
-      "articleTreatment": null,
-      "searchAliasEligibility": null,
-      "supportingContentEligibility": null,
-      "fieldSemantics": {
-        "primaryNodeCode": "Canonical ownership derived from canonicalNodeCode.",
-        "sourceNodeCode": "Legacy, consolidation, or origin trace only; never a second Canonical owner."
-      }
+      "coverageRole": "embedded_or_search_entry",
+      "articleTreatment": "defer",
+      "searchAliasEligibility": false,
+      "supportingContentEligibility": true
     },
     {
       "questionCode": "SQ-PREFACE-021",
@@ -69,24 +59,15 @@
       "primaryNodeCode": "KN-PREFACE-008",
       "relatedNodeCodes": [],
       "relationshipType": "supporting_question",
-      "coverageRole": null,
-      "articleTreatment": null,
-      "searchAliasEligibility": null,
-      "supportingContentEligibility": null,
-      "fieldSemantics": {
-        "primaryNodeCode": "Canonical ownership derived from canonicalNodeCode.",
-        "sourceNodeCode": "Legacy, consolidation, or origin trace only; never a second Canonical owner."
-      }
+      "coverageRole": "embedded_or_search_entry",
+      "articleTreatment": "defer",
+      "searchAliasEligibility": false,
+      "supportingContentEligibility": true
     }
   ],
   "sequenceBoundary": {
     "previousNode": "KN-PREFACE-005",
-    "previousNodes": [
-      "KN-PREFACE-005"
-    ],
-    "nextNode": [
-      "KN-PREFACE-009"
-    ],
+    "nextNode": "KN-PREFACE-009",
     "previousNodeContribution": null,
     "currentNodeTransformation": null,
     "nextNodePreparation": null,
@@ -105,8 +86,8 @@
     "qualificationRequirements": []
   },
   "sourceBoundary": {
-    "sourcePlanVersion": null,
-    "sourceRequirement": null,
+    "sourcePlanVersion": "0.1.0",
+    "sourceRequirement": [],
     "internalCanonicalSources": [
       "SRC-PREFACE-S05"
     ],
@@ -116,133 +97,76 @@
     "knownSources": [
       "SRC-PREFACE-S05"
     ],
-    "researchNeeded": true,
-    "verificationNeeded": true,
+    "researchNeeded": [],
+    "verificationNeeded": [],
     "citationSensitivity": null
   },
   "figureBoundary": {
-    "figureRequirement": null,
+    "figureRequirement": "not_assessed",
     "requiredFigures": [],
     "optionalFigures": [],
     "visualMechanism": null,
     "prohibitedVisualClaims": [],
     "accessibilityRequirements": [],
-    "assetSourceBoundary": null,
-    "sequence": [
-      "media_brief",
-      "asset_registry",
-      "article_figure"
-    ]
+    "assetSourceBoundary": []
   },
   "publicContentBoundary": {
-    "publicKnowledgeBoundary": null,
-    "paidBookBoundary": null,
-    "runtimeJourneyBoundary": null,
-    "professionalServiceBoundary": null,
-    "enterpriseBoundary": null,
-    "developerBoundary": null
+    "publicKnowledgeBoundary": [],
+    "paidBookBoundary": [],
+    "runtimeJourneyBoundary": [],
+    "professionalServiceBoundary": [],
+    "enterpriseBoundary": [],
+    "developerBoundary": []
   },
   "localizationReadiness": {
     "localizedTitle": "系统速度失配如何形成现实压力",
     "localizedQuestion": "系统速度失配如何形成现实压力？",
-    "canonicalThesisReady": false,
-    "articleBoundaryReady": false,
-    "supportingQuestionsReady": false,
-    "searchAliases": [],
-    "terminologyReview": "not_applicable",
-    "languageStatus": "not_started"
+    "canonicalThesis": "not_ready",
+    "articleBoundary": "not_ready",
+    "supportingQuestions": "ready_for_editorial_review",
+    "searchAliases": "not_ready",
+    "terminologyReview": "not_ready",
+    "languageStatus": "not_ready"
   },
   "productionReadiness": {
+    "readinessVersion": "0.1.0",
     "status": "production_blocked",
-    "productionPriority": "foundation",
-    "registryStatus": "frozen",
-    "blueprintMembership": "registered",
-    "exportability": "blocked",
-    "blockingFindings": [
-      {
-        "code": "CANONICAL_THESIS_NOT_READY",
-        "message": "Canonical Thesis requires a separate human editorial decision.",
-        "field": "canonicalThesis",
-        "severity": "blocking"
-      },
-      {
-        "code": "PRODUCTION_BOUNDARY_NOT_READY",
-        "message": "Article Boundary requires a separate human editorial decision.",
-        "field": "articleBoundary",
-        "severity": "blocking"
-      },
-      {
-        "code": "CLAIM_BOUNDARY_NOT_READY",
-        "message": "Claim Plan has not been established.",
-        "field": "claimBoundary",
-        "severity": "blocking"
-      },
-      {
-        "code": "SOURCE_BOUNDARY_NOT_READY",
-        "message": "Source Plan has not been established.",
-        "field": "sourceBoundary",
-        "severity": "blocking"
-      },
-      {
-        "code": "FIGURE_BOUNDARY_NOT_READY",
-        "message": "Figure requirement has not been decided.",
-        "field": "figureBoundary",
-        "severity": "blocking"
-      },
-      {
-        "code": "PUBLIC_BOUNDARY_NOT_READY",
-        "message": "Public, paid, Runtime and professional boundaries require human review.",
-        "field": "publicContentBoundary",
-        "severity": "blocking"
-      },
-      {
-        "code": "SUPPORTING_QUESTION_MAPPING_INCOMPLETE",
-        "message": "Supporting Question treatment and eligibility require editorial decisions.",
-        "field": "supportingQuestionBoundary",
-        "severity": "blocking"
-      }
-    ],
     "missingFields": [
       "canonicalThesis.statement",
       "canonicalThesis.mechanism",
       "canonicalThesis.necessity",
       "canonicalThesis.systemRole",
-      "canonicalThesis.continuity.fromPreviousNode",
-      "canonicalThesis.continuity.toNextNode",
       "articleBoundary.mustEstablish",
-      "articleBoundary.requiredDistinctions",
       "articleBoundary.mustNotClaim",
       "articleBoundary.includedScope",
       "articleBoundary.excludedScope",
       "claimBoundary",
-      "sourceBoundary.sourceRequirement",
-      "figureBoundary.figureRequirement",
+      "sourceBoundary",
+      "figureBoundary",
       "publicContentBoundary",
-      "review.humanFreezeCompleted",
-      "supportingQuestionBoundary.articleTreatment"
+      "sequenceBoundary.editorialContinuity",
+      "humanEditorialFreeze"
+    ],
+    "blockingReasons": [
+      "The initializer populated deterministic identity only.",
+      "Canonical Thesis, boundaries and human editorial freeze are not complete."
     ]
-  },
-  "contentVersions": {
-    "thesisVersion": null,
-    "boundaryVersion": null,
-    "sourcePlanVersion": null,
-    "readinessVersion": "1.0.0"
   },
   "versionBinding": {
     "registryVersion": "1.1.0",
-    "registryHash": "c5950f5985119304de7a95f59f3bf1b37c21b1301f950781450e95674c9f9b2c",
     "blueprintVersion": "PHI-OS-BOOK-I-KNOWLEDGE-BLUEPRINT-v1.3.0",
-    "blueprintPath": "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
-    "editorialContractVersion": "PJA-W2A-v1.0.0-Canonical-Article-Editorial",
+    "editorialContractVersion": "PJA-W2A-v1.0.0",
     "articleSchemaVersion": "PHI-OS-KNOWLEDGE-ARTICLE-v2.0.0",
-    "claimGovernanceVersion": "PJA-W2C-v1.0.0-Claim-Source-Editorial-Review-Governance",
-    "exporterVersion": "PJA-W2E-R1-v1.0.0-Frozen"
+    "claimGovernanceVersion": "PJA-W2C-v1.0.0",
+    "exporterVersion": "PJA-W2E-v1.0.0-Frozen"
   },
   "review": {
-    "status": "not_assessed",
-    "humanFreezeCompleted": false,
-    "humanReviewerId": null,
-    "humanReviewedAt": null,
-    "decisions": []
+    "status": "not_reviewed",
+    "humanFrozen": false,
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "blockingFindings": [
+      "Human editorial review has not frozen the theory or boundaries."
+    ]
   }
 }

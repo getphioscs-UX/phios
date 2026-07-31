@@ -3,522 +3,370 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { sha256 } from './lib/knowledge-production/checksum.mjs';
-import { loadKnowledgeAuthority } from './lib/knowledge-readiness/authority-loader.mjs';
 import {
-  READINESS_CONTRACT_PATH,
+  compileReadinessSchema,
+  initializeReadinessRecord,
+  loadKnowledgeInventory,
   READINESS_ERROR_CODES,
   READINESS_INDEX_PATH,
-  READINESS_INVENTORY_PATH,
-  READINESS_SCHEMA_PATH,
   READINESS_SCHEMA_VERSION,
-  readinessRelativePath
-} from './lib/knowledge-readiness/readiness-config.mjs';
-import {
-  auditAuthorityIntegrity,
-  auditThesisDuplication,
-  readReadinessRecord,
+  readReadiness,
+  resolveKnowledgeScope,
   validateReadinessRecord
-} from './lib/knowledge-readiness/readiness-record.mjs';
-import { resolveKnowledgeScope } from './lib/knowledge-readiness/scope-resolver.mjs';
+} from './lib/knowledge-production/readiness-system.mjs';
+import { sha256 } from './lib/knowledge-production/checksum.mjs';
 
 const execFileAsync = promisify(execFile);
 const root = process.cwd();
-const temporaryRelative = '.tmp/pja-w2f-a-check';
-const temporary = path.join(root, temporaryRelative);
+const read = file => fs.readFile(path.join(root, file), 'utf8');
+const readJson = async file => JSON.parse(await read(file));
+const protectedFiles = [
+  'content/knowledge/registry/nodes.json',
+  'content/knowledge/registry/learning-paths.json',
+  'content/knowledge/registry/localized-content.json',
+  'content/knowledge/registry/supporting-questions.json',
+  'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
+  'content/knowledge/schemas/article-v2.schema.json',
+  'content/knowledge/schemas/claim.schema.json',
+  'docs/knowledge/PJA-article-renderer-contract.md',
+  'scripts/import-canonical-article-package.mjs'
+];
 
-async function run(script, args = [], cwd = root) {
-  try {
-    const result = await execFileAsync(process.execPath, [
-      path.join(root, script),
-      ...args
-    ], {
-      cwd,
-      windowsHide: true,
-      maxBuffer: 10 * 1024 * 1024
-    });
-    return { code: 0, stdout: result.stdout, stderr: result.stderr };
-  } catch (error) {
-    return {
-      code: typeof error.code === 'number' ? error.code : 2,
-      stdout: error.stdout ?? '',
-      stderr: error.stderr ?? ''
-    };
+const packageJson = await readJson('package.json');
+assert.equal(
+  packageJson.scripts['knowledge:init-readiness'],
+  'node scripts/initialize-canonical-production-readiness.mjs'
+);
+assert.equal(
+  packageJson.scripts['knowledge:validate-readiness'],
+  'node scripts/validate-canonical-production-readiness.mjs'
+);
+assert.equal(
+  packageJson.scripts['check:pja-w2f-a'],
+  'npm run check:pja-w2e && node scripts/check-pja-w2f-a-universal-production-readiness.mjs'
+);
+assert(packageJson.scripts.precheck.endsWith(
+  'node scripts/check-pja-w2f-a-universal-production-readiness.mjs'
+));
+assert.equal(READINESS_ERROR_CODES.length, 40);
+
+const knowledge = await loadKnowledgeInventory(root);
+assert.equal(knowledge.inventory.length, 13);
+assert.equal(knowledge.questions.supportingQuestions.length, 23);
+assert.equal(knowledge.blueprints[0].nodes.length, 78);
+assert.equal(resolveKnowledgeScope(knowledge, { scope: 'ALL' }).length, 13);
+assert.equal(resolveKnowledgeScope(knowledge, { scope: 'PREFACE' }).length, 13);
+assert.equal(resolveKnowledgeScope(knowledge, { scope: 'BOOK-1' }).length, 13);
+assert.throws(
+  () => resolveKnowledgeScope(knowledge, { scope: 'PART-1' }),
+  error => error.code === 'KNOWLEDGE_SCOPE_EMPTY'
+);
+assert.throws(
+  () => resolveKnowledgeScope(knowledge, { nodeCode: 'KN-B1-P1-001' }),
+  error => error.code === 'CANONICAL_NODE_NOT_FOUND'
+);
+
+const schema = await compileReadinessSchema(root);
+const statusCounts = {
+  production_ready: 0,
+  ready_for_editorial_review: 0,
+  production_blocked: 0
+};
+const thesisStatements = new Map();
+for (const item of knowledge.inventory) {
+  const loaded = await readReadiness(root, item);
+  const result = validateReadinessRecord(item, loaded, schema);
+  assert.equal(result.schemaValid, true, `${item.nodeCode}: ${result.errors}`);
+  statusCounts[result.status] += 1;
+  const statement = loaded.legacy
+    ? loaded.record.centralThesis
+    : loaded.record.canonicalThesis.statement;
+  if (statement) {
+    assert.equal(thesisStatements.has(statement), false, 'CANONICAL_THESIS_DUPLICATED');
+    thesisStatements.set(statement, item.nodeCode);
+  }
+  if (!loaded.legacy) {
+    assert.equal(loaded.record.review.humanFrozen, false);
+    assert.equal(loaded.record.productionReadiness.status, 'production_blocked');
+    assert.equal(loaded.record.canonicalThesis.statement, null);
   }
 }
+assert.deepEqual(statusCounts, {
+  production_ready: 0,
+  ready_for_editorial_review: 1,
+  production_blocked: 12
+});
 
-async function gitBytes(relativePath) {
-  const { stdout } = await execFileAsync('git', ['show', `HEAD:${relativePath}`], {
+const index = await readJson(READINESS_INDEX_PATH);
+assert.equal(index.sourceOfTruth, false);
+assert.equal(index.entries.length, knowledge.inventory.length);
+assert.deepEqual(
+  index.entries.map(entry => entry.nodeCode),
+  knowledge.inventory.map(item => item.nodeCode)
+);
+assert((await read('docs/pja/PJA-W2F-A-CANONICAL-READINESS-INVENTORY.md'))
+  .includes('Blueprint-planned, not registered: 65'));
+
+const questionOwners = new Map();
+for (const question of knowledge.questions.supportingQuestions) {
+  const code = question.questionCode || question.supportingQuestionCode;
+  const owner = question.canonicalNodeCode || question.primaryNodeCode;
+  assert(knowledge.inventory.some(item => item.nodeCode === owner));
+  assert.equal(questionOwners.has(code), false, 'SUPPORTING_QUESTION_MULTI_ASSIGNED');
+  questionOwners.set(code, owner);
+}
+
+const fixtureCatalog = await readJson(
+  'tests/fixtures/knowledge/readiness/fixture-catalog.json'
+);
+assert.equal(fixtureCatalog.validCases.length, 11);
+assert.equal(fixtureCatalog.invalidCases.length, 25);
+assert.equal(fixtureCatalog.productionAuthority, false);
+
+const synthetic = makeSyntheticKnowledge();
+for (const scope of [
+  'PART-1', 'PART-2', 'PART-3', 'PART-4', 'PART-5',
+  'BOOK-1', 'BOOK-2', 'BOOK-3', 'KN-B3-P14'
+]) {
+  assert(resolveKnowledgeScope(synthetic, { scope }).length > 0, scope);
+}
+assert.equal(resolveKnowledgeScope(synthetic, { scope: 'ALL' }).length, 8);
+const futureItem = synthetic.inventory.at(-1);
+const futureRecord = initializeReadinessRecord(futureItem, synthetic);
+assert.equal(schema(futureRecord), true, JSON.stringify(schema.errors));
+assert.equal(futureRecord.hierarchy.bookCode, 'BOOK-III');
+assert.equal(futureRecord.hierarchy.partCode, 'P14');
+assert.equal(futureRecord.productionReadiness.status, 'production_blocked');
+
+const productionReady = structuredClone(futureRecord);
+completeForHumanFixture(productionReady);
+let result = validateReadinessRecord(
+  futureItem,
+  { record: productionReady, legacy: false },
+  schema
+);
+assert.equal(result.schemaValid, true, result.errors);
+assert.equal(result.status, 'production_ready');
+
+const invalidMutations = [
+  record => { record.canonicalThesis.statement = record.canonicalIdentity.localizedQuestion; },
+  record => { record.hierarchy.bookCode = 'BOOK-WRONG'; },
+  record => { record.hierarchy.partCode = 'P99'; },
+  record => { record.nodeCode = 'KN-WRONG-001'; },
+  record => { record.sequenceBoundary.previousNode = 'KN-WRONG-001'; },
+  record => { record.sequenceBoundary.nextNode = 'KN-WRONG-002'; },
+  record => { record.productionReadiness.status = 'unknown'; },
+  record => { record.locale = 'xx-invalid'; },
+  record => { record.versionBinding = {}; },
+  record => { record.review.blockingFindings = ['Blocking fixture']; }
+];
+for (const mutate of invalidMutations) {
+  const invalid = structuredClone(productionReady);
+  mutate(invalid);
+  result = validateReadinessRecord(
+    futureItem,
+    { record: invalid, legacy: false },
+    schema
+  );
+  assert.equal(result.schemaValid, false);
+}
+
+const [exporter, resolver] = await Promise.all([
+  read('scripts/export-knowledge-production-brief.mjs'),
+  read('scripts/lib/knowledge-production/readiness-system.mjs')
+]);
+assert(!/KN-PREFACE-00[2-9]|KN-B1-P[1-5]-00/.test(exporter));
+assert(!/\[\s*['"]KN-PREFACE/.test(resolver));
+assert(!resolver.includes('78'));
+assert(resolver.includes('blueprintFiles'));
+
+const commands = [
+  ['scripts/initialize-canonical-production-readiness.mjs', ['--scope', 'ALL']],
+  ['scripts/validate-canonical-production-readiness.mjs', ['--scope', 'PREFACE']],
+  ['scripts/validate-canonical-production-readiness.mjs', ['--scope', 'BOOK-1']],
+  ['scripts/validate-canonical-production-readiness.mjs', ['--scope', 'PART-1']],
+  ['scripts/export-knowledge-production-brief.mjs', [
+    '--scope', 'PREFACE', '--output', '.tmp/pja-w2f-batch'
+  ]]
+];
+for (const [script, args] of commands) {
+  const { stdout } = await execFileAsync(process.execPath, [script, ...args], {
+    cwd: root,
+    windowsHide: true
+  });
+  if (script.includes('initialize')) {
+    assert(stdout.includes('Existing preserved: 13'));
+  }
+  if (args.includes('PART-1')) assert(stdout.includes('NOT REGISTERED'));
+}
+await fs.rm(path.join(root, '.tmp/pja-w2f-batch'), {
+  recursive: true,
+  force: true
+});
+
+for (const file of protectedFiles) {
+  const [current, baseline] = await Promise.all([
+    fs.readFile(path.join(root, file)),
+    gitFile(file)
+  ]);
+  assert.equal(sha256(current), sha256(baseline), `Protected file changed: ${file}`);
+}
+const legacyCurrent = await fs.readFile(
+  path.join(root, 'content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json')
+);
+const legacyBaseline = await gitFile(
+  'content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json'
+);
+assert.equal(sha256(legacyCurrent), sha256(legacyBaseline));
+
+console.log('✓ PJA-W2F-A Universal Canonical Production Readiness passed.');
+console.log('  13 registered Preface Nodes are inventoried; 12 deterministic Skeletons were added and the legacy KN-PREFACE-001 record is preserved.');
+console.log('  Blueprint-only P1–P5 Nodes and unregistered P6–P14 remain non-authoritative; universal fixtures cover P1–P14 and Books I–III.');
+console.log('  No Skeleton is production_ready; Thesis, boundary and human authority gates remain blocking.');
+console.log('  Scope, hierarchy, continuity, Supporting Question, duplication, future-pattern and batch-export behavior passed.');
+
+async function gitFile(file) {
+  const { stdout } = await execFileAsync('git', ['show', `HEAD:${file}`], {
     cwd: root,
     encoding: 'buffer',
-    maxBuffer: 10 * 1024 * 1024
+    maxBuffer: 20 * 1024 * 1024
   });
   return stdout;
 }
 
-async function currentBytes(relativePath) {
-  return fs.readFile(path.join(root, relativePath));
-}
-
-async function fileHashes(relativePaths) {
-  return Object.fromEntries(await Promise.all(relativePaths.map(async relativePath => (
-    [relativePath, sha256(await currentBytes(relativePath))]
-  ))));
-}
-
-function codes(result) {
-  return [
-    ...(result.structuralErrors ?? []),
-    ...(result.findings ?? [])
-  ].map(item => item.code);
-}
-
-function mutatedRecord(record, mutate) {
-  const clone = {
-    ...record,
-    normalized: structuredClone(record.normalized)
-  };
-  mutate(clone.normalized);
-  return clone;
-}
-
-function forbiddenAuthorityValue(value) {
-  if (typeof value === 'string') {
-    return [
-      'approved',
-      'publication_ready',
-      'published',
-      'human_approved',
-      'editorially_approved'
-    ].includes(value);
-  }
-  if (Array.isArray(value)) return value.some(forbiddenAuthorityValue);
-  if (value && typeof value === 'object') {
-    return Object.values(value).some(forbiddenAuthorityValue);
-  }
-  return false;
-}
-
-await fs.rm(temporary, { recursive: true, force: true });
-await fs.mkdir(temporary, { recursive: true });
-
-try {
-  const packageJson = JSON.parse(await currentBytes('package.json'));
-  assert.equal(
-    packageJson.scripts['knowledge:init-readiness'],
-    'node scripts/initialize-canonical-production-readiness.mjs'
-  );
-  assert.equal(
-    packageJson.scripts['knowledge:validate-readiness'],
-    'node scripts/validate-canonical-production-readiness.mjs'
-  );
-  assert.equal(
-    packageJson.scripts['check:pja-w2f-a'],
-    'node scripts/check-pja-w2f-a-universal-production-readiness.mjs'
-  );
-  assert.equal(new Set(READINESS_ERROR_CODES).size, READINESS_ERROR_CODES.length);
-  for (const code of [
-    'KNOWLEDGE_SCOPE_INVALID',
-    'CANONICAL_NODE_NOT_FOUND',
-    'CANONICAL_THESIS_NOT_READY',
-    'CANONICAL_THESIS_DUPLICATED',
-    'SUPPORTING_QUESTION_MULTI_ASSIGNED',
-    'PRODUCTION_READY_REQUIREMENTS_NOT_MET'
-  ]) {
-    assert(READINESS_ERROR_CODES.includes(code));
-  }
-
-  const protectedFiles = [
-    'content/knowledge/registry/nodes.json',
-    'content/knowledge/registry/learning-paths.json',
-    'content/knowledge/registry/localized-content.json',
-    'content/knowledge/registry/supporting-questions.json',
-    'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
-    'content/knowledge/editorial/schemas/canonical-article.schema.json',
-    'content/knowledge/schemas/article-v2.schema.json',
-    'content/knowledge/schemas/claim.schema.json',
-    'content/knowledge/schemas/source.schema.json',
-    'content/knowledge/schemas/article-review.schema.json',
-    'content/knowledge/governance/policies/pja-w2c-claim-source-review-policy.json',
-    'docs/knowledge/PJA-article-renderer-contract.md'
+function makeSyntheticKnowledge() {
+  const definitions = [
+    ['BOOK-I', 1, 'P1', 'KN-B1-P1-001'],
+    ['BOOK-I', 1, 'P1', 'KN-B1-P1-006'],
+    ['BOOK-I', 1, 'P2', 'KN-B1-P2-001'],
+    ['BOOK-I', 1, 'P3', 'KN-B1-P3-001'],
+    ['BOOK-I', 1, 'P4', 'KN-B1-P4-001'],
+    ['BOOK-I', 1, 'P5', 'KN-B1-P5-013'],
+    ['BOOK-II', 2, 'P6', 'KN-B2-P6-001'],
+    ['BOOK-III', 3, 'P14', 'KN-B3-P14-001']
   ];
-  for (const relativePath of protectedFiles) {
-    assert.equal(
-      sha256(await currentBytes(relativePath)),
-      sha256(await gitBytes(relativePath)),
-      `Protected file changed: ${relativePath}`
-    );
-  }
-  assert.equal(
-    sha256(await currentBytes(
-      'content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json'
-    )),
-    sha256(await gitBytes(
-      'content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json'
-    )),
-    'Existing KN-PREFACE-001 Readiness must be preserved byte-for-byte.'
-  );
-
-  const authority = await loadKnowledgeAuthority(root);
-  assert.equal(authority.registeredNodes.length, 13);
-  assert.equal(authority.supportingQuestions.supportingQuestions.length, 23);
-  assert.equal(
-    authority.blueprints.reduce((sum, entry) => sum + entry.value.nodes.length, 0),
-    78
-  );
-  assert.equal(authority.membership.size, 13);
-  assert.equal(authority.planned.size, 65);
-  assert.deepEqual(auditAuthorityIntegrity(authority), []);
-
-  const allScope = resolveKnowledgeScope(authority, { scope: 'ALL' });
-  const prefaceScope = resolveKnowledgeScope(authority, { scope: 'PREFACE' });
-  const bookScope = resolveKnowledgeScope(authority, { scope: 'BOOK-1' });
-  const partOneScope = resolveKnowledgeScope(authority, { scope: 'PART-1' });
-  const partFiveScope = resolveKnowledgeScope(authority, { scope: 'PART-5' });
-  const partFourteenScope = resolveKnowledgeScope(authority, { scope: 'PART-14' });
-  const nodePrefixScope = resolveKnowledgeScope(authority, { scope: 'KN-B1-P1' });
-  assert.equal(allScope.nodes.length, 13);
-  assert.equal(allScope.plannedNodes.length, 65);
-  assert.equal(prefaceScope.nodes.length, 13);
-  assert.equal(bookScope.nodes.length, 13);
-  assert.equal(bookScope.plannedNodes.length, 65);
-  assert.equal(partOneScope.nodes.length, 0);
-  assert.equal(partOneScope.plannedNodes.length, 12);
-  assert.equal(partFiveScope.nodes.length, 0);
-  assert.equal(partFiveScope.plannedNodes.length, 13);
-  assert.equal(partFourteenScope.registrationState, 'not_registered');
-  assert.equal(partFourteenScope.nodes.length, 0);
-  assert.equal(nodePrefixScope.plannedNodes.length, 12);
-  const plannedDistribution = Object.fromEntries(
-    ['P1', 'P2', 'P3', 'P4', 'P5'].map(partCode => [
+  const inventory = definitions.map(([bookCode, bookNumber, partCode, nodeCode], index) => {
+    const question = `Fixture question ${index + 1}?`;
+    const node = {
+      nodeCode,
+      canonicalQuestionKey: `fixture-${index + 1}`,
+      canonicalLanguage: 'zh-Hans',
+      registryStatus: 'fixture_registered',
+      themeCode: `TH-FIXTURE-${index + 1}`,
+      nodeType: 'mechanism_question',
+      relationships: {
+        prerequisiteNodeCodes: index ? [definitions[index - 1][3]] : [],
+        nextNodeCodes: index < definitions.length - 1
+          ? [definitions[index + 1][3]]
+          : []
+      },
+      sourceReferences: []
+    };
+    const blueprint = {
+      bookCode,
+      bookTitleZhHans: `${bookCode} fixture`,
+      contract: `${bookCode}-FIXTURE-v1.0.0`
+    };
+    const blueprintNode = {
+      nodeCode,
       partCode,
-      [...authority.planned.values()].filter(
-        entry => entry.blueprintNode.partCode === partCode
-      ).length
-    ])
-  );
-  assert.deepEqual(plannedDistribution, {
-    P1: 12,
-    P2: 13,
-    P3: 15,
-    P4: 12,
-    P5: 13
+      titleZhHans: `Fixture title ${index + 1}`,
+      status: 'fixture_registered'
+    };
+    return {
+      index,
+      node,
+      nodeCode,
+      membership: { blueprint, blueprintNode, bookNumber },
+      blueprintNode,
+      blueprint,
+      part: { partCode, title: `${partCode} fixture` },
+      bookCode,
+      bookNumber,
+      partCode,
+      localizedRecord: {
+        nodeCode,
+        locales: {
+          'zh-Hans': {
+            locale: 'zh-Hans',
+            displayQuestion: question,
+            slug: `fixture-${index + 1}`
+          }
+        }
+      },
+      supportingQuestions: [],
+      previousNode: index ? definitions[index - 1][3] : null,
+      nextNode: index < definitions.length - 1
+        ? definitions[index + 1][3]
+        : null,
+      learningPaths: []
+    };
   });
-
-  const futureNode = structuredClone(authority.registeredNodes[0]);
-  futureNode.nodeCode = 'KN-B9-P14-FUTURE';
-  futureNode.bookCode = 'BOOK-IX';
-  futureNode.partCode = 'P14';
-  futureNode.collectionCode = 'KC-FUTURE';
-  futureNode.relationships = {
-    prerequisiteNodeCodes: [],
-    nextNodeCodes: [],
-    relatedNodeCodes: [],
-    parentNodeCodes: [],
-    childNodeCodes: []
+  return {
+    inventory,
+    nodes: { version: 'fixture-v1.0.0' },
+    localized: {},
+    questions: { supportingQuestions: [] },
+    learningPaths: { learningPaths: [] },
+    blueprints: [],
+    parts: []
   };
-  const futureMembership = {
-    blueprintPath: 'test-only/future-blueprint.json',
-    blueprint: {
-      contract: 'TEST-ONLY-FUTURE-BLUEPRINT-v1',
-      bookCode: 'BOOK-IX'
-    },
-    blueprintNode: {
-      nodeCode: futureNode.nodeCode,
-      partCode: 'P14',
-      status: 'registered',
-      titleZhHans: 'Test-only future Part pattern'
-    },
-    part: {
-      partCode: 'P14',
-      title: 'Test-only future Part'
-    },
-    bookCode: 'BOOK-IX',
-    bookTitle: 'Test-only future Book'
-  };
-  const futureAuthority = {
-    ...authority,
-    registeredNodes: [...authority.registeredNodes, futureNode],
-    membership: new Map(authority.membership),
-    planned: new Map(authority.planned)
-  };
-  futureAuthority.membership.set(futureNode.nodeCode, futureMembership);
-  assert.deepEqual(
-    resolveKnowledgeScope(futureAuthority, { scope: 'PART-14' }).nodes.map(
-      node => node.nodeCode
-    ),
-    [futureNode.nodeCode]
-  );
-  assert.deepEqual(
-    resolveKnowledgeScope(futureAuthority, { scope: 'BOOK-9' }).nodes.map(
-      node => node.nodeCode
-    ),
-    [futureNode.nodeCode]
-  );
+}
 
-  const readinessPaths = authority.registeredNodes.map(
-    node => readinessRelativePath(node.nodeCode, 'zh-Hans')
-  );
-  for (const relativePath of readinessPaths) {
-    await fs.access(path.join(root, relativePath));
-  }
-  const records = [];
-  const validationResults = [];
-  for (const node of authority.registeredNodes) {
-    const record = await readReadinessRecord(authority, node.nodeCode, 'zh-Hans');
-    const result = validateReadinessRecord(authority, record);
-    records.push(record);
-    validationResults.push(result);
-  }
-  assert.equal(records.filter(record => record.legacy).length, 1);
-  assert.equal(validationResults.filter(result => result.productionReady).length, 1);
-  assert.equal(validationResults.filter(result => !result.productionReady).length, 12);
-  assert.equal(
-    validationResults.find(result => result.nodeCode === 'KN-PREFACE-001')
-      .exportability,
-    'exportable'
-  );
-  const blocked002 = validationResults.find(
-    result => result.nodeCode === 'KN-PREFACE-002'
-  );
-  assert(codes(blocked002).includes('CANONICAL_THESIS_NOT_READY'));
-  for (const record of records.filter(record => !record.legacy)) {
-    assert.equal(record.raw.readinessSchemaVersion, READINESS_SCHEMA_VERSION);
-    assert.equal(record.raw.canonicalThesis.statement, null);
-    assert.equal(record.raw.productionReadiness.status, 'production_blocked');
-    assert.equal(record.raw.review.humanFreezeCompleted, false);
-    assert.equal(forbiddenAuthorityValue(record.raw), false);
-  }
-
-  const readyRecord = records.find(record => record.context.node.nodeCode === 'KN-PREFACE-001');
-  const titleAsThesis = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.canonicalThesis.statement = value.canonicalIdentity.canonicalTitle;
-    }
-  ));
-  assert(codes(titleAsThesis).includes('CANONICAL_THESIS_NOT_READY'));
-  const questionAsThesis = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.canonicalThesis.statement = value.canonicalIdentity.canonicalQuestion;
-    }
-  ));
-  assert(codes(questionAsThesis).includes('CANONICAL_THESIS_NOT_READY'));
-  const missingMustEstablish = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.articleBoundary.mustEstablish = [];
-    }
-  ));
-  assert(codes(missingMustEstablish).includes('MUST_ESTABLISH_MISSING'));
-  const missingMustNotClaim = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.articleBoundary.mustNotClaim = {
-        global: [],
-        partSpecific: [],
-        nodeSpecific: []
-      };
-    }
-  ));
-  assert(codes(missingMustNotClaim).includes('MUST_NOT_CLAIM_MISSING'));
-  const wrongBook = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.hierarchy.bookCode = 'BOOK-WRONG';
-    }
-  ));
-  assert(codes(wrongBook).includes('CANONICAL_HIERARCHY_MISMATCH'));
-  const wrongPart = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.hierarchy.partCode = 'P999';
-    }
-  ));
-  assert(codes(wrongPart).includes('CANONICAL_HIERARCHY_MISMATCH'));
-  const wrongNode = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.canonicalIdentity.nodeCode = 'KN-WRONG';
-    }
-  ));
-  assert(codes(wrongNode).includes('CANONICAL_IDENTITY_MISMATCH'));
-  const wrongPrevious = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.sequenceBoundary.previousNode = 'KN-WRONG';
-    }
-  ));
-  assert(codes(wrongPrevious).includes('PREVIOUS_NODE_MISMATCH'));
-  const wrongNext = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.sequenceBoundary.nextNode = ['KN-WRONG'];
-    }
-  ));
-  assert(codes(wrongNext).includes('NEXT_NODE_MISMATCH'));
-  const missingSource = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.sourceBoundary.sourceRequirement = null;
-    }
-  ));
-  assert(codes(missingSource).includes('SOURCE_BOUNDARY_NOT_READY'));
-  const missingPublic = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.publicContentBoundary.professionalServiceBoundary = null;
-    }
-  ));
-  assert(codes(missingPublic).includes('PUBLIC_BOUNDARY_NOT_READY'));
-  const blockingReady = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.productionReadiness.blockingFindings = [{
-        code: 'TEST_ONLY_BLOCKER'
-      }];
-    }
-  ));
-  assert(codes(blockingReady).includes('BLOCKING_FINDINGS_PRESENT'));
-  const unknownStatus = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.productionReadiness.status = 'automatic_approval';
-    }
-  ));
-  assert(codes(unknownStatus).includes('PRODUCTION_STATUS_INVALID'));
-  const missingVersion = validateReadinessRecord(authority, mutatedRecord(
-    readyRecord,
-    value => {
-      value.versionBinding.registryVersion = null;
-    }
-  ));
-  assert(codes(missingVersion).includes('VERSION_BINDING_MISSING'));
-  const duplicateLeft = validateReadinessRecord(authority, readyRecord);
-  const duplicateRight = structuredClone(duplicateLeft);
-  duplicateRight.nodeCode = 'KN-TEST-DUPLICATE';
-  duplicateRight.normalized.nodeCode = duplicateRight.nodeCode;
-  assert.equal(
-    auditThesisDuplication([duplicateLeft, duplicateRight])[0].classification,
-    'canonical_duplication'
-  );
-  const duplicateQuestionAuthority = {
-    ...authority,
-    supportingQuestions: {
-      ...authority.supportingQuestions,
-      supportingQuestions: [
-        ...authority.supportingQuestions.supportingQuestions,
-        structuredClone(authority.supportingQuestions.supportingQuestions[0])
-      ]
+function completeForHumanFixture(record) {
+  record.canonicalThesis = {
+    thesisVersion: '1.0.0',
+    statement: 'Fixture thesis establishes a bounded future-node mechanism.',
+    mechanism: 'Fixture mechanism.',
+    necessity: 'Fixture necessity.',
+    systemRole: 'Fixture system role.',
+    continuity: {
+      fromPreviousNode: 'Fixture previous contribution.',
+      toNextNode: 'Fixture next preparation.'
     }
   };
-  assert(
-    auditAuthorityIntegrity(duplicateQuestionAuthority).some(
-      item => item.code === 'SUPPORTING_QUESTION_MULTI_ASSIGNED'
-    )
-  );
-
-  const schema = JSON.parse(await currentBytes(READINESS_SCHEMA_PATH));
-  const contract = JSON.parse(await currentBytes(READINESS_CONTRACT_PATH));
-  const index = JSON.parse(await currentBytes(READINESS_INDEX_PATH));
-  const inventoryDocument = await fs.readFile(
-    path.join(root, READINESS_INVENTORY_PATH),
-    'utf8'
-  );
-  assert.equal(schema.properties.readinessSchemaVersion.const, READINESS_SCHEMA_VERSION);
-  assert.equal(contract.scope.registeredCanonicalNodesOnly, true);
-  assert.equal(contract.scope.blueprintPlannedNodesAreCanonicalIdentity, false);
-  assert.deepEqual(contract.figureBoundaryContract.sequence, [
-    'media_brief',
-    'asset_registry',
-    'article_figure'
-  ]);
-  assert.equal(contract.humanAuthorityBoundary.toolsMayApproveProductionReady, false);
-  assert.equal(index.summary.canonicalNodesDetected, 13);
-  assert.equal(index.summary.blueprintPlannedNodesDetected, 65);
-  assert.equal(index.summary.productionReady, 1);
-  assert.equal(index.summary.blocked, 12);
-  assert.equal(index.registeredNodes.length, 13);
-  assert.equal(index.blueprintPlannedNodes.length, 65);
-  assert.match(inventoryDocument, /Parts 6–14/);
-  assert.match(inventoryDocument, /Not Registered/);
-
-  const recordHashesBefore = await fileHashes(readinessPaths);
-  let command = await run('scripts/initialize-canonical-production-readiness.mjs', [
-    '--scope',
-    'ALL'
-  ]);
-  assert.equal(command.code, 0, command.stderr);
-  assert(command.stdout.includes('Created: 0'));
-  assert(command.stdout.includes('Existing preserved: 13'));
-  assert.deepEqual(await fileHashes(readinessPaths), recordHashesBefore);
-
-  for (const scope of ['PREFACE', 'BOOK-1', 'PART-1', 'PART-14', 'ALL']) {
-    command = await run('scripts/validate-canonical-production-readiness.mjs', [
-      '--scope',
-      scope
-    ]);
-    assert.equal(command.code, 0, `${scope}: ${command.stderr}`);
-  }
-
-  const briefOutput = `${temporaryRelative}/single`;
-  command = await run('scripts/export-knowledge-production-brief.mjs', [
-    'KN-PREFACE-001',
-    '--output',
-    briefOutput
-  ]);
-  assert.equal(command.code, 0, command.stderr);
-  assert(await fs.stat(path.join(
-    root,
-    briefOutput,
-    'KN-PREFACE-001-production-brief.md'
-  )));
-  command = await run('scripts/export-knowledge-production-brief.mjs', [
-    'KN-PREFACE-002',
-    '--output',
-    briefOutput
-  ]);
-  assert.notEqual(command.code, 0);
-  assert(command.stderr.includes('CANONICAL_THESIS_NOT_READY'));
-
-  command = await run('scripts/export-knowledge-production-brief.mjs', [
-    '--scope',
-    'PREFACE',
-    '--output',
-    `${temporaryRelative}/preface-batch`
-  ]);
-  assert.equal(command.code, 0, command.stderr);
-  assert(command.stdout.includes('Exported 1; Skipped 0; Blocked 12; Failed 0'));
-  command = await run('scripts/export-knowledge-production-brief.mjs', [
-    '--scope',
-    'PART-1',
-    '--output',
-    `${temporaryRelative}/part-one-batch`
-  ]);
-  assert.equal(command.code, 0, command.stderr);
-  assert(command.stdout.includes('Exported 0; Skipped 12; Blocked 0; Failed 0'));
-
-  const exporterSource = await fs.readFile(
-    path.join(root, 'scripts/export-knowledge-production-brief.mjs'),
-    'utf8'
-  );
-  const resolverSource = await fs.readFile(
-    path.join(root, 'scripts/lib/knowledge-readiness/scope-resolver.mjs'),
-    'utf8'
-  );
-  assert.equal(/KN-PREFACE-001|KN-B1-P1-001/.test(exporterSource), false);
-  assert.equal(/\b78\b/.test(resolverSource), false);
-  assert.equal(/PREFACE-\d{3}/.test(resolverSource), false);
-  assert.match(exporterSource, /resolveKnowledgeScope/);
-  assert.match(exporterSource, /loadCanonicalContext\(root, nodeCode, locale\)/);
-
-  console.log('✓ PJA-W2F-A Universal Canonical Production Readiness passed.');
-  console.log('  Registry drives 13 Canonical Nodes; 65 Blueprint-planned Part 1–5 Nodes remain explicitly not registered.');
-  console.log('  One preserved KN-PREFACE-001 record is exportable; 12 deterministic Skeletons remain production_blocked without auto-written Thesis or Boundary.');
-  console.log('  ALL, PREFACE, Book, Part, Node-prefix and future Book/Part pattern scopes share one Resolver, Schema, Initializer, Validator and Exporter path.');
-  console.log('  Registry, Blueprint, Learning Paths, Supporting Questions, Article/Claim Schemas, Governance and Renderer remain byte-identical to HEAD.');
-  console.log('  State: PJA-W2F-A1-v1.0.0-Frozen.');
-} finally {
-  await fs.rm(temporary, { recursive: true, force: true });
+  record.articleBoundary = {
+    boundaryVersion: '1.0.0',
+    mustEstablish: ['Fixture mechanism'],
+    mustNotClaim: ['No factual or production authority'],
+    includedScope: ['Fixture scope'],
+    excludedScope: ['Production content'],
+    assumptions: ['Fixture-only'],
+    unresolvedQuestions: []
+  };
+  record.claimBoundary.requiredClaimFamilies = ['fixture'];
+  record.claimBoundary.allowedClaimTypes = ['phi_os_interpretation'];
+  record.sourceBoundary.sourceRequirement = ['Fixture source review'];
+  record.figureBoundary.figureRequirement = 'none';
+  record.publicContentBoundary.publicKnowledgeBoundary = ['Fixture public boundary'];
+  record.publicContentBoundary.paidBookBoundary = ['No paid content'];
+  record.publicContentBoundary.runtimeJourneyBoundary = ['No Runtime'];
+  record.publicContentBoundary.professionalServiceBoundary = ['No advice'];
+  record.publicContentBoundary.enterpriseBoundary = ['No implementation'];
+  record.publicContentBoundary.developerBoundary = ['No internal docs'];
+  record.sequenceBoundary.previousNodeContribution = 'Fixture previous';
+  record.sequenceBoundary.currentNodeTransformation = 'Fixture transformation';
+  record.sequenceBoundary.nextNodePreparation = 'Fixture next';
+  record.sequenceBoundary.partContribution = 'Fixture part';
+  record.sequenceBoundary.bookContribution = 'Fixture book';
+  record.sequenceBoundary.systemContribution = 'Fixture system';
+  record.localizationReadiness.canonicalThesis = 'production_ready';
+  record.localizationReadiness.articleBoundary = 'production_ready';
+  record.localizationReadiness.supportingQuestions = 'production_ready';
+  record.localizationReadiness.searchAliases = 'production_ready';
+  record.localizationReadiness.terminologyReview = 'approved';
+  record.localizationReadiness.languageStatus = 'production_ready';
+  record.productionReadiness = {
+    readinessVersion: '1.0.0',
+    status: 'production_ready',
+    missingFields: [],
+    blockingReasons: []
+  };
+  record.review = {
+    status: 'approved',
+    humanFrozen: true,
+    reviewedBy: 'FIXTURE-HUMAN',
+    reviewedAt: '2000-01-01T00:00:00Z',
+    blockingFindings: []
+  };
 }

@@ -87,10 +87,7 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
   } catch (error) {
     if (!requireReadiness && error.code === 'READINESS_FILE_NOT_FOUND') {
       readiness = null;
-    } else if (
-      error.code === 'READINESS_FILE_NOT_FOUND' &&
-      nodeCode === 'KN-PREFACE-002'
-    ) {
+    } else if (error.code === 'READINESS_FILE_NOT_FOUND') {
       throw new ProductionError(
         'CANONICAL_THESIS_NOT_READY',
         `${nodeCode} has no frozen Canonical Thesis or Production Readiness.`,
@@ -100,41 +97,32 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
       throw error;
     }
   }
-  const canonicalThesis = (
-    readiness?.centralThesis ??
-    readiness?.canonicalThesis?.statement
-  );
-  if (
-    requireReadiness &&
-    (typeof canonicalThesis !== 'string' || !canonicalThesis.trim())
-  ) {
+  if (requireReadiness && (!readiness?.centralThesis?.trim())) {
+    if (
+      readiness?.readinessSchemaVersion ===
+      'PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0' &&
+      readiness.canonicalThesis?.statement?.trim()
+    ) {
+      if (readiness.productionReadiness?.status !== 'production_ready') {
+        throw new ProductionError(
+          'NODE_NOT_PRODUCTION_READY',
+          `${nodeCode} has not passed the human Production Readiness gate.`
+        );
+      }
+      readiness = adaptUniversalReadiness(readiness);
+    } else {
     throw new ProductionError(
       'CANONICAL_THESIS_NOT_READY',
       `${nodeCode} has no complete Canonical Thesis.`,
       'Do not infer a thesis from the title, question, another node, or a fixture.'
     );
+    }
   }
-  if (
-    requireReadiness &&
-    readiness?.readinessSchemaVersion &&
-    readiness.productionReadiness?.status !== 'production_ready'
-  ) {
-    throw new ProductionError(
-      'NODE_NOT_PRODUCTION_READY',
-      `${nodeCode}/${locale} is not production_ready.`,
-      'Resolve Blocking Findings and obtain the required human editorial freeze.'
-    );
-  }
-  const readinessIdentity = readiness?.articleIdentity ?? readiness?.canonicalIdentity;
-  const readinessLocale = (
-    readiness?.articleIdentity?.canonicalLanguage ??
-    readiness?.locale
-  );
   if (
     readiness &&
     (
-      readinessIdentity?.nodeCode !== nodeCode ||
-      readinessLocale !== locale
+      readiness.articleIdentity?.nodeCode !== nodeCode ||
+      readiness.articleIdentity?.canonicalLanguage !== locale
     )
   ) {
     throw new ProductionError(
@@ -166,6 +154,72 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
       'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
       ...(readiness ? [readinessRelative] : [])
     ]
+  };
+}
+
+function adaptUniversalReadiness(record) {
+  return {
+    recordVersion: record.productionReadiness.readinessVersion,
+    articleIdentity: {
+      nodeCode: record.nodeCode,
+      canonicalLanguage: record.locale
+    },
+    canonicalQuestion: record.canonicalIdentity.localizedQuestion,
+    publicTitle: record.canonicalIdentity.localizedTitle,
+    centralThesis: record.canonicalThesis.statement,
+    requiredMechanisms: record.canonicalThesis.mechanism
+      ? [{
+          label: 'Canonical mechanism',
+          requirement: record.canonicalThesis.mechanism
+        }]
+      : [],
+    requiredDistinctions: (record.articleBoundary.requiredDistinctions || []).map(item => (
+      typeof item === 'string'
+        ? { left: item, right: 'must remain distinct', reason: item }
+        : item
+    )),
+    prohibitedClaims: [
+      ...record.articleBoundary.mustNotClaim,
+      ...record.claimBoundary.prohibitedClaims
+    ],
+    articleBoundary: [
+      ...record.articleBoundary.includedScope,
+      ...record.articleBoundary.excludedScope
+    ],
+    sourceRequirement: {
+      internalCanonicalSources: record.sourceBoundary.internalCanonicalSources,
+      externalSourceNeeds: record.sourceBoundary.researchNeeded,
+      preferredSourceTypes: record.sourceBoundary.preferredSourceTypes,
+      sourceCodesMayBeInvented: false
+    },
+    visualRequirement: {
+      figureRequirement: record.figureBoundary.figureRequirement,
+      visualRequired: ['required', 'brief_required_asset_reference_deferred']
+        .includes(record.figureBoundary.figureRequirement),
+      mediaBriefRequired: ['required', 'brief_required_asset_reference_deferred']
+        .includes(record.figureBoundary.figureRequirement),
+      articleFigureBlockAllowed: false,
+      assetCreated: false,
+      assetCode: null,
+      requiredFigures: record.figureBoundary.requiredFigures,
+      registryRequirement: {
+        requiredBeforeArticleReference: true
+      },
+      reviewStatus: record.review.status
+    },
+    nextNodeRequirement: {
+      nodeCode: record.sequenceBoundary.nextNode,
+      semanticBridge: record.canonicalThesis.continuity.toNextNode
+    },
+    editorialOutline: {
+      status: record.review.status,
+      articleBodyCreated: false
+    },
+    publicationRequirement: {
+      productionReadiness: record.productionReadiness.status,
+      humanFrozen: record.review.humanFrozen,
+      published: false
+    }
   };
 }
 

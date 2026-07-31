@@ -1,137 +1,72 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import Ajv2020 from 'ajv/dist/2020.js';
-import { loadKnowledgeAuthority } from './lib/knowledge-readiness/authority-loader.mjs';
+import { parseArgs } from './lib/knowledge-production/cli.mjs';
+import { formatError, ProductionError } from './lib/knowledge-production/production-errors.mjs';
 import {
-  READINESS_SCHEMA_PATH,
-  formatReadinessError,
-  parseReadinessArgs
-} from './lib/knowledge-readiness/readiness-config.mjs';
-import {
-  auditAuthorityIntegrity,
-  auditThesisDuplication,
-  readReadinessRecord,
+  compileReadinessSchema,
+  loadKnowledgeInventory,
+  readReadiness,
+  resolveKnowledgeScope,
   validateReadinessRecord
-} from './lib/knowledge-readiness/readiness-record.mjs';
-import { resolveKnowledgeScope } from './lib/knowledge-readiness/scope-resolver.mjs';
+} from './lib/knowledge-production/readiness-system.mjs';
+import { DEFAULT_LOCALE } from './lib/knowledge-production/production-config.mjs';
 
 const root = process.cwd();
 
 async function main() {
-  const args = parseReadinessArgs(process.argv.slice(2));
-  const authority = await loadKnowledgeAuthority(root);
-  const resolved = resolveKnowledgeScope(authority, args);
-  const schema = JSON.parse(await fs.readFile(
-    path.join(root, READINESS_SCHEMA_PATH),
-    'utf8'
-  ));
-  const ajv = new Ajv2020({
-    allErrors: true,
-    strict: true,
-    strictRequired: false,
-    strictTypes: false
-  });
-  const validateSchema = ajv.compile(schema);
-  const results = [];
-  for (const node of resolved.nodes) {
-    try {
-      const record = await readReadinessRecord(
-        authority,
-        node.nodeCode,
-        args.locale
-      );
-      const schemaErrors = [];
-      if (!record.legacy && !validateSchema(record.raw)) {
-        schemaErrors.push({
-          code: 'READINESS_SCHEMA_INVALID',
-          message: ajv.errorsText(validateSchema.errors),
-          field: null,
-          severity: 'blocking'
-        });
-      }
-      const result = validateReadinessRecord(authority, record);
-      result.structuralErrors.push(...schemaErrors);
-      if (schemaErrors.length) {
-        result.structurallyValid = false;
-        result.productionReady = false;
-        result.productionStatus = 'production_blocked';
-        result.exportability = 'blocked';
-      }
-      results.push(result);
-    } catch (error) {
-      results.push({
-        nodeCode: node.nodeCode,
-        locale: args.locale,
-        structurallyValid: false,
-        structuralErrors: [{
-          code: error.code ?? 'READINESS_SCHEMA_INVALID',
-          message: error.message,
-          field: null,
-          severity: 'blocking'
-        }],
-        findings: [],
-        productionReady: false,
-        productionStatus: 'production_blocked',
-        exportability: 'blocked'
-      });
+  const { positionals, options } = parseArgs(process.argv.slice(2), 0);
+  const nodeCode = positionals[0] || null;
+  const scope = options.scope || (nodeCode ? null : 'ALL');
+  const locale = options.locale || DEFAULT_LOCALE;
+  const knowledge = await loadKnowledgeInventory(root);
+  let selection;
+  try {
+    selection = resolveKnowledgeScope(knowledge, { nodeCode, scope });
+  } catch (error) {
+    if (
+      error.code === 'KNOWLEDGE_SCOPE_EMPTY' &&
+      /^(?:PART|BOOK)-\d+$/i.test(scope || '')
+    ) {
+      console.log(`${String(scope).toUpperCase()}: NOT REGISTERED`);
+      return;
     }
+    throw error;
   }
-  const authorityFindings = auditAuthorityIntegrity(authority);
-  const duplicationFindings = auditThesisDuplication(results);
-  const report = {
-    selector: resolved.selector,
-    selectorType: resolved.selectorType,
-    registrationState: resolved.registrationState,
-    locale: args.locale,
-    registeredValidated: results.length,
-    blueprintPlannedNotRegistered: resolved.plannedNodes.length,
-    productionReady: results.filter(result => result.productionReady).length,
-    readyForEditorialReview: results.filter(
-      result => result.productionStatus === 'ready_for_editorial_review'
-    ).length,
-    blocked: results.filter(result => !result.productionReady).length,
-    structurallyInvalid: results.filter(result => !result.structurallyValid).length,
-    authorityFindings,
-    duplicationFindings,
-    results: results.map(result => ({
-      nodeCode: result.nodeCode,
-      locale: result.locale,
-      productionStatus: result.productionStatus,
-      exportability: result.exportability,
-      structurallyValid: result.structurallyValid,
-      blockingReason: [...new Set([
-        ...(result.structuralErrors ?? []),
-        ...(result.findings ?? [])
-      ].map(item => item.code))]
-    }))
+  const schema = await compileReadinessSchema(root);
+  let structuralFailures = 0;
+  const counts = {
+    production_ready: 0,
+    ready_for_editorial_review: 0,
+    production_blocked: 0,
+    other: 0
   };
-  if (args.options.json) {
-    console.log(JSON.stringify(report, null, 2));
-  } else {
-    console.log(`READINESS VALIDATION: ${resolved.selector}`);
-    for (const result of report.results) {
+  for (const item of selection) {
+    try {
+      const loaded = await readReadiness(root, item, locale);
+      const result = validateReadinessRecord(item, loaded, schema);
+      if (!result.schemaValid) structuralFailures += 1;
+      counts[result.status] = (counts[result.status] ?? counts.other) + 1;
       console.log(
-        `  ${result.nodeCode}  ${result.productionStatus.toUpperCase()}  ` +
-        `${result.blockingReason.join(', ') || 'NONE'}`
+        `${item.nodeCode} ${result.schemaValid ? 'VALID' : 'INVALID'} ` +
+        `${result.status} ${result.exportability}` +
+        `${result.blockingReason ? ` ${result.blockingReason}` : ''}`
       );
+      for (const error of result.errors) console.log(`  ERROR ${error}`);
+      for (const missing of result.missingFields) console.log(`  MISSING ${missing}`);
+    } catch (error) {
+      structuralFailures += 1;
+      console.log(`${item.nodeCode} INVALID ${error.code || 'READINESS_FILE_NOT_FOUND'}`);
     }
-    if (!resolved.nodes.length) {
-      console.log('  Registered Canonical Nodes: 0 (NOT_REGISTERED)');
-    }
-    console.log(`  Blueprint-planned, not registered: ${report.blueprintPlannedNotRegistered}`);
-    console.log(`  Production Ready: ${report.productionReady}`);
-    console.log(`  Blocked: ${report.blocked}`);
   }
-  if (
-    report.structurallyInvalid ||
-    authorityFindings.length ||
-    duplicationFindings.length
-  ) {
-    process.exitCode = 2;
-  }
+  console.log(`Production Ready: ${counts.production_ready}`);
+  console.log(`Ready for Editorial Review: ${counts.ready_for_editorial_review}`);
+  console.log(`Blocked: ${counts.production_blocked}`);
+  if (structuralFailures) process.exitCode = 1;
 }
 
 main().catch(error => {
-  console.error(formatReadinessError(error));
-  process.exitCode = 2;
+  console.error(formatError(
+    error instanceof ProductionError
+      ? error
+      : new ProductionError('READINESS_SCHEMA_INVALID', error.message)
+  ));
+  process.exitCode = 1;
 });

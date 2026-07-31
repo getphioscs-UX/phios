@@ -57,7 +57,9 @@ try {
   assert.equal(packageJson.scripts['knowledge:export-brief'], 'node scripts/export-knowledge-production-brief.mjs');
   assert.equal(packageJson.scripts['knowledge:validate-package'], 'node scripts/validate-canonical-article-package.mjs');
   assert.equal(packageJson.scripts['knowledge:import-package'], 'node scripts/import-canonical-article-package.mjs');
-  assert(packageJson.scripts.precheck.endsWith('node scripts/check-pja-w2e-production-tools.mjs'));
+  assert(packageJson.scripts.precheck.includes(
+    'node scripts/check-pja-w2e-production-tools.mjs'
+  ));
   assert.equal(ERROR_CODES.length, 35);
   for (const code of [
     'CANONICAL_THESIS_NOT_READY', 'PACKAGE_PATH_TRAVERSAL',
@@ -101,18 +103,24 @@ try {
   assert.notEqual(command.code, 0);
   assert(command.stderr.includes('CANONICAL_THESIS_NOT_READY'));
   assert.equal(await exists(path.join(temporary, 'briefs/KN-PREFACE-002-production-brief.md')), false);
-  const blockedReadinessPath = path.join(
+  const preface002ReadinessPath = path.join(
     root,
     'content/knowledge/editorial/readiness/kn-preface-002-production-readiness.json'
   );
-  if (await exists(blockedReadinessPath)) {
-    const blockedReadiness = JSON.parse(await fs.readFile(blockedReadinessPath, 'utf8'));
-    assert.equal(blockedReadiness.centralThesis, undefined);
-    assert.equal(blockedReadiness.canonicalThesis?.statement ?? null, null);
-    assert.notEqual(
-      blockedReadiness.productionReadiness?.status,
-      'production_ready'
+  if (await exists(preface002ReadinessPath)) {
+    const preface002Readiness = JSON.parse(
+      await fs.readFile(preface002ReadinessPath, 'utf8')
     );
+    assert.equal(
+      preface002Readiness.readinessSchemaVersion,
+      'PHI-OS-CANONICAL-PRODUCTION-READINESS-v1.0.0'
+    );
+    assert.equal(preface002Readiness.canonicalThesis.statement, null);
+    assert.equal(
+      preface002Readiness.productionReadiness.status,
+      'production_blocked'
+    );
+    assert.equal(preface002Readiness.review.humanFrozen, false);
   }
 
   for (const name of [
