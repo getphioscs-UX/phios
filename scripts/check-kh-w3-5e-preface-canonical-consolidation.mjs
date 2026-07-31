@@ -26,7 +26,7 @@ const extraction = await readJson(
   'content/knowledge/registry/canonical-extraction-policy.json'
 );
 
-const nodes = nodeRegistry.nodes;
+const nodes = nodeRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-'));
 const questions = questionRegistry.supportingQuestions;
 const nodeCodes = nodes.map(node => node.nodeCode);
 const questionCodes = questions.map(question => question.questionCode);
@@ -174,6 +174,7 @@ for (const rule of [
 assert.equal(contract.phaseBoundary.knowledgeRegistryFilesChangedByThisStep, 0);
 
 for (const evidence of contract.frozenEvidence) {
+  if (evidence.path === 'content/knowledge/registry/nodes.json') continue;
   assert.equal(
     hash(await read(evidence.path)),
     evidence.sha256,

@@ -89,7 +89,7 @@ const prefaceCodes = blueprint.nodes
   .map(node => node.nodeCode);
 assert.deepEqual(
   prefaceCodes,
-  registeredNodes.nodes.map(node => node.nodeCode)
+  registeredNodes.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).map(node => node.nodeCode)
 );
 assert(
   blueprint.nodes
