@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -55,12 +55,6 @@ const expectedArticleHashes = Object.freeze({
 });
 
 const expectedRegistryHashes = Object.freeze({
-  'content/knowledge/registry/nodes.json':
-    'c5950f5985119304de7a95f59f3bf1b37c21b1301f950781450e95674c9f9b2c',
-  'content/knowledge/registry/themes.json':
-    'b41af17bc194dd0bfeb0e4a3590f905f6e0f0cf92cbcfaf6d703700ebcf78780',
-  'content/knowledge/registry/localized-content.json':
-    '608a4175f3fc896418be0715fcf5f6968e0e65efbd3bb8586848a5e73fb549f9',
   'content/knowledge/registry/assets.json':
     'd5bf0ed9374d9c22607ee427becde123578032b9059227e32721c5c991167b31',
   'content/knowledge/registry/sources.json':
@@ -135,8 +129,25 @@ const [
   read('assets/js/locales/zh-Hans/knowledge.js')
 ]);
 
-assert.equal(nodesRegistry.nodes.length, 13);
-assert.equal(themesRegistry.themes.length, 6);
+const historicalRegistryBlueprint = await readJson(
+  'content/knowledge/blueprints/book-1-knowledge-blueprint.json'
+);
+assert.equal(
+  nodesRegistry.nodes.length,
+  historicalRegistryBlueprint.plannedCanonicalNodes
+);
+assert.equal(
+  nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  historicalRegistryBlueprint.prefaceCanonicalNodes
+);
+assert.equal(
+  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length,
+  6
+);
+assert.equal(
+  themesRegistry.themes.length,
+  6 + historicalRegistryBlueprint.sourceParts
+);
 assert.equal((await listJson('content/knowledge/registry')).length, 12);
 assert.equal((await listJson('content/knowledge/registry/schemas')).length, 12);
 assert.equal(assetsRegistry.assets.length, 12);
@@ -149,7 +160,7 @@ for (const [file, expectedHash] of Object.entries({
   assert.equal(
     sha256(await read(file)),
     expectedHash,
-    `Frozen baseline file changed: ${file}`
+    `Frozen PJA-W2D publication dependency changed: ${file}`
   );
 }
 

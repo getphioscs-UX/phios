@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import Ajv2020 from 'ajv/dist/2020.js';
@@ -808,8 +808,25 @@ assert.equal(prefaceLocalized.locales['zh-Hans'].publicationStatus, 'not_publish
 assert.equal(prefaceLocalized.locales.en.contentStatus, 'localization_pending');
 assert.equal(prefaceLocalized.locales.en.publicationStatus, 'not_published');
 
-assert.equal(nodesRegistry.nodes.length, 13);
-assert.equal(themesRegistry.themes.length, 6);
+const historicalRegistryBlueprint = await readJson(
+  'content/knowledge/blueprints/book-1-knowledge-blueprint.json'
+);
+assert.equal(
+  nodesRegistry.nodes.length,
+  historicalRegistryBlueprint.plannedCanonicalNodes
+);
+assert.equal(
+  nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  historicalRegistryBlueprint.prefaceCanonicalNodes
+);
+assert.equal(
+  themesRegistry.themes.filter(theme => theme.themeCode.startsWith('TH-PREFACE-')).length,
+  6
+);
+assert.equal(
+  themesRegistry.themes.length,
+  6 + historicalRegistryBlueprint.sourceParts
+);
 assert.equal(
   (await fs.readdir(path.join(root, 'content/knowledge/registry')))
     .filter(file => file.endsWith('.json')).length,
