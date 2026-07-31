@@ -31,6 +31,13 @@ const protectedFiles = [
   'docs/knowledge/PJA-article-renderer-contract.md',
   'scripts/import-canonical-article-package.mjs'
 ];
+const W2E_CHECK = 'check:pja-w2e';
+const W2E_R1_CHECK = 'check:pja-w2e-r1';
+const W2F_A_CHECK = 'check:pja-w2f-a';
+const W2F_B1_CHECK = 'check:pja-w2f-b1';
+const W2E_CHECKER = 'scripts/check-pja-w2e-production-tools.mjs';
+const W2E_R1_CHECKER = 'scripts/check-pja-w2e-r1-production-brief-hardening.mjs';
+const W2F_A_CHECKER = 'scripts/check-pja-w2f-a-universal-production-readiness.mjs';
 
 const packageJson = await readJson('package.json');
 assert.equal(
@@ -41,13 +48,9 @@ assert.equal(
   packageJson.scripts['knowledge:validate-readiness'],
   'node scripts/validate-canonical-production-readiness.mjs'
 );
-assert.equal(
-  packageJson.scripts['check:pja-w2f-a'],
-  'npm run check:pja-w2e && node scripts/check-pja-w2f-a-universal-production-readiness.mjs'
-);
-assert(packageJson.scripts.precheck.endsWith(
-  'node scripts/check-pja-w2f-a-universal-production-readiness.mjs'
-));
+validateCheckDependencyContract(packageJson.scripts);
+testCheckDependencyContract(packageJson.scripts);
+validatePrecheckDependencyContract(packageJson.scripts.precheck);
 assert.equal(READINESS_ERROR_CODES.length, 40);
 
 const knowledge = await loadKnowledgeInventory(root);
@@ -224,6 +227,231 @@ console.log('  13 registered Preface Nodes are inventoried; 12 deterministic Ske
 console.log('  Blueprint-only P1–P5 Nodes and unregistered P6–P14 remain non-authoritative; universal fixtures cover P1–P14 and Books I–III.');
 console.log('  No Skeleton is production_ready; Thesis, boundary and human authority gates remain blocking.');
 console.log('  Scope, hierarchy, continuity, Supporting Question, duplication, future-pattern and batch-export behavior passed.');
+
+function contractError(code, detail) {
+  const error = new Error(`${code}: ${detail}`);
+  error.code = code;
+  return error;
+}
+
+function parseCommandChain(command, scriptName) {
+  if (typeof command !== 'string' || command.trim() === '') {
+    throw contractError('CHECK_DEPENDENCY_SCRIPT_MISSING', scriptName);
+  }
+  const withoutPortableAnd = command.replaceAll('&&', '');
+  if (/[\r\n;&|<>`]|\$\(/.test(withoutPortableAnd)) {
+    throw contractError('CHECK_DEPENDENCY_NON_PORTABLE', scriptName);
+  }
+  const segments = command.split(/\s*&&\s*/).map(segment => segment.trim());
+  if (segments.some(segment => segment === '')) {
+    throw contractError('CHECK_DEPENDENCY_COMMAND_INVALID', scriptName);
+  }
+  return segments.map(segment => {
+    const tokens = [...segment.matchAll(/"([^"]*)"|'([^']*)'|([^\s]+)/g)]
+      .map(match => match[1] ?? match[2] ?? match[3]);
+    if (tokens.length === 0) {
+      throw contractError('CHECK_DEPENDENCY_COMMAND_INVALID', scriptName);
+    }
+    return { segment, tokens };
+  });
+}
+
+function npmRunTarget(command) {
+  const [executable, action, target] = command.tokens;
+  return executable === 'npm' && action === 'run' ? target : null;
+}
+
+function executesNodeChecker(command, checkerPath) {
+  const [executable, target] = command.tokens;
+  return ['node', 'node.exe'].includes(path.basename(executable).toLowerCase())
+    && target === checkerPath;
+}
+
+function assertNoReverseDependency(scripts) {
+  const r1Chain = parseCommandChain(scripts[W2E_R1_CHECK], W2E_R1_CHECK);
+  if (r1Chain.some(command => npmRunTarget(command) === W2F_A_CHECK)) {
+    throw contractError(
+      'CHECK_DEPENDENCY_REVERSE',
+      `${W2E_R1_CHECK} must not invoke ${W2F_A_CHECK}`
+    );
+  }
+}
+
+function buildCheckGraph(scripts) {
+  const entries = Object.entries(scripts)
+    .filter(([name]) => name.startsWith('check:pja-'));
+  const knownChecks = new Set(entries.map(([name]) => name));
+  return new Map(entries.map(([name, command]) => [
+    name,
+    parseCommandChain(command, name)
+      .map(npmRunTarget)
+      .filter(target => knownChecks.has(target))
+  ]));
+}
+
+function assertAcyclicCheckGraph(graph) {
+  const visiting = new Set();
+  const visited = new Set();
+  const visit = (name, chain = []) => {
+    if (visiting.has(name)) {
+      throw contractError(
+        'CHECK_DEPENDENCY_CYCLE',
+        [...chain, name].join(' -> ')
+      );
+    }
+    if (visited.has(name)) return;
+    visiting.add(name);
+    for (const dependency of graph.get(name) || []) {
+      visit(dependency, [...chain, name]);
+    }
+    visiting.delete(name);
+    visited.add(name);
+  };
+  for (const name of graph.keys()) visit(name);
+}
+
+function validateCheckDependencyContract(scripts) {
+  const chain = parseCommandChain(scripts[W2F_A_CHECK], W2F_A_CHECK);
+  const runTargets = chain.map(npmRunTarget).filter(Boolean);
+  const predecessorIndexes = chain
+    .map((command, index) => npmRunTarget(command) === W2E_R1_CHECK ? index : -1)
+    .filter(index => index >= 0);
+  const checkerIndexes = chain
+    .map((command, index) => executesNodeChecker(command, W2F_A_CHECKER) ? index : -1)
+    .filter(index => index >= 0);
+
+  if (runTargets.includes(W2F_A_CHECK)) {
+    throw contractError('CHECK_DEPENDENCY_SELF', W2F_A_CHECK);
+  }
+  if (runTargets.includes(W2F_B1_CHECK)
+    || runTargets.some(target => target.startsWith(`${W2F_B1_CHECK}:`))) {
+    throw contractError('CHECK_DEPENDENCY_FUTURE_STAGE', W2F_B1_CHECK);
+  }
+  assertNoReverseDependency(scripts);
+  if (predecessorIndexes.length !== 1) {
+    throw contractError(
+      predecessorIndexes.length === 0
+        ? 'CHECK_DEPENDENCY_PREDECESSOR_MISSING'
+        : 'CHECK_DEPENDENCY_DUPLICATED',
+      W2E_R1_CHECK
+    );
+  }
+  if (runTargets.includes(W2E_CHECK)) {
+    throw contractError('CHECK_DEPENDENCY_DUPLICATED', W2E_CHECK);
+  }
+  if (checkerIndexes.length !== 1) {
+    throw contractError(
+      checkerIndexes.length === 0
+        ? 'CHECK_DEPENDENCY_CHECKER_MISSING'
+        : 'CHECK_DEPENDENCY_DUPLICATED',
+      W2F_A_CHECKER
+    );
+  }
+  if (predecessorIndexes[0] > checkerIndexes[0]) {
+    throw contractError(
+      'CHECK_DEPENDENCY_ORDER_INVALID',
+      `${W2E_R1_CHECK} must run before ${W2F_A_CHECKER}`
+    );
+  }
+  assertAcyclicCheckGraph(buildCheckGraph(scripts));
+}
+
+function validatePrecheckDependencyContract(precheck) {
+  const chain = parseCommandChain(precheck, 'precheck');
+  const checkerPaths = [W2E_CHECKER, W2E_R1_CHECKER, W2F_A_CHECKER];
+  const indexes = checkerPaths.map(checkerPath => chain
+    .map((command, index) => executesNodeChecker(command, checkerPath) ? index : -1)
+    .filter(index => index >= 0));
+  for (let index = 0; index < checkerPaths.length; index += 1) {
+    if (indexes[index].length !== 1) {
+      throw contractError(
+        indexes[index].length === 0
+          ? 'CHECK_DEPENDENCY_CHECKER_MISSING'
+          : 'CHECK_DEPENDENCY_DUPLICATED',
+        `precheck:${checkerPaths[index]}`
+      );
+    }
+  }
+  if (!(indexes[0][0] < indexes[1][0] && indexes[1][0] < indexes[2][0])) {
+    throw contractError(
+      'CHECK_DEPENDENCY_ORDER_INVALID',
+      `precheck:${checkerPaths.join(' -> ')}`
+    );
+  }
+  if (chain.some(command => command.tokens
+    .some(token => token.includes('check-pja-w2f-b1')))) {
+    throw contractError('CHECK_DEPENDENCY_FUTURE_STAGE', 'precheck');
+  }
+}
+
+function testCheckDependencyContract(scripts) {
+  const validVariant = {
+    ...scripts,
+    [W2F_A_CHECK]:
+      `npm   run   "${W2E_R1_CHECK}" && node '${W2F_A_CHECKER}'`
+  };
+  assert.doesNotThrow(() => validateCheckDependencyContract(validVariant));
+
+  const invalidFixtures = [
+    {
+      code: 'CHECK_DEPENDENCY_REVERSE',
+      scripts: {
+        ...validVariant,
+        [W2E_R1_CHECK]:
+          `npm run ${W2F_A_CHECK} && node scripts/check-pja-w2e-r1-production-brief-hardening.mjs`
+      }
+    },
+    {
+      code: 'CHECK_DEPENDENCY_SELF',
+      scripts: {
+        ...validVariant,
+        [W2F_A_CHECK]:
+          `npm run ${W2E_R1_CHECK} && npm run ${W2F_A_CHECK} && node ${W2F_A_CHECKER}`
+      }
+    },
+    {
+      code: 'CHECK_DEPENDENCY_FUTURE_STAGE',
+      scripts: {
+        ...validVariant,
+        [W2F_A_CHECK]:
+          `npm run ${W2E_R1_CHECK} && npm run ${W2F_B1_CHECK} && node ${W2F_A_CHECKER}`
+      }
+    },
+    {
+      code: 'CHECK_DEPENDENCY_PREDECESSOR_MISSING',
+      scripts: {
+        ...validVariant,
+        [W2F_A_CHECK]: `node ${W2F_A_CHECKER}`
+      }
+    },
+    {
+      code: 'CHECK_DEPENDENCY_NON_PORTABLE',
+      scripts: {
+        ...validVariant,
+        [W2F_A_CHECK]:
+          `npm run ${W2E_R1_CHECK}; node ${W2F_A_CHECKER}`
+      }
+    }
+  ];
+  for (const fixture of invalidFixtures) {
+    assert.throws(
+      () => validateCheckDependencyContract(fixture.scripts),
+      error => error.code === fixture.code,
+      fixture.code
+    );
+  }
+
+  const cyclicScripts = {
+    ...validVariant,
+    [W2E_R1_CHECK]:
+      `npm run ${W2F_A_CHECK} && node scripts/check-pja-w2e-r1-production-brief-hardening.mjs`
+  };
+  assert.throws(
+    () => assertAcyclicCheckGraph(buildCheckGraph(cyclicScripts)),
+    error => error.code === 'CHECK_DEPENDENCY_CYCLE',
+    'CHECK_DEPENDENCY_CYCLE'
+  );
+}
 
 async function gitFile(file) {
   const { stdout } = await execFileAsync('git', ['show', `HEAD:${file}`], {

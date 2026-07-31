@@ -72,7 +72,6 @@ try {
     packageJson.scripts['check:pja-w2e-r1'],
     'npm run check:pja-w2e && node scripts/check-pja-w2e-r1-production-brief-hardening.mjs'
   );
-  assert(packageJson.scripts['check:pja-w2f-a'].includes('check:pja-w2e-r1'));
 
   console.log('✓ PJA-W2E-R1 Production Brief Contract Hardening passed.');
   console.log('  Sentinel values, boundary separation, source deduplication, figure sequencing, package states and Manifest contract are hardened.');
