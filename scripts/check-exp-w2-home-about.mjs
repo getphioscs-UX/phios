@@ -15,7 +15,8 @@ assert.equal(contract.routeDecision.home, '/');
 assert.equal(contract.routeDecision.secondDiscoverRouteCreated, false);
 assert.equal((home.match(/public-button--primary/g) || []).length, 1);
 assert.match(home, /public-button--primary" href="\/reality-journey"/);
-for (const href of ['/reality-demo', '/library', '/services']) assert.match(home, new RegExp(`href="${href}"`));
+for (const href of ['/reality-journey', '/library', '/services']) assert.match(home, new RegExp(`href="${href}"`));
+assert.doesNotMatch(home, /href="\/reality-demo"/);
 for (const id of ['why-phios', 'responsibility', 'limits', 'trust']) assert.match(about, new RegExp(`id="${id}"`));
 for (const forbidden of ['Unified Runtime Framework', 'integrated reference implementation']) {
   assert.equal(home.includes(forbidden), false);

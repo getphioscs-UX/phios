@@ -197,7 +197,6 @@ function activeSectionFromPage() {
     path === '/free-observation' ||
     path === '/reality-journey' ||
     path === '/reality-dashboard' ||
-    path === '/reality-demo' ||
     path === '/reality-entry' ||
     path === '/reality-reconstruction' ||
     path === '/reality-reading' ||

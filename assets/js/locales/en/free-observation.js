@@ -116,7 +116,7 @@ const freeObservation = Object.freeze({
       eyebrow: 'Continue by choice',
       title: 'Free Observation does not force a service route.',
       articles: 'Read published articles',
-      demo: 'View the Reality Demo',
+      journeyOverview: 'Understand the Reality Journey',
       journey: 'Understand the Reality Journey',
       leave: 'Return to Discover'
     }

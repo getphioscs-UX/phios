@@ -9,7 +9,6 @@ const journeyPublic = Object.freeze({
       lead: 'The Reality Journey guides you from describing one change to understanding how it formed, choosing what to try next and returning to see what actually changed.',
       start: 'Start a new Reality Journey',
       resume: 'Already started? Check your current status',
-      demo: 'Not ready to enter information? Try the no-save Demo',
       secondaryLabel: 'Other Journey actions',
       stages: '6 customer stages',
       choice: 'You choose whether to continue',
@@ -29,7 +28,7 @@ const journeyPublic = Object.freeze({
       stagesLabel: 'Reality Journey stages'
     },
     customerStages: {
-      enter: { name: 'Enter', task: 'Decide whether PHI OS can help with the change you are facing.', result: 'A clear choice to start, view the Demo or leave without entering personal information.' },
+      enter: { name: 'Enter', task: 'Decide whether PHI OS can help with the change you are facing.', result: 'A clear choice to start, review your current status or leave without entering personal information.' },
       describe: { name: 'Describe', task: 'Say what changed, when it became noticeable and what it affects.', result: 'A description you can review and correct before moving on.' },
       discover: { name: 'Discover', task: 'Confirm how the situation developed, what influenced it and what is still unknown.', result: 'A corrected account of how the current situation formed.' },
       understand: { name: 'Understand', task: 'See what is happening now, why it matters and where confidence is limited.', result: 'A reality map that keeps evidence, interpretation and unknowns separate.' },
@@ -45,16 +44,6 @@ const journeyPublic = Object.freeze({
       saveCopy: 'Entry may keep a protected recovery copy in this browser. Existing content stays hidden until you explicitly choose Resume.',
       statusTitle: 'Your current status',
       statusCopy: 'Starting creates a new description. If you already started, check the dashboard before choosing whether to resume or begin again.'
-    },
-    difference: {
-      eyebrow: 'Demo and Journey are different',
-      title: 'Try the idea without starting personal continuity.',
-      demoTitle: 'Demo',
-      demoCopy: 'Uses a fixed teaching case and an optional local input. It creates no personal reading and saves nothing.',
-      journeyTitle: 'Reality Journey',
-      journeyCopy: 'Uses your description across the six customer stages and may provide browser recovery when clearly disclosed.',
-      professionalTitle: 'Professional service',
-      professionalCopy: 'Is separate from the Journey and requires its own service, consent, price, scope and human responsibility.'
     },
     stages: {
       entry: {
@@ -121,7 +110,6 @@ const journeyPublic = Object.freeze({
       title: 'Start with one change you can describe.',
       lead: 'You do not need to understand the whole situation first. Entry begins with what recently became different and keeps uncertainty open.',
       action: 'Start Reality Journey',
-      demo: 'Use the no-save Demo first',
       note: 'You can stop before submitting. Avoid entering emergency information or highly sensitive identifiers.'
     }
   },

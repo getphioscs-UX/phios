@@ -34,8 +34,7 @@ const [
   page,
   pageController,
   localContract,
-  styles,
-  realityDemo
+  styles
 ] = await Promise.all([
   readJson(
     'docs/pws/contracts/' +
@@ -53,8 +52,7 @@ const [
   read('free-observation.html'),
   read('assets/js/pages/free-observation.js'),
   read('assets/js/modules/free-observation-local.js'),
-  read('assets/css/free-observation.css'),
-  read('reality-demo.html')
+  read('assets/css/free-observation.css')
 ]);
 
 assert.equal(
@@ -325,10 +323,8 @@ assert.equal(
 );
 assert.equal(/href=["']\/services/i.test(page), false);
 assert(page.includes('href="/articles"'));
-assert(page.includes('href="/reality-demo"'));
 assert(page.includes('href="/reality-journey"'));
 assert(page.includes('href="/"'));
-assert.equal((realityDemo.match(/href="\/free-observation"/g) || []).length, 2);
 
 const browserSources = `${localContract}\n${pageController}`;
 assert.equal(/\bfetch\s*\(/.test(browserSources), false);

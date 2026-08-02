@@ -9,7 +9,6 @@ const journeyPublic = Object.freeze({
       lead: '现实旅程引导你从描述一项变化开始，理解它如何形成，选择下一步尝试，并在之后回来看见真正发生了什么。',
       start: '开始新的现实旅程',
       resume: '已经开始？查看当前状态',
-      demo: '还不想输入资料？先体验不保存的 Demo',
       secondaryLabel: '其他旅程行动',
       stages: '6 个客户阶段',
       choice: '是否继续由你选择',
@@ -29,7 +28,7 @@ const journeyPublic = Object.freeze({
       stagesLabel: '现实旅程阶段'
     },
     customerStages: {
-      enter: { name: '进入', task: '判断 PHI OS 是否能够帮助你理解当前面对的变化。', result: '清楚选择开始、查看 Demo，或不输入个人资料便离开。' },
+      enter: { name: '进入', task: '判断 PHI OS 是否能够帮助你理解当前面对的变化。', result: '清楚选择开始、查看当前状态，或不输入个人资料便离开。' },
       describe: { name: '描述', task: '说明发生了什么变化、何时开始明显，以及影响了什么。', result: '一份可以在继续前查看与修正的描述。' },
       discover: { name: '发现', task: '确认事情如何发展、受到什么影响，以及哪些部分仍然未知。', result: '一份经过你确认的现实形成过程。' },
       understand: { name: '理解', task: '看见现在发生什么、为什么重要，以及哪些部分可信程度有限。', result: '一张把证据、解释与未知分开的现实地图。' },
@@ -45,16 +44,6 @@ const journeyPublic = Object.freeze({
       saveCopy: '入口可能在此浏览器保留受保护的恢复副本。你明确选择继续之前，原有内容不会显示。',
       statusTitle: '你的当前状态',
       statusCopy: '开始会建立一份新描述。如果你已经开始，请先查看面板，再决定继续或重新开始。'
-    },
-    difference: {
-      eyebrow: 'Demo 与旅程并不相同',
-      title: '先体验概念，而不开始个人连续记录。',
-      demoTitle: 'Demo',
-      demoCopy: '使用固定教学案例与可选的本地输入，不会建立个人读取，也不会保存资料。',
-      journeyTitle: '现实旅程',
-      journeyCopy: '使用你的描述经过六个客户阶段，并只在清楚说明时提供浏览器恢复。',
-      professionalTitle: '专业服务',
-      professionalCopy: '与现实旅程分开，需要独立服务、同意、价格、范围与人类责任。'
     },
     stages: {
       entry: {
@@ -121,7 +110,6 @@ const journeyPublic = Object.freeze({
       title: '从一项你能够描述的变化开始。',
       lead: '你不需要先理解整个情境。入口从最近开始变得不同的部分开始，并让不确定性保持开放。',
       action: '开始现实旅程',
-      demo: '先使用不保存的 Demo',
       note: '提交前你可以随时停止。请勿输入紧急信息或高度敏感的身份资料。'
     }
   },

@@ -83,6 +83,11 @@ assert.equal(
 
 for (const surfaces of Object.values(contract.surfaceReferences)) {
   for (const surface of surfaces) {
+    if (surface === 'reality-demo.html') {
+      await assert.rejects(fs.access(path.join(root, surface)), { code: 'ENOENT' });
+      assert.match(await read('_redirects'), /^\/reality-demo \/reality-journey 308$/m);
+      continue;
+    }
     await fs.access(path.join(root, surface));
   }
 }

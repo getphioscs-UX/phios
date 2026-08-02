@@ -116,7 +116,7 @@ const freeObservation = Object.freeze({
       eyebrow: '由您选择是否继续',
       title: '免费观察不会强制导向服务。',
       articles: '阅读已发布文章',
-      demo: '查看 Reality Demo',
+      journeyOverview: '了解现实旅程',
       journey: '了解 Reality Journey',
       leave: '返回发现首页'
     }

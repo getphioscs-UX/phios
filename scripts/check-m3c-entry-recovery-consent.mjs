@@ -33,11 +33,9 @@ async function sha256(relativePath) {
 
 const requiredFiles = [
   'reality-entry.html',
-  'reality-demo.html',
   'assets/css/entry-recovery-consent.css',
   'assets/css/guided-entry.css',
   'assets/js/reality-entry.js',
-  'assets/js/pages/reality-demo.js',
   'assets/js/modules/journey-dashboard-projection.js',
   'assets/js/locales/en/entry.js',
   'assets/js/locales/zh-Hans/entry.js',
@@ -199,50 +197,6 @@ for (const visualContract of [
   );
 }
 
-const demoPage = await read('reality-demo.html');
-for (const contract of [
-  'id="light-coordinate-step"',
-  'id="light-reality-coordinates"',
-  'id="light-coordinate-continue"',
-  'id="light-observation-step"',
-  'id="light-coordinate-summary"',
-  'id="light-coordinate-back"'
-]) {
-  assert.equal(
-    demoPage.includes(contract),
-    true,
-    `Light Try coordinate-first contract is missing: ${contract}`
-  );
-}
-assert.equal(
-  demoPage.indexOf('id="light-reality-coordinates"') <
-    demoPage.indexOf('id="light-change"'),
-  true,
-  'Light Try must ask for Reality Coordinate before free text'
-);
-assert.match(
-  demoPage,
-  /id="light-observation-step"[\s\S]*?hidden/,
-  'Light Try text step must be hidden initially'
-);
-
-const demoController = await read('assets/js/pages/reality-demo.js');
-for (const forbidden of [
-  'sessionStorage',
-  'localStorage',
-  'fetch(',
-  'RuntimeKernel',
-  'setSession',
-  'runtime-persistence',
-  '/api/'
-]) {
-  assert.equal(
-    demoController.includes(forbidden),
-    false,
-    `Light Try must remain isolated from Runtime persistence/API: ${forbidden}`
-  );
-}
-
 const projectionModule = await import(
   `${pathToFileURL(
     path.join(root, 'assets/js/modules/journey-dashboard-projection.js')
@@ -325,26 +279,6 @@ for (const localePath of [
       locale.includes(key),
       true,
       `Entry locale is missing M3C-W3.2 key: ${localePath} ${key}`
-    );
-  }
-}
-
-for (const localePath of [
-  'assets/js/locales/en/public.js',
-  'assets/js/locales/zh-Hans/public.js'
-]) {
-  const locale = await read(localePath);
-  for (const key of [
-    'coordinateQuestion:',
-    'coordinateRequired:',
-    'selectedStatus:',
-    'coordinateSummary:',
-    'back:'
-  ]) {
-    assert.equal(
-      locale.includes(key),
-      true,
-      `Public locale is missing coordinate-first key: ${localePath} ${key}`
     );
   }
 }

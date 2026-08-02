@@ -46,3 +46,19 @@ The current shared shell and public files also expose `/articles`, three article
 ## Inventory conclusion
 
 All requested surfaces have an identifiable Production route, but the public information architecture is not a single coherent customer map. One requested surface is duplicated by name (Home/Discover), two are merged into one stateful page (Memory/Continuity), and two canonical destinations use conflicting labels between the PDS, header and footer (Atlas/Explore; Professional/Services).
+
+## Post-audit route retirement
+
+This section does not alter the original EXP-W0 audit, its **Failed** result, its 19 audited surfaces or its 18 unique-route historical baseline.
+
+After EXP-W0, the PHI OS product owner retired the Public Reality Demo. `/reality-demo` is no longer an active public experience and permanently redirects to the sole Reality Journey Overview at `/reality-journey`. The old Demo UI is excluded from later Experience Gates; Production route acceptance checks only the permanent redirect and absence of old public entry points.
+
+| Item | Post-audit state |
+|---|---|
+| Historical audited surface | Demo remains recorded as surface 5 of the original 19 |
+| Historical unique-route baseline | 18 |
+| Active unique routes among the originally requested set | 17 |
+| `/reality-demo` | Retired after EXP-W0; permanent redirect only |
+| Replacement | `/reality-journey` |
+| Decision authority | PHI OS product owner |
+| EXP-W0 result | **Failed — unchanged** |

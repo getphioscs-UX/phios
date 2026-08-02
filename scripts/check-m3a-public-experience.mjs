@@ -12,7 +12,6 @@ const publicPages = [
   'articles.html',
   'services.html',
   'reality-journey.html',
-  'reality-demo.html',
   'privacy.html',
   'terms.html',
   'ai-disclosure.html',
@@ -111,32 +110,9 @@ for (const section of [
 }
 assert.ok(about.includes('Teresa Lee'), 'About must include builder trust information');
 
-const demo = read('reality-demo.html');
-for (const label of [
-  'Observed Change',
-  'Evidence',
-  'Reading',
-  'Navigation',
-  'Understand the Reality Journey'
-]) {
-  assert.ok(demo.includes(label), `Reality Demo is missing ${label}`);
-}
-
-const demoRuntime = read('assets/js/pages/reality-demo.js');
-for (const forbidden of [
-  'sessionStorage',
-  'localStorage',
-  'fetch(',
-  'RuntimeKernel',
-  'setSession',
-  'runtime-persistence',
-  '/api/'
-]) {
-  assert.ok(
-    !demoRuntime.includes(forbidden),
-    `Reality Demo must not use ${forbidden}`
-  );
-}
+assert.equal(fs.existsSync('reality-demo.html'), false, 'Retired Reality Demo page must be absent');
+assert.equal(fs.existsSync('assets/js/pages/reality-demo.js'), false, 'Retired Reality Demo controller must be absent');
+assert.match(read('_redirects'), /^\/reality-demo \/reality-journey 308$/m);
 
 const aiDisclosure = read('assets/js/locales/en/public.js');
 for (const disclosure of [
@@ -161,7 +137,7 @@ for (const responsiveContract of [
 
 const registry = JSON.parse(read('content/registry/m3a-public-experience.json'));
 assert.equal(registry.status, 'public-experience-ready');
-assert.equal(registry.deliverables.demo.writesFormalRuntimeMemory, false);
+assert.equal(registry.deliverables.demo.writesFormalRuntimeMemory, false, 'Historical M3A boundary remains recorded');
 assert.equal(registry.acceptance.runtimeContractsChanged, false);
 assert.equal(registry.acceptance.d1BindingChanged, false);
 
@@ -172,5 +148,5 @@ assert.ok(
   'Production Runtime D1 database changed'
 );
 
-console.log('✓ M3A-W2–W6 Public Experience passed: unified navigation, Discover, About, Demo, bilingual trust and mobile contracts.');
-console.log('  Reality Demo remains isolated from API, session storage and formal Runtime Memory.');
+console.log('✓ M3A public experience passed: unified navigation, Discover, About, bilingual trust and mobile contracts.');
+console.log('  Historical Reality Demo boundary remains recorded; the public route is retired by permanent redirect.');

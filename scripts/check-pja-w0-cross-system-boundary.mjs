@@ -177,8 +177,14 @@ const rootPages = (await fs.readdir(root))
   .sort();
 const mappedPages = freeze.pageCapabilities
   .flatMap(capability => capability.pages)
+  .filter(page => page !== 'reality-demo.html')
   .sort();
 assert.deepEqual(mappedPages, rootPages, 'Page-to-Capability Map is incomplete.');
+assert(
+  freeze.pageCapabilities.some(capability => capability.pages.includes('reality-demo.html')),
+  'Frozen PJA-W0 history must retain the retired Demo record.'
+);
+assert.match(await fs.readFile(path.join(root, '_redirects'), 'utf8'), /^\/reality-demo \/reality-journey 308$/m);
 assert.equal(
   new Set(mappedPages).size,
   mappedPages.length,

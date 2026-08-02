@@ -26,3 +26,7 @@ Entry exceeds the EXP-W3 minimum of 13/18. Scores are code-level acceptance only
 ## Boundaries
 
 No Runtime behavior, Runtime Contract, Registry, Migration, D1, Payment, Entitlement, Provider, Professional Contract or Knowledge publication file changed. A green `npm run check` proves regression safety, not Production experience acceptance.
+
+## Post-freeze retirement note
+
+EXP-W4A subsequently retires the Public Reality Demo by product-owner decision. The Demo findings and boundary assertions above remain historical EXP-W3 evidence; they do not define an active route, replacement experience or later Experience Gate. Reality Journey Overview is the only current public Journey orientation route.

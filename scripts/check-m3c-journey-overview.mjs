@@ -41,7 +41,6 @@ for (const contract of [
   '/assets/js/public-shell.js',
   'data-public-section="reality"',
   'journeyPublic.before.title',
-  'journeyPublic.difference.title',
   'journeyPublic.customerStages.continue.name'
 ]) {
   assert.match(page, new RegExp(contract), `Journey Overview is missing: ${contract}`);
@@ -61,15 +60,15 @@ for (const stageId of customerStageIds) {
 
 assert.equal(
   (page.match(/href="\/reality-entry"/g) || []).length,
-  2,
-  'Journey Overview must provide the hero and closing Start Journey actions'
+  1,
+  'Journey Overview must provide one unambiguous Start Journey action after Demo retirement'
 );
 assert.equal(
   (page.match(/public-button--primary/g) || []).length,
   1,
   'Journey Overview hero must expose one unique primary action'
 );
-assert.match(page, /href="\/reality-demo"/);
+assert.doesNotMatch(page, /href="\/reality-demo"/);
 
 for (const forbidden of [
   '<form',
@@ -129,7 +128,8 @@ const registry = await readJson('content/registry/m3c-public-journey.json');
 assert.equal(registry.status, 'w1-journey-overview-ready');
 assert.equal(registry.overview.publicRoute, '/reality-journey');
 assert.equal(registry.overview.startRoute, '/reality-entry');
-assert.equal(registry.overview.demoRoute, '/reality-demo');
+assert.equal(registry.overview.demoRoute, '/reality-demo', 'Historical W1 record remains immutable');
+assert.match(await read('_redirects'), /^\/reality-demo \/reality-journey 308$/m);
 assert.equal(registry.overview.writesRuntime, false);
 assert.equal(registry.overview.storesJourneyContent, false);
 assert.equal(registry.overview.callsRuntimeApi, false);
