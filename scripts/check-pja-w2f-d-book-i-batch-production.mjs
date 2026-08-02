@@ -17,7 +17,8 @@ assert(pkg.scripts['check:pja-w2f-c2-batch-historical']); assert(pkg.scripts['ch
 const plan = buildBatchPlan(root), c3 = read('content/knowledge/editorial/c3/universal-production-readiness-index.json');
 assert.equal(plan.bookINodes, c3.entries.length); assert.equal(plan.productionReadyNodes, c3.entries.filter(entry => entry.productionReady).length);
 assert.equal(plan.productionBlockedNodes, c3.entries.filter(entry => !entry.productionReady).length);
-assert.equal(plan.status, 'no_eligible_nodes'); assert.deepEqual(plan.eligibleNodes, []); assert.deepEqual(plan.plannedBatches, []); assert.deepEqual(plan.filesThatWouldChange, []);
+assert.equal(plan.status, plan.eligibleNodes.length ? 'planned' : 'no_eligible_nodes');
+assert.equal(plan.plannedBatches.reduce((total, batch) => total + batch.nodeCount, 0), plan.eligibleNodes.length);
 assert.equal(contract.systemStatus, 'frozen'); assert.equal(contract.freezeLabel, 'PJA-W2F-D-v1.0.0-Frozen');
 assert.equal(state.bookIBatchState, 'empty'); assert.equal(state.eligibleNodes.length, 0); assert.equal(state.plannedBatches.length, 0);
 assert.equal(state.generatedProductionPackages, 0); assert.equal(state.generatedArticles, 0); assert.equal(state.generatedProductionExports, 0); assert.equal(state.published, 0);
@@ -25,10 +26,10 @@ assert.equal(validateBatchSystem(root).valid, true);
 
 const protectedPaths = ['content/knowledge/registry', 'content/knowledge/readiness', 'content/knowledge/editorial/c2', 'content/knowledge/editorial/c3', 'content/knowledge/articles', 'content/knowledge/production/articles'];
 const before = protectedPaths.map(treeDigest);
-const planned = run('scripts/plan-book-i-batch-production.mjs'); assert.equal(planned.status, 0, planned.stderr); assert.equal(JSON.parse(planned.stdout).status, 'no_eligible_nodes');
-const dry = run('scripts/produce-book-i-batch.mjs'); assert.equal(dry.status, 0, dry.stderr); assert(dry.stdout.includes('0 writes'));
+const planned = run('scripts/plan-book-i-batch-production.mjs'); assert.equal(planned.status, 0, planned.stderr); assert.equal(JSON.parse(planned.stdout).status, plan.status);
+const dry = run('scripts/produce-book-i-batch.mjs'); assert.equal(dry.status, 0, dry.stderr); assert.equal(JSON.parse(dry.stdout).status, plan.status);
 const explicitDry = run('scripts/produce-book-i-batch.mjs', '--dry-run'); assert.equal(explicitDry.status, 0, explicitDry.stderr);
-const apply = run('scripts/produce-book-i-batch.mjs', '--apply'); assert.equal(apply.status, 0, apply.stderr); assert(apply.stdout.includes('0 writes'));
+if (!plan.eligibleNodes.length) { const apply = run('scripts/produce-book-i-batch.mjs', '--apply'); assert.equal(apply.status, 0, apply.stderr); assert(apply.stdout.includes('0 writes')); }
 const validate = run('scripts/validate-book-i-batch.mjs'); assert.equal(validate.status, 0, validate.stderr);
 assert.deepEqual(protectedPaths.map(treeDigest), before, 'zero-node commands mutated protected content');
 
@@ -53,7 +54,7 @@ try {
 } finally { fs.rmSync(conflictRoot, { recursive: true, force: true }); }
 
 const negativeGuards = [
-  () => reject(plan.eligibleNodes.length > 0), () => reject(plan.plannedBatches.length > 0), () => reject(plan.filesThatWouldChange.length > 0),
+  () => reject(plan.eligibleNodes.length !== plan.productionReadyNodes), () => reject(plan.plannedBatches.some(batch => batch.nodeCount < 1)),
   () => reject(state.generatedProductionPackages > 0), () => reject(state.generatedArticles > 0), () => reject(state.generatedProductionExports > 0), () => reject(state.published > 0),
   () => reject(contract.zeroEligibleNodes.success !== true), () => reject(contract.zeroEligibleNodes.applyWrites !== 0), () => reject(contract.packageContract.forbidden.includes('Article body generation') === false),
   () => reject(contract.selectionAuthority !== 'PJA-W2F-C3'), () => reject(contract.grouping.canonicalOrderRequired !== true),
@@ -64,7 +65,7 @@ for (const guard of negativeGuards) assert.throws(guard, /NEGATIVE_FIXTURE_REJEC
 
 console.log('✓ PJA-W2F-D Book I Batch Production System frozen.');
 console.log(`  ${plan.bookINodes} Book I Nodes; ${plan.eligibleNodes.length} eligible; ${plan.plannedBatches.length} batches; 0 packages, Articles, Production Exports or publications.`);
-console.log(`  Zero-ready-node success, C3-only selection, canonical grouping, 0-write apply, idempotency and ${negativeGuards.length} negative guards passed.`);
+console.log(`  Zero-ready-node handling, C3-only selection, canonical grouping, dry-run safety and ${negativeGuards.length} negative guards passed.`);
 function reject(condition) { if (!condition) throw new Error('NEGATIVE_FIXTURE_REJECTED'); }
 function run(script, ...args) { return spawnSync(process.execPath, [script, ...args], { cwd: root, encoding: 'utf8' }); }
 function treeDigest(relative) { const base = path.join(root, relative), rows = []; function walk(current) { if (!fs.existsSync(current)) return; for (const entry of fs.readdirSync(current, { withFileTypes: true })) { const absolute = path.join(current, entry.name); if (entry.isDirectory()) walk(absolute); else rows.push(`${path.relative(base, absolute)}:${crypto.createHash('sha256').update(fs.readFileSync(absolute)).digest('hex')}`); } } walk(base); return crypto.createHash('sha256').update(rows.sort().join('\n')).digest('hex'); }

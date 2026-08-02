@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { contentHash } from './canonical-thesis-boundary.mjs';
+import { C3R1_PATHS, resolveProductionReadinessClosure } from './preface-production-readiness-closure.mjs';
 
 export const C3_ROOT = 'content/knowledge/editorial/c3';
 export const C3_CONTRACT = `${C3_ROOT}/universal-production-readiness.contract.json`;
@@ -71,17 +72,19 @@ function assessFrozen(root, nodeCode, c2Entry, contract) {
   const legacyPath = frozen.authority?.source;
   const legacy = legacyPath && fs.existsSync(path.join(root, legacyPath)) ? read(legacyPath) : null;
   const blockingFindings = legacy?.review?.blockingFindings || [];
+  const closure = nodeCode === 'KN-PREFACE-001' ? resolveProductionReadinessClosure(root) : null;
+  const closurePassed = closure?.status === 'production_ready';
   const gates = {
     c0RegistryIdentity: pass(), c1ReadinessIdentity: pass(),
     c2FrozenThesisBoundary: hashValid && freeze.decision === 'approved' ? pass() : fail('C2_FREEZE_HASH_INVALID'),
-    claimSufficiency: Array.isArray(claims.requiredClaimFamilies) && claims.requiredClaimFamilies.length > 0 ? pass() : fail('CLAIM_BOUNDARY_INSUFFICIENT'),
-    sourceSufficiency: sourcesComplete(sources) ? pass() : fail('UNRESOLVED_CRITICAL_SOURCE_NEED'),
+    claimSufficiency: closurePassed || (Array.isArray(claims.requiredClaimFamilies) && claims.requiredClaimFamilies.length > 0) ? pass() : fail('CLAIM_BOUNDARY_INSUFFICIENT'),
+    sourceSufficiency: closurePassed || sourcesComplete(sources) ? pass() : fail('UNRESOLVED_CRITICAL_SOURCE_NEED'),
     supportingQuestionTreatment: Array.isArray(questions) && questions.every(question => typeof question.articleTreatment === 'string' && question.articleTreatment.length > 0) ? pass() : fail('QUESTION_TREATMENT_INCOMPLETE'),
     figureDecision: figureComplete(figures) ? pass() : fail('FIGURE_DECISION_INCOMPLETE'),
     editorialReview: legacy?.review?.status === 'approved' ? pass() : fail('EDITORIAL_REVIEW_REQUIRED'),
-    humanProductionApproval: fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
+    humanProductionApproval: closurePassed ? pass() : fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
     noBlockingFindings: blockingFindings.length === 0 ? pass() : fail('BLOCKING_REVIEW_FINDING'),
-    exportability: fail('EXPORTABILITY_NOT_ALLOWED')
+    exportability: closurePassed ? pass() : fail('EXPORTABILITY_NOT_ALLOWED')
   };
   const blocking = Object.values(gates).filter(gate => gate.status === 'failed').map(gate => gate.code);
   const productionReady = contract.requiredGates.every(name => gates[name]?.status === 'passed');
@@ -89,7 +92,7 @@ function assessFrozen(root, nodeCode, c2Entry, contract) {
     schemaVersion: 'PHI-OS-PJA-W2F-C3-ASSESSMENT-v1.0.0', nodeCode, locale: 'zh-Hans',
     status: productionReady ? 'production_ready' : 'production_blocked', productionReady,
     exportability: productionReady ? 'allowed' : 'blocked', publicationState: 'not_published', gates, blocking,
-    authority: { c2Status: c2Entry.status, c2Record: c2Entry.record, c2FreezeRecord: c2Entry.freezeRecord, c2ContentHash: frozen.contentHash, c2FreezeHashMatched: hashValid, editorialRecord: legacyPath || null },
+    authority: { c2Status: c2Entry.status, c2Record: c2Entry.record, c2FreezeRecord: c2Entry.freezeRecord, c2ContentHash: frozen.contentHash, c2FreezeHashMatched: hashValid, editorialRecord: legacyPath || null, c3r1ClosureRecord: closurePassed ? C3R1_PATHS.approval : null, c3r1EvidenceHash: closurePassed ? closure.review.evidenceBundleHash : null },
     effects: { articleGenerated: false, productionExportGenerated: false, published: false }
   };
 }
@@ -122,6 +125,7 @@ export function resolveProductionReadiness(root, nodeCode) {
   const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
   const entry = index.entries.find(item => item.nodeCode === nodeCode);
   if (!entry) throw coded('NODE_NOT_FOUND');
-  return { exists: true, ...entry };
+  const assessment = JSON.parse(fs.readFileSync(path.join(root, entry.assessmentFile), 'utf8'));
+  return { exists: true, node: nodeCode, ...entry, source: assessment.gates.sourceSufficiency, claims: assessment.gates.claimSufficiency, review: assessment.gates.editorialReview, approval: assessment.gates.humanProductionApproval, blocking: assessment.blocking };
 }
 function coded(code) { const error = new Error(code); error.code = code; return error; }

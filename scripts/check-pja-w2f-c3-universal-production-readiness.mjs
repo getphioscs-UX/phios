@@ -44,16 +44,21 @@ const frozenC2 = c2.entries.filter(entry => entry.status === 'frozen');
 for (const c2Entry of frozenC2) {
   const result = resolveProductionReadiness(root, c2Entry.nodeCode), assessment = read(result.assessmentFile);
   assert.equal(assessment.gates.c2FrozenThesisBoundary.status, 'passed');
-  assert.equal(assessment.gates.sourceSufficiency.status, 'failed');
-  assert.equal(assessment.gates.humanProductionApproval.status, 'failed');
-  assert.equal(assessment.productionReady, false);
+  if (assessment.productionReady) {
+    assert.equal(assessment.gates.sourceSufficiency.status, 'passed');
+    assert.equal(assessment.gates.humanProductionApproval.status, 'passed');
+    assert.equal(assessment.gates.exportability.status, 'passed');
+  } else {
+    assert.equal(assessment.gates.sourceSufficiency.status, 'failed');
+    assert.equal(assessment.gates.humanProductionApproval.status, 'failed');
+  }
 }
 for (const c2Entry of c2.entries.filter(entry => entry.status !== 'frozen')) assert.equal(resolveProductionReadiness(root, c2Entry.nodeCode).status, 'blocked_by_c2');
 assert.throws(() => resolveProductionReadiness(root, 'KN-NOT-REGISTERED-999'), error => error.code === 'NODE_NOT_FOUND');
 assert.equal(validateProductionReadiness(root).valid, true);
 
 const dry = run('scripts/assess-book-i-production-readiness.mjs'); assert.equal(dry.status, 0, dry.stderr);
-const dryReport = parse(dry.stdout); assert.equal(dryReport.create, 0); assert.deepEqual(dryReport.filesThatWouldChange, []);
+const dryReport = parse(dry.stdout); assert.equal(dryReport.create, 0); assert.equal(dryReport.update, 0); assert.deepEqual(dryReport.filesThatWouldChange, []);
 const explicitDry = run('scripts/assess-book-i-production-readiness.mjs', '--dry-run'); assert.equal(explicitDry.status, 0, explicitDry.stderr);
 const apply = run('scripts/apply-book-i-production-readiness.mjs'); assert.equal(apply.status, 0, apply.stderr); assert(apply.stdout.includes('apply no-op'));
 
