@@ -176,7 +176,11 @@
     "check:pja-w2f-c0": "npm run check:pja-w2f-b1 && node scripts/check-pja-w2f-c0-book-i-registry-population.mjs",
     "knowledge:sync-readiness": "node scripts/sync-pja-w2f-c1-readiness-skeletons.mjs",
     "knowledge:validate-readiness-skeletons": "node scripts/validate-pja-w2f-c1-readiness-skeletons.mjs",
-    "check:pja-w2f-c1": "npm run check:pja-w2f-c0 && node scripts/check-pja-w2f-c1-readiness-skeleton-population.mjs"
+    "check:pja-w2f-c1": "npm run check:pja-w2f-c0 && node scripts/check-pja-w2f-c1-readiness-skeleton-population.mjs",
+    "knowledge:plan-book-i-thesis": "node scripts/plan-pja-w2f-c2-canonical-thesis-boundary.mjs",
+    "knowledge:apply-book-i-thesis": "node scripts/apply-pja-w2f-c2-canonical-thesis-boundary.mjs",
+    "knowledge:validate-book-i-thesis": "node scripts/validate-pja-w2f-c2-canonical-thesis-boundary.mjs",
+    "check:pja-w2f-c2": "npm run check:pja-w2f-c1 && node scripts/check-pja-w2f-c2-canonical-thesis-boundary-freeze.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
