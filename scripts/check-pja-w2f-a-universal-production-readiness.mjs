@@ -56,7 +56,13 @@ const blueprint = knowledge.blueprints[0];
 const productionInventory = resolveKnowledgeScope(knowledge, {
   scope: 'PREFACE'
 });
+const registeredIdentityCount = knowledge.inventory.length;
+const prefacePilotCount = productionInventory.length;
+const registryPresentProductionDeferredCount = registeredIdentityCount - prefacePilotCount;
 assert.equal(knowledge.inventory.length, blueprint.plannedCanonicalNodes);
+assert.equal(registeredIdentityCount, 78);
+assert.equal(prefacePilotCount, 13);
+assert.equal(registryPresentProductionDeferredCount, 65);
 assert.equal(
   knowledge.questions.supportingQuestions.length,
   productionInventory.reduce((total, item) => total + item.supportingQuestions.length, 0)
@@ -131,7 +137,7 @@ assert.deepEqual(
   productionInventory.map(item => item.nodeCode)
 );
 assert((await read('docs/pja/PJA-W2F-A-CANONICAL-READINESS-INVENTORY.md'))
-  .includes(`Registry-present, production-deferred: ${knowledge.inventory.length - productionInventory.length}`));
+  .includes(`Registry-present, production-deferred: ${registryPresentProductionDeferredCount}`));
 
 const questionOwners = new Map();
 for (const question of knowledge.questions.supportingQuestions) {
@@ -243,8 +249,9 @@ const legacyBaseline = await gitFile(
 assert.equal(sha256(legacyCurrent), sha256(legacyBaseline));
 
 console.log('✓ PJA-W2F-A Universal Canonical Production Readiness passed.');
-console.log(`  ${productionInventory.length} registered Preface Nodes are inventoried; ${productionInventory.length - statusCounts.production_ready} deterministic Skeletons remain blocked and the human-frozen pilot is preserved.`);
-console.log('  Blueprint-only P1–P5 Nodes and unregistered P6–P14 remain non-authoritative; universal fixtures cover P1–P14 and Books I–III.');
+console.log(`  ${registeredIdentityCount} Canonical Node identities are registered; Readiness remains limited to the ${prefacePilotCount}-Node Preface pilot.`);
+console.log(`  ${registryPresentProductionDeferredCount} P1–P5 identities have no C1 Readiness Skeleton and remain production-deferred; universal fixtures cover P1–P14 and Books I–III.`);
+console.log(`  ${productionInventory.length - statusCounts.production_ready} Preface Skeletons remain blocked and the human-frozen pilot is preserved.`);
 console.log('  No Skeleton is production_ready; Thesis, boundary and human authority gates remain blocking.');
 console.log('  Scope, hierarchy, continuity, Supporting Question, duplication, future-pattern and batch-export behavior passed.');
 

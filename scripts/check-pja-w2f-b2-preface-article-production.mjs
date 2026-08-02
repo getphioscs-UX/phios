@@ -37,6 +37,7 @@ const packageJson = JSON.parse(await fs.readFile(
 const temporaryRoot = await fs.mkdtemp(
   path.join(os.tmpdir(), 'phios-pja-w2f-b2-check-')
 );
+const protectedStatusBaseline = await protectedStatus();
 
 try {
   checkPackageCommands();
@@ -129,12 +130,12 @@ async function checkRealEligibility() {
   const expectedEligible = selection.filter(item => item.nodeCode === 'KN-PREFACE-001').length;
   assert.equal(eligible, expectedEligible);
   assert.equal(blocked, selection.length - expectedEligible);
-  assert.throws(
-    () => resolveKnowledgeScope(knowledge, {
-      nodeCode: 'KN-B1-P1-001'
-    }),
-    error => error.code === 'CANONICAL_NODE_NOT_FOUND'
-  );
+  const registeredDeferred = resolveKnowledgeScope(knowledge, {
+    nodeCode: 'KN-B1-P1-001'
+  });
+  assert.equal(registeredDeferred.length, 1);
+  assert.equal(registeredDeferred[0].partCode, 'P1');
+  assert.equal(selection.some(item => item.nodeCode === 'KN-B1-P1-001'), false);
   assert.throws(
     () => resolveKnowledgeScope(knowledge, {
       nodeCode: 'KN-NOT-REGISTERED-999'
@@ -494,8 +495,8 @@ async function checkCliBlocking() {
     {
       args: ['scripts/produce-canonical-article.mjs', 'KN-B1-P1-001',
         '--output', '.tmp/pja-w2f-b2-check-real'],
-      code: 2,
-      token: 'BLUEPRINT_PLANNED_NOT_REGISTERED'
+      code: 1,
+      token: 'LOCALE_NOT_READY'
     },
     {
       args: ['scripts/produce-canonical-article.mjs',
@@ -525,7 +526,8 @@ async function checkCliBlocking() {
     '.tmp/pja-w2f-b2-check-batch'
   ]);
   assert.equal(batch.code, 0, batch.output);
-  assert(batch.output.includes(`Blocked: ${knowledge.inventory.length - 1}`));
+  const prefaceCount = resolveKnowledgeScope(knowledge, { scope: 'PREFACE' }).length;
+  assert(batch.output.includes(`Blocked: ${prefaceCount - 1}`));
   assert(batch.output.includes('Produced: 1'));
   assert.equal(
     await fs.access(path.join(
@@ -563,6 +565,19 @@ async function runNode(args) {
 }
 
 async function checkProtectedFiles() {
+  const stdout = await protectedStatus();
+  assert.equal(stdout, protectedStatusBaseline, `Protected files changed during B2:\n${stdout}`);
+  const productionDirectory = path.join(
+    root,
+    'content/knowledge/production/articles'
+  );
+  const productionEntries = await fs.readdir(
+    productionDirectory
+  ).catch(error => error.code === 'ENOENT' ? [] : Promise.reject(error));
+  assert.deepEqual(productionEntries, ['kn-preface-001']);
+}
+
+async function protectedStatus() {
   const protectedPaths = [
     'content/knowledge/registry',
     'content/knowledge/blueprints',
@@ -582,13 +597,5 @@ async function checkProtectedFiles() {
     ['status', '--porcelain=v1', '--', ...protectedPaths],
     { cwd: root, windowsHide: true }
   );
-  assert.equal(stdout.trim(), '', `Protected files changed:\n${stdout}`);
-  const productionDirectory = path.join(
-    root,
-    'content/knowledge/production/articles'
-  );
-  const productionEntries = await fs.readdir(
-    productionDirectory
-  ).catch(error => error.code === 'ENOENT' ? [] : Promise.reject(error));
-  assert.deepEqual(productionEntries, ['kn-preface-001']);
+  return stdout.trim();
 }

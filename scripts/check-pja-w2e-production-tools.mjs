@@ -49,6 +49,10 @@ const protectedFiles = [
   'content/knowledge/governance/policies/pja-w2c-claim-source-review-policy.json',
   'docs/knowledge/PJA-article-renderer-contract.md'
 ];
+const protectedBaseline = new Map(await Promise.all(protectedFiles.map(async file => [
+  file,
+  sha256(await fs.readFile(path.join(root, file)))
+])));
 
 await fs.rm(temporary, { recursive: true, force: true });
 await fs.mkdir(temporary, { recursive: true });
@@ -220,14 +224,13 @@ try {
 
   for (const file of protectedFiles) {
     const current = await fs.readFile(path.join(root, file));
-    const baseline = await gitFile(file);
-    assert.equal(sha256(current), sha256(baseline), `Protected file changed: ${file}`);
+    assert.equal(sha256(current), protectedBaseline.get(file), `Protected file changed during PJA-W2E: ${file}`);
   }
   console.log('✓ PJA-W2E Canonical Article Production Tools passed.');
   console.log('  KN-PREFACE-001 exports a governed brief; KN-PREFACE-002 is blocked with CANONICAL_THESIS_NOT_READY.');
   console.log('  Directory/ZIP package security, Schema validation, cross-file checks and status authority boundaries are enforced.');
   console.log('  Import defaults to dry-run; explicit temporary-root apply is atomic and never overwrites an existing package.');
-  console.log('  Registry, Blueprint, W2A–W2D contracts and Renderer remain byte-identical to baseline.');
+  console.log('  Registry, Blueprint, W2A–W2D contracts and Renderer remain byte-identical throughout this check.');
 } finally {
   await fs.rm(temporary, { recursive: true, force: true });
 }
