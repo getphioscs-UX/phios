@@ -233,37 +233,40 @@ const sessionDeletion = await service.deleteSession({
 assert.equal(sessionDeletion.deleted, true);
 assert.equal(sessions.has('session_a'), false);
 
-const professionalGrant = {
-  status: 'granted',
-  professional_id: 'professional_1',
-  runtime_ids: ['runtime_root'],
-  purpose: 'financial evidence review',
-  consent_version: '1.0',
-  expires_at: '2026-08-01T00:00:00.000Z'
-};
-assert.equal(authorizeProfessionalAccess({
-  runtime_id: 'runtime_root',
-  professional_id: 'professional_1',
-  grant: professionalGrant
-}, {
-  now: '2026-07-23T12:00:00.000Z'
-}).allowed, true);
-await rejectsCode(
-  async () => authorizeProfessionalAccess({
-    runtime_id: 'runtime_other',
-    professional_id: 'professional_1',
-    grant: professionalGrant
-  }),
-  SECURITY_ERROR_CODES.PROFESSIONAL_SCOPE_DENIED
+const professionalAccessPriority = JSON.parse(read(
+  'tests/fixtures/runtime-security-professional-access-priority.json'
+));
+assert.equal(
+  professionalAccessPriority.contract,
+  'phi-os.runtime-security-privacy.v1'
 );
-await rejectsCode(
-  async () => authorizeProfessionalAccess({
-    runtime_id: 'runtime_root',
-    professional_id: 'professional_1',
-    grant: { ...professionalGrant, runtime_ids: ['*'] }
-  }),
-  SECURITY_ERROR_CODES.PROFESSIONAL_SCOPE_DENIED
-);
+assert.deepEqual(professionalAccessPriority.decisionOrder, [
+  'active-purpose-bound-consent',
+  'explicit-professional-and-runtime-scope'
+]);
+for (const scenario of professionalAccessPriority.scenarios) {
+  const request = {
+    runtime_id: scenario.runtime_id,
+    professional_id: scenario.professional_id,
+    grant: {
+      ...professionalAccessPriority.grant,
+      ...(scenario.grant || {})
+    }
+  };
+  const options = { now: scenario.now };
+  if (scenario.expected === 'allowed') {
+    assert.equal(
+      authorizeProfessionalAccess(request, options).allowed,
+      true,
+      scenario.id
+    );
+  } else {
+    await rejectsCode(
+      async () => authorizeProfessionalAccess(request, options),
+      scenario.expected
+    );
+  }
+}
 
 await rejectsCode(
   async () => authorizeResearchUse({
