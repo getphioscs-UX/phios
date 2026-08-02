@@ -313,7 +313,8 @@ for (const [file, expected] of Object.entries({
   'reality-entry.html':
     '1d4c5ccd9e756f9f628e1abef66016c95c9c98aeae1f85af0108b26f598f2308',
   'reality-navigation.html':
-    '0d78b63ef0f3f510df2ecf4c4bf114c232af5d6ded337e72cd50114443f4bb05'
+    // EXP-W6 changes customer projection only; authorisation/loader code is unchanged.
+    '8eb829d1247f132ef5987d8712120fbbaa5eac315e34a131d5d526dfa6b32c04'
 })) {
   assert.equal(hash(await read(file)), expected, `Page changed: ${file}`);
 }

@@ -2,6 +2,15 @@
 
 const navigation = Object.freeze({
   navigation: {
+    expW6: {
+      savedStatus: 'Saved action status',
+      whyNow: 'Why start here now',
+      howToAct: 'How to do it',
+      whatChanges: 'What this step may change',
+      validSignal: 'Signal that it is working',
+      invalidSignal: 'Signal to pause or change',
+      reviewTime: 'When to review'
+    },
     reconstructionStaleTitle: 'This Navigation is based on an earlier Reconstruction version.',
     reconstructionStaleDetail: 'The current Reconstruction has a material revision. This Navigation remains available as history and must be regenerated after a current Reading.',
     skipLink:

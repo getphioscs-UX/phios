@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/assets/css/review-memory-continuity.css">
   <link rel="stylesheet" href="/assets/css/pds-w8-navigation-review-continuity.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
+  <link rel="stylesheet" href="/assets/css/exp-w6-task-separation.css">
 </head>
 <body class="review-page">
   <a class="phi-skip-link" href="#review-main" data-i18n="review.skipLink">Skip to Review</a>
@@ -115,7 +116,9 @@
             </div>
 
             <aside>
-              <section class="review-card">
+              <details class="review-card exp-w6-supporting-context">
+                <summary data-i18n="review.expW6.contextSummary">Review the direction and supporting context</summary>
+                <div class="exp-w6-details-body">
                 <h2 data-i18n="review.selectedPathTitle">Selected path</h2>
                 <h3 id="selectedPathTitle"></h3>
                 <p id="selectedPathDirection"></p>
@@ -125,7 +128,8 @@
                 <ul class="review-list" id="reviewEvidence"></ul>
                 <h3 data-i18n="review.unknownTitle">Still unknown</h3>
                 <ul class="review-list" id="reviewUnknown"></ul>
-              </section>
+                </div>
+              </details>
 
               <section class="review-card review-stage-card" data-review-view="next-decision">
                 <p class="eyebrow" data-i18n="review.decisionEyebrow">04 · Continue / Revise / Close</p>
@@ -145,7 +149,7 @@
                     <span data-i18n="review.decisionCloseText">Close this action cycle while preserving the Runtime.</span>
                   </button>
                 </div>
-                <label>
+                <label class="exp-w6-compatible-control">
                   <span data-i18n="review.outcomeLabel">Choose the next runtime state</span>
                   <select id="reviewOutcome">
                     <option value="" data-i18n="review.outcomePending">Not chosen</option>
@@ -168,10 +172,16 @@
                 </label>
                 <div class="review-memory-status" id="memoryStatus" role="status" aria-live="polite"></div>
                 <div class="review-actions">
-                  <button class="btn primary" id="saveReview" type="button" data-i18n="review.saveButton">Save Review</button>
-                  <button class="btn" id="prepareMemory" type="button" data-i18n="review.prepareMemoryButton">Prepare Runtime Memory</button>
-                  <a class="btn hidden" id="openMemory" href="/my-reality.html#memory" data-i18n="review.openMemoryButton">Open Runtime Memory</a>
+                  <button class="btn primary" id="saveReview" type="button" data-i18n="review.expW6.primaryAction">Confirm this Review</button>
                 </div>
+                <details class="exp-w6-review-handoff">
+                  <summary data-i18n="review.expW6.afterReview">After this Review</summary>
+                  <p data-i18n="review.expW6.afterReviewText">Once confirmed, you can save this point in your Journey and return to it later.</p>
+                  <div class="review-actions">
+                    <button class="btn" id="prepareMemory" type="button" data-i18n="review.expW6.saveJourney">Save this point</button>
+                    <a class="btn hidden" id="openMemory" href="/my-reality.html#memory" data-i18n="review.expW6.openSaved">View saved Journey</a>
+                  </div>
+                </details>
                 <p class="review-note" data-i18n="review.boundaryNote">Your report remains reported experience. It does not overwrite the earlier Reading or become verified evidence automatically.</p>
                 <aside class="review-pause-resume" role="note">
                   <strong data-i18n="review.w8.pauseTitle">Not ready to decide?</strong>

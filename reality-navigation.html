@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="/assets/css/navigation-visual-alignment.css">
   <link rel="stylesheet" href="/assets/css/pds-w8-navigation-review-continuity.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
+  <link rel="stylesheet" href="/assets/css/exp-w6-task-separation.css">
 </head>
 
 <body class="navigation-page">
@@ -265,7 +266,9 @@
           <button type="button" class="btn" data-navigation-mode="technical" aria-pressed="false" data-i18n="navigation.technicalView">Technical View</button>
         </nav>
 
-        <section class="navigation-customer-status" aria-labelledby="navigationCustomerStatusTitle">
+        <section class="navigation-customer-status">
+        <details class="exp-w6-supporting-status">
+          <summary data-i18n="navigation.expW6.savedStatus">Saved action status</summary>
           <header>
             <p data-i18n="navigation.customerStatusEyebrow">Navigation status</p>
             <h2 id="navigationCustomerStatusTitle" data-i18n="navigation.customerStatusTitle">Your current action</h2>
@@ -279,6 +282,7 @@
             <div><dt data-i18n="navigation.customerSaveStatus">Save status</dt><dd id="navigationCustomerSave">—</dd></div>
           </dl>
           <p id="navigationDeviceStorageNotice" class="navigation-device-storage" hidden></p>
+        </details>
         </section>
 
         <div

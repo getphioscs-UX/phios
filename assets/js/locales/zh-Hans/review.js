@@ -21,6 +21,10 @@ const review = Object.freeze({
     }
   },
   review: {
+    expW6: {
+      contextSummary: '查看原方向与支持内容', primaryAction: '确认本次回看', afterReview: '本次回看之后',
+      afterReviewText: '确认后，你可以保存 Journey 的这个节点，以后再返回。', saveJourney: '保存这个节点', openSaved: '查看已保存 Journey'
+    },
     skipLink: '跳到现实回顾',
     eyebrow: '运行体验 · 回顾',
     title: '现实回顾',
@@ -152,6 +156,15 @@ const review = Object.freeze({
     }
   },
   memory: {
+    expW6: {
+      emptyTitle: '还没有已保存的 Journey', emptyText: '完成一次回看后，才能保存以后可返回的节点。',
+      eyebrow: '你的 Journey · 已保存', title: '你已经保存的内容', subtitle: '查看可返回的 Journey、Reading 与行动，以及仍在进行的事项。',
+      savedJourney: '已保存 Journey', savedReading: '已保存 Reading', savedActions: '已保存行动', inProgress: '仍在进行', available: '可返回',
+      returnSummary: '你可以返回什么', dataTitle: '下载或移除已保存副本', dataText: '下载本地报告，或在确认后从此浏览器移除这个 Journey。', historySummary: '技术历史',
+      continuityEyebrow: '你的 Journey · 继续', continuityTitle: '你想如何继续？', continuityText: '继续、暂停、恢复或另行开始。已保存 Journey 会继续保留。',
+      choiceEyebrow: '你的下一步 Journey 选择', choiceTitle: '选择如何继续', choiceIntro: '这里不重复 Review，只决定你接下来返回哪里。',
+      continueJourney: '继续原 Journey', newVersion: '开始新版本', newTopic: '开始新主题', pause: '在这里暂停', resume: '恢复已选行动', end: '结束本次行动并重新选择'
+    },
     skipLink: '跳到我的现实',
     backReview: '返回现实回顾',
     emptyTitle: '运行记忆尚未准备好',

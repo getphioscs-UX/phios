@@ -2,6 +2,15 @@
 
 const navigation = Object.freeze({
   navigation: {
+    expW6: {
+      savedStatus: '已保存的行动状态',
+      whyNow: '为什么现在从这里开始',
+      howToAct: '如何执行',
+      whatChanges: '这一步可能改变什么',
+      validSignal: '有效信号',
+      invalidSignal: '暂停或调整的信号',
+      reviewTime: '何时回看'
+    },
     reconstructionStaleTitle: '这份现实导航建立在较早的现实重建版本上。',
     reconstructionStaleDetail: '当前现实重建已经发生重要修订；这份现实导航会作为历史记录保留，并需要在新的现实读取完成后重新生成。',
     skipLink:

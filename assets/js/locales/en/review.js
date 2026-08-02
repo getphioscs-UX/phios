@@ -21,6 +21,14 @@ const review = Object.freeze({
     }
   },
   review: {
+    expW6: {
+      contextSummary: 'Review the direction and supporting context',
+      primaryAction: 'Confirm this Review',
+      afterReview: 'After this Review',
+      afterReviewText: 'Once confirmed, you can save this point in your Journey and return to it later.',
+      saveJourney: 'Save this point',
+      openSaved: 'View saved Journey'
+    },
     skipLink: 'Skip to Review',
     eyebrow: 'Runtime Experience · Review',
     title: 'Reality Review',
@@ -152,6 +160,15 @@ const review = Object.freeze({
     }
   },
   memory: {
+    expW6: {
+      emptyTitle: 'No saved Journey yet', emptyText: 'Complete a Review before saving a point you can return to.',
+      eyebrow: 'Your Journey · Saved', title: 'What you have saved', subtitle: 'See the Journey, Reading and actions you can return to, and what is still in progress.',
+      savedJourney: 'Saved Journey', savedReading: 'Saved Reading', savedActions: 'Saved actions', inProgress: 'Still in progress', available: 'Available',
+      returnSummary: 'What you can return to', dataTitle: 'Download or remove your saved copy', dataText: 'Download a local report, or remove this Journey from this browser after confirmation.', historySummary: 'Technical history',
+      continuityEyebrow: 'Your Journey · Continue', continuityTitle: 'How would you like to continue?', continuityText: 'Continue, pause, resume or begin separately. Your saved Journey remains available.',
+      choiceEyebrow: 'Your next Journey choice', choiceTitle: 'Choose how to continue', choiceIntro: 'This choice does not repeat your Review. It only decides where you return next.',
+      continueJourney: 'Continue this Journey', newVersion: 'Start a new version', newTopic: 'Start a new topic', pause: 'Pause here', resume: 'Resume the chosen action', end: 'End this action and choose again'
+    },
     skipLink: 'Skip to My Reality',
     backReview: 'Back to Review',
     emptyTitle: 'Runtime Memory is not ready',

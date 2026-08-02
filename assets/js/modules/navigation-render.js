@@ -193,22 +193,34 @@ function renderPaths(paths, recommendedPathId = '', selectedPathId = '') {
           ${sourceStage ? `<p class="navigation-path-source"><strong>${escapeHTML(t('navigation.pathSource'))}</strong> ${escapeHTML(t('navigation.pathSourceReading'))}</p>` : ''}
           ${evidenceAction ? `<div class="navigation-evidence-action"><span>${escapeHTML(t('navigation.evidenceAction'))}</span><p>${escapeHTML(cleanText(evidenceAction.evidence) || t('navigation.notEstablished'))} → ${escapeHTML(cleanText(evidenceAction.action) || t('navigation.notEstablished'))}</p></div>` : ''}
 
-          <div class="navigation-path-customer-grid">
+          <div class="navigation-path-customer-grid exp-w6-direction-grid">
             <section>
-              <span>${escapeHTML(t('navigation.suitableWhen'))}</span>
+              <span>${escapeHTML(t('navigation.expW6.whyNow'))}</span>
               ${suitableWhen.length > 0
                 ? `<ul>${suitableWhen.map(item => `<li>${escapeHTML(item)}</li>`).join('')}</ul>`
                 : `<p>${escapeHTML(t('navigation.notEstablished'))}</p>`}
             </section>
 
             <section>
-              <span>${escapeHTML(t('navigation.firstStep'))}</span>
+              <span>${escapeHTML(t('navigation.expW6.howToAct'))}</span>
               <p>${escapeHTML(firstStep || t('navigation.notEstablished'))}</p>
             </section>
 
-            <section>
-              <span>${escapeHTML(t('navigation.pathBoundary'))}</span>
+            <section data-contract-label="${escapeHTML(t('navigation.pathBoundary'))}">
+              <span>${escapeHTML(t('navigation.expW6.whatChanges'))}</span>
               <p>${escapeHTML(boundary || t('navigation.boundaryFallback'))}</p>
+            </section>
+            <section>
+              <span>${escapeHTML(t('navigation.expW6.validSignal'))}</span>
+              ${completionSignals.length > 0 ? `<ul>${completionSignals.map(signal => `<li>${escapeHTML(signal)}</li>`).join('')}</ul>` : `<p>${escapeHTML(t('navigation.notEstablished'))}</p>`}
+            </section>
+            <section>
+              <span>${escapeHTML(t('navigation.expW6.invalidSignal'))}</span>
+              ${stopConditions.length > 0 ? `<ul>${stopConditions.map(condition => `<li>${escapeHTML(condition)}</li>`).join('')}</ul>` : `<p>${escapeHTML(t('navigation.notEstablished'))}</p>`}
+            </section>
+            <section>
+              <span>${escapeHTML(t('navigation.expW6.reviewTime'))}</span>
+              <p>${escapeHTML(observationWindow || reviewConditions[0] || t('navigation.notEstablished'))}</p>
             </section>
           </div>
 
