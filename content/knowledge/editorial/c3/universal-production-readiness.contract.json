@@ -1,0 +1,49 @@
+{
+  "contract": "PHI-OS-PJA-W2F-C3-UNIVERSAL-PRODUCTION-READINESS-v1.0.0",
+  "stage": "PJA-W2F-C3",
+  "systemStatus": "frozen",
+  "freezeLabel": "PJA-W2F-C3-v1.0.0-Frozen",
+  "states": [
+    "not_assessed",
+    "blocked_by_c2",
+    "editorial_review_required",
+    "human_approval_required",
+    "production_blocked",
+    "production_ready",
+    "conflicted"
+  ],
+  "requiredGates": [
+    "c0RegistryIdentity",
+    "c1ReadinessIdentity",
+    "c2FrozenThesisBoundary",
+    "claimSufficiency",
+    "sourceSufficiency",
+    "supportingQuestionTreatment",
+    "figureDecision",
+    "editorialReview",
+    "humanProductionApproval",
+    "noBlockingFindings",
+    "exportability"
+  ],
+  "productionReadyRule": "Every required gate must pass.",
+  "approvalBoundary": {
+    "approvedByMustBeHuman": true,
+    "forbiddenApprovers": ["AI", "ai", "system", "automation"],
+    "distinctProductionApprovalRequired": true,
+    "c2FreezeIsProductionApproval": false
+  },
+  "exportBoundary": {
+    "productionReadyMeans": "eligible_for_production_export",
+    "generatesExport": false,
+    "publishes": false,
+    "publicationStateForReadyNode": "not_published"
+  },
+  "protectedWrites": [
+    "Canonical Registry",
+    "C1 Readiness Identity",
+    "C2 Thesis and Boundary",
+    "Article",
+    "Production Export",
+    "Publication"
+  ]
+}
