@@ -1,0 +1,32 @@
+{
+  "contract": "PHI-OS-KNR-PUBLIC-QUESTION-v1.0.0",
+  "status": "frozen",
+  "schema": "schemas/public-knowledge-question.schema.json",
+  "input": {
+    "minimumCharacters": 3,
+    "maximumCharacters": 500,
+    "locales": ["zh-Hans", "en"],
+    "htmlAndScript": "strip_then_reject_if_executable",
+    "promptInjection": "detect_and_block_authority_override",
+    "duplicateSubmission": "idempotent_within_rate_window",
+    "rateLimit": "required_at_public_api_boundary",
+    "sensitiveDataWarning": "required_before_submission"
+  },
+  "allowedPurposes": ["definition", "why_question", "mechanism", "distinction", "relationship", "navigation", "misconception", "application_general", "book_orientation", "site_orientation"],
+  "boundedPurposes": ["out_of_scope_personal", "out_of_scope_professional", "insufficient_context"],
+  "forbiddenData": ["complete_personal_history", "identity_document", "financial_account", "medical_record", "third_party_sensitive_data"],
+  "persistence": {
+    "sessionMode": "ephemeral",
+    "storesQuestionHistory": false,
+    "writesRuntimeMemory": false,
+    "writesJourney": false,
+    "createsProfessionalAssignment": false
+  },
+  "provider": { "required": false, "enabledByThisContract": false },
+  "authority": {
+    "mayCreateCanonicalNode": false,
+    "mayCreateCanonicalArticle": false,
+    "mayPublish": false,
+    "adaptiveProjectionIsSourceOfTruth": false
+  }
+}
