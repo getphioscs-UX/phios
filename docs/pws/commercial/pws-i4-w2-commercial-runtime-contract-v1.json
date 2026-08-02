@@ -1,0 +1,68 @@
+{
+  "contractId": "phi-os.pws.commercial-runtime.v1",
+  "version": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "854bcd03b392cbf56401bdbdbf08191c4a04385b"
+  },
+  "owner": "runtime/commercial",
+  "objects": [
+    "Offer", "Price", "Currency", "Region", "Customer Segment",
+    "Order", "Payment", "Payment Attempt", "Payment Receipt", "Refund",
+    "Settlement", "Payment Provider", "Payment Provider Policy",
+    "Payment Provider Configuration", "Payment Provider Status"
+  ],
+  "separationRules": {
+    "offerOwnsProduct": false,
+    "offerReferencesProductVersion": true,
+    "priceOwnsProduct": false,
+    "offerReferencesPrice": true,
+    "orderOwnsPayment": false,
+    "paymentReferencesOrder": true,
+    "paymentOwnsProvider": false,
+    "paymentAttemptReferencesProvider": true,
+    "providerFailureChangesProduct": false,
+    "providerFailureChangesOfferOrPrice": false
+  },
+  "providerRules": {
+    "registryPresenceIsProductionRequirement": false,
+    "providerIsPaymentAuthority": false,
+    "credentialsStoredInRegistry": false,
+    "configurationUsesExternalReferenceOnly": true,
+    "policyRequiredBeforeAttempt": true,
+    "statusRequiredBeforeAttempt": true,
+    "registeredStatusAllowsProductionAttempt": false,
+    "futureProviderRegistrationSupported": true
+  },
+  "registeredProviders": [
+    {"providerCode":"stripe","kind":"gateway","status":"configured","legacyIntegration":true},
+    {"providerCode":"fpx","kind":"bank_rail","status":"registered","legacyIntegration":false},
+    {"providerCode":"duitnow","kind":"payment_rail","status":"registered","legacyIntegration":false},
+    {"providerCode":"touch-n-go-ewallet","kind":"wallet","status":"registered","legacyIntegration":false}
+  ],
+  "stateRules": {
+    "orderUsesCanonicalStates": true,
+    "paymentUsesCanonicalStates": true,
+    "failedAttemptDoesNotConfirmOrder": true,
+    "receiptRequiresSucceededPayment": true,
+    "refundCannotExceedPayment": true,
+    "settlementMustReconcile": true
+  },
+  "boundaries": {
+    "createsEntitlement": false,
+    "activatesJourney": false,
+    "createsProfessionalAssignment": false,
+    "invokesProvider": false,
+    "changesExistingStripeFlow": false,
+    "publicPageBehaviorChanged": false
+  },
+  "storage": {
+    "runtimeProjection": "in_memory_contract_runtime",
+    "schemaChanged": false,
+    "migrationAdded": false,
+    "d1Changed": false
+  },
+  "freeze": "PWS-I4-W2-Passed"
+}
