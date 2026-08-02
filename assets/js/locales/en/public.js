@@ -34,16 +34,54 @@ const publicExperience = Object.freeze({
     }
   },
   discover: {
-    metaTitle: 'Discover PHI OS — Reality Navigation',
+    metaTitle: 'Discover PHI OS — Understand changing reality',
     skip: 'Skip to Discover',
     hero: {
       eyebrow: 'PHI OS · Reality Navigation',
+      title: 'Understand what is changing before deciding what to do next.',
       line1: 'Reality has structure.',
       line2: 'Reality can be understood.',
       line3: 'Reality can be navigated.',
-      lead: 'PHI OS connects research, knowledge and an evidence-aware Reality Journey so changing reality can be observed, reconstructed and navigated over time.',
-      demo: 'Watch the Reality Demo',
-      knowledge: 'Explore Knowledge'
+      lead: 'PHI OS helps you organize a changing situation, distinguish what you know from what you are interpreting, and find a direction you can review over time.',
+      distinction: 'It is not a general chatbot that gives an instant answer. It keeps the situation, evidence, uncertainty and next steps connected.',
+      primary: 'Understand the Reality Journey',
+      secondaryLabel: 'Other ways to begin',
+      demo: 'Experience the free Demo',
+      knowledge: 'Browse free Knowledge',
+      professional: 'Understand Professional services'
+    },
+    value: {
+      eyebrow: 'What PHI OS helps you see',
+      title: 'A difficult situation is usually more than one isolated question.',
+      example: 'A change in work can also affect money, confidence, relationships and timing. A quick answer may address one part while losing how the parts are connected.',
+      explanation: 'PHI OS helps you describe the change, examine how it formed, understand the current picture, choose a bounded direction and later compare it with what actually changed.'
+    },
+    routes: {
+      eyebrow: 'Three clear entrances',
+      title: 'Start with the kind of help you need now.',
+      journeyStatus: 'PRIMARY · FREE OVERVIEW',
+      journeyTitle: 'Reality Journey',
+      journeyCopy: 'Understand the guided path from describing a change to choosing and reviewing a direction.',
+      journeyAction: 'See the Journey',
+      knowledgeStatus: 'FREE PUBLIC CONTENT',
+      knowledgeTitle: 'Knowledge',
+      knowledgeCopy: 'Explore the Thesis, articles, Book I, figures and Atlas without starting a personal journey.',
+      knowledgeAction: 'Browse Knowledge',
+      professionalStatus: 'SEPARATE PAID SERVICES',
+      professionalTitle: 'Professional',
+      professionalCopy: 'Understand services that involve a qualified person, separate consent, scope, price and responsibility.',
+      professionalAction: 'View Professional services'
+    },
+    boundary: {
+      eyebrow: 'How PHI OS keeps boundaries',
+      title: 'Understanding comes before conclusions.',
+      evidenceTitle: 'Evidence stays distinct',
+      evidenceCopy: 'What happened, what you reported and what is interpreted are not presented as the same thing.',
+      unknownTitle: 'Unknowns stay visible',
+      unknownCopy: 'Missing information is named instead of being filled with a confident guess.',
+      responsibilityTitle: 'Human responsibility remains',
+      responsibilityCopy: 'PHI OS does not turn automated output into diagnosis, regulated advice or professional responsibility.',
+      action: 'Read why PHI OS was built'
     },
     problem: {
       eyebrow: 'The question beneath the questions',
@@ -106,18 +144,22 @@ const publicExperience = Object.freeze({
     }
   },
   aboutPublic: {
-    metaTitle: 'About PHI OS — Research, Architecture and Ecosystem',
+    metaTitle: 'About PHI OS — Purpose, responsibility and trust',
     skip: 'Skip to About PHI OS',
     hero: {
       eyebrow: 'About PHI OS',
-      title: 'A research path becoming public infrastructure.',
-      lead: 'PHI OS grew from a question about continuity: how can intelligence remain oriented to a specific reality while that reality keeps changing?',
+      title: 'Built to keep a changing reality understandable.',
+      lead: 'PHI OS began with a practical problem: useful answers lose their meaning when the situation, evidence and changes around them are not carried forward.',
+      action: 'Read the design responsibilities',
       thesis: 'Read the Thesis',
       demo: 'Experience the Demo'
     },
     index: {
       label: 'On this page',
       why: 'Why PHI OS',
+      responsibility: 'Design responsibility',
+      limits: 'What PHI OS does not do',
+      trust: 'Builder and trust',
       research: 'Research Foundation',
       books: 'Three Books',
       architecture: 'Fourteen-Part Architecture',
@@ -126,10 +168,35 @@ const publicExperience = Object.freeze({
     },
     why: {
       eyebrow: '01 · Why PHI OS',
-      title: 'We do not lack intelligence. We lack continuity.',
-      statement: 'Reality does not arrive as one question with one answer.',
-      body1: 'A transition may involve identity, relationships, resources, timing, health, responsibility and future direction at the same time.',
-      body2: 'Knowledge is divided into disciplines. Reality is not. PHI OS therefore begins by preserving the evolving context that gives any answer its meaning.'
+      title: 'Reality does not arrive as one question with one answer.',
+      statement: 'A change in one area can alter work, money, relationships, health, identity and future choices at the same time.',
+      body1: 'Most tools respond to the latest prompt. PHI OS was built to help preserve how a situation develops, what supports each interpretation and what remains uncertain.',
+      body2: 'The purpose is not to replace judgment. It is to make the reality being judged easier to see and revisit.'
+    },
+    responsibility: {
+      eyebrow: '02 · Design responsibility',
+      title: 'Reality first. Understanding before intervention.',
+      contextTitle: 'Keep context connected',
+      contextCopy: 'A response should remain connected to the situation and changes that give it meaning.',
+      evidenceTitle: 'Separate evidence and interpretation',
+      evidenceCopy: 'Reported experience, observed facts, interpretation and unknowns must remain distinguishable.',
+      reviewTitle: 'Make direction reviewable',
+      reviewCopy: 'A next step should be bounded and later compared with what actually changed.'
+    },
+    limits: {
+      eyebrow: '03 · What PHI OS does not do',
+      title: 'The platform does not turn uncertainty into authority.',
+      body1: 'PHI OS does not present an automated interpretation as fact, diagnosis, legal advice, financial recommendation or a professional decision.',
+      body2: 'Public Knowledge and the Demo are free orientation routes. A personal Journey is a separate experience. Professional work has separate scope, consent, price and human responsibility.',
+      action: 'Read the Professional boundary'
+    },
+    trust: {
+      eyebrow: '04 · Builder and trust',
+      title: 'Research led by Teresa Lee, made accountable in public.',
+      body1: 'Teresa Lee founded PHI OS after years of working across financial planning, organizational systems and different frameworks for understanding human experience.',
+      body2: 'The work asks why different systems can each reveal something useful while still losing the whole situation across time. PHI OS makes its evidence boundaries, AI use, privacy terms and professional limits visible so visitors can judge the platform before relying on it.',
+      aiAction: 'Read the AI disclosure',
+      privacyAction: 'Read the Privacy policy'
     },
     research: {
       eyebrow: '02 · Research Foundation',

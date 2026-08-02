@@ -34,16 +34,54 @@ const publicExperience = Object.freeze({
     }
   },
   discover: {
-    metaTitle: '发现 PHI OS — 现实导航',
+    metaTitle: '发现 PHI OS — 理解变化中的现实',
     skip: '跳至发现 PHI OS',
     hero: {
       eyebrow: 'PHI OS · 现实导航',
+      title: '先理解正在发生什么，再决定下一步怎么走。',
       line1: '现实具有结构。',
       line2: '现实可以被理解。',
       line3: '现实可以被导航。',
-      lead: 'PHI OS 连接研究、知识与尊重证据的现实旅程，使变化中的现实能够随时间被观察、重建与导航。',
-      demo: '观看现实 Demo',
-      knowledge: '探索知识'
+      lead: 'PHI OS 帮助你整理一个正在变化的处境，分清已经知道的内容与正在作出的解释，并找到一个日后可以回看的方向。',
+      distinction: '它不是一个立即给出答案的一般聊天机器人，而是让处境、证据、不确定之处与下一步保持连接。',
+      primary: '了解现实旅程',
+      secondaryLabel: '其他开始方式',
+      demo: '体验免费 Demo',
+      knowledge: '浏览免费知识内容',
+      professional: '了解专业服务'
+    },
+    value: {
+      eyebrow: 'PHI OS 帮助你看见什么',
+      title: '一个困难处境，通常不只是一个孤立问题。',
+      example: '工作上的变化，也可能同时影响金钱、信心、关系与时机。一个快速答案或许回应了其中一部分，却失去了这些部分如何互相连接。',
+      explanation: 'PHI OS 帮助你描述变化、查看它如何形成、理解当前全貌、选择一个有边界的方向，并在之后与真正发生的变化进行比较。'
+    },
+    routes: {
+      eyebrow: '三个清楚入口',
+      title: '从你现在需要的帮助开始。',
+      journeyStatus: '主要入口 · 免费概览',
+      journeyTitle: '现实旅程',
+      journeyCopy: '了解一条从描述变化，到选择方向并回看结果的引导路径。',
+      journeyAction: '查看现实旅程',
+      knowledgeStatus: '免费公共内容',
+      knowledgeTitle: '知识',
+      knowledgeCopy: '无需开始个人旅程，也可以浏览论文、文章、第一册、图示与现实地图集。',
+      knowledgeAction: '浏览知识',
+      professionalStatus: '独立付费服务',
+      professionalTitle: '专业服务',
+      professionalCopy: '了解由合资格人员参与，并具有独立同意、范围、价格与责任的服务。',
+      professionalAction: '查看专业服务'
+    },
+    boundary: {
+      eyebrow: 'PHI OS 如何保持边界',
+      title: '先理解，再下结论。',
+      evidenceTitle: '证据保持分开',
+      evidenceCopy: '发生的事情、你所报告的内容与系统作出的解释，不会被呈现为同一件事。',
+      unknownTitle: '未知保持可见',
+      unknownCopy: '缺少的资料会被明确指出，而不会由一个看似肯定的猜测填补。',
+      responsibilityTitle: '人类责任不变',
+      responsibilityCopy: 'PHI OS 不会把自动输出变成诊断、受监管建议或专业责任。',
+      action: '阅读 PHI OS 为什么被建立'
     },
     problem: {
       eyebrow: '所有问题之下的问题',
@@ -106,18 +144,22 @@ const publicExperience = Object.freeze({
     }
   },
   aboutPublic: {
-    metaTitle: '关于 PHI OS — 研究、架构与生态',
+    metaTitle: '关于 PHI OS — 目的、责任与信任',
     skip: '跳至关于 PHI OS',
     hero: {
       eyebrow: '关于 PHI OS',
-      title: '一条正在成为公共基础设施的研究路径。',
-      lead: 'PHI OS 源于一个关于连续性的问题：当一个具体的现实持续变化时，智能如何仍然保持对它的定位？',
+      title: '为了让变化中的现实持续可以被理解。',
+      lead: 'PHI OS 始于一个实际问题：当处境、证据及其变化没有被延续保留，再有用的答案也会逐渐失去原本的意义。',
+      action: '阅读设计责任',
       thesis: '阅读研究论文',
       demo: '体验 Demo'
     },
     index: {
       label: '本页内容',
       why: '为什么是 PHI OS',
+      responsibility: '设计责任',
+      limits: 'PHI OS 不做什么',
+      trust: '建立者与信任',
       research: '研究基础',
       books: '三本书',
       architecture: '十四部架构',
@@ -126,10 +168,35 @@ const publicExperience = Object.freeze({
     },
     why: {
       eyebrow: '01 · 为什么是 PHI OS',
-      title: '我们不缺智能。我们缺少连续性。',
-      statement: '现实并不是一个只有一个答案的问题。',
-      body1: '一次转变可能同时涉及身份、关系、资源、时机、健康、责任与未来方向。',
-      body2: '知识被划分为不同学科，现实却不是。PHI OS 因此从保留持续演变的背景开始，因为这些背景赋予任何答案真正的含义。'
+      title: '现实并不是一个只有一个答案的问题。',
+      statement: '一个领域的变化，可能同时改变工作、金钱、关系、健康、身份与未来选择。',
+      body1: '大多数工具回应最近一次提问。PHI OS 则尝试保留处境如何发展、每一种解释由什么支持，以及哪些部分仍然无法确定。',
+      body2: '目的不是取代判断，而是让正在被判断的现实更容易被看见，也能够在之后重新查看。'
+    },
+    responsibility: {
+      eyebrow: '02 · 设计责任',
+      title: '现实优先，理解先于介入。',
+      contextTitle: '让背景保持连接',
+      contextCopy: '每一个回应都应继续连接赋予它意义的处境与变化。',
+      evidenceTitle: '分开证据与解释',
+      evidenceCopy: '个人报告、已观察事实、解释与未知内容必须保持可区分。',
+      reviewTitle: '让方向可以回看',
+      reviewCopy: '下一步应具有边界，并能在之后与真正发生的变化进行比较。'
+    },
+    limits: {
+      eyebrow: '03 · PHI OS 不做什么',
+      title: '平台不会把不确定变成权威。',
+      body1: 'PHI OS 不会把自动解释呈现为事实、诊断、法律意见、财务建议或专业决定。',
+      body2: '公共知识与 Demo 是免费认识入口；个人现实旅程是独立体验；专业工作则拥有独立范围、同意、价格与人类责任。',
+      action: '阅读专业边界'
+    },
+    trust: {
+      eyebrow: '04 · 建立者与信任',
+      title: '由 Teresa Lee 主导研究，并以公开责任建立信任。',
+      body1: 'Teresa Lee 在多年理财规划、组织系统及不同人类经验理解框架的工作基础上，创立了 PHI OS。',
+      body2: '这项工作探索：为什么不同系统都能揭示有用内容，却仍会随时间失去完整处境。PHI OS 公开呈现证据边界、AI 使用、隐私条款与专业限制，让访客在依赖平台之前可以自行判断。',
+      aiAction: '阅读 AI 披露',
+      privacyAction: '阅读隐私政策'
     },
     research: {
       eyebrow: '02 · 研究基础',

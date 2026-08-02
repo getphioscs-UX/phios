@@ -244,7 +244,10 @@ for (const page of evidence.publicInformationArchitecture.articlePages) {
   assert(html.includes('/assets/js/pages/article.js'));
   assert(html.includes('/assets/css/knowledge-release.css'));
 }
-for (const page of ['index.html', 'library.html', 'book-one.html', 'thesis.html', 'explore.html']) {
+const expW2 = await readJson('docs/experience/EXP-W2-home-discover-about-contract.json');
+assert.equal(expW2.freezeId, 'EXP-W2-v1.0.0-Frozen');
+assert.equal((await read('index.html')).includes('data-knowledge-article-grid'), false);
+for (const page of ['library.html', 'book-one.html', 'thesis.html', 'explore.html']) {
   const html = await read(page);
   assert(html.includes('data-knowledge-article-grid'));
   assert(html.includes('/assets/js/pages/knowledge-connections.js'));

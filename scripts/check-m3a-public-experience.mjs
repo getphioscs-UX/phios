@@ -83,22 +83,19 @@ assert.ok(shell.includes("id: 'professional', href: '/services'"), 'Public shell
 
 const home = read('index.html');
 for (const statement of [
-  'Reality has structure.',
-  'Reality can be understood.',
-  'Reality can be navigated.',
-  'Explore Knowledge',
-  'Experience Reality Journey',
-  'Discover PHI OS'
+  'Understand what is changing before deciding what to do next.',
+  'It is not a general chatbot',
+  'Understand the Reality Journey',
+  'Browse free Knowledge',
+  'Understand Professional services'
 ]) {
   assert.ok(home.includes(statement), `Discover is missing: ${statement}`);
 }
 
 for (const section of [
-  'problem-title',
   'entries-title',
-  'overview-title',
-  'ecosystem-title',
-  'book-preview-title'
+  'value-title',
+  'boundary-title'
 ]) {
   assert.ok(home.includes(`id="${section}"`), `Discover is missing #${section}`);
 }
@@ -106,19 +103,13 @@ for (const section of [
 const about = read('about.html');
 for (const section of [
   'why-phios',
-  'research-foundation',
-  'three-books',
-  'fourteen-part-architecture',
-  'platform',
-  'future-ecosystem',
-  'figure-v2'
+  'responsibility',
+  'limits',
+  'trust'
 ]) {
   assert.ok(about.includes(`id="${section}"`), `About is missing #${section}`);
 }
-assert.ok(
-  about.includes('Figure V.2 · PHI OS Ecosystem Architecture'),
-  'About must include Figure V.2'
-);
+assert.ok(about.includes('Teresa Lee'), 'About must include builder trust information');
 
 const demo = read('reality-demo.html');
 for (const label of [
