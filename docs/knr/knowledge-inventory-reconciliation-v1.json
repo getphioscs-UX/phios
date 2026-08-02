@@ -1,0 +1,69 @@
+{
+  "contract": "PHI-OS-KNR-KNOWLEDGE-INVENTORY-RECONCILIATION-v1.0.0",
+  "stage": "KNR-W0R",
+  "status": "frozen",
+  "baseline": "fd402e6b0565430078707a588cc5ae63e675f483",
+  "authorityMap": {
+    "PKR": "Canonical Knowledge identity, boundary and relationships",
+    "PJA": "Canonical Article production, editorial, export and publication",
+    "KNR": "Published-only retrieval, ranking, coverage and adaptive projection"
+  },
+  "historicalNaming": {
+    "term": "Knowledge Runtime Registry",
+    "meaningAtFreeze": "PKR Canonical Knowledge Registry",
+    "currentRuntimeProgramme": "KNR",
+    "frozenDocumentsRewritten": false
+  },
+  "activeInventory": [
+    "content/knowledge/registry",
+    "content/knowledge/articles",
+    "content/knowledge/runtime",
+    "docs/knowledge",
+    "docs/pja",
+    "docs/knr"
+  ],
+  "generatedReadModels": [
+    "content/knowledge/runtime/index"
+  ],
+  "historicalGovernedInventory": [
+    "content/knowledge/editorial/c2",
+    "content/knowledge/editorial/c3",
+    "content/knowledge/production",
+    "content/knowledge/readiness"
+  ],
+  "removedInventory": [
+    {
+      "path": "docs/knowledge/runtime",
+      "reason": "Seven byte-identical PKR document copies and one older PKR data-model copy created a false second Knowledge Runtime documentation authority."
+    },
+    {
+      "path": "EXP-W4A.patch",
+      "reason": "Unreferenced root delivery patch residue."
+    },
+    {
+      "path": "EXP-W5.patch",
+      "reason": "Unreferenced root delivery patch residue."
+    },
+    {
+      "path": "content/knowledge/registry/m3c-navigation-operationalization.json",
+      "reason": "Misplaced Navigation acceptance record; canonical location remains content/registry/m3c-navigation-operationalization.json."
+    }
+  ],
+  "preservedInventory": {
+    "canonicalNodes": 78,
+    "publishedLocalizedArticles": 6,
+    "c2Candidates": 77,
+    "c3Assessments": 78,
+    "productionHistoryRemoved": false,
+    "canonicalKnowledgeChanged": false,
+    "publishedArticleContentChanged": false
+  },
+  "boundaries": {
+    "routingImplemented": false,
+    "rankingImplemented": false,
+    "adaptiveProjectionImplemented": false,
+    "providerEnabled": false,
+    "runtimeWritten": false,
+    "publicationWritten": false
+  }
+}
