@@ -15,7 +15,8 @@ for (const view of ['customer', 'evidence', 'technical']) {
   assert.match(page, new RegExp(`data-reading-experience-panel="${view}"`));
 }
 for (const hook of [
-  'data-reading-summary', 'data-reading-runtime-chain',
+  'data-reading-value="what_changed"', 'data-reading-value="persistence"',
+  'data-reading-related-conditions',
   'data-reading-priority-customer', 'data-reading-priority-evidence',
   'data-reading-alternative', 'data-reading-confidence-explanation',
   'data-reading-unknown-questions', 'data-reading-navigation-rationale',

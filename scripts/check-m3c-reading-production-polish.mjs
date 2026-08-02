@@ -42,8 +42,8 @@ assert.match(
 );
 assert.doesNotMatch(`${atlasEn}\n${atlasZh}`, /Reality Reading Architecture|现实读取架构/);
 
-assert.match(readingEn, /PHI OS does not explain reality; it reads how reality forms\./);
-assert.match(readingZh, /PHI OS 并不解释现实，而是读取现实如何形成。/);
+assert.match(readingEn, /Start with the clearest current understanding, then review its basis and limits when you need them\./);
+assert.match(readingZh, /先看目前最清楚的理解，需要时再查看它的依据与边界。/);
 assert.match(readingEn, /Current Reading maturity/);
 assert.match(readingZh, /当前读取成熟度/);
 

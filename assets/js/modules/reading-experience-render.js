@@ -33,6 +33,18 @@ function renderSummary(experience) {
     '[data-reading-experience-field="one_sentence_reading"]',
     summary.one_sentence_reading
   );
+  setText('[data-reading-value="what_changed"]', summary.what_changed);
+  setText(
+    '[data-reading-value="persistence"]',
+    [summary.operating_pattern, summary.protective_function]
+      .map(cleanText)
+      .filter(Boolean)
+      .join(' ')
+  );
+  setHTML('[data-reading-related-conditions]', `
+    <p>${escapeHTML(cleanText(summary.current_tension))}</p>
+    <p>${escapeHTML(cleanText(summary.current_cost))}</p>
+  `);
   const keys = [
     'what_changed',
     'operating_pattern',
@@ -63,7 +75,7 @@ function renderChain(experience) {
 function renderPriority(experience) {
   const items = list(experience.priority_evidence);
   setHTML('[data-reading-priority-customer]', items.map(item => `
-    <li>
+    <li data-reading-kind="${escapeHTML(cleanText(item.classification))}">
       <strong>${escapeHTML(cleanText(item.canonical_text))}</strong>
       <p>${escapeHTML(cleanText(item.reason_selected))}</p>
       <small>${escapeHTML(t(
@@ -134,7 +146,7 @@ function renderCustomerUnknowns(experience) {
   );
   const render = (selector, values, text) => {
     setHTML(selector, values.length
-      ? values.map(item => `<li>${escapeHTML(cleanText(text(item)))}</li>`).join('')
+      ? values.map(item => `<li data-reading-kind="${escapeHTML(cleanText(item.classification || 'unknown'))}">${escapeHTML(cleanText(text(item)))}</li>`).join('')
       : `<li>${escapeHTML(t('reading.dynamic.notEstablished'))}</li>`);
   };
   render('[data-reading-known]', known, item => item.canonical_text);
