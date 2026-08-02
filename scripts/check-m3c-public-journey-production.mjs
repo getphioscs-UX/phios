@@ -13,7 +13,7 @@ if (!configuredBase) {
 
 const base = configuredBase.replace(/\/+$/, '');
 const routes = [
-  { path: '/reality-journey', token: 'id="stage-entry"' },
+  { path: '/reality-journey', token: 'id="journey-flow-title"' },
   { path: '/reality-dashboard', token: 'id="resumeJourney"' },
   { path: '/reality-entry', token: 'id="entryRecoveryGate"' },
   { path: '/reality-reconstruction', token: 'id="reconstructionWorkspace"' },
