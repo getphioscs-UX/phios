@@ -1,11 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { buildPortfolio, buildPreparedPackage, loadAuthority, NODE_ROOT, sha } from './lib/knowledge-production/scalable-article-workflow.mjs';
+import { compareCandidate, generatePrompt, importCandidate, promoteCandidate } from './lib/knowledge-production/governed-editorial-generation.mjs';
 
 const args = process.argv.slice(2), command = args[0], nodeCode = args[1] && !args[1].startsWith('--') ? args[1] : null, root = process.cwd();
 const apply = args.includes('--apply'), dryRun = args.includes('--dry-run') || !apply;
-if (!['prepare', 'draft', 'review', 'approve', 'export', 'publish', 'status', 'wave'].includes(command)) stop('UNKNOWN_COMMAND', 2);
-if (!nodeCode && command !== 'wave') stop('NODE_CODE_REQUIRED', 2);
+if (!['prepare', 'draft', 'review', 'approve', 'export', 'publish', 'status', 'wave', 'generate', 'import-candidate', 'compare', 'promote-candidate'].includes(command)) stop('UNKNOWN_COMMAND', 2);
+if (!nodeCode && command !== 'wave' && !(command === 'generate' && option('--wave'))) stop('NODE_CODE_REQUIRED', 2);
 
 try {
   if (command === 'prepare' || command === 'draft') prepare();
@@ -14,6 +15,10 @@ try {
   else if (command === 'export') exportPackage();
   else if (command === 'publish') publish();
   else if (command === 'status') status();
+  else if (command === 'generate') commandGenerate();
+  else if (command === 'import-candidate') console.log(JSON.stringify(importCandidate(root, nodeCode, option('--file'), { apply, replace: args.includes('--replace-candidate'), importedAt: option('--imported-at'), importedBy: option('--imported-by'), model: option('--model') }), null, 2));
+  else if (command === 'compare') console.log(JSON.stringify(compareCandidate(root, nodeCode, true), null, 2));
+  else if (command === 'promote-candidate') console.log(JSON.stringify(promoteCandidate(root, nodeCode, { apply, reviewer: option('--reviewer'), decision: option('--decision'), decidedAt: option('--decided-at'), editedFile: option('--file') }), null, 2));
   else wave();
 } catch (error) { stop(error.code || error.message, error.code === 'NODE_NOT_FOUND' ? 2 : 2); }
 
@@ -67,6 +72,18 @@ function exportPackage() {
 function publish() { const exportPath = path.join(root, `content/knowledge/exports/${nodeCode.toLowerCase()}/production-export.json`), approvalPath = path.join(root, `content/knowledge/publication/${nodeCode.toLowerCase()}/publication-approval.json`); if (!fs.existsSync(exportPath)) throw coded('PRODUCTION_EXPORT_REQUIRED'); if (!fs.existsSync(approvalPath)) throw coded('PUBLICATION_APPROVAL_REQUIRED'); throw coded('W3R1_PUBLICATION_DISABLED'); }
 function status() { const packageRoot = NODE_ROOT(nodeCode), built = buildPreparedPackage(root, nodeCode), approvalPath = path.join(root, packageRoot, 'editorial-review.json'), approval = fs.existsSync(approvalPath) ? JSON.parse(fs.readFileSync(approvalPath)) : null; const derivedWarnings = []; for (const [name, expectedHash] of Object.entries(built.manifest.derivedHashes)) { const target = path.join(root, packageRoot, name); if (fs.existsSync(target) && sha(fs.readFileSync(target)) !== expectedHash) derivedWarnings.push(`derived_artifact_modified:${name}`); } console.log(JSON.stringify({ command, nodeCode, productionReadiness: 'production_ready', packageStatus: fs.existsSync(path.join(root, packageRoot, 'production-package.json')) ? built.manifest.status : 'not_prepared', draftHash: built.draftHash, editorialApproval: approval?.draftHash === built.draftHash ? approval.decision : approval ? 'stale' : 'missing', exportStatus: 'not_exported', publicationStatus: 'not_published', warnings: derivedWarnings }, null, 2)); }
 function wave() { const portfolio = buildPortfolio(root); console.log(JSON.stringify({ command, status: 'portfolio_projection', nodeCount: portfolio.entries.length, secondCanonicalRegistry: false, waveLimits: { pilot: 1, wave1: 8, wave2: 12, mature: 24 }, writes: 0 }, null, 2)); }
+function commandGenerate() {
+  const waveCode = option('--wave');
+  if (!waveCode) return console.log(JSON.stringify(generatePrompt(root, nodeCode, apply), null, 2));
+  const candidates = [`content/knowledge/production/waves/${waveCode}.json`, `content/knowledge/production/waves/${waveCode}/wave.json`], wavePath = candidates.map(value => path.join(root, value)).find(fs.existsSync);
+  if (!wavePath) throw coded('WAVE_NOT_FOUND'); const waveRecord = JSON.parse(fs.readFileSync(wavePath, 'utf8')), nodeCodes = waveRecord.nodeCodes || waveRecord.nodes?.map(value => value.nodeCode || value) || [];
+  if (nodeCodes.length > 24) throw coded('WAVE_SIZE_EXCEEDED'); const results = nodeCodes.map(code => generatePrompt(root, code, apply));
+  const state = code => { const base = path.join(root, NODE_ROOT(code)); return { promptReady: fs.existsSync(path.join(base, 'prompt.md')), candidateImported: fs.existsSync(path.join(base, 'candidate.md')), candidatePassed: fs.existsSync(path.join(base, 'candidate-review.json')) && JSON.parse(fs.readFileSync(path.join(base, 'candidate-review.json'))).blockingFindings.length === 0, candidateBlocked: fs.existsSync(path.join(base, 'candidate-review.json')) && JSON.parse(fs.readFileSync(path.join(base, 'candidate-review.json'))).blockingFindings.length > 0, candidatePromoted: fs.existsSync(path.join(base, 'candidate-promotion.json')), humanEditorialApproved: fs.existsSync(path.join(base, 'editorial-review.json')) && JSON.parse(fs.readFileSync(path.join(base, 'editorial-review.json'))).decision === 'approved' }; };
+  const states = nodeCodes.map(state), manifest = { schemaVersion: 'PHI-OS-PJA-W3R2-GENERATION-MANIFEST-v1.0.0', authority: 'derived_projection_only', secondProductionRegistry: false, waveCode, nodeCodes, promptReady: states.filter(value => value.promptReady).length, candidateImported: states.filter(value => value.candidateImported).length, candidatePassed: states.filter(value => value.candidatePassed).length, candidateBlocked: states.filter(value => value.candidateBlocked).length, candidatePromoted: states.filter(value => value.candidatePromoted).length, humanEditorialApproved: states.filter(value => value.humanEditorialApproved).length, stale: 0, conflicted: 0, providerInvocation: 'disabled' };
+  const manifestPath = path.join(root, `content/knowledge/production/waves/${waveCode}/generation-manifest.json`), manifestValue = `${JSON.stringify(manifest, null, 2)}\n`, manifestChange = !fs.existsSync(manifestPath) || fs.readFileSync(manifestPath, 'utf8') !== manifestValue;
+  if (apply && manifestChange) { fs.mkdirSync(path.dirname(manifestPath), { recursive: true }); const temporary = `${manifestPath}.tmp`; fs.writeFileSync(temporary, manifestValue); fs.renameSync(temporary, manifestPath); }
+  console.log(JSON.stringify({ command, waveCode, mode: apply ? 'apply' : 'dry-run', nodeCodes, promptReady: results.filter(value => ['applied', 'no_op'].includes(value.status)).map(value => value.nodeCode), candidateMissing: nodeCodes.filter(code => !fs.existsSync(path.join(root, NODE_ROOT(code), 'candidate.md'))), generationManifest: { path: path.relative(root, manifestPath), action: manifestChange ? (apply ? 'written' : 'would_write') : 'no_op' }, results, providerInvocation: 'disabled', candidatesGenerated: 0 }, null, 2));
+}
 function validateSource(relative) { const absolute = path.resolve(root, relative); if (!absolute.startsWith(`${root}${path.sep}`) || path.extname(absolute) !== '.md' || !fs.existsSync(absolute)) throw coded('INVALID_SOURCE_MANUSCRIPT_PATH'); const providedBy = option('--provided-by'), providedAt = option('--provided-at'); if (!providedBy || !providedAt) throw coded('SOURCE_PROVENANCE_REQUIRED'); const startHeading = option('--start-heading'), endHeading = option('--end-heading'); if (Boolean(startHeading) !== Boolean(endHeading)) throw coded('SOURCE_RANGE_INCOMPLETE'); return { source: relative, sourceHash: sha(fs.readFileSync(absolute)), language: option('--language') || 'zh-Hans', providedBy, providedAt, startHeading, endHeading }; }
 function option(name) { const index = args.indexOf(name); return index >= 0 ? args[index + 1] : null; }
 function coded(code) { const error = new Error(code); error.code = code; return error; }

@@ -297,6 +297,7 @@ for (const articleFile of articleFiles) {
 const articleBodyAlternatives = await Promise.all([
   filesIn('content/knowledge').then(files => files.filter(file => (
     !file.startsWith('content/knowledge/production/') &&
+    !file.startsWith('content/knowledge/governance/prompt-templates/') &&
     (file.endsWith('.md') || file.endsWith('.html'))
   ))),
   filesIn('articles').then(files => files.filter(file => (
