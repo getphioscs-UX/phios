@@ -1,10 +1,11 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const root = process.cwd();
-const read = file => fs.readFile(path.join(root, file), 'utf8');
+const read = file => fs.readFile(path.join(root, file), 'utf8')
+  .then(content => content.replace(/\r\n?/g, '\n'));
 const readJson = async file => JSON.parse(await read(file));
 const exists = file => fs.access(path.join(root, file)).then(() => true, () => false);
 
