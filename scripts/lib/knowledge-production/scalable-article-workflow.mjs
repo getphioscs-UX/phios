@@ -5,6 +5,7 @@ import path from 'node:path';
 export const NODE_ROOT = nodeCode => `content/knowledge/production/${nodeCode.toLowerCase()}`;
 export const sha = value => `sha256:${crypto.createHash('sha256').update(value).digest('hex')}`;
 const json = value => `${JSON.stringify(value, null, 2)}\n`;
+const canonicalText = value => value.replace(/\r\n?/g, '\n');
 
 export function loadAuthority(root, nodeCode) {
   const read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
@@ -23,7 +24,7 @@ export function loadAuthority(root, nodeCode) {
 
 export function buildPreparedPackage(root, nodeCode, options = {}) {
   const authority = loadAuthority(root, nodeCode), targetRoot = NODE_ROOT(nodeCode), targetDraft = path.join(root, targetRoot, 'draft.md');
-  const draft = fs.existsSync(targetDraft) ? fs.readFileSync(targetDraft, 'utf8') : buildCleanDraft(authority);
+  const draft = fs.existsSync(targetDraft) ? canonicalText(fs.readFileSync(targetDraft, 'utf8')) : buildCleanDraft(authority);
   const draftHash = sha(draft), version = '1.0.0', archetype = primaryArchetype(authority.canonical);
   const sourceCodes = [...new Set(authority.claims.claimCoverage.flatMap(claim => claim.registrySourceCodes))];
   const sourceMap = new Map(authority.sources.sources.map(source => [source.sourceCode, source]));

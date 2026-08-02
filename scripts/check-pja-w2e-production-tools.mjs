@@ -17,7 +17,8 @@ const execFileAsync = promisify(execFile);
 const root = process.cwd();
 const temporaryRelative = '.tmp/pja-w2e-check';
 const temporary = path.join(root, temporaryRelative);
-const fixtures = path.join(root, 'tests/fixtures/knowledge/production-tools');
+const fixtureSource = path.join(root, 'tests/fixtures/knowledge/production-tools');
+const fixtures = path.join(temporary, 'fixtures');
 const run = async (script, args = []) => {
   try {
     const result = await execFileAsync(process.execPath, [script, ...args], {
@@ -57,6 +58,8 @@ const protectedBaseline = new Map(await Promise.all(protectedFiles.map(async fil
 await fs.rm(temporary, { recursive: true, force: true });
 await fs.mkdir(temporary, { recursive: true });
 try {
+  await fs.cp(fixtureSource, fixtures, { recursive: true });
+  await normalizeTextTree(fixtures);
   const packageJson = JSON.parse(await fs.readFile(path.join(root, 'package.json')));
   assert.equal(packageJson.scripts['knowledge:export-brief'], 'node scripts/export-knowledge-production-brief.mjs');
   assert.equal(packageJson.scripts['knowledge:validate-package'], 'node scripts/validate-canonical-article-package.mjs');
@@ -185,7 +188,7 @@ try {
   assert.equal(await exists(formalTarget), false);
   command = await run('scripts/import-canonical-article-package.mjs', [
     'KN-PREFACE-001',
-    'tests/fixtures/knowledge/production-tools/valid-complete-package',
+    `${temporaryRelative}/fixtures/valid-complete-package`,
     '--report-output',
     `${temporaryRelative}/reports`
   ]);
@@ -197,7 +200,7 @@ try {
   const targetRoot = `${temporaryRelative}/import-root`;
   command = await run('scripts/import-canonical-article-package.mjs', [
     'KN-PREFACE-001',
-    'tests/fixtures/knowledge/production-tools/valid-complete-package',
+    `${temporaryRelative}/fixtures/valid-complete-package`,
     '--apply',
     '--target-root',
     targetRoot,
@@ -212,7 +215,7 @@ try {
   assert.equal((await fs.readdir(imported)).length, 6);
   command = await run('scripts/import-canonical-article-package.mjs', [
     'KN-PREFACE-001',
-    'tests/fixtures/knowledge/production-tools/valid-complete-package',
+    `${temporaryRelative}/fixtures/valid-complete-package`,
     '--apply',
     '--target-root',
     targetRoot,
@@ -233,6 +236,18 @@ try {
   console.log('  Registry, Blueprint, W2A–W2D contracts and Renderer remain byte-identical throughout this check.');
 } finally {
   await fs.rm(temporary, { recursive: true, force: true });
+}
+
+async function normalizeTextTree(directory) {
+  for (const entry of await fs.readdir(directory, { withFileTypes: true })) {
+    const absolute = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      await normalizeTextTree(absolute);
+    } else if (entry.isFile() && /\.(json|md|txt)$/i.test(entry.name)) {
+      const content = await fs.readFile(absolute, 'utf8');
+      await fs.writeFile(absolute, content.replace(/\r\n?/g, '\n'), 'utf8');
+    }
+  }
 }
 
 async function gitHead() {

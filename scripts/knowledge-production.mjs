@@ -4,6 +4,7 @@ import { buildPortfolio, buildPreparedPackage, loadAuthority, NODE_ROOT, sha } f
 import { compareCandidate, generatePrompt, importCandidate, promoteCandidate } from './lib/knowledge-production/governed-editorial-generation.mjs';
 
 const args = process.argv.slice(2), command = args[0], nodeCode = args[1] && !args[1].startsWith('--') ? args[1] : null, root = process.cwd();
+const canonicalText = value => value.replace(/\r\n?/g, '\n');
 const apply = args.includes('--apply'), dryRun = args.includes('--dry-run') || !apply;
 if (!['prepare', 'draft', 'review', 'approve', 'export', 'publish', 'status', 'wave', 'generate', 'import-candidate', 'compare', 'promote-candidate'].includes(command)) stop('UNKNOWN_COMMAND', 2);
 if (!nodeCode && command !== 'wave' && !(command === 'generate' && option('--wave'))) stop('NODE_CODE_REQUIRED', 2);
@@ -28,8 +29,8 @@ function prepare() {
   for (const [relative, expected] of built.files) {
     const absolute = path.join(root, relative);
     if (!fs.existsSync(absolute)) changes.push({ path: relative, action: 'create' });
-    else if (relative.endsWith('/draft.md')) { if (fs.readFileSync(absolute, 'utf8') !== expected) changes.push({ path: relative, action: 'preserve_human_draft' }); }
-    else if (fs.readFileSync(absolute, 'utf8') !== expected) changes.push({ path: relative, action: 'update_derived' });
+    else if (relative.endsWith('/draft.md')) { if (canonicalText(fs.readFileSync(absolute, 'utf8')) !== canonicalText(expected)) changes.push({ path: relative, action: 'preserve_human_draft' }); }
+    else if (canonicalText(fs.readFileSync(absolute, 'utf8')) !== canonicalText(expected)) changes.push({ path: relative, action: 'update_derived' });
   }
   const report = { command, mode: dryRun ? 'dry-run' : 'apply', nodeCode, status: changes.some(item => item.action !== 'preserve_human_draft') ? 'changes_planned' : 'no_op', humanEditableFiles: [`${built.targetRoot}/draft.md`], derivedReadOnlyFiles: built.manifest.derivedReadOnlyFiles, changes, productionExportGenerated: false, published: false };
   console.log(JSON.stringify(report, null, 2)); if (dryRun) return;

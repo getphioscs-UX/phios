@@ -18,6 +18,7 @@ import { sha256 } from './lib/knowledge-production/checksum.mjs';
 
 const execFileAsync = promisify(execFile);
 const root = process.cwd();
+const textSha256 = value => sha256(Buffer.from(value).toString('utf8').replace(/\r\n?/g, '\n'));
 const read = file => fs.readFile(path.join(root, file), 'utf8');
 const readJson = async file => JSON.parse(await read(file));
 const protectedFiles = [
@@ -238,7 +239,7 @@ for (const file of protectedFiles) {
     fs.readFile(path.join(root, file)),
     gitFile(file)
   ]);
-  assert.equal(sha256(current), sha256(baseline), `Protected file changed: ${file}`);
+  assert.equal(textSha256(current), textSha256(baseline), `Protected file changed: ${file}`);
 }
 const legacyCurrent = await fs.readFile(
   path.join(root, 'content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json')
@@ -246,7 +247,7 @@ const legacyCurrent = await fs.readFile(
 const legacyBaseline = await gitFile(
   'content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json'
 );
-assert.equal(sha256(legacyCurrent), sha256(legacyBaseline));
+assert.equal(textSha256(legacyCurrent), textSha256(legacyBaseline));
 
 console.log('✓ PJA-W2F-A Universal Canonical Production Readiness passed.');
 console.log(`  ${registeredIdentityCount} Canonical Node identities are registered; Readiness remains limited to the ${prefacePilotCount}-Node Preface pilot.`);

@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { W3A_FILES, buildEditorialPackage, validateEditorialPackage } from './lib/knowledge-production/editorial-package.mjs';
 
 const root = process.cwd();
-const readText = relative => fs.readFileSync(path.join(root, relative), 'utf8');
+const readText = relative => fs.readFileSync(path.join(root, relative), 'utf8').replace(/\r\n?/g, '\n');
 const read = relative => JSON.parse(readText(relative));
 const pkg = read('package.json');
 assert.equal(pkg.scripts['check:pja-w3a'], 'npm run check:pja-w2f-c3r1 && node scripts/check-pja-w3a-editorial-package-foundation.mjs');

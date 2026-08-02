@@ -20,7 +20,9 @@ export function resolveProductionReadinessClosure(root, overrides = {}) {
   const raw = {}, parsed = {};
   for (const [key, relative] of Object.entries(C3R1_PATHS)) {
     const absolute = path.join(root, relative);
-    raw[key] = overrides[key] === undefined ? (fs.existsSync(absolute) ? fs.readFileSync(absolute, 'utf8') : null) : null;
+    raw[key] = overrides[key] === undefined
+      ? (fs.existsSync(absolute) ? fs.readFileSync(absolute, 'utf8').replace(/\r\n?/g, '\n') : null)
+      : null;
     parsed[key] = overrides[key] === undefined ? (raw[key] ? JSON.parse(raw[key]) : null) : overrides[key];
   }
   const blocking = [];

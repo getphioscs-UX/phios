@@ -23,7 +23,8 @@ import {
 const root = process.cwd();
 const renderingFixtureDirectory =
   'tests/fixtures/knowledge/rendering';
-const read = file => fs.readFile(path.join(root, file), 'utf8');
+const read = file => fs.readFile(path.join(root, file), 'utf8')
+  .then(content => content.replace(/\r\n?/g, '\n'));
 const readJson = async file => JSON.parse(await read(file));
 const exists = file => fs.access(path.join(root, file))
   .then(() => true, () => false);

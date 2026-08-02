@@ -6,7 +6,8 @@ import Ajv2020 from 'ajv/dist/2020.js';
 const root = process.cwd();
 const fixtureDirectory = 'tests/fixtures/knowledge/articles';
 const schemaPath = 'content/knowledge/schemas/article-v2.schema.json';
-const read = file => fs.readFile(path.join(root, file), 'utf8');
+const read = file => fs.readFile(path.join(root, file), 'utf8')
+  .then(content => content.replace(/\r\n?/g, '\n'));
 const readJson = async file => JSON.parse(await read(file));
 const exists = file => fs.access(path.join(root, file)).then(
   () => true,

@@ -82,10 +82,12 @@ export function validateEditorialPackage(root, overrides = {}) {
   const expected = buildEditorialPackage(root), errors = [];
   for (const [relative, value] of expected) {
     const actual = Object.hasOwn(overrides, relative) ? overrides[relative] : (fs.existsSync(path.join(root, relative)) ? fs.readFileSync(path.join(root, relative), 'utf8') : null);
-    if (actual === null) errors.push(`PACKAGE_FILE_MISSING:${relative}`); else if (actual !== value) errors.push(`PACKAGE_FILE_MISMATCH:${relative}`);
+    if (actual === null) errors.push(`PACKAGE_FILE_MISSING:${relative}`); else if (canonicalText(actual) !== canonicalText(value)) errors.push(`PACKAGE_FILE_MISMATCH:${relative}`);
   }
   return { valid: errors.length === 0, errors };
 }
+
+const canonicalText = value => value.replace(/\r\n?/g, '\n');
 
 function bindings(values, section) { return values.map((statement, index) => ({ boundaryId: `${anchor(section)}-${index + 1}`, statement, section, covered: true })); }
 function coded(code) { const error = new Error(code); error.code = code; return error; }

@@ -3,11 +3,12 @@ import path from 'node:path';
 import { buildEditorialPackage } from './lib/knowledge-production/editorial-package.mjs';
 
 const root = process.cwd(), apply = process.argv.includes('--apply');
+const canonicalText = value => value.replace(/\r\n?/g, '\n');
 const files = buildEditorialPackage(root), create = [], update = [], existing = [];
 for (const [relative, expected] of files) {
   const absolute = path.join(root, relative);
   if (!fs.existsSync(absolute)) create.push(relative);
-  else if (fs.readFileSync(absolute, 'utf8') === expected) existing.push(relative);
+  else if (canonicalText(fs.readFileSync(absolute, 'utf8')) === canonicalText(expected)) existing.push(relative);
   else update.push(relative);
 }
 const report = { stage: 'PJA-W3A', mode: apply ? 'apply' : 'dry-run', nodeCode: 'KN-PREFACE-001', status: 'validated', existing: existing.length, create: create.length, update: update.length, filesThatWouldChange: [...create, ...update], productionExports: 0, published: 0 };

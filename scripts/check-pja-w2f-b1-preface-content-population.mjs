@@ -14,6 +14,7 @@ import { sha256 } from './lib/knowledge-production/checksum.mjs';
 
 const execFileAsync = promisify(execFile);
 const root = process.cwd();
+const textSha256 = value => sha256(Buffer.from(value).toString('utf8').replace(/\r\n?/g, '\n'));
 const stageTitle = 'PJA-W2F-B1｜Universal Contract and Preface Pilot';
 const systemScope = 'ALL_REGISTERED_CANONICAL_NODES';
 const pilotScope = 'PREFACE';
@@ -229,7 +230,7 @@ try {
       fs.readFile(path.join(root, file)),
       gitFile(file)
     ]);
-    assert.equal(sha256(current), sha256(baseline), `Protected file changed: ${file}`);
+    assert.equal(textSha256(current), textSha256(baseline), `Protected file changed: ${file}`);
   }
 
   console.log(`✓ ${stageTitle} conditionally passed.`);
@@ -425,8 +426,9 @@ function registerUnique(map, value, nodeCode, errorCode) {
   map.set(value, nodeCode);
 }
 
-function read(relative) {
-  return fs.readFile(path.join(root, relative), 'utf8');
+async function read(relative) {
+  return (await fs.readFile(path.join(root, relative), 'utf8'))
+    .replace(/\r\n?/g, '\n');
 }
 
 async function readJson(relative) {
