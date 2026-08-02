@@ -1,0 +1,16 @@
+{
+  "auditId": "PWS-I4-W0-Legacy-Reconciliation-Map",
+  "version": "1.0.0",
+  "entries": [
+    {"legacy":"ServiceProduct / service_product_id","canonical":"Product plus required Service reference","disposition":"mapped_read_compatibility","newWritesAllowed":false,"migration":"mapping only; no data activation"},
+    {"legacy":"ServiceEntitlement / service_entitlement_id","canonical":"Entitlement plus required Service reference","disposition":"mapped_read_compatibility","newWritesAllowed":false,"migration":"mapping only; no entitlement activation"},
+    {"legacy":"functions/pws/product-offer-registry.js","canonical":"functions/pws/registry/product-offer-registry.js","disposition":"re_export_compatibility","newWritesAllowed":false,"migration":"remove imports only after downstream compatibility window"},
+    {"legacy":"content/registry/book-products.json","canonical":"PWS Product/Offer definition plus Book operational adapter","disposition":"preserve_read_adapter","newWritesAllowed":false,"migration":"reconcile operational product snapshot by canonical product/version"},
+    {"legacy":"Book tables in immutable 0004","canonical":"future generic commercial instance stores","disposition":"preserve_and_bridge","newWritesAllowed":true,"migration":"Book writes remain until cutover; never mutate 0004; additive migration and idempotent backfill required"},
+    {"legacy":"professional pricing profiles","canonical":"future approved Offer/Price","disposition":"deferred_unpublished","newWritesAllowed":false,"migration":"do not publish or migrate unapproved amounts"},
+    {"legacy":"professional payment record contract","canonical":"future Payment projection","disposition":"non_authoritative_projection","newWritesAllowed":false,"migration":"map only after verified Payment source exists"},
+    {"legacy":"M4C subscription and entitlement previews","canonical":"future Order/Payment/Entitlement services","disposition":"preview_only","newWritesAllowed":false,"migration":"client preview state must never be imported as verified payment or entitlement"},
+    {"legacy":"Stripe-specific webhook and identifiers","canonical":"provider-neutral Payment event plus Stripe adapter","disposition":"operational_until_adapter_cutover","newWritesAllowed":true,"migration":"preserve provider references and replay identity during dual-read/cutover"}
+  ],
+  "rules":{"deleteLegacyData":false,"mutateMigration0004":false,"activateFromMigration":false,"createAssignmentFromMigration":false,"publishDeferredPrices":false}
+}

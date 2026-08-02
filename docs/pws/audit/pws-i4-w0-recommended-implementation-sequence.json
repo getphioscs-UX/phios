@@ -1,0 +1,16 @@
+{
+  "auditId":"PWS-I4-W0-Recommended-Implementation-Sequence",
+  "version":"1.0.0",
+  "rule":"Complete and freeze one package before beginning the next.",
+  "steps":[
+    {"order":1,"workPackage":"PWS-I4-W1","name":"Commercial Contract and Source-of-Truth Freeze","outcome":"Freeze definition versus instance ownership, Price versions, Order snapshots, Payment facts, Entitlement policies, operations, events and canonical errors."},
+    {"order":2,"workPackage":"PWS-I4-W2","name":"Payment Provider Abstraction","outcome":"Define provider-neutral adapter, normalized event, idempotency and Stripe mapping without changing current Book behaviour."},
+    {"order":3,"workPackage":"PWS-I4-W3","name":"Generic Commercial Persistence","outcome":"Add immutable operational Product/Offer/Price snapshots, Order, Payment and provider-reference storage in a new additive migration."},
+    {"order":4,"workPackage":"PWS-I4-W4","name":"Entitlement and Activation Service","outcome":"Create one Entitlement write owner with separate Book, Journey and future service activation policies; retain all Journey gates."},
+    {"order":5,"workPackage":"PWS-I4-W5","name":"Refund, Credit, Receipt and Settlement Ledgers","outcome":"Add append-only commercial adjustments, provider reconciliation and product-neutral receipt projection."},
+    {"order":6,"workPackage":"PWS-I4-W6","name":"Book Commerce Reconciliation and Cutover","outcome":"Bridge immutable 0004 identities, backfill idempotently, compare facts, then cut over without duplicate writes."},
+    {"order":7,"workPackage":"PWS-I4-W7","name":"Checkout and Consumer Projections","outcome":"Route Book checkout/webhook through canonical services; keep professional and membership surfaces disabled until separately approved."},
+    {"order":8,"workPackage":"PWS-I4-G1","name":"Commercial Runtime Gate","outcome":"Prove security, privacy, replay, refunds, multi-provider readiness, migration reconciliation and provider-independent Journey behaviour."}
+  ],
+  "nextOnly":"PWS-I4-W1"
+}

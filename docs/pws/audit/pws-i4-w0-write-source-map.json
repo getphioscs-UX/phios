@@ -1,0 +1,23 @@
+{
+  "auditId": "PWS-I4-W0-Write-Source-Map",
+  "version": "1.0.0",
+  "sources": [
+    {"scope":"Product definition","canonicalOwner":"runtime/product","currentWriteSource":"PWS Universal Registry through functions/pws/registry/product-offer-registry.js","singleSource":true,"notes":"Legacy module re-exports canonical implementation."},
+    {"scope":"Offer definition","canonicalOwner":"runtime/commercial","currentWriteSource":"PWS Universal Registry through functions/pws/registry/product-offer-registry.js","singleSource":true,"notes":"Only two approved offers; W1A catalog is not write authority."},
+    {"scope":"Price definition","canonicalOwner":"runtime/commercial","currentWriteSource":"Embedded approved offer metadata","singleSource":false,"notes":"No standalone versioned Price writer."},
+    {"scope":"Book product operational snapshot","canonicalOwner":"book commerce adapter","currentWriteSource":"ensureBookProduct -> commerce_products","singleSource":true,"notes":"A projection, not definition authority."},
+    {"scope":"Book checkout attempt","canonicalOwner":"book commerce","currentWriteSource":"functions/api/book-one-checkout.js -> book-commerce-store.js","singleSource":true,"notes":"Idempotency-key hash enforced."},
+    {"scope":"Order","canonicalOwner":"runtime/commercial","currentWriteSource":null,"singleSource":false,"notes":"Book checkout/purchase records approximate order facts but are not canonical Order."},
+    {"scope":"Payment","canonicalOwner":"runtime/commercial","currentWriteSource":null,"singleSource":false,"notes":"Verified Stripe facts update Book purchase; professional payment record is non-persistent."},
+    {"scope":"Book purchase/payment projection","canonicalOwner":"book commerce","currentWriteSource":"verified Stripe webhook -> book-fulfillment.js -> book-commerce-store.js","singleSource":true,"notes":"Stripe session and payment-intent identifiers are persisted."},
+    {"scope":"Refund","canonicalOwner":"runtime/commercial","currentWriteSource":"verified Stripe charge.refunded event for Book only","singleSource":false,"notes":"No canonical refund record; aggregate refunded amount is mutable."},
+    {"scope":"Credit","canonicalOwner":"runtime/commercial","currentWriteSource":null,"singleSource":false,"notes":"Planning only."},
+    {"scope":"Receipt","canonicalOwner":"runtime/commercial future","currentWriteSource":"Book fulfilment transaction -> commerce_receipts","singleSource":false,"notes":"Book-specific receipt JSON."},
+    {"scope":"Entitlement","canonicalOwner":"runtime/entitlement","currentWriteSource":null,"singleSource":false,"notes":"No generic writer."},
+    {"scope":"Book digital entitlement","canonicalOwner":"book commerce bounded projection","currentWriteSource":"verified paid webhook transaction -> digital_entitlements","singleSource":true,"notes":"Refund/revoke also revokes download tokens."},
+    {"scope":"Formal Journey activation","canonicalOwner":"Journey activation policy","currentWriteSource":"existing nine-gate formal activation flow","singleSource":true,"notes":"Provider independent; payment is necessary but insufficient."},
+    {"scope":"Provider event receipt","canonicalOwner":"runtime/commercial future","currentWriteSource":"Stripe-specific commerce_webhook_events","singleSource":false,"notes":"No provider-neutral event envelope."},
+    {"scope":"Settlement","canonicalOwner":"runtime/commercial future","currentWriteSource":null,"singleSource":false,"notes":"No settlement or payout reconciliation."}
+  ],
+  "decision":{"singleProductSource":true,"singleOfferSource":true,"singlePaymentSource":false,"singleEntitlementSource":false,"multipleProviderReady":false,"providerIndependentJourneyRuntime":true}
+}

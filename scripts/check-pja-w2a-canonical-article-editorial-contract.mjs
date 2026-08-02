@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -28,9 +28,11 @@ async function filesIn(directory) {
 }
 
 async function sha256(file) {
+  const canonicalText = (await fs.readFile(path.join(root, file), 'utf8'))
+    .replace(/\r\n?/g, '\n');
   return crypto
     .createHash('sha256')
-    .update(await fs.readFile(path.join(root, file)))
+    .update(canonicalText, 'utf8')
     .digest('hex');
 }
 
