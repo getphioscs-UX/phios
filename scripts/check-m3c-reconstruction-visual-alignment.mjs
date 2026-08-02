@@ -126,17 +126,17 @@ for (const id of [
 }
 
 const progressBlock = page.slice(
-  page.indexOf('<ol data-current-stage="reconstruction"'),
-  page.indexOf('</ol>', page.indexOf('<ol data-current-stage="reconstruction"')) + 5
+  page.indexOf('<ol data-current-stage="discover"'),
+  page.indexOf('</ol>', page.indexOf('<ol data-current-stage="discover"')) + 5
 );
 assert.equal(
   (progressBlock.match(/<li/g) || []).length,
-  7,
-  'Reconstruction header must show all seven Runtime Journey stages'
+  6,
+  'Reconstruction header must show the six customer Reality Journey stages'
 );
 assert.deepEqual(
   [...progressBlock.matchAll(/<data value="([^"]+)"/g)].map(match => match[1]),
-  ['entry', 'reconstruction', 'reading', 'navigation', 'review', 'memory', 'continuity']
+  ['enter', 'describe', 'discover', 'understand', 'choose', 'continue']
 );
 assert.match(progressBlock, /aria-current="step"/);
 assert.match(

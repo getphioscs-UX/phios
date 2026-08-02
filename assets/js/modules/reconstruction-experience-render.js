@@ -142,8 +142,31 @@ function conditionListHTML(values) {
   `).join('');
 }
 
-function influenceListHTML(values) {
+function timelineListHTML(values) {
   const items = uniquePresentationItems(values);
+  if (!items.length) return listHTML([]);
+  return items.map(item => `
+    <li>
+      <span>${escapeHTML(itemText(item))}</span>
+      ${item.event_id ? selectCorrectionForm({
+        targetType: 'timeline_event',
+        targetId: item.event_id,
+        field: 'reported_time',
+        previousValue: item.reported_time,
+        options: [
+          { value: item.reported_time, label: item.reported_time },
+          { value: 'custom', label: t('reconstruction.w14.customCorrection') }
+        ].filter(option => option.value),
+        labelKey: 'reconstruction.w14.adjustTimeline'
+      }) : ''}
+    </li>
+  `).join('');
+}
+
+function influenceListHTML(values) {
+  const items = uniquePresentationItems(values).filter(
+    item => item.confirmation_status !== 'contradicted'
+  );
   if (!items.length) return listHTML([]);
   return items.map(item => `
     <li>
@@ -155,6 +178,14 @@ function influenceListHTML(values) {
         previousValue: item.relation_type,
         options: ['amplifies', 'reduces', 'maintains', 'constrains', 'spreads_to', 'correlates_with']
           .map(value => ({ value, label: t(`reconstruction.w14.relations.${value}`) }))
+      })}
+      ${selectCorrectionForm({
+        targetType: 'influence_relation',
+        targetId: item.relation_id,
+        field: 'confirmation_status',
+        previousValue: item.confirmation_status,
+        options: [{ value: 'contradicted', label: t('reconstruction.w14.notConnected') }],
+        labelKey: 'reconstruction.w14.removeConnection'
       })}
     </li>
   `).join('');
@@ -242,6 +273,9 @@ function customerHTML(experience) {
   const evidenceItems = uniquePresentationItems(
     experience.views?.evidence?.items
   );
+  const confidenceExplanations = list(experience.confidence?.explanation_keys)
+    .map(key => t(key, {}, ''))
+    .filter(Boolean);
   return `
     <header class="customer-reconstruction-heading">
       <p class="section-label">${escapeHTML(t('reconstruction.w14.customerView'))}</p>
@@ -257,11 +291,19 @@ function customerHTML(experience) {
       <div class="w14-customer-grid">
         <article class="w14-customer-card w14-customer-card--change">
           <span>01</span>
-          <div><h4>${escapeHTML(t('reconstruction.customerChangeTitle'))}</h4><p>${escapeHTML(customer.primary_change || t('reconstruction.w14.none'))}</p></div>
+          <div>
+            <h4>${escapeHTML(t('reconstruction.customerChangeTitle'))}</h4>
+            <p>${escapeHTML(customer.primary_change || t('reconstruction.w14.none'))}</p>
+            <a class="w14-card-action" href="/reality-entry?mode=revise&amp;target=observed_change">${escapeHTML(t('reconstruction.w14.modifyChange'))}</a>
+          </div>
         </article>
         <article class="w14-customer-card">
           <span>02</span>
-          <div><h4>${escapeHTML(t('reconstruction.customerProcessTitle'))}</h4><ol>${listHTML(customer.timeline)}</ol></div>
+          <div>
+            <h4>${escapeHTML(t('reconstruction.customerProcessTitle'))}</h4>
+            <ol>${timelineListHTML(customer.timeline)}</ol>
+            <a class="w14-card-action" href="/reality-entry?mode=revise&amp;target=timing">${escapeHTML(t('reconstruction.w14.addMissingEvent'))}</a>
+          </div>
         </article>
         <article class="w14-customer-card">
           <span>03</span>
@@ -274,17 +316,50 @@ function customerHTML(experience) {
         </article>
         <article class="w14-customer-card w14-customer-card--confirmed">
           <span>04</span>
-          <div><h4>${escapeHTML(t('reconstruction.customerConfirmedTitle'))}</h4><ul>${listHTML(customer.confirmed)}</ul></div>
+          <div>
+            <h4>${escapeHTML(t('reconstruction.customerConfirmedTitle'))}</h4>
+            <ul>${listHTML(customer.confirmed)}</ul>
+            <button class="w14-card-action" type="button" data-open-evidence-view>${escapeHTML(t('reconstruction.w14.reviewFacts'))}</button>
+          </div>
         </article>
         <article class="w14-customer-card w14-customer-card--unknown">
           <span>05</span>
           <div>
             <h4>${escapeHTML(t('reconstruction.customerUnknownTitle'))}</h4>
             <p>${escapeHTML(customer.unknown_summary_key ? t(customer.unknown_summary_key, { count: list(customer.unknown).length }) : t('reconstruction.w14.none'))}</p>
+            <p class="w14-unknown-note">${escapeHTML(t('reconstruction.w14.unknownNotError'))}</p>
             <ul>${listHTML(list(customer.tentative_summary_keys).map(key => ({ label: t(key) })))}</ul>
           </div>
         </article>
       </div>
+      <details class="w14-customer-explanation">
+        <summary>${escapeHTML(t('reconstruction.w14.explainOrganization'))}</summary>
+        <div class="w14-customer-explanation__body">
+          <section>
+            <h4>${escapeHTML(t('reconstruction.w14.whyOrganized'))}</h4>
+            <ul>${listHTML(confidenceExplanations.map(label => ({ label })))}</ul>
+          </section>
+          <section>
+            <h4>${escapeHTML(t('reconstruction.w14.supportingContent'))}</h4>
+            <p>${escapeHTML(t('reconstruction.w14.supportingContentCopy', { count: evidenceItems.length }))}</p>
+            <button type="button" data-open-evidence-view>${escapeHTML(t('reconstruction.w14.reviewFacts'))}</button>
+          </section>
+          <section>
+            <h4>${escapeHTML(t('reconstruction.w14.conflictReview'))}</h4>
+            <p>${escapeHTML(conflicts.length
+              ? t('reconstruction.w14.conflictsNeedReview', { count: conflicts.length })
+              : t('reconstruction.w14.noConflicts'))}</p>
+          </section>
+          <section>
+            <h4>${escapeHTML(t('reconstruction.w14.reconfirmReview'))}</h4>
+            <p>${escapeHTML(t('reconstruction.w14.reconfirmCount', { count: questions.length }))}</p>
+          </section>
+        </div>
+      </details>
+      <section class="w14-version-confirmation">
+        <h4>${escapeHTML(t('reconstruction.w14.versionConfirmation', { version: experience.reconstruction_version }))}</h4>
+        <p>${escapeHTML(t('reconstruction.w14.versionConfirmationCopy'))}</p>
+      </section>
       ${gateHTML(experience.reading_gate)}
       <section class="w14-confirmation" ${questions.length ? '' : 'hidden'}>
         <h4>${escapeHTML(t('reconstruction.w14.needsConfirmation'))}</h4>
@@ -453,6 +528,11 @@ export function renderReconstructionExperience(result, options = {}) {
         technicalRecord.hidden = selected !== 'technical';
         technicalRecord.open = selected === 'technical';
       }
+    });
+  });
+  root.querySelectorAll('[data-open-evidence-view]').forEach(button => {
+    button.addEventListener('click', () => {
+      root.querySelector('[data-reconstruction-view="evidence"]')?.click();
     });
   });
   root.dataset.activeReconstructionView = 'customer';

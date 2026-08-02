@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="/assets/css/reconstruction-visual-alignment.css">
   <link rel="stylesheet" href="/assets/css/reconstruction-experience.css">
   <link rel="stylesheet" href="/assets/css/reconstruction-pds-w6.css">
+  <link rel="stylesheet" href="/assets/css/reconstruction-exp-w4.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
 </head>
 <body class="reconstruction-page runtime-workspace-page">
@@ -36,29 +37,26 @@
         <span>PHI OS</span>
       </a>
 
-      <div class="reconstruction-progress" aria-label="Runtime Journey progress" data-i18n-aria-label="accessibility.journeyProgress">
-        <span data-i18n="journey.label">Runtime Journey</span>
-        <ol data-current-stage="reconstruction">
+      <div class="reconstruction-progress" aria-label="Reality Journey progress" data-i18n-aria-label="accessibility.journeyProgress">
+        <span data-i18n="journeyShell.label">Reality Journey</span>
+        <ol data-current-stage="discover">
           <li class="complete">
-            <b>01</b><data value="entry" data-i18n="journey.entry">Entry</data>
+            <b>01</b><data value="enter" data-i18n="journeyShell.stages.enter">Enter</data>
+          </li>
+          <li class="complete">
+            <b>02</b><data value="describe" data-i18n="journeyShell.stages.describe">Describe</data>
           </li>
           <li class="active" aria-current="step">
-            <b>02</b><data value="reconstruction" data-i18n="journey.reconstruction">Reconstruction</data>
+            <b>03</b><data value="discover" data-i18n="journeyShell.stages.discover">Discover</data>
           </li>
           <li>
-            <b>03</b><data value="reading" data-i18n="journey.reading">Reading</data>
+            <b>04</b><data value="understand" data-i18n="journeyShell.stages.understand">Understand</data>
           </li>
           <li>
-            <b>04</b><data value="navigation" data-i18n="journey.navigation">Navigation</data>
+            <b>05</b><data value="choose" data-i18n="journeyShell.stages.choose">Choose</data>
           </li>
           <li>
-            <b>05</b><data value="review" data-i18n="journey.review">Review</data>
-          </li>
-          <li>
-            <b>06</b><data value="memory" data-i18n="entry.progressMemory">Memory</data>
-          </li>
-          <li>
-            <b>07</b><data value="continuity" data-i18n="entry.progressContinuity">Continuity</data>
+            <b>06</b><data value="continue" data-i18n="journeyShell.stages.continue">Continue</data>
           </li>
         </ol>
       </div>
@@ -98,9 +96,9 @@
   <main id="reconstructionWorkspace" class="reconstruction-shell">
     <section class="reconstruction-intro" aria-labelledby="reconstructionTitle">
       <div>
-        <p class="eyebrow" data-i18n="reconstruction.stageLabel">Runtime Journey · Stage 02</p>
-        <h1 id="reconstructionTitle" data-i18n="reconstruction.title">Reality Reconstruction</h1>
-        <p data-i18n="reconstruction.introduction">Before PHI OS interprets your Reality, it reconstructs how the change formed, where it entered, how it became experience, and which evidence remains missing.</p>
+        <p class="eyebrow" data-i18n="reconstruction.stageLabel">Reality Journey · Discover</p>
+        <h1 id="reconstructionTitle" data-i18n="reconstruction.title">Check how this situation developed</h1>
+        <p data-i18n="reconstruction.introduction">Review the change, its sequence, the conditions around it, what is established and what still needs confirmation.</p>
       </div>
 
       <div class="reconstruction-boundary">
@@ -154,8 +152,8 @@
       <section class="reconstruction-main">
         <header class="workspace-heading">
           <div>
-            <p class="workspace-kicker" data-i18n="reconstruction.workspaceKicker">Canonical Runtime Reconstruction</p>
-            <h2 data-i18n="reconstruction.workspaceTitle">Reconstructing your current Reality</h2>
+            <p class="workspace-kicker" data-i18n="reconstruction.workspaceKicker">Your current reconstruction</p>
+            <h2 data-i18n="reconstruction.workspaceTitle">Confirm what happened and correct what is not accurate</h2>
           </div>
           <div class="reconstruction-score" hidden>
             <span data-i18n="reconstruction.maturityLabel">Reconstruction maturity</span>
@@ -522,12 +520,12 @@
                   type="button"
                   disabled
                   data-i18n="reconstruction.continueButton"
-                >Continue to Reality Reading →</button>
+                >Confirm this version and continue →</button>
                 <a
                   class="btn phi-button phi-button--secondary reconstruction-secondary-action"
                   href="/reality-entry?mode=revise"
                   data-i18n="reconstruction.returnToEntryButton"
-                >Return to Entry</a>
+                >Revise the original description</a>
                 <small data-i18n="reconstruction.actionBoundary">
                   Use inline correction for individual items. Return to Entry
                   only when the source account needs broader revision.

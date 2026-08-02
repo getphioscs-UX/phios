@@ -91,7 +91,9 @@ export function renderReconstructionVisualAlignment(result) {
   const projection = buildReconstructionCustomerProjection(result);
   const summary = qs('#reconstructionEvidenceSummary');
 
-  summary?.classList.remove('hidden');
+  // EXP-W4 keeps source codes and numeric structural confidence out of the
+  // default customer layer. The values remain available to explicit views.
+  summary?.classList.add('hidden');
   summary?.setAttribute('aria-busy', 'false');
 
   setText(
