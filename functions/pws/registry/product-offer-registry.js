@@ -2,6 +2,9 @@ import {
   RegistryValidationError,
   requiredText
 } from './universal-registry-schema.js';
+import {
+  DEFAULT_PRODUCT_RUNTIME_DEFINITIONS
+} from '../product/product-runtime.js';
 
 export const PRODUCT_OFFER_REGISTRY_VERSION =
   'phi-os.pws.product-offer-registry.v1';
@@ -45,37 +48,45 @@ export const DEFAULT_PRODUCT_TYPE_DEFINITIONS = Object.freeze([
   })
 ]);
 
-export const DEFAULT_PRODUCT_DEFINITIONS = Object.freeze([
-  Object.freeze({
-    product_code: 'reality-journey-pass-v1',
-    display_name: 'Reality Journey Pass',
-    product_type_code: 'reality_journey_pass',
-    method_code: 'reality_journey',
-    journey_type: 'personal_reality_journey',
-    professional_review_included: false,
-    offer: Object.freeze({
-      code: 'reality-journey-pass-v1-myr',
-      amount_minor: 500,
-      currency: 'MYR'
-    })
+const DEFAULT_OFFER_DEFINITIONS = Object.freeze({
+  'reality-journey-pass-v1': Object.freeze({
+    code: 'reality-journey-pass-v1-myr', amount_minor: 500, currency: 'MYR'
   }),
-  Object.freeze({
-    product_code: 'phios-book-one-zh-pdf',
-    display_name: '《世界如何形成》第一册',
-    product_type_code: 'book',
-    method_code: 'knowledge_routing',
-    journey_type: null,
-    professional_review_included: false,
-    legacy_product_ids: Object.freeze(['phios-book-one']),
-    fulfilment_code: 'watermarked_pdf',
-    knowledge_asset_id: 'BOOK-I',
-    offer: Object.freeze({
-      code: 'phios-book-one-zh-pdf-myr',
-      amount_minor: 8900,
-      currency: 'MYR'
-    })
+  'phios-book-one-zh-pdf': Object.freeze({
+    code: 'phios-book-one-zh-pdf-myr', amount_minor: 8900, currency: 'MYR'
   })
-]);
+});
+
+// Compatibility projection for the PWS-I2 Product/Offer Registry. Product
+// identity, version and components are owned by Product Runtime; price remains
+// an Offer concern and is joined only at this adapter boundary.
+export const DEFAULT_PRODUCT_DEFINITIONS = Object.freeze(
+  DEFAULT_PRODUCT_RUNTIME_DEFINITIONS.map(product => {
+    const version = product.versions.find(
+      item => item.version === product.current_version
+    );
+    const journeyAccess = version.components.find(
+      item => item.component_type === 'journey_access'
+    );
+    const knowledgeAccess = version.components.find(
+      item => item.component_type === 'knowledge_access'
+    );
+    return Object.freeze({
+      product_code: product.product_code,
+      display_name: product.display_name,
+      product_type_code: product.product_type_code,
+      product_version: product.current_version,
+      method_code: journeyAccess?.configuration.method_code || 'knowledge_routing',
+      journey_type: journeyAccess?.configuration.journey_type || null,
+      professional_review_included:
+        journeyAccess?.configuration.professional_review_included === true,
+      legacy_product_ids: product.legacy_product_ids,
+      fulfilment_code: knowledgeAccess?.configuration.format || null,
+      knowledge_asset_id: knowledgeAccess?.configuration.knowledge_asset_id || null,
+      offer: DEFAULT_OFFER_DEFINITIONS[product.product_code]
+    });
+  })
+);
 
 const CANONICAL_CODE_PATTERN = /^[a-z][a-z0-9_]*$/;
 const COMMERCIAL_CODE_PATTERN = /^[a-z][a-z0-9-]*$/;
@@ -347,6 +358,9 @@ export function createProductOfferRegistry(options = {}) {
         ownerModule: 'runtime/product',
         metadata: {
           product_code: productCode,
+          product_version: input.product_version == null
+            ? null
+            : requiredText(input.product_version, 'product_version'),
           display_name: requiredText(input.display_name, 'display_name'),
           product_type_code: productTypeCode,
           journey_type: journeyType,

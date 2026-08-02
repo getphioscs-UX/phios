@@ -1,0 +1,80 @@
+{
+  "contractId": "phi-os.pws.product-runtime.v1",
+  "version": "1.0.0",
+  "status": "frozen",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "5e70d816dee3652d015732ed1b711ff53d989a4b"
+  },
+  "owner": "runtime/product",
+  "objects": [
+    "Product",
+    "Product Component",
+    "Product Version",
+    "Knowledge Access",
+    "Journey Access",
+    "Professional Service Access",
+    "Membership Access",
+    "Service Credit"
+  ],
+  "componentTypes": [
+    "knowledge_access",
+    "journey_access",
+    "professional_service_access",
+    "membership_access",
+    "service_credit"
+  ],
+  "productRules": {
+    "paymentProviderIndependent": true,
+    "countryIndependent": true,
+    "currencyIndependent": true,
+    "createsEntitlement": false,
+    "activatesJourney": false,
+    "createsProfessionalAssignment": false,
+    "createsProfessionalResponsibility": false,
+    "priceOwnedByProduct": false,
+    "registryPresenceCreatesProductionRequirement": false
+  },
+  "versionRules": {
+    "format": "MAJOR.MINOR.PATCH",
+    "currentVersionMustBeActive": true,
+    "versionsAreImmutableProjections": true,
+    "componentCodesUniqueWithinVersion": true,
+    "historicalVersionResolvable": true
+  },
+  "accessRules": {
+    "knowledgeAccessReferencesGovernedAsset": true,
+    "journeyAccessDeclaresTypeMethodAndCount": true,
+    "professionalServiceAccessRequiresEligibilityConsentAndAssignment": true,
+    "membershipAccessDeclaresTierWithoutActivatingMembership": true,
+    "serviceCreditDeclaresServiceAndUnitsWithoutCreatingEntitlement": true
+  },
+  "defaultProducts": [
+    {
+      "productCode": "phios-book-one-zh-pdf",
+      "currentVersion": "1.0.0",
+      "componentType": "knowledge_access",
+      "legacyProductIds": ["phios-book-one"]
+    },
+    {
+      "productCode": "reality-journey-pass-v1",
+      "currentVersion": "1.0.0",
+      "componentType": "journey_access",
+      "legacyProductIds": []
+    }
+  ],
+  "legacyRules": {
+    "readCompatibilityAllowed": true,
+    "legacyWritesAllowed": false,
+    "ambiguousMappingFailsClosed": true,
+    "mappingCreatesEntitlement": false,
+    "mappingActivatesJourney": false
+  },
+  "storage": {
+    "schemaChanged": false,
+    "migrationAdded": false,
+    "d1Changed": false
+  },
+  "freeze": "PWS-I4-W1-Passed"
+}
