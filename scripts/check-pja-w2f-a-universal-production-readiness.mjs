@@ -250,7 +250,7 @@ assert.equal(sha256(legacyCurrent), sha256(legacyBaseline));
 
 console.log('✓ PJA-W2F-A Universal Canonical Production Readiness passed.');
 console.log(`  ${registeredIdentityCount} Canonical Node identities are registered; Readiness remains limited to the ${prefacePilotCount}-Node Preface pilot.`);
-console.log(`  ${registryPresentProductionDeferredCount} P1–P5 identities have no C1 Readiness Skeleton and remain production-deferred; universal fixtures cover P1–P14 and Books I–III.`);
+console.log(`  ${registryPresentProductionDeferredCount} P1–P5 identities have no Editorial Production Readiness record and remain production-deferred; universal fixtures cover P1–P14 and Books I–III.`);
 console.log(`  ${productionInventory.length - statusCounts.production_ready} Preface Skeletons remain blocked and the human-frozen pilot is preserved.`);
 console.log('  No Skeleton is production_ready; Thesis, boundary and human authority gates remain blocking.');
 console.log('  Scope, hierarchy, continuity, Supporting Question, duplication, future-pattern and batch-export behavior passed.');

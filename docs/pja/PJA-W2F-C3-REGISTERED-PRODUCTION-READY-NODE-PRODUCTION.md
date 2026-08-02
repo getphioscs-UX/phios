@@ -23,5 +23,5 @@ An optional append-only execution report binds the selected scope, locale, deter
 ```text
 npm run knowledge:produce-ready -- PREFACE
 npm run knowledge:produce-ready -- PREFACE --apply --report dist/knowledge-production-runs/preface-c3.json
-npm run check:pja-w2f-c3
+npm run check:pja-w2f-c3-production-historical
 ```

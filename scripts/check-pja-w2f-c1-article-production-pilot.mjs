@@ -30,7 +30,7 @@ const packageDirectory = path.join(
 const packageJson = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8'));
 
 assert.equal(
-  packageJson.scripts['check:pja-w2f-c1'],
+  packageJson.scripts['check:pja-w2f-c1-article-pilot-historical'],
   'npm run check:pja-w2f-b2b && node scripts/check-pja-w2f-c1-article-production-pilot.mjs'
 );
 

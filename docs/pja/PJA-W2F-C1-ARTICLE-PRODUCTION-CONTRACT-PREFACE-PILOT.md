@@ -59,7 +59,7 @@ C1 does not:
 Run:
 
 ```text
-npm run check:pja-w2f-c1
+npm run check:pja-w2f-c1-article-pilot-historical
 npm run knowledge:validate-article -- KN-PREFACE-001
 npm run check
 ```

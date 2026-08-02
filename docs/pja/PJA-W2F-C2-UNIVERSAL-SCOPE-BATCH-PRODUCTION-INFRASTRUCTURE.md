@@ -18,7 +18,7 @@ C2 adds deterministic production selection for `NODE`, `PREFACE`, `PART`, `BOOK`
 npm run knowledge:plan-articles -- PREFACE
 npm run knowledge:produce-articles -- PREFACE --apply
 npm run knowledge:validate-articles -- PREFACE
-npm run check:pja-w2f-c2
+npm run check:pja-w2f-c2-batch-historical
 ```
 
 ## Cross-platform validation
