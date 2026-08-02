@@ -5,11 +5,10 @@ const publicExperience = Object.freeze({
       label: '主导航',
       discover: '发现',
       knowledge: '知识',
-      explore: '探索',
-      services: '服务',
+      realityJourney: '现实旅程',
+      professional: '专业服务',
       about: '关于',
       signIn: '登录',
-      startJourney: '开始现实旅程',
       language: '语言',
       openMenu: '打开导航',
       closeMenu: '关闭导航'

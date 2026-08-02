@@ -22,9 +22,6 @@ const tokens = await read('assets/css/tokens.css');
 const foundation = await read('assets/css/design/foundation.css');
 const components = await read('assets/css/design/components.css');
 const layout = await read('assets/css/design/layout.css');
-const pjaW1 = await readJson(
-  'docs/pja/pja-w1-blueprint-led-public-knowledge-ecosystem-v1.json'
-);
 
 assert.equal(contract.milestone, 'PDS-W3');
 assert.equal(contract.status, 'core-component-shell-aligned');
@@ -38,9 +35,7 @@ assert.equal(contract.boundaries.runtimeSdkChanged, false);
 assert.equal(contract.boundaries.apiChanged, false);
 assert.equal(contract.boundaries.storageKeysChanged, false);
 
-assert.equal(pjaW1.freezeId, 'PJA-W1-v1.1.0-Blueprint-led');
-const activeNavigationIds = pjaW1.publicInformationArchitecture.mainNavigation
-  .map(item => item.id);
+const activeNavigationIds = fixture.primaryNavigationIds;
 let cursor = shell.indexOf('const NAVIGATION');
 for (const id of activeNavigationIds) {
   const index = shell.indexOf(`id: '${id}'`, cursor + 1);
@@ -132,7 +127,7 @@ assert.equal(
 );
 
 console.log('✓ PDS-W3 Core Component Contract and Global Shell aligned');
-console.log('  Historical shell behavior preserved; PJA-W1 navigation override validated');
+console.log('  Canonical PDS primary navigation validated');
 console.log('  Mobile focus, Escape, outside-click and locale-close behavior validated');
 console.log('  Responsive contracts: 360px, 768px, 1440px');
 console.log('  Runtime, Runtime SDK, APIs and storage keys unchanged');

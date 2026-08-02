@@ -37,8 +37,8 @@ const shell = read('assets/js/public-shell.js');
 const navOrder = [
   "'discover'",
   "'knowledge'",
-  "'explore'",
-  "'services'",
+  "'reality'",
+  "'professional'",
   "'about'"
 ];
 let cursor = -1;
@@ -78,10 +78,8 @@ for (const contract of [
   assert.ok(shell.includes(contract), `Public shell is missing ${contract}`);
 }
 assert.ok(shell.includes('href="/account"'), 'Public shell is missing Sign In');
-assert.ok(
-  shell.includes('class="public-nav__journey" href="/reality-journey"'),
-  'Public shell is missing the auxiliary Reality Journey route'
-);
+assert.ok(shell.includes("id: 'reality', href: '/reality-journey'"), 'Public shell is missing Reality Journey');
+assert.ok(shell.includes("id: 'professional', href: '/services'"), 'Public shell is missing Professional');
 
 const home = read('index.html');
 for (const statement of [

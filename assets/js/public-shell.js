@@ -8,20 +8,20 @@ import {
 const NAVIGATION = Object.freeze([
   { id: 'discover', href: '/', key: 'publicShell.nav.discover' },
   { id: 'knowledge', href: '/library', key: 'publicShell.nav.knowledge' },
-  { id: 'explore', href: '/explore', key: 'publicShell.nav.explore' },
-  { id: 'services', href: '/services', key: 'publicShell.nav.services' },
+  { id: 'reality', href: '/reality-journey', key: 'publicShell.nav.realityJourney' },
+  { id: 'professional', href: '/services', key: 'publicShell.nav.professional' },
   { id: 'about', href: '/about', key: 'publicShell.nav.about' }
 ]);
 
 const FOOTER_LINKS = Object.freeze([
-  { href: '/library', key: 'publicShell.footer.knowledgeHub' },
+  { href: '/library', key: 'publicShell.nav.knowledge' },
   { href: '/articles', key: 'publicShell.footer.articles' },
   { href: '/thesis', key: 'publicShell.footer.thesis' },
   { href: '/book-one', key: 'publicShell.footer.books' },
   { href: '/explore', key: 'publicShell.footer.atlas' },
-  { href: '/reality-journey', key: 'publicShell.footer.realityJourney' },
-  { href: '/services', key: 'publicShell.footer.services' },
-  { href: '/about', key: 'publicShell.footer.about' },
+  { href: '/reality-journey', key: 'publicShell.nav.realityJourney' },
+  { href: '/services', key: 'publicShell.nav.professional' },
+  { href: '/about', key: 'publicShell.nav.about' },
   { href: '/privacy', key: 'publicShell.footer.privacy' },
   { href: '/terms', key: 'publicShell.footer.terms' },
   { href: '/contact', key: 'publicShell.footer.contact' }
@@ -71,7 +71,6 @@ function auxiliaryMarkup() {
   return `
     <div class="public-nav__actions">
       <a class="public-nav__auxiliary" href="/account" data-i18n="publicShell.nav.signIn"></a>
-      <a class="public-nav__journey" href="/reality-journey" data-i18n="publicShell.nav.startJourney"></a>
     </div>
   `;
 }
@@ -193,14 +192,26 @@ function activeSectionFromPage() {
     path === '/digital-product-policy' ||
     path.startsWith('/read/book-one')
   ) return 'knowledge';
-  if (path === '/explore' || path === '/thesis') return 'explore';
+  if (path === '/explore' || path === '/thesis') return 'knowledge';
   if (
     path === '/free-observation' ||
     path === '/reality-journey' ||
     path === '/reality-dashboard' ||
-    path === '/reality-demo'
+    path === '/reality-demo' ||
+    path === '/reality-entry' ||
+    path === '/reality-reconstruction' ||
+    path === '/reality-reading' ||
+    path === '/reality-navigation' ||
+    path === '/reality-review' ||
+    path === '/reality-memory' ||
+    path === '/reality-continuity' ||
+    path === '/my-reality'
   ) return 'reality';
-  if (path === '/services' || path === '/professional-boundary') return 'services';
+  if (
+    path === '/services' ||
+    path === '/professional-boundary' ||
+    path.startsWith('/professional/')
+  ) return 'professional';
   if (path === '/about') return 'about';
 
   return '';

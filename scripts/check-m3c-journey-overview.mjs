@@ -114,11 +114,8 @@ const footerBlock = shell.slice(
   shell.indexOf('const FOOTER_LINKS'),
   shell.indexOf('function navigationMarkup')
 );
-assert.doesNotMatch(navigationBlock, /id: 'reality'/);
-assert.match(
-  shell,
-  /class="public-nav__journey" href="\/reality-journey"/
-);
+assert.match(navigationBlock, /id: 'reality', href: '\/reality-journey'/);
+assert.doesNotMatch(shell, /class="public-nav__journey"/);
 assert.match(footerBlock, /href: '\/reality-journey'/);
 
 const pjaW1 = await readJson(

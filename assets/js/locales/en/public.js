@@ -5,11 +5,10 @@ const publicExperience = Object.freeze({
       label: 'Primary navigation',
       discover: 'Discover',
       knowledge: 'Knowledge',
-      explore: 'Explore',
-      services: 'Services',
+      realityJourney: 'Reality Journey',
+      professional: 'Professional',
       about: 'About',
       signIn: 'Sign In',
-      startJourney: 'Start a Reality Journey',
       language: 'Language',
       openMenu: 'Open navigation',
       closeMenu: 'Close navigation'

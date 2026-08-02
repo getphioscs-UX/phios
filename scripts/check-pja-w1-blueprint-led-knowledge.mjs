@@ -213,13 +213,10 @@ for (const forbidden of ['/api/', 'openai', 'RuntimeKernel', 'fetchProvider']) {
   );
 }
 
-const expectedMainNavigation = [
-  ['discover', '/'],
-  ['knowledge', '/library'],
-  ['explore', '/explore'],
-  ['services', '/services'],
-  ['about', '/about']
-];
+const expW1 = await readJson('docs/experience/EXP-W1-global-ia-shared-shell.json');
+assert.equal(expW1.freezeId, 'EXP-W1-v1.0.0-Frozen');
+assert.equal(expW1.supersedes.field, 'publicInformationArchitecture');
+const expectedMainNavigation = expW1.primaryNavigation.map(item => [item.id, item.href]);
 for (const [id, href] of expectedMainNavigation) {
   assert(
     publicShell.includes(`{ id: '${id}', href: '${href}'`),
@@ -227,11 +224,10 @@ for (const [id, href] of expectedMainNavigation) {
   );
 }
 assert(publicShell.includes('href="/account"'));
-assert(publicShell.includes('href="/reality-journey"'));
+assert(publicShell.includes("href: '/reality-journey'"));
 assert(publicShell.includes('public-nav__actions'));
-for (const removedMainId of ["id: 'reality'", "id: 'professional'"]) {
-  assert.equal(publicShell.includes(removedMainId), false);
-}
+assert.equal(publicShell.includes("id: 'explore'"), false);
+assert.equal(publicShell.includes("id: 'services'"), false);
 
 const requiredPages = [
   ...evidence.publicInformationArchitecture.requiredPages,
