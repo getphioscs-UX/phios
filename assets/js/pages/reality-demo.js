@@ -3,7 +3,6 @@ import {
   t
 } from '../i18n.js';
 import {
-  createEntryDraftUrl,
   deriveEvidenceLab
 } from '../modules/evidence-boundary-lab.js';
 
@@ -231,10 +230,6 @@ lightTryForm?.addEventListener('submit', event => {
   if (lightObserved) {
     lightObserved.textContent = observation;
   }
-  if (lightContinue) {
-    lightContinue.href = createEntryDraftUrl(observation);
-  }
-
   if (lightResult) {
     lightResult.hidden = false;
     lightResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

@@ -117,7 +117,7 @@ for (const label of [
   'Evidence',
   'Reading',
   'Navigation',
-  'Start Full Reality Journey'
+  'Understand the Reality Journey'
 ]) {
   assert.ok(demo.includes(label), `Reality Demo is missing ${label}`);
 }

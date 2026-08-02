@@ -40,40 +40,36 @@ for (const contract of [
   '/assets/css/reality-journey.css',
   '/assets/js/public-shell.js',
   'data-public-section="reality"',
-  'Privacy &amp; AI boundary',
-  'AI-assisted, not AI-authoritative',
-  'Not professional or emergency advice'
+  'journeyPublic.before.title',
+  'journeyPublic.difference.title',
+  'journeyPublic.customerStages.continue.name'
 ]) {
   assert.match(page, new RegExp(contract), `Journey Overview is missing: ${contract}`);
 }
 
-const stageIds = [
-  'entry',
-  'reconstruction',
-  'reading',
-  'navigation',
-  'review',
-  'memory',
-  'continuity'
+const customerStageIds = [
+  'enter', 'describe', 'discover', 'understand', 'choose', 'continue'
 ];
 
-for (const stageId of stageIds) {
+for (const stageId of customerStageIds) {
   assert.match(
     page,
-    new RegExp(`id="stage-${stageId}"`),
-    `Journey Overview is missing stage: ${stageId}`
+    new RegExp(`journeyPublic\\.customerStages\\.${stageId}\\.name`),
+    `Journey Overview is missing customer stage: ${stageId}`
   );
 }
 
 assert.equal(
   (page.match(/href="\/reality-entry"/g) || []).length,
   2,
-  'Journey Overview must provide two canonical Start Journey actions'
+  'Journey Overview must provide the hero and closing Start Journey actions'
+);
+assert.equal(
+  (page.match(/public-button--primary/g) || []).length,
+  1,
+  'Journey Overview hero must expose one unique primary action'
 );
 assert.match(page, /href="\/reality-demo"/);
-assert.match(page, /href="\/privacy"/);
-assert.match(page, /href="\/ai-disclosure"/);
-assert.match(page, /href="\/professional-boundary"/);
 
 for (const forbidden of [
   '<form',
@@ -139,7 +135,7 @@ assert.equal(registry.overview.storesJourneyContent, false);
 assert.equal(registry.overview.callsRuntimeApi, false);
 assert.deepEqual(
   registry.stages.map(stage => stage.id),
-  stageIds
+  ['entry', 'reconstruction', 'reading', 'navigation', 'review', 'memory', 'continuity']
 );
 assert.deepEqual(
   registry.stages.map(stage => stage.number),
@@ -195,5 +191,5 @@ const wrangler = await read('wrangler.jsonc');
 assert.match(wrangler, /"binding": "RUNTIME_DB"/);
 assert.match(wrangler, /073639fa-01e4-4868-af10-6ed032637dab/);
 
-console.log('✓ M3C-W1 Journey Overview passed: Entry → Reconstruction → Reading → Navigation → Review → Memory → Continuity.');
-console.log('  Public overview remains bilingual, no-save, evidence-bounded and contract-preserving.');
+console.log('✓ Journey Overview passed: Enter → Describe → Discover → Understand → Choose → Continue.');
+console.log('  Internal Runtime stages remain contract-preserving and are not presented as a second customer journey.');

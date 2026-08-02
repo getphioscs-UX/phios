@@ -43,13 +43,13 @@ for (const token of [
   'Light Reading',
   'Light Navigation',
   'Why this direction',
-  'Continue with this change',
+  'Compare with the Reality Journey',
   'id="light-reset"',
   'id="light-reroute"'
 ]) {
   assert.ok(demoPage.includes(token), `Light Orientation missing: ${token}`);
 }
-assert.ok(demoController.includes('createEntryDraftUrl(observation)'));
+assert.equal(demoController.includes('createEntryDraftUrl(observation)'), false);
 assert.ok(entryController.includes("get('draft')"));
 for (const forbidden of ['fetch(', 'sessionStorage', 'localStorage', '/api/']) {
   assert.equal(

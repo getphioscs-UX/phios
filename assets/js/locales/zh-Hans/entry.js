@@ -1,15 +1,15 @@
 /* PHI OS zh-Hans entry translations. Keep keys aligned with the matching locale module. */
 const entry = Object.freeze({
   entry: {
-    metaTitle: '现实入口工作区 — PHI OS',
+    metaTitle: '描述正在发生的变化 — PHI OS',
     eyebrow: '现实旅程 · 描述',
-    title: '现实入口',
+    title: '描述正在发生的变化',
     subtitle: '确认发生了什么变化、何时变得明显、影响了什么，以及哪些部分仍不明确。',
     progressMemory: '记忆',
     progressContinuity: '持续',
-    sessionOnlyTitle: '仅用于本次会话',
+    sessionOnlyTitle: '私密恢复状态',
     sessionOnlyText: '你可以选择继续，或重新开始。',
-    observationWorkspace: '观察工作区',
+    observationWorkspace: '你的描述',
     workspaceQuestion: '你的现实正在发生什么变化？',
     recoveryGate: {
       eyebrow: '受保护的恢复资料',
@@ -61,7 +61,7 @@ const entry = Object.freeze({
     depthDeepText: '为细节与背景保留更多空间',
     evidenceTargets: {
       carrierCoordinates: '身体与节律变化',
-      runtimeConditions: '运行条件',
+      runtimeConditions: '变化周围的条件',
       experienceStyle: '直接经验',
       expressionStyle: '表达方式',
       agencyStyle: '行动方式',
@@ -116,7 +116,7 @@ const entry = Object.freeze({
       pending: '仍待明确'
     },
     card: {
-      title: '运行入口卡',
+      title: '目前的描述',
       observedChange: '什么开始发生变化',
       timeSignal: '何时开始变得明显',
       affectedReality: '受影响的现实领域',

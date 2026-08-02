@@ -4,27 +4,57 @@ const journeyPublic = Object.freeze({
     metaTitle: 'Reality Journey — PHI OS',
     skip: 'Skip to Reality Journey',
     hero: {
-      eyebrow: 'M3C · Reality Journey',
-      title: 'Understand what changed. Preserve what matters. Navigate what comes next.',
-      lead: 'The PHI OS Reality Journey turns one changing situation into a reviewable, recoverable Runtime without collapsing evidence, interpretation and uncertainty.',
-      start: 'Start Reality Journey',
-      resume: 'Resume Journey',
-      demo: 'Try the lightweight Demo',
-      stages: '7 bounded stages',
-      runtime: '1 versioned Runtime',
-      recovery: 'Recovery & lineage preserved',
-      mapLabel: 'Seven-stage Reality Journey',
-      factsLabel: 'Journey characteristics'
+      eyebrow: 'Reality Journey',
+      title: 'Understand a changing situation, then choose a direction you can review.',
+      lead: 'The Reality Journey guides you from describing one change to understanding how it formed, choosing what to try next and returning to see what actually changed.',
+      start: 'Start a new Reality Journey',
+      resume: 'Already started? Check your current status',
+      demo: 'Not ready to enter information? Try the no-save Demo',
+      secondaryLabel: 'Other Journey actions',
+      stages: '6 customer stages',
+      choice: 'You choose whether to continue',
+      recovery: 'Saved recovery is shown before it is opened',
+      mapLabel: 'Six-stage customer journey',
+      factsLabel: 'Journey facts'
     },
     overview: {
-      eyebrow: 'Complete Journey',
-      title: 'From first change to continuing Reality.',
-      lead: 'Each stage has one responsibility. No stage silently rewrites the evidence, decision or history established before it.',
+      eyebrow: 'One customer journey',
+      title: 'Six tasks, each with one clear purpose.',
+      lead: 'Internal processing may use more detailed states, but they do not create a second journey for you to learn.',
       stageLabel: 'Stage',
       purposeLabel: 'Purpose',
       actionLabel: 'What happens',
+      resultLabel: 'What you leave with',
       preserveLabel: 'What remains protected',
       stagesLabel: 'Reality Journey stages'
+    },
+    customerStages: {
+      enter: { name: 'Enter', task: 'Decide whether PHI OS can help with the change you are facing.', result: 'A clear choice to start, view the Demo or leave without entering personal information.' },
+      describe: { name: 'Describe', task: 'Say what changed, when it became noticeable and what it affects.', result: 'A description you can review and correct before moving on.' },
+      discover: { name: 'Discover', task: 'Confirm how the situation developed, what influenced it and what is still unknown.', result: 'A corrected account of how the current situation formed.' },
+      understand: { name: 'Understand', task: 'See what is happening now, why it matters and where confidence is limited.', result: 'A reality map that keeps evidence, interpretation and unknowns separate.' },
+      choose: { name: 'Choose', task: 'Choose one bounded direction and decide what you will observe.', result: 'A next step and a review point, not a command or guaranteed result.' },
+      continue: { name: 'Continue', task: 'Compare what you expected with what changed, then decide whether to continue, revise or close.', result: 'A reviewable history that changes only through your explicit choice.' }
+    },
+    before: {
+      eyebrow: 'Before you start',
+      title: 'Bring one change you can describe. You do not need a complete explanation.',
+      inputTitle: 'What to enter',
+      inputCopy: 'Describe one recent change and avoid emergency information, passwords or identity numbers.',
+      saveTitle: 'How saving works',
+      saveCopy: 'Entry may keep a protected recovery copy in this browser. Existing content stays hidden until you explicitly choose Resume.',
+      statusTitle: 'Your current status',
+      statusCopy: 'Starting creates a new description. If you already started, check the dashboard before choosing whether to resume or begin again.'
+    },
+    difference: {
+      eyebrow: 'Demo and Journey are different',
+      title: 'Try the idea without starting personal continuity.',
+      demoTitle: 'Demo',
+      demoCopy: 'Uses a fixed teaching case and an optional local input. It creates no personal reading and saves nothing.',
+      journeyTitle: 'Reality Journey',
+      journeyCopy: 'Uses your description across the six customer stages and may provide browser recovery when clearly disclosed.',
+      professionalTitle: 'Professional service',
+      professionalCopy: 'Is separate from the Journey and requires its own service, consent, price, scope and human responsibility.'
     },
     stages: {
       entry: {

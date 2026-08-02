@@ -4,27 +4,57 @@ const journeyPublic = Object.freeze({
     metaTitle: '现实旅程 — PHI OS',
     skip: '跳至现实旅程',
     hero: {
-      eyebrow: 'M3C · 现实旅程',
-      title: '理解发生了什么。保留重要内容。导航下一步。',
-      lead: 'PHI OS 现实旅程把一个正在变化的情境转化为可回顾、可恢复的 Runtime，同时保持证据、解释与不确定性的清晰边界。',
-      start: '开始现实旅程',
-      resume: '继续旅程',
-      demo: '先体验轻量 Demo',
-      stages: '7 个有边界阶段',
-      runtime: '1 个带版本 Runtime',
-      recovery: '保留恢复与谱系',
-      mapLabel: '现实旅程的七个阶段',
-      factsLabel: '旅程特征'
+      eyebrow: '现实旅程',
+      title: '理解一个正在变化的处境，再选择一个可以回看的方向。',
+      lead: '现实旅程引导你从描述一项变化开始，理解它如何形成，选择下一步尝试，并在之后回来看见真正发生了什么。',
+      start: '开始新的现实旅程',
+      resume: '已经开始？查看当前状态',
+      demo: '还不想输入资料？先体验不保存的 Demo',
+      secondaryLabel: '其他旅程行动',
+      stages: '6 个客户阶段',
+      choice: '是否继续由你选择',
+      recovery: '恢复资料会在打开前先向你说明',
+      mapLabel: '六阶段客户旅程',
+      factsLabel: '旅程说明'
     },
     overview: {
-      eyebrow: '完整旅程',
-      title: '从最初变化，到现实继续。',
-      lead: '每个阶段只承担一项责任。任何阶段都不会在没有说明的情况下改写之前建立的证据、决定或历史。',
+      eyebrow: '唯一客户旅程',
+      title: '六项任务，每项只有一个清楚目的。',
+      lead: '内部处理可以使用更细的状态，但不会变成另一套需要客户学习的旅程。',
       stageLabel: '阶段',
       purposeLabel: '作用',
       actionLabel: '进行什么',
+      resultLabel: '你会得到什么',
       preserveLabel: '保留什么边界',
       stagesLabel: '现实旅程阶段'
+    },
+    customerStages: {
+      enter: { name: '进入', task: '判断 PHI OS 是否能够帮助你理解当前面对的变化。', result: '清楚选择开始、查看 Demo，或不输入个人资料便离开。' },
+      describe: { name: '描述', task: '说明发生了什么变化、何时开始明显，以及影响了什么。', result: '一份可以在继续前查看与修正的描述。' },
+      discover: { name: '发现', task: '确认事情如何发展、受到什么影响，以及哪些部分仍然未知。', result: '一份经过你确认的现实形成过程。' },
+      understand: { name: '理解', task: '看见现在发生什么、为什么重要，以及哪些部分可信程度有限。', result: '一张把证据、解释与未知分开的现实地图。' },
+      choose: { name: '选择', task: '选择一个有边界的方向，并决定接下来观察什么。', result: '一个下一步与回看时间点，而不是命令或结果保证。' },
+      continue: { name: '继续', task: '比较预期与实际变化，再决定继续、修订或结束。', result: '一段只有经过你明确选择才会改变的可回看记录。' }
+    },
+    before: {
+      eyebrow: '开始之前',
+      title: '准备一项你能够描述的变化，不需要先拥有完整解释。',
+      inputTitle: '适合输入什么',
+      inputCopy: '描述最近的一项变化，请勿输入紧急资料、密码或身份号码。',
+      saveTitle: '资料如何保存',
+      saveCopy: '入口可能在此浏览器保留受保护的恢复副本。你明确选择继续之前，原有内容不会显示。',
+      statusTitle: '你的当前状态',
+      statusCopy: '开始会建立一份新描述。如果你已经开始，请先查看面板，再决定继续或重新开始。'
+    },
+    difference: {
+      eyebrow: 'Demo 与旅程并不相同',
+      title: '先体验概念，而不开始个人连续记录。',
+      demoTitle: 'Demo',
+      demoCopy: '使用固定教学案例与可选的本地输入，不会建立个人读取，也不会保存资料。',
+      journeyTitle: '现实旅程',
+      journeyCopy: '使用你的描述经过六个客户阶段，并只在清楚说明时提供浏览器恢复。',
+      professionalTitle: '专业服务',
+      professionalCopy: '与现实旅程分开，需要独立服务、同意、价格、范围与人类责任。'
     },
     stages: {
       entry: {

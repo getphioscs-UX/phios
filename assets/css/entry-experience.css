@@ -9,6 +9,16 @@
   --entry-failed: var(--phi-state-danger, #a33b32);
 }
 
+/* Keep the internal stage model available to Runtime code without exposing a
+ * second, technical journey model to customers on Entry. */
+.entry-workspace-page [data-runtime-workspace] {
+  display: none;
+}
+
+.entry-workspace-page .runtime-workspace-layout {
+  display: block;
+}
+
 .entry-workspace-page .entry-intro-bar {
   align-items: center;
 }

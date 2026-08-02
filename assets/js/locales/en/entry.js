@@ -1,15 +1,15 @@
 /* PHI OS en entry translations. Keep keys aligned with the matching locale module. */
 const entry = Object.freeze({
   entry: {
-    metaTitle: 'Reality Entry Workspace — PHI OS',
+    metaTitle: 'Describe what is changing — PHI OS',
     eyebrow: 'Reality Journey · Describe',
-    title: 'Reality Entry',
+    title: 'Describe what is changing',
     subtitle: 'Establish what changed, when it became noticeable, what it affects, and what remains unclear.',
     progressMemory: 'Memory',
     progressContinuity: 'Continuity',
-    sessionOnlyTitle: 'Private to this session',
+    sessionOnlyTitle: 'Private recovery status',
     sessionOnlyText: 'You choose whether to resume or start again.',
-    observationWorkspace: 'Observation Workspace',
+    observationWorkspace: 'Your description',
     workspaceQuestion: 'What is changing in your Reality?',
     recoveryGate: {
       eyebrow: 'Protected recovery',
@@ -61,7 +61,7 @@ const entry = Object.freeze({
     depthDeepText: 'More room for detail and context',
     evidenceTargets: {
       carrierCoordinates: 'Body and rhythm changes',
-      runtimeConditions: 'Runtime conditions',
+      runtimeConditions: 'Conditions around the change',
       experienceStyle: 'Direct experience',
       expressionStyle: 'Expression pattern',
       agencyStyle: 'Action pattern',
@@ -116,7 +116,7 @@ const entry = Object.freeze({
       pending: 'Still open'
     },
     card: {
-      title: 'Runtime Entry Card',
+      title: 'Your description so far',
       observedChange: 'What Started to Change',
       timeSignal: 'When It Became Noticeable',
       affectedReality: 'Affected Reality',

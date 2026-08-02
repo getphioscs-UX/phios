@@ -68,14 +68,14 @@ const progressBlock = page.slice(
 );
 assert.equal(
   (progressBlock.match(/<li/g) || []).length,
-  7,
-  'Entry header must show the complete seven-stage Journey'
+  6,
+  'Entry header must show the complete six-stage customer Journey'
 );
-assert.match(progressBlock, /data-current-stage="entry"/);
+assert.match(progressBlock, /data-current-stage="describe"/);
 assert.match(progressBlock, /aria-current="step"/);
 assert.deepEqual(
   [...progressBlock.matchAll(/<data value="([^"]+)"/g)].map(match => match[1]),
-  ['entry', 'reconstruction', 'reading', 'navigation', 'review', 'memory', 'continuity']
+  ['enter', 'describe', 'discover', 'understand', 'choose', 'continue']
 );
 
 const stylesheetOrder = [

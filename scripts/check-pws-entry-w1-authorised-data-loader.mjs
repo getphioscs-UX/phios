@@ -311,7 +311,7 @@ for (const [file, expected] of Object.entries({
   'services.html':
     '79d47c96c79e9947ceaac34b425e8aba2da33506c08349f2fde324b21f24ed25',
   'reality-entry.html':
-    '940f4d5821bc63a34a075bf2e0b76cf5f4d7517be014ac44e325f09ad7ce00c3',
+    '1d4c5ccd9e756f9f628e1abef66016c95c9c98aeae1f85af0108b26f598f2308',
   'reality-navigation.html':
     '0d78b63ef0f3f510df2ecf4c4bf114c232af5d6ded337e72cd50114443f4bb05'
 })) {

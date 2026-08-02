@@ -411,11 +411,11 @@ for (const contract of slowNetworkContracts) {
 }
 
 const overview = await read('reality-journey.html');
-for (const stage of registry.journeyStages) {
+for (const stage of ['enter', 'describe', 'discover', 'understand', 'choose', 'continue']) {
   assert.equal(
-    overview.includes(`id="stage-${stage}"`),
+    overview.includes(`journeyPublic.customerStages.${stage}.name`),
     true,
-    `Journey Overview missing ${stage}`
+    `Journey Overview missing customer stage ${stage}`
   );
 }
 const dashboard = await read('reality-dashboard.html');

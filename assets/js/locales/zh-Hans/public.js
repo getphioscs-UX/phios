@@ -269,7 +269,7 @@ const publicExperience = Object.freeze({
     hero: {
       eyebrow: '现实 Demo',
       title: '观看一个变化如何变得可以导航。',
-      lead: '探索固定案例、检查证据边界，并尝试一条轻量输入。本页不会建立正式 Runtime，也不会写入 Runtime Memory。',
+      lead: '探索固定案例和一项可选的本地输入。Demo 不会形成个人读取、不会开始现实旅程，也不会保存任何内容。',
       watch: '观看案例',
       try: '尝试引导式开场',
       freeObservation: '使用免费观察'
@@ -389,14 +389,14 @@ const publicExperience = Object.freeze({
       needInEntryCopy: '可追溯观察，以及进入现实重建所需的证据。',
       reset: '重新输入',
       reroute: '重新导向',
-      continue: '继续以这项变化建立现实入口',
-      boundary: '这是 Reality Entry 的轻量预览。正式 Reality Reading 将在进入 Reality Journey 后建立。'
+      continue: '对照了解现实旅程',
+      boundary: '这是一个不保存的预览。你在这里输入的内容不会带入现实旅程。'
     },
     conversion: {
       eyebrow: '由你决定是否继续',
-      title: '准备建立一个完整、可回顾的 Runtime 吗？',
-      lead: '完整现实旅程能够在 Runtime 契约下保留证据、重建、读取、导航与后续回顾。',
-      action: '开始完整现实旅程',
+      title: '想先了解个人旅程会做什么吗？',
+      lead: '现实旅程与这个 Demo 相互独立。只有你选择开始时才会进入旅程，并会在显示保存内容前先说明恢复状态。',
+      action: '了解现实旅程',
       freeObservation: '继续使用纯本地免费观察'
     }
   },

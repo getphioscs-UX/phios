@@ -269,7 +269,7 @@ const publicExperience = Object.freeze({
     hero: {
       eyebrow: 'Reality Demo',
       title: 'Watch how a change becomes navigable.',
-      lead: 'Explore a fixed example, inspect the evidence boundary and try one lightweight input. Nothing on this page creates a formal Runtime or writes to Runtime Memory.',
+      lead: 'Explore a fixed example and an optional local input. The Demo creates no personal reading, starts no Reality Journey and saves nothing.',
       watch: 'Watch the case',
       try: 'Try the guided opening',
       freeObservation: 'Use Free Observation'
@@ -389,14 +389,14 @@ const publicExperience = Object.freeze({
       needInEntryCopy: 'Traceable observations and the evidence needed for Reconstruction.',
       reset: 'Enter again',
       reroute: 'Generate again',
-      continue: 'Continue with this change',
-      boundary: 'This is a lightweight preview. Formal Reading will be generated only after entering the Reality Journey.'
+      continue: 'Compare with the Reality Journey',
+      boundary: 'This is a no-save preview. Nothing entered here is carried into a Reality Journey.'
     },
     conversion: {
       eyebrow: 'Continue when you choose',
-      title: 'Ready to build a full, reviewable Runtime?',
-      lead: 'The full Reality Journey can preserve evidence, reconstruction, reading, navigation and later review under the Runtime contracts.',
-      action: 'Start Full Reality Journey',
+      title: 'Want to understand what the personal Journey does?',
+      lead: 'The Reality Journey is separate from this Demo. It starts only when you choose to begin and explains recovery before showing saved content.',
+      action: 'Understand the Reality Journey',
       freeObservation: 'Stay local with Free Observation'
     }
   },

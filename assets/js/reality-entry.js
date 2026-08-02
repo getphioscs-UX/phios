@@ -991,6 +991,11 @@ async function submit(rawMessage) {
   } catch (error) {
     console.error('Reality Entry request failed:', error);
 
+    // A transport or provider failure must not make the customer's text
+    // disappear. Restore the exact cleaned submission for review and retry.
+    els.input.value = message;
+    els.input.focus();
+
     addMessage(
       'assistant',
       '',
