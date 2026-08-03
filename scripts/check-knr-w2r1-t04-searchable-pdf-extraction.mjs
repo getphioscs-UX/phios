@@ -12,6 +12,7 @@ import {
   cleanP0Pages,
   headingDiagnostics,
   locateP0Boundary,
+  normalizeOverprintedHeading,
   textItemsToLines
 } from './lib/knowledge-manuscripts/searchable-pdf-extraction.mjs';
 
@@ -54,8 +55,12 @@ assert(!/tesseract|ocrmypdf|paddleocr|easyocr/iu.test(`${extractionSource}\n${cl
 assert(extractionSource.includes("ocrUsed: false"));
 assert(extractionSource.includes("r2UploadPerformed: false"));
 assert(extractionSource.includes("verbosity: 0"));
+assert(extractionSource.includes("why_phios_heading"));
 assert(extractionSource.includes("prelude_reality_breakdown"));
 assert(extractionSource.includes("part_one_reality_physics"));
+assert(extractionSource.includes("exact_overlay_duplicate_collapsed"));
+assert(extractionSource.includes("wrapped_heading_continuation_merged"));
+assert(extractionSource.includes("shortSemanticContinuation"));
 
 assert.deepEqual(parseExtractionArgs([]), { mode: 'dry-run', overrides: {} });
 assert.deepEqual(parseExtractionArgs(['--dry-run', '--start-page', '8', '--end-page=31']), {
@@ -76,6 +81,19 @@ const ordered = textItemsToLines([
 ], 1, 842);
 assert.equal(ordered.length, 1);
 assert.equal(ordered[0].text, '为什么需要');
+
+assert.deepEqual(normalizeOverprintedHeading(
+  '◈◈文明断裂不是未来，而是正在发生文明断裂不是未来，而是正在发生'
+), {
+  text: '文明断裂不是未来，而是正在发生',
+  actions: ['decorative_heading_marker_removed', 'exact_overlay_duplicate_collapsed'],
+  repeatCount: 2
+});
+assert.deepEqual(normalizeOverprintedHeading('长期运行长期运行'), {
+  text: '长期运行长期运行',
+  actions: [],
+  repeatCount: 1
+});
 
 const pages = [
   page(1, [line(1, '现实如何形成', 430, 28, 150)]),
@@ -157,10 +175,33 @@ assert.deepEqual(actualBookBoundary.contentsPages, [7]);
 assert.equal(actualBookBoundary.start.text, 'Prelude Reality Breakdown');
 assert.equal(actualBookBoundary.end.text, '📙 第一部｜ Reality Physics');
 
+const actualPdfOverprintPages = [
+  page(2, [
+    line(2, '◈◈为什么需要 PHI OS为什么需要 PHI OS', 790, 16, 160),
+    line(2, '现实系统必须被放回完整结构中理解。', 700, 12, 72),
+    line(2, '局部知识能够解释局部现象，但无法单独说明整体如何持续运行。', 675, 12, 72)
+  ]),
+  page(34, [
+    line(34, '第一部｜Reality Physics', 760, 24, 155),
+    line(34, 'Reality 如何形成可持续现实', 710, 18, 155)
+  ])
+];
+const actualPdfOverprintBoundary = locateP0Boundary(actualPdfOverprintPages, manifest);
+assert.equal(actualPdfOverprintBoundary.start.pageNumber, 2);
+assert.equal(actualPdfOverprintBoundary.end.pageNumber, 34);
+assert.equal(actualPdfOverprintBoundary.start.matchMode, 'book_toc_alias');
+assert.equal(actualPdfOverprintBoundary.start.matchProfile, 'why_phios_heading');
+assert.equal(actualPdfOverprintBoundary.start.text, '为什么需要 PHI OS');
+assert.equal(actualPdfOverprintBoundary.start.likelyRunningHeader, false);
+assert.equal(actualPdfOverprintBoundary.end.matchProfile, 'part_one_reality_physics');
+
 const aliasDiagnostics = headingDiagnostics(actualBookTocPages);
 assert(aliasDiagnostics.some(item => item.text === 'Prelude'));
 assert(aliasDiagnostics.some(item => item.text === 'Reality Physics'));
 assert(aliasDiagnostics.every(item => item.text.length <= 72));
+const overprintDiagnostics = headingDiagnostics(actualPdfOverprintPages);
+assert(overprintDiagnostics.some(item => item.text.includes('为什么需要 PHI OS')));
+assert(!overprintDiagnostics.some(item => item.text.includes('局部知识能够解释')));
 
 const aliasCleanedBase = cleanP0Pages([
   page(8, [
@@ -174,6 +215,39 @@ const aliasCleanedBase = cleanP0Pages([
 assert(aliasCleanedBase.body.startsWith('# Prelude Reality Breakdown'));
 assert(aliasCleanedBase.body.includes('文明断裂序章'));
 assert(!aliasCleanedBase.body.startsWith('# 序部｜为什么需要 PHI OS'));
+
+const overprintedHeadingCleaned = cleanP0Pages([
+  page(20, [
+    line(20, manifest.parts.find(part => part.partCode === 'P0').title, 770, 24, 72),
+    line(20, '◈◈为什么现实不是一个对象，而是一种持续形成自为什么现实不是一个对象，而是一种持续形成自', 700, 20, 72),
+    line(20, '己的生命过程己的生命过程', 630, 19, 120),
+    line(20, '现实的形成需要经过连续的结构变化，并在不同条件之间保持可辨认的关系。', 575, 12, 72),
+    line(20, '候选文本必须保留原有论证顺序，任何文字规范化都不能改变理论含义。', 550, 12, 72),
+    line(20, '人工复核还需要检查标题、段落、页码、图注以及跨页连接是否完整。', 525, 12, 72)
+  ])
+], manifest.parts.find(part => part.partCode === 'P0').title);
+assert(overprintedHeadingCleaned.body.includes(
+  '## 为什么现实不是一个对象，而是一种持续形成自己的生命过程'
+));
+assert(!overprintedHeadingCleaned.body.includes('◈'));
+assert(!overprintedHeadingCleaned.body.includes('## 己的生命过程'));
+assert.equal(overprintedHeadingCleaned.normalized.length, 3);
+
+const distinctHeadingCleaned = cleanP0Pages([
+  page(21, [
+    line(21, manifest.parts.find(part => part.partCode === 'P0').title, 770, 24, 72),
+    line(21, '为什么持续变化会形成新的系统层级与可辨认的现实边界', 700, 20, 72),
+    line(21, '结论：继续', 630, 19, 120),
+    line(21, '不同标题必须维持独立结构，不能仅因相邻位置而被错误合并。', 575, 12, 72),
+    line(21, '受控规范化只处理可以由文本形态与页面关系共同确认的断行。', 550, 12, 72),
+    line(21, '人工复核仍然负责确认理论含义、章节层级与最终发布边界。', 525, 12, 72)
+  ])
+], manifest.parts.find(part => part.partCode === 'P0').title);
+assert(distinctHeadingCleaned.body.includes(
+  '## 为什么持续变化会形成新的系统层级与可辨认的现实边界'
+));
+assert(distinctHeadingCleaned.body.includes('## 结论：继续'));
+assert(!distinctHeadingCleaned.body.includes('现实边界结论：继续'));
 
 const selectedPages = pages.slice(2, 5).map((fixturePage, index) => {
   if (index !== 0) return fixturePage;

@@ -11,10 +11,15 @@ export const P0_REPORT_RELATIVE =
 export const P0_R2_TARGET = 'books/book-1/extracted/p0-preface.md';
 export const EXTRACTION_METHOD = 'searchable_pdf_text_layer';
 export const EXTRACTION_TOOL_SCHEMA_VERSION =
-  'PHI-OS-KNR-W2R1-P0-EXTRACTION-TOOL-v1.0.1';
+  'PHI-OS-KNR-W2R1-P0-EXTRACTION-TOOL-v1.0.4';
 
 const BOUNDARY_ALIAS_PROFILES = Object.freeze({
   start: Object.freeze([
+    Object.freeze({
+      id: 'why_phios_heading',
+      tokens: Object.freeze(['为什么需要', 'phios']),
+      normalizedHeading: '为什么需要 PHI OS'
+    }),
     Object.freeze({ id: 'prelude_reality_breakdown', tokens: Object.freeze(['prelude', 'realitybreakdown']) }),
     Object.freeze({ id: 'civilization_breakdown_prelude', tokens: Object.freeze(['文明断裂序章']) })
   ]),
@@ -46,6 +51,32 @@ const cleanScalar = value => String(value ?? '')
   .replace(/\u00a0/gu, ' ')
   .replace(/[ \t]+/gu, ' ')
   .trim();
+
+export function normalizeOverprintedHeading(value) {
+  const original = cleanScalar(value);
+  const withoutMarker = original.replace(/^[◈◆◇]+\s*/u, '');
+  const characters = [...withoutMarker];
+  const maximumRepeats = Math.min(8, Math.floor(characters.length / 6));
+  let collapsed = null;
+  let repeatCount = 1;
+  for (let repeats = maximumRepeats; repeats >= 2; repeats -= 1) {
+    if (characters.length % repeats !== 0) continue;
+    const unitLength = characters.length / repeats;
+    if (unitLength < 6) continue;
+    const unit = characters.slice(0, unitLength).join('');
+    if (Array.from({ length: repeats }, (_, index) =>
+      characters.slice(index * unitLength, (index + 1) * unitLength).join('') === unit).every(Boolean)) {
+      collapsed = unit;
+      repeatCount = repeats;
+      break;
+    }
+  }
+  if (!collapsed) return { text: original, actions: [], repeatCount: 1 };
+  const actions = [];
+  if (withoutMarker !== original) actions.push('decorative_heading_marker_removed');
+  actions.push('exact_overlay_duplicate_collapsed');
+  return { text: collapsed, actions, repeatCount };
+}
 
 export function anchorForm(value) {
   return cleanScalar(value)
@@ -198,7 +229,7 @@ function aliasProfile(normalized, kind) {
     (!profile.partOne || partOneMarker(normalized))) || null;
 }
 
-function candidateFromWindow(page, lines, index, kind, matchMode, matchProfile) {
+function candidateFromWindow(page, lines, index, kind, matchMode, matchProfile, normalizedHeading = null) {
   const combined = lines.map(line => line.text).join('');
   const fontSize = Math.max(...lines.map(line => line.fontSize));
   const bodyFont = pageBodyFont(page);
@@ -208,12 +239,12 @@ function candidateFromWindow(page, lines, index, kind, matchMode, matchProfile) 
     pageNumber: page.pageNumber,
     startLineIndex: index,
     endLineIndex: index + lines.length - 1,
-    text: lines.map(line => line.text).join(' '),
+    text: normalizedHeading || lines.map(line => line.text).join(' '),
     fontSize,
     matchMode,
     matchProfile,
     strongHeading: fontSize >= bodyFont * 1.12 || PART_HEADING_PATTERN.test(cleanScalar(combined)),
-    likelyRunningHeader: marginal && fontSize < bodyFont * 1.4
+    likelyRunningHeader: marginal && fontSize < bodyFont * 1.22
   };
 }
 
@@ -233,7 +264,15 @@ function windowCandidates(page, anchor, kind) {
       }
       const profile = aliasProfile(normalized, kind);
       if (!aliasCandidate && profile) {
-        aliasCandidate = candidateFromWindow(page, lines, index, kind, 'book_toc_alias', profile.id);
+        aliasCandidate = candidateFromWindow(
+          page,
+          lines,
+          index,
+          kind,
+          'book_toc_alias',
+          profile.id,
+          profile.normalizedHeading || null
+        );
       }
     }
     if (aliasCandidate) candidates.push(aliasCandidate);
@@ -267,14 +306,21 @@ function chooseCandidate(candidates, pageOverride, after = null) {
 
 export function headingDiagnostics(pages) {
   const diagnostics = [];
-  const diagnosticTokenPattern = /(?:prelude|reality|文明|断裂|序章|序部|第一部|第1部|物理|projection)/iu;
   for (const page of pages) {
     const bodyFont = pageBodyFont(page);
     for (const line of page.lines) {
       const text = cleanScalar(line.text);
       if (!text || text.length > 72 || SENTENCE_END_PATTERN.test(text)) continue;
-      const headingShape = line.fontSize >= bodyFont * 1.12 || PART_HEADING_PATTERN.test(text);
-      const boundarySignal = diagnosticTokenPattern.test(text) && text.length <= 48;
+      const normalized = anchorForm(text);
+      const headingShape = line.fontSize >= bodyFont * 1.45 || PART_HEADING_PATTERN.test(text);
+      const boundarySignal = normalized.includes('为什么需要phios') ||
+        normalized.includes('文明断裂序章') ||
+        normalized.includes('realityphysics') ||
+        normalized === 'prelude' ||
+        normalized.includes('realitybreakdown') ||
+        normalized.includes(anchorForm('序部｜为什么需要 PHI OS')) ||
+        normalized.includes(anchorForm('第一部｜现实物理学')) ||
+        normalized.includes('preluderealitybreakdown');
       if (!headingShape && !boundarySignal) continue;
       diagnostics.push({
         pageNumber: page.pageNumber,
@@ -418,6 +464,27 @@ function lineBreakRequired(previous, current, bodyX, medianGap) {
   return false;
 }
 
+function isHeadingContinuation(current, next, bodyFont, p0Title) {
+  if (!next || current.pageNumber !== next.pageNumber) return false;
+  if (!isHeading(next, bodyFont, p0Title) || PART_HEADING_PATTERN.test(next.text)) return false;
+  if (SENTENCE_END_PATTERN.test(current.text)) return false;
+  const currentLength = [...current.text].length;
+  const nextLength = [...next.text].length;
+  const shortSemanticContinuation =
+    currentLength >= 20 &&
+    nextLength <= 10 &&
+    anchorForm(current.text) !== anchorForm(p0Title) &&
+    !/[|｜:：]/u.test(next.text) &&
+    !SENTENCE_END_PATTERN.test(next.text);
+  if (shortSemanticContinuation) return true;
+  if (currentLength < 20 || nextLength > 16) return false;
+  const largerFont = Math.max(current.fontSize, next.fontSize, 1);
+  if (Math.abs(current.fontSize - next.fontSize) / largerFont > 0.12) return false;
+  if (Math.abs(current.xStart - next.xStart) > largerFont * 1.5) return false;
+  const verticalGap = current.y - next.y;
+  return verticalGap > 0 && verticalGap <= largerFont * 2.2;
+}
+
 export function cleanP0Pages(pages, p0Title) {
   const recurring = recurringMarginalSignatures(pages);
   const allLines = pages.flatMap(page => page.lines);
@@ -426,31 +493,46 @@ export function cleanP0Pages(pages, p0Title) {
   const gaps = pages.flatMap(page => page.lines.slice(1).map((line, index) => page.lines[index].y - line.y).filter(gap => gap > 0));
   const medianGap = median(gaps);
   const removed = [];
+  const normalized = [];
   const retained = [];
   let titleSeen = false;
   let previousSignature = null;
 
   for (const page of pages) {
     for (const line of page.lines) {
-      const marginal = line.y >= page.height * 0.9 || line.y <= page.height * 0.1;
-      const signature = anchorForm(line.text);
-      let reason = null;
-      if (SUSPICIOUS_TEXT_PATTERN.test(line.text)) {
-        throw coded('SEARCHABLE_TEXT_GARBLED', { pageNumber: page.pageNumber, line: line.text });
+      const proposed = normalizeOverprintedHeading(line.text);
+      const proposedLine = { ...line, text: proposed.text };
+      const workingLine = proposed.actions.length && isHeading(proposedLine, bodyFont, p0Title)
+        ? proposedLine
+        : line;
+      if (workingLine !== line) {
+        normalized.push({
+          pageNumber: page.pageNumber,
+          actions: proposed.actions,
+          repeatCount: proposed.repeatCount,
+          before: line.text,
+          after: workingLine.text
+        });
       }
-      if (marginal && PAGE_NUMBER_PATTERN.test(line.text)) reason = 'page_number';
+      const marginal = workingLine.y >= page.height * 0.9 || workingLine.y <= page.height * 0.1;
+      const signature = anchorForm(workingLine.text);
+      let reason = null;
+      if (SUSPICIOUS_TEXT_PATTERN.test(workingLine.text)) {
+        throw coded('SEARCHABLE_TEXT_GARBLED', { pageNumber: page.pageNumber, line: workingLine.text });
+      }
+      if (marginal && PAGE_NUMBER_PATTERN.test(workingLine.text)) reason = 'page_number';
       else if (marginal && recurring.has(signature)) reason = 'recurring_header_or_footer';
-      else if (CAPTION_PATTERN.test(line.text)) reason = 'figure_caption';
+      else if (CAPTION_PATTERN.test(workingLine.text)) reason = 'figure_caption';
       else if (signature === anchorForm(p0Title)) {
         if (titleSeen) reason = 'duplicate_title';
         else titleSeen = true;
       } else if (signature && signature === previousSignature) reason = 'adjacent_duplicate_line';
 
       if (reason) {
-        removed.push({ pageNumber: page.pageNumber, reason, text: line.text });
+        removed.push({ pageNumber: page.pageNumber, reason, text: workingLine.text });
         continue;
       }
-      retained.push(line);
+      retained.push(workingLine);
       previousSignature = signature;
     }
   }
@@ -466,10 +548,26 @@ export function cleanP0Pages(pages, p0Title) {
     if (paragraph) blocks.push(paragraph);
     paragraph = '';
   };
-  for (const line of retained) {
+  for (let index = 0; index < retained.length; index += 1) {
+    const line = retained[index];
     if (isHeading(line, bodyFont, p0Title)) {
       flush();
-      blocks.push(`${anchorForm(line.text) === anchorForm(p0Title) ? '#' : '##'} ${line.text}`);
+      const headingLines = [line];
+      while (isHeadingContinuation(headingLines.at(-1), retained[index + 1], bodyFont, p0Title)) {
+        headingLines.push(retained[index + 1]);
+        index += 1;
+      }
+      const headingText = headingLines.reduce((text, item) => joinWrappedText(text, item.text), '');
+      if (headingLines.length > 1) {
+        normalized.push({
+          pageNumber: line.pageNumber,
+          actions: ['wrapped_heading_continuation_merged'],
+          repeatCount: 1,
+          before: headingLines.map(item => item.text),
+          after: headingText
+        });
+      }
+      blocks.push(`${anchorForm(headingText) === anchorForm(p0Title) ? '#' : '##'} ${headingText}`);
       previous = null;
       continue;
     }
@@ -484,6 +582,7 @@ export function cleanP0Pages(pages, p0Title) {
     body,
     retainedLineCount: retained.length,
     removed,
+    normalized,
     bodyFont,
     bodyX,
     medianLineGap: medianGap
@@ -592,7 +691,7 @@ export async function extractP0Candidate({ root, manifest, mode = 'dry-run', ove
   });
   const candidateSha256 = createHash('sha256').update(candidate).digest('hex');
   const report = {
-    schemaVersion: 'PHI-OS-KNR-W2R1-P0-EXTRACTION-REPORT-v1.0.0',
+    schemaVersion: 'PHI-OS-KNR-W2R1-P0-EXTRACTION-REPORT-v1.0.1',
     stage: 'KNR-W2R1-T04',
     bookCode: manifest.bookCode,
     partCode: 'P0',
@@ -619,7 +718,9 @@ export async function extractP0Candidate({ root, manifest, mode = 'dry-run', ove
     cleaning: {
       retainedLineCount: cleaned.retainedLineCount,
       removedLineCount: cleaned.removed.length,
-      removedLines: cleaned.removed
+      removedLines: cleaned.removed,
+      normalizedLineCount: cleaned.normalized.length,
+      normalizedLines: cleaned.normalized
     },
     candidate: {
       path: P0_CANDIDATE_RELATIVE,
@@ -674,6 +775,7 @@ export async function extractP0Candidate({ root, manifest, mode = 'dry-run', ove
     candidateSha256,
     candidateCharacterCount: candidate.length,
     removedLineCount: cleaned.removed.length,
+    normalizedLineCount: cleaned.normalized.length,
     normalizationStatus: 'human_review_required',
     humanVerified: false,
     r2TargetObjectKey: P0_R2_TARGET,
