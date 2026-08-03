@@ -226,19 +226,20 @@
     "knowledge:manuscript:inventory": "node scripts/book-i-manuscript.mjs inventory",
     "knowledge:manuscript:map": "node scripts/book-i-manuscript.mjs map",
     "knowledge:manuscript:status": "node scripts/book-i-manuscript.mjs status",
+    "knowledge:manuscript:extract-p0": "node scripts/extract-book-i-p0.mjs",
+    "check:knr-w2r1-t04": "node scripts/check-knr-w2r1-t04-searchable-pdf-extraction.mjs",
     "knowledge:runtime:index": "node scripts/knowledge-runtime.mjs index",
     "knowledge:runtime:query": "node scripts/knowledge-runtime.mjs query",
     "knowledge:runtime:evaluate": "node scripts/knowledge-runtime.mjs evaluate",
     "knowledge:runtime:fixtures": "node scripts/knowledge-runtime.mjs fixtures",
     "check:knowledge-runtime": "node scripts/check-knowledge-runtime.mjs",
-    "check:knr-w0r": "node scripts/check-knr-w0r-knowledge-inventory-reconciliation.mjs",
-    "check:imr-w0": "node scripts/check-imr-w0-scope-data-algorithm-license-audit.mjs",
-    "check:hdr-w0": "node scripts/check-hdr-w0-human-design-runtime-foundation.mjs"
+    "check:knr-w0r": "node scripts/check-knr-w0r-knowledge-inventory-reconciliation.mjs"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1101.0",
     "ajv": "^8.17.1",
     "linkedom": "^0.18.13",
+    "pdfjs-dist": "6.2.108",
     "wrangler": "^4.0.0"
   }
 }
