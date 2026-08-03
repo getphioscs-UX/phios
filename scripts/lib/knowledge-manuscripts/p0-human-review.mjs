@@ -490,7 +490,6 @@ export async function uploadApprovedP0({
           ContentLength: candidate.sizeBytes,
           ContentType: 'text/markdown',
           CacheControl: 'private, no-store',
-          ChecksumSHA256: Buffer.from(candidate.sha256, 'hex').toString('base64'),
           IfNoneMatch: '*',
           Metadata: {
             sha256: candidate.sha256,

@@ -62,6 +62,7 @@ assert(P0_HUMAN_REVIEW_RELATIVE.startsWith('.tmp/knowledge-manuscripts/'));
 assert.equal(P0_R2_TARGET, 'books/book-1/extracted/p0-preface.md');
 assert(implementationSource.includes("IfNoneMatch: '*'"));
 assert(implementationSource.includes("CacheControl: 'private, no-store'"));
+assert(!implementationSource.includes('ChecksumSHA256'));
 assert(implementationSource.includes("humanverified: 'true'"));
 assert(implementationSource.includes("authoritative: false"));
 assert(!/publicUrl|presignedUrl|r2\.dev|PutObjectAcl|public-read/u.test(implementationSource));
