@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-PLUGIN-CONTRACT-v1.0.0",
+  "pluginVersion": "1.0.0",
+  "runtimeVersion": "1.0.0",
+  "projectionVersion": "1.0.0",
+  "status": "experimental",
+  "licenseStatus": "not_required",
+  "imrStatus": "approved",
+  "methodDefinitionVersion": "1.0.0",
+  "dataAuthority": "SHARED_DATA_AUTHORITY",
+  "dependencies": {
+    "journeyRuntime": false,
+    "knowledgeRuntime": false,
+    "professionalWorkspace": false,
+    "methodPlugins": [],
+    "externalCalculationEngines": [],
+    "optionalInputs": [
+      "PUBLISHED_KNOWLEDGE",
+      "JOURNEY_RUNTIME"
+    ]
+  },
+  "authority": {
+    "methodDefinition": "IMR_APPROVED_METHOD_DEFINITION",
+    "data": "SHARED_DATA_AUTHORITY",
+    "calculation": "SHARED_CALCULATION_RUNTIME",
+    "projection": "SHARED_PROJECTION_RUNTIME",
+    "interpretation": "SHARED_INTERPRETATION_RUNTIME",
+    "professionalReview": "SHARED_PROFESSIONAL_RUNTIME",
+    "release": "AUTHORIZED_HUMAN_VIA_PROFESSIONAL_RUNTIME"
+  },
+  "calculationPolicy": {
+    "engineType": "deterministic_engine",
+    "providerParticipation": false,
+    "aiAllowed": false,
+    "workersAiAllowed": false,
+    "promptAllowed": false,
+    "interpretationAllowed": false,
+    "repeatability": "100_percent"
+  },
+  "projectionPolicy": {
+    "output": "PROJECTION_JSON",
+    "containsInterpretation": false,
+    "professionalAuthority": false
+  },
+  "interpretationPolicy": {
+    "output": "INTERPRETATION_CANDIDATE",
+    "professionalConclusion": false,
+    "directReleaseAllowed": false
+  },
+  "professionalPolicy": {
+    "independentReview": true,
+    "authorizedHumanRequired": true,
+    "releaseAuthority": "SHARED_PROFESSIONAL_RUNTIME"
+  },
+  "capabilities": [
+    "Definition",
+    "Data",
+    "Calculation",
+    "Projection",
+    "Interpretation",
+    "Professional"
+  ],
+  "pluginCode": "AST",
+  "pluginName": "Astrology"
+}
+
