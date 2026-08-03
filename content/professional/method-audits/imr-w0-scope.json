@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0.0",
+  "stageCode": "IMR-W0",
+  "stageTitle": "Scope, Data, Algorithm and License Audit",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "cfa39ac50d5129f3b0b31bc126e813c8a883a5ba"
+  },
+  "runtimePosition": "parallel_track",
+  "masterTrackBlocking": false,
+  "methods": [
+    {
+      "methodCode": "ASTROLOGY",
+      "status": "defined",
+      "calculationStatus": "audit_complete_pilot_selected",
+      "serviceStatus": "inactive",
+      "productionEligible": false,
+      "selfCalculationScope": "planned"
+    },
+    {
+      "methodCode": "BAZI",
+      "status": "defined",
+      "calculationStatus": "policy_candidate_frozen",
+      "serviceStatus": "inactive",
+      "productionEligible": false,
+      "selfCalculationScope": "planned"
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "status": "existing_professional_method",
+      "calculationMode": "external",
+      "selfCalculationStatus": "separate_hdr_audit_required",
+      "serviceStatus": "preserved",
+      "productionEligible": false
+    },
+    {
+      "methodCode": "GENE_KEYS",
+      "status": "not_planned",
+      "productionEligible": false
+    },
+    {
+      "methodCode": "ZI_WEI_DOU_SHU",
+      "status": "deferred_out_of_scope",
+      "productionEligible": false
+    }
+  ],
+  "prohibitedThisStage": [
+    "calculation_engine",
+    "chart_renderer",
+    "public_chart_page",
+    "product",
+    "offer",
+    "provider_call",
+    "runtime_write",
+    "database_migration",
+    "canonical_knowledge_change",
+    "pja_change",
+    "knr_change"
+  ],
+  "stageStatus": "conditional_passed"
+}
