@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 const readJson = async file => JSON.parse(await fs.readFile(file, 'utf8'));
 const digest = async file => crypto
   .createHash('sha256')
-  .update(await fs.readFile(file))
+  .update((await fs.readFile(file, 'utf8')).replace(/\r\n?/g, '\n'))
   .digest('hex');
 
 const blueprintPath =

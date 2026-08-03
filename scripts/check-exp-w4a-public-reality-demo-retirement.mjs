@@ -6,7 +6,10 @@ import path from 'node:path';
 const root = process.cwd();
 const read = relative => fs.readFile(path.join(root, relative), 'utf8');
 const exists = async relative => fs.access(path.join(root, relative)).then(() => true, () => false);
-const sha256 = async relative => crypto.createHash('sha256').update(await read(relative)).digest('hex');
+const sha256 = async relative => crypto
+  .createHash('sha256')
+  .update((await read(relative)).replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n'))
+  .digest('hex');
 
 const contract = JSON.parse(await read('docs/experience/EXP-W4A-public-reality-demo-retirement-contract.json'));
 assert.equal(contract.freezeId, 'EXP-W4A-Public-Reality-Demo-Retired');

@@ -6,7 +6,9 @@ import path from 'node:path';
 const root = process.cwd();
 
 async function read(relativePath) {
-  return fs.readFile(path.join(root, relativePath), 'utf8');
+  return (await fs.readFile(path.join(root, relativePath), 'utf8'))
+    .replace(/^\uFEFF/, '')
+    .replace(/\r\n?/g, '\n');
 }
 
 async function readJson(relativePath) {
