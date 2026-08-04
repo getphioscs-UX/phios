@@ -27,3 +27,17 @@ Validation:
 
 MR-W1 is standalone and remains outside the default check, PJA, Knowledge Runtime, MR-W0, IMR-W0 and HDR-W0 chains.
 <!-- MR-W1:END -->
+
+<!-- MR-W2:BEGIN -->
+## MR-W2｜Shared Data Authority
+
+MR-W2 establishes the single PHI OS Shared Data Authority at constitutional baseline main@6769f262c71a3a08319194942f17a0a154419fc8.
+
+Birth Record, Coordinate, Timezone, DST, True Solar Time, Astronomy, Calendar, Solar Terms and Reference Tables are shared across every Method and belong to no individual Method or Plugin. MR-W2 freezes authority and record contracts only; deterministic execution remains gated by MR-W3.
+
+Validation:
+
+    npm run check:mr-w2
+
+MR-W2 is standalone and remains outside the default check, PJA, Knowledge Runtime, MR-W0, MR-W1, IMR-W0, HDR-W0 and KNR-W2R1 T06 chains.
+<!-- MR-W2:END -->

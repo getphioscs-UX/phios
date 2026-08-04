@@ -1,0 +1,695 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/method-runtime/shared-data-authority-v1.schema.json",
+  "title": "PHI OS MR-W2 Shared Data Authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "stageCode",
+    "authorityCode",
+    "authorityVersion",
+    "status",
+    "baseline",
+    "runtimeCode",
+    "runtimeVersion",
+    "layerCode",
+    "singleton",
+    "sharedAcrossAllMethods",
+    "belongsToIndividualMethod",
+    "methodOwnershipAllowed",
+    "methodOverrideAllowed",
+    "providerAuthorityAllowed",
+    "aiAuthorityAllowed",
+    "recordContract",
+    "domains",
+    "governance",
+    "dependencyBoundary",
+    "privacyContract",
+    "productionContract"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-SHARED-DATA-AUTHORITY-v1.0.0"
+    },
+    "stageCode": {
+      "const": "MR-W2"
+    },
+    "authorityCode": {
+      "const": "SHARED_DATA_AUTHORITY"
+    },
+    "authorityVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "frozen"
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "branch",
+        "commit"
+      ],
+      "properties": {
+        "repository": {
+          "const": "getphioscs-UX/phios"
+        },
+        "branch": {
+          "const": "main"
+        },
+        "commit": {
+          "const": "6769f262c71a3a08319194942f17a0a154419fc8"
+        }
+      }
+    },
+    "runtimeCode": {
+      "const": "METHOD_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "layerCode": {
+      "const": "Data"
+    },
+    "singleton": {
+      "const": true
+    },
+    "sharedAcrossAllMethods": {
+      "const": true
+    },
+    "belongsToIndividualMethod": {
+      "const": false
+    },
+    "methodOwnershipAllowed": {
+      "const": false
+    },
+    "methodOverrideAllowed": {
+      "const": false
+    },
+    "providerAuthorityAllowed": {
+      "const": false
+    },
+    "aiAuthorityAllowed": {
+      "const": false
+    },
+    "recordContract": {
+      "const": "content/professional/method-runtime/shared-data-record-v1.schema.json"
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        {
+          "$ref": "#/$defs/birthDomain"
+        },
+        {
+          "$ref": "#/$defs/coordinateDomain"
+        },
+        {
+          "$ref": "#/$defs/timezoneDomain"
+        },
+        {
+          "$ref": "#/$defs/dstDomain"
+        },
+        {
+          "$ref": "#/$defs/trueSolarTimeDomain"
+        },
+        {
+          "$ref": "#/$defs/astronomyDomain"
+        },
+        {
+          "$ref": "#/$defs/calendarDomain"
+        },
+        {
+          "$ref": "#/$defs/solarTermsDomain"
+        },
+        {
+          "$ref": "#/$defs/referenceTablesDomain"
+        }
+      ],
+      "items": false
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authoritativeRecordRequiredBeforeCalculation",
+        "immutableSourceFacts",
+        "correctionCreatesRevision",
+        "silentInferenceAllowed",
+        "unknownValueAllowed",
+        "provenanceRequired",
+        "sourceVersionRequired",
+        "normalizationVersionRequired",
+        "checksumRequiredForReferenceTables",
+        "deterministicDerivationRequired",
+        "calculationExecutionOwner",
+        "providerMaySupplyAuthority",
+        "aiMayCreateOrRepairFacts",
+        "projectionAuthority",
+        "interpretationAuthority",
+        "professionalAuthority"
+      ],
+      "properties": {
+        "authoritativeRecordRequiredBeforeCalculation": {
+          "const": true
+        },
+        "immutableSourceFacts": {
+          "const": true
+        },
+        "correctionCreatesRevision": {
+          "const": true
+        },
+        "silentInferenceAllowed": {
+          "const": false
+        },
+        "unknownValueAllowed": {
+          "const": true
+        },
+        "provenanceRequired": {
+          "const": true
+        },
+        "sourceVersionRequired": {
+          "const": true
+        },
+        "normalizationVersionRequired": {
+          "const": true
+        },
+        "checksumRequiredForReferenceTables": {
+          "const": true
+        },
+        "deterministicDerivationRequired": {
+          "const": true
+        },
+        "calculationExecutionOwner": {
+          "const": "SHARED_CALCULATION_RUNTIME"
+        },
+        "providerMaySupplyAuthority": {
+          "const": false
+        },
+        "aiMayCreateOrRepairFacts": {
+          "const": false
+        },
+        "projectionAuthority": {
+          "const": false
+        },
+        "interpretationAuthority": {
+          "const": false
+        },
+        "professionalAuthority": {
+          "const": false
+        }
+      }
+    },
+    "dependencyBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "journeyRuntimeRequired",
+        "knowledgeRuntimeRequired",
+        "professionalWorkspaceRequired",
+        "methodPluginRequired",
+        "methodPluginsAreConsumersOnly",
+        "methodSpecificCopiesAllowed",
+        "methodSpecificOverridesAllowed"
+      ],
+      "properties": {
+        "journeyRuntimeRequired": {
+          "const": false
+        },
+        "knowledgeRuntimeRequired": {
+          "const": false
+        },
+        "professionalWorkspaceRequired": {
+          "const": false
+        },
+        "methodPluginRequired": {
+          "const": false
+        },
+        "methodPluginsAreConsumersOnly": {
+          "const": true
+        },
+        "methodSpecificCopiesAllowed": {
+          "const": false
+        },
+        "methodSpecificOverridesAllowed": {
+          "const": false
+        }
+      }
+    },
+    "privacyContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "privacyAuthority",
+        "birthRecordIsSensitive",
+        "coordinateIsSensitive",
+        "purposeLimitationRequired",
+        "minimumNecessaryAccessRequired",
+        "consentAndRetentionRemainExternalGovernance",
+        "stageCreatesStorageEntitlement"
+      ],
+      "properties": {
+        "privacyAuthority": {
+          "const": "EXISTING_PHI_OS_PRIVACY_GOVERNANCE"
+        },
+        "birthRecordIsSensitive": {
+          "const": true
+        },
+        "coordinateIsSensitive": {
+          "const": true
+        },
+        "purposeLimitationRequired": {
+          "const": true
+        },
+        "minimumNecessaryAccessRequired": {
+          "const": true
+        },
+        "consentAndRetentionRemainExternalGovernance": {
+          "const": true
+        },
+        "stageCreatesStorageEntitlement": {
+          "const": false
+        }
+      }
+    },
+    "productionContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorityContractEstablished",
+        "calculationEngineEstablished",
+        "productionDataPublished",
+        "stageCreatesCalculationFacts",
+        "stageCreatesProjection",
+        "stageCreatesInterpretation",
+        "stageCreatesProfessionalConclusion",
+        "nextGate"
+      ],
+      "properties": {
+        "authorityContractEstablished": {
+          "const": true
+        },
+        "calculationEngineEstablished": {
+          "const": false
+        },
+        "productionDataPublished": {
+          "const": false
+        },
+        "stageCreatesCalculationFacts": {
+          "const": false
+        },
+        "stageCreatesProjection": {
+          "const": false
+        },
+        "stageCreatesInterpretation": {
+          "const": false
+        },
+        "stageCreatesProfessionalConclusion": {
+          "const": false
+        },
+        "nextGate": {
+          "const": "MR-W3"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "domainBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "order",
+        "dataCode",
+        "name",
+        "sourceClass",
+        "authorityOwner",
+        "computationOwner",
+        "methodOwner",
+        "shared",
+        "versionRequired",
+        "provenanceRequired",
+        "privacyClassification",
+        "purpose"
+      ],
+      "properties": {
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "dataCode": {
+          "enum": [
+            "BIRTH_RECORD",
+            "COORDINATE",
+            "TIMEZONE",
+            "DST",
+            "TRUE_SOLAR_TIME",
+            "ASTRONOMY",
+            "CALENDAR",
+            "SOLAR_TERMS",
+            "REFERENCE_TABLES"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceClass": {
+          "enum": [
+            "declared",
+            "measured",
+            "governed_resolution",
+            "deterministic_derivation",
+            "governed_reference"
+          ]
+        },
+        "authorityOwner": {
+          "const": "SHARED_DATA_AUTHORITY"
+        },
+        "computationOwner": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "methodOwner": {
+          "type": "null"
+        },
+        "shared": {
+          "const": true
+        },
+        "versionRequired": {
+          "const": true
+        },
+        "provenanceRequired": {
+          "const": true
+        },
+        "privacyClassification": {
+          "enum": [
+            "sensitive_personal_data",
+            "sensitive_location_data",
+            "derived_context_data",
+            "derived_method_input",
+            "governed_reference_data"
+          ]
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 20
+        }
+      }
+    },
+    "sourceDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/domainBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "computationOwner": {
+              "const": null
+            }
+          }
+        }
+      ]
+    },
+    "derivedDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/domainBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "computationOwner": {
+              "const": "SHARED_CALCULATION_RUNTIME"
+            }
+          }
+        }
+      ]
+    },
+    "birthDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sourceDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 1
+            },
+            "dataCode": {
+              "const": "BIRTH_RECORD"
+            },
+            "name": {
+              "const": "Birth Record"
+            },
+            "sourceClass": {
+              "const": "declared"
+            },
+            "privacyClassification": {
+              "const": "sensitive_personal_data"
+            }
+          }
+        }
+      ]
+    },
+    "coordinateDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sourceDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 2
+            },
+            "dataCode": {
+              "const": "COORDINATE"
+            },
+            "name": {
+              "const": "Coordinate"
+            },
+            "sourceClass": {
+              "const": "measured"
+            },
+            "privacyClassification": {
+              "const": "sensitive_location_data"
+            }
+          }
+        }
+      ]
+    },
+    "timezoneDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/derivedDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 3
+            },
+            "dataCode": {
+              "const": "TIMEZONE"
+            },
+            "name": {
+              "const": "Timezone"
+            },
+            "sourceClass": {
+              "const": "governed_resolution"
+            },
+            "privacyClassification": {
+              "const": "derived_context_data"
+            }
+          }
+        }
+      ]
+    },
+    "dstDomain": {
+      "$ref": "#/$defs/dstLikeDomain"
+    },
+    "trueSolarTimeDomain": {
+      "$ref": "#/$defs/trueSolarLikeDomain"
+    },
+    "astronomyDomain": {
+      "$ref": "#/$defs/astronomyLikeDomain"
+    },
+    "calendarDomain": {
+      "$ref": "#/$defs/calendarLikeDomain"
+    },
+    "solarTermsDomain": {
+      "$ref": "#/$defs/solarTermsLikeDomain"
+    },
+    "referenceTablesDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/sourceDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 9
+            },
+            "dataCode": {
+              "const": "REFERENCE_TABLES"
+            },
+            "name": {
+              "const": "Reference Tables"
+            },
+            "sourceClass": {
+              "const": "governed_reference"
+            },
+            "privacyClassification": {
+              "const": "governed_reference_data"
+            }
+          }
+        }
+      ]
+    },
+    "dstLikeDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/derivedDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 4
+            },
+            "dataCode": {
+              "const": "DST"
+            },
+            "name": {
+              "const": "DST"
+            },
+            "sourceClass": {
+              "const": "deterministic_derivation"
+            },
+            "privacyClassification": {
+              "const": "derived_context_data"
+            }
+          }
+        }
+      ]
+    },
+    "trueSolarLikeDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/derivedDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 5
+            },
+            "dataCode": {
+              "const": "TRUE_SOLAR_TIME"
+            },
+            "name": {
+              "const": "True Solar Time"
+            },
+            "sourceClass": {
+              "const": "deterministic_derivation"
+            },
+            "privacyClassification": {
+              "const": "derived_context_data"
+            }
+          }
+        }
+      ]
+    },
+    "astronomyLikeDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/derivedDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 6
+            },
+            "dataCode": {
+              "const": "ASTRONOMY"
+            },
+            "name": {
+              "const": "Astronomy"
+            },
+            "sourceClass": {
+              "const": "deterministic_derivation"
+            },
+            "privacyClassification": {
+              "const": "derived_method_input"
+            }
+          }
+        }
+      ]
+    },
+    "calendarLikeDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/derivedDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 7
+            },
+            "dataCode": {
+              "const": "CALENDAR"
+            },
+            "name": {
+              "const": "Calendar"
+            },
+            "sourceClass": {
+              "const": "deterministic_derivation"
+            },
+            "privacyClassification": {
+              "const": "derived_context_data"
+            }
+          }
+        }
+      ]
+    },
+    "solarTermsLikeDomain": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/derivedDomain"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "order": {
+              "const": 8
+            },
+            "dataCode": {
+              "const": "SOLAR_TERMS"
+            },
+            "name": {
+              "const": "Solar Terms"
+            },
+            "sourceClass": {
+              "const": "deterministic_derivation"
+            },
+            "privacyClassification": {
+              "const": "derived_method_input"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
