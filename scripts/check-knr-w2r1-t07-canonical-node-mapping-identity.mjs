@@ -129,32 +129,52 @@ for (const [index, record] of mapping.mappings.entries()) {
   assert.equal(record.sourceObjectKey, inventoryPart.sourceObjectKey);
   assert.equal(record.sourceVersion, manifest.manuscriptVersion);
   assert.equal(record.publicExtractionPolicy, 'prohibited');
-  assert.deepEqual(record.crossSectionReferences, []);
   assert.equal(record.review.reviewerRole, 'TL');
-  assert.equal(record.review.humanVerified, false);
-  assert.equal(record.review.reviewedBy, null);
-  assert.equal(record.review.reviewedAt, null);
+  if (record.mappingStatus === 'mapped') {
+    assert.equal(record.authorityStatus, 'human_confirmed');
+    assert.equal(record.review.status, 'approved');
+    assert.equal(record.review.humanVerified, true);
+    assert(record.review.reviewedBy);
+    assert(record.review.reviewedAt);
+  } else {
+    assert.deepEqual(record.crossSectionReferences, []);
+    assert.equal(record.review.humanVerified, false);
+    assert.equal(record.review.reviewedBy, null);
+    assert.equal(record.review.reviewedAt, null);
+  }
   assert.equal(record.stalenessStatus, inventoryPart.stalenessStatus);
 }
 
 const p0Records = mapping.mappings.filter(record => record.partCode === 'P0');
 const laterRecords = mapping.mappings.filter(record => record.partCode !== 'P0');
 assert.equal(p0Records.length, blueprint.parts.find(part => part.partCode === 'P0').nodes.length);
-assert(p0Records.every(record => record.mappingStatus === 'candidate'));
-assert(p0Records.every(record => record.authorityStatus === 'automation_candidate'));
-assert(p0Records.every(record => record.extractionEligibility === 'private_candidate_only'));
-assert(p0Records.every(record => record.review.status === 'pending_tl_review'));
-assert(p0Records.every(record => record.ranges.length === 1));
-for (const record of p0Records) {
-  const [range] = record.ranges;
-  assert(requiredRangeFields.every(field => Object.hasOwn(range, field)));
-  assert.equal(range.startHeading, inventory.parts[0].startHeading);
-  assert.equal(range.endHeading, inventory.parts[0].endHeading);
-  assert.equal(range.startAnchor, inventory.parts[0].startAnchor);
-  assert.equal(range.endAnchor, inventory.parts[0].endAnchor);
-  assert.equal(range.sectionHash, inventory.parts[0].sectionHash);
-  assert.equal(range.rangeRole, 'primary');
-  assert(record.unresolved.includes('exact_primary_range_requires_tl_confirmation'));
+const p0CandidateRound = p0Records.every(record => record.mappingStatus === 'candidate');
+const p0MappedRound = p0Records.every(record => record.mappingStatus === 'mapped');
+assert(p0CandidateRound || p0MappedRound, 'P0 must be wholly candidate or atomically TL-mapped');
+if (p0CandidateRound) {
+  assert(p0Records.every(record => record.authorityStatus === 'automation_candidate'));
+  assert(p0Records.every(record => record.extractionEligibility === 'private_candidate_only'));
+  assert(p0Records.every(record => record.review.status === 'pending_tl_review'));
+  assert(p0Records.every(record => record.ranges.length === 1));
+  for (const record of p0Records) {
+    const [range] = record.ranges;
+    assert(requiredRangeFields.every(field => Object.hasOwn(range, field)));
+    assert.equal(range.startHeading, inventory.parts[0].startHeading);
+    assert.equal(range.endHeading, inventory.parts[0].endHeading);
+    assert.equal(range.startAnchor, inventory.parts[0].startAnchor);
+    assert.equal(range.endAnchor, inventory.parts[0].endAnchor);
+    assert.equal(range.sectionHash, inventory.parts[0].sectionHash);
+    assert.equal(range.rangeRole, 'primary');
+    assert(record.unresolved.includes('exact_primary_range_requires_tl_confirmation'));
+  }
+} else {
+  assert(p0Records.every(record => record.authorityStatus === 'human_confirmed'));
+  assert(p0Records.every(record => record.extractionEligibility === 'private_mapped_only'));
+  assert(p0Records.every(record => record.review.status === 'approved'));
+  assert(p0Records.every(record => record.review.reviewerRole === 'TL'));
+  assert(p0Records.every(record => record.review.humanVerified === true));
+  assert(p0Records.every(record => record.unresolved.length === 0));
+  assert(p0Records.every(record => record.ranges.some(range => range.rangeRole === 'primary')));
 }
 assert(laterRecords.every(record => record.mappingStatus === 'unmapped'));
 assert(laterRecords.every(record => record.authorityStatus === 'unassigned'));
@@ -163,11 +183,13 @@ assert(laterRecords.every(record => record.ranges.length === 0));
 assert(laterRecords.every(record => record.review.status === 'not_started'));
 
 assert.equal(validateBookINodeMapping(mapping, { manifest, blueprint, inventory }), mapping);
-assert.deepEqual(
-  deriveInitialBookINodeMapping({ manifest, blueprint, inventory }),
-  mapping,
-  'The checked-in Mapping must remain a deterministic Blueprint-derived first-round identity'
-);
+if (p0CandidateRound) {
+  assert.deepEqual(
+    deriveInitialBookINodeMapping({ manifest, blueprint, inventory }),
+    mapping,
+    'The initial Mapping must remain a deterministic Blueprint-derived first-round identity'
+  );
+}
 
 const missingNode = clone(mapping);
 missingNode.mappings.pop();
@@ -216,7 +238,10 @@ assert.equal(report.status, 'registered');
 assert.equal(report.mappingFilePresent, true);
 assert.equal(report.blueprintNodeCount, blueprintNodes.length);
 assert.equal(report.mappingRecordCount, blueprintNodes.length);
-assert.equal(report.mappingStatusCounts.candidate, p0Records.length);
+assert.equal(
+  p0CandidateRound ? report.mappingStatusCounts.candidate : report.mappingStatusCounts.mapped,
+  p0Records.length
+);
 assert.equal(report.mappingStatusCounts.unmapped, laterRecords.length);
 assert.deepEqual(report.staleNodeCodes, []);
 assert.equal(report.staleArtifactReuseBlocked, false);
@@ -252,7 +277,7 @@ assert.equal(staleReport.writes, 0);
 
 console.log('✓ KNR-W2R1-T07 Canonical Node Mapping Identity contract passed.');
 console.log('  Mapping coverage is derived from the Book I Blueprint node arrays; no fixed portfolio count is used.');
-console.log('  P0 remains automation-candidate for TL review; unmaterialized P1–P5 remain unmapped.');
+console.log(`  P0 is ${p0CandidateRound ? 'automation-candidate for TL review' : 'atomically TL-mapped'}; unmaterialized P1–P5 remain unmapped.`);
 console.log('  Automation cannot grant mapped authority, and mapped status requires explicit TL approval evidence.');
 console.log('  Section Hash drift becomes MANUSCRIPT_STALE and blocks Mapping, Candidate and Prompt reuse.');
 console.log('  Mapping stores references and hashes only—no continuous manuscript body or public extraction right.');
