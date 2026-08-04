@@ -12,6 +12,11 @@ import {
   reviewP3Candidate
 } from './p3-human-review.mjs';
 
+import {
+  archiveStaleMappingReview,
+  mappingReviewIdentityMatches
+} from './mapping-range-suggestion.mjs';
+
 export const T08_SCHEMA_VERSION = 'PHI-OS-KNR-W2R1-P3-MAPPING-REVIEW-v1.0.0';
 export const P3_MAPPING_REVIEW_RELATIVE =
   '.tmp/knowledge-manuscripts/book-1/p3-node-mapping-review.json';
@@ -533,6 +538,26 @@ export function reviewP3NodeMapping({ root, mode = 'dry-run', now }) {
   if (!['dry-run', 'prepare'].includes(mode)) throw coded('P3_MAPPING_REVIEW_MODE_INVALID');
   const context = loadContext(root);
   const reviewFile = resolveWithin(root, P3_MAPPING_REVIEW_RELATIVE);
+  let staleReviewArchivedTo = null;
+  if (fs.existsSync(reviewFile)) {
+    const existing = readJson(reviewFile, 'P3_MAPPING_REVIEW_FILE_INVALID');
+    if (!mappingReviewIdentityMatches(existing, context)) {
+      if (mode === 'dry-run') {
+        return common(context, {
+          command: 'review-map-p3',
+          mode,
+          status: 'stale_review_requires_regeneration',
+          reviewFilePresent: true,
+          candidateIdentityChanged: existing.candidate?.sha256 !== context.candidate.sha256,
+          mappingIdentityChanged: existing.mapping?.sha256 !== context.mappingSha256,
+          approvedNodeCount: 0,
+          blockedNodeCount: p3BlueprintNodes(context).length,
+          nextAction: 'PREPARE_REGENERATED_PRIVATE_TL_REVIEW_TEMPLATE'
+        });
+      }
+      staleReviewArchivedTo = archiveStaleMappingReview(reviewFile, root, 'P3', now);
+    }
+  }
   if (!fs.existsSync(reviewFile)) {
     if (mode === 'dry-run') {
       return common(context, {
@@ -552,6 +577,8 @@ export function reviewP3NodeMapping({ root, mode = 'dry-run', now }) {
       mode,
       status: 'human_review_required',
       reviewFilePresent: true,
+      staleReviewArchivedTo,
+      derivedArtifactRegenerated: Boolean(staleReviewArchivedTo),
       approvedNodeCount: 0,
       blockedNodeCount: template.nodes.length,
       writes: Number(written),

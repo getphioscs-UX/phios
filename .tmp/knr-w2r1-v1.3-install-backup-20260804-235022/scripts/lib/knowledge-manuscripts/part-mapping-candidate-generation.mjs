@@ -7,10 +7,9 @@ import {
   validateBookINodeMapping,
   validateBookISectionInventory
 } from '../../book-i-manuscript.mjs';
-import { suggestPartNodeRanges } from './mapping-range-suggestion.mjs';
 
 export const MAPPING_CANDIDATE_SCHEMA_VERSION =
-  'PHI-OS-KNR-W2R1-PART-MAPPING-CANDIDATE-v1.3.0';
+  'PHI-OS-KNR-W2R1-PART-MAPPING-CANDIDATE-v1.0.0';
 export const MAPPING_RELATIVE =
   'content/knowledge/manuscripts/book-1/node-manuscript-mapping.json';
 export const INVENTORY_RELATIVE =
@@ -33,12 +32,20 @@ function resolveWithin(root, relativePath) {
   }
   return resolved;
 }
+
 function readJson(file, code) {
   if (!fs.existsSync(file)) throw coded(code, { path: file });
-  try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
-  catch { throw coded(`${code}_INVALID_JSON`, { path: file }); }
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch {
+    throw coded(`${code}_INVALID_JSON`, { path: file });
+  }
 }
-function jsonText(value) { return `${JSON.stringify(value, null, 2)}\n`; }
+
+function jsonText(value) {
+  return `${JSON.stringify(value, null, 2)}\n`;
+}
+
 function writeJsonAtomic(file, value) {
   const next = jsonText(value);
   if (fs.readFileSync(file, 'utf8') === next) return false;
@@ -52,24 +59,43 @@ function writeJsonAtomic(file, value) {
   }
   return true;
 }
+
 function loadContext(root) {
-  const manifest = readJson(resolveWithin(root, MANIFEST_RELATIVE), 'PART_MAPPING_CANDIDATE_MANIFEST_MISSING');
+  const manifest = readJson(
+    resolveWithin(root, MANIFEST_RELATIVE),
+    'PART_MAPPING_CANDIDATE_MANIFEST_MISSING'
+  );
   const inventory = validateBookISectionInventory(
     readJson(resolveWithin(root, INVENTORY_RELATIVE), 'PART_MAPPING_CANDIDATE_INVENTORY_MISSING'),
     manifest
   );
-  const blueprint = readJson(resolveWithin(root, BLUEPRINT_RELATIVE), 'PART_MAPPING_CANDIDATE_BLUEPRINT_MISSING');
+  const blueprint = readJson(
+    resolveWithin(root, BLUEPRINT_RELATIVE),
+    'PART_MAPPING_CANDIDATE_BLUEPRINT_MISSING'
+  );
   const mappingFile = resolveWithin(root, MAPPING_RELATIVE);
   const mappingSource = fs.readFileSync(mappingFile, 'utf8');
-  const mapping = validateBookINodeMapping(JSON.parse(mappingSource), { manifest, blueprint, inventory });
+  const mapping = validateBookINodeMapping(JSON.parse(mappingSource), {
+    manifest,
+    blueprint,
+    inventory
+  });
   return { manifest, inventory, blueprint, mapping, mappingFile, mappingSource };
 }
+
 function assertSequentialEligibility(partCode, context) {
   const index = PART_CODES.indexOf(partCode);
   if (index === -1) throw coded('PART_MAPPING_CANDIDATE_PART_INVALID', { partCode });
   const inventoryPart = context.inventory.parts.find(part => part.partCode === partCode);
   const manifestHash = context.manifest.contentHashes?.normalizedParts?.[partCode] ?? null;
-  if (!inventoryPart || inventoryPart.normalizationStatus !== 'human_verified' || inventoryPart.humanVerified !== true || inventoryPart.stalenessStatus !== 'CURRENT' || !inventoryPart.sectionHash || inventoryPart.sectionHash !== manifestHash) {
+  if (
+    !inventoryPart ||
+    inventoryPart.normalizationStatus !== 'human_verified' ||
+    inventoryPart.humanVerified !== true ||
+    inventoryPart.stalenessStatus !== 'CURRENT' ||
+    !inventoryPart.sectionHash ||
+    inventoryPart.sectionHash !== manifestHash
+  ) {
     throw coded(`${partCode}_MAPPING_CANDIDATE_MANUSCRIPT_NOT_READY`, {
       normalizationStatus: inventoryPart?.normalizationStatus ?? null,
       humanVerified: inventoryPart?.humanVerified ?? null,
@@ -90,7 +116,9 @@ function assertSequentialEligibility(partCode, context) {
 }
 
 export function generatePartMappingCandidates({ root, partCode, mode = 'dry-run' }) {
-  if (!['dry-run', 'apply'].includes(mode)) throw coded('PART_MAPPING_CANDIDATE_MODE_INVALID', { mode });
+  if (!['dry-run', 'apply'].includes(mode)) {
+    throw coded('PART_MAPPING_CANDIDATE_MODE_INVALID', { mode });
+  }
   const context = loadContext(root);
   const inventoryPart = assertSequentialEligibility(partCode, context);
   const blueprintNodes = deriveBookIBlueprintNodes(context.blueprint, context.manifest)
@@ -102,60 +130,75 @@ export function generatePartMappingCandidates({ root, partCode, mode = 'dry-run'
       mappingRecordCount: targetRecords.length
     });
   }
-
-  const suggestion = suggestPartNodeRanges({
-    root,
-    partCode,
-    blueprintNodes,
-    sectionHash: inventoryPart.sectionHash
-  });
-  const suggestionByNode = new Map(suggestion.suggestions.map(item => [item.nodeCode, item]));
   const statuses = [...new Set(targetRecords.map(record => record.mappingStatus))];
-  const refreshable = statuses.every(status => ['unmapped', 'candidate'].includes(status));
-  if (!refreshable) throw coded(`${partCode}_MAPPING_CANDIDATE_STATE_INVALID`, { statuses });
-
-  const next = clone(context.mapping);
-  for (const record of next.mappings) {
-    const generated = suggestionByNode.get(record.nodeCode);
-    if (!generated) continue;
-    record.mappingStatus = 'candidate';
-    record.authorityStatus = 'automation_candidate';
-    record.ranges = clone(generated.ranges);
-    record.crossSectionReferences = [];
-    record.extractionEligibility = 'private_candidate_only';
-    record.unresolved = clone(generated.unresolved);
-    record.review = {
-      status: 'pending_tl_review',
-      reviewerRole: 'TL',
-      humanVerified: false,
-      reviewedBy: null,
-      reviewedAt: null
-    };
-    record.stalenessStatus = 'CURRENT';
+  const alreadyCandidate = statuses.length === 1 && statuses[0] === 'candidate';
+  if (!alreadyCandidate && !(statuses.length === 1 && statuses[0] === 'unmapped')) {
+    throw coded(`${partCode}_MAPPING_CANDIDATE_STATE_INVALID`, { statuses });
   }
 
-  validateBookINodeMapping(next, { manifest: context.manifest, blueprint: context.blueprint, inventory: context.inventory });
+  const next = clone(context.mapping);
+  if (!alreadyCandidate) {
+    const nodeCodes = new Set(blueprintNodes.map(node => node.nodeCode));
+    for (const record of next.mappings) {
+      if (!nodeCodes.has(record.nodeCode)) continue;
+      record.mappingStatus = 'candidate';
+      record.authorityStatus = 'automation_candidate';
+      record.ranges = [{
+        rangeCode: `${record.nodeCode}-R01`,
+        startHeading: inventoryPart.startHeading,
+        endHeading: inventoryPart.endHeading,
+        startAnchor: inventoryPart.startAnchor,
+        endAnchor: inventoryPart.endAnchor,
+        sectionHash: inventoryPart.sectionHash,
+        rangeRole: 'primary'
+      }];
+      record.crossSectionReferences = [];
+      record.extractionEligibility = 'private_candidate_only';
+      record.unresolved = [
+        'exact_primary_range_requires_tl_confirmation',
+        'supporting_ranges_not_assessed',
+        'cross_section_references_not_assessed'
+      ];
+      record.review = {
+        status: 'pending_tl_review',
+        reviewerRole: 'TL',
+        humanVerified: false,
+        reviewedBy: null,
+        reviewedAt: null
+      };
+      record.stalenessStatus = 'CURRENT';
+    }
+  }
+
+  validateBookINodeMapping(next, {
+    manifest: context.manifest,
+    blueprint: context.blueprint,
+    inventory: context.inventory
+  });
+
   let writes = 0;
-  if (mode === 'apply') writes = writeJsonAtomic(context.mappingFile, next) ? 1 : 0;
+  if (mode === 'apply' && !alreadyCandidate) {
+    writes = writeJsonAtomic(context.mappingFile, next) ? 1 : 0;
+  }
   return {
     schemaVersion: MAPPING_CANDIDATE_SCHEMA_VERSION,
     stage: `KNR-W2R1-T09-${partCode}`,
     command: `generate-map-${partCode.toLowerCase()}`,
     mode,
-    status: mode === 'apply' ? 'candidates_generated_or_refreshed' : 'candidate_plan_validated',
+    status: alreadyCandidate ? 'already_candidate' : mode === 'apply' ? 'candidates_generated' : 'candidate_plan_validated',
     bookCode: context.manifest.bookCode,
     partCode,
     mappingPath: MAPPING_RELATIVE,
     mappingSha256Before: sha256(context.mappingSource),
     mappingSha256After: sha256(jsonText(next)),
-    candidatePath: suggestion.candidatePath,
-    candidateSha256: suggestion.candidateSha256,
-    headingAuthority: suggestion.headingAuthority,
-    headingCount: suggestion.headingCount,
     blueprintNodeCount: blueprintNodes.length,
-    generatedCandidateCount: blueprintNodes.length,
-    targetStatusBefore: statuses,
+    generatedCandidateCount: alreadyCandidate ? 0 : blueprintNodes.length,
+    targetStatusBefore: statuses[0],
     targetStatusAfter: 'candidate',
+    authorityStatusAfter: 'automation_candidate',
+    extractionEligibilityAfter: 'private_candidate_only',
+    priorPartsPreserved: true,
+    laterPartsPreserved: true,
     automaticHumanVerification: false,
     automaticMappedStatus: false,
     publicExtractionAllowed: false,

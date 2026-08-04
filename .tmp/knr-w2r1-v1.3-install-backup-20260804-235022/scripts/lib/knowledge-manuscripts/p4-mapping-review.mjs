@@ -8,25 +8,20 @@ import {
   validateBookISectionInventory
 } from '../../book-i-manuscript.mjs';
 import {
-  P1_CANDIDATE_RELATIVE,
-  reviewP1Candidate
-} from './p1-human-review.mjs';
+  P4_CANDIDATE_RELATIVE,
+  reviewP4Candidate
+} from './p4-human-review.mjs';
 
-import {
-  archiveStaleMappingReview,
-  mappingReviewIdentityMatches
-} from './mapping-range-suggestion.mjs';
-
-export const T08_SCHEMA_VERSION = 'PHI-OS-KNR-W2R1-P1-MAPPING-REVIEW-v1.0.0';
-export const P1_MAPPING_REVIEW_RELATIVE =
-  '.tmp/knowledge-manuscripts/book-1/p1-node-mapping-review.json';
-export const P1_MAPPING_RELATIVE =
+export const T08_SCHEMA_VERSION = 'PHI-OS-KNR-W2R1-P4-MAPPING-REVIEW-v1.0.0';
+export const P4_MAPPING_REVIEW_RELATIVE =
+  '.tmp/knowledge-manuscripts/book-1/p4-node-mapping-review.json';
+export const P4_MAPPING_RELATIVE =
   'content/knowledge/manuscripts/book-1/node-manuscript-mapping.json';
-export const P1_INVENTORY_RELATIVE =
+export const P4_INVENTORY_RELATIVE =
   'content/knowledge/manuscripts/book-1/book-1-section-inventory.json';
-export const P1_BLUEPRINT_RELATIVE =
+export const P4_BLUEPRINT_RELATIVE =
   'content/knowledge/blueprints/book-1-knowledge-blueprint.json';
-export const P1_MAPPING_MANIFEST_RELATIVE =
+export const P4_MAPPING_MANIFEST_RELATIVE =
   'content/knowledge/manuscripts/book-1/manuscript-manifest.json';
 
 export const REQUIRED_MAPPING_REVIEW_CHECKS = Object.freeze([
@@ -67,7 +62,7 @@ function resolveWithin(root, relativePath) {
   const resolvedRoot = path.resolve(root);
   const resolved = path.resolve(resolvedRoot, relativePath);
   if (!resolved.startsWith(`${resolvedRoot}${path.sep}`)) {
-    throw coded('P1_MAPPING_REVIEW_PATH_ESCAPE', { path: relativePath });
+    throw coded('P4_MAPPING_REVIEW_PATH_ESCAPE', { path: relativePath });
   }
   return resolved;
 }
@@ -107,7 +102,7 @@ function sha256(value) {
 function isoNow(now) {
   const supplied = typeof now === 'function' ? now() : new Date();
   const value = supplied instanceof Date ? supplied : new Date(supplied);
-  if (Number.isNaN(value.getTime())) throw coded('P1_MAPPING_REVIEW_TIMESTAMP_INVALID');
+  if (Number.isNaN(value.getTime())) throw coded('P4_MAPPING_REVIEW_TIMESTAMP_INVALID');
   return value.toISOString();
 }
 
@@ -133,13 +128,13 @@ function anchorPositions(candidateText, anchor) {
 }
 
 function candidateState(root) {
-  const file = resolveWithin(root, P1_CANDIDATE_RELATIVE);
-  if (!fs.existsSync(file)) throw coded('P1_MAPPING_REVIEW_CANDIDATE_MISSING');
+  const file = resolveWithin(root, P4_CANDIDATE_RELATIVE);
+  if (!fs.existsSync(file)) throw coded('P4_MAPPING_REVIEW_CANDIDATE_MISSING');
   const bytes = fs.readFileSync(file);
-  if (!bytes.length) throw coded('P1_MAPPING_REVIEW_CANDIDATE_EMPTY');
+  if (!bytes.length) throw coded('P4_MAPPING_REVIEW_CANDIDATE_EMPTY');
   const text = bytes.toString('utf8');
   return {
-    path: P1_CANDIDATE_RELATIVE,
+    path: P4_CANDIDATE_RELATIVE,
     sha256: sha256(bytes),
     sizeBytes: bytes.length,
     characterCount: text.length,
@@ -149,23 +144,23 @@ function candidateState(root) {
 }
 
 function loadContext(root) {
-  const t05 = reviewP1Candidate({ root, mode: 'dry-run' });
+  const t05 = reviewP4Candidate({ root, mode: 'dry-run' });
   if (t05.status !== 'human_verified' || t05.humanVerified !== true) {
-    throw coded('P1_MAPPING_REVIEW_REQUIRES_T05_HUMAN_VERIFIED');
+    throw coded('P4_MAPPING_REVIEW_REQUIRES_T05_HUMAN_VERIFIED');
   }
   const manifest = readJson(
-    resolveWithin(root, P1_MAPPING_MANIFEST_RELATIVE),
-    'P1_MAPPING_REVIEW_MANIFEST_MISSING'
+    resolveWithin(root, P4_MAPPING_MANIFEST_RELATIVE),
+    'P4_MAPPING_REVIEW_MANIFEST_MISSING'
   );
   const inventory = validateBookISectionInventory(
-    readJson(resolveWithin(root, P1_INVENTORY_RELATIVE), 'P1_MAPPING_REVIEW_INVENTORY_MISSING'),
+    readJson(resolveWithin(root, P4_INVENTORY_RELATIVE), 'P4_MAPPING_REVIEW_INVENTORY_MISSING'),
     manifest
   );
   const blueprint = readJson(
-    resolveWithin(root, P1_BLUEPRINT_RELATIVE),
-    'P1_MAPPING_REVIEW_BLUEPRINT_MISSING'
+    resolveWithin(root, P4_BLUEPRINT_RELATIVE),
+    'P4_MAPPING_REVIEW_BLUEPRINT_MISSING'
   );
-  const mappingFile = resolveWithin(root, P1_MAPPING_RELATIVE);
+  const mappingFile = resolveWithin(root, P4_MAPPING_RELATIVE);
   const mappingBytes = fs.readFileSync(mappingFile);
   const mapping = validateBookINodeMapping(JSON.parse(mappingBytes.toString('utf8')), {
     manifest,
@@ -173,19 +168,19 @@ function loadContext(root) {
     inventory
   });
   const candidate = candidateState(root);
-  const p1 = inventory.parts.find(part => part.partCode === 'P1');
+  const p4 = inventory.parts.find(part => part.partCode === 'P4');
   if (
-    !p1 ||
-    p1.normalizationStatus !== 'human_verified' ||
-    p1.humanVerified !== true ||
-    p1.stalenessStatus !== 'CURRENT' ||
-    candidate.sha256 !== p1.sectionHash ||
-    candidate.sha256 !== manifest.contentHashes?.normalizedParts?.P1
+    !p4 ||
+    p4.normalizationStatus !== 'human_verified' ||
+    p4.humanVerified !== true ||
+    p4.stalenessStatus !== 'CURRENT' ||
+    candidate.sha256 !== p4.sectionHash ||
+    candidate.sha256 !== manifest.contentHashes?.normalizedParts?.P4
   ) {
-    throw coded('P1_MAPPING_REVIEW_MANUSCRIPT_STALE', {
+    throw coded('P4_MAPPING_REVIEW_MANUSCRIPT_STALE', {
       candidateSha256: candidate.sha256,
-      inventorySectionHash: p1?.sectionHash || null,
-      manifestSectionHash: manifest.contentHashes?.normalizedParts?.P1 || null
+      inventorySectionHash: p4?.sectionHash || null,
+      manifestSectionHash: manifest.contentHashes?.normalizedParts?.P4 || null
     });
   }
   return {
@@ -199,22 +194,22 @@ function loadContext(root) {
   };
 }
 
-function p1BlueprintNodes(context) {
+function p4BlueprintNodes(context) {
   return deriveBookIBlueprintNodes(context.blueprint, context.manifest)
-    .filter(node => node.partCode === 'P1');
+    .filter(node => node.partCode === 'P4');
 }
 
-export function createP1MappingReviewTemplate(context, { now } = {}) {
-  const nodes = p1BlueprintNodes(context);
+export function createP4MappingReviewTemplate(context, { now } = {}) {
+  const nodes = p4BlueprintNodes(context);
   const mappingByNode = new Map(context.mapping.mappings.map(record => [record.nodeCode, record]));
   if (nodes.some(node => mappingByNode.get(node.nodeCode)?.mappingStatus !== 'candidate')) {
-    throw coded('P1_MAPPING_REVIEW_PREPARE_REQUIRES_CANDIDATES');
+    throw coded('P4_MAPPING_REVIEW_PREPARE_REQUIRES_CANDIDATES');
   }
   return {
     schemaVersion: T08_SCHEMA_VERSION,
-    stage: 'KNR-W2R1-T09-P1',
+    stage: 'KNR-W2R1-T09-P4',
     bookCode: context.manifest.bookCode,
-    partCode: 'P1',
+    partCode: 'P4',
     locale: context.manifest.locale,
     sourceVersion: context.manifest.manuscriptVersion,
     createdAt: isoNow(now),
@@ -226,9 +221,9 @@ export function createP1MappingReviewTemplate(context, { now } = {}) {
       headings: [...context.candidate.headings]
     },
     mapping: {
-      path: P1_MAPPING_RELATIVE,
+      path: P4_MAPPING_RELATIVE,
       sha256: context.mappingSha256,
-      applyPolicy: 'atomic_after_all_p1_nodes_approved'
+      applyPolicy: 'atomic_after_all_p4_nodes_approved'
     },
     requiredChecks: [...REQUIRED_MAPPING_REVIEW_CHECKS],
     reviewerAuthority: {
@@ -279,17 +274,17 @@ export function createP1MappingReviewTemplate(context, { now } = {}) {
 
 function topLevelReviewIdentity(review, context) {
   if (!review || typeof review !== 'object' || Array.isArray(review)) {
-    throw coded('P1_MAPPING_REVIEW_INVALID');
+    throw coded('P4_MAPPING_REVIEW_INVALID');
   }
   if (
     review.schemaVersion !== T08_SCHEMA_VERSION ||
-    review.stage !== 'KNR-W2R1-T09-P1' ||
+    review.stage !== 'KNR-W2R1-T09-P4' ||
     review.bookCode !== context.manifest.bookCode ||
-    review.partCode !== 'P1' ||
+    review.partCode !== 'P4' ||
     review.locale !== context.manifest.locale ||
     review.sourceVersion !== context.manifest.manuscriptVersion
   ) {
-    throw coded('P1_MAPPING_REVIEW_IDENTITY_MISMATCH');
+    throw coded('P4_MAPPING_REVIEW_IDENTITY_MISMATCH');
   }
   if (
     review.candidate?.path !== context.candidate.path ||
@@ -297,18 +292,18 @@ function topLevelReviewIdentity(review, context) {
     review.candidate?.sizeBytes !== context.candidate.sizeBytes ||
     review.candidate?.characterCount !== context.candidate.characterCount
   ) {
-    throw coded('P1_MAPPING_REVIEW_MANUSCRIPT_STALE');
+    throw coded('P4_MAPPING_REVIEW_MANUSCRIPT_STALE');
   }
   const expectedMappingHash = review.application?.status === 'applied'
     ? review.application?.appliedMappingSha256
     : review.mapping?.sha256;
   if (
-    review.mapping?.path !== P1_MAPPING_RELATIVE ||
+    review.mapping?.path !== P4_MAPPING_RELATIVE ||
     !HASH_PATTERN.test(clean(expectedMappingHash)) ||
     expectedMappingHash !== context.mappingSha256 ||
-    review.mapping?.applyPolicy !== 'atomic_after_all_p1_nodes_approved'
+    review.mapping?.applyPolicy !== 'atomic_after_all_p4_nodes_approved'
   ) {
-    throw coded('P1_MAPPING_REVIEW_MAPPING_STALE', {
+    throw coded('P4_MAPPING_REVIEW_MAPPING_STALE', {
       expected: expectedMappingHash || null,
       actual: context.mappingSha256
     });
@@ -324,7 +319,7 @@ function topLevelReviewIdentity(review, context) {
     review.publicBoundary?.paidBookSubstitutionAllowed !== false ||
     review.publicBoundary?.productionModified !== false
   ) {
-    throw coded('P1_MAPPING_REVIEW_AUTHORITY_OR_BOUNDARY_MISMATCH');
+    throw coded('P4_MAPPING_REVIEW_AUTHORITY_OR_BOUNDARY_MISMATCH');
   }
 }
 
@@ -342,7 +337,7 @@ function rangeBlockers(range, node, context, allNodeCodes) {
   if (
     range.endHeading !== null &&
     !context.candidate.headings.includes(range.endHeading) &&
-    range.endHeading !== context.inventory.parts.find(part => part.partCode === 'P1')?.endHeading
+    range.endHeading !== context.inventory.parts.find(part => part.partCode === 'P4')?.endHeading
   ) {
     blockers.push('end_heading_not_found');
   }
@@ -367,13 +362,13 @@ function rangeBlockers(range, node, context, allNodeCodes) {
   return blockers;
 }
 
-export function evaluateP1MappingReview(review, context) {
+export function evaluateP4MappingReview(review, context) {
   topLevelReviewIdentity(review, context);
-  const blueprintNodes = p1BlueprintNodes(context);
+  const blueprintNodes = p4BlueprintNodes(context);
   const expectedCodes = blueprintNodes.map(node => node.nodeCode);
   const actualCodes = Array.isArray(review.nodes) ? review.nodes.map(node => node?.nodeCode) : [];
   if (JSON.stringify(actualCodes) !== JSON.stringify(expectedCodes)) {
-    throw coded('P1_MAPPING_REVIEW_NODE_SEQUENCE_MISMATCH', {
+    throw coded('P4_MAPPING_REVIEW_NODE_SEQUENCE_MISMATCH', {
       expected: expectedCodes,
       actual: actualCodes
     });
@@ -463,19 +458,19 @@ export function evaluateP1MappingReview(review, context) {
   };
 }
 
-export function applyApprovedP1Mapping(review, context) {
-  const evaluation = evaluateP1MappingReview(review, context);
+export function applyApprovedP4Mapping(review, context) {
+  const evaluation = evaluateP4MappingReview(review, context);
   if (review.application?.status === 'applied' && evaluation.status === 'mapped') {
     return clone(context.mapping);
   }
   if (!evaluation.readyForApply) {
-    throw coded('P1_MAPPING_REVIEW_INCOMPLETE', {
+    throw coded('P4_MAPPING_REVIEW_INCOMPLETE', {
       blockedNodes: evaluation.nodeResults.filter(result => result.blockers.length)
     });
   }
   const approvedByNode = new Map(review.nodes.map(node => [node.nodeCode, node]));
   const nextMapping = clone(context.mapping);
-  for (const record of nextMapping.mappings.filter(item => item.partCode === 'P1')) {
+  for (const record of nextMapping.mappings.filter(item => item.partCode === 'P4')) {
     const approved = approvedByNode.get(record.nodeCode);
     record.mappingStatus = 'mapped';
     record.authorityStatus = 'human_confirmed';
@@ -507,18 +502,18 @@ export function applyApprovedP1Mapping(review, context) {
 }
 
 function common(context, overrides = {}) {
-  const p1Nodes = p1BlueprintNodes(context);
+  const p4Nodes = p4BlueprintNodes(context);
   return {
     schemaVersion: T08_SCHEMA_VERSION,
-    stage: 'KNR-W2R1-T09-P1',
+    stage: 'KNR-W2R1-T09-P4',
     bookCode: context.manifest.bookCode,
-    partCode: 'P1',
+    partCode: 'P4',
     candidatePath: context.candidate.path,
     candidateSha256: context.candidate.sha256,
-    mappingPath: P1_MAPPING_RELATIVE,
+    mappingPath: P4_MAPPING_RELATIVE,
     mappingSha256: context.mappingSha256,
-    reviewPath: P1_MAPPING_REVIEW_RELATIVE,
-    blueprintDerivedNodeCount: p1Nodes.length,
+    reviewPath: P4_MAPPING_REVIEW_RELATIVE,
+    blueprintDerivedNodeCount: p4Nodes.length,
     automationMaximumStatus: 'candidate',
     mappedStatusRequiresTL: true,
     privateReviewEvidence: true,
@@ -534,61 +529,39 @@ function common(context, overrides = {}) {
   };
 }
 
-export function reviewP1NodeMapping({ root, mode = 'dry-run', now }) {
-  if (!['dry-run', 'prepare'].includes(mode)) throw coded('P1_MAPPING_REVIEW_MODE_INVALID');
+export function reviewP4NodeMapping({ root, mode = 'dry-run', now }) {
+  if (!['dry-run', 'prepare'].includes(mode)) throw coded('P4_MAPPING_REVIEW_MODE_INVALID');
   const context = loadContext(root);
-  const reviewFile = resolveWithin(root, P1_MAPPING_REVIEW_RELATIVE);
-  let staleReviewArchivedTo = null;
-  if (fs.existsSync(reviewFile)) {
-    const existing = readJson(reviewFile, 'P1_MAPPING_REVIEW_FILE_INVALID');
-    if (!mappingReviewIdentityMatches(existing, context)) {
-      if (mode === 'dry-run') {
-        return common(context, {
-          command: 'review-map-p1',
-          mode,
-          status: 'stale_review_requires_regeneration',
-          reviewFilePresent: true,
-          candidateIdentityChanged: existing.candidate?.sha256 !== context.candidate.sha256,
-          mappingIdentityChanged: existing.mapping?.sha256 !== context.mappingSha256,
-          approvedNodeCount: 0,
-          blockedNodeCount: p1BlueprintNodes(context).length,
-          nextAction: 'PREPARE_REGENERATED_PRIVATE_TL_REVIEW_TEMPLATE'
-        });
-      }
-      staleReviewArchivedTo = archiveStaleMappingReview(reviewFile, root, 'P1', now);
-    }
-  }
+  const reviewFile = resolveWithin(root, P4_MAPPING_REVIEW_RELATIVE);
   if (!fs.existsSync(reviewFile)) {
     if (mode === 'dry-run') {
       return common(context, {
-        command: 'review-map-p1',
+        command: 'review-map-p4',
         mode,
         status: 'review_template_required',
         reviewFilePresent: false,
         approvedNodeCount: 0,
-        blockedNodeCount: p1BlueprintNodes(context).length,
+        blockedNodeCount: p4BlueprintNodes(context).length,
         nextAction: 'PREPARE_PRIVATE_TL_REVIEW_TEMPLATE'
       });
     }
-    const template = createP1MappingReviewTemplate(context, { now });
+    const template = createP4MappingReviewTemplate(context, { now });
     const written = writeJsonAtomic(reviewFile, template, 0o600);
     return common(context, {
-      command: 'review-map-p1',
+      command: 'review-map-p4',
       mode,
       status: 'human_review_required',
       reviewFilePresent: true,
-      staleReviewArchivedTo,
-      derivedArtifactRegenerated: Boolean(staleReviewArchivedTo),
       approvedNodeCount: 0,
       blockedNodeCount: template.nodes.length,
       writes: Number(written),
       nextAction: 'TL_REVIEW_NODES_SEQUENTIALLY'
     });
   }
-  const review = readJson(reviewFile, 'P1_MAPPING_REVIEW_FILE_INVALID');
-  const evaluation = evaluateP1MappingReview(review, context);
+  const review = readJson(reviewFile, 'P4_MAPPING_REVIEW_FILE_INVALID');
+  const evaluation = evaluateP4MappingReview(review, context);
   return common(context, {
-    command: 'review-map-p1',
+    command: 'review-map-p4',
     mode,
     status: evaluation.status,
     reviewFilePresent: true,
@@ -598,35 +571,35 @@ export function reviewP1NodeMapping({ root, mode = 'dry-run', now }) {
     nextAction: evaluation.readyForApply
       ? 'PRIVATE_REVIEW_APPLY_DRY_RUN'
       : evaluation.status === 'mapped'
-        ? 'KNR_W2R1_T09_P1_ACCEPTANCE_CHECK'
+        ? 'KNR_W2R1_T09_P4_ACCEPTANCE_CHECK'
         : 'CONTINUE_TL_REVIEW'
   });
 }
 
-export function applyP1NodeMappingReview({ root, mode = 'dry-run', now }) {
-  if (!['dry-run', 'apply'].includes(mode)) throw coded('P1_MAPPING_APPLY_MODE_INVALID');
+export function applyP4NodeMappingReview({ root, mode = 'dry-run', now }) {
+  if (!['dry-run', 'apply'].includes(mode)) throw coded('P4_MAPPING_APPLY_MODE_INVALID');
   const context = loadContext(root);
-  const reviewFile = resolveWithin(root, P1_MAPPING_REVIEW_RELATIVE);
-  const review = readJson(reviewFile, 'P1_MAPPING_REVIEW_FILE_MISSING');
-  const evaluation = evaluateP1MappingReview(review, context);
+  const reviewFile = resolveWithin(root, P4_MAPPING_REVIEW_RELATIVE);
+  const review = readJson(reviewFile, 'P4_MAPPING_REVIEW_FILE_MISSING');
+  const evaluation = evaluateP4MappingReview(review, context);
   if (evaluation.status === 'mapped') {
     return common(context, {
-      command: 'apply-map-p1',
+      command: 'apply-map-p4',
       mode,
       status: 'already_mapped',
       approvedNodeCount: evaluation.approvedNodeCount,
       blockedNodeCount: 0,
-      nextAction: 'KNR_W2R1_T09_P1_ACCEPTANCE_CHECK'
+      nextAction: 'KNR_W2R1_T09_P4_ACCEPTANCE_CHECK'
     });
   }
   if (!evaluation.readyForApply) {
-    throw coded('P1_MAPPING_REVIEW_INCOMPLETE', {
+    throw coded('P4_MAPPING_REVIEW_INCOMPLETE', {
       blockedNodes: evaluation.nodeResults.filter(result => result.blockers.length)
     });
   }
   if (mode === 'dry-run') {
     return common(context, {
-      command: 'apply-map-p1',
+      command: 'apply-map-p4',
       mode,
       status: 'ready_for_atomic_apply',
       approvedNodeCount: evaluation.approvedNodeCount,
@@ -635,9 +608,9 @@ export function applyP1NodeMappingReview({ root, mode = 'dry-run', now }) {
     });
   }
 
-  const nextMapping = applyApprovedP1Mapping(review, context);
+  const nextMapping = applyApprovedP4Mapping(review, context);
   const mappingWritten = writeJsonAtomic(
-    resolveWithin(root, P1_MAPPING_RELATIVE),
+    resolveWithin(root, P4_MAPPING_RELATIVE),
     nextMapping,
     0o644
   );
@@ -654,18 +627,18 @@ export function applyP1NodeMappingReview({ root, mode = 'dry-run', now }) {
     reviewWritten = writeJsonAtomic(reviewFile, nextReview, 0o600);
   } catch (error) {
     if (mappingWritten) {
-      writeJsonAtomic(resolveWithin(root, P1_MAPPING_RELATIVE), context.mapping, 0o644);
+      writeJsonAtomic(resolveWithin(root, P4_MAPPING_RELATIVE), context.mapping, 0o644);
     }
     throw error;
   }
   return common({ ...context, mappingSha256: nextMappingSha256 }, {
-    command: 'apply-map-p1',
+    command: 'apply-map-p4',
     mode,
     status: 'mapped',
     approvedNodeCount: evaluation.approvedNodeCount,
     blockedNodeCount: 0,
     writes: Number(mappingWritten) + Number(reviewWritten),
     mappingWrites: Number(mappingWritten),
-    nextAction: 'KNR_W2R1_T09_P1_ACCEPTANCE_CHECK'
+    nextAction: 'KNR_W2R1_T09_P4_ACCEPTANCE_CHECK'
   });
 }
