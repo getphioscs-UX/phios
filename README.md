@@ -13,3 +13,17 @@ Validation:
 
 MR-W0 is standalone and is not included in the default check, PJA, Knowledge Runtime, IMR-W0 or HDR-W0 chains.
 <!-- MR-W0:END -->
+
+<!-- MR-W1:BEGIN -->
+## MR-W1｜Method Registry
+
+MR-W1 populates the versioned PHI OS Method Registry at baseline main@a8e8c642af0052c3579e75ce9c9a0fd124002241.
+
+The Registry records Human Design, Astrology, BaZi, I Ching, Tarot and Psychology under the single Method Runtime. Registration reserves identity and Plugin code; it does not activate a Plugin or create Production authority.
+
+Validation:
+
+    npm run check:mr-w1
+
+MR-W1 is standalone and remains outside the default check, PJA, Knowledge Runtime, MR-W0, IMR-W0 and HDR-W0 chains.
+<!-- MR-W1:END -->
