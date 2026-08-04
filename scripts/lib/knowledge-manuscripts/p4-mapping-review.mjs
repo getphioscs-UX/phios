@@ -278,7 +278,7 @@ function topLevelReviewIdentity(review, context) {
   }
   if (
     review.schemaVersion !== T08_SCHEMA_VERSION ||
-    review.stage !== 'KNR-W2R1-T08' ||
+    review.stage !== 'KNR-W2R1-T09-P4' ||
     review.bookCode !== context.manifest.bookCode ||
     review.partCode !== 'P4' ||
     review.locale !== context.manifest.locale ||

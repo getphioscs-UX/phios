@@ -490,7 +490,6 @@ export async function uploadApprovedP3({
           ContentLength: candidate.sizeBytes,
           ContentType: 'text/markdown',
           CacheControl: 'private, no-store',
-          IfNoneMatch: '*',
           Metadata: {
             sha256: candidate.sha256,
             bookcode: 'BOOK-1',
@@ -500,9 +499,7 @@ export async function uploadApprovedP3({
         }));
         uploadPerformed = true;
       } catch (error) {
-        if (Number(error?.$metadata?.httpStatusCode || 0) !== 412) {
-          throw remoteFailure(error, 'P3_R2_UPLOAD_FAILED');
-        }
+        throw remoteFailure(error, 'P3_R2_UPLOAD_FAILED');
       }
       remoteHead = await headObject(client, credentials.bucket, P3_R2_TARGET);
       if (!remoteHead) throw coded('P3_R2_POST_UPLOAD_HEAD_MISSING');
