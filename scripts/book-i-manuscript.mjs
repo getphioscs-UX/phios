@@ -45,6 +45,30 @@ const PROHIBITED_KEYS = new Set([
   'apiToken',
   'credential'
 ]);
+const SECTION_HASH_PATTERN = /^[a-f0-9]{64}$/u;
+const INVENTORY_PART_FIELDS = Object.freeze([
+  'partCode',
+  'title',
+  'sequence',
+  'sourceObjectKey',
+  'normalizedObjectKey',
+  'startHeading',
+  'endHeading',
+  'startAnchor',
+  'endAnchor',
+  'estimatedCharacterCount',
+  'sectionHash',
+  'normalizationStatus',
+  'humanVerified',
+  'startPage',
+  'endPage',
+  'stalenessStatus'
+]);
+const INVENTORY_STALENESS_STATUSES = new Set([
+  'CURRENT',
+  'NOT_MATERIALIZED',
+  'MANUSCRIPT_STALE'
+]);
 
 const relative = file => path.relative(ROOT, file).replaceAll(path.sep, '/');
 const coded = (code, details = null) => Object.assign(new Error(code), { code, details });
@@ -103,6 +127,205 @@ export function loadBookIManifest() {
     throw coded('SOURCE_HASH_MISMATCH');
   }
   return manifest;
+}
+
+const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
+const nullableText = value => value === null || (typeof value === 'string' && value.trim());
+const nullableNonNegativeInteger = value => (
+  value === null || (Number.isInteger(value) && value >= 0)
+);
+
+export function validateBookISectionInventory(sectionInventory, manifest = loadBookIManifest()) {
+  if (!sectionInventory || typeof sectionInventory !== 'object' || Array.isArray(sectionInventory)) {
+    throw coded('SECTION_INVENTORY_INVALID');
+  }
+  const forbidden = prohibitedPaths(sectionInventory);
+  if (forbidden.length) {
+    throw coded('PROHIBITED_SECTION_INVENTORY_FIELD', { paths: forbidden });
+  }
+  if (sectionInventory.schemaVersion !== '1.0.0') {
+    throw coded('SECTION_INVENTORY_SCHEMA_VERSION_MISMATCH');
+  }
+  if (sectionInventory.stage !== 'KNR-W2R1-T06') {
+    throw coded('SECTION_INVENTORY_STAGE_MISMATCH');
+  }
+  if (sectionInventory.bookCode !== manifest.bookCode) {
+    throw coded('SECTION_INVENTORY_BOOK_CODE_MISMATCH');
+  }
+  if (sectionInventory.locale !== manifest.locale) {
+    throw coded('SECTION_INVENTORY_LOCALE_MISMATCH');
+  }
+  if (sectionInventory.manuscriptVersion !== manifest.manuscriptVersion) {
+    throw coded('SECTION_INVENTORY_MANUSCRIPT_VERSION_MISMATCH');
+  }
+  const source = manifest.objects.find(object => object.objectRole === 'source_pdf');
+  if (sectionInventory.sourceObjectKey !== source.objectKey) {
+    throw coded('SECTION_INVENTORY_SOURCE_OBJECT_MISMATCH');
+  }
+  if (sectionInventory.sourceObjectSha256 !== source.sha256) {
+    throw coded('SECTION_INVENTORY_SOURCE_HASH_MISMATCH');
+  }
+  if (!Array.isArray(sectionInventory.parts)) {
+    throw coded('SECTION_INVENTORY_PARTS_REQUIRED');
+  }
+  const manifestParts = new Map(manifest.parts.map(part => [part.partCode, part]));
+  const expectedCodes = manifest.parts.map(part => part.partCode);
+  const actualCodes = sectionInventory.parts.map(part => part?.partCode);
+  if (JSON.stringify(actualCodes) !== JSON.stringify(expectedCodes)) {
+    throw coded('SECTION_INVENTORY_PART_SEQUENCE_MISMATCH', {
+      expected: expectedCodes,
+      actual: actualCodes
+    });
+  }
+
+  for (const [index, part] of sectionInventory.parts.entries()) {
+    if (!part || typeof part !== 'object' || Array.isArray(part)) {
+      throw coded('SECTION_INVENTORY_PART_INVALID', { index });
+    }
+    const missingFields = INVENTORY_PART_FIELDS.filter(field => !hasOwn(part, field));
+    if (missingFields.length) {
+      throw coded('SECTION_INVENTORY_PART_FIELDS_MISSING', {
+        partCode: part.partCode || null,
+        missingFields
+      });
+    }
+    const manifestPart = manifestParts.get(part.partCode);
+    if (
+      !manifestPart ||
+      part.title !== manifestPart.title ||
+      part.sequence !== manifestPart.sequence ||
+      part.sourceObjectKey !== manifestPart.sourceObjectKey ||
+      part.normalizedObjectKey !== manifestPart.normalizedObjectKey
+    ) {
+      throw coded('SECTION_INVENTORY_MANIFEST_PART_MISMATCH', { partCode: part.partCode });
+    }
+    if (!nullableText(part.startHeading) || !nullableText(part.endHeading)) {
+      throw coded('SECTION_INVENTORY_HEADING_INVALID', { partCode: part.partCode });
+    }
+    if (!nullableText(part.startAnchor) || !nullableText(part.endAnchor)) {
+      throw coded('SECTION_INVENTORY_ANCHOR_INVALID', { partCode: part.partCode });
+    }
+    if (!nullableNonNegativeInteger(part.estimatedCharacterCount)) {
+      throw coded('SECTION_INVENTORY_CHARACTER_COUNT_INVALID', { partCode: part.partCode });
+    }
+    if (part.sectionHash !== null && !SECTION_HASH_PATTERN.test(part.sectionHash)) {
+      throw coded('SECTION_INVENTORY_HASH_INVALID', { partCode: part.partCode });
+    }
+    if (!nullableNonNegativeInteger(part.startPage) || !nullableNonNegativeInteger(part.endPage)) {
+      throw coded('SECTION_INVENTORY_PAGE_INVALID', { partCode: part.partCode });
+    }
+    if (part.startPage !== null && part.endPage !== null && part.endPage < part.startPage) {
+      throw coded('SECTION_INVENTORY_PAGE_RANGE_INVALID', { partCode: part.partCode });
+    }
+    if (!INVENTORY_STALENESS_STATUSES.has(part.stalenessStatus)) {
+      throw coded('SECTION_INVENTORY_STALENESS_STATUS_INVALID', { partCode: part.partCode });
+    }
+    if (
+      part.humanVerified &&
+      (
+        part.normalizationStatus !== 'human_verified' ||
+        part.normalizedObjectKey === null ||
+        part.sectionHash === null ||
+        part.stalenessStatus !== 'CURRENT'
+      )
+    ) {
+      throw coded('SECTION_INVENTORY_HUMAN_VERIFICATION_INVALID', { partCode: part.partCode });
+    }
+    if (
+      part.stalenessStatus === 'NOT_MATERIALIZED' &&
+      (
+        part.normalizationStatus !== 'not_materialized' ||
+        part.normalizedObjectKey !== null ||
+        part.sectionHash !== null ||
+        part.humanVerified
+      )
+    ) {
+      throw coded('SECTION_INVENTORY_NOT_MATERIALIZED_INVALID', { partCode: part.partCode });
+    }
+    if (
+      part.stalenessStatus === 'MANUSCRIPT_STALE' &&
+      (part.normalizationStatus !== 'stale' || part.humanVerified)
+    ) {
+      throw coded('SECTION_INVENTORY_STALE_STATE_INVALID', { partCode: part.partCode });
+    }
+  }
+
+  for (let index = 0; index < sectionInventory.parts.length - 1; index += 1) {
+    const current = sectionInventory.parts[index];
+    const next = sectionInventory.parts[index + 1];
+    if (current.endHeading !== next.startHeading || current.endAnchor !== next.startAnchor) {
+      throw coded('SECTION_INVENTORY_BOUNDARY_CONTINUITY_FAILED', {
+        currentPartCode: current.partCode,
+        nextPartCode: next.partCode
+      });
+    }
+  }
+
+  const boundary = sectionInventory.boundaryAuthority;
+  if (
+    JSON.stringify(boundary?.primary) !== JSON.stringify([
+      'startHeading',
+      'endHeading',
+      'startAnchor',
+      'endAnchor',
+      'sectionHash'
+    ]) ||
+    JSON.stringify(boundary?.auxiliary) !== JSON.stringify(['startPage', 'endPage']) ||
+    boundary?.pageNumbersAuthoritative !== false
+  ) {
+    throw coded('SECTION_INVENTORY_BOUNDARY_AUTHORITY_INVALID');
+  }
+  const policy = sectionInventory.stalenessPolicy;
+  if (
+    policy?.hashAlgorithm !== 'sha256' ||
+    policy?.hashChangeStatus !== 'MANUSCRIPT_STALE' ||
+    policy?.automaticReuseOnHashChange?.mapping !== false ||
+    policy?.automaticReuseOnHashChange?.candidate !== false ||
+    policy?.automaticReuseOnHashChange?.prompt !== false ||
+    policy?.automaticStaleClear !== false ||
+    policy?.freshHumanReviewRequired !== true
+  ) {
+    throw coded('SECTION_INVENTORY_STALENESS_POLICY_INVALID');
+  }
+  return sectionInventory;
+}
+
+export function loadBookISectionInventory(manifest = loadBookIManifest()) {
+  return validateBookISectionInventory(
+    readJson(INVENTORY_PATH, 'SECTION_INVENTORY_MISSING'),
+    manifest
+  );
+}
+
+export function evaluateSectionStaleness(part, currentSectionHash) {
+  if (!part || typeof part !== 'object') throw coded('SECTION_INVENTORY_PART_INVALID');
+  if (part.sectionHash !== null && !SECTION_HASH_PATTERN.test(part.sectionHash)) {
+    throw coded('SECTION_INVENTORY_HASH_INVALID', { partCode: part.partCode || null });
+  }
+  if (currentSectionHash !== null && !SECTION_HASH_PATTERN.test(currentSectionHash)) {
+    throw coded('CURRENT_SECTION_HASH_INVALID', { partCode: part.partCode || null });
+  }
+  const changed = part.sectionHash !== null &&
+    currentSectionHash !== null &&
+    part.sectionHash !== currentSectionHash;
+  const remainsStale = part.stalenessStatus === 'MANUSCRIPT_STALE';
+  const effectiveStatus = changed || remainsStale
+    ? 'MANUSCRIPT_STALE'
+    : part.stalenessStatus;
+  const reuseBlocked = effectiveStatus === 'MANUSCRIPT_STALE';
+  return {
+    partCode: part.partCode,
+    recordedStalenessStatus: part.stalenessStatus,
+    stalenessStatus: effectiveStatus,
+    hashComparison: changed
+      ? 'changed'
+      : part.sectionHash === null || currentSectionHash === null
+        ? 'not_available'
+        : 'matched',
+    reuseBlocked,
+    invalidatedArtifacts: reuseBlocked ? ['mapping', 'candidate', 'prompt'] : [],
+    freshHumanReviewRequired: reuseBlocked
+  };
 }
 
 function credentialState(env = process.env) {
@@ -469,16 +692,50 @@ async function verify(manifest, args, options) {
   }
 }
 
-function inventory(manifest) {
+function inventory(manifest, options = {}) {
   const present = fs.existsSync(INVENTORY_PATH);
+  if (!present && !options.inventory) {
+    return {
+      ...common(manifest, 'inventory'),
+      stage: 'KNR-W2R1-T06',
+      mode: 'dry-run',
+      status: 'not_materialized',
+      inventoryPath: relative(INVENTORY_PATH),
+      inventoryFilePresent: false,
+      plannedParts: manifest.parts.map(part => part.partCode),
+      nextImplementation: 'KNR-W2R1-T06'
+    };
+  }
+  const sectionInventory = options.inventory
+    ? validateBookISectionInventory(options.inventory, manifest)
+    : loadBookISectionInventory(manifest);
+  const partStates = sectionInventory.parts.map(part => evaluateSectionStaleness(
+    part,
+    manifest.contentHashes?.normalizedParts?.[part.partCode] ?? null
+  ));
+  const staleParts = partStates
+    .filter(part => part.stalenessStatus === 'MANUSCRIPT_STALE')
+    .map(part => part.partCode);
   return {
     ...common(manifest, 'inventory'),
+    stage: 'KNR-W2R1-T06',
     mode: 'dry-run',
-    status: present ? 'registered' : 'not_materialized',
+    status: staleParts.length ? 'MANUSCRIPT_STALE' : 'registered',
     inventoryPath: relative(INVENTORY_PATH),
     inventoryFilePresent: present,
-    plannedParts: manifest.parts.map(part => part.partCode),
-    nextImplementation: 'KNR-W2R1-T06'
+    sectionCount: sectionInventory.parts.length,
+    humanVerifiedSectionCount: sectionInventory.parts.filter(part => part.humanVerified).length,
+    notMaterializedSectionCount: sectionInventory.parts.filter(
+      part => part.stalenessStatus === 'NOT_MATERIALIZED'
+    ).length,
+    primaryBoundaryAuthority: [...sectionInventory.boundaryAuthority.primary],
+    pageNumberAuthority: 'auxiliary_only',
+    partStates,
+    staleParts,
+    staleArtifactReuseBlocked: staleParts.length > 0,
+    nextImplementation: staleParts.length
+      ? 'FRESH_EXTRACTION_MAPPING_CANDIDATE_AND_PROMPT_REVIEW_REQUIRED'
+      : 'KNR-W2R1-T07'
   };
 }
 
@@ -519,7 +776,7 @@ export async function runBookIManuscriptCommand(command, args = [], options = {}
   assertFlags(command, args);
   const manifest = options.manifest || loadBookIManifest();
   if (command === 'verify') return verify(manifest, args, options);
-  if (command === 'inventory') return inventory(manifest);
+  if (command === 'inventory') return inventory(manifest, options);
   if (command === 'map') return map(manifest);
   return status(manifest, options.env || process.env);
 }
