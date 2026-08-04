@@ -21,6 +21,10 @@ const INVENTORY_PATH = path.join(
   ROOT,
   'content/knowledge/manuscripts/book-1/book-1-section-inventory.json'
 );
+const BLUEPRINT_PATH = path.join(
+  ROOT,
+  'content/knowledge/blueprints/book-1-knowledge-blueprint.json'
+);
 const MAPPING_PATH = path.join(
   ROOT,
   'content/knowledge/manuscripts/book-1/node-manuscript-mapping.json'
@@ -68,6 +72,58 @@ const INVENTORY_STALENESS_STATUSES = new Set([
   'CURRENT',
   'NOT_MATERIALIZED',
   'MANUSCRIPT_STALE'
+]);
+const MAPPING_STATUSES = Object.freeze([
+  'unmapped',
+  'candidate',
+  'human_review_required',
+  'mapped',
+  'conflicted',
+  'insufficient_source'
+]);
+const MAPPING_STATUS_SET = new Set(MAPPING_STATUSES);
+const RANGE_ROLES = Object.freeze([
+  'primary',
+  'supporting',
+  'continuity',
+  'distinction',
+  'example',
+  'boundary'
+]);
+const RANGE_ROLE_SET = new Set(RANGE_ROLES);
+const MAPPING_RECORD_FIELDS = Object.freeze([
+  'nodeCode',
+  'bookCode',
+  'partCode',
+  'locale',
+  'sourceObjectKey',
+  'sourceVersion',
+  'mappingStatus',
+  'authorityStatus',
+  'ranges',
+  'crossSectionReferences',
+  'extractionEligibility',
+  'publicExtractionPolicy',
+  'unresolved',
+  'review',
+  'stalenessStatus'
+]);
+const RANGE_FIELDS = Object.freeze([
+  'rangeCode',
+  'startHeading',
+  'endHeading',
+  'startAnchor',
+  'endAnchor',
+  'sectionHash',
+  'rangeRole'
+]);
+const PROHIBITED_MAPPING_BODY_KEYS = new Set([
+  'body',
+  'content',
+  'markdown',
+  'paragraphs',
+  'excerpt',
+  'continuousText'
 ]);
 
 const relative = file => path.relative(ROOT, file).replaceAll(path.sep, '/');
@@ -328,6 +384,433 @@ export function evaluateSectionStaleness(part, currentSectionHash) {
   };
 }
 
+function mappingBodyPaths(value, current = '$', findings = []) {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => mappingBodyPaths(item, `${current}[${index}]`, findings));
+    return findings;
+  }
+  if (!value || typeof value !== 'object') return findings;
+  for (const [key, child] of Object.entries(value)) {
+    if (PROHIBITED_MAPPING_BODY_KEYS.has(key)) findings.push(`${current}.${key}`);
+    mappingBodyPaths(child, `${current}.${key}`, findings);
+  }
+  return findings;
+}
+
+function oversizedMappingStrings(value, current = '$', findings = []) {
+  if (typeof value === 'string') {
+    if (value.length > 512) findings.push(current);
+    return findings;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => oversizedMappingStrings(item, `${current}[${index}]`, findings));
+    return findings;
+  }
+  if (!value || typeof value !== 'object') return findings;
+  for (const [key, child] of Object.entries(value)) {
+    oversizedMappingStrings(child, `${current}.${key}`, findings);
+  }
+  return findings;
+}
+
+export function deriveBookIBlueprintNodes(blueprint, manifest = loadBookIManifest()) {
+  if (!blueprint || typeof blueprint !== 'object' || Array.isArray(blueprint)) {
+    throw coded('BOOK_I_BLUEPRINT_INVALID');
+  }
+  if (!text(blueprint.contract) || blueprint.canonicalLanguage !== manifest.locale) {
+    throw coded('BOOK_I_BLUEPRINT_CONTRACT_MISMATCH');
+  }
+  if (!Array.isArray(blueprint.parts) || !Array.isArray(blueprint.nodes)) {
+    throw coded('BOOK_I_BLUEPRINT_NODES_REQUIRED');
+  }
+  const expectedPartCodes = manifest.parts.map(part => part.partCode);
+  const actualPartCodes = blueprint.parts.map(part => part?.partCode);
+  if (JSON.stringify(actualPartCodes) !== JSON.stringify(expectedPartCodes)) {
+    throw coded('BOOK_I_BLUEPRINT_PART_SEQUENCE_MISMATCH', {
+      expected: expectedPartCodes,
+      actual: actualPartCodes
+    });
+  }
+
+  const flattened = [];
+  for (const part of blueprint.parts) {
+    if (!Array.isArray(part.nodes) || part.nodes.some(nodeCode => !text(nodeCode))) {
+      throw coded('BOOK_I_BLUEPRINT_PART_NODES_INVALID', { partCode: part.partCode || null });
+    }
+    if (part.canonicalNodeCount !== part.nodes.length) {
+      throw coded('BOOK_I_BLUEPRINT_PART_COUNT_MISMATCH', { partCode: part.partCode });
+    }
+    for (const nodeCode of part.nodes) flattened.push({ nodeCode, partCode: part.partCode });
+  }
+  if (new Set(flattened.map(node => node.nodeCode)).size !== flattened.length) {
+    throw coded('BOOK_I_BLUEPRINT_DUPLICATE_NODE');
+  }
+  if (blueprint.plannedCanonicalNodes !== flattened.length) {
+    throw coded('BOOK_I_BLUEPRINT_DECLARED_COUNT_MISMATCH');
+  }
+
+  const detailCodes = blueprint.nodes.map(node => node?.nodeCode);
+  if (JSON.stringify(detailCodes) !== JSON.stringify(flattened.map(node => node.nodeCode))) {
+    throw coded('BOOK_I_BLUEPRINT_NODE_ORDER_MISMATCH');
+  }
+  return flattened.map((node, index) => {
+    const detail = blueprint.nodes[index];
+    if (
+      !detail ||
+      detail.partCode !== node.partCode ||
+      !text(detail.titleZhHans)
+    ) {
+      throw coded('BOOK_I_BLUEPRINT_NODE_DETAIL_MISMATCH', { nodeCode: node.nodeCode });
+    }
+    return {
+      nodeCode: node.nodeCode,
+      partCode: node.partCode,
+      titleZhHans: detail.titleZhHans
+    };
+  });
+}
+
+export function loadBookIBlueprint(manifest = loadBookIManifest()) {
+  const blueprint = readJson(BLUEPRINT_PATH, 'BOOK_I_BLUEPRINT_MISSING');
+  deriveBookIBlueprintNodes(blueprint, manifest);
+  return blueprint;
+}
+
+export function deriveInitialBookINodeMapping({
+  manifest = loadBookIManifest(),
+  blueprint = loadBookIBlueprint(manifest),
+  inventory: suppliedInventory
+} = {}) {
+  const sectionInventory = suppliedInventory
+    ? validateBookISectionInventory(suppliedInventory, manifest)
+    : loadBookISectionInventory(manifest);
+  const blueprintNodes = deriveBookIBlueprintNodes(blueprint, manifest);
+  const inventoryByPart = new Map(sectionInventory.parts.map(part => [part.partCode, part]));
+  const mappings = blueprintNodes.map(node => {
+    const part = inventoryByPart.get(node.partCode);
+    if (!part) throw coded('NODE_MAPPING_PART_NOT_FOUND', { nodeCode: node.nodeCode });
+    const isPrefaceCandidate = part.partCode === 'P0';
+    return {
+      nodeCode: node.nodeCode,
+      bookCode: manifest.bookCode,
+      partCode: part.partCode,
+      locale: manifest.locale,
+      sourceObjectKey: part.sourceObjectKey,
+      sourceVersion: manifest.manuscriptVersion,
+      mappingStatus: isPrefaceCandidate ? 'candidate' : 'unmapped',
+      authorityStatus: isPrefaceCandidate ? 'automation_candidate' : 'unassigned',
+      ranges: isPrefaceCandidate
+        ? [{
+            rangeCode: `${node.nodeCode}-R01`,
+            startHeading: part.startHeading,
+            endHeading: part.endHeading,
+            startAnchor: part.startAnchor,
+            endAnchor: part.endAnchor,
+            sectionHash: part.sectionHash,
+            rangeRole: 'primary'
+          }]
+        : [],
+      crossSectionReferences: [],
+      extractionEligibility: isPrefaceCandidate
+        ? 'private_candidate_only'
+        : 'blocked_not_materialized',
+      publicExtractionPolicy: 'prohibited',
+      unresolved: isPrefaceCandidate
+        ? [
+            'exact_primary_range_requires_tl_confirmation',
+            'supporting_ranges_not_assessed',
+            'cross_section_references_not_assessed'
+          ]
+        : [
+            'part_not_materialized',
+            'mapping_ranges_not_assessed',
+            'tl_review_not_started'
+          ],
+      review: {
+        status: isPrefaceCandidate ? 'pending_tl_review' : 'not_started',
+        reviewerRole: 'TL',
+        humanVerified: false,
+        reviewedBy: null,
+        reviewedAt: null
+      },
+      stalenessStatus: part.stalenessStatus
+    };
+  });
+
+  return {
+    schemaVersion: '1.0.0',
+    stage: 'KNR-W2R1-T07',
+    bookCode: manifest.bookCode,
+    locale: manifest.locale,
+    sourceVersion: manifest.manuscriptVersion,
+    blueprintPath: relative(BLUEPRINT_PATH),
+    blueprintContract: blueprint.contract,
+    inventoryPath: relative(INVENTORY_PATH),
+    coverageAuthority: 'blueprint.parts.nodes_cross_checked_with_blueprint.nodes',
+    mappingAuthority: {
+      automationMaximumStatus: 'candidate',
+      mappedRequires: {
+        reviewerRole: 'TL',
+        reviewStatus: 'approved',
+        humanVerified: true,
+        authorityStatus: 'human_confirmed'
+      }
+    },
+    allowedMappingStatuses: [...MAPPING_STATUSES],
+    allowedRangeRoles: [...RANGE_ROLES],
+    manuscriptBodyPolicy: {
+      storage: 'references_only',
+      continuousBodyAllowed: false,
+      gitEligible: false,
+      publicBuildEligible: false,
+      productionPackageEligible: false
+    },
+    mappings
+  };
+}
+
+export function validateBookINodeMapping(nodeMapping, {
+  manifest = loadBookIManifest(),
+  blueprint = loadBookIBlueprint(manifest),
+  inventory: suppliedInventory
+} = {}) {
+  if (!nodeMapping || typeof nodeMapping !== 'object' || Array.isArray(nodeMapping)) {
+    throw coded('NODE_MAPPING_INVALID');
+  }
+  const forbidden = prohibitedPaths(nodeMapping);
+  if (forbidden.length) throw coded('PROHIBITED_NODE_MAPPING_FIELD', { paths: forbidden });
+  const bodyPaths = mappingBodyPaths(nodeMapping);
+  const oversizedStrings = oversizedMappingStrings(nodeMapping);
+  if (bodyPaths.length || oversizedStrings.length) {
+    throw coded('MANUSCRIPT_BODY_NOT_ALLOWED_IN_MAPPING', {
+      bodyPaths,
+      oversizedStrings
+    });
+  }
+  if (nodeMapping.schemaVersion !== '1.0.0' || nodeMapping.stage !== 'KNR-W2R1-T07') {
+    throw coded('NODE_MAPPING_CONTRACT_MISMATCH');
+  }
+  if (
+    nodeMapping.bookCode !== manifest.bookCode ||
+    nodeMapping.locale !== manifest.locale ||
+    nodeMapping.sourceVersion !== manifest.manuscriptVersion
+  ) {
+    throw coded('NODE_MAPPING_MANIFEST_IDENTITY_MISMATCH');
+  }
+  if (
+    nodeMapping.blueprintPath !== relative(BLUEPRINT_PATH) ||
+    nodeMapping.blueprintContract !== blueprint.contract ||
+    nodeMapping.inventoryPath !== relative(INVENTORY_PATH) ||
+    nodeMapping.coverageAuthority !== 'blueprint.parts.nodes_cross_checked_with_blueprint.nodes'
+  ) {
+    throw coded('NODE_MAPPING_SOURCE_AUTHORITY_MISMATCH');
+  }
+  if (
+    JSON.stringify(nodeMapping.allowedMappingStatuses) !== JSON.stringify(MAPPING_STATUSES) ||
+    JSON.stringify(nodeMapping.allowedRangeRoles) !== JSON.stringify(RANGE_ROLES)
+  ) {
+    throw coded('NODE_MAPPING_ENUM_CONTRACT_MISMATCH');
+  }
+  if (
+    nodeMapping.mappingAuthority?.automationMaximumStatus !== 'candidate' ||
+    nodeMapping.mappingAuthority?.mappedRequires?.reviewerRole !== 'TL' ||
+    nodeMapping.mappingAuthority?.mappedRequires?.reviewStatus !== 'approved' ||
+    nodeMapping.mappingAuthority?.mappedRequires?.humanVerified !== true ||
+    nodeMapping.mappingAuthority?.mappedRequires?.authorityStatus !== 'human_confirmed'
+  ) {
+    throw coded('NODE_MAPPING_AUTHORITY_CONTRACT_MISMATCH');
+  }
+  if (
+    nodeMapping.manuscriptBodyPolicy?.storage !== 'references_only' ||
+    nodeMapping.manuscriptBodyPolicy?.continuousBodyAllowed !== false ||
+    nodeMapping.manuscriptBodyPolicy?.gitEligible !== false ||
+    nodeMapping.manuscriptBodyPolicy?.publicBuildEligible !== false ||
+    nodeMapping.manuscriptBodyPolicy?.productionPackageEligible !== false
+  ) {
+    throw coded('NODE_MAPPING_BODY_POLICY_MISMATCH');
+  }
+  if (!Array.isArray(nodeMapping.mappings)) throw coded('NODE_MAPPING_RECORDS_REQUIRED');
+
+  const sectionInventory = suppliedInventory
+    ? validateBookISectionInventory(suppliedInventory, manifest)
+    : loadBookISectionInventory(manifest);
+  const inventoryByPart = new Map(sectionInventory.parts.map(part => [part.partCode, part]));
+  const blueprintNodes = deriveBookIBlueprintNodes(blueprint, manifest);
+  const expectedCodes = blueprintNodes.map(node => node.nodeCode);
+  const actualCodes = nodeMapping.mappings.map(mapping => mapping?.nodeCode);
+  if (JSON.stringify(actualCodes) !== JSON.stringify(expectedCodes)) {
+    throw coded('NODE_MAPPING_BLUEPRINT_COVERAGE_MISMATCH', {
+      expectedCount: expectedCodes.length,
+      actualCount: actualCodes.length
+    });
+  }
+
+  const rangeCodes = new Set();
+  for (const [index, mapping] of nodeMapping.mappings.entries()) {
+    if (!mapping || typeof mapping !== 'object' || Array.isArray(mapping)) {
+      throw coded('NODE_MAPPING_RECORD_INVALID', { index });
+    }
+    const missingFields = MAPPING_RECORD_FIELDS.filter(field => !hasOwn(mapping, field));
+    if (missingFields.length) {
+      throw coded('NODE_MAPPING_FIELDS_MISSING', {
+        nodeCode: mapping.nodeCode || null,
+        missingFields
+      });
+    }
+    const blueprintNode = blueprintNodes[index];
+    const part = inventoryByPart.get(blueprintNode.partCode);
+    if (
+      mapping.nodeCode !== blueprintNode.nodeCode ||
+      mapping.bookCode !== manifest.bookCode ||
+      mapping.partCode !== blueprintNode.partCode ||
+      mapping.locale !== manifest.locale ||
+      mapping.sourceObjectKey !== part?.sourceObjectKey ||
+      mapping.sourceVersion !== manifest.manuscriptVersion
+    ) {
+      throw coded('NODE_MAPPING_RECORD_IDENTITY_MISMATCH', { nodeCode: mapping.nodeCode });
+    }
+    if (!MAPPING_STATUS_SET.has(mapping.mappingStatus)) {
+      throw coded('NODE_MAPPING_STATUS_INVALID', { nodeCode: mapping.nodeCode });
+    }
+    if (!INVENTORY_STALENESS_STATUSES.has(mapping.stalenessStatus)) {
+      throw coded('NODE_MAPPING_STALENESS_STATUS_INVALID', { nodeCode: mapping.nodeCode });
+    }
+    if (!Array.isArray(mapping.ranges)) {
+      throw coded('NODE_MAPPING_RANGES_REQUIRED', { nodeCode: mapping.nodeCode });
+    }
+    for (const range of mapping.ranges) {
+      if (!range || typeof range !== 'object' || Array.isArray(range)) {
+        throw coded('NODE_MAPPING_RANGE_INVALID', { nodeCode: mapping.nodeCode });
+      }
+      const missingRangeFields = RANGE_FIELDS.filter(field => !hasOwn(range, field));
+      if (missingRangeFields.length) {
+        throw coded('NODE_MAPPING_RANGE_FIELDS_MISSING', {
+          nodeCode: mapping.nodeCode,
+          missingFields: missingRangeFields
+        });
+      }
+      if (!text(range.rangeCode) || rangeCodes.has(range.rangeCode)) {
+        throw coded('NODE_MAPPING_RANGE_CODE_INVALID', { nodeCode: mapping.nodeCode });
+      }
+      rangeCodes.add(range.rangeCode);
+      if (
+        !text(range.startHeading) ||
+        !nullableText(range.endHeading) ||
+        !text(range.startAnchor) ||
+        !nullableText(range.endAnchor) ||
+        !SECTION_HASH_PATTERN.test(range.sectionHash) ||
+        !RANGE_ROLE_SET.has(range.rangeRole)
+      ) {
+        throw coded('NODE_MAPPING_RANGE_CONTRACT_MISMATCH', { nodeCode: mapping.nodeCode });
+      }
+    }
+    if (!Array.isArray(mapping.crossSectionReferences)) {
+      throw coded('NODE_MAPPING_CROSS_SECTION_REFERENCES_INVALID', { nodeCode: mapping.nodeCode });
+    }
+    for (const reference of mapping.crossSectionReferences) {
+      if (!expectedCodes.includes(reference) || reference === mapping.nodeCode) {
+        throw coded('NODE_MAPPING_CROSS_SECTION_REFERENCE_INVALID', {
+          nodeCode: mapping.nodeCode,
+          reference
+        });
+      }
+    }
+    if (
+      new Set(mapping.crossSectionReferences).size !== mapping.crossSectionReferences.length ||
+      !Array.isArray(mapping.unresolved) ||
+      mapping.unresolved.some(item => !text(item))
+    ) {
+      throw coded('NODE_MAPPING_UNRESOLVED_OR_REFERENCE_INVALID', { nodeCode: mapping.nodeCode });
+    }
+    if (mapping.publicExtractionPolicy !== 'prohibited') {
+      throw coded('NODE_MAPPING_PUBLIC_EXTRACTION_NOT_PROHIBITED', { nodeCode: mapping.nodeCode });
+    }
+    if (!mapping.review || typeof mapping.review !== 'object' || Array.isArray(mapping.review)) {
+      throw coded('NODE_MAPPING_REVIEW_INVALID', { nodeCode: mapping.nodeCode });
+    }
+    if (mapping.mappingStatus === 'mapped') {
+      if (
+        mapping.authorityStatus !== 'human_confirmed' ||
+        mapping.review.status !== 'approved' ||
+        mapping.review.reviewerRole !== 'TL' ||
+        mapping.review.humanVerified !== true ||
+        !text(mapping.review.reviewedBy) ||
+        !text(mapping.review.reviewedAt) ||
+        Number.isNaN(Date.parse(mapping.review.reviewedAt))
+      ) {
+        throw coded('NODE_MAPPING_MAPPED_REQUIRES_TL_APPROVAL', { nodeCode: mapping.nodeCode });
+      }
+    } else if (mapping.review.humanVerified !== false) {
+      throw coded('NODE_MAPPING_UNMAPPED_CANNOT_BE_HUMAN_VERIFIED', { nodeCode: mapping.nodeCode });
+    }
+    if (mapping.mappingStatus === 'candidate') {
+      if (
+        mapping.authorityStatus !== 'automation_candidate' ||
+        mapping.extractionEligibility !== 'private_candidate_only' ||
+        mapping.review.status !== 'pending_tl_review' ||
+        mapping.review.reviewerRole !== 'TL' ||
+        part?.humanVerified !== true ||
+        part?.stalenessStatus !== 'CURRENT' ||
+        mapping.ranges.length === 0
+      ) {
+        throw coded('NODE_MAPPING_CANDIDATE_CONTRACT_MISMATCH', { nodeCode: mapping.nodeCode });
+      }
+    }
+    if (mapping.mappingStatus === 'unmapped') {
+      if (
+        mapping.authorityStatus !== 'unassigned' ||
+        mapping.extractionEligibility !== 'blocked_not_materialized' ||
+        mapping.review.status !== 'not_started' ||
+        mapping.review.reviewerRole !== 'TL' ||
+        mapping.ranges.length !== 0
+      ) {
+        throw coded('NODE_MAPPING_UNMAPPED_CONTRACT_MISMATCH', { nodeCode: mapping.nodeCode });
+      }
+    }
+    if (part?.stalenessStatus === 'NOT_MATERIALIZED' && mapping.mappingStatus !== 'unmapped') {
+      throw coded('NODE_MAPPING_NOT_MATERIALIZED_PART_MUST_BE_UNMAPPED', {
+        nodeCode: mapping.nodeCode
+      });
+    }
+  }
+  return nodeMapping;
+}
+
+export function loadBookINodeMapping(context = {}) {
+  return validateBookINodeMapping(
+    readJson(MAPPING_PATH, 'NODE_MAPPING_MISSING'),
+    context
+  );
+}
+
+function evaluateNodeMappingStaleness(mapping, inventoryPart, manifest) {
+  const partState = evaluateSectionStaleness(
+    inventoryPart,
+    manifest.contentHashes?.normalizedParts?.[inventoryPart.partCode] ?? null
+  );
+  const rangeHashChanged = inventoryPart.sectionHash !== null && mapping.ranges.some(
+    range => range.sectionHash !== inventoryPart.sectionHash
+  );
+  const stale = (
+    partState.stalenessStatus === 'MANUSCRIPT_STALE' ||
+    mapping.stalenessStatus === 'MANUSCRIPT_STALE' ||
+    rangeHashChanged
+  );
+  return {
+    nodeCode: mapping.nodeCode,
+    partCode: mapping.partCode,
+    recordedStalenessStatus: mapping.stalenessStatus,
+    stalenessStatus: stale ? 'MANUSCRIPT_STALE' : mapping.stalenessStatus,
+    rangeHashComparison: rangeHashChanged
+      ? 'changed'
+      : mapping.ranges.length === 0 || inventoryPart.sectionHash === null
+        ? 'not_available'
+        : 'matched',
+    reuseBlocked: stale,
+    invalidatedArtifacts: stale ? ['mapping', 'candidate', 'prompt'] : []
+  };
+}
+
 function credentialState(env = process.env) {
   const configured = CREDENTIAL_ENV_NAMES.filter(name => text(env[name]));
   const missing = CREDENTIAL_ENV_NAMES.filter(name => !text(env[name]));
@@ -374,13 +857,18 @@ function credentialsFor(manifest, env, { required }) {
 function assertFlags(command, args) {
   const allowed = command === 'verify'
     ? new Set(['--dry-run', '--download'])
-    : command === 'status'
-      ? new Set()
-      : new Set(['--dry-run']);
+    : command === 'map'
+      ? new Set(['--dry-run', '--apply'])
+      : command === 'status'
+        ? new Set()
+        : new Set(['--dry-run']);
   const unknown = args.filter(argument => !allowed.has(argument));
   if (unknown.length) throw coded('UNKNOWN_ARGUMENT', { arguments: unknown });
   if (args.includes('--dry-run') && args.includes('--download')) {
     throw coded('VERIFY_MODE_CONFLICT');
+  }
+  if (args.includes('--dry-run') && args.includes('--apply')) {
+    throw coded('MAP_MODE_CONFLICT');
   }
 }
 
@@ -739,17 +1227,85 @@ function inventory(manifest, options = {}) {
   };
 }
 
-function map(manifest) {
+function map(manifest, args, options = {}) {
+  const apply = args.includes('--apply');
+  const blueprint = options.blueprint || loadBookIBlueprint(manifest);
+  const sectionInventory = options.inventory
+    ? validateBookISectionInventory(options.inventory, manifest)
+    : loadBookISectionInventory(manifest);
+  const blueprintNodes = deriveBookIBlueprintNodes(blueprint, manifest);
+  const initialMapping = deriveInitialBookINodeMapping({
+    manifest,
+    blueprint,
+    inventory: sectionInventory
+  });
+  const wasPresent = fs.existsSync(MAPPING_PATH);
+  if (apply) {
+    if (wasPresent) throw coded('NODE_MAPPING_ALREADY_EXISTS', { path: relative(MAPPING_PATH) });
+    fs.mkdirSync(path.dirname(MAPPING_PATH), { recursive: true });
+    fs.writeFileSync(MAPPING_PATH, `${JSON.stringify(initialMapping, null, 2)}\n`, {
+      encoding: 'utf8',
+      flag: 'wx',
+      mode: 0o600
+    });
+  }
   const present = fs.existsSync(MAPPING_PATH);
+  const mapping = options.mapping
+    ? validateBookINodeMapping(options.mapping, {
+        manifest,
+        blueprint,
+        inventory: sectionInventory
+      })
+    : present
+      ? loadBookINodeMapping({ manifest, blueprint, inventory: sectionInventory })
+      : initialMapping;
+  const inventoryByPart = new Map(sectionInventory.parts.map(part => [part.partCode, part]));
+  const nodeStates = mapping.mappings.map(record => evaluateNodeMappingStaleness(
+    record,
+    inventoryByPart.get(record.partCode),
+    manifest
+  ));
+  const staleNodeCodes = nodeStates
+    .filter(state => state.stalenessStatus === 'MANUSCRIPT_STALE')
+    .map(state => state.nodeCode);
+  const staleNodeStates = nodeStates.filter(
+    state => state.stalenessStatus === 'MANUSCRIPT_STALE'
+  );
+  const mappingStatusCounts = Object.fromEntries(MAPPING_STATUSES.map(status => [status, 0]));
+  for (const record of mapping.mappings) mappingStatusCounts[record.mappingStatus] += 1;
+  const partMappingCounts = Object.fromEntries(sectionInventory.parts.map(part => [
+    part.partCode,
+    mapping.mappings.filter(record => record.partCode === part.partCode).length
+  ]));
   return {
     ...common(manifest, 'map'),
-    mode: 'dry-run',
-    status: present ? 'registered' : 'not_materialized',
+    stage: 'KNR-W2R1-T07',
+    mode: apply ? 'apply' : 'dry-run',
+    status: staleNodeCodes.length
+      ? 'MANUSCRIPT_STALE'
+      : present || options.mapping ? 'registered' : 'mapping_plan_validated',
     mappingPath: relative(MAPPING_PATH),
     mappingFilePresent: present,
+    blueprintPath: relative(BLUEPRINT_PATH),
+    inventoryPath: relative(INVENTORY_PATH),
+    coverageAuthority: mapping.coverageAuthority,
+    blueprintNodeCount: blueprintNodes.length,
+    mappingRecordCount: mapping.mappings.length,
+    partMappingCounts,
+    mappingStatusCounts,
+    staleNodeCodes,
+    staleNodeStates,
+    staleArtifactReuseBlocked: staleNodeCodes.length > 0,
     automaticHumanVerification: false,
     automaticMappedStatus: false,
-    nextImplementation: 'KNR-W2R1-T07'
+    automationMaximumStatus: mapping.mappingAuthority.automationMaximumStatus,
+    mappedStatusRequiresTL: true,
+    manuscriptBodyStored: false,
+    publicExtractionAllowed: false,
+    writes: apply ? 1 : 0,
+    nextImplementation: staleNodeCodes.length
+      ? 'FRESH_EXTRACTION_MAPPING_CANDIDATE_AND_PROMPT_REVIEW_REQUIRED'
+      : present || options.mapping ? 'KNR-W2R1-T08' : 'KNR-W2R1-T07_APPLY'
   };
 }
 
@@ -777,7 +1333,7 @@ export async function runBookIManuscriptCommand(command, args = [], options = {}
   const manifest = options.manifest || loadBookIManifest();
   if (command === 'verify') return verify(manifest, args, options);
   if (command === 'inventory') return inventory(manifest, options);
-  if (command === 'map') return map(manifest);
+  if (command === 'map') return map(manifest, args, options);
   return status(manifest, options.env || process.env);
 }
 
@@ -788,7 +1344,7 @@ async function main() {
   } catch (error) {
     console.error(JSON.stringify({
       schemaVersion: 'PHI-OS-KNR-W2R1-MANUSCRIPT-TOOL-v1.1.0',
-      stage: 'KNR-W2R1-T02-T03',
+      stage: command === 'map' ? 'KNR-W2R1-T07' : 'KNR-W2R1-T02-T03',
       command: command || null,
       status: 'blocked',
       code: error.code || 'MANUSCRIPT_TOOL_FAILED',
