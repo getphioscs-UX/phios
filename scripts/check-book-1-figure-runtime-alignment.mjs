@@ -13,6 +13,8 @@ import { validateReadingNavigationContract } from '../functions/runtime/navigati
 
 const registry = JSON.parse(fs.readFileSync('content/registry/book-1-runtime-alignment.json', 'utf8'));
 const figureRegistry = JSON.parse(fs.readFileSync('content/registry/figures.json', 'utf8'));
+const bookRegistry = JSON.parse(fs.readFileSync('content/registry/books.json', 'utf8'));
+const publicAssetRegistry = JSON.parse(fs.readFileSync('content/registry/public-assets.json', 'utf8'));
 assert.equal(registry.status, 'closed');
 assert.equal(registry.changeClass, 'contract_closure_and_bug_fix');
 assert.deepEqual(registry.newRuntimeStages, []);
@@ -39,33 +41,52 @@ assert.equal(registry.conceptualMappings.agency.contractField, 'agency_style');
 assert.equal(registry.conceptualMappings.identityRuntimeSignature.removedCarrierSignatureFamily, false);
 assert.equal(registry.conceptualMappings.projection.observedEvidenceMutableByProvider, false);
 
+const bookOne = bookRegistry.books.find(item => item.book_id === 'book-1');
+assert.ok(bookOne, 'Book I must be registered');
+assert.equal(bookOne.asset.bucket, 'phios-public-assets');
+assert.equal(bookOne.asset.figure_root, 'images/figures/book-1/');
+
+const bookOneFigureAssets = publicAssetRegistry.assets.find(
+  item => item.asset_code === 'BOOK-1-FIGURES'
+);
+assert.ok(bookOneFigureAssets, 'Book I R2 Figure collection must be registered');
+assert.equal(bookOneFigureAssets.category, 'book-figures');
+assert.equal(bookOneFigureAssets.book_id, 'book-1');
+assert.equal(bookOneFigureAssets.object_key, bookOne.asset.figure_root);
+assert.equal(bookOneFigureAssets.format, 'webp');
+assert.notEqual(bookOneFigureAssets.status, 'local-only');
+
 for (const figureNumber of ['3A', '3B', '4D']) {
   const figure = figureRegistry.figures.find(item => item.figure_number === figureNumber);
   assert.ok(figure, `Figure ${figureNumber} must be registered`);
   assert.equal(figure.status, 'available');
   assert.equal(figure.source_file, `${figureNumber}.pdf`);
-  assert.equal(figure.web_file, `assets/images/figures/book-1/${figureNumber}.png`);
-  assert.ok(fs.existsSync(figure.web_file), `Figure ${figureNumber} web asset must exist`);
-  assert.ok(fs.statSync(figure.web_file).size > 100_000, `Figure ${figureNumber} must use the complete rendered asset`);
+  assert.equal(
+    figureRegistry.filename_pattern,
+    'fig-{volume}-{number}-{slug}.{ext}'
+  );
+  assert.ok(
+    figure.web_file.endsWith('.webp') || figure.web_file.endsWith('.png'),
+    `Figure ${figureNumber} must retain a governed rendered-asset reference`
+  );
+  assert.equal(
+    fs.existsSync(`assets/images/figures/book-1/${figureNumber}.png`),
+    false,
+    `Figure ${figureNumber} legacy PNG must remain outside Git after R2 migration`
+  );
 }
 
 const atlasSource = fs.readFileSync('explore.html', 'utf8');
 const atlasScript = fs.readFileSync('assets/js/pages/atlas.js', 'utf8');
 for (const figureNumber of ['3A', '3B', '4D']) {
   assert.ok(
-    atlasScript.includes(
-      `/assets/images/figures/book-1/web/${figureNumber}.webp`
-    ),
-    `Atlas must expose public WebP Figure ${figureNumber}`
-  );
-  const publicFigure = `assets/images/figures/book-1/web/${figureNumber}.webp`;
-  assert.ok(
-    fs.existsSync(publicFigure),
-    `Atlas public Figure ${figureNumber} asset must exist`
+    atlasScript.includes(`${figureNumber}.webp`),
+    `Atlas must retain the public WebP mapping for Figure ${figureNumber}`
   );
   assert.ok(
-    fs.statSync(publicFigure).size > 0,
-    `Atlas public Figure ${figureNumber} asset must not be empty`
+    atlasScript.includes('/assets/images/figures/book-1/web/') ||
+      atlasScript.includes('images/figures/book-1/'),
+    'Atlas Figure configuration must retain a governed Book I Figure root until the public asset base URL is verified'
   );
 }
 for (const part of [1, 2, 3, 4, 5]) {
@@ -156,4 +177,4 @@ assert.equal(entrySource.includes("target: 'runtime_conditions'"), true);
 const reconstructionSource = fs.readFileSync('functions/runtime/reconstruction/rule-reconstruction.js', 'utf8');
 assert.match(reconstructionSource, /carrier_signatures[\s\S]*runtime_conditions/);
 
-console.log('✓ M1-W7 Book 1 Figures 1A–5E conceptual boundaries, Runtime representation, and handoff alignment passed.');
+console.log('✓ M1-W7 Book 1 Figures 1A–5E conceptual boundaries, R2 asset ownership, Runtime representation, and handoff alignment passed.');
