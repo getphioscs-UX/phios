@@ -1,0 +1,50 @@
+{
+  "contract": "KH-W4A-RUNTIME-AUTHORITY-v1",
+  "stage": "KH-W4A",
+  "status": "reconciled",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "46db2da328581cb03b8bbdd1dac035dc3a29e5e8",
+    "shortCommitSha": "46db2da",
+    "sourceArchive": "PHIOS(22).zip",
+    "userReportedNpmCheck": "passed",
+    "generatedAt": "2026-08-05T10:57:10.772884+00:00"
+  },
+  "authorities": [
+    {
+      "concern": "book_identity",
+      "authority": "content/registry/books.json"
+    },
+    {
+      "concern": "part_identity_and_current_publication_ownership",
+      "authority": "content/registry/parts.json"
+    },
+    {
+      "concern": "canonical_node_identity_and_meaning",
+      "authority": "content/knowledge/registry/nodes.json"
+    },
+    {
+      "concern": "blueprint_discovery_and_binding",
+      "authority": "content/knowledge/blueprints/blueprint-registry.json"
+    },
+    {
+      "concern": "blueprint_loading_runtime",
+      "authority": "scripts/lib/knowledge-blueprint/blueprint-registry-loader.mjs"
+    },
+    {
+      "concern": "historical_migration_evidence",
+      "authority": "docs/knowledge/kh-w3-5g-four-volume-knowledge-blueprint-migration-v1.json"
+    }
+  ],
+  "nonAuthorities": [
+    {
+      "path": "docs/knowledge/kh-w4a-knowledge-runtime-v2-freeze.json",
+      "reason": "freeze evidence, not runtime authority"
+    },
+    {
+      "path": "docs/pja/pja-r4-four-volume-blueprint-binding-reconciliation-v1.json",
+      "reason": "PJA binding foundation, not registry authority"
+    }
+  ]
+}

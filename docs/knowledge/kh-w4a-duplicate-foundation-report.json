@@ -1,0 +1,42 @@
+{
+  "contract": "KH-W4A-DUPLICATE-FOUNDATION-REPORT-v1",
+  "stage": "KH-W4A",
+  "status": "reviewed",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "46db2da328581cb03b8bbdd1dac035dc3a29e5e8",
+    "shortCommitSha": "46db2da",
+    "sourceArchive": "PHIOS(22).zip",
+    "userReportedNpmCheck": "passed",
+    "generatedAt": "2026-08-05T10:57:10.772884+00:00"
+  },
+  "duplicates": [
+    {
+      "topic": "book_and_part_metadata_repeated_in_blueprint_registry",
+      "status": "requires_reconciliation",
+      "canonicalAuthority": [
+        "content/registry/books.json",
+        "content/registry/parts.json"
+      ],
+      "projectionLocation": "content/knowledge/blueprints/blueprint-registry.json",
+      "resolution": "Treat repeated book and part fields as validated projections only.",
+      "targetStage": "KH-W4B"
+    },
+    {
+      "topic": "single_book_blueprint_direct_consumption",
+      "status": "legacy_and_current_consumers_detected",
+      "evidenceCount": 113,
+      "resolution": "Migrate current consumers to the universal registry loader; retain historical allowlist.",
+      "targetStage": "KH-W4C"
+    },
+    {
+      "topic": "part_5_legacy_book_identity",
+      "status": "identity_debt_detected",
+      "evidenceFileCount": 98,
+      "resolution": "Separate canonical identity, manuscript source and current publication ownership without bulk node renaming.",
+      "targetStage": "KH-W4E"
+    }
+  ],
+  "decision": "No duplicate foundation is created in KH-W4A; reconciliation is delegated to the named later stages."
+}
