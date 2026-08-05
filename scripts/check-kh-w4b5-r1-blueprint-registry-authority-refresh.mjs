@@ -71,9 +71,9 @@ assert.equal(frozenBook2.status, book2.status);
 
 const book3 = registry.books.find(entry => entry.bookCode === 'BOOK-3');
 assert.ok(book3);
-assert.equal(book3.contract, 'PHI-OS-BOOK-3-KNOWLEDGE-BLUEPRINT-v2.0.0');
+assert.equal(book3.contract, 'PHI-OS-BOOK-3-KNOWLEDGE-BLUEPRINT-v2.1.0');
 assert.equal(book3.status, 'registry-complete-planning');
-assert.equal(book3.canonicalNodeCount, 182);
+assert.equal(book3.canonicalNodeCount, 187);
 assert.deepEqual(book3.partCodes, ['P10', 'P11', 'P12']);
 
 const frozenBook3 = freeze.freeze.bookFreeze.find(
