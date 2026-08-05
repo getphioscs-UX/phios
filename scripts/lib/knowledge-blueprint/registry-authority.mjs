@@ -7,17 +7,42 @@ export const KNOWLEDGE_REGISTRY_AUTHORITY_PATH =
   'content/knowledge/contracts/knowledge-registry-authority-v2.json';
 
 export function normalizeBookCode(value) {
-  if (typeof value === 'number' && Number.isInteger(value) && value > 0) {
-    return `BOOK-${value}`;
+  if (typeof value === 'number') {
+    return Number.isInteger(value) && value > 0
+      ? `BOOK-${value}`
+      : null;
   }
+
   if (typeof value !== 'string' || value.trim().length === 0) {
-    throw new TypeError('Knowledge book identity is required.');
+    return null;
   }
-  const normalized = value.trim().toUpperCase().replace(/^BOOK\s+/, 'BOOK-');
-  const roman = new Map([['I','1'],['II','2'],['III','3'],['IV','4'],['V','5']]);
+
+  const normalized = value
+    .trim()
+    .toUpperCase()
+    .replace(/^BOOK\s+/, 'BOOK-');
+
+  const roman = new Map([
+    ['I', '1'],
+    ['II', '2'],
+    ['III', '3'],
+    ['IV', '4'],
+    ['V', '5']
+  ]);
+
   const match = /^(?:BOOK-?|)(I{1,3}|IV|V|\d+)$/.exec(normalized);
-  if (!match) throw new TypeError(`Invalid Knowledge book identity: ${value}`);
-  return `BOOK-${roman.get(match[1]) || String(Number(match[1]))}`;
+
+  if (!match) {
+    return null;
+  }
+
+  const number = Number(roman.get(match[1]) || match[1]);
+
+  if (!Number.isInteger(number) || number <= 0) {
+    return null;
+  }
+
+  return `BOOK-${number}`;
 }
 function requireBookCode(value, context = 'Knowledge book identity') {
   const bookCode = normalizeBookCode(value);
