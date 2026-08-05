@@ -25,8 +25,17 @@ assert.equal(knowledge.registry.policies.directSingleBookAssumptionDeprecated, t
 assert.equal(knowledge.registry.policies.registryRequiredForProduction, true);
 assert.equal(knowledge.registry.policies.failClosedOnDigestMismatch, true);
 assert.deepEqual(knowledge.books.map(book => book.bookCode), ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4']);
-assert.deepEqual(knowledge.totals, { books: 4, parts: 16, nodes: 78 });
-assert.deepEqual(knowledge.registry.totals, { books: 4, parts: 16, canonicalNodes: 78 });
+const currentCanonicalNodeCount = nodes.nodes.length;
+assert.deepEqual(knowledge.totals, {
+  books: 4,
+  parts: 16,
+  nodes: currentCanonicalNodeCount
+});
+assert.deepEqual(knowledge.registry.totals, {
+  books: 4,
+  parts: 16,
+  canonicalNodes: currentCanonicalNodeCount
+});
 
 const expectedBookParts = Object.fromEntries(books.books.map(book => [
   `BOOK-${book.volume}`,
@@ -46,19 +55,23 @@ for (const [partCode, projected] of knowledge.byPartCode) {
 const canonicalCodes = nodes.nodes.map(node => node.nodeCode).sort();
 const projectedCodes = knowledge.nodes.map(node => node.nodeCode).sort();
 assert.deepEqual(projectedCodes, canonicalCodes);
-assert.equal(new Set(projectedCodes).size, 78);
+assert.equal(new Set(projectedCodes).size, currentCanonicalNodeCount);
 assert.equal(knowledge.byBookCode.get('BOOK-1').cardinality.canonicalNodeCount, 65);
-assert.equal(knowledge.byBookCode.get('BOOK-2').cardinality.canonicalNodeCount, 13);
-assert.equal(knowledge.byBookCode.get('BOOK-3').cardinality.canonicalNodeCount, 0);
+assert.equal(knowledge.byBookCode.get('BOOK-2').cardinality.canonicalNodeCount, 266);
+assert.equal(knowledge.byBookCode.get('BOOK-3').cardinality.canonicalNodeCount, 182);
 assert.equal(knowledge.byBookCode.get('BOOK-4').cardinality.canonicalNodeCount, 0);
 assert.equal((await resolveKnowledgeBlueprintForNode(root, 'KN-B1-P5-001', { knowledge })).bookCode, 'BOOK-2');
 assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P13', { knowledge })).bookCode, 'BOOK-4');
 assert.equal(freeze.completionId, 'KH-W4A-Blueprint-Registry-Loader-Freeze-Completed');
 assert.equal(freeze.invariants.canonicalNodeCount, 78);
+assert.ok(
+  currentCanonicalNodeCount >= freeze.invariants.canonicalNodeCount,
+  'Current Registry may extend the historical KH-W4A baseline but must not shrink below it.'
+);
 assert.equal(freeze.invariants.canonicalNodeCodesChanged, false);
 assert.equal(freeze.invariants.canonicalMeaningChanged, false);
 
 console.log('✓ KH-W4A Knowledge Runtime v2 Blueprint Registry and Loader passed.');
-console.log('  Four registered Blueprints project 16 Parts and preserve all 78 Canonical Node identities.');
-console.log('  P5 resolves to BOOK-2; P13 resolves to BOOK-4; architecture-only Parts create no Nodes.');
+console.log(`  Four registered Blueprints project 16 Parts and ${currentCanonicalNodeCount} current Canonical Node identities.`);
+console.log('  P5 resolves to BOOK-2; P10 resolves to BOOK-3; P13 resolves to BOOK-4.');
 console.log('  Legacy single-Book authority is retired; digest mismatch fails closed.');

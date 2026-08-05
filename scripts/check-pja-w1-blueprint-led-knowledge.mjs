@@ -96,11 +96,17 @@ assert.equal(
   nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   blueprint.prefaceCanonicalNodes
 );
-const referencedThemeCodes = new Set(nodesRegistry.nodes.map(node => node.themeCode));
+const pjaW1NodeCodes = new Set([...activeCodes, ...deferredCodes]);
+const referencedThemeCodes = new Set(
+  nodesRegistry.nodes
+    .filter(node => pjaW1NodeCodes.has(node.nodeCode))
+    .map(node => node.themeCode)
+);
 assert(
   [...referencedThemeCodes].every(themeCode =>
     themesRegistry.themes.some(theme => theme.themeCode === themeCode)
-  )
+  ),
+  'PJA-W1 validates Theme coverage only for its active and deferred Wave 1 Nodes.'
 );
 
 const publishedLocaleRecords = [];
