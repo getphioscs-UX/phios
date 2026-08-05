@@ -49,10 +49,26 @@ assert.equal(blueprint.nodes.length, 78);
 assert.equal(preface.length, 13);
 assert.equal(targets.length, 65);
 assert.equal(policy.nodes.length, 65);
-assert.equal(nodes.nodes.length, 78);
+const book1BlueprintCodes = new Set(
+  blueprint.nodes.map(node => node.nodeCode)
+);
+const book1RegistryNodes = nodes.nodes.filter(node =>
+  book1BlueprintCodes.has(node.nodeCode)
+);
+assert.equal(book1RegistryNodes.length, 78);
 assert.equal(localized.localizedContent.length, 78);
-assert.deepEqual(new Set(nodes.nodes.map(node => node.nodeCode)), new Set(blueprint.nodes.map(node => node.nodeCode)));
-assert.deepEqual(new Set(localized.localizedContent.map(item => item.nodeCode)), new Set(blueprint.nodes.map(node => node.nodeCode)));
+assert.deepEqual(
+  new Set(book1RegistryNodes.map(node => node.nodeCode)),
+  book1BlueprintCodes
+);
+assert.deepEqual(
+  new Set(localized.localizedContent.map(item => item.nodeCode)),
+  book1BlueprintCodes
+);
+assert(
+  nodes.nodes.length >= book1RegistryNodes.length,
+  'Universal Canonical Registry may contain Books II–IV beyond Book I C0 scope.'
+);
 
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 assert.equal(ajv.compile(nodeSchema)(nodes), true, JSON.stringify(ajv.errors));

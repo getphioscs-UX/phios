@@ -191,7 +191,23 @@ const migrationFiles = (await fs.readdir(
   path.join(root, 'db/migrations')
 )).filter(file => file.endsWith('.sql'));
 
-assert.equal(nodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
+const registryNodeCodes = new Set(
+  nodesRegistry.nodes.map(node => node.nodeCode)
+);
+const blueprintNodeCodes = new Set(
+  (blueprint.nodes || []).map(node =>
+    typeof node === 'string' ? node : node.nodeCode
+  )
+);
+assert.equal(blueprintNodeCodes.size, blueprint.plannedCanonicalNodes);
+assert(
+  [...blueprintNodeCodes].every(nodeCode => registryNodeCodes.has(nodeCode)),
+  'Every PJA-W2A Book 1 Blueprint Node must exist in the expanded Canonical Registry.'
+);
+assert(
+  nodesRegistry.nodes.length >= blueprint.plannedCanonicalNodes,
+  'The Universal Canonical Registry may extend beyond the historical Book 1 Blueprint.'
+);
 assert.equal(
   nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   contract.preservation.canonicalNodeCount
@@ -214,10 +230,13 @@ assert.equal(contract.preservation.knowledgeRegistrySchemaCount, 12);
 assert.equal(contract.preservation.canonicalRegistryChanged, false);
 assert.equal(contract.preservation.localizedRegistryChanged, false);
 assert.equal(contract.preservation.assetRegistryChanged, false);
+const universalNodeCodes = new Set(
+  nodesRegistry.nodes.map(node => node.nodeCode)
+);
 assert.equal(
-  nodesRegistry.nodes.every(node => blueprint.nodes.some(item => item.nodeCode === node.nodeCode)),
+  blueprint.nodes.every(item => universalNodeCodes.has(item.nodeCode)),
   true,
-  'Canonical Node Registry contains an identity outside the Book I Blueprint.'
+  'Every Book I Blueprint identity must exist in the Universal Canonical Node Registry.'
 );
 assert.equal(
   localizedRegistry.localizedContent.every(record => (

@@ -24,8 +24,14 @@ const [authority, knowledge, governance, controller] = await Promise.all([
   read('assets/js/pages/free-explore.js')
 ]);
 assert.equal(authority.contract.contract, KNOWLEDGE_REGISTRY_AUTHORITY_VERSION);
-assert.deepEqual(authority.totals, { books: 4, parts: 16, nodes: 78 });
+const expectedAuthorityTotals = {
+  books: authority.byBookCode.size,
+  parts: authority.byPartCode.size,
+  nodes: authority.byNodeCode.size
+};
+assert.deepEqual(authority.totals, expectedAuthorityTotals);
 assert.deepEqual(knowledge.totals, authority.totals);
+assert.equal(authority.totals.nodes, 513);
 assert.equal(normalizeBookCode('book-2'), 'BOOK-2');
 assert.equal(normalizeBookCode('Book II'), 'BOOK-2');
 assert.equal(normalizePartCode('part-5'), 'P5');
