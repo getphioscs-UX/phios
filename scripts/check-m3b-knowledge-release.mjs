@@ -116,9 +116,11 @@ const glossaryEnglish = await readJson('content/knowledge/glossary-en.json');
 const figureCaptionsEnglish = await readJson('content/knowledge/figure-captions-en.json');
 const releaseRegistry = await readJson('content/registry/m3b-knowledge-release.json');
 const previewManifest = await readJson('content/registry/book-1-free-preview.json');
+const publicAssets = await readJson('content/registry/public-assets.json');
 
 assert.equal(manifest.page_count, 462);
-assert.equal(manifest.parts.length, 6);
+assert.equal(manifest.parts.length, 5);
+assert.deepEqual(manifest.parts.map(part => part.number), [0, 1, 2, 3, 4]);
 assert.equal(figureRegistry.figures.filter(figure => figure.book === 1).length, 16);
 assert.equal(conceptRegistry.concepts.length, 41);
 assert.equal(Object.keys(glossaryEnglish.definitions).length, 41);
@@ -127,24 +129,19 @@ for (const concept of conceptRegistry.concepts) {
   assert.equal(typeof glossaryEnglish.definitions[concept.id], 'string', `Missing English definition: ${concept.id}`);
 }
 
-const invalidWebFigures = [];
 for (const figure of figureRegistry.figures.filter(item => item.book === 1)) {
   assert.equal(typeof figureCaptionsEnglish.captions[figure.figure_id], 'string', `Missing English caption: ${figure.figure_id}`);
-  const webPath = `assets/images/figures/book-1/web/${figure.figure_number}.webp`;
-  if (!await exists(webPath)) {
-    invalidWebFigures.push(`${figure.figure_id} (missing)`);
-    continue;
-  }
-  const webFile = await fs.stat(path.join(root, webPath));
-  if (!webFile.isFile() || webFile.size === 0) {
-    invalidWebFigures.push(`${figure.figure_id} (empty)`);
-  }
 }
-assert.deepEqual(
-  invalidWebFigures,
-  [],
-  `Invalid public WebP files: ${invalidWebFigures.join(', ')}`
-);
+
+assert.equal(publicAssets.bucket, 'phios-public-assets');
+assert.equal(publicAssets.resolution_policy.fail_closed, true);
+const bookOneFiguresAsset = publicAssets.assets.find(asset => asset.asset_code === 'BOOK-1-FIGURES');
+assert.ok(bookOneFiguresAsset, 'BOOK-1-FIGURES must be registered in public-assets.json');
+assert.equal(bookOneFiguresAsset.category, 'book-figures');
+assert.equal(bookOneFiguresAsset.book_id, 'book-1');
+assert.equal(bookOneFiguresAsset.object_key, 'images/figures/book-1/');
+assert.equal(bookOneFiguresAsset.format, 'webp');
+assert.notEqual(bookOneFiguresAsset.status, 'missing');
 
 assert.equal(previewManifest.status, 'public-preview-ready');
 assert.equal(previewManifest.source.pageCount, 48);
@@ -159,36 +156,17 @@ assert.equal(previewManifest.publicRender.previewPdfDownloadExposed, false);
 assert.equal(previewManifest.publicRender.fullBookPdfDownloadExposed, false);
 assert.equal(previewManifest.accessBoundary.browserStorageCanGrantFullAccess, false);
 
-const invalidPreviewPages = [];
-for (let page = 1; page <= previewManifest.publicRender.pageCount; page += 1) {
-  const pageNumber = String(page).padStart(
-    previewManifest.publicRender.pageNumberPadding,
-    '0'
-  );
-  const pagePath = `assets/images/books/book-1/preview/page-${pageNumber}.webp`;
-  if (!await exists(pagePath)) {
-    invalidPreviewPages.push(`page ${page} (missing)`);
-    continue;
-  }
-  const pageFile = await fs.stat(path.join(root, pagePath));
-  if (!pageFile.isFile() || pageFile.size === 0) {
-    invalidPreviewPages.push(`page ${page} (empty)`);
-  }
-}
-assert.deepEqual(
-  invalidPreviewPages,
-  [],
-  `Invalid free-preview WebP files: ${invalidPreviewPages.join(', ')}`
-);
-
-const previewAssetFiles = await fs.readdir(
-  path.join(root, 'assets/images/books/book-1/preview')
-);
-assert.equal(
-  previewAssetFiles.some(file => file.toLowerCase().endsWith('.pdf')),
-  false,
-  'The source or full Book I PDF must not be exposed in the public preview assets'
-);
+const bookOnePreviewAsset = publicAssets.assets.find(asset => asset.asset_code === 'BOOK-1-PREVIEW');
+assert.ok(bookOnePreviewAsset, 'BOOK-1-PREVIEW must be registered in public-assets.json');
+assert.equal(bookOnePreviewAsset.category, 'book-preview');
+assert.equal(bookOnePreviewAsset.book_id, 'book-1');
+assert.equal(bookOnePreviewAsset.object_key, 'books/previews/book-1/');
+assert.equal(bookOnePreviewAsset.format, 'webp');
+assert.notEqual(bookOnePreviewAsset.status, 'missing');
+assert.equal(previewManifest.publicRender.storage, 'cloudflare-r2');
+assert.equal(previewManifest.publicRender.assetCode, 'BOOK-1-PREVIEW');
+assert.equal(previewManifest.publicRender.objectKeyPattern, 'books/previews/book-1/page-{page}.webp');
+assert.equal(previewManifest.publicRender.publicUrlResolution, 'asset-resolver-required');
 
 assert.equal(releaseRegistry.workstreams['M3B-W1'].status, 'ready');
 assert.equal(releaseRegistry.workstreams['M3B-W6'].publicFormat, 'webp');
@@ -243,5 +221,5 @@ assert.doesNotMatch(readerScript, /setItem|purchaseState\s*=\s*['"]purchased/);
 const atlasHtml = await read('explore.html');
 assert.match(atlasHtml, /atlas-knowledge-upgrade\.js/);
 
-console.log('✓ M3B Knowledge Release passed: Library → Book I → 48-page Preview → Access → Atlas → Figures → Glossary.');
+console.log('✓ M3B Knowledge Release passed: Library → Book I → R2 Preview → Access → Atlas → R2 Figures → Glossary.');
 console.log('  Stripe/R2 commerce is implemented and remains production-gated until external acceptance passes.');
