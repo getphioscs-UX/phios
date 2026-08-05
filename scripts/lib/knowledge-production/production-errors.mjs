@@ -54,5 +54,6 @@ export function formatError(error) {
   const code = error?.code || 'IMPORT_CONFLICT';
   const lines = [`${code}: ${error?.message || 'Unexpected production tool failure.'}`];
   if (error?.hint) lines.push(`Hint: ${error.hint}`);
+  if (error?.details) lines.push(`Details: ${error.details}`);
   return lines.join('\n');
 }
