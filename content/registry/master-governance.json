@@ -51,7 +51,12 @@
     "production-verification"
   ],
   "gateRules": {
-    "appliesToViews": ["public", "customer", "professional", "technical"],
+    "appliesToViews": [
+      "public",
+      "customer",
+      "professional",
+      "technical"
+    ],
     "pageChangeRequiresVisualAcceptance": true,
     "nonPageContractChangeMayMarkVisualAcceptanceNotApplicable": true,
     "notApplicableRequiresReason": true,
@@ -59,12 +64,68 @@
     "automatedPassCannotSubstituteForVisualAcceptance": true
   },
   "canonicalJourneyMapping": [
-    {"stageId":"enter","customerName":{"en":"Enter","zh-Hans":"进入"},"technicalSurfaces":["index.html","reality-journey.html"]},
-    {"stageId":"describe","customerName":{"en":"Describe","zh-Hans":"描述"},"technicalSurfaces":["reality-entry.html"]},
-    {"stageId":"discover","customerName":{"en":"Discover","zh-Hans":"发现"},"technicalSurfaces":["reality-reconstruction.html"]},
-    {"stageId":"understand","customerName":{"en":"Understand","zh-Hans":"理解"},"technicalSurfaces":["reality-reading.html"]},
-    {"stageId":"choose","customerName":{"en":"Choose","zh-Hans":"选择"},"technicalSurfaces":["reality-navigation.html"]},
-    {"stageId":"continue","customerName":{"en":"Continue","zh-Hans":"继续"},"technicalSurfaces":["reality-review.html","my-reality.html"]}
+    {
+      "stageId": "enter",
+      "customerName": {
+        "en": "Enter",
+        "zh-Hans": "进入"
+      },
+      "technicalSurfaces": [
+        "index.html",
+        "reality-journey.html"
+      ]
+    },
+    {
+      "stageId": "describe",
+      "customerName": {
+        "en": "Describe",
+        "zh-Hans": "描述"
+      },
+      "technicalSurfaces": [
+        "reality-entry.html"
+      ]
+    },
+    {
+      "stageId": "discover",
+      "customerName": {
+        "en": "Discover",
+        "zh-Hans": "发现"
+      },
+      "technicalSurfaces": [
+        "reality-reconstruction.html"
+      ]
+    },
+    {
+      "stageId": "understand",
+      "customerName": {
+        "en": "Understand",
+        "zh-Hans": "理解"
+      },
+      "technicalSurfaces": [
+        "reality-reading.html"
+      ]
+    },
+    {
+      "stageId": "choose",
+      "customerName": {
+        "en": "Choose",
+        "zh-Hans": "选择"
+      },
+      "technicalSurfaces": [
+        "reality-navigation.html"
+      ]
+    },
+    {
+      "stageId": "continue",
+      "customerName": {
+        "en": "Continue",
+        "zh-Hans": "继续"
+      },
+      "technicalSurfaces": [
+        "reality-review.html",
+        "my-reality.html"
+      ]
+    }
   ],
   "journeyRules": {
     "technicalRouteNamesMayRemainUnchanged": true,
@@ -81,12 +142,19 @@
     "readModelsAreReadOnly": true,
     "writeSourceMap": [
       {
-        "objects": ["Journey"],
+        "objects": [
+          "Journey"
+        ],
         "owner": "Core Runtime",
-        "canonicalPaths": ["functions/runtime"]
+        "canonicalPaths": [
+          "functions/runtime"
+        ]
       },
       {
-        "objects": ["Knowledge Node", "Supporting Question"],
+        "objects": [
+          "Knowledge Node",
+          "Supporting Question"
+        ],
         "owner": "PKR",
         "canonicalPaths": [
           "content/knowledge/registry/nodes.json",
@@ -94,12 +162,26 @@
         ]
       },
       {
-        "objects": ["Book I Planning"],
-        "owner": "KH-W3.5G Blueprint",
-        "canonicalPaths": ["content/knowledge/blueprints/book-1-knowledge-blueprint.json"]
+        "objects": [
+          "Book",
+          "Part",
+          "Knowledge Blueprint"
+        ],
+        "owner": "KH-W4B Canonical Registry Authority",
+        "canonicalPaths": [
+          "content/registry/books.json",
+          "content/registry/parts.json",
+          "content/knowledge/blueprints/blueprint-registry.json",
+          "content/knowledge/contracts/knowledge-registry-authority-v2.json"
+        ]
       },
       {
-        "objects": ["Product", "Offer", "Price", "Entitlement"],
+        "objects": [
+          "Product",
+          "Offer",
+          "Price",
+          "Entitlement"
+        ],
         "owner": "PWS-I2 / PWS-I4",
         "canonicalPaths": [
           "content/registry/book-products.json",
@@ -109,7 +191,10 @@
         ]
       },
       {
-        "objects": ["Consent", "Privacy"],
+        "objects": [
+          "Consent",
+          "Privacy"
+        ],
         "owner": "PWS-I8",
         "canonicalPaths": [
           "functions/professional/consent",
@@ -118,7 +203,11 @@
         ]
       },
       {
-        "objects": ["Provider", "Prompt", "Budget"],
+        "objects": [
+          "Provider",
+          "Prompt",
+          "Budget"
+        ],
         "owner": "PWS-I9",
         "canonicalPaths": [
           "functions/runtime/entry/providers",
@@ -127,12 +216,21 @@
         ]
       },
       {
-        "objects": ["Professional Identity", "Capability"],
+        "objects": [
+          "Professional Identity",
+          "Capability"
+        ],
         "owner": "PWS-I3",
-        "canonicalPaths": ["functions/professional/access"]
+        "canonicalPaths": [
+          "functions/professional/access"
+        ]
       },
       {
-        "objects": ["Assignment", "Workspace", "Deliverable"],
+        "objects": [
+          "Assignment",
+          "Workspace",
+          "Deliverable"
+        ],
         "owner": "PWS-I5",
         "canonicalPaths": [
           "functions/professional/workspace",
@@ -140,7 +238,10 @@
         ]
       },
       {
-        "objects": ["Queue", "Continuity"],
+        "objects": [
+          "Queue",
+          "Continuity"
+        ],
         "owner": "PWS-I6",
         "canonicalPaths": [
           "functions/professional/appointments",
@@ -148,7 +249,10 @@
         ]
       },
       {
-        "objects": ["Governance", "Quality"],
+        "objects": [
+          "Governance",
+          "Quality"
+        ],
         "owner": "PWS-I7",
         "canonicalPaths": [
           "content/registry/professional-data-governance.json",

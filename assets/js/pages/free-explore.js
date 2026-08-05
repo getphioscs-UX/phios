@@ -65,8 +65,8 @@ if (workspace) {
       '/content/knowledge/registry/supporting-questions.json',
     searchAliases:
       '/content/knowledge/registry/search-aliases.json',
-    blueprint:
-      '/content/knowledge/blueprints/book-1-knowledge-blueprint.json'
+    blueprintRegistry:
+      '/content/knowledge/blueprints/blueprint-registry.json'
   });
 
   const questionKeys = Object.freeze({
@@ -540,6 +540,22 @@ if (workspace) {
       );
 
       registries = Object.fromEntries(entries);
+      const blueprintEntries = Array.isArray(registries.blueprintRegistry?.books)
+        ? registries.blueprintRegistry.books
+        : [];
+      const blueprints = await Promise.all(blueprintEntries.map(async entry => {
+        const response = await fetch(`/${entry.blueprintPath}`, {
+          credentials: 'same-origin',
+          headers: { accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error(`blueprint_unavailable_${entry.bookCode}`);
+        return response.json();
+      }));
+      registries.blueprint = {
+        books: blueprints,
+        parts: blueprints.flatMap(blueprint => blueprint.parts || []),
+        nodes: blueprints.flatMap(blueprint => blueprint.nodes || [])
+      };
       registryState = 'ready';
       populateThemes();
       evaluateSelection();

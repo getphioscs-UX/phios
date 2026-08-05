@@ -1,0 +1,40 @@
+{
+  "contract": "KH-W4B-W4C-ACCEPTANCE-v1",
+  "status": "tested_with_environment_limitation",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "7906432",
+    "commitReference": "user-confirmed latest main short SHA; source reconstructed from PHIOS(22).zip plus committed KH-W4A delta"
+  },
+  "acceptance": {
+    "uniqueAuthorities": true,
+    "registryLedUniversalLoader": true,
+    "publicRuntimeRegistryDriven": true,
+    "part5PublicationOwner": "BOOK-2",
+    "canonicalNodeIdentityChanged": false,
+    "reviewChanged": false,
+    "approvalChanged": false,
+    "publicationChanged": false
+  },
+  "nextStage": "KH-W4D",
+  "checks": {
+    "check:kh-w4b-w4c": "passed",
+    "check:kh-w4a": "passed",
+    "check:knowledge-runtime": "passed",
+    "check:pja-r4": "passed",
+    "npm run check": {
+      "status": "environment_blocked_after_prior_checks",
+      "failure": "existing SQLite migration harness returned ERR_SQLITE_ERROR: column index out of range",
+      "scopeAssessment": "failure occurred in check-pws-i2-w1-universal-registry-core and is outside KH-W4B/W4C changed files",
+      "userBaselineResult": "passed before this delta"
+    }
+  },
+  "preservedBoundaries": {
+    "canonicalNodeIdentityChanged": false,
+    "humanReviewChanged": false,
+    "approvalChanged": false,
+    "publicationChanged": false,
+    "legacyBookIRegistryPopulationRetained": true
+  }
+}

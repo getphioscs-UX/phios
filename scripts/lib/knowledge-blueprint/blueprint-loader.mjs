@@ -3,18 +3,8 @@ import path from 'node:path';
 
 export const BLUEPRINT_SCHEMA_VERSION = 'PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0';
 
-export function normalizeBookCode(value) {
-  if (typeof value !== 'string' || value.length === 0) {
-    throw new TypeError('Knowledge Blueprint bookCode is required.');
-  }
-  const upper = value.toUpperCase();
-  const roman = new Map([
-    ['I', '1'], ['II', '2'], ['III', '3'], ['IV', '4'], ['V', '5']
-  ]);
-  const match = /^BOOK-(.+)$/.exec(upper);
-  if (!match) throw new TypeError(`Invalid Knowledge Blueprint bookCode: ${value}`);
-  return `BOOK-${roman.get(match[1]) || match[1]}`;
-}
+export { normalizeBookCode } from './registry-authority.mjs';
+import { normalizeBookCode } from './registry-authority.mjs';
 
 export function deriveBlueprintCardinality(blueprint) {
   const parts = Array.isArray(blueprint.parts) ? blueprint.parts : [];

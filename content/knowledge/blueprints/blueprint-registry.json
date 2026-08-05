@@ -4,7 +4,7 @@
   "status": "frozen",
   "authority": {
     "canonicalKnowledge": "content/knowledge/registry/nodes.json",
-    "publicationOwnership": "content/knowledge/blueprints/blueprint-registry.json",
+    "publicationOwnership": "content/registry/parts.json",
     "bookIdentity": "content/registry/books.json",
     "partIdentity": "content/registry/parts.json"
   },
@@ -94,5 +94,12 @@
   "legacy": {
     "book1V1Snapshot": "content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json",
     "status": "historical_evidence_only"
+  },
+  "authorityContract": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+  "projectionPolicy": {
+    "partCodes": "derived_and_validated_from_book_and_part_registries",
+    "canonicalNodeCount": "derived_and_validated_from_blueprint_and_canonical_node_registry",
+    "bookMetadata": "not_authoritative",
+    "publicationOwnership": "not_inferred_from_node_code"
   }
 }

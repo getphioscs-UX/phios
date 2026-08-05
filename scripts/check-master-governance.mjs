@@ -121,7 +121,10 @@ assert.equal(contract.writeSourceRule.readModelsAreReadOnly, true);
 const expectedWriteSources = [
   { objects: ['Journey'], owner: 'Core Runtime' },
   { objects: ['Knowledge Node', 'Supporting Question'], owner: 'PKR' },
-  { objects: ['Book I Planning'], owner: 'KH-W3.5G Blueprint' },
+  {
+    objects: ['Book', 'Part', 'Knowledge Blueprint'],
+    owner: 'KH-W4B Canonical Registry Authority'
+  },
   {
     objects: ['Product', 'Offer', 'Price', 'Entitlement'],
     owner: 'PWS-I2 / PWS-I4'
