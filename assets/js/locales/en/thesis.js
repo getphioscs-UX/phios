@@ -69,26 +69,12 @@ const thesis = Object.freeze({
     },
     "books": {
       "eyebrow": "Human Reading Route",
-      "title": "Three books. One architecture.",
-      "copy": "The three books form the human-readable route through the fourteen-part PHI OS architecture.",
-      "b1": {
-        "no": "BOOK I · PARTS 1–5",
-        "title": "How Reality Forms",
-        "copy": "From structure, field and projection to temporal dynamics, initialization and conscious Runtime.",
-        "status": "Foundation completed · Current figures available"
-      },
-      "b2": {
-        "no": "BOOK II · PARTS 6–9",
-        "title": "How Humans and Worlds Operate Together",
-        "copy": "From relational and collective Runtime to governance, maintenance and shared reality.",
-        "status": "Architecture in development"
-      },
-      "b3": {
-        "no": "BOOK III · PARTS 10–14",
-        "title": "How the World Will Continue",
-        "copy": "From civilization dynamics and ecology to diagnostics, reading architecture and continuity mechanics.",
-        "status": "Structural route established"
-      }
+      "title": "Four books. One architecture.",
+      "copy": "The four books form the human-readable route through the fifteen-part PHI OS architecture.",
+      "b1": {"no":"BOOK I · PARTS 1–4","title":"Reality Formation","copy":"From Reality physics, projection and dynamics to the carrier and continuous Human Runtime.","status":"Foundation completed · Formal assets migrating"},
+      "b2": {"no":"BOOK II · PARTS 5–9","title":"Reality Runtime","copy":"From conscious experience to relationship, collective operation, maintenance and governance.","status":"Architecture and manuscript in development"},
+      "b3": {"no":"BOOK III · PARTS 10–12","title":"Reality Civilization","copy":"From civilization migration, cycles and functions to ecology, coordinates and succession.","status":"Structural route established"},
+      "b4": {"no":"BOOK IV · PARTS 13–15","title":"Reality Navigation","copy":"From Reality reading, diagnosis and navigation to continuity and Reality evolution.","status":"Structural route established"}
     },
     "implementation": {
       "eyebrow": "04 · Reference Implementation",

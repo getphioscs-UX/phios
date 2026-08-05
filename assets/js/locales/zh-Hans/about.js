@@ -68,12 +68,12 @@ const about = Object.freeze({
       "title": "可以被阅读、体验并持续发展的研究。",
       "copy": "每一层都提供进入同一个 Reality Navigation 架构的不同方式。",
       "b1": {
-        "title": "三册书",
+        "title": "四册书",
         "copy": "从现实如何形成，到人与世界共同运行，再到世界如何继续的人类阅读路径。",
         "link": "探索知识路径 →"
       },
       "b2": {
-        "copy": "以滚动与逐层探索方式呈现 PHI OS 十四部架构。",
+        "copy": "以滚动与逐层探索方式呈现 PHI OS 十五部架构。",
         "link": "进入现实地图集 →"
       },
       "b3": {
@@ -105,7 +105,7 @@ const about = Object.freeze({
       },
       "j2": {
         "title": "知识旅程",
-        "copy": "适合从 Thesis、Atlas、三册书、图像与 Academy 进入的读者和学习者。"
+        "copy": "适合从 Thesis、Atlas、四册书、图像与 Academy 进入的读者和学习者。"
       },
       "j3": {
         "title": "平台旅程",

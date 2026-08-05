@@ -17,7 +17,7 @@ const atlas = Object.freeze({
     hero: {
       eyebrow: 'Knowledge Journey · Reality Atlas',
       title: 'Explore how Reality organizes itself.',
-      subtitle: 'A scrollable knowledge map connecting the PHI OS thesis, three books, fourteen architectural layers and their figures.',
+      subtitle: 'A scrollable knowledge map connecting the PHI OS thesis, four books, fifteen architectural layers and their figures.',
       beginAction: 'Enter the Atlas',
       thesisAction: 'Read the Thesis',
       orientationLabel: 'You are here',
@@ -44,21 +44,25 @@ const atlas = Object.freeze({
       boundary: 'The fourteen Parts are interoperable architectural layers. They are not fourteen separate books, and this Knowledge Journey does not change the Reality Journey.'
     },
     books: {
-      eyebrow: 'Three-book architecture',
-      title: 'Reality forms, runs together and continues.',
+      eyebrow: 'Four-book architecture',
+      title: 'Reality forms, runs, expands and continues.',
       description: 'Each book opens a different scale of the same PHI OS architecture.',
-      bookOneTitle: '世界如何形成',
-      bookOneEnglish: 'How Reality Forms',
-      bookOneDescription: 'From Reality physics and projection to continuous Runtime, the human carrier and conscious experience.',
-      bookTwoTitle: '人与世界如何共同运行',
-      bookTwoEnglish: 'How Humans and the World Run Together',
-      bookTwoDescription: 'How relationships, collectives, maintenance and governance coordinate shared Runtime.',
-      bookThreeTitle: '世界将如何继续',
-      bookThreeEnglish: 'How the World Will Continue',
-      bookThreeDescription: 'How civilizations migrate, coexist, become readable and preserve continuity.',
-      exploreParts: 'Explore Parts 1–5',
-      explorePartsTwo: 'Explore Parts 6–9',
-      explorePartsThree: 'Explore Parts 10–14'
+      bookOneTitle: 'Reality Formation',
+      bookOneEnglish: 'Reality Formation',
+      bookOneDescription: 'How Reality forms structure, field, projection, activation, carrier and continuous Runtime.',
+      bookTwoTitle: 'Reality Runtime',
+      bookTwoEnglish: 'Reality Runtime',
+      bookTwoDescription: 'How consciousness, relationships, collectives, maintenance and governance organize shared operation.',
+      bookThreeTitle: 'Reality Civilization',
+      bookThreeEnglish: 'Reality Civilization',
+      bookThreeDescription: 'How civilizations migrate through cycles, functions, ecologies, coordinates and succession.',
+      bookFourTitle: 'Reality Navigation',
+      bookFourEnglish: 'Reality Navigation',
+      bookFourDescription: 'How Reality is read, diagnosed, navigated and carried through change into evolution.',
+      exploreParts: 'Explore Parts 1–4',
+      explorePartsTwo: 'Explore Parts 5–9',
+      explorePartsThree: 'Explore Parts 10–12',
+      explorePartsFour: 'Explore Parts 13–15'
     },
     status: {
       completed: 'Completed',
@@ -68,14 +72,15 @@ const atlas = Object.freeze({
     },
     layers: {
       eyebrow: 'PHI OS Architecture Stack',
-      title: 'Fourteen layers of one continuous Reality.',
+      title: 'Fifteen layers of one continuous Reality.',
       description: 'Filter by book, then open any layer to understand the question it answers.',
       filterLabel: 'Filter Atlas layers',
       all: 'All layers',
-      showingAll: 'Showing all 14 layers',
-      showingBookOne: 'Showing Book I · Parts 1–5',
-      showingBookTwo: 'Showing Book II · Parts 6–9',
-      showingBookThree: 'Showing Book III · Parts 10–14'
+      showingAll: 'Showing all 15 layers',
+      showingBookOne: 'Showing Book I · Parts 1–4',
+      showingBookTwo: 'Showing Book II · Parts 5–9',
+      showingBookThree: 'Showing Book III · Parts 10–12',
+      showingBookFour: 'Showing Book IV · Parts 13–15'
     },
     parts: {
       openCompleteFigure: 'Open the complete figure',
@@ -182,8 +187,12 @@ const atlas = Object.freeze({
         description: 'Why reality can be observed, how evidence forms, how interpretive interfaces contribute, and how PHI OS creates a unified reading.'
       },
       part14: {
-        title: 'Continuity Mechanics',
+        title: 'Navigation Science',
         description: 'How Runtime persists across change, review, memory and carriers.'
+      },
+      part15: {
+        title: 'Continuity Science',
+        description: 'How Reality continues through settlement, residue, memory, inheritance, migration and evolution.'
       }
     },
     continuation: {

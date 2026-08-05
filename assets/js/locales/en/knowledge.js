@@ -102,7 +102,7 @@ const knowledgeRelease = Object.freeze({
       metaTitle: 'How Reality Forms — Book I',
       eyebrow: 'PHI OS · Book I',
       title: 'How Reality Forms',
-      subtitle: 'Reality Formation & Experience',
+      subtitle: 'Reality Formation',
       heroLead: 'The first human-readable route through the PHI OS architecture—from difference and projection to Runtime, the human carrier and conscious experience.',
       heroPromise: 'A 462-page architecture for understanding how Reality forms, enters experience, becomes human Runtime and continues through consciousness.',
       proofPages: '462 pages',

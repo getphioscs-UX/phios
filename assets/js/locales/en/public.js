@@ -94,7 +94,7 @@ const publicExperience = Object.freeze({
       eyebrow: 'Three ways to enter',
       title: 'Begin with knowledge, experience or the system itself.',
       knowledgeTitle: 'Explore Knowledge',
-      knowledgeCopy: 'Enter the Thesis, three books, fourteen-part architecture and Reality Atlas.',
+      knowledgeCopy: 'Enter the Thesis, four books, fifteen-part architecture and Reality Atlas.',
       knowledgeAction: 'Open the Atlas',
       realityTitle: 'Experience Reality Journey',
       realityCopy: 'Understand the six-stage path, its information boundaries and what happens before you choose to begin.',
@@ -159,8 +159,8 @@ const publicExperience = Object.freeze({
       limits: 'What PHI OS does not do',
       trust: 'Builder and trust',
       research: 'Research Foundation',
-      books: 'Three Books',
-      architecture: 'Fourteen-Part Architecture',
+      books: 'Four Books',
+      architecture: 'Fifteen-Part Architecture',
       platform: 'Platform',
       ecosystem: 'Future Ecosystem'
     },
@@ -211,29 +211,29 @@ const publicExperience = Object.freeze({
       ecosystem: 'Ecosystem'
     },
     books: {
-      eyebrow: '03 · Three Books',
+      eyebrow: '03 · Four Books',
       title: 'Three reading scales of one architecture.',
-      lead: 'The books are not separate products. Together they form the human-readable route through fourteen connected Parts.',
-      b1Title: 'Book I · How Reality Forms',
-      b1Copy: 'Structure, projection, time, the human carrier and conscious Runtime.',
-      b2Title: 'Book II · How Humans and Worlds Run Together',
-      b2Copy: 'Relationships, collectives, maintenance and governance.',
-      b3Title: 'Book III · How the World Will Continue',
-      b3Copy: 'Civilization, ecology, atlas, reading architecture and continuity.'
+      lead: 'The books are not separate products. Together they form the human-readable route through fifteen connected Parts.',
+      b1Title: 'Book I · Reality Formation',
+      b1Copy: 'Structure, projection, time, activation, carrier and continuous Runtime.',
+      b2Title: 'Book II · Reality Runtime',
+      b2Copy: 'Consciousness, relationships, collectives, maintenance and governance.',
+      b3Title: 'Book III · Reality Civilization',
+      b3Copy: 'Civilization migration, cycles, functions, ecology, coordinates and succession.'
     },
     architecture: {
-      eyebrow: '04 · Fourteen-Part Architecture',
+      eyebrow: '04 · Fifteen-Part Architecture',
       title: 'From the smallest observable difference to civilizational continuity.',
       lead: 'Fourteen interoperable Parts organize the architecture without turning them into fourteen separate journeys.',
-      formationTitle: 'Parts 1–5 · Formation & Experience',
+      formationTitle: 'Parts 1–4 · Reality Formation',
       formationCopy: 'Reality Physics, Projection, Dynamics, Human Runtime Carrier and Conscious Runtime.',
-      sharedTitle: 'Parts 6–9 · Shared Operation',
+      sharedTitle: 'Parts 5–9 · Reality Runtime',
       sharedCopy: 'Relational Runtime, Collective Runtime, Maintenance and Governance.',
       civilizationTitle: 'Parts 10–12 · Civilization',
       civilizationCopy: 'Civilization Dynamics, Ecology and Atlas.',
-      continuityTitle: 'Parts 13–14 · Reading & Continuity',
-      continuityCopy: 'Reality Reading Science and Continuity Mechanics.',
-      action: 'Explore all fourteen Parts'
+      continuityTitle: 'Parts 13–15 · Reading, Navigation & Continuity',
+      continuityCopy: 'Reality Reading Science, Navigation Science and Continuity Science.',
+      action: 'Explore all fifteen Parts'
     },
     platform: {
       eyebrow: '05 · Platform',

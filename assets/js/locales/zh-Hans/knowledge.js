@@ -102,7 +102,7 @@ const knowledgeRelease = Object.freeze({
       metaTitle: '世界如何形成 — 第一册',
       eyebrow: 'PHI OS · 第一册',
       title: '世界如何形成',
-      subtitle: '现实形成与体验',
+      subtitle: '现实形成与运行基础',
       heroLead: '进入 PHI OS 架构的第一条人类可读路径——从差异与投影，到 Runtime、人类载体与意识体验。',
       heroPromise: '一套跨越 462 页的完整架构，说明现实如何形成、进入体验、成为人类运行，并通过意识继续存在。',
       proofPages: '462 页',

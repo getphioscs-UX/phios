@@ -1143,3 +1143,14 @@ html[lang="zh-Hans"] .atlas-return-panel h2 {
     transition: none;
   }
 }
+
+/* BOOK-W0 four-volume publication projection */
+.book-card--four::before {
+  background: linear-gradient(90deg, rgba(36, 199, 231, 0.92), rgba(214, 171, 61, 0.82));
+}
+
+@media (min-width: 1180px) {
+  .book-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

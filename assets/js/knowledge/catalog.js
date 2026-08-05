@@ -19,7 +19,7 @@ export const LIBRARY_RESOURCES = Object.freeze([
     status: 'available',
     href: '/book-one',
     title: {
-      en: 'Book I · How Reality Forms',
+      en: 'Book I · Reality Formation',
       'zh-Hans': '第一册 · 世界如何形成'
     },
     description: {
@@ -51,8 +51,8 @@ export const LIBRARY_RESOURCES = Object.freeze([
       'zh-Hans': '第二册 · 共同运行'
     },
     description: {
-      en: 'Relationships, collectives, maintenance and governance.',
-      'zh-Hans': '关系、群体、维护与治理。'
+      en: 'Consciousness, relationships, collectives, maintenance and governance.',
+      'zh-Hans': '意识、关系、集体、维护与治理。'
     }
   },
   {
@@ -62,11 +62,11 @@ export const LIBRARY_RESOURCES = Object.freeze([
     href: '/explore?book=3',
     title: {
       en: 'Book III · Continuity',
-      'zh-Hans': '第三册 · 连续性'
+      'zh-Hans': '第四册 · 连续性'
     },
     description: {
       en: 'Civilization, ecology, Atlas, reading architecture and continuity.',
-      'zh-Hans': '文明、生态、地图集、读取架构与连续性。'
+      'zh-Hans': '文明迁移、周期、功能、生态、坐标与继任。'
     }
   },
   {
@@ -79,8 +79,8 @@ export const LIBRARY_RESOURCES = Object.freeze([
       'zh-Hans': '现实 Atlas'
     },
     description: {
-      en: 'A free structural route across fourteen Parts and three Books.',
-      'zh-Hans': '贯穿十四部与三本书的免费结构路径。'
+      en: 'A free structural route across fifteen Parts and three Books.',
+      'zh-Hans': '贯穿十五部与四本书的免费结构路径。'
     }
   },
   {

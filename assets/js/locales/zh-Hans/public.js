@@ -94,7 +94,7 @@ const publicExperience = Object.freeze({
       eyebrow: '三种进入方式',
       title: '从知识、体验或系统本身开始。',
       knowledgeTitle: '探索知识',
-      knowledgeCopy: '进入研究论文、三本书、十四部架构与现实地图集。',
+      knowledgeCopy: '进入研究论文、四本书、十五部架构与现实地图集。',
       knowledgeAction: '打开现实地图集',
       realityTitle: '体验现实旅程',
       realityCopy: '了解六阶段路径、信息边界，以及你选择开始前会发生什么。',
@@ -159,8 +159,8 @@ const publicExperience = Object.freeze({
       limits: 'PHI OS 不做什么',
       trust: '建立者与信任',
       research: '研究基础',
-      books: '三本书',
-      architecture: '十四部架构',
+      books: '四本书',
+      architecture: '十五部架构',
       platform: '平台',
       ecosystem: '未来生态'
     },
@@ -211,29 +211,29 @@ const publicExperience = Object.freeze({
       ecosystem: '生态'
     },
     books: {
-      eyebrow: '03 · 三本书',
+      eyebrow: '03 · 四本书',
       title: '同一个架构的三种阅读尺度。',
-      lead: '这三本书不是相互分离的产品，而是贯穿十四个相连部分的人类可读路径。',
+      lead: '这四本书不是相互分离的产品，而是贯穿十五个相连部分的人类可读路径。',
       b1Title: '第一册 · 世界如何形成',
-      b1Copy: '结构、投影、时间、人类载体与意识 Runtime。',
-      b2Title: '第二册 · 人与世界如何共同运行',
-      b2Copy: '关系、群体、维护与治理。',
-      b3Title: '第三册 · 世界将如何继续',
-      b3Copy: '文明、生态、地图集、读取架构与连续性。'
+      b1Copy: '结构、投影、时间、激活、载体与持续运行。',
+      b2Title: '第二册 · 世界如何运行',
+      b2Copy: '意识、关系、集体、维护与治理。',
+      b3Title: '第四册 · 世界将如何继续',
+      b3Copy: '文明迁移、周期、功能、生态、坐标与继任。'
     },
     architecture: {
-      eyebrow: '04 · 十四部架构',
+      eyebrow: '04 · 十五部架构',
       title: '从最小的可观察差异，到文明连续性。',
-      lead: '十四个可互操作的部分组织整体架构，但不会把它们变成十四条不同的旅程。',
-      formationTitle: '第 1–5 部 · 形成与体验',
+      lead: '十五个可互操作的部分组织整体架构，但不会把它们变成十四条不同的旅程。',
+      formationTitle: '第 1–4 部 · 现实形成',
       formationCopy: '现实物理、投影系统、现实动力学、人类 Runtime 载体与意识 Runtime。',
-      sharedTitle: '第 6–9 部 · 共同运行',
+      sharedTitle: '第 5–9 部 · 世界运行',
       sharedCopy: '关系 Runtime、群体 Runtime、维护与治理。',
       civilizationTitle: '第 10–12 部 · 文明',
       civilizationCopy: '文明动力学、文明生态与文明地图集。',
-      continuityTitle: '第 13–14 部 · 读取与连续性',
-      continuityCopy: '现实读取科学与连续性机制。',
-      action: '探索全部十四部'
+      continuityTitle: '第 13–15 部 · 读取、导航与持续',
+      continuityCopy: '现实读取科学、导航科学与持续科学。',
+      action: '探索全部十五部'
     },
     platform: {
       eyebrow: '05 · 平台',
