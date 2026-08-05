@@ -19,7 +19,15 @@ export function normalizeBookCode(value) {
   if (!match) throw new TypeError(`Invalid Knowledge book identity: ${value}`);
   return `BOOK-${roman.get(match[1]) || String(Number(match[1]))}`;
 }
+function requireBookCode(value, context = 'Knowledge book identity') {
+  const bookCode = normalizeBookCode(value);
 
+  if (!bookCode) {
+    throw new TypeError(`${context} is invalid: ${value}`);
+  }
+
+  return bookCode;
+}
 export function normalizePartCode(value) {
   if (typeof value === 'number' && Number.isInteger(value) && value >= 0) {
     return `P${value}`;
@@ -47,7 +55,10 @@ export async function loadKnowledgeRegistryAuthorities(root) {
   ]);
   const byBookCode = new Map();
   for (const book of books.books || []) {
-    const bookCode = normalizeBookCode(book.volume ?? book.book_id);
+    const bookCode = requireBookCode(
+  book.volume ?? book.book_id,
+  'Book Registry identity'
+);
     if (byBookCode.has(bookCode)) throw new Error(`Duplicate Book Registry identity: ${bookCode}`);
     const partCodes = [
       ...(book.cross_volume_sections?.includes('part-0-core-language') ? ['P0'] : []),
@@ -61,7 +72,10 @@ export async function loadKnowledgeRegistryAuthorities(root) {
   }
   for (const part of parts.parts || []) {
     const partCode = normalizePartCode(part.number ?? part.part_id);
-    const bookCode = normalizeBookCode(part.book);
+    const bookCode = requireBookCode(
+  part.book,
+  'Part Registry book identity'
+);
     if (!byBookCode.has(bookCode)) throw new Error(`Unknown Part Registry book: ${bookCode}`);
     if (byPartCode.has(partCode)) throw new Error(`Duplicate Part Registry identity: ${partCode}`);
     byPartCode.set(partCode, { ...part, partCode, bookCode, crossVolume: false });
