@@ -1,0 +1,98 @@
+{
+  "contract": "PHI-OS-KNOWLEDGE-BLUEPRINT-REGISTRY-v2.0.0",
+  "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-REGISTRY-v2.0.0",
+  "status": "frozen",
+  "authority": {
+    "canonicalKnowledge": "content/knowledge/registry/nodes.json",
+    "publicationOwnership": "content/knowledge/blueprints/blueprint-registry.json",
+    "bookIdentity": "content/registry/books.json",
+    "partIdentity": "content/registry/parts.json"
+  },
+  "policies": {
+    "nodeIdentityChangesWithPublication": false,
+    "blueprintMayCreateCanonicalNode": false,
+    "architectureOnlyPartMayEnterProduction": false,
+    "directSingleBookAssumptionDeprecated": true,
+    "registryRequiredForProduction": true,
+    "failClosedOnDigestMismatch": true
+  },
+  "books": [
+    {
+      "bookCode": "BOOK-1",
+      "blueprintPath": "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
+      "contract": "PHI-OS-BOOK-1-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "status": "planning-freeze",
+      "canonicalLanguage": "zh-Hans",
+      "partCodes": [
+        "P0",
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "canonicalNodeCount": 65,
+      "sha256": "dfc2d3b07afb5e5cf8fed93ef68f9b12bd1856035398874cccb5380db0953592",
+      "productionEligibility": "registered_nodes_only"
+    },
+    {
+      "bookCode": "BOOK-2",
+      "blueprintPath": "content/knowledge/blueprints/book-2-knowledge-blueprint.json",
+      "contract": "PHI-OS-BOOK-2-KNOWLEDGE-BLUEPRINT-v1.0.0",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "status": "architecture-freeze",
+      "canonicalLanguage": "zh-Hans",
+      "partCodes": [
+        "P5",
+        "P6",
+        "P7",
+        "P8",
+        "P9"
+      ],
+      "canonicalNodeCount": 13,
+      "sha256": "291c72398925bdc0349fd8ee498d54fbd1d557efde0d6b43417ec7461b7aa325",
+      "productionEligibility": "registered_nodes_only"
+    },
+    {
+      "bookCode": "BOOK-3",
+      "blueprintPath": "content/knowledge/blueprints/book-3-knowledge-blueprint.json",
+      "contract": "PHI-OS-BOOK-3-KNOWLEDGE-BLUEPRINT-v1.0.0",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "status": "architecture-freeze",
+      "canonicalLanguage": "zh-Hans",
+      "partCodes": [
+        "P10",
+        "P11",
+        "P12"
+      ],
+      "canonicalNodeCount": 0,
+      "sha256": "320f98a8ae87e040d6ab613a777abbf8807ea4e71df13b288e08506d950a88a3",
+      "productionEligibility": "architecture_only"
+    },
+    {
+      "bookCode": "BOOK-4",
+      "blueprintPath": "content/knowledge/blueprints/book-4-knowledge-blueprint.json",
+      "contract": "PHI-OS-BOOK-4-KNOWLEDGE-BLUEPRINT-v1.0.0",
+      "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0",
+      "status": "architecture-freeze",
+      "canonicalLanguage": "zh-Hans",
+      "partCodes": [
+        "P13",
+        "P14",
+        "P15"
+      ],
+      "canonicalNodeCount": 0,
+      "sha256": "4a1e49e1ca4ce167bdd77d65415eda180d3e5d20fd09a076769d5f761634720a",
+      "productionEligibility": "architecture_only"
+    }
+  ],
+  "totals": {
+    "books": 4,
+    "parts": 16,
+    "canonicalNodes": 78
+  },
+  "legacy": {
+    "book1V1Snapshot": "content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json",
+    "status": "historical_evidence_only"
+  }
+}

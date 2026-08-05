@@ -1,0 +1,42 @@
+{
+  "contract": "PHI-OS-KH-W4-KNOWLEDGE-RUNTIME-V2-FREEZE-v1.0.0",
+  "completionId": "KH-W4A-Blueprint-Registry-Loader-Freeze-Completed",
+  "status": "frozen",
+  "baseline": {
+    "reportedMain": "ce08c68",
+    "fullCommit": "local-verification-required"
+  },
+  "scope": [
+    "Four-volume Blueprint Registry",
+    "Registry-led universal loader",
+    "Per-book digest validation",
+    "Node and Part ownership projection",
+    "Legacy single-book freeze retirement"
+  ],
+  "outOfScope": [
+    "Canonical Node rewrite",
+    "PJA article production",
+    "KNR public retrieval behavior",
+    "Publication approval",
+    "Runtime provider routing"
+  ],
+  "invariants": {
+    "canonicalNodeCount": 78,
+    "canonicalNodeCodesChanged": false,
+    "canonicalMeaningChanged": false,
+    "publicationOwnershipChanged": true,
+    "newProductionStateCreated": false,
+    "publicContentPublished": false
+  },
+  "authorityOrder": [
+    "content/knowledge/registry/nodes.json",
+    "content/knowledge/blueprints/blueprint-registry.json",
+    "content/knowledge/blueprints/book-*-knowledge-blueprint.json"
+  ],
+  "deprecatedAssumptions": [
+    "Book I contains P5",
+    "One Blueprint represents the entire Knowledge system",
+    "A checker may freeze a mutable current Blueprint under a legacy hash"
+  ],
+  "nextStage": "PJA-R4 Four-Volume Blueprint Binding Reconciliation"
+}
