@@ -8,6 +8,7 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import { loadCanonicalContext } from './lib/knowledge-production/repository-loader.mjs';
 
 const root = process.cwd();
+const historicalBlueprintPath = 'content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json';
 const paths = {
   blueprint: 'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
   policy: 'content/knowledge/governance/book-1-registry-population-policy.json',
@@ -22,7 +23,16 @@ const paths = {
 const read = relative => fs.readFile(path.join(root, relative), 'utf8');
 const readJson = async relative => JSON.parse(await read(relative));
 const [pkg, blueprint, policy, nodes, localized, collections, themes, sources, supporting, nodeSchema] = await Promise.all([
-  readJson('package.json'), ...Object.values(paths).map(readJson)
+  readJson('package.json'),
+  readJson(historicalBlueprintPath),
+  readJson(paths.policy),
+  readJson(paths.nodes),
+  readJson(paths.localized),
+  readJson(paths.collections),
+  readJson(paths.themes),
+  readJson(paths.sources),
+  readJson(paths.supporting),
+  readJson(paths.nodeSchema)
 ]);
 
 assert.equal(pkg.scripts['check:pja-w2f-b1'], 'npm run check:pja-w2f-a && node scripts/check-pja-w2f-b1-preface-content-population.mjs');
@@ -112,6 +122,11 @@ async function exerciseSynchronizerFixtures() {
   const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'pja-w2f-c0-'));
   try {
     for (const relative of Object.values(paths).filter(file => !file.endsWith('.schema.json'))) await copy(relative, temp);
+    await copy(historicalBlueprintPath, temp);
+    await fs.copyFile(
+      path.join(temp, historicalBlueprintPath),
+      path.join(temp, paths.blueprint)
+    );
     await copy(paths.nodeSchema, temp);
     await copy('scripts/sync-pja-w2f-c0-book-i-registry.mjs', temp);
     const tempNodesPath = path.join(temp, paths.nodes);

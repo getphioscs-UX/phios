@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -67,7 +67,7 @@ const [
   readJson(articleSchemaPath),
   readJson(claimSchemaPath),
   readJson('docs/pja/pja-w1-blueprint-led-public-knowledge-ecosystem-v1.json'),
-  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json'),
+  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json'),
   readJson('content/knowledge/registry/nodes.json'),
   readJson('content/knowledge/registry/localized-content.json'),
   readJson('content/knowledge/registry/assets.json'),

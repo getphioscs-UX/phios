@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
@@ -15,6 +15,7 @@ import {
   validateReadinessRecord
 } from './lib/knowledge-production/readiness-system.mjs';
 import { sha256 } from './lib/knowledge-production/checksum.mjs';
+import { loadPjaBlueprintContext } from './lib/knowledge-production/blueprint-context.mjs';
 
 const execFileAsync = promisify(execFile);
 const root = process.cwd();
@@ -53,7 +54,8 @@ validatePrecheckDependencyContract(packageJson.scripts.precheck);
 assert.equal(READINESS_ERROR_CODES.length, 40);
 
 const knowledge = await loadKnowledgeInventory(root);
-const blueprint = knowledge.blueprints[0];
+const blueprint = await loadPjaBlueprintContext(root, { knowledge: knowledge.blueprintKnowledge });
+const book1Blueprint = blueprint.byBookCode.get('BOOK-1');
 const productionInventory = resolveKnowledgeScope(knowledge, {
   scope: 'PREFACE'
 });
@@ -79,7 +81,7 @@ assert.equal(
 );
 assert.equal(
   resolveKnowledgeScope(knowledge, { scope: 'BOOK-1' }).length,
-  blueprint.plannedCanonicalNodes
+  book1Blueprint.cardinality.canonicalNodeCount
 );
 assert(resolveKnowledgeScope(knowledge, { scope: 'PART-1' }).length > 0);
 assert.equal(
@@ -211,7 +213,9 @@ const [exporter, resolver] = await Promise.all([
 assert(!/KN-PREFACE-00[2-9]|KN-B1-P[1-5]-00/.test(exporter));
 assert(!/\[\s*['"]KN-PREFACE/.test(resolver));
 assert(!resolver.includes('78'));
-assert(resolver.includes('blueprintFiles'));
+assert(resolver.includes('loadKnowledgeBlueprintRegistry'));
+assert(!resolver.includes('blueprintFiles'));
+assert(resolver.includes('blueprintRegistry: blueprintKnowledge.registry'));
 
 const commands = [
   ['scripts/initialize-canonical-production-readiness.mjs', ['--scope', 'PREFACE']],

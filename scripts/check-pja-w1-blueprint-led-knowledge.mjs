@@ -1,6 +1,7 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { loadPjaBlueprintContext } from './lib/knowledge-production/blueprint-context.mjs';
 
 const root = process.cwd();
 const read = file => fs.readFile(path.join(root, file), 'utf8');
@@ -22,7 +23,7 @@ const [
 ] = await Promise.all([
   readJson(evidencePath),
   readJson('docs/pja/pja-w0-cross-system-boundary-freeze-v1.json'),
-  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json'),
+  loadPjaBlueprintContext(root),
   readJson('content/knowledge/registry/nodes.json'),
   readJson('content/knowledge/registry/localized-content.json'),
   readJson('content/knowledge/registry/assets.json'),

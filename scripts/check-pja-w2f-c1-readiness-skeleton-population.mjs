@@ -9,6 +9,7 @@ import {
   READINESS_IDENTITY_SCHEMA, readinessIdentityPath, resolveReadiness, validateReadinessIdentity
 } from './lib/knowledge-readiness/readiness-identity.mjs';
 import { loadCanonicalContext } from './lib/knowledge-production/repository-loader.mjs';
+import { loadPjaBlueprintContext } from './lib/knowledge-production/blueprint-context.mjs';
 
 const root = process.cwd();
 const readJson = async (base, relative) => JSON.parse(await fs.readFile(path.join(base, relative), 'utf8'));
@@ -21,7 +22,7 @@ assert(!pkg.scripts['check:pja-w2f-c1'].includes('article'));
 
 const [registry, blueprint, contract, index] = await Promise.all([
   readJson(root, 'content/knowledge/registry/nodes.json'),
-  readJson(root, 'content/knowledge/blueprints/book-1-knowledge-blueprint.json'),
+  loadPjaBlueprintContext(root),
   readJson(root, READINESS_IDENTITY_CONTRACT), readJson(root, READINESS_IDENTITY_INDEX)
 ]);
 assert.equal(registry.nodes.length, 78);
@@ -94,14 +95,17 @@ function hasForbiddenKey(value) {
 async function exerciseFixtures() {
   const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'pja-w2f-c1-'));
   try {
+    const blueprintRegistry = await readJson(root, 'content/knowledge/blueprints/blueprint-registry.json');
     const files = [
-      'content/knowledge/registry/nodes.json', 'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
+      'content/knowledge/registry/nodes.json',
+      'content/knowledge/blueprints/blueprint-registry.json',
+      ...blueprintRegistry.books.map(entry => entry.blueprintPath),
       'content/knowledge/registry/localized-content.json', READINESS_IDENTITY_SCHEMA, READINESS_IDENTITY_CONTRACT,
       'scripts/sync-pja-w2f-c1-readiness-skeletons.mjs',
       'scripts/lib/knowledge-readiness/readiness-identity.mjs'
     ];
     for (const relative of files) await copy(relative, temp);
-    const governed = files.slice(0, 5).map(relative => path.join(temp, relative));
+    const governed = files.slice(0, 2 + blueprintRegistry.books.length + 3).map(relative => path.join(temp, relative));
     const before = await Promise.all(governed.map(fileDigest));
     for (const args of [[], ['--dry-run']]) {
       const result = run(temp, args);

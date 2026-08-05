@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
@@ -38,7 +38,6 @@ const protectedFiles = [
   'content/knowledge/registry/learning-paths.json',
   'content/knowledge/registry/supporting-questions.json',
   'content/knowledge/registry/sources.json',
-  'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
   'content/knowledge/editorial/schemas/canonical-article.schema.json',
   'content/knowledge/editorial/schemas/canonical-production-readiness.schema.json',
   'content/knowledge/editorial/schemas/claim-review-record.schema.json',
@@ -48,7 +47,6 @@ const protectedFiles = [
   'scripts/check-pja-w2e-r1-production-brief-hardening.mjs',
   'scripts/initialize-canonical-production-readiness.mjs',
   'scripts/validate-canonical-production-readiness.mjs',
-  'scripts/lib/knowledge-production/readiness-system.mjs',
   'scripts/import-canonical-article-package.mjs'
 ];
 

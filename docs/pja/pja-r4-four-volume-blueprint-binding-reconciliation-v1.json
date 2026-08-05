@@ -1,0 +1,31 @@
+{
+  "contract": "PHI-OS-PJA-R4-FOUR-VOLUME-BLUEPRINT-BINDING-v1.0.0",
+  "stage": "PJA-R4",
+  "status": "frozen",
+  "purpose": "Bind PJA production and readiness resolution to the Knowledge Blueprint Registry without changing Canonical Node identity.",
+  "authority": {
+    "canonicalNodes": "content/knowledge/registry/nodes.json",
+    "publicationOwnership": "content/knowledge/blueprints/blueprint-registry.json",
+    "blueprintLoader": "scripts/lib/knowledge-blueprint/blueprint-registry-loader.mjs",
+    "pjaCompatibilityContext": "scripts/lib/knowledge-production/blueprint-context.mjs"
+  },
+  "invariants": {
+    "registeredBlueprints": 4,
+    "registeredPartsIncludingPreface": 16,
+    "canonicalNodes": 78,
+    "nodeIdentityChanges": 0,
+    "p5PublicationBook": "BOOK-2",
+    "p13PublicationBook": "BOOK-4",
+    "architectureOnlyPartsProductionEligible": false,
+    "digestMismatchFailsClosed": true,
+    "historicalPjaFreezeUsesLegacySnapshot": true
+  },
+  "boundaries": {
+    "canonicalMeaningChanged": false,
+    "nodeCodesRenamed": false,
+    "articlesPublished": false,
+    "readinessPromoted": false,
+    "runtimeChanged": false,
+    "providerChanged": false
+  }
+}

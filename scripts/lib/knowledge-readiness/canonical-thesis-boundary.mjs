@@ -13,7 +13,7 @@ export const contentHash = value => `sha256:${crypto.createHash('sha256').update
 export function buildC2(root) {
   const read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
   const registry = read('content/knowledge/registry/nodes.json');
-  const blueprint = read('content/knowledge/blueprints/book-1-knowledge-blueprint.json');
+  const blueprint = read('content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json');
   const legacy = read('content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json');
   const nodes = registry.nodes;
   if (nodes.length !== 78 || blueprint.nodes.length !== 78) throw coded('TOPOLOGY_CONFLICT', 'C0 Registry and Blueprint must each contain 78 nodes.');

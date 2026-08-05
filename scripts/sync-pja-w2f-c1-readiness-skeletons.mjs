@@ -12,16 +12,24 @@ const apply = process.argv.includes('--apply');
 if (apply && process.argv.includes('--dry-run')) fail('ARGUMENT_CONFLICT', '--apply and --dry-run are mutually exclusive.');
 const readJson = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
 const registry = readJson('content/knowledge/registry/nodes.json');
-const blueprint = readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json');
+const blueprintRegistry = readJson('content/knowledge/blueprints/blueprint-registry.json');
+const blueprints = blueprintRegistry.books.map(entry => ({
+  entry,
+  blueprint: readJson(entry.blueprintPath)
+}));
 const localized = readJson('content/knowledge/registry/localized-content.json');
 const contract = readJson(READINESS_IDENTITY_CONTRACT);
 const nodeCodes = registry.nodes.map(node => node.nodeCode);
-const blueprintCodes = new Set(blueprint.nodes.map(node => node.nodeCode));
+const blueprintNodes = blueprints.flatMap(({ entry, blueprint }) =>
+  (blueprint.nodes || []).map(node => ({ ...node, bookCode: entry.bookCode, blueprintContract: blueprint.contract }))
+);
+const blueprintCodes = new Set(blueprintNodes.map(node => node.nodeCode));
+const blueprintContractByCode = new Map(blueprintNodes.map(node => [node.nodeCode, node.blueprintContract]));
 const localizedCodes = new Set(localized.localizedContent.filter(item => item.locales?.['zh-Hans']).map(item => item.nodeCode));
 const conflicts = [];
 if (nodeCodes.length !== 78 || new Set(nodeCodes).size !== 78) conflicts.push(conflict('REGISTRY_NODE_SET_CONFLICT', null, 'nodeCode', nodeCodes.length, 78, 'Canonical Registry'));
 for (const code of nodeCodes) {
-  if (!blueprintCodes.has(code)) conflicts.push(conflict('BLUEPRINT_IDENTITY_NOT_FOUND', code, 'nodeCode', code, null, 'Book I Blueprint'));
+  if (!blueprintCodes.has(code)) conflicts.push(conflict('BLUEPRINT_IDENTITY_NOT_FOUND', code, 'nodeCode', code, null, 'Knowledge Blueprint Registry'));
   if (!localizedCodes.has(code)) conflicts.push(conflict('LOCALIZED_IDENTITY_NOT_FOUND', code, 'locale', null, 'zh-Hans', 'Localized Identity Registry'));
 }
 
@@ -94,7 +102,7 @@ function buildRecord(nodeCode) {
     thesis: { status: 'not_ready' }, boundary: { status: 'not_ready' }, claims: { status: 'not_ready' },
     sources: { status: 'not_ready' }, questions: { status: 'not_ready' }, figures: { status: 'not_ready' },
     export: { status: 'blocked' },
-    audit: { ownerStage: 'PJA-W2F-C1', registryVersion: registry.version, blueprintContract: blueprint.contract, recordVersion: '1.0.0' }
+    audit: { ownerStage: 'PJA-W2F-C1', registryVersion: registry.version, blueprintContract: blueprintContractByCode.get(nodeCode), recordVersion: '1.0.0' }
   };
 }
 function conflict(code, nodeCode, field, currentValue, proposedValue, authoritySource) {

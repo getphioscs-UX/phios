@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import Ajv2020 from 'ajv/dist/2020.js';
@@ -107,7 +107,7 @@ const [
   readiness
 ] = await Promise.all([
   readJson(schemaPath),
-  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json'),
+  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json'),
   readJson('content/knowledge/registry/nodes.json'),
   readJson('content/knowledge/registry/themes.json'),
   readJson('content/knowledge/registry/localized-content.json'),

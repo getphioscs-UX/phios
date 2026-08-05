@@ -3,6 +3,8 @@ import path from 'node:path';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { readJson } from './repository-loader.mjs';
 import { ProductionError } from './production-errors.mjs';
+import { loadKnowledgeBlueprintRegistry } from '../knowledge-blueprint/blueprint-registry-loader.mjs';
+import { normalizeBookCode } from '../knowledge-blueprint/blueprint-loader.mjs';
 import {
   DEFAULT_LOCALE,
   PRODUCTION_TOOL_VERSION,
@@ -83,23 +85,16 @@ const romanToNumber = value => {
   return result;
 };
 
-async function blueprintFiles(root) {
-  const directory = path.join(root, 'content/knowledge/blueprints');
-  const entries = await fs.readdir(directory);
-  return entries.filter(file => file.endsWith('.json')).sort().map(file => (
-    `content/knowledge/blueprints/${file}`
-  ));
-}
-
 export async function loadKnowledgeInventory(root) {
-  const [nodes, localized, questions, learningPaths, ...blueprints] =
+  const [nodes, localized, questions, learningPaths, blueprintKnowledge] =
     await Promise.all([
       readJson(root, 'content/knowledge/registry/nodes.json'),
       readJson(root, 'content/knowledge/registry/localized-content.json'),
       readJson(root, 'content/knowledge/registry/supporting-questions.json'),
       readJson(root, 'content/knowledge/registry/learning-paths.json'),
-      ...await blueprintFiles(root).then(files => files.map(file => readJson(root, file)))
+      loadKnowledgeBlueprintRegistry(root)
     ]);
+  const blueprints = blueprintKnowledge.books;
   const blueprintMembership = new Map();
   const parts = new Map();
   blueprints.forEach((blueprint, bookIndex) => {
@@ -166,6 +161,8 @@ export async function loadKnowledgeInventory(root) {
     questions,
     learningPaths,
     blueprints,
+    blueprintRegistry: blueprintKnowledge.registry,
+    blueprintKnowledge,
     parts: [...parts.values()]
   };
 }
@@ -445,7 +442,7 @@ export function validateReadinessRecord(item, loaded, schemaValidator) {
     errors.push('CANONICAL_IDENTITY_MISMATCH');
   }
   if (
-    record.hierarchy?.bookCode !== item.bookCode ||
+    normalizeBookCode(record.hierarchy?.bookCode) !== normalizeBookCode(item.bookCode) ||
     record.hierarchy?.partCode !== item.partCode ||
     record.hierarchy?.themeCode !== (item.node.themeCode || null)
   ) errors.push('CANONICAL_HIERARCHY_MISMATCH');

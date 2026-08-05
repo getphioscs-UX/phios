@@ -7,6 +7,7 @@ import {
   SCHEMA_PATHS
 } from './production-config.mjs';
 import { ProductionError } from './production-errors.mjs';
+import { loadKnowledgeBlueprintRegistry } from '../knowledge-blueprint/blueprint-registry-loader.mjs';
 
 const execFileAsync = promisify(execFile);
 const NODE_PATTERN = /^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$/;
@@ -59,10 +60,10 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
   requireReadiness = true
 } = {}) {
   validateNodeCode(nodeCode);
-  const [nodes, localized, blueprint, questions, sources] = await Promise.all([
+  const [nodes, localized, blueprintKnowledge, questions, sources] = await Promise.all([
     readJson(root, 'content/knowledge/registry/nodes.json', 'NODE_NOT_FOUND'),
     readJson(root, 'content/knowledge/registry/localized-content.json', 'LOCALIZED_CONTENT_NOT_FOUND'),
-    readJson(root, 'content/knowledge/blueprints/book-1-knowledge-blueprint.json', 'NODE_NOT_FOUND'),
+    loadKnowledgeBlueprintRegistry(root),
     readJson(root, 'content/knowledge/registry/supporting-questions.json', 'NODE_NOT_FOUND'),
     readJson(root, 'content/knowledge/registry/sources.json', 'NODE_NOT_FOUND')
   ]);
@@ -76,10 +77,11 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
       `Locale ${locale} is not registered for ${nodeCode}.`
     );
   }
-  const blueprintNode = blueprint.nodes.find(item => item.nodeCode === nodeCode);
+  const blueprintNode = blueprintKnowledge.byNodeCode.get(nodeCode);
   if (!blueprintNode) {
-    throw new ProductionError('NODE_NOT_FOUND', `${nodeCode} is absent from the Book I Blueprint.`);
+    throw new ProductionError('NODE_NOT_FOUND', `${nodeCode} is absent from the Knowledge Blueprint Registry.`);
   }
+  const blueprint = blueprintKnowledge.byBookCode.get(blueprintNode.bookCode);
   const readinessRelative = `content/knowledge/editorial/readiness/${nodeCode.toLowerCase()}-production-readiness.json`;
   let readiness = null;
   try {
@@ -151,7 +153,8 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
       'content/knowledge/registry/localized-content.json',
       'content/knowledge/registry/supporting-questions.json',
       'content/knowledge/registry/sources.json',
-      'content/knowledge/blueprints/book-1-knowledge-blueprint.json',
+      'content/knowledge/blueprints/blueprint-registry.json',
+      blueprint?.registryEntry?.blueprintPath,
       ...(readiness ? [readinessRelative] : [])
     ]
   };

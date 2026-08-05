@@ -1,4 +1,4 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -131,7 +131,7 @@ const [
 ]);
 
 const historicalRegistryBlueprint = await readJson(
-  'content/knowledge/blueprints/book-1-knowledge-blueprint.json'
+  'content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json'
 );
 assert.equal(
   nodesRegistry.nodes.length,
