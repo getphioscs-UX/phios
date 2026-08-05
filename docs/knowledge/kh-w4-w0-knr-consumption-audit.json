@@ -1,0 +1,172 @@
+{
+  "contract": "PHI-OS-KH-W4-W0-KNR-CONSUMPTION-AUDIT-v1.0.0",
+  "baselineSha": "cd0f17752f38c4a25552e786b65013d8dcf786e4",
+  "generatedAt": "2026-08-05T17:20:00+08:00",
+  "summary": {
+    "candidateFiles": 22,
+    "registryLoaderConsumers": 1,
+    "directBookBlueprintConsumers": 11,
+    "hardcodedB1Consumers": 2
+  },
+  "criticalFindings": [
+    "assets/js/pages/free-explore.js directly loads Book I Blueprint.",
+    "Some KNR checker fixtures still materialize Book I Blueprint directly.",
+    "Published-only and private-manuscript boundaries must remain unchanged during migration."
+  ],
+  "entries": [
+    {
+      "path": "assets/js/pages/free-explore.js",
+      "classification": "Browser Runtime",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": "docs/archive/install-guides/KNR-W2R1-T09-P2-P5-INSTALL.md",
+      "classification": "Documentation/Freeze Evidence",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "docs/archive/install-guides/KNR-W2R1-T09-P1-INSTALL.md",
+      "classification": "Documentation/Freeze Evidence",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "docs/knowledge/kh-w4a-knowledge-runtime-v2-freeze.json",
+      "classification": "Documentation/Freeze Evidence",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "docs/knowledge/KNR-W2R1-T07A-CANONICAL-NODE-NAMING-FREEZE.md",
+      "classification": "Documentation/Freeze Evidence",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": true
+    },
+    {
+      "path": ".tmp/knr-w2r1-v1.3-install-backup-20260804-235022/package.json",
+      "classification": "Other",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": ".tmp/knr-w2r1-v1.3-install-backup-20260804-235022/scripts/lib/knowledge-manuscripts/p3-mapping-review.mjs",
+      "classification": "Other",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": ".tmp/knr-w2r1-v1.3-install-backup-20260804-235022/scripts/lib/knowledge-manuscripts/p5-mapping-review.mjs",
+      "classification": "Other",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": ".tmp/knr-w2r1-v1.3-install-backup-20260804-235022/scripts/lib/knowledge-manuscripts/p4-mapping-review.mjs",
+      "classification": "Other",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": ".tmp/knr-w2r1-v1.3-install-backup-20260804-235022/scripts/lib/knowledge-manuscripts/part-mapping-candidate-generation.mjs",
+      "classification": "Other",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": ".tmp/knr-w2r1-v1.3-install-backup-20260804-235022/scripts/lib/knowledge-manuscripts/p1-mapping-review.mjs",
+      "classification": "Other",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": ".tmp/knr-w2r1-v1.3-install-backup-20260804-235022/scripts/lib/knowledge-manuscripts/p2-mapping-review.mjs",
+      "classification": "Other",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t07-canonical-node-mapping-identity.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t09-p1-progressive-extraction.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t06-book-i-section-inventory.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t05-p0-human-normalization-review.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t04-searchable-pdf-extraction.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-pja-w2-free-explore-rule-navigation.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t08-preface-mapping-review.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t09-p2-p5-progressive-extraction.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": false,
+      "hardcodedB1": false
+    },
+    {
+      "path": "scripts/check-kh-w4a-knowledge-runtime-v2.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": true,
+      "directBookBlueprint": false,
+      "hardcodedB1": true
+    },
+    {
+      "path": "scripts/check-knr-w2r1-t09-controlled-mapping-candidates.mjs",
+      "classification": "Current or Historical Checker",
+      "usesRegistryLoader": false,
+      "directBookBlueprint": true,
+      "hardcodedB1": false
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "contract": "PHI-OS-KH-W4-W0-KNOWLEDGE-RUNTIME-V2-BASELINE-AUDIT-v1.0.0",
+  "stage": "KH-W4-W0",
+  "status": "audited-with-environment-limitation",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commitSha": "cd0f17752f38c4a25552e786b65013d8dcf786e4",
+    "sourceArchive": "PHIOS(21).zip",
+    "sourceArchiveWorkingTreeNote": "ZIP extraction produced broad line-ending/status noise; audit was performed from git archive of the committed HEAD object."
+  },
+  "generatedAt": "2026-08-05T17:20:00+08:00",
+  "scope": "Audit only. No runtime, registry, state, hash, review, approval, or publication changes.",
+  "findings": [
+    "Four-volume Book Registry, Part Registry, Blueprint Registry, four Blueprints, v2 schema, and universal loader foundation are present.",
+    "The repository is in a mixed v1/v2 state: several current or compatibility consumers still reference a single Book I Blueprint directly.",
+    "Part 5 current publication ownership is BOOK-2, while legacy KN-B1-P5 identities and Book I manuscript-source records remain widespread.",
+    "PJA already has registry-loader integration in core libraries, but compatibility checkers and generated editorial records retain Book I paths.",
+    "KNR public/browser consumption is not fully registry-led because free-explore.js directly loads the Book I Blueprint.",
+    "Existing checker inventory must be classified before archive or replacement; historical evidence must not be deleted.",
+    "Generated projections can be rebuilt, but Human Review, Approval, Canonical Thesis, frozen assessments, and Published Articles are immutable."
+  ],
+  "outputs": [
+    "docs/knowledge/kh-w4-w0-v2-asset-inventory.json",
+    "docs/knowledge/kh-w4-w0-blueprint-direct-read-inventory.json",
+    "docs/knowledge/kh-w4-w0-registry-authority-matrix.json",
+    "docs/knowledge/kh-w4-w0-part-5-identity-ownership-audit.json",
+    "docs/knowledge/kh-w4-w0-pja-consumption-audit.json",
+    "docs/knowledge/kh-w4-w0-knr-consumption-audit.json",
+    "docs/knowledge/kh-w4-w0-manuscript-dependency-audit.json",
+    "docs/knowledge/kh-w4-w0-checker-classification.json",
+    "docs/knowledge/kh-w4-w0-generated-data-mutability.json",
+    "docs/knowledge/kh-w4-w0-migration-package-plan.json"
+  ],
+  "nextStage": "KH-W4A｜Existing v2 Foundation Reconciliation",
+  "validation": {
+    "jsonDocuments": "passed",
+    "checkKhW4a": "passed",
+    "checkPjaR4": "passed",
+    "checkKnowledgeRuntime": "passed",
+    "checkKnrW2r1V13": "not_executable_package_script_points_to_missing_scripts/check-knr-w2r1-v1-3.mjs",
+    "npmRunCheck": "not_independently_reproducible_from_uploaded_zip",
+    "npmRunCheckReason": "The extracted ZIP working tree reports broad protected-path modifications, while a clean git-archive export lacks historical commits required by PDS baseline verification. User reports npm run check passed in the source checkout."
+  }
+}
