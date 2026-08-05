@@ -31,7 +31,7 @@ const expectedAuthorityTotals = {
 };
 assert.deepEqual(authority.totals, expectedAuthorityTotals);
 assert.deepEqual(knowledge.totals, authority.totals);
-assert.equal(authority.totals.nodes, 513);
+assert.equal(authority.totals.nodes, 518);
 assert.equal(normalizeBookCode('book-2'), 'BOOK-2');
 assert.equal(normalizeBookCode('Book II'), 'BOOK-2');
 assert.equal(normalizePartCode('part-5'), 'P5');
