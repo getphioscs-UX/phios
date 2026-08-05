@@ -85,6 +85,21 @@ for (const [index, blueprintNode] of blueprint.nodes.entries()) {
   const node = nodeByCode.get(blueprintNode.nodeCode);
   const identity = localizedByCode.get(blueprintNode.nodeCode)?.locales?.['zh-Hans'];
   assert(node && identity, `${blueprintNode.nodeCode}: Registry identity missing`);
+
+  const isPart5PublicationMigration = (
+    node.sourceBookCode === 'BOOK-1' &&
+    node.publicationBookCode === 'BOOK-2' &&
+    node.publicationPartCode === 'P5'
+  );
+  if (isPart5PublicationMigration) {
+    assert.match(node.nodeCode, /^KN-B1-P5-\d{3}$/);
+    assert.equal(node.partCode, 'P5');
+    assert.equal(node.productionReady, false);
+    assert.equal(node.articleStatus, 'not_created');
+    assert.equal(node.candidateStatus, 'not_created');
+    continue;
+  }
+
   assert(collectionByCode.has(node.collectionCode));
   assert(themeByCode.has(node.themeCode));
   assert.equal(themeByCode.get(node.themeCode).collectionCode, node.collectionCode);

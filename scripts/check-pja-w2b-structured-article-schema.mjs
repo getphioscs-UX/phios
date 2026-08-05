@@ -467,16 +467,33 @@ for (const file of productionArticleFiles) {
   );
 }
 
-assert.equal(nodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
+const blueprintNodeCodes = new Set(
+  (blueprint.nodes || []).map(node =>
+    typeof node === 'string' ? node : node.nodeCode
+  )
+);
+const universalNodeCodes = new Set(
+  nodesRegistry.nodes.map(node => node.nodeCode)
+);
+assert.equal(blueprintNodeCodes.size, blueprint.plannedCanonicalNodes);
+assert(
+  [...blueprintNodeCodes].every(nodeCode => universalNodeCodes.has(nodeCode)),
+  'Every PJA-W2B Blueprint identity must exist in the Universal Canonical Registry.'
+);
 assert.equal(
   nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   blueprint.prefaceCanonicalNodes
 );
-const referencedThemeCodes = new Set(nodesRegistry.nodes.map(node => node.themeCode));
+const referencedThemeCodes = new Set(
+  nodesRegistry.nodes
+    .filter(node => blueprintNodeCodes.has(node.nodeCode))
+    .map(node => node.themeCode)
+);
 assert(
   [...referencedThemeCodes].every(themeCode =>
     themesRegistry.themes.some(theme => theme.themeCode === themeCode)
-  )
+  ),
+  'PJA-W2B validates Theme coverage only for its Blueprint scope.'
 );
 assert.equal(
   (await fs.readdir(path.join(root, 'content/knowledge/registry')))
