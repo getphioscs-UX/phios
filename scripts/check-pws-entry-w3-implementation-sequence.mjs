@@ -72,7 +72,7 @@ for (const item of audit.categories) {
 const registry = JSON.parse(await read('content/registry/index.json'));
 const contracts = JSON.parse(await read('content/registry/runtime-contracts.json'));
 const migrations = JSON.parse(await read('content/registry/runtime-migrations.json'));
-assert.equal(Object.keys(registry.registries).length, 48);
+assert.equal(Object.keys(registry.registries).length, 50);
 assert.equal(contracts.contracts.length, 20);
 assert(migrations.migrations.length >= 4);
 assert.deepEqual(
@@ -82,4 +82,4 @@ assert.deepEqual(
 
 console.log('✓ PWS-ENTRY-W3 implementation sequence and PWS-I1-T00 audit frozen.');
 console.log('  28 strictly ordered stages; duplicate programme labels have unique sequence keys.');
-console.log('  Registry 48, Runtime Contracts 20, Migrations 4; page behaviour unchanged.');
+console.log('  Registry 50, Runtime Contracts 20, Migrations 4; page behaviour unchanged.');

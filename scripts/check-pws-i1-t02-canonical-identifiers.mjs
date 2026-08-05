@@ -117,7 +117,7 @@ const runtimeContracts = JSON.parse(
 const migrations = JSON.parse(
   await read('content/registry/runtime-migrations.json')
 );
-assert.equal(Object.keys(registry.registries).length, 48);
+assert.equal(Object.keys(registry.registries).length, 50);
 assert.equal(runtimeContracts.contracts.length, 20);
 assert(migrations.migrations.length >= 4);
 assert.deepEqual(
