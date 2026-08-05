@@ -45,7 +45,8 @@ function jsonFiles(directory) {
   })) {
     if (
       entry.name === '.git' ||
-      entry.name === 'node_modules'
+      entry.name === 'node_modules' ||
+      entry.name === '.tmp'
     ) {
       continue;
     }

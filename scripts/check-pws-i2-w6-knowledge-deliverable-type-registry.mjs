@@ -1,5 +1,6 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import { loadKnowledgeBlueprintRegistry } from './lib/knowledge-blueprint/blueprint-registry-loader.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import {
   createKnowledgeDeliverableTypeRegistry,
@@ -21,10 +22,10 @@ import {
 } from './runtime-migration-loader.mjs';
 
 const readJson = async file => JSON.parse(await fs.readFile(file, 'utf8'));
-const [nodesBefore, questionsBefore, blueprintBefore] = await Promise.all([
+const [nodesBefore, questionsBefore, knowledgeBefore] = await Promise.all([
   readJson('content/knowledge/registry/nodes.json'),
   readJson('content/knowledge/registry/supporting-questions.json'),
-  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json')
+  loadKnowledgeBlueprintRegistry(process.cwd())
 ]);
 
 const database = new DatabaseSync(':memory:');
@@ -111,27 +112,35 @@ await assert.rejects(
   RegistryValidationError
 );
 
-const [nodesAfter, questionsAfter, blueprintAfter] = await Promise.all([
+const [nodesAfter, questionsAfter, knowledgeAfter] = await Promise.all([
   readJson('content/knowledge/registry/nodes.json'),
   readJson('content/knowledge/registry/supporting-questions.json'),
-  readJson('content/knowledge/blueprints/book-1-knowledge-blueprint.json')
+  loadKnowledgeBlueprintRegistry(process.cwd())
 ]);
 assert.deepEqual(nodesAfter, nodesBefore);
 assert.deepEqual(questionsAfter, questionsBefore);
-assert.deepEqual(blueprintAfter, blueprintBefore);
-assert.equal(nodesAfter.nodes.length, blueprintAfter.plannedCanonicalNodes);
+assert.deepEqual(knowledgeAfter.registry, knowledgeBefore.registry);
+assert.deepEqual(knowledgeAfter.books, knowledgeBefore.books);
+assert.equal(nodesAfter.nodes.length, knowledgeAfter.totals.nodes);
+assert.deepEqual(
+  new Set(nodesAfter.nodes.map(node => node.nodeCode)),
+  new Set(knowledgeAfter.nodes.map(node => node.nodeCode))
+);
+const book1Blueprint = knowledgeAfter.byBookCode.get('BOOK-1');
+assert(book1Blueprint);
 assert.equal(
   nodesAfter.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
-  blueprintAfter.prefaceCanonicalNodes
+  book1Blueprint.prefaceCanonicalNodes
 );
 assert.equal(questionsAfter.supportingQuestions.length, 23);
-assert.equal(blueprintAfter.nodes.length, blueprintAfter.plannedCanonicalNodes);
-assert.equal(blueprintAfter.activeProductionLimit, 8);
+assert.equal(book1Blueprint.nodes.length, book1Blueprint.plannedCanonicalNodes);
+assert.equal(book1Blueprint.activeProductionLimit, 8);
+assert.equal(knowledgeAfter.totals.books, 4);
 
 assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 5);
 database.close();
 console.log('✓ PWS-I2-W6 Knowledge and Deliverable Type Registry passed.');
 console.log('  Seven Published Asset Types and five Deliverable Types registered.');
-console.log('  PKR Canonical Nodes/Questions and KH-W3.5G Book I Blueprint remain unchanged.');
+console.log('  PKR Canonical Nodes/Questions and the four-volume Blueprint Registry remain unchanged.');
 console.log('  Type registration creates no content, Deliverable, Signature or responsibility.');
 console.log('  W1 Universal Registry reused; W5 path restored; no Migration added.');
