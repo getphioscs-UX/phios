@@ -11,10 +11,12 @@ export function buildBatchPlan(root) {
   const registry = read('content/knowledge/registry/nodes.json');
   const c3 = read('content/knowledge/editorial/c3/universal-production-readiness-index.json');
   const contract = read(D_CONTRACT);
-  const codes = registry.nodes.map(node => node.nodeCode);
-  if (c3.entries.length !== codes.length || new Set(c3.entries.map(entry => entry.nodeCode)).size !== codes.length || codes.some(code => !c3.entries.some(entry => entry.nodeCode === code))) throw coded('C3_TOPOLOGY_CONFLICT');
+  const registryByCode = new Map(registry.nodes.map(node => [node.nodeCode, node]));
+  const codes = c3.entries.map(entry => entry.nodeCode);
+  if (new Set(codes).size !== codes.length || codes.some(code => !registryByCode.has(code))) throw coded('C3_TOPOLOGY_CONFLICT');
+  const scopedNodes = codes.map(code => registryByCode.get(code));
   const assessments = new Map(c3.entries.map(entry => [entry.nodeCode, read(entry.assessmentFile)]));
-  const eligible = selectEligible(registry.nodes, c3.entries, assessments);
+  const eligible = selectEligible(scopedNodes, c3.entries, assessments);
   const batches = groupEligible(eligible, contract.grouping.maximumBatchSize);
   return {
     schemaVersion: 'PHI-OS-PJA-W2F-D-PLAN-v1.0.0', stage: 'PJA-W2F-D',

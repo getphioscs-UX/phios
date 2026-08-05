@@ -15,8 +15,12 @@ export function buildC2(root) {
   const registry = read('content/knowledge/registry/nodes.json');
   const blueprint = read('content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json');
   const legacy = read('content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json');
-  const nodes = registry.nodes;
-  if (nodes.length !== 78 || blueprint.nodes.length !== 78) throw coded('TOPOLOGY_CONFLICT', 'C0 Registry and Blueprint must each contain 78 nodes.');
+  const blueprintCodes = new Set(blueprint.nodes.map(node => node.nodeCode));
+  const nodes = registry.nodes.filter(node => blueprintCodes.has(node.nodeCode));
+  if (nodes.length !== 78 || blueprint.nodes.length !== 78) throw coded(
+    'TOPOLOGY_CONFLICT',
+    'Historical Book I C2 scope must contain 78 Blueprint identities inside the Universal Registry.'
+  );
   const files = new Map();
   const entries = [];
   for (const node of nodes) {

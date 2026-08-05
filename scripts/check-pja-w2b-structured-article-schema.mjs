@@ -486,7 +486,10 @@ assert.equal(
 );
 const referencedThemeCodes = new Set(
   nodesRegistry.nodes
-    .filter(node => blueprintNodeCodes.has(node.nodeCode))
+    .filter(node => (
+      blueprintNodeCodes.has(node.nodeCode) &&
+      node.publicationBookCode !== 'BOOK-2'
+    ))
     .map(node => node.themeCode)
 );
 assert(

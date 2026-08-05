@@ -46,3 +46,23 @@ console.log('✓ KH-W4B.5 Book 3 Canonical Node Registry passed.');
 console.log('✓ P10 77 / P11 60 / P12 45 / Total 182.');
 console.log('✓ Canonical naming, dependencies and cross-session graph passed.');
 console.log('✓ Production boundary remains closed until KH-W4K.');
+
+
+const blueprintRegistry = await readJson('content/knowledge/blueprints/blueprint-registry.json');
+const book3RegistryEntry = blueprintRegistry.books.find(entry => entry.bookCode === 'BOOK-3');
+assert.ok(book3RegistryEntry);
+assert.equal(book3RegistryEntry.canonicalNodeCount, 182);
+assert.equal(blueprintRegistry.totals.canonicalNodes, nodes.nodes.length);
+assert.equal(nodes.nodes.length, 513);
+assert.deepEqual(book3RegistryEntry.partCodes, ['P10','P11','P12']);
+
+const historicalBook1Codes = new Set(
+  (await readJson('content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json'))
+    .nodes.map(node => node.nodeCode)
+);
+assert.equal(historicalBook1Codes.size, 78);
+assert(
+  [...historicalBook1Codes].every(nodeCode => nodes.nodes.some(node => node.nodeCode === nodeCode))
+);
+
+console.log('✓ Consolidated Book 3 compatibility and Universal Registry authority checks passed.');

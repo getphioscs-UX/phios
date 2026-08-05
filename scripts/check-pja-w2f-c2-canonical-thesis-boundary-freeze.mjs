@@ -16,9 +16,16 @@ assert.equal(pkg.scripts['knowledge:validate-book-i-thesis'], 'node scripts/vali
 const registry = read('content/knowledge/registry/nodes.json');
 const c1Index = read('content/knowledge/readiness/canonical-readiness-index.json');
 const contract = read(C2_CONTRACT), index = read(C2_INDEX), queue = read(C2_REPORT);
-assert.equal(registry.nodes.length, 78); assert.equal(c1Index.entries.length, 78); assert.equal(index.entries.length, 78);
+assert.equal(c1Index.entries.length, 78); assert.equal(index.entries.length, 78);
 assert.equal(new Set(index.entries.map(x => x.nodeCode)).size, 78);
-assert.deepEqual(new Set(index.entries.map(x => x.nodeCode)), new Set(registry.nodes.map(x => x.nodeCode)));
+assert.deepEqual(
+  new Set(index.entries.map(x => x.nodeCode)),
+  new Set(c1Index.entries.map(x => x.nodeCode))
+);
+assert(
+  c1Index.entries.every(entry => registry.nodes.some(node => node.nodeCode === entry.nodeCode)),
+  'Every Book I C1 identity must remain in the Universal Canonical Registry.'
+);
 assert.equal(contract.authorityRules.blueprintIdentityIsContentAuthority, false);
 assert.equal(index.entries.filter(x => x.status === 'frozen').length, 1);
 assert.equal(index.entries.filter(x => x.status === 'human_review_required').length, 77);

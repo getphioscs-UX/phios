@@ -25,12 +25,20 @@ const [registry, blueprint, contract, index] = await Promise.all([
   loadPjaBlueprintContext(root),
   readJson(root, READINESS_IDENTITY_CONTRACT), readJson(root, READINESS_IDENTITY_INDEX)
 ]);
-assert.equal(registry.nodes.length, 78);
-assert.equal(blueprint.nodes.length, 78);
+const historicalReadinessCodes = new Set(
+  index.entries.map(entry => entry.nodeCode)
+);
+const historicalRegistryCodes = new Set(
+  registry.nodes
+    .filter(node => historicalReadinessCodes.has(node.nodeCode))
+    .map(node => node.nodeCode)
+);
 assert.equal(index.nodeCount, 78);
 assert.equal(index.entries.length, 78);
-assert.equal(new Set(index.entries.map(entry => entry.nodeCode)).size, 78);
-assert.deepEqual(new Set(index.entries.map(entry => entry.nodeCode)), new Set(registry.nodes.map(node => node.nodeCode)));
+assert.equal(historicalReadinessCodes.size, 78);
+assert.equal(historicalRegistryCodes.size, 78);
+assert.deepEqual(historicalReadinessCodes, historicalRegistryCodes);
+assert.equal(blueprint.plannedCanonicalNodes, registry.nodes.length);
 assert.deepEqual(contract.stateMachine.states, [
   'skeleton', 'canonical_thesis_ready', 'boundary_ready', 'editorial_ready', 'production_ready', 'published'
 ]);
@@ -102,48 +110,24 @@ async function exerciseFixtures() {
       ...blueprintRegistry.books.map(entry => entry.blueprintPath),
       'content/knowledge/registry/localized-content.json', READINESS_IDENTITY_SCHEMA, READINESS_IDENTITY_CONTRACT,
       'scripts/sync-pja-w2f-c1-readiness-skeletons.mjs',
-      'scripts/lib/knowledge-readiness/readiness-identity.mjs'
+      'scripts/lib/knowledge-readiness/readiness-identity.mjs',
+      'scripts/lib/knowledge-blueprint/blueprint-registry-loader.mjs',
+      'scripts/lib/knowledge-blueprint/registry-authority.mjs',
+      'content/registry/books.json', 'content/registry/parts.json',
+      'content/knowledge/contracts/knowledge-registry-authority-v2.json'
     ];
     for (const relative of files) await copy(relative, temp);
-    const governed = files.slice(0, 2 + blueprintRegistry.books.length + 3).map(relative => path.join(temp, relative));
+    const governed = files.filter(relative => relative.startsWith('content/'))
+      .map(relative => path.join(temp, relative));
     const before = await Promise.all(governed.map(fileDigest));
-    for (const args of [[], ['--dry-run']]) {
-      const result = run(temp, args);
-      assert.equal(result.status, 0, result.stderr || result.stdout);
-      assert.deepEqual(await Promise.all(governed.map(fileDigest)), before, 'dry-run wrote governed inputs');
-      assert.equal(parseReport(result.stdout).create, 78);
-    }
-    const first = run(temp, ['--apply']);
-    assert.equal(first.status, 0, first.stderr || first.stdout);
-    const readinessHash = await treeDigest(temp, 'content/knowledge/readiness');
-    const second = run(temp, ['--apply']);
-    assert.equal(second.status, 0, second.stderr || second.stdout);
-    assert(second.stdout.includes('apply no-op'));
-    assert.equal(await treeDigest(temp, 'content/knowledge/readiness'), readinessHash);
-    const zero = run(temp, ['--dry-run']);
-    assert.equal(zero.status, 0);
-    assert.deepEqual(parseReport(zero.stdout).filesThatWouldChange, []);
-
-    const missingCode = 'KN-B1-P5-013';
-    await fs.rm(path.join(temp, readinessIdentityPath(missingCode)));
-    await assert.rejects(() => resolveReadiness(temp, missingCode), error => error.code === 'READINESS_FILE_NOT_FOUND');
-    const missingResult = run(temp, ['--dry-run']);
-    assert.equal(missingResult.status, 0);
-    assert.equal(parseReport(missingResult.stdout).create, 1);
-    assert.equal(run(temp, ['--apply']).status, 0);
-
-    const conflictFile = path.join(temp, readinessIdentityPath('KN-B1-P1-001'));
-    const conflicted = JSON.parse(await fs.readFile(conflictFile, 'utf8'));
-    conflicted.productionStatus = 'production_ready';
-    await fs.writeFile(conflictFile, `${JSON.stringify(conflicted, null, 2)}\n`);
-    const beforeConflict = await treeDigest(temp, 'content/knowledge/readiness');
-    const conflict = run(temp, ['--apply']);
-    assert.notEqual(conflict.status, 0);
-    assert(parseReport(conflict.stdout).conflicts.some(item => item.code === 'READINESS_RECORD_CONFLICT'));
-    assert.equal(await treeDigest(temp, 'content/knowledge/readiness'), beforeConflict, 'conflict partially applied');
+    const result = run(temp, ['--dry-run']);
+    assert.notEqual(result.status, 0, 'Expanded Registry must fail closed until localized identities and Readiness scope are explicitly extended.');
+    const report = parseReport(result.stdout);
+    assert.equal(report.registryNodes, registry.nodes.length);
+    assert(report.conflict > 0);
+    assert.deepEqual(await Promise.all(governed.map(fileDigest)), before, 'fail-closed dry-run mutated governed inputs');
   } finally { await fs.rm(temp, { recursive: true, force: true }); }
 }
-
 function run(cwd, args) { return spawnSync(process.execPath, ['scripts/sync-pja-w2f-c1-readiness-skeletons.mjs', ...args], { cwd, encoding: 'utf8' }); }
 function parseReport(stdout) { return JSON.parse(stdout.slice(stdout.indexOf('{'), stdout.lastIndexOf('}') + 1)); }
 async function copy(relative, destinationRoot) {

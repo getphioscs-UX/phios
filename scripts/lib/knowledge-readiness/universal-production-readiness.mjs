@@ -15,8 +15,11 @@ export function buildProductionReadiness(root) {
   const c1 = read('content/knowledge/readiness/canonical-readiness-index.json');
   const c2 = read('content/knowledge/editorial/c2/canonical-thesis-boundary-index.json');
   const contract = read(C3_CONTRACT);
-  const registryCodes = registry.nodes.map(node => node.nodeCode);
-  assertSameCodes(registryCodes, c1.entries.map(entry => entry.nodeCode), 'C1_TOPOLOGY_CONFLICT');
+  const registryCodeSet = new Set(registry.nodes.map(node => node.nodeCode));
+  const registryCodes = c1.entries.map(entry => entry.nodeCode);
+  if (!registryCodes.every(nodeCode => registryCodeSet.has(nodeCode))) {
+    throw coded('C1_TOPOLOGY_CONFLICT', 'Historical C1 identities must remain in the Universal Registry.');
+  }
   assertSameCodes(registryCodes, c2.entries.map(entry => entry.nodeCode), 'C2_TOPOLOGY_CONFLICT');
 
   const files = new Map(), entries = [];

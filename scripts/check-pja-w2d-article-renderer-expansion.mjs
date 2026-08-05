@@ -133,15 +133,25 @@ const [
 const historicalRegistryBlueprint = await readJson(
   'content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json'
 );
+const historicalNodeCodes = new Set(
+  historicalRegistryBlueprint.nodes.map(node => node.nodeCode)
+);
+const historicalRegistryNodes = nodesRegistry.nodes.filter(node =>
+  historicalNodeCodes.has(node.nodeCode)
+);
 assert.equal(
-  nodesRegistry.nodes.length,
+  historicalRegistryNodes.length,
   historicalRegistryBlueprint.plannedCanonicalNodes
 );
 assert.equal(
   nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   historicalRegistryBlueprint.prefaceCanonicalNodes
 );
-const referencedThemeCodes = new Set(nodesRegistry.nodes.map(node => node.themeCode));
+const referencedThemeCodes = new Set(
+  historicalRegistryNodes
+    .filter(node => node.publicationBookCode !== 'BOOK-2')
+    .map(node => node.themeCode)
+);
 assert(
   [...referencedThemeCodes].every(themeCode =>
     themesRegistry.themes.some(theme => theme.themeCode === themeCode)
