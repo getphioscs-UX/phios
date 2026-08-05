@@ -1,0 +1,38 @@
+{
+  "contract": "KH-W4B.5-R1-BLUEPRINT-REGISTRY-AUTHORITY-REFRESH-v1",
+  "status": "implemented",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "fullCommitSha": "1c047580802d4dd424db64be9e31b6143745b083"
+  },
+  "problem": {
+    "book2BlueprintChanged": true,
+    "blueprintRegistryDigestStale": true,
+    "freezeManifestStale": true
+  },
+  "resolution": {
+    "refreshRegistryBeforeFreeze": true,
+    "deriveContractSchemaStatusAndDigestFromBlueprint": true,
+    "derivePartCodesAndCanonicalNodeCountFromBlueprint": true,
+    "updateRegistryTotals": true,
+    "updateRegistryManifestFreeze": true,
+    "updatePerBookFreeze": true
+  },
+  "expectedTotals": {
+    "books": 4,
+    "parts": 16,
+    "canonicalNodes": 331,
+    "book2CanonicalNodes": 266
+  },
+  "immutableBoundaries": [
+    "canonical node identity",
+    "canonical node content",
+    "article",
+    "candidate",
+    "readiness",
+    "review",
+    "approval",
+    "publication"
+  ]
+}

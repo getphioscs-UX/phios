@@ -13,6 +13,16 @@ const freezePath =
 const registryPath =
   'content/knowledge/blueprints/blueprint-registry.json';
 
+const readSource = relative =>
+  fs.readFile(path.join(root, relative), 'utf8');
+
+const writeJson = (relative, value) =>
+  fs.writeFile(
+    path.join(root, relative),
+    `${JSON.stringify(value, null, 2)}\n`,
+    'utf8'
+  );
+
 if (mode === 'status') {
   const result = await verifyKnowledgeBlueprintFreeze(root);
   console.log(JSON.stringify({
@@ -31,23 +41,59 @@ if (mode !== 'write') {
   throw new Error(`Unsupported knowledge freeze mode: ${mode}`);
 }
 
-const registrySource = await fs.readFile(path.join(root, registryPath), 'utf8');
-const registry = JSON.parse(registrySource);
+const registry = JSON.parse(await readSource(registryPath));
 const current = await loadKnowledgeBlueprintFreeze(root);
 
-const bookFreeze = [];
+const refreshedEntries = [];
 for (const entry of registry.books || []) {
-  const source = await fs.readFile(path.join(root, entry.blueprintPath), 'utf8');
+  const source = await readSource(entry.blueprintPath);
   const blueprint = JSON.parse(source);
-  bookFreeze.push({
-    bookCode: entry.bookCode,
-    blueprintPath: entry.blueprintPath,
-    blueprintSHA: digestKnowledgeSource(source),
+  const partCodes = (blueprint.parts || []).map(part => part.partCode);
+  const canonicalNodeCount = Array.isArray(blueprint.nodes)
+    ? blueprint.nodes.length
+    : (blueprint.parts || []).reduce(
+        (total, part) => total + Number(part.canonicalNodeCount || 0),
+        0
+      );
+
+  refreshedEntries.push({
+    ...entry,
+    contract: blueprint.contract,
     schemaVersion: blueprint.schemaVersion,
-    contractVersion: blueprint.contract,
-    status: blueprint.status
+    status: blueprint.status,
+    canonicalLanguage:
+      blueprint.canonicalLanguage || entry.canonicalLanguage || 'zh-Hans',
+    partCodes,
+    canonicalNodeCount,
+    sha256: digestKnowledgeSource(source),
+    productionEligibility:
+      canonicalNodeCount > 0
+        ? 'registered_nodes_only'
+        : 'architecture_only'
   });
 }
+
+registry.books = refreshedEntries;
+registry.totals = {
+  books: refreshedEntries.length,
+  parts: new Set(refreshedEntries.flatMap(entry => entry.partCodes)).size,
+  canonicalNodes: refreshedEntries.reduce(
+    (total, entry) => total + entry.canonicalNodeCount,
+    0
+  )
+};
+
+await writeJson(registryPath, registry);
+
+const registrySource = await readSource(registryPath);
+const bookFreeze = refreshedEntries.map(entry => ({
+  bookCode: entry.bookCode,
+  blueprintPath: entry.blueprintPath,
+  blueprintSHA: entry.sha256,
+  schemaVersion: entry.schemaVersion,
+  contractVersion: entry.contract,
+  status: entry.status
+}));
 
 const next = {
   ...current,
@@ -56,11 +102,9 @@ const next = {
   bookFreeze
 };
 
-await fs.writeFile(
-  path.join(root, freezePath),
-  `${JSON.stringify(next, null, 2)}\n`,
-  'utf8'
-);
-
+await writeJson(freezePath, next);
 await verifyKnowledgeBlueprintFreeze(root);
+
+console.log('✓ Blueprint Registry Authority refreshed from all registered Blueprints.');
+console.log(`✓ Registry totals: ${registry.totals.books} books / ${registry.totals.parts} parts / ${registry.totals.canonicalNodes} nodes.`);
 console.log(`✓ Knowledge Blueprint Freeze v2 updated explicitly: ${freezePath}`);
