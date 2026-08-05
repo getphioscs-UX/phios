@@ -24,6 +24,28 @@ export function loadRuntimeMigrations(root) {
   return hydrateRuntimeMigrations(root, registry);
 }
 
+
+export function enableSqliteNumberedParameterCompatibility(database) {
+  const prepare = database.prepare.bind(database);
+  database.prepare = sql => {
+    const statement = prepare(sql);
+    if (!/\?\d+/u.test(sql)) return statement;
+    const convert = bindings => Object.fromEntries(
+      bindings.map((value, index) => [`?${index + 1}`, value])
+    );
+    return new Proxy(statement, {
+      get(target, property, receiver) {
+        if (['run', 'get', 'all'].includes(property)) {
+          return (...bindings) => target[property](...(bindings.length === 1 && bindings[0] && typeof bindings[0] === 'object' && !Array.isArray(bindings[0]) ? bindings : [convert(bindings)]));
+        }
+        const value = Reflect.get(target, property, receiver);
+        return typeof value === 'function' ? value.bind(target) : value;
+      }
+    });
+  };
+  return database;
+}
+
 export function createSqliteD1Adapter(database) {
   class Statement {
     constructor(sql, bindings = []) {
@@ -35,8 +57,15 @@ export function createSqliteD1Adapter(database) {
       return new Statement(this.sql, bindings);
     }
 
+    sqliteArguments() {
+      if (/\?\d+/u.test(this.sql)) {
+        return [Object.fromEntries(this.bindings.map((value, index) => [`?${index + 1}`, value]))];
+      }
+      return this.bindings;
+    }
+
     async run() {
-      const result = database.prepare(this.sql).run(...this.bindings);
+      const result = database.prepare(this.sql).run(...this.sqliteArguments());
       const changes = Number(result.changes || 0);
       return {
         success: true,
@@ -54,12 +83,12 @@ export function createSqliteD1Adapter(database) {
     async all() {
       return {
         success: true,
-        results: database.prepare(this.sql).all(...this.bindings)
+        results: database.prepare(this.sql).all(...this.sqliteArguments())
       };
     }
 
     async first() {
-      return database.prepare(this.sql).get(...this.bindings) || null;
+      return database.prepare(this.sql).get(...this.sqliteArguments()) || null;
     }
   }
 

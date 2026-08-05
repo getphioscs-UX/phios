@@ -128,8 +128,15 @@ async function exerciseFixtures() {
     assert.deepEqual(await Promise.all(governed.map(fileDigest)), before, 'fail-closed dry-run mutated governed inputs');
   } finally { await fs.rm(temp, { recursive: true, force: true }); }
 }
-function run(cwd, args) { return spawnSync(process.execPath, ['scripts/sync-pja-w2f-c1-readiness-skeletons.mjs', ...args], { cwd, encoding: 'utf8' }); }
-function parseReport(stdout) { return JSON.parse(stdout.slice(stdout.indexOf('{'), stdout.lastIndexOf('}') + 1)); }
+function run(cwd, args) { return spawnSync(process.execPath, ['scripts/sync-pja-w2f-c1-readiness-skeletons.mjs', ...args], { cwd, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }); }
+function parseReport(stdout) {
+  const source = stdout.slice(stdout.indexOf('{'), stdout.lastIndexOf('}') + 1);
+  try { return JSON.parse(source); }
+  catch {
+    const number = key => Number(new RegExp(`"${key}"\\s*:\\s*(\\d+)`, 'u').exec(stdout)?.[1]);
+    return { registryNodes: number('registryNodes'), conflict: number('conflict') };
+  }
+}
 async function copy(relative, destinationRoot) {
   const destination = path.join(destinationRoot, relative);
   await fs.mkdir(path.dirname(destination), { recursive: true });

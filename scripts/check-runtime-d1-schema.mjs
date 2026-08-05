@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
+import { enableSqliteNumberedParameterCompatibility } from './runtime-migration-loader.mjs';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -12,6 +13,7 @@ const schemaSql = read(schemaPath);
 const legacyMigrationSql = read(legacyMigrationPath);
 const manifest = JSON.parse(read('content/registry/runtime-d1-schema.json'));
 const db = new DatabaseSync(':memory:');
+enableSqliteNumberedParameterCompatibility(db);
 
 db.exec('PRAGMA foreign_keys = ON;');
 db.exec(legacyMigrationSql);

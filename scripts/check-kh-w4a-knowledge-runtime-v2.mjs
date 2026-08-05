@@ -59,7 +59,7 @@ assert.equal(new Set(projectedCodes).size, currentCanonicalNodeCount);
 assert.equal(knowledge.byBookCode.get('BOOK-1').cardinality.canonicalNodeCount, 65);
 assert.equal(knowledge.byBookCode.get('BOOK-2').cardinality.canonicalNodeCount, 266);
 assert.equal(knowledge.byBookCode.get('BOOK-3').cardinality.canonicalNodeCount, 187);
-assert.equal(knowledge.byBookCode.get('BOOK-4').cardinality.canonicalNodeCount, 0);
+assert.equal(knowledge.byBookCode.get('BOOK-4').cardinality.canonicalNodeCount, 198);
 assert.equal((await resolveKnowledgeBlueprintForNode(root, 'KN-B1-P5-001', { knowledge })).bookCode, 'BOOK-2');
 assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P13', { knowledge })).bookCode, 'BOOK-4');
 assert.equal(freeze.completionId, 'KH-W4A-Blueprint-Registry-Loader-Freeze-Completed');

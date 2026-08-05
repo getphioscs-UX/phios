@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
+import { enableSqliteNumberedParameterCompatibility } from './runtime-migration-loader.mjs';
 import {
   normalizeMigrationText,
   sha256Hex
@@ -236,6 +237,7 @@ for (const requiredColumn of [
 }
 
 const database = new DatabaseSync(':memory:');
+enableSqliteNumberedParameterCompatibility(database);
 database.exec('PRAGMA foreign_keys = ON;');
 database.exec(await read('db/migrations/0001_platform_foundation.sql'));
 database.exec(await read('db/migrations/0002_initial_runtime.sql'));

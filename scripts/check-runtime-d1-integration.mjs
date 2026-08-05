@@ -21,6 +21,7 @@ import { onRequestGet as infrastructureHealth } from
   '../functions/api/runtime-infrastructure-health.js';
 import {
   createSqliteD1Adapter,
+  enableSqliteNumberedParameterCompatibility,
   loadRuntimeMigrations
 } from './runtime-migration-loader.mjs';
 
@@ -69,6 +70,7 @@ assert.deepEqual(
 );
 
 const database = new DatabaseSync(':memory:');
+enableSqliteNumberedParameterCompatibility(database);
 database.exec('PRAGMA foreign_keys = ON;');
 const db = createSqliteD1Adapter(database);
 const { migrations } = loadRuntimeMigrations(root);

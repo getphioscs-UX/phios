@@ -14,6 +14,7 @@ import {
 } from '../functions/runtime/migrations/migration-validation.js';
 import {
   createSqliteD1Adapter,
+  enableSqliteNumberedParameterCompatibility,
   hydrateRuntimeMigrations,
   loadRuntimeMigrations
 } from './runtime-migration-loader.mjs';
@@ -94,6 +95,7 @@ assert.deepEqual(migrationFiles, [
 ]);
 
 const migratedDatabase = new DatabaseSync(':memory:');
+enableSqliteNumberedParameterCompatibility(migratedDatabase);
 migratedDatabase.exec('PRAGMA foreign_keys = ON;');
 const migratedAdapter = createSqliteD1Adapter(migratedDatabase);
 const firstRun = await applyRuntimeMigrations({
@@ -139,6 +141,7 @@ await assert.rejects(
 );
 
 const canonicalDatabase = new DatabaseSync(':memory:');
+enableSqliteNumberedParameterCompatibility(canonicalDatabase);
 canonicalDatabase.exec('PRAGMA foreign_keys = ON;');
 canonicalDatabase.exec(read('db/migrations/0001_platform_foundation.sql'));
 canonicalDatabase.exec(read('db/schema/runtime-schema-v1.sql'));

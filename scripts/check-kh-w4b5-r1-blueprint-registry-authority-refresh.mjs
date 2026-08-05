@@ -84,7 +84,23 @@ assert.equal(frozenBook3.blueprintSHA, book3.sha256);
 assert.equal(frozenBook3.contractVersion, book3.contract);
 assert.equal(frozenBook3.status, book3.status);
 
+
+const book4 = registry.books.find(entry => entry.bookCode === 'BOOK-4');
+assert.ok(book4);
+assert.equal(book4.contract, 'PHI-OS-BOOK-4-KNOWLEDGE-BLUEPRINT-v2.0.0');
+assert.equal(book4.status, 'final-outline-registry-freeze');
+assert.equal(book4.canonicalNodeCount, 198);
+assert.deepEqual(book4.partCodes, ['P13', 'P14', 'P15']);
+
+const frozenBook4 = freeze.freeze.bookFreeze.find(
+  entry => entry.bookCode === 'BOOK-4'
+);
+assert.ok(frozenBook4);
+assert.equal(frozenBook4.blueprintSHA, book4.sha256);
+assert.equal(frozenBook4.contractVersion, book4.contract);
+assert.equal(frozenBook4.status, book4.status);
+
 console.log('✓ KH-W4B.5 R1 Blueprint Registry Authority Refresh passed.');
-console.log('✓ BOOK-2 and BOOK-3 digest, contract, status and node counts are synchronized.');
+console.log('✓ BOOK-2, BOOK-3 and BOOK-4 digest, contract, status and node counts are synchronized.');
 console.log('✓ Registry Manifest and per-book Freeze are synchronized.');
 console.log('✓ Canonical Nodes and production states remain unchanged.');

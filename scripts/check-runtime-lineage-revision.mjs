@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
+import { enableSqliteNumberedParameterCompatibility } from './runtime-migration-loader.mjs';
 import { fileURLToPath } from 'node:url';
 import {
   createMemoryDriver
@@ -233,6 +234,7 @@ function createD1Adapter(database) {
 }
 
 const db = new DatabaseSync(':memory:');
+enableSqliteNumberedParameterCompatibility(db);
 db.exec('PRAGMA foreign_keys = ON;');
 db.exec(read('db/migrations/0001_platform_foundation.sql'));
 db.exec(read('db/schema/runtime-schema-v1.sql'));
