@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-HDR-BODYGRAPH-RUNTIME-v1.0.0",
+  "stageCode": "HDR-W4",
+  "runtimeCode": "HDR_BODYGRAPH_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "a944efba6b6e751d3beab926ca56bd0cb2505de6"
+  },
+  "requiredInput": "HDR_GATE_RESULT",
+  "structureAuthority": {
+    "strategy": "VERSIONED_GOVERNED_ADAPTER",
+    "embeddedChannelTableAllowed": false,
+    "embeddedCenterRulesAllowed": false,
+    "embeddedTypeRulesAllowed": false,
+    "embeddedAuthorityRulesAllowed": false,
+    "embeddedProfileRulesAllowed": false,
+    "sourceAuthorityRequired": true,
+    "structureVersionRequired": true,
+    "licenseStatusRequired": true
+  },
+  "scope": {
+    "createsChannel": true,
+    "createsCenterDefinition": true,
+    "createsType": true,
+    "createsAuthority": true,
+    "createsProfile": true,
+    "createsDefinition": true,
+    "createsBodyGraph": true,
+    "createsProjection": false,
+    "createsInterpretation": false,
+    "createsProfessionalConclusion": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "bodyGraphSourceAndRightsResolved": false,
+    "commercialLicenseApproved": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "HDR-W5"
+}
