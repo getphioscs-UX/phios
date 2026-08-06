@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "PHI-OS-BZR-RUNTIME-MANIFEST-v1.0.0",
+  "stageCode": "BZR-W0",
+  "runtimeCode": "BAZI_RUNTIME",
+  "runtimeVersion": "0.1.0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "foundation_audited_runtime_not_activated",
+  "dependencies": {
+    "sharedRuntime": [
+      "SHARED_DATA_AUTHORITY",
+      "SHARED_CALCULATION_RUNTIME",
+      "SHARED_PROJECTION_RUNTIME",
+      "SHARED_INTERPRETATION_RUNTIME",
+      "SHARED_PROFESSIONAL_RUNTIME"
+    ],
+    "requiredAuthorities": [
+      {
+        "dependencyCode": "IANA_TZDB",
+        "runtimeRole": "timezone_and_dst_authority",
+        "licenseStatus": "review_required",
+        "versionRequired": true
+      },
+      {
+        "dependencyCode": "ASTRONOMY_ENGINE_JS",
+        "runtimeRole": "solar_longitude_and_solar_term_candidate",
+        "licenseStatus": "approved",
+        "license": "MIT",
+        "noticeRequired": true
+      },
+      {
+        "dependencyCode": "PHI_OS_TRUE_SOLAR_TIME",
+        "runtimeRole": "internal_true_solar_time_algorithm",
+        "licenseStatus": "internal"
+      },
+      {
+        "dependencyCode": "PHI_OS_SEXAGENARY_CALENDAR",
+        "runtimeRole": "internal_sexagenary_calendar_algorithm",
+        "licenseStatus": "internal"
+      },
+      {
+        "dependencyCode": "PHI_OS_BAZI_POLICY_V1",
+        "runtimeRole": "method_policy_authority",
+        "licenseStatus": "internal"
+      }
+    ]
+  },
+  "policyAuthority": {
+    "policyCode": "PHI_OS_BAZI_POLICY_V1",
+    "policyVersion": "candidate-1",
+    "status": "human_frozen_candidate_validation_pending",
+    "runtimeMayOverride": false,
+    "runtimeMayInventDefaults": false
+  },
+  "activation": {
+    "methodRegistered": true,
+    "pluginReserved": true,
+    "pluginActivated": false,
+    "sharedRuntimeImplemented": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "commercialLicensePassed": false,
+    "productionEligible": false,
+    "professionalReady": false
+  },
+  "pipeline": [
+    {
+      "stageCode": "BZR-W0",
+      "status": "completed"
+    },
+    {
+      "stageCode": "BZR-W1",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "BZR-W2",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "BZR-W3",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "BZR-W4",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "BZR-W5",
+      "status": "not_implemented"
+    },
+    {
+      "stageCode": "BZR-W6",
+      "status": "not_eligible"
+    }
+  ],
+  "nextStage": "BZR-W1"
+}

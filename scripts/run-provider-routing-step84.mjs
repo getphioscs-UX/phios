@@ -1,0 +1,2 @@
+import {routePublicKnowledge} from './lib/provider/provider-routing-v1.mjs';
+const args=process.argv.slice(2);const query=args.find(x=>!x.startsWith('--'))??'';const locale=(args.find(x=>x.startsWith('--locale='))??'--locale=zh-Hans').split('=')[1];const purpose=(args.find(x=>x.startsWith('--purpose='))??'--purpose=auto').split('=')[1];console.log(JSON.stringify(await routePublicKnowledge({query,locale,purpose}),null,2));

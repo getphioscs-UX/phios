@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-BZR-FOUNDATION-AUDIT-v1.0.0",
+  "stageCode": "BZR-W0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "foundation_audited_runtime_not_activated",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "5694d16c5f69624120d47ca2dadc5e79fcd9113b"
+  },
+  "existingGovernance": {
+    "methodFamily": "zi_ping_four_pillars",
+    "methodVersion": "0.1.0",
+    "methodStatus": "experimental",
+    "algorithmStatus": "policy_candidate",
+    "policyAuthority": "PHI_OS_BAZI_POLICY_V1",
+    "commercialLicenseStatus": "conditional",
+    "validationStatus": "not_executed",
+    "productionReady": false,
+    "professionalReady": false
+  },
+  "preservedCandidatePolicies": {
+    "formalTimeBasis": "true_solar_time",
+    "trueSolarTimeEnabledByDefault": true,
+    "preserveRecordedCivilTime": true,
+    "yearBoundary": "exact_li_chun_instant",
+    "monthBoundary": "exact_twelve_jie_instants",
+    "dayBoundary": {
+      "timeBasis": "true_solar_time",
+      "boundary": "00:00"
+    },
+    "ziHour": {
+      "range": "23:00-00:59",
+      "beforeMidnightDateBasis": "same_true_solar_date",
+      "afterMidnightDateBasis": "next_true_solar_date"
+    },
+    "unknownBirthTime": {
+      "threePillarCalculationAllowed": true,
+      "fabricatedHourPillarProhibited": true,
+      "hourPillarStatus": "unresolved",
+      "hourDependentInterpretation": "conditional"
+    },
+    "luckDirection": {
+      "rule": "year_stem_polarity_plus_traditional_calculation_sex",
+      "traditionalCalculationSexUseLimitedToLuckDirection": true
+    },
+    "luckStart": {
+      "forwardReference": "next_jie",
+      "backwardReference": "previous_jie",
+      "threeDaysEqualYears": 1,
+      "oneDayEqualMonths": 4,
+      "twoHoursEqualDays": 10,
+      "rounding": "no_rounding_in_engine"
+    }
+  },
+  "auditConclusion": {
+    "runtimeMayProceed": true,
+    "nextStage": "BZR-W1",
+    "productionActivationAllowed": false,
+    "professionalReleaseAllowed": false,
+    "frozenGovernanceMutationAllowed": false
+  },
+  "blockingFindings": [
+    "COMMERCIAL_LICENSE_NOT_APPROVED",
+    "DEPENDENCY_LICENSE_REVIEW_INCOMPLETE",
+    "ALGORITHM_VALIDATION_NOT_PASSED",
+    "REGRESSION_NOT_PASSED",
+    "SHARED_RUNTIME_NOT_IMPLEMENTED",
+    "PROFESSIONAL_BOUNDARY_NOT_ACCEPTED",
+    "PROFESSIONAL_WORKFLOW_NOT_READY"
+  ]
+}
