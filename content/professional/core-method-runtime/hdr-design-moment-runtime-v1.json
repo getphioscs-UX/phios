@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-HDR-DESIGN-MOMENT-RUNTIME-v1.0.0",
+  "stageCode": "HDR-W2",
+  "runtimeCode": "HDR_DESIGN_MOMENT_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "status": "implemented_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "8ab68495cb761e75ab15211508d485935371c321"
+  },
+  "input": {
+    "recordType": "HDR_PERSONALITY_ASTRONOMY",
+    "authority": "SHARED_DATA_AUTHORITY",
+    "requiresDeterministicHDRW1Output": true
+  },
+  "solver": {
+    "targetSolarArcDegrees": 88,
+    "strategy": "BRACKETED_BINARY_SEARCH",
+    "defaultEarliestDaysBefore": 100,
+    "defaultLatestDaysBefore": 70,
+    "defaultAngleToleranceDegrees": 1e-07,
+    "defaultTimeToleranceMs": 1,
+    "maximumIterations": 80,
+    "fixedEightyEightDaySubtractionAllowed": false
+  },
+  "output": {
+    "schemaVersion": "PHI-OS-HDR-DESIGN-MOMENT-RESULT-v1.0.0",
+    "createsDesignMoment": true,
+    "createsDesignAstronomy": false,
+    "createsGateMapping": false,
+    "createsBodyGraph": false,
+    "createsProjection": false
+  },
+  "boundaries": {
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "interpretationAllowed": false,
+    "professionalConclusionAllowed": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "HDR-W3"
+}

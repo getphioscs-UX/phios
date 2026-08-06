@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Search and read published-only PHI OS knowledge projections.">
+  <title>Published Knowledge Search — PHI OS</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-release.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-search.css">
+</head>
+<body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-search">
+  <a class="skip-link" href="#knowledge-search-main">Skip to main content</a>
+  <header data-public-header-placeholder></header>
+  <main id="knowledge-search-main">
+    <section class="knowledge-hero">
+      <div class="knowledge-shell">
+        <p class="knowledge-eyebrow">Published-only Knowledge Runtime</p>
+        <h1>Search published PHI OS knowledge.</h1>
+        <p class="knowledge-hero__lead">Results come only from independently reviewed, approved and published locale articles. No model generates an answer here.</p>
+      </div>
+    </section>
+    <section class="knowledge-section knowledge-section--paper">
+      <div class="knowledge-shell knowledge-search-panel">
+        <form class="knowledge-search-form" data-knowledge-search-form>
+          <label>Question<input data-knowledge-query name="q" maxlength="500" autocomplete="off" required></label>
+          <label>Projection<select data-projection-mode name="mode"><option value="auto">Adaptive</option><option value="overview">Overview</option><option value="focused">Focused</option><option value="full_article">Full article</option><option value="continuity">Continuity</option></select></label>
+          <button class="knowledge-action knowledge-action--primary" type="submit">Search</button>
+        </form>
+        <p class="knowledge-search-status" role="status" aria-live="polite" data-knowledge-status>Enter a question to begin.</p>
+        <div class="knowledge-search-results" data-knowledge-results></div>
+        <div class="knowledge-boundary"><strong>Public knowledge boundary</strong><p>Coverage reports what published content supports. It does not create a personal reading, professional conclusion or generated answer.</p></div>
+      </div>
+    </section>
+  </main>
+  <footer data-public-footer-placeholder></footer>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-search.js"></script>
+</body>
+</html>

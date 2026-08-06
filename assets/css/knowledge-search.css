@@ -1,0 +1,11 @@
+.knowledge-search-panel{display:grid;gap:1rem;max-width:58rem;margin:0 auto}
+.knowledge-search-form{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:.75rem;align-items:end}
+.knowledge-search-form label{display:grid;gap:.4rem;font-weight:600}
+.knowledge-search-form input,.knowledge-search-form select{min-height:44px;border:1px solid var(--color-border,#c9c6be);border-radius:.55rem;padding:.75rem;background:var(--color-surface,#fff);color:inherit}
+.knowledge-search-status{min-height:1.5rem}
+.knowledge-search-results{display:grid;gap:1rem}
+.knowledge-search-result{display:grid;gap:1.5rem;padding:clamp(1rem,3vw,2rem);border:1px solid var(--color-border,#d7d2c8);border-radius:1rem;background:var(--color-surface,#fff)}
+.knowledge-search-fragments{display:grid;gap:1rem;max-width:72ch}
+.knowledge-search-fragments p{margin:0;line-height:1.75}
+.knowledge-search-boundary{padding:1rem;border-left:4px solid currentColor;background:rgba(127,127,127,.08)}
+@media(max-width:720px){.knowledge-search-form{grid-template-columns:1fr}.knowledge-search-form button{width:100%}}

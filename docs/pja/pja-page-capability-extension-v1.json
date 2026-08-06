@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-PJA-PAGE-CAPABILITY-EXTENSION-v1.0.0",
+  "extensionCode": "PJA-PAGE-CAPABILITY-EXTENSION-001",
+  "status": "active",
+  "extendsFreezeId": "PJA-W0-v1.0.0-Frozen",
+  "reason": "Register post-freeze Public Knowledge Search page without mutating the frozen PJA-W0 contract.",
+  "pageCapabilities": [
+    {
+      "capabilityId": "knowledge-discovery",
+      "pages": [
+        "knowledge-search.html"
+      ],
+      "sourceObjects": [
+        "Published Knowledge Projection"
+      ],
+      "dependencyOwners": [
+        "Knowledge Runtime Public Projection + PJA Public Architecture"
+      ],
+      "activationState": "production_projection",
+      "writeAuthority": "none"
+    }
+  ],
+  "boundaries": {
+    "freezeMutationAllowed": false,
+    "runtimeWriteAuthorityCreated": false,
+    "contentProductionAuthorityCreated": false,
+    "publicationAuthorityCreated": false
+  }
+}

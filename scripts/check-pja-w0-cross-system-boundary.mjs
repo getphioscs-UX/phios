@@ -54,9 +54,20 @@ const assertRuntimePlaceholderBoundary = async () => {
 };
 
 const freezePath = 'docs/pja/pja-w0-cross-system-boundary-freeze-v1.json';
-const [freeze, pwsI2, khBlueprint, ownership, directory, packageJson] =
-  await Promise.all([
+const pageCapabilityExtensionPath =
+  'docs/pja/pja-page-capability-extension-v1.json';
+
+const [
+  freeze,
+  pageCapabilityExtension,
+  pwsI2,
+  khBlueprint,
+  ownership,
+  directory,
+  packageJson
+] = await Promise.all([
     readJson(freezePath),
+    readJson(pageCapabilityExtensionPath),
     readJson('docs/pws/contracts/pws-i2-v1-freeze.json'),
     readJson(
       'docs/knowledge/kh-w3-5g-book-i-knowledge-blueprint-freeze-v1.json'
@@ -220,7 +231,29 @@ for (const [boundary, changed] of Object.entries(freeze.changeScope)) {
 const rootPages = (await fs.readdir(root))
   .filter(file => file.endsWith('.html'))
   .sort();
-const mappedPages = freeze.pageCapabilities
+assert.equal(
+  pageCapabilityExtension.schemaVersion,
+  'PHI-OS-PJA-PAGE-CAPABILITY-EXTENSION-v1.0.0'
+);
+assert.equal(
+  pageCapabilityExtension.extendsFreezeId,
+  'PJA-W0-v1.0.0-Frozen'
+);
+assert.equal(pageCapabilityExtension.status, 'active');
+assert.equal(
+  pageCapabilityExtension.boundaries.freezeMutationAllowed,
+  false
+);
+assert.equal(
+  pageCapabilityExtension.boundaries.runtimeWriteAuthorityCreated,
+  false
+);
+
+const effectivePageCapabilities = [
+  ...freeze.pageCapabilities,
+  ...pageCapabilityExtension.pageCapabilities
+];
+const mappedPages = effectivePageCapabilities
   .flatMap(capability => capability.pages)
   .filter(page => page !== 'reality-demo.html')
   .sort();
@@ -235,7 +268,7 @@ assert.equal(
   mappedPages.length,
   'A page is mapped to more than one PJA capability.'
 );
-for (const capability of freeze.pageCapabilities) {
+for (const capability of effectivePageCapabilities) {
   assert.equal(capability.writeAuthority, 'none');
   assert(capability.sourceObjects.length > 0);
   assert(capability.dependencyOwners.length > 0);
