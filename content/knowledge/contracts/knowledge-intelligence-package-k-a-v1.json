@@ -1,0 +1,16 @@
+{
+  "contractCode": "KNOWLEDGE-INTELLIGENCE-PACKAGE-K-A",
+  "version": "1.0.0",
+  "scope": ["STEP74", "STEP75"],
+  "authority": "published-knowledge-derived",
+  "inputs": ["STEP64 published retrieval index"],
+  "allowed": ["read", "profile", "classify", "link", "compare", "report"],
+  "forbidden": ["provider_call", "answer_generation", "unpublished_node_promotion", "registry_mutation", "publication_mutation", "canonical_mutation"],
+  "boundaries": {
+    "publishedOnly": true,
+    "providerAllowed": false,
+    "answerGenerationAllowed": false,
+    "crossLocaleIdentityAllowed": true,
+    "crossLocaleStateInheritanceAllowed": false
+  }
+}

@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {buildSemanticProfiles,buildKnowledgeGraph} from './lib/knowledge-intelligence/package-k-a-v1.mjs';
+const root=process.cwd();const json=async f=>JSON.parse(await fs.readFile(path.join(root,f),'utf8'));
+const contract=await json('content/knowledge/contracts/knowledge-intelligence-package-k-a-v1.json');const sp=await json('content/knowledge/runtime/knowledge-intelligence/package-k-a/semantic-profile-policy-v1.json');const gp=await json('content/knowledge/runtime/knowledge-intelligence/package-k-a/knowledge-graph-policy-v1.json');
+assert.equal(contract.contractCode,'KNOWLEDGE-INTELLIGENCE-PACKAGE-K-A');assert.equal(sp.providerAllowed,false);assert.equal(gp.inferredEdgeAllowed,false);
+const a=await buildSemanticProfiles(),b=await buildSemanticProfiles();assert.deepEqual(a,b);assert.equal(a.profileCount,2);assert.equal(a.canonicalNodeCount,1);assert.deepEqual(a.profiles.map(x=>x.locale).sort(),['en','zh-Hans']);
+const g1=await buildKnowledgeGraph(),g2=await buildKnowledgeGraph();assert.deepEqual(g1,g2);assert.equal(g1.canonicalNodeCount,1);assert.equal(g1.externalBoundaries.every(x=>x.targetNodeCode==='KN-PREFACE-002'),true);assert.equal(g1.nodes.some(x=>x.nodeCode==='KN-PREFACE-002'),false);assert.equal(g1.edges.some(x=>x.type==='locale_equivalent'),true);
+const serialized=JSON.stringify({contract,sp,gp,a,g1});for(const t of ['provider_call','answer_generation','unpublished_node_promotion','registry_mutation'])assert.equal(serialized.includes(`\"${t}\":true`),false);
+console.log('✓ STEP74 deterministic Published Semantic Profile Runtime passed.');
+console.log('✓ STEP75 published-only Knowledge Graph Runtime passed.');
+console.log('✓ 2 locale profiles / 1 Canonical Node represented without unpublished promotion.');
+console.log('✓ KN-PREFACE-002 remains an external boundary, not a graph node.');
