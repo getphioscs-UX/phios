@@ -1,0 +1,25 @@
+{
+  "contract": "KNR-L10N-STALENESS-v1",
+  "version": "1.0.0",
+  "triggers": [
+    "canonical_meaning_version_changed",
+    "canonical_title_changed",
+    "required_mechanism_changed",
+    "terminology_lock_changed",
+    "source_boundary_changed"
+  ],
+  "propagation": {
+    "canonicalLocale": "current_after_human_freeze",
+    "dependentLocales": "stale_until_semantic_parity_review"
+  },
+  "effects": [
+    "block_locale_brief_export",
+    "block_new_locale_publication",
+    "retain_existing_publication_with_staleness_disclosure_unless_withdrawn"
+  ],
+  "doesNotChange": [
+    "human_review",
+    "approval",
+    "publication"
+  ]
+}

@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict'; import fs from 'node:fs'; import path from 'node:path'; import crypto from 'node:crypto'; import { assertLocaleBriefReady } from './lib/knowledge-l10n/locale-readiness.mjs';
+const root=process.cwd(), read=r=>fs.readFileSync(path.join(root,r),'utf8'), json=r=>JSON.parse(read(r)), sha=r=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,r))).digest('hex');
+const nodes=json('content/knowledge/registry/nodes.json').nodes;
+const values=json('content/knowledge/l10n/locale-controlled-values.json');
+const terms=json('content/knowledge/l10n/bilingual-terminology-registry.json');
+const projections=json('content/knowledge/l10n/multilingual-node-projection-registry.json');
+const publications=json('content/knowledge/l10n/publication-locale-registry.json');
+const discovery=json('content/knowledge/l10n/discovery-candidates.json');
+const reviews=json('content/knowledge/l10n/tl-discovery-review-registry.json');
+const freeze=json('content/knowledge/l10n/knr-l10n-w1-freeze-v1.json');
+assert.deepEqual(values.supportedLocales,['zh-Hans','en']); assert.equal(values.canonicalLocale,'zh-Hans');
+assert.equal(new Set(terms.terms.map(x=>x.key)).size,terms.terms.length); assert.ok(terms.terms.every(x=>x.status==='approved'&&x.translationLock===true));
+assert.equal(projections.records.length,nodes.length); assert.equal(projections.canonicalNodeCount,nodes.length); assert.equal(new Set(projections.records.map(x=>x.nodeCode)).size,nodes.length);
+for(const p of projections.records){assert.deepEqual(Object.keys(p.locales),values.supportedLocales); for(const l of values.supportedLocales){assert.equal(p.locales[l].locale,l);assert.ok(values.values.translationMode.includes(p.locales[l].translationMode));assert.ok(values.values.stalenessStatus.includes(p.locales[l].stalenessStatus));}}
+assert.equal(publications.records.length,nodes.length*values.supportedLocales.length); assert.equal(publications.recordCount,publications.records.length);
+for(const r of publications.records){assert.ok(values.supportedLocales.includes(r.locale)); if(r.publicationStatus==='published'){assert.equal(r.contentStatus,'content_reviewed');assert.equal(r.reviewStatus,'reviewed');assert.equal(r.approvalStatus,'approved');assert.equal(r.readiness,'published');}}
+const missing=projections.records.flatMap(p=>values.supportedLocales.filter(l=>p.locales[l].availability==='discovery_required').map(l=>`${p.nodeCode}|${l}`));
+assert.equal(discovery.candidateCount,missing.length); assert.equal(new Set(discovery.candidates.map(x=>`${x.nodeCode}|${x.locale}`)).size,missing.length); assert.equal(reviews.pendingCandidateCount,missing.length); assert.equal(reviews.reviews.length,0); assert.equal(reviews.policy.absenceOfReviewMeansApproval,false);
+const retrieval=json('content/knowledge/l10n/cross-locale-retrieval-contract.json'); assert.equal(retrieval.rules.publishedOnly,true);assert.equal(retrieval.rules.articleBodiesShared,false);assert.equal(retrieval.rules.approvalShared,false);assert.equal(retrieval.rules.publicationShared,false);
+const fallback=json('content/knowledge/l10n/locale-fallback-policy.json');assert.equal(fallback.rules.automaticBodyTranslation,false);assert.equal(fallback.rules.unpublishedFallback,false);
+const translation=json('content/knowledge/l10n/translation-governance.json');for(const x of ['automatic_approval','automatic_publication','approval_inheritance','publication_inheritance'])assert.ok(translation.prohibitions.includes(x));
+const stale=json('content/knowledge/l10n/staleness-propagation-policy.json');assert.ok(stale.effects.includes('block_locale_brief_export'));assert.deepEqual(stale.doesNotChange,['human_review','approval','publication']);
+const binding=json('content/knowledge/l10n/pja-locale-binding-contract.json');assert.deepEqual(binding.bindingKey,['nodeCode','locale']);assert.equal(binding.independentAuthority.review,true);assert.equal(binding.independentAuthority.approval,true);assert.equal(binding.independentAuthority.publication,true);
+const gate=json('content/knowledge/l10n/locale-readiness-gate.json');assert.equal(gate.failClosed,true);assert.equal(gate.firstFormalProductionBriefExportBlockedUntil,freeze.status);
+assert.equal(freeze.scope.canonicalNodes,nodes.length);assert.equal(freeze.scope.projectionRecords,projections.records.length);assert.equal(freeze.scope.publicationLocaleRecords,publications.records.length);assert.equal(freeze.scope.discoveryCandidates,discovery.candidateCount);assert.equal(freeze.authority.humanReview,'unchanged');assert.equal(freeze.authority.approval,'unchanged');assert.equal(freeze.authority.publication,'unchanged');
+for(const [f,d] of Object.entries(freeze.digests))assert.equal(sha(`content/knowledge/l10n/${f}`),d,`Digest mismatch ${f}`);
+assertLocaleBriefReady(root,'KN-PREFACE-004','zh-Hans'); assertLocaleBriefReady(root,'KN-PREFACE-004','en');
+let blocked=false; try{assertLocaleBriefReady(root,nodes.find(n=>!projections.records.find(p=>p.nodeCode===n.nodeCode).locales.en||projections.records.find(p=>p.nodeCode===n.nodeCode).locales.en.availability!=='available')?.nodeCode||'KN-NOT-REAL','en')}catch(e){blocked=true} assert.equal(blocked,true,'Missing locale identity must fail closed');
+const exportSource=read('scripts/export-knowledge-production-brief.mjs');assert.match(exportSource,/assertLocaleBriefReady\(root, nodeCode, locale\)/);
+console.log('✓ STEP 39–44 schemas, controlled values, terminology and registries passed.');
+console.log('✓ STEP 45–51 retrieval, fallback, translation, staleness, PJA binding and readiness gate passed.');
+console.log(`✓ STEP 52–54 discovery, TL review boundary and KNR-L10N-W1 freeze passed: ${nodes.length} nodes, ${publications.records.length} locale records, ${discovery.candidateCount} discovery candidates.`);

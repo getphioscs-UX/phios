@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phios://knowledge/l10n/multilingual-node-projection/v1",
+  "title": "Multilingual Node Projection",
+  "type": "object",
+  "required": [
+    "nodeCode",
+    "canonicalLocale",
+    "locales",
+    "projectionVersion"
+  ],
+  "properties": {
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "canonicalLocale": {
+      "enum": [
+        "zh-Hans"
+      ]
+    },
+    "projectionVersion": {
+      "type": "string"
+    },
+    "locales": {
+      "type": "object",
+      "required": [
+        "zh-Hans",
+        "en"
+      ],
+      "properties": {
+        "zh-Hans": {
+          "$ref": "#/$defs/localeProjection"
+        },
+        "en": {
+          "$ref": "#/$defs/localeProjection"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "localeProjection": {
+      "type": "object",
+      "required": [
+        "locale",
+        "availability",
+        "authority",
+        "translationMode",
+        "stalenessStatus"
+      ],
+      "properties": {
+        "locale": {
+          "enum": [
+            "zh-Hans",
+            "en"
+          ]
+        },
+        "availability": {
+          "enum": [
+            "available",
+            "discovery_required",
+            "not_available"
+          ]
+        },
+        "authority": {
+          "enum": [
+            "canonical_human_authored",
+            "independent_human_authored",
+            "human_reviewed_localization",
+            "unassigned"
+          ]
+        },
+        "translationMode": {
+          "enum": [
+            "canonical_authoring",
+            "independent_authoring",
+            "assisted_translation",
+            "manual_translation",
+            "none"
+          ]
+        },
+        "stalenessStatus": {
+          "enum": [
+            "current",
+            "stale",
+            "unknown",
+            "not_applicable"
+          ]
+        },
+        "displayQuestion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "slug": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceLocale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceVersion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "semanticParityStatus": {
+          "enum": [
+            "approved",
+            "pending",
+            "not_reviewed",
+            "not_applicable"
+          ]
+        }
+      }
+    }
+  }
+}

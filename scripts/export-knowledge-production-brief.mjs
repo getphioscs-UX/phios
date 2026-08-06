@@ -19,6 +19,7 @@ import {
   formatError,
   ProductionError
 } from './lib/knowledge-production/production-errors.mjs';
+import { assertLocaleBriefReady } from './lib/knowledge-l10n/locale-readiness.mjs';
 import {
   compileReadinessSchema,
   loadKnowledgeInventory,
@@ -79,6 +80,7 @@ function briefName(nodeCode, locale) {
 }
 
 async function buildBrief(nodeCode, locale) {
+  assertLocaleBriefReady(root, nodeCode, locale);
   const [
     context,
     commit,
