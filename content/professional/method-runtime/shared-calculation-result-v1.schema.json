@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/method-runtime/shared-calculation-result-v1.schema.json",
+  "title": "PHI OS Shared Calculation Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "calculationId",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "algorithmCode",
+    "algorithmVersion",
+    "inputRecordIds",
+    "inputDigest",
+    "referenceVersions",
+    "deterministic",
+    "aiUsed",
+    "providerUsed",
+    "output",
+    "outputDigest",
+    "projectionCreated",
+    "interpretationCreated",
+    "professionalConclusionCreated"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-SHARED-CALCULATION-RESULT-v1.0.0"
+    },
+    "calculationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtimeCode": {
+      "const": "SHARED_CALCULATION_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]+$"
+    },
+    "pluginCode": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]+$"
+    },
+    "algorithmCode": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]+$"
+    },
+    "algorithmVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "inputRecordIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "inputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "referenceVersions": {
+      "type": "object"
+    },
+    "deterministic": {
+      "const": true
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "output": {
+      "type": "object"
+    },
+    "outputDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "projectionCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    }
+  }
+}
