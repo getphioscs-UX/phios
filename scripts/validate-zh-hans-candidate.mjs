@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { validateZhHansCandidate } from './lib/knowledge-production/zh-hans-candidate-v1.mjs';
+const [candidateArg,briefArg]=process.argv.slice(2);
+if(!candidateArg)throw new Error('Usage: npm run knowledge:validate-candidate:zh-Hans -- <candidate.json> [brief.json]');
+const root=process.cwd();
+const candidate=JSON.parse(await fs.readFile(path.resolve(root,candidateArg),'utf8'));
+const result=await validateZhHansCandidate(root,candidate,{briefPath:briefArg?path.resolve(root,briefArg):undefined});
+console.log(JSON.stringify(result,null,2));
+if(!result.valid)process.exitCode=1;

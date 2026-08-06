@@ -1,0 +1,35 @@
+{
+  "contract": "PJA-L10N-W3-ZH-HANS-CANDIDATE-IMPORT",
+  "version": "1.0.0",
+  "status": "active",
+  "locale": "zh-Hans",
+  "sourceBriefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+  "candidateSchemaVersion": "PHI-OS-ZH-HANS-CANONICAL-CANDIDATE-v1.0.0",
+  "allowedOperations": [
+    "read",
+    "validate",
+    "compare",
+    "import_candidate",
+    "record_digest",
+    "report"
+  ],
+  "prohibitedOperations": [
+    "write_registry",
+    "modify_canonical_meaning",
+    "record_human_review",
+    "change_approval",
+    "publish",
+    "promote_locale_state",
+    "inherit_locale_state"
+  ],
+  "targetRoot": "content/knowledge/production/candidates/zh-Hans",
+  "atomicCreate": true,
+  "overwriteAllowed": false,
+  "authority": {
+    "canonicalMeaning": "TL",
+    "candidate": "candidate_only",
+    "humanReview": "independent",
+    "approval": "independent",
+    "publication": "independent"
+  }
+}
