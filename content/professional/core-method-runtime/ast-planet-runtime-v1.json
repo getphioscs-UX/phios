@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-AST-PLANET-RUNTIME-v1.0.0",
+  "stageCode": "AST-W2",
+  "runtimeCode": "AST_PLANET_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "status": "validation_only_policy_explicit_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "5fd6ff437b7d8ae38c264fc06ec0031c2e637789"
+  },
+  "input": {
+    "recordType": "AST_ASTRONOMY_CONTEXT",
+    "runtimeCode": "AST_ASTRONOMY_RUNTIME",
+    "authority": "SHARED_DATA_AUTHORITY"
+  },
+  "requiredPolicies": {
+    "planetSetCode": "explicit_versioned_code",
+    "nodePolicyCode": "explicit_versioned_code",
+    "retrogradePolicyCode": "explicit_versioned_code",
+    "precisionPolicyCode": "explicit_versioned_code",
+    "bodyCodes": "explicit_unique_ordered_list",
+    "implicitDefaultsAllowed": false
+  },
+  "engine": {
+    "engineCode": "ASTRONOMY_ENGINE_JS",
+    "licenseCode": "MIT",
+    "noticeRequired": true,
+    "validationReferenceCode": "NASA_JPL_HORIZONS",
+    "validationReferenceRole": "validation_only"
+  },
+  "scope": {
+    "createsPlanetLongitude": true,
+    "createsPlanetLatitude": true,
+    "createsDistance": true,
+    "createsLongitudeSpeed": true,
+    "createsRetrogradeStatus": true,
+    "createsNodePositionWhenExplicitlyRequested": true,
+    "createsHousePlacement": false,
+    "createsHouseCusps": false,
+    "createsAspects": false,
+    "createsProjection": false
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "governance": {
+    "planetSetFrozen": false,
+    "nodePolicyFrozen": false,
+    "retrogradePolicyFrozen": false,
+    "precisionPolicyFrozen": false,
+    "toleranceDefined": false,
+    "jplFixturesExecuted": false,
+    "validationPassed": false,
+    "regressionPassed": false,
+    "productionReady": false,
+    "professionalReady": false,
+    "productionEligibilityChanged": false
+  },
+  "nextStage": "AST-W3"
+}
