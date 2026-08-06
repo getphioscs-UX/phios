@@ -1,0 +1,39 @@
+{
+  "adapters": [
+    {
+      "adapterCode": "google_query_translation_adapter",
+      "allowedOperations": [
+        "unmatched_query_translation_fallback"
+      ],
+      "enabled": false,
+      "maxInputCharacters": 512,
+      "networkEnabled": false,
+      "outputType": "query_translation_candidate",
+      "providerCode": "google_query_translation"
+    },
+    {
+      "adapterCode": "workers_ai_reranking_adapter",
+      "allowedOperations": [
+        "intent_classification",
+        "semantic_similarity",
+        "candidate_reranking",
+        "ambiguity_resolution"
+      ],
+      "enabled": false,
+      "networkEnabled": false,
+      "outputType": "routing_candidate",
+      "providerCode": "workers_ai_reranking"
+    },
+    {
+      "adapterCode": "openai_public_knr_disabled_adapter",
+      "allowedOperations": [],
+      "budgetUnits": 0,
+      "enabled": false,
+      "networkEnabled": false,
+      "outputType": "none",
+      "providerCode": "openai_public_knr"
+    }
+  ],
+  "allAdaptersDisabled": true,
+  "registryCode": "PHI-OS-PUBLIC-KNR-PROVIDER-ADAPTER-REGISTRY-v1.0.0"
+}

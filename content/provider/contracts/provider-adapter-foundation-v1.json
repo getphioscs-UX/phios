@@ -1,0 +1,32 @@
+{
+  "allowedOperations": [
+    "validate_adapter_request",
+    "classify_operation",
+    "return_disabled_status",
+    "report"
+  ],
+  "contractCode": "PHI-OS-PUBLIC-KNR-PROVIDER-ADAPTER-FOUNDATION-v1.0.0",
+  "forbiddenOperations": [
+    "network_call",
+    "read_credentials",
+    "enable_provider",
+    "reserve_budget",
+    "write_usage_ledger",
+    "write_registry",
+    "create_canonical_node",
+    "create_claim",
+    "generate_published_article",
+    "bypass_coverage_gate"
+  ],
+  "package": "L-B2",
+  "phase": "PHASE-L",
+  "principles": {
+    "allAdaptersDisabled": true,
+    "credentialsReadAllowed": false,
+    "networkCallsAllowed": false,
+    "paidFallbackAllowed": false,
+    "providerOutputAuthority": "candidate_only"
+  },
+  "purpose": "Define disabled, fail-closed Public KNR provider adapter interfaces without enabling network calls.",
+  "step": "STEP83"
+}
