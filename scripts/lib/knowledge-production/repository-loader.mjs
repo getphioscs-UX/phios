@@ -8,6 +8,8 @@ import {
 } from './production-config.mjs';
 import { ProductionError } from './production-errors.mjs';
 import { loadKnowledgeBlueprintRegistry } from '../knowledge-blueprint/blueprint-registry-loader.mjs';
+import { resolvePublicationContext, resolveSourceLineage } from './publication-context.mjs';
+import { resolveProductionState } from './production-resolver.mjs';
 
 const execFileAsync = promisify(execFile);
 const NODE_PATTERN = /^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$/;
@@ -81,7 +83,15 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
   if (!blueprintNode) {
     throw new ProductionError('NODE_NOT_FOUND', `${nodeCode} is absent from the Knowledge Blueprint Registry.`);
   }
-  const blueprint = blueprintKnowledge.byBookCode.get(blueprintNode.bookCode);
+  const publicationContext = await resolvePublicationContext(root, node, {
+    authorities: blueprintKnowledge.authorities,
+    blueprintNode
+  });
+  const sourceLineage = await resolveSourceLineage(root, node, {
+    authorities: blueprintKnowledge.authorities,
+    blueprintNode
+  });
+  const blueprint = blueprintKnowledge.byBookCode.get(publicationContext.publicationBookCode);
   const readinessRelative = `content/knowledge/editorial/readiness/${nodeCode.toLowerCase()}-production-readiness.json`;
   let readiness = null;
   try {
@@ -132,6 +142,11 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
       `Production Readiness identity does not match ${nodeCode}/${locale}.`
     );
   }
+  const productionState = await resolveProductionState(root, node, {
+    authorities: blueprintKnowledge.authorities,
+    publicationContext,
+    readiness
+  });
   const supportingQuestions = questions.supportingQuestions.filter(
     question => node.supportingQuestionCodes?.includes(
       question.questionCode || question.supportingQuestionCode
@@ -145,6 +160,9 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
     localizedIdentity,
     localizationRecord,
     blueprintNode,
+    publicationContext,
+    sourceLineage,
+    productionState,
     readiness,
     supportingQuestions,
     availableSources,
@@ -155,6 +173,7 @@ export async function loadCanonicalContext(root, nodeCode, locale = DEFAULT_LOCA
       'content/knowledge/registry/sources.json',
       'content/knowledge/blueprints/blueprint-registry.json',
       blueprint?.registryEntry?.blueprintPath,
+      'content/knowledge/migrations/node-publication-ownership-v2.json',
       ...(readiness ? [readinessRelative] : [])
     ]
   };

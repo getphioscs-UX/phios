@@ -5,6 +5,8 @@ import { readJson } from './repository-loader.mjs';
 import { ProductionError } from './production-errors.mjs';
 import { loadKnowledgeBlueprintRegistry } from '../knowledge-blueprint/blueprint-registry-loader.mjs';
 import { normalizeBookCode } from '../knowledge-blueprint/blueprint-loader.mjs';
+import { loadPublicationOwnership, resolvePublicationContext } from './publication-context.mjs';
+import { resolveProductionState } from './production-resolver.mjs';
 import {
   DEFAULT_LOCALE,
   PRODUCTION_TOOL_VERSION,
@@ -119,12 +121,22 @@ export async function loadKnowledgeInventory(root) {
       });
     }
   });
+  const ownership = await loadPublicationOwnership(root);
   const localizedMap = new Map(
     localized.localizedContent.map(item => [item.nodeCode, item])
   );
-  const inventory = nodes.nodes.map((node, index) => {
+  const inventory = await Promise.all(nodes.nodes.map(async (node, index) => {
     const membership = blueprintMembership.get(node.nodeCode);
     const localizedRecord = localizedMap.get(node.nodeCode);
+    const publicationContext = await resolvePublicationContext(root, node, {
+      authorities: blueprintKnowledge.authorities,
+      ownership,
+      blueprintNode: blueprintKnowledge.byNodeCode.get(node.nodeCode) || membership?.blueprintNode || null
+    });
+    const productionState = await resolveProductionState(root, node, {
+      authorities: blueprintKnowledge.authorities,
+      publicationContext
+    });
     const supportingQuestions = questions.supportingQuestions.filter(question => (
       (question.canonicalNodeCode || question.primaryNodeCode) === node.nodeCode
     ));
@@ -133,10 +145,13 @@ export async function loadKnowledgeInventory(root) {
       node,
       nodeCode: node.nodeCode,
       membership,
-      blueprintNode: membership?.blueprintNode || null,
+      blueprintNode: blueprintKnowledge.byNodeCode.get(node.nodeCode) || membership?.blueprintNode || null,
       blueprint: membership?.blueprint || null,
       part: membership?.part || null,
-      bookCode: membership?.blueprint?.bookCode || null,
+      bookCode: publicationContext.publicationBookCode,
+      sourceBookCode: publicationContext.sourceBookCode,
+      publicationContext,
+      productionState,
       bookNumber: membership?.bookNumber || null,
       partCode: membership?.blueprintNode?.partCode || null,
       localizedRecord,
@@ -147,7 +162,7 @@ export async function loadKnowledgeInventory(root) {
         item.nodeCodes.includes(node.nodeCode)
       ))
     };
-  });
+  }));
   if (!inventory.length) {
     throw new ProductionError(
       'CANONICAL_NODE_INVENTORY_EMPTY',
