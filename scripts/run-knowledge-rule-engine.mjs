@@ -1,0 +1,2 @@
+import {runKnowledgeRuleEngine} from './lib/knowledge-rule-engine/knowledge-rule-engine-v1.mjs';
+const args=process.argv.slice(2);const query=args.find(a=>!a.startsWith('--'))??'';const locale=args.find(a=>a.startsWith('--locale='))?.split('=')[1]??'zh-Hans';const intent=args.find(a=>a.startsWith('--intent='))?.split('=')[1]??'auto';console.log(JSON.stringify(await runKnowledgeRuleEngine({query,locale,intent}),null,2));

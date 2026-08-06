@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/ast/ast-projection-bundle-v1.schema.json",
+  "title": "PHI OS AST Projection Bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "executionMode",
+    "projectionVersion",
+    "sourceCalculations",
+    "projections",
+    "deterministic",
+    "providerUsed",
+    "aiUsed",
+    "projectionCreated",
+    "interpretationCreated",
+    "knowledgeCreated",
+    "realityConclusionCreated",
+    "professionalConclusionCreated",
+    "productionEligible"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-AST-PROJECTION-BUNDLE-v1.0.0"
+    },
+    "runtimeCode": {
+      "const": "AST_PROJECTION_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "ASTROLOGY"
+    },
+    "pluginCode": {
+      "const": "AST"
+    },
+    "executionMode": {
+      "const": "validation"
+    },
+    "projectionVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "sourceCalculations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "planetCalculationId",
+        "planetOutputDigest",
+        "houseCalculationId",
+        "houseOutputDigest",
+        "aspectCalculationId",
+        "aspectOutputDigest"
+      ],
+      "properties": {
+        "planetCalculationId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "planetOutputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "houseCalculationId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "houseOutputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "aspectCalculationId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aspectOutputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "projections": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        },
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        },
+        {
+          "$ref": "../../method-runtime/canonical-projection-v1.schema.json"
+        }
+      ],
+      "items": false
+    },
+    "deterministic": {
+      "const": true
+    },
+    "providerUsed": {
+      "const": false
+    },
+    "aiUsed": {
+      "const": false
+    },
+    "projectionCreated": {
+      "const": true
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "knowledgeCreated": {
+      "const": false
+    },
+    "realityConclusionCreated": {
+      "const": false
+    },
+    "professionalConclusionCreated": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    }
+  }
+}
