@@ -1,0 +1,47 @@
+{
+  "contractCode": "PJA-HUMAN-REVIEW-W1",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "authority": "Human Review Runtime",
+  "inputAuthority": "Candidate Runtime",
+  "reviewAuthority": "TL Human Review Authority",
+  "outputAuthority": "review_only",
+  "allowedOperations": [
+    "read_candidate",
+    "record_findings",
+    "record_comment",
+    "request_changes",
+    "accept",
+    "reject",
+    "defer",
+    "validate",
+    "digest",
+    "register_review_projection",
+    "report"
+  ],
+  "prohibitedOperations": [
+    "rewrite_candidate",
+    "modify_canonical_meaning",
+    "modify_knowledge_registry",
+    "change_brief",
+    "change_prompt",
+    "approve",
+    "publish",
+    "promote_locale_state",
+    "inherit_review_across_locale",
+    "call_provider"
+  ],
+  "decisions": [
+    "accept",
+    "changes_required",
+    "reject",
+    "defer"
+  ],
+  "boundaries": {
+    "reviewDoesNotImplyApproval": true,
+    "reviewDoesNotImplyPublication": true,
+    "candidateContentRemainsImmutable": true,
+    "canonicalMeaningRemainsTLAuthority": true,
+    "localeReviewIsIndependent": true
+  }
+}

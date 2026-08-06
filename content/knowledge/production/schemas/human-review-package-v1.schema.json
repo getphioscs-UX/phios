@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/human-review-package-v1.schema.json",
+  "title": "PHI OS Human Review Package v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reviewType",
+    "reviewSchemaVersion",
+    "reviewCode",
+    "candidate",
+    "reviewer",
+    "decision",
+    "summary",
+    "findings",
+    "authority",
+    "governance",
+    "reviewedAt",
+    "reviewDigest"
+  ],
+  "properties": {
+    "reviewType": {
+      "const": "canonical_article_human_review"
+    },
+    "reviewSchemaVersion": {
+      "const": "PHI-OS-HUMAN-REVIEW-PACKAGE-v1.0.0"
+    },
+    "reviewCode": {
+      "type": "string",
+      "pattern": "^REVIEW-CANDIDATE-KN-[A-Z0-9-]+-ZH-HANS-V1$"
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateCode",
+        "candidateDigest",
+        "nodeCode",
+        "locale",
+        "candidateState"
+      ],
+      "properties": {
+        "candidateCode": {
+          "type": "string"
+        },
+        "candidateDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "nodeCode": {
+          "type": "string"
+        },
+        "locale": {
+          "const": "zh-Hans"
+        },
+        "candidateState": {
+          "enum": [
+            "draft",
+            "ready_for_human_review",
+            "changes_required"
+          ]
+        }
+      }
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewerCode",
+        "authority"
+      ],
+      "properties": {
+        "reviewerCode": {
+          "const": "TL"
+        },
+        "authority": {
+          "const": "TL Human Review Authority"
+        }
+      }
+    },
+    "decision": {
+      "enum": [
+        "accept",
+        "changes_required",
+        "reject",
+        "defer"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "findingCode",
+          "category",
+          "severity",
+          "comment"
+        ],
+        "properties": {
+          "findingCode": {
+            "type": "string",
+            "pattern": "^FINDING-[0-9]{3}$"
+          },
+          "category": {
+            "enum": [
+              "canonical_meaning",
+              "boundary",
+              "structure",
+              "terminology",
+              "evidence",
+              "continuity",
+              "language",
+              "other"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "note",
+              "minor",
+              "major",
+              "blocking"
+            ]
+          },
+          "comment": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalMeaning",
+        "review",
+        "approval",
+        "publication"
+      ],
+      "properties": {
+        "canonicalMeaning": {
+          "const": "TL"
+        },
+        "review": {
+          "const": "human_review_recorded"
+        },
+        "approval": {
+          "const": "not_approved"
+        },
+        "publication": {
+          "const": "not_published"
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateMutationAllowed",
+        "knowledgeRegistryMutationAllowed",
+        "approvalRecorded",
+        "publicationRecorded",
+        "localeStatePromotionAllowed"
+      ],
+      "properties": {
+        "candidateMutationAllowed": {
+          "const": false
+        },
+        "knowledgeRegistryMutationAllowed": {
+          "const": false
+        },
+        "approvalRecorded": {
+          "const": false
+        },
+        "publicationRecorded": {
+          "const": false
+        },
+        "localeStatePromotionAllowed": {
+          "const": false
+        }
+      }
+    },
+    "reviewedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reviewDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
