@@ -288,7 +288,7 @@
     "check:kh-w3.5h": "node scripts/check-kh-w3-5h-universal-knowledge-blueprint-v2.mjs",
     "check:kh-w4a": "node scripts/check-kh-w4a-knowledge-runtime-v2.mjs",
     "check:knowledge-blueprints": "node scripts/check-kh-w3-5e-preface-canonical-consolidation.mjs && node scripts/check-kh-w3-5f-canonical-extraction-scaling-freeze.mjs && node scripts/check-kh-w4a-knowledge-runtime-v2.mjs",
-    "check:pja-r4": "node scripts/check-pja-r4-four-volume-blueprint-binding-reconciliation.mjs",
+    "check:pja-r4": "npm run check:pja-r4a && npm run check:pja-r4f",
     "check:kh-w4b": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
     "check:kh-w4c": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
     "check:kh-w4b-w4c": "node scripts/check-kh-w4b-w4c-registry-authority-consumption.mjs",
@@ -303,7 +303,12 @@
     "knowledge:finalize-book-3-outline": "node scripts/finalize-kh-w4b5-book-3-outline.mjs",
     "knowledge:complete-book-4-registry": "node scripts/complete-kh-w4b5-book-4-canonical-node-registry.mjs",
     "check:kh-w4b.5-book-4": "node scripts/check-kh-w4b5-book-4-canonical-node-registry.mjs",
-    "check:pja-r4a": "node scripts/check-pja-r4a-blueprint-binding-foundation.mjs"
+    "check:pja-r4a": "node scripts/check-pja-r4a-blueprint-binding-foundation.mjs",
+    "check:pja-r4b": "node scripts/check-pja-r4b-production-repository-migration.mjs",
+    "check:pja-r4c": "npm run check:pja-r4b && node scripts/check-pja-r4c-readiness-migration.mjs",
+    "check:pja-r4d": "npm run check:pja-r4c && node scripts/check-pja-r4d-production-orchestration-migration.mjs",
+    "check:pja-r4e": "npm run check:pja-r4d && node scripts/check-pja-r4e-article-package-contract-v2.mjs",
+    "check:pja-r4f": "npm run check:pja-r4e && node scripts/check-pja-r4f-acceptance-freeze.mjs"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1101.0",

@@ -3,7 +3,8 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { parseArgs, resolveInside } from './lib/knowledge-production/cli.mjs';
-import { compileReadinessSchema, loadKnowledgeInventory, readReadiness, resolveKnowledgeScope, validateReadinessRecord } from './lib/knowledge-production/readiness-system.mjs';
+import { compileReadinessSchema, readReadiness, validateReadinessRecord } from './lib/knowledge-production/readiness-system.mjs';
+import { loadProductionRepository } from './lib/knowledge-production/production-repository.mjs';
 import { evaluateArticleEligibility, ARTICLE_PACKAGE_ROOT } from './lib/knowledge-production/article-package.mjs';
 import { latestArticlePackage } from './lib/knowledge-production/article-versioning.mjs';
 import { ProductionError, formatError } from './lib/knowledge-production/production-errors.mjs';
@@ -64,10 +65,10 @@ async function main() {
   const scope = normalizeScope(positionals, options);
   const locale = options.locale || 'zh-Hans';
   const outputRoot = path.relative(root, resolveInside(root, options.output || ARTICLE_PACKAGE_ROOT));
-  const knowledge = await loadKnowledgeInventory(root);
+  const repository = await loadProductionRepository(root);
   const records = /^KN-/i.test(scope) && !options.scope
-    ? resolveKnowledgeScope(knowledge, { nodeCode: scope })
-    : resolveKnowledgeScope(knowledge, { scope });
+    ? [repository.resolveNode(scope)].filter(Boolean)
+    : repository.resolveScope(scope);
   const schema = await compileReadinessSchema(root);
   const nodes = [];
   for (const item of records) nodes.push(await assess(item, locale, schema, outputRoot));
