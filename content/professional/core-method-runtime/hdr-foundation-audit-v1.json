@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "PHI-OS-HDR-FOUNDATION-AUDIT-v1.0.0",
+  "stageCode": "HDR-W0",
+  "stageTitle": "Human Design Runtime Foundation Audit",
+  "status": "foundation_audited_runtime_not_activated",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "d64a4d2609df123256d4d5e354b3c51629421173"
+  },
+  "methodIdentity": {
+    "methodCode": "HUMAN_DESIGN",
+    "pluginCode": "HDR",
+    "methodVersion": "1.0.0",
+    "runtimeTrack": "HDR",
+    "governanceOwner": "TL"
+  },
+  "sourceAuthorities": {
+    "legacyAudit": "content/professional/method-audits/hdr-w0-scope.json",
+    "methodGovernance": "content/professional/method-governance/imr-method-registry-v1.json",
+    "commercialLicense": "content/professional/method-governance/imr-commercial-license-registry-v1.json",
+    "algorithmGovernance": "content/professional/method-governance/imr-algorithm-governance-registry-v1.json",
+    "productionEligibility": "content/professional/method-governance/imr-production-eligibility-registry-v1.json",
+    "methodRuntimeFreeze": "content/professional/method-runtime/method-runtime-freeze-v1.json",
+    "methodGovernanceFreeze": "content/professional/method-governance/imr-method-governance-freeze-v1.json"
+  },
+  "inputBoundary": {
+    "required": [
+      "birthDate",
+      "birthTime",
+      "birthLocation",
+      "timezone"
+    ],
+    "conditional": [
+      "dstResolution",
+      "birthTimePrecision",
+      "coordinateResolution"
+    ],
+    "unknownBirthTimePolicy": "fail_closed_for_full_chart",
+    "fabricatedBirthTimeForbidden": true,
+    "customerConsentRequired": true
+  },
+  "calculationScope": {
+    "sequence": [
+      "BIRTH_DATA_NORMALIZATION",
+      "PERSONALITY_ASTRONOMY",
+      "DESIGN_MOMENT_SOLVER",
+      "GATE_LINE_MAPPING",
+      "BODYGRAPH_STRUCTURE"
+    ],
+    "currentMode": "external_only_preserved",
+    "selfCalculationActivated": false,
+    "fixedEightyEightDaySubtractionForbidden": true,
+    "designMomentRule": "backward_solar_arc_88_degrees",
+    "advancedVariablePHS": "deferred"
+  },
+  "projectionScope": {
+    "allowedFutureProjectionTypes": [
+      "GATE",
+      "CHANNEL",
+      "CENTER",
+      "AUTHORITY",
+      "PROFILE",
+      "BODYGRAPH"
+    ],
+    "projectionRuntime": "SHARED_PROJECTION_RUNTIME",
+    "projectionCreatedThisStage": false,
+    "interpretationCreatedThisStage": false,
+    "professionalConclusionCreatedThisStage": false
+  },
+  "professionalScope": {
+    "integrationStage": "HDR-W6",
+    "sharedProfessionalRuntimeRequired": true,
+    "professionalReviewRequired": true,
+    "releaseAllowedThisStage": false,
+    "medicalDiagnosisForbidden": true,
+    "actionAuthorizationForbidden": true,
+    "interpretationPresentedAsRealityFactForbidden": true
+  },
+  "dependencies": {
+    "shared": [
+      "SHARED_DATA_AUTHORITY",
+      "SHARED_CALCULATION_RUNTIME",
+      "SHARED_PROJECTION_RUNTIME",
+      "SHARED_INTERPRETATION_RUNTIME",
+      "SHARED_PROFESSIONAL_RUNTIME"
+    ],
+    "external": [
+      "EXTERNAL_HUMAN_DESIGN_CALCULATION"
+    ],
+    "futureHDRStages": [
+      "HDR-W1",
+      "HDR-W2",
+      "HDR-W3",
+      "HDR-W4",
+      "HDR-W5",
+      "HDR-W6",
+      "HDR-W7"
+    ]
+  },
+  "blockingFindings": [
+    "CURRENT_CALCULATION_SOURCE_UNVERIFIED",
+    "COMMERCIAL_LICENSE_NOT_APPROVED",
+    "GATE_LINE_MAPPING_SOURCE_REQUIRED",
+    "BODYGRAPH_STRUCTURE_SOURCE_REQUIRED",
+    "ALGORITHM_VALIDATION_NOT_PASSED",
+    "REGRESSION_NOT_PASSED",
+    "SHARED_RUNTIME_IMPLEMENTATION_NOT_CONFIRMED",
+    "PROFESSIONAL_READINESS_NOT_PASSED"
+  ],
+  "stageRules": {
+    "auditOnly": true,
+    "registryLed": true,
+    "governanceLed": true,
+    "runtimeWriteForbidden": true,
+    "providerCallForbidden": true,
+    "aiCalculationForbidden": true,
+    "productionEligibilityChangeForbidden": true,
+    "frozenRuntimeMutationForbidden": true,
+    "frozenGovernanceMutationForbidden": true
+  }
+}
