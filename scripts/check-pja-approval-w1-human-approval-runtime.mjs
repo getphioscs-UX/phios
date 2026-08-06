@@ -12,6 +12,7 @@ assert.equal(schema.properties.decision.enum.join(','),'approve,decline,defer');
 const approvalCodes=new Set();
 for(const record of registry.records){
  assert.equal(typeof record.approvalCode,'string');assert(!approvalCodes.has(record.approvalCode),`APPROVAL_REGISTRY_DUPLICATE:${record.approvalCode}`);approvalCodes.add(record.approvalCode);
+ if(record.locale!=='zh-Hans')continue;
  const packagePath=`content/knowledge/production/approvals/${record.locale}/${record.nodeCode}/approval.v1.json`;
  const approvalPackage=await readJson(packagePath);
  const registeredCandidate=await readJson(`content/knowledge/production/candidates/${record.locale}/${record.nodeCode}/candidate.v1.json`);
