@@ -222,10 +222,10 @@
     "knowledge:wave:dashboard": "node scripts/knowledge-wave-orchestration.mjs dashboard",
     "knowledge:wave:complete": "node scripts/knowledge-wave-orchestration.mjs complete",
     "check:pja-w3r3": "npm run check:pja-w3r2 && node scripts/check-pja-w3r3-knowledge-production-orchestration.mjs",
-    "knowledge:manuscript:verify": "node scripts/book-i-manuscript.mjs verify",
-    "knowledge:manuscript:inventory": "node scripts/book-i-manuscript.mjs inventory",
-    "knowledge:manuscript:map": "node scripts/book-i-manuscript.mjs map",
-    "knowledge:manuscript:status": "node scripts/book-i-manuscript.mjs status",
+    "knowledge:manuscript:verify": "node scripts/knowledge-manuscript.mjs verify",
+    "knowledge:manuscript:inventory": "node scripts/knowledge-manuscript.mjs inventory",
+    "knowledge:manuscript:map": "node scripts/knowledge-manuscript.mjs map",
+    "knowledge:manuscript:status": "node scripts/knowledge-manuscript.mjs status",
     "knowledge:manuscript:extract-p0": "node scripts/extract-book-i-p0.mjs",
     "check:knr-w2r1-t04": "node scripts/check-knr-w2r1-t04-searchable-pdf-extraction.mjs",
     "knowledge:manuscript:review-p0": "node scripts/review-book-i-p0.mjs review",
@@ -310,7 +310,12 @@
     "check:pja-r4e": "npm run check:pja-r4d && node scripts/check-pja-r4e-article-package-contract-v2.mjs",
     "check:pja-r4f": "npm run check:pja-r4e && node scripts/check-pja-r4f-acceptance-freeze.mjs",
     "check:kh-w4g": "node scripts/check-kh-w4g-knr-registry-consumption-migration.mjs",
-    "check:kh-w4g.5": "node scripts/check-kh-w4g5-semantic-graph-foundation.mjs"
+    "check:kh-w4g.5": "node scripts/check-kh-w4g5-semantic-graph-foundation.mjs",
+    "check:kh-w4g.6-w4h": "node scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs",
+    "check:semantic-runtime": "node scripts/check-kh-w4g6-w4h-manuscript-mapping-foundation.mjs",
+    "knowledge:manuscript:extract": "node scripts/knowledge-manuscript.mjs extract",
+    "knowledge:manuscript:review": "node scripts/knowledge-manuscript.mjs review",
+    "knowledge:manuscript:book-1:legacy": "node scripts/book-i-manuscript.mjs status"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1101.0",

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phios://knowledge/approved-mapping-v2",
+  "type": "object",
+  "required": [
+    "mappingCode",
+    "nodeCode",
+    "sectionCode",
+    "authorityStatus",
+    "approvedBy",
+    "approvedAt",
+    "sourceRangeHash"
+  ],
+  "properties": {
+    "mappingCode": {
+      "type": "string"
+    },
+    "nodeCode": {
+      "type": "string"
+    },
+    "sectionCode": {
+      "type": "string"
+    },
+    "authorityStatus": {
+      "const": "approved"
+    },
+    "approvedBy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approvedAt": {
+      "type": "string"
+    },
+    "sourceRangeHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}
