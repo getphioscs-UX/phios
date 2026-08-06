@@ -1,0 +1,35 @@
+{
+  "runtimeCode": "SHARED_PROFESSIONAL_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "schemaVersion": "PHI-OS-CANONICAL-PROFESSIONAL-RELEASE-v1.0.0",
+  "authority": "Registry-led",
+  "scope": [
+    "Professional Review",
+    "Boundary Validation",
+    "Deliverable Assembly",
+    "Professional Signature",
+    "Release"
+  ],
+  "requiredSequence": [
+    "PROFESSIONAL_REVIEW",
+    "BOUNDARY_VALIDATION",
+    "DELIVERABLE_ASSEMBLY",
+    "PROFESSIONAL_SIGNATURE",
+    "RELEASE"
+  ],
+  "input": {
+    "runtimeCode": "SHARED_INTERPRETATION_RUNTIME",
+    "schemaVersion": "PHI-OS-CANONICAL-INTERPRETATION-CANDIDATE-v1.0.0",
+    "candidateStatus": "candidate"
+  },
+  "rules": {
+    "allMethodsMustPass": true,
+    "failClosed": true,
+    "releaseRequiresReview": true,
+    "releaseRequiresBoundaryValidation": true,
+    "releaseRequiresDeliverableAssembly": true,
+    "releaseRequiresProfessionalSignature": true,
+    "inputMutationForbidden": true,
+    "bypassForbidden": true
+  }
+}
