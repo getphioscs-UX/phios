@@ -1,0 +1,44 @@
+{
+  "paidJourneyBudgetShared": false,
+  "providers": [
+    {
+      "allowedOperations": [
+        "unmatched_query_translation_fallback"
+      ],
+      "enabled": false,
+      "forbiddenOperations": [
+        "full_article_translation",
+        "full_fragment_translation",
+        "private_manuscript_translation",
+        "final_answer_translation"
+      ],
+      "providerCode": "google_query_translation"
+    },
+    {
+      "allowedOperations": [
+        "intent_classification",
+        "semantic_similarity",
+        "candidate_reranking",
+        "ambiguity_resolution"
+      ],
+      "enabled": false,
+      "forbiddenOperations": [
+        "create_canonical_node",
+        "create_claim",
+        "generate_published_article",
+        "bypass_coverage_gate"
+      ],
+      "providerCode": "workers_ai_reranking"
+    },
+    {
+      "allowedOperations": [],
+      "budgetUnits": 0,
+      "enabled": false,
+      "forbiddenOperations": [
+        "all_public_knr_operations"
+      ],
+      "providerCode": "openai_public_knr"
+    }
+  ],
+  "registryCode": "PHI-OS-PUBLIC-KNR-PROVIDER-REGISTRY-v1.0.0"
+}
