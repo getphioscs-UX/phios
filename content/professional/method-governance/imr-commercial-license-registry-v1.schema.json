@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IMR-W2 Commercial License Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "stageCode",
+    "registryCode",
+    "registryVersion",
+    "status",
+    "baseline",
+    "authority",
+    "runtimeAuthority",
+    "methodRegistryReference",
+    "governancePolicy",
+    "methods"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "stageCode": {
+      "const": "IMR-W2"
+    },
+    "registryCode": {
+      "const": "IMR_COMMERCIAL_LICENSE_REGISTRY"
+    },
+    "registryVersion": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "active_governance_registry"
+    },
+    "baseline": {
+      "type": "object"
+    },
+    "authority": {
+      "const": "INTERPRETIVE_METHOD_GOVERNANCE"
+    },
+    "runtimeAuthority": {
+      "const": false
+    },
+    "methodRegistryReference": {
+      "type": "string"
+    },
+    "commercialLicenseReference": {
+      "type": "string"
+    },
+    "calculationRuntimeReference": {
+      "type": "string"
+    },
+    "governancePolicy": {
+      "type": "object"
+    },
+    "methods": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "methodCode",
+          "methodVersion",
+          "licenseStatus",
+          "license",
+          "commercialRights",
+          "usageScope",
+          "redistribution",
+          "thirdPartyDependencies",
+          "productionAuthorityCreated"
+        ]
+      }
+    }
+  }
+}

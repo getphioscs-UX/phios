@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "PHI-OS-IMR-COMMERCIAL-LICENSE-REGISTRY-v1.0.0",
+  "stageCode": "IMR-W2",
+  "registryCode": "IMR_COMMERCIAL_LICENSE_REGISTRY",
+  "registryVersion": "1.0.0",
+  "status": "active_governance_registry",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "e2cb2de96550054346775aae48d4f1fc596b332e"
+  },
+  "authority": "INTERPRETIVE_METHOD_GOVERNANCE",
+  "runtimeAuthority": false,
+  "methodRegistryReference": "content/professional/method-governance/imr-method-registry-v1.json",
+  "governancePolicy": {
+    "licenseRequiredBeforeCommercialUse": true,
+    "thirdPartyDependencyDisclosureRequired": true,
+    "unknownLicenseFailsClosed": true,
+    "registrationCreatesCommercialRights": false,
+    "commercialRightsCreateProductionEligibility": false,
+    "redistributionRequiresExplicitPermission": true,
+    "algorithmGovernedBy": "IMR-W3",
+    "productionEligibilityGovernedBy": "IMR-W4"
+  },
+  "methods": [
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "licenseStatus": "restricted",
+      "license": {
+        "licenseType": "third_party_restricted",
+        "rightsHolder": "External Human Design authority",
+        "evidenceStatus": "documented",
+        "evidenceReferences": [
+          "docs/imr/IMR-W0-SCOPE-DATA-ALGORITHM-LICENSE-AUDIT.md",
+          "HDR-W0"
+        ]
+      },
+      "commercialRights": {
+        "commercialUse": "conditional",
+        "serviceUse": "conditional",
+        "productUse": "blocked",
+        "apiUse": "blocked"
+      },
+      "usageScope": {
+        "internalResearch": true,
+        "professionalService": true,
+        "publicSelfService": false,
+        "calculationHosting": false
+      },
+      "redistribution": {
+        "sourceCode": false,
+        "calculationData": false,
+        "derivedProjection": true,
+        "conditions": [
+          "Professional boundary and external calculation terms remain applicable."
+        ]
+      },
+      "thirdPartyDependencies": [
+        {
+          "dependencyCode": "EXTERNAL_HUMAN_DESIGN_CALCULATION",
+          "licenseStatus": "restricted",
+          "commercialRightsStatus": "conditional",
+          "redistributionStatus": "prohibited",
+          "required": true
+        }
+      ],
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "licenseStatus": "approved",
+      "license": {
+        "licenseType": "MIT",
+        "rightsHolder": "Astronomy Engine contributors",
+        "evidenceStatus": "documented",
+        "evidenceReferences": [
+          "docs/imr/IMR-W0-SCOPE-DATA-ALGORITHM-LICENSE-AUDIT.md"
+        ]
+      },
+      "commercialRights": {
+        "commercialUse": "allowed",
+        "serviceUse": "allowed",
+        "productUse": "allowed",
+        "apiUse": "allowed"
+      },
+      "usageScope": {
+        "internalResearch": true,
+        "professionalService": true,
+        "publicSelfService": false,
+        "calculationHosting": false
+      },
+      "redistribution": {
+        "sourceCode": true,
+        "calculationData": true,
+        "derivedProjection": true,
+        "conditions": [
+          "Preserve MIT license and copyright notice when redistribution applies."
+        ]
+      },
+      "thirdPartyDependencies": [
+        {
+          "dependencyCode": "ASTRONOMY_ENGINE_JS",
+          "licenseStatus": "approved",
+          "commercialRightsStatus": "allowed",
+          "redistributionStatus": "notice_required",
+          "required": true
+        },
+        {
+          "dependencyCode": "NASA_JPL_HORIZONS",
+          "licenseStatus": "reference_only",
+          "commercialRightsStatus": "not_applicable",
+          "redistributionStatus": "not_embedded",
+          "required": false
+        }
+      ],
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "BAZI",
+      "methodVersion": "0.1.0",
+      "licenseStatus": "conditional",
+      "license": {
+        "licenseType": "mixed_internal_and_third_party",
+        "rightsHolder": "PHI OS / external data authorities",
+        "evidenceStatus": "not_assessed",
+        "evidenceReferences": [
+          "docs/imr/IMR-W0-SCOPE-DATA-ALGORITHM-LICENSE-AUDIT.md"
+        ]
+      },
+      "commercialRights": {
+        "commercialUse": "conditional",
+        "serviceUse": "conditional",
+        "productUse": "blocked",
+        "apiUse": "blocked"
+      },
+      "usageScope": {
+        "internalResearch": true,
+        "professionalService": false,
+        "publicSelfService": false,
+        "calculationHosting": false
+      },
+      "redistribution": {
+        "sourceCode": false,
+        "calculationData": false,
+        "derivedProjection": false,
+        "conditions": [
+          "Complete dependency license review and IMR-W3 validation before production use."
+        ]
+      },
+      "thirdPartyDependencies": [
+        {
+          "dependencyCode": "IANA_TZDB",
+          "licenseStatus": "review_required",
+          "commercialRightsStatus": "conditional",
+          "redistributionStatus": "review_required",
+          "required": true
+        },
+        {
+          "dependencyCode": "ASTRONOMY_ENGINE_JS",
+          "licenseStatus": "approved",
+          "commercialRightsStatus": "allowed",
+          "redistributionStatus": "notice_required",
+          "required": true
+        },
+        {
+          "dependencyCode": "PHI_OS_BAZI_POLICY_V1",
+          "licenseStatus": "internal",
+          "commercialRightsStatus": "owned",
+          "redistributionStatus": "controlled",
+          "required": true
+        }
+      ],
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "I_CHING",
+      "methodVersion": "0.1.0",
+      "licenseStatus": "not_assessed",
+      "license": {
+        "licenseType": "unassessed",
+        "rightsHolder": "unresolved",
+        "evidenceStatus": "not_assessed",
+        "evidenceReferences": [
+          "IMR-W1"
+        ]
+      },
+      "commercialRights": {
+        "commercialUse": "blocked",
+        "serviceUse": "blocked",
+        "productUse": "blocked",
+        "apiUse": "blocked"
+      },
+      "usageScope": {
+        "internalResearch": true,
+        "professionalService": false,
+        "publicSelfService": false,
+        "calculationHosting": false
+      },
+      "redistribution": {
+        "sourceCode": false,
+        "calculationData": false,
+        "derivedProjection": false,
+        "conditions": [
+          "IMR-W2 assessment required before any commercial use."
+        ]
+      },
+      "thirdPartyDependencies": [],
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "TAROT",
+      "methodVersion": "0.1.0",
+      "licenseStatus": "not_assessed",
+      "license": {
+        "licenseType": "unassessed",
+        "rightsHolder": "unresolved",
+        "evidenceStatus": "not_assessed",
+        "evidenceReferences": [
+          "IMR-W1"
+        ]
+      },
+      "commercialRights": {
+        "commercialUse": "blocked",
+        "serviceUse": "blocked",
+        "productUse": "blocked",
+        "apiUse": "blocked"
+      },
+      "usageScope": {
+        "internalResearch": true,
+        "professionalService": false,
+        "publicSelfService": false,
+        "calculationHosting": false
+      },
+      "redistribution": {
+        "sourceCode": false,
+        "calculationData": false,
+        "derivedProjection": false,
+        "conditions": [
+          "IMR-W2 assessment required before any commercial use."
+        ]
+      },
+      "thirdPartyDependencies": [],
+      "productionAuthorityCreated": false
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "methodVersion": "0.1.0",
+      "licenseStatus": "not_assessed",
+      "license": {
+        "licenseType": "unassessed",
+        "rightsHolder": "unresolved",
+        "evidenceStatus": "not_assessed",
+        "evidenceReferences": [
+          "IMR-W1"
+        ]
+      },
+      "commercialRights": {
+        "commercialUse": "blocked",
+        "serviceUse": "blocked",
+        "productUse": "blocked",
+        "apiUse": "blocked"
+      },
+      "usageScope": {
+        "internalResearch": true,
+        "professionalService": false,
+        "publicSelfService": false,
+        "calculationHosting": false
+      },
+      "redistribution": {
+        "sourceCode": false,
+        "calculationData": false,
+        "derivedProjection": false,
+        "conditions": [
+          "IMR-W2 assessment required before any commercial use."
+        ]
+      },
+      "thirdPartyDependencies": [],
+      "productionAuthorityCreated": false
+    }
+  ]
+}
