@@ -1,0 +1,62 @@
+{
+  "reportCode": "KNR-PACKAGE-D-QUALITY-REPORT",
+  "reportVersion": "1.0.0",
+  "source": {
+    "indexDigest": "9ddcf3331d1f1788ea0f8539ce0f78a225e4f217719eb7e598af292806463f53"
+  },
+  "summary": {
+    "status": "blocked",
+    "score": 44,
+    "findings": 4,
+    "severityCounts": {
+      "info": 0,
+      "warning": 2,
+      "error": 2,
+      "critical": 0
+    },
+    "publishedLocaleRecords": 2,
+    "publishedCanonicalNodes": 1
+  },
+  "findings": [
+    {
+      "code": "EN_LOCALE_CJK_CONTAMINATION",
+      "severity": "warning",
+      "dimension": "locale_integrity",
+      "message": "English summary contains substantial CJK text.",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "en",
+      "field": "summary",
+      "cjkCharacters": 136
+    },
+    {
+      "code": "EN_HEADING_CJK_CONTAMINATION",
+      "severity": "warning",
+      "dimension": "locale_integrity",
+      "message": "English heading fragment contains substantial CJK text.",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "en",
+      "fragmentCode": "FRAGMENT-KN-PREFACE-001-EN-001",
+      "cjkCharacters": 19
+    },
+    {
+      "code": "EN_BODY_CJK_CONTAMINATION",
+      "severity": "error",
+      "dimension": "locale_integrity",
+      "message": "English article body is predominantly CJK and is not suitable for English public projection.",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "en",
+      "cjkCharacters": 1679,
+      "latinCharacters": 5
+    },
+    {
+      "code": "ZH_SUMMARY_ARTIFACT_CONTAMINATION",
+      "severity": "error",
+      "dimension": "projection_integrity",
+      "message": "Chinese summary contains file-digest artifact content instead of an article summary.",
+      "nodeCode": "KN-PREFACE-001",
+      "locale": "zh-Hans",
+      "field": "summary"
+    }
+  ],
+  "reportDigest": "d8f22874839cbc87914e141081c2f7e14be1c7d5bf480fcd82b55d920a7c8137"
+}

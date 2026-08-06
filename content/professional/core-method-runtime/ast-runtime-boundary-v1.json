@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "PHI-OS-AST-RUNTIME-BOUNDARY-v1.0.0",
+  "stageCode": "AST-W0",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "inputBoundary": {
+    "required": [
+      "birthDate",
+      "birthTime",
+      "birthLocation",
+      "timezone"
+    ],
+    "conditional": [
+      "dstResolution",
+      "birthTimePrecision",
+      "coordinateResolution"
+    ],
+    "unknownBirthTimePolicy": "fail_closed_for_houses_and_angles",
+    "fabricatedBirthTimeAllowed": false,
+    "consentRequired": true
+  },
+  "calculationBoundary": {
+    "orderedStages": [
+      "BIRTH_DATA_NORMALIZATION",
+      "ASTRONOMY",
+      "PLANET",
+      "HOUSE",
+      "ASPECT"
+    ],
+    "providerAllowed": false,
+    "aiAllowed": false,
+    "promptAllowed": false,
+    "deterministicRequired": true,
+    "sharedCalculationRuntimeRequired": true
+  },
+  "projectionBoundary": {
+    "canonicalTypes": [
+      "PLANET",
+      "HOUSE",
+      "ASPECT"
+    ],
+    "sharedProjectionRuntimeRequired": true,
+    "localProjectionSchemaAllowed": false,
+    "interpretationCreated": false,
+    "knowledgeCreated": false,
+    "realityConclusionCreated": false
+  },
+  "professionalBoundary": {
+    "integrationStage": "AST-W6",
+    "sharedProfessionalRuntimeRequired": true,
+    "automaticProfessionalConclusionAllowed": false,
+    "medicalDiagnosisAllowed": false,
+    "legalDecisionAllowed": false,
+    "financialDecisionAllowed": false,
+    "realityFactClaimAllowed": false
+  },
+  "stageOwnership": {
+    "AST-W1": [
+      "ephemeris",
+      "julianDay",
+      "timeScale",
+      "referenceFrame",
+      "observerMode"
+    ],
+    "AST-W2": [
+      "planetLongitude",
+      "planetLatitude",
+      "retrogradeStatus",
+      "nodePosition"
+    ],
+    "AST-W3": [
+      "ascendant",
+      "midheaven",
+      "houseCusps",
+      "housePlacement"
+    ],
+    "AST-W4": [
+      "aspectDetection",
+      "aspectOrb",
+      "applyingSeparating"
+    ],
+    "AST-W5": [
+      "canonicalProjection"
+    ],
+    "AST-W6": [
+      "professionalIntegration"
+    ],
+    "AST-W7": [
+      "productionFreeze"
+    ]
+  }
+}

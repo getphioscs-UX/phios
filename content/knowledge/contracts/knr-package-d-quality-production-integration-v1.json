@@ -1,0 +1,45 @@
+{
+  "contractCode": "KNR-PACKAGE-D-QUALITY-PRODUCTION-INTEGRATION",
+  "contractVersion": "1.0.0",
+  "status": "frozen",
+  "baselineCommit": "b8298ae",
+  "scope": [
+    "KNR-W10-quality-evaluation",
+    "KNR-W11-production-integration"
+  ],
+  "inputs": [
+    "STEP63 Published Knowledge Authority",
+    "STEP64 Published Retrieval Index",
+    "Package A routing/ranking/coverage",
+    "Package B adaptive projection/reading paths",
+    "Package C public API/experience"
+  ],
+  "allowed": [
+    "read",
+    "evaluate",
+    "compare",
+    "score",
+    "gate",
+    "report"
+  ],
+  "prohibited": [
+    "modify_article",
+    "modify_candidate",
+    "modify_review",
+    "modify_approval",
+    "modify_publication",
+    "modify_registry",
+    "publish",
+    "unpublish",
+    "call_provider",
+    "generate_answer",
+    "repair_content"
+  ],
+  "principles": {
+    "publishedOnly": true,
+    "deterministic": true,
+    "failClosed": true,
+    "qualityFindingIsNotPublicationMutation": true,
+    "productionIntegrationIsReadOnly": true
+  }
+}
