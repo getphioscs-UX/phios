@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-HDR-ASTRONOMY-RUNTIME-v1.0.0",
+  "stageCode": "HDR-W1",
+  "runtimeCode": "HDR_ASTRONOMY_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "status": "implemented_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "8dc06b2"
+  },
+  "authority": {
+    "input": "SHARED_DATA_AUTHORITY",
+    "execution": "SHARED_CALCULATION_RUNTIME",
+    "algorithmGovernance": "IMR_ALGORITHM_GOVERNANCE",
+    "astronomyAdapter": "VERSIONED_GOVERNED_ADAPTER",
+    "projection": false,
+    "interpretation": false,
+    "professional": false
+  },
+  "input": {
+    "requiredRecordType": "NORMALIZED_BIRTH_MOMENT",
+    "requiredTimeScale": "UTC",
+    "uncertainBirthMomentAllowed": false,
+    "methodOwnedSharedDataAllowed": false
+  },
+  "requiredBodies": [
+    "SUN",
+    "EARTH",
+    "MOON",
+    "NORTH_NODE",
+    "SOUTH_NODE",
+    "MERCURY",
+    "VENUS",
+    "MARS",
+    "JUPITER",
+    "SATURN",
+    "URANUS",
+    "NEPTUNE",
+    "PLUTO"
+  ],
+  "output": {
+    "schemaVersion": "PHI-OS-HDR-ASTRONOMY-RESULT-v1.0.0",
+    "calculationType": "PERSONALITY_ASTRONOMY",
+    "longitudeUnit": "degree",
+    "longitudeRange": "[0,360)",
+    "earthRule": "SUN_PLUS_180_DEGREES",
+    "southNodeRule": "NORTH_NODE_PLUS_180_DEGREES",
+    "lineageRequired": true
+  },
+  "boundaries": {
+    "astronomyOnly": true,
+    "designMomentCreated": false,
+    "fixedEightyEightDaySubtractionForbidden": true,
+    "gateMappingCreated": false,
+    "bodyGraphCreated": false,
+    "projectionCreated": false,
+    "interpretationCreated": false,
+    "professionalConclusionCreated": false,
+    "providerAllowed": false,
+    "aiAllowed": false
+  },
+  "nextStage": "HDR-W2"
+}
