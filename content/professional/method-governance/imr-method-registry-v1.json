@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "PHI-OS-IMR-METHOD-GOVERNANCE-REGISTRY-v1.0.0",
+  "stageCode": "IMR-W1",
+  "registryCode": "IMR_METHOD_REGISTRY",
+  "registryVersion": "1.0.0",
+  "status": "active_governance_registry",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "7b446f57e2b62a94c931fbac0de7ad6c550d19b8"
+  },
+  "authority": "INTERPRETIVE_METHOD_GOVERNANCE",
+  "runtimeAuthority": false,
+  "runtimeRegistryReference": "content/professional/method-runtime/method-registry-v1.json",
+  "capabilityModelReference": "content/professional/method-runtime/method-capability-model.json",
+  "foundationAuditReference": "content/professional/method-audits/imr-w0-scope.json",
+  "requiredFields": [
+    "methodCode",
+    "owner",
+    "version",
+    "status",
+    "capabilities",
+    "dependencies"
+  ],
+  "governancePolicy": {
+    "registrationCreatesRuntimeAuthority": false,
+    "registrationCreatesProductionEligibility": false,
+    "ownerRequired": true,
+    "versionRequired": true,
+    "capabilityDeclarationRequired": true,
+    "dependencyDeclarationRequired": true,
+    "commercialLicenseGovernedBy": "IMR-W2",
+    "algorithmGovernedBy": "IMR-W3",
+    "productionEligibilityGovernedBy": "IMR-W4",
+    "versionManagementGovernedBy": "IMR-W5",
+    "freezeGovernedBy": "IMR-W6"
+  },
+  "methods": [
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "methodName": "Human Design",
+      "owner": {
+        "authorityType": "HUMAN_GOVERNANCE",
+        "ownerCode": "TL",
+        "implementationTrack": "HDR"
+      },
+      "version": "1.0.0",
+      "status": "internal",
+      "capabilities": [
+        "Definition",
+        "Data",
+        "Calculation",
+        "Projection",
+        "Interpretation",
+        "Professional"
+      ],
+      "dependencies": {
+        "runtimeRegistryMethodCode": "HUMAN_DESIGN",
+        "pluginCode": "HDR",
+        "governanceAuditTracks": [
+          "IMR-W0",
+          "HDR-W0"
+        ],
+        "sharedRuntimeDependencies": [
+          "SHARED_DATA_AUTHORITY",
+          "SHARED_CALCULATION_RUNTIME",
+          "SHARED_PROJECTION_RUNTIME",
+          "SHARED_INTERPRETATION_RUNTIME",
+          "SHARED_PROFESSIONAL_RUNTIME"
+        ],
+        "externalDependencies": [
+          "EXTERNAL_HUMAN_DESIGN_CALCULATION"
+        ],
+        "methodDependencies": []
+      },
+      "productionEligible": false
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "methodName": "Astrology",
+      "owner": {
+        "authorityType": "HUMAN_GOVERNANCE",
+        "ownerCode": "TL",
+        "implementationTrack": "AST"
+      },
+      "version": "0.1.0",
+      "status": "experimental",
+      "capabilities": [
+        "Definition",
+        "Data",
+        "Calculation",
+        "Projection",
+        "Interpretation",
+        "Professional"
+      ],
+      "dependencies": {
+        "runtimeRegistryMethodCode": "ASTROLOGY",
+        "pluginCode": "AST",
+        "governanceAuditTracks": [
+          "IMR-W0"
+        ],
+        "sharedRuntimeDependencies": [
+          "SHARED_DATA_AUTHORITY",
+          "SHARED_CALCULATION_RUNTIME",
+          "SHARED_PROJECTION_RUNTIME",
+          "SHARED_INTERPRETATION_RUNTIME",
+          "SHARED_PROFESSIONAL_RUNTIME"
+        ],
+        "externalDependencies": [
+          "ASTRONOMY_ENGINE_JS"
+        ],
+        "methodDependencies": []
+      },
+      "productionEligible": false
+    },
+    {
+      "methodCode": "BAZI",
+      "methodName": "BaZi",
+      "owner": {
+        "authorityType": "HUMAN_GOVERNANCE",
+        "ownerCode": "TL",
+        "implementationTrack": "BZR"
+      },
+      "version": "0.1.0",
+      "status": "experimental",
+      "capabilities": [
+        "Definition",
+        "Data",
+        "Calculation",
+        "Projection",
+        "Interpretation",
+        "Professional"
+      ],
+      "dependencies": {
+        "runtimeRegistryMethodCode": "BAZI",
+        "pluginCode": "BZR",
+        "governanceAuditTracks": [
+          "IMR-W0"
+        ],
+        "sharedRuntimeDependencies": [
+          "SHARED_DATA_AUTHORITY",
+          "SHARED_CALCULATION_RUNTIME",
+          "SHARED_PROJECTION_RUNTIME",
+          "SHARED_INTERPRETATION_RUNTIME",
+          "SHARED_PROFESSIONAL_RUNTIME"
+        ],
+        "externalDependencies": [],
+        "methodDependencies": []
+      },
+      "productionEligible": false
+    },
+    {
+      "methodCode": "I_CHING",
+      "methodName": "I Ching",
+      "owner": {
+        "authorityType": "HUMAN_GOVERNANCE",
+        "ownerCode": "TL",
+        "implementationTrack": "ICH"
+      },
+      "version": "0.1.0",
+      "status": "draft",
+      "capabilities": [
+        "Definition"
+      ],
+      "dependencies": {
+        "runtimeRegistryMethodCode": "I_CHING",
+        "pluginCode": "ICH",
+        "governanceAuditTracks": [],
+        "sharedRuntimeDependencies": [
+          "SHARED_DATA_AUTHORITY",
+          "SHARED_CALCULATION_RUNTIME",
+          "SHARED_PROJECTION_RUNTIME",
+          "SHARED_INTERPRETATION_RUNTIME",
+          "SHARED_PROFESSIONAL_RUNTIME"
+        ],
+        "externalDependencies": [],
+        "methodDependencies": []
+      },
+      "productionEligible": false
+    },
+    {
+      "methodCode": "TAROT",
+      "methodName": "Tarot",
+      "owner": {
+        "authorityType": "HUMAN_GOVERNANCE",
+        "ownerCode": "TL",
+        "implementationTrack": "TAR"
+      },
+      "version": "0.1.0",
+      "status": "draft",
+      "capabilities": [
+        "Definition"
+      ],
+      "dependencies": {
+        "runtimeRegistryMethodCode": "TAROT",
+        "pluginCode": "TAR",
+        "governanceAuditTracks": [],
+        "sharedRuntimeDependencies": [
+          "SHARED_DATA_AUTHORITY",
+          "SHARED_CALCULATION_RUNTIME",
+          "SHARED_PROJECTION_RUNTIME",
+          "SHARED_INTERPRETATION_RUNTIME",
+          "SHARED_PROFESSIONAL_RUNTIME"
+        ],
+        "externalDependencies": [],
+        "methodDependencies": []
+      },
+      "productionEligible": false
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "methodName": "Psychology",
+      "owner": {
+        "authorityType": "HUMAN_GOVERNANCE",
+        "ownerCode": "TL",
+        "implementationTrack": "PSY"
+      },
+      "version": "0.1.0",
+      "status": "draft",
+      "capabilities": [
+        "Definition"
+      ],
+      "dependencies": {
+        "runtimeRegistryMethodCode": "PSYCHOLOGY",
+        "pluginCode": "PSY",
+        "governanceAuditTracks": [],
+        "sharedRuntimeDependencies": [
+          "SHARED_DATA_AUTHORITY",
+          "SHARED_CALCULATION_RUNTIME",
+          "SHARED_PROJECTION_RUNTIME",
+          "SHARED_INTERPRETATION_RUNTIME",
+          "SHARED_PROFESSIONAL_RUNTIME"
+        ],
+        "externalDependencies": [],
+        "methodDependencies": []
+      },
+      "productionEligible": false
+    }
+  ]
+}
