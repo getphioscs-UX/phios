@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
+import { loadKnrRegistryAuthority } from './lib/knowledge-runtime/registry-consumer.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ARTICLES = path.join(ROOT, 'content/knowledge/articles');
@@ -17,8 +18,8 @@ const sortedFiles = directory => fs.readdirSync(directory, { withFileTypes: true
 const unique = values => [...new Set(values.filter(value => typeof value === 'string' && value.trim()).map(value => value.trim()))].sort();
 
 export function buildKnowledgeRuntimeIndex() {
-  const registry = readJson(path.join(REGISTRY, 'nodes.json'));
-  const nodeByCode = new Map(registry.nodes.map(node => [node.nodeCode, node]));
+  const authority = loadKnrRegistryAuthority(ROOT);
+  const nodeByCode = authority.nodes;
   const articles = sortedFiles(ARTICLES).map(file => ({ file, value: readJson(file) }));
   const published = articles.filter(({ value }) => value.publicationStatus === 'published' && value.reviewStatus === 'approved' && value.contentStatus === 'content_reviewed');
   const publishedNodeLocales = new Set(published.map(({ value }) => `${value.nodeCode}:${value.locale}`));
@@ -29,13 +30,17 @@ export function buildKnowledgeRuntimeIndex() {
     if (!canonical) throw new Error(`Published article has no canonical node: ${article.nodeCode}`);
     const articleCode = article.assetCode;
     const articleHref = `/articles/${article.slug}`;
+    const publicationContext = authority.resolvePublicationContext(article.nodeCode);
+    const publicationBook = authority.books.get(publicationContext.publicationBookCode);
+    const publicationPart = authority.parts.get(publicationContext.publicationPartCode);
     nodes.push({
       nodeCode: article.nodeCode, articleCode, locale: article.locale, title: article.title,
       displayQuestion: article.displayQuestion, summary: article.summary, themeCode: canonical.themeCode,
       collectionCode: canonical.collectionCode, nodeType: canonical.nodeType, knowledgeLevel: canonical.knowledgeLevel,
-      publicationStatus: article.publicationStatus, href: articleHref
+      publicationStatus: article.publicationStatus, href: articleHref,
+      publicationBookCode: publicationContext.publicationBookCode, publicationPartCode: publicationContext.publicationPartCode
     });
-    publications.push({ articleCode, nodeCode: article.nodeCode, locale: article.locale, slug: article.slug, href: articleHref, publishedAt: article.publishedAt, version: article.version, publicationStatus: article.publicationStatus });
+    publications.push({ articleCode, nodeCode: article.nodeCode, locale: article.locale, slug: article.slug, href: articleHref, publishedAt: article.publishedAt, version: article.version, publicationStatus: article.publicationStatus, publicationBookCode: publicationContext.publicationBookCode, publicationPartCode: publicationContext.publicationPartCode, bookTitle: publicationBook?.title?.[article.locale] || publicationBook?.title?.['zh-Hans'] || null, partTitle: publicationPart?.title?.[article.locale] || publicationPart?.title?.['zh-Hans'] || null });
     questions.push({ questionCode: `${articleCode}-QUESTION`, nodeCode: article.nodeCode, articleCode, locale: article.locale, text: article.displayQuestion, publicStatus: 'published' });
     for (const alias of unique([article.title, article.displayQuestion, ...(article.keyConcepts || []), ...(article.seo?.keywords || [])])) {
       aliases.push({ aliasCode: `${articleCode}-ALIAS-${String(aliases.length + 1).padStart(4, '0')}`, nodeCode: article.nodeCode, articleCode, locale: article.locale, text: alias, publicStatus: 'published' });
@@ -62,7 +67,25 @@ export function buildKnowledgeRuntimeIndex() {
     }
   }
 
-  const envelope = (type, records) => ({ contract: 'PHI-OS-KNR-INDEX-v1.0.0', generatedFrom: 'published-canonical-articles', authority: 'rebuildable-read-model', type, recordCount: records.length, records });
+  const publishedNodeCodes = new Set(nodes.map(record => record.nodeCode));
+  for (const alias of authority.searchAliases) {
+    if (!publishedNodeCodes.has(alias.canonicalNodeCode || alias.nodeCode)) continue;
+    for (const [locale, value] of Object.entries(alias.locales || {})) {
+      const article = published.find(item => item.value.nodeCode === (alias.canonicalNodeCode || alias.nodeCode) && item.value.locale === locale)?.value;
+      if (!article) continue;
+      aliases.push({ aliasCode: alias.aliasCode, nodeCode: article.nodeCode, articleCode: article.assetCode, locale, text: value.displayAlias || value.alias || value, publicStatus: 'published' });
+    }
+  }
+  for (const question of authority.supportingQuestions) {
+    if (!publishedNodeCodes.has(question.canonicalNodeCode)) continue;
+    for (const [locale, value] of Object.entries(question.locales || {})) {
+      const article = published.find(item => item.value.nodeCode === question.canonicalNodeCode && item.value.locale === locale)?.value;
+      if (!article) continue;
+      questions.push({ questionCode: question.questionCode, nodeCode: question.canonicalNodeCode, articleCode: article.assetCode, locale, text: value.displayQuestion, publicStatus: 'published_supporting_question' });
+    }
+  }
+  const readingPaths = authority.learningPaths.filter(path => path.audience === 'public').map(path => ({ ...path, nodeCodes: path.nodeCodes.filter(code => publishedNodeCodes.has(code)) })).filter(path => path.nodeCodes.length);
+  const envelope = (type, records) => ({ contract: 'PHI-OS-KNR-INDEX-v1.1.0', generatedFrom: 'published-canonical-articles+universal-registries', authority: 'rebuildable-published-only-read-model', registryContract: authority.contract, type, recordCount: records.length, records });
   return {
     'nodes-index.json': envelope('nodes', nodes),
     'fragments-index.json': envelope('fragments', fragments),

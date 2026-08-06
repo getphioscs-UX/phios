@@ -1,0 +1,26 @@
+{
+  "contract": "PHI-OS-KH-W4G-KNR-REGISTRY-CONSUMPTION-MIGRATION-v1.0.0",
+  "status": "accepted",
+  "scope": "KNR Registry Consumption Migration",
+  "authority": [
+    "Blueprint Registry",
+    "Canonical Node Registry",
+    "Book Registry",
+    "Part Registry",
+    "Publication Context",
+    "Published Article State"
+  ],
+  "publicBoundary": {
+    "allowed": ["published canonical articles", "published aliases", "published supporting questions", "public reading paths", "public book and part metadata"],
+    "forbidden": ["draft", "candidate", "private manuscript", "mapping", "internal production package"]
+  },
+  "rules": {
+    "bookAndPartFiltersUsePublicationContext": true,
+    "registryPresenceDoesNotEqualPublished": true,
+    "prefixInferenceForbidden": true,
+    "digestMismatchFailsClosed": true,
+    "approvalUnchanged": true,
+    "publicationUnchanged": true
+  },
+  "nextPackage": "KH-W4G.5 Semantic Profile Schema"
+}

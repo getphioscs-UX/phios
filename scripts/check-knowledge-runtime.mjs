@@ -46,11 +46,12 @@ assert.equal(records('nodes-index.json').length, 6);
 assert.equal(new Set(records('nodes-index.json').map(item => item.nodeCode)).size, 3);
 assert.equal(records('publications-index.json').length, 6);
 assert.equal(records('fragments-index.json').length, 48);
-assert.equal(records('questions-index.json').length, 6);
+assert.equal(records('questions-index.json').length, 16);
 assert.ok(records('aliases-index.json').length > 6);
 for (const name of Object.keys(output)) {
-  assert.equal(output[name].generatedFrom, 'published-canonical-articles');
-  assert.equal(output[name].authority, 'rebuildable-read-model');
+  assert.equal(output[name].generatedFrom, 'published-canonical-articles+universal-registries');
+  assert.equal(output[name].authority, 'rebuildable-published-only-read-model');
+  assert.equal(output[name].registryContract, 'PHI-OS-KNR-REGISTRY-CONSUMPTION-v1.0.0');
   assert.ok(!JSON.stringify(output[name]).includes('content/knowledge/editorial'));
   assert.ok(!JSON.stringify(output[name]).includes('content/knowledge/production'));
 }
@@ -61,6 +62,6 @@ for (const fragment of records('fragments-index.json')) {
 }
 for (const publication of records('publications-index.json')) assert.equal(publication.publicationStatus, 'published');
 
-console.log('KNR-W0-W2 Knowledge Runtime foundation checks passed.');
+console.log('KNR-W0-W2 + KH-W4G Knowledge Runtime checks passed.');
 console.log('Validated: published-only index, public question boundary, no Provider/Runtime/Publication authority, deterministic rebuild contract.');
 console.log('Deferred by scope: routing, ranking, coverage, projection, API, public UI, Provider projection.');
