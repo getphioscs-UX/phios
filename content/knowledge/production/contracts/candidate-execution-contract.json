@@ -1,0 +1,35 @@
+{
+  "contractCode": "PJA-CANDIDATE-EXECUTION-W1",
+  "contractVersion": "1.0.0",
+  "status": "frozen",
+  "baselineCommit": "4b91aea",
+  "input": "validated_production_prompt_package",
+  "externalExecution": "human_initiated_chatgpt_session",
+  "output": "article_body_markdown",
+  "candidateAuthority": "candidate_only",
+  "allowedOperations": [
+    "read_prompt",
+    "execute_prompt_externally",
+    "receive_markdown",
+    "build_candidate",
+    "validate_candidate",
+    "register_candidate_projection",
+    "report"
+  ],
+  "prohibitedOperations": [
+    "write_knowledge_registry",
+    "record_human_review",
+    "change_approval",
+    "publish",
+    "promote_locale_state",
+    "call_provider_from_runtime",
+    "accept_model_claim_as_authority"
+  ],
+  "requiredBindings": [
+    "nodeCode",
+    "locale",
+    "promptPackageDigest",
+    "briefDigest"
+  ],
+  "humanAuthorityUnchanged": true
+}
