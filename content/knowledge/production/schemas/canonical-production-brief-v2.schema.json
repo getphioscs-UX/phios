@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/canonical-production-brief-v2.schema.json",
+  "title": "PHI OS Canonical Production Brief v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["briefType","briefSchemaVersion","briefCode","nodeCode","locale","repositoryCommit","authority","canonicalMeaning","localizedIdentity","articleBoundary","governance","terminologyProjection","sourceSnapshot","outputContract","briefDigest"],
+  "properties": {
+    "briefType": {"const":"canonical_article_production_brief"},
+    "briefSchemaVersion": {"const":"PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0"},
+    "briefCode": {"type":"string","pattern":"^BRIEF-KN-[A-Z0-9-]+-ZH-HANS-V1$"},
+    "nodeCode": {"type":"string","pattern":"^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$"},
+    "locale": {"const":"zh-Hans"},
+    "repositoryCommit": {"type":"string","pattern":"^[a-f0-9]{40}$"},
+    "authority": {
+      "type":"object","additionalProperties":false,
+      "required":["canonicalMeaning","localizedIdentity","review","approval","publication"],
+      "properties": {
+        "canonicalMeaning":{"const":"TL"},
+        "localizedIdentity":{"const":"KNR-L10N-W1"},
+        "review":{"const":"independent_human_review"},
+        "approval":{"const":"independent_human_approval"},
+        "publication":{"const":"independent_publication"}
+      }
+    },
+    "canonicalMeaning": {"type":"object","required":["canonicalTitle","canonicalQuestion","centralThesis"],"additionalProperties":true},
+    "localizedIdentity": {"type":"object","required":["displayQuestion","slug"],"additionalProperties":true},
+    "articleBoundary": {"type":"object","required":["mustEstablish","requiredDistinctions","mustNotClaim","includedScope","excludedScope"],"additionalProperties":false,"properties":{"mustEstablish":{"type":"array"},"requiredDistinctions":{"type":"array"},"mustNotClaim":{"type":"array"},"includedScope":{"type":"array"},"excludedScope":{"type":"array"}}},
+    "governance": {"type":"object","required":["registryMutationAllowed","reviewInheritanceAllowed","approvalInheritanceAllowed","publicationInheritanceAllowed"],"additionalProperties":true},
+    "terminologyProjection": {"type":"object","required":["registryVersion","terms"],"additionalProperties":false,"properties":{"registryVersion":{"type":"string"},"terms":{"type":"array"}}},
+    "sourceSnapshot": {"type":"object","required":["inputFiles","inputDigest"],"additionalProperties":false,"properties":{"inputFiles":{"type":"array","items":{"type":"string"}},"inputDigest":{"type":"string","pattern":"^[a-f0-9]{64}$"}}},
+    "outputContract": {"type":"object","required":["candidateLocale","allowedCandidateStates","forbiddenCandidateStates"],"additionalProperties":true},
+    "briefDigest": {"type":"string","pattern":"^[a-f0-9]{64}$"}
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "manifestCode": "PJA-L10N-ZH-HANS-BRIEF-EXPORT",
+  "manifestVersion": "1.0.0",
+  "status": "active",
+  "baselineCommit": "ad3dd14",
+  "locale": "zh-Hans",
+  "schemaPath": "content/knowledge/production/schemas/canonical-production-brief-v2.schema.json",
+  "exportCommand": "npm run knowledge:export-brief:zh-Hans -- <NODE_CODE>",
+  "defaultOutputDirectory": "content/knowledge/production/briefs/zh-Hans",
+  "authority": {
+    "canonicalMeaning": "TL",
+    "registry": "Registry-led",
+    "locale": "KNR-L10N-W1",
+    "review": "independent_human_review",
+    "approval": "independent_human_approval",
+    "publication": "independent_publication"
+  },
+  "allowedOperations": ["read","project","validate","export","digest"],
+  "prohibitedOperations": ["write_registry","repair_data","generate_candidate","change_review","change_approval","publish"],
+  "deterministic": true,
+  "overwriteRequiresForce": true
+}

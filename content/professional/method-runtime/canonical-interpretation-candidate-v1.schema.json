@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-CANONICAL-INTERPRETATION-CANDIDATE-v1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runtimeCode", "runtimeVersion", "candidateCode", "candidateVersion", "candidateStatus", "locale", "projectionReference", "knowledgeLineage", "journeyLineage", "providerLineage", "interpretation", "providerUsed", "aiUsed", "interpretationCreated", "finalConclusionCreated", "professionalReportCreated", "realityDecisionCreated", "professionalConclusionCreated"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-INTERPRETATION-CANDIDATE-v1.0.0"},
+    "runtimeCode": {"const": "SHARED_INTERPRETATION_RUNTIME"},
+    "runtimeVersion": {"const": "1.0.0"},
+    "candidateCode": {"type": "string", "pattern": "^INT-[A-F0-9]{24}$"},
+    "candidateVersion": {"type": "string", "minLength": 1},
+    "candidateStatus": {"const": "candidate"},
+    "locale": {"type": "string", "minLength": 2},
+    "projectionReference": {"type": "object"},
+    "knowledgeLineage": {"type": "object"},
+    "journeyLineage": {"type": "object"},
+    "providerLineage": {"type": "object"},
+    "interpretation": {"type": "object"},
+    "providerUsed": {"const": true},
+    "aiUsed": {"const": true},
+    "interpretationCreated": {"const": true},
+    "finalConclusionCreated": {"const": false},
+    "professionalReportCreated": {"const": false},
+    "realityDecisionCreated": {"const": false},
+    "professionalConclusionCreated": {"const": false}
+  }
+}

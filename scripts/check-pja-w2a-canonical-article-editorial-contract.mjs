@@ -316,10 +316,17 @@ for (const articleFile of articleFiles) {
   }
 }
 
+const approvedKnowledgePlaceholderMarkdown = new Set([
+  'content/knowledge/localization/discovery/README.md',
+  'content/knowledge/localization/terminology/README.md',
+  'content/knowledge/public/articles/README.md'
+]);
+
 const articleBodyAlternatives = await Promise.all([
   filesIn('content/knowledge').then(files => files.filter(file => (
     !file.startsWith('content/knowledge/production/') &&
     !file.startsWith('content/knowledge/governance/prompt-templates/') &&
+    !approvedKnowledgePlaceholderMarkdown.has(file) &&
     (file.endsWith('.md') || file.endsWith('.html'))
   ))),
   filesIn('articles').then(files => files.filter(file => (
@@ -329,6 +336,17 @@ const articleBodyAlternatives = await Promise.all([
 ]);
 assert.deepEqual(articleBodyAlternatives[0], []);
 assert.deepEqual(articleBodyAlternatives[1], []);
+
+for (const placeholder of approvedKnowledgePlaceholderMarkdown) {
+  if (!(await exists(placeholder))) {
+    continue;
+  }
+  const placeholderText = await read(placeholder);
+  assert.match(placeholderText, /^# /);
+  assert.match(placeholderText, /## Purpose/);
+  assert.match(placeholderText, /## Authority/);
+  assert.match(placeholderText, /## Notes/);
+}
 
 for (const shell of await filesIn('articles')) {
   const html = await read(shell);

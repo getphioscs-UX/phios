@@ -7,6 +7,51 @@ const read = file => fs.readFile(path.join(root, file), 'utf8');
 const exists = file => fs.access(path.join(root, file))
   .then(() => true, () => false);
 
+const assertRuntimePlaceholderBoundary = async () => {
+  if (!(await exists('runtime'))) return;
+
+  const allowedDirectories = new Set([
+    'runtime',
+    'runtime/production',
+    'runtime/production/exporter',
+    'runtime/production/validator',
+    'runtime/production/importer',
+    'runtime/production/publication',
+    'runtime/production/localization'
+  ]);
+  const allowedFiles = new Set([
+    'runtime/production/README.md',
+    'runtime/production/exporter/README.md',
+    'runtime/production/validator/README.md',
+    'runtime/production/importer/README.md',
+    'runtime/production/publication/README.md',
+    'runtime/production/localization/README.md'
+  ]);
+
+  const walk = async relativeDirectory => {
+    const entries = await fs.readdir(path.join(root, relativeDirectory), {
+      withFileTypes: true
+    });
+    for (const entry of entries) {
+      const relativePath = path.posix.join(relativeDirectory, entry.name);
+      if (entry.isDirectory()) {
+        assert(
+          allowedDirectories.has(relativePath),
+          `Unexpected physical Runtime directory: ${relativePath}`
+        );
+        await walk(relativePath);
+        continue;
+      }
+      assert(
+        entry.isFile() && allowedFiles.has(relativePath),
+        `Runtime placeholder boundary violation: ${relativePath}`
+      );
+    }
+  };
+
+  await walk('runtime');
+};
+
 const ownership = JSON.parse(await read(
   'docs/pws/architecture/pws-canonical-ownership-v1.json'
 ));
@@ -191,7 +236,7 @@ assert.equal(registryIds.size, requiredObjects.length);
 assert.equal(schemaVersions.size, requiredObjects.length);
 
 // Logical owners are frozen without creating a parallel physical object tree.
-assert.equal(await exists('runtime'), false);
+await assertRuntimePlaceholderBoundary();
 
 const registryIndex = JSON.parse(await read('content/registry/index.json'));
 const runtimeContracts = JSON.parse(

@@ -8,6 +8,51 @@ const readJson = async file => JSON.parse(await read(file));
 const exists = file => fs.access(path.join(root, file))
   .then(() => true, () => false);
 
+const assertRuntimePlaceholderBoundary = async () => {
+  if (!(await exists('runtime'))) return;
+
+  const allowedDirectories = new Set([
+    'runtime',
+    'runtime/production',
+    'runtime/production/exporter',
+    'runtime/production/validator',
+    'runtime/production/importer',
+    'runtime/production/publication',
+    'runtime/production/localization'
+  ]);
+  const allowedFiles = new Set([
+    'runtime/production/README.md',
+    'runtime/production/exporter/README.md',
+    'runtime/production/validator/README.md',
+    'runtime/production/importer/README.md',
+    'runtime/production/publication/README.md',
+    'runtime/production/localization/README.md'
+  ]);
+
+  const walk = async relativeDirectory => {
+    const entries = await fs.readdir(path.join(root, relativeDirectory), {
+      withFileTypes: true
+    });
+    for (const entry of entries) {
+      const relativePath = path.posix.join(relativeDirectory, entry.name);
+      if (entry.isDirectory()) {
+        assert(
+          allowedDirectories.has(relativePath),
+          `Unexpected physical Runtime directory: ${relativePath}`
+        );
+        await walk(relativePath);
+        continue;
+      }
+      assert(
+        entry.isFile() && allowedFiles.has(relativePath),
+        `Runtime placeholder boundary violation: ${relativePath}`
+      );
+    }
+  };
+
+  await walk('runtime');
+};
+
 const freezePath = 'docs/pja/pja-w0-cross-system-boundary-freeze-v1.json';
 const [freeze, pwsI2, khBlueprint, ownership, directory, packageJson] =
   await Promise.all([
@@ -244,7 +289,7 @@ assert.deepEqual(migrationFiles, [
   '0004_book_commerce.sql',
   '0005_pws_universal_registry.sql'
 ]);
-assert.equal(await exists('runtime'), false);
+await assertRuntimePlaceholderBoundary();
 
 assert.equal(
   packageJson.scripts['check:pja-w0'],
