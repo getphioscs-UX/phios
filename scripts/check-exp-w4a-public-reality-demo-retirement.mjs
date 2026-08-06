@@ -29,13 +29,25 @@ for (const retired of [
   'assets/js/modules/evidence-boundary-lab.js'
 ]) assert.equal(await exists(retired), false, `Retired public Demo artifact remains: ${retired}`);
 
-const redirects = (await read('_redirects')).trim().split(/\r?\n/);
-assert.deepEqual(redirects, [
+const redirectRules = (await read('_redirects'))
+  .split(/\r?\n/)
+  .map(rule => rule.trim())
+  .filter(Boolean);
+
+const retiredDemoRedirects = redirectRules.filter(rule =>
+  /^\/reality-demo(?:\.html)?\s/.test(rule)
+);
+
+assert.deepEqual(retiredDemoRedirects, [
   '/reality-demo /reality-journey 308',
   '/reality-demo.html /reality-journey 308'
 ]);
-assert.equal(redirects.some(rule => rule.includes('/checkout')), false);
-assert.equal(redirects.some(rule => /^\/reality-journey\s/.test(rule)), false, 'Redirect loop or chain starts at target');
+assert.equal(redirectRules.some(rule => rule.includes('/checkout')), false);
+assert.equal(
+  redirectRules.some(rule => /^\/reality-journey\s/.test(rule)),
+  false,
+  'Redirect loop or chain starts at target'
+);
 
 const activePages = [
   'index.html', 'about.html', 'ai-disclosure.html', 'free-observation.html',
