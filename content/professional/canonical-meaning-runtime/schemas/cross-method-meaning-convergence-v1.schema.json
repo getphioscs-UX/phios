@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/cross-method-meaning-convergence-v1.schema.json",
+  "title": "PHI OS Cross-Method Meaning Convergence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "convergenceCode",
+    "convergenceVersion",
+    "supportingSignals",
+    "contradictingSignals",
+    "unresolvedSignals",
+    "sourceIndependence",
+    "limitations",
+    "status"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CROSS-METHOD-MEANING-CONVERGENCE-v1.0.0"
+    },
+    "convergenceCode": {
+      "type": "string",
+      "pattern": "^CMC-[A-F0-9]{24}$"
+    },
+    "convergenceVersion": {
+      "const": "1.0.0"
+    },
+    "supportingSignals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/signal"
+      }
+    },
+    "contradictingSignals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/signal"
+      }
+    },
+    "unresolvedSignals": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unresolved"
+      }
+    },
+    "sourceIndependence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "independentMethodCount",
+        "methodCodes",
+        "independent",
+        "basis"
+      ],
+      "properties": {
+        "independentMethodCount": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "methodCodes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "independent": {
+          "type": "boolean"
+        },
+        "basis": {
+          "const": "distinct_canonical_projection_method_lineage"
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  },
+  "$defs": {
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodCode",
+        "projectionCode",
+        "projectionType",
+        "meaningCode",
+        "meaningFamily",
+        "relation"
+      ],
+      "properties": {
+        "methodCode": {
+          "type": "string"
+        },
+        "projectionCode": {
+          "type": "string"
+        },
+        "projectionType": {
+          "type": "string"
+        },
+        "meaningCode": {
+          "type": "string"
+        },
+        "meaningFamily": {
+          "type": "string"
+        },
+        "relation": {
+          "enum": [
+            "same_family_signal",
+            "same_meaning_signal",
+            "explicit_contradiction"
+          ]
+        }
+      }
+    },
+    "unresolved": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meaningFamily",
+        "reason",
+        "meaningCodes",
+        "methodCodes"
+      ],
+      "properties": {
+        "meaningFamily": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "meaningCodes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "methodCodes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

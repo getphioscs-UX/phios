@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/car-quality-evaluation-v1.schema.json",
+  "title": "PHI OS CAR Quality Evaluation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evaluationCode",
+    "evaluationVersion",
+    "subjectCode",
+    "checks",
+    "lineage",
+    "decision",
+    "evaluatedAt",
+    "evaluationDigest"
+  ],
+  "properties": {
+    "evaluationCode": {
+      "type": "string",
+      "pattern": "^CAR-QA-[A-Z0-9-]+$"
+    },
+    "evaluationVersion": {
+      "type": "string"
+    },
+    "subjectCode": {
+      "type": "string"
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "pass",
+          "fail",
+          "not_applicable"
+        ]
+      }
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "decision": {
+      "enum": [
+        "pass",
+        "fail"
+      ]
+    },
+    "evaluatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "evaluationDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

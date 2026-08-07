@@ -1,0 +1,49 @@
+{
+  "acceptanceCode": "PHI-OS-CAR-FULL-ACCEPTANCE-v1",
+  "version": "1.0.0",
+  "work": "CAR-W18",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "baselineCommit": "4c3691f828b088ef6285e7551f15fae3e7133ca0",
+  "requirements": [
+    "canonicalMeaningAuthorityValid",
+    "knowledgeAuthorityValid",
+    "assetBriefValid",
+    "articleRuntimeReused",
+    "assetTypesControlled",
+    "promptAssetsControlled",
+    "candidateLineageValid",
+    "independentReviewValid",
+    "independentApprovalValid",
+    "rightsGateValid",
+    "accessibilityGateValid",
+    "publishedOnlyPresentationValid",
+    "providerDisabledByDefault",
+    "noPaidFallback",
+    "noNewCanonicalMeaning",
+    "noKnowledgeSourceDuplication",
+    "noCrossAssetDrift",
+    "deterministicRebuildValid",
+    "npmRunCheckRequiredInGitWorktree"
+  ],
+  "pilot": {
+    "nodeCode": "KN-PREFACE-001",
+    "productionRecordsCreated": false,
+    "recommendedAssets": [
+      "FIGURE",
+      "DIAGRAM",
+      "HERO_IMAGE_PROMPT",
+      "VIDEO_SCRIPT",
+      "SLIDES",
+      "WEBSITE_MODULE"
+    ]
+  },
+  "invariants": {
+    "carIsKnowledgeAuthority": false,
+    "carIsMeaningAuthority": false,
+    "carIsProfessionalAuthority": false,
+    "fixtureIsProductionPublication": false,
+    "providersEnabled": false,
+    "paidFallbackAllowed": false
+  }
+}

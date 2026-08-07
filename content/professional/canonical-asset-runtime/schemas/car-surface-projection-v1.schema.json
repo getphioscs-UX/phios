@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/car-surface-projection-v1.schema.json",
+  "title": "PHI OS CAR Surface Projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "projectionCode",
+    "projectionVersion",
+    "surface",
+    "locale",
+    "slots",
+    "sourcePublications",
+    "knowledgeReferences",
+    "meaningReferences",
+    "accessibilityData",
+    "projectionState",
+    "projectionDigest"
+  ],
+  "properties": {
+    "projectionCode": {
+      "type": "string",
+      "pattern": "^CAR-SURFACE-[A-Z0-9-]+$"
+    },
+    "projectionVersion": {
+      "type": "string"
+    },
+    "surface": {
+      "enum": [
+        "WEBSITE",
+        "BOOK",
+        "ACADEMY",
+        "SOCIAL",
+        "API"
+      ]
+    },
+    "locale": {
+      "type": "string"
+    },
+    "slots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "slotCode",
+          "publicationCode",
+          "publicationDigest"
+        ],
+        "properties": {
+          "slotCode": {
+            "type": "string"
+          },
+          "publicationCode": {
+            "type": "string"
+          },
+          "publicationDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "sourcePublications": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "meaningReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "accessibilityData": {
+      "type": "object"
+    },
+    "projectionState": {
+      "const": "validation_projection"
+    },
+    "projectionDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
