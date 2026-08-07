@@ -1,0 +1,75 @@
+{
+  "contractCode": "PHI-OS-CMR-HDR-RUNTIME-MAPPING-v1",
+  "contractVersion": "1.0.0",
+  "work": "CM-W7B",
+  "productionStatus": "validation_only",
+  "purpose": "Freeze the HDR runtime Projection-to-Meaning mapping boundary for Authority, Profile-derived number structure, Runtime Type and Connectivity without interpretation text.",
+  "soleInputAuthority": {
+    "schemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "methodCode": "HUMAN_DESIGN",
+    "pluginCode": "HDR"
+  },
+  "runtimeScopes": [
+    {
+      "scopeCode": "AUTHORITY",
+      "projectionType": "AUTHORITY",
+      "projectionPaths": [
+        "projectionValue.authorityCode"
+      ],
+      "status": "available"
+    },
+    {
+      "scopeCode": "RUNTIME_TYPE",
+      "projectionType": "CENTER",
+      "projectionPaths": [
+        "projectionValue.typeCode"
+      ],
+      "status": "available_embedded"
+    },
+    {
+      "scopeCode": "CONNECTIVITY",
+      "projectionType": "CENTER",
+      "projectionPaths": [
+        "projectionValue.definitionCode"
+      ],
+      "status": "available_embedded"
+    },
+    {
+      "scopeCode": "PROFILE_NUMBER_STRUCTURE",
+      "projectionType": "PROFILE",
+      "projectionPaths": [
+        "projectionValue.profile.profileCode",
+        "projectionValue.profile.personalityLine",
+        "projectionValue.profile.designLine"
+      ],
+      "status": "available"
+    }
+  ],
+  "requiredMappingShape": [
+    "projectionCode",
+    "meaningCode",
+    "mappingVersion",
+    "mappingAuthority",
+    "mappingConfidence",
+    "boundary"
+  ],
+  "forbiddenContent": [
+    "AUTHORITY_INTERPRETATION",
+    "TYPE_STRATEGY_TEXT",
+    "PROFILE_DESCRIPTION",
+    "DEFINITION_DESCRIPTION",
+    "ORIGINAL_METHOD_INTERPRETATION_TEXT",
+    "RAW_METHOD_OBJECT"
+  ],
+  "activationRequirements": [
+    "registered_target_meaning_code",
+    "valid_meaning_identity",
+    "knowledge_authority_reference",
+    "cm_w6_foundation_valid"
+  ],
+  "invariants": {
+    "projectionToMeaningOnly": true,
+    "interpretationCreated": false,
+    "actualMappingsCreated": false
+  }
+}

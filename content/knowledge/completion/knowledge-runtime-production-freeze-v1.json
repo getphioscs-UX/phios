@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-KNOWLEDGE-RUNTIME-PRODUCTION-FREEZE-v1.0.0",
+  "stageCode": "KH-P5",
+  "status": "KH-P5 Frozen v1",
+  "baselineCommit": "1e534402bb46b61d8955f22c776c9a95f4b72f24",
+  "runtimeCode": "KNOWLEDGE_COMPLETION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "frozenQueries": [
+    "Meaning Query",
+    "Coverage Query",
+    "Published-only Query",
+    "Locale Query",
+    "Assembly Query"
+  ],
+  "authorities": {
+    "nodeRegistry": "content/knowledge/registry/nodes.json",
+    "coverageReadModel": "content/knowledge/completion/canonical-node-coverage-v1.json",
+    "publishedFragments": "content/knowledge/public/retrieval/fragments.json",
+    "canonicalAssembly": "content/knowledge/intelligence/assembly/canonical-assembly.json",
+    "meaningMap": "content/professional/canonical-meaning-runtime/canonical-meaning-knowledge-map-v1.json"
+  },
+  "boundaries": {
+    "checkerReadOnly": true,
+    "queryRuntimeReadOnly": true,
+    "registryPresenceDoesNotEqualCoverage": true,
+    "unpublishedContentReturned": false,
+    "localeFallbackInvented": false,
+    "assemblyGenerationAllowed": false,
+    "providerUsed": false,
+    "aiUsed": false,
+    "productionCoveragePromotionAllowed": false
+  },
+  "currentCoverage": {
+    "canonicalNodes": 716,
+    "publishedNodeLocaleRecords": 6,
+    "publishedArticleLocaleRecords": 6,
+    "publishedFragments": 18,
+    "canonicalAssemblies": 16,
+    "pilotNodes": 32
+  },
+  "digest": "08a0f52a74af5df9235d913bd15f691c903aab0b3073077932f5428b81eb81ba"
+}

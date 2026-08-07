@@ -1,0 +1,45 @@
+{
+  "registryCode": "PHI-OS-HDR-STRUCTURE-MAPPING-REGISTRY",
+  "registryVersion": "1.0.0",
+  "work": "CM-W7A",
+  "productionStatus": "validation_only",
+  "sourceMethodCode": "HUMAN_DESIGN",
+  "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+  "expectedCoverage": {
+    "sdu": 64,
+    "scu": 36,
+    "resourceCenters": 9,
+    "processingNetworks": 5,
+    "total": 114
+  },
+  "sourceProjectionSurface": {
+    "GATE": {
+      "path": "projectionValue.activations",
+      "sourceField": "gate",
+      "status": "available"
+    },
+    "CHANNEL": {
+      "path": "projectionValue.channels",
+      "sourceField": "channelCode",
+      "status": "available"
+    },
+    "CENTER": {
+      "paths": [
+        "projectionValue.definedCenters",
+        "projectionValue.undefinedCenters"
+      ],
+      "status": "available"
+    },
+    "PROCESSING_NETWORK": {
+      "status": "missing_canonical_projection",
+      "note": "HDR-W5 does not expose an independent processing-network projection."
+    }
+  },
+  "blockers": [
+    "CANONICAL_MEANING_CODE_REGISTRY_EMPTY",
+    "PROCESSING_NETWORK_CANONICAL_PROJECTION_MISSING",
+    "KNOWLEDGE_AUTHORITY_MAPPING_NOT_POPULATED"
+  ],
+  "mappingCount": 0,
+  "mappings": []
+}
