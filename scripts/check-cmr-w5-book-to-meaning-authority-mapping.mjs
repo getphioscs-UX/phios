@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
+const readJson=async p=>JSON.parse(await fs.readFile(p,'utf8'));
+const sha=async p=>crypto.createHash('sha256').update(await fs.readFile(p)).digest('hex');
+const root='content/professional/canonical-meaning-runtime/';
+const paths={schema:root+'schemas/canonical-meaning-knowledge-map-v1.schema.json',contract:root+'contracts/canonical-meaning-knowledge-map-contract-v1.json',registry:root+'registries/canonical-meaning-knowledge-map-v1.json',freeze:root+'freeze/cmr-w5-freeze-v1.json',code:root+'registries/canonical-meaning-code-registry-v1.json',nodes:'content/knowledge/registry/nodes.json',fragments:'content/knowledge/public/retrieval/fragments.json',assembly:'content/knowledge/intelligence/assembly/canonical-assembly.json',semantic:'content/knowledge/semantic/semantic-runtime-freeze.json'};
+const [schema,contract,registry,freeze,code,nodes,fragments]=await Promise.all([paths.schema,paths.contract,paths.registry,paths.freeze,paths.code,paths.nodes,paths.fragments].map(readJson));
+assert.equal(schema.$schema,'https://json-schema.org/draft/2020-12/schema');assert.equal(contract.work,'CM-W5');assert.equal(contract.productionStatus,'validation_only');
+assert.equal(contract.rules.meaningRegistryStoresArticleBody,false);assert.equal(contract.rules.meaningRegistryRewritesKnowledgeNode,false);assert.equal(contract.rules.knowledgeNodeRemainsKnowledgeAuthority,true);assert.equal(contract.rules.meaningStoresReferencesOnly,true);assert.equal(contract.rules.publishedFragmentTextMayNotBeCopiedIntoMap,true);
+assert.equal(registry.registryCode,'PHI-OS-CANONICAL-MEANING-KNOWLEDGE-MAP');assert.equal(registry.productionStatus,'validation_only');
+assert.equal(registry.sourceSnapshots.knowledgeNodeRegistry.sha256,await sha(paths.nodes));assert.equal(registry.sourceSnapshots.publishedFragmentProjection.sha256,await sha(paths.fragments));assert.equal(registry.sourceSnapshots.canonicalAssembly.sha256,await sha(paths.assembly));
+assert.equal(registry.coverage.registeredMeaningCodeCount,code.meaningCodes.length);assert.equal(registry.coverage.mappedMeaningCodeCount,registry.mappings.length);assert.deepEqual(code.meaningCodes,[]);assert.deepEqual(registry.mappings,[]);assert.equal(registry.coverage.mappingStatus,'awaiting_meaning_code_population');
+const nodeCodes=new Set(nodes.nodes.map(x=>x.nodeCode));const fragCodes=new Set(fragments.records.map(x=>x.fragmentCode));
+for(const m of registry.mappings){assert.equal(code.meaningCodes.some(x=>x.meaningCode===m.meaningCode),true);for(const n of [...m.primaryNodeCodes,...m.supportingNodeCodes])assert.equal(nodeCodes.has(n),true);for(const f of m.publishedFragmentReferences)assert.equal(fragCodes.has(f.fragmentCode),true);assert.equal('articleBody' in m,false);assert.equal('fragmentText' in m,false);}
+assert.equal(freeze.status,'frozen');assert.equal(freeze.work,'CM-W5');for(const o of freeze.outputs)assert.equal(await sha(o),freeze.digests[o],`${o} changed after CM-W5 freeze`);
+assert.equal(await sha(paths.semantic),freeze.protectedDigests.khW4G6SemanticRuntimeFreeze);assert.equal(freeze.invariants.knowledgeNodeRemainsAuthority,true);assert.equal(freeze.invariants.articleBodyStoredInMeaningMap,false);assert.equal(freeze.invariants.methodMappingCreated,false);assert.equal(freeze.invariants.productionAuthorityCreated,false);
+console.log('✓ CM-W5 Book-to-Meaning Authority Mapping passed.');
+console.log('✓ Meaning-to-Knowledge Map is reference-only and preserves Knowledge Node and Published Fragment authority.');
+console.log('✓ Empty mapping is valid until registered Meaning Codes possess PHI OS Definition, Boundary and Knowledge Authority.');
+console.log('✓ KH-W4G.6 Semantic Runtime Freeze remains unchanged.');

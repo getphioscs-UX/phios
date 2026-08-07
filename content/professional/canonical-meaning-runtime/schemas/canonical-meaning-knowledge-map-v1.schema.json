@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-knowledge-map-v1.schema.json",
+  "title": "Canonical Meaning Knowledge Map v1",
+  "type": "object",
+  "required": [
+    "registryCode",
+    "registryVersion",
+    "productionStatus",
+    "authority",
+    "sourceSnapshots",
+    "coverage",
+    "mappings"
+  ],
+  "properties": {
+    "registryCode": {
+      "const": "PHI-OS-CANONICAL-MEANING-KNOWLEDGE-MAP"
+    },
+    "registryVersion": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "productionStatus": {
+      "const": "validation_only"
+    },
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": true
+}

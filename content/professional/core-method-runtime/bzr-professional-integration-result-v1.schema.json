@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/bzr/bzr-professional-integration-result-v1.schema.json",
+  "title": "PHI OS BZR Professional Integration Result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "runtimeCode",
+    "runtimeVersion",
+    "methodCode",
+    "pluginCode",
+    "integrationStatus",
+    "methodEligibilityVersion",
+    "professionalEligibilityContract",
+    "workspaceLineage",
+    "professionalRelease",
+    "parallelProfessionalRuntimeCreated",
+    "sharedProfessionalRuntimeUsed"
+  ],
+  "properties": {
+    "runtimeCode": {
+      "const": "BZR_PROFESSIONAL_INTEGRATION_RUNTIME"
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "methodCode": {
+      "const": "BAZI"
+    },
+    "pluginCode": {
+      "const": "BZR"
+    },
+    "integrationStatus": {
+      "const": "released_through_shared_professional_runtime"
+    },
+    "methodEligibilityVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "professionalEligibilityContract": {
+      "const": "phi-os.professional-eligibility-decision.v1"
+    },
+    "workspaceLineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assignmentId",
+        "consentId",
+        "workspaceId",
+        "boundaryVersion"
+      ],
+      "properties": {
+        "assignmentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "consentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "workspaceId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "boundaryVersion": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "professionalRelease": {
+      "$ref": "../../method-runtime/canonical-professional-release-v1.schema.json"
+    },
+    "parallelProfessionalRuntimeCreated": {
+      "const": false
+    },
+    "sharedProfessionalRuntimeUsed": {
+      "const": true
+    }
+  }
+}
