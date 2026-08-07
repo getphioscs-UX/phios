@@ -1,0 +1,129 @@
+{
+  "auditCode": "CAR-W0-FOUNDATION-AUDIT-v1",
+  "version": "1.0.0",
+  "phase": "PHASE-CAR",
+  "work": "CAR-W0",
+  "status": "audited",
+  "baselineCommit": "f85bf43bf2d3069700008ac2c9f4b0ffab20f47a",
+  "sourceSystems": [
+    {
+      "key": "canonicalMeaningRuntime",
+      "path": "content/professional/canonical-meaning-runtime/freeze/cmr-w0-freeze-v1.json",
+      "exists": true,
+      "sha256": "e142bba8b43d27089424f4d5972a91faff85ac2380ca524c32ba64eb90c818dd"
+    },
+    {
+      "key": "knowledgeSemanticRuntime",
+      "path": "content/knowledge/semantic/semantic-runtime-freeze.json",
+      "exists": true,
+      "sha256": "59cbe5781c3cd383b9f0c90e729567894dc85651d1f42d8c2c756ef717a168f4"
+    },
+    {
+      "key": "canonicalAssembly",
+      "path": "content/knowledge/intelligence/assembly/canonical-assembly.json",
+      "exists": true,
+      "sha256": "109357db05a2c94db72770150e31f0294c8227322402b6333f2c4801a0866cf5"
+    },
+    {
+      "key": "publishedKnowledgeAuthority",
+      "path": "content/knowledge/public/authority/published-knowledge-authority.json",
+      "exists": true,
+      "sha256": "0ad96cefb4083333bcd347c616a01e2cf398196006ccef60d99c958aa2cf660e"
+    },
+    {
+      "key": "articleProductionRuntime",
+      "path": "content/knowledge/production/manifests/production-runtime-manifest.json",
+      "exists": true,
+      "sha256": "6cf199cc7c14902d49fbc281a3a9315d2596e1ac10b7ccdb7215d9df68413e8e"
+    },
+    {
+      "key": "articlePublicationRuntime",
+      "path": "content/knowledge/production/manifests/publication-manifest.json",
+      "exists": true,
+      "sha256": "1ee6fbe076eab51291d2da810f48a9d6c1a1ce85a3b9c5ce7114360169d7a1b5"
+    },
+    {
+      "key": "articleRenderer",
+      "path": "assets/js/knowledge/article-renderer.js",
+      "exists": true,
+      "sha256": "ff90fa6b23b8bf11817afa7101649cf10435941173f5c05cd95382a12bfc645b"
+    },
+    {
+      "key": "publicAssetRegistry",
+      "path": "content/registry/public-assets.json",
+      "exists": true,
+      "sha256": "49b4993a75c19cb3f4dab6baf392da81dbb2eb0e00aa6983681667a471b4a9b0"
+    },
+    {
+      "key": "providerRoutingPolicy",
+      "path": "content/provider/routing/provider-routing-policy-v1.json",
+      "exists": true,
+      "sha256": "f51d258d33a4a2b144a3a837bdd0af6752d85d021dda6c1fdb2efd8ee5dc58b6"
+    },
+    {
+      "key": "providerRoutingRegistry",
+      "path": "content/provider/routing/provider-routing-registry-v1.json",
+      "exists": true,
+      "sha256": "b6a205fa55cb0e15c32cd101e0ec5c1c16b56ff643c24625ff7921cada687db1"
+    },
+    {
+      "key": "pdsBoundary",
+      "path": "content/registry/pds-w0-baseline-boundary.json",
+      "exists": true,
+      "sha256": "db4194ce577162add32e80494805175167f8cbac138715ee887f92661e5b3ee8"
+    },
+    {
+      "key": "pdsDesignTokens",
+      "path": "content/registry/pds-w2-design-token-contract.json",
+      "exists": true,
+      "sha256": "022521975e037b42c84e5eba2613c4c0a0d93acfc57210b363f632e25ac8c782"
+    },
+    {
+      "key": "pdsKnowledgeProfessional",
+      "path": "content/registry/pds-w9-knowledge-professional.json",
+      "exists": true,
+      "sha256": "b45e0b48d55bc650fe3770cda4adcc4843493c8e2187a10f802efbab1eb21390"
+    },
+    {
+      "key": "pdsAcceptance",
+      "path": "content/registry/pds-w10-full-site-acceptance.json",
+      "exists": true,
+      "sha256": "c0e452604366314517d81748996b0b297b3e3cb80347a119cfe422606bf43fbe"
+    }
+  ],
+  "observations": {
+    "canonicalMeaningRuntimePresent": true,
+    "knowledgeSemanticRuntimeFrozen": true,
+    "canonicalAssemblyPresent": true,
+    "publishedFragmentsAuthorityResolvedToPublishedKnowledgeAuthority": true,
+    "articleProductionRuntimePresent": true,
+    "articleRendererPresent": true,
+    "publicAssetRegistryPresent": true,
+    "providerRoutingPresent": true,
+    "pdsPresent": true
+  },
+  "authorityFindings": [
+    {
+      "subject": "PJA",
+      "finding": "existing_authority",
+      "action": "reuse_only"
+    },
+    {
+      "subject": "Published Article Runtime",
+      "finding": "existing_authority",
+      "action": "reference_only"
+    },
+    {
+      "subject": "Provider Routing",
+      "finding": "existing_authority",
+      "action": "reuse_only"
+    },
+    {
+      "subject": "Public Asset Registry",
+      "finding": "storage_and_resolution_registry",
+      "action": "must_not_become_knowledge_authority"
+    }
+  ],
+  "mutations": [],
+  "conclusion": "Canonical Asset Runtime may be introduced as an asset projection authority without rebuilding PJA, Published Article Runtime, Provider Routing, or Knowledge Authority."
+}
