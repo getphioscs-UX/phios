@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/knowledge/canonical-node-proposal-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "proposalCode",
+    "proposedTitle",
+    "proposedMechanism",
+    "proposedBoundary",
+    "sourceSections",
+    "differenceFromExistingNodes",
+    "supportingQuestions",
+    "suggestedBookOwnership",
+    "suggestedPartOwnership",
+    "reasonForCanonicalStatus",
+    "status",
+    "authorityMode"
+  ],
+  "properties": {
+    "proposalCode": {
+      "type": "string"
+    },
+    "proposedTitle": {
+      "type": "string"
+    },
+    "proposedMechanism": {
+      "type": "string"
+    },
+    "proposedBoundary": {
+      "type": "string"
+    },
+    "sourceSections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "differenceFromExistingNodes": {
+      "type": "string"
+    },
+    "supportingQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggestedBookOwnership": {
+      "type": "string"
+    },
+    "suggestedPartOwnership": {
+      "type": "string"
+    },
+    "reasonForCanonicalStatus": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "candidate",
+        "human_review",
+        "accepted",
+        "rejected",
+        "merged",
+        "deferred"
+      ]
+    },
+    "authorityMode": {
+      "const": "proposal_only"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "contractCode": "CMR-MEANING-KNOWLEDGE-QUERY-v1",
+  "contractVersion": "1.0.0",
+  "status": "validation_only",
+  "authority": {
+    "connectionMode": "reference_query_contract",
+    "meaningRegistryMergedWithKnowledgeRegistry": false,
+    "knowledgeRegistryMutated": false
+  },
+  "input": {
+    "required": [
+      "Canonical Meaning Bundle",
+      "Knowledge Node Registry",
+      "Published Semantic Profiles",
+      "Published Knowledge Graph",
+      "Canonical Assembly",
+      "Adaptive Knowledge Projection"
+    ],
+    "forbidden": [
+      "unpublished article body",
+      "private manuscript",
+      "provider output",
+      "professional notes"
+    ]
+  },
+  "flow": [
+    "Canonical Meaning Code",
+    "Knowledge Node References",
+    "Semantic Profile",
+    "Relationship Graph",
+    "Canonical Assembly",
+    "Adaptive Knowledge Projection"
+  ],
+  "output": [
+    "meaningCodes",
+    "knowledge references",
+    "published semantic profiles",
+    "published graph membership",
+    "canonical assemblies",
+    "adaptive projection profile references",
+    "knowledgeCoverage"
+  ],
+  "prohibitions": [
+    "No registry merge",
+    "No Knowledge Authority rewrite",
+    "No unpublished knowledge exposure",
+    "No Provider",
+    "No AI",
+    "No interpretation creation"
+  ]
+}

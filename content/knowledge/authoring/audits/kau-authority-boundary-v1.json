@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "stage": "KAU-W0",
+  "authority": "KAU_AUTHORING_PROPOSAL_ONLY",
+  "allowed": [
+    "read_authoring_sources",
+    "inventory_sections",
+    "create_extraction_candidates",
+    "match_existing_nodes",
+    "create_node_proposals",
+    "map_supporting_questions",
+    "create_section_node_mapping_proposals",
+    "report"
+  ],
+  "forbidden": [
+    "create_canonical_node",
+    "mutate_nodes_registry",
+    "mutate_blueprint_registry",
+    "approve_knowledge",
+    "write_article_candidate",
+    "approve_article",
+    "publish_article",
+    "promote_publication_state"
+  ],
+  "identityRules": [
+    "PAGE_NE_NODE",
+    "SECTION_NE_NODE",
+    "QUESTION_NE_NODE",
+    "ARTICLE_NE_NODE",
+    "AUTHORING_NE_AUTHORITY"
+  ]
+}
