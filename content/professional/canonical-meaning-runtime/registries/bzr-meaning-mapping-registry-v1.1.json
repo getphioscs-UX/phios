@@ -1,0 +1,1180 @@
+{
+  "registryCode": "PHI-OS-BZR-MEANING-MAPPING-REGISTRY",
+  "registryVersion": "1.1.0",
+  "work": "CM-W9",
+  "productionStatus": "validation_only",
+  "sourceMethodCode": "BAZI",
+  "sourcePluginCode": "BZR",
+  "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+  "sourceProjectionSurface": {
+    "STEM": {
+      "path": "projectionValue.stems",
+      "sourceField": "stemCode",
+      "status": "available",
+      "semanticTarget": "ACTIVATION_QUALITY"
+    },
+    "BRANCH": {
+      "path": "projectionValue.branches",
+      "sourceField": "branchCode",
+      "status": "available",
+      "semanticTarget": "CARRIER_CONTEXT"
+    },
+    "PILLAR": {
+      "path": "projectionValue.pillars",
+      "sourceFields": [
+        "pillarType",
+        "stemCode",
+        "branchCode",
+        "sexagenaryIndex"
+      ],
+      "status": "available",
+      "semanticTarget": "TEMPORAL_STRUCTURAL_POSITION"
+    },
+    "LUCK_CYCLE": {
+      "path": "projectionValue",
+      "sourceFields": [
+        "direction",
+        "startAge",
+        "cycles"
+      ],
+      "status": "available",
+      "semanticTarget": "RUNTIME_PHASE_CONTEXT"
+    }
+  },
+  "targetNamespaces": [
+    "CM-ACTIVATION-QUALITY",
+    "CM-CARRIER-CONTEXT",
+    "CM-TEMPORAL-POSITION",
+    "CM-RUNTIME-PHASE"
+  ],
+  "blockers": [],
+  "mappingCount": 29,
+  "mappings": [
+    {
+      "mappingCode": "MAP-BZR-STEM-JIA-TO-AQ01",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "JIA"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ01",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "c344e89c55cbb26f6d528572d50f7e1e51ed86ff3ddc0b7b4adac2a12109d038"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-YI-TO-AQ02",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "YI"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ02",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "8a821142951c30cea80ba7e61abf2cc4110a385ca50a4c1b44baff9381ea297f"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-BING-TO-AQ03",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "BING"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ03",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "055e82fc7ed8b53050653d7aaf23d54cb8512630e6cf882023ea372cd8c12503"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-DING-TO-AQ04",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "DING"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ04",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "3f9cda83b8741e68112c4e8e49b481dd0a6dedea02b30e1ce65fbdf573706b88"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-WU-TO-AQ05",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "WU"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ05",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "47df525eee323119e5a2ec8954f857c990465bff634bd640206947f2c503d4e1"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-JI-TO-AQ06",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "JI"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ06",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "34e91514e392ad92c4e56614eb61d28b12a4a8a14e1be48c5cf0575b77e0bb1d"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-GENG-TO-AQ07",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "GENG"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ07",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "591974186576d97c26b512aead4ee8e1b6178bc44031dca0ee4e039fee697c3d"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-XIN-TO-AQ08",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "XIN"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ08",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "d03d0198744f18962cd8221e9d2fe1f8059db7de81d74790df9f0715e746418e"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-REN-TO-AQ09",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "REN"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ09",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "5661f64b80c61de0891079279e2790b182bc62e3acc9651873b4a0099bec178f"
+    },
+    {
+      "mappingCode": "MAP-BZR-STEM-GUI-TO-AQ10",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "STEM",
+      "sourceProjectionValue": {
+        "path": "projectionValue.stems",
+        "field": "stemCode",
+        "operator": "contains",
+        "value": "GUI"
+      },
+      "meaningCode": "CM-ACTIVATION-QUALITY-AQ10",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "ef22e772da0f853cdd6c5b07879674f0895d81578740f814057f77271348e97c"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-ZI-TO-CC01",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "ZI"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC01",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "a640c3a50f976f6db9c494b08923845dcd0a77b38023e92234d4d38412e2a3ab"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-CHOU-TO-CC02",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "CHOU"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC02",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "5b133ce70e176c4cb424851d00330991036507f89004793408b8602dfb1505bc"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-YIN-TO-CC03",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "YIN"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC03",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "4a594729f01c746ebbc1757b5fa50811b6078e20865b7f4d47703e1ce1a2e35a"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-MAO-TO-CC04",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "MAO"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC04",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "105f248168460616f4013233914c9c9340946fe0d5fec12a30c5e51a7026431a"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-CHEN-TO-CC05",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "CHEN"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC05",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "08667161430447f71c7185eb4ea6dc478ccec482c2a5dfe3041b4236e655cd2c"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-SI-TO-CC06",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "SI"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC06",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "739da92aba005fe6d5c9e92505ed63beb684953d37d6b78a32a9c5fb426effa7"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-WU-TO-CC07",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "WU"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC07",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "c1457d92aa016b51da90b91e538cd8d5459a1511d674d0bcfcc8270a8e7f58cf"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-WEI-TO-CC08",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "WEI"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC08",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "63762a5c70ce1cde74b5ebbb203950e274e57a31d2e9acbaf8cb924efbf1ef90"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-SHEN-TO-CC09",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "SHEN"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC09",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "110d5daa00abf0c21e75c7039e3fb4791544ed80729e81f2633360e7ed46c4de"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-YOU-TO-CC10",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "YOU"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC10",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "e22756304d929b862d3af7912572772043135ecb1e9e90685527daa5da050464"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-XU-TO-CC11",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "XU"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC11",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "a1d1f9f6855f7ffd26d206ce1854266abe84583bfe5b38795ddb751cb6050ecd"
+    },
+    {
+      "mappingCode": "MAP-BZR-BRANCH-HAI-TO-CC12",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "BRANCH",
+      "sourceProjectionValue": {
+        "path": "projectionValue.branches",
+        "field": "branchCode",
+        "operator": "contains",
+        "value": "HAI"
+      },
+      "meaningCode": "CM-CARRIER-CONTEXT-CC12",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "4fe85fe4145e15b9b773e1d68094829b36b12ab54670e80ad9e7553fdfc5e572"
+    },
+    {
+      "mappingCode": "MAP-BZR-PILLAR-YEAR-TO-TP01",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "PILLAR",
+      "sourceProjectionValue": {
+        "path": "projectionValue.pillars",
+        "field": "pillarType",
+        "operator": "contains",
+        "value": "YEAR"
+      },
+      "meaningCode": "CM-TEMPORAL-POSITION-TP01",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "6eecda4f26789d72ff665d4165b1aa3a7711c961df394f9982cdd44dc3cde002"
+    },
+    {
+      "mappingCode": "MAP-BZR-PILLAR-MONTH-TO-TP02",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "PILLAR",
+      "sourceProjectionValue": {
+        "path": "projectionValue.pillars",
+        "field": "pillarType",
+        "operator": "contains",
+        "value": "MONTH"
+      },
+      "meaningCode": "CM-TEMPORAL-POSITION-TP02",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "402ccfd71dd098112bf21d811f2be2e0715e437064222a91b8a6866f2c60b829"
+    },
+    {
+      "mappingCode": "MAP-BZR-PILLAR-DAY-TO-TP03",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "PILLAR",
+      "sourceProjectionValue": {
+        "path": "projectionValue.pillars",
+        "field": "pillarType",
+        "operator": "contains",
+        "value": "DAY"
+      },
+      "meaningCode": "CM-TEMPORAL-POSITION-TP03",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "aaadf5be0e484293d76f2567917b4893c9f1f2c380d71ed01cfceb1ece58b6ad"
+    },
+    {
+      "mappingCode": "MAP-BZR-PILLAR-HOUR-TO-TP04",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "PILLAR",
+      "sourceProjectionValue": {
+        "path": "projectionValue.pillars",
+        "field": "pillarType",
+        "operator": "contains",
+        "value": "HOUR"
+      },
+      "meaningCode": "CM-TEMPORAL-POSITION-TP04",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "ca1150521f46fa717fd2d2e49a905609d6e4e2499a7d4e96de3957a5c694cdb9"
+    },
+    {
+      "mappingCode": "MAP-BZR-LUCK-CYCLE-SEQUENCE-TO-RP01",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "LUCK_CYCLE",
+      "sourceProjectionValue": {
+        "path": "projectionValue.cycles",
+        "operator": "exists_nonempty"
+      },
+      "meaningCode": "CM-RUNTIME-PHASE-RP01",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "14c6320eda0e24329e117f73ab1aa2168b9d5c2594d7a3ed26ea9d2937fe00c9"
+    },
+    {
+      "mappingCode": "MAP-BZR-LUCK-CYCLE-FORWARD-TO-RP02",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "LUCK_CYCLE",
+      "sourceProjectionValue": {
+        "path": "projectionValue.direction",
+        "operator": "equals",
+        "value": "FORWARD"
+      },
+      "meaningCode": "CM-RUNTIME-PHASE-RP02",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "9c757d5f9e14b4da469c4dd47e3cd7a32fff05fec14709c18e3eaa1b6fcd8f7b"
+    },
+    {
+      "mappingCode": "MAP-BZR-LUCK-CYCLE-BACKWARD-TO-RP03",
+      "sourceMethod": "BAZI",
+      "sourceMethodCode": "BAZI",
+      "sourcePluginCode": "BZR",
+      "sourceProjectionType": "LUCK_CYCLE",
+      "sourceProjectionValue": {
+        "path": "projectionValue.direction",
+        "operator": "equals",
+        "value": "BACKWARD"
+      },
+      "meaningCode": "CM-RUNTIME-PHASE-RP03",
+      "mappingVersion": "1.0.0",
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "structural_correspondence",
+      "boundary": "validation_only",
+      "sourceProjectionLineage": {
+        "required": true,
+        "requiredFields": [
+          "calculationId",
+          "calculationRuntimeCode",
+          "calculationRuntimeVersion",
+          "methodCode",
+          "pluginCode",
+          "algorithmCode",
+          "algorithmVersion",
+          "inputDigest",
+          "outputDigest"
+        ],
+        "sourceMayBeMerged": false
+      },
+      "createsInterpretation": false,
+      "createsKnowledge": false,
+      "createsRealityConclusion": false,
+      "createsProfessionalConclusion": false,
+      "mappingDigest": "81a736c1e3aa31ee78cea68ff3f1a5b3927dc58e2a50e59c5e4fe5b4df59e53d"
+    }
+  ],
+  "foundationRegistryVersion": "1.0.0",
+  "meaningPopulationModel": "neutral_phi_os_semantic_slots",
+  "coverage": {
+    "STEM": {
+      "expected": 10,
+      "mapped": 10
+    },
+    "BRANCH": {
+      "expected": 12,
+      "mapped": 12
+    },
+    "PILLAR": {
+      "expected": 4,
+      "mapped": 4
+    },
+    "LUCK_CYCLE": {
+      "expectedContexts": 3,
+      "mapped": 3
+    }
+  },
+  "invariants": {
+    "traditionalBaZiInterpretationStored": false,
+    "tenGodsCreated": false,
+    "usefulGodCreated": false,
+    "fortunePredictionCreated": false,
+    "identityFactCreated": false,
+    "mappingTargetIsPhiOSMeaning": true
+  }
+}

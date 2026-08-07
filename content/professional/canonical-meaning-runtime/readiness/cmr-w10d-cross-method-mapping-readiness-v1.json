@@ -1,0 +1,26 @@
+{
+  "reportCode": "CMR-W10-CROSS-METHOD-MAPPING-READINESS",
+  "reportVersion": "1.0.0",
+  "work": "CM-W10",
+  "baselineCommit": "4c3691f828b088ef6285e7551f15fae3e7133ca0",
+  "status": "ready_for_canonical_meaning_runtime",
+  "ready_for_canonical_meaning_runtime": true,
+  "checks": {
+    "hdrStructureMappingAvailable": true,
+    "hdrProfileSharedMeaningMappingAvailable": true,
+    "astMappingFoundationAvailable": true,
+    "astActualMappingPopulationAvailable": false,
+    "bzrMappingAvailable": true,
+    "numMappingAvailable": true,
+    "meaningIdentityCompleteForPopulatedMappings": true,
+    "knowledgeAuthorityCompleteForPopulatedMappings": true,
+    "boundaryCompleteForPopulatedMappings": true,
+    "sourceLineageIndependent": true
+  },
+  "runtimeRequirement": {
+    "unmappedProjectionMustBecomeUnresolved": true,
+    "astMustNotBeFabricated": true,
+    "missingMappingMustFailClosedOrReturnUnresolved": true
+  },
+  "nextStage": "CM-W11"
+}
