@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/meaning-identity-v1.schema.json",
+  "title": "PHI OS Meaning Identity v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meaningIdentityVersion",
+    "meaningId",
+    "meaningCode",
+    "meaningVersion",
+    "semanticHash",
+    "knowledgeHash",
+    "mappingHash",
+    "meaningCanonicalDigest",
+    "compatibility",
+    "lifecycle",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "meaningIdentityVersion": { "const": "1.0.0" },
+    "meaningId": { "type": "string", "pattern": "^CMID-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+    "meaningCode": { "type": "string", "pattern": "^CM-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
+    "meaningVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "semanticHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "knowledgeHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "mappingHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "meaningCanonicalDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backwardCompatible", "compatibilityBasis", "migrationRequired"],
+      "properties": {
+        "backwardCompatible": { "type": "boolean" },
+        "compatibilityBasis": {
+          "type": "string",
+          "enum": ["initial_version", "semantic_compatible", "knowledge_only_change", "mapping_only_change", "metadata_only_change", "breaking_semantic_change"]
+        },
+        "migrationRequired": { "type": "boolean" },
+        "compatibleFromVersions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "deprecated", "successorMeaningId"],
+      "properties": {
+        "status": { "type": "string", "enum": ["draft", "validation_only", "deprecated"] },
+        "deprecated": { "type": "boolean" },
+        "deprecatedAt": { "type": ["string", "null"], "format": "date-time" },
+        "deprecatedReason": { "type": ["string", "null"], "minLength": 1 },
+        "successorMeaningId": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^CMID-[A-Z0-9]+(?:-[A-Z0-9]+)*$" }
+          ]
+        }
+      }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "lifecycle": { "properties": { "deprecated": { "const": true } } } } },
+      "then": {
+        "properties": {
+          "lifecycle": {
+            "required": ["deprecatedAt", "deprecatedReason"],
+            "properties": { "status": { "const": "deprecated" } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "compatibility": { "properties": { "backwardCompatible": { "const": false } } } } },
+      "then": { "properties": { "compatibility": { "properties": { "migrationRequired": { "const": true } } } } }
+    }
+  ]
+}
