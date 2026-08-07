@@ -1,6 +1,6 @@
 {
   "registryCode": "PHI-OS-HDR-STRUCTURE-MAPPING-REGISTRY",
-  "registryVersion": "1.0.0",
+  "registryVersion": "1.1.0",
   "work": "CM-W7A",
   "productionStatus": "validation_only",
   "sourceMethodCode": "HUMAN_DESIGN",
@@ -36,10 +36,2518 @@
     }
   },
   "blockers": [
-    "CANONICAL_MEANING_CODE_REGISTRY_EMPTY",
-    "PROCESSING_NETWORK_CANONICAL_PROJECTION_MISSING",
-    "KNOWLEDGE_AUTHORITY_MAPPING_NOT_POPULATED"
+    "RESOURCE_CENTER_DIRECT_MAPPING_REJECTED_NON_ONE_TO_ONE",
+    "PROCESSING_NETWORK_CANONICAL_PROJECTION_SUCCESSOR_REQUIRED"
   ],
-  "mappingCount": 0,
-  "mappings": []
+  "mappingCount": 100,
+  "mappings": [
+    {
+      "mappingId": "MAPID-HDR-GATE-01",
+      "mappingCode": "MAP-HDR-GATE-01-TO-SDU-01",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 1
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-01"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "b899b8937d88eda719bbf75c4782637519a4c80d8b6d9e69be43db28c14c8072",
+      "targetMeaningHash": "7be3c82a28bf78008bae5ce4e3355a48c15d543dfa8b011c94a6f34b1e84297c",
+      "mappingDigest": "cca0f7f3bd85bef0fd228ee7ecbc54ef8337c91cb33cbe802bbf83f743a9cad5"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-02",
+      "mappingCode": "MAP-HDR-GATE-02-TO-SDU-02",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 2
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-02"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "55e849770fd8512415a45ec976a61d53f1930e91b63a1e36543aaf0cf5caccd1",
+      "targetMeaningHash": "07a85b1e30fbf2e5ced7bf17dce2eb0787e2bd738b59d6c74890ad1acd707aa8",
+      "mappingDigest": "c47905aac162a2d3367469b2a2682b76e5e1914c7a545864bf74063acf2a1798"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-03",
+      "mappingCode": "MAP-HDR-GATE-03-TO-SDU-03",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 3
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-03"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "2efb2cfc87c525ffb0ec5f9d2b10f3d6e920ec20bf2ec3d72a1db3b15b1bf7e4",
+      "targetMeaningHash": "509987c78b8ad46038c7b98b91cbadaf5301c076a0bab972feb5b28331730c1f",
+      "mappingDigest": "2244eab2c9196fb5520cddfb1e7c89d9201fab7456c248f8ea85654350a37279"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-04",
+      "mappingCode": "MAP-HDR-GATE-04-TO-SDU-04",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 4
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-04"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "2bad8b1f933a5b90bae3a0cbeb4796cc9d1fd506e822b9c9fc76887a3e1bbe80",
+      "targetMeaningHash": "daf32d0236c593d02b8c3874ec9917fc5d21dc15f86fdb500cf1de41655c9a2a",
+      "mappingDigest": "9e7d960dfe331b12a038ce36942f0ccd6502d4baf87a84db8ee7fe4dfd40abdd"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-05",
+      "mappingCode": "MAP-HDR-GATE-05-TO-SDU-05",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 5
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-05"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "abbc20014b8b1896f98fffb98b53b5c62bf7cd9671f22b3c8337c7730dae96c4",
+      "targetMeaningHash": "5623e8307d3479910e96cc6a581dde4fb7323f698c64dd9ff8f4088ce2f142a4",
+      "mappingDigest": "1b2bf8702e5956cc028acaa9ec2714b9644780616dc32bb4735d3d9fd01dd8f4"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-06",
+      "mappingCode": "MAP-HDR-GATE-06-TO-SDU-06",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 6
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-06"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "9917d6262403a3eea6667f556e59f8e8ddeeefc29c7ffd14ee9daf782aec4353",
+      "targetMeaningHash": "e6b7f45aed7ec3b173040bc6706676d11bcc8981ff4ae2667889e8eb7b8319db",
+      "mappingDigest": "aa5869dbdfe58e42a468800b7137e4a3445564d6afc4736b1a61668734f288e6"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-07",
+      "mappingCode": "MAP-HDR-GATE-07-TO-SDU-07",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 7
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-07"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "fbd37bbe01c5d5c06424d12fed92b2b0f3e55e96261d003c49c68bf89423f6a3",
+      "targetMeaningHash": "4c4839f90686c1724874902758e494ac3febaba3dc90ef0587117a78c2bbadde",
+      "mappingDigest": "ddea83acef2567071600bd659a57c77dc1ebe2f3c38475c1513babcebe8ebbc9"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-08",
+      "mappingCode": "MAP-HDR-GATE-08-TO-SDU-08",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 8
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-08"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "6ba8b30474147ba3687113ace92174f084e5333a6415e34be6d57361b7a08e46",
+      "targetMeaningHash": "107959cd67601462e7ef075f050699cf9876c863cb5e4238d55ba3933f2924d3",
+      "mappingDigest": "83ee1b411cbec51294c1afaf5953c4309845930b93c877e2430d61b2bda08d33"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-09",
+      "mappingCode": "MAP-HDR-GATE-09-TO-SDU-09",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 9
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-09"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "cba3a5ade21098c25491543803bed8b90f05031ce45ec30ee215609a3658bab9",
+      "targetMeaningHash": "373e914ce721566f8e586a8d232b2ee04d484e80ea6c4b27a91c25f98c2c763d",
+      "mappingDigest": "ac91fa2802ca1ce742c4ff341e0f808d4481c51183f904e73beca039cdb7fd75"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-10",
+      "mappingCode": "MAP-HDR-GATE-10-TO-SDU-10",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 10
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-10"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "ef063ce6e0cebc7f344fd4ce6d7c2a15c4a4d9286a0a0e8b2ed53ba74d351be1",
+      "targetMeaningHash": "03dd04414b5a90316c97aaa2e3ead76cffcd57161f6062ab0ceea739836329b2",
+      "mappingDigest": "9531df8590b7326d4a8ee08f242762fdd7030e0d25f154485dd3faf486402b85"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-11",
+      "mappingCode": "MAP-HDR-GATE-11-TO-SDU-11",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 11
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-11"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "e7925561de3296c2d5bc60c1f4bd6ecd0dd14e49e083a1f728be9101ec30753d",
+      "targetMeaningHash": "8091b77fab2cb0193908e43c3082fb724c9986bfaae6078820d006bd8355f9ab",
+      "mappingDigest": "161e008682039177eaaf26e8847e18857503384e43fd6658fe0067b14737324c"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-12",
+      "mappingCode": "MAP-HDR-GATE-12-TO-SDU-12",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 12
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-12"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "e090347bf307ab441e6da42fe233208dd188ea25b93eddb678dce4f6c2100d11",
+      "targetMeaningHash": "cce1124fd70dddf10c54a17e9f1a18ec5e31a8b040e122a376467e4effa5cc2f",
+      "mappingDigest": "0817227408b3ec34eb56196a43ae6408b7c49c957f412fdb37a98c78b30cc45d"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-13",
+      "mappingCode": "MAP-HDR-GATE-13-TO-SDU-13",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 13
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-13"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "b696604bf0ddf9c794470d02193a566243ae727b4eba59a811ca6afabf4d2416",
+      "targetMeaningHash": "89bd5ea55fc9e01640c431bf9cb4fcd5afe0f76c45caef2998a0a8f6cd62edc1",
+      "mappingDigest": "cfa1b47dfb7330ea7720f4ac360214f70231f9ebea0e39a9291e38e67781ede8"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-14",
+      "mappingCode": "MAP-HDR-GATE-14-TO-SDU-14",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 14
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-14"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "cd4b435bdc3bd999bc5aa88817d92a6f79b7f898f93fc147ef7ed2972e68dd2f",
+      "targetMeaningHash": "1a3ec77013678c85fa9cb70696df7b3a8db61f3dde9fca17ce4e5f6774a57cfd",
+      "mappingDigest": "d5b5a1398ca36d93935d025c70a4db1935fad6a8de4125175a16285eeb670f6b"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-15",
+      "mappingCode": "MAP-HDR-GATE-15-TO-SDU-15",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 15
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-15"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "9c8a2b019c81517be17fddabea88a6210fae470cbe4b3e0917bc25b66d61d134",
+      "targetMeaningHash": "9bfdadb9519e8f6f3c83cd0815aaa661865bdbe4b2f6766358553c6b08a3f1b6",
+      "mappingDigest": "0476b27a2646eaa5d30316ced98311baee240c935a31ebd54de6a516eb640f47"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-16",
+      "mappingCode": "MAP-HDR-GATE-16-TO-SDU-16",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 16
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-16"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "fcd34e7747ccae7efd5eac81154a6e52b996dd71d55288bcde9b262e3b3a2d1b",
+      "targetMeaningHash": "742c4d647467eb58be9f046dbd4fca85a7a895067df96f971a32da2eb81953c0",
+      "mappingDigest": "b5ef4b6d40b96362f8855eee8586b826f7f25a9664a2e38a4e65242b3a52e4c0"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-17",
+      "mappingCode": "MAP-HDR-GATE-17-TO-SDU-17",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 17
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-17"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "4e9eb6ed061c6bd4423ed43cbd8a9bfffd83f34c587eaa3f4c63e3c420574567",
+      "targetMeaningHash": "806b3833e4662aebc2114e93b0470de117830f7689f5fa017c35024926f595f0",
+      "mappingDigest": "31ab39123f1a28902090df1d2bd37b6dcf9b49c8b10386b49f571fc7a9420312"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-18",
+      "mappingCode": "MAP-HDR-GATE-18-TO-SDU-18",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 18
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-18"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "6f60659b6345d01ae050b24dc02bac6a60fd3c51c1e4a10c992d2c968384f87e",
+      "targetMeaningHash": "783a6e93b140aa4fc5575f6f947d52f5a5132090017d593d17b00597504d0bfe",
+      "mappingDigest": "e81eda12f5668c844e68cceb44a02110b6db6eb0bf7ef7368f4d3baaea0949f9"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-19",
+      "mappingCode": "MAP-HDR-GATE-19-TO-SDU-19",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 19
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-19"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "479a34b01d4fb0b22790f48a51272197c51b4d4c1b89d722069bc3b481296b25",
+      "targetMeaningHash": "fa047ad3ee5bd52c48644c2f97af1e53b6da57ae999b4f800959aeded1ac9e34",
+      "mappingDigest": "a1238fbd448618d25285dcfda5c1c359ef793fee28c3c9a6065eaa030d1566ba"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-20",
+      "mappingCode": "MAP-HDR-GATE-20-TO-SDU-20",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 20
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-20"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "d43ba49e0273e9abd57251ec3a0e4fcaf723310b24ad347ec1fd866802b5f40f",
+      "targetMeaningHash": "77b0822e1b666f91530778304ca00a8835d70de68ce87b454bec8954ecbf430d",
+      "mappingDigest": "f94e19dbf0b04c210f1e501030e19e467342efa6e53d6e123f5f22f80cb39c78"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-21",
+      "mappingCode": "MAP-HDR-GATE-21-TO-SDU-21",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 21
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-21"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "01411a86c5643bf4bdcaabe2d0283a0b0a497e53638c5cc63c153d34da1b6fe0",
+      "targetMeaningHash": "415f258c7f6fc6393abcafc21d083a890c5f0b86363a56767c28db4a4905dbde",
+      "mappingDigest": "83ab64b2389cc3c2037cf85f04506664b2c1776b088de9abac22d98a669a78b0"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-22",
+      "mappingCode": "MAP-HDR-GATE-22-TO-SDU-22",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 22
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-22"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "671b5cc05bc5dfc04ab3bbebc411ccf5cf1e64af6f66b1e0e99be7438fb2040a",
+      "targetMeaningHash": "1aac85c9ebfb3a9e5fcbecb1de8b615069387705fd26ccb4c75b88efb047a38f",
+      "mappingDigest": "bae45523b5eb009f170efbf3c47c9378866d774e93b5a24aeea1c5ae63e90abd"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-23",
+      "mappingCode": "MAP-HDR-GATE-23-TO-SDU-23",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 23
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-23"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "823ae0d399b84af137a2fbba4349f4a9730935a7e9f905459ab6c3d36ba83629",
+      "targetMeaningHash": "6b62562e2a34fec5d206ec0b544408f95212a6a97d0fb316d98f8bb7407c52d8",
+      "mappingDigest": "37b8c741b8b3395dd09b686de9283882167e01502075bc9d5eae4a5e5dea7e99"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-24",
+      "mappingCode": "MAP-HDR-GATE-24-TO-SDU-24",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 24
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-24"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "0c58749c2f3a86ffc2c4631c1c93006d44e1110a7d843236043e709e8f893c04",
+      "targetMeaningHash": "472a0ef61428a561978f7c0289549e4549e29c1c4f2a06cb25dddbcd89020ddf",
+      "mappingDigest": "91be599bc5cda04a6b74593962cd6c6babe6255cf1d8d23b7fc02c2a42e4549d"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-25",
+      "mappingCode": "MAP-HDR-GATE-25-TO-SDU-25",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 25
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-25"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "067996e555d78b250569aeffce9ccb5c824100c6f5ceda09ee27af2fdf71368a",
+      "targetMeaningHash": "d52691728d912c5831139ef2904fabce35e87caf4d7a2f3c32dc7123042ed1d7",
+      "mappingDigest": "fc70209b9eaf207e5055c29b38a16300426355ba4b2cfbc8a1dff1f33e7939f0"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-26",
+      "mappingCode": "MAP-HDR-GATE-26-TO-SDU-26",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 26
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-26"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "bd6791bd10de325019b406bda6224447af1bbc7a4ed8af21d3091fccdb06451c",
+      "targetMeaningHash": "d11cae3ebb0f80b5e3c5b07e3cd7687337cd1037b24485b5a4bd12ca654d4b7e",
+      "mappingDigest": "a2582423bd9cbb34955c4b8b33276b03c78585d9ee5a6ff9ce360a8baa80134a"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-27",
+      "mappingCode": "MAP-HDR-GATE-27-TO-SDU-27",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 27
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-27"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "1313340bc921f12c8f90448c9ad984585b88cb7c617bc666e00e42507e8474b1",
+      "targetMeaningHash": "51c7d89c52118f9c9490e3c8bdc2295c2b0c67d7757076e831e98bdc8255f065",
+      "mappingDigest": "1d64677fa8d245a03996b097afe3f6657caa94e1a2ede84e2948ff37297c92fd"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-28",
+      "mappingCode": "MAP-HDR-GATE-28-TO-SDU-28",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 28
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-28"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "e82a36ca9890199e9c2099204a09957ce7608e968a436ebaa5ba2f9d361ce2c2",
+      "targetMeaningHash": "b0bdd658d9ab9c9d935126d0cba989fa313eab0f69c9096b261c2fd52d1c9bfc",
+      "mappingDigest": "d5bd660c94362aa4399b47a8a5821db6e61745992bd93088a0a9edd2b49ea33a"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-29",
+      "mappingCode": "MAP-HDR-GATE-29-TO-SDU-29",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 29
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-29"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "8afcb1b3f05483f7cf05aa52bdf37252e5ab99403ce32d32d843374aa1a185cf",
+      "targetMeaningHash": "ae9ad4265c9bef63c09dfac57186ac23cdfdc0eaf06f0ce523dc4f6e3cf96420",
+      "mappingDigest": "685d9a260417712dfdf76219fdf17fcc3001715f5fd437b116948a73c80be87e"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-30",
+      "mappingCode": "MAP-HDR-GATE-30-TO-SDU-30",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 30
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-30"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "eea310f8e178d8c16f25392c6a21c0d3c6186dfc65337874dd10d9054bc7859f",
+      "targetMeaningHash": "19bf1a1fd8ed165174c91bc30850ed8da4b22db26aa07418943ad6f7f45a1b3d",
+      "mappingDigest": "cff5f11864701224e9f7b89b2c5f1819f18906b635ae974feb162a2d326a3c91"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-31",
+      "mappingCode": "MAP-HDR-GATE-31-TO-SDU-31",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 31
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-31"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "a8110e0e300e57a1a58bddfb527cb792713934e72a2a1e2caf927351b7e536a5",
+      "targetMeaningHash": "77744e6e181dd8d1a5fd907ac8062231ad1842b67bc65c4060ca874eb78cbe84",
+      "mappingDigest": "232b388dd6efb98a5c31c8a34ecd0a021f075a76e53d14e0e1af9a67d7dc6814"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-32",
+      "mappingCode": "MAP-HDR-GATE-32-TO-SDU-32",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 32
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-32"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "d2280ca7d5bd40bc04a9f50a94e2e447dd8e3299ee8fb92321645462a1030467",
+      "targetMeaningHash": "6789427c7090275a870f84469d98f8172ccdf80f6e7fe887222e06702b251dc2",
+      "mappingDigest": "07f1319974e8853843d3eb554201300a17776fa3788cdbe995bdb015e983e2bd"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-33",
+      "mappingCode": "MAP-HDR-GATE-33-TO-SDU-33",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 33
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-33"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "43fbc84a70ab4dc31836f6639efb38833cd87346b22c53aac29f8ab00e416de5",
+      "targetMeaningHash": "bfab3153e7bc0ad68dcb8ebe7e536dce8ff9809b32a6d1ecc4ef0b56028b8090",
+      "mappingDigest": "4c2bea59761a75df9696dffffe410cf309c25dc6a52e361278acd20c40938b5f"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-34",
+      "mappingCode": "MAP-HDR-GATE-34-TO-SDU-34",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 34
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-34"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "1cc6a272bf3e24cc3c2dba5cbd0a51c83577649b7f828bf54a8f549e6d6efcc0",
+      "targetMeaningHash": "7675bd959a02adfc2796b5b21315ca445da25413a02438a937ea6dcb2be79042",
+      "mappingDigest": "c9639960c1a464d2f0a293a44601ce3950fe8fd5fa0dfbb0864af0a71c2378a0"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-35",
+      "mappingCode": "MAP-HDR-GATE-35-TO-SDU-35",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 35
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-35"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "c9b440b48871c302ea7e22d78c0973c1c71c1031743221d05627a415faee56b5",
+      "targetMeaningHash": "5b156a70748debf55870cf3910945c6ca83107548148c99af7af56b6ec5f00c6",
+      "mappingDigest": "cc4da3dee02e59e0e7da52f60da8cd1b18c1c73428229b0bad69fc0b7d6d86f4"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-36",
+      "mappingCode": "MAP-HDR-GATE-36-TO-SDU-36",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 36
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-36"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "e8299b4e1af23a7dc0143f018c0486fb64c29f3f159011089d79a7319626333a",
+      "targetMeaningHash": "a4c8526781573b721a6ec7dbaa5f7641b91122ecd78deff7fb3a0eaec80b5a06",
+      "mappingDigest": "d5cdc2f654166cff28b81dffb2e9aecc9cf29e1ad6eff71fe3ea64cfd68edac4"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-37",
+      "mappingCode": "MAP-HDR-GATE-37-TO-SDU-37",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 37
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-37"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "f0edc70b39281a90924ceb57d5d3f0fb6e9190b781d83797678c3792a33611f6",
+      "targetMeaningHash": "8794a9d5324218b86b61eb97d431f0f45b8771e55b703a2ec8ae2071861db09c",
+      "mappingDigest": "868378f9ecf81aa53ab25665f450df51e90ceb8a1e01a4c3f9e5f92885142fed"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-38",
+      "mappingCode": "MAP-HDR-GATE-38-TO-SDU-38",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 38
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-38"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "060aed128b1c167adbc45f2be0e0fb447dc5172a91d13b43b599909e3c4e25fb",
+      "targetMeaningHash": "e7c5b922a2f48707b1d9662b0c50322a506f6dcfaed164874a04d5920216b87a",
+      "mappingDigest": "a161a653ea35ae531ac58a4e3e3f361e520ffc0913096cf9b9234ca7687567c5"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-39",
+      "mappingCode": "MAP-HDR-GATE-39-TO-SDU-39",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 39
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-39"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "0e9654174443a955cabd39a6a6df057e531e80207d8e192dc816dfc1ef997b6f",
+      "targetMeaningHash": "7411dff099d7d81e34ee74c74705bcaa754bc4b2c579ab95379baf4ffefe3788",
+      "mappingDigest": "53734061320c45b82b0d9edaee21bb933fdf305d0a595d929ad2b155dfce9978"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-40",
+      "mappingCode": "MAP-HDR-GATE-40-TO-SDU-40",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 40
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-40"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "c36a368776fb0c6071d1e9ed63c4fd8b3d79c4c8771112cbd20b6192bd6eb6ee",
+      "targetMeaningHash": "abde5282ddc095dc69c50e74dddc0d01de68e5a6c197b9eb1e6b1972747b6b17",
+      "mappingDigest": "f5fe9f5f7e9ae12384e4ad9b3b824581a6ac4e7792cbec0d25def9df0e239e0a"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-41",
+      "mappingCode": "MAP-HDR-GATE-41-TO-SDU-41",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 41
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-41"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "c741c1ee4fa679d7bbea98987ff2810510af4f1ba069fb88738a9149c7212c9f",
+      "targetMeaningHash": "e4ccdc439b8956329f5baec1239eca35bee916f01ed973101f525ab34a7ac414",
+      "mappingDigest": "fc2a39c1a4526912217d504fcce0183090eb3c967adec0b03659109fc7a2a6fd"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-42",
+      "mappingCode": "MAP-HDR-GATE-42-TO-SDU-42",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 42
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-42"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "5356851678337733ace6c0ce1502c205efba2dd954c9752a47f63759a1e5bd14",
+      "targetMeaningHash": "2bb36ec93199e3009ced2817a26b64a245a90b6d1f4de3cf2c797a3ba9bbb683",
+      "mappingDigest": "6a8da5acd89ba72777e230d74a6cfd6627b7e9e3989d40f1fe18e3e34c53aa37"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-43",
+      "mappingCode": "MAP-HDR-GATE-43-TO-SDU-43",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 43
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-43"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "f4b64ffed1a876ddddf71f96ae7667f91c13cb0d16879efc2cc9f8d4063d2939",
+      "targetMeaningHash": "512be39d2c9be26091f1d21dd782036540893137f31ab9bbfeb32d8edc2c7a17",
+      "mappingDigest": "c51b76c6a09bc3774a8645f75c4c94a51f3d0008ca3e4447c92ba8944113b5e5"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-44",
+      "mappingCode": "MAP-HDR-GATE-44-TO-SDU-44",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 44
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-44"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "24f8469c328768e9c2f5bf6279a893b3072167e4d227688d83fa648a1f142453",
+      "targetMeaningHash": "a04b7b93b607a147359c95a697afa72dd29839f51695c70f3c8eff6212d9e75e",
+      "mappingDigest": "9315b672a9842b808b168ccb26bf80412598aa9e7e7675feda9567a40a760351"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-45",
+      "mappingCode": "MAP-HDR-GATE-45-TO-SDU-45",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 45
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-45"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "57d6a9d8ea0ebba071faed9a7ffdb5d281015025968ab37b3ca44e91dadf333a",
+      "targetMeaningHash": "34f29dc3fe35f6a554ad6d882cae01c65e1fa331bf25c67baec030fe1804ab97",
+      "mappingDigest": "b4bedadcffd7f77263a8f3cfb4eec430dedbb7b9ea969fe4c68e4f7187e9f3d5"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-46",
+      "mappingCode": "MAP-HDR-GATE-46-TO-SDU-46",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 46
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-46"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "8a766ffdee09a194a41c2ca08d90415a28ca8a946c076c362239fa6801f032f5",
+      "targetMeaningHash": "74d557be0dcd93f108f828c03c77c174f68b1a463fc3cfc988c994b114436822",
+      "mappingDigest": "5eaf937fe1a8646a4d9f65e76ef881603d2e525377c1a53580dee05aef62b5a0"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-47",
+      "mappingCode": "MAP-HDR-GATE-47-TO-SDU-47",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 47
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-47"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "3c2dc24bd545b9298a812b4ff98d2295a8bb1916774213c88c6d1ee32c54665a",
+      "targetMeaningHash": "9d775be9c27de3bf75fe82a576ef9d1eaf8c6f82fd629f16a01c9890dc55b591",
+      "mappingDigest": "5f69579f714b221a3c89247a52d3e7ce6ce3c1401e56a78a790b53c7062d1959"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-48",
+      "mappingCode": "MAP-HDR-GATE-48-TO-SDU-48",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 48
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-48"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "632106647b28b8e6ff0a57f84f38ddf60c57b63d9deccc6f1887ed51a3331867",
+      "targetMeaningHash": "72ddb03294e4a27ce026f750c90d2cf91cb0b2214b8f416b734fda3f90d141e0",
+      "mappingDigest": "aeebd9709fe712665d23ecb26ff347646b1ed73e03df317a8fce1bf139edd7fb"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-49",
+      "mappingCode": "MAP-HDR-GATE-49-TO-SDU-49",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 49
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-49"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "c3dd72ef71834451b311d4e8d313c119a8a12f326fdbf46d5abf4b535c55071b",
+      "targetMeaningHash": "6fb1ee597a231e54e78867d6fc4c961754833a7517e2103aa533eb669d0668ab",
+      "mappingDigest": "042e1c5618bd506aef47b81501035a427f7808c52573c2333495427e1d579bc6"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-50",
+      "mappingCode": "MAP-HDR-GATE-50-TO-SDU-50",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 50
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-50"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "5be28f740722d437737cfe93be37bb82b90089900997068c38eb7ee658cf6a0b",
+      "targetMeaningHash": "3e0282c79fe08ec39ddb9ac72dd89dc029e1330f9310312950bd749d6b49c240",
+      "mappingDigest": "6b6112a32c5b2dafbca8cbe8ddd1e97968d97f1bc80ac71b3a360e1fce1bdee2"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-51",
+      "mappingCode": "MAP-HDR-GATE-51-TO-SDU-51",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 51
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-51"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "6a770e7de7d27403f1e31c856afc36bf0753878abc373cfa862afcf0aa623354",
+      "targetMeaningHash": "d9d7f9cf8793114a54a0166c780f0c10d93fbcb9288828c8e1b720aaec907cea",
+      "mappingDigest": "412457d9b03427c091dd15038b2a9daa9b2763bfba7a584bfe94eb434417b633"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-52",
+      "mappingCode": "MAP-HDR-GATE-52-TO-SDU-52",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 52
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-52"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "fed8f8f1b7b02d6f0ecceddf19488dcd63c2c988d1459e3f63491a29e43e557a",
+      "targetMeaningHash": "af81b8cf98057d9e79783cf6d3c11cda55da5ec18663d88b345ca497b207b6a6",
+      "mappingDigest": "3de8bd604813b4e31dc172374c37a9610e6e2a5a3c33fa04e2011f7052e7f8a8"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-53",
+      "mappingCode": "MAP-HDR-GATE-53-TO-SDU-53",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 53
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-53"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "68b4cdf46179a8030509749b391aafa2d2e5baa222b417443b8241939b5ce886",
+      "targetMeaningHash": "7e6b85106579c066cd3321ee6cd316d4e47efeed1e4a0b9cb6bc952bfd279e2f",
+      "mappingDigest": "f5e16c6c43fe1f0f6febfbb9e02669dc8d026b43b23e3eda8225151221970b8b"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-54",
+      "mappingCode": "MAP-HDR-GATE-54-TO-SDU-54",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 54
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-54"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "43b70f782cd5dd3436c2abb7ae51f115a88819cb3bd40625569d82ea6096aa21",
+      "targetMeaningHash": "cc78b9ee6db498c2f859ec127bdcfc520716a6b28d835d04ae94f1b1b43deb44",
+      "mappingDigest": "56d0076a7224e72a229912573761e3aab6da5fcdd4578b8b3b3df4b030a8428a"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-55",
+      "mappingCode": "MAP-HDR-GATE-55-TO-SDU-55",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 55
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-55"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "bc406fa1c135c6d9573677e99d1ffd0c8c07033683a5bf1ece495c5d63e555af",
+      "targetMeaningHash": "81a33c52fe14e5e921ac7b98f43469194a828f6418cf1315e44d3e780704c370",
+      "mappingDigest": "5ce8221693ef971fc0062359576f2dd4631255fe5925c6afb9d628ba076052d6"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-56",
+      "mappingCode": "MAP-HDR-GATE-56-TO-SDU-56",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 56
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-56"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "339489a05c1be0bf59c345e64a25914eb41d398c32a4b24e1d0b84ffd1eff641",
+      "targetMeaningHash": "1d9890d299beced35acc392f54703d33d0463e9c05184b41943c52402d39403d",
+      "mappingDigest": "567b7d1e74e38085c1975ce0e51429a38126d1243bb1e78063a59922bfff0cdf"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-57",
+      "mappingCode": "MAP-HDR-GATE-57-TO-SDU-57",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 57
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-57"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "41043c35cac96c8ea5f6f2e53f94430a175c7e2a5002618825da00af598528e5",
+      "targetMeaningHash": "5fb2e9a726a79d3e04eb783c8e4f3c766c621524b93c85e94bf1f2bdf0cbef61",
+      "mappingDigest": "c1463f26ea0953e24b1dece1599a8cdddad74020bc19c470dd9b3e18a178e0eb"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-58",
+      "mappingCode": "MAP-HDR-GATE-58-TO-SDU-58",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 58
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-58"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "33bd719cb058e5edd1392094535466cfe17df8e2a5c51d05d784142cf2bc2604",
+      "targetMeaningHash": "f79171e1bc94f226ca6ed2d94386405b27539c16af0b1ddf5966971b40b51ba3",
+      "mappingDigest": "256a7cc3deb612a731765fb40fc9a0878e097bda49134a3837d373cfc343d7c3"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-59",
+      "mappingCode": "MAP-HDR-GATE-59-TO-SDU-59",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 59
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-59"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "062dd290770983b18d462a12abc05c1b84fe1b1d24a8ccbd74aedee71e7dba10",
+      "targetMeaningHash": "59334c4f5a0e4a1bfbb8832657035e9cdeec7a946d6569381799ac8ea0fc73e0",
+      "mappingDigest": "44814dd4e6a9350dd8622f2af43932809615bc271ca1c69911675df1d201bc44"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-60",
+      "mappingCode": "MAP-HDR-GATE-60-TO-SDU-60",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 60
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-60"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "0338db783a374972ba35a646f51979d68fea75c3b1e0579ebee1d5ad1c76a46d",
+      "targetMeaningHash": "babc39ad902555781afc038e23a6878fdc510176312b931eb4ee6864e2ba6270",
+      "mappingDigest": "ef2d8c912c990336b92e42a39bcd1d2be1d76c01c381f3852819fed0f3e7b475"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-61",
+      "mappingCode": "MAP-HDR-GATE-61-TO-SDU-61",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 61
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-61"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "24cbe18b15f0d271be502545cf18f7b469eb739f4cf0ab9c3e355ea520d86bd3",
+      "targetMeaningHash": "3eca4c6d4563dfa2e6f32cea709ecd5cc5e3d60300db61095dc88430ea326815",
+      "mappingDigest": "f45ad486898a0907b536d5a30a0a6cd6a278eea1d1bcf457718f6b0403107f08"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-62",
+      "mappingCode": "MAP-HDR-GATE-62-TO-SDU-62",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 62
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-62"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "8e92ffce45c65a718072ffac40e93b9d5529740d06b49bfd77b06aa9de1976c2",
+      "targetMeaningHash": "1418f93486c021763bae569325b109311ae387f06818460c84cb8e71cd476943",
+      "mappingDigest": "d24707c9da84cf2c6f2b5d467a4b6e3f3ebdd1178db7f249e6eb92161198b37c"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-63",
+      "mappingCode": "MAP-HDR-GATE-63-TO-SDU-63",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 63
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-63"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "ca860d5433a91e1b2a09b9ebdbe7fdc5c538688f48828995ec70bb25cc45eaf0",
+      "targetMeaningHash": "6c5bd7516e00a239da71b46f4253ec0f5816d40bae80caf3c353993127bef657",
+      "mappingDigest": "65e717937b85ba96aab1754ff6cfcc619593c935c51e4f5f1eb5b1f37f39149f"
+    },
+    {
+      "mappingId": "MAPID-HDR-GATE-64",
+      "mappingCode": "MAP-HDR-GATE-64-TO-SDU-64",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "GATE",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.activations",
+        "field": "gate",
+        "value": 64
+      },
+      "targetMeaningCodes": [
+        "CM-FORMATION-SDU-64"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "a5b6c36aa5511ae8a59fff9259ad74ce0fd4a907f34057741db27b9b00fff399",
+      "targetMeaningHash": "22fe58b40d9de16a219b4060619a9d6549ecf4fedc4188e410668f3f3eb882dc",
+      "mappingDigest": "f2c7a0b0e2cac661905dc50a78a5a94e21d1c58576f1d9f9e82eb10e19baea34"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-64-47",
+      "mappingCode": "MAP-HDR-CHANNEL-64-47-TO-SCU-01",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "64-47"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-01"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "209f35e56fc50bc2c1400d669f7ab87079568b68dba06eb9d8aef37956cac42f",
+      "targetMeaningHash": "5bd08c30f270bfe181d0270e103c04e839a6c786de2cd13c00ef1d6efb358691",
+      "mappingDigest": "97070a788f81e640ff08195863529c30024d03a43ffaaec11eddd4643274fcbc"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-61-24",
+      "mappingCode": "MAP-HDR-CHANNEL-61-24-TO-SCU-02",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "61-24"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-02"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "aba22e1f417c942cc20175626ed9b6a54d505adda2265492eaf0fad3ebcea652",
+      "targetMeaningHash": "cac92a6096d112fe6ea69d01586285c5f19f6f8fa392007af1efdb32fb2c3b76",
+      "mappingDigest": "0c610dbcb65f6fea9139b0580c3142eaba52d3ef0930634948235d4766074144"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-63-4",
+      "mappingCode": "MAP-HDR-CHANNEL-63-4-TO-SCU-03",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "63-4"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-03"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "0160aa9b397d9136527f9fa462dcf7f60c4f3bd9a43eb122d118a8923d854105",
+      "targetMeaningHash": "b501b08754a44c4a57b1258748de87dc11d299ce80ea31d7e103c07447bb45e5",
+      "mappingDigest": "cd5701c2889d9cea2a9db9dfbc93b204c1322bab95847ed31d52142766859a22"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-17-62",
+      "mappingCode": "MAP-HDR-CHANNEL-17-62-TO-SCU-04",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "17-62"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-04"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "1aa2473ab9dd47df0ae8d8fe761d9df7b5f0977bd167bd0c98bf0476b26648e9",
+      "targetMeaningHash": "73d73827952424d502b4693e7c98922773f4a3f73b4b85492a4b4542913bc2d8",
+      "mappingDigest": "d57128cc505f09e798e78d432b7be46b72ebdac17565b8fc1afdcddfdce56c8d"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-43-23",
+      "mappingCode": "MAP-HDR-CHANNEL-43-23-TO-SCU-05",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "43-23"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-05"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "d237b2e6349df33895e80e484b16cf6a9a42e1810bf7dbcfb297d2356b5de1a6",
+      "targetMeaningHash": "9c5261e4891a44d6ea08569c58b08ce31b228b85f899669d9c0c9a7b19eb48e1",
+      "mappingDigest": "dd075e2a36ec426f5938de757ebe1319848e6c4bfa08bf3117d21566cbf6dce0"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-11-56",
+      "mappingCode": "MAP-HDR-CHANNEL-11-56-TO-SCU-06",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "11-56"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-06"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "3a5f9f9d03c49c15e2f10898b8b56e8848ea3ffb93bbd2fd23ad9377ff1efdbf",
+      "targetMeaningHash": "0d8c3de28b5ced2b475e5b3291eb0408c70d48460937500f5f4539c680e71560",
+      "mappingDigest": "3e9586f65b4375ff9b3844987dd78f5583db0c9cdc51351b4969e84e7ea27f76"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-16-48",
+      "mappingCode": "MAP-HDR-CHANNEL-16-48-TO-SCU-07",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "16-48"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-07"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "991182dd68fb7cdedc3981dff2218612e8ec695da116df138f6b4dbf17da2491",
+      "targetMeaningHash": "5008ecfbcbb8acffdd74950e9b427b86305926248c7eaae3d8c9392a4f236425",
+      "mappingDigest": "1d1cf341842f61ba95528cb0d6277d227d008d0b2eb5d6f67bc7d271bc68c4cb"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-20-57",
+      "mappingCode": "MAP-HDR-CHANNEL-20-57-TO-SCU-08",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "20-57"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-08"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "2eb2d2bf64b79ef7ec395f9009517b3c4c9f8fffccbf026a6094d7cbd3b1992e",
+      "targetMeaningHash": "615b4f23d7d4b0da960b3ec1010bdc6870d582e0cd1dfe0a696d7788d7ff09d2",
+      "mappingDigest": "884caf37189bbfd2d9015b5ff5be5649a3b0d55d6befd389caea5ca9c0f0d7dc"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-57-10",
+      "mappingCode": "MAP-HDR-CHANNEL-57-10-TO-SCU-09",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "57-10"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-09"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "ef9f889df557e8bdb2d387079a4d2ada92bd13352517e20e313ee9d5fb258567",
+      "targetMeaningHash": "581b15fd4b1ece67a801cf2fcd5bd5165acb61410b00e40fe191e029a829b50f",
+      "mappingDigest": "d80cb9522cb8f905f87b06aac59b2f203f58b75b5b23bf27a96610bf68f25d87"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-1-8",
+      "mappingCode": "MAP-HDR-CHANNEL-1-8-TO-SCU-10",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "1-8"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-10"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "803b1c5f473619c6b62342963af21dbb2f047a8f30023127721d629738e4b524",
+      "targetMeaningHash": "622df2ee97d82ba55900658ce1ce505b90be6e38b851423a88f1f97d1bb083af",
+      "mappingDigest": "6cc02eaa8a0a006ab0c46dfbd8769302f69d69fe243ac02305b65a3915dbe6d0"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-2-14",
+      "mappingCode": "MAP-HDR-CHANNEL-2-14-TO-SCU-11",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "2-14"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-11"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "5299b7a0574b16e533c8d98cc217d87fd4ab020c1c76d24bfcb4310789e79ce0",
+      "targetMeaningHash": "d40dc4e35e0879d80b433b12b14c2839a6f73a2edc808525de3c35c6d0a9c7b0",
+      "mappingDigest": "36d9809d8cd8c5beb675c6e2e592e9dfa055623cacf1caa4c867045fdcea5d14"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-7-31",
+      "mappingCode": "MAP-HDR-CHANNEL-7-31-TO-SCU-12",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "7-31"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-12"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "3d3680cd6181d75949f968b1897e52ab1ca300e3ea3190b512f383feda88918b",
+      "targetMeaningHash": "101900ad0e97cf41a1f7e8d11b17ae2c9caced7ba9b70fb84427bb78c02bbdb1",
+      "mappingDigest": "8da9f07e9069fc03acc1306f31133f3b6333f333a3104b37dec30798a71e6f3c"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-13-33",
+      "mappingCode": "MAP-HDR-CHANNEL-13-33-TO-SCU-13",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "13-33"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-13"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "a68ce0c38ee294c1a101749f82c836af736b0c90a03fec41d9e3201ec0f010df",
+      "targetMeaningHash": "3ced3e9eac99dbc51b4569157e69bd0ffb21d4985e83e277a4e320a137e109d7",
+      "mappingDigest": "f155cf42b35fad65afe9950722b98f6499fca5c4c80e47bc07fb1574ed423a2f"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-10-20",
+      "mappingCode": "MAP-HDR-CHANNEL-10-20-TO-SCU-14",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "10-20"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-14"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "37678646043dc1acadb033fc80e75dcd6ca9584b1e99e0cda62f12a8a8e91db7",
+      "targetMeaningHash": "1acd32c94c39ef5770c4190d48aa9eb3ff93ca63e4ec3f2da92106032f64f488",
+      "mappingDigest": "4b9264911f8a5ef7bfe1c2d1f61867b60eeea2c2db23c55c6c3e92b976ff709a"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-10-34",
+      "mappingCode": "MAP-HDR-CHANNEL-10-34-TO-SCU-15",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "10-34"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-15"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "916db7a99af708dc13cea6f5cefa918b2496810632af4391aec2c0d7aca3bd9d",
+      "targetMeaningHash": "f8dffaeb6d61607ba1d5b9a1b7ce6c59525927db8fd8e31c797f2a703fc5ae6f",
+      "mappingDigest": "aa6c496bed44d6bf29f4bf57c1f9c91c1a4c90058161225311824d45172aee6c"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-25-51",
+      "mappingCode": "MAP-HDR-CHANNEL-25-51-TO-SCU-16",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "25-51"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-16"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "638253bbbf6b59fed02796eff588f66fccc5552790e663fe1a75bc3dc98f64ac",
+      "targetMeaningHash": "6a87b340db7155d1a9f9b11d3d748103ab5879538d18231acc1731484723c13b",
+      "mappingDigest": "9a4972c924191df938eda458f12fa650e9ad0794365fe409b2785118e1149435"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-15-5",
+      "mappingCode": "MAP-HDR-CHANNEL-15-5-TO-SCU-17",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "15-5"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-17"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "a78baa23330d5a3a942ca1e87bcdfadbc4a79526ecfbc31a6fce5a068ff0644a",
+      "targetMeaningHash": "06bc560c9233149b453d86fb18a3dac4516b501d34684291f557cb79f14a0db6",
+      "mappingDigest": "9ca3330d21ebda375f64328bbf8dbb1b16e4886b1cbfd3be2d1ffedae3eeba9b"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-46-29",
+      "mappingCode": "MAP-HDR-CHANNEL-46-29-TO-SCU-18",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "46-29"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-18"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "7966183abab1985d6e8622fe6e90b2a0447e7f52b63a502fe91c154a356cb487",
+      "targetMeaningHash": "c403cdf6cf4c3ceac048ffb271368db69d494d4e9a3a70da959b4d629bf03127",
+      "mappingDigest": "9238749946cf36bd82f53f0353b1cae5eef04cd83a7229471b99bfdb25a56a19"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-3-60",
+      "mappingCode": "MAP-HDR-CHANNEL-3-60-TO-SCU-19",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "3-60"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-19"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "f67d1c82b9015ab084c823e4c7650ebbd09546ac1ce8349d571675b3eeb500a2",
+      "targetMeaningHash": "7623ba11fb95b68792a4d857d97a6668be11b5df5f6e0fdf9e2ba69957106726",
+      "mappingDigest": "62ccf849785c107f652100526ec5e70831f27b0f32e5d49eba880e9563111f33"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-9-52",
+      "mappingCode": "MAP-HDR-CHANNEL-9-52-TO-SCU-20",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "9-52"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-20"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "2dddf8ec27a04df3bf29561fd4f27419ffdc99b7059ac82a11458789f2ba4c7d",
+      "targetMeaningHash": "0d7ff0a4ed8b24ac37689056af46c934e12186771126a50f4465bf58369b5d8d",
+      "mappingDigest": "0886a43950a4b9381d0d13f59c8425184dd1c370970680ce8d832171eab1bb69"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-18-58",
+      "mappingCode": "MAP-HDR-CHANNEL-18-58-TO-SCU-21",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "18-58"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-21"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "07f350d01ba6accfde1f54e8353a331bc86ae8f5b0a3c735be6eaf0ae2512b12",
+      "targetMeaningHash": "723996b3f56b1f93a42f2e7fc68f5d5f9d55d866c2d4eb247331cb335ec621b5",
+      "mappingDigest": "97f1a671cf689447e3eeb7a2691d21459b04dce88858fafec0e3f773e9531eae"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-42-53",
+      "mappingCode": "MAP-HDR-CHANNEL-42-53-TO-SCU-22",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "42-53"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-22"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "f9f73bb8d141d266f73aa64f53d80dd9a0963bbfaef39ec22e1369823fd1d90d",
+      "targetMeaningHash": "898892f3ffe648279b4056f7bae10aedb88af74cf3a2e97bdb5c34e998a4bd4f",
+      "mappingDigest": "433331a00bb2d38b5616d20e1ac921b4ee5ad206cdcfa1e92d48ad608f18a89f"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-32-54",
+      "mappingCode": "MAP-HDR-CHANNEL-32-54-TO-SCU-23",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "32-54"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-23"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "0decf0aafa7b718dc535e6aacedcca3e4b531ea8f2f52db6cc3e6a3fc2132c97",
+      "targetMeaningHash": "7697c8b2f6a8fc4a27839805953da1288f6783be8565423a7cecf15515d8d16c",
+      "mappingDigest": "83de185c36823f38dfd3fe54f263157c7d06ea6149549a5c2383969065f44266"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-28-38",
+      "mappingCode": "MAP-HDR-CHANNEL-28-38-TO-SCU-24",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "28-38"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-24"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "cc6ccca58b2807e77e6b2f1a04d9bd9b27de8ae0255a497358a8f05e4e81b305",
+      "targetMeaningHash": "84a6e798c40e05a00b5fd10e458ca54fc362d1d7dd3fe8cd0599668178197fa9",
+      "mappingDigest": "1602a02a6468a235236dd3efe4add1693a1618850bba8ad1af2b5691923d3904"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-27-50",
+      "mappingCode": "MAP-HDR-CHANNEL-27-50-TO-SCU-25",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "27-50"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-25"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "106c6b9149df0ab0ab4417db4bd5520aac3df9b87cf5322b3667a29b5fc8157d",
+      "targetMeaningHash": "82529eb87b8affc9494671114fc2c4db1cb843d52dadf52d7c9c84fa2a1cfbb4",
+      "mappingDigest": "8e02655d9b216d33dbf0ad1ba3494973d3bd688caadce5adbae200c5a7afb2f3"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-59-6",
+      "mappingCode": "MAP-HDR-CHANNEL-59-6-TO-SCU-26",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "59-6"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-26"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "aa31311abf650dbb866032d70739f90dbd6fb81f61d8fb251ea7ffbafa413d0e",
+      "targetMeaningHash": "788fb02b5d163cb02875f3d004760aa956cdee1fe7ebb7c5b973552e4204478d",
+      "mappingDigest": "9303affe07c49c42eab6a35df66ab782dbadb4dbf27689b803f86d09fd0cda6f"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-19-49",
+      "mappingCode": "MAP-HDR-CHANNEL-19-49-TO-SCU-27",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "19-49"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-27"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "725168256ccb9cb18c623d8644f8979ecef9750fd12495aca86d3715974f9ca0",
+      "targetMeaningHash": "7a9804bb457af7ccc83bd5765dd8715eb4a0e4536a9c434f95a8253bec06cded",
+      "mappingDigest": "adc5c25c0f1d706e490585f417aa6f8b51bfb60d87b4bc18e99f73304c91dd18"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-39-55",
+      "mappingCode": "MAP-HDR-CHANNEL-39-55-TO-SCU-28",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "39-55"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-28"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "fa956c9eb47a8aeece099cd8b8767aa69084936a545a60ea02ae4d802c58094f",
+      "targetMeaningHash": "4b8f0a84b84bc23e7d7a636575da83462e2d6a3631e4af92f03220ec5a72a207",
+      "mappingDigest": "f6a22ccf4ec1ccba483acce7bc9604f57b1afcb8685d2ad4c5cdc65413e0f1fc"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-41-30",
+      "mappingCode": "MAP-HDR-CHANNEL-41-30-TO-SCU-29",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "41-30"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-29"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "64f67d768637f39d47e82bfc86da14eb7d6689eb29097dd35d640aee04799426",
+      "targetMeaningHash": "1ca5bab268dc03a5b9355cb716fdd7f58c79a2ede99cb6b9c45e50b621e51a9a",
+      "mappingDigest": "2e89083021e85c67a614008d486b3981bf45993ca699349b198cdbb06d7eadaf"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-35-36",
+      "mappingCode": "MAP-HDR-CHANNEL-35-36-TO-SCU-30",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "35-36"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-30"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "4ed426cc917bfc892903d41c2faea5a787540b8af4531d5b3037af414fae089e",
+      "targetMeaningHash": "2a672220bcf22ea1ff9d4823f30ee428589d4e5be091d02e39ac9553417e80da",
+      "mappingDigest": "da3f71af8716cff962eaa9e176f444c0c5a84fd3bbee512559e9663fc5730745"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-12-22",
+      "mappingCode": "MAP-HDR-CHANNEL-12-22-TO-SCU-31",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "12-22"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-31"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "e10d4e9c37bf0837fbe68e752c08635a7305a1dbdd3e272e636e1a8bb066ebbe",
+      "targetMeaningHash": "4ba368c5e7843486be04150a3aea79632c1da5b09320205969ad33ef3f8aed30",
+      "mappingDigest": "435c47c52dc3f77069d7e1e4f4dde09a9d1480a7074b75db281ca3cbd15b5136"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-26-44",
+      "mappingCode": "MAP-HDR-CHANNEL-26-44-TO-SCU-32",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "26-44"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-32"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "f12b7e78bbb0fa1d204f8ef1f2b6dd6d9ab5b8998aeae4a4313c8256309998c7",
+      "targetMeaningHash": "81f10e20a38549f230b1c70587071d7148dccd68fc62e4ab229e2f8e053e87db",
+      "mappingDigest": "039e7fe3a68fa0c124cb3fcfe5b463c0ddb8569b45aee24b61af8e4896e7ed89"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-21-45",
+      "mappingCode": "MAP-HDR-CHANNEL-21-45-TO-SCU-33",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "21-45"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-33"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "9a748fb8f0d0751ef098b9ca4f03ae1a83fb9dcfc8c04df4791c6d478fd77773",
+      "targetMeaningHash": "66995726f8cadb7ef9bdd68d852677b732dd279fd83e87c0a802a84673e4d4b8",
+      "mappingDigest": "183378a06fc79055465c6e08ed86faab88bdf90173ed0d350ff226f0ada9a514"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-37-40",
+      "mappingCode": "MAP-HDR-CHANNEL-37-40-TO-SCU-34",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "37-40"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-34"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "9755f19fc280509374622334e9458bbe57852fdccb916fa85fccd445d372543c",
+      "targetMeaningHash": "0c85ee1c209a7635d453909bb8cb7ba182475df42da7ee7efe6f303ccdb9312a",
+      "mappingDigest": "4be65558eb6e7926135d49bf9475c2cefe4e60583e76648cf1ee318bea0af09d"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-34-57",
+      "mappingCode": "MAP-HDR-CHANNEL-34-57-TO-SCU-35",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "34-57"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-35"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "56cde86a6097acdcacd0deeebe5a1351c51e082be9d05efbd0cb0048c83ed944",
+      "targetMeaningHash": "e4cbe7598b37c8aa52e9a87555cdbfc09bbe6977e7f148cf45755369d47941c1",
+      "mappingDigest": "8183b6afae2e58e1ea272d47d22f908b4ebc32fb4e28d103f1f8c57286bb8448"
+    },
+    {
+      "mappingId": "MAPID-HDR-CHANNEL-34-20",
+      "mappingCode": "MAP-HDR-CHANNEL-34-20-TO-SCU-36",
+      "mappingVersion": "1.0.0",
+      "sourceMethodCode": "HUMAN_DESIGN",
+      "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+      "projectionType": "CHANNEL",
+      "projectionPredicate": {
+        "predicateVersion": "1.0.0",
+        "operator": "contains",
+        "path": "projectionValue.channels",
+        "field": "channelCode",
+        "value": "34-20"
+      },
+      "targetMeaningCodes": [
+        "CM-CONNECTION-SCU-36"
+      ],
+      "mappingAuthority": "PHIOS",
+      "mappingConfidence": "validated",
+      "boundary": "validation_only",
+      "status": "active",
+      "predicateHash": "0e511b3adf09a6b4383d7c5ce22926e86b3bcc79775a592497632b2d16bea987",
+      "targetMeaningHash": "2c5b9afd50f84c51f2a73a65170d7b777ba0cdb0b9cb579322c84cceda9d9da1",
+      "mappingDigest": "05eabfc57ae0b14ffbc41d737c1451a3355399354ff39e13f84b71ec0b85d040"
+    }
+  ],
+  "coverage": {
+    "sduMapped": 64,
+    "scuMapped": 36,
+    "resourceCenterMapped": 0,
+    "processingNetworkMapped": 0,
+    "totalMapped": 100,
+    "totalExpected": 114
+  }
 }

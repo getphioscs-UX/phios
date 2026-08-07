@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/website-module-projection-v1.json",
+  "title": "website-module-projection-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "moduleCode",
+    "moduleVersion",
+    "assetType",
+    "moduleType",
+    "locale",
+    "surface",
+    "publishedAssetReferences",
+    "knowledgeReferences",
+    "meaningReferences",
+    "journeyContextReference",
+    "contentContract",
+    "pdsReferences",
+    "accessibilityRequirements",
+    "publishedOnly",
+    "candidateAssetReadable",
+    "status"
+  ],
+  "properties": {
+    "moduleCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "moduleVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "assetType": {
+      "const": "WEBSITE_MODULE"
+    },
+    "moduleType": {
+      "enum": [
+        "KNOWLEDGE_CARD",
+        "MEANING_CARD",
+        "FIGURE_CARD",
+        "READING_PATH_MODULE",
+        "JOURNEY_MODULE"
+      ]
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "surface": {
+      "const": "website"
+    },
+    "publishedAssetReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "meaningReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "journeyContextReference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "contentContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "heading",
+        "bodyMode",
+        "ctaMode"
+      ],
+      "properties": {
+        "heading": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bodyMode": {
+          "enum": [
+            "metadata_only",
+            "published_fragment",
+            "published_asset"
+          ]
+        },
+        "ctaMode": {
+          "enum": [
+            "none",
+            "read",
+            "continue",
+            "start_journey"
+          ]
+        }
+      }
+    },
+    "pdsReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "accessibilityRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "publishedOnly": {
+      "const": true
+    },
+    "candidateAssetReadable": {
+      "const": false
+    },
+    "status": {
+      "const": "validation_only"
+    }
+  }
+}

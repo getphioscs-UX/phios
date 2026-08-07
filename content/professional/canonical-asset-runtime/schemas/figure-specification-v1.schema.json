@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/figure-specification-v1.json",
+  "title": "figure-specification-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specCode",
+    "specVersion",
+    "assetType",
+    "briefCode",
+    "nodeCode",
+    "meaningReferences",
+    "knowledgeReferences",
+    "sourceFragmentDigests",
+    "locale",
+    "status",
+    "figureKind",
+    "visualStructure",
+    "accessibilityDescription",
+    "responsiveVariants",
+    "factualBoundary"
+  ],
+  "properties": {
+    "specCode": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]+$"
+    },
+    "specVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "assetType": {
+      "const": "FIGURE"
+    },
+    "briefCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9-]+$"
+    },
+    "meaningReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "sourceFragmentDigests": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "status": {
+      "const": "validation_only"
+    },
+    "figureKind": {
+      "enum": [
+        "conceptual",
+        "comparative",
+        "process",
+        "structural",
+        "evidence"
+      ]
+    },
+    "visualStructure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "layers",
+        "hierarchy",
+        "labels"
+      ],
+      "properties": {
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "hierarchy": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "accessibilityDescription": {
+      "type": "string",
+      "minLength": 1
+    },
+    "responsiveVariants": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "compact",
+          "content",
+          "wide"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "factualBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publishedOnly",
+        "newClaimsAllowed"
+      ],
+      "properties": {
+        "publishedOnly": {
+          "const": true
+        },
+        "newClaimsAllowed": {
+          "const": false
+        }
+      }
+    }
+  }
+}

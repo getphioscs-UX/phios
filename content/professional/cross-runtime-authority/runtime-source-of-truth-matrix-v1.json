@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "PHI-OS-RUNTIME-SOURCE-OF-TRUTH-MATRIX-v1.0.0",
+  "phaseCode": "PHASE-0",
+  "stepCode": "STEP-0.1",
+  "matrixCode": "RUNTIME_SOURCE_OF_TRUTH_MATRIX",
+  "matrixVersion": "1.0.0",
+  "status": "frozen",
+  "rows": [
+    {
+      "objectType": "INPUT_RECORD",
+      "authorityCode": "INPUT_AUTHORITY",
+      "canonicalCodeField": "caseCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "METHOD_CALCULATION",
+      "authorityCode": "METHOD_AUTHORITY",
+      "canonicalCodeField": "calculationId",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "CANONICAL_PROJECTION",
+      "authorityCode": "PROJECTION_AUTHORITY",
+      "canonicalCodeField": "projectionCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "CANONICAL_MEANING",
+      "authorityCode": "MEANING_AUTHORITY",
+      "canonicalCodeField": "meaningCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "CANONICAL_KNOWLEDGE_NODE",
+      "authorityCode": "KNOWLEDGE_AUTHORITY",
+      "canonicalCodeField": "nodeCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "CANONICAL_ASSET_BRIEF",
+      "authorityCode": "ASSET_AUTHORITY",
+      "canonicalCodeField": "briefCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "CANONICAL_ASSET",
+      "authorityCode": "ASSET_AUTHORITY",
+      "canonicalCodeField": "assetCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "JOURNEY",
+      "authorityCode": "JOURNEY_AUTHORITY",
+      "canonicalCodeField": "journeyCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "PROFESSIONAL_DECISION",
+      "authorityCode": "PROFESSIONAL_AUTHORITY",
+      "canonicalCodeField": "professionalDecisionCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "REPORT",
+      "authorityCode": "REPORT_AUTHORITY",
+      "canonicalCodeField": "reportCode",
+      "mutableByConsumers": false
+    },
+    {
+      "objectType": "PUBLICATION",
+      "authorityCode": "PUBLICATION_AUTHORITY",
+      "canonicalCodeField": "publicationCode",
+      "mutableByConsumers": false
+    }
+  ],
+  "rules": {
+    "oneRowPerObjectType": true,
+    "oneAuthorityPerObjectType": true,
+    "codeReuseAcrossObjectTypesAllowed": false,
+    "aliasesMayReplaceCanonicalCode": false
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "contractCode": "PHI-OS-CAR-PROVIDER-ROUTING-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "phase": "PHASE-CAR",
+  "work": "CAR-W9",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "providerAuthority": {
+    "policy": "content/provider/routing/provider-routing-policy-v1.json",
+    "registry": "content/provider/routing/provider-routing-registry-v1.json",
+    "runner": "scripts/lib/provider/provider-routing-v1.mjs"
+  },
+  "effectiveFlags": {
+    "providersEnabled": false,
+    "networkCallsEnabled": false,
+    "paidOverageDisabled": true,
+    "paidFallbackAllowed": false,
+    "providerMayCreatePublishedContent": false
+  },
+  "allowedLocalCapabilities": [
+    "Deterministic Asset Brief",
+    "Schemas",
+    "Fixtures",
+    "Local Prompt Projection",
+    "Review Queue Contract"
+  ],
+  "invariants": {
+    "providerRoutingRebuilt": false,
+    "carMayOverrideProviderPolicy": false,
+    "providerMayCreatePublishedContent": false,
+    "automaticPublicationAllowed": false,
+    "failClosed": true
+  }
+}
