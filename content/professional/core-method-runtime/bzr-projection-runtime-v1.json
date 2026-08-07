@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-BZR-PROJECTION-RUNTIME-v1.0.0",
+  "stageCode": "BZR-W4",
+  "runtimeCode": "BZR_PROJECTION_RUNTIME",
+  "runtimeVersion": "1.0.0",
+  "methodCode": "BAZI",
+  "pluginCode": "BZR",
+  "status": "validation_only_not_production_eligible",
+  "baseline": {
+    "repository": "getphioscs-UX/phios",
+    "branch": "main",
+    "commit": "c9d407544f11a3b294e93e5d793e1aa3f8dc530f"
+  },
+  "inputs": [
+    "BZR-W2 SHARED_CALCULATION_RUNTIME result",
+    "BZR-W2A normalized projection facts",
+    "BZR-W3 SHARED_CALCULATION_RUNTIME result"
+  ],
+  "projectionAuthority": {
+    "runtimeCode": "SHARED_PROJECTION_RUNTIME",
+    "canonicalSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "localProjectionSchemaAllowed": false,
+    "normalizedFactsCreateProjectionAuthority": false,
+    "perProjectionCalculationLineageRequired": true
+  },
+  "projectionTypes": [
+    "STEM",
+    "BRANCH",
+    "PILLAR",
+    "LUCK_CYCLE"
+  ],
+  "lineagePolicy": {
+    "stemSource": "BZR-W2",
+    "branchSource": "BZR-W2",
+    "pillarSource": "BZR-W2",
+    "luckCycleSource": "BZR-W3",
+    "luckCycleMustReferenceFourPillarsDigest": true
+  },
+  "execution": {
+    "allowedModes": [
+      "validation"
+    ],
+    "productionExecutionAllowed": false,
+    "providerAllowed": false,
+    "aiAllowed": false
+  },
+  "boundaries": {
+    "createsProjection": true,
+    "createsTenGods": false,
+    "createsUsefulGod": false,
+    "createsPattern": false,
+    "createsInterpretation": false,
+    "createsKnowledge": false,
+    "createsRealityConclusion": false,
+    "createsProfessionalConclusion": false,
+    "changesProductionEligibility": false
+  },
+  "nextStage": "BZR-W5"
+}

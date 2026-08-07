@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-ASSET-BRIEF-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "phase": "PHASE-CAR",
+  "work": "CAR-W2",
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "inputAuthorities": {
+    "meaning": "Canonical Meaning Runtime",
+    "knowledge": "Canonical Knowledge Node Registry",
+    "coverage": ["Canonical Assembly", "Published Fragments"],
+    "locale": "Production Locale Manifest",
+    "assetType": "Canonical Asset Type Registry",
+    "brand": "PDS"
+  },
+  "gateOrder": ["meaningAuthorityValid","knowledgeReferencesValid","publishedCoverageSufficient","localeSupported","assetTypeRegistered"],
+  "invariants": {
+    "assetBriefIsAsset": false,
+    "assetBriefIsCanonicalMeaning": false,
+    "assetBriefIsKnowledgeNode": false,
+    "assetBriefIsPublishedFragment": false,
+    "assetBriefMayCreateKnowledge": false,
+    "assetBriefMayPublish": false,
+    "providerRequired": false,
+    "deterministic": true,
+    "registryLed": true
+  }
+}
