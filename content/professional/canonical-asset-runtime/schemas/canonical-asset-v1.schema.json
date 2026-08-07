@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-asset-v1.schema.json",
+  "title": "PHI OS Canonical Asset v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assetCode",
+    "assetVersion",
+    "assetType",
+    "nodeCode",
+    "meaningReferences",
+    "knowledgeReferences",
+    "sourceFragmentDigests",
+    "locale",
+    "audience",
+    "purpose",
+    "providerLineage",
+    "reviewState",
+    "approvalState",
+    "publicationState",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "assetCode": {
+      "type": "string",
+      "pattern": "^ASSET-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "assetVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "assetType": {
+      "type": "string",
+      "enum": [
+        "ARTICLE",
+        "FIGURE",
+        "DIAGRAM",
+        "ILLUSTRATION_PROMPT",
+        "ICON_PROMPT",
+        "HERO_IMAGE_PROMPT",
+        "VIDEO_SCRIPT",
+        "SHORT_VIDEO_SCRIPT",
+        "AUDIO_SCRIPT",
+        "PODCAST_SCRIPT",
+        "SLIDES",
+        "ACADEMY_LESSON",
+        "QUIZ",
+        "WEBSITE_MODULE",
+        "SOCIAL_POST",
+        "THUMBNAIL_PROMPT",
+        "SEO_METADATA",
+        "SEARCH_SNIPPET"
+      ]
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "meaningReferences": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^CM-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+      }
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+      }
+    },
+    "sourceFragmentDigests": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(?:-[A-Z][a-z]{3})?(?:-[A-Z]{2}|-[0-9]{3})?$"
+    },
+    "audience": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "providerLineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "providerCode",
+        "modelCode",
+        "invocationDigest"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "none",
+            "local_projection",
+            "provider_candidate"
+          ]
+        },
+        "providerCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "modelCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "invocationDigest": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "none"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "providerCode": {
+                "type": "null"
+              },
+              "modelCode": {
+                "type": "null"
+              },
+              "invocationDigest": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "provider_candidate"
+              }
+            },
+            "required": [
+              "mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "providerCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "modelCode": {
+                "type": "string",
+                "minLength": 1
+              },
+              "invocationDigest": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "reviewState": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending",
+        "accepted",
+        "changes_required",
+        "rejected",
+        "deferred"
+      ]
+    },
+    "approvalState": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending",
+        "approved",
+        "conditionally_approved",
+        "rejected",
+        "revoked"
+      ]
+    },
+    "publicationState": {
+      "type": "string",
+      "enum": [
+        "not_published",
+        "scheduled",
+        "published",
+        "withdrawn",
+        "archived"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
