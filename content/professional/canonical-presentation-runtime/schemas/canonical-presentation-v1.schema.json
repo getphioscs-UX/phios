@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-presentation-v1.schema.json",
+  "title": "PHI OS Canonical Presentation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "presentationCode",
+    "presentationVersion",
+    "surface",
+    "presentationType",
+    "sourceAssetReferences",
+    "sourceProjectionReferences",
+    "locale",
+    "audience",
+    "informationLayer",
+    "pdsReferences",
+    "accessibilityContract",
+    "responsiveContract",
+    "renderState"
+  ],
+  "properties": {
+    "presentationCode": {
+      "type": "string",
+      "pattern": "^CPR-PRESENT-[A-Z0-9-]+$"
+    },
+    "presentationVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "surface": {
+      "enum": [
+        "WEBSITE",
+        "BOOK",
+        "PDF",
+        "ACADEMY",
+        "CUSTOMER_WORKSPACE",
+        "PROFESSIONAL_WORKSPACE",
+        "APP",
+        "API",
+        "EMAIL",
+        "SOCIAL"
+      ]
+    },
+    "presentationType": {
+      "enum": [
+        "ARTICLE_PAGE",
+        "ARTICLE_READING",
+        "KNOWLEDGE_CARD",
+        "MEANING_CARD",
+        "FIGURE_PAGE",
+        "FIGURE_CARD",
+        "DIAGRAM",
+        "CALLOUT",
+        "SUMMARY_BLOCK",
+        "RELATED_NODES_BLOCK",
+        "READING_PATH_BLOCK",
+        "TIMELINE",
+        "HERO",
+        "BOOK_SECTION",
+        "ACADEMY_LESSON",
+        "QUIZ",
+        "REPORT_SECTION",
+        "MEDIA_CARD",
+        "AUTHORITY_BADGE",
+        "PUBLICATION_BADGE",
+        "LOCALE_BADGE",
+        "JOURNEY_PROGRESS"
+      ]
+    },
+    "sourceAssetReferences": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceProjectionReferences": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "audience": {
+      "enum": [
+        "CUSTOMER",
+        "PROFESSIONAL",
+        "TECHNICAL"
+      ]
+    },
+    "informationLayer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested",
+        "resolved",
+        "disclosureMode"
+      ],
+      "properties": {
+        "requested": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "L1_IMMEDIATE_UNDERSTANDING",
+              "L2_CONFIRMATION",
+              "L3_PROFESSIONAL_EVIDENCE",
+              "L4_TECHNICAL_RECORD"
+            ]
+          }
+        },
+        "resolved": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "L1_IMMEDIATE_UNDERSTANDING",
+              "L2_CONFIRMATION",
+              "L3_PROFESSIONAL_EVIDENCE",
+              "L4_TECHNICAL_RECORD"
+            ]
+          }
+        },
+        "disclosureMode": {
+          "enum": [
+            "default",
+            "progressive",
+            "restricted"
+          ]
+        }
+      }
+    },
+    "pdsReferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contracts",
+        "tokenReferences",
+        "themeCode"
+      ],
+      "properties": {
+        "contracts": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "tokenReferences": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^--phi-"
+          }
+        },
+        "themeCode": {
+          "enum": [
+            "BOOK_1_GOLD",
+            "BOOK_2_PURPLE",
+            "BOOK_3_EMERALD",
+            "BOOK_4_CYAN",
+            "NEUTRAL_PUBLIC",
+            "PROFESSIONAL"
+          ]
+        }
+      }
+    },
+    "accessibilityContract": {
+      "type": "object"
+    },
+    "responsiveContract": {
+      "type": "object"
+    },
+    "renderState": {
+      "enum": [
+        "validation_projection",
+        "ready_for_render",
+        "rendered"
+      ]
+    }
+  }
+}

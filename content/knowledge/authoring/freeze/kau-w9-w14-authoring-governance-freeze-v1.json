@@ -1,0 +1,34 @@
+{
+  "freezeCode": "KAU-W9-W14-v1",
+  "version": "1.0.0",
+  "baselineCommit": "14c910b2170ab372a0194739921ffc607a0f365a",
+  "works": [
+    "KAU-W9",
+    "KAU-W10",
+    "KAU-W11",
+    "KAU-W12",
+    "KAU-W13",
+    "KAU-W14"
+  ],
+  "status": "frozen",
+  "productionStatus": "validation_only",
+  "boundaries": {
+    "canonicalNodeRegistryMutation": false,
+    "manuscriptMutation": false,
+    "articleCandidateCreation": false,
+    "articleApproval": false,
+    "meaningMappingMutation": false,
+    "assetMutation": false,
+    "journeyMutation": false,
+    "knowledgeGovernanceHandoffOnly": true,
+    "pjaReadinessHandoffOnly": true
+  },
+  "invariants": [
+    "Coverage analysis is read-only.",
+    "Manuscript drift creates proposals, never node mutations.",
+    "Impact analysis is lineage-only.",
+    "Editorial decisions are human-only.",
+    "Registry change packages require existing Knowledge Governance.",
+    "Production readiness hands off to existing PJA and cannot create Article Candidates."
+  ]
+}

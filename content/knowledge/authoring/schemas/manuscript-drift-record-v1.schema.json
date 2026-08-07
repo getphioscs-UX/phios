@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "driftCode",
+    "manuscriptCode",
+    "oldManuscriptDigest",
+    "newManuscriptDigest",
+    "affectedSections",
+    "affectedNodes",
+    "detectedDrift",
+    "status",
+    "authorityMode"
+  ],
+  "properties": {
+    "driftCode": {
+      "type": "string"
+    },
+    "manuscriptCode": {
+      "type": "string"
+    },
+    "oldManuscriptDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "newManuscriptDigest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "affectedSections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "affectedNodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^KN-"
+      }
+    },
+    "detectedDrift": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "definition_drift",
+          "boundary_drift",
+          "mechanism_drift",
+          "terminology_drift",
+          "ownership_drift",
+          "relationship_drift"
+        ]
+      }
+    },
+    "status": {
+      "enum": [
+        "no_drift",
+        "drift_detected",
+        "requires_human_review"
+      ]
+    },
+    "authorityMode": {
+      "const": "proposal_only"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "readinessCode",
+    "nodeCode",
+    "locale",
+    "checks",
+    "productionReady",
+    "blockingReasons",
+    "pjaAuthority",
+    "authorityMode"
+  ],
+  "properties": {
+    "readinessCode": {
+      "type": "string"
+    },
+    "nodeCode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalNodeExists",
+        "sourceCoverageSufficient",
+        "boundaryStable",
+        "noUnresolvedDuplicate",
+        "noUnresolvedConflict",
+        "localeSourceAvailable",
+        "humanEditorialAccepted"
+      ],
+      "properties": {
+        "canonicalNodeExists": {
+          "type": "boolean"
+        },
+        "sourceCoverageSufficient": {
+          "type": "boolean"
+        },
+        "boundaryStable": {
+          "type": "boolean"
+        },
+        "noUnresolvedDuplicate": {
+          "type": "boolean"
+        },
+        "noUnresolvedConflict": {
+          "type": "boolean"
+        },
+        "localeSourceAvailable": {
+          "type": "boolean"
+        },
+        "humanEditorialAccepted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "productionReady": {
+      "type": "boolean"
+    },
+    "blockingReasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "pjaAuthority": {
+      "const": "EXISTING_PJA"
+    },
+    "authorityMode": {
+      "const": "readiness_handoff_only"
+    }
+  }
+}

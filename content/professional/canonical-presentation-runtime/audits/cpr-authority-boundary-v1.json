@@ -1,0 +1,51 @@
+{
+  "boundaryCode": "PHI-OS-CPR-AUTHORITY-BOUNDARY-v1",
+  "boundaryVersion": "1.0.0",
+  "work": "CPR-W0",
+  "status": "frozen_boundary",
+  "productionStatus": "validation_only",
+  "owns": [
+    "composition",
+    "presentation_selection",
+    "layout_projection",
+    "pds_mapping",
+    "responsive_projection",
+    "accessibility_presentation",
+    "surface_rendering"
+  ],
+  "doesNotOwn": [
+    "knowledge_creation",
+    "meaning_selection",
+    "related_node_inference",
+    "reading_path_priority",
+    "asset_approval",
+    "asset_publication",
+    "professional_judgment",
+    "runtime_state",
+    "permission_authority",
+    "pds_token_definition"
+  ],
+  "authorityRelationships": {
+    "CAR": "upstream_asset_and_surface_projection_authority",
+    "PublishedAssetRegistry": "upstream_publication_authority_input",
+    "PDS": "downstream_visual_and_interaction_token_authority_reused_by_reference",
+    "KnowledgeIntelligence": "upstream_relationship_and_reading_path_authority",
+    "JourneyRuntime": "upstream_journey_semantics_and_progress_authority",
+    "CPR": "presentation_composition_projection_only"
+  },
+  "invariants": {
+    "cprIsCar": false,
+    "cprIsPds": false,
+    "cprIsKnowledgeIntelligence": false,
+    "cprIsJourneyRuntime": false,
+    "cprMayCreateKnowledge": false,
+    "cprMaySelectMeaning": false,
+    "cprMayInferRelatedNodes": false,
+    "cprMayReorderReadingPriority": false,
+    "cprMayApproveAsset": false,
+    "cprMayPublishAsset": false,
+    "cprMayInferRuntimeState": false,
+    "cprMayDefinePdsTokens": false,
+    "duplicateAuthorityCreated": false
+  }
+}

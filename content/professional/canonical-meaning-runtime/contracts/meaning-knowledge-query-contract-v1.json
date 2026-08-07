@@ -1,6 +1,6 @@
 {
   "contractCode": "CMR-MEANING-KNOWLEDGE-QUERY-v1",
-  "contractVersion": "1.0.0",
+  "contractVersion": "1.1.0",
   "status": "validation_only",
   "authority": {
     "connectionMode": "reference_query_contract",
@@ -47,5 +47,18 @@
     "No Provider",
     "No AI",
     "No interpretation creation"
-  ]
+  ],
+  "baselineCommit": "14c910b2170ab372a0194739921ffc607a0f365a",
+  "registryAuthority": {
+    "meaningFamilyRegistry": "canonical-meaning-family-registry-v1.1.json",
+    "meaningCodeRegistry": "canonical-meaning-code-registry-v1.2.json",
+    "meaningKnowledgeMap": "canonical-meaning-knowledge-map-v1.2.json",
+    "successorRegistryUse": "read_only"
+  },
+  "journeyBoundary": {
+    "cmW14V1Frozen": true,
+    "cmW14V1DependsOnCMW13": false,
+    "cmW14V1KnowledgeQueryAllowed": false,
+    "futureIntegrationRequiresVersionedCMW14Successor": true
+  }
 }
