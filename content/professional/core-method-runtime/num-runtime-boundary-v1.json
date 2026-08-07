@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-NUM-RUNTIME-BOUNDARY-v1.0.0",
+  "stageCode": "NUM-W0",
+  "methodCode": "NUMEROLOGY",
+  "pluginCode": "NUM",
+  "inputBoundary": {
+    "birthDateFormat": "YYYY-MM-DD",
+    "targetDateFormat": "YYYY-MM-DD",
+    "timezoneRequiredForDateSelection": true,
+    "nameInputAllowed": false,
+    "silentDateReformatAllowed": false
+  },
+  "calculationBoundary": {
+    "orderedStages": [
+      "BIRTH_DATE_VALIDATION",
+      "CONTROLLED_REDUCTION",
+      "BIRTH_NUMBER_FACTS",
+      "NUMBER_STRUCTURE_NORMALIZATION",
+      "DATE_CYCLE_CALCULATION",
+      "LIFE_STAGE_CYCLE_CALCULATION"
+    ],
+    "sharedCalculationRuntimeRequired": true,
+    "deterministicRequired": true,
+    "providerAllowed": false,
+    "aiAllowed": false
+  },
+  "semanticBoundary": {
+    "numericFactIsIdentityFact": false,
+    "numericFactIsPersonalityFact": false,
+    "numericCycleIsFuturePrediction": false,
+    "numericFactIsProfessionalConclusion": false,
+    "meaningCreationAllowed": false
+  },
+  "stageOwnership": {
+    "NUM-W1": [
+      "lifePath",
+      "birthdayNumber",
+      "attitudeNumber",
+      "birthComponents"
+    ],
+    "NUM-W2": [
+      "digitFrequency",
+      "masterNumberState",
+      "compoundStructure",
+      "stableFactCodes"
+    ],
+    "NUM-W3": [
+      "personalYear",
+      "personalMonth",
+      "personalDay",
+      "pinnacleCycles",
+      "challengeCycles"
+    ],
+    "NUM-W4": [
+      "canonicalProjection"
+    ],
+    "NUM-W5": [
+      "professionalIntegration"
+    ],
+    "NUM-W6": [
+      "productionFreeze"
+    ]
+  }
+}

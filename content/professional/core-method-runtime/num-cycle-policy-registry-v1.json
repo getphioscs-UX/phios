@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-NUM-CYCLE-POLICY-REGISTRY-v1.0.0",
+  "stageCode": "NUM-W3",
+  "registryCode": "NUM_CYCLE_POLICY_REGISTRY",
+  "registryVersion": "1.0.0",
+  "status": "candidate_validation_only",
+  "calendarCyclePolicy": {
+    "policyCode": "PHI_OS_NUMERIC_CYCLE_V1",
+    "personalYearFormula": "birth_month + birth_day + reduced_target_year",
+    "personalMonthFormula": "personal_year + target_month",
+    "personalDayFormula": "personal_month + target_day",
+    "targetDateMustBeExplicit": true,
+    "serverCurrentDateAllowed": false
+  },
+  "lifeStagePolicy": {
+    "policyCode": "PHI_OS_NUMERIC_LIFE_STAGE_BOUNDARY_V1",
+    "pinnacleFormulaSet": [
+      "month+day",
+      "day+year",
+      "pinnacle1+pinnacle2",
+      "month+year"
+    ],
+    "challengeFormulaSet": [
+      "abs(month-day)",
+      "abs(day-year)",
+      "abs(challenge1-challenge2)",
+      "abs(month-year)"
+    ],
+    "firstBoundaryAgeFormula": "36 - reduced_life_path",
+    "followingCycleYears": 9
+  },
+  "semanticBoundary": {
+    "futureEventPredictionAllowed": false,
+    "realityConclusionAllowed": false
+  }
+}
