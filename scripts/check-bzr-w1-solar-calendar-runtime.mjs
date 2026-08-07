@@ -4,7 +4,7 @@ import path from 'node:path';
 import {
   createBzrSolarCalendarRuntime,
   BZR_SOLAR_CALENDAR_RUNTIME_CODE
-} from '../functions/core-method-runtime/bzr-solar-calendar-runtime.js';
+} from './lib/core-method-runtime/bzr-solar-calendar-runtime.js';
 
 const root = process.cwd();
 const readJson = async file =>
