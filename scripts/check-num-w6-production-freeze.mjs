@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises'; import path from 'node:path';
+const root=process.cwd(); const j=async f=>JSON.parse(await fs.readFile(path.join(root,f),'utf8'));
+const freeze=await j('content/professional/core-method-runtime/num-production-freeze-v1.json');
+assert.equal(freeze.status,'NUM Frozen v1'); assert.equal(freeze.productionStatus,'blocked');
+assert.equal(freeze.executionMode,'validation_only');
+assert.equal(freeze.governance.mergedIntoFrozenMR,false);
+assert.equal(freeze.governance.mergedIntoFrozenIMR,false);
+for(const f of freeze.frozenScope) await fs.access(path.join(root,f));
+console.log('✓ NUM-W6 Production Freeze passed.');
+console.log('  NUM is frozen as validation-only; Production and Professional release remain blocked.');
