@@ -1,0 +1,35 @@
+{
+  "reportCode": "CMR-W8-AST-MEANING-MAPPING-READINESS",
+  "reportVersion": "1.0.0",
+  "work": "CM-W8",
+  "baselineCommit": "0354d60efce30e1154992d53161ac6f7fcd1095f",
+  "status": "blocked",
+  "readyForMappingPopulation": false,
+  "checks": {
+    "cmW6FoundationFrozen": true,
+    "astCanonicalProjectionAvailable": true,
+    "planetProjectionAvailable": true,
+    "houseProjectionAvailable": true,
+    "aspectProjectionAvailable": true,
+    "directionDriverFamilyRegistered": true,
+    "directionDriverMeaningCodesPopulated": false,
+    "activationCarrierFamilyRegistered": false,
+    "realityDomainFamilyRegistered": false,
+    "structuralRelationshipSignalFamilyRegistered": false,
+    "zodiacDirectionProjectionAvailable": false,
+    "productionAuthorityCreated": false
+  },
+  "blockers": [
+    "DIRECTION_DRIVER_MEANING_CODES_NOT_POPULATED",
+    "ZODIAC_DIRECTION_CANONICAL_PROJECTION_OR_GOVERNED_RANGE_PREDICATE_MISSING",
+    "ACTIVATION_CARRIER_FUNCTIONAL_DRIVER_MEANING_FAMILY_MISSING",
+    "REALITY_DOMAIN_MEANING_FAMILY_MISSING",
+    "STRUCTURAL_RELATIONSHIP_SIGNAL_MEANING_FAMILY_MISSING"
+  ],
+  "requiredNextActions": [
+    "Create a versioned Meaning Family successor for Activation Carrier / Functional Driver, Reality Domain and Structural Relationship Signal if those semantics remain required.",
+    "Populate PHI OS-owned Direction Driver and other target Meaning Codes with Knowledge Authority.",
+    "Create a versioned Canonical Projection or governed mapping-predicate successor for Zodiac Direction segmentation; do not infer zodiac archetypes from raw method objects.",
+    "Only then populate the CM-W6B Versioned Mapping Registry for AST."
+  ]
+}

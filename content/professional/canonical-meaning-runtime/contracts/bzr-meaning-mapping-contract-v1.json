@@ -1,0 +1,98 @@
+{
+  "contractCode": "PHI-OS-CMR-BZR-MEANING-MAPPING-v1",
+  "contractVersion": "1.0.0",
+  "work": "CM-W9",
+  "productionStatus": "validation_only",
+  "purpose": "Freeze the BaZi Canonical Projection-to-PHI OS Meaning mapping boundary without importing traditional BaZi interpretation.",
+  "baselineCommit": "0354d60efce30e1154992d53161ac6f7fcd1095f",
+  "soleInputAuthority": {
+    "schemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "methodCode": "BAZI",
+    "pluginCode": "BZR",
+    "projectionRuntimeCode": "BZR_PROJECTION_RUNTIME"
+  },
+  "mappingScopes": [
+    {
+      "scopeCode": "STEM_ACTIVATION_QUALITY",
+      "projectionType": "STEM",
+      "projectionPaths": [
+        "projectionValue.stems[].stemCode"
+      ],
+      "targetSemanticDomain": "ACTIVATION_QUALITY",
+      "targetMeaningNamespace": "CM-ACTIVATION-QUALITY",
+      "mappingPopulation": "blocked_pending_target_meaning_codes"
+    },
+    {
+      "scopeCode": "BRANCH_CARRIER_CONTEXT",
+      "projectionType": "BRANCH",
+      "projectionPaths": [
+        "projectionValue.branches[].branchCode"
+      ],
+      "targetSemanticDomain": "CARRIER_CONTEXT",
+      "targetMeaningNamespace": "CM-CARRIER-CONTEXT",
+      "mappingPopulation": "blocked_pending_target_meaning_codes"
+    },
+    {
+      "scopeCode": "PILLAR_TEMPORAL_STRUCTURAL_POSITION",
+      "projectionType": "PILLAR",
+      "projectionPaths": [
+        "projectionValue.pillars[].pillarType",
+        "projectionValue.pillars[].stemCode",
+        "projectionValue.pillars[].branchCode",
+        "projectionValue.pillars[].sexagenaryIndex"
+      ],
+      "targetSemanticDomain": "TEMPORAL_STRUCTURAL_POSITION",
+      "targetMeaningNamespace": "CM-TEMPORAL-POSITION",
+      "mappingPopulation": "blocked_pending_target_meaning_codes"
+    },
+    {
+      "scopeCode": "LUCK_CYCLE_RUNTIME_PHASE_CONTEXT",
+      "projectionType": "LUCK_CYCLE",
+      "projectionPaths": [
+        "projectionValue.direction",
+        "projectionValue.startAge",
+        "projectionValue.cycles[]"
+      ],
+      "targetSemanticDomain": "RUNTIME_PHASE_CONTEXT",
+      "targetMeaningNamespace": "CM-RUNTIME-PHASE",
+      "mappingPopulation": "blocked_pending_target_meaning_codes"
+    }
+  ],
+  "requiredMappingShape": [
+    "projectionCode",
+    "meaningCode",
+    "mappingVersion",
+    "mappingAuthority",
+    "mappingConfidence",
+    "boundary"
+  ],
+  "forbiddenContent": [
+    "TEN_GODS_INTERPRETATION",
+    "USEFUL_GOD_INTERPRETATION",
+    "PATTERN_INTERPRETATION",
+    "FORTUNE_PREDICTION",
+    "IDENTITY_FACT",
+    "PERSONALITY_DESCRIPTION",
+    "ORIGINAL_BAZI_INTERPRETATION_TEXT",
+    "RAW_METHOD_OBJECT",
+    "METHOD_CALCULATION_INTERNALS"
+  ],
+  "activationRequirements": [
+    "registered_target_meaning_code",
+    "valid_meaning_identity",
+    "knowledge_authority_reference",
+    "canonical_projection_support",
+    "cm_w6_foundation_valid"
+  ],
+  "invariants": {
+    "projectionToMeaningOnly": true,
+    "stemMeansActivationQualityOnly": true,
+    "branchMeansCarrierContextOnly": true,
+    "pillarMeansTemporalStructuralPositionOnly": true,
+    "luckCycleMeansRuntimePhaseContextOnly": true,
+    "interpretationCreated": false,
+    "knowledgeCreated": false,
+    "professionalConclusionCreated": false,
+    "actualMappingsCreated": false
+  }
+}

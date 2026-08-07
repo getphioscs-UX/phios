@@ -1,23 +1,20 @@
 import assert from "node:assert/strict";
-import crypto from "node:crypto";
 import fs from "node:fs/promises";
-const readJson=async p=>JSON.parse(await fs.readFile(p,"utf8"));
-const sha=async p=>crypto.createHash("sha256").update(await fs.readFile(p)).digest("hex");
+import crypto from "node:crypto";
+const J=async p=>JSON.parse(await fs.readFile(p,"utf8"));
+const S=async p=>crypto.createHash("sha256").update(await fs.readFile(p)).digest("hex");
 const r="content/professional/canonical-meaning-runtime/";
-const paths={contract:r+"contracts/hdr-structure-mapping-contract-v1.json",registry:r+"registries/hdr-structure-mapping-registry-v1.json",readiness:r+"readiness/hdr-structure-mapping-readiness-v1.json",freeze:r+"freeze/cmr-w7a-hdr-structure-mapping-freeze-v1.json",codes:r+"registries/canonical-meaning-code-registry-v1.json",global:r+"registries/versioned-method-meaning-mapping-registry-v1.json",w6d:r+"freeze/cmr-w6d-mapping-foundation-freeze-v1.json",projection:"content/professional/core-method-runtime/hdr-projection-runtime-v1.json"};
-const [c,g,q,f,codes,global,w6d,p]=await Promise.all(Object.values(paths).map(readJson));
-assert.equal(c.work,"CM-W7A"); assert.equal(c.soleInputAuthority.schemaVersion,"PHI-OS-CANONICAL-PROJECTION-v1.0.0");
-assert.deepEqual(c.structureScopes.map(x=>x.expectedSourceCount),[64,36,9,5]);
-for(const x of ["GATE_DESCRIPTION","CHANNEL_DESCRIPTION","CENTER_DESCRIPTION","ORIGINAL_METHOD_INTERPRETATION_TEXT","RAW_METHOD_OBJECT"]) assert.equal(c.forbiddenContent.includes(x),true);
-assert.equal(g.expectedCoverage.total,114); assert.equal(g.mappingCount,0); assert.deepEqual(g.mappings,[]);
-assert.equal(g.sourceProjectionSurface.PROCESSING_NETWORK.status,"missing_canonical_projection");
-assert.equal(q.status,"blocked"); assert.equal(q.readyForMappingPopulation,false); assert.equal(q.actualMappingsCreated,false);
-assert.deepEqual(codes.meaningCodes,[]); assert.equal(global.mappingCount,0); assert.deepEqual(global.mappings,[]);
-assert.deepEqual(p.projectionTypes,["GATE","CHANNEL","CENTER","AUTHORITY","PROFILE"]);
-assert.equal(w6d.status,"frozen");
-for(const output of f.outputs) assert.equal(await sha(output),f.digests[output]);
-assert.equal(await sha(paths.w6d),f.protectedDigests.cmrW6D); assert.equal(await sha(paths.codes),f.protectedDigests.meaningCodeRegistry); assert.equal(await sha(paths.global),f.protectedDigests.versionedMappingRegistry);
-assert.equal(f.invariants.actualMappingsCreated,false); assert.equal(f.invariants.processingNetworkProjectionGapDisclosed,true);
-console.log("✓ CM-W7A HDR Structure Mapping readiness foundation passed.");
-console.log("✓ 64 SDU / 36 SCU / 9 Resource Center / 5 Processing Network coverage is governed without fabricated Mapping.");
-console.log("✓ Meaning Code population and Processing Network Canonical Projection remain explicit blockers.");
+const P={reg:r+"registries/hdr-structure-mapping-registry-v1.json",codes:r+"registries/canonical-meaning-code-registry-v1.json",knowledge:r+"registries/canonical-meaning-knowledge-map-v1.json",accept:r+"acceptance/cmr-w7-hdr-mapping-acceptance-v1.json",legacy:r+"freeze/cmr-w7a-hdr-structure-mapping-freeze-v1.json",successor:r+"freeze/cmr-w7a-populated-state-freeze-v1.1.json",w6d:r+"freeze/cmr-w6d-mapping-foundation-freeze-v1.json"};
+const [g,c,k,a,l,f,w]=await Promise.all(Object.values(P).map(J));
+assert.equal(g.registryVersion,"1.1.0"); assert.equal(g.mappingCount,100); assert.equal(g.mappings.length,100);
+assert.equal(g.coverage.sduMapped,64); assert.equal(g.coverage.scuMapped,36); assert.equal(g.coverage.resourceCenterMapped,0); assert.equal(g.coverage.processingNetworkMapped,0);
+assert.equal(c.meaningCodes.length,100); assert.equal(k.mappings.length,100);
+const codeSet=new Set(c.meaningCodes.map(x=>x.meaningCode)); const mapCodeSet=new Set();
+for(const m of g.mappings){ assert.equal(m.sourceMethodCode,"HUMAN_DESIGN"); assert.equal(["GATE","CHANNEL"].includes(m.projectionType),true); assert.equal(m.boundary,"validation_only"); assert.equal(m.mappingAuthority,"PHIOS"); assert.match(m.mappingDigest,/^[a-f0-9]{64}$/); assert.equal(m.targetMeaningCodes.every(x=>codeSet.has(x)),true); assert.equal(mapCodeSet.has(m.mappingCode),false); mapCodeSet.add(m.mappingCode); }
+assert.equal(a.results.productionAuthorityCreated,false); assert.equal(a.results.professionalConclusionCreated,false); assert.equal(a.results.journeyActivated,false);
+assert.equal(w.status,"frozen"); assert.equal(l.invariants.actualMappingsCreated,false); // historical v1 readiness freeze remains immutable
+assert.equal(f.successorVersion,"1.1.0"); assert.equal(f.populationState.mappingCount,100); assert.equal(f.invariants.legacyReadinessFreezeMutated,false);
+for(const [p,h] of Object.entries(f.digests)){ assert.equal(await S(p),h); }
+console.log("✓ CM-W7A v1.1 populated-state checker passed.");
+console.log("✓ 64 SDU + 36 SCU mappings resolve only to registered PHI OS Meaning Codes with Knowledge Authority.");
+console.log("✓ Historical CM-W7A v1.0 readiness freeze remains immutable; Resource Center and Processing Network stay fail-closed.");

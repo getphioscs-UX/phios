@@ -1,0 +1,63 @@
+{
+  "registryCode": "PHI-OS-AST-MEANING-MAPPING-REGISTRY",
+  "registryVersion": "1.0.0",
+  "work": "CM-W8",
+  "productionStatus": "validation_only",
+  "sourceMethodCode": "ASTROLOGY",
+  "sourceProjectionSchemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+  "sourceProjectionSurface": {
+    "PLANET": {
+      "status": "available",
+      "authorizedFields": [
+        "projectionValue.bodies",
+        "projectionValue.utcIso",
+        "projectionValue.referenceFrame"
+      ]
+    },
+    "HOUSE": {
+      "status": "available",
+      "authorizedFields": [
+        "projectionValue.angles",
+        "projectionValue.cusps",
+        "projectionValue.placements"
+      ]
+    },
+    "ASPECT": {
+      "status": "available",
+      "authorizedFields": [
+        "projectionValue.aspects"
+      ]
+    }
+  },
+  "plannedSemanticRelations": [
+    {
+      "projection": "ZODIAC_DIRECTION",
+      "meaning": "DIRECTION_DRIVER",
+      "relationship": "maps_to_when_authorized"
+    },
+    {
+      "projection": "PLANET",
+      "meaning": "ACTIVATION_CARRIER_OR_FUNCTIONAL_DRIVER",
+      "relationship": "maps_to_when_authorized"
+    },
+    {
+      "projection": "HOUSE",
+      "meaning": "REALITY_DOMAIN",
+      "relationship": "maps_to_when_authorized"
+    },
+    {
+      "projection": "ASPECT",
+      "meaning": "STRUCTURAL_RELATIONSHIP_SIGNAL",
+      "relationship": "maps_to_when_authorized"
+    }
+  ],
+  "mappingCount": 0,
+  "mappings": [],
+  "blockers": [
+    "DIRECTION_DRIVER_MEANING_CODES_NOT_POPULATED",
+    "ZODIAC_DIRECTION_CANONICAL_PROJECTION_OR_GOVERNED_RANGE_PREDICATE_MISSING",
+    "ACTIVATION_CARRIER_FUNCTIONAL_DRIVER_MEANING_FAMILY_MISSING",
+    "REALITY_DOMAIN_MEANING_FAMILY_MISSING",
+    "STRUCTURAL_RELATIONSHIP_SIGNAL_MEANING_FAMILY_MISSING"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "contractCode": "PHI-OS-AST-MEANING-MAPPING-CONTRACT-v1.0.0",
+  "work": "CM-W8",
+  "version": "1.0.0",
+  "productionStatus": "validation_only",
+  "sourceMethodCode": "ASTROLOGY",
+  "soleInputAuthority": {
+    "authority": "CANONICAL_PROJECTION",
+    "schemaVersion": "PHI-OS-CANONICAL-PROJECTION-v1.0.0",
+    "projectionTypes": [
+      "PLANET",
+      "HOUSE",
+      "ASPECT"
+    ]
+  },
+  "authorityDistinctions": {
+    "planetPosition": "PROJECTION",
+    "zodiacDirectionDriver": "MEANING",
+    "knowledgeMechanismExplanation": "KNOWLEDGE",
+    "housePlacement": "PROJECTION",
+    "realityDomain": "MEANING",
+    "aspectGeometry": "PROJECTION",
+    "structuralRelationshipSignal": "MEANING"
+  },
+  "mappingScopes": [
+    {
+      "scopeCode": "ZODIAC_DIRECTION_TO_DIRECTION_DRIVER",
+      "sourceProjectionType": "PLANET",
+      "targetMeaningFamily": "DIRECTION_DRIVER",
+      "status": "blocked",
+      "reason": "No explicit Zodiac Direction Canonical Projection and W6A predicate language does not authorize longitude-range segmentation."
+    },
+    {
+      "scopeCode": "PLANET_TO_ACTIVATION_CARRIER_FUNCTIONAL_DRIVER",
+      "sourceProjectionType": "PLANET",
+      "targetMeaningFamily": "ACTIVATION_CARRIER_OR_FUNCTIONAL_DRIVER",
+      "status": "blocked",
+      "reason": "Target PHI OS Meaning Family and Codes are not registered."
+    },
+    {
+      "scopeCode": "HOUSE_TO_REALITY_DOMAIN",
+      "sourceProjectionType": "HOUSE",
+      "targetMeaningFamily": "REALITY_DOMAIN",
+      "status": "blocked",
+      "reason": "Target PHI OS Meaning Family and Codes are not registered."
+    },
+    {
+      "scopeCode": "ASPECT_TO_STRUCTURAL_RELATIONSHIP_SIGNAL",
+      "sourceProjectionType": "ASPECT",
+      "targetMeaningFamily": "STRUCTURAL_RELATIONSHIP_SIGNAL",
+      "status": "blocked",
+      "reason": "Target PHI OS Meaning Family and Codes are not registered; STRUCTURAL_CONNECTION may not be reused as an undocumented semantic substitute."
+    }
+  ],
+  "forbiddenContent": [
+    "ASTROLOGY_ARCHETYPE_INTERPRETATION",
+    "PLANET_DESCRIPTION",
+    "SIGN_DESCRIPTION",
+    "HOUSE_DESCRIPTION",
+    "ASPECT_DESCRIPTION",
+    "RAW_ASTROLOGY_CHART",
+    "METHOD_CALCULATION_INTERNALS",
+    "ORIGINAL_METHOD_INTERPRETATION_TEXT"
+  ],
+  "rules": {
+    "canonicalProjectionOnly": true,
+    "mappingMayDeriveUnregisteredMeaning": false,
+    "mappingMayCreateMeaningFamily": false,
+    "mappingMayCreateMeaningCode": false,
+    "knowledgeExplainsMeaningNotMethodText": true,
+    "productionAuthorityCreated": false,
+    "professionalConclusionCreated": false
+  }
+}
