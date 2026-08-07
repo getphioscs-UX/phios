@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-meaning-v1.schema.json",
+  "title": "PHI OS Canonical Meaning v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "meaningCode",
+    "meaningVersion",
+    "meaningFamily",
+    "meaningDimensions",
+    "sourceProjection",
+    "mappingLineage",
+    "knowledgeReferences",
+    "confidence",
+    "boundaries",
+    "status"
+  ],
+  "properties": {
+    "meaningCode": {
+      "type": "string",
+      "pattern": "^CM-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+    },
+    "meaningVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "meaningFamily": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*$"
+    },
+    "meaningDimensions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "anyOf": [
+          { "type": "string", "minLength": 1 },
+          { "type": "number" },
+          { "type": "boolean" },
+          {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        ]
+      }
+    },
+    "sourceProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["methodCode", "projectionType", "projectionCode", "projectionVersion", "projectionDigest"],
+      "properties": {
+        "methodCode": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "projectionType": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "projectionCode": { "type": "string", "minLength": 1 },
+        "projectionVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "projectionDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "mappingLineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mappingCode", "mappingVersion", "mappingAuthority", "mappingDigest"],
+      "properties": {
+        "mappingCode": { "type": "string", "minLength": 1 },
+        "mappingVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "mappingAuthority": { "type": "string", "enum": ["registry_led", "tl_human_approved"] },
+        "mappingDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "knowledgeReferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primaryNodeCodes", "supportingNodeCodes", "publishedFragmentDigests"],
+      "properties": {
+        "primaryNodeCodes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$" }
+        },
+        "supportingNodeCodes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$" }
+        },
+        "publishedFragmentDigests": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "basis"],
+      "properties": {
+        "level": { "type": "string", "enum": ["provisional", "bounded", "validated"] },
+        "basis": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mustNotClaim", "limitations", "prohibitedAuthorities"],
+      "properties": {
+        "mustNotClaim": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "limitations": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "prohibitedAuthorities": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "method_projection",
+              "knowledge_node",
+              "published_fragment",
+              "article",
+              "reality_fact",
+              "professional_conclusion",
+              "reality_decision"
+            ]
+          },
+          "allOf": [
+            { "contains": { "const": "method_projection" } },
+            { "contains": { "const": "article" } },
+            { "contains": { "const": "reality_fact" } },
+            { "contains": { "const": "professional_conclusion" } }
+          ]
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "validation_only", "deprecated"]
+    }
+  }
+}
