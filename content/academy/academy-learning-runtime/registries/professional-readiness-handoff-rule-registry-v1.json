@@ -1,0 +1,27 @@
+{
+  "registryCode": "PHI-OS-ALR-W34-PROFESSIONAL-READINESS-HANDOFF-RULE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W34",
+  "status": "canonical",
+  "productionStatus": "bounded_handoff_rule_only",
+  "handoffRules": [
+    {
+      "handoffRuleCode": "ALR-PRH-BOUNDED-PROFESSIONAL-FORMATION",
+      "handoffRuleVersion": "1.0.0",
+      "sourceCapabilityCode": "ALR-CAP-BOUNDED-PROFESSIONAL-FORMATION",
+      "requiredCapabilityCodes": ["ALR-CAP-EVIDENCE-DISTINCTION", "ALR-CAP-BOUNDED-READING", "ALR-CAP-CONSTRAINT-AWARE-NAVIGATION", "ALR-CAP-REVIEW-CONTINUITY", "ALR-CAP-BOUNDED-PROFESSIONAL-FORMATION"],
+      "requiredCapabilityState": "SUPPORTED",
+      "targetAuthority": "runtime/workspace/readiness",
+      "targetOperation": "readiness.evaluate",
+      "status": "ACTIVE",
+      "authorityReference": "ALR"
+    }
+  ],
+  "rules": {
+    "ruleUsesCompleteCapabilityDependencyClosure": true,
+    "handoffIsCandidateInputNotReadinessDecision": true,
+    "handoffDoesNotSatisfyAnyPwsGateByItself": true,
+    "handoffDoesNotCreateProfessionalQueueAssignmentWorkspaceOrResponsibility": true,
+    "registryStoresLearnerOrProfessionalData": false
+  }
+}

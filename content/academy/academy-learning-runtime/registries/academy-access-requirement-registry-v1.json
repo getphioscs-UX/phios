@@ -1,0 +1,22 @@
+{
+  "registryCode": "PHI-OS-ALR-W33-ACADEMY-ACCESS-REQUIREMENT-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W33",
+  "status": "canonical",
+  "productionStatus": "learning_path_access_requirement_semantics_only",
+  "requiredFields": ["accessRequirementCode", "accessRequirementVersion", "learningPathCode", "academyLevelCode", "minimumAccessScopeCode", "acceptedAccessScopeCodes", "status", "authorityReference"],
+  "accessRequirements": [
+    {"accessRequirementCode": "ALR-AER-EVIDENCE-DISTINCTION", "accessRequirementVersion": "1.0.0", "learningPathCode": "ALR-LO-PATH-EVIDENCE-DISTINCTION", "academyLevelCode": "FOUNDATION", "minimumAccessScopeCode": "ACADEMY_FOUNDATION", "acceptedAccessScopeCodes": ["ACADEMY_FOUNDATION", "ACADEMY_READER", "ACADEMY_NAVIGATOR", "ACADEMY_PROFESSIONAL_FORMATION"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"accessRequirementCode": "ALR-AER-BOUNDED-READING", "accessRequirementVersion": "1.0.0", "learningPathCode": "ALR-LO-PATH-BOUNDED-READING", "academyLevelCode": "READER", "minimumAccessScopeCode": "ACADEMY_READER", "acceptedAccessScopeCodes": ["ACADEMY_READER", "ACADEMY_NAVIGATOR", "ACADEMY_PROFESSIONAL_FORMATION"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"accessRequirementCode": "ALR-AER-CONSTRAINT-AWARE-NAVIGATION", "accessRequirementVersion": "1.0.0", "learningPathCode": "ALR-LO-PATH-CONSTRAINT-AWARE-NAVIGATION", "academyLevelCode": "NAVIGATOR", "minimumAccessScopeCode": "ACADEMY_NAVIGATOR", "acceptedAccessScopeCodes": ["ACADEMY_NAVIGATOR", "ACADEMY_PROFESSIONAL_FORMATION"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"accessRequirementCode": "ALR-AER-REVIEW-CONTINUITY", "accessRequirementVersion": "1.0.0", "learningPathCode": "ALR-LO-PATH-REVIEW-CONTINUITY", "academyLevelCode": "NAVIGATOR", "minimumAccessScopeCode": "ACADEMY_NAVIGATOR", "acceptedAccessScopeCodes": ["ACADEMY_NAVIGATOR", "ACADEMY_PROFESSIONAL_FORMATION"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"accessRequirementCode": "ALR-AER-BOUNDED-PROFESSIONAL-FORMATION", "accessRequirementVersion": "1.0.0", "learningPathCode": "ALR-LO-PATH-BOUNDED-PROFESSIONAL-FORMATION", "academyLevelCode": "PROFESSIONAL", "minimumAccessScopeCode": "ACADEMY_PROFESSIONAL_FORMATION", "acceptedAccessScopeCodes": ["ACADEMY_PROFESSIONAL_FORMATION"], "status": "ACTIVE", "authorityReference": "ALR"}
+  ],
+  "rules": {
+    "oneRequirementPerCanonicalLearningPath": true,
+    "acceptedScopesAreMinimumScopeAndHigherAcademyScopes": true,
+    "requirementDoesNotGrantEntitlementEnrollmentOrDelivery": true,
+    "unknownPathLevelOrScopeFailsClosed": true,
+    "registryStoresUserOrEntitlementData": false
+  }
+}
