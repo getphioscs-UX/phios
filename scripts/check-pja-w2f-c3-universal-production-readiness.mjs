@@ -55,15 +55,16 @@ for (const c2Entry of c2.entries.filter(entry => entry.status !== 'frozen')) ass
 const wave1 = ['KN-PREFACE-004','KN-B1-P1-003','KN-B1-P4-003','KN-B1-P4-004'];
 for (const code of wave1) {
   const assessment = read(`content/knowledge/editorial/c3/assessments/${code.toLowerCase()}-production-readiness.json`);
-  assert.equal(assessment.status, 'human_approval_required'); assert.equal(assessment.productionReady, false); assert.equal(assessment.humanProductionDecisionEligible, true);
-  assert.equal(assessment.gates.c2FrozenThesisBoundary.status, 'passed'); assert.equal(assessment.gates.claimSufficiency.status, 'passed');
-  assert.equal(assessment.gates.sourceSufficiency.status, 'passed'); assert.equal(assessment.gates.supportingQuestionTreatment.status, 'passed'); assert.equal(assessment.gates.figureDecision.status, 'passed'); assert.equal(assessment.gates.editorialReview.status, 'passed');
-  assert.equal(assessment.gates.humanProductionApproval.status, 'failed'); assert.equal(assessment.gates.exportability.status, 'failed');
-  assert.deepEqual(assessment.blocking, ['HUMAN_PRODUCTION_APPROVAL_REQUIRED','EXPORTABILITY_NOT_ALLOWED']);
+  assert.equal(assessment.status, 'production_ready'); assert.equal(assessment.productionReady, true); assert.equal(assessment.humanProductionDecisionEligible, false);
+  for (const gate of Object.values(assessment.gates)) assert.equal(gate.status, 'passed', code);
+  assert.deepEqual(assessment.blocking, []);
   assert.equal(assessment.authority.humanEditorialApproved, true);
   assert.equal(assessment.authority.editorialRecord, 'content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json');
   assert.equal(assessment.authority.wave1C3ClosureRecord, 'content/knowledge/editorial/c3/closures/wave1-c3-readiness-closure-v1.json');
-  assert.equal(assessment.authority.humanProductionDecisionEligible, true);
+  assert.equal(assessment.authority.humanProductionDecisionEligible, false);
+  assert.equal(assessment.authority.humanProductionApproved, true);
+  assert.equal(assessment.authority.humanProductionDecisionRecord, 'content/knowledge/production-planning/production/wave1/human-production-decision-v1.json');
+  assert.equal(assessment.authority.c3HumanProductionApprovalRecord, 'content/knowledge/editorial/c3/closures/wave1-human-production-approval-v1.json');
 }
 const preface = read('content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json');
 assert.equal(preface.authority.wave1FigureDecisionState, 'passed');
@@ -93,7 +94,7 @@ const negativeGuards = [
 for (const guard of negativeGuards) assert.throws(guard, /NEGATIVE_FIXTURE_REJECTED/);
 console.log('✓ PJA-W2F-C3 Universal Production Readiness rebuilt after Wave 1 C2 Human Freeze.');
 console.log(`✓ ${nodeCount} assessed; ${summary.c2Frozen} C2 frozen; ${summary.c2Blocked} blocked by C2; ${summary.productionReady} production ready; ${summary.productionBlocked} production blocked.`);
-console.log('✓ Wave 1 source/figure/editorial gates now pass; 4/4 items are human_approval_required and eligible for Human Production Decision.');
+console.log('✓ Wave 1 Human Production Decision is reconciled; 4/4 items are production_ready and exportable for governed production brief generation.');
 console.log('✓ Existing KN-PREFACE-004 publication is explicitly reconciled without creating a new publication.');
 function reject(condition){if(!condition)throw new Error('NEGATIVE_FIXTURE_REJECTED');}
 function run(script,...args){return spawnSync(process.execPath,[script,...args],{cwd:root,encoding:'utf8'});}

@@ -9,6 +9,8 @@ const plans=read('content/knowledge/production-planning/registries/kpp-productio
 const waves=read('content/knowledge/production-planning/registries/kpp-production-wave-registry-v2.json');
 const pja=read('content/knowledge/production-planning/registries/kpp-pja-handoff-registry-v1.json');
 const car=read('content/knowledge/production-planning/registries/kpp-car-handoff-registry-v1.json');
+const decision=read('content/knowledge/production-planning/production/wave1/human-production-decision-v1.json');
+const authorized=read('content/knowledge/production-planning/activation/wave1-production-authorized-v1.json');
 const expected=[['KN-PREFACE-004','ARTICLE','PJA'],['KN-B1-P1-003','FRAGMENT','PJA'],['KN-B1-P4-003','FIGURE','CAR'],['KN-B1-P4-004','MULTI_ASSET','CAR']];
 assert.equal(eligibility.status,'active');assert.equal(eligibility.eligibleAssessmentStatus,'human_approval_required');assert.equal(eligibility.circularityResolution.eligibilityUsesNonHumanC3GatesOnly,true);assert.equal(eligibility.downstreamEffectsBeforeDecision.dispatchAllowed,false);
 assert.equal(pre.eligibilityContractReference,'content/knowledge/production-planning/contracts/wave1-human-production-decision-eligibility-v1.json');
@@ -19,16 +21,15 @@ assert.equal(pre.gateSnapshot.humanApprovalRequiredCount,4);assert.equal(pre.gat
 assert.equal(pre.gateSnapshot.humanProductionDecisionAllowed,true);assert.equal(pre.gateSnapshot.productionPlanFreezeAllowed,false);assert.equal(pre.gateSnapshot.productionWaveFreezeAllowed,false);assert.equal(pre.gateSnapshot.dispatchAllowed,false);
 for(const [code,role,target] of expected){
  const item=pre.selectedExecutionScope.find(x=>x.nodeCode===code);assert(item);assert.equal(item.productionRole,role);assert.equal(item.dispatchTarget,target);
- const a=read(item.c3AssessmentReference);assert.equal(a.nodeCode,code);assert.equal(a.status,'human_approval_required');assert.equal(a.productionReady,false);assert.equal(a.humanProductionDecisionEligible,true);
- for(const [name,gate] of Object.entries(a.gates)){
-   if(['humanProductionApproval','exportability'].includes(name)) assert.equal(gate.status,'failed',`${code}:${name}`);
-   else assert.equal(gate.status,'passed',`${code}:${name}`);
- }
- assert.deepEqual(a.blocking,['HUMAN_PRODUCTION_APPROVAL_REQUIRED','EXPORTABILITY_NOT_ALLOWED']);
+ const a=read(item.c3AssessmentReference);assert.equal(a.nodeCode,code);assert.equal(a.status,'production_ready');assert.equal(a.productionReady,true);assert.equal(a.humanProductionDecisionEligible,false);
+ for(const [name,gate] of Object.entries(a.gates)) assert.equal(gate.status,'passed',`${code}:${name}`);
+ assert.deepEqual(a.blocking,[]);assert.equal(a.authority.humanProductionDecisionRecord,'content/knowledge/production-planning/production/wave1/human-production-decision-v1.json');
 }
 assert.equal(pre.requiredNextAuthority,'KPP_W25_HUMAN_PRODUCTION_DECISION');
 assert.equal(human.decisions.length,0);assert.equal(plans.plans.length,0);assert.equal(plans.revisions.length,0);assert.equal(waves.waves.length,0);assert.equal(pja.handoffs.length,0);assert.equal(car.handoffs.length,0);
 assert.equal(pre.effects.humanProductionDecisionCreated,false);assert.equal(pre.effects.productionPlanFrozen,false);assert.equal(pre.effects.productionWaveFrozen,false);assert.equal(pre.effects.dispatchCreated,false);assert.equal(pre.effects.publicationCreated,false);
-console.log('✓ Wave 1 is READY_FOR_HUMAN_PRODUCTION_DECISION.');
-console.log('✓ 4/4 selected items have every non-human C3 gate passed; only Human Production Approval and dependent Exportability remain closed.');
-console.log('✓ Human Production Decision is now allowed, while Plan/Wave freeze and PJA/CAR dispatch remain blocked until that decision is recorded.');
+assert.equal(decision.status,'APPROVED_FOR_PRODUCTION');assert.equal(decision.actor,'TL');assert.equal(decision.entries.length,4);
+assert.equal(authorized.status,'AUTHORIZED_FOR_GOVERNED_PRODUCTION_BRIEF_GENERATION');
+console.log('✓ Historical Wave 1 Human Production Decision eligibility preflight remains preserved.');
+console.log('✓ Its 4/4 eligible items are now superseded by the recorded TL Human Production Decision and current production_ready C3 assessments.');
+console.log('✓ Frozen validation-only KPP registries remain empty; production state lives in the governed Wave 1 production overlay.');

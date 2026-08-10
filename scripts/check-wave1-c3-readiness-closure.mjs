@@ -46,4 +46,4 @@ assert.equal(closure.effects.pjaCandidateCreated,false);assert.equal(closure.eff
 console.log('✓ C3-CL1～CL4 Wave 1 Production Readiness Closure passed.');
 console.log('✓ KN-PREFACE-004 Figure Decision is closed for future visual release without creating CAR authority or invalidating the existing publication.');
 console.log('✓ P1-003/P4-003/P4-004 Source Sufficiency is closed for C2-scoped canonical candidate production; unsourced external claims remain prohibited.');
-console.log('✓ No Human Production Decision, exportability, dispatch, candidate, asset or publication authority was created.');
+console.log('✓ C3-CL1～CL4 itself created no Human Production Decision, exportability, dispatch, candidate, asset or publication authority; downstream Human-governed authorization may supersede it.');

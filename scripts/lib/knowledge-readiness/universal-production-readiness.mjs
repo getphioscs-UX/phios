@@ -3,6 +3,7 @@ import path from 'node:path';
 import { contentHash, C2_WAVE1_HUMAN_RESOLUTION, resolveHumanEditorialFreezeResolutions } from './canonical-thesis-boundary.mjs';
 import { C3R1_PATHS, resolveProductionReadinessClosure } from './preface-production-readiness-closure.mjs';
 import { WAVE1_C3_CLOSURE, resolveWave1C3ReadinessClosure } from './wave1-c3-readiness-closure.mjs';
+import { WAVE1_C3_HUMAN_APPROVAL, WAVE1_HUMAN_DECISION, resolveWave1HumanProductionDecision } from '../knowledge-production-planning/wave1-production-authorization.mjs';
 
 export const C3_ROOT = 'content/knowledge/editorial/c3';
 export const C3_CONTRACT = `${C3_ROOT}/universal-production-readiness.contract.json`;
@@ -81,6 +82,8 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
   const closure = nodeCode === 'KN-PREFACE-001' ? resolveProductionReadinessClosure(root) : null;
   const closurePassed = closure?.status === 'production_ready';
   const wave1Closure = resolveWave1C3ReadinessClosure(root, nodeCode);
+  const wave1ProductionDecision = resolveWave1HumanProductionDecision(root, nodeCode);
+  const wave1ProductionApproved = wave1ProductionDecision?.approved === true;
   const humanEditorialApproval = humanEditorialApprovals.get(nodeCode) ?? null;
   const humanEditorialPassed = Boolean(humanEditorialApproval) || legacy?.review?.status === 'approved';
   const existingPublishedContentReferences = Array.isArray(sources.knownPublishedContent) ? sources.knownPublishedContent : [];
@@ -92,9 +95,9 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
     supportingQuestionTreatment: Array.isArray(questions) && questions.every(question => typeof question.articleTreatment === 'string' && question.articleTreatment.length > 0) ? pass() : fail('QUESTION_TREATMENT_INCOMPLETE'),
     figureDecision: wave1Closure?.entry?.figureDecision?.status === 'passed' || figureComplete(figures) ? pass() : fail('FIGURE_DECISION_INCOMPLETE'),
     editorialReview: humanEditorialPassed ? pass() : fail('EDITORIAL_REVIEW_REQUIRED'),
-    humanProductionApproval: closurePassed ? pass() : fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
+    humanProductionApproval: (closurePassed || wave1ProductionApproved) ? pass() : fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
     noBlockingFindings: blockingFindings.length === 0 ? pass() : fail('BLOCKING_REVIEW_FINDING'),
-    exportability: closurePassed ? pass() : fail('EXPORTABILITY_NOT_ALLOWED')
+    exportability: (closurePassed || wave1ProductionApproved) ? pass() : fail('EXPORTABILITY_NOT_ALLOWED')
   };
   const blocking = Object.values(gates).filter(gate => gate.status === 'failed').map(gate => gate.code);
   const productionReady = contract.requiredGates.every(name => gates[name]?.status === 'passed');
@@ -118,7 +121,13 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
         wave1C3ClosureRecord: WAVE1_C3_CLOSURE,
         wave1SourceClosureState: wave1Closure.entry.sourceSufficiency?.status || null,
         wave1FigureDecisionState: wave1Closure.entry.figureDecision?.status || null,
-        humanProductionDecisionEligible
+        humanProductionDecisionEligible,
+        ...(wave1ProductionApproved ? {
+          humanProductionDecisionRecord: WAVE1_HUMAN_DECISION,
+          humanProductionDecisionDigest: wave1ProductionDecision.decisionDigest,
+          humanProductionApproved: true,
+          c3HumanProductionApprovalRecord: WAVE1_C3_HUMAN_APPROVAL
+        } : {})
       } : {})
     },
     effects: { articleGenerated: false, productionExportGenerated: false, published: false }

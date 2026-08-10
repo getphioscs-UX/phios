@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "PHI-OS-KPP-W26-WAVE1-FROZEN-PRODUCTION-PLAN-v1.0.0",
+  "planCode": "KPP-W26-WAVE1-PRODUCTION-PLAN-001",
+  "planVersion": "1.0.0",
+  "status": "FROZEN",
+  "baselineCommit": "07d634195cd7b1d641fbaf5bbba60137b8ca274c",
+  "humanDecisionReference": "content/knowledge/production-planning/production/wave1/human-production-decision-v1.json",
+  "humanDecisionDigest": "sha256:e9015bb270d90e406262b17198710dce804f909ee4ed45a0ce5b503ced872cfc",
+  "frozenBy": "TL",
+  "frozenAt": "2026-08-10T19:46:00+08:00",
+  "eligibleNodes": [
+    "KN-PREFACE-004",
+    "KN-B1-P1-003",
+    "KN-B1-P4-003",
+    "KN-B1-P4-004"
+  ],
+  "productionRoles": {
+    "KN-PREFACE-004": "ARTICLE",
+    "KN-B1-P1-003": "FRAGMENT",
+    "KN-B1-P4-003": "FIGURE",
+    "KN-B1-P4-004": "MULTI_ASSET"
+  },
+  "priorityProjection": {
+    "KN-PREFACE-004": "P0",
+    "KN-B1-P1-003": "P0",
+    "KN-B1-P4-003": "P0",
+    "KN-B1-P4-004": "P0"
+  },
+  "waves": [
+    "KPP-WAVE-WAVE1-001"
+  ],
+  "handoffTargets": {
+    "KN-PREFACE-004": "PJA",
+    "KN-B1-P1-003": "PJA",
+    "KN-B1-P4-003": "CAR",
+    "KN-B1-P4-004": "CAR"
+  },
+  "localeTargets": {
+    "KN-PREFACE-004": [
+      "zh-Hans"
+    ],
+    "KN-B1-P1-003": [
+      "zh-Hans"
+    ],
+    "KN-B1-P4-003": [
+      "zh-Hans"
+    ],
+    "KN-B1-P4-004": [
+      "zh-Hans"
+    ]
+  },
+  "inputDigest": "sha256:3fc281250d1ecea2790e0847db732c676144535b0e3fdaec499eae00fafc7392",
+  "policyDigest": "sha256:ac584cca291312a58373f2563ca3a0ff323a3eba74764e9a67fd89bf25c6302d",
+  "planDigest": "sha256:39c5fed2bcee02b0b28cdc06ed0fcf992a7b23bd3a7e2bc30c8f1ed02484b5f3",
+  "items": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "knowledgeVersion": "1.1.0",
+      "productionRole": "ARTICLE",
+      "productionPriority": "P0",
+      "requiredOutputs": [
+        "ARTICLE_RECONCILIATION_FOR_VISUAL_RELEASE"
+      ],
+      "dispatchTarget": "PJA",
+      "localeRequirements": [
+        "zh-Hans"
+      ],
+      "productionReadiness": "production_ready",
+      "planStatus": "FROZEN",
+      "existingPublicationMode": "REUSE_EXISTING_PUBLISHED_ARTICLE",
+      "newArticleCandidateRequired": false,
+      "visualReleaseRequirement": "FIGURE-REQ-KN-PREFACE-004-NAVIGATION-LOOP-001"
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "knowledgeVersion": "1.0.0",
+      "productionRole": "FRAGMENT",
+      "productionPriority": "P0",
+      "requiredOutputs": [
+        "FRAGMENT"
+      ],
+      "dispatchTarget": "PJA",
+      "localeRequirements": [
+        "zh-Hans"
+      ],
+      "productionReadiness": "production_ready",
+      "planStatus": "FROZEN"
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "knowledgeVersion": "1.0.0",
+      "productionRole": "FIGURE",
+      "productionPriority": "P0",
+      "requiredOutputs": [
+        "FIGURE"
+      ],
+      "dispatchTarget": "CAR",
+      "localeRequirements": [
+        "zh-Hans"
+      ],
+      "productionReadiness": "production_ready",
+      "planStatus": "FROZEN"
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "knowledgeVersion": "1.0.0",
+      "productionRole": "MULTI_ASSET",
+      "productionPriority": "P0",
+      "requiredOutputs": [
+        "FIGURE",
+        "DIAGRAM"
+      ],
+      "dispatchTarget": "CAR",
+      "localeRequirements": [
+        "zh-Hans"
+      ],
+      "productionReadiness": "production_ready",
+      "planStatus": "FROZEN"
+    }
+  ],
+  "authorityBoundary": {
+    "mutatesCanonicalKnowledge": false,
+    "publishes": false,
+    "createsCandidate": false,
+    "createsAssetBrief": false
+  }
+}

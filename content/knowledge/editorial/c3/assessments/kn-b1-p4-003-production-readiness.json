@@ -2,10 +2,10 @@
   "schemaVersion": "PHI-OS-PJA-W2F-C3-ASSESSMENT-v1.0.0",
   "nodeCode": "KN-B1-P4-003",
   "locale": "zh-Hans",
-  "status": "human_approval_required",
-  "productionReady": false,
-  "humanProductionDecisionEligible": true,
-  "exportability": "blocked",
+  "status": "production_ready",
+  "productionReady": true,
+  "humanProductionDecisionEligible": false,
+  "exportability": "allowed",
   "publicationState": "not_published",
   "gates": {
     "c0RegistryIdentity": {
@@ -41,22 +41,19 @@
       "code": null
     },
     "humanProductionApproval": {
-      "status": "failed",
-      "code": "HUMAN_PRODUCTION_APPROVAL_REQUIRED"
+      "status": "passed",
+      "code": null
     },
     "noBlockingFindings": {
       "status": "passed",
       "code": null
     },
     "exportability": {
-      "status": "failed",
-      "code": "EXPORTABILITY_NOT_ALLOWED"
+      "status": "passed",
+      "code": null
     }
   },
-  "blocking": [
-    "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
-    "EXPORTABILITY_NOT_ALLOWED"
-  ],
+  "blocking": [],
   "authority": {
     "c2Status": "frozen",
     "c2Record": "content/knowledge/editorial/c2/frozen/kn-b1-p4-003.json",
@@ -72,7 +69,11 @@
     "wave1C3ClosureRecord": "content/knowledge/editorial/c3/closures/wave1-c3-readiness-closure-v1.json",
     "wave1SourceClosureState": "passed",
     "wave1FigureDecisionState": "c2_already_complete_no_override",
-    "humanProductionDecisionEligible": true
+    "humanProductionDecisionEligible": false,
+    "humanProductionDecisionRecord": "content/knowledge/production-planning/production/wave1/human-production-decision-v1.json",
+    "humanProductionDecisionDigest": "sha256:e9015bb270d90e406262b17198710dce804f909ee4ed45a0ce5b503ced872cfc",
+    "humanProductionApproved": true,
+    "c3HumanProductionApprovalRecord": "content/knowledge/editorial/c3/closures/wave1-human-production-approval-v1.json"
   },
   "effects": {
     "articleGenerated": false,

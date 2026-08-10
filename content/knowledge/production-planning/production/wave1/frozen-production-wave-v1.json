@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-KPP-WAVE1-FROZEN-PRODUCTION-WAVE-v1.0.0",
+  "waveCode": "KPP-WAVE-WAVE1-001",
+  "waveVersion": "1.0.0",
+  "title": "PHI OS Wave 1 Governed Production Activation",
+  "status": "FROZEN",
+  "baselineCommit": "07d634195cd7b1d641fbaf5bbba60137b8ca274c",
+  "planReference": "content/knowledge/production-planning/production/wave1/frozen-production-plan-v1.json",
+  "planDigest": "sha256:39c5fed2bcee02b0b28cdc06ed0fcf992a7b23bd3a7e2bc30c8f1ed02484b5f3",
+  "humanDecisionReference": "content/knowledge/production-planning/production/wave1/human-production-decision-v1.json",
+  "humanDecisionDigest": "sha256:e9015bb270d90e406262b17198710dce804f909ee4ed45a0ce5b503ced872cfc",
+  "items": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "priority": "P0",
+      "requiredOutputs": [
+        "ARTICLE_RECONCILIATION_FOR_VISUAL_RELEASE"
+      ],
+      "dispatchTarget": "PJA",
+      "localeRequirement": "zh-Hans"
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "priority": "P0",
+      "requiredOutputs": [
+        "FRAGMENT"
+      ],
+      "dispatchTarget": "PJA",
+      "localeRequirement": "zh-Hans"
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "priority": "P0",
+      "requiredOutputs": [
+        "FIGURE"
+      ],
+      "dispatchTarget": "CAR",
+      "localeRequirement": "zh-Hans"
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "priority": "P0",
+      "requiredOutputs": [
+        "FIGURE",
+        "DIAGRAM"
+      ],
+      "dispatchTarget": "CAR",
+      "localeRequirement": "zh-Hans"
+    }
+  ],
+  "inputDigest": "sha256:3fc281250d1ecea2790e0847db732c676144535b0e3fdaec499eae00fafc7392",
+  "policyDigest": "sha256:ac584cca291312a58373f2563ca3a0ff323a3eba74764e9a67fd89bf25c6302d",
+  "resultDigest": "sha256:1a2814f465a13cdf5171a4e85f9adf7551785e9d50f4452bc7f42fc8400da4a5",
+  "createdAt": "2026-08-10T19:46:00+08:00",
+  "updatedAt": "2026-08-10T19:46:00+08:00",
+  "frozenAt": "2026-08-10T19:46:00+08:00",
+  "replay": {
+    "sameInputAndPolicyMustProduceSameResult": true,
+    "replayVerified": true
+  },
+  "authorityBoundary": {
+    "waveIsArticleBatch": false,
+    "mixedRolesAllowed": true,
+    "providerInvocationAllowed": false,
+    "publicationAllowed": false
+  }
+}
