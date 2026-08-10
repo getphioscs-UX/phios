@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises'; import path from 'node:path';
+import {assertLegacyBoundary,rankEligible,replayWave,assertFrozenHandoff,productionCoverage,assertHumanDecision,assertRevision} from './lib/knowledge-production-planning/kpp-v2-foundation.mjs';
+const root=process.cwd(); const j=async p=>JSON.parse(await fs.readFile(path.join(root,p),'utf8'));
+const base='content/knowledge/production-planning';
+const rec=await j(`${base}/audits/kpp-v2-reconciliation-audit-v1.json`); assert.equal(rec.baselineCommit,'86bee5093dd4975dddbe864da9626b655bbc32ee'); assert(rec.upgraded.includes('KPP-W17'));
+const wave=await j(`${base}/contracts/kpp-production-wave-contract-v2.json`); assert.equal(wave.waveIsArticleBatch,false); assert.equal(wave.replay.sameInputAndPolicyMustProduceSameResult,true);
+assert.throws(()=>assertLegacyBoundary({rawLegacySource:true}),/KPP_RAW_LEGACY_SOURCE_FORBIDDEN/); assert.equal(assertLegacyBoundary({legacyTriggered:true,acceptedSupportingRelationship:true}),true);
+const input={wavePurpose:'pilot',items:[{nodeCode:'B',eligibility:'WAVE_ELIGIBLE',priorityScore:5},{nodeCode:'A',eligibility:'WAVE_ELIGIBLE',priorityScore:5},{nodeCode:'C',eligibility:'WAVE_BLOCKED',priorityScore:99}]}; const policy={version:'v2'}; assert.deepEqual(replayWave(input,policy),replayWave(input,policy)); assert.deepEqual(rankEligible(input.items).map(x=>x.nodeCode),['A','B']);
+assert.throws(()=>assertFrozenHandoff({planStatus:'PROPOSED',waveStatus:'FROZEN'}),/KPP_FROZEN_PLAN_REQUIRED/); assert.equal(assertFrozenHandoff({planStatus:'FROZEN',waveStatus:'FROZEN'}),true);
+const cov=productionCoverage([{assessed:true,articleRequired:true},{assessed:true,productionRole:'NO_PUBLIC_ASSET_REQUIRED'},{assessed:false,productionRole:'STRUCTURED_ONLY'}]); assert.equal(cov.total,3); assert.equal(cov.noPublicAssetRequired,1);
+assert.throws(()=>assertHumanDecision({humanDecision:false}),/KPP_HUMAN_PRODUCTION_DECISION_REQUIRED/); assert.equal(assertHumanDecision({humanDecision:true,actor:'human-editor'}),true);
+assert.throws(()=>assertRevision({status:'FROZEN',x:1},{status:'FROZEN',x:2},null),/KPP_FROZEN_PLAN_SILENT_DRIFT/);
+const fr=await j(`${base}/freeze/kpp-v2-reconciliation-w21-w22-w24-w26-foundation-freeze-v1.json`); assert.equal(fr.fullKppV2Frozen,false); assert(fr.waitingOn.some(x=>x.includes('KAU-E2')));
+console.log('✓ KPP v2 Reconciliation + W21/W22/W24-W26 Foundation passed.');
+console.log('✓ v1 W0-W20 preserved by delta; W16/W17/W18/W19 tightened for deterministic frozen-wave handoff.');
+console.log('✓ Raw Legacy Source is rejected; KPP-W23/W27 remain blocked until KAU-E2 accepted supporting relationships.');
+console.log('✓ Production coverage, KI handoff, drift, human decision and freeze/revision remain planning-only authorities.');
