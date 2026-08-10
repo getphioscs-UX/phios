@@ -353,11 +353,17 @@ assert.equal(pkg.scripts['check:alr-access'], 'npm run check:alr-w33-w35');
 const requiredPostcheckPrefix = 'npm run check:governance-data-closure && npm run check:alr-foundation && npm run check:alr-capability && npm run check:alr-learning-architecture && npm run check:car-reconciliation && npm run check:icr-foundation && npm run check:icr-runtime &&  npm run check:rmo && npm run check:alr-knowledge-learning && npm run check:alr-practice && npm run check:alr-assessment && npm run check:alr-progress && npm run check:alr-access && ';
 assert.ok(pkg.scripts.postcheck.startsWith(requiredPostcheckPrefix));
 assert.match(pkg.scripts.postcheck,
-  /npm run check:wave1-production && npm run check:vap-w0 && npm run check:vap-w1$/);
+  /npm run check:wave1-production && npm run check:vap-w0 && npm run check:vap-w1(?: && npm run check:vap-w2)?$/);
 assert.ok(pkg.scripts.postcheck.indexOf('npm run check:wave1-production') <
   pkg.scripts.postcheck.indexOf('npm run check:vap-w0'));
 assert.ok(pkg.scripts.postcheck.indexOf('npm run check:vap-w0') <
   pkg.scripts.postcheck.indexOf('npm run check:vap-w1'));
+const vapW2Index = pkg.scripts.postcheck.indexOf('npm run check:vap-w2');
+if (vapW2Index >= 0) {
+  assert.equal(pkg.scripts['check:vap-w2'],
+    'node scripts/check-vap-w2-cloudflare-production-sha.mjs');
+  assert.ok(pkg.scripts.postcheck.indexOf('npm run check:vap-w1') < vapW2Index);
+}
 
 console.log('✓ ALR-W33～W35 Access passed.');
 console.log('✓ Academy access eligibility consumes canonical Entitlement decisions without granting or mutating Entitlement, enrollment, unlock or delivery.');
