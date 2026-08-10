@@ -1,0 +1,55 @@
+{
+  "registryCode": "PHI-OS-ALR-W6-CAPABILITY-DEPENDENCY-GRAPH-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W6",
+  "status": "canonical",
+  "productionStatus": "semantic_graph_only",
+  "nodeAuthority": "content/academy/academy-learning-runtime/registries/capability-registry-v1.json",
+  "edgeType": "REQUIRES",
+  "dependencyMode": "ALL_REQUIRED",
+  "nodes": [
+    "ALR-CAP-EVIDENCE-DISTINCTION",
+    "ALR-CAP-BOUNDED-READING",
+    "ALR-CAP-CONSTRAINT-AWARE-NAVIGATION",
+    "ALR-CAP-REVIEW-CONTINUITY",
+    "ALR-CAP-BOUNDED-PROFESSIONAL-FORMATION"
+  ],
+  "edges": [
+    {
+      "fromCapabilityCode": "ALR-CAP-EVIDENCE-DISTINCTION",
+      "toCapabilityCode": "ALR-CAP-BOUNDED-READING",
+      "edgeType": "REQUIRES"
+    },
+    {
+      "fromCapabilityCode": "ALR-CAP-BOUNDED-READING",
+      "toCapabilityCode": "ALR-CAP-CONSTRAINT-AWARE-NAVIGATION",
+      "edgeType": "REQUIRES"
+    },
+    {
+      "fromCapabilityCode": "ALR-CAP-CONSTRAINT-AWARE-NAVIGATION",
+      "toCapabilityCode": "ALR-CAP-REVIEW-CONTINUITY",
+      "edgeType": "REQUIRES"
+    },
+    {
+      "fromCapabilityCode": "ALR-CAP-REVIEW-CONTINUITY",
+      "toCapabilityCode": "ALR-CAP-BOUNDED-PROFESSIONAL-FORMATION",
+      "edgeType": "REQUIRES"
+    }
+  ],
+  "topologicalOrder": [
+    "ALR-CAP-EVIDENCE-DISTINCTION",
+    "ALR-CAP-BOUNDED-READING",
+    "ALR-CAP-CONSTRAINT-AWARE-NAVIGATION",
+    "ALR-CAP-REVIEW-CONTINUITY",
+    "ALR-CAP-BOUNDED-PROFESSIONAL-FORMATION"
+  ],
+  "rules": {
+    "graphMustBeAcyclic": true,
+    "dependencyMustBeExplicit": true,
+    "allDependenciesRequired": true,
+    "dependencyGrantsCapabilityState": false,
+    "dependencyGrantsAcademyLevel": false,
+    "dependencyMayCrossIntoPwsNamespace": false,
+    "unknownNodeOrEdgeFailsClosed": true
+  }
+}

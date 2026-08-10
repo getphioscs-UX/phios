@@ -1,0 +1,66 @@
+{
+  "contractCode": "PHI-OS-ALR-W7-CAPABILITY-EVIDENCE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W7",
+  "status": "active",
+  "productionStatus": "semantic_evaluation_only",
+  "semanticAuthority": "ALR",
+  "dataGovernanceAuthority": "RDG",
+  "evidenceIdentityPrefix": "ALR-CAPE-",
+  "rdgLearningDataReference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+  "rdgEvidenceBoundaryReference": "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json",
+  "requiredEvidenceFields": [
+    "capabilityEvidenceCode",
+    "capabilityReference",
+    "learningRecordReference",
+    "practiceReference",
+    "assessmentReference",
+    "criterionResults",
+    "lineageReferences",
+    "recordedAt",
+    "rdgEligibilityDecision"
+  ],
+  "requiredCriterionResultFields": ["criterionCode", "status"],
+  "acceptedCriterionStatusValues": ["MET", "NOT_MET", "DISPUTED", "UNKNOWN"],
+  "acceptedRdgEligibilityDecisions": [
+    "ELIGIBLE_FOR_ALR_REVIEW",
+    "INSUFFICIENT",
+    "INELIGIBLE",
+    "DISPUTED",
+    "UNKNOWN",
+    "DENY_ALR_AUTHORITY"
+  ],
+  "semanticEvidenceDecisions": [
+    "READY_FOR_CAPABILITY_STATE_REVIEW",
+    "INSUFFICIENT_EVIDENCE",
+    "INELIGIBLE_EVIDENCE",
+    "DISPUTED",
+    "UNKNOWN",
+    "DENY_ALR_AUTHORITY"
+  ],
+  "forbiddenAuthorityFields": [
+    "capabilityState",
+    "capabilityAchieved",
+    "capabilityLevel",
+    "credentialGranted",
+    "academyEntitlement",
+    "professionalEligibility",
+    "professionalJudgment"
+  ],
+  "rules": {
+    "alrMayInterpretCapabilitySemantics": true,
+    "alrMayOverrideRdgEligibility": false,
+    "rdgMayDetermineCapabilityState": false,
+    "watchedLessonIsCapability": false,
+    "lessonCompletionIsCapability": false,
+    "assessmentScoreAloneIsEvidence": false,
+    "allRegisteredCriteriaRequired": true,
+    "unknownCriterionFailsClosed": true,
+    "unknownAndDisputedRemainGovernedStates": true,
+    "semanticEvidenceDecisionSetsCapabilityState": false,
+    "evidenceDecisionGrantsCredential": false,
+    "evidenceDecisionGrantsEntitlement": false,
+    "evidenceDecisionGrantsProfessionalAuthority": false,
+    "semanticEvaluationPersistsData": false
+  }
+}
