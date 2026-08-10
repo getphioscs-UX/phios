@@ -39,7 +39,7 @@ export async function evaluatePublishedKnowledgeQuality(root=process.cwd()){
  const counts={info:0,warning:0,error:0,critical:0};for(const f of findings)counts[f.severity]++;
  const score=Math.max(0,100-counts.warning*8-counts.error*20-counts.critical*50);
  const status=counts.critical||counts.error?'blocked':counts.warning?'attention_required':'ready';
- const report={reportCode:'KNR-PACKAGE-D-QUALITY-REPORT',reportVersion:'1.0.0',source:{authorityDigest:authority.authorityDigest,indexDigest:index.indexDigest},summary:{status,score,findings:findings.length,severityCounts:counts,publishedLocaleRecords:data.nodes.recordCount,publishedCanonicalNodes:new Set(data.nodes.records.map(x=>x.nodeCode)).size},findings};
+ const report={reportCode:'KNR-PACKAGE-D-QUALITY-REPORT',reportVersion:'1.0.0',source:{authorityDigest:digest(authority),indexDigest:index.indexDigest},summary:{status,score,findings:findings.length,severityCounts:counts,publishedLocaleRecords:data.nodes.recordCount,publishedCanonicalNodes:new Set(data.nodes.records.map(x=>x.nodeCode)).size},findings};
  report.reportDigest=digest(report);return report;
 }
 export function buildProductionIntegrationReport(quality){
