@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-reasoning-boundary-v1.schema.json",
+  "title": "PHI OS Canonical Reality Reasoning Boundary v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "boundaryCode", "boundaryVersion", "componentType", "requestedDataNature",
+    "requestedCertainty", "sourceState", "realityReference", "componentReferences",
+    "evidenceBindingReferences", "reasoning", "governanceContext", "boundaryDecision",
+    "decisionReasons", "recordStatus", "unknownStatePreserved", "evidencePromotionAllowed",
+    "interpretationCreated", "inferenceCreated", "professionalJudgmentCreated",
+    "navigationOrActionCreated", "authorityReference", "operationalMode",
+    "persistentStoreWriteAllowed", "createdAt", "reasoningBoundaryDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-REASONING-BOUNDARY-v1.0.0"},
+    "boundaryCode": {"type": "string", "pattern": "^RMO-REASONING-BOUNDARY-[A-Z0-9-]{4,100}$"},
+    "boundaryVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_REASONING_BOUNDARY"},
+    "requestedDataNature": {"enum": ["INFERRED", "INTERPRETED", "PROFESSIONAL_JUDGMENT"]},
+    "requestedCertainty": {"type": ["string", "null"]},
+    "sourceState": {"enum": ["SUPPORTED", "RESOLVED", "DISPUTED", "UNKNOWN", "UNRESOLVED"]},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "componentReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceBindingReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "reasoning": {
+      "oneOf": [
+        {"$ref": "#/$defs/inferenceReasoning"},
+        {"$ref": "#/$defs/interpretationReasoning"},
+        {"$ref": "#/$defs/professionalReasoning"}
+      ]
+    },
+    "governanceContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purposeCodes", "sensitivityClass", "sensitivityCategory", "explicitConsent", "purposeAllowed", "firewallDecision"],
+      "properties": {
+        "purposeCodes": {"$ref": "#/$defs/referenceArray"},
+        "sensitivityClass": {"type": "string", "minLength": 1},
+        "sensitivityCategory": {"type": "string", "minLength": 1},
+        "explicitConsent": {"type": "boolean"},
+        "purposeAllowed": {"type": "boolean"},
+        "firewallDecision": {"enum": ["ALLOW_PURPOSE_BOUND", "REQUIRE_EXPLICIT_CONSENT", "REQUIRE_PROFESSIONAL_AUTHORITY", "DENY", "UNRESOLVED"]}
+      }
+    },
+    "boundaryDecision": {"enum": ["ALLOW_BOUNDED", "REQUIRE_CORROBORATION", "REQUIRE_EXPLICIT_CONSENT", "REQUIRE_PROFESSIONAL_AUTHORITY", "DENY", "UNRESOLVED"]},
+    "decisionReasons": {"$ref": "#/$defs/referenceArray"},
+    "recordStatus": {"const": "EVALUATED"},
+    "unknownStatePreserved": {"const": true},
+    "evidencePromotionAllowed": {"const": false},
+    "interpretationCreated": {"const": false},
+    "inferenceCreated": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "navigationOrActionCreated": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/interpretation-inference-boundary-contract-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "reasoningBoundaryDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "optionalReferenceArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "inferenceReasoning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "inference", "interpretation", "professionalJudgment"],
+      "properties": {
+        "mode": {"const": "INFERENCE"},
+        "inference": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["methodReference", "methodVersion", "inputReferences", "uncertainty"],
+          "properties": {
+            "methodReference": {"type": "string", "pattern": "^RMO-INFERENCE-METHOD-[A-Z0-9-]{4,120}-v[1-9][0-9]*$"},
+            "methodVersion": {"$ref": "#/$defs/semver"},
+            "inputReferences": {"$ref": "#/$defs/referenceArray"},
+            "uncertainty": {"enum": ["BOUNDED", "MATERIAL", "UNKNOWN", "UNRESOLVED"]}
+          }
+        },
+        "interpretation": {"type": "null"},
+        "professionalJudgment": {"type": "null"}
+      }
+    },
+    "interpretationReasoning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "inference", "interpretation", "professionalJudgment"],
+      "properties": {
+        "mode": {"const": "INTERPRETATION"},
+        "inference": {"type": "null"},
+        "interpretation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["interpretationAuthorityRuntime", "interpretationAuthorityReference", "boundaryStatementReference"],
+          "properties": {
+            "interpretationAuthorityRuntime": {"const": "RMO"},
+            "interpretationAuthorityReference": {"const": "content/runtime/reality-model-runtime/contracts/interpretation-inference-boundary-contract-v1.json"},
+            "boundaryStatementReference": {"type": "string", "pattern": "^RMO-BOUNDARY-STATEMENT-[A-Z0-9-]{4,140}$"}
+          }
+        },
+        "professionalJudgment": {"type": "null"}
+      }
+    },
+    "professionalReasoning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "inference", "interpretation", "professionalJudgment"],
+      "properties": {
+        "mode": {"const": "PROFESSIONAL_JUDGMENT"},
+        "inference": {"type": "null"},
+        "interpretation": {"type": "null"},
+        "professionalJudgment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["requiredAuthorityRuntime"],
+          "properties": {"requiredAuthorityRuntime": {"const": "PR"}}
+        }
+      }
+    }
+  }
+}

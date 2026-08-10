@@ -1,0 +1,21 @@
+{
+  "registryCode": "PHI-OS-ALR-W32-LEARNING-RECOMMENDATION-RULE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W32",
+  "status": "canonical",
+  "rules": [
+    {"actionCode": "HOLD_DISPUTED", "priority": 1, "targetScope": "NO_AUTOMATIC_TARGET", "reasonCode": "DISPUTED_STATE", "requiresChoice": true},
+    {"actionCode": "HOLD_UNKNOWN", "priority": 2, "targetScope": "NO_AUTOMATIC_TARGET", "reasonCode": "UNKNOWN_STATE", "requiresChoice": true},
+    {"actionCode": "REVIEW_RETENTION", "priority": 3, "targetScope": "RDG_RETENTION_REVIEW", "reasonCode": "RETENTION_BOUNDARY", "requiresChoice": true},
+    {"actionCode": "REVIEW_SOURCE", "priority": 4, "targetScope": "CURRENT_LEARNING_SCOPE", "reasonCode": "SOURCE_VERSION_CHANGED", "requiresChoice": true},
+    {"actionCode": "REVIEW_CONTINUITY", "priority": 5, "targetScope": "CURRENT_LEARNING_SCOPE", "reasonCode": "CONTINUITY_OR_REVIEW_DUE", "requiresChoice": true},
+    {"actionCode": "REVISIT_PREREQUISITE", "priority": 6, "targetScope": "DIRECT_PREREQUISITE_REVIEW", "reasonCode": "PREREQUISITE_GAP", "requiresChoice": true},
+    {"actionCode": "REINFORCE_PRACTICE", "priority": 7, "targetScope": "CURRENT_PRACTICE", "reasonCode": "EVIDENCE_OR_MAINTENANCE_GAP", "requiresChoice": true},
+    {"actionCode": "REVIEW_ASSESSMENT", "priority": 8, "targetScope": "CURRENT_ASSESSMENT", "reasonCode": "ASSESSMENT_PENDING", "requiresChoice": true},
+    {"actionCode": "START_CURRENT_LESSON", "priority": 9, "targetScope": "CURRENT_LESSON", "reasonCode": "NOT_STARTED", "requiresChoice": true},
+    {"actionCode": "CONTINUE_CURRENT_LESSON", "priority": 10, "targetScope": "CURRENT_LESSON", "reasonCode": "LEARNING_IN_PROGRESS", "requiresChoice": true},
+    {"actionCode": "COMPLETE_NO_AUTOMATIC_NEXT_STEP", "priority": 11, "targetScope": "NO_AUTOMATIC_TARGET", "reasonCode": "LEARNING_COMPLETE_NO_GAP", "requiresChoice": true}
+  ],
+  "evaluationPriority": ["HOLD_DISPUTED", "HOLD_UNKNOWN", "REVIEW_RETENTION", "REVIEW_SOURCE", "REVIEW_CONTINUITY", "REVISIT_PREREQUISITE", "REINFORCE_PRACTICE", "REVIEW_ASSESSMENT", "START_CURRENT_LESSON", "CONTINUE_CURRENT_LESSON", "COMPLETE_NO_AUTOMATIC_NEXT_STEP"],
+  "rulesBoundary": {"recommendationIsOptionNotDecision": true, "automaticEnrollmentOrAssignment": false, "providerAiPersonalization": false, "registryStoresLearnerProfile": false, "semanticEvaluationIsPure": true}
+}

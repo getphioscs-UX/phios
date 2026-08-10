@@ -1,0 +1,52 @@
+{
+  "registryCode": "PHI-OS-RMO-W9-CANONICAL-REASONING-BOUNDARY-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RMO-W9",
+  "status": "canonical_boundary",
+  "runtimeAuthority": "RMO",
+  "dataGovernanceAuthority": "RDG",
+  "professionalJudgmentAuthority": "PR",
+  "containsUserData": false,
+  "containsReasoningContentOrDecisions": false,
+  "reasoningClasses": [
+    {
+      "requestedDataNature": "INFERRED",
+      "mode": "INFERENCE",
+      "expectedCertainty": "INFERRED",
+      "required": ["methodReference", "methodVersion", "exact input lineage", "Evidence Binding", "uncertainty"]
+    },
+    {
+      "requestedDataNature": "INTERPRETED",
+      "mode": "INTERPRETATION",
+      "expectedCertainty": "INTERPRETED",
+      "required": ["RMO boundary authority", "Evidence Binding", "boundaryStatementReference"]
+    },
+    {
+      "requestedDataNature": "PROFESSIONAL_JUDGMENT",
+      "mode": "PROFESSIONAL_JUDGMENT",
+      "expectedCertainty": null,
+      "requiredAuthorityRuntime": "PR"
+    }
+  ],
+  "boundaryDecisions": [
+    "ALLOW_BOUNDED",
+    "REQUIRE_CORROBORATION",
+    "REQUIRE_EXPLICIT_CONSENT",
+    "REQUIRE_PROFESSIONAL_AUTHORITY",
+    "DENY",
+    "UNRESOLVED"
+  ],
+  "uncertaintyStates": ["BOUNDED", "MATERIAL", "UNKNOWN", "UNRESOLVED"],
+  "sourceStates": ["SUPPORTED", "RESOLVED", "DISPUTED", "UNKNOWN", "UNRESOLVED"],
+  "instances": [],
+  "rules": {
+    "registryDefinesBoundaryOnly": true,
+    "registryMayStoreReasoningContentOrDecisions": false,
+    "allowBoundedDoesNotCreateReasoningContent": true,
+    "unknownOrUnresolvedReturnsUnresolved": true,
+    "disputedOrMaterialUncertaintyRequiresCorroboration": true,
+    "professionalJudgmentAlwaysRoutesToPr": true,
+    "providerOrAiCannotGrantAuthority": true,
+    "unknownReasoningClassFailsClosed": true
+  }
+}

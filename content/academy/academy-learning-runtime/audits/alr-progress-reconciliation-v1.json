@@ -1,0 +1,65 @@
+{
+  "auditCode": "PHI-OS-ALR-W29-W32-PROGRESS-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "ALR-W29-W32",
+  "status": "closed",
+  "baselineCommit": "6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f",
+  "inspectedAuthorities": [
+    {"reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json", "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172", "classification": "WORK_ORDER_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/contracts/alr-authority-contract-v1.json", "sha256": "d47989ba38dd8df058387d4444e9e5752950bdbef5eaa3ec368aaf817c59b13d", "classification": "ALR_SEMANTIC_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json", "sha256": "2b67e5366f78299fbd0c84eb7a27657283eee0760472d1caae92bee9a370e3dd", "classification": "FROZEN_TYPE_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/program-registry-v1.json", "sha256": "a0532734ed1386f0e510f2ee7fa1139c4dc5c64ed767e08d504fa5156ef4a55f", "classification": "PROGRAM_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/learning-path-registry-v1.json", "sha256": "17ff2454cc1f6c287acb4d8c42e0a6a1b5cb8291de0c1ffaf3fa211401b6c8fe", "classification": "LEARNING_PATH_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/module-registry-v1.json", "sha256": "292541fe08e589d70acc4f74fc19bb3d86212e28ffb0ac20acefc40d6e71f643", "classification": "MODULE_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/lesson-registry-v1.json", "sha256": "cbc932d689c003764678997a3b9358bf9aebd81958bf23793cf46a43a6e2581d", "classification": "LESSON_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/learning-objective-registry-v1.json", "sha256": "67366a07bd5f77ce2319c5d9fcbf5226902e211b54ac4813b793b7564b883bb9", "classification": "OBJECTIVE_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/capability-registry-v1.json", "sha256": "4aa82fcb20ef9caa2573ebe4750553da166fb7a9e87855e5e73f29b369790100", "classification": "CAPABILITY_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/capability-dependency-graph-v1.json", "sha256": "8084f18b1f02cc743296832276e2f1eeef18485268a158d5e14fc5d9c262d36e", "classification": "CAPABILITY_DEPENDENCY_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/registries/capability-state-registry-v1.json", "sha256": "ba1e6c5bd15b0741b4848725a8640bb93ee7a73862c08e4575057c4e558e6968", "classification": "CAPABILITY_STATE_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/contracts/capability-gap-contract-v1.json", "sha256": "5075b53f3b27e4cd0a1369a548f8f18510923de8f0afb8e8537c44ec318c4523", "classification": "CAPABILITY_GAP_AUTHORITY"},
+    {"reference": "content/academy/academy-learning-runtime/contracts/assessment-evidence-rdg-handoff-contract-v1.json", "sha256": "6d2d254959740c0e1c4ea29fab2e300dab1c9ef63c34b0001b96b6d6d5443552", "classification": "ASSESSMENT_RDG_BOUNDARY"},
+    {"reference": "content/academy/academy-learning-runtime/freeze/alr-w24-w28-assessment-freeze-v1.json", "sha256": "37bbfc598569ed75b6ce015c4bb8927625a08fd48107f51b757e6e120e45f866", "classification": "PREVIOUS_ALR_FREEZE"},
+    {"reference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json", "sha256": "015fd9cc8265ccc3bc7c61254b6c70b2ca680c40979f4c35b6a0f77b2b92aac2", "classification": "RDG_LEARNING_DATA_AUTHORITY"},
+    {"reference": "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json", "sha256": "2d6d00c17237f10c2a79fa19ab20b13fb97499796fbf2ad408c6a722a47c5243", "classification": "RDG_CAPABILITY_EVIDENCE_BOUNDARY"},
+    {"reference": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json", "sha256": "cdf977546bcbbbfbf1b9ad3da2f639d12ed43639f093f1dd27322a16cee8db02", "classification": "RDG_RETENTION_AUTHORITY"},
+    {"reference": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json", "sha256": "498838a91799bc89167b65765d6bec710327e0e29be32ba92a43a5e541990708", "classification": "RDG_RETENTION_CLASS_AUTHORITY"},
+    {"reference": "content/runtime/reality-model-runtime/freeze/rmo-w5-w7-reality-structure-freeze-v1.json", "sha256": "27cc49b4160748a64b7242e1a33c6ef09a6b308c08e330d3670b602fec9326bf", "classification": "PARALLEL_RMO_FREEZE"},
+    {"reference": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json", "sha256": "9f4a697f792e5ef0a835be633573dd1fc4ef0bcaf2fe102e63aaa418c27b7757", "classification": "PARALLEL_WAVE1_HUMAN_REVIEW_STATE"}
+  ],
+  "implementationDecision": {
+    "progressScopeCount": 5,
+    "progressStateCount": 7,
+    "continuityDecisionCount": 7,
+    "reviewDecisionCount": 8,
+    "recommendationActionCount": 11,
+    "progressAndCompletionAreCapability": false,
+    "progressMaySetCapabilityState": false,
+    "progressContinuityReviewAndRecommendationArePureSemanticEvaluations": true,
+    "alrMayChooseRetentionClassDurationExpiryDeletionOrLegalHold": false,
+    "recommendationIsExplainableOptionRequiringChoice": true,
+    "recommendationMayAutoEnrollAssignUnlockOrPurchase": false,
+    "providerAiPersonalizationMayBeActivated": false,
+    "learnerProgressOrRecommendationMayBePersisted": false,
+    "learnerDeliveryMayBeActivated": false
+  },
+  "authorityBoundary": {
+    "alrOwns": ["LEARNING_PROGRESS_SEMANTICS", "LEARNING_COMPLETION_SEMANTICS", "LEARNING_CONTINUITY_SEMANTICS", "LEARNING_REVIEW_SEMANTICS", "LEARNING_RECOMMENDATION_SEMANTICS"],
+    "rdgOwns": ["LEARNING_DATA_PERMISSION", "PERSISTENCE", "RETENTION", "DELETION", "LEGAL_HOLD", "DATA_SUBJECT_RIGHTS"],
+    "permissionEntitlementOwns": ["ACADEMY_ENTITLEMENT"],
+    "professionalGovernanceOwns": ["PROFESSIONAL_READINESS", "CREDENTIAL", "SIGNATURE_AUTHORITY"],
+    "cprOwns": ["ACADEMY_PRESENTATION"]
+  },
+  "parallelWorkBoundary": {
+    "rmoW5W7Present": true,
+    "wave1C2FreezeResolutionPresent": true,
+    "packageIntegrationMustPreserveRmoAndWave1Commands": true,
+    "progressMayReadOrMutateCanonicalReality": false,
+    "progressMayModifyHumanEditorialReview": false
+  },
+  "preservation": {
+    "alrW0W28ContractsRegistriesRuntimeOrFreezeMutated": false,
+    "programPathModuleLessonObjectivePracticeAssessmentOrCapabilityAuthorityMutated": false,
+    "rdgRmoWave1CarCprIcrOrPwsAuthorityMutated": false,
+    "existingRuntimeOrUserDataMutated": false
+  }
+}
