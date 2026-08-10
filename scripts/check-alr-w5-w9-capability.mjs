@@ -15,7 +15,11 @@ import {
 const root = process.cwd();
 const base = 'content/academy/academy-learning-runtime';
 const read = async file => JSON.parse(await fs.readFile(path.join(root, file), 'utf8'));
-const digest = async file => crypto.createHash('sha256').update(await fs.readFile(path.join(root, file))).digest('hex');
+const normalizeText = source => source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+const digest = async file => crypto
+  .createHash('sha256')
+  .update(normalizeText(await fs.readFile(path.join(root, file), 'utf8')), 'utf8')
+  .digest('hex');
 
 const audit = await read(`${base}/audits/alr-capability-reconciliation-v1.json`);
 assert.equal(audit.baselineCommit, 'c1ded91129cea2e9406f49c5066fdf041df0c1eb');
