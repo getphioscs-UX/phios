@@ -1,0 +1,25 @@
+{
+  "auditCode": "PHI-OS-RDG-W21-W25-ANALYTICS-LEARNING-RESEARCH-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "baselineCommit": "d6dbed564c6b3e61aeebe2c7bca8f35f536bc6c6",
+  "status": "reconciled",
+  "existingAuthorityReferences": [
+    "docs/pws/contracts/pws-canonical-events-v1.json",
+    "docs/pws/contracts/pws-canonical-states-v1.json",
+    "functions/runtime/timeline/event-append-service.js",
+    "functions/runtime/security/access-boundary.js",
+    "content/governance/reality-data-governance/contracts/evidence-eligibility-contract-v1.json",
+    "content/governance/reality-data-governance/contracts/data-permission-contract-v1.json",
+    "content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json",
+    "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json"
+  ],
+  "findings": {
+    "pwsAlreadyRejectsUiTelemetryAsCanonicalEvent": true,
+    "rdgAlreadyRejectsTelemetryAsEvidence": true,
+    "researchConsentIsRuntimeScoped": true,
+    "alrV2RuntimePresent": false,
+    "liveProductAnalyticsCollectionIntroduced": false,
+    "liveResearchDatasetIntroduced": false,
+    "existingRuntimeOrDataMutated": false
+  }
+}

@@ -543,7 +543,10 @@
     "check:runtime:integrity": "npm run check:rg-w3-w8 && npm run check:rg-w9-w15",
     "check:runtime:all": "npm run check:runtime -- --group=ALL_REGISTERED",
     "check:rdg-w16-w20": "node scripts/check-rdg-w16-w20-access-privacy-rights.mjs",
-    "check:governance-access-closure": "npm run check:operational-architecture-closure && npm run check:rg-w9-w15 && npm run check:rdg-w16-w20"
+    "check:governance-access-closure": "npm run check:operational-architecture-closure && npm run check:rg-w9-w15 && npm run check:rdg-w16-w20",
+    "check:rdg-w21-w25": "node scripts/check-rdg-w21-w25-analytics-alr-research.mjs",
+    "check:rdg-analytics": "npm run check:rdg-w21-w25",
+    "check:governance-data-closure": "npm run check:governance-access-closure && npm run check:rdg-w21-w25"
   },
   "type": "module"
 }
