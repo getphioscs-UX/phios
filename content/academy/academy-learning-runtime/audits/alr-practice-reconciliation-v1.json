@@ -1,0 +1,128 @@
+{
+  "auditCode": "PHI-OS-ALR-W20-W23-PRACTICE-RECONCILIATION-v1",
+  "auditVersion": "1.0.0",
+  "scope": "ALR-W20-W23",
+  "status": "reconciled",
+  "baselineCommit": "e16f8e39ea09586833d848770c9d0eb042032144",
+  "canonicalPhase": "ALR-E｜Practice",
+  "inspectedAuthorities": [
+    {
+      "reference": "content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json",
+      "sha256": "b4105df7e8d55f0f9bf1a895f0293b3be119edfde94784d5cd48a95dcc47b172",
+      "classification": "MASTER_WORK_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/contracts/alr-authority-contract-v1.json",
+      "sha256": "d47989ba38dd8df058387d4444e9e5752950bdbef5eaa3ec368aaf817c59b13d",
+      "classification": "ALR_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json",
+      "sha256": "2b67e5366f78299fbd0c84eb7a27657283eee0760472d1caae92bee9a370e3dd",
+      "classification": "LEARNING_OBJECT_TYPE_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/lesson-registry-v1.json",
+      "sha256": "cbc932d689c003764678997a3b9358bf9aebd81958bf23793cf46a43a6e2581d",
+      "classification": "LESSON_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/learning-objective-registry-v1.json",
+      "sha256": "67366a07bd5f77ce2319c5d9fcbf5226902e211b54ac4813b793b7564b883bb9",
+      "classification": "LEARNING_OBJECTIVE_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/capability-registry-v1.json",
+      "sha256": "4aa82fcb20ef9caa2573ebe4750553da166fb7a9e87855e5e73f29b369790100",
+      "classification": "CAPABILITY_SEMANTIC_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/knowledge-learning-binding-registry-v1.json",
+      "sha256": "824d041b1afc088a686886a736f9e870664d5223fc73c18b549c9efd932ae373",
+      "classification": "ALR_W15_W19_LESSON_BINDING"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/registries/case-study-registry-v1.json",
+      "sha256": "2bc161ca52c29e08a5aa9f7c8bd948ca7557fa61a15fbdacbf014b8d4b7fad66",
+      "classification": "SYNTHETIC_CASE_STUDY_AUTHORITY"
+    },
+    {
+      "reference": "content/academy/academy-learning-runtime/freeze/alr-w15-w19-knowledge-learning-freeze-v1.json",
+      "sha256": "3d373f4d4ff6116927aa61959f48706ebb447d8f1f5117b7fdee83081bc02206",
+      "classification": "ALR_W15_W19_FREEZE"
+    },
+    {
+      "reference": "scripts/lib/academy-learning-runtime/alr-knowledge-learning-v1.mjs",
+      "sha256": "39ef672e84f8b0f91e0416b3d4f26510a9708682084f817d9e0d0d554f0909a9",
+      "classification": "ALR_W15_W19_RUNTIME"
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+      "sha256": "015fd9cc8265ccc3bc7c61254b6c70b2ca680c40979f4c35b6a0f77b2b92aac2",
+      "classification": "RDG_LEARNING_DATA_BOUNDARY"
+    },
+    {
+      "reference": "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json",
+      "sha256": "2d6d00c17237f10c2a79fa19ab20b13fb97499796fbf2ad408c6a722a47c5243",
+      "classification": "RDG_CAPABILITY_EVIDENCE_BOUNDARY"
+    },
+    {
+      "reference": "content/professional/canonical-asset-runtime/contracts/car-alr-cpr-authority-reconciliation-v1.json",
+      "sha256": "3f8ce8787728a2cec005289223a201c18421626ff9a6dbcb6748cab06497f662",
+      "classification": "CAR_ALR_CPR_AUTHORITY_BOUNDARY"
+    },
+    {
+      "reference": "content/runtime/input-case-runtime/freeze/icr-w0-w9-freeze-v1.json",
+      "sha256": "1aa8a7b20450070c86322733acac45508bc67a4eb9ba75a6b3ccf4d6608bdf22",
+      "classification": "ICR_CASE_BOUNDARY"
+    }
+  ],
+  "baselineFindings": {
+    "canonicalLessonCount": 5,
+    "canonicalLearningObjectiveCount": 10,
+    "canonicalKnowledgeLearningBindingCount": 5,
+    "canonicalSyntheticCaseStudyCount": 5,
+    "practiceTypeOwner": "ALR-W20",
+    "guidedPracticeTypeOwner": "ALR-W21",
+    "simulationTypeOwner": "ALR-W22",
+    "reflectionTypeOwner": "ALR-W23",
+    "practiceRegistryPresent": false,
+    "guidedPracticeRegistryPresent": false,
+    "simulationRegistryPresent": false,
+    "reflectionRegistryPresent": false,
+    "learnerDataRuntimeActive": false,
+    "assessmentRuntimeActive": false,
+    "capabilityStatePersistenceActive": false
+  },
+  "implementationDecision": {
+    "practiceCount": 5,
+    "guidedPracticeCount": 5,
+    "simulationCount": 5,
+    "reflectionCount": 5,
+    "practiceBindingOverlayRequired": true,
+    "practiceDefinitionsMayBeUnscored": true,
+    "guidedPracticeMayUseStaticScaffolding": true,
+    "guidedPracticeMayProfileLearnerOrAdaptFromLearnerData": false,
+    "simulationMayResolveSyntheticDeterministicBranches": true,
+    "simulationMayExecuteRealWorldActionOrProfessionalDecision": false,
+    "reflectionMayDefinePrompts": true,
+    "reflectionMayCaptureOrPersistResponse": false,
+    "practiceMayBecomeAssessmentOrCapabilityEvidenceAutomatically": false,
+    "learnerDeliveryMayBeActivated": false
+  },
+  "checkerIntegrationRepair": {
+    "classification": "CHECKER_GOVERNANCE_COMPATIBILITY",
+    "issue": "The ALR-W15-W19 checker asserted a fixed postcheck prefix, making valid later ALR extensions order-fragile.",
+    "sourceReference": "scripts/check-alr-w15-w19-knowledge-learning.mjs",
+    "sourceSha256": "81113e0f7c27fc266f8d9a71a4f51ee401b2d5ff64b41c73c51ebfa3ac6939ab",
+    "repair": "Validate required commands as a unique ordered subsequence instead of a fixed string prefix.",
+    "runtimeSemanticsMutated": false
+  },
+  "preservation": {
+    "w0W19ContractsRegistriesRuntimeOrFreezeMutated": false,
+    "w15W19CheckerSemanticAssertionsReduced": false,
+    "rdgCarCprOrIcrAuthorityMutated": false,
+    "lessonOrObjectiveAuthorityMutated": false,
+    "existingRuntimeOrUserDataMutated": false
+  }
+}

@@ -246,11 +246,34 @@ for (const output of freeze.outputs) await fs.access(path.join(root, output));
 const pkg = await read('package.json');
 assert.equal(pkg.scripts['check:alr-w15-w19'], 'node scripts/check-alr-w15-w19-knowledge-learning.mjs');
 assert.equal(pkg.scripts['check:alr-knowledge-learning'], 'npm run check:alr-w15-w19');
-const requiredPostcheckPrefix =
-  'npm run check:governance-data-closure && npm run check:alr-foundation && npm run check:alr-capability && ' +
-  'npm run check:alr-learning-architecture && npm run check:car-reconciliation && npm run check:icr-foundation && ' +
-  'npm run check:icr-runtime && npm run check:alr-knowledge-learning && ';
-assert.ok(pkg.scripts.postcheck.startsWith(requiredPostcheckPrefix));
+const assertUniqueOrderedCommands = (actualCommands, requiredCommands) => {
+  let priorIndex = -1;
+  for (const command of requiredCommands) {
+    const matchingIndexes = actualCommands.flatMap((candidate, index) => candidate === command ? [index] : []);
+    assert.equal(matchingIndexes.length, 1, `postcheck command must occur exactly once: ${command}`);
+    assert.ok(matchingIndexes[0] > priorIndex, `postcheck command order: ${command}`);
+    priorIndex = matchingIndexes[0];
+  }
+};
+const requiredPostcheckCommands = [
+  'npm run check:governance-data-closure',
+  'npm run check:alr-foundation',
+  'npm run check:alr-capability',
+  'npm run check:alr-learning-architecture',
+  'npm run check:car-reconciliation',
+  'npm run check:icr-foundation',
+  'npm run check:icr-runtime',
+  'npm run check:alr-knowledge-learning'
+];
+const postcheckCommands = pkg.scripts.postcheck.split('&&').map(command => command.trim());
+assertUniqueOrderedCommands(postcheckCommands, requiredPostcheckCommands);
+const simulatedParallelRmoCommands = [...postcheckCommands];
+simulatedParallelRmoCommands.splice(
+  simulatedParallelRmoCommands.indexOf('npm run check:icr-runtime') + 1,
+  0,
+  'npm run check:rmo-foundation'
+);
+assertUniqueOrderedCommands(simulatedParallelRmoCommands, requiredPostcheckCommands);
 
 console.log('✓ ALR-W15～W19 Knowledge → Learning passed.');
 console.log('✓ 5 Published Knowledge Projections → 5 Teaching Explanations → 5 synthetic Examples → 5 synthetic Case Studies are reciprocal across all 5 Lessons.');
