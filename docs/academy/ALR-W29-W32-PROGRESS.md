@@ -23,4 +23,6 @@ Status: frozen semantic runtime; learner delivery, learner progress persistence,
 
 Registry validation, reciprocal scope validation, pure Progress evaluation, pure Continuity evaluation, pure Review evaluation and pure Recommendation resolution are active. Learner accounts, Academy delivery, storage, retention mutation and presentation remain blocked.
 
+Parallel Wave 1 editorial state is checked for presence and package-order preservation only. It is not an ALR authority and is therefore not content-hash-bound by the ALR freeze; Human-governed C2/C3 advancement may continue without invalidating ALR-W29～W32.
+
 The next governed work is **ALR-W33 Academy Entitlement**.

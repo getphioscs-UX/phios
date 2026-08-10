@@ -1,6 +1,6 @@
 {
   "auditCode": "PHI-OS-ALR-W29-W32-PROGRESS-RECONCILIATION-v1",
-  "auditVersion": "1.0.0",
+  "auditVersion": "1.0.1",
   "scope": "ALR-W29-W32",
   "status": "closed",
   "baselineCommit": "6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f",
@@ -23,8 +23,7 @@
     {"reference": "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json", "sha256": "2d6d00c17237f10c2a79fa19ab20b13fb97499796fbf2ad408c6a722a47c5243", "classification": "RDG_CAPABILITY_EVIDENCE_BOUNDARY"},
     {"reference": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json", "sha256": "cdf977546bcbbbfbf1b9ad3da2f639d12ed43639f093f1dd27322a16cee8db02", "classification": "RDG_RETENTION_AUTHORITY"},
     {"reference": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json", "sha256": "498838a91799bc89167b65765d6bec710327e0e29be32ba92a43a5e541990708", "classification": "RDG_RETENTION_CLASS_AUTHORITY"},
-    {"reference": "content/runtime/reality-model-runtime/freeze/rmo-w5-w7-reality-structure-freeze-v1.json", "sha256": "27cc49b4160748a64b7242e1a33c6ef09a6b308c08e330d3670b602fec9326bf", "classification": "PARALLEL_RMO_FREEZE"},
-    {"reference": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json", "sha256": "9f4a697f792e5ef0a835be633573dd1fc4ef0bcaf2fe102e63aaa418c27b7757", "classification": "PARALLEL_WAVE1_HUMAN_REVIEW_STATE"}
+    {"reference": "content/runtime/reality-model-runtime/freeze/rmo-w5-w7-reality-structure-freeze-v1.json", "sha256": "27cc49b4160748a64b7242e1a33c6ef09a6b308c08e330d3670b602fec9326bf", "classification": "PARALLEL_RMO_FREEZE"}
   ],
   "implementationDecision": {
     "progressScopeCount": 5,
@@ -52,6 +51,9 @@
   "parallelWorkBoundary": {
     "rmoW5W7Present": true,
     "wave1C2FreezeResolutionPresent": true,
+    "wave1C2FreezeResolutionReference": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json",
+    "wave1ValidationMode": "PRESENCE_ONLY_NOT_ALR_CONTENT_HASH",
+    "wave1MayAdvanceWithoutAlrHashRefresh": true,
     "packageIntegrationMustPreserveRmoAndWave1Commands": true,
     "progressMayReadOrMutateCanonicalReality": false,
     "progressMayModifyHumanEditorialReview": false

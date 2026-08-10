@@ -26,6 +26,7 @@ const digest = async file => crypto.createHash('sha256')
   .digest('hex');
 
 const audit = await read(`${base}/audits/alr-progress-reconciliation-v1.json`);
+assert.equal(audit.auditVersion, '1.0.1');
 assert.equal(audit.baselineCommit, '6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f');
 assert.equal(audit.scope, 'ALR-W29-W32');
 assert.deepEqual(audit.implementationDecision, {
@@ -46,6 +47,8 @@ assert.deepEqual(audit.implementationDecision, {
 });
 assert.equal(audit.parallelWorkBoundary.rmoW5W7Present, true);
 assert.equal(audit.parallelWorkBoundary.wave1C2FreezeResolutionPresent, true);
+assert.equal(audit.parallelWorkBoundary.wave1ValidationMode, 'PRESENCE_ONLY_NOT_ALR_CONTENT_HASH');
+assert.equal(audit.parallelWorkBoundary.wave1MayAdvanceWithoutAlrHashRefresh, true);
 assert.equal(audit.parallelWorkBoundary.packageIntegrationMustPreserveRmoAndWave1Commands, true);
 assert.equal(audit.preservation.alrW0W28ContractsRegistriesRuntimeOrFreezeMutated, false);
 assert.equal(audit.preservation.programPathModuleLessonObjectivePracticeAssessmentOrCapabilityAuthorityMutated, false);
@@ -55,6 +58,7 @@ for (const source of audit.inspectedAuthorities) {
   await fs.access(path.join(root, source.reference));
   assert.equal(await digest(source.reference), source.sha256, source.reference);
 }
+await fs.access(path.join(root, audit.parallelWorkBoundary.wave1C2FreezeResolutionReference));
 
 const masterWork = await read('content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json');
 const workEntries = masterWork.entries.filter(entry => /^ALR-W(?:29|30|31|32)$/.test(entry.workCode));
@@ -368,4 +372,5 @@ console.log('✓ ALR-W29～W32 Learning Progress / Continuity / Review / Recomme
 console.log('✓ 5 reciprocal Progress scopes resolve through 7 Progress states, 7 Continuity decisions, 8 Review decisions and 11 explainable Recommendation actions.');
 console.log('✓ Completion is not Capability; RDG retains retention authority; every Recommendation remains an option requiring choice.');
 console.log('✓ Learner persistence, Provider/AI personalization, automatic assignment, Entitlement, Credential and Professional authority remain inactive.');
-console.log('✓ postcheck preserves RMO and Wave 1 C2 while adding ALR Progress immediately after ALR Assessment.');
+console.log('✓ postcheck preserves RMO and the Wave 1 production chain while adding ALR Progress immediately after ALR Assessment.');
+console.log('✓ Parallel Wave 1 review state is presence-bound, not ALR content-hash-bound, so Human-governed C2/C3 advancement does not invalidate ALR.');
