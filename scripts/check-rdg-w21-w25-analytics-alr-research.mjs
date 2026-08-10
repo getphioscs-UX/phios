@@ -93,7 +93,7 @@ assert.equal(freeze.existingDataMutated, false);
 const pkg = await read('package.json');
 assert.equal(pkg.scripts['check:rdg-w21-w25'], 'node scripts/check-rdg-w21-w25-analytics-alr-research.mjs');
 assert.equal(pkg.scripts['check:rdg-analytics'], 'npm run check:rdg-w21-w25');
-assert.equal(pkg.scripts['check:governance-data-closure'], 'npm run check:governance-access-closure && npm run check:rdg-w21-w25');
+assert.equal(pkg.scripts['check:governance-data-closure'], 'npm run check:governance-access-closure && npm run check:rdg-w21-w25 && npm run check:rdg-w26-w30');
 assert.ok(pkg.scripts.postcheck.startsWith('npm run check:governance-data-closure && '));
 
 console.log('✓ RDG-W21～W25 Analytics / ALR / Research passed.');

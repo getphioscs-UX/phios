@@ -1,0 +1,260 @@
+{
+  "registryCode": "PHI-OS-RDG-W26-CANONICAL-DATA-CONTRACT-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RDG-W26",
+  "status": "canonical",
+  "baselineCommit": "ab07f77f1e389b7a99499b8f242751cc64ecc1ad",
+  "inventoryAuthority": "content/governance/operational-architecture/runtime-inventory-v1.json",
+  "dataGovernanceAuthority": "RDG",
+  "dataTypes": [
+    {"dataType": "ACCOUNT_RECORD", "dataDomain": "ACCOUNT"},
+    {"dataType": "REALITY_INPUT_RECORD", "dataDomain": "REALITY_INPUT"},
+    {"dataType": "REALITY_EVIDENCE_RECORD", "dataDomain": "REALITY_EVIDENCE"},
+    {"dataType": "RUNTIME_STATE_RECORD", "dataDomain": "RUNTIME_STATE"},
+    {"dataType": "RUNTIME_INTERACTION_RECORD", "dataDomain": "RUNTIME_INTERACTION"},
+    {"dataType": "KNOWLEDGE_USAGE_RECORD", "dataDomain": "KNOWLEDGE_USAGE"},
+    {"dataType": "LEARNING_RECORD", "dataDomain": "LEARNING"},
+    {"dataType": "CAPABILITY_EVIDENCE_RECORD", "dataDomain": "CAPABILITY"},
+    {"dataType": "NAVIGATION_RECORD", "dataDomain": "NAVIGATION"},
+    {"dataType": "OUTCOME_RECORD", "dataDomain": "OUTCOME"},
+    {"dataType": "PROFESSIONAL_JUDGMENT_RECORD", "dataDomain": "PROFESSIONAL"},
+    {"dataType": "METHOD_INPUT_RECORD", "dataDomain": "METHOD_INPUT"},
+    {"dataType": "METHOD_PROJECTION_RECORD", "dataDomain": "METHOD_PROJECTION"},
+    {"dataType": "MEANING_PROJECTION_RECORD", "dataDomain": "METHOD_PROJECTION"},
+    {"dataType": "REPORT_RECORD", "dataDomain": "OUTCOME"},
+    {"dataType": "SYSTEM_OPERATION_RECORD", "dataDomain": "SYSTEM_OPERATION"},
+    {"dataType": "GOVERNANCE_RECORD", "dataDomain": "GOVERNANCE"},
+    {"dataType": "UI_TELEMETRY_RECORD", "dataDomain": "ANALYTICS"},
+    {"dataType": "ANALYTICS_RECORD", "dataDomain": "ANALYTICS"}
+  ],
+  "entries": [
+    {
+      "runtimeCode": "KAU", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "SECURITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "INTERNAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "KPP", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "SECURITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "INTERNAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "PJA", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "SECURITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "INTERNAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "KI", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["KNOWLEDGE_USAGE_RECORD", "SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["GOVERNANCE_RECORD", "ANALYTICS_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["GOVERNANCE_RECORD", "ANALYTICS_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["KNOWLEDGE_USAGE_RECORD", "SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "PRODUCT_ANALYTICS"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "ANONYMIZED_AGGREGATE"], "sensitivityCeiling": "PERSONAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "CMR", "plane": "AUTHORITY", "activationState": "EXISTING",
+      "producedDataTypes": ["MEANING_PROJECTION_RECORD"], "consumedDataTypes": ["METHOD_PROJECTION_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["METHOD_PROJECTION_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["MEANING_PROJECTION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "CAR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "SECURITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "INTERNAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "CPR", "plane": "PRESENTATION", "activationState": "EXISTING",
+      "producedDataTypes": ["UI_TELEMETRY_RECORD", "ANALYTICS_RECORD"], "consumedDataTypes": ["REPORT_RECORD", "RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["REPORT_RECORD", "RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["UI_TELEMETRY_RECORD", "ANALYTICS_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "PRODUCT_ANALYTICS"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "ANONYMIZED_AGGREGATE"], "sensitivityCeiling": "PERSONAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "ALLOW_PURPOSE_CONSENT_BOUND"}
+    },
+    {
+      "runtimeCode": "MR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["METHOD_PROJECTION_RECORD"], "consumedDataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["METHOD_PROJECTION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "HDR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["METHOD_PROJECTION_RECORD"], "consumedDataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["METHOD_PROJECTION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "AST", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["METHOD_PROJECTION_RECORD"], "consumedDataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["METHOD_PROJECTION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "BZR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["METHOD_PROJECTION_RECORD"], "consumedDataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["METHOD_PROJECTION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "NUM", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["METHOD_PROJECTION_RECORD"], "consumedDataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["METHOD_INPUT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["METHOD_PROJECTION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "ICR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["REALITY_INPUT_RECORD", "METHOD_INPUT_RECORD"], "consumedDataTypes": ["ACCOUNT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["ACCOUNT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["REALITY_INPUT_RECORD", "METHOD_INPUT_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "RUNTIME_RECOVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RECOVERY", "SERVICE_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "RMO", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["RUNTIME_STATE_RECORD"], "consumedDataTypes": ["REALITY_INPUT_RECORD", "REALITY_EVIDENCE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["REALITY_INPUT_RECORD", "REALITY_EVIDENCE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["RUNTIME_STATE_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "RUNTIME_CONTINUITY", "RUNTIME_RECOVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RECOVERY", "RUNTIME"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "RRE", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["REALITY_EVIDENCE_RECORD"], "consumedDataTypes": ["REALITY_INPUT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["REALITY_INPUT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["REALITY_EVIDENCE_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "PROFESSIONAL_SERVICE"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED", "PROFESSIONAL_SCOPED"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "ALLOW_GOVERNED", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "ALR", "plane": "RUNTIME", "activationState": "RESERVED_NOT_IMPLEMENTED",
+      "producedDataTypes": ["LEARNING_RECORD", "CAPABILITY_EVIDENCE_RECORD"], "consumedDataTypes": ["LEARNING_RECORD", "CAPABILITY_EVIDENCE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["LEARNING_RECORD", "CAPABILITY_EVIDENCE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["LEARNING_RECORD", "CAPABILITY_EVIDENCE_RECORD"]},
+      "allowedPurposes": ["LEARNING_DELIVERY", "CAPABILITY_TRACKING"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED"], "sensitivityCeiling": "SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY_REALITY_EVIDENCE", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "JR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["NAVIGATION_RECORD", "RUNTIME_STATE_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "MEANING_PROJECTION_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "MEANING_PROJECTION_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["NAVIGATION_RECORD", "RUNTIME_STATE_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "RUNTIME_CONTINUITY", "RUNTIME_RECOVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RECOVERY", "RUNTIME"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "PR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["PROFESSIONAL_JUDGMENT_RECORD", "OUTCOME_RECORD"], "consumedDataTypes": ["REALITY_EVIDENCE_RECORD", "RUNTIME_STATE_RECORD", "METHOD_PROJECTION_RECORD", "MEANING_PROJECTION_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "ASSIGNMENT_PURPOSE_PERMISSION_BOUND", "dataTypes": ["REALITY_EVIDENCE_RECORD", "RUNTIME_STATE_RECORD", "METHOD_PROJECTION_RECORD", "MEANING_PROJECTION_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["PROFESSIONAL_JUDGMENT_RECORD", "OUTCOME_RECORD"]},
+      "allowedPurposes": ["PROFESSIONAL_SERVICE", "LEGAL_COMPLIANCE"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "PROFESSIONAL_SCOPED"], "sensitivityCeiling": "RESTRICTED_PROFESSIONAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "ALLOW_PR_AUTHORITY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "RR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["REPORT_RECORD"], "consumedDataTypes": ["REALITY_EVIDENCE_RECORD", "CAPABILITY_EVIDENCE_RECORD", "PROFESSIONAL_JUDGMENT_RECORD", "OUTCOME_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["REALITY_EVIDENCE_RECORD", "CAPABILITY_EVIDENCE_RECORD", "PROFESSIONAL_JUDGMENT_RECORD", "OUTCOME_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["REPORT_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "PROFESSIONAL_SERVICE"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "SERVICE_SCOPED", "PROFESSIONAL_SCOPED"], "sensitivityCeiling": "RESTRICTED_PROFESSIONAL",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "ORC", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "SECURITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RECOVERY"], "sensitivityCeiling": "SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "LRM", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["RUNTIME_STATE_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["RUNTIME_STATE_RECORD"]},
+      "allowedPurposes": ["RUNTIME_CONTINUITY", "USER_REQUESTED_MEMORY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RUNTIME", "LONG_TERM_MEMORY"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "RCL", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["RUNTIME_STATE_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["RUNTIME_STATE_RECORD"]},
+      "allowedPurposes": ["RUNTIME_CONTINUITY", "RUNTIME_RECOVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RECOVERY", "RUNTIME"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "VAL", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "REALITY_EVIDENCE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "REALITY_EVIDENCE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "SECURITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "RME", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["RUNTIME_INTERACTION_RECORD", "RUNTIME_STATE_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["RUNTIME_INTERACTION_RECORD", "RUNTIME_STATE_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "RUNTIME_CONTINUITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RUNTIME"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "RNE", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["NAVIGATION_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["NAVIGATION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY", "RUNTIME_CONTINUITY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "RUNTIME"], "sensitivityCeiling": "HIGHLY_SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "AIR", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["RUNTIME_INTERACTION_RECORD"], "consumedDataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["RUNTIME_STATE_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["RUNTIME_INTERACTION_RECORD"]},
+      "allowedPurposes": ["SERVICE_DELIVERY"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION"], "sensitivityCeiling": "SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    },
+    {
+      "runtimeCode": "CIV", "plane": "RUNTIME", "activationState": "EXISTING",
+      "producedDataTypes": ["ACCOUNT_RECORD", "SYSTEM_OPERATION_RECORD"], "consumedDataTypes": ["ACCOUNT_RECORD", "GOVERNANCE_RECORD"],
+      "readAuthority": {"mode": "PURPOSE_PERMISSION_VISIBILITY_BOUND", "dataTypes": ["ACCOUNT_RECORD", "GOVERNANCE_RECORD"]},
+      "writeAuthority": {"mode": "ALLOW_LIST", "dataTypes": ["ACCOUNT_RECORD", "SYSTEM_OPERATION_RECORD"]},
+      "allowedPurposes": ["SECURITY", "FRAUD_PREVENTION", "LEGAL_COMPLIANCE"], "allowedPersistenceClasses": ["EPHEMERAL", "SESSION", "ACCOUNT"], "sensitivityCeiling": "SENSITIVE",
+      "permissions": {"evidencePromotion": "DENY", "professionalDataWrite": "DENY", "analyticsWrite": "DENY"}
+    }
+  ],
+  "rules": {
+    "registryDoesNotActivateRuntime": true,
+    "contractDoesNotGrantAuthorityBeyondCanonicalAuthorityMap": true,
+    "crossRuntimeWriteRequiresSourceAndTargetContract": true,
+    "cprMayWriteCanonicalRealityData": false,
+    "alrMayWriteLearningAndCapabilityEvidenceOnly": true,
+    "alrMayWriteRealityEvidence": false,
+    "professionalJudgmentAuthorityRuntime": "PR",
+    "professionalDataIsRuntimeMemoryByDefault": false,
+    "analyticsRequiresPurposeAndConsent": true,
+    "unknownContractFailsClosed": true
+  }
+}

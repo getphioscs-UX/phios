@@ -1,0 +1,38 @@
+{
+  "contractCode": "PHI-OS-RDG-W27-DATA-DRIFT-CONTROL-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W27",
+  "status": "active",
+  "driftTypes": [
+    {"driftType": "PURPOSE_DRIFT", "comparisonField": "purposeCodes"},
+    {"driftType": "CONSENT_DRIFT", "comparisonField": "consentClass"},
+    {"driftType": "RETENTION_DRIFT", "comparisonField": "retentionClass"},
+    {"driftType": "SENSITIVITY_DRIFT", "comparisonField": "sensitivityClass"},
+    {"driftType": "EVIDENCE_DRIFT", "comparisonField": "evidenceState"},
+    {"driftType": "AUTHORITY_DRIFT", "comparisonField": "authorityReference"},
+    {"driftType": "PROFESSIONAL_BOUNDARY_DRIFT", "comparisonField": "professionalBoundary"},
+    {"driftType": "INFERENCE_DRIFT", "comparisonField": "inferenceBoundary"},
+    {"driftType": "ANALYTICS_DRIFT", "comparisonField": "analyticsLayer"},
+    {"driftType": "DELETION_DRIFT", "comparisonField": "deletionState"}
+  ],
+  "decisions": ["NO_DRIFT", "BLOCKED_DRIFT", "APPROVED_GOVERNED_CHANGE", "UNRESOLVED"],
+  "governedChangeRequirements": [
+    "governedChangeReference",
+    "explicitDriftTypes",
+    "authorityApproval",
+    "lineageReference",
+    "effectiveAt"
+  ],
+  "rules": {
+    "missingBaselineOrCandidateFailsClosed": true,
+    "unapprovedDriftIsBlocked": true,
+    "purposeExpansionRequiresGovernedChange": true,
+    "journeyDataMayBeSilentlyReusedForMarketing": false,
+    "consentMayBeInferredFromPriorPurpose": false,
+    "retentionMayNotSilentlyBecomeIndefinite": true,
+    "analyticsMayNotBecomeEvidenceOrRuntimeState": true,
+    "inferenceMayNotReplaceUnknown": true,
+    "professionalBoundaryMayNotBeRelaxedByStorageLocation": true,
+    "deletionStateMayNotBeReversedWithoutAuthority": true
+  }
+}
