@@ -1,0 +1,201 @@
+{
+  "contractCode": "PHI-OS-CAR-ALR-CPR-AUTHORITY-RECONCILIATION-v1",
+  "contractVersion": "1.0.0",
+  "phase": "PHASE-CAR",
+  "status": "reconciled",
+  "phaseStatus": "PRESERVED",
+  "baselineCommit": "d5266251b43fc1497ab60959203c7a21b129acdf",
+  "authorityModel": {
+    "CAR": {
+      "authority": "ASSET_PRODUCTION",
+      "canonicalRole": "Asset Production Authority",
+      "owns": [
+        "Asset Brief",
+        "Asset Candidate",
+        "Asset Review and Approval Lifecycle",
+        "Rights and Accessibility Publication Gates",
+        "Published Asset Eligibility and Projection"
+      ],
+      "doesNotOwn": [
+        "Learning Runtime",
+        "Learning Progression",
+        "Capability State",
+        "Canonical Presentation",
+        "Presentation Composition",
+        "Layout Projection",
+        "PDS Token Authority"
+      ]
+    },
+    "ALR": {
+      "authority": "LEARNING_CAPABILITY",
+      "canonicalRole": "Learning Runtime",
+      "activationState": "NOT_ACTIVATED_BY_THIS_RECONCILIATION",
+      "ownsWhenImplemented": [
+        "Lesson Runtime",
+        "Practice Runtime",
+        "Assessment Runtime",
+        "Learning Progression",
+        "Capability Evidence and State"
+      ],
+      "doesNotOwn": [
+        "Asset Production",
+        "Asset Approval",
+        "Asset Publication"
+      ]
+    },
+    "CPR": {
+      "authority": "PRESENTATION",
+      "canonicalRole": "Presentation Runtime",
+      "owns": [
+        "Canonical Presentation",
+        "Presentation Composition",
+        "Layout Projection",
+        "Responsive Projection",
+        "Accessibility Presentation",
+        "PDS Mapping",
+        "Surface Rendering"
+      ],
+      "doesNotOwn": [
+        "Asset Production",
+        "Asset Review",
+        "Asset Approval",
+        "Asset Publication Eligibility"
+      ]
+    }
+  },
+  "workInterpretation": {
+    "CAR-W7": {
+      "status": "PRESERVED",
+      "outputs": [
+        "Lesson Brief",
+        "Slides Brief",
+        "Quiz Brief",
+        "Assignment Brief"
+      ],
+      "equations": {
+        "carLessonBriefEqualsAlrLessonRuntime": false,
+        "carQuizBriefEqualsAlrAssessmentRuntime": false,
+        "carAssignmentBriefEqualsCapabilityEvidence": false
+      },
+      "rules": {
+        "carMayCreateLearningRuntimeState": false,
+        "carMayEnrollLearner": false,
+        "carMayScoreAssessment": false,
+        "carMayAdvanceLearningProgression": false,
+        "carMayPromoteCapability": false
+      }
+    },
+    "CAR-W8": {
+      "status": "PRESERVED",
+      "interpretation": "Website Module Projection remains a published-only asset projection input to CPR.",
+      "rules": {
+        "websiteModuleProjectionIsCanonicalPresentation": false,
+        "websiteModuleProjectionMayOwnLayout": false,
+        "websiteModuleProjectionMayRenderSurface": false,
+        "candidateAssetReadable": false
+      }
+    },
+    "CAR-W9": {
+      "status": "PRESERVED",
+      "effectiveFlags": {
+        "providersEnabled": false,
+        "networkCallsEnabled": false,
+        "paidOverageDisabled": true,
+        "providerMayCreatePublishedContent": false
+      },
+      "rules": {
+        "providerRoutingAuthorityRebuilt": false,
+        "carMayOverrideProviderPolicy": false,
+        "automaticPublicationAllowed": false,
+        "failClosed": true
+      }
+    },
+    "CAR-W10-W14": {
+      "status": "PRESERVED",
+      "chain": [
+        "Asset Brief",
+        "Candidate",
+        "Independent Review",
+        "Independent Approval",
+        "Rights Gate",
+        "Accessibility Gate",
+        "Published Asset"
+      ],
+      "rules": {
+        "candidateMaySelfApprove": false,
+        "reviewIsApproval": false,
+        "approvalIsPublication": false,
+        "rightsAndAccessibilityFailClosed": true,
+        "providerMayCreatePublishedContent": false
+      }
+    },
+    "CAR-W15-W17": {
+      "status": "PRESERVED_WITH_AUTHORITY_INTERPRETATION_RECONCILED",
+      "canonicalInterpretation": "Published Asset Eligibility / Projection",
+      "downstreamAuthority": "CPR Canonical Presentation",
+      "legacyTermResolution": {
+        "CAR Surface Composition": "Published Asset Projection Bundle only",
+        "CAR Presentation Type": "Asset lineage or eligibility classification only",
+        "CAR PDS Integration": "PDS eligibility and reference validation only"
+      },
+      "rules": {
+        "carMayDetermineSurfaceEligibility": true,
+        "carMayProjectPublishedAssetReferences": true,
+        "carMayCreateCanonicalPresentation": false,
+        "carMayComposePresentation": false,
+        "carMayOwnLayout": false,
+        "carMayMapPdsTokens": false,
+        "carMayRenderSurface": false,
+        "cprMayRecomputeCarPublicationState": false,
+        "cprMayExpandCarPublicationEligibility": false
+      }
+    },
+    "CAR-W18": {
+      "status": "PRESERVED",
+      "existingFreeze": "content/professional/canonical-asset-runtime/freeze/car-w18-freeze-v1.json",
+      "rules": {
+        "existingFreezeRemainsAuthority": true,
+        "replacementFreezeCreated": false,
+        "productionActivationAllowed": false
+      }
+    }
+  },
+  "handoffs": [
+    {
+      "from": "CAR",
+      "to": "ALR",
+      "allowedObjects": [
+        "Published Teaching Asset",
+        "Lesson Brief",
+        "Slides Brief",
+        "Quiz Brief",
+        "Assignment Brief"
+      ],
+      "writeThroughAllowed": false,
+      "authorityTransferAllowed": false
+    },
+    {
+      "from": "CAR",
+      "to": "CPR",
+      "allowedObjects": [
+        "Published Asset Reference",
+        "Surface Eligibility Decision",
+        "Asset Projection Reference",
+        "Quality and Accessibility Gate Result"
+      ],
+      "writeThroughAllowed": false,
+      "authorityTransferAllowed": false
+    }
+  ],
+  "invariants": {
+    "carRebuilt": false,
+    "alrImplemented": false,
+    "cprRebuilt": false,
+    "existingCarFreezeModified": false,
+    "publishedAssetRegistryModified": false,
+    "secondAssetAuthorityCreated": false,
+    "secondLearningAuthorityCreated": false,
+    "secondPresentationAuthorityCreated": false,
+    "dependencyGrantsAuthority": false
+  }
+}
