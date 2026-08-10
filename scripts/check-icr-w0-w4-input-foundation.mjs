@@ -237,7 +237,7 @@ for (const output of freeze.frozenOutputs) assert.ok(fs.existsSync(path.join(roo
 assert.equal(packageJson.scripts['check:icr-w0-w4'], 'node scripts/check-icr-w0-w4-input-foundation.mjs');
 assert.equal(packageJson.scripts['check:icr-foundation'], 'npm run check:icr-w0-w4');
 assert.ok(packageJson.scripts.postcheck.startsWith(
-  'npm run check:governance-data-closure && npm run check:alr-foundation && npm run check:car-reconciliation && npm run check:icr-foundation && '
+  'npm run check:governance-data-closure && npm run check:alr-foundation && npm run check:alr-capability && npm run check:alr-learning-architecture && npm run check:car-reconciliation && npm run check:icr-foundation && '
 ));
 
 console.log('ICR-W0-W4 input foundation check passed.');
