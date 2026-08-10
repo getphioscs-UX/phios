@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/icr/verified-input-v1.schema.json",
+  "title": "PHI OS ICR Verified Input Decision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "verifiedInputCode",
+    "verifiedInputVersion",
+    "sourceCanonicalInputCode",
+    "sourceCanonicalInputDigest",
+    "inputType",
+    "verificationState",
+    "projectionEligibility",
+    "verificationCode",
+    "verifierClass",
+    "verifierReference",
+    "verifiedAt",
+    "fieldDecisions",
+    "authorityBindings",
+    "governanceBindings",
+    "lineage",
+    "verifiedInputDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-VERIFIED-INPUT-v1.0.0"},
+    "verifiedInputCode": {"type": "string", "pattern": "^ICR-VERIFIED-[A-Z0-9-]{4,80}$"},
+    "verifiedInputVersion": {"$ref": "#/$defs/semver"},
+    "sourceCanonicalInputCode": {"type": "string", "pattern": "^ICR-INPUT-[A-Z0-9-]{4,80}$"},
+    "sourceCanonicalInputDigest": {"$ref": "#/$defs/digest"},
+    "inputType": {"enum": ["REALITY_DESCRIPTION", "BIRTH_DATA", "FINANCIAL_INTAKE", "EXTERNAL_READER_INTAKE"]},
+    "verificationState": {"enum": ["VERIFIED", "PARTIALLY_VERIFIED", "DISPUTED", "REJECTED"]},
+    "projectionEligibility": {"enum": ["ELIGIBLE", "BLOCKED"]},
+    "verificationCode": {"type": "string", "pattern": "^ICR-VERIFY-[A-Z0-9-]{4,80}$"},
+    "verifierClass": {"enum": ["SUBJECT_CONFIRMATION", "DOCUMENT_REVIEW", "PROFESSIONAL_REVIEW", "GOVERNED_SYSTEM_CONSISTENCY"]},
+    "verifierReference": {"type": "string", "minLength": 1},
+    "verifiedAt": {"type": "string", "format": "date-time"},
+    "fieldDecisions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fieldPath", "state", "evidenceReferences"],
+        "properties": {
+          "fieldPath": {"type": "string", "minLength": 1},
+          "state": {"enum": ["VERIFIED", "DECLARED_NOT_VERIFIED", "UNKNOWN", "DISPUTED", "INVALID"]},
+          "evidenceReferences": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+        }
+      }
+    },
+    "authorityBindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["bindingCode", "authority", "recordType", "recordId", "recordVersion", "recordDigest"],
+        "properties": {
+          "bindingCode": {"type": "string", "pattern": "^ICR-BIND-[A-Z0-9-]{4,80}$"},
+          "authority": {"const": "SHARED_DATA_AUTHORITY"},
+          "recordType": {"enum": ["BIRTH_RECORD", "COORDINATE", "TIMEZONE", "DST", "TRUE_SOLAR_TIME", "ASTRONOMY", "CALENDAR", "SOLAR_TERMS", "REFERENCE_TABLES"]},
+          "recordId": {"type": "string", "pattern": "^SDA-[A-Z0-9-]{4,64}$"},
+          "recordVersion": {"$ref": "#/$defs/semver"},
+          "recordDigest": {"$ref": "#/$defs/digest"}
+        }
+      }
+    },
+    "governanceBindings": {"type": "object"},
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalInputReference", "canonicalInputDigest", "verificationEvidenceReferences"],
+      "properties": {
+        "canonicalInputReference": {"type": "string"},
+        "canonicalInputDigest": {"$ref": "#/$defs/digest"},
+        "verificationEvidenceReferences": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      }
+    },
+    "verifiedInputDigest": {"$ref": "#/$defs/digest"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"verificationState": {"const": "VERIFIED"}}, "required": ["verificationState"]},
+      "then": {
+        "properties": {
+          "projectionEligibility": {"const": "ELIGIBLE"},
+          "authorityBindings": {"minItems": 1}
+        }
+      },
+      "else": {"properties": {"projectionEligibility": {"const": "BLOCKED"}}}
+    }
+  ],
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

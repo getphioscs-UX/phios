@@ -1,0 +1,52 @@
+{
+  "registryCode": "PHI-OS-ICR-W1-CANONICAL-INPUT-TYPE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ICR-W1",
+  "status": "foundation",
+  "productionStatus": "validation_only",
+  "inputTypes": [
+    {
+      "inputType": "REALITY_DESCRIPTION",
+      "sourceChannels": ["REALITY_ENTRY"],
+      "existingAuthorityReference": "functions/_lib/runtime-entry.js",
+      "typeContractStatus": "PRESERVED_OPERATIONAL_INTAKE",
+      "requiredVerificationPaths": []
+    },
+    {
+      "inputType": "BIRTH_DATA",
+      "sourceChannels": ["SELF_SERVICE_INTAKE", "PROFESSIONAL_INTAKE", "EXTERNAL_READER_INTAKE"],
+      "existingAuthorityReference": "content/professional/method-runtime/shared-data-authority-v1.json",
+      "typeContractStatus": "ICR_W2_FOUNDATION",
+      "requiredVerificationPaths": [
+        "birthData.localDate",
+        "birthData.localTime",
+        "birthData.precision",
+        "birthData.calendarCode",
+        "birthData.placeName",
+        "birthData.sourceTimezoneText"
+      ]
+    },
+    {
+      "inputType": "FINANCIAL_INTAKE",
+      "sourceChannels": ["PROFESSIONAL_INTAKE"],
+      "existingAuthorityReference": "functions/professional/financial/financial-intake-contract.js",
+      "typeContractStatus": "PRESERVED_OPERATIONAL_INTAKE",
+      "requiredVerificationPaths": []
+    },
+    {
+      "inputType": "EXTERNAL_READER_INTAKE",
+      "sourceChannels": ["PROFESSIONAL_INTAKE", "EXTERNAL_READER_INTAKE"],
+      "existingAuthorityReference": "functions/professional/external-readers/external-reader-intake-contract.js",
+      "typeContractStatus": "PRESERVED_OPERATIONAL_INTAKE",
+      "requiredVerificationPaths": []
+    }
+  ],
+  "instances": [],
+  "populationState": "EMPTY_BY_DESIGN_NO_USER_DATA",
+  "rules": {
+    "registryStoresUserInput": false,
+    "registryCreatesIntakeInstance": false,
+    "existingOperationalIntakeRebuilt": false,
+    "newInputTypeRequiresVersionedContract": true
+  }
+}
