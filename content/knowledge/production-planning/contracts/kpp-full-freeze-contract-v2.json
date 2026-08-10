@@ -1,0 +1,39 @@
+{
+  "contractCode": "KPP-W29-KNOWLEDGE-PRODUCTION-PLANNING-FULL-FREEZE-v2",
+  "contractVersion": "2.0.0",
+  "workCode": "KPP-W29",
+  "status": "active",
+  "scope": "KPP-W0-W29",
+  "authority": {
+    "decides": [
+      "Production Plan",
+      "Production Role",
+      "Production Eligibility",
+      "Production Priority Projection",
+      "Production Wave Plan",
+      "Production Handoff"
+    ],
+    "doesNotDecide": [
+      "Knowledge Truth",
+      "Canonical Node Ownership",
+      "Canonical Meaning",
+      "Article Approval",
+      "Asset Approval",
+      "Publication",
+      "Journey Priority",
+      "Professional Judgment",
+      "Book Completion Truth"
+    ]
+  },
+  "invariants": {
+    "canonicalNodeNotArticle": true,
+    "knowledgeReadyNotArticleRequired": true,
+    "productionWaveNotArticleBatch": true,
+    "rawLegacySourceForbidden": true,
+    "acceptedLegacyReevaluationOnly": true,
+    "frozenPlanNoSilentDrift": true,
+    "frozenWaveReplayRequired": true,
+    "noPublicAssetIsCompletionState": true,
+    "productionActivationSeparateFromRuntimeFreeze": true
+  }
+}

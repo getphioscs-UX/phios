@@ -1,0 +1,90 @@
+{
+  "planCode": "KPP-PILOT-PRODUCTION-PLAN-v2",
+  "planVersion": "2.0.0",
+  "workCode": "KPP-W27",
+  "status": "VALIDATION_PILOT_ONLY",
+  "baselineCommit": "6f35c31ee070e08718b05b59bbafbdb4cc71124a",
+  "scope": [
+    "Preface",
+    "Book I Part 1",
+    "Book I Part 4",
+    "Journey Core Nodes"
+  ],
+  "sourceHandoffs": [
+    "PHI-OS-KAU-E2-KPP-ACCEPTED-SUPPORTING-RELATIONSHIP-HANDOFF-v1"
+  ],
+  "nodes": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "purpose": "standalone public entry test"
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "purpose": "compressed public knowledge test"
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "purpose": "visual-first carrier initialization test"
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "purpose": "KAU-E2-supported Part 4 cross-node visual/fragment re-evaluation test",
+      "acceptedSupportingRelationshipCount": 5
+    },
+    {
+      "nodeCode": "KN-B1-P4-008",
+      "productionRole": "STRUCTURED_ONLY",
+      "purpose": "runtime-only completion test"
+    },
+    {
+      "nodeCode": "KN-B1-P1-006",
+      "productionRole": "JOURNEY_ONLY",
+      "purpose": "journey consumption without article test"
+    },
+    {
+      "nodeCode": "KN-B1-P4-007",
+      "productionRole": "ACADEMY",
+      "purpose": "learning need without public article test"
+    }
+  ],
+  "crossNodeAssembly": {
+    "assemblyPurpose": "Figure 4E / Human Runtime Carrier cross-node visual validation",
+    "primaryNode": "KN-B1-P4-004",
+    "supportingNodes": [
+      "KN-B1-P4-003",
+      "KN-B1-P4-005"
+    ],
+    "productionRole": "MULTI_ASSET",
+    "articleRequiredByAssembly": false
+  },
+  "requiredValidation": [
+    "ARTICLE",
+    "FRAGMENT",
+    "FIGURE",
+    "STRUCTURED_ONLY",
+    "JOURNEY_ONLY",
+    "ACADEMY",
+    "MULTI_ASSET",
+    "NO_UNNECESSARY_ARTICLE",
+    "WAVE_PLANNING",
+    "WAVE_REPLAY"
+  ],
+  "activation": {
+    "productionActivated": false,
+    "candidateCreationAllowed": false,
+    "publicationAllowed": false,
+    "humanProductionDecisionRequiredBeforeActivation": true
+  },
+  "invariants": {
+    "legacySupportingMayInfluenceReevaluationOnly": true,
+    "roleAssignmentsArePilotFixturesNotProductionDecisions": true,
+    "rawLegacySourceForbidden": true
+  },
+  "inputDigest": "e5549356a7e39c6fa3cd2c57a2555f054d9456ed8485d1ffdb63f05446fc1e77",
+  "policyDigest": "1a84bddc044773f2c9288aad065b8c7a8f3822da2020e34e99540ef0904c8af7",
+  "resultDigest": "81e0681abe023944a5aa920a6fd5e16cd77c708df78f102453758b8447687604"
+}

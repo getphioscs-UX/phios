@@ -1,0 +1,29 @@
+{
+  "contractCode": "KPP-W23-GOVERNED-LEGACY-GAP-PRODUCTION-ASSESSMENT-v2",
+  "contractVersion": "2.0.0",
+  "workCode": "KPP-W23",
+  "status": "active",
+  "requiredInput": "KAU-E2 frozen accepted supporting relationship handoff only",
+  "inputReferences": {
+    "kauE2Handoff": "content/knowledge/authoring/extensions/legacy-supporting-source/handoff/kau-e2-kpp-accepted-supporting-relationship-handoff-v1.json",
+    "acceptedSupportingRegistry": "content/knowledge/authoring/extensions/legacy-supporting-source/registries/legacy-accepted-supporting-relationship-registry-v1.json"
+  },
+  "rules": {
+    "rawLegacySourceForbidden": true,
+    "acceptedSupportingReadOnly": true,
+    "deferredItemsExcluded": true,
+    "acceptedSupportingMayTriggerReevaluationOnly": true,
+    "automaticProductionReadinessPromotionForbidden": true,
+    "automaticArticleRequirementForbidden": true,
+    "automaticPriorityChangeForbidden": true,
+    "automaticWaveMutationForbidden": true,
+    "productionPlanRevisionProposalRequiredForChange": true
+  },
+  "outputs": [
+    "canonicalCoverageDelta",
+    "kauReadinessReference",
+    "knowledgeVersion",
+    "productionReevaluation",
+    "productionPlanRevisionProposal"
+  ]
+}
