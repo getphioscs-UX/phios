@@ -508,7 +508,7 @@
     "check:kpp-w27-w29": "node scripts/check-kpp-w23-w27-w29-v2-full-freeze.mjs",
     "check:wave1-c2-review": "node scripts/check-wave1-c2-human-editorial-review-foundation.mjs",
     "check:wave1-c2-freeze-resolution": "node scripts/check-wave1-c2-human-editorial-freeze-resolution.mjs",
-    "check:wave1-production": "npm run check:wave1-preflight && npm run check:wave1-c2-review && npm run check:wave1-c2-freeze-resolution",
+    "check:wave1-production": "npm run check:wave1-c2-mapping-reconciliation && npm run check:wave1-c2-freeze-resolution && npm run check:pja-w2f-c2 && npm run check:pja-w2f-c3 && npm run check:wave1-post-c2-c3",
     "check:cpr-w7-w18": "node scripts/check-cpr-w7-w18-presentation-objects.mjs",
     "check:cpr-w19-w29": "node scripts/check-cpr-w19-w29-composition-surfaces.mjs",
     "check:cpr-w30": "node scripts/check-cpr-w30-full-freeze.mjs",
@@ -616,7 +616,9 @@
     "check:rmo-w5-w7": "node scripts/check-rmo-w5-w7-reality-structure.mjs",
     "check:rmo-structure": "npm run check:rmo-w5-w7",
     "check:rmo": "npm run check:rmo-foundation && npm run check:rmo-structure",
-    "check:wave1-preflight": "node scripts/check-wave1-production-activation-preflight.mjs"
+    "check:wave1-preflight": "node scripts/check-wave1-production-activation-preflight.mjs",
+    "check:wave1-c2-mapping-reconciliation": "node scripts/check-wave1-c2-manuscript-mapping-reconciliation.mjs",
+    "check:wave1-post-c2-c3": "node scripts/check-wave1-post-c2-c3-preflight.mjs"
   },
   "type": "module"
 }

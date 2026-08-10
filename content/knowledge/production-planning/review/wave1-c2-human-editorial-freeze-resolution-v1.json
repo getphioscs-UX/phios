@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-FREEZE-RESOLUTION-v1.0.0",
   "resolutionCode": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-FREEZE-RESOLUTION-v1",
   "resolutionVersion": "1.0.0",
-  "status": "OPEN_PENDING_HUMAN",
+  "status": "HUMAN_RESOLVED",
   "baselineCommit": "5430224d5fb21232d77c19b0f854ba4f802a73a7",
   "contractReference": "content/knowledge/production-planning/contracts/wave1-c2-human-editorial-freeze-resolution-v1.json",
   "sourceReviewRegistry": "content/knowledge/production-planning/review/wave1-c2-human-editorial-review-package-registry-v1.json",
@@ -16,7 +16,7 @@
       "knowledgeVersion": "1.1.0",
       "locale": "zh-Hans",
       "reviewPackageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-PREFACE-004-v1",
-      "approvalState": "pending_human",
+      "approvalState": "human_approved",
       "sourceAuthorities": [
         "content/knowledge/registry/nodes.json",
         "content/knowledge/registry/supporting-questions.json",
@@ -34,7 +34,7 @@
       "manuscriptMappingReview": {
         "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-PREFACE-004",
         "mappingStatus": "candidate",
-        "humanVerified": false,
+        "humanVerified": true,
         "requiredBeforeApproval": true
       },
       "publicationReconciliationProposal": "RECONCILE_EXISTING_PUBLICATION_INTO_C2",
@@ -135,7 +135,9 @@
           ],
           "sources": {
             "sourcePlanVersion": "1.0.0",
-            "internalCanonicalSources": ["SRC-PREFACE-S02"],
+            "internalCanonicalSources": [
+              "SRC-PREFACE-S02"
+            ],
             "knownPublishedContent": [
               "KA-PREFACE-004-ZH-ARTICLE",
               "KA-PREFACE-004-EN-ARTICLE"
@@ -183,25 +185,70 @@
       },
       "proposalContentHash": "sha256:6a77357a3d60841b205a202d77defbf0528c5b7ca6de2d78855276387ac02ece",
       "reviewDimensionProposals": [
-        { "dimension": "CANONICAL_THESIS", "recommendation": "采用本提案 thesis，并以现有双语 Published Article 作为 reconciliation evidence，而非自动 authority。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "ARTICLE_BOUNDARY", "recommendation": "保留现有文章；C2 只冻结其知识边界，不创建 replacement。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SUPPORTING_QUESTION_BOUNDARY", "recommendation": "SQ-PREFACE-008 与 009 嵌入处理，不建立独立 Article requirement。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SEQUENCE_BOUNDARY", "recommendation": "承接 KN-PREFACE-003；后续进入 PHI OS 分层与 Authority。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CLAIM_BOUNDARY", "recommendation": "冻结框架解释、外部事实与 Human Authority 的区分。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SOURCE_BOUNDARY", "recommendation": "SRC-PREFACE-S02 支持 Canonical framework；外部事实另行验证。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "FIGURE_BOUNDARY", "recommendation": "仅冻结导航循环 Figure Decision，不产生 Asset Brief 或 Asset。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "PUBLIC_CONTENT_BOUNDARY", "recommendation": "显式 reconcile 已发布内容，不 silent rebuild、replace 或 unpublish。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CROSS_NODE_BOUNDARY", "recommendation": "仅引用已注册 prerequisite/related nodes，不把关联升级为内容所有权。", "state": "PENDING_HUMAN", "humanFinding": null }
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "采用本提案 thesis，并以现有双语 Published Article 作为 reconciliation evidence，而非自动 authority。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Canonical Thesis exactly as reviewed; no content change was requested."
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "保留现有文章；C2 只冻结其知识边界，不创建 replacement。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Article Boundary exactly as reviewed, including all must-establish, distinction, scope and must-not-claim constraints."
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "SQ-PREFACE-008 与 009 嵌入处理，不建立独立 Article requirement。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Supporting Question treatment exactly as reviewed; no additional Article requirement was created."
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "承接 KN-PREFACE-003；后续进入 PHI OS 分层与 Authority。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed sequence and continuity treatment exactly as reviewed; registered prerequisite/continuity boundaries remain authoritative."
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "冻结框架解释、外部事实与 Human Authority 的区分。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Claim Boundary exactly as reviewed, including internal Canonical Interpretation versus externally verifiable fact separation."
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "SRC-PREFACE-S02 支持 Canonical framework；外部事实另行验证。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Source Boundary exactly as reviewed; Legacy supporting relationships remain supporting-only and external facts remain source-bound."
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "仅冻结导航循环 Figure Decision，不产生 Asset Brief 或 Asset。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Figure Boundary exactly as reviewed; C2 creates no Asset and CAR authority remains required before any Candidate or Published Asset."
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "显式 reconcile 已发布内容，不 silent rebuild、replace 或 unpublish。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Public Content Boundary exactly as reviewed; public, paid-book, Journey and Professional boundaries remain separated."
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "仅引用已注册 prerequisite/related nodes，不把关联升级为内容所有权。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Cross-node Boundary exactly as reviewed; related/prerequisite references do not transfer Canonical ownership."
+        }
       ],
       "humanDecision": {
-        "decision": null,
-        "actor": null,
-        "actorRole": null,
-        "decidedAt": null,
-        "rationale": null,
-        "contentHash": null
+        "decision": "freeze_approved",
+        "actor": "TL",
+        "actorRole": "HUMAN_EDITORIAL_AUTHORITY",
+        "decidedAt": "2026-08-10T18:30:00+08:00",
+        "rationale": "TL explicitly approved all four Wave 1 C2 proposals on current main 6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f. Manuscript mapping ranges were reconciled against the current mapping/inventory model; shared sectionHash values are Part-level hashes by design and are not range collisions. No Production Decision is created by this C2 approval.",
+        "contentHash": "sha256:6a77357a3d60841b205a202d77defbf0528c5b7ca6de2d78855276387ac02ece"
       },
-      "promotionAllowed": false
+      "promotionAllowed": true
     },
     {
       "nodeCode": "KN-B1-P1-003",
@@ -209,7 +256,7 @@
       "knowledgeVersion": "1.0.0",
       "locale": "zh-Hans",
       "reviewPackageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-B1-P1-003-v1",
-      "approvalState": "pending_human",
+      "approvalState": "human_approved",
       "sourceAuthorities": [
         "content/knowledge/registry/nodes.json",
         "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
@@ -228,7 +275,7 @@
       "manuscriptMappingReview": {
         "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P1-003",
         "mappingStatus": "candidate",
-        "humanVerified": false,
+        "humanVerified": true,
         "requiredBeforeApproval": true
       },
       "publicationReconciliationProposal": "NO_EXISTING_PUBLICATION",
@@ -286,7 +333,12 @@
               "重复与反馈",
               "结构持续性与可读取性"
             ],
-            "allowedClaimTypes": ["phi_os_interpretation", "canonical_transition", "boundary_statement", "externally_verifiable"],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
             "sourceRequiredClaims": [
               "任何援引具体物理、复杂系统、生物或社会案例的事实。"
             ],
@@ -342,25 +394,70 @@
       },
       "proposalContentHash": "sha256:311ab65885cab32b37e08e36a88bbb10c631b5c4d8bac32c53a1613564685bbf",
       "reviewDimensionProposals": [
-        { "dimension": "CANONICAL_THESIS", "recommendation": "将 Structure 冻结为受约束且可维持的关系组织。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "ARTICLE_BOUNDARY", "recommendation": "冻结知识范围，但不把 KPP FRAGMENT pilot projection 当作 C2 决定。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SUPPORTING_QUESTION_BOUNDARY", "recommendation": "当前无注册 Supporting Question，不自动新增。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SEQUENCE_BOUNDARY", "recommendation": "承接 KN-B1-P1-002，并进入 KN-B1-P1-004。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CLAIM_BOUNDARY", "recommendation": "区分 PHI OS mechanism 与外部案例事实。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SOURCE_BOUNDARY", "recommendation": "先核实 manuscript range；Legacy 仅 supporting。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "FIGURE_BOUNDARY", "recommendation": "C2 不要求 Figure；未来如需要必须经 CAR。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "PUBLIC_CONTENT_BOUNDARY", "recommendation": "只允许一般机制解释，不包含付费书完整章节或个案应用。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CROSS_NODE_BOUNDARY", "recommendation": "仅保持 P1-002 → P1-003 → P1-004 连续关系。", "state": "PENDING_HUMAN", "humanFinding": null }
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "将 Structure 冻结为受约束且可维持的关系组织。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Canonical Thesis exactly as reviewed; no content change was requested."
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "冻结知识范围，但不把 KPP FRAGMENT pilot projection 当作 C2 决定。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Article Boundary exactly as reviewed, including all must-establish, distinction, scope and must-not-claim constraints."
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无注册 Supporting Question，不自动新增。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Supporting Question treatment exactly as reviewed; no additional Article requirement was created."
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "承接 KN-B1-P1-002，并进入 KN-B1-P1-004。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed sequence and continuity treatment exactly as reviewed; registered prerequisite/continuity boundaries remain authoritative."
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "区分 PHI OS mechanism 与外部案例事实。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Claim Boundary exactly as reviewed, including internal Canonical Interpretation versus externally verifiable fact separation."
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "先核实 manuscript range；Legacy 仅 supporting。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Source Boundary exactly as reviewed; Legacy supporting relationships remain supporting-only and external facts remain source-bound."
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "C2 不要求 Figure；未来如需要必须经 CAR。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Figure Boundary exactly as reviewed; C2 creates no Asset and CAR authority remains required before any Candidate or Published Asset."
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "只允许一般机制解释，不包含付费书完整章节或个案应用。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Public Content Boundary exactly as reviewed; public, paid-book, Journey and Professional boundaries remain separated."
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "仅保持 P1-002 → P1-003 → P1-004 连续关系。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Cross-node Boundary exactly as reviewed; related/prerequisite references do not transfer Canonical ownership."
+        }
       ],
       "humanDecision": {
-        "decision": null,
-        "actor": null,
-        "actorRole": null,
-        "decidedAt": null,
-        "rationale": null,
-        "contentHash": null
+        "decision": "freeze_approved",
+        "actor": "TL",
+        "actorRole": "HUMAN_EDITORIAL_AUTHORITY",
+        "decidedAt": "2026-08-10T18:30:00+08:00",
+        "rationale": "TL explicitly approved all four Wave 1 C2 proposals on current main 6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f. Manuscript mapping ranges were reconciled against the current mapping/inventory model; shared sectionHash values are Part-level hashes by design and are not range collisions. No Production Decision is created by this C2 approval.",
+        "contentHash": "sha256:311ab65885cab32b37e08e36a88bbb10c631b5c4d8bac32c53a1613564685bbf"
       },
-      "promotionAllowed": false
+      "promotionAllowed": true
     },
     {
       "nodeCode": "KN-B1-P4-003",
@@ -368,7 +465,7 @@
       "knowledgeVersion": "1.0.0",
       "locale": "zh-Hans",
       "reviewPackageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-B1-P4-003-v1",
-      "approvalState": "pending_human",
+      "approvalState": "human_approved",
       "sourceAuthorities": [
         "content/knowledge/registry/nodes.json",
         "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
@@ -383,7 +480,7 @@
       "manuscriptMappingReview": {
         "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P4-003",
         "mappingStatus": "candidate",
-        "humanVerified": false,
+        "humanVerified": true,
         "requiredBeforeApproval": true
       },
       "publicationReconciliationProposal": "NO_EXISTING_PUBLICATION",
@@ -441,7 +538,12 @@
               "反馈强化",
               "稳定维持、漂移与重组"
             ],
-            "allowedClaimTypes": ["phi_os_interpretation", "canonical_transition", "boundary_statement", "externally_verifiable"],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
             "sourceRequiredClaims": [
               "任何关于物理、生物、发育或复杂系统 path dependence 的具体事实。"
             ],
@@ -502,25 +604,70 @@
       },
       "proposalContentHash": "sha256:9908fe44f909a3437e83636f353185209760bbd540a87a79762c3d1e58a35d49",
       "reviewDimensionProposals": [
-        { "dimension": "CANONICAL_THESIS", "recommendation": "冻结初始化、坐标嵌入、反馈与条件性稳定机制，并明确反决定论。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "ARTICLE_BOUNDARY", "recommendation": "冻结 Article 可表达范围，但不决定 Article production。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SUPPORTING_QUESTION_BOUNDARY", "recommendation": "当前无注册 Supporting Question，不自动新增。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SEQUENCE_BOUNDARY", "recommendation": "保持 P4-002 → P4-003 → P4-004。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CLAIM_BOUNDARY", "recommendation": "禁止命运决定、最优稳定与个体推断。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SOURCE_BOUNDARY", "recommendation": "先核实 manuscript range，再为外部机制例证建立来源。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "FIGURE_BOUNDARY", "recommendation": "建议非线性 Figure，但 C2 不创建 Brief 或 Asset。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "PUBLIC_CONTENT_BOUNDARY", "recommendation": "仅一般机制，不进入个案或专业判断。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CROSS_NODE_BOUNDARY", "recommendation": "仅作为 P4-004 carrier discussion 的前置节点；assembly proposal 不改变 Node ownership。", "state": "PENDING_HUMAN", "humanFinding": null }
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "冻结初始化、坐标嵌入、反馈与条件性稳定机制，并明确反决定论。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Canonical Thesis exactly as reviewed; no content change was requested."
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "冻结 Article 可表达范围，但不决定 Article production。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Article Boundary exactly as reviewed, including all must-establish, distinction, scope and must-not-claim constraints."
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无注册 Supporting Question，不自动新增。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Supporting Question treatment exactly as reviewed; no additional Article requirement was created."
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "保持 P4-002 → P4-003 → P4-004。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed sequence and continuity treatment exactly as reviewed; registered prerequisite/continuity boundaries remain authoritative."
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "禁止命运决定、最优稳定与个体推断。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Claim Boundary exactly as reviewed, including internal Canonical Interpretation versus externally verifiable fact separation."
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "先核实 manuscript range，再为外部机制例证建立来源。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Source Boundary exactly as reviewed; Legacy supporting relationships remain supporting-only and external facts remain source-bound."
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "建议非线性 Figure，但 C2 不创建 Brief 或 Asset。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Figure Boundary exactly as reviewed; C2 creates no Asset and CAR authority remains required before any Candidate or Published Asset."
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "仅一般机制，不进入个案或专业判断。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Public Content Boundary exactly as reviewed; public, paid-book, Journey and Professional boundaries remain separated."
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "仅作为 P4-004 carrier discussion 的前置节点；assembly proposal 不改变 Node ownership。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Cross-node Boundary exactly as reviewed; related/prerequisite references do not transfer Canonical ownership."
+        }
       ],
       "humanDecision": {
-        "decision": null,
-        "actor": null,
-        "actorRole": null,
-        "decidedAt": null,
-        "rationale": null,
-        "contentHash": null
+        "decision": "freeze_approved",
+        "actor": "TL",
+        "actorRole": "HUMAN_EDITORIAL_AUTHORITY",
+        "decidedAt": "2026-08-10T18:30:00+08:00",
+        "rationale": "TL explicitly approved all four Wave 1 C2 proposals on current main 6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f. Manuscript mapping ranges were reconciled against the current mapping/inventory model; shared sectionHash values are Part-level hashes by design and are not range collisions. No Production Decision is created by this C2 approval.",
+        "contentHash": "sha256:9908fe44f909a3437e83636f353185209760bbd540a87a79762c3d1e58a35d49"
       },
-      "promotionAllowed": false
+      "promotionAllowed": true
     },
     {
       "nodeCode": "KN-B1-P4-004",
@@ -528,7 +675,7 @@
       "knowledgeVersion": "1.0.0",
       "locale": "zh-Hans",
       "reviewPackageCode": "PHI-OS-WAVE1-C2-REVIEW-KN-B1-P4-004-v1",
-      "approvalState": "pending_human",
+      "approvalState": "human_approved",
       "sourceAuthorities": [
         "content/knowledge/registry/nodes.json",
         "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
@@ -550,7 +697,7 @@
       "manuscriptMappingReview": {
         "reference": "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P4-004",
         "mappingStatus": "candidate",
-        "humanVerified": false,
+        "humanVerified": true,
         "requiredBeforeApproval": true
       },
       "publicationReconciliationProposal": "NO_EXISTING_PUBLICATION",
@@ -612,7 +759,12 @@
               "容量、资源与恢复限制",
               "Carrier 与 Identity 的区分"
             ],
-            "allowedClaimTypes": ["phi_os_interpretation", "canonical_transition", "boundary_statement", "externally_verifiable"],
+            "allowedClaimTypes": [
+              "phi_os_interpretation",
+              "canonical_transition",
+              "boundary_statement",
+              "externally_verifiable"
+            ],
             "sourceRequiredClaims": [
               "任何具体解剖、生理、神经、代谢或健康事实。"
             ],
@@ -684,25 +836,70 @@
       },
       "proposalContentHash": "sha256:0e13e5306fd57ab9a6f71133db4c986126f158775714517485e1692bb7cf2e81",
       "reviewDimensionProposals": [
-        { "dimension": "CANONICAL_THESIS", "recommendation": "冻结身体作为分层、有限 Carrier，并区分 Carrier、Identity 与 Value。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "ARTICLE_BOUNDARY", "recommendation": "冻结一般机制与非医学边界，不决定 MULTI_ASSET production。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SUPPORTING_QUESTION_BOUNDARY", "recommendation": "当前无注册 Supporting Question，不自动新增。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SEQUENCE_BOUNDARY", "recommendation": "保持 P4-003 → P4-004 → P4-005。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CLAIM_BOUNDARY", "recommendation": "禁止单层决定论、价值缺陷推断与医学诊断。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "SOURCE_BOUNDARY", "recommendation": "先核实 manuscript range；五个 Legacy relationships 仅 supporting；身体事实须权威来源。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "FIGURE_BOUNDARY", "recommendation": "建议分层 Carrier Figure，但 C2 不创建 Brief 或 Asset。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "PUBLIC_CONTENT_BOUNDARY", "recommendation": "只允许一般教育内容，排除个人推断与健康建议。", "state": "PENDING_HUMAN", "humanFinding": null },
-        { "dimension": "CROSS_NODE_BOUNDARY", "recommendation": "P4-004 可作为 future assembly primary only after Human Production Decision；P4-003/P4-005 保持独立 Node authority。", "state": "PENDING_HUMAN", "humanFinding": null }
+        {
+          "dimension": "CANONICAL_THESIS",
+          "recommendation": "冻结身体作为分层、有限 Carrier，并区分 Carrier、Identity 与 Value。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Canonical Thesis exactly as reviewed; no content change was requested."
+        },
+        {
+          "dimension": "ARTICLE_BOUNDARY",
+          "recommendation": "冻结一般机制与非医学边界，不决定 MULTI_ASSET production。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Article Boundary exactly as reviewed, including all must-establish, distinction, scope and must-not-claim constraints."
+        },
+        {
+          "dimension": "SUPPORTING_QUESTION_BOUNDARY",
+          "recommendation": "当前无注册 Supporting Question，不自动新增。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Supporting Question treatment exactly as reviewed; no additional Article requirement was created."
+        },
+        {
+          "dimension": "SEQUENCE_BOUNDARY",
+          "recommendation": "保持 P4-003 → P4-004 → P4-005。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed sequence and continuity treatment exactly as reviewed; registered prerequisite/continuity boundaries remain authoritative."
+        },
+        {
+          "dimension": "CLAIM_BOUNDARY",
+          "recommendation": "禁止单层决定论、价值缺陷推断与医学诊断。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Claim Boundary exactly as reviewed, including internal Canonical Interpretation versus externally verifiable fact separation."
+        },
+        {
+          "dimension": "SOURCE_BOUNDARY",
+          "recommendation": "先核实 manuscript range；五个 Legacy relationships 仅 supporting；身体事实须权威来源。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Source Boundary exactly as reviewed; Legacy supporting relationships remain supporting-only and external facts remain source-bound."
+        },
+        {
+          "dimension": "FIGURE_BOUNDARY",
+          "recommendation": "建议分层 Carrier Figure，但 C2 不创建 Brief 或 Asset。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Figure Boundary exactly as reviewed; C2 creates no Asset and CAR authority remains required before any Candidate or Published Asset."
+        },
+        {
+          "dimension": "PUBLIC_CONTENT_BOUNDARY",
+          "recommendation": "只允许一般教育内容，排除个人推断与健康建议。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Public Content Boundary exactly as reviewed; public, paid-book, Journey and Professional boundaries remain separated."
+        },
+        {
+          "dimension": "CROSS_NODE_BOUNDARY",
+          "recommendation": "P4-004 可作为 future assembly primary only after Human Production Decision；P4-003/P4-005 保持独立 Node authority。",
+          "state": "HUMAN_APPROVED",
+          "humanFinding": "TL approved the proposed Cross-node Boundary exactly as reviewed; related/prerequisite references do not transfer Canonical ownership."
+        }
       ],
       "humanDecision": {
-        "decision": null,
-        "actor": null,
-        "actorRole": null,
-        "decidedAt": null,
-        "rationale": null,
-        "contentHash": null
+        "decision": "freeze_approved",
+        "actor": "TL",
+        "actorRole": "HUMAN_EDITORIAL_AUTHORITY",
+        "decidedAt": "2026-08-10T18:30:00+08:00",
+        "rationale": "TL explicitly approved all four Wave 1 C2 proposals on current main 6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f. Manuscript mapping ranges were reconciled against the current mapping/inventory model; shared sectionHash values are Part-level hashes by design and are not range collisions. No Production Decision is created by this C2 approval.",
+        "contentHash": "sha256:0e13e5306fd57ab9a6f71133db4c986126f158775714517485e1692bb7cf2e81"
       },
-      "promotionAllowed": false
+      "promotionAllowed": true
     }
   ],
   "proposalDigest": "sha256:b357fb041bef4814e9a155fce2235b1d9f0b46b586300b76be18d422c634ea70",

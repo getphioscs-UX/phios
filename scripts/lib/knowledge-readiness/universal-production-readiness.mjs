@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { contentHash } from './canonical-thesis-boundary.mjs';
+import { contentHash, C2_WAVE1_HUMAN_RESOLUTION, resolveHumanEditorialFreezeResolutions } from './canonical-thesis-boundary.mjs';
 import { C3R1_PATHS, resolveProductionReadinessClosure } from './preface-production-readiness-closure.mjs';
 
 export const C3_ROOT = 'content/knowledge/editorial/c3';
@@ -15,6 +15,7 @@ export function buildProductionReadiness(root) {
   const c1 = read('content/knowledge/readiness/canonical-readiness-index.json');
   const c2 = read('content/knowledge/editorial/c2/canonical-thesis-boundary-index.json');
   const contract = read(C3_CONTRACT);
+  const humanEditorialApprovals = resolveHumanEditorialFreezeResolutions(root).approvedByNode;
   const registryCodeSet = new Set(registry.nodes.map(node => node.nodeCode));
   const registryCodes = c1.entries.map(entry => entry.nodeCode);
   if (!registryCodes.every(nodeCode => registryCodeSet.has(nodeCode))) {
@@ -26,7 +27,7 @@ export function buildProductionReadiness(root) {
   for (const nodeCode of registryCodes) {
     const c2Entry = c2.entries.find(entry => entry.nodeCode === nodeCode);
     const assessment = c2Entry.status === 'frozen'
-      ? assessFrozen(root, nodeCode, c2Entry, contract)
+      ? assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals)
       : assessBlockedByC2(nodeCode, c2Entry, contract);
     const relative = recordPath(nodeCode);
     files.set(relative, assessment);
@@ -63,7 +64,7 @@ function assessBlockedByC2(nodeCode, c2Entry, contract) {
   };
 }
 
-function assessFrozen(root, nodeCode, c2Entry, contract) {
+function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals) {
   const read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
   const frozen = read(c2Entry.record), freeze = read(c2Entry.freezeRecord);
   const hashValid = frozen.contentHash === freeze.contentHash && frozen.contentHash === contentHash(frozen.content);
@@ -77,6 +78,9 @@ function assessFrozen(root, nodeCode, c2Entry, contract) {
   const blockingFindings = legacy?.review?.blockingFindings || [];
   const closure = nodeCode === 'KN-PREFACE-001' ? resolveProductionReadinessClosure(root) : null;
   const closurePassed = closure?.status === 'production_ready';
+  const humanEditorialApproval = humanEditorialApprovals.get(nodeCode) ?? null;
+  const humanEditorialPassed = Boolean(humanEditorialApproval) || legacy?.review?.status === 'approved';
+  const existingPublishedContentReferences = Array.isArray(sources.knownPublishedContent) ? sources.knownPublishedContent : [];
   const gates = {
     c0RegistryIdentity: pass(), c1ReadinessIdentity: pass(),
     c2FrozenThesisBoundary: hashValid && freeze.decision === 'approved' ? pass() : fail('C2_FREEZE_HASH_INVALID'),
@@ -84,7 +88,7 @@ function assessFrozen(root, nodeCode, c2Entry, contract) {
     sourceSufficiency: closurePassed || sourcesComplete(sources) ? pass() : fail('UNRESOLVED_CRITICAL_SOURCE_NEED'),
     supportingQuestionTreatment: Array.isArray(questions) && questions.every(question => typeof question.articleTreatment === 'string' && question.articleTreatment.length > 0) ? pass() : fail('QUESTION_TREATMENT_INCOMPLETE'),
     figureDecision: figureComplete(figures) ? pass() : fail('FIGURE_DECISION_INCOMPLETE'),
-    editorialReview: legacy?.review?.status === 'approved' ? pass() : fail('EDITORIAL_REVIEW_REQUIRED'),
+    editorialReview: humanEditorialPassed ? pass() : fail('EDITORIAL_REVIEW_REQUIRED'),
     humanProductionApproval: closurePassed ? pass() : fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
     noBlockingFindings: blockingFindings.length === 0 ? pass() : fail('BLOCKING_REVIEW_FINDING'),
     exportability: closurePassed ? pass() : fail('EXPORTABILITY_NOT_ALLOWED')
@@ -95,17 +99,32 @@ function assessFrozen(root, nodeCode, c2Entry, contract) {
     schemaVersion: 'PHI-OS-PJA-W2F-C3-ASSESSMENT-v1.0.0', nodeCode, locale: 'zh-Hans',
     status: productionReady ? 'production_ready' : 'production_blocked', productionReady,
     exportability: productionReady ? 'allowed' : 'blocked', publicationState: 'not_published', gates, blocking,
-    authority: { c2Status: c2Entry.status, c2Record: c2Entry.record, c2FreezeRecord: c2Entry.freezeRecord, c2ContentHash: frozen.contentHash, c2FreezeHashMatched: hashValid, editorialRecord: legacyPath || null, c3r1ClosureRecord: closurePassed ? C3R1_PATHS.approval : null, c3r1EvidenceHash: closurePassed ? closure.review.evidenceBundleHash : null },
+    authority: {
+      c2Status: c2Entry.status, c2Record: c2Entry.record, c2FreezeRecord: c2Entry.freezeRecord, c2ContentHash: frozen.contentHash, c2FreezeHashMatched: hashValid,
+      editorialRecord: humanEditorialApproval ? C2_WAVE1_HUMAN_RESOLUTION : (legacyPath || null),
+      ...(humanEditorialApproval ? {
+        humanEditorialApproved: true,
+        existingPublicationReconciliation: existingPublishedContentReferences.length ? 'EXISTING_PUBLISHED_CONTENT_RECONCILED_NO_NEW_PUBLICATION' : 'NO_EXISTING_PUBLICATION',
+        existingPublishedContentReferences
+      } : {}),
+      c3r1ClosureRecord: closurePassed ? C3R1_PATHS.approval : null, c3r1EvidenceHash: closurePassed ? closure.review.evidenceBundleHash : null
+    },
     effects: { articleGenerated: false, productionExportGenerated: false, published: false }
   };
 }
 
 function sourcesComplete(sources) {
-  return Array.isArray(sources.knownSources) && sources.knownSources.length > 0 &&
-    Array.isArray(sources.researchNeeded) && sources.researchNeeded.length === 0 &&
-    Array.isArray(sources.verificationNeeded) && sources.verificationNeeded.length === 0;
+  const researchNeeded = Array.isArray(sources.researchNeeded) ? sources.researchNeeded : [];
+  const verificationNeeded = Array.isArray(sources.verificationNeeded) ? sources.verificationNeeded : [];
+  const hasKnownSources = Array.isArray(sources.knownSources) && sources.knownSources.length > 0;
+  const hasInternalCanonicalSources = Array.isArray(sources.internalCanonicalSources) && sources.internalCanonicalSources.length > 0;
+  return (hasKnownSources || hasInternalCanonicalSources) && researchNeeded.length === 0 && verificationNeeded.length === 0;
 }
-function figureComplete(figures) { return ['required', 'optional', 'not_required'].includes(figures.figureRequirement) && (figures.figureRequirement !== 'required' || (Array.isArray(figures.requiredFigures) && figures.requiredFigures.length > 0)); }
+function figureComplete(figures) {
+  if (['optional', 'not_required', 'not_required_by_c2', 'recommended_subject_to_human_production_decision'].includes(figures.figureRequirement)) return true;
+  if (figures.figureRequirement === 'required') return Array.isArray(figures.requiredFigures) && figures.requiredFigures.length > 0;
+  return false;
+}
 function pass() { return { status: 'passed', code: null }; }
 function fail(code) { return { status: 'failed', code }; }
 function notAssessed(code) { return { status: 'not_assessed', code }; }

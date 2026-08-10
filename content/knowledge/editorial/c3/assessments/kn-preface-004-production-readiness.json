@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-PJA-W2F-C3-ASSESSMENT-v1.0.0",
   "nodeCode": "KN-PREFACE-004",
   "locale": "zh-Hans",
-  "status": "blocked_by_c2",
+  "status": "production_blocked",
   "productionReady": false,
   "exportability": "blocked",
   "publicationState": "not_published",
@@ -16,51 +16,62 @@
       "code": null
     },
     "c2FrozenThesisBoundary": {
-      "status": "failed",
-      "code": "C2_NOT_FROZEN"
+      "status": "passed",
+      "code": null
     },
     "claimSufficiency": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "passed",
+      "code": null
     },
     "sourceSufficiency": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "passed",
+      "code": null
     },
     "supportingQuestionTreatment": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "passed",
+      "code": null
     },
     "figureDecision": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "failed",
+      "code": "FIGURE_DECISION_INCOMPLETE"
     },
     "editorialReview": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "passed",
+      "code": null
     },
     "humanProductionApproval": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "failed",
+      "code": "HUMAN_PRODUCTION_APPROVAL_REQUIRED"
     },
     "noBlockingFindings": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "passed",
+      "code": null
     },
     "exportability": {
-      "status": "not_assessed",
-      "code": "C2_PREREQUISITE_NOT_MET"
+      "status": "failed",
+      "code": "EXPORTABILITY_NOT_ALLOWED"
     }
   },
   "blocking": [
-    "C2_THESIS_BOUNDARY_NOT_FROZEN",
+    "FIGURE_DECISION_INCOMPLETE",
     "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
     "EXPORTABILITY_NOT_ALLOWED"
   ],
   "authority": {
-    "c2Status": "human_review_required",
-    "c2Record": "content/knowledge/editorial/c2/candidates/kn-preface-004.json",
-    "c2FreezeRecord": null
+    "c2Status": "frozen",
+    "c2Record": "content/knowledge/editorial/c2/frozen/kn-preface-004.json",
+    "c2FreezeRecord": "content/knowledge/editorial/c2/freezes/kn-preface-004-freeze.json",
+    "c2ContentHash": "sha256:6a77357a3d60841b205a202d77defbf0528c5b7ca6de2d78855276387ac02ece",
+    "c2FreezeHashMatched": true,
+    "editorialRecord": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json",
+    "humanEditorialApproved": true,
+    "existingPublicationReconciliation": "EXISTING_PUBLISHED_CONTENT_RECONCILED_NO_NEW_PUBLICATION",
+    "existingPublishedContentReferences": [
+      "KA-PREFACE-004-ZH-ARTICLE",
+      "KA-PREFACE-004-EN-ARTICLE"
+    ],
+    "c3r1ClosureRecord": null,
+    "c3r1EvidenceHash": null
   },
   "effects": {
     "articleGenerated": false,

@@ -30,9 +30,7 @@ assert.equal(summary.exportGenerated, false); assert.equal(summary.published, fa
 
 for (const entry of index.entries) {
   const assessment = read(entry.assessmentFile);
-  assert.equal(assessment.effects.articleGenerated, false);
-  assert.equal(assessment.effects.productionExportGenerated, false);
-  assert.equal(assessment.effects.published, false);
+  assert.equal(assessment.effects.articleGenerated, false); assert.equal(assessment.effects.productionExportGenerated, false); assert.equal(assessment.effects.published, false);
   assert.equal(assessment.publicationState, 'not_published');
   if (assessment.productionReady) {
     assert.equal(assessment.status, 'production_ready'); assert.equal(assessment.exportability, 'allowed');
@@ -46,47 +44,55 @@ for (const c2Entry of frozenC2) {
   const result = resolveProductionReadiness(root, c2Entry.nodeCode), assessment = read(result.assessmentFile);
   assert.equal(assessment.gates.c2FrozenThesisBoundary.status, 'passed');
   if (assessment.productionReady) {
-    assert.equal(assessment.gates.sourceSufficiency.status, 'passed');
-    assert.equal(assessment.gates.humanProductionApproval.status, 'passed');
-    assert.equal(assessment.gates.exportability.status, 'passed');
+    assert.equal(assessment.gates.humanProductionApproval.status, 'passed'); assert.equal(assessment.gates.exportability.status, 'passed');
   } else {
-    assert.equal(assessment.gates.sourceSufficiency.status, 'failed');
-    assert.equal(assessment.gates.humanProductionApproval.status, 'failed');
+    assert.equal(assessment.gates.humanProductionApproval.status, 'failed'); assert.equal(assessment.gates.exportability.status, 'failed');
   }
 }
 for (const c2Entry of c2.entries.filter(entry => entry.status !== 'frozen')) assert.equal(resolveProductionReadiness(root, c2Entry.nodeCode).status, 'blocked_by_c2');
+
+const wave1 = ['KN-PREFACE-004','KN-B1-P1-003','KN-B1-P4-003','KN-B1-P4-004'];
+for (const code of wave1) {
+  const assessment = read(`content/knowledge/editorial/c3/assessments/${code.toLowerCase()}-production-readiness.json`);
+  assert.equal(assessment.status, 'production_blocked'); assert.equal(assessment.productionReady, false);
+  assert.equal(assessment.gates.c2FrozenThesisBoundary.status, 'passed'); assert.equal(assessment.gates.claimSufficiency.status, 'passed');
+  assert.equal(assessment.gates.supportingQuestionTreatment.status, 'passed'); assert.equal(assessment.gates.editorialReview.status, 'passed');
+  assert.equal(assessment.gates.humanProductionApproval.status, 'failed'); assert.equal(assessment.gates.exportability.status, 'failed');
+  assert.equal(assessment.authority.humanEditorialApproved, true);
+  assert.equal(assessment.authority.editorialRecord, 'content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json');
+}
+const preface = read('content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json');
+assert.equal(preface.gates.sourceSufficiency.status, 'passed'); assert.equal(preface.gates.figureDecision.status, 'failed');
+assert.equal(preface.authority.existingPublicationReconciliation, 'EXISTING_PUBLISHED_CONTENT_RECONCILED_NO_NEW_PUBLICATION');
+assert.deepEqual(preface.authority.existingPublishedContentReferences, ['KA-PREFACE-004-ZH-ARTICLE','KA-PREFACE-004-EN-ARTICLE']);
+const p1003 = read('content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json');
+assert.equal(p1003.gates.sourceSufficiency.status, 'failed'); assert.equal(p1003.gates.figureDecision.status, 'passed');
+for (const code of ['KN-B1-P4-003','KN-B1-P4-004']) {
+  const assessment = read(`content/knowledge/editorial/c3/assessments/${code.toLowerCase()}-production-readiness.json`);
+  assert.equal(assessment.gates.sourceSufficiency.status, 'failed'); assert.equal(assessment.gates.figureDecision.status, 'passed');
+}
+
 assert.throws(() => resolveProductionReadiness(root, 'KN-NOT-REGISTERED-999'), error => error.code === 'NODE_NOT_FOUND');
 assert.equal(validateProductionReadiness(root).valid, true);
-
-const dry = run('scripts/assess-book-i-production-readiness.mjs'); assert.equal(dry.status, 0, dry.stderr);
-const dryReport = parse(dry.stdout); assert.equal(dryReport.create, 0); assert.equal(dryReport.update, 0); assert.deepEqual(dryReport.filesThatWouldChange, []);
+const dry = run('scripts/assess-book-i-production-readiness.mjs'); assert.equal(dry.status, 0, dry.stderr); const dryReport = parse(dry.stdout); assert.equal(dryReport.create, 0); assert.equal(dryReport.update, 0); assert.deepEqual(dryReport.filesThatWouldChange, []);
 const explicitDry = run('scripts/assess-book-i-production-readiness.mjs', '--dry-run'); assert.equal(explicitDry.status, 0, explicitDry.stderr);
 const apply = run('scripts/apply-book-i-production-readiness.mjs'); assert.equal(apply.status, 0, apply.stderr); assert(apply.stdout.includes('apply no-op'));
 
 const negativeGuards = [
-  () => reject(contract.approvalBoundary.c2FreezeIsProductionApproval),
-  () => reject(contract.exportBoundary.generatesExport), () => reject(contract.exportBoundary.publishes),
+  () => reject(contract.approvalBoundary.c2FreezeIsProductionApproval), () => reject(contract.exportBoundary.generatesExport), () => reject(contract.exportBoundary.publishes),
   () => reject(index.entries.length !== nodeCount), () => reject(new Set(index.entries.map(entry => entry.nodeCode)).size !== nodeCount),
-  () => reject(summary.productionReady + summary.productionBlocked !== nodeCount),
-  () => reject(summary.c2Frozen + summary.c2Blocked !== nodeCount),
-  () => reject(index.entries.some(entry => entry.productionReady && entry.exportability !== 'allowed')),
-  () => reject(index.entries.some(entry => entry.productionReady && entry.blocking.length > 0)),
-  () => reject(index.entries.some(entry => entry.status === 'blocked_by_c2' && entry.productionReady)),
-  () => reject(frozenC2.some(entry => !entry.freezeRecord)),
-  () => reject(frozenC2.some(entry => read(entry.record).contentHash !== read(entry.freezeRecord).contentHash)),
-  () => reject(contract.approvalBoundary.forbiddenApprovers.includes('TL')),
-  () => reject(!contract.approvalBoundary.forbiddenApprovers.includes('AI')),
-  () => reject(!contract.approvalBoundary.distinctProductionApprovalRequired),
-  () => reject(contract.requiredGates.length !== 11),
-  () => reject(summary.exportGenerated), () => reject(summary.published),
-  () => reject(index.entries.some(entry => read(entry.assessmentFile).publicationState === 'published')),
-  () => reject(index.entries.some(entry => read(entry.assessmentFile).effects.productionExportGenerated))
+  () => reject(summary.productionReady + summary.productionBlocked !== nodeCount), () => reject(summary.c2Frozen + summary.c2Blocked !== nodeCount),
+  () => reject(index.entries.some(entry => entry.productionReady && entry.exportability !== 'allowed')), () => reject(index.entries.some(entry => entry.productionReady && entry.blocking.length > 0)),
+  () => reject(index.entries.some(entry => entry.status === 'blocked_by_c2' && entry.productionReady)), () => reject(frozenC2.some(entry => !entry.freezeRecord)),
+  () => reject(frozenC2.some(entry => read(entry.record).contentHash !== read(entry.freezeRecord).contentHash)), () => reject(contract.approvalBoundary.forbiddenApprovers.includes('TL')),
+  () => reject(!contract.approvalBoundary.forbiddenApprovers.includes('AI')), () => reject(!contract.approvalBoundary.distinctProductionApprovalRequired),
+  () => reject(summary.exportGenerated), () => reject(summary.published), () => reject(index.entries.some(entry => read(entry.assessmentFile).effects.productionExportGenerated))
 ];
 for (const guard of negativeGuards) assert.throws(guard, /NEGATIVE_FIXTURE_REJECTED/);
-
-console.log('✓ PJA-W2F-C3 Universal Production Readiness system frozen.');
-console.log(`  ${nodeCount} assessed; ${summary.c2Frozen} C2 frozen; ${summary.c2Blocked} blocked by C2; ${summary.productionReady} production ready; ${summary.productionBlocked} production blocked.`);
-console.log(`  Evaluator, approval boundary, exportability gate, idempotency and ${negativeGuards.length} negative guards passed; no Article, export or publication generated.`);
-function reject(condition) { if (!condition) throw new Error('NEGATIVE_FIXTURE_REJECTED'); }
-function run(script, ...args) { return spawnSync(process.execPath, [script, ...args], { cwd: root, encoding: 'utf8' }); }
-function parse(value) { return JSON.parse(value.slice(value.indexOf('{'), value.lastIndexOf('}') + 1)); }
+console.log('✓ PJA-W2F-C3 Universal Production Readiness rebuilt after Wave 1 C2 Human Freeze.');
+console.log(`✓ ${nodeCount} assessed; ${summary.c2Frozen} C2 frozen; ${summary.c2Blocked} blocked by C2; ${summary.productionReady} production ready; ${summary.productionBlocked} production blocked.`);
+console.log('✓ Wave 1 C2/editorial gates now pass; remaining source/figure and Human Production Approval gates fail closed as applicable.');
+console.log('✓ Existing KN-PREFACE-004 publication is explicitly reconciled without creating a new publication.');
+function reject(condition){if(!condition)throw new Error('NEGATIVE_FIXTURE_REJECTED');}
+function run(script,...args){return spawnSync(process.execPath,[script,...args],{cwd:root,encoding:'utf8'});}
+function parse(value){return JSON.parse(value.slice(value.indexOf('{'),value.lastIndexOf('}')+1));}

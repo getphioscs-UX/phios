@@ -15,5 +15,12 @@ for (const [relative, expected] of files) {
 const report = { stage: 'PJA-W2F-C3', mode: apply ? 'apply' : 'dry-run', assessed: index.nodeCount, productionReady: index.productionReadyCount, productionBlocked: index.productionBlockedCount, existing: existing.length, create: create.length, update: update.length, conflict: 0, filesThatWouldChange: [...create, ...update], conflicts: [] };
 console.log(JSON.stringify(report, null, 2));
 if (!apply || (!create.length && !update.length)) { if (apply) console.log('PJA-W2F-C3 apply no-op; byte-stable.'); process.exit(0); }
-for (const [relative, value] of files) { const target = path.join(root, relative), temporary = `${target}.tmp`; fs.mkdirSync(path.dirname(target), { recursive: true }); fs.writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`); fs.renameSync(temporary, target); }
+const writeSet = new Set([...create, ...update]);
+for (const [relative, value] of files) {
+  if (!writeSet.has(relative)) continue;
+  const target = path.join(root, relative), temporary = `${target}.tmp`;
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(temporary, `${JSON.stringify(value, null, 2)}\n`);
+  fs.renameSync(temporary, target);
+}
 console.log('PJA-W2F-C3 Universal Production Readiness assessments applied atomically.');

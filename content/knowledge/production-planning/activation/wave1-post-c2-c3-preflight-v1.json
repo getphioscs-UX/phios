@@ -1,0 +1,104 @@
+{
+  "preflightCode": "PHI-OS-WAVE1-POST-C2-C3-PREFLIGHT-v1",
+  "preflightVersion": "1.0.0",
+  "status": "BLOCKED_PENDING_C3_CLOSURE",
+  "baselineCommit": "6920c9efb164a6e29f7dcbd8575f7a54e9d28c2f",
+  "humanEditorialDecisionReference": "content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json",
+  "mappingReconciliationReference": "content/knowledge/production-planning/reconciliation/wave1-c2-manuscript-mapping-reconciliation-v1.json",
+  "selectedExecutionScope": [
+    {
+      "nodeCode": "KN-PREFACE-004",
+      "productionRole": "ARTICLE",
+      "dispatchTarget": "PJA",
+      "c2Status": "frozen",
+      "c2FreezeRecord": "content/knowledge/editorial/c2/freezes/kn-preface-004-freeze.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json",
+      "c3Status": "production_blocked",
+      "productionReady": false,
+      "remainingBlocking": [
+        "FIGURE_DECISION_INCOMPLETE",
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ],
+      "nextClosure": "FIGURE_DECISION_CLOSURE"
+    },
+    {
+      "nodeCode": "KN-B1-P1-003",
+      "productionRole": "FRAGMENT",
+      "dispatchTarget": "PJA",
+      "c2Status": "frozen",
+      "c2FreezeRecord": "content/knowledge/editorial/c2/freezes/kn-b1-p1-003-freeze.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json",
+      "c3Status": "production_blocked",
+      "productionReady": false,
+      "remainingBlocking": [
+        "UNRESOLVED_CRITICAL_SOURCE_NEED",
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ],
+      "nextClosure": "SOURCE_SUFFICIENCY_CLOSURE"
+    },
+    {
+      "nodeCode": "KN-B1-P4-003",
+      "productionRole": "FIGURE",
+      "dispatchTarget": "CAR",
+      "c2Status": "frozen",
+      "c2FreezeRecord": "content/knowledge/editorial/c2/freezes/kn-b1-p4-003-freeze.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-003-production-readiness.json",
+      "c3Status": "production_blocked",
+      "productionReady": false,
+      "remainingBlocking": [
+        "UNRESOLVED_CRITICAL_SOURCE_NEED",
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ],
+      "nextClosure": "SOURCE_SUFFICIENCY_CLOSURE"
+    },
+    {
+      "nodeCode": "KN-B1-P4-004",
+      "productionRole": "MULTI_ASSET",
+      "dispatchTarget": "CAR",
+      "c2Status": "frozen",
+      "c2FreezeRecord": "content/knowledge/editorial/c2/freezes/kn-b1-p4-004-freeze.json",
+      "c3AssessmentReference": "content/knowledge/editorial/c3/assessments/kn-b1-p4-004-production-readiness.json",
+      "c3Status": "production_blocked",
+      "productionReady": false,
+      "remainingBlocking": [
+        "UNRESOLVED_CRITICAL_SOURCE_NEED",
+        "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
+        "EXPORTABILITY_NOT_ALLOWED"
+      ],
+      "nextClosure": "SOURCE_SUFFICIENCY_CLOSURE"
+    }
+  ],
+  "gateSnapshot": {
+    "selectedItemCount": 4,
+    "c2FrozenCount": 4,
+    "productionReadyCount": 0,
+    "blockedCount": 4,
+    "humanProductionDecisionAllowed": false,
+    "productionPlanFreezeAllowed": false,
+    "productionWaveFreezeAllowed": false,
+    "dispatchAllowed": false
+  },
+  "requiredNextAuthority": "PJA_C3_READINESS_CLOSURE",
+  "requiredClosureSummary": {
+    "figureDecisionClosure": [
+      "KN-PREFACE-004"
+    ],
+    "sourceSufficiencyClosure": [
+      "KN-B1-P1-003",
+      "KN-B1-P4-003",
+      "KN-B1-P4-004"
+    ],
+    "humanProductionApprovalAfterAllOtherC3GatesPass": true
+  },
+  "effects": {
+    "humanProductionDecisionCreated": false,
+    "productionPlanFrozen": false,
+    "productionWaveFrozen": false,
+    "pjaCandidateCreated": false,
+    "carAssetCreated": false,
+    "publicationCreated": false
+  }
+}
