@@ -1,0 +1,66 @@
+{
+  "contractCode": "PHI-OS-VAP-W3-VISUAL-PRODUCTION-AUTHORITY-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W3",
+  "status": "active",
+  "implementationBaselineCommit": "bdd9adf0dd28a6de47488089507228eb165e72db",
+  "purpose": "Resolve Wave 1 production authority into a fail-closed execution matrix before any governed production brief, candidate, provider invocation, asset, presentation record or publication is created.",
+  "prerequisites": [
+    "VAP-W0_PRODUCTION_BASELINE_FROZEN",
+    "VAP-W1_PUBLISHED_KNOWLEDGE_INTEGRITY_REPAIR_PASSED",
+    "VAP-W2_PRODUCTION_SHA_VERIFIED",
+    "WAVE1_HUMAN_PRODUCTION_DECISION_APPROVED",
+    "WAVE1_GOVERNED_BRIEF_GENERATION_AUTHORIZED"
+  ],
+  "authorityOrder": [
+    "KPP_PRODUCTION_DECISION_AND_DISPATCH",
+    "PJA_ARTICLE_FRAGMENT_PRODUCTION",
+    "CAR_GOVERNED_ASSET_PRODUCTION",
+    "CPR_PRESENTATION_ONLY_AFTER_GOVERNED_SOURCE_ASSETS"
+  ],
+  "allowedOperations": [
+    "read_existing_authorities",
+    "validate_wave1_dispatch",
+    "freeze_visual_production_authority_matrix",
+    "record_execution_compatibility_gaps",
+    "define_preface004_secondary_visual_handoff_boundary",
+    "close_wave1_checker_aggregate_coverage_gap"
+  ],
+  "forbiddenOperations": [
+    "generate_actual_pja_production_brief",
+    "generate_actual_car_asset_brief",
+    "create_article_candidate",
+    "create_fragment_candidate",
+    "create_asset_candidate",
+    "invoke_provider",
+    "make_network_generation_call",
+    "generate_binary_asset",
+    "create_cpr_production_record",
+    "publish_article",
+    "publish_fragment",
+    "publish_asset",
+    "mutate_kpp_plan_or_wave",
+    "mutate_human_production_decision",
+    "mutate_pja_or_car_frozen_authority",
+    "repair_out_of_scope_english_locale_contamination"
+  ],
+  "localeScope": [
+    "zh-Hans"
+  ],
+  "deferredFailClosedFindings": [
+    "EN_LOCALE_CJK_CONTAMINATION",
+    "EN_HEADING_CJK_CONTAMINATION",
+    "EN_BODY_CJK_CONTAMINATION"
+  ],
+  "executionPrinciples": {
+    "authorizationDoesNotEqualRuntimeCompatibility": true,
+    "briefReadyDoesNotEqualCandidateReady": true,
+    "candidateReadyDoesNotEqualProviderReady": true,
+    "assetReadyDoesNotEqualPresentationReady": true,
+    "presentationReadyDoesNotEqualPublicationReady": true,
+    "kppPrimaryDispatchMustNotBeRewrittenByDerivedVisualNeed": true,
+    "canonicalMeaningSelectionMustNotBeInvented": true,
+    "historicalPublishedArticleMustNotBeDuplicated": true
+  },
+  "nextWork": "VAP-W4_GOVERNED_BRIEF_ADAPTERS_AND_WAVE1_BRIEF_GENERATION"
+}
