@@ -1,0 +1,9 @@
+{
+  "contractCode": "PHI-OS-RDG-W12-EVIDENCE-PROMOTION-RUNTIME-v1",
+  "work": "RDG-W12",
+  "status": "active",
+  "fromStates": ["CANDIDATE", "ELIGIBLE", "DISPUTED", "UNKNOWN"],
+  "toStates": ["ACCEPTED_EVIDENCE", "CORROBORATION_REQUIRED", "REJECTED", "DISPUTED", "UNKNOWN"],
+  "requirements": ["eligibilityDecision", "authorityReference", "lineageReferences", "promotionReason", "promotedAt"],
+  "rules": {"automaticPromotionForbidden": true, "inferenceCannotSelfPromote": true, "promotionIsReversibleByGovernedReview": true, "providerMayPromote": false}
+}

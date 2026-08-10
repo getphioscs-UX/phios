@@ -1,0 +1,12 @@
+{
+  "registryCode": "PHI-OS-RDG-W13-INFERENCE-BOUNDARY-REGISTRY-v1",
+  "work": "RDG-W13",
+  "status": "active",
+  "boundaries": [
+    {"dataNature": "DERIVED", "requires": ["derivationMethod", "inputLineage", "version"], "mayBecomeEvidenceAutomatically": false},
+    {"dataNature": "INFERRED", "requires": ["inferenceMethod", "supportingEvidence", "uncertainty"], "mayBecomeEvidenceAutomatically": false},
+    {"dataNature": "INTERPRETED", "requires": ["interpretationAuthority", "supportingEvidence", "boundaryStatement"], "mayBecomeEvidenceAutomatically": false},
+    {"dataNature": "PROFESSIONAL_JUDGMENT", "authority": "PR", "requires": ["professionalReference", "supportingEvidence"], "mayBecomeEvidenceAutomatically": false}
+  ],
+  "rules": {"inferenceMustRemainDistinguishableFromObservation": true, "unknownMayNotBeFilledByInference": true, "professionalJudgmentAuthorityRuntime": "PR"}
+}

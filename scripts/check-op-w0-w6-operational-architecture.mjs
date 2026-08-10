@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+const root=process.cwd(); const base='content/governance/operational-architecture';
+const read=async p=>JSON.parse(await fs.readFile(path.join(root,p),'utf8'));
+const inventory=await read(`${base}/runtime-inventory-v1.json`); assert.equal(inventory.baselineCommit,'79b74177e6f00d215b3d8843fdd5de7dbc0e1622');
+const authority=await read(`${base}/runtime-authority-map-v1.json`); const classes=authority.authorities.map(x=>x.authorityClass); assert.equal(new Set(classes).size,classes.length); assert.equal(authority.authorities.find(x=>x.authorityClass==='PROFESSIONAL_JUDGMENT').sourceOfTruth,'PR');
+const planes=await read(`${base}/runtime-plane-classification-v1.json`); assert.deepEqual(planes.planes.PRESENTATION,['CPR']); assert.ok(planes.invariants.includes('AUTHORITY_NE_RUNTIME'));
+const migration=await read('content/governance/canonical-master-work/registries/canonical-master-work-migration-registry-v1.json'); assert.equal(migration.rules.silentDisappearanceForbidden,true);
+const audit=await read(`${base}/audits/authority-duplication-audit-v1.json`); assert.deepEqual(audit.duplicateCanonicalAuthorities,[]); assert.equal(audit.existingAuthoritiesMutated,false);
+const dag=await read(`${base}/runtime-dependency-map-v1.json`); const incoming=new Map(dag.nodes.map(x=>[x,0])); const next=new Map(dag.nodes.map(x=>[x,[]])); for(const [a,b] of dag.edges){assert(incoming.has(a)&&incoming.has(b));incoming.set(b,incoming.get(b)+1);next.get(a).push(b)} const q=[...incoming].filter(([,n])=>n===0).map(([x])=>x);let visited=0;while(q.length){const a=q.shift();visited++;for(const b of next.get(a)){incoming.set(b,incoming.get(b)-1);if(incoming.get(b)===0)q.push(b)}}assert.equal(visited,dag.nodes.length,'Runtime dependency graph must remain acyclic');
+for(const edge of ['CPR->MEANING_MUTATION','UI->PERMISSION_DECISION','AI->RUNTIME_STATE_PROMOTION']) assert.ok(dag.forbiddenEdges.includes(edge));
+const slice=await read(`${base}/contracts/production-vertical-slice-contract-v1.json`); assert.equal(slice.stages.at(0),'CUSTOMER'); assert.equal(slice.stages.at(-1),'CONTINUITY'); assert.equal(slice.productionExecutionEnabled,false);
+const freeze=await read(`${base}/freeze/op-w0-w6-operational-architecture-freeze-v1.json`); assert.equal(freeze.status,'frozen'); assert.equal(freeze.migrationAuthorityDuplicated,false); assert.equal(freeze.productionActivated,false);
+console.log('✓ OP-W0～W6 Operational Architecture Closure passed.');
+console.log('✓ Plane, authority uniqueness, acyclic dependency DAG and vertical-slice boundaries are frozen without production activation.');
