@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-unknown-v1.schema.json",
+  "title": "PHI OS Canonical Reality Unknown v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "unknownCode", "unknownVersion", "componentType", "dataType",
+    "unknownKind", "unknownState", "certaintySnapshot", "realityReference",
+    "componentReferences", "evidenceBindingReferences", "statementReference",
+    "sourceReferences", "resolutionRequirements", "recordStatus", "defaultValueApplied",
+    "inferenceFilled", "silentResolutionPerformed", "resolutionTransitionPerformed",
+    "truthClaimed", "evidencePromotionPerformed", "actionCreated", "outcomeCreated",
+    "professionalJudgmentCreated", "authorityReference", "rdgAuthorityReference",
+    "operationalMode", "persistentStoreWriteAllowed", "createdAt", "unknownDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-UNKNOWN-v1.0.0"},
+    "unknownCode": {"type": "string", "pattern": "^RMO-UNKNOWN-[A-Z0-9-]{4,100}$"},
+    "unknownVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_UNKNOWN"},
+    "dataType": {"const": "RUNTIME_STATE_RECORD"},
+    "unknownKind": {"enum": ["MISSING_DATA", "UNVERIFIED_CLAIM", "CONFLICTING_EVIDENCE", "UNBOUNDED_UNCERTAINTY", "OPEN_QUESTION", "PROFESSIONAL_BOUNDARY"]},
+    "unknownState": {"enum": ["UNKNOWN", "UNRESOLVED", "DISPUTED"]},
+    "certaintySnapshot": {"enum": ["UNKNOWN", "UNRESOLVED", "DISPUTED"]},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "componentReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceBindingReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "statementReference": {"type": "string", "pattern": "^RMO-UNKNOWN-STATEMENT-[A-Z0-9-]{4,140}$"},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "resolutionRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredEvidenceCount", "requiredEvidenceRoles", "resolutionAuthorityRuntime", "evidenceAuthorityRuntime", "dataGovernanceAuthorityRuntime", "professionalAuthorityRequired"],
+      "properties": {
+        "requiredEvidenceCount": {"type": "integer", "minimum": 1, "maximum": 100},
+        "requiredEvidenceRoles": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["SUPPORTS", "CONTRADICTS", "QUALIFIES", "CONTEXTUALIZES"]}},
+        "resolutionAuthorityRuntime": {"const": "RMO"},
+        "evidenceAuthorityRuntime": {"const": "RRE"},
+        "dataGovernanceAuthorityRuntime": {"const": "RDG"},
+        "professionalAuthorityRequired": {"type": "boolean"}
+      }
+    },
+    "recordStatus": {"const": "OPEN"},
+    "defaultValueApplied": {"const": false},
+    "inferenceFilled": {"const": false},
+    "silentResolutionPerformed": {"const": false},
+    "resolutionTransitionPerformed": {"const": false},
+    "truthClaimed": {"const": false},
+    "evidencePromotionPerformed": {"const": false},
+    "actionCreated": {"const": false},
+    "outcomeCreated": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/unknown-runtime-contract-v1.json"},
+    "rdgAuthorityReference": {"const": "content/governance/reality-data-governance/contracts/unknown-disputed-runtime-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "unknownDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "optionalReferenceArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "registryCode": "PHI-OS-RMO-W11-CANONICAL-ACTION-CLASS-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RMO-W11",
+  "status": "canonical_boundary",
+  "runtimeAuthority": "RMO",
+  "navigationAuthority": "JR_RNE_EXISTING_RUNTIME",
+  "professionalJudgmentAuthority": "PR",
+  "containsUserData": false,
+  "containsActionInstances": false,
+  "actionClasses": [
+    {
+      "actionClass": "OBSERVED_ACTION",
+      "allowedDataNatures": ["OBSERVED"],
+      "allowedCertainties": ["OBSERVED"],
+      "allowedActionStates": ["OBSERVED_COMPLETED"],
+      "evidenceBindingRequired": true,
+      "unknownReferenceRequired": false,
+      "occurredAtMode": "REQUIRED"
+    },
+    {
+      "actionClass": "REPORTED_ACTION",
+      "allowedDataNatures": ["USER_REPORTED"],
+      "allowedCertainties": ["REPORTED", "DISPUTED"],
+      "allowedActionStates": ["REPORTED_IN_PROGRESS", "REPORTED_COMPLETED"],
+      "evidenceBindingRequired": false,
+      "unknownReferenceRequired": false,
+      "occurredAtMode": "REQUIRED"
+    },
+    {
+      "actionClass": "DECLARED_INTENT",
+      "allowedDataNatures": ["USER_REPORTED"],
+      "allowedCertainties": ["REPORTED"],
+      "allowedActionStates": ["DECLARED_NOT_EXECUTED"],
+      "evidenceBindingRequired": false,
+      "unknownReferenceRequired": false,
+      "occurredAtMode": "FORBIDDEN"
+    },
+    {
+      "actionClass": "UNKNOWN_ACTION",
+      "allowedDataNatures": ["SYSTEM_STATE"],
+      "allowedCertainties": ["UNKNOWN", "UNRESOLVED", "DISPUTED"],
+      "allowedActionStates": ["UNKNOWN"],
+      "evidenceBindingRequired": false,
+      "unknownReferenceRequired": true,
+      "occurredAtMode": "FORBIDDEN"
+    }
+  ],
+  "instances": [],
+  "rules": {
+    "registryDefinesClassesOnly": true,
+    "observedAndReportedRemainDistinct": true,
+    "declaredIntentIsNotExecution": true,
+    "rmoActionIsRuntimeStateRecord": true,
+    "rmoActionIsNavigationRecord": false,
+    "rmoMaySelectPathOrExecuteAction": false,
+    "rmoMayCreateRequiredOrProfessionalAction": false,
+    "rmoMayPredictOutcome": false,
+    "providerOrAiCannotGrantActionAuthority": true
+  }
+}

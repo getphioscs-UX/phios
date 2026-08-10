@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-outcome-v1.schema.json",
+  "title": "PHI OS Canonical Reality Outcome v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "outcomeCode", "outcomeVersion", "componentType", "dataType",
+    "outcomeClass", "realityReference", "actionReference", "componentReferences",
+    "evidenceBindingReferences", "unknownReferences", "sourceReferences", "dataNature",
+    "certainty", "observedAt", "recordStatus", "causalityClaimed", "successClaimed",
+    "actionEffectivenessDetermined", "actionMutationPerformed", "continuityDecisionCreated",
+    "professionalOutcomeRecordCreated", "professionalJudgmentCreated", "evidencePromotionPerformed",
+    "authorityReference", "professionalOutcomeAuthorityRuntime", "operationalMode",
+    "persistentStoreWriteAllowed", "createdAt", "outcomeDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-OUTCOME-v1.0.0"},
+    "outcomeCode": {"type": "string", "pattern": "^RMO-OUTCOME-[A-Z0-9-]{4,100}$"},
+    "outcomeVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_OUTCOME"},
+    "dataType": {"const": "RUNTIME_STATE_RECORD"},
+    "outcomeClass": {"enum": ["OBSERVED_CHANGE", "REPORTED_CHANGE", "NO_OBSERVED_CHANGE", "UNEXPECTED_CHANGE", "UNKNOWN_OUTCOME"]},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "actionReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actionCode", "actionVersion", "actionDigest"],
+      "properties": {
+        "actionCode": {"type": "string", "pattern": "^RMO-ACTION-[A-Z0-9-]{4,100}$"},
+        "actionVersion": {"$ref": "#/$defs/semver"},
+        "actionDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "componentReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceBindingReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "unknownReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "dataNature": {"enum": ["OBSERVED", "USER_REPORTED", "SYSTEM_STATE"]},
+    "certainty": {"enum": ["OBSERVED", "REPORTED", "DISPUTED", "UNKNOWN", "UNRESOLVED"]},
+    "observedAt": {"type": ["string", "null"], "format": "date-time"},
+    "recordStatus": {"const": "RECORDED"},
+    "causalityClaimed": {"const": false},
+    "successClaimed": {"const": false},
+    "actionEffectivenessDetermined": {"const": false},
+    "actionMutationPerformed": {"const": false},
+    "continuityDecisionCreated": {"const": false},
+    "professionalOutcomeRecordCreated": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "evidencePromotionPerformed": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/outcome-runtime-contract-v1.json"},
+    "professionalOutcomeAuthorityRuntime": {"const": "PR"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "outcomeDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "optionalReferenceArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 240}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

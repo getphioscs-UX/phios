@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-RMO-W12-OUTCOME-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W12",
+  "status": "boundary_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "componentType": "REALITY_OUTCOME",
+  "rdgDataType": "RUNTIME_STATE_RECORD",
+  "schemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-outcome-v1.schema.json",
+  "registryReference": "content/runtime/reality-model-runtime/registries/canonical-outcome-class-registry-v1.json",
+  "authorityBoundary": {
+    "rmoOwns": ["Reality Outcome representation", "Outcome-to-Action and Reality component binding"],
+    "reviewOwns": ["customer report", "user-selected next Runtime state"],
+    "prOwns": ["OUTCOME_RECORD", "Professional Judgment"]
+  },
+  "rules": {
+    "outcomeRequiresKnownActionLineage": true,
+    "observedChangeRequiresPostActionAcceptedEvidenceBinding": true,
+    "reportedChangeRemainsUserReported": true,
+    "unknownOutcomeRequiresUnknownReference": true,
+    "noObservedChangeDoesNotEqualFailure": true,
+    "unexpectedChangeDoesNotCreateCausality": true,
+    "outcomeMayClaimCausality": false,
+    "outcomeMayDetermineSuccessOrEffectiveness": false,
+    "outcomeMayChooseContinuity": false,
+    "outcomeMayCreatePrOutcomeRecord": false,
+    "providerOrAiMayGrantOutcomeAuthority": false,
+    "persistentStoreActivated": false
+  }
+}
