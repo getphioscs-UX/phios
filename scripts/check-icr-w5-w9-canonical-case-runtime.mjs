@@ -21,8 +21,9 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const readText = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const readJson = relative => JSON.parse(readText(relative));
+const normalizeText = source => source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const hashFile = relative => crypto.createHash('sha256')
-  .update(fs.readFileSync(path.join(root, relative)))
+  .update(normalizeText(readText(relative)), 'utf8')
   .digest('hex');
 const clone = value => structuredClone(value);
 const sorted = values => [...values].sort();
