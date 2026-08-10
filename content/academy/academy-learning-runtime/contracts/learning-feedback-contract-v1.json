@@ -1,0 +1,32 @@
+{
+  "contractCode": "PHI-OS-ALR-W27-LEARNING-FEEDBACK-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W27",
+  "objectType": "LEARNING_FEEDBACK",
+  "status": "active",
+  "productionStatus": "controlled_deterministic_feedback_semantics",
+  "authorityReference": "ALR",
+  "typeAuthorityReference": "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json",
+  "feedbackStates": ["SUPPORTED", "PARTIALLY_SUPPORTED", "UNSUPPORTED", "OVER_INTERPRETED", "BOUNDARY_MISSED", "UNKNOWN_IGNORED", "EVIDENCE_MISSING", "CONSTRAINT_MISREAD"],
+  "requiredFeedbackDefinitionFields": ["feedbackCode", "priority", "triggerDimension", "triggerValue", "criterionEvidenceStatus", "directiveCode", "definition"],
+  "criterionEvidenceStatuses": ["MET", "NOT_MET", "UNKNOWN"],
+  "aggregateMode": "FIRST_MATCH_BY_CONTROLLED_PRIORITY",
+  "forbiddenFeedbackFields": ["learnerReference", "subjectReference", "accountReference", "rawResponse", "response", "score", "grade", "capabilityState", "credentialState", "entitlementState", "professionalJudgment", "diagnosis", "recommendedAction", "providerPrompt", "providerResponse", "modelOutput", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "feedbackMustUseControlledState": true,
+    "feedbackMustResolveDeterministicallyFromIntegrityValidatedFinding": true,
+    "feedbackMayDescribeCriterionSupportAndBoundary": true,
+    "feedbackMayDiagnoseLearnerOrInferPersonalTrait": false,
+    "feedbackMaySetCapabilityState": false,
+    "feedbackMayGrantCredentialEntitlementOrProfessionalAuthority": false,
+    "feedbackEvaluationMutatesInputOrRegistry": false,
+    "unknownFeedbackStateOrTriggerFailsClosed": true
+  },
+  "activation": {
+    "deterministicFeedbackSemanticsActive": true,
+    "personalizedGenerativeFeedbackActive": false,
+    "learnerDeliveryRuntimeActive": false,
+    "learnerDataRuntimeActive": false,
+    "persistenceRuntimeActive": false
+  }
+}

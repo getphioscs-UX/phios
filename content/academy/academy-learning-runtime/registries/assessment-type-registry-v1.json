@@ -1,0 +1,22 @@
+{
+  "registryCode": "PHI-OS-ALR-W25-ASSESSMENT-TYPE-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ALR-W25",
+  "status": "canonical",
+  "productionStatus": "controlled_assessment_type_semantics",
+  "contractReference": "content/academy/academy-learning-runtime/contracts/assessment-type-contract-v1.json",
+  "assessmentTypes": [
+    {"assessmentTypeCode": "ALR-ASMT-TYPE-EVIDENCE-CLASSIFICATION", "assessmentTypeVersion": "1.0.0", "title": "Evidence Classification", "capabilityKind": "FOUNDATIONAL_LITERACY", "evaluationMode": "GOVERNED_CRITERION_FINDING_MATRIX", "responseShape": "STRUCTURED_CRITERION_FINDINGS_ONLY", "supportedActionVerbs": ["DISTINGUISH", "PRESERVE"], "requiredIntegrityDimensions": ["EVIDENCE_PRESENT", "UNKNOWNS_PRESERVED", "CONSTRAINTS_CORRECT", "INTERPRETATION_BOUNDED", "BOUNDARY_PRESERVED", "SUPPORT_LEVEL"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"assessmentTypeCode": "ALR-ASMT-TYPE-BOUNDED-READING-ANALYSIS", "assessmentTypeVersion": "1.0.0", "title": "Bounded Reading Analysis", "capabilityKind": "READING_LITERACY", "evaluationMode": "GOVERNED_CRITERION_FINDING_MATRIX", "responseShape": "STRUCTURED_CRITERION_FINDINGS_ONLY", "supportedActionVerbs": ["BOUND", "PRESERVE"], "requiredIntegrityDimensions": ["EVIDENCE_PRESENT", "UNKNOWNS_PRESERVED", "CONSTRAINTS_CORRECT", "INTERPRETATION_BOUNDED", "BOUNDARY_PRESERVED", "SUPPORT_LEVEL"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"assessmentTypeCode": "ALR-ASMT-TYPE-CONSTRAINT-AUTHORITY-MAPPING", "assessmentTypeVersion": "1.0.0", "title": "Constraint and Authority Mapping", "capabilityKind": "APPLIED_NAVIGATION", "evaluationMode": "GOVERNED_CRITERION_FINDING_MATRIX", "responseShape": "STRUCTURED_CRITERION_FINDINGS_ONLY", "supportedActionVerbs": ["MAP", "BOUND"], "requiredIntegrityDimensions": ["EVIDENCE_PRESENT", "UNKNOWNS_PRESERVED", "CONSTRAINTS_CORRECT", "INTERPRETATION_BOUNDED", "BOUNDARY_PRESERVED", "SUPPORT_LEVEL"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"assessmentTypeCode": "ALR-ASMT-TYPE-REVIEW-LINEAGE-ANALYSIS", "assessmentTypeVersion": "1.0.0", "title": "Review and Lineage Analysis", "capabilityKind": "CONTINUITY_PRACTICE", "evaluationMode": "GOVERNED_CRITERION_FINDING_MATRIX", "responseShape": "STRUCTURED_CRITERION_FINDINGS_ONLY", "supportedActionVerbs": ["LINK", "PRESERVE"], "requiredIntegrityDimensions": ["EVIDENCE_PRESENT", "UNKNOWNS_PRESERVED", "CONSTRAINTS_CORRECT", "INTERPRETATION_BOUNDED", "BOUNDARY_PRESERVED", "SUPPORT_LEVEL"], "status": "ACTIVE", "authorityReference": "ALR"},
+    {"assessmentTypeCode": "ALR-ASMT-TYPE-PROFESSIONAL-BOUNDARY-ANALYSIS", "assessmentTypeVersion": "1.0.0", "title": "Professional Boundary Analysis", "capabilityKind": "PROFESSIONAL_FORMATION", "evaluationMode": "GOVERNED_CRITERION_FINDING_MATRIX", "responseShape": "STRUCTURED_CRITERION_FINDINGS_ONLY", "supportedActionVerbs": ["APPLY", "SEPARATE"], "requiredIntegrityDimensions": ["EVIDENCE_PRESENT", "UNKNOWNS_PRESERVED", "CONSTRAINTS_CORRECT", "INTERPRETATION_BOUNDED", "BOUNDARY_PRESERVED", "SUPPORT_LEVEL"], "status": "ACTIVE", "authorityReference": "ALR"}
+  ],
+  "rules": {
+    "oneAssessmentTypePerCanonicalCapabilityKind": true,
+    "allTypesUseDeterministicStructuredFindings": true,
+    "rawResponseAnswerKeyOrScoreStored": false,
+    "providerOrAiScoringActivated": false,
+    "learnerDeliveryActivated": false
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-relationship-v1.schema.json",
+  "title": "PHI OS Canonical Reality Relationship v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "relationshipCode", "relationshipVersion", "componentType", "relationshipType",
+    "directionality", "realityReference", "sourceEntityReference", "targetEntityReference",
+    "sourceReferences", "evidenceReferences", "dataNature", "certainty", "recordStatus",
+    "evidenceEligibility", "interpretationState", "inferenceState", "professionalJudgmentCreated",
+    "authorityReference", "operationalMode", "pwsRegistryWriteAllowed", "operationalLineageWriteAllowed",
+    "persistentStoreWriteAllowed", "createdAt", "relationshipDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-RELATIONSHIP-v1.0.0"},
+    "relationshipCode": {"type": "string", "pattern": "^RMO-RELATIONSHIP-[A-Z0-9-]{4,100}$"},
+    "relationshipVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_RELATIONSHIP"},
+    "relationshipType": {"type": "string", "minLength": 1},
+    "directionality": {"enum": ["DIRECTED", "UNDIRECTED"]},
+    "realityReference": {"$ref": "#/$defs/realityReference"},
+    "sourceEntityReference": {"type": "string", "pattern": "^RMO-ENTITY-[A-Z0-9-]{4,100}$"},
+    "targetEntityReference": {"type": "string", "pattern": "^RMO-ENTITY-[A-Z0-9-]{4,100}$"},
+    "sourceReferences": {"$ref": "#/$defs/referenceArray"},
+    "evidenceReferences": {"$ref": "#/$defs/optionalReferenceArray"},
+    "dataNature": {"type": "string", "minLength": 1},
+    "certainty": {"type": "string", "minLength": 1},
+    "recordStatus": {"const": "RECORDED"},
+    "evidenceEligibility": {"const": "NOT_EVALUATED"},
+    "interpretationState": {"const": "NOT_INTERPRETED"},
+    "inferenceState": {"const": "NOT_INFERRED"},
+    "professionalJudgmentCreated": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/relationship-runtime-contract-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "pwsRegistryWriteAllowed": {"const": false},
+    "operationalLineageWriteAllowed": {"const": false},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "relationshipDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "referenceArray": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "optionalReferenceArray": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200}},
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    }
+  }
+}

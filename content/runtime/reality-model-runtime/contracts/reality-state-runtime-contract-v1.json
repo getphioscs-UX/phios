@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-RMO-W7-REALITY-STATE-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W7",
+  "status": "structure_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "componentType": "REALITY_STATE",
+  "schemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-state-v1.schema.json",
+  "stateClassRegistryReference": "content/runtime/reality-model-runtime/registries/canonical-reality-state-class-registry-v1.json",
+  "stateClasses": ["OBSERVED", "DERIVED", "PROJECTED"],
+  "rules": {
+    "stateClassIsIndependentFromDataNature": true,
+    "stateClassIsIndependentFromCertainty": true,
+    "observedDoesNotEqualTruth": true,
+    "observedDoesNotEqualAcceptedEvidence": true,
+    "derivedRequiresMethodVersionAndExactInputLineage": true,
+    "derivedIsInference": false,
+    "derivedIsInterpretation": false,
+    "projectedRequiresMethodVersionBasisScenarioAndHorizon": true,
+    "projectedIsRdgDataNature": false,
+    "projectedIsObservedTruth": false,
+    "projectedIsPredictionAuthority": false,
+    "projectedCreatesActionOrNavigationChoice": false,
+    "stateCreationPromotesEvidence": false,
+    "stateRecordImmutable": true,
+    "stateDigestMustBeDeterministic": true,
+    "providerOrAiMayCreateStateAuthority": false,
+    "persistentStoreActivated": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "contractCode": "PHI-OS-ALR-W28-ASSESSMENT-EVIDENCE-RDG-HANDOFF-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W28",
+  "status": "active",
+  "productionStatus": "unmaterialized_assessment_evidence_candidate_handoff",
+  "semanticAuthority": "ALR",
+  "dataGovernanceAuthority": "RDG",
+  "identityPrefix": "ALR-AE-",
+  "rdgLearningDataReference": "content/governance/reality-data-governance/contracts/alr-learning-data-contract-v1.json",
+  "rdgCapabilityEvidenceBoundaryReference": "content/governance/reality-data-governance/contracts/capability-evidence-boundary-v1.json",
+  "requiredHandoffInputFields": ["assessmentEvidenceCode", "learningRecordReference", "practiceAttemptReference", "assessmentResponseReference", "recordedAt", "permissionDecision", "sensitivityClass", "retentionClass"],
+  "requiredHandoffOutputFields": ["assessmentEvidenceCode", "recordType", "assessmentReference", "assessmentVersion", "practiceReference", "capabilityReference", "learningRecordReference", "responseReference", "criterionResults", "feedbackResults", "lineageReferences", "recordedAt", "sensitivityClass", "retentionClass", "handoffState", "materializationState", "semanticAuthority", "dataGovernanceAuthority"],
+  "permissionDecisions": ["ALLOW_FOR_RDG_HANDOFF", "DENY", "UNKNOWN"],
+  "handoffStates": ["READY_FOR_RDG_ELIGIBILITY_REVIEW"],
+  "materializationStates": ["NOT_MATERIALIZED_ALR_HANDOFF_ONLY"],
+  "recordTypes": ["ASSESSMENT_RESULT"],
+  "criterionStatusMapping": {"SUPPORTED": "MET", "PARTIALLY_SUPPORTED": "NOT_MET", "UNSUPPORTED": "NOT_MET", "OVER_INTERPRETED": "NOT_MET", "BOUNDARY_MISSED": "NOT_MET", "UNKNOWN_IGNORED": "NOT_MET", "EVIDENCE_MISSING": "UNKNOWN", "CONSTRAINT_MISREAD": "NOT_MET"},
+  "forbiddenHandoffFields": ["learnerReference", "subjectReference", "accountReference", "rawResponse", "response", "score", "grade", "capabilityState", "capabilityAchieved", "credentialGranted", "credentialState", "entitlementState", "professionalJudgment", "realityEvidenceReference", "providerPrompt", "providerResponse", "modelOutput", "persistencePayload", "presentationPayload"],
+  "rules": {
+    "onlyIntegrityValidSemanticEvaluationMayCreateCandidate": true,
+    "permissionSensitivityAndRetentionMustBeResolvedBeforeHandoff": true,
+    "handoffContainsOpaqueReferencesNotRawResponse": true,
+    "alrAssessmentEvidenceCandidateIsRdgLearningRecord": false,
+    "alrMayMaterializePersistRetainOrDeleteAssessmentData": false,
+    "rdgEligibilityRequiredBeforeCapabilityEvidenceEvaluation": true,
+    "assessmentScoreAloneIsCapabilityEvidence": false,
+    "assessmentEvidenceCandidateIsCapabilityState": false,
+    "handoffMayGrantCredentialEntitlementOrProfessionalAuthority": false,
+    "handoffConstructionMutatesInputOrRegistry": false,
+    "unknownPermissionClassificationReferenceOrFeedbackFailsClosed": true
+  },
+  "activation": {
+    "assessmentEvidenceCandidateConstructionActive": true,
+    "rdgMaterializationActiveFromAlr": false,
+    "learnerDataPersistenceActive": false,
+    "capabilityEvidencePromotionActive": false,
+    "capabilityStatePersistenceActive": false
+  }
+}

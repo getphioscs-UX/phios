@@ -1,0 +1,25 @@
+{
+  "registryCode": "PHI-OS-ALR-W24-W28-ASSESSMENT-LEARNING-BINDING-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "scope": "ALR-W24-W28",
+  "status": "canonical",
+  "productionStatus": "additive_lesson_assessment_binding_overlay",
+  "lessonAuthorityReference": "content/academy/academy-learning-runtime/registries/lesson-registry-v1.json",
+  "practiceBindingAuthorityReference": "content/academy/academy-learning-runtime/registries/practice-learning-binding-registry-v1.json",
+  "requiredBindingFields": ["bindingCode", "practiceLearningBindingCode", "lessonCode", "capabilityCode", "assessmentCode", "assessmentTypeCode", "feedbackContractCode", "evidenceHandoffContractCode", "bindingStatus", "deliveryActivationState"],
+  "bindings": [
+    {"bindingCode": "ALR-ALB-EVIDENCE-DISTINCTION", "practiceLearningBindingCode": "ALR-PLB-EVIDENCE-DISTINCTION", "lessonCode": "ALR-LO-LESSON-EVIDENCE-DISTINCTION", "capabilityCode": "ALR-CAP-EVIDENCE-DISTINCTION", "assessmentCode": "ALR-LO-ASSESSMENT-EVIDENCE-DISTINCTION", "assessmentTypeCode": "ALR-ASMT-TYPE-EVIDENCE-CLASSIFICATION", "feedbackContractCode": "PHI-OS-ALR-W27-LEARNING-FEEDBACK-CONTRACT-v1", "evidenceHandoffContractCode": "PHI-OS-ALR-W28-ASSESSMENT-EVIDENCE-RDG-HANDOFF-v1", "bindingStatus": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED"},
+    {"bindingCode": "ALR-ALB-BOUNDED-READING", "practiceLearningBindingCode": "ALR-PLB-BOUNDED-READING", "lessonCode": "ALR-LO-LESSON-BOUNDED-READING", "capabilityCode": "ALR-CAP-BOUNDED-READING", "assessmentCode": "ALR-LO-ASSESSMENT-BOUNDED-READING", "assessmentTypeCode": "ALR-ASMT-TYPE-BOUNDED-READING-ANALYSIS", "feedbackContractCode": "PHI-OS-ALR-W27-LEARNING-FEEDBACK-CONTRACT-v1", "evidenceHandoffContractCode": "PHI-OS-ALR-W28-ASSESSMENT-EVIDENCE-RDG-HANDOFF-v1", "bindingStatus": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED"},
+    {"bindingCode": "ALR-ALB-CONSTRAINT-AWARE-NAVIGATION", "practiceLearningBindingCode": "ALR-PLB-CONSTRAINT-AWARE-NAVIGATION", "lessonCode": "ALR-LO-LESSON-CONSTRAINT-AWARE-NAVIGATION", "capabilityCode": "ALR-CAP-CONSTRAINT-AWARE-NAVIGATION", "assessmentCode": "ALR-LO-ASSESSMENT-CONSTRAINT-AWARE-NAVIGATION", "assessmentTypeCode": "ALR-ASMT-TYPE-CONSTRAINT-AUTHORITY-MAPPING", "feedbackContractCode": "PHI-OS-ALR-W27-LEARNING-FEEDBACK-CONTRACT-v1", "evidenceHandoffContractCode": "PHI-OS-ALR-W28-ASSESSMENT-EVIDENCE-RDG-HANDOFF-v1", "bindingStatus": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED"},
+    {"bindingCode": "ALR-ALB-REVIEW-CONTINUITY", "practiceLearningBindingCode": "ALR-PLB-REVIEW-CONTINUITY", "lessonCode": "ALR-LO-LESSON-REVIEW-CONTINUITY", "capabilityCode": "ALR-CAP-REVIEW-CONTINUITY", "assessmentCode": "ALR-LO-ASSESSMENT-REVIEW-CONTINUITY", "assessmentTypeCode": "ALR-ASMT-TYPE-REVIEW-LINEAGE-ANALYSIS", "feedbackContractCode": "PHI-OS-ALR-W27-LEARNING-FEEDBACK-CONTRACT-v1", "evidenceHandoffContractCode": "PHI-OS-ALR-W28-ASSESSMENT-EVIDENCE-RDG-HANDOFF-v1", "bindingStatus": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED"},
+    {"bindingCode": "ALR-ALB-BOUNDED-PROFESSIONAL-FORMATION", "practiceLearningBindingCode": "ALR-PLB-BOUNDED-PROFESSIONAL-FORMATION", "lessonCode": "ALR-LO-LESSON-BOUNDED-PROFESSIONAL-FORMATION", "capabilityCode": "ALR-CAP-BOUNDED-PROFESSIONAL-FORMATION", "assessmentCode": "ALR-LO-ASSESSMENT-BOUNDED-PROFESSIONAL-FORMATION", "assessmentTypeCode": "ALR-ASMT-TYPE-PROFESSIONAL-BOUNDARY-ANALYSIS", "feedbackContractCode": "PHI-OS-ALR-W27-LEARNING-FEEDBACK-CONTRACT-v1", "evidenceHandoffContractCode": "PHI-OS-ALR-W28-ASSESSMENT-EVIDENCE-RDG-HANDOFF-v1", "bindingStatus": "APPROVED", "deliveryActivationState": "CONTENT_SEMANTICS_READY_DELIVERY_BLOCKED"}
+  ],
+  "rules": {
+    "additiveOverlayOnly": true,
+    "w13W14AndW20W23RegistriesMutated": false,
+    "oneBindingPerCanonicalLesson": true,
+    "assessmentTypeCapabilityPracticeAndLessonReferencesReciprocal": true,
+    "feedbackAndRdgHandoffContractsRequired": true,
+    "learnerDeliveryActivated": false
+  }
+}
