@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Reality Academy learning path for evidence-aware Reality Navigation.">
-  <title data-i18n="academyPublic.metaTitle">Reality Academy — PHI OS</title>
+  <meta name="description" content="A governed preview of the PHI OS Reality Academy learning structure.">
+  <title data-i18n="academyLearning.metaTitleDashboard">Reality Academy — PHI OS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
@@ -15,50 +15,121 @@
   <link rel="stylesheet" href="/assets/css/design/components.css">
   <link rel="stylesheet" href="/assets/css/design/motion.css">
   <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/academy.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
 </head>
-<body class="public-page" data-page="academy" data-public-section="knowledge">
-  <a class="phi-skip-link" href="#academy-main" data-i18n="academyPublic.skip">Skip to Reality Academy</a>
+<body class="public-page academy-page" data-page="academy" data-public-section="knowledge" data-academy-view="dashboard">
+  <a class="phi-skip-link" href="#academy-main" data-i18n="academyLearning.skipDashboard">
+    Skip to Academy dashboard
+  </a>
   <div data-public-header-placeholder></div>
+
   <main id="academy-main">
-    <section class="legal-hero">
-      <div class="public-container">
-        <p class="public-eyebrow" data-i18n="academyPublic.eyebrow">Knowledge · Learning</p>
-        <h1 class="public-display" data-i18n="academyPublic.title">Reality Academy</h1>
-        <p class="public-lead" data-i18n="academyPublic.lead">
-          Learn to observe, reconstruct, distinguish evidence from interpretation, navigate transitions and review change.
-        </p>
+    <section class="academy-hero" aria-labelledby="academy-title">
+      <div class="public-container academy-hero__grid">
+        <div>
+          <p class="public-eyebrow" data-i18n="academyLearning.dashboard.eyebrow">
+            Reality Academy · Learning structure
+          </p>
+          <h1 id="academy-title" class="public-display" data-i18n="academyLearning.dashboard.title">
+            Build Reality Navigation capability without losing the boundary of what is known.
+          </h1>
+          <p class="public-lead" data-i18n="academyLearning.dashboard.lead">
+            Five governed learning paths connect evidence distinction, bounded reading,
+            constraint-aware navigation, continuity and professional boundaries.
+          </p>
+        </div>
+        <aside class="academy-status" aria-labelledby="academy-status-title">
+          <p class="public-eyebrow" data-i18n="academyLearning.status.eyebrow">ALR-I · Presentation</p>
+          <h2 id="academy-status-title" data-i18n="academyLearning.status.label">Validation projection</h2>
+          <p data-i18n="academyLearning.status.boundary">
+            Course delivery, learner progress, assessment results and credentials are not activated.
+          </p>
+          <div class="academy-status__signal">
+            <span aria-hidden="true">◇</span>
+            <strong data-i18n="academyLearning.status.progressUnavailable">Learner progress not provided</strong>
+          </div>
+        </aside>
       </div>
     </section>
-    <section class="public-section public-section--soft">
+
+    <section class="public-section academy-summary" aria-labelledby="academy-summary-title">
       <div class="public-container">
-        <div class="trust-grid">
-          <article class="trust-card">
-            <span>01</span>
-            <h3 data-i18n="academyPublic.observeTitle">Observe</h3>
-            <p data-i18n="academyPublic.observeCopy">Begin with what changed and what can be supported.</p>
-          </article>
-          <article class="trust-card">
-            <span>02</span>
-            <h3 data-i18n="academyPublic.organizeTitle">Organize</h3>
-            <p data-i18n="academyPublic.organizeCopy">Connect knowledge, experience and evidence without collapsing their boundaries.</p>
-          </article>
-          <article class="trust-card">
-            <span>03</span>
-            <h3 data-i18n="academyPublic.continueTitle">Continue</h3>
-            <p data-i18n="academyPublic.continueCopy">Return outcomes to the same Runtime for review and continuity.</p>
-          </article>
+        <p class="public-eyebrow" data-i18n="academyLearning.dashboard.summaryEyebrow">Academy structure</p>
+        <h2 id="academy-summary-title" class="public-title" data-i18n="academyLearning.dashboard.summaryTitle">
+          One formation. Five connected paths.
+        </h2>
+        <dl class="academy-metrics">
+          <div>
+            <dt data-i18n="academyLearning.dashboard.program">Program</dt>
+            <dd>01</dd>
+          </div>
+          <div>
+            <dt data-i18n="academyLearning.dashboard.paths">Learning paths</dt>
+            <dd>05</dd>
+          </div>
+          <div>
+            <dt data-i18n="academyLearning.dashboard.lessons">Lessons</dt>
+            <dd>05</dd>
+          </div>
+          <div>
+            <dt data-i18n="academyLearning.dashboard.objectives">Learning objectives</dt>
+            <dd>10</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="public-section academy-paths" aria-labelledby="academy-paths-title">
+      <div class="public-container">
+        <div class="academy-section-heading">
+          <p class="public-eyebrow" data-i18n="academyLearning.dashboard.pathEyebrow">Learning paths</p>
+          <h2 id="academy-paths-title" class="public-title" data-i18n="academyLearning.dashboard.pathTitle">
+            Choose a lesson preview by learning purpose.
+          </h2>
+          <p class="public-lead" data-i18n="academyLearning.dashboard.pathLead">
+            Availability describes governed structure only. It does not mean enrolment,
+            entitlement, completion or capability.
+          </p>
         </div>
-        <div class="public-actions">
-          <a class="public-button public-button--primary" href="/explore">
-            <span data-i18n="academyPublic.atlas">Explore the Reality Atlas</span>
-            <span aria-hidden="true">→</span>
-          </a>
-        </div>
+        <ol id="academyPathList" class="academy-path-list" aria-labelledby="academy-paths-title"></ol>
+      </div>
+    </section>
+
+    <section class="public-section academy-boundaries" aria-label="Academy presentation boundaries">
+      <div class="public-container academy-boundaries__grid">
+        <article>
+          <p class="public-eyebrow" data-i18n="academyLearning.dashboard.progressEyebrow">Progress boundary</p>
+          <h2 data-i18n="academyLearning.dashboard.progressTitle">
+            No learner state is created by viewing this dashboard.
+          </h2>
+          <p data-i18n="academyLearning.dashboard.progressCopy">
+            A future progress view must read governed ALR Progress references.
+            Missing data remains “not provided”.
+          </p>
+          <div class="academy-boundary-note">
+            <span aria-hidden="true">—</span>
+            <span data-i18n="academyLearning.status.progressExplanation">
+              This view does not infer “not started” and does not write a learning record.
+            </span>
+          </div>
+        </article>
+        <article>
+          <p class="public-eyebrow" data-i18n="academyLearning.dashboard.accessEyebrow">Access boundary</p>
+          <h2 data-i18n="academyLearning.dashboard.accessTitle">
+            Presentation is separate from access and delivery.
+          </h2>
+          <p data-i18n="academyLearning.dashboard.accessCopy">
+            Academy entitlement, enrolment, content unlock and credential decisions remain
+            with their governing authorities.
+          </p>
+        </article>
       </div>
     </section>
   </main>
+
   <div data-public-footer-placeholder></div>
   <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/academy.js"></script>
 </body>
 </html>

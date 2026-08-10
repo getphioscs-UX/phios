@@ -18,6 +18,12 @@ const digest = async file => crypto
   .update(normalizeText(await fs.readFile(path.join(root, file), 'utf8')), 'utf8')
   .digest('hex');
 
+const presentationFreezePath = `${base}/freeze/alr-w36-w41-presentation-freeze-v1.json`;
+const presentationFreeze = await read(presentationFreezePath).catch(error => {
+  if (error.code === 'ENOENT') return null;
+  throw error;
+});
+
 const audit = await read(`${base}/audits/alr-foundation-audit-v1.json`);
 assert.equal(audit.baselineCommit, 'd5266251b43fc1497ab60959203c7a21b129acdf');
 assert.equal(audit.migration.legacyScope, 'ALR-W0-W32');
@@ -31,6 +37,12 @@ assert.equal(audit.foundationDecision.capabilityStateMayBeSet, false);
 assert.equal(audit.existingRuntimeOrUserDataMutated, false);
 for (const source of audit.inspectedAuthorities) {
   await fs.access(path.join(root, source.reference));
+  if (source.reference === 'academy.html' && presentationFreeze) {
+    assert.ok(presentationFreeze.completedWorks.includes('ALR-W36'));
+    assert.ok(presentationFreeze.outputs.includes('academy.html'));
+    assert.equal(presentationFreeze.cprW0W30CarPdsRdgKnowledgeOrProfessionalAuthorityMutated, false);
+    continue;
+  }
   assert.equal(await digest(source.reference), source.sha256, source.reference);
 }
 

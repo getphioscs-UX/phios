@@ -3,7 +3,7 @@
   "extensionCode": "PJA-PAGE-CAPABILITY-EXTENSION-001",
   "status": "active",
   "extendsFreezeId": "PJA-W0-v1.0.0-Frozen",
-  "reason": "Register post-freeze Public Knowledge Search page without mutating the frozen PJA-W0 contract.",
+  "reason": "Register post-freeze Public Knowledge Search and Academy Lesson presentation pages without mutating the frozen PJA-W0 contract.",
   "pageCapabilities": [
     {
       "capabilityId": "knowledge-discovery",
@@ -17,6 +17,22 @@
         "Knowledge Runtime Public Projection + PJA Public Architecture"
       ],
       "activationState": "production_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "academy-lesson-presentation",
+      "pages": [
+        "academy-lesson.html"
+      ],
+      "sourceObjects": [
+        "ALR Learning Object",
+        "Published Knowledge Projection",
+        "CPR Academy Presentation Request"
+      ],
+      "dependencyOwners": [
+        "ALR + CPR + CAR + Published Knowledge Authority"
+      ],
+      "activationState": "validation_projection_delivery_inactive",
       "writeAuthority": "none"
     }
   ],

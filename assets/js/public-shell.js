@@ -178,6 +178,7 @@ function activeSectionFromPage() {
   if (path === '' || path === '/') return 'discover';
   if (
     path === '/academy' ||
+    path === '/academy-lesson' ||
     path === '/library' ||
     path === '/articles' ||
     path.startsWith('/articles/') ||

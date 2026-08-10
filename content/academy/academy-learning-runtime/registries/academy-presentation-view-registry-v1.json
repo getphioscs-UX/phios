@@ -1,0 +1,50 @@
+{
+  "registryCode": "PHI-OS-ALR-ACADEMY-PRESENTATION-VIEW-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "scope": "ALR-W36-W41",
+  "status": "active",
+  "productionStatus": "validation_projection_only",
+  "views": [
+    {
+      "viewCode": "ALR-ACADEMY-DASHBOARD",
+      "viewVersion": "1.0.0",
+      "ownerWork": "ALR-W37",
+      "route": "/academy",
+      "surface": "ACADEMY",
+      "compositionTypes": [
+        "SUMMARY_BLOCK",
+        "JOURNEY_PROGRESS",
+        "ACADEMY_LESSON"
+      ],
+      "renderState": "validation_projection",
+      "sourceAssetGate": "VALIDATION_PROJECTION_SOURCE_ASSET_BLOCKED",
+      "primaryAction": "OPEN_SELECTED_LESSON_PREVIEW",
+      "status": "ACTIVE"
+    },
+    {
+      "viewCode": "ALR-ACADEMY-LESSON",
+      "viewVersion": "1.0.0",
+      "ownerWork": "ALR-W38",
+      "route": "/academy-lesson",
+      "surface": "ACADEMY",
+      "compositionTypes": [
+        "ACADEMY_LESSON",
+        "SUMMARY_BLOCK",
+        "CALLOUT"
+      ],
+      "renderState": "validation_projection",
+      "sourceAssetGate": "VALIDATION_PROJECTION_SOURCE_ASSET_BLOCKED",
+      "primaryAction": "RETURN_TO_ACADEMY_DASHBOARD",
+      "status": "ACTIVE"
+    }
+  ],
+  "rules": {
+    "viewCodesUnique": true,
+    "routesUnique": true,
+    "cprPresentationTypesOnly": true,
+    "surfaceFixedToAcademy": true,
+    "validationProjectionIsCanonicalPresentation": false,
+    "viewMayWriteLearningProgress": false,
+    "viewMayActivateDelivery": false
+  }
+}

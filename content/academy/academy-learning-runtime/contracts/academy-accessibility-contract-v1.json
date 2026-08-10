@@ -1,0 +1,35 @@
+{
+  "contractCode": "PHI-OS-ALR-W40-ACADEMY-ACCESSIBILITY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "ALR-W40",
+  "status": "active",
+  "presentationAuthority": "CPR",
+  "interactionAuthority": "PDS",
+  "cprReference": "content/professional/canonical-presentation-runtime/contracts/cpr-accessibility-presentation-runtime-v1.json",
+  "pdsReference": "content/registry/pds-w2-design-token-contract.json",
+  "requirements": [
+    "SKIP_LINK",
+    "LANDMARKS",
+    "ONE_H1",
+    "HEADING_ORDER",
+    "READING_ORDER",
+    "KEYBOARD_NAVIGATION",
+    "VISIBLE_FOCUS",
+    "MINIMUM_TOUCH_TARGET",
+    "NON_COLOR_STATE_SIGNAL",
+    "REDUCED_MOTION",
+    "ZOOM_REFLOW",
+    "CURRENT_LESSON_ANNOUNCEMENT",
+    "ALT_TEXT_CAPTION_OR_TRANSCRIPT_WHEN_SOURCE_REQUIRES"
+  ],
+  "rules": {
+    "sourceAccessibilityMetadataMayBeInvented": false,
+    "presentationMayAddInterfaceAccessibleNames": true,
+    "allInteractiveControlsKeyboardOperable": true,
+    "focusOrderFollowsSemanticOrder": true,
+    "stateMeaningMayRelyOnColorAlone": false,
+    "minimumTouchTargetUsesPdsToken": true,
+    "motionMustRespectUserPreference": true,
+    "accessibilityChangesLearningAuthority": false
+  }
+}
