@@ -1,0 +1,63 @@
+{
+  "contractCode": "PHI-OS-WAVE1-C2-HUMAN-EDITORIAL-FREEZE-RESOLUTION-v1",
+  "contractVersion": "1.0.0",
+  "status": "ESTABLISHED_PENDING_HUMAN",
+  "extends": "content/knowledge/production-planning/contracts/wave1-c2-human-editorial-review-foundation-v1.json",
+  "purpose": "Bind exact proposed C2 content to human review and allow the existing PJA C2 builder to reconcile only a real, hash-matched Human Editorial Freeze.",
+  "proposalAuthority": {
+    "proposalIsCanonicalKnowledge": false,
+    "proposalIsHumanDecision": false,
+    "proposalMayFreezeC2": false,
+    "proposalMayRaiseC3Readiness": false,
+    "proposalMayCreateProductionAuthority": false
+  },
+  "humanApprovalRequirements": [
+    "approvalState is human_approved",
+    "decision is freeze_approved",
+    "actor identifies a real human reviewer",
+    "actorRole is HUMAN_EDITORIAL_AUTHORITY",
+    "decidedAt is a valid timestamp",
+    "decision contentHash matches the exact proposedContent digest",
+    "all nine review dimensions contain a Human finding"
+  ],
+  "promotionTarget": {
+    "runtime": "PJA-W2F-C2",
+    "frozenRecordDirectory": "content/knowledge/editorial/c2/frozen",
+    "freezeRecordDirectory": "content/knowledge/editorial/c2/freezes",
+    "automaticPromotionAllowed": false,
+    "explicitApplyRequired": true
+  },
+  "c3Boundary": {
+    "c2FreezeIsC3Readiness": false,
+    "c3MustBeRebuiltAfterFreeze": true,
+    "c3ProductionReadyMustBeTrueBeforeHumanProductionDecision": true
+  },
+  "kpeBoundary": {
+    "currentMainAuthorityStatus": "NOT_PRESENT_IN_CURRENT_MAIN",
+    "mayBeEstablishedBeforeC2AndC3": false,
+    "mayBeActivatedBeforeApprovedHumanProductionDecision": false
+  },
+  "legacySupportingBoundary": {
+    "mayInformProposal": true,
+    "maySignalEvidenceGap": true,
+    "mayBecomeCanonicalThesis": false,
+    "mayBecomeCanonicalSource": false,
+    "mayModifyCanonicalNode": false,
+    "mayCreateArticleRequirement": false,
+    "mayRaiseProductionReadiness": false
+  },
+  "checkerBoundary": {
+    "read": true,
+    "validate": true,
+    "compare": true,
+    "fail": true,
+    "report": true,
+    "repair": false,
+    "mutate": false,
+    "approve": false,
+    "publish": false,
+    "freeze": false,
+    "updateRegistry": false,
+    "generateAuthority": false
+  }
+}

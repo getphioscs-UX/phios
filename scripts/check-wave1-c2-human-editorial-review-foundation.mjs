@@ -9,7 +9,7 @@ const readJson = async relativePath => JSON.parse(await fs.readFile(path.join(ro
 const expected = [
   {
     nodeCode: 'KN-PREFACE-004',
-    titleZhHans: 'ä¸ºä»€ä¹ˆéœ€è¦ PHI OS',
+    titleZhHans: '为什么需要 PHI OS',
     productionRole: 'ARTICLE',
     dispatchTarget: 'PJA',
     candidateReference: 'content/knowledge/editorial/c2/candidates/kn-preface-004.json',
@@ -17,7 +17,7 @@ const expected = [
   },
   {
     nodeCode: 'KN-B1-P1-003',
-    titleZhHans: 'ä¸ºä»€ä¹ˆçŽ°å®žéœ€è¦ç»“æž„',
+    titleZhHans: '为什么现实需要结构',
     productionRole: 'FRAGMENT',
     dispatchTarget: 'PJA',
     candidateReference: 'content/knowledge/editorial/c2/candidates/kn-b1-p1-003.json',
@@ -25,7 +25,7 @@ const expected = [
   },
   {
     nodeCode: 'KN-B1-P4-003',
-    titleZhHans: 'åˆå§‹åŒ–çŠ¶æ€å¦‚ä½•åµŒå…¥åæ ‡å¹¶å½¢æˆé•¿æœŸç¨³å®š',
+    titleZhHans: '初始化状态如何嵌入坐标并形成长期稳定',
     productionRole: 'FIGURE',
     dispatchTarget: 'CAR',
     candidateReference: 'content/knowledge/editorial/c2/candidates/kn-b1-p4-003.json',
@@ -33,7 +33,7 @@ const expected = [
   },
   {
     nodeCode: 'KN-B1-P4-004',
-    titleZhHans: 'ä¸ºä»€ä¹ˆèº«ä½“æ˜¯åˆ†å±‚ä¸”æœ‰é™çš„çŽ°å®žè½½ä½“',
+    titleZhHans: '为什么身体是分层且有限的现实载体',
     productionRole: 'MULTI_ASSET',
     dispatchTarget: 'CAR',
     candidateReference: 'content/knowledge/editorial/c2/candidates/kn-b1-p4-004.json',
@@ -337,10 +337,10 @@ if (process.argv.includes('--print-digests')) {
 assert.equal(documents.registry.digestBinding.inputDigest, computedDigests.inputDigest, 'Wave 1 authority input projection drifted');
 assert.equal(documents.registry.digestBinding.packageSetDigest, computedDigests.packageSetDigest, 'Wave 1 C2 review package set drifted');
 
-console.log('âœ“ Wave 1 C2 Human Editorial Review Foundation passed.');
-console.log('âœ“ 4/4 evidence-bound review packages cover thesis, article, question, sequence, claim, source, figure, public-content and cross-node boundaries.');
-console.log('âœ“ All packages remain pending_human; C2/C3, Production Decision, Frozen Plan/Wave, KPE, PJA/CAR Candidate and Publication effects remain false.');
-console.log('âœ“ KN-PREFACE-004 existing publication conflict is preserved for Human reconciliation; KAU-E2 evidence remains supporting-only.');
+console.log('✓ Wave 1 C2 Human Editorial Review Foundation passed.');
+console.log('✓ 4/4 evidence-bound review packages cover thesis, article, question, sequence, claim, source, figure, public-content and cross-node boundaries.');
+console.log('✓ All packages remain pending_human; C2/C3, Production Decision, Frozen Plan/Wave, KPE, PJA/CAR Candidate and Publication effects remain false.');
+console.log('✓ KN-PREFACE-004 existing publication conflict is preserved for Human reconciliation; KAU-E2 evidence remains supporting-only.');
 
 function collectObjectsByNodeCode(value, allowed) {
   const found = [];
