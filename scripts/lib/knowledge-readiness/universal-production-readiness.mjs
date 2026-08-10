@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { contentHash, C2_WAVE1_HUMAN_RESOLUTION, resolveHumanEditorialFreezeResolutions } from './canonical-thesis-boundary.mjs';
 import { C3R1_PATHS, resolveProductionReadinessClosure } from './preface-production-readiness-closure.mjs';
+import { WAVE1_C3_CLOSURE, resolveWave1C3ReadinessClosure } from './wave1-c3-readiness-closure.mjs';
 
 export const C3_ROOT = 'content/knowledge/editorial/c3';
 export const C3_CONTRACT = `${C3_ROOT}/universal-production-readiness.contract.json`;
@@ -31,7 +32,7 @@ export function buildProductionReadiness(root) {
       : assessBlockedByC2(nodeCode, c2Entry, contract);
     const relative = recordPath(nodeCode);
     files.set(relative, assessment);
-    entries.push({ nodeCode, status: assessment.status, productionReady: assessment.productionReady, exportability: assessment.exportability, assessmentFile: relative, blocking: assessment.blocking });
+    entries.push({ nodeCode, status: assessment.status, productionReady: assessment.productionReady, humanProductionDecisionEligible: assessment.humanProductionDecisionEligible === true, exportability: assessment.exportability, assessmentFile: relative, blocking: assessment.blocking });
   }
   const counts = countBy(entries, entry => entry.status);
   const index = {
@@ -48,6 +49,7 @@ export function buildProductionReadiness(root) {
     c2Frozen: c2.entries.filter(entry => entry.status === 'frozen').length,
     c2Blocked: c2.entries.filter(entry => entry.status !== 'frozen').length,
     productionReady: index.productionReadyCount, productionBlocked: index.productionBlockedCount,
+    humanProductionDecisionEligible: entries.filter(entry => entry.humanProductionDecisionEligible).length,
     states: counts, exportGenerated: false, published: false
   });
   return { files, index };
@@ -78,6 +80,7 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
   const blockingFindings = legacy?.review?.blockingFindings || [];
   const closure = nodeCode === 'KN-PREFACE-001' ? resolveProductionReadinessClosure(root) : null;
   const closurePassed = closure?.status === 'production_ready';
+  const wave1Closure = resolveWave1C3ReadinessClosure(root, nodeCode);
   const humanEditorialApproval = humanEditorialApprovals.get(nodeCode) ?? null;
   const humanEditorialPassed = Boolean(humanEditorialApproval) || legacy?.review?.status === 'approved';
   const existingPublishedContentReferences = Array.isArray(sources.knownPublishedContent) ? sources.knownPublishedContent : [];
@@ -85,9 +88,9 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
     c0RegistryIdentity: pass(), c1ReadinessIdentity: pass(),
     c2FrozenThesisBoundary: hashValid && freeze.decision === 'approved' ? pass() : fail('C2_FREEZE_HASH_INVALID'),
     claimSufficiency: closurePassed || (Array.isArray(claims.requiredClaimFamilies) && claims.requiredClaimFamilies.length > 0) ? pass() : fail('CLAIM_BOUNDARY_INSUFFICIENT'),
-    sourceSufficiency: closurePassed || sourcesComplete(sources) ? pass() : fail('UNRESOLVED_CRITICAL_SOURCE_NEED'),
+    sourceSufficiency: closurePassed || wave1Closure?.entry?.sourceSufficiency?.status === 'passed' || sourcesComplete(sources) ? pass() : fail('UNRESOLVED_CRITICAL_SOURCE_NEED'),
     supportingQuestionTreatment: Array.isArray(questions) && questions.every(question => typeof question.articleTreatment === 'string' && question.articleTreatment.length > 0) ? pass() : fail('QUESTION_TREATMENT_INCOMPLETE'),
-    figureDecision: figureComplete(figures) ? pass() : fail('FIGURE_DECISION_INCOMPLETE'),
+    figureDecision: wave1Closure?.entry?.figureDecision?.status === 'passed' || figureComplete(figures) ? pass() : fail('FIGURE_DECISION_INCOMPLETE'),
     editorialReview: humanEditorialPassed ? pass() : fail('EDITORIAL_REVIEW_REQUIRED'),
     humanProductionApproval: closurePassed ? pass() : fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
     noBlockingFindings: blockingFindings.length === 0 ? pass() : fail('BLOCKING_REVIEW_FINDING'),
@@ -95,9 +98,12 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
   };
   const blocking = Object.values(gates).filter(gate => gate.status === 'failed').map(gate => gate.code);
   const productionReady = contract.requiredGates.every(name => gates[name]?.status === 'passed');
+  const preHumanGateNames = contract.requiredGates.filter(name => !['humanProductionApproval', 'exportability'].includes(name));
+  const humanProductionDecisionEligible = !productionReady && preHumanGateNames.every(name => gates[name]?.status === 'passed') && gates.humanProductionApproval.status === 'failed' && gates.exportability.status === 'failed';
   return {
     schemaVersion: 'PHI-OS-PJA-W2F-C3-ASSESSMENT-v1.0.0', nodeCode, locale: 'zh-Hans',
-    status: productionReady ? 'production_ready' : 'production_blocked', productionReady,
+    status: productionReady ? 'production_ready' : humanProductionDecisionEligible ? 'human_approval_required' : 'production_blocked', productionReady,
+    ...(wave1Closure ? { humanProductionDecisionEligible } : {}),
     exportability: productionReady ? 'allowed' : 'blocked', publicationState: 'not_published', gates, blocking,
     authority: {
       c2Status: c2Entry.status, c2Record: c2Entry.record, c2FreezeRecord: c2Entry.freezeRecord, c2ContentHash: frozen.contentHash, c2FreezeHashMatched: hashValid,
@@ -107,7 +113,13 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
         existingPublicationReconciliation: existingPublishedContentReferences.length ? 'EXISTING_PUBLISHED_CONTENT_RECONCILED_NO_NEW_PUBLICATION' : 'NO_EXISTING_PUBLICATION',
         existingPublishedContentReferences
       } : {}),
-      c3r1ClosureRecord: closurePassed ? C3R1_PATHS.approval : null, c3r1EvidenceHash: closurePassed ? closure.review.evidenceBundleHash : null
+      c3r1ClosureRecord: closurePassed ? C3R1_PATHS.approval : null, c3r1EvidenceHash: closurePassed ? closure.review.evidenceBundleHash : null,
+      ...(wave1Closure ? {
+        wave1C3ClosureRecord: WAVE1_C3_CLOSURE,
+        wave1SourceClosureState: wave1Closure.entry.sourceSufficiency?.status || null,
+        wave1FigureDecisionState: wave1Closure.entry.figureDecision?.status || null,
+        humanProductionDecisionEligible
+      } : {})
     },
     effects: { articleGenerated: false, productionExportGenerated: false, published: false }
   };

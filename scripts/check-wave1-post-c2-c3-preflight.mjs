@@ -15,12 +15,13 @@ assert.equal(pre.gateSnapshot.selectedItemCount,4);assert.equal(pre.gateSnapshot
 assert.equal(pre.gateSnapshot.humanProductionDecisionAllowed,false);assert.equal(pre.gateSnapshot.productionPlanFreezeAllowed,false);assert.equal(pre.gateSnapshot.productionWaveFreezeAllowed,false);assert.equal(pre.gateSnapshot.dispatchAllowed,false);
 for(const [code,role,target] of expected){
  const item=pre.selectedExecutionScope.find(x=>x.nodeCode===code);assert(item);assert.equal(item.productionRole,role);assert.equal(item.dispatchTarget,target);assert.equal(item.c2Status,'frozen');assert(item.c2FreezeRecord);assert.equal(item.c3Status,'production_blocked');assert.equal(item.productionReady,false);
- const assessment=read(item.c3AssessmentReference);assert.equal(assessment.nodeCode,code);assert.equal(assessment.gates.c2FrozenThesisBoundary.status,'passed');assert.equal(assessment.gates.editorialReview.status,'passed');assert.equal(assessment.gates.humanProductionApproval.status,'failed');assert.deepEqual(item.remainingBlocking,assessment.blocking);
+ const assessment=read(item.c3AssessmentReference);assert.equal(assessment.nodeCode,code);assert.equal(assessment.status,'human_approval_required');assert.equal(assessment.humanProductionDecisionEligible,true);
+ assert.equal(assessment.gates.c2FrozenThesisBoundary.status,'passed');assert.equal(assessment.gates.sourceSufficiency.status,'passed');assert.equal(assessment.gates.figureDecision.status,'passed');assert.equal(assessment.gates.editorialReview.status,'passed');
+ assert.deepEqual(assessment.blocking,['HUMAN_PRODUCTION_APPROVAL_REQUIRED','EXPORTABILITY_NOT_ALLOWED']);
 }
 assert.deepEqual(pre.requiredClosureSummary.figureDecisionClosure,['KN-PREFACE-004']);
 assert.deepEqual(pre.requiredClosureSummary.sourceSufficiencyClosure,['KN-B1-P1-003','KN-B1-P4-003','KN-B1-P4-004']);
 assert.equal(human.decisions.length,0);assert.equal(plans.plans.length,0);assert.equal(plans.revisions.length,0);assert.equal(waves.waves.length,0);assert.equal(pja.handoffs.length,0);assert.equal(car.handoffs.length,0);
-console.log('✓ Wave 1 Post-C2 C3 Preflight passed.');
-console.log('✓ 4/4 Wave 1 items are C2 frozen and Human-editorially approved, but 0/4 are C3 production ready.');
-console.log('✓ KN-PREFACE-004 requires Figure Decision closure; P1-003/P4-003/P4-004 require Source Sufficiency closure.');
-console.log('✓ Human Production Decision, Plan/Wave freeze and PJA/CAR dispatch remain correctly blocked.');
+console.log('✓ Wave 1 Post-C2 C3 historical preflight is byte-preserved and superseded by C3-CL1～CL4 closure.');
+console.log('✓ Former Figure/Source blockers are now closed; current assessments are human_approval_required.');
+console.log('✓ Human Production Decision, Plan/Wave freeze and PJA/CAR dispatch remain uncreated.');

@@ -26,6 +26,7 @@ assert.equal(summary.assessed, nodeCount); assert.equal(summary.c2Frozen, c2.ent
 assert.equal(summary.c2Blocked, c2.entries.filter(entry => entry.status !== 'frozen').length);
 assert.equal(summary.productionReady, index.entries.filter(entry => entry.productionReady).length);
 assert.equal(summary.productionBlocked, index.entries.filter(entry => !entry.productionReady).length);
+assert.equal(summary.humanProductionDecisionEligible, index.entries.filter(entry => entry.humanProductionDecisionEligible).length);
 assert.equal(summary.exportGenerated, false); assert.equal(summary.published, false);
 
 for (const entry of index.entries) {
@@ -54,22 +55,23 @@ for (const c2Entry of c2.entries.filter(entry => entry.status !== 'frozen')) ass
 const wave1 = ['KN-PREFACE-004','KN-B1-P1-003','KN-B1-P4-003','KN-B1-P4-004'];
 for (const code of wave1) {
   const assessment = read(`content/knowledge/editorial/c3/assessments/${code.toLowerCase()}-production-readiness.json`);
-  assert.equal(assessment.status, 'production_blocked'); assert.equal(assessment.productionReady, false);
+  assert.equal(assessment.status, 'human_approval_required'); assert.equal(assessment.productionReady, false); assert.equal(assessment.humanProductionDecisionEligible, true);
   assert.equal(assessment.gates.c2FrozenThesisBoundary.status, 'passed'); assert.equal(assessment.gates.claimSufficiency.status, 'passed');
-  assert.equal(assessment.gates.supportingQuestionTreatment.status, 'passed'); assert.equal(assessment.gates.editorialReview.status, 'passed');
+  assert.equal(assessment.gates.sourceSufficiency.status, 'passed'); assert.equal(assessment.gates.supportingQuestionTreatment.status, 'passed'); assert.equal(assessment.gates.figureDecision.status, 'passed'); assert.equal(assessment.gates.editorialReview.status, 'passed');
   assert.equal(assessment.gates.humanProductionApproval.status, 'failed'); assert.equal(assessment.gates.exportability.status, 'failed');
+  assert.deepEqual(assessment.blocking, ['HUMAN_PRODUCTION_APPROVAL_REQUIRED','EXPORTABILITY_NOT_ALLOWED']);
   assert.equal(assessment.authority.humanEditorialApproved, true);
   assert.equal(assessment.authority.editorialRecord, 'content/knowledge/production-planning/review/wave1-c2-human-editorial-freeze-resolution-v1.json');
+  assert.equal(assessment.authority.wave1C3ClosureRecord, 'content/knowledge/editorial/c3/closures/wave1-c3-readiness-closure-v1.json');
+  assert.equal(assessment.authority.humanProductionDecisionEligible, true);
 }
 const preface = read('content/knowledge/editorial/c3/assessments/kn-preface-004-production-readiness.json');
-assert.equal(preface.gates.sourceSufficiency.status, 'passed'); assert.equal(preface.gates.figureDecision.status, 'failed');
+assert.equal(preface.authority.wave1FigureDecisionState, 'passed');
 assert.equal(preface.authority.existingPublicationReconciliation, 'EXISTING_PUBLISHED_CONTENT_RECONCILED_NO_NEW_PUBLICATION');
 assert.deepEqual(preface.authority.existingPublishedContentReferences, ['KA-PREFACE-004-ZH-ARTICLE','KA-PREFACE-004-EN-ARTICLE']);
-const p1003 = read('content/knowledge/editorial/c3/assessments/kn-b1-p1-003-production-readiness.json');
-assert.equal(p1003.gates.sourceSufficiency.status, 'failed'); assert.equal(p1003.gates.figureDecision.status, 'passed');
-for (const code of ['KN-B1-P4-003','KN-B1-P4-004']) {
+for (const code of ['KN-B1-P1-003','KN-B1-P4-003','KN-B1-P4-004']) {
   const assessment = read(`content/knowledge/editorial/c3/assessments/${code.toLowerCase()}-production-readiness.json`);
-  assert.equal(assessment.gates.sourceSufficiency.status, 'failed'); assert.equal(assessment.gates.figureDecision.status, 'passed');
+  assert.equal(assessment.authority.wave1SourceClosureState, 'passed');
 }
 
 assert.throws(() => resolveProductionReadiness(root, 'KN-NOT-REGISTERED-999'), error => error.code === 'NODE_NOT_FOUND');
@@ -91,7 +93,7 @@ const negativeGuards = [
 for (const guard of negativeGuards) assert.throws(guard, /NEGATIVE_FIXTURE_REJECTED/);
 console.log('✓ PJA-W2F-C3 Universal Production Readiness rebuilt after Wave 1 C2 Human Freeze.');
 console.log(`✓ ${nodeCount} assessed; ${summary.c2Frozen} C2 frozen; ${summary.c2Blocked} blocked by C2; ${summary.productionReady} production ready; ${summary.productionBlocked} production blocked.`);
-console.log('✓ Wave 1 C2/editorial gates now pass; remaining source/figure and Human Production Approval gates fail closed as applicable.');
+console.log('✓ Wave 1 source/figure/editorial gates now pass; 4/4 items are human_approval_required and eligible for Human Production Decision.');
 console.log('✓ Existing KN-PREFACE-004 publication is explicitly reconciled without creating a new publication.');
 function reject(condition){if(!condition)throw new Error('NEGATIVE_FIXTURE_REJECTED');}
 function run(script,...args){return spawnSync(process.execPath,[script,...args],{cwd:root,encoding:'utf8'});}
