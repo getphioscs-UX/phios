@@ -518,8 +518,9 @@
     "check:rdg-w0-w10": "node scripts/check-rdg-w0-w10-foundation.mjs",
     "check:rdg-foundation": "npm run check:rdg-w0-w10",
     "check:kau-e0": "node scripts/check-kau-e0-legacy-supporting-source-governance.mjs",
-    "check:governance-foundation": "npm run check:rg-foundation && npm run check:rdg-foundation && npm run check:kau-e0 && node scripts/check-rg-rdg-foundation-kau-e0-freeze.mjs"
-  
+    "check:governance-foundation": "npm run check:rg-foundation && npm run check:rdg-foundation && npm run check:kau-e0 && node scripts/check-rg-rdg-foundation-kau-e0-freeze.mjs",
+    "check:kau-e0-registration": "node scripts/check-kau-e0-legacy-source-registration.mjs",
+    "check:kau-e0-all": "npm run check:kau-e0 && npm run check:kau-e0-registration"
   },
   "type": "module"
 }

@@ -1,0 +1,38 @@
+{
+  "acceptanceCode": "PHI-OS-KAU-E0-LEGACY-SOURCE-REGISTRATION-ACCEPTANCE-v1",
+  "acceptanceVersion": "1.0.0",
+  "work": "KAU-E0",
+  "status": "accepted_for_reconciliation_queue",
+  "baselineCommit": "fb0be62d25669e4e6c81f9b6e459afd2ca0c6633",
+  "registeredSources": [
+    "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-1",
+    "LEGACY-PHIOS-UNIFIED-LANGUAGE-PART-2"
+  ],
+  "sourceCount": 2,
+  "checks": {
+    "twoSourceManifestsPresent": true,
+    "registryV2ContainsExactlyTwoSources": true,
+    "v1FoundationRegistryUnchanged": true,
+    "digestBindingComplete": true,
+    "r2ObjectBindingComplete": true,
+    "supportingOnlyTrue": true,
+    "canonicalAuthorityFalse": true,
+    "meaningAuthorityFalse": true,
+    "publicationAuthorityFalse": true,
+    "nodeAuthorityFalse": true,
+    "rawLegacyToKPPForbidden": true,
+    "candidateNodeReferencesEmpty": true,
+    "matchedNodeReferencesEmpty": true,
+    "remoteObjectExistenceUserConfirmed": true,
+    "remoteObjectExistenceRuntimeVerified": false,
+    "baseKAUW0W14FreezeMutated": false,
+    "kauE0GovernanceFreezeMutated": false
+  },
+  "nextState": "READY_FOR_KAU_E1_INVENTORY_AND_RECONCILIATION",
+  "nextWork": "KAU-E1 Cross-Book Canonical Reconciliation",
+  "notes": [
+    "Acceptance binds source identity, digest, and declared private R2 object keys.",
+    "It does not accept any legacy statement as Canonical Knowledge.",
+    "It does not create or modify Canonical Nodes."
+  ]
+}
