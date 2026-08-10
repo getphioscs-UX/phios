@@ -1,0 +1,43 @@
+{
+  "contractCode": "PHI-OS-KAU-E2-EXTENSION-ACCEPTANCE-FREEZE-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "workCode": "KAU-E2",
+  "status": "ACTIVE",
+  "purpose": "Accept and freeze the KAU legacy-supporting-source extension after explicit human resolution without modifying KAU v1 base authority.",
+  "requiredPredecessors": [
+    "KAU-E0 legacy supporting source governance and registration",
+    "KAU-E1 legacy reconciliation",
+    "KAU-E1R 185/185 explicit human review completion"
+  ],
+  "acceptedInputState": {
+    "humanReviewed": 185,
+    "acceptedSupporting": 155,
+    "deferred": 30,
+    "pendingHumanDecision": 0
+  },
+  "rules": {
+    "acceptedRelationshipIsSupportingOnly": true,
+    "acceptedRelationshipDoesNotBecomeCanonicalKnowledge": true,
+    "acceptedRelationshipDoesNotBecomeMeaningAuthority": true,
+    "acceptedRelationshipDoesNotPublish": true,
+    "acceptedRelationshipDoesNotPromoteProductionReadiness": true,
+    "deferredRelationshipRemainsDeferred": true,
+    "deferredRelationshipCannotBeAutoResolved": true,
+    "rawLegacySourceCannotEnterKpp": true,
+    "kppMayConsumeOnlyFrozenAcceptedSupportingProjection": true,
+    "baseKauFreezeCannotBeMutated": true,
+    "e0E1E1rArtifactsCannotBeRewrittenByE2": true,
+    "cmwFrozenRegistryCannotBeSilentlyMutated": true
+  },
+  "kppHandoffBoundary": {
+    "allowedConsumers": [
+      "KPP-W23",
+      "KPP-W27"
+    ],
+    "handoffIsReadOnly": true,
+    "handoffMayNotDecideArticleRequirement": true,
+    "handoffMayNotChangePriority": true,
+    "handoffMayNotPromoteReadiness": true,
+    "handoffMayNotMutateFrozenWave": true
+  }
+}

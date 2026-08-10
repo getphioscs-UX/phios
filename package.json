@@ -563,7 +563,7 @@
     "check:kau-e1-review": "npm run check:kau-e1 && npm run check:kau-e1r",
     "check:kau-e0-e1r": "npm run check:kau-e0-all && npm run check:kau-e1-review",
     "check:kau-e1r-wave-a": "node scripts/check-kau-e1r-wave-a-resolution.mjs",
-    "check:kau-e1r-resolved": "npm run check:kau-e1r && npm run check:kau-e1r-wave-a",
+    "check:kau-e1r-resolved": "npm run check:kau-e1r && npm run check:kau-e1r-wave-a && npm run check:kau-e1r-wave-b && npm run check:kau-e1r-wave-c && npm run check:kau-e1r-wave-d && npm run check:kau-e1r-wave-e && npm run check:kau-e1r-wave-f",
     "check:kau-e1r-wave-b": "node scripts/check-kau-e1r-wave-b-resolution.mjs",
     "check:kau-e1r-wave-c": "node scripts/check-kau-e1r-wave-c-resolution.mjs",
     "check:kau-e1r-wave-d": "node scripts/check-kau-e1r-wave-d-resolution.mjs",
@@ -587,7 +587,9 @@
     "check:rdg-governance": "npm run check:rdg-w26-w30",
     "check:governance-data-closure": "npm run check:governance-access-closure && npm run check:rdg-w21-w25 && npm run check:rdg-w26-w30",
     "check:alr-w0-w4": "node scripts/check-alr-w0-w4-foundation.mjs",
-    "check:alr-foundation": "npm run check:alr-w0-w4"
-    },
+    "check:alr-foundation": "npm run check:alr-w0-w4",
+    "check:kau-e2": "node scripts/check-kau-e2-extension-acceptance-freeze.mjs",
+    "check:kau-extension": "npm run check:kau-e0-all && npm run check:kau-e1 && npm run check:kau-e1r-resolved && npm run check:kau-e2"
+  },
   "type": "module"
 }
