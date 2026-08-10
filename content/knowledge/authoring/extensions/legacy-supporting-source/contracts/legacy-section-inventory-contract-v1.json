@@ -1,0 +1,26 @@
+{
+  "contractCode": "KAU-E1-LEGACY-SECTION-INVENTORY-CONTRACT",
+  "contractVersion": "1.0.0",
+  "workCode": "KAU-E1",
+  "purpose": "Inventory legacy manuscript structure without creating or mutating Canonical Knowledge.",
+  "entryTypes": [
+    "PART",
+    "SECTION",
+    "APPENDIX"
+  ],
+  "requiredFields": [
+    "sourceCode",
+    "legacySectionCode",
+    "legacyPartCode",
+    "entryType",
+    "titleZhHans",
+    "tocPage"
+  ],
+  "invariants": {
+    "supportingOnly": true,
+    "canonicalMutationAllowed": false,
+    "nodeCreationAllowed": false,
+    "tocLocationIsNotSectionStartPage": true,
+    "humanReviewRequiredForCanonicalRelationship": true
+  }
+}
