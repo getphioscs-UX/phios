@@ -213,14 +213,32 @@ const presentationIndex = postcheck.indexOf('npm run check:alr-presentation');
 const governanceIndex = postcheck.indexOf('npm run check:alr-governance');
 const expIndex = postcheck.indexOf('node scripts/check-exp-w4-reconstruction-customer-projection.mjs');
 assert.ok(presentationIndex >= 0 && governanceIndex > presentationIndex && expIndex > governanceIndex);
-const productionIndex = postcheck.indexOf('npm run check:wave1-production');
-const vapW0Index = postcheck.indexOf('npm run check:vap-w0');
-const vapW1Index = postcheck.indexOf('npm run check:vap-w1');
-const vapW2Index = postcheck.indexOf('npm run check:vap-w2');
-assert.ok(productionIndex > expIndex && vapW0Index > productionIndex &&
-  vapW1Index > vapW0Index && vapW2Index > vapW1Index);
-assert.equal(packageJson.scripts['check:vap-w2'],
-  'node scripts/check-vap-w2-cloudflare-production-sha.mjs');
+const vapTail = postcheck.match(
+  /npm run check:wave1-production((?: && npm run check:vap-w\d+)+)$/);
+assert.ok(vapTail, 'postcheck must end in the governed contiguous VAP chain');
+const productionIndex = postcheck.indexOf(vapTail[0]);
+assert.ok(productionIndex > expIndex);
+const vapWorkNumbers = [...vapTail[1].matchAll(/npm run check:vap-w(\d+)/g)]
+  .map(match => Number(match[1]));
+assert.ok(vapWorkNumbers.length >= 4, 'VAP-W0 through VAP-W3 must remain governed');
+assert.deepEqual(vapWorkNumbers,
+  Array.from({length: vapWorkNumbers.length}, (_, index) => index));
+const governedVapAliases = {
+  0: 'node scripts/check-vap-w0-production-baseline.mjs',
+  1: 'node scripts/check-vap-w1-published-knowledge-integrity-repair.mjs',
+  2: 'node scripts/check-vap-w2-cloudflare-production-sha.mjs',
+  3: 'node scripts/check-vap-w3-visual-production-authority.mjs'
+};
+for (const workNumber of vapWorkNumbers) {
+  const alias = packageJson.scripts[`check:vap-w${workNumber}`];
+  if (governedVapAliases[workNumber]) {
+    assert.equal(alias, governedVapAliases[workNumber]);
+  } else {
+    assert.match(alias,
+      new RegExp(`^node scripts/check-vap-w${workNumber}-[a-z0-9-]+\\.mjs$`));
+  }
+  await fs.access(path.join(root, alias.slice('node '.length)));
+}
 
 const freeze = await read(`${base}/freeze/alr-v2-freeze-v1.json`);
 assert.equal(freeze.scope, 'ALR-W0-W46');

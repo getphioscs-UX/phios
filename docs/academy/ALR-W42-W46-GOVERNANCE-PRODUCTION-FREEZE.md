@@ -22,9 +22,10 @@ registries are not modified. Central RG registration remains
 `DEFERRED_TO_RG_AUTHORIZED_EXPANSION`; the ALR-owned registry must not be described
 as canonical central RG registration.
 
-The historical ALR-W33～W35 postcheck guard accepts the governed VAP-W2 successor
-only after Wave 1, VAP-W0 and VAP-W1. This repairs the VAP-W2 compatibility drift
-without weakening the production-chain order.
+The historical ALR-W33～W35 postcheck guard accepts a governed contiguous VAP successor chain
+only after Wave 1. VAP-W0 through VAP-W3 remain mandatory, and later VAP successors
+must be gap-free, resolve to matching checker aliases and reference existing checker files.
+This repairs the VAP-W2/VAP-W3 compatibility drift without weakening the production-chain order.
 
 Commands:
 
