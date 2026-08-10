@@ -1,0 +1,41 @@
+{
+  "contractCode": "PHI-OS-WAVE1-PRODUCTION-ACTIVATION-GATE-v1",
+  "contractVersion": "1.0.0",
+  "status": "active",
+  "requiredBeforeHumanProductionDecision": [
+    "canonicalNodeExists",
+    "kppProductionRoleResolved",
+    "pjaOrCarReadinessAuthorityPresent",
+    "canonicalThesisFrozen",
+    "requiredBoundariesFrozen",
+    "noUnresolvedProductionBlockers"
+  ],
+  "requiredBeforePlanFreeze": [
+    "humanProductionDecisionRecorded",
+    "allWaveItemsProductionEligible",
+    "localeRequirementsResolved"
+  ],
+  "requiredBeforeWaveActivation": [
+    "productionPlanFrozen",
+    "productionWaveFrozen",
+    "inputDigestValid",
+    "policyDigestValid",
+    "resultDigestReplayValid"
+  ],
+  "dispatchRules": {
+    "ARTICLE": "PJA",
+    "FRAGMENT": "PJA",
+    "FIGURE": "CAR",
+    "DIAGRAM": "CAR",
+    "MULTI_ASSET": "CAR"
+  },
+  "failClosed": true,
+  "forbidden": [
+    "record_human_production_decision_before_readiness",
+    "freeze_plan_with_blocked_item",
+    "freeze_wave_with_blocked_item",
+    "create_pja_candidate_from_blocked_item",
+    "create_car_asset_from_blocked_item",
+    "publish_from_preflight"
+  ]
+}
