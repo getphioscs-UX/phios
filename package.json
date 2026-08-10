@@ -485,7 +485,7 @@
     "check:cpr-w5": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
     "check:cpr-w6": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
     "check:cpr-w0-w6": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
-    "check:cpr": "node scripts/check-cpr-w0-w6-presentation-foundation.mjs",
+    "check:cpr": "npm run check:cpr-w0-w6 && npm run check:cpr-w7-w18 && npm run check:cpr-w19-w29 && npm run check:cpr-w30",
     "check:kau-w0-w8": "node scripts/check-kau-w0-w8-authoring-foundation.mjs",
     "check:kau-w0": "node scripts/check-kau-w0-w8-authoring-foundation.mjs",
     "check:kau-w1-w8": "node scripts/check-kau-w0-w8-authoring-foundation.mjs",
@@ -495,8 +495,21 @@
     "check:kau": "npm run check:kau-w0-w8 && npm run check:kau-w9-w14",
     "check:kpp-w0-w12": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
     "check:kpp-w0": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
-    "check:kpp-w1-w12": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs"
-  
+    "check:kpp-w1-w12": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
+    "check:cpr-w7-w18": "node scripts/check-cpr-w7-w18-presentation-objects.mjs",
+    "check:cpr-w19-w29": "node scripts/check-cpr-w19-w29-composition-surfaces.mjs",
+    "check:cpr-w30": "node scripts/check-cpr-w30-full-freeze.mjs",
+    "check:cpr-complete": "npm run check:cpr",
+    "check:cmw-w0-w6": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:cmw-w7": "node scripts/check-cmw-w7-freeze.mjs",
+    "check:cmw": "npm run check:cmw-w0-w6 && npm run check:cmw-w7",
+    "check:cmw-w0": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:cmw-w1": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:cmw-w2": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:cmw-w3": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:cmw-w4": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:cmw-w5": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:cmw-w6": "node scripts/check-cmw-w0-w6-master-work-governance.mjs"
   },
   "type": "module"
 }

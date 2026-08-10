@@ -1,0 +1,219 @@
+{
+  "registryCode": "PHI-OS-CANONICAL-RUNTIME-DEPENDENCY-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "CMW-W2",
+  "status": "canonical",
+  "entries": [
+    {
+      "runtimeCode": "KAU",
+      "dependsOn": [
+        "KNOWLEDGE_AUTHORITY"
+      ],
+      "readsFrom": [
+        "AUTHORING_SOURCES",
+        "CANONICAL_NODE_REGISTRY"
+      ],
+      "writesTo": [
+        "AUTHORING_PROJECTIONS"
+      ],
+      "handsOffTo": [
+        "KNOWLEDGE_AUTHORITY",
+        "PJA"
+      ],
+      "governedBy": [
+        "RG"
+      ],
+      "presentedBy": [],
+      "forbiddenDependencies": [
+        "CPR",
+        "SURFACE"
+      ]
+    },
+    {
+      "runtimeCode": "KPP",
+      "dependsOn": [
+        "KNOWLEDGE_AUTHORITY",
+        "KAU"
+      ],
+      "readsFrom": [
+        "CANONICAL_NODE_REGISTRY",
+        "KAU_READINESS",
+        "PUBLISHED_COVERAGE",
+        "MEANING_COVERAGE",
+        "JOURNEY_REQUIREMENTS",
+        "LOCALE_RUNTIME"
+      ],
+      "writesTo": [
+        "PRODUCTION_PLAN"
+      ],
+      "handsOffTo": [
+        "PJA",
+        "CAR",
+        "ALR",
+        "JR",
+        "KI"
+      ],
+      "governedBy": [
+        "RG"
+      ],
+      "presentedBy": [],
+      "forbiddenDependencies": [
+        "CPR_AS_AUTHORITY"
+      ]
+    },
+    {
+      "runtimeCode": "CPR",
+      "dependsOn": [
+        "PDS",
+        "PUBLICATION_AUTHORITY"
+      ],
+      "readsFrom": [
+        "PUBLISHED_PROJECTIONS",
+        "PDS_CONTRACTS"
+      ],
+      "writesTo": [
+        "CANONICAL_PRESENTATION_PROJECTIONS"
+      ],
+      "handsOffTo": [
+        "SURFACES"
+      ],
+      "governedBy": [
+        "RG",
+        "PDS"
+      ],
+      "presentedBy": [],
+      "forbiddenDependencies": [
+        "KNOWLEDGE_WRITE",
+        "MEANING_WRITE",
+        "PUBLICATION_WRITE"
+      ]
+    },
+    {
+      "runtimeCode": "ALR",
+      "dependsOn": [
+        "KNOWLEDGE_AUTHORITY",
+        "CAR",
+        "RDG",
+        "CPR"
+      ],
+      "readsFrom": [
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLISHED_ASSETS"
+      ],
+      "writesTo": [
+        "LEARNING_STATE",
+        "CAPABILITY_SEMANTICS"
+      ],
+      "handsOffTo": [
+        "CPR",
+        "PROFESSIONAL_READINESS"
+      ],
+      "governedBy": [
+        "RG",
+        "RDG",
+        "PDS"
+      ],
+      "presentedBy": [
+        "CPR"
+      ],
+      "forbiddenDependencies": [
+        "PROFESSIONAL_PERMISSION_WRITE"
+      ]
+    },
+    {
+      "runtimeCode": "JR",
+      "dependsOn": [
+        "RMO",
+        "RRE",
+        "RDG"
+      ],
+      "readsFrom": [
+        "REALITY",
+        "READOUT",
+        "KNOWLEDGE",
+        "MEANING"
+      ],
+      "writesTo": [
+        "JOURNEY_STATE"
+      ],
+      "handsOffTo": [
+        "PR",
+        "LRM"
+      ],
+      "governedBy": [
+        "RG",
+        "RDG"
+      ],
+      "presentedBy": [
+        "CPR"
+      ],
+      "forbiddenDependencies": [
+        "PROFESSIONAL_JUDGMENT_WRITE"
+      ]
+    },
+    {
+      "runtimeCode": "PR",
+      "dependsOn": [
+        "JR",
+        "RRE",
+        "RDG"
+      ],
+      "readsFrom": [
+        "PROFESSIONAL_EVIDENCE_PACKAGE"
+      ],
+      "writesTo": [
+        "PROFESSIONAL_OBSERVATION",
+        "PROFESSIONAL_JUDGMENT",
+        "PROFESSIONAL_RECOMMENDATION"
+      ],
+      "handsOffTo": [
+        "RR"
+      ],
+      "governedBy": [
+        "RG",
+        "RDG"
+      ],
+      "presentedBy": [
+        "CPR"
+      ],
+      "forbiddenDependencies": [
+        "KNOWLEDGE_WRITE"
+      ]
+    },
+    {
+      "runtimeCode": "RR",
+      "dependsOn": [
+        "PR",
+        "JR",
+        "RRE"
+      ],
+      "readsFrom": [
+        "APPROVED_PROFESSIONAL_DECISION",
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLISHED_ASSETS"
+      ],
+      "writesTo": [
+        "CANONICAL_REPORT"
+      ],
+      "handsOffTo": [
+        "CPR",
+        "LRM"
+      ],
+      "governedBy": [
+        "RG",
+        "RDG"
+      ],
+      "presentedBy": [
+        "CPR"
+      ],
+      "forbiddenDependencies": [
+        "PROFESSIONAL_APPROVAL_WRITE"
+      ]
+    }
+  ],
+  "rules": {
+    "downstreamMutationOfUpstreamAuthorityForbidden": true,
+    "cyclesForbidden": true,
+    "handoffMustBeExplicit": true
+  }
+}
