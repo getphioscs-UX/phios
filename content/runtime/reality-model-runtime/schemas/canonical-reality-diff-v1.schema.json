@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-diff-v1.schema.json",
+  "title": "PHI OS Canonical Reality Diff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "diffCode", "diffVersion", "componentType", "dataDomain", "dataType",
+    "dataNature", "certainty", "fromRealityReference", "toRealityReference", "comparisonMode",
+    "algorithmReference", "algorithmVersion", "componentChanges", "summary", "changeDetected",
+    "interpretationPerformed", "inferencePerformed", "diagnosisCreated", "causalityClaimed",
+    "successOrEffectivenessDetermined", "professionalJudgmentCreated", "navigationOrActionCreated",
+    "evidencePromotionPerformed", "providerOrAiAuthorityUsed", "authorityReference",
+    "operationalMode", "persistentStoreWriteAllowed", "createdAt", "diffDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-DIFF-v1.0.0"},
+    "diffCode": {"type": "string", "pattern": "^RMO-DIFF-[A-Z0-9-]{4,100}$"},
+    "diffVersion": {"$ref": "#/$defs/semver"},
+    "componentType": {"const": "REALITY_DIFF"},
+    "dataDomain": {"const": "RUNTIME_STATE"},
+    "dataType": {"const": "RUNTIME_STATE_RECORD"},
+    "dataNature": {"const": "AUDIT"},
+    "certainty": {"const": "CONFIRMED"},
+    "fromRealityReference": {"$ref": "#/$defs/realityReference"},
+    "toRealityReference": {"$ref": "#/$defs/realityReference"},
+    "comparisonMode": {"enum": ["ADJACENT_VERSION", "ANCESTOR_VERSION"]},
+    "algorithmReference": {"const": "RMO-REALITY-DIFF-STRUCTURAL-REFERENCE-v1"},
+    "algorithmVersion": {"const": "1.0.0"},
+    "componentChanges": {"$ref": "#/$defs/componentChanges"},
+    "summary": {"$ref": "#/$defs/summary"},
+    "changeDetected": {"const": true},
+    "interpretationPerformed": {"const": false},
+    "inferencePerformed": {"const": false},
+    "diagnosisCreated": {"const": false},
+    "causalityClaimed": {"const": false},
+    "successOrEffectivenessDetermined": {"const": false},
+    "professionalJudgmentCreated": {"const": false},
+    "navigationOrActionCreated": {"const": false},
+    "evidencePromotionPerformed": {"const": false},
+    "providerOrAiAuthorityUsed": {"const": false},
+    "authorityReference": {"const": "content/runtime/reality-model-runtime/contracts/reality-diff-contract-v1.json"},
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "diffDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "realityReference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityVersionSequence", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityVersionSequence": {"type": "integer", "minimum": 1},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "sourceRealityReference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "componentReference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["componentCode", "componentVersion", "componentDigest", "sourceRealityReference"],
+      "properties": {
+        "componentCode": {"type": "string", "minLength": 1, "maxLength": 200},
+        "componentVersion": {"$ref": "#/$defs/semver"},
+        "componentDigest": {"$ref": "#/$defs/digest"},
+        "sourceRealityReference": {"$ref": "#/$defs/sourceRealityReference"}
+      }
+    },
+    "componentReferenceArray": {"type": "array", "items": {"$ref": "#/$defs/componentReference"}},
+    "replacement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["componentCode", "from", "to"],
+      "properties": {
+        "componentCode": {"type": "string", "minLength": 1, "maxLength": 200},
+        "from": {"$ref": "#/$defs/componentReference"},
+        "to": {"$ref": "#/$defs/componentReference"}
+      }
+    },
+    "familyChange": {
+      "type": "object", "additionalProperties": false,
+      "required": ["added", "removed", "replaced", "unchanged"],
+      "properties": {
+        "added": {"$ref": "#/$defs/componentReferenceArray"},
+        "removed": {"$ref": "#/$defs/componentReferenceArray"},
+        "replaced": {"type": "array", "items": {"$ref": "#/$defs/replacement"}},
+        "unchanged": {"$ref": "#/$defs/componentReferenceArray"}
+      }
+    },
+    "componentChanges": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "entities", "events", "signals", "relationships", "constraints", "states",
+        "evidenceBindings", "reasoningBoundaries", "unknowns", "actions", "outcomes"
+      ],
+      "properties": {
+        "entities": {"$ref": "#/$defs/familyChange"},
+        "events": {"$ref": "#/$defs/familyChange"},
+        "signals": {"$ref": "#/$defs/familyChange"},
+        "relationships": {"$ref": "#/$defs/familyChange"},
+        "constraints": {"$ref": "#/$defs/familyChange"},
+        "states": {"$ref": "#/$defs/familyChange"},
+        "evidenceBindings": {"$ref": "#/$defs/familyChange"},
+        "reasoningBoundaries": {"$ref": "#/$defs/familyChange"},
+        "unknowns": {"$ref": "#/$defs/familyChange"},
+        "actions": {"$ref": "#/$defs/familyChange"},
+        "outcomes": {"$ref": "#/$defs/familyChange"}
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["addedCount", "removedCount", "replacedCount", "unchangedCount", "changedFamilies"],
+      "properties": {
+        "addedCount": {"type": "integer", "minimum": 0},
+        "removedCount": {"type": "integer", "minimum": 0},
+        "replacedCount": {"type": "integer", "minimum": 0},
+        "unchangedCount": {"type": "integer", "minimum": 0},
+        "changedFamilies": {
+          "type": "array", "uniqueItems": true,
+          "items": {
+            "enum": [
+              "entities", "events", "signals", "relationships", "constraints", "states",
+              "evidenceBindings", "reasoningBoundaries", "unknowns", "actions", "outcomes"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

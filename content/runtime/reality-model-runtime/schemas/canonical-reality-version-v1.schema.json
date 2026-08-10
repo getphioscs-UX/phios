@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rmo/canonical-reality-version-v1.schema.json",
+  "title": "PHI OS Canonical Reality Version v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "realityCode", "realityVersion", "realityVersionSequence",
+    "dataDomain", "dataType", "realityStatus", "subjectReference", "sourceInitialization",
+    "governanceReferences", "componentReferences", "componentVersionReferences",
+    "componentSnapshotDigest", "unknownResolution", "authorityBoundary", "operationalMode",
+    "persistentStoreWriteAllowed", "productionExecutionAllowed", "createdAt", "updatedAt",
+    "lineage", "realityDigest"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CANONICAL-REALITY-VERSION-v1.0.0"},
+    "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+    "realityVersion": {"$ref": "#/$defs/semver"},
+    "realityVersionSequence": {"type": "integer", "minimum": 2},
+    "dataDomain": {"const": "RUNTIME_STATE"},
+    "dataType": {"const": "RUNTIME_STATE_RECORD"},
+    "realityStatus": {"const": "VERSIONED"},
+    "subjectReference": {"type": "string", "minLength": 1, "maxLength": 200},
+    "sourceInitialization": {"type": "object"},
+    "governanceReferences": {"type": "object"},
+    "componentReferences": {"$ref": "#/$defs/componentReferenceGroups"},
+    "componentVersionReferences": {"$ref": "#/$defs/componentVersionReferenceGroups"},
+    "componentSnapshotDigest": {"$ref": "#/$defs/digest"},
+    "unknownResolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transitionPerformed", "resolvedUnknownReferences", "resolutionEvidenceBindingReferences",
+        "silentResolutionPerformed", "inferenceFilled", "providerOrAiResolutionPerformed"
+      ],
+      "properties": {
+        "transitionPerformed": {"type": "boolean"},
+        "resolvedUnknownReferences": {"$ref": "#/$defs/codeReferenceArray"},
+        "resolutionEvidenceBindingReferences": {"$ref": "#/$defs/codeReferenceArray"},
+        "silentResolutionPerformed": {"const": false},
+        "inferenceFilled": {"const": false},
+        "providerOrAiResolutionPerformed": {"const": false}
+      }
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inputAuthority", "realityModelAuthority", "dataGovernanceAuthority", "operationalRuntimeAuthority"],
+      "properties": {
+        "inputAuthority": {"const": "ICR"},
+        "realityModelAuthority": {"const": "RMO"},
+        "dataGovernanceAuthority": {"const": "RDG"},
+        "operationalRuntimeAuthority": {"const": "EXISTING_RUNTIME"}
+      }
+    },
+    "operationalMode": {"const": "VALIDATION_ONLY"},
+    "persistentStoreWriteAllowed": {"const": false},
+    "productionExecutionAllowed": {"const": false},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"},
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rootRealityReference", "previousRealityVersion", "previousRealityDigest",
+        "ancestorRealityReferences", "changeType", "changeReferences", "structuralChangeSummary"
+      ],
+      "properties": {
+        "rootRealityReference": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "previousRealityVersion": {"$ref": "#/$defs/semver"},
+        "previousRealityDigest": {"$ref": "#/$defs/digest"},
+        "ancestorRealityReferences": {
+          "type": "array", "minItems": 1, "items": {"$ref": "#/$defs/realityVersionReference"}
+        },
+        "changeType": {
+          "enum": [
+            "COMPONENTS_INCORPORATED", "LIFECYCLE_ADVANCED", "COMPONENTS_REVISED",
+            "UNKNOWN_RESOLUTION_RECORDED", "CORRECTION_RECORDED"
+          ]
+        },
+        "changeReferences": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 200}
+        },
+        "structuralChangeSummary": {"$ref": "#/$defs/summary"}
+      }
+    },
+    "realityDigest": {"$ref": "#/$defs/digest"}
+  },
+  "$defs": {
+    "semver": {"type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"},
+    "digest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "codeReferenceArray": {
+      "type": "array", "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 200}
+    },
+    "realitySourceReference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "realityVersionReference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["realityCode", "realityVersion", "realityVersionSequence", "realityDigest"],
+      "properties": {
+        "realityCode": {"type": "string", "pattern": "^RMO-REALITY-[A-Z0-9-]{4,100}$"},
+        "realityVersion": {"$ref": "#/$defs/semver"},
+        "realityVersionSequence": {"type": "integer", "minimum": 1},
+        "realityDigest": {"$ref": "#/$defs/digest"}
+      }
+    },
+    "componentVersionReference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["componentCode", "componentVersion", "componentDigest", "sourceRealityReference"],
+      "properties": {
+        "componentCode": {"type": "string", "minLength": 1, "maxLength": 200},
+        "componentVersion": {"$ref": "#/$defs/semver"},
+        "componentDigest": {"$ref": "#/$defs/digest"},
+        "sourceRealityReference": {"$ref": "#/$defs/realitySourceReference"}
+      }
+    },
+    "componentVersionReferenceArray": {
+      "type": "array", "items": {"$ref": "#/$defs/componentVersionReference"}
+    },
+    "componentReferenceGroups": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "entities", "events", "signals", "relationships", "constraints", "states",
+        "evidenceBindings", "reasoningBoundaries", "unknowns", "actions", "outcomes"
+      ],
+      "properties": {
+        "entities": {"$ref": "#/$defs/codeReferenceArray"},
+        "events": {"$ref": "#/$defs/codeReferenceArray"},
+        "signals": {"$ref": "#/$defs/codeReferenceArray"},
+        "relationships": {"$ref": "#/$defs/codeReferenceArray"},
+        "constraints": {"$ref": "#/$defs/codeReferenceArray"},
+        "states": {"$ref": "#/$defs/codeReferenceArray"},
+        "evidenceBindings": {"$ref": "#/$defs/codeReferenceArray"},
+        "reasoningBoundaries": {"$ref": "#/$defs/codeReferenceArray"},
+        "unknowns": {"$ref": "#/$defs/codeReferenceArray"},
+        "actions": {"$ref": "#/$defs/codeReferenceArray"},
+        "outcomes": {"$ref": "#/$defs/codeReferenceArray"}
+      }
+    },
+    "componentVersionReferenceGroups": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "entities", "events", "signals", "relationships", "constraints", "states",
+        "evidenceBindings", "reasoningBoundaries", "unknowns", "actions", "outcomes"
+      ],
+      "properties": {
+        "entities": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "events": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "signals": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "relationships": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "constraints": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "states": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "evidenceBindings": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "reasoningBoundaries": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "unknowns": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "actions": {"$ref": "#/$defs/componentVersionReferenceArray"},
+        "outcomes": {"$ref": "#/$defs/componentVersionReferenceArray"}
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["addedCount", "removedCount", "replacedCount", "unchangedCount", "changedFamilies"],
+      "properties": {
+        "addedCount": {"type": "integer", "minimum": 0},
+        "removedCount": {"type": "integer", "minimum": 0},
+        "replacedCount": {"type": "integer", "minimum": 0},
+        "unchangedCount": {"type": "integer", "minimum": 0},
+        "changedFamilies": {
+          "type": "array", "uniqueItems": true,
+          "items": {
+            "enum": [
+              "entities", "events", "signals", "relationships", "constraints", "states",
+              "evidenceBindings", "reasoningBoundaries", "unknowns", "actions", "outcomes"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

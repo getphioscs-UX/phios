@@ -1,0 +1,33 @@
+{
+  "contractCode": "PHI-OS-RMO-W14-REALITY-DIFF-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W14",
+  "status": "diff_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "componentType": "REALITY_DIFF",
+  "dataType": "RUNTIME_STATE_RECORD",
+  "requestSchemaReference": "content/runtime/reality-model-runtime/schemas/reality-diff-request-v1.schema.json",
+  "diffSchemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-diff-v1.schema.json",
+  "authorityBoundary": {
+    "rmoOwns": ["deterministic structural Reality comparison", "Reality Diff identity and lineage"],
+    "rdgOwns": ["data governance", "persistence", "consent", "retention", "deletion"],
+    "prOwns": ["Professional Judgment", "causality and professional outcome decisions"],
+    "rreOwns": ["Evidence evaluation and acceptance"]
+  },
+  "rules": {
+    "sameRealityIdentityRequired": true,
+    "orderedAncestorLineageRequired": true,
+    "exactComponentReferencesCompared": true,
+    "addedRemovedReplacedUnchangedRemainDistinct": true,
+    "diffIsDeterministicAuditData": true,
+    "diffInterpretsMeaning": false,
+    "diffDiagnosesReality": false,
+    "diffClaimsCausality": false,
+    "diffDeterminesSuccessOrEffectiveness": false,
+    "diffCreatesProfessionalJudgment": false,
+    "diffPromotesEvidence": false,
+    "providerOrAiMayGrantDiffAuthority": false,
+    "persistentStoreActivated": false
+  }
+}
