@@ -1,0 +1,49 @@
+{
+  "contractCode": "PHI-OS-RMO-W1-CANONICAL-REALITY-OBJECT-v1",
+  "contractVersion": "1.0.0",
+  "work": "RMO-W1",
+  "status": "foundation_complete",
+  "productionStatus": "validation_only",
+  "runtimeCode": "RMO",
+  "objectType": "CANONICAL_REALITY_SNAPSHOT",
+  "dataDomain": "RUNTIME_STATE",
+  "dataType": "RUNTIME_STATE_RECORD",
+  "schemaReference": "content/runtime/reality-model-runtime/schemas/canonical-reality-v1.schema.json",
+  "inputs": [
+    "ICR Reality Initialization Request",
+    "Referenced immutable Canonical Case",
+    "Explicit RMO validation acceptance"
+  ],
+  "output": "Immutable Reality v1 root snapshot",
+  "authorityBoundary": {
+    "icrOwns": ["Canonical Case", "Reality Initialization Request"],
+    "rmoOwns": ["Reality identity", "Reality root snapshot", "Reality component model"],
+    "rdgOwns": ["Data governance", "Evidence eligibility", "Persistence", "Consent", "Retention", "Deletion"],
+    "existingRuntimeOwns": ["Operational journey execution", "Operational timeline", "Persistence adapters"]
+  },
+  "componentFamilies": [
+    "ENTITY",
+    "EVENT",
+    "SIGNAL",
+    "RELATIONSHIP",
+    "CONSTRAINT",
+    "EVIDENCE_BINDING",
+    "UNKNOWN",
+    "ACTION",
+    "OUTCOME"
+  ],
+  "rules": {
+    "canonicalCaseRequired": true,
+    "initializationRequestRequired": true,
+    "caseAndRequestDigestBindingRequired": true,
+    "realitySnapshotImmutable": true,
+    "realityDigestMustBeDeterministic": true,
+    "realityStoresVerifiedInputPayload": false,
+    "realityStoresEvidencePayload": false,
+    "realityCreationDoesNotPromoteEvidence": true,
+    "realityCreationDoesNotCreateInterpretation": true,
+    "providerOrAiMayCreateRealityAuthority": false,
+    "persistentStoreActivated": false,
+    "productionExecutionActivated": false
+  }
+}
