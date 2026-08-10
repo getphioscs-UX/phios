@@ -1,0 +1,10 @@
+{
+  "contractCode": "PHI-OS-RDG-W19-DATA-SUBJECT-RIGHTS-RUNTIME-v1",
+  "work": "RDG-W19",
+  "status": "active",
+  "rights": ["ACCESS", "RECTIFY", "EXPORT", "RESTRICT_PROCESSING", "OBJECT", "WITHDRAW_CONSENT", "DELETE"],
+  "requestStates": ["RECEIVED", "IDENTITY_VERIFICATION_REQUIRED", "VERIFIED", "IN_REVIEW", "FULFILLED", "PARTIALLY_FULFILLED", "DENIED_WITH_REASON", "CLOSED"],
+  "requirements": ["requestReference", "subjectReference", "rightCode", "scope", "receivedAt", "identityVerificationState", "decisionReason", "auditReference"],
+  "exceptions": ["LEGAL_HOLD", "LEGAL_COMPLIANCE", "SECURITY_INVESTIGATION", "PROFESSIONAL_RECORD_OBLIGATION"],
+  "rules": {"requestDoesNotAutoDelete": true, "denialRequiresReason": true, "identityMustBeVerifiedBeforeDisclosure": true, "withdrawalAffectsFutureProcessing": true, "rightsRequestMayNotEraseAuditProof": true}
+}

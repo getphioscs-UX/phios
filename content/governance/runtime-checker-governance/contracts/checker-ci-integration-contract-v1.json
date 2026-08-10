@@ -1,0 +1,10 @@
+{
+  "contractCode": "PHI-OS-RG-W13-CI-INTEGRATION-v1",
+  "work": "RG-W13",
+  "status": "active",
+  "mandatoryIntegrityEntry": "npm run check:runtime:integrity",
+  "fullRegressionEntry": "npm run check:runtime:all",
+  "npmCheckLifecycle": "postcheck",
+  "mandatoryIntegrityChecks": ["identity_uniqueness", "alias_resolution", "implementation_presence", "implementation_digest", "package_script_alignment", "group_integrity", "no_mutation"],
+  "rules": {"fullRegressionMayDeduplicateSharedImplementation": true, "ciMayRepairRegistry": false, "ciMayUpdateDigest": false, "ciMayPromoteState": false}
+}

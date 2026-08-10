@@ -1,0 +1,10 @@
+{
+  "contractCode": "PHI-OS-RDG-W20-DELETION-TOMBSTONE-RUNTIME-v1",
+  "work": "RDG-W20",
+  "status": "active",
+  "states": ["ACTIVE", "DELETION_REQUESTED", "DELETION_ELIGIBILITY_REVIEW", "BLOCKED_LEGAL_HOLD", "TOMBSTONED", "DELETED", "ANONYMIZED"],
+  "decisions": ["DELETE", "ANONYMIZE", "TOMBSTONE_AND_DELETE", "BLOCK_LEGAL_HOLD", "REVIEW_REQUIRED", "DENY"],
+  "tombstoneFields": ["tombstoneCode", "dataReference", "subjectReferenceHash", "deletionReasonCode", "authorityReference", "deletedAt", "lineageReferences", "retentionProofReference"],
+  "forbiddenTombstoneFields": ["value", "rawPayload", "professionalNotes", "authenticationSecret"],
+  "rules": {"hardDeleteWithoutEligibilityForbidden": true, "legalHoldMustBlockDeletion": true, "tombstoneMustNotRetainPayload": true, "lineageBreakageForbidden": true, "deletionDoesNotRewriteHistoricalAudit": true, "providerMayDeleteByItself": false}
+}

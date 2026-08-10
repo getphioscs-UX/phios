@@ -1,0 +1,23 @@
+{
+  "registryCode": "PHI-OS-RG-W9-CHECKER-GROUP-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RG-W9",
+  "status": "canonical",
+  "groups": [
+    {"groupCode": "CMR", "runtimeCodes": ["CMR"]},
+    {"groupCode": "HDR", "runtimeCodes": ["HDR"]},
+    {"groupCode": "AST", "runtimeCodes": ["AST"]},
+    {"groupCode": "BZR", "runtimeCodes": ["BZR"]},
+    {"groupCode": "NUM", "runtimeCodes": ["NUM"]},
+    {"groupCode": "CAR", "runtimeCodes": ["CAR"]},
+    {"groupCode": "KAU", "runtimeCodes": ["KAU"]},
+    {"groupCode": "METHOD", "runtimeCodes": ["HDR", "AST", "BZR", "NUM"]},
+    {"groupCode": "ALL_REGISTERED", "runtimeCodes": ["CMR", "HDR", "AST", "BZR", "NUM", "CAR", "KAU"]}
+  ],
+  "rules": {
+    "sharedImplementationMustExecuteOnce": true,
+    "groupMembershipDoesNotGrantRuntimeAuthority": true,
+    "unknownGroupFailsClosed": true,
+    "emptyGroupFailsClosed": true
+  }
+}
