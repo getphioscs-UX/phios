@@ -1,0 +1,69 @@
+{
+  "reportCode": "PHI-OS-RG-W0-RUNTIME-CHECKER-GAP-REPORT-v1",
+  "reportVersion": "1.0.0",
+  "work": "RG-W0",
+  "status": "audit",
+  "baselineCommit": "c6ff0a9d0481cafeb57f6c3248b6377d78444859",
+  "missingPackageTargets": [
+    {
+      "npmAlias": "check:ast-w4a",
+      "command": "node scripts/check-ast-w4a-aspect-governance.mjs",
+      "implementationFile": "scripts/check-ast-w4a-aspect-governance.mjs"
+    },
+    {
+      "npmAlias": "check:car-w15",
+      "command": "node scripts/check-car-w15-surface-projection.mjs",
+      "implementationFile": "scripts/check-car-w15-surface-projection.mjs"
+    },
+    {
+      "npmAlias": "check:car-w16",
+      "command": "node scripts/check-car-w16-quality-drift.mjs",
+      "implementationFile": "scripts/check-car-w16-quality-drift.mjs"
+    },
+    {
+      "npmAlias": "check:car-w17",
+      "command": "node scripts/check-car-w17-pds-integration.mjs",
+      "implementationFile": "scripts/check-car-w17-pds-integration.mjs"
+    },
+    {
+      "npmAlias": "check:car-w18",
+      "command": "node scripts/check-car-w18-full-acceptance-freeze.mjs",
+      "implementationFile": "scripts/check-car-w18-full-acceptance-freeze.mjs"
+    },
+    {
+      "npmAlias": "check:cm-w14",
+      "command": "node scripts/check-cmr-w14-meaning-projection-for-journey.mjs",
+      "implementationFile": "scripts/check-cmr-w14-meaning-projection-for-journey.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-v1.2",
+      "command": "node scripts/check-knr-w2r1-v1-2.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-v1-2.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-v1.2.1",
+      "command": "node scripts/check-knr-w2r1-v1-2-1.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-v1-2-1.mjs"
+    },
+    {
+      "npmAlias": "check:knr-w2r1-v1.3",
+      "command": "node scripts/check-knr-w2r1-v1-3.mjs",
+      "implementationFile": "scripts/check-knr-w2r1-v1-3.mjs"
+    }
+  ],
+  "danglingLegacyAliasTargets": [],
+  "notYetGovernedRuntimes": [
+    "HDR",
+    "AST",
+    "BZR",
+    "NUM",
+    "CAR",
+    "KAU",
+    "KPP",
+    "CPR",
+    "CMW",
+    "RDG"
+  ],
+  "interpretation": "W0 reports current baseline only. Registration of runtime families belongs to later RG work and must not be inferred from filename patterns.",
+  "mutationPerformed": false
+}

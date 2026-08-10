@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-car-handoff-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "handoffCode",
+    "primaryNode",
+    "supportingNodes",
+    "productionRole",
+    "targetAssetTypes",
+    "productionPlanCode",
+    "locale",
+    "readinessState",
+    "authorityMode"
+  ],
+  "properties": {
+    "handoffCode": {
+      "type": "string",
+      "pattern": "^KPP-CAR-"
+    },
+    "primaryNode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "supportingNodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^KN-"
+      },
+      "uniqueItems": true
+    },
+    "productionRole": {
+      "enum": [
+        "FIGURE",
+        "DIAGRAM",
+        "MULTI_ASSET",
+        "ACADEMY"
+      ]
+    },
+    "targetAssetTypes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "FIGURE",
+          "DIAGRAM",
+          "ACADEMY_LESSON",
+          "SLIDES",
+          "QUIZ",
+          "VIDEO_SCRIPT",
+          "SHORT_VIDEO_SCRIPT",
+          "AUDIO_SCRIPT",
+          "PODCAST_SCRIPT",
+          "WEBSITE_MODULE",
+          "ILLUSTRATION_PROMPT",
+          "ICON_PROMPT",
+          "HERO_IMAGE_PROMPT",
+          "THUMBNAIL_PROMPT"
+        ]
+      }
+    },
+    "productionPlanCode": {
+      "type": "string",
+      "pattern": "^KPP-PLAN-"
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "readinessState": {
+      "enum": [
+        "ready_for_car",
+        "blocked",
+        "deferred"
+      ]
+    },
+    "authorityMode": {
+      "const": "asset_brief_handoff_only"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kpp-visual-eligibility-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "primaryNode",
+    "supportingNodes",
+    "targetRole",
+    "knowledgeCoverageSufficient",
+    "visualStructurePresent",
+    "knowledgeBoundaryStable",
+    "localeSupported",
+    "carAssetTypeRegistered",
+    "status"
+  ],
+  "properties": {
+    "primaryNode": {
+      "type": "string",
+      "pattern": "^KN-"
+    },
+    "supportingNodes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^KN-"
+      },
+      "uniqueItems": true
+    },
+    "targetRole": {
+      "enum": [
+        "FIGURE",
+        "DIAGRAM",
+        "MULTI_ASSET"
+      ]
+    },
+    "knowledgeCoverageSufficient": {
+      "type": "boolean"
+    },
+    "visualStructurePresent": {
+      "type": "boolean"
+    },
+    "knowledgeBoundaryStable": {
+      "type": "boolean"
+    },
+    "localeSupported": {
+      "type": "boolean"
+    },
+    "carAssetTypeRegistered": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "visual_eligible",
+        "visual_not_required",
+        "visual_deferred",
+        "visual_blocked"
+      ]
+    }
+  }
+}

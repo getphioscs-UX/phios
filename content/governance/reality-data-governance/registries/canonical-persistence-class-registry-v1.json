@@ -1,0 +1,27 @@
+{
+  "registryCode": "PHI-OS-RDG-W8-PERSISTENCE-CLASS-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "RDG-W8",
+  "status": "active",
+  "persistenceClasses": [
+    "EPHEMERAL",
+    "SESSION",
+    "RECOVERY",
+    "RUNTIME",
+    "ACCOUNT",
+    "SERVICE_SCOPED",
+    "PROFESSIONAL_SCOPED",
+    "LONG_TERM_MEMORY",
+    "ANONYMIZED_AGGREGATE"
+  ],
+  "examples": {
+    "realityEntryDraft": "SESSION",
+    "crashRecovery": "RECOVERY",
+    "runtimeContinuity": "RUNTIME",
+    "birthChartDefault": "SERVICE_SCOPED"
+  },
+  "rules": {
+    "longTermMemoryIsExplicitNotDefault": true,
+    "professionalScopedDataNotRuntimeMemoryByDefault": true
+  }
+}

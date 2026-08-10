@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-RDG-W9-RETENTION-RUNTIME-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "RDG-W9",
+  "status": "active",
+  "fields": [
+    "retentionCode",
+    "dataDomain",
+    "purposeCode",
+    "persistenceClass",
+    "duration",
+    "retentionTrigger",
+    "expiryBehavior",
+    "deletionRequirement",
+    "anonymizationEligibility",
+    "legalHoldOverride"
+  ],
+  "expiryBehaviors": [
+    "DELETE",
+    "ANONYMIZE",
+    "ARCHIVE_IF_AUTHORIZED",
+    "REVIEW_REQUIRED"
+  ],
+  "rules": {
+    "retentionMustBePurposeBound": true,
+    "silentIndefiniteRetentionForbidden": true,
+    "legalHoldOverrideMustBeExplicit": true
+  }
+}

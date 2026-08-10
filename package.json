@@ -496,6 +496,9 @@
     "check:kpp-w0-w12": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
     "check:kpp-w0": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
     "check:kpp-w1-w12": "node scripts/check-kpp-w0-w12-production-planning-foundation.mjs",
+    "check:kpp-w13-w20": "node scripts/check-kpp-w13-w20-handoff-governance.mjs",
+    "check:kpp-w13": "node scripts/check-kpp-w13-w20-handoff-governance.mjs",
+    "check:kpp-w14-w20": "node scripts/check-kpp-w13-w20-handoff-governance.mjs",
     "check:cpr-w7-w18": "node scripts/check-cpr-w7-w18-presentation-objects.mjs",
     "check:cpr-w19-w29": "node scripts/check-cpr-w19-w29-composition-surfaces.mjs",
     "check:cpr-w30": "node scripts/check-cpr-w30-full-freeze.mjs",
@@ -509,7 +512,14 @@
     "check:cmw-w3": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
     "check:cmw-w4": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
     "check:cmw-w5": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
-    "check:cmw-w6": "node scripts/check-cmw-w0-w6-master-work-governance.mjs"
+    "check:cmw-w6": "node scripts/check-cmw-w0-w6-master-work-governance.mjs",
+    "check:rg-w0-w2": "node scripts/check-rg-w0-w2-checker-governance-foundation.mjs",
+    "check:rg-foundation": "npm run check:rg-w0-w2",
+    "check:rdg-w0-w10": "node scripts/check-rdg-w0-w10-foundation.mjs",
+    "check:rdg-foundation": "npm run check:rdg-w0-w10",
+    "check:kau-e0": "node scripts/check-kau-e0-legacy-supporting-source-governance.mjs",
+    "check:governance-foundation": "npm run check:rg-foundation && npm run check:rdg-foundation && npm run check:kau-e0 && node scripts/check-rg-rdg-foundation-kau-e0-freeze.mjs"
+  
   },
   "type": "module"
 }
