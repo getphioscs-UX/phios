@@ -1,0 +1,77 @@
+{
+  "freezeCode": "PHI-OS-ICR-W0-W9-FREEZE-v1",
+  "freezeVersion": "1.0.0",
+  "runtimeCode": "ICR",
+  "status": "ICR-v1.0.0-FROZEN",
+  "baselineCommit": "1e99186e5bc5fafa705f61cc15ef57370bec07e9",
+  "completedWork": [
+    "ICR-W0",
+    "ICR-W1",
+    "ICR-W2",
+    "ICR-W3",
+    "ICR-W4",
+    "ICR-W5",
+    "ICR-W6",
+    "ICR-W7",
+    "ICR-W8",
+    "ICR-W9"
+  ],
+  "previousFreezeReference": "content/runtime/input-case-runtime/freeze/icr-w0-w4-input-foundation-freeze-v1.json",
+  "bytePreservationManifest": "content/runtime/input-case-runtime/freeze/icr-w0-w4-byte-preservation-manifest-v1.json",
+  "authorityInterpretation": {
+    "icr": "Canonical Input, Verified Input decision, Method Input projection, Canonical Case and RMO initialization request",
+    "sharedDataAuthority": "Verified shared facts",
+    "rdg": "Persistence, consent, retention and deletion",
+    "rmo": "Reality v1 and Reality state"
+  },
+  "closedBoundaries": {
+    "canonicalCaseIsReality": false,
+    "canonicalCaseIsRuntimeState": false,
+    "icrCreatesRealityV1": false,
+    "icrWritesRuntimeStateRecord": false,
+    "icrOwnsPrivacyOrRetention": false,
+    "methodReadsCustomerDatabase": false,
+    "caseStoresVerifiedInputPayload": false,
+    "caseVersionMutatesPreviousSnapshot": false
+  },
+  "nonActivation": {
+    "persistentCaseStoreActivated": false,
+    "databaseMigrationCreated": false,
+    "customerDatabaseAdapterCreated": false,
+    "rmoRuntimeImplemented": false,
+    "rmoProductionExecutionActivated": false,
+    "realityObjectCreated": false,
+    "providerOrAiAuthorityActivated": false,
+    "userDataCreated": false
+  },
+  "deliveryBoundary": {
+    "packageJsonModified": false,
+    "packageWiringProvidedForManualEntry": true,
+    "manualWiringReference": "docs/runtime/ICR-W5-W9-PACKAGE-MANUAL-WIRING.md"
+  },
+  "frozenOutputs": [
+    "content/runtime/input-case-runtime/audits/icr-case-runtime-authority-audit-v1.json",
+    "content/runtime/input-case-runtime/contracts/canonical-case-runtime-v1.json",
+    "content/runtime/input-case-runtime/contracts/icr-rdg-integration-v1.json",
+    "content/runtime/input-case-runtime/contracts/canonical-reality-initialization-handoff-v1.json",
+    "content/runtime/input-case-runtime/contracts/case-versioning-contract-v1.json",
+    "content/runtime/input-case-runtime/contracts/icr-w0-w9-acceptance-contract-v1.json",
+    "content/runtime/input-case-runtime/registries/case-state-transition-registry-v1.json",
+    "content/runtime/input-case-runtime/registries/icr-rdg-reference-registry-v1.json",
+    "content/runtime/input-case-runtime/schemas/canonical-case-v1.schema.json",
+    "content/runtime/input-case-runtime/schemas/icr-rdg-lifecycle-reference-v1.schema.json",
+    "content/runtime/input-case-runtime/schemas/reality-initialization-request-v1.schema.json",
+    "content/runtime/input-case-runtime/schemas/case-version-request-v1.schema.json",
+    "content/runtime/input-case-runtime/fixtures/canonical-case.request.valid.json",
+    "content/runtime/input-case-runtime/fixtures/reality-initialization.request.valid.json",
+    "content/runtime/input-case-runtime/fixtures/case-revision.request.valid.json",
+    "content/runtime/input-case-runtime/freeze/icr-w0-w4-byte-preservation-manifest-v1.json",
+    "scripts/lib/input-case-runtime/icr-case-runtime-v1.mjs",
+    "scripts/check-icr-w5-w9-canonical-case-runtime.mjs",
+    "docs/runtime/ICR-W5-W9-CANONICAL-CASE-RUNTIME.md",
+    "docs/runtime/ICR-W5-W9-PACKAGE-MANUAL-WIRING.md"
+  ],
+  "nextRuntime": "RMO",
+  "nextWork": "RMO-W0",
+  "nextWorkName": "Reality Model Audit"
+}

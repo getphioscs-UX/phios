@@ -12,7 +12,11 @@ import {
 const root = process.cwd();
 const base = 'content/academy/academy-learning-runtime';
 const read = async file => JSON.parse(await fs.readFile(path.join(root, file), 'utf8'));
-const digest = async file => crypto.createHash('sha256').update(await fs.readFile(path.join(root, file))).digest('hex');
+const normalizeText = source => source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+const digest = async file => crypto
+  .createHash('sha256')
+  .update(normalizeText(await fs.readFile(path.join(root, file), 'utf8')), 'utf8')
+  .digest('hex');
 
 const audit = await read(`${base}/audits/alr-foundation-audit-v1.json`);
 assert.equal(audit.baselineCommit, 'd5266251b43fc1497ab60959203c7a21b129acdf');

@@ -1,0 +1,48 @@
+{
+  "registryCode": "PHI-OS-ICR-W5-CASE-STATE-TRANSITION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "ICR-W5",
+  "status": "canonical_contract_registry",
+  "states": [
+    {
+      "state": "DRAFT",
+      "terminal": false,
+      "rmoHandoffEligible": false,
+      "allowedNextStates": ["VERIFICATION_PENDING", "CLOSED"]
+    },
+    {
+      "state": "VERIFICATION_PENDING",
+      "terminal": false,
+      "rmoHandoffEligible": false,
+      "allowedNextStates": ["READY_FOR_RMO", "CLOSED"]
+    },
+    {
+      "state": "READY_FOR_RMO",
+      "terminal": false,
+      "rmoHandoffEligible": true,
+      "allowedNextStates": ["READY_FOR_RMO", "HANDED_OFF_TO_RMO", "CLOSED"]
+    },
+    {
+      "state": "HANDED_OFF_TO_RMO",
+      "terminal": false,
+      "rmoHandoffEligible": false,
+      "allowedNextStates": ["READY_FOR_RMO", "CLOSED"]
+    },
+    {
+      "state": "CLOSED",
+      "terminal": true,
+      "rmoHandoffEligible": false,
+      "allowedNextStates": []
+    }
+  ],
+  "initialSnapshotState": "READY_FOR_RMO",
+  "instances": [],
+  "rules": {
+    "registryStoresCaseInstances": false,
+    "unknownStateFailsClosed": true,
+    "unknownTransitionFailsClosed": true,
+    "terminalStateCannotTransition": true,
+    "stateDoesNotGrantPersistence": true,
+    "stateDoesNotCreateReality": true
+  }
+}

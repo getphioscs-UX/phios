@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/icr/icr-rdg-lifecycle-reference-v1.schema.json",
+  "title": "PHI OS ICR RDG Lifecycle Reference v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "mode",
+    "rdgAuthorityReference",
+    "persistenceClass",
+    "persistenceDecisionReference",
+    "persistenceRegistryReference",
+    "persistenceEligibilityGateReference",
+    "consentClass",
+    "consentReference",
+    "consentRegistryReference",
+    "retentionClass",
+    "retentionRegistryReference",
+    "deletionState",
+    "deletionRuntimeReference"
+  ],
+  "properties": {
+    "mode": {"const": "RDG_REFERENCE_ONLY"},
+    "rdgAuthorityReference": {
+      "const": "content/governance/reality-data-governance/registries/reality-data-registry-v1.json"
+    },
+    "persistenceClass": {"type": "string", "minLength": 1},
+    "persistenceDecisionReference": {
+      "type": "string",
+      "pattern": "^RDG-PERSISTENCE-DECISION-[A-Z0-9-]{4,100}$"
+    },
+    "persistenceRegistryReference": {
+      "const": "content/governance/reality-data-governance/registries/canonical-persistence-class-registry-v1.json"
+    },
+    "persistenceEligibilityGateReference": {
+      "const": "content/governance/reality-data-governance/contracts/persistence-eligibility-gate-v1.json"
+    },
+    "consentClass": {"type": "string", "minLength": 1},
+    "consentReference": {"type": "string", "minLength": 1},
+    "consentRegistryReference": {
+      "const": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json"
+    },
+    "retentionClass": {"type": "string", "minLength": 1},
+    "retentionRegistryReference": {
+      "const": "content/governance/reality-data-governance/registries/canonical-data-retention-registry-v1.json"
+    },
+    "deletionState": {"type": "string", "minLength": 1},
+    "deletionRuntimeReference": {
+      "const": "content/governance/reality-data-governance/contracts/deletion-tombstone-runtime-v1.json"
+    }
+  }
+}
