@@ -1,0 +1,57 @@
+{
+  "reconciliationCode": "PHI-OS-ALR-POST-FREEZE-CHECKER-RECONCILIATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "status": "ACCEPTED_SUCCESSOR_RECONCILIATION",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "purpose": "Accept narrowly scoped post-freeze checker successors after removal of stale cross-runtime postcheck tail ownership assertions without reopening ALR runtime semantics, authority, registries, or freeze.",
+  "frozenAliasRegistry": "content/academy/academy-learning-runtime/registries/alr-checker-alias-registry-v1.json",
+  "frozenAliasRegistryRewritten": false,
+  "alrFreezeRewritten": false,
+  "authorityExpansionGranted": false,
+  "entries": [
+    {
+      "implementationFile": "scripts/check-alr-w33-w35-access.mjs",
+      "affectedWorks": [
+        "ALR-W33",
+        "ALR-W34",
+        "ALR-W35"
+      ],
+      "frozenDigest": "f2992f64f4d723b3c3c0da760dc8dddd738a4928f7b7db1985079b5a3cfc1c8d",
+      "successorDigest": "d38c77ffdcc60f97d5b292ae8fcb2c4e953f7dde01d961c234eb93fbe81324c4",
+      "changeScope": "REMOVE_STALE_CROSS_RUNTIME_POSTCHECK_VAP_TAIL_ASSERTION_ONLY",
+      "runtimeSemanticAuthorityChanged": false,
+      "academyAccessSemanticsChanged": false,
+      "entitlementAuthorityChanged": false,
+      "professionalBoundaryChanged": false,
+      "authorityExpansionGranted": false
+    },
+    {
+      "implementationFile": "scripts/check-alr-w42-w46-governance-production-freeze.mjs",
+      "affectedWorks": [
+        "ALR-W42",
+        "ALR-W43",
+        "ALR-W44",
+        "ALR-W45",
+        "ALR-W46"
+      ],
+      "frozenDigest": "820507dedaf75f7c1f46f4de092ce344943d240d0beecc48fb66a6a2d2104144",
+      "successorDigest": "2e6e1a430de88303acabf6b0da3e915b57a7fdb7e7cba7f5475be59c08407e4d",
+      "changeScope": "ADD_POST_FREEZE_CHECKER_SUCCESSOR_RECONCILIATION_AND_REMOVE_STALE_CROSS_RUNTIME_POSTCHECK_VAP_TAIL_ASSERTION",
+      "runtimeSemanticAuthorityChanged": false,
+      "alrGovernanceSemanticsChanged": false,
+      "freezeDecisionChanged": false,
+      "authorityExpansionGranted": false
+    }
+  ],
+  "rules": {
+    "frozenAliasRegistryDigestValuesRemainHistoricalAuthority": true,
+    "successorDigestMustMatchExactFileContent": true,
+    "onlyListedImplementationFilesMayUseSuccessorDigest": true,
+    "unlistedCheckerDigestDriftFailsClosed": true,
+    "futureSuccessorChangeRequiresNewVersionedReconciliation": true,
+    "alrDoesNotOwnFuturePostcheckTail": true,
+    "vapRuntimeAuthorityUnchanged": true,
+    "rreRuntimeAuthorityUnchanged": true,
+    "mpaRuntimeAuthorityUnchanged": true
+  }
+}

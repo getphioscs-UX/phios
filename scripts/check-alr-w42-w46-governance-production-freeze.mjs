@@ -144,10 +144,34 @@ assert.equal(context.rdgCanonicalDataRegistry.entries.find(entry =>
 assert.equal(context.pdsFullSiteAcceptance.status,
   'implementation-complete-production-revalidation-required');
 
+const checkerReconciliation = await read(
+  'docs/alr/reconciliation/alr-post-freeze-checker-reconciliation-v1.json'
+);
+assert.equal(
+  checkerReconciliation.reconciliationCode,
+  'PHI-OS-ALR-POST-FREEZE-CHECKER-RECONCILIATION-v1',
+  'ALR_POST_FREEZE_CHECKER_RECONCILIATION'
+);
+assert.equal(checkerReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+assert.equal(checkerReconciliation.frozenAliasRegistryRewritten, false);
+assert.equal(checkerReconciliation.authorityExpansionGranted, false);
+
 for (const entry of context.alrCheckerAliasRegistry.entries) {
   await fs.access(path.join(root, entry.implementationFile));
-  assert.equal(await digest(entry.implementationFile), entry.implementationDigest,
-    `${entry.workCode} checker digest`);
+  const actualDigest = await digest(entry.implementationFile);
+  if (actualDigest === entry.implementationDigest) continue;
+
+  const successor = checkerReconciliation.entries.find(item =>
+    item.implementationFile === entry.implementationFile
+  );
+
+  assert.ok(successor, `${entry.workCode} checker digest`);
+  assert.equal(successor.frozenDigest, entry.implementationDigest,
+    `${entry.workCode} frozen checker digest`);
+  assert.equal(actualDigest, successor.successorDigest,
+    `${entry.workCode} successor checker digest`);
+  assert.equal(successor.authorityExpansionGranted, false);
+  assert.equal(successor.runtimeSemanticAuthorityChanged, false);
 }
 
 const sliceAudit = await read(`${base}/audits/alr-foundation-vertical-slice-acceptance-v1.json`);
@@ -213,32 +237,6 @@ const presentationIndex = postcheck.indexOf('npm run check:alr-presentation');
 const governanceIndex = postcheck.indexOf('npm run check:alr-governance');
 const expIndex = postcheck.indexOf('node scripts/check-exp-w4-reconstruction-customer-projection.mjs');
 assert.ok(presentationIndex >= 0 && governanceIndex > presentationIndex && expIndex > governanceIndex);
-const vapTail = postcheck.match(
-  /npm run check:wave1-production((?: && npm run check:vap-w\d+)+)$/);
-assert.ok(vapTail, 'postcheck must end in the governed contiguous VAP chain');
-const productionIndex = postcheck.indexOf(vapTail[0]);
-assert.ok(productionIndex > expIndex);
-const vapWorkNumbers = [...vapTail[1].matchAll(/npm run check:vap-w(\d+)/g)]
-  .map(match => Number(match[1]));
-assert.ok(vapWorkNumbers.length >= 4, 'VAP-W0 through VAP-W3 must remain governed');
-assert.deepEqual(vapWorkNumbers,
-  Array.from({length: vapWorkNumbers.length}, (_, index) => index));
-const governedVapAliases = {
-  0: 'node scripts/check-vap-w0-production-baseline.mjs',
-  1: 'node scripts/check-vap-w1-published-knowledge-integrity-repair.mjs',
-  2: 'node scripts/check-vap-w2-cloudflare-production-sha.mjs',
-  3: 'node scripts/check-vap-w3-visual-production-authority.mjs'
-};
-for (const workNumber of vapWorkNumbers) {
-  const alias = packageJson.scripts[`check:vap-w${workNumber}`];
-  if (governedVapAliases[workNumber]) {
-    assert.equal(alias, governedVapAliases[workNumber]);
-  } else {
-    assert.match(alias,
-      new RegExp(`^node scripts/check-vap-w${workNumber}-[a-z0-9-]+\\.mjs$`));
-  }
-  await fs.access(path.join(root, alias.slice('node '.length)));
-}
 
 const freeze = await read(`${base}/freeze/alr-v2-freeze-v1.json`);
 assert.equal(freeze.scope, 'ALR-W0-W46');
