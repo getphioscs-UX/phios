@@ -3,7 +3,7 @@
   "extensionCode": "PJA-PAGE-CAPABILITY-EXTENSION-001",
   "status": "active",
   "extendsFreezeId": "PJA-W0-v1.0.0-Frozen",
-  "reason": "Register post-freeze Public Knowledge Search and Academy Lesson presentation pages without mutating the frozen PJA-W0 contract.",
+  "reason": "Register post-freeze Public Knowledge Search, Academy Lesson presentation and Personal Runtime setup pages without mutating the frozen PJA-W0 contract.",
   "pageCapabilities": [
     {
       "capabilityId": "knowledge-discovery",
@@ -33,6 +33,22 @@
         "ALR + CPR + CAR + Published Knowledge Authority"
       ],
       "activationState": "validation_projection_delivery_inactive",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "personal-runtime-input-readiness",
+      "pages": [
+        "personal-runtime.html"
+      ],
+      "sourceObjects": [
+        "MPA Birth Initialization Data",
+        "MPA Method Activation State",
+        "RDG Consent and Data Purpose"
+      ],
+      "dependencyOwners": [
+        "MPA + RDG + WPR"
+      ],
+      "activationState": "limited_production_input_readiness_no_method_execution",
       "writeAuthority": "none"
     }
   ],
