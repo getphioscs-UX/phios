@@ -1,0 +1,39 @@
+{
+  "contractCode": "PHI-OS-MPA-W27-PRODUCTION-EXECUTION-GATE-v1",
+  "contractVersion": "1.0.0",
+  "work": "MPA-W27",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "ACTIVE_FAIL_CLOSED_PRODUCTION_EXECUTION_GATE",
+  "canonicalFlow": [
+    "FRONTEND",
+    "WPR",
+    "METHOD_EXECUTION_API",
+    "MPA_PRODUCTION_ELIGIBILITY",
+    "METHOD_RUNTIME"
+  ],
+  "canonicalEndpoint": "/api/method-execute",
+  "eligibilityFunction": "isMethodProductionEligible(methodCode, methodVersion, capability)",
+  "executableCapabilities": [
+    "CALCULATION",
+    "PROJECTION"
+  ],
+  "rules": {
+    "everyProductionMethodEndpointMustCallEligibilityFirst": true,
+    "frontendDirectCalculationForbidden": true,
+    "frontendDirectMethodRuntimeForbidden": true,
+    "wprDirectMethodRuntimeForbidden": true,
+    "unknownMethodFailsClosed": true,
+    "unknownVersionFailsClosed": true,
+    "unknownCapabilityFailsClosed": true,
+    "blockedDecisionFailsClosed": true,
+    "conditionallyEligibleFailsClosed": true,
+    "onlyEligibleMayDispatch": true,
+    "validationRegressionAndCheckerExecutionMayCallMethodRuntimeOutsideProductionEndpoint": true,
+    "nonProductionDirectRuntimeUseMustRemainExplicitlyNonProduction": true
+  },
+  "currentActivation": {
+    "eligibleProductionExecutionCount": 0,
+    "productionRuntimeDispatchActivated": false,
+    "reason": "W26 currently contains no unconditional ELIGIBLE capability decision."
+  }
+}

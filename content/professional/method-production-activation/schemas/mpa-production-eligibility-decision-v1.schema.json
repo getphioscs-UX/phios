@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mpa-production-eligibility-decision-v1.schema.json",
+  "title": "MPA Production Eligibility Decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "methodCode",
+    "methodVersion",
+    "capability",
+    "validation",
+    "regression",
+    "license",
+    "dataGovernance",
+    "professionalBoundary",
+    "publicVocabulary",
+    "decision",
+    "blockingReasons",
+    "decisionDigest"
+  ],
+  "properties": {
+    "methodCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "methodVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capability": {
+      "enum": [
+        "DATA",
+        "CALCULATION",
+        "PROJECTION",
+        "INTERPRETATION",
+        "PROFESSIONAL",
+        "PUBLIC"
+      ]
+    },
+    "validation": {
+      "$ref": "#/$defs/gate"
+    },
+    "regression": {
+      "$ref": "#/$defs/gate"
+    },
+    "license": {
+      "$ref": "#/$defs/gate"
+    },
+    "dataGovernance": {
+      "$ref": "#/$defs/gate"
+    },
+    "professionalBoundary": {
+      "$ref": "#/$defs/gate"
+    },
+    "publicVocabulary": {
+      "$ref": "#/$defs/gate"
+    },
+    "decision": {
+      "enum": [
+        "ELIGIBLE",
+        "CONDITIONALLY_ELIGIBLE",
+        "BLOCKED"
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "conditionsSatisfied": {
+      "type": "boolean"
+    },
+    "blockingReasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "decisionDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "$defs": {
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "reference",
+        "detail"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PASSED",
+            "CONDITIONAL",
+            "BLOCKED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "ELIGIBLE"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "blockingReasons": {
+            "maxItems": 0
+          },
+          "conditions": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "CONDITIONALLY_ELIGIBLE"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "required": [
+          "conditions",
+          "conditionsSatisfied"
+        ],
+        "properties": {
+          "conditions": {
+            "minItems": 1
+          },
+          "conditionsSatisfied": {
+            "const": false
+          },
+          "blockingReasons": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "BLOCKED"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "properties": {
+          "blockingReasons": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

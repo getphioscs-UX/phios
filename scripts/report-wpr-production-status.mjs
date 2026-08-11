@@ -1,0 +1,11 @@
+import {deriveWprObservation} from './lib/web-production/wpr-observability-v1.mjs';
+const o=deriveWprObservation();
+console.log('PHI OS WPR production status');
+console.log(`repository baseline: ${o.baselineCommit}`);
+console.log(`production records:  ${o.productionRecordCount} (${o.productionStates.join(', ')})`);
+console.log(`routes / surfaces:   ${o.routeEntryCount} / ${o.surfaceEntryCount}`);
+console.log(`last verified deploy:${o.lastVerifiedDeploymentCommit}`);
+console.log(`deployment aligned:  ${o.deploymentMatchesBaseline}`);
+console.log(`public asset base:   ${o.publicAssetBaseUrl ?? 'unverified'}`);
+console.log(`CPR records / CAR publications: ${o.cprProductionRecordCount} / ${o.carPublicationCount}`);
+console.log(o.deploymentMatchesBaseline ? 'deployment state: VERIFIED_FOR_RECORDED_BASELINE' : 'deployment state: REVALIDATION_REQUIRED');
