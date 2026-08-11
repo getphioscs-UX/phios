@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import { BASELINE, readJson } from './lib/method-production-activation/mpa-projection-integration-v1.mjs';
+import { createProjectionFreezeRecord, assertInterpretationBoundary } from '../functions/method-production-activation/projection-integration-runtime.js';
+
+const contract = readJson('content/professional/method-production-activation/contracts/mpa-interpretation-boundary-v1.json');
+const projection = readJson('content/professional/method-production-activation/fixtures/mpa-w17-num-projection-freeze.valid.json');
+assert.equal(contract.work, 'MPA-W18');
+assert.equal(contract.baselineCommit, BASELINE);
+assert.ok(contract.distinctions.every(item => item.equal === false));
+assert.equal(contract.aiBoundary.calculationAuthority, false);
+assert.equal(contract.aiBoundary.projectionAuthority, false);
+assert.equal(contract.aiBoundary.interpretationCandidateAllowedOnlyThroughSharedInterpretationRuntime, true);
+assert.equal(contract.aiBoundary.realityFactAuthority, false);
+assert.equal(contract.aiBoundary.diagnosisAuthority, false);
+const freeze = await createProjectionFreezeRecord({projection, methodVersion:'0.1.0-candidate', calculationPolicyCode:'PHI_OS_NUMERIC_REDUCTION_V1', calculationPolicyVersion:'1.0.0', projectionPolicyCode:'MR-PROJECTION-EXT-NUMERIC-001', projectionPolicyVersion:'1.0.0'});
+const boundary = assertInterpretationBoundary({ projectionFreeze: freeze });
+assert.equal(boundary.projectionIsInterpretation, false);
+assert.equal(boundary.projectionIsRealityFact, false);
+assert.equal(boundary.aiInterpretationCandidateOnly, true);
+const candidate = {schemaVersion:'PHI-OS-CANONICAL-INTERPRETATION-CANDIDATE-v1.0.0', candidateStatus:'candidate'};
+assert.equal(assertInterpretationBoundary({projectionFreeze:freeze, interpretationCandidate:candidate}).interpretationIsProfessionalJudgment, false);
+assert.throws(() => assertInterpretationBoundary({projectionFreeze:freeze, interpretationCandidate:{...candidate, diagnosis:'x'}}), /may not create diagnosis/);
+assert.equal(contract.productionEligibilityChanged, false);
+console.log('✓ MPA-W18 Interpretation Boundary passed.');
+console.log('  Projection ≠ Interpretation ≠ Reality Fact/Diagnosis/Professional Judgment; AI remains candidate-only downstream of Projection.');

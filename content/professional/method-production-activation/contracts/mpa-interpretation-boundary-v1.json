@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-MPA-INTERPRETATION-BOUNDARY-v1.0.0",
+  "work": "MPA-W18",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "validation_only",
+  "distinctions": [
+    {
+      "left": "CANONICAL_PROJECTION",
+      "right": "INTERPRETATION_CANDIDATE",
+      "equal": false
+    },
+    {
+      "left": "CANONICAL_PROJECTION",
+      "right": "REALITY_FACT",
+      "equal": false
+    },
+    {
+      "left": "INTERPRETATION_CANDIDATE",
+      "right": "REALITY_FACT",
+      "equal": false
+    },
+    {
+      "left": "INTERPRETATION_CANDIDATE",
+      "right": "DIAGNOSIS",
+      "equal": false
+    },
+    {
+      "left": "INTERPRETATION_CANDIDATE",
+      "right": "PROFESSIONAL_JUDGMENT",
+      "equal": false
+    }
+  ],
+  "authorityChain": {
+    "calculation": "SHARED_CALCULATION_RUNTIME",
+    "projection": "SHARED_PROJECTION_RUNTIME or governed versioned Method projection extension",
+    "interpretationCandidate": "SHARED_INTERPRETATION_RUNTIME",
+    "realityTruth": "RMO / evidence-governed Reality authority",
+    "professionalJudgment": "PR v2 / SHARED_PROFESSIONAL_RUNTIME"
+  },
+  "aiBoundary": {
+    "calculationAuthority": false,
+    "projectionAuthority": false,
+    "interpretationCandidateAllowedOnlyThroughSharedInterpretationRuntime": true,
+    "realityFactAuthority": false,
+    "diagnosisAuthority": false,
+    "professionalReleaseAuthority": false
+  },
+  "forbiddenConflations": [
+    "Projection = Interpretation",
+    "Projection = Reality Fact",
+    "Interpretation Candidate = Reality Fact",
+    "Interpretation Candidate = Diagnosis",
+    "Interpretation Candidate = Professional Judgment"
+  ],
+  "references": {
+    "sharedInterpretationRuntime": "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+    "sharedProfessionalRuntime": "content/professional/method-runtime/shared-professional-runtime-v1.json",
+    "rmoFreeze": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json"
+  },
+  "productionEligibilityChanged": false,
+  "nextWork": "MPA-W19"
+}

@@ -1,0 +1,386 @@
+# KN-B1-P2-009 Canonical Article Production Brief
+
+> Controlled input snapshot only. This document is not a Source of Truth,
+> approval record, publication record, or public article body.
+
+## 1. Brief Identity
+
+```json
+{
+  "briefType": "canonical_article_production_brief",
+  "briefSchemaVersion": "PHI-OS-KNOWLEDGE-PRODUCTION-BRIEF-v1.1.0",
+  "generatedAt": "2026-08-11T05:23:49.017Z",
+  "generatorVersion": "PJA-W2E-R1-v1.0.0-Frozen",
+  "repositoryCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "nodeCode": "KN-B1-P2-009",
+  "locale": "zh-Hans",
+  "productionTarget": "governance_compatible_draft_package"
+}
+```
+
+## 2. Canonical Node Identity
+
+```json
+{
+  "nodeCode": "KN-B1-P2-009",
+  "domainCode": null,
+  "themeCode": "TH-BOOK1-P2-01",
+  "canonicalTitle": "为什么投影会产生偏向、失真、稳定与更新",
+  "canonicalQuestion": "投影偏向、失真、稳定与更新如何发生",
+  "nodeType": "mechanism_question",
+  "status": "planned",
+  "previousNode": "KN-B1-P2-008",
+  "nextNode": [
+    "KN-B1-P2-010"
+  ],
+  "relationships": {
+    "prerequisiteNodeCodes": [
+      "KN-B1-P2-008"
+    ],
+    "nextNodeCodes": [
+      "KN-B1-P2-010"
+    ],
+    "relatedNodeCodes": [],
+    "parentNodeCodes": [],
+    "childNodeCodes": []
+  }
+}
+```
+
+## 3. Localized Identity
+
+```json
+{
+  "localizedTitle": "为什么投影会产生偏向、失真、稳定与更新",
+  "localizedQuestion": "投影偏向、失真、稳定与更新如何发生",
+  "localizedSummary": null,
+  "searchAliases": [],
+  "slug": "projection-bias-distortion-stability-and-renewal"
+}
+```
+
+## 4. Canonical Thesis
+
+投影会同时产生偏向、失真、稳定与更新，因为投影必须选择有限信息，而选择一旦持续运行就会形成稳定模式；当投影与新信号、约束或结果不再匹配时，系统又必须修正或重组原有投影。
+
+## 5. Article Boundary
+
+### Must Establish
+
+- 偏向首先来自有限选择，不必然等于错误。
+- 失真是投影与可用信号或结果之间的失配。
+- 稳定来自重复权重、反馈与持续条件。
+- 更新需要新信号、误差或约束改变推动重组。
+
+### Required Distinctions
+
+- Bias ≠ Error
+- Stability ≠ Accuracy
+- Update ≠ Complete Replacement
+- Distortion ≠ Moral Failure
+
+### Must Not Claim
+
+- 不得把所有偏向都描述为心理缺陷或认知错误。
+- 不得把稳定投影当成客观真理。
+- 不得声称更新一定更准确或更优。
+- 不得从一般投影机制推断个人心理状态。
+- 偏向必然等于错误。
+- 稳定必然代表真实性。
+
+### Included Scope
+
+- 选择偏向、失配、重复稳定、反馈、误差与版本更新。
+
+### Excluded Scope
+
+- 不展开具体认知偏误清单、精神健康诊断或社会群体标签。
+- 不提前展开 KN-B1-P2-010 的共同现实协调机制。
+
+### Previous / Next / Supporting Question Boundary
+
+```json
+{
+  "previousNode": "KN-B1-P2-008",
+  "nextNode": {
+    "nodeCode": "KN-B1-P2-010",
+    "semanticBridge": "进入 KN-B1-P2-010，讨论多个不同投影如何在差异中形成协调。"
+  },
+  "supportingQuestions": [],
+  "supportingQuestionFieldSemantics": {
+    "canonicalNodeCode": "Authoritative Canonical Node ownership.",
+    "sourceNodeCode": "Consolidation origin only; it does not override canonicalNodeCode."
+  },
+  "paidContentBoundary": "Public article must not reproduce restricted paid content.",
+  "runtimeBoundary": "No Runtime read or write, Provider invocation, or case input.",
+  "professionalBoundary": "No personal diagnosis, recommendation, or professional conclusion."
+}
+```
+
+## 6. Editorial Contract
+
+```json
+{
+  "articlePurpose": "public_knowledge_explanation",
+  "audience": "public_reader",
+  "humanApprovalAuthority": "Human editorial authority only"
+}
+```
+
+## 7. Structured Article Contract
+
+```json
+{
+  "articleSchemaPath": "content/knowledge/schemas/article-v2.schema.json",
+  "articleSchemaVersion": "PHI-OS-KNOWLEDGE-ARTICLE-v2.0.0",
+  "requiredFiles": [
+    "article.zh-Hans.json",
+    "claims.zh-Hans.json",
+    "source-dossier.zh-Hans.json",
+    "review.zh-Hans.json",
+    "media-brief.zh-Hans.json",
+    "package-manifest.json"
+  ],
+  "requiredRootFields": [
+    "contract",
+    "assetCode",
+    "nodeCode",
+    "locale",
+    "contentRole",
+    "version",
+    "contentStatus",
+    "reviewStatus",
+    "publicationStatus",
+    "publishedAt",
+    "publicationOrder",
+    "slug",
+    "title",
+    "displayQuestion",
+    "shortAnswer",
+    "summary",
+    "seo",
+    "keyConcepts",
+    "sections",
+    "knowledgeBoundary",
+    "sourceReferences",
+    "connections",
+    "masterMediaPost"
+  ],
+  "allowedBlockTypes": [
+    "paragraph",
+    "lead",
+    "question",
+    "insight",
+    "mechanism",
+    "timeline",
+    "comparison",
+    "figure",
+    "transition",
+    "next_node"
+  ],
+  "blockRestrictions": [
+    "No rawHtml, script, style, iframe, arbitrary embed or javascript URL",
+    "All blockCode and sectionCode values are unique and ordered",
+    "No external image URL or Base64 image"
+  ],
+  "connectionRules": "previousNode and nextNode must match the Canonical Registry",
+  "figureRules": "Every figure reference must map to the package Media Brief; no binary media is accepted",
+  "accessibilityRequirements": "Figure alt text is mandatory",
+  "rendererRestrictions": "PJA-W2D allowlist and safe DOM behavior remain authoritative"
+}
+```
+
+## 8. Claim Governance
+
+```json
+{
+  "claimTypes": [
+    "externally_verifiable",
+    "phi_os_interpretation",
+    "editorial_inference",
+    "mixed",
+    "canonical_transition",
+    "boundary_statement"
+  ],
+  "materialityLevels": [
+    "low",
+    "medium",
+    "high",
+    "critical"
+  ],
+  "evidenceRequirements": "Externally verifiable claims and source-required claims require mapped sources",
+  "qualificationRules": "Interpretation and inference must be explicitly qualified",
+  "unresolvedClaimHandling": "Retain as draft finding; never approve automatically",
+  "canonicalInterpretationRules": true,
+  "externalFactDraftRules": {
+    "sourceRequired": true,
+    "factualReviewRequired": true,
+    "generatedPackageMayNotApprove": true,
+    "unresolvedFactsMustRemainQualified": true
+  },
+  "futurePublicationGate": {
+    "requiredClaimStateForHighAndCritical": "approved",
+    "informationalOnlyForGeneratedPackage": true
+  },
+  "contraryEvidenceRules": true
+}
+```
+
+## 9. Source Governance
+
+```json
+{
+  "sourceTypes": "Defined by the formal Source Schema",
+  "authorityRequirements": [
+    "primary",
+    "authoritative_secondary",
+    "reputable_secondary",
+    "contextual",
+    "reference_only"
+  ],
+  "reliabilityRequirements": "Record quality assessment; reference-only cannot support high/critical claims",
+  "sourceVerificationRules": "Validator checks structure and mappings only; it does not browse or verify truth",
+  "publicCitationRules": [
+    "public_citation_allowed",
+    "public_metadata_only"
+  ],
+  "noFabricationRules": {
+    "internalCanonicalSources": [
+      "content/knowledge/manuscripts/book-1/node-manuscript-mapping.json#KN-B1-P2-009"
+    ],
+    "externalSourceNeeds": [],
+    "preferredSourceTypes": [
+      "primary research",
+      "official technical source",
+      "canonical PHI OS manuscript"
+    ],
+    "sourceCodesMayBeInvented": false
+  },
+  "unavailableSourceHandling": "Mark unresolved, identify missing metadata, and create a blocking review finding"
+}
+```
+
+## 10. Review Governance
+
+```json
+{
+  "reviewDimensions": [
+    "canonicalReview",
+    "factualReview",
+    "sourceReview",
+    "boundaryReview",
+    "languageReview",
+    "readabilityReview",
+    "crossNodeReview",
+    "continuityReview",
+    "visualReview",
+    "localizationReadinessReview"
+  ],
+  "allowedDraftStatus": [
+    "draft",
+    "ready_for_human_review",
+    "changes_required"
+  ],
+  "forbiddenStatus": [
+    "approved",
+    "publication_ready",
+    "published",
+    "human_approved"
+  ],
+  "blockingFindingRules": [
+    "major",
+    "critical"
+  ],
+  "humanApprovalRequirement": true,
+  "versionBindingRequirement": [
+    "articleVersion",
+    "claimSetVersion",
+    "sourceSetVersion"
+  ]
+}
+```
+
+## 11. Node-specific Inputs
+
+```json
+{
+  "supportingQuestions": [],
+  "searchAliases": [],
+  "previousNode": "KN-B1-P2-008",
+  "nextNode": [
+    "KN-B1-P2-010"
+  ],
+  "availableSourceReferences": [],
+  "whyThisNodeExists": "没有偏向，有限系统无法完成选择；没有稳定，经验无法形成连续性；没有更新，稳定投影会在现实变化后积累失配，因此四者共同构成投影运行的动态平衡。",
+  "knownUnresolvedQuestions": [],
+  "requiredFigures": [],
+  "figureProductionContract": {
+    "figureRequirement": "not_required_by_c2",
+    "mediaBriefRequired": false,
+    "articleFigureBlockAllowed": false,
+    "assetRegistryRequiredBeforeArticleReference": true,
+    "binaryAssetAllowedInPackage": false,
+    "remoteAssetAllowed": false
+  },
+  "optionalFigures": [],
+  "productionReadinessFindings": {
+    "recordVersion": "1.0.0",
+    "productionInputStatus": "production_ready",
+    "centralThesisPresent": true,
+    "outlineStatus": "approved",
+    "articleBodyCreated": false,
+    "generatedPackageAllowedState": {
+      "contentStatus": "draft",
+      "reviewStatus": "not_reviewed",
+      "publicationStatus": "not_published"
+    },
+    "futureHumanPublicationTarget": null,
+    "futurePublicationTargetIsInformationalOnly": true
+  }
+}
+```
+
+## 12. Package Output Contract
+
+```json
+{
+  "packageManifestContract": {
+    "packageType": "canonical_article_package",
+    "packageSchemaVersion": "PHI-OS-KNOWLEDGE-PACKAGE-v1.0.0",
+    "requiredFields": [
+      "packageType",
+      "packageSchemaVersion",
+      "nodeCode",
+      "locale",
+      "status",
+      "files"
+    ],
+    "allowedStatus": [
+      "draft",
+      "ready_for_human_review",
+      "changes_required"
+    ],
+    "checksumAlgorithm": "sha256",
+    "checksumInput": "original_file_bytes",
+    "requiredFiles": [
+      "article.zh-Hans.json",
+      "claims.zh-Hans.json",
+      "source-dossier.zh-Hans.json",
+      "review.zh-Hans.json",
+      "media-brief.zh-Hans.json",
+      "package-manifest.json"
+    ],
+    "generatedPackageMayNotUseFinalPublicationStates": true
+  }
+}
+```
+
+- Validation means structurally valid and governance-compatible draft only.
+
+## 13. Forbidden Actions
+
+- Do not modify Schema, Registry, Blueprint, Canonical Thesis, Previous Node or Next Node.
+- Do not create a Canonical Node or fabricate a Source.
+- Do not output raw HTML, iframe, script, executable content, remote embeds, or binary media.
+- Do not set approved, publication_ready, published, or human_approved.
+- Do not commit, push, deploy, invoke an AI API, or write to Runtime.

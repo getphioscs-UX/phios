@@ -1,0 +1,44 @@
+{
+  "registryCode": "PHI-OS-MPA-INTEGRATION-AUTHORITY-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "status": "canonical_validation_only",
+  "entries": [
+    {
+      "integrationCode": "MPA-INT-PROJECTION-FREEZE",
+      "work": "MPA-W17",
+      "upstream": "CANONICAL_PROJECTION",
+      "downstream": "INTERPRETATION_OR_CMR",
+      "authorityEffect": "NONE",
+      "productionActivated": false
+    },
+    {
+      "integrationCode": "MPA-INT-INTERPRETATION-BOUNDARY",
+      "work": "MPA-W18",
+      "upstream": "PROJECTION_FREEZE",
+      "downstream": "SHARED_INTERPRETATION_RUNTIME",
+      "authorityEffect": "BOUNDARY_ONLY",
+      "productionActivated": false
+    },
+    {
+      "integrationCode": "MPA-INT-MEANING-KNOWLEDGE",
+      "work": "MPA-W19",
+      "upstream": "PROJECTION_FREEZE",
+      "downstream": "CMR_AND_PUBLISHED_KNOWLEDGE",
+      "authorityEffect": "REFERENCE_ONLY",
+      "productionActivated": false
+    },
+    {
+      "integrationCode": "MPA-INT-PROFESSIONAL",
+      "work": "MPA-W20",
+      "upstream": "INTERPRETATION_CANDIDATE_OR_JR_HANDOFF",
+      "downstream": "PR_V2_AND_SHARED_PROFESSIONAL_RUNTIME",
+      "authorityEffect": "GATE_ONLY",
+      "productionActivated": false
+    }
+  ],
+  "rules": {
+    "noIntegrationCreatesUpstreamAuthority": true,
+    "noIntegrationCreatesProfessionalRelease": true
+  }
+}

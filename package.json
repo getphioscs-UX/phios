@@ -689,7 +689,7 @@
     "check:mpa-w5": "node scripts/check-mpa-w5-method-capability-matrix.mjs",
     "check:mpa-w0-w5": "node scripts/check-mpa-w0-w5-foundation.mjs",
     "check:mpa-foundation": "npm run check:mpa-w0-w5",
-    "check:mpa": "npm run check:mpa-foundation && npm run check:mpa-input-calculation && npm run check:mpa-validation-evidence",
+    "check:mpa": "npm run check:mpa-foundation && npm run check:mpa-input-calculation && npm run check:mpa-validation-evidence && npm run check:mpa-projection-integration",
     "check:rre-w0-w4": "node scripts/check-rre-w0-w4-readout-foundation.mjs",
     "check:rre-foundation": "npm run check:rre-w0-w4",
     "check:rre": "npm run check:rre-foundation && npm run check:rre-reading && npm run check:rre-canonical",
@@ -743,7 +743,13 @@
     "check:jr": "npm run check:jr-w0-w14",
     "build:vap-w6a": "node scripts/build-vap-w6a-batch-article-decision-c2-c3-wave-freeze.mjs",
     "vap:w6a:apply": "node scripts/apply-vap-w6a-batch-article-decision-c2-c3-wave-freeze.mjs",
-    "check:vap-w6a": "node scripts/check-vap-w6a-batch-article-decision-c2-c3-wave-freeze.mjs"
+    "check:vap-w6a": "node scripts/check-vap-w6a-batch-article-decision-c2-c3-wave-freeze.mjs",
+    "check:mpa-w17": "node scripts/check-mpa-w17-projection-freeze.mjs",
+    "check:mpa-w18": "node scripts/check-mpa-w18-interpretation-boundary.mjs",
+    "check:mpa-w19": "node scripts/check-mpa-w19-meaning-knowledge-integration.mjs",
+    "check:mpa-w20": "node scripts/check-mpa-w20-professional-integration.mjs",
+    "check:mpa-w17-w20": "node scripts/check-mpa-w17-w20-projection-integration-foundation.mjs",
+    "check:mpa-projection-integration": "npm run check:mpa-w17-w20"
   },
   "type": "module"
 }

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.mpa.projection-freeze-record.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "freezeVersion",
+    "freezeCode",
+    "methodReference",
+    "calculationReference",
+    "policyReferences",
+    "projectionReference",
+    "projectionSnapshot",
+    "freezeDigest",
+    "immutable",
+    "validationArtifactOnly",
+    "productionAuthorityCreated",
+    "interpretationCreated",
+    "realityFactCreated",
+    "diagnosisCreated",
+    "professionalJudgmentCreated"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-PROJECTION-FREEZE-RECORD-v1.0.0"
+    },
+    "freezeVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "freezeCode": {
+      "type": "string",
+      "pattern": "^MPA-PRJ-FRZ-[A-F0-9]{24}$"
+    },
+    "methodReference": {
+      "type": "object"
+    },
+    "calculationReference": {
+      "type": "object"
+    },
+    "policyReferences": {
+      "type": "object"
+    },
+    "projectionReference": {
+      "type": "object"
+    },
+    "projectionSnapshot": {
+      "type": "object"
+    },
+    "freezeDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "immutable": {
+      "const": true
+    },
+    "validationArtifactOnly": {
+      "type": "boolean"
+    },
+    "productionAuthorityCreated": {
+      "const": false
+    },
+    "interpretationCreated": {
+      "const": false
+    },
+    "realityFactCreated": {
+      "const": false
+    },
+    "diagnosisCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    }
+  }
+}

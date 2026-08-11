@@ -25,10 +25,9 @@ const expected={
   'check:mpa-w4':'node scripts/check-mpa-w4-public-method-vocabulary-boundary.mjs',
   'check:mpa-w5':'node scripts/check-mpa-w5-method-capability-matrix.mjs',
   'check:mpa-w0-w5':'node scripts/check-mpa-w0-w5-foundation.mjs',
-  'check:mpa-foundation':'npm run check:mpa-w0-w5',
-  'check:mpa':'npm run check:mpa-foundation && npm run check:mpa-input-calculation && npm run check:mpa-validation-evidence'
+  'check:mpa-foundation':'npm run check:mpa-w0-w5'
 };
 for(const [k,v] of Object.entries(expected)) assert.equal(pkg.scripts[k],v,k);
-assert.equal(String(pkg.scripts.postcheck||'').includes('check:mpa'),false,'MPA must not enter global postcheck before W30 Full Acceptance/Freeze.');
+const mpaSegments=String(pkg.scripts['check:mpa']||'').split(' && '); assert.deepEqual(mpaSegments.slice(0,3),['npm run check:mpa-foundation','npm run check:mpa-input-calculation','npm run check:mpa-validation-evidence']); assert.equal(String(pkg.scripts.postcheck||'').includes('check:mpa'),false,'MPA must not enter global postcheck before W30 Full Acceptance/Freeze.');
 console.log('✓ MPA-W0-W5 Foundation Acceptance passed.');
 console.log('✓ Method execution remains closed; next work is MPA-W6 Canonical Method Input Contract.');
