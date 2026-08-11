@@ -1,0 +1,45 @@
+{
+  "contractCode": "PHI-OS-RDG-RRE-READOUT-RECORD-DATA-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "status": "ACTIVE_SUCCESSOR_EXTENSION",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "dataType": "REALITY_READOUT_RECORD",
+  "dataDomain": "REALITY_READOUT",
+  "runtimeCode": "RRE",
+  "subauthorityCode": "RRE_READOUT",
+  "payloadAuthority": "RRE_CANONICAL_RUNTIME_READOUT",
+  "persistenceAuthority": "RDG_PERSISTENCE_ELIGIBILITY_GATE",
+  "requiredGovernanceReferences": [
+    "content/governance/reality-data-governance/contracts/canonical-data-object-contract-v1.json",
+    "content/governance/reality-data-governance/contracts/persistence-eligibility-gate-v1.json"
+  ],
+  "allowedPersistenceDecisions": [
+    "DENY",
+    "REQUIRE_CONSENT",
+    "UNRESOLVED",
+    "ALLOW_SESSION",
+    "ALLOW_SERVICE_SCOPE"
+  ],
+  "directStorageWriteOwnedByRre": false,
+  "rules": {
+    "readoutIsEvidence": false,
+    "readoutIsRuntimeState": false,
+    "readoutIsDiagnosis": false,
+    "readoutIsProfessionalJudgment": false,
+    "readoutIsNavigationDecision": false,
+    "persistenceDecisionRequiredBeforeStorage": true,
+    "lineageRequired": true,
+    "confidenceMustBeEvidenceDerived": true,
+    "customerReportStillRequiresRrReportAuthority": true
+  },
+  "authorizedConsumers": [
+    {
+      "runtimeCode": "CPR",
+      "mode": "READ_ONLY_PURPOSE_PERMISSION_VISIBILITY_BOUND"
+    },
+    {
+      "runtimeCode": "RR",
+      "mode": "READ_ONLY_PURPOSE_PERMISSION_VISIBILITY_BOUND"
+    }
+  ]
+}

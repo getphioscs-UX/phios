@@ -1,0 +1,44 @@
+{
+  "registryCode": "PHI-OS-JR-W8-SAFETY-RULES-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "status": "canonical",
+  "orderedRules": [
+    {
+      "ordinal": 1,
+      "signal": "EMERGENCY_SIGNAL",
+      "state": "ESCALATE",
+      "nextWorkflowStep": "PAUSE"
+    },
+    {
+      "ordinal": 2,
+      "signal": "DATA_PURPOSE_VIOLATION",
+      "state": "BLOCK",
+      "nextWorkflowStep": "PAUSE"
+    },
+    {
+      "ordinal": 3,
+      "signal": "MISSING_REQUIRED_CONSENT",
+      "state": "BLOCK",
+      "nextWorkflowStep": "COLLECT_CONSENT"
+    },
+    {
+      "ordinal": 4,
+      "signal": "REGULATED_ADVICE_REQUEST",
+      "state": "ESCALATE",
+      "nextWorkflowStep": "PROFESSIONAL_HANDOFF"
+    },
+    {
+      "ordinal": 5,
+      "signal": "PROFESSIONAL_ESCALATION",
+      "state": "ESCALATE",
+      "nextWorkflowStep": "PROFESSIONAL_HANDOFF"
+    },
+    {
+      "ordinal": 6,
+      "signal": "NONE",
+      "state": "ALLOW",
+      "nextWorkflowStep": "CONTINUE_WORKFLOW"
+    }
+  ]
+}

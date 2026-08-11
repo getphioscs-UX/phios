@@ -1,0 +1,44 @@
+{
+  "contractCode": "PHI-OS-JR-W4-JOURNEY-PRIORITY-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W4",
+  "status": "active",
+  "purpose": "Decide what workflow context is relevant next without deciding Reality truth or professional judgment.",
+  "inputs": [
+    "currentStage",
+    "completedStages",
+    "safetyState",
+    "missingConsent",
+    "unknownReferences",
+    "customerQuestionReference",
+    "candidateWorkflowSteps"
+  ],
+  "outputs": [
+    "priorityState",
+    "nextRelevantWorkflowStep",
+    "supportReferences",
+    "blockingReasons"
+  ],
+  "priorityStates": [
+    "BLOCKED",
+    "ESCALATION_REQUIRED",
+    "READY",
+    "WAITING_FOR_CONTEXT",
+    "COMPLETE"
+  ],
+  "forbiddenOutputs": [
+    "realityTruth",
+    "professionalJudgment",
+    "medicalDecision",
+    "financialDecision",
+    "legalDecision",
+    "lifeDecision"
+  ],
+  "rules": {
+    "workflowOnly": true,
+    "supportReferencesRequired": true,
+    "unknownsMayBlock": true,
+    "priorityDoesNotEqualRecommendationTruth": true
+  }
+}

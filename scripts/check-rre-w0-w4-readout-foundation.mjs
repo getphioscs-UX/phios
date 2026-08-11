@@ -181,7 +181,8 @@ assert.equal(packageJson.scripts['check:rre-foundation'], 'npm run check:rre-w0-
 const rreAlias = packageJson.scripts['check:rre'];
 assert.ok(
   rreAlias === 'npm run check:rre-foundation' ||
-  rreAlias === 'npm run check:rre-foundation && npm run check:rre-reading',
+  rreAlias === 'npm run check:rre-foundation && npm run check:rre-reading' ||
+  rreAlias === 'npm run check:rre-foundation && npm run check:rre-reading && npm run check:rre-canonical',
   `Unexpected check:rre alias: ${rreAlias}`
 );
 if (rreAlias.includes('check:rre-reading')) {
@@ -191,4 +192,4 @@ if (rreAlias.includes('check:rre-reading')) {
 console.log('✓ RRE-W0-W4 Reality Readout Engine foundation passed.');
 console.log('✓ Existing RRE Evidence authority and RMO evidence binding remain preserved.');
 console.log('✓ Readout input, observable extraction, runtime signature and governed pattern runtime are validation-only.');
-console.log('✓ Persistent Canonical Readout remains blocked pending versioned RDG REALITY_READOUT_RECORD authority.');
+console.log('✓ Historical W0-W4 persistence gate remains preserved; W11 successor authority is validated by check:rre-canonical.');

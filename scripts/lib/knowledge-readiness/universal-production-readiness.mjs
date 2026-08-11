@@ -4,6 +4,7 @@ import { contentHash, C2_WAVE1_HUMAN_RESOLUTION, resolveHumanEditorialFreezeReso
 import { C3R1_PATHS, resolveProductionReadinessClosure } from './preface-production-readiness-closure.mjs';
 import { WAVE1_C3_CLOSURE, resolveWave1C3ReadinessClosure } from './wave1-c3-readiness-closure.mjs';
 import { WAVE1_C3_HUMAN_APPROVAL, WAVE1_HUMAN_DECISION, resolveWave1HumanProductionDecision } from '../knowledge-production-planning/wave1-production-authorization.mjs';
+import { VAP_W6A_DECISIONS, resolveVapW6aEditorialApprovals, resolveVapW6aProductionDecision } from '../visual-article-production/vap-w6a-authority-resolution-v1.mjs';
 
 export const C3_ROOT = 'content/knowledge/editorial/c3';
 export const C3_CONTRACT = `${C3_ROOT}/universal-production-readiness.contract.json`;
@@ -17,7 +18,9 @@ export function buildProductionReadiness(root) {
   const c1 = read('content/knowledge/readiness/canonical-readiness-index.json');
   const c2 = read('content/knowledge/editorial/c2/canonical-thesis-boundary-index.json');
   const contract = read(C3_CONTRACT);
-  const humanEditorialApprovals = resolveHumanEditorialFreezeResolutions(root).approvedByNode;
+  const wave1HumanEditorialApprovals = resolveHumanEditorialFreezeResolutions(root).approvedByNode;
+  const vapW6aHumanEditorialApprovals = resolveVapW6aEditorialApprovals(root);
+  const humanEditorialApprovals = new Map([...wave1HumanEditorialApprovals, ...vapW6aHumanEditorialApprovals]);
   const registryCodeSet = new Set(registry.nodes.map(node => node.nodeCode));
   const registryCodes = c1.entries.map(entry => entry.nodeCode);
   if (!registryCodes.every(nodeCode => registryCodeSet.has(nodeCode))) {
@@ -84,6 +87,8 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
   const wave1Closure = resolveWave1C3ReadinessClosure(root, nodeCode);
   const wave1ProductionDecision = resolveWave1HumanProductionDecision(root, nodeCode);
   const wave1ProductionApproved = wave1ProductionDecision?.approved === true;
+  const vapW6aProductionDecision = resolveVapW6aProductionDecision(root, nodeCode);
+  const vapW6aProductionApproved = vapW6aProductionDecision?.approved === true;
   const humanEditorialApproval = humanEditorialApprovals.get(nodeCode) ?? null;
   const humanEditorialPassed = Boolean(humanEditorialApproval) || legacy?.review?.status === 'approved';
   const existingPublishedContentReferences = Array.isArray(sources.knownPublishedContent) ? sources.knownPublishedContent : [];
@@ -95,9 +100,9 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
     supportingQuestionTreatment: Array.isArray(questions) && questions.every(question => typeof question.articleTreatment === 'string' && question.articleTreatment.length > 0) ? pass() : fail('QUESTION_TREATMENT_INCOMPLETE'),
     figureDecision: wave1Closure?.entry?.figureDecision?.status === 'passed' || figureComplete(figures) ? pass() : fail('FIGURE_DECISION_INCOMPLETE'),
     editorialReview: humanEditorialPassed ? pass() : fail('EDITORIAL_REVIEW_REQUIRED'),
-    humanProductionApproval: (closurePassed || wave1ProductionApproved) ? pass() : fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
+    humanProductionApproval: (closurePassed || wave1ProductionApproved || vapW6aProductionApproved) ? pass() : fail('HUMAN_PRODUCTION_APPROVAL_REQUIRED'),
     noBlockingFindings: blockingFindings.length === 0 ? pass() : fail('BLOCKING_REVIEW_FINDING'),
-    exportability: (closurePassed || wave1ProductionApproved) ? pass() : fail('EXPORTABILITY_NOT_ALLOWED')
+    exportability: (closurePassed || wave1ProductionApproved || vapW6aProductionApproved) ? pass() : fail('EXPORTABILITY_NOT_ALLOWED')
   };
   const blocking = Object.values(gates).filter(gate => gate.status === 'failed').map(gate => gate.code);
   const productionReady = contract.requiredGates.every(name => gates[name]?.status === 'passed');
@@ -110,13 +115,21 @@ function assessFrozen(root, nodeCode, c2Entry, contract, humanEditorialApprovals
     exportability: productionReady ? 'allowed' : 'blocked', publicationState: 'not_published', gates, blocking,
     authority: {
       c2Status: c2Entry.status, c2Record: c2Entry.record, c2FreezeRecord: c2Entry.freezeRecord, c2ContentHash: frozen.contentHash, c2FreezeHashMatched: hashValid,
-      editorialRecord: humanEditorialApproval ? C2_WAVE1_HUMAN_RESOLUTION : (legacyPath || null),
+      editorialRecord: humanEditorialApproval
+        ? (humanEditorialApproval.authoritySource || C2_WAVE1_HUMAN_RESOLUTION)
+        : (legacyPath || null),
       ...(humanEditorialApproval ? {
         humanEditorialApproved: true,
         existingPublicationReconciliation: existingPublishedContentReferences.length ? 'EXISTING_PUBLISHED_CONTENT_RECONCILED_NO_NEW_PUBLICATION' : 'NO_EXISTING_PUBLICATION',
         existingPublishedContentReferences
       } : {}),
       c3r1ClosureRecord: closurePassed ? C3R1_PATHS.approval : null, c3r1EvidenceHash: closurePassed ? closure.review.evidenceBundleHash : null,
+      ...(vapW6aProductionApproved ? {
+        humanProductionDecisionRecord: VAP_W6A_DECISIONS,
+        humanProductionDecisionDigest: vapW6aProductionDecision.proposalContentHash || null,
+        humanProductionApproved: true,
+        humanProductionAuthoritySource: 'VAP-W6A'
+      } : {}),
       ...(wave1Closure ? {
         wave1C3ClosureRecord: WAVE1_C3_CLOSURE,
         wave1SourceClosureState: wave1Closure.entry.sourceSufficiency?.status || null,

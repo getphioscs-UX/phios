@@ -10,6 +10,7 @@ export const VAP_W6_BATCH = 'content/production/visual-article/batches/vap-artic
 export const VAP_W6_ACTIVATION = 'content/production/visual-article/activation/vap-w6-batch-production-brief-export-v1.json';
 export const VAP_W5R_PORTFOLIO = 'content/production/visual-article/portfolio/scalable-article-production-portfolio-v1.json';
 export const VAP_W4R_EXECUTION = 'content/production/visual-article/eligibility/visual-article-execution-eligibility-v1.json';
+export const VAP_W6A_EXECUTION = 'content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json';
 export const PJA_WAVE_CONTRACT = 'content/knowledge/production/waves/wave-production-contract.json';
 export const LOCALE_PROJECTION_REGISTRY = 'content/knowledge/l10n/multilingual-node-projection-registry.json';
 export const LOCALE_CONTROLLED_VALUES = 'content/knowledge/l10n/locale-controlled-values.json';
@@ -321,6 +322,7 @@ export function buildVapW6Activation(root, batch = buildVapW6BatchSelection(root
 
 export function buildVapW6ExportPlan(root, batch, locale) {
   const w4r = readJson(root, VAP_W4R_EXECUTION);
+  const w6a = fs.existsSync(path.join(root, VAP_W6A_EXECUTION)) ? readJson(root, VAP_W6A_EXECUTION) : null;
   const localeRegistry = readJson(root, LOCALE_PROJECTION_REGISTRY);
   const supported = readJson(root, LOCALE_CONTROLLED_VALUES).supportedLocales || [];
   if (!supported.includes(locale)) throw new Error(`VAP_W6_UNSUPPORTED_LOCALE:${locale}`);
@@ -328,7 +330,10 @@ export function buildVapW6ExportPlan(root, batch, locale) {
   const entries = batch.entries.map(entry => {
     const localeRecord = localeRecordFor(localeRegistry, entry.nodeCode, locale);
     const localeReady = isLocaleBriefReady(localeRecord);
-    const executionEntry = executionEntryFor(w4r, entry.nodeCode, locale);
+    const w4rExecutionEntry = executionEntryFor(w4r, entry.nodeCode, locale);
+    const w6aExecutionEntry = (w6a?.entries || []).find(item => item.nodeCode === entry.nodeCode && item.locale === locale) || null;
+    const executionEntry = w6aExecutionEntry?.articleExecutionEligible === true ? w6aExecutionEntry : w4rExecutionEntry;
+    const executionSource = w6aExecutionEntry?.articleExecutionEligible === true ? 'VAP-W6A' : 'VAP-W4R';
     const blockers = [];
     if (!localeReady) blockers.push('LOCALE_BRIEF_READINESS_NOT_PASSED');
     if (!executionEntry) blockers.push('W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_ESTABLISHED');
@@ -342,6 +347,7 @@ export function buildVapW6ExportPlan(root, batch, locale) {
       locale,
       exportReady: unique.length === 0,
       blockers: unique,
+      executionEligibilitySource: executionSource,
       exporter: EXISTING_PJA_EXPORTER
     };
   });

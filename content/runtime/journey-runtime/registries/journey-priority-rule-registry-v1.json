@@ -1,0 +1,38 @@
+{
+  "registryCode": "PHI-OS-JR-W4-PRIORITY-RULES-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "JR",
+  "status": "canonical",
+  "orderedRules": [
+    {
+      "ordinal": 1,
+      "when": "SAFETY_BLOCK",
+      "result": "BLOCKED"
+    },
+    {
+      "ordinal": 2,
+      "when": "PROFESSIONAL_ESCALATION",
+      "result": "ESCALATION_REQUIRED"
+    },
+    {
+      "ordinal": 3,
+      "when": "MISSING_REQUIRED_CONSENT",
+      "result": "BLOCKED"
+    },
+    {
+      "ordinal": 4,
+      "when": "MISSING_REQUIRED_CONTEXT",
+      "result": "WAITING_FOR_CONTEXT"
+    },
+    {
+      "ordinal": 5,
+      "when": "CLOSED",
+      "result": "COMPLETE"
+    },
+    {
+      "ordinal": 6,
+      "when": "OTHERWISE",
+      "result": "READY"
+    }
+  ]
+}

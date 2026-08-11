@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W16-METHOD-UNCERTAINTY-ERROR-CONTRACT-v1.0.0",
+  "work": "MPA-W16",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "status": "ACTIVE_FAIL_CLOSED_NO_PSEUDO_RESULT",
+  "errorCodes": [
+    {
+      "code": "INPUT_INVALID",
+      "class": "input",
+      "resultAllowed": false
+    },
+    {
+      "code": "INPUT_INCOMPLETE",
+      "class": "input",
+      "resultAllowed": false
+    },
+    {
+      "code": "PRECISION_LIMIT",
+      "class": "uncertainty",
+      "resultAllowed": false,
+      "partialContextAllowed": true
+    },
+    {
+      "code": "DATA_AUTHORITY_UNAVAILABLE",
+      "class": "authority",
+      "resultAllowed": false
+    },
+    {
+      "code": "CALCULATION_FAILED",
+      "class": "calculation",
+      "resultAllowed": false
+    },
+    {
+      "code": "PROJECTION_FAILED",
+      "class": "projection",
+      "resultAllowed": false
+    },
+    {
+      "code": "METHOD_NOT_ELIGIBLE",
+      "class": "eligibility",
+      "resultAllowed": false
+    },
+    {
+      "code": "PROFESSIONAL_REQUIRED",
+      "class": "professional_boundary",
+      "resultAllowed": false
+    }
+  ],
+  "rules": {
+    "pseudoResultForbidden": true,
+    "fallbackCalculationForbidden": true,
+    "unknownMayNotBecomeDefault": true,
+    "errorMustPreserveStageAndMethod": true,
+    "professionalRequirementCannotBeBypassed": true,
+    "projectionFailureCannotReturnCalculationAsProjection": true
+  },
+  "productionEligibilityChanged": false
+}

@@ -1,0 +1,36 @@
+{
+  "contractCode": "PHI-OS-RRE-W11-CANONICAL-RUNTIME-READOUT-v1",
+  "contractVersion": "1.0.0",
+  "work": "RRE-W11",
+  "runtimeCode": "RRE",
+  "status": "canonical_governed",
+  "productionStatus": "canonical_runtime_available",
+  "dataType": "REALITY_READOUT_RECORD",
+  "dataDomain": "REALITY_READOUT",
+  "requiredFields": [
+    "readoutCode",
+    "realityReference",
+    "observationSummary",
+    "runtimeSignature",
+    "patterns",
+    "constraints",
+    "load",
+    "stability",
+    "drift",
+    "recovery",
+    "unknowns",
+    "resolutionLimits",
+    "confidence",
+    "lineage"
+  ],
+  "rules": {
+    "sourceComponentsMustBeGoverned": true,
+    "readoutMayCreateDiagnosis": false,
+    "readoutMayCreateProfessionalJudgment": false,
+    "readoutMayCreateNavigationDecision": false,
+    "readoutMayCreateMetric": false,
+    "directStorageWriteAllowed": false,
+    "persistenceRequiresRdgDecision": true,
+    "readoutDigestRequired": true
+  }
+}

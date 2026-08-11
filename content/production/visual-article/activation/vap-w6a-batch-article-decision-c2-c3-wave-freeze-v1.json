@@ -1,0 +1,41 @@
+{
+  "activationCode": "PHI-OS-VAP-W6A-BATCH-ARTICLE-DECISION-C2-C3-WAVE-FREEZE-ACTIVATION-v1",
+  "activationDigest": "sha256:cca50adaa587f39e1745bd5a60d73c3d75e65b7fda2ca79fc32e3beddafb17b0",
+  "activationVersion": "1.0.0",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "batchCode": "VAP-ARTICLE-BATCH-001",
+  "currentAuthority": {
+    "humanApprovedNodeCodes": [],
+    "humanApprovedNodeCount": 0,
+    "newArticleExecutionEligibleCount": 0,
+    "newArticleExecutionEligibleNodeCodes": [],
+    "pendingHumanNodeCount": 6
+  },
+  "effectsByActivation": {
+    "c2FrozenWithoutHumanApproval": false,
+    "c3PromotedWithoutHumanApproval": false,
+    "candidateCreated": false,
+    "humanDecisionCreatedBySystem": false,
+    "providerInvoked": false,
+    "publicationCreated": false
+  },
+  "executionEligibilityReference": "content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json",
+  "formationOrder": [
+    "HUMAN_ARTICLE_DECISION",
+    "HUMAN_C2_CONTENT_AND_MAPPING_APPROVAL",
+    "C2_FREEZE",
+    "C3_REBUILD",
+    "CANONICAL_PRODUCTION_READINESS_PROJECTION",
+    "PRODUCTION_PLAN_FREEZE",
+    "ARTICLE_WAVE_FREEZE",
+    "EXECUTION_ELIGIBILITY",
+    "W6_BRIEF_EXPORT"
+  ],
+  "humanDecisionReference": "content/production/visual-article/decisions/vap-w6a-batch-001-human-decisions-v1.json",
+  "nextRequiredAuthority": "EXPLICIT_PER_NODE_HUMAN_PRODUCTION_AND_EDITORIAL_DECISIONS",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "reviewReference": "content/production/visual-article/review/vap-w6a-batch-001-human-review-v1.json",
+  "schemaVersion": "PHI-OS-VAP-W6A-BATCH-ARTICLE-DECISION-C2-C3-WAVE-FREEZE-ACTIVATION-v1.0.0",
+  "status": "AWAITING_EXPLICIT_HUMAN_ARTICLE_AND_C2_DECISIONS",
+  "work": "VAP-W6A"
+}

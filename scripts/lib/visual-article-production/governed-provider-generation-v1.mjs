@@ -10,6 +10,7 @@ export const VAP_W7_PROVIDER_REGISTRY = 'content/production/visual-article/provi
 export const VAP_W7_SCHEMA = 'content/production/visual-article/schemas/vap-w7-provider-generation-report-v1.schema.json';
 export const VAP_W7_ACTIVATION = 'content/production/visual-article/activation/vap-w7-governed-provider-generation-v1.json';
 export const VAP_W6_BATCH = 'content/production/visual-article/batches/vap-article-batch-001-selection-v1.json';
+export const VAP_W6A_EXECUTION = 'content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json';
 export const BRIEF_ROOT = 'dist/knowledge-production-briefs';
 export const CANDIDATE_ROOT = 'dist/knowledge-production-candidates';
 export const OPENAI_OPERATION = 'generate_article_candidate_from_governed_brief';
@@ -74,11 +75,24 @@ function resolveModel(provider, options = {}, env = process.env) {
 function entryGate(root, entry, locale) {
   const briefPath = briefRelativePath(entry.nodeCode, locale);
   const fullBrief = path.join(root, briefPath);
+  const w6aPath = path.join(root, VAP_W6A_EXECUTION);
+  const w6a = fs.existsSync(w6aPath) ? readJson(root, VAP_W6A_EXECUTION) : null;
+  const w6aEntry = (w6a?.entries || []).find(item => item.nodeCode === entry.nodeCode && item.locale === locale) || null;
+  const w6aEligible = w6aEntry?.articleExecutionEligible === true;
+  const w6Ready = w6aEligible || entry.productionBriefExport?.ready === true;
+  const executionReady = w6aEligible || entry.executionEligibility?.newArticleExecutionEligible === true;
   const blockers = [];
-  if (entry.productionBriefExport?.ready !== true) blockers.push('W6_PRODUCTION_BRIEF_EXPORT_NOT_READY');
-  if (entry.executionEligibility?.newArticleExecutionEligible !== true) blockers.push('W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_PASSED');
+  if (!w6Ready) blockers.push('W6_PRODUCTION_BRIEF_EXPORT_NOT_READY');
+  if (!executionReady) blockers.push('W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_PASSED');
   if (!exists(fullBrief)) blockers.push('PRODUCTION_BRIEF_FILE_MISSING');
-  return { briefPath, fullBrief, blockers: [...new Set(blockers)] };
+  return {
+    briefPath,
+    fullBrief,
+    blockers: [...new Set(blockers)],
+    w6Ready,
+    executionReady,
+    executionEligibilitySource: w6aEligible ? 'VAP-W6A' : 'VAP-W6/W4R'
+  };
 }
 
 export function buildVapW7Activation(root) {
@@ -89,8 +103,9 @@ export function buildVapW7Activation(root) {
     return {
       nodeCode: entry.nodeCode,
       locale,
-      w6ProductionBriefExportReady: entry.productionBriefExport?.ready === true,
-      w4rNewArticleExecutionEligible: entry.executionEligibility?.newArticleExecutionEligible === true,
+      w6ProductionBriefExportReady: gate.w6Ready,
+      w4rNewArticleExecutionEligible: gate.executionReady,
+      executionEligibilitySource: gate.executionEligibilitySource,
       productionBriefPath: gate.briefPath,
       productionBriefPresent: exists(gate.fullBrief),
       providerGenerationEligible: gate.blockers.length === 0,
@@ -141,7 +156,8 @@ export function buildVapW7Activation(root) {
       VAP_W7_CONTRACT,
       VAP_W7_POLICY,
       VAP_W7_PROVIDER_REGISTRY,
-      VAP_W6_BATCH
+      VAP_W6_BATCH,
+      ...(fs.existsSync(path.join(root, VAP_W6A_EXECUTION)) ? [VAP_W6A_EXECUTION] : [])
     ].map(relative => [relative, digest(fs.readFileSync(path.join(root, relative), 'utf8'))])),
     nextRequiredAuthority: eligible.length ? 'EXPLICIT_OPERATOR_NETWORK_EXECUTION' : 'VAP_W6A_OR_EQUIVALENT_UPSTREAM_ARTICLE_EXECUTION_FORMATION'
   };

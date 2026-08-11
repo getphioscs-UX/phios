@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import { resolveVapW6aEditorialApprovals } from '../visual-article-production/vap-w6a-authority-resolution-v1.mjs';
 
 export const C2_ROOT = 'content/knowledge/editorial/c2';
 export const C2_CONTRACT = `${C2_ROOT}/canonical-thesis-boundary.contract.json`;
@@ -43,7 +44,9 @@ export function buildC2(root) {
   const registry = read('content/knowledge/registry/nodes.json');
   const blueprint = read('content/knowledge/blueprints/book-1-knowledge-blueprint-v1.3.0.legacy.json');
   const legacy = read('content/knowledge/editorial/readiness/kn-preface-001-production-readiness.json');
-  const { approvedByNode } = resolveHumanEditorialFreezeResolutions(root);
+  const { approvedByNode: wave1ApprovedByNode } = resolveHumanEditorialFreezeResolutions(root);
+  const vapW6aApprovedByNode = resolveVapW6aEditorialApprovals(root);
+  const approvedByNode = new Map([...wave1ApprovedByNode, ...vapW6aApprovedByNode]);
   const blueprintCodes = new Set(blueprint.nodes.map(node => node.nodeCode));
   const nodes = registry.nodes.filter(node => blueprintCodes.has(node.nodeCode));
   if (nodes.length !== 78 || blueprint.nodes.length !== 78) throw coded(
@@ -78,10 +81,15 @@ export function buildC2(root) {
       entries.push({ nodeCode: code, status: 'frozen', thesisState: 'frozen', boundaryState: 'frozen', humanFreezeState: 'approved', record: frozenPath, freezeRecord: freezePath });
     } else if (approvedByNode.has(code)) {
       const approved = approvedByNode.get(code);
+      validateApprovedResolutionEntry(approved);
       const content = approved.proposedContent;
       const hash = contentHash(content);
       const frozenPath = `${C2_ROOT}/frozen/${slug(code)}.json`;
       const freezePath = `${C2_ROOT}/freezes/${slug(code)}-freeze.json`;
+      const authoritySource = approved.authoritySource || C2_WAVE1_HUMAN_RESOLUTION;
+      const migration = approved.authoritySource
+        ? 'vap_w6a_human_editorial_freeze_resolution'
+        : 'human_editorial_freeze_resolution';
       files.set(frozenPath, {
         schemaVersion: 'PHI-OS-PJA-W2F-C2-FROZEN-v1.0.0',
         nodeCode: code,
@@ -93,8 +101,8 @@ export function buildC2(root) {
         content,
         contentHash: hash,
         authority: {
-          source: C2_WAVE1_HUMAN_RESOLUTION,
-          migration: 'human_editorial_freeze_resolution'
+          source: authoritySource,
+          migration
         }
       });
       files.set(freezePath, {
@@ -105,7 +113,7 @@ export function buildC2(root) {
         reviewerRole: approved.humanDecision.actorRole,
         reviewedAt: approved.humanDecision.decidedAt,
         contentHash: hash,
-        sourceRecord: C2_WAVE1_HUMAN_RESOLUTION
+        sourceRecord: authoritySource
       });
       entries.push({
         nodeCode: code,

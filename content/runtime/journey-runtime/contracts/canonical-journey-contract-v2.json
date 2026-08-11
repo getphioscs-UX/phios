@@ -1,0 +1,65 @@
+{
+  "contractCode": "PHI-OS-JR-W1-CANONICAL-JOURNEY-CONTRACT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "JR",
+  "work": "JR-W1",
+  "status": "active_frozen_candidate",
+  "schemaReference": "content/runtime/journey-runtime/schemas/canonical-journey-v2.schema.json",
+  "requiredFields": [
+    "schemaVersion",
+    "journeyId",
+    "customerReference",
+    "stage",
+    "context",
+    "session",
+    "progress",
+    "realityReference",
+    "readoutReferences",
+    "consentReferences",
+    "dataPurpose"
+  ],
+  "preservedFields": [
+    "journeyId",
+    "customerReference",
+    "stage",
+    "context",
+    "session",
+    "progress"
+  ],
+  "v2Fields": [
+    "realityReference",
+    "readoutReferences",
+    "consentReferences",
+    "dataPurpose"
+  ],
+  "authorityBoundary": {
+    "journeyOwnsWorkflowState": true,
+    "journeyOwnsRealityTruth": false,
+    "journeyOwnsReadoutTruth": false,
+    "journeyOwnsMeaning": false,
+    "journeyOwnsKnowledge": false,
+    "journeyOwnsProfessionalJudgment": false,
+    "journeyOwnsNavigationIntelligence": false,
+    "journeyOwnsPresentation": false,
+    "journeyOwnsDataGovernance": false
+  },
+  "referenceOnlyFields": [
+    "realityReference",
+    "readoutReferences",
+    "consentReferences",
+    "context.canonicalRealityReferences",
+    "context.meaningReferences",
+    "context.knowledgeReferences",
+    "context.readoutReferences",
+    "context.publishedAssetReferences",
+    "context.previousStateReferences"
+  ],
+  "rules": {
+    "authorityPayloadCopyForbidden": true,
+    "uiInventedStageForbidden": true,
+    "automaticProfessionalResponsibilityForbidden": true,
+    "automaticLifeDecisionForbidden": true,
+    "unknownsMustRemainVisible": true,
+    "missingAuthorityMustNotBeSynthesized": true
+  }
+}

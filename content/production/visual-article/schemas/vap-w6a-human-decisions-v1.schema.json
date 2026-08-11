@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VAP-W6A Human Decisions",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "decisionEnvelopeCode",
+    "batchCode",
+    "status",
+    "reviewReference",
+    "entries"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-VAP-W6A-HUMAN-DECISIONS-v1.0.0"
+    },
+    "decisionEnvelopeCode": {
+      "type": "string"
+    },
+    "batchCode": {
+      "const": "VAP-ARTICLE-BATCH-001"
+    },
+    "status": {
+      "enum": [
+        "PENDING_HUMAN",
+        "PARTIALLY_HUMAN_APPROVED",
+        "HUMAN_APPROVED"
+      ]
+    },
+    "reviewReference": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "decisionCode",
+          "nodeCode",
+          "proposalContentHash",
+          "decisionState",
+          "productionDecision",
+          "productionRole",
+          "requiredOutputs",
+          "dispatchTarget",
+          "c2FreezeDecision",
+          "manuscriptMappingDecision",
+          "actor",
+          "productionActorRole",
+          "editorialActorRole",
+          "decidedAt",
+          "rationale"
+        ]
+      }
+    }
+  }
+}

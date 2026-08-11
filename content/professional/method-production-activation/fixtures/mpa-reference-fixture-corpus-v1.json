@@ -1,0 +1,411 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W12-REFERENCE-FIXTURE-CORPUS-v1.0.0",
+  "work": "MPA-W12",
+  "baselineCommit": "3dd903344945ecd3b585c8aafe48b93d7894caa9",
+  "corpusVersion": "1.0.0",
+  "status": "VALIDATION_CORPUS_NO_PRODUCTION_EVIDENCE",
+  "methods": [
+    "NUMEROLOGY",
+    "ASTROLOGY",
+    "BAZI",
+    "HUMAN_DESIGN"
+  ],
+  "requiredFixtureTypes": [
+    "valid",
+    "edge",
+    "invalid",
+    "regression"
+  ],
+  "requiredCoverage": [
+    "KNOWN_INPUT",
+    "KNOWN_EXPECTED_OUTPUT",
+    "BOUNDARY_INPUT",
+    "TIMEZONE_BOUNDARY",
+    "LEAP_YEAR",
+    "DST",
+    "MISSING_TIME",
+    "INVALID_LOCATION",
+    "DETERMINISM"
+  ],
+  "fixtures": [
+    {
+      "fixtureId": "NUM-VALID-001",
+      "methodCode": "NUMEROLOGY",
+      "fixtureType": "valid",
+      "coverage": [
+        "KNOWN_INPUT",
+        "KNOWN_EXPECTED_OUTPUT"
+      ],
+      "input": {
+        "birthDate": "1989-11-15"
+      },
+      "expected": {
+        "status": "PASS",
+        "lifePath": 8,
+        "birthdayNumber": 6,
+        "attitudeNumber": 8
+      },
+      "authorityReferences": [
+        "NUMERIC_REDUCTION_RULES_V1"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "NUM-EDGE-LEAP-001",
+      "methodCode": "NUMEROLOGY",
+      "fixtureType": "edge",
+      "coverage": [
+        "LEAP_YEAR",
+        "BOUNDARY_INPUT"
+      ],
+      "input": {
+        "birthDate": "2000-02-29"
+      },
+      "expected": {
+        "status": "PASS",
+        "lifePath": 4,
+        "birthdayNumber": 11,
+        "attitudeNumber": 4
+      },
+      "authorityReferences": [
+        "NUMERIC_REDUCTION_RULES_V1"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "NUM-INVALID-DATE-001",
+      "methodCode": "NUMEROLOGY",
+      "fixtureType": "invalid",
+      "coverage": [
+        "INVALID_DATE"
+      ],
+      "input": {
+        "birthDate": "2025-02-29"
+      },
+      "expected": {
+        "status": "ERROR",
+        "errorCode": "INPUT_INVALID"
+      },
+      "authorityReferences": [],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "NUM-REGRESSION-001",
+      "methodCode": "NUMEROLOGY",
+      "fixtureType": "regression",
+      "coverage": [
+        "DETERMINISM",
+        "KNOWN_EXPECTED_OUTPUT"
+      ],
+      "input": {
+        "birthDate": "1989-11-15"
+      },
+      "expected": {
+        "status": "PASS",
+        "repeatOutputMustMatch": true,
+        "lifePath": 8
+      },
+      "authorityReferences": [
+        "NUMERIC_REDUCTION_RULES_V1"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "AST-VALID-001",
+      "methodCode": "ASTROLOGY",
+      "fixtureType": "valid",
+      "coverage": [
+        "KNOWN_INPUT",
+        "KNOWN_EXPECTED_OUTPUT"
+      ],
+      "input": {
+        "utcIso": "1989-11-15T14:50:00.000Z",
+        "coordinate": {
+          "latitude": 4.85,
+          "longitude": 100.7333
+        },
+        "observerMode": "TOPOCENTRIC"
+      },
+      "expected": {
+        "status": "PASS",
+        "julianDay": 2447846.118055556,
+        "referenceEvidence": "SYNTHETIC_ADAPTER_VALIDATION_ONLY"
+      },
+      "authorityReferences": [
+        "AST_EPHEMERIS_AUTHORITY"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "AST-EDGE-DST-001",
+      "methodCode": "ASTROLOGY",
+      "fixtureType": "edge",
+      "coverage": [
+        "DST",
+        "TIMEZONE_BOUNDARY"
+      ],
+      "input": {
+        "localDate": "2026-11-01",
+        "localTime": "01:30:00",
+        "timezone": "America/New_York"
+      },
+      "expected": {
+        "status": "BLOCKED_UNTIL_RESOLVED_CONTEXT",
+        "errorCode": "PRECISION_LIMIT",
+        "reason": "DST ambiguity must be resolved by MPA-W9 with explicit authority lineage"
+      },
+      "authorityReferences": [
+        "IANA_TZDB"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "AST-INVALID-LOCATION-001",
+      "methodCode": "ASTROLOGY",
+      "fixtureType": "invalid",
+      "coverage": [
+        "INVALID_LOCATION"
+      ],
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "coordinates": {
+          "latitude": 91,
+          "longitude": 100.7
+        }
+      },
+      "expected": {
+        "status": "ERROR",
+        "errorCode": "INPUT_INVALID"
+      },
+      "authorityReferences": [],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "AST-REGRESSION-001",
+      "methodCode": "ASTROLOGY",
+      "fixtureType": "regression",
+      "coverage": [
+        "DETERMINISM",
+        "REFERENCE_COMPARISON"
+      ],
+      "input": {
+        "utcIso": "1989-11-15T14:50:00.000Z",
+        "coordinate": {
+          "latitude": 4.85,
+          "longitude": 100.7333
+        }
+      },
+      "expected": {
+        "status": "BLOCKED_TRUSTED_REFERENCE_PENDING",
+        "repeatOutputMustMatch": true,
+        "comparisonStatus": "UNRESOLVED_TRUSTED_REFERENCE_PENDING"
+      },
+      "authorityReferences": [
+        "AST_EPHEMERIS_AUTHORITY"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-VALID-001",
+      "methodCode": "BAZI",
+      "fixtureType": "valid",
+      "coverage": [
+        "KNOWN_INPUT",
+        "KNOWN_EXPECTED_OUTPUT"
+      ],
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "timezone": "Asia/Kuala_Lumpur",
+        "coordinates": {
+          "latitude": 4.85,
+          "longitude": 100.7333
+        }
+      },
+      "expected": {
+        "status": "PASS_VALIDATION_ONLY",
+        "utcIso": "1989-11-15T14:50:00.000Z",
+        "trueSolarCorrectionMinutes": -12.5,
+        "pillarFixture": {
+          "year": "JI-SI",
+          "month": "YI-HAI",
+          "day": "JI-MAO",
+          "hour": "YI-HAI"
+        }
+      },
+      "authorityReferences": [
+        "BZR_CALENDAR_POLICY_V1",
+        "BZR_STEM_BRANCH_TABLES_V1",
+        "IANA_TZDB"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-EDGE-MISSING-TIME-001",
+      "methodCode": "BAZI",
+      "fixtureType": "edge",
+      "coverage": [
+        "MISSING_TIME",
+        "BOUNDARY_INPUT"
+      ],
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": null,
+        "timezone": "Asia/Kuala_Lumpur"
+      },
+      "expected": {
+        "status": "PARTIAL_DATE_ONLY",
+        "hourPillar": null,
+        "errorCode": "PRECISION_LIMIT"
+      },
+      "authorityReferences": [
+        "BZR_CALENDAR_POLICY_V1"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-INVALID-LOCATION-001",
+      "methodCode": "BAZI",
+      "fixtureType": "invalid",
+      "coverage": [
+        "INVALID_LOCATION"
+      ],
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "coordinates": {
+          "latitude": 4.85,
+          "longitude": 181
+        }
+      },
+      "expected": {
+        "status": "ERROR",
+        "errorCode": "INPUT_INVALID"
+      },
+      "authorityReferences": [],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-REGRESSION-001",
+      "methodCode": "BAZI",
+      "fixtureType": "regression",
+      "coverage": [
+        "DETERMINISM",
+        "CALENDAR_BOUNDARY"
+      ],
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "timezone": "Asia/Kuala_Lumpur"
+      },
+      "expected": {
+        "status": "PASS_VALIDATION_ONLY",
+        "repeatOutputMustMatch": true,
+        "productionEligible": false
+      },
+      "authorityReferences": [
+        "BZR_CALENDAR_POLICY_V1",
+        "BZR_STEM_BRANCH_TABLES_V1"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "HDR-VALID-001",
+      "methodCode": "HUMAN_DESIGN",
+      "fixtureType": "valid",
+      "coverage": [
+        "KNOWN_INPUT",
+        "KNOWN_EXPECTED_OUTPUT",
+        "RESTRICTED_TRACK"
+      ],
+      "input": {
+        "utcIso": "2026-08-06T00:00:00.000Z",
+        "personalitySunLongitude": 120
+      },
+      "expected": {
+        "status": "PASS_SYNTHETIC_VALIDATION_ONLY",
+        "targetSolarArcDegrees": 88,
+        "productionEligible": false
+      },
+      "authorityReferences": [
+        "HDR_SOLAR_ARC_CONSTANTS_V1"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "HDR-EDGE-MISSING-TIME-001",
+      "methodCode": "HUMAN_DESIGN",
+      "fixtureType": "edge",
+      "coverage": [
+        "MISSING_TIME",
+        "PRECISION_BOUNDARY",
+        "RESTRICTED_TRACK"
+      ],
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": null
+      },
+      "expected": {
+        "status": "ERROR",
+        "errorCode": "INPUT_INCOMPLETE"
+      },
+      "authorityReferences": [
+        "HDR_SOLAR_ARC_CONSTANTS_V1"
+      ],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "HDR-INVALID-LOCATION-001",
+      "methodCode": "HUMAN_DESIGN",
+      "fixtureType": "invalid",
+      "coverage": [
+        "INVALID_LOCATION",
+        "RESTRICTED_TRACK"
+      ],
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "coordinates": {
+          "latitude": -91,
+          "longitude": 100.7
+        }
+      },
+      "expected": {
+        "status": "ERROR",
+        "errorCode": "INPUT_INVALID"
+      },
+      "authorityReferences": [],
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "HDR-REGRESSION-001",
+      "methodCode": "HUMAN_DESIGN",
+      "fixtureType": "regression",
+      "coverage": [
+        "DETERMINISM",
+        "RESTRICTED_TRACK"
+      ],
+      "input": {
+        "utcIso": "2026-08-06T00:00:00.000Z",
+        "ephemerisVersion": "TEST-1"
+      },
+      "expected": {
+        "status": "BLOCKED_PRODUCTION",
+        "repeatOutputMustMatch": true,
+        "errorCode": "METHOD_NOT_ELIGIBLE"
+      },
+      "authorityReferences": [
+        "HDR_SOLAR_ARC_CONSTANTS_V1",
+        "HDR_GATE_MAPPING_AUTHORITY"
+      ],
+      "productionEvidence": false
+    }
+  ],
+  "rules": {
+    "syntheticAdapterEvidenceMaySupportValidation": true,
+    "syntheticAdapterEvidenceCannotCreateProductionEligibility": true,
+    "trustedReferencePendingMustRemainExplicit": true,
+    "fixtureFailureBlocksValidation": true
+  }
+}
