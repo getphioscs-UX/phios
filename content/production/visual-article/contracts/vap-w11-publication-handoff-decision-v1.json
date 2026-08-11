@@ -1,0 +1,50 @@
+{
+  "contractCode": "PHI-OS-VAP-W11-PUBLICATION-HANDOFF-DECISION-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W11",
+  "baselineCommit": "d150a741231abe608a0d994e9e5787e6c71cfc3d",
+  "batchCode": "VAP-ARTICLE-BATCH-001",
+  "locale": "zh-Hans",
+  "inputAuthority": [
+    "six VAP-W10 Human-approved Production Article Packages",
+    "six accepted Human Editorial Reviews",
+    "six PJA Human Approval records",
+    "six Candidate-bound Canonical Production Brief v2 digests"
+  ],
+  "outputAuthority": "human_publication_decision_and_publication_runtime_handoff_only",
+  "authorityBoundary": {
+    "humanApprovalEqualsPublication": false,
+    "humanPublicationDecisionEqualsPublicationRecord": false,
+    "publicationHandoffEqualsPublicationRecord": false,
+    "pjaPublicationRuntimeRequired": true,
+    "publicationRecordEqualsPublicProjection": false,
+    "w11MayWritePjaPublicationRegistry": false,
+    "w11MayWritePublishedKnowledgeAuthority": false,
+    "w11MayMutateArticleBody": false
+  },
+  "allowedOperations": [
+    "read_human_approved_production_article_package",
+    "validate_candidate_review_approval_lineage",
+    "deterministically_reconstruct_bound_canonical_brief_v2",
+    "materialize_exact_digest_bound_canonical_brief_v2",
+    "resolve_publication_identity",
+    "create_pending_human_publication_decision_envelope",
+    "record_explicit_per_node_human_publication_decision",
+    "create_publication_runtime_handoff",
+    "report"
+  ],
+  "prohibitedOperations": [
+    "infer_human_publication_decision",
+    "bulk_human_publication_approval",
+    "rewrite_candidate",
+    "rewrite_article_body",
+    "modify_review",
+    "modify_approval",
+    "write_pja_publication_package",
+    "write_pja_publication_registry",
+    "write_published_knowledge_authority",
+    "write_public_runtime_projection",
+    "call_provider"
+  ],
+  "nextAuthority": "PJA Publication Runtime after explicit TL publish decision"
+}

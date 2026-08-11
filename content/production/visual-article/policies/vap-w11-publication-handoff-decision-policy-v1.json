@@ -1,0 +1,26 @@
+{
+  "policyCode": "PHI-OS-VAP-W11-PUBLICATION-HANDOFF-DECISION-POLICY-v1",
+  "version": "1.0.0",
+  "work": "VAP-W11",
+  "humanPublicationAuthority": "TL Independent Publication Authority",
+  "bulkPublicationDecisionAllowed": false,
+  "oneIndependentDecisionPerNode": true,
+  "allowedHumanDecisions": ["publish", "do_not_publish", "defer"],
+  "systemMayInferPublishFromHumanApproval": false,
+  "systemMayInferPublishFromContinueCommand": false,
+  "aiMayActAsPublicationAuthority": false,
+  "publicationDecisionRequiresExactFrozenQueueDigest": true,
+  "canonicalBriefMaterialization": {
+    "allowed": true,
+    "mustMatchCandidateSourceBriefDigestExactly": true,
+    "mayChangeRepositoryCommit": false,
+    "mayRewriteCanonicalMeaning": false
+  },
+  "publicationExecution": {
+    "performedByW11": false,
+    "requiresPjaPublicationRuntime": true,
+    "publicationRegistryMutationAllowed": false,
+    "publishedKnowledgeAuthorityMutationAllowed": false,
+    "publicProjectionAllowed": false
+  }
+}
