@@ -1,0 +1,106 @@
+{
+  "matrixCode": "PHI-OS-MPA-W29-FULL-ACCEPTANCE-MATRIX-v1",
+  "matrixVersion": "1.0.0",
+  "work": "MPA-W29",
+  "baselineCommit": "07391e717e64c2636ce22e3f97900ff97d9571d8",
+  "status": "FULL_ACCEPTANCE_TEST_MATRIX",
+  "methodStateMatrix": {
+    "NUMEROLOGY": {
+      "methodVersion": "0.1.0-candidate",
+      "capabilities": {
+        "DATA": "CONDITIONALLY_ELIGIBLE",
+        "CALCULATION": "CONDITIONALLY_ELIGIBLE",
+        "PROJECTION": "CONDITIONALLY_ELIGIBLE",
+        "INTERPRETATION": "BLOCKED",
+        "PROFESSIONAL": "BLOCKED",
+        "PUBLIC": "BLOCKED"
+      },
+      "productionExecutionAllowed": false
+    },
+    "ASTROLOGY": {
+      "methodVersion": "0.1.0",
+      "capabilities": {
+        "DATA": "BLOCKED",
+        "CALCULATION": "BLOCKED",
+        "PROJECTION": "BLOCKED",
+        "INTERPRETATION": "BLOCKED",
+        "PROFESSIONAL": "BLOCKED",
+        "PUBLIC": "BLOCKED"
+      },
+      "productionExecutionAllowed": false
+    },
+    "BAZI": {
+      "methodVersion": "0.1.0",
+      "capabilities": {
+        "DATA": "CONDITIONALLY_ELIGIBLE",
+        "CALCULATION": "CONDITIONALLY_ELIGIBLE",
+        "PROJECTION": "CONDITIONALLY_ELIGIBLE",
+        "INTERPRETATION": "BLOCKED",
+        "PROFESSIONAL": "BLOCKED",
+        "PUBLIC": "BLOCKED"
+      },
+      "productionExecutionAllowed": false
+    },
+    "HUMAN_DESIGN": {
+      "methodVersion": "1.0.0",
+      "capabilities": {
+        "DATA": "BLOCKED",
+        "CALCULATION": "BLOCKED",
+        "PROJECTION": "BLOCKED",
+        "INTERPRETATION": "BLOCKED",
+        "PROFESSIONAL": "BLOCKED",
+        "PUBLIC": "BLOCKED"
+      },
+      "productionExecutionAllowed": false
+    }
+  },
+  "tests": [
+    {
+      "testCode": "MPA-W29-T01",
+      "requirement": "blocked method cannot execute",
+      "expected": "PASS_FAIL_CLOSED"
+    },
+    {
+      "testCode": "MPA-W29-T02",
+      "requirement": "conditionally eligible cannot execute",
+      "expected": "PASS_FAIL_CLOSED"
+    },
+    {
+      "testCode": "MPA-W29-T03",
+      "requirement": "validation-only cannot appear as production",
+      "expected": "PASS_FAIL_CLOSED"
+    },
+    {
+      "testCode": "MPA-W29-T04",
+      "requirement": "missing input cannot be fabricated",
+      "expected": "PASS_FAIL_CLOSED"
+    },
+    {
+      "testCode": "MPA-W29-T05",
+      "requirement": "projection cannot become fact",
+      "expected": "PASS_BOUNDARY_PRESERVED"
+    },
+    {
+      "testCode": "MPA-W29-T06",
+      "requirement": "professional boundary remains",
+      "expected": "PASS_BOUNDARY_PRESERVED"
+    },
+    {
+      "testCode": "MPA-W29-T07",
+      "requirement": "public term boundary remains",
+      "expected": "PASS_BOUNDARY_PRESERVED"
+    },
+    {
+      "testCode": "MPA-W29-T08",
+      "requirement": "MPA does not create customer readout",
+      "expected": "PASS_BOUNDARY_PRESERVED"
+    }
+  ],
+  "currentState": {
+    "unconditionalEligibleCapabilityCount": 0,
+    "conditionallyEligibleCapabilityCount": 6,
+    "blockedCapabilityCount": 36,
+    "productionRuntimeDispatchActivated": false,
+    "customerReadoutCreatedByMpa": false
+  }
+}

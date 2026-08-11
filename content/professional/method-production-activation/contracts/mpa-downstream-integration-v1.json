@@ -1,0 +1,53 @@
+{
+  "contractCode": "PHI-OS-MPA-W28-DOWNSTREAM-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "MPA-W28",
+  "baselineCommit": "07391e717e64c2636ce22e3f97900ff97d9571d8",
+  "status": "ACTIVE_REFERENCE_ONLY_DOWNSTREAM_INTEGRATION",
+  "canonicalFlow": [
+    "METHOD_PROJECTION",
+    "RMO",
+    "RRE",
+    "JR_PR_RNE",
+    "CPR",
+    "WPR"
+  ],
+  "canonicalFlowDisplay": "Method Projection → RMO → RRE → JR / PR / RNE → CPR → WPR",
+  "authority": {
+    "mpaOwnsMethodProductionEligibility": true,
+    "mpaOwnsMethodProductionExecutionGate": true,
+    "mpaOwnsCustomerReadout": false,
+    "mpaOwnsRealityTruth": false,
+    "mpaOwnsProfessionalJudgment": false,
+    "mpaOwnsJourney": false,
+    "mpaOwnsNavigationDecision": false,
+    "mpaOwnsPresentation": false,
+    "mpaOwnsWebProjection": false
+  },
+  "handoffRules": {
+    "methodProjectionToRmo": "REFERENCE_ONLY_RDG_GOVERNED",
+    "rmoToRre": "CANONICAL_REALITY_REFERENCE_PLUS_GOVERNED_SOURCE_REFERENCES",
+    "rreToJrPrRne": "CANONICAL_READOUT_REFERENCE_ONLY",
+    "jrPrRneToCpr": "GOVERNED_CONSUMER_OUTPUT_OR_REFERENCE_PRESENTATION_ONLY",
+    "cprToWpr": "CANONICAL_PRESENTATION_OR_COMPOSITION_REFERENCE_ONLY"
+  },
+  "productionRules": {
+    "projectionHandoffRequiresEligibilityDecision": "ELIGIBLE",
+    "conditionallyEligibleCannotHandoffAsProduction": true,
+    "blockedCannotHandoffAsProduction": true,
+    "validationOnlyProjectionCannotHandoffAsProduction": true,
+    "currentProductionProjectionHandoffCount": 0,
+    "currentCustomerReadoutCountCreatedByMpa": 0
+  },
+  "separations": [
+    "METHOD_PROJECTION_NE_REALITY_FACT",
+    "METHOD_PROJECTION_NE_RRE_READOUT",
+    "RRE_READOUT_NE_PROFESSIONAL_JUDGMENT",
+    "RRE_READOUT_NE_NAVIGATION_DECISION",
+    "JR_NE_REALITY_TRUTH",
+    "PR_HUMAN_AUTHORITY_ONLY",
+    "RNE_NE_NAVIGATION_COMMAND",
+    "CPR_PRESENTATION_ONLY",
+    "WPR_WEB_PROJECTION_ONLY"
+  ]
+}
