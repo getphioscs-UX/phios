@@ -6,6 +6,7 @@ const knowledgeRelease = Object.freeze({
       available: '可用',
       preview: '预览',
       development: '开发中',
+      architecture: '架构已定义',
       later: '稍后推出',
       bookOne: '第一册 · 世界如何形成',
       price: 'RM89',
@@ -33,6 +34,7 @@ const knowledgeRelease = Object.freeze({
       atlas: 'Atlas',
       figures: '图示',
       glossary: '术语表',
+      academy: 'Academy',
       downloads: '下载',
       results: '显示 {count} 项资源',
       empty: '没有符合筛选条件的资源。',
@@ -331,7 +333,46 @@ const knowledgeRelease = Object.freeze({
       paidLabel: '完整第一册',
       continue: '继续前往第一册',
       figures: '打开相关图示'
-    }
+    },
+    production: {
+      volume: '第 {volume} 册',
+      status: {
+        'publication-preparation': '出版准备',
+        'in-development': '开发中',
+        'architecture-defined': '架构已定义'
+      },
+      openVolume: '打开本册',
+      sourceUnavailable: 'Canonical Book 数据目前不可用。',
+      booksEyebrow: '四册知识架构',
+      booksTitle: '四册、十五个 Part、同一套 Reality Architecture。',
+      booksLead: '书册身份、Part 归属与发布状态直接投射自 Canonical Registry。',
+      partState: { completed: '已完成', 'in-development': '开发中', 'architecture-only': '仅架构' },
+      crossVolume: '跨册核心语言',
+      registryLed: 'Registry-led 公开投射',
+      bookOnePurchase: '第一册 · RM89',
+      bookOnePreview: '预览第一册',
+      futureVolumeBoundary: '本册目前以 Canonical Architecture 公开，不代表完整出版已经完成。',
+      allVolumes: '查看全部四册',
+      coverBoundary: '只有 Public Base 与 Asset Verification 通过后，才显示受治理的 R2 封面。',
+      architectureEyebrow: 'Canonical Architecture',
+      architectureTitle: '{count} 个 Part',
+      ownershipBoundary: 'Part 归属遵循 Canonical Part Registry。',
+      thesisTitle: 'Reality Navigation Thesis',
+      thesisCopy: 'PHI OS Reality Navigation Architecture 背后的研究论文。',
+      previewTitle: '第一册预览',
+      previewCopy: 'Reality Formation 的受限公开预览。',
+      atlasTitle: 'Reality Atlas',
+      atlasCopy: '通过受治理的路线与坐标探索知识架构。',
+      figuresTitle: '第一册 Figures',
+      figuresCopy: '当前有 {count} 张 Figure 与 Canonical Book I Part ownership 保持一致。',
+      glossaryTitle: 'PHI OS Glossary',
+      glossaryCopy: 'Reality Architecture 使用的 Canonical 概念与定义。',
+      academyTitle: 'Reality Academy',
+      academyCopy: '探索受治理的 Learning Architecture，不推断 live entitlement 或 learner state。',
+      downloadsTitle: '公开研究下载',
+      downloadsCopy: '已经公开发布的研究材料与受治理下载路径。'
+    },
+
   }
 });
 

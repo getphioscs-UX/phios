@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W6-CANONICAL-METHOD-INPUT-CONTRACT-v1.0.0",
+  "work": "MPA-W6",
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "ACTIVE_CANONICAL_INPUT_CONTRACT_NO_PRODUCTION_GRANT",
+  "authority": {
+    "inputNormalizationOwner": "MPA_INPUT_GATE",
+    "personalDataAuthority": "RDG",
+    "sharedDataAuthority": "SHARED_DATA_AUTHORITY",
+    "methodRuleAuthority": "MR_IMR_CORE_METHOD_RUNTIME",
+    "methodDefinitionOwnedByMpa": false,
+    "algorithmDefinitionOwnedByMpa": false
+  },
+  "canonicalFields": [
+    "inputId",
+    "subjectReference",
+    "methodCode",
+    "methodVersion",
+    "requestedCapabilities",
+    "birthDate",
+    "birthTime",
+    "birthPlace",
+    "timezone",
+    "coordinates",
+    "calendarCode",
+    "inputPrecision",
+    "source",
+    "customerConfirmation",
+    "consentRecordId",
+    "purposeCode"
+  ],
+  "precisionValues": [
+    "exact",
+    "approximate",
+    "unknown"
+  ],
+  "rules": {
+    "silentDefaultsForbidden": true,
+    "unknownMustRemainExplicit": true,
+    "unknownBirthTimeMayNotBecomeNoon": true,
+    "timezoneMayNotBeGuessed": true,
+    "coordinatesMayNotBeGuessed": true,
+    "customerConfirmationMustBeExplicitBoolean": true,
+    "consentReferenceRequiredBeforePersonalCalculation": true,
+    "purposeCodeRequiredBeforePersonalCalculation": true,
+    "methodSpecificRequirementsAreCapabilityScoped": true,
+    "registrationDoesNotGrantExecution": true
+  },
+  "methodProfiles": [
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "requiredForCalculation": [
+        "birthDate",
+        "calendarCode"
+      ],
+      "optional": [
+        "birthTime",
+        "birthPlace",
+        "timezone",
+        "coordinates"
+      ],
+      "allowedRequestedCapabilities": [
+        "CALCULATION"
+      ],
+      "timePrecision": [
+        "exact",
+        "approximate",
+        "unknown"
+      ],
+      "notes": [
+        "Current NUM deterministic birth-number path is date based."
+      ]
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "requiredForCalculation": [
+        "birthDate",
+        "birthTime",
+        "birthPlace",
+        "timezone",
+        "calendarCode"
+      ],
+      "optional": [
+        "coordinates"
+      ],
+      "allowedRequestedCapabilities": [
+        "CALCULATION",
+        "PLANETS",
+        "HOUSES",
+        "ASPECTS"
+      ],
+      "timePrecision": [
+        "exact",
+        "approximate"
+      ],
+      "conditional": [
+        {
+          "capability": "HOUSES",
+          "requireResolvedCoordinates": true,
+          "precisionWarning": "House projection is birth-time and location sensitive."
+        }
+      ]
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "requiredForCalculation": [
+        "birthDate",
+        "birthPlace",
+        "timezone",
+        "calendarCode"
+      ],
+      "optional": [
+        "birthTime",
+        "coordinates"
+      ],
+      "allowedRequestedCapabilities": [
+        "CALCULATION",
+        "THREE_PILLARS",
+        "FOUR_PILLARS",
+        "LUCK_CYCLE"
+      ],
+      "timePrecision": [
+        "exact",
+        "approximate",
+        "unknown"
+      ],
+      "conditional": [
+        {
+          "capability": "THREE_PILLARS",
+          "unknownBirthTimeAllowed": true,
+          "hourPillarMustRemainUnresolved": true
+        },
+        {
+          "capability": "FOUR_PILLARS",
+          "birthTimeRequired": true
+        },
+        {
+          "capability": "LUCK_CYCLE",
+          "birthTimeRequired": true
+        }
+      ]
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "requiredForCalculation": [
+        "birthDate",
+        "birthTime",
+        "birthPlace",
+        "timezone",
+        "calendarCode"
+      ],
+      "optional": [
+        "coordinates"
+      ],
+      "allowedRequestedCapabilities": [
+        "CALCULATION"
+      ],
+      "timePrecision": [
+        "exact",
+        "approximate"
+      ],
+      "activationBoundary": "BLOCKED_UNTIL_MPA_W24_LICENSE_ALGORITHM_VOCABULARY_COMMERCIAL_PROFESSIONAL_GATES"
+    },
+    {
+      "methodCode": "I_CHING",
+      "pluginCode": "ICH",
+      "requiredForCalculation": [],
+      "optional": [],
+      "allowedRequestedCapabilities": [],
+      "activationBoundary": "INPUT_CONTRACT_NOT_DEFINED"
+    },
+    {
+      "methodCode": "TAROT",
+      "pluginCode": "TAR",
+      "requiredForCalculation": [],
+      "optional": [],
+      "allowedRequestedCapabilities": [],
+      "activationBoundary": "INPUT_CONTRACT_NOT_DEFINED"
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "pluginCode": "PSY",
+      "requiredForCalculation": [],
+      "optional": [],
+      "allowedRequestedCapabilities": [],
+      "activationBoundary": "INPUT_CONTRACT_NOT_DEFINED"
+    }
+  ],
+  "nextGate": "MPA-W7_CONSENT_AND_DATA_PURPOSE"
+}

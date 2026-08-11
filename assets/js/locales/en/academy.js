@@ -8,6 +8,7 @@ const academyLearning = Object.freeze({
       eyebrow: 'ALR-I · Presentation',
       label: 'Validation projection',
       boundary: 'Course delivery, learner progress, assessment results and credentials are not activated.',
+      wprDiscoveryBoundary: 'Academy discovery is public. Live entitlement, progress, assessment and credential delivery remain governed separately and are not activated by WPR.',
       progressUnavailable: 'Learner progress not provided',
       progressExplanation: 'This view does not infer “not started” and does not write a learning record.'
     },

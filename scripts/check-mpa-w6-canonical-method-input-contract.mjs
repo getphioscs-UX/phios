@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { BASELINE, readJson } from './lib/method-production-activation/mpa-input-calculation-v1.mjs';
+import { createCanonicalMethodInput } from '../functions/method-production-activation/canonical-method-input-runtime.js';
+const c=readJson('content/professional/method-production-activation/contracts/mpa-canonical-method-input-contract-v1.json');
+const s=readJson('content/professional/method-production-activation/schemas/mpa-canonical-method-input-v1.schema.json');
+assert.equal(c.work,'MPA-W6'); assert.equal(c.baselineCommit,BASELINE); assert.equal(c.rules.silentDefaultsForbidden,true); assert.equal(c.rules.unknownBirthTimeMayNotBecomeNoon,true);
+const codes=c.methodProfiles.map(x=>x.methodCode); assert.deepEqual(codes,['NUMEROLOGY','ASTROLOGY','BAZI','HUMAN_DESIGN','I_CHING','TAROT','PSYCHOLOGY']);
+const base={inputId:'MPA-IN-0001',subjectReference:'SUBJECT-1',methodVersion:'0.1.0-candidate',requestedCapabilities:['CALCULATION'],birthDate:'1989-11-15',birthTime:null,birthPlace:null,timezone:null,coordinates:null,calendarCode:'GREGORIAN',inputPrecision:{date:'exact',time:'unknown',place:'unknown',timezone:'unknown',coordinates:'unknown'},source:{sourceType:'human_declaration',sourceReference:'CUSTOMER_INPUT',sourceVersion:'1.0.0'},customerConfirmation:true,consentRecordId:'CONSENT-1',purposeCode:'SERVICE_DELIVERY',fabricatedDefaultsUsed:false};
+const num=createCanonicalMethodInput({...base,methodCode:'NUMEROLOGY'}); assert.equal(num.birthTime,null); assert.equal(num.fabricatedDefaultsUsed,false);
+const bazi=createCanonicalMethodInput({...base,inputId:'MPA-IN-0002',methodCode:'BAZI',birthPlace:'Kajang, Selangor, Malaysia',timezone:'Asia/Kuala_Lumpur',inputPrecision:{...base.inputPrecision,place:'exact',timezone:'exact'},requestedCapabilities:['CALCULATION','THREE_PILLARS']}); assert.equal(bazi.birthTime,null);
+assert.throws(()=>createCanonicalMethodInput({...base,methodCode:'BAZI',birthPlace:'Kajang',timezone:'Asia/Kuala_Lumpur',inputPrecision:{...base.inputPrecision,place:'exact',timezone:'exact'},requestedCapabilities:['FOUR_PILLARS']}),/requires known birthTime/i);
+assert.throws(()=>createCanonicalMethodInput({...base,methodCode:'ASTROLOGY'}),/birthTime is required|requires known birthTime/i);
+assert.throws(()=>createCanonicalMethodInput({...base,methodCode:'NUMEROLOGY',birthTime:'12:00'}),/Unknown birthTime precision requires null birthTime/);
+assert.throws(()=>createCanonicalMethodInput({...base,methodCode:'NUMEROLOGY',fabricatedDefaultsUsed:true}),/FABRICATED_DEFAULT_FORBIDDEN/);
+assert.throws(()=>createCanonicalMethodInput({...base,methodCode:'I_CHING'}),/METHOD_INPUT_CONTRACT_NOT_DEFINED/);
+console.log('✓ MPA-W6 Canonical Method Input Contract passed.');
+console.log('  Method-specific required/optional fields are capability-scoped; fabricated defaults remain forbidden.');

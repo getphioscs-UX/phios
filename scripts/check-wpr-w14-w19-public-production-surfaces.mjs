@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import { readJson, readText, BASELINE } from './lib/web-production/wpr-public-v1.mjs';
+await import('./check-wpr-w14-homepage-production.mjs');
+await import('./check-wpr-w15-library-production.mjs');
+await import('./check-wpr-w16-article-production.mjs');
+await import('./check-wpr-w17-figure-diagram-production.mjs');
+await import('./check-wpr-w18-books-production.mjs');
+await import('./check-wpr-w19-academy-production.mjs');
+
+const a=readJson('content/web-production/acceptance/wpr-w14-w19-public-production-surfaces-acceptance-v1.json');
+assert.equal(a.baselineCommit,BASELINE); assert.deepEqual(a.completedWorks,['WPR-W14','WPR-W15','WPR-W16','WPR-W17','WPR-W18','WPR-W19']); assert.equal(a.status,'ACCEPT_PUBLIC_SURFACES_LIMITED_PRODUCTION_NO_CPR_PROMOTION');
+for(const v of Object.values(a.nonActivation)) assert.equal(v,false);
+const web=readJson('content/web-production/registries/canonical-web-production-registry-v1.json'); assert.ok(web.productionRecords.length>0); assert.ok(web.productionRecords.every(r=>r.productionState==='LIMITED_PRODUCTION')); assert.ok(web.productionRecords.every(r=>r.lineage?.cprProductionRecordReference===null));
+const cpr=readJson('content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json'); assert.deepEqual(cpr.productionRecords,[]);
+const car=readJson('content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json'); assert.deepEqual(car.publications,[]);
+const vocab=readJson('content/web-production/audits/wpr-public-vocabulary-migration-closure-v1.json'); assert.equal(vocab.remainingHits.length,0); assert.equal(vocab.status,'closed_on_activated_public_customer_targets');
+const pkg=readJson('package.json'); const required={'check:wpr-w14':'node scripts/check-wpr-w14-homepage-production.mjs','check:wpr-w15':'node scripts/check-wpr-w15-library-production.mjs','check:wpr-w16':'node scripts/check-wpr-w16-article-production.mjs','check:wpr-w17':'node scripts/check-wpr-w17-figure-diagram-production.mjs','check:wpr-w18':'node scripts/check-wpr-w18-books-production.mjs','check:wpr-w19':'node scripts/check-wpr-w19-academy-production.mjs','check:wpr-w14-w19':'node scripts/check-wpr-w14-w19-public-production-surfaces.mjs','check:wpr-public':'npm run check:wpr-w14-w19'}; for(const[k,v]of Object.entries(required))assert.equal(pkg.scripts[k],v,k);
+assert.ok(pkg.scripts['check:wpr'].includes('npm run check:wpr-public')); assert.equal(pkg.scripts.postcheck.includes('check:wpr'),false,'WPR must remain outside postcheck until WPR-W29/W30.');
+console.log('✓ WPR-D W14-W19 Public Production Surfaces passed.');
+console.log(`✓ ${web.productionRecords.length} WPR limited-production records exist without CPR/CAR promotion.`);

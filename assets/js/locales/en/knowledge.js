@@ -6,6 +6,7 @@ const knowledgeRelease = Object.freeze({
       available: 'Available',
       preview: 'Preview',
       development: 'In Development',
+      architecture: 'Architecture Defined',
       later: 'Coming Later',
       bookOne: 'Book I · How Reality Forms',
       price: 'RM89',
@@ -33,6 +34,7 @@ const knowledgeRelease = Object.freeze({
       atlas: 'Atlas',
       figures: 'Figures',
       glossary: 'Glossary',
+      academy: 'Academy',
       downloads: 'Downloads',
       results: '{count} resources shown',
       empty: 'No resources match these filters.',
@@ -42,7 +44,7 @@ const knowledgeRelease = Object.freeze({
       metaTitle: 'Articles — PHI OS Knowledge',
       eyebrow: 'Blueprint-led Knowledge',
       title: 'Published questions for understanding Reality.',
-      lead: 'A deliberately small first release from the frozen Book I Blueprint. Only reviewed, published content appears here.',
+      lead: 'A deliberately small published release across the governed knowledge architecture. Only reviewed, published content appears here.',
       loading: 'Loading published articles…',
       results: '{count} published articles',
       empty: 'No reviewed articles are published in this language yet.',
@@ -331,7 +333,46 @@ const knowledgeRelease = Object.freeze({
       paidLabel: 'Complete Book I',
       continue: 'Continue to Book I',
       figures: 'Open related figures'
-    }
+    },
+    production: {
+      volume: 'Volume {volume}',
+      status: {
+        'publication-preparation': 'Publication preparation',
+        'in-development': 'In development',
+        'architecture-defined': 'Architecture defined'
+      },
+      openVolume: 'Open volume',
+      sourceUnavailable: 'Canonical book data is currently unavailable.',
+      booksEyebrow: 'Four-volume knowledge architecture',
+      booksTitle: 'Four volumes, fifteen Parts, one Reality architecture.',
+      booksLead: 'Book identity, Part ownership and release state are projected directly from canonical registries.',
+      partState: { completed: 'Completed', 'in-development': 'In development', 'architecture-only': 'Architecture only' },
+      crossVolume: 'Cross-volume core language',
+      registryLed: 'Registry-led public projection',
+      bookOnePurchase: 'Book I · RM89',
+      bookOnePreview: 'Preview Book I',
+      futureVolumeBoundary: 'This volume is visible as canonical architecture; complete publication is not yet claimed.',
+      allVolumes: 'All four volumes',
+      coverBoundary: 'The governed R2 cover appears only after public-base and asset verification pass.',
+      architectureEyebrow: 'Canonical architecture',
+      architectureTitle: '{count} Parts',
+      ownershipBoundary: 'Part ownership follows the canonical Part Registry.',
+      thesisTitle: 'Reality Navigation Thesis',
+      thesisCopy: 'The research thesis behind the PHI OS Reality Navigation architecture.',
+      previewTitle: 'Book I Preview',
+      previewCopy: 'A bounded public preview of Reality Formation.',
+      atlasTitle: 'Reality Atlas',
+      atlasCopy: 'Explore the knowledge architecture through governed routes and coordinates.',
+      figuresTitle: 'Book I Figures',
+      figuresCopy: '{count} figures currently remain aligned with canonical Book I Part ownership.',
+      glossaryTitle: 'PHI OS Glossary',
+      glossaryCopy: 'Canonical concepts and definitions used across the Reality architecture.',
+      academyTitle: 'Reality Academy',
+      academyCopy: 'Discover the governed learning architecture without inferring live entitlement or learner state.',
+      downloadsTitle: 'Public Research Downloads',
+      downloadsCopy: 'Publicly released research materials and governed download routes.'
+    },
+
   }
 });
 

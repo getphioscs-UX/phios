@@ -1,0 +1,75 @@
+{
+  "contractCode": "PHI-OS-VAP-W7-GOVERNED-PROVIDER-GENERATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W7",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "status": "active",
+  "implementationBaselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "purpose": "Activate real, explicitly authorized Provider generation for governed Article candidates after VAP-W6 production-brief eligibility, while keeping Provider output non-authoritative, isolated from Canonical Knowledge, and unable to approve, publish, or mutate governance state.",
+  "inputs": {
+    "batchSelection": "content/production/visual-article/batches/vap-article-batch-001-selection-v1.json",
+    "providerRegistry": "content/production/visual-article/provider/vap-w7-editorial-provider-registry-v1.json",
+    "providerPolicy": "content/production/visual-article/policies/vap-w7-provider-generation-policy-v1.json",
+    "existingPjaBriefExporter": "scripts/export-knowledge-production-brief.mjs",
+    "productionBriefDirectory": "dist/knowledge-production-briefs"
+  },
+  "upstreamExecutionGate": {
+    "perNodeProductionBriefExportReadyRequired": true,
+    "actualProductionBriefFileRequired": true,
+    "briefDigestBoundToGenerationRecord": true,
+    "blockedNodeProviderInvocationForbidden": true,
+    "zeroEligibleNodesIsValidFailClosedState": true,
+    "w6aOrEquivalentUpstreamGovernanceExpectedBeforeFirstRealBatch": true
+  },
+  "providerInvocationBoundary": {
+    "networkInvocationSupported": true,
+    "networkInvocationRequiresApply": true,
+    "networkInvocationRequiresExplicitNetworkFlag": true,
+    "providerMustBeExplicitlySelected": true,
+    "modelMustBeExplicitlyResolved": true,
+    "credentialMustComeFromEnvironment": true,
+    "credentialsMayBePersisted": false,
+    "providerOutputAuthority": "CANDIDATE_ONLY",
+    "providerMayCreateCanonicalKnowledge": false,
+    "providerMayCreateClaims": false,
+    "providerMayApproveClaims": false,
+    "providerMayCreateSources": false,
+    "providerMayApproveSources": false,
+    "providerMayChangeMeaningAuthority": false,
+    "providerMayChangeHumanProductionDecision": false,
+    "providerMayFreezeC2OrC3": false,
+    "providerMayPublish": false
+  },
+  "candidateIsolationBoundary": {
+    "stagingRoot": "dist/knowledge-production-candidates",
+    "providerCandidateMustRemainOutsideCanonicalAuthority": true,
+    "providerCandidateMustRemainOutsidePublishedKnowledge": true,
+    "automaticPjaCandidateImportAllowed": false,
+    "formalCandidateValidationDeferredTo": "VAP-W8",
+    "humanEditorialReviewRequired": true
+  },
+  "promptBoundary": {
+    "authoritativeInputIsGovernedProductionBrief": true,
+    "providerToolsEnabled": false,
+    "providerWebSearchEnabled": false,
+    "providerFileSearchEnabled": false,
+    "providerMustNotInventSources": true,
+    "providerMustNotInventCanonicalClaims": true,
+    "providerMustNotEmitInternalRegistryIdentifiersInPublicBody": true,
+    "unverifiedExternalFactsMustRemainQualified": true
+  },
+  "batchBoundary": {
+    "maximumNodes": 24,
+    "sequentialInvocation": true,
+    "nodeIsolatedFailure": true,
+    "partialSuccessfulCandidateStagingAllowed": true,
+    "batchSuccessDoesNotMeanHumanApproval": true
+  },
+  "outputs": {
+    "activation": "content/production/visual-article/activation/vap-w7-governed-provider-generation-v1.json",
+    "candidatePattern": "dist/knowledge-production-candidates/<BATCH_CODE>/<NODE_CODE>.<LOCALE>.provider-candidate.md",
+    "generationRecordPattern": "dist/knowledge-production-candidates/<BATCH_CODE>/<NODE_CODE>.<LOCALE>.provider-generation.json",
+    "batchRunReportPattern": "dist/knowledge-production-candidates/<BATCH_CODE>/provider-generation-run.json"
+  },
+  "nextWork": "VAP-W8_CANDIDATE_VALIDATION_AND_PJA_IMPORT"
+}

@@ -178,7 +178,15 @@ for (const output of freeze.frozenOutputs) assert.ok(exists(output), `missing fr
 
 assert.equal(packageJson.scripts['check:rre-w0-w4'], 'node scripts/check-rre-w0-w4-readout-foundation.mjs');
 assert.equal(packageJson.scripts['check:rre-foundation'], 'npm run check:rre-w0-w4');
-assert.equal(packageJson.scripts['check:rre'], 'npm run check:rre-foundation');
+const rreAlias = packageJson.scripts['check:rre'];
+assert.ok(
+  rreAlias === 'npm run check:rre-foundation' ||
+  rreAlias === 'npm run check:rre-foundation && npm run check:rre-reading',
+  `Unexpected check:rre alias: ${rreAlias}`
+);
+if (rreAlias.includes('check:rre-reading')) {
+  assert.equal(packageJson.scripts['check:rre-reading'], 'npm run check:rre-w5-w10');
+}
 
 console.log('✓ RRE-W0-W4 Reality Readout Engine foundation passed.');
 console.log('✓ Existing RRE Evidence authority and RMO evidence binding remain preserved.');

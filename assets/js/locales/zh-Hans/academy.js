@@ -8,6 +8,7 @@ const academyLearning = Object.freeze({
       eyebrow: 'ALR-I · 呈现',
       label: '验证投影',
       boundary: '课程交付、学习进度、评估结果与凭证尚未启用。',
+      wprDiscoveryBoundary: 'Academy Discovery 可以公开；live entitlement、progress、assessment 与 credential delivery 仍由各自治理层管理，不由 WPR 激活。',
       progressUnavailable: '未提供学习进度',
       progressExplanation: '本视图不会推断“尚未开始”，也不会写入学习记录。'
     },

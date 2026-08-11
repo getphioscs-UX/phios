@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W4",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "canonical_foundation",
+  "status": "canonical_wpr_d_public_routes_active",
   "entries": [
     {
       "routeCode": "HOME",
@@ -33,7 +33,7 @@
       "routeCode": "ARTICLE",
       "path": "/articles/:slug",
       "surfaceCode": "ARTICLE",
-      "implementationState": "TARGET_CANONICAL",
+      "implementationState": "EXISTING_STATIC_PUBLISHED_ROUTES",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     },
@@ -47,9 +47,9 @@
     },
     {
       "routeCode": "FIGURE",
-      "path": "/figure/:figureCode",
+      "path": "/figure",
       "surfaceCode": "FIGURE",
-      "implementationState": "TARGET_CANONICAL",
+      "implementationState": "EXISTING_QUERY_RESOLVED",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     },
@@ -57,7 +57,7 @@
       "routeCode": "BOOKS",
       "path": "/books",
       "surfaceCode": "BOOK",
-      "implementationState": "TARGET_CANONICAL",
+      "implementationState": "EXISTING",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     },
@@ -65,7 +65,7 @@
       "routeCode": "BOOK_REALITY_FORMATION",
       "path": "/books/reality-formation",
       "surfaceCode": "BOOK",
-      "implementationState": "TARGET_CANONICAL",
+      "implementationState": "EXISTING",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     },
@@ -73,7 +73,7 @@
       "routeCode": "BOOK_REALITY_RUNTIME",
       "path": "/books/reality-runtime",
       "surfaceCode": "BOOK",
-      "implementationState": "TARGET_CANONICAL",
+      "implementationState": "EXISTING",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     },
@@ -81,7 +81,7 @@
       "routeCode": "BOOK_REALITY_CIVILIZATION",
       "path": "/books/reality-civilization",
       "surfaceCode": "BOOK",
-      "implementationState": "TARGET_CANONICAL",
+      "implementationState": "EXISTING",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     },
@@ -89,7 +89,7 @@
       "routeCode": "BOOK_REALITY_NAVIGATION",
       "path": "/books/reality-navigation",
       "surfaceCode": "BOOK",
-      "implementationState": "TARGET_CANONICAL",
+      "implementationState": "EXISTING",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     },
@@ -196,23 +196,36 @@
       "implementationState": "EXISTING",
       "localeMode": "RUNTIME_LOCALE",
       "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
+    },
+    {
+      "routeCode": "PROFESSIONAL_PERSONAL_RUNTIME",
+      "path": "/professional/personal-runtime",
+      "surfaceCode": "PROFESSIONAL",
+      "implementationState": "EXISTING",
+      "localeMode": "RUNTIME_LOCALE",
+      "accessResolution": "SURFACE_AND_UPSTREAM_AUTHORITY"
     }
   ],
   "legacyCompatibility": [
     {
       "legacyPath": "/book-one",
       "targetRouteCode": "BOOK_REALITY_FORMATION",
-      "status": "PRESERVE_UNTIL_WPR_BOOK_MIGRATION"
+      "status": "COMPATIBILITY_ALIAS_ACTIVE_TO_CANONICAL_BOOK_ROUTE"
     },
     {
       "legacyPath": "/book-one-preview",
       "targetRouteCode": "BOOK_REALITY_FORMATION",
-      "status": "PRESERVE_UNTIL_WPR_BOOK_MIGRATION"
+      "status": "PRESERVED_PUBLIC_PREVIEW_ROUTE"
     },
     {
       "legacyPath": "/professional-data-privacy",
       "targetRouteCode": "PRIVACY",
       "status": "PROFESSIONAL_COMPATIBILITY_REQUIRES_REVIEW"
+    },
+    {
+      "legacyPath": "/professional/human-design",
+      "targetRouteCode": "PROFESSIONAL_PERSONAL_RUNTIME",
+      "status": "LEGACY_INTERNAL_TERM_ROUTE_COMPATIBILITY_REDIRECT"
     }
   ],
   "rules": {

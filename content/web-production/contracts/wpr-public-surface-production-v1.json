@@ -1,0 +1,53 @@
+{
+  "contractCode": "PHI-OS-WPR-D-PUBLIC-SURFACE-PRODUCTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W14-W19",
+  "phase": "WPR-D_PUBLIC_PRODUCTION_SURFACES",
+  "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
+  "status": "active_limited_production_contract",
+  "purpose": "Activate governed public web surfaces without inventing CPR production records, publication authority, method eligibility, customer state or Academy delivery authority.",
+  "productionModes": {
+    "STATIC_PUBLIC_SHELL_TRANSITIONAL": {
+      "allowedAudience": [
+        "PUBLIC"
+      ],
+      "requiresCanonicalOrPublishedSources": true,
+      "requiresCprProductionRecord": false,
+      "mayInvokeW11AsCprBoundProduction": false,
+      "mayCreateCprProductionRecord": false,
+      "use": "Homepage, Library, Figures, Books and Academy discovery while CPR productionRecords remain empty."
+    },
+    "EXISTING_PUBLISHED_RUNTIME_ACCEPTED": {
+      "allowedAudience": [
+        "PUBLIC"
+      ],
+      "requiresPublishedKnowledge": true,
+      "requiresCprProductionRecord": false,
+      "mayCreatePublication": false,
+      "use": "Existing published Article runtime already governed by PJA/Published Knowledge."
+    },
+    "CPR_BOUND_PRODUCTION": {
+      "allowedAudience": [
+        "PUBLIC",
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "requiresCprProductionRecord": true,
+      "currentAvailability": false
+    }
+  },
+  "authorityBoundary": {
+    "cprRemainsCompositionAuthority": true,
+    "wprOwnsWebProductionRecords": true,
+    "wprMayNotCreateCprProductionRecords": true,
+    "wprMayNotPublishKnowledgeOrAssets": true,
+    "wprMayNotRepairUpstreamOwnership": true,
+    "wprMayNotActivateAcademyEntitlementProgressAssessmentCredential": true
+  },
+  "limitations": [
+    "CPR canonical presentation productionRecords remain empty.",
+    "CAR published asset publications remain empty and validation-only.",
+    "Public R2 base URL and asset verification remain externally gated.",
+    "Figure registry retains five historical Part 5 / Book 1 ownership mismatches; WPR excludes them from Book I public production."
+  ]
+}

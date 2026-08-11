@@ -26,7 +26,7 @@ const expected={
   'check:mpa-w5':'node scripts/check-mpa-w5-method-capability-matrix.mjs',
   'check:mpa-w0-w5':'node scripts/check-mpa-w0-w5-foundation.mjs',
   'check:mpa-foundation':'npm run check:mpa-w0-w5',
-  'check:mpa':'npm run check:mpa-foundation'
+  'check:mpa':'npm run check:mpa-foundation && npm run check:mpa-input-calculation'
 };
 for(const [k,v] of Object.entries(expected)) assert.equal(pkg.scripts[k],v,k);
 assert.equal(String(pkg.scripts.postcheck||'').includes('check:mpa'),false,'MPA must not enter global postcheck before W30 Full Acceptance/Freeze.');

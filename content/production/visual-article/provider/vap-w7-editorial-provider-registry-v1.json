@@ -1,0 +1,30 @@
+{
+  "registryCode": "PHI-OS-VAP-W7-EDITORIAL-PROVIDER-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "status": "active",
+  "scope": "VAP_ARTICLE_CANDIDATE_GENERATION_ONLY",
+  "providers": [
+    {
+      "providerCode": "openai_responses",
+      "implementationStatus": "implemented",
+      "networkCapable": true,
+      "endpoint": "https://api.openai.com/v1/responses",
+      "credentialEnvironmentVariable": "OPENAI_API_KEY",
+      "modelEnvironmentVariables": [
+        "VAP_OPENAI_MODEL",
+        "OPENAI_MODEL"
+      ],
+      "defaultModel": null,
+      "allowedOperations": [
+        "generate_article_candidate_from_governed_brief"
+      ],
+      "providerOutputAuthority": "candidate_only",
+      "toolsEnabled": false,
+      "webSearchEnabled": false,
+      "fileSearchEnabled": false,
+      "automaticPublicationAllowed": false
+    }
+  ],
+  "publicKnrProviderRegistryReused": false,
+  "reasonPublicKnrProviderRegistryNotReused": "Public KNR providers are governed for retrieval/routing and explicitly prohibit published-content generation; VAP-W7 is a separate editorial candidate-production scope."
+}

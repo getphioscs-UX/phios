@@ -183,6 +183,8 @@ function activeSectionFromPage() {
     path === '/articles' ||
     path.startsWith('/articles/') ||
     path === '/book-one' ||
+    path === '/books' ||
+    path.startsWith('/books/') ||
     path === '/book-one-preview' ||
     path === '/figures' ||
     path === '/figure' ||
