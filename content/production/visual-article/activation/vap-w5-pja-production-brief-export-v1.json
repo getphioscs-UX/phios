@@ -1,0 +1,94 @@
+{
+  "acceptanceCode": "PHI-OS-VAP-W5-PJA-PRODUCTION-BRIEF-EXPORT-ACCEPTANCE-v1",
+  "acceptanceDigest": "sha256:92e61c503c7d90e62ce79fa02112fbb6f50968e5b138b3fe6fdebfe536c07fb7",
+  "acceptanceVersion": "1.0.0",
+  "baselineCommit": "cdcb11be3e2db494fa1c40c7814604e2de31f34e",
+  "briefContract": {
+    "allRequiredMarkersPresent": true,
+    "approvalRecord": false,
+    "controlledInputSnapshotOnly": true,
+    "markerChecks": {
+      "# ${nodeCode} Canonical Article Production Brief": true,
+      "## 1. Brief Identity": true,
+      "## 10. Review Governance": true,
+      "## 11. Node-specific Inputs": true,
+      "## 12. Package Output Contract": true,
+      "## 13. Forbidden Actions": true,
+      "## 2. Canonical Node Identity": true,
+      "## 4. Canonical Thesis": true,
+      "## 5. Article Boundary": true,
+      "## 6. Editorial Contract": true,
+      "## 7. Structured Article Contract": true,
+      "## 8. Claim Governance": true,
+      "## 9. Source Governance": true
+    },
+    "publicArticleBody": false,
+    "publicationRecord": false,
+    "sections": [
+      "Identity",
+      "Canonical Node Identity",
+      "Localized Identity",
+      "Canonical Thesis",
+      "Article Boundary",
+      "Editorial Contract",
+      "Structured Article Contract",
+      "Claim Governance",
+      "Source Governance",
+      "Review Governance",
+      "Node-specific Inputs",
+      "Package Output Contract",
+      "Forbidden Actions"
+    ],
+    "sourceOfTruth": false
+  },
+  "contractReference": "content/production/visual-article/contracts/vap-w5-pja-production-brief-export-v1.json",
+  "effects": {
+    "candidateCreated": false,
+    "exporterSourceModified": false,
+    "networkGenerationCallMade": false,
+    "productionBriefGeneratedByAcceptance": false,
+    "providerInvoked": false,
+    "publicationCreated": false
+  },
+  "existingRuntime": {
+    "briefSchemaVersion": "PHI-OS-KNOWLEDGE-PRODUCTION-BRIEF-v1.1.0",
+    "briefType": "canonical_article_production_brief",
+    "defaultLocale": "zh-Hans",
+    "defaultOutputDirectory": "dist/knowledge-production-briefs",
+    "exporterPath": "scripts/export-knowledge-production-brief.mjs",
+    "jsonReportPattern": "dist/knowledge-production-briefs/<brief-name>.report.json",
+    "localizedOutputPattern": "dist/knowledge-production-briefs/<NODE_CODE>.<locale>-production-brief.md",
+    "npmCommand": "npm run knowledge:export-brief -- <NODE_CODE>",
+    "npmCommandWithLocaleAndReport": "npm run knowledge:export-brief -- <NODE_CODE> --locale zh-Hans --json-report",
+    "npmScript": "knowledge:export-brief",
+    "outputPattern": "dist/knowledge-production-briefs/<NODE_CODE>-production-brief.md",
+    "productionToolVersion": "PJA-W2E-R1-v1.0.0-Frozen",
+    "runtimeReimplementedByVapW5": false
+  },
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "schemaVersion": "PHI-OS-VAP-W5-PJA-PRODUCTION-BRIEF-EXPORT-ACCEPTANCE-v1.0.0",
+  "sourceDigests": {
+    "scripts/check-pja-w2e-r1-production-brief-hardening.mjs": "sha256:fae3ddf15db85499e2f3f98b7dbb63d78facc31455a3be82a4bc1e343c4c5758",
+    "scripts/export-knowledge-production-brief.mjs": "sha256:e2566e2486d607596739760cc3fcb1974872bb33f48a1367d34e6109165e2521",
+    "scripts/lib/knowledge-production/production-config.mjs": "sha256:f31c99457002ded6768250b252b1bd1036c07c748d49adc92383bc6ac246e1cf"
+  },
+  "status": "EXISTING_PJA_PRODUCTION_BRIEF_EXPORT_ACCEPTED_NO_REIMPLEMENTATION",
+  "vapEligibilityIntegration": {
+    "eligibilityReference": "content/production/visual-article/eligibility/visual-article-production-eligibility-v1.json",
+    "noWave1StandardPjaExportExecutedByVapW5": true,
+    "reason": "VAP-W5 accepts the existing PJA Article brief exporter without overriding VAP-W3 execution-mode and adapter boundaries. Current Wave 1 ARTICLE eligibility is reconciliation-gated at PJA, while MULTI_ASSET is dispatched to CAR.",
+    "requiresVapW4ArticleProductionEligibility": true,
+    "wave1ArticleEligibleNodeCodes": [
+      "KN-PREFACE-004",
+      "KN-B1-P4-004"
+    ],
+    "wave1NonPjaEligibleNodeCodes": [
+      "KN-B1-P4-004"
+    ],
+    "wave1PjaAdapterGatedNodeCodes": [
+      "KN-PREFACE-004"
+    ],
+    "wave1StandardPjaExporterTargetNodeCodes": []
+  },
+  "work": "VAP-W5"
+}
