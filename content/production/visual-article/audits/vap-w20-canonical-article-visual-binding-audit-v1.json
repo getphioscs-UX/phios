@@ -1,0 +1,46 @@
+{
+  "auditCode": "PHI-OS-VAP-W20-CANONICAL-ARTICLE-VISUAL-BINDING-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "VAP-W20",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "result": "BLOCKED_UPSTREAM_NO_CANONICAL_PUBLISHED_FIGURE",
+  "findings": [
+    {
+      "code": "CAR_PUBLISHED_ASSET_REGISTRY_VALIDATION_ONLY",
+      "path": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json",
+      "observed": {"productionStatus": "validation_only", "publicationCount": 0},
+      "effect": "LIVE_ARTICLE_FIGURE_BINDING_FORBIDDEN"
+    },
+    {
+      "code": "CAR_ASSET_MEDIA_REGISTRY_EMPTY",
+      "path": "content/professional/canonical-asset-runtime/registries/asset-media-registry-v1.json",
+      "observed": {"mediaCount": 0},
+      "effect": "NO_CANONICAL_FIGURE_MEDIA_TO_PROJECT"
+    },
+    {
+      "code": "LEGACY_BOOK_FIGURE_GROUP_NOT_CONCRETE_PUBLISHED_ASSET",
+      "path": "content/registry/public-assets.json",
+      "assetCode": "BOOK-1-FIGURES",
+      "observed": {"verification": "pending-object-inventory-and-public-url-check", "objectType": "directory_group"},
+      "effect": "MAY_NOT_BE_USED_AS_ARTICLE_FIGURE_BINDING"
+    },
+    {
+      "code": "CURRENT_PUBLISHED_ARTICLE_LACKS_STABLE_SECTION_CODES",
+      "path": "content/knowledge/articles/zh-Hans/why-phi-os-is-needed.json",
+      "nodeCode": "KN-PREFACE-004",
+      "effect": "PLACEMENT_AFTER_SECTION_S04_MAY_NOT_BE_MATERIALIZED_WITHOUT_SUCCESSOR_SECTION_IDENTITY"
+    }
+  ],
+  "authorityDecision": {
+    "fabricateAssetCode": false,
+    "promoteLegacyFigure": false,
+    "mutateCarRegistry": false,
+    "mutateFrozenPublishedArticle": false,
+    "keepBindingRegistryEmpty": true
+  },
+  "nextRequiredUpstreamState": [
+    "CAR publishes a concrete FIGURE/DIAGRAM for WEBSITE",
+    "Published visual media projection exposes safe publicSrc, altText, caption, width and height",
+    "Target published Article projection exposes stable sectionCode for placement"
+  ]
+}

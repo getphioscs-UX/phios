@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS CAR Production Asset Candidate v1",
+  "type": "object",
+  "required": ["candidateCode","candidateVersion","assetCode","assetType","nodeCode","assetBriefCode","assetBriefDigest","meaningReferences","knowledgeReferences","sourceFragmentDigests","locale","candidatePayload","providerLineage","candidateState","candidateDigest","createdAt"],
+  "properties": {
+    "providerLineage": {"type":"object","required":["mode","providerCode","modelCode"],"properties":{"mode":{"const":"external_manual"},"providerCode":{"const":"OPENAI_CHATGPT"},"modelCode":{"type":["string","null"]}}},
+    "candidateState": {"const":"candidate"}
+  }
+}

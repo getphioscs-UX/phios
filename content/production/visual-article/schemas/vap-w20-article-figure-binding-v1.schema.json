@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/vap-w20-article-figure-binding-v1.schema.json",
+  "title": "PHI OS VAP-W20 Article Figure Binding v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bindingCode", "articleAssetCode", "nodeCode", "locale", "assetCode",
+    "publicationCode", "publicationDigest", "placement", "bindingState"
+  ],
+  "properties": {
+    "bindingCode": {"type": "string", "pattern": "^VAP-W20-BIND-[A-Z0-9-]+$"},
+    "articleAssetCode": {"type": "string", "minLength": 1},
+    "nodeCode": {"type": "string", "pattern": "^KN-[A-Z0-9-]+$"},
+    "locale": {"type": "string", "minLength": 2},
+    "assetCode": {"type": "string", "minLength": 1},
+    "publicationCode": {"type": "string", "pattern": "^CAR-PUB-[A-Z0-9-]+$"},
+    "publicationDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "placement": {"type": "string", "pattern": "^after_section:S[0-9]{2}$"},
+    "displayMode": {"type": "string", "enum": ["inline", "wide", "full"]},
+    "creditLabel": {"type": "string"},
+    "bindingState": {"const": "active"}
+  }
+}

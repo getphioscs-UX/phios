@@ -1,0 +1,35 @@
+{
+  "registryCode": "PHI-OS-VAP-W20-ARTICLE-FIGURE-BINDING-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "VAP-W20",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "status": "canonical_empty_until_car_published_figure_exists",
+  "bindings": [],
+  "liveBindingCount": 0,
+  "pendingRequirements": [
+    {
+      "requirementCode": "FIGURE-REQ-KN-PREFACE-004-NAVIGATION-LOOP-001",
+      "nodeCode": "KN-PREFACE-004",
+      "locale": "zh-Hans",
+      "articleAssetCode": "KA-PREFACE-004-ZH-ARTICLE",
+      "requiredAssetType": "FIGURE",
+      "assetCode": null,
+      "publicationCode": null,
+      "placementIntent": "after_section:S04",
+      "targetSectionIdentityStatus": "ABSENT_IN_CURRENT_PUBLISHED_ARTICLE",
+      "bindingState": "BLOCKED_UPSTREAM",
+      "blockers": [
+        "CAR_PUBLISHED_FIGURE_ABSENT",
+        "CAR_PUBLISHED_ASSET_REGISTRY_VALIDATION_ONLY",
+        "PUBLISHED_ARTICLE_STABLE_SECTION_CODE_ABSENT"
+      ]
+    }
+  ],
+  "invariants": {
+    "emptyRegistryDoesNotMeanFigureNotNeeded": true,
+    "pendingRequirementIsNotBinding": true,
+    "legacyFigureRegistryIsNotCarPublishedAssetAuthority": true,
+    "publicR2DirectoryGroupIsNotPublishedFigure": true,
+    "fixtureMayNotBecomeProductionBinding": true
+  }
+}
