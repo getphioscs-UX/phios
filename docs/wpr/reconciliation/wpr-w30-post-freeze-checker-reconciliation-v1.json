@@ -1,0 +1,35 @@
+{
+  "reconciliationCode": "PHI-OS-WPR-W30-POST-FREEZE-CHECKER-RECONCILIATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "status": "ACCEPTED_SUCCESSOR_RECONCILIATION",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "purpose": "Accept a narrowly scoped WPR-W30 checker successor that removes stale ownership of the global postcheck tail while preserving the frozen WPR authority, checker manifest as historical authority, neutral web-production-runtime integration, and all production-state gates.",
+  "frozenCheckerManifest": "content/web-production/registries/wpr-checker-manifest-v1.json",
+  "frozenWprFreeze": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+  "checkerManifestRewritten": false,
+  "wprFreezeRewritten": false,
+  "authorityExpansionGranted": false,
+  "entries": [
+    {
+      "workCode": "WPR-W30",
+      "implementationFile": "scripts/check-wpr-w30-freeze.mjs",
+      "frozenDigest": "ebf19ca96a49c3ca5776b9b85328386ef2782aa423aa967011c798441ddf65d2",
+      "successorDigest": "7c6f00a7274d98a040d14093c91cb72f5b57aaad160e8df003f3ddde5a9689bc",
+      "changeScope": "REMOVE_STALE_GLOBAL_POSTCHECK_TAIL_OWNERSHIP_ASSERTION_AND_ADD_EXACT_SUCCESSOR_DIGEST_RECONCILIATION_ONLY",
+      "runtimeSemanticAuthorityChanged": false,
+      "freezeDecisionChanged": false,
+      "productionStateChanged": false,
+      "authorityExpansionGranted": false
+    }
+  ],
+  "rules": {
+    "frozenCheckerManifestDigestValuesRemainHistoricalAuthority": true,
+    "successorDigestMustMatchExactFileContent": true,
+    "onlyListedImplementationFilesMayUseSuccessorDigest": true,
+    "unlistedCheckerDigestDriftFailsClosed": true,
+    "neutralWebProductionRuntimeAliasMustExistExactlyOnce": true,
+    "wprDoesNotOwnFuturePostcheckTail": true,
+    "futurePostcheckCommandsRemainOwnedByTheirRespectiveGovernedRuntimes": true,
+    "futureWprCheckerSuccessorRequiresNewVersionedReconciliation": true
+  }
+}
