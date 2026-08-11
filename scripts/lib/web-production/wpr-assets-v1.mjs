@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import path from 'node:path';
+export const root=process.cwd();
+export const BASELINE='39fb21c54768c2c247a73cf5f005cf25d73435fc';
+export const readJson=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),'utf8'));
+export const readText=relative=>fs.readFileSync(path.join(root,relative),'utf8');
+export const exists=relative=>fs.existsSync(path.join(root,relative));
+export const PUBLIC_ASSET_REGISTRY='content/registry/public-assets.json';
+export const W7='content/web-production/contracts/wpr-public-asset-resolution-v1.json';
+export const W8='content/web-production/production/wpr-r2-public-delivery-v1.json';
+export const W9='content/web-production/contracts/wpr-responsive-asset-runtime-v1.json';
+export const W10='content/web-production/registries/wpr-visual-production-projection-v1.json';

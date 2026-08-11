@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readJson,readText,exists,BASELINE,W7,PUBLIC_ASSET_REGISTRY} from './lib/web-production/wpr-assets-v1.mjs';
+const c=readJson(W7), registry=readJson(PUBLIC_ASSET_REGISTRY);
+assert.equal(c.baselineCommit,BASELINE); assert.equal(c.work,'WPR-W7'); assert.equal(c.status,'active_fail_closed_resolution_contract');
+assert.equal(c.authority.publicAssetRegistry,PUBLIC_ASSET_REGISTRY); assert.equal(c.authority.assetApprovalAuthorityCreated,false); assert.equal(c.authority.assetPublicationAuthorityCreated,false);
+for(const key of ['assetCodeMustExist','objectKeyMustBeRegistered','directoryGroupCannotResolveAsConcreteObject','variantMustBeExplicitlyRegistered','fabricatedUrlForbidden','directVapBinaryResolutionForbidden']) assert.equal(c.resolutionRules[key],true,key);
+assert.equal(registry.bucket,'phios-public-assets'); assert.equal(registry.resolution_policy.fail_closed,true); assert.equal(registry.resolution_policy.environment_variable,'PHIOS_PUBLIC_ASSET_BASE_URL');
+assert.ok(exists(c.resolver.implementation)); const source=readText(c.resolver.implementation); for(const marker of ['resolvePublicAsset','resolvePublicAssetForWeb','PUBLIC_ASSET_GROUP_REQUIRES_OBJECT_MEMBER','PUBLIC_ASSET_VARIANT_NOT_REGISTERED','UPSTREAM_VERIFICATION_REQUIRED']) assert.ok(source.includes(marker),marker);
+const mod=await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+const fixture={bucket:'phios-public-assets',assets:[{asset_code:'FIXTURE-COVER',category:'book-cover',object_key:'books/covers/f.webp',format:'webp',verification:'verified-public-url'}]};
+const resolved=mod.resolvePublicAsset({registry:fixture,assetCode:'FIXTURE-COVER',publicBaseUrl:'https://assets.example.test'}); assert.equal(resolved.src,'https://assets.example.test/books/covers/f.webp'); assert.equal(resolved.renderable,true); assert.equal(resolved.srcset,null);
+const pending={bucket:'phios-public-assets',assets:[{asset_code:'PENDING',category:'book-cover',object_key:'x.webp',verification:'pending-public-url-check'}]}; assert.equal(mod.resolvePublicAsset({registry:pending,assetCode:'PENDING',publicBaseUrl:'https://assets.example.test'}).renderable,false);
+assert.throws(()=>mod.resolvePublicAsset({registry:{bucket:'phios-public-assets',assets:[{asset_code:'GROUP',object_key:'images/g/',verification:'verified'}]},assetCode:'GROUP',publicBaseUrl:'https://assets.example.test'}),e=>e.code==='PUBLIC_ASSET_GROUP_REQUIRES_OBJECT_MEMBER');
+console.log('✓ WPR-W7 Public Asset Resolution Contract passed.');
+console.log('✓ Resolver is registry-led, HTTPS/base-url governed, variant-explicit and fail-closed for unverified/group assets.');

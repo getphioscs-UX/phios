@@ -1,0 +1,60 @@
+{
+  "deliveryCode": "PHI-OS-WPR-W8-R2-PUBLIC-DELIVERY-v1",
+  "deliveryVersion": "1.0.0",
+  "work": "WPR-W8",
+  "phase": "WPR-B_PUBLIC_ASSET_DELIVERY",
+  "baselineCommit": "39fb21c54768c2c247a73cf5f005cf25d73435fc",
+  "status": "DELIVERY_RUNTIME_READY_ENVIRONMENT_AND_UPSTREAM_VERIFICATION_REQUIRED",
+  "bucket": "phios-public-assets",
+  "registryReference": "content/registry/public-assets.json",
+  "deliveryModel": {
+    "mode": "PUBLIC_BASE_URL",
+    "environmentVariable": "PHIOS_PUBLIC_ASSET_BASE_URL",
+    "serverConfigBridge": "functions/api/public-asset-config.js",
+    "browserEndpoint": "/api/public-asset-config",
+    "r2BindingRequiredForPublicRead": false,
+    "publicBaseUrlIsSecret": false,
+    "credentialsExposedToBrowser": false,
+    "preferredTransport": "HTTPS"
+  },
+  "currentCanonicalObservation": {
+    "publicBaseUrl": null,
+    "publicDomainStatus": "verification_required",
+    "registeredAssets": 7,
+    "exactObjectAssets": [
+      "BOOK-1-HARDCOVER",
+      "BOOK-2-HARDCOVER",
+      "BOOK-3-HARDCOVER",
+      "BOOK-4-HARDCOVER"
+    ],
+    "directoryGroupAssets": [
+      "BOOK-1-PREVIEW",
+      "THESIS-PUBLIC-ASSETS",
+      "BOOK-1-FIGURES"
+    ],
+    "productionDeliveryActivated": false
+  },
+  "verification": {
+    "liveChecker": "scripts/check-wpr-public-assets-live.mjs",
+    "liveCheckerNpmAlias": "check:wpr-public-assets-live",
+    "liveCheckerInAggregate": false,
+    "reasonNotInAggregate": "External public URL state is environment-dependent and WPR checkers may not mutate or fabricate upstream verification state.",
+    "exactObjectHeadChecksAllowed": true,
+    "directoryInventoryRequiresSeparateGovernedInventory": true,
+    "upstreamVerificationMustRemainAuthoritative": true
+  },
+  "failClosed": {
+    "missingEnvironmentVariable": true,
+    "invalidUrl": true,
+    "registryEnvironmentConflict": true,
+    "unverifiedAsset": true,
+    "missingObject": true,
+    "directoryAsObject": true
+  },
+  "nonActivation": {
+    "wranglerR2BindingAdded": false,
+    "publicAssetRegistryRewritten": false,
+    "r2ObjectWritten": false,
+    "productionSurfaceActivated": false
+  }
+}

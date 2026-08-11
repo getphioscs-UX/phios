@@ -1,0 +1,67 @@
+{
+  "contractCode": "PHI-OS-WPR-W7-PUBLIC-ASSET-RESOLUTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W7",
+  "phase": "WPR-B_PUBLIC_ASSET_DELIVERY",
+  "baselineCommit": "39fb21c54768c2c247a73cf5f005cf25d73435fc",
+  "status": "active_fail_closed_resolution_contract",
+  "authority": {
+    "publicAssetRegistry": "content/registry/public-assets.json",
+    "publishedAssetRegistry": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json",
+    "wprAuthority": "ASSET_DELIVERY_RESOLUTION_ONLY",
+    "assetApprovalAuthorityCreated": false,
+    "assetPublicationAuthorityCreated": false
+  },
+  "resolver": {
+    "implementation": "assets/js/runtime/web-production/asset-resolver.js",
+    "canonicalRegistryUrl": "/content/registry/public-assets.json",
+    "publicConfigEndpoint": "/api/public-asset-config",
+    "function": "resolvePublicAsset",
+    "requiredInputs": [
+      "assetCode"
+    ],
+    "optionalInputs": [
+      "variant",
+      "surface",
+      "locale",
+      "density"
+    ],
+    "baseUrlPrecedence": [
+      "VERIFIED_CANONICAL_REGISTRY_BASE_URL",
+      "SERVER_PUBLIC_CONFIG_BASE_URL"
+    ],
+    "baseUrlConflictBehavior": "FAIL_CLOSED"
+  },
+  "resolutionRules": {
+    "assetCodeMustExist": true,
+    "objectKeyMustBeRegistered": true,
+    "directoryGroupCannotResolveAsConcreteObject": true,
+    "variantMustBeExplicitlyRegistered": true,
+    "unverifiedAssetMayComputeCandidateUrlButMustNotBeRenderable": true,
+    "pendingVerificationIsRenderable": false,
+    "missingBaseUrlIsRenderable": false,
+    "fabricatedUrlForbidden": true,
+    "hardCodedGovernedAssetPathForbidden": true,
+    "directVapBinaryResolutionForbidden": true
+  },
+  "failureCodes": [
+    "PUBLIC_ASSET_REGISTRY_INVALID",
+    "PUBLIC_ASSET_NOT_FOUND",
+    "PUBLIC_ASSET_BASE_URL_UNAVAILABLE",
+    "PUBLIC_ASSET_BASE_URL_INVALID",
+    "PUBLIC_ASSET_BASE_URL_CONFLICT",
+    "PUBLIC_ASSET_OBJECT_KEY_INVALID",
+    "PUBLIC_ASSET_GROUP_REQUIRES_OBJECT_MEMBER",
+    "PUBLIC_ASSET_VARIANT_NOT_REGISTERED",
+    "PUBLIC_ASSET_NOT_VERIFIED"
+  ],
+  "nonActivation": {
+    "r2Mutation": false,
+    "assetUpload": false,
+    "assetApproval": false,
+    "assetPublication": false,
+    "carPromotion": false,
+    "cprPromotion": false,
+    "surfaceActivation": false
+  }
+}

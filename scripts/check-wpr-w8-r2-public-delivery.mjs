@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {readJson,readText,exists,BASELINE,W8,PUBLIC_ASSET_REGISTRY} from './lib/web-production/wpr-assets-v1.mjs';
+const d=readJson(W8), registry=readJson(PUBLIC_ASSET_REGISTRY);
+assert.equal(d.baselineCommit,BASELINE); assert.equal(d.work,'WPR-W8'); assert.equal(d.bucket,'phios-public-assets'); assert.equal(d.deliveryModel.environmentVariable,'PHIOS_PUBLIC_ASSET_BASE_URL'); assert.equal(d.deliveryModel.browserEndpoint,'/api/public-asset-config');
+assert.equal(d.currentCanonicalObservation.publicBaseUrl,registry.public_base_url); assert.equal(d.currentCanonicalObservation.publicDomainStatus,registry.public_domain_status); assert.equal(d.currentCanonicalObservation.registeredAssets,registry.assets.length); assert.equal(d.currentCanonicalObservation.productionDeliveryActivated,false);
+assert.equal(d.verification.liveCheckerInAggregate,false); assert.equal(d.verification.upstreamVerificationMustRemainAuthoritative,true); for(const value of Object.values(d.failClosed)) assert.equal(value,true);
+assert.ok(exists(d.deliveryModel.serverConfigBridge)); const src=readText(d.deliveryModel.serverConfigBridge); for(const marker of ['PHIOS_PUBLIC_ASSET_BASE_URL','PUBLIC_ASSET_BASE_URL_UNAVAILABLE','503','Cache-Control']) assert.ok(src.includes(marker),marker); assert.ok(!/SECRET|ACCESS_KEY|API_KEY/.test(src.replace('PHIOS_PUBLIC_ASSET_BASE_URL','')),'public config bridge must not expose credentials');
+for(const value of Object.values(d.nonActivation)) assert.equal(value,false);
+console.log('✓ WPR-W8 R2/Public Base URL Delivery Contract passed.');
+console.log('✓ Public config bridge fails closed until PHIOS_PUBLIC_ASSET_BASE_URL is configured; no R2 mutation or upstream verification promotion occurs.');
