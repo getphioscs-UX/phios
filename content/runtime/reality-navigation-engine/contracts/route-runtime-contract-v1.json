@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-RNE-W9-ROUTE-RUNTIME-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W9",
+  "runtimeCode": "RNE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-navigation-engine/schemas/route-candidate-set-v1.schema.json",
+  "registryReference": "content/runtime/reality-navigation-engine/registries/canonical-route-stage-registry-v1.json",
+  "routeShape": [
+    "CURRENT",
+    "INTERMEDIATE",
+    "TARGET"
+  ],
+  "rules": {
+    "routeCandidatesRemainMultiple": true,
+    "intermediateIsNavigationCheckpointNotRealityTruth": true,
+    "targetAuthorityMustRemainUpstreamAuthorized": true,
+    "routeCandidateSelectionCreated": false,
+    "journeyStageMutationCreated": false,
+    "actionRecordCreated": false,
+    "executionCreated": false,
+    "outcomePredictionCreated": false,
+    "professionalJudgmentCreated": false,
+    "jrIntegrationDeferredTo": "RNE-W10",
+    "persistentStoreActivated": false
+  }
+}

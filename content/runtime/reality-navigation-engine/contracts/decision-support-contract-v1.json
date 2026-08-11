@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-RNE-W7-DECISION-SUPPORT-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W7",
+  "runtimeCode": "RNE",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "schemaReference": "content/runtime/reality-navigation-engine/schemas/decision-support-set-v1.schema.json",
+  "registryReference": "content/runtime/reality-navigation-engine/registries/canonical-decision-support-pattern-registry-v1.json",
+  "outputs": [
+    "tradeoff",
+    "dependency",
+    "reversibility",
+    "observationPoint"
+  ],
+  "rules": {
+    "tradeoffIsGenericControlledDescription": true,
+    "dependencyMustTraceToRiskContext": true,
+    "reversibilityMustTraceToRecoverabilityAssessment": true,
+    "observationPointMustUseControlledPattern": true,
+    "optionRankingCreated": false,
+    "optionSelectionCreated": false,
+    "recommendedDirectionCreated": false,
+    "commandCreated": false,
+    "executionCreated": false,
+    "professionalJudgmentCreated": false,
+    "persistentStoreActivated": false
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "registryCode": "PHI-OS-RDG-RR-V2-DATA-CONTRACT-SUCCESSOR-v1",
+  "registryVersion": "1.0.0",
+  "status": "ACTIVE_SUCCESSOR_EXTENSION",
+  "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+  "purpose": "Extend RR read authority for canonical report assembly without changing RR REPORT_RECORD write authority or legacy RDG v1 records.",
+  "preservedLegacyAuthority": {
+    "registry": "content/governance/reality-data-governance/registries/canonical-data-contract-registry-v1.json",
+    "runtimeCode": "RR",
+    "mutated": false,
+    "producedDataTypes": [
+      "REPORT_RECORD"
+    ],
+    "consumedDataTypes": [
+      "REALITY_EVIDENCE_RECORD",
+      "CAPABILITY_EVIDENCE_RECORD",
+      "PROFESSIONAL_JUDGMENT_RECORD",
+      "OUTCOME_RECORD",
+      "GOVERNANCE_RECORD"
+    ],
+    "writeAuthority": [
+      "REPORT_RECORD"
+    ]
+  },
+  "inheritedReadExtensions": [
+    {
+      "source": "content/governance/reality-data-governance/extensions/rre-readout/registries/rre-readout-data-contract-successor-v1.json",
+      "runtimeCode": "RR",
+      "dataType": "REALITY_READOUT_RECORD",
+      "writeAuthorityExpanded": false
+    }
+  ],
+  "addedReadOnlyDataTypes": [
+    "RUNTIME_STATE_RECORD",
+    "METHOD_PROJECTION_RECORD",
+    "MEANING_PROJECTION_RECORD",
+    "NAVIGATION_RECORD"
+  ],
+  "effectiveConsumedDataTypes": [
+    "REALITY_EVIDENCE_RECORD",
+    "CAPABILITY_EVIDENCE_RECORD",
+    "PROFESSIONAL_JUDGMENT_RECORD",
+    "OUTCOME_RECORD",
+    "GOVERNANCE_RECORD",
+    "REALITY_READOUT_RECORD",
+    "RUNTIME_STATE_RECORD",
+    "METHOD_PROJECTION_RECORD",
+    "MEANING_PROJECTION_RECORD",
+    "NAVIGATION_RECORD"
+  ],
+  "externalReferenceAuthorities": [
+    {
+      "referenceKind": "PUBLISHED_KNOWLEDGE_REFERENCE",
+      "authority": "KNOWLEDGE_AUTHORITY"
+    },
+    {
+      "referenceKind": "PUBLISHED_ASSET_REFERENCE",
+      "authority": "PUBLICATION_ASSET_AUTHORITY"
+    },
+    {
+      "referenceKind": "SERVICE_CONTRACT_REFERENCE",
+      "authority": "PROFESSIONAL_SERVICE_AUTHORITY"
+    },
+    {
+      "referenceKind": "GOVERNED_METRIC_REFERENCE",
+      "authority": "UPSTREAM_METRIC_AUTHORITY_IF_AVAILABLE"
+    }
+  ],
+  "permissions": {
+    "evidencePromotion": "DENY",
+    "professionalApprovalWrite": "DENY",
+    "professionalJudgmentWrite": "DENY",
+    "readoutWrite": "DENY",
+    "metricWrite": "DENY",
+    "reportWrite": "ALLOW_EXISTING_REPORT_RECORD_ONLY",
+    "analyticsWrite": "DENY"
+  },
+  "rules": {
+    "legacyRdgV1Rewritten": false,
+    "newDataTypeCreated": false,
+    "reportRecordAuthorityPreserved": true,
+    "dependencyDoesNotGrantAuthority": true,
+    "knowledgeAndAssetReferencesRemainExternalAuthorities": true
+  }
+}

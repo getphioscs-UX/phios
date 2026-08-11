@@ -113,6 +113,48 @@ const journeyPublic = Object.freeze({
       note: '提交前你可以随时停止。请勿输入紧急信息或高度敏感的身份资料。'
     }
   },
+  journeyCanonical: {
+    authority: {
+      eyebrow: 'JR v2 · Canonical Journey Authority',
+      title: '八个 canonical workflow stage 共同治理同一条 Reality Journey。',
+      lead: '下方六项客户任务继续作为兼容投射存在。Canonical workflow state 来自 JR v2，而不是页面顺序或页面访问。',
+      statusFrozen: 'JR v2 已冻结',
+      statusReadOnly: '只读网页投射',
+      statusNoPersistence: '不声称已启用 live canonical Journey persistence'
+    },
+    stages: {
+      entry: { name: '入口', purpose: '建立 Journey、客户引用、同意与已声明的数据目的。' },
+      orientation: { name: '定位', purpose: '在进入 Reading 前明确这次 Journey 正在理解什么。' },
+      reading: { name: '读取', purpose: '引用有边界的 Readout 与 Knowledge authority，而不复制其权威内容。' },
+      reconstruction: { name: '重建', purpose: '重建当前 Reality 如何形成，同时让未知保持可见。' },
+      navigation: { name: '导航', purpose: '进入有边界的 workflow navigation，而不把方向变成人生决定。' },
+      review: { name: '回顾', purpose: '通过明确的完成事件比较预期变化与实际变化。' },
+      continuity: { name: '持续', purpose: '选择继续、修订、保持开放或准备关闭。' },
+      closed: { name: '关闭', purpose: '结束 workflow，同时不改写之前的 Reality、Readout 或历史。' }
+    },
+    compatibility: {
+      eyebrow: '客户任务投射',
+      title: '六项客户任务继续可见，但它们不是第二套 Journey。',
+      lead: '它们必须通过冻结的 JR v2 compatibility registry 映射，不能重新定义 canonical stage order。'
+    },
+    safety: {
+      title: 'Journey 边界继续生效',
+      copy: '紧急讯号、受监管建议请求、缺失同意、专业升级及数据目的违规继续采用 fail-closed 检查。Journey recommendation 只决定 workflow step。'
+    },
+    dashboard: {
+      eyebrow: 'JR v2 canonical mapping',
+      title: '你浏览器中的本地 Journey 会映射到 canonical workflow authority。',
+      current: 'Canonical stage',
+      source: '投射来源',
+      sourceValue: '现有 M3C 浏览器状态 + JR v2 compatibility registry',
+      persistence: 'Persistence 状态',
+      persistenceValue: '仅浏览器本地兼容；不声称 canonical JR v2 persistence 已启用',
+      progress: '进度边界',
+      progressValue: '只有明确的 stage completion event 才计入进度；打开页面不会自动完成阶段。',
+      unavailable: 'Canonical mapping 不可用',
+      unavailableCopy: '无法读取 JR v2 authority。现有本地状态不会被修改。'
+    }
+  },
   journeyDashboard: {
     metaTitle: '旅程面板 — PHI OS',
     skip: '跳到旅程面板',

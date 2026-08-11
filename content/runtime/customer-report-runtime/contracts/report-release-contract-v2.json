@@ -1,0 +1,28 @@
+{
+  "contractCode": "PHI-OS-RR-W8-REPORT-RELEASE-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "RR",
+  "work": "RR-W8",
+  "status": "canonical",
+  "releaseFields": [
+    "releaseReference",
+    "releaseVersion",
+    "customer",
+    "channel",
+    "time",
+    "state",
+    "approvedReportDigest"
+  ],
+  "channels": [
+    "HTML",
+    "PDF",
+    "WORKSPACE"
+  ],
+  "rules": {
+    "approvedReportRequired": true,
+    "releaseCreatesNewImmutableReportRecord": true,
+    "releaseDoesNotMutateApprovedRecord": true,
+    "channelRecordsDeliveryIntentNotRenderingAuthority": true,
+    "cprRequiredForPresentation": true
+  }
+}

@@ -18,9 +18,11 @@
   <link rel="stylesheet" href="/assets/css/public-experience.css">
   <link rel="stylesheet" href="/assets/css/design/journey-shell.css">
   <link rel="stylesheet" href="/assets/css/reality-journey.css">
+  <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/wpr-reality-journey-production.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
 </head>
-<body class="public-page journey-overview-page" data-page="reality-journey" data-public-section="reality">
+<body class="public-page journey-overview-page" data-page="reality-journey" data-public-section="reality" data-wpr-production-surface="REALITY_JOURNEY_OVERVIEW" data-wpr-work="WPR-W20">
   <a class="phi-skip-link" href="#journey-main" data-i18n="journeyPublic.skip">Skip to Reality Journey</a>
   <div data-public-header-placeholder></div>
 
@@ -56,11 +58,29 @@
       </div>
     </section>
 
+    <section class="public-section public-section--soft wpr-jr-authority" aria-labelledby="jr-v2-authority-title">
+      <div class="public-container">
+        <div class="wpr-jr-authority__head">
+          <p class="public-eyebrow" data-i18n="journeyCanonical.authority.eyebrow">JR v2 · Canonical Journey Authority</p>
+          <h2 id="jr-v2-authority-title" class="public-title" data-i18n="journeyCanonical.authority.title">Eight canonical workflow stages govern one Reality Journey.</h2>
+          <p class="public-lead" data-i18n="journeyCanonical.authority.lead">The six customer tasks below remain a compatibility view. Canonical workflow state comes from JR v2, not from page order or page visits.</p>
+        </div>
+        <ul class="wpr-jr-statuses" data-wpr-jr-authority-status aria-label="JR v2 authority status"></ul>
+        <ol class="wpr-jr-canonical-stages" data-wpr-jr-canonical-stages aria-label="JR v2 canonical stages"></ol>
+        <p class="wpr-jr-authority__error" data-wpr-jr-authority-error hidden></p>
+      </div>
+    </section>
+
     <section class="public-section journey-flow-section" aria-labelledby="journey-flow-title">
       <div class="public-container">
         <p class="public-eyebrow" data-i18n="journeyPublic.overview.eyebrow">One customer journey</p>
         <h2 id="journey-flow-title" class="public-title" data-i18n="journeyPublic.overview.title">Six tasks, each with one clear purpose.</h2>
         <p class="public-lead" data-i18n="journeyPublic.overview.lead">Internal processing may use more detailed states, but they do not create a second journey for you to learn.</p>
+        <div class="wpr-jr-compatibility-note">
+          <p class="public-eyebrow" data-i18n="journeyCanonical.compatibility.eyebrow">Customer task projection</p>
+          <h3 data-i18n="journeyCanonical.compatibility.title">Six customer tasks remain visible, but they are not a second Journey.</h3>
+          <p data-i18n="journeyCanonical.compatibility.lead">They map through the frozen JR v2 compatibility registry and cannot redefine canonical stage order.</p>
+        </div>
         <ol class="journey-stage-list" data-i18n-aria-label="journeyPublic.overview.stagesLabel" aria-label="Six customer stages">
           <li class="journey-stage"><div class="journey-stage__identity"><span>01</span><h3 data-i18n="journeyPublic.customerStages.enter.name">Enter</h3></div><div class="journey-stage__content"><div><strong data-i18n="journeyPublic.overview.purposeLabel">Your task</strong><p data-i18n="journeyPublic.customerStages.enter.task">Decide whether PHI OS can help with the change you are facing.</p></div><div><strong data-i18n="journeyPublic.overview.resultLabel">What you leave with</strong><p data-i18n="journeyPublic.customerStages.enter.result">A clear choice to start, review your current status or leave without entering personal information.</p></div></div></li>
           <li class="journey-stage"><div class="journey-stage__identity"><span>02</span><h3 data-i18n="journeyPublic.customerStages.describe.name">Describe</h3></div><div class="journey-stage__content"><div><strong data-i18n="journeyPublic.overview.purposeLabel">Your task</strong><p data-i18n="journeyPublic.customerStages.describe.task">Say what changed, when it became noticeable and what it affects.</p></div><div><strong data-i18n="journeyPublic.overview.resultLabel">What you leave with</strong><p data-i18n="journeyPublic.customerStages.describe.result">A description you can review and correct before moving on.</p></div></div></li>
@@ -69,6 +89,15 @@
           <li class="journey-stage"><div class="journey-stage__identity"><span>05</span><h3 data-i18n="journeyPublic.customerStages.choose.name">Choose</h3></div><div class="journey-stage__content"><div><strong data-i18n="journeyPublic.overview.purposeLabel">Your task</strong><p data-i18n="journeyPublic.customerStages.choose.task">Choose one bounded direction and decide what you will observe.</p></div><div><strong data-i18n="journeyPublic.overview.resultLabel">What you leave with</strong><p data-i18n="journeyPublic.customerStages.choose.result">A next step and a review point, not a command or guaranteed result.</p></div></div></li>
           <li class="journey-stage"><div class="journey-stage__identity"><span>06</span><h3 data-i18n="journeyPublic.customerStages.continue.name">Continue</h3></div><div class="journey-stage__content"><div><strong data-i18n="journeyPublic.overview.purposeLabel">Your task</strong><p data-i18n="journeyPublic.customerStages.continue.task">Compare what you expected with what changed, then decide whether to continue, revise or close.</p></div><div><strong data-i18n="journeyPublic.overview.resultLabel">What you leave with</strong><p data-i18n="journeyPublic.customerStages.continue.result">A reviewable history that changes only through your explicit choice.</p></div></div></li>
         </ol>
+      </div>
+    </section>
+
+    <section class="public-section" aria-labelledby="jr-v2-safety-title">
+      <div class="public-container">
+        <div class="wpr-jr-compatibility-note">
+          <h2 id="jr-v2-safety-title" class="public-title" data-i18n="journeyCanonical.safety.title">Journey boundaries remain active</h2>
+          <p data-i18n="journeyCanonical.safety.copy">Emergency signals, regulated-advice requests, missing consent, professional escalation and data-purpose violations remain fail-closed checks. Journey recommendations are workflow steps only.</p>
+        </div>
       </div>
     </section>
 
@@ -87,6 +116,7 @@
   </main>
   <div data-public-footer-placeholder></div>
   <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/reality-journey-production.js"></script>
   <script type="module" src="/assets/js/journey-shell.js"></script>
 </body>
 </html>

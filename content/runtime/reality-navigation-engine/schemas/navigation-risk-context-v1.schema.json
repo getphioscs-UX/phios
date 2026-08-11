@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Navigation Risk Context v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "riskContextCode",
+    "riskContextVersion",
+    "objectType",
+    "dataType",
+    "optionSetReference",
+    "constraintGraphReference",
+    "knownRisks",
+    "unknownReferences",
+    "dependencies",
+    "optionRiskContexts",
+    "authorityBoundary",
+    "riskProbabilityCreated",
+    "riskSeverityScoreCreated",
+    "predictionCreated",
+    "recommendationCreated",
+    "commandCreated",
+    "selectionMade",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "riskContextDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-NAVIGATION-RISK-CONTEXT-v1.0.0"
+    },
+    "riskContextCode": {
+      "type": "string",
+      "pattern": "^RNE-RISK-CONTEXT-[A-Z0-9-]{4,120}$"
+    },
+    "riskContextVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "NAVIGATION_RISK_CONTEXT"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "optionSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "constraintGraphReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "knownRisks": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "riskReference",
+          "authorityReference",
+          "constraintReference",
+          "appliesToOptionCodes"
+        ],
+        "properties": {
+          "riskReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "authorityReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "constraintReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "appliesToOptionCodes": {
+            "$ref": "#/$defs/strarr"
+          }
+        }
+      }
+    },
+    "unknownReferences": {
+      "$ref": "#/$defs/strarr"
+    },
+    "dependencies": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "constraintReference",
+          "dependsOnConstraintReferences"
+        ],
+        "properties": {
+          "constraintReference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "dependsOnConstraintReferences": {
+            "$ref": "#/$defs/strarr"
+          }
+        }
+      }
+    },
+    "optionRiskContexts": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "optionCode",
+          "knownRiskReferences",
+          "unknownReferences",
+          "dependencyReferences",
+          "riskState"
+        ],
+        "properties": {
+          "optionCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "knownRiskReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "unknownReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "dependencyReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "riskState": {
+            "const": "DESCRIBED_NOT_SCORED"
+          }
+        }
+      }
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "riskFactAuthority",
+        "unknownAuthority",
+        "dependencyAuthority",
+        "navigationRiskDescriptionAuthority",
+        "professionalJudgmentAuthority"
+      ],
+      "properties": {
+        "riskFactAuthority": {
+          "const": "UPSTREAM_GOVERNED_SOURCE"
+        },
+        "unknownAuthority": {
+          "const": "RMO"
+        },
+        "dependencyAuthority": {
+          "const": "RMO_CONSTRAINT_REFERENCE"
+        },
+        "navigationRiskDescriptionAuthority": {
+          "const": "RNE"
+        },
+        "professionalJudgmentAuthority": {
+          "const": "PR"
+        }
+      }
+    },
+    "riskProbabilityCreated": {
+      "const": false
+    },
+    "riskSeverityScoreCreated": {
+      "const": false
+    },
+    "predictionCreated": {
+      "const": false
+    },
+    "recommendationCreated": {
+      "const": false
+    },
+    "commandCreated": {
+      "const": false
+    },
+    "selectionMade": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "riskContextDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

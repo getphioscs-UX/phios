@@ -1,0 +1,30 @@
+{
+  "contractCode": "PHI-OS-RNE-W0-READOUT-INTEGRATION-GAP-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W0",
+  "status": "governance_extension_required_before_persistent_readout_binding",
+  "currentCanonicalRneDataContract": {
+    "producedDataTypes": [
+      "NAVIGATION_RECORD"
+    ],
+    "consumedDataTypes": [
+      "RUNTIME_STATE_RECORD",
+      "GOVERNANCE_RECORD"
+    ]
+  },
+  "currentRreState": {
+    "persistentCanonicalReadoutActivated": false,
+    "validationReadoutViewAvailable": true
+  },
+  "w0W4Resolution": {
+    "readoutReferenceMode": "VALIDATION_VIEW_REFERENCE_ONLY",
+    "readoutPayloadCopiedIntoRne": false,
+    "persistentRreReadoutBinding": false,
+    "rdgRegistryMutation": false
+  },
+  "rules": {
+    "validationViewReferenceIsNotCanonicalPersistentReadout": true,
+    "thisContractDoesNotAmendRdgAuthority": true,
+    "w10PersistentJrIntegrationMustRecheckDataAuthority": true
+  }
+}

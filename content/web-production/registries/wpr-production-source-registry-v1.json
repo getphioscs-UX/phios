@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W5",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "canonical_foundation",
+  "status": "canonical_wpr_e_w20_journey_sources_active",
   "sourceClasses": [
     "CANONICAL",
     "PUBLISHED",
@@ -81,7 +81,9 @@
         "BOOK",
         "ACADEMY_DISCOVERY",
         "CUSTOMER_REPORT",
-        "PROFESSIONAL_WORKSPACE"
+        "PROFESSIONAL_WORKSPACE",
+        "REALITY_JOURNEY_OVERVIEW",
+        "REALITY_JOURNEY_LOCAL"
       ],
       "sourceAuthorityPreserved": true
     },
@@ -116,9 +118,35 @@
         "CUSTOMER_WORKSPACE",
         "CUSTOMER_REPORT",
         "PROFESSIONAL_WORKSPACE",
-        "LEGAL"
+        "LEGAL",
+        "REALITY_JOURNEY_OVERVIEW",
+        "REALITY_JOURNEY_LOCAL"
       ],
       "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "JR",
+      "sourceClass": "CANONICAL",
+      "reference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+      "allowedSurfaces": [
+        "REALITY_JOURNEY_OVERVIEW",
+        "REALITY_JOURNEY_LOCAL",
+        "CUSTOMER_WORKSPACE"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "FROZEN_ARCHITECTURE_VALIDATION_ONLY",
+      "readOnlyProjectionOnly": true
+    },
+    {
+      "sourceCode": "M3C_BROWSER_LOCAL",
+      "sourceClass": "SESSION",
+      "reference": "content/registry/m3c-journey-dashboard.json",
+      "allowedSurfaces": [
+        "REALITY_JOURNEY_LOCAL"
+      ],
+      "sourceAuthorityPreserved": true,
+      "canonicalJourneyAuthority": false,
+      "compatibilityMappingRequired": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json"
     }
   ],
   "forbiddenDirectSourceStates": [

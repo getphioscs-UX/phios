@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.rr.canonical-report.v2",
+  "title": "PHI OS RR v2 Canonical Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "dataType",
+    "reportCode",
+    "reportReference",
+    "reportVersion",
+    "case",
+    "customer",
+    "locale",
+    "serviceContractReference",
+    "consentReferences",
+    "allowedChannels",
+    "sections",
+    "sourceReferences",
+    "reviewState",
+    "approval",
+    "release",
+    "revision",
+    "candidateReference",
+    "assemblyDigest",
+    "canonicalState",
+    "reportDigest",
+    "authorityFlags"
+  ],
+  "properties": {
+    "dataType": {
+      "const": "REPORT_RECORD"
+    },
+    "reportCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reportReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reportVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "case": {
+      "type": "string",
+      "minLength": 1
+    },
+    "customer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "serviceContractReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "sourceReferences": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "reviewState": {
+      "enum": [
+        "REVIEW_PASSED"
+      ]
+    },
+    "approval": {
+      "type": "object"
+    },
+    "release": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "revision": {
+      "type": "object"
+    },
+    "candidateReference": {
+      "type": "string"
+    },
+    "assemblyDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "canonicalState": {
+      "enum": [
+        "APPROVED_UNRELEASED",
+        "RELEASED"
+      ]
+    },
+    "reportDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "authorityFlags": {
+      "type": "object",
+      "required": [
+        "knowledgeCreated",
+        "meaningCreated",
+        "professionalJudgmentCreated",
+        "journeyCreated",
+        "readoutCreated",
+        "metricCreated",
+        "professionalApprovalCreated",
+        "cprRegistryWritten",
+        "lrmPersistedByRr"
+      ],
+      "properties": {
+        "knowledgeCreated": {
+          "const": false
+        },
+        "meaningCreated": {
+          "const": false
+        },
+        "professionalJudgmentCreated": {
+          "const": false
+        },
+        "journeyCreated": {
+          "const": false
+        },
+        "readoutCreated": {
+          "const": false
+        },
+        "metricCreated": {
+          "const": false
+        },
+        "professionalApprovalCreated": {
+          "const": false
+        },
+        "cprRegistryWritten": {
+          "const": false
+        },
+        "lrmPersistedByRr": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "consentReferences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "allowedChannels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "HTML",
+          "PDF",
+          "WORKSPACE"
+        ]
+      },
+      "uniqueItems": true
+    }
+  }
+}

@@ -79,7 +79,7 @@ function eventDetails(event) {
 function renderStages(projection) {
   const target = $('dashboardStages');
   target.innerHTML = projection.stages.map(stage => `
-    <li class="journey-dashboard-stage is-${stage.status}">
+    <li class="journey-dashboard-stage is-${stage.status}" data-legacy-journey-stage="${stage.id}">
       <span class="journey-dashboard-stage__number">${stage.number}</span>
       <span class="journey-dashboard-stage__copy">
         <strong>${escapeHTML(stageName(stage.id))}</strong>
@@ -157,6 +157,7 @@ function render() {
     $('dashboardError').classList.add('hidden');
     $('dashboardEmpty').classList.toggle('hidden', projection.hasActiveJourney);
     $('dashboardWorkspace').classList.toggle('hidden', !projection.hasActiveJourney);
+    document.body.dataset.legacyJourneyStage = projection.currentStage;
 
     if (!projection.hasActiveJourney) return;
 

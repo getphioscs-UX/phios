@@ -1,0 +1,52 @@
+{
+  "contractCode": "PHI-OS-RNE-W0-AUTHORITY-BOUNDARY-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W0",
+  "runtimeCode": "RNE",
+  "runtimeName": "Reality Navigation Engine",
+  "status": "validation_only",
+  "productionStatus": "validation_only",
+  "objectFamily": "RNE_NAVIGATION_INTELLIGENCE",
+  "authorityStatement": "RNE supports bounded decision formation. It does not command, choose, execute, predict truth, create goals, or replace professional judgment.",
+  "owns": [
+    "current-position synthesis from governed references",
+    "authorized-target binding",
+    "navigation constraint graph formation",
+    "bounded option-set generation"
+  ],
+  "doesNotOwn": {
+    "journeyWorkflow": "JR",
+    "realityTruthAndConstraintRepresentation": "RMO",
+    "readoutAndEvidenceEvaluation": "RRE",
+    "professionalJudgment": "PR",
+    "navigationEffectivenessValidation": "VAL",
+    "dataGovernance": "RDG"
+  },
+  "legacyCompatibility": {
+    "legacyNavigationContractPreserved": true,
+    "legacyRuleNavigationPreserved": true,
+    "automaticCutoverAllowed": false,
+    "jrIntegrationDeferredTo": "RNE-W10"
+  },
+  "forbidden": [
+    "AUTOMATIC_TARGET_CREATION",
+    "AUTOMATIC_OPTION_SELECTION",
+    "AUTOMATIC_OPTION_EXECUTION",
+    "NAVIGATION_COMMAND",
+    "PREDICTION_AS_TRUTH",
+    "PROFESSIONAL_JUDGMENT",
+    "PROFESSIONAL_RECOMMENDATION",
+    "EVIDENCE_PROMOTION",
+    "REALITY_MUTATION",
+    "JOURNEY_STAGE_TRANSITION"
+  ],
+  "rules": {
+    "multipleBoundedOptionsRequired": true,
+    "customerOrAuthorizedTargetRequired": true,
+    "unknownMustRemainExplicit": true,
+    "decisionRemainsHumanOrAuthorizedProfessional": true,
+    "providerOrAiMayGrantNavigationAuthority": false,
+    "persistentStoreActivated": false,
+    "productionExecutionActivated": false
+  }
+}

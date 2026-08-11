@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W2",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "limited_production_public_surfaces",
+  "status": "limited_production_wpr_e_w20_reality_journey",
   "schemaReference": "content/web-production/schemas/canonical-web-production-v1.schema.json",
   "productionRecords": [
     {
@@ -1243,6 +1243,242 @@
         "baselineCommit": "b939293cea3ddbe8afd4ca45b25debb98f30a0a1",
         "cprProductionRecordReference": null,
         "cprBindingState": "STATIC_PUBLIC_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-OVERVIEW-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+      "routeCode": "REALITY_JOURNEY",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-safety-boundary-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-recommendation-contract-v1.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_JOURNEY_ORIENTATION",
+        "JR_V2_AUTHORITY_PROJECTION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "JR_V2_READ_ONLY_AUTHORITY_PROJECTION",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY_CANONICAL_REGISTRY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-LOCAL-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_LOCAL",
+      "routeCode": "CUSTOMER_WORKSPACE",
+      "locale": "en",
+      "audience": "CUSTOMER",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-progress-contract-v1.json",
+        "content/registry/m3c-journey-dashboard.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "M3C_COMPATIBILITY",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "BROWSER_LOCAL_JOURNEY_STATUS",
+        "RECOVERY_COMPATIBILITY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "BROWSER_LOCAL_JOURNEY_COMPATIBILITY",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_LOCAL_READ_ONLY_COMPATIBILITY",
+        "privateStateAllowed": "BROWSER_LOCAL_ONLY",
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "legacyCompatibilityReference": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-OVERVIEW-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_OVERVIEW",
+      "routeCode": "REALITY_JOURNEY",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-safety-boundary-contract-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-recommendation-contract-v1.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PUBLIC_JOURNEY_ORIENTATION",
+        "JR_V2_AUTHORITY_PROJECTION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "JR_V2_READ_ONLY_AUTHORITY_PROJECTION",
+        "htmlIsProjectionOnly": true,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "PUBLIC_READ_ONLY_CANONICAL_REGISTRY",
+        "privateStateAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PUBLIC_CACHEABLE",
+        "privateDataAllowed": false
+      },
+      "seoPolicy": {
+        "indexable": true,
+        "privateDataAllowed": false
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-REALITY-JOURNEY-LOCAL-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "REALITY_JOURNEY_LOCAL",
+      "routeCode": "CUSTOMER_WORKSPACE",
+      "locale": "zh-Hans",
+      "audience": "CUSTOMER",
+      "sourceReferences": [
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "content/runtime/journey-runtime/registries/canonical-journey-stage-registry-v2.json",
+        "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "content/runtime/journey-runtime/contracts/journey-progress-contract-v1.json",
+        "content/registry/m3c-journey-dashboard.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "JR",
+        "M3C_COMPATIBILITY",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/reality-journey-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "BROWSER_LOCAL_JOURNEY_STATUS",
+        "RECOVERY_COMPATIBILITY"
+      ],
+      "compositionCode": "PHI-OS-WPR-W20-REALITY-JOURNEY-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "BROWSER_LOCAL_JOURNEY_COMPATIBILITY",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_LOCAL_READ_ONLY_COMPATIBILITY",
+        "privateStateAllowed": "BROWSER_LOCAL_ONLY",
+        "serverCustomerDataAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "BROWSER_LOCAL_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W20",
+        "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
+        "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
+        "legacyCompatibilityReference": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
       },
       "productionState": "LIMITED_PRODUCTION"
     }

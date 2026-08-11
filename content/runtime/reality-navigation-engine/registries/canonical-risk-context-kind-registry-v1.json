@@ -1,0 +1,26 @@
+{
+  "registryCode": "PHI-OS-RNE-CANONICAL-RISK-CONTEXT-KIND-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "runtimeCode": "RNE",
+  "containsUserData": false,
+  "contextKinds": [
+    {
+      "kind": "KNOWN_RISK",
+      "authorityRule": "REFERENCE_ONLY_FROM_GOVERNED_SOURCE"
+    },
+    {
+      "kind": "UNKNOWN",
+      "authorityRule": "PRESERVE_UPSTREAM_UNKNOWN"
+    },
+    {
+      "kind": "DEPENDENCY",
+      "authorityRule": "REFERENCE_CONSTRAINT_GRAPH_DEPENDENCY_ONLY"
+    }
+  ],
+  "rules": {
+    "probabilityScoringAllowed": false,
+    "severityScoringAllowed": false,
+    "riskFactInventionAllowed": false,
+    "professionalJudgmentCreated": false
+  }
+}

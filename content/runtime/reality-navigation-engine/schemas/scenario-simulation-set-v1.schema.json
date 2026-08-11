@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Scenario Simulation Set v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "scenarioSetCode",
+    "scenarioSetVersion",
+    "objectType",
+    "dataType",
+    "optionSetReference",
+    "decisionSupportReference",
+    "recoverabilityAssessmentReference",
+    "simulationMode",
+    "scenarios",
+    "simulationIsPrediction",
+    "simulationIsRealityTruth",
+    "probabilityCreated",
+    "forecastCreated",
+    "causalityClaimed",
+    "guaranteedOutcomeCreated",
+    "selectionMade",
+    "executionCreated",
+    "professionalJudgmentCreated",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "scenarioSetDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-SCENARIO-SIMULATION-SET-v1.0.0"
+    },
+    "scenarioSetCode": {
+      "type": "string",
+      "pattern": "^RNE-SCENARIO-SET-[A-Z0-9-]{4,120}$"
+    },
+    "scenarioSetVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "SCENARIO_SIMULATION_SET"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "optionSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "decisionSupportReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "recoverabilityAssessmentReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "simulationMode": {
+      "const": "CONDITIONAL_OPTION_SIMULATION"
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scenarioCode",
+          "optionCode",
+          "optionClass",
+          "simulationMode",
+          "assumptionMode",
+          "tradeoff",
+          "dependencyReferences",
+          "knownRiskReferences",
+          "unknownReferences",
+          "recoverabilityClass",
+          "observationPoint",
+          "truthStatus",
+          "probabilityCreated",
+          "forecastCreated",
+          "causalityClaimed",
+          "outcomeClaimed",
+          "guaranteedOutcomeCreated",
+          "selectionMade",
+          "executionCreated"
+        ],
+        "properties": {
+          "scenarioCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "optionCode": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "optionClass": {
+            "enum": [
+              "OBSERVE",
+              "CLARIFY",
+              "VERIFY",
+              "REPOSITION",
+              "RECONFIGURE"
+            ]
+          },
+          "simulationMode": {
+            "const": "CONDITIONAL_OPTION_SIMULATION"
+          },
+          "assumptionMode": {
+            "const": "IF_OPTION_WERE_SELECTED_BY_AUTHORIZED_DECIDER"
+          },
+          "tradeoff": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "dependencyReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "knownRiskReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "unknownReferences": {
+            "$ref": "#/$defs/strarr"
+          },
+          "recoverabilityClass": {
+            "enum": [
+              "NO_STATE_CHANGE_REQUIRED",
+              "RECOVERY_WINDOW_OPEN",
+              "RECOVERY_WINDOW_CONDITIONAL",
+              "RECOVERY_NOT_OBSERVED",
+              "RECOVERY_UNKNOWN"
+            ]
+          },
+          "observationPoint": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "truthStatus": {
+            "const": "SIMULATION_ONLY"
+          },
+          "probabilityCreated": {
+            "const": false
+          },
+          "forecastCreated": {
+            "const": false
+          },
+          "causalityClaimed": {
+            "const": false
+          },
+          "outcomeClaimed": {
+            "const": false
+          },
+          "guaranteedOutcomeCreated": {
+            "const": false
+          },
+          "selectionMade": {
+            "const": false
+          },
+          "executionCreated": {
+            "const": false
+          }
+        }
+      }
+    },
+    "simulationIsPrediction": {
+      "const": false
+    },
+    "simulationIsRealityTruth": {
+      "const": false
+    },
+    "probabilityCreated": {
+      "const": false
+    },
+    "forecastCreated": {
+      "const": false
+    },
+    "causalityClaimed": {
+      "const": false
+    },
+    "guaranteedOutcomeCreated": {
+      "const": false
+    },
+    "selectionMade": {
+      "const": false
+    },
+    "executionCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "scenarioSetDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

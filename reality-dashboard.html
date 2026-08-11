@@ -23,9 +23,11 @@
   <link rel="stylesheet" href="/assets/css/design/motion.css">
   <link rel="stylesheet" href="/assets/css/public-experience.css">
   <link rel="stylesheet" href="/assets/css/reality-dashboard.css">
+  <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/wpr-reality-journey-production.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
 </head>
-<body class="public-page journey-dashboard-page" data-page="reality-dashboard" data-public-section="reality">
+<body class="public-page journey-dashboard-page" data-page="reality-dashboard" data-public-section="reality" data-wpr-production-surface="REALITY_JOURNEY_LOCAL" data-wpr-work="WPR-W20">
   <a class="phi-skip-link" href="#dashboard-main" data-i18n="journeyDashboard.skip">
     Skip to Journey Dashboard
   </a>
@@ -179,6 +181,33 @@
         </div>
       </section>
 
+      <section class="public-section public-section--soft" aria-labelledby="jr-v2-dashboard-title">
+        <div class="public-container">
+          <div class="wpr-jr-dashboard-authority" data-wpr-jr-dashboard-authority data-jr-projection-state="loading">
+            <p class="public-eyebrow" data-i18n="journeyCanonical.dashboard.eyebrow">JR v2 canonical mapping</p>
+            <h2 id="jr-v2-dashboard-title" class="public-title" data-i18n="journeyCanonical.dashboard.title">Your browser-local Journey is mapped to canonical workflow authority.</h2>
+            <dl class="wpr-jr-dashboard-authority__grid">
+              <div>
+                <dt data-i18n="journeyCanonical.dashboard.current">Canonical stage</dt>
+                <dd><span data-wpr-jr-canonical-current>—</span> <small data-wpr-jr-dashboard-state></small></dd>
+              </div>
+              <div>
+                <dt data-i18n="journeyCanonical.dashboard.source">Projection source</dt>
+                <dd data-i18n="journeyCanonical.dashboard.sourceValue">Existing M3C browser state + JR v2 compatibility registry</dd>
+              </div>
+              <div>
+                <dt data-i18n="journeyCanonical.dashboard.persistence">Persistence status</dt>
+                <dd data-i18n="journeyCanonical.dashboard.persistenceValue">Browser-local compatibility only; canonical JR v2 persistence is not claimed</dd>
+              </div>
+              <div>
+                <dt data-i18n="journeyCanonical.dashboard.progress">Progress boundary</dt>
+                <dd data-i18n="journeyCanonical.dashboard.progressValue">Only explicit stage completion events count; opening a page does not complete a stage.</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
       <section class="public-section journey-dashboard-progress" aria-labelledby="dashboard-progress-title">
         <div class="public-container">
           <p class="public-eyebrow" data-i18n="journeyDashboard.progress.eyebrow">
@@ -287,5 +316,6 @@
   <div data-public-footer-placeholder></div>
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/reality-dashboard.js"></script>
+  <script type="module" src="/assets/js/pages/reality-dashboard-jr-v2.js"></script>
 </body>
 </html>

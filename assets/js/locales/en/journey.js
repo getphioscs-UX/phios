@@ -113,6 +113,48 @@ const journeyPublic = Object.freeze({
       note: 'You can stop before submitting. Avoid entering emergency information or highly sensitive identifiers.'
     }
   },
+  journeyCanonical: {
+    authority: {
+      eyebrow: 'JR v2 · Canonical Journey Authority',
+      title: 'Eight canonical workflow stages govern one Reality Journey.',
+      lead: 'The six customer tasks below remain a compatibility view. Canonical workflow state comes from JR v2, not from page order or page visits.',
+      statusFrozen: 'JR v2 frozen',
+      statusReadOnly: 'Read-only web projection',
+      statusNoPersistence: 'No live canonical Journey persistence is claimed'
+    },
+    stages: {
+      entry: { name: 'Entry', purpose: 'Establish the Journey, customer reference, consent and declared data purpose.' },
+      orientation: { name: 'Orientation', purpose: 'Clarify what the Journey is examining before Reading begins.' },
+      reading: { name: 'Reading', purpose: 'Reference bounded Readout and Knowledge authority without copying their payloads.' },
+      reconstruction: { name: 'Reconstruction', purpose: 'Rebuild how the current Reality formed while keeping unknowns explicit.' },
+      navigation: { name: 'Navigation', purpose: 'Move into bounded workflow navigation without turning direction into a life decision.' },
+      review: { name: 'Review', purpose: 'Compare expected and observed change using explicit completion events.' },
+      continuity: { name: 'Continuity', purpose: 'Choose whether to continue, revise, remain open or prepare closure.' },
+      closed: { name: 'Closed', purpose: 'Close the workflow without rewriting earlier Reality, Readout or history.' }
+    },
+    compatibility: {
+      eyebrow: 'Customer task projection',
+      title: 'Six customer tasks remain visible, but they are not a second Journey.',
+      lead: 'They map through the frozen JR v2 compatibility registry and cannot redefine canonical stage order.'
+    },
+    safety: {
+      title: 'Journey boundaries remain active',
+      copy: 'Emergency signals, regulated-advice requests, missing consent, professional escalation and data-purpose violations remain fail-closed checks. Journey recommendations are workflow steps only.'
+    },
+    dashboard: {
+      eyebrow: 'JR v2 canonical mapping',
+      title: 'Your browser-local Journey is mapped to canonical workflow authority.',
+      current: 'Canonical stage',
+      source: 'Projection source',
+      sourceValue: 'Existing M3C browser state + JR v2 compatibility registry',
+      persistence: 'Persistence status',
+      persistenceValue: 'Browser-local compatibility only; canonical JR v2 persistence is not claimed',
+      progress: 'Progress boundary',
+      progressValue: 'Only explicit stage completion events count; opening a page does not complete a stage.',
+      unavailable: 'Canonical mapping unavailable',
+      unavailableCopy: 'JR v2 authority could not be loaded. Existing local state is left unchanged.'
+    }
+  },
   journeyDashboard: {
     metaTitle: 'Journey Dashboard — PHI OS',
     skip: 'Skip to Journey Dashboard',
