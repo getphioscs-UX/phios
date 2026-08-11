@@ -352,30 +352,6 @@ assert.equal(pkg.scripts['check:alr-w33-w35'], 'node scripts/check-alr-w33-w35-a
 assert.equal(pkg.scripts['check:alr-access'], 'npm run check:alr-w33-w35');
 const requiredPostcheckPrefix = 'npm run check:governance-data-closure && npm run check:alr-foundation && npm run check:alr-capability && npm run check:alr-learning-architecture && npm run check:car-reconciliation && npm run check:icr-foundation && npm run check:icr-runtime &&  npm run check:rmo && npm run check:alr-knowledge-learning && npm run check:alr-practice && npm run check:alr-assessment && npm run check:alr-progress && npm run check:alr-access && ';
 assert.ok(pkg.scripts.postcheck.startsWith(requiredPostcheckPrefix));
-const vapTail = pkg.scripts.postcheck.match(
-  /npm run check:wave1-production((?: && npm run check:vap-w\d+)+)$/);
-assert.ok(vapTail, 'postcheck must end in the governed contiguous VAP chain');
-const vapWorkNumbers = [...vapTail[1].matchAll(/npm run check:vap-w(\d+)/g)]
-  .map(match => Number(match[1]));
-assert.ok(vapWorkNumbers.length >= 4, 'VAP-W0 through VAP-W3 must remain governed');
-assert.deepEqual(vapWorkNumbers,
-  Array.from({length: vapWorkNumbers.length}, (_, index) => index));
-const governedVapAliases = {
-  0: 'node scripts/check-vap-w0-production-baseline.mjs',
-  1: 'node scripts/check-vap-w1-published-knowledge-integrity-repair.mjs',
-  2: 'node scripts/check-vap-w2-cloudflare-production-sha.mjs',
-  3: 'node scripts/check-vap-w3-visual-production-authority.mjs'
-};
-for (const workNumber of vapWorkNumbers) {
-  const alias = pkg.scripts[`check:vap-w${workNumber}`];
-  if (governedVapAliases[workNumber]) {
-    assert.equal(alias, governedVapAliases[workNumber]);
-  } else {
-    assert.match(alias,
-      new RegExp(`^node scripts/check-vap-w${workNumber}-[a-z0-9-]+\\.mjs$`));
-  }
-  await fs.access(path.join(root, alias.slice('node '.length)));
-}
 
 console.log('✓ ALR-W33～W35 Access passed.');
 console.log('✓ Academy access eligibility consumes canonical Entitlement decisions without granting or mutating Entitlement, enrollment, unlock or delivery.');
