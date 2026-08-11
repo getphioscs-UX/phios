@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 import { contentHash, C2_WAVE1_HUMAN_RESOLUTION, resolveHumanEditorialFreezeResolutions } from './canonical-thesis-boundary.mjs';
 import { C3R1_PATHS, resolveProductionReadinessClosure } from './preface-production-readiness-closure.mjs';
 import { WAVE1_C3_CLOSURE, resolveWave1C3ReadinessClosure } from './wave1-c3-readiness-closure.mjs';
@@ -170,7 +171,7 @@ export function validateProductionReadiness(root) {
   for (const [relative, value] of expected.files) {
     const absolute = path.join(root, relative);
     if (!fs.existsSync(absolute)) errors.push(`MISSING:${relative}`);
-    else if (JSON.stringify(JSON.parse(fs.readFileSync(absolute, 'utf8'))) !== JSON.stringify(value)) errors.push(`CONFLICT:${relative}`);
+    else if (!isDeepStrictEqual(JSON.parse(fs.readFileSync(absolute, 'utf8')), value)) errors.push(`CONFLICT:${relative}`);
   }
   return { valid: errors.length === 0, errors };
 }
