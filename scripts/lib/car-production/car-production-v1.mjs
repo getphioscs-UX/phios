@@ -13,6 +13,7 @@ export const REVIEW_REGISTRY = `${CAR_PROD}/registries/asset-review-production-r
 export const APPROVAL_REGISTRY = `${CAR_PROD}/registries/asset-approval-production-registry-v1.json`;
 export const MEDIA_REGISTRY = `${CAR_PROD}/registries/asset-media-production-registry-v1.json`;
 export const PUBLISHED_REGISTRY = `${CAR_PROD}/registries/published-asset-production-registry-v1.json`;
+export const ACTIVATION_PATH = `${CAR_PROD}/activation/vap-w12-w19-car-production-activation-v1.json`;
 
 const EXISTING = {
   briefSchema: 'content/professional/canonical-asset-runtime/schemas/canonical-asset-brief-v1.schema.json',
@@ -321,6 +322,96 @@ export function inferDimensions(buffer, ext, supplied = {}) {
   return { width: null, height: null };
 }
 
+
+
+export function deriveCarProductionActivation(root = ROOT) {
+  const briefRegistry = readJson(root, BRIEF_REGISTRY);
+  const candidateRegistry = readJson(root, CANDIDATE_REGISTRY);
+  const reviewRegistry = readJson(root, REVIEW_REGISTRY);
+  const approvalRegistry = readJson(root, APPROVAL_REGISTRY);
+  const mediaRegistry = readJson(root, MEDIA_REGISTRY);
+  const publishedRegistry = readJson(root, PUBLISHED_REGISTRY);
+  const pilotBriefCode = 'CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
+  const pilotCandidateEntry = candidateRegistry.candidates.find(x => x.briefCode === pilotBriefCode) || null;
+  const pilotReviews = pilotCandidateEntry ? reviewRegistry.reviews.filter(x => x.candidateCode === pilotCandidateEntry.candidateCode) : [];
+  const pilotApprovals = pilotCandidateEntry ? approvalRegistry.approvals.filter(x => x.candidateCode === pilotCandidateEntry.candidateCode) : [];
+  const pilotMedia = pilotCandidateEntry ? mediaRegistry.media.filter(x => x.candidateCode === pilotCandidateEntry.candidateCode) : [];
+  const pilotPublications = pilotCandidateEntry ? publishedRegistry.publications.filter(x => x.assetCode === pilotCandidateEntry.assetCode) : [];
+  const latestReview = pilotReviews.length ? readJson(root, pilotReviews.at(-1).path) : null;
+  const latestApproval = pilotApprovals.length ? readJson(root, pilotApprovals.at(-1).path) : null;
+  let status = 'PILOT_CANONICAL_ASSET_BRIEF_FROZEN_AND_CHATGPT_HANDOFF_READY';
+  let nextAuthority = 'External manual candidate generation via OPENAI_CHATGPT, followed by CAR Candidate Intake';
+  if (pilotCandidateEntry) {
+    status = 'PILOT_FIGURE_CANDIDATE_IMPORTED_AWAITING_HUMAN_ASSET_REVIEW';
+    nextAuthority = 'TL Human Asset Review Authority';
+  }
+  if (latestReview?.decision === 'accept') {
+    status = 'PILOT_FIGURE_CANDIDATE_ACCEPTED_AWAITING_HUMAN_ASSET_APPROVAL';
+    nextAuthority = 'TL Human Asset Approval Authority';
+  } else if (latestReview?.decision === 'changes_required') {
+    status = 'PILOT_FIGURE_CHANGES_REQUIRED_AWAITING_REVISED_CANDIDATE';
+    nextAuthority = 'External manual candidate revision followed by TL Human Asset Review';
+  } else if (latestReview?.decision === 'reject') {
+    status = 'PILOT_FIGURE_REJECTED';
+    nextAuthority = 'TL Human Asset Review Authority';
+  }
+  if (latestApproval?.decision === 'approved') {
+    status = 'PILOT_FIGURE_APPROVED_AWAITING_MEDIA_MATERIALIZATION';
+    nextAuthority = 'CAR Media Materialization Runtime with explicit rights/accessibility status';
+  } else if (latestApproval && latestApproval.decision !== 'approved') {
+    status = `PILOT_FIGURE_${String(latestApproval.decision).toUpperCase()}_NOT_MEDIA_ELIGIBLE`;
+    nextAuthority = 'TL Human Asset Approval Authority';
+  }
+  if (pilotMedia.length) {
+    status = 'PILOT_MEDIA_MATERIALIZED_AWAITING_PUBLISHED_ASSET_GATE';
+    nextAuthority = 'CAR Published Asset Runtime';
+  }
+  if (pilotPublications.length) {
+    status = 'PILOT_PUBLISHED_ASSET_RECORDED';
+    nextAuthority = 'CPR/WPR governed Website surface consumption';
+  }
+  return {
+    schemaVersion: 'PHI-OS-VAP-W12-W19-CAR-PRODUCTION-ACTIVATION-v1.0.0',
+    status,
+    pilot: {
+      briefCode: pilotBriefCode,
+      nodeCode: 'KN-PREFACE-001',
+      productionKind: 'mechanism_diagram',
+      briefState: 'validated_frozen',
+      chatgptHandoffReady: true,
+      candidateCode: pilotCandidateEntry?.candidateCode || null,
+      candidateDigest: pilotCandidateEntry?.candidateDigest || null,
+      reviewCode: latestReview?.reviewCode || null,
+      reviewDigest: latestReview?.reviewDigest || null,
+      reviewDecision: latestReview?.decision || null,
+      approvalCode: latestApproval?.approvalCode || null,
+      approvalDigest: latestApproval?.approvalDigest || null,
+      approvalDecision: latestApproval?.decision || null,
+      mediaCode: pilotMedia.at(-1)?.mediaCode || null,
+      publishedAssetCode: pilotPublications.at(-1)?.publishedAssetCode || null
+    },
+    productionCounts: {
+      briefs: briefRegistry.briefs.length,
+      candidates: candidateRegistry.candidates.length,
+      reviews: reviewRegistry.reviews.length,
+      approvals: approvalRegistry.approvals.length,
+      media: mediaRegistry.media.length,
+      publishedAssets: publishedRegistry.publications.length
+    },
+    nextAuthority,
+    publicationAuthorityCreated: publishedRegistry.publications.length > 0,
+    generationIsApproval: false,
+    reviewAcceptanceIsApproval: false,
+    approvalIsPublication: false
+  };
+}
+
+export async function refreshCarProductionActivation(root = ROOT) {
+  const activation = deriveCarProductionActivation(root);
+  await writeJson(root, ACTIVATION_PATH, activation);
+  return activation;
+}
+
 function candidatePaths(candidateCode) { return { record: `${CAR_PROD}/candidates/${candidateCode}/candidate.v1.json`, directory: `${CAR_PROD}/candidates/${candidateCode}` }; }
 export function resolveCandidate(root, candidateCode) { const p=candidatePaths(candidateCode).record; assert(exists(root,p),'CAR_PRODUCTION_CANDIDATE_NOT_FOUND',candidateCode); return readJson(root,p); }
 export function resolveReview(root, candidateCode) { const registry=readJson(root,REVIEW_REGISTRY); const refs=registry.reviews.filter(x=>x.candidateCode===candidateCode); assert(refs.length,'CAR_PRODUCTION_REVIEW_NOT_FOUND',candidateCode); const latest=refs.at(-1); return readJson(root,latest.path); }
@@ -334,21 +425,21 @@ export async function importCandidate({ root = ROOT, briefCode, file, modelCode 
   const payload={ fileName:path.basename(file), contentType:mime, fileDigest:fileDigest(bytes), byteLength:bytes.length, width:dims.width, height:dims.height };
   const providerLineage={ mode:'external_manual', providerCode:'OPENAI_CHATGPT', modelCode:modelCode||null, invocationDigest:null, source:'chatgpt_figure_brief_manual_handoff' };
   const body={ candidateCode,candidateVersion:'1.0.0',assetCode,assetType:brief.assetType,nodeCode:brief.nodeCode,assetBriefCode:brief.briefCode,assetBriefDigest:brief.briefDigest,meaningReferences:[...brief.meaningReferences].sort(),knowledgeReferences:[...brief.knowledgeReferences].sort(),sourceFragmentDigests:[...brief.sourceFragmentDigests].sort(),locale:brief.locale,candidatePayload:payload,providerLineage,candidateState:'candidate',createdAt };
-  const candidate={...body,candidateDigest:digest(body)}; const p=candidatePaths(candidateCode); const dir=path.join(root,p.directory); await fsp.mkdir(dir,{recursive:true}); const stored=path.join(dir,`candidate${ext}`); if(fs.existsSync(stored)) assert(fileDigest(fs.readFileSync(stored))===payload.fileDigest,'CAR_PRODUCTION_CANDIDATE_BINARY_CONFLICT'); else await fsp.copyFile(file,stored); await writeJson(root,p.record,candidate); await upsertRegistry(root,CANDIDATE_REGISTRY,'candidates','candidateCode',{candidateCode,candidateDigest:candidate.candidateDigest,assetCode,nodeCode:brief.nodeCode,briefCode,briefDigest:brief.briefDigest,providerMode:'external_manual',path:p.record,binaryPath:path.relative(root,stored).replaceAll('\\','/')}); return candidate;
+  const candidate={...body,candidateDigest:digest(body)}; const p=candidatePaths(candidateCode); const dir=path.join(root,p.directory); await fsp.mkdir(dir,{recursive:true}); const stored=path.join(dir,`candidate${ext}`); if(fs.existsSync(stored)) assert(fileDigest(fs.readFileSync(stored))===payload.fileDigest,'CAR_PRODUCTION_CANDIDATE_BINARY_CONFLICT'); else await fsp.copyFile(file,stored); await writeJson(root,p.record,candidate); await upsertRegistry(root,CANDIDATE_REGISTRY,'candidates','candidateCode',{candidateCode,candidateDigest:candidate.candidateDigest,assetCode,nodeCode:brief.nodeCode,briefCode,briefDigest:brief.briefDigest,providerMode:'external_manual',path:p.record,binaryPath:path.relative(root,stored).replaceAll('\\','/')}); await refreshCarProductionActivation(root); return candidate;
 }
 
 export async function reviewCandidate({ root=ROOT,candidateCode,reviewerCode,decision,dimensions,reviewNotes=[],reviewedAt=new Date().toISOString() }) {
   assert(['accept','changes_required','reject'].includes(decision),'CAR_PRODUCTION_REVIEW_DECISION_UNSUPPORTED',decision);
   const candidate=resolveCandidate(root,candidateCode); const seq=String(readJson(root,REVIEW_REGISTRY).reviews.filter(x=>x.candidateCode===candidateCode).length+1).padStart(3,'0'); const reviewCode=`CAR-REV-${candidateCode.replace(/^CAR-CAND-/,'')}-${seq}`;
   if(decision==='accept') assert(Object.values(dimensions).every(v=>v==='pass'),'CAR_PRODUCTION_ACCEPT_REVIEW_REQUIRES_ALL_DIMENSIONS_PASS');
-  const review=buildAssetReview({candidate,reviewerCode,reviewerIndependent:true,dimensions,decision,reviewNotes,reviewedAt,reviewCode}); const relative=`${CAR_PROD}/reviews/${reviewCode}.json`; await writeJson(root,relative,review); await upsertRegistry(root,REVIEW_REGISTRY,'reviews','reviewCode',{reviewCode,reviewDigest:review.reviewDigest,candidateCode,candidateDigest:candidate.candidateDigest,decision,path:relative}); return review;
+  const review=buildAssetReview({candidate,reviewerCode,reviewerIndependent:true,dimensions,decision,reviewNotes,reviewedAt,reviewCode}); const relative=`${CAR_PROD}/reviews/${reviewCode}.json`; await writeJson(root,relative,review); await upsertRegistry(root,REVIEW_REGISTRY,'reviews','reviewCode',{reviewCode,reviewDigest:review.reviewDigest,candidateCode,candidateDigest:candidate.candidateDigest,decision,path:relative}); await refreshCarProductionActivation(root); return review;
 }
 
 export async function approveCandidate({root=ROOT,candidateCode,approverCode,decision='approved',conditions=[],approvedAt=new Date().toISOString()}) {
   const candidate=resolveCandidate(root,candidateCode); const review=resolveReview(root,candidateCode); assert(review.decision==='accept','CAR_APPROVAL_ACCEPTED_REVIEW_REQUIRED'); const seq=String(readJson(root,APPROVAL_REGISTRY).approvals.filter(x=>x.candidateCode===candidateCode).length+1).padStart(3,'0'); const approvalCode=`CAR-APP-${candidateCode.replace(/^CAR-CAND-/,'')}-${seq}`;
   const carApprovalRecord=buildAssetApproval({candidate,review,approverCode,approverIndependent:true,decision,conditions,approvedAt,approvalCode});
   const approval={schemaVersion:'PHI-OS-CAR-PRODUCTION-ASSET-APPROVAL-v1.0.0',approvalCode,approver:approverCode,candidateCode,candidateDigest:candidate.candidateDigest,reviewCode:review.reviewCode,reviewDigest:review.reviewDigest,decision,conditions,approvedAt,approvalDigest:carApprovalRecord.approvalDigest,carApprovalRecord};
-  const relative=`${CAR_PROD}/approvals/${approvalCode}.json`; await writeJson(root,relative,approval); await upsertRegistry(root,APPROVAL_REGISTRY,'approvals','approvalCode',{approvalCode,approvalDigest:approval.approvalDigest,approver:approverCode,candidateCode,candidateDigest:candidate.candidateDigest,reviewCode:review.reviewCode,reviewDigest:review.reviewDigest,decision,path:relative}); return approval;
+  const relative=`${CAR_PROD}/approvals/${approvalCode}.json`; await writeJson(root,relative,approval); await upsertRegistry(root,APPROVAL_REGISTRY,'approvals','approvalCode',{approvalCode,approvalDigest:approval.approvalDigest,approver:approverCode,candidateCode,candidateDigest:candidate.candidateDigest,reviewCode:review.reviewCode,reviewDigest:review.reviewDigest,decision,path:relative}); await refreshCarProductionActivation(root); return approval;
 }
 
 export async function materializeMedia({root=ROOT,candidateCode,altText,rightsStatus,accessibilityStatus,file=null,width=null,height=null}) {
@@ -356,12 +447,12 @@ export async function materializeMedia({root=ROOT,candidateCode,altText,rightsSt
   const registryEntry=readJson(root,CANDIDATE_REGISTRY).candidates.find(x=>x.candidateCode===candidateCode); const sourceFile=file?path.resolve(file):path.join(root,registryEntry.binaryPath); const bytes=fs.readFileSync(sourceFile); assert(fileDigest(bytes)===candidate.candidatePayload.fileDigest,'CAR_MEDIA_BINARY_MUST_MATCH_CANDIDATE'); const ext=path.extname(sourceFile).toLowerCase(); assert(['.webp','.avif','.svg'].includes(ext),'CAR_MEDIA_PUBLIC_EXTENSION_UNSAFE'); const dims=inferDimensions(bytes,ext,{width,height}); assert(dims.width&&dims.height,'CAR_MEDIA_DIMENSIONS_REQUIRED');
   const kind=candidate.assetType==='DIAGRAM'?normalizeProductionKind('mechanism_diagram'):normalizeProductionKind('hero_illustration'); const publicRelative=`assets/knowledge/${candidate.nodeCode}/${candidate.assetCode}${ext}`; const publicAbs=path.join(root,publicRelative); await fsp.mkdir(path.dirname(publicAbs),{recursive:true}); if(fs.existsSync(publicAbs)) assert(fileDigest(fs.readFileSync(publicAbs))===candidate.candidatePayload.fileDigest,'CAR_MEDIA_PUBLIC_BINARY_CONFLICT'); else await fsp.copyFile(sourceFile,publicAbs);
   const mediaCode=`CAR-MEDIA-${candidateCode.replace(/^CAR-CAND-/,'')}-001`; const carMediaRecord=buildMediaRecord({candidate,assetType:candidate.assetType,mediaCode,mediaType:kind.mediaType,storageAuthority:'PUBLIC_REPOSITORY_ASSET_PATH',contentType:inferMime(sourceFile),width:dims.width,height:dims.height,duration:null,locale:candidate.locale,accessibilityText:altText,accessibilityStatus,rightsStatus,sourceDigest:candidate.candidateDigest,fixtureOnly:false});
-  const body={schemaVersion:'PHI-OS-CAR-PRODUCTION-MEDIA-v1.0.0',mediaCode,assetCode:candidate.assetCode,candidateCode,candidateDigest:candidate.candidateDigest,contentType:carMediaRecord.contentType,width:dims.width,height:dims.height,sourceDigest:candidate.candidateDigest,binaryDigest:candidate.candidatePayload.fileDigest,storageAuthority:'PUBLIC_REPOSITORY_ASSET_PATH',publicSrc:`/${publicRelative.replaceAll('\\','/')}`,altText,accessibilityStatus,rightsStatus,carMediaRecord}; const record={...body,productionMediaDigest:digest(body)}; const relative=`${CAR_PROD}/media/${mediaCode}.json`; await writeJson(root,relative,record); await upsertRegistry(root,MEDIA_REGISTRY,'media','mediaCode',{mediaCode,productionMediaDigest:record.productionMediaDigest,assetCode:candidate.assetCode,candidateCode,candidateDigest:candidate.candidateDigest,publicSrc:record.publicSrc,rightsStatus,accessibilityStatus,path:relative}); return record;
+  const body={schemaVersion:'PHI-OS-CAR-PRODUCTION-MEDIA-v1.0.0',mediaCode,assetCode:candidate.assetCode,candidateCode,candidateDigest:candidate.candidateDigest,contentType:carMediaRecord.contentType,width:dims.width,height:dims.height,sourceDigest:candidate.candidateDigest,binaryDigest:candidate.candidatePayload.fileDigest,storageAuthority:'PUBLIC_REPOSITORY_ASSET_PATH',publicSrc:`/${publicRelative.replaceAll('\\','/')}`,altText,accessibilityStatus,rightsStatus,carMediaRecord}; const record={...body,productionMediaDigest:digest(body)}; const relative=`${CAR_PROD}/media/${mediaCode}.json`; await writeJson(root,relative,record); await upsertRegistry(root,MEDIA_REGISTRY,'media','mediaCode',{mediaCode,productionMediaDigest:record.productionMediaDigest,assetCode:candidate.assetCode,candidateCode,candidateDigest:candidate.candidateDigest,publicSrc:record.publicSrc,rightsStatus,accessibilityStatus,path:relative}); await refreshCarProductionActivation(root); return record;
 }
 
 export async function publishProductionAsset({root=ROOT,candidateCode,surface='WEBSITE',publishedAt=new Date().toISOString()}) {
   const candidate=resolveCandidate(root,candidateCode); const review=resolveReview(root,candidateCode); const approval=resolveApproval(root,candidateCode); const media=resolveMedia(root,candidateCode); assert(media.rightsStatus&&['cleared','owned','licensed'].includes(media.rightsStatus),'CAR_PUBLICATION_RIGHTS_GATE_FAILED'); assert(media.accessibilityStatus==='passed','CAR_PUBLICATION_ACCESSIBILITY_GATE_FAILED'); const publicationCode=`CAR-PUB-${candidateCode.replace(/^CAR-CAND-/,'')}-001`;
-  const carPublicationRecord=publishAsset({candidate,review,approval,media:[media.carMediaRecord],surface,rightsStatus:media.rightsStatus,accessibilityStatus:media.accessibilityStatus,publishedAt,publicationCode}); const publishedAssetCode=`PUBLISHED-${candidate.assetCode}`; const body={schemaVersion:'PHI-OS-CAR-PUBLISHED-ASSET-PRODUCTION-v1.0.0',publishedAssetCode,assetCode:candidate.assetCode,mediaCode:media.mediaCode,surface,publicSrc:media.publicSrc,width:media.width,height:media.height,altText:media.altText,rightsStatus:media.rightsStatus,accessibilityStatus:media.accessibilityStatus,publicationState:'published',publishedAt,carPublicationRecord}; const record={...body,publicationDigest:digest(body)}; const relative=`${CAR_PROD}/published/${publishedAssetCode}.json`; await writeJson(root,relative,record); await upsertRegistry(root,PUBLISHED_REGISTRY,'publications','publishedAssetCode',{publishedAssetCode,assetCode:candidate.assetCode,mediaCode:media.mediaCode,surface,publicSrc:media.publicSrc,publicationDigest:record.publicationDigest,path:relative}); return record;
+  const carPublicationRecord=publishAsset({candidate,review,approval,media:[media.carMediaRecord],surface,rightsStatus:media.rightsStatus,accessibilityStatus:media.accessibilityStatus,publishedAt,publicationCode}); const publishedAssetCode=`PUBLISHED-${candidate.assetCode}`; const body={schemaVersion:'PHI-OS-CAR-PUBLISHED-ASSET-PRODUCTION-v1.0.0',publishedAssetCode,assetCode:candidate.assetCode,mediaCode:media.mediaCode,surface,publicSrc:media.publicSrc,width:media.width,height:media.height,altText:media.altText,rightsStatus:media.rightsStatus,accessibilityStatus:media.accessibilityStatus,publicationState:'published',publishedAt,carPublicationRecord}; const record={...body,publicationDigest:digest(body)}; const relative=`${CAR_PROD}/published/${publishedAssetCode}.json`; await writeJson(root,relative,record); await upsertRegistry(root,PUBLISHED_REGISTRY,'publications','publishedAssetCode',{publishedAssetCode,assetCode:candidate.assetCode,mediaCode:media.mediaCode,surface,publicSrc:media.publicSrc,publicationDigest:record.publicationDigest,path:relative}); await refreshCarProductionActivation(root); return record;
 }
 
 export const lifecycleBuilders = { buildAssetReview, buildAssetApproval, buildMediaRecord, publishAsset, lifecycleDigest };
