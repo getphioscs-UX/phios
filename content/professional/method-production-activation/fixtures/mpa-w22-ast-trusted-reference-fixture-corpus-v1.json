@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W22-AST-TRUSTED-REFERENCE-FIXTURE-CORPUS-v1.0.0",
+  "work": "MPA-W22",
+  "methodCode": "ASTROLOGY",
+  "sourceClassification": "IMMUTABLE_NASA_JPL_HORIZONS_ARCHIVE_IN_CANDIDATE_ENGINE_RELEASE",
+  "candidateEngineRelease": "2.1.19",
+  "candidateEngineCommit": "61dc07020aaa6885d2c7f688a4d82beaf6edb9ef",
+  "fixtures": [
+    {
+      "fixtureId": "AST-W22-JPL-JUPITER-1900-001",
+      "fixtureType": "trusted_reference",
+      "reference": "NASA_JPL_HORIZONS",
+      "sourceArtifact": "generate/horizons/airless_Jupiter.txt",
+      "sourceGitBlobSha1": "2ee26b47f6e90e35e7131fb6af3da7ac68062d7c",
+      "input": {
+        "utc": "1900-01-01T00:00:00Z",
+        "observerLatitudeDegrees": 29.0,
+        "observerLongitudeDegrees": -81.0,
+        "observerElevationMeters": 10,
+        "target": "Jupiter",
+        "refraction": false
+      },
+      "referenceOutput": {
+        "utc": "1900-01-01T00:00:00Z",
+        "j2000RaDegrees": 240.63084,
+        "j2000DecDegrees": -19.8803,
+        "apparentRaDegrees": 239.17752,
+        "apparentDecDegrees": -19.60066,
+        "azimuthDegrees": 275.3334,
+        "altitudeDegrees": -52.5522
+      },
+      "comparisonPolicy": {
+        "toleranceFreeze": "PHI-OS-MPA-W22-AST-TOLERANCE-FREEZE-v1.0.0",
+        "maximumAngularErrorArcminutes": 0.878
+      }
+    }
+  ],
+  "directPhiNumericReplayExecuted": false,
+  "exactMatchClaimed": false,
+  "corpusDigest": "e9dc1b2da001a5011b809350dc5634a33cf3a7447d31597fd5bb4cb33f309feb"
+}

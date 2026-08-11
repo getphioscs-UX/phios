@@ -1,0 +1,52 @@
+{
+  "manifestCode": "PHI-OS-MPA-W22-DELTA-MANIFEST-v1",
+  "manifestVersion": "1.0.0",
+  "work": "MPA-W22",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "scope": "AST technical activation evidence: ephemeris authority, trusted JPL reference evidence, tolerance freeze, historical TZDB authority, regression and policy boundary.",
+  "decision": "AST_TECHNICAL_EVIDENCE_READY_METHOD_POLICY_BLOCKED",
+  "requestedTechnicalBlockers": {
+    "ephemerisVersion": "RESOLVED",
+    "ephemerisDigest": "RESOLVED",
+    "nasaJplTrustedReferenceComparison": "RESOLVED_WITH_IMMUTABLE_UPSTREAM_RELEASE_EVIDENCE_NO_FALSE_LOCAL_REPLAY_CLAIM",
+    "toleranceFreeze": "RESOLVED",
+    "historicalTimezoneTzdbAuthority": "RESOLVED"
+  },
+  "remainingBlockers": [
+    "PRODUCTION_POLICIES_NOT_APPROVED",
+    "MPA-W27_PRODUCTION_EXECUTION_GATE_REQUIRED"
+  ],
+  "preservation": {
+    "frozenMrImrRewritten": false,
+    "legacyAstFreezeRewritten": false,
+    "methodRegistryV2Rewritten": false,
+    "capabilityMatrixRewritten": false,
+    "w11HistoricalAuthorityRegistryRewritten": false,
+    "w15HistoricalComparisonRegistryRewritten": false
+  },
+  "packageReconciliation": {
+    "w21AggregateSegmentRestored": true,
+    "w22AggregateSegmentAdded": true,
+    "mpaStillOutsidePostcheck": true
+  },
+  "files": [
+    "content/professional/method-production-activation/acceptance/mpa-w22-ast-activation-acceptance-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-ast-activation-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-ast-tolerance-freeze-v1.json",
+    "content/professional/method-production-activation/fixtures/mpa-w22-ast-timezone-fixture-corpus-v1.json",
+    "content/professional/method-production-activation/fixtures/mpa-w22-ast-trusted-reference-fixture-corpus-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-activation-readiness-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-ephemeris-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-production-policy-blocker-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-regression-freeze-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-timezone-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-trusted-reference-evidence-v1.json",
+    "content/professional/method-production-activation/schemas/mpa-ast-activation-readiness-v1.schema.json",
+    "docs/runtime/MPA-W22-AST-ACTIVATION.md",
+    "functions/method-production-activation/ast-activation-runtime.js",
+    "package.json",
+    "scripts/check-mpa-w22-ast-activation.mjs",
+    "scripts/lib/method-production-activation/mpa-ast-activation-v1.mjs",
+    "docs/mpa/MPA-W22-DELTA-MANIFEST.json"
+  ]
+}

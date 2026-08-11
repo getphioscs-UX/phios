@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-VAP-W9-CONTRACT-v1.0.0",
+  "contractCode": "PHI-OS-VAP-W9-HUMAN-EDITORIAL-REVIEW-CANDIDATE-PROMOTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W9",
+  "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
+  "status": "active",
+  "implementationBaselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "purpose": "Route the six validated Batch 001 PJA candidates through explicit TL Human Editorial Review and promote only Human-accepted candidates to the next PJA Human Approval eligibility stage without mutating Candidate content or creating Approval/Publication authority.",
+  "upstream": {
+    "w8Activation": "content/production/visual-article/activation/vap-w8-candidate-validation-pja-import-v1.json",
+    "w8Validation": "content/production/visual-article/validation/vap-article-batch-001-candidate-validation-v1.json",
+    "w8ImportManifest": "content/production/visual-article/import/vap-article-batch-001-pja-import-v1.json",
+    "pjaCandidatePattern": "content/knowledge/production/candidates/zh-Hans/<NODE_CODE>/candidate.v1.json"
+  },
+  "existingPjaRuntimeReuse": {
+    "humanReviewRuntime": "scripts/lib/knowledge-production/human-review-v1.mjs",
+    "humanReviewContract": "content/knowledge/production/contracts/human-review-contract.json",
+    "humanReviewSchema": "content/knowledge/production/schemas/human-review-package-v1.schema.json",
+    "humanReviewRegistry": "content/knowledge/production/registry/review-registry.json",
+    "secondHumanReviewRuntimeAllowed": false
+  },
+  "humanReviewGate": {
+    "oneIndependentDecisionPerNode": true,
+    "bulkEnvelopeIsNotBulkReviewDecision": true,
+    "allowedDecisions": ["accept", "changes_required", "reject", "defer"],
+    "reviewerCode": "TL",
+    "reviewerAuthority": "TL Human Review Authority",
+    "editorialActorRole": "HUMAN_EDITORIAL_AUTHORITY",
+    "candidateDigestBindingRequired": true,
+    "w8ValidationRequired": true,
+    "aiRecommendationIsNotHumanReview": true
+  },
+  "candidatePromotion": {
+    "promotionMeaning": "accepted_human_review_handoff_to_pja_approval_eligibility",
+    "acceptRequired": true,
+    "candidateBodyMutationAllowed": false,
+    "candidateAcceptanceIsApproval": false,
+    "candidateAcceptanceIsPublication": false,
+    "approvalRecordCreationAllowed": false,
+    "publicationRecordCreationAllowed": false,
+    "pjaCandidateRegistryMutationAllowed": false,
+    "legacyCandidateRegistryReason": "The frozen PJA Candidate Registry projection expects prompt-package lineage that VAP-W8 intentionally did not fabricate; W9 therefore records successor promotion without inventing legacy prompt provenance.",
+    "nextAuthority": "PJA Human Approval Runtime"
+  },
+  "outputs": {
+    "reviewQueue": "content/production/visual-article/review/vap-w9-batch-001-human-editorial-review-v1.json",
+    "humanDecisions": "content/production/visual-article/decisions/vap-w9-batch-001-human-editorial-decisions-v1.json",
+    "pjaHumanReviewPattern": "content/knowledge/production/reviews/zh-Hans/<NODE_CODE>/review.v1.json",
+    "promotionPattern": "content/production/visual-article/promotion/zh-Hans/<NODE_CODE>/promotion.v1.json",
+    "promotionManifest": "content/production/visual-article/promotion/vap-article-batch-001-candidate-promotion-v1.json",
+    "activation": "content/production/visual-article/activation/vap-w9-human-editorial-review-candidate-promotion-v1.json"
+  },
+  "prohibited": [
+    "fabricate_human_review",
+    "rewrite_candidate_during_review",
+    "mutate_canonical_knowledge",
+    "mutate_pja_candidate_registry",
+    "create_human_approval",
+    "create_publication",
+    "promote_non_accepted_candidate",
+    "inherit_review_across_locale"
+  ]
+}

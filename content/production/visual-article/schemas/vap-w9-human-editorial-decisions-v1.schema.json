@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/production/visual-article/vap-w9-human-editorial-decisions-v1.schema.json",
+  "title": "PHI OS VAP-W9 Human Editorial Decisions v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "decisionEnvelopeCode", "work", "batchCode", "locale", "status", "reviewQueueDigest", "bulkApprovalAllowed", "oneIndependentDecisionPerNode", "entries"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-VAP-W9-HUMAN-EDITORIAL-DECISIONS-v1.0.0"},
+    "decisionEnvelopeCode": {"const": "PHI-OS-VAP-W9-BATCH-001-HUMAN-EDITORIAL-DECISIONS-v1"},
+    "work": {"const": "VAP-W9"},
+    "batchCode": {"const": "VAP-ARTICLE-BATCH-001"},
+    "locale": {"const": "zh-Hans"},
+    "status": {"enum": ["PENDING_HUMAN", "HUMAN_DECISIONS_RECORDED"]},
+    "reviewQueueDigest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "bulkApprovalAllowed": {"const": false},
+    "oneIndependentDecisionPerNode": {"const": true},
+    "entries": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["decisionCode", "nodeCode", "candidateCode", "candidateDigest", "decisionState", "decision", "reviewerCode", "reviewerAuthority", "editorialActorRole", "reviewedAt", "summary", "findings"],
+        "properties": {
+          "decisionCode": {"type": "string"},
+          "nodeCode": {"type": "string"},
+          "candidateCode": {"type": "string"},
+          "candidateDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "decisionState": {"enum": ["pending_human", "human_decided"]},
+          "decision": {"type": ["string", "null"], "enum": ["accept", "changes_required", "reject", "defer", null]},
+          "reviewerCode": {"type": ["string", "null"]},
+          "reviewerAuthority": {"type": ["string", "null"]},
+          "editorialActorRole": {"type": ["string", "null"]},
+          "reviewedAt": {"type": ["string", "null"]},
+          "summary": {"type": ["string", "null"]},
+          "findings": {"type": "array"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W22-AST-REGRESSION-FREEZE-v1.0.0",
+  "work": "MPA-W22",
+  "status": "PASS_TECHNICAL_ACTIVATION_EVIDENCE_POLICY_BLOCKED",
+  "methodCode": "ASTROLOGY",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "fingerprints": [
+    {
+      "path": "functions/core-method-runtime/ast-astronomy-runtime.js",
+      "sha256": "8368bef2f0bc7290811de47005f24c389aff25d198d353b9c528061d11c4b444"
+    },
+    {
+      "path": "functions/core-method-runtime/ast-planet-runtime.js",
+      "sha256": "ccae563a9a8e56a2dbedfd5e4cfa7b22139d6f2d9b033b2407e7b6e8984a9d26"
+    },
+    {
+      "path": "functions/core-method-runtime/ast-house-runtime.js",
+      "sha256": "b606bf844e4ddb0c121dceec1bce64fdaba738d9b2c97ed4c6ffe0d146a0d97b"
+    },
+    {
+      "path": "functions/core-method-runtime/ast-aspect-runtime.js",
+      "sha256": "1499593085089b28a6e373cac18b40955434c70ebe7016127290c9e0ebcd7d06"
+    },
+    {
+      "path": "functions/core-method-runtime/ast-projection-runtime.js",
+      "sha256": "19ebb6b6c16c7dfad8b10cbabcf363e354cbe683af6cd339ddaf843e31f65fc7"
+    },
+    {
+      "path": "content/professional/core-method-runtime/ast-astronomy-runtime-v1.json",
+      "sha256": "3818dc777a864deae09396b943b23b570238629ad830c49e2363ab565620a3e6"
+    },
+    {
+      "path": "content/professional/core-method-runtime/ast-planet-runtime-v1.json",
+      "sha256": "b7b211f052ae4c7060fa85d485e8ff45fa9e2f2429f5398aed251bb0dd3cc43f"
+    },
+    {
+      "path": "content/professional/core-method-runtime/ast-house-runtime-v1.json",
+      "sha256": "b53f1e18146e145ea05c231355d873ca61daa5f3e5c28674bd4ff12c231d608c"
+    },
+    {
+      "path": "content/professional/core-method-runtime/ast-aspect-runtime-v1.json",
+      "sha256": "e29f570edf9bacf1f75ee5049acb1f8845dde985cdccbaf0d07a138704d02c3b"
+    },
+    {
+      "path": "content/professional/core-method-runtime/ast-projection-runtime-v1.json",
+      "sha256": "17a18f9ca195e059ac1e5bcba74a2d2bca370ae0fa3d6529b51c30b2ddf1b33d"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-ast-ephemeris-authority-resolution-v1.json",
+      "sha256": "112040207a352538d5fcc8ed116385cfaa6b26fb920625a1d426e7eebf348c10"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-ast-timezone-authority-resolution-v1.json",
+      "sha256": "31586698e0dede4e919747b5cec61e25832f65883b743ad5d9c09bb851a7a4e5"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-ast-trusted-reference-evidence-v1.json",
+      "sha256": "39061cad9799f6fee0b30f8c92ae19ea052166f80a5f3de7871c2c6ee122a5ef"
+    },
+    {
+      "path": "content/professional/method-production-activation/contracts/mpa-ast-tolerance-freeze-v1.json",
+      "sha256": "24a9d569b0fcfbea8e92ffee8a005bb3f53a3c0071edf1cef959895f9451d479"
+    },
+    {
+      "path": "content/professional/method-production-activation/fixtures/mpa-w22-ast-timezone-fixture-corpus-v1.json",
+      "sha256": "d3d053d78f1e80f465bfa418c440b586e1f20b8eea6ffbcd92e63c3d804513b6"
+    },
+    {
+      "path": "content/professional/method-production-activation/fixtures/mpa-w22-ast-trusted-reference-fixture-corpus-v1.json",
+      "sha256": "53025c27b97fdfbfd31611aa66f4283581ce9ff402f714a2bfa5d0a2eff0257c"
+    },
+    {
+      "path": "content/professional/method-production-activation/registries/mpa-ast-production-policy-blocker-v1.json",
+      "sha256": "7d241d841a72015e23bae9899b938cc8f6162ce7b940db42ab62060de4adcc6b"
+    }
+  ],
+  "checkerAliases": [
+    "check:ast-w0",
+    "check:ast-w1",
+    "check:ast-w2",
+    "check:ast-w3",
+    "check:ast-w4a",
+    "check:ast-w4b",
+    "check:ast-w5",
+    "check:ast-w6",
+    "check:ast-w7"
+  ],
+  "technicalRegressionReady": true,
+  "methodSpecificReadyForW26": false,
+  "remainingBlocker": "PRODUCTION_POLICIES_NOT_APPROVED",
+  "rules": {
+    "anyFingerprintDriftRequiresRegressionRerun": true,
+    "ephemerisUpgradeRequiresNewAuthorityResolution": true,
+    "tzdbUpgradeRequiresNewAuthorityResolution": true,
+    "toleranceChangeRequiresVersionedSuccessor": true,
+    "productionEligibilityCreated": false
+  }
+}

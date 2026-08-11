@@ -655,8 +655,7 @@
     "check:vap-w4r": "node scripts/check-vap-w4r-article-execution-eligibility-reconciliation.mjs",
     "build:vap-w5r": "node scripts/build-vap-w5r-scalable-article-production-portfolio.mjs",
     "check:vap-w5r": "node scripts/check-vap-w5r-scalable-article-production-portfolio.mjs",
-    "check:vap-b": "npm run check:vap-w4r && npm run check:vap-w5r && npm run check:vap-w6 && npm run check:vap-w6a && npm run check:vap-w7 && npm run check:vap-w7s && npm run check:vap-w8",
-    "check:wpr-w0": "node scripts/check-wpr-w0-production-baseline.mjs",
+    "check:vap-b": "npm run check:vap-w4r && npm run check:vap-w5r && npm run check:vap-w6 && npm run check:vap-w6a && npm run check:vap-w7 && npm run check:vap-w7s && npm run check:vap-w8 && npm run check:vap-w9",
     "check:wpr-w1": "node scripts/check-wpr-w1-authority-boundary.mjs",
     "check:wpr-w2": "node scripts/check-wpr-w2-canonical-web-production.mjs",
     "check:wpr-w3": "node scripts/check-wpr-w3-surface-registry.mjs",
@@ -689,8 +688,7 @@
     "check:mpa-w5": "node scripts/check-mpa-w5-method-capability-matrix.mjs",
     "check:mpa-w0-w5": "node scripts/check-mpa-w0-w5-foundation.mjs",
     "check:mpa-foundation": "npm run check:mpa-w0-w5",
-    "check:mpa": "npm run check:mpa-foundation && npm run check:mpa-input-calculation && npm run check:mpa-validation-evidence && npm run check:mpa-projection-integration && npm run check:mpa-num-activation",
-    "check:rre-w0-w4": "node scripts/check-rre-w0-w4-readout-foundation.mjs",
+    "check:mpa": "npm run check:mpa-foundation && npm run check:mpa-input-calculation && npm run check:mpa-validation-evidence && npm run check:mpa-projection-integration && npm run check:mpa-num-activation && npm run check:mpa-ast-activation",
     "check:rre-foundation": "npm run check:rre-w0-w4",
     "check:rre": "npm run check:rre-foundation && npm run check:rre-reading && npm run check:rre-canonical",
     "check:rre-w5-w10": "node scripts/check-rre-w5-w10-reading-runtime.mjs",
@@ -777,7 +775,12 @@
     "check:pr-w0-w13": "node scripts/check-pr-w0-w13-professional-runtime-v2.mjs",
     "check:pr": "npm run check:pr-w0-w13",
     "check:pr-v2": "npm run check:pr",
-    "check:professional-runtime": "npm run check:pr"
+    "check:professional-runtime": "npm run check:pr",
+    "build:vap-w9": "node scripts/build-vap-w9-human-editorial-review-candidate-promotion.mjs",
+    "vap:w9:apply": "node scripts/apply-vap-w9-human-editorial-review-candidate-promotion.mjs --apply",
+    "check:vap-w9": "node scripts/check-vap-w9-human-editorial-review-candidate-promotion.mjs",
+    "check:mpa-w22": "node scripts/check-mpa-w22-ast-activation.mjs",
+    "check:mpa-ast-activation": "npm run check:mpa-w22"
   },
   "type": "module"
 }
