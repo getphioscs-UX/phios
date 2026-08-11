@@ -154,8 +154,9 @@ const approvalRegistry = read('content/knowledge/production/registry/approval-re
 const publicationRegistry = read('content/knowledge/production/registry/publication-registry.json');
 const w9ActivationPath = 'content/production/visual-article/activation/vap-w9-human-editorial-review-candidate-promotion-v1.json';
 const w9SuccessorApplied = fs.existsSync(path.join(root, w9ActivationPath)) && read(w9ActivationPath).humanEditorialReviewCount === 6;
-const w10ActivationPath = 'content/production/visual-article/activation/vap-w10-human-approval-production-article-package-v1.json';
-const w10SuccessorApplied = fs.existsSync(path.join(root, w10ActivationPath)) && read(w10ActivationPath).humanApprovedCount === 6 && read(w10ActivationPath).productionArticlePackageCount === 6;
+const w10DecisionPath = 'content/production/visual-article/decisions/vap-w10-batch-001-human-approval-decisions-v1.json';
+const w10Decisions = fs.existsSync(path.join(root, w10DecisionPath)) ? read(w10DecisionPath) : null;
+const w10DecisionByNode = new Map((w10Decisions?.entries ?? []).map(entry => [entry.nodeCode, entry]));
 for (const nodeCode of nodeCodes) {
   assert.equal(candidateRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE), false, `${nodeCode}: CANDIDATE_REGISTRY_MUST_NOT_BE_PROMOTED_BY_W8`);
   const successorReview = reviewRegistry.records.find(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE);
@@ -167,12 +168,23 @@ for (const nodeCode of nodeCodes) {
     assert.equal(Boolean(successorReview), false, `${nodeCode}: HUMAN_REVIEW_MUST_NOT_BE_INVENTED_BY_W8`);
   }
   const successorApproval = approvalRegistry.records.find(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE);
-  if (w10SuccessorApplied) {
-    assert(successorApproval, `${nodeCode}: W10_SUCCESSOR_APPROVAL_REQUIRED`);
+  const w10Decision = w10DecisionByNode.get(nodeCode) ?? null;
+  const w10Approved = Boolean(w10Decision
+    && w10Decision.decisionState === 'human_decided'
+    && w10Decision.decision === 'approve'
+    && w10Decision.approverCode === 'TL'
+    && w10Decision.approverAuthority === 'TL Human Approval Authority');
+  if (successorApproval) {
+    assert.equal(w10Approved, true, `${nodeCode}: APPROVAL_MUST_HAVE_W10_HUMAN_AUTHORITY`);
     assert.equal(successorApproval.decision, 'approve', `${nodeCode}: W10_SUCCESSOR_APPROVAL_DECISION`);
     assert.equal(successorApproval.approverCode, 'TL', `${nodeCode}: W10_SUCCESSOR_APPROVAL_AUTHORITY`);
+    assert.equal(successorApproval.candidateCode, w10Decision.candidateCode, `${nodeCode}: W10_SUCCESSOR_CANDIDATE_CODE`);
+    assert.equal(successorApproval.candidateDigest, w10Decision.candidateDigest, `${nodeCode}: W10_SUCCESSOR_CANDIDATE_DIGEST`);
+    assert.equal(successorApproval.reviewCode, w10Decision.reviewCode, `${nodeCode}: W10_SUCCESSOR_REVIEW_CODE`);
+    assert.equal(successorApproval.reviewDigest, w10Decision.reviewDigest, `${nodeCode}: W10_SUCCESSOR_REVIEW_DIGEST`);
+    assert.equal(successorApproval.publication, 'not_published', `${nodeCode}: W10_SUCCESSOR_MUST_REMAIN_UNPUBLISHED`);
   } else {
-    assert.equal(Boolean(successorApproval), false, `${nodeCode}: APPROVAL_MUST_NOT_BE_INVENTED_BY_W8`);
+    assert.equal(w10Approved, false, `${nodeCode}: W10_APPROVAL_DECISION_REQUIRES_APPROVAL_RECORD`);
   }
   assert.equal(publicationRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE), false, `${nodeCode}: PUBLICATION_MUST_NOT_BE_INVENTED_BY_W8`);
 }
@@ -216,5 +228,5 @@ console.log('✓ VAP-W8 Candidate Validation & PJA Import passed.');
 console.log('✓ All 6 Batch 001 provider candidates pass integrity, public-body, title, minimum thesis/must-establish coverage, C2→PJA brief bridge, and PJA candidate-schema validation.');
 console.log('✓ All 6 candidates are imported into the existing zh-Hans PJA Candidate layer as ready_for_human_review, preserving provider Markdown exactly.');
 console.log('✓ W8 does not claim factual/source truth or complete semantic fidelity; all 6 still require Human editorial review.');
-console.log(w10SuccessorApplied ? '✓ W8 itself does not create Human Review/Approval/Publication authority; successor VAP-W9 Human Reviews and VAP-W10 Human Approvals are validated as separate TL authority.' : '✓ W8 itself does not create Human Review/Approval/Publication authority; successor VAP-W9 Human Reviews may exist and are validated as separate TL authority.');
+console.log('✓ W8 itself does not create Human Review/Approval/Publication authority; any successor Approval record must be independently bound to an explicit VAP-W10 TL Human Approval decision.');
 console.log('✓ Existing PJA atomic importer is reused; overwrite remains forbidden and conflict fails closed.');

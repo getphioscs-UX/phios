@@ -22,8 +22,9 @@ const [contract, policy, reviewQueue, decisions, promotionManifest, activation, 
   readJson(VAP_W9_PATHS.reviewQueue), readJson(VAP_W9_PATHS.decisions), readJson(VAP_W9_PATHS.promotionManifest), readJson(VAP_W9_PATHS.activation),
   readJson(VAP_W9_PATHS.pjaCandidateRegistry), readJson(VAP_W9_PATHS.pjaReviewRegistry), readJson(VAP_W9_PATHS.pjaApprovalRegistry), readJson(VAP_W9_PATHS.pjaPublicationRegistry)
 ]);
-const w10ActivationPath = 'content/production/visual-article/activation/vap-w10-human-approval-production-article-package-v1.json';
-const w10SuccessorApplied = await fileExists(w10ActivationPath) && (await readJson(w10ActivationPath)).humanApprovedCount === 6 && (await readJson(w10ActivationPath)).productionArticlePackageCount === 6;
+const w10DecisionPath = 'content/production/visual-article/decisions/vap-w10-batch-001-human-approval-decisions-v1.json';
+const w10Decisions = await fileExists(w10DecisionPath) ? await readJson(w10DecisionPath) : null;
+const w10DecisionByNode = new Map((w10Decisions?.entries ?? []).map(entry => [entry.nodeCode, entry]));
 
 assert.equal(contract.work, 'VAP-W9');
 assert.equal(contract.implementationBaselineCommit, '9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed');
@@ -66,9 +67,19 @@ for (const nodeCode of VAP_W9_EXPECTED_NODE_CODES) {
   assert.equal(promotion.reviewDecision, 'accept'); assert.equal(promotion.promotionState, 'promoted_to_pja_approval_eligibility');
   assert.equal(promotion.candidateAcceptanceIsApproval, false); assert.equal(promotion.approvalRecorded, false); assert.equal(promotion.publicationRecorded, false);
   const successorApproval = approvalRegistry.records.find(record => record.nodeCode === nodeCode && record.locale === 'zh-Hans');
-  if (w10SuccessorApplied) {
-    assert(successorApproval, `${nodeCode}:W10_SUCCESSOR_APPROVAL_REQUIRED`); assert.equal(successorApproval.decision, 'approve'); assert.equal(successorApproval.approverCode, 'TL');
-  } else assert.equal(Boolean(successorApproval), false, `${nodeCode}:APPROVAL_MUST_REMAIN_SEPARATE_UNTIL_W10`);
+  const w10Decision = w10DecisionByNode.get(nodeCode) ?? null;
+  const w10Approved = Boolean(w10Decision
+    && w10Decision.decisionState === 'human_decided'
+    && w10Decision.decision === 'approve'
+    && w10Decision.approverCode === 'TL'
+    && w10Decision.approverAuthority === 'TL Human Approval Authority');
+  if (successorApproval) {
+    assert.equal(w10Approved, true, `${nodeCode}:APPROVAL_MUST_HAVE_W10_HUMAN_AUTHORITY`);
+    assert.equal(successorApproval.decision, 'approve'); assert.equal(successorApproval.approverCode, 'TL');
+    assert.equal(successorApproval.candidateCode, w10Decision.candidateCode); assert.equal(successorApproval.candidateDigest, w10Decision.candidateDigest);
+    assert.equal(successorApproval.reviewCode, w10Decision.reviewCode); assert.equal(successorApproval.reviewDigest, w10Decision.reviewDigest);
+    assert.equal(successorApproval.publication, 'not_published');
+  } else assert.equal(w10Approved, false, `${nodeCode}:W10_APPROVAL_DECISION_REQUIRES_APPROVAL_RECORD`);
   assert.equal(publicationRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === 'zh-Hans'), false, `${nodeCode}:PUBLICATION_MUST_NOT_EXIST`);
   assert.equal(await fileExists(`content/knowledge/production/reviews/zh-Hans/${nodeCode}/review.v1.json`), true);
 }
@@ -97,5 +108,5 @@ assert.equal(pkg.scripts['check:vap-w9'], 'node scripts/check-vap-w9-human-edito
 assert.equal(pkg.scripts['vap:w9:apply'], 'node scripts/apply-vap-w9-human-editorial-review-candidate-promotion.mjs --apply');
 console.log('✓ VAP-W9 Human Editorial Review & Candidate Promotion passed after explicit TL decisions.');
 console.log('✓ 6/6 Candidates have independent TL Human Review = accept and 6/6 are promoted to PJA Approval Eligibility.');
-console.log(w10SuccessorApplied ? '✓ VAP-W9 itself does not create Approval; successor VAP-W10 TL Human Approvals are present and validated as separate authority.' : '✓ Candidate content is immutable; Human Editorial acceptance remains separate from Human Approval and Publication.');
+console.log('✓ VAP-W9 itself does not create Approval; any successor Approval record must be independently bound to an explicit VAP-W10 TL Human Approval decision.');
 console.log('✓ AI/System actors cannot satisfy Human Review authority; non-accept outcomes cannot promote.');
