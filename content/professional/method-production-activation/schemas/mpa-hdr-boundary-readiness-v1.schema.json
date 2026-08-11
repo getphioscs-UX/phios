@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS MPA HDR Boundary Decision v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "work",
+    "methodCode",
+    "pluginCode",
+    "decision",
+    "boundaryEstablished",
+    "methodSpecificReady",
+    "readyForW26",
+    "productionEligible",
+    "productionExecutionAllowed",
+    "professionalEligible",
+    "professionalReleaseAllowed"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-HDR-BOUNDARY-DECISION-v1.0.0"
+    },
+    "work": {
+      "const": "MPA-W24"
+    },
+    "methodCode": {
+      "const": "HUMAN_DESIGN"
+    },
+    "pluginCode": {
+      "const": "HDR"
+    },
+    "decision": {
+      "const": "RESTRICTED_BOUNDARY_ESTABLISHED_NOT_ELIGIBLE_FOR_W26"
+    },
+    "boundaryEstablished": {
+      "const": true
+    },
+    "methodSpecificReady": {
+      "const": false
+    },
+    "readyForW26": {
+      "const": false
+    },
+    "productionEligible": {
+      "const": false
+    },
+    "productionExecutionAllowed": {
+      "const": false
+    },
+    "professionalEligible": {
+      "const": false
+    },
+    "professionalReleaseAllowed": {
+      "const": false
+    }
+  }
+}

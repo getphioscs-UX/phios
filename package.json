@@ -689,7 +689,7 @@
     "check:mpa-w5": "node scripts/check-mpa-w5-method-capability-matrix.mjs",
     "check:mpa-w0-w5": "node scripts/check-mpa-w0-w5-foundation.mjs",
     "check:mpa-foundation": "npm run check:mpa-w0-w5",
-    "check:mpa": "npm run check:mpa-foundation && npm run check:mpa-input-calculation && npm run check:mpa-validation-evidence && npm run check:mpa-projection-integration && npm run check:mpa-num-activation && npm run check:mpa-ast-activation && npm run check:mpa-bzr-activation",
+    "check:mpa": "npm run check:mpa-foundation && npm run check:mpa-input-calculation && npm run check:mpa-validation-evidence && npm run check:mpa-projection-integration && npm run check:mpa-num-activation && npm run check:mpa-ast-activation && npm run check:mpa-bzr-activation && npm run check:mpa-future-holding",
     "check:rre-foundation": "npm run check:rre-w0-w4",
     "check:rre": "npm run check:rre-foundation && npm run check:rre-reading && npm run check:rre-canonical",
     "check:rre-w5-w10": "node scripts/check-rre-w5-w10-reading-runtime.mjs",
@@ -789,6 +789,8 @@
     "check:mpa-ast-activation": "npm run check:mpa-w22",
     "check:mpa-w23": "node scripts/check-mpa-w23-bzr-activation.mjs",
     "check:mpa-bzr-activation": "npm run check:mpa-w23",
+    "check:mpa-w24": "node scripts/check-mpa-w24-hdr-boundary.mjs",
+    "check:mpa-hdr-boundary": "npm run check:mpa-w24",
     "check:rre-w0-w4": "node scripts/check-rre-w0-w4-readout-foundation.mjs",
     "build:vap-w10": "node scripts/build-vap-w10-human-approval-production-article-package.mjs",
     "vap:w10:apply": "node scripts/apply-vap-w10-human-approval-production-article-package.mjs --apply",
@@ -804,7 +806,9 @@
     "check:orc:rg": "npm run check:runtime:v4 -- ORC-W12",
     "check:pr-e4-e6": "node scripts/check-pr-e4-e6-decision-workspace-report-handoff.mjs",
     "check:pr-decision-integration": "npm run check:pr-e4-e6",
-    "check:pr-production-e4-e6": "npm run check:pr-production && npm run check:pr-decision-integration"
+    "check:pr-production-e4-e6": "npm run check:pr-production && npm run check:pr-decision-integration",
+    "check:mpa-w25": "node scripts/check-mpa-w25-future-method-holding-registry.mjs",
+    "check:mpa-future-holding": "npm run check:mpa-w25"
   },
   "type": "module"
 }
