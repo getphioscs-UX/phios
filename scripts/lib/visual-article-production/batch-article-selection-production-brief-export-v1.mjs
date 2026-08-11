@@ -87,10 +87,13 @@ function selectionCandidates(portfolio, policy) {
     });
 }
 
-function selectedEntry({ portfolioEntry, selectionIndex, defaultLocale, localeRegistry, w4r }) {
+function selectedEntry({ portfolioEntry, selectionIndex, defaultLocale, localeRegistry, w4r, w6a }) {
   const localeRecord = localeRecordFor(localeRegistry, portfolioEntry.nodeCode, defaultLocale);
   const localeReady = isLocaleBriefReady(localeRecord);
-  const executionEntry = executionEntryFor(w4r, portfolioEntry.nodeCode, defaultLocale);
+  const w4rExecutionEntry = executionEntryFor(w4r, portfolioEntry.nodeCode, defaultLocale);
+  const w6aExecutionEntry = executionEntryFor(w6a || { entries: [] }, portfolioEntry.nodeCode, defaultLocale);
+  const executionEntry = w6aExecutionEntry?.articleExecutionEligible === true ? w6aExecutionEntry : w4rExecutionEntry;
+  const executionSource = w6aExecutionEntry?.articleExecutionEligible === true ? 'VAP-W6A' : 'VAP-W4R';
   const blockers = buildExportBlockers({ portfolioEntry, executionEntry, localeReady });
 
   return {
@@ -123,13 +126,17 @@ function selectedEntry({ portfolioEntry, selectionIndex, defaultLocale, localeRe
       stalenessStatus: localeRecord?.stalenessStatus || null
     },
     executionEligibility: executionEntry ? {
-      evaluatedByW4r: true,
+      evaluatedByW4r: executionSource === 'VAP-W4R',
+      evaluatedByW6a: executionSource === 'VAP-W6A',
+      authoritySource: executionSource,
       articleIntent: executionEntry.articleIntent,
       newArticleExecutionEligible: executionEntry.articleExecutionEligible,
       status: executionEntry.articleExecutionStatus,
       nonExecutionReasons: executionEntry.nonExecutionReasons || []
     } : {
       evaluatedByW4r: false,
+      evaluatedByW6a: false,
+      authoritySource: null,
       articleIntent: null,
       newArticleExecutionEligible: false,
       status: 'NOT_YET_ESTABLISHED_FOR_SELECTED_BATCH',
@@ -149,6 +156,7 @@ export function buildVapW6BatchSelection(root) {
   const policy = readJson(root, VAP_W6_POLICY);
   const portfolio = readJson(root, VAP_W5R_PORTFOLIO);
   const w4r = readJson(root, VAP_W4R_EXECUTION);
+  const w6a = fs.existsSync(path.join(root, VAP_W6A_EXECUTION)) ? readJson(root, VAP_W6A_EXECUTION) : null;
   const waveContract = readJson(root, PJA_WAVE_CONTRACT);
   const localeRegistry = readJson(root, LOCALE_PROJECTION_REGISTRY);
   const localeValues = readJson(root, LOCALE_CONTROLLED_VALUES);
@@ -168,7 +176,8 @@ export function buildVapW6BatchSelection(root) {
     selectionIndex: index + 1,
     defaultLocale: policy.defaultLocale,
     localeRegistry,
-    w4r
+    w4r,
+    w6a
   }));
 
   const exportReady = selected.filter(entry => entry.productionBriefExport.ready);
@@ -193,6 +202,7 @@ export function buildVapW6BatchSelection(root) {
     schemaReference: VAP_W6_SCHEMA,
     portfolioReference: VAP_W5R_PORTFOLIO,
     executionEligibilityReference: VAP_W4R_EXECUTION,
+    successorExecutionEligibilityReference: w6a ? VAP_W6A_EXECUTION : null,
     selection: {
       mode: policy.selectionMode,
       maximumBatchSize: policy.maximumBatchSize,
@@ -246,6 +256,7 @@ export function buildVapW6BatchSelection(root) {
       c3ProductionReadinessPreserved: true,
       humanProductionDecisionPreserved: true,
       w4rExecutionEligibilityRequiredForBriefExport: true,
+      w6aSuccessorExecutionEligibilityMaySatisfyBriefExport: true,
       existingPjaExporterReimplemented: false,
       candidateCreationAllowed: false,
       providerInvocationAllowed: false,
@@ -256,6 +267,7 @@ export function buildVapW6BatchSelection(root) {
       [VAP_W6_POLICY]: sourceDigest(root, VAP_W6_POLICY),
       [VAP_W5R_PORTFOLIO]: sourceDigest(root, VAP_W5R_PORTFOLIO),
       [VAP_W4R_EXECUTION]: sourceDigest(root, VAP_W4R_EXECUTION),
+      ...(w6a ? { [VAP_W6A_EXECUTION]: sourceDigest(root, VAP_W6A_EXECUTION) } : {}),
       [PJA_WAVE_CONTRACT]: sourceDigest(root, PJA_WAVE_CONTRACT),
       [LOCALE_PROJECTION_REGISTRY]: sourceDigest(root, LOCALE_PROJECTION_REGISTRY),
       [LOCALE_CONTROLLED_VALUES]: sourceDigest(root, LOCALE_CONTROLLED_VALUES),

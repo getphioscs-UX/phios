@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { applyVapW8Imports, buildVapW8Activation, buildVapW8Plan, stableJson, validationProjection, VAP_W8_ACTIVATION, VAP_W8_IMPORT, VAP_W8_VALIDATION } from './lib/visual-article-production/candidate-validation-pja-import-v1.mjs';
+const root = process.cwd();
+const apply = process.argv.includes('--apply');
+const write = async (relative, value) => { const file = path.join(root, relative); await fs.mkdir(path.dirname(file), { recursive: true }); await fs.writeFile(file, stableJson(value)); };
+const result = await applyVapW8Imports(root, { apply });
+await write(VAP_W8_IMPORT, result);
+await write(VAP_W8_VALIDATION, validationProjection(await buildVapW8Plan(root)));
+await write(VAP_W8_ACTIVATION, await buildVapW8Activation(root));
+console.log(JSON.stringify(result, null, 2));

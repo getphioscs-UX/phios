@@ -1,26 +1,28 @@
 {
   "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
   "batchCode": "VAP-ARTICLE-BATCH-001",
-  "batchDigest": "sha256:b3e695f515ace9eeade5ca36d90e4fdf761b65ac679547cb5595f087fd5d7369",
+  "batchDigest": "sha256:30a5e9c63fdc4655958a30f3b79b359e0987b0d65436cc34bb4fc0da57ac9505",
   "batchVersion": "1.0.0",
   "contractReference": "content/production/visual-article/contracts/vap-w6-batch-article-selection-production-brief-export-v1.json",
   "entries": [
     {
       "articleEligibility": {
         "articleRoleAutoAssigned": false,
-        "status": "ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION"
+        "status": "SATISFIED_BY_FROZEN_HUMAN_ARTICLE_DECISION"
       },
       "bookCode": "BOOK-1",
       "canonicalVersion": "1.0.0",
       "chapterCode": null,
       "executionEligibility": {
-        "articleIntent": null,
+        "articleIntent": true,
+        "authoritySource": "VAP-W6A",
         "evaluatedByW4r": false,
-        "newArticleExecutionEligible": false,
+        "evaluatedByW6a": true,
+        "newArticleExecutionEligible": true,
         "nonExecutionReasons": [],
-        "status": "NOT_YET_ESTABLISHED_FOR_SELECTED_BATCH"
+        "status": "NEW_ARTICLE_EXECUTION_ELIGIBLE"
       },
-      "humanProductionDecisionRequired": true,
+      "humanProductionDecisionRequired": false,
       "locale": {
         "authority": "canonical_human_authored",
         "availability": "available",
@@ -38,34 +40,22 @@
         "canonicalPrimaryAssetTypeAuthority": "NON_AUTHORITATIVE_FOR_KPP_ROLE_ASSIGNMENT",
         "canonicalPrimaryAssetTypeIsArticle": true
       },
-      "portfolioState": "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL",
+      "portfolioState": "EXPLICIT_ARTICLE_INTENT",
       "productionBriefExport": {
-        "blockers": [
-          "KPP_ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED",
-          "HUMAN_KPP_PRODUCTION_DECISION_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_PLAN_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_WAVE_REQUIRED",
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "C3_PRODUCTION_READINESS_NOT_PASSED",
-          "W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_ESTABLISHED"
-        ],
+        "blockers": [],
         "exporter": "scripts/export-knowledge-production-brief.mjs",
-        "ready": false,
-        "status": "BLOCKED_PENDING_GOVERNANCE"
+        "ready": true,
+        "status": "READY_FOR_EXISTING_PJA_EXPORTER"
       },
       "readiness": {
-        "blocking": [
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
-          "EXPORTABILITY_NOT_ALLOWED"
-        ],
+        "blocking": [],
         "c3Indexed": true,
-        "c3Status": "blocked_by_c2",
-        "pjaPortfolioReadiness": "blocked_by_c2",
-        "productionReady": false
+        "c3Status": "production_ready",
+        "pjaPortfolioReadiness": "production_ready",
+        "productionReady": true
       },
       "selectionIndex": 1,
-      "selectionReason": "BLUEPRINT_ARTICLE_REQUIRED_NOW_HIGH_SIGNAL",
+      "selectionReason": "EXPLICIT_ARTICLE_INTENT_PRIORITY",
       "selectionStatus": "SELECTED_FOR_GOVERNED_ARTICLE_DECISION_REVIEW",
       "titleEn": null,
       "titleZhHans": "为什么导航需要方向、位置与坐标"
@@ -73,19 +63,21 @@
     {
       "articleEligibility": {
         "articleRoleAutoAssigned": false,
-        "status": "ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION"
+        "status": "SATISFIED_BY_FROZEN_HUMAN_ARTICLE_DECISION"
       },
       "bookCode": "BOOK-1",
       "canonicalVersion": "1.0.0",
       "chapterCode": null,
       "executionEligibility": {
-        "articleIntent": null,
+        "articleIntent": true,
+        "authoritySource": "VAP-W6A",
         "evaluatedByW4r": false,
-        "newArticleExecutionEligible": false,
+        "evaluatedByW6a": true,
+        "newArticleExecutionEligible": true,
         "nonExecutionReasons": [],
-        "status": "NOT_YET_ESTABLISHED_FOR_SELECTED_BATCH"
+        "status": "NEW_ARTICLE_EXECUTION_ELIGIBLE"
       },
-      "humanProductionDecisionRequired": true,
+      "humanProductionDecisionRequired": false,
       "locale": {
         "authority": "canonical_human_authored",
         "availability": "available",
@@ -103,34 +95,22 @@
         "canonicalPrimaryAssetTypeAuthority": "NON_AUTHORITATIVE_FOR_KPP_ROLE_ASSIGNMENT",
         "canonicalPrimaryAssetTypeIsArticle": true
       },
-      "portfolioState": "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL",
+      "portfolioState": "EXPLICIT_ARTICLE_INTENT",
       "productionBriefExport": {
-        "blockers": [
-          "KPP_ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED",
-          "HUMAN_KPP_PRODUCTION_DECISION_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_PLAN_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_WAVE_REQUIRED",
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "C3_PRODUCTION_READINESS_NOT_PASSED",
-          "W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_ESTABLISHED"
-        ],
+        "blockers": [],
         "exporter": "scripts/export-knowledge-production-brief.mjs",
-        "ready": false,
-        "status": "BLOCKED_PENDING_GOVERNANCE"
+        "ready": true,
+        "status": "READY_FOR_EXISTING_PJA_EXPORTER"
       },
       "readiness": {
-        "blocking": [
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
-          "EXPORTABILITY_NOT_ALLOWED"
-        ],
+        "blocking": [],
         "c3Indexed": true,
-        "c3Status": "blocked_by_c2",
-        "pjaPortfolioReadiness": "blocked_by_c2",
-        "productionReady": false
+        "c3Status": "production_ready",
+        "pjaPortfolioReadiness": "production_ready",
+        "productionReady": true
       },
       "selectionIndex": 2,
-      "selectionReason": "BLUEPRINT_ARTICLE_REQUIRED_NOW_HIGH_SIGNAL",
+      "selectionReason": "EXPLICIT_ARTICLE_INTENT_PRIORITY",
       "selectionStatus": "SELECTED_FOR_GOVERNED_ARTICLE_DECISION_REVIEW",
       "titleEn": null,
       "titleZhHans": "为什么现实必须经过投影才能成为世界"
@@ -138,19 +118,21 @@
     {
       "articleEligibility": {
         "articleRoleAutoAssigned": false,
-        "status": "ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION"
+        "status": "SATISFIED_BY_FROZEN_HUMAN_ARTICLE_DECISION"
       },
       "bookCode": "BOOK-1",
       "canonicalVersion": "1.0.0",
       "chapterCode": null,
       "executionEligibility": {
-        "articleIntent": null,
+        "articleIntent": true,
+        "authoritySource": "VAP-W6A",
         "evaluatedByW4r": false,
-        "newArticleExecutionEligible": false,
+        "evaluatedByW6a": true,
+        "newArticleExecutionEligible": true,
         "nonExecutionReasons": [],
-        "status": "NOT_YET_ESTABLISHED_FOR_SELECTED_BATCH"
+        "status": "NEW_ARTICLE_EXECUTION_ELIGIBLE"
       },
-      "humanProductionDecisionRequired": true,
+      "humanProductionDecisionRequired": false,
       "locale": {
         "authority": "canonical_human_authored",
         "availability": "available",
@@ -168,34 +150,22 @@
         "canonicalPrimaryAssetTypeAuthority": "NON_AUTHORITATIVE_FOR_KPP_ROLE_ASSIGNMENT",
         "canonicalPrimaryAssetTypeIsArticle": true
       },
-      "portfolioState": "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL",
+      "portfolioState": "EXPLICIT_ARTICLE_INTENT",
       "productionBriefExport": {
-        "blockers": [
-          "KPP_ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED",
-          "HUMAN_KPP_PRODUCTION_DECISION_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_PLAN_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_WAVE_REQUIRED",
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "C3_PRODUCTION_READINESS_NOT_PASSED",
-          "W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_ESTABLISHED"
-        ],
+        "blockers": [],
         "exporter": "scripts/export-knowledge-production-brief.mjs",
-        "ready": false,
-        "status": "BLOCKED_PENDING_GOVERNANCE"
+        "ready": true,
+        "status": "READY_FOR_EXISTING_PJA_EXPORTER"
       },
       "readiness": {
-        "blocking": [
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
-          "EXPORTABILITY_NOT_ALLOWED"
-        ],
+        "blocking": [],
         "c3Indexed": true,
-        "c3Status": "blocked_by_c2",
-        "pjaPortfolioReadiness": "blocked_by_c2",
-        "productionReady": false
+        "c3Status": "production_ready",
+        "pjaPortfolioReadiness": "production_ready",
+        "productionReady": true
       },
       "selectionIndex": 3,
-      "selectionReason": "BLUEPRINT_ARTICLE_REQUIRED_NOW_HIGH_SIGNAL",
+      "selectionReason": "EXPLICIT_ARTICLE_INTENT_PRIORITY",
       "selectionStatus": "SELECTED_FOR_GOVERNED_ARTICLE_DECISION_REVIEW",
       "titleEn": null,
       "titleZhHans": "为什么投影会产生偏向、失真、稳定与更新"
@@ -203,19 +173,21 @@
     {
       "articleEligibility": {
         "articleRoleAutoAssigned": false,
-        "status": "ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION"
+        "status": "SATISFIED_BY_FROZEN_HUMAN_ARTICLE_DECISION"
       },
       "bookCode": "BOOK-1",
       "canonicalVersion": "1.0.0",
       "chapterCode": null,
       "executionEligibility": {
-        "articleIntent": null,
+        "articleIntent": true,
+        "authoritySource": "VAP-W6A",
         "evaluatedByW4r": false,
-        "newArticleExecutionEligible": false,
+        "evaluatedByW6a": true,
+        "newArticleExecutionEligible": true,
         "nonExecutionReasons": [],
-        "status": "NOT_YET_ESTABLISHED_FOR_SELECTED_BATCH"
+        "status": "NEW_ARTICLE_EXECUTION_ELIGIBLE"
       },
-      "humanProductionDecisionRequired": true,
+      "humanProductionDecisionRequired": false,
       "locale": {
         "authority": "canonical_human_authored",
         "availability": "available",
@@ -233,34 +205,22 @@
         "canonicalPrimaryAssetTypeAuthority": "NON_AUTHORITATIVE_FOR_KPP_ROLE_ASSIGNMENT",
         "canonicalPrimaryAssetTypeIsArticle": true
       },
-      "portfolioState": "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL",
+      "portfolioState": "EXPLICIT_ARTICLE_INTENT",
       "productionBriefExport": {
-        "blockers": [
-          "KPP_ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED",
-          "HUMAN_KPP_PRODUCTION_DECISION_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_PLAN_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_WAVE_REQUIRED",
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "C3_PRODUCTION_READINESS_NOT_PASSED",
-          "W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_ESTABLISHED"
-        ],
+        "blockers": [],
         "exporter": "scripts/export-knowledge-production-brief.mjs",
-        "ready": false,
-        "status": "BLOCKED_PENDING_GOVERNANCE"
+        "ready": true,
+        "status": "READY_FOR_EXISTING_PJA_EXPORTER"
       },
       "readiness": {
-        "blocking": [
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
-          "EXPORTABILITY_NOT_ALLOWED"
-        ],
+        "blocking": [],
         "c3Indexed": true,
-        "c3Status": "blocked_by_c2",
-        "pjaPortfolioReadiness": "blocked_by_c2",
-        "productionReady": false
+        "c3Status": "production_ready",
+        "pjaPortfolioReadiness": "production_ready",
+        "productionReady": true
       },
       "selectionIndex": 4,
-      "selectionReason": "BLUEPRINT_ARTICLE_REQUIRED_NOW_HIGH_SIGNAL",
+      "selectionReason": "EXPLICIT_ARTICLE_INTENT_PRIORITY",
       "selectionStatus": "SELECTED_FOR_GOVERNED_ARTICLE_DECISION_REVIEW",
       "titleEn": null,
       "titleZhHans": "无限现实如何压缩为有限问题"
@@ -268,19 +228,21 @@
     {
       "articleEligibility": {
         "articleRoleAutoAssigned": false,
-        "status": "ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION"
+        "status": "SATISFIED_BY_FROZEN_HUMAN_ARTICLE_DECISION"
       },
       "bookCode": "BOOK-1",
       "canonicalVersion": "1.0.0",
       "chapterCode": null,
       "executionEligibility": {
-        "articleIntent": null,
+        "articleIntent": true,
+        "authoritySource": "VAP-W6A",
         "evaluatedByW4r": false,
-        "newArticleExecutionEligible": false,
+        "evaluatedByW6a": true,
+        "newArticleExecutionEligible": true,
         "nonExecutionReasons": [],
-        "status": "NOT_YET_ESTABLISHED_FOR_SELECTED_BATCH"
+        "status": "NEW_ARTICLE_EXECUTION_ELIGIBLE"
       },
-      "humanProductionDecisionRequired": true,
+      "humanProductionDecisionRequired": false,
       "locale": {
         "authority": "canonical_human_authored",
         "availability": "available",
@@ -298,34 +260,22 @@
         "canonicalPrimaryAssetTypeAuthority": "NON_AUTHORITATIVE_FOR_KPP_ROLE_ASSIGNMENT",
         "canonicalPrimaryAssetTypeIsArticle": true
       },
-      "portfolioState": "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL",
+      "portfolioState": "EXPLICIT_ARTICLE_INTENT",
       "productionBriefExport": {
-        "blockers": [
-          "KPP_ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED",
-          "HUMAN_KPP_PRODUCTION_DECISION_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_PLAN_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_WAVE_REQUIRED",
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "C3_PRODUCTION_READINESS_NOT_PASSED",
-          "W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_ESTABLISHED"
-        ],
+        "blockers": [],
         "exporter": "scripts/export-knowledge-production-brief.mjs",
-        "ready": false,
-        "status": "BLOCKED_PENDING_GOVERNANCE"
+        "ready": true,
+        "status": "READY_FOR_EXISTING_PJA_EXPORTER"
       },
       "readiness": {
-        "blocking": [
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
-          "EXPORTABILITY_NOT_ALLOWED"
-        ],
+        "blocking": [],
         "c3Indexed": true,
-        "c3Status": "blocked_by_c2",
-        "pjaPortfolioReadiness": "blocked_by_c2",
-        "productionReady": false
+        "c3Status": "production_ready",
+        "pjaPortfolioReadiness": "production_ready",
+        "productionReady": true
       },
       "selectionIndex": 5,
-      "selectionReason": "BLUEPRINT_ARTICLE_REQUIRED_NOW_HIGH_SIGNAL",
+      "selectionReason": "EXPLICIT_ARTICLE_INTENT_PRIORITY",
       "selectionStatus": "SELECTED_FOR_GOVERNED_ARTICLE_DECISION_REVIEW",
       "titleEn": null,
       "titleZhHans": "运行网络如何形成状态、反馈、重组与连续性"
@@ -333,19 +283,21 @@
     {
       "articleEligibility": {
         "articleRoleAutoAssigned": false,
-        "status": "ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION"
+        "status": "SATISFIED_BY_FROZEN_HUMAN_ARTICLE_DECISION"
       },
       "bookCode": "BOOK-1",
       "canonicalVersion": "1.0.0",
       "chapterCode": null,
       "executionEligibility": {
-        "articleIntent": null,
+        "articleIntent": true,
+        "authoritySource": "VAP-W6A",
         "evaluatedByW4r": false,
-        "newArticleExecutionEligible": false,
+        "evaluatedByW6a": true,
+        "newArticleExecutionEligible": true,
         "nonExecutionReasons": [],
-        "status": "NOT_YET_ESTABLISHED_FOR_SELECTED_BATCH"
+        "status": "NEW_ARTICLE_EXECUTION_ELIGIBLE"
       },
-      "humanProductionDecisionRequired": true,
+      "humanProductionDecisionRequired": false,
       "locale": {
         "authority": "canonical_human_authored",
         "availability": "available",
@@ -363,34 +315,22 @@
         "canonicalPrimaryAssetTypeAuthority": "NON_AUTHORITATIVE_FOR_KPP_ROLE_ASSIGNMENT",
         "canonicalPrimaryAssetTypeIsArticle": true
       },
-      "portfolioState": "ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL",
+      "portfolioState": "EXPLICIT_ARTICLE_INTENT",
       "productionBriefExport": {
-        "blockers": [
-          "KPP_ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED",
-          "HUMAN_KPP_PRODUCTION_DECISION_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_PLAN_REQUIRED",
-          "FROZEN_ARTICLE_PRODUCTION_WAVE_REQUIRED",
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "C3_PRODUCTION_READINESS_NOT_PASSED",
-          "W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_ESTABLISHED"
-        ],
+        "blockers": [],
         "exporter": "scripts/export-knowledge-production-brief.mjs",
-        "ready": false,
-        "status": "BLOCKED_PENDING_GOVERNANCE"
+        "ready": true,
+        "status": "READY_FOR_EXISTING_PJA_EXPORTER"
       },
       "readiness": {
-        "blocking": [
-          "C2_THESIS_BOUNDARY_NOT_FROZEN",
-          "HUMAN_PRODUCTION_APPROVAL_REQUIRED",
-          "EXPORTABILITY_NOT_ALLOWED"
-        ],
+        "blocking": [],
         "c3Indexed": true,
-        "c3Status": "blocked_by_c2",
-        "pjaPortfolioReadiness": "blocked_by_c2",
-        "productionReady": false
+        "c3Status": "production_ready",
+        "pjaPortfolioReadiness": "production_ready",
+        "productionReady": true
       },
       "selectionIndex": 6,
-      "selectionReason": "BLUEPRINT_ARTICLE_REQUIRED_NOW_HIGH_SIGNAL",
+      "selectionReason": "EXPLICIT_ARTICLE_INTENT_PRIORITY",
       "selectionStatus": "SELECTED_FOR_GOVERNED_ARTICLE_DECISION_REVIEW",
       "titleEn": null,
       "titleZhHans": "运行成本、恢复与内部连接如何维持身体稳定"
@@ -400,8 +340,8 @@
   "humanDecisionRequest": {
     "bulkApprovalAllowed": false,
     "requestedDecisionPerNode": "ARTICLE | OTHER_KPP_ROLE | DEFERRED",
-    "required": true,
-    "requiredNodeCount": 6,
+    "required": false,
+    "requiredNodeCount": 0,
     "selectedNodeCodes": [
       "KN-B1-P1-006",
       "KN-B1-P2-001",
@@ -428,7 +368,8 @@
     "selectionFreezesProductionPlan": false,
     "selectionFreezesProductionWave": false,
     "selectionIsHumanProductionDecision": false,
-    "w4rExecutionEligibilityRequiredForBriefExport": true
+    "w4rExecutionEligibilityRequiredForBriefExport": true,
+    "w6aSuccessorExecutionEligibilityMaySatisfyBriefExport": true
   },
   "phase": "VAP-B_ARTICLE_PRODUCTION_ACTIVATION",
   "policyReference": "content/production/visual-article/policies/vap-w6-batch-selection-policy-v1.json",
@@ -437,7 +378,7 @@
     "existingExporterCommand": "npm run knowledge:export-brief -- <NODE_CODE> --locale <LOCALE> --json-report",
     "existingExporterPath": "scripts/export-knowledge-production-brief.mjs",
     "existingExporterReimplemented": false,
-    "runtimeStatus": "NO_ELIGIBLE_NODES_FAIL_CLOSED",
+    "runtimeStatus": "PARTIAL_OR_FULL_EXPORT_AVAILABLE",
     "wrapperCommand": "npm run vap:batch:export-briefs -- --locale zh-Hans",
     "zeroEligibleNodesIsValid": true
   },
@@ -468,25 +409,34 @@
     "content/knowledge/l10n/multilingual-node-projection-registry.json": "sha256:ae686b4d900197fadb27c2cf93664638b39c5d59ba80d0ef1737a749f28a3999",
     "content/knowledge/production/waves/wave-production-contract.json": "sha256:f3ccce9cd37dc7df20c05e12a72dc9401587de175a712a5a383d09592260458f",
     "content/production/visual-article/contracts/vap-w6-batch-article-selection-production-brief-export-v1.json": "sha256:fc921a0d18a1876bee8407b5e5757520404e4122fa577ac3b996836c9152088b",
+    "content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json": "sha256:bacdc5d1b402ee96330fe3d5c53798bafd340f763b6b86112d8de7af9f4e9c86",
     "content/production/visual-article/eligibility/visual-article-execution-eligibility-v1.json": "sha256:ad14fbb7a796c50fa0f002ede8d8335b22d6e01639a24323218d2b116badeb7c",
     "content/production/visual-article/policies/vap-w6-batch-selection-policy-v1.json": "sha256:c280672a17b8787acea26ed3c2c15c5dc775dcb558a5a90fcb7bd2f104709ba7",
-    "content/production/visual-article/portfolio/scalable-article-production-portfolio-v1.json": "sha256:4d91a4b49d084b3048c49a8c7b258b1d392a10cc2aa1eddbb373fc9d27d2d31d",
+    "content/production/visual-article/portfolio/scalable-article-production-portfolio-v1.json": "sha256:9c9a12c66c6dcc7baddff48f65ea0e09748384088c0e5fd1eec37c07620b871b",
     "scripts/export-knowledge-production-brief.mjs": "sha256:e2566e2486d607596739760cc3fcb1974872bb33f48a1367d34e6109165e2521"
   },
-  "status": "GOVERNED_ARTICLE_REVIEW_COHORT_AWAITING_PRODUCTION_GATES",
+  "status": "GOVERNED_ARTICLE_REVIEW_COHORT_WITH_EXPORTABLE_NODES",
+  "successorExecutionEligibilityReference": "content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json",
   "summary": {
-    "c2BlockedCount": 6,
+    "c2BlockedCount": 0,
     "currentBriefExportCount": 0,
     "generalBacklogNotAutoSelectedCount": 703,
-    "humanProductionDecisionRequiredCount": 6,
+    "humanProductionDecisionRequiredCount": 0,
     "localeReadyForDefaultBriefCount": 6,
     "portfolioArticlePlanningBacklogCount": 709,
     "preferredSignalCandidateCount": 6,
-    "productionBriefExportReadyCount": 0,
-    "productionBriefExportReadyNodeCodes": [],
+    "productionBriefExportReadyCount": 6,
+    "productionBriefExportReadyNodeCodes": [
+      "KN-B1-P1-006",
+      "KN-B1-P2-001",
+      "KN-B1-P2-009",
+      "KN-B1-P3-005",
+      "KN-B1-P3-015",
+      "KN-B1-P4-006"
+    ],
     "remainingUnselectedPreferredSignalCount": 0,
     "selectedNodeCount": 6,
-    "w4rExecutionEligibilityNotEstablishedCount": 6
+    "w4rExecutionEligibilityNotEstablishedCount": 0
   },
   "work": "VAP-W6"
 }

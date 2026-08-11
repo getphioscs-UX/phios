@@ -19,10 +19,14 @@ const PATHS = Object.freeze({
   humanDecision: 'content/knowledge/production-planning/production/wave1/human-production-decision-v1.json',
   modernPublished: 'content/knowledge/public/authority/published-knowledge-authority.json',
   publishedArticles: 'content/knowledge/public/published-articles.json',
-  pjaWaveContract: 'content/knowledge/production/waves/wave-production-contract.json'
+  pjaWaveContract: 'content/knowledge/production/waves/wave-production-contract.json',
+  w6aPlan: 'content/knowledge/production-planning/production/vap-article-batch-001/frozen-production-plan-v1.json',
+  w6aHumanDecision: 'content/knowledge/production-planning/production/vap-article-batch-001/human-production-decision-v1.json',
+  w6aEligibility: 'content/production/visual-article/eligibility/vap-article-batch-001-execution-eligibility-v1.json'
 });
 
 const readJson = (root, relative) => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
+const readJsonIfExists = (root, relative) => fs.existsSync(path.join(root, relative)) ? readJson(root, relative) : null;
 const normalize = source => source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const sha = source => crypto.createHash('sha256').update(normalize(source), 'utf8').digest('hex');
 export const stableValue = value => Array.isArray(value)
@@ -72,9 +76,9 @@ function buildPublishedMap(modern, legacy) {
   return map;
 }
 
-function stateFor({ published, planEntry, w4rEntry, blueprintSignal }) {
+function stateFor({ published, planEntry, articleIntent, blueprintSignal }) {
   if (published) return 'EXISTING_PUBLISHED_ARTICLE';
-  if (planEntry && w4rEntry?.articleIntent === true) return 'EXPLICIT_ARTICLE_INTENT';
+  if (planEntry && articleIntent === true) return 'EXPLICIT_ARTICLE_INTENT';
   if (planEntry) return 'EXPLICIT_NON_ARTICLE_WAVE_OUTPUT';
   if (blueprintSignal) return 'ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL';
   return 'ARTICLE_DECISION_REQUIRED';
@@ -121,6 +125,9 @@ export function buildVapW5rPortfolio(root) {
   const publishedArticles = readJson(root, PATHS.publishedArticles);
   const waveContract = readJson(root, PATHS.pjaWaveContract);
   const w4r = readJson(root, VAP_W4R_OUTPUT);
+  const w6aPlan = readJsonIfExists(root, PATHS.w6aPlan);
+  const w6aHuman = readJsonIfExists(root, PATHS.w6aHumanDecision);
+  const w6aEligibility = readJsonIfExists(root, PATHS.w6aEligibility);
 
   if (!kppBaseline.invariants?.includes('716_CANONICAL_NODES_NOT_716_ARTICLES')) throw new Error('VAP_W5R_KPP_716_NOT_716_INVARIANT_MISSING');
   if (kppArticleGate.articleRequiredByDefault !== false) throw new Error('VAP_W5R_KPP_DEFAULT_ARTICLE_FORBIDDEN');
@@ -139,6 +146,9 @@ export function buildVapW5rPortfolio(root) {
   const planMap = new Map((plan.items || []).map(entry => [entry.nodeCode, entry]));
   const humanMap = new Map((human.entries || []).map(entry => [entry.nodeCode, entry]));
   const w4rMap = new Map((w4r.entries || []).map(entry => [entry.nodeCode, entry]));
+  const w6aPlanMap = new Map((w6aPlan?.items || []).map(entry => [entry.nodeCode, entry]));
+  const w6aHumanMap = new Map((w6aHuman?.entries || []).map(entry => [entry.nodeCode, entry]));
+  const w6aEligibilityMap = new Map((w6aEligibility?.entries || []).map(entry => [entry.nodeCode, entry]));
   const publishedMap = buildPublishedMap(modernPublished, publishedArticles);
 
   if (blueprintMap.size !== nodes.nodes.length) throw new Error(`VAP_W5R_BLUEPRINT_COVERAGE_MISMATCH:${blueprintMap.size}:${nodes.nodes.length}`);
@@ -147,11 +157,17 @@ export function buildVapW5rPortfolio(root) {
     const blueprint = blueprintMap.get(node.nodeCode);
     const pja = pjaMap.get(node.nodeCode);
     const c3Entry = c3Map.get(node.nodeCode);
-    const planEntry = planMap.get(node.nodeCode);
-    const humanEntry = humanMap.get(node.nodeCode);
+    const historicalPlanEntry = planMap.get(node.nodeCode);
+    const historicalHumanEntry = humanMap.get(node.nodeCode);
     const w4rEntry = w4rMap.get(node.nodeCode);
+    const successorPlanEntry = w6aPlanMap.get(node.nodeCode);
+    const successorHumanEntry = w6aHumanMap.get(node.nodeCode);
+    const successorEligibilityEntry = w6aEligibilityMap.get(node.nodeCode);
+    const planEntry = successorPlanEntry || historicalPlanEntry;
+    const humanEntry = successorHumanEntry || historicalHumanEntry;
+    const articleIntent = successorEligibilityEntry?.articleIntent ?? w4rEntry?.articleIntent ?? (planEntry?.productionRole === 'ARTICLE' ? true : null);
     const published = publishedMap.get(node.nodeCode);
-    const portfolioState = stateFor({ published, planEntry, w4rEntry, blueprintSignal: blueprint.articleRequiredNow });
+    const portfolioState = stateFor({ published, planEntry, articleIntent, blueprintSignal: blueprint.articleRequiredNow });
 
     return {
       nodeCode: node.nodeCode,
@@ -175,12 +191,13 @@ export function buildVapW5rPortfolio(root) {
         blueprintSignalAuthority: 'PLANNING_SIGNAL_ONLY_NOT_PRODUCTION_DECISION'
       },
       productionDecision: planEntry ? {
-        status: 'FROZEN_WAVE1_HUMAN_PRODUCTION_DECISION',
+        status: successorPlanEntry ? 'FROZEN_VAP_W6A_HUMAN_PRODUCTION_DECISION' : 'FROZEN_WAVE1_HUMAN_PRODUCTION_DECISION',
         productionRole: planEntry.productionRole,
         requiredOutputs: planEntry.requiredOutputs || [],
         dispatchTarget: planEntry.dispatchTarget,
         humanDecision: humanEntry?.decision || null,
-        articleIntent: w4rEntry?.articleIntent ?? null
+        articleIntent,
+        authoritySource: successorPlanEntry ? 'VAP-W6A' : 'WAVE1'
       } : published ? {
         status: 'NO_NEW_DECISION_REQUIRED_EXISTING_PUBLICATION',
         productionRole: null,
@@ -197,9 +214,11 @@ export function buildVapW5rPortfolio(root) {
         articleIntent: null
       },
       kppArticleEligibility: {
-        status: published || (planEntry && w4rEntry?.articleIntent !== true)
+        status: published || (planEntry && articleIntent !== true)
           ? 'NOT_REQUIRED_FOR_CURRENT_STATE'
-          : 'ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION',
+          : planEntry && articleIntent === true
+            ? 'SATISFIED_BY_FROZEN_HUMAN_ARTICLE_DECISION'
+            : 'ARTICLE_ELIGIBILITY_ASSESSMENT_REQUIRED_BEFORE_NEW_ARTICLE_DECISION',
         articleRequiredByDefault: false,
         autoAssignedByW5r: false
       },
@@ -217,18 +236,31 @@ export function buildVapW5rPortfolio(root) {
         articleCodes: published ? [...published.articleCodes].sort() : [],
         newCandidateRegenerationAllowedByPortfolio: false
       },
-      execution: w4rEntry ? {
+      execution: successorEligibilityEntry ? {
+        evaluatedByW4r: false,
+        evaluatedByW6a: true,
+        articleIntent: successorEligibilityEntry.articleIntent,
+        newArticleExecutionEligible: successorEligibilityEntry.articleExecutionEligible,
+        status: successorEligibilityEntry.articleExecutionStatus,
+        nonExecutionReasons: successorEligibilityEntry.nonExecutionReasons || [],
+        authoritySource: 'VAP-W6A'
+      } : w4rEntry ? {
         evaluatedByW4r: true,
+        evaluatedByW6a: false,
         articleIntent: w4rEntry.articleIntent,
         newArticleExecutionEligible: w4rEntry.articleExecutionEligible,
         status: w4rEntry.articleExecutionStatus,
-        nonExecutionReasons: w4rEntry.nonExecutionReasons
+        nonExecutionReasons: w4rEntry.nonExecutionReasons,
+        authoritySource: 'VAP-W4R'
       } : {
+        evaluatedByW4r: false,
+        evaluatedByW6a: false,
         evaluatedByW4r: false,
         articleIntent: null,
         newArticleExecutionEligible: false,
         status: 'NOT_IN_CURRENT_EXECUTION_WAVE',
-        nonExecutionReasons: []
+        nonExecutionReasons: [],
+        authoritySource: null
       }
     };
   });
@@ -237,7 +269,7 @@ export function buildVapW5rPortfolio(root) {
   const publishedLocaleRecordCount = [...publishedMap.values()].reduce((sum, value) => sum + value.locales.size, 0);
   const articlePlanningBacklogCount = (stateCounts.ARTICLE_DECISION_REQUIRED_HIGH_SIGNAL || 0) + (stateCounts.ARTICLE_DECISION_REQUIRED || 0) + (stateCounts.EXPLICIT_ARTICLE_INTENT || 0);
   const blueprintSignalCount = entries.filter(entry => entry.planningSignals.blueprintArticleRequiredNow).length;
-  const confirmedArticleIntentEntries = entries.filter(entry => entry.execution.evaluatedByW4r && entry.execution.articleIntent === true);
+  const confirmedArticleIntentEntries = entries.filter(entry => (entry.execution.evaluatedByW4r || entry.execution.evaluatedByW6a) && entry.execution.articleIntent === true);
   const executionEligibleEntries = entries.filter(entry => entry.execution.newArticleExecutionEligible);
 
   const sourceFiles = [
@@ -253,7 +285,10 @@ export function buildVapW5rPortfolio(root) {
     PATHS.modernPublished,
     PATHS.publishedArticles,
     PATHS.pjaWaveContract,
-    VAP_W4R_OUTPUT
+    VAP_W4R_OUTPUT,
+    ...(w6aPlan ? [PATHS.w6aPlan] : []),
+    ...(w6aHuman ? [PATHS.w6aHumanDecision] : []),
+    ...(w6aEligibility ? [PATHS.w6aEligibility] : [])
   ];
 
   const result = {
@@ -271,13 +306,15 @@ export function buildVapW5rPortfolio(root) {
       existingPortfolioSchemaVersion: pjaPortfolio.schemaVersion,
       existingPortfolioEntryCount: pjaPortfolio.entries.length,
       secondCanonicalRegistryCreated: false,
-      pjaRuntimeReimplementedByW5r: false
+      pjaRuntimeReimplementedByW5r: false,
+      w6aSuccessorAuthorityConsumed: Boolean(w6aPlan && w6aHuman && w6aEligibility)
     },
     summary: {
       canonicalNodeCount: entries.length,
       publishedArticleNodeCount: stateCounts.EXISTING_PUBLISHED_ARTICLE || 0,
       publishedArticleLocaleRecordCount: publishedLocaleRecordCount,
       frozenWave1ProductionDecisionCount: plan.items.length,
+      frozenW6aArticleProductionDecisionCount: w6aPlan?.items?.length || 0,
       confirmedArticleIntentCount: confirmedArticleIntentEntries.length,
       confirmedArticleIntentNodeCodes: confirmedArticleIntentEntries.map(entry => entry.nodeCode),
       newArticleExecutionEligibleCount: executionEligibleEntries.length,
@@ -317,6 +354,7 @@ export function buildVapW5rPortfolio(root) {
       canonicalPrimaryAssetTypeIsNotKppRoleAuthority: true,
       publishedArticleRegenerationForbidden: true,
       w4rExecutionEligibilityRequiredBeforeNewArticleExecution: true,
+      w6aSuccessorExecutionAuthorityMaySupersedeHistoricalW4rForItsBatch: true,
       secondCanonicalRegistryCreated: false,
       portfolioCreatesCandidate: false,
       portfolioInvokesProvider: false,

@@ -85,12 +85,13 @@ assert.equal(schema.properties.humanReviewRequired.const, true);
 assert.equal(schema.properties.publicationAllowed.const, false);
 assert.equal(schema.properties.credentialPersisted.const, false);
 
-assert.equal(stableJson(actualActivation), stableJson(expectedActivation), 'VAP-W7 activation must rebuild deterministically from W6 + W7 authority.');
-assert.equal(actualActivation.status, 'PROVIDER_RUNTIME_ACTIVE_UPSTREAM_BATCH_BLOCKED_FAIL_CLOSED');
+assert.equal(stableJson(actualActivation), stableJson(expectedActivation), 'VAP-W7 activation must rebuild deterministically from W6/W6A + W7 authority.');
+assert.equal(actualActivation.status, 'PROVIDER_RUNTIME_ACTIVE_READY_FOR_EXPLICIT_NETWORK_EXECUTION');
 assert.equal(actualActivation.selectedNodeCount, 6);
-assert.equal(actualActivation.productionBriefExportReadyCount, 0);
-assert.equal(actualActivation.providerGenerationEligibleCount, 0);
-assert.deepEqual(actualActivation.providerGenerationEligibleNodeCodes, []);
+assert.equal(actualActivation.productionBriefExportReadyCount, 6);
+assert.equal(actualActivation.productionBriefPresentCount, 6);
+assert.equal(actualActivation.providerGenerationEligibleCount, 6);
+assert.equal(actualActivation.providerGenerationEligibleNodeCodes.length, 6);
 assert.equal(actualActivation.effectsByActivation.networkCallMade, false);
 assert.equal(actualActivation.effectsByActivation.candidateCreated, false);
 assert.equal(actualActivation.effectsByActivation.pjaCandidateImported, false);
@@ -98,25 +99,24 @@ assert.equal(actualActivation.effectsByActivation.publicationCreated, false);
 
 const currentPlan = buildProviderGenerationPlan(root, { providerCode: 'openai_responses', model: 'fixture-model' });
 assert.equal(currentPlan.selectedNodeCount, 6);
-assert.deepEqual(currentPlan.providerGenerationReadyNodeCodes, []);
+assert.equal(currentPlan.providerGenerationReadyNodeCodes.length, 6);
 for (const entry of currentPlan.entries) {
-  assert.ok(entry.blockers.includes('W6_PRODUCTION_BRIEF_EXPORT_NOT_READY'));
-  assert.ok(entry.blockers.includes('W4R_NEW_ARTICLE_EXECUTION_ELIGIBILITY_NOT_PASSED'));
-  assert.ok(entry.blockers.includes('PRODUCTION_BRIEF_FILE_MISSING'));
+  assert.deepEqual(entry.blockers, [], `${entry.nodeCode}: LIVE_PROVIDER_ELIGIBILITY_BLOCKERS`);
+  assert.equal(entry.providerGenerationReady, true, `${entry.nodeCode}: LIVE_PROVIDER_READY`);
 }
 
-let blockedTransportCalls = 0;
-const blockedRun = await runProviderGeneration(root, {
+let liveDryTransportCalls = 0;
+const liveDry = await runProviderGeneration(root, {
   providerCode: 'openai_responses',
   model: 'fixture-model',
-  apply: true,
+  apply: false,
   network: true,
   env: { OPENAI_API_KEY: 'fixture-secret' },
-  transport: async () => { blockedTransportCalls += 1; return { responseId: 'should-not-run', text: '# no', usage: null }; }
+  transport: async () => { liveDryTransportCalls += 1; return { responseId: 'must-not-run', text: '# no', usage: null }; }
 });
-assert.equal(blockedTransportCalls, 0, 'Upstream-blocked batch must never call Provider.');
-assert.equal(blockedRun.networkCalls, 0);
-assert.equal(blockedRun.candidatesStaged, 0);
+assert.equal(liveDryTransportCalls, 0, 'Live checker must never invoke Provider in dry-run mode.');
+assert.equal(liveDry.networkCalls, 0);
+assert.equal(liveDry.candidatesStaged, 0);
 
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'phios-vap-w7-'));
 try {
@@ -214,11 +214,11 @@ assert.equal(packageJson.scripts['build:vap-w7'], 'node scripts/build-vap-w7-gov
 assert.equal(packageJson.scripts['vap:provider:generate'], 'node scripts/run-vap-w7-governed-provider-generation.mjs');
 assert.equal(packageJson.scripts['check:vap-w7'], 'node scripts/check-vap-w7-governed-provider-generation.mjs');
 assert.ok(packageJson.scripts['check:vap-b'].includes('npm run check:vap-w7'));
-assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-w7'));
+assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-b'));
 
 console.log('✓ VAP-W7 Governed Provider Generation passed.');
 console.log('✓ Real network Provider generation is implemented but requires per-node W6 readiness, an actual exported Brief, --apply, --network, explicit Provider/model resolution, and environment credentials.');
-console.log('✓ Current Batch 001 remains fail-closed with 0 Provider-eligible nodes; no Provider call is made while W6A/C2/C3/Human/plan/wave/W4R gates remain unresolved.');
+console.log('✓ Current Batch 001 has 6 Provider-eligible nodes after W6A/C2/C3/plan/wave formation; this checker performs no live network invocation.');
 console.log('✓ Provider outputs are staged only under dist/knowledge-production-candidates and remain non-authoritative Candidate artifacts for VAP-W8 validation/import.');
-console.log('✓ Dry-run, missing network authorization, blocked upstream nodes, and existing Candidate protection all prevent network calls.');
+console.log('✓ Dry-run and missing network authorization prevent network calls; isolated temp fixtures verify the positive network path and existing-Candidate protection.');
 console.log('✓ Credentials are never persisted; Provider cannot mutate Canonical Knowledge, Human decisions, C2/C3 authority, PJA Candidate authority, or Publication.');

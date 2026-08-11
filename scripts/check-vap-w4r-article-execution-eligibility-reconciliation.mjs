@@ -59,7 +59,7 @@ for (const entry of actual.entries) {
 const packageJson = readJson('package.json');
 assert.equal(packageJson.scripts['build:vap-w4r'], 'node scripts/build-vap-w4r-article-execution-eligibility-reconciliation.mjs');
 assert.equal(packageJson.scripts['check:vap-w4r'], 'node scripts/check-vap-w4r-article-execution-eligibility-reconciliation.mjs');
-assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-w4r'));
+assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-b') || packageJson.scripts.postcheck.includes('npm run check:vap-w4r'));
 
 console.log('✓ VAP-W4R Article Intent / Execution Eligibility Reconciliation passed.');
 console.log('✓ Historical VAP-W4 remains immutable, but downstream execution semantics now use W4R.');
