@@ -1,0 +1,24 @@
+{
+  "reconciliationCode": "PHI-OS-ORC-W9-RG-POST-FREEZE-REGISTRATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "status": "ACCEPTED_SUCCESSOR_REGISTRATION",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "historicalRgFreeze": "content/governance/runtime-checker-governance/freeze/rg-w9-w15-runtime-checker-governance-freeze-v1.json",
+  "historicalRgFreezeRewritten": false,
+  "historicalAliasV3Rewritten": false,
+  "successorArtifacts": [
+    "content/governance/runtime-checker-governance/registries/runtime-checker-alias-registry-v4.json",
+    "content/governance/runtime-checker-governance/registries/runtime-checker-group-registry-v2.json",
+    "content/governance/runtime-checker-governance/registries/checker-successor-deprecation-registry-v2.json",
+    "content/governance/runtime-checker-governance/manifests/runtime-checker-manifest-v2.json",
+    "scripts/run-runtime-checker-v4.mjs"
+  ],
+  "globalCutoverDeferred": true,
+  "reason": "Register ORC v2 checker/governance through an explicit RG successor extension without silently rewriting frozen RG v1 authority or the existing global check:runtime entry.",
+  "authorityExpansionGranted": false,
+  "rules": {
+    "v3RemainsHistoricalGlobalAuthorityUntilSeparateRgCutover": true,
+    "orcMayUseExplicitV4Successor": true,
+    "futureGlobalCutoverRequiresVersionedRgReconciliation": true
+  }
+}

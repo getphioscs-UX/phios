@@ -1,0 +1,31 @@
+{
+  "contractCode": "PHI-OS-PR-E3-EVIDENCE-RESOLUTION-v1",
+  "contractVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extensionWork": "PR-E3",
+  "status": "ACTIVE_REFERENCE_RESOLUTION_ONLY",
+  "requiredGates": [
+    "active PR Case Version",
+    "allowed Professional access decision",
+    "registered source class",
+    "source reference exists",
+    "authority matches registry",
+    "data type or reference kind matches registry",
+    "source version matches requested version when requested",
+    "RDG permission is ALLOW",
+    "purpose matches Professional access purpose",
+    "source scope is within authorized scope"
+  ],
+  "outputClass": "PR_RESOLVED_EVIDENCE_PACKAGE",
+  "payloadPolicy": "REFERENCE_AND_METADATA_ONLY_NO_SOURCE_CONTENT_COPY",
+  "rules": {
+    "rawDataIsEvidence": false,
+    "metricIsJudgment": false,
+    "readoutIsJudgment": false,
+    "unknownRemainsExplicit": true,
+    "deniedReferenceFailsClosed": true,
+    "missingReferenceFailsClosed": true,
+    "versionMismatchFailsClosed": true,
+    "payloadCopyForbidden": true
+  }
+}

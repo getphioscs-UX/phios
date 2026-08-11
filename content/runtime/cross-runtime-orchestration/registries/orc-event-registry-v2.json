@@ -1,0 +1,141 @@
+{
+  "registryCode": "PHI-OS-ORC-W2-EVENT-REGISTRY-v2",
+  "registryVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W2",
+  "status": "canonical",
+  "events": [
+    {
+      "eventCode": "CASE_OPENED",
+      "commitsState": "CASE_OPENED",
+      "authorityRuntime": "ICR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "CONSENT_VALIDATED",
+      "commitsState": "CONSENT_VALID",
+      "authorityRuntime": "CONSENT",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "INPUT_VERIFIED",
+      "commitsState": "INPUT_VERIFIED",
+      "authorityRuntime": "ICR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "REALITY_INITIALIZED",
+      "commitsState": "REALITY_INITIALIZED",
+      "authorityRuntime": "RMO",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "METHOD_ELIGIBILITY_CONFIRMED",
+      "commitsState": null,
+      "authorityRuntime": "MPA",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "METHOD_CALCULATED",
+      "commitsState": "METHOD_CALCULATED",
+      "authorityRuntime": "METHOD_RUNTIME",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "PROJECTION_FROZEN",
+      "commitsState": "PROJECTION_FROZEN",
+      "authorityRuntime": "MPA",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "MEANING_RESOLVED",
+      "commitsState": "MEANING_RESOLVED",
+      "authorityRuntime": "CMR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "KNOWLEDGE_COVERAGE_CHECKED",
+      "commitsState": "KNOWLEDGE_COVERAGE_CHECKED",
+      "authorityRuntime": "KI",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "READOUT_READY",
+      "commitsState": "READOUT_GENERATED",
+      "authorityRuntime": "RRE",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "JOURNEY_ACTIVATED",
+      "commitsState": "JOURNEY_ACTIVATED",
+      "authorityRuntime": "JR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "PROFESSIONAL_REVIEW_REQUIRED",
+      "commitsState": null,
+      "authorityRuntime": "RNE",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "PROFESSIONAL_HANDOFF_CREATED",
+      "commitsState": "PROFESSIONAL_HANDOFF",
+      "authorityRuntime": "JR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "PROFESSIONAL_DECISION_RECORDED",
+      "commitsState": "PROFESSIONAL_DECISION",
+      "authorityRuntime": "PR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "REPORT_ASSEMBLED",
+      "commitsState": "REPORT_ASSEMBLED",
+      "authorityRuntime": "RR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "REPORT_APPROVED",
+      "commitsState": "REPORT_APPROVED",
+      "authorityRuntime": "RR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "REPORT_RELEASED",
+      "commitsState": "REPORT_RELEASED",
+      "authorityRuntime": "RR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "ACTION_RECORDED",
+      "commitsState": "ACTION_RECORDED",
+      "authorityRuntime": "RMO",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "OUTCOME_OBSERVED",
+      "commitsState": "OUTCOME_OBSERVED",
+      "authorityRuntime": "RMO",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "REVIEW_RECORDED",
+      "commitsState": "REVIEW",
+      "authorityRuntime": "JR",
+      "payloadPolicy": "REFERENCE_ONLY"
+    },
+    {
+      "eventCode": "CONTINUITY_COMMITTED",
+      "commitsState": "CONTINUITY",
+      "authorityRuntime": "RCL",
+      "payloadPolicy": "REFERENCE_ONLY"
+    }
+  ],
+  "rules": {
+    "eventCodeDoesNotTransferDomainAuthority": true,
+    "eventPayloadCopyForbidden": true,
+    "unknownEventFailsClosed": true,
+    "duplicateEventRequiresIdempotencyResolution": true
+  }
+}

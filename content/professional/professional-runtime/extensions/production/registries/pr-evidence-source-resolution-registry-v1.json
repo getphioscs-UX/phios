@@ -1,0 +1,77 @@
+{
+  "registryCode": "PHI-OS-PR-E3-EVIDENCE-SOURCE-RESOLUTION-v1",
+  "registryVersion": "1.0.0",
+  "status": "canonical_post_freeze_extension",
+  "sourceClasses": [
+    {
+      "sourceClass": "RAW_DATA",
+      "dataType": "REALITY_INPUT_RECORD",
+      "authority": "ICR",
+      "referenceKind": null,
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "REALITY",
+      "dataType": "RUNTIME_STATE_RECORD",
+      "authority": "RMO",
+      "referenceKind": null,
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "EVIDENCE",
+      "dataType": "REALITY_EVIDENCE_RECORD",
+      "authority": "RRE",
+      "referenceKind": null,
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "READOUT",
+      "dataType": "REALITY_READOUT_RECORD",
+      "authority": "RRE",
+      "referenceKind": null,
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "METRICS",
+      "dataType": null,
+      "authority": "UPSTREAM_METRIC_AUTHORITY_IF_AVAILABLE",
+      "referenceKind": "GOVERNED_METRIC_REFERENCE",
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "MEANING",
+      "dataType": "MEANING_PROJECTION_RECORD",
+      "authority": "CMR",
+      "referenceKind": null,
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "KNOWLEDGE",
+      "dataType": null,
+      "authority": "KNOWLEDGE_AUTHORITY",
+      "referenceKind": "PUBLISHED_KNOWLEDGE_REFERENCE",
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "JOURNEY",
+      "dataType": "NAVIGATION_RECORD",
+      "authority": "JR",
+      "referenceKind": null,
+      "payloadCopied": false
+    },
+    {
+      "sourceClass": "UNKNOWN",
+      "dataType": null,
+      "authority": "RRE_OR_RMO",
+      "referenceKind": "REALITY_READOUT_RECORD_OR_RUNTIME_STATE_RECORD",
+      "payloadCopied": false
+    }
+  ],
+  "rules": {
+    "registeredSourceClassRequired": true,
+    "authorityAndTypeMustMatch": true,
+    "rdgAllowRequired": true,
+    "purposeAndScopeMustMatch": true,
+    "sourcePayloadCopied": false
+  }
+}

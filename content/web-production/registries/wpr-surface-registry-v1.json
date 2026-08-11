@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W3",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "canonical_wpr_e_w21_personal_runtime_setup_active",
+  "status": "canonical_wpr_f_w22_w23_professional_financial_report_surfaces_active",
   "audienceClasses": [
     "PUBLIC",
     "CUSTOMER",
@@ -220,7 +220,9 @@
         "PR"
       ],
       "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
-      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+      "implementationState": "LIMITED_PRODUCTION_DISCOVERY",
+      "professionalJudgmentCreationAllowed": false
     },
     {
       "surfaceCode": "PROFESSIONAL_WORKSPACE",
@@ -229,10 +231,15 @@
       "entitlementRequired": false,
       "sourceAuthorities": [
         "PR",
-        "RDG"
+        "RDG",
+        "RR",
+        "FINANCIAL_RUNTIME"
       ],
       "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
-      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+      "implementationState": "LIMITED_PRODUCTION_AUTHORIZED_SHELL",
+      "authorizedPayloadRequired": true,
+      "wprPrivatePayloadFetchAllowed": false
     },
     {
       "surfaceCode": "FINANCIAL",
@@ -244,7 +251,10 @@
         "PR"
       ],
       "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
-      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+      "implementationState": "LIMITED_PRODUCTION_DISCOVERY",
+      "financialCalculationExecutionAllowed": false,
+      "financialRecommendationCreationAllowed": false
     },
     {
       "surfaceCode": "ACCOUNT",
@@ -311,6 +321,23 @@
       "dataHandling": "EPHEMERAL_BROWSER_ONLY",
       "methodExecutionAllowed": false,
       "canonicalCustomerWorkspace": false
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+      "audienceClass": "PROFESSIONAL",
+      "authRequired": true,
+      "entitlementRequired": false,
+      "sourceAuthorities": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
+      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+      "implementationState": "LIMITED_PRODUCTION_AUTHORIZED_SHELL",
+      "authorizedPayloadRequired": true,
+      "wprPrivatePayloadFetchAllowed": false,
+      "reportGenerationAllowed": false
     }
   ],
   "rules": {

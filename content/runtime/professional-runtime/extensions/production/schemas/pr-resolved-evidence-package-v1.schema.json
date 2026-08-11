@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schema/pr-resolved-evidence-package-v1.schema.json",
+  "title": "PHI OS PR Resolved Evidence Package v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectClass",
+    "packageReference",
+    "caseVersionReference",
+    "accessDecision",
+    "resolvedSources",
+    "rawDataCountsAsEvidence",
+    "metricCountsAsJudgment",
+    "readoutCountsAsJudgment",
+    "sourcePayloadCopied",
+    "packageDigest"
+  ],
+  "properties": {
+    "objectClass": {
+      "const": "PR_RESOLVED_EVIDENCE_PACKAGE"
+    },
+    "packageReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "caseVersionReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accessDecision": {
+      "const": "ALLOW_MINIMUM_NECESSARY_PROFESSIONAL_ACCESS"
+    },
+    "resolvedSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceClass",
+          "reference",
+          "authority",
+          "dataType",
+          "referenceKind",
+          "version",
+          "permissionDecision",
+          "purpose",
+          "scope",
+          "sourceDigest",
+          "payloadCopied"
+        ],
+        "properties": {
+          "sourceClass": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "authority": {
+            "type": "string"
+          },
+          "dataType": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "referenceKind": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "permissionDecision": {
+            "const": "ALLOW"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sourceDigest": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "payloadCopied": {
+            "const": false
+          }
+        }
+      }
+    },
+    "rawDataCountsAsEvidence": {
+      "const": false
+    },
+    "metricCountsAsJudgment": {
+      "const": false
+    },
+    "readoutCountsAsJudgment": {
+      "const": false
+    },
+    "sourcePayloadCopied": {
+      "const": false
+    },
+    "packageDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

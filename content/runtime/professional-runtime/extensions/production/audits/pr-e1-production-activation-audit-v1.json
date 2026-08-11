@@ -1,0 +1,37 @@
+{
+  "auditCode": "PHI-OS-PR-E1-PRODUCTION-ACTIVATION-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "runtimeCode": "PR",
+  "extensionWork": "PR-E1",
+  "status": "POST_FREEZE_PRODUCTION_FOUNDATION_AUDITED",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "sourceFreeze": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+  "decision": "FOUNDATION_ALLOWED_CASE_STORAGE_EXECUTION_BLOCKED",
+  "observed": {
+    "prV2Frozen": true,
+    "pwsProfessionalHandoffFrozen": true,
+    "assignmentAuthorityAvailable": true,
+    "professionalEligibilityAvailable": true,
+    "professionalAuthorisationAvailable": true,
+    "authorisedResourceLoaderAvailable": true,
+    "rdgPrV2ReadSuccessorAvailable": true,
+    "professionalWorkspacePersistenceStatus": "contract_only",
+    "professionalWorkspaceD1RecordCreated": false,
+    "authorisedWorkspacePersistenceStatus": "not_implemented",
+    "dedicatedPrCasePersistenceExecutorObserved": false
+  },
+  "activation": {
+    "professionalDecisionRuntime": "AVAILABLE_HUMAN_AUTHORITY_GATED",
+    "evidenceReferenceResolution": "ACTIVATABLE_WITH_EXISTING_RDG_AUTHORITY",
+    "caseVersionMaterialization": "ACTIVATABLE_IMMUTABLE_IN_MEMORY",
+    "caseStorageExecution": "BLOCKED_EXECUTOR_NOT_IMPLEMENTED",
+    "workspaceD1Persistence": "BLOCKED_CONTRACT_ONLY"
+  },
+  "rules": {
+    "prV2FreezeRewritten": false,
+    "pwsAuthorityRewritten": false,
+    "rdgV1Rewritten": false,
+    "prMayClaimStorageExecutionWithoutExecutor": false,
+    "missingProductionGateFailsClosed": true
+  }
+}

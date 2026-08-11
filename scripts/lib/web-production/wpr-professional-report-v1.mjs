@@ -1,0 +1,1 @@
+import fs from 'node:fs';import path from 'node:path';export const BASELINE='57bccb6d6f9fc6aca054b4261e854f04758ec0e3';export const root=process.cwd();export const readText=f=>fs.readFileSync(path.join(root,f),'utf8').replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n');export const readJson=f=>JSON.parse(readText(f));export const exists=f=>fs.existsSync(path.join(root,f));

@@ -1,0 +1,60 @@
+{
+  "contractCode": "PHI-OS-WPR-W23-REPORT-WORKSPACE-PRODUCTION-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W23",
+  "phase": "WPR-F_PROFESSIONAL_FINANCIAL_REPORT_SURFACES",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "status": "ACTIVE_LIMITED_PRODUCTION_AUTHORIZED_SHELL_NO_REPORT_GENERATION",
+  "purpose": "Project Professional Workspace and Professional Report Viewer as fail-closed authorised shells consuming frozen PR/RR governance without fetching private data, generating reports, creating judgment, or bypassing consent and professional authorization.",
+  "authority": {
+    "professionalRuntime": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+    "reportRuntime": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+    "rdg": "content/governance/reality-data-governance/freeze/rdg-w16-w20-access-privacy-rights-freeze-v1.json",
+    "professionalJudgmentAuthority": "PR",
+    "reportAssemblyAuthority": "RR",
+    "presentationAuthority": "CPR",
+    "wprAuthority": "AUTHORIZED_WEB_SHELL_PROJECTION_ONLY"
+  },
+  "surfaces": [
+    {
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "route": "/professional-workspace",
+      "audience": "PROFESSIONAL",
+      "access": "PROFESSIONAL_AUTHORIZED",
+      "payloadMode": "EXTERNAL_AUTHORIZED_PAYLOAD_OR_FAIL_CLOSED"
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_REPORT_VIEWER",
+      "route": "/professional-reports",
+      "audience": "PROFESSIONAL",
+      "access": "PROFESSIONAL_AUTHORIZED",
+      "payloadMode": "EXTERNAL_AUTHORIZED_PAYLOAD_OR_FAIL_CLOSED"
+    }
+  ],
+  "reportBoundary": {
+    "rrAuthority": "REPORT_ASSEMBLY",
+    "professionalReportRequiresPrApproval": true,
+    "readoutRequiresRre": true,
+    "navigationRequiresJr": true,
+    "knowledgeRequiresPublishedKnowledge": true,
+    "rrRendersHtml": false,
+    "wprGeneratesReport": false
+  },
+  "workspaceBoundary": {
+    "authorizedPayloadRequired": true,
+    "wprFetchesPrivateCustomerData": false,
+    "browserRuntimeStorageUsedByWpr": false,
+    "unauthorizedShellFailsClosed": true,
+    "professionalRoleAloneGrantsPermission": false
+  },
+  "forbidden": [
+    "PROFESSIONAL_JUDGMENT_CREATION",
+    "REPORT_ASSEMBLY",
+    "REPORT_APPROVAL",
+    "PRIVATE_DATA_DISCOVERY",
+    "CONSENT_BYPASS",
+    "PROFESSIONAL_PERMISSION_INFERENCE",
+    "REPORT_CONTENT_FABRICATION",
+    "FINANCIAL_RECOMMENDATION_CREATION"
+  ]
+}

@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W6",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "canonical_wpr_e_w21_mpa_personal_runtime_projection_active",
+  "status": "canonical_wpr_f_w22_w23_runtime_consumption_active",
   "entries": [
     {
       "runtimeCode": "KNR_PUBLISHED_KNOWLEDGE",
@@ -117,6 +117,44 @@
         "content/professional/method-production-activation/contracts/mpa-birth-initialization-data-runtime-v1.json",
         "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json"
       ]
+    },
+    {
+      "runtimeCode": "PR",
+      "authorityReference": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "productionState": "FROZEN_HUMAN_AUTHORITY_GATED",
+      "surfaceConsumers": [
+        "PROFESSIONAL",
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE",
+        "PROFESSIONAL_REPORT_VIEWER"
+      ],
+      "consumptionMode": "READ_ONLY_AUTHORITY_AND_EXISTING_AUTHORIZED_PAYLOAD",
+      "professionalJudgmentCreatedByWpr": false
+    },
+    {
+      "runtimeCode": "RR",
+      "authorityReference": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "productionState": "FROZEN_ASSEMBLY_READY_UPSTREAM_GATED",
+      "surfaceConsumers": [
+        "PROFESSIONAL_REPORT_VIEWER",
+        "PROFESSIONAL_WORKSPACE",
+        "CUSTOMER_REPORT"
+      ],
+      "consumptionMode": "RELEASED_OR_AUTHORIZED_REPORT_REFERENCE_ONLY",
+      "reportGeneratedByWpr": false,
+      "reportApprovedByWpr": false
+    },
+    {
+      "runtimeCode": "FINANCIAL_RUNTIME",
+      "authorityReference": "content/registry/m4a-financial-reality-navigation.json",
+      "productionState": "GOVERNED_M4A_COMPATIBILITY",
+      "surfaceConsumers": [
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "consumptionMode": "PUBLIC_DISCOVERY_AND_AUTHORIZED_WORKSPACE_PROJECTION",
+      "financialCalculationExecutedByWpr": false,
+      "financialRecommendationCreatedByWpr": false
     }
   ],
   "orphanPolicy": {

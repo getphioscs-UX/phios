@@ -1,0 +1,45 @@
+{
+  "compositionCode": "PHI-OS-WPR-W22-PROFESSIONAL-FINANCIAL-COMPOSITION-v1",
+  "compositionVersion": "1.0.0",
+  "work": "WPR-W22",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "status": "canonical_limited_production_composition",
+  "bindings": [
+    {
+      "surfaceCode": "PROFESSIONAL",
+      "routeCode": "PROFESSIONAL",
+      "sourceCodes": [
+        "PR"
+      ],
+      "slots": [
+        "HERO",
+        "PRIMARY_CONTEXT",
+        "PROFESSIONAL_BOUNDARY",
+        "CTA"
+      ]
+    },
+    {
+      "surfaceCode": "FINANCIAL",
+      "routeCode": "FINANCIAL",
+      "sourceCodes": [
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "slots": [
+        "HERO",
+        "PRIMARY_CONTEXT",
+        "EVIDENCE",
+        "PROFESSIONAL_BOUNDARY",
+        "CTA"
+      ]
+    }
+  ],
+  "rules": {
+    "sourceAuthorityPreserved": true,
+    "professionalJudgmentMayNotBeCreatedByComposition": true,
+    "financialRecommendationMayNotBeCreatedByComposition": true,
+    "privateProfessionalPayloadAllowed": false,
+    "cprProductionRecordRequiredForCprBoundMode": true,
+    "currentMode": "STATIC_PUBLIC_SHELL_TRANSITIONAL"
+  }
+}

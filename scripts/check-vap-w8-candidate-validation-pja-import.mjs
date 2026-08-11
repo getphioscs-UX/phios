@@ -152,9 +152,18 @@ const candidateRegistry = read('content/knowledge/production/registry/candidate-
 const reviewRegistry = read('content/knowledge/production/registry/review-registry.json');
 const approvalRegistry = read('content/knowledge/production/registry/approval-registry.json');
 const publicationRegistry = read('content/knowledge/production/registry/publication-registry.json');
+const w9ActivationPath = 'content/production/visual-article/activation/vap-w9-human-editorial-review-candidate-promotion-v1.json';
+const w9SuccessorApplied = fs.existsSync(path.join(root, w9ActivationPath)) && read(w9ActivationPath).humanEditorialReviewCount === 6;
 for (const nodeCode of nodeCodes) {
   assert.equal(candidateRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE), false, `${nodeCode}: CANDIDATE_REGISTRY_MUST_NOT_BE_PROMOTED_BY_W8`);
-  assert.equal(reviewRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE), false, `${nodeCode}: HUMAN_REVIEW_MUST_NOT_BE_INVENTED_BY_W8`);
+  const successorReview = reviewRegistry.records.find(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE);
+  if (w9SuccessorApplied) {
+    assert(successorReview, `${nodeCode}: W9_SUCCESSOR_HUMAN_REVIEW_REQUIRED`);
+    assert.equal(successorReview.decision, 'accept', `${nodeCode}: W9_SUCCESSOR_REVIEW_DECISION`);
+    assert.equal(successorReview.reviewerCode, 'TL', `${nodeCode}: W9_SUCCESSOR_REVIEW_AUTHORITY`);
+  } else {
+    assert.equal(Boolean(successorReview), false, `${nodeCode}: HUMAN_REVIEW_MUST_NOT_BE_INVENTED_BY_W8`);
+  }
   assert.equal(approvalRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE), false, `${nodeCode}: APPROVAL_MUST_NOT_BE_INVENTED_BY_W8`);
   assert.equal(publicationRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === VAP_W8_LOCALE), false, `${nodeCode}: PUBLICATION_MUST_NOT_BE_INVENTED_BY_W8`);
 }
@@ -198,5 +207,5 @@ console.log('✓ VAP-W8 Candidate Validation & PJA Import passed.');
 console.log('✓ All 6 Batch 001 provider candidates pass integrity, public-body, title, minimum thesis/must-establish coverage, C2→PJA brief bridge, and PJA candidate-schema validation.');
 console.log('✓ All 6 candidates are imported into the existing zh-Hans PJA Candidate layer as ready_for_human_review, preserving provider Markdown exactly.');
 console.log('✓ W8 does not claim factual/source truth or complete semantic fidelity; all 6 still require Human editorial review.');
-console.log('✓ Candidate/Review/Approval/Publication registries remain unpromoted for these six nodes; no approval or publication is created by import.');
+console.log('✓ W8 itself does not create Human Review/Approval/Publication authority; successor VAP-W9 Human Reviews may exist and are validated as separate TL authority.');
 console.log('✓ Existing PJA atomic importer is reused; overwrite remains forbidden and conflict fails closed.');

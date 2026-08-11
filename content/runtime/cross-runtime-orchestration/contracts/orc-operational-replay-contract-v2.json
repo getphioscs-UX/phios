@@ -1,0 +1,26 @@
+{
+  "contractCode": "PHI-OS-ORC-W10-OPERATIONAL-REPLAY-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W10",
+  "status": "canonical",
+  "inputs": [
+    "governedServiceProfile",
+    "committedAuditTimeline",
+    "eventReferences",
+    "idempotencyLedger"
+  ],
+  "outputs": [
+    "reconstructedCommittedState",
+    "determinismDigest",
+    "replayFindings"
+  ],
+  "sideEffectPolicy": "DO_NOT_REEXECUTE_EXTERNAL_SIDE_EFFECTS",
+  "rules": {
+    "sameCommittedTimelineProducesSameState": true,
+    "replayMayValidateButNotMutateHistory": true,
+    "missingCommitFailsClosed": true,
+    "externalPaymentNotReexecuted": true,
+    "externalReportReleaseNotReexecuted": true
+  }
+}

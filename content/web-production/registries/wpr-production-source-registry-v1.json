@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W5",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "canonical_wpr_e_w21_mpa_sources_active",
+  "status": "canonical_wpr_f_w22_w23_professional_report_sources_active",
   "sourceClasses": [
     "CANONICAL",
     "PUBLISHED",
@@ -161,6 +161,50 @@
       "productionEligibilityMayBeInferredByWpr": false,
       "executionAuthorityMayBeInferredByWpr": false,
       "sourceAuthorityPreserved": true
+    },
+    {
+      "sourceCode": "PR",
+      "sourceClass": "CANONICAL",
+      "reference": "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json",
+      "allowedSurfaces": [
+        "PROFESSIONAL",
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE",
+        "PROFESSIONAL_REPORT_VIEWER",
+        "CUSTOMER_REPORT"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "FROZEN_HUMAN_AUTHORITY_GATED",
+      "readOnlyProjectionOnly": true,
+      "professionalJudgmentAuthorityMayBeInferredByWpr": false
+    },
+    {
+      "sourceCode": "RR",
+      "sourceClass": "CANONICAL",
+      "reference": "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json",
+      "allowedSurfaces": [
+        "CUSTOMER_REPORT",
+        "PROFESSIONAL_REPORT_VIEWER",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "FROZEN_ASSEMBLY_READY_UPSTREAM_GATED",
+      "readOnlyProjectionOnly": true,
+      "reportAssemblyAuthorityMayBeInferredByWpr": false
+    },
+    {
+      "sourceCode": "FINANCIAL_RUNTIME",
+      "sourceClass": "PRODUCTION",
+      "reference": "content/registry/m4a-financial-reality-navigation.json",
+      "allowedSurfaces": [
+        "FINANCIAL",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "sourceAuthorityPreserved": true,
+      "sourceState": "GOVERNED_M4A_COMPATIBILITY",
+      "readOnlyProjectionOnly": true,
+      "calculationAuthorityMayBeInferredByWpr": false,
+      "recommendationAuthorityMayBeInferredByWpr": false
     }
   ],
   "forbiddenDirectSourceStates": [

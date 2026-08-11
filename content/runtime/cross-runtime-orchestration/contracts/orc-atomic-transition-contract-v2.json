@@ -1,0 +1,20 @@
+{
+  "contractCode": "PHI-OS-ORC-W7-ATOMIC-TRANSITION-CONTRACT-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "ORC",
+  "work": "ORC-W7",
+  "status": "canonical",
+  "atomicCommitSet": [
+    "canonicalStatePointer",
+    "SYSTEM_OPERATION_RECORD",
+    "auditTimelineEntry",
+    "idempotencyLedgerEntry"
+  ],
+  "commitPolicy": "ALL_OR_NOTHING",
+  "rules": {
+    "partialTransitionForbidden": true,
+    "auditEntryWithoutStateCommitForbidden": true,
+    "stateCommitWithoutAuditEntryForbidden": true,
+    "externalSideEffectOutsideAtomicDomainRecordedByReferenceOnly": true
+  }
+}
