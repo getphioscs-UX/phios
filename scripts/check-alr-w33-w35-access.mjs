@@ -350,8 +350,33 @@ for (const output of freeze.outputs) await fs.access(path.join(root, output));
 const pkg = await read('package.json');
 assert.equal(pkg.scripts['check:alr-w33-w35'], 'node scripts/check-alr-w33-w35-access.mjs');
 assert.equal(pkg.scripts['check:alr-access'], 'npm run check:alr-w33-w35');
-const requiredPostcheckPrefix = 'npm run check:governance-data-closure && npm run check:alr-foundation && npm run check:alr-capability && npm run check:alr-learning-architecture && npm run check:car-reconciliation && npm run check:icr-foundation && npm run check:icr-runtime &&  npm run check:rmo && npm run check:alr-knowledge-learning && npm run check:alr-practice && npm run check:alr-assessment && npm run check:alr-progress && npm run check:alr-access && ';
-assert.ok(pkg.scripts.postcheck.startsWith(requiredPostcheckPrefix));
+// ALR_POSTCHECK_COMMAND_PREFIX_V2
+// Compare normalized command tokens instead of raw whitespace so legitimate
+// post-freeze tail additions remain possible without weakening required order.
+const requiredPostcheckPrefixCommands = Object.freeze([
+  'npm run check:governance-data-closure',
+  'npm run check:alr-foundation',
+  'npm run check:alr-capability',
+  'npm run check:alr-learning-architecture',
+  'npm run check:car-reconciliation',
+  'npm run check:icr-foundation',
+  'npm run check:icr-runtime',
+  'npm run check:rmo',
+  'npm run check:alr-knowledge-learning',
+  'npm run check:alr-practice',
+  'npm run check:alr-assessment',
+  'npm run check:alr-progress',
+  'npm run check:alr-access'
+]);
+const postcheckCommands = pkg.scripts.postcheck
+  .split('&&')
+  .map(command => command.trim())
+  .filter(Boolean);
+assert.deepEqual(
+  postcheckCommands.slice(0, requiredPostcheckPrefixCommands.length),
+  requiredPostcheckPrefixCommands,
+  'ALR_W33_POSTCHECK_COMMAND_PREFIX_DRIFT'
+);
 
 console.log('✓ ALR-W33～W35 Access passed.');
 console.log('✓ Academy access eligibility consumes canonical Entitlement decisions without granting or mutating Entitlement, enrollment, unlock or delivery.');

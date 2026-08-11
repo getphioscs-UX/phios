@@ -144,34 +144,47 @@ assert.equal(context.rdgCanonicalDataRegistry.entries.find(entry =>
 assert.equal(context.pdsFullSiteAcceptance.status,
   'implementation-complete-production-revalidation-required');
 
-const checkerReconciliation = await read(
-  'docs/alr/reconciliation/alr-post-freeze-checker-reconciliation-v1.json'
+// ALR_POST_FREEZE_CHECKER_RECONCILIATION_CHAIN_V2
+const checkerReconciliations = [
+  await read('docs/alr/reconciliation/alr-post-freeze-checker-reconciliation-v1.json'),
+  await read('docs/alr/reconciliation/alr-post-freeze-checker-reconciliation-v2.json')
+];
+assert.deepEqual(
+  checkerReconciliations.map(item => item.reconciliationCode),
+  [
+    'PHI-OS-ALR-POST-FREEZE-CHECKER-RECONCILIATION-v1',
+    'PHI-OS-ALR-POST-FREEZE-CHECKER-RECONCILIATION-v2'
+  ],
+  'ALR_POST_FREEZE_CHECKER_RECONCILIATION_CHAIN'
 );
-assert.equal(
-  checkerReconciliation.reconciliationCode,
-  'PHI-OS-ALR-POST-FREEZE-CHECKER-RECONCILIATION-v1',
-  'ALR_POST_FREEZE_CHECKER_RECONCILIATION'
-);
-assert.equal(checkerReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
-assert.equal(checkerReconciliation.frozenAliasRegistryRewritten, false);
-assert.equal(checkerReconciliation.authorityExpansionGranted, false);
+for (const reconciliation of checkerReconciliations) {
+  assert.equal(reconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+  assert.equal(reconciliation.frozenAliasRegistryRewritten, false);
+  assert.equal(reconciliation.alrFreezeRewritten, false);
+  assert.equal(reconciliation.authorityExpansionGranted, false);
+}
 
 for (const entry of context.alrCheckerAliasRegistry.entries) {
   await fs.access(path.join(root, entry.implementationFile));
   const actualDigest = await digest(entry.implementationFile);
-  if (actualDigest === entry.implementationDigest) continue;
+  let acceptedDigest = entry.implementationDigest;
 
-  const successor = checkerReconciliation.entries.find(item =>
-    item.implementationFile === entry.implementationFile
-  );
+  for (const reconciliation of checkerReconciliations) {
+    const successor = reconciliation.entries.find(item =>
+      item.implementationFile === entry.implementationFile
+    );
+    if (!successor) continue;
 
-  assert.ok(successor, `${entry.workCode} checker digest`);
-  assert.equal(successor.frozenDigest, entry.implementationDigest,
-    `${entry.workCode} frozen checker digest`);
-  assert.equal(actualDigest, successor.successorDigest,
-    `${entry.workCode} successor checker digest`);
-  assert.equal(successor.authorityExpansionGranted, false);
-  assert.equal(successor.runtimeSemanticAuthorityChanged, false);
+    const predecessorDigest = successor.predecessorDigest ?? successor.frozenDigest;
+    assert.equal(predecessorDigest, acceptedDigest,
+      `${entry.workCode} reconciliation predecessor digest`);
+    assert.equal(successor.authorityExpansionGranted, false);
+    assert.equal(successor.runtimeSemanticAuthorityChanged, false);
+    acceptedDigest = successor.successorDigest;
+  }
+
+  assert.equal(actualDigest, acceptedDigest,
+    `${entry.workCode} latest accepted checker digest`);
 }
 
 const sliceAudit = await read(`${base}/audits/alr-foundation-vertical-slice-acceptance-v1.json`);

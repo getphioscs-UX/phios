@@ -1,0 +1,53 @@
+{
+  "manifestCode": "MPA-W21-DELTA-MANIFEST-v1",
+  "manifestVersion": "1.0.0",
+  "work": "MPA-W21",
+  "baselineCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "baselineMessage": "VAP+MPA",
+  "status": "READY_TO_OVERLAY",
+  "decision": "NUM_METHOD_SPECIFIC_ACTIVATION_READY_FOR_MPA_W26_ELIGIBILITY_DECISION",
+  "productionEligible": false,
+  "productionExecutionAllowed": false,
+  "professionalEligible": false,
+  "changedFiles": [
+    "content/professional/method-production-activation/acceptance/mpa-w21-num-activation-acceptance-v1.json",
+    "content/professional/method-production-activation/audits/mpa-w21-num-fixture-reconciliation-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-num-activation-v1.json",
+    "content/professional/method-production-activation/fixtures/mpa-w21-num-activation-fixture-corpus-v1.1.json",
+    "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+    "content/professional/method-production-activation/registries/mpa-num-calculation-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-num-cross-implementation-evidence-v1.json",
+    "content/professional/method-production-activation/registries/mpa-num-regression-freeze-v1.json",
+    "content/professional/method-production-activation/schemas/mpa-method-activation-readiness-v1.schema.json",
+    "docs/mpa/MPA-W21-NUM-ACTIVATION.md",
+    "functions/method-production-activation/num-activation-runtime.js",
+    "package.json",
+    "scripts/check-mpa-w21-num-activation.mjs",
+    "scripts/lib/method-production-activation/mpa-num-activation-v1.mjs"
+  ],
+  "validation": {
+    "npm run check:mpa-w21": "PASS",
+    "npm run check:mpa": "PASS",
+    "npm run check:mr-w3": "PASS",
+    "npm run check:mr-w4": "PASS",
+    "npm run check:mr-w5": "PASS",
+    "npm run check:mr-w6": "PASS",
+    "numW0W6": "PASS_THROUGH_W21_CHECKER"
+  },
+  "preservation": {
+    "mrImrFrozenAuthorityChanged": false,
+    "numLegacyFreezeChanged": false,
+    "methodRegistryV2EligibilityChanged": false,
+    "capabilityMatrixEligibilityChanged": false,
+    "w12HistoricalCorpusChanged": false,
+    "w15HistoricalComparisonChanged": false
+  },
+  "fixtureReconciliation": {
+    "historicalFixture": "NUM-EDGE-LEAP-001",
+    "historicalExpectedLifePath": 4,
+    "successorFixture": "NUM-W21-EDGE-LEAP-001",
+    "correctedExpectedLifePath": 6,
+    "resolution": "LEGACY_RUNTIME_AND_INDEPENDENT_GOVERNED_RECALCULATION_EXACT_MATCH"
+  },
+  "nextWork": "MPA-W22_AST_ACTIVATION"
+}

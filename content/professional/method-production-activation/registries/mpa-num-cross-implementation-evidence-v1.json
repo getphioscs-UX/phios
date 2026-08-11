@@ -1,0 +1,31 @@
+{
+  "registryCode": "MPA-W21-NUM-CROSS-IMPLEMENTATION-EVIDENCE-v1",
+  "registryVersion": "1.0.0",
+  "work": "MPA-W21",
+  "baselineCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681",
+  "status": "EXACT_MATCH_METHOD_ACTIVATION_EVIDENCE",
+  "methodCode": "NUMEROLOGY",
+  "pluginCode": "NUM",
+  "comparisonMode": "legacy_validation_runtime_vs_independent_governed_recalculation",
+  "independentImplementation": {
+    "code": "MPA_NUM_INDEPENDENT_REFERENCE_V1",
+    "usesGovernedAuthorityResolver": true,
+    "hardCodedMasterNumbersForbidden": true
+  },
+  "trustedReferenceRequiredForCurrentNumericScope": false,
+  "tolerance": {
+    "type": "exact",
+    "value": 0
+  },
+  "fixtures": [
+    "NUM-W21-VALID-001",
+    "NUM-W21-EDGE-LEAP-001",
+    "NUM-W21-REGRESSION-001"
+  ],
+  "invalidFixture": "NUM-W21-INVALID-DATE-001",
+  "productionComparisonSatisfiedForMethodSpecificReadiness": true,
+  "effects": {
+    "w15RegistryRewritten": false,
+    "productionEligibilityCreated": false
+  }
+}
