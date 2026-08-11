@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-ACTIVATION-FIXTURE-CORPUS-v1.1.0",
+  "work": "MPA-W23",
+  "methodCode": "BAZI",
+  "supersedesForActivationEvidence": "BZR fixtures inside mpa-reference-fixture-corpus-v1.json; historical corpus remains unchanged.",
+  "fixtures": [
+    {
+      "fixtureId": "BZR-W23-VALID-1989-001",
+      "fixtureType": "valid",
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "timezone": "Asia/Kuala_Lumpur",
+        "coordinates": {
+          "latitude": 4.85,
+          "longitude": 100.7333
+        }
+      },
+      "expected": {
+        "physicalInstantUtcIso": "1989-11-15T14:50:00.000Z",
+        "trueSolarLocalDate": "1989-11-15",
+        "trueSolarLocalTime": "21:48:19.059296",
+        "trueSolarCorrectionMinutes": -61.68234507085435,
+        "year": "JI-SI",
+        "month": "YI-HAI",
+        "day": "JI-MAO",
+        "hour": "YI-HAI",
+        "previousJie": "LI_DONG",
+        "nextJie": "DA_XUE"
+      },
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-W23-LI-CHUN-BOUNDARY-001",
+      "fixtureType": "edge",
+      "input": {
+        "before": "2020-02-04T13:22:00+08:00",
+        "after": "2020-02-04T18:22:00+08:00"
+      },
+      "expected": {
+        "beforeYear": "JI-HAI",
+        "beforeMonth": "DING-CHOU",
+        "afterYear": "GENG-ZI",
+        "afterMonth": "WU-YIN",
+        "boundaryPolicy": "exact_li_chun_instant"
+      },
+      "reference": "lunar-javascript 1.7.7 immutable test evidence",
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-W23-MISSING-TIME-001",
+      "fixtureType": "edge",
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": null,
+        "timezone": "Asia/Kuala_Lumpur"
+      },
+      "expected": {
+        "status": "PARTIAL_DATE_ONLY",
+        "hourPillar": null,
+        "errorCode": "PRECISION_LIMIT"
+      },
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-W23-INVALID-LOCATION-001",
+      "fixtureType": "invalid",
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "coordinates": {
+          "latitude": 4.85,
+          "longitude": 181
+        }
+      },
+      "expected": {
+        "status": "ERROR",
+        "errorCode": "INPUT_INVALID"
+      },
+      "productionEvidence": false
+    },
+    {
+      "fixtureId": "BZR-W23-REGRESSION-001",
+      "fixtureType": "regression",
+      "input": {
+        "birthDate": "1989-11-15",
+        "birthTime": "22:50:00",
+        "timezone": "Asia/Kuala_Lumpur",
+        "longitude": 100.7333
+      },
+      "expected": {
+        "repeatOutputMustMatch": true,
+        "productionEligible": false,
+        "successorReferenceRequired": true
+      },
+      "productionEvidence": false
+    }
+  ],
+  "rules": {
+    "historicalSyntheticTrueSolarValueMayBeUsedAsProductionExpectedValue": false,
+    "historicalSyntheticSolarTermInstantsMayBeUsedAsProductionExpectedValue": false
+  }
+}

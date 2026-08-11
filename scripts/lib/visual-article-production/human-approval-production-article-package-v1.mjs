@@ -127,6 +127,55 @@ export async function buildVapW10ApprovalQueue(root) {
   return { ...payload, approvalQueueDigest: shaBytes(Buffer.from(serialize(payload), 'utf8')) };
 }
 
+function approvalQueueWithoutDigest(queue) {
+  const copy = structuredClone(queue);
+  delete copy.approvalQueueDigest;
+  return copy;
+}
+
+function staticQueueEntry(entry) {
+  return {
+    approvalIndex: entry.approvalIndex,
+    nodeCode: entry.nodeCode,
+    locale: entry.locale,
+    title: entry.title,
+    candidate: entry.candidate,
+    review: entry.review,
+    promotion: entry.promotion,
+    proposedConditions: entry.proposedConditions
+  };
+}
+
+export function validateFrozenApprovalQueueLineage(frozenQueue, currentQueue) {
+  const errors = [];
+  const add = (code, message) => errors.push({ code, message });
+  if (frozenQueue?.schemaVersion !== 'PHI-OS-VAP-W10-HUMAN-APPROVAL-QUEUE-v1.0.0') add('VAP_W10_FROZEN_QUEUE_SCHEMA_INVALID', String(frozenQueue?.schemaVersion));
+  if (frozenQueue?.batchCode !== VAP_W10_BATCH_CODE || frozenQueue?.locale !== VAP_W10_LOCALE) add('VAP_W10_FROZEN_QUEUE_SCOPE_INVALID', `${frozenQueue?.batchCode}:${frozenQueue?.locale}`);
+  const expectedDigest = shaBytes(Buffer.from(serialize(approvalQueueWithoutDigest(frozenQueue)), 'utf8'));
+  if (frozenQueue?.approvalQueueDigest !== expectedDigest) add('VAP_W10_FROZEN_QUEUE_DIGEST_INVALID', String(frozenQueue?.approvalQueueDigest));
+  if (frozenQueue?.approvalAuthority !== 'TL Human Approval Authority' || frozenQueue?.approvalIsPublication !== false || frozenQueue?.productionArticlePackageIsPublication !== false) add('VAP_W10_FROZEN_QUEUE_AUTHORITY_INVALID', 'approval/publication boundary');
+  if (!Array.isArray(frozenQueue?.entries) || frozenQueue.entries.length !== VAP_W10_EXPECTED_NODE_CODES.length) add('VAP_W10_FROZEN_QUEUE_COUNT_INVALID', String(frozenQueue?.entries?.length));
+  const currentByNode = new Map((currentQueue?.entries ?? []).map(item => [item.nodeCode, item]));
+  for (const nodeCode of VAP_W10_EXPECTED_NODE_CODES) {
+    const frozen = frozenQueue?.entries?.find(item => item.nodeCode === nodeCode);
+    const current = currentByNode.get(nodeCode);
+    if (!frozen || !current) { add('VAP_W10_FROZEN_QUEUE_NODE_MISSING', nodeCode); continue; }
+    if (serialize(staticQueueEntry(frozen)) !== serialize(staticQueueEntry(current))) add('VAP_W10_FROZEN_QUEUE_LINEAGE_DRIFT', nodeCode);
+  }
+  return { valid: errors.length === 0, errors };
+}
+
+async function resolveDecisionInputQueue(root, decisionEnvelope) {
+  const currentQueue = await buildVapW10ApprovalQueue(root);
+  const frozenPath = path.join(root, VAP_W10_PATHS.approvalQueue);
+  if (!(await exists(frozenPath))) return { queue: currentQueue, currentQueue, source: 'current_runtime_projection' };
+  const frozenQueue = await readJson(root, VAP_W10_PATHS.approvalQueue);
+  const lineage = validateFrozenApprovalQueueLineage(frozenQueue, currentQueue);
+  if (!lineage.valid) throw fail('VAP_W10_FROZEN_APPROVAL_QUEUE_INVALID', JSON.stringify(lineage.errors));
+  if (decisionEnvelope?.approvalQueueDigest === frozenQueue.approvalQueueDigest) return { queue: frozenQueue, currentQueue, source: 'frozen_pre_decision_queue' };
+  return { queue: currentQueue, currentQueue, source: 'current_runtime_projection' };
+}
+
 export function buildPendingApprovalDecisionEnvelope(queue) {
   return {
     schemaVersion: 'PHI-OS-VAP-W10-HUMAN-APPROVAL-DECISIONS-v1.0.0',
@@ -274,7 +323,7 @@ async function preflightEquivalent(target, text, conflictCode) {
 }
 
 export async function applyVapW10(root, decisionEnvelope, { apply = false, targetRoot = root } = {}) {
-  const queue = await buildVapW10ApprovalQueue(root);
+  const { queue } = await resolveDecisionInputQueue(root, decisionEnvelope);
   const decisionValidation = validateApprovalDecisionEnvelope(decisionEnvelope, queue, { requireAllDecided: true });
   if (!decisionValidation.valid) throw fail('VAP_W10_HUMAN_APPROVAL_DECISIONS_INVALID', JSON.stringify(decisionValidation.errors));
   const [approvalRegistry, publicationRegistry, nodeRegistry, blueprintRegistry] = await Promise.all([
@@ -366,13 +415,31 @@ export async function applyVapW10(root, decisionEnvelope, { apply = false, targe
 }
 
 export async function buildPendingVapW10Projection(root) {
-  const queue = await buildVapW10ApprovalQueue(root);
+  const currentQueue = await buildVapW10ApprovalQueue(root);
   let decisions;
   const decisionsFile = path.join(root, VAP_W10_PATHS.decisions);
+  const frozenQueueFile = path.join(root, VAP_W10_PATHS.approvalQueue);
+  let queue = currentQueue;
+  if (await exists(frozenQueueFile)) {
+    const frozenQueue = await readJson(root, VAP_W10_PATHS.approvalQueue);
+    const lineage = validateFrozenApprovalQueueLineage(frozenQueue, currentQueue);
+    if (!lineage.valid) throw fail('VAP_W10_FROZEN_APPROVAL_QUEUE_INVALID', JSON.stringify(lineage.errors));
+    queue = frozenQueue;
+  }
   if (await exists(decisionsFile)) decisions = await readJson(root, VAP_W10_PATHS.decisions); else decisions = buildPendingApprovalDecisionEnvelope(queue);
   const validation = validateApprovalDecisionEnvelope(decisions, queue, { requireAllDecided: false });
   if (!validation.valid) throw fail('VAP_W10_PENDING_DECISIONS_INVALID', JSON.stringify(validation.errors));
   const decided = decisions.entries.filter(item => item.decisionState === 'human_decided');
+  const fullyDecided = decided.length === VAP_W10_EXPECTED_NODE_CODES.length;
+  if (fullyDecided) {
+    const approvalPackagesExist = (await Promise.all(VAP_W10_EXPECTED_NODE_CODES.map(code => exists(path.join(root, approvalPath(code)))))).every(Boolean);
+    const productionPackagesExist = (await Promise.all(VAP_W10_EXPECTED_NODE_CODES.map(code => exists(path.join(root, packageRoot(code), 'production-article-package.v1.json'))))).every(Boolean);
+    if (approvalPackagesExist && productionPackagesExist && await exists(path.join(root, VAP_W10_PATHS.packageManifest)) && await exists(path.join(root, VAP_W10_PATHS.activation))) {
+      const packageManifest = await readJson(root, VAP_W10_PATHS.packageManifest);
+      const activation = await readJson(root, VAP_W10_PATHS.activation);
+      return { queue, decisions, packageManifest, activation };
+    }
+  }
   const packageManifest = {
     schemaVersion: 'PHI-OS-VAP-W10-PRODUCTION-ARTICLE-PACKAGE-MANIFEST-v1.0.0', work: 'VAP-W10', batchCode: VAP_W10_BATCH_CODE, locale: VAP_W10_LOCALE,
     status: decided.length ? 'HUMAN_APPROVAL_DECISIONS_PRESENT_APPLY_REQUIRED' : 'AWAITING_EXPLICIT_HUMAN_APPROVAL',
@@ -401,7 +468,7 @@ export async function buildPendingVapW10Projection(root) {
 export async function writePendingVapW10Projection(root, { apply = false } = {}) {
   const built = await buildPendingVapW10Projection(root);
   if (!apply) return { mode: 'dry-run', applied: false, ...built };
-  await atomicWrite(path.join(root, VAP_W10_PATHS.approvalQueue), serialize(built.queue));
+  if (!(await exists(path.join(root, VAP_W10_PATHS.approvalQueue)))) await atomicWrite(path.join(root, VAP_W10_PATHS.approvalQueue), serialize(built.queue));
   if (!(await exists(path.join(root, VAP_W10_PATHS.decisions)))) await atomicWrite(path.join(root, VAP_W10_PATHS.decisions), serialize(built.decisions));
   await atomicWrite(path.join(root, VAP_W10_PATHS.packageManifest), serialize(built.packageManifest));
   await atomicWrite(path.join(root, VAP_W10_PATHS.activation), serialize(built.activation));

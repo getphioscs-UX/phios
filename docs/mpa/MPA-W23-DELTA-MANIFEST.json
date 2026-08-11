@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-DELTA-MANIFEST-v1.0.0",
+  "work": "MPA-W23",
+  "baselineCommit": "57bccb6d6f9fc6aca054b4261e854f04758ec0e3",
+  "title": "BZR Activation successor evidence",
+  "decision": "READY_FOR_MPA_W26_ELIGIBILITY_DECISION",
+  "changedFileCount": 20,
+  "changedFiles": [
+    "content/professional/method-production-activation/acceptance/mpa-w23-bzr-activation-acceptance-v1.json",
+    "content/professional/method-production-activation/audits/mpa-w23-bzr-fixture-reconciliation-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-bzr-activation-v1.json",
+    "content/professional/method-production-activation/contracts/mpa-bzr-boundary-tolerance-freeze-v1.json",
+    "content/professional/method-production-activation/fixtures/mpa-w23-bzr-activation-fixture-corpus-v1.1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-activation-readiness-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-cross-implementation-evidence-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-luck-start-exact-evidence-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-regression-freeze-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-sexagenary-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-solar-term-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-timezone-authority-resolution-v1.json",
+    "content/professional/method-production-activation/registries/mpa-bzr-true-solar-time-reference-v1.json",
+    "content/professional/method-production-activation/schemas/mpa-bzr-activation-readiness-v1.schema.json",
+    "docs/mpa/MPA-W23-DELTA-MANIFEST.json",
+    "docs/runtime/MPA-W23-BZR-ACTIVATION.md",
+    "functions/method-production-activation/bzr-activation-runtime.js",
+    "package.json",
+    "scripts/check-mpa-w23-bzr-activation.mjs",
+    "scripts/lib/method-production-activation/mpa-bzr-activation-v1.mjs"
+  ],
+  "validation": {
+    "npmRunCheckMpaW23": "PASS",
+    "npmRunCheckMpa": "PASS_W0_W23",
+    "bzrW0W6": "PASS_EXECUTED_BY_W23",
+    "mrW3W6": "PASS",
+    "npmRunCheck": "NOT_COMPLETED_ARCHIVE_HAS_NO_GIT_METADATA",
+    "npmRunCheckFailureBoundary": "PDS-W0 git rev-parse requires .git; not an MPA-W23 assertion failure"
+  },
+  "criticalReconciliation": {
+    "historicalW12Rewritten": false,
+    "historicalW15Rewritten": false,
+    "historicalTrueSolarCorrectionMinutes": -12.5,
+    "successorTrueSolarCorrectionMinutes": -61.68234507085435,
+    "pillarOutcomeChanged": false
+  },
+  "externalEvidence": {
+    "ianaTzdb": "2026c successor binding reused from W22 authority evidence",
+    "astronomyEngine": "2.1.19 immutable release identity reused for BZR solar-term engine",
+    "hko": "24 solar terms longitude definition; exact-time methodology based on HM Nautical Almanac Office and US Naval Observatory",
+    "noaa": "Meeus-based equation-of-time calculation used as independent validation reference only",
+    "lunarJavascript": "1.7.7 immutable secondary independent implementation evidence only, not Production authority",
+    "swissEphemeris": "2.10.03 Moshier local validation reference only; not shipped as repo dependency"
+  },
+  "authorityBoundary": {
+    "productionEligible": false,
+    "productionExecutionAllowed": false,
+    "professionalEligible": false,
+    "nextGlobalGate": "MPA-W26",
+    "nextExecutionGate": "MPA-W27",
+    "postcheckChanged": false
+  }
+}

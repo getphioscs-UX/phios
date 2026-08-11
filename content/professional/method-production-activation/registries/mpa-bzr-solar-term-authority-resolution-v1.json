@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-SOLAR-TERM-AUTHORITY-RESOLUTION-v1.0.0",
+  "work": "MPA-W23",
+  "methodCode": "BAZI",
+  "authorityBinding": {
+    "engineCode": "ASTRONOMY_ENGINE_JS",
+    "version": "2.1.19",
+    "releaseCommit": "61dc07020aaa6885d2c7f688a4d82beaf6edb9ef",
+    "sourceArtifact": {
+      "path": "source/js/astronomy.min.js",
+      "digestAlgorithm": "GIT_BLOB_SHA1",
+      "digest": "b16e54660ee65df2947079b383d90bac06ee82bf"
+    },
+    "license": {
+      "code": "MIT",
+      "path": "LICENSE",
+      "digestAlgorithm": "GIT_BLOB_SHA1",
+      "digest": "9dd5faf8b0dad1d25ce768b8c0792c8185b0e7ae"
+    },
+    "solarTermDefinition": {
+      "authorityCode": "HKO_24_SOLAR_TERMS_LONGITUDE_DEFINITION",
+      "jieLongitudes": [
+        285,
+        315,
+        345,
+        15,
+        45,
+        75,
+        105,
+        135,
+        165,
+        195,
+        225,
+        255
+      ],
+      "definition": "12 BZR Jie are exact apparent/ecliptic solar-longitude boundaries at 30-degree spacing beginning with Li Chun 315° under PHI_OS_BAZI_POLICY_V1.",
+      "hkoReference": "https://www.hko.gov.hk/en/gts/time/24solarterms.htm",
+      "hkoExactTimeMethodReference": "https://www.hko.gov.hk/en/gts/astronomy/Solar_Term.htm"
+    }
+  },
+  "authorityBindingDigest": "2dc4235d5c7689fc6a9a26b062972a03602dea99a967ce4a2e6a15d619b48084",
+  "referenceEvidence": {
+    "independentNumericEngine": {
+      "name": "Swiss Ephemeris / Moshier",
+      "version": "2.10.03",
+      "role": "VALIDATION_ONLY_NOT_RUNTIME_AUTHORITY"
+    },
+    "year": 1989,
+    "jieBoundaries": [
+      {
+        "jieCode": "XIAO_HAN",
+        "solarLongitudeDegrees": 285,
+        "referenceUtcIso": "1989-01-05T08:45:57.000Z"
+      },
+      {
+        "jieCode": "LI_CHUN",
+        "solarLongitudeDegrees": 315,
+        "referenceUtcIso": "1989-02-03T20:27:10.000Z"
+      },
+      {
+        "jieCode": "JING_ZHE",
+        "solarLongitudeDegrees": 345,
+        "referenceUtcIso": "1989-03-05T14:34:09.000Z"
+      },
+      {
+        "jieCode": "QING_MING",
+        "solarLongitudeDegrees": 15,
+        "referenceUtcIso": "1989-04-04T19:29:54.000Z"
+      },
+      {
+        "jieCode": "LI_XIA",
+        "solarLongitudeDegrees": 45,
+        "referenceUtcIso": "1989-05-05T12:53:55.000Z"
+      },
+      {
+        "jieCode": "MANG_ZHONG",
+        "solarLongitudeDegrees": 75,
+        "referenceUtcIso": "1989-06-05T17:05:13.000Z"
+      },
+      {
+        "jieCode": "XIAO_SHU",
+        "solarLongitudeDegrees": 105,
+        "referenceUtcIso": "1989-07-07T03:19:26.000Z"
+      },
+      {
+        "jieCode": "LI_QIU",
+        "solarLongitudeDegrees": 135,
+        "referenceUtcIso": "1989-08-07T13:03:53.000Z"
+      },
+      {
+        "jieCode": "BAI_LU",
+        "solarLongitudeDegrees": 165,
+        "referenceUtcIso": "1989-09-07T15:53:54.000Z"
+      },
+      {
+        "jieCode": "HAN_LU",
+        "solarLongitudeDegrees": 195,
+        "referenceUtcIso": "1989-10-08T07:27:19.000Z"
+      },
+      {
+        "jieCode": "LI_DONG",
+        "solarLongitudeDegrees": 225,
+        "referenceUtcIso": "1989-11-07T10:33:32.000Z"
+      },
+      {
+        "jieCode": "DA_XUE",
+        "solarLongitudeDegrees": 255,
+        "referenceUtcIso": "1989-12-07T03:20:57.000Z"
+      }
+    ],
+    "hkoRole": "TRUSTED_DEFINITION_AND_ASTRONOMICAL_REFERENCE_METHOD",
+    "independentEngineRole": "NUMERIC_SMOKE_REFERENCE"
+  },
+  "resolution": {
+    "historicalSyntheticMonthlyDay4FixtureAcceptedForProduction": false,
+    "solarTermReferenceFrozen": true,
+    "productionRuntimeEngineBindingRequiredAt": "MPA-W27"
+  },
+  "effects": {
+    "historicalBzrW1Rewritten": false,
+    "productionEligibilityCreated": false
+  }
+}

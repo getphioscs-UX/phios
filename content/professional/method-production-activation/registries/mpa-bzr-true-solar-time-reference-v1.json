@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W23-BZR-TRUE-SOLAR-TIME-REFERENCE-v1.0.0",
+  "work": "MPA-W23",
+  "methodCode": "BAZI",
+  "algorithmCode": "PHI_OS_TRUE_SOLAR_TIME",
+  "algorithmAuthorityOwner": "BZR_METHOD_GOVERNANCE_NOT_MPA",
+  "referenceImplementation": {
+    "formulaFamily": "NOAA_MEEUS_EQUATION_OF_TIME_REFERENCE",
+    "sourceRole": "INDEPENDENT_VALIDATION_REFERENCE_ONLY",
+    "source": "https://gml.noaa.gov/grad/solcalc/calcdetails.html",
+    "formula": {
+      "standardMeridianDegrees": "timezoneOffsetMinutes / 4",
+      "longitudeCorrectionMinutes": "4 * (longitudeDegreesEast - standardMeridianDegreesEast)",
+      "totalCorrectionMinutes": "longitudeCorrectionMinutes + equationOfTimeMinutes",
+      "trueSolarClock": "civilLocalClock + totalCorrectionMinutes"
+    },
+    "physicalInstantInvariant": true
+  },
+  "fixture": {
+    "civil": {
+      "localDate": "1989-11-15",
+      "localTime": "22:50:00",
+      "timezoneId": "Asia/Kuala_Lumpur",
+      "utcOffsetMinutes": 480,
+      "physicalInstantUtcIso": "1989-11-15T14:50:00.000Z"
+    },
+    "longitudeDegreesEast": 100.7333,
+    "standardMeridianDegreesEast": 120,
+    "noaaMeeusEquationOfTimeMinutes": 15.384454929145647,
+    "longitudeCorrectionMinutes": -77.0668,
+    "totalCorrectionMinutes": -61.68234507085435,
+    "trueSolarLocalDate": "1989-11-15",
+    "trueSolarLocalTime": "21:48:19.059296",
+    "independentSwissEphemeris": {
+      "version": "2.10.03",
+      "equationOfTimeMinutes": 15.365152254348915,
+      "totalCorrectionMinutes": -61.70164774565109,
+      "differenceSeconds": 1.1581604878039187,
+      "withinFrozenTolerance": true
+    }
+  },
+  "semanticCorrection": {
+    "historicalW12CorrectionMinutes": -12.5,
+    "historicalW12AcceptedForProduction": false,
+    "trueSolarClockEncodedAsShiftedAbsoluteInstantForbidden": true,
+    "successorRepresentation": {
+      "physicalInstantUtcIso": "unchanged physical instant",
+      "trueSolarLocalDate": "derived clock date",
+      "trueSolarLocalTime": "21:48:19.059296"
+    }
+  },
+  "effects": {
+    "createsAlgorithmAuthority": false,
+    "historicalW12Rewritten": false,
+    "productionEligibilityCreated": false
+  }
+}

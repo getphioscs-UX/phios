@@ -1,0 +1,222 @@
+{
+  "fixtureCode": "PHI-OS-PR-E4-E6-PRODUCTION-SLICE-v1",
+  "syntheticOnly": true,
+  "capability": {
+    "capabilityDecision": {
+      "capabilityAuthority": "runtime/capability",
+      "professionalId": "PRO-001",
+      "state": "ACTIVE",
+      "scope": [
+        "runtime_review"
+      ],
+      "capabilityCodes": [
+        "CAP-RUNTIME-REVIEW"
+      ]
+    },
+    "credentialRequired": true,
+    "credentialDecision": {
+      "credentialAuthority": "runtime/credential",
+      "professionalId": "PRO-001",
+      "state": "ACTIVE",
+      "credentialCodes": [
+        "CRED-RUNTIME-REVIEW"
+      ]
+    },
+    "alrCapabilityReferences": [
+      "ALR-CAP-LEARNING-ONLY"
+    ]
+  },
+  "materialization": {
+    "humanProfessionalId": "PRO-001",
+    "observationReference": "PR-OBS-PROD-001",
+    "observation": "Synthetic human-authored professional observation for governed production acceptance.",
+    "observationCreatedAt": "2026-08-11T10:00:00Z",
+    "judgmentReference": "PR-JUDGMENT-PROD-001",
+    "judgment": "Synthetic human-attributable professional judgment constrained to the authorized runtime-review scope.",
+    "scope": [
+      "runtime_review"
+    ],
+    "judgmentLimitations": [
+      "SYNTHETIC_FIXTURE_ONLY"
+    ],
+    "judgmentCreatedAt": "2026-08-11T10:10:00Z",
+    "recommendationReference": "PR-RECOMMENDATION-PROD-001",
+    "recommendation": "Synthetic professional recommendation bound to the judgment, evidence, competence and stated limitation.",
+    "recommendationLimitations": [
+      "SYNTHETIC_FIXTURE_ONLY"
+    ],
+    "evidenceReferences": [
+      "EVIDENCE-001"
+    ],
+    "alternativeReferences": [
+      "PR-ALTERNATIVE-001"
+    ],
+    "recommendationCreatedAt": "2026-08-11T10:20:00Z",
+    "decisionPackageReference": "PR-DECISION-PROD-001",
+    "decisionVersion": "1.0.0",
+    "unknown": [
+      {
+        "reference": "READOUT-UNKNOWN-001",
+        "state": "EXPLICIT"
+      }
+    ],
+    "alternative": [
+      {
+        "reference": "PR-ALTERNATIVE-001",
+        "state": "AVAILABLE"
+      }
+    ],
+    "boundary": [
+      "PROFESSIONAL_SCOPE_ONLY",
+      "SYNTHETIC_FIXTURE_ONLY"
+    ],
+    "decisionCreatedAt": "2026-08-11T10:30:00Z"
+  },
+  "review": {
+    "role": "SECOND_PROFESSIONAL",
+    "reviewerProfessionalId": "PRO-002",
+    "outcome": "PASS_WITH_LIMITATIONS",
+    "reviewReference": "PR-REVIEW-PROD-001",
+    "limitations": [
+      "SYNTHETIC_FIXTURE_ONLY"
+    ],
+    "reviewedAt": "2026-08-11T11:00:00Z"
+  },
+  "approval": {
+    "approverProfessionalId": "PRO-003",
+    "approvalReference": "PR-APPROVAL-PROD-001",
+    "approvedAt": "2026-08-11T11:15:00Z"
+  },
+  "signature": {
+    "signerProfessionalId": "PRO-001",
+    "signatureReference": "PR-SIGNATURE-PROD-001",
+    "signedAt": "2026-08-11T11:30:00Z"
+  },
+  "release": {
+    "releasedBy": "PRO-001",
+    "releaseReference": "PR-RELEASE-PROD-001",
+    "releasedAt": "2026-08-11T11:45:00Z"
+  },
+  "workspace": {
+    "workspaceReference": "WORKSPACE-001",
+    "expectedWorkspaceReference": "WORKSPACE-001",
+    "assignmentReference": "ASSIGNMENT-001",
+    "expectedAssignmentReference": "ASSIGNMENT-001",
+    "assignmentState": "active",
+    "consentValidated": true,
+    "workspaceStatus": "in_professional_review",
+    "persistenceStatus": "contract_only",
+    "deliverableReference": "PWS-DELIVERABLE-001",
+    "deliverableProvisionedExternally": true
+  },
+  "rr": {
+    "caseReference": "PR-CASE-PROD-001",
+    "customerReference": "CUSTOMER-001",
+    "serviceReference": "SERVICE-PR-001",
+    "signatureRequired": true,
+    "report": {
+      "reportCode": "RR-PR-PROD-001",
+      "case": "PR-CASE-PROD-001",
+      "customer": "CUSTOMER-001",
+      "locale": "en",
+      "consentReferences": [
+        "CONSENT-001"
+      ],
+      "serviceContract": {
+        "reference": "SERVICE-CONTRACT-PR-PROD-001",
+        "requiredSectionTypes": [
+          "CONTEXT",
+          "REALITY",
+          "EVIDENCE",
+          "READOUT",
+          "PROFESSIONAL_OBSERVATION",
+          "PROFESSIONAL_JUDGMENT",
+          "RECOMMENDATION",
+          "BOUNDARY"
+        ],
+        "optionalSectionTypes": [
+          "UNKNOWN",
+          "FOLLOW_UP"
+        ],
+        "professionalReviewRequired": true,
+        "signatureRequired": true,
+        "requiresConsent": true,
+        "allowedLocales": [
+          "en"
+        ],
+        "allowedChannels": [
+          "HTML",
+          "PDF",
+          "WORKSPACE"
+        ]
+      },
+      "staticSections": [
+        {
+          "sectionCode": "CONTEXT",
+          "sourceReferences": [
+            {
+              "reference": "PR-CASE-PROD-001",
+              "kind": "EXTERNAL",
+              "externalKind": "CASE_REFERENCE",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "REALITY",
+          "sourceReferences": [
+            {
+              "reference": "REALITY-STATE-001",
+              "kind": "RDG_DATA",
+              "dataType": "RUNTIME_STATE_RECORD",
+              "authority": "RMO",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "EVIDENCE",
+          "sourceReferences": [
+            {
+              "reference": "EVIDENCE-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_EVIDENCE_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "READOUT",
+          "sourceReferences": [
+            {
+              "reference": "READOUT-001",
+              "kind": "RDG_DATA",
+              "dataType": "REALITY_READOUT_RECORD",
+              "authority": "RRE",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        },
+        {
+          "sectionCode": "BOUNDARY",
+          "sourceReferences": [
+            {
+              "reference": "GOVERNANCE-PR-PROD-001",
+              "kind": "RDG_DATA",
+              "dataType": "GOVERNANCE_RECORD",
+              "authority": "RG",
+              "state": "VALID",
+              "availability": "AVAILABLE"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
