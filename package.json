@@ -655,9 +655,7 @@
     "check:vap-w4r": "node scripts/check-vap-w4r-article-execution-eligibility-reconciliation.mjs",
     "build:vap-w5r": "node scripts/build-vap-w5r-scalable-article-production-portfolio.mjs",
     "check:vap-w5r": "node scripts/check-vap-w5r-scalable-article-production-portfolio.mjs",
-    "check:vap-b": "npm run check:vap-w4r && npm run check:vap-w5r && npm run check:vap-w6 && npm run check:vap-w6a && npm run check:vap-w7 && npm run check:vap-w7s && npm run check:vap-w8 && npm run check:vap-w9 && npm run check:vap-w10",
-    "check:wpr-w0": "node scripts/check-wpr-w0-production-baseline.mjs",
-    "check:wpr-w1": "node scripts/check-wpr-w1-authority-boundary.mjs",
+    "check:vap-b": "npm run check:vap-w4r && npm run check:vap-w5r && npm run check:vap-w6 && npm run check:vap-w6a && npm run check:vap-w7 && npm run check:vap-w7s && npm run check:vap-w8 && npm run check:vap-w9 && npm run check:vap-w10 && npm run check:vap-w11",    "check:wpr-w1": "node scripts/check-wpr-w1-authority-boundary.mjs",
     "check:wpr-w2": "node scripts/check-wpr-w2-canonical-web-production.mjs",
     "check:wpr-w3": "node scripts/check-wpr-w3-surface-registry.mjs",
     "check:wpr-w4": "node scripts/check-wpr-w4-route-registry.mjs",
@@ -818,7 +816,10 @@
     "check:pr-decision-integration": "npm run check:pr-e4-e6",
     "check:pr-production-e4-e6": "npm run check:pr-production && npm run check:pr-decision-integration",
     "check:mpa-w25": "node scripts/check-mpa-w25-future-method-holding-registry.mjs",
-    "check:mpa-future-holding": "npm run check:mpa-w25"
+    "check:mpa-future-holding": "npm run check:mpa-w25",
+    "build:vap-w11": "node scripts/build-vap-w11-publication-handoff-decision.mjs",
+    "vap:w11:apply": "node scripts/apply-vap-w11-publication-handoff-decision.mjs --apply",
+    "check:vap-w11": "node scripts/check-vap-w11-publication-handoff-decision.mjs"
   },
   "type": "module"
 }
