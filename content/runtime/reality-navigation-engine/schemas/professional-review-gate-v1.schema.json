@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Professional Review Gate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "gateCode",
+    "gateVersion",
+    "objectType",
+    "dataType",
+    "riskContextReference",
+    "routeSetReference",
+    "professionalReviewTriggers",
+    "professionalReviewState",
+    "professionalHandoffReference",
+    "pwsRequiredGateCount",
+    "authorityBoundary",
+    "professionalSelectionCreated",
+    "professionalResponsibilityCreated",
+    "assignmentCreated",
+    "professionalJudgmentCreated",
+    "routeSelectionCreated",
+    "navigationExecutionCreated",
+    "continuationWithoutRequiredReviewAllowed",
+    "productionExecutionActivated",
+    "gateDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "typedRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest",
+        "dataType",
+        "authorityRuntime"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dataType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorityRuntime": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-PROFESSIONAL-REVIEW-GATE-v1.0.0"
+    },
+    "gateCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gateVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "PROFESSIONAL_REVIEW_GATE"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "riskContextReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "routeSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "professionalReviewTriggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "riskReference",
+          "authorityReference",
+          "triggerClass"
+        ],
+        "properties": {
+          "riskReference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authorityReference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "triggerClass": {
+            "const": "HIGH_RISK_NAVIGATION"
+          }
+        }
+      }
+    },
+    "professionalReviewState": {
+      "enum": [
+        "REQUIRED_BY_GOVERNED_TRIGGER",
+        "NOT_REQUIRED_BY_GOVERNED_TRIGGER"
+      ]
+    },
+    "professionalHandoffReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pwsRequiredGateCount": {
+      "const": 8
+    },
+    "authorityBoundary": {
+      "type": "object"
+    },
+    "professionalSelectionCreated": {
+      "const": false
+    },
+    "professionalResponsibilityCreated": {
+      "const": false
+    },
+    "assignmentCreated": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "routeSelectionCreated": {
+      "const": false
+    },
+    "navigationExecutionCreated": {
+      "const": false
+    },
+    "productionExecutionActivated": {
+      "const": false
+    },
+    "continuationWithoutRequiredReviewAllowed": {
+      "type": "boolean"
+    },
+    "gateDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

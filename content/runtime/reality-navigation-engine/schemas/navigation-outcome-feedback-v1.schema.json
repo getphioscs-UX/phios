@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE Navigation Outcome Feedback v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "feedbackCode",
+    "feedbackVersion",
+    "objectType",
+    "dataType",
+    "routeSetReference",
+    "actionReference",
+    "outcomeReference",
+    "realityDiffReference",
+    "unknownReferences",
+    "governanceReferences",
+    "feedbackState",
+    "nextNavigationCapability",
+    "authorityBoundary",
+    "causalityClaimed",
+    "effectivenessDetermined",
+    "targetChangedAutomatically",
+    "optionSelectedAutomatically",
+    "routeSelectedAutomatically",
+    "actionExecutedByRne",
+    "outcomeCreatedByRne",
+    "realityDiffCreatedByRne",
+    "productionExecutionActivated",
+    "feedbackDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "typedRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest",
+        "dataType",
+        "authorityRuntime"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dataType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorityRuntime": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-NAVIGATION-OUTCOME-FEEDBACK-v1.0.0"
+    },
+    "feedbackCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "feedbackVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "NAVIGATION_OUTCOME_FEEDBACK"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "routeSetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "actionReference": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/typedRef"
+        },
+        {
+          "properties": {
+            "dataType": {
+              "const": "RUNTIME_STATE_RECORD"
+            },
+            "authorityRuntime": {
+              "const": "RMO"
+            }
+          }
+        }
+      ]
+    },
+    "outcomeReference": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/typedRef"
+        },
+        {
+          "properties": {
+            "dataType": {
+              "const": "RUNTIME_STATE_RECORD"
+            },
+            "authorityRuntime": {
+              "const": "RMO"
+            }
+          }
+        }
+      ]
+    },
+    "realityDiffReference": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/typedRef"
+        },
+        {
+          "properties": {
+            "dataType": {
+              "const": "RUNTIME_STATE_RECORD"
+            },
+            "authorityRuntime": {
+              "const": "RMO"
+            }
+          }
+        }
+      ]
+    },
+    "unknownReferences": {
+      "$ref": "#/$defs/strarr"
+    },
+    "governanceReferences": {
+      "$ref": "#/$defs/strarr"
+    },
+    "feedbackState": {
+      "const": "REFERENCES_BOUND_FOR_REPOSITIONING"
+    },
+    "nextNavigationCapability": {
+      "const": "CURRENT_POSITION_REASSESSMENT_AVAILABLE"
+    },
+    "authorityBoundary": {
+      "type": "object"
+    },
+    "causalityClaimed": {
+      "const": false
+    },
+    "effectivenessDetermined": {
+      "const": false
+    },
+    "targetChangedAutomatically": {
+      "const": false
+    },
+    "optionSelectedAutomatically": {
+      "const": false
+    },
+    "routeSelectedAutomatically": {
+      "const": false
+    },
+    "actionExecutedByRne": {
+      "const": false
+    },
+    "outcomeCreatedByRne": {
+      "const": false
+    },
+    "realityDiffCreatedByRne": {
+      "const": false
+    },
+    "productionExecutionActivated": {
+      "const": false
+    },
+    "feedbackDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

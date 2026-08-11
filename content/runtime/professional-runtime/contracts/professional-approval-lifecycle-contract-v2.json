@@ -1,0 +1,36 @@
+{
+  "contractCode": "PHI-OS-PR-W8-APPROVAL-LIFECYCLE-v2",
+  "contractVersion": "2.0.0",
+  "runtimeCode": "PR",
+  "work": "PR-W8",
+  "status": "canonical",
+  "states": [
+    "DRAFT",
+    "REVIEWED",
+    "APPROVED",
+    "SIGNED",
+    "RELEASED"
+  ],
+  "transitions": {
+    "DRAFT": [
+      "REVIEWED"
+    ],
+    "REVIEWED": [
+      "APPROVED"
+    ],
+    "APPROVED": [
+      "SIGNED"
+    ],
+    "SIGNED": [
+      "RELEASED"
+    ],
+    "RELEASED": []
+  },
+  "rules": {
+    "stateSkippingForbidden": true,
+    "reviewRecordRequiredForReviewed": true,
+    "approvalAttributable": true,
+    "signatureAttributable": true,
+    "releaseRequiresSigned": true
+  }
+}

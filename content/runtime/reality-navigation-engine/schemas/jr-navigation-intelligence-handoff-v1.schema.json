@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS RNE JR Navigation Intelligence Handoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "handoffCode",
+    "handoffVersion",
+    "objectType",
+    "dataType",
+    "journeyReference",
+    "currentPositionReference",
+    "targetReference",
+    "canonicalReadoutReference",
+    "responseReferences",
+    "dataPurpose",
+    "consentReferences",
+    "governanceReferences",
+    "integrationState",
+    "authorityBoundary",
+    "journeyStageMutationCreated",
+    "journeyWorkflowImplementedByRne",
+    "navigationReasoningImplementedByJr",
+    "professionalJudgmentCreated",
+    "executionCreated",
+    "rawReadoutCopied",
+    "productionExecutionActivated",
+    "handoffDigest"
+  ],
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "typedRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest",
+        "dataType",
+        "authorityRuntime"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "dataType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorityRuntime": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "strarr": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 240
+      }
+    }
+  },
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-RNE-JR-NAVIGATION-INTELLIGENCE-HANDOFF-v1.0.0"
+    },
+    "handoffCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "handoffVersion": {
+      "const": "1.0.0"
+    },
+    "objectType": {
+      "const": "JR_NAVIGATION_INTELLIGENCE_HANDOFF"
+    },
+    "dataType": {
+      "const": "NAVIGATION_RECORD"
+    },
+    "journeyReference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "currentPositionReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "targetReference": {
+      "$ref": "#/$defs/ref"
+    },
+    "canonicalReadoutReference": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/typedRef"
+        },
+        {
+          "properties": {
+            "dataType": {
+              "const": "REALITY_READOUT_RECORD"
+            },
+            "authorityRuntime": {
+              "const": "RRE"
+            }
+          }
+        }
+      ]
+    },
+    "responseReferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "navigationOptionReferences",
+        "tradeoffReferences",
+        "riskReferences",
+        "reversibilityReferences",
+        "scenarioReferences",
+        "routeCandidateReferences"
+      ],
+      "properties": {
+        "navigationOptionReferences": {
+          "$ref": "#/$defs/strarr"
+        },
+        "tradeoffReferences": {
+          "$ref": "#/$defs/strarr"
+        },
+        "riskReferences": {
+          "$ref": "#/$defs/strarr"
+        },
+        "reversibilityReferences": {
+          "$ref": "#/$defs/strarr"
+        },
+        "scenarioReferences": {
+          "$ref": "#/$defs/strarr"
+        },
+        "routeCandidateReferences": {
+          "$ref": "#/$defs/strarr"
+        }
+      }
+    },
+    "dataPurpose": {
+      "const": "SERVICE_DELIVERY"
+    },
+    "consentReferences": {
+      "$ref": "#/$defs/strarr"
+    },
+    "governanceReferences": {
+      "$ref": "#/$defs/strarr"
+    },
+    "integrationState": {
+      "const": "REFERENCE_ONLY_ACTIVE"
+    },
+    "authorityBoundary": {
+      "type": "object"
+    },
+    "journeyStageMutationCreated": {
+      "const": false
+    },
+    "journeyWorkflowImplementedByRne": {
+      "const": false
+    },
+    "navigationReasoningImplementedByJr": {
+      "const": false
+    },
+    "professionalJudgmentCreated": {
+      "const": false
+    },
+    "executionCreated": {
+      "const": false
+    },
+    "rawReadoutCopied": {
+      "const": false
+    },
+    "productionExecutionActivated": {
+      "const": false
+    },
+    "handoffDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

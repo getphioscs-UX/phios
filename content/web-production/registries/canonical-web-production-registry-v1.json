@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W2",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "limited_production_wpr_e_w20_reality_journey",
+  "status": "limited_production_wpr_e_w21_personal_runtime_setup",
   "schemaReference": "content/web-production/schemas/canonical-web-production-v1.schema.json",
   "productionRecords": [
     {
@@ -1477,6 +1477,130 @@
         "baselineCommit": "1ebd26901fb63db0753a8fc737ea6423155cf8b0",
         "jrFreezeReference": "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json",
         "legacyCompatibilityReference": "content/runtime/journey-runtime/registries/journey-stage-compatibility-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PERSONAL-RUNTIME-SETUP-en",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+      "routeCode": "PERSONAL_RUNTIME_SETUP",
+      "locale": "en",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/professional/method-production-activation/contracts/mpa-birth-initialization-data-runtime-v1.json",
+        "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json",
+        "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+        "content/web-production/registries/wpr-personal-runtime-projection-registry-v1.json",
+        "content/web-production/registries/wpr-public-vocabulary-registry-v2.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "MPA",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/personal-runtime-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PERSONAL_RUNTIME_INPUT_READINESS",
+        "METHOD_AVAILABILITY_ORIENTATION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W21-PERSONAL-RUNTIME-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "EPHEMERAL_INPUT_READINESS_NO_METHOD_EXECUTION",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true,
+        "methodExecutionAllowed": false
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_EPHEMERAL_INPUT_READINESS",
+        "privateStateAllowed": "DOM_MEMORY_ONLY",
+        "serverCustomerDataAllowed": false,
+        "localStorageAllowed": false,
+        "sessionStorageAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W21",
+        "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+        "mpaReadinessReference": "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+        "cprProductionRecordReference": null,
+        "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
+      },
+      "productionState": "LIMITED_PRODUCTION"
+    },
+    {
+      "productionCode": "WPR-PERSONAL-RUNTIME-SETUP-zh_Hans",
+      "productionVersion": "1.0.0",
+      "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+      "routeCode": "PERSONAL_RUNTIME_SETUP",
+      "locale": "zh-Hans",
+      "audience": "PUBLIC",
+      "sourceReferences": [
+        "content/professional/method-production-activation/contracts/mpa-birth-initialization-data-runtime-v1.json",
+        "content/professional/method-production-activation/contracts/mpa-consent-data-purpose-v1.json",
+        "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
+        "content/web-production/registries/wpr-personal-runtime-projection-registry-v1.json",
+        "content/web-production/registries/wpr-public-vocabulary-registry-v2.json"
+      ],
+      "runtimeReferences": [
+        "WPR",
+        "MPA",
+        "RDG"
+      ],
+      "presentationReferences": [
+        "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+        "content/web-production/composition/customer/personal-runtime-composition-v1.json"
+      ],
+      "assetReferences": [],
+      "accessMode": "PUBLIC",
+      "dataPurpose": [
+        "PERSONAL_RUNTIME_INPUT_READINESS",
+        "METHOD_AVAILABILITY_ORIENTATION"
+      ],
+      "compositionCode": "PHI-OS-WPR-W21-PERSONAL-RUNTIME-COMPOSITION-v1",
+      "renderPolicy": {
+        "mode": "EPHEMERAL_INPUT_READINESS_NO_METHOD_EXECUTION",
+        "htmlIsProjectionOnly": true,
+        "canonicalCustomerWorkspaceClaimed": false,
+        "failClosedOnMissingCanonicalSource": true,
+        "methodExecutionAllowed": false
+      },
+      "hydrationPolicy": {
+        "mode": "BROWSER_EPHEMERAL_INPUT_READINESS",
+        "privateStateAllowed": "DOM_MEMORY_ONLY",
+        "serverCustomerDataAllowed": false,
+        "localStorageAllowed": false,
+        "sessionStorageAllowed": false
+      },
+      "cachePolicy": {
+        "class": "PRIVATE_NO_STORE",
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "seoPolicy": {
+        "indexable": false,
+        "privateDataAllowed": "DOM_MEMORY_ONLY"
+      },
+      "lineage": {
+        "wprPhase": "WPR-E",
+        "wprWork": "WPR-W21",
+        "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+        "mpaReadinessReference": "content/professional/method-production-activation/registries/mpa-method-activation-readiness-registry-v1.json",
         "cprProductionRecordReference": null,
         "cprBindingState": "STATIC_CUSTOMER_SHELL_TRANSITIONAL"
       },

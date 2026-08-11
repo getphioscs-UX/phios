@@ -1,0 +1,75 @@
+{
+  "contractCode": "PHI-OS-WPR-W21-PERSONAL-RUNTIME-SURFACE-v1",
+  "contractVersion": "1.0.0",
+  "work": "WPR-W21",
+  "phase": "WPR-E_PERSONAL_RUNTIME_SURFACE",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "status": "ACTIVE_LIMITED_PRODUCTION_INPUT_READINESS_NO_METHOD_EXECUTION",
+  "purpose": "Project governed birth-input readiness and method activation status without creating Method execution, canonical consent, canonical customer persistence, interpretation, or professional authority.",
+  "canonicalInputs": {
+    "birthInitializationContract": "content/professional/method-production-activation/contracts/mpa-birth-initialization-data-runtime-v1.json",
+    "fields": [
+      "BirthDate",
+      "BirthTime",
+      "BirthPlace",
+      "Timezone",
+      "Coordinates",
+      "InputPrecision",
+      "Source",
+      "CustomerConfirmation"
+    ],
+    "precisionValues": [
+      "exact",
+      "approximate",
+      "unknown"
+    ],
+    "unknownBirthTimeDefaultForbidden": true,
+    "browserTimezoneDefaultForbidden": true,
+    "placeCentroidDefaultForbidden": true
+  },
+  "dataBoundary": {
+    "category": "BIRTH_DATA",
+    "sensitivity": "SENSITIVE_CONTEXT_DEPENDENT",
+    "surfacePersistence": "EPHEMERAL",
+    "serverSubmissionAllowed": false,
+    "localStorageAllowed": false,
+    "sessionStorageAllowed": false,
+    "cache": "PRIVATE_NO_STORE",
+    "canonicalConsentRecordRequiredForExecution": true,
+    "canonicalConsentRecordCreatedHere": false,
+    "purposeCodePreview": "SERVICE_DELIVERY"
+  },
+  "methodBoundary": {
+    "source": "content/web-production/registries/wpr-personal-runtime-projection-registry-v1.json",
+    "methodExecutionAllowed": false,
+    "productionEligibleMethodCount": 0,
+    "publicEligibleMethodCount": 0,
+    "numMethodSpecificReadyForW26": true,
+    "numProductionEligible": false,
+    "numExecutionAllowed": false,
+    "astrologyExecutionAllowed": false,
+    "baziExecutionAllowed": false,
+    "restrictedTrackExecutionAllowed": false
+  },
+  "presentation": {
+    "route": "/personal-runtime",
+    "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+    "audience": "PUBLIC",
+    "canonicalCustomerWorkspaceClaimed": false,
+    "htmlIsProjectionOnly": true,
+    "cprProductionRecordReference": null
+  },
+  "forbidden": [
+    "METHOD_CALCULATION",
+    "METHOD_PROJECTION_EXECUTION",
+    "INTERPRETATION",
+    "PROFESSIONAL_JUDGMENT",
+    "CANONICAL_CONSENT_WRITE",
+    "BIRTH_DATA_PERSISTENCE",
+    "SERVER_BIRTH_DATA_SUBMISSION",
+    "FABRICATED_TIMEZONE",
+    "FABRICATED_COORDINATES",
+    "RESTRICTED_INTERNAL_MARKETING_LABEL"
+  ],
+  "nextWork": "WPR-W22_OR_MPA_W26_W27_DEPENDENCY_RESOLUTION"
+}

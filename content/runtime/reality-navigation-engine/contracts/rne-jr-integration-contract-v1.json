@@ -1,0 +1,38 @@
+{
+  "contractCode": "PHI-OS-RNE-W10-JR-INTEGRATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "RNE-W10",
+  "runtimeCode": "RNE",
+  "status": "REFERENCE_INTEGRATION_ACTIVE",
+  "upstreamJrContract": "content/runtime/journey-runtime/contracts/rne-integration-contract-v1.json",
+  "rdgExtension": "content/governance/reality-data-governance/extensions/rne-navigation/registries/rne-navigation-consumer-read-successor-v1.json",
+  "allowedPurposes": [
+    "SERVICE_DELIVERY"
+  ],
+  "requestEnvelope": [
+    "journeyReference",
+    "canonicalReadoutReference",
+    "dataPurpose",
+    "consentReferences",
+    "governanceReferences"
+  ],
+  "responseConsumption": [
+    "navigationOptionReferences",
+    "tradeoffReferences",
+    "riskReferences",
+    "reversibilityReferences",
+    "scenarioReferences",
+    "routeCandidateReferences"
+  ],
+  "rules": {
+    "jrOwnsWorkflow": true,
+    "rneOwnsNavigationIntelligence": true,
+    "jrMayImplementRneReasoning": false,
+    "rneMayMutateJourneyStage": false,
+    "rneMayExecuteRoute": false,
+    "rawReadoutCopyForbidden": true,
+    "canonicalReadoutReferenceOnly": true,
+    "fabricatedRneResponseForbidden": true,
+    "productionExecutionActivated": false
+  }
+}

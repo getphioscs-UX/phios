@@ -17,6 +17,7 @@ import account from './en/account.js';
 import freeObservation from './en/free-observation.js';
 import freeExplore from './en/free-explore.js';
 import academyLearning from './en/academy.js';
+import personalRuntime from './en/personal-runtime.js';
 
 const dictionary = Object.freeze({
   ...shared,
@@ -36,7 +37,8 @@ const dictionary = Object.freeze({
   ...account,
   ...freeObservation,
   ...freeExplore,
-  ...academyLearning
+  ...academyLearning,
+  ...personalRuntime
 });
 
 export default dictionary;

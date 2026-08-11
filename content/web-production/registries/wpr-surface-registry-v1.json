@@ -3,7 +3,7 @@
   "registryVersion": "1.0.0",
   "work": "WPR-W3",
   "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
-  "status": "canonical_wpr_e_w20_journey_projection_active",
+  "status": "canonical_wpr_e_w21_personal_runtime_setup_active",
   "audienceClasses": [
     "PUBLIC",
     "CUSTOMER",
@@ -180,7 +180,9 @@
         "RDG"
       ],
       "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
-      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+      "implementationState": "PENDING_AUTHENTICATED_EXECUTION_AFTER_MPA_W26_W27",
+      "methodExecutionAllowed": false
     },
     {
       "surfaceCode": "CUSTOMER_WORKSPACE",
@@ -294,6 +296,21 @@
       "sourceAuthorities": [],
       "allowedPresentationAuthority": "CPR_OR_STATIC_PUBLIC_SHELL_WHERE_CPR_RECORD_NOT_YET_PRODUCTION",
       "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL"
+    },
+    {
+      "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+      "audienceClass": "PUBLIC",
+      "authRequired": false,
+      "entitlementRequired": false,
+      "sourceAuthorities": [
+        "MPA",
+        "RDG"
+      ],
+      "allowedPresentationAuthority": "STATIC_CUSTOMER_SHELL_TRANSITIONAL_UNTIL_CPR_PRODUCTION",
+      "assetPolicy": "GOVERNED_WHEN_CANONICAL_OR_PUBLISHED_VISUAL",
+      "dataHandling": "EPHEMERAL_BROWSER_ONLY",
+      "methodExecutionAllowed": false,
+      "canonicalCustomerWorkspace": false
     }
   ],
   "rules": {

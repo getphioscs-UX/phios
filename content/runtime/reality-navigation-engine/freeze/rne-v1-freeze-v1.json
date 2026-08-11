@@ -1,0 +1,188 @@
+{
+  "freezeCode": "PHI-OS-RNE-v1-FREEZE",
+  "freezeVersion": "1.0.0",
+  "status": "RNE_FROZEN_v1",
+  "baselineCommit": "9cd28c6ad24ebffeeb553cfe65fb572ef562d3ed",
+  "runtimeCode": "RNE",
+  "runtimeName": "Reality Navigation Engine",
+  "completedWork": [
+    "RNE-W0",
+    "RNE-W1",
+    "RNE-W2",
+    "RNE-W3",
+    "RNE-W4",
+    "RNE-W5",
+    "RNE-W6",
+    "RNE-W7",
+    "RNE-W8",
+    "RNE-W9",
+    "RNE-W10",
+    "RNE-W11",
+    "RNE-W12",
+    "RNE-W13",
+    "RNE-W14"
+  ],
+  "authority": {
+    "supportsDecision": true,
+    "navigationDecisionCommand": false,
+    "automaticOptionSelection": false,
+    "routeExecution": false,
+    "predictionAsTruth": false,
+    "professionalJudgment": false,
+    "effectivenessValidation": "VAL",
+    "journeyWorkflow": "JR",
+    "realityLifecycle": "RMO",
+    "readout": "RRE",
+    "dataGovernance": "RDG"
+  },
+  "integrations": {
+    "jr": "REFERENCE_ONLY_ACTIVE",
+    "professionalBoundary": "GOVERNED_TRIGGER_TO_PWS_GATE",
+    "outcomeFeedback": "RMO_REFERENCE_BINDING_ACTIVE",
+    "canonicalReadout": "RDG_AUTHORIZED_RRE_REFERENCE",
+    "validation": "VAL_HANDOFF_READY"
+  },
+  "validation": {
+    "effectivenessStatus": "PENDING_VAL_RUNTIME_EXECUTION",
+    "rneSelfValidation": false,
+    "effectivenessClaimCreated": false,
+    "successClaimCreated": false,
+    "causalityClaimCreated": false,
+    "freezeDoesNotImplyEffectiveness": true
+  },
+  "activation": {
+    "liveRouteExecution": false,
+    "productionDecisionCommand": false,
+    "automaticTargetCreation": false,
+    "professionalServiceAssignment": false,
+    "persistentDirectStorageWrite": false
+  },
+  "aliases": {
+    "historicalCheckRnePreserved": true,
+    "historicalCheckRneValue": "npm run check:rne-foundation",
+    "canonicalV1Alias": "check:rne-v1",
+    "fullRangeAlias": "check:rne-w0-w14",
+    "reason": "Earlier W0-W4 freeze checker hard-froze check:rne; v1 final aliases avoid rewriting approved historical artifacts."
+  },
+  "readoutGapResolution": {
+    "predecessor": "content/runtime/reality-navigation-engine/contracts/rne-readout-integration-gap-v1.json",
+    "successor": "content/runtime/reality-navigation-engine/contracts/rne-readout-integration-gap-resolution-v1.json",
+    "state": "RESOLVED_FOR_CANONICAL_REFERENCE_CONSUMPTION_SERVICE_DELIVERY_ONLY",
+    "historicalW1ContractRewritten": false
+  },
+  "frozenArtifacts": [
+    {
+      "reference": "content/governance/reality-data-governance/extensions/rne-navigation/registries/rne-navigation-consumer-read-successor-v1.json",
+      "sha256": "8211e8a9294d56c88e8dfab516b8abf4d019d59381e9fbbb9211c4e430fbbe0b"
+    },
+    {
+      "reference": "content/governance/reality-data-governance/extensions/rne-navigation/audits/rne-navigation-data-authority-reconciliation-v1.json",
+      "sha256": "fc87a25d6341e9d1f7bea1d365bea31c0f5ffb93998ec9487d2d15d5dfa8657a"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/audits/rne-w10-jr-integration-reconciliation-v1.json",
+      "sha256": "762db763e19ca4810aa676bc667d78d8ce7e3a120871674750a3d4a875f07a46"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/audits/rne-w10-w14-authority-reconciliation-v1.json",
+      "sha256": "3adc164b4d5ab2241d44aac471555dca6bee42bc662747a7ebfe58d6901e7ff9"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/contracts/rne-readout-integration-gap-resolution-v1.json",
+      "sha256": "9eedeb610c765a123cf9658ed385280872dd30c65d5f7399301679be7e5d1008"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/contracts/rne-jr-integration-contract-v1.json",
+      "sha256": "ba41869ff592572d60c5f6377e63a6b73b2435230b265c4af14ec93eaef074b9"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/contracts/professional-boundary-contract-v1.json",
+      "sha256": "15a07030095a0a281605ff740a8b451bb121a919eee4b58143ad02ffebc905a5"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/contracts/outcome-feedback-contract-v1.json",
+      "sha256": "ee19034270cf9e5aa28943cbcbb9680ee6f8241d7330bf6cca79d5149ffe01a4"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/contracts/navigation-effectiveness-validation-contract-v1.json",
+      "sha256": "1558ab6a68d4a0d24aeb6dcf1b6f336a3cf561f659e63b5b914291cc7018f801"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/contracts/rne-w10-w14-acceptance-contract-v1.json",
+      "sha256": "e70a8ca27ee101d7bc9532e5fdd5a5b80ae174883155928895618575d4524b02"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/registries/canonical-professional-review-trigger-registry-v1.json",
+      "sha256": "c9134bd7294e3c10aad6d1c96bf622255bd7fce4911b37340aac7fed9a1dfaa5"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/registries/canonical-navigation-validation-check-registry-v1.json",
+      "sha256": "27a5935e981cefd7e357b35aa1f514fd12d4248dafc64c2f801641ba5831a2e2"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/fixtures/jr-navigation-integration.request.valid.json",
+      "sha256": "efe1f4710e69294c561f3f99e4e28d6a712fffbf8e956dcaaee235d7daffd9e7"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/fixtures/professional-boundary.request.valid.json",
+      "sha256": "2487b6c1e49ced920d50e728c8c0caf3ec9b1f72378e1cb26971c75d5d4c3538"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/fixtures/outcome-feedback.request.valid.json",
+      "sha256": "dbacff647ae09515c73cebb796402ae79cf6d38cf7721c0adcb27d78fbbe172d"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/fixtures/navigation-validation.request.valid.json",
+      "sha256": "fa687877573c4737b00bcb27b3c78b50cbe58e6dda9220c873d16f0e095d4baa"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/schemas/jr-navigation-intelligence-handoff-v1.schema.json",
+      "sha256": "472c9422dafdf7950e26856714b77bdcce0f4f53fcf6bd679e3a5481c693fbb4"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/schemas/professional-review-gate-v1.schema.json",
+      "sha256": "e1c7fb387f07d5ed9a653201df0538970f078dc976ebbcc45d800326c4eb7757"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/schemas/navigation-outcome-feedback-v1.schema.json",
+      "sha256": "21df76d00c78f9d55f4348ee5fed65881ecdc5b6eb329bd503c2c797263e5fd9"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/schemas/navigation-validation-request-v1.schema.json",
+      "sha256": "9989815205de61103591c1a4530fe609895d435a5f3d4015f14256deb993c1fc"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/freeze/rne-w10-w14-content-preservation-manifest-v1.json",
+      "sha256": "193afab672a6acefe0f3c473ac6b2615c771109f9feb851ae5a43d8eab41b2e9"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/freeze/rne-w0-w9-approved-dependency-manifest-v1.json",
+      "sha256": "57d65e725cd56c9a2a473da0396b4fcf2a65297c417640ad59a32e87944c2677"
+    },
+    {
+      "reference": "content/runtime/reality-navigation-engine/acceptance/rne-v1-full-acceptance-v1.json",
+      "sha256": "a65c071568fc2d867245dba380bdc51ea420500754eb7ffb7561080647bbf484"
+    },
+    {
+      "reference": "scripts/lib/reality-navigation-engine/rne-integration-feedback-v1.mjs",
+      "sha256": "a67eb37a26d76e14bd266184655a72ebd8b776c57d3f5d8d5f0040f6bab2da5c"
+    },
+    {
+      "reference": "scripts/check-rne-w10-w14-integration-feedback-freeze.mjs",
+      "sha256": "2caf9385cf55b8bb5bbd143ebd3a208817acd120edf481817e06731d2a3aa000"
+    },
+    {
+      "reference": "scripts/apply-rne-w10-w14-package-scripts.mjs",
+      "sha256": "91150bc65f94e38f1bb2db08371245cbd6ad998b7aa5893409f254e86ff555bd"
+    }
+  ],
+  "rules": {
+    "w0W9ApprovedArtifactsRewritten": false,
+    "jrFrozenContractRewritten": false,
+    "rdgBaseRegistryRewritten": false,
+    "rreReadoutSuccessorRewritten": false,
+    "valAuthorityMayBeImpersonatedByRne": false,
+    "futureSemanticChangeRequiresVersionedSuccessor": true,
+    "freezeIsNotProductionActivation": true
+  }
+}

@@ -149,7 +149,7 @@ const publicExperience = Object.freeze({
       platformTitle: '知识、Journey、个人运行、财务、学习与专业支持通过同一架构连接。',
       platformLead: '公开页面只呈现各受治理层可以做什么，不会把 validation-only 或 private runtime state 当成 production truth。',
       journeyTitle: 'Reality Journey', journeyCopy: '从变化与证据进入读取、导航、复核与持续的受治理路径。', openJourney: '进入 Reality Journey',
-      personalTitle: '个人运行', personalCopy: '了解个人输入与 Method availability 如何受治理连接，不把 blocked method 呈现为 production。', openEntry: '进入 Reality Entry',
+      personalTitle: '个人运行', personalCopy: '了解个人输入与 Method availability 如何受治理连接，不把 blocked method 呈现为 production。', openEntry: '进入 Reality Entry', openPersonalRuntime: '进入 Personal Runtime',
       financialTitle: '财务现实', financialCopy: '了解 Financial Reality 的服务边界、输入与专业支持路径。', openFinancial: '查看财务现实',
       academyTitle: 'Reality Academy', academyCopy: '探索受治理的学习架构；live entitlement、progress、assessment 与 credential 仍由各自 Authority 管理。', openAcademy: '探索 Academy',
       professionalTitle: '专业支持', professionalCopy: '了解人类专业观察、判断、建议与责任从哪里开始。', openProfessional: '查看专业服务',

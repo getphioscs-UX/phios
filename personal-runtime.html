@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Prepare PHI OS Personal Runtime birth inputs and view governed Method availability without executing a Method.">
+  <meta name="robots" content="noindex,follow">
+  <title data-i18n="personalRuntime.metaTitle">Personal Runtime Setup — PHI OS</title>
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
+  <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/wpr-personal-runtime.css">
+</head>
+<body class="public-page wpr-personal-runtime" data-page="personal-runtime" data-public-section="reality" data-wpr-production-surface="PERSONAL_RUNTIME_SETUP">
+  <a class="phi-skip-link" href="#personal-runtime-main" data-i18n="personalRuntime.skip">Skip to Personal Runtime setup</a>
+  <div data-public-header-placeholder></div>
+  <main id="personal-runtime-main">
+    <section class="pr-hero"><div class="public-container pr-hero__grid">
+      <div><p class="public-eyebrow" data-i18n="personalRuntime.eyebrow">WPR-W21 · Personal Runtime</p><h1 class="public-display" data-i18n="personalRuntime.title">Prepare your birth inputs without activating a Method.</h1><p class="public-lead" data-i18n="personalRuntime.lead">Use this page to check whether your birth information is structurally ready. No Method calculation, interpretation, upload or persistence occurs here.</p></div>
+      <aside class="pr-boundary-card"><strong data-i18n="personalRuntime.privacyTitle">Birth data stays on this page only</strong><p data-i18n="personalRuntime.privacyCopy">This setup is ephemeral.</p><span class="pr-badge" data-i18n="personalRuntime.noStorage">No data sent · No browser storage · No calculation</span></aside>
+    </div></section>
+
+    <section class="public-section"><div class="public-container pr-layout">
+      <section class="pr-panel" aria-labelledby="birth-input-title">
+        <div class="pr-section-heading"><p class="public-eyebrow">MPA-W8</p><h2 id="birth-input-title" data-i18n="personalRuntime.inputTitle">Birth initialization</h2><p data-i18n="personalRuntime.inputCopy"></p></div>
+        <form id="personalRuntimeInput" class="pr-form" autocomplete="off" novalidate>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthDate">Birth date</span><input id="birthDate" name="BirthDate" type="date"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="BirthDatePrecision" data-precision-for="birthDate"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthTime">Birth time</span><input id="birthTime" name="BirthTime" type="time" step="60"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="BirthTimePrecision" data-precision-for="birthTime"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthPlace">Birth place</span><input id="birthPlace" name="BirthPlace" type="text" inputmode="text"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="BirthPlacePrecision" data-precision-for="birthPlace"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.timezone">Timezone</span><input id="birthTimezone" name="Timezone" type="text" placeholder="Asia/Kuala_Lumpur" spellcheck="false"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="TimezonePrecision" data-precision-for="birthTimezone"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
+          <fieldset class="pr-coordinate-fieldset"><legend data-i18n="personalRuntime.coordinates">Coordinates (optional)</legend><div class="pr-coordinate-grid"><label><span data-i18n="personalRuntime.latitude">Latitude</span><input id="birthLatitude" name="Latitude" type="number" min="-90" max="90" step="any"></label><label><span data-i18n="personalRuntime.longitude">Longitude</span><input id="birthLongitude" name="Longitude" type="number" min="-180" max="180" step="any"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="CoordinatesPrecision" data-precision-for="coordinates"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div></fieldset>
+          <div class="pr-source"><span data-i18n="personalRuntime.source">Source</span><strong data-i18n="personalRuntime.sourceHuman">Human declaration</strong></div>
+          <label class="pr-confirm"><input id="customerConfirmation" name="CustomerConfirmation" type="checkbox"><span data-i18n="personalRuntime.confirm">I confirm that the information entered here reflects what I currently know.</span></label>
+          <div class="pr-actions"><button class="public-button" id="checkPersonalRuntimeInput" type="button" data-i18n="personalRuntime.check">Check input readiness</button><button class="pr-secondary" id="clearPersonalRuntimeInput" type="button" data-i18n="personalRuntime.clear">Clear inputs</button></div>
+        </form>
+        <section class="pr-readiness" data-personal-runtime-readiness hidden aria-live="polite"><h3 data-i18n="personalRuntime.resultTitle">Input readiness</h3><p data-personal-runtime-readiness-message></p><ul data-personal-runtime-readiness-facts></ul></section>
+      </section>
+
+      <aside class="pr-side">
+        <section class="pr-panel"><p class="public-eyebrow">MPA</p><h2 data-i18n="personalRuntime.methodsTitle">Method availability</h2><p data-i18n="personalRuntime.methodsCopy"></p><div class="pr-method-grid" data-personal-runtime-methods aria-live="polite"></div><p class="pr-note" data-i18n="personalRuntime.methodBoundary"></p><p class="pr-error" data-personal-runtime-authority-error hidden data-i18n="personalRuntime.authorityUnavailable"></p></section>
+        <section class="pr-panel pr-consent"><p class="public-eyebrow">RDG · MPA-W7</p><h2 data-i18n="personalRuntime.consentTitle">Execution consent is a later gate</h2><p data-i18n="personalRuntime.consentCopy"></p></section>
+      </aside>
+    </div></section>
+    <section class="public-section public-section--soft"><div class="public-container pr-footer-actions"><a class="public-button" href="/reality-journey"><span data-i18n="personalRuntime.journeyAction">Return to Reality Journey</span><span aria-hidden="true">→</span></a><a class="pr-text-link" href="/services" data-i18n="personalRuntime.professionalAction">View professional services</a></div></section>
+  </main>
+  <div data-public-footer-placeholder></div>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/personal-runtime.js"></script>
+</body></html>

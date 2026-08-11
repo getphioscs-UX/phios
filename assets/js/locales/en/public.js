@@ -149,7 +149,7 @@ const publicExperience = Object.freeze({
       platformTitle: 'Knowledge, Journey, personal Runtime, finance, learning and professional support connect through one architecture.',
       platformLead: 'Public discovery shows what each governed layer can do without presenting validation-only or private runtime state as production truth.',
       journeyTitle: 'Reality Journey', journeyCopy: 'Enter a governed path from change and evidence toward reading, navigation, review and continuity.', openJourney: 'Open Reality Journey',
-      personalTitle: 'Personal Runtime', personalCopy: 'See how governed personal inputs and method availability will connect without exposing blocked methods as production.', openEntry: 'Open Reality Entry',
+      personalTitle: 'Personal Runtime', personalCopy: 'See how governed personal inputs and method availability will connect without exposing blocked methods as production.', openEntry: 'Open Reality Entry', openPersonalRuntime: 'Open Personal Runtime',
       financialTitle: 'Financial Reality', financialCopy: 'Explore the financial Reality service boundary, inputs and professional support path.', openFinancial: 'Explore Financial Reality',
       academyTitle: 'Reality Academy', academyCopy: 'Discover governed learning architecture while live entitlement, progress, assessment and credentials remain separate.', openAcademy: 'Explore Academy',
       professionalTitle: 'Professional Support', professionalCopy: 'Understand where human observation, judgment, recommendation and accountability begin.', openProfessional: 'Explore Professional',
