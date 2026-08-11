@@ -299,7 +299,7 @@ for (const file of [
   );
 }
 
-for (const [file, expected] of Object.entries({
+const protectedPageHashes = {
   'professional-workspace.html':
     'fc4f5fc7260a5b344acd0eb377c200f6c91102419fe66538abf94c537bfb0d14',
   'professional-consent-sharing.html':
@@ -315,8 +315,47 @@ for (const [file, expected] of Object.entries({
   'reality-navigation.html':
     // EXP-W6 changes customer projection only; authorisation/loader code is unchanged.
     '8eb829d1247f132ef5987d8712120fbbaa5eac315e34a131d5d526dfa6b32c04'
-})) {
-  assert.equal(hash(await read(file)), expected, `Page changed: ${file}`);
+};
+
+const servicesReconciliation = JSON.parse(await read(
+  'docs/pws/reconciliation/pws-entry-w1-wpr-d-services-reconciliation-v1.json'
+));
+const publicVocabulary = JSON.parse(await read(
+  'content/web-production/registries/wpr-public-vocabulary-registry-v1.json'
+));
+
+for (const [file, expected] of Object.entries(protectedPageHashes)) {
+  const source = await read(file);
+  const actual = hash(source);
+
+  if (file === 'services.html' && actual !== expected) {
+    assert.equal(servicesReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+    assert.equal(servicesReconciliation.protectedArtifact.path, file);
+    assert.equal(servicesReconciliation.protectedArtifact.baselineExpectedHash, expected);
+    assert.equal(servicesReconciliation.successor.runtime, 'WPR');
+    assert.equal(servicesReconciliation.successor.phase, 'WPR-D_PUBLIC_PRODUCTION_SURFACES');
+    assert.equal(servicesReconciliation.successor.sha256, actual);
+    assert.equal(servicesReconciliation.successor.authorityExpansionGranted, false);
+    assert.equal(servicesReconciliation.pwsBoundary.authorisedDataLoaderChanged, false);
+    assert.equal(servicesReconciliation.pwsBoundary.professionalAuthorisationChanged, false);
+    assert.equal(servicesReconciliation.pwsBoundary.publicSurfaceOnly, true);
+
+    const vocabulary = publicVocabulary.entries?.find(entry =>
+      Array.isArray(entry.internalCodes) && entry.internalCodes.includes('HUMAN_DESIGN')
+    );
+    assert.ok(vocabulary, 'WPR_PUBLIC_VOCABULARY_HUMAN_DESIGN_ENTRY_MISSING');
+    assert.equal(vocabulary.publicLabels?.en, 'Personal Runtime Projection');
+    assert.equal(vocabulary.publicLabels?.['zh-Hans'], '个人运行投射');
+
+    assert.ok(source.includes('href="/professional/personal-runtime"'));
+    assert.ok(source.includes('Personal Runtime Projection'));
+    assert.equal(source.includes('href="/professional/human-design"'), false);
+    assert.equal(source.includes('Human Design Foundation Report'), false);
+    assert.equal(source.includes('Human Design Runtime Interpretation'), false);
+    continue;
+  }
+
+  assert.equal(actual, expected, `Page changed: ${file}`);
 }
 
 console.log('✓ PWS-ENTRY-W1 Professional authorisation and loader passed.');
