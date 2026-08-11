@@ -1,0 +1,109 @@
+{
+  "registryCode": "PHI-OS-PDS-W0-POST-FREEZE-PROTECTED-PATH-ADDITIONS-v1",
+  "registryVersion": "1.0.0",
+  "status": "canonical",
+  "purpose": "Permit only independently governed post-PDS runtime additions inside PDS-W0 protected paths without reopening or rewriting the frozen PDS baseline.",
+  "pdsBaseline": {
+    "commit": "3311262b377fb1e936fe39cfdd0528e6f3ce3e2e",
+    "tree": "6610d1c36fa1c477b1cc61868a5bc3e6993738ca"
+  },
+  "authorizationMode": "ADD_ONLY_EXACT_GIT_BLOB",
+  "entries": [
+    {
+      "path": "assets/js/runtime/web-production/asset-resolver.js",
+      "protectedPath": "assets/js/runtime",
+      "introducedByRuntime": "WPR",
+      "introducedByPhase": "WPR-B_PUBLIC_ASSET_DELIVERY",
+      "introducedByWorks": [
+        "WPR-W7",
+        "WPR-W8",
+        "WPR-W9",
+        "WPR-W10"
+      ],
+      "introducedByCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+      "gitBlobSha": "bb61dc08b10f562530c335a48aa46accffbd7bcb",
+      "immutable": true,
+      "authorityEvidence": [
+        "content/web-production/contracts/wpr-public-asset-resolution-v1.json",
+        "content/web-production/acceptance/wpr-w7-w10-public-asset-delivery-acceptance-v1.json",
+        "docs/runtime/WPR-B-W7-W10-PUBLIC-ASSET-DELIVERY.md"
+      ],
+      "pdsMutationAuthorityGranted": false,
+      "runtimeAdditionAuthority": "INDEPENDENT_WPR_RUNTIME_PHASE"
+    },
+    {
+      "path": "assets/js/runtime/web-production/composition-resolver.js",
+      "protectedPath": "assets/js/runtime",
+      "introducedByRuntime": "WPR",
+      "introducedByPhase": "WPR-C_COMPOSITION_INFRASTRUCTURE",
+      "introducedByWorks": [
+        "WPR-W11"
+      ],
+      "introducedByCommit": "a79af8f24608965c9323bd38c4c3ef948c9ce571",
+      "gitBlobSha": "8ec22b86c38fed83aa30fb09a7f427c89bf6de26",
+      "immutable": true,
+      "authorityEvidence": [
+        "content/web-production/contracts/wpr-canonical-composition-resolution-v1.json",
+        "content/web-production/acceptance/wpr-w11-w13-composition-infrastructure-acceptance-v1.json",
+        "docs/runtime/WPR-C-W11-W13-COMPOSITION-INFRASTRUCTURE.md"
+      ],
+      "pdsMutationAuthorityGranted": false,
+      "runtimeAdditionAuthority": "INDEPENDENT_WPR_RUNTIME_PHASE"
+    },
+    {
+      "path": "assets/js/runtime/web-production/locale-resolver.js",
+      "protectedPath": "assets/js/runtime",
+      "introducedByRuntime": "WPR",
+      "introducedByPhase": "WPR-C_COMPOSITION_INFRASTRUCTURE",
+      "introducedByWorks": [
+        "WPR-W12"
+      ],
+      "introducedByCommit": "a79af8f24608965c9323bd38c4c3ef948c9ce571",
+      "gitBlobSha": "e21aa7ae47883b730557cbc21d831dbf4ba829c4",
+      "immutable": true,
+      "authorityEvidence": [
+        "content/web-production/contracts/wpr-locale-projection-v1.json",
+        "content/web-production/acceptance/wpr-w11-w13-composition-infrastructure-acceptance-v1.json",
+        "docs/runtime/WPR-C-W11-W13-COMPOSITION-INFRASTRUCTURE.md"
+      ],
+      "pdsMutationAuthorityGranted": false,
+      "runtimeAdditionAuthority": "INDEPENDENT_WPR_RUNTIME_PHASE"
+    },
+    {
+      "path": "assets/js/runtime/web-production/vocabulary-resolver.js",
+      "protectedPath": "assets/js/runtime",
+      "introducedByRuntime": "WPR",
+      "introducedByPhase": "WPR-C_COMPOSITION_INFRASTRUCTURE",
+      "introducedByWorks": [
+        "WPR-W13"
+      ],
+      "introducedByCommit": "a79af8f24608965c9323bd38c4c3ef948c9ce571",
+      "gitBlobSha": "63eae597812259925d1a8151819671cdad683549",
+      "immutable": true,
+      "authorityEvidence": [
+        "content/web-production/contracts/wpr-public-vocabulary-resolution-v1.json",
+        "content/web-production/acceptance/wpr-w11-w13-composition-infrastructure-acceptance-v1.json",
+        "docs/runtime/WPR-C-W11-W13-COMPOSITION-INFRASTRUCTURE.md"
+      ],
+      "pdsMutationAuthorityGranted": false,
+      "runtimeAdditionAuthority": "INDEPENDENT_WPR_RUNTIME_PHASE"
+    }
+  ],
+  "rules": {
+    "pdsBaselineCommitRemainsFrozen": true,
+    "baselineFileModificationAllowed": false,
+    "baselineFileDeletionAllowed": false,
+    "unregisteredProtectedPathAdditionAllowed": false,
+    "registeredAdditionMustBeAbsentFromBaseline": true,
+    "registeredAdditionMustMatchExactGitBlob": true,
+    "runtimeAuthorizationDoesNotGrantPdsRuntimeMutationAuthority": true,
+    "futureAdditionRequiresExplicitVersionedRegistryEntry": true
+  },
+  "registryLocation": "docs/design-system/pds-w0-post-freeze-protected-path-additions-v1.json",
+  "registryPlacement": {
+    "owner": "PDS",
+    "classification": "POST_FREEZE_RECONCILIATION_METADATA",
+    "canonicalContentRegistryMember": false,
+    "reason": "PWS-I2-W0 freezes content/registry JSON inventory at 113; PDS post-freeze protected-path authorization is PDS governance metadata, not a canonical platform registry."
+  }
+}

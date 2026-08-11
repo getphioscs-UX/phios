@@ -47,6 +47,12 @@ for (const file of deliverables) {
 
 const contract = await readJson(deliverables[0]);
 const fixture = await readJson(deliverables[1]);
+const postFreezeAdditions = await readJson(
+  'docs/design-system/pds-w0-post-freeze-protected-path-additions-v1.json'
+);
+assert.equal(postFreezeAdditions.status, 'canonical');
+assert.equal(postFreezeAdditions.authorizationMode, 'ADD_ONLY_EXACT_GIT_BLOB');
+assert.equal(postFreezeAdditions.pdsBaseline.commit, contract.baseline.commit);
 
 assert.equal(contract.milestone, 'PDS-W0');
 assert.equal(contract.contractVersion, '1.0.0');
@@ -131,6 +137,31 @@ for (const protectedPath of fixture.protectedPaths) {
           registeredImmutableFiles.has(file)
         );
       if (authorisedAdditions) changed = '';
+    }
+
+    // Independent post-PDS Runtime phases may add new files inside a protected
+    // path only when the addition is explicitly registered and the current Git
+    // blob is byte-identical to the authorised blob. This does not reopen the
+    // frozen PDS baseline and never permits modification/deletion of baseline files.
+    if (changed) {
+      const changedFiles = changed.split('\n').filter(Boolean);
+      const authorisedEntries = new Map(
+        postFreezeAdditions.entries
+          .filter(entry => entry.protectedPath === protectedPath && entry.immutable === true)
+          .map(entry => [entry.path, entry])
+      );
+      const authorisedRuntimeAdditions = changedFiles.length > 0 &&
+        changedFiles.every(file => {
+          if (baselineFiles.includes(file)) return false;
+          const entry = authorisedEntries.get(file);
+          if (!entry) return false;
+          try {
+            return git(['hash-object', file]) === entry.gitBlobSha;
+          } catch {
+            return false;
+          }
+        });
+      if (authorisedRuntimeAdditions) changed = '';
     }
   }
   assert.equal(changed, '', `Protected PDS-W0 path changed: ${protectedPath}`);
