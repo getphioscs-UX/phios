@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-REGISTRY-v2.0.0",
+  "registryCode": "METHOD_REGISTRY_V2",
+  "registryVersion": "2.0.0",
+  "work": "MPA-W2",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "ACTIVE_GOVERNED_SUCCESSOR_NO_PRODUCTION_GRANT",
+  "predecessors": [
+    "content/professional/method-runtime/method-registry-v1.json",
+    "content/professional/method-governance/imr-method-registry-v1.json",
+    "content/professional/method-governance/numerology-registration-extension-v1.json"
+  ],
+  "predecessorMutationAllowed": false,
+  "states": [
+    "REGISTERED",
+    "VALIDATION",
+    "ACTIVATION_CANDIDATE",
+    "PRODUCTION_ELIGIBLE",
+    "PROFESSIONAL_ELIGIBLE",
+    "BLOCKED",
+    "RETIRED"
+  ],
+  "registrationPolicy": {
+    "registrationCreatesProductionAuthority": false,
+    "registrationCreatesProfessionalAuthority": false,
+    "implementationCreatesProductionAuthority": false,
+    "capabilityEligibilityEvaluatedSeparately": true,
+    "publicVocabularyResolvedSeparately": true,
+    "futureChangeRequiresVersionedSuccessor": true
+  },
+  "methods": [
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "methodVersion": "0.1.0-candidate",
+      "state": "ACTIVATION_CANDIDATE",
+      "legacyRegistration": "EXTENSION_CANDIDATE",
+      "internalTrack": "NUM",
+      "publicVocabularyKey": "PUBLIC_METHOD_NUM",
+      "productionEligible": false,
+      "professionalEligible": false,
+      "blockingReasons": [
+        "VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "COMMERCIAL_LICENSE_NOT_PASSED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "methodVersion": "0.1.0",
+      "state": "ACTIVATION_CANDIDATE",
+      "legacyRegistration": "MR_IMR_V1",
+      "internalTrack": "AST",
+      "publicVocabularyKey": "PUBLIC_METHOD_AST",
+      "productionEligible": false,
+      "professionalEligible": false,
+      "blockingReasons": [
+        "REFERENCE_VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "PRODUCTION_POLICIES_NOT_APPROVED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "methodVersion": "0.1.0",
+      "state": "ACTIVATION_CANDIDATE",
+      "legacyRegistration": "MR_IMR_V1",
+      "internalTrack": "BZR",
+      "publicVocabularyKey": "PUBLIC_METHOD_BZR",
+      "productionEligible": false,
+      "professionalEligible": false,
+      "blockingReasons": [
+        "LICENSE_REVIEW_INCOMPLETE",
+        "VALIDATION_NOT_PASSED",
+        "REGRESSION_NOT_PASSED",
+        "MPA_EXECUTION_GATE_NOT_ESTABLISHED"
+      ]
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "methodVersion": "1.0.0",
+      "state": "BLOCKED",
+      "legacyRegistration": "MR_IMR_V1",
+      "internalTrack": "HDR",
+      "publicVocabularyKey": "PUBLIC_METHOD_HDR",
+      "productionEligible": false,
+      "professionalEligible": false,
+      "blockingReasons": [
+        "RESTRICTED_LICENSE",
+        "EXTERNAL_ALGORITHM_AUTHORITY",
+        "PUBLIC_VOCABULARY_RESTRICTED",
+        "COMMERCIAL_ACTIVATION_NOT_APPROVED",
+        "PROFESSIONAL_BOUNDARY_REQUIRES_RENEWED_ACTIVATION"
+      ]
+    },
+    {
+      "methodCode": "I_CHING",
+      "pluginCode": "ICH",
+      "methodVersion": "0.1.0",
+      "state": "REGISTERED",
+      "legacyRegistration": "MR_IMR_V1",
+      "internalTrack": "ICH",
+      "publicVocabularyKey": "PUBLIC_METHOD_ICH",
+      "productionEligible": false,
+      "professionalEligible": false,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    },
+    {
+      "methodCode": "TAROT",
+      "pluginCode": "TAR",
+      "methodVersion": "0.1.0",
+      "state": "REGISTERED",
+      "legacyRegistration": "MR_IMR_V1",
+      "internalTrack": "TAR",
+      "publicVocabularyKey": "PUBLIC_METHOD_TAR",
+      "productionEligible": false,
+      "professionalEligible": false,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "pluginCode": "PSY",
+      "methodVersion": "0.1.0",
+      "state": "REGISTERED",
+      "legacyRegistration": "MR_IMR_V1",
+      "internalTrack": "PSY",
+      "publicVocabularyKey": "PUBLIC_METHOD_PSY",
+      "productionEligible": false,
+      "professionalEligible": false,
+      "blockingReasons": [
+        "METHOD_NOT_IMPLEMENTED",
+        "INDEPENDENT_ACTIVATION_REQUIRED"
+      ]
+    }
+  ]
+}

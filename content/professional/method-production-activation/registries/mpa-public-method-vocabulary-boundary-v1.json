@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W4-PUBLIC-METHOD-VOCABULARY-BOUNDARY-v1.0.0",
+  "work": "MPA-W4",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "ACTIVE_RESOLVER_REQUIRED",
+  "rule": "Internal method identity must not automatically become marketing copy.",
+  "resolver": {
+    "authority": "PUBLIC_VOCABULARY_REGISTRY",
+    "functionContract": "resolvePublicMethodVocabulary(methodCode, locale, surface)",
+    "fallbackToInternalNameAllowed": false,
+    "missingVocabularyBehavior": "FAIL_CLOSED_NO_PUBLIC_LABEL"
+  },
+  "internalTracks": [
+    {
+      "internalCode": "HDR",
+      "methodCode": "HUMAN_DESIGN",
+      "publicVocabularyKey": "PUBLIC_METHOD_HDR",
+      "restrictedOrTrademarkSensitive": true,
+      "directInternalNameExposureAllowed": false,
+      "publicLabel": null,
+      "publicStatus": "BLOCKED_PENDING_GOVERNED_VOCABULARY"
+    },
+    {
+      "internalCode": "AST",
+      "methodCode": "ASTROLOGY",
+      "publicVocabularyKey": "PUBLIC_METHOD_AST",
+      "restrictedOrTrademarkSensitive": false,
+      "directInternalNameExposureAllowed": false,
+      "publicLabel": null,
+      "publicStatus": "REGISTERED_PENDING_GOVERNED_VOCABULARY"
+    },
+    {
+      "internalCode": "BZR",
+      "methodCode": "BAZI",
+      "publicVocabularyKey": "PUBLIC_METHOD_BZR",
+      "restrictedOrTrademarkSensitive": false,
+      "directInternalNameExposureAllowed": false,
+      "publicLabel": null,
+      "publicStatus": "REGISTERED_PENDING_GOVERNED_VOCABULARY"
+    },
+    {
+      "internalCode": "NUM",
+      "methodCode": "NUMEROLOGY",
+      "publicVocabularyKey": "PUBLIC_METHOD_NUM",
+      "restrictedOrTrademarkSensitive": false,
+      "directInternalNameExposureAllowed": false,
+      "publicLabel": null,
+      "publicStatus": "REGISTERED_PENDING_GOVERNED_VOCABULARY"
+    }
+  ],
+  "futureTracks": [
+    "ICH",
+    "TAR",
+    "PSY"
+  ],
+  "forbidden": {
+    "internalCodeAsMarketingCopy": true,
+    "legacyMethodNameAsAutomaticPublicLabel": true,
+    "restrictedTermFallback": true,
+    "frontendHardcodedMethodLabel": true
+  }
+}

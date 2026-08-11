@@ -1,0 +1,10 @@
+import fs from 'node:fs'; import path from 'node:path';
+export const root=process.cwd(); export const BASELINE='1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7';
+export const readJson=relative=>JSON.parse(fs.readFileSync(path.join(root,relative),'utf8'));
+export const readText=relative=>fs.readFileSync(path.join(root,relative),'utf8');
+export const exists=relative=>fs.existsSync(path.join(root,relative));
+export const W11='content/web-production/contracts/wpr-canonical-composition-resolution-v1.json';
+export const SLOTS='content/web-production/registries/wpr-composition-slot-registry-v1.json';
+export const W12='content/web-production/contracts/wpr-locale-projection-v1.json';
+export const W13='content/web-production/registries/wpr-public-vocabulary-registry-v1.json';
+export const W13CONTRACT='content/web-production/contracts/wpr-public-vocabulary-resolution-v1.json';

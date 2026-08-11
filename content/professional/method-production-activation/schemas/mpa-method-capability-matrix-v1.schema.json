@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-MPA-METHOD-CAPABILITY-MATRIX-v1.schema.json",
+  "title": "PHI OS MPA Method Capability Matrix",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "capabilities",
+    "capabilityStates",
+    "methods"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MPA-W5-METHOD-CAPABILITY-MATRIX-v1.0.0"
+    },
+    "capabilities": {
+      "const": [
+        "DATA",
+        "CALCULATION",
+        "PROJECTION",
+        "INTERPRETATION",
+        "PROFESSIONAL",
+        "PUBLIC"
+      ]
+    },
+    "methods": {
+      "type": "array",
+      "minItems": 7
+    }
+  },
+  "additionalProperties": true
+}

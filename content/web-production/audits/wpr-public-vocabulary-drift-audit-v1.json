@@ -1,0 +1,75 @@
+{
+  "auditCode": "PHI-OS-WPR-W13-PUBLIC-VOCABULARY-DRIFT-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "WPR-W13",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "migration_findings_recorded_no_surface_rewrite",
+  "scopeAudiences": [
+    "PUBLIC",
+    "CUSTOMER"
+  ],
+  "restrictedPublicTerms": [
+    "Human Design",
+    "人类图"
+  ],
+  "findings": [
+    {
+      "file": "reality-reading.html",
+      "audienceClass": "CUSTOMER",
+      "hits": [
+        {
+          "term": "Human Design",
+          "occurrences": 1
+        }
+      ],
+      "classification": "WPR_D_PUBLIC_OR_CUSTOMER_VOCABULARY_MIGRATION_REQUIRED",
+      "modifiedByWprC": false
+    },
+    {
+      "file": "services.html",
+      "audienceClass": "PUBLIC",
+      "hits": [
+        {
+          "term": "Human Design",
+          "occurrences": 6
+        }
+      ],
+      "classification": "WPR_D_PUBLIC_OR_CUSTOMER_VOCABULARY_MIGRATION_REQUIRED",
+      "modifiedByWprC": false
+    },
+    {
+      "file": "assets/js/locales/en/public.js",
+      "audienceClass": "PUBLIC",
+      "hits": [
+        {
+          "term": "Human Design",
+          "occurrences": 10
+        }
+      ],
+      "classification": "WPR_D_PUBLIC_OR_CUSTOMER_VOCABULARY_MIGRATION_REQUIRED",
+      "modifiedByWprC": false
+    },
+    {
+      "file": "assets/js/locales/zh-Hans/public.js",
+      "audienceClass": "PUBLIC",
+      "hits": [
+        {
+          "term": "人类图",
+          "occurrences": 11
+        }
+      ],
+      "classification": "WPR_D_PUBLIC_OR_CUSTOMER_VOCABULARY_MIGRATION_REQUIRED",
+      "modifiedByWprC": false
+    }
+  ],
+  "professionalScope": {
+    "audienceClass": "PROFESSIONAL",
+    "includedInThisAudit": false,
+    "reason": "WPR-C preserves separately governed professional internal vocabulary; public/customer vocabulary rules do not rename professional authority records."
+  },
+  "rules": {
+    "wprCRecordsButDoesNotRewritePublicSurface": true,
+    "internalMethodRegistryMustNotBeRenamed": true,
+    "futureWprPublicSurfaceMigrationMustUseVocabularyResolver": true
+  }
+}

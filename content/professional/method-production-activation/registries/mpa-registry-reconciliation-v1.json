@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W0-REGISTRY-RECONCILIATION-v1.0.0",
+  "work": "MPA-W0",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "VERSIONED_SUCCESSOR_REQUIRED",
+  "immutablePredecessors": [
+    {
+      "registry": "MR_METHOD_REGISTRY_V1",
+      "path": "content/professional/method-runtime/method-registry-v1.json",
+      "frozen": true,
+      "mutationAllowed": false
+    },
+    {
+      "registry": "IMR_METHOD_REGISTRY_V1",
+      "path": "content/professional/method-governance/imr-method-registry-v1.json",
+      "frozen": true,
+      "mutationAllowed": false
+    },
+    {
+      "registry": "IMR_PRODUCTION_ELIGIBILITY_V1",
+      "path": "content/professional/method-governance/imr-production-eligibility-registry-v1.json",
+      "frozen": true,
+      "mutationAllowed": false
+    }
+  ],
+  "extensionEvidence": {
+    "numerology": "content/professional/method-governance/numerology-registration-extension-v1.json",
+    "status": "candidate_not_merged_into_frozen_v1"
+  },
+  "successorPlan": {
+    "registry": "METHOD_REGISTRY_V2",
+    "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+    "governedBy": "MPA-W2",
+    "predecessorMutation": false,
+    "migrationType": "additive_versioned_successor"
+  },
+  "methodReconciliation": [
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "v1State": "ABSENT_WITH_EXTENSION_CANDIDATE",
+      "v2TargetState": "ACTIVATION_CANDIDATE",
+      "productionGranted": false
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "v1State": "REGISTERED_BLOCKED",
+      "v2TargetState": "ACTIVATION_CANDIDATE",
+      "productionGranted": false
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "v1State": "REGISTERED_BLOCKED",
+      "v2TargetState": "ACTIVATION_CANDIDATE",
+      "productionGranted": false
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "pluginCode": "HDR",
+      "v1State": "REGISTERED_RESTRICTED_BLOCKED",
+      "v2TargetState": "BLOCKED",
+      "productionGranted": false
+    },
+    {
+      "methodCode": "I_CHING",
+      "pluginCode": "ICH",
+      "v1State": "REGISTERED_DRAFT",
+      "v2TargetState": "REGISTERED",
+      "productionGranted": false
+    },
+    {
+      "methodCode": "TAROT",
+      "pluginCode": "TAR",
+      "v1State": "REGISTERED_DRAFT",
+      "v2TargetState": "REGISTERED",
+      "productionGranted": false
+    },
+    {
+      "methodCode": "PSYCHOLOGY",
+      "pluginCode": "PSY",
+      "v1State": "REGISTERED_DRAFT",
+      "v2TargetState": "REGISTERED",
+      "productionGranted": false
+    }
+  ],
+  "rules": {
+    "registrationDoesNotGrantProduction": true,
+    "implementationDoesNotGrantProduction": true,
+    "freezeDoesNotMeanActivated": true,
+    "blockedMethodsMayRemainInFrozenGovernance": true
+  }
+}

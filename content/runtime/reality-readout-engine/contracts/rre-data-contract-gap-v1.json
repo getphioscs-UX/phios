@@ -1,0 +1,36 @@
+{
+  "contractCode": "PHI-OS-RRE-W0-DATA-CONTRACT-GAP-v1",
+  "contractVersion": "1.0.0",
+  "work": "RRE-W0",
+  "status": "governance_extension_required_before_persistence",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "currentCanonicalRdgContract": {
+    "producedDataTypes": [
+      "REALITY_EVIDENCE_RECORD"
+    ],
+    "consumedDataTypes": [
+      "REALITY_INPUT_RECORD",
+      "GOVERNANCE_RECORD"
+    ],
+    "evidencePromotion": "ALLOW_GOVERNED"
+  },
+  "requiredReadoutContractSuccessor": {
+    "newDataType": "REALITY_READOUT_RECORD",
+    "minimumConsumedDataTypes": [
+      "RUNTIME_STATE_RECORD",
+      "REALITY_EVIDENCE_RECORD",
+      "METHOD_PROJECTION_RECORD",
+      "MEANING_PROJECTION_RECORD",
+      "GOVERNANCE_RECORD"
+    ],
+    "writeAuthority": "RRE_READOUT_ONLY",
+    "professionalDataWrite": "DENY",
+    "analyticsWrite": "DENY",
+    "evidencePromotion": "PRESERVE_EXISTING_EVIDENCE_SUBAUTHORITY_ONLY"
+  },
+  "rules": {
+    "thisFileDoesNotAmendRdgAuthority": true,
+    "w0W4MayValidateEphemeralReadoutObjects": true,
+    "w11PersistentCanonicalReadoutBlockedUntilGovernanceExtension": true
+  }
+}

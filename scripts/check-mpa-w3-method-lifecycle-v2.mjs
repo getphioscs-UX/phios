@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { BASELINE, readJson } from './lib/method-production-activation/mpa-foundation-v1.mjs';
+const c = readJson('content/professional/method-production-activation/contracts/mpa-method-lifecycle-v2.json');
+const expected = ['DEFINED','REGISTERED','IMPLEMENTED','VALIDATION_CANDIDATE','VALIDATED','REGRESSION_PASSED','GOVERNANCE_ELIGIBLE','PRODUCTION_ACTIVATED','PROFESSIONAL_ACTIVATED','VERSIONED','RETIRED'];
+assert.equal(c.schemaVersion,'PHI-OS-MPA-W3-METHOD-LIFECYCLE-v2.0.0');
+assert.equal(c.baselineCommit,BASELINE);
+assert.deepEqual(c.orderedStages.map(x=>x.code), expected);
+assert.deepEqual(c.orderedStages.map(x=>x.order), expected.map((_,i)=>i+1));
+for (const k of ['stageSkippingAllowed','productionBeforeGovernanceAllowed','professionalBeforeProductionAllowed','validationBypassAllowed','regressionBypassAllowed','licenseBypassAllowed','retiredReactivationAllowed']) assert.equal(c.guards[k],false,k);
+assert.equal(c.transitionPolicy.normalTransition,'NEXT_STAGE_ONLY');
+console.log('✓ MPA-W3 Method Lifecycle v2 passed.');
+console.log('  Defined → Registered → Implemented → Validation → Regression → Governance → Production → Professional remains non-skippable.');

@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W3-METHOD-LIFECYCLE-v2.0.0",
+  "work": "MPA-W3",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "ACTIVE_ORDERED_LIFECYCLE",
+  "orderedStages": [
+    {
+      "order": 1,
+      "code": "DEFINED"
+    },
+    {
+      "order": 2,
+      "code": "REGISTERED"
+    },
+    {
+      "order": 3,
+      "code": "IMPLEMENTED"
+    },
+    {
+      "order": 4,
+      "code": "VALIDATION_CANDIDATE"
+    },
+    {
+      "order": 5,
+      "code": "VALIDATED"
+    },
+    {
+      "order": 6,
+      "code": "REGRESSION_PASSED"
+    },
+    {
+      "order": 7,
+      "code": "GOVERNANCE_ELIGIBLE"
+    },
+    {
+      "order": 8,
+      "code": "PRODUCTION_ACTIVATED"
+    },
+    {
+      "order": 9,
+      "code": "PROFESSIONAL_ACTIVATED"
+    },
+    {
+      "order": 10,
+      "code": "VERSIONED"
+    },
+    {
+      "order": 11,
+      "code": "RETIRED"
+    }
+  ],
+  "guards": {
+    "stageSkippingAllowed": false,
+    "productionBeforeGovernanceAllowed": false,
+    "professionalBeforeProductionAllowed": false,
+    "validationBypassAllowed": false,
+    "regressionBypassAllowed": false,
+    "licenseBypassAllowed": false,
+    "retiredReactivationAllowed": false
+  },
+  "transitionPolicy": {
+    "normalTransition": "NEXT_STAGE_ONLY",
+    "blockedState": "May be attached at any stage without granting forward progress.",
+    "versioning": "A versioned successor restarts required downstream validation/regression gates when algorithm, dependency, registry or policy changes."
+  },
+  "mappingToRegistryV2": {
+    "DEFINED": "REGISTERED may not be inferred from definition alone",
+    "VALIDATION_CANDIDATE": "VALIDATION",
+    "GOVERNANCE_ELIGIBLE": "ACTIVATION_CANDIDATE",
+    "PRODUCTION_ACTIVATED": "PRODUCTION_ELIGIBLE",
+    "PROFESSIONAL_ACTIVATED": "PROFESSIONAL_ELIGIBLE",
+    "RETIRED": "RETIRED"
+  }
+}

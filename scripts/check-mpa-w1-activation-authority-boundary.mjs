@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import { BASELINE, readJson } from './lib/method-production-activation/mpa-foundation-v1.mjs';
+const c = readJson('content/professional/method-production-activation/contracts/mpa-authority-boundary-v1.json');
+assert.equal(c.schemaVersion, 'PHI-OS-MPA-W1-ACTIVATION-AUTHORITY-BOUNDARY-v1.0.0');
+assert.equal(c.baselineCommit, BASELINE);
+assert.equal(c.status, 'ACTIVE_FAIL_CLOSED_BOUNDARY');
+assert.equal(c.authority.evaluatesEligibility, true);
+for (const k of ['ownsMethod','redefinesMethod','ownsAlgorithmDefinition','ownsMeaningAuthority','createsRealityTruth','createsProfessionalJudgment']) assert.equal(c.authority[k], false, k);
+for (const required of ['BYPASS_IMR','BYPASS_LICENSE','BYPASS_VALIDATION','BYPASS_REGRESSION','BYPASS_PROFESSIONAL_BOUNDARY','BYPASS_PUBLIC_VOCABULARY','FRONTEND_DIRECT_CALCULATION']) assert(c.forbidden.includes(required), required);
+for (const value of Object.values(c.failClosed)) assert.equal(value, true);
+assert.equal(c.releaseBoundary.methodProductionDecisionIsRealityTruth, false);
+assert.equal(c.releaseBoundary.methodProductionDecisionIsProfessionalRelease, false);
+console.log('✓ MPA-W1 Activation Authority Boundary passed.');
+console.log('  MPA evaluates eligibility only; Method, algorithm, Meaning, Reality Truth and Professional Judgment authority remain upstream/downstream owned.');

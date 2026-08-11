@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/rre/reality-readout-input-v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "inputCode",
+    "inputVersion",
+    "runtimeCode",
+    "objectFamily",
+    "realityReference",
+    "observationReferences",
+    "evidenceReferences",
+    "methodProjectionReferences",
+    "meaningReferences",
+    "knowledgeReferences",
+    "previousRealityReference",
+    "timeReference",
+    "dataQuality",
+    "governanceReferences",
+    "validationOnly",
+    "persistentStoreWriteAllowed",
+    "productionExecutionAllowed",
+    "inputDigest"
+  ],
+  "properties": {
+    "inputCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputVersion": {
+      "const": "1.0.0"
+    },
+    "runtimeCode": {
+      "const": "RRE"
+    },
+    "objectFamily": {
+      "const": "READOUT_INPUT"
+    },
+    "realityReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "version",
+        "digest"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        }
+      }
+    },
+    "observationReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidenceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "methodProjectionReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meaningReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "knowledgeReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "previousRealityReference": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "code",
+            "version",
+            "digest"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "digest": {
+              "type": "string",
+              "pattern": "^[A-Fa-f0-9]{64}$"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "timeReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observedAt",
+        "timezone"
+      ],
+      "properties": {
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timezone": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dataQuality": {
+      "enum": [
+        "VERIFIED",
+        "PARTIAL",
+        "CONFLICTING",
+        "LOW",
+        "UNKNOWN"
+      ]
+    },
+    "governanceReferences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "validationOnly": {
+      "const": true
+    },
+    "persistentStoreWriteAllowed": {
+      "const": false
+    },
+    "productionExecutionAllowed": {
+      "const": false
+    },
+    "inputDigest": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    }
+  }
+}

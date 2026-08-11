@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W1-ACTIVATION-AUTHORITY-BOUNDARY-v1.0.0",
+  "work": "MPA-W1",
+  "baselineCommit": "1d4bc9e98d38c743b44f9659fd89d75bdbb1c0f7",
+  "status": "ACTIVE_FAIL_CLOSED_BOUNDARY",
+  "authority": {
+    "evaluatesEligibility": true,
+    "ownsMethod": false,
+    "redefinesMethod": false,
+    "ownsAlgorithmDefinition": false,
+    "ownsMeaningAuthority": false,
+    "createsRealityTruth": false,
+    "createsProfessionalJudgment": false
+  },
+  "requiredUpstreamAuthorities": [
+    "MR",
+    "IMR",
+    "SHARED_DATA_AUTHORITY",
+    "SHARED_CALCULATION_RUNTIME",
+    "SHARED_PROJECTION_RUNTIME",
+    "SHARED_INTERPRETATION_RUNTIME",
+    "SHARED_PROFESSIONAL_RUNTIME",
+    "RDG"
+  ],
+  "forbidden": [
+    "INVENT_ALGORITHM",
+    "CHANGE_METHOD_RULES",
+    "BYPASS_IMR",
+    "BYPASS_LICENSE",
+    "BYPASS_VALIDATION",
+    "BYPASS_REGRESSION",
+    "BYPASS_PROFESSIONAL_BOUNDARY",
+    "BYPASS_PUBLIC_VOCABULARY",
+    "FRONTEND_DIRECT_CALCULATION"
+  ],
+  "failClosed": {
+    "unknownMethod": true,
+    "unknownVersion": true,
+    "unknownLicense": true,
+    "missingValidation": true,
+    "missingRegression": true,
+    "missingConsent": true,
+    "missingPurpose": true,
+    "missingPublicVocabulary": true,
+    "professionalGateMissing": true
+  },
+  "releaseBoundary": {
+    "methodProductionDecisionIsProfessionalRelease": false,
+    "methodProductionDecisionIsRealityTruth": false,
+    "professionalReleaseOwner": "PR_V2_SHARED_PROFESSIONAL_RUNTIME"
+  }
+}

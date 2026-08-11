@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import { BASELINE, readJson, methodByCode, sorted } from './lib/method-production-activation/mpa-foundation-v1.mjs';
+const v2 = readJson('content/professional/method-production-activation/registries/method-registry-v2.json');
+const mr = readJson('content/professional/method-runtime/method-registry-v1.json');
+const imr = readJson('content/professional/method-governance/imr-method-registry-v1.json');
+const schema = readJson('content/professional/method-production-activation/schemas/method-registry-v2.schema.json');
+const expectedStates = ['REGISTERED','VALIDATION','ACTIVATION_CANDIDATE','PRODUCTION_ELIGIBLE','PROFESSIONAL_ELIGIBLE','BLOCKED','RETIRED'];
+assert.equal(v2.schemaVersion, 'PHI-OS-METHOD-REGISTRY-v2.0.0');
+assert.equal(v2.registryVersion, '2.0.0');
+assert.equal(v2.baselineCommit, BASELINE);
+assert.equal(v2.predecessorMutationAllowed, false);
+assert.deepEqual(v2.states, expectedStates);
+assert.equal(schema.properties.schemaVersion.const, v2.schemaVersion);
+assert.equal(methodByCode(mr,'NUMEROLOGY'), undefined);
+assert.equal(methodByCode(imr,'NUMEROLOGY'), undefined);
+assert.equal(v2.methods.length, 7);
+assert.equal(new Set(v2.methods.map(x=>x.methodCode)).size, 7);
+assert.equal(new Set(v2.methods.map(x=>x.pluginCode)).size, 7);
+assert.deepEqual(sorted(v2.methods.map(x=>x.pluginCode)), sorted(['NUM','AST','BZR','HDR','ICH','TAR','PSY']));
+assert.equal(methodByCode(v2,'NUMEROLOGY').state, 'ACTIVATION_CANDIDATE');
+assert.equal(methodByCode(v2,'ASTROLOGY').state, 'ACTIVATION_CANDIDATE');
+assert.equal(methodByCode(v2,'BAZI').state, 'ACTIVATION_CANDIDATE');
+assert.equal(methodByCode(v2,'HUMAN_DESIGN').state, 'BLOCKED');
+for (const code of ['I_CHING','TAROT','PSYCHOLOGY']) assert.equal(methodByCode(v2,code).state, 'REGISTERED');
+for (const method of v2.methods) {
+  assert(expectedStates.includes(method.state));
+  assert.equal(method.productionEligible, false, `${method.methodCode} must not gain Production in W2.`);
+  assert.equal(method.professionalEligible, false, `${method.methodCode} must not gain Professional eligibility in W2.`);
+  assert.ok(method.publicVocabularyKey);
+}
+console.log('✓ MPA-W2 Method Registry v2 Reconciliation passed.');
+console.log('  NUM is now represented by a versioned successor while all Production and Professional grants remain false.');
