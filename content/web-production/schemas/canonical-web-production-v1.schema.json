@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/canonical-web-production-v1.schema.json",
+  "title": "PHI OS Canonical Web Production v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "productionCode",
+    "productionVersion",
+    "surfaceCode",
+    "routeCode",
+    "locale",
+    "audience",
+    "sourceReferences",
+    "runtimeReferences",
+    "presentationReferences",
+    "assetReferences",
+    "accessMode",
+    "dataPurpose",
+    "compositionCode",
+    "renderPolicy",
+    "hydrationPolicy",
+    "cachePolicy",
+    "seoPolicy",
+    "lineage",
+    "productionState"
+  ],
+  "properties": {
+    "productionCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "productionVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "surfaceCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "routeCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audience": {
+      "enum": [
+        "PUBLIC",
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ]
+    },
+    "sourceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "runtimeReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "presentationReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "assetReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "accessMode": {
+      "enum": [
+        "PUBLIC",
+        "AUTHENTICATED",
+        "ENTITLED",
+        "PROFESSIONAL_AUTHORIZED"
+      ]
+    },
+    "dataPurpose": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compositionCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "renderPolicy": {
+      "type": "object"
+    },
+    "hydrationPolicy": {
+      "type": "object"
+    },
+    "cachePolicy": {
+      "type": "object"
+    },
+    "seoPolicy": {
+      "type": "object"
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "productionState": {
+      "enum": [
+        "PLANNED",
+        "VALIDATION_ONLY",
+        "PILOT",
+        "LIMITED_PRODUCTION",
+        "PRODUCTION",
+        "SUSPENDED",
+        "RETIRED"
+      ]
+    }
+  }
+}

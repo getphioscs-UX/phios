@@ -1,0 +1,45 @@
+{
+  "auditCode": "PHI-OS-WPR-W0-ASSET-DELIVERY-GAP-v1",
+  "auditVersion": "1.0.0",
+  "work": "WPR-W0",
+  "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
+  "status": "open_findings",
+  "publicAssetAuthority": {
+    "registry": "content/registry/public-assets.json",
+    "bucket": "phios-public-assets",
+    "publicBaseUrl": null,
+    "publicDomainStatus": "verification_required",
+    "environmentVariable": "PHIOS_PUBLIC_ASSET_BASE_URL",
+    "failClosed": true
+  },
+  "wranglerObservation": {
+    "repoControlledBindings": [
+      "AI",
+      "RUNTIME_DB"
+    ],
+    "publicAssetBaseUrlDeclaredInWrangler": false,
+    "r2BindingDeclaredInWrangler": false,
+    "externalCloudflareConfigurationMayExist": true
+  },
+  "findings": [
+    {
+      "code": "WPR-ASSET-GAP-001",
+      "severity": "P0",
+      "finding": "Public asset base URL is unresolved in the canonical public asset registry.",
+      "resolutionOwner": "WPR-W7_W8"
+    },
+    {
+      "code": "WPR-ASSET-GAP-002",
+      "severity": "P0",
+      "finding": "Governed public assets remain pending public URL/object inventory verification.",
+      "resolutionOwner": "WPR-W8"
+    },
+    {
+      "code": "WPR-ASSET-GAP-003",
+      "severity": "P1",
+      "finding": "A single production asset resolver does not yet exist under WPR.",
+      "resolutionOwner": "WPR-W7"
+    }
+  ],
+  "wprW0MutatesR2": false
+}

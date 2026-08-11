@@ -650,7 +650,17 @@
     "build:vap-w4": "node scripts/build-vap-w4-node-production-eligibility.mjs",
     "check:vap-w4": "node scripts/check-vap-w4-node-production-eligibility.mjs",
     "build:vap-w5": "node scripts/build-vap-w5-pja-production-brief-export-acceptance.mjs",
-    "check:vap-w5": "node scripts/check-vap-w5-pja-production-brief-export.mjs"
+    "check:vap-w5": "node scripts/check-vap-w5-pja-production-brief-export.mjs",
+    "check:wpr-w0": "node scripts/check-wpr-w0-production-baseline.mjs",
+    "check:wpr-w1": "node scripts/check-wpr-w1-authority-boundary.mjs",
+    "check:wpr-w2": "node scripts/check-wpr-w2-canonical-web-production.mjs",
+    "check:wpr-w3": "node scripts/check-wpr-w3-surface-registry.mjs",
+    "check:wpr-w4": "node scripts/check-wpr-w4-route-registry.mjs",
+    "check:wpr-w5": "node scripts/check-wpr-w5-production-source-registry.mjs",
+    "check:wpr-w6": "node scripts/check-wpr-w6-runtime-consumption-registry.mjs",
+    "check:wpr-w0-w6": "node scripts/check-wpr-w0-w6-production-foundation.mjs",
+    "check:wpr-foundation": "npm run check:wpr-w0-w6",
+    "check:wpr": "npm run check:wpr-foundation"
   },
   "type": "module"
 }

@@ -1,0 +1,103 @@
+{
+  "registryCode": "PHI-OS-WPR-W6-RUNTIME-CONSUMPTION-REGISTRY-v1",
+  "registryVersion": "1.0.0",
+  "work": "WPR-W6",
+  "baselineCommit": "9c6ab5b198f6603a2e8ac3d95ef743b5b2694db9",
+  "status": "canonical_foundation",
+  "entries": [
+    {
+      "runtimeCode": "KNR_PUBLISHED_KNOWLEDGE",
+      "authorityReference": "content/knowledge/public/authority/published-knowledge-authority.json",
+      "architectureState": "ACTIVE_AUTHORITY",
+      "productionState": "PUBLISHED_RECORDS_AVAILABLE",
+      "surfaceConsumers": [
+        "HOME",
+        "LIBRARY",
+        "ARTICLE"
+      ],
+      "webProjectionState": "MIGRATION_REQUIRED"
+    },
+    {
+      "runtimeCode": "CAR_PUBLISHED_ASSET",
+      "authorityReference": "content/professional/canonical-asset-runtime/registries/published-asset-registry-v1.json",
+      "architectureState": "FROZEN",
+      "productionState": "VALIDATION_ONLY",
+      "surfaceConsumers": [
+        "FIGURE",
+        "DIAGRAM"
+      ],
+      "webProjectionState": "BLOCKED_UNTIL_PUBLICATIONS_EXIST"
+    },
+    {
+      "runtimeCode": "CPR",
+      "authorityReference": "content/professional/canonical-presentation-runtime/registries/canonical-presentation-registry-v1.json",
+      "architectureState": "FROZEN",
+      "productionState": "VALIDATION_ONLY",
+      "surfaceConsumers": [
+        "HOME",
+        "LIBRARY",
+        "ARTICLE",
+        "FIGURE",
+        "DIAGRAM",
+        "BOOK",
+        "ACADEMY_DISCOVERY",
+        "CUSTOMER_REPORT",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "webProjectionState": "FOUNDATION_ONLY_UNTIL_PRODUCTION_RECORDS_EXIST"
+    },
+    {
+      "runtimeCode": "ALR",
+      "authorityReference": "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json",
+      "architectureState": "FROZEN",
+      "productionState": "VALIDATION_PROJECTION_ONLY",
+      "surfaceConsumers": [
+        "ACADEMY_DISCOVERY",
+        "ACADEMY_LEARNING"
+      ],
+      "webProjectionState": "DISCOVERY_ALLOWED_LIVE_DELIVERY_BLOCKED"
+    },
+    {
+      "runtimeCode": "RMO",
+      "authorityReference": "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json",
+      "architectureState": "FROZEN",
+      "productionState": "NOT_ACTIVATED",
+      "surfaceConsumers": [
+        "CUSTOMER_WORKSPACE"
+      ],
+      "webProjectionState": "BLOCKED_CANONICAL_REALITY_PRODUCTION"
+    },
+    {
+      "runtimeCode": "RDG",
+      "authorityReference": "content/governance/reality-data-governance/freeze/rdg-w16-w20-access-privacy-rights-freeze-v1.json",
+      "architectureState": "FROZEN",
+      "productionState": "GOVERNANCE_AUTHORITY",
+      "surfaceConsumers": [
+        "LEGAL",
+        "REALITY_ENTRY",
+        "CUSTOMER_WORKSPACE",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "webProjectionState": "BOUNDARY_CONSUMER"
+    },
+    {
+      "runtimeCode": "VAP",
+      "authorityReference": "content/production/visual-article/eligibility/visual-article-production-eligibility-v1.json",
+      "architectureState": "ACTIVE_PRODUCTION_ACTIVATION",
+      "productionState": "W4_W5_ACTIVE_NO_PROVIDER_OR_PUBLICATION_BY_ACCEPTANCE",
+      "surfaceConsumers": [],
+      "webProjectionState": "NONE_BY_DESIGN_DIRECT_VAP_WEB_PROJECTION_FORBIDDEN"
+    }
+  ],
+  "orphanPolicy": {
+    "productionRuntimeWithNoSurfaceConsumerRequiresExplicitNoWebSurfaceByDesign": true,
+    "directVapToWebForbidden": true,
+    "validationOnlyRuntimeMayHavePlannedConsumerButCannotBePresentedAsProduction": true,
+    "runtimeExistenceDoesNotCreateCustomerAvailability": true
+  },
+  "rules": {
+    "consumerDoesNotChangeUpstreamAuthority": true,
+    "consumerDoesNotChangeProductionEligibility": true,
+    "customerPrivateAndProfessionalPrivateRequireFutureAccessBinding": true
+  }
+}
