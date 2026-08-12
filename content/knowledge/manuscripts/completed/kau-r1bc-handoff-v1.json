@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R1BC-HANDOFF-v1.0.0",
+  "from": ["KAU-R1B", "KAU-R1C"],
+  "to": "KAU-R2",
+  "status": "READY_FOR_CANDIDATE_MATCHING",
+  "supersedesForCurrentWork": "content/knowledge/manuscripts/completed/kau-r1-handoff-v1.json",
+  "inputs": [
+    "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v2.json",
+    "content/knowledge/manuscripts/completed/book-2-completed-manuscript-v1.json",
+    "content/knowledge/manuscripts/materialization/book-1-materialization-v1.json",
+    "content/knowledge/manuscripts/materialization/book-2-materialization-v1.json",
+    "content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json",
+    "content/knowledge/manuscripts/extraction/book-2-full-section-inventory-v1.json",
+    "content/knowledge/registry/nodes.json"
+  ],
+  "candidateDecisionVocabulary": [
+    "EXACT_MATCH",
+    "EXPANDED_MATCH",
+    "REMAP",
+    "SPLIT_REQUIRED",
+    "MERGE_REQUIRED",
+    "NEW_NODE_REQUIRED",
+    "DEPRECATED",
+    "SUPPORTING_ONLY"
+  ],
+  "rules": [
+    "KAU-R2 must use full extracted section content rather than TOC-only metadata.",
+    "A manuscript section does not automatically equal one Canonical Node.",
+    "Exact source duplicate pages remain provenance and must not create duplicate Canonical Nodes.",
+    "Human review is required before any semantic mapping decision becomes accepted authority.",
+    "KAU-R2 must not mutate content/knowledge/registry/nodes.json."
+  ],
+  "gates": {
+    "candidateMatchingAllowed": true,
+    "automaticAcceptanceAllowed": false,
+    "nodesJsonMutationAllowed": false,
+    "book2DuplicatePageHumanDispositionPending": true
+  }
+}

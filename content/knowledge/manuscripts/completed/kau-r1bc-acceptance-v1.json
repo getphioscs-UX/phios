@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R1BC-ACCEPTANCE-v1.0.0",
+  "stage": ["KAU-R1B", "KAU-R1C"],
+  "status": "ACCEPTED_WITH_PRESERVED_SOURCE_INTEGRITY_NOTICE",
+  "baselineCommit": "7043d884c27bc38c42106ace336b5f4cb6ae54ab",
+  "acceptance": {
+    "book1All402PagesMaterialized": true,
+    "book2All386PagesMaterialized": true,
+    "total788PagesMaterialized": true,
+    "fullTextBodiesStoredPrivateOnly": true,
+    "sectionCoverageHasZeroGaps": true,
+    "sectionCoverageHasZeroOverlaps": true,
+    "sectionHashesFrozen": true,
+    "pageHashesFrozen": true,
+    "book2DuplicatePages100And101PreservedAndFlagged": true,
+    "canonical716NodesUntouched": true,
+    "humanSemanticReviewStillRequired": true
+  },
+  "sourceIntegrityNotice": {
+    "bookCode": "BOOK-2",
+    "pages": [100, 101],
+    "finding": "The two source PDF pages are exact duplicates in both extracted text and rendered pixels.",
+    "materializationPolicy": "Preserve both source pages; suppress the second copy as a new logical section boundary; do not silently delete source content.",
+    "blockingForKAUR1BC": false,
+    "blockingForKAUR2CandidateMatching": false,
+    "blockingForCanonicalAcceptanceUntilHumanDisposition": true
+  },
+  "nextStage": "KAU-R2 Existing Canonical Node Match"
+}
