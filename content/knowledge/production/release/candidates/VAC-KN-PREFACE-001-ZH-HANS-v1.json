@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-VISUAL-ARTICLE-RELEASE-CANDIDATE-v1.0.0",
+  "releaseCandidateCode": "VAC-KN-PREFACE-001-ZH-HANS-v1",
+  "work": "VAP-W25",
+  "phase": "VAP-F_ARTICLE_RELEASE",
+  "nodeCode": "KN-PREFACE-001",
+  "locale": "zh-Hans",
+  "status": "BLOCKED_MISSING_PRODUCTION_MEANING_MAPPING",
+  "gates": {
+    "articleApproved": true,
+    "articlePublicationReady": true,
+    "figureRequired": true,
+    "publishedAssetExists": true,
+    "cprPresentationExists": true,
+    "pdsValidationPassed": true,
+    "localeValid": true,
+    "publicSlugValid": true,
+    "productionMeaningMappingValid": false
+  },
+  "authorityReferences": {
+    "article": {
+      "path": "content/knowledge/public/authority/articles/zh-Hans/KN-PREFACE-001.json",
+      "digest": "5dd1583da69d277a78f5546e74ab6c082898d012d33b6412d95d1266fcd41980"
+    },
+    "figure": {
+      "path": "content/production/car/published/PUBLISHED-ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-001.json",
+      "digest": "41ad0dc2405511966f675447b9df8f4154e887757931dc39d4dcf7c479b8f5f3"
+    },
+    "presentation": {
+      "path": "content/production/cpr/presentations/PRESENTATION-ARTICLE-KN-PREFACE-001-ZH-HANS-v1.json",
+      "digest": "a59aacb009ac3f3f3e6b84fe2651a3a151d265da16ab5e479fa126f1d7bdcac3"
+    },
+    "pdsAcceptance": {
+      "path": "content/production/visual-article/acceptance/vap-w22-w24-cpr-pds-production-presentation-acceptance-v1.json",
+      "digest": "92ba1ff64a8da6e7354ea39d7b78c560be6fe0304fe6c3b0f89a995320331c30"
+    },
+    "meaningKnowledgeMap": {
+      "path": "content/professional/canonical-meaning-runtime/registries/canonical-meaning-knowledge-map-v1.2.json",
+      "digest": "1c01f39cdab68e05bfaea963b00ff21cbac9e2a24d5a6b8b10b8f5ef805ad1bc",
+      "productionStatus": "validation_only"
+    },
+    "carBrief": {
+      "path": "content/production/car/briefs/CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-001.json",
+      "digest": "108737370491785180366fd3217af4bee27e89967f6b96bbcfa28c1896aaeecb",
+      "meaningReferences": [
+        "CM-DECISION-INTERNAL-RESPONSE"
+      ]
+    }
+  },
+  "blockers": [
+    "MEANING_KNOWLEDGE_MAP_VALIDATION_ONLY",
+    "PRODUCTION_MEANING_KNOWLEDGE_MAPPING_MISSING",
+    "FIXTURE_OR_LEGACY_BRIDGE_MEANING_FORBIDDEN"
+  ],
+  "downstream": {
+    "w26AuthorityProjectionExecuted": false,
+    "w27WebsiteReleaseExecuted": false,
+    "w28ProductionAcceptanceExecuted": false,
+    "w29FreezeExecuted": false
+  },
+  "governance": {
+    "checkerWritesState": false,
+    "fixtureMeaningAllowed": false,
+    "legacyBridgeMeaningAllowed": false,
+    "humanMeaningSelectionRequired": true
+  },
+  "releaseCandidateDigest": "e6eb0861b8db8981ee8fa0c41dcd7f3d857d73c95dec66075761552e83a83086"
+}

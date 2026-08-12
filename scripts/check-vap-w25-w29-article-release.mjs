@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { buildVisualArticleReleaseCandidate, releasePath, validateVisualArticleReleaseCandidate } from './lib/visual-article-production/article-release-v1.mjs';
+const root = process.cwd();
+const candidate = JSON.parse(fs.readFileSync(releasePath('KN-PREFACE-001', 'zh-Hans'), 'utf8'));
+assert.deepEqual(candidate, buildVisualArticleReleaseCandidate({ root }));
+validateVisualArticleReleaseCandidate(candidate);
+assert.equal(candidate.work, 'VAP-W25');
+assert.equal(candidate.status, 'BLOCKED_MISSING_PRODUCTION_MEANING_MAPPING');
+assert.equal(candidate.gates.articleApproved, true);
+assert.equal(candidate.gates.articlePublicationReady, true);
+assert.equal(candidate.gates.publishedAssetExists, true);
+assert.equal(candidate.gates.cprPresentationExists, true);
+assert.equal(candidate.gates.pdsValidationPassed, true);
+assert.equal(candidate.gates.localeValid, true);
+assert.equal(candidate.gates.publicSlugValid, true);
+assert.equal(candidate.gates.productionMeaningMappingValid, false);
+assert(candidate.blockers.includes('MEANING_KNOWLEDGE_MAP_VALIDATION_ONLY'));
+assert(candidate.blockers.includes('PRODUCTION_MEANING_KNOWLEDGE_MAPPING_MISSING'));
+assert(candidate.blockers.includes('FIXTURE_OR_LEGACY_BRIDGE_MEANING_FORBIDDEN'));
+assert.deepEqual(candidate.downstream, { w26AuthorityProjectionExecuted:false, w27WebsiteReleaseExecuted:false, w28ProductionAcceptanceExecuted:false, w29FreezeExecuted:false });
+assert.throws(() => validateVisualArticleReleaseCandidate(candidate, { requireReady: true }), /VAP_RELEASE_BLOCKED/);
+const checker = fs.readFileSync('scripts/check-vap-w25-w29-article-release.mjs', 'utf8');
+const forbiddenWriterCalls = ['writeFileSync', 'writeFile', 'rename', 'mkdir', 'publishAsset', 'releaseVisualArticle'];
+for (const name of forbiddenWriterCalls) {
+  const callPattern = new RegExp(`(?:fs\\.)?${name}\\s*\\(`);
+  const executableLines = checker.split('\n').filter(line => !line.includes('forbiddenWriterCalls'));
+  assert.equal(executableLines.some(line => callPattern.test(line)), false, `CHECKER_WRITER_FORBIDDEN:${name}`);
+}
+const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+assert.equal(pkg.scripts['visual-article:release-candidate:build'], 'node scripts/build-vap-w25-visual-article-release-candidate.mjs');
+assert.equal(pkg.scripts['visual-article:validate'], 'node scripts/validate-visual-article-release.mjs');
+assert.equal(pkg.scripts['visual-article:release'], 'node scripts/release-visual-article.mjs');
+assert.equal(pkg.scripts['check:vap-f'], 'node scripts/check-vap-w25-w29-article-release.mjs');
+console.log('✓ VAP-W25 release gate is fail-closed: Article, Figure, CPR, PDS, locale and slug pass; production Meaning authority does not.');
+console.log('✓ Fixture and legacy CAR-W2 bridge Meaning are explicitly forbidden from Article Release.');
+console.log('✓ VAP-W26–W29 remain unexecuted; no Published Authority projection, Website release, Production acceptance or Freeze is falsely created.');
+console.log('✓ Writer commands and read-only checker are separated.');
