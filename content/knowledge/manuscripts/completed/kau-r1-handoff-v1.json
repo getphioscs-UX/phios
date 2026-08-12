@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R1-HANDOFF-v1.0.0",
+  "from": "KAU-R1",
+  "to": "KAU-R2",
+  "status": "ready",
+  "inputs": [
+    "content/knowledge/manuscripts/completed/book-1-completed-manuscript-v2.json",
+    "content/knowledge/manuscripts/completed/book-2-completed-manuscript-v1.json",
+    "content/knowledge/registry/nodes.json",
+    "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
+    "content/knowledge/blueprints/book-2-knowledge-blueprint.json"
+  ],
+  "rules": [
+    "Completed manuscript structure does not create Canonical Node identity.",
+    "A manuscript chapter is not assumed to equal one Canonical Node.",
+    "Historical nodeCode prefixes are preserved unless a later governed migration explicitly supersedes them.",
+    "KAU-R2 records mapping decisions only and must not mutate nodes.json."
+  ]
+}
