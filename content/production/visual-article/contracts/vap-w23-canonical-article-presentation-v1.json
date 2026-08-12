@@ -1,0 +1,52 @@
+{
+  "contractCode": "PHI-OS-VAP-W23-CANONICAL-ARTICLE-PRESENTATION-v1",
+  "contractVersion": "1.0.0",
+  "work": "VAP-W23",
+  "phase": "VAP-E_CPR_PDS_PRODUCTION_PRESENTATION",
+  "baselineCommit": "807efc359a0d1477bc697044f55970fc5e6e8500",
+  "status": "active_canonical_production_template_contract",
+  "presentationType": "ARTICLE_PAGE",
+  "template": "content/production/cpr/templates/article-page-v1.json",
+  "canonicalOrder": [
+    "BREADCRUMB_READING_CONTEXT",
+    "ARTICLE_HEADER",
+    "HERO",
+    "ARTICLE_BODY",
+    "KNOWLEDGE_CONTEXT",
+    "CONTINUITY",
+    "FOOTER"
+  ],
+  "structure": {
+    "BREADCRUMB_READING_CONTEXT": [],
+    "ARTICLE_HEADER": ["PART_BOOK", "CANONICAL_TITLE", "SUMMARY_LEAD", "READING_METADATA"],
+    "HERO": ["OPTIONAL_PUBLISHED_HERO"],
+    "ARTICLE_BODY": ["SECTION", "FIGURE", "SECTION", "CALLOUT", "SECTION", "DIAGRAM"],
+    "KNOWLEDGE_CONTEXT": ["CANONICAL_NODE", "RELATED_NODES", "SOURCES_WHERE_PUBLIC"],
+    "CONTINUITY": ["PREVIOUS", "NEXT"],
+    "FOOTER": []
+  },
+  "pdsOwnership": [
+    "TYPOGRAPHY",
+    "SPACING",
+    "GRID",
+    "CONTAINER_WIDTH",
+    "FIGURE_WIDTH",
+    "CAPTION",
+    "CALLOUT",
+    "COLOR",
+    "RADIUS",
+    "RESPONSIVE",
+    "FOCUS",
+    "CONTRAST",
+    "MOTION"
+  ],
+  "rules": {
+    "articleLocalCssForbidden": true,
+    "rawVisualLiteralForbidden": true,
+    "sourceSemanticOrderPreserved": true,
+    "heroOptional": true,
+    "sourcesVisibleOnlyWherePublic": true,
+    "unpublishedRelatedNodeNotLinked": true,
+    "continuityMayNotBeInvented": true
+  }
+}
