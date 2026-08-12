@@ -24,15 +24,15 @@ assert.equal(knowledge.registry.status, 'frozen');
 assert.equal(knowledge.registry.policies.directSingleBookAssumptionDeprecated, true);
 assert.equal(knowledge.registry.policies.registryRequiredForProduction, true);
 assert.equal(knowledge.registry.policies.failClosedOnDigestMismatch, true);
-assert.deepEqual(knowledge.books.map(book => book.bookCode), ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4']);
+assert.deepEqual(knowledge.books.map(book => book.bookCode), ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4', 'BOOK-5']);
 const currentCanonicalNodeCount = nodes.nodes.length;
 assert.deepEqual(knowledge.totals, {
-  books: 4,
+  books: 5,
   parts: 16,
   nodes: currentCanonicalNodeCount
 });
 assert.deepEqual(knowledge.registry.totals, {
-  books: 4,
+  books: 5,
   parts: 16,
   canonicalNodes: currentCanonicalNodeCount
 });
@@ -57,11 +57,14 @@ const projectedCodes = knowledge.nodes.map(node => node.nodeCode).sort();
 assert.deepEqual(projectedCodes, canonicalCodes);
 assert.equal(new Set(projectedCodes).size, currentCanonicalNodeCount);
 assert.equal(knowledge.byBookCode.get('BOOK-1').cardinality.canonicalNodeCount, 65);
-assert.equal(knowledge.byBookCode.get('BOOK-2').cardinality.canonicalNodeCount, 266);
-assert.equal(knowledge.byBookCode.get('BOOK-3').cardinality.canonicalNodeCount, 187);
-assert.equal(knowledge.byBookCode.get('BOOK-4').cardinality.canonicalNodeCount, 198);
+assert.equal(knowledge.byBookCode.get('BOOK-2').cardinality.canonicalNodeCount, 180);
+assert.equal(knowledge.byBookCode.get('BOOK-3').cardinality.canonicalNodeCount, 86);
+assert.equal(knowledge.byBookCode.get('BOOK-4').cardinality.canonicalNodeCount, 187);
+assert.equal(knowledge.byBookCode.get('BOOK-5').cardinality.canonicalNodeCount, 198);
 assert.equal((await resolveKnowledgeBlueprintForNode(root, 'KN-B1-P5-001', { knowledge })).bookCode, 'BOOK-2');
-assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P13', { knowledge })).bookCode, 'BOOK-4');
+assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P8', { knowledge })).bookCode, 'BOOK-3');
+assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P10', { knowledge })).bookCode, 'BOOK-4');
+assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P13', { knowledge })).bookCode, 'BOOK-5');
 assert.equal(freeze.completionId, 'KH-W4A-Blueprint-Registry-Loader-Freeze-Completed');
 assert.equal(freeze.invariants.canonicalNodeCount, 78);
 assert.ok(
@@ -72,6 +75,6 @@ assert.equal(freeze.invariants.canonicalNodeCodesChanged, false);
 assert.equal(freeze.invariants.canonicalMeaningChanged, false);
 
 console.log('✓ KH-W4A Knowledge Runtime v2 Blueprint Registry and Loader passed.');
-console.log(`  Four registered Blueprints project 16 Parts and ${currentCanonicalNodeCount} current Canonical Node identities.`);
-console.log('  P5 resolves to BOOK-2; P10 resolves to BOOK-3; P13 resolves to BOOK-4.');
+console.log(`  Five registered Blueprints project 16 Parts and ${currentCanonicalNodeCount} current Canonical Node identities.`);
+console.log('  P5 resolves to BOOK-2; P8 resolves to BOOK-3; P10 resolves to BOOK-4; P13 resolves to BOOK-5.');
 console.log('  Legacy single-Book authority is retired; digest mismatch fails closed.');

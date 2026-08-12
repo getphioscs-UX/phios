@@ -24,36 +24,49 @@ export async function resolvePublicationContext(root, nodeOrCode, options = {}) 
   if (!node || !nodeCode || !authorities.byNodeCode.has(nodeCode)) {
     throw new Error(`Canonical Node is not registered: ${nodeCode || 'unknown'}`);
   }
+
   const ownership = options.ownership || await loadPublicationOwnership(root);
   const blueprintNode = options.blueprintNode || null;
   const migrated = ownership.byNodeCode.get(nodeCode) || null;
+
+  // Part Registry is the current publication-ownership authority. Canonical Node
+  // publicationBookCode fields and nodeCode prefixes are historical lineage only.
+  const publicationPartCode = normalizePartCode(
+    migrated?.publicationPartCode || blueprintNode?.partCode || node.publicationPartCode || node.partCode
+  );
+  const authorityPart = authorities.byPartCode.get(publicationPartCode);
+  const authorityPublicationBookCode = authorityPart?.bookCode || null;
+  const blueprintPublicationBookCode = normalizeBookCode(blueprintNode?.bookCode);
+  const migratedPublicationBookCode = normalizeBookCode(migrated?.publicationBookCode);
+  const publicationBookCode = migratedPublicationBookCode || authorityPublicationBookCode || blueprintPublicationBookCode;
   const sourceBookCode = normalizeBookCode(
     migrated?.sourceBookCode || node.sourceBookCode || node.publicationBookCode || blueprintNode?.bookCode
   );
-  const publicationBookCode = normalizeBookCode(
-    migrated?.publicationBookCode || node.publicationBookCode || blueprintNode?.bookCode
-  );
-  const publicationPartCode = normalizePartCode(
-    migrated?.publicationPartCode || node.publicationPartCode || node.partCode || blueprintNode?.partCode
-  );
-  const authorityPart = authorities.byPartCode.get(publicationPartCode);
+
   if (!sourceBookCode || !publicationBookCode || !authorityPart ||
-      authorityPart.bookCode !== publicationBookCode) {
+      authorityPublicationBookCode !== publicationBookCode) {
     throw new Error(`Publication Context conflicts with Registry Authority: ${nodeCode}`);
   }
+  if (blueprintPublicationBookCode && blueprintPublicationBookCode !== publicationBookCode) {
+    throw new Error(`Blueprint publication projection conflicts with Registry Authority: ${nodeCode}`);
+  }
+
+  // The explicit P5 migration remains binding historical evidence and therefore
+  // must agree with current Part authority. Non-migrated node publicationBookCode
+  // fields are intentionally not treated as publication authority after KAU-R0.
   if (migrated && (
     normalizeBookCode(node.sourceBookCode) !== sourceBookCode ||
-    normalizeBookCode(node.publicationBookCode) !== publicationBookCode ||
     normalizePartCode(node.publicationPartCode || node.partCode) !== publicationPartCode
   )) {
     throw new Error(`Publication ownership migration conflicts with Canonical Node: ${nodeCode}`);
   }
+
   return Object.freeze({
     nodeCode,
     sourceBookCode,
     publicationBookCode,
     publicationPartCode,
-    authority: migrated ? 'node-publication-ownership-v2' : 'canonical-node-registry',
+    authority: migrated ? 'node-publication-ownership-v2+part-registry' : 'part-registry',
     migrated: Boolean(migrated)
   });
 }

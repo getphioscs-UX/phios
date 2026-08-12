@@ -9,12 +9,15 @@ const authority = loadKnrRegistryAuthority(root);
 const output = buildKnowledgeRuntimeIndex();
 const records = name => output[name].records;
 
-assert.equal(authority.books.size, 4);
+assert.equal(authority.books.size, 5);
 assert.equal(authority.nodes.size, 716);
 assert.equal(authority.parts.size, 16);
 assert.equal(authority.resolvePublicationContext('KN-B1-P5-001').sourceBookCode, 'BOOK-1');
 assert.equal(authority.resolvePublicationContext('KN-B1-P5-001').publicationBookCode, 'BOOK-2');
 assert.equal(authority.resolvePublicationContext('KN-B1-P5-001').publicationPartCode, 'P5');
+assert.equal(authority.resolvePublicationContext('KN-B2-P8-001').publicationBookCode, 'BOOK-3');
+assert.equal(authority.resolvePublicationContext('KN-B3-P10-001').publicationBookCode, 'BOOK-4');
+assert.equal(authority.resolvePublicationContext('KN-B4-P13-001').publicationBookCode, 'BOOK-5');
 assert.equal(records('nodes-index.json').length, 6);
 assert.equal(records('publications-index.json').length, 6);
 assert.ok(records('nodes-index.json').every(record => record.publicationBookCode && record.publicationPartCode));
@@ -40,4 +43,4 @@ try {
 }
 
 console.log('KH-W4G KNR Registry Consumption Migration checks passed.');
-console.log('Validated: 4 Books, 16 Parts, 716 Nodes, P5 -> BOOK-2, published-only projection, registry-led filters, digest fail-closed.');
+console.log('Validated: 5 Books, 16 Parts, 716 Nodes; P5→BOOK-2, P8→BOOK-3, P10→BOOK-4, P13→BOOK-5; published-only projection, registry-led filters, digest fail-closed.');

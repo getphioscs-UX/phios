@@ -13,10 +13,10 @@ const readJson = async relative =>
 
 const result = await verifyKnowledgeBlueprintFreeze(root);
 assert.equal(result.freeze.status, 'frozen');
-assert.equal(result.freeze.bookFreeze.length, 4);
+assert.equal(result.freeze.bookFreeze.length, 5);
 assert.deepEqual(
   result.freeze.bookFreeze.map(entry => entry.bookCode),
-  ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4']
+  ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4', 'BOOK-5']
 );
 
 const migration = await readJson(
@@ -78,5 +78,5 @@ for (const forbiddenRoot of forbiddenRoots) {
 
 console.log('✓ KH-W4D Freeze Contract v2 passed.');
 console.log('✓ KH-W4E Part 5 Publication Ownership passed.');
-console.log('✓ Per-book digests remain independently frozen.');
+console.log('✓ Five per-book Blueprint digests remain independently frozen under KAU-R0 projection.');
 console.log('✓ Canonical Node codes and production states remain unchanged.');

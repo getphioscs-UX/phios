@@ -53,7 +53,7 @@ export function loadKnrRegistryAuthority(root = process.cwd()) {
   const migrations = new Map((ownership.nodes || []).map(node => [node.nodeCode, node]));
   const localeByNode = new Map((localized.localizedContent || []).map(item => [item.nodeCode, item.locales || {}]));
 
-  if (books.size !== 4 || nodes.size !== blueprintRegistry.totals.canonicalNodes) {
+  if (books.size !== 5 || nodes.size !== blueprintRegistry.totals.canonicalNodes) {
     throw new Error('KNR Registry Authority coverage mismatch.');
   }
 
@@ -62,12 +62,12 @@ export function loadKnrRegistryAuthority(root = process.cwd()) {
     if (!node) throw new Error(`KNR Canonical Node not registered: ${nodeCode}`);
     const migration = migrations.get(nodeCode);
     const blueprintContext = blueprintNodeContext.get(nodeCode);
-    const publicationBookCode = bookCode(migration?.publicationBookCode || node.publicationBookCode || blueprintContext?.bookCode);
-    const publicationPartCode = partCode(migration?.publicationPartCode || node.publicationPartCode || node.partCode || blueprintContext?.partCode);
-    const sourceBookCode = bookCode(migration?.sourceBookCode || node.sourceBookCode || blueprintContext?.bookCode || publicationBookCode);
+    const publicationPartCode = partCode(migration?.publicationPartCode || blueprintContext?.partCode || node.publicationPartCode || node.partCode);
     const part = parts.get(publicationPartCode);
     const partBookCode = part?.book === 'cross-volume' ? 'CROSS-VOLUME' : bookCode(part?.book);
-    if (!publicationBookCode || !publicationPartCode || !part || (partBookCode !== 'CROSS-VOLUME' && partBookCode !== publicationBookCode)) {
+    const publicationBookCode = bookCode(migration?.publicationBookCode || (partBookCode === 'CROSS-VOLUME' ? blueprintContext?.bookCode : partBookCode) || blueprintContext?.bookCode);
+    const sourceBookCode = bookCode(migration?.sourceBookCode || node.sourceBookCode || node.publicationBookCode || blueprintContext?.bookCode || publicationBookCode);
+    if (!publicationBookCode || !publicationPartCode || !part || (partBookCode !== 'CROSS-VOLUME' && partBookCode !== publicationBookCode) || (blueprintContext?.bookCode && bookCode(blueprintContext.bookCode) !== publicationBookCode)) {
       throw new Error(`KNR Publication Context invalid: ${nodeCode}`);
     }
     return Object.freeze({
@@ -75,7 +75,7 @@ export function loadKnrRegistryAuthority(root = process.cwd()) {
       sourceBookCode,
       publicationBookCode,
       publicationPartCode,
-      authority: migration ? ownership.contract : 'canonical-node-registry'
+      authority: migration ? `${ownership.contract}+part-registry` : 'part-registry'
     });
   };
 

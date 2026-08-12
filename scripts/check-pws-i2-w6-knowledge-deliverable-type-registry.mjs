@@ -135,12 +135,12 @@ assert.equal(
 assert.equal(questionsAfter.supportingQuestions.length, 23);
 assert.equal(book1Blueprint.nodes.length, book1Blueprint.plannedCanonicalNodes);
 assert.equal(book1Blueprint.activeProductionLimit, 8);
-assert.equal(knowledgeAfter.totals.books, 4);
+assert.equal(knowledgeAfter.totals.books, 5);
 
 assert.equal(loadRuntimeMigrations(process.cwd()).migrations.length, 5);
 database.close();
 console.log('✓ PWS-I2-W6 Knowledge and Deliverable Type Registry passed.');
 console.log('  Seven Published Asset Types and five Deliverable Types registered.');
-console.log('  PKR Canonical Nodes/Questions and the four-volume Blueprint Registry remain unchanged.');
+console.log('  PKR Canonical Nodes/Questions and the five-volume Blueprint Registry remain unchanged.');
 console.log('  Type registration creates no content, Deliverable, Signature or responsibility.');
 console.log('  W1 Universal Registry reused; W5 path restored; no Migration added.');
