@@ -4,7 +4,7 @@
   "migrationCode": "BOOK-W1B-P8-RUNTIME-MAINTENANCE-OUTLINE-MIGRATION-v1",
   "phase": "BOOK-W1",
   "step": "BOOK-W1B",
-  "status": "in-progress-source-authority-complete-pending-human-canonical-review",
+  "status": "HUMAN_APPROVED_BOOK_W1B_MIGRATION_MAP",
   "recordedAt": "2026-08-13",
   "partAuthority": {
     "partCode": "P8",
@@ -25,7 +25,8 @@
     "fullChapterListIncluded": true,
     "humanSourceAuthorizationRecorded": true,
     "humanReviewEligible": true,
-    "canonicalAcceptanceEligible": false,
+    "bookW1BAcceptanceRecorded": true,
+    "canonicalAcceptanceEligible": true,
     "sourceNormalizationApplied": "NONE"
   },
   "inventory": {
@@ -33,15 +34,16 @@
     "upgradedOutlineChapterCount": 64,
     "outlineChapterMinusExistingNodeCount": 17,
     "preservedExistingNodeCount": 47,
-    "acceptedCanonicalOutlineMatchCount": 0,
+    "acceptedCanonicalOutlineMatchCount": 44,
     "unresolvedSourceOutlineChapterCount": 0,
     "humanReviewRecommendationCount": 67,
     "recommendedNewCanonicalNodeCandidateCount": 20,
+    "acceptedCandidateOnlyNewOutlineChapterCount": 20,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "chapterCountDeltaIsNotANodeCandidateCount": true
   },
   "decisionSummary": {
-    "recommendationsOnly": true,
+    "recommendationsOnly": false,
     "match": 0,
     "rename": 0,
     "move": 44,
@@ -49,7 +51,10 @@
     "splitCandidateReview": 3,
     "mergeCandidateReview": 3,
     "newCandidate": 20,
-    "acceptedDecisionCount": 0,
+    "acceptedPrimaryRecommendationCount": 47,
+    "acceptedNewCandidateOnlyCount": 20,
+    "acceptedDecisionCount": 67,
+    "approvedCanonicalNodeCount": 0,
     "publicationOwnershipMoveCount": 47,
     "moveScope": "outline move recommendations are separate from BOOK-W1A publication-ownership moves"
   },
@@ -69,8 +74,11 @@
           "score": 0.78
         }
       ],
-      "status": "PENDING_HUMAN_REVIEW",
-      "candidateOnly": true
+      "status": "NON_DISPOSITIVE_REVIEW_EVIDENCE",
+      "candidateOnly": true,
+      "humanDecisionRequired": false,
+      "humanDecision": null,
+      "disposition": "RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE"
     },
     {
       "oldNodeCode": "KN-B2-P8-013",
@@ -92,8 +100,11 @@
           "score": 0.78
         }
       ],
-      "status": "PENDING_HUMAN_REVIEW",
-      "candidateOnly": true
+      "status": "NON_DISPOSITIVE_REVIEW_EVIDENCE",
+      "candidateOnly": true,
+      "humanDecisionRequired": false,
+      "humanDecision": null,
+      "disposition": "RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE"
     },
     {
       "oldNodeCode": "KN-B2-P8-047",
@@ -115,8 +126,11 @@
           "score": 0.78
         }
       ],
-      "status": "PENDING_HUMAN_REVIEW",
-      "candidateOnly": true
+      "status": "NON_DISPOSITIVE_REVIEW_EVIDENCE",
+      "candidateOnly": true,
+      "humanDecisionRequired": false,
+      "humanDecision": null,
+      "disposition": "RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE"
     }
   ],
   "mergeCandidates": [
@@ -135,8 +149,11 @@
           "score": 0.78
         }
       ],
-      "status": "PENDING_HUMAN_REVIEW",
-      "candidateOnly": true
+      "status": "NON_DISPOSITIVE_REVIEW_EVIDENCE",
+      "candidateOnly": true,
+      "humanDecisionRequired": false,
+      "humanDecision": null,
+      "disposition": "RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE"
     },
     {
       "outlineChapterCode": "8.61",
@@ -153,8 +170,11 @@
           "score": 0.78
         }
       ],
-      "status": "PENDING_HUMAN_REVIEW",
-      "candidateOnly": true
+      "status": "NON_DISPOSITIVE_REVIEW_EVIDENCE",
+      "candidateOnly": true,
+      "humanDecisionRequired": false,
+      "humanDecision": null,
+      "disposition": "RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE"
     },
     {
       "outlineChapterCode": "8.64",
@@ -171,22 +191,25 @@
           "score": 0.78
         }
       ],
-      "status": "PENDING_HUMAN_REVIEW",
-      "candidateOnly": true
+      "status": "NON_DISPOSITIVE_REVIEW_EVIDENCE",
+      "candidateOnly": true,
+      "humanDecisionRequired": false,
+      "humanDecision": null,
+      "disposition": "RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE"
     }
   ],
   "reconciliationActionGates": [
     {
       "action": "match",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "human-approved-book-w1b-primary-recommendation"
     },
     {
       "action": "rename",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "human-approved-book-w1b-primary-recommendation"
     },
     {
       "action": "same-part-move",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "human-approved-book-w1b-primary-recommendation"
     },
     {
       "action": "publication-ownership-move",
@@ -194,26 +217,27 @@
     },
     {
       "action": "supersede",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "human-approved-book-w1b-primary-recommendation"
     },
     {
       "action": "split",
-      "status": "candidate-review-only"
+      "status": "non-dispositive-review-evidence"
     },
     {
       "action": "merge",
-      "status": "candidate-review-only"
+      "status": "non-dispositive-review-evidence"
     },
     {
       "action": "new-candidate",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "human-approved-as-candidate-only-not-canonical-node"
     }
   ],
   "blocker": {
-    "code": "HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED",
-    "missingAuthority": "Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.",
-    "w1bAcceptanceBlocked": true,
-    "w1cSuccessorBlueprintGenerationAllowed": false
+    "code": null,
+    "missingAuthority": null,
+    "w1bAcceptanceBlocked": false,
+    "w1cSuccessorBlueprintGenerationAllowed": true,
+    "nextGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
   },
   "boundaries": {
     "canonicalNodeRegistryMutationAllowed": false,
@@ -238,11 +262,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行为何留下残留",
       "titleEn": "Residual Load",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.6",
@@ -251,8 +275,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -269,11 +296,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 为什么不会自动归零",
       "titleEn": "Runtime Accumulation",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.7",
@@ -282,8 +309,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -300,11 +330,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "过去为何持续存在",
       "titleEn": "Runtime Persistence",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.8",
@@ -313,8 +343,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -331,11 +364,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何偏离原有轨道",
       "titleEn": "Drift Formation",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.84,
         "sourceOutlineChapterCode": "8.9",
@@ -344,8 +377,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -362,11 +398,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何逐渐变形",
       "titleEn": "Distortion Formation",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": true,
       "outlineReconciliationRecommendation": {
         "action": "supersede",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "UNRESOLVED",
         "score": null,
         "sourceOutlineChapterCode": null,
@@ -384,8 +420,11 @@
             "score": 0.78
           }
         ],
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -402,11 +441,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何问题长期存在",
       "titleEn": "Chronic Runtime",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.11",
@@ -415,8 +454,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -433,11 +475,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何失去整体性",
       "titleEn": "Fragmentation",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.88,
         "sourceOutlineChapterCode": "8.12",
@@ -446,8 +488,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -464,11 +509,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统无法继续承载",
       "titleEn": "Saturation",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.8933,
         "sourceOutlineChapterCode": "8.13",
@@ -477,8 +522,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -495,11 +543,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "摩擦如何成为警告信号",
       "titleEn": "Friction Signals",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.14",
@@ -508,8 +556,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -526,11 +577,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "重复模式如何成为警告",
       "titleEn": "Repetition Patterns",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.15",
@@ -539,8 +590,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -557,11 +611,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "慢性噪音如何形成",
       "titleEn": "Chronic Noise",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.16",
@@ -570,8 +624,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -588,11 +645,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "失稳如何逐步升级",
       "titleEn": "Escalation",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.86,
         "sourceOutlineChapterCode": "8.17",
@@ -601,8 +658,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -619,11 +679,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何跨越失稳阈值",
       "titleEn": "Threshold Crossing",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": true,
       "outlineReconciliationRecommendation": {
         "action": "supersede",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "UNRESOLVED",
         "score": null,
         "sourceOutlineChapterCode": null,
@@ -646,8 +706,11 @@
             "score": 0.78
           }
         ],
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -664,11 +727,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统持续警告却无人察觉",
       "titleEn": "Signal Blindness",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.19",
@@ -677,8 +740,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -695,11 +761,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何持续占用资源",
       "titleEn": "Interface Occupancy",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.84,
         "sourceOutlineChapterCode": "8.21",
@@ -708,8 +774,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -726,11 +795,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统无法退出运行",
       "titleEn": "Interface Saturation",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.22",
@@ -739,8 +808,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -757,11 +829,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何成本最终进入载体",
       "titleEn": "Structural Cost Transfer",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.84,
         "sourceOutlineChapterCode": "8.23",
@@ -770,8 +842,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -788,11 +863,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "载体限制如何约束运行",
       "titleEn": "Embodied Constraints",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.25",
@@ -801,8 +876,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -819,11 +897,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何没有崩溃却无法顺畅运行",
       "titleEn": "Soft Interruptions",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.26",
@@ -832,8 +910,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -850,11 +931,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "慢性运行状态如何形成",
       "titleEn": "Chronic Runtime States",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.27",
@@ -863,8 +944,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -881,11 +965,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "责任如何转化为运行成本",
       "titleEn": "Responsibility Mapping",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.24",
@@ -894,8 +978,11 @@
         "basis": "high-confidence-reordered-semantic-match",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -912,11 +999,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行接口如何组织",
       "titleEn": "Interface Architecture",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.28",
@@ -925,8 +1012,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -943,11 +1033,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Medical OS 如何成为 Runtime Maintenance Layer",
       "titleEn": "Medical Runtime",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.8933,
         "sourceOutlineChapterCode": "8.30",
@@ -956,8 +1046,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -974,11 +1067,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何检测安全",
       "titleEn": "Safety Detection",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.31",
@@ -987,8 +1080,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1005,11 +1101,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复许可如何形成",
       "titleEn": "Recovery Permission",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.32",
@@ -1018,8 +1114,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1036,11 +1135,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统拒绝恢复",
       "titleEn": "Recovery Resistance",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.33",
@@ -1049,8 +1148,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1067,11 +1169,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复窗口如何出现",
       "titleEn": "Recovery Window",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.34",
@@ -1080,8 +1182,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1098,11 +1203,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何重新整合",
       "titleEn": "Reintegration",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.36",
@@ -1111,8 +1216,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1129,11 +1237,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何重新进入运行",
       "titleEn": "Runtime Re-entry",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.8933,
         "sourceOutlineChapterCode": "8.37",
@@ -1142,8 +1250,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1160,11 +1271,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复如何被排程",
       "titleEn": "Recovery Scheduling",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.39",
@@ -1173,8 +1284,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": false,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1191,11 +1305,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复债务如何形成",
       "titleEn": "Recovery Debt",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.40",
@@ -1204,8 +1318,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1222,11 +1339,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "结构如何被修复",
       "titleEn": "Structural Repair",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.41",
@@ -1235,8 +1352,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": false,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1253,11 +1373,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行如何重新平衡",
       "titleEn": "Runtime Rebalancing",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.42",
@@ -1266,8 +1386,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1284,11 +1407,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复架构如何形成",
       "titleEn": "Recovery Architecture",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.47",
@@ -1297,8 +1420,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1315,11 +1441,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "神经系统如何恢复",
       "titleEn": "Nervous Recovery",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.48",
@@ -1328,8 +1454,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1346,11 +1475,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "内分泌系统如何恢复",
       "titleEn": "Endocrine Recovery",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.49",
@@ -1359,8 +1488,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1377,11 +1509,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "免疫系统如何恢复",
       "titleEn": "Immune Recovery",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.50",
@@ -1390,8 +1522,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1408,11 +1543,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "代谢系统如何恢复",
       "titleEn": "Metabolic Recovery",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.51",
@@ -1421,8 +1556,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1439,11 +1577,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "心理运行如何恢复",
       "titleEn": "Psychological Recovery",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.52",
@@ -1452,8 +1590,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1470,11 +1611,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "AI 如何辅助恢复",
       "titleEn": "AI-Assisted Recovery",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.55",
@@ -1483,8 +1624,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": false,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1501,11 +1645,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "可持续运行如何形成",
       "titleEn": "Sustainability",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.88,
         "sourceOutlineChapterCode": "8.57",
@@ -1514,8 +1658,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1532,11 +1679,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行韧性如何形成",
       "titleEn": "Runtime Resilience",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.58",
@@ -1545,8 +1692,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1563,11 +1713,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "维护如何适应变化",
       "titleEn": "Adaptive Maintenance",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.45",
@@ -1576,8 +1726,11 @@
         "basis": "high-confidence-reordered-semantic-match",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1594,11 +1747,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何形成长期连续性",
       "titleEn": "Long-Term Continuity",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "HIGH",
         "score": 1,
         "sourceOutlineChapterCode": "8.59",
@@ -1607,8 +1760,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1625,11 +1781,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何形成自维护能力",
       "titleEn": "Self-Maintaining Systems",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.8526,
         "sourceOutlineChapterCode": "8.60",
@@ -1638,8 +1794,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1656,11 +1815,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复之后如何进入长期稳定",
       "titleEn": "Beyond Recovery",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": false,
       "outlineReconciliationRecommendation": {
         "action": "move",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "MEDIUM",
         "score": 0.86,
         "sourceOutlineChapterCode": "8.63",
@@ -1669,8 +1828,11 @@
         "basis": "ordered-semantic-alignment",
         "samePartChapterPositionChanged": true,
         "titleMetadataReviewRequired": true,
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     },
     {
@@ -1687,11 +1849,11 @@
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "维护如何升级为治理",
       "titleEn": "Maintenance Transition",
-      "outlineMatchStatus": "pending-explicit-human-canonical-review",
+      "outlineMatchStatus": "human-approved-book-w1b-primary-recommendation",
       "newChapterCodeIsPreservationPlaceholder": true,
       "outlineReconciliationRecommendation": {
         "action": "supersede",
-        "candidateOnly": true,
+        "candidateOnly": false,
         "confidence": "UNRESOLVED",
         "score": null,
         "sourceOutlineChapterCode": null,
@@ -1714,8 +1876,11 @@
             "score": 0.78
           }
         ],
-        "humanDecisionRequired": true,
-        "humanDecision": null
+        "humanDecisionRequired": false,
+        "humanDecision": "ACCEPT",
+        "humanDecisionAuthority": "TL",
+        "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION",
+        "applicationGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
       }
     }
   ],
@@ -1737,8 +1902,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.2",
@@ -1749,8 +1916,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.3",
@@ -1761,8 +1930,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.4",
@@ -1781,8 +1952,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.5",
@@ -1801,8 +1974,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.6",
@@ -1814,10 +1989,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.7",
@@ -1829,10 +2006,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.8",
@@ -1844,10 +2023,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.9",
@@ -1859,10 +2040,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.84,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.10",
@@ -1881,8 +2064,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.11",
@@ -1894,10 +2079,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.12",
@@ -1909,10 +2096,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.88,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.13",
@@ -1924,10 +2113,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.8933,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.14",
@@ -1939,10 +2130,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.15",
@@ -1954,10 +2147,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.16",
@@ -1969,10 +2164,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.17",
@@ -1984,10 +2181,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.86,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.18",
@@ -2006,8 +2205,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.19",
@@ -2019,10 +2220,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.20",
@@ -2033,8 +2236,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.21",
@@ -2046,10 +2251,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.84,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.22",
@@ -2061,10 +2268,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.23",
@@ -2076,10 +2285,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.84,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.24",
@@ -2091,10 +2302,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.25",
@@ -2106,10 +2319,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.26",
@@ -2121,10 +2336,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.27",
@@ -2136,10 +2353,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.28",
@@ -2151,10 +2370,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.29",
@@ -2165,8 +2386,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.30",
@@ -2178,10 +2401,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.8933,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.31",
@@ -2193,10 +2418,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.32",
@@ -2208,10 +2435,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.33",
@@ -2223,10 +2452,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.34",
@@ -2238,10 +2469,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.35",
@@ -2252,8 +2485,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.36",
@@ -2265,10 +2500,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.37",
@@ -2280,10 +2517,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.8933,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.38",
@@ -2294,8 +2533,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.39",
@@ -2307,10 +2548,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.40",
@@ -2322,10 +2565,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.41",
@@ -2337,10 +2582,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.42",
@@ -2352,10 +2599,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.43",
@@ -2374,8 +2623,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.44",
@@ -2394,8 +2645,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.45",
@@ -2407,10 +2660,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.46",
@@ -2436,8 +2691,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.47",
@@ -2449,10 +2706,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.48",
@@ -2464,10 +2723,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.49",
@@ -2479,10 +2740,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.50",
@@ -2494,10 +2757,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.51",
@@ -2509,10 +2774,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.52",
@@ -2524,10 +2791,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.53",
@@ -2538,8 +2807,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.54",
@@ -2558,8 +2829,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.55",
@@ -2571,10 +2844,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.56",
@@ -2593,8 +2868,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.57",
@@ -2606,10 +2883,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.88,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.58",
@@ -2621,10 +2900,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.59",
@@ -2636,10 +2917,12 @@
       ],
       "confidence": "HIGH",
       "score": 1,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.60",
@@ -2651,10 +2934,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.8526,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.61",
@@ -2680,8 +2965,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.62",
@@ -2692,8 +2979,10 @@
       "alternateExistingNodeCandidates": [],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     },
     {
       "outlineChapterCode": "8.63",
@@ -2705,10 +2994,12 @@
       ],
       "confidence": "MEDIUM",
       "score": 0.86,
-      "candidateOnly": true,
+      "candidateOnly": false,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION"
     },
     {
       "outlineChapterCode": "8.64",
@@ -2734,8 +3025,10 @@
       ],
       "candidateOnly": true,
       "canonicalNodeApproved": false,
-      "humanDecisionRequired": true,
-      "humanDecision": null
+      "humanDecisionRequired": false,
+      "humanDecision": "ACCEPT_AS_CANDIDATE_ONLY",
+      "humanDecisionAuthority": "TL",
+      "disposition": "HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY"
     }
   ]
 }

@@ -1,10 +1,10 @@
-# BOOK-W1B｜Part 8–15 Canonical Outline Reconciliation — TL review candidate
+# BOOK-W1B｜Part 8–15 Canonical Outline Reconciliation — Human approved
 
 ## Authority and gate state
 
 The TL-authorized source file is pinned by SHA-256 `44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd`. It contains 708 main-chapter occurrences; the exact repeated P13 13.1–13.87 sequence is recorded and normalized to 621 unique main chapters. The original source digest remains authoritative.
 
-This authorization establishes complete `sourceOutlineAuthority` and permits candidate rebuilding only. **BOOK-W1B, BOOK-W1C and BOOK-W1D remain unaccepted.** Every action below is a deterministic review suggestion, not a Canonical decision.
+The TL has accepted all eight BOOK-W1B migration maps and their current primary recommendations with no overrides. Split and merge records remain non-dispositive review evidence. New candidates are accepted only as candidates and are not approved Canonical Nodes. **BOOK-W1C and BOOK-W1D remain unaccepted.**
 
 621 outline chapters ≠ 621 Canonical Nodes. Existing frozen identities remain unchanged, `nodes.json` is not mutated, and no outline chapter is automatically approved as a Node.
 
@@ -21,11 +21,11 @@ This authorization establishes complete `sourceOutlineAuthority` and permits can
 | P14 | 79 | 52 | 2 | 1 | 22 | 27 | 13 | 31 | 54 |
 | P15 | 106 | 71 | 5 | 1 | 28 | 37 | 26 | 30 | 72 |
 
-Interpretation: `match`, `rename`, `move` and `supersede` are primary recommendations for existing Nodes. `split review` and `merge review` are non-dispositive semantic-overlap prompts. `new candidate` means an outline chapter has no governed one-to-one existing-Node recommendation; it is not an approved Canonical Node.
+Interpretation: `match`, `rename`, `move` and `supersede` are Human-approved BOOK-W1B primary migration decisions. `split review` and `merge review` remain non-dispositive semantic-overlap evidence. `new candidate` is accepted only for successor review and is not an approved Canonical Node.
 
-## Approval path
+## Next gate
 
-Review this summary and the eight JSON maps, then record the TL decision in `content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json`. A chat approval is acceptable only when it clearly approves all eight reviewed maps and identifies any overrides; the repository acceptance record must then be updated and rechecked before BOOK-W1C may begin.
+The Human approval is recorded in `content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json`. BOOK-W1C successor Blueprint candidates may now enter Human Review. This approval does not accept BOOK-W1C, mutate the Active Blueprint Registry, or authorize BOOK-W1D Canonical Registry reconciliation.
 
 ## P8｜Runtime Maintenance / 运行维持
 

@@ -2,7 +2,9 @@
 
 ## Result
 
-BOOK-W1D candidate preparation accounts for **716 existing Canonical Node Authority** records plus **2 KAU-R5 Human-accepted admissions**. It produces no active Canonical mutation because BOOK-W1B and BOOK-W1C Human Acceptance remain pending.
+BOOK-W1D candidate preparation accounts for **716 existing Canonical Node Authority** records plus **2 KAU-R5 Human-accepted admissions**. It produces no active Canonical mutation because W1B is Human approved; W1C Human Acceptance remains pending.
+
+BOOK-W1C now carries **323 upstream Canonical admission review candidates**: 192 promote, 66 link-to-existing, 21 supersede and 44 defer recommendations. This W1D candidate records their upstream existence but accepts 0 admissions and creates 0 new Canonical identities because W1C is not accepted.
 
 The exact KAU-R5 718-node `nodes.json` remains byte-identical. There are **0 silent deletion**, 0 ungoverned nodeCode mutation, 0 duplicate active identity and 0 orphan migration entry.
 
@@ -19,4 +21,4 @@ There are **473 publication ownership records** in total: 471 W1B ownership move
 
 ## Gate
 
-This is candidate evidence only. **W1B and W1C Human Acceptance remain pending.** Activation remains blocked until W1B migration maps and W1C successor Blueprints receive explicit Human Acceptance. Only then may W1D Human Acceptance authorize a versioned Canonical Registry successor and publication-context application.
+This is candidate evidence only. **W1B is Human approved; W1C Human Acceptance remains pending.** Activation remains blocked until the W1C successor Blueprints receive separate Human Acceptance. Only then may W1D Human Acceptance authorize a versioned Canonical Registry successor and publication-context application.

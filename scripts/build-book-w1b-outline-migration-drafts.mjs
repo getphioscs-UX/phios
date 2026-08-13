@@ -29,6 +29,9 @@ const ownerTransitions = {
   P13: ['BOOK-4', 'BOOK-5'], P14: ['BOOK-4', 'BOOK-5'], P15: ['BOOK-4', 'BOOK-5']
 };
 
+const W1B_ACCEPTANCE_RECORDED_AT = '2026-08-13';
+const W1B_ACCEPTANCE_REASON = 'TL accepts the current primary recommendations; split and merge remain non-dispositive review evidence; new candidates are accepted as candidates only and are not approved Canonical Nodes; overrides: none.';
+
 const ENGLISH_SEMANTIC_TERMS = [
   ['artificial intelligence', 'ai'], ['human–ai', 'human ai'], ['human-ai', 'human ai'],
   ['runtime', '运行'], ['reality', '现实'], ['structure', '结构'], ['activation', '激活'],
@@ -190,6 +193,8 @@ const semanticScore = (node, chapter) => {
   }
   return Number(score.toFixed(4));
 };
+
+export const scoreNodeOutlineSemantics = semanticScore;
 
 const candidateConfidence = score => score >= 0.9 ? 'HIGH' : score >= 0.8 ? 'MEDIUM' : 'LOW';
 
@@ -402,7 +407,17 @@ export async function buildBookW1BOutlineMigrationMaps(root = process.cwd()) {
       .sort((left, right) => compareChapterCodes(left.chapterCode, right.chapterCode));
     assert(nodes.every(node => node.publicationBookCode === oldPublicationBookCode));
     const recommendations = buildPartRecommendations(nodes, sourcePart.chapters);
-    const entries = recommendations.entries.map(({ node, recommendation }) => ({
+    const entries = recommendations.entries.map(({ node, recommendation: draftRecommendation }) => {
+      const recommendation = {
+        ...draftRecommendation,
+        candidateOnly: false,
+        humanDecisionRequired: false,
+        humanDecision: 'ACCEPT',
+        humanDecisionAuthority: 'TL',
+        disposition: 'HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION',
+        applicationGate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE'
+      };
+      return ({
       oldNodeCode: node.nodeCode, oldChapterCode: node.chapterCode,
       newChapterCode: recommendation.sourceOutlineChapterCode ?? node.chapterCode,
       action: 'move', actionScope: 'publication-ownership-only',
@@ -410,9 +425,38 @@ export async function buildBookW1BOutlineMigrationMaps(root = process.cwd()) {
       reason: `Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from ${oldPublicationBookCode} to ${newPublicationBookCode}; the outline action is a separate Human-review candidate.`,
       successorNodeCodes: [], oldPublicationBookCode, newPublicationBookCode,
       titleZhHans: node.titleZhHans, titleEn: node.titleEn,
-      outlineMatchStatus: 'pending-explicit-human-canonical-review',
+      outlineMatchStatus: 'human-approved-book-w1b-primary-recommendation',
       newChapterCodeIsPreservationPlaceholder: recommendation.sourceOutlineChapterCode === null,
       outlineReconciliationRecommendation: recommendation
+      });
+    });
+    const outlineCandidates = recommendations.outlineCandidates.map(candidate => {
+      const isNewCandidate = candidate.recommendedAction === 'new candidate';
+      return {
+        ...candidate,
+        candidateOnly: isNewCandidate,
+        canonicalNodeApproved: false,
+        humanDecisionRequired: false,
+        humanDecision: isNewCandidate ? 'ACCEPT_AS_CANDIDATE_ONLY' : 'ACCEPT',
+        humanDecisionAuthority: 'TL',
+        disposition: isNewCandidate
+          ? 'HUMAN_APPROVED_AS_NON_CANONICAL_CANDIDATE_ONLY'
+          : 'HUMAN_APPROVED_BOOK_W1B_PRIMARY_RECOMMENDATION'
+      };
+    });
+    const splitCandidates = recommendations.splitCandidates.map(candidate => ({
+      ...candidate,
+      status: 'NON_DISPOSITIVE_REVIEW_EVIDENCE',
+      humanDecisionRequired: false,
+      humanDecision: null,
+      disposition: 'RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE'
+    }));
+    const mergeCandidates = recommendations.mergeCandidates.map(candidate => ({
+      ...candidate,
+      status: 'NON_DISPOSITIVE_REVIEW_EVIDENCE',
+      humanDecisionRequired: false,
+      humanDecision: null,
+      disposition: 'RETAINED_AS_NON_DISPOSITIVE_REVIEW_EVIDENCE'
     }));
     const actionCount = action => entries.filter(entry =>
       entry.outlineReconciliationRecommendation.action === action).length;
@@ -423,7 +467,7 @@ export async function buildBookW1BOutlineMigrationMaps(root = process.cwd()) {
       contract: 'PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.1.0', schemaVersion: '1.1.0',
       migrationCode: `BOOK-W1B-${partCode}-${migrationSlug}-OUTLINE-MIGRATION-v1`,
       phase: 'BOOK-W1', step: 'BOOK-W1B',
-      status: 'in-progress-source-authority-complete-pending-human-canonical-review',
+      status: 'HUMAN_APPROVED_BOOK_W1B_MIGRATION_MAP',
       recordedAt: '2026-08-13',
       partAuthority: {
         partCode, titleZhHans: authority.titleZhHans, titleEn: authority.titleEn,
@@ -435,7 +479,7 @@ export async function buildBookW1BOutlineMigrationMaps(root = process.cwd()) {
         partInventorySha256: sourcePart.inventorySha256,
         upgradedOutlineChapterCount: sourcePart.mainChapterCount, fullChapterListIncluded: true,
         humanSourceAuthorizationRecorded: true, humanReviewEligible: true,
-        canonicalAcceptanceEligible: false,
+        bookW1BAcceptanceRecorded: true, canonicalAcceptanceEligible: true,
         sourceNormalizationApplied: partCode === 'P13'
           ? sourceAuthority.normalizationRecord.duplicateDisposition : 'NONE'
       },
@@ -443,44 +487,51 @@ export async function buildBookW1BOutlineMigrationMaps(root = process.cwd()) {
         existingCanonicalNodeCount: nodes.length,
         upgradedOutlineChapterCount: sourcePart.mainChapterCount,
         outlineChapterMinusExistingNodeCount: sourcePart.mainChapterCount - nodes.length,
-        preservedExistingNodeCount: entries.length, acceptedCanonicalOutlineMatchCount: 0,
+        preservedExistingNodeCount: entries.length,
+        acceptedCanonicalOutlineMatchCount: entries.filter(entry =>
+          entry.outlineReconciliationRecommendation.sourceOutlineChapterCode).length,
         unresolvedSourceOutlineChapterCount: 0,
         humanReviewRecommendationCount: entries.length + newCandidateCount,
         recommendedNewCanonicalNodeCandidateCount: newCandidateCount,
+        acceptedCandidateOnlyNewOutlineChapterCount: newCandidateCount,
         approvedNewCanonicalNodeCandidateCount: 0,
         chapterCountDeltaIsNotANodeCandidateCount: true
       },
       decisionSummary: {
-        recommendationsOnly: true,
+        recommendationsOnly: false,
         match: actionCount('match'), rename: actionCount('rename'), move: actionCount('move'),
         supersede: actionCount('supersede'), splitCandidateReview: recommendations.splitCandidates.length,
-        mergeCandidateReview: recommendations.mergeCandidates.length, newCandidate: newCandidateCount,
-        acceptedDecisionCount: 0, publicationOwnershipMoveCount: entries.length,
+        mergeCandidateReview: mergeCandidates.length, newCandidate: newCandidateCount,
+        acceptedPrimaryRecommendationCount: entries.length,
+        acceptedNewCandidateOnlyCount: newCandidateCount,
+        acceptedDecisionCount: entries.length + newCandidateCount,
+        approvedCanonicalNodeCount: 0, publicationOwnershipMoveCount: entries.length,
         moveScope: 'outline move recommendations are separate from BOOK-W1A publication-ownership moves'
       },
-      splitCandidates: recommendations.splitCandidates,
-      mergeCandidates: recommendations.mergeCandidates,
+      splitCandidates,
+      mergeCandidates,
       reconciliationActionGates: [
-        { action: 'match', status: 'pending-explicit-human-canonical-review' },
-        { action: 'rename', status: 'pending-explicit-human-canonical-review' },
-        { action: 'same-part-move', status: 'pending-explicit-human-canonical-review' },
+        { action: 'match', status: 'human-approved-book-w1b-primary-recommendation' },
+        { action: 'rename', status: 'human-approved-book-w1b-primary-recommendation' },
+        { action: 'same-part-move', status: 'human-approved-book-w1b-primary-recommendation' },
         { action: 'publication-ownership-move', status: 'recorded-by-book-w1a' },
-        { action: 'supersede', status: 'pending-explicit-human-canonical-review' },
-        { action: 'split', status: 'candidate-review-only' },
-        { action: 'merge', status: 'candidate-review-only' },
-        { action: 'new-candidate', status: 'pending-explicit-human-canonical-review' }
+        { action: 'supersede', status: 'human-approved-book-w1b-primary-recommendation' },
+        { action: 'split', status: 'non-dispositive-review-evidence' },
+        { action: 'merge', status: 'non-dispositive-review-evidence' },
+        { action: 'new-candidate', status: 'human-approved-as-candidate-only-not-canonical-node' }
       ],
       blocker: {
-        code: 'HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED',
-        missingAuthority: 'Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.',
-        w1bAcceptanceBlocked: true, w1cSuccessorBlueprintGenerationAllowed: false
+        code: null,
+        missingAuthority: null,
+        w1bAcceptanceBlocked: false, w1cSuccessorBlueprintGenerationAllowed: true,
+        nextGate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE'
       },
       boundaries: {
         canonicalNodeRegistryMutationAllowed: false, frozenNodeDeletionAllowed: false,
         frozenNodeRenumberAllowed: false, automaticCanonicalNodeApprovalAllowed: false,
         articlePublicationAllowed: false, productionAuthorityCreated: false
       },
-      entries, outlineCandidates: recommendations.outlineCandidates
+      entries, outlineCandidates
     });
   }
   return maps;
@@ -490,32 +541,43 @@ const migrationPath = fileName => `content/knowledge/migrations/${fileName}`;
 
 export function buildBookW1BHumanAcceptance(maps) {
   return {
-    schemaVersion: 'PHI-OS-BOOK-W1B-HUMAN-ACCEPTANCE-v1.1.0',
-    phase: 'BOOK-W1', step: 'BOOK-W1B', status: 'PENDING_HUMAN_CANONICAL_REVIEW',
-    recordedAt: null, humanActor: null, decision: null,
+    schemaVersion: 'PHI-OS-BOOK-W1B-HUMAN-ACCEPTANCE-v1.2.0',
+    phase: 'BOOK-W1', step: 'BOOK-W1B', status: 'HUMAN_APPROVED',
+    recordedAt: W1B_ACCEPTANCE_RECORDED_AT, humanActor: 'TL', decision: 'ACCEPT',
+    authorizationStatement: W1B_ACCEPTANCE_REASON,
     sourceAuthorityGate: {
       complete: true, completePartCount: 8, requiredPartCount: 8,
       authorityPath: SOURCE_AUTHORITY_PATH,
-      authorityDecision: 'TL_AUTHORIZED_SOURCE_AUTHORITY_ONLY',
+      authorityDecision: 'TL_AUTHORIZED_SOURCE_AUTHORITY_AND_W1B_ACCEPTANCE_RECORDED_SEPARATELY',
       missingCompleteOutlineAuthorities: []
     },
     reviewedArtifacts: MIGRATION_FILES.map(([partCode, fileName]) => ({
       partCode, path: migrationPath(fileName), sha256: objectDigest(maps.get(fileName))
     })),
     partDecisions: MIGRATION_FILES.map(([partCode, fileName]) => ({
-      partCode, migrationMapPath: migrationPath(fileName), decision: null, reason: null,
+      partCode, migrationMapPath: migrationPath(fileName), decision: 'ACCEPT', reason: W1B_ACCEPTANCE_REASON,
       acceptedRecommendationOverrides: [], rejectedRecommendationIds: []
     })),
+    dispositionPolicy: {
+      primaryRecommendations: 'HUMAN_APPROVED',
+      splitAndMerge: 'NON_DISPOSITIVE_REVIEW_EVIDENCE',
+      newCandidates: 'HUMAN_APPROVED_AS_CANDIDATE_ONLY',
+      approvedCanonicalNodeCount: 0,
+      overrides: []
+    },
     allowedDecisions: ['ACCEPT', 'REVISE', 'REJECT'],
     approvalInstructions: {
       chatAuthorizationAccepted: true,
-      requiredChatStatement: 'I approve the eight BOOK-W1B migration maps as reviewed, including any explicitly listed overrides.',
-      repositoryRecordingRequiredAfterChatAuthorization: true,
+      receivedChatStatement: W1B_ACCEPTANCE_REASON,
+      repositoryRecordingRequiredAfterChatAuthorization: false,
       allPartDecisionsMustBeRecorded: true, w1cMayBeginOnlyAfterDecisionAccept: true
     },
     boundaries: {
       sourceAuthorityAuthorizationIsW1BAcceptance: false, systemMaySelfAccept: false,
-      acceptanceCreatesCanonicalNodeAutomatically: false, w1cActivationBeforeAcceptanceAllowed: false
+      acceptanceCreatesCanonicalNodeAutomatically: false,
+      w1cHumanReviewMayBegin: true,
+      w1cActivationBeforeW1CHumanAcceptanceAllowed: false,
+      canonicalRegistryMutationAllowed: false
     }
   };
 }
@@ -571,17 +633,17 @@ export function buildBookW1BReviewSummary(maps, sourceAuthority) {
     ].join('\n');
   });
   return [
-    '# BOOK-W1B｜Part 8–15 Canonical Outline Reconciliation — TL review candidate', '',
+    '# BOOK-W1B｜Part 8–15 Canonical Outline Reconciliation — Human approved', '',
     '## Authority and gate state', '',
     `The TL-authorized source file is pinned by SHA-256 \`${sourceAuthority.source.originalSha256}\`. It contains 708 main-chapter occurrences; the exact repeated P13 13.1–13.87 sequence is recorded and normalized to 621 unique main chapters. The original source digest remains authoritative.`, '',
-    'This authorization establishes complete `sourceOutlineAuthority` and permits candidate rebuilding only. **BOOK-W1B, BOOK-W1C and BOOK-W1D remain unaccepted.** Every action below is a deterministic review suggestion, not a Canonical decision.', '',
+    'The TL has accepted all eight BOOK-W1B migration maps and their current primary recommendations with no overrides. Split and merge records remain non-dispositive review evidence. New candidates are accepted only as candidates and are not approved Canonical Nodes. **BOOK-W1C and BOOK-W1D remain unaccepted.**', '',
     '621 outline chapters ≠ 621 Canonical Nodes. Existing frozen identities remain unchanged, `nodes.json` is not mutated, and no outline chapter is automatically approved as a Node.', '',
     '## Per-Part review counts', '',
     '| Part | Outline chapters | Existing nodes | Match | Rename | Move | Supersede | Split review | Merge review | New candidate |',
     '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |', ...rows, '',
-    'Interpretation: `match`, `rename`, `move` and `supersede` are primary recommendations for existing Nodes. `split review` and `merge review` are non-dispositive semantic-overlap prompts. `new candidate` means an outline chapter has no governed one-to-one existing-Node recommendation; it is not an approved Canonical Node.', '',
-    '## Approval path', '',
-    `Review this summary and the eight JSON maps, then record the TL decision in \`${ACCEPTANCE_PATH}\`. A chat approval is acceptable only when it clearly approves all eight reviewed maps and identifies any overrides; the repository acceptance record must then be updated and rechecked before BOOK-W1C may begin.`, '',
+    'Interpretation: `match`, `rename`, `move` and `supersede` are Human-approved BOOK-W1B primary migration decisions. `split review` and `merge review` remain non-dispositive semantic-overlap evidence. `new candidate` is accepted only for successor review and is not an approved Canonical Node.', '',
+    '## Next gate', '',
+    `The Human approval is recorded in \`${ACCEPTANCE_PATH}\`. BOOK-W1C successor Blueprint candidates may now enter Human Review. This approval does not accept BOOK-W1C, mutate the Active Blueprint Registry, or authorize BOOK-W1D Canonical Registry reconciliation.`, '',
     ...sections
   ].join('\n') + '\n';
 }
@@ -595,8 +657,8 @@ async function writeArtifacts(root) {
   }
   await fs.writeFile(path.join(root, ACCEPTANCE_PATH), objectText(buildBookW1BHumanAcceptance(maps)), 'utf8');
   await fs.writeFile(path.join(root, REVIEW_SUMMARY_PATH), buildBookW1BReviewSummary(maps, sourceAuthority), 'utf8');
-  console.log(`Generated ${maps.size} BOOK-W1B migration-map review candidates from complete source authority.`);
-  console.log('W1B acceptance remains pending explicit TL Canonical review.');
+  console.log(`Generated ${maps.size} Human-approved BOOK-W1B migration maps from complete source authority.`);
+  console.log('W1C Human Review is now the next gate; W1C remains unaccepted and inactive.');
 }
 
 const invokedDirectly = process.argv[1]

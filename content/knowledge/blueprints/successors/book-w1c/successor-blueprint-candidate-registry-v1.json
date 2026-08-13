@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BOOK-W1C-SUCCESSOR-BLUEPRINT-CANDIDATE-REGISTRY-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1C-CANDIDATE-PREPARATION",
-  "status": "candidate-set-blocked-pending-w1b-and-human-acceptance",
+  "status": "candidate-set-ready-for-human-review",
   "recordedAt": "2026-08-13",
   "sourceActiveRegistry": {
     "path": "content/knowledge/blueprints/blueprint-registry.json",
@@ -61,9 +61,10 @@
     {
       "bookCode": "BOOK-2",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-2-knowledge-blueprint-v3.json",
-      "sha256": "515e4dadf9ff0e4e1609d1b91ede34cb62585ca636e0bb48d4ab4a3dbcf6ee00",
+      "sha256": "4c67e05814b65240f14b359edc38776a8c40ad2e51ee6b171c4fdcdf9bb3954b",
       "contractVersion": "PHI-OS-BOOK-2-KNOWLEDGE-BLUEPRINT-v3.0.0",
       "canonicalNodeCount": 182,
+      "newCanonicalNodeCandidateCount": 0,
       "partCodes": [
         "P5",
         "P6",
@@ -74,9 +75,10 @@
     {
       "bookCode": "BOOK-3",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-3-knowledge-blueprint-v1.json",
-      "sha256": "5f1b3bc5410bc1e379b6f4780ad76d4ecba924db21e0ecae43d9cbb23e9493b6",
+      "sha256": "8f8418223660009fd4b11f0e51b07e6e70890d2c0da1bdc349068357681c6aaa",
       "contractVersion": "PHI-OS-BOOK-3-KNOWLEDGE-BLUEPRINT-v1.0.0",
       "canonicalNodeCount": 86,
+      "newCanonicalNodeCandidateCount": 33,
       "partCodes": [
         "P8",
         "P9"
@@ -86,9 +88,10 @@
     {
       "bookCode": "BOOK-4",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-4-knowledge-blueprint-v3.json",
-      "sha256": "f53c353a646fa326bc62c61d5918ee02f1788393d8d7ad4dac7e1d51b5d50932",
+      "sha256": "d8041793a528365f6527e9e3c87b4d18fb4a23867f57a1136d9b4e6ee5d64d97",
       "contractVersion": "PHI-OS-BOOK-4-KNOWLEDGE-BLUEPRINT-v3.0.0",
       "canonicalNodeCount": 187,
+      "newCanonicalNodeCandidateCount": 146,
       "partCodes": [
         "P10",
         "P11",
@@ -99,9 +102,10 @@
     {
       "bookCode": "BOOK-5",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json",
-      "sha256": "0de1a998fe22ba48ec15557988ebcba1187150b00b9ef6fca5890703c0eea918",
+      "sha256": "fac9eec7e6df34d8aba16214f72c3a59f3e661b97dedf143471e148624177d87",
       "contractVersion": "PHI-OS-BOOK-5-KNOWLEDGE-BLUEPRINT-v1.0.0",
       "canonicalNodeCount": 198,
+      "newCanonicalNodeCandidateCount": 144,
       "partCodes": [
         "P13",
         "P14",
@@ -113,13 +117,31 @@
   "traceability": {
     "book2NodesTraceToKauR5Count": 182,
     "p8ToP15NodesTraceToW1BMigrationDecisionCount": 471,
+    "candidateOnlyNewOutlineChaptersTraceToW1BCount": 323,
+    "approvedNewCanonicalNodeCount": 0,
     "untracedIncludedNodeCount": 0
   },
+  "canonicalAdmissionReview": {
+    "authorizationPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-authorization-v1.json",
+    "authorizationSha256": "9ba9bc994d484a06e7659f19895404bc325f015413713f7a00dedbf56316af18",
+    "authorizationStatus": "HUMAN_REVIEW_AUTHORIZED_NOT_ACCEPTED",
+    "ledgerPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
+    "ledgerSha256": "3d32d8a9fcbc7df8a71e6154f71ae1f432b6c494613fac1c26fa4a0f4059d576",
+    "candidateCount": 323,
+    "promote": 192,
+    "linkToExisting": 66,
+    "supersede": 21,
+    "defer": 44,
+    "provisionalNodeCodeCount": 213,
+    "approvedCanonicalNodeCount": 0,
+    "w1cHumanDecisionCount": 0,
+    "w1dCanonicalAdmissionDecisionCount": 0
+  },
   "activationGates": {
-    "w1bMigrationMapsAccepted": false,
+    "w1bMigrationMapsAccepted": true,
     "successorBlueprintCandidatesGenerated": true,
     "humanBlueprintAcceptanceRecorded": false,
     "activeBlueprintRegistryMutationAllowed": false,
-    "nextPermittedGate": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
   }
 }

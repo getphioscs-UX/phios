@@ -76,13 +76,14 @@ for (const [partCode, fileName] of MIGRATION_FILES) {
 assert.equal(actualMaps.length, 8);
 assert.deepEqual(actualMaps.map(map => map.partAuthority.newPublicationBookCode),
   ['BOOK-3', 'BOOK-3', 'BOOK-4', 'BOOK-4', 'BOOK-4', 'BOOK-5', 'BOOK-5', 'BOOK-5']);
-assert(actualMaps.every(map => map.status === 'in-progress-source-authority-complete-pending-human-canonical-review'));
+assert(actualMaps.every(map => map.status === 'HUMAN_APPROVED_BOOK_W1B_MIGRATION_MAP'));
 assert(actualMaps.every(map => map.sourceOutlineAuthority.path === SOURCE_AUTHORITY_PATH));
 assert(actualMaps.every(map => map.sourceOutlineAuthority.fullChapterListIncluded));
 assert(actualMaps.every(map => map.sourceOutlineAuthority.humanReviewEligible));
-assert(actualMaps.every(map => !map.sourceOutlineAuthority.canonicalAcceptanceEligible));
-assert(actualMaps.every(map => map.blocker.w1bAcceptanceBlocked));
-assert(actualMaps.every(map => !map.blocker.w1cSuccessorBlueprintGenerationAllowed));
+assert(actualMaps.every(map => map.sourceOutlineAuthority.bookW1BAcceptanceRecorded));
+assert(actualMaps.every(map => map.sourceOutlineAuthority.canonicalAcceptanceEligible));
+assert(actualMaps.every(map => !map.blocker.w1bAcceptanceBlocked));
+assert(actualMaps.every(map => map.blocker.w1cSuccessorBlueprintGenerationAllowed));
 
 assert.equal(actualMaps.reduce((sum, map) => sum + map.inventory.existingCanonicalNodeCount, 0), 471);
 assert.equal(actualMaps.reduce((sum, map) => sum + map.inventory.upgradedOutlineChapterCount, 0), 621);
@@ -99,51 +100,66 @@ for (const entry of entries) {
   assert.equal(entry.actionScope, 'publication-ownership-only');
   assert.equal(entry.canonicalIdentityChanged, false);
   assert.equal(entry.publicationOwnershipChanged, true);
-  assert.equal(entry.outlineMatchStatus, 'pending-explicit-human-canonical-review');
+  assert.equal(entry.outlineMatchStatus, 'human-approved-book-w1b-primary-recommendation');
   assert.deepEqual(entry.successorNodeCodes, []);
   const recommendation = entry.outlineReconciliationRecommendation;
   assert(RECOMMENDATION_ACTIONS.has(recommendation.action));
-  assert.equal(recommendation.candidateOnly, true);
-  assert.equal(recommendation.humanDecisionRequired, true);
-  assert.equal(recommendation.humanDecision, null);
+  assert.equal(recommendation.candidateOnly, false);
+  assert.equal(recommendation.humanDecisionRequired, false);
+  assert.equal(recommendation.humanDecision, 'ACCEPT');
+  assert.equal(recommendation.humanDecisionAuthority, 'TL');
 }
 
 const outlineCandidates = actualMaps.flatMap(map => map.outlineCandidates);
 assert.equal(outlineCandidates.length, 621);
 assert.equal(new Set(outlineCandidates.map(candidate => candidate.outlineChapterCode)).size, 621);
-assert(outlineCandidates.every(candidate => candidate.candidateOnly && !candidate.canonicalNodeApproved));
-assert(outlineCandidates.every(candidate => candidate.humanDecisionRequired && candidate.humanDecision === null));
-assert(actualMaps.flatMap(map => map.splitCandidates).every(candidate => candidate.status === 'PENDING_HUMAN_REVIEW'));
-assert(actualMaps.flatMap(map => map.mergeCandidates).every(candidate => candidate.status === 'PENDING_HUMAN_REVIEW'));
-assert(actualMaps.every(map => map.decisionSummary.acceptedDecisionCount === 0));
+assert(outlineCandidates.every(candidate => !candidate.canonicalNodeApproved));
+assert(outlineCandidates.every(candidate => !candidate.humanDecisionRequired));
+assert(outlineCandidates.filter(candidate => candidate.recommendedAction === 'new candidate')
+  .every(candidate => candidate.candidateOnly && candidate.humanDecision === 'ACCEPT_AS_CANDIDATE_ONLY'));
+assert(outlineCandidates.filter(candidate => candidate.recommendedAction !== 'new candidate')
+  .every(candidate => !candidate.candidateOnly && candidate.humanDecision === 'ACCEPT'));
+assert(actualMaps.flatMap(map => map.splitCandidates)
+  .every(candidate => candidate.status === 'NON_DISPOSITIVE_REVIEW_EVIDENCE'));
+assert(actualMaps.flatMap(map => map.mergeCandidates)
+  .every(candidate => candidate.status === 'NON_DISPOSITIVE_REVIEW_EVIDENCE'));
+assert(actualMaps.every(map => map.decisionSummary.acceptedPrimaryRecommendationCount === map.entries.length));
+assert(actualMaps.every(map => map.decisionSummary.approvedCanonicalNodeCount === 0));
 
 const acceptance = await readJson(ACCEPTANCE_PATH);
 assert.deepEqual(acceptance, buildBookW1BHumanAcceptance(expectedMaps));
-assert.equal(acceptance.status, 'PENDING_HUMAN_CANONICAL_REVIEW');
+assert.equal(acceptance.status, 'HUMAN_APPROVED');
 assert.equal(acceptance.sourceAuthorityGate.complete, true);
 assert.equal(acceptance.sourceAuthorityGate.completePartCount, 8);
 assert.deepEqual(acceptance.sourceAuthorityGate.missingCompleteOutlineAuthorities, []);
-assert.equal(acceptance.decision, null);
-assert(acceptance.partDecisions.every(part => part.decision === null));
+assert.equal(acceptance.decision, 'ACCEPT');
+assert.equal(acceptance.humanActor, 'TL');
+assert(acceptance.partDecisions.every(part => part.decision === 'ACCEPT'));
+assert(acceptance.partDecisions.every(part => part.acceptedRecommendationOverrides.length === 0));
+assert.equal(acceptance.dispositionPolicy.splitAndMerge, 'NON_DISPOSITIVE_REVIEW_EVIDENCE');
+assert.equal(acceptance.dispositionPolicy.newCandidates, 'HUMAN_APPROVED_AS_CANDIDATE_ONLY');
+assert.equal(acceptance.dispositionPolicy.approvedCanonicalNodeCount, 0);
 assert.equal(acceptance.boundaries.sourceAuthorityAuthorizationIsW1BAcceptance, false);
 
 assert.equal(audit, buildBookW1BReviewSummary(expectedMaps, sourceAuthority));
-assert(audit.includes('BOOK-W1B, BOOK-W1C and BOOK-W1D remain unaccepted'));
+assert(audit.includes('BOOK-W1C and BOOK-W1D remain unaccepted'));
 assert(audit.includes('621 outline chapters ≠ 621 Canonical Nodes'));
 assert(audit.includes('exact repeated P13 13.1–13.87 sequence'));
 assert(audit.includes('## P8｜'));
 assert(audit.includes('## P15｜'));
 
 assert.equal(contract.implementationSteps[0].status, 'accepted');
-assert.equal(contract.implementationSteps[1].status, 'in_progress');
-assert(contract.implementationSteps.slice(2).every(step => step.status === 'pending'));
-assert.equal(contract.progress.currentStep, 'BOOK-W1B');
-assert.equal(contract.progress.status, 'source-authority-complete-pending-human-canonical-review');
+assert.equal(contract.implementationSteps[1].status, 'accepted');
+assert.equal(contract.implementationSteps[2].status, 'in_progress');
+assert(contract.implementationSteps.slice(3).every(step => step.status === 'pending'));
+assert.equal(contract.progress.currentStep, 'BOOK-W1C');
+assert.equal(contract.progress.status, 'w1b-human-approved-w1c-human-review-ready');
 assert.deepEqual(contract.progress.fullChapterInventoryAvailableForParts,
   ['P8', 'P9', 'P10', 'P11', 'P12', 'P13', 'P14', 'P15']);
 assert.deepEqual(contract.progress.fullChapterInventoryMissingForParts, []);
 assert.equal(contract.progress.approvedNewCanonicalNodeCandidateCount, 0);
-assert.equal(contract.progress.nextPermittedStep, 'BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE');
+assert.equal(contract.progress.w1bHumanAcceptanceSatisfied, true);
+assert.equal(contract.progress.nextPermittedStep, 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE');
 assert.equal(contract.boundaries.canonicalNodeRegistryMutationAllowedInW1B, false);
 assert.equal(contract.boundaries.successorBlueprintGenerationAllowedBeforeW1BAcceptance, false);
 
@@ -159,8 +175,8 @@ const recommendationTotals = actualMaps.reduce((totals, map) => {
   return totals;
 }, { match: 0, rename: 0, move: 0, supersede: 0, splitCandidateReview: 0, mergeCandidateReview: 0, newCandidate: 0 });
 
-console.log('✓ BOOK-W1B complete-source migration review candidate passed.');
+console.log('✓ BOOK-W1B Human-approved complete-source migration maps passed.');
 console.log(`  TL-authorized source ${AUTHORIZED_SOURCE_SHA256} yields 621 unique chapters after governed exact-repeat P13 normalization.`);
 console.log('  Eight deterministic maps account for all 471 existing P8-P15 frozen Canonical Nodes and all 621 outline chapters.');
 console.log(`  Review suggestions: ${recommendationTotals.match} match, ${recommendationTotals.rename} rename, ${recommendationTotals.move} move, ${recommendationTotals.supersede} supersede, ${recommendationTotals.splitCandidateReview} split clusters, ${recommendationTotals.mergeCandidateReview} merge clusters, ${recommendationTotals.newCandidate} new candidates.`);
-console.log('  Accepted decisions: 0. W1B/W1C/W1D remain unaccepted and nodes.json remains byte-identical to KAU-R5.');
+console.log('  W1B is Human approved; W1C Human Review is open, while W1C/W1D remain unaccepted and nodes.json remains byte-identical to KAU-R5.');

@@ -3,6 +3,11 @@ import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  ADMISSION_AUTHORIZATION_PATH,
+  ADMISSION_LEDGER_PATH,
+  buildBookW1CCanonicalAdmissionReview
+} from './build-book-w1c-canonical-node-admission-review.mjs';
 
 export const CANDIDATE_ROOT = 'content/knowledge/blueprints/successors/book-w1c';
 export const CANDIDATE_REGISTRY_PATH = `${CANDIDATE_ROOT}/successor-blueprint-candidate-registry-v1.json`;
@@ -26,6 +31,9 @@ const W1B_MAPS = {
   P15: 'content/knowledge/migrations/p15-reality-continuation-outline-migration-v1.json'
 };
 
+const W1B_ACCEPTANCE_PATH =
+  'content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json';
+
 const CANONICAL_PART_TITLES = {
   P8: '第八部｜运行维持', P9: '第九部｜协调运行', P10: '第十部｜运行扩展',
   P11: '第十一部｜文明运行', P12: '第十二部｜文明图谱', P13: '第十三部｜读取科学',
@@ -40,14 +48,21 @@ const objectDigest = value => normalizedDigest(objectText(value));
 const candidatePath = spec => `${CANDIDATE_ROOT}/${spec.candidateFile}`;
 
 export async function buildBookW1CCandidateSet(root = process.cwd()) {
-  const [activeRegistryRaw, r5Freeze, w1Contract] = await Promise.all([
+  const admissionReview = await buildBookW1CCanonicalAdmissionReview(root);
+  const admissionByOutlineKey = new Map(admissionReview.ledger.entries.map(entry =>
+    [`${entry.partCode}:${entry.outlineChapterCode}`, entry]));
+  const [activeRegistryRaw, r5Freeze, w1Contract, w1bAcceptance] = await Promise.all([
     read(root, 'content/knowledge/blueprints/blueprint-registry.json'),
     readJson(root, 'content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'),
-    readJson(root, 'content/knowledge/migrations/five-volume-migration-contract-v1.json')
+    readJson(root, 'content/knowledge/migrations/five-volume-migration-contract-v1.json'),
+    readJson(root, W1B_ACCEPTANCE_PATH)
   ]);
   assert.equal(r5Freeze.status, 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY');
   assert.equal(normalizedDigest(activeRegistryRaw), r5Freeze.blueprintAuthority.registryManifestSha256);
-  assert.equal(w1Contract.implementationSteps.find(step => step.step === 'BOOK-W1B')?.status, 'in_progress');
+  assert.equal(w1Contract.implementationSteps.find(step => step.step === 'BOOK-W1B')?.status, 'accepted');
+  assert.equal(w1bAcceptance.status, 'HUMAN_APPROVED');
+  assert.equal(w1bAcceptance.decision, 'ACCEPT');
+  assert.equal(w1bAcceptance.humanActor, 'TL');
 
   const maps = new Map();
   for (const [partCode, migrationPath] of Object.entries(W1B_MAPS)) {
@@ -68,12 +83,13 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
     assert.deepEqual(source.parts.map(part => part.partCode), spec.partCodes);
     const migrationRecord = spec.bookCode === 'BOOK-2'
       ? ['content/knowledge/reconciliation/kau-r5/canonical-registry-lineage-v1.json', 'content/knowledge/reconciliation/kau-r5/kau-r5-acceptance-v1.json', 'content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json']
-      : spec.partCodes.map(partCode => W1B_MAPS[partCode]);
+      : [...spec.partCodes.map(partCode => W1B_MAPS[partCode]), W1B_ACCEPTANCE_PATH];
     const sourceOutlineAuthority = spec.bookCode === 'BOOK-2'
       ? { scope: 'P5-P7 completed-manuscript and Human-accepted KAU-R5 Canonical successor', status: 'accepted-and-frozen', paths: migrationRecord }
       : {
-          scope: `${spec.partCodes[0]}-${spec.partCodes.at(-1)} BOOK-W1B migration-map drafts`,
-          status: 'blocked-pending-w1b-human-canonical-acceptance',
+          scope: `${spec.partCodes[0]}-${spec.partCodes.at(-1)} Human-approved BOOK-W1B migration maps`,
+          status: 'human-approved-book-w1b',
+          acceptancePath: W1B_ACCEPTANCE_PATH,
           paths: spec.partCodes.map(partCode => ({ partCode, path: maps.get(partCode).path, sha256: maps.get(partCode).digest, migrationStatus: maps.get(partCode).migration.status }))
         };
     const nodes = source.nodes.map(node => {
@@ -91,7 +107,10 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
         migrationDecisionRef: {
           authority: 'BOOK-W1B-OUTLINE-MIGRATION-MAP', status: entry.outlineMatchStatus,
           path: maps.get(node.partCode).path, entryIndex: index, oldNodeCode: entry.oldNodeCode,
-          action: entry.action, canonicalIdentityChanged: entry.canonicalIdentityChanged,
+          action: entry.outlineReconciliationRecommendation.action,
+          humanDecision: entry.outlineReconciliationRecommendation.humanDecision,
+          publicationOwnershipAction: entry.action,
+          canonicalIdentityChanged: entry.canonicalIdentityChanged,
           publicationOwnershipChanged: entry.publicationOwnershipChanged,
           oldChapterCode: entry.oldChapterCode, newChapterCode: entry.newChapterCode
         }
@@ -100,8 +119,48 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
     const parts = source.parts.map(part => ({
       ...part,
       title: CANONICAL_PART_TITLES[part.partCode] ?? part.title,
-      blueprintCandidateStatus: spec.bookCode === 'BOOK-2' ? 'kau-r5-authority-accepted' : 'w1b-human-canonical-acceptance-pending'
+      blueprintCandidateStatus: spec.bookCode === 'BOOK-2' ? 'kau-r5-authority-accepted' : 'w1b-human-approved-w1c-review-pending'
     }));
+    const newCanonicalNodeCandidates = spec.bookCode === 'BOOK-2' ? [] : spec.partCodes.flatMap(partCode =>
+      maps.get(partCode).migration.outlineCandidates
+        .filter(candidate => candidate.recommendedAction === 'new candidate')
+        .map(candidate => {
+          const admission = admissionByOutlineKey.get(`${partCode}:${candidate.outlineChapterCode}`);
+          assert(admission, `${partCode} ${candidate.outlineChapterCode} must have one admission review record.`);
+          return ({
+          partCode,
+          outlineChapterCode: candidate.outlineChapterCode,
+          sourceTitle: candidate.sourceTitle,
+          canonicalQuestion: candidate.canonicalQuestion,
+          candidateOnly: true,
+          canonicalNodeApproved: false,
+          w1bDisposition: candidate.disposition,
+          admissionCandidateCode: admission.admissionCandidateCode,
+          admissionRecommendation: admission.recommendation,
+          provisionalNodeCode: admission.provisionalNodeCode,
+          admissionReviewStatus: 'HUMAN_DECISION_PENDING',
+          admissionReviewRef: {
+            path: ADMISSION_LEDGER_PATH,
+            entryIndex: admissionReview.ledger.entries.indexOf(admission)
+          },
+          migrationDecisionRef: {
+            authority: 'BOOK-W1B-OUTLINE-MIGRATION-MAP',
+            path: maps.get(partCode).path,
+            outlineCandidateIndex: maps.get(partCode).migration.outlineCandidates.indexOf(candidate),
+            humanDecision: candidate.humanDecision
+          }
+          });
+        }));
+    const nonDispositiveReviewEvidence = spec.bookCode === 'BOOK-2'
+      ? { splitCandidateCount: 0, mergeCandidateCount: 0, disposition: 'NOT_APPLICABLE' }
+      : {
+          splitCandidateCount: spec.partCodes.reduce((sum, partCode) =>
+            sum + maps.get(partCode).migration.splitCandidates.length, 0),
+          mergeCandidateCount: spec.partCodes.reduce((sum, partCode) =>
+            sum + maps.get(partCode).migration.mergeCandidates.length, 0),
+          disposition: 'NON_DISPOSITIVE_REVIEW_EVIDENCE',
+          sourcePaths: spec.partCodes.map(partCode => maps.get(partCode).path)
+        };
     const candidate = {
       ...source,
       contract: spec.contractVersion,
@@ -112,9 +171,29 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
       migrationRecord,
       supersedes: { path: spec.sourcePath, sha256: normalizedDigest(sourceRaw), contractVersion: source.contract, historicalFileMutationAllowed: false },
       sourceOutlineAuthority,
-      activation: { candidateOnly: true, w1bMigrationMapsAccepted: false, humanBlueprintAcceptanceStatus: 'PENDING', activeBlueprintRegistryMutationAllowed: false, activeBlueprintAuthorityCreated: false },
+      activation: { candidateOnly: true, w1bMigrationMapsAccepted: true, humanBlueprintAcceptanceStatus: 'PENDING', activeBlueprintRegistryMutationAllowed: false, activeBlueprintAuthorityCreated: false },
       parts,
-      nodes
+      nodes,
+      newCanonicalNodeCandidates,
+      canonicalAdmissionReview: {
+        authorizationPath: ADMISSION_AUTHORIZATION_PATH,
+        ledgerPath: ADMISSION_LEDGER_PATH,
+        ledgerSha256: objectDigest(admissionReview.ledger),
+        candidateCount: newCanonicalNodeCandidates.length,
+        recommendationCounts: {
+          promote: newCanonicalNodeCandidates.filter(candidate =>
+            candidate.admissionRecommendation.action === 'promote').length,
+          linkToExisting: newCanonicalNodeCandidates.filter(candidate =>
+            candidate.admissionRecommendation.action === 'link to existing').length,
+          supersede: newCanonicalNodeCandidates.filter(candidate =>
+            candidate.admissionRecommendation.action === 'supersede').length,
+          defer: newCanonicalNodeCandidates.filter(candidate =>
+            candidate.admissionRecommendation.action === 'defer').length
+        },
+        humanDecisionCount: 0,
+        approvedCanonicalNodeCount: 0
+      },
+      nonDispositiveReviewEvidence
     };
     candidates.set(spec.candidateFile, candidate);
   }
@@ -122,7 +201,7 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
   const candidateRegistry = {
     schemaVersion: 'PHI-OS-BOOK-W1C-SUCCESSOR-BLUEPRINT-CANDIDATE-REGISTRY-v1.0.0',
     phase: 'BOOK-W1', step: 'BOOK-W1C-CANDIDATE-PREPARATION',
-    status: 'candidate-set-blocked-pending-w1b-and-human-acceptance', recordedAt: '2026-08-13',
+    status: 'candidate-set-ready-for-human-review', recordedAt: '2026-08-13',
     sourceActiveRegistry: { path: 'content/knowledge/blueprints/blueprint-registry.json', sha256: normalizedDigest(activeRegistryRaw), status: 'frozen-kau-r5-successor', mutatedByBookW1CPreparation: false },
     finalOwnershipTarget: [
       { bookCode: 'BOOK-1', partCodes: ['P1', 'P2', 'P3', 'P4'], source: 'active-predecessor-preserved' },
@@ -130,23 +209,95 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
     ],
     candidates: BOOK_SPECS.map(spec => {
       const candidate = candidates.get(spec.candidateFile);
-      return { bookCode: spec.bookCode, path: candidatePath(spec), sha256: objectDigest(candidate), contractVersion: spec.contractVersion, canonicalNodeCount: candidate.nodes.length, partCodes: spec.partCodes, status: candidate.status };
+      return {
+        bookCode: spec.bookCode, path: candidatePath(spec), sha256: objectDigest(candidate),
+        contractVersion: spec.contractVersion, canonicalNodeCount: candidate.nodes.length,
+        newCanonicalNodeCandidateCount: candidate.newCanonicalNodeCandidates.length,
+        partCodes: spec.partCodes, status: candidate.status
+      };
     }),
     traceability: {
       book2NodesTraceToKauR5Count: candidates.get(BOOK_SPECS[0].candidateFile).nodes.length,
       p8ToP15NodesTraceToW1BMigrationDecisionCount: BOOK_SPECS.slice(1).flatMap(spec => candidates.get(spec.candidateFile).nodes).length,
+      candidateOnlyNewOutlineChaptersTraceToW1BCount: BOOK_SPECS.slice(1)
+        .flatMap(spec => candidates.get(spec.candidateFile).newCanonicalNodeCandidates).length,
+      approvedNewCanonicalNodeCount: 0,
       untracedIncludedNodeCount: 0
     },
-    activationGates: { w1bMigrationMapsAccepted: false, successorBlueprintCandidatesGenerated: true, humanBlueprintAcceptanceRecorded: false, activeBlueprintRegistryMutationAllowed: false, nextPermittedGate: 'BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE' }
+    canonicalAdmissionReview: {
+      authorizationPath: ADMISSION_AUTHORIZATION_PATH,
+      authorizationSha256: objectDigest(admissionReview.authorization),
+      authorizationStatus: admissionReview.authorization.status,
+      ledgerPath: ADMISSION_LEDGER_PATH,
+      ledgerSha256: objectDigest(admissionReview.ledger),
+      ...admissionReview.ledger.inventory
+    },
+    activationGates: { w1bMigrationMapsAccepted: true, successorBlueprintCandidatesGenerated: true, humanBlueprintAcceptanceRecorded: false, activeBlueprintRegistryMutationAllowed: false, nextPermittedGate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE' }
   };
   const acceptance = {
     schemaVersion: 'PHI-OS-BOOK-W1C-HUMAN-ACCEPTANCE-v1.0.0', phase: 'BOOK-W1', step: 'BOOK-W1C', status: 'PENDING_HUMAN_ACCEPTANCE',
     candidateRegistryPath: CANDIDATE_REGISTRY_PATH, candidateRegistrySha256: objectDigest(candidateRegistry),
     humanActor: null, decidedAt: null, decision: null, allowedDecisions: ['ACCEPT', 'REVISE', 'REJECT'],
-    bookDecisions: BOOK_SPECS.map(spec => ({ bookCode: spec.bookCode, candidatePath: candidatePath(spec), decision: null, reason: null })),
-    boundaries: { systemMaySelfAccept: false, candidateGenerationCreatesActiveAuthority: false, activeRegistryMutationBeforeAcceptanceAllowed: false, w1bAcceptanceMayBeInferredFromThisTemplate: false }
+    admissionReviewAuthorization: {
+      path: ADMISSION_AUTHORIZATION_PATH,
+      status: admissionReview.authorization.status,
+      humanActor: 'TL',
+      reviewAuthorized: true,
+      authorizationIsW1CAcceptance: false
+    },
+    admissionReview: {
+      path: ADMISSION_LEDGER_PATH,
+      sha256: objectDigest(admissionReview.ledger),
+      candidateCount: admissionReview.ledger.inventory.candidateCount,
+      recommendationCounts: {
+        promote: admissionReview.ledger.inventory.promote,
+        linkToExisting: admissionReview.ledger.inventory.linkToExisting,
+        supersede: admissionReview.ledger.inventory.supersede,
+        defer: admissionReview.ledger.inventory.defer
+      },
+      decision: null,
+      acceptedRecommendationOverrides: []
+    },
+    bookDecisions: BOOK_SPECS.map(spec => {
+      const candidate = candidates.get(spec.candidateFile);
+      return {
+        bookCode: spec.bookCode,
+        candidatePath: candidatePath(spec),
+        candidateSha256: objectDigest(candidate),
+        canonicalNodeCount: candidate.nodes.length,
+        newCanonicalNodeCandidateCount: candidate.newCanonicalNodeCandidates.length,
+        admissionRecommendationCounts: candidate.canonicalAdmissionReview.recommendationCounts,
+        admissionDecision: null,
+        decision: null,
+        reason: null,
+        acceptedRecommendationOverrides: []
+      };
+    }),
+    reviewPolicy: {
+      w1bPrimaryRecommendationsAreAcceptedInputs: true,
+      splitAndMergeAreNonDispositiveEvidence: true,
+      newCandidatesRequireSeparateCanonicalGovernance: true,
+      all323CandidatesRemainInBlueprintHumanReview: true,
+      admissionRecommendationsAreAdvisoryUntilHumanDecision: true,
+      acceptanceActivatesBlueprintRegistryAutomatically: false
+    },
+    approvalInstructions: {
+      chatAuthorizationMayBeUsed: true,
+      requiredChatStatement: '我以 TL 身份接受 BOOK-W1C 四份 successor Blueprint candidates，并接受 323 项 Canonical admission review 的当前 recommendations；所有 overrides 必须明确列出。此 W1C acceptance 不自动创建 Canonical Nodes；正式 admission 仍须进入 BOOK-W1D Human governance。',
+      allBookDecisionsMustBeRecorded: true,
+      overridesMustBeExplicit: true,
+      repositoryRecordingRequiredAfterChatAuthorization: true,
+      w1dMayBeginOnlyAfterDecisionAccept: true
+    },
+    boundaries: {
+      systemMaySelfAccept: false,
+      candidateGenerationCreatesActiveAuthority: false,
+      admissionReviewAuthorizationCreatesCanonicalNode: false,
+      activeRegistryMutationBeforeAcceptanceAllowed: false,
+      w1bAcceptanceMayBeInferredFromThisTemplate: false
+    }
   };
-  return { candidates, candidateRegistry, acceptance };
+  return { candidates, candidateRegistry, acceptance, admissionReview };
 }
 
 async function writeCandidateSet(root) {

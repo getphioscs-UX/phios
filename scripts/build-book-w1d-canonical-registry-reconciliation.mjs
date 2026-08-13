@@ -8,6 +8,7 @@ export const OUTPUT_ROOT='content/knowledge/migrations/book-w1d';
 export const RECONCILIATION_PATH=`${OUTPUT_ROOT}/canonical-registry-reconciliation-candidate-v1.json`;
 export const PUBLICATION_PATH=`${OUTPUT_ROOT}/publication-ownership-migration-candidate-v1.json`;
 export const ACCEPTANCE_PATH=`${OUTPUT_ROOT}/book-w1d-human-acceptance-v1.json`;
+export const W1C_ADMISSION_LEDGER_PATH='content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json';
 export const MAP_PATHS=[
   'content/knowledge/migrations/p8-runtime-maintenance-outline-migration-v1.json',
   'content/knowledge/migrations/p9-coordination-runtime-outline-migration-v1.json',
@@ -27,22 +28,26 @@ const currentOwner=partCode=>partCode==='P0'||/^P[1-4]$/.test(partCode)?'BOOK-1'
 const targetOwner=partCode=>partCode==='P0'||/^P[1-4]$/.test(partCode)?'BOOK-1':partCode&&Number(partCode.slice(1))<=7?'BOOK-2':partCode&&Number(partCode.slice(1))<=9?'BOOK-3':partCode&&Number(partCode.slice(1))<=12?'BOOK-4':'BOOK-5';
 
 export async function buildBookW1DReconciliation(root=process.cwd()){
-  const [nodesRaw,r5,w1Contract,w1cRegistry,w1cAcceptance,rehome,...maps]=await Promise.all([
+  const [nodesRaw,r5,w1Contract,w1cRegistry,w1cAcceptance,w1cAdmissionLedger,rehome,...maps]=await Promise.all([
     read(root,'content/knowledge/registry/nodes.json'),
     readJson(root,'content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'),
     readJson(root,'content/knowledge/migrations/five-volume-migration-contract-v1.json'),
     readJson(root,'content/knowledge/blueprints/successors/book-w1c/successor-blueprint-candidate-registry-v1.json'),
     readJson(root,'content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json'),
+    readJson(root,W1C_ADMISSION_LEDGER_PATH),
     readJson(root,'content/knowledge/reconciliation/kau-r5/canonical-node-rehome-pending-v1.json'),
     ...MAP_PATHS.map(relative=>readJson(root,relative))
   ]);
   const nodes=JSON.parse(nodesRaw).nodes;
   assert.equal(nodes.length,718);
   assert.equal(normalizedSha(nodesRaw),r5.canonicalAuthority.successorSha256);
-  assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1B')?.status,'in_progress');
-  assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1C')?.status,'pending');
-  assert.equal(w1cRegistry.activationGates.w1bMigrationMapsAccepted,false);
+  assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1B')?.status,'accepted');
+  assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1C')?.status,'in_progress');
+  assert.equal(w1cRegistry.activationGates.w1bMigrationMapsAccepted,true);
   assert.equal(w1cAcceptance.status,'PENDING_HUMAN_ACCEPTANCE');
+  assert.equal(w1cAdmissionLedger.status,'HUMAN_REVIEW_CANDIDATES_NOT_ACCEPTED');
+  assert.equal(w1cAdmissionLedger.inventory.candidateCount,323);
+  assert.equal(w1cAdmissionLedger.inventory.approvedCanonicalNodeCount,0);
 
   const mapEntries=new Map();
   maps.forEach((migration,mapIndex)=>migration.entries.forEach((entry,entryIndex)=>{
@@ -65,7 +70,7 @@ export async function buildBookW1DReconciliation(root=process.cwd()){
     if(mapped){
       action=mapped.entry.action;
       decisionAuthority={authority:'BOOK-W1B-OUTLINE-MIGRATION-MAP',status:mapped.entry.outlineMatchStatus,path:mapped.path,migrationCode:mapped.migrationCode,entryIndex:mapped.entryIndex};
-      applicationStatus='blocked-pending-w1b-and-w1c-human-acceptance';
+      applicationStatus='blocked-pending-w1c-human-acceptance';
     }else if(rehomeRecord){
       action='cross-part relationship';
       decisionAuthority={authority:'KAU-R4-HUMAN-ACCEPTED-REHOME-TARGET',status:'target-accepted-physical-move-deferred',path:'content/knowledge/reconciliation/kau-r5/canonical-node-rehome-pending-v1.json'};
@@ -102,7 +107,7 @@ export async function buildBookW1DReconciliation(root=process.cwd()){
       partCode:maps.find(map=>map.migrationCode===mapped.migrationCode).partAuthority.partCode,
       publicationOwnershipChanged:true,
       migrationRecord:{path:mapped.path,migrationCode:mapped.migrationCode,entryIndex:mapped.entryIndex},
-      humanAcceptance:{status:'PENDING_W1B_HUMAN_CANONICAL_ACCEPTANCE',authority:null},
+      humanAcceptance:{status:'HUMAN_APPROVED_BOOK_W1B',authority:'content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json'},
       applicationStatus:'candidate-only-not-applied'
     })),
     ...rehome.records.map((record,index)=>({
@@ -125,24 +130,46 @@ export async function buildBookW1DReconciliation(root=process.cwd()){
   const actionCounts=Object.fromEntries([...new Set(entries.map(entry=>entry.action))].sort().map(action=>[action,entries.filter(entry=>entry.action===action).length]));
   const reconciliation={
     schemaVersion:'PHI-OS-BOOK-W1D-CANONICAL-REGISTRY-RECONCILIATION-CANDIDATE-v1.0.0',
-    phase:'BOOK-W1',step:'BOOK-W1D-CANDIDATE-PREPARATION',status:'candidate-only-blocked-pending-w1b-w1c-human-acceptance',recordedAt:'2026-08-13',
+    phase:'BOOK-W1',step:'BOOK-W1D-CANDIDATE-PREPARATION',status:'candidate-only-blocked-pending-w1c-human-acceptance',recordedAt:'2026-08-13',
     sourceAuthority:{canonicalRegistryPath:r5.canonicalAuthority.path,canonicalRegistrySha256:r5.canonicalAuthority.successorSha256,kauR5FreezePath:'content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json',predecessorCanonicalNodeCount:716,currentCanonicalNodeCount:718},
-    priorGateState:{w1bAccepted:false,w1cBlueprintHumanAcceptanceRecorded:false,w1cActiveBlueprintRegistryCreated:false,w1dActivationAllowed:false},
+    priorGateState:{
+      w1bAccepted:true,
+      w1cAdmissionReviewAuthorized:true,
+      w1cAdmissionReviewCandidateCount:323,
+      w1cAdmissionHumanDecisionCount:0,
+      w1cBlueprintHumanAcceptanceRecorded:false,
+      w1cActiveBlueprintRegistryCreated:false,
+      w1dActivationAllowed:false
+    },
     acceptanceAccounting:{existing716CanonicalNodeAuthorityAccountedFor:entries.filter(entry=>entry.baselineClass==='716-PREDECESSOR-CANONICAL-AUTHORITY').length,postBaselineHumanAcceptedAdmissionsAccountedFor:entries.filter(entry=>entry.baselineClass!=='716-PREDECESSOR-CANONICAL-AUTHORITY').length,silentDeletionCount:0,ungovernedNodeCodeMutationCount:0,duplicateActiveIdentityCount:0,orphanMigrationEntryCount:0,publicationOwnershipRecords:publicationEntries.length,untraceableOwnershipChangeCount:0},
     actionCounts,
-    candidateDecisionCounts:{splitCandidate:0,mergeCandidate:0,newCandidate:0,canonicalIdentityChanged:0},
+    candidateDecisionCounts:{
+      splitCandidate:0,mergeCandidate:0,newCandidate:0,canonicalIdentityChanged:0,
+      upstreamAdmissionReviewCandidateCount:323,
+      upstreamPromoteRecommendationCount:w1cAdmissionLedger.inventory.promote,
+      upstreamLinkToExistingRecommendationCount:w1cAdmissionLedger.inventory.linkToExisting,
+      upstreamSupersedeRecommendationCount:w1cAdmissionLedger.inventory.supersede,
+      upstreamDeferRecommendationCount:w1cAdmissionLedger.inventory.defer,
+      w1dAcceptedAdmissionCount:0
+    },
     boundaries:{nodesJsonMutationAllowed:false,outlineChapterAutoApprovalAllowed:false,batchNodeCodeRewriteAllowed:false,legacyNodeDeletionAllowed:false,productionAuthorityCreated:false},
     entries
   };
   const publication={
     schemaVersion:'PHI-OS-BOOK-W1D-PUBLICATION-OWNERSHIP-MIGRATION-CANDIDATE-v1.0.0',phase:'BOOK-W1',step:'BOOK-W1D-CANDIDATE-PREPARATION',status:'candidate-only-not-applied',recordedAt:'2026-08-13',
     recordCount:publicationEntries.length,w1bMapRecordCount:471,kauR4RehomeRecordCount:2,identityMutationCount:0,untraceableRecordCount:0,
-    activation:{w1bAccepted:false,w1cBlueprintsAccepted:false,w1dHumanAcceptanceRecorded:false,nodesJsonPublicationContextMutationAllowed:false},
+    activation:{w1bAccepted:true,w1cBlueprintsAccepted:false,w1dHumanAcceptanceRecorded:false,nodesJsonPublicationContextMutationAllowed:false},
     records:publicationEntries
   };
   const acceptance={
-    schemaVersion:'PHI-OS-BOOK-W1D-HUMAN-ACCEPTANCE-v1.0.0',phase:'BOOK-W1',step:'BOOK-W1D',status:'BLOCKED_PENDING_PRIOR_HUMAN_GATES',recordedAt:null,humanActor:null,decision:null,
-    priorGates:{w1bOutlineMigrationMapsAccepted:false,w1cSuccessorBlueprintsAccepted:false},
+    schemaVersion:'PHI-OS-BOOK-W1D-HUMAN-ACCEPTANCE-v1.0.0',phase:'BOOK-W1',step:'BOOK-W1D',status:'BLOCKED_PENDING_W1C_HUMAN_GATE',recordedAt:null,humanActor:null,decision:null,
+    priorGates:{
+      w1bOutlineMigrationMapsAccepted:true,
+      w1cCanonicalAdmissionReviewAuthorized:true,
+      w1cCanonicalAdmissionReviewAccepted:false,
+      w1cSuccessorBlueprintsAccepted:false
+    },
+    upstreamAdmissionReview:{path:W1C_ADMISSION_LEDGER_PATH,candidateCount:323,approvedCanonicalNodeCount:0},
     reviewedArtifacts:[RECONCILIATION_PATH,PUBLICATION_PATH],
     acceptanceChecks:{existing716CanonicalNodeAuthorityAccountedFor:null,silentDeletionCount:null,ungovernedNodeCodeMutationCount:null,duplicateActiveIdentityCount:null,orphanMigrationEntryCount:null,allOwnershipChangesTraceable:null},
     activation:{canonicalRegistryMutationAllowed:false,publicationOwnershipMutationAllowed:false,activeAuthorityCreated:false}

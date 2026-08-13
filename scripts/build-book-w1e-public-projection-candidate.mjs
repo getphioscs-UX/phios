@@ -38,7 +38,8 @@ const REVIEWED_W1C_PATHS = Object.freeze([
   'content/knowledge/blueprints/successors/book-w1c/book-2-knowledge-blueprint-v3.json',
   'content/knowledge/blueprints/successors/book-w1c/book-3-knowledge-blueprint-v1.json',
   'content/knowledge/blueprints/successors/book-w1c/book-4-knowledge-blueprint-v3.json',
-  'content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json'
+  'content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json',
+  'content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json'
 ]);
 
 const RECONCILIATION_PATH = 'content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json';
@@ -153,13 +154,13 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
     schemaVersion: 'PHI-OS-BOOK-W1D-TL-ACTIVATION-REVIEW-v1.0.0',
     phase: 'BOOK-W1',
     step: 'BOOK-W1D-ACTIVATION-READINESS',
-    status: 'BLOCKED_PENDING_W1B_W1C_W1D_HUMAN_GATES',
+    status: 'BLOCKED_PENDING_W1C_W1D_HUMAN_GATES',
     generatedAt: '2026-08-13',
     directActivationAllowed: false,
     blockerSummary: {
       missingCompleteOutlineAuthorityPartCount: missingOutlineAuthorities.length,
       missingCompleteOutlineAuthorities: missingOutlineAuthorities,
-      w1bMigrationMapsAccepted: false,
+      w1bMigrationMapsAccepted: true,
       w1cSuccessorBlueprintsAccepted: false,
       w1dReconciliationAccepted: false,
       targetOnlyRehomeCount: 2
@@ -177,6 +178,7 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
         order: 2,
         gate: 'BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE',
         requiredDecision: 'Review and accept the rebuilt eight migration maps, including every match, move, rename, split, merge, supersede and new candidate decision.',
+        satisfied: true,
         tlReviewRequired: true,
         systemMayInfer: false,
         acceptanceArtifact: W1B_ACCEPTANCE_PATH,
@@ -185,7 +187,7 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
       {
         order: 3,
         gate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE',
-        requiredDecision: 'Review and accept all four successor Blueprints after they are rebuilt from accepted W1B decisions.',
+        requiredDecision: 'Review and accept all four successor Blueprints plus the 323-item Canonical admission recommendation ledger after they are rebuilt from accepted W1B decisions.',
         tlReviewRequired: true,
         systemMayInfer: false,
         reviewedArtifacts: reviewedW1C
@@ -238,7 +240,7 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
       candidateOnly: true,
       currentProductionMutationAllowed: false,
       activePublicProjectionCreated: false,
-      nextPermittedGate: 'BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE'
+      nextPermittedGate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE'
     },
     sourceSnapshots,
     canonicalBookRoutes: books.map(book => ({ bookCode: book.bookCode, route: book.canonicalRoute })),

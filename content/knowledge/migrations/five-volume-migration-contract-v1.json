@@ -49,12 +49,12 @@
     {
       "step": "BOOK-W1B",
       "name": "Part 8-15 Canonical Outline Reconciliation",
-      "status": "in_progress"
+      "status": "accepted"
     },
     {
       "step": "BOOK-W1C",
       "name": "Successor Blueprint Generation",
-      "status": "pending"
+      "status": "in_progress"
     },
     {
       "step": "BOOK-W1D",
@@ -97,8 +97,8 @@
     "finalFreezeRequiresW1AToW1F": true
   },
   "progress": {
-    "currentStep": "BOOK-W1B",
-    "status": "source-authority-complete-pending-human-canonical-review",
+    "currentStep": "BOOK-W1C",
+    "status": "w1b-human-approved-w1c-human-review-ready",
     "migrationMapCount": 8,
     "upgradedOutlineChapterCount": 621,
     "accountedExistingCanonicalNodeCount": 471,
@@ -118,18 +118,30 @@
     "sourceOutlineAuthorityPath": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
     "sourceOutlineSourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
     "sourceOutlineAuthorityAuthorizedByTl": true,
-    "w1bHumanAcceptanceSatisfied": false,
-    "nextPermittedStep": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
+    "w1bHumanAcceptanceSatisfied": true,
+    "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
+    "nextPermittedStep": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
   },
   "w1cCandidatePreparation": {
-    "status": "generated-blocked-not-active",
+    "status": "generated-ready-for-human-review-not-active",
     "candidateRegistryPath": "content/knowledge/blueprints/successors/book-w1c/successor-blueprint-candidate-registry-v1.json",
     "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json",
     "candidateCount": 4,
-    "w1bAcceptanceSatisfied": false,
+    "w1bAcceptanceSatisfied": true,
+    "canonicalAdmissionReviewAuthorizationPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-authorization-v1.json",
+    "canonicalAdmissionReviewLedgerPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
+    "canonicalAdmissionReviewAuthorizedByTl": true,
+    "canonicalAdmissionCandidateCount": 323,
+    "canonicalAdmissionRecommendationCounts": {
+      "promote": 192,
+      "linkToExisting": 66,
+      "supersede": 21,
+      "defer": 44
+    },
+    "approvedCanonicalNodeCount": 0,
     "humanBlueprintAcceptanceSatisfied": false,
     "activeBlueprintRegistryMutated": false,
-    "nextPermittedGate": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
   },
   "w1dCandidatePreparation": {
     "status": "generated-blocked-not-active",
@@ -139,10 +151,12 @@
     "humanAcceptancePath": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
     "existingCanonicalAuthorityAccountedFor": 716,
     "postBaselineKauR5AdmissionsAccountedFor": 2,
-    "w1bAcceptanceSatisfied": false,
+    "upstreamW1cAdmissionReviewCandidateCount": 323,
+    "w1dCanonicalAdmissionDecisionCount": 0,
+    "w1bAcceptanceSatisfied": true,
     "w1cAcceptanceSatisfied": false,
     "activeCanonicalRegistryMutated": false,
-    "nextPermittedGate": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
   },
   "w1eCandidatePreparation": {
     "status": "generated-blocked-not-active",
@@ -154,6 +168,6 @@
     "canonicalRouteCount": 5,
     "compatibilityAliasCount": 1,
     "activePublicProjectionMutated": false,
-    "nextPermittedGate": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
   }
 }
