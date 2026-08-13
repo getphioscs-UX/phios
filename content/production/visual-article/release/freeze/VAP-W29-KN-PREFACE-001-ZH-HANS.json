@@ -1,29 +1,46 @@
 {
-  "schemaVersion": "PHI-OS-VAP-ARTICLE-RELEASE-PHASE-v1.0.0",
+  "schemaVersion": "PHI-OS-VAP-W29-FIRST-VISUAL-ARTICLE-FREEZE-v1.0.0",
   "work": "VAP-W29",
-  "title": "First Visual Article Freeze",
   "nodeCode": "KN-PREFACE-001",
   "locale": "zh-Hans",
-  "slug": "ai-formation-from-civilizational-capability",
-  "href": "/articles/ai-formation-from-civilizational-capability",
-  "status": "BLOCKED_BY_HUMAN_ASSET_REVIEW",
+  "status": "BLOCKED_BY_W28_INTERACTIVE_ACCEPTANCE",
   "executionPerformed": false,
-  "plannedOperations": [
-    "vertical_slice_freeze"
-  ],
-  "requiredGate": "W28_ACCEPTED",
-  "upstream": {
-    "w25Status": "AWAITING_HUMAN_ASSET_REVIEW",
-    "w25Digest": "d21ddc755f0567afe13eca9714dee3c220aba46ff640b83fa02b4f3943b5d79d",
-    "priorPath": "content/production/visual-article/release/acceptance/VAP-W28-KN-PREFACE-001-ZH-HANS.json",
-    "priorDigest": "fab6f0776867367882e1150037bfe48ee17ece3340b27de9ed975356f3c91205"
+  "verticalSlice": {
+    "canonicalNodeCount": 1,
+    "approvedArticleCount": 1,
+    "publishedFigureCount": 1,
+    "cprPresentationCount": 1,
+    "pdsArticlePageCount": 1,
+    "publicReleaseCount": 1
   },
+  "lineage": [
+    {
+      "path": "content/knowledge/public/authority/articles/zh-Hans/KN-PREFACE-001.json",
+      "sha256": "5dd1583da69d277a78f5546e74ab6c082898d012d33b6412d95d1266fcd41980"
+    },
+    {
+      "path": "content/production/car/published/PUBLISHED-ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-002.json",
+      "sha256": "65126e01f2c08be63c287d7cf829423af76f28c578a448bbe5bede347b5c8d20"
+    },
+    {
+      "path": "content/production/cpr/presentations/PRESENTATION-ARTICLE-KN-PREFACE-001-ZH-HANS-v2.json",
+      "sha256": "f0acde004cdfc29732cd809c8c698df194fc9536ad9ddb7d19bcc2c5451efa9d"
+    },
+    {
+      "path": "content/production/visual-article/acceptance/vap-w22-w24-cpr-pds-production-presentation-acceptance-v2.json",
+      "sha256": "7828fc6f6d2c131f34b2e8e62f6d42c77de4ee779e852b50845cf9c935e1ee65"
+    },
+    {
+      "path": "content/production/visual-article/release/acceptance/VAP-W28-KN-PREFACE-001-ZH-HANS.json",
+      "sha256": "06b1b941a4e160c4ca6193458ce2d6e574c97e7bd94bf76a55d37bbefa78daf8"
+    }
+  ],
+  "w28AcceptanceDigest": "1b6ad3c9e8de9f5ae8d0e20ef72e7ec2222f668856f0626e5e3d480a02edfff6",
   "governance": {
     "checkerWritesState": false,
-    "automaticApprovalForbidden": true,
-    "automaticPublicationForbidden": true,
-    "automaticDeploymentForbidden": true,
-    "productionUrlCheckedBeforeRelease": false
+    "freezeRequiresAcceptedW28": true,
+    "fixtureLeakageAllowed": false,
+    "unpublishedAssetLeakageAllowed": false
   },
-  "phaseDigest": "01fcc602a22ef56c5cc21da56d5f4459ba94bbaf42ad78f028c03f588c44e1cf"
+  "freezeDigest": "dc1e9d9bbf7dbfd18a49efe2a8277c528fcad846b0de6763ce1292cc930d4ab5"
 }
