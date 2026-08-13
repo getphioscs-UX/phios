@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   ADMISSION_AUTHORIZATION_PATH,
+  ADMISSION_HUMAN_ACCEPTANCE_PATH,
   ADMISSION_LEDGER_PATH,
   buildBookW1CCanonicalAdmissionReview
 } from './build-book-w1c-canonical-node-admission-review.mjs';
@@ -138,7 +139,9 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
           admissionCandidateCode: admission.admissionCandidateCode,
           admissionRecommendation: admission.recommendation,
           provisionalNodeCode: admission.provisionalNodeCode,
-          admissionReviewStatus: 'HUMAN_DECISION_PENDING',
+          admissionReviewStatus: admission.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION'
+            ? 'HUMAN_RECOMMENDATION_ACCEPTED_CANONICAL_ADMISSION_PENDING_W1D'
+            : 'HUMAN_DECISION_PENDING',
           admissionReviewRef: {
             path: ADMISSION_LEDGER_PATH,
             entryIndex: admissionReview.ledger.entries.indexOf(admission)
@@ -177,6 +180,7 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
       newCanonicalNodeCandidates,
       canonicalAdmissionReview: {
         authorizationPath: ADMISSION_AUTHORIZATION_PATH,
+        humanAcceptancePath: ADMISSION_HUMAN_ACCEPTANCE_PATH,
         ledgerPath: ADMISSION_LEDGER_PATH,
         ledgerSha256: objectDigest(admissionReview.ledger),
         candidateCount: newCanonicalNodeCandidates.length,
@@ -190,7 +194,12 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
           defer: newCanonicalNodeCandidates.filter(candidate =>
             candidate.admissionRecommendation.action === 'defer').length
         },
-        humanDecisionCount: 0,
+        humanDecisionCount: newCanonicalNodeCandidates.filter(candidate =>
+          candidate.admissionRecommendation.humanDecision !== null).length,
+        acceptedRecommendationCount: newCanonicalNodeCandidates.filter(candidate =>
+          candidate.admissionRecommendation.humanDecision === 'ACCEPT_RECOMMENDATION').length,
+        pendingHumanDecisionCount: newCanonicalNodeCandidates.filter(candidate =>
+          candidate.admissionRecommendation.humanDecision === null).length,
         approvedCanonicalNodeCount: 0
       },
       nonDispositiveReviewEvidence
@@ -201,7 +210,7 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
   const candidateRegistry = {
     schemaVersion: 'PHI-OS-BOOK-W1C-SUCCESSOR-BLUEPRINT-CANDIDATE-REGISTRY-v1.0.0',
     phase: 'BOOK-W1', step: 'BOOK-W1C-CANDIDATE-PREPARATION',
-    status: 'candidate-set-ready-for-human-review', recordedAt: '2026-08-13',
+    status: 'candidate-set-partial-human-review', recordedAt: '2026-08-13',
     sourceActiveRegistry: { path: 'content/knowledge/blueprints/blueprint-registry.json', sha256: normalizedDigest(activeRegistryRaw), status: 'frozen-kau-r5-successor', mutatedByBookW1CPreparation: false },
     finalOwnershipTarget: [
       { bookCode: 'BOOK-1', partCodes: ['P1', 'P2', 'P3', 'P4'], source: 'active-predecessor-preserved' },
@@ -221,6 +230,8 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
       p8ToP15NodesTraceToW1BMigrationDecisionCount: BOOK_SPECS.slice(1).flatMap(spec => candidates.get(spec.candidateFile).nodes).length,
       candidateOnlyNewOutlineChaptersTraceToW1BCount: BOOK_SPECS.slice(1)
         .flatMap(spec => candidates.get(spec.candidateFile).newCanonicalNodeCandidates).length,
+      acceptedAdmissionRecommendationCount: admissionReview.ledger.inventory.acceptedRecommendationCount,
+      pendingAdmissionRecommendationCount: admissionReview.ledger.inventory.pendingHumanDecisionCount,
       approvedNewCanonicalNodeCount: 0,
       untracedIncludedNodeCount: 0
     },
@@ -228,16 +239,19 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
       authorizationPath: ADMISSION_AUTHORIZATION_PATH,
       authorizationSha256: objectDigest(admissionReview.authorization),
       authorizationStatus: admissionReview.authorization.status,
+      humanAcceptancePath: ADMISSION_HUMAN_ACCEPTANCE_PATH,
+      humanAcceptanceSha256: objectDigest(admissionReview.humanAcceptance),
+      humanAcceptanceStatus: admissionReview.humanAcceptance.status,
       ledgerPath: ADMISSION_LEDGER_PATH,
       ledgerSha256: objectDigest(admissionReview.ledger),
       ...admissionReview.ledger.inventory
     },
-    activationGates: { w1bMigrationMapsAccepted: true, successorBlueprintCandidatesGenerated: true, humanBlueprintAcceptanceRecorded: false, activeBlueprintRegistryMutationAllowed: false, nextPermittedGate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE' }
+    activationGates: { w1bMigrationMapsAccepted: true, successorBlueprintCandidatesGenerated: true, canonicalAdmissionReviewPartiallyAccepted: true, canonicalAdmissionReviewFullyResolved: false, humanBlueprintAcceptanceRecorded: false, activeBlueprintRegistryMutationAllowed: false, nextPermittedGate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE' }
   };
   const acceptance = {
-    schemaVersion: 'PHI-OS-BOOK-W1C-HUMAN-ACCEPTANCE-v1.0.0', phase: 'BOOK-W1', step: 'BOOK-W1C', status: 'PENDING_HUMAN_ACCEPTANCE',
+    schemaVersion: 'PHI-OS-BOOK-W1C-HUMAN-ACCEPTANCE-v1.0.0', phase: 'BOOK-W1', step: 'BOOK-W1C', status: 'PARTIAL_HUMAN_ACCEPTANCE',
     candidateRegistryPath: CANDIDATE_REGISTRY_PATH, candidateRegistrySha256: objectDigest(candidateRegistry),
-    humanActor: null, decidedAt: null, decision: null, allowedDecisions: ['ACCEPT', 'REVISE', 'REJECT'],
+    humanActor: 'TL', decidedAt: '2026-08-13', decision: 'PARTIAL_ACCEPT', allowedDecisions: ['PARTIAL_ACCEPT', 'ACCEPT', 'REVISE', 'REJECT'],
     admissionReviewAuthorization: {
       path: ADMISSION_AUTHORIZATION_PATH,
       status: admissionReview.authorization.status,
@@ -248,6 +262,8 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
     admissionReview: {
       path: ADMISSION_LEDGER_PATH,
       sha256: objectDigest(admissionReview.ledger),
+      humanAcceptancePath: ADMISSION_HUMAN_ACCEPTANCE_PATH,
+      humanAcceptanceSha256: objectDigest(admissionReview.humanAcceptance),
       candidateCount: admissionReview.ledger.inventory.candidateCount,
       recommendationCounts: {
         promote: admissionReview.ledger.inventory.promote,
@@ -255,7 +271,17 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
         supersede: admissionReview.ledger.inventory.supersede,
         defer: admissionReview.ledger.inventory.defer
       },
-      decision: null,
+      decision: 'PARTIAL_ACCEPT_PROMOTE_AND_SUPERSEDE_RECOMMENDATIONS',
+      acceptedRecommendationCounts: {
+        promote: admissionReview.ledger.inventory.acceptedPromoteCount,
+        supersede: admissionReview.ledger.inventory.acceptedSupersedeCount,
+        total: admissionReview.ledger.inventory.acceptedRecommendationCount
+      },
+      pendingRecommendationCounts: {
+        linkToExisting: admissionReview.ledger.inventory.linkToExisting,
+        defer: admissionReview.ledger.inventory.defer,
+        total: admissionReview.ledger.inventory.pendingHumanDecisionCount
+      },
       acceptedRecommendationOverrides: []
     },
     bookDecisions: BOOK_SPECS.map(spec => {
@@ -267,7 +293,11 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
         canonicalNodeCount: candidate.nodes.length,
         newCanonicalNodeCandidateCount: candidate.newCanonicalNodeCandidates.length,
         admissionRecommendationCounts: candidate.canonicalAdmissionReview.recommendationCounts,
-        admissionDecision: null,
+        acceptedAdmissionRecommendationCount: candidate.canonicalAdmissionReview.acceptedRecommendationCount,
+        pendingAdmissionRecommendationCount: candidate.canonicalAdmissionReview.pendingHumanDecisionCount,
+        admissionDecision: candidate.newCanonicalNodeCandidates.length === 0
+          ? 'NOT_APPLICABLE'
+          : 'PARTIAL_ACCEPT_PROMOTE_AND_SUPERSEDE_RECOMMENDATIONS',
         decision: null,
         reason: null,
         acceptedRecommendationOverrides: []
@@ -278,12 +308,13 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
       splitAndMergeAreNonDispositiveEvidence: true,
       newCandidatesRequireSeparateCanonicalGovernance: true,
       all323CandidatesRemainInBlueprintHumanReview: true,
-      admissionRecommendationsAreAdvisoryUntilHumanDecision: true,
+      acceptedAdmissionRecommendationsRemainNonCanonicalUntilW1D: true,
+      unresolvedAdmissionRecommendationsRemainAdvisory: true,
       acceptanceActivatesBlueprintRegistryAutomatically: false
     },
     approvalInstructions: {
       chatAuthorizationMayBeUsed: true,
-      requiredChatStatement: '我以 TL 身份接受 BOOK-W1C 四份 successor Blueprint candidates，并接受 323 项 Canonical admission review 的当前 recommendations；所有 overrides 必须明确列出。此 W1C acceptance 不自动创建 Canonical Nodes；正式 admission 仍须进入 BOOK-W1D Human governance。',
+      requiredChatStatement: '我以 TL 身份接受 BOOK-W1C 四份 successor Blueprint candidates；接受 66 项 link-to-existing recommendations，并接受 44 项 defer recommendations 作为暂缓 admission、保留候选的 W1C disposition；overrides: none。授权记录完整 W1C acceptance 并进入 BOOK-W1D Human Review。',
       allBookDecisionsMustBeRecorded: true,
       overridesMustBeExplicit: true,
       repositoryRecordingRequiredAfterChatAuthorization: true,
@@ -293,6 +324,7 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
       systemMaySelfAccept: false,
       candidateGenerationCreatesActiveAuthority: false,
       admissionReviewAuthorizationCreatesCanonicalNode: false,
+      partialAdmissionAcceptanceCreatesCanonicalNode: false,
       activeRegistryMutationBeforeAcceptanceAllowed: false,
       w1bAcceptanceMayBeInferredFromThisTemplate: false
     }

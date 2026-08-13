@@ -157,11 +157,15 @@ assert.equal(w1bAcceptance.boundaries.systemMaySelfAccept, false);
 assert.equal(w1bAcceptance.boundaries.sourceAuthorityAuthorizationIsW1BAcceptance, false);
 assert.equal(w1dReview.blockerSummary.missingCompleteOutlineAuthorityPartCount, 0);
 assert.deepEqual(w1dReview.blockerSummary.missingCompleteOutlineAuthorities, []);
+assert.equal(w1dReview.blockerSummary.w1cAdmissionRecommendationsAccepted, 213);
+assert.equal(w1dReview.blockerSummary.w1cAdmissionRecommendationsPending, 110);
 assert.equal(w1dReview.reviewSequence[0].satisfied, true);
 assert.equal(w1dReview.reviewSequence[1].satisfied, true);
 assert.deepEqual(w1dReview.reviewSequence.map(record => record.tlReviewRequired), [false, true, true, true]);
 assert.equal(w1dReview.reviewSequence[1].reviewedArtifacts.length, 8);
-assert.equal(w1dReview.reviewSequence[2].reviewedArtifacts.length, 5);
+assert.equal(w1dReview.reviewSequence[2].reviewedArtifacts.length, 6);
+assert.equal(w1dReview.reviewSequence[2].gate,
+  'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE');
 assert.equal(w1dReview.reviewSequence[3].reviewedArtifacts.length, 2);
 assert.deepEqual(w1dReview.specialTlDecisions.map(record => record.canonicalNodeCode), [
   'KN-B2-P7-052', 'KN-B2-P7-057'

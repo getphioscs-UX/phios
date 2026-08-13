@@ -9,6 +9,8 @@
     "missingCompleteOutlineAuthorityPartCount": 0,
     "missingCompleteOutlineAuthorities": [],
     "w1bMigrationMapsAccepted": true,
+    "w1cAdmissionRecommendationsAccepted": 213,
+    "w1cAdmissionRecommendationsPending": 110,
     "w1cSuccessorBlueprintsAccepted": false,
     "w1dReconciliationAccepted": false,
     "targetOnlyRehomeCount": 2
@@ -67,30 +69,34 @@
     },
     {
       "order": 3,
-      "gate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE",
-      "requiredDecision": "Review and accept all four successor Blueprints plus the 323-item Canonical admission recommendation ledger after they are rebuilt from accepted W1B decisions.",
+      "gate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE",
+      "requiredDecision": "Accept or revise all four successor Blueprints, resolve 66 link-to-existing recommendations and decide 44 defer dispositions. The 213 provisional recommendations are already TL-accepted but remain non-Canonical until W1D.",
       "tlReviewRequired": true,
       "systemMayInfer": false,
       "reviewedArtifacts": [
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-2-knowledge-blueprint-v3.json",
-          "sha256": "4c67e05814b65240f14b359edc38776a8c40ad2e51ee6b171c4fdcdf9bb3954b"
+          "sha256": "85a85578cc31237a91c67ba7e9fbf0c5fa94a92c5176d16aa0bb0fe0fc984239"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-3-knowledge-blueprint-v1.json",
-          "sha256": "8f8418223660009fd4b11f0e51b07e6e70890d2c0da1bdc349068357681c6aaa"
+          "sha256": "fc55f9772df33cc06141d281a16ed9d7ec0aaf1f797ba2ce828604d996fd6e0d"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-4-knowledge-blueprint-v3.json",
-          "sha256": "d8041793a528365f6527e9e3c87b4d18fb4a23867f57a1136d9b4e6ee5d64d97"
+          "sha256": "057c63abde63b57f675924db8b0fc0e136f55e9b743b85e9f65ee21e39102324"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json",
-          "sha256": "fac9eec7e6df34d8aba16214f72c3a59f3e661b97dedf143471e148624177d87"
+          "sha256": "ca0f60dc469d22221f65a81aef8e5b0236e01e5db9ba0ed9b222c20fc134fb6d"
+        },
+        {
+          "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json",
+          "sha256": "57bb59484b0e4c2fd5678fc5f5cb77e3726ce060015b7dd45ff1819ffc267902"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
-          "sha256": "3d32d8a9fcbc7df8a71e6154f71ae1f432b6c494613fac1c26fa4a0f4059d576"
+          "sha256": "e14c3c34fb366cf078ea126b4ce500d74145f51e6957a2249ac0216f552b77f4"
         }
       ]
     },
@@ -103,7 +109,7 @@
       "reviewedArtifacts": [
         {
           "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
-          "sha256": "19283d3d6f576c0d84d995f9a56ffe06698719871e774837537a5a1c0a2bf760"
+          "sha256": "20e5d9312f5d905988371528f8739fb3e777f4feaea9ff664d9ff41c926f7605"
         },
         {
           "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",

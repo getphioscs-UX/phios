@@ -2,9 +2,9 @@
 
 ## Result
 
-BOOK-W1D candidate preparation accounts for **716 existing Canonical Node Authority** records plus **2 KAU-R5 Human-accepted admissions**. It produces no active Canonical mutation because W1B is Human approved; W1C Human Acceptance remains pending.
+BOOK-W1D candidate preparation accounts for **716 existing Canonical Node Authority** records plus **2 KAU-R5 Human-accepted admissions**. It produces no active Canonical mutation because W1B is Human approved and W1C remains partially accepted.
 
-BOOK-W1C now carries **323 upstream Canonical admission review candidates**: 192 promote, 66 link-to-existing, 21 supersede and 44 defer recommendations. This W1D candidate records their upstream existence but accepts 0 admissions and creates 0 new Canonical identities because W1C is not accepted.
+BOOK-W1C now carries **323 upstream Canonical admission review candidates**: 192 promote, 66 link-to-existing, 21 supersede and 44 defer recommendations. The **213 provisional recommendations are TL-accepted**, while 110 recommendations remain pending. This W1D candidate records their upstream state but accepts 0 admissions and creates 0 new Canonical identities because W1C is not fully accepted.
 
 The exact KAU-R5 718-node `nodes.json` remains byte-identical. There are **0 silent deletion**, 0 ungoverned nodeCode mutation, 0 duplicate active identity and 0 orphan migration entry.
 
@@ -21,4 +21,4 @@ There are **473 publication ownership records** in total: 471 W1B ownership move
 
 ## Gate
 
-This is candidate evidence only. **W1B is Human approved; W1C Human Acceptance remains pending.** Activation remains blocked until the W1C successor Blueprints receive separate Human Acceptance. Only then may W1D Human Acceptance authorize a versioned Canonical Registry successor and publication-context application.
+This is candidate evidence only. **W1B is Human approved; W1C remains partially accepted.** Activation remains blocked until the four W1C successor Blueprints and the remaining 110 recommendation dispositions receive Human decisions. Only then may W1D Human Acceptance authorize a versioned Canonical Registry successor and publication-context application.

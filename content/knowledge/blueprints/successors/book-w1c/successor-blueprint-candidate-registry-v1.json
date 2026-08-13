@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BOOK-W1C-SUCCESSOR-BLUEPRINT-CANDIDATE-REGISTRY-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1C-CANDIDATE-PREPARATION",
-  "status": "candidate-set-ready-for-human-review",
+  "status": "candidate-set-partial-human-review",
   "recordedAt": "2026-08-13",
   "sourceActiveRegistry": {
     "path": "content/knowledge/blueprints/blueprint-registry.json",
@@ -61,7 +61,7 @@
     {
       "bookCode": "BOOK-2",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-2-knowledge-blueprint-v3.json",
-      "sha256": "4c67e05814b65240f14b359edc38776a8c40ad2e51ee6b171c4fdcdf9bb3954b",
+      "sha256": "85a85578cc31237a91c67ba7e9fbf0c5fa94a92c5176d16aa0bb0fe0fc984239",
       "contractVersion": "PHI-OS-BOOK-2-KNOWLEDGE-BLUEPRINT-v3.0.0",
       "canonicalNodeCount": 182,
       "newCanonicalNodeCandidateCount": 0,
@@ -75,7 +75,7 @@
     {
       "bookCode": "BOOK-3",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-3-knowledge-blueprint-v1.json",
-      "sha256": "8f8418223660009fd4b11f0e51b07e6e70890d2c0da1bdc349068357681c6aaa",
+      "sha256": "fc55f9772df33cc06141d281a16ed9d7ec0aaf1f797ba2ce828604d996fd6e0d",
       "contractVersion": "PHI-OS-BOOK-3-KNOWLEDGE-BLUEPRINT-v1.0.0",
       "canonicalNodeCount": 86,
       "newCanonicalNodeCandidateCount": 33,
@@ -88,7 +88,7 @@
     {
       "bookCode": "BOOK-4",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-4-knowledge-blueprint-v3.json",
-      "sha256": "d8041793a528365f6527e9e3c87b4d18fb4a23867f57a1136d9b4e6ee5d64d97",
+      "sha256": "057c63abde63b57f675924db8b0fc0e136f55e9b743b85e9f65ee21e39102324",
       "contractVersion": "PHI-OS-BOOK-4-KNOWLEDGE-BLUEPRINT-v3.0.0",
       "canonicalNodeCount": 187,
       "newCanonicalNodeCandidateCount": 146,
@@ -102,7 +102,7 @@
     {
       "bookCode": "BOOK-5",
       "path": "content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json",
-      "sha256": "fac9eec7e6df34d8aba16214f72c3a59f3e661b97dedf143471e148624177d87",
+      "sha256": "ca0f60dc469d22221f65a81aef8e5b0236e01e5db9ba0ed9b222c20fc134fb6d",
       "contractVersion": "PHI-OS-BOOK-5-KNOWLEDGE-BLUEPRINT-v1.0.0",
       "canonicalNodeCount": 198,
       "newCanonicalNodeCandidateCount": 144,
@@ -118,6 +118,8 @@
     "book2NodesTraceToKauR5Count": 182,
     "p8ToP15NodesTraceToW1BMigrationDecisionCount": 471,
     "candidateOnlyNewOutlineChaptersTraceToW1BCount": 323,
+    "acceptedAdmissionRecommendationCount": 213,
+    "pendingAdmissionRecommendationCount": 110,
     "approvedNewCanonicalNodeCount": 0,
     "untracedIncludedNodeCount": 0
   },
@@ -125,23 +127,32 @@
     "authorizationPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-authorization-v1.json",
     "authorizationSha256": "9ba9bc994d484a06e7659f19895404bc325f015413713f7a00dedbf56316af18",
     "authorizationStatus": "HUMAN_REVIEW_AUTHORIZED_NOT_ACCEPTED",
+    "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json",
+    "humanAcceptanceSha256": "57bb59484b0e4c2fd5678fc5f5cb77e3726ce060015b7dd45ff1819ffc267902",
+    "humanAcceptanceStatus": "PARTIAL_HUMAN_ACCEPTANCE_RECORDED",
     "ledgerPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
-    "ledgerSha256": "3d32d8a9fcbc7df8a71e6154f71ae1f432b6c494613fac1c26fa4a0f4059d576",
+    "ledgerSha256": "e14c3c34fb366cf078ea126b4ce500d74145f51e6957a2249ac0216f552b77f4",
     "candidateCount": 323,
     "promote": 192,
     "linkToExisting": 66,
     "supersede": 21,
     "defer": 44,
     "provisionalNodeCodeCount": 213,
+    "acceptedRecommendationCount": 213,
+    "acceptedPromoteCount": 192,
+    "acceptedSupersedeCount": 21,
+    "pendingHumanDecisionCount": 110,
     "approvedCanonicalNodeCount": 0,
-    "w1cHumanDecisionCount": 0,
+    "w1cHumanDecisionCount": 213,
     "w1dCanonicalAdmissionDecisionCount": 0
   },
   "activationGates": {
     "w1bMigrationMapsAccepted": true,
     "successorBlueprintCandidatesGenerated": true,
+    "canonicalAdmissionReviewPartiallyAccepted": true,
+    "canonicalAdmissionReviewFullyResolved": false,
     "humanBlueprintAcceptanceRecorded": false,
     "activeBlueprintRegistryMutationAllowed": false,
-    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE"
   }
 }

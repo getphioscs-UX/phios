@@ -44,9 +44,12 @@ export async function buildBookW1DReconciliation(root=process.cwd()){
   assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1B')?.status,'accepted');
   assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1C')?.status,'in_progress');
   assert.equal(w1cRegistry.activationGates.w1bMigrationMapsAccepted,true);
-  assert.equal(w1cAcceptance.status,'PENDING_HUMAN_ACCEPTANCE');
-  assert.equal(w1cAdmissionLedger.status,'HUMAN_REVIEW_CANDIDATES_NOT_ACCEPTED');
+  assert.equal(w1cAcceptance.status,'PARTIAL_HUMAN_ACCEPTANCE');
+  assert.equal(w1cAcceptance.decision,'PARTIAL_ACCEPT');
+  assert.equal(w1cAdmissionLedger.status,'PARTIAL_HUMAN_ACCEPTANCE_RECORDED');
   assert.equal(w1cAdmissionLedger.inventory.candidateCount,323);
+  assert.equal(w1cAdmissionLedger.inventory.acceptedRecommendationCount,213);
+  assert.equal(w1cAdmissionLedger.inventory.pendingHumanDecisionCount,110);
   assert.equal(w1cAdmissionLedger.inventory.approvedCanonicalNodeCount,0);
 
   const mapEntries=new Map();
@@ -136,7 +139,10 @@ export async function buildBookW1DReconciliation(root=process.cwd()){
       w1bAccepted:true,
       w1cAdmissionReviewAuthorized:true,
       w1cAdmissionReviewCandidateCount:323,
-      w1cAdmissionHumanDecisionCount:0,
+      w1cAdmissionHumanDecisionCount:213,
+      w1cAdmissionPendingHumanDecisionCount:110,
+      w1cAdmissionReviewPartiallyAccepted:true,
+      w1cAdmissionReviewFullyResolved:false,
       w1cBlueprintHumanAcceptanceRecorded:false,
       w1cActiveBlueprintRegistryCreated:false,
       w1dActivationAllowed:false
@@ -150,6 +156,8 @@ export async function buildBookW1DReconciliation(root=process.cwd()){
       upstreamLinkToExistingRecommendationCount:w1cAdmissionLedger.inventory.linkToExisting,
       upstreamSupersedeRecommendationCount:w1cAdmissionLedger.inventory.supersede,
       upstreamDeferRecommendationCount:w1cAdmissionLedger.inventory.defer,
+      upstreamHumanAcceptedRecommendationCount:w1cAdmissionLedger.inventory.acceptedRecommendationCount,
+      upstreamPendingHumanDecisionCount:w1cAdmissionLedger.inventory.pendingHumanDecisionCount,
       w1dAcceptedAdmissionCount:0
     },
     boundaries:{nodesJsonMutationAllowed:false,outlineChapterAutoApprovalAllowed:false,batchNodeCodeRewriteAllowed:false,legacyNodeDeletionAllowed:false,productionAuthorityCreated:false},
@@ -166,10 +174,18 @@ export async function buildBookW1DReconciliation(root=process.cwd()){
     priorGates:{
       w1bOutlineMigrationMapsAccepted:true,
       w1cCanonicalAdmissionReviewAuthorized:true,
+      w1cCanonicalAdmissionReviewPartiallyAccepted:true,
       w1cCanonicalAdmissionReviewAccepted:false,
       w1cSuccessorBlueprintsAccepted:false
     },
-    upstreamAdmissionReview:{path:W1C_ADMISSION_LEDGER_PATH,candidateCount:323,approvedCanonicalNodeCount:0},
+    upstreamAdmissionReview:{
+      path:W1C_ADMISSION_LEDGER_PATH,
+      candidateCount:323,
+      acceptedRecommendationCount:213,
+      pendingHumanDecisionCount:110,
+      approvedCanonicalNodeCount:0,
+      w1dAcceptedAdmissionCount:0
+    },
     reviewedArtifacts:[RECONCILIATION_PATH,PUBLICATION_PATH],
     acceptanceChecks:{existing716CanonicalNodeAuthorityAccountedFor:null,silentDeletionCount:null,ungovernedNodeCodeMutationCount:null,duplicateActiveIdentityCount:null,orphanMigrationEntryCount:null,allOwnershipChangesTraceable:null},
     activation:{canonicalRegistryMutationAllowed:false,publicationOwnershipMutationAllowed:false,activeAuthorityCreated:false}
