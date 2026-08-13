@@ -39,7 +39,9 @@ const REVIEWED_W1C_PATHS = Object.freeze([
   'content/knowledge/blueprints/successors/book-w1c/book-3-knowledge-blueprint-v1.json',
   'content/knowledge/blueprints/successors/book-w1c/book-4-knowledge-blueprint-v3.json',
   'content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json',
+  'content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json',
   'content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json',
+  'content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json',
   'content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json'
 ]);
 
@@ -115,10 +117,11 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
   assert.equal(partsRegistry.architecture, 'five-volume-15-part');
   assert.equal(booksRegistry.books.length, 5);
   assert.equal(partsRegistry.parts.length, 15);
-  assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1D')?.status, 'pending');
-  assert.equal(w1cAcceptance.status, 'PARTIAL_HUMAN_ACCEPTANCE');
-  assert.equal(w1cAcceptance.admissionReview.acceptedRecommendationCounts.total, 213);
-  assert.equal(w1cAcceptance.admissionReview.pendingRecommendationCounts.total, 110);
+  assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1D')?.status, 'in_progress');
+  assert.equal(w1cAcceptance.status, 'HUMAN_APPROVED');
+  assert.equal(w1cAcceptance.admissionReview.acceptedRecommendationCounts.totalResolved, 323);
+  assert.equal(w1cAcceptance.admissionReview.pendingRecommendationCounts.total, 0);
+  assert.equal(w1dAcceptance.status, 'READY_FOR_HUMAN_REVIEW');
   assert.equal(w1dAcceptance.activation.activeAuthorityCreated, false);
   assert.equal(reconciliation.entries.length, 718);
   assert.equal(publication.recordCount, 473);
@@ -158,16 +161,19 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
     schemaVersion: 'PHI-OS-BOOK-W1D-TL-ACTIVATION-REVIEW-v1.0.0',
     phase: 'BOOK-W1',
     step: 'BOOK-W1D-ACTIVATION-READINESS',
-    status: 'BLOCKED_PENDING_W1C_W1D_HUMAN_GATES',
+    status: 'READY_FOR_W1D_HUMAN_REVIEW',
     generatedAt: '2026-08-13',
     directActivationAllowed: false,
     blockerSummary: {
       missingCompleteOutlineAuthorityPartCount: missingOutlineAuthorities.length,
       missingCompleteOutlineAuthorities: missingOutlineAuthorities,
       w1bMigrationMapsAccepted: true,
-      w1cAdmissionRecommendationsAccepted: 213,
-      w1cAdmissionRecommendationsPending: 110,
-      w1cSuccessorBlueprintsAccepted: false,
+      w1cHumanResolvedDispositionCount: 323,
+      w1dCanonicalAdmissionCandidateCount: 213,
+      w1cAcceptedLinkRelationshipCount: 66,
+      w1cDeferredAdmissionCandidateCount: 44,
+      w1cAdmissionRecommendationsPending: 0,
+      w1cSuccessorBlueprintsAccepted: true,
       w1dReconciliationAccepted: false,
       targetOnlyRehomeCount: 2
     },
@@ -193,15 +199,18 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
       {
         order: 3,
         gate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE',
-        requiredDecision: 'Accept or revise all four successor Blueprints, resolve 66 link-to-existing recommendations and decide 44 defer dispositions. The 213 provisional recommendations are already TL-accepted but remain non-Canonical until W1D.',
+        requiredDecision: 'Accept all four successor Blueprints and resolve the full 323-entry W1C review: 213 admission recommendations, 66 link-to-existing relationships and 44 deferred admissions.',
+        satisfied: true,
         tlReviewRequired: true,
         systemMayInfer: false,
+        acceptanceArtifact: 'content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json',
         reviewedArtifacts: reviewedW1C
       },
       {
         order: 4,
         gate: 'BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE',
-        requiredDecision: 'Accept the 718-entry identity ledger and 473 publication-ownership records; explicitly decide whether the two target-only rehomes may be physically applied.',
+        requiredDecision: 'Review the 718-entry existing identity ledger, decide 213 Canonical admission candidates (192 promote + 21 supersede with lineage/compatibility), review 473 publication-ownership records and explicitly decide whether the two target-only rehomes may be physically applied. The 66 accepted links remain relationship-only and the 44 deferred candidates stay preserved.',
+        satisfied: false,
         tlReviewRequired: true,
         systemMayInfer: false,
         reviewedArtifacts: reviewedW1D
@@ -246,7 +255,7 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
       candidateOnly: true,
       currentProductionMutationAllowed: false,
       activePublicProjectionCreated: false,
-      nextPermittedGate: 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE'
+      nextPermittedGate: 'BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE'
     },
     sourceSnapshots,
     canonicalBookRoutes: books.map(book => ({ bookCode: book.bookCode, route: book.canonicalRoute })),

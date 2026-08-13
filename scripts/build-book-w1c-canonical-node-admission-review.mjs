@@ -12,6 +12,8 @@ export const ADMISSION_LEDGER_PATH =
   `${ADMISSION_ROOT}/canonical-node-admission-review-candidates-v1.json`;
 export const ADMISSION_HUMAN_ACCEPTANCE_PATH =
   `${ADMISSION_ROOT}/canonical-node-admission-review-human-acceptance-v1.json`;
+export const ADMISSION_FINAL_HUMAN_ACCEPTANCE_PATH =
+  `${ADMISSION_ROOT}/canonical-node-admission-review-human-acceptance-v2.json`;
 export const ADMISSION_AUDIT_PATH =
   'docs/audits/BOOK-W1C-canonical-node-admission-review.md';
 
@@ -39,6 +41,13 @@ const AUTHORIZATION_STATEMENT =
   '我以 TL 身份授权 BOOK-W1C 将全部 323 个 unmatched outline chapters 作为 Canonical Node admission candidates 进行逐项审核；允许提出 promote、link to existing、supersede 或 defer 建议，但暂不自动创建 Canonical Node，也不代表 W1C 或 W1D acceptance。';
 const HUMAN_ACCEPTANCE_STATEMENT =
   '接受 213 项 provisional admission recommendations，继续 W1C 或 W1D acceptance。';
+const FINAL_HUMAN_ACCEPTANCE_STATEMENT = [
+  '我以 TL 身份接受 BOOK-W1C 四份 successor Blueprint candidates；',
+  '接受 66 项 link-to-existing recommendations；',
+  '接受 44 项 defer recommendations 作为暂缓 admission、继续保留候选的 W1C disposition；',
+  'overrides: none。',
+  '授权记录完整 W1C acceptance 并进入 BOOK-W1D Human Review。'
+].join('\n');
 
 const read = (root, relative) => fs.readFile(path.join(root, relative), 'utf8');
 const readJson = async (root, relative) => JSON.parse(await read(root, relative));
@@ -183,6 +192,80 @@ export function buildBookW1CAdmissionHumanAcceptance(reviewEntries) {
   };
 }
 
+export function buildBookW1CAdmissionFinalHumanAcceptance(reviewEntries, partialAcceptance) {
+  const promote = reviewEntries.filter(entry => entry.recommendation.action === 'promote');
+  const linkToExisting = reviewEntries.filter(entry =>
+    entry.recommendation.action === 'link to existing');
+  const supersede = reviewEntries.filter(entry => entry.recommendation.action === 'supersede');
+  const defer = reviewEntries.filter(entry => entry.recommendation.action === 'defer');
+  assert.deepEqual([promote.length, linkToExisting.length, supersede.length, defer.length],
+    [192, 66, 21, 44]);
+  const reviewCandidateSet = reviewEntries.map(entry => ({
+    admissionCandidateCode: entry.admissionCandidateCode,
+    partCode: entry.partCode,
+    outlineChapterCode: entry.outlineChapterCode,
+    recommendationAction: entry.recommendation.action,
+    targetExistingNodeCode: entry.recommendation.targetExistingNodeCode,
+    provisionalNodeCode: entry.provisionalNodeCode
+  }));
+  return {
+    schemaVersion: 'PHI-OS-BOOK-W1C-CANONICAL-NODE-ADMISSION-REVIEW-HUMAN-ACCEPTANCE-v2.0.0',
+    phase: 'BOOK-W1',
+    step: 'BOOK-W1C-CANONICAL-ADMISSION-HUMAN-REVIEW',
+    status: 'HUMAN_REVIEW_COMPLETE',
+    recordedAt: '2026-08-13',
+    humanActor: 'TL',
+    decision: 'ACCEPT_ALL_W1C_ADMISSION_REVIEW_DISPOSITIONS',
+    acceptanceStatement: FINAL_HUMAN_ACCEPTANCE_STATEMENT,
+    sourceReviewCandidateSetSha256: objectSha256(reviewCandidateSet),
+    supersedes: {
+      path: ADMISSION_HUMAN_ACCEPTANCE_PATH,
+      sha256: objectSha256(partialAcceptance),
+      decision: partialAcceptance.decision,
+      historicalRecordMutationAllowed: false
+    },
+    blueprintAcceptanceScope: [
+      'book-2-knowledge-blueprint-v3.json',
+      'book-3-knowledge-blueprint-v1.json',
+      'book-4-knowledge-blueprint-v3.json',
+      'book-5-knowledge-blueprint-v1.json'
+    ],
+    dispositionCounts: {
+      total: reviewEntries.length,
+      promoteAccepted: promote.length,
+      linkToExistingAccepted: linkToExisting.length,
+      supersedeAccepted: supersede.length,
+      deferAcceptedAsDeferredAdmission: defer.length,
+      pending: 0,
+      overrides: 0
+    },
+    decisions: reviewEntries.map(entry => ({
+      admissionCandidateCode: entry.admissionCandidateCode,
+      partCode: entry.partCode,
+      outlineChapterCode: entry.outlineChapterCode,
+      recommendationAction: entry.recommendation.action,
+      humanDecision: entry.recommendation.action === 'defer'
+        ? 'ACCEPT_DEFERRED_DISPOSITION'
+        : 'ACCEPT_RECOMMENDATION',
+      provisionalNodeCode: entry.provisionalNodeCode,
+      targetExistingNodeCode: entry.recommendation.targetExistingNodeCode
+    })),
+    boundaries: {
+      bookW1CAccepted: true,
+      bookW1DAccepted: false,
+      successorBlueprintsAccepted: true,
+      recommendationAcceptanceCreatesCanonicalNode: false,
+      deferredCandidatesRemainPreserved: true,
+      canonicalNodeApprovedCount: 0,
+      canonicalIdentityChangedCount: 0,
+      nodesJsonMutationAllowed: false,
+      activeCanonicalRegistryMutationAllowed: false,
+      publicationOwnershipActivationAllowed: false,
+      w1dMayBegin: true
+    }
+  };
+}
+
 export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd()) {
   const [nodesRaw, activeBlueprintRegistryRaw, w1bAcceptance, ...maps] = await Promise.all([
     read(root, 'content/knowledge/registry/nodes.json'),
@@ -294,22 +377,27 @@ export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd())
     });
 
   const humanAcceptance = buildBookW1CAdmissionHumanAcceptance(reviewEntries);
-  const acceptedCandidateCodes = new Set(humanAcceptance.acceptedCandidates
+  const finalHumanAcceptance = buildBookW1CAdmissionFinalHumanAcceptance(
+    reviewEntries, humanAcceptance);
+  const partialAcceptedCandidateCodes = new Set(humanAcceptance.acceptedCandidates
     .map(entry => entry.admissionCandidateCode));
   const entries = reviewEntries.map(entry => {
-    const accepted = acceptedCandidateCodes.has(entry.admissionCandidateCode);
+    const acceptedInPartialReview = partialAcceptedCandidateCodes.has(entry.admissionCandidateCode);
+    const deferred = entry.recommendation.action === 'defer';
     return {
       ...entry,
       recommendation: {
         ...entry.recommendation,
-        humanDecision: accepted ? 'ACCEPT_RECOMMENDATION' : null,
-        humanActor: accepted ? 'TL' : null,
-        decidedAt: accepted ? '2026-08-13' : null,
-        humanAcceptancePath: accepted ? ADMISSION_HUMAN_ACCEPTANCE_PATH : null
+        humanDecision: deferred ? 'ACCEPT_DEFERRED_DISPOSITION' : 'ACCEPT_RECOMMENDATION',
+        humanActor: 'TL',
+        decidedAt: '2026-08-13',
+        humanAcceptancePath: acceptedInPartialReview
+          ? ADMISSION_HUMAN_ACCEPTANCE_PATH
+          : ADMISSION_FINAL_HUMAN_ACCEPTANCE_PATH
       },
       gates: {
         ...entry.gates,
-        w1cHumanAcceptanceRecorded: accepted
+        w1cHumanAcceptanceRecorded: true
       }
     };
   });
@@ -340,7 +428,7 @@ export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd())
   const ledger = {
     schemaVersion: 'PHI-OS-BOOK-W1C-CANONICAL-NODE-ADMISSION-REVIEW-CANDIDATES-v1.0.0',
     phase: 'BOOK-W1', step: 'BOOK-W1C-CANONICAL-ADMISSION-REVIEW',
-    status: 'PARTIAL_HUMAN_ACCEPTANCE_RECORDED',
+    status: 'HUMAN_REVIEW_COMPLETE_W1C_ACCEPTED',
     generatedAt: '2026-08-13',
     authorization: {
       path: ADMISSION_AUTHORIZATION_PATH,
@@ -349,11 +437,12 @@ export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd())
       humanActor: authorization.humanActor
     },
     humanAcceptance: {
-      path: ADMISSION_HUMAN_ACCEPTANCE_PATH,
-      sha256: objectSha256(humanAcceptance),
-      status: humanAcceptance.status,
-      humanActor: humanAcceptance.humanActor,
-      decision: humanAcceptance.decision
+      path: ADMISSION_FINAL_HUMAN_ACCEPTANCE_PATH,
+      sha256: objectSha256(finalHumanAcceptance),
+      status: finalHumanAcceptance.status,
+      humanActor: finalHumanAcceptance.humanActor,
+      decision: finalHumanAcceptance.decision,
+      supersedesPath: ADMISSION_HUMAN_ACCEPTANCE_PATH
     },
     frozenAuthoritySnapshots: {
       canonicalNodeRegistryPath: 'content/knowledge/registry/nodes.json',
@@ -387,6 +476,13 @@ export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd())
       acceptedSupersedeCount: entries.filter(entry =>
         entry.recommendation.action === 'supersede'
         && entry.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION').length,
+      acceptedLinkToExistingCount: entries.filter(entry =>
+        entry.recommendation.action === 'link to existing'
+        && entry.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION').length,
+      acceptedDeferredDispositionCount: entries.filter(entry =>
+        entry.recommendation.humanDecision === 'ACCEPT_DEFERRED_DISPOSITION').length,
+      resolvedHumanDispositionCount: entries.filter(entry =>
+        entry.recommendation.humanDecision !== null).length,
       pendingHumanDecisionCount: entries.filter(entry =>
         entry.recommendation.humanDecision === null).length,
       approvedCanonicalNodeCount: 0,
@@ -395,10 +491,16 @@ export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd())
       w1dCanonicalAdmissionDecisionCount: 0
     },
     partSummary,
-    boundaries: authorization.boundaries,
+    boundaries: {
+      ...authorization.boundaries,
+      bookW1CAccepted: true,
+      successorBlueprintsAccepted: true,
+      deferredCandidatesRemainPreserved: true,
+      w1dMayBegin: true
+    },
     entries
   };
-  return { authorization, humanAcceptance, ledger };
+  return { authorization, humanAcceptance, finalHumanAcceptance, ledger };
 }
 
 const escapeMarkdown = value => String(value ?? '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
@@ -413,27 +515,27 @@ export function buildBookW1CAdmissionAudit(ledger) {
         .map(candidate => `${candidate.nodeCode} (${candidate.semanticScore})`).join('<br>') || '—');
     const score = entry.existingNodeEvidence.samePartCandidates[0]?.semanticScore
       ?? entry.existingNodeEvidence.crossPartCandidates[0]?.semanticScore ?? '—';
-    const humanDecision = entry.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION'
-      ? 'TL accepted recommendation'
-      : 'Pending';
+    const humanDecision = entry.recommendation.humanDecision === 'ACCEPT_DEFERRED_DISPOSITION'
+      ? 'TL accepted deferred disposition'
+      : 'TL accepted recommendation';
     return `| ${entry.admissionCandidateCode} | ${entry.outlineChapterCode} | ${escapeMarkdown(entry.sourceTitle)} | ${entry.recommendation.action} | ${target} | ${score} | ${humanDecision} |`;
   });
   return [
     '# BOOK-W1C｜323 Canonical Node Admission Candidates — Human Review', '',
     '## Authority boundary', '',
-    'TL authorized the review of all 323 unmatched outline chapters, then accepted the 213 recommendations carrying provisional Node Codes: 192 `promote` and 21 `supersede`. The remaining 66 `link to existing` and 44 `defer` recommendations are still pending.', '',
-    'This is partial W1C Human Acceptance only. It does not accept the four successor Blueprints, close BOOK-W1C, begin BOOK-W1D, create Canonical Nodes, mutate `nodes.json`, or activate a Blueprint Registry successor.', '',
+    'TL completed BOOK-W1C Human Review. All four successor Blueprints are accepted; all 192 `promote`, 66 `link to existing` and 21 `supersede` recommendations are accepted; all 44 `defer` recommendations are accepted as deferred-admission dispositions and remain preserved candidates.', '',
+    'W1C acceptance does not create Canonical Nodes, mutate `nodes.json`, activate publication ownership, or decide W1D admissions. W1D Human Review may now begin.', '',
     'A provisional Node Code is a collision-checked review identifier only. It becomes no identity or authority unless a later explicit W1D Human admission decision is recorded.', '',
     '## Recommendation summary', '',
     '| Part | Target Book | Candidates | Promote | Link existing | Supersede | Defer |',
     '| --- | --- | ---: | ---: | ---: | ---: | ---: |',
     ...summaryRows, '',
-    `Total: ${ledger.inventory.candidateCount}; promote ${ledger.inventory.promote}; link to existing ${ledger.inventory.linkToExisting}; supersede ${ledger.inventory.supersede}; defer ${ledger.inventory.defer}. TL-accepted recommendations: ${ledger.inventory.acceptedRecommendationCount}; pending recommendations: ${ledger.inventory.pendingHumanDecisionCount}; approved Canonical Nodes: 0.`, '',
+    `Total: ${ledger.inventory.candidateCount}; promote ${ledger.inventory.promote}; link to existing ${ledger.inventory.linkToExisting}; supersede ${ledger.inventory.supersede}; defer ${ledger.inventory.defer}. Human-resolved W1C dispositions: ${ledger.inventory.resolvedHumanDispositionCount}; Canonical admission recommendations for W1D: ${ledger.inventory.provisionalNodeCodeCount}; pending recommendations: ${ledger.inventory.pendingHumanDecisionCount}; approved Canonical Nodes: 0.`, '',
     '## Decision meaning', '',
     '- `promote`: distinct admission candidate; provisional code reserved for review only.',
     '- `link to existing`: important chapter is retained through an existing Canonical Node relationship; no new identity is recommended.',
     '- `supersede`: a new provisional identity is recommended with explicit legacy lineage; W1D Human governance is mandatory.',
-    '- `defer`: semantic evidence is ambiguous; TL disambiguation is required before any admission outcome.', '',
+    '- `defer`: Human-accepted deferred admission; the candidate stays preserved and requires later disambiguation before any future admission outcome.', '',
     '## All 323 review candidates', '',
     '| Candidate | Chapter | Title | Recommendation | Existing target / provisional code | Top score | Human decision |',
     '| --- | --- | --- | --- | --- | ---: | --- |',
@@ -442,10 +544,11 @@ export function buildBookW1CAdmissionAudit(ledger) {
 }
 
 async function writeArtifacts(root) {
-  const { authorization, humanAcceptance, ledger } = await buildBookW1CCanonicalAdmissionReview(root);
+  const { authorization, humanAcceptance, finalHumanAcceptance, ledger } = await buildBookW1CCanonicalAdmissionReview(root);
   await fs.mkdir(path.join(root, ADMISSION_ROOT), { recursive: true });
   await fs.writeFile(path.join(root, ADMISSION_AUTHORIZATION_PATH), objectText(authorization), 'utf8');
   await fs.writeFile(path.join(root, ADMISSION_HUMAN_ACCEPTANCE_PATH), objectText(humanAcceptance), 'utf8');
+  await fs.writeFile(path.join(root, ADMISSION_FINAL_HUMAN_ACCEPTANCE_PATH), objectText(finalHumanAcceptance), 'utf8');
   await fs.writeFile(path.join(root, ADMISSION_LEDGER_PATH), objectText(ledger), 'utf8');
   await fs.writeFile(path.join(root, ADMISSION_AUDIT_PATH), `${buildBookW1CAdmissionAudit(ledger)}\n`, 'utf8');
   console.log(`Generated ${ledger.inventory.candidateCount} BOOK-W1C Canonical admission review candidates; 0 Canonical Nodes approved.`);

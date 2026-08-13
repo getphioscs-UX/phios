@@ -54,12 +54,12 @@
     {
       "step": "BOOK-W1C",
       "name": "Successor Blueprint Generation",
-      "status": "in_progress"
+      "status": "accepted"
     },
     {
       "step": "BOOK-W1D",
       "name": "Canonical Registry Reconciliation",
-      "status": "pending"
+      "status": "in_progress"
     },
     {
       "step": "BOOK-W1E",
@@ -97,8 +97,8 @@
     "finalFreezeRequiresW1AToW1F": true
   },
   "progress": {
-    "currentStep": "BOOK-W1C",
-    "status": "w1b-human-approved-w1c-human-review-ready",
+    "currentStep": "BOOK-W1D",
+    "status": "w1c-human-approved-w1d-human-review-ready",
     "migrationMapCount": 8,
     "upgradedOutlineChapterCount": 621,
     "accountedExistingCanonicalNodeCount": 471,
@@ -120,16 +120,17 @@
     "sourceOutlineAuthorityAuthorizedByTl": true,
     "w1bHumanAcceptanceSatisfied": true,
     "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
-    "nextPermittedStep": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
+    "nextPermittedStep": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
   },
   "w1cCandidatePreparation": {
-    "status": "partial-human-acceptance-not-active",
+    "status": "human-approved-ready-for-w1d-review-not-active",
     "candidateRegistryPath": "content/knowledge/blueprints/successors/book-w1c/successor-blueprint-candidate-registry-v1.json",
     "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json",
     "candidateCount": 4,
     "w1bAcceptanceSatisfied": true,
     "canonicalAdmissionReviewAuthorizationPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-authorization-v1.json",
-    "canonicalAdmissionReviewHumanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json",
+    "canonicalAdmissionReviewPartialHumanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json",
+    "canonicalAdmissionReviewHumanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json",
     "canonicalAdmissionReviewLedgerPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
     "canonicalAdmissionReviewAuthorizedByTl": true,
     "canonicalAdmissionCandidateCount": 323,
@@ -139,23 +140,28 @@
       "supersede": 21,
       "defer": 44
     },
-    "acceptedCanonicalAdmissionRecommendationCount": 213,
+    "acceptedCanonicalAdmissionRecommendationCount": 279,
     "acceptedCanonicalAdmissionRecommendationCounts": {
       "promote": 192,
+      "linkToExisting": 66,
       "supersede": 21
     },
-    "pendingCanonicalAdmissionRecommendationCount": 110,
+    "canonicalAdmissionRecommendationCount": 213,
+    "acceptedLinkToExistingRecommendationCount": 66,
+    "acceptedDeferredDispositionCount": 44,
+    "resolvedHumanDispositionCount": 323,
+    "pendingCanonicalAdmissionRecommendationCount": 0,
     "pendingCanonicalAdmissionRecommendationCounts": {
-      "linkToExisting": 66,
-      "defer": 44
+      "linkToExisting": 0,
+      "defer": 0
     },
     "approvedCanonicalNodeCount": 0,
-    "humanBlueprintAcceptanceSatisfied": false,
+    "humanBlueprintAcceptanceSatisfied": true,
     "activeBlueprintRegistryMutated": false,
-    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
   },
   "w1dCandidatePreparation": {
-    "status": "generated-blocked-not-active",
+    "status": "generated-ready-for-human-review-not-active",
     "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
     "canonicalReconciliationPath": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
     "publicationOwnershipPath": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
@@ -163,13 +169,16 @@
     "existingCanonicalAuthorityAccountedFor": 716,
     "postBaselineKauR5AdmissionsAccountedFor": 2,
     "upstreamW1cAdmissionReviewCandidateCount": 323,
-    "upstreamW1cAcceptedAdmissionRecommendationCount": 213,
-    "upstreamW1cPendingAdmissionRecommendationCount": 110,
+    "upstreamW1cResolvedHumanDispositionCount": 323,
+    "w1dAdmissionCandidateCount": 213,
+    "acceptedLinkRelationshipCount": 66,
+    "deferredAdmissionCandidateCount": 44,
+    "upstreamW1cPendingAdmissionRecommendationCount": 0,
     "w1dCanonicalAdmissionDecisionCount": 0,
     "w1bAcceptanceSatisfied": true,
-    "w1cAcceptanceSatisfied": false,
+    "w1cAcceptanceSatisfied": true,
     "activeCanonicalRegistryMutated": false,
-    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
   },
   "w1eCandidatePreparation": {
     "status": "generated-blocked-not-active",
@@ -181,6 +190,6 @@
     "canonicalRouteCount": 5,
     "compatibilityAliasCount": 1,
     "activePublicProjectionMutated": false,
-    "nextPermittedGate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
   }
 }

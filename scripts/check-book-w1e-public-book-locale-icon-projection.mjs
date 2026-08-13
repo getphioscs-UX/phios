@@ -55,7 +55,7 @@ assert.deepEqual(acceptance, expected.acceptance, 'BOOK-W1E Human Acceptance tem
 assert.deepEqual(w1bAcceptance, expected.w1bAcceptance, 'BOOK-W1B Human Acceptance template must rebuild deterministically.');
 assert.deepEqual(w1dReview, expected.w1dTlReview, 'BOOK-W1D TL activation review package must rebuild deterministically.');
 
-assert.equal(w1dAcceptance.status, 'BLOCKED_PENDING_W1C_HUMAN_GATE');
+assert.equal(w1dAcceptance.status, 'READY_FOR_HUMAN_REVIEW');
 assert.equal(w1dAcceptance.decision, null);
 assert.equal(w1dAcceptance.activation.activeAuthorityCreated, false);
 assert.equal(projection.status, 'candidate-only-blocked-pending-book-w1d-active-reconciliation');
@@ -157,13 +157,20 @@ assert.equal(w1bAcceptance.boundaries.systemMaySelfAccept, false);
 assert.equal(w1bAcceptance.boundaries.sourceAuthorityAuthorizationIsW1BAcceptance, false);
 assert.equal(w1dReview.blockerSummary.missingCompleteOutlineAuthorityPartCount, 0);
 assert.deepEqual(w1dReview.blockerSummary.missingCompleteOutlineAuthorities, []);
-assert.equal(w1dReview.blockerSummary.w1cAdmissionRecommendationsAccepted, 213);
-assert.equal(w1dReview.blockerSummary.w1cAdmissionRecommendationsPending, 110);
+assert.equal(w1dReview.status, 'READY_FOR_W1D_HUMAN_REVIEW');
+assert.equal(w1dReview.blockerSummary.w1cHumanResolvedDispositionCount, 323);
+assert.equal(w1dReview.blockerSummary.w1dCanonicalAdmissionCandidateCount, 213);
+assert.equal(w1dReview.blockerSummary.w1cAcceptedLinkRelationshipCount, 66);
+assert.equal(w1dReview.blockerSummary.w1cDeferredAdmissionCandidateCount, 44);
+assert.equal(w1dReview.blockerSummary.w1cAdmissionRecommendationsPending, 0);
+assert.equal(w1dReview.blockerSummary.w1cSuccessorBlueprintsAccepted, true);
 assert.equal(w1dReview.reviewSequence[0].satisfied, true);
 assert.equal(w1dReview.reviewSequence[1].satisfied, true);
+assert.equal(w1dReview.reviewSequence[2].satisfied, true);
+assert.equal(w1dReview.reviewSequence[3].satisfied, false);
 assert.deepEqual(w1dReview.reviewSequence.map(record => record.tlReviewRequired), [false, true, true, true]);
 assert.equal(w1dReview.reviewSequence[1].reviewedArtifacts.length, 8);
-assert.equal(w1dReview.reviewSequence[2].reviewedArtifacts.length, 6);
+assert.equal(w1dReview.reviewSequence[2].reviewedArtifacts.length, 8);
 assert.equal(w1dReview.reviewSequence[2].gate,
   'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE');
 assert.equal(w1dReview.reviewSequence[3].reviewedArtifacts.length, 2);
@@ -184,7 +191,7 @@ assert.equal((packageJson.scripts.precheck.match(/npm run check:book-w1-public-p
 for (const phrase of [
   'W1D is not active',
   'P8–P15 source authority is complete',
-  'two remaining explicit TL acceptance gates',
+  'one remaining explicit TL acceptance gate',
   'compatibility alias',
   'Current production remains byte-identical'
 ]) assert(audit.includes(phrase));
@@ -193,4 +200,4 @@ console.log('✓ BOOK-W1E Public Book / Locale / Icon Projection candidate passe
 console.log('  Five canonical book routes, five-book Part ownership and Book 3-5 visual vocabulary are projected deterministically.');
 console.log('  /books/reality-maintenance/ is a non-canonical 308 compatibility alias to /books/reality-continuity/.');
 console.log('  Current production remains unchanged because W1D is not active; five stale production classes are inventoried for activation.');
-console.log('  W1B is Human approved; W1D activation still requires W1C and W1D Human Acceptance.');
+console.log('  W1C is Human approved; W1D is ready for its independent Human Acceptance.');

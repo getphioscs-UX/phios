@@ -142,7 +142,7 @@ assert.equal(acceptance.dispositionPolicy.approvedCanonicalNodeCount, 0);
 assert.equal(acceptance.boundaries.sourceAuthorityAuthorizationIsW1BAcceptance, false);
 
 assert.equal(audit, buildBookW1BReviewSummary(expectedMaps, sourceAuthority));
-assert(audit.includes('BOOK-W1C and BOOK-W1D remain unaccepted'));
+assert(audit.includes('At the BOOK-W1B acceptance checkpoint'));
 assert(audit.includes('621 outline chapters ≠ 621 Canonical Nodes'));
 assert(audit.includes('exact repeated P13 13.1–13.87 sequence'));
 assert(audit.includes('## P8｜'));
@@ -150,16 +150,17 @@ assert(audit.includes('## P15｜'));
 
 assert.equal(contract.implementationSteps[0].status, 'accepted');
 assert.equal(contract.implementationSteps[1].status, 'accepted');
-assert.equal(contract.implementationSteps[2].status, 'in_progress');
-assert(contract.implementationSteps.slice(3).every(step => step.status === 'pending'));
-assert.equal(contract.progress.currentStep, 'BOOK-W1C');
-assert.equal(contract.progress.status, 'w1b-human-approved-w1c-human-review-ready');
+assert.equal(contract.implementationSteps[2].status, 'accepted');
+assert.equal(contract.implementationSteps[3].status, 'in_progress');
+assert(contract.implementationSteps.slice(4).every(step => step.status === 'pending'));
+assert.equal(contract.progress.currentStep, 'BOOK-W1D');
+assert.equal(contract.progress.status, 'w1c-human-approved-w1d-human-review-ready');
 assert.deepEqual(contract.progress.fullChapterInventoryAvailableForParts,
   ['P8', 'P9', 'P10', 'P11', 'P12', 'P13', 'P14', 'P15']);
 assert.deepEqual(contract.progress.fullChapterInventoryMissingForParts, []);
 assert.equal(contract.progress.approvedNewCanonicalNodeCandidateCount, 0);
 assert.equal(contract.progress.w1bHumanAcceptanceSatisfied, true);
-assert.equal(contract.progress.nextPermittedStep, 'BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE');
+assert.equal(contract.progress.nextPermittedStep, 'BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE');
 assert.equal(contract.boundaries.canonicalNodeRegistryMutationAllowedInW1B, false);
 assert.equal(contract.boundaries.successorBlueprintGenerationAllowedBeforeW1BAcceptance, false);
 
@@ -179,4 +180,4 @@ console.log('✓ BOOK-W1B Human-approved complete-source migration maps passed.'
 console.log(`  TL-authorized source ${AUTHORIZED_SOURCE_SHA256} yields 621 unique chapters after governed exact-repeat P13 normalization.`);
 console.log('  Eight deterministic maps account for all 471 existing P8-P15 frozen Canonical Nodes and all 621 outline chapters.');
 console.log(`  Review suggestions: ${recommendationTotals.match} match, ${recommendationTotals.rename} rename, ${recommendationTotals.move} move, ${recommendationTotals.supersede} supersede, ${recommendationTotals.splitCandidateReview} split clusters, ${recommendationTotals.mergeCandidateReview} merge clusters, ${recommendationTotals.newCandidate} new candidates.`);
-console.log('  W1B is Human approved; W1C Human Review is open, while W1C/W1D remain unaccepted and nodes.json remains byte-identical to KAU-R5.');
+console.log('  W1B remains Human approved; W1C is now accepted and W1D Human Review is open; nodes.json remains byte-identical to KAU-R5.');

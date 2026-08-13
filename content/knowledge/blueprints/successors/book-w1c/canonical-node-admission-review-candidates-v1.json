@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BOOK-W1C-CANONICAL-NODE-ADMISSION-REVIEW-CANDIDATES-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1C-CANONICAL-ADMISSION-REVIEW",
-  "status": "PARTIAL_HUMAN_ACCEPTANCE_RECORDED",
+  "status": "HUMAN_REVIEW_COMPLETE_W1C_ACCEPTED",
   "generatedAt": "2026-08-13",
   "authorization": {
     "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-authorization-v1.json",
@@ -11,11 +11,12 @@
     "humanActor": "TL"
   },
   "humanAcceptance": {
-    "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json",
-    "sha256": "57bb59484b0e4c2fd5678fc5f5cb77e3726ce060015b7dd45ff1819ffc267902",
-    "status": "PARTIAL_HUMAN_ACCEPTANCE_RECORDED",
+    "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json",
+    "sha256": "9a91f994d10c2660bce266709462962dc2f9c8072ea3c96a8540722aec2237ab",
+    "status": "HUMAN_REVIEW_COMPLETE",
     "humanActor": "TL",
-    "decision": "ACCEPT_213_PROVISIONAL_ADMISSION_RECOMMENDATIONS"
+    "decision": "ACCEPT_ALL_W1C_ADMISSION_REVIEW_DISPOSITIONS",
+    "supersedesPath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json"
   },
   "frozenAuthoritySnapshots": {
     "canonicalNodeRegistryPath": "content/knowledge/registry/nodes.json",
@@ -41,12 +42,15 @@
     "supersede": 21,
     "defer": 44,
     "provisionalNodeCodeCount": 213,
-    "acceptedRecommendationCount": 213,
+    "acceptedRecommendationCount": 279,
     "acceptedPromoteCount": 192,
     "acceptedSupersedeCount": 21,
-    "pendingHumanDecisionCount": 110,
+    "acceptedLinkToExistingCount": 66,
+    "acceptedDeferredDispositionCount": 44,
+    "resolvedHumanDispositionCount": 323,
+    "pendingHumanDecisionCount": 0,
     "approvedCanonicalNodeCount": 0,
-    "w1cHumanDecisionCount": 213,
+    "w1cHumanDecisionCount": 323,
     "w1dCanonicalAdmissionDecisionCount": 0
   },
   "partSummary": [
@@ -126,11 +130,14 @@
   "boundaries": {
     "canonicalNodeCreatedByAuthorization": false,
     "provisionalNodeCodeCreatesIdentity": false,
-    "bookW1CAccepted": false,
+    "bookW1CAccepted": true,
     "bookW1DAccepted": false,
     "nodesJsonMutationAllowed": false,
     "activeBlueprintRegistryMutationAllowed": false,
-    "systemMaySelfAcceptRecommendation": false
+    "systemMaySelfAcceptRecommendation": false,
+    "successorBlueprintsAccepted": true,
+    "deferredCandidatesRemainPreserved": true,
+    "w1dMayBegin": true
   },
   "entries": [
     {
@@ -153,10 +160,10 @@
         "targetExistingNodeCode": "KN-B2-P8-003",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -218,7 +225,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -243,10 +250,10 @@
         "targetExistingNodeCode": "KN-B2-P8-003",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -299,7 +306,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -324,10 +331,10 @@
         "targetExistingNodeCode": "KN-B2-P8-007",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -389,7 +396,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -414,10 +421,10 @@
         "targetExistingNodeCode": "KN-B2-P8-003",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -479,7 +486,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -594,10 +601,10 @@
         "targetExistingNodeCode": "KN-B2-P8-003",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -632,7 +639,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -810,10 +817,10 @@
         "targetExistingNodeCode": "KN-B2-P8-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -866,7 +873,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -891,10 +898,10 @@
         "targetExistingNodeCode": "KN-B2-P8-003",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -956,7 +963,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -981,10 +988,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -1019,7 +1026,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -1044,10 +1051,10 @@
         "targetExistingNodeCode": "KN-B2-P8-003",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -1109,7 +1116,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -1134,10 +1141,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -1199,7 +1206,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -1314,10 +1321,10 @@
         "targetExistingNodeCode": "KN-B2-P8-003",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -1379,7 +1386,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -1494,10 +1501,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -1559,7 +1566,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -1584,10 +1591,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -1649,7 +1656,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -1674,10 +1681,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -1739,7 +1746,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -2925,10 +2932,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -2972,7 +2979,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -2997,10 +3004,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -3062,7 +3069,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -3239,10 +3246,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -3268,7 +3275,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -3651,10 +3658,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -3698,7 +3705,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -3723,10 +3730,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -3788,7 +3795,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -3813,10 +3820,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -3851,7 +3858,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -3876,10 +3883,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -3941,7 +3948,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4010,10 +4017,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4039,7 +4046,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4064,10 +4071,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4120,7 +4127,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4145,10 +4152,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4210,7 +4217,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4289,10 +4296,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4354,7 +4361,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4379,10 +4386,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4435,7 +4442,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4541,10 +4548,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4606,7 +4613,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4631,10 +4638,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4696,7 +4703,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4721,10 +4728,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4768,7 +4775,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4793,10 +4800,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4858,7 +4865,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -4883,10 +4890,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -4948,7 +4955,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -5067,10 +5074,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -5132,7 +5139,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -5413,10 +5420,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -5451,7 +5458,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -5476,10 +5483,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -5514,7 +5521,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -5727,10 +5734,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -5765,7 +5772,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -6087,10 +6094,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -6152,7 +6159,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -6249,10 +6256,10 @@
         "targetExistingNodeCode": "KN-B3-P10-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -6287,7 +6294,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -6402,10 +6409,10 @@
         "targetExistingNodeCode": "KN-B3-P11-009",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -6440,7 +6447,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -6509,10 +6516,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -6574,7 +6581,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -6666,10 +6673,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -6731,7 +6738,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -6756,10 +6763,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -6821,7 +6828,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7289,10 +7296,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -7354,7 +7361,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7379,10 +7386,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -7444,7 +7451,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7469,10 +7476,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -7534,7 +7541,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7559,10 +7566,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -7624,7 +7631,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7649,10 +7656,10 @@
         "targetExistingNodeCode": "KN-B3-P11-010",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -7687,7 +7694,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7712,10 +7719,10 @@
         "targetExistingNodeCode": "KN-B3-P11-064",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -7741,7 +7748,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7900,10 +7907,10 @@
         "targetExistingNodeCode": "KN-B3-P11-060",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -7956,7 +7963,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -7981,10 +7988,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -8028,7 +8035,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -8053,10 +8060,10 @@
         "targetExistingNodeCode": "KN-B3-P11-057",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -8082,7 +8089,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -8107,10 +8114,10 @@
         "targetExistingNodeCode": "KN-B3-P11-048",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -8145,7 +8152,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -8170,10 +8177,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -8217,7 +8224,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -8242,10 +8249,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -8307,7 +8314,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -8332,10 +8339,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -8397,7 +8404,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -9685,10 +9692,10 @@
         "targetExistingNodeCode": "KN-B3-P12-024",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -9714,7 +9721,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10287,10 +10294,10 @@
         "targetExistingNodeCode": "KN-B3-P12-042",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -10343,7 +10350,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10368,10 +10375,10 @@
         "targetExistingNodeCode": "KN-B3-P12-042",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -10424,7 +10431,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10449,10 +10456,10 @@
         "targetExistingNodeCode": "KN-B3-P12-042",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -10505,7 +10512,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10530,10 +10537,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -10595,7 +10602,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10620,10 +10627,10 @@
         "targetExistingNodeCode": "KN-B3-P12-042",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -10676,7 +10683,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10701,10 +10708,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -10766,7 +10773,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10881,10 +10888,10 @@
         "targetExistingNodeCode": "KN-B3-P12-017",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -10946,7 +10953,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -10971,10 +10978,10 @@
         "targetExistingNodeCode": "KN-B3-P12-042",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -11036,7 +11043,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -11349,10 +11356,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -11414,7 +11421,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -11617,10 +11624,10 @@
         "targetExistingNodeCode": "KN-B3-P12-041",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -11646,7 +11653,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -12080,10 +12087,10 @@
         "targetExistingNodeCode": "KN-B3-P12-041",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -12127,7 +12134,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -12152,10 +12159,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -12217,7 +12224,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -12422,10 +12429,10 @@
         "targetExistingNodeCode": "KN-B3-P12-045",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -12487,7 +12494,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -12619,10 +12626,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -12657,7 +12664,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -12682,10 +12689,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -12747,7 +12754,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -13014,10 +13021,10 @@
         "targetExistingNodeCode": "KN-B4-P13-023",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -13079,7 +13086,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -13284,10 +13291,10 @@
         "targetExistingNodeCode": "KN-B4-P13-028",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -13349,7 +13356,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -14004,10 +14011,10 @@
         "targetExistingNodeCode": "KN-B4-P13-063",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -14069,7 +14076,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -14454,10 +14461,10 @@
         "targetExistingNodeCode": "KN-B4-P13-073",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -14519,7 +14526,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -14544,10 +14551,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -14609,7 +14616,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -14634,10 +14641,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -14699,7 +14706,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -14724,10 +14731,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -14789,7 +14796,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -15291,10 +15298,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -15356,7 +15363,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -15381,10 +15388,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -15446,7 +15453,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -15471,10 +15478,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -15536,7 +15543,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -15867,10 +15874,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -15932,7 +15939,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -16065,10 +16072,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -16130,7 +16137,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -16452,10 +16459,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -16517,7 +16524,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -16738,10 +16745,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -16803,7 +16810,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -16828,10 +16835,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -16893,7 +16900,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -17084,10 +17091,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -17149,7 +17156,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -17354,10 +17361,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -17419,7 +17426,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -17444,10 +17451,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -17509,7 +17516,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -17632,10 +17639,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -17697,7 +17704,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -17829,10 +17836,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -17894,7 +17901,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -17919,10 +17926,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -17984,7 +17991,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18009,10 +18016,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18074,7 +18081,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18099,10 +18106,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18164,7 +18171,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18189,10 +18196,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18254,7 +18261,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18279,10 +18286,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18344,7 +18351,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18369,10 +18376,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18434,7 +18441,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18459,10 +18466,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18524,7 +18531,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18593,10 +18600,10 @@
         "targetExistingNodeCode": "KN-B4-P14-001",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18658,7 +18665,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18773,10 +18780,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18838,7 +18845,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -18863,10 +18870,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -18928,7 +18935,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -19223,10 +19230,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -19288,7 +19295,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -21164,10 +21171,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -21229,7 +21236,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -21254,10 +21261,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -21301,7 +21308,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -21326,10 +21333,10 @@
         "targetExistingNodeCode": "KN-B4-P15-045",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -21382,7 +21389,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -21730,10 +21737,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -21795,7 +21802,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -22930,10 +22937,10 @@
         "targetExistingNodeCode": "KN-B4-P15-045",
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_RECOMMENDATION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -22986,7 +22993,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -23065,10 +23072,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -23130,7 +23137,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -23155,10 +23162,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -23220,7 +23227,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -23245,10 +23252,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -23310,7 +23317,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }
@@ -23690,10 +23697,10 @@
         "targetExistingNodeCode": null,
         "proposedCanonicalIdentityChangedOnW1DAdmission": false,
         "humanDecisionRequired": true,
-        "humanDecision": null,
-        "humanActor": null,
-        "decidedAt": null,
-        "humanAcceptancePath": null
+        "humanDecision": "ACCEPT_DEFERRED_DISPOSITION",
+        "humanActor": "TL",
+        "decidedAt": "2026-08-13",
+        "humanAcceptancePath": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
       },
       "lineageCandidate": null,
       "existingNodeEvidence": {
@@ -23755,7 +23762,7 @@
         "w1bAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json"
       },
       "gates": {
-        "w1cHumanAcceptanceRecorded": false,
+        "w1cHumanAcceptanceRecorded": true,
         "w1dCanonicalAdmissionDecisionRecorded": false,
         "activeCanonicalAuthorityCreated": false
       }

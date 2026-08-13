@@ -6,6 +6,7 @@ import { ACCEPTANCE_PATH, BOOK_SPECS, CANDIDATE_REGISTRY_PATH, CANDIDATE_ROOT, b
 import {
   ADMISSION_AUTHORIZATION_PATH,
   ADMISSION_AUDIT_PATH,
+  ADMISSION_FINAL_HUMAN_ACCEPTANCE_PATH,
   ADMISSION_HUMAN_ACCEPTANCE_PATH,
   ADMISSION_LEDGER_PATH,
   buildBookW1CAdmissionAudit
@@ -18,13 +19,15 @@ const digest = value => crypto.createHash('sha256').update(value.replace(/^\uFEF
 
 const [
   expected, activeRegistryRaw, activeFreeze, r5Freeze, contract, packageJson, audit,
-  actualAdmissionAuthorization, actualAdmissionHumanAcceptance, actualAdmissionLedger,
+  actualAdmissionAuthorization, actualAdmissionHumanAcceptance,
+  actualAdmissionFinalHumanAcceptance, actualAdmissionLedger,
   admissionAudit, nodesRaw
 ] = await Promise.all([
   buildBookW1CCandidateSet(root), read('content/knowledge/blueprints/blueprint-registry.json'),
   readJson('content/knowledge/blueprints/knowledge-blueprint-freeze-v2.json'), readJson('content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'),
   readJson('content/knowledge/migrations/five-volume-migration-contract-v1.json'), readJson('package.json'), read('docs/audits/BOOK-W1C-successor-blueprint-generation.md'),
   readJson(ADMISSION_AUTHORIZATION_PATH), readJson(ADMISSION_HUMAN_ACCEPTANCE_PATH),
+  readJson(ADMISSION_FINAL_HUMAN_ACCEPTANCE_PATH),
   readJson(ADMISSION_LEDGER_PATH),
   read(ADMISSION_AUDIT_PATH), read('content/knowledge/registry/nodes.json')
 ]);
@@ -33,6 +36,8 @@ assert.equal(activeFreeze.registryManifestSHA, r5Freeze.blueprintAuthority.regis
 assert.equal(digest(nodesRaw), r5Freeze.canonicalAuthority.successorSha256);
 assert.deepEqual(actualAdmissionAuthorization, expected.admissionReview.authorization);
 assert.deepEqual(actualAdmissionHumanAcceptance, expected.admissionReview.humanAcceptance);
+assert.deepEqual(actualAdmissionFinalHumanAcceptance,
+  expected.admissionReview.finalHumanAcceptance);
 assert.deepEqual(actualAdmissionLedger, expected.admissionReview.ledger);
 assert.equal(admissionAudit, `${buildBookW1CAdmissionAudit(expected.admissionReview.ledger)}\n`);
 
@@ -66,10 +71,10 @@ assert(w1bNodes.every(node => node.migrationDecisionRef.humanDecision === 'ACCEP
 assert(w1bNodes.every(node => node.migrationDecisionRef.canonicalIdentityChanged === false));
 
 for (const candidate of actualCandidates) {
-  assert.equal(candidate.status, 'successor-blueprint-candidate-human-acceptance-pending');
+  assert.equal(candidate.status, 'successor-blueprint-human-approved-ready-for-w1d-review');
   assert.equal(candidate.activation.candidateOnly, true);
   assert.equal(candidate.activation.w1bMigrationMapsAccepted, true);
-  assert.equal(candidate.activation.humanBlueprintAcceptanceStatus, 'PENDING');
+  assert.equal(candidate.activation.humanBlueprintAcceptanceStatus, 'ACCEPTED');
   assert.equal(candidate.activation.activeBlueprintRegistryMutationAllowed, false);
   assert.equal(candidate.activation.activeBlueprintAuthorityCreated, false);
   assert(candidate.migrationRecord.length > 0);
@@ -86,11 +91,15 @@ assert(newNodeCandidates.every(candidate => candidate.admissionCandidateCode));
 assert.equal(newNodeCandidates.filter(candidate =>
   candidate.admissionReviewStatus === 'HUMAN_RECOMMENDATION_ACCEPTED_CANONICAL_ADMISSION_PENDING_W1D').length, 213);
 assert.equal(newNodeCandidates.filter(candidate =>
-  candidate.admissionReviewStatus === 'HUMAN_DECISION_PENDING').length, 110);
+  candidate.admissionReviewStatus === 'HUMAN_LINK_RELATIONSHIP_ACCEPTED_NO_NEW_IDENTITY').length, 66);
 assert.equal(newNodeCandidates.filter(candidate =>
-  candidate.admissionRecommendation.humanDecision === 'ACCEPT_RECOMMENDATION').length, 213);
+  candidate.admissionReviewStatus === 'HUMAN_DEFERRED_ADMISSION_PRESERVED').length, 44);
 assert.equal(newNodeCandidates.filter(candidate =>
-  candidate.admissionRecommendation.humanDecision === null).length, 110);
+  candidate.admissionRecommendation.humanDecision === 'ACCEPT_RECOMMENDATION').length, 279);
+assert.equal(newNodeCandidates.filter(candidate =>
+  candidate.admissionRecommendation.humanDecision === 'ACCEPT_DEFERRED_DISPOSITION').length, 44);
+assert.equal(newNodeCandidates.filter(candidate =>
+  candidate.admissionRecommendation.humanDecision === null).length, 0);
 
 assert.equal(actualAdmissionAuthorization.status, 'HUMAN_REVIEW_AUTHORIZED_NOT_ACCEPTED');
 assert.equal(actualAdmissionAuthorization.humanActor, 'TL');
@@ -113,6 +122,29 @@ assert.equal(actualAdmissionHumanAcceptance.boundaries.recommendationAcceptanceC
   false);
 assert.equal(actualAdmissionHumanAcceptance.boundaries.bookW1CAccepted, false);
 assert.equal(actualAdmissionHumanAcceptance.boundaries.w1dMayBegin, false);
+assert.equal(actualAdmissionFinalHumanAcceptance.status, 'HUMAN_REVIEW_COMPLETE');
+assert.equal(actualAdmissionFinalHumanAcceptance.humanActor, 'TL');
+assert.equal(actualAdmissionFinalHumanAcceptance.decision,
+  'ACCEPT_ALL_W1C_ADMISSION_REVIEW_DISPOSITIONS');
+assert.deepEqual(actualAdmissionFinalHumanAcceptance.dispositionCounts, {
+  total: 323,
+  promoteAccepted: 192,
+  linkToExistingAccepted: 66,
+  supersedeAccepted: 21,
+  deferAcceptedAsDeferredAdmission: 44,
+  pending: 0,
+  overrides: 0
+});
+assert.equal(actualAdmissionFinalHumanAcceptance.decisions.length, 323);
+assert.equal(actualAdmissionFinalHumanAcceptance.decisions.filter(record =>
+  record.humanDecision === 'ACCEPT_RECOMMENDATION').length, 279);
+assert.equal(actualAdmissionFinalHumanAcceptance.decisions.filter(record =>
+  record.humanDecision === 'ACCEPT_DEFERRED_DISPOSITION').length, 44);
+assert.equal(actualAdmissionFinalHumanAcceptance.boundaries.bookW1CAccepted, true);
+assert.equal(actualAdmissionFinalHumanAcceptance.boundaries.bookW1DAccepted, false);
+assert.equal(actualAdmissionFinalHumanAcceptance.boundaries.successorBlueprintsAccepted, true);
+assert.equal(actualAdmissionFinalHumanAcceptance.boundaries.canonicalNodeApprovedCount, 0);
+assert.equal(actualAdmissionFinalHumanAcceptance.boundaries.w1dMayBegin, true);
 assert.equal(actualAdmissionLedger.inventory.candidateCount, 323);
 assert.deepEqual({
   promote: actualAdmissionLedger.inventory.promote,
@@ -121,29 +153,38 @@ assert.deepEqual({
   defer: actualAdmissionLedger.inventory.defer
 }, { promote: 192, linkToExisting: 66, supersede: 21, defer: 44 });
 assert.equal(actualAdmissionLedger.inventory.provisionalNodeCodeCount, 213);
-assert.equal(actualAdmissionLedger.inventory.acceptedRecommendationCount, 213);
+assert.equal(actualAdmissionLedger.status, 'HUMAN_REVIEW_COMPLETE_W1C_ACCEPTED');
+assert.equal(actualAdmissionLedger.inventory.acceptedRecommendationCount, 279);
 assert.equal(actualAdmissionLedger.inventory.acceptedPromoteCount, 192);
 assert.equal(actualAdmissionLedger.inventory.acceptedSupersedeCount, 21);
-assert.equal(actualAdmissionLedger.inventory.pendingHumanDecisionCount, 110);
+assert.equal(actualAdmissionLedger.inventory.acceptedLinkToExistingCount, 66);
+assert.equal(actualAdmissionLedger.inventory.acceptedDeferredDispositionCount, 44);
+assert.equal(actualAdmissionLedger.inventory.resolvedHumanDispositionCount, 323);
+assert.equal(actualAdmissionLedger.inventory.pendingHumanDecisionCount, 0);
 assert.equal(actualAdmissionLedger.inventory.approvedCanonicalNodeCount, 0);
-assert.equal(actualAdmissionLedger.inventory.w1cHumanDecisionCount, 213);
+assert.equal(actualAdmissionLedger.inventory.w1cHumanDecisionCount, 323);
 assert.equal(actualAdmissionLedger.inventory.w1dCanonicalAdmissionDecisionCount, 0);
 assert.equal(new Set(actualAdmissionLedger.entries.map(entry => entry.admissionCandidateCode)).size, 323);
 assert(actualAdmissionLedger.entries.every(entry => entry.candidateOnly));
 assert(actualAdmissionLedger.entries.every(entry => !entry.canonicalNodeApproved));
 assert(actualAdmissionLedger.entries.every(entry => !entry.canonicalIdentityChanged));
 assert.equal(actualAdmissionLedger.entries.filter(entry =>
-  entry.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION').length, 213);
+  entry.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION').length, 279);
 assert.equal(actualAdmissionLedger.entries.filter(entry =>
-  entry.recommendation.humanDecision === null).length, 110);
+  entry.recommendation.humanDecision === 'ACCEPT_DEFERRED_DISPOSITION').length, 44);
+assert.equal(actualAdmissionLedger.entries.filter(entry =>
+  entry.recommendation.humanDecision === null).length, 0);
 assert(actualAdmissionLedger.entries.filter(entry =>
   ['promote', 'supersede'].includes(entry.recommendation.action))
   .every(entry => entry.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION'
     && entry.gates.w1cHumanAcceptanceRecorded));
 assert(actualAdmissionLedger.entries.filter(entry =>
-  ['link to existing', 'defer'].includes(entry.recommendation.action))
-  .every(entry => entry.recommendation.humanDecision === null
-    && !entry.gates.w1cHumanAcceptanceRecorded));
+  entry.recommendation.action === 'link to existing')
+  .every(entry => entry.recommendation.humanDecision === 'ACCEPT_RECOMMENDATION'
+    && entry.gates.w1cHumanAcceptanceRecorded));
+assert(actualAdmissionLedger.entries.filter(entry => entry.recommendation.action === 'defer')
+  .every(entry => entry.recommendation.humanDecision === 'ACCEPT_DEFERRED_DISPOSITION'
+    && entry.gates.w1cHumanAcceptanceRecorded));
 assert(actualAdmissionLedger.entries.every(entry =>
   ['promote', 'link to existing', 'supersede', 'defer'].includes(entry.recommendation.action)));
 assert(actualAdmissionLedger.entries.filter(entry =>
@@ -155,55 +196,63 @@ assert(actualAdmissionLedger.entries.filter(entry =>
 
 const actualRegistry = await readJson(CANDIDATE_REGISTRY_PATH);
 const actualAcceptance = await readJson(ACCEPTANCE_PATH);
-assert.equal(actualRegistry.status, 'candidate-set-partial-human-review');
+assert.equal(actualRegistry.status, 'human-approved-successor-set-ready-for-w1d-review');
 assert.equal(actualRegistry.traceability.book2NodesTraceToKauR5Count, 182);
 assert.equal(actualRegistry.traceability.p8ToP15NodesTraceToW1BMigrationDecisionCount, 471);
 assert.equal(actualRegistry.traceability.untracedIncludedNodeCount, 0);
 assert.equal(actualRegistry.traceability.candidateOnlyNewOutlineChaptersTraceToW1BCount, 323);
-assert.equal(actualRegistry.traceability.acceptedAdmissionRecommendationCount, 213);
-assert.equal(actualRegistry.traceability.pendingAdmissionRecommendationCount, 110);
+assert.equal(actualRegistry.traceability.humanResolvedAdmissionDispositionCount, 323);
+assert.equal(actualRegistry.traceability.canonicalAdmissionRecommendationCount, 213);
+assert.equal(actualRegistry.traceability.acceptedLinkRelationshipCount, 66);
+assert.equal(actualRegistry.traceability.deferredCandidateCount, 44);
+assert.equal(actualRegistry.traceability.pendingAdmissionRecommendationCount, 0);
 assert.equal(actualRegistry.traceability.approvedNewCanonicalNodeCount, 0);
 assert.equal(actualRegistry.canonicalAdmissionReview.candidateCount, 323);
 assert.equal(actualRegistry.canonicalAdmissionReview.promote, 192);
 assert.equal(actualRegistry.canonicalAdmissionReview.linkToExisting, 66);
 assert.equal(actualRegistry.canonicalAdmissionReview.supersede, 21);
 assert.equal(actualRegistry.canonicalAdmissionReview.defer, 44);
-assert.equal(actualRegistry.canonicalAdmissionReview.acceptedRecommendationCount, 213);
-assert.equal(actualRegistry.canonicalAdmissionReview.pendingHumanDecisionCount, 110);
+assert.equal(actualRegistry.canonicalAdmissionReview.acceptedRecommendationCount, 279);
+assert.equal(actualRegistry.canonicalAdmissionReview.acceptedLinkToExistingCount, 66);
+assert.equal(actualRegistry.canonicalAdmissionReview.acceptedDeferredDispositionCount, 44);
+assert.equal(actualRegistry.canonicalAdmissionReview.resolvedHumanDispositionCount, 323);
+assert.equal(actualRegistry.canonicalAdmissionReview.pendingHumanDecisionCount, 0);
 assert.equal(actualRegistry.canonicalAdmissionReview.approvedCanonicalNodeCount, 0);
 assert.equal(actualRegistry.activationGates.w1bMigrationMapsAccepted, true);
 assert.equal(actualRegistry.activationGates.canonicalAdmissionReviewPartiallyAccepted, true);
-assert.equal(actualRegistry.activationGates.canonicalAdmissionReviewFullyResolved, false);
-assert.equal(actualRegistry.activationGates.humanBlueprintAcceptanceRecorded, false);
+assert.equal(actualRegistry.activationGates.canonicalAdmissionReviewFullyResolved, true);
+assert.equal(actualRegistry.activationGates.humanBlueprintAcceptanceRecorded, true);
 assert.equal(actualRegistry.activationGates.activeBlueprintRegistryMutationAllowed, false);
-assert.equal(actualAcceptance.status, 'PARTIAL_HUMAN_ACCEPTANCE');
+assert.equal(actualAcceptance.status, 'HUMAN_APPROVED');
 assert.equal(actualAcceptance.humanActor, 'TL');
-assert.equal(actualAcceptance.decision, 'PARTIAL_ACCEPT');
+assert.equal(actualAcceptance.decision, 'ACCEPT');
 assert.equal(actualAcceptance.admissionReviewAuthorization.reviewAuthorized, true);
 assert.equal(actualAcceptance.admissionReviewAuthorization.authorizationIsW1CAcceptance, false);
 assert.equal(actualAcceptance.admissionReview.decision,
-  'PARTIAL_ACCEPT_PROMOTE_AND_SUPERSEDE_RECOMMENDATIONS');
+  'ACCEPT_ALL_RECOMMENDATIONS_AND_DEFERRED_DISPOSITIONS');
 assert.deepEqual(actualAcceptance.admissionReview.acceptedRecommendationCounts,
-  { promote: 192, supersede: 21, total: 213 });
+  { promote: 192, linkToExisting: 66, supersede: 21,
+    deferAsDeferredAdmission: 44, totalResolved: 323 });
 assert.deepEqual(actualAcceptance.admissionReview.pendingRecommendationCounts,
-  { linkToExisting: 66, defer: 44, total: 110 });
+  { linkToExisting: 0, defer: 0, total: 0 });
 assert.deepEqual(actualAcceptance.admissionReview.recommendationCounts,
   { promote: 192, linkToExisting: 66, supersede: 21, defer: 44 });
-assert(actualAcceptance.bookDecisions.every(record => record.decision === null));
+assert(actualAcceptance.bookDecisions.every(record => record.decision === 'ACCEPT'));
 assert.equal(actualAcceptance.bookDecisions[0].admissionDecision, 'NOT_APPLICABLE');
 assert(actualAcceptance.bookDecisions.slice(1).every(record =>
-  record.admissionDecision === 'PARTIAL_ACCEPT_PROMOTE_AND_SUPERSEDE_RECOMMENDATIONS'));
+  record.admissionDecision === 'ACCEPT_RECOMMENDATIONS_AND_DEFERRED_DISPOSITIONS'));
 assert.deepEqual(actualAcceptance.bookDecisions.map(record =>
-  record.acceptedAdmissionRecommendationCount), [0, 19, 90, 104]);
+  record.acceptedAdmissionRecommendationCount), [0, 28, 123, 128]);
 assert.deepEqual(actualAcceptance.bookDecisions.map(record =>
-  record.pendingAdmissionRecommendationCount), [0, 14, 56, 40]);
+  record.pendingAdmissionRecommendationCount), [0, 0, 0, 0]);
 assert.deepEqual(actualAcceptance.bookDecisions.map(record => record.newCanonicalNodeCandidateCount), [0, 33, 146, 144]);
 
 assert.equal(contract.implementationSteps[0].status, 'accepted');
 assert.equal(contract.implementationSteps[1].status, 'accepted');
-assert.equal(contract.implementationSteps[2].status, 'in_progress');
-assert(contract.implementationSteps.slice(3).every(step => step.status === 'pending'));
-assert.equal(contract.w1cCandidatePreparation.status, 'partial-human-acceptance-not-active');
+assert.equal(contract.implementationSteps[2].status, 'accepted');
+assert.equal(contract.implementationSteps[3].status, 'in_progress');
+assert(contract.implementationSteps.slice(4).every(step => step.status === 'pending'));
+assert.equal(contract.w1cCandidatePreparation.status, 'human-approved-ready-for-w1d-review-not-active');
 assert.equal(contract.w1cCandidatePreparation.candidateCount, 4);
 assert.equal(contract.w1cCandidatePreparation.w1bAcceptanceSatisfied, true);
 assert.equal(contract.w1cCandidatePreparation.canonicalAdmissionReviewAuthorizedByTl, true);
@@ -211,9 +260,13 @@ assert.equal(contract.w1cCandidatePreparation.canonicalAdmissionCandidateCount, 
 assert.deepEqual(contract.w1cCandidatePreparation.canonicalAdmissionRecommendationCounts,
   { promote: 192, linkToExisting: 66, supersede: 21, defer: 44 });
 assert.equal(contract.w1cCandidatePreparation.approvedCanonicalNodeCount, 0);
-assert.equal(contract.w1cCandidatePreparation.acceptedCanonicalAdmissionRecommendationCount, 213);
-assert.equal(contract.w1cCandidatePreparation.pendingCanonicalAdmissionRecommendationCount, 110);
-assert.equal(contract.w1cCandidatePreparation.humanBlueprintAcceptanceSatisfied, false);
+assert.equal(contract.w1cCandidatePreparation.acceptedCanonicalAdmissionRecommendationCount, 279);
+assert.equal(contract.w1cCandidatePreparation.canonicalAdmissionRecommendationCount, 213);
+assert.equal(contract.w1cCandidatePreparation.acceptedLinkToExistingRecommendationCount, 66);
+assert.equal(contract.w1cCandidatePreparation.acceptedDeferredDispositionCount, 44);
+assert.equal(contract.w1cCandidatePreparation.resolvedHumanDispositionCount, 323);
+assert.equal(contract.w1cCandidatePreparation.pendingCanonicalAdmissionRecommendationCount, 0);
+assert.equal(contract.w1cCandidatePreparation.humanBlueprintAcceptanceSatisfied, true);
 assert.equal(contract.w1cCandidatePreparation.activeBlueprintRegistryMutated, false);
 assert.equal(contract.boundaries.successorBlueprintCandidatePreparationCreatesAuthority, false);
 assert.equal(packageJson.scripts['check:book-w1-blueprints'], 'node scripts/check-book-w1c-successor-blueprint-generation.mjs');
@@ -221,13 +274,14 @@ assert.equal(packageJson.scripts['check:book-w1c'], 'npm run check:book-w1-bluep
 assert.equal((packageJson.scripts.precheck.match(/npm run check:book-w1-blueprints/g) ?? []).length, 1);
 assert(audit.includes('4 successor Blueprint candidates'));
 assert(audit.includes('Active Blueprint Registry remains byte-identical'));
-assert(audit.includes('W1B is Human approved'));
+assert(audit.includes('W1B and W1C are Human approved'));
 assert(admissionAudit.includes('All 323 review candidates'));
-assert(admissionAudit.includes('TL-accepted recommendations: 213'));
+assert(admissionAudit.includes('Human-resolved W1C dispositions: 323'));
+assert(admissionAudit.includes('Canonical admission recommendations for W1D: 213'));
 assert(admissionAudit.includes('approved Canonical Nodes: 0'));
 
-console.log('✓ BOOK-W1C Successor Blueprint Candidate Generation passed.');
-console.log('  4 deterministic candidates cover BOOK-2 P5-P7, BOOK-3 P8-P9, BOOK-4 P10-P12 and BOOK-5 P13-P15.');
+console.log('✓ BOOK-W1C Successor Blueprint Human Acceptance passed.');
+console.log('  4 Human-approved successor Blueprints cover BOOK-2 P5-P7, BOOK-3 P8-P9, BOOK-4 P10-P12 and BOOK-5 P13-P15.');
 console.log('  182 Book-II nodes trace to KAU-R5; all 471 P8-P15 nodes trace to exact W1B migration-map entries.');
-console.log('  TL accepted 213 provisional recommendations: 192 promote + 21 supersede; 66 link-to-existing and 44 defer remain pending.');
-console.log('  W1C remains partially accepted and W1D remains blocked; 0 Canonical Nodes were approved or created.');
+console.log('  All 323 W1C dispositions are resolved: 213 admission candidates, 66 accepted links and 44 preserved deferrals.');
+console.log('  W1C is Human approved and W1D review may begin; 0 Canonical Nodes were approved or created.');

@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BOOK-W1D-HUMAN-ACCEPTANCE-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1D",
-  "status": "BLOCKED_PENDING_W1C_HUMAN_GATE",
+  "status": "READY_FOR_HUMAN_REVIEW",
   "recordedAt": null,
   "humanActor": null,
   "decision": null,
@@ -10,21 +10,36 @@
     "w1bOutlineMigrationMapsAccepted": true,
     "w1cCanonicalAdmissionReviewAuthorized": true,
     "w1cCanonicalAdmissionReviewPartiallyAccepted": true,
-    "w1cCanonicalAdmissionReviewAccepted": false,
-    "w1cSuccessorBlueprintsAccepted": false
+    "w1cCanonicalAdmissionReviewAccepted": true,
+    "w1cSuccessorBlueprintsAccepted": true
   },
   "upstreamAdmissionReview": {
     "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
     "candidateCount": 323,
-    "acceptedRecommendationCount": 213,
-    "pendingHumanDecisionCount": 110,
+    "resolvedHumanDispositionCount": 323,
+    "canonicalAdmissionCandidateCount": 213,
+    "acceptedLinkRelationshipCount": 66,
+    "deferredAdmissionCandidateCount": 44,
+    "pendingHumanDecisionCount": 0,
     "approvedCanonicalNodeCount": 0,
     "w1dAcceptedAdmissionCount": 0
   },
   "reviewedArtifacts": [
     "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
-    "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json"
+    "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
+    "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
+    "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
   ],
+  "requiredHumanDecisions": {
+    "existingCanonicalIdentityLedgerEntryCount": 718,
+    "canonicalAdmissionCandidateCount": 213,
+    "promoteCandidateCount": 192,
+    "supersedeCandidateCount": 21,
+    "acceptedLinkRelationshipCount": 66,
+    "deferredCandidateCount": 44,
+    "publicationOwnershipRecordCount": 473,
+    "targetOnlyRehomePhysicalApplicationDecisionCount": 2
+  },
   "acceptanceChecks": {
     "existing716CanonicalNodeAuthorityAccountedFor": null,
     "silentDeletionCount": null,

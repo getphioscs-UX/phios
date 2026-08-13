@@ -2,16 +2,19 @@
   "schemaVersion": "PHI-OS-BOOK-W1D-TL-ACTIVATION-REVIEW-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1D-ACTIVATION-READINESS",
-  "status": "BLOCKED_PENDING_W1C_W1D_HUMAN_GATES",
+  "status": "READY_FOR_W1D_HUMAN_REVIEW",
   "generatedAt": "2026-08-13",
   "directActivationAllowed": false,
   "blockerSummary": {
     "missingCompleteOutlineAuthorityPartCount": 0,
     "missingCompleteOutlineAuthorities": [],
     "w1bMigrationMapsAccepted": true,
-    "w1cAdmissionRecommendationsAccepted": 213,
-    "w1cAdmissionRecommendationsPending": 110,
-    "w1cSuccessorBlueprintsAccepted": false,
+    "w1cHumanResolvedDispositionCount": 323,
+    "w1dCanonicalAdmissionCandidateCount": 213,
+    "w1cAcceptedLinkRelationshipCount": 66,
+    "w1cDeferredAdmissionCandidateCount": 44,
+    "w1cAdmissionRecommendationsPending": 0,
+    "w1cSuccessorBlueprintsAccepted": true,
     "w1dReconciliationAccepted": false,
     "targetOnlyRehomeCount": 2
   },
@@ -70,50 +73,61 @@
     {
       "order": 3,
       "gate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-AND-REMAINING-ADMISSION-ACCEPTANCE",
-      "requiredDecision": "Accept or revise all four successor Blueprints, resolve 66 link-to-existing recommendations and decide 44 defer dispositions. The 213 provisional recommendations are already TL-accepted but remain non-Canonical until W1D.",
+      "requiredDecision": "Accept all four successor Blueprints and resolve the full 323-entry W1C review: 213 admission recommendations, 66 link-to-existing relationships and 44 deferred admissions.",
+      "satisfied": true,
       "tlReviewRequired": true,
       "systemMayInfer": false,
+      "acceptanceArtifact": "content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json",
       "reviewedArtifacts": [
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-2-knowledge-blueprint-v3.json",
-          "sha256": "85a85578cc31237a91c67ba7e9fbf0c5fa94a92c5176d16aa0bb0fe0fc984239"
+          "sha256": "cea71638e33fc1457ae6d8dc6340604424853bda9c99e2151bc276b64d492fc6"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-3-knowledge-blueprint-v1.json",
-          "sha256": "fc55f9772df33cc06141d281a16ed9d7ec0aaf1f797ba2ce828604d996fd6e0d"
+          "sha256": "160027ef03cf7502f20aa2297111e0a72b300d6a2fa451d80ec683ad44830f11"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-4-knowledge-blueprint-v3.json",
-          "sha256": "057c63abde63b57f675924db8b0fc0e136f55e9b743b85e9f65ee21e39102324"
+          "sha256": "0afb28ec55ca988b2311a3432c45a7d31f4f5f6a892ce0c259faf01828085082"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json",
-          "sha256": "ca0f60dc469d22221f65a81aef8e5b0236e01e5db9ba0ed9b222c20fc134fb6d"
+          "sha256": "e70ff02ebbf21da2a54b702b75ca88676937203d8e7aed1c58fcdbe57504e9d7"
+        },
+        {
+          "path": "content/knowledge/blueprints/successors/book-w1c/book-w1c-human-acceptance-v1.json",
+          "sha256": "c1b6d6c212f27e6a526bbf3a2ffef2aaf6dc0f2bdeb06444727740e4fd983805"
         },
         {
           "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v1.json",
           "sha256": "57bb59484b0e4c2fd5678fc5f5cb77e3726ce060015b7dd45ff1819ffc267902"
         },
         {
+          "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json",
+          "sha256": "9a91f994d10c2660bce266709462962dc2f9c8072ea3c96a8540722aec2237ab"
+        },
+        {
           "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
-          "sha256": "e14c3c34fb366cf078ea126b4ce500d74145f51e6957a2249ac0216f552b77f4"
+          "sha256": "364d65f982f7f439f28acba33af0ffab704de1b483e5b4e359bf683e6e8bd9b5"
         }
       ]
     },
     {
       "order": 4,
       "gate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE",
-      "requiredDecision": "Accept the 718-entry identity ledger and 473 publication-ownership records; explicitly decide whether the two target-only rehomes may be physically applied.",
+      "requiredDecision": "Review the 718-entry existing identity ledger, decide 213 Canonical admission candidates (192 promote + 21 supersede with lineage/compatibility), review 473 publication-ownership records and explicitly decide whether the two target-only rehomes may be physically applied. The 66 accepted links remain relationship-only and the 44 deferred candidates stay preserved.",
+      "satisfied": false,
       "tlReviewRequired": true,
       "systemMayInfer": false,
       "reviewedArtifacts": [
         {
           "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
-          "sha256": "20e5d9312f5d905988371528f8739fb3e777f4feaea9ff664d9ff41c926f7605"
+          "sha256": "cd0f60eec0dd7b6b61f5f3e22f273bf18f6fd93aef3a9e4105dfae8c338c61da"
         },
         {
           "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
-          "sha256": "9ca37bd43b848a97d1341bbebfe851f003f0a26165f996c567d583c59ca3e608"
+          "sha256": "85ac263c19ff772894b811602c6de3d2eb4e94e38ae18ba49a5a0ad4316f9b60"
         }
       ]
     }

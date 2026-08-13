@@ -636,7 +636,7 @@ export function buildBookW1BReviewSummary(maps, sourceAuthority) {
     '# BOOK-W1B｜Part 8–15 Canonical Outline Reconciliation — Human approved', '',
     '## Authority and gate state', '',
     `The TL-authorized source file is pinned by SHA-256 \`${sourceAuthority.source.originalSha256}\`. It contains 708 main-chapter occurrences; the exact repeated P13 13.1–13.87 sequence is recorded and normalized to 621 unique main chapters. The original source digest remains authoritative.`, '',
-    'The TL has accepted all eight BOOK-W1B migration maps and their current primary recommendations with no overrides. Split and merge records remain non-dispositive review evidence. New candidates are accepted only as candidates and are not approved Canonical Nodes. **BOOK-W1C and BOOK-W1D remain unaccepted.**', '',
+    'The TL has accepted all eight BOOK-W1B migration maps and their current primary recommendations with no overrides. Split and merge records remain non-dispositive review evidence. New candidates are accepted only as candidates and are not approved Canonical Nodes. **At the BOOK-W1B acceptance checkpoint, BOOK-W1C and BOOK-W1D remained unaccepted; later-step status is governed by the five-volume migration contract.**', '',
     '621 outline chapters ≠ 621 Canonical Nodes. Existing frozen identities remain unchanged, `nodes.json` is not mutated, and no outline chapter is automatically approved as a Node.', '',
     '## Per-Part review counts', '',
     '| Part | Outline chapters | Existing nodes | Match | Rename | Move | Supersede | Split review | Merge review | New candidate |',

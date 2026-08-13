@@ -4,10 +4,9 @@
 
 BOOK-W1E candidate preparation is complete, but activation is blocked because **W1D is not active**. The W1D evidence based on `610ccf4` is a candidate ledger only. It accounts for 716 predecessor Canonical Nodes, two KAU-R5 admissions and 473 publication-ownership records without creating active reconciliation authority.
 
-Direct W1D activation is not a safe TL checkbox. **P8–P15 source authority is complete**, and BOOK-W1B is Human approved with no overrides. TL has accepted the 213 provisional W1C recommendations, but no Canonical Node has been created. The repository still needs two remaining explicit TL acceptance gates in order:
+Direct W1D activation is not a safe TL checkbox. **P8–P15 source authority is complete**, and BOOK-W1B plus BOOK-W1C are Human approved with no overrides. All 323 W1C dispositions are resolved, but no Canonical Node has been created. The repository now has one remaining explicit TL acceptance gate before W1E may activate:
 
-1. accept the rebuilt four W1C successor Blueprints and resolve the remaining 66 `link to existing` plus 44 `defer` recommendations;
-2. accept the W1D 718-entry identity ledger and 473 publication-ownership records, including an explicit physical-application decision for `KN-B2-P7-052 → P11` and `KN-B2-P7-057 → P10`.
+1. accept or revise the W1D 718-entry existing-identity ledger, 213 Canonical admission candidates (192 promote + 21 supersede), and 473 publication-ownership records, including explicit physical-application decisions for `KN-B2-P7-052 → P11` and `KN-B2-P7-057 → P10`. The 66 accepted links remain relationship-only; the 44 deferred candidates remain preserved.
 
 The exact artifact hashes and ordered decisions are recorded in `content/knowledge/migrations/book-w1d/book-w1d-tl-activation-review-v1.json`. The system may not infer or self-record these decisions.
 

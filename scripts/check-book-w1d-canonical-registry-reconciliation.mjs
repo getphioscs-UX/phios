@@ -45,11 +45,37 @@ assert.equal(actualReconciliation.candidateDecisionCounts.upstreamPromoteRecomme
 assert.equal(actualReconciliation.candidateDecisionCounts.upstreamLinkToExistingRecommendationCount,66);
 assert.equal(actualReconciliation.candidateDecisionCounts.upstreamSupersedeRecommendationCount,21);
 assert.equal(actualReconciliation.candidateDecisionCounts.upstreamDeferRecommendationCount,44);
-assert.equal(actualReconciliation.candidateDecisionCounts.upstreamHumanAcceptedRecommendationCount,213);
-assert.equal(actualReconciliation.candidateDecisionCounts.upstreamPendingHumanDecisionCount,110);
+assert.equal(actualReconciliation.candidateDecisionCounts.upstreamHumanAcceptedRecommendationCount,279);
+assert.equal(actualReconciliation.candidateDecisionCounts.upstreamHumanResolvedDispositionCount,323);
+assert.equal(actualReconciliation.candidateDecisionCounts.upstreamPendingHumanDecisionCount,0);
+assert.equal(actualReconciliation.candidateDecisionCounts.w1dAdmissionCandidateCount,213);
+assert.equal(actualReconciliation.candidateDecisionCounts.acceptedLinkRelationshipCount,66);
+assert.equal(actualReconciliation.candidateDecisionCounts.deferredAdmissionCandidateCount,44);
 assert.equal(actualReconciliation.candidateDecisionCounts.w1dAcceptedAdmissionCount,0);
 assert.equal(actualReconciliation.boundaries.nodesJsonMutationAllowed,false);
 assert.equal(actualReconciliation.boundaries.outlineChapterAutoApprovalAllowed,false);
+assert.equal(actualReconciliation.status,'ready-for-human-review-not-active');
+assert.equal(actualReconciliation.admissionCandidates.length,213);
+assert.equal(actualReconciliation.admissionCandidates.filter(record=>record.proposedAction==='promote').length,192);
+assert.equal(actualReconciliation.admissionCandidates.filter(record=>record.proposedAction==='supersede').length,21);
+assert.equal(new Set(actualReconciliation.admissionCandidates.map(record=>record.proposedCanonicalNodeCode)).size,213);
+assert(actualReconciliation.admissionCandidates.every(record=>record.canonicalNodeApproved===false));
+assert(actualReconciliation.admissionCandidates.every(record=>record.canonicalIdentityChanged===false));
+assert(actualReconciliation.admissionCandidates.every(record=>record.w1dHumanDecision===null));
+assert(actualReconciliation.admissionCandidates.every(record=>
+  !nodes.some(node=>node.nodeCode===record.proposedCanonicalNodeCode)));
+assert(actualReconciliation.admissionCandidates.filter(record=>record.proposedAction==='supersede')
+  .every(record=>record.lineageCandidate.legacyNodeCode
+    && record.lineageCandidate.successorProvisionalNodeCode===record.proposedCanonicalNodeCode
+    && record.lineageCandidate.compatibilityStrategy));
+assert.equal(actualReconciliation.acceptedLinkRelationships.length,66);
+assert(actualReconciliation.acceptedLinkRelationships.every(record=>
+  record.w1cHumanAcceptance.status==='HUMAN_ACCEPTED_RELATIONSHIP_RECOMMENDATION'
+  && record.canonicalNodeCreated===false));
+assert.equal(actualReconciliation.deferredAdmissionCandidates.length,44);
+assert(actualReconciliation.deferredAdmissionCandidates.every(record=>
+  record.w1cHumanAcceptance.status==='HUMAN_ACCEPTED_DEFERRED_DISPOSITION'
+  && record.applicationStatus.includes('preserved')));
 
 assert.equal(actualPublication.recordCount,473);
 assert.equal(actualPublication.w1bMapRecordCount,471);
@@ -76,42 +102,53 @@ const rehomeRecords=actualPublication.records.slice(471);
 assert.deepEqual(rehomeRecords.map(record=>record.canonicalNodeCode),['KN-B2-P7-052','KN-B2-P7-057']);
 assert.deepEqual(rehomeRecords.map(record=>record.partCode),['P11','P10']);
 assert(rehomeRecords.every(record=>record.humanAcceptance.status==='HUMAN_ACCEPTED_TARGET_ONLY'));
-assert(rehomeRecords.every(record=>record.applicationStatus==='blocked-pending-target-completed-outline-authority'));
+assert(rehomeRecords.every(record=>record.applicationStatus==='ready-for-w1d-explicit-physical-application-decision'));
 
 assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1B').status,'accepted');
-assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1C').status,'in_progress');
-assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1D').status,'pending');
-assert.equal(w1Contract.w1dCandidatePreparation.status,'generated-blocked-not-active');
+assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1C').status,'accepted');
+assert.equal(w1Contract.implementationSteps.find(step=>step.step==='BOOK-W1D').status,'in_progress');
+assert.equal(w1Contract.w1dCandidatePreparation.status,'generated-ready-for-human-review-not-active');
 assert.equal(w1Contract.w1dCandidatePreparation.existingCanonicalAuthorityAccountedFor,716);
 assert.equal(w1Contract.w1dCandidatePreparation.postBaselineKauR5AdmissionsAccountedFor,2);
 assert.equal(w1Contract.w1dCandidatePreparation.upstreamW1cAdmissionReviewCandidateCount,323);
-assert.equal(w1Contract.w1dCandidatePreparation.upstreamW1cAcceptedAdmissionRecommendationCount,213);
-assert.equal(w1Contract.w1dCandidatePreparation.upstreamW1cPendingAdmissionRecommendationCount,110);
+assert.equal(w1Contract.w1dCandidatePreparation.upstreamW1cResolvedHumanDispositionCount,323);
+assert.equal(w1Contract.w1dCandidatePreparation.w1dAdmissionCandidateCount,213);
+assert.equal(w1Contract.w1dCandidatePreparation.acceptedLinkRelationshipCount,66);
+assert.equal(w1Contract.w1dCandidatePreparation.deferredAdmissionCandidateCount,44);
+assert.equal(w1Contract.w1dCandidatePreparation.upstreamW1cPendingAdmissionRecommendationCount,0);
 assert.equal(w1Contract.w1dCandidatePreparation.w1dCanonicalAdmissionDecisionCount,0);
 assert.equal(w1Contract.w1dCandidatePreparation.activeCanonicalRegistryMutated,false);
 assert.equal(w1Contract.boundaries.canonicalRegistryReconciliationAllowedBeforeW1BAndW1CAcceptance,false);
 assert.equal(w1cRegistry.activationGates.w1bMigrationMapsAccepted,true);
-assert.equal(w1cAcceptance.status,'PARTIAL_HUMAN_ACCEPTANCE');
-assert.equal(w1cAcceptance.decision,'PARTIAL_ACCEPT');
+assert.equal(w1cAcceptance.status,'HUMAN_APPROVED');
+assert.equal(w1cAcceptance.decision,'ACCEPT');
 assert.equal(w1cAdmissionLedger.inventory.candidateCount,323);
-assert.equal(w1cAdmissionLedger.inventory.acceptedRecommendationCount,213);
-assert.equal(w1cAdmissionLedger.inventory.pendingHumanDecisionCount,110);
+assert.equal(w1cAdmissionLedger.inventory.resolvedHumanDispositionCount,323);
+assert.equal(w1cAdmissionLedger.inventory.pendingHumanDecisionCount,0);
 assert.equal(w1cAdmissionLedger.inventory.approvedCanonicalNodeCount,0);
-assert.equal(actualAcceptance.status,'BLOCKED_PENDING_W1C_HUMAN_GATE');
+assert.equal(actualAcceptance.status,'READY_FOR_HUMAN_REVIEW');
 assert.equal(actualAcceptance.priorGates.w1cCanonicalAdmissionReviewAuthorized,true);
 assert.equal(actualAcceptance.priorGates.w1cCanonicalAdmissionReviewPartiallyAccepted,true);
-assert.equal(actualAcceptance.priorGates.w1cCanonicalAdmissionReviewAccepted,false);
+assert.equal(actualAcceptance.priorGates.w1cCanonicalAdmissionReviewAccepted,true);
+assert.equal(actualAcceptance.priorGates.w1cSuccessorBlueprintsAccepted,true);
+assert.equal(actualAcceptance.upstreamAdmissionReview.resolvedHumanDispositionCount,323);
+assert.equal(actualAcceptance.upstreamAdmissionReview.canonicalAdmissionCandidateCount,213);
+assert.equal(actualAcceptance.upstreamAdmissionReview.acceptedLinkRelationshipCount,66);
+assert.equal(actualAcceptance.upstreamAdmissionReview.deferredAdmissionCandidateCount,44);
+assert.equal(actualAcceptance.requiredHumanDecisions.existingCanonicalIdentityLedgerEntryCount,718);
+assert.equal(actualAcceptance.requiredHumanDecisions.canonicalAdmissionCandidateCount,213);
+assert.equal(actualAcceptance.requiredHumanDecisions.publicationOwnershipRecordCount,473);
 assert.equal(actualAcceptance.decision,null);
 assert.equal(actualAcceptance.activation.canonicalRegistryMutationAllowed,false);
 assert.equal(actualAcceptance.activation.activeAuthorityCreated,false);
 assert.equal(pkg.scripts['check:book-w1-canonical'],'node scripts/check-book-w1d-canonical-registry-reconciliation.mjs');
 assert.equal(pkg.scripts['check:book-w1d'],'npm run check:book-w1-canonical');
 assert.equal((pkg.scripts.precheck.match(/npm run check:book-w1-canonical/g)??[]).length,1);
-for(const phrase of ['716 existing Canonical Node Authority','2 KAU-R5 Human-accepted admissions','0 silent deletion','473 publication ownership records','323 upstream Canonical admission review candidates','213 provisional recommendations are TL-accepted','W1C remains partially accepted']) assert(audit.includes(phrase));
+for(const phrase of ['716 existing Canonical Node Authority','2 KAU-R5 Human-accepted admissions','0 silent deletion','473 publication ownership records','323 W1C dispositions','213 Canonical admission candidates','W1C is Human approved','READY_FOR_HUMAN_REVIEW']) assert(audit.includes(phrase));
 
-console.log('✓ BOOK-W1D Canonical Registry Reconciliation candidate passed.');
+console.log('✓ BOOK-W1D Canonical Registry Human Review package passed.');
 console.log('  716 predecessor Canonical Nodes + 2 KAU-R5 Human-accepted admissions are accounted for exactly once.');
 console.log('  0 silent deletion, 0 ungoverned nodeCode mutation, 0 duplicate identity and 0 orphan migration entry.');
 console.log('  473 publication ownership records are traceable: 471 W1B moves + 2 Human-accepted rehome targets.');
-console.log('  213 W1C recommendations are Human accepted and 110 remain pending; W1D has admitted 0 and created 0 identities.');
-console.log('  W1C remains partially accepted, so W1D is blocked; nodes.json and active Blueprint authority were not mutated.');
+console.log('  W1C resolved all 323 dispositions: 213 admission candidates, 66 accepted links and 44 preserved deferrals.');
+console.log('  W1D is ready for Human Review but has admitted 0; nodes.json and active Blueprint authority were not mutated.');
