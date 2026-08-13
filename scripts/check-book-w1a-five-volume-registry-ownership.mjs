@@ -17,6 +17,7 @@ const NODE_REGISTRY_SHA = '61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b
 const BLUEPRINT_REGISTRY_SHA = '981d25e7fddcab69ce0640ea5bc161c83df095c345695b4a4a82c21ec76fb92a';
 const BOOK_W0_AUDIT_SHA = '7035fcc9a354935ac418c1bc4313c78c0c42e4a19247496dd60a2e34d49571fa';
 const KAU_R0_FREEZE_SHA = '9276048142f346bdb2ab4b20aaf095bc0409b28ae0d0e38433181828b607a582';
+const R5_FREEZE_PATH='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
 
 const [
   books,
@@ -133,13 +134,7 @@ assert.equal(contract.contract, 'PHI-OS-FIVE-VOLUME-MIGRATION-CONTRACT-v1.0.0');
 assert.equal(contract.status, 'active-successor-migration');
 assert.equal(contract.implementationSteps[0].step, 'BOOK-W1A');
 assert.equal(contract.implementationSteps[0].status, 'accepted');
-const allowedSuccessorStatuses = new Set(['pending', 'in_progress', 'accepted']);
-assert(contract.implementationSteps.slice(1).every(step => allowedSuccessorStatuses.has(step.status)));
-let nonAcceptedStepSeen = false;
-for (const step of contract.implementationSteps) {
-  if (step.status !== 'accepted') nonAcceptedStepSeen = true;
-  if (nonAcceptedStepSeen) assert.notEqual(step.status, 'accepted', 'BOOK-W1 steps cannot skip a prior gate.');
-}
+assert(contract.implementationSteps.slice(1).every(step => step.status === 'pending'));
 assert.equal(contract.boundaries.canonicalNodeRegistryMutationAllowedInW1A, false);
 assert.equal(contract.boundaries.finalSuccessorBlueprintGenerationAllowedInW1A, false);
 assert.equal(contract.boundaries.publicProjectionMutationAllowedInW1A, false);
@@ -156,10 +151,21 @@ assert.equal(migration.acceptance.canonicalNodeRegistryUnchanged, true);
 assert.equal(migration.acceptance.finalSuccessorBlueprintsGenerated, false);
 assert.equal(migration.nextGate, 'BOOK-W1B');
 
-assert.equal(nodes.nodes.length, 716);
-assert.equal(digest(await read('content/knowledge/registry/nodes.json')), NODE_REGISTRY_SHA);
-assert.equal(blueprintRegistry.status, 'frozen');
-assert.equal(digest(await read('content/knowledge/blueprints/blueprint-registry.json')), BLUEPRINT_REGISTRY_SHA);
+const r5Active=await fs.access(path.join(root,R5_FREEZE_PATH)).then(()=>true).catch(()=>false);
+if(r5Active){
+  const r5=await readJson(R5_FREEZE_PATH);
+  assert.equal(r5.canonicalAuthority.predecessorCount,716);
+  assert.equal(r5.canonicalAuthority.predecessorSha256,NODE_REGISTRY_SHA);
+  assert.equal(r5.canonicalAuthority.successorCount,718);
+  assert.equal(nodes.nodes.length,718);
+  assert.equal(digest(await read('content/knowledge/registry/nodes.json')),r5.canonicalAuthority.successorSha256);
+  assert.equal(blueprintRegistry.totals.canonicalNodes,718);
+}else{
+  assert.equal(nodes.nodes.length,716);
+  assert.equal(digest(await read('content/knowledge/registry/nodes.json')),NODE_REGISTRY_SHA);
+  assert.equal(digest(await read('content/knowledge/blueprints/blueprint-registry.json')),BLUEPRINT_REGISTRY_SHA);
+}
+assert.equal(blueprintRegistry.status,'frozen');
 assert.equal(migration.blueprintRegistryTransition.mutatedInW1A, false);
 assert.equal(migration.blueprintRegistryTransition.successorGenerationGate, 'BOOK-W1C');
 assert.equal(digest(bookW0Audit), BOOK_W0_AUDIT_SHA);
@@ -178,5 +184,5 @@ assert.equal(packageJson.scripts['check:book-w1-ownership'], 'npm run check:book
 console.log('✓ BOOK-W1A Five-Volume Registry Ownership passed.');
 console.log('  BOOK-1/Volume I through BOOK-5/Volume V are aligned; 15 numbered Parts have one current owner.');
 console.log('  P8-P15 Current Part Authority is exact; superseded titles remain legacy aliases only.');
-console.log('  716 Canonical Node identities and the frozen KAU-R0 Blueprint Registry remain unchanged.');
+console.log(r5Active ? '  W1A historical 716-node baseline remains preserved as predecessor lineage; KAU-R5 is the governed 718-node current successor.' : '  716 Canonical Node identities and the frozen KAU-R0 Blueprint Registry remain unchanged.');
 console.log('  W1B outline reconciliation is the next gate; no public projection or Production Authority was created.');

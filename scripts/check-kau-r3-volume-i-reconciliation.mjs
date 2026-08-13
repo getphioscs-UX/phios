@@ -19,6 +19,8 @@ const blueprint = read('content/knowledge/blueprints/book-1-knowledge-blueprint.
 const nodes = read('content/knowledge/registry/nodes.json');
 const bindings = read('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
 const corrections = read('content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json');
+const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
+const r5Active=fs.existsSync(r5Path);
 
 assert.equal(recon.stage, 'KAU-R3');
 assert.equal(recon.bookCode, 'BOOK-1');
@@ -76,18 +78,22 @@ for (const code of book1NodeCodes) {
 }
 for (const r of coverage.records) assert.equal(r.humanAcceptance, 'ACCEPTED');
 
-assert.equal(meta.status, 'HUMAN_ACCEPTED_APPLICATION_DEFERRED_TO_KAU_R5');
+assert.equal(meta.status, r5Active ? 'HUMAN_ACCEPTED_APPLIED_IN_KAU_R5' : 'HUMAN_ACCEPTED_APPLICATION_DEFERRED_TO_KAU_R5');
 assert.equal(meta.records.length, 2);
 assert.deepEqual(meta.records.map(r => r.nodeCode).sort(), ['KN-B1-P1-002','KN-B1-P1-005']);
 for (const r of meta.records) {
   assert.equal(r.canonicalIdentityChanged, false);
   assert.equal(r.humanAcceptance, 'ACCEPTED');
-  assert.equal(r.applicationStatus, 'DEFERRED_TO_KAU_R5');
+  assert.equal(r.applicationStatus, r5Active ? 'APPLIED_IN_KAU_R5' : 'DEFERRED_TO_KAU_R5');
   assert.equal(nodes.nodes.find(n => n.nodeCode === r.nodeCode)?.canonicalQuestionKey, r.canonicalQuestionKey);
 }
-// Frozen blueprint is intentionally not mutated until KAU-R5 successor reconciliation.
-assert.equal(blueprint.nodes.find(n => n.nodeCode === 'KN-B1-P1-002').titleZhHans, '为什么差异会持续扩大');
-assert.equal(blueprint.nodes.find(n => n.nodeCode === 'KN-B1-P1-005').titleZhHans, '为什么现实会不断演化');
+if(r5Active){
+  assert.equal(blueprint.nodes.find(n=>n.nodeCode==='KN-B1-P1-002').titleZhHans,'约束如何裁剪可能性并维持差异');
+  assert.equal(blueprint.nodes.find(n=>n.nodeCode==='KN-B1-P1-005').titleZhHans,'结构差异如何形成区域与网络');
+}else{
+  assert.equal(blueprint.nodes.find(n=>n.nodeCode==='KN-B1-P1-002').titleZhHans,'为什么差异会持续扩大');
+  assert.equal(blueprint.nodes.find(n=>n.nodeCode==='KN-B1-P1-005').titleZhHans,'为什么现实会不断演化');
+}
 
 assert.equal(notices.status, 'RESOLVED_BY_HUMAN_SOURCE_CORRECTION');
 assert.equal(notices.records.length, 1);
@@ -123,21 +129,22 @@ assert.equal(freeze.metadataRevisions.deferredTo, 'KAU-R5');
 
 assert.equal(approved.recordCount, 62);
 assert.equal(approved.records.length, 62);
-assert.equal(bindings.records.length, 62);
-assert.deepEqual(bindings.records, approved.records);
-assert(bindings.records.every(r => r.bookCode === 'BOOK-1' && r.status === 'APPROVED'));
-assert.equal(new Set(bindings.records.map(r => r.sectionCode)).size, 62);
-assert.equal(new Set(bindings.records.map(r => r.nodeCode)).size, 61);
+const book1Bindings=bindings.records.filter(r=>r.bookCode==='BOOK-1');
+assert.equal(book1Bindings.length,62);
+assert.deepEqual(book1Bindings,approved.records);
+assert(book1Bindings.every(r=>r.status==='APPROVED'));
+assert.equal(new Set(book1Bindings.map(r=>r.sectionCode)).size,62);
+assert.equal(new Set(book1Bindings.map(r=>r.nodeCode)).size,61);
 
 assert.equal(corrections.records.length, 1);
 assert.equal(corrections.records[0].correctedValue, 'Domain III Coexistence |');
 assert.equal(corrections.records[0].rawSourcePreserved, true);
 
-assert.equal(sha256('content/knowledge/registry/nodes.json'), '61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
+if(r5Active){const r5=read(r5Path);assert.equal(nodes.nodes.length,718);assert.equal(sha256('content/knowledge/registry/nodes.json'),r5.canonicalAuthority.successorSha256);assert.equal(r5.canonicalAuthority.predecessorSha256,'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');}else assert.equal(sha256('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
 
 console.log('✓ KAU-R3 Volume I Human-Accepted Reconciliation passed.');
 console.log('  275/275 final Book-I materialized sections are human accepted.');
 console.log('  65/65 existing Volume-I Canonical Nodes retain accepted source coverage.');
 console.log('  62 primary Book-I section→node bindings are now APPROVED for KSAR; supporting-only sections remain source-native.');
 console.log('  Domain III Coexistence is human-confirmed through a governed editorial projection while raw source provenance remains unchanged.');
-console.log('  2 accepted Blueprint display-title revisions are deferred to KAU-R5; nodes.json remains byte-identical.');
+console.log(r5Active ? '  2 accepted Book-I Blueprint display-title revisions are applied by KAU-R5; predecessor identity is preserved.' : '  2 accepted Blueprint display-title revisions are deferred to KAU-R5; nodes.json remains byte-identical.');

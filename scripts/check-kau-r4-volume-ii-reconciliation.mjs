@@ -15,16 +15,17 @@ const inventory=read('content/knowledge/manuscripts/extraction/book-2-full-secti
 const blueprint=read('content/knowledge/blueprints/book-2-knowledge-blueprint.json');
 const nodes=read('content/knowledge/registry/nodes.json');
 const bindings=read('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
+const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'; const r5Active=fs.existsSync(r5Path);
 assert.equal(recon.stage,'KAU-R4');
 assert.equal(recon.baselineCommit,'a8e6c3e9cd1495c407df321cfb94cdaa60e6446a');
-assert.equal(recon.status,'SEMANTIC_RECONCILIATION_COMPLETE_HUMAN_ACCEPTANCE_PENDING');
+assert.equal(recon.status,r5Active?'HUMAN_ACCEPTED_VOLUME_II_RECONCILIATION':'SEMANTIC_RECONCILIATION_COMPLETE_HUMAN_ACCEPTANCE_PENDING');
 assert.equal(recon.records.length,173);
 const invBy=new Map(inventory.sections.map(s=>[s.sectionCode,s])); assert.equal(invBy.size,173);
 const allowed=new Set(['SUPPORTING_ONLY','EXACT_MATCH','EXPANDED_MATCH','NEW_NODE_REQUIRED']);
 const counts={}; const primary=new Set(); const supporting=new Set(); let relationCount=0;
 for(const r of recon.records){
   const s=invBy.get(r.sectionCode); assert.ok(s); assert.equal(r.sectionTextSha256,s.textSha256); assert.equal(r.heading,s.heading);
-  assert.ok(allowed.has(r.r4ProposedDecision)); assert.equal(r.humanAcceptance,'PENDING');
+  assert.ok(allowed.has(r.r4ProposedDecision)); assert.equal(r.humanAcceptance,r5Active?'ACCEPTED':'PENDING');
   assert.equal(r.canonicalBindingEligibleAfterHumanAcceptance,r.primaryNodeCodes.length>0);
   for(const c of r.primaryNodeCodes){primary.add(c); relationCount++;} for(const c of r.supportingNodeCodes)supporting.add(c);
   counts[r.r4ProposedDecision]=(counts[r.r4ProposedDecision]??0)+1;
@@ -36,19 +37,18 @@ assert.equal(recon.records.find(r=>r.sectionCode==='CM-B2V1-P6-S049').primaryNod
 assert.deepEqual(recon.records.find(r=>r.sectionCode==='CM-B2V1-P6-S049').primaryNodeCodes,['KN-B2-P6-056','KN-B2-P6-057','KN-B2-P6-058']);
 assert.equal(recon.records.find(r=>r.sectionCode==='CM-B2V1-P7-S052').r4ProposedDecision,'NEW_NODE_REQUIRED');
 assert.equal(recon.records.find(r=>r.sectionCode==='CM-B2V1-P7-S057').r4ProposedDecision,'NEW_NODE_REQUIRED');
-const b2nodes=blueprint.nodes.filter(n=>['P5','P6','P7'].includes(n.partCode)); assert.equal(b2nodes.length,180);
+const b2nodes=blueprint.nodes.filter(n=>['P5','P6','P7'].includes(n.partCode)); assert.equal(b2nodes.length,r5Active?182:180);
 assert.equal(coverage.existingCanonicalNodeCount,180); assert.equal(coverage.coveredCanonicalNodeCount,173); assert.equal(coverage.primarySourceNodeCount,171); assert.equal(coverage.compositeOnlyNodeCount,2); assert.equal(coverage.uncoveredExistingCanonicalNodeCount,7);
 assert.deepEqual(coverage.uncoveredCanonicalNodeCodes.sort(),['KN-B2-P6-051','KN-B2-P6-052','KN-B2-P6-053','KN-B2-P6-054','KN-B2-P6-055','KN-B2-P7-052','KN-B2-P7-057'].sort());
 assert.ok(supporting.has('KN-B2-P6-005')); assert.ok(supporting.has('KN-B2-P6-012'));
 assert.equal(scope.recordCount,7); assert.equal(disp.recordCount,7); assert.equal(disp.deprecationCandidateCount,5); assert.equal(disp.crossVolumeRehomeCandidateCount,2); assert.equal(newNodes.recordCount,2);
-assert.equal(integrity.records.length,1); assert.deepEqual(integrity.records[0].physicalPages,[100,101]); assert.equal(integrity.records[0].humanDisposition,'PENDING');
-assert.equal(queue.status,'OPEN'); assert.equal(queue.attentionItemCount,19); assert.equal(queue.humanAcceptance,'PENDING');
-assert.equal(acceptance.status,'SEMANTIC_RECONCILIATION_COMPLETE_HUMAN_ACCEPTANCE_PENDING'); assert.equal(acceptance.summary.ksarBook2ApprovedBindingsWritten,0);
-assert.equal(bindings.records.length,62); assert.ok(bindings.records.every(r=>r.bookCode==='BOOK-1'));
-assert.equal(nodes.nodes.length,716); assert.equal(sha256('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
+assert.equal(integrity.records.length,1); assert.deepEqual(integrity.records[0].physicalPages,[100,101]); assert.equal(integrity.records[0].humanDisposition,r5Active?'CONFIRMED_SOURCE_EDITORIAL_DUPLICATE':'PENDING');
+assert.equal(queue.status,r5Active?'CLOSED_HUMAN_ACCEPTED':'OPEN'); assert.equal(queue.attentionItemCount,19); assert.equal(queue.humanAcceptance,r5Active?'ACCEPTED':'PENDING');
+assert.equal(acceptance.status,r5Active?'HUMAN_ACCEPTED_VOLUME_II_RECONCILIATION_FROZEN':'SEMANTIC_RECONCILIATION_COMPLETE_HUMAN_ACCEPTANCE_PENDING'); assert.equal(acceptance.summary.ksarBook2ApprovedBindingsWritten,r5Active?171:0);
+if(r5Active){const r5=read(r5Path);assert.equal(bindings.records.length,235);assert.equal(bindings.records.filter(r=>r.bookCode==='BOOK-2').length,173);assert.equal(nodes.nodes.length,718);assert.equal(sha256('content/knowledge/registry/nodes.json'),r5.canonicalAuthority.successorSha256);}else{assert.equal(bindings.records.length,62);assert.ok(bindings.records.every(r=>r.bookCode==='BOOK-1'));assert.equal(nodes.nodes.length,716);assert.equal(sha256('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');}
 console.log('✓ KAU-R4 Volume II Reconciliation passed.');
 console.log('  173/173 final Book-II materialized sections are semantically accounted for.');
 console.log('  Decisions: 159 EXACT_MATCH, 10 EXPANDED_MATCH, 2 SUPPORTING_ONLY, 2 NEW_NODE_REQUIRED.');
 console.log('  173/180 existing Volume-II Canonical Nodes have final-manuscript source coverage; 7 legacy planned nodes require human disposition.');
 console.log('  P6 final closure is a multi-node source for Exit / Shared Memory / Closure; no merge is forced.');
-console.log('  2 new P7 threshold mechanisms and 2 cross-volume legacy rehome candidates remain human-pending; nodes.json and Book-II KSAR bindings are unchanged.');
+console.log(r5Active ? '  R4 human resolutions are applied by KAU-R5: 2 new P7 nodes admitted, 5 legacy nodes deprecated, 2 rehome targets accepted/deferred, and Book-II KSAR bindings activated.' : '  2 new P7 threshold mechanisms and 2 cross-volume legacy rehome candidates remain human-pending; nodes.json and Book-II KSAR bindings are unchanged.');

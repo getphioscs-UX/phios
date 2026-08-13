@@ -66,7 +66,9 @@ assert.equal(handoff.gates.nodesJsonMutationAllowed, false);
 if (fs.existsSync('content/knowledge/registry/nodes.json')) {
   const nodes = read('content/knowledge/registry/nodes.json');
   const arr = Array.isArray(nodes) ? nodes : (nodes.nodes ?? nodes.canonicalNodes ?? []);
-  assert.equal(arr.length, 716, 'KAU-R1C must preserve 716 Canonical Nodes');
+  const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
+  if (fs.existsSync(r5Path)) { const r5=read(r5Path); assert.equal(arr.length,r5.canonicalAuthority.successorCount); assert.equal(r5.canonicalAuthority.predecessorCount,716); }
+  else assert.equal(arr.length, 716, 'KAU-R1C must preserve 716 Canonical Nodes before an accepted successor');
 }
 
 console.log('✓ KAU-R1C Full Section Extraction & Integrity passed.');

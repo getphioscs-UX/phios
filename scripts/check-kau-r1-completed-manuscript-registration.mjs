@@ -37,7 +37,9 @@ assert.equal(freeze.handoff.nodesJsonMutationInR2, false);
 if (fs.existsSync('content/knowledge/registry/nodes.json')) {
   const nodes = readJson('content/knowledge/registry/nodes.json');
   const arr = Array.isArray(nodes) ? nodes : (nodes.nodes ?? nodes.canonicalNodes ?? []);
-  assert.equal(arr.length, 716, 'Canonical Node count must remain 716 at KAU-R1');
+  const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
+  if (fs.existsSync(r5Path)) { const r5=readJson(r5Path); assert.equal(arr.length,r5.canonicalAuthority.successorCount); assert.equal(r5.canonicalAuthority.predecessorCount,716); }
+  else assert.equal(arr.length, 716, 'Canonical Node count must remain 716 at KAU-R1 before an accepted successor');
   const digest = hashNormalizedJson(nodes);
   // Informational only: repositories may serialize equivalent JSON differently across governed projections.
   assert.equal(typeof digest, 'string');

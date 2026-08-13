@@ -8,8 +8,8 @@ const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const nodes=json('content/knowledge/registry/nodes.json');
 const nodeList=Array.isArray(nodes)?nodes:(nodes.nodes||[]);
-assert.equal(nodeList.length,716);
-assert.equal(sha('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
+const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'; const r5Active=fs.existsSync(r5Path);
+if(r5Active){const r5=json(r5Path);assert.equal(nodeList.length,718);assert.equal(sha('content/knowledge/registry/nodes.json'),r5.canonicalAuthority.successorSha256);assert.equal(r5.canonicalAuthority.predecessorSha256,'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');}else{assert.equal(nodeList.length,716);assert.equal(sha('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');}
 
 const contract=json('content/knowledge/source-access/contracts/ksar-r1-r8-reconciliation-contract-v1.json');
 assert.deepEqual(contract.stage,['KSAR-R1','KSAR-R2','KSAR-R3','KSAR-R4','KSAR-R5','KSAR-R6','KSAR-R7','KSAR-R8']);
@@ -41,8 +41,10 @@ const kauR3Acceptance=json('content/knowledge/reconciliation/kau-r3/kau-r3-accep
 assert.equal(kauR3Acceptance.status,'HUMAN_ACCEPTED_VOLUME_I_RECONCILIATION_FROZEN');
 assert.equal(kauR3Acceptance.humanAcceptance.decision,'ACCEPT_WITH_CHANGES');
 assert.equal(kauR3Acceptance.summary.ksarApprovedBindingsWritten,62);
-assert.equal(bindings.records.length,62,'KAU-R3 human-accepted bindings must project exactly once into KSAR.');
-assert(bindings.records.every(record => record.status==='APPROVED' && record.authority==='KAU-R3_HUMAN_ACCEPTED_VOLUME_I_RECONCILIATION'));
+const b1Bindings=bindings.records.filter(r=>r.bookCode==='BOOK-1');
+assert.equal(b1Bindings.length,62,'KAU-R3 human-accepted Volume-I bindings must remain projected exactly once.');
+assert(b1Bindings.every(record=>record.status==='APPROVED'&&record.authority==='KAU-R3_HUMAN_ACCEPTED_VOLUME_I_RECONCILIATION'));
+if(r5Active){const b2Bindings=bindings.records.filter(r=>r.bookCode==='BOOK-2');assert.equal(bindings.records.length,235);assert.equal(b2Bindings.length,173);assert(b2Bindings.every(record=>record.status==='APPROVED'));}else assert.equal(bindings.records.length,62);
 const corrections=json('content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json');
 assert.equal(corrections.status,'ACTIVE_HUMAN_CONFIRMED_CORRECTIONS');
 assert.equal(corrections.records.length,1);
@@ -98,7 +100,7 @@ assert.equal(pkg.scripts['ksar:verify-corpora'],'node scripts/verify-ksar-r2-cor
 
 console.log('✓ KSAR-R1～R8 Reconciliation passed.');
 console.log('  R1 actual-bytes corpus hashes and canonical books/ object keys are reconciled; remote GET evidence remains explicit pending state.');
-console.log('  R2-R4 KAU-R3 human-accepted Volume I bindings and editorial correction projection are active without putting manuscript bodies in public Git.');
+console.log(r5Active ? '  R2-R4 human-accepted Volume I/II bindings plus KAU-R5 Canonical successor projection are active without putting manuscript bodies in public Git.' : '  R2-R4 KAU-R3 human-accepted Volume I bindings and editorial correction projection are active without putting manuscript bodies in public Git.');
 console.log('  R5-R6 unified hybrid retrieval plus deterministic grounded answer projection are active.');
 console.log('  R7 Knowledge Search, Free Explore and Library gateways route into Knowledge Access.');
 console.log('  R8 Human Review Gate is closed; production freeze remains correctly blocked only until reviewed-corpus remote R2 hash verification completes.');

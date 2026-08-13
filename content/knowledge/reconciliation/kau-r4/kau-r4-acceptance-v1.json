@@ -1,8 +1,8 @@
 {
   "schemaVersion": "PHI-OS-KAU-R4-ACCEPTANCE-v1.0.0",
   "stage": "KAU-R4",
-  "status": "SEMANTIC_RECONCILIATION_COMPLETE_HUMAN_ACCEPTANCE_PENDING",
-  "baselineCommit": "a8e6c3e9cd1495c407df321cfb94cdaa60e6446a",
+  "status": "HUMAN_ACCEPTED_VOLUME_II_RECONCILIATION_FROZEN",
+  "baselineCommit": "50192461e355fde67994a1103921d2003cc9ed2b",
   "bookCode": "BOOK-2",
   "summary": {
     "materializedSectionsAccountedFor": 173,
@@ -17,7 +17,8 @@
     "scopeReviewCandidates": 7,
     "sourceIntegrityNoticesPending": 1,
     "canonicalNodeRegistryMutations": 0,
-    "ksarBook2ApprovedBindingsWritten": 0
+    "ksarBook2ApprovedBindingsWritten": 171,
+    "humanAcceptedAttentionItems": 19
   },
   "decisionStats": {
     "SUPPORTING_ONLY": 2,
@@ -30,11 +31,15 @@
     "nodesJsonUnchanged": true,
     "nodeCodeRenameAllowed": false,
     "automaticHumanAcceptance": false,
-    "ksarBook2BindingRegistryMayBePopulatedNow": false,
-    "newNodeCreationAllowedNow": false,
-    "legacyNodeDeprecationAllowedNow": false,
-    "crossVolumeRehomeAllowedNow": false,
+    "ksarBook2BindingRegistryMayBePopulatedNow": true,
+    "newNodeCreationAllowedNow": true,
+    "legacyNodeDeprecationAllowedNow": true,
+    "crossVolumeRehomeAllowedNow": "TARGET_ACCEPTED_PHYSICAL_MOVE_DEFERRED_UNTIL_BOOK_W1D",
     "allRegistryMutationsDeferredTo": "KAU-R5 after KAU-R4 human resolution"
   },
-  "nextAfterHumanAcceptance": "KAU-R5 Canonical Registry / Metadata Delta and successor-safe downstream reconciliation."
+  "nextAfterHumanAcceptance": "KAU-R5 Canonical Registry / Metadata Delta",
+  "humanAcceptance": {
+    "decision": "ACCEPT",
+    "acceptedDate": "2026-08-13"
+  }
 }

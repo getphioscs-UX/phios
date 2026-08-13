@@ -13,6 +13,8 @@ const root = process.cwd();
 const BASELINE = '807efc359a0d1477bc697044f55970fc5e6e8500';
 const NODE_SHA = '61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431';
 const NODE_CODE_SET_SHA = '98cea9eb7a84970dc1ea8fb98c992ee66612f5c560b987c90ba85a11d43f50c3';
+const R5_FREEZE_PATH = 'content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
+const r5Active = await fs.access(path.join(root, R5_FREEZE_PATH)).then(() => true).catch(() => false);
 
 const read = relative => fs.readFile(path.join(root, relative), 'utf8');
 const readJson = async relative => JSON.parse(await read(relative));
@@ -84,21 +86,35 @@ assert.equal(byNumber.get(9).title.en, 'Coordination Runtime');
 for (const n of [5, 6, 7]) assert.equal(byNumber.get(n).content_status, 'completed');
 
 const nodeSource = await read('content/knowledge/registry/nodes.json');
-assert.equal(digest(nodeSource), NODE_SHA, 'Canonical Node Registry bytes/content must remain unchanged from baseline.');
-assert.equal(nodes.nodes.length, 716);
 const nodeCodes = nodes.nodes.map(node => node.nodeCode).sort();
-assert.equal(new Set(nodeCodes).size, 716);
-assert.equal(digest(`${nodeCodes.join('\n')}\n`), NODE_CODE_SET_SHA);
+if (r5Active) {
+  const r5 = await readJson(R5_FREEZE_PATH);
+  assert.equal(r5.status, 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY');
+  assert.equal(r5.canonicalAuthority.predecessorCount, 716);
+  assert.equal(r5.canonicalAuthority.predecessorSha256, NODE_SHA);
+  assert.equal(r5.canonicalAuthority.predecessorNodeCodeSetSha256, NODE_CODE_SET_SHA);
+  assert.equal(r5.canonicalAuthority.successorCount, 718);
+  assert.equal(nodes.nodes.length, 718);
+  assert.equal(digest(nodeSource), r5.canonicalAuthority.successorSha256);
+  const predecessorCodes = nodeCodes.filter(code => !['KN-B2-P7-058','KN-B2-P7-059'].includes(code));
+  assert.equal(predecessorCodes.length, 716);
+  assert.equal(digest(`${predecessorCodes.join('\n')}\n`), NODE_CODE_SET_SHA);
+} else {
+  assert.equal(digest(nodeSource), NODE_SHA, 'Canonical Node Registry bytes/content must remain unchanged from baseline before an accepted successor.');
+  assert.equal(nodes.nodes.length, 716);
+  assert.equal(digest(`${nodeCodes.join('\n')}\n`), NODE_CODE_SET_SHA);
+}
+assert.equal(new Set(nodeCodes).size, nodes.nodes.length);
 assert.equal(contract.canonicalPreservation.normalizedSha256, NODE_SHA);
 assert.equal(contract.canonicalPreservation.nodeCodeSetSha256, NODE_CODE_SET_SHA);
 assert.equal(contract.canonicalPreservation.nodeIdentityMutationAllowed, false);
 
 assert.deepEqual(knowledge.books.map(book => book.bookCode), ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4', 'BOOK-5']);
-assert.deepEqual(knowledge.totals, { books: 5, parts: 16, nodes: 716 });
-assert.deepEqual(knowledge.registry.totals, { books: 5, parts: 16, canonicalNodes: 716 });
+assert.deepEqual(knowledge.totals, { books: 5, parts: 16, nodes: r5Active ? 718 : 716 });
+assert.deepEqual(knowledge.registry.totals, { books: 5, parts: 16, canonicalNodes: r5Active ? 718 : 716 });
 assert.deepEqual(
   Object.fromEntries(knowledge.books.map(book => [book.bookCode, book.cardinality.canonicalNodeCount])),
-  { 'BOOK-1': 65, 'BOOK-2': 180, 'BOOK-3': 86, 'BOOK-4': 187, 'BOOK-5': 198 }
+  r5Active ? { 'BOOK-1': 65, 'BOOK-2': 182, 'BOOK-3': 86, 'BOOK-4': 187, 'BOOK-5': 198 } : { 'BOOK-1': 65, 'BOOK-2': 180, 'BOOK-3': 86, 'BOOK-4': 187, 'BOOK-5': 198 }
 );
 assert.deepEqual(
   Object.fromEntries(knowledge.books.map(book => [book.bookCode, book.parts.map(part => part.partCode)])),
@@ -153,6 +169,6 @@ assert.equal(contract.downstreamGate.webProductionRuntime, 'BLOCKED_PENDING_FIVE
 
 console.log('✓ KAU-R0 Five-Volume Baseline & Book/Part Authority Reconciliation passed.');
 console.log('  BOOK-1 P1–P4; BOOK-2 P5–P7; BOOK-3 P8–P9; BOOK-4 P10–P12; BOOK-5 P13–P15.');
-console.log('  716 Canonical Node identities are byte/content preserved; no nodeCode rename, delete or semantic rewrite occurred.');
-console.log('  Blueprint projection: 65 / 180 / 86 / 187 / 198 = 716; KAU-R1/R2 remain the next governed stages.');
+console.log(r5Active ? '  KAU-R0 predecessor 716 identities remain preserved inside the accepted 718-node KAU-R5 successor.' : '  716 Canonical Node identities are byte/content preserved; no nodeCode rename, delete or semantic rewrite occurred.');
+console.log(r5Active ? '  Blueprint projection: 65 / 182 / 86 / 187 / 198 = 718; KAU-R5 is the active Canonical successor.' : '  Blueprint projection: 65 / 180 / 86 / 187 / 198 = 716; KAU-R1/R2 remain the next governed stages.');
 console.log('  Production deployment remains blocked until frozen WPR receives a five-volume successor reconciliation.');

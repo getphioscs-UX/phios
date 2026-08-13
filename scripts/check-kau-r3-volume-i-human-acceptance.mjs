@@ -12,6 +12,8 @@ const corrections = read('content/knowledge/source-access/registries/manuscript-
 const meta = read('content/knowledge/reconciliation/kau-r3/book-1-metadata-revision-candidates-v1.json');
 const blueprint = read('content/knowledge/blueprints/book-1-knowledge-blueprint.json');
 const pkg = read('package.json');
+const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
+const r5Active=fs.existsSync(r5Path);
 
 assert.equal(resolution.status, 'HUMAN_RESOLVED');
 assert.equal(resolution.bookCode, 'BOOK-1');
@@ -27,10 +29,11 @@ assert.equal(freeze.acceptedReconciliation.primaryApprovedKsarbBindings, 62);
 assert.equal(freeze.authorityBoundaries.nodesJsonUnchanged, true);
 assert.equal(freeze.nextStage, 'KAU-R4 Volume II Reconciliation');
 
-assert.equal(bindings.status, 'ACTIVE_PARTIAL_VOLUME_I_APPROVED');
-assert.equal(bindings.records.length, 62);
-assert(bindings.records.every(r => r.authority === 'KAU-R3_HUMAN_ACCEPTED_VOLUME_I_RECONCILIATION'));
-assert(bindings.records.every(r => ['EXACT_MATCH','EXPANDED_MATCH'].includes(r.reconciliationDecision)));
+assert.equal(bindings.status,r5Active?'ACTIVE_VOLUME_I_II_APPROVED':'ACTIVE_PARTIAL_VOLUME_I_APPROVED');
+const book1Bindings=bindings.records.filter(r=>r.bookCode==='BOOK-1');
+assert.equal(book1Bindings.length,62);
+assert(book1Bindings.every(r=>r.authority==='KAU-R3_HUMAN_ACCEPTED_VOLUME_I_RECONCILIATION'));
+assert(book1Bindings.every(r=>['EXACT_MATCH','EXPANDED_MATCH'].includes(r.reconciliationDecision)));
 
 assert.equal(corrections.status, 'ACTIVE_HUMAN_CONFIRMED_CORRECTIONS');
 assert.equal(corrections.records.length, 1);
@@ -39,12 +42,12 @@ assert.equal(corrections.records[0].correctedValue, 'Domain III Coexistence |');
 assert.equal(corrections.policy.rawMaterializedTextMutationByRegistry, false);
 assert.equal(corrections.policy.correctionAppliedAtRetrievalProjection, true);
 
-assert.equal(meta.status, 'HUMAN_ACCEPTED_APPLICATION_DEFERRED_TO_KAU_R5');
-assert.equal(meta.records.every(r => r.applicationStatus === 'DEFERRED_TO_KAU_R5'), true);
-assert.equal(blueprint.nodes.find(n => n.nodeCode === 'KN-B1-P1-002').titleZhHans, '为什么差异会持续扩大');
-assert.equal(blueprint.nodes.find(n => n.nodeCode === 'KN-B1-P1-005').titleZhHans, '为什么现实会不断演化');
+assert.equal(meta.status,r5Active?'HUMAN_ACCEPTED_APPLIED_IN_KAU_R5':'HUMAN_ACCEPTED_APPLICATION_DEFERRED_TO_KAU_R5');
+assert.equal(meta.records.every(r=>r.applicationStatus===(r5Active?'APPLIED_IN_KAU_R5':'DEFERRED_TO_KAU_R5')),true);
+assert.equal(blueprint.nodes.find(n=>n.nodeCode==='KN-B1-P1-002').titleZhHans,r5Active?'约束如何裁剪可能性并维持差异':'为什么差异会持续扩大');
+assert.equal(blueprint.nodes.find(n=>n.nodeCode==='KN-B1-P1-005').titleZhHans,r5Active?'结构差异如何形成区域与网络':'为什么现实会不断演化');
 
-assert.equal(sha256('content/knowledge/registry/nodes.json'), '61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
+if(r5Active){const r5=read(r5Path);assert.equal(sha256('content/knowledge/registry/nodes.json'),r5.canonicalAuthority.successorSha256);assert.equal(r5.canonicalAuthority.predecessorSha256,'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');}else assert.equal(sha256('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
 assert.equal(pkg.scripts['check:kau-r3-acceptance'], 'node scripts/check-kau-r3-volume-i-human-acceptance.mjs');
 
 console.log('✓ KAU-R3 Human Acceptance & Volume-I Freeze passed.');

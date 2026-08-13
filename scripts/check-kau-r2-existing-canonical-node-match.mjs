@@ -7,8 +7,10 @@ const sha256 = p => crypto.createHash('sha256').update(fs.readFileSync(p)).diges
 
 const nodes = readJson('content/knowledge/registry/nodes.json');
 const nodeList = Array.isArray(nodes) ? nodes : (nodes.nodes || []);
-assert.equal(nodeList.length, 716, 'Canonical Node count must remain 716.');
-assert.equal(sha256('content/knowledge/registry/nodes.json'), '61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431', 'nodes.json must remain byte-identical in KAU-R2.');
+const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
+const r5Active=fs.existsSync(r5Path);
+if(r5Active){const r5=readJson(r5Path);assert.equal(nodeList.length,r5.canonicalAuthority.successorCount);assert.equal(r5.canonicalAuthority.predecessorCount,716);assert.equal(r5.canonicalAuthority.predecessorSha256,'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');}
+else {assert.equal(nodeList.length,716,'Canonical Node count must remain 716 before an accepted successor.');assert.equal(sha256('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431','nodes.json must remain byte-identical in KAU-R2 before a governed successor.');}
 const nodeCodes = new Set(nodeList.map(n => n.nodeCode));
 
 const b1 = readJson('content/knowledge/reconciliation/kau-r2/book-1-section-node-candidates-v1.json');
@@ -57,7 +59,12 @@ assert.equal(acceptance.acceptance.ksarCanonicalBindingRegistryPopulated, false)
 // KAU-R2 itself never auto-populates bindings. A later human-accepted successor may do so.
 const ksarBindings = readJson('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
 const r3ResolutionPath = 'content/knowledge/reconciliation/kau-r3/kau-r3-human-resolution-v1.json';
-if (fs.existsSync(r3ResolutionPath)) {
+if (r5Active) {
+  assert.equal(ksarBindings.status,'ACTIVE_VOLUME_I_II_APPROVED');
+  assert.equal(ksarBindings.records.length,235);
+  assert.equal(ksarBindings.records.filter(r=>r.bookCode==='BOOK-1').length,62);
+  assert.equal(ksarBindings.records.filter(r=>r.bookCode==='BOOK-2').length,173);
+} else if (fs.existsSync(r3ResolutionPath)) {
   const r3Resolution = readJson(r3ResolutionPath);
   assert.equal(r3Resolution.status, 'HUMAN_RESOLVED');
   assert.equal(r3Resolution.acceptStraightforwardMappings, true);
@@ -74,4 +81,4 @@ console.log('✓ KAU-R2 Existing Canonical Node Match candidate phase passed.');
 console.log('  448 materialized manuscript segments remain accounted for with candidate-only R2 decisions.');
 console.log('  245 existing P0-P7 Canonical Nodes remain accounted for in the R2 coverage ledger.');
 console.log('  P8-P15 upgraded outline architecture remains a non-manuscript semantic constraint: 621 outline chapters vs 471 existing nodes.');
-console.log(`  716 Canonical Nodes remain byte-identical; later human-accepted KSAR bindings recognized: ${ksarBindings.records.length}.`);
+console.log(r5Active ? `  KAU-R2 predecessor authority remains preserved inside the 718-node KAU-R5 successor; approved KSAR mappings recognized: ${ksarBindings.records.length}.` : `  716 Canonical Nodes remain byte-identical; later human-accepted KSAR bindings recognized: ${ksarBindings.records.length}.`);

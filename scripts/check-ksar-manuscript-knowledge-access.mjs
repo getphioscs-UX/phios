@@ -5,7 +5,8 @@ import { searchManuscriptCorpus, MANUSCRIPT_SOURCE_LIMITS } from '../functions/k
 const json = path => JSON.parse(fs.readFileSync(path, 'utf8'));
 const nodes = json('content/knowledge/registry/nodes.json');
 const nodeList = Array.isArray(nodes) ? nodes : (nodes.nodes || []);
-assert.equal(nodeList.length, 716, 'Canonical Node count must remain 716 in KSAR.');
+const r5Path='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'; const r5Active=fs.existsSync(r5Path);
+assert.equal(nodeList.length,r5Active?718:716,`Canonical Node count must match the active ${r5Active?'KAU-R5 successor':'predecessor'} authority in KSAR.`);
 const nodeCodes = new Set(nodeList.map(n => n.nodeCode));
 
 const boundary = json('content/knowledge/source-access/contracts/knowledge-source-access-boundary-v1.json');
@@ -25,11 +26,14 @@ assert.equal(reviewedRegistry.records.length, 2);
 assert(reviewedRegistry.records.every(r => r.humanReadabilityStatus === 'HUMAN_REVIEW_COMPLETE'));
 
 const bindings = json('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
-assert.equal(bindings.status, 'ACTIVE_PARTIAL_VOLUME_I_APPROVED');
-assert.equal(bindings.records.length, 62);
+assert.equal(bindings.status,r5Active?'ACTIVE_VOLUME_I_II_APPROVED':'ACTIVE_PARTIAL_VOLUME_I_APPROVED');
+assert.equal(bindings.records.length,r5Active?235:62);
+assert.equal(bindings.records.filter(r=>r.bookCode==='BOOK-1').length,62);
+if(r5Active){assert.equal(bindings.status,'ACTIVE_VOLUME_I_II_APPROVED');assert.equal(bindings.records.filter(r=>r.bookCode==='BOOK-2').length,173);assert(bindings.records.every(r=>nodeCodes.has(r.nodeCode)));}
 assert.equal(bindings.policy.unmappedSectionMayClaimNodeCode, false);
 assert(bindings.records.every(r => nodeCodes.has(r.nodeCode)));
-assert(bindings.records.every(r => r.bookCode === 'BOOK-1' && r.status === 'APPROVED'));
+assert(bindings.records.every(r=>r.status==='APPROVED'));
+if(!r5Active) assert(bindings.records.every(r=>r.bookCode==='BOOK-1'));
 
 const corrections = json('content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json');
 assert.equal(corrections.records.length, 1);
@@ -43,7 +47,7 @@ const fixtureCorpus = {
     { sectionCode:'CM-B2V1-P5-S003', segmentType:'SECTION', partCode:'P5', sequence:3, heading:'Experience Emergence | 现实如何形成体验', startPage:7, endPage:9, textSha256:'b'.repeat(64), text:'现实如何形成体验，需要区分运行、体验与觉察。' }
   ]
 };
-const pending = searchManuscriptCorpus({ corpus: fixtureCorpus, source: fixtureSource, bindings, corrections, query:'为什么某些现实会进入意识' });
+const pending = searchManuscriptCorpus({ corpus: fixtureCorpus, source: fixtureSource, bindings:{records:[]}, corrections, query:'为什么某些现实会进入意识' });
 assert(pending.length > 0);
 assert.equal(pending[0].canonicalBinding.status, 'PENDING');
 assert.deepEqual(pending[0].canonicalBinding.nodeCodes, []);
@@ -86,6 +90,6 @@ for (const forbidden of [
 console.log('✓ KSAR Knowledge Source Access Runtime passed.');
 console.log('  Published Canonical Article remains primary publication authority.');
 console.log('  Human-reviewed Book I/II manuscript derivatives may ground client queries through private R2 corpora.');
-console.log('  62 human-accepted Volume-I primary bindings are active; Book II and unmapped sections remain source-native/PENDING.');
+console.log(r5Active ? '  62 Volume-I plus 173 Volume-II approved mapping records are active; only unmapped/supporting source-native sections remain without Canonical claim.' : '  62 human-accepted Volume-I primary bindings are active; Book II and unmapped sections remain source-native/PENDING.');
 console.log('  Human-confirmed manuscript editorial corrections may be projected without mutating raw source provenance.');
 console.log('  Question-scoped excerpts are bounded; raw full-book delivery remains blocked.');
