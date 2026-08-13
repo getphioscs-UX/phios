@@ -88,14 +88,14 @@ const romanToNumber = value => {
 };
 
 export async function loadKnowledgeInventory(root) {
-  const [nodes, localized, questions, learningPaths, blueprintKnowledge] =
+  const [localized, questions, learningPaths, blueprintKnowledge] =
     await Promise.all([
-      readJson(root, 'content/knowledge/registry/nodes.json'),
       readJson(root, 'content/knowledge/registry/localized-content.json'),
       readJson(root, 'content/knowledge/registry/supporting-questions.json'),
       readJson(root, 'content/knowledge/registry/learning-paths.json'),
       loadKnowledgeBlueprintRegistry(root)
     ]);
+  const nodes = blueprintKnowledge.authorities.nodes;
   const blueprints = blueprintKnowledge.books;
   const blueprintMembership = new Map();
   const parts = new Map();

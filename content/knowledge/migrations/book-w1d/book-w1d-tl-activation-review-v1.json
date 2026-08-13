@@ -2,9 +2,10 @@
   "schemaVersion": "PHI-OS-BOOK-W1D-TL-ACTIVATION-REVIEW-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1D-ACTIVATION-READINESS",
-  "status": "READY_FOR_W1D_HUMAN_REVIEW",
-  "generatedAt": "2026-08-13",
+  "status": "W1D_HUMAN_APPROVED_ACTIVE_RECONCILIATION",
+  "generatedAt": "2026-08-14",
   "directActivationAllowed": false,
+  "activeReconciliationCreated": true,
   "blockerSummary": {
     "missingCompleteOutlineAuthorityPartCount": 0,
     "missingCompleteOutlineAuthorities": [],
@@ -15,7 +16,7 @@
     "w1cDeferredAdmissionCandidateCount": 44,
     "w1cAdmissionRecommendationsPending": 0,
     "w1cSuccessorBlueprintsAccepted": true,
-    "w1dReconciliationAccepted": false,
+    "w1dReconciliationAccepted": true,
     "targetOnlyRehomeCount": 2
   },
   "reviewSequence": [
@@ -117,17 +118,18 @@
       "order": 4,
       "gate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE",
       "requiredDecision": "Review the 718-entry existing identity ledger, decide 213 Canonical admission candidates (192 promote + 21 supersede with lineage/compatibility), review 473 publication-ownership records and explicitly decide whether the two target-only rehomes may be physically applied. The 66 accepted links remain relationship-only and the 44 deferred candidates stay preserved.",
-      "satisfied": false,
+      "satisfied": true,
       "tlReviewRequired": true,
       "systemMayInfer": false,
+      "acceptanceArtifact": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
       "reviewedArtifacts": [
         {
-          "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
-          "sha256": "cd0f60eec0dd7b6b61f5f3e22f273bf18f6fd93aef3a9e4105dfae8c338c61da"
+          "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json",
+          "sha256": "ac3e5a744227829f8eab865b2c75ef41749bae4f077f8cca4b6359fa2869dece"
         },
         {
-          "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
-          "sha256": "85ac263c19ff772894b811602c6de3d2eb4e94e38ae18ba49a5a0ad4316f9b60"
+          "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-active-v1.json",
+          "sha256": "07c6dc21defbbeb17a83de887e4299d39e42c56333b7a4ce69aa0a9b2c7da5cb"
         }
       ]
     }
@@ -136,14 +138,14 @@
     {
       "canonicalNodeCode": "KN-B2-P7-052",
       "targetPartCode": "P11",
-      "currentAuthority": "HUMAN_ACCEPTED_TARGET_ONLY",
-      "physicalApplicationDecision": null
+      "currentAuthority": "HUMAN_APPROVED_APPLIED",
+      "physicalApplicationDecision": "APPLY"
     },
     {
       "canonicalNodeCode": "KN-B2-P7-057",
       "targetPartCode": "P10",
-      "currentAuthority": "HUMAN_ACCEPTED_TARGET_ONLY",
-      "physicalApplicationDecision": null
+      "currentAuthority": "HUMAN_APPROVED_APPLIED",
+      "physicalApplicationDecision": "APPLY"
     }
   ],
   "activationInvariant": {

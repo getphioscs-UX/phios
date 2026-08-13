@@ -31,7 +31,10 @@ const [
   readJson(ADMISSION_LEDGER_PATH),
   read(ADMISSION_AUDIT_PATH), read('content/knowledge/registry/nodes.json')
 ]);
-assert.equal(digest(activeRegistryRaw), r5Freeze.blueprintAuthority.registryManifestSha256);
+const activeRegistry = JSON.parse(activeRegistryRaw);
+assert.equal(activeRegistry.status, 'book-w1d-human-approved-frozen-successor');
+assert.equal(activeRegistry.totals.canonicalNodes, 931);
+assert.equal(activeRegistry.supersedes.sha256, r5Freeze.blueprintAuthority.registryManifestSha256);
 assert.equal(activeFreeze.registryManifestSHA, r5Freeze.blueprintAuthority.registryManifestSha256);
 assert.equal(digest(nodesRaw), r5Freeze.canonicalAuthority.successorSha256);
 assert.deepEqual(actualAdmissionAuthorization, expected.admissionReview.authorization);
@@ -250,8 +253,9 @@ assert.deepEqual(actualAcceptance.bookDecisions.map(record => record.newCanonica
 assert.equal(contract.implementationSteps[0].status, 'accepted');
 assert.equal(contract.implementationSteps[1].status, 'accepted');
 assert.equal(contract.implementationSteps[2].status, 'accepted');
-assert.equal(contract.implementationSteps[3].status, 'in_progress');
-assert(contract.implementationSteps.slice(4).every(step => step.status === 'pending'));
+assert.equal(contract.implementationSteps[3].status, 'accepted');
+assert.equal(contract.implementationSteps[4].status, 'in_progress');
+assert(contract.implementationSteps.slice(5).every(step => step.status === 'pending'));
 assert.equal(contract.w1cCandidatePreparation.status, 'human-approved-ready-for-w1d-review-not-active');
 assert.equal(contract.w1cCandidatePreparation.candidateCount, 4);
 assert.equal(contract.w1cCandidatePreparation.w1bAcceptanceSatisfied, true);
@@ -284,4 +288,4 @@ console.log('✓ BOOK-W1C Successor Blueprint Human Acceptance passed.');
 console.log('  4 Human-approved successor Blueprints cover BOOK-2 P5-P7, BOOK-3 P8-P9, BOOK-4 P10-P12 and BOOK-5 P13-P15.');
 console.log('  182 Book-II nodes trace to KAU-R5; all 471 P8-P15 nodes trace to exact W1B migration-map entries.');
 console.log('  All 323 W1C dispositions are resolved: 213 admission candidates, 66 accepted links and 44 preserved deferrals.');
-console.log('  W1C is Human approved and W1D review may begin; 0 Canonical Nodes were approved or created.');
+console.log('  W1C remains Human approved as the predecessor review set; W1D activated its 213 accepted admissions and W1E review may begin.');

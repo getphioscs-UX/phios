@@ -60,7 +60,9 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
     readJson(root, W1B_ACCEPTANCE_PATH)
   ]);
   assert.equal(r5Freeze.status, 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY');
-  assert.equal(normalizedDigest(activeRegistryRaw), r5Freeze.blueprintAuthority.registryManifestSha256);
+  const activeRegistry = JSON.parse(activeRegistryRaw);
+  assert.equal(activeRegistry.status, 'book-w1d-human-approved-frozen-successor');
+  assert.equal(activeRegistry.supersedes.sha256, r5Freeze.blueprintAuthority.registryManifestSha256);
   assert.equal(w1Contract.implementationSteps.find(step => step.step === 'BOOK-W1B')?.status, 'accepted');
   assert.equal(w1bAcceptance.status, 'HUMAN_APPROVED');
   assert.equal(w1bAcceptance.decision, 'ACCEPT');
@@ -219,7 +221,7 @@ export async function buildBookW1CCandidateSet(root = process.cwd()) {
     schemaVersion: 'PHI-OS-BOOK-W1C-SUCCESSOR-BLUEPRINT-CANDIDATE-REGISTRY-v1.0.0',
     phase: 'BOOK-W1', step: 'BOOK-W1C-CANDIDATE-PREPARATION',
     status: 'human-approved-successor-set-ready-for-w1d-review', recordedAt: '2026-08-13',
-    sourceActiveRegistry: { path: 'content/knowledge/blueprints/blueprint-registry.json', sha256: normalizedDigest(activeRegistryRaw), status: 'frozen-kau-r5-successor', mutatedByBookW1CPreparation: false },
+    sourceActiveRegistry: { path: 'content/knowledge/blueprints/blueprint-registry.json', sha256: r5Freeze.blueprintAuthority.registryManifestSha256, status: 'frozen-kau-r5-successor', mutatedByBookW1CPreparation: false },
     finalOwnershipTarget: [
       { bookCode: 'BOOK-1', partCodes: ['P1', 'P2', 'P3', 'P4'], source: 'active-predecessor-preserved' },
       ...BOOK_SPECS.map(spec => ({ bookCode: spec.bookCode, partCodes: spec.partCodes, source: candidatePath(spec) }))

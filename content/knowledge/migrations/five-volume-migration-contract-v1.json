@@ -59,12 +59,12 @@
     {
       "step": "BOOK-W1D",
       "name": "Canonical Registry Reconciliation",
-      "status": "in_progress"
+      "status": "accepted"
     },
     {
       "step": "BOOK-W1E",
       "name": "Public Book, Locale and Icon Projection",
-      "status": "pending"
+      "status": "in_progress"
     },
     {
       "step": "BOOK-W1F",
@@ -97,13 +97,13 @@
     "finalFreezeRequiresW1AToW1F": true
   },
   "progress": {
-    "currentStep": "BOOK-W1D",
-    "status": "w1c-human-approved-w1d-human-review-ready",
+    "currentStep": "BOOK-W1E",
+    "status": "w1d-human-approved-w1e-human-review-ready",
     "migrationMapCount": 8,
     "upgradedOutlineChapterCount": 621,
     "accountedExistingCanonicalNodeCount": 471,
     "outlineChapterMinusExistingNodeCount": 150,
-    "approvedNewCanonicalNodeCandidateCount": 0,
+    "approvedNewCanonicalNodeCandidateCount": 213,
     "fullChapterInventoryAvailableForParts": [
       "P8",
       "P9",
@@ -120,7 +120,8 @@
     "sourceOutlineAuthorityAuthorizedByTl": true,
     "w1bHumanAcceptanceSatisfied": true,
     "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
-    "nextPermittedStep": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
+    "nextPermittedStep": "BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE",
+    "activeCanonicalNodeRecordCount": 931
   },
   "w1cCandidatePreparation": {
     "status": "human-approved-ready-for-w1d-review-not-active",
@@ -161,7 +162,7 @@
     "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
   },
   "w1dCandidatePreparation": {
-    "status": "generated-ready-for-human-review-not-active",
+    "status": "human-approved-active-successor",
     "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
     "canonicalReconciliationPath": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
     "publicationOwnershipPath": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
@@ -174,22 +175,36 @@
     "acceptedLinkRelationshipCount": 66,
     "deferredAdmissionCandidateCount": 44,
     "upstreamW1cPendingAdmissionRecommendationCount": 0,
-    "w1dCanonicalAdmissionDecisionCount": 0,
+    "w1dCanonicalAdmissionDecisionCount": 213,
     "w1bAcceptanceSatisfied": true,
     "w1cAcceptanceSatisfied": true,
-    "activeCanonicalRegistryMutated": false,
-    "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
+    "activeCanonicalRegistryMutated": true,
+    "nextPermittedGate": "BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE",
+    "activeReconciliationPath": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json",
+    "activePublicationOwnershipPath": "content/knowledge/migrations/book-w1d/publication-ownership-migration-active-v1.json",
+    "successorCanonicalRegistryPath": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "successorBlueprintRegistryPath": "content/knowledge/blueprints/blueprint-registry.json",
+    "w1dHumanAcceptanceSatisfied": true,
+    "appliedPublicationOwnershipRecordCount": 473,
+    "appliedRehomeRecordCount": 2,
+    "successorCanonicalNodeRecordCount": 931
   },
   "w1eCandidatePreparation": {
-    "status": "generated-blocked-not-active",
+    "status": "generated-ready-for-human-review-not-active",
     "projectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json",
     "humanAcceptancePath": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
     "w1dTlActivationReviewPath": "content/knowledge/migrations/book-w1d/book-w1d-tl-activation-review-v1.json",
-    "w1dActiveReconciliationSatisfied": false,
+    "w1dActiveReconciliationSatisfied": true,
     "mandatoryProjectionSourceCount": 10,
     "canonicalRouteCount": 5,
     "compatibilityAliasCount": 1,
     "activePublicProjectionMutated": false,
-    "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE"
+  },
+  "w1dAcceptance": {
+    "path": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
+    "sha256": "f54f5011143264dbd5cad224f5d3a8efec338783047ee42d6c2604048835efa7",
+    "activeReconciliationSha256": "ac3e5a744227829f8eab865b2c75ef41749bae4f077f8cca4b6359fa2869dece",
+    "activePublicationOwnershipSha256": "07c6dc21defbbeb17a83de887e4299d39e42c56333b7a4ce69aa0a9b2c7da5cb"
   }
 }

@@ -2,9 +2,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 export const KNOWLEDGE_REGISTRY_AUTHORITY_VERSION =
-  'PHI-OS-KNOWLEDGE-REGISTRY-AUTHORITY-v2.0.0';
+  'PHI-OS-KNOWLEDGE-REGISTRY-AUTHORITY-v3.0.0';
 export const KNOWLEDGE_REGISTRY_AUTHORITY_PATH =
-  'content/knowledge/contracts/knowledge-registry-authority-v2.json';
+  'content/knowledge/contracts/knowledge-registry-authority-book-w1d-v1.json';
 
 export function normalizeBookCode(value) {
   if (typeof value === 'number') {

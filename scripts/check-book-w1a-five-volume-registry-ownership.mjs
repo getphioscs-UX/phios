@@ -165,13 +165,15 @@ if(r5Active){
   assert.equal(r5.canonicalAuthority.successorCount,718);
   assert.equal(nodes.nodes.length,718);
   assert.equal(digest(await read('content/knowledge/registry/nodes.json')),r5.canonicalAuthority.successorSha256);
-  assert.equal(blueprintRegistry.totals.canonicalNodes,718);
+  assert.equal(blueprintRegistry.totals.canonicalNodes,931);
+  assert.equal(blueprintRegistry.status,'book-w1d-human-approved-frozen-successor');
+  assert.equal(blueprintRegistry.supersedes.sha256,r5.blueprintAuthority.registryManifestSha256);
 }else{
   assert.equal(nodes.nodes.length,716);
   assert.equal(digest(await read('content/knowledge/registry/nodes.json')),NODE_REGISTRY_SHA);
   assert.equal(digest(await read('content/knowledge/blueprints/blueprint-registry.json')),BLUEPRINT_REGISTRY_SHA);
 }
-assert.equal(blueprintRegistry.status,'frozen');
+assert(['frozen','book-w1d-human-approved-frozen-successor'].includes(blueprintRegistry.status));
 assert.equal(migration.blueprintRegistryTransition.mutatedInW1A, false);
 assert.equal(migration.blueprintRegistryTransition.successorGenerationGate, 'BOOK-W1C');
 assert.equal(digest(bookW0Audit), BOOK_W0_AUDIT_SHA);
@@ -190,5 +192,5 @@ assert.equal(packageJson.scripts['check:book-w1-ownership'], 'npm run check:book
 console.log('✓ BOOK-W1A Five-Volume Registry Ownership passed.');
 console.log('  BOOK-1/Volume I through BOOK-5/Volume V are aligned; 15 numbered Parts have one current owner.');
 console.log('  P8-P15 Current Part Authority is exact; superseded titles remain legacy aliases only.');
-console.log(r5Active ? '  W1A historical 716-node baseline remains preserved as predecessor lineage; KAU-R5 is the governed 718-node current successor.' : '  716 Canonical Node identities and the frozen KAU-R0 Blueprint Registry remain unchanged.');
-console.log('  W1B outline reconciliation is the next gate; no public projection or Production Authority was created.');
+console.log(r5Active ? '  W1A and KAU-R5 historical authorities remain preserved; the governed W1D successor now carries 931 records.' : '  716 Canonical Node identities and the frozen KAU-R0 Blueprint Registry remain unchanged.');
+console.log('  W1D is accepted and W1E review is open; no public projection or Production Authority was created.');

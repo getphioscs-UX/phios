@@ -42,9 +42,10 @@ assert.deepEqual(
   new Set(book5Blueprint.nodes.map(node=>node.nodeCode)),
   new Set(historicalBook4Population.map(node=>node.nodeCode))
 );
-assert.equal(registry.totals.canonicalNodes,nodes.nodes.length);
-assert.ok([716,718].includes(nodes.nodes.length));
-assert.equal(registry.books.find(entry=>entry.bookCode==='BOOK-5')?.canonicalNodeCount,198);
+assert.equal(registry.totals.canonicalNodes,931);
+assert.equal(nodes.nodes.length,718);
+assert.equal(registry.status,'book-w1d-human-approved-frozen-successor');
+assert.equal(registry.books.find(entry=>entry.bookCode==='BOOK-5')?.canonicalNodeCount,302);
 
 assert.equal(new Set(nodes.nodes.map(n=>n.canonicalQuestionKey)).size,nodes.nodes.length);
 const byCode=new Map(nodes.nodes.map(n=>[n.nodeCode,n]));
@@ -57,4 +58,4 @@ assert.equal(byCode.get('KN-B4-P15-071').closureRole,'four_volume_finale');
 
 console.log('✓ KH-W4B.5 historical BOOK-4 Canonical source population remains preserved.');
 console.log('✓ P13 75 / P14 52 / P15 71 = 198 identities now project through BOOK-5.');
-console.log('✓ Current BOOK-4 projects P10–P12; no Article/Candidate/Readiness/Approval/Publication state was promoted.');
+console.log('✓ W1D extends active BOOK-5 to 302 records while preserving all historical identities and Production states.');

@@ -38,7 +38,9 @@ assert.equal(index.entries.length, 78);
 assert.equal(historicalReadinessCodes.size, 78);
 assert.equal(historicalRegistryCodes.size, 78);
 assert.deepEqual(historicalReadinessCodes, historicalRegistryCodes);
-assert.equal(blueprint.plannedCanonicalNodes, registry.nodes.length);
+assert.equal(blueprint.plannedCanonicalNodes, blueprint.authorities.nodes.nodes.length);
+assert.equal(blueprint.plannedCanonicalNodes, 931);
+assert.equal(registry.nodes.length, 718, 'Historical KAU-R5 nodes.json remains immutable.');
 assert.deepEqual(contract.stateMachine.states, [
   'skeleton', 'canonical_thesis_ready', 'boundary_ready', 'editorial_ready', 'production_ready', 'published'
 ]);

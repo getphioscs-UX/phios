@@ -37,8 +37,11 @@ const [
 assert.equal(r5Freeze.status, 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY');
 assert.equal(digest(nodesRaw), r5Freeze.canonicalAuthority.successorSha256,
   'BOOK-W1B must preserve the exact KAU-R5 Canonical successor.');
-assert.equal(digest(blueprintRegistryRaw), r5Freeze.blueprintAuthority.registryManifestSha256,
-  'BOOK-W1B must preserve the exact KAU-R5 Blueprint Registry.');
+const activeBlueprintRegistry = JSON.parse(blueprintRegistryRaw);
+assert.equal(activeBlueprintRegistry.status, 'book-w1d-human-approved-frozen-successor');
+assert.equal(activeBlueprintRegistry.totals.canonicalNodes, 931);
+assert.equal(activeBlueprintRegistry.supersedes.sha256, r5Freeze.blueprintAuthority.registryManifestSha256,
+  'The active W1D Blueprint Registry must preserve the exact KAU-R5 predecessor digest.');
 
 assert.equal(sourceAuthority.source.originalSha256, AUTHORIZED_SOURCE_SHA256);
 assert.equal(sourceAuthority.status, 'TL_AUTHORIZED_SOURCE_AUTHORITY_REVIEW_CANDIDATES_ONLY');
@@ -151,16 +154,18 @@ assert(audit.includes('## P15｜'));
 assert.equal(contract.implementationSteps[0].status, 'accepted');
 assert.equal(contract.implementationSteps[1].status, 'accepted');
 assert.equal(contract.implementationSteps[2].status, 'accepted');
-assert.equal(contract.implementationSteps[3].status, 'in_progress');
-assert(contract.implementationSteps.slice(4).every(step => step.status === 'pending'));
-assert.equal(contract.progress.currentStep, 'BOOK-W1D');
-assert.equal(contract.progress.status, 'w1c-human-approved-w1d-human-review-ready');
+assert.equal(contract.implementationSteps[3].status, 'accepted');
+assert.equal(contract.implementationSteps[4].status, 'in_progress');
+assert(contract.implementationSteps.slice(5).every(step => step.status === 'pending'));
+assert.equal(contract.progress.currentStep, 'BOOK-W1E');
+assert.equal(contract.progress.status, 'w1d-human-approved-w1e-human-review-ready');
 assert.deepEqual(contract.progress.fullChapterInventoryAvailableForParts,
   ['P8', 'P9', 'P10', 'P11', 'P12', 'P13', 'P14', 'P15']);
 assert.deepEqual(contract.progress.fullChapterInventoryMissingForParts, []);
-assert.equal(contract.progress.approvedNewCanonicalNodeCandidateCount, 0);
+assert.equal(contract.progress.approvedNewCanonicalNodeCandidateCount, 213);
 assert.equal(contract.progress.w1bHumanAcceptanceSatisfied, true);
-assert.equal(contract.progress.nextPermittedStep, 'BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE');
+assert.equal(contract.progress.nextPermittedStep, 'BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE');
+assert.equal(contract.progress.activeCanonicalNodeRecordCount, 931);
 assert.equal(contract.boundaries.canonicalNodeRegistryMutationAllowedInW1B, false);
 assert.equal(contract.boundaries.successorBlueprintGenerationAllowedBeforeW1BAcceptance, false);
 
@@ -180,4 +185,4 @@ console.log('✓ BOOK-W1B Human-approved complete-source migration maps passed.'
 console.log(`  TL-authorized source ${AUTHORIZED_SOURCE_SHA256} yields 621 unique chapters after governed exact-repeat P13 normalization.`);
 console.log('  Eight deterministic maps account for all 471 existing P8-P15 frozen Canonical Nodes and all 621 outline chapters.');
 console.log(`  Review suggestions: ${recommendationTotals.match} match, ${recommendationTotals.rename} rename, ${recommendationTotals.move} move, ${recommendationTotals.supersede} supersede, ${recommendationTotals.splitCandidateReview} split clusters, ${recommendationTotals.mergeCandidateReview} merge clusters, ${recommendationTotals.newCandidate} new candidates.`);
-console.log('  W1B remains Human approved; W1C is now accepted and W1D Human Review is open; nodes.json remains byte-identical to KAU-R5.');
+console.log('  W1B and W1C remain Human approved; W1D is active and W1E Human Review is open; historical nodes.json remains byte-identical to KAU-R5.');

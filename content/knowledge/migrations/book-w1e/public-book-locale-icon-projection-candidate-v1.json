@@ -2,71 +2,71 @@
   "schemaVersion": "PHI-OS-BOOK-W1E-PUBLIC-BOOK-LOCALE-ICON-PROJECTION-CANDIDATE-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1E-CANDIDATE-PREPARATION",
-  "status": "candidate-only-blocked-pending-book-w1d-active-reconciliation",
-  "generatedAt": "2026-08-13",
+  "status": "candidate-only-ready-for-human-review-not-active",
+  "generatedAt": "2026-08-14",
   "sourceAuthority": {
     "booksRegistryPath": "content/registry/books.json",
     "partsRegistryPath": "content/registry/parts.json",
     "architecture": "five-volume-15-part",
     "w1dAcceptancePath": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
-    "w1dActiveReconciliationSatisfied": false
+    "w1dActiveReconciliationSatisfied": true
   },
   "activation": {
     "candidateOnly": true,
     "currentProductionMutationAllowed": false,
     "activePublicProjectionCreated": false,
-    "nextPermittedGate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE"
+    "nextPermittedGate": "BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE"
   },
   "sourceSnapshots": [
     {
       "path": "assets/js/web-production/public-surface-data.js",
       "sha256": "17e5003adfebf6bf835037bd340d35c34943be3406ee8f20da29a1c3b5c00309",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "assets/js/pages/books.js",
       "sha256": "1a405f7102c97b85cb055746d6f4d3d5e593413a7ab08ad700e5c651db564442",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "assets/js/pages/book-volume.js",
       "sha256": "1594eb5abdd565bd165776d3029a1331f927c57831e23c40e7b29f74c6d65e72",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "assets/js/locales/en/atlas.js",
       "sha256": "fc5f92a2c33dcba521d8e220525b81d8eea0e3f94c00c16aad8180f822b9fc56",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "assets/js/locales/zh-Hans/atlas.js",
       "sha256": "f02db59d004f517413d15cd577dc53cd3f51875a6382ecd2ded0d5788a3cb572",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "assets/js/locales/en/public.js",
       "sha256": "6d2edd521a61eda88892aafeec2a98d20b479f0bbbe0cc253d4f0cb2c2f8c646",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "assets/js/locales/zh-Hans/public.js",
       "sha256": "6f924c2f429c8be2da6ad7c9087867f4ad36127c2d1411c0f54d379bde156971",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "content/knowledge/public/public-book-metadata.json",
       "sha256": "d1e32d2ce94d994cae4c48ba7d92aa752b0cea42974567cbc1f8c5ca02c8c757",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "content/registry/public-assets.json",
       "sha256": "49b4993a75c19cb3f4dab6baf392da81dbb2eb0e00aa6983681667a471b4a9b0",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     },
     {
       "path": "content/web-production/composition/public/book-composition-v1.json",
       "sha256": "51b0f634cc485b36e51111ea785cd4048c00119e94a9e6b9351f6d03e068d03a",
-      "mutationStatus": "blocked-until-book-w1d-active-reconciliation"
+      "mutationStatus": "blocked-until-book-w1e-human-acceptance"
     }
   ],
   "canonicalBookRoutes": [
@@ -617,6 +617,7 @@
     "historicalUrlDeletionAllowed": false,
     "maintenanceAliasMayClaimCanonicalAuthority": false,
     "currentProductionMayBeUpdatedBeforeW1DActive": false,
+    "currentProductionMayBeUpdatedBeforeW1EAcceptance": false,
     "legacyVisualVocabularyMayRemainPrimary": false,
     "aiIconDeleted": false,
     "aiMayRemainBookLevelPrimary": false

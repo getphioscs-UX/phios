@@ -82,8 +82,9 @@ assert(
   ))
 );
 
+const activeNodesRegistry = blueprint.authorities.nodes;
 const nodeByCode = new Map(
-  nodesRegistry.nodes.map(node => [node.nodeCode, node])
+  activeNodesRegistry.nodes.map(node => [node.nodeCode, node])
 );
 const localizedByCode = new Map(
   localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
@@ -91,14 +92,15 @@ const localizedByCode = new Map(
 const assetByCode = new Map(
   assetsRegistry.assets.map(asset => [asset.assetCode, asset])
 );
-assert.equal(nodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
+assert.equal(nodesRegistry.nodes.length, 718, 'Historical KAU-R5 nodes.json remains immutable.');
+assert.equal(activeNodesRegistry.nodes.length, blueprint.plannedCanonicalNodes);
 assert.equal(
-  nodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  activeNodesRegistry.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   blueprint.prefaceCanonicalNodes
 );
 const pjaW1NodeCodes = new Set([...activeCodes, ...deferredCodes]);
 const referencedThemeCodes = new Set(
-  nodesRegistry.nodes
+  activeNodesRegistry.nodes
     .filter(node => pjaW1NodeCodes.has(node.nodeCode))
     .map(node => node.themeCode)
 );

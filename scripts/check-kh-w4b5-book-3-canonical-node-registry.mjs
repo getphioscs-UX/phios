@@ -61,14 +61,15 @@ assert.deepEqual(
 
 const book4Entry = blueprintRegistry.books.find(entry=>entry.bookCode==='BOOK-4');
 assert.ok(book4Entry);
-assert.equal(book4Entry.canonicalNodeCount,187);
+assert.equal(book4Entry.canonicalNodeCount,279);
 assert.deepEqual(book4Entry.partCodes,['P10','P11','P12']);
-assert.equal(blueprintRegistry.totals.canonicalNodes,nodes.nodes.length);
-assert.ok([716,718].includes(nodes.nodes.length));
+assert.equal(blueprintRegistry.totals.canonicalNodes,931);
+assert.equal(nodes.nodes.length,718);
+assert.equal(blueprintRegistry.status,'book-w1d-human-approved-frozen-successor');
 
 const forbidden = new Set(['production_ready','review_ready','approved','published']);
 assert.equal(historicalBook3Population.some(node=>forbidden.has(node.registryStatus)),false);
 
 console.log('✓ KH-W4B.5 historical BOOK-3 Canonical source population remains preserved.');
 console.log('✓ P10 77 / P11 64 / P12 46 = 187 identities now project through BOOK-4.');
-console.log('✓ Current BOOK-3 projects P8/P9 only; no Canonical identity or Production state was rewritten.');
+console.log('✓ W1D extends active BOOK-4 to 279 records while preserving all historical identities and Production states.');

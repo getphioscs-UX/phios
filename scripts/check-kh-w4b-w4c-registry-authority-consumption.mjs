@@ -31,7 +31,7 @@ const expectedAuthorityTotals = {
 };
 assert.deepEqual(authority.totals, expectedAuthorityTotals);
 assert.deepEqual(knowledge.totals, authority.totals);
-assert.ok([716,718].includes(authority.totals.nodes));
+assert.equal(authority.totals.nodes, 931);
 assert.equal(normalizeBookCode('book-2'), 'BOOK-2');
 assert.equal(normalizeBookCode('Book II'), 'BOOK-2');
 assert.equal(normalizePartCode('part-5'), 'P5');
@@ -40,7 +40,10 @@ assert.equal((await loadKnowledgeBlueprintByBook(root, 'book-2', { knowledge }))
 assert.equal((await resolveKnowledgeBlueprintForPart(root, 'part-5', { knowledge })).bookCode, 'BOOK-2');
 assert.equal((await resolveKnowledgeBlueprintForNode(root, 'KN-B1-P5-001', { knowledge })).bookCode, 'BOOK-2');
 assert.equal(knowledge.registry.authority.publicationOwnership, 'content/registry/parts.json');
-assert.equal(knowledge.registry.authorityContract, 'content/knowledge/contracts/knowledge-registry-authority-v2.json');
+assert.equal(knowledge.registry.authorityContract,
+  'content/knowledge/contracts/knowledge-registry-authority-book-w1d-v1.json');
+assert.equal(authority.contract.supersedes.path,
+  'content/knowledge/contracts/knowledge-registry-authority-v2.json');
 assert(controller.includes('/content/knowledge/blueprints/blueprint-registry.json'));
 assert(!controller.includes("blueprint:\n      '/content/knowledge/blueprints/book-1-knowledge-blueprint.json'"));
 const governanceEntry = governance.writeSourceRule.writeSourceMap.find(entry => entry.owner === 'KH-W4B Canonical Registry Authority');

@@ -12,7 +12,7 @@ const readJson = async relative =>
   JSON.parse(await fs.readFile(path.join(root, relative), 'utf8'));
 
 const result = await verifyKnowledgeBlueprintFreeze(root);
-assert.equal(result.freeze.status, 'frozen');
+assert.equal(result.freeze.status, 'frozen-book-w1d-human-approved-successor');
 assert.equal(result.freeze.bookFreeze.length, 5);
 assert.deepEqual(
   result.freeze.bookFreeze.map(entry => entry.bookCode),
@@ -78,5 +78,5 @@ for (const forbiddenRoot of forbiddenRoots) {
 
 console.log('✓ KH-W4D Freeze Contract v2 passed.');
 console.log('✓ KH-W4E Part 5 Publication Ownership passed.');
-console.log('✓ Five per-book Blueprint digests remain independently frozen under KAU-R0 projection.');
-console.log('✓ Canonical Node codes and production states remain unchanged.');
+console.log('✓ Five per-book Blueprint digests are frozen under the W1D Human-approved successor projection.');
+console.log('✓ Historical Canonical Node codes and all production states remain preserved.');

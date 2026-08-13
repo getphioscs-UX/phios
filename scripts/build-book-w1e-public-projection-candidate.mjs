@@ -45,8 +45,8 @@ const REVIEWED_W1C_PATHS = Object.freeze([
   'content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json'
 ]);
 
-const RECONCILIATION_PATH = 'content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json';
-const PUBLICATION_PATH = 'content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json';
+const RECONCILIATION_PATH = 'content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json';
+const PUBLICATION_PATH = 'content/knowledge/migrations/book-w1d/publication-ownership-migration-active-v1.json';
 const W1D_ACCEPTANCE_PATH = 'content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json';
 
 export const CANONICAL_ROUTES = Object.freeze({
@@ -117,19 +117,22 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
   assert.equal(partsRegistry.architecture, 'five-volume-15-part');
   assert.equal(booksRegistry.books.length, 5);
   assert.equal(partsRegistry.parts.length, 15);
-  assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1D')?.status, 'in_progress');
+  assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1D')?.status, 'accepted');
+  assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1E')?.status, 'in_progress');
   assert.equal(w1cAcceptance.status, 'HUMAN_APPROVED');
   assert.equal(w1cAcceptance.admissionReview.acceptedRecommendationCounts.totalResolved, 323);
   assert.equal(w1cAcceptance.admissionReview.pendingRecommendationCounts.total, 0);
-  assert.equal(w1dAcceptance.status, 'READY_FOR_HUMAN_REVIEW');
-  assert.equal(w1dAcceptance.activation.activeAuthorityCreated, false);
-  assert.equal(reconciliation.entries.length, 718);
+  assert.equal(w1dAcceptance.status, 'HUMAN_APPROVED');
+  assert.equal(w1dAcceptance.decision, 'ACCEPT');
+  assert.equal(w1dAcceptance.activation.canonicalRegistrySuccessorActive, true);
+  assert.equal(reconciliation.existingIdentityDecisions.length, 718);
+  assert.equal(reconciliation.canonicalAdmissionDecisions.length, 213);
   assert.equal(publication.recordCount, 473);
 
   const sourceSnapshots = REQUIRED_PROJECTION_SOURCES.map((relative, index) => ({
     path: relative,
     sha256: sha256(sourceRaws[index]),
-    mutationStatus: 'blocked-until-book-w1d-active-reconciliation'
+    mutationStatus: 'blocked-until-book-w1e-human-acceptance'
   }));
 
   const partTitles = Object.fromEntries(partsRegistry.parts.map(part => [
@@ -161,9 +164,10 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
     schemaVersion: 'PHI-OS-BOOK-W1D-TL-ACTIVATION-REVIEW-v1.0.0',
     phase: 'BOOK-W1',
     step: 'BOOK-W1D-ACTIVATION-READINESS',
-    status: 'READY_FOR_W1D_HUMAN_REVIEW',
-    generatedAt: '2026-08-13',
+    status: 'W1D_HUMAN_APPROVED_ACTIVE_RECONCILIATION',
+    generatedAt: '2026-08-14',
     directActivationAllowed: false,
+    activeReconciliationCreated: true,
     blockerSummary: {
       missingCompleteOutlineAuthorityPartCount: missingOutlineAuthorities.length,
       missingCompleteOutlineAuthorities: missingOutlineAuthorities,
@@ -174,7 +178,7 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
       w1cDeferredAdmissionCandidateCount: 44,
       w1cAdmissionRecommendationsPending: 0,
       w1cSuccessorBlueprintsAccepted: true,
-      w1dReconciliationAccepted: false,
+      w1dReconciliationAccepted: true,
       targetOnlyRehomeCount: 2
     },
     reviewSequence: [
@@ -210,9 +214,10 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
         order: 4,
         gate: 'BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE',
         requiredDecision: 'Review the 718-entry existing identity ledger, decide 213 Canonical admission candidates (192 promote + 21 supersede with lineage/compatibility), review 473 publication-ownership records and explicitly decide whether the two target-only rehomes may be physically applied. The 66 accepted links remain relationship-only and the 44 deferred candidates stay preserved.',
-        satisfied: false,
+        satisfied: true,
         tlReviewRequired: true,
         systemMayInfer: false,
+        acceptanceArtifact: W1D_ACCEPTANCE_PATH,
         reviewedArtifacts: reviewedW1D
       }
     ],
@@ -220,14 +225,14 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
       {
         canonicalNodeCode: 'KN-B2-P7-052',
         targetPartCode: 'P11',
-        currentAuthority: 'HUMAN_ACCEPTED_TARGET_ONLY',
-        physicalApplicationDecision: null
+        currentAuthority: 'HUMAN_APPROVED_APPLIED',
+        physicalApplicationDecision: 'APPLY'
       },
       {
         canonicalNodeCode: 'KN-B2-P7-057',
         targetPartCode: 'P10',
-        currentAuthority: 'HUMAN_ACCEPTED_TARGET_ONLY',
-        physicalApplicationDecision: null
+        currentAuthority: 'HUMAN_APPROVED_APPLIED',
+        physicalApplicationDecision: 'APPLY'
       }
     ],
     activationInvariant: {
@@ -242,20 +247,20 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
     schemaVersion: 'PHI-OS-BOOK-W1E-PUBLIC-BOOK-LOCALE-ICON-PROJECTION-CANDIDATE-v1.0.0',
     phase: 'BOOK-W1',
     step: 'BOOK-W1E-CANDIDATE-PREPARATION',
-    status: 'candidate-only-blocked-pending-book-w1d-active-reconciliation',
-    generatedAt: '2026-08-13',
+    status: 'candidate-only-ready-for-human-review-not-active',
+    generatedAt: '2026-08-14',
     sourceAuthority: {
       booksRegistryPath: 'content/registry/books.json',
       partsRegistryPath: 'content/registry/parts.json',
       architecture: booksRegistry.architecture,
       w1dAcceptancePath: W1D_ACCEPTANCE_PATH,
-      w1dActiveReconciliationSatisfied: false
+      w1dActiveReconciliationSatisfied: true
     },
     activation: {
       candidateOnly: true,
       currentProductionMutationAllowed: false,
       activePublicProjectionCreated: false,
-      nextPermittedGate: 'BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE'
+      nextPermittedGate: 'BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE'
     },
     sourceSnapshots,
     canonicalBookRoutes: books.map(book => ({ bookCode: book.bookCode, route: book.canonicalRoute })),
@@ -360,6 +365,7 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
       historicalUrlDeletionAllowed: false,
       maintenanceAliasMayClaimCanonicalAuthority: false,
       currentProductionMayBeUpdatedBeforeW1DActive: false,
+      currentProductionMayBeUpdatedBeforeW1EAcceptance: false,
       legacyVisualVocabularyMayRemainPrimary: false,
       aiIconDeleted: false,
       aiMayRemainBookLevelPrimary: false
@@ -370,13 +376,13 @@ export async function buildBookW1EProjectionCandidate(root = process.cwd()) {
     schemaVersion: 'PHI-OS-BOOK-W1E-HUMAN-ACCEPTANCE-v1.0.0',
     phase: 'BOOK-W1',
     step: 'BOOK-W1E',
-    status: 'BLOCKED_PENDING_BOOK_W1D_ACTIVE_RECONCILIATION',
+    status: 'READY_FOR_HUMAN_REVIEW',
     recordedAt: null,
     humanActor: null,
     decision: null,
     priorGates: {
-      w1dActiveReconciliation: false,
-      knowledgeAuthorityAccepted: false
+      w1dActiveReconciliation: true,
+      knowledgeAuthorityAccepted: true
     },
     reviewedArtifact: PROJECTION_PATH,
     reviewedArtifactSha256: sha256(`${JSON.stringify(projection, null, 2)}\n`),
@@ -402,5 +408,5 @@ if (isMain) {
   await writeJson(process.cwd(), PROJECTION_PATH, built.projection);
   await writeJson(process.cwd(), ACCEPTANCE_PATH, built.acceptance);
   await writeJson(process.cwd(), W1D_REVIEW_PATH, built.w1dTlReview);
-  console.log('Generated fail-closed BOOK-W1E public projection candidate and BOOK-W1D TL activation review package.');
+  console.log('Generated BOOK-W1E Human Review candidate from active W1D authority; Public Production remains unchanged.');
 }

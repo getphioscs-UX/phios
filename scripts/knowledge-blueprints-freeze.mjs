@@ -2,16 +2,16 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {
   digestKnowledgeSource,
+  KNOWLEDGE_BLUEPRINT_FREEZE_PATH,
+  KNOWLEDGE_BLUEPRINT_REGISTRY_PATH,
   loadKnowledgeBlueprintFreeze,
   verifyKnowledgeBlueprintFreeze
 } from './lib/knowledge-blueprint/freeze-contract.mjs';
 
 const root = process.cwd();
 const mode = process.argv[2] || 'write';
-const freezePath =
-  'content/knowledge/blueprints/knowledge-blueprint-freeze-v2.json';
-const registryPath =
-  'content/knowledge/blueprints/blueprint-registry.json';
+const freezePath = KNOWLEDGE_BLUEPRINT_FREEZE_PATH;
+const registryPath = KNOWLEDGE_BLUEPRINT_REGISTRY_PATH;
 
 const readSource = relative =>
   fs.readFile(path.join(root, relative), 'utf8');
@@ -107,4 +107,4 @@ await verifyKnowledgeBlueprintFreeze(root);
 
 console.log('✓ Blueprint Registry Authority refreshed from all registered Blueprints.');
 console.log(`✓ Registry totals: ${registry.totals.books} books / ${registry.totals.parts} parts / ${registry.totals.canonicalNodes} nodes.`);
-console.log(`✓ Knowledge Blueprint Freeze v2 updated explicitly: ${freezePath}`);
+console.log(`✓ Active Knowledge Blueprint Freeze updated explicitly: ${freezePath}`);

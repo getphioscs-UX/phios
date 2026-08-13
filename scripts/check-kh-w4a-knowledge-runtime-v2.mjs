@@ -20,12 +20,13 @@ const [knowledge, nodes, books, parts, freeze] = await Promise.all([
 ]);
 
 assert.equal(knowledge.registry.contract, BLUEPRINT_REGISTRY_VERSION);
-assert.equal(knowledge.registry.status, 'frozen');
+assert.equal(knowledge.registry.status, 'book-w1d-human-approved-frozen-successor');
 assert.equal(knowledge.registry.policies.directSingleBookAssumptionDeprecated, true);
 assert.equal(knowledge.registry.policies.registryRequiredForProduction, true);
 assert.equal(knowledge.registry.policies.failClosedOnDigestMismatch, true);
 assert.deepEqual(knowledge.books.map(book => book.bookCode), ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4', 'BOOK-5']);
-const currentCanonicalNodeCount = nodes.nodes.length;
+const activeNodes = knowledge.authorities.nodes;
+const currentCanonicalNodeCount = activeNodes.nodes.length;
 assert.deepEqual(knowledge.totals, {
   books: 5,
   parts: 16,
@@ -52,15 +53,16 @@ for (const [partCode, projected] of knowledge.byPartCode) {
   if (partCode !== 'P0') assert.equal(projected.bookCode, registryPartOwners[partCode]);
 }
 
-const canonicalCodes = nodes.nodes.map(node => node.nodeCode).sort();
+assert.equal(nodes.nodes.length, 718, 'Historical KAU-R5 nodes.json must remain immutable.');
+const canonicalCodes = activeNodes.nodes.map(node => node.nodeCode).sort();
 const projectedCodes = knowledge.nodes.map(node => node.nodeCode).sort();
 assert.deepEqual(projectedCodes, canonicalCodes);
 assert.equal(new Set(projectedCodes).size, currentCanonicalNodeCount);
 assert.equal(knowledge.byBookCode.get('BOOK-1').cardinality.canonicalNodeCount, 65);
-assert.equal(knowledge.byBookCode.get('BOOK-2').cardinality.canonicalNodeCount, currentCanonicalNodeCount === 718 ? 182 : 180);
-assert.equal(knowledge.byBookCode.get('BOOK-3').cardinality.canonicalNodeCount, 86);
-assert.equal(knowledge.byBookCode.get('BOOK-4').cardinality.canonicalNodeCount, 187);
-assert.equal(knowledge.byBookCode.get('BOOK-5').cardinality.canonicalNodeCount, 198);
+assert.equal(knowledge.byBookCode.get('BOOK-2').cardinality.canonicalNodeCount, 180);
+assert.equal(knowledge.byBookCode.get('BOOK-3').cardinality.canonicalNodeCount, 105);
+assert.equal(knowledge.byBookCode.get('BOOK-4').cardinality.canonicalNodeCount, 279);
+assert.equal(knowledge.byBookCode.get('BOOK-5').cardinality.canonicalNodeCount, 302);
 assert.equal((await resolveKnowledgeBlueprintForNode(root, 'KN-B1-P5-001', { knowledge })).bookCode, 'BOOK-2');
 assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P8', { knowledge })).bookCode, 'BOOK-3');
 assert.equal((await resolveKnowledgeBlueprintForPart(root, 'P10', { knowledge })).bookCode, 'BOOK-4');

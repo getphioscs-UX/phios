@@ -5,7 +5,7 @@ import path from 'node:path';
 export const KNOWLEDGE_BLUEPRINT_FREEZE_CONTRACT =
   'PHI-OS-KNOWLEDGE-BLUEPRINT-FREEZE-v2.0.0';
 export const KNOWLEDGE_BLUEPRINT_FREEZE_PATH =
-  'content/knowledge/blueprints/knowledge-blueprint-freeze-v2.json';
+  'content/knowledge/blueprints/successors/book-w1d/knowledge-blueprint-freeze-v1.json';
 export const KNOWLEDGE_BLUEPRINT_REGISTRY_PATH =
   'content/knowledge/blueprints/blueprint-registry.json';
 export const NODE_PUBLICATION_OWNERSHIP_PATH =

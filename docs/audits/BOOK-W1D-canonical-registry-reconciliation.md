@@ -1,24 +1,41 @@
-# BOOK-W1D｜Canonical Registry Reconciliation
+# BOOK-W1D｜Canonical Registry Reconciliation — HUMAN_APPROVED
 
-## Result
+## Activated result
 
-BOOK-W1D Human Review preparation accounts for **716 existing Canonical Node Authority** records plus **2 KAU-R5 Human-accepted admissions**. W1C is Human approved, so W1D is now `READY_FOR_HUMAN_REVIEW`; it still produces no active Canonical mutation before independent W1D acceptance.
+TL accepted all **718 existing identity reconciliation** records, all **192 promote** plus **21 supersede** admissions, and all **473 publication ownership** records. `KN-B2-P7-052 → P11` and `KN-B2-P7-057 → P10` are both explicitly approved as `APPLY`.
 
-BOOK-W1C resolved **323 W1C dispositions**: 192 promote, 66 link-to-existing, 21 supersede and 44 defer. W1D receives **213 Canonical admission candidates** (192 promote + 21 supersede), while 66 Human-accepted links remain relationship-only and 44 deferred admissions remain preserved outside the current admission queue. W1D has accepted 0 admissions and created 0 new Canonical identities.
+The active versioned Canonical successor contains **931 Canonical records**: all 718 KAU-R5 records remain accounted for and 213 W1D admissions are added. The exact KAU-R5 `nodes.json` remains immutable predecessor evidence. Active authority is expressed through a separate successor Registry, successor Authority Contract, four successor Blueprints and a successor Blueprint Freeze.
 
-The exact KAU-R5 718-node `nodes.json` remains byte-identical. There are **0 silent deletion**, 0 ungoverned nodeCode mutation, 0 duplicate active identity and 0 orphan migration entry.
+## Identity and lineage
 
-## Reconciliation actions
+- All 718 existing reconciliation records preserve `oldNodeCode == canonicalNodeCode` and record `canonicalIdentityChanged = false`.
+- The 192 promote admissions create governed new identities without rewriting any predecessor Node Code.
+- The 21 supersede admissions carry 21 explicit `legacyNodeCode → successorNodeCode` lineage records and compatibility strategies. They address 13 unique legacy identities; every legacy Node remains preserved and non-reusable.
+- All 66 W1C link-to-existing relationships are applied without creating additional identities.
+- All 44 deferred admissions remain preserved candidates and are not present as Canonical Nodes.
+- Acceptance accounting remains: **0 silent deletion**, 0 ungoverned nodeCode mutation, 0 duplicate active identity and 0 orphan migration entry.
 
-- Every unchanged identity records `oldNodeCode == canonicalNodeCode` and `canonicalIdentityChanged = false`.
-- W1B contributes 471 traceable `move publication ownership` candidate records for P8–P15.
-- KAU-R4/R5 contributes two Human-accepted cross-Part rehome targets: `KN-B2-P7-052 → P11` and `KN-B2-P7-057 → P10`.
-- The two physical rehomes remain unapplied and are ready for explicit W1D physical-application decisions.
-- Five KAU-R5 deprecated identities remain governed legacy references; their nodeCodes are neither deleted nor reused.
-- No outline chapter is converted into an approved Canonical Node, and no split, merge or new candidate is invented.
+## Publication ownership
 
-There are **473 publication ownership records** in total: 471 W1B ownership moves and two governed rehome targets. Every record contains old/new publication ownership, Part scope and a migrationRecord.
+All 473 records are traceable and applied: 471 W1B publication-owner migrations plus two governed physical rehomes.
 
-## Gate
+- `KN-B2-P7-052` retains its Canonical Node Code and source Part lineage while its publication context is applied to `BOOK-4 / P11`.
+- `KN-B2-P7-057` retains its Canonical Node Code and source Part lineage while its publication context is applied to `BOOK-4 / P10`.
 
-This is `READY_FOR_HUMAN_REVIEW` evidence only. **W1B and W1C are Human approved.** W1D TL review must decide the 718-entry existing-identity ledger, 213 admission candidates, 473 publication-ownership records and the two target-only physical rehomes. Only W1D Human Acceptance may authorize a versioned Canonical Registry successor and publication-context application.
+Publication migration does not itself create an Article, Approval, Publication, public-route or Production Authority.
+
+## Successor Blueprint accounting
+
+| Book | Parts | Canonical records in active Blueprint |
+| --- | --- | ---: |
+| BOOK-1 | P0–P4 | 65 |
+| BOOK-2 | P5–P7 | 180 |
+| BOOK-3 | P8–P9 | 105 |
+| BOOK-4 | P10–P12 | 279 |
+| BOOK-5 | P13–P15 | 302 |
+
+Total active Blueprint coverage is 931. Each successor records `schemaVersion`, `contractVersion`, `migrationRecord`, `supersedes`, `sourceOutlineAuthority` and its W1D Human Acceptance.
+
+## Next gate
+
+BOOK-W1D is accepted and active. **W1E remains independently Human-governed**: Public Book / Locale / Icon Projection may now enter Human Review, but current public production remains unchanged until a separate BOOK-W1E acceptance is recorded.

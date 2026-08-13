@@ -109,12 +109,14 @@ assert.equal(contract.canonicalPreservation.normalizedSha256, NODE_SHA);
 assert.equal(contract.canonicalPreservation.nodeCodeSetSha256, NODE_CODE_SET_SHA);
 assert.equal(contract.canonicalPreservation.nodeIdentityMutationAllowed, false);
 
+const w1dActive = knowledge.registry.status === 'book-w1d-human-approved-frozen-successor';
+assert.equal(w1dActive, true);
 assert.deepEqual(knowledge.books.map(book => book.bookCode), ['BOOK-1', 'BOOK-2', 'BOOK-3', 'BOOK-4', 'BOOK-5']);
-assert.deepEqual(knowledge.totals, { books: 5, parts: 16, nodes: r5Active ? 718 : 716 });
-assert.deepEqual(knowledge.registry.totals, { books: 5, parts: 16, canonicalNodes: r5Active ? 718 : 716 });
+assert.deepEqual(knowledge.totals, { books: 5, parts: 16, nodes: 931 });
+assert.deepEqual(knowledge.registry.totals, { books: 5, parts: 16, canonicalNodes: 931 });
 assert.deepEqual(
   Object.fromEntries(knowledge.books.map(book => [book.bookCode, book.cardinality.canonicalNodeCount])),
-  r5Active ? { 'BOOK-1': 65, 'BOOK-2': 182, 'BOOK-3': 86, 'BOOK-4': 187, 'BOOK-5': 198 } : { 'BOOK-1': 65, 'BOOK-2': 180, 'BOOK-3': 86, 'BOOK-4': 187, 'BOOK-5': 198 }
+  { 'BOOK-1': 65, 'BOOK-2': 180, 'BOOK-3': 105, 'BOOK-4': 279, 'BOOK-5': 302 }
 );
 assert.deepEqual(
   Object.fromEntries(knowledge.books.map(book => [book.bookCode, book.parts.map(part => part.partCode)])),
@@ -169,6 +171,6 @@ assert.equal(contract.downstreamGate.webProductionRuntime, 'BLOCKED_PENDING_FIVE
 
 console.log('✓ KAU-R0 Five-Volume Baseline & Book/Part Authority Reconciliation passed.');
 console.log('  BOOK-1 P1–P4; BOOK-2 P5–P7; BOOK-3 P8–P9; BOOK-4 P10–P12; BOOK-5 P13–P15.');
-console.log(r5Active ? '  KAU-R0 predecessor 716 identities remain preserved inside the accepted 718-node KAU-R5 successor.' : '  716 Canonical Node identities are byte/content preserved; no nodeCode rename, delete or semantic rewrite occurred.');
-console.log(r5Active ? '  Blueprint projection: 65 / 182 / 86 / 187 / 198 = 718; KAU-R5 is the active Canonical successor.' : '  Blueprint projection: 65 / 180 / 86 / 187 / 198 = 716; KAU-R1/R2 remain the next governed stages.');
+console.log('  KAU-R0 predecessor 716 identities and the exact 718-node KAU-R5 successor remain preserved as historical authorities.');
+console.log('  Active W1D Blueprint projection: 65 / 180 / 105 / 279 / 302 = 931.');
 console.log('  Production deployment remains blocked until frozen WPR receives a five-volume successor reconciliation.');

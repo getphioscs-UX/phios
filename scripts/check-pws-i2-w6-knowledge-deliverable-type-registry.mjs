@@ -121,15 +121,17 @@ assert.deepEqual(nodesAfter, nodesBefore);
 assert.deepEqual(questionsAfter, questionsBefore);
 assert.deepEqual(knowledgeAfter.registry, knowledgeBefore.registry);
 assert.deepEqual(knowledgeAfter.books, knowledgeBefore.books);
-assert.equal(nodesAfter.nodes.length, knowledgeAfter.totals.nodes);
+assert.deepEqual(knowledgeAfter.authorities.nodes, knowledgeBefore.authorities.nodes);
+const activeNodesAfter = knowledgeAfter.authorities.nodes;
+assert.equal(activeNodesAfter.nodes.length, knowledgeAfter.totals.nodes);
 assert.deepEqual(
-  new Set(nodesAfter.nodes.map(node => node.nodeCode)),
+  new Set(activeNodesAfter.nodes.map(node => node.nodeCode)),
   new Set(knowledgeAfter.nodes.map(node => node.nodeCode))
 );
 const book1Blueprint = knowledgeAfter.byBookCode.get('BOOK-1');
 assert(book1Blueprint);
 assert.equal(
-  nodesAfter.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
+  activeNodesAfter.nodes.filter(node => node.nodeCode.startsWith('KN-PREFACE-')).length,
   book1Blueprint.prefaceCanonicalNodes
 );
 assert.equal(questionsAfter.supportingQuestions.length, 23);

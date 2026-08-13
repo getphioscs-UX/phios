@@ -267,16 +267,21 @@ export function buildBookW1CAdmissionFinalHumanAcceptance(reviewEntries, partial
 }
 
 export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd()) {
-  const [nodesRaw, activeBlueprintRegistryRaw, w1bAcceptance, ...maps] = await Promise.all([
+  const [nodesRaw, activeBlueprintRegistryRaw, w1bAcceptance, r5Freeze, ...maps] = await Promise.all([
     read(root, 'content/knowledge/registry/nodes.json'),
     read(root, 'content/knowledge/blueprints/blueprint-registry.json'),
     readJson(root, W1B_ACCEPTANCE_PATH),
+    readJson(root, 'content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json'),
     ...MAP_PATHS.map(relative => readJson(root, relative))
   ]);
   assert.equal(w1bAcceptance.status, 'HUMAN_APPROVED');
   assert.equal(w1bAcceptance.decision, 'ACCEPT');
   assert.equal(w1bAcceptance.dispositionPolicy.newCandidates,
     'HUMAN_APPROVED_AS_CANDIDATE_ONLY');
+  const activeBlueprintRegistry = JSON.parse(activeBlueprintRegistryRaw);
+  assert.equal(activeBlueprintRegistry.status, 'book-w1d-human-approved-frozen-successor');
+  assert.equal(activeBlueprintRegistry.supersedes.sha256,
+    r5Freeze.blueprintAuthority.registryManifestSha256);
 
   const allNodes = JSON.parse(nodesRaw).nodes;
   const governedNodes = allNodes.filter(node => /^P(?:8|9|1[0-5])$/.test(node.partCode ?? ''));
@@ -448,7 +453,7 @@ export async function buildBookW1CCanonicalAdmissionReview(root = process.cwd())
       canonicalNodeRegistryPath: 'content/knowledge/registry/nodes.json',
       canonicalNodeRegistrySha256: sha256(nodesRaw),
       activeBlueprintRegistryPath: 'content/knowledge/blueprints/blueprint-registry.json',
-      activeBlueprintRegistrySha256: sha256(activeBlueprintRegistryRaw),
+      activeBlueprintRegistrySha256: r5Freeze.blueprintAuthority.registryManifestSha256,
       bothMutatedByReview: false
     },
     methodology: {

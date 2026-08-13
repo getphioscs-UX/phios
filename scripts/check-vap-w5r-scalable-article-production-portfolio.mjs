@@ -8,8 +8,10 @@ const root = process.cwd();
 const readJson = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
 const contract = readJson(VAP_W5R_CONTRACT);
 const actual = readJson(VAP_W5R_OUTPUT);
-const expected = buildVapW5rPortfolio(root);
 const r5 = readJson('content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json');
+const expected = r5.status === 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY'
+  ? null
+  : buildVapW5rPortfolio(root);
 const currentNodes = readJson('content/knowledge/registry/nodes.json');
 const digest = value => crypto.createHash('sha256').update(value, 'utf8').digest('hex');
 

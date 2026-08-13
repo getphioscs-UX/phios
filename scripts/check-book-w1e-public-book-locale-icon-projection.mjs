@@ -55,14 +55,14 @@ assert.deepEqual(acceptance, expected.acceptance, 'BOOK-W1E Human Acceptance tem
 assert.deepEqual(w1bAcceptance, expected.w1bAcceptance, 'BOOK-W1B Human Acceptance template must rebuild deterministically.');
 assert.deepEqual(w1dReview, expected.w1dTlReview, 'BOOK-W1D TL activation review package must rebuild deterministically.');
 
-assert.equal(w1dAcceptance.status, 'READY_FOR_HUMAN_REVIEW');
-assert.equal(w1dAcceptance.decision, null);
-assert.equal(w1dAcceptance.activation.activeAuthorityCreated, false);
-assert.equal(projection.status, 'candidate-only-blocked-pending-book-w1d-active-reconciliation');
+assert.equal(w1dAcceptance.status, 'HUMAN_APPROVED');
+assert.equal(w1dAcceptance.decision, 'ACCEPT');
+assert.equal(w1dAcceptance.activation.canonicalRegistrySuccessorActive, true);
+assert.equal(projection.status, 'candidate-only-ready-for-human-review-not-active');
 assert.equal(projection.activation.candidateOnly, true);
 assert.equal(projection.activation.currentProductionMutationAllowed, false);
 assert.equal(projection.activation.activePublicProjectionCreated, false);
-assert.equal(acceptance.status, 'BLOCKED_PENDING_BOOK_W1D_ACTIVE_RECONCILIATION');
+assert.equal(acceptance.status, 'READY_FOR_HUMAN_REVIEW');
 assert.equal(acceptance.decision, null);
 assert.equal(acceptance.activation.currentProductionMutationAllowed, false);
 
@@ -114,13 +114,13 @@ assert.deepEqual(projection.visualVocabulary['BOOK-5'].retainedNonPrimary, ['ai'
 
 assert.equal(projection.sourceSnapshots.length, REQUIRED_PROJECTION_SOURCES.length);
 assert.deepEqual(projection.sourceSnapshots.map(record => record.path), REQUIRED_PROJECTION_SOURCES);
-assert(projection.sourceSnapshots.every(record => record.mutationStatus === 'blocked-until-book-w1d-active-reconciliation'));
+assert(projection.sourceSnapshots.every(record => record.mutationStatus === 'blocked-until-book-w1e-human-acceptance'));
 assert.equal(projection.activationTargets.length, REQUIRED_PROJECTION_SOURCES.length);
 assert.deepEqual(projection.activationTargets.map(record => record.path), REQUIRED_PROJECTION_SOURCES);
 assert.equal(projection.currentProductionBlockers.length, 5);
 assert(projection.currentProductionBlockers.every(record => record.disposition.includes('replace-on-activation')));
 
-// The current production read model intentionally remains unchanged while W1D is not active.
+// The current production read model intentionally remains unchanged until W1E is separately accepted.
 assert.equal((publicSurface.match(/four-volume-15-part/g) ?? []).length, 2);
 assert(!publicSurface.includes("'book-5': '/books/reality-navigation'"));
 assert.equal(publicMetadata.recordCount, 4);
@@ -157,7 +157,8 @@ assert.equal(w1bAcceptance.boundaries.systemMaySelfAccept, false);
 assert.equal(w1bAcceptance.boundaries.sourceAuthorityAuthorizationIsW1BAcceptance, false);
 assert.equal(w1dReview.blockerSummary.missingCompleteOutlineAuthorityPartCount, 0);
 assert.deepEqual(w1dReview.blockerSummary.missingCompleteOutlineAuthorities, []);
-assert.equal(w1dReview.status, 'READY_FOR_W1D_HUMAN_REVIEW');
+assert.equal(w1dReview.status, 'W1D_HUMAN_APPROVED_ACTIVE_RECONCILIATION');
+assert.equal(w1dReview.activeReconciliationCreated, true);
 assert.equal(w1dReview.blockerSummary.w1cHumanResolvedDispositionCount, 323);
 assert.equal(w1dReview.blockerSummary.w1dCanonicalAdmissionCandidateCount, 213);
 assert.equal(w1dReview.blockerSummary.w1cAcceptedLinkRelationshipCount, 66);
@@ -167,7 +168,7 @@ assert.equal(w1dReview.blockerSummary.w1cSuccessorBlueprintsAccepted, true);
 assert.equal(w1dReview.reviewSequence[0].satisfied, true);
 assert.equal(w1dReview.reviewSequence[1].satisfied, true);
 assert.equal(w1dReview.reviewSequence[2].satisfied, true);
-assert.equal(w1dReview.reviewSequence[3].satisfied, false);
+assert.equal(w1dReview.reviewSequence[3].satisfied, true);
 assert.deepEqual(w1dReview.reviewSequence.map(record => record.tlReviewRequired), [false, true, true, true]);
 assert.equal(w1dReview.reviewSequence[1].reviewedArtifacts.length, 8);
 assert.equal(w1dReview.reviewSequence[2].reviewedArtifacts.length, 8);
@@ -177,11 +178,12 @@ assert.equal(w1dReview.reviewSequence[3].reviewedArtifacts.length, 2);
 assert.deepEqual(w1dReview.specialTlDecisions.map(record => record.canonicalNodeCode), [
   'KN-B2-P7-052', 'KN-B2-P7-057'
 ]);
-assert(w1dReview.specialTlDecisions.every(record => record.physicalApplicationDecision === null));
+assert(w1dReview.specialTlDecisions.every(record => record.physicalApplicationDecision === 'APPLY'));
 
-assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1E')?.status, 'pending');
-assert.equal(contract.w1eCandidatePreparation.status, 'generated-blocked-not-active');
-assert.equal(contract.w1eCandidatePreparation.w1dActiveReconciliationSatisfied, false);
+assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1D')?.status, 'accepted');
+assert.equal(contract.implementationSteps.find(record => record.step === 'BOOK-W1E')?.status, 'in_progress');
+assert.equal(contract.w1eCandidatePreparation.status, 'generated-ready-for-human-review-not-active');
+assert.equal(contract.w1eCandidatePreparation.w1dActiveReconciliationSatisfied, true);
 assert.equal(contract.w1eCandidatePreparation.mandatoryProjectionSourceCount, 10);
 assert.equal(contract.w1eCandidatePreparation.activePublicProjectionMutated, false);
 assert.equal(packageJson.scripts['check:book-w1-public-projection'], 'node scripts/check-book-w1e-public-book-locale-icon-projection.mjs');
@@ -189,9 +191,9 @@ assert.equal(packageJson.scripts['check:book-w1e'], 'npm run check:book-w1-publi
 assert.equal((packageJson.scripts.precheck.match(/npm run check:book-w1-public-projection/g) ?? []).length, 1);
 
 for (const phrase of [
-  'W1D is not active',
-  'P8–P15 source authority is complete',
-  'one remaining explicit TL acceptance gate',
+  'W1D is Human approved and active',
+  'W1E is ready for its independent Human Review',
+  '931 Canonical records',
   'compatibility alias',
   'Current production remains byte-identical'
 ]) assert(audit.includes(phrase));
@@ -199,5 +201,5 @@ for (const phrase of [
 console.log('✓ BOOK-W1E Public Book / Locale / Icon Projection candidate passed.');
 console.log('  Five canonical book routes, five-book Part ownership and Book 3-5 visual vocabulary are projected deterministically.');
 console.log('  /books/reality-maintenance/ is a non-canonical 308 compatibility alias to /books/reality-continuity/.');
-console.log('  Current production remains unchanged because W1D is not active; five stale production classes are inventoried for activation.');
-console.log('  W1C is Human approved; W1D is ready for its independent Human Acceptance.');
+console.log('  W1D is Human approved and active; five stale production classes are inventoried for W1E activation.');
+console.log('  W1E is ready for independent Human Review; Current Public Production remains byte-identical.');

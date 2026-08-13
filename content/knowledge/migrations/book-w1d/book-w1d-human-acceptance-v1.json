@@ -2,55 +2,70 @@
   "schemaVersion": "PHI-OS-BOOK-W1D-HUMAN-ACCEPTANCE-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1D",
-  "status": "READY_FOR_HUMAN_REVIEW",
-  "recordedAt": null,
-  "humanActor": null,
-  "decision": null,
-  "priorGates": {
-    "w1bOutlineMigrationMapsAccepted": true,
-    "w1cCanonicalAdmissionReviewAuthorized": true,
-    "w1cCanonicalAdmissionReviewPartiallyAccepted": true,
-    "w1cCanonicalAdmissionReviewAccepted": true,
-    "w1cSuccessorBlueprintsAccepted": true
-  },
-  "upstreamAdmissionReview": {
-    "path": "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
-    "candidateCount": 323,
-    "resolvedHumanDispositionCount": 323,
-    "canonicalAdmissionCandidateCount": 213,
-    "acceptedLinkRelationshipCount": 66,
-    "deferredAdmissionCandidateCount": 44,
-    "pendingHumanDecisionCount": 0,
-    "approvedCanonicalNodeCount": 0,
-    "w1dAcceptedAdmissionCount": 0
-  },
+  "status": "HUMAN_APPROVED",
+  "recordedAt": "2026-08-14",
+  "humanActor": "TL",
+  "decision": "ACCEPT",
+  "acceptanceStatement": "接受 718 项 existing identity reconciliation。\n接受 192 promote + 21 supersede admissions。\n接受 473 项 publication ownership records。\nKN-B2-P7-052 → P11：apply。\nKN-B2-P7-057 → P10：apply。",
+  "overrides": [],
   "reviewedArtifacts": [
-    "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
-    "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
-    "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-candidates-v1.json",
-    "content/knowledge/blueprints/successors/book-w1c/canonical-node-admission-review-human-acceptance-v2.json"
+    {
+      "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
+      "sha256": "cd0f60eec0dd7b6b61f5f3e22f273bf18f6fd93aef3a9e4105dfae8c338c61da"
+    },
+    {
+      "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
+      "sha256": "85ac263c19ff772894b811602c6de3d2eb4e94e38ae18ba49a5a0ad4316f9b60"
+    }
   ],
-  "requiredHumanDecisions": {
-    "existingCanonicalIdentityLedgerEntryCount": 718,
-    "canonicalAdmissionCandidateCount": 213,
-    "promoteCandidateCount": 192,
-    "supersedeCandidateCount": 21,
-    "acceptedLinkRelationshipCount": 66,
-    "deferredCandidateCount": 44,
+  "acceptedScope": {
+    "existingIdentityReconciliationCount": 718,
+    "promoteAdmissionCount": 192,
+    "supersedeAdmissionCount": 21,
+    "canonicalAdmissionCount": 213,
     "publicationOwnershipRecordCount": 473,
-    "targetOnlyRehomePhysicalApplicationDecisionCount": 2
+    "rehomeApplications": [
+      {
+        "canonicalNodeCode": "KN-B2-P7-052",
+        "targetPartCode": "P11",
+        "decision": "APPLY"
+      },
+      {
+        "canonicalNodeCode": "KN-B2-P7-057",
+        "targetPartCode": "P10",
+        "decision": "APPLY"
+      }
+    ]
   },
   "acceptanceChecks": {
-    "existing716CanonicalNodeAuthorityAccountedFor": null,
-    "silentDeletionCount": null,
-    "ungovernedNodeCodeMutationCount": null,
-    "duplicateActiveIdentityCount": null,
-    "orphanMigrationEntryCount": null,
-    "allOwnershipChangesTraceable": null
+    "existing716CanonicalNodeAuthorityAccountedFor": 716,
+    "postBaselineKauR5AdmissionsAccountedFor": 2,
+    "all718ExistingIdentityRecordsAccepted": true,
+    "silentDeletionCount": 0,
+    "ungovernedNodeCodeMutationCount": 0,
+    "duplicateActiveIdentityCount": 0,
+    "orphanMigrationEntryCount": 0,
+    "allOwnershipChangesTraceable": true,
+    "supersedeLineageRecordCount": 21,
+    "supersedeCompatibilityStrategyCount": 21
+  },
+  "activatedSuccessors": {
+    "canonicalRegistryPath": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "canonicalRegistrySha256": "5156bf1a591754ce31efabd8648dacb1e4b5f61b2cd47674fa3055b0cb402932",
+    "canonicalRegistryRecordCount": 931,
+    "activeBlueprintRegistryPath": "content/knowledge/blueprints/blueprint-registry.json",
+    "activeBlueprintRegistrySha256": "e234261da01a06a6098dfdbcc1319fe7f9fc5e63224e7c1c01d3eb18e2d20941",
+    "activeBlueprintNodeCount": 931,
+    "authorityContractPath": "content/knowledge/contracts/knowledge-registry-authority-book-w1d-v1.json",
+    "freezePath": "content/knowledge/blueprints/successors/book-w1d/knowledge-blueprint-freeze-v1.json"
   },
   "activation": {
-    "canonicalRegistryMutationAllowed": false,
-    "publicationOwnershipMutationAllowed": false,
-    "activeAuthorityCreated": false
+    "canonicalRegistrySuccessorActive": true,
+    "publicationOwnershipApplied": true,
+    "rehomeApplicationsApplied": true,
+    "activeBlueprintRegistrySuccessorActive": true,
+    "bookW1EHumanAcceptanceRecorded": false,
+    "publicProjectionMutationAllowed": false,
+    "productionAuthorityCreated": false
   }
 }
