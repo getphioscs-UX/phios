@@ -22,6 +22,8 @@ const VISUAL_ASSET_TYPES = Object.freeze([
   'decorative_image'
 ]);
 const cache = new Map();
+const VISUAL_RELEASE_MANIFEST =
+  '/content/knowledge/public/visual-article-release.json';
 
 async function fetchJson(path) {
   const response = await fetch(path, {
@@ -140,12 +142,14 @@ async function loadLocale(locale) {
     fetchJson(REGISTRY_PATHS.nodes),
     fetchJson(REGISTRY_PATHS.localizedContent),
     fetchJson(REGISTRY_PATHS.assets),
-    fetchJson(REGISTRY_PATHS.sources)
+    fetchJson(REGISTRY_PATHS.sources),
+    fetchJson(VISUAL_RELEASE_MANIFEST).catch(() => ({ records: [] }))
   ]).then(async ([
     nodeRegistry,
     localizedRegistry,
     assetRegistry,
-    sourceRegistry
+    sourceRegistry,
+    visualReleaseManifest
   ]) => {
     const localizedByNode = new Map(
       localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
@@ -199,9 +203,21 @@ async function loadLocale(locale) {
       );
     }));
 
+    const visualArticles = await Promise.all(
+      (visualReleaseManifest.records || [])
+        .filter(record => (
+          record.locale === normalizedLocale &&
+          record.status === 'published'
+        ))
+        .map(record => fetchJson(record.path))
+    );
+    const publishedByNode = new Map(
+      [...loaded.filter(Boolean), ...visualArticles]
+        .map(article => [article.nodeCode, article])
+    );
+
     return Object.freeze(
-      loaded
-        .filter(Boolean)
+      [...publishedByNode.values()]
         .sort((left, right) => (
           left.publicationOrder - right.publicationOrder
         ))
