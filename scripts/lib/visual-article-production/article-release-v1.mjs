@@ -13,7 +13,8 @@ const PATHS = Object.freeze({
   presentation: 'content/production/cpr/presentations/PRESENTATION-ARTICLE-KN-PREFACE-001-ZH-HANS-v1.json',
   meaningMap: 'content/production/canonical-meaning/authority/CM-KNOWLEDGE-AUTHORITY-KN-PREFACE-001-v1.json',
   carBrief: 'content/production/car/briefs/CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-002.json',
-  figureCandidate: 'content/production/car/candidates/CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-001/candidate.v1.json',
+  figureCandidate: 'content/production/car/candidates/CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-002/candidate.v1.json',
+  carActivation: 'content/production/car/activation/vap-w12-w19-car-production-activation-v1.json',
   carBridge: 'content/production/car/authority/car-production-meaning-bridge-v1.json',
   pdsAcceptance: 'content/production/visual-article/acceptance/vap-w22-w24-cpr-pds-production-presentation-acceptance-v1.json'
 });
@@ -43,6 +44,7 @@ export function buildVisualArticleReleaseCandidate({ root = ROOT, nodeCode = 'KN
   const meaningMap = read(root, PATHS.meaningMap);
   const carBrief = read(root, PATHS.carBrief);
   const figureCandidate = read(root, PATHS.figureCandidate);
+  const carActivation = read(root, PATHS.carActivation);
   const bridge = read(root, PATHS.carBridge);
   const mappings = productionMeaningMappings(meaningMap, nodeCode);
   const productionMeaningCodes = mappings.map(record => record.meaningCode).sort();
@@ -63,13 +65,18 @@ export function buildVisualArticleReleaseCandidate({ root = ROOT, nodeCode = 'KN
   if (mappings.length === 0) blockers.push('PRODUCTION_MEANING_KNOWLEDGE_MAPPING_MISSING');
   if (fixtureOrBridgeMeaning) blockers.push('FIXTURE_OR_LEGACY_BRIDGE_MEANING_FORBIDDEN');
   if (JSON.stringify(productionMeaningCodes) !== JSON.stringify(carMeaningCodes)) blockers.push('CAR_BRIEF_PRODUCTION_MEANING_REFERENCES_STALE');
-  if (figureCandidate.assetBriefCode !== carBrief.briefCode || figureCandidate.assetBriefDigest !== carBrief.briefDigest) blockers.push('PUBLISHED_FIGURE_MEANING_LINEAGE_STALE');
+  const successorCandidateValid = figureCandidate.assetBriefCode === carBrief.briefCode && figureCandidate.assetBriefDigest === carBrief.briefDigest;
+  const successorPublished = carActivation.pilot?.publishedAssetCode && carActivation.pilot?.candidateCode === figureCandidate.candidateCode;
+  if (!successorCandidateValid) blockers.push('FIGURE_CANDIDATE_MEANING_LINEAGE_INVALID');
+  if (successorCandidateValid && carActivation.pilot?.reviewCode === null) blockers.push('HUMAN_ASSET_REVIEW_REQUIRED');
+  else if (successorCandidateValid && carActivation.pilot?.approvalCode === null) blockers.push('HUMAN_ASSET_APPROVAL_REQUIRED');
+  else if (successorCandidateValid && !successorPublished) blockers.push('SUCCESSOR_PUBLISHED_FIGURE_REQUIRED');
   if (!exists(root, figure.publicSrc.replace(/^\//, ''))) blockers.push('PUBLIC_ASSET_BINARY_MISSING');
   const payload = {
     schemaVersion: 'PHI-OS-VISUAL-ARTICLE-RELEASE-CANDIDATE-v1.0.0',
     releaseCandidateCode: `VAC-${nodeCode}-${locale.toUpperCase()}-v1`,
     work: 'VAP-W25', phase: 'VAP-F_ARTICLE_RELEASE', nodeCode, locale,
-    status: blockers.length ? (mappings.length ? 'BLOCKED_STALE_PUBLISHED_FIGURE_LINEAGE' : 'BLOCKED_MISSING_PRODUCTION_MEANING_MAPPING') : 'READY_FOR_RELEASE',
+    status: blockers.length ? (blockers.includes('HUMAN_ASSET_REVIEW_REQUIRED') ? 'AWAITING_HUMAN_ASSET_REVIEW' : blockers.includes('HUMAN_ASSET_APPROVAL_REQUIRED') ? 'AWAITING_HUMAN_ASSET_APPROVAL' : 'BLOCKED_FIGURE_RELEASE_LINEAGE') : 'READY_FOR_RELEASE',
     gates: {
       articleApproved: article.eligibility?.approved === true,
       articlePublicationReady: article.eligibility?.published === true,
@@ -81,7 +88,10 @@ export function buildVisualArticleReleaseCandidate({ root = ROOT, nodeCode = 'KN
       publicSlugValid: /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(article.article?.slug || ''),
       productionMeaningMappingValid: mappings.length > 0,
       carBriefMeaningReferencesValid: mappings.length > 0 && !fixtureOrBridgeMeaning && JSON.stringify(productionMeaningCodes) === JSON.stringify(carMeaningCodes),
-      publishedFigureMeaningLineageValid: figureCandidate.assetBriefCode === carBrief.briefCode && figureCandidate.assetBriefDigest === carBrief.briefDigest
+      figureCandidateMeaningLineageValid: successorCandidateValid,
+      humanAssetReviewPassed: carActivation.pilot?.reviewDecision === 'accept',
+      humanAssetApprovalPassed: carActivation.pilot?.approvalDecision === 'approved',
+      publishedFigureMeaningLineageValid: Boolean(successorPublished)
     },
     authorityReferences: {
       article: { path: PATHS.article, digest: fileDigest(root, PATHS.article) },
@@ -90,6 +100,7 @@ export function buildVisualArticleReleaseCandidate({ root = ROOT, nodeCode = 'KN
       pdsAcceptance: { path: PATHS.pdsAcceptance, digest: fileDigest(root, PATHS.pdsAcceptance) },
       meaningKnowledgeMap: { path: PATHS.meaningMap, digest: fileDigest(root, PATHS.meaningMap), productionStatus: meaningMap.productionStatus },
       carBrief: { path: PATHS.carBrief, digest: fileDigest(root, PATHS.carBrief), meaningReferences: carBrief.meaningReferences }
+      ,figureCandidate: { path: PATHS.figureCandidate, digest: fileDigest(root, PATHS.figureCandidate), candidateCode: figureCandidate.candidateCode, candidateDigest: figureCandidate.candidateDigest }
     },
     blockers,
     downstream: { w26AuthorityProjectionExecuted: false, w27WebsiteReleaseExecuted: false, w28ProductionAcceptanceExecuted: false, w29FreezeExecuted: false },

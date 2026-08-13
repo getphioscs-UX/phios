@@ -115,7 +115,9 @@ const runtimeContracts = JSON.parse(
 const migrations = JSON.parse(
   await read('content/registry/runtime-migrations.json')
 );
-assert.equal(Object.keys(contentRegistry.registries).length, 50);
+assert.equal(Object.keys(contentRegistry.registries).length, 51);
+assert.equal(contentRegistry.registries.public_assets, './public-assets.json');
+assert.equal(contentRegistry.registries.book_5_manifest, './book-5-manifest.json');
 assert.equal(runtimeContracts.contracts.length, 20);
 assert(migrations.migrations.length >= 4);
 assert.deepEqual(

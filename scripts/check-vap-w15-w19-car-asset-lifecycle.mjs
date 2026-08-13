@@ -23,8 +23,6 @@ import {
 const root = process.cwd();
 const briefCode = 'CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
 const successorBriefCode = 'CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-002';
-const pilotCandidateCode = 'CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
-const pilotAssetCode = 'ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
 const registries = {
   candidates: readJson(root, CANDIDATE_REGISTRY),
   reviews: readJson(root, REVIEW_REGISTRY),
@@ -35,16 +33,14 @@ const registries = {
 
 // Successor-aware real production-state validation. W15-W19 may advance over time,
 // but every downstream artifact must remain exact-lineage bound to the pilot Candidate.
-assert(registries.candidates.candidates.length <= 1, 'CAR_PILOT_MULTIPLE_REAL_CANDIDATES_UNEXPECTED');
-if (registries.candidates.candidates.length) {
-  const entry = registries.candidates.candidates[0];
-  assert.equal(entry.candidateCode, pilotCandidateCode);
-  assert.equal(entry.assetCode, pilotAssetCode);
-  assert.equal(entry.briefCode, briefCode);
+assert.equal(new Set(registries.candidates.candidates.map(entry => entry.briefCode)).size, registries.candidates.candidates.length, 'CAR_MULTIPLE_REAL_CANDIDATES_PER_BRIEF_UNEXPECTED');
+assert(registries.candidates.candidates.length <= 2, 'CAR_SUCCESSOR_CANDIDATE_COUNT_UNEXPECTED');
+for (const entry of registries.candidates.candidates) {
+  assert([briefCode, successorBriefCode].includes(entry.briefCode));
   const candidate = readJson(root, entry.path);
   assert.equal(candidate.candidateCode, entry.candidateCode);
   assert.equal(candidate.candidateDigest, entry.candidateDigest);
-  assert.equal(candidate.assetBriefCode, briefCode);
+  assert.equal(candidate.assetBriefCode, entry.briefCode);
   assert.equal(candidate.providerLineage.mode, 'external_manual');
   assert.equal(candidate.providerLineage.providerCode, 'OPENAI_CHATGPT');
   assert.equal(candidate.candidateState, 'candidate');
@@ -185,4 +181,4 @@ console.log('✓ VAP-W16 independent Human Asset Review is successor-aware; acce
 console.log('✓ VAP-W17 independent Asset Approval requires an accepted review and remains distinct from generation/publication.');
 console.log('✓ VAP-W18 Media Materialization is fail-closed on rights/accessibility and emits only safe /assets/... .svg/.webp/.avif paths with dimensions and alt text.');
 console.log('✓ VAP-W19 Published Asset requires Candidate + accepted Review + approved Approval + Media + rights/accessibility gates.');
-console.log(`✓ Real CAR pilot state: ${registries.candidates.candidates.length} Candidate, ${registries.reviews.reviews.length} Review, ${registries.approvals.approvals.length} Approval, ${registries.media.media.length} Media, ${registries.publications.publications.length} Published Asset.`);
+console.log(`✓ Real CAR state: ${registries.candidates.candidates.length} Candidates across immutable 001 + successor 002 lineages, ${registries.reviews.reviews.length} Review, ${registries.approvals.approvals.length} Approval, ${registries.media.media.length} Media, ${registries.publications.publications.length} Published Asset.`);

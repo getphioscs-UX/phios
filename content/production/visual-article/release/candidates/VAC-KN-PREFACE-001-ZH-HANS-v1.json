@@ -5,7 +5,7 @@
   "phase": "VAP-F_ARTICLE_RELEASE",
   "nodeCode": "KN-PREFACE-001",
   "locale": "zh-Hans",
-  "status": "BLOCKED_STALE_PUBLISHED_FIGURE_LINEAGE",
+  "status": "AWAITING_HUMAN_ASSET_REVIEW",
   "gates": {
     "articleApproved": true,
     "articlePublicationReady": true,
@@ -17,6 +17,9 @@
     "publicSlugValid": true,
     "productionMeaningMappingValid": true,
     "carBriefMeaningReferencesValid": true,
+    "figureCandidateMeaningLineageValid": true,
+    "humanAssetReviewPassed": false,
+    "humanAssetApprovalPassed": false,
     "publishedFigureMeaningLineageValid": false
   },
   "authorityReferences": {
@@ -51,10 +54,16 @@
         "CM-FORMATION-SDU-17",
         "CM-FORMATION-SDU-64"
       ]
+    },
+    "figureCandidate": {
+      "path": "content/production/car/candidates/CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-002/candidate.v1.json",
+      "digest": "36764e9245d5541861f38dd7aa0b870c03320ccd51d0469405dc5ca1b2e30b1a",
+      "candidateCode": "CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-002",
+      "candidateDigest": "b6b1b77c3c7317d3e5d5222777298062144b50914a4eab92452adbab5e590cef"
     }
   },
   "blockers": [
-    "PUBLISHED_FIGURE_MEANING_LINEAGE_STALE"
+    "HUMAN_ASSET_REVIEW_REQUIRED"
   ],
   "downstream": {
     "w26AuthorityProjectionExecuted": false,
@@ -68,5 +77,5 @@
     "legacyBridgeMeaningAllowed": false,
     "humanMeaningSelectionRequired": true
   },
-  "releaseCandidateDigest": "8362810d3a592da7b334dbdfde792afde0f39548805180d07c9668c758d275d1"
+  "releaseCandidateDigest": "d21ddc755f0567afe13eca9714dee3c220aba46ff640b83fa02b4f3943b5d79d"
 }
