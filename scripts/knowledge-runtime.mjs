@@ -3,6 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { loadKnrRegistryAuthority } from './lib/knowledge-runtime/registry-consumer.mjs';
+import { searchManuscriptCorpus } from '../functions/knowledge-runtime/manuscript-source-runtime.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ARTICLES = path.join(ROOT, 'content/knowledge/articles');
@@ -114,16 +115,81 @@ export function applyKnowledgeRuntimeIndex({ dryRun = true } = {}) {
   return { mode: dryRun ? 'dry-run' : 'apply', changed: changes, counts: Object.fromEntries(INDEX_FILES.map(name => [name.replace('-index.json', ''), output[name].recordCount])) };
 }
 
-function main() {
-  const [operation, ...args] = process.argv.slice(2);
-  if (operation !== 'index') {
-    console.error(`KNR-W0-W2 implements index only; ${operation || 'missing operation'} is deferred.`);
-    process.exitCode = 2;
-    return;
-  }
-  const apply = args.includes('--apply');
-  if (apply && args.includes('--dry-run')) throw new Error('Choose either --apply or --dry-run.');
-  console.log(JSON.stringify(applyKnowledgeRuntimeIndex({ dryRun: !apply }), null, 2));
+function option(args, name, fallback = null) {
+  const index = args.indexOf(name);
+  return index >= 0 && args[index + 1] ? args[index + 1] : fallback;
 }
 
+function resolvePrivateCorpus(corpusRoot, objectKey) {
+  const candidates = [
+    path.join(corpusRoot, objectKey),
+    path.join(corpusRoot, objectKey.replace(/^books[\\/]/, ''))
+  ];
+  return candidates.find(fs.existsSync) || null;
+}
+
+export function queryLocalManuscriptKnowledge({ query, locale = 'zh-Hans', corpusRoot }) {
+  if (!query?.trim()) throw new Error('Knowledge query requires --q <question>.');
+  if (!corpusRoot || !fs.existsSync(corpusRoot)) throw new Error('Knowledge query requires --corpus-dir <private corpus directory> or KSAR_PRIVATE_CORPUS_DIR.');
+  const sources = readJson(path.join(ROOT, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json'));
+  const bindings = readJson(path.join(ROOT, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'));
+  const readability = readJson(path.join(ROOT, 'content/knowledge/source-access/registries/manuscript-readability-review-v1.json'));
+  const records = [];
+  for (const source of sources.records.filter(record => record.locale === locale)) {
+    const file = resolvePrivateCorpus(corpusRoot, source.r2ObjectKey);
+    if (!file) throw new Error(`Private corpus missing: ${source.r2ObjectKey}`);
+    const corpus = readJson(file);
+    records.push(...searchManuscriptCorpus({ corpus, source, bindings, readability, query }));
+  }
+  records.sort((a,b) => b.score-a.score || a.sectionCode.localeCompare(b.sectionCode));
+  return {
+    runtime: 'KSAR_LOCAL_MANUSCRIPT_QUERY',
+    query: { text: query, locale },
+    coverage: records.length ? 'manuscript' : 'none',
+    records: records.slice(0, 4)
+  };
+}
+
+function runFixtures() {
+  const source = { sourceCode:'FIXTURE',bookCode:'BOOK-2',title:'Fixture',titleEn:'Fixture',bookRoute:'/books/fixture/' };
+  const corpus = { records:[
+    {sectionCode:'FIX-P5-001',segmentType:'SECTION',partCode:'P5',sequence:1,heading:'Runtime Visibility',startPage:1,endPage:2,textSha256:'a'.repeat(64),text:'运行并不等于体验。意识可以被理解为运行中形成的可见层。'},
+    {sectionCode:'FIX-P5-002',segmentType:'SECTION',partCode:'P5',sequence:2,heading:'Experience Emergence',startPage:3,endPage:4,textSha256:'b'.repeat(64),text:'现实进入体验之前，会经过筛选、组织与投影。'}
+  ]};
+  const records = searchManuscriptCorpus({ corpus, source, query:'意识如何形成体验' });
+  if (!records.length) throw new Error('KSAR fixture query returned no result.');
+  return { runtime:'KSAR_FIXTURES', passed:true, resultCount:records.length, firstSectionCode:records[0].sectionCode };
+}
+
+function main() {
+  const [operation, ...args] = process.argv.slice(2);
+  if (operation === 'index') {
+    const apply = args.includes('--apply');
+    if (apply && args.includes('--dry-run')) throw new Error('Choose either --apply or --dry-run.');
+    console.log(JSON.stringify(applyKnowledgeRuntimeIndex({ dryRun: !apply }), null, 2));
+    return;
+  }
+  if (operation === 'fixtures') {
+    console.log(JSON.stringify(runFixtures(), null, 2));
+    return;
+  }
+  if (operation === 'query' || operation === 'evaluate') {
+    const query = option(args, '--q');
+    const locale = option(args, '--locale', 'zh-Hans');
+    const corpusRoot = path.resolve(option(args, '--corpus-dir', process.env.KSAR_PRIVATE_CORPUS_DIR || ''));
+    const result = queryLocalManuscriptKnowledge({ query, locale, corpusRoot });
+    console.log(JSON.stringify(operation === 'evaluate' ? {
+      ...result,
+      evaluation: {
+        sourceCount: result.records.length,
+        approvedCanonicalBindings: result.records.filter(record => record.canonicalBinding.status === 'APPROVED').length,
+        pendingCanonicalBindings: result.records.filter(record => record.canonicalBinding.status !== 'APPROVED').length,
+        cautionSources: result.records.filter(record => record.readability?.runtimeEligibility === 'SOURCE_ONLY_WITH_CAUTION').length
+      }
+    } : result, null, 2));
+    return;
+  }
+  console.error(`Unknown knowledge runtime operation: ${operation || 'missing operation'}. Supported: index, query, evaluate, fixtures.`);
+  process.exitCode = 2;
+}
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main();

@@ -352,16 +352,31 @@ if (workspace) {
     const limit = depthLimits[selectedValue('depth')] || 2;
     const resources = (routeResult?.matchedResources || []).slice(0, limit);
 
+    const knowledgeQuestion = selectedValue('question')
+      ? t(questionKeys[selectedValue('question')])
+      : '';
+    const askKnowledge = document.createElement('a');
+    askKnowledge.className = 'free-explore__route is-matched';
+    askKnowledge.dataset.routeType = 'knowledge-access';
+    askKnowledge.href = `/knowledge-search${knowledgeQuestion ? `?q=${encodeURIComponent(knowledgeQuestion)}` : ''}`;
+    const askMarker = document.createElement('span');
+    askMarker.setAttribute('aria-hidden', 'true');
+    askMarker.textContent = 'Q';
+    const askTitle = document.createElement('strong');
+    askTitle.textContent = getLocale() === 'zh-Hans' ? '询问 PHI OS Knowledge' : 'Ask PHI OS Knowledge';
+    const askBody = document.createElement('p');
+    askBody.textContent = getLocale() === 'zh-Hans'
+      ? '同时检索 Published Knowledge 与已完成书稿，不需要等待 Article publication。'
+      : 'Search Published Knowledge and completed manuscripts without waiting for Article publication.';
+    askKnowledge.append(askMarker, askTitle, askBody);
+
     if (!resources.length) {
-      const empty = document.createElement('p');
-      empty.className = 'free-explore__unknown';
-      empty.textContent = t('freeExplore.navigation.noArticle');
-      matchedResources.replaceChildren(empty);
+      matchedResources.replaceChildren(askKnowledge);
       arrangeGeneralRoutes();
       return;
     }
 
-    matchedResources.replaceChildren(...resources.map(resource => {
+    matchedResources.replaceChildren(askKnowledge, ...resources.map(resource => {
       const route = document.createElement('a');
       route.className = 'free-explore__route is-matched';
       route.href = resource.href;

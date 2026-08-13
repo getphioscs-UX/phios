@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-KSAR-RUNTIME-MANIFEST-v1.0.0",
+  "runtimeCode": "KSAR",
+  "runtimeName": "Knowledge Source Access Runtime",
+  "baselineCommit": "5f6c3f07ef86164ba3ab0655286ec349e9901156",
+  "authority": "QUESTION_SCOPED_ACCESS_ONLY",
+  "sources": [
+    {
+      "type": "PUBLISHED_CANONICAL_ARTICLE",
+      "authorityRank": 1,
+      "runtime": "functions/_lib/public-knowledge-api.js"
+    },
+    {
+      "type": "COMPLETED_MANUSCRIPT",
+      "authorityRank": 2,
+      "runtime": "functions/knowledge-runtime/manuscript-source-runtime.js"
+    }
+  ],
+  "artifacts": {
+    "sourceRegistry": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json",
+    "canonicalBindings": "content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json",
+    "readabilityReview": "content/knowledge/source-access/registries/manuscript-readability-review-v1.json",
+    "r2Verification": "content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json"
+  },
+  "checker": "scripts/check-ksar-r1-r8-reconciliation.mjs",
+  "productionState": "BLOCKED_PENDING_REMOTE_R2_GET_AND_HUMAN_READABILITY_REVIEW"
+}

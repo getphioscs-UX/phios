@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-KSAR-R1-R2-OBJECT-VERIFICATION-v1.0.0",
+  "stage": "KSAR-R1",
+  "status": "LOCAL_BYTES_RECONCILED_REMOTE_GET_PENDING",
+  "baselineCommit": "5f6c3f07ef86164ba3ab0655286ec349e9901156",
+  "bucketName": "phios-private-manuscripts",
+  "rules": {
+    "objectKeyMustMatchRegistry": true,
+    "actualBytesSha256Required": true,
+    "corpusSelfReportedDigestAloneInsufficient": true,
+    "remotePutDoesNotEqualVerification": true,
+    "remoteGetAndSha256RequiredForProduction": true
+  },
+  "records": [
+    {
+      "sourceCode": "MKS-BOOK-1-V2-ZH-HANS",
+      "bookCode": "BOOK-1",
+      "r2ObjectKey": "books/book-1/materialized/v2/retrieval-corpus.json",
+      "expectedRetrievalCorpusSha256": "2756bf5f18a42772d40d46cfccd141e26e07d2ca416c5a9448a36eeb037bba6a",
+      "localBytesVerified": true,
+      "remoteObjectGetVerified": false,
+      "remoteBytesSha256": null,
+      "productionEligible": false
+    },
+    {
+      "sourceCode": "MKS-BOOK-2-V1-ZH-HANS",
+      "bookCode": "BOOK-2",
+      "r2ObjectKey": "books/book-2/materialized/v1/retrieval-corpus.json",
+      "expectedRetrievalCorpusSha256": "83ae5f5af63652b1f45faf82ede922069b69e5eb2703b1ba2a617170619d2c8e",
+      "localBytesVerified": true,
+      "remoteObjectGetVerified": false,
+      "remoteBytesSha256": null,
+      "productionEligible": false
+    }
+  ]
+}

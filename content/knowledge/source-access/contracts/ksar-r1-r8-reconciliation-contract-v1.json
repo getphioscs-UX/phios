@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-KSAR-R1-R8-RECONCILIATION-CONTRACT-v1.0.0",
+  "stage": [
+    "KSAR-R1",
+    "KSAR-R2",
+    "KSAR-R3",
+    "KSAR-R4",
+    "KSAR-R5",
+    "KSAR-R6",
+    "KSAR-R7",
+    "KSAR-R8"
+  ],
+  "baselineCommit": "5f6c3f07ef86164ba3ab0655286ec349e9901156",
+  "purpose": "Reconcile completed-manuscript knowledge access into a client-usable runtime without bypassing Canonical Node, PJA, CAR, publication, book-commerce or human-review authority.",
+  "stages": {
+    "KSAR-R1": {
+      "name": "R2 Object Path & Transport Integrity",
+      "acceptance": "LOCAL_BYTES_RECONCILED_REMOTE_GET_PENDING"
+    },
+    "KSAR-R2": {
+      "name": "Manuscript Human Review Projection",
+      "acceptance": "REVIEW_UI_READY"
+    },
+    "KSAR-R3": {
+      "name": "Text / Figure / Garble Readability Triage",
+      "acceptance": "AUTOMATED_TRIAGE_COMPLETE_HUMAN_REVIEW_PENDING"
+    },
+    "KSAR-R4": {
+      "name": "Reviewed Manuscript Corpus",
+      "acceptance": "BUILDER_READY_HUMAN_DECISIONS_PENDING"
+    },
+    "KSAR-R5": {
+      "name": "Unified Knowledge Retrieval",
+      "acceptance": "RUNTIME_RECONCILED"
+    },
+    "KSAR-R6": {
+      "name": "Grounded Answer Projection",
+      "acceptance": "DETERMINISTIC_EXTRACTIVE_READY"
+    },
+    "KSAR-R7": {
+      "name": "Client Surface Integration",
+      "acceptance": "KNOWLEDGE_SEARCH_PLUS_GATEWAYS"
+    },
+    "KSAR-R8": {
+      "name": "Production Acceptance & Freeze",
+      "acceptance": "RECONCILED_WITH_REMOTE_AND_HUMAN_GATES_PENDING"
+    }
+  },
+  "authorityBoundaries": {
+    "publishedArticleAuthorityUnchanged": true,
+    "canonicalNodeAuthorityUnchanged": true,
+    "KAUR2CandidateDoesNotEqualApprovedBinding": true,
+    "manuscriptReadabilityReviewDoesNotEqualCanonicalAcceptance": true,
+    "sourceNativeKnowledgeMayAnswerQuestions": true,
+    "rawFullBookDeliveryBlocked": true,
+    "bookPurchaseCapabilityPreserved": true
+  }
+}

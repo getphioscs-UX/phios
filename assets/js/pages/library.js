@@ -80,6 +80,16 @@ async function buildResources(locale) {
       description: article.summary
     })),
     {
+      id: 'knowledge-access',
+      category: 'articles',
+      status: 'available',
+      href: '/knowledge-search',
+      title: locale === 'zh-Hans' ? '询问 PHI OS Knowledge' : 'Ask PHI OS Knowledge',
+      description: locale === 'zh-Hans'
+        ? '同时检索已发布知识与已完成书稿；书稿来源不会被冒充为 Published Article。'
+        : 'Search both published knowledge and completed manuscripts while preserving publication authority boundaries.'
+    },
+    {
       id: 'reality-navigation-thesis',
       category: 'research',
       status: 'available',

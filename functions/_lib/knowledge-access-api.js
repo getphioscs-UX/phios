@@ -1,7 +1,9 @@
 import { handlePublicKnowledgeRequest } from './public-knowledge-api.js';
 import {
   MANUSCRIPT_SOURCE_LIMITS,
+  MANUSCRIPT_GROUNDING_LIMITS,
   loadR2RetrievalCorpus,
+  queryTerms,
   searchManuscriptCorpus
 } from '../knowledge-runtime/manuscript-source-runtime.js';
 
@@ -9,6 +11,7 @@ const MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuit
 const SOURCES = new Set(['auto', 'hybrid', 'published', 'manuscript']);
 const LOCALES = new Set(['zh-Hans', 'en']);
 const MAX_QUERY_LENGTH = 500;
+const MAX_ANSWER_CHARS = 1600;
 
 const response = (body, status = 200) => Response.json(body, {
   status,
@@ -35,24 +38,39 @@ async function publishedProjection({ request, env, query, locale, mode }) {
 }
 
 async function manuscriptProjection({ env, query, locale }) {
-  const [registry, bindings] = await Promise.all([
+  const [registry, bindings, readability] = await Promise.all([
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json'),
-    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json')
+    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'),
+    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-readability-review-v1.json')
   ]);
   const sources = registry.records.filter(source => source.locale === locale);
-  if (!sources.length) return { status: 'locale_unavailable', records: [], errors: [] };
-  if (!env?.MANUSCRIPTS?.get) return { status: 'storage_unavailable', records: [], errors: ['MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE'] };
+  if (!sources.length) return { status: 'locale_unavailable', records: [], groundingRecords: [], errors: [] };
+  if (!env?.MANUSCRIPTS?.get) return { status: 'storage_unavailable', records: [], groundingRecords: [], errors: ['MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE'] };
 
   const settled = await Promise.allSettled(sources.map(async source => {
     const corpus = await loadR2RetrievalCorpus(env.MANUSCRIPTS, source);
-    return searchManuscriptCorpus({ corpus, source, bindings, query });
+    const publicRecords = searchManuscriptCorpus({ corpus, source, bindings, readability, query });
+    const groundingRecords = searchManuscriptCorpus({
+      corpus,
+      source,
+      bindings,
+      readability,
+      query,
+      maximumResults: MANUSCRIPT_GROUNDING_LIMITS.maximumResults,
+      maximumExcerptChars: MANUSCRIPT_GROUNDING_LIMITS.maximumExcerptCharsPerResult,
+      maximumTotalExcerptChars: MANUSCRIPT_GROUNDING_LIMITS.maximumTotalExcerptChars
+    });
+    return { publicRecords, groundingRecords };
   }));
-  const records = settled.flatMap(result => result.status === 'fulfilled' ? result.value : []);
+  const records = settled.flatMap(result => result.status === 'fulfilled' ? result.value.publicRecords : []);
+  const groundingRecords = settled.flatMap(result => result.status === 'fulfilled' ? result.value.groundingRecords : []);
   const errors = settled.filter(result => result.status === 'rejected').map(result => result.reason?.code || 'MANUSCRIPT_SOURCE_QUERY_FAILED');
   records.sort((a, b) => b.score - a.score || a.sectionCode.localeCompare(b.sectionCode));
+  groundingRecords.sort((a, b) => b.score - a.score || a.sectionCode.localeCompare(b.sectionCode));
   return {
     status: records.length ? 'covered' : (errors.length === sources.length ? 'unavailable' : 'no_match'),
     records: records.slice(0, MANUSCRIPT_SOURCE_LIMITS.maximumResults),
+    groundingRecords: groundingRecords.slice(0, MANUSCRIPT_GROUNDING_LIMITS.maximumResults),
     errors
   };
 }
@@ -61,6 +79,7 @@ function groundingFrom(published, manuscript) {
   const sources = [];
   for (const fragment of published?.projection?.fragments || []) {
     sources.push({
+      sourceId: `PUBLISHED:${published.projection.nodeCode}:${fragment.fragmentCode}`,
       sourceType: 'PUBLISHED_CANONICAL_ARTICLE',
       nodeCode: published.projection.nodeCode,
       fragmentCode: fragment.fragmentCode,
@@ -68,15 +87,18 @@ function groundingFrom(published, manuscript) {
       text: fragment.text
     });
   }
-  for (const record of manuscript?.records || []) {
+  for (const record of manuscript?.groundingRecords || manuscript?.records || []) {
     sources.push({
+      sourceId: `MANUSCRIPT:${record.sectionCode}`,
       sourceType: record.sourceType,
       bookCode: record.bookCode,
       partCode: record.partCode,
       sectionCode: record.sectionCode,
+      heading: record.heading,
       pageRange: record.pageRange,
       sourceDigest: record.sourceDigest,
       canonicalBinding: record.canonicalBinding,
+      readability: record.readability,
       text: record.excerpt
     });
   }
@@ -85,6 +107,53 @@ function groundingFrom(published, manuscript) {
     generatedAnswerPresent: false,
     policy: 'DOWNSTREAM_SUMMARY_OR_ANSWER_MUST_USE_ONLY_RETURNED_GROUNDING_AND_PRESERVE_SOURCE_BOUNDARIES',
     sources
+  };
+}
+
+function splitSentences(text) {
+  return String(text || '')
+    .replace(/\s+/g, ' ')
+    .match(/[^。！？!?]+[。！？!?]?/g)?.map(value => value.trim()).filter(value => value.length >= 12) || [];
+}
+
+function deterministicGroundedAnswer(query, grounding, locale) {
+  if (!grounding.allowed) return null;
+  const terms = queryTerms(query);
+  const candidates = [];
+  for (const source of grounding.sources) {
+    for (const sentence of splitSentences(source.text)) {
+      const lower = sentence.toLocaleLowerCase();
+      let score = 0;
+      for (const term of terms) if (lower.includes(term)) score += term.length > 2 ? 3 : 1;
+      if (source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE') score += 2;
+      candidates.push({ sentence, score, source });
+    }
+  }
+  candidates.sort((a, b) => b.score - a.score || a.sentence.length - b.sentence.length);
+  const selected = [];
+  const seen = new Set();
+  let chars = 0;
+  for (const item of candidates) {
+    const key = item.sentence.normalize('NFKC');
+    if (seen.has(key)) continue;
+    if (selected.length && item.score <= 0) continue;
+    const next = chars + item.sentence.length;
+    if (next > MAX_ANSWER_CHARS && selected.length) continue;
+    seen.add(key);
+    selected.push(item);
+    chars = next;
+    if (selected.length >= 4 || chars >= MAX_ANSWER_CHARS) break;
+  }
+  if (!selected.length && candidates.length) selected.push(candidates[0]);
+  if (!selected.length) return null;
+  return {
+    present: true,
+    projectionType: 'DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER',
+    generativeModelUsed: false,
+    locale,
+    text: selected.map(item => item.sentence).join(locale === 'zh-Hans' ? '\n\n' : ' '),
+    sourceReferences: [...new Set(selected.map(item => item.source.sourceId))],
+    authorityNotice: 'This answer is a question-scoped extractive projection from returned governed sources. It does not create Canonical Node or Published Article authority.'
   };
 }
 
@@ -101,7 +170,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
   if (!SOURCES.has(sourceMode)) return response({ ok: false, error: { code: 'SOURCE_MODE_UNSUPPORTED' } }, 400);
 
   let published = null;
-  let manuscript = { status: 'not_requested', records: [], errors: [] };
+  let manuscript = { status: 'not_requested', records: [], groundingRecords: [], errors: [] };
   if (sourceMode !== 'manuscript') published = await publishedProjection({ request, env, query, locale, mode });
   if (sourceMode !== 'published') manuscript = await manuscriptProjection({ env, query, locale });
 
@@ -119,6 +188,10 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
     return response({ ok: false, error: { code: 'MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE' } }, 503);
   }
 
+  const answerGrounding = groundingFrom(published, manuscript);
+  const groundedAnswer = deterministicGroundedAnswer(query, answerGrounding, locale);
+  answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);
+
   return response({
     ok: true,
     query: { text: query, locale, mode, source: sourceMode },
@@ -128,6 +201,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
       manuscript: manuscript.status,
       answerGroundingAllowed: publishedCovered || manuscriptCovered
     },
+    groundedAnswer,
     published,
     manuscript: {
       status: manuscript.status,
@@ -140,13 +214,16 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
         maximumTotalExcerptChars: MANUSCRIPT_SOURCE_LIMITS.maximumTotalExcerptChars
       }
     },
-    answerGrounding: groundingFrom(published, manuscript),
+    answerGrounding,
     authorityBoundary: {
       publishedArticleAuthorityUnchanged: true,
       completedManuscriptIsValidKnowledgeSource: true,
       sourceNativeSectionMayAnswerWithoutCanonicalNodeClaim: true,
       pendingCanonicalBindingIsNotCanonicalAuthority: true,
+      manuscriptReadabilityReviewIsSeparateFromCanonicalAcceptance: true,
       bookPurchaseAndKnowledgeQueryAreSeparateCapabilities: true
     }
   });
 }
+
+export { deterministicGroundedAnswer, groundingFrom };

@@ -1,0 +1,88 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import { loadR2RetrievalCorpus, searchManuscriptCorpus } from '../functions/knowledge-runtime/manuscript-source-runtime.js';
+import { deterministicGroundedAnswer } from '../functions/_lib/knowledge-access-api.js';
+
+const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const nodes=json('content/knowledge/registry/nodes.json');
+const nodeList=Array.isArray(nodes)?nodes:(nodes.nodes||[]);
+assert.equal(nodeList.length,716);
+assert.equal(sha('content/knowledge/registry/nodes.json'),'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
+
+const contract=json('content/knowledge/source-access/contracts/ksar-r1-r8-reconciliation-contract-v1.json');
+assert.deepEqual(contract.stage,['KSAR-R1','KSAR-R2','KSAR-R3','KSAR-R4','KSAR-R5','KSAR-R6','KSAR-R7','KSAR-R8']);
+assert.equal(contract.authorityBoundaries.KAUR2CandidateDoesNotEqualApprovedBinding,true);
+assert.equal(contract.authorityBoundaries.rawFullBookDeliveryBlocked,true);
+
+const registry=json('content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json');
+assert.equal(registry.records.length,2);
+assert.deepEqual(registry.records.map(r=>r.r2ObjectKey),['books/book-1/materialized/v2/retrieval-corpus.json','books/book-2/materialized/v1/retrieval-corpus.json']);
+assert.deepEqual(registry.records.map(r=>r.retrievalCorpusSha256),['2756bf5f18a42772d40d46cfccd141e26e07d2ca416c5a9448a36eeb037bba6a','83ae5f5af63652b1f45faf82ede922069b69e5eb2703b1ba2a617170619d2c8e']);
+assert(registry.records.every(r=>r.transportIntegrity==='ACTUAL_BYTES_SHA256_REQUIRED'));
+
+const remote=json('content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json');
+assert.equal(remote.records.length,2);
+assert(remote.records.every(r=>r.localBytesVerified===true));
+assert(remote.records.every(r=>r.expectedRetrievalCorpusSha256===registry.records.find(s=>s.sourceCode===r.sourceCode).retrievalCorpusSha256));
+
+const readability=json('content/knowledge/source-access/registries/manuscript-readability-review-v1.json');
+assert.equal(readability.recordCount,448);
+assert.equal(readability.records.length,448);
+assert.equal(Object.values(readability.riskCounts).reduce((a,b)=>a+b,0),448);
+assert(readability.records.every(r=>!Object.hasOwn(r,'text')),'Public readability registry must not contain manuscript body text.');
+assert(readability.records.every(r=>['LOW','MEDIUM','HIGH'].includes(r.riskLevel)));
+
+const bindings=json('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
+assert.equal(bindings.records.length,0,'KAU-R2 human acceptance is still pending and must not be auto-promoted by KSAR.');
+
+const fixtureSource={sourceCode:'FIXTURE',bookCode:'BOOK-1',locale:'zh-Hans',sourceSha256:'s'.repeat(64),corpusSha256:'c'.repeat(64),recordCount:1};
+const fixtureCorpus={bookCode:'BOOK-1',locale:'zh-Hans',sourceSha256:fixtureSource.sourceSha256,corpusSha256:fixtureSource.corpusSha256,recordCount:1,records:[{sectionCode:'FIX-1',segmentType:'SECTION',partCode:'P1',sequence:1,heading:'现实如何形成',startPage:1,endPage:2,textSha256:'a'.repeat(64),text:'现实形成需要区分差异、约束与结构。结构稳定之后，运行才有可以持续的载体。'}]};
+const fixtureText=JSON.stringify(fixtureCorpus);
+fixtureSource.retrievalCorpusSha256=crypto.createHash('sha256').update(fixtureText).digest('hex');
+fixtureSource.r2ObjectKey='books/fixture/retrieval-corpus.json';
+const loaded=await loadR2RetrievalCorpus({get:async key=>({body:fixtureText,key})},fixtureSource);
+assert.equal(loaded.retrievalCorpusSha256,fixtureSource.retrievalCorpusSha256);
+await assert.rejects(()=>loadR2RetrievalCorpus({get:async()=>({body:fixtureText+' '})},fixtureSource),error=>error?.code==='MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH');
+
+const quality={records:[{sectionCode:'FIX-1',reviewStatus:'PENDING_HUMAN_READABILITY_REVIEW',riskLevel:'MEDIUM',runtimeEligibility:'SOURCE_ONLY_WITH_CAUTION',findingCodes:['FIGURE_OR_DIAGRAM_TEXT_LIKELY']} ]};
+const searched=searchManuscriptCorpus({corpus:fixtureCorpus,source:fixtureSource,bindings,readability:quality,query:'现实 结构'});
+assert.equal(searched.length,1);
+assert.equal(searched[0].readability.runtimeEligibility,'SOURCE_ONLY_WITH_CAUTION');
+const excluded=searchManuscriptCorpus({corpus:fixtureCorpus,source:fixtureSource,bindings,readability:{records:[{sectionCode:'FIX-1',riskLevel:'HIGH',runtimeEligibility:'EXCLUDE_UNTIL_REVIEW'}]},query:'现实'});
+assert.equal(excluded.length,0);
+
+const grounding={allowed:true,sources:[{sourceId:'MANUSCRIPT:FIX-1',sourceType:'COMPLETED_MANUSCRIPT',text:'现实形成需要区分差异、约束与结构。结构稳定之后，运行才有可以持续的载体。'}]};
+const answer=deterministicGroundedAnswer('现实如何形成',grounding,'zh-Hans');
+assert.equal(answer.present,true);
+assert.equal(answer.generativeModelUsed,false);
+assert(answer.sourceReferences.includes('MANUSCRIPT:FIX-1'));
+
+const knowledgeSearch=fs.readFileSync('assets/js/pages/knowledge-search.js','utf8');
+const freeExplore=fs.readFileSync('assets/js/pages/free-explore.js','utf8');
+const library=fs.readFileSync('assets/js/pages/library.js','utf8');
+assert(knowledgeSearch.includes('renderGroundedAnswer'));
+assert(knowledgeSearch.includes("new URLSearchParams(location.search).get('q')"));
+assert(freeExplore.includes('/knowledge-search'));
+assert(library.includes("id: 'knowledge-access'"));
+
+const freeze=json('content/knowledge/source-access/freeze/ksar-r1-r8-reconciliation-v1.json');
+assert.equal(freeze.status,'DEVELOPMENT_RECONCILED_REMOTE_AND_HUMAN_GATES_PENDING');
+assert.equal(freeze.acceptance.productionFreezeEligible,false);
+assert(freeze.productionBlockers.includes('REMOTE_R2_GET_SHA256_VERIFICATION_PENDING'));
+assert(freeze.productionBlockers.includes('HUMAN_MANUSCRIPT_READABILITY_REVIEW_PENDING'));
+
+const pkg=json('package.json');
+assert.equal(pkg.scripts['check:ksar-r1-r8'],'node scripts/check-ksar-r1-r8-reconciliation.mjs');
+assert(pkg.scripts.check.includes('npm run check:ksar-r1-r8'));
+assert.equal(pkg.scripts['ksar:review'],'node scripts/build-ksar-manuscript-review-projection.mjs');
+assert.equal(pkg.scripts['ksar:reviewed-corpus'],'node scripts/build-ksar-reviewed-corpus.mjs');
+assert.equal(pkg.scripts['ksar:verify-corpora'],'node scripts/verify-ksar-r2-corpora.mjs');
+
+console.log('✓ KSAR-R1～R8 Reconciliation passed.');
+console.log('  R1 actual-bytes corpus hashes and canonical books/ object keys are reconciled; remote GET evidence remains explicit pending state.');
+console.log('  R2-R4 human readability review projection/triage/reviewed-corpus builder are present without putting manuscript bodies in public Git.');
+console.log('  R5-R6 unified hybrid retrieval plus deterministic grounded answer projection are active.');
+console.log('  R7 Knowledge Search, Free Explore and Library gateways route into Knowledge Access.');
+console.log('  R8 production freeze remains correctly blocked until remote R2 hash verification and human readability review are complete.');

@@ -10,6 +10,16 @@ const escapeHtml=value=>String(value??'').replaceAll('&','&amp;').replaceAll('<'
 
 function setStatus(message,state='idle'){status.textContent=message;status.dataset.state=state;}
 function pageLabel(range){return range.start===range.end?`p. ${range.start}`:`pp. ${range.start}–${range.end}`;}
+function renderGroundedAnswer(payload){
+  const answer=payload.groundedAnswer;
+  if(!answer?.present||!answer.text)return '';
+  return `<section class="knowledge-source-group knowledge-grounded-answer">
+    <p class="knowledge-eyebrow">PHI OS grounded answer · ${escapeHtml(answer.projectionType)}</p>
+    <h2>Answer</h2>
+    ${answer.text.split(/\n{2,}/).map(paragraph=>`<p>${escapeHtml(paragraph)}</p>`).join('')}
+    <p class="knowledge-source-meta">Grounded in ${escapeHtml(String(answer.sourceReferences?.length||0))} governed source fragment(s). No generative model was used.</p>
+  </section>`;
+}
 function renderPublished(payload){
   const published=payload.published;
   if(!published?.projection||published.coverage?.level==='none')return '';
@@ -31,6 +41,7 @@ function renderManuscript(payload){
       <h3>${escapeHtml(record.heading)}</h3></header>
       <p>${escapeHtml(record.excerpt)}</p>
       <p class="knowledge-source-meta">Canonical binding: ${escapeHtml(record.canonicalBinding.status)}${record.canonicalBinding.nodeCodes?.length?` · ${escapeHtml(record.canonicalBinding.nodeCodes.join(', '))}`:''}</p>
+      <p class="knowledge-source-meta">Readability: ${escapeHtml(record.readability?.reviewStatus||'UNREVIEWED')} · risk ${escapeHtml(record.readability?.riskLevel||'UNKNOWN')}</p>
       <a class="knowledge-action" href="${escapeHtml(record.bookRoute)}">Explore the volume</a>
     </article>`).join('')}</div>
   </section>`;
@@ -39,7 +50,7 @@ function render(payload){
   if(payload.coverage.level==='none'){results.replaceChildren();setStatus('No published or completed-manuscript coverage is available for this query.','no_coverage');return;}
   const article=document.createElement('article');
   article.className='knowledge-search-result';
-  article.innerHTML=`${renderPublished(payload)}${renderManuscript(payload)}<aside class="knowledge-search-boundary"><strong>Knowledge source boundary</strong><p>Published Articles remain publication authority. Completed manuscripts may ground question-scoped knowledge before Article publication. A section with pending Canonical binding is shown as manuscript source and is not presented as a Canonical Node.</p></aside>`;
+  article.innerHTML=`${renderGroundedAnswer(payload)}${renderPublished(payload)}${renderManuscript(payload)}<aside class="knowledge-search-boundary"><strong>Knowledge source boundary</strong><p>Published Articles remain publication authority. Completed manuscripts may ground question-scoped knowledge before Article publication. A section with pending Canonical binding is shown as manuscript source and is not presented as a Canonical Node.</p></aside>`;
   results.replaceChildren(article);
   setStatus(`Knowledge coverage: ${payload.coverage.level}. Manuscript sources: ${payload.manuscript?.records?.length||0}.`,'results');
 }
@@ -53,3 +64,6 @@ async function submit(event){
 }
 form?.addEventListener('submit',submit);
 onLocaleChange(()=>{if(input.value.trim())submit();});
+
+const initialQuery=new URLSearchParams(location.search).get('q');
+if(initialQuery){input.value=initialQuery;queueMicrotask(()=>submit());}
