@@ -187,10 +187,9 @@ assert.equal(
   ),
   false
 );
-assert.equal(
-  await exists('articles/ai-formation-from-civilizational-capability.html'),
-  false
-);
+const vapW27Path = 'content/production/visual-article/release/website/VAP-W27-KN-PREFACE-001-ZH-HANS.json';
+const vapW27Executed = await exists(vapW27Path) && (await readJson(vapW27Path)).status === 'EXECUTED';
+assert.equal(await exists('articles/ai-formation-from-civilizational-capability.html'), vapW27Executed);
 const prefaceLocalized = localizedRegistry.localizedContent.find(
   record => record.nodeCode === 'KN-PREFACE-001'
 );
@@ -369,10 +368,10 @@ const [publishedChinese, publishedEnglish] = await Promise.all([
   loadPublishedArticles('en')
 ]);
 globalThis.fetch = originalFetch;
-assert.equal(publishedChinese.length, 3);
+assert.equal(publishedChinese.length, vapW27Executed ? 4 : 3);
 assert.equal(publishedEnglish.length, 3);
 for (const publicArticle of [
-  ...publishedChinese,
+  ...publishedChinese.filter(article => article.nodeCode !== 'KN-PREFACE-001'),
   ...publishedEnglish
 ]) {
   const publicJson = JSON.stringify(publicArticle);

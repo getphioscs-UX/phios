@@ -9,14 +9,14 @@ export const releasePath = (nodeCode, locale) => `${RELEASE_ROOT}/candidates/VAC
 
 const PATHS = Object.freeze({
   article: 'content/knowledge/public/authority/articles/zh-Hans/KN-PREFACE-001.json',
-  figure: 'content/production/car/published/PUBLISHED-ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-001.json',
-  presentation: 'content/production/cpr/presentations/PRESENTATION-ARTICLE-KN-PREFACE-001-ZH-HANS-v1.json',
+  figure: 'content/production/car/published/PUBLISHED-ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-002.json',
+  presentation: 'content/production/cpr/presentations/PRESENTATION-ARTICLE-KN-PREFACE-001-ZH-HANS-v2.json',
   meaningMap: 'content/production/canonical-meaning/authority/CM-KNOWLEDGE-AUTHORITY-KN-PREFACE-001-v1.json',
   carBrief: 'content/production/car/briefs/CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-002.json',
   figureCandidate: 'content/production/car/candidates/CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-002/candidate.v1.json',
   carActivation: 'content/production/car/activation/vap-w12-w19-car-production-activation-v1.json',
   carBridge: 'content/production/car/authority/car-production-meaning-bridge-v1.json',
-  pdsAcceptance: 'content/production/visual-article/acceptance/vap-w22-w24-cpr-pds-production-presentation-acceptance-v1.json'
+  pdsAcceptance: 'content/production/visual-article/acceptance/vap-w22-w24-cpr-pds-production-presentation-acceptance-v2.json'
 });
 
 const read = (root, relative) => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));

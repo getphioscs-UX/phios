@@ -113,6 +113,7 @@ const navigationOperationalization = await json(
 const authorizedW12Updates =
   navigationOperationalization.authorizedFrozenArtifactUpdates || {};
 for (const [file, expected] of Object.entries(registry.frozenArtifacts)) {
+  if (file === 'wrangler.jsonc') { const reconciliation = await json('content/registry/m3c-w3-wrangler-successor-reconciliation-v1.json'); assert.equal(reconciliation.predecessor.wranglerSha256, expected); assert.equal(await sha256(file), reconciliation.successor.wranglerSha256); continue; }
   assert.equal(
     await sha256(file),
     authorizedW12Updates[file] || expected,

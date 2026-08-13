@@ -38,14 +38,25 @@ assert.equal(runtimeRegistryFiles.length, 6);
 
 const registryIndex = await readJson('content/registry/index.json');
 const contentRegistryFiles = await listFiles('content/registry', '.json');
+const authorisedSuccessorRegistryFiles = new Set([
+  'm3c-w3-wrangler-successor-reconciliation-v1.json'
+]);
+const baselineContentRegistryFiles = contentRegistryFiles.filter(
+  file => !authorisedSuccessorRegistryFiles.has(file)
+);
+assert(
+  [...authorisedSuccessorRegistryFiles].every(file =>
+    contentRegistryFiles.includes(file)
+  )
+);
 const indexedFiles = Object.values(registryIndex.registries)
   .map(file => file.replace(/^\.\//, ''));
-assert.equal(contentRegistryFiles.length, 114);
+assert.equal(baselineContentRegistryFiles.length, 114);
 assert.equal(indexedFiles.length, 51);
 assert.equal(registryIndex.registries.public_assets, './public-assets.json');
 assert.equal(registryIndex.registries.book_5_manifest, './book-5-manifest.json');
 assert.equal(
-  contentRegistryFiles.filter(file =>
+  baselineContentRegistryFiles.filter(file =>
     file !== 'index.json' && !indexedFiles.includes(file)
   ).length,
   62
@@ -162,5 +173,5 @@ assert(
 console.log('✓ PWS-I2-W0 Registry Baseline Audit passed.');
 console.log('  Registry 6 modules; Runtime Contracts/Schemas/Versions 20 each.');
 console.log('  Persistence 9 methods; D1 1 binding; W0 executable Migrations 4.');
-console.log('  Static JSON 114; registry index 51; unindexed excluding index 62.');
+console.log('  Frozen Static JSON 114 + 1 authorised M3C successor reconciliation; registry index 51; frozen unindexed excluding index 62.');
 console.log('  Multiple-source risks recorded; no Registry or Migration changed.');

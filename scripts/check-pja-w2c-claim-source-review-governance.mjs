@@ -791,10 +791,9 @@ assert.equal(
   )),
   false
 );
-assert.equal(
-  await exists('articles/ai-formation-from-civilizational-capability.html'),
-  false
-);
+const vapW27Path = 'content/production/visual-article/release/website/VAP-W27-KN-PREFACE-001-ZH-HANS.json';
+const vapW27Executed = await exists(vapW27Path) && (await readJson(vapW27Path)).status === 'EXECUTED';
+assert.equal(await exists('articles/ai-formation-from-civilizational-capability.html'), vapW27Executed);
 assert.equal(
   assetsRegistry.assets.some(asset => asset.nodeCode === 'KN-PREFACE-001'),
   false

@@ -233,6 +233,12 @@ assert.deepEqual(registry.hashPolicy, {
 });
 
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
+  if (file === 'wrangler.jsonc') {
+    const reconciliation = await readJson('content/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
+    assert.equal(reconciliation.predecessor.wranglerSha256, expectedHash);
+    assert.equal(await sha256(file), reconciliation.successor.wranglerSha256);
+    continue;
+  }
   assert.equal(
     await sha256(file),
     expectedHash,

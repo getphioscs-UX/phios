@@ -189,13 +189,26 @@ assert.deepEqual(registry.hashPolicy, {
   byteOrderMarkIgnored: true
 });
 
+const wranglerReconciliation = await readJson('content/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
+  if (file === 'wrangler.jsonc') continue;
   assert.equal(
     await sha256(file),
     expectedHash,
     `Frozen M3C-W3 artifact changed: ${file}`
   );
 }
+assert.equal(wranglerReconciliation.predecessor.wranglerSha256, registry.frozenArtifacts['wrangler.jsonc']);
+assert.equal(await sha256('wrangler.jsonc'), wranglerReconciliation.successor.wranglerSha256);
+const wrangler = JSON.parse((await read('wrangler.jsonc')).replace(/^\uFEFF/, ''));
+assert.equal(wrangler.pages_build_output_dir, wranglerReconciliation.preserved.pagesBuildOutputDirectory);
+assert.equal(wrangler.ai.binding, wranglerReconciliation.preserved.aiBinding);
+assert.equal(wrangler.d1_databases.length, 1);
+assert.equal(wrangler.d1_databases[0].binding, wranglerReconciliation.preserved.d1Binding);
+assert.equal(wrangler.d1_databases[0].database_name, wranglerReconciliation.preserved.d1DatabaseName);
+assert.deepEqual(wrangler.r2_buckets, [{ binding: wranglerReconciliation.allowedDelta.r2Binding, bucket_name: wranglerReconciliation.allowedDelta.bucketName }]);
+assert.equal(wranglerReconciliation.preserved.runtimeContractsChanged, false);
+assert.equal(wranglerReconciliation.preserved.entryPresentationChanged, false);
 
 for (const [key, value] of Object.entries(registry.acceptance)) {
   if (key.endsWith('Changed')) {
