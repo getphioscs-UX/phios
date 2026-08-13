@@ -22,6 +22,7 @@ import {
 
 const root = process.cwd();
 const briefCode = 'CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
+const successorBriefCode = 'CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-002';
 const pilotCandidateCode = 'CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
 const pilotAssetCode = 'ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
 const registries = {
@@ -128,13 +129,14 @@ await refreshCarProductionActivation(tmp);
 
 const svg = path.join(tmp, 'external-chatgpt-candidate.svg');
 fs.writeFileSync(svg, '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800"><rect width="1200" height="800"/><circle cx="600" cy="400" r="100"/></svg>');
-const candidate = await importCandidate({ root: tmp, briefCode, file: svg, modelCode: null, createdAt: '2026-08-11T12:00:00.000Z' });
+const candidate = await importCandidate({ root: tmp, briefCode: successorBriefCode, file: svg, modelCode: null, createdAt: '2026-08-11T12:00:00.000Z' });
 assert.equal(candidate.providerLineage.mode, 'external_manual');
 assert.equal(candidate.providerLineage.providerCode, 'OPENAI_CHATGPT');
 assert.equal(candidate.providerLineage.modelCode, null);
 assert.equal(candidate.candidateState, 'candidate');
-assert.equal(candidate.assetBriefCode, briefCode);
+assert.equal(candidate.assetBriefCode, successorBriefCode);
 assert.equal(candidate.assetType, 'DIAGRAM');
+assert.equal(candidate.candidateCode, 'CAR-CAND-KN-PREFACE-001-MECHANISM-ZH-HANS-002');
 assert.equal(readJson(tmp, 'content/production/car/activation/vap-w12-w19-car-production-activation-v1.json').status, 'PILOT_FIGURE_CANDIDATE_IMPORTED_AWAITING_HUMAN_ASSET_REVIEW');
 
 const dimsPass = { semanticAccuracy: 'pass', knowledgeTraceability: 'pass', brandCompliance: 'pass', accessibility: 'pass', rightsLicense: 'pass' };

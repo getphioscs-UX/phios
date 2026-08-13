@@ -17,8 +17,12 @@ Knowledge Authority:
 - Published Article Authority: content/knowledge/public/authority/articles/zh-Hans/KN-PREFACE-001.json
 
 Meaning Authority:
-- CM-DECISION-INTERNAL-RESPONSE
-- Resolution mode: legacy_car_w2_pilot_bridge
+- CM-CONNECTION-SCU-12
+- CM-CONNECTION-SCU-13
+- CM-CONNECTION-SCU-22
+- CM-FORMATION-SDU-17
+- CM-FORMATION-SDU-64
+- Resolution mode: cm_knowledge_production_authority
 
 The visual must establish:
 1. 当人们谈论人工智能时，最容易注意到的是模型的生成能力、计算速度或对复杂任务的处理表现。

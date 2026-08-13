@@ -28,6 +28,7 @@ const EXISTING = {
   articleRefs: 'content/professional/canonical-asset-runtime/registries/canonical-article-reference-registry-v1.json',
   coveragePolicy: 'content/professional/canonical-asset-runtime/policies/canonical-asset-brief-coverage-policy-v1.json',
   bridge: `${CAR_PROD}/authority/car-production-meaning-bridge-v1.json`
+  ,productionMeaningAuthority: 'content/production/canonical-meaning/authority/CM-KNOWLEDGE-AUTHORITY-KN-PREFACE-001-v1.json'
 };
 
 export const stable = value => Array.isArray(value)
@@ -91,6 +92,7 @@ export function loadAuthorities(root = ROOT) {
   const articleRefs = readJson(root, EXISTING.articleRefs);
   const policy = readJson(root, EXISTING.coveragePolicy);
   const bridge = readJson(root, EXISTING.bridge);
+  const productionMeaningAuthority = exists(root, EXISTING.productionMeaningAuthority) ? readJson(root, EXISTING.productionMeaningAuthority) : null;
   return {
     assetTypes: assetTypes.assetTypes,
     meanings: [...meaningCodes.meaningCodes, legacyMeaning],
@@ -103,11 +105,21 @@ export function loadAuthorities(root = ROOT) {
     minimumPublishedFragmentCount: policy.minimumPublishedFragmentCount,
     pdsReferences: [pds.source.canonicalFile, EXISTING.pds],
     articleReferences: articleRefs.references || articleRefs.records || [],
-    bridge
+    bridge,
+    productionMeaningAuthority
   };
 }
 
 export function resolveMeaningReferences(nodeCode, authorities) {
+  const production = authorities.productionMeaningAuthority;
+  if (production?.productionStatus === 'active' && production.nodeCode === nodeCode) {
+    assert(production.boundaries?.fixtureMeaningAllowed === false, 'CAR_PRODUCTION_FIXTURE_MEANING_FORBIDDEN');
+    assert(production.boundaries?.legacyBridgeMeaningAllowed === false, 'CAR_PRODUCTION_LEGACY_BRIDGE_FORBIDDEN');
+    const references = (production.mappings || []).filter(record => record.status === 'active').map(record => record.meaningCode);
+    assert(references.length > 0, 'CAR_PRODUCTION_MEANING_AUTHORITY_EMPTY');
+    assert(references.every(code => authorities.meaningCodes.some(record => record.meaningCode === code)), 'CAR_PRODUCTION_MEANING_CODE_NOT_REGISTERED');
+    return { references, mode: 'cm_knowledge_production_authority', authorityPath: EXISTING.productionMeaningAuthority, authorityDigest: production.authorityDigest };
+  }
   const direct = authorities.meaningCodes.filter(record => {
     const ka = record.knowledgeAuthority || {};
     return [...(ka.primaryNodeCodes || []), ...(ka.supportingNodeCodes || [])].includes(nodeCode);
@@ -165,7 +177,8 @@ export function deriveBriefInput({ root = ROOT, nodeCode, type, locale = 'zh-Han
     textPolicy: 'no_text_unless_explicitly_permitted',
     sourceAssemblyCodes: assemblies.map(item => item.assemblyCode).sort()
   };
-  const briefCode = `CAB-${nodeCodeSegment(nodeCode)}-${kind.kindCode}-${localeCode(locale)}-001`;
+  const sequence = meaning.mode === 'cm_knowledge_production_authority' ? '002' : '001';
+  const briefCode = `CAB-${nodeCodeSegment(nodeCode)}-${kind.kindCode}-${localeCode(locale)}-${sequence}`;
   return {
     input: { briefCode, assetType: kind.assetType, nodeCode, meaningReferences: meaning.references, knowledgeReferences: [nodeCode], locale, audience: 'public_reader', purpose, mustEstablish, mustInclude, mustNotInclude, visualOrNarrativeContract, accessibilityRequirements: localeZh ? ['提供简洁、非装饰性的替代文字。', '不得只依赖颜色表达差异。', '关键关系必须在无颜色条件下仍可理解。'] : ['Provide concise non-decorative alternative text.', 'Do not rely on color alone.', 'Key relationships must remain understandable without color.'] },
     authorities,
@@ -331,7 +344,7 @@ export function deriveCarProductionActivation(root = ROOT) {
   const approvalRegistry = readJson(root, APPROVAL_REGISTRY);
   const mediaRegistry = readJson(root, MEDIA_REGISTRY);
   const publishedRegistry = readJson(root, PUBLISHED_REGISTRY);
-  const pilotBriefCode = 'CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
+  const pilotBriefCode = briefRegistry.briefs.filter(x => x.nodeCode === 'KN-PREFACE-001' && x.assetType === 'DIAGRAM' && x.locale === 'zh-Hans' && x.state === 'validated_frozen').map(x => x.briefCode).sort().at(-1) || 'CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
   const pilotCandidateEntry = candidateRegistry.candidates.find(x => x.briefCode === pilotBriefCode) || null;
   const pilotReviews = pilotCandidateEntry ? reviewRegistry.reviews.filter(x => x.candidateCode === pilotCandidateEntry.candidateCode) : [];
   const pilotApprovals = pilotCandidateEntry ? approvalRegistry.approvals.filter(x => x.candidateCode === pilotCandidateEntry.candidateCode) : [];
@@ -421,7 +434,7 @@ export function resolveMedia(root, candidateCode) { const registry=readJson(root
 export async function importCandidate({ root = ROOT, briefCode, file, modelCode = null, createdAt = new Date().toISOString() }) {
   const { brief }=resolveBriefByCode(root,briefCode); validateProductionBrief({root,brief}); assert(exists(root,`${CAR_PROD}/freezes/${briefCode}.freeze.json`),'CAR_PRODUCTION_BRIEF_MUST_BE_FROZEN');
   const kind=briefCode.includes('-MECHANISM-')?normalizeProductionKind('mechanism_diagram'):normalizeProductionKind('hero_illustration'); const ext=path.extname(file).toLowerCase(); assert(['.webp','.avif','.svg'].includes(ext),'CAR_PRODUCTION_CANDIDATE_FILE_TYPE_UNSUPPORTED',ext);
-  const bytes=fs.readFileSync(file); const mime=inferMime(file); const dims=inferDimensions(bytes,ext,{}); const suffix=`${kind.kindCode}-${localeCode(brief.locale)}-001`; const assetCode=`ASSET-${brief.nodeCode}-${suffix}`; const candidateCode=`CAR-CAND-${brief.nodeCode}-${suffix}`;
+  const bytes=fs.readFileSync(file); const mime=inferMime(file); const dims=inferDimensions(bytes,ext,{}); const sequence=brief.briefCode.match(/-(\d{3})$/)?.[1] || '001'; const suffix=`${kind.kindCode}-${localeCode(brief.locale)}-${sequence}`; const assetCode=`ASSET-${brief.nodeCode}-${suffix}`; const candidateCode=`CAR-CAND-${brief.nodeCode}-${suffix}`;
   const payload={ fileName:path.basename(file), contentType:mime, fileDigest:fileDigest(bytes), byteLength:bytes.length, width:dims.width, height:dims.height };
   const providerLineage={ mode:'external_manual', providerCode:'OPENAI_CHATGPT', modelCode:modelCode||null, invocationDigest:null, source:'chatgpt_figure_brief_manual_handoff' };
   const body={ candidateCode,candidateVersion:'1.0.0',assetCode,assetType:brief.assetType,nodeCode:brief.nodeCode,assetBriefCode:brief.briefCode,assetBriefDigest:brief.briefDigest,meaningReferences:[...brief.meaningReferences].sort(),knowledgeReferences:[...brief.knowledgeReferences].sort(),sourceFragmentDigests:[...brief.sourceFragmentDigests].sort(),locale:brief.locale,candidatePayload:payload,providerLineage,candidateState:'candidate',createdAt };
