@@ -7,11 +7,10 @@ const statusPath='content/knowledge/source-access/registries/ksar-r8-production-
 const finalExists=fs.existsSync(finalPath);
 const statusExists=fs.existsSync(statusPath);
 
-assert.equal(finalExists,statusExists,'KSAR-R8 final freeze and production status must be created as one successor pair.');
-
 if(finalExists){
   await import('./check-ksar-r8-production-freeze.mjs');
 }else{
+  assert.equal(statusExists,false,'KSAR-R8 production status cannot exist without its final freeze.');
   const verification=json('content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json');
   assert.equal(verification.status,'REVIEWED_CORPUS_LOCAL_BYTES_RECONCILED_REMOTE_GET_PENDING');
   assert.equal(verification.records.length,2);

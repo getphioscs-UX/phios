@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { buildVapW5rPortfolio, stableJson, VAP_W5R_BASELINE, VAP_W5R_CONTRACT, VAP_W5R_OUTPUT } from './lib/visual-article-production/scalable-article-production-portfolio-v1.mjs';
@@ -8,6 +9,9 @@ const readJson = relative => JSON.parse(fs.readFileSync(path.join(root, relative
 const contract = readJson(VAP_W5R_CONTRACT);
 const actual = readJson(VAP_W5R_OUTPUT);
 const expected = buildVapW5rPortfolio(root);
+const r5 = readJson('content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json');
+const currentNodes = readJson('content/knowledge/registry/nodes.json');
+const digest = value => crypto.createHash('sha256').update(value, 'utf8').digest('hex');
 
 assert.equal(contract.contractCode, 'PHI-OS-VAP-W5R-SCALABLE-ARTICLE-PRODUCTION-PORTFOLIO-v1');
 assert.equal(contract.contractVersion, '1.0.0');
@@ -17,7 +21,16 @@ assert.equal(contract.signalRules.planningSignalMayNotAutoAssignArticleRole, tru
 assert.equal(contract.signalRules.frozenHumanProductionDecisionOverridesOlderPlanningSignals, true);
 assert.equal(contract.invariants.canonicalNodeCountDoesNotEqualArticleCount, true);
 
-assert.equal(stableJson(actual), stableJson(expected), 'VAP-W5R portfolio must rebuild deterministically from current Canonical/KPP/C3/Published authority and the existing PJA scalable portfolio runtime.');
+if (r5.status === 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY') {
+  assert.equal(currentNodes.nodes.length, 718);
+  assert.equal(actual.entries.length, 716, 'Frozen VAP-W5R must remain a 716-node predecessor projection until a governed VAP successor is accepted.');
+  const currentCodes = currentNodes.nodes.map(node => node.nodeCode).sort();
+  const predecessorCodes = currentCodes.filter(code => !r5.appliedDelta.newNodeCodes.includes(code));
+  const actualCodes = actual.entries.map(entry => entry.nodeCode).sort();
+  assert.deepEqual(actualCodes, predecessorCodes, 'VAP-W5R must cover every KAU-R5 predecessor identity exactly once.');
+  assert.equal(digest(`${actualCodes.join('\n')}\n`), r5.canonicalAuthority.predecessorNodeCodeSetSha256);
+  assert.deepEqual(currentCodes.filter(code => !actualCodes.includes(code)), r5.appliedDelta.newNodeCodes.slice().sort(), 'Only the two KAU-R5 admissions may await a governed VAP successor.');
+} else assert.equal(stableJson(actual), stableJson(expected), 'VAP-W5R portfolio must rebuild deterministically from current Canonical/KPP/C3/Published authority and the existing PJA scalable portfolio runtime.');
 assert.equal(actual.status, 'SCALABLE_ARTICLE_PRODUCTION_PORTFOLIO_ACTIVE');
 assert.equal(actual.authority, 'DERIVED_PRODUCTION_PLANNING_PROJECTION_ONLY');
 assert.equal(actual.summary.canonicalNodeCount, 716);
@@ -100,6 +113,7 @@ assert.ok(packageJson.scripts.postcheck.includes('npm run check:vap-b') || packa
 console.log('✓ VAP-W5R Scalable Article Production Portfolio passed.');
 console.log('✓ Existing PJA-W3R1 scalable portfolio runtime is reused; no second Canonical Registry or duplicate portfolio engine is created.');
 console.log('✓ 716 Canonical Nodes are visible in one governed planning projection, but 716 Nodes are NOT auto-declared as 716 Articles.');
+if (r5.status === 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY') console.log('✓ Frozen VAP-W5R covers all 716 KAU-R5 predecessor identities; the 2 later P7 admissions require a separate governed VAP successor.');
 console.log('✓ Current portfolio: 4 published Article nodes protected, 3 explicit non-Article Wave 1 outputs, 6 W6A-approved Article intents, 0 remaining high-signal decisions, and 703 further Article decisions pending.');
 console.log('✓ Article planning backlog remains 709 because approved-but-unpublished Article intents remain in production; current new-Article execution targets = 6 through W6A successor authority.');
 console.log('✓ Existing mature PJA wave maximum remains 24; W5R does not auto-create waves, invoke providers, create Candidates, or publish.');
