@@ -6,9 +6,12 @@ import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 
 const ROOT=process.cwd();
-const registryPath=path.join(ROOT,'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json');
+const sourceRegistryPath=path.join(ROOT,'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json');
+const registryPath=path.join(ROOT,'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json');
 const verificationPath=path.join(ROOT,'content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json');
+const sourceRegistry=JSON.parse(fs.readFileSync(sourceRegistryPath,'utf8'));
 const registry=JSON.parse(fs.readFileSync(registryPath,'utf8'));
+const bucketName=sourceRegistry.bucketName;
 const verification=JSON.parse(fs.readFileSync(verificationPath,'utf8'));
 const args=process.argv.slice(2);
 const corpusDir=path.resolve(args.find(arg=>!arg.startsWith('--'))||process.env.KSAR_PRIVATE_CORPUS_DIR||'');
@@ -24,7 +27,7 @@ function wrangler(command){
 for(const source of registry.records){
   const file=localFile(source.r2ObjectKey); if(!file) throw new Error(`Missing local file ${source.r2ObjectKey}`);
   const localHash=sha(file); if(localHash!==source.retrievalCorpusSha256) throw new Error(`Local hash mismatch ${source.sourceCode}`);
-  const target=`${registry.bucketName}/${source.r2ObjectKey}`;
+  const target=`${bucketName}/${source.r2ObjectKey}`;
   if(upload) wrangler(['r2','object','put',target,`--file=${file}`,'--remote']);
   const remoteFile=path.join(os.tmpdir(),`phios-ksar-${source.bookCode.toLowerCase()}-${process.pid}.json`);
   try{
@@ -36,7 +39,7 @@ for(const source of registry.records){
   } finally { if(fs.existsSync(remoteFile)) fs.rmSync(remoteFile,{force:true}); }
 }
 if(write){
-  verification.status='REMOTE_GET_SHA256_VERIFIED';
+  verification.status='REVIEWED_CORPUS_REMOTE_GET_SHA256_VERIFIED';
   fs.writeFileSync(verificationPath,JSON.stringify(verification,null,2)+'\n','utf8');
   console.log(`✓ updated ${verificationPath}`);
 } else {

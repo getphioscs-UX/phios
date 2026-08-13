@@ -1,8 +1,8 @@
 {
   "schemaVersion": "PHI-OS-KSAR-R1-R2-OBJECT-VERIFICATION-v1.0.0",
   "stage": "KSAR-R1",
-  "status": "LOCAL_BYTES_RECONCILED_REMOTE_GET_PENDING",
-  "baselineCommit": "5f6c3f07ef86164ba3ab0655286ec349e9901156",
+  "status": "REVIEWED_CORPUS_LOCAL_BYTES_RECONCILED_REMOTE_GET_PENDING",
+  "baselineCommit": "a8e6c3e9cd1495c407df321cfb94cdaa60e6446a",
   "bucketName": "phios-private-manuscripts",
   "rules": {
     "objectKeyMustMatchRegistry": true,
@@ -15,21 +15,25 @@
     {
       "sourceCode": "MKS-BOOK-1-V2-ZH-HANS",
       "bookCode": "BOOK-1",
-      "r2ObjectKey": "books/book-1/materialized/v2/retrieval-corpus.json",
-      "expectedRetrievalCorpusSha256": "2756bf5f18a42772d40d46cfccd141e26e07d2ca416c5a9448a36eeb037bba6a",
+      "corpusAuthority": "HUMAN_REVIEWED_MANUSCRIPT_DERIVATIVE",
+      "r2ObjectKey": "books/book-1/materialized/v2/reviewed/retrieval-corpus.json",
+      "expectedRetrievalCorpusSha256": "286fecbd38a67b765d83647b36a19e9484b7b228a34235ee4a0f2cb3856a19d6",
       "localBytesVerified": true,
       "remoteObjectGetVerified": false,
       "remoteBytesSha256": null,
+      "humanReviewGateClosed": true,
       "productionEligible": false
     },
     {
       "sourceCode": "MKS-BOOK-2-V1-ZH-HANS",
       "bookCode": "BOOK-2",
-      "r2ObjectKey": "books/book-2/materialized/v1/retrieval-corpus.json",
-      "expectedRetrievalCorpusSha256": "83ae5f5af63652b1f45faf82ede922069b69e5eb2703b1ba2a617170619d2c8e",
+      "corpusAuthority": "HUMAN_REVIEWED_MANUSCRIPT_DERIVATIVE",
+      "r2ObjectKey": "books/book-2/materialized/v1/reviewed/retrieval-corpus.json",
+      "expectedRetrievalCorpusSha256": "cb843896992792db44e98795ed8a4fa8edbb057f59148d4d20f42321557cc3ef",
       "localBytesVerified": true,
       "remoteObjectGetVerified": false,
       "remoteBytesSha256": null,
+      "humanReviewGateClosed": true,
       "productionEligible": false
     }
   ]

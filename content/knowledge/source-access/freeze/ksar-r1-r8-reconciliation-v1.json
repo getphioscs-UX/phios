@@ -10,7 +10,7 @@
     "KSAR-R7",
     "KSAR-R8"
   ],
-  "status": "DEVELOPMENT_RECONCILED_REMOTE_AND_HUMAN_GATES_PENDING",
+  "status": "HUMAN_REVIEW_GATE_CLOSED_REMOTE_R2_GATE_PENDING",
   "baselineCommit": "5f6c3f07ef86164ba3ab0655286ec349e9901156",
   "acceptance": {
     "canonical716NodesUntouched": true,
@@ -19,16 +19,22 @@
     "remoteR2GetVerificationComplete": false,
     "manuscriptReviewProjectionReady": true,
     "automatedReadabilityTriageComplete": true,
-    "all448HumanReadabilityReviewsComplete": false,
+    "all448HumanReadabilityReviewsComplete": true,
     "reviewedCorpusBuilderReady": true,
     "unifiedPublishedAndManuscriptRetrievalReady": true,
     "deterministicGroundedAnswerProjectionReady": true,
     "rawFullBookDeliveryBlocked": true,
-    "productionFreezeEligible": false
+    "productionFreezeEligible": false,
+    "all22RepairCandidatesFinalAccepted": true,
+    "reviewedCorpusPromotionComplete": true,
+    "reviewedCorpusActiveForKnowledgeAccess": true
   },
   "productionBlockers": [
-    "REMOTE_R2_GET_SHA256_VERIFICATION_PENDING",
-    "HUMAN_MANUSCRIPT_READABILITY_REVIEW_PENDING"
+    "REMOTE_R2_GET_SHA256_VERIFICATION_PENDING"
   ],
-  "promotionRule": "Production Freeze may become eligible only when every configured R2 object is remote-GET hash verified and all runtime-eligible manuscript sections have explicit human readability dispositions."
+  "promotionRule": "Human Review Gate is closed. Production Freeze may become eligible only after every active reviewed-corpus R2 object is remote-GET actual-bytes SHA256 verified.",
+  "humanReviewClosureBaselineCommit": "a8e6c3e9cd1495c407df321cfb94cdaa60e6446a",
+  "closedGates": [
+    "HUMAN_MANUSCRIPT_READABILITY_REVIEW"
+  ]
 }

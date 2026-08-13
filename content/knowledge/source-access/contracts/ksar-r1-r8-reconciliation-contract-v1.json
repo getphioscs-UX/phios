@@ -19,15 +19,15 @@
     },
     "KSAR-R2": {
       "name": "Manuscript Human Review Projection",
-      "acceptance": "REVIEW_UI_READY"
+      "acceptance": "HUMAN_REVIEW_COMPLETE_448_OF_448"
     },
     "KSAR-R3": {
       "name": "Text / Figure / Garble Readability Triage",
-      "acceptance": "AUTOMATED_TRIAGE_COMPLETE_HUMAN_REVIEW_PENDING"
+      "acceptance": "READABILITY_FINDINGS_HUMAN_RESOLVED"
     },
     "KSAR-R4": {
       "name": "Reviewed Manuscript Corpus",
-      "acceptance": "BUILDER_READY_HUMAN_DECISIONS_PENDING"
+      "acceptance": "REVIEWED_MANUSCRIPT_CORPUS_PROMOTED"
     },
     "KSAR-R5": {
       "name": "Unified Knowledge Retrieval",
@@ -43,7 +43,7 @@
     },
     "KSAR-R8": {
       "name": "Production Acceptance & Freeze",
-      "acceptance": "RECONCILED_WITH_REMOTE_AND_HUMAN_GATES_PENDING"
+      "acceptance": "HUMAN_REVIEW_GATE_CLOSED_REMOTE_R2_GATE_PENDING"
     }
   },
   "authorityBoundaries": {
@@ -54,5 +54,11 @@
     "sourceNativeKnowledgeMayAnswerQuestions": true,
     "rawFullBookDeliveryBlocked": true,
     "bookPurchaseCapabilityPreserved": true
+  },
+  "humanReviewClosureBaselineCommit": "a8e6c3e9cd1495c407df321cfb94cdaa60e6446a",
+  "promotion": {
+    "reviewedCorpusRegistry": "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json",
+    "humanReviewClosure": "content/knowledge/review/ksar-r4-human-review-closure-v1.json",
+    "activeClientCorpus": "HUMAN_REVIEWED_MANUSCRIPT_DERIVATIVE"
   }
 }

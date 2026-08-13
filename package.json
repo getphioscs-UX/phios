@@ -895,11 +895,13 @@
     "check:ksar": "node scripts/check-ksar-manuscript-knowledge-access.mjs",
     "check:kau-r2": "node scripts/check-kau-r2-existing-canonical-node-match.mjs",
     "check:ksar-r1-r8": "node scripts/check-ksar-r1-r8-reconciliation.mjs",
-    "check:knowledge-access": "npm run check:knowledge-runtime && npm run check:ksar && npm run check:kau-r2 && npm run check:ksar-r1-r8",
+    "check:knowledge-access": "npm run check:knowledge-runtime && npm run check:ksar && npm run check:kau-r2 && npm run check:ksar-r4-r8 && npm run check:ksar-r1-r8",
     "ksar:review": "node scripts/build-ksar-manuscript-review-projection.mjs",
     "ksar:reviewed-corpus": "node scripts/build-ksar-reviewed-corpus.mjs",
     "ksar:verify-corpora": "node scripts/verify-ksar-r2-corpora.mjs",
-    "ksar:r2:verify-remote": "node scripts/verify-ksar-r2-remote.mjs"
+    "ksar:r2:verify-remote": "node scripts/verify-ksar-r2-remote.mjs",
+    "check:ksar-r4-r8": "node scripts/check-ksar-r4-r8-human-review-closure.mjs",
+    "ksar:verify-reviewed-corpora": "node scripts/verify-ksar-reviewed-corpora.mjs"
   },
   "type": "module"
 }

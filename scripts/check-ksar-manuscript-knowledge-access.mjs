@@ -19,6 +19,11 @@ assert.equal(registry.records.length, 2);
 assert.deepEqual(registry.records.map(r => r.bookCode), ['BOOK-1', 'BOOK-2']);
 assert(registry.records.every(r => r.r2ObjectKey.endsWith('/retrieval-corpus.json')));
 
+const reviewedRegistry = json('content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json');
+assert.equal(reviewedRegistry.recordCount, 448);
+assert.equal(reviewedRegistry.records.length, 2);
+assert(reviewedRegistry.records.every(r => r.humanReadabilityStatus === 'HUMAN_REVIEW_COMPLETE'));
+
 const bindings = json('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
 assert.equal(bindings.status, 'ACTIVE_PARTIAL_VOLUME_I_APPROVED');
 assert.equal(bindings.records.length, 62);
@@ -80,7 +85,7 @@ for (const forbidden of [
 
 console.log('✓ KSAR Knowledge Source Access Runtime passed.');
 console.log('  Published Canonical Article remains primary publication authority.');
-console.log('  Completed Book I/II manuscripts may ground client queries through private R2 corpora.');
+console.log('  Human-reviewed Book I/II manuscript derivatives may ground client queries through private R2 corpora.');
 console.log('  62 human-accepted Volume-I primary bindings are active; Book II and unmapped sections remain source-native/PENDING.');
 console.log('  Human-confirmed manuscript editorial corrections may be projected without mutating raw source provenance.');
 console.log('  Question-scoped excerpts are bounded; raw full-book delivery remains blocked.');

@@ -25,7 +25,9 @@ assert(registry.records.every(r=>r.transportIntegrity==='ACTUAL_BYTES_SHA256_REQ
 const remote=json('content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json');
 assert.equal(remote.records.length,2);
 assert(remote.records.every(r=>r.localBytesVerified===true));
-assert(remote.records.every(r=>r.expectedRetrievalCorpusSha256===registry.records.find(s=>s.sourceCode===r.sourceCode).retrievalCorpusSha256));
+const reviewedRegistry=json('content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json');
+assert.equal(reviewedRegistry.recordCount,448);
+assert(remote.records.every(r=>r.expectedRetrievalCorpusSha256===reviewedRegistry.records.find(s=>s.sourceCode===r.sourceCode).retrievalCorpusSha256));
 
 const readability=json('content/knowledge/source-access/registries/manuscript-readability-review-v1.json');
 assert.equal(readability.recordCount,448);
@@ -80,10 +82,12 @@ assert(freeExplore.includes('/knowledge-search'));
 assert(library.includes("id: 'knowledge-access'"));
 
 const freeze=json('content/knowledge/source-access/freeze/ksar-r1-r8-reconciliation-v1.json');
-assert.equal(freeze.status,'DEVELOPMENT_RECONCILED_REMOTE_AND_HUMAN_GATES_PENDING');
+assert.equal(freeze.status,'HUMAN_REVIEW_GATE_CLOSED_REMOTE_R2_GATE_PENDING');
 assert.equal(freeze.acceptance.productionFreezeEligible,false);
 assert(freeze.productionBlockers.includes('REMOTE_R2_GET_SHA256_VERIFICATION_PENDING'));
-assert(freeze.productionBlockers.includes('HUMAN_MANUSCRIPT_READABILITY_REVIEW_PENDING'));
+assert.equal(freeze.acceptance.all448HumanReadabilityReviewsComplete,true);
+assert.equal(freeze.acceptance.reviewedCorpusPromotionComplete,true);
+assert.deepEqual(freeze.productionBlockers,['REMOTE_R2_GET_SHA256_VERIFICATION_PENDING']);
 
 const pkg=json('package.json');
 assert.equal(pkg.scripts['check:ksar-r1-r8'],'node scripts/check-ksar-r1-r8-reconciliation.mjs');
@@ -97,4 +101,4 @@ console.log('  R1 actual-bytes corpus hashes and canonical books/ object keys ar
 console.log('  R2-R4 KAU-R3 human-accepted Volume I bindings and editorial correction projection are active without putting manuscript bodies in public Git.');
 console.log('  R5-R6 unified hybrid retrieval plus deterministic grounded answer projection are active.');
 console.log('  R7 Knowledge Search, Free Explore and Library gateways route into Knowledge Access.');
-console.log('  R8 production freeze remains correctly blocked until remote R2 hash verification and human readability review are complete.');
+console.log('  R8 Human Review Gate is closed; production freeze remains correctly blocked only until reviewed-corpus remote R2 hash verification completes.');

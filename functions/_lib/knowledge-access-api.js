@@ -37,12 +37,26 @@ async function publishedProjection({ request, env, query, locale, mode }) {
 }
 
 async function manuscriptProjection({ env, query, locale }) {
-  const [registry, bindings, corrections] = await Promise.all([
+  const [registry, reviewedRegistry, bindings, corrections] = await Promise.all([
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json'),
+    readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json'),
     readAssetJson(env, 'content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json')
   ]);
-  const sources = registry.records.filter(source => source.locale === locale);
+  const sources = registry.records
+    .filter(source => source.locale === locale)
+    .map(source => {
+      const reviewed = reviewedRegistry.records.find(record => record.sourceCode === source.sourceCode && record.locale === source.locale);
+      if (!reviewed || reviewed.humanReadabilityStatus !== 'HUMAN_REVIEW_COMPLETE') return null;
+      return {
+        ...source,
+        r2ObjectKey: reviewed.r2ObjectKey,
+        retrievalCorpusSha256: reviewed.retrievalCorpusSha256,
+        activeCorpusAuthority: reviewed.corpusAuthority,
+        humanReadabilityStatus: reviewed.humanReadabilityStatus
+      };
+    })
+    .filter(Boolean);
   if (!sources.length) return { status: 'locale_unavailable', records: [], errors: [] };
   if (!env?.MANUSCRIPTS?.get) return { status: 'storage_unavailable', records: [], errors: ['MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE'] };
 
@@ -199,6 +213,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
     authorityBoundary: {
       publishedArticleAuthorityUnchanged: true,
       completedManuscriptIsValidKnowledgeSource: true,
+      activeManuscriptCorpusIsHumanReviewed: true,
       sourceNativeSectionMayAnswerWithoutCanonicalNodeClaim: true,
       pendingCanonicalBindingIsNotCanonicalAuthority: true,
       bookPurchaseAndKnowledgeQueryAreSeparateCapabilities: true

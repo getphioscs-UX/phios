@@ -13,15 +13,20 @@
     {
       "type": "COMPLETED_MANUSCRIPT",
       "authorityRank": 2,
-      "runtime": "functions/knowledge-runtime/manuscript-source-runtime.js"
+      "runtime": "functions/knowledge-runtime/manuscript-source-runtime.js",
+      "activeCorpusAuthority": "HUMAN_REVIEWED_MANUSCRIPT_DERIVATIVE"
     }
   ],
   "artifacts": {
     "sourceRegistry": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json",
     "canonicalBindings": "content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json",
     "readabilityReview": "content/knowledge/source-access/registries/manuscript-readability-review-v1.json",
-    "r2Verification": "content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json"
+    "r2Verification": "content/knowledge/source-access/registries/r2-manuscript-object-verification-v1.json",
+    "reviewedCorpusRegistry": "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json",
+    "humanReviewClosure": "content/knowledge/review/ksar-r4-human-review-closure-v1.json"
   },
   "checker": "scripts/check-ksar-r1-r8-reconciliation.mjs",
-  "productionState": "BLOCKED_PENDING_REMOTE_R2_GET_AND_HUMAN_READABILITY_REVIEW"
+  "productionState": "BLOCKED_PENDING_REMOTE_R2_GET_ONLY",
+  "humanReviewClosureBaselineCommit": "a8e6c3e9cd1495c407df321cfb94cdaa60e6446a",
+  "humanReviewClosureChecker": "scripts/check-ksar-r4-r8-human-review-closure.mjs"
 }

@@ -64,7 +64,7 @@ function correctedRecord(record, corrections) {
 }
 
 function scoreRecord(record, query, terms) {
-  if (record.segmentType === 'FRONT_MATTER') return 0;
+  if (record.retrievalEligible === false || record.segmentType === 'FRONT_MATTER') return 0;
   const heading = normalized(record.heading);
   const text = normalized(record.text);
   const q = normalized(query);
@@ -151,6 +151,9 @@ export function searchManuscriptCorpus({
       heading: item.record.heading,
       pageRange: { start: item.record.startPage, end: item.record.endPage },
       sourceDigest: item.record.textSha256,
+      sourceMaterializationDigest: item.record.sourceTextSha256 || item.record.textSha256,
+      humanReadabilityStatus: item.record.reviewStatus || source.humanReadabilityStatus || 'UNKNOWN',
+      corpusAuthority: source.activeCorpusAuthority || source.sourceAuthority,
       score: item.score,
       excerpt,
       canonicalBinding: bindingFor(item.record.sectionCode, bindings),
