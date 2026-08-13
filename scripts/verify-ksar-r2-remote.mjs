@@ -3,7 +3,50 @@ import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import crypto from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { spawnSync } from "node:child_process";
+
+function wrangler(command) {
+  const result = process.platform === 'win32'
+    ? spawnSync(
+        'cmd.exe',
+        ['/d', '/s', '/c', 'npx', 'wrangler', ...command],
+        {
+          cwd: ROOT,
+          encoding: 'utf8',
+          stdio: 'pipe',
+          windowsHide: true
+        }
+      )
+    : spawnSync(
+        'npx',
+        ['wrangler', ...command],
+        {
+          cwd: ROOT,
+          encoding: 'utf8',
+          stdio: 'pipe'
+        }
+      );
+
+  if (result.stdout) {
+    process.stdout.write(result.stdout);
+  }
+
+  if (result.stderr) {
+    process.stderr.write(result.stderr);
+  }
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  if (result.status !== 0) {
+    throw new Error(
+      `wrangler failed (${result.status}): ${command.join(' ')}`
+    );
+  }
+
+  return result;
+}
 
 const ROOT=process.cwd();
 const sourceRegistryPath=path.join(ROOT,'content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json');
@@ -20,10 +63,7 @@ const write=args.includes('--write');
 if(!corpusDir||!fs.existsSync(corpusDir)) throw new Error('Usage: node scripts/verify-ksar-r2-remote.mjs <private-corpus-dir> [--upload] [--write]');
 const sha=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 function localFile(key){return [path.join(corpusDir,key),path.join(corpusDir,key.replace(/^books[\\/]/,''))].find(fs.existsSync);}
-function wrangler(command){
-  const result=spawnSync(process.platform==='win32'?'npx.cmd':'npx',['wrangler',...command],{cwd:ROOT,stdio:'inherit'});
-  if(result.status!==0) throw new Error(`wrangler failed: ${command.join(' ')}`);
-}
+
 for(const source of registry.records){
   const file=localFile(source.r2ObjectKey); if(!file) throw new Error(`Missing local file ${source.r2ObjectKey}`);
   const localHash=sha(file); if(localHash!==source.retrievalCorpusSha256) throw new Error(`Local hash mismatch ${source.sourceCode}`);

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-KSAR-R8-MATERIALIZATION-REPAIR-v1.0.0",
+  "stage": "KSAR-R8",
+  "baselineCommit": "4abdf30cdf29b7626fc20a03766ac34d9fd0a170",
+  "repairType": "MATERIALIZE_MISSING_R8_SCRIPTS",
+  "reason": "4abdf30 committed the KSAR-R8 successor-freeze delta ZIP and package.json wiring, but the referenced R8 scripts were not materialized into repo/scripts.",
+  "packageJsonChangeRequired": false,
+  "files": [
+    "scripts/freeze-ksar-r8-production.mjs",
+    "scripts/close-ksar-r8-remote-and-freeze.mjs",
+    "scripts/check-ksar-r8-production-freeze.mjs"
+  ],
+  "preserves": [
+    "KSAR-R1-R7 authority and runtime artifacts",
+    "ksar-r1-r8-reconciliation-v1.json predecessor evidence",
+    "ksar-r4 human-review closure evidence",
+    "Canonical Knowledge authority",
+    "Published Article authority",
+    "raw full-book delivery block"
+  ],
+  "productionGate": "REMOTE_R2_GET_SHA256_VERIFICATION_REQUIRED_BEFORE_SUCCESSOR_FREEZE"
+}
