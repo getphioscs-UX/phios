@@ -1,0 +1,95 @@
+{
+  "contract": "PHI-OS-FIVE-VOLUME-MIGRATION-CONTRACT-v1.0.0",
+  "schemaVersion": "1.0.0",
+  "phase": "BOOK-W1",
+  "status": "active-successor-migration",
+  "authority": {
+    "bookIdentity": "content/registry/books.json",
+    "partIdentityAndPublicationOwnership": "content/registry/parts.json",
+    "canonicalNodeIdentity": "content/knowledge/registry/nodes.json",
+    "blueprintAuthority": "content/knowledge/blueprints/blueprint-registry.json",
+    "historicalFourVolumeAudit": "docs/audits/BOOK-W0-four-volume-migration.md",
+    "successorMigrationAudit": "docs/audits/BOOK-W1-five-volume-migration.md"
+  },
+  "identityPolicy": {
+    "bookVolumeDirectoryAlignmentRequired": true,
+    "canonicalBookIds": [
+      "book-1",
+      "book-2",
+      "book-3",
+      "book-4",
+      "book-5"
+    ],
+    "canonicalBookCodes": [
+      "BOOK-1",
+      "BOOK-2",
+      "BOOK-3",
+      "BOOK-4",
+      "BOOK-5"
+    ],
+    "partCodeChangesWithPublicationOwnership": false,
+    "canonicalNodeIdentityChangesWithPublicationOwnership": false,
+    "nodeCodePrefixIsPublicationAuthority": false,
+    "legacyIdentityMayRemainAsAliasOnly": true
+  },
+  "manifestCompatibility": {
+    "currentBookIdentityField": "canonical_book_id",
+    "currentBookCodeField": "bookCode",
+    "legacySchemaBoundField": "book_id",
+    "legacySchemaBoundPattern": "phios-volume-{n}",
+    "reason": "BOOK-W1A does not rewrite the pre-existing book-architecture-manifest schema. Current canonical identity is explicit while the legacy schema-bound manifest identifier remains a compatibility alias until BOOK-W1F.",
+    "schemaReconciliationGate": "BOOK-W1F"
+  },
+  "implementationSteps": [
+    {
+      "step": "BOOK-W1A",
+      "name": "Five-Volume Registry Ownership",
+      "status": "accepted"
+    },
+    {
+      "step": "BOOK-W1B",
+      "name": "Part 8-15 Canonical Outline Reconciliation",
+      "status": "pending"
+    },
+    {
+      "step": "BOOK-W1C",
+      "name": "Successor Blueprint Generation",
+      "status": "pending"
+    },
+    {
+      "step": "BOOK-W1D",
+      "name": "Canonical Registry Reconciliation",
+      "status": "pending"
+    },
+    {
+      "step": "BOOK-W1E",
+      "name": "Public Book, Locale and Icon Projection",
+      "status": "pending"
+    },
+    {
+      "step": "BOOK-W1F",
+      "name": "Compatibility and Checker",
+      "status": "pending"
+    },
+    {
+      "step": "BOOK-W1G",
+      "name": "Five-Volume Acceptance and Freeze",
+      "status": "pending"
+    }
+  ],
+  "boundaries": {
+    "historicalFreezeRewriteAllowed": false,
+    "canonicalNodeRegistryMutationAllowedInW1A": false,
+    "canonicalNodeCodeRenumberAllowed": false,
+    "finalSuccessorBlueprintGenerationAllowedInW1A": false,
+    "publicProjectionMutationAllowedInW1A": false,
+    "articlePublicationAllowedInW1A": false,
+    "productionAuthorityCreatedByW1A": false
+  },
+  "gatePolicy": {
+    "stepsAreSequential": true,
+    "eachStepRequiresIndependentAcceptance": true,
+    "fullRepositoryCheckRequiredAfterW1A": true,
+    "finalFreezeRequiresW1AToW1F": true
+  }
+}

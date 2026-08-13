@@ -1,7 +1,10 @@
 {
   "$schema": "../../data/schemas/book-architecture-manifest.schema.json",
-  "manifest_version": "2.0.0",
+  "manifest_version": "3.0.0",
   "book_id": "phios-volume-4",
+  "canonical_book_id": "book-4",
+  "bookCode": "BOOK-4",
+  "legacy_manifest_id": "phios-volume-4",
   "series_id": "phios",
   "volume": 4,
   "status": "draft",
@@ -27,20 +30,28 @@
       "id": "part-10",
       "number": 10,
       "title": {
-        "zh-Hans": "文明动态",
-        "en": "Civilization Dynamics"
+        "zh-Hans": "运行扩展",
+        "en": "Runtime Expansion"
       },
       "status": "stable",
+      "deprecated_aliases": [
+        "文明动态",
+        "Civilization Dynamics"
+      ],
       "chapters": []
     },
     {
       "id": "part-11",
       "number": 11,
       "title": {
-        "zh-Hans": "文明生态",
-        "en": "Civilization Ecology"
+        "zh-Hans": "文明运行",
+        "en": "Civilization Runtime"
       },
       "status": "stable",
+      "deprecated_aliases": [
+        "文明生态",
+        "Civilization Ecology"
+      ],
       "chapters": []
     },
     {
@@ -57,6 +68,7 @@
   "figures": [],
   "preview_sections": [],
   "publication_version": null,
-  "canonical_reconciliation_status": "ownership-reconciled-awaiting-kau-r2-existing-node-match",
+  "canonical_reconciliation_status": "book-w1a-ownership-accepted-awaiting-outline-reconciliation",
+  "migration_record": "content/knowledge/migrations/five-volume-book-ownership-migration-v1.json",
   "rule": "只登记已确认五册架构；第四册正文完成前不得标记 content-complete。P10–P12 Canonical Node identity 保留。"
 }
