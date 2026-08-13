@@ -54,6 +54,7 @@ const book1 = actual.bookSummary.find(entry => entry.bookCode === 'BOOK-1');
 const book2 = actual.bookSummary.find(entry => entry.bookCode === 'BOOK-2');
 const book3 = actual.bookSummary.find(entry => entry.bookCode === 'BOOK-3');
 const book4 = actual.bookSummary.find(entry => entry.bookCode === 'BOOK-4');
+const book5 = actual.bookSummary.find(entry => entry.bookCode === 'BOOK-5');
 assert.equal(book1.nodeCount, 65);
 assert.equal(book1.publishedArticleNodeCount, 4);
 assert.equal(book1.explicitNonArticleWaveOutputCount, 3);
@@ -61,9 +62,10 @@ assert.equal(book1.explicitArticleIntentCount, 6);
 assert.equal(book1.articleDecisionRequiredHighSignalCount, 0);
 assert.equal(book1.articleDecisionRequiredCount, 52);
 assert.equal(book1.c3ProductionReadyCount, 11);
-assert.equal(book2.nodeCount, 266);
-assert.equal(book3.nodeCount, 187);
-assert.equal(book4.nodeCount, 198);
+assert.equal(book2.nodeCount, 180);
+assert.equal(book3.nodeCount, 86);
+assert.equal(book4.nodeCount, 187);
+assert.equal(book5.nodeCount, 198);
 
 for (const code of ['KN-PREFACE-001', 'KN-PREFACE-004', 'KN-PREFACE-010', 'KN-PREFACE-013']) {
   const entry = actual.entries.find(item => item.nodeCode === code);

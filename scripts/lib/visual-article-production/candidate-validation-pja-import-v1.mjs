@@ -93,6 +93,16 @@ function currentImportPath(nodeCode) {
   return `content/knowledge/production/candidates/zh-Hans/${nodeCode}/candidate.v1.json`;
 }
 
+function successorEquivalentCandidate(existing, proposed) {
+  return existing?.candidateCode === proposed?.candidateCode &&
+    existing?.nodeCode === proposed?.nodeCode &&
+    existing?.locale === proposed?.locale &&
+    existing?.candidateState === proposed?.candidateState &&
+    serialize(existing?.article) === serialize(proposed?.article) &&
+    existing?.sourceBrief?.briefCode === proposed?.sourceBrief?.briefCode &&
+    existing?.sourceBrief?.briefSchemaVersion === proposed?.sourceBrief?.briefSchemaVersion;
+}
+
 async function validateOne(root, { sessionEntry, decision, proposal, eligibility, policy }) {
   const blockers = [], warnings = [];
   const candidatePath = sessionEntry.candidatePath;
@@ -159,7 +169,7 @@ async function validateOne(root, { sessionEntry, decision, proposal, eligibility
     producer: `VAP-W7S openai_chatgpt_session / GPT-5.6 Sol; VAP-W8 integrity + C2 bridge validation; source=${providerDigest}`,
     candidateState: 'ready_for_human_review'
   });
-  const pjaValidation = await validateZhHansCandidate(root, pjaCandidate);
+  const pjaValidation = await validateZhHansCandidate(root, pjaCandidate, { commit: VAP_W8_BASELINE });
   if (!pjaValidation.valid) blockers.push(...pjaValidation.errors.map(error => `PJA_${error.code}`));
 
   const briefReportPath = `dist/knowledge-production-briefs/${sessionEntry.nodeCode}-production-brief.report.json`;
@@ -256,7 +266,10 @@ export async function buildVapW8Plan(root) {
     const target = path.join(root, entry.pjaCandidate.targetPath);
     if (!(await exists(target))) continue;
     const current = JSON.parse(await fs.readFile(target, 'utf8'));
-    if (serialize(current) === serialize(entry.candidateObject)) pjaImportPresentCount += 1;
+    if (
+      serialize(current) === serialize(entry.candidateObject) ||
+      successorEquivalentCandidate(current, entry.candidateObject)
+    ) pjaImportPresentCount += 1;
   }
   const eligible = entries.filter(entry => entry.importEligible);
   return {
@@ -293,8 +306,10 @@ export async function applyVapW8Imports(root, { apply = false } = {}) {
     const absolute = path.join(root, relative);
     if (await exists(absolute)) {
       const existing = JSON.parse(await fs.readFile(absolute, 'utf8'));
-      if (serialize(existing) !== serialize(entry.candidateObject)) throw fail('PJA_CANDIDATE_CONFLICT', relative);
-      results.push({ nodeCode: entry.nodeCode, targetPath: relative, status: 'already_imported_byte_equivalent', applied: false, candidateDigest: entry.pjaCandidate.candidateDigest });
+      const byteEquivalent = serialize(existing) === serialize(entry.candidateObject);
+      const successorEquivalent = successorEquivalentCandidate(existing, entry.candidateObject);
+      if (!byteEquivalent && !successorEquivalent) throw fail('PJA_CANDIDATE_CONFLICT', relative);
+      results.push({ nodeCode: entry.nodeCode, targetPath: relative, status: byteEquivalent ? 'already_imported_byte_equivalent' : 'already_imported_successor_lineage_equivalent', applied: false, candidateDigest: existing.candidateDigest, successorBriefDigest: successorEquivalent ? entry.pjaCandidate.sourceBriefDigest : null });
       continue;
     }
     if (!apply) {
@@ -326,8 +341,12 @@ export async function buildVapW8Activation(root) {
     let state = 'NOT_IMPORTED';
     if (await exists(target)) {
       const current = JSON.parse(await fs.readFile(target, 'utf8'));
-      state = serialize(current) === serialize(entry.candidateObject) ? 'IMPORTED_BYTE_EQUIVALENT' : 'IMPORT_CONFLICT';
-      if (state === 'IMPORTED_BYTE_EQUIVALENT') imported += 1;
+      state = serialize(current) === serialize(entry.candidateObject)
+        ? 'IMPORTED_BYTE_EQUIVALENT'
+        : successorEquivalentCandidate(current, entry.candidateObject)
+          ? 'IMPORTED_SUCCESSOR_LINEAGE_EQUIVALENT'
+          : 'IMPORT_CONFLICT';
+      if (state !== 'IMPORT_CONFLICT') imported += 1;
     }
     entries.push({ nodeCode: entry.nodeCode, validationPassed: entry.importEligible, pjaImportState: state, targetPath: entry.pjaCandidate.targetPath, candidateDigest: entry.pjaCandidate.candidateDigest });
   }

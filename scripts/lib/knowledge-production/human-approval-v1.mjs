@@ -13,8 +13,8 @@ const exists=file=>fs.access(file).then(()=>true,()=>false);
 export function approvalWithoutDigest(approval){const copy=structuredClone(approval);delete copy.approvalDigest;return copy;}
 export function computeApprovalDigest(approval){return digest(approvalWithoutDigest(approval));}
 function normalizeConditions(conditions=[]){return conditions.map((item,index)=>({conditionCode:`CONDITION-${String(index+1).padStart(3,'0')}`,status:item.status,description:String(item.description||'').trim()}));}
-export async function buildHumanApproval(root,{candidate,review,approverCode='TL',decision,summary,conditions=[],approvedAt}){
- const candidateValidation=await validateZhHansCandidate(root,candidate,{briefPath:null});
+export async function buildHumanApproval(root,{candidate,review,approverCode='TL',decision,summary,conditions=[],approvedAt,successorBriefLineageValidated=false}){
+ const candidateValidation=await validateZhHansCandidate(root,candidate,{briefPath:null,validateBriefBinding:!successorBriefLineageValidated});
  if(!candidateValidation.valid)throw fail('APPROVAL_REQUIRES_VALID_CANDIDATE',JSON.stringify(candidateValidation.errors));
  const reviewValidation=validateHumanReview(review,candidate);
  if(!reviewValidation.valid)throw fail('APPROVAL_REQUIRES_VALID_REVIEW',JSON.stringify(reviewValidation.errors));

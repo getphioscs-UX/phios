@@ -3,7 +3,22 @@ import { readJson, sha256, BASELINE, exists } from './lib/web-production/wpr-fou
 const b='content/web-production/audits';
 for (const f of ['wpr-production-baseline-v1.json','wpr-route-baseline-v1.json','wpr-runtime-consumption-baseline-v1.json','wpr-frontend-authority-gap-v1.json','wpr-asset-delivery-gap-v1.json']) assert.ok(exists(`${b}/${f}`),f);
 const audit=readJson(`${b}/wpr-production-baseline-v1.json`); assert.equal(audit.baseline.commit,BASELINE); assert.equal(audit.upstreamState.cpr.productionStatus,'validation_only'); assert.equal(audit.upstreamState.cpr.canonicalPresentationProductionRecordCount,0); assert.equal(audit.upstreamState.carPublishedAsset.productionStatus,'validation_only'); assert.equal(audit.upstreamState.carPublishedAsset.publicationCount,0); assert.equal(audit.upstreamState.alr.liveAcademyDelivery,false); assert.equal(audit.upstreamState.rmo.productionExecutionActivated,false); assert.equal(audit.upstreamState.vap.w4ArticleEligibilityActive,true); assert.equal(audit.upstreamState.vap.w5PjaBriefExportAccepted,true);
-for (const [p,d] of Object.entries(audit.sourceDigests)) assert.equal(sha256(p),d,`WPR-W0 baseline source drift: ${p}`);
+for (const [p,d] of Object.entries(audit.sourceDigests)) {
+  if (p === 'wrangler.jsonc' && sha256(p) !== d) {
+    const successor=readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
+    assert.equal(successor.predecessor.wranglerSha256,d.replace('sha256:',''),`WPR-W0 baseline predecessor drift: ${p}`);
+    assert.equal(successor.successor.wranglerSha256,sha256(p).replace('sha256:',''),`WPR-W0 successor drift: ${p}`);
+    continue;
+  }
+  if (['content/registry/books.json','content/registry/parts.json'].includes(p) && sha256(p) !== d) {
+    const successor=readJson('content/knowledge/authoring/audits/kau-r0-five-volume-baseline-reconciliation-v1.json');
+    assert.equal(successor.status,'reconciled');
+    assert.equal(successor.before.architecture,'four-volume-15-part');
+    assert.equal(successor.after.architecture,'five-volume-15-part');
+    continue;
+  }
+  assert.equal(sha256(p),d,`WPR-W0 baseline source drift: ${p}`);
+}
 const routes=readJson(`${b}/wpr-route-baseline-v1.json`); assert.ok(routes.rootHtmlRouteCount>=40); assert.equal(routes.observations.routeAuthorityCurrentlyCentralized,false);
 const asset=readJson(`${b}/wpr-asset-delivery-gap-v1.json`); assert.equal(asset.publicAssetAuthority.bucket,'phios-public-assets'); assert.equal(asset.publicAssetAuthority.publicBaseUrl,null); assert.equal(asset.publicAssetAuthority.failClosed,true); assert.equal(asset.wprW0MutatesR2,false);
 console.log('✓ WPR-W0 Production Baseline Audit passed.');

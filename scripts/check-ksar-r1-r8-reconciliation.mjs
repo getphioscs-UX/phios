@@ -35,7 +35,15 @@ assert(readability.records.every(r=>!Object.hasOwn(r,'text')),'Public readabilit
 assert(readability.records.every(r=>['LOW','MEDIUM','HIGH'].includes(r.riskLevel)));
 
 const bindings=json('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
-assert.equal(bindings.records.length,0,'KAU-R2 human acceptance is still pending and must not be auto-promoted by KSAR.');
+const kauR3Acceptance=json('content/knowledge/reconciliation/kau-r3/kau-r3-acceptance-v1.json');
+assert.equal(kauR3Acceptance.status,'HUMAN_ACCEPTED_VOLUME_I_RECONCILIATION_FROZEN');
+assert.equal(kauR3Acceptance.humanAcceptance.decision,'ACCEPT_WITH_CHANGES');
+assert.equal(kauR3Acceptance.summary.ksarApprovedBindingsWritten,62);
+assert.equal(bindings.records.length,62,'KAU-R3 human-accepted bindings must project exactly once into KSAR.');
+assert(bindings.records.every(record => record.status==='APPROVED' && record.authority==='KAU-R3_HUMAN_ACCEPTED_VOLUME_I_RECONCILIATION'));
+const corrections=json('content/knowledge/source-access/registries/manuscript-editorial-correction-v1.json');
+assert.equal(corrections.status,'ACTIVE_HUMAN_CONFIRMED_CORRECTIONS');
+assert.equal(corrections.records.length,1);
 
 const fixtureSource={sourceCode:'FIXTURE',bookCode:'BOOK-1',locale:'zh-Hans',sourceSha256:'s'.repeat(64),corpusSha256:'c'.repeat(64),recordCount:1};
 const fixtureCorpus={bookCode:'BOOK-1',locale:'zh-Hans',sourceSha256:fixtureSource.sourceSha256,corpusSha256:fixtureSource.corpusSha256,recordCount:1,records:[{sectionCode:'FIX-1',segmentType:'SECTION',partCode:'P1',sequence:1,heading:'现实如何形成',startPage:1,endPage:2,textSha256:'a'.repeat(64),text:'现实形成需要区分差异、约束与结构。结构稳定之后，运行才有可以持续的载体。'}]};
@@ -43,15 +51,19 @@ const fixtureText=JSON.stringify(fixtureCorpus);
 fixtureSource.retrievalCorpusSha256=crypto.createHash('sha256').update(fixtureText).digest('hex');
 fixtureSource.r2ObjectKey='books/fixture/retrieval-corpus.json';
 const loaded=await loadR2RetrievalCorpus({get:async key=>({body:fixtureText,key})},fixtureSource);
-assert.equal(loaded.retrievalCorpusSha256,fixtureSource.retrievalCorpusSha256);
+assert.equal(loaded.bookCode,fixtureCorpus.bookCode);
+assert.equal(loaded.sourceSha256,fixtureCorpus.sourceSha256);
+assert.equal(loaded.records.length,fixtureCorpus.recordCount);
 await assert.rejects(()=>loadR2RetrievalCorpus({get:async()=>({body:fixtureText+' '})},fixtureSource),error=>error?.code==='MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH');
 
-const quality={records:[{sectionCode:'FIX-1',reviewStatus:'PENDING_HUMAN_READABILITY_REVIEW',riskLevel:'MEDIUM',runtimeEligibility:'SOURCE_ONLY_WITH_CAUTION',findingCodes:['FIGURE_OR_DIAGRAM_TEXT_LIKELY']} ]};
-const searched=searchManuscriptCorpus({corpus:fixtureCorpus,source:fixtureSource,bindings,readability:quality,query:'现实 结构'});
+const fixtureBindings={records:[{mappingCode:'FIX-MAP-1',sectionCode:'FIX-1',nodeCode:'KN-PREFACE-001',status:'APPROVED'}]};
+const fixtureCorrections={records:[{correctionCode:'FIX-CORR-1',sectionCode:'FIX-1',field:'heading',rawValue:'现实如何形成',correctedValue:'现实形成机制',status:'APPROVED',rawSourcePreserved:true}]};
+const searched=searchManuscriptCorpus({corpus:fixtureCorpus,source:fixtureSource,bindings:fixtureBindings,corrections:fixtureCorrections,query:'现实 结构'});
 assert.equal(searched.length,1);
-assert.equal(searched[0].readability.runtimeEligibility,'SOURCE_ONLY_WITH_CAUTION');
-const excluded=searchManuscriptCorpus({corpus:fixtureCorpus,source:fixtureSource,bindings,readability:{records:[{sectionCode:'FIX-1',riskLevel:'HIGH',runtimeEligibility:'EXCLUDE_UNTIL_REVIEW'}]},query:'现实'});
-assert.equal(excluded.length,0);
+assert.equal(searched[0].canonicalBinding.status,'APPROVED');
+assert.deepEqual(searched[0].canonicalBinding.nodeCodes,['KN-PREFACE-001']);
+assert.equal(searched[0].heading,'现实形成机制');
+assert.equal(searched[0].editorialCorrections[0].correctionCode,'FIX-CORR-1');
 
 const grounding={allowed:true,sources:[{sourceId:'MANUSCRIPT:FIX-1',sourceType:'COMPLETED_MANUSCRIPT',text:'现实形成需要区分差异、约束与结构。结构稳定之后，运行才有可以持续的载体。'}]};
 const answer=deterministicGroundedAnswer('现实如何形成',grounding,'zh-Hans');
@@ -82,7 +94,7 @@ assert.equal(pkg.scripts['ksar:verify-corpora'],'node scripts/verify-ksar-r2-cor
 
 console.log('✓ KSAR-R1～R8 Reconciliation passed.');
 console.log('  R1 actual-bytes corpus hashes and canonical books/ object keys are reconciled; remote GET evidence remains explicit pending state.');
-console.log('  R2-R4 human readability review projection/triage/reviewed-corpus builder are present without putting manuscript bodies in public Git.');
+console.log('  R2-R4 KAU-R3 human-accepted Volume I bindings and editorial correction projection are active without putting manuscript bodies in public Git.');
 console.log('  R5-R6 unified hybrid retrieval plus deterministic grounded answer projection are active.');
 console.log('  R7 Knowledge Search, Free Explore and Library gateways route into Knowledge Access.');
 console.log('  R8 production freeze remains correctly blocked until remote R2 hash verification and human readability review are complete.');

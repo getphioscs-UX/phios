@@ -25,7 +25,7 @@ export function buildCandidateTemplate(brief,{title,summary,bodyMarkdown,section
   return {...payload,candidateDigest:computeCandidateDigest(payload)};
 }
 
-export async function validateZhHansCandidate(root,candidate,{briefPath,commit}={}) {
+export async function validateZhHansCandidate(root,candidate,{briefPath,commit,validateBriefBinding=true}={}) {
   const errors=[],warnings=[];
   const add=(code,message)=>errors.push({code,message});
   if (!candidate || typeof candidate!=='object' || Array.isArray(candidate)) return {valid:false,errors:[{code:'CANDIDATE_NOT_OBJECT',message:'Candidate must be a JSON object.'}],warnings};
@@ -52,8 +52,8 @@ export async function validateZhHansCandidate(root,candidate,{briefPath,commit}=
   if(!/^[a-f0-9]{64}$/.test(candidate.candidateDigest||''))add('CANDIDATE_DIGEST_FORMAT_INVALID',String(candidate.candidateDigest));
   else if(candidate.candidateDigest!==computeCandidateDigest(candidate))add('CANDIDATE_DIGEST_INVALID','candidateDigest does not match candidate payload.');
   let brief;
-  if(briefPath){ brief=JSON.parse(await fs.readFile(briefPath,'utf8')); }
-  else if(candidate.nodeCode){ brief=await buildCanonicalBriefV2(root,candidate.nodeCode,{commit:candidate.sourceBrief?.repositoryCommit||commit}); }
+  if(validateBriefBinding && briefPath){ brief=JSON.parse(await fs.readFile(briefPath,'utf8')); }
+  else if(validateBriefBinding && candidate.nodeCode){ brief=await buildCanonicalBriefV2(root,candidate.nodeCode,{commit:candidate.sourceBrief?.repositoryCommit||commit}); }
   if(brief){
     if(candidate.sourceBrief?.briefCode!==brief.briefCode)add('CANDIDATE_BRIEF_CODE_MISMATCH',String(candidate.sourceBrief?.briefCode));
     if(candidate.sourceBrief?.briefSchemaVersion!==brief.briefSchemaVersion)add('CANDIDATE_BRIEF_SCHEMA_MISMATCH',String(candidate.sourceBrief?.briefSchemaVersion));

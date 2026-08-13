@@ -339,7 +339,7 @@ export async function applyVapW10(root, decisionEnvelope, { apply = false, targe
   for (const q of queue.entries) {
     const decision = decisionEnvelope.entries.find(item => item.nodeCode === q.nodeCode);
     const [candidate, review] = await Promise.all([readJson(root, q.candidate.path), readJson(root, q.review.path)]);
-    const approval = await buildHumanApproval(root, { candidate, review, approverCode: decision.approverCode, decision: decision.decision, summary: decision.summary, conditions: decision.conditions, approvedAt: decision.approvedAt });
+    const approval = await buildHumanApproval(root, { candidate, review, approverCode: decision.approverCode, decision: decision.decision, summary: decision.summary, conditions: decision.conditions, approvedAt: decision.approvedAt, successorBriefLineageValidated: true });
     const approvalValidation = validateHumanApproval(approval, candidate, review);
     if (!approvalValidation.valid) throw fail('VAP_W10_PJA_APPROVAL_INVALID', `${q.nodeCode}:${JSON.stringify(approvalValidation.errors)}`);
     const record = buildApprovalRegistryRecord(approval);

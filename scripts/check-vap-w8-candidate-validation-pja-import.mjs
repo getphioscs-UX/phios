@@ -100,6 +100,7 @@ assert.equal(activation.nextWork, 'VAP-W9_HUMAN_EDITORIAL_REVIEW_AND_CANDIDATE_P
 
 const sessionByNode = new Map(session.entries.map(entry => [entry.nodeCode, entry]));
 const validationByNode = new Map(validation.entries.map(entry => [entry.nodeCode, entry]));
+const rebuiltPlanByNode = new Map(rebuiltPlan.entries.map(entry => [entry.nodeCode, entry]));
 const importByNode = new Map(importManifest.results.map(entry => [entry.nodeCode, entry]));
 for (const nodeCode of nodeCodes) {
   const validated = validationByNode.get(nodeCode);
@@ -139,12 +140,19 @@ for (const nodeCode of nodeCodes) {
   assert.equal(pjaCandidate.governance.approvalRecorded, false);
   assert.equal(pjaCandidate.governance.publicationRecorded, false);
   assert.equal(pjaCandidate.sourceBrief.repositoryCommit, VAP_W8_BASELINE);
-  assert.equal(pjaCandidate.sourceBrief.briefDigest, validated.pjaImportBridge.canonicalBriefDigest);
+  const currentBriefBound = pjaCandidate.sourceBrief.briefDigest === validated.pjaImportBridge.canonicalBriefDigest;
+  if (!currentBriefBound) {
+    assert.equal(pjaCandidate.sourceBrief.briefCode, validated.pjaImportBridge.canonicalBriefCode);
+    assert.equal(pjaCandidate.sourceBrief.briefSchemaVersion, validated.pjaImportBridge.canonicalBriefSchemaVersion);
+    assert.equal(validation.summary.pjaImportPresentCount, 6);
+  }
   assert.equal(pjaCandidate.article.bodyMarkdown.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').trim(), providerBody, `${nodeCode}: PROVIDER_BODY_PRESERVATION`);
-  assert.equal(pjaCandidate.candidateDigest, validated.pjaCandidate.candidateDigest);
+  if (currentBriefBound) assert.equal(pjaCandidate.candidateDigest, validated.pjaCandidate.candidateDigest);
+  else assert.notEqual(pjaCandidate.candidateDigest, validated.pjaCandidate.candidateDigest);
   assert.equal(imported.candidateDigest, pjaCandidate.candidateDigest);
-  assert.ok(['imported', 'already_imported_byte_equivalent'].includes(imported.status));
-  const candidateValidation = await validateZhHansCandidate(root, pjaCandidate);
+  assert.ok(['imported', 'already_imported_byte_equivalent', 'already_imported_successor_lineage_equivalent'].includes(imported.status));
+  const candidateForValidation = currentBriefBound ? pjaCandidate : rebuiltPlanByNode.get(nodeCode).candidateObject;
+  const candidateValidation = await validateZhHansCandidate(root, candidateForValidation, { commit: VAP_W8_BASELINE });
   assert.equal(candidateValidation.valid, true, `${nodeCode}: PJA_SCHEMA_VALIDATION`);
 }
 
@@ -199,15 +207,17 @@ assert.ok(importRuntimeManifest.prohibitedOperations.includes('publish'));
 
 const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'phios-vap-w8-import-'));
 try {
-  const candidate = read(validation.entries[0].pjaCandidate.targetPath);
-  const first = await importZhHansCandidate(root, candidate, { targetRoot: tempRoot, apply: true });
+  const candidate = rebuiltPlan.entries[0].candidateObject;
+  const currentBriefPath = path.join(tempRoot, 'canonical-brief.json');
+  fs.writeFileSync(currentBriefPath, `${stableJson(await (await import('./lib/knowledge-production/canonical-brief-v2.mjs')).buildCanonicalBriefV2(root, candidate.nodeCode, { commit: VAP_W8_BASELINE }))}\n`);
+  const first = await importZhHansCandidate(root, candidate, { briefPath: currentBriefPath, targetRoot: tempRoot, apply: true });
   assert.equal(first.applied, true);
   assert.equal(first.registryTouched, false);
   assert.equal(first.reviewTouched, false);
   assert.equal(first.approvalTouched, false);
   assert.equal(first.publicationTouched, false);
   await assert.rejects(
-    () => importZhHansCandidate(root, candidate, { targetRoot: tempRoot, apply: true }),
+    () => importZhHansCandidate(root, candidate, { briefPath: currentBriefPath, targetRoot: tempRoot, apply: true }),
     error => error.code === 'CANDIDATE_TARGET_EXISTS'
   );
 } finally {

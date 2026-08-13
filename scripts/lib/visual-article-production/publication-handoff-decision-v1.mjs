@@ -79,7 +79,7 @@ async function buildEntry(root, nodeCode, index, publicationRegistry) {
 
   const sourceBrief = candidate.sourceBrief ?? {};
   if (sourceBrief.briefSchemaVersion !== 'PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0' || !sourceBrief.repositoryCommit) throw fail('VAP_W11_CANONICAL_BRIEF_BINDING_REQUIRED', nodeCode);
-  const canonicalBrief = await buildCanonicalBriefV2(root, nodeCode, { commit: sourceBrief.repositoryCommit });
+  const canonicalBrief = await readJson(root, canonicalBriefPath(nodeCode));
   if (canonicalBrief.briefCode !== sourceBrief.briefCode || canonicalBrief.briefDigest !== sourceBrief.briefDigest) throw fail('VAP_W11_CANONICAL_BRIEF_DIGEST_MISMATCH', nodeCode);
   const target = publicationIdentityFromBrief(nodeCode, canonicalBrief, productionPackage);
   const existingPublication = publicationRegistry.records.find(record => record.nodeCode === nodeCode && record.locale === VAP_W11_LOCALE) ?? null;
@@ -290,7 +290,7 @@ export async function materializeBoundCanonicalBriefs(root, queue, { apply = fal
   const outcomes = [];
   for (const entry of queue.entries) {
     const candidate = await readJson(root, entry.candidate.path);
-    const brief = await buildCanonicalBriefV2(root, entry.nodeCode, { commit: candidate.sourceBrief.repositoryCommit });
+    const brief = await readJson(root, canonicalBriefPath(entry.nodeCode));
     if (brief.briefDigest !== entry.canonicalBrief.briefDigest || brief.briefDigest !== candidate.sourceBrief.briefDigest) throw fail('VAP_W11_CANONICAL_BRIEF_MATERIALIZATION_DIGEST_MISMATCH', entry.nodeCode);
     const text = serialize(brief), target = path.join(targetRoot, entry.canonicalBrief.path);
     const state = await preflightEquivalent(target, text, 'VAP_W11_CANONICAL_BRIEF_CONFLICT');

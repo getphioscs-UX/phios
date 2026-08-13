@@ -175,6 +175,17 @@ export async function loadR2RetrievalCorpus(binding, source) {
     throw error;
   }
   const text = await new Response(object.body).text();
+  const actualBytesSha256 = [...new Uint8Array(
+    await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text))
+  )].map(byte => byte.toString(16).padStart(2, '0')).join('');
+  if (
+    source.retrievalCorpusSha256 &&
+    actualBytesSha256 !== source.retrievalCorpusSha256
+  ) {
+    const error = new Error('MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH');
+    error.code = 'MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH';
+    throw error;
+  }
   const corpus = JSON.parse(text);
   if (corpus.bookCode !== source.bookCode || corpus.locale !== source.locale) {
     const error = new Error('MANUSCRIPT_RETRIEVAL_CORPUS_IDENTITY_MISMATCH');

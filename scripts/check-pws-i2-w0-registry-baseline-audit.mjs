@@ -38,37 +38,37 @@ assert.equal(runtimeRegistryFiles.length, 6);
 
 const registryIndex = await readJson('content/registry/index.json');
 const contentRegistryFiles = await listFiles('content/registry', '.json');
-const authorisedSuccessorRegistryFiles = new Set([
+const authorisedKnowledgeSuccessorRegistryFiles = new Set([
   'm3c-w3-wrangler-successor-reconciliation-v1.json'
 ]);
-const baselineContentRegistryFiles = contentRegistryFiles.filter(
-  file => !authorisedSuccessorRegistryFiles.has(file)
-);
-assert(
-  [...authorisedSuccessorRegistryFiles].every(file =>
-    contentRegistryFiles.includes(file)
-  )
-);
 const indexedFiles = Object.values(registryIndex.registries)
   .map(file => file.replace(/^\.\//, ''));
-assert.equal(baselineContentRegistryFiles.length, 114);
+assert.equal(contentRegistryFiles.length, 114);
 assert.equal(indexedFiles.length, 51);
 assert.equal(registryIndex.registries.public_assets, './public-assets.json');
 assert.equal(registryIndex.registries.book_5_manifest, './book-5-manifest.json');
 assert.equal(
-  baselineContentRegistryFiles.filter(file =>
+  contentRegistryFiles.filter(file =>
     file !== 'index.json' && !indexedFiles.includes(file)
   ).length,
   62
 );
 
 const knowledgeData = await listFiles('content/knowledge/registry', '.json');
+assert(
+  [...authorisedKnowledgeSuccessorRegistryFiles].every(file =>
+    knowledgeData.includes(file)
+  )
+);
+const baselineKnowledgeData = knowledgeData.filter(
+  file => !authorisedKnowledgeSuccessorRegistryFiles.has(file)
+);
 const knowledgeSchemas = await listFiles(
   'content/knowledge/registry/schemas',
   '.json'
 );
 const pwsContracts = await listFiles('docs/pws/contracts', '.json');
-assert.equal(knowledgeData.length, 12);
+assert.equal(baselineKnowledgeData.length, 12);
 assert.equal(knowledgeSchemas.length, 12);
 const postAuditContracts = new Set([
   'pws-i2-v1-freeze.json',
@@ -173,5 +173,5 @@ assert(
 console.log('✓ PWS-I2-W0 Registry Baseline Audit passed.');
 console.log('  Registry 6 modules; Runtime Contracts/Schemas/Versions 20 each.');
 console.log('  Persistence 9 methods; D1 1 binding; W0 executable Migrations 4.');
-console.log('  Frozen Static JSON 114 + 1 authorised M3C successor reconciliation; registry index 51; frozen unindexed excluding index 62.');
+console.log('  Static JSON 114; Knowledge Registry 12 frozen + 1 authorised M3C successor reconciliation; registry index 51; unindexed excluding index 62.');
 console.log('  Multiple-source risks recorded; no Registry or Migration changed.');

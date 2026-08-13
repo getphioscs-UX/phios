@@ -189,7 +189,7 @@ assert.deepEqual(registry.hashPolicy, {
   byteOrderMarkIgnored: true
 });
 
-const wranglerReconciliation = await readJson('content/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
+const wranglerReconciliation = await readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json');
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   if (file === 'wrangler.jsonc') continue;
   assert.equal(

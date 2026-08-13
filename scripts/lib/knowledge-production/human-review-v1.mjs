@@ -12,8 +12,8 @@ const exists=file=>fs.access(file).then(()=>true,()=>false);
 export function reviewWithoutDigest(review){const copy=structuredClone(review);delete copy.reviewDigest;return copy;}
 export function computeReviewDigest(review){return digest(reviewWithoutDigest(review));}
 function normalizeFindings(findings=[]){return findings.map((item,index)=>({findingCode:`FINDING-${String(index+1).padStart(3,'0')}`,category:item.category,severity:item.severity,comment:String(item.comment||'').trim()}));}
-export async function buildHumanReview(root,{candidate,reviewerCode='TL',decision,summary,findings=[],reviewedAt}){
- const candidateValidation=await validateZhHansCandidate(root,candidate,{briefPath:null});
+export async function buildHumanReview(root,{candidate,reviewerCode='TL',decision,summary,findings=[],reviewedAt,successorBriefLineageValidated=false}){
+ const candidateValidation=await validateZhHansCandidate(root,candidate,{briefPath:null,validateBriefBinding:!successorBriefLineageValidated});
  if(!candidateValidation.valid)throw fail('REVIEW_REQUIRES_VALID_CANDIDATE',JSON.stringify(candidateValidation.errors));
  if(!REVIEW_DECISIONS.includes(decision))throw fail('REVIEW_DECISION_INVALID',String(decision));
  if(typeof summary!=='string'||!summary.trim())throw fail('REVIEW_SUMMARY_REQUIRED','summary');

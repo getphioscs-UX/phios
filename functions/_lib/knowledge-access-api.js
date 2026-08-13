@@ -2,6 +2,7 @@ import { handlePublicKnowledgeRequest } from './public-knowledge-api.js';
 import {
   MANUSCRIPT_SOURCE_LIMITS,
   loadR2RetrievalCorpus,
+  queryTerms,
   searchManuscriptCorpus
 } from '../knowledge-runtime/manuscript-source-runtime.js';
 
@@ -9,6 +10,7 @@ const MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuit
 const SOURCES = new Set(['auto', 'hybrid', 'published', 'manuscript']);
 const LOCALES = new Set(['zh-Hans', 'en']);
 const MAX_QUERY_LENGTH = 500;
+const MAX_ANSWER_CHARS = 1600;
 
 const response = (body, status = 200) => Response.json(body, {
   status,
@@ -89,6 +91,53 @@ function groundingFrom(published, manuscript) {
   };
 }
 
+function splitSentences(text) {
+  return String(text || '')
+    .replace(/\s+/g, ' ')
+    .match(/[^。！？!?]+[。！？!?]?/g)
+    ?.map(value => value.trim())
+    .filter(value => value.length >= 12) || [];
+}
+
+export function deterministicGroundedAnswer(query, grounding, locale) {
+  if (!grounding?.allowed) return null;
+  const terms = queryTerms(query);
+  const candidates = [];
+  for (const source of grounding.sources || []) {
+    const sourceId = source.sourceId || (
+      source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE'
+        ? `PUBLISHED:${source.nodeCode}:${source.fragmentCode}`
+        : `MANUSCRIPT:${source.sectionCode}`
+    );
+    for (const sentence of splitSentences(source.text)) {
+      const normalized = sentence.toLocaleLowerCase();
+      let score = source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE' ? 2 : 0;
+      for (const term of terms) if (normalized.includes(term)) score += term.length > 2 ? 3 : 1;
+      candidates.push({ sentence, score, sourceId });
+    }
+  }
+  candidates.sort((left, right) => right.score - left.score || left.sentence.length - right.sentence.length);
+  const selected = []; const seen = new Set(); let characters = 0;
+  for (const candidate of candidates) {
+    const key = candidate.sentence.normalize('NFKC');
+    if (seen.has(key) || (selected.length && candidate.score <= 0)) continue;
+    if (characters + candidate.sentence.length > MAX_ANSWER_CHARS && selected.length) continue;
+    seen.add(key); selected.push(candidate); characters += candidate.sentence.length;
+    if (selected.length >= 4 || characters >= MAX_ANSWER_CHARS) break;
+  }
+  if (!selected.length && candidates.length) selected.push(candidates[0]);
+  if (!selected.length) return null;
+  return {
+    present: true,
+    projectionType: 'DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER',
+    generativeModelUsed: false,
+    locale,
+    text: selected.map(item => item.sentence).join(locale === 'zh-Hans' ? '\n\n' : ' '),
+    sourceReferences: [...new Set(selected.map(item => item.sourceId))],
+    authorityNotice: 'This answer is a question-scoped extractive projection from returned governed sources. It does not create Canonical Node or Published Article authority.'
+  };
+}
+
 export async function handleKnowledgeAccessRequest(request, env = {}) {
   if (request.method !== 'GET') return response({ ok: false, error: { code: 'METHOD_NOT_ALLOWED' } }, 405);
   const url = new URL(request.url);
@@ -120,6 +169,10 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
     return response({ ok: false, error: { code: 'MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE' } }, 503);
   }
 
+  const answerGrounding = groundingFrom(published, manuscript);
+  const groundedAnswer = deterministicGroundedAnswer(query, answerGrounding, locale);
+  answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);
+
   return response({
     ok: true,
     query: { text: query, locale, mode, source: sourceMode },
@@ -129,6 +182,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
       manuscript: manuscript.status,
       answerGroundingAllowed: publishedCovered || manuscriptCovered
     },
+    groundedAnswer,
     published,
     manuscript: {
       status: manuscript.status,
@@ -141,7 +195,7 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
         maximumTotalExcerptChars: MANUSCRIPT_SOURCE_LIMITS.maximumTotalExcerptChars
       }
     },
-    answerGrounding: groundingFrom(published, manuscript),
+    answerGrounding,
     authorityBoundary: {
       publishedArticleAuthorityUnchanged: true,
       completedManuscriptIsValidKnowledgeSource: true,

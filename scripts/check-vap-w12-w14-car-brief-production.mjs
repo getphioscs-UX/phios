@@ -5,10 +5,10 @@ import path from 'node:path';
 import { buildProductionBrief, digest, exportChatGptBrief, normalizeProductionKind, readJson, resolveBriefByCode, validateBriefSchema, validateProductionBrief } from './lib/car-production/car-production-v1.mjs';
 
 const root=process.cwd();
-const pilotCode='CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-001';
+const pilotCode='CAB-KN-PREFACE-001-MECHANISM-ZH-HANS-002';
 const a=buildProductionBrief({root,nodeCode:'KN-PREFACE-001',type:'mechanism_diagram',locale:'zh-Hans'});
 const b=buildProductionBrief({root,nodeCode:'KN-PREFACE-001',type:'mechanism_diagram',locale:'zh-Hans'});
-assert.deepEqual(a.brief,b.brief); assert.equal(a.brief.assetType,'DIAGRAM'); assert.equal(a.kind.chatgptAsset,'MECHANISM_DIAGRAM'); assert.equal(a.meaningMode,'legacy_car_w2_pilot_bridge');
+assert.deepEqual(a.brief,b.brief); assert.equal(a.brief.assetType,'DIAGRAM'); assert.equal(a.kind.chatgptAsset,'MECHANISM_DIAGRAM'); assert.equal(a.meaningMode,'cm_knowledge_production_authority');
 validateBriefSchema(root,a.brief); const validation=validateProductionBrief({root,brief:a.brief}); assert.equal(validation.valid,true); assert.deepEqual(Object.values(validation.checks),Array(Object.keys(validation.checks).length).fill(true));
 assert.equal(a.brief.briefDigest,b.brief.briefDigest); assert.equal(a.brief.outputContract.candidateOnly,true); assert.equal(a.brief.outputContract.publicationAllowed,false); assert.equal(a.brief.factualBoundary.newClaimsAllowed,false); assert(a.brief.mustEstablish.every(x=>typeof x==='string'&&x.length>0));
 assert.throws(()=>buildProductionBrief({root,nodeCode:'KN-PREFACE-001',type:'unknown',locale:'zh-Hans'}),/CAR_PRODUCTION_ASSET_TYPE_ALIAS_UNSUPPORTED/);

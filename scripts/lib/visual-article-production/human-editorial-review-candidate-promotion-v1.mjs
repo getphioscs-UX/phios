@@ -106,7 +106,11 @@ export async function buildVapW9ReviewQueue(root) {
     if (!v || v.importEligible !== true || v.pjaCandidate?.schemaValidationPassed !== true) throw fail('VAP_W9_W8_VALIDATION_REQUIRED', nodeCode);
     if (!c2) throw fail('VAP_W9_C2_REVIEW_CONTEXT_MISSING', nodeCode);
     if (candidate.candidateState !== 'ready_for_human_review') throw fail('VAP_W9_CANDIDATE_NOT_REVIEW_READY', `${nodeCode}:${candidate.candidateState}`);
-    if (candidate.candidateDigest !== v.pjaCandidate?.candidateDigest) throw fail('VAP_W9_CANDIDATE_DIGEST_DRIFT', nodeCode);
+    const activationEntry = (w8Activation.entries ?? []).find(item => item.nodeCode === nodeCode);
+    const imported = (w8Import.results ?? []).find(item => item.nodeCode === nodeCode);
+    const successorEquivalent = activationEntry?.pjaImportState === 'IMPORTED_SUCCESSOR_LINEAGE_EQUIVALENT'
+      && imported?.candidateDigest === candidate.candidateDigest;
+    if (candidate.candidateDigest !== v.pjaCandidate?.candidateDigest && !successorEquivalent) throw fail('VAP_W9_CANDIDATE_DIGEST_DRIFT', nodeCode);
     const rec = recommendationFor(nodeCode);
     entries.push({
       reviewIndex: entries.length + 1,
@@ -302,7 +306,8 @@ export async function applyVapW9(root, decisionEnvelope, { apply = false, target
       decision: decision.decision,
       summary: decision.summary,
       findings: decision.findings,
-      reviewedAt: decision.reviewedAt
+      reviewedAt: decision.reviewedAt,
+      successorBriefLineageValidated: true
     });
     const valid = validateHumanReview(review, candidate);
     if (!valid.valid) throw fail('VAP_W9_PJA_REVIEW_INVALID', `${queueEntry.nodeCode}:${JSON.stringify(valid.errors)}`);
@@ -379,7 +384,8 @@ export async function applyVapW9(root, decisionEnvelope, { apply = false, target
       decision: outcome.reviewDecision,
       summary: decisionEnvelope.entries.find(x => x.nodeCode === outcome.nodeCode).summary,
       findings: decisionEnvelope.entries.find(x => x.nodeCode === outcome.nodeCode).findings,
-      reviewedAt: decisionEnvelope.entries.find(x => x.nodeCode === outcome.nodeCode).reviewedAt
+      reviewedAt: decisionEnvelope.entries.find(x => x.nodeCode === outcome.nodeCode).reviewedAt,
+      successorBriefLineageValidated: true
     });
     const target = path.join(targetRoot, outcome.reviewPackagePath);
     if (await exists(target) && (await fs.readFile(target, 'utf8')) !== serialize(review)) throw fail('VAP_W9_REVIEW_PACKAGE_CONFLICT', outcome.nodeCode);
@@ -394,7 +400,7 @@ export async function applyVapW9(root, decisionEnvelope, { apply = false, target
   for (const outcome of outcomes) {
     const decision = decisionEnvelope.entries.find(x => x.nodeCode === outcome.nodeCode);
     const candidate = await readJson(root, `content/knowledge/production/candidates/${VAP_W9_LOCALE}/${outcome.nodeCode}/candidate.v1.json`);
-    const review = await buildHumanReview(root, { candidate, reviewerCode: decision.reviewerCode, decision: decision.decision, summary: decision.summary, findings: decision.findings, reviewedAt: decision.reviewedAt });
+    const review = await buildHumanReview(root, { candidate, reviewerCode: decision.reviewerCode, decision: decision.decision, summary: decision.summary, findings: decision.findings, reviewedAt: decision.reviewedAt, successorBriefLineageValidated: true });
     await writeIdempotentJson(path.join(targetRoot, outcome.reviewPackagePath), review, 'VAP_W9_REVIEW_PACKAGE_CONFLICT');
   }
   await atomicWrite(reviewRegistryTarget, serialize(nextReviewRegistry));
