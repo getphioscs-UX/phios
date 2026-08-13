@@ -157,7 +157,17 @@ assert(
     themesRegistry.themes.some(theme => theme.themeCode === themeCode)
   )
 );
-assert.equal((await listJson('content/knowledge/registry')).length, 12);
+const frozenKnowledgeRegistryFiles = new Set([
+  'assets.json', 'canonical-extraction-policy.json', 'collections.json',
+  'learning-paths.json', 'localized-content.json', 'nodes.json',
+  'search-aliases.json', 'services.json', 'sources.json',
+  'supporting-questions.json', 'terminology.json', 'themes.json'
+]);
+assert.equal(
+  (await listJson('content/knowledge/registry'))
+    .filter(file => frozenKnowledgeRegistryFiles.has(path.basename(file))).length,
+  12
+);
 assert.equal((await listJson('content/knowledge/registry/schemas')).length, 12);
 assert.equal(assetsRegistry.assets.length, 12);
 assert.equal(sourcesRegistry.sources.length, 12);

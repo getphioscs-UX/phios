@@ -4,9 +4,6 @@ export const MANUSCRIPT_SOURCE_RUNTIME_VERSION = '1.1.0';
 const MAX_RESULTS = 4;
 const MAX_EXCERPT_CHARS = 1200;
 const MAX_TOTAL_EXCERPT_CHARS = 3600;
-const INTERNAL_MAX_RESULTS = 10;
-const INTERNAL_MAX_EXCERPT_CHARS = 1800;
-const INTERNAL_MAX_TOTAL_EXCERPT_CHARS = 10000;
 
 const clean = value => String(value ?? '')
   .normalize('NFKC')
@@ -34,6 +31,38 @@ export function queryTerms(value) {
   return unique([...latin, ...cjk]).slice(0, 40);
 }
 
+function correctionRows(sectionCode, corrections) {
+  return (corrections?.records || []).filter(record =>
+    record.sectionCode === sectionCode &&
+    String(record.status || '').toUpperCase() === 'APPROVED'
+  );
+}
+
+function correctedRecord(record, corrections) {
+  const rows = correctionRows(record.sectionCode, corrections);
+  if (!rows.length) return { ...record, editorialCorrections: [] };
+  let heading = String(record.heading ?? '');
+  let text = String(record.text ?? '');
+  for (const row of rows) {
+    if (row.field === 'heading' && (!row.rawValue || heading === row.rawValue)) {
+      heading = row.correctedValue || heading;
+    }
+    const from = row.textReplacement?.from;
+    const to = row.textReplacement?.to;
+    if (from && to) text = text.split(from).join(to);
+  }
+  return {
+    ...record,
+    heading,
+    text,
+    editorialCorrections: rows.map(row => ({
+      correctionCode: row.correctionCode,
+      status: 'APPROVED',
+      rawSourcePreserved: row.rawSourcePreserved !== false
+    }))
+  };
+}
+
 function scoreRecord(record, query, terms) {
   if (record.segmentType === 'FRONT_MATTER') return 0;
   const heading = normalized(record.heading);
@@ -54,9 +83,8 @@ function excerptFor(record, query, terms, maximum = MAX_EXCERPT_CHARS) {
   if (text.length <= maximum) return text;
   let anchor = text.indexOf(clean(query));
   if (anchor < 0) {
-    const lower = text.toLocaleLowerCase();
     for (const term of terms) {
-      anchor = lower.indexOf(term);
+      anchor = text.toLocaleLowerCase().indexOf(term);
       if (anchor >= 0) break;
     }
   }
@@ -83,29 +111,11 @@ function bindingFor(sectionCode, bindings) {
   };
 }
 
-function readabilityFor(sectionCode, readability) {
-  const record = (readability?.records || []).find(row => row.sectionCode === sectionCode);
-  if (!record) {
-    return {
-      reviewStatus: 'UNREVIEWED',
-      riskLevel: 'UNKNOWN',
-      runtimeEligibility: 'ELIGIBLE_UNREVIEWED',
-      findingCodes: []
-    };
-  }
-  return {
-    reviewStatus: record.reviewStatus || 'UNREVIEWED',
-    riskLevel: record.riskLevel || 'UNKNOWN',
-    runtimeEligibility: record.runtimeEligibility || 'ELIGIBLE_UNREVIEWED',
-    findingCodes: unique(record.findingCodes || [])
-  };
-}
-
 export function searchManuscriptCorpus({
   corpus,
   source,
   bindings = { records: [] },
-  readability = { records: [] },
+  corrections = { records: [] },
   query,
   maximumResults = MAX_RESULTS,
   maximumExcerptChars = MAX_EXCERPT_CHARS,
@@ -114,12 +124,11 @@ export function searchManuscriptCorpus({
   if (!corpus || !Array.isArray(corpus.records)) return [];
   const terms = queryTerms(query);
   const ranked = corpus.records
-    .map(record => ({
-      record,
-      readability: readabilityFor(record.sectionCode, readability),
-      score: scoreRecord(record, query, terms)
-    }))
-    .filter(item => item.score > 0 && item.readability.runtimeEligibility !== 'EXCLUDE_UNTIL_REVIEW')
+    .map(rawRecord => {
+      const record = correctedRecord(rawRecord, corrections);
+      return { record, score: scoreRecord(record, query, terms) };
+    })
+    .filter(item => item.score > 0)
     .sort((a, b) => b.score - a.score || a.record.sequence - b.record.sequence);
 
   const results = [];
@@ -145,16 +154,11 @@ export function searchManuscriptCorpus({
       score: item.score,
       excerpt,
       canonicalBinding: bindingFor(item.record.sectionCode, bindings),
-      readability: item.readability,
+      editorialCorrections: item.record.editorialCorrections,
       publicationState: 'SOURCE_NOT_CANONICAL_ARTICLE'
     });
   }
   return results;
-}
-
-async function sha256Hex(bytes) {
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  return [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, '0')).join('');
 }
 
 export async function loadR2RetrievalCorpus(binding, source) {
@@ -168,20 +172,9 @@ export async function loadR2RetrievalCorpus(binding, source) {
     const error = new Error('MANUSCRIPT_RETRIEVAL_CORPUS_NOT_FOUND');
     error.code = 'MANUSCRIPT_RETRIEVAL_CORPUS_NOT_FOUND';
     error.sourceCode = source.sourceCode;
-    error.r2ObjectKey = source.r2ObjectKey;
     throw error;
   }
-  const bytes = new Uint8Array(await new Response(object.body).arrayBuffer());
-  const actualRetrievalCorpusSha256 = await sha256Hex(bytes);
-  if (source.retrievalCorpusSha256 && actualRetrievalCorpusSha256 !== source.retrievalCorpusSha256) {
-    const error = new Error('MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH');
-    error.code = 'MANUSCRIPT_RETRIEVAL_CORPUS_BYTES_MISMATCH';
-    error.sourceCode = source.sourceCode;
-    error.expectedSha256 = source.retrievalCorpusSha256;
-    error.actualSha256 = actualRetrievalCorpusSha256;
-    throw error;
-  }
-  const text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+  const text = await new Response(object.body).text();
   const corpus = JSON.parse(text);
   if (corpus.bookCode !== source.bookCode || corpus.locale !== source.locale) {
     const error = new Error('MANUSCRIPT_RETRIEVAL_CORPUS_IDENTITY_MISMATCH');
@@ -198,17 +191,11 @@ export async function loadR2RetrievalCorpus(binding, source) {
     error.code = 'MANUSCRIPT_RETRIEVAL_CORPUS_COUNT_MISMATCH';
     throw error;
   }
-  return { ...corpus, retrievalCorpusSha256: actualRetrievalCorpusSha256 };
+  return corpus;
 }
 
 export const MANUSCRIPT_SOURCE_LIMITS = Object.freeze({
   maximumResults: MAX_RESULTS,
   maximumExcerptCharsPerResult: MAX_EXCERPT_CHARS,
   maximumTotalExcerptChars: MAX_TOTAL_EXCERPT_CHARS
-});
-
-export const MANUSCRIPT_GROUNDING_LIMITS = Object.freeze({
-  maximumResults: INTERNAL_MAX_RESULTS,
-  maximumExcerptCharsPerResult: INTERNAL_MAX_EXCERPT_CHARS,
-  maximumTotalExcerptChars: INTERNAL_MAX_TOTAL_EXCERPT_CHARS
 });

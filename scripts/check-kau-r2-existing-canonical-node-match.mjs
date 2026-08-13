@@ -54,14 +54,24 @@ assert.equal(acceptance.acceptance.nodesJsonModified, false);
 assert.equal(acceptance.acceptance.automaticCanonicalAcceptance, false);
 assert.equal(acceptance.acceptance.ksarCanonicalBindingRegistryPopulated, false);
 
+// KAU-R2 itself never auto-populates bindings. A later human-accepted successor may do so.
 const ksarBindings = readJson('content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json');
-assert.equal(ksarBindings.records.length, 0, 'KAU-R2 candidates must not become KSAR approved bindings before human acceptance.');
+const r3ResolutionPath = 'content/knowledge/reconciliation/kau-r3/kau-r3-human-resolution-v1.json';
+if (fs.existsSync(r3ResolutionPath)) {
+  const r3Resolution = readJson(r3ResolutionPath);
+  assert.equal(r3Resolution.status, 'HUMAN_RESOLVED');
+  assert.equal(r3Resolution.acceptStraightforwardMappings, true);
+  assert.equal(ksarBindings.records.length, 62, 'Only the human-accepted KAU-R3 Volume-I successor may populate the 62 approved primary bindings at this stage.');
+  assert(ksarBindings.records.every(r => r.bookCode === 'BOOK-1' && r.status === 'APPROVED'));
+} else {
+  assert.equal(ksarBindings.records.length, 0, 'KAU-R2 candidates must not become KSAR approved bindings before later human acceptance.');
+}
 
 const pkg = readJson('package.json');
 assert.equal(pkg.scripts['check:kau-r2'], 'node scripts/check-kau-r2-existing-canonical-node-match.mjs');
 
 console.log('✓ KAU-R2 Existing Canonical Node Match candidate phase passed.');
-console.log('  448 materialized manuscript segments are accounted for with candidate-only decisions.');
-console.log('  245 existing P0-P7 Canonical Nodes are accounted for in the coverage ledger.');
-console.log('  P8-P15 upgraded outline architecture is registered as a non-manuscript semantic constraint: 621 outline chapters vs 471 existing nodes.');
-console.log('  716 Canonical Nodes remain byte-identical; KSAR approved binding registry remains empty pending human acceptance.');
+console.log('  448 materialized manuscript segments remain accounted for with candidate-only R2 decisions.');
+console.log('  245 existing P0-P7 Canonical Nodes remain accounted for in the R2 coverage ledger.');
+console.log('  P8-P15 upgraded outline architecture remains a non-manuscript semantic constraint: 621 outline chapters vs 471 existing nodes.');
+console.log(`  716 Canonical Nodes remain byte-identical; later human-accepted KSAR bindings recognized: ${ksarBindings.records.length}.`);

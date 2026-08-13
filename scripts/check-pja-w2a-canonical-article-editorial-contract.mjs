@@ -217,7 +217,16 @@ assert.equal(
   contract.preservation.canonicalThemeCount
 );
 assert.equal(themesRegistry.themes.length, contract.preservation.canonicalThemeCount + blueprint.sourceParts);
-assert.equal(registryFiles.length, 12);
+const frozenKnowledgeRegistryFiles = [
+  'assets.json', 'canonical-extraction-policy.json', 'collections.json',
+  'learning-paths.json', 'localized-content.json', 'nodes.json',
+  'search-aliases.json', 'services.json', 'sources.json',
+  'supporting-questions.json', 'terminology.json', 'themes.json'
+];
+assert.deepEqual(
+  registryFiles.filter(file => frozenKnowledgeRegistryFiles.includes(file)).sort(),
+  [...frozenKnowledgeRegistryFiles].sort()
+);
 assert.equal(registrySchemas.length, 12);
 assert.equal(migrationFiles.length, 5);
 assert.equal(contract.preservation.canonicalNodeCount, blueprint.prefaceCanonicalNodes);

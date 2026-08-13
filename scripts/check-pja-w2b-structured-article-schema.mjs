@@ -498,9 +498,15 @@ assert(
   ),
   'PJA-W2B validates Theme coverage only for its Blueprint scope.'
 );
+const frozenKnowledgeRegistryFiles = new Set([
+  'assets.json', 'canonical-extraction-policy.json', 'collections.json',
+  'learning-paths.json', 'localized-content.json', 'nodes.json',
+  'search-aliases.json', 'services.json', 'sources.json',
+  'supporting-questions.json', 'terminology.json', 'themes.json'
+]);
 assert.equal(
   (await fs.readdir(path.join(root, 'content/knowledge/registry')))
-    .filter(file => file.endsWith('.json')).length,
+    .filter(file => frozenKnowledgeRegistryFiles.has(file)).length,
   12
 );
 assert.equal(

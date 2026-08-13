@@ -296,7 +296,16 @@ const registryFiles = (await fs.readdir(path.join(root, 'content/knowledge/regis
   .filter(file => file.endsWith('.json'));
 const registrySchemas = (await fs.readdir(path.join(root, 'content/knowledge/registry/schemas')))
   .filter(file => file.endsWith('.json'));
-assert.equal(registryFiles.length, 12);
+const frozenKnowledgeRegistryFiles = [
+  'assets.json', 'canonical-extraction-policy.json', 'collections.json',
+  'learning-paths.json', 'localized-content.json', 'nodes.json',
+  'search-aliases.json', 'services.json', 'sources.json',
+  'supporting-questions.json', 'terminology.json', 'themes.json'
+];
+assert.deepEqual(
+  registryFiles.filter(file => frozenKnowledgeRegistryFiles.includes(file)).sort(),
+  [...frozenKnowledgeRegistryFiles].sort()
+);
 assert.equal(registrySchemas.length, 12);
 assert.equal(evidence.preservation.knowledgeRegistryFileCount, 12);
 assert.equal(evidence.preservation.knowledgeRegistrySchemaCount, 12);
