@@ -1,78 +1,25 @@
 {
-  "schemaVersion": "PHI-OS-VAP-W28-PRODUCTION-VISUAL-ACCEPTANCE-v1.0.0",
+  "schemaVersion": "PHI-OS-VAP-PRODUCTION-VISUAL-ACCEPTANCE-v1.0.0",
   "work": "VAP-W28",
   "nodeCode": "KN-PREFACE-001",
   "locale": "zh-Hans",
   "slug": "ai-formation-from-civilizational-capability",
+  "href": "/articles/ai-formation-from-civilizational-capability",
   "productionUrl": "https://phios-github.pages.dev/articles/ai-formation-from-civilizational-capability",
-  "status": "AWAITING_TL_INTERACTIVE_BROWSER_ACCEPTANCE",
-  "executionPerformed": true,
+  "status": "BLOCKED_BY_PRODUCTION_EVIDENCE",
+  "executionPerformed": false,
   "automatedEvidence": {
-    "checkedAt": "2026-08-13T05:25:50.488Z",
-    "targets": {
-      "route": {
-        "url": "https://phios-github.pages.dev/articles/ai-formation-from-civilizational-capability",
-        "status": 200,
-        "contentType": "text/html; charset=utf-8",
-        "bytes": 1938,
-        "sha256": "db1b6ae32801331514a72a869e18eea95b39c641a5500e84f6b14cd4652d6e2c"
-      },
-      "article": {
-        "url": "https://phios-github.pages.dev/content/knowledge/public/visual-articles/zh-Hans/ai-formation-from-civilizational-capability.json",
-        "status": 200,
-        "contentType": "application/json",
-        "bytes": 11146,
-        "sha256": "4a607fc949375532c00ac757e162070ee576a310596c6b798418d30b5e23405e"
-      },
-      "asset": {
-        "url": "https://phios-github.pages.dev/assets/knowledge/KN-PREFACE-001/ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-002.webp",
-        "status": 200,
-        "contentType": "image/webp",
-        "bytes": 123720,
-        "sha256": "75f4a883cb13d422b849269c38e05ed7526d67548b609a717f0b3748c038f2d0"
-      }
-    },
-    "automated": {
-      "routeVisible": true,
-      "chineseMetadataCorrect": true,
-      "publicArticleVisible": true,
-      "figureReferenceCorrect": true,
-      "figureAssetVisible": true,
-      "deployedBytesMatchRepository": true,
-      "noFixtureLeakage": true,
-      "noUnpublishedAssetLeakage": true
-    },
-    "allAutomatedPassed": true
+    "routeHttp200": false,
+    "articleJsonHttp200": false,
+    "figureHttp200": false,
+    "rendererContractValid": true
   },
-  "interactiveBrowserAcceptance": {
-    "required": true,
-    "reviewPath": "content/production/visual-article/release/acceptance/VAP-W28-KN-PREFACE-001-ZH-HANS.browser-review.json",
-    "reviewed": false,
-    "reviewerCode": null,
-    "decision": null,
-    "checks": {
-      "articleVisible": false,
-      "figureVisible": false,
-      "figureCorrect": false,
-      "figurePlacementCorrect": false,
-      "altCorrect": false,
-      "pdsCorrect": false,
-      "mobileCorrect": false,
-      "chineseCorrect": false,
-      "noConsoleErrors": false,
-      "noBrokenAsset": false,
-      "noUnpublishedAssetLeakage": false,
-      "noFixtureLeakage": false
-    }
-  },
-  "upstream": {
-    "w25Digest": "c660a2dfd3538eda61d423076650eaff561b0a8263f760d3b809116ca5b2d93c",
-    "w27ReleaseDigest": "06ca9723e54aca89d285087191522a6000978b98e6e37a9256fc84d010055c36"
-  },
+  "browserReviewPath": "content/production/visual-article/release/acceptance/VAP-W28-browser-review.json",
   "governance": {
     "checkerWritesState": false,
-    "automaticHumanAcceptanceForbidden": true,
-    "automaticFreezeForbidden": true
+    "interactiveHumanAcceptanceRequired": true,
+    "automaticApprovalForbidden": true,
+    "automaticDeploymentForbidden": true
   },
-  "acceptanceDigest": "d87d8026663a0146ed320bc08c19a69b6bd607a0f08ca5465d6f8e3a67aaa06d"
+  "acceptanceDigest": "add21fc3ea46c245fe476b13fa13f0698f0ebb6e678eb31523510129bc300cb7"
 }

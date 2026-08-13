@@ -1,7 +1,6 @@
 import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { buildVisualArticleReleaseCandidate } from './article-release-v1.mjs';
 
 const root = process.cwd();
 const read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
@@ -15,7 +14,7 @@ export const executionPaths = {
   website: 'content/production/visual-article/release/website/VAP-W27-KN-PREFACE-001-ZH-HANS.json'
 };
 
-function markdownSections(markdown) {
+function markdownSections(markdown, figure) {
   const sections = []; let current = null;
   for (const chunk of markdown.split(/\n\s*\n/).map(value => value.trim()).filter(Boolean)) {
     const heading = chunk.match(/^#{2,3}\s+(.+)$/)?.[1];
@@ -25,14 +24,14 @@ function markdownSections(markdown) {
     current.blocks.push({ type: 'paragraph', text: chunk.replace(/\n/g, ' ') });
   }
   const target = sections[Math.min(1, sections.length - 1)];
-  target.blocks.push({ type: 'figure', assetCode: 'ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-002', displayMode: 'wide' });
+  target.blocks.push({ type: 'figure', assetCode: figure.assetCode, altText: figure.altText, caption: figure.altText, displayMode: 'wide' });
   const boundary = sections.at(-1);
   boundary.blocks.push({ type: 'insight', heading: '能力与责任必须保持区分', statement: '能力增加 ≠ 方向出现 ≠ 价值判断 ≠ 责任主体' });
   return sections;
 }
 
 export function buildArticleReleaseExecution() {
-  const w25 = buildVisualArticleReleaseCandidate({ root });
+  const w25 = read('content/production/visual-article/release/candidates/VAC-KN-PREFACE-001-ZH-HANS-v1.json');
   if (w25.status !== 'READY_FOR_RELEASE') throw new Error(`VAP_W26_REQUIRES_READY_W25:${w25.status}`);
   const article = read('content/knowledge/public/authority/articles/zh-Hans/KN-PREFACE-001.json');
   const figure = read('content/production/car/published/PUBLISHED-ASSET-KN-PREFACE-001-MECHANISM-ZH-HANS-002.json');
@@ -50,8 +49,13 @@ export function buildArticleReleaseExecution() {
   const publicArticle = {
     schemaVersion: 'PHI-OS-PUBLIC-VISUAL-ARTICLE-v1.0.0', assetCode: article.article.articleCode, nodeCode: article.nodeCode,
     locale: article.locale, slug: article.article.slug, publicHref: article.article.href, title: article.article.title,
-    summary: article.article.summary, answer: article.article.summary, publicationOrder: 1, contentStatus: 'content_reviewed', reviewStatus: 'approved', publicationStatus: 'published',
-    version: article.article.version, sections: markdownSections(article.article.bodyMarkdown),
+    summary: article.article.summary, shortAnswer: article.article.summary, publicationOrder: 1, contentStatus: 'content_reviewed', reviewStatus: 'approved', publicationStatus: 'published',
+    version: article.article.version, sections: markdownSections(article.article.bodyMarkdown, figure),
+    hero: { lead: article.article.summary },
+    keyConcepts: ['文明能力', '知识表达', '物质基础', '组织协调', '反馈机制'],
+    knowledgeBoundary: ['本文提供形成机制的理论解释，不把理论本身表述为已经完成全部事实审核的结论。', '计算能力不等于方向、价值判断或责任主体。'],
+    connections: { previousNode: null, nextNode: null, relatedNodes: [], relatedArticles: [], relatedBooks: [], relatedAtlasEntries: [], relatedFigures: [], journeyEntryTopics: [] },
+    publicSources: [],
     visualAssets: [{ assetCode: figure.assetCode, assetType: 'mechanism_diagram', publicSrc: figure.publicSrc, altText: figure.altText, caption: figure.altText, width: figure.width, height: figure.height, publicProjection: true }],
     figureReferences: authority.figureReferences, provenance: { bookCode: 'BOOK-1', partCode: 'P0', nodeCode: article.nodeCode, locale: article.locale, version: article.article.version, lineage: authority.lineage },
     seo: { title: `${article.article.title}｜PHI OS Knowledge`, description: article.article.summary }
