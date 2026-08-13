@@ -1,0 +1,4250 @@
+{
+  "schemaVersion": "PHI-OS-KAU-R4-VOLUME-II-SEMANTIC-RECONCILIATION-v1.0.0",
+  "stage": "KAU-R4",
+  "status": "SEMANTIC_RECONCILIATION_COMPLETE_HUMAN_ACCEPTANCE_PENDING",
+  "baselineCommit": "a8e6c3e9cd1495c407df321cfb94cdaa60e6446a",
+  "bookCode": "BOOK-2",
+  "sourceManuscript": "PHI-OS-Book-2-v1.pdf",
+  "sourceSha256": "1ae413dbfddae604f65af3e9b16a28a923899e3ebe8f419d9b7f3ff10bfa41fe",
+  "sectionInventory": "content/knowledge/manuscripts/extraction/book-2-full-section-inventory-v1.json",
+  "r2CandidateInput": "content/knowledge/reconciliation/kau-r2/book-2-section-node-candidates-v1.json",
+  "sectionCount": 173,
+  "decisionStats": {
+    "SUPPORTING_ONLY": 2,
+    "EXACT_MATCH": 159,
+    "EXPANDED_MATCH": 10,
+    "NEW_NODE_REQUIRED": 2
+  },
+  "partStats": {
+    "FRONT": {
+      "sectionCount": 1,
+      "decisionStats": {
+        "SUPPORTING_ONLY": 1
+      }
+    },
+    "P5": {
+      "sectionCount": 66,
+      "decisionStats": {
+        "SUPPORTING_ONLY": 1,
+        "EXACT_MATCH": 65
+      }
+    },
+    "P6": {
+      "sectionCount": 49,
+      "decisionStats": {
+        "EXACT_MATCH": 42,
+        "EXPANDED_MATCH": 7
+      }
+    },
+    "P7": {
+      "sectionCount": 57,
+      "decisionStats": {
+        "EXACT_MATCH": 52,
+        "EXPANDED_MATCH": 3,
+        "NEW_NODE_REQUIRED": 2
+      }
+    }
+  },
+  "semanticPolicies": {
+    "oneSectionMaySupportMultipleCanonicalNodes": true,
+    "multiNodeSourceDoesNotImplyNodeMerge": true,
+    "legacyNodeWithoutFinalManuscriptSourceMayNotClaimSourceCoverage": true,
+    "legacySemanticCollisionMayNotBeSilentlyReusedForNewMeaning": true,
+    "outlineOnlyFuturePartMayReceiveRehomeCandidateButNotAcceptedBinding": true
+  },
+  "automaticAcceptanceAllowed": false,
+  "nodesJsonMutationAllowed": false,
+  "ksarBindingMutationAllowedBeforeHumanAcceptance": false,
+  "records": [
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-FRONT-S000",
+      "sectionCode": "CM-B2V1-FRONT-S000",
+      "bookCode": "BOOK-2",
+      "partCode": "FRONT",
+      "heading": "Front Matter",
+      "pageRange": {
+        "start": 1,
+        "end": 3
+      },
+      "sectionTextSha256": "f680281d7439b962966e4eb92c7a926388a3fd52cfd2caa893251f7dd02c4b6e",
+      "r2ProposedDecision": "SUPPORTING_ONLY",
+      "r4ProposedDecision": "SUPPORTING_ONLY",
+      "primaryNodeCodes": [],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Front matter or Part-level introduction is source context and does not independently require a Canonical Node.",
+      "canonicalBindingEligibleAfterHumanAcceptance": false,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S001",
+      "sectionCode": "CM-B2V1-P5-S001",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "意识运行 Conscious Runtime |",
+      "pageRange": {
+        "start": 3,
+        "end": 4
+      },
+      "sectionTextSha256": "beead0f3dbb8a972fbce0feb185fd2bf5afe2f45ce4297a4f74e2dc2ab08e263",
+      "r2ProposedDecision": "SUPPORTING_ONLY",
+      "r4ProposedDecision": "SUPPORTING_ONLY",
+      "primaryNodeCodes": [],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Front matter or Part-level introduction is source context and does not independently require a Canonical Node.",
+      "canonicalBindingEligibleAfterHumanAcceptance": false,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S002",
+      "sectionCode": "CM-B2V1-P5-S002",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Runtime Visibility |",
+      "pageRange": {
+        "start": 4,
+        "end": 7
+      },
+      "sectionTextSha256": "5549ee70f9fe21ecb8a08a1654bed1d9b3a7287191a7edca8499f4aedaca3c0b",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-001"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S003",
+      "sectionCode": "CM-B2V1-P5-S003",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Experience Emergence | 现实如何形成体验",
+      "pageRange": {
+        "start": 7,
+        "end": 9
+      },
+      "sectionTextSha256": "7f7422dfba42a9942fb9609fef08a83ec6e5cb10dbacd8a7d10702f05ddbac88",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-002"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S004",
+      "sectionCode": "CM-B2V1-P5-S004",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Awareness Formation | 体验如何进入觉察",
+      "pageRange": {
+        "start": 9,
+        "end": 10
+      },
+      "sectionTextSha256": "832a82c847ab859f3d83809fd7d7f6d86a34945cc20d44d58b6aa0ec74adc68e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-014"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S005",
+      "sectionCode": "CM-B2V1-P5-S005",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Dream Runtime | 现实如何在意识之外继续运行",
+      "pageRange": {
+        "start": 10,
+        "end": 12
+      },
+      "sectionTextSha256": "d6c66326052c291c4426b6a03dc6c496d741caa2d27cdcb4d851aa86279028f3",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-003"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S006",
+      "sectionCode": "CM-B2V1-P5-S006",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Continuous Conscious Process | 为什么意识是一",
+      "pageRange": {
+        "start": 12,
+        "end": 14
+      },
+      "sectionTextSha256": "6dc9b6bc55777730a85df9a2b4e1338cdf4b7993967670ffc6b7910c731be39c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-015"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S007",
+      "sectionCode": "CM-B2V1-P5-S007",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Subjective Reality |",
+      "pageRange": {
+        "start": 14,
+        "end": 16
+      },
+      "sectionTextSha256": "b6eee9d8b7a0ac302bffb3ec6bc85a18a14dfb30f404cdfe0bf1fd9c3d46b2bd",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-016"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S008",
+      "sectionCode": "CM-B2V1-P5-S008",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Conscious Illusion |",
+      "pageRange": {
+        "start": 16,
+        "end": 17
+      },
+      "sectionTextSha256": "5393b1050b2e3f56f0250452823f6554d7144c5175871ab0821ca085b39d4b10",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-004"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S009",
+      "sectionCode": "CM-B2V1-P5-S009",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Self Observation | 自我如何开始观察自己",
+      "pageRange": {
+        "start": 17,
+        "end": 19
+      },
+      "sectionTextSha256": "c5e38f0a69262fdd2ff744e28b012e31ee1478c1316c637df49ad5bc08e23b5e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-017"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S010",
+      "sectionCode": "CM-B2V1-P5-S010",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Self Construction | 为什么持续的运行中心，会逐",
+      "pageRange": {
+        "start": 19,
+        "end": 20
+      },
+      "sectionTextSha256": "bdb78289b181cf66ab4f7a759522c0f32282792315cc4865583b847eb6632006",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-005"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S011",
+      "sectionCode": "CM-B2V1-P5-S011",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Self Maintenance |",
+      "pageRange": {
+        "start": 20,
+        "end": 22
+      },
+      "sectionTextSha256": "631b00cf65c3d74639092f52e5b4a86ff93f053c998ae530aa71f9b8d3476e7d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-018"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S012",
+      "sectionCode": "CM-B2V1-P5-S012",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Self Fragmentation |",
+      "pageRange": {
+        "start": 22,
+        "end": 23
+      },
+      "sectionTextSha256": "5e2408c639f801d696f324dfb921cf0907802b6244014ab776dc6e08c2dcc6fd",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-019"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S013",
+      "sectionCode": "CM-B2V1-P5-S013",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Self Reintegration |",
+      "pageRange": {
+        "start": 23,
+        "end": 25
+      },
+      "sectionTextSha256": "38fb6673c71f2a3c664eae89865df00a8777626fd6c97c41ff2900ef8e20f2ef",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-020"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S014",
+      "sectionCode": "CM-B2V1-P5-S014",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Emotional Emergence | 情绪为何出现",
+      "pageRange": {
+        "start": 25,
+        "end": 27
+      },
+      "sectionTextSha256": "94e9ada5f3d32462c296f1e77c43a988ebb73c74504f4c82212027ad924665b7",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-006"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S015",
+      "sectionCode": "CM-B2V1-P5-S015",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Emotional Prediction | 情绪如何预测现实",
+      "pageRange": {
+        "start": 27,
+        "end": 28
+      },
+      "sectionTextSha256": "a76d051f57ce3da457ea70cfee39e8787469ed1b0081059491e6c3116421913b",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-021"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S016",
+      "sectionCode": "CM-B2V1-P5-S016",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Future Simulation | 意识如何提前体验未来",
+      "pageRange": {
+        "start": 28,
+        "end": 30
+      },
+      "sectionTextSha256": "bcd0096e9c72c00cac1abc7ff40d5ca7eec03bb3c3d0238f1fa5e0c492f54786",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-022"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S017",
+      "sectionCode": "CM-B2V1-P5-S017",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Emotional Regulation | 情绪如何调节运行",
+      "pageRange": {
+        "start": 30,
+        "end": 31
+      },
+      "sectionTextSha256": "306401a456faaa6f336220529b0ca11341b5cd07ff566ee6ab003875a5cc1ea0",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-023"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S018",
+      "sectionCode": "CM-B2V1-P5-S018",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Emotional Distortion | 情绪为何扭曲现实",
+      "pageRange": {
+        "start": 31,
+        "end": 33
+      },
+      "sectionTextSha256": "79113476bffdefba32ab159ac7c4ec7fc0e081a0eaa28c5108d0fbc630e50d11",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-024"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S019",
+      "sectionCode": "CM-B2V1-P5-S019",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Adaptive Imprinting | 现实如何留下适应痕迹",
+      "pageRange": {
+        "start": 33,
+        "end": 34
+      },
+      "sectionTextSha256": "29219dd5388d2746fbbf84356522151466efaf19dac2c83356ea382e4a3e8044",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-007"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S020",
+      "sectionCode": "CM-B2V1-P5-S020",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Adaptive Reconfiguration | 适应如何改变运行方式",
+      "pageRange": {
+        "start": 34,
+        "end": 35
+      },
+      "sectionTextSha256": "8827fcf932455e872e27a539f03b43574850105bc2978a91600e1a3511f78aee",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-025"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S021",
+      "sectionCode": "CM-B2V1-P5-S021",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Adaptive Reintegration | 适应结构如何重新整合",
+      "pageRange": {
+        "start": 35,
+        "end": 37
+      },
+      "sectionTextSha256": "92e47948bb5fc288c1c9529ebf40d25c3ec7af2fe7b920f121a1d7143f562ba1",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-026"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S022",
+      "sectionCode": "CM-B2V1-P5-S022",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Experience Configuration System |",
+      "pageRange": {
+        "start": 37,
+        "end": 40
+      },
+      "sectionTextSha256": "b3231f617bd6c54722d5345bfe316a7a828431e24dd87e8281e32a30f9ec02a5",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-008"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S023",
+      "sectionCode": "CM-B2V1-P5-S023",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Experience Selection |",
+      "pageRange": {
+        "start": 40,
+        "end": 41
+      },
+      "sectionTextSha256": "2266b03db7f727170c6b2e7a73ee34a36f4f0c52d9fc5b757cc99cb4b661391e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-027"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S024",
+      "sectionCode": "CM-B2V1-P5-S024",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Experience Stabilization | 体验如何获得稳定性",
+      "pageRange": {
+        "start": 41,
+        "end": 42
+      },
+      "sectionTextSha256": "b0a74ca91c07631898a1ba9e5d06aba6162736e8912d76302ed209bebf1d0870",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-028"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S025",
+      "sectionCode": "CM-B2V1-P5-S025",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Perspective Runtime | 现实如何被观察",
+      "pageRange": {
+        "start": 42,
+        "end": 44
+      },
+      "sectionTextSha256": "44d8833dff7ac283d2b4ab2096261f76fc219967e2ac272fc98a81e97e62256c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-009"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S026",
+      "sectionCode": "CM-B2V1-P5-S026",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Motivation Runtime | 现实为什么变得重要",
+      "pageRange": {
+        "start": 44,
+        "end": 46
+      },
+      "sectionTextSha256": "168978a29da661f72a6fe64b9d53b27970e9114045139fc01b1205996258eb1d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-029"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S027",
+      "sectionCode": "CM-B2V1-P5-S027",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Experience Integration |",
+      "pageRange": {
+        "start": 46,
+        "end": 48
+      },
+      "sectionTextSha256": "7db385a9b37194717a6af7c840dd1243a231d4e2eee4acec04ed7f5ba3f66b84",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-030"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S028",
+      "sectionCode": "CM-B2V1-P5-S028",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Temporal Integration |",
+      "pageRange": {
+        "start": 48,
+        "end": 49
+      },
+      "sectionTextSha256": "8fd280966d2227ffb505d34620d2b5c5f25c95dc24b880b29a2cce2659f2974c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-031"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S029",
+      "sectionCode": "CM-B2V1-P5-S029",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Sensory Integration |",
+      "pageRange": {
+        "start": 49,
+        "end": 50
+      },
+      "sectionTextSha256": "c2e61cd9a79ecf9e2748b022c5de901bfda999c5efcc5a980d2c385b918cc758",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-032"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S030",
+      "sectionCode": "CM-B2V1-P5-S030",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Internal Representation |",
+      "pageRange": {
+        "start": 50,
+        "end": 51
+      },
+      "sectionTextSha256": "73869b9a1c9bf16b8c97d68b982e1029859c2092cb0240db6699e187e9ff6573",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-033"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S031",
+      "sectionCode": "CM-B2V1-P5-S031",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Memory Organization |",
+      "pageRange": {
+        "start": 51,
+        "end": 53
+      },
+      "sectionTextSha256": "ad993c77fd420527f6b2edaceeb1bd3ede69ef7f7087af140b82685b67a872f7",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-034"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S032",
+      "sectionCode": "CM-B2V1-P5-S032",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Predictive Simulation |",
+      "pageRange": {
+        "start": 53,
+        "end": 54
+      },
+      "sectionTextSha256": "ea2c3d8aeaf096d48c034e9a7b0fe406a5917d231a5f744f0a32ff5c0c52b110",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-035"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S033",
+      "sectionCode": "CM-B2V1-P5-S033",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Representation Continuity |",
+      "pageRange": {
+        "start": 54,
+        "end": 57
+      },
+      "sectionTextSha256": "f296b496bcb560cc4f6ec69d291b9de25e5578ef63137131371b6738ef3742b9",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-036"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S034",
+      "sectionCode": "CM-B2V1-P5-S034",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Emergence | 表达为何出现",
+      "pageRange": {
+        "start": 57,
+        "end": 58
+      },
+      "sectionTextSha256": "617610f7407eec14ba24ea26e07d7a744ed99c488a00715e8010d83f64b1757b",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-037"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S035",
+      "sectionCode": "CM-B2V1-P5-S035",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Cognitive Expression |",
+      "pageRange": {
+        "start": 58,
+        "end": 59
+      },
+      "sectionTextSha256": "b0fba59422c84f7580e8b8e89aeff413ead5ca055c2d916bb547a32b851e22a2",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-038"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S036",
+      "sectionCode": "CM-B2V1-P5-S036",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Compression & Expression |",
+      "pageRange": {
+        "start": 59,
+        "end": 61
+      },
+      "sectionTextSha256": "5da73c3280134b961e16181253f41bd21d91370ec01f1fd1a72c130c82f97b59",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-010"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S037",
+      "sectionCode": "CM-B2V1-P5-S037",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Architectures |",
+      "pageRange": {
+        "start": 61,
+        "end": 63
+      },
+      "sectionTextSha256": "a2a057f7d3382b20a93bc90a264dca1df0c5d12ccf1eb68ac2c8a6bb4346698e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-039"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S038",
+      "sectionCode": "CM-B2V1-P5-S038",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Threshold |",
+      "pageRange": {
+        "start": 63,
+        "end": 64
+      },
+      "sectionTextSha256": "222cc0b9c1e907f43e64e2c46792aee1ad5b76d3bc762d243b1a4bab1e192266",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-040"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S039",
+      "sectionCode": "CM-B2V1-P5-S039",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Development | 表达如何持续成长",
+      "pageRange": {
+        "start": 64,
+        "end": 66
+      },
+      "sectionTextSha256": "cf5001c144b43969493eb2f97cd77815c79fb82c57042373fb785b71c7e09da5",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-041"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S040",
+      "sectionCode": "CM-B2V1-P5-S040",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Configuration |",
+      "pageRange": {
+        "start": 66,
+        "end": 68
+      },
+      "sectionTextSha256": "4b669673bb7188587d9ad5b176205c42ad451b3cde18d15d4dcfaa48e70b1a8c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-042"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S041",
+      "sectionCode": "CM-B2V1-P5-S041",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Medium Configuration | 现实如何选择表达介质",
+      "pageRange": {
+        "start": 68,
+        "end": 69
+      },
+      "sectionTextSha256": "e4c2bad98d0666430f192be335b738dc0baa2f2b699cbd5c88af58013116d2a5",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-043"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S042",
+      "sectionCode": "CM-B2V1-P5-S042",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Power | 为什么有些表达能够改变现实",
+      "pageRange": {
+        "start": 69,
+        "end": 71
+      },
+      "sectionTextSha256": "6f016e3626d520104d5af52a74444a4061b0b96a168cb196bc8c83e9b591e482",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-044"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S043",
+      "sectionCode": "CM-B2V1-P5-S043",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Distortion | 表达为何失真",
+      "pageRange": {
+        "start": 71,
+        "end": 73
+      },
+      "sectionTextSha256": "57cbe35893dc9c5e15802afb2f46ad8cb49d4dbe01ff20b2d44b958e59de031a",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-045"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S044",
+      "sectionCode": "CM-B2V1-P5-S044",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Expression Silence | 现实为何选择不表达",
+      "pageRange": {
+        "start": 73,
+        "end": 77
+      },
+      "sectionTextSha256": "99446fd71697f68bf9602071e19450b2635ccbbe4e4792e5d5a0691f3768d956",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-046"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S045",
+      "sectionCode": "CM-B2V1-P5-S045",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Intention Formation | 意图为何形成",
+      "pageRange": {
+        "start": 77,
+        "end": 78
+      },
+      "sectionTextSha256": "6d1c57ea979b11e46e05992dcecc88b7bc5b7ec48e06fe2eab6302b9cd931c26",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-011"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S046",
+      "sectionCode": "CM-B2V1-P5-S046",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Decision Emergence｜决策为何出现",
+      "pageRange": {
+        "start": 78,
+        "end": 79
+      },
+      "sectionTextSha256": "c0d3cf5f2bf144273b0ddbe9a2250d125ed61510a586e0ac56a4c6491a9e98fa",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-047"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S047",
+      "sectionCode": "CM-B2V1-P5-S047",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Decision Architectures |",
+      "pageRange": {
+        "start": 79,
+        "end": 81
+      },
+      "sectionTextSha256": "cd1c216410daa5cfed2e3ce23ddb48816c4b6e3599adcfb09059a1721de6b3fc",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-048"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S048",
+      "sectionCode": "CM-B2V1-P5-S048",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Decision Formation | 现实如何形成选择",
+      "pageRange": {
+        "start": 81,
+        "end": 82
+      },
+      "sectionTextSha256": "6eb3540b23cac9b957fc18abfdd663df31d733a63d218966c8953fd247aff6bc",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-049"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S049",
+      "sectionCode": "CM-B2V1-P5-S049",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Internal Conflict | 内部冲突为何出现",
+      "pageRange": {
+        "start": 82,
+        "end": 83
+      },
+      "sectionTextSha256": "5a4869480ca0070f4e160e0f2df9e81da1444eddcd0543e64ec841c40bad9dd3",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-050"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S050",
+      "sectionCode": "CM-B2V1-P5-S050",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Responsibility Formation | 责任如何形成",
+      "pageRange": {
+        "start": 83,
+        "end": 85
+      },
+      "sectionTextSha256": "f679c7c3d2eda8771bbda3ff99430984b7d543d982a5799ae55e3bfe6ae57836",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-051"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S051",
+      "sectionCode": "CM-B2V1-P5-S051",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Commitment Stability | 承诺为何能够持续存在",
+      "pageRange": {
+        "start": 85,
+        "end": 87
+      },
+      "sectionTextSha256": "ad7f7b0aef2efe7465588d7161cc8127845d68d7942d9d120d51856ccb33de6e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-052"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S052",
+      "sectionCode": "CM-B2V1-P5-S052",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Agency Collapse | 能动性为何会崩塌",
+      "pageRange": {
+        "start": 87,
+        "end": 91
+      },
+      "sectionTextSha256": "7814a0c0b830a3474a331f5f8df5bd516fb6f95b3e095e670a99cf0bf5b59327",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-053"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S053",
+      "sectionCode": "CM-B2V1-P5-S053",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Identity Stabilization | 身份如何被维持",
+      "pageRange": {
+        "start": 91,
+        "end": 92
+      },
+      "sectionTextSha256": "4ad5d3be9b2d732ef514d05caad85ba48fad8e825ab151cc49424174379be3df",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-012"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S054",
+      "sectionCode": "CM-B2V1-P5-S054",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Identity Compression | 身份如何被压缩",
+      "pageRange": {
+        "start": 92,
+        "end": 93
+      },
+      "sectionTextSha256": "35da0fd590cdf6cce73ea78a7092a432cfd7a253b4b01b7f2b6454bbbab1fd9e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-054"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S055",
+      "sectionCode": "CM-B2V1-P5-S055",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Identity Drift | 身份为何偏离",
+      "pageRange": {
+        "start": 93,
+        "end": 94
+      },
+      "sectionTextSha256": "3b1ce45d963414133a825b35050b4f75ae0878a98011d51ef5299b1f8db508a8",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-055"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S056",
+      "sectionCode": "CM-B2V1-P5-S056",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Identity Reconfiguration | 身份如何重组",
+      "pageRange": {
+        "start": 94,
+        "end": 96
+      },
+      "sectionTextSha256": "1c4ce64689e3c6893cda49d39459050a9248a8deae1d62060e47c5d832072e58",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-056"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S057",
+      "sectionCode": "CM-B2V1-P5-S057",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Identity Dissolution | 身份如何瓦解",
+      "pageRange": {
+        "start": 96,
+        "end": 98
+      },
+      "sectionTextSha256": "f6e871c5db7feea085b58694e4f1b8845779c7c45edd75cc7772d0243c9d7e30",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-057"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S058",
+      "sectionCode": "CM-B2V1-P5-S058",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Feedback Formation |",
+      "pageRange": {
+        "start": 98,
+        "end": 99
+      },
+      "sectionTextSha256": "a5fce49df5320dee4f168f57db327138a05f9ec29e625d6dfa4da12d33b30dc4",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-058"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S059",
+      "sectionCode": "CM-B2V1-P5-S059",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Runtime Calibration |",
+      "pageRange": {
+        "start": 99,
+        "end": 100
+      },
+      "sectionTextSha256": "05e4edff5045644e7d5b0249d05a8638555febf6d0ec2e4876286a4b3ad4438f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-059"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S060",
+      "sectionCode": "CM-B2V1-P5-S060",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Conscious Learning |",
+      "pageRange": {
+        "start": 100,
+        "end": 103
+      },
+      "sectionTextSha256": "c26fc3ddb896b226395ef127768e84b64c1e02bccae4a11bdb6b592fb05cf408",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-060"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S061",
+      "sectionCode": "CM-B2V1-P5-S061",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Self Model Dissolution | 为什么自我模型会从固定",
+      "pageRange": {
+        "start": 103,
+        "end": 104
+      },
+      "sectionTextSha256": "ddb44aebcd248464408e914731b03aa9db571a83c6ef9256f1057e7c8624d152",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-061"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S062",
+      "sectionCode": "CM-B2V1-P5-S062",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Narrative Survival | 为什么意识运行结束之后，现",
+      "pageRange": {
+        "start": 104,
+        "end": 106
+      },
+      "sectionTextSha256": "2e82b9d53d3f92fa7ca95b789e419bde16bcdcd7a9dbab71e6873e40dd00bdd8",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-062"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S063",
+      "sectionCode": "CM-B2V1-P5-S063",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Meaning Residue | 为什么意识运行结束之后，仍",
+      "pageRange": {
+        "start": 106,
+        "end": 107
+      },
+      "sectionTextSha256": "52ed7198a5746cd4bc6bc3f2c718f47e536fae5b36f0bc44d8b304d6b53dff13",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-063"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S064",
+      "sectionCode": "CM-B2V1-P5-S064",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Conscious Completion | 为什么意识运行能够完成",
+      "pageRange": {
+        "start": 107,
+        "end": 109
+      },
+      "sectionTextSha256": "7b7d1633da20fe555a94e9a376b6fd7f0a4b7458f7f92595c99f2a96c9bf081c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-064"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S065",
+      "sectionCode": "CM-B2V1-P5-S065",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Synthetic Self-Model | AI 是否能够形成自我模型",
+      "pageRange": {
+        "start": 109,
+        "end": 110
+      },
+      "sectionTextSha256": "780c2b25a08753ead2f48c70edb6c3d955fc1fcb3237118dd6a512cb6858cdba",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-013"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P5-S066",
+      "sectionCode": "CM-B2V1-P5-S066",
+      "bookCode": "BOOK-2",
+      "partCode": "P5",
+      "heading": "Synthetic Consciousness | 人工智能是否能够形成",
+      "pageRange": {
+        "start": 110,
+        "end": 113
+      },
+      "sectionTextSha256": "d1c6307db1e8a1ae6c86ac4258f1837a69332f1d73f2231fc6ed188a3ec57896",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B1-P5-065"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S001",
+      "sectionCode": "CM-B2V1-P6-S001",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Shared Runtime 为什么会出现共同现实",
+      "pageRange": {
+        "start": 113,
+        "end": 114
+      },
+      "sectionTextSha256": "ba9bc08673b84923a126045af19225207b05d6025d5e8e192e34256dcd2dc374",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-001"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S002",
+      "sectionCode": "CM-B2V1-P6-S002",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Runtime Synchronization |",
+      "pageRange": {
+        "start": 114,
+        "end": 116
+      },
+      "sectionTextSha256": "dc2e71dc39583b24861873f3a79448b01f5260f79da2adc00057e00ac96da96c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-002"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S003",
+      "sectionCode": "CM-B2V1-P6-S003",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Runtime Connection Mechanics |",
+      "pageRange": {
+        "start": 116,
+        "end": 118
+      },
+      "sectionTextSha256": "2afd5860c7d3e93d32d25d2088e0eb8405b4b96d13b6a2a662f015721f924355",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-003"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S004",
+      "sectionCode": "CM-B2V1-P6-S004",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Shared Field | 为什么共同场开始形成",
+      "pageRange": {
+        "start": 118,
+        "end": 119
+      },
+      "sectionTextSha256": "2bfdab6d8c1ccb808c658c6c3e16dca73dac2eac9fd1af7fab8746c0f1d69e29",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-004"
+      ],
+      "supportingNodeCodes": [
+        "KN-B2-P6-005"
+      ],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S005",
+      "sectionCode": "CM-B2V1-P6-S005",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Resonance | 为什么开始共振",
+      "pageRange": {
+        "start": 119,
+        "end": 121
+      },
+      "sectionTextSha256": "bbb390deeb26bebf8084c0a25d9aecf546a7812b93a2f319ff5bcb6b2d6de098",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-006"
+      ],
+      "supportingNodeCodes": [
+        "KN-B2-P6-005"
+      ],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S006",
+      "sectionCode": "CM-B2V1-P6-S006",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Interference | 为什么开始互相干扰",
+      "pageRange": {
+        "start": 121,
+        "end": 122
+      },
+      "sectionTextSha256": "493196a97fa500565bf22577f05d1475d0c0ca79549fc00d2d653f051dcb1ac8",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-007"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S007",
+      "sectionCode": "CM-B2V1-P6-S007",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Biological Resonance | 生命为何能够共同运行",
+      "pageRange": {
+        "start": 122,
+        "end": 124
+      },
+      "sectionTextSha256": "4bc5bb27c582f98465f06f9960ea62252546fd2db3c368a11dbed315b0a3330c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-008"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S008",
+      "sectionCode": "CM-B2V1-P6-S008",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Multi-Node Runtime | 现实如何形成多人系统",
+      "pageRange": {
+        "start": 124,
+        "end": 126
+      },
+      "sectionTextSha256": "3d6e90ef6f3c2d4eda3cec33df3f7300e9fee8e10a47e2681e85f01c16788223",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-009"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S009",
+      "sectionCode": "CM-B2V1-P6-S009",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Runtime Dominance |",
+      "pageRange": {
+        "start": 126,
+        "end": 127
+      },
+      "sectionTextSha256": "e520fd17cb8d2ac4338e3925b75ff9075ccc8eb54b25d34485425c26971a309d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-010"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S010",
+      "sectionCode": "CM-B2V1-P6-S010",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Relational Load｜",
+      "pageRange": {
+        "start": 127,
+        "end": 129
+      },
+      "sectionTextSha256": "478726ed9da5f875da6cf9d59540283e50592120106835764f8e005de31d5e86",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-011"
+      ],
+      "supportingNodeCodes": [
+        "KN-B2-P6-012"
+      ],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S011",
+      "sectionCode": "CM-B2V1-P6-S011",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Boundary Formation |",
+      "pageRange": {
+        "start": 129,
+        "end": 130
+      },
+      "sectionTextSha256": "747ee1459269bc5fec69e689a4e3e0d7ab26bbdf54d6975f815ebd76a949ba99",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-013"
+      ],
+      "supportingNodeCodes": [
+        "KN-B2-P6-012"
+      ],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S012",
+      "sectionCode": "CM-B2V1-P6-S012",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Boundary Transition |",
+      "pageRange": {
+        "start": 130,
+        "end": 131
+      },
+      "sectionTextSha256": "55efeb51e400567b0357bdc160927cbfee1bea2cec172aad2d15fc830bb986e6",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-014"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S013",
+      "sectionCode": "CM-B2V1-P6-S013",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Boundary Collapse |",
+      "pageRange": {
+        "start": 131,
+        "end": 132
+      },
+      "sectionTextSha256": "83f800ef3a37605d6f29881aa93b3cf758478ea29450b6760fc7d04b740aa077",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-015"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S014",
+      "sectionCode": "CM-B2V1-P6-S014",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Runtime Dependency |",
+      "pageRange": {
+        "start": 132,
+        "end": 133
+      },
+      "sectionTextSha256": "27fb097c198f76f5009bf6f2a23becc544aebff54c350072493277b9aeebb946",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-016"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S015",
+      "sectionCode": "CM-B2V1-P6-S015",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Attachment Runtime |",
+      "pageRange": {
+        "start": 133,
+        "end": 135
+      },
+      "sectionTextSha256": "c9c32e873f8b84bcc436b50df13e359d1b8d9d0190062f00001fca546a1cfa38",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-017"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S016",
+      "sectionCode": "CM-B2V1-P6-S016",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Runtime Evolution | 为什么共同现实会持续演化",
+      "pageRange": {
+        "start": 135,
+        "end": 137
+      },
+      "sectionTextSha256": "09ca3208a88929f64fb8d4c137892230ac9a2e21e16ae3612140b0a48a9cce8a",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-018"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S017",
+      "sectionCode": "CM-B2V1-P6-S017",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Reality Network |",
+      "pageRange": {
+        "start": 137,
+        "end": 138
+      },
+      "sectionTextSha256": "18f12a75cc1f1a719d76865a7484e1ac84e74f3f6d83e951c90d42c39e3a00fd",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-019"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S018",
+      "sectionCode": "CM-B2V1-P6-S018",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Participation Balance |",
+      "pageRange": {
+        "start": 138,
+        "end": 139
+      },
+      "sectionTextSha256": "62f00d739b8323c28f574553136ee809564c386d9cc2088ecce9d4e737542728",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-020"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S019",
+      "sectionCode": "CM-B2V1-P6-S019",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Responsibility Distribution |",
+      "pageRange": {
+        "start": 139,
+        "end": 141
+      },
+      "sectionTextSha256": "2354629153f85823952073b6c93aa58b08a46c5e238200bff4a4425cadc5573d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-021"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S020",
+      "sectionCode": "CM-B2V1-P6-S020",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "System Load Distribution |",
+      "pageRange": {
+        "start": 141,
+        "end": 142
+      },
+      "sectionTextSha256": "814d6628b192b57ff6c56112c1cf4e78e3f30d8b19f4cce1d7b6a62f8fc3826d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-022"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S021",
+      "sectionCode": "CM-B2V1-P6-S021",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Structural Cost |",
+      "pageRange": {
+        "start": 142,
+        "end": 143
+      },
+      "sectionTextSha256": "642e6980bdadd7ce9ed9a77cfdc03b2bd5dd0eea0dca0fe420753dc3de8a95bf",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-023"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S022",
+      "sectionCode": "CM-B2V1-P6-S022",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Ecological Stability |",
+      "pageRange": {
+        "start": 143,
+        "end": 145
+      },
+      "sectionTextSha256": "951974cb4fc2372989968e2aab0b6362a4b9ea608a0bce5fd654fe507f265adb",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-024"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S023",
+      "sectionCode": "CM-B2V1-P6-S023",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Reproductive Relationship",
+      "pageRange": {
+        "start": 145,
+        "end": 147
+      },
+      "sectionTextSha256": "2f6f0b270925a5bdcd3d0d75850cb4f7e3c932dea8c7daea940cbdfb8bbc0127",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-025"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S024",
+      "sectionCode": "CM-B2V1-P6-S024",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Pair Bond Runtime |",
+      "pageRange": {
+        "start": 147,
+        "end": 149
+      },
+      "sectionTextSha256": "b97f76e4719cac5c7e4a0dab23c7b736ae9cf9ba11738a7e7097ca1ddfe3c199",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-026"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S025",
+      "sectionCode": "CM-B2V1-P6-S025",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Parenting Runtime |",
+      "pageRange": {
+        "start": 149,
+        "end": 151
+      },
+      "sectionTextSha256": "7eddf6d229f2024b332f5e7d67a2266ef5a98cb378fbe6270344e298a9dc510f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-027"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S026",
+      "sectionCode": "CM-B2V1-P6-S026",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Child Runtime Reading |",
+      "pageRange": {
+        "start": 151,
+        "end": 152
+      },
+      "sectionTextSha256": "8e74492b58d78297af16476bff69fdcba10f3a79123eb8e03af4f4c9393f427d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-028"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S027",
+      "sectionCode": "CM-B2V1-P6-S027",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Generational Runtime | 为什么运行会跨世代延续",
+      "pageRange": {
+        "start": 152,
+        "end": 154
+      },
+      "sectionTextSha256": "22c03d8a2152410d7938f480f05537a94c72172ed21178b23ea4a8b496b210d5",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-029"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S028",
+      "sectionCode": "CM-B2V1-P6-S028",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Generational Projection |",
+      "pageRange": {
+        "start": 154,
+        "end": 155
+      },
+      "sectionTextSha256": "03c860fabebf664164b56bb4c969a2d13f1523df7b62a161f9ef49f9d47492fb",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-030"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S029",
+      "sectionCode": "CM-B2V1-P6-S029",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Intergenerational Transition |",
+      "pageRange": {
+        "start": 155,
+        "end": 157
+      },
+      "sectionTextSha256": "e6701b1c072e9b7719f116ec35bb6d655a55423e03938a9511531f3b52cda2dd",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-031"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S030",
+      "sectionCode": "CM-B2V1-P6-S030",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Family Stabilization |",
+      "pageRange": {
+        "start": 157,
+        "end": 159
+      },
+      "sectionTextSha256": "a6b3a7d2974718a5e4796a38806d5af3e02b77c97fdaf2575e6638fe2d34428d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-032"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S031",
+      "sectionCode": "CM-B2V1-P6-S031",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Emotional Flow｜",
+      "pageRange": {
+        "start": 159,
+        "end": 160
+      },
+      "sectionTextSha256": "20f6fd32c3502d387640a49d74923accaee0a7898973d4404155747b8575feba",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-033"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S032",
+      "sectionCode": "CM-B2V1-P6-S032",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Family Synchronization |",
+      "pageRange": {
+        "start": 160,
+        "end": 162
+      },
+      "sectionTextSha256": "200d282caa205e8a73817a90163d0470d2304f9d166b49b4f5709548e9fca15a",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-034"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S033",
+      "sectionCode": "CM-B2V1-P6-S033",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Family Reconfiguration |",
+      "pageRange": {
+        "start": 162,
+        "end": 163
+      },
+      "sectionTextSha256": "cddbfcc4682f67a7210623451971102362086daf09757a6474aa0f008774eab4",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-035"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S034",
+      "sectionCode": "CM-B2V1-P6-S034",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Family Collapse |",
+      "pageRange": {
+        "start": 163,
+        "end": 165
+      },
+      "sectionTextSha256": "8de538f19b0e01851e5271d23099c43cfb5f30ca1f6d3bf39578e892f2c55eb3",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-036"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S035",
+      "sectionCode": "CM-B2V1-P6-S035",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Group Formation | 为什么多个家庭会形成群体",
+      "pageRange": {
+        "start": 165,
+        "end": 166
+      },
+      "sectionTextSha256": "7cb0bf8974db3d1b9e33760a5bab41687c52ae35bf1f676adec13d575bc1991e",
+      "r2ProposedDecision": "EXPANDED_MATCH",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-037"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Final manuscript broadens the older Tribe Formation label to Group Formation. The existing node is retained as the closest mechanism candidate, while scope/key treatment is deferred to KAU-R5 successor review.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S036",
+      "sectionCode": "CM-B2V1-P6-S036",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Community Runtime |",
+      "pageRange": {
+        "start": 166,
+        "end": 167
+      },
+      "sectionTextSha256": "b537e73d86d311b4fb738df1f8caf3070b2d4e440f1a7ae388f8bc6e3420315c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-038"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S037",
+      "sectionCode": "CM-B2V1-P6-S037",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Shared Identity |",
+      "pageRange": {
+        "start": 167,
+        "end": 169
+      },
+      "sectionTextSha256": "1ef9994c604e6d488f05c5426e102d2bdcd85dff98e50fd45d95542b5d0b2a76",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-039"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S038",
+      "sectionCode": "CM-B2V1-P6-S038",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Collective Synchronization |",
+      "pageRange": {
+        "start": 169,
+        "end": 170
+      },
+      "sectionTextSha256": "5e4d7771f8e197751afe115564cfa8905b6c9a4d63b242a44f0548af690f83f2",
+      "r2ProposedDecision": "EXPANDED_MATCH",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-040"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Final manuscript uses Collective Synchronization where the legacy node uses Collective Resonance. The mechanism remains closely related, but the terminology/scope change is not silently rewritten.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S039",
+      "sectionCode": "CM-B2V1-P6-S039",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Group polarization |",
+      "pageRange": {
+        "start": 170,
+        "end": 171
+      },
+      "sectionTextSha256": "79da5f1f6d8f475293331e009863591c600e25ffe8e294cda39a6d637ea14209",
+      "r2ProposedDecision": "EXPANDED_MATCH",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-041"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Group Polarization is the final manuscript expression of the existing Collective Polarization mechanism; the source broadens examples without requiring a new node.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S040",
+      "sectionCode": "CM-B2V1-P6-S040",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Influence Formation |",
+      "pageRange": {
+        "start": 171,
+        "end": 173
+      },
+      "sectionTextSha256": "18a5f175593d1a9dfb75bf3ef2eac250f63af6b6558765ce5aad4958d4ddc5c4",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-042"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S041",
+      "sectionCode": "CM-B2V1-P6-S041",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Attention Coupling |",
+      "pageRange": {
+        "start": 173,
+        "end": 174
+      },
+      "sectionTextSha256": "ed7b699beb82bca21a16289c1b3827adbb4c3a8c1877c8b0a4583308cb24c00a",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-043"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S042",
+      "sectionCode": "CM-B2V1-P6-S042",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Belief Coupling |",
+      "pageRange": {
+        "start": 174,
+        "end": 175
+      },
+      "sectionTextSha256": "1101e177abc07cc3f758a16a6973a7451d93f5851f4e454c4a0f592b85ba0c00",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-044"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S043",
+      "sectionCode": "CM-B2V1-P6-S043",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Narrative Coupling |",
+      "pageRange": {
+        "start": 175,
+        "end": 176
+      },
+      "sectionTextSha256": "6ab53127fb297f86db5e3781068b08d5c1d1665fcf4e8dcd353beba4c74a8812",
+      "r2ProposedDecision": "REMAP",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-045"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Narrative Coupling is broader and more neutral than the legacy Narrative Infection label. The section remains an expanded source candidate while successor/metadata treatment is deferred.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S044",
+      "sectionCode": "CM-B2V1-P6-S044",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Collective Suggestion |",
+      "pageRange": {
+        "start": 176,
+        "end": 177
+      },
+      "sectionTextSha256": "52332f7189559a6d3488fd16c443d0585a0a3935f6291c4ed5465cd648ab22fe",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-046"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S045",
+      "sectionCode": "CM-B2V1-P6-S045",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Symbol impact |",
+      "pageRange": {
+        "start": 177,
+        "end": 179
+      },
+      "sectionTextSha256": "8a1cd6756832ad32dfe414507878c5ae761373b25219c0a57b4f78d96b6ad94b",
+      "r2ProposedDecision": "EXPANDED_MATCH",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-047"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Symbol Impact develops the same symbolic-influence mechanism with broader source treatment; no new Canonical Node is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S046",
+      "sectionCode": "CM-B2V1-P6-S046",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Relationship deadlock |",
+      "pageRange": {
+        "start": 179,
+        "end": 180
+      },
+      "sectionTextSha256": "c82bb19dd790ac5e98cf27194427ea819ce26021c375f11dcb954707f5638313",
+      "r2ProposedDecision": "EXPANDED_MATCH",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-048"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Relationship Deadlock develops the existing Relational Entrapment mechanism from the final manuscript perspective; no automatic identity rewrite is allowed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S047",
+      "sectionCode": "CM-B2V1-P6-S047",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "Runtime hijacking |",
+      "pageRange": {
+        "start": 180,
+        "end": 181
+      },
+      "sectionTextSha256": "a8da3ff74a3450b198c4d570dc79f6b302d0f963e44b6b7db5914498449508e0",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-049"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S048",
+      "sectionCode": "CM-B2V1-P6-S048",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "影响恢复 | 为什么生命能够重新回到现实本身",
+      "pageRange": {
+        "start": 181,
+        "end": 183
+      },
+      "sectionTextSha256": "161c38adb8843bcc2668f6efe94184cf9908662878accf05ad6b9f6ffb1b6134",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-050"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P6-S049",
+      "sectionCode": "CM-B2V1-P6-S049",
+      "bookCode": "BOOK-2",
+      "partCode": "P6",
+      "heading": "共同运行解除 | 为什么共同运行能够结束",
+      "pageRange": {
+        "start": 183,
+        "end": 187
+      },
+      "sectionTextSha256": "4667c69c13e0f8eaca5723d62ffbe1749457ec0b796dbf3d4304d8b9be4907d0",
+      "r2ProposedDecision": "MERGE_REQUIRED",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P6-056",
+        "KN-B2-P6-057",
+        "KN-B2-P6-058"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "The final “共同运行解除” section explicitly contains exit, retained shared memory/residue, and closure. One source section may support multiple Canonical Nodes; this does not justify merging node identities.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S001",
+      "sectionCode": "CM-B2V1-P7-S001",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Field | 集体场为何出现",
+      "pageRange": {
+        "start": 187,
+        "end": 188
+      },
+      "sectionTextSha256": "e03780c91a44a8aa56ba6efb5cc294170d8e4c80ec4138c233c56438d35b43e6",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-001"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S002",
+      "sectionCode": "CM-B2V1-P7-S002",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "共同投影 | 为什么彼此独立的共同运行，会开始形",
+      "pageRange": {
+        "start": 188,
+        "end": 189
+      },
+      "sectionTextSha256": "c0ba1e77eac838d7193656f03259a0eff848bcb4bac622d52d834ec2b038b02f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-002"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S003",
+      "sectionCode": "CM-B2V1-P7-S003",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Narrative Synchronization |",
+      "pageRange": {
+        "start": 189,
+        "end": 191
+      },
+      "sectionTextSha256": "4c8ea42f7ab8c45204775c90149467f19ae56b4dd0a1315c9c97a22787ad3e9f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-003"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S004",
+      "sectionCode": "CM-B2V1-P7-S004",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Emotion | 为什么情绪能够跨个体传播",
+      "pageRange": {
+        "start": 191,
+        "end": 192
+      },
+      "sectionTextSha256": "402f401d5d024629dd465211a88a5537d10dc4d59236f3fd3b62a63c7744edf4",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-004"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S005",
+      "sectionCode": "CM-B2V1-P7-S005",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Identity | 群体为什么会形成「我们」",
+      "pageRange": {
+        "start": 192,
+        "end": 195
+      },
+      "sectionTextSha256": "0e85b0f61e444ff720805018e71e4c81023ebdf9b1188d032c205dcba85028d4",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-005"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S006",
+      "sectionCode": "CM-B2V1-P7-S006",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Pressure | 集体为什么开始约束个体",
+      "pageRange": {
+        "start": 195,
+        "end": 197
+      },
+      "sectionTextSha256": "c64b8b939530e95cde354cf59bb955d9ee72187eca9e0294ab64a83b476b845a",
+      "r2ProposedDecision": "REMAP",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-006"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Final manuscript intentionally expresses this as Collective Pressure rather than Civilization Pressure. The core constraint-on-individual mechanism remains close, but scale terminology requires governed review.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S007",
+      "sectionCode": "CM-B2V1-P7-S007",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Value Formation |",
+      "pageRange": {
+        "start": 197,
+        "end": 199
+      },
+      "sectionTextSha256": "e7c345d056f20e16fac82daa0e1293a5da4823307c2b58e1233c2e80b4a9a06c",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-007"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S008",
+      "sectionCode": "CM-B2V1-P7-S008",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Value Hierarchy |",
+      "pageRange": {
+        "start": 199,
+        "end": 201
+      },
+      "sectionTextSha256": "dcdfd2196c224a157fbe3edaafebc92173d9e49a88a38589961425349d0f5ba5",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-008"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S009",
+      "sectionCode": "CM-B2V1-P7-S009",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Resource Compression |",
+      "pageRange": {
+        "start": 201,
+        "end": 203
+      },
+      "sectionTextSha256": "66df1373b3eb36e03bc6f026a8fcfaf7deab54eb2819600ab31d475fa06c661f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-009"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S010",
+      "sectionCode": "CM-B2V1-P7-S010",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Scarcity Formation | 为什么集体现实会产生稀缺",
+      "pageRange": {
+        "start": 203,
+        "end": 206
+      },
+      "sectionTextSha256": "43e506426a5ebd734c74641551b770de5deecbc7477d9806a22bd76d7061d7ca",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-010"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S011",
+      "sectionCode": "CM-B2V1-P7-S011",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Social Reward Systems |",
+      "pageRange": {
+        "start": 206,
+        "end": 208
+      },
+      "sectionTextSha256": "4c66d7b969145e85f51b2000149824655c430939e2378b44eff2942cdb0a9e36",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-011"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S012",
+      "sectionCode": "CM-B2V1-P7-S012",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Incentive Structures |",
+      "pageRange": {
+        "start": 208,
+        "end": 211
+      },
+      "sectionTextSha256": "20ea778dc1f2266a0796b6e96980b7edf98c3441c4a0baf56eb9aff081886508",
+      "r2ProposedDecision": "REMAP",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-012"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Final manuscript uses Collective Incentive Structures rather than Civilization Incentive Structures. Core incentive mechanics remain related; scale wording is deferred to KAU-R5.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S013",
+      "sectionCode": "CM-B2V1-P7-S013",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Memetic Runtime |",
+      "pageRange": {
+        "start": 211,
+        "end": 213
+      },
+      "sectionTextSha256": "d19bb1102a2d0a15470790f4f6c41a7ac017eed0494696cce5237f10b6de39cc",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-013"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S014",
+      "sectionCode": "CM-B2V1-P7-S014",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Cultural Runtime |",
+      "pageRange": {
+        "start": 213,
+        "end": 217
+      },
+      "sectionTextSha256": "19c5d2a17637155e12c9160fb1f3af4d0662ca571f198ded72b8e03568379e05",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-014"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S015",
+      "sectionCode": "CM-B2V1-P7-S015",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Economic Runtime |",
+      "pageRange": {
+        "start": 217,
+        "end": 220
+      },
+      "sectionTextSha256": "32c6a185b349b01fd591cabc860de7539ae9694ae5581085503a8ae9c25013d7",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-015"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S016",
+      "sectionCode": "CM-B2V1-P7-S016",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Value Storage |",
+      "pageRange": {
+        "start": 220,
+        "end": 223
+      },
+      "sectionTextSha256": "743d5a209a4d23e55904d72a5f36d8ea4040fc995715cb367b2259f4a8e020a7",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-016"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S017",
+      "sectionCode": "CM-B2V1-P7-S017",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Credit Creation |",
+      "pageRange": {
+        "start": 223,
+        "end": 227
+      },
+      "sectionTextSha256": "cf7fe96a358792d2aa611390d6f355e25a7e325813f860e19e420e4470b8c4fd",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-017"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S018",
+      "sectionCode": "CM-B2V1-P7-S018",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Debt Expansion |",
+      "pageRange": {
+        "start": 227,
+        "end": 231
+      },
+      "sectionTextSha256": "d26faa3d417eb89174ca88a4d7cef67d2d033c799391e5d7007524762a62adf5",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-018"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S019",
+      "sectionCode": "CM-B2V1-P7-S019",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Capital Allocation |",
+      "pageRange": {
+        "start": 231,
+        "end": 235
+      },
+      "sectionTextSha256": "c63928d521148a8a2348fc74fb6598390d34c74eaeb64864642fb1c2b5eb2c43",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-019"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S020",
+      "sectionCode": "CM-B2V1-P7-S020",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Financial Narratives |",
+      "pageRange": {
+        "start": 235,
+        "end": 239
+      },
+      "sectionTextSha256": "d71b5cc2c85a21a5c326232510ae325963e00404c78b9167ce2bf63b4eb62ac7",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-020"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S021",
+      "sectionCode": "CM-B2V1-P7-S021",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Speculative Cycles |",
+      "pageRange": {
+        "start": 239,
+        "end": 243
+      },
+      "sectionTextSha256": "c5dfd3d74e0f3afba449ea8a22fe999831c93de7fc93c788dac3cd9b0fd46b57",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-021"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S022",
+      "sectionCode": "CM-B2V1-P7-S022",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Financial Compression |",
+      "pageRange": {
+        "start": 243,
+        "end": 247
+      },
+      "sectionTextSha256": "542c7fed41a12a4061be0f11d7f10c2acf9d0b5a19487b74a1e38feed83bde89",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-022"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S023",
+      "sectionCode": "CM-B2V1-P7-S023",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Future Extraction |",
+      "pageRange": {
+        "start": 247,
+        "end": 251
+      },
+      "sectionTextSha256": "957cadddef25eb8084eedb6ff48e0344669bec949d6072b83b7d16f2aab262b5",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-023"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S024",
+      "sectionCode": "CM-B2V1-P7-S024",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Institutional Runtime |",
+      "pageRange": {
+        "start": 251,
+        "end": 255
+      },
+      "sectionTextSha256": "60692e3d7f7f5ca899bc2b8fc82045bf51c4ca6cfab74110c561781dc62f69d2",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-024"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S025",
+      "sectionCode": "CM-B2V1-P7-S025",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Information Runtime | 为什么大规模共同现实必须",
+      "pageRange": {
+        "start": 255,
+        "end": 258
+      },
+      "sectionTextSha256": "74791e443a9c616bac376c41dc5d3676d35644437b61d7d41a3ed680f8754fe6",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-025"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S026",
+      "sectionCode": "CM-B2V1-P7-S026",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Media Runtime | 为什么大规模共同现实需要选择",
+      "pageRange": {
+        "start": 258,
+        "end": 262
+      },
+      "sectionTextSha256": "9e2a9449e4b49d68588409bd042b06966832ea2a1bddba6dbad737721bcc40f9",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-026"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S027",
+      "sectionCode": "CM-B2V1-P7-S027",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Platform Runtime |",
+      "pageRange": {
+        "start": 262,
+        "end": 266
+      },
+      "sectionTextSha256": "3cf291f0e3cdd9213f406b2d3a2e53429cd08420457d68e69534cb3c03b2bc2d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-027"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S028",
+      "sectionCode": "CM-B2V1-P7-S028",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Network Runtime | 为什么大规模共同现实最终会",
+      "pageRange": {
+        "start": 266,
+        "end": 270
+      },
+      "sectionTextSha256": "2559cd40d36c7badb3c15055741b797f8864a6664c78b3931f7833f4a29acc9e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-028"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S029",
+      "sectionCode": "CM-B2V1-P7-S029",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Infrastructure Runtime | 为什么大规模共同现实必",
+      "pageRange": {
+        "start": 270,
+        "end": 274
+      },
+      "sectionTextSha256": "4e9958da151c67508f901a27e674feaf2dc5183860652b0216aba8044b7bc189",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-029"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S030",
+      "sectionCode": "CM-B2V1-P7-S030",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Neural Networks | 为什么大规模共同现",
+      "pageRange": {
+        "start": 274,
+        "end": 279
+      },
+      "sectionTextSha256": "f718f95c0c1d9b07cc538ddd2b2dce4c71734c2b443bded443e02af2950096fd",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-030"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S031",
+      "sectionCode": "CM-B2V1-P7-S031",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Attention Economy | 为什么信息越丰富，注意力",
+      "pageRange": {
+        "start": 279,
+        "end": 283
+      },
+      "sectionTextSha256": "265ff99a46d6d381cab80f6e6a9e16351b5e4697b8b87669a1c5caa6c36f398a",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-031"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S032",
+      "sectionCode": "CM-B2V1-P7-S032",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Attention Competition",
+      "pageRange": {
+        "start": 283,
+        "end": 286
+      },
+      "sectionTextSha256": "0a406b890abf4682f402380b4bab5f8c13e9d131cbcf40974af1d844f36a0ebf",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-032"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S033",
+      "sectionCode": "CM-B2V1-P7-S033",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Narrative Markets |",
+      "pageRange": {
+        "start": 286,
+        "end": 290
+      },
+      "sectionTextSha256": "5875722b20f31e4b7223dfbca291082d4dcc02db0df809e45fbb905c7e9da38e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-033"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S034",
+      "sectionCode": "CM-B2V1-P7-S034",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Attention Loops |",
+      "pageRange": {
+        "start": 290,
+        "end": 294
+      },
+      "sectionTextSha256": "ce67267cb7dff6fdd63bbb4905dddf0d86cfc3c99008aefd5b8599f14afd6d2a",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-034"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S035",
+      "sectionCode": "CM-B2V1-P7-S035",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Attention Capture |",
+      "pageRange": {
+        "start": 294,
+        "end": 298
+      },
+      "sectionTextSha256": "1c1da2da0d21b75ccb719550c4b53803c4c09cc79bb052c979a0a3ff42b58713",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-035"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S036",
+      "sectionCode": "CM-B2V1-P7-S036",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Algorithmic Amplification | 为什么高反应讯号会在",
+      "pageRange": {
+        "start": 298,
+        "end": 302
+      },
+      "sectionTextSha256": "4c54daf6faab83b56eb05bd9a9b4b5ffddd1c5bbdad71c65f1aa070fed772e71",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-036"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S037",
+      "sectionCode": "CM-B2V1-P7-S037",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Viral Runtime | 为什么某些现实能够在极短时间内",
+      "pageRange": {
+        "start": 302,
+        "end": 305
+      },
+      "sectionTextSha256": "cc2a2e5bff1f3454b427d65e74875f46a47ee24bfb608ce914a98f80b83efa3f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-037"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S038",
+      "sectionCode": "CM-B2V1-P7-S038",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "AI Attention Architecture | 为什么人工智能会开始",
+      "pageRange": {
+        "start": 305,
+        "end": 309
+      },
+      "sectionTextSha256": "af1d2def0c417514cf9fd5e6f579a22a8e5ee715a47ad20ac3fb2a024ef4f999",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-038"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S039",
+      "sectionCode": "CM-B2V1-P7-S039",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Temporal Compression | 为什么共同运行越复",
+      "pageRange": {
+        "start": 309,
+        "end": 313
+      },
+      "sectionTextSha256": "24281e7e68bb16b7d02b5435bc864f5911b47327ddef85208c46588ff0bee5f2",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-039"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S040",
+      "sectionCode": "CM-B2V1-P7-S040",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Acceleration Runtime | 为什么速度一旦成为优",
+      "pageRange": {
+        "start": 313,
+        "end": 317
+      },
+      "sectionTextSha256": "5d7c79188b909ab3673d1a6bf3232c4fdf162259fed8903eb9d42fec9bee9ff1",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-040"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S041",
+      "sectionCode": "CM-B2V1-P7-S041",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Productivity Runtime | 为什么文明会不断要求单位",
+      "pageRange": {
+        "start": 317,
+        "end": 321
+      },
+      "sectionTextSha256": "54a107cedbb6bedb01b7e3b8a080de5b4810c1688c69588f03c204b37389dc0f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-041"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S042",
+      "sectionCode": "CM-B2V1-P7-S042",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Future Orientation |",
+      "pageRange": {
+        "start": 321,
+        "end": 325
+      },
+      "sectionTextSha256": "52ec7d6c9491872e533da48cbd9943af114d551c0e57da4c1c8caf30c2591658",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-042"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S043",
+      "sectionCode": "CM-B2V1-P7-S043",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Generational Time |",
+      "pageRange": {
+        "start": 325,
+        "end": 329
+      },
+      "sectionTextSha256": "f7984c67ed5045e47b6d175ac3ac329e38e0b6c5f65c6ceb03617b64e2562a7d",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-043"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S044",
+      "sectionCode": "CM-B2V1-P7-S044",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Historical Memory |",
+      "pageRange": {
+        "start": 329,
+        "end": 334
+      },
+      "sectionTextSha256": "e2ec6acf3a900939a2b4e175bb58d5229fac5976f1076eaeaf055f9b31b7b9eb",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-044"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S045",
+      "sectionCode": "CM-B2V1-P7-S045",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Civilization Deadline |",
+      "pageRange": {
+        "start": 334,
+        "end": 337
+      },
+      "sectionTextSha256": "8cac64d6a8783afe3ccf17babd7eae032e3f06b307a91b3b7768d1f779d22396",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-045"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S046",
+      "sectionCode": "CM-B2V1-P7-S046",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Time Debt | 为什么今天没有承担的成本，会成为",
+      "pageRange": {
+        "start": 337,
+        "end": 341
+      },
+      "sectionTextSha256": "ab31f83c3464279f14d8708f2458753190c516bf8d952f3a878e84500f7c9c79",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-046"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S047",
+      "sectionCode": "CM-B2V1-P7-S047",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Artificial Collective Runtime | 为什么大量彼此连接",
+      "pageRange": {
+        "start": 341,
+        "end": 346
+      },
+      "sectionTextSha256": "0cd263f76320061a55367ae67257a593553e809a4803821c69d29b246f780cdf",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-047"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S048",
+      "sectionCode": "CM-B2V1-P7-S048",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Human-AI Collective |",
+      "pageRange": {
+        "start": 346,
+        "end": 350
+      },
+      "sectionTextSha256": "83bb48f580b4e44994dda15111ef889dc6697d666f514873c97935cd72a322a0",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-048"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S049",
+      "sectionCode": "CM-B2V1-P7-S049",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Synthetic Culture | 为什么人工系统参与之后，文",
+      "pageRange": {
+        "start": 350,
+        "end": 354
+      },
+      "sectionTextSha256": "5aba41e8a98b7b2db795ab4e6e52b3b593d64cce658bcd370df984023d863d67",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-049"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S050",
+      "sectionCode": "CM-B2V1-P7-S050",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Synthetic Value Systems |",
+      "pageRange": {
+        "start": 354,
+        "end": 357
+      },
+      "sectionTextSha256": "639b3ad1d289332a176ad28d0c2aab6553e9a50f6d8fc8c50cd53d9023e6d78f",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-050"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S051",
+      "sectionCode": "CM-B2V1-P7-S051",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Synthetic Coordination | 为什么人工系统开始参与",
+      "pageRange": {
+        "start": 357,
+        "end": 361
+      },
+      "sectionTextSha256": "7ad32c9fa5218d73f77e99ed08bfca398ac60fdb2e6d5460952ea09118ae1c96",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-051"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S052",
+      "sectionCode": "CM-B2V1-P7-S052",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "AI Collective Threshold | 人工运行何时开始跨过工",
+      "pageRange": {
+        "start": 361,
+        "end": 365
+      },
+      "sectionTextSha256": "0a410f1f18de08fac887795321ab072567af2fc76d953f4d4482fa9e5451de91",
+      "r2ProposedDecision": "NEW_NODE_REQUIRED",
+      "r4ProposedDecision": "NEW_NODE_REQUIRED",
+      "primaryNodeCodes": [],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [
+        "KN-B2-P7-052"
+      ],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Final manuscript section 'AI Collective Threshold | 人工运行何时开始跨过工' is not semantically equivalent to the legacy candidate KN-B2-P7-052. A new Book-II Canonical mechanism is proposed; the legacy node is preserved for later cross-volume rehome/successor reconciliation.",
+      "canonicalBindingEligibleAfterHumanAcceptance": false,
+      "requiresR5RegistryMutation": true,
+      "humanAcceptance": "PENDING",
+      "newNodeCandidate": {
+        "legacy": [
+          "KN-B2-P7-052"
+        ],
+        "provisionalConceptCode": "KAU-R4-NEW-P7-AI-COLLECTIVE-THRESHOLD",
+        "proposedTitleEn": "AI Collective Threshold",
+        "proposedTitleZhHans": "人工集体阈值",
+        "proposedCanonicalQuestion": "人工运行何时跨过工具集合与集体结构之间的边界",
+        "futureRehome": {
+          "legacyNodeCode": "KN-B2-P7-052",
+          "targetPartCode": "P11",
+          "targetSemanticLayer": "Synthetic Civilization",
+          "outlineAuthority": "KAU-R2 future-volume outline guard; P11 manuscript not yet available"
+        }
+      }
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S053",
+      "sectionCode": "CM-B2V1-P7-S053",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Saturation | 为什么集体运行不断扩大之",
+      "pageRange": {
+        "start": 365,
+        "end": 369
+      },
+      "sectionTextSha256": "2ace86f54315d9e07f0261fcf79810751d489eaee055fec2d2dbc5d43266be6e",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-053"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S054",
+      "sectionCode": "CM-B2V1-P7-S054",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Fragmentation | 为什么共同现实达到饱",
+      "pageRange": {
+        "start": 369,
+        "end": 374
+      },
+      "sectionTextSha256": "a5d1074a38659cf903bea2e8a5036bc53e879e46998458a504e078b86d0ee435",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-054"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S055",
+      "sectionCode": "CM-B2V1-P7-S055",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Collapse | 为什么局部仍然能够运行，集",
+      "pageRange": {
+        "start": 374,
+        "end": 378
+      },
+      "sectionTextSha256": "ee0d6fe22f6fee9e66f5d4c5ec120f50f1f77c013b107bcff0dca7ca0a5a8642",
+      "r2ProposedDecision": "EXACT_MATCH",
+      "r4ProposedDecision": "EXACT_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-055"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "HIGH",
+      "rationale": "Final manuscript section directly develops the existing same-Part Canonical mechanism; no Canonical identity change is proposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S056",
+      "sectionCode": "CM-B2V1-P7-S056",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Collective Reconfiguration | 为什么旧的集体结构",
+      "pageRange": {
+        "start": 378,
+        "end": 382
+      },
+      "sectionTextSha256": "77f35693045cfda8e57ffe6ef6ff42da5e9badf46b25ed7c4da60ece9157b8aa",
+      "r2ProposedDecision": "REMAP",
+      "r4ProposedDecision": "EXPANDED_MATCH",
+      "primaryNodeCodes": [
+        "KN-B2-P7-056"
+      ],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Final manuscript uses Collective Reconfiguration rather than Civilization Reconfiguration. The mechanism is retained only as an expanded candidate pending scope/successor review; the existing identity is not silently repurposed.",
+      "canonicalBindingEligibleAfterHumanAcceptance": true,
+      "requiresR5RegistryMutation": false,
+      "humanAcceptance": "PENDING"
+    },
+    {
+      "resolutionCode": "KAU-R4-CM-B2V1-P7-S057",
+      "sectionCode": "CM-B2V1-P7-S057",
+      "bookCode": "BOOK-2",
+      "partCode": "P7",
+      "heading": "Maintenance Threshold | 为什么集体运行达到一定",
+      "pageRange": {
+        "start": 382,
+        "end": 386
+      },
+      "sectionTextSha256": "296921568c87f85560ffcb2e53420f90753b339ec7859aa452e739164765d320",
+      "r2ProposedDecision": "NEW_NODE_REQUIRED",
+      "r4ProposedDecision": "NEW_NODE_REQUIRED",
+      "primaryNodeCodes": [],
+      "supportingNodeCodes": [],
+      "legacyCollisionNodeCodes": [
+        "KN-B2-P7-057"
+      ],
+      "confidence": "MEDIUM_HIGH",
+      "rationale": "Final manuscript section 'Maintenance Threshold | 为什么集体运行达到一定' is not semantically equivalent to the legacy candidate KN-B2-P7-057. A new Book-II Canonical mechanism is proposed; the legacy node is preserved for later cross-volume rehome/successor reconciliation.",
+      "canonicalBindingEligibleAfterHumanAcceptance": false,
+      "requiresR5RegistryMutation": true,
+      "humanAcceptance": "PENDING",
+      "newNodeCandidate": {
+        "legacy": [
+          "KN-B2-P7-057"
+        ],
+        "provisionalConceptCode": "KAU-R4-NEW-P7-MAINTENANCE-THRESHOLD",
+        "proposedTitleEn": "Maintenance Threshold",
+        "proposedTitleZhHans": "维护阈值",
+        "proposedCanonicalQuestion": "为什么集体运行达到一定规模之后必须开始维护自身",
+        "futureRehome": {
+          "legacyNodeCode": "KN-B2-P7-057",
+          "targetPartCode": "P10",
+          "targetChapterCode": "10.81",
+          "targetSemanticLayer": "Civilization Threshold",
+          "outlineAuthority": "KAU-R2 future-volume outline guard; P10.81 is an explicit semantic anchor"
+        }
+      }
+    }
+  ],
+  "humanAcceptance": "PENDING"
+}
