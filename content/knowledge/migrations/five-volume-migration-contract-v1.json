@@ -98,24 +98,27 @@
   },
   "progress": {
     "currentStep": "BOOK-W1B",
-    "status": "blocked-pending-complete-outline-authority-and-human-canonical-review",
+    "status": "source-authority-complete-pending-human-canonical-review",
     "migrationMapCount": 8,
     "upgradedOutlineChapterCount": 621,
     "accountedExistingCanonicalNodeCount": 471,
     "outlineChapterMinusExistingNodeCount": 150,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "fullChapterInventoryAvailableForParts": [
-      "P13"
-    ],
-    "fullChapterInventoryMissingForParts": [
       "P8",
       "P9",
       "P10",
       "P11",
       "P12",
+      "P13",
       "P14",
       "P15"
     ],
+    "fullChapterInventoryMissingForParts": [],
+    "sourceOutlineAuthorityPath": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "sourceOutlineSourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "sourceOutlineAuthorityAuthorizedByTl": true,
+    "w1bHumanAcceptanceSatisfied": false,
     "nextPermittedStep": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
   },
   "w1cCandidatePreparation": {
@@ -130,6 +133,7 @@
   },
   "w1dCandidatePreparation": {
     "status": "generated-blocked-not-active",
+    "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
     "canonicalReconciliationPath": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
     "publicationOwnershipPath": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
     "humanAcceptancePath": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",
@@ -138,6 +142,18 @@
     "w1bAcceptanceSatisfied": false,
     "w1cAcceptanceSatisfied": false,
     "activeCanonicalRegistryMutated": false,
+    "nextPermittedGate": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
+  },
+  "w1eCandidatePreparation": {
+    "status": "generated-blocked-not-active",
+    "projectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json",
+    "humanAcceptancePath": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
+    "w1dTlActivationReviewPath": "content/knowledge/migrations/book-w1d/book-w1d-tl-activation-review-v1.json",
+    "w1dActiveReconciliationSatisfied": false,
+    "mandatoryProjectionSourceCount": 10,
+    "canonicalRouteCount": 5,
+    "compatibilityAliasCount": 1,
+    "activePublicProjectionMutated": false,
     "nextPermittedGate": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE"
   }
 }

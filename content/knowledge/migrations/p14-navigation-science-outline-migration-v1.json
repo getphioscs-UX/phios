@@ -1,10 +1,10 @@
 {
-  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.0.0",
-  "schemaVersion": "1.0.0",
+  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.1.0",
+  "schemaVersion": "1.1.0",
   "migrationCode": "BOOK-W1B-P14-NAVIGATION-SCIENCE-OUTLINE-MIGRATION-v1",
   "phase": "BOOK-W1",
   "step": "BOOK-W1B",
-  "status": "in-progress-blocked-pending-canonical-outline-authority",
+  "status": "in-progress-source-authority-complete-pending-human-canonical-review",
   "recordedAt": "2026-08-13",
   "partAuthority": {
     "partCode": "P14",
@@ -15,20 +15,16 @@
     "newPublicationBookCode": "BOOK-5"
   },
   "sourceOutlineAuthority": {
-    "path": "content/knowledge/reconciliation/kau-r2/future-volume-outline-upgrade-guard-v1.json",
-    "sourceAuthority": "USER_SUPPLIED_UPGRADED_OUTLINE_2026-08-13",
-    "sourceStage": "OUTLINE_ONLY_NON_MANUSCRIPT",
+    "path": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "schemaVersion": "PHI-OS-BOOK-W1B-SOURCE-OUTLINE-AUTHORITY-v1.0.0",
+    "sourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "partInventorySha256": "22b52cccefff6b233322329b6ffbe4debaee370be567a271dd1f4f897c83e6b8",
     "upgradedOutlineChapterCount": 79,
-    "fullChapterListIncluded": false,
-    "chapterInventoryDigest": null,
-    "semanticAnchors": [
-      {
-        "chapterCode": "14.79",
-        "titleZhHans": "继续阈值",
-        "role": "Navigation → Continuation"
-      }
-    ],
-    "canonicalAcceptanceEligible": false
+    "fullChapterListIncluded": true,
+    "humanSourceAuthorizationRecorded": true,
+    "humanReviewEligible": true,
+    "canonicalAcceptanceEligible": false,
+    "sourceNormalizationApplied": "NONE"
   },
   "inventory": {
     "existingCanonicalNodeCount": 52,
@@ -36,23 +32,1019 @@
     "outlineChapterMinusExistingNodeCount": 27,
     "preservedExistingNodeCount": 52,
     "acceptedCanonicalOutlineMatchCount": 0,
-    "unresolvedSourceOutlineChapterCount": 79,
+    "unresolvedSourceOutlineChapterCount": 0,
+    "humanReviewRecommendationCount": 106,
+    "recommendedNewCanonicalNodeCandidateCount": 54,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "chapterCountDeltaIsNotANodeCandidateCount": true
   },
   "decisionSummary": {
-    "retain": 0,
-    "rename": 0,
-    "move": 52,
-    "supersede": 0,
-    "split": 0,
-    "merge": 0,
-    "new": 0,
-    "moveScope": "publication-ownership-only; same-Part chapter moves remain unresolved"
+    "recommendationsOnly": true,
+    "match": 2,
+    "rename": 1,
+    "move": 22,
+    "supersede": 27,
+    "splitCandidateReview": 13,
+    "mergeCandidateReview": 31,
+    "newCandidate": 54,
+    "acceptedDecisionCount": 0,
+    "publicationOwnershipMoveCount": 52,
+    "moveScope": "outline move recommendations are separate from BOOK-W1A publication-ownership moves"
   },
+  "splitCandidates": [
+    {
+      "oldNodeCode": "KN-B4-P14-003",
+      "oldChapterCode": "14.3",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.3",
+          "sourceTitle": "导航对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.5",
+          "sourceTitle": "导航准备度",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.6",
+          "sourceTitle": "导航目标",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-014",
+      "oldChapterCode": "14.14",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.17",
+          "sourceTitle": "风险诊断",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.35",
+          "sourceTitle": "风险与机会",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-019",
+      "oldChapterCode": "14.19",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.19",
+          "sourceTitle": "重构需求",
+          "score": 0.8859
+        },
+        {
+          "chapterCode": "14.42",
+          "sourceTitle": "行动形成",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "14.62",
+          "sourceTitle": "结果形成",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-020",
+      "oldChapterCode": "14.20",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.19",
+          "sourceTitle": "重构需求",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "14.11",
+          "sourceTitle": "压力诊断",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.22",
+          "sourceTitle": "期望状态",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-021",
+      "oldChapterCode": "14.21",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.3",
+          "sourceTitle": "导航对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.5",
+          "sourceTitle": "导航准备度",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.6",
+          "sourceTitle": "导航目标",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-022",
+      "oldChapterCode": "14.22",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.3",
+          "sourceTitle": "导航对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.5",
+          "sourceTitle": "导航准备度",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.6",
+          "sourceTitle": "导航目标",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-031",
+      "oldChapterCode": "14.31",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.19",
+          "sourceTitle": "重构需求",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "14.39",
+          "sourceTitle": "适应性决定",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "14.42",
+          "sourceTitle": "行动形成",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-034",
+      "oldChapterCode": "14.34",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.52",
+          "sourceTitle": "专业导航入口",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.54",
+          "sourceTitle": "专业诊断",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.57",
+          "sourceTitle": "跨专业协作",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-041",
+      "oldChapterCode": "14.41",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.68",
+          "sourceTitle": "导航反馈",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.72",
+          "sourceTitle": "循环导航",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-045",
+      "oldChapterCode": "14.45",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.50",
+          "sourceTitle": "多运行行动",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "14.43",
+          "sourceTitle": "行动尺度",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "14.3",
+          "sourceTitle": "导航对象",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-046",
+      "oldChapterCode": "14.46",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.65",
+          "sourceTitle": "结果归因",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "14.3",
+          "sourceTitle": "导航对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.5",
+          "sourceTitle": "导航准备度",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-047",
+      "oldChapterCode": "14.47",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.76",
+          "sourceTitle": "结果进入现实",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "14.3",
+          "sourceTitle": "导航对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.5",
+          "sourceTitle": "导航准备度",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P14-050",
+      "oldChapterCode": "14.50",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "14.3",
+          "sourceTitle": "导航对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.5",
+          "sourceTitle": "导航准备度",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "14.6",
+          "sourceTitle": "导航目标",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
+  "mergeCandidates": [
+    {
+      "outlineChapterCode": "14.3",
+      "sourceTitle": "导航对象",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.5",
+      "sourceTitle": "导航准备度",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.6",
+      "sourceTitle": "导航目标",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.11",
+      "sourceTitle": "压力诊断",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-010",
+          "oldChapterCode": "14.10",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.13",
+      "sourceTitle": "碎裂诊断",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-012",
+          "oldChapterCode": "14.12",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.17",
+      "sourceTitle": "风险诊断",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-014",
+          "oldChapterCode": "14.14",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.19",
+      "sourceTitle": "重构需求",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "score": 0.8859
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.22",
+      "sourceTitle": "期望状态",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.25",
+      "sourceTitle": "最小改变路径",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.26",
+      "sourceTitle": "结构调整路径",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.27",
+      "sourceTitle": "退出路径",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.32",
+      "sourceTitle": "决定依据",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.39",
+      "sourceTitle": "适应性决定",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-044",
+          "oldChapterCode": "14.44",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.41",
+      "sourceTitle": "决定边界",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.42",
+      "sourceTitle": "行动形成",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.47",
+      "sourceTitle": "行动边界",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.48",
+      "sourceTitle": "最小可行动作",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.52",
+      "sourceTitle": "专业导航入口",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.57",
+      "sourceTitle": "跨专业协作",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-034",
+          "oldChapterCode": "14.34",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.58",
+      "sourceTitle": "人工智能辅助专业导航",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-017",
+          "oldChapterCode": "14.17",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.62",
+      "sourceTitle": "结果形成",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.65",
+      "sourceTitle": "结果归因",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-046",
+          "oldChapterCode": "14.46",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.68",
+      "sourceTitle": "导航反馈",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.69",
+      "sourceTitle": "导航学习",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.71",
+      "sourceTitle": "导航修订",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.72",
+      "sourceTitle": "循环导航",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.73",
+      "sourceTitle": "导航完成",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.75",
+      "sourceTitle": "导航残留",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.76",
+      "sourceTitle": "结果进入现实",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-047",
+          "oldChapterCode": "14.47",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.77",
+      "sourceTitle": "后果与责任",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "14.79",
+      "sourceTitle": "继续阈值",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
   "reconciliationActionGates": [
     {
-      "action": "retain",
+      "action": "match",
       "status": "pending-explicit-human-canonical-review"
     },
     {
@@ -73,15 +1065,11 @@
     },
     {
       "action": "split",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "merge",
-      "status": "pending-explicit-human-canonical-review"
-    },
-    {
-      "action": "cross-part-related-node",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "new-candidate",
@@ -89,8 +1077,8 @@
     }
   ],
   "blocker": {
-    "code": "COMPLETE_CHAPTER_OUTLINE_AUTHORITY_REQUIRED",
-    "missingAuthority": "The complete Human-agreed chapter-by-chapter outline inventory plus explicit Human Canonical matching decisions.",
+    "code": "HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED",
+    "missingAuthority": "Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.",
     "w1bAcceptanceBlocked": true,
     "w1cSuccessorBlueprintGenerationAllowed": false
   },
@@ -108,832 +1096,3578 @@
       "oldChapterCode": "14.1",
       "newChapterCode": "14.1",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么需要 Navigation",
       "titleEn": "Why Navigation Exists",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.1",
+        "sourceOutlineTitle": "导航出现",
+        "sourceOutlineQuestion": "为什么理解 Reality 之后仍然需要形成方向",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-002",
       "oldChapterCode": "14.2",
       "newChapterCode": "14.2",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 必须进入 Navigation",
       "titleEn": "Reading and Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "rename",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "14.2",
+        "sourceOutlineTitle": "读取与导航边界",
+        "sourceOutlineQuestion": "为什么 Reading 不能自动升级为行动建议",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-003",
       "oldChapterCode": "14.3",
       "newChapterCode": "14.3",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "什么时候能够开始 Navigation",
       "titleEn": "Navigation Readiness",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.3",
+            "sourceTitle": "导航对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.5",
+            "sourceTitle": "导航准备度",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.6",
+            "sourceTitle": "导航目标",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-004",
       "oldChapterCode": "14.4",
       "newChapterCode": "14.4",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么必须知道自己在哪里",
       "titleEn": "Position Awareness",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.4",
+        "sourceOutlineTitle": "位置意识",
+        "sourceOutlineQuestion": "为什么所有 Navigation 都必须先知道当前在哪里",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-005",
       "oldChapterCode": "14.5",
-      "newChapterCode": "14.5",
+      "newChapterCode": "14.21",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "方向如何形成",
       "titleEn": "Direction Formation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.21",
+        "sourceOutlineTitle": "方向形成",
+        "sourceOutlineQuestion": "为什么方向不能直接从问题反向推导",
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-006",
       "oldChapterCode": "14.6",
-      "newChapterCode": "14.6",
+      "newChapterCode": "14.7",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Navigation 为什么存在限制",
       "titleEn": "Navigation Constraints",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.7",
+        "sourceOutlineTitle": "导航限制",
+        "sourceOutlineQuestion": "什么决定当前不能做什么",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-007",
       "oldChapterCode": "14.7",
-      "newChapterCode": "14.7",
+      "newChapterCode": "14.8",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Navigation 为什么存在边界",
       "titleEn": "Navigation Boundaries",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.8",
+        "sourceOutlineTitle": "导航边界",
+        "sourceOutlineQuestion": "为什么不是所有 Reality 都能够被当前主体改变",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-008",
       "oldChapterCode": "14.8",
-      "newChapterCode": "14.8",
+      "newChapterCode": "14.9",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Navigation 必须承担责任",
       "titleEn": "Navigation Responsibility",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.9",
+        "sourceOutlineTitle": "导航责任",
+        "sourceOutlineQuestion": "为什么提出方向本身就具有责任",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-009",
       "oldChapterCode": "14.9",
-      "newChapterCode": "14.9",
+      "newChapterCode": "14.10",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "运行诊断",
       "titleEn": "Runtime Diagnosis",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.10",
+        "sourceOutlineTitle": "运行诊断",
+        "sourceOutlineQuestion": "为什么 Reading 必须先转化成明确的问题结构",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-010",
       "oldChapterCode": "14.10",
       "newChapterCode": "14.10",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "压力识别",
       "titleEn": "Pressure Detection",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.11",
+            "sourceTitle": "压力诊断",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-011",
       "oldChapterCode": "14.11",
       "newChapterCode": "14.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "运行偏移",
       "titleEn": "Runtime Drift",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.12",
+            "sourceTitle": "漂移诊断",
+            "score": 0.81
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-012",
       "oldChapterCode": "14.12",
       "newChapterCode": "14.12",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "运行碎裂",
       "titleEn": "Runtime Fragmentation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.13",
+            "sourceTitle": "碎裂诊断",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-013",
       "oldChapterCode": "14.13",
       "newChapterCode": "14.13",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "运行停滞",
       "titleEn": "Runtime Deadlock",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.15",
+            "sourceTitle": "停滞诊断",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-014",
       "oldChapterCode": "14.14",
       "newChapterCode": "14.14",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "崩塌风险",
       "titleEn": "Collapse Risk",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.17",
+            "sourceTitle": "风险诊断",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.35",
+            "sourceTitle": "风险与机会",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-015",
       "oldChapterCode": "14.15",
-      "newChapterCode": "14.15",
+      "newChapterCode": "14.18",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "恢复潜力",
       "titleEn": "Recovery Potential",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.18",
+        "sourceOutlineTitle": "恢复潜力",
+        "sourceOutlineQuestion": "当前 Runtime 是否仍然拥有通过局部调整恢复的能力",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-016",
       "oldChapterCode": "14.16",
-      "newChapterCode": "14.16",
+      "newChapterCode": "14.20",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "诊断边界",
       "titleEn": "Diagnosis Boundary",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.20",
+        "sourceOutlineTitle": "诊断边界",
+        "sourceOutlineQuestion": "什么时候不能继续形成 Diagnosis",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-017",
       "oldChapterCode": "14.17",
       "newChapterCode": "14.17",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "重新建立位置",
       "titleEn": "Position Reconstruction",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.58",
+            "sourceTitle": "人工智能辅助专业导航",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-018",
       "oldChapterCode": "14.18",
       "newChapterCode": "14.18",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "恢复激活",
       "titleEn": "Activation Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-019",
       "oldChapterCode": "14.19",
       "newChapterCode": "14.19",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "重新组织运行",
       "titleEn": "Runtime Reconfiguration",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.19",
+            "sourceTitle": "重构需求",
+            "score": 0.8859
+          },
+          {
+            "chapterCode": "14.42",
+            "sourceTitle": "行动形成",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "14.62",
+            "sourceTitle": "结果形成",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-020",
       "oldChapterCode": "14.20",
       "newChapterCode": "14.20",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "调整结构",
       "titleEn": "Structural Adjustment",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.19",
+            "sourceTitle": "重构需求",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "14.11",
+            "sourceTitle": "压力诊断",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.22",
+            "sourceTitle": "期望状态",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-021",
       "oldChapterCode": "14.21",
       "newChapterCode": "14.21",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "关系导航",
       "titleEn": "Relationship Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.3",
+            "sourceTitle": "导航对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.5",
+            "sourceTitle": "导航准备度",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.6",
+            "sourceTitle": "导航目标",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-022",
       "oldChapterCode": "14.22",
       "newChapterCode": "14.22",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "资源导航",
       "titleEn": "Resource Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.3",
+            "sourceTitle": "导航对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.5",
+            "sourceTitle": "导航准备度",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.6",
+            "sourceTitle": "导航目标",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-023",
       "oldChapterCode": "14.23",
       "newChapterCode": "14.23",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "成本优化",
       "titleEn": "Cost Optimization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-024",
       "oldChapterCode": "14.24",
       "newChapterCode": "14.24",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "运行稳定",
       "titleEn": "Runtime Stabilization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-025",
       "oldChapterCode": "14.25",
-      "newChapterCode": "14.25",
+      "newChapterCode": "14.28",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "替代路径",
       "titleEn": "Alternative Paths",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.28",
+        "sourceOutlineTitle": "替代路径",
+        "sourceOutlineQuestion": "为什么 PHI OS 必须保留不止一种可行方向",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-026",
       "oldChapterCode": "14.26",
-      "newChapterCode": "14.26",
+      "newChapterCode": "14.31",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "决定如何形成",
       "titleEn": "Decision Formation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.31",
+        "sourceOutlineTitle": "决定形成",
+        "sourceOutlineQuestion": "一个 Decision 如何从 Reading、Diagnosis 与 Path 中形成",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-027",
       "oldChapterCode": "14.27",
-      "newChapterCode": "14.27",
+      "newChapterCode": "14.33",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么必须交换成本",
       "titleEn": "Trade-offs",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.33",
+        "sourceOutlineTitle": "成本交换",
+        "sourceOutlineQuestion": "为什么任何选择都会放弃其他可能",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-028",
       "oldChapterCode": "14.28",
-      "newChapterCode": "14.28",
+      "newChapterCode": "14.34",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么永远无法完全确定",
       "titleEn": "Uncertainty",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.34",
+        "sourceOutlineTitle": "不确定性",
+        "sourceOutlineQuestion": "为什么 Decision 永远无法等待完全确定",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-029",
       "oldChapterCode": "14.29",
-      "newChapterCode": "14.29",
+      "newChapterCode": "14.36",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "时机为什么重要",
       "titleEn": "Timing",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.36",
+        "sourceOutlineTitle": "时机",
+        "sourceOutlineQuestion": "为什么相同决定在不同时间可能产生完全不同结果",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-030",
       "oldChapterCode": "14.30",
-      "newChapterCode": "14.30",
+      "newChapterCode": "14.38",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "承诺为什么重要",
       "titleEn": "Commitment",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.38",
+        "sourceOutlineTitle": "承诺",
+        "sourceOutlineQuestion": "为什么真正的决定会改变后续选择空间",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-031",
       "oldChapterCode": "14.31",
       "newChapterCode": "14.31",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "适应性决策",
       "titleEn": "Adaptive Decisions",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.19",
+            "sourceTitle": "重构需求",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "14.39",
+            "sourceTitle": "适应性决定",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "14.42",
+            "sourceTitle": "行动形成",
+            "score": 0.81
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-032",
       "oldChapterCode": "14.32",
-      "newChapterCode": "14.32",
+      "newChapterCode": "14.40",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "决定如何修订",
       "titleEn": "Decision Revision",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.40",
+        "sourceOutlineTitle": "决定修订",
+        "sourceOutlineQuestion": "什么时候改变决定不是失败，而是 Reality Correction",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-033",
       "oldChapterCode": "14.33",
-      "newChapterCode": "14.33",
+      "newChapterCode": "14.53",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "专业读取",
       "titleEn": "Professional Reading",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "14.53",
+        "sourceOutlineTitle": "专业读取复核",
+        "sourceOutlineQuestion": "为什么专业行动之前必须重新检查 Reading Basis",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-034",
       "oldChapterCode": "14.34",
       "newChapterCode": "14.34",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "专业复核",
       "titleEn": "Professional Review",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.52",
+            "sourceTitle": "专业导航入口",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.54",
+            "sourceTitle": "专业诊断",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.57",
+            "sourceTitle": "跨专业协作",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-035",
       "oldChapterCode": "14.35",
-      "newChapterCode": "14.35",
+      "newChapterCode": "14.55",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "专业判断",
       "titleEn": "Professional Judgment",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.55",
+        "sourceOutlineTitle": "专业判断",
+        "sourceOutlineQuestion": "为什么 Professional Judgment 不能被算法输出直接替代",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-036",
       "oldChapterCode": "14.36",
-      "newChapterCode": "14.36",
+      "newChapterCode": "14.56",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "边界保护",
       "titleEn": "Boundary Protection",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "14.56",
+        "sourceOutlineTitle": "专业边界保护",
+        "sourceOutlineQuestion": "为什么专业人士必须知道什么不属于自己的 Authority",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-037",
       "oldChapterCode": "14.37",
-      "newChapterCode": "14.37",
+      "newChapterCode": "14.59",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "交付组织",
       "titleEn": "Deliverable Assembly",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.59",
+        "sourceOutlineTitle": "交付组织",
+        "sourceOutlineQuestion": "如何把 Reading、Diagnosis、Options、Risks 与 Action Plan 组织成可使用结果",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-038",
       "oldChapterCode": "14.38",
-      "newChapterCode": "14.38",
+      "newChapterCode": "14.60",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "专业签署",
       "titleEn": "Professional Signature",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.60",
+        "sourceOutlineTitle": "专业签署",
+        "sourceOutlineQuestion": "为什么某些高责任输出必须存在明确承担主体",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-039",
       "oldChapterCode": "14.39",
-      "newChapterCode": "14.39",
+      "newChapterCode": "14.61",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "专业责任",
       "titleEn": "Professional Responsibility",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.61",
+        "sourceOutlineTitle": "专业责任",
+        "sourceOutlineQuestion": "Navigation 产生真实后果之后，责任如何被保留",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-040",
       "oldChapterCode": "14.40",
       "newChapterCode": "14.40",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "连续性的基础",
       "titleEn": "Continuity Foundations",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-041",
       "oldChapterCode": "14.41",
       "newChapterCode": "14.41",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "反馈循环",
       "titleEn": "Feedback Loops",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.68",
+            "sourceTitle": "导航反馈",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.72",
+            "sourceTitle": "循环导航",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-042",
       "oldChapterCode": "14.42",
       "newChapterCode": "14.42",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "运行学习",
       "titleEn": "Runtime Learning",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.69",
+            "sourceTitle": "导航学习",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-043",
       "oldChapterCode": "14.43",
-      "newChapterCode": "14.43",
+      "newChapterCode": "14.70",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "导航记忆",
       "titleEn": "Navigation Memory",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "14.70",
+        "sourceOutlineTitle": "导航记忆",
+        "sourceOutlineQuestion": "为什么系统必须保存哪些路径尝试过、发生了什么结果",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-044",
       "oldChapterCode": "14.44",
       "newChapterCode": "14.44",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "适应演化",
       "titleEn": "Adaptive Evolution",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.39",
+            "sourceTitle": "适应性决定",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-045",
       "oldChapterCode": "14.45",
       "newChapterCode": "14.45",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "多个 Runtime 的共同导航",
       "titleEn": "Multi-Runtime Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.50",
+            "sourceTitle": "多运行行动",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "14.43",
+            "sourceTitle": "行动尺度",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "14.3",
+            "sourceTitle": "导航对象",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-046",
       "oldChapterCode": "14.46",
       "newChapterCode": "14.46",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "文明导航",
       "titleEn": "Civilization Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.65",
+            "sourceTitle": "结果归因",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "14.3",
+            "sourceTitle": "导航对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.5",
+            "sourceTitle": "导航准备度",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-047",
       "oldChapterCode": "14.47",
       "newChapterCode": "14.47",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "超越个体的导航",
       "titleEn": "Navigation Beyond Individuals",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.76",
+            "sourceTitle": "结果进入现实",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "14.3",
+            "sourceTitle": "导航对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.5",
+            "sourceTitle": "导航准备度",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-048",
       "oldChapterCode": "14.48",
       "newChapterCode": "14.48",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "现实演化",
       "titleEn": "Reality Evolution",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-049",
       "oldChapterCode": "14.49",
       "newChapterCode": "14.49",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "超越当前运行",
       "titleEn": "Reality Beyond Current Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.19",
+            "sourceTitle": "重构需求",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-050",
       "oldChapterCode": "14.50",
       "newChapterCode": "14.50",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "未来导航",
       "titleEn": "Future Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "14.3",
+            "sourceTitle": "导航对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.5",
+            "sourceTitle": "导航准备度",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "14.6",
+            "sourceTitle": "导航目标",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-051",
       "oldChapterCode": "14.51",
       "newChapterCode": "14.51",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "共同现实演化",
       "titleEn": "Shared Reality Evolution",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P14-052",
       "oldChapterCode": "14.52",
-      "newChapterCode": "14.52",
+      "newChapterCode": "14.74",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reality 将如何继续",
       "titleEn": "The Navigation Question",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "14.74",
+        "sourceOutlineTitle": "未完成导航",
+        "sourceOutlineQuestion": "为什么某些 Action 已经发生，结果却仍然没有形成足够 Evidence",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
+    }
+  ],
+  "outlineCandidates": [
+    {
+      "outlineChapterCode": "14.1",
+      "sourceTitle": "导航出现",
+      "canonicalQuestion": "为什么理解 Reality 之后仍然需要形成方向",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-001"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.2",
+      "sourceTitle": "读取与导航边界",
+      "canonicalQuestion": "为什么 Reading 不能自动升级为行动建议",
+      "recommendedAction": "rename",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-002"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.3",
+      "sourceTitle": "导航对象",
+      "canonicalQuestion": "我们究竟正在导航什么",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.4",
+      "sourceTitle": "位置意识",
+      "canonicalQuestion": "为什么所有 Navigation 都必须先知道当前在哪里",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-004"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.5",
+      "sourceTitle": "导航准备度",
+      "canonicalQuestion": "什么时候当前 Evidence 已经足够支持下一步 Navigation",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.6",
+      "sourceTitle": "导航目标",
+      "canonicalQuestion": "为什么 Navigation 必须知道试图改变什么",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.7",
+      "sourceTitle": "导航限制",
+      "canonicalQuestion": "什么决定当前不能做什么",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-006"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.8",
+      "sourceTitle": "导航边界",
+      "canonicalQuestion": "为什么不是所有 Reality 都能够被当前主体改变",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-007"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.9",
+      "sourceTitle": "导航责任",
+      "canonicalQuestion": "为什么提出方向本身就具有责任",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-008"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.10",
+      "sourceTitle": "运行诊断",
+      "canonicalQuestion": "为什么 Reading 必须先转化成明确的问题结构",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-009"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.11",
+      "sourceTitle": "压力诊断",
+      "canonicalQuestion": "什么时候压力仍属于可承受运行，什么时候已经需要调整",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-010",
+          "oldChapterCode": "14.10",
+          "titleEn": "Pressure Detection",
+          "titleZhHans": "压力识别",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.12",
+      "sourceTitle": "漂移诊断",
+      "canonicalQuestion": "什么 Evidence 足以支持 Runtime 已经偏离原有方向",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-011",
+          "oldChapterCode": "14.11",
+          "titleEn": "Runtime Drift",
+          "titleZhHans": "运行偏移",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.13",
+      "sourceTitle": "碎裂诊断",
+      "canonicalQuestion": "什么时候局部运行之间已经失去足够整合",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-012",
+          "oldChapterCode": "14.12",
+          "titleEn": "Runtime Fragmentation",
+          "titleZhHans": "运行碎裂",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.14",
+      "sourceTitle": "饱和诊断",
+      "canonicalQuestion": "什么时候当前容量已经不足以继续承载新的 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.15",
+      "sourceTitle": "停滞诊断",
+      "canonicalQuestion": "为什么系统仍然运行，却已经无法形成有效下一步",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-013",
+          "oldChapterCode": "14.13",
+          "titleEn": "Runtime Deadlock",
+          "titleZhHans": "运行停滞",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.16",
+      "sourceTitle": "结构失配诊断",
+      "canonicalQuestion": "什么时候问题已经不再属于局部，而进入结构层",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.17",
+      "sourceTitle": "风险诊断",
+      "canonicalQuestion": "什么风险已经需要进入 Navigation",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-014",
+          "oldChapterCode": "14.14",
+          "titleEn": "Collapse Risk",
+          "titleZhHans": "崩塌风险",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.18",
+      "sourceTitle": "恢复潜力",
+      "canonicalQuestion": "当前 Runtime 是否仍然拥有通过局部调整恢复的能力",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-015"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.19",
+      "sourceTitle": "重构需求",
+      "canonicalQuestion": "什么时候局部修正已经不足，必须考虑 Runtime Reconfiguration",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "titleEn": "Runtime Reconfiguration",
+          "titleZhHans": "重新组织运行",
+          "score": 0.8859
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "titleEn": "Adaptive Decisions",
+          "titleZhHans": "适应性决策",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.20",
+      "sourceTitle": "诊断边界",
+      "canonicalQuestion": "什么时候不能继续形成 Diagnosis",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-016"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.21",
+      "sourceTitle": "方向形成",
+      "canonicalQuestion": "为什么方向不能直接从问题反向推导",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-005"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.22",
+      "sourceTitle": "期望状态",
+      "canonicalQuestion": "Navigation 为什么需要描述可能进入的 Reality State",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "titleEn": "Runtime Reconfiguration",
+          "titleZhHans": "重新组织运行",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.23",
+      "sourceTitle": "方向边界",
+      "canonicalQuestion": "哪些方向虽然理想，却不符合当前 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.24",
+      "sourceTitle": "路径形成",
+      "canonicalQuestion": "为什么同一个方向可能存在多条不同路径",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.25",
+      "sourceTitle": "最小改变路径",
+      "canonicalQuestion": "什么时候最小调整比完整重构更合理",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.26",
+      "sourceTitle": "结构调整路径",
+      "canonicalQuestion": "什么时候必须改变责任、资源、关系或接口结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.27",
+      "sourceTitle": "退出路径",
+      "canonicalQuestion": "为什么某些 Navigation 的正确方向不是继续，而是结束",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.28",
+      "sourceTitle": "替代路径",
+      "canonicalQuestion": "为什么 PHI OS 必须保留不止一种可行方向",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-025"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.29",
+      "sourceTitle": "路径依赖",
+      "canonicalQuestion": "为什么今天选择的方向会改变未来可以选择什么",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.30",
+      "sourceTitle": "路径可逆性",
+      "canonicalQuestion": "为什么可逆与不可逆选择必须被区别处理",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.31",
+      "sourceTitle": "决定形成",
+      "canonicalQuestion": "一个 Decision 如何从 Reading、Diagnosis 与 Path 中形成",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-026"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.32",
+      "sourceTitle": "决定依据",
+      "canonicalQuestion": "哪些 Evidence、Constraint 与 Objective 必须进入决定",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "titleEn": "Runtime Reconfiguration",
+          "titleZhHans": "重新组织运行",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "titleEn": "Adaptive Decisions",
+          "titleZhHans": "适应性决策",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.33",
+      "sourceTitle": "成本交换",
+      "canonicalQuestion": "为什么任何选择都会放弃其他可能",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-027"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.34",
+      "sourceTitle": "不确定性",
+      "canonicalQuestion": "为什么 Decision 永远无法等待完全确定",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-028"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.35",
+      "sourceTitle": "风险与机会",
+      "canonicalQuestion": "为什么降低风险与保留机会必须同时考虑",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-014",
+          "oldChapterCode": "14.14",
+          "titleEn": "Collapse Risk",
+          "titleZhHans": "崩塌风险",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.36",
+      "sourceTitle": "时机",
+      "canonicalQuestion": "为什么相同决定在不同时间可能产生完全不同结果",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-029"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.37",
+      "sourceTitle": "决定窗口",
+      "canonicalQuestion": "为什么有些选择只能在特定时间范围内有效",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.38",
+      "sourceTitle": "承诺",
+      "canonicalQuestion": "为什么真正的决定会改变后续选择空间",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-030"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.39",
+      "sourceTitle": "适应性决定",
+      "canonicalQuestion": "为什么 Decision 必须能够根据新 Evidence 调整",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "titleEn": "Adaptive Decisions",
+          "titleZhHans": "适应性决策",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-044",
+          "oldChapterCode": "14.44",
+          "titleEn": "Adaptive Evolution",
+          "titleZhHans": "适应演化",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.40",
+      "sourceTitle": "决定修订",
+      "canonicalQuestion": "什么时候改变决定不是失败，而是 Reality Correction",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-032"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.41",
+      "sourceTitle": "决定边界",
+      "canonicalQuestion": "什么时候 PHI OS 不能替主体作出决定",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "titleEn": "Runtime Reconfiguration",
+          "titleZhHans": "重新组织运行",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "titleEn": "Adaptive Decisions",
+          "titleZhHans": "适应性决策",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.42",
+      "sourceTitle": "行动形成",
+      "canonicalQuestion": "为什么 Decision 必须被转换成可执行 Action",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "titleEn": "Runtime Reconfiguration",
+          "titleZhHans": "重新组织运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "titleEn": "Adaptive Decisions",
+          "titleZhHans": "适应性决策",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.43",
+      "sourceTitle": "行动尺度",
+      "canonicalQuestion": "为什么改变一个局部与改变整个 Runtime 不是同一等级",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-045",
+          "oldChapterCode": "14.45",
+          "titleEn": "Multi-Runtime Navigation",
+          "titleZhHans": "多个 Runtime 的共同导航",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.44",
+      "sourceTitle": "行动顺序",
+      "canonicalQuestion": "为什么正确的动作以错误顺序执行仍然可能失败",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.45",
+      "sourceTitle": "行动资源",
+      "canonicalQuestion": "什么资源必须在行动之前到位",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.46",
+      "sourceTitle": "行动权限",
+      "canonicalQuestion": "谁真正拥有改变当前 Reality 的 Authority",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.47",
+      "sourceTitle": "行动边界",
+      "canonicalQuestion": "哪些 Navigation 必须停留在建议，而不能直接介入",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.48",
+      "sourceTitle": "最小可行动作",
+      "canonicalQuestion": "为什么复杂 Navigation 应该先形成可验证的小步行动",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.49",
+      "sourceTitle": "结构行动",
+      "canonicalQuestion": "什么时候行动必须直接改变系统结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.50",
+      "sourceTitle": "多运行行动",
+      "canonicalQuestion": "当一个行动同时影响多个 Runtime 时应该如何处理",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-045",
+          "oldChapterCode": "14.45",
+          "titleEn": "Multi-Runtime Navigation",
+          "titleZhHans": "多个 Runtime 的共同导航",
+          "score": 0.84
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.51",
+      "sourceTitle": "行动停止条件",
+      "canonicalQuestion": "什么时候必须暂停、退出或撤销行动",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.52",
+      "sourceTitle": "专业导航入口",
+      "canonicalQuestion": "什么条件要求一般 Reading 升级为专业导航",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.53",
+      "sourceTitle": "专业读取复核",
+      "canonicalQuestion": "为什么专业行动之前必须重新检查 Reading Basis",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-033"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.54",
+      "sourceTitle": "专业诊断",
+      "canonicalQuestion": "专业人士如何界定问题而不越过自身领域",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-034",
+          "oldChapterCode": "14.34",
+          "titleEn": "Professional Review",
+          "titleZhHans": "专业复核",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.55",
+      "sourceTitle": "专业判断",
+      "canonicalQuestion": "为什么 Professional Judgment 不能被算法输出直接替代",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-035"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.56",
+      "sourceTitle": "专业边界保护",
+      "canonicalQuestion": "为什么专业人士必须知道什么不属于自己的 Authority",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-036"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.57",
+      "sourceTitle": "跨专业协作",
+      "canonicalQuestion": "什么时候单一专业已经不足以处理 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-034",
+          "oldChapterCode": "14.34",
+          "titleEn": "Professional Review",
+          "titleZhHans": "专业复核",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.58",
+      "sourceTitle": "人工智能辅助专业导航",
+      "canonicalQuestion": "AI 可以在哪些位置辅助 Professional",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-017",
+          "oldChapterCode": "14.17",
+          "titleEn": "Position Reconstruction",
+          "titleZhHans": "重新建立位置",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.59",
+      "sourceTitle": "交付组织",
+      "canonicalQuestion": "如何把 Reading、Diagnosis、Options、Risks 与 Action Plan 组织成可使用结果",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-037"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.60",
+      "sourceTitle": "专业签署",
+      "canonicalQuestion": "为什么某些高责任输出必须存在明确承担主体",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-038"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.61",
+      "sourceTitle": "专业责任",
+      "canonicalQuestion": "Navigation 产生真实后果之后，责任如何被保留",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-039"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.62",
+      "sourceTitle": "结果形成",
+      "canonicalQuestion": "为什么 Action 一旦进入 Reality，就会产生新的 Evidence",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "titleEn": "Runtime Reconfiguration",
+          "titleZhHans": "重新组织运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "titleEn": "Adaptive Decisions",
+          "titleZhHans": "适应性决策",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-020",
+          "oldChapterCode": "14.20",
+          "titleEn": "Structural Adjustment",
+          "titleZhHans": "调整结构",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.63",
+      "sourceTitle": "预期结果",
+      "canonicalQuestion": "为什么行动前必须知道希望观察什么变化",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.64",
+      "sourceTitle": "非预期结果",
+      "canonicalQuestion": "为什么 Reality 常常产生模型没有预见的后果",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.65",
+      "sourceTitle": "结果归因",
+      "canonicalQuestion": "为什么发生变化并不自动证明 Navigation 导致了变化",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-046",
+          "oldChapterCode": "14.46",
+          "titleEn": "Civilization Navigation",
+          "titleZhHans": "文明导航",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.66",
+      "sourceTitle": "结果延迟",
+      "canonicalQuestion": "为什么某些行动的真实后果需要更长时间才能被读取",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.67",
+      "sourceTitle": "结果冲突",
+      "canonicalQuestion": "为什么一个行动可能改善一个 Runtime，却损害另一个 Runtime",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.68",
+      "sourceTitle": "导航反馈",
+      "canonicalQuestion": "Outcome 如何返回 Reading 与 Decision",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.69",
+      "sourceTitle": "导航学习",
+      "canonicalQuestion": "过去行动如何改变下一轮路径选择",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.70",
+      "sourceTitle": "导航记忆",
+      "canonicalQuestion": "为什么系统必须保存哪些路径尝试过、发生了什么结果",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-043"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.71",
+      "sourceTitle": "导航修订",
+      "canonicalQuestion": "为什么 Navigation 必须随着 Outcome 持续更新",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.72",
+      "sourceTitle": "循环导航",
+      "canonicalQuestion": "为什么现实导航不是一次决定，而是持续反馈过程",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.73",
+      "sourceTitle": "导航完成",
+      "canonicalQuestion": "什么时候一轮 Navigation 可以被认为已经完成",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.74",
+      "sourceTitle": "未完成导航",
+      "canonicalQuestion": "为什么某些 Action 已经发生，结果却仍然没有形成足够 Evidence",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P14-052"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.75",
+      "sourceTitle": "导航残留",
+      "canonicalQuestion": "为什么一次 Navigation 会留下下一轮必须继续处理的现实",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.76",
+      "sourceTitle": "结果进入现实",
+      "canonicalQuestion": "为什么 Outcome 不只是评价，而会成为新的 Reality Condition",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-019",
+          "oldChapterCode": "14.19",
+          "titleEn": "Runtime Reconfiguration",
+          "titleZhHans": "重新组织运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-031",
+          "oldChapterCode": "14.31",
+          "titleEn": "Adaptive Decisions",
+          "titleZhHans": "适应性决策",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-047",
+          "oldChapterCode": "14.47",
+          "titleEn": "Navigation Beyond Individuals",
+          "titleZhHans": "超越个体的导航",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.77",
+      "sourceTitle": "后果与责任",
+      "canonicalQuestion": "为什么行动结束之后，Navigation Responsibility 仍然不会立即结束",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.78",
+      "sourceTitle": "下一运行条件",
+      "canonicalQuestion": "为什么本轮结果会成为下一轮 Runtime 的初始条件",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "14.79",
+      "sourceTitle": "继续阈值",
+      "canonicalQuestion": "为什么 Navigation 最终必须把 Reality 交还给下一轮运行",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P14-003",
+          "oldChapterCode": "14.3",
+          "titleEn": "Navigation Readiness",
+          "titleZhHans": "什么时候能够开始 Navigation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-021",
+          "oldChapterCode": "14.21",
+          "titleEn": "Relationship Navigation",
+          "titleZhHans": "关系导航",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P14-022",
+          "oldChapterCode": "14.22",
+          "titleEn": "Resource Navigation",
+          "titleZhHans": "资源导航",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
     }
   ]
 }

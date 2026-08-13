@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-W1D-TL-ACTIVATION-REVIEW-v1.0.0",
+  "phase": "BOOK-W1",
+  "step": "BOOK-W1D-ACTIVATION-READINESS",
+  "status": "BLOCKED_PENDING_W1B_W1C_W1D_HUMAN_GATES",
+  "generatedAt": "2026-08-13",
+  "directActivationAllowed": false,
+  "blockerSummary": {
+    "missingCompleteOutlineAuthorityPartCount": 0,
+    "missingCompleteOutlineAuthorities": [],
+    "w1bMigrationMapsAccepted": false,
+    "w1cSuccessorBlueprintsAccepted": false,
+    "w1dReconciliationAccepted": false,
+    "targetOnlyRehomeCount": 2
+  },
+  "reviewSequence": [
+    {
+      "order": 1,
+      "gate": "BOOK-W1B-SOURCE-AUTHORITY",
+      "requiredDecision": "Complete source authority is recorded for P8-P15; no further source inventory is missing.",
+      "satisfied": true,
+      "tlReviewRequired": false,
+      "systemMayInfer": false
+    },
+    {
+      "order": 2,
+      "gate": "BOOK-W1B-HUMAN-CANONICAL-OUTLINE-ACCEPTANCE",
+      "requiredDecision": "Review and accept the rebuilt eight migration maps, including every match, move, rename, split, merge, supersede and new candidate decision.",
+      "tlReviewRequired": true,
+      "systemMayInfer": false,
+      "acceptanceArtifact": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
+      "reviewedArtifacts": [
+        {
+          "path": "content/knowledge/migrations/p8-runtime-maintenance-outline-migration-v1.json",
+          "sha256": "2dd663d2208e45c9740a005c24076b351b7fe5e86b619f76a5d7483961cb63ee"
+        },
+        {
+          "path": "content/knowledge/migrations/p9-coordination-runtime-outline-migration-v1.json",
+          "sha256": "20dcad39cfe3cb520278c8ce5acd752fe0724b511bdf452d2b8107c32f8fada9"
+        },
+        {
+          "path": "content/knowledge/migrations/p10-runtime-expansion-outline-migration-v1.json",
+          "sha256": "2df29c729a32da2504af9f8f6a756ed9a4ee5e6273be4df53d760cb3e09af010"
+        },
+        {
+          "path": "content/knowledge/migrations/p11-civilization-runtime-outline-migration-v1.json",
+          "sha256": "474c2b2d6d726f565183c04cfd2bd739050c84083679cfc6627788953efe9d53"
+        },
+        {
+          "path": "content/knowledge/migrations/p12-civilization-atlas-outline-migration-v1.json",
+          "sha256": "b130b719a445d65958b072b796ad317d71a77a787e6baa9e7314df22489bd375"
+        },
+        {
+          "path": "content/knowledge/migrations/p13-reading-science-outline-migration-v1.json",
+          "sha256": "af0e65dc663e0af89408dd2d5fa73a067da69cc17af6ca8d626bf1540a20467f"
+        },
+        {
+          "path": "content/knowledge/migrations/p14-navigation-science-outline-migration-v1.json",
+          "sha256": "d4c6c0d65577f42789cf2cb4eaa5ef9243b2ff5b94056a3da8eed60df5aab9a0"
+        },
+        {
+          "path": "content/knowledge/migrations/p15-reality-continuation-outline-migration-v1.json",
+          "sha256": "c59d80364a484319a0fb38e9d8dd395ec6128a6f1aa532c91d9c525fe9feb8d9"
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "gate": "BOOK-W1C-HUMAN-SUCCESSOR-BLUEPRINT-ACCEPTANCE",
+      "requiredDecision": "Review and accept all four successor Blueprints after they are rebuilt from accepted W1B decisions.",
+      "tlReviewRequired": true,
+      "systemMayInfer": false,
+      "reviewedArtifacts": [
+        {
+          "path": "content/knowledge/blueprints/successors/book-w1c/book-2-knowledge-blueprint-v3.json",
+          "sha256": "515e4dadf9ff0e4e1609d1b91ede34cb62585ca636e0bb48d4ab4a3dbcf6ee00"
+        },
+        {
+          "path": "content/knowledge/blueprints/successors/book-w1c/book-3-knowledge-blueprint-v1.json",
+          "sha256": "5f1b3bc5410bc1e379b6f4780ad76d4ecba924db21e0ecae43d9cbb23e9493b6"
+        },
+        {
+          "path": "content/knowledge/blueprints/successors/book-w1c/book-4-knowledge-blueprint-v3.json",
+          "sha256": "f53c353a646fa326bc62c61d5918ee02f1788393d8d7ad4dac7e1d51b5d50932"
+        },
+        {
+          "path": "content/knowledge/blueprints/successors/book-w1c/book-5-knowledge-blueprint-v1.json",
+          "sha256": "0de1a998fe22ba48ec15557988ebcba1187150b00b9ef6fca5890703c0eea918"
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "gate": "BOOK-W1D-HUMAN-CANONICAL-RECONCILIATION-ACCEPTANCE",
+      "requiredDecision": "Accept the 718-entry identity ledger and 473 publication-ownership records; explicitly decide whether the two target-only rehomes may be physically applied.",
+      "tlReviewRequired": true,
+      "systemMayInfer": false,
+      "reviewedArtifacts": [
+        {
+          "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-candidate-v1.json",
+          "sha256": "eac630634c495caf8812257a789e0605acb7f4b1290cb7715cb0a68521a263be"
+        },
+        {
+          "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-candidate-v1.json",
+          "sha256": "2e310f271a644a2b52eebf978919c86b6503db90240c729bd5574430240b5ef2"
+        }
+      ]
+    }
+  ],
+  "specialTlDecisions": [
+    {
+      "canonicalNodeCode": "KN-B2-P7-052",
+      "targetPartCode": "P11",
+      "currentAuthority": "HUMAN_ACCEPTED_TARGET_ONLY",
+      "physicalApplicationDecision": null
+    },
+    {
+      "canonicalNodeCode": "KN-B2-P7-057",
+      "targetPartCode": "P10",
+      "currentAuthority": "HUMAN_ACCEPTED_TARGET_ONLY",
+      "physicalApplicationDecision": null
+    }
+  ],
+  "activationInvariant": {
+    "canonicalNodeCodeMutationAllowed": false,
+    "oldNodeCodeMustEqualCanonicalNodeCode": true,
+    "silentDeletionAllowed": false,
+    "w1eCurrentProductionMutationAllowedBeforeActivation": false
+  }
+}

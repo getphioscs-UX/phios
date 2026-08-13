@@ -1,10 +1,10 @@
 {
-  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.0.0",
-  "schemaVersion": "1.0.0",
+  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.1.0",
+  "schemaVersion": "1.1.0",
   "migrationCode": "BOOK-W1B-P8-RUNTIME-MAINTENANCE-OUTLINE-MIGRATION-v1",
   "phase": "BOOK-W1",
   "step": "BOOK-W1B",
-  "status": "in-progress-blocked-pending-canonical-outline-authority",
+  "status": "in-progress-source-authority-complete-pending-human-canonical-review",
   "recordedAt": "2026-08-13",
   "partAuthority": {
     "partCode": "P8",
@@ -17,20 +17,16 @@
     "newPublicationBookCode": "BOOK-3"
   },
   "sourceOutlineAuthority": {
-    "path": "content/knowledge/reconciliation/kau-r2/future-volume-outline-upgrade-guard-v1.json",
-    "sourceAuthority": "USER_SUPPLIED_UPGRADED_OUTLINE_2026-08-13",
-    "sourceStage": "OUTLINE_ONLY_NON_MANUSCRIPT",
+    "path": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "schemaVersion": "PHI-OS-BOOK-W1B-SOURCE-OUTLINE-AUTHORITY-v1.0.0",
+    "sourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "partInventorySha256": "adee6db4ae83e7ab6e251919ce58582fd383fa8b8e2b840ebe0c859c70d22d8c",
     "upgradedOutlineChapterCount": 64,
-    "fullChapterListIncluded": false,
-    "chapterInventoryDigest": null,
-    "semanticAnchors": [
-      {
-        "chapterCode": "8.64",
-        "titleZhHans": "协调阈值",
-        "role": "Maintenance → Coordination"
-      }
-    ],
-    "canonicalAcceptanceEligible": false
+    "fullChapterListIncluded": true,
+    "humanSourceAuthorizationRecorded": true,
+    "humanReviewEligible": true,
+    "canonicalAcceptanceEligible": false,
+    "sourceNormalizationApplied": "NONE"
   },
   "inventory": {
     "existingCanonicalNodeCount": 47,
@@ -38,23 +34,150 @@
     "outlineChapterMinusExistingNodeCount": 17,
     "preservedExistingNodeCount": 47,
     "acceptedCanonicalOutlineMatchCount": 0,
-    "unresolvedSourceOutlineChapterCount": 64,
+    "unresolvedSourceOutlineChapterCount": 0,
+    "humanReviewRecommendationCount": 67,
+    "recommendedNewCanonicalNodeCandidateCount": 20,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "chapterCountDeltaIsNotANodeCandidateCount": true
   },
   "decisionSummary": {
-    "retain": 0,
+    "recommendationsOnly": true,
+    "match": 0,
     "rename": 0,
-    "move": 47,
-    "supersede": 0,
-    "split": 0,
-    "merge": 0,
-    "new": 0,
-    "moveScope": "publication-ownership-only; same-Part chapter moves remain unresolved"
+    "move": 44,
+    "supersede": 3,
+    "splitCandidateReview": 3,
+    "mergeCandidateReview": 3,
+    "newCandidate": 20,
+    "acceptedDecisionCount": 0,
+    "publicationOwnershipMoveCount": 47,
+    "moveScope": "outline move recommendations are separate from BOOK-W1A publication-ownership moves"
   },
+  "splitCandidates": [
+    {
+      "oldNodeCode": "KN-B2-P8-005",
+      "oldChapterCode": "8.5",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "8.10",
+          "sourceTitle": "运行扭曲",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "8.61",
+          "sourceTitle": "维护闭环",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P8-013",
+      "oldChapterCode": "8.13",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "8.18",
+          "sourceTitle": "阈值穿越",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "8.46",
+          "sourceTitle": "维护学习",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "8.64",
+          "sourceTitle": "协调阈值",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P8-047",
+      "oldChapterCode": "8.47",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "8.1",
+          "sourceTitle": "维持出现",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "8.4",
+          "sourceTitle": "维持容量",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "8.5",
+          "sourceTitle": "维持边界",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
+  "mergeCandidates": [
+    {
+      "outlineChapterCode": "8.46",
+      "sourceTitle": "维护学习",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P8-013",
+          "oldChapterCode": "8.13",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "8.61",
+      "sourceTitle": "维护闭环",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P8-005",
+          "oldChapterCode": "8.5",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "8.64",
+      "sourceTitle": "协调阈值",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P8-013",
+          "oldChapterCode": "8.13",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
   "reconciliationActionGates": [
     {
-      "action": "retain",
+      "action": "match",
       "status": "pending-explicit-human-canonical-review"
     },
     {
@@ -75,15 +198,11 @@
     },
     {
       "action": "split",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "merge",
-      "status": "pending-explicit-human-canonical-review"
-    },
-    {
-      "action": "cross-part-related-node",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "new-candidate",
@@ -91,8 +210,8 @@
     }
   ],
   "blocker": {
-    "code": "COMPLETE_CHAPTER_OUTLINE_AUTHORITY_REQUIRED",
-    "missingAuthority": "The complete Human-agreed chapter-by-chapter outline inventory plus explicit Human Canonical matching decisions.",
+    "code": "HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED",
+    "missingAuthority": "Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.",
     "w1bAcceptanceBlocked": true,
     "w1cSuccessorBlueprintGenerationAllowed": false
   },
@@ -108,754 +227,2515 @@
     {
       "oldNodeCode": "KN-B2-P8-001",
       "oldChapterCode": "8.1",
-      "newChapterCode": "8.1",
+      "newChapterCode": "8.6",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行为何留下残留",
       "titleEn": "Residual Load",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.6",
+        "sourceOutlineTitle": "残余负荷",
+        "sourceOutlineQuestion": "一次运行结束之后，为什么仍然留下负荷",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-002",
       "oldChapterCode": "8.2",
-      "newChapterCode": "8.2",
+      "newChapterCode": "8.7",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 为什么不会自动归零",
       "titleEn": "Runtime Accumulation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.7",
+        "sourceOutlineTitle": "运行累积",
+        "sourceOutlineQuestion": "多次未完成运行如何不断叠加",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-003",
       "oldChapterCode": "8.3",
-      "newChapterCode": "8.3",
+      "newChapterCode": "8.8",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "过去为何持续存在",
       "titleEn": "Runtime Persistence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.8",
+        "sourceOutlineTitle": "运行持续",
+        "sourceOutlineQuestion": "过去形成的运行为什么不会自动退出",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-004",
       "oldChapterCode": "8.4",
-      "newChapterCode": "8.4",
+      "newChapterCode": "8.9",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何偏离原有轨道",
       "titleEn": "Drift Formation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "8.9",
+        "sourceOutlineTitle": "运行漂移",
+        "sourceOutlineQuestion": "现实如何逐渐偏离原有运行方向",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-005",
       "oldChapterCode": "8.5",
       "newChapterCode": "8.5",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何逐渐变形",
       "titleEn": "Distortion Formation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "8.10",
+            "sourceTitle": "运行扭曲",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "8.61",
+            "sourceTitle": "维护闭环",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-006",
       "oldChapterCode": "8.6",
-      "newChapterCode": "8.6",
+      "newChapterCode": "8.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何问题长期存在",
       "titleEn": "Chronic Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.11",
+        "sourceOutlineTitle": "慢性运行",
+        "sourceOutlineQuestion": "为什么原本短暂的问题会长期存在",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-007",
       "oldChapterCode": "8.7",
-      "newChapterCode": "8.7",
+      "newChapterCode": "8.12",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何失去整体性",
       "titleEn": "Fragmentation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.88,
+        "sourceOutlineChapterCode": "8.12",
+        "sourceOutlineTitle": "运行碎裂",
+        "sourceOutlineQuestion": "现实如何失去整体连接",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-008",
       "oldChapterCode": "8.8",
-      "newChapterCode": "8.8",
+      "newChapterCode": "8.13",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统无法继续承载",
       "titleEn": "Saturation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "8.13",
+        "sourceOutlineTitle": "运行饱和",
+        "sourceOutlineQuestion": "为什么系统最终无法继续承载更多现实",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-009",
       "oldChapterCode": "8.9",
-      "newChapterCode": "8.9",
+      "newChapterCode": "8.14",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "摩擦如何成为警告信号",
       "titleEn": "Friction Signals",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.14",
+        "sourceOutlineTitle": "摩擦讯号",
+        "sourceOutlineQuestion": "为什么原本顺畅的运行开始变得困难",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-010",
       "oldChapterCode": "8.10",
-      "newChapterCode": "8.10",
+      "newChapterCode": "8.15",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "重复模式如何成为警告",
       "titleEn": "Repetition Patterns",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.15",
+        "sourceOutlineTitle": "重复模式",
+        "sourceOutlineQuestion": "为什么相同问题会不断重新出现",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-011",
       "oldChapterCode": "8.11",
-      "newChapterCode": "8.11",
+      "newChapterCode": "8.16",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "慢性噪音如何形成",
       "titleEn": "Chronic Noise",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.16",
+        "sourceOutlineTitle": "慢性噪声",
+        "sourceOutlineQuestion": "为什么系统长期无法恢复清晰",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-012",
       "oldChapterCode": "8.12",
-      "newChapterCode": "8.12",
+      "newChapterCode": "8.17",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "失稳如何逐步升级",
       "titleEn": "Escalation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "8.17",
+        "sourceOutlineTitle": "运行升级",
+        "sourceOutlineQuestion": "为什么轻微问题会逐渐扩大",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-013",
       "oldChapterCode": "8.13",
       "newChapterCode": "8.13",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何跨越失稳阈值",
       "titleEn": "Threshold Crossing",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "8.18",
+            "sourceTitle": "阈值穿越",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "8.46",
+            "sourceTitle": "维护学习",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "8.64",
+            "sourceTitle": "协调阈值",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-014",
       "oldChapterCode": "8.14",
-      "newChapterCode": "8.14",
+      "newChapterCode": "8.19",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统持续警告却无人察觉",
       "titleEn": "Signal Blindness",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.19",
+        "sourceOutlineTitle": "讯号失读",
+        "sourceOutlineQuestion": "为什么系统不断警告，却始终没有获得回应",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-015",
       "oldChapterCode": "8.15",
-      "newChapterCode": "8.15",
+      "newChapterCode": "8.21",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何持续占用资源",
       "titleEn": "Interface Occupancy",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "8.21",
+        "sourceOutlineTitle": "接口占用",
+        "sourceOutlineQuestion": "现实如何持续占用运行资源",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-016",
       "oldChapterCode": "8.16",
-      "newChapterCode": "8.16",
+      "newChapterCode": "8.22",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统无法退出运行",
       "titleEn": "Interface Saturation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.22",
+        "sourceOutlineTitle": "接口饱和",
+        "sourceOutlineQuestion": "为什么系统已经停止行动，却仍然无法退出运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-017",
       "oldChapterCode": "8.17",
-      "newChapterCode": "8.17",
+      "newChapterCode": "8.23",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何成本最终进入载体",
       "titleEn": "Structural Cost Transfer",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "8.23",
+        "sourceOutlineTitle": "结构成本转移",
+        "sourceOutlineQuestion": "为什么系统会把无法处理的成本转移到其他位置",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-018",
       "oldChapterCode": "8.18",
-      "newChapterCode": "8.18",
+      "newChapterCode": "8.25",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "载体限制如何约束运行",
       "titleEn": "Embodied Constraints",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.25",
+        "sourceOutlineTitle": "载体限制",
+        "sourceOutlineQuestion": "身体为什么成为运行无法绕过的边界",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-019",
       "oldChapterCode": "8.19",
-      "newChapterCode": "8.19",
+      "newChapterCode": "8.26",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何没有崩溃却无法顺畅运行",
       "titleEn": "Soft Interruptions",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.26",
+        "sourceOutlineTitle": "软性中断",
+        "sourceOutlineQuestion": "为什么系统没有崩溃，却无法顺畅运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-020",
       "oldChapterCode": "8.20",
-      "newChapterCode": "8.20",
+      "newChapterCode": "8.27",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "慢性运行状态如何形成",
       "titleEn": "Chronic Runtime States",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.27",
+        "sourceOutlineTitle": "慢性运行状态",
+        "sourceOutlineQuestion": "长期负荷如何写入身体与意识",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-021",
       "oldChapterCode": "8.21",
-      "newChapterCode": "8.21",
+      "newChapterCode": "8.24",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "责任如何转化为运行成本",
       "titleEn": "Responsibility Mapping",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.24",
+        "sourceOutlineTitle": "责任负荷",
+        "sourceOutlineQuestion": "责任如何转化为持续运行成本",
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-022",
       "oldChapterCode": "8.22",
-      "newChapterCode": "8.22",
+      "newChapterCode": "8.28",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行接口如何组织",
       "titleEn": "Interface Architecture",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.28",
+        "sourceOutlineTitle": "接口架构",
+        "sourceOutlineQuestion": "运行成本会进入哪些承载位置",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-023",
       "oldChapterCode": "8.23",
-      "newChapterCode": "8.23",
+      "newChapterCode": "8.30",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Medical OS 如何成为 Runtime Maintenance Layer",
       "titleEn": "Medical Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "8.30",
+        "sourceOutlineTitle": "医疗运行边界",
+        "sourceOutlineQuestion": "什么时候运行维持必须进入专业医疗系统",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-024",
       "oldChapterCode": "8.24",
-      "newChapterCode": "8.24",
+      "newChapterCode": "8.31",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何检测安全",
       "titleEn": "Safety Detection",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.31",
+        "sourceOutlineTitle": "安全检测",
+        "sourceOutlineQuestion": "为什么系统必须先确认安全，才能开始恢复",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-025",
       "oldChapterCode": "8.25",
-      "newChapterCode": "8.25",
+      "newChapterCode": "8.32",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复许可如何形成",
       "titleEn": "Recovery Permission",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.32",
+        "sourceOutlineTitle": "恢复许可",
+        "sourceOutlineQuestion": "为什么系统即使拥有时间，也未必允许自己恢复",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-026",
       "oldChapterCode": "8.26",
-      "newChapterCode": "8.26",
+      "newChapterCode": "8.33",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为何系统拒绝恢复",
       "titleEn": "Recovery Resistance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.33",
+        "sourceOutlineTitle": "恢复阻抗",
+        "sourceOutlineQuestion": "为什么系统会拒绝对自己有帮助的恢复",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-027",
       "oldChapterCode": "8.27",
-      "newChapterCode": "8.27",
+      "newChapterCode": "8.34",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复窗口如何出现",
       "titleEn": "Recovery Window",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.34",
+        "sourceOutlineTitle": "恢复窗口",
+        "sourceOutlineQuestion": "为什么恢复只能在特定条件下真正发生",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-028",
       "oldChapterCode": "8.28",
-      "newChapterCode": "8.28",
+      "newChapterCode": "8.36",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何重新整合",
       "titleEn": "Reintegration",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.36",
+        "sourceOutlineTitle": "重新整合",
+        "sourceOutlineQuestion": "碎裂的运行如何重新形成整体",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-029",
       "oldChapterCode": "8.29",
-      "newChapterCode": "8.29",
+      "newChapterCode": "8.37",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何重新进入运行",
       "titleEn": "Runtime Re-entry",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "8.37",
+        "sourceOutlineTitle": "重新进入运行",
+        "sourceOutlineQuestion": "恢复之后，系统如何重新面对现实",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-030",
       "oldChapterCode": "8.30",
-      "newChapterCode": "8.30",
+      "newChapterCode": "8.39",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复如何被排程",
       "titleEn": "Recovery Scheduling",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.39",
+        "sourceOutlineTitle": "恢复排程",
+        "sourceOutlineQuestion": "为什么恢复必须成为运行结构的一部分",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-031",
       "oldChapterCode": "8.31",
-      "newChapterCode": "8.31",
+      "newChapterCode": "8.40",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复债务如何形成",
       "titleEn": "Recovery Debt",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.40",
+        "sourceOutlineTitle": "恢复债务",
+        "sourceOutlineQuestion": "被不断延后的恢复为什么会形成未来成本",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-032",
       "oldChapterCode": "8.32",
-      "newChapterCode": "8.32",
+      "newChapterCode": "8.41",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "结构如何被修复",
       "titleEn": "Structural Repair",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.41",
+        "sourceOutlineTitle": "结构修复",
+        "sourceOutlineQuestion": "为什么有些问题无法只靠休息解决",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-033",
       "oldChapterCode": "8.33",
-      "newChapterCode": "8.33",
+      "newChapterCode": "8.42",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行如何重新平衡",
       "titleEn": "Runtime Rebalancing",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.42",
+        "sourceOutlineTitle": "运行再平衡",
+        "sourceOutlineQuestion": "资源、责任与节律如何重新获得适当位置",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-034",
       "oldChapterCode": "8.34",
-      "newChapterCode": "8.34",
+      "newChapterCode": "8.47",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复架构如何形成",
       "titleEn": "Recovery Architecture",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.47",
+        "sourceOutlineTitle": "恢复架构",
+        "sourceOutlineQuestion": "如何把监测、释放、修复、校准与重新进入组织成完整系统",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-035",
       "oldChapterCode": "8.35",
-      "newChapterCode": "8.35",
+      "newChapterCode": "8.48",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "神经系统如何恢复",
       "titleEn": "Nervous Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.48",
+        "sourceOutlineTitle": "神经恢复",
+        "sourceOutlineQuestion": "长期警觉如何逐渐回到可调节状态",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-036",
       "oldChapterCode": "8.36",
-      "newChapterCode": "8.36",
+      "newChapterCode": "8.49",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "内分泌系统如何恢复",
       "titleEn": "Endocrine Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.49",
+        "sourceOutlineTitle": "内分泌恢复",
+        "sourceOutlineQuestion": "长期运行如何影响身体调节节律",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-037",
       "oldChapterCode": "8.37",
-      "newChapterCode": "8.37",
+      "newChapterCode": "8.50",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "免疫系统如何恢复",
       "titleEn": "Immune Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.50",
+        "sourceOutlineTitle": "免疫恢复",
+        "sourceOutlineQuestion": "持续负荷如何改变身体防御与修复能力",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-038",
       "oldChapterCode": "8.38",
-      "newChapterCode": "8.38",
+      "newChapterCode": "8.51",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "代谢系统如何恢复",
       "titleEn": "Metabolic Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.51",
+        "sourceOutlineTitle": "代谢恢复",
+        "sourceOutlineQuestion": "能量生产、使用与补充如何重新获得平衡",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-039",
       "oldChapterCode": "8.39",
-      "newChapterCode": "8.39",
+      "newChapterCode": "8.52",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "心理运行如何恢复",
       "titleEn": "Psychological Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.52",
+        "sourceOutlineTitle": "心理恢复",
+        "sourceOutlineQuestion": "体验、自我模型、意义与注意如何重新整合",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-040",
       "oldChapterCode": "8.40",
-      "newChapterCode": "8.40",
+      "newChapterCode": "8.55",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "AI 如何辅助恢复",
       "titleEn": "AI-Assisted Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.55",
+        "sourceOutlineTitle": "人工智能辅助恢复",
+        "sourceOutlineQuestion": "人工智能如何协助监测、识别、排程与校准维护",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-041",
       "oldChapterCode": "8.41",
-      "newChapterCode": "8.41",
+      "newChapterCode": "8.57",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "可持续运行如何形成",
       "titleEn": "Sustainability",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.88,
+        "sourceOutlineChapterCode": "8.57",
+        "sourceOutlineTitle": "可持续运行",
+        "sourceOutlineQuestion": "为什么长期持续不等于持续消耗",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-042",
       "oldChapterCode": "8.42",
-      "newChapterCode": "8.42",
+      "newChapterCode": "8.58",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "运行韧性如何形成",
       "titleEn": "Runtime Resilience",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.58",
+        "sourceOutlineTitle": "运行韧性",
+        "sourceOutlineQuestion": "系统如何承受冲击而不失去整体运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-043",
       "oldChapterCode": "8.43",
-      "newChapterCode": "8.43",
+      "newChapterCode": "8.45",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "维护如何适应变化",
       "titleEn": "Adaptive Maintenance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.45",
+        "sourceOutlineTitle": "适应性维护",
+        "sourceOutlineQuestion": "为什么不同阶段需要不同维护方式",
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-044",
       "oldChapterCode": "8.44",
-      "newChapterCode": "8.44",
+      "newChapterCode": "8.59",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "Reality 如何形成长期连续性",
       "titleEn": "Long-Term Continuity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "8.59",
+        "sourceOutlineTitle": "长期连续",
+        "sourceOutlineQuestion": "运行如何跨越不同阶段维持自身",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-045",
       "oldChapterCode": "8.45",
-      "newChapterCode": "8.45",
+      "newChapterCode": "8.60",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "系统如何形成自维护能力",
       "titleEn": "Self-Maintaining Systems",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8526,
+        "sourceOutlineChapterCode": "8.60",
+        "sourceOutlineTitle": "自维护系统",
+        "sourceOutlineQuestion": "系统如何逐渐形成维护自己的能力",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-046",
       "oldChapterCode": "8.46",
-      "newChapterCode": "8.46",
+      "newChapterCode": "8.63",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "恢复之后如何进入长期稳定",
       "titleEn": "Beyond Recovery",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "8.63",
+        "sourceOutlineTitle": "恢复之后",
+        "sourceOutlineQuestion": "为什么真正的恢复不是返回过去，而是进入新的可运行状态",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P8-047",
       "oldChapterCode": "8.47",
       "newChapterCode": "8.47",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "维护如何升级为治理",
       "titleEn": "Maintenance Transition",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "8.1",
+            "sourceTitle": "维持出现",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "8.4",
+            "sourceTitle": "维持容量",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "8.5",
+            "sourceTitle": "维持边界",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
+    }
+  ],
+  "outlineCandidates": [
+    {
+      "outlineChapterCode": "8.1",
+      "sourceTitle": "维持出现",
+      "canonicalQuestion": "为什么持续运行必然产生维护需求",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.2",
+      "sourceTitle": "载体漂移",
+      "canonicalQuestion": "载体为什么逐渐偏离原有运行位置",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.3",
+      "sourceTitle": "载体失效架构",
+      "canonicalQuestion": "现实为什么会逐渐失去原有载体",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.4",
+      "sourceTitle": "维持容量",
+      "canonicalQuestion": "不同运行能够承受多少长期负荷",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.5",
+      "sourceTitle": "维持边界",
+      "canonicalQuestion": "什么属于维护，什么已经进入修复、医疗或治理",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.6",
+      "sourceTitle": "残余负荷",
+      "canonicalQuestion": "一次运行结束之后，为什么仍然留下负荷",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-001"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.7",
+      "sourceTitle": "运行累积",
+      "canonicalQuestion": "多次未完成运行如何不断叠加",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-002"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.8",
+      "sourceTitle": "运行持续",
+      "canonicalQuestion": "过去形成的运行为什么不会自动退出",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-003"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.9",
+      "sourceTitle": "运行漂移",
+      "canonicalQuestion": "现实如何逐渐偏离原有运行方向",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-004"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.10",
+      "sourceTitle": "运行扭曲",
+      "canonicalQuestion": "偏移为什么会进一步改变现实结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-005",
+          "oldChapterCode": "8.5",
+          "titleEn": "Distortion Formation",
+          "titleZhHans": "Reality 如何逐渐变形",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.11",
+      "sourceTitle": "慢性运行",
+      "canonicalQuestion": "为什么原本短暂的问题会长期存在",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-006"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.12",
+      "sourceTitle": "运行碎裂",
+      "canonicalQuestion": "现实如何失去整体连接",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-007"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.88,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.13",
+      "sourceTitle": "运行饱和",
+      "canonicalQuestion": "为什么系统最终无法继续承载更多现实",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-008"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.14",
+      "sourceTitle": "摩擦讯号",
+      "canonicalQuestion": "为什么原本顺畅的运行开始变得困难",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-009"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.15",
+      "sourceTitle": "重复模式",
+      "canonicalQuestion": "为什么相同问题会不断重新出现",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-010"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.16",
+      "sourceTitle": "慢性噪声",
+      "canonicalQuestion": "为什么系统长期无法恢复清晰",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-011"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.17",
+      "sourceTitle": "运行升级",
+      "canonicalQuestion": "为什么轻微问题会逐渐扩大",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-012"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.18",
+      "sourceTitle": "阈值穿越",
+      "canonicalQuestion": "为什么系统会从可恢复状态进入失控状态",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-013",
+          "oldChapterCode": "8.13",
+          "titleEn": "Threshold Crossing",
+          "titleZhHans": "系统如何跨越失稳阈值",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.19",
+      "sourceTitle": "讯号失读",
+      "canonicalQuestion": "为什么系统不断警告，却始终没有获得回应",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-014"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.20",
+      "sourceTitle": "崩溃前窗口",
+      "canonicalQuestion": "为什么系统在失效之前仍然存在修正机会",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.21",
+      "sourceTitle": "接口占用",
+      "canonicalQuestion": "现实如何持续占用运行资源",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-015"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.22",
+      "sourceTitle": "接口饱和",
+      "canonicalQuestion": "为什么系统已经停止行动，却仍然无法退出运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-016"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.23",
+      "sourceTitle": "结构成本转移",
+      "canonicalQuestion": "为什么系统会把无法处理的成本转移到其他位置",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-017"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.24",
+      "sourceTitle": "责任负荷",
+      "canonicalQuestion": "责任如何转化为持续运行成本",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-021"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.25",
+      "sourceTitle": "载体限制",
+      "canonicalQuestion": "身体为什么成为运行无法绕过的边界",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-018"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.26",
+      "sourceTitle": "软性中断",
+      "canonicalQuestion": "为什么系统没有崩溃，却无法顺畅运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-019"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.27",
+      "sourceTitle": "慢性运行状态",
+      "canonicalQuestion": "长期负荷如何写入身体与意识",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-020"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.28",
+      "sourceTitle": "接口架构",
+      "canonicalQuestion": "运行成本会进入哪些承载位置",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-022"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.29",
+      "sourceTitle": "跨尺度成本转移",
+      "canonicalQuestion": "个体、关系、组织与集体如何彼此转移负荷",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.30",
+      "sourceTitle": "医疗运行边界",
+      "canonicalQuestion": "什么时候运行维持必须进入专业医疗系统",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-023"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.31",
+      "sourceTitle": "安全检测",
+      "canonicalQuestion": "为什么系统必须先确认安全，才能开始恢复",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-024"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.32",
+      "sourceTitle": "恢复许可",
+      "canonicalQuestion": "为什么系统即使拥有时间，也未必允许自己恢复",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-025"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.33",
+      "sourceTitle": "恢复阻抗",
+      "canonicalQuestion": "为什么系统会拒绝对自己有帮助的恢复",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-026"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.34",
+      "sourceTitle": "恢复窗口",
+      "canonicalQuestion": "为什么恢复只能在特定条件下真正发生",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-027"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.35",
+      "sourceTitle": "负荷释放",
+      "canonicalQuestion": "已经累积的运行如何逐渐退出载体",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.36",
+      "sourceTitle": "重新整合",
+      "canonicalQuestion": "碎裂的运行如何重新形成整体",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-028"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.37",
+      "sourceTitle": "重新进入运行",
+      "canonicalQuestion": "恢复之后，系统如何重新面对现实",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-029"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.38",
+      "sourceTitle": "运行监测",
+      "canonicalQuestion": "系统如何持续读取自己的运行状态",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.39",
+      "sourceTitle": "恢复排程",
+      "canonicalQuestion": "为什么恢复必须成为运行结构的一部分",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-030"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.40",
+      "sourceTitle": "恢复债务",
+      "canonicalQuestion": "被不断延后的恢复为什么会形成未来成本",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-031"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.41",
+      "sourceTitle": "结构修复",
+      "canonicalQuestion": "为什么有些问题无法只靠休息解决",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-032"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.42",
+      "sourceTitle": "运行再平衡",
+      "canonicalQuestion": "资源、责任与节律如何重新获得适当位置",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-033"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.43",
+      "sourceTitle": "运行重构",
+      "canonicalQuestion": "为什么真正的维持有时必须改变原有运行结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.44",
+      "sourceTitle": "维护校准",
+      "canonicalQuestion": "实际运行状态如何修正原有维护方式",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.45",
+      "sourceTitle": "适应性维护",
+      "canonicalQuestion": "为什么不同阶段需要不同维护方式",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-043"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.46",
+      "sourceTitle": "维护学习",
+      "canonicalQuestion": "过去的失稳如何改变下一次维护",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-013",
+          "oldChapterCode": "8.13",
+          "titleEn": "Threshold Crossing",
+          "titleZhHans": "系统如何跨越失稳阈值",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.47",
+      "sourceTitle": "恢复架构",
+      "canonicalQuestion": "如何把监测、释放、修复、校准与重新进入组织成完整系统",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-034"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.48",
+      "sourceTitle": "神经恢复",
+      "canonicalQuestion": "长期警觉如何逐渐回到可调节状态",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-035"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.49",
+      "sourceTitle": "内分泌恢复",
+      "canonicalQuestion": "长期运行如何影响身体调节节律",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-036"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.50",
+      "sourceTitle": "免疫恢复",
+      "canonicalQuestion": "持续负荷如何改变身体防御与修复能力",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-037"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.51",
+      "sourceTitle": "代谢恢复",
+      "canonicalQuestion": "能量生产、使用与补充如何重新获得平衡",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-038"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.52",
+      "sourceTitle": "心理恢复",
+      "canonicalQuestion": "体验、自我模型、意义与注意如何重新整合",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-039"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.53",
+      "sourceTitle": "关系恢复",
+      "canonicalQuestion": "共同运行如何在冲突与失配之后重新建立连接",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.54",
+      "sourceTitle": "组织恢复",
+      "canonicalQuestion": "组织如何修复流程、责任、信任与协调能力",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.55",
+      "sourceTitle": "人工智能辅助恢复",
+      "canonicalQuestion": "人工智能如何协助监测、识别、排程与校准维护",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-040"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.56",
+      "sourceTitle": "人工运行维护",
+      "canonicalQuestion": "人工系统如何维持连续、准确与安全运行",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.57",
+      "sourceTitle": "可持续运行",
+      "canonicalQuestion": "为什么长期持续不等于持续消耗",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-041"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.88,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.58",
+      "sourceTitle": "运行韧性",
+      "canonicalQuestion": "系统如何承受冲击而不失去整体运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-042"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.59",
+      "sourceTitle": "长期连续",
+      "canonicalQuestion": "运行如何跨越不同阶段维持自身",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-044"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.60",
+      "sourceTitle": "自维护系统",
+      "canonicalQuestion": "系统如何逐渐形成维护自己的能力",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-045"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8526,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.61",
+      "sourceTitle": "维护闭环",
+      "canonicalQuestion": "运行如何形成持续监测与调整循环",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-005",
+          "oldChapterCode": "8.5",
+          "titleEn": "Distortion Formation",
+          "titleZhHans": "Reality 如何逐渐变形",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.62",
+      "sourceTitle": "新运行出现",
+      "canonicalQuestion": "为什么恢复之后出现的 Reality 不再只是原来的 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.63",
+      "sourceTitle": "恢复之后",
+      "canonicalQuestion": "为什么真正的恢复不是返回过去，而是进入新的可运行状态",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P8-046"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "8.64",
+      "sourceTitle": "协调阈值",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P8-013",
+          "oldChapterCode": "8.13",
+          "titleEn": "Threshold Crossing",
+          "titleZhHans": "系统如何跨越失稳阈值",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P8-047",
+          "oldChapterCode": "8.47",
+          "titleEn": "Maintenance Transition",
+          "titleZhHans": "维护如何升级为治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
     }
   ]
 }

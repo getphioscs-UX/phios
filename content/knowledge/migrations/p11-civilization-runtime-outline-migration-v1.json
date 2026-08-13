@@ -1,10 +1,10 @@
 {
-  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.0.0",
-  "schemaVersion": "1.0.0",
+  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.1.0",
+  "schemaVersion": "1.1.0",
   "migrationCode": "BOOK-W1B-P11-CIVILIZATION-RUNTIME-OUTLINE-MIGRATION-v1",
   "phase": "BOOK-W1",
   "step": "BOOK-W1B",
-  "status": "in-progress-blocked-pending-canonical-outline-authority",
+  "status": "in-progress-source-authority-complete-pending-human-canonical-review",
   "recordedAt": "2026-08-13",
   "partAuthority": {
     "partCode": "P11",
@@ -18,50 +18,16 @@
     "newPublicationBookCode": "BOOK-4"
   },
   "sourceOutlineAuthority": {
-    "path": "content/knowledge/reconciliation/kau-r2/future-volume-outline-upgrade-guard-v1.json",
-    "sourceAuthority": "USER_SUPPLIED_UPGRADED_OUTLINE_2026-08-13",
-    "sourceStage": "OUTLINE_ONLY_NON_MANUSCRIPT",
+    "path": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "schemaVersion": "PHI-OS-BOOK-W1B-SOURCE-OUTLINE-AUTHORITY-v1.0.0",
+    "sourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "partInventorySha256": "8e9c820a3e9660c022f5497ae724890b49a58a69f94e2d82cb14c0fe657ea8a7",
     "upgradedOutlineChapterCount": 77,
-    "fullChapterListIncluded": false,
-    "chapterInventoryDigest": null,
-    "semanticAnchors": [
-      {
-        "chapterCode": "11.2",
-        "titleZhHans": "集体与文明边界",
-        "role": "Collective/Civilization boundary"
-      },
-      {
-        "chapterCode": "11.4",
-        "titleZhHans": "跨世代运行",
-        "role": "Cross-generational runtime"
-      },
-      {
-        "chapterCode": "11.40",
-        "titleZhHans": "文明压缩",
-        "role": "Civilization compression"
-      },
-      {
-        "chapterCode": "11.45",
-        "titleZhHans": "文明继任",
-        "role": "Civilization succession"
-      },
-      {
-        "chapterCode": "11.55",
-        "titleZhHans": "文明尺度收缩",
-        "role": "Civilization scale contraction"
-      },
-      {
-        "chapterCode": "11.75",
-        "titleZhHans": "文明载体迁移",
-        "role": "Civilization carrier migration"
-      },
-      {
-        "chapterCode": "11.77",
-        "titleZhHans": "文明图谱阈值",
-        "role": "Atlas threshold"
-      }
-    ],
-    "canonicalAcceptanceEligible": false
+    "fullChapterListIncluded": true,
+    "humanSourceAuthorizationRecorded": true,
+    "humanReviewEligible": true,
+    "canonicalAcceptanceEligible": false,
+    "sourceNormalizationApplied": "NONE"
   },
   "inventory": {
     "existingCanonicalNodeCount": 64,
@@ -69,23 +35,503 @@
     "outlineChapterMinusExistingNodeCount": 13,
     "preservedExistingNodeCount": 64,
     "acceptedCanonicalOutlineMatchCount": 0,
-    "unresolvedSourceOutlineChapterCount": 77,
+    "unresolvedSourceOutlineChapterCount": 0,
+    "humanReviewRecommendationCount": 93,
+    "recommendedNewCanonicalNodeCandidateCount": 29,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "chapterCountDeltaIsNotANodeCandidateCount": true
   },
   "decisionSummary": {
-    "retain": 0,
+    "recommendationsOnly": true,
+    "match": 1,
     "rename": 0,
-    "move": 64,
-    "supersede": 0,
-    "split": 0,
-    "merge": 0,
-    "new": 0,
-    "moveScope": "publication-ownership-only; same-Part chapter moves remain unresolved"
+    "move": 47,
+    "supersede": 16,
+    "splitCandidateReview": 12,
+    "mergeCandidateReview": 10,
+    "newCandidate": 29,
+    "acceptedDecisionCount": 0,
+    "publicationOwnershipMoveCount": 64,
+    "moveScope": "outline move recommendations are separate from BOOK-W1A publication-ownership moves"
   },
+  "splitCandidates": [
+    {
+      "oldNodeCode": "KN-B3-P11-002",
+      "oldChapterCode": "11.2",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.46",
+          "sourceTitle": "制度失配",
+          "score": 0.82
+        },
+        {
+          "chapterCode": "11.47",
+          "sourceTitle": "治理失配",
+          "score": 0.82
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-006",
+      "oldChapterCode": "11.6",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.12",
+          "sourceTitle": "文明身份",
+          "score": 0.86
+        },
+        {
+          "chapterCode": "11.6",
+          "sourceTitle": "共同知识",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "11.13",
+          "sourceTitle": "文明组织架构",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-012",
+      "oldChapterCode": "11.12",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.47",
+          "sourceTitle": "治理失配",
+          "score": 0.86
+        },
+        {
+          "chapterCode": "11.51",
+          "sourceTitle": "协调失配",
+          "score": 0.86
+        },
+        {
+          "chapterCode": "11.13",
+          "sourceTitle": "文明组织架构",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-017",
+      "oldChapterCode": "11.17",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.13",
+          "sourceTitle": "文明组织架构",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "11.58",
+          "sourceTitle": "人工组织",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "11.75",
+          "sourceTitle": "文明载体迁移",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-026",
+      "oldChapterCode": "11.26",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.32",
+          "sourceTitle": "文明激励",
+          "score": 0.86
+        },
+        {
+          "chapterCode": "11.6",
+          "sourceTitle": "共同知识",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "11.13",
+          "sourceTitle": "文明组织架构",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-028",
+      "oldChapterCode": "11.28",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.13",
+          "sourceTitle": "文明组织架构",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "11.58",
+          "sourceTitle": "人工组织",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-038",
+      "oldChapterCode": "11.38",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.42",
+          "sourceTitle": "复杂度增长",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "11.47",
+          "sourceTitle": "治理失配",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "11.40",
+          "sourceTitle": "文明压缩",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-041",
+      "oldChapterCode": "11.41",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.46",
+          "sourceTitle": "制度失配",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "11.48",
+          "sourceTitle": "信任侵蚀",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-042",
+      "oldChapterCode": "11.42",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.47",
+          "sourceTitle": "治理失配",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "11.51",
+          "sourceTitle": "协调失配",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-046",
+      "oldChapterCode": "11.46",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.47",
+          "sourceTitle": "治理失配",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "11.51",
+          "sourceTitle": "协调失配",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-050",
+      "oldChapterCode": "11.50",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.6",
+          "sourceTitle": "共同知识",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "11.13",
+          "sourceTitle": "文明组织架构",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "11.19",
+          "sourceTitle": "文明信仰系统",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P11-063",
+      "oldChapterCode": "11.63",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "11.6",
+          "sourceTitle": "共同知识",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "11.13",
+          "sourceTitle": "文明组织架构",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "11.58",
+          "sourceTitle": "人工组织",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
+  "mergeCandidates": [
+    {
+      "outlineChapterCode": "11.6",
+      "sourceTitle": "共同知识",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-063",
+          "oldChapterCode": "11.63",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.13",
+      "sourceTitle": "文明组织架构",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-028",
+          "oldChapterCode": "11.28",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.19",
+      "sourceTitle": "文明信仰系统",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-050",
+          "oldChapterCode": "11.50",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.46",
+      "sourceTitle": "制度失配",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-002",
+          "oldChapterCode": "11.2",
+          "score": 0.82
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-041",
+          "oldChapterCode": "11.41",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.47",
+      "sourceTitle": "治理失配",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "score": 0.86
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-002",
+          "oldChapterCode": "11.2",
+          "score": 0.82
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-038",
+          "oldChapterCode": "11.38",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.48",
+      "sourceTitle": "信任侵蚀",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-041",
+          "oldChapterCode": "11.41",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-043",
+          "oldChapterCode": "11.43",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.51",
+      "sourceTitle": "协调失配",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "score": 0.86
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-042",
+          "oldChapterCode": "11.42",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-046",
+          "oldChapterCode": "11.46",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.58",
+      "sourceTitle": "人工组织",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-017",
+          "oldChapterCode": "11.17",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-028",
+          "oldChapterCode": "11.28",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.75",
+      "sourceTitle": "文明载体迁移",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-017",
+          "oldChapterCode": "11.17",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-050",
+          "oldChapterCode": "11.50",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "11.77",
+      "sourceTitle": "文明图谱阈值",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-050",
+          "oldChapterCode": "11.50",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
   "reconciliationActionGates": [
     {
-      "action": "retain",
+      "action": "match",
       "status": "pending-explicit-human-canonical-review"
     },
     {
@@ -106,15 +552,11 @@
     },
     {
       "action": "split",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "merge",
-      "status": "pending-explicit-human-canonical-review"
-    },
-    {
-      "action": "cross-part-related-node",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "new-candidate",
@@ -122,8 +564,8 @@
     }
   ],
   "blocker": {
-    "code": "COMPLETE_CHAPTER_OUTLINE_AUTHORITY_REQUIRED",
-    "missingAuthority": "The complete Human-agreed chapter-by-chapter outline inventory plus explicit Human Canonical matching decisions.",
+    "code": "HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED",
+    "missingAuthority": "Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.",
     "w1bAcceptanceBlocked": true,
     "w1cSuccessorBlueprintGenerationAllowed": false
   },
@@ -141,1024 +583,3489 @@
       "oldChapterCode": "11.1",
       "newChapterCode": "11.1",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何出现",
       "titleEn": "Civilization Emergence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.1",
+        "sourceOutlineTitle": "文明涌现",
+        "sourceOutlineQuestion": "为什么规模扩大最终可能产生新的 Reality Layer",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-002",
       "oldChapterCode": "11.2",
       "newChapterCode": "11.2",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "共同 Runtime 为什么能够持续扩大",
       "titleEn": "Shared Reality",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.46",
+            "sourceTitle": "制度失配",
+            "score": 0.82
+          },
+          {
+            "chapterCode": "11.47",
+            "sourceTitle": "治理失配",
+            "score": 0.82
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-003",
       "oldChapterCode": "11.3",
-      "newChapterCode": "11.3",
+      "newChapterCode": "11.5",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "为什么文明需要共同记忆",
       "titleEn": "Shared Memory",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.5",
+        "sourceOutlineTitle": "共同记忆",
+        "sourceOutlineQuestion": "为什么文明必须保存不再亲历的过去",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-004",
       "oldChapterCode": "11.4",
-      "newChapterCode": "11.4",
+      "newChapterCode": "11.7",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "为什么文明需要共同意义",
       "titleEn": "Shared Meaning",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.7",
+        "sourceOutlineTitle": "共同意义",
+        "sourceOutlineQuestion": "为什么文明需要能够跨群体传递的重要性结构",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-005",
       "oldChapterCode": "11.5",
-      "newChapterCode": "11.5",
+      "newChapterCode": "11.8",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "为什么文明需要共同语言",
       "titleEn": "Shared Language",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.8",
+        "sourceOutlineTitle": "共同语言",
+        "sourceOutlineQuestion": "为什么文明必须拥有跨节点的意义接口",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-006",
       "oldChapterCode": "11.6",
       "newChapterCode": "11.6",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "为什么文明形成共同身份",
       "titleEn": "Shared Identity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.12",
+            "sourceTitle": "文明身份",
+            "score": 0.86
+          },
+          {
+            "chapterCode": "11.6",
+            "sourceTitle": "共同知识",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "11.13",
+            "sourceTitle": "文明组织架构",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-007",
       "oldChapterCode": "11.7",
-      "newChapterCode": "11.7",
+      "newChapterCode": "11.9",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "为什么文明需要统一时间",
       "titleEn": "Shared Time",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.9",
+        "sourceOutlineTitle": "共同时间",
+        "sourceOutlineQuestion": "为什么文明需要组织远超过个体寿命的时间",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-008",
       "oldChapterCode": "11.8",
-      "newChapterCode": "11.8",
+      "newChapterCode": "11.10",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "为什么文明需要共同空间",
       "titleEn": "Shared Space",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.10",
+        "sourceOutlineTitle": "共同空间",
+        "sourceOutlineQuestion": "为什么文明必须把巨大地域组织成可以共同运行的 Reality",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-009",
       "oldChapterCode": "11.9",
-      "newChapterCode": "11.9",
+      "newChapterCode": "11.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明边界如何形成",
       "titleEn": "Civilization Boundary",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.11",
+        "sourceOutlineTitle": "文明边界",
+        "sourceOutlineQuestion": "什么属于一个文明，什么只是与它发生关系",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-010",
       "oldChapterCode": "11.10",
-      "newChapterCode": "11.10",
+      "newChapterCode": "11.3",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明为何不断扩大",
       "titleEn": "Civilization Scale",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.3",
+        "sourceOutlineTitle": "文明尺度",
+        "sourceOutlineQuestion": "什么使 Runtime 进入文明级规模",
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-011",
       "oldChapterCode": "11.11",
-      "newChapterCode": "11.11",
+      "newChapterCode": "11.14",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "制度如何组织文明",
       "titleEn": "Institutions",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.14",
+        "sourceOutlineTitle": "制度持续",
+        "sourceOutlineQuestion": "为什么文明需要不依赖具体个体的长期规则结构",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-012",
       "oldChapterCode": "11.12",
       "newChapterCode": "11.12",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "治理如何组织文明",
       "titleEn": "Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.47",
+            "sourceTitle": "治理失配",
+            "score": 0.86
+          },
+          {
+            "chapterCode": "11.51",
+            "sourceTitle": "协调失配",
+            "score": 0.86
+          },
+          {
+            "chapterCode": "11.13",
+            "sourceTitle": "文明组织架构",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-013",
       "oldChapterCode": "11.13",
-      "newChapterCode": "11.13",
+      "newChapterCode": "11.15",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "法律如何组织文明",
       "titleEn": "Law",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.15",
+        "sourceOutlineTitle": "法律架构",
+        "sourceOutlineQuestion": "为什么文明必须把共同边界转化成可重复执行的规则",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-014",
       "oldChapterCode": "11.14",
-      "newChapterCode": "11.14",
+      "newChapterCode": "11.16",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "经济如何组织文明",
       "titleEn": "Economy",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.16",
+        "sourceOutlineTitle": "文明经济",
+        "sourceOutlineQuestion": "为什么局部经济必须进入跨区域、跨世代的资源网络",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-015",
       "oldChapterCode": "11.15",
-      "newChapterCode": "11.15",
+      "newChapterCode": "11.17",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "市场如何组织文明",
       "titleEn": "Markets",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.17",
+        "sourceOutlineTitle": "文明市场",
+        "sourceOutlineQuestion": "为什么大量陌生节点能够通过市场交换彼此能力",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-016",
       "oldChapterCode": "11.16",
-      "newChapterCode": "11.16",
+      "newChapterCode": "11.18",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "教育如何组织文明",
       "titleEn": "Education",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.18",
+        "sourceOutlineTitle": "文明教育",
+        "sourceOutlineQuestion": "为什么文明必须持续生产下一代能力",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-017",
       "oldChapterCode": "11.17",
       "newChapterCode": "11.17",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "宗教如何组织文明",
       "titleEn": "Religion",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.13",
+            "sourceTitle": "文明组织架构",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "11.58",
+            "sourceTitle": "人工组织",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "11.75",
+            "sourceTitle": "文明载体迁移",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-018",
       "oldChapterCode": "11.18",
-      "newChapterCode": "11.18",
+      "newChapterCode": "11.20",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "科学如何组织文明",
       "titleEn": "Science",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.20",
+        "sourceOutlineTitle": "文明科学",
+        "sourceOutlineQuestion": "为什么文明必须形成可累积、可验证的共同知识机制",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-019",
       "oldChapterCode": "11.19",
-      "newChapterCode": "11.19",
+      "newChapterCode": "11.21",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "技术如何组织文明",
       "titleEn": "Technology",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.21",
+        "sourceOutlineTitle": "文明技术",
+        "sourceOutlineQuestion": "为什么技术会改变文明可以承载的尺度",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-020",
       "oldChapterCode": "11.20",
-      "newChapterCode": "11.20",
+      "newChapterCode": "11.22",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "基础设施如何承载文明",
       "titleEn": "Infrastructure",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "11.22",
+        "sourceOutlineTitle": "文明基础设施",
+        "sourceOutlineQuestion": "为什么文明必须把大量共同能力外部化",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-021",
       "oldChapterCode": "11.21",
-      "newChapterCode": "11.21",
+      "newChapterCode": "11.23",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "组织层级如何形成",
       "titleEn": "Organization Layers",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.23",
+        "sourceOutlineTitle": "组织层级",
+        "sourceOutlineQuestion": "为什么文明会不断形成中心、区域与局部层级",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-022",
       "oldChapterCode": "11.22",
-      "newChapterCode": "11.22",
+      "newChapterCode": "11.24",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何协调",
       "titleEn": "Coordination",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.24",
+        "sourceOutlineTitle": "文明协调",
+        "sourceOutlineQuestion": "文明尺度为什么需要不同于家庭与组织的协调方式",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-023",
       "oldChapterCode": "11.23",
-      "newChapterCode": "11.23",
+      "newChapterCode": "11.25",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何形成信任",
       "titleEn": "Trust",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "11.25",
+        "sourceOutlineTitle": "制度化信任",
+        "sourceOutlineQuestion": "为什么人不需要认识彼此，也能够进行长期合作",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-024",
       "oldChapterCode": "11.24",
-      "newChapterCode": "11.24",
+      "newChapterCode": "11.26",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何形成信誉",
       "titleEn": "Reputation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.26",
+        "sourceOutlineTitle": "信誉网络",
+        "sourceOutlineQuestion": "为什么过去行为能够跨越陌生关系影响未来机会",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-025",
       "oldChapterCode": "11.25",
-      "newChapterCode": "11.25",
+      "newChapterCode": "11.27",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何形成权威",
       "titleEn": "Authority",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.27",
+        "sourceOutlineTitle": "文明权威",
+        "sourceOutlineQuestion": "为什么巨大 Runtime 必须形成能够处理共同边界的决定位置",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-026",
       "oldChapterCode": "11.26",
       "newChapterCode": "11.26",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何形成激励",
       "titleEn": "Incentives",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.32",
+            "sourceTitle": "文明激励",
+            "score": 0.86
+          },
+          {
+            "chapterCode": "11.6",
+            "sourceTitle": "共同知识",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "11.13",
+            "sourceTitle": "文明组织架构",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-027",
       "oldChapterCode": "11.27",
-      "newChapterCode": "11.27",
+      "newChapterCode": "11.28",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何分配责任",
       "titleEn": "Responsibilities",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.28",
+        "sourceOutlineTitle": "文明责任",
+        "sourceOutlineQuestion": "为什么责任必须跨越个体与组织被重新分配",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-028",
       "oldChapterCode": "11.28",
       "newChapterCode": "11.28",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何组织参与",
       "titleEn": "Participation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.13",
+            "sourceTitle": "文明组织架构",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "11.58",
+            "sourceTitle": "人工组织",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "11.29",
+            "sourceTitle": "文明参与",
+            "score": 0.675
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-029",
       "oldChapterCode": "11.29",
-      "newChapterCode": "11.29",
+      "newChapterCode": "11.30",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何组织合作",
       "titleEn": "Cooperation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.30",
+        "sourceOutlineTitle": "合作尺度",
+        "sourceOutlineQuestion": "为什么合作能够扩展到彼此完全陌生的生命之间",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-030",
       "oldChapterCode": "11.30",
-      "newChapterCode": "11.30",
+      "newChapterCode": "11.31",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何组织竞争",
       "titleEn": "Competition",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "11.31",
+        "sourceOutlineTitle": "竞争尺度",
+        "sourceOutlineQuestion": "为什么文明内部必须同时允许竞争与合作",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-031",
       "oldChapterCode": "11.31",
-      "newChapterCode": "11.31",
+      "newChapterCode": "11.34",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何维持运行平衡",
       "titleEn": "Runtime Balance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "11.34",
+        "sourceOutlineTitle": "文明运行平衡",
+        "sourceOutlineQuestion": "为什么任何文明都必须在稳定、自由、效率、冗余与适应之间保持动态关系",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-032",
       "oldChapterCode": "11.32",
-      "newChapterCode": "11.32",
+      "newChapterCode": "11.41",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何创新",
       "titleEn": "Innovation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.41",
+        "sourceOutlineTitle": "文明创新",
+        "sourceOutlineQuestion": "为什么新的能力会从已有知识与结构之间出现",
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-033",
       "oldChapterCode": "11.33",
-      "newChapterCode": "11.33",
+      "newChapterCode": "11.36",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "知识如何累积",
       "titleEn": "Knowledge Accumulation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.36",
+        "sourceOutlineTitle": "知识累积",
+        "sourceOutlineQuestion": "为什么知识能够跨世代形成复利",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-034",
       "oldChapterCode": "11.34",
-      "newChapterCode": "11.34",
+      "newChapterCode": "11.37",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "技术如何扩散",
       "titleEn": "Technology Diffusion",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.37",
+        "sourceOutlineTitle": "技术扩散",
+        "sourceOutlineQuestion": "为什么局部技术最终可能改变整个文明尺度",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-035",
       "oldChapterCode": "11.35",
-      "newChapterCode": "11.35",
+      "newChapterCode": "11.38",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "制度如何学习",
       "titleEn": "Institutional Learning",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.38",
+        "sourceOutlineTitle": "制度学习",
+        "sourceOutlineQuestion": "为什么制度必须根据过去结果不断修改自己",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-036",
       "oldChapterCode": "11.36",
-      "newChapterCode": "11.36",
+      "newChapterCode": "11.39",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文化如何适应",
       "titleEn": "Cultural Adaptation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.39",
+        "sourceOutlineTitle": "文化适应",
+        "sourceOutlineQuestion": "为什么文化能够在保持身份的同时不断重新解释自己",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-037",
       "oldChapterCode": "11.37",
       "newChapterCode": "11.37",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何优化运行",
       "titleEn": "Runtime Optimization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-038",
       "oldChapterCode": "11.38",
       "newChapterCode": "11.38",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明复杂度如何成长",
       "titleEn": "Complexity Growth",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.42",
+            "sourceTitle": "复杂度增长",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "11.47",
+            "sourceTitle": "治理失配",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "11.40",
+            "sourceTitle": "文明压缩",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-039",
       "oldChapterCode": "11.39",
-      "newChapterCode": "11.39",
+      "newChapterCode": "11.43",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明扩展能力如何形成",
       "titleEn": "Expansion Capacity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 0.91,
+        "sourceOutlineChapterCode": "11.43",
+        "sourceOutlineTitle": "文明扩展能力",
+        "sourceOutlineQuestion": "什么决定一个文明还能否继续扩大自己的 Reality Scale",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-040",
       "oldChapterCode": "11.40",
       "newChapterCode": "11.40",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何经历演化选择",
       "titleEn": "Evolutionary Selection",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.44",
+            "sourceTitle": "文明选择",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-041",
       "oldChapterCode": "11.41",
       "newChapterCode": "11.41",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "制度如何失效",
       "titleEn": "Institutional Failure",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.46",
+            "sourceTitle": "制度失配",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "11.48",
+            "sourceTitle": "信任侵蚀",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-042",
       "oldChapterCode": "11.42",
       "newChapterCode": "11.42",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "治理如何失效",
       "titleEn": "Governance Failure",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.47",
+            "sourceTitle": "治理失配",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "11.51",
+            "sourceTitle": "协调失配",
+            "score": 0.81
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-043",
       "oldChapterCode": "11.43",
       "newChapterCode": "11.43",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "信任如何崩塌",
       "titleEn": "Trust Collapse",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.48",
+            "sourceTitle": "信任侵蚀",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-044",
       "oldChapterCode": "11.44",
-      "newChapterCode": "11.44",
+      "newChapterCode": "11.49",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "意义如何碎裂",
       "titleEn": "Meaning Fragmentation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.49",
+        "sourceOutlineTitle": "意义碎裂",
+        "sourceOutlineQuestion": "为什么共同价值无法继续组织越来越多不同的 Reality",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-045",
       "oldChapterCode": "11.45",
-      "newChapterCode": "11.45",
+      "newChapterCode": "11.50",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "身份冲突如何形成",
       "titleEn": "Identity Conflict",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.50",
+        "sourceOutlineTitle": "身份冲突",
+        "sourceOutlineQuestion": "为什么文明中的局部身份会逐渐高于共同身份",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-046",
       "oldChapterCode": "11.46",
       "newChapterCode": "11.46",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "协调如何崩塌",
       "titleEn": "Coordination Collapse",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.47",
+            "sourceTitle": "治理失配",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "11.51",
+            "sourceTitle": "协调失配",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-047",
       "oldChapterCode": "11.47",
-      "newChapterCode": "11.47",
+      "newChapterCode": "11.52",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "组织为何僵化",
       "titleEn": "Organizational Rigidity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.52",
+        "sourceOutlineTitle": "组织僵化",
+        "sourceOutlineQuestion": "为什么文明越成熟，改变旧结构的成本越高",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-048",
       "oldChapterCode": "11.48",
-      "newChapterCode": "11.48",
+      "newChapterCode": "11.53",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明适应为何失败",
       "titleEn": "Adaptive Failure",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.53",
+        "sourceOutlineTitle": "适应失效",
+        "sourceOutlineQuestion": "为什么文明知道现实正在改变，却仍然无法完成足够快的结构调整",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-049",
       "oldChapterCode": "11.49",
-      "newChapterCode": "11.49",
+      "newChapterCode": "11.54",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何碎裂",
       "titleEn": "Civilization Fragmentation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.54",
+        "sourceOutlineTitle": "文明碎裂",
+        "sourceOutlineQuestion": "为什么文明级共同 Reality 会分化成越来越独立的局部运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-050",
       "oldChapterCode": "11.50",
       "newChapterCode": "11.50",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "AI 组织如何形成",
       "titleEn": "AI Organizations",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.6",
+            "sourceTitle": "共同知识",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "11.13",
+            "sourceTitle": "文明组织架构",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "11.19",
+            "sourceTitle": "文明信仰系统",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-051",
       "oldChapterCode": "11.51",
-      "newChapterCode": "11.51",
+      "newChapterCode": "11.59",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "人工制度如何形成",
       "titleEn": "Synthetic Institutions",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.59",
+        "sourceOutlineTitle": "人工制度",
+        "sourceOutlineQuestion": "规则、状态与执行是否能够部分由人工系统持续承载",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-052",
       "oldChapterCode": "11.52",
-      "newChapterCode": "11.52",
+      "newChapterCode": "11.60",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "机器治理如何形成",
       "titleEn": "Machine Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "11.60",
+        "sourceOutlineTitle": "机器治理",
+        "sourceOutlineQuestion": "当人工系统参与文明级决定结构，会改变什么",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-053",
       "oldChapterCode": "11.53",
       "newChapterCode": "11.53",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "人机如何协作",
       "titleEn": "Human–AI Collaboration",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.61",
+            "sourceTitle": "人机文明协作",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-054",
       "oldChapterCode": "11.54",
-      "newChapterCode": "11.54",
+      "newChapterCode": "11.62",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "自主协调如何形成",
       "titleEn": "Autonomous Coordination",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "11.62",
+        "sourceOutlineTitle": "自主协调网络",
+        "sourceOutlineQuestion": "人工节点能够在多大程度上维持跨组织共同运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-055",
       "oldChapterCode": "11.55",
-      "newChapterCode": "11.55",
+      "newChapterCode": "11.63",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "人工文化如何形成",
       "titleEn": "Synthetic Culture",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "11.63",
+        "sourceOutlineTitle": "人工文化持续",
+        "sourceOutlineQuestion": "人工参与的文化能否跨世代继续积累与变化",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-056",
       "oldChapterCode": "11.56",
-      "newChapterCode": "11.56",
+      "newChapterCode": "11.65",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "集体智能如何形成",
       "titleEn": "Collective Intelligence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "11.65",
+        "sourceOutlineTitle": "集体智能",
+        "sourceOutlineQuestion": "什么时候文明整体开始表现出超过单一人类与单一人工系统的处理能力",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-057",
       "oldChapterCode": "11.57",
-      "newChapterCode": "11.57",
+      "newChapterCode": "11.66",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "超越人类的文明如何形成",
       "titleEn": "Civilization Beyond Humanity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "11.66",
+        "sourceOutlineTitle": "非人类文明参与",
+        "sourceOutlineQuestion": "Civilization 是否一定需要全部参与节点都是人类",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-058",
       "oldChapterCode": "11.58",
-      "newChapterCode": "11.58",
+      "newChapterCode": "11.68",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明稳定性如何形成",
       "titleEn": "Civilization Stability",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8743,
+        "sourceOutlineChapterCode": "11.68",
+        "sourceOutlineTitle": "文明稳定",
+        "sourceOutlineQuestion": "什么让巨大 Runtime 在长期变化中仍然保持基本结构",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-059",
       "oldChapterCode": "11.59",
-      "newChapterCode": "11.59",
+      "newChapterCode": "11.69",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明韧性如何形成",
       "titleEn": "Civilization Resilience",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.69",
+        "sourceOutlineTitle": "文明韧性",
+        "sourceOutlineQuestion": "文明如何承受局部失效而不立即失去整体运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-060",
       "oldChapterCode": "11.60",
-      "newChapterCode": "11.60",
+      "newChapterCode": "11.71",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明可持续性如何形成",
       "titleEn": "Civilization Sustainability",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 0.91,
+        "sourceOutlineChapterCode": "11.71",
+        "sourceOutlineTitle": "文明可持续性",
+        "sourceOutlineQuestion": "文明如何避免用未来能力永久补贴当前运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-061",
       "oldChapterCode": "11.61",
-      "newChapterCode": "11.61",
+      "newChapterCode": "11.72",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何转型",
       "titleEn": "Civilization Transformation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.72",
+        "sourceOutlineTitle": "文明转型",
+        "sourceOutlineQuestion": "为什么文明维持自身有时必须改变原来的制度、技术与价值结构",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-062",
       "oldChapterCode": "11.62",
-      "newChapterCode": "11.62",
+      "newChapterCode": "11.73",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何维持连续性",
       "titleEn": "Civilization Continuity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.73",
+        "sourceOutlineTitle": "文明连续",
+        "sourceOutlineQuestion": "为什么文明即使发生重大变化，仍然可能保持某种长期 Runtime Continuity",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-063",
       "oldChapterCode": "11.63",
       "newChapterCode": "11.63",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "Runtime 如何组织成 Civilization",
       "titleEn": "Runtime Civilization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "11.6",
+            "sourceTitle": "共同知识",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "11.13",
+            "sourceTitle": "文明组织架构",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "11.58",
+            "sourceTitle": "人工组织",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P11-064",
       "oldChapterCode": "11.64",
-      "newChapterCode": "11.64",
+      "newChapterCode": "11.76",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明为何能够持续运行",
       "titleEn": "The Civilization Question",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "11.76",
+        "sourceOutlineTitle": "文明运行",
+        "sourceOutlineQuestion": "什么时候大量制度、知识、文化、基础设施与生命共同形成真正的 Civilization Runtime",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
+    }
+  ],
+  "outlineCandidates": [
+    {
+      "outlineChapterCode": "11.1",
+      "sourceTitle": "文明涌现",
+      "canonicalQuestion": "为什么规模扩大最终可能产生新的 Reality Layer",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-001"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.2",
+      "sourceTitle": "集体与文明边界",
+      "canonicalQuestion": "为什么更大的 Collective 仍然不一定是 Civilization",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.3",
+      "sourceTitle": "文明尺度",
+      "canonicalQuestion": "什么使 Runtime 进入文明级规模",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-010"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.4",
+      "sourceTitle": "跨世代运行",
+      "canonicalQuestion": "为什么文明必须能够穿越个体生命继续存在",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.5",
+      "sourceTitle": "共同记忆",
+      "canonicalQuestion": "为什么文明必须保存不再亲历的过去",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-003"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.6",
+      "sourceTitle": "共同知识",
+      "canonicalQuestion": "为什么知识累积会成为文明形成条件",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "titleEn": "Shared Identity",
+          "titleZhHans": "为什么文明形成共同身份",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "titleEn": "Incentives",
+          "titleZhHans": "文明如何形成激励",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-063",
+          "oldChapterCode": "11.63",
+          "titleEn": "Runtime Civilization",
+          "titleZhHans": "Runtime 如何组织成 Civilization",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.7",
+      "sourceTitle": "共同意义",
+      "canonicalQuestion": "为什么文明需要能够跨群体传递的重要性结构",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-004"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.8",
+      "sourceTitle": "共同语言",
+      "canonicalQuestion": "为什么文明必须拥有跨节点的意义接口",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-005"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.9",
+      "sourceTitle": "共同时间",
+      "canonicalQuestion": "为什么文明需要组织远超过个体寿命的时间",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-007"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.10",
+      "sourceTitle": "共同空间",
+      "canonicalQuestion": "为什么文明必须把巨大地域组织成可以共同运行的 Reality",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-008"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.11",
+      "sourceTitle": "文明边界",
+      "canonicalQuestion": "什么属于一个文明，什么只是与它发生关系",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-009"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.12",
+      "sourceTitle": "文明身份",
+      "canonicalQuestion": "为什么陌生生命会把自己放进同一个长期「我们」之中",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "titleEn": "Shared Identity",
+          "titleZhHans": "为什么文明形成共同身份",
+          "score": 0.86
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.13",
+      "sourceTitle": "文明组织架构",
+      "canonicalQuestion": "为什么文明必须形成多层组织",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "titleEn": "Shared Identity",
+          "titleZhHans": "为什么文明形成共同身份",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "titleEn": "Incentives",
+          "titleZhHans": "文明如何形成激励",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-028",
+          "oldChapterCode": "11.28",
+          "titleEn": "Participation",
+          "titleZhHans": "文明如何组织参与",
+          "score": 0.84
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.14",
+      "sourceTitle": "制度持续",
+      "canonicalQuestion": "为什么文明需要不依赖具体个体的长期规则结构",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-011"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.15",
+      "sourceTitle": "法律架构",
+      "canonicalQuestion": "为什么文明必须把共同边界转化成可重复执行的规则",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-013"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.16",
+      "sourceTitle": "文明经济",
+      "canonicalQuestion": "为什么局部经济必须进入跨区域、跨世代的资源网络",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-014"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.17",
+      "sourceTitle": "文明市场",
+      "canonicalQuestion": "为什么大量陌生节点能够通过市场交换彼此能力",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-015"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.18",
+      "sourceTitle": "文明教育",
+      "canonicalQuestion": "为什么文明必须持续生产下一代能力",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-016"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.19",
+      "sourceTitle": "文明信仰系统",
+      "canonicalQuestion": "为什么文明会形成超越即时利益的长期意义结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "titleEn": "Shared Identity",
+          "titleZhHans": "为什么文明形成共同身份",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "titleEn": "Incentives",
+          "titleZhHans": "文明如何形成激励",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-050",
+          "oldChapterCode": "11.50",
+          "titleEn": "AI Organizations",
+          "titleZhHans": "AI 组织如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.20",
+      "sourceTitle": "文明科学",
+      "canonicalQuestion": "为什么文明必须形成可累积、可验证的共同知识机制",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-018"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.21",
+      "sourceTitle": "文明技术",
+      "canonicalQuestion": "为什么技术会改变文明可以承载的尺度",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-019"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.22",
+      "sourceTitle": "文明基础设施",
+      "canonicalQuestion": "为什么文明必须把大量共同能力外部化",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-020"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.23",
+      "sourceTitle": "组织层级",
+      "canonicalQuestion": "为什么文明会不断形成中心、区域与局部层级",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-021"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.24",
+      "sourceTitle": "文明协调",
+      "canonicalQuestion": "文明尺度为什么需要不同于家庭与组织的协调方式",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-022"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.25",
+      "sourceTitle": "制度化信任",
+      "canonicalQuestion": "为什么人不需要认识彼此，也能够进行长期合作",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-023"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.26",
+      "sourceTitle": "信誉网络",
+      "canonicalQuestion": "为什么过去行为能够跨越陌生关系影响未来机会",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-024"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.27",
+      "sourceTitle": "文明权威",
+      "canonicalQuestion": "为什么巨大 Runtime 必须形成能够处理共同边界的决定位置",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-025"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.28",
+      "sourceTitle": "文明责任",
+      "canonicalQuestion": "为什么责任必须跨越个体与组织被重新分配",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-027"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.29",
+      "sourceTitle": "文明参与",
+      "canonicalQuestion": "为什么文明必须持续让成员进入共同运行",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-028",
+          "oldChapterCode": "11.28",
+          "titleEn": "Participation",
+          "titleZhHans": "文明如何组织参与",
+          "score": 0.675
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-063",
+          "oldChapterCode": "11.63",
+          "titleEn": "Runtime Civilization",
+          "titleZhHans": "Runtime 如何组织成 Civilization",
+          "score": 0.6545
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.30",
+      "sourceTitle": "合作尺度",
+      "canonicalQuestion": "为什么合作能够扩展到彼此完全陌生的生命之间",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-029"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.31",
+      "sourceTitle": "竞争尺度",
+      "canonicalQuestion": "为什么文明内部必须同时允许竞争与合作",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-030"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.32",
+      "sourceTitle": "文明激励",
+      "canonicalQuestion": "为什么巨大系统必须让局部行动与整体需要保持足够一致",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "titleEn": "Incentives",
+          "titleZhHans": "文明如何形成激励",
+          "score": 0.86
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.33",
+      "sourceTitle": "权力分布",
+      "canonicalQuestion": "为什么文明必须处理控制能力在不同节点之间的分布",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.34",
+      "sourceTitle": "文明运行平衡",
+      "canonicalQuestion": "为什么任何文明都必须在稳定、自由、效率、冗余与适应之间保持动态关系",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-031"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.35",
+      "sourceTitle": "文明学习",
+      "canonicalQuestion": "为什么整个文明能够从过去改变自己的下一轮运行",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.36",
+      "sourceTitle": "知识累积",
+      "canonicalQuestion": "为什么知识能够跨世代形成复利",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-033"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.37",
+      "sourceTitle": "技术扩散",
+      "canonicalQuestion": "为什么局部技术最终可能改变整个文明尺度",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-034"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.38",
+      "sourceTitle": "制度学习",
+      "canonicalQuestion": "为什么制度必须根据过去结果不断修改自己",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-035"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.39",
+      "sourceTitle": "文化适应",
+      "canonicalQuestion": "为什么文化能够在保持身份的同时不断重新解释自己",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-036"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.40",
+      "sourceTitle": "文明压缩",
+      "canonicalQuestion": "为什么文明必须不断把复杂知识、规则与经验压缩成可传递结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-038",
+          "oldChapterCode": "11.38",
+          "titleEn": "Complexity Growth",
+          "titleZhHans": "文明复杂度如何成长",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.41",
+      "sourceTitle": "文明创新",
+      "canonicalQuestion": "为什么新的能力会从已有知识与结构之间出现",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-032"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.42",
+      "sourceTitle": "复杂度增长",
+      "canonicalQuestion": "为什么文明成功本身会不断制造新的复杂度",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-038",
+          "oldChapterCode": "11.38",
+          "titleEn": "Complexity Growth",
+          "titleZhHans": "文明复杂度如何成长",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.43",
+      "sourceTitle": "文明扩展能力",
+      "canonicalQuestion": "什么决定一个文明还能否继续扩大自己的 Reality Scale",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-039"
+      ],
+      "confidence": "HIGH",
+      "score": 0.91,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.44",
+      "sourceTitle": "文明选择",
+      "canonicalQuestion": "为什么不同文明会沿着不同扩展路径发展",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-040",
+          "oldChapterCode": "11.40",
+          "titleEn": "Evolutionary Selection",
+          "titleZhHans": "文明如何经历演化选择",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.45",
+      "sourceTitle": "文明继任",
+      "canonicalQuestion": "为什么新的文明结构常常建立在过去文明留下的能力之上",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.46",
+      "sourceTitle": "制度失配",
+      "canonicalQuestion": "为什么过去有效的制度逐渐无法处理新的文明 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-002",
+          "oldChapterCode": "11.2",
+          "titleEn": "Shared Reality",
+          "titleZhHans": "共同 Runtime 为什么能够持续扩大",
+          "score": 0.82
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-041",
+          "oldChapterCode": "11.41",
+          "titleEn": "Institutional Failure",
+          "titleZhHans": "制度如何失效",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.47",
+      "sourceTitle": "治理失配",
+      "canonicalQuestion": "为什么文明的决定结构会逐渐落后于现实复杂度",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "titleEn": "Governance",
+          "titleZhHans": "治理如何组织文明",
+          "score": 0.86
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-002",
+          "oldChapterCode": "11.2",
+          "titleEn": "Shared Reality",
+          "titleZhHans": "共同 Runtime 为什么能够持续扩大",
+          "score": 0.82
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-038",
+          "oldChapterCode": "11.38",
+          "titleEn": "Complexity Growth",
+          "titleZhHans": "文明复杂度如何成长",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.48",
+      "sourceTitle": "信任侵蚀",
+      "canonicalQuestion": "为什么制度仍然存在，成员却逐渐不再相信共同结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-041",
+          "oldChapterCode": "11.41",
+          "titleEn": "Institutional Failure",
+          "titleZhHans": "制度如何失效",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-043",
+          "oldChapterCode": "11.43",
+          "titleEn": "Trust Collapse",
+          "titleZhHans": "信任如何崩塌",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.49",
+      "sourceTitle": "意义碎裂",
+      "canonicalQuestion": "为什么共同价值无法继续组织越来越多不同的 Reality",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-044"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.50",
+      "sourceTitle": "身份冲突",
+      "canonicalQuestion": "为什么文明中的局部身份会逐渐高于共同身份",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-045"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.51",
+      "sourceTitle": "协调失配",
+      "canonicalQuestion": "为什么文明仍然拥有资源，却无法在正确时间共同使用这些资源",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "titleEn": "Governance",
+          "titleZhHans": "治理如何组织文明",
+          "score": 0.86
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-042",
+          "oldChapterCode": "11.42",
+          "titleEn": "Governance Failure",
+          "titleZhHans": "治理如何失效",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-046",
+          "oldChapterCode": "11.46",
+          "titleEn": "Coordination Collapse",
+          "titleZhHans": "协调如何崩塌",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.52",
+      "sourceTitle": "组织僵化",
+      "canonicalQuestion": "为什么文明越成熟，改变旧结构的成本越高",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-047"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.53",
+      "sourceTitle": "适应失效",
+      "canonicalQuestion": "为什么文明知道现实正在改变，却仍然无法完成足够快的结构调整",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-048"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.54",
+      "sourceTitle": "文明碎裂",
+      "canonicalQuestion": "为什么文明级共同 Reality 会分化成越来越独立的局部运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-049"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.55",
+      "sourceTitle": "文明尺度收缩",
+      "canonicalQuestion": "为什么文明可能仍然存在，却已经失去过去能够维持的尺度",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.56",
+      "sourceTitle": "文明结构终止",
+      "canonicalQuestion": "什么时候原来的 Civilization Runtime 已经无法继续作为同一个整体运行",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.57",
+      "sourceTitle": "文明遗产",
+      "canonicalQuestion": "为什么文明结构结束之后，部分 Runtime 仍然会继续存在",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.58",
+      "sourceTitle": "人工组织",
+      "canonicalQuestion": "为什么人工节点开始进入长期组织结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "titleEn": "Governance",
+          "titleZhHans": "治理如何组织文明",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-017",
+          "oldChapterCode": "11.17",
+          "titleEn": "Religion",
+          "titleZhHans": "宗教如何组织文明",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-028",
+          "oldChapterCode": "11.28",
+          "titleEn": "Participation",
+          "titleZhHans": "文明如何组织参与",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.59",
+      "sourceTitle": "人工制度",
+      "canonicalQuestion": "规则、状态与执行是否能够部分由人工系统持续承载",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-051"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.60",
+      "sourceTitle": "机器治理",
+      "canonicalQuestion": "当人工系统参与文明级决定结构，会改变什么",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-052"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.61",
+      "sourceTitle": "人机文明协作",
+      "canonicalQuestion": "为什么未来文明可能由生命与人工节点共同承载",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-053",
+          "oldChapterCode": "11.53",
+          "titleEn": "Human–AI Collaboration",
+          "titleZhHans": "人机如何协作",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.62",
+      "sourceTitle": "自主协调网络",
+      "canonicalQuestion": "人工节点能够在多大程度上维持跨组织共同运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-054"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.63",
+      "sourceTitle": "人工文化持续",
+      "canonicalQuestion": "人工参与的文化能否跨世代继续积累与变化",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-055"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.64",
+      "sourceTitle": "人工知识连续",
+      "canonicalQuestion": "机器可读知识如何改变文明记忆与知识累积",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.65",
+      "sourceTitle": "集体智能",
+      "canonicalQuestion": "什么时候文明整体开始表现出超过单一人类与单一人工系统的处理能力",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-056"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.66",
+      "sourceTitle": "非人类文明参与",
+      "canonicalQuestion": "Civilization 是否一定需要全部参与节点都是人类",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-057"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.67",
+      "sourceTitle": "文明超越人类中心",
+      "canonicalQuestion": "如果 Carrier 构成改变，Civilization 的定义是否仍然成立",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.68",
+      "sourceTitle": "文明稳定",
+      "canonicalQuestion": "什么让巨大 Runtime 在长期变化中仍然保持基本结构",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-058"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8743,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.69",
+      "sourceTitle": "文明韧性",
+      "canonicalQuestion": "文明如何承受局部失效而不立即失去整体运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-059"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.70",
+      "sourceTitle": "文明适应",
+      "canonicalQuestion": "为什么真正能够长期存在的文明必须持续改变自己",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.71",
+      "sourceTitle": "文明可持续性",
+      "canonicalQuestion": "文明如何避免用未来能力永久补贴当前运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-060"
+      ],
+      "confidence": "HIGH",
+      "score": 0.91,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.72",
+      "sourceTitle": "文明转型",
+      "canonicalQuestion": "为什么文明维持自身有时必须改变原来的制度、技术与价值结构",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-061"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.73",
+      "sourceTitle": "文明连续",
+      "canonicalQuestion": "为什么文明即使发生重大变化，仍然可能保持某种长期 Runtime Continuity",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-062"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.74",
+      "sourceTitle": "文明继任运行",
+      "canonicalQuestion": "为什么一个 Civilization Runtime 结束之后，新的文明可能继承其中部分结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-063",
+          "oldChapterCode": "11.63",
+          "titleEn": "Runtime Civilization",
+          "titleZhHans": "Runtime 如何组织成 Civilization",
+          "score": 0.72
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.75",
+      "sourceTitle": "文明载体迁移",
+      "canonicalQuestion": "为什么文明的运行可以跨越国家、帝国、组织与技术载体继续存在",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-012",
+          "oldChapterCode": "11.12",
+          "titleEn": "Governance",
+          "titleZhHans": "治理如何组织文明",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-017",
+          "oldChapterCode": "11.17",
+          "titleEn": "Religion",
+          "titleZhHans": "宗教如何组织文明",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-050",
+          "oldChapterCode": "11.50",
+          "titleEn": "AI Organizations",
+          "titleZhHans": "AI 组织如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.76",
+      "sourceTitle": "文明运行",
+      "canonicalQuestion": "什么时候大量制度、知识、文化、基础设施与生命共同形成真正的 Civilization Runtime",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P11-064"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "11.77",
+      "sourceTitle": "文明图谱阈值",
+      "canonicalQuestion": "为什么理解文明如何形成还不够，我们还需要知道不同文明究竟位于什么运行位置",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P11-006",
+          "oldChapterCode": "11.6",
+          "titleEn": "Shared Identity",
+          "titleZhHans": "为什么文明形成共同身份",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-026",
+          "oldChapterCode": "11.26",
+          "titleEn": "Incentives",
+          "titleZhHans": "文明如何形成激励",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P11-050",
+          "oldChapterCode": "11.50",
+          "titleEn": "AI Organizations",
+          "titleZhHans": "AI 组织如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
     }
   ]
 }

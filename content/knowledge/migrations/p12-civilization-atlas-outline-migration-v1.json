@@ -1,10 +1,10 @@
 {
-  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.0.0",
-  "schemaVersion": "1.0.0",
+  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.1.0",
+  "schemaVersion": "1.1.0",
   "migrationCode": "BOOK-W1B-P12-CIVILIZATION-ATLAS-OUTLINE-MIGRATION-v1",
   "phase": "BOOK-W1",
   "step": "BOOK-W1B",
-  "status": "in-progress-blocked-pending-canonical-outline-authority",
+  "status": "in-progress-source-authority-complete-pending-human-canonical-review",
   "recordedAt": "2026-08-13",
   "partAuthority": {
     "partCode": "P12",
@@ -15,20 +15,16 @@
     "newPublicationBookCode": "BOOK-4"
   },
   "sourceOutlineAuthority": {
-    "path": "content/knowledge/reconciliation/kau-r2/future-volume-outline-upgrade-guard-v1.json",
-    "sourceAuthority": "USER_SUPPLIED_UPGRADED_OUTLINE_2026-08-13",
-    "sourceStage": "OUTLINE_ONLY_NON_MANUSCRIPT",
+    "path": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "schemaVersion": "PHI-OS-BOOK-W1B-SOURCE-OUTLINE-AUTHORITY-v1.0.0",
+    "sourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "partInventorySha256": "70c9a69ec57338f5861bb10289ee8159680862e1ec29005e7a9e0db2889bc639",
     "upgradedOutlineChapterCount": 84,
-    "fullChapterListIncluded": false,
-    "chapterInventoryDigest": null,
-    "semanticAnchors": [
-      {
-        "chapterCode": "12.84",
-        "titleZhHans": "观察阈值",
-        "role": "Atlas → Observation"
-      }
-    ],
-    "canonicalAcceptanceEligible": false
+    "fullChapterListIncluded": true,
+    "humanSourceAuthorizationRecorded": true,
+    "humanReviewEligible": true,
+    "canonicalAcceptanceEligible": false,
+    "sourceNormalizationApplied": "NONE"
   },
   "inventory": {
     "existingCanonicalNodeCount": 46,
@@ -36,23 +32,1270 @@
     "outlineChapterMinusExistingNodeCount": 38,
     "preservedExistingNodeCount": 46,
     "acceptedCanonicalOutlineMatchCount": 0,
-    "unresolvedSourceOutlineChapterCount": 84,
+    "unresolvedSourceOutlineChapterCount": 0,
+    "humanReviewRecommendationCount": 114,
+    "recommendedNewCanonicalNodeCandidateCount": 68,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "chapterCountDeltaIsNotANodeCandidateCount": true
   },
   "decisionSummary": {
-    "retain": 0,
-    "rename": 0,
-    "move": 46,
-    "supersede": 0,
-    "split": 0,
-    "merge": 0,
-    "new": 0,
-    "moveScope": "publication-ownership-only; same-Part chapter moves remain unresolved"
+    "recommendationsOnly": true,
+    "match": 0,
+    "rename": 1,
+    "move": 15,
+    "supersede": 30,
+    "splitCandidateReview": 28,
+    "mergeCandidateReview": 28,
+    "newCandidate": 68,
+    "acceptedDecisionCount": 0,
+    "publicationOwnershipMoveCount": 46,
+    "moveScope": "outline move recommendations are separate from BOOK-W1A publication-ownership moves"
   },
+  "splitCandidates": [
+    {
+      "oldNodeCode": "KN-B3-P12-046",
+      "oldChapterCode": "12.0",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.24",
+          "sourceTitle": "结构转型窗口",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.27",
+          "sourceTitle": "文明历史分叉",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.48",
+          "sourceTitle": "生物文明载体",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-001",
+      "oldChapterCode": "12.1",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-002",
+      "oldChapterCode": "12.2",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-004",
+      "oldChapterCode": "12.4",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-005",
+      "oldChapterCode": "12.5",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-006",
+      "oldChapterCode": "12.6",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-007",
+      "oldChapterCode": "12.7",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-008",
+      "oldChapterCode": "12.8",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-009",
+      "oldChapterCode": "12.9",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-010",
+      "oldChapterCode": "12.10",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-011",
+      "oldChapterCode": "12.11",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-012",
+      "oldChapterCode": "12.12",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.61",
+          "sourceTitle": "并行文明",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-014",
+      "oldChapterCode": "12.14",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.33",
+          "sourceTitle": "知识扩展",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.56",
+          "sourceTitle": "文明载体边界",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-025",
+      "oldChapterCode": "12.25",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.51",
+          "sourceTitle": "人工文明载体",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.58",
+          "sourceTitle": "文明案例识别",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.60",
+          "sourceTitle": "跨文明比较",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-026",
+      "oldChapterCode": "12.26",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.76",
+          "sourceTitle": "投影未知",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-027",
+      "oldChapterCode": "12.27",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.76",
+          "sourceTitle": "投影未知",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.21",
+          "sourceTitle": "历史压缩",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-029",
+      "oldChapterCode": "12.29",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.21",
+          "sourceTitle": "历史压缩",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.27",
+          "sourceTitle": "文明历史分叉",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-030",
+      "oldChapterCode": "12.30",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.73",
+          "sourceTitle": "历史—投影对照",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.67",
+          "sourceTitle": "投影窗口",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.70",
+          "sourceTitle": "角色拓扑投影",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-031",
+      "oldChapterCode": "12.31",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.58",
+          "sourceTitle": "文明案例识别",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "12.53",
+          "sourceTitle": "载体迁移",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.59",
+          "sourceTitle": "文明阶段切分",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-032",
+      "oldChapterCode": "12.32",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.76",
+          "sourceTitle": "投影未知",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-033",
+      "oldChapterCode": "12.33",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.51",
+          "sourceTitle": "人工文明载体",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.76",
+          "sourceTitle": "投影未知",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-034",
+      "oldChapterCode": "12.34",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.17",
+          "sourceTitle": "文明未来容量",
+          "score": 0.84
+        },
+        {
+          "chapterCode": "12.82",
+          "sourceTitle": "文明未知边界",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-035",
+      "oldChapterCode": "12.35",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.2",
+          "sourceTitle": "文明观察单位",
+          "score": 0.87
+        },
+        {
+          "chapterCode": "12.70",
+          "sourceTitle": "角色拓扑投影",
+          "score": 0.87
+        },
+        {
+          "chapterCode": "12.33",
+          "sourceTitle": "知识扩展",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-036",
+      "oldChapterCode": "12.36",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.27",
+          "sourceTitle": "文明历史分叉",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.48",
+          "sourceTitle": "生物文明载体",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.49",
+          "sourceTitle": "组织文明载体",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-037",
+      "oldChapterCode": "12.37",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.27",
+          "sourceTitle": "文明历史分叉",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.64",
+          "sourceTitle": "文明融合",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-038",
+      "oldChapterCode": "12.38",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.27",
+          "sourceTitle": "文明历史分叉",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.64",
+          "sourceTitle": "文明融合",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-039",
+      "oldChapterCode": "12.39",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.6",
+          "sourceTitle": "文明版本",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.27",
+          "sourceTitle": "文明历史分叉",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "12.64",
+          "sourceTitle": "文明融合",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B3-P12-044",
+      "oldChapterCode": "12.44",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "12.2",
+          "sourceTitle": "文明观察单位",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "12.84",
+          "sourceTitle": "观察阈值",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
+  "mergeCandidates": [
+    {
+      "outlineChapterCode": "12.2",
+      "sourceTitle": "文明观察单位",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.87
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-044",
+          "oldChapterCode": "12.44",
+          "score": 0.81
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.6",
+      "sourceTitle": "文明版本",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-026",
+          "oldChapterCode": "12.26",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-006",
+          "oldChapterCode": "12.6",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.21",
+      "sourceTitle": "历史压缩",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.27",
+      "sourceTitle": "文明历史分叉",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.33",
+      "sourceTitle": "知识扩展",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-014",
+          "oldChapterCode": "12.14",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.39",
+      "sourceTitle": "结构负载",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.48",
+      "sourceTitle": "生物文明载体",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.49",
+      "sourceTitle": "组织文明载体",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.50",
+      "sourceTitle": "技术文明载体",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.51",
+      "sourceTitle": "人工文明载体",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-033",
+          "oldChapterCode": "12.33",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-025",
+          "oldChapterCode": "12.25",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.52",
+      "sourceTitle": "混合文明载体",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.53",
+      "sourceTitle": "载体迁移",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.54",
+      "sourceTitle": "载体依赖",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.55",
+      "sourceTitle": "载体脆弱性",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.56",
+      "sourceTitle": "文明载体边界",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.57",
+      "sourceTitle": "历史文明案例架构",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.58",
+      "sourceTitle": "文明案例识别",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-031",
+          "oldChapterCode": "12.31",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-006",
+          "oldChapterCode": "12.6",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-008",
+          "oldChapterCode": "12.8",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.61",
+      "sourceTitle": "并行文明",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.64",
+      "sourceTitle": "文明融合",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-037",
+          "oldChapterCode": "12.37",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.69",
+      "sourceTitle": "运行轨迹投影",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-013",
+          "oldChapterCode": "12.13",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-010",
+          "oldChapterCode": "12.10",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-037",
+          "oldChapterCode": "12.37",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.70",
+      "sourceTitle": "角色拓扑投影",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "score": 0.87
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-007",
+          "oldChapterCode": "12.7",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.71",
+      "sourceTitle": "历史时间与投影时间",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.72",
+      "sourceTitle": "文明状态与投影状态",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.73",
+      "sourceTitle": "历史—投影对照",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.74",
+      "sourceTitle": "投影支持",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.75",
+      "sourceTitle": "投影失配",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.76",
+      "sourceTitle": "投影未知",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-025",
+          "oldChapterCode": "12.25",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "12.81",
+      "sourceTitle": "文明比较图谱",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "score": 0.84
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
   "reconciliationActionGates": [
     {
-      "action": "retain",
+      "action": "match",
       "status": "pending-explicit-human-canonical-review"
     },
     {
@@ -73,15 +1316,11 @@
     },
     {
       "action": "split",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "merge",
-      "status": "pending-explicit-human-canonical-review"
-    },
-    {
-      "action": "cross-part-related-node",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "new-candidate",
@@ -89,8 +1328,8 @@
     }
   ],
   "blocker": {
-    "code": "COMPLETE_CHAPTER_OUTLINE_AUTHORITY_REQUIRED",
-    "missingAuthority": "The complete Human-agreed chapter-by-chapter outline inventory plus explicit Human Canonical matching decisions.",
+    "code": "HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED",
+    "missingAuthority": "Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.",
     "w1bAcceptanceBlocked": true,
     "w1cSuccessorBlueprintGenerationAllowed": false
   },
@@ -108,736 +1347,3496 @@
       "oldChapterCode": "12.0",
       "newChapterCode": "12.0",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "Reality 为什么形成不同承载形态",
       "titleEn": "Carrier Archetypes",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.24",
+            "sourceTitle": "结构转型窗口",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.27",
+            "sourceTitle": "文明历史分叉",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.48",
+            "sourceTitle": "生物文明载体",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-001",
       "oldChapterCode": "12.1",
       "newChapterCode": "12.1",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "美国文明当前如何运行",
       "titleEn": "United States Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-002",
       "oldChapterCode": "12.2",
       "newChapterCode": "12.2",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "中国文明当前如何运行",
       "titleEn": "China Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-003",
       "oldChapterCode": "12.3",
       "newChapterCode": "12.3",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "印度文明当前如何运行",
       "titleEn": "India Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "rename",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "12.3",
+        "sourceOutlineTitle": "文明边界识别",
+        "sourceOutlineQuestion": "什么使一个 Civilization Runtime 与另一个 Runtime 区分开来",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-004",
       "oldChapterCode": "12.4",
       "newChapterCode": "12.4",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "日本文明当前如何运行",
       "titleEn": "Japan Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-005",
       "oldChapterCode": "12.5",
       "newChapterCode": "12.5",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "韩国文明当前如何运行",
       "titleEn": "Korea Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-006",
       "oldChapterCode": "12.6",
       "newChapterCode": "12.6",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "东南亚文明当前如何运行",
       "titleEn": "Southeast Asia Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-007",
       "oldChapterCode": "12.7",
       "newChapterCode": "12.7",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "欧洲文明当前如何运行",
       "titleEn": "Europe Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-008",
       "oldChapterCode": "12.8",
       "newChapterCode": "12.8",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "中东文明当前如何运行",
       "titleEn": "Middle East Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-009",
       "oldChapterCode": "12.9",
       "newChapterCode": "12.9",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "非洲文明当前如何运行",
       "titleEn": "Africa Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-010",
       "oldChapterCode": "12.10",
       "newChapterCode": "12.10",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "拉丁美洲文明当前如何运行",
       "titleEn": "Latin America Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-011",
       "oldChapterCode": "12.11",
       "newChapterCode": "12.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "俄罗斯文明当前如何运行",
       "titleEn": "Russia Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-012",
       "oldChapterCode": "12.12",
       "newChapterCode": "12.12",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "朝鲜文明当前如何运行",
       "titleEn": "North Korea Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.61",
+            "sourceTitle": "并行文明",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-013",
       "oldChapterCode": "12.13",
       "newChapterCode": "12.13",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "新兴文明生态如何运行",
       "titleEn": "Emerging Ecologies",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.69",
+            "sourceTitle": "运行轨迹投影",
+            "score": 0.81
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-014",
       "oldChapterCode": "12.14",
       "newChapterCode": "12.14",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明生命周期如何划分",
       "titleEn": "Civilization Runtime Phases",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.33",
+            "sourceTitle": "知识扩展",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.56",
+            "sourceTitle": "文明载体边界",
+            "score": 0.84
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-015",
       "oldChapterCode": "12.15",
-      "newChapterCode": "12.15",
+      "newChapterCode": "12.5",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明时间轴如何建立",
       "titleEn": "Civilization Runtime Timeline",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "12.5",
+        "sourceOutlineTitle": "文明时间尺度",
+        "sourceOutlineQuestion": "为什么文明必须同时从几十年、数百年与数千年读取",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-016",
       "oldChapterCode": "12.16",
-      "newChapterCode": "12.16",
+      "newChapterCode": "12.8",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明运行矩阵如何建立",
       "titleEn": "Civilization Runtime Matrix",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "12.8",
+        "sourceOutlineTitle": "文明运行阶段",
+        "sourceOutlineQuestion": "文明当前处于形成、扩展、成熟、转型还是收缩阶段",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-017",
       "oldChapterCode": "12.17",
-      "newChapterCode": "12.17",
+      "newChapterCode": "12.77",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明位置如何确定",
       "titleEn": "Civilization Position",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "12.77",
+        "sourceOutlineTitle": "文明位置",
+        "sourceOutlineQuestion": "一个 Civilization Runtime 如何被描述为当前位置",
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-018",
       "oldChapterCode": "12.18",
-      "newChapterCode": "12.18",
+      "newChapterCode": "12.10",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明密度如何读取",
       "titleEn": "Civilization Density",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "12.10",
+        "sourceOutlineTitle": "文明密度",
+        "sourceOutlineQuestion": "一个文明内部有多少 Runtime 被压缩进同一结构",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-019",
       "oldChapterCode": "12.19",
-      "newChapterCode": "12.19",
+      "newChapterCode": "12.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明容量如何读取",
       "titleEn": "Civilization Capacity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "12.11",
+        "sourceOutlineTitle": "文明容量",
+        "sourceOutlineQuestion": "文明还能承载多少新的复杂度",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-020",
       "oldChapterCode": "12.20",
-      "newChapterCode": "12.20",
+      "newChapterCode": "12.12",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明负载如何读取",
       "titleEn": "Civilization Load",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "12.12",
+        "sourceOutlineTitle": "文明负载",
+        "sourceOutlineQuestion": "当前 Runtime 已经承担多少维持与协调成本",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-021",
       "oldChapterCode": "12.21",
-      "newChapterCode": "12.21",
+      "newChapterCode": "12.13",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明对齐如何读取",
       "titleEn": "Civilization Alignment",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "12.13",
+        "sourceOutlineTitle": "文明对齐",
+        "sourceOutlineQuestion": "不同制度、资源、价值与目标是否仍然指向相近方向",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-022",
       "oldChapterCode": "12.22",
-      "newChapterCode": "12.22",
+      "newChapterCode": "12.14",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明韧性如何读取",
       "titleEn": "Civilization Resilience",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "12.14",
+        "sourceOutlineTitle": "文明韧性",
+        "sourceOutlineQuestion": "文明受到冲击之后能够恢复多少关键运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-023",
       "oldChapterCode": "12.23",
-      "newChapterCode": "12.23",
+      "newChapterCode": "12.18",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明风险如何读取",
       "titleEn": "Civilization Risk",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "12.18",
+        "sourceOutlineTitle": "文明风险",
+        "sourceOutlineQuestion": "哪些结构可能限制下一轮连续与扩展",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-024",
       "oldChapterCode": "12.24",
-      "newChapterCode": "12.24",
+      "newChapterCode": "12.20",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "历史运行如何被压缩",
       "titleEn": "Historical Runtime Compression",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "12.20",
+        "sourceOutlineTitle": "历史运行层",
+        "sourceOutlineQuestion": "哪些过去形成的 Runtime 仍然存在于当前文明之中",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-025",
       "oldChapterCode": "12.25",
       "newChapterCode": "12.25",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "哪些条件允许文明出现",
       "titleEn": "Runtime Permissions",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.51",
+            "sourceTitle": "人工文明载体",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.58",
+            "sourceTitle": "文明案例识别",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.60",
+            "sourceTitle": "跨文明比较",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-026",
       "oldChapterCode": "12.26",
       "newChapterCode": "12.26",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何被显化",
       "titleEn": "Runtime Manifestation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.76",
+            "sourceTitle": "投影未知",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-027",
       "oldChapterCode": "12.27",
       "newChapterCode": "12.27",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "历史运行如何被解释",
       "titleEn": "Historical Runtime Interpretation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.76",
+            "sourceTitle": "投影未知",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.21",
+            "sourceTitle": "历史压缩",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-028",
       "oldChapterCode": "12.28",
-      "newChapterCode": "12.28",
+      "newChapterCode": "12.22",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "过去如何塑造现在",
       "titleEn": "Civilization Runtime Projection",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "12.22",
+        "sourceOutlineTitle": "文明形成窗口",
+        "sourceOutlineQuestion": "哪些历史阶段真正改变了文明的 Runtime Architecture",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-029",
       "oldChapterCode": "12.29",
       "newChapterCode": "12.29",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "AI 如何进入历史进程",
       "titleEn": "AI Transition Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.21",
+            "sourceTitle": "历史压缩",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.27",
+            "sourceTitle": "文明历史分叉",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-030",
       "oldChapterCode": "12.30",
       "newChapterCode": "12.30",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "未来运行如何投影",
       "titleEn": "Future Runtime Projection",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.73",
+            "sourceTitle": "历史—投影对照",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.67",
+            "sourceTitle": "投影窗口",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.70",
+            "sourceTitle": "角色拓扑投影",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-031",
       "oldChapterCode": "12.31",
       "newChapterCode": "12.31",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "AI 时代属于什么阶段",
       "titleEn": "AI Transition Phase",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.58",
+            "sourceTitle": "文明案例识别",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "12.53",
+            "sourceTitle": "载体迁移",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.59",
+            "sourceTitle": "文明阶段切分",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-032",
       "oldChapterCode": "12.32",
       "newChapterCode": "12.32",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "继任文明如何出现",
       "titleEn": "Successor Civilizations",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.76",
+            "sourceTitle": "投影未知",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-033",
       "oldChapterCode": "12.33",
       "newChapterCode": "12.33",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "人工文明如何出现",
       "titleEn": "Synthetic Civilizations",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.51",
+            "sourceTitle": "人工文明载体",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.76",
+            "sourceTitle": "投影未知",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-034",
       "oldChapterCode": "12.34",
       "newChapterCode": "12.34",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明未来情景如何建立",
       "titleEn": "Civilization Scenarios",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.17",
+            "sourceTitle": "文明未来容量",
+            "score": 0.84
+          },
+          {
+            "chapterCode": "12.82",
+            "sourceTitle": "文明未知边界",
+            "score": 0.81
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-035",
       "oldChapterCode": "12.35",
       "newChapterCode": "12.35",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "生命如何超越生物载体",
       "titleEn": "Life Beyond Biology",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.2",
+            "sourceTitle": "文明观察单位",
+            "score": 0.87
+          },
+          {
+            "chapterCode": "12.70",
+            "sourceTitle": "角色拓扑投影",
+            "score": 0.87
+          },
+          {
+            "chapterCode": "12.33",
+            "sourceTitle": "知识扩展",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-036",
       "oldChapterCode": "12.36",
       "newChapterCode": "12.36",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "替代载体如何形成",
       "titleEn": "Alternative Carriers",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.27",
+            "sourceTitle": "文明历史分叉",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.48",
+            "sourceTitle": "生物文明载体",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.49",
+            "sourceTitle": "组织文明载体",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-037",
       "oldChapterCode": "12.37",
       "newChapterCode": "12.37",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "非人类智能如何形成",
       "titleEn": "Intelligence Without Humanity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.27",
+            "sourceTitle": "文明历史分叉",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.64",
+            "sourceTitle": "文明融合",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-038",
       "oldChapterCode": "12.38",
       "newChapterCode": "12.38",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "集体智能如何形成",
       "titleEn": "Collective Intelligence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.27",
+            "sourceTitle": "文明历史分叉",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.64",
+            "sourceTitle": "文明融合",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-039",
       "oldChapterCode": "12.39",
       "newChapterCode": "12.39",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "行星智能如何形成",
       "titleEn": "Planetary Intelligence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.6",
+            "sourceTitle": "文明版本",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.27",
+            "sourceTitle": "文明历史分叉",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "12.64",
+            "sourceTitle": "文明融合",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-040",
       "oldChapterCode": "12.40",
-      "newChapterCode": "12.40",
+      "newChapterCode": "12.25",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "人工文明如何持续运行",
       "titleEn": "Synthetic Civilization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "12.25",
+        "sourceOutlineTitle": "文明继任轨迹",
+        "sourceOutlineQuestion": "一个 Civilization Runtime 结束之后，哪些部分进入下一文明",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-041",
       "oldChapterCode": "12.41",
-      "newChapterCode": "12.41",
+      "newChapterCode": "12.46",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "外星文明可能性如何被审查",
       "titleEn": "Extraterrestrial Possibility",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "12.46",
+        "sourceOutlineTitle": "文明尺度收缩",
+        "sourceOutlineQuestion": "为什么文明可能在不完全崩塌的情况下逐渐退出原有尺度",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-042",
       "oldChapterCode": "12.42",
-      "newChapterCode": "12.42",
+      "newChapterCode": "12.47",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明最终需要什么载体",
       "titleEn": "The Carrier Question",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "12.47",
+        "sourceOutlineTitle": "文明载体",
+        "sourceOutlineQuestion": "什么真正承载 Civilization Runtime",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-043",
       "oldChapterCode": "12.43",
       "newChapterCode": "12.43",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何被诊断",
       "titleEn": "Civilization Diagnostics",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-044",
       "oldChapterCode": "12.44",
       "newChapterCode": "12.44",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "文明如何被观测",
       "titleEn": "Observable Civilization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "12.2",
+            "sourceTitle": "文明观察单位",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "12.84",
+            "sourceTitle": "观察阈值",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B3-P12-045",
       "oldChapterCode": "12.45",
-      "newChapterCode": "12.45",
+      "newChapterCode": "12.66",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-3 to BOOK-4; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-3 to BOOK-4; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-3",
       "newPublicationBookCode": "BOOK-4",
       "titleZhHans": "PHI OS 如何阅读文明",
       "titleEn": "Reading Civilization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.87,
+        "sourceOutlineChapterCode": "12.66",
+        "sourceOutlineTitle": "48运行投影矩阵",
+        "sourceOutlineQuestion": "为什么 PHI OS 建立跨长时间窗口的 Runtime Projection",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
+    }
+  ],
+  "outlineCandidates": [
+    {
+      "outlineChapterCode": "12.1",
+      "sourceTitle": "文明图谱",
+      "canonicalQuestion": "为什么文明需要被放进多维 Reality Space 中理解",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.2",
+      "sourceTitle": "文明观察单位",
+      "canonicalQuestion": "我们究竟在读取国家、文明、区域，还是更大的 Runtime Ecology",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.87
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-044",
+          "oldChapterCode": "12.44",
+          "titleEn": "Observable Civilization",
+          "titleZhHans": "文明如何被观测",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.3",
+      "sourceTitle": "文明边界识别",
+      "canonicalQuestion": "什么使一个 Civilization Runtime 与另一个 Runtime 区分开来",
+      "recommendedAction": "rename",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-003"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.4",
+      "sourceTitle": "文明尺度层级",
+      "canonicalQuestion": "文明可以存在于哪些不同尺度",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.5",
+      "sourceTitle": "文明时间尺度",
+      "canonicalQuestion": "为什么文明必须同时从几十年、数百年与数千年读取",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-015"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.6",
+      "sourceTitle": "文明版本",
+      "canonicalQuestion": "为什么同一个文明在不同历史时期不能被视为同一个 Runtime State",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-026",
+          "oldChapterCode": "12.26",
+          "titleEn": "Runtime Manifestation",
+          "titleZhHans": "文明如何被显化",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-006",
+          "oldChapterCode": "12.6",
+          "titleEn": "Southeast Asia Runtime",
+          "titleZhHans": "东南亚文明当前如何运行",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "titleEn": "United States Runtime",
+          "titleZhHans": "美国文明当前如何运行",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.7",
+      "sourceTitle": "文明比较边界",
+      "canonicalQuestion": "哪些文明可以比较，哪些比较会产生错误压缩",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.8",
+      "sourceTitle": "文明运行阶段",
+      "canonicalQuestion": "文明当前处于形成、扩展、成熟、转型还是收缩阶段",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-016"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.9",
+      "sourceTitle": "文明尺度坐标",
+      "canonicalQuestion": "文明当前承载了多大的 Reality Scale",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.10",
+      "sourceTitle": "文明密度",
+      "canonicalQuestion": "一个文明内部有多少 Runtime 被压缩进同一结构",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-018"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.11",
+      "sourceTitle": "文明容量",
+      "canonicalQuestion": "文明还能承载多少新的复杂度",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-019"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.12",
+      "sourceTitle": "文明负载",
+      "canonicalQuestion": "当前 Runtime 已经承担多少维持与协调成本",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-020"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.13",
+      "sourceTitle": "文明对齐",
+      "canonicalQuestion": "不同制度、资源、价值与目标是否仍然指向相近方向",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-021"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.14",
+      "sourceTitle": "文明韧性",
+      "canonicalQuestion": "文明受到冲击之后能够恢复多少关键运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-022"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.15",
+      "sourceTitle": "文明适应能力",
+      "canonicalQuestion": "文明面对新技术、新人口、新环境时能够改变多少",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.16",
+      "sourceTitle": "文明扩展能力",
+      "canonicalQuestion": "文明是否仍然能够产生下一尺度的 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.17",
+      "sourceTitle": "文明未来容量",
+      "canonicalQuestion": "当前结构为后来者留下多少选择空间",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-034",
+          "oldChapterCode": "12.34",
+          "titleEn": "Civilization Scenarios",
+          "titleZhHans": "文明未来情景如何建立",
+          "score": 0.84
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.18",
+      "sourceTitle": "文明风险",
+      "canonicalQuestion": "哪些结构可能限制下一轮连续与扩展",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-023"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.19",
+      "sourceTitle": "文明轨迹",
+      "canonicalQuestion": "为什么文明必须作为路径而不是静止位置理解",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.20",
+      "sourceTitle": "历史运行层",
+      "canonicalQuestion": "哪些过去形成的 Runtime 仍然存在于当前文明之中",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-024"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.21",
+      "sourceTitle": "历史压缩",
+      "canonicalQuestion": "为什么数千年文明必须被压缩成可读取结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.22",
+      "sourceTitle": "文明形成窗口",
+      "canonicalQuestion": "哪些历史阶段真正改变了文明的 Runtime Architecture",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-028"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.23",
+      "sourceTitle": "扩展窗口",
+      "canonicalQuestion": "文明什么时候真正跨越了原有尺度",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.24",
+      "sourceTitle": "结构转型窗口",
+      "canonicalQuestion": "什么时候文明开始改变自己的制度、知识或承载方式",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.25",
+      "sourceTitle": "文明继任轨迹",
+      "canonicalQuestion": "一个 Civilization Runtime 结束之后，哪些部分进入下一文明",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-040"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.26",
+      "sourceTitle": "文明路径依赖",
+      "canonicalQuestion": "为什么过去的选择持续限制今天能够走向哪里",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.27",
+      "sourceTitle": "文明历史分叉",
+      "canonicalQuestion": "为什么相似起点最终可以形成完全不同的文明路径",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.28",
+      "sourceTitle": "文明扩展模式",
+      "canonicalQuestion": "文明可以通过哪些方式扩大自己的 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.29",
+      "sourceTitle": "空间扩展",
+      "canonicalQuestion": "文明如何跨越地理边界",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.30",
+      "sourceTitle": "制度扩展",
+      "canonicalQuestion": "为什么制度可以跨越原来的政治主体继续传播",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.31",
+      "sourceTitle": "经济扩展",
+      "canonicalQuestion": "经济 Runtime 如何把文明影响延伸到边界之外",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.32",
+      "sourceTitle": "文化扩展",
+      "canonicalQuestion": "文明如何通过语言、宗教、艺术与生活方式进入其他群体",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.33",
+      "sourceTitle": "知识扩展",
+      "canonicalQuestion": "为什么知识可以让文明影响远超过原有生命周期",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-014",
+          "oldChapterCode": "12.14",
+          "titleEn": "Civilization Runtime Phases",
+          "titleZhHans": "文明生命周期如何划分",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.34",
+      "sourceTitle": "技术扩展",
+      "canonicalQuestion": "为什么技术会重新定义文明能够达到的尺度",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.35",
+      "sourceTitle": "网络扩展",
+      "canonicalQuestion": "文明如何通过连接而不是领土扩大自己",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.36",
+      "sourceTitle": "文明压缩输出",
+      "canonicalQuestion": "文明如何把复杂 Runtime 压缩成其他节点可以采用的形式",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.37",
+      "sourceTitle": "文明影响半径",
+      "canonicalQuestion": "文明的实际影响为什么可能远大于其政治边界",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.38",
+      "sourceTitle": "扩展负载",
+      "canonicalQuestion": "过去扩展留下的成本如何限制下一轮 Expansion",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.39",
+      "sourceTitle": "结构负载",
+      "canonicalQuestion": "基础设施、制度与历史承诺如何占用文明能力",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.40",
+      "sourceTitle": "人口负载",
+      "canonicalQuestion": "人口结构如何改变文明可用的时间与资源",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.41",
+      "sourceTitle": "知识负载",
+      "canonicalQuestion": "知识越多为什么也会提高协调与更新成本",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.42",
+      "sourceTitle": "基础设施负载",
+      "canonicalQuestion": "文明规模越大，为什么维护旧结构的成本越高",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.43",
+      "sourceTitle": "时间负载",
+      "canonicalQuestion": "过去、现在与未来为什么同时争夺文明资源",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.44",
+      "sourceTitle": "未来压缩",
+      "canonicalQuestion": "为什么当前运行可能逐渐减少未来可选择空间",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.45",
+      "sourceTitle": "文明扩展边界",
+      "canonicalQuestion": "什么真正决定一个文明还能走多远",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.46",
+      "sourceTitle": "文明尺度收缩",
+      "canonicalQuestion": "为什么文明可能在不完全崩塌的情况下逐渐退出原有尺度",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-041"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.47",
+      "sourceTitle": "文明载体",
+      "canonicalQuestion": "什么真正承载 Civilization Runtime",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-042"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.48",
+      "sourceTitle": "生物文明载体",
+      "canonicalQuestion": "为什么目前已知文明高度依赖生物生命",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "titleEn": "Alternative Carriers",
+          "titleZhHans": "替代载体如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.49",
+      "sourceTitle": "组织文明载体",
+      "canonicalQuestion": "为什么制度与组织能够跨越个体生命承载文明",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "titleEn": "Alternative Carriers",
+          "titleZhHans": "替代载体如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.50",
+      "sourceTitle": "技术文明载体",
+      "canonicalQuestion": "技术基础设施如何逐渐承担越来越多文明连续性",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "titleEn": "Alternative Carriers",
+          "titleZhHans": "替代载体如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.51",
+      "sourceTitle": "人工文明载体",
+      "canonicalQuestion": "人工系统在什么条件下可以成为 Civilization Carrier 的组成部分",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-033",
+          "oldChapterCode": "12.33",
+          "titleEn": "Synthetic Civilizations",
+          "titleZhHans": "人工文明如何出现",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-025",
+          "oldChapterCode": "12.25",
+          "titleEn": "Runtime Permissions",
+          "titleZhHans": "哪些条件允许文明出现",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.52",
+      "sourceTitle": "混合文明载体",
+      "canonicalQuestion": "生物、组织与人工结构如何共同承载一个文明",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "titleEn": "Alternative Carriers",
+          "titleZhHans": "替代载体如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.53",
+      "sourceTitle": "载体迁移",
+      "canonicalQuestion": "文明运行如何从一种主要 Carrier 转向另一种",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "titleEn": "United States Runtime",
+          "titleZhHans": "美国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "titleEn": "China Runtime",
+          "titleZhHans": "中国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "titleEn": "Japan Runtime",
+          "titleZhHans": "日本文明当前如何运行",
+          "score": 0.84
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.54",
+      "sourceTitle": "载体依赖",
+      "canonicalQuestion": "为什么文明越复杂，越可能依赖少数关键承载结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "titleEn": "Alternative Carriers",
+          "titleZhHans": "替代载体如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.55",
+      "sourceTitle": "载体脆弱性",
+      "canonicalQuestion": "为什么 Carrier Failure 可能改变整个文明的位置",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "titleEn": "Alternative Carriers",
+          "titleZhHans": "替代载体如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.56",
+      "sourceTitle": "文明载体边界",
+      "canonicalQuestion": "什么时候 Carrier 改变之后，仍然可以被视为同一个 Civilization Runtime",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "titleEn": "United States Runtime",
+          "titleZhHans": "美国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "titleEn": "China Runtime",
+          "titleZhHans": "中国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "titleEn": "Japan Runtime",
+          "titleZhHans": "日本文明当前如何运行",
+          "score": 0.84
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.57",
+      "sourceTitle": "历史文明案例架构",
+      "canonicalQuestion": "为什么文明案例必须与理论章节分开",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.58",
+      "sourceTitle": "文明案例识别",
+      "canonicalQuestion": "一个历史文明需要满足哪些条件才能作为独立 Runtime Case",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-031",
+          "oldChapterCode": "12.31",
+          "titleEn": "AI Transition Phase",
+          "titleZhHans": "AI 时代属于什么阶段",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-006",
+          "oldChapterCode": "12.6",
+          "titleEn": "Southeast Asia Runtime",
+          "titleZhHans": "东南亚文明当前如何运行",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-008",
+          "oldChapterCode": "12.8",
+          "titleEn": "Middle East Runtime",
+          "titleZhHans": "中东文明当前如何运行",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.59",
+      "sourceTitle": "文明阶段切分",
+      "canonicalQuestion": "为什么罗马、中国、印度等不能被压缩成单一静态案例",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-031",
+          "oldChapterCode": "12.31",
+          "titleEn": "AI Transition Phase",
+          "titleZhHans": "AI 时代属于什么阶段",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.60",
+      "sourceTitle": "跨文明比较",
+      "canonicalQuestion": "如何比较两个并不处于相同时间、尺度与资源条件的文明",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-025",
+          "oldChapterCode": "12.25",
+          "titleEn": "Runtime Permissions",
+          "titleZhHans": "哪些条件允许文明出现",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.61",
+      "sourceTitle": "并行文明",
+      "canonicalQuestion": "为什么同一个历史时期可以同时存在多个完全不同的 Civilization Runtime",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "titleEn": "United States Runtime",
+          "titleZhHans": "美国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "titleEn": "China Runtime",
+          "titleZhHans": "中国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "titleEn": "Japan Runtime",
+          "titleZhHans": "日本文明当前如何运行",
+          "score": 0.84
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.62",
+      "sourceTitle": "文明接触",
+      "canonicalQuestion": "两个文明相遇之后为什么会改变彼此的 Runtime",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.63",
+      "sourceTitle": "文明吸收",
+      "canonicalQuestion": "为什么一个文明可以吸收另一个文明的局部 Runtime",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.64",
+      "sourceTitle": "文明融合",
+      "canonicalQuestion": "什么时候长期接触会形成新的混合文明结构",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-036",
+          "oldChapterCode": "12.36",
+          "titleEn": "Alternative Carriers",
+          "titleZhHans": "替代载体如何形成",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-037",
+          "oldChapterCode": "12.37",
+          "titleEn": "Intelligence Without Humanity",
+          "titleZhHans": "非人类智能如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.65",
+      "sourceTitle": "文明继承",
+      "canonicalQuestion": "为什么已经结束的文明仍然可能继续组织后来世界",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.66",
+      "sourceTitle": "48运行投影矩阵",
+      "canonicalQuestion": "为什么 PHI OS 建立跨长时间窗口的 Runtime Projection",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-045"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.87,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.67",
+      "sourceTitle": "投影窗口",
+      "canonicalQuestion": "不同 Projection Window 表达的是什么",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "titleEn": "Future Runtime Projection",
+          "titleZhHans": "未来运行如何投影",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.68",
+      "sourceTitle": "运行层投影",
+      "canonicalQuestion": "不同时间窗口为什么被映射到不同 Runtime Layer",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "titleEn": "Future Runtime Projection",
+          "titleZhHans": "未来运行如何投影",
+          "score": 0.6545
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.69",
+      "sourceTitle": "运行轨迹投影",
+      "canonicalQuestion": "Trajectory 如何描述理论上的 Reality Movement",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-013",
+          "oldChapterCode": "12.13",
+          "titleEn": "Emerging Ecologies",
+          "titleZhHans": "新兴文明生态如何运行",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-010",
+          "oldChapterCode": "12.10",
+          "titleEn": "Latin America Runtime",
+          "titleZhHans": "拉丁美洲文明当前如何运行",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-037",
+          "oldChapterCode": "12.37",
+          "titleEn": "Intelligence Without Humanity",
+          "titleZhHans": "非人类智能如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.70",
+      "sourceTitle": "角色拓扑投影",
+      "canonicalQuestion": "Role Topology 如何描述节点关系可能发生的变化",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-035",
+          "oldChapterCode": "12.35",
+          "titleEn": "Life Beyond Biology",
+          "titleZhHans": "生命如何超越生物载体",
+          "score": 0.87
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-046",
+          "oldChapterCode": "12.0",
+          "titleEn": "Carrier Archetypes",
+          "titleZhHans": "Reality 为什么形成不同承载形态",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-007",
+          "oldChapterCode": "12.7",
+          "titleEn": "Europe Runtime",
+          "titleZhHans": "欧洲文明当前如何运行",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.71",
+      "sourceTitle": "历史时间与投影时间",
+      "canonicalQuestion": "为什么实际历史时间不能与 Projection Window 直接等同",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "titleEn": "Future Runtime Projection",
+          "titleZhHans": "未来运行如何投影",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.72",
+      "sourceTitle": "文明状态与投影状态",
+      "canonicalQuestion": "为什么同一 Projection Window 内，不同文明仍然可能处于完全不同 Runtime Position",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "titleEn": "United States Runtime",
+          "titleZhHans": "美国文明当前如何运行",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "titleEn": "Future Runtime Projection",
+          "titleZhHans": "未来运行如何投影",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.73",
+      "sourceTitle": "历史—投影对照",
+      "canonicalQuestion": "如何把 Civilization Evidence 与 Runtime Projection 放在同一框架比较",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "titleEn": "Future Runtime Projection",
+          "titleZhHans": "未来运行如何投影",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.74",
+      "sourceTitle": "投影支持",
+      "canonicalQuestion": "什么情况下历史证据可以被视为支持某种 Projection",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "titleEn": "Future Runtime Projection",
+          "titleZhHans": "未来运行如何投影",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.75",
+      "sourceTitle": "投影失配",
+      "canonicalQuestion": "当历史 Reality 与 Projection 不一致时应该如何处理",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-029",
+          "oldChapterCode": "12.29",
+          "titleEn": "AI Transition Runtime",
+          "titleZhHans": "AI 如何进入历史进程",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-030",
+          "oldChapterCode": "12.30",
+          "titleEn": "Future Runtime Projection",
+          "titleZhHans": "未来运行如何投影",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.76",
+      "sourceTitle": "投影未知",
+      "canonicalQuestion": "什么情况下 PHI OS 必须保留 Unknown，而不是强行解释",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-027",
+          "oldChapterCode": "12.27",
+          "titleEn": "Historical Runtime Interpretation",
+          "titleZhHans": "历史运行如何被解释",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "titleEn": "China Runtime",
+          "titleZhHans": "中国文明当前如何运行",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-025",
+          "oldChapterCode": "12.25",
+          "titleEn": "Runtime Permissions",
+          "titleZhHans": "哪些条件允许文明出现",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.77",
+      "sourceTitle": "文明位置",
+      "canonicalQuestion": "一个 Civilization Runtime 如何被描述为当前位置",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B3-P12-017"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.78",
+      "sourceTitle": "文明轨迹",
+      "canonicalQuestion": "当前位置如何与过去路径连接",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.79",
+      "sourceTitle": "文明方向",
+      "canonicalQuestion": "当前结构正在扩大、维持、转型还是收缩",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.80",
+      "sourceTitle": "文明可能空间",
+      "canonicalQuestion": "一个文明从当前位置还拥有哪些可行路径",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.81",
+      "sourceTitle": "文明比较图谱",
+      "canonicalQuestion": "多个 Civilization Runtime 如何同时放进同一个 Atlas，而不被压缩成简单排名",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-001",
+          "oldChapterCode": "12.1",
+          "titleEn": "United States Runtime",
+          "titleZhHans": "美国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-002",
+          "oldChapterCode": "12.2",
+          "titleEn": "China Runtime",
+          "titleZhHans": "中国文明当前如何运行",
+          "score": 0.84
+        },
+        {
+          "oldNodeCode": "KN-B3-P12-004",
+          "oldChapterCode": "12.4",
+          "titleEn": "Japan Runtime",
+          "titleZhHans": "日本文明当前如何运行",
+          "score": 0.84
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.82",
+      "sourceTitle": "文明未知边界",
+      "canonicalQuestion": "文明图谱中哪些部分仍然不能被确定",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-034",
+          "oldChapterCode": "12.34",
+          "titleEn": "Civilization Scenarios",
+          "titleZhHans": "文明未来情景如何建立",
+          "score": 0.81
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.83",
+      "sourceTitle": "文明图谱完成",
+      "canonicalQuestion": "为什么建立坐标还不等于真正理解文明",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "12.84",
+      "sourceTitle": "观察阈值",
+      "canonicalQuestion": "为什么文明一旦能够被描述，就必须进一步回答这些描述依据什么 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B3-P12-044",
+          "oldChapterCode": "12.44",
+          "titleEn": "Observable Civilization",
+          "titleZhHans": "文明如何被观测",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
     }
   ]
 }

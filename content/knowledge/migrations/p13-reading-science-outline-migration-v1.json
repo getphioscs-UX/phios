@@ -1,10 +1,10 @@
 {
-  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.0.0",
-  "schemaVersion": "1.0.0",
+  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.1.0",
+  "schemaVersion": "1.1.0",
   "migrationCode": "BOOK-W1B-P13-READING-SCIENCE-OUTLINE-MIGRATION-v1",
   "phase": "BOOK-W1",
   "step": "BOOK-W1B",
-  "status": "in-progress-blocked-pending-canonical-outline-authority",
+  "status": "in-progress-source-authority-complete-pending-human-canonical-review",
   "recordedAt": "2026-08-13",
   "partAuthority": {
     "partCode": "P13",
@@ -18,20 +18,16 @@
     "newPublicationBookCode": "BOOK-5"
   },
   "sourceOutlineAuthority": {
-    "path": "content/knowledge/reconciliation/kau-r2/future-volume-outline-upgrade-guard-v1.json",
-    "sourceAuthority": "USER_SUPPLIED_UPGRADED_OUTLINE_2026-08-13",
-    "sourceStage": "OUTLINE_ONLY_NON_MANUSCRIPT",
+    "path": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "schemaVersion": "PHI-OS-BOOK-W1B-SOURCE-OUTLINE-AUTHORITY-v1.0.0",
+    "sourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "partInventorySha256": "2872ac7c65a1b59c916bf0ba46c08c53ff09fecaad2fa14e61dce8ae132cdc98",
     "upgradedOutlineChapterCount": 87,
     "fullChapterListIncluded": true,
-    "chapterInventoryDigest": "sha256:c9df2fa676645b642d8c3c541159fd1aec4a324b0d3a95d897e2d66c4ac29384",
-    "semanticAnchors": [
-      {
-        "chapterCode": "13.87",
-        "titleZhHans": "导航阈值",
-        "role": "Reading → Navigation"
-      }
-    ],
-    "canonicalAcceptanceEligible": false
+    "humanSourceAuthorizationRecorded": true,
+    "humanReviewEligible": true,
+    "canonicalAcceptanceEligible": false,
+    "sourceNormalizationApplied": "DEDUPLICATED_EXACT_REPEAT_FOR_REVIEW_CANDIDATE_ONLY"
   },
   "inventory": {
     "existingCanonicalNodeCount": 75,
@@ -39,23 +35,418 @@
     "outlineChapterMinusExistingNodeCount": 12,
     "preservedExistingNodeCount": 75,
     "acceptedCanonicalOutlineMatchCount": 0,
-    "unresolvedSourceOutlineChapterCount": 87,
+    "unresolvedSourceOutlineChapterCount": 0,
+    "humanReviewRecommendationCount": 93,
+    "recommendedNewCanonicalNodeCandidateCount": 18,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "chapterCountDeltaIsNotANodeCandidateCount": true
   },
   "decisionSummary": {
-    "retain": 0,
-    "rename": 0,
-    "move": 75,
-    "supersede": 0,
-    "split": 0,
-    "merge": 0,
-    "new": 0,
-    "moveScope": "publication-ownership-only; same-Part chapter moves remain unresolved"
+    "recommendationsOnly": true,
+    "match": 11,
+    "rename": 4,
+    "move": 54,
+    "supersede": 6,
+    "splitCandidateReview": 6,
+    "mergeCandidateReview": 11,
+    "newCandidate": 18,
+    "acceptedDecisionCount": 0,
+    "publicationOwnershipMoveCount": 75,
+    "moveScope": "outline move recommendations are separate from BOOK-W1A publication-ownership moves"
   },
+  "splitCandidates": [
+    {
+      "oldNodeCode": "KN-B4-P13-060",
+      "oldChapterCode": "13.60",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "13.69",
+          "sourceTitle": "投影治理",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.72",
+          "sourceTitle": "专业读取边界",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P13-066",
+      "oldChapterCode": "13.66",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "13.78",
+          "sourceTitle": "读取作为重建",
+          "score": 0.8
+        },
+        {
+          "chapterCode": "13.41",
+          "sourceTitle": "读取对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.42",
+          "sourceTitle": "读取尺度",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P13-067",
+      "oldChapterCode": "13.67",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "13.41",
+          "sourceTitle": "读取对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.42",
+          "sourceTitle": "读取尺度",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.46",
+          "sourceTitle": "投影进入读取",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P13-068",
+      "oldChapterCode": "13.68",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "13.41",
+          "sourceTitle": "读取对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.42",
+          "sourceTitle": "读取尺度",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.46",
+          "sourceTitle": "投影进入读取",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P13-070",
+      "oldChapterCode": "13.70",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "13.41",
+          "sourceTitle": "读取对象",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.42",
+          "sourceTitle": "读取尺度",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "13.46",
+          "sourceTitle": "投影进入读取",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B4-P13-072",
+      "oldChapterCode": "13.72",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "13.84",
+          "sourceTitle": "人工智能作为读取者",
+          "score": 0.8182
+        },
+        {
+          "chapterCode": "13.42",
+          "sourceTitle": "读取尺度",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "13.41",
+          "sourceTitle": "读取对象",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
+  "mergeCandidates": [
+    {
+      "outlineChapterCode": "13.41",
+      "sourceTitle": "读取对象",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.42",
+      "sourceTitle": "读取尺度",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-072",
+          "oldChapterCode": "13.72",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.46",
+      "sourceTitle": "投影进入读取",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.47",
+      "sourceTitle": "读取一致性",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.53",
+      "sourceTitle": "读取版本",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.72",
+      "sourceTitle": "专业读取边界",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-060",
+          "oldChapterCode": "13.60",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.78",
+      "sourceTitle": "读取作为重建",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.8
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.79",
+      "sourceTitle": "读取作为参与",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.80",
+      "sourceTitle": "读取作为影响",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.81",
+      "sourceTitle": "读取与决定",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "13.84",
+      "sourceTitle": "人工智能作为读取者",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B4-P13-072",
+          "oldChapterCode": "13.72",
+          "score": 0.8182
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
   "reconciliationActionGates": [
     {
-      "action": "retain",
+      "action": "match",
       "status": "pending-explicit-human-canonical-review"
     },
     {
@@ -76,15 +467,11 @@
     },
     {
       "action": "split",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "merge",
-      "status": "pending-explicit-human-canonical-review"
-    },
-    {
-      "action": "cross-part-related-node",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "new-candidate",
@@ -93,7 +480,7 @@
   ],
   "blocker": {
     "code": "HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED",
-    "missingAuthority": "Explicit Human Canonical decisions for existing-node matches, insertions, supersessions, splits and merges.",
+    "missingAuthority": "Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.",
     "w1bAcceptanceBlocked": true,
     "w1cSuccessorBlueprintGenerationAllowed": false
   },
@@ -111,1200 +498,3907 @@
       "oldChapterCode": "13.1",
       "newChapterCode": "13.1",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reality 为什么能够留下可观察现象",
       "titleEn": "Observable Reality",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.1",
+        "sourceOutlineTitle": "可观察现实",
+        "sourceOutlineQuestion": "为什么 Reality 会留下能够被观察的现象",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-002",
       "oldChapterCode": "13.2",
       "newChapterCode": "13.2",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Structure 为什么能够留下结构讯号",
       "titleEn": "Observable Structure",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.2",
+        "sourceOutlineTitle": "可观察结构",
+        "sourceOutlineQuestion": "为什么 Structure 会留下稳定的组织讯号",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-003",
       "oldChapterCode": "13.3",
       "newChapterCode": "13.3",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Activation 为什么能够留下激活痕迹",
       "titleEn": "Observable Activation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.3",
+        "sourceOutlineTitle": "可观察激活",
+        "sourceOutlineQuestion": "为什么 Activation 会留下状态改变的痕迹",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-004",
       "oldChapterCode": "13.4",
       "newChapterCode": "13.4",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Runtime 为什么能够留下持续运行痕迹",
       "titleEn": "Observable Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.4",
+        "sourceOutlineTitle": "可观察运行",
+        "sourceOutlineQuestion": "为什么持续 Runtime 会留下连续变化",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-005",
       "oldChapterCode": "13.5",
       "newChapterCode": "13.5",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么长期运行会形成稳定签名",
       "titleEn": "Runtime Signatures",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "rename",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.88,
+        "sourceOutlineChapterCode": "13.5",
+        "sourceOutlineTitle": "运行签名",
+        "sourceOutlineQuestion": "为什么长期运行会形成相对稳定的识别特征",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-006",
       "oldChapterCode": "13.6",
       "newChapterCode": "13.6",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么运行会留下残留",
       "titleEn": "Runtime Residue",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "rename",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "13.6",
+        "sourceOutlineTitle": "残留可观察性",
+        "sourceOutlineQuestion": "为什么运行结束之后留下的 Residue 仍然可以被读取",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-007",
       "oldChapterCode": "13.7",
       "newChapterCode": "13.7",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么偏移能够被观察",
       "titleEn": "Runtime Drift",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "rename",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8327,
+        "sourceOutlineChapterCode": "13.7",
+        "sourceOutlineTitle": "漂移可观察性",
+        "sourceOutlineQuestion": "为什么 Runtime Drift 会留下可比较差异",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-008",
       "oldChapterCode": "13.8",
       "newChapterCode": "13.8",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Projection 会改变可观察 Reality",
       "titleEn": "Projection Artifacts",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "rename",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.88,
+        "sourceOutlineChapterCode": "13.8",
+        "sourceOutlineTitle": "投影痕迹",
+        "sourceOutlineQuestion": "为什么 Projection 本身也会改变可观察 Reality",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-009",
       "oldChapterCode": "13.9",
       "newChapterCode": "13.9",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Runtime 可以被 Reading",
       "titleEn": "Runtime Readability",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.9",
+        "sourceOutlineTitle": "运行可读性",
+        "sourceOutlineQuestion": "什么使一个 Runtime 具备被 Reading 的条件",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-010",
       "oldChapterCode": "13.10",
       "newChapterCode": "13.10",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么必须区分讯号与解释",
       "titleEn": "Signal and Interpretation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.10",
+        "sourceOutlineTitle": "讯号与解释",
+        "sourceOutlineQuestion": "为什么 Signal 必须先于 Interpretation",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-011",
       "oldChapterCode": "13.11",
       "newChapterCode": "13.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "噪声如何影响 Reading",
       "titleEn": "Runtime Noise",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.11",
+        "sourceOutlineTitle": "运行噪声",
+        "sourceOutlineQuestion": "为什么 Noise 会干扰 Reading",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-012",
       "oldChapterCode": "13.12",
       "newChapterCode": "13.12",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 永远存在解析极限",
       "titleEn": "Resolution Limits",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.12",
+        "sourceOutlineTitle": "解析极限",
+        "sourceOutlineQuestion": "为什么任何 Reading 都存在 Resolution Limit",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-013",
       "oldChapterCode": "13.13",
       "newChapterCode": "13.13",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "观察者如何参与 Reading",
       "titleEn": "Observer Participation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.13",
+        "sourceOutlineTitle": "观察者参与",
+        "sourceOutlineQuestion": "为什么 Observer 本身会进入 Reading 条件",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-014",
       "oldChapterCode": "13.14",
       "newChapterCode": "13.14",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reality 为什么能够留下 Evidence",
       "titleEn": "Reality Evidence Architecture",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.14",
+        "sourceOutlineTitle": "现实证据架构",
+        "sourceOutlineQuestion": "为什么 Reality Evidence 必须被单独建立",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-015",
       "oldChapterCode": "13.15",
       "newChapterCode": "13.15",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Evidence 为什么存在不同类别",
       "titleEn": "Evidence Categories",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.15",
+        "sourceOutlineTitle": "证据类别",
+        "sourceOutlineQuestion": "为什么不同 Reality 会留下不同类型的 Evidence",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-016",
       "oldChapterCode": "13.16",
-      "newChapterCode": "13.16",
+      "newChapterCode": "13.17",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Evidence 为什么具有不同可信度",
       "titleEn": "Evidence Reliability",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.17",
+        "sourceOutlineTitle": "证据可靠度",
+        "sourceOutlineQuestion": "为什么不同 Evidence 具有不同可信强度",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-017",
       "oldChapterCode": "13.17",
-      "newChapterCode": "13.17",
+      "newChapterCode": "13.18",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Evidence 与 Interpretation 的边界",
       "titleEn": "Evidence Boundary",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.18",
+        "sourceOutlineTitle": "证据边界",
+        "sourceOutlineQuestion": "为什么 Evidence 永远不能直接等于 Interpretation",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-018",
       "oldChapterCode": "13.18",
-      "newChapterCode": "13.18",
+      "newChapterCode": "13.19",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "不同 Evidence 如何互相支持",
       "titleEn": "Evidence Correlation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.19",
+        "sourceOutlineTitle": "证据相关性",
+        "sourceOutlineQuestion": "为什么真实 Evidence 也可能与当前问题无关",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-019",
       "oldChapterCode": "13.19",
-      "newChapterCode": "13.19",
+      "newChapterCode": "13.21",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么反证同样重要",
       "titleEn": "Counter Evidence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "13.21",
+        "sourceOutlineTitle": "反证",
+        "sourceOutlineQuestion": "为什么 Counter Evidence 必须与支持证据拥有同等位置",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-020",
       "oldChapterCode": "13.20",
-      "newChapterCode": "13.20",
+      "newChapterCode": "13.22",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么缺失也是 Evidence",
       "titleEn": "Missing Evidence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.22",
+        "sourceOutlineTitle": "缺失证据",
+        "sourceOutlineQuestion": "什么时候 Missing Evidence 本身具有意义",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-021",
       "oldChapterCode": "13.21",
-      "newChapterCode": "13.21",
+      "newChapterCode": "13.23",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "时间如何形成 Evidence",
       "titleEn": "Temporal Evidence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.23",
+        "sourceOutlineTitle": "时间证据",
+        "sourceOutlineQuestion": "为什么时间序列比单点观察能够提供更多 Reality",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-022",
       "oldChapterCode": "13.22",
-      "newChapterCode": "13.22",
+      "newChapterCode": "13.24",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么跨领域 Evidence 更强",
       "titleEn": "Cross-Domain Evidence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.24",
+        "sourceOutlineTitle": "跨领域证据",
+        "sourceOutlineQuestion": "为什么 Cross-Domain Evidence 能够降低单一解释依赖",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-023",
       "oldChapterCode": "13.23",
-      "newChapterCode": "13.23",
+      "newChapterCode": "13.25",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Evidence 如何形成网络",
       "titleEn": "Runtime Evidence Network",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "13.25",
+        "sourceOutlineTitle": "证据网络",
+        "sourceOutlineQuestion": "为什么 Evidence 应该被组织成 Network，而不是孤立列表",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-024",
       "oldChapterCode": "13.24",
-      "newChapterCode": "13.24",
+      "newChapterCode": "13.26",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "PHI OS 如何统一所有 Evidence",
       "titleEn": "Unified Evidence Model",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.26",
+        "sourceOutlineTitle": "统一证据模型",
+        "sourceOutlineQuestion": "PHI OS 如何让不同类型 Evidence 进入同一 Reading Architecture",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-025",
       "oldChapterCode": "13.25",
-      "newChapterCode": "13.25",
+      "newChapterCode": "13.27",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Projection 为什么存在",
       "titleEn": "Projection Foundations",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.27",
+        "sourceOutlineTitle": "投影基础",
+        "sourceOutlineQuestion": "为什么人类会建立 Projection",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-026",
       "oldChapterCode": "13.26",
-      "newChapterCode": "13.26",
+      "newChapterCode": "13.29",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Projection 为什么具有共同 Grammar",
       "titleEn": "Projection Grammar",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.29",
+        "sourceOutlineTitle": "投影语法",
+        "sourceOutlineQuestion": "为什么不同 Projection 仍然可以拥有共同 Grammar",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-027",
       "oldChapterCode": "13.27",
-      "newChapterCode": "13.27",
+      "newChapterCode": "13.30",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Projection 存在不同层级",
       "titleEn": "Projection Layers",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.30",
+        "sourceOutlineTitle": "投影层级",
+        "sourceOutlineQuestion": "为什么 Projection 必须区分不同 Reality Layer",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-028",
       "oldChapterCode": "13.28",
-      "newChapterCode": "13.28",
+      "newChapterCode": "13.32",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Projection 为什么存在边界",
       "titleEn": "Projection Boundaries",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.32",
+        "sourceOutlineTitle": "投影边界",
+        "sourceOutlineQuestion": "Projection 最多能够告诉我们什么",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-029",
       "oldChapterCode": "13.29",
-      "newChapterCode": "13.29",
+      "newChapterCode": "13.33",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么不同时间仍可保持一致性",
       "titleEn": "Projection Consistency",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.33",
+        "sourceOutlineTitle": "投影一致性",
+        "sourceOutlineQuestion": "为什么同一方法在相同输入下必须保持足够稳定",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-030",
       "oldChapterCode": "13.30",
-      "newChapterCode": "13.30",
+      "newChapterCode": "13.34",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么不同 Projection 会冲突",
       "titleEn": "Projection Conflict",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.34",
+        "sourceOutlineTitle": "投影冲突",
+        "sourceOutlineQuestion": "为什么不同 Projection 会产生不同结果",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-031",
       "oldChapterCode": "13.31",
-      "newChapterCode": "13.31",
+      "newChapterCode": "13.35",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么任何 Projection 都是不完整的",
       "titleEn": "Projection Completeness",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.35",
+        "sourceOutlineTitle": "投影完整性",
+        "sourceOutlineQuestion": "为什么任何 Projection 都只能覆盖 Reality 的部分结构",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-032",
       "oldChapterCode": "13.32",
-      "newChapterCode": "13.32",
+      "newChapterCode": "13.36",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Projection 如何持续演化",
       "titleEn": "Projection Evolution",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.36",
+        "sourceOutlineTitle": "投影演化",
+        "sourceOutlineQuestion": "为什么 Projection Model 必须允许被 Reality 修正",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-033",
       "oldChapterCode": "13.33",
-      "newChapterCode": "13.33",
+      "newChapterCode": "13.37",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Projection 不等于 Reality",
       "titleEn": "Projection and Reality",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.37",
+        "sourceOutlineTitle": "投影与现实",
+        "sourceOutlineQuestion": "为什么 Projection 永远不能等于 Reality",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-034",
       "oldChapterCode": "13.34",
-      "newChapterCode": "13.34",
+      "newChapterCode": "13.39",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么不同 Projection 可以进入统一 Runtime",
       "titleEn": "Shared Projection Runtime",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.39",
+        "sourceOutlineTitle": "共享投影运行",
+        "sourceOutlineQuestion": "为什么不同 Projection 可以进入统一 Runtime",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-035",
       "oldChapterCode": "13.35",
-      "newChapterCode": "13.35",
+      "newChapterCode": "13.40",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 必须建立统一入口",
       "titleEn": "Reading Entry",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.40",
+        "sourceOutlineTitle": "读取入口",
+        "sourceOutlineQuestion": "为什么 Reading 必须先建立统一入口",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-036",
       "oldChapterCode": "13.36",
-      "newChapterCode": "13.36",
+      "newChapterCode": "13.43",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 必须遵循统一 Grammar",
       "titleEn": "Reading Grammar",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.43",
+        "sourceOutlineTitle": "读取语法",
+        "sourceOutlineQuestion": "为什么 Reading 需要统一 Grammar",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-037",
       "oldChapterCode": "13.37",
-      "newChapterCode": "13.37",
+      "newChapterCode": "13.44",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "如何重建 Runtime Chain",
       "titleEn": "Runtime Reconstruction",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.44",
+        "sourceOutlineTitle": "运行重建",
+        "sourceOutlineQuestion": "如何从现有痕迹重建 Runtime Chain",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-038",
       "oldChapterCode": "13.38",
-      "newChapterCode": "13.38",
+      "newChapterCode": "13.45",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么必须排序 Evidence",
       "titleEn": "Evidence Prioritization",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.45",
+        "sourceOutlineTitle": "证据排序",
+        "sourceOutlineQuestion": "为什么不同 Evidence 不能获得相同权重",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-039",
       "oldChapterCode": "13.39",
-      "newChapterCode": "13.39",
+      "newChapterCode": "13.48",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么能够建立 Confidence",
       "titleEn": "Reading Confidence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.48",
+        "sourceOutlineTitle": "读取信心",
+        "sourceOutlineQuestion": "为什么可以建立 Confidence，却不能制造确定性",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-040",
       "oldChapterCode": "13.40",
-      "newChapterCode": "13.40",
+      "newChapterCode": "13.49",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么必须保留其他 Reading",
       "titleEn": "Alternative Reading",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.49",
+        "sourceOutlineTitle": "替代读取",
+        "sourceOutlineQuestion": "为什么必须保留 Alternative Reading",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-041",
       "oldChapterCode": "13.41",
-      "newChapterCode": "13.41",
+      "newChapterCode": "13.50",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Unknown 会持续形成",
       "titleEn": "Unknown Formation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.50",
+        "sourceOutlineTitle": "未知形成",
+        "sourceOutlineQuestion": "为什么 Unknown 必须成为正式 Reading State",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-042",
       "oldChapterCode": "13.42",
-      "newChapterCode": "13.42",
+      "newChapterCode": "13.51",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "如何整合全部 Reading",
       "titleEn": "Reading Synthesis",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.51",
+        "sourceOutlineTitle": "读取综合",
+        "sourceOutlineQuestion": "如何把不同 Evidence、Projection 与 Context 组织成整体 Reading",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-043",
       "oldChapterCode": "13.43",
-      "newChapterCode": "13.43",
+      "newChapterCode": "13.52",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "如何形成统一 Runtime Profile",
       "titleEn": "Runtime Profile",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.52",
+        "sourceOutlineTitle": "运行画像",
+        "sourceOutlineQuestion": "统一 Runtime Profile 应该包含什么",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-044",
       "oldChapterCode": "13.44",
-      "newChapterCode": "13.44",
+      "newChapterCode": "13.54",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reading 为什么能够持续更新",
       "titleEn": "Reading Revision",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.54",
+        "sourceOutlineTitle": "读取修订",
+        "sourceOutlineQuestion": "什么情况下旧 Reading 必须被修改",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-045",
       "oldChapterCode": "13.45",
-      "newChapterCode": "13.45",
+      "newChapterCode": "13.55",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "PHI OS Reading Contract",
       "titleEn": "Reading Contract",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.55",
+        "sourceOutlineTitle": "读取契约",
+        "sourceOutlineQuestion": "PHI OS Reading Contract 应该保证什么",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-046",
       "oldChapterCode": "13.46",
-      "newChapterCode": "13.46",
+      "newChapterCode": "13.56",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Interpretation 为什么产生",
       "titleEn": "Interpretation Foundations",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.56",
+        "sourceOutlineTitle": "解释基础",
+        "sourceOutlineQuestion": "为什么事实仍然需要 Interpretation",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-047",
       "oldChapterCode": "13.47",
-      "newChapterCode": "13.47",
+      "newChapterCode": "13.57",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Context 会改变 Interpretation",
       "titleEn": "Context Formation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.57",
+        "sourceOutlineTitle": "情境形成",
+        "sourceOutlineQuestion": "为什么 Context 会改变同一个讯号的意义",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-048",
       "oldChapterCode": "13.48",
-      "newChapterCode": "13.48",
+      "newChapterCode": "13.58",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Knowledge 如何进入 Interpretation",
       "titleEn": "Knowledge Integration",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.58",
+        "sourceOutlineTitle": "知识整合",
+        "sourceOutlineQuestion": "Canonical Knowledge 如何进入 Interpretation",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-049",
       "oldChapterCode": "13.49",
-      "newChapterCode": "13.49",
+      "newChapterCode": "13.59",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Evidence 如何进入 Interpretation",
       "titleEn": "Evidence Integration",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.59",
+        "sourceOutlineTitle": "证据整合",
+        "sourceOutlineQuestion": "Evidence 如何限制 Interpretation 可以走多远",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-050",
       "oldChapterCode": "13.50",
-      "newChapterCode": "13.50",
+      "newChapterCode": "13.60",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Projection 如何进入 Interpretation",
       "titleEn": "Projection Integration",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.60",
+        "sourceOutlineTitle": "投影整合",
+        "sourceOutlineQuestion": "Projection 如何进入 Interpretation，而不取代 Reality",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-051",
       "oldChapterCode": "13.51",
-      "newChapterCode": "13.51",
+      "newChapterCode": "13.61",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么只能形成 Candidate",
       "titleEn": "Interpretation Candidate",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.61",
+        "sourceOutlineTitle": "解释候选",
+        "sourceOutlineQuestion": "为什么 Interpretation 首先只能形成 Candidate",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-052",
       "oldChapterCode": "13.52",
-      "newChapterCode": "13.52",
+      "newChapterCode": "13.62",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么可能存在多个 Interpretation",
       "titleEn": "Multiple Interpretations",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.87,
+        "sourceOutlineChapterCode": "13.62",
+        "sourceOutlineTitle": "多重解释",
+        "sourceOutlineQuestion": "为什么同一个 Reality 可能存在多个合理 Interpretation",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-053",
       "oldChapterCode": "13.53",
-      "newChapterCode": "13.53",
+      "newChapterCode": "13.64",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Interpretation 为什么必须验证",
       "titleEn": "Interpretation Validation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.64",
+        "sourceOutlineTitle": "解释验证",
+        "sourceOutlineQuestion": "什么使 Interpretation 获得更高支持",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-054",
       "oldChapterCode": "13.54",
-      "newChapterCode": "13.54",
+      "newChapterCode": "13.65",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么任何 Interpretation 都存在边界",
       "titleEn": "Interpretation Boundaries",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.65",
+        "sourceOutlineTitle": "解释边界",
+        "sourceOutlineQuestion": "为什么 Interpretation 必须知道自己在哪里停止",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-055",
       "oldChapterCode": "13.55",
-      "newChapterCode": "13.55",
+      "newChapterCode": "13.66",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Interpretation 永远不能等于 Reality",
       "titleEn": "Interpretation and Reality",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.66",
+        "sourceOutlineTitle": "解释与现实",
+        "sourceOutlineQuestion": "为什么 Interpretation 永远不能等于 Reality",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-056",
       "oldChapterCode": "13.56",
-      "newChapterCode": "13.56",
+      "newChapterCode": "13.67",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reading 的 Authority 如何建立",
       "titleEn": "Reading Authority",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.67",
+        "sourceOutlineTitle": "读取权威",
+        "sourceOutlineQuestion": "Reading Authority 从哪里来",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-057",
       "oldChapterCode": "13.57",
-      "newChapterCode": "13.57",
+      "newChapterCode": "13.68",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Evidence 如何受到治理",
       "titleEn": "Evidence Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.68",
+        "sourceOutlineTitle": "证据治理",
+        "sourceOutlineQuestion": "Evidence 如何被记录、审查与更新",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-058",
       "oldChapterCode": "13.58",
-      "newChapterCode": "13.58",
+      "newChapterCode": "13.70",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Interpretation 如何受到治理",
       "titleEn": "Interpretation Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.70",
+        "sourceOutlineTitle": "解释治理",
+        "sourceOutlineQuestion": "Interpretation 为什么不能无限扩展",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-059",
       "oldChapterCode": "13.59",
-      "newChapterCode": "13.59",
+      "newChapterCode": "13.71",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "AI 为什么不能成为最终 Authority",
       "titleEn": "AI Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "13.71",
+        "sourceOutlineTitle": "人工智能读取边界",
+        "sourceOutlineQuestion": "AI 为什么不能自动成为最终 Reading Authority",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-060",
       "oldChapterCode": "13.60",
       "newChapterCode": "13.60",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Professional 为什么必须参与",
       "titleEn": "Professional Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "13.69",
+            "sourceTitle": "投影治理",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.72",
+            "sourceTitle": "专业读取边界",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-061",
       "oldChapterCode": "13.61",
-      "newChapterCode": "13.61",
+      "newChapterCode": "13.73",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reading 为什么需要伦理",
       "titleEn": "Reading Ethics",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.73",
+        "sourceOutlineTitle": "读取伦理",
+        "sourceOutlineQuestion": "为什么能够读取不等于应该读取",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-062",
       "oldChapterCode": "13.62",
-      "newChapterCode": "13.62",
+      "newChapterCode": "13.74",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reading 为什么需要责任",
       "titleEn": "Reading Responsibility",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.74",
+        "sourceOutlineTitle": "读取责任",
+        "sourceOutlineQuestion": "为什么 Interpretation 一旦影响他人，就必须承担后果边界",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-063",
       "oldChapterCode": "13.63",
-      "newChapterCode": "13.63",
+      "newChapterCode": "13.75",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "Reading 为什么必须停止",
       "titleEn": "Reading Boundaries",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.8933,
+        "sourceOutlineChapterCode": "13.75",
+        "sourceOutlineTitle": "读取停止边界",
+        "sourceOutlineQuestion": "什么时候 PHI OS 必须停止继续解释",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-064",
       "oldChapterCode": "13.64",
-      "newChapterCode": "13.64",
+      "newChapterCode": "13.76",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "PHI OS Reading Standards",
       "titleEn": "Reading Standards",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.76",
+        "sourceOutlineTitle": "读取标准",
+        "sourceOutlineQuestion": "统一 Reading 最低需要满足什么条件",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-065",
       "oldChapterCode": "13.65",
-      "newChapterCode": "13.65",
+      "newChapterCode": "13.77",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "PHI OS Reading Governance Contract",
       "titleEn": "Reading Governance Contract",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.77",
+        "sourceOutlineTitle": "读取治理契约",
+        "sourceOutlineQuestion": "PHI OS 如何正式定义 Reading Governance",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-066",
       "oldChapterCode": "13.66",
       "newChapterCode": "13.66",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 会重新组织 Reality",
       "titleEn": "Reading as Reconstruction",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "13.78",
+            "sourceTitle": "读取作为重建",
+            "score": 0.8
+          },
+          {
+            "chapterCode": "13.41",
+            "sourceTitle": "读取对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.42",
+            "sourceTitle": "读取尺度",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-067",
       "oldChapterCode": "13.67",
       "newChapterCode": "13.67",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 本身就是 Participation",
       "titleEn": "Reading as Participation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "13.41",
+            "sourceTitle": "读取对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.42",
+            "sourceTitle": "读取尺度",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.46",
+            "sourceTitle": "投影进入读取",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-068",
       "oldChapterCode": "13.68",
       "newChapterCode": "13.68",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 会影响 Runtime",
       "titleEn": "Reading as Intervention",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "13.41",
+            "sourceTitle": "读取对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.42",
+            "sourceTitle": "读取尺度",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.46",
+            "sourceTitle": "投影进入读取",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-069",
       "oldChapterCode": "13.69",
-      "newChapterCode": "13.69",
+      "newChapterCode": "13.82",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 必须进入 Navigation",
       "titleEn": "Reading and Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "13.82",
+        "sourceOutlineTitle": "读取与导航",
+        "sourceOutlineQuestion": "为什么某些 Reading 会产生 Navigation Requirement",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-070",
       "oldChapterCode": "13.70",
       "newChapterCode": "13.70",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 必须持续更新",
       "titleEn": "Reading and Continuity",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "13.41",
+            "sourceTitle": "读取对象",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.42",
+            "sourceTitle": "读取尺度",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "13.46",
+            "sourceTitle": "投影进入读取",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-071",
       "oldChapterCode": "13.71",
-      "newChapterCode": "13.71",
+      "newChapterCode": "13.83",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么多个 Runtime 可以共同 Reading",
       "titleEn": "Reading Between Multiple Runtimes",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "13.83",
+        "sourceOutlineTitle": "多运行读取",
+        "sourceOutlineQuestion": "为什么多个 Runtime 可以被放进同一 Reading，而不能被压缩成单一结论",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-072",
       "oldChapterCode": "13.72",
       "newChapterCode": "13.72",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "AI 能否成为真正的 Reader",
       "titleEn": "AI as Reader",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "13.84",
+            "sourceTitle": "人工智能作为读取者",
+            "score": 0.8182
+          },
+          {
+            "chapterCode": "13.42",
+            "sourceTitle": "读取尺度",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "13.41",
+            "sourceTitle": "读取对象",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-073",
       "oldChapterCode": "13.73",
-      "newChapterCode": "13.73",
+      "newChapterCode": "13.85",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "谁真正完成 Reading",
       "titleEn": "The Observer Question",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.885,
+        "sourceOutlineChapterCode": "13.85",
+        "sourceOutlineTitle": "观察者问题",
+        "sourceOutlineQuestion": "到底是谁完成了 Reading",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-074",
       "oldChapterCode": "13.74",
-      "newChapterCode": "13.74",
+      "newChapterCode": "13.86",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "PHI OS 如何开启新的 Reading Paradigm",
       "titleEn": "The Future of Reading",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 0.9,
+        "sourceOutlineChapterCode": "13.86",
+        "sourceOutlineTitle": "读取未来",
+        "sourceOutlineQuestion": "为什么未来 Reading 必须从单一判断走向持续版本化",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B4-P13-075",
       "oldChapterCode": "13.75",
-      "newChapterCode": "13.75",
+      "newChapterCode": "13.87",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-4 to BOOK-5; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-4 to BOOK-5; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-4",
       "newPublicationBookCode": "BOOK-5",
       "titleZhHans": "为什么 Reading 最终必须进入 Navigation",
       "titleEn": "Toward Reality Navigation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.84,
+        "sourceOutlineChapterCode": "13.87",
+        "sourceOutlineTitle": "导航阈值",
+        "sourceOutlineQuestion": "什么时候 Reading 已经足够形成下一步 Reality Navigation",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
+    }
+  ],
+  "outlineCandidates": [
+    {
+      "outlineChapterCode": "13.1",
+      "sourceTitle": "可观察现实",
+      "canonicalQuestion": "为什么 Reality 会留下能够被观察的现象",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-001"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.2",
+      "sourceTitle": "可观察结构",
+      "canonicalQuestion": "为什么 Structure 会留下稳定的组织讯号",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-002"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.3",
+      "sourceTitle": "可观察激活",
+      "canonicalQuestion": "为什么 Activation 会留下状态改变的痕迹",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-003"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.4",
+      "sourceTitle": "可观察运行",
+      "canonicalQuestion": "为什么持续 Runtime 会留下连续变化",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-004"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.5",
+      "sourceTitle": "运行签名",
+      "canonicalQuestion": "为什么长期运行会形成相对稳定的识别特征",
+      "recommendedAction": "rename",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-005"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.88,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.6",
+      "sourceTitle": "残留可观察性",
+      "canonicalQuestion": "为什么运行结束之后留下的 Residue 仍然可以被读取",
+      "recommendedAction": "rename",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-006"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.7",
+      "sourceTitle": "漂移可观察性",
+      "canonicalQuestion": "为什么 Runtime Drift 会留下可比较差异",
+      "recommendedAction": "rename",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-007"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8327,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.8",
+      "sourceTitle": "投影痕迹",
+      "canonicalQuestion": "为什么 Projection 本身也会改变可观察 Reality",
+      "recommendedAction": "rename",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-008"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.88,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.9",
+      "sourceTitle": "运行可读性",
+      "canonicalQuestion": "什么使一个 Runtime 具备被 Reading 的条件",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-009"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.10",
+      "sourceTitle": "讯号与解释",
+      "canonicalQuestion": "为什么 Signal 必须先于 Interpretation",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-010"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.11",
+      "sourceTitle": "运行噪声",
+      "canonicalQuestion": "为什么 Noise 会干扰 Reading",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-011"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.12",
+      "sourceTitle": "解析极限",
+      "canonicalQuestion": "为什么任何 Reading 都存在 Resolution Limit",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-012"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.13",
+      "sourceTitle": "观察者参与",
+      "canonicalQuestion": "为什么 Observer 本身会进入 Reading 条件",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-013"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.14",
+      "sourceTitle": "现实证据架构",
+      "canonicalQuestion": "为什么 Reality Evidence 必须被单独建立",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-014"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.15",
+      "sourceTitle": "证据类别",
+      "canonicalQuestion": "为什么不同 Reality 会留下不同类型的 Evidence",
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-015"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.16",
+      "sourceTitle": "证据来源",
+      "canonicalQuestion": "Evidence 从哪里形成",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.17",
+      "sourceTitle": "证据可靠度",
+      "canonicalQuestion": "为什么不同 Evidence 具有不同可信强度",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-016"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.18",
+      "sourceTitle": "证据边界",
+      "canonicalQuestion": "为什么 Evidence 永远不能直接等于 Interpretation",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-017"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.19",
+      "sourceTitle": "证据相关性",
+      "canonicalQuestion": "为什么真实 Evidence 也可能与当前问题无关",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-018"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.20",
+      "sourceTitle": "证据关联",
+      "canonicalQuestion": "为什么多个独立 Evidence 能够形成更强支持",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.21",
+      "sourceTitle": "反证",
+      "canonicalQuestion": "为什么 Counter Evidence 必须与支持证据拥有同等位置",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-019"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.22",
+      "sourceTitle": "缺失证据",
+      "canonicalQuestion": "什么时候 Missing Evidence 本身具有意义",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-020"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.23",
+      "sourceTitle": "时间证据",
+      "canonicalQuestion": "为什么时间序列比单点观察能够提供更多 Reality",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-021"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.24",
+      "sourceTitle": "跨领域证据",
+      "canonicalQuestion": "为什么 Cross-Domain Evidence 能够降低单一解释依赖",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-022"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.25",
+      "sourceTitle": "证据网络",
+      "canonicalQuestion": "为什么 Evidence 应该被组织成 Network，而不是孤立列表",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-023"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.26",
+      "sourceTitle": "统一证据模型",
+      "canonicalQuestion": "PHI OS 如何让不同类型 Evidence 进入同一 Reading Architecture",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-024"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.27",
+      "sourceTitle": "投影基础",
+      "canonicalQuestion": "为什么人类会建立 Projection",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-025"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.28",
+      "sourceTitle": "投影来源",
+      "canonicalQuestion": "Projection 建立在什么基础之上",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.29",
+      "sourceTitle": "投影语法",
+      "canonicalQuestion": "为什么不同 Projection 仍然可以拥有共同 Grammar",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-026"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.30",
+      "sourceTitle": "投影层级",
+      "canonicalQuestion": "为什么 Projection 必须区分不同 Reality Layer",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-027"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.31",
+      "sourceTitle": "投影尺度",
+      "canonicalQuestion": "为什么不同 Projection 只适用于有限 Scale",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.32",
+      "sourceTitle": "投影边界",
+      "canonicalQuestion": "Projection 最多能够告诉我们什么",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-028"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.33",
+      "sourceTitle": "投影一致性",
+      "canonicalQuestion": "为什么同一方法在相同输入下必须保持足够稳定",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-029"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.34",
+      "sourceTitle": "投影冲突",
+      "canonicalQuestion": "为什么不同 Projection 会产生不同结果",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-030"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.35",
+      "sourceTitle": "投影完整性",
+      "canonicalQuestion": "为什么任何 Projection 都只能覆盖 Reality 的部分结构",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-031"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.36",
+      "sourceTitle": "投影演化",
+      "canonicalQuestion": "为什么 Projection Model 必须允许被 Reality 修正",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-032"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.37",
+      "sourceTitle": "投影与现实",
+      "canonicalQuestion": "为什么 Projection 永远不能等于 Reality",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-033"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.38",
+      "sourceTitle": "历史投影边界",
+      "canonicalQuestion": "为什么 Historical Reality 与 Projection Window 必须分开",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.39",
+      "sourceTitle": "共享投影运行",
+      "canonicalQuestion": "为什么不同 Projection 可以进入统一 Runtime",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-034"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.40",
+      "sourceTitle": "读取入口",
+      "canonicalQuestion": "为什么 Reading 必须先建立统一入口",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-035"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.41",
+      "sourceTitle": "读取对象",
+      "canonicalQuestion": "我们究竟正在读取什么",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.42",
+      "sourceTitle": "读取尺度",
+      "canonicalQuestion": "为什么同一个 Reality 在不同 Scale 下会形成不同 Reading",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-072",
+          "oldChapterCode": "13.72",
+          "titleEn": "AI as Reader",
+          "titleZhHans": "AI 能否成为真正的 Reader",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.43",
+      "sourceTitle": "读取语法",
+      "canonicalQuestion": "为什么 Reading 需要统一 Grammar",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-036"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.44",
+      "sourceTitle": "运行重建",
+      "canonicalQuestion": "如何从现有痕迹重建 Runtime Chain",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-037"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.45",
+      "sourceTitle": "证据排序",
+      "canonicalQuestion": "为什么不同 Evidence 不能获得相同权重",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-038"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.46",
+      "sourceTitle": "投影进入读取",
+      "canonicalQuestion": "Projection 在 Reading 中应该处于什么位置",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.47",
+      "sourceTitle": "读取一致性",
+      "canonicalQuestion": "为什么同一组 Evidence 不应该产生完全失控的 Reading",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.48",
+      "sourceTitle": "读取信心",
+      "canonicalQuestion": "为什么可以建立 Confidence，却不能制造确定性",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-039"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.49",
+      "sourceTitle": "替代读取",
+      "canonicalQuestion": "为什么必须保留 Alternative Reading",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-040"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.50",
+      "sourceTitle": "未知形成",
+      "canonicalQuestion": "为什么 Unknown 必须成为正式 Reading State",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-041"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.51",
+      "sourceTitle": "读取综合",
+      "canonicalQuestion": "如何把不同 Evidence、Projection 与 Context 组织成整体 Reading",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-042"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.52",
+      "sourceTitle": "运行画像",
+      "canonicalQuestion": "统一 Runtime Profile 应该包含什么",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-043"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.53",
+      "sourceTitle": "读取版本",
+      "canonicalQuestion": "为什么 Reading 必须拥有 Version",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.54",
+      "sourceTitle": "读取修订",
+      "canonicalQuestion": "什么情况下旧 Reading 必须被修改",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-044"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.55",
+      "sourceTitle": "读取契约",
+      "canonicalQuestion": "PHI OS Reading Contract 应该保证什么",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-045"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.56",
+      "sourceTitle": "解释基础",
+      "canonicalQuestion": "为什么事实仍然需要 Interpretation",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-046"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.57",
+      "sourceTitle": "情境形成",
+      "canonicalQuestion": "为什么 Context 会改变同一个讯号的意义",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-047"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.58",
+      "sourceTitle": "知识整合",
+      "canonicalQuestion": "Canonical Knowledge 如何进入 Interpretation",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-048"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.59",
+      "sourceTitle": "证据整合",
+      "canonicalQuestion": "Evidence 如何限制 Interpretation 可以走多远",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-049"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.60",
+      "sourceTitle": "投影整合",
+      "canonicalQuestion": "Projection 如何进入 Interpretation，而不取代 Reality",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-050"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.61",
+      "sourceTitle": "解释候选",
+      "canonicalQuestion": "为什么 Interpretation 首先只能形成 Candidate",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-051"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.62",
+      "sourceTitle": "多重解释",
+      "canonicalQuestion": "为什么同一个 Reality 可能存在多个合理 Interpretation",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-052"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.87,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.63",
+      "sourceTitle": "解释比较",
+      "canonicalQuestion": "不同 Interpretation 应该如何比较",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.64",
+      "sourceTitle": "解释验证",
+      "canonicalQuestion": "什么使 Interpretation 获得更高支持",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-053"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.65",
+      "sourceTitle": "解释边界",
+      "canonicalQuestion": "为什么 Interpretation 必须知道自己在哪里停止",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-054"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.66",
+      "sourceTitle": "解释与现实",
+      "canonicalQuestion": "为什么 Interpretation 永远不能等于 Reality",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-055"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.67",
+      "sourceTitle": "读取权威",
+      "canonicalQuestion": "Reading Authority 从哪里来",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-056"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.68",
+      "sourceTitle": "证据治理",
+      "canonicalQuestion": "Evidence 如何被记录、审查与更新",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-057"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.69",
+      "sourceTitle": "投影治理",
+      "canonicalQuestion": "Projection 如何避免被错误升级为 Reality",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-060",
+          "oldChapterCode": "13.60",
+          "titleEn": "Professional Governance",
+          "titleZhHans": "Professional 为什么必须参与",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.70",
+      "sourceTitle": "解释治理",
+      "canonicalQuestion": "Interpretation 为什么不能无限扩展",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-058"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.71",
+      "sourceTitle": "人工智能读取边界",
+      "canonicalQuestion": "AI 为什么不能自动成为最终 Reading Authority",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-059"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.72",
+      "sourceTitle": "专业读取边界",
+      "canonicalQuestion": "什么时候 Reading 必须进入 Professional Review",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-060",
+          "oldChapterCode": "13.60",
+          "titleEn": "Professional Governance",
+          "titleZhHans": "Professional 为什么必须参与",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.73",
+      "sourceTitle": "读取伦理",
+      "canonicalQuestion": "为什么能够读取不等于应该读取",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-061"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.74",
+      "sourceTitle": "读取责任",
+      "canonicalQuestion": "为什么 Interpretation 一旦影响他人，就必须承担后果边界",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-062"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.75",
+      "sourceTitle": "读取停止边界",
+      "canonicalQuestion": "什么时候 PHI OS 必须停止继续解释",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-063"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.8933,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.76",
+      "sourceTitle": "读取标准",
+      "canonicalQuestion": "统一 Reading 最低需要满足什么条件",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-064"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.77",
+      "sourceTitle": "读取治理契约",
+      "canonicalQuestion": "PHI OS 如何正式定义 Reading Governance",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-065"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.78",
+      "sourceTitle": "读取作为重建",
+      "canonicalQuestion": "为什么 Reading 本质上是在有限证据中重建 Reality Model",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.8
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.79",
+      "sourceTitle": "读取作为参与",
+      "canonicalQuestion": "为什么观察与解释本身已经改变参与者的位置",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.80",
+      "sourceTitle": "读取作为影响",
+      "canonicalQuestion": "为什么 Reading 可能改变后续行动与 Runtime",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.81",
+      "sourceTitle": "读取与决定",
+      "canonicalQuestion": "为什么理解 Reality 不等于已经知道应该怎么做",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-068",
+          "oldChapterCode": "13.68",
+          "titleEn": "Reading as Intervention",
+          "titleZhHans": "为什么 Reading 会影响 Runtime",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.82",
+      "sourceTitle": "读取与导航",
+      "canonicalQuestion": "为什么某些 Reading 会产生 Navigation Requirement",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-069"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.83",
+      "sourceTitle": "多运行读取",
+      "canonicalQuestion": "为什么多个 Runtime 可以被放进同一 Reading，而不能被压缩成单一结论",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-071"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.84",
+      "sourceTitle": "人工智能作为读取者",
+      "canonicalQuestion": "AI 可以完成 Reading 的哪些部分，又不能完成哪些部分",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B4-P13-072",
+          "oldChapterCode": "13.72",
+          "titleEn": "AI as Reader",
+          "titleZhHans": "AI 能否成为真正的 Reader",
+          "score": 0.8182
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-066",
+          "oldChapterCode": "13.66",
+          "titleEn": "Reading as Reconstruction",
+          "titleZhHans": "为什么 Reading 会重新组织 Reality",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B4-P13-067",
+          "oldChapterCode": "13.67",
+          "titleEn": "Reading as Participation",
+          "titleZhHans": "为什么 Reading 本身就是 Participation",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.85",
+      "sourceTitle": "观察者问题",
+      "canonicalQuestion": "到底是谁完成了 Reading",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-073"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.885,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.86",
+      "sourceTitle": "读取未来",
+      "canonicalQuestion": "为什么未来 Reading 必须从单一判断走向持续版本化",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-074"
+      ],
+      "confidence": "HIGH",
+      "score": 0.9,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "13.87",
+      "sourceTitle": "导航阈值",
+      "canonicalQuestion": "什么时候 Reading 已经足够形成下一步 Reality Navigation",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B4-P13-075"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.84,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
     }
   ]
 }

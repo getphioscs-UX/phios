@@ -1,10 +1,10 @@
 {
-  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.0.0",
-  "schemaVersion": "1.0.0",
+  "contract": "PHI-OS-BOOK-W1B-PART-OUTLINE-MIGRATION-v1.1.0",
+  "schemaVersion": "1.1.0",
   "migrationCode": "BOOK-W1B-P9-COORDINATION-RUNTIME-OUTLINE-MIGRATION-v1",
   "phase": "BOOK-W1",
   "step": "BOOK-W1B",
-  "status": "in-progress-blocked-pending-canonical-outline-authority",
+  "status": "in-progress-source-authority-complete-pending-human-canonical-review",
   "recordedAt": "2026-08-13",
   "partAuthority": {
     "partCode": "P9",
@@ -18,20 +18,16 @@
     "newPublicationBookCode": "BOOK-3"
   },
   "sourceOutlineAuthority": {
-    "path": "content/knowledge/reconciliation/kau-r2/future-volume-outline-upgrade-guard-v1.json",
-    "sourceAuthority": "USER_SUPPLIED_UPGRADED_OUTLINE_2026-08-13",
-    "sourceStage": "OUTLINE_ONLY_NON_MANUSCRIPT",
+    "path": "content/knowledge/migrations/book-w1b/source-authority/book-w1b-part-8-15-final-outline-authority-v1.json",
+    "schemaVersion": "PHI-OS-BOOK-W1B-SOURCE-OUTLINE-AUTHORITY-v1.0.0",
+    "sourceFileSha256": "44d03dbed8f69dcdefb3c7127353ce5bbbf8e19554037dd1a054c099156551fd",
+    "partInventorySha256": "45576ef8d306165fe74cee9d72ef4ce91572d56780c3cdeb3d2e3ec3327bb057",
     "upgradedOutlineChapterCount": 43,
-    "fullChapterListIncluded": false,
-    "chapterInventoryDigest": null,
-    "semanticAnchors": [
-      {
-        "chapterCode": "9.43",
-        "titleZhHans": "扩展阈值",
-        "role": "Coordination → Expansion"
-      }
-    ],
-    "canonicalAcceptanceEligible": false
+    "fullChapterListIncluded": true,
+    "humanSourceAuthorizationRecorded": true,
+    "humanReviewEligible": true,
+    "canonicalAcceptanceEligible": false,
+    "sourceNormalizationApplied": "NONE"
   },
   "inventory": {
     "existingCanonicalNodeCount": 39,
@@ -39,23 +35,390 @@
     "outlineChapterMinusExistingNodeCount": 4,
     "preservedExistingNodeCount": 39,
     "acceptedCanonicalOutlineMatchCount": 0,
-    "unresolvedSourceOutlineChapterCount": 43,
+    "unresolvedSourceOutlineChapterCount": 0,
+    "humanReviewRecommendationCount": 52,
+    "recommendedNewCanonicalNodeCandidateCount": 13,
     "approvedNewCanonicalNodeCandidateCount": 0,
     "chapterCountDeltaIsNotANodeCandidateCount": true
   },
   "decisionSummary": {
-    "retain": 0,
+    "recommendationsOnly": true,
+    "match": 4,
     "rename": 0,
-    "move": 39,
-    "supersede": 0,
-    "split": 0,
-    "merge": 0,
-    "new": 0,
-    "moveScope": "publication-ownership-only; same-Part chapter moves remain unresolved"
+    "move": 26,
+    "supersede": 9,
+    "splitCandidateReview": 8,
+    "mergeCandidateReview": 8,
+    "newCandidate": 13,
+    "acceptedDecisionCount": 0,
+    "publicationOwnershipMoveCount": 39,
+    "moveScope": "outline move recommendations are separate from BOOK-W1A publication-ownership moves"
   },
+  "splitCandidates": [
+    {
+      "oldNodeCode": "KN-B2-P9-002",
+      "oldChapterCode": "9.2",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.8",
+          "sourceTitle": "Coordination Compliance",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P9-005",
+      "oldChapterCode": "9.5",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.8",
+          "sourceTitle": "Coordination Compliance",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P9-006",
+      "oldChapterCode": "9.6",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "9.41",
+          "sourceTitle": "连续性形成",
+          "score": 0.81
+        },
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P9-007",
+      "oldChapterCode": "9.7",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.8",
+          "sourceTitle": "Coordination Compliance",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P9-011",
+      "oldChapterCode": "9.11",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.8",
+          "sourceTitle": "Coordination Compliance",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P9-037",
+      "oldChapterCode": "9.37",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.8",
+          "sourceTitle": "Coordination Compliance",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P9-038",
+      "oldChapterCode": "9.38",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.8",
+          "sourceTitle": "Coordination Compliance",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "oldNodeCode": "KN-B2-P9-039",
+      "oldChapterCode": "9.39",
+      "candidateOutlineChapters": [
+        {
+          "chapterCode": "9.2",
+          "sourceTitle": "Coordination Pressure",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.7",
+          "sourceTitle": "Coordination Legitimacy",
+          "score": 0.78
+        },
+        {
+          "chapterCode": "9.8",
+          "sourceTitle": "Coordination Compliance",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
+  "mergeCandidates": [
+    {
+      "outlineChapterCode": "9.2",
+      "sourceTitle": "Coordination Pressure",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "9.7",
+      "sourceTitle": "Coordination Legitimacy",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "9.8",
+      "sourceTitle": "Coordination Compliance",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "9.12",
+      "sourceTitle": "Cultural Coordination",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "9.38",
+      "sourceTitle": "协调学习",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "9.39",
+      "sourceTitle": "协调连续",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "9.40",
+      "sourceTitle": "共同维持",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-038",
+          "oldChapterCode": "9.38",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    },
+    {
+      "outlineChapterCode": "9.41",
+      "sourceTitle": "连续性形成",
+      "candidateExistingNodes": [
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-038",
+          "oldChapterCode": "9.38",
+          "score": 0.78
+        }
+      ],
+      "status": "PENDING_HUMAN_REVIEW",
+      "candidateOnly": true
+    }
+  ],
   "reconciliationActionGates": [
     {
-      "action": "retain",
+      "action": "match",
       "status": "pending-explicit-human-canonical-review"
     },
     {
@@ -76,15 +439,11 @@
     },
     {
       "action": "split",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "merge",
-      "status": "pending-explicit-human-canonical-review"
-    },
-    {
-      "action": "cross-part-related-node",
-      "status": "pending-explicit-human-canonical-review"
+      "status": "candidate-review-only"
     },
     {
       "action": "new-candidate",
@@ -92,8 +451,8 @@
     }
   ],
   "blocker": {
-    "code": "COMPLETE_CHAPTER_OUTLINE_AUTHORITY_REQUIRED",
-    "missingAuthority": "The complete Human-agreed chapter-by-chapter outline inventory plus explicit Human Canonical matching decisions.",
+    "code": "HUMAN_CANONICAL_MATCH_DECISIONS_REQUIRED",
+    "missingAuthority": "Explicit TL decisions on candidate match, rename, move, supersede, split, merge and new-candidate recommendations.",
     "w1bAcceptanceBlocked": true,
     "w1cSuccessorBlueprintGenerationAllowed": false
   },
@@ -111,624 +470,2103 @@
       "oldChapterCode": "9.1",
       "newChapterCode": "9.1",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理为何出现",
       "titleEn": "Governance Emergence",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.1",
+        "sourceOutlineTitle": "Coordination Emergence",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-002",
       "oldChapterCode": "9.2",
       "newChapterCode": "9.2",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为什么复杂系统需要治理",
       "titleEn": "Coordination Problem",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.8",
+            "sourceTitle": "Coordination Compliance",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-003",
       "oldChapterCode": "9.3",
-      "newChapterCode": "9.3",
+      "newChapterCode": "9.4",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "资源如何被分配",
       "titleEn": "Resource Allocation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.86,
+        "sourceOutlineChapterCode": "9.4",
+        "sourceOutlineTitle": "Shared Resources",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-004",
       "oldChapterCode": "9.4",
       "newChapterCode": "9.4",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "限制如何被管理",
       "titleEn": "Constraint Management",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.3",
+            "sourceTitle": "Shared Constraints",
+            "score": 0.86
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-005",
       "oldChapterCode": "9.5",
       "newChapterCode": "9.5",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理为何产生不同形式",
       "titleEn": "Governance Selection",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.8",
+            "sourceTitle": "Coordination Compliance",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-006",
       "oldChapterCode": "9.6",
       "newChapterCode": "9.6",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "为什么人们接受治理",
       "titleEn": "Legitimacy Formation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "9.41",
+            "sourceTitle": "连续性形成",
+            "score": 0.81
+          },
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-007",
       "oldChapterCode": "9.7",
       "newChapterCode": "9.7",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何通过服从机制持续存在",
       "titleEn": "Compliance Systems",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.8",
+            "sourceTitle": "Coordination Compliance",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-008",
       "oldChapterCode": "9.8",
-      "newChapterCode": "9.8",
+      "newChapterCode": "9.9",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "市场治理如何运行",
       "titleEn": "Market Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.9",
+        "sourceOutlineTitle": "Market Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-009",
       "oldChapterCode": "9.9",
-      "newChapterCode": "9.9",
+      "newChapterCode": "9.10",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "计划治理如何运行",
       "titleEn": "Planned Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.10",
+        "sourceOutlineTitle": "Planned Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-010",
       "oldChapterCode": "9.10",
-      "newChapterCode": "9.10",
+      "newChapterCode": "9.13",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "宗教治理如何运行",
       "titleEn": "Religious Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.13",
+        "sourceOutlineTitle": "Religious Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-011",
       "oldChapterCode": "9.11",
       "newChapterCode": "9.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "世俗治理如何运行",
       "titleEn": "Secular Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.8",
+            "sourceTitle": "Coordination Compliance",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-012",
       "oldChapterCode": "9.12",
-      "newChapterCode": "9.12",
+      "newChapterCode": "9.11",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "制度治理如何运行",
       "titleEn": "Institutional Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.11",
+        "sourceOutlineTitle": "Institutional Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-013",
       "oldChapterCode": "9.13",
-      "newChapterCode": "9.13",
+      "newChapterCode": "9.15",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "混合治理如何运行",
       "titleEn": "Hybrid Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.15",
+        "sourceOutlineTitle": "Hybrid Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-014",
       "oldChapterCode": "9.14",
       "newChapterCode": "9.14",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "网络与平台治理如何运行",
       "titleEn": "Network Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.14",
+        "sourceOutlineTitle": "Network Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-015",
       "oldChapterCode": "9.15",
-      "newChapterCode": "9.15",
+      "newChapterCode": "9.16",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "资源如何被治理",
       "titleEn": "Resource Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.16",
+        "sourceOutlineTitle": "Resource Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-016",
       "oldChapterCode": "9.16",
-      "newChapterCode": "9.16",
+      "newChapterCode": "9.18",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "意义如何被治理",
       "titleEn": "Meaning Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.18",
+        "sourceOutlineTitle": "Meaning Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-017",
       "oldChapterCode": "9.17",
       "newChapterCode": "9.17",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "信息如何被治理",
       "titleEn": "Information Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.17",
+        "sourceOutlineTitle": "Information Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-018",
       "oldChapterCode": "9.18",
-      "newChapterCode": "9.18",
+      "newChapterCode": "9.19",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "注意力如何被治理",
       "titleEn": "Attention Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.19",
+        "sourceOutlineTitle": "Attention Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-019",
       "oldChapterCode": "9.19",
-      "newChapterCode": "9.19",
+      "newChapterCode": "9.21",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "权力如何被治理",
       "titleEn": "Power Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.21",
+        "sourceOutlineTitle": "Power Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "high-confidence-reordered-semantic-match",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-020",
       "oldChapterCode": "9.20",
       "newChapterCode": "9.20",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "激励如何被治理",
       "titleEn": "Incentive Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "match",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.20",
+        "sourceOutlineTitle": "Incentive Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": false,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-021",
       "oldChapterCode": "9.21",
-      "newChapterCode": "9.21",
+      "newChapterCode": "9.22",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "风险如何被治理",
       "titleEn": "Risk Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.22",
+        "sourceOutlineTitle": "Risk Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-022",
       "oldChapterCode": "9.22",
-      "newChapterCode": "9.22",
+      "newChapterCode": "9.23",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "复杂度如何被治理",
       "titleEn": "Complexity Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.23",
+        "sourceOutlineTitle": "Complexity Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-023",
       "oldChapterCode": "9.23",
-      "newChapterCode": "9.23",
+      "newChapterCode": "9.24",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何发生漂移",
       "titleEn": "Governance Drift",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.24",
+        "sourceOutlineTitle": "Coordination Drift",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-024",
       "oldChapterCode": "9.24",
-      "newChapterCode": "9.24",
+      "newChapterCode": "9.25",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何达到饱和",
       "titleEn": "Governance Saturation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.25",
+        "sourceOutlineTitle": "Coordination Saturation",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-025",
       "oldChapterCode": "9.25",
-      "newChapterCode": "9.25",
+      "newChapterCode": "9.26",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何碎裂",
       "titleEn": "Governance Fragmentation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.26",
+        "sourceOutlineTitle": "Coordination Fragmentation",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-026",
       "oldChapterCode": "9.26",
-      "newChapterCode": "9.26",
+      "newChapterCode": "9.27",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "合法性如何崩塌",
       "titleEn": "Legitimacy Collapse",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.27",
+        "sourceOutlineTitle": "Legitimacy Collapse",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-027",
       "oldChapterCode": "9.27",
-      "newChapterCode": "9.27",
+      "newChapterCode": "9.28",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何被利益结构俘获",
       "titleEn": "Governance Capture",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.28",
+        "sourceOutlineTitle": "Coordination Capture",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-028",
       "oldChapterCode": "9.28",
-      "newChapterCode": "9.28",
+      "newChapterCode": "9.29",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何崩塌",
       "titleEn": "Governance Collapse",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.29",
+        "sourceOutlineTitle": "Coordination Collapse",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": false,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-029",
       "oldChapterCode": "9.29",
-      "newChapterCode": "9.29",
+      "newChapterCode": "9.30",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "算法治理如何运行",
       "titleEn": "Algorithmic Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.30",
+        "sourceOutlineTitle": "Algorithmic Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-030",
       "oldChapterCode": "9.30",
-      "newChapterCode": "9.30",
+      "newChapterCode": "9.31",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "人工协调如何运行",
       "titleEn": "Synthetic Coordination",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.31",
+        "sourceOutlineTitle": "Synthetic Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-031",
       "oldChapterCode": "9.31",
-      "newChapterCode": "9.31",
+      "newChapterCode": "9.32",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "AI 如何辅助治理",
       "titleEn": "AI-Assisted Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.32",
+        "sourceOutlineTitle": "AI-Assisted Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-032",
       "oldChapterCode": "9.32",
-      "newChapterCode": "9.32",
+      "newChapterCode": "9.33",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "人机共治如何形成",
       "titleEn": "Human-AI Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.33",
+        "sourceOutlineTitle": "Human–AI Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-033",
       "oldChapterCode": "9.33",
-      "newChapterCode": "9.33",
+      "newChapterCode": "9.34",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "自主治理系统如何形成",
       "titleEn": "Autonomous Governance",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.34",
+        "sourceOutlineTitle": "Autonomous Coordination",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-034",
       "oldChapterCode": "9.34",
-      "newChapterCode": "9.34",
+      "newChapterCode": "9.35",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "没有人类的治理是否可能",
       "titleEn": "Governance Without Humans",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "MEDIUM",
+        "score": 0.88,
+        "sourceOutlineChapterCode": "9.35",
+        "sourceOutlineTitle": "Coordination Beyond Humans",
+        "sourceOutlineQuestion": null,
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-035",
       "oldChapterCode": "9.35",
-      "newChapterCode": "9.35",
+      "newChapterCode": "9.36",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理韧性如何形成",
       "titleEn": "Governance Resilience",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.36",
+        "sourceOutlineTitle": "协调韧性",
+        "sourceOutlineQuestion": "为什么局部冲击不一定破坏共同运行",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-036",
       "oldChapterCode": "9.36",
-      "newChapterCode": "9.36",
+      "newChapterCode": "9.37",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何适应变化",
       "titleEn": "Governance Adaptation",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": false,
+      "outlineReconciliationRecommendation": {
+        "action": "move",
+        "candidateOnly": true,
+        "confidence": "HIGH",
+        "score": 1,
+        "sourceOutlineChapterCode": "9.37",
+        "sourceOutlineTitle": "协调适应",
+        "sourceOutlineQuestion": "为什么协调结构必须随着 Reality 改变",
+        "basis": "ordered-semantic-alignment",
+        "samePartChapterPositionChanged": true,
+        "titleMetadataReviewRequired": true,
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-037",
       "oldChapterCode": "9.37",
       "newChapterCode": "9.37",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何演化",
       "titleEn": "Governance Evolution",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.8",
+            "sourceTitle": "Coordination Compliance",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-038",
       "oldChapterCode": "9.38",
       "newChapterCode": "9.38",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "文明级协调如何形成",
       "titleEn": "Civilizational Coordination",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.8",
+            "sourceTitle": "Coordination Compliance",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
     },
     {
       "oldNodeCode": "KN-B2-P9-039",
       "oldChapterCode": "9.39",
       "newChapterCode": "9.39",
       "action": "move",
+      "actionScope": "publication-ownership-only",
       "canonicalIdentityChanged": false,
       "publicationOwnershipChanged": true,
-      "reason": "Preserve the frozen Canonical Node identity and current chapter slot while recording the BOOK-W1A publication move from BOOK-2 to BOOK-3; final outline matching remains pending explicit Human Canonical review.",
+      "reason": "Preserve frozen Canonical Node identity while recording the accepted BOOK-W1A publication move from BOOK-2 to BOOK-3; the outline action is a separate Human-review candidate.",
       "successorNodeCodes": [],
       "oldPublicationBookCode": "BOOK-2",
       "newPublicationBookCode": "BOOK-3",
       "titleZhHans": "治理如何迁移",
       "titleEn": "Governance Transition",
       "outlineMatchStatus": "pending-explicit-human-canonical-review",
-      "newChapterCodeIsPreservationPlaceholder": true
+      "newChapterCodeIsPreservationPlaceholder": true,
+      "outlineReconciliationRecommendation": {
+        "action": "supersede",
+        "candidateOnly": true,
+        "confidence": "UNRESOLVED",
+        "score": null,
+        "sourceOutlineChapterCode": null,
+        "sourceOutlineTitle": null,
+        "basis": "no-one-to-one-semantic-candidate-above-governed-threshold",
+        "alternateOutlineCandidates": [
+          {
+            "chapterCode": "9.2",
+            "sourceTitle": "Coordination Pressure",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.7",
+            "sourceTitle": "Coordination Legitimacy",
+            "score": 0.78
+          },
+          {
+            "chapterCode": "9.8",
+            "sourceTitle": "Coordination Compliance",
+            "score": 0.78
+          }
+        ],
+        "humanDecisionRequired": true,
+        "humanDecision": null
+      }
+    }
+  ],
+  "outlineCandidates": [
+    {
+      "outlineChapterCode": "9.1",
+      "sourceTitle": "Coordination Emergence",
+      "canonicalQuestion": null,
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-001"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.2",
+      "sourceTitle": "Coordination Pressure",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "titleEn": "Coordination Problem",
+          "titleZhHans": "为什么复杂系统需要治理",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "titleEn": "Governance Selection",
+          "titleZhHans": "治理为何产生不同形式",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.3",
+      "sourceTitle": "Shared Constraints",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-004",
+          "oldChapterCode": "9.4",
+          "titleEn": "Constraint Management",
+          "titleZhHans": "限制如何被管理",
+          "score": 0.86
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.4",
+      "sourceTitle": "Shared Resources",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-003"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.86,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.5",
+      "sourceTitle": "Shared Objectives",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.6",
+      "sourceTitle": "Shared Responsibilities",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.7",
+      "sourceTitle": "Coordination Legitimacy",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "titleEn": "Coordination Problem",
+          "titleZhHans": "为什么复杂系统需要治理",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "titleEn": "Governance Selection",
+          "titleZhHans": "治理为何产生不同形式",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.8",
+      "sourceTitle": "Coordination Compliance",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "titleEn": "Coordination Problem",
+          "titleZhHans": "为什么复杂系统需要治理",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "titleEn": "Governance Selection",
+          "titleZhHans": "治理为何产生不同形式",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.9",
+      "sourceTitle": "Market Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-008"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.10",
+      "sourceTitle": "Planned Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-009"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.11",
+      "sourceTitle": "Institutional Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-012"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.12",
+      "sourceTitle": "Cultural Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "titleEn": "Coordination Problem",
+          "titleZhHans": "为什么复杂系统需要治理",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "titleEn": "Governance Selection",
+          "titleZhHans": "治理为何产生不同形式",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.13",
+      "sourceTitle": "Religious Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-010"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.14",
+      "sourceTitle": "Network Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-014"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.15",
+      "sourceTitle": "Hybrid Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-013"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.16",
+      "sourceTitle": "Resource Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-015"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.17",
+      "sourceTitle": "Information Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-017"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.18",
+      "sourceTitle": "Meaning Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-016"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.19",
+      "sourceTitle": "Attention Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-018"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.20",
+      "sourceTitle": "Incentive Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "match",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-020"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.21",
+      "sourceTitle": "Power Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-019"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.22",
+      "sourceTitle": "Risk Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-021"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.23",
+      "sourceTitle": "Complexity Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-022"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.24",
+      "sourceTitle": "Coordination Drift",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-023"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.25",
+      "sourceTitle": "Coordination Saturation",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-024"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.26",
+      "sourceTitle": "Coordination Fragmentation",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-025"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.27",
+      "sourceTitle": "Legitimacy Collapse",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-026"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.28",
+      "sourceTitle": "Coordination Capture",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-027"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.29",
+      "sourceTitle": "Coordination Collapse",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-028"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.30",
+      "sourceTitle": "Algorithmic Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-029"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.31",
+      "sourceTitle": "Synthetic Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-030"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.32",
+      "sourceTitle": "AI-Assisted Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-031"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.33",
+      "sourceTitle": "Human–AI Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-032"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.34",
+      "sourceTitle": "Autonomous Coordination",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-033"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.35",
+      "sourceTitle": "Coordination Beyond Humans",
+      "canonicalQuestion": null,
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-034"
+      ],
+      "confidence": "MEDIUM",
+      "score": 0.88,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.36",
+      "sourceTitle": "协调韧性",
+      "canonicalQuestion": "为什么局部冲击不一定破坏共同运行",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-035"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.37",
+      "sourceTitle": "协调适应",
+      "canonicalQuestion": "为什么协调结构必须随着 Reality 改变",
+      "recommendedAction": "move",
+      "linkedExistingNodeCodes": [
+        "KN-B2-P9-036"
+      ],
+      "confidence": "HIGH",
+      "score": 1,
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.38",
+      "sourceTitle": "协调学习",
+      "canonicalQuestion": "过去的冲突与失败如何改变下一轮协调",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "titleEn": "Coordination Problem",
+          "titleZhHans": "为什么复杂系统需要治理",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "titleEn": "Governance Selection",
+          "titleZhHans": "治理为何产生不同形式",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.39",
+      "sourceTitle": "协调连续",
+      "canonicalQuestion": "为什么参与者、资源与结构改变之后，共同运行仍然可以继续",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-002",
+          "oldChapterCode": "9.2",
+          "titleEn": "Coordination Problem",
+          "titleZhHans": "为什么复杂系统需要治理",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-005",
+          "oldChapterCode": "9.5",
+          "titleEn": "Governance Selection",
+          "titleZhHans": "治理为何产生不同形式",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.40",
+      "sourceTitle": "共同维持",
+      "canonicalQuestion": "多个 Runtime 如何形成不依赖单一节点的持续运行能力",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.78
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-038",
+          "oldChapterCode": "9.38",
+          "titleEn": "Civilizational Coordination",
+          "titleZhHans": "文明级协调如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.41",
+      "sourceTitle": "连续性形成",
+      "canonicalQuestion": "Reality 如何从维持当前运行，进入跨越变化的连续存在",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [
+        {
+          "oldNodeCode": "KN-B2-P9-006",
+          "oldChapterCode": "9.6",
+          "titleEn": "Legitimacy Formation",
+          "titleZhHans": "为什么人们接受治理",
+          "score": 0.81
+        },
+        {
+          "oldNodeCode": "KN-B2-P9-038",
+          "oldChapterCode": "9.38",
+          "titleEn": "Civilizational Coordination",
+          "titleZhHans": "文明级协调如何形成",
+          "score": 0.78
+        }
+      ],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.42",
+      "sourceTitle": "扩展准备",
+      "canonicalQuestion": "为什么能够维持连续的 Runtime，开始拥有进入更大尺度的条件",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
+    },
+    {
+      "outlineChapterCode": "9.43",
+      "sourceTitle": "扩展阈值",
+      "canonicalQuestion": "为什么 Reality 一旦能够在变化中维持自身，便可能突破原有运行尺度",
+      "recommendedAction": "new candidate",
+      "linkedExistingNodeCodes": [],
+      "alternateExistingNodeCandidates": [],
+      "candidateOnly": true,
+      "canonicalNodeApproved": false,
+      "humanDecisionRequired": true,
+      "humanDecision": null
     }
   ]
 }
