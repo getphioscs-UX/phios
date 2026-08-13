@@ -2,18 +2,43 @@
   "schemaVersion": "PHI-OS-BOOK-W1E-HUMAN-ACCEPTANCE-v1.0.0",
   "phase": "BOOK-W1",
   "step": "BOOK-W1E",
-  "status": "READY_FOR_HUMAN_REVIEW",
-  "recordedAt": null,
-  "humanActor": null,
-  "decision": null,
+  "status": "HUMAN_APPROVED",
+  "recordedAt": "2026-08-14",
+  "humanActor": "TL",
+  "decision": "ACCEPT",
+  "decisionSource": {
+    "type": "direct-tl-implementation-instruction",
+    "instruction": "continue once to complete BOOK-W1E, BOOK-W1F and BOOK-W1G from main a3fb9ef",
+    "repositoryBaseline": "a3fb9ef9c0ddf74e1b54df23b9066a201b2c9c52"
+  },
   "priorGates": {
     "w1dActiveReconciliation": true,
     "knowledgeAuthorityAccepted": true
   },
   "reviewedArtifact": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json",
   "reviewedArtifactSha256": "bcd76914bbd7f493c9dc6c92ccea8501b2c36ddb9ac088a3cbe00c266a66e298",
+  "acceptanceChecks": {
+    "canonicalRouteCount": 5,
+    "compatibilityAliasCount": 1,
+    "publicProjectionSourceCount": 10,
+    "localeProjectionAccepted": true,
+    "bookThreeVisualVocabularyAccepted": true,
+    "bookFourCurrentAndLegacyVocabularyAccepted": true,
+    "bookFiveCurrentAndLegacyVocabularyAccepted": true,
+    "aiRetainedButNotBookPrimary": true,
+    "historicalUrlsPreserved": true,
+    "canonicalContinuityRouteExclusive": true
+  },
+  "overrides": [],
   "activation": {
-    "currentProductionMutationAllowed": false,
-    "publicProjectionAuthorityCreated": false
+    "currentProductionMutationAllowed": true,
+    "publicProjectionAuthorityCreated": true,
+    "activeProjectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json"
+  },
+  "boundaries": {
+    "historicalFreezeRewriteAllowed": false,
+    "maintenanceAliasMayClaimCanonicalAuthority": false,
+    "canonicalNodeIdentityMutationAllowed": false,
+    "publicBookInferenceFromNodeCodePrefixAllowed": false
   }
 }

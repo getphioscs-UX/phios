@@ -30,12 +30,12 @@ const [
   read('package.json').then(JSON.parse)
 ]);
 
-assert.match(atlasEn, /title: 'Reality Reading Science'/);
+assert.match(atlasEn, /title: 'Reading Science'/);
 assert.match(
   atlasEn,
   /Why reality can be observed, how evidence forms, how interpretive interfaces contribute, and how PHI OS creates a unified reading\./
 );
-assert.match(atlasZh, /title: '现实读取科学 Reality Reading Science'/);
+assert.match(atlasZh, /title: '读取科学 Reading Science'/);
 assert.match(
   atlasZh,
   /现实为何能够被观察，证据如何形成，解释接口如何参与，以及 PHI OS 如何形成统一 Reading。/

@@ -61,7 +61,7 @@ const home = Object.freeze({
         atlasTitle: '现实地图集',
         atlasDescription: '探索现实如何跨层形成。',
         booksTitle: 'PHI OS 书籍',
-        booksDescription: '探索三本书的整体架构。',
+        booksDescription: '探索五册书的整体架构。',
         researchTitle: '图示与研究',
         researchDescription: '阅读视觉模型与理论基础。',
         academyTitle: '学院',

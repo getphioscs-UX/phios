@@ -4,9 +4,9 @@
 
 **W1D is Human approved and active.** Its successor Knowledge Authority contains 931 Canonical records: all 718 existing identities, 192 promoted admissions and 21 lineage-bound supersede admissions. All 473 publication-ownership records are applied, including `KN-B2-P7-052 → P11` and `KN-B2-P7-057 → P10`.
 
-**W1E is ready for its independent Human Review.** This state does not accept W1E and does not authorize a Public Production write. The W1E acceptance artifact remains decision-null until a TL separately accepts or revises the public projection.
+**W1E is Human approved and active.** The TL instruction dated 2026-08-14 accepted the candidate without overrides and authorized the five-volume Public Production write. The accepted candidate remains hash-bound as review evidence; the active successor authority is `content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json`.
 
-## Candidate projection
+## Accepted projection
 
 The deterministic candidate records the final five-book ownership and routes:
 
@@ -22,16 +22,16 @@ The deterministic candidate records the final five-book ownership and routes:
 
 The candidate also records the requested Book 3–5 primary and legacy visual vocabularies. `ai` remains retained metadata for Book 5 but is not a Book-level primary icon.
 
-## Current-production boundary
+## Current-production result
 
-All ten required public, locale, asset and composition sources are hash-bound in the candidate. Five stale production classes are explicitly inventoried: four-volume guards/copy, stale Volume III/IV identity, BOOK-2 P5–P9 ownership, and stale Part 8–15 titles.
+All ten required public, locale, asset and composition sources are post-activation hash-bound in the active successor. The five stale production classes inventoried by the candidate are now zero in active production: four-volume guards/copy, stale Volume III/IV identity, BOOK-2 P5–P9 ownership, stale Part 8–15 titles and public Book inference from a `KN-B*` prefix.
 
-**Current production remains byte-identical** pending separate W1E Human Acceptance. No stale current-production statement is mislabeled `HISTORICAL_ALLOWED`; it is queued for replacement only after W1E acceptance. Historical files outside the current-production projection may retain old terms only when explicitly marked `HISTORICAL_ALLOWED` during the activation scan.
+The historical BOOK-W0 audit, migration evidence, accepted W1E candidate and Book I preview pagination are retained under explicit `HISTORICAL_ALLOWED` entries. Their historical hashes and facts are not rewritten into five-volume claims.
 
-## Required TL decision
+## Human decision
 
-Review the candidate's five canonical routes, one compatibility alias, five-book Part ownership, bilingual locale projection, Book 3–5 visual vocabulary and ten hash-bound activation targets. Then record either `ACCEPT` or a scoped revision in `content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json`.
+`content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json` records `TL / ACCEPT / overrides: none` and binds the exact candidate digest reviewed before activation.
 
 ## Checker
 
-`npm run check:book-w1-public-projection` verifies the deterministic candidate, compatibility route, ownership, locale intent, visual vocabulary, source hashes, current-production fail-closed boundary, completed W1D gate and open W1E Human Review gate.
+`npm run check:book-w1-public-projection` verifies the accepted candidate digest, active source digests, routes, route pages, compatibility redirect, ownership, bilingual Part titles, visual vocabulary and zero stale active-production assumptions.

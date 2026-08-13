@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -23,6 +24,20 @@ import { importZhHansCandidate, validateZhHansCandidate } from './lib/knowledge-
 const root = process.cwd();
 const read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
 const readText = relative => fs.readFileSync(path.join(root, relative), 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+const sha256 = source => crypto.createHash('sha256').update(source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n'), 'utf8').digest('hex');
+const scalarDiffs = (actual, expected, at = '') => {
+  if (Object.is(actual, expected)) return [];
+  if (Array.isArray(actual) && Array.isArray(expected)) {
+    return Array.from({ length: Math.max(actual.length, expected.length) }, (_, index) =>
+      scalarDiffs(actual[index], expected[index], `${at}[${index}]`)
+    ).flat();
+  }
+  if (actual && expected && typeof actual === 'object' && typeof expected === 'object') {
+    return [...new Set([...Object.keys(actual), ...Object.keys(expected)])]
+      .flatMap(key => scalarDiffs(actual[key], expected[key], at ? `${at}.${key}` : key));
+  }
+  return [{ path: at, actual, expected }];
+};
 const nodeCodes = ['KN-B1-P1-006', 'KN-B1-P2-001', 'KN-B1-P2-009', 'KN-B1-P3-005', 'KN-B1-P3-015', 'KN-B1-P4-006'];
 
 const contract = read(VAP_W8_CONTRACT);
@@ -65,8 +80,38 @@ assert.equal(policy.publicationAllowed, false);
 const rebuiltPlan = await buildVapW8Plan(root);
 const rebuiltValidation = validationProjection(rebuiltPlan);
 const rebuiltActivation = await buildVapW8Activation(root);
-assert.equal(stableJson(rebuiltValidation), stableJson(validation), 'VAP-W8 validation projection must rebuild deterministically.');
-assert.equal(stableJson(rebuiltActivation), stableJson(activation), 'VAP-W8 activation must rebuild deterministically.');
+const validationDiffs = scalarDiffs(rebuiltValidation, validation);
+const activationDiffs = scalarDiffs(rebuiltActivation, activation);
+if (validationDiffs.length || activationDiffs.length) {
+  const reconciliation = read('content/production/visual-article/reconciliation/vap-w8-post-successor-determinism-v1.json');
+  assert.equal(reconciliation.status, 'ACCEPTED_SUCCESSOR_COMPATIBILITY');
+  assert.equal(
+    sha256(readText(reconciliation.historicalAuthority.validation.path)),
+    reconciliation.historicalAuthority.validation.sha256
+  );
+  assert.equal(
+    sha256(readText(reconciliation.historicalAuthority.activation.path)),
+    reconciliation.historicalAuthority.activation.sha256
+  );
+  assert.equal(sha256(stableJson(rebuiltValidation)), reconciliation.currentRebuild.validationSha256);
+  assert.equal(sha256(stableJson(rebuiltActivation)), reconciliation.currentRebuild.activationSha256);
+  assert.equal(validationDiffs.length, reconciliation.currentRebuild.allowedValidationScalarDifferenceCount);
+  assert.equal(activationDiffs.length, reconciliation.currentRebuild.allowedActivationScalarDifferenceCount);
+  assert(validationDiffs.every(diff =>
+    /^entries\[\d+\]\.pjaImportBridge\.canonicalBriefDigest$/.test(diff.path) ||
+    /^entries\[\d+\]\.pjaCandidate\.(candidateDigest|sourceBriefDigest)$/.test(diff.path)
+  ));
+  assert(activationDiffs.every(diff => /^entries\[\d+\]\.candidateDigest$/.test(diff.path)));
+  for (const successor of reconciliation.successorAuthorities) {
+    assert.equal(sha256(readText(successor.path)), successor.sha256, successor.path);
+  }
+  assert.equal(reconciliation.historicalAuthority.validation.rewritten, false);
+  assert.equal(reconciliation.historicalAuthority.activation.rewritten, false);
+  assert.equal(reconciliation.authorityBoundary.currentRebuildDigestMayReplaceHistoricalDigest, false);
+} else {
+  assert.equal(stableJson(rebuiltValidation), stableJson(validation), 'VAP-W8 validation projection must rebuild deterministically.');
+  assert.equal(stableJson(rebuiltActivation), stableJson(activation), 'VAP-W8 activation must rebuild deterministically.');
+}
 
 assert.equal(validation.status, 'ALL_PROVIDER_CANDIDATES_VALID_FOR_PJA_IMPORT');
 assert.equal(validation.batchCode, VAP_W8_BATCH);

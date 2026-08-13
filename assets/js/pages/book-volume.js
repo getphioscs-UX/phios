@@ -1,5 +1,6 @@
 import { getLocale, onLocaleChange, t } from '../i18n.js';
 import {
+  bookRoute,
   canonicalPartsForBook,
   loadCanonicalBooks,
   loadCanonicalParts,
@@ -38,6 +39,15 @@ async function render() {
     ]);
     const book = booksRegistry.books.find(item => item.book_id === bookId);
     if (!book) throw new Error('WPR_BOOK_NOT_FOUND');
+
+    const canonicalRoute = bookRoute(bookId);
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.rel = 'canonical';
+      document.head.append(canonicalLink);
+    }
+    canonicalLink.href = new URL(canonicalRoute, window.location.origin).href;
 
     const title = book.title?.[locale] || book.title?.en || bookId;
     const subtitle = book.subtitle?.[locale] || book.subtitle?.en || '';

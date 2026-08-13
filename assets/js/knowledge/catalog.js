@@ -23,8 +23,8 @@ export const LIBRARY_RESOURCES = Object.freeze([
       'zh-Hans': '第一册 · 世界如何形成'
     },
     description: {
-      en: 'Product overview, six registered Parts, figures and RM89 access boundary.',
-      'zh-Hans': '产品概览、六个登记部分、图示与 RM89 访问边界。'
+      en: 'Product overview, Parts 1–4, figures and RM89 access boundary.',
+      'zh-Hans': '产品概览、第 1–4 部、图示与 RM89 访问边界。'
     }
   },
   {
@@ -45,28 +45,56 @@ export const LIBRARY_RESOURCES = Object.freeze([
     id: 'book-two',
     category: 'books',
     status: 'development',
-    href: '/explore?book=2',
+    href: '/books/reality-runtime/',
     title: {
-      en: 'Book II · Shared Runtime',
-      'zh-Hans': '第二册 · 共同运行'
+      en: 'Book II · Reality Runtime',
+      'zh-Hans': '第二册 · 世界如何运行'
     },
     description: {
-      en: 'Consciousness, relationships, collectives, maintenance and governance.',
-      'zh-Hans': '意识、关系、集体、维护与治理。'
+      en: 'Conscious Runtime, Relational Runtime and Collective Runtime.',
+      'zh-Hans': '意识运行、关系运行与集体运行。'
     }
   },
   {
     id: 'book-three',
     category: 'books',
     status: 'later',
-    href: '/explore?book=3',
+    href: '/books/reality-continuity/',
     title: {
-      en: 'Book III · Continuity',
-      'zh-Hans': '第四册 · 连续性'
+      en: 'Book III · Reality Continuity',
+      'zh-Hans': '第三册 · 世界如何维持'
     },
     description: {
-      en: 'Civilization, ecology, Atlas, reading architecture and continuity.',
-      'zh-Hans': '文明迁移、周期、功能、生态、坐标与继任。'
+      en: 'Runtime Maintenance and Coordination Runtime.',
+      'zh-Hans': '运行维持与协调运行。'
+    }
+  },
+  {
+    id: 'book-four',
+    category: 'books',
+    status: 'later',
+    href: '/books/reality-civilization/',
+    title: {
+      en: 'Book IV · Reality Civilization',
+      'zh-Hans': '第四册 · 世界如何扩展'
+    },
+    description: {
+      en: 'Runtime Expansion, Civilization Runtime and Civilization Atlas.',
+      'zh-Hans': '运行扩展、文明运行与文明图谱。'
+    }
+  },
+  {
+    id: 'book-five',
+    category: 'books',
+    status: 'later',
+    href: '/books/reality-navigation/',
+    title: {
+      en: 'Book V · Reality Navigation',
+      'zh-Hans': '第五册 · 世界将如何继续'
+    },
+    description: {
+      en: 'Reading Science, Navigation Science and Reality Continuation.',
+      'zh-Hans': '读取科学、导航科学与现实延续。'
     }
   },
   {
@@ -79,8 +107,8 @@ export const LIBRARY_RESOURCES = Object.freeze([
       'zh-Hans': '现实 Atlas'
     },
     description: {
-      en: 'A free structural route across fifteen Parts and three Books.',
-      'zh-Hans': '贯穿十五部与四本书的免费结构路径。'
+      en: 'A free structural route across fifteen Parts and five Books.',
+      'zh-Hans': '贯穿十五部与五册书的免费结构路径。'
     }
   },
   {

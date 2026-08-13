@@ -393,7 +393,7 @@ html[lang="zh-Hans"] .atlas-section-heading h2 {
 }
 
 /* ==========================================================================
-   Three books
+   Five books
    ========================================================================== */
 
 .atlas-books {
@@ -436,7 +436,15 @@ html[lang="zh-Hans"] .atlas-section-heading h2 {
 }
 
 .book-card--three::before {
-  border-color: rgba(169, 79, 49, 0.14);
+  border-color: rgba(178, 75, 145, 0.18);
+}
+
+.book-card--four::before {
+  border-color: rgba(35, 135, 94, 0.18);
+}
+
+.book-card--five::before {
+  border-color: rgba(36, 199, 231, 0.2);
 }
 
 .book-card header {
@@ -961,7 +969,7 @@ html[lang="zh-Hans"] .atlas-return-panel h2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .book-card--three {
+  .book-card--five {
     grid-column: 1 / -1;
     min-height: 430px;
   }
@@ -1075,7 +1083,7 @@ html[lang="zh-Hans"] .atlas-return-panel h2 {
   }
 
   .book-card,
-  .book-card--three {
+  .book-card--five {
     grid-column: auto;
     min-height: 450px;
   }
@@ -1144,13 +1152,21 @@ html[lang="zh-Hans"] .atlas-return-panel h2 {
   }
 }
 
-/* BOOK-W0 four-volume publication projection */
+/* BOOK-W1E five-volume visual projection */
+.book-card--three::before {
+  background: linear-gradient(90deg, rgba(155, 98, 196, 0.84), rgba(201, 82, 143, 0.7));
+}
+
 .book-card--four::before {
+  background: linear-gradient(90deg, rgba(33, 139, 94, 0.82), rgba(214, 171, 61, 0.72));
+}
+
+.book-card--five::before {
   background: linear-gradient(90deg, rgba(36, 199, 231, 0.92), rgba(214, 171, 61, 0.82));
 }
 
 @media (min-width: 1180px) {
   .book-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }

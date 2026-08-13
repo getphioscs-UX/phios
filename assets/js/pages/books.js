@@ -21,6 +21,7 @@ async function render() {
   const locale = getLocale();
   try {
     const registry = await loadCanonicalBooks();
+    if (registry.books.length !== 5) throw new Error('WPR_FIVE_VOLUME_PROJECTION_REQUIRED');
     const cards = await Promise.all(registry.books.slice().sort((a,b) => a.volume-b.volume).map(async book => {
       const cover = await resolveBookCover(book.book_id, { surface: 'BOOK', locale, variant: 'CARD' })
         || await resolveBookCover(book.book_id, { surface: 'BOOK', locale });
@@ -31,7 +32,7 @@ async function render() {
         : `<span class="wpr-volume-fallback" aria-hidden="true"><span>Φ</span><strong>${String(book.volume).padStart(2,'0')}</strong></span>`;
       return `
         <article class="wpr-volume-panel wpr-volume-${escapeHtml(book.volume)}">
-          <a class="wpr-volume-panel__visual" href="${escapeHtml(bookRoute(book.book_id))}">${visual}</a>
+          <a class="wpr-volume-panel__visual" href="${escapeHtml(bookRoute(book.book_id))}" data-canonical-book-code="${escapeHtml(book.bookCode)}">${visual}</a>
           <div>
             <p class="wpr-kicker">${escapeHtml(t('knowledge.production.volume', { volume: book.volume }))}</p>
             <h2><a href="${escapeHtml(bookRoute(book.book_id))}">${escapeHtml(title)}</a></h2>

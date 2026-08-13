@@ -61,7 +61,7 @@ const home = Object.freeze({
         atlasTitle: 'Reality Atlas',
         atlasDescription: 'Explore how Reality forms across layers.',
         booksTitle: 'PHI OS Books',
-        booksDescription: 'Move through the three-book architecture.',
+        booksDescription: 'Move through the five-book architecture.',
         researchTitle: 'Figures & Research',
         researchDescription: 'Read visual models and theoretical foundations.',
         academyTitle: 'Academy',

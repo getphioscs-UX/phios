@@ -10,19 +10,22 @@ const partCode = value => String(value || '').replace(/^part-/i, 'P').toUpperCas
 
 export function loadKnrRegistryAuthority(root = process.cwd()) {
   const rel = value => path.join(root, value);
+  const authorityContractPath = 'content/knowledge/contracts/knowledge-registry-authority-book-w1d-v1.json';
   const blueprintRegistryPath = 'content/knowledge/blueprints/blueprint-registry.json';
-  const freezePath = 'content/knowledge/blueprints/knowledge-blueprint-freeze-v2.json';
-  const nodeRegistryPath = 'content/knowledge/registry/nodes.json';
+  const authorityContract = readJson(rel(authorityContractPath));
+  const blueprintRegistry = readJson(rel(blueprintRegistryPath));
+  const freezePath = blueprintRegistry.freezeAuthorityPath;
+  const nodeRegistryPath = authorityContract.authorities.canonicalKnowledge.path;
   const bookRegistryPath = 'content/registry/books.json';
   const partRegistryPath = 'content/registry/parts.json';
-  const ownershipPath = 'content/knowledge/migrations/node-publication-ownership-v2.json';
+  const legacyOwnershipPath = 'content/knowledge/migrations/node-publication-ownership-v2.json';
+  const activeOwnershipPath = 'content/knowledge/migrations/book-w1d/publication-ownership-migration-active-v1.json';
   const localizedPath = 'content/knowledge/registry/localized-content.json';
   const aliasesPath = 'content/knowledge/registry/search-aliases.json';
   const questionsPath = 'content/knowledge/registry/supporting-questions.json';
   const readingPathsPath = 'content/knowledge/registry/learning-paths.json';
 
   const blueprintSource = fs.readFileSync(rel(blueprintRegistryPath), 'utf8');
-  const blueprintRegistry = JSON.parse(blueprintSource);
   const freeze = readJson(rel(freezePath));
   if (digest(blueprintSource) !== freeze.registryManifestSHA) {
     throw new Error('KNR Blueprint Registry digest mismatch.');
@@ -40,7 +43,8 @@ export function loadKnrRegistryAuthority(root = process.cwd()) {
   const nodeRegistry = readJson(rel(nodeRegistryPath));
   const bookRegistry = readJson(rel(bookRegistryPath));
   const partRegistry = readJson(rel(partRegistryPath));
-  const ownership = readJson(rel(ownershipPath));
+  const legacyOwnership = readJson(rel(legacyOwnershipPath));
+  const activeOwnership = readJson(rel(activeOwnershipPath));
   const localized = readJson(rel(localizedPath));
   const searchAliases = readJson(rel(aliasesPath));
   const supportingQuestions = readJson(rel(questionsPath));
@@ -50,7 +54,16 @@ export function loadKnrRegistryAuthority(root = process.cwd()) {
   const allParts = [partRegistry.part_0, ...(partRegistry.parts || [])].filter(Boolean);
   const parts = new Map(allParts.map(part => [partCode(part.part_id), part]));
   const nodes = new Map((nodeRegistry.nodes || []).map(node => [node.nodeCode, node]));
-  const migrations = new Map((ownership.nodes || []).map(node => [node.nodeCode, node]));
+  const migrations = new Map((legacyOwnership.nodes || []).map(node => [node.nodeCode, node]));
+  for (const record of activeOwnership.records || []) {
+    migrations.set(record.canonicalNodeCode, {
+      nodeCode: record.canonicalNodeCode,
+      sourceBookCode: record.oldPublicationBookCode,
+      publicationBookCode: record.newPublicationBookCode,
+      publicationPartCode: record.partCode,
+      authority: 'BOOK-W1D-HUMAN-APPROVED'
+    });
+  }
   const localeByNode = new Map((localized.localizedContent || []).map(item => [item.nodeCode, item.locales || {}]));
 
   if (books.size !== 5 || nodes.size !== blueprintRegistry.totals.canonicalNodes) {
@@ -75,7 +88,11 @@ export function loadKnrRegistryAuthority(root = process.cwd()) {
       sourceBookCode,
       publicationBookCode,
       publicationPartCode,
-      authority: migration ? `${ownership.contract}+part-registry` : 'part-registry'
+      authority: migration?.authority === 'BOOK-W1D-HUMAN-APPROVED'
+        ? 'BOOK-W1D-active-publication-ownership+part-registry'
+        : migration
+          ? `${legacyOwnership.contract}+part-registry`
+          : 'part-registry'
     });
   };
 
@@ -92,8 +109,8 @@ export function loadKnrRegistryAuthority(root = process.cwd()) {
     learningPaths: learningPaths.learningPaths || [],
     resolvePublicationContext,
     sourcePaths: Object.freeze({
-      blueprintRegistryPath, freezePath, nodeRegistryPath, bookRegistryPath, partRegistryPath,
-      ownershipPath, localizedPath, aliasesPath, questionsPath, readingPathsPath
+      authorityContractPath, blueprintRegistryPath, freezePath, nodeRegistryPath, bookRegistryPath, partRegistryPath,
+      legacyOwnershipPath, activeOwnershipPath, localizedPath, aliasesPath, questionsPath, readingPathsPath
     })
   });
 }

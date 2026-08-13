@@ -8,7 +8,8 @@ export const exists=f=>fs.existsSync(path.join(root,f));
 export const routeFile=route=>({
   '/':'index.html','/library':'library.html','/articles':'articles.html','/figures':'figures.html','/figure':'figure.html','/books':'books/index.html',
   '/books/reality-formation':'books/reality-formation/index.html','/books/reality-runtime':'books/reality-runtime/index.html',
-  '/books/reality-civilization':'books/reality-civilization/index.html','/books/reality-navigation':'books/reality-navigation/index.html',
+  '/books/reality-continuity':'books/reality-continuity/index.html','/books/reality-civilization':'books/reality-civilization/index.html','/books/reality-navigation':'books/reality-navigation/index.html',
+  '/books/reality-maintenance/':'books/reality-maintenance/index.html',
   '/academy':'academy.html','/reality-journey':'reality-journey.html','/reality-dashboard':'reality-dashboard.html','/personal-runtime':'personal-runtime.html',
   '/services':'services.html','/professional/financial':'professional/financial/index.html','/professional-workspace':'professional-workspace.html','/professional-reports':'professional-reports.html'
 }[route]??null);

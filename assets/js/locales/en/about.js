@@ -68,7 +68,7 @@ const about = Object.freeze({
       "title": "Research that can be read, experienced and continued.",
       "copy": "Each layer serves a different way of entering the same Reality Navigation architecture.",
       "b1": {
-        "title": "Four Books",
+        "title": "Five Books",
         "copy": "The human-readable route from how reality forms to how worlds continue.",
         "link": "Explore the knowledge route →"
       },

@@ -32,20 +32,20 @@ const atlas = Object.freeze({
     },
     overview: {
       eyebrow: 'How to read this Atlas',
-      title: 'One architecture, read through four connected forms.',
+      title: 'One architecture, read through connected forms.',
       thesisTitle: 'Thesis',
       thesisDescription: 'Establishes why Reality Navigation is needed.',
-      layersTitle: '14 Layers',
+      layersTitle: '15 Layers',
       layersDescription: 'Defines how the PHI OS architecture works.',
-      booksTitle: 'Three Books',
+      booksTitle: 'Five Books',
       booksDescription: 'Provides a continuous route for human reading.',
       figuresTitle: 'Figures',
       figuresDescription: 'Compresses relationships into visual reference maps.',
-      boundary: 'The fourteen Parts are interoperable architectural layers. They are not fourteen separate books, and this Knowledge Journey does not change the Reality Journey.'
+      boundary: 'The fifteen Parts are interoperable architectural layers. They are not fifteen separate books, and this Knowledge Journey does not change the Reality Journey.'
     },
     books: {
-      eyebrow: 'Four-book architecture',
-      title: 'Reality forms, runs, expands and continues.',
+      eyebrow: 'Five-book architecture',
+      title: 'Reality forms, runs, maintains continuity, expands and continues.',
       description: 'Each book opens a different scale of the same PHI OS architecture.',
       bookOneTitle: 'Reality Formation',
       bookOneEnglish: 'Reality Formation',
@@ -55,13 +55,13 @@ const atlas = Object.freeze({
       bookTwoDescription: 'How consciousness, relationships and collectives organize shared operation.',
       bookThreeTitle: 'Reality Continuity',
       bookThreeEnglish: 'Reality Continuity',
-      bookThreeDescription: 'How Runtime is maintained, recovered and coordinated.',
+      bookThreeDescription: 'How Runtime is maintained, reconfigured, recovered and coordinated into continuity.',
       bookFourTitle: 'Reality Civilization',
       bookFourEnglish: 'Reality Civilization',
-      bookFourDescription: 'How civilizations migrate through cycles, functions, ecologies, coordinates and succession.',
+      bookFourDescription: 'How civilization scales through replication, distribution and infrastructure into an atlas.',
       bookFiveTitle: 'Reality Navigation',
       bookFiveEnglish: 'Reality Navigation',
-      bookFiveDescription: 'How Reality is read, diagnosed, navigated and carried through change into evolution.',
+      bookFiveDescription: 'How Reality is read through evidence, navigated into action and carried toward outcomes and continuation.',
       exploreParts: 'Explore Parts 1–4',
       explorePartsTwo: 'Explore Parts 5–7',
       explorePartsThree: 'Explore Parts 8–9',
@@ -172,32 +172,32 @@ const atlas = Object.freeze({
         description: 'How a Runtime preserves stability, detects drift and recovers.'
       },
       part9: {
-        title: 'Governance Runtime',
-        description: 'How rules, authority and allocation coordinate shared Reality.'
+        title: 'Coordination Runtime',
+        description: 'How interacting Runtimes coordinate shared operation, authority and allocation.'
       },
       part10: {
-        title: 'Civilization Dynamics',
-        description: 'Why civilizations migrate under changing pressures and gradients.'
+        title: 'Runtime Expansion',
+        description: 'How Runtime scales through replication, distribution and infrastructure.'
       },
       part11: {
-        title: 'Civilization Ecology',
-        description: 'How institutions, technologies, resources and meanings coexist.'
+        title: 'Civilization Runtime',
+        description: 'How institutions, technologies, resources and meanings operate together at civilization scale.'
       },
       part12: {
         title: 'Civilization Atlas',
         description: 'How civilization patterns can be compared without deterministic prediction.'
       },
       part13: {
-        title: 'Reality Reading Science',
+        title: 'Reading Science',
         description: 'Why reality can be observed, how evidence forms, how interpretive interfaces contribute, and how PHI OS creates a unified reading.'
       },
       part14: {
         title: 'Navigation Science',
-        description: 'How Runtime persists across change, review, memory and carriers.'
+        description: 'How evidence and position become bounded direction and action.'
       },
       part15: {
-        title: 'Continuity Science',
-        description: 'How Reality continues through settlement, residue, memory, inheritance, migration and evolution.'
+        title: 'Reality Continuation',
+        description: 'How outcomes, memory and formation carry Reality into its next continuation.'
       }
     },
     continuation: {

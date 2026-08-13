@@ -1,8 +1,10 @@
 {
-  "contract": "PHI-OS-PUBLIC-KNOWLEDGE-PROJECTION-v1.0.0",
+  "contract": "PHI-OS-PUBLIC-KNOWLEDGE-PROJECTION-v2.0.0",
   "authority": "published-only-rebuildable-read-model",
   "type": "public-book-metadata",
-  "recordCount": 4,
+  "architecture": "five-volume-15-part",
+  "canonicalRouteAuthority": "content/registry/books.json",
+  "recordCount": 5,
   "records": [
     {
       "bookCode": "BOOK-1",
@@ -15,6 +17,13 @@
         "zh-Hans": "现实形成与运行基础",
         "en": "Foundations of Reality Formation and Runtime"
       },
+      "canonicalRoute": "/books/reality-formation/",
+      "partCodes": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
       "status": "publication-preparation",
       "hasPublishedKnowledge": true,
       "publishedNodeCount": 3,
@@ -31,7 +40,13 @@
         "zh-Hans": "人与世界如何共同运行",
         "en": "How Humans and the World Run Together"
       },
-      "status": "in-development",
+      "canonicalRoute": "/books/reality-runtime/",
+      "partCodes": [
+        "P5",
+        "P6",
+        "P7"
+      ],
+      "status": "publication-preparation",
       "hasPublishedKnowledge": false,
       "publishedNodeCount": 0,
       "publishedArticleCount": 0
@@ -40,13 +55,18 @@
       "bookCode": "BOOK-3",
       "volume": 3,
       "title": {
-        "zh-Hans": "世界如何扩展",
-        "en": "Reality Civilization"
+        "zh-Hans": "世界如何维持",
+        "en": "Reality Continuity"
       },
       "subtitle": {
-        "zh-Hans": "文明如何持续扩展",
-        "en": "How Civilization Continues to Expand"
+        "zh-Hans": "运行如何被维护、恢复与协调",
+        "en": "How Runtime Is Maintained, Recovered and Coordinated"
       },
+      "canonicalRoute": "/books/reality-continuity/",
+      "partCodes": [
+        "P8",
+        "P9"
+      ],
       "status": "architecture-defined",
       "hasPublishedKnowledge": false,
       "publishedNodeCount": 0,
@@ -56,6 +76,28 @@
       "bookCode": "BOOK-4",
       "volume": 4,
       "title": {
+        "zh-Hans": "世界如何扩展",
+        "en": "Reality Civilization"
+      },
+      "subtitle": {
+        "zh-Hans": "文明如何持续扩展",
+        "en": "How Civilization Continues to Expand"
+      },
+      "canonicalRoute": "/books/reality-civilization/",
+      "partCodes": [
+        "P10",
+        "P11",
+        "P12"
+      ],
+      "status": "architecture-defined",
+      "hasPublishedKnowledge": false,
+      "publishedNodeCount": 0,
+      "publishedArticleCount": 0
+    },
+    {
+      "bookCode": "BOOK-5",
+      "volume": 5,
+      "title": {
         "zh-Hans": "世界将如何继续",
         "en": "Reality Navigation"
       },
@@ -63,10 +105,24 @@
         "zh-Hans": "现实读取、导航与持续",
         "en": "Reality Reading, Navigation and Continuity"
       },
+      "canonicalRoute": "/books/reality-navigation/",
+      "partCodes": [
+        "P13",
+        "P14",
+        "P15"
+      ],
       "status": "architecture-defined",
       "hasPublishedKnowledge": false,
       "publishedNodeCount": 0,
       "publishedArticleCount": 0
+    }
+  ],
+  "compatibilityRoutes": [
+    {
+      "route": "/books/reality-maintenance/",
+      "target": "/books/reality-continuity/",
+      "redirectStatus": 308,
+      "canonicalAuthority": false
     }
   ]
 }

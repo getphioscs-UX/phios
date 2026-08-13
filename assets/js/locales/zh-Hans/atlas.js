@@ -32,7 +32,7 @@ const atlas = Object.freeze({
     },
     overview: {
       eyebrow: '如何阅读这张地图',
-      title: '同一个架构，通过四种彼此连接的形式展开。',
+      title: '同一个架构，通过彼此连接的形式展开。',
       thesisTitle: '论文',
       thesisDescription: '说明为什么世界需要现实导航。',
       layersTitle: '十五个架构层',
@@ -45,7 +45,7 @@ const atlas = Object.freeze({
     },
     books: {
       eyebrow: '五册架构',
-      title: '现实形成、运行、扩展，并持续下去。',
+      title: '现实形成、运行、维持、扩展，并持续下去。',
       description: '每一册打开同一个 PHI OS 架构的不同尺度。',
       bookOneTitle: '世界如何形成',
       bookOneEnglish: 'Reality Formation',
@@ -55,13 +55,13 @@ const atlas = Object.freeze({
       bookTwoDescription: '意识、关系与集体如何组织共同运行。',
       bookThreeTitle: '世界如何维持',
       bookThreeEnglish: 'Reality Continuity',
-      bookThreeDescription: '运行如何被维持、恢复并重新协调。',
+      bookThreeDescription: 'Runtime 如何被维护、重构、恢复与协调，从而形成连续性。',
       bookFourTitle: '世界如何扩展',
       bookFourEnglish: 'Reality Civilization',
-      bookFourDescription: '文明如何迁移，形成周期、功能、生态、坐标与继任系统。',
+      bookFourDescription: '文明如何透过复制、分布与基础设施扩展，并形成文明图谱。',
       bookFiveTitle: '世界将如何继续',
       bookFiveEnglish: 'Reality Navigation',
-      bookFiveDescription: '现实如何被读取、诊断、导航，并跨越变化持续演化。',
+      bookFiveDescription: '现实如何透过证据被读取、进入行动与结果，并延续至下一次形成。',
       exploreParts: '探索第 1–4 部',
       explorePartsTwo: '探索第 5–7 部',
       explorePartsThree: '探索第 8–9 部',
@@ -168,36 +168,36 @@ const atlas = Object.freeze({
         description: '群体如何形成共享模式、共同记忆与协调行动。'
       },
       part8: {
-        title: '运行维护 Runtime Maintenance',
+        title: '运行维持 Runtime Maintenance',
         description: 'Runtime 如何维持稳定、辨认漂移并恢复运行。'
       },
       part9: {
-        title: '治理运行 Governance Runtime',
-        description: '规则、权力与分配如何协调共享现实。'
+        title: '协调运行 Coordination Runtime',
+        description: '相互作用的 Runtime 如何协调共同运行、权力与分配。'
       },
       part10: {
-        title: '文明动力学 Civilization Dynamics',
-        description: '文明为什么会在压力与梯度改变时开始迁移。'
+        title: '运行扩展 Runtime Expansion',
+        description: 'Runtime 如何透过复制、分布与基础设施扩大规模。'
       },
       part11: {
-        title: '文明生态 Civilization Ecology',
-        description: '制度、技术、资源与意义如何共同存在。'
+        title: '文明运行 Civilization Runtime',
+        description: '制度、技术、资源与意义如何在文明尺度共同运行。'
       },
       part12: {
-        title: '文明地图集 Civilization Atlas',
+        title: '文明图谱 Civilization Atlas',
         description: '如何在不作确定性预测的前提下比较文明模式。'
       },
       part13: {
-        title: '现实读取科学 Reality Reading Science',
+        title: '读取科学 Reading Science',
         description: '现实为何能够被观察，证据如何形成，解释接口如何参与，以及 PHI OS 如何形成统一 Reading。'
       },
       part14: {
-        title: '持续机制 Continuity Mechanics',
-        description: 'Runtime 如何跨越变化、回顾、记忆与载体而继续。'
+        title: '导航科学 Navigation Science',
+        description: '证据与位置如何成为有边界的方向与行动。'
       },
       part15: {
-        title: '持续科学 Continuity Science',
-        description: '现实如何透过结算、残留、记忆、继承、迁移与演化跨越结束继续存在。'
+        title: '现实延续 Reality Continuation',
+        description: '结果、记忆与形成如何把现实带入下一次延续。'
       }
     },
     continuation: {

@@ -131,7 +131,7 @@ assert.equal(manifests[3].parts[0].title.en, 'Reading Science');
 assert.equal(manifests[3].parts[2].title.en, 'Reality Continuation');
 
 assert.equal(contract.contract, 'PHI-OS-FIVE-VOLUME-MIGRATION-CONTRACT-v1.0.0');
-assert.equal(contract.status, 'active-successor-migration');
+assert(['active-successor-migration', 'FROZEN_BOOK_W1G_SUCCESSOR'].includes(contract.status));
 assert.equal(contract.implementationSteps[0].step, 'BOOK-W1A');
 assert.equal(contract.implementationSteps[0].status, 'accepted');
 const allowedSuccessorStatuses = new Set(['pending', 'in_progress', 'accepted']);
@@ -193,4 +193,6 @@ console.log('✓ BOOK-W1A Five-Volume Registry Ownership passed.');
 console.log('  BOOK-1/Volume I through BOOK-5/Volume V are aligned; 15 numbered Parts have one current owner.');
 console.log('  P8-P15 Current Part Authority is exact; superseded titles remain legacy aliases only.');
 console.log(r5Active ? '  W1A and KAU-R5 historical authorities remain preserved; the governed W1D successor now carries 931 records.' : '  716 Canonical Node identities and the frozen KAU-R0 Blueprint Registry remain unchanged.');
-console.log('  W1D is accepted and W1E review is open; no public projection or Production Authority was created.');
+console.log(contract.status === 'FROZEN_BOOK_W1G_SUCCESSOR'
+  ? '  W1E–W1G successor projection and freeze are active; W1A historical boundaries remain unchanged.'
+  : '  W1D is accepted and W1E review is open; no public projection or Production Authority was created.');

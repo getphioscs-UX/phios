@@ -2,11 +2,11 @@
   "contract": "PHI-OS-FIVE-VOLUME-MIGRATION-CONTRACT-v1.0.0",
   "schemaVersion": "1.0.0",
   "phase": "BOOK-W1",
-  "status": "active-successor-migration",
+  "status": "FROZEN_BOOK_W1G_SUCCESSOR",
   "authority": {
     "bookIdentity": "content/registry/books.json",
     "partIdentityAndPublicationOwnership": "content/registry/parts.json",
-    "canonicalNodeIdentity": "content/knowledge/registry/nodes.json",
+    "canonicalNodeIdentity": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
     "blueprintAuthority": "content/knowledge/blueprints/blueprint-registry.json",
     "historicalFourVolumeAudit": "docs/audits/BOOK-W0-four-volume-migration.md",
     "successorMigrationAudit": "docs/audits/BOOK-W1-five-volume-migration.md"
@@ -37,8 +37,9 @@
     "currentBookCodeField": "bookCode",
     "legacySchemaBoundField": "book_id",
     "legacySchemaBoundPattern": "phios-volume-{n}",
-    "reason": "BOOK-W1A does not rewrite the pre-existing book-architecture-manifest schema. Current canonical identity is explicit while the legacy schema-bound manifest identifier remains a compatibility alias until BOOK-W1F.",
-    "schemaReconciliationGate": "BOOK-W1F"
+    "reason": "BOOK-W1F reconciles the legacy schema-bound identifier as a compatibility alias while the five canonical book identities remain explicit.",
+    "schemaReconciliationGate": "BOOK-W1F",
+    "status": "reconciled-compatibility-alias-preserved"
   },
   "implementationSteps": [
     {
@@ -64,17 +65,17 @@
     {
       "step": "BOOK-W1E",
       "name": "Public Book, Locale and Icon Projection",
-      "status": "in_progress"
+      "status": "accepted"
     },
     {
       "step": "BOOK-W1F",
       "name": "Compatibility and Checker",
-      "status": "pending"
+      "status": "accepted"
     },
     {
       "step": "BOOK-W1G",
       "name": "Five-Volume Acceptance and Freeze",
-      "status": "pending"
+      "status": "accepted"
     }
   ],
   "boundaries": {
@@ -97,8 +98,8 @@
     "finalFreezeRequiresW1AToW1F": true
   },
   "progress": {
-    "currentStep": "BOOK-W1E",
-    "status": "w1d-human-approved-w1e-human-review-ready",
+    "currentStep": "BOOK-W1G",
+    "status": "five-volume-human-approved-frozen-successor",
     "migrationMapCount": 8,
     "upgradedOutlineChapterCount": 621,
     "accountedExistingCanonicalNodeCount": 471,
@@ -120,8 +121,11 @@
     "sourceOutlineAuthorityAuthorizedByTl": true,
     "w1bHumanAcceptanceSatisfied": true,
     "w1bHumanAcceptancePath": "content/knowledge/migrations/book-w1b/book-w1b-human-acceptance-v1.json",
-    "nextPermittedStep": "BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE",
-    "activeCanonicalNodeRecordCount": 931
+    "nextPermittedStep": null,
+    "activeCanonicalNodeRecordCount": 931,
+    "activeCanonicalBookCount": 5,
+    "activeCanonicalPartCount": 15,
+    "freezePath": "content/knowledge/blueprints/knowledge-blueprint-freeze-v3.json"
   },
   "w1cCandidatePreparation": {
     "status": "human-approved-ready-for-w1d-review-not-active",
@@ -190,7 +194,7 @@
     "successorCanonicalNodeRecordCount": 931
   },
   "w1eCandidatePreparation": {
-    "status": "generated-ready-for-human-review-not-active",
+    "status": "human-approved-active-public-projection",
     "projectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json",
     "humanAcceptancePath": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
     "w1dTlActivationReviewPath": "content/knowledge/migrations/book-w1d/book-w1d-tl-activation-review-v1.json",
@@ -198,8 +202,32 @@
     "mandatoryProjectionSourceCount": 10,
     "canonicalRouteCount": 5,
     "compatibilityAliasCount": 1,
-    "activePublicProjectionMutated": false,
-    "nextPermittedGate": "BOOK-W1E-HUMAN-PUBLIC-PROJECTION-ACCEPTANCE"
+    "activePublicProjectionMutated": true,
+    "activeProjectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json",
+    "nextPermittedGate": "BOOK-W1F-COMPATIBILITY-AND-CHECKER"
+  },
+  "w1eActivation": {
+    "status": "human-approved-active-public-projection",
+    "humanAcceptancePath": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
+    "activeProjectionPath": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json",
+    "canonicalRouteCount": 5,
+    "compatibilityAliasCount": 1,
+    "activeFourVolumeProductionAssumptionCount": 0
+  },
+  "w1fCompatibility": {
+    "status": "accepted-successor-compatibility-active",
+    "path": "content/knowledge/migrations/book-w1f/book-w1f-compatibility-reconciliation-v1.json",
+    "coveredConsumerCount": 17,
+    "uncoveredConsumerCount": 0,
+    "historicalCheckerMutationCount": 0
+  },
+  "w1gFreeze": {
+    "status": "human-approved-five-volume-frozen-successor",
+    "acceptancePath": "content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json",
+    "freezePath": "content/knowledge/blueprints/knowledge-blueprint-freeze-v3.json",
+    "canonicalBookCount": 5,
+    "canonicalPartCount": 15,
+    "canonicalNodeCount": 931
   },
   "w1dAcceptance": {
     "path": "content/knowledge/migrations/book-w1d/book-w1d-human-acceptance-v1.json",

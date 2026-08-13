@@ -1,0 +1,61 @@
+{
+  "contract": "PHI-OS-KNOWLEDGE-BLUEPRINT-FREEZE-v3.0.0",
+  "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-FREEZE-v3.0.0",
+  "contractVersion": "PHI-OS-BOOK-W1G-FIVE-VOLUME-FREEZE-v1.0.0",
+  "status": "frozen-book-w1g-human-approved-five-volume-successor",
+  "recordedAt": "2026-08-14",
+  "registryManifestPath": "content/knowledge/blueprints/blueprint-registry.json",
+  "registryManifestSHA": "e234261da01a06a6098dfdbcc1319fe7f9fc5e63224e7c1c01d3eb18e2d20941",
+  "canonicalRegistryPath": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+  "canonicalRegistrySHA": "5156bf1a591754ce31efabd8648dacb1e4b5f61b2cd47674fa3055b0cb402932",
+  "humanAcceptance": {
+    "path": "content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json",
+    "actor": "TL",
+    "decision": "ACCEPT"
+  },
+  "migrationRecord": [
+    "content/knowledge/migrations/five-volume-migration-contract-v1.json",
+    "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json",
+    "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json",
+    "content/knowledge/migrations/book-w1f/book-w1f-compatibility-reconciliation-v1.json",
+    "content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json"
+  ],
+  "supersedes": {
+    "path": "content/knowledge/blueprints/successors/book-w1d/knowledge-blueprint-freeze-v1.json",
+    "sha256": "6111e3fcdd43a2ed61e4bb64d42a851353fce4a51020b77d34ab5a9ad9239455",
+    "historicalAuthorityMutationAllowed": false,
+    "historicalFreezePaths": [
+      "content/knowledge/blueprints/knowledge-blueprint-freeze-v2.json",
+      "content/knowledge/blueprints/successors/book-w1d/knowledge-blueprint-freeze-v1.json"
+    ]
+  },
+  "architecture": {
+    "name": "five-volume-15-part",
+    "canonicalBookCount": 5,
+    "canonicalPartCount": 15,
+    "canonicalNodeCount": 931,
+    "partZeroCrossVolume": true
+  },
+  "bookFreeze": [
+    { "bookCode": "BOOK-1", "partCodes": ["P1", "P2", "P3", "P4"], "blueprintPath": "content/knowledge/blueprints/book-1-knowledge-blueprint.json", "blueprintSHA": "c0b76c15b40ecd4daf7249d67ff14b0a500a7111e078adb25ab8d83e26b46ae3", "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0", "contractVersion": "PHI-OS-BOOK-1-KNOWLEDGE-BLUEPRINT-v2.0.0", "status": "book-w1g-frozen-successor" },
+    { "bookCode": "BOOK-2", "partCodes": ["P5", "P6", "P7"], "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-2-knowledge-blueprint-v4.json", "blueprintSHA": "e90c0720444db76b5a34f59759142f684479028e6d42641a7104347966e6495d", "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0", "contractVersion": "PHI-OS-BOOK-2-KNOWLEDGE-BLUEPRINT-v4.0.0", "status": "book-w1g-frozen-successor" },
+    { "bookCode": "BOOK-3", "partCodes": ["P8", "P9"], "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-3-knowledge-blueprint-v2.json", "blueprintSHA": "00232d7c2b6d9fb6fad7fc43f58dfb07adb4b00cd3d863867bfb6c03e51a7eac", "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0", "contractVersion": "PHI-OS-BOOK-3-KNOWLEDGE-BLUEPRINT-v2.0.0", "status": "book-w1g-frozen-successor" },
+    { "bookCode": "BOOK-4", "partCodes": ["P10", "P11", "P12"], "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-4-knowledge-blueprint-v4.json", "blueprintSHA": "c3c9253f4eb3e6bf764fab5ad0c18fbb8cf17e3c312e02d4dd14bf3358aa93c0", "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0", "contractVersion": "PHI-OS-BOOK-4-KNOWLEDGE-BLUEPRINT-v4.0.0", "status": "book-w1g-frozen-successor" },
+    { "bookCode": "BOOK-5", "partCodes": ["P13", "P14", "P15"], "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-5-knowledge-blueprint-v2.json", "blueprintSHA": "a0cd78865aaf46f67e1ff0b46687b416acac3ff45d695f73bf8eb95cd6a14d4c", "schemaVersion": "PHI-OS-KNOWLEDGE-BLUEPRINT-v2.0.0", "contractVersion": "PHI-OS-BOOK-5-KNOWLEDGE-BLUEPRINT-v2.0.0", "status": "book-w1g-frozen-successor" }
+  ],
+  "acceptanceProof": {
+    "existingCanonicalNodeAuthorityPreserved": true,
+    "orphanPartCount": 0,
+    "duplicateCurrentOwnershipCount": 0,
+    "ungovernedNodeCodeMutationCount": 0,
+    "semanticNodeLossCount": 0,
+    "brokenMigrationLineageCount": 0,
+    "activeFourVolumeProductionAssumptionCount": 0
+  },
+  "updatePolicy": {
+    "automaticHistoricalCheckerUpdateAllowed": false,
+    "explicitCommandRequired": "npm run check:book-w1",
+    "independentBookDigestRequired": true,
+    "successorRecordRequired": true
+  }
+}
