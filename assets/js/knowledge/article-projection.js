@@ -192,7 +192,8 @@ export function createPublicArticleProjection(
     localized,
     articleAsset,
     visualAssets,
-    registeredSources
+    registeredSources,
+    publicationContext
   }
 ) {
   assertNoForbiddenCapabilityKeys(content);
@@ -237,6 +238,11 @@ export function createPublicArticleProjection(
       content.sourceReferences,
       registeredSources
     )),
+    publicationContext: publicationContext ? Object.freeze({
+      ...publicationContext,
+      bookTitle: publicationContext.bookTitle ? Object.freeze({ ...publicationContext.bookTitle }) : null,
+      partTitle: publicationContext.partTitle ? Object.freeze({ ...publicationContext.partTitle }) : null
+    }) : null,
     connections: Object.freeze(publicConnections(content.connections)),
     node: Object.freeze({
       nodeCode: node.nodeCode,

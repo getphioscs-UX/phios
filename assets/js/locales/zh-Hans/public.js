@@ -134,8 +134,8 @@ const publicExperience = Object.freeze({
       action: '探索生态'
     },
     production: {
-      booksEyebrow: 'Canonical Knowledge · 四册',
-      booksTitle: '四册知识现在由同一套受治理的公开架构承载。',
+      booksEyebrow: 'Canonical Knowledge · 五册',
+      booksTitle: '五册知识现在由同一套受治理的公开架构承载。',
       booksLead: '书册身份、Part 归属与公开状态直接投射自 Canonical Registry，不再依赖另一份前端目录。',
       knowledgePulse: '{articles} 条已发布 Article 记录 · {figures} 张归属一致的第一册 Figure · {parts} 个 Canonical Part',
       volumeLabel: '第 {volume} 册',
@@ -236,15 +236,19 @@ const publicExperience = Object.freeze({
       ecosystem: '生态'
     },
     books: {
-      eyebrow: '03 · 四本书',
+      eyebrow: '03 · 五本书',
       title: '同一个架构的三种阅读尺度。',
-      lead: '这四本书不是相互分离的产品，而是贯穿十五个相连部分的人类可读路径。',
+      lead: '这五本书不是相互分离的产品，而是贯穿十五个相连部分的人类可读路径。',
       b1Title: '第一册 · 世界如何形成',
       b1Copy: '结构、投影、时间、激活、载体与持续运行。',
       b2Title: '第二册 · 世界如何运行',
-      b2Copy: '意识、关系、集体、维护与治理。',
-      b3Title: '第四册 · 世界将如何继续',
-      b3Copy: '文明迁移、周期、功能、生态、坐标与继任。'
+      b2Copy: '意识、关系与集体运行。',
+      b3Title: '第三册 · 世界如何维持',
+      b3Copy: '运行维持、恢复与协调，覆盖第 8–9 部。',
+      b4Title: '第四册 · 世界如何扩展',
+      b4Copy: '文明运行、迁移、生态与继任，覆盖第 10–12 部。',
+      b5Title: '第五册 · 世界将如何继续',
+      b5Copy: '现实读取、导航与延续，覆盖第 13–15 部。'
     },
     architecture: {
       eyebrow: '04 · 十五部架构',

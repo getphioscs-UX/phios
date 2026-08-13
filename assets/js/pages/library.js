@@ -12,6 +12,7 @@ import {
 const search = document.querySelector('#library-search');
 const category = document.querySelector('#library-category');
 const status = document.querySelector('#library-status');
+const partFilter = document.querySelector('#library-part');
 const grid = document.querySelector('[data-library-grid]');
 const results = document.querySelector('[data-library-results]');
 const empty = document.querySelector('[data-library-empty]');
@@ -64,7 +65,8 @@ async function buildResources(locale) {
     status: bookStatusKind(book),
     href: bookRoute(book.book_id),
     title: `${t('knowledge.production.volume', { volume: book.volume })} · ${localized(book.title, locale)}`,
-    description: localized(book.subtitle, locale)
+    description: localized(book.subtitle, locale),
+    parts: (book.parts || []).map(number => `P${number}`)
   }));
 
   const bookOne = booksRegistry.books.find(book => book.book_id === 'book-1');
@@ -77,7 +79,8 @@ async function buildResources(locale) {
       status: 'published',
       href: articleHref(article),
       title: article.title,
-      description: article.summary
+      description: article.summary,
+      parts: article.publicationContext?.partCode ? [article.publicationContext.partCode] : []
     })),
     {
       id: 'knowledge-access',
@@ -155,10 +158,12 @@ function render() {
   const query = String(search?.value || '').trim().toLocaleLowerCase(locale);
   const selectedCategory = category?.value || 'all';
   const selectedStatus = status?.value || 'all';
+  const selectedPart = partFilter?.value || 'all';
   const visible = resources.filter(resource => {
     const searchable = `${resource.title} ${resource.description} ${resource.category}`.toLocaleLowerCase(locale);
     return (selectedCategory === 'all' || resource.category === selectedCategory)
       && (selectedStatus === 'all' || resource.status === selectedStatus)
+      && (selectedPart === 'all' || (resource.parts || []).includes(selectedPart))
       && (!query || searchable.includes(query));
   });
 
@@ -187,7 +192,7 @@ async function loadAndRender() {
   render();
 }
 
-[search, category, status].forEach(control => {
+[search, category, status, partFilter].forEach(control => {
   control?.addEventListener('input', render);
   control?.addEventListener('change', render);
 });

@@ -5,6 +5,12 @@ import {
 import {
   safeInternalHref
 } from './article-links.js';
+import {
+  loadCanonicalBooks,
+  loadCanonicalParts,
+  loadFiveVolumePublicationContextRegistry,
+  resolvePublicationContextForNode
+} from '../web-production/public-surface-data.js';
 
 const REGISTRY_PATHS = Object.freeze({
   nodes: '/content/knowledge/registry/nodes.json',
@@ -116,7 +122,10 @@ function publicArticle(
   localized,
   asset,
   assets,
-  sources
+  sources,
+  booksRegistry,
+  partsRegistry,
+  publicationContextRegistry
 ) {
   return createPublicArticleProjection(content, {
     node,
@@ -127,7 +136,10 @@ function publicArticle(
       node.nodeCode,
       localized.locale
     ),
-    registeredSources: sources
+    registeredSources: sources,
+    publicationContext: resolvePublicationContextForNode(
+      node, booksRegistry, partsRegistry, publicationContextRegistry
+    )
   });
 }
 
@@ -143,13 +155,19 @@ async function loadLocale(locale) {
     fetchJson(REGISTRY_PATHS.localizedContent),
     fetchJson(REGISTRY_PATHS.assets),
     fetchJson(REGISTRY_PATHS.sources),
-    fetchJson(VISUAL_RELEASE_MANIFEST).catch(() => ({ records: [] }))
+    fetchJson(VISUAL_RELEASE_MANIFEST).catch(() => ({ records: [] })),
+    loadCanonicalBooks(),
+    loadCanonicalParts(),
+    loadFiveVolumePublicationContextRegistry()
   ]).then(async ([
     nodeRegistry,
     localizedRegistry,
     assetRegistry,
     sourceRegistry,
-    visualReleaseManifest
+    visualReleaseManifest,
+    booksRegistry,
+    partsRegistry,
+    publicationContextRegistry
   ]) => {
     const localizedByNode = new Map(
       localizedRegistry.localizedContent.map(record => [record.nodeCode, record])
@@ -199,7 +217,10 @@ async function loadLocale(locale) {
         candidate.localized,
         candidate.asset,
         assetRegistry.assets,
-        sourceRegistry.sources
+        sourceRegistry.sources,
+        booksRegistry,
+        partsRegistry,
+        publicationContextRegistry
       );
     }));
 

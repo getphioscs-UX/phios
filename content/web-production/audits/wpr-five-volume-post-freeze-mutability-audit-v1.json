@@ -1,0 +1,221 @@
+{
+  "auditCode": "PHI-OS-WPR-5V-W0-POST-FREEZE-MUTABILITY-AUDIT-v1",
+  "auditVersion": "1.0.0",
+  "work": "WPR-5V-W0",
+  "baselineCommit": "1cbc50f7590759774944a577d3082c13ef59c40b",
+  "status": "ACCEPTED",
+  "freezeReference": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+  "conclusion": "WPR v1 remains frozen. Five-volume web changes are implemented through successor registries/compositions plus mutable public projection implementation files; this is not WPR v2.",
+  "classes": {
+    "APPEND_OR_REFRESH_ALLOWED": [
+      {
+        "path": "content/web-production/observability/wpr-production-observation-v1.json",
+        "reason": "WPR-W30 explicitly permits operational deployment observation refresh."
+      },
+      {
+        "path": "package.json#scripts.postcheck",
+        "reason": "WPR-W30 permits later governed runtimes to append commands after the neutral web-production-runtime alias without rewriting that alias."
+      }
+    ],
+    "EXACT_DIGEST_FROZEN_CHECKERS": [
+      {
+        "workCode": "WPR-W0",
+        "implementationFile": "scripts/check-wpr-w0-production-baseline.mjs",
+        "sha256": "56fc7eeea0b9e93cc0aa82dc2ff115e747746095ea8242bf986a7489925d6e58"
+      },
+      {
+        "workCode": "WPR-W1",
+        "implementationFile": "scripts/check-wpr-w1-authority-boundary.mjs",
+        "sha256": "64a3ebf7a8121829bf547a3cdbe49e201ed16cdf1bd2cc2aa69e9b85d5f0673a"
+      },
+      {
+        "workCode": "WPR-W2",
+        "implementationFile": "scripts/check-wpr-w2-canonical-web-production.mjs",
+        "sha256": "a428a78bda9075ce58f05fed53002a6588da65273334d83e03863db79387e9a3"
+      },
+      {
+        "workCode": "WPR-W3",
+        "implementationFile": "scripts/check-wpr-w3-surface-registry.mjs",
+        "sha256": "d56964f0641f353eac32050dfd9a51ade3f2b574472149c940aac2c273940241"
+      },
+      {
+        "workCode": "WPR-W4",
+        "implementationFile": "scripts/check-wpr-w4-route-registry.mjs",
+        "sha256": "44046ef8bbc3f4173794733225cb149c313a07d012518297b9e8876cfea3f21d"
+      },
+      {
+        "workCode": "WPR-W5",
+        "implementationFile": "scripts/check-wpr-w5-production-source-registry.mjs",
+        "sha256": "734d013dd22a69645fdd837b4a71e5fb232b7e285518ee500234289115ab32c4"
+      },
+      {
+        "workCode": "WPR-W6",
+        "implementationFile": "scripts/check-wpr-w6-runtime-consumption-registry.mjs",
+        "sha256": "254dd6a1533cfe7a93f09b4124434344a591ad037ebedb25d7650e16005b1f98"
+      },
+      {
+        "workCode": "WPR-W7",
+        "implementationFile": "scripts/check-wpr-w7-public-asset-resolution.mjs",
+        "sha256": "11cb5b9381a526439dab2e1b2446d934053fdbd1bfe5ec95b7c456841f12ec68"
+      },
+      {
+        "workCode": "WPR-W8",
+        "implementationFile": "scripts/check-wpr-w8-r2-public-delivery.mjs",
+        "sha256": "5799a22b8f0d094f057c1249def8873b8a8dbf70a323c4ed1b9e51b1af4b8d1d"
+      },
+      {
+        "workCode": "WPR-W9",
+        "implementationFile": "scripts/check-wpr-w9-responsive-asset-runtime.mjs",
+        "sha256": "c05e5c70cb803062a73d996435238a36411035fad7fdb268b62a1672fa0cd844"
+      },
+      {
+        "workCode": "WPR-W10",
+        "implementationFile": "scripts/check-wpr-w10-visual-production-projection.mjs",
+        "sha256": "67053237efced6722540ac8f5e0da4e22ed7a38a79511f387d2eac0791caf392"
+      },
+      {
+        "workCode": "WPR-W11",
+        "implementationFile": "scripts/check-wpr-w11-canonical-composition-resolver.mjs",
+        "sha256": "192d510e430d53d9ef5e942e82f4e72462801b041f5c9001efeecbdc75e276e1"
+      },
+      {
+        "workCode": "WPR-W12",
+        "implementationFile": "scripts/check-wpr-w12-locale-projection.mjs",
+        "sha256": "a27ad945b559ce15f66f6cef17061ab912390e62ea2c8f1b474d2fc94b7bddef"
+      },
+      {
+        "workCode": "WPR-W13",
+        "implementationFile": "scripts/check-wpr-w13-public-vocabulary.mjs",
+        "sha256": "11d296d450b0be851f6eadf4f18b3cd0563d89c6361093a7d2edaed93e73997e"
+      },
+      {
+        "workCode": "WPR-W14",
+        "implementationFile": "scripts/check-wpr-w14-homepage-production.mjs",
+        "sha256": "3ca2a52e235a0890a6a04047bf675af0e940685ca999ffe7c9008923a34f3c2b"
+      },
+      {
+        "workCode": "WPR-W15",
+        "implementationFile": "scripts/check-wpr-w15-library-production.mjs",
+        "sha256": "f9a873b878330249b9ad0b49152ae88ca70ff9601f9d8936c7edb8395d2ebfa0"
+      },
+      {
+        "workCode": "WPR-W16",
+        "implementationFile": "scripts/check-wpr-w16-article-production.mjs",
+        "sha256": "d11c6c75e1d54704ad3633fc939570e3a03d1a3c6d803a6484d9e344941f426a"
+      },
+      {
+        "workCode": "WPR-W17",
+        "implementationFile": "scripts/check-wpr-w17-figure-diagram-production.mjs",
+        "sha256": "5726d2c1663c3528556a62ab0170dd4df1a8b3e9f8ba653ecb5064e297d10117"
+      },
+      {
+        "workCode": "WPR-W18",
+        "implementationFile": "scripts/check-wpr-w18-books-production.mjs",
+        "sha256": "fe3c1bcbcbbe8041878fb7a76d4081584f3c238673b41fccb15b6e94d2710ddd"
+      },
+      {
+        "workCode": "WPR-W19",
+        "implementationFile": "scripts/check-wpr-w19-academy-production.mjs",
+        "sha256": "6cc06e5f1164dfee1a66a885639305721bd2851cfdbac1d7f264af4dd4b51623"
+      },
+      {
+        "workCode": "WPR-W20",
+        "implementationFile": "scripts/check-wpr-w20-reality-journey-production.mjs",
+        "sha256": "d39b8111b5708d4d4462948298a217c7259b8d1260379c57295be30c61fab027"
+      },
+      {
+        "workCode": "WPR-W21",
+        "implementationFile": "scripts/check-wpr-w21-personal-runtime-surface.mjs",
+        "sha256": "4a314fe5390a3ddc39ab032aadd1538b5689236303ada3744a985d18644f3978"
+      },
+      {
+        "workCode": "WPR-W22",
+        "implementationFile": "scripts/check-wpr-w22-professional-financial-production.mjs",
+        "sha256": "1e1cdee992598cc95cd72053aada5f20be381d22446955335c8607f0f36bf6f3"
+      },
+      {
+        "workCode": "WPR-W23",
+        "implementationFile": "scripts/check-wpr-w23-report-workspace-production.mjs",
+        "sha256": "59ac665c27552b195a43ccb359ba749a54d373cacfca3d6e6a9c91dcc2636e3f"
+      },
+      {
+        "workCode": "WPR-W24",
+        "implementationFile": "scripts/check-wpr-w24-hydration-runtime.mjs",
+        "sha256": "389290723e0ab7faac9836e97aa443ba42a1c4dcc10774348d904298b246bc24"
+      },
+      {
+        "workCode": "WPR-W25",
+        "implementationFile": "scripts/check-wpr-w25-public-discovery.mjs",
+        "sha256": "e61019c062acec076115df491097113d292c7b2f134d80a06687b164a3dd258e"
+      },
+      {
+        "workCode": "WPR-W26",
+        "implementationFile": "scripts/check-wpr-w26-privacy-security-production.mjs",
+        "sha256": "a010d89f21e017a4a714b8e1babc35067cd4f5c0afab3e626d07ab5cc54fd417"
+      },
+      {
+        "workCode": "WPR-W27",
+        "implementationFile": "scripts/check-wpr-w27-pds-responsive-accessibility.mjs",
+        "sha256": "245adc2d85a94961a6f4cc9bd1c26643e09b53001430a4193fddd112aa9cc655"
+      },
+      {
+        "workCode": "WPR-W28",
+        "implementationFile": "scripts/check-wpr-w28-drift-observability-deployment.mjs",
+        "sha256": "d0d5dbd868f812bb99a39d49968f1a0368466048fcb141fa2bff20f95b248ed2"
+      },
+      {
+        "workCode": "WPR-W29",
+        "implementationFile": "scripts/check-wpr-w29-full-production-acceptance.mjs",
+        "sha256": "4098e3c628e678036734904ca217454e235eea5618cbc6fb325e9dfce8e60830"
+      },
+      {
+        "workCode": "WPR-W30",
+        "implementationFile": "scripts/check-wpr-w30-freeze.mjs",
+        "sha256": "ebf19ca96a49c3ca5776b9b85328386ef2782aa423aa967011c798441ddf65d2"
+      }
+    ],
+    "FROZEN_AUTHORITY_SUCCESSOR_REQUIRED": [
+      {
+        "path": "content/web-production/registries/canonical-web-production-registry-v1.json",
+        "frozenState": "38 records",
+        "successor": "content/web-production/registries/canonical-web-production-registry-v1.1.json"
+      },
+      {
+        "path": "content/web-production/registries/wpr-route-registry-v1.json",
+        "successor": "content/web-production/registries/wpr-route-registry-v1.1.json"
+      },
+      {
+        "path": "content/web-production/registries/wpr-public-discovery-registry-v1.json",
+        "successor": "content/web-production/registries/wpr-public-discovery-registry-v1.1.json"
+      },
+      {
+        "path": "content/web-production/composition/public/*-composition-v1.json",
+        "successorPattern": "content/web-production/composition/public/*-composition-v1.1.json"
+      }
+    ],
+    "SEMANTIC_FREEZE_NO_EXPLICIT_FILE_SHA_IN_W30": [
+      {
+        "path": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+        "sha256AtSuccessorBaseline": "405efc8d15e0c604ca9797267ff405e4fa38591f5b9b2f76a0a230720f980c66"
+      },
+      {
+        "path": "content/web-production/acceptance/wpr-w30-freeze-acceptance-v1.json",
+        "sha256AtSuccessorBaseline": "b219fb1798e437b5d9de7798fea3626cc7c27d845ca6f3b8d5491f9610cce60a"
+      }
+    ]
+  },
+  "invariants": {
+    "wprV1AuthorityRewritten": false,
+    "wprV2Created": false,
+    "authorityExpansionGranted": false,
+    "successorRequiredFor38To40Records": true
+  },
+  "postFreezeCheckerReconciliation": {
+    "predecessor": "docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v1.json",
+    "successor": "docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v2.json",
+    "reason": "WPR-W25 frozen discovery checker required versioned reconciliation to validate the 17-route WPR-5V sitemap while preserving 16-route predecessor authority.",
+    "checkerManifestRewritten": false,
+    "wprFreezeRewritten": false,
+    "wprV2Created": false
+  }
+}

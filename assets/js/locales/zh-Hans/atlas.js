@@ -17,7 +17,7 @@ const atlas = Object.freeze({
     hero: {
       eyebrow: '知识旅程 · 现实地图集',
       title: '探索现实如何组织自身。',
-      subtitle: '一张可以滚动、逐层探索的知识地图，连接 PHI OS 论文、四册体系、十五个架构层与相关图像。',
+      subtitle: '一张可以滚动、逐层探索的知识地图，连接 PHI OS 论文、五册体系、十五个架构层与相关图像。',
       beginAction: '进入现实地图集',
       thesisAction: '阅读论文',
       orientationLabel: '你在这里',
@@ -26,7 +26,7 @@ const atlas = Object.freeze({
     path: {
       atlas: '地图集',
       thesis: '论文',
-      books: '四册',
+      books: '五册',
       figures: '图像与影音',
       academy: '学院'
     },
@@ -35,16 +35,16 @@ const atlas = Object.freeze({
       title: '同一个架构，通过四种彼此连接的形式展开。',
       thesisTitle: '论文',
       thesisDescription: '说明为什么世界需要现实导航。',
-      layersTitle: '十四个架构层',
+      layersTitle: '十五个架构层',
       layersDescription: '定义 PHI OS 架构如何运行。',
-      booksTitle: '四册体系',
+      booksTitle: '五册体系',
       booksDescription: '为人类阅读提供一条连续路径。',
       figuresTitle: '总结图像',
       figuresDescription: '把复杂关系压缩成可视化参考地图。',
-      boundary: '十四部是彼此互通的架构层，不是十四本彼此分离的书；知识旅程也不会改变现实旅程。'
+      boundary: '十五部是彼此互通的架构层，不是十五本彼此分离的书；知识旅程也不会改变现实旅程。'
     },
     books: {
-      eyebrow: '四册架构',
+      eyebrow: '五册架构',
       title: '现实形成、运行、扩展，并持续下去。',
       description: '每一册打开同一个 PHI OS 架构的不同尺度。',
       bookOneTitle: '世界如何形成',
@@ -52,17 +52,21 @@ const atlas = Object.freeze({
       bookOneDescription: '现实如何形成结构、场域、投影、激活、载体与持续运行。',
       bookTwoTitle: '世界如何运行',
       bookTwoEnglish: 'Reality Runtime',
-      bookTwoDescription: '意识、关系、集体、维护与治理如何组织共同运行。',
-      bookThreeTitle: '世界如何扩展',
-      bookThreeEnglish: 'Reality Civilization',
-      bookThreeDescription: '文明如何迁移，形成周期、功能、生态、坐标与继任系统。',
-      bookFourTitle: '世界将如何继续',
-      bookFourEnglish: 'Reality Navigation',
-      bookFourDescription: '现实如何被读取、诊断、导航，并跨越变化持续演化。',
+      bookTwoDescription: '意识、关系与集体如何组织共同运行。',
+      bookThreeTitle: '世界如何维持',
+      bookThreeEnglish: 'Reality Continuity',
+      bookThreeDescription: '运行如何被维持、恢复并重新协调。',
+      bookFourTitle: '世界如何扩展',
+      bookFourEnglish: 'Reality Civilization',
+      bookFourDescription: '文明如何迁移，形成周期、功能、生态、坐标与继任系统。',
+      bookFiveTitle: '世界将如何继续',
+      bookFiveEnglish: 'Reality Navigation',
+      bookFiveDescription: '现实如何被读取、诊断、导航，并跨越变化持续演化。',
       exploreParts: '探索第 1–4 部',
-      explorePartsTwo: '探索第 5–9 部',
-      explorePartsThree: '探索第 10–12 部',
-      explorePartsFour: '探索第 13–15 部'
+      explorePartsTwo: '探索第 5–7 部',
+      explorePartsThree: '探索第 8–9 部',
+      explorePartsFour: '探索第 10–12 部',
+      explorePartsFive: '探索第 13–15 部'
     },
     status: {
       completed: '已完成',
@@ -78,9 +82,10 @@ const atlas = Object.freeze({
       all: '全部架构层',
       showingAll: '正在显示全部 15 个架构层',
       showingBookOne: '正在显示第一册 · 第 1–4 部',
-      showingBookTwo: '正在显示第二册 · 第 5–9 部',
-      showingBookThree: '正在显示第三册 · 第 10–12 部',
-      showingBookFour: '正在显示第四册 · 第 13–15 部'
+      showingBookTwo: '正在显示第二册 · 第 5–7 部',
+      showingBookThree: '正在显示第三册 · 第 8–9 部',
+      showingBookFour: '正在显示第四册 · 第 10–12 部',
+      showingBookFive: '正在显示第五册 · 第 13–15 部'
     },
     parts: {
       openCompleteFigure: '打开完整图像',

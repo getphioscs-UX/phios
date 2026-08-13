@@ -4,6 +4,7 @@ import {
   onLocaleChange,
   t
 } from '../i18n.js';
+import { bookRoute, loadCanonicalBooks } from '../web-production/public-surface-data.js';
 
 const LESSONS = Object.freeze([
   {
@@ -128,9 +129,34 @@ function renderLesson() {
   document.title = `${title} — ${t('academyLearning.metaTitleLesson')}`;
 }
 
+
+function renderVolumeSources() {
+  const root = document.querySelector('[data-wpr-academy-volumes]');
+  if (!root) return;
+  loadCanonicalBooks().then(registry => {
+    const locale = getLocale();
+    root.replaceChildren(...registry.books
+      .slice()
+      .sort((a, b) => a.volume - b.volume)
+      .map(book => {
+        const card = element('a', `wpr-book-card wpr-volume-${book.volume}`);
+        card.href = bookRoute(book.book_id);
+        const body = element('span', 'wpr-book-card__body');
+        body.append(
+          element('span', 'wpr-kicker', `Volume ${book.volume}`),
+          element('strong', '', book.title?.[locale] || book.title?.en || book.book_id),
+          element('span', '', (book.parts || []).map(part => `P${part}`).join(' · '))
+        );
+        card.append(body);
+        return card;
+      }));
+  }).catch(() => root.replaceChildren());
+}
+
 function render() {
   renderDashboard();
   renderLesson();
+  renderVolumeSources();
 }
 
 initializeI18n();

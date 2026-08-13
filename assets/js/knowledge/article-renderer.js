@@ -641,6 +641,11 @@ function renderHeader(documentRef, article, translate) {
       { date: article.publishedAt }
     ));
   }
+  if (article.publicationContext) {
+    const locale = article.locale === 'zh-Hans' ? 'zh-Hans' : 'en';
+    const bookTitle = article.publicationContext.bookTitle?.[locale] || article.publicationContext.bookTitle?.en || '';
+    metadataParts.push(`Volume ${article.publicationContext.publicationVolume}${bookTitle ? ` · ${bookTitle}` : ''} · ${article.publicationContext.partCode}`);
+  }
   metadata.textContent = metadataParts.join(' · ');
   if (metadata.textContent) {
     headerContent.append(metadata);
@@ -660,7 +665,7 @@ function renderHeader(documentRef, article, translate) {
   actions.append(save);
 
   for (const action of [
-    ['/book-one', translated(translate, 'knowledge.articles.viewBook')],
+    [article.publicationContext?.bookRoute || '/books', translated(translate, 'knowledge.articles.viewBook')],
     ['/explore', translated(translate, 'knowledge.articles.viewAtlas')]
   ]) {
     const link = createInternalLink(documentRef, {

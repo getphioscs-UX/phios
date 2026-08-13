@@ -1,0 +1,37 @@
+{
+  "reconciliationCode": "PHI-OS-BOOK-W1E-WPR-5V-WEB-PROJECTION-SUCCESSOR-RECONCILIATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "status": "ACCEPTED_WEB_PROJECTION_SUCCESSOR_ONLY",
+  "baselineCommit": "1cbc50f7590759774944a577d3082c13ef59c40b",
+  "purpose": "Preserve the pre-activation BOOK-W1E candidate as historical evidence while allowing the explicitly requested WPR-5V post-freeze successor to own current five-volume web projection without activating BOOK-W1E or mutating canonical node authority.",
+  "historicalBookW1ECandidate": "content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json",
+  "historicalBookW1EAcceptance": "content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json",
+  "successorAuthority": "content/web-production/acceptance/wpr-five-volume-production-successor-acceptance-v1.json",
+  "scope": {
+    "webProjectionOnly": true,
+    "bookW1EActivated": false,
+    "wprV2Created": false,
+    "wprV1AuthorityRewritten": false,
+    "canonicalNodeAuthorityMutated": false,
+    "activeBlueprintAuthorityMutated": false,
+    "legacyCandidateSourceSnapshotsRebased": false
+  },
+  "successorSources": [
+    "content/registry/books.json",
+    "content/registry/parts.json",
+    "content/web-production/registries/wpr-five-volume-book-production-projection-v1.json",
+    "content/web-production/registries/wpr-route-registry-v1.1.json",
+    "content/web-production/registries/canonical-web-production-registry-v1.1.json",
+    "content/web-production/registries/wpr-five-volume-publication-context-registry-v1.json",
+    "content/web-production/registries/wpr-public-discovery-registry-v1.1.json"
+  ],
+  "invariants": {
+    "canonicalVolumes": 5,
+    "canonicalParts": 15,
+    "bookNumberEqualsVolumeNumber": true,
+    "nodeIdentityPreserved": true,
+    "publicationOwnershipAuthoritative": true,
+    "nodeBPrefixBookInferenceAllowed": false,
+    "legacyMaintenanceRouteCanonicalAuthority": false
+  }
+}

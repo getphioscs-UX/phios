@@ -21,13 +21,15 @@ const filterStatusKeys = Object.freeze({
   all: 'atlas.layers.showingAll',
   1: 'atlas.layers.showingBookOne',
   2: 'atlas.layers.showingBookTwo',
-  3: 'atlas.layers.showingBookThree'
+  3: 'atlas.layers.showingBookThree',
+  4: 'atlas.layers.showingBookFour',
+  5: 'atlas.layers.showingBookFive'
 });
 
 function normalizeFilter(value) {
   const cleanValue = String(value || '').trim();
 
-  return ['1', '2', '3'].includes(cleanValue)
+  return ['1', '2', '3', '4', '5'].includes(cleanValue)
     ? cleanValue
     : 'all';
 }

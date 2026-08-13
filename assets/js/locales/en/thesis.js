@@ -69,12 +69,13 @@ const thesis = Object.freeze({
     },
     "books": {
       "eyebrow": "Human Reading Route",
-      "title": "Four books. One architecture.",
-      "copy": "The four books form the human-readable route through the fifteen-part PHI OS architecture.",
+      "title": "Five books. One architecture.",
+      "copy": "The five books form the human-readable route through the fifteen-part PHI OS architecture.",
       "b1": {"no":"BOOK I · PARTS 1–4","title":"Reality Formation","copy":"From Reality physics, projection and dynamics to the carrier and continuous Human Runtime.","status":"Foundation completed · Formal assets migrating"},
-      "b2": {"no":"BOOK II · PARTS 5–9","title":"Reality Runtime","copy":"From conscious experience to relationship, collective operation, maintenance and governance.","status":"Architecture and manuscript in development"},
-      "b3": {"no":"BOOK III · PARTS 10–12","title":"Reality Civilization","copy":"From civilization migration, cycles and functions to ecology, coordinates and succession.","status":"Structural route established"},
-      "b4": {"no":"BOOK IV · PARTS 13–15","title":"Reality Navigation","copy":"From Reality reading, diagnosis and navigation to continuity and Reality evolution.","status":"Structural route established"}
+      "b2": {"no":"BOOK II · PARTS 5–7","title":"Reality Runtime","copy":"From conscious experience to relationship and collective operation.","status":"Architecture and manuscript in development"},
+      "b3": {"no":"BOOK III · PARTS 8–9","title":"Reality Continuity","copy":"From Runtime maintenance and recovery to coordination.","status":"Structural route established"},
+      "b4": {"no":"BOOK IV · PARTS 10–12","title":"Reality Civilization","copy":"From Runtime expansion to civilization systems and atlas.","status":"Structural route established"},
+      "b5": {"no":"BOOK V · PARTS 13–15","title":"Reality Navigation","copy":"From Reality reading and navigation to continuation and future carry-forward.","status":"Structural route established"}
     },
     "implementation": {
       "eyebrow": "04 · Reference Implementation",

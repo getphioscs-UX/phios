@@ -1,0 +1,93 @@
+{
+  "reconciliationCode": "PHI-OS-WPR-W30-POST-FREEZE-CHECKER-RECONCILIATION-v2",
+  "reconciliationVersion": "2.0.0",
+  "status": "ACCEPTED_SUCCESSOR_RECONCILIATION",
+  "baselineCommit": "021007b80fa20739a726fb28bcda4a9369af48e4",
+  "purpose": "Accept the WPR-5V post-freeze public-discovery checker successor so sitemap/discovery may project the governed five-volume architecture at 17 stable routes while WPR v1 remains frozen at its 16-route W25 historical authority and 38-record W30 freeze.",
+  "frozenCheckerManifest": "content/web-production/registries/wpr-checker-manifest-v1.json",
+  "frozenWprFreeze": "content/web-production/freeze/wpr-v1-freeze-v1.json",
+  "checkerManifestRewritten": false,
+  "wprFreezeRewritten": false,
+  "authorityExpansionGranted": false,
+  "entries": [
+    {
+      "workCode": "WPR-W0",
+      "implementationFile": "scripts/check-wpr-w0-production-baseline.mjs",
+      "frozenDigest": "56fc7eeea0b9e93cc0aa82dc2ff115e747746095ea8242bf986a7489925d6e58",
+      "successorDigest": "68d272c6572c5e0740b12a765f5f042fabc72c3bdbcc5dedde0e866287f63946",
+      "changeScope": "RECOGNIZE_GOVERNED_WRANGLER_AND_FIVE_VOLUME_SUCCESSOR_RECONCILIATIONS",
+      "runtimeSemanticAuthorityChanged": false,
+      "freezeDecisionChanged": false,
+      "productionStateChanged": false,
+      "authorityExpansionGranted": false
+    },
+    {
+      "workCode": "WPR-W14",
+      "implementationFile": "scripts/check-wpr-w14-homepage-production.mjs",
+      "frozenDigest": "3ca2a52e235a0890a6a04047bf675af0e940685ca999ffe7c9008923a34f3c2b",
+      "successorDigest": "24cc03ca115a42fc4205d8fcb487bbedd816d0573ee6095415e266ed43afd008",
+      "changeScope": "ALIGN_HOMEPAGE_CHECK_WITH_GOVERNED_FIVE_VOLUME_REGISTRY",
+      "runtimeSemanticAuthorityChanged": false,
+      "freezeDecisionChanged": false,
+      "productionStateChanged": false,
+      "authorityExpansionGranted": false
+    },
+    {
+      "workCode": "WPR-W15",
+      "implementationFile": "scripts/check-wpr-w15-library-production.mjs",
+      "frozenDigest": "f9a873b878330249b9ad0b49152ae88ca70ff9601f9d8936c7edb8395d2ebfa0",
+      "successorDigest": "813061cfc6254552a47c04fbd75b9769fb85151da76c9a0ce6d0bfa21abaa93e",
+      "changeScope": "ALIGN_LIBRARY_CHECK_WITH_GOVERNED_FIVE_VOLUME_REGISTRY",
+      "runtimeSemanticAuthorityChanged": false,
+      "freezeDecisionChanged": false,
+      "productionStateChanged": false,
+      "authorityExpansionGranted": false
+    },
+    {
+      "workCode": "WPR-W18",
+      "implementationFile": "scripts/check-wpr-w18-books-production.mjs",
+      "frozenDigest": "fe3c1bcbcbbe8041878fb7a76d4081584f3c238673b41fccb15b6e94d2710ddd",
+      "successorDigest": "a3cd2ec6f68a00457fb71c8accea2a7e24f890fafa2e1fda23f4c14b081b04e1",
+      "changeScope": "ALIGN_BOOK_COMPOSITION_CHECK_WITH_GOVERNED_FIVE_VOLUME_PART_OWNERSHIP",
+      "runtimeSemanticAuthorityChanged": false,
+      "freezeDecisionChanged": false,
+      "productionStateChanged": false,
+      "authorityExpansionGranted": false
+    },
+    {
+      "workCode": "WPR-W30",
+      "implementationFile": "scripts/check-wpr-w30-freeze.mjs",
+      "frozenDigest": "ebf19ca96a49c3ca5776b9b85328386ef2782aa423aa967011c798441ddf65d2",
+      "successorDigest": "174a12ea5cb7abceff779176a3d8e6618aa38997508022eb75c336a2c9f9eec9",
+      "changeScope": "READ_VERSIONED_WPR_5V_DISCOVERY_RECONCILIATION_WHILE_PRESERVING_FROZEN_AUTHORITY_AND_NEUTRAL_POSTCHECK_BOUNDARY",
+      "runtimeSemanticAuthorityChanged": false,
+      "freezeDecisionChanged": false,
+      "productionStateChanged": false,
+      "authorityExpansionGranted": false
+    },
+    {
+      "workCode": "WPR-W25",
+      "implementationFile": "scripts/check-wpr-w25-public-discovery.mjs",
+      "frozenDigest": "e61019c062acec076115df491097113d292c7b2f134d80a06687b164a3dd258e",
+      "successorDigest": "5151e6aa202c17ead7c8006aa1dc61c187487fba85fcb1a8de470027cf779fb1",
+      "changeScope": "READ_WPR_5V_PUBLIC_DISCOVERY_SUCCESSOR_AT_17_ROUTES_WHILE_PRESERVING_16_ROUTE_W25_PREDECESSOR_AUTHORITY",
+      "runtimeSemanticAuthorityChanged": false,
+      "freezeDecisionChanged": false,
+      "productionStateChanged": false,
+      "authorityExpansionGranted": false
+    }
+  ],
+  "rules": {
+    "frozenCheckerManifestDigestValuesRemainHistoricalAuthority": true,
+    "successorDigestMustMatchExactFileContent": true,
+    "onlyListedImplementationFilesMayUseSuccessorDigest": true,
+    "unlistedCheckerDigestDriftFailsClosed": true,
+    "neutralWebProductionRuntimeAliasMustExistExactlyOnce": true,
+    "wprDoesNotOwnFuturePostcheckTail": true,
+    "futurePostcheckCommandsRemainOwnedByTheirRespectiveGovernedRuntimes": true,
+    "futureWprCheckerSuccessorRequiresNewVersionedReconciliation": true,
+    "predecessorW25RegistryRemainsHistoricalAuthority": true,
+    "wpr5vDiscoverySuccessorMayExtendStableSitemapWithoutWprV2": true
+  },
+  "predecessorReconciliation": "docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v1.json"
+}

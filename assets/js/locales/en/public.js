@@ -94,7 +94,7 @@ const publicExperience = Object.freeze({
       eyebrow: 'Three ways to enter',
       title: 'Begin with knowledge, experience or the system itself.',
       knowledgeTitle: 'Explore Knowledge',
-      knowledgeCopy: 'Enter the Thesis, four books, fifteen-part architecture and Reality Atlas.',
+      knowledgeCopy: 'Enter the Thesis, five books, fifteen-part architecture and Reality Atlas.',
       knowledgeAction: 'Open the Atlas',
       realityTitle: 'Experience Reality Journey',
       realityCopy: 'Understand the six-stage path, its information boundaries and what happens before you choose to begin.',
@@ -134,8 +134,8 @@ const publicExperience = Object.freeze({
       action: 'Explore the ecosystem'
     },
     production: {
-      booksEyebrow: 'Canonical Knowledge · Four Volumes',
-      booksTitle: 'Four volumes now share one governed public architecture.',
+      booksEyebrow: 'Canonical Knowledge · Five Volumes',
+      booksTitle: 'Five volumes now share one governed public architecture.',
       booksLead: 'Book identity, Part ownership and public status are projected from canonical registries rather than a separate frontend catalogue.',
       knowledgePulse: '{articles} published article records · {figures} aligned Book I figures · {parts} canonical Parts',
       volumeLabel: 'Volume {volume}',
@@ -236,15 +236,19 @@ const publicExperience = Object.freeze({
       ecosystem: 'Ecosystem'
     },
     books: {
-      eyebrow: '03 · Four Books',
+      eyebrow: '03 · Five Books',
       title: 'Three reading scales of one architecture.',
-      lead: 'The books are not separate products. Together they form the human-readable route through fifteen connected Parts.',
+      lead: 'The five books are not separate products. Together they form the human-readable route through fifteen connected Parts.',
       b1Title: 'Book I · Reality Formation',
       b1Copy: 'Structure, projection, time, activation, carrier and continuous Runtime.',
       b2Title: 'Book II · Reality Runtime',
-      b2Copy: 'Consciousness, relationships, collectives, maintenance and governance.',
-      b3Title: 'Book III · Reality Civilization',
-      b3Copy: 'Civilization migration, cycles, functions, ecology, coordinates and succession.'
+      b2Copy: 'Consciousness, relationships and collective Runtime.',
+      b3Title: 'Book III · Reality Continuity',
+      b3Copy: 'Runtime maintenance, recovery and coordination across Parts 8–9.',
+      b4Title: 'Book IV · Reality Civilization',
+      b4Copy: 'Civilization systems, migration, ecology and succession across Parts 10–12.',
+      b5Title: 'Book V · Reality Navigation',
+      b5Copy: 'Reality reading, navigation and continuation across Parts 13–15.'
     },
     architecture: {
       eyebrow: '04 · Fifteen-Part Architecture',
