@@ -15,8 +15,7 @@ const digest = value => crypto.createHash('sha256')
   .update(value.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n'), 'utf8')
   .digest('hex');
 
-const NODE_REGISTRY_SHA = '61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431';
-const BLUEPRINT_REGISTRY_SHA = '981d25e7fddcab69ce0640ea5bc161c83df095c345695b4a4a82c21ec76fb92a';
+const R5_FREEZE_PATH = 'content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
 const ALLOWED_ACTIONS = new Set(['retain', 'rename', 'move', 'supersede', 'split', 'merge', 'new']);
 
 const [
@@ -26,6 +25,7 @@ const [
   outlineGuard,
   packageJson,
   audit,
+  r5Freeze,
   expectedMaps
 ] = await Promise.all([
   read('content/knowledge/registry/nodes.json'),
@@ -34,11 +34,15 @@ const [
   readJson(OUTLINE_GUARD_PATH),
   readJson('package.json'),
   read('docs/audits/BOOK-W1B-part-8-15-outline-reconciliation.md'),
+  readJson(R5_FREEZE_PATH),
   buildBookW1BOutlineMigrationMaps(root)
 ]);
 
-assert.equal(digest(nodesRaw), NODE_REGISTRY_SHA, 'BOOK-W1B must not mutate the frozen Canonical Node Registry.');
-assert.equal(digest(blueprintRegistryRaw), BLUEPRINT_REGISTRY_SHA, 'BOOK-W1B must not mutate the frozen Blueprint Registry.');
+assert.equal(r5Freeze.status, 'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY');
+assert.equal(r5Freeze.canonicalAuthority.predecessorCount, 716);
+assert.equal(r5Freeze.canonicalAuthority.successorCount, 718);
+assert.equal(digest(nodesRaw), r5Freeze.canonicalAuthority.successorSha256, 'BOOK-W1B must preserve the exact KAU-R5 Canonical successor.');
+assert.equal(digest(blueprintRegistryRaw), r5Freeze.blueprintAuthority.registryManifestSha256, 'BOOK-W1B must preserve the exact KAU-R5 Blueprint Registry.');
 
 const nodes = JSON.parse(nodesRaw);
 const actualMaps = [];
@@ -119,4 +123,5 @@ assert.equal((packageJson.scripts.precheck.match(/npm run check:book-w1-outline/
 console.log('✓ BOOK-W1B Part 8-15 Canonical Outline Reconciliation draft guard passed.');
 console.log('  Eight deterministic migration maps account for all 471 existing P8-P15 frozen Canonical Nodes.');
 console.log('  621 outline chapters are preserved as semantic constraints; the +150 delta created 0 automatic Node candidates.');
+console.log('  The exact 718-node KAU-R5 successor is preserved; its two Human-approved additions remain in P7 outside W1B scope.');
 console.log('  W1B acceptance and W1C remain blocked pending complete chapter authority and explicit Human Canonical decisions.');

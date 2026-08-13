@@ -20,6 +20,7 @@ const nodes=await readJson('content/knowledge/registry/nodes.json');
 const cmw=await readJson('content/governance/canonical-master-work/registries/canonical-master-work-registry-v1.json');
 const migration=await readJson('content/governance/canonical-master-work/registries/canonical-master-work-migration-registry-v1.json');
 const kppContract=await readJson('content/knowledge/production-planning/contracts/kpp-v2-reconciliation-w21-w22-w24-w26-foundation-v1.json');
+const r5FreezePath='content/knowledge/reconciliation/kau-r5/kau-r5-freeze-v1.json';
 
 assert.equal(contract.workCode,'KAU-E2');
 assert.equal(contract.rules.acceptedRelationshipIsSupportingOnly,true);
@@ -35,8 +36,18 @@ const decisions=[];
 for(const wave of ['a','b','c','d','e','f']){const d=await readJson(`${base}/review-resolution/decisions/legacy-human-review-wave-${wave}-decisions-v1.json`); for(const entry of d.decisions) decisions.push({wave:wave.toUpperCase(),entry});}
 assert.equal(decisions.length,185); assert.equal(new Set(decisions.map(x=>x.entry.reviewCode)).size,185);
 
-const nodeCodes=new Set(nodes.nodes.map(n=>n.nodeCode)); assert.equal(nodes.nodes.length,716);
-assert.equal(await digest('content/knowledge/registry/nodes.json'),acceptance.authoritySnapshots.canonicalNodeRegistry.sha256);
+const nodeCodes=new Set(nodes.nodes.map(n=>n.nodeCode));
+const r5Active=await fs.access(path.join(root,r5FreezePath)).then(()=>true).catch(()=>false);
+if(r5Active){
+ const r5=await readJson(r5FreezePath);
+ assert.equal(r5.status,'FROZEN_SUCCESSOR_CANONICAL_AUTHORITY');
+ assert.equal(nodes.nodes.length,718);
+ assert.equal(await digest('content/knowledge/registry/nodes.json'),r5.canonicalAuthority.successorSha256);
+ assert.equal(acceptance.authoritySnapshots.canonicalNodeRegistry.sha256,r5.canonicalAuthority.predecessorSha256);
+}else{
+ assert.equal(nodes.nodes.length,716);
+ assert.equal(await digest('content/knowledge/registry/nodes.json'),acceptance.authoritySnapshots.canonicalNodeRegistry.sha256);
+}
 assert.equal(acceptance.authoritySnapshots.canonicalNodeRegistry.sha256,'61c1d8bd00a13af5fa3d41e802fa3a787c97750c60b04e037377b585a3d01431');
 assert.equal(await digest(acceptance.authoritySnapshots.canonicalMeaningCodeRegistry.path),acceptance.authoritySnapshots.canonicalMeaningCodeRegistry.sha256);
 assert.equal(await digest(acceptance.authoritySnapshots.kppCanonicalProductionPlanRegistry.path),acceptance.authoritySnapshots.kppCanonicalProductionPlanRegistry.sha256);
@@ -57,7 +68,12 @@ assert.equal(handoff.status,'READY_FOR_CONTROLLED_KPP_CONSUMPTION');assert.equal
 assert.deepEqual(handoff.allowedConsumers,['KPP-W23','KPP-W27']);assert.equal(handoff.consumerRules.readOnly,true);assert.equal(handoff.consumerRules.rawLegacySourceAccessForbidden,true);assert.equal(handoff.consumerRules.acceptedSupportingDoesNotEqualProductionReadiness,true);assert.equal(handoff.consumerRules.acceptedSupportingDoesNotEqualArticleRequirement,true);assert.equal(handoff.consumerRules.acceptedSupportingDoesNotEqualPriority,true);assert.equal(handoff.consumerRules.acceptedSupportingDoesNotEqualWavePlacement,true);assert.equal(handoff.consumerRules.deferredItemsExcluded,true);
 assert.equal(kppContract.rawLegacySourceAccepted,false);assert.ok(kppContract.explicitlyDeferred.some(x=>x.includes('KPP-W23')&&x.includes('KAU-E2')));assert.ok(kppContract.explicitlyDeferred.some(x=>x.includes('KPP-W27')&&x.includes('KAU-E2')));
 
-for(const item of manifest.files) assert.equal(await digest(item.path),item.sha256,`FREEZE_DRIFT:${item.path}`);
+for(const item of manifest.files){
+ if(r5Active&&item.path==='content/knowledge/registry/nodes.json'){
+  const r5=await readJson(r5FreezePath);
+  assert.equal(item.sha256,r5.canonicalAuthority.predecessorSha256,'KAU-E2 must retain its exact predecessor snapshot.');
+ }else assert.equal(await digest(item.path),item.sha256,`FREEZE_DRIFT:${item.path}`);
+}
 const md=await digest(`${base}/manifests/kau-e2-extension-freeze-manifest-v1.json`);assert.equal(acceptance.freezeManifestSha256,md);assert.equal(freeze.freezeManifestSha256,md);
 assert.equal(acceptance.relationshipState.acceptedSupporting,155);assert.equal(acceptance.relationshipState.deferred,30);assert.equal(acceptance.relationshipState.canonicalNodeReferenceEdges,597);
 assert.equal(acceptance.checks.canonicalNodeRegistryMutated,false);assert.equal(acceptance.checks.meaningAuthorityMutated,false);assert.equal(acceptance.checks.productionReadinessPromoted,false);assert.equal(acceptance.checks.articleRequirementCreated,false);assert.equal(acceptance.checks.frozenWaveMutated,false);assert.equal(acceptance.checks.rawLegacyToKppForbidden,true);assert.equal(acceptance.checks.deferredItemsAutoResolved,false);assert.equal(acceptance.checks.baseKauFreezeMutated,false);assert.equal(acceptance.checks.cmwRegistryMutated,false);
@@ -71,3 +87,4 @@ console.log('✓ KAU-E2 Extension Acceptance & Freeze passed.');
 console.log('✓ 185/185 human reviews governed: 155 frozen accepted-supporting records, 30 frozen deferred records, 597 canonical-node reference edges.');
 console.log('✓ KPP-W23/W27 may consume only the frozen E2 handoff; raw legacy remains forbidden and no production decision is promoted.');
 console.log('✓ Canonical Knowledge, Meaning, Publication, KPP decision authority and KAU v1 base freeze remain unchanged.');
+if(r5Active) console.log('  KAU-E2 predecessor evidence is preserved inside the exact 718-node KAU-R5 Canonical successor.');

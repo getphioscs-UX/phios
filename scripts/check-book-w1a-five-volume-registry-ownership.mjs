@@ -134,7 +134,13 @@ assert.equal(contract.contract, 'PHI-OS-FIVE-VOLUME-MIGRATION-CONTRACT-v1.0.0');
 assert.equal(contract.status, 'active-successor-migration');
 assert.equal(contract.implementationSteps[0].step, 'BOOK-W1A');
 assert.equal(contract.implementationSteps[0].status, 'accepted');
-assert(contract.implementationSteps.slice(1).every(step => step.status === 'pending'));
+const allowedSuccessorStatuses = new Set(['pending', 'in_progress', 'accepted']);
+assert(contract.implementationSteps.slice(1).every(step => allowedSuccessorStatuses.has(step.status)));
+let nonAcceptedStepSeen = false;
+for (const step of contract.implementationSteps) {
+  if (step.status !== 'accepted') nonAcceptedStepSeen = true;
+  if (nonAcceptedStepSeen) assert.notEqual(step.status, 'accepted', 'BOOK-W1 steps cannot skip a prior gate.');
+}
 assert.equal(contract.boundaries.canonicalNodeRegistryMutationAllowedInW1A, false);
 assert.equal(contract.boundaries.finalSuccessorBlueprintGenerationAllowedInW1A, false);
 assert.equal(contract.boundaries.publicProjectionMutationAllowedInW1A, false);
