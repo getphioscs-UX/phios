@@ -1008,7 +1008,11 @@
     "check:rjx-hdr-boundary": "node scripts/check-rjx-package-b.mjs RJX-W7C",
     "check:rjx-method-recalculation": "node scripts/check-rjx-package-b.mjs RJX-W7D",
     "check:rjx-package-b": "node scripts/check-rjx-package-b.mjs",
-    "check:rjx-931-eligibility": "node scripts/check-rjx-931-rule-eligibility-classification.mjs"
+    "check:rjx-931-eligibility": "node scripts/check-rjx-931-rule-eligibility-classification.mjs",
+    "check:mcd-6": "node scripts/check-mcd-6-dynamic-renderers.mjs && node scripts/check-mcd-6-dynamic-renderer-freeze.mjs",
+    "check:mcd-renderer": "npm run check:mcd-6",
+    "check:mcd-through-6": "npm run check:mcd && npm run check:mcd-6",
+    "check:mcd-1-6": "npm run check:mcd-through-6"
   },
   "type": "module"
 }

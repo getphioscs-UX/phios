@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/mcd/mcd-6-cross-method-composition-v1.schema.json",
+  "title": "PHI OS MCD-6 CanonicalCrossMethodCompositionProjection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "compositionId",
+    "sourceProjectionRefs",
+    "signals",
+    "unknown",
+    "evidence",
+    "lineage"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-MCD-6-CROSS-METHOD-COMPOSITION-v1.0.0"
+    },
+    "compositionId": {
+      "type": "string",
+      "pattern": "^CMC-[A-Z0-9-]{8,}$"
+    },
+    "sourceProjectionRefs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectionId",
+          "publicMethodCode"
+        ],
+        "properties": {
+          "projectionId": {
+            "type": "string",
+            "pattern": "^CMP-[A-F0-9]{24}$"
+          },
+          "publicMethodCode": {
+            "enum": [
+              "ASTROLOGY_PROJECTION",
+              "BAZI_PROJECTION",
+              "NUMEROLOGY_PROJECTION"
+            ]
+          }
+        }
+      }
+    },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "signalId",
+          "classification",
+          "label",
+          "projectionRefs",
+          "evidenceRefs"
+        ],
+        "properties": {
+          "signalId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "classification": {
+            "enum": [
+              "CONVERGENCE",
+              "DIVERGENCE",
+              "UNKNOWN"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "detail": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "projectionRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^CMP-[A-F0-9]{24}$"
+            }
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "unknown": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "reason"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "label"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "lineage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "label"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "authorityBoundary": {
+    "x-renderer-must-not-compute-classification": true,
+    "x-source-method-values-not-part-of-input": true
+  }
+}
