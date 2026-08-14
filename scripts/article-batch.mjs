@@ -1,5 +1,6 @@
 import { writeBatchPlan } from './lib/article-simplification/batch-orchestrator-v1.mjs';
 import { DEFAULT_TARGET_LOCALES, writeCandidateOrchestration } from './lib/article-simplification/candidate-orchestrator-v1.mjs';
+import { writeReviewBatch } from './lib/article-simplification/review-batch-assembler-v1.mjs';
 
 const args = process.argv.slice(2);
 const valueAfter = flag => {
@@ -33,4 +34,11 @@ console.log(`✓ Primary candidates ready ${orchestration.summary.primaryCandida
 console.log(`✓ Locale lanes: ${orchestration.targetLocales.join(' + ')}; candidate-ready ${orchestration.summary.localeCandidateReadyCount}/${orchestration.summary.localeLaneCount}; locale-discovery blocked ${orchestration.summary.localeDiscoveryBlockedCount}.`);
 console.log('✓ Candidate remains candidate-only; article:batch creates no Human Review, Human Approval, Human Publication, CAR, CPR or Visual Article authority.');
 console.log('✓ No implicit paid-AI/network call is made when a Candidate is missing; APS reports a governed generation requirement instead.');
-console.log('→ APS-5 will assemble one review batch and reuse exact digest-bound Human evidence where already available.');
+const reviewResult = writeReviewBatch(root, orchestration);
+const reviewBatch = reviewResult.reviewBatch;
+console.log(`✓ APS-5 Review Batch Assembly ${reviewResult.reusedExistingReviewBatch ? 'reused' : 'created'}: ${reviewResult.reviewBatchPath}`);
+console.log(`✓ Human decision input ${reviewResult.reusedExistingHumanDecisions ? 'reused' : 'created'}: ${reviewResult.humanDecisionsPath}`);
+console.log(`✓ Review batch active ${reviewBatch.summary.activeReviewEntryCount}; reused TL Review ${reviewBatch.summary.reusedAcceptedReviewCount}; reused TL Approval ${reviewBatch.summary.reusedApprovedApprovalCount}; pending Publication ${reviewBatch.summary.pendingPublicationDecisionCount}.`);
+console.log(`✓ Excluded locale lanes ${reviewBatch.summary.excludedLocaleLaneCount}; blocked lanes do not enter Human decision authority.`);
+console.log('✓ APS-5 files are non-authoritative envelopes/input only; article:batch still creates no Human Publication, CAR, CPR or Visual Article authority.');
+console.log('→ APS-6 will validate explicit Human decisions and bridge only those decisions to governed publication authority.');
