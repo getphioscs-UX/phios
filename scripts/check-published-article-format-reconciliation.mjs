@@ -77,12 +77,39 @@ const englishText = [
 assert(!/[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]/u.test(englishText), 'EN_REPAIR_STILL_CONTAINS_HAN_TEXT');
 
 const manifest = readJson('content/knowledge/public/visual-article-release.json');
-assert(
-  !(manifest.records || []).some(record => record.nodeCode === 'KN-PREFACE-001' && record.locale === 'en'),
-  'EN_REPAIR_MUST_NOT_BE_AUTO_PUBLISHED_BEFORE_HUMAN_REVIEW'
-);
+const englishRelease = (manifest.records || []).find(record => record.nodeCode === 'KN-PREFACE-001' && record.locale === 'en') || null;
+if (!englishRelease) {
+  assert.equal(repair.status, 'READY_FOR_HUMAN_REVIEW');
+} else {
+  const review = readJson('content/knowledge/production/repairs/en/KN-PREFACE-001/review-resolution.json');
+  const approval = readJson('content/knowledge/production/repairs/en/KN-PREFACE-001/approval-resolution.json');
+  const publication = readJson('content/knowledge/production/repairs/en/KN-PREFACE-001/publication-resolution.json');
+  const successor = readJson('content/knowledge/public/authority/successors/en/KN-PREFACE-001.v1.0.1.json');
+  const freeze = readJson('content/production/visual-article/l10n/freeze/VAP-L10N-R5-KN-PREFACE-001-EN.json');
+  assert.equal(review.candidateDigest, repair.candidateDigest, 'EN_SUCCESSOR_REVIEW_CANDIDATE_DIGEST_MISMATCH');
+  assert.equal(review.decision, 'ACCEPT', 'EN_SUCCESSOR_HUMAN_REVIEW_REQUIRED');
+  assert.equal(approval.candidateDigest, repair.candidateDigest, 'EN_SUCCESSOR_APPROVAL_CANDIDATE_DIGEST_MISMATCH');
+  assert.equal(approval.decision, 'APPROVE', 'EN_SUCCESSOR_HUMAN_APPROVAL_REQUIRED');
+  assert.equal(publication.candidateDigest, repair.candidateDigest, 'EN_SUCCESSOR_PUBLICATION_CANDIDATE_DIGEST_MISMATCH');
+  assert.equal(publication.decision, 'PUBLISH', 'EN_SUCCESSOR_HUMAN_PUBLICATION_REQUIRED');
+  assert.equal(successor.nodeCode, 'KN-PREFACE-001');
+  assert.equal(successor.locale, 'en');
+  assert.equal(successor.eligibility.contentReviewed, true);
+  assert.equal(successor.eligibility.approved, true);
+  assert.equal(successor.eligibility.published, true);
+  assert.equal(successor.lineage.candidateDigest, repair.candidateDigest);
+  assert.equal(successor.governance.translationInheritanceUsed, false);
+  assert.equal(freeze.status, 'FROZEN');
+  assert.equal(freeze.governance.sameRouteLocaleBehaviorFrozen, true);
+  assert.equal(englishRelease.status, 'published');
+  assert.equal(englishRelease.authorityPath, 'content/knowledge/public/authority/successors/en/KN-PREFACE-001.v1.0.1.json');
+  assert.equal(englishRelease.slug, successor.article.slug);
+  assert.equal(englishRelease.href, successor.article.href);
+}
 
 console.log(`✓ Published Article Format reconciliation passed for ${articleRoutes.length} article routes.`);
 console.log('✓ Future VAP release generator now emits the canonical published-article shell.');
 console.log('✓ Canonical 960px article reading rail is present through knowledge-release.css.');
-console.log('✓ KN-PREFACE-001 English mixed-locale successor is English-only and remains review-gated.');
+console.log(englishRelease
+  ? '✓ KN-PREFACE-001 English successor is published only through explicit Human Review + Approval + Publication and frozen VAP-L10N same-route authority.'
+  : '✓ KN-PREFACE-001 English mixed-locale successor remains review-gated and unpublished.');

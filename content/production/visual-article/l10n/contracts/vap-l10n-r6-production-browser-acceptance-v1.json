@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-VAP-L10N-R6-PRODUCTION-BROWSER-ACCEPTANCE-CONTRACT-v1.0.0",
+  "work": "VAP-L10N-R6",
+  "name": "Production Browser Acceptance",
+  "upstreamBaselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "scope": {
+    "nodeCode": "KN-PREFACE-001",
+    "slug": "ai-formation-from-civilizational-capability",
+    "href": "/articles/ai-formation-from-civilizational-capability",
+    "productionOrigin": "https://phios-github.pages.dev",
+    "locales": [
+      "zh-Hans",
+      "en"
+    ]
+  },
+  "upstreamAuthority": {
+    "r5AcceptancePath": "content/production/visual-article/l10n/acceptance/VAP-L10N-R5-KN-PREFACE-001-EN.json",
+    "r5FreezePath": "content/production/visual-article/l10n/freeze/VAP-L10N-R5-KN-PREFACE-001-EN.json",
+    "r5MustRemainFrozen": true,
+    "r1ToR5MutationAllowed": false
+  },
+  "automatedEvidence": {
+    "routeShellHttp200Required": true,
+    "manifestHttp200Required": true,
+    "zhHansVisualArticleHttp200Required": true,
+    "englishVisualArticleHttp200Required": true,
+    "sharedFigureHttp200Required": true,
+    "rendererContractRequiredForBothLocales": true,
+    "liveArticleModuleExportCompatibilityRequired": true,
+    "sameCanonicalRouteRequired": true,
+    "samePhysicalFigureRequired": true
+  },
+  "interactiveHumanEvidence": {
+    "required": true,
+    "reviewer": "TL",
+    "desktopBothLocalesRequired": true,
+    "mobileBothLocalesRequired": true,
+    "languagePurityRequired": true,
+    "articleAndFigureVisibilityRequired": true,
+    "readingWidthAndLayoutRequired": true,
+    "localeSpecificAltCaptionRequired": true,
+    "sameRouteLocaleSwitchRequired": true,
+    "noConsoleErrorsRequired": true,
+    "noBrokenRequestsRequired": true,
+    "fullCloudflareDeploymentCommitShaRequired": true
+  },
+  "deploymentShaPolicy": {
+    "authority": "CLOUDFLARE_PAGES_FULL_DEPLOYMENT_COMMIT_SHA",
+    "fullShaRequired": true,
+    "testedDeploymentMayPrecedeAcceptanceCommit": true,
+    "testedDeploymentMustBeAncestorOfCurrentHead": true,
+    "shortShaForbidden": true
+  },
+  "governance": {
+    "checkerWritesState": false,
+    "browserReviewCannotBeAutoApproved": true,
+    "httpEvidenceCannotReplaceInteractiveReview": true,
+    "acceptanceCreatesNoKnowledgeAuthority": true,
+    "acceptanceCreatesNoCarAuthority": true,
+    "acceptanceCreatesNoCprAuthority": true,
+    "acceptanceDoesNotModifyR5Freeze": true
+  }
+}

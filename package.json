@@ -884,7 +884,7 @@
     "check:mpa-downstream-integration": "npm run check:mpa-w28",
     "check:mpa-w29": "node scripts/check-mpa-w29-full-acceptance.mjs",
     "check:mpa-full-acceptance": "npm run check:mpa-w29",
-    "check:mpa-w30": "node scripts/check-mpa-w30-mcd2-successor-freeze.mjs",
+    "check:mpa-w30": "node scripts/check-mpa-w30-freeze.mjs",
     "check:mpa-freeze": "npm run check:mpa-w30",
     "check:mpa-complete": "npm run check:mpa",
     "method-production-activation:check": "npm run check:mpa-complete",
@@ -971,11 +971,9 @@
     "check:mcd-0": "node scripts/check-mcd-0-method-client-delivery-authority-boundary.mjs",
     "check:mcd-1": "node scripts/check-mcd-1-production-method-selection.mjs",
     "check:mcd-production-authority": "npm run check:mcd-0 && npm run check:mcd-1",
-    "check:mcd-2": "node scripts/check-mcd-2-canonical-runtime-adapter.mjs",
-    "check:mcd-adapter": "npm run check:mcd-production-authority && npm run check:mcd-2",
-    "check:mcd": "npm run check:mcd-adapter",
-    "check:mcd-3": "node scripts/check-mcd-3-single-birth-input.mjs",
-    "check:mcd-canonical-input": "npm run check:mcd-production-authority && npm run check:mcd-3"
+    "check:aps-4": "node scripts/check-aps-4-candidate-orchestration.mjs",
+    "check:aps-l10n": "node scripts/check-aps-l10n-integration.mjs",
+    "check:aps": "npm run check:aps-1 && npm run check:aps-2 && npm run check:aps-3 && npm run check:aps-4 && npm run check:aps-l10n"
   },
   "type": "module"
 }

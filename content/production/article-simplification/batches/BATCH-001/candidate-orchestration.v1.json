@@ -1,0 +1,1045 @@
+{
+  "apsL10nContractReference": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+  "apsL10nReconciliationReference": "content/production/article-simplification/l10n/aps-l10n-vap-l10n-r1-r5-reconciliation-v1.json",
+  "batchCode": "BATCH-001",
+  "contractReference": "content/production/article-simplification/contracts/aps-4-candidate-orchestration-contract-v1.json",
+  "createdAt": "2026-08-14T03:25:55.946Z",
+  "entries": [
+    {
+      "apsL10nHandoff": {
+        "contract": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+        "downstreamAuthorityMayBegin": true,
+        "sequence": [
+          "ARTICLE_CANDIDATE",
+          "LOCALE_ARTICLE_AUTHORITY",
+          "CAR",
+          "CPR",
+          "VISUAL_ARTICLE",
+          "SAME_ROUTE_LOCALE_RELEASE"
+        ]
+      },
+      "batchIndex": 1,
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P1-006",
+      "partCode": "P1",
+      "primaryCandidate": {
+        "blockers": [],
+        "candidateCode": "CANDIDATE-KN-B1-P1-006-ZH-HANS-V1",
+        "candidateDigest": "35657a32be574b888b82e615213ade9af4345e5c82d19186f119a010be0e47ce",
+        "candidateState": "ready_for_human_review",
+        "fileDigest": "sha256:1fb8b054b90bc7808823e794b67159373139bc99f83765373cc55a38ae4bfa6a",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P1-006/candidate.v1.json",
+        "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+        "sourceBrief": {
+          "briefCode": "BRIEF-KN-B1-P1-006-ZH-HANS-V1",
+          "briefDigest": "00b14ad45cb10812505ad4e01cc8e9c2de6eb6dbc84ad80b2807a6ac9b5853cb",
+          "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+          "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+        },
+        "state": "CANDIDATE_READY",
+        "validCandidateOnlyBoundary": true
+      },
+      "sourceSelectionLocale": "zh-Hans",
+      "targetLocaleLanes": [
+        {
+          "blockers": [],
+          "candidate": {
+            "blockers": [],
+            "candidateCode": "CANDIDATE-KN-B1-P1-006-ZH-HANS-V1",
+            "candidateDigest": "35657a32be574b888b82e615213ade9af4345e5c82d19186f119a010be0e47ce",
+            "candidateState": "ready_for_human_review",
+            "fileDigest": "sha256:1fb8b054b90bc7808823e794b67159373139bc99f83765373cc55a38ae4bfa6a",
+            "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P1-006/candidate.v1.json",
+            "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+            "sourceBrief": {
+              "briefCode": "BRIEF-KN-B1-P1-006-ZH-HANS-V1",
+              "briefDigest": "00b14ad45cb10812505ad4e01cc8e9c2de6eb6dbc84ad80b2807a6ac9b5853cb",
+              "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+              "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+            },
+            "state": "CANDIDATE_READY",
+            "validCandidateOnlyBoundary": true
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": true,
+              "code": "APPROVAL-REVIEW-CANDIDATE-KN-B1-P1-006-ZH-HANS-V1-V1-V1",
+              "digest": "1cbeaadbed532eaa059e4d37666ffa7473072d58292a42bd5d201af4351fcd54",
+              "path": "content/knowledge/production/approvals/zh-Hans/KN-B1-P1-006/approval.v1.json",
+              "present": true
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": true,
+              "code": "REVIEW-CANDIDATE-KN-B1-P1-006-ZH-HANS-V1-V1",
+              "digest": "31de95fdb4c17298601dea0251c6d8540109a490c6812f2af169e53ef109ae63",
+              "path": "content/knowledge/production/reviews/zh-Hans/KN-B1-P1-006/review.v1.json",
+              "present": true
+            }
+          },
+          "locale": "zh-Hans",
+          "localeArticleAuthorityState": "AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION",
+          "localeIdentity": {
+            "authority": "canonical_human_authored",
+            "availability": "available",
+            "displayQuestion": "方向、位置与坐标如何共同形成导航",
+            "sameRouteSlugReady": true,
+            "slug": "direction-position-and-coordinates-form-navigation",
+            "stalenessStatus": "current",
+            "translationMode": "canonical_authoring"
+          },
+          "state": "CANDIDATE_READY_FOR_LOCALE_AUTHORITY"
+        },
+        {
+          "blockers": [
+            "LOCALE_DISCOVERY_REQUIRED",
+            "LOCALE_AUTHORITY_UNASSIGNED",
+            "LOCALE_NOT_CURRENT",
+            "LOCALE_SLUG_NOT_ESTABLISHED",
+            "LOCALE_DISPLAY_IDENTITY_NOT_ESTABLISHED",
+            "CANDIDATE_NOT_PRESENT"
+          ],
+          "candidate": {
+            "blockers": [
+              "CANDIDATE_NOT_PRESENT"
+            ],
+            "candidateCode": null,
+            "candidateDigest": null,
+            "candidateState": null,
+            "fileDigest": null,
+            "path": null,
+            "resolution": "GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+            "state": "CANDIDATE_NOT_PRESENT",
+            "validCandidateOnlyBoundary": false
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            }
+          },
+          "locale": "en",
+          "localeArticleAuthorityState": "NOT_ELIGIBLE_FOR_LOCALE_AUTHORITY",
+          "localeIdentity": {
+            "authority": "unassigned",
+            "availability": "discovery_required",
+            "displayQuestion": null,
+            "sameRouteSlugReady": false,
+            "slug": null,
+            "stalenessStatus": "not_applicable",
+            "translationMode": "none"
+          },
+          "state": "BLOCKED_LOCALE_AUTHORITY_DISCOVERY"
+        }
+      ],
+      "title": "为什么导航需要方向、位置与坐标"
+    },
+    {
+      "apsL10nHandoff": {
+        "contract": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+        "downstreamAuthorityMayBegin": true,
+        "sequence": [
+          "ARTICLE_CANDIDATE",
+          "LOCALE_ARTICLE_AUTHORITY",
+          "CAR",
+          "CPR",
+          "VISUAL_ARTICLE",
+          "SAME_ROUTE_LOCALE_RELEASE"
+        ]
+      },
+      "batchIndex": 2,
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P2-001",
+      "partCode": "P2",
+      "primaryCandidate": {
+        "blockers": [],
+        "candidateCode": "CANDIDATE-KN-B1-P2-001-ZH-HANS-V1",
+        "candidateDigest": "20c6861a59b2049b3d0b49aa5b91829f55ae0aab3b343e08a59ef320a07b2f0e",
+        "candidateState": "ready_for_human_review",
+        "fileDigest": "sha256:fcce77b04e4c1caa8c903d8feaa04b31135ccd8047611d4c97c0aa19276bc1a5",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P2-001/candidate.v1.json",
+        "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+        "sourceBrief": {
+          "briefCode": "BRIEF-KN-B1-P2-001-ZH-HANS-V1",
+          "briefDigest": "f2fb7985180b2a2c705f84b2d5f2b41f5e8d2775b8fc1062ae125f7fe625c29b",
+          "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+          "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+        },
+        "state": "CANDIDATE_READY",
+        "validCandidateOnlyBoundary": true
+      },
+      "sourceSelectionLocale": "zh-Hans",
+      "targetLocaleLanes": [
+        {
+          "blockers": [],
+          "candidate": {
+            "blockers": [],
+            "candidateCode": "CANDIDATE-KN-B1-P2-001-ZH-HANS-V1",
+            "candidateDigest": "20c6861a59b2049b3d0b49aa5b91829f55ae0aab3b343e08a59ef320a07b2f0e",
+            "candidateState": "ready_for_human_review",
+            "fileDigest": "sha256:fcce77b04e4c1caa8c903d8feaa04b31135ccd8047611d4c97c0aa19276bc1a5",
+            "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P2-001/candidate.v1.json",
+            "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+            "sourceBrief": {
+              "briefCode": "BRIEF-KN-B1-P2-001-ZH-HANS-V1",
+              "briefDigest": "f2fb7985180b2a2c705f84b2d5f2b41f5e8d2775b8fc1062ae125f7fe625c29b",
+              "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+              "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+            },
+            "state": "CANDIDATE_READY",
+            "validCandidateOnlyBoundary": true
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": true,
+              "code": "APPROVAL-REVIEW-CANDIDATE-KN-B1-P2-001-ZH-HANS-V1-V1-V1",
+              "digest": "607ed6337ed692d72ba3c1cac7eafb1ef2b8518905367f9d6af46f13ea07d7d8",
+              "path": "content/knowledge/production/approvals/zh-Hans/KN-B1-P2-001/approval.v1.json",
+              "present": true
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": true,
+              "code": "REVIEW-CANDIDATE-KN-B1-P2-001-ZH-HANS-V1-V1",
+              "digest": "d0ba0d5daa1d1dce0653fd7da738931e996b64b5ebf603f77e2199bab4e4cb64",
+              "path": "content/knowledge/production/reviews/zh-Hans/KN-B1-P2-001/review.v1.json",
+              "present": true
+            }
+          },
+          "locale": "zh-Hans",
+          "localeArticleAuthorityState": "AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION",
+          "localeIdentity": {
+            "authority": "canonical_human_authored",
+            "availability": "available",
+            "displayQuestion": "为什么现实必须经过投影才能成为世界",
+            "sameRouteSlugReady": true,
+            "slug": "projection-makes-reality-experiencable-as-world",
+            "stalenessStatus": "current",
+            "translationMode": "canonical_authoring"
+          },
+          "state": "CANDIDATE_READY_FOR_LOCALE_AUTHORITY"
+        },
+        {
+          "blockers": [
+            "LOCALE_DISCOVERY_REQUIRED",
+            "LOCALE_AUTHORITY_UNASSIGNED",
+            "LOCALE_NOT_CURRENT",
+            "LOCALE_SLUG_NOT_ESTABLISHED",
+            "LOCALE_DISPLAY_IDENTITY_NOT_ESTABLISHED",
+            "CANDIDATE_NOT_PRESENT"
+          ],
+          "candidate": {
+            "blockers": [
+              "CANDIDATE_NOT_PRESENT"
+            ],
+            "candidateCode": null,
+            "candidateDigest": null,
+            "candidateState": null,
+            "fileDigest": null,
+            "path": null,
+            "resolution": "GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+            "state": "CANDIDATE_NOT_PRESENT",
+            "validCandidateOnlyBoundary": false
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            }
+          },
+          "locale": "en",
+          "localeArticleAuthorityState": "NOT_ELIGIBLE_FOR_LOCALE_AUTHORITY",
+          "localeIdentity": {
+            "authority": "unassigned",
+            "availability": "discovery_required",
+            "displayQuestion": null,
+            "sameRouteSlugReady": false,
+            "slug": null,
+            "stalenessStatus": "not_applicable",
+            "translationMode": "none"
+          },
+          "state": "BLOCKED_LOCALE_AUTHORITY_DISCOVERY"
+        }
+      ],
+      "title": "为什么现实必须经过投影才能成为世界"
+    },
+    {
+      "apsL10nHandoff": {
+        "contract": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+        "downstreamAuthorityMayBegin": true,
+        "sequence": [
+          "ARTICLE_CANDIDATE",
+          "LOCALE_ARTICLE_AUTHORITY",
+          "CAR",
+          "CPR",
+          "VISUAL_ARTICLE",
+          "SAME_ROUTE_LOCALE_RELEASE"
+        ]
+      },
+      "batchIndex": 3,
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P2-009",
+      "partCode": "P2",
+      "primaryCandidate": {
+        "blockers": [],
+        "candidateCode": "CANDIDATE-KN-B1-P2-009-ZH-HANS-V1",
+        "candidateDigest": "b62a5ddeb779d61bb6ef87fc5bebcab5a3175fe07eeab667070b6f8dfe4ec9c1",
+        "candidateState": "ready_for_human_review",
+        "fileDigest": "sha256:5c93b1300bf4e6e8e5c77051002ed0477d779adaa4231b6302ae93bbff03591d",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P2-009/candidate.v1.json",
+        "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+        "sourceBrief": {
+          "briefCode": "BRIEF-KN-B1-P2-009-ZH-HANS-V1",
+          "briefDigest": "27dc2f9bb0b99836366c263bf9f84f2dddf7542dd977ae2b943b61c81aad0b23",
+          "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+          "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+        },
+        "state": "CANDIDATE_READY",
+        "validCandidateOnlyBoundary": true
+      },
+      "sourceSelectionLocale": "zh-Hans",
+      "targetLocaleLanes": [
+        {
+          "blockers": [],
+          "candidate": {
+            "blockers": [],
+            "candidateCode": "CANDIDATE-KN-B1-P2-009-ZH-HANS-V1",
+            "candidateDigest": "b62a5ddeb779d61bb6ef87fc5bebcab5a3175fe07eeab667070b6f8dfe4ec9c1",
+            "candidateState": "ready_for_human_review",
+            "fileDigest": "sha256:5c93b1300bf4e6e8e5c77051002ed0477d779adaa4231b6302ae93bbff03591d",
+            "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P2-009/candidate.v1.json",
+            "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+            "sourceBrief": {
+              "briefCode": "BRIEF-KN-B1-P2-009-ZH-HANS-V1",
+              "briefDigest": "27dc2f9bb0b99836366c263bf9f84f2dddf7542dd977ae2b943b61c81aad0b23",
+              "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+              "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+            },
+            "state": "CANDIDATE_READY",
+            "validCandidateOnlyBoundary": true
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": true,
+              "code": "APPROVAL-REVIEW-CANDIDATE-KN-B1-P2-009-ZH-HANS-V1-V1-V1",
+              "digest": "73fda4fe467f7b7abace7c596f5d29d22b0a8a5ce23700aeced45531a257a7e2",
+              "path": "content/knowledge/production/approvals/zh-Hans/KN-B1-P2-009/approval.v1.json",
+              "present": true
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": true,
+              "code": "REVIEW-CANDIDATE-KN-B1-P2-009-ZH-HANS-V1-V1",
+              "digest": "08dceb9761347f8d22c3e48cf7e58c0f54b679ae65229440cb2d92cb1816347c",
+              "path": "content/knowledge/production/reviews/zh-Hans/KN-B1-P2-009/review.v1.json",
+              "present": true
+            }
+          },
+          "locale": "zh-Hans",
+          "localeArticleAuthorityState": "AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION",
+          "localeIdentity": {
+            "authority": "canonical_human_authored",
+            "availability": "available",
+            "displayQuestion": "投影偏向、失真、稳定与更新如何发生",
+            "sameRouteSlugReady": true,
+            "slug": "projection-bias-distortion-stability-and-renewal",
+            "stalenessStatus": "current",
+            "translationMode": "canonical_authoring"
+          },
+          "state": "CANDIDATE_READY_FOR_LOCALE_AUTHORITY"
+        },
+        {
+          "blockers": [
+            "LOCALE_DISCOVERY_REQUIRED",
+            "LOCALE_AUTHORITY_UNASSIGNED",
+            "LOCALE_NOT_CURRENT",
+            "LOCALE_SLUG_NOT_ESTABLISHED",
+            "LOCALE_DISPLAY_IDENTITY_NOT_ESTABLISHED",
+            "CANDIDATE_NOT_PRESENT"
+          ],
+          "candidate": {
+            "blockers": [
+              "CANDIDATE_NOT_PRESENT"
+            ],
+            "candidateCode": null,
+            "candidateDigest": null,
+            "candidateState": null,
+            "fileDigest": null,
+            "path": null,
+            "resolution": "GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+            "state": "CANDIDATE_NOT_PRESENT",
+            "validCandidateOnlyBoundary": false
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            }
+          },
+          "locale": "en",
+          "localeArticleAuthorityState": "NOT_ELIGIBLE_FOR_LOCALE_AUTHORITY",
+          "localeIdentity": {
+            "authority": "unassigned",
+            "availability": "discovery_required",
+            "displayQuestion": null,
+            "sameRouteSlugReady": false,
+            "slug": null,
+            "stalenessStatus": "not_applicable",
+            "translationMode": "none"
+          },
+          "state": "BLOCKED_LOCALE_AUTHORITY_DISCOVERY"
+        }
+      ],
+      "title": "为什么投影会产生偏向、失真、稳定与更新"
+    },
+    {
+      "apsL10nHandoff": {
+        "contract": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+        "downstreamAuthorityMayBegin": true,
+        "sequence": [
+          "ARTICLE_CANDIDATE",
+          "LOCALE_ARTICLE_AUTHORITY",
+          "CAR",
+          "CPR",
+          "VISUAL_ARTICLE",
+          "SAME_ROUTE_LOCALE_RELEASE"
+        ]
+      },
+      "batchIndex": 4,
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P3-005",
+      "partCode": "P3",
+      "primaryCandidate": {
+        "blockers": [],
+        "candidateCode": "CANDIDATE-KN-B1-P3-005-ZH-HANS-V1",
+        "candidateDigest": "d114c1b5c95ec79431a7549843d20aa139cef6ac54d061e1b1590668f7cc80ce",
+        "candidateState": "ready_for_human_review",
+        "fileDigest": "sha256:7c106c622ec42820d99ff23c48dae7178698b8015bcb1defc2490eafd622b4ec",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P3-005/candidate.v1.json",
+        "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+        "sourceBrief": {
+          "briefCode": "BRIEF-KN-B1-P3-005-ZH-HANS-V1",
+          "briefDigest": "7e8119ff8ce95dfa5822a3f5e4d00b12dbde3e99dcddd4d1a1554eedb5db2fdc",
+          "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+          "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+        },
+        "state": "CANDIDATE_READY",
+        "validCandidateOnlyBoundary": true
+      },
+      "sourceSelectionLocale": "zh-Hans",
+      "targetLocaleLanes": [
+        {
+          "blockers": [],
+          "candidate": {
+            "blockers": [],
+            "candidateCode": "CANDIDATE-KN-B1-P3-005-ZH-HANS-V1",
+            "candidateDigest": "d114c1b5c95ec79431a7549843d20aa139cef6ac54d061e1b1590668f7cc80ce",
+            "candidateState": "ready_for_human_review",
+            "fileDigest": "sha256:7c106c622ec42820d99ff23c48dae7178698b8015bcb1defc2490eafd622b4ec",
+            "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P3-005/candidate.v1.json",
+            "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+            "sourceBrief": {
+              "briefCode": "BRIEF-KN-B1-P3-005-ZH-HANS-V1",
+              "briefDigest": "7e8119ff8ce95dfa5822a3f5e4d00b12dbde3e99dcddd4d1a1554eedb5db2fdc",
+              "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+              "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+            },
+            "state": "CANDIDATE_READY",
+            "validCandidateOnlyBoundary": true
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": true,
+              "code": "APPROVAL-REVIEW-CANDIDATE-KN-B1-P3-005-ZH-HANS-V1-V1-V1",
+              "digest": "0d22ed3af46624d361fcc0f922b922c5608a239f025a84b51c2d18e81dfe1caf",
+              "path": "content/knowledge/production/approvals/zh-Hans/KN-B1-P3-005/approval.v1.json",
+              "present": true
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": true,
+              "code": "REVIEW-CANDIDATE-KN-B1-P3-005-ZH-HANS-V1-V1",
+              "digest": "de30e79c44094fafc831577e55b25710518b33504f7a9f5809018bb3e1b89b46",
+              "path": "content/knowledge/production/reviews/zh-Hans/KN-B1-P3-005/review.v1.json",
+              "present": true
+            }
+          },
+          "locale": "zh-Hans",
+          "localeArticleAuthorityState": "AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION",
+          "localeIdentity": {
+            "authority": "canonical_human_authored",
+            "availability": "available",
+            "displayQuestion": "无限现实如何压缩为有限问题",
+            "sameRouteSlugReady": true,
+            "slug": "infinite-reality-compresses-into-finite-problems",
+            "stalenessStatus": "current",
+            "translationMode": "canonical_authoring"
+          },
+          "state": "CANDIDATE_READY_FOR_LOCALE_AUTHORITY"
+        },
+        {
+          "blockers": [
+            "LOCALE_DISCOVERY_REQUIRED",
+            "LOCALE_AUTHORITY_UNASSIGNED",
+            "LOCALE_NOT_CURRENT",
+            "LOCALE_SLUG_NOT_ESTABLISHED",
+            "LOCALE_DISPLAY_IDENTITY_NOT_ESTABLISHED",
+            "CANDIDATE_NOT_PRESENT"
+          ],
+          "candidate": {
+            "blockers": [
+              "CANDIDATE_NOT_PRESENT"
+            ],
+            "candidateCode": null,
+            "candidateDigest": null,
+            "candidateState": null,
+            "fileDigest": null,
+            "path": null,
+            "resolution": "GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+            "state": "CANDIDATE_NOT_PRESENT",
+            "validCandidateOnlyBoundary": false
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            }
+          },
+          "locale": "en",
+          "localeArticleAuthorityState": "NOT_ELIGIBLE_FOR_LOCALE_AUTHORITY",
+          "localeIdentity": {
+            "authority": "unassigned",
+            "availability": "discovery_required",
+            "displayQuestion": null,
+            "sameRouteSlugReady": false,
+            "slug": null,
+            "stalenessStatus": "not_applicable",
+            "translationMode": "none"
+          },
+          "state": "BLOCKED_LOCALE_AUTHORITY_DISCOVERY"
+        }
+      ],
+      "title": "无限现实如何压缩为有限问题"
+    },
+    {
+      "apsL10nHandoff": {
+        "contract": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+        "downstreamAuthorityMayBegin": true,
+        "sequence": [
+          "ARTICLE_CANDIDATE",
+          "LOCALE_ARTICLE_AUTHORITY",
+          "CAR",
+          "CPR",
+          "VISUAL_ARTICLE",
+          "SAME_ROUTE_LOCALE_RELEASE"
+        ]
+      },
+      "batchIndex": 5,
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P3-015",
+      "partCode": "P3",
+      "primaryCandidate": {
+        "blockers": [],
+        "candidateCode": "CANDIDATE-KN-B1-P3-015-ZH-HANS-V1",
+        "candidateDigest": "f51a45851064f290d3de50564e6554587c03b01380fbeeb91bb80c97a0ff1f32",
+        "candidateState": "ready_for_human_review",
+        "fileDigest": "sha256:eb6be213ba4be100190817f0112ac112f65f9122489932deb27770a122cdf713",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P3-015/candidate.v1.json",
+        "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+        "sourceBrief": {
+          "briefCode": "BRIEF-KN-B1-P3-015-ZH-HANS-V1",
+          "briefDigest": "42566e4f06b2b090cbfe492a4bc799c2487dc384da625dacedace83ee0bc118b",
+          "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+          "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+        },
+        "state": "CANDIDATE_READY",
+        "validCandidateOnlyBoundary": true
+      },
+      "sourceSelectionLocale": "zh-Hans",
+      "targetLocaleLanes": [
+        {
+          "blockers": [],
+          "candidate": {
+            "blockers": [],
+            "candidateCode": "CANDIDATE-KN-B1-P3-015-ZH-HANS-V1",
+            "candidateDigest": "f51a45851064f290d3de50564e6554587c03b01380fbeeb91bb80c97a0ff1f32",
+            "candidateState": "ready_for_human_review",
+            "fileDigest": "sha256:eb6be213ba4be100190817f0112ac112f65f9122489932deb27770a122cdf713",
+            "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P3-015/candidate.v1.json",
+            "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+            "sourceBrief": {
+              "briefCode": "BRIEF-KN-B1-P3-015-ZH-HANS-V1",
+              "briefDigest": "42566e4f06b2b090cbfe492a4bc799c2487dc384da625dacedace83ee0bc118b",
+              "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+              "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+            },
+            "state": "CANDIDATE_READY",
+            "validCandidateOnlyBoundary": true
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": true,
+              "code": "APPROVAL-REVIEW-CANDIDATE-KN-B1-P3-015-ZH-HANS-V1-V1-V1",
+              "digest": "f58193ab97a0a978b6a6658c3af02e4d3e50c36eb97117230f687e024f6c42c5",
+              "path": "content/knowledge/production/approvals/zh-Hans/KN-B1-P3-015/approval.v1.json",
+              "present": true
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": true,
+              "code": "REVIEW-CANDIDATE-KN-B1-P3-015-ZH-HANS-V1-V1",
+              "digest": "6c9b24202f36d6ce7d2a7958bf688c20eb5f068b0cd6f1f86f71f4f48ce8d7b2",
+              "path": "content/knowledge/production/reviews/zh-Hans/KN-B1-P3-015/review.v1.json",
+              "present": true
+            }
+          },
+          "locale": "zh-Hans",
+          "localeArticleAuthorityState": "AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION",
+          "localeIdentity": {
+            "authority": "canonical_human_authored",
+            "availability": "available",
+            "displayQuestion": "运行网络如何形成状态、反馈、重组与连续性",
+            "sameRouteSlugReady": true,
+            "slug": "runtime-networks-form-state-feedback-reorganization-and-continuity",
+            "stalenessStatus": "current",
+            "translationMode": "canonical_authoring"
+          },
+          "state": "CANDIDATE_READY_FOR_LOCALE_AUTHORITY"
+        },
+        {
+          "blockers": [
+            "LOCALE_DISCOVERY_REQUIRED",
+            "LOCALE_AUTHORITY_UNASSIGNED",
+            "LOCALE_NOT_CURRENT",
+            "LOCALE_SLUG_NOT_ESTABLISHED",
+            "LOCALE_DISPLAY_IDENTITY_NOT_ESTABLISHED",
+            "CANDIDATE_NOT_PRESENT"
+          ],
+          "candidate": {
+            "blockers": [
+              "CANDIDATE_NOT_PRESENT"
+            ],
+            "candidateCode": null,
+            "candidateDigest": null,
+            "candidateState": null,
+            "fileDigest": null,
+            "path": null,
+            "resolution": "GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+            "state": "CANDIDATE_NOT_PRESENT",
+            "validCandidateOnlyBoundary": false
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            }
+          },
+          "locale": "en",
+          "localeArticleAuthorityState": "NOT_ELIGIBLE_FOR_LOCALE_AUTHORITY",
+          "localeIdentity": {
+            "authority": "unassigned",
+            "availability": "discovery_required",
+            "displayQuestion": null,
+            "sameRouteSlugReady": false,
+            "slug": null,
+            "stalenessStatus": "not_applicable",
+            "translationMode": "none"
+          },
+          "state": "BLOCKED_LOCALE_AUTHORITY_DISCOVERY"
+        }
+      ],
+      "title": "运行网络如何形成状态、反馈、重组与连续性"
+    },
+    {
+      "apsL10nHandoff": {
+        "contract": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+        "downstreamAuthorityMayBegin": true,
+        "sequence": [
+          "ARTICLE_CANDIDATE",
+          "LOCALE_ARTICLE_AUTHORITY",
+          "CAR",
+          "CPR",
+          "VISUAL_ARTICLE",
+          "SAME_ROUTE_LOCALE_RELEASE"
+        ]
+      },
+      "batchIndex": 6,
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P4-006",
+      "partCode": "P4",
+      "primaryCandidate": {
+        "blockers": [],
+        "candidateCode": "CANDIDATE-KN-B1-P4-006-ZH-HANS-V1",
+        "candidateDigest": "7f25fa5596051b7bc0ba869395d25b4a2b006e74ef462b17efd62610e83ad010",
+        "candidateState": "ready_for_human_review",
+        "fileDigest": "sha256:f1cb9799417be999623c469d9917a4ad64f057daa4344a8913e761f75c434542",
+        "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P4-006/candidate.v1.json",
+        "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+        "sourceBrief": {
+          "briefCode": "BRIEF-KN-B1-P4-006-ZH-HANS-V1",
+          "briefDigest": "e8ae53ffb8cc8dfaef305a938c654d26dadd99621ded8e4d21cd14fcfd0805b0",
+          "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+          "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+        },
+        "state": "CANDIDATE_READY",
+        "validCandidateOnlyBoundary": true
+      },
+      "sourceSelectionLocale": "zh-Hans",
+      "targetLocaleLanes": [
+        {
+          "blockers": [],
+          "candidate": {
+            "blockers": [],
+            "candidateCode": "CANDIDATE-KN-B1-P4-006-ZH-HANS-V1",
+            "candidateDigest": "7f25fa5596051b7bc0ba869395d25b4a2b006e74ef462b17efd62610e83ad010",
+            "candidateState": "ready_for_human_review",
+            "fileDigest": "sha256:f1cb9799417be999623c469d9917a4ad64f057daa4344a8913e761f75c434542",
+            "path": "content/knowledge/production/candidates/zh-Hans/KN-B1-P4-006/candidate.v1.json",
+            "resolution": "REUSED_EXISTING_GOVERNED_PJA_CANDIDATE",
+            "sourceBrief": {
+              "briefCode": "BRIEF-KN-B1-P4-006-ZH-HANS-V1",
+              "briefDigest": "e8ae53ffb8cc8dfaef305a938c654d26dadd99621ded8e4d21cd14fcfd0805b0",
+              "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
+              "repositoryCommit": "78cd282f8677e8da45bc168a28e6e8e563c4a681"
+            },
+            "state": "CANDIDATE_READY",
+            "validCandidateOnlyBoundary": true
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": true,
+              "code": "APPROVAL-REVIEW-CANDIDATE-KN-B1-P4-006-ZH-HANS-V1-V1-V1",
+              "digest": "2754c2c99dd333363f3ae31f3c1e926c6fd4c9672af8c7ad2278005dff261758",
+              "path": "content/knowledge/production/approvals/zh-Hans/KN-B1-P4-006/approval.v1.json",
+              "present": true
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": true,
+              "code": "REVIEW-CANDIDATE-KN-B1-P4-006-ZH-HANS-V1-V1",
+              "digest": "8cebd7e6f82f2aebb6d58cff0ccad8124895c90f0572f95bd875daf483de09d9",
+              "path": "content/knowledge/production/reviews/zh-Hans/KN-B1-P4-006/review.v1.json",
+              "present": true
+            }
+          },
+          "locale": "zh-Hans",
+          "localeArticleAuthorityState": "AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION",
+          "localeIdentity": {
+            "authority": "canonical_human_authored",
+            "availability": "available",
+            "displayQuestion": "运行成本、恢复与内部连接如何维持身体",
+            "sameRouteSlugReady": true,
+            "slug": "runtime-cost-recovery-and-internal-connection-sustain-body",
+            "stalenessStatus": "current",
+            "translationMode": "canonical_authoring"
+          },
+          "state": "CANDIDATE_READY_FOR_LOCALE_AUTHORITY"
+        },
+        {
+          "blockers": [
+            "LOCALE_DISCOVERY_REQUIRED",
+            "LOCALE_AUTHORITY_UNASSIGNED",
+            "LOCALE_NOT_CURRENT",
+            "LOCALE_SLUG_NOT_ESTABLISHED",
+            "LOCALE_DISPLAY_IDENTITY_NOT_ESTABLISHED",
+            "CANDIDATE_NOT_PRESENT"
+          ],
+          "candidate": {
+            "blockers": [
+              "CANDIDATE_NOT_PRESENT"
+            ],
+            "candidateCode": null,
+            "candidateDigest": null,
+            "candidateState": null,
+            "fileDigest": null,
+            "path": null,
+            "resolution": "GOVERNED_CANDIDATE_GENERATION_REQUIRED",
+            "state": "CANDIDATE_NOT_PRESENT",
+            "validCandidateOnlyBoundary": false
+          },
+          "downstreamProjection": {
+            "car": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "cpr": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "sameRouteLocaleRelease": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY",
+            "visualArticle": "BLOCKED_UNTIL_LOCALE_ARTICLE_AUTHORITY"
+          },
+          "existingHumanEvidence": {
+            "approval": {
+              "approved": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            },
+            "publication": {
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false,
+              "published": false
+            },
+            "review": {
+              "accepted": false,
+              "code": null,
+              "digest": null,
+              "path": null,
+              "present": false
+            }
+          },
+          "locale": "en",
+          "localeArticleAuthorityState": "NOT_ELIGIBLE_FOR_LOCALE_AUTHORITY",
+          "localeIdentity": {
+            "authority": "unassigned",
+            "availability": "discovery_required",
+            "displayQuestion": null,
+            "sameRouteSlugReady": false,
+            "slug": null,
+            "stalenessStatus": "not_applicable",
+            "translationMode": "none"
+          },
+          "state": "BLOCKED_LOCALE_AUTHORITY_DISCOVERY"
+        }
+      ],
+      "title": "运行成本、恢复与内部连接如何维持身体稳定"
+    }
+  ],
+  "governance": {
+    "candidateEqualsAuthority": false,
+    "carAuthorityOwnedByCar": true,
+    "cprAuthorityOwnedByCpr": true,
+    "existingCandidateMutationAllowed": false,
+    "existingValidCandidateMustBeReused": true,
+    "humanApprovalMayBeInferred": false,
+    "humanPublicationMayBeInferred": false,
+    "humanReviewMayBeInferred": false,
+    "implicitPaidAiInvocationAllowed": false,
+    "localeAuthorityInheritanceAllowed": false,
+    "missingCandidateMayBeFabricatedFromMetadata": false,
+    "missingCandidateRequiresGovernedGenerationAdapter": true,
+    "sameRouteRuntimeChoosesLocale": true,
+    "visualArticleReleaseOwnedByVap": true,
+    "zhHansToEnglishTranslationInheritanceAllowed": false
+  },
+  "implementationBaselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "nextWork": "APS-5_REVIEW_BATCH_ASSEMBLY",
+  "orchestrationDigest": "sha256:873f5f1b917437029bd5d0b72ca84c060d1df820e2990bdfb9381a6efe878a68",
+  "schemaVersion": "PHI-OS-APS-4-CANDIDATE-ORCHESTRATION-v1.0.0",
+  "sourceBatch": {
+    "batchCode": "BATCH-001",
+    "batchDigest": "sha256:6945b912d3f27150e6defe45d352d69a56078554dfc675b1e668e62cb2f55449",
+    "request": {
+      "bookCode": "BOOK-1",
+      "locale": "zh-Hans",
+      "requestedCount": 30,
+      "requestedCountMeaning": "maximum_not_quota"
+    },
+    "work": "APS-3"
+  },
+  "status": "PRIMARY_CANDIDATES_RESOLVED_FOR_APS_5_REVIEW_BATCH",
+  "summary": {
+    "localeCandidateReadyCount": 6,
+    "localeDiscoveryBlockedCount": 6,
+    "localeGenerationRequiredCount": 0,
+    "localeLaneCount": 12,
+    "localePublicationAuthorityPresentCount": 0,
+    "primaryCandidateConflictCount": 0,
+    "primaryCandidateGenerationRequiredCount": 0,
+    "primaryCandidateReadyCount": 6,
+    "reusableHumanApprovalCount": 6,
+    "reusableHumanReviewCount": 6,
+    "reusedExistingPrimaryCandidateCount": 6,
+    "selectedNodeCount": 6
+  },
+  "targetLocales": [
+    "zh-Hans",
+    "en"
+  ],
+  "work": "APS-4"
+}
