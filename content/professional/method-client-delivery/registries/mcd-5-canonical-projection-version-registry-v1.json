@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-MCD-5-CANONICAL-PROJECTION-VERSION-REGISTRY-v1.0.0",
+  "work": "MCD-5F",
+  "status": "ACTIVE_VERSION_COMPLETE_PROJECTION_REGISTRY",
+  "methodRegistry": {
+    "code": "METHOD_REGISTRY_V2",
+    "version": "2.0.0",
+    "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0"
+  },
+  "runtimeVersion": "1.0.0",
+  "adapterVersion": "1.0.0",
+  "inputContractVersion": "1.0.0",
+  "projectionContractVersion": "1.0.0",
+  "adapters": [
+    {
+      "publicMethodCode": "ASTROLOGY_PROJECTION",
+      "adapterVersion": "1.0.0",
+      "bindingRegistryVersion": "1.0.0"
+    },
+    {
+      "publicMethodCode": "BAZI_PROJECTION",
+      "adapterVersion": "1.0.0",
+      "bindingRegistryVersion": "1.0.0"
+    },
+    {
+      "publicMethodCode": "NUMEROLOGY_PROJECTION",
+      "adapterVersion": "1.0.0",
+      "bindingRegistryVersion": "1.0.0"
+    },
+    {
+      "publicMethodCode": "PERSONAL_RUNTIME_PROJECTION",
+      "adapterVersion": "1.0.0",
+      "bindingRegistryVersion": "1.0.0",
+      "status": "VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE"
+    }
+  ],
+  "rules": {
+    "allFiveVersionsRequiredForProduction": true,
+    "missingVersionFailsClosed": true,
+    "versionMetadataDoesNotGrantProductionAuthority": true,
+    "adapterVersionBindsCanonicalMcdInterfaceNotCoreAlgorithmTruth": true
+  }
+}
