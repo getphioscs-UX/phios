@@ -128,8 +128,13 @@ assert.equal(snapshot.publicationRecordCount, 0);
 assert.equal(snapshot.currentBlockingGate, 'HUMAN_PUBLICATION_DECISION');
 
 const pkg = readJson('package.json');
-assert.equal(Boolean(pkg.scripts?.['article:batch']), false, 'APS-1 must not prematurely expose article:batch');
-assert.equal(Boolean(pkg.scripts?.['article:publish']), false, 'APS-1 must not prematurely expose article:publish');
+const aps3SuccessorPresent = exists('content/production/article-simplification/contracts/aps-3-batch-orchestrator-contract-v1.json');
+if (aps3SuccessorPresent) {
+  assert.equal(pkg.scripts?.['article:batch'], 'node scripts/article-batch.mjs', 'APS-3 successor may expose article:batch without changing the APS-1 baseline audit');
+} else {
+  assert.equal(Boolean(pkg.scripts?.['article:batch']), false, 'APS-1 baseline must not prematurely expose article:batch');
+}
+assert.equal(Boolean(pkg.scripts?.['article:publish']), false, 'APS-1/APS-3 must not prematurely expose article:publish');
 
 console.log('✓ APS-1 Current Gate Audit passed.');
 console.log('✓ Baseline 6932c88 preserves the existing authority model and standardized published-article presentation.');

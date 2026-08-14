@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-APS-3-BATCH-ORCHESTRATOR-CONTRACT-v1.0.0",
+  "work": "APS-3",
+  "status": "ACTIVE",
+  "title": "Article Batch Orchestrator",
+  "baselineCommit": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+  "purpose": "Expose one deterministic article:batch entrypoint that consumes APS-2 ARTICLE_READY results and forms a governed, non-authoritative batch plan without re-implementing upstream gate logic.",
+  "command": "npm run article:batch -- --book BOOK-1 --count 30",
+  "defaults": {
+    "locale": "zh-Hans",
+    "countMeaning": "maximum_not_quota",
+    "downstreamPjaWaveMaximum": 24
+  },
+  "inputContract": {
+    "work": "APS-2",
+    "requiredReadyState": "ARTICLE_READY",
+    "mayInspectUnderlyingC2C3KppVapGateInternals": false,
+    "failClosed": true
+  },
+  "output": {
+    "artifact": "content/production/article-simplification/batches/BATCH-NNN/batch-plan.v1.json",
+    "authority": "NON_AUTHORITATIVE_ORCHESTRATION_PLAN",
+    "candidateCreated": false,
+    "humanDecisionCreated": false,
+    "publicationCreated": false
+  },
+  "governance": {
+    "selectionMayCreateKnowledgeAuthority": false,
+    "selectionMayCreateHumanAuthority": false,
+    "selectionMayFreezeC2OrC3": false,
+    "selectionMayCreateCandidate": false,
+    "selectionMayInvokeProvider": false,
+    "selectionMayPublish": false,
+    "existingUpstreamAuthorityMustBeReused": true,
+    "batchCountIsMaximumNotQuota": true,
+    "batchSelectionIsDeterministic": true
+  },
+  "successorBoundary": {
+    "APS-4": "Candidate orchestration may reuse governed existing candidates or create candidate-only output for selected nodes.",
+    "APS-5": "Review batch assembly may bind candidate and existing Human Review/Approval evidence.",
+    "APS-6": "Explicit per-node Human decisions remain required before publication.",
+    "articlePublishCommandAddedByAPS3": false
+  },
+  "nextWork": "APS-4_CANDIDATE_ORCHESTRATION"
+}
