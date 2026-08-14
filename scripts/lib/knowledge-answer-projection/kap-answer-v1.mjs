@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+export const BASELINE='09d6ee76315cf7a8d6ab7e373d86fff816866845';
+export const ROOT='content/knowledge/answer-projection';
+export const read=p=>fs.readFileSync(p,'utf8');
+export const readJson=p=>JSON.parse(read(p));
+export const exists=p=>fs.existsSync(p);
+export const sha256=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+export const assertFile=p=>assert.ok(exists(p),`MISSING_FILE:${p}`);
+export const assertEvidence=e=>{assertFile(e.path);assert.equal(sha256(e.path),e.sha256,`DIGEST_DRIFT:${e.path}`);};

@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8'); const j=p=>JSON.parse(read(p));
+const r=j('content/web-production/reconciliation/wpr-w1f-public-surface-data-export-repair-v1.json');
+assert.equal(r.status,'SUCCESSOR_EXPORT_REPAIR_NO_AUTHORITY_CHANGE');
+const source=read('assets/js/web-production/public-surface-data.js');
+for(const name of r.problem.missingExports) assert.match(source,new RegExp(`export\\s+(?:async\\s+)?function\\s+${name}\\b`),`MISSING_EXPORT:${name}`);
+assert.ok(source.includes("'book-3': '/books/reality-continuity/'")); assert.ok(source.includes("'book-5': '/books/reality-navigation/'"));
+assert.ok(source.includes("'/books/reality-maintenance/'")); assert.ok(source.includes('nodeCodePrefixUsedForBookInference: false'));
+assert.equal(/nodeCode.*split|nodeCode.*match.*B|KN-B.*infer/i.test(source),false);
+await import('../assets/js/knowledge/published-content.js');
+assert.equal(r.repair.changesCanonicalBookOwnership,false); assert.equal(r.repair.changesKnowledgeAuthority,false);
+console.log('✓ WPR-W1F public-surface-data export reconciliation passed.');

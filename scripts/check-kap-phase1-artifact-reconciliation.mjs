@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {ROOT,readJson,assertEvidence} from './lib/knowledge-answer-projection/kap-answer-v1.mjs';
+const r=readJson(`${ROOT}/reconciliation/kap-phase1-authority-artifact-restoration-v1.json`);
+assert.equal(r.status,'BYTE_EXACT_RESTORATION_OF_PREVIOUSLY_ACCEPTED_AUTHORITY_ARTIFACTS');
+assert.equal(r.semanticsChanged,false); assert.equal(r.authorityChanged,false); assert.equal(r.runtimeActivated,false);
+for(const item of r.restoration) assertEvidence(item);
+assertEvidence(r.requiredPhase2BoundDigest);
+const p2=readJson(`${ROOT}/freeze/kap-w4-w10-knowledge-grounding-freeze-v1.json`);
+const bound=p2.predecessorEvidence.find(x=>x.name==='kapPhase1Freeze');
+assert.deepEqual(r.requiredPhase2BoundDigest,{path:bound.path,sha256:bound.sha256});
+console.log('✓ KAP Phase 1 authority artifact reconciliation passed.');

@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {ROOT,BASELINE,readJson} from './lib/knowledge-answer-projection/kap-answer-v1.mjs';
+import {evaluateKapAiEligibility} from '../functions/_lib/knowledge-answer-composition.js';
+const c=readJson(`${ROOT}/contracts/kap-w13-ai-eligibility-contract-v1.json`); const p=readJson(`${ROOT}/registries/kap-w13-ai-eligibility-policy-v1.json`);
+const bundle=readJson(`${ROOT}/fixtures/knowledge-grounding-bundle.valid.json`); const coverage=readJson(`${ROOT}/fixtures/kap-coverage-decision.valid.json`);
+assert.equal(c.baselineCommit,BASELINE); assert.deepEqual(c.states,['AI_NOT_REQUIRED','AI_OPTIONAL','AI_RECOMMENDED']); assert.equal(c.rules.aiRequiredStateExists,false); assert.equal(p.providerInvocation,false);
+const decision=evaluateKapAiEligibility({bundle,coverageDecision:coverage,depth:'STANDARD'});
+assert.ok(c.states.includes(decision.status)); assert.equal(decision.aiRequired,false); assert.equal(decision.providerInvocationAuthorizedByPhase3,false); assert.equal(decision.deterministicFallbackRequired,true);
+const insufficient={...coverage,status:'INSUFFICIENT_COVERAGE',answerCompositionEligible:false}; const blocked=evaluateKapAiEligibility({bundle:{...bundle,sources:[]},coverageDecision:insufficient,depth:'DEEP'});
+assert.equal(blocked.status,'AI_NOT_REQUIRED'); assert.ok(blocked.reasonCodes.includes('NO_COMPOSITION_BENEFIT_WITHOUT_GROUNDED_COVERAGE'));
+console.log('✓ KAP-W13 AI Assistance Eligibility passed.');

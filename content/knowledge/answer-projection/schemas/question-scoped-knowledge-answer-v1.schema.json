@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://getphios.com/schemas/question-scoped-knowledge-answer-v1.schema.json",
+  "title": "PHI OS Question-Scoped Knowledge Answer",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "answerId",
+    "question",
+    "normalizedQuestion",
+    "locale",
+    "answerMode",
+    "authorityClass",
+    "knowledgeRefs",
+    "content",
+    "generation",
+    "lifecycle",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-QUESTION-SCOPED-KNOWLEDGE-ANSWER-v1.0.0"
+    },
+    "answerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "normalizedQuestion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 2
+    },
+    "answerMode": {
+      "const": "KNOWLEDGE_ANSWER"
+    },
+    "authorityClass": {
+      "const": "QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION"
+    },
+    "coverageStatus": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "groundingBundleId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "knowledgeRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primaryNodeCodes",
+        "supportingNodeCodes",
+        "relatedNodeCodes",
+        "manuscriptRefs",
+        "publishedRefs"
+      ],
+      "properties": {
+        "primaryNodeCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportingNodeCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relatedNodeCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manuscriptRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "publishedRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "directAnswer",
+        "mechanism",
+        "whyItMatters",
+        "whatToObserve",
+        "boundaries",
+        "unknowns",
+        "relatedKnowledge"
+      ],
+      "properties": {
+        "directAnswer": {
+          "type": "string"
+        },
+        "mechanism": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whyItMatters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whatToObserve": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boundaries": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relatedKnowledge": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generationMode",
+        "generativeModelUsed",
+        "modelRef"
+      ],
+      "properties": {
+        "generationMode": {
+          "enum": [
+            "DETERMINISTIC",
+            "AI_ASSISTED"
+          ]
+        },
+        "generativeModelUsed": {
+          "type": "boolean"
+        },
+        "modelRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "createdAt",
+        "expiresAt",
+        "persistentCaseCreated"
+      ],
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "expiresAt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "persistentCaseCreated": {
+          "const": false
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publicationStatus",
+        "canonicalAuthorityStatus",
+        "realityReadingStatus"
+      ],
+      "properties": {
+        "publicationStatus": {
+          "const": "NOT_PUBLICATION"
+        },
+        "canonicalAuthorityStatus": {
+          "const": "NONE"
+        },
+        "realityReadingStatus": {
+          "const": "NOT_REALITY_READING"
+        }
+      }
+    }
+  }
+}

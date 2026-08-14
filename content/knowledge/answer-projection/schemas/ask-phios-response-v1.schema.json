@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://getphios.com/schemas/ask-phios-response-v1.schema.json",
+  "title": "PHI OS Ask PHI OS Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "capability",
+    "answerDepth",
+    "answer",
+    "sources",
+    "boundary",
+    "coverage",
+    "ai",
+    "production",
+    "governance",
+    "grounding"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0"
+    },
+    "capability": {
+      "const": "ASK_PHIOS"
+    },
+    "answerDepth": {
+      "enum": [
+        "QUICK",
+        "STANDARD",
+        "DEEP"
+      ]
+    },
+    "answer": {
+      "type": "object"
+    },
+    "sources": {
+      "type": "array"
+    },
+    "boundary": {
+      "type": "object"
+    },
+    "coverage": {
+      "type": "object"
+    },
+    "ai": {
+      "type": "object"
+    },
+    "production": {
+      "type": "object"
+    },
+    "governance": {
+      "type": "object"
+    },
+    "grounding": {
+      "type": "object"
+    }
+  }
+}

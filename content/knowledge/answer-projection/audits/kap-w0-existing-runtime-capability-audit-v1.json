@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W0-EXISTING-RUNTIME-CAPABILITY-AUDIT-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W0",
+  "baselineCommit": "00b5d580c9dbc4fc460694095b7519afad4b0b61",
+  "status": "AUDITED_NO_RUNTIME_MUTATION",
+  "purpose": "Audit existing Knowledge, Answer, Publication and Reality Reading capabilities before creating the KAP authority foundation. Reuse predecessor authorities and do not activate later KAP, MCD, Guided Reading or Reality Journey work.",
+  "evidence": {
+    "ksarProductionFreeze": {
+      "path": "content/knowledge/source-access/freeze/ksar-r8-production-freeze-v1.json",
+      "sha256": "c5d16ad6d9aa6c95bc4143962c9ea1fc3cd26b70bc3114ddb7876b461dbc55cf"
+    },
+    "knowledgeAccessBoundary": {
+      "path": "content/knowledge/source-access/contracts/knowledge-source-access-boundary-v1.json",
+      "sha256": "25deb64016002e62f0f9a2ab42b1122fbc9abe09e248a55c288380917544f9d9"
+    },
+    "knowledgeAccessApi": {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "0d1192a081849761a6a88e8623f14e95d70c9f94f007f2b99deeb9f723202fd5"
+    },
+    "pjaPublicationFreeze": {
+      "path": "content/knowledge/production/freeze/pja-publication-w1-freeze-v1.json",
+      "sha256": "2fe75eae06530a19cb02597f842229af8a3408a6a17bc624a4c79ad65ea7fe73"
+    },
+    "pjaPublishedKnowledgeAuthorityFreeze": {
+      "path": "content/knowledge/production/freeze/pja-published-knowledge-authority-w1-freeze-v1.json",
+      "sha256": "277c9d4d7033979b1624068186638db06fdb92beddd489b5d6e4cce33f436313"
+    },
+    "carAuthorityBoundary": {
+      "path": "content/professional/canonical-asset-runtime/audits/car-authority-boundary-v1.json",
+      "sha256": "d42dca01a97f8fe272ba90eb34b9916dbdaa96cca656c273a47d9e8f7f9ef0d2"
+    },
+    "rmoAuthorityAudit": {
+      "path": "content/runtime/reality-model-runtime/audits/rmo-reality-model-authority-audit-v1.json",
+      "sha256": "f8b87ec8026ef3cb9e014efadfbdbb5249b61a5a9841f6fe0011652f251d0cfb"
+    },
+    "rdgAuthorityBoundary": {
+      "path": "content/governance/reality-data-governance/audits/rdg-data-authority-boundary-v1.json",
+      "sha256": "91bc679d3b0f9146771c28b5fcc120fcbf6e0b90aacd5e3e51ead5b3898f13fa"
+    },
+    "rreReadingFreeze": {
+      "path": "content/runtime/reality-readout-engine/freeze/rre-w5-w10-reading-runtime-freeze-v1.json",
+      "sha256": "ce435f7b8e7464314af264cf7e1d796cabaadbadd53ab6531019f463509bd302"
+    }
+  },
+  "capabilities": {
+    "knowledge": {
+      "authorityState": "PREEXISTING_PRESERVED",
+      "questionScopedGroundingAvailable": true,
+      "reviewedManuscriptGroundingAvailable": true,
+      "publishedKnowledgeGroundingAvailable": true,
+      "rawFullBookDeliveryBlocked": true,
+      "canonicalKnowledgeAuthorityChangedByKap": false,
+      "sourceAuthority": [
+        "KSAR",
+        "CANONICAL_KNOWLEDGE"
+      ]
+    },
+    "answer": {
+      "existingProjectionType": "DETERMINISTIC_EXTRACTIVE_GROUNDED_ANSWER",
+      "existingGenerativeModelUsed": false,
+      "questionScopedProjectionAvailable": true,
+      "formalKapAnswerObjectPreviouslyFrozen": false,
+      "answerMayCreateCanonicalAuthority": false,
+      "answerMayCreatePublicationAuthority": false
+    },
+    "publication": {
+      "articleAuthorityOwner": "PJA",
+      "nonArticleAssetAuthorityOwner": "CAR",
+      "approvalImpliesPublication": false,
+      "publishedKnowledgeAuthorityPreexisting": true,
+      "kapMayPublish": false,
+      "kapMayApprovePublication": false
+    },
+    "realityReading": {
+      "canonicalRealityOwner": "RMO",
+      "dataGovernanceOwner": "RDG",
+      "readingRuntimeEvidence": "RRE",
+      "rreCurrentStatus": "FROZEN_VALIDATION_ONLY_READING_RUNTIME",
+      "providerOrAiMayCreateRealityAuthority": false,
+      "kapMayCreateRealityAuthority": false,
+      "kapMayActivateReadingProduction": false,
+      "caseEvidenceScopeRequiredForRealityReading": true
+    }
+  },
+  "identifiedFoundationGaps": [
+    "KAP_AUTHORITY_BOUNDARY_NOT_YET_VERSIONED",
+    "QUESTION_SCOPED_ANSWER_OBJECT_NOT_YET_VERSIONED",
+    "CLIENT_ANSWER_LEVELS_NOT_YET_REGISTERED"
+  ],
+  "notInScope": [
+    "ANSWER_RETRIEVAL_IMPLEMENTATION",
+    "ANSWER_COMPOSITION",
+    "AI_ROUTING",
+    "GUIDED_READING_EXECUTION",
+    "MCD",
+    "REALITY_JOURNEY_ACTIVATION",
+    "CLIENT_SURFACE"
+  ]
+}

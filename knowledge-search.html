@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Search PHI OS published knowledge and completed-manuscript source projections.">
-  <title>Published Knowledge Search — PHI OS</title>
+  <meta name="description" content="Ask PHI OS using governed published knowledge and reviewed manuscript grounding.">
+  <title>Ask PHI OS — PHI OS</title>
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/design/foundation.css">
   <link rel="stylesheet" href="/assets/css/design/typography.css">
@@ -18,21 +18,21 @@
   <main id="knowledge-search-main">
     <section class="knowledge-hero">
       <div class="knowledge-shell">
-        <p class="knowledge-eyebrow">PHI OS Knowledge Runtime</p>
-        <h1>Ask PHI OS knowledge.</h1>
-        <p class="knowledge-hero__lead">Results prefer published Canonical Articles and can also use completed Book I / Book II manuscript sections as source-grounded knowledge while Article publication is still pending.</p>
+        <p class="knowledge-eyebrow">Ask PHI OS · Governed Knowledge Answer</p>
+        <h1>Ask PHI OS.</h1>
+        <p class="knowledge-hero__lead">Ask a question once. PHI OS grounds the answer in governed published knowledge and reviewed manuscript material without turning the answer into a Published Article or Reality Reading.</p>
       </div>
     </section>
     <section class="knowledge-section knowledge-section--paper">
       <div class="knowledge-shell knowledge-search-panel">
         <form class="knowledge-search-form" data-knowledge-search-form>
           <label>Question<input data-knowledge-query name="q" maxlength="500" autocomplete="off" required></label>
-          <label>Projection<select data-projection-mode name="mode"><option value="auto">Adaptive</option><option value="overview">Overview</option><option value="focused">Focused</option><option value="full_article">Full article</option><option value="continuity">Continuity</option></select></label>
-          <button class="knowledge-action knowledge-action--primary" type="submit">Search</button>
+          <label>Answer depth<select data-answer-depth name="depth"><option value="QUICK">Quick</option><option value="STANDARD" selected>Standard</option><option value="DEEP">Deep</option></select></label>
+          <button class="knowledge-action knowledge-action--primary" type="submit">Ask PHI OS</button>
         </form>
-        <p class="knowledge-search-status" role="status" aria-live="polite" data-knowledge-status>Enter a question to begin.</p>
+        <p class="knowledge-search-status" role="status" aria-live="polite" data-knowledge-status>Enter a question to Ask PHI OS.</p>
         <div class="knowledge-search-results" data-knowledge-results></div>
-        <div class="knowledge-boundary"><strong>Knowledge access boundary</strong><p>Book-source access is question-scoped: it does not expose the full manuscript, grant a book download, or claim Canonical Node authority when section mapping is still pending.</p></div>
+        <div class="knowledge-boundary"><strong>Ask PHI OS boundary</strong><p>Answers are question-scoped, grounded projections. They do not publish an Article, create Canonical Knowledge, create a Reality Reading, expose the full manuscript, or require a generative AI provider.</p></div>
       </div>
     </section>
   </main>

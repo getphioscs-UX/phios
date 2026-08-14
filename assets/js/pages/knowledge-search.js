@@ -1,69 +1,77 @@
 import { getLocale, onLocaleChange } from '../i18n.js';
-import { queryKnowledgeAccess } from '../knowledge/knowledge-access-client.js';
+import { askPhios } from '../knowledge/ask-phios-client.js';
 
 const form=document.querySelector('[data-knowledge-search-form]');
 const input=document.querySelector('[data-knowledge-query]');
-const mode=document.querySelector('[data-projection-mode]');
+const depth=document.querySelector('[data-answer-depth]');
 const status=document.querySelector('[data-knowledge-status]');
 const results=document.querySelector('[data-knowledge-results]');
 const escapeHtml=value=>String(value??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
 
+function copy(){
+  const zh=getLocale()==='zh-Hans';
+  return zh?{
+    answer:'回答',mechanism:'为什么会这样',why:'为什么重要',observe:'可以观察什么',unknown:'仍然未知',related:'相关知识',sources:'依据',boundary:'边界',
+    sourcePublished:'已发布 Canonical Knowledge',sourceManuscript:'已审核 Manuscript Knowledge',searching:'正在读取受治理 PHI OS Knowledge…',
+    empty:'请输入一个问题。',failed:'目前无法完成 Ask PHI OS 回答。',coverage:'Knowledge coverage',noAi:'本次回答没有使用生成式 AI。'
+  }:{
+    answer:'Answer',mechanism:'Why this can happen',why:'Why it matters',observe:'What to observe',unknown:'What remains unknown',related:'Related knowledge',sources:'Grounding',boundary:'Boundary',
+    sourcePublished:'Published canonical knowledge',sourceManuscript:'Reviewed manuscript knowledge',searching:'Reading governed PHI OS Knowledge…',
+    empty:'Enter a question for Ask PHI OS.',failed:'Ask PHI OS could not complete this answer.',coverage:'Knowledge coverage',noAi:'No generative AI was used for this answer.'
+  };
+}
+
 function setStatus(message,state='idle'){status.textContent=message;status.dataset.state=state;}
-function pageLabel(range){return range.start===range.end?`p. ${range.start}`:`pp. ${range.start}–${range.end}`;}
-function renderGroundedAnswer(payload){
-  const answer=payload.groundedAnswer;
-  if(!answer?.present||!answer.text)return '';
-  return `<section class="knowledge-source-group knowledge-grounded-answer">
-    <p class="knowledge-eyebrow">PHI OS grounded answer · ${escapeHtml(answer.projectionType)}</p>
-    <h2>Answer</h2>
-    ${answer.text.split(/\n{2,}/).map(paragraph=>`<p>${escapeHtml(paragraph)}</p>`).join('')}
-    <p class="knowledge-source-meta">Grounded in ${escapeHtml(String(answer.sourceReferences?.length||0))} governed source fragment(s). No generative model was used.</p>
-  </section>`;
+function listSection(title,items){
+  if(!items?.length)return '';
+  return `<section class="knowledge-source-group"><h2>${escapeHtml(title)}</h2><ul>${items.map(item=>`<li>${escapeHtml(item)}</li>`).join('')}</ul></section>`;
 }
-function renderPublished(payload){
-  const published=payload.published;
-  if(!published?.projection||published.coverage?.level==='none')return '';
-  return `<section class="knowledge-source-group">
-    <p class="knowledge-eyebrow">Published canonical knowledge · ${escapeHtml(published.coverage.level)} coverage</p>
-    <h2>${escapeHtml(published.results?.[0]?.title||published.projection.nodeCode)}</h2>
-    <p>${escapeHtml(published.results?.[0]?.summary||'')}</p>
-    ${published.results?.[0]?.href?`<a class="knowledge-action knowledge-action--primary" href="${escapeHtml(published.results[0].href)}">Read published article</a>`:''}
-    <div class="knowledge-search-fragments">${published.projection.fragments.map(fragment=>fragment.kind==='heading'?`<h3>${escapeHtml(fragment.text.replace(/^#\s*/,''))}</h3>`:`<p>${escapeHtml(fragment.text)}</p>`).join('')}</div>
-  </section>`;
-}
-function renderManuscript(payload){
-  const records=payload.manuscript?.records||[];
-  if(!records.length)return '';
-  return `<section class="knowledge-source-group">
-    <p class="knowledge-eyebrow">Completed manuscript knowledge · question-scoped access</p>
-    <div class="knowledge-manuscript-results">${records.map(record=>`<article class="knowledge-manuscript-source">
-      <header><p class="knowledge-source-meta">${escapeHtml(record.bookTitle)} · ${escapeHtml(record.partCode)} · ${escapeHtml(pageLabel(record.pageRange))}</p>
-      <h3>${escapeHtml(record.heading)}</h3></header>
-      <p>${escapeHtml(record.excerpt)}</p>
-      <p class="knowledge-source-meta">Canonical binding: ${escapeHtml(record.canonicalBinding.status)}${record.canonicalBinding.nodeCodes?.length?` · ${escapeHtml(record.canonicalBinding.nodeCodes.join(', '))}`:''}</p>
-      <p class="knowledge-source-meta">Readability: ${escapeHtml(record.readability?.reviewStatus||'UNREVIEWED')} · risk ${escapeHtml(record.readability?.riskLevel||'UNKNOWN')}</p>
-      <a class="knowledge-action" href="${escapeHtml(record.bookRoute)}">Explore the volume</a>
-    </article>`).join('')}</div>
-  </section>`;
+function sourceLabel(source,c){return source.sourceType==='PUBLISHED_CANONICAL_ARTICLE'?c.sourcePublished:c.sourceManuscript;}
+function renderSources(payload,c){
+  if(!payload.sources?.length)return '';
+  return `<section class="knowledge-source-group"><h2>${escapeHtml(c.sources)}</h2><div class="knowledge-manuscript-results">${payload.sources.map(source=>`<article class="knowledge-manuscript-source">
+    <p class="knowledge-eyebrow">${escapeHtml(sourceLabel(source,c))}</p>
+    <p>${escapeHtml(source.questionScopedExcerpt||'')}</p>
+    <p class="knowledge-source-meta">${escapeHtml([source.nodeCode,source.fragmentCode||source.sectionCode,source.partCode].filter(Boolean).join(' · '))}</p>
+    ${source.href?`<a class="knowledge-action" href="${escapeHtml(source.href)}">${escapeHtml(getLocale()==='zh-Hans'?'查看已发布知识':'Open published knowledge')}</a>`:''}
+  </article>`).join('')}</div></section>`;
 }
 function render(payload){
-  if(payload.coverage.level==='none'){results.replaceChildren();setStatus('No published or completed-manuscript coverage is available for this query.','no_coverage');return;}
+  const c=copy();
+  const answer=payload.answer;
+  const content=answer?.content||{};
   const article=document.createElement('article');
   article.className='knowledge-search-result';
-  article.innerHTML=`${renderGroundedAnswer(payload)}${renderPublished(payload)}${renderManuscript(payload)}<aside class="knowledge-search-boundary"><strong>Knowledge source boundary</strong><p>Published Articles remain publication authority. Completed manuscripts may ground question-scoped knowledge before Article publication. A section with pending Canonical binding is shown as manuscript source and is not presented as a Canonical Node.</p></aside>`;
+  article.innerHTML=`
+    <section class="knowledge-source-group knowledge-grounded-answer">
+      <p class="knowledge-eyebrow">Ask PHI OS · ${escapeHtml(payload.answerDepth)} · ${escapeHtml(answer.coverageStatus)}</p>
+      <h2>${escapeHtml(c.answer)}</h2>
+      <p>${escapeHtml(content.directAnswer||'')}</p>
+      <p class="knowledge-source-meta">${escapeHtml(c.noAi)}</p>
+    </section>
+    ${listSection(c.mechanism,content.mechanism)}
+    ${listSection(c.why,content.whyItMatters)}
+    ${listSection(c.observe,content.whatToObserve)}
+    ${listSection(c.unknown,content.unknowns)}
+    ${listSection(c.related,content.relatedKnowledge)}
+    ${renderSources(payload,c)}
+    <aside class="knowledge-search-boundary"><strong>${escapeHtml(c.boundary)}</strong>${(payload.boundary?.limits||content.boundaries||[]).map(item=>`<p>${escapeHtml(item)}</p>`).join('')}</aside>`;
   results.replaceChildren(article);
-  setStatus(`Knowledge coverage: ${payload.coverage.level}. Manuscript sources: ${payload.manuscript?.records?.length||0}.`,'results');
+  setStatus(`${c.coverage}: ${answer.coverageStatus}. ${payload.sources?.length||0} governed source projection(s).`,'results');
 }
 async function submit(event){
   event?.preventDefault();
   const query=input.value.trim();
-  if(!query){setStatus('Enter a question to search PHI OS knowledge.','invalid');input.focus();return;}
-  setStatus('Searching published and completed-manuscript knowledge…','loading');results.replaceChildren();
-  try{render(await queryKnowledgeAccess({query,locale:getLocale(),mode:mode.value,source:'hybrid'}));}
-  catch(error){setStatus(error.code==='MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE'?'Manuscript knowledge storage is not connected yet.':'Knowledge could not be loaded. Please try again.','error');}
+  const c=copy();
+  if(!query){setStatus(c.empty,'invalid');input.focus();return;}
+  setStatus(c.searching,'loading');results.replaceChildren();
+  try{
+    render(await askPhios({query,locale:getLocale(),depth:depth?.value||'STANDARD',source:'hybrid'}));
+  }catch(error){
+    setStatus(`${c.failed}${error?.code?` (${error.code})`:''}`,'error');
+  }
 }
 form?.addEventListener('submit',submit);
 onLocaleChange(()=>{if(input.value.trim())submit();});
-
 const initialQuery=new URLSearchParams(location.search).get('q');
 if(initialQuery){input.value=initialQuery;queueMicrotask(()=>submit());}

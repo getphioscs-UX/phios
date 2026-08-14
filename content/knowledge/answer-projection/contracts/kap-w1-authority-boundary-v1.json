@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W1-AUTHORITY-BOUNDARY-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W1",
+  "baselineCommit": "00b5d580c9dbc4fc460694095b7519afad4b0b61",
+  "status": "FROZEN_AUTHORITY_BOUNDARY",
+  "purpose": "Freeze the separation between Knowledge, Question-Scoped Answer, Publication and Reality Reading without changing predecessor authority or activating later client runtimes.",
+  "domains": {
+    "KNOWLEDGE": {
+      "authority": "PREEXISTING_CANONICAL_KNOWLEDGE_AND_GOVERNED_SOURCE_AUTHORITY",
+      "may": [
+        "GROUND_QUESTION_SCOPED_ANSWER",
+        "REFERENCE_GOVERNED_RELATIONSHIPS"
+      ],
+      "mayNot": [
+        "AUTO_PUBLISH",
+        "MUTATE_FROM_CLIENT_ANSWER",
+        "BECOME_CASE_EVIDENCE_WITHOUT_PROVENANCE"
+      ]
+    },
+    "ANSWER": {
+      "authority": "NON_AUTHORITATIVE_QUESTION_SCOPED_PROJECTION",
+      "owner": "KAP",
+      "may": [
+        "PROJECT_GROUNDED_KNOWLEDGE",
+        "STATE_BOUNDARIES",
+        "STATE_UNKNOWNS",
+        "REFERENCE_GOVERNED_SOURCES"
+      ],
+      "mayNot": [
+        "CREATE_CANONICAL_KNOWLEDGE",
+        "CREATE_CANONICAL_NODE",
+        "APPROVE_PUBLICATION",
+        "PUBLISH_ARTICLE",
+        "PUBLISH_ASSET",
+        "CREATE_REALITY_STATE",
+        "CREATE_REALITY_READING_AUTHORITY",
+        "CREATE_PROFESSIONAL_JUDGMENT"
+      ]
+    },
+    "PUBLICATION": {
+      "authority": "PREEXISTING_GOVERNED_PUBLICATION_AUTHORITY",
+      "owners": {
+        "article": "PJA",
+        "nonArticleAsset": "CAR"
+      },
+      "requires": [
+        "GOVERNED_PRODUCTION_PATH",
+        "REQUIRED_HUMAN_REVIEW_OR_APPROVAL",
+        "PUBLICATION_RECORD"
+      ],
+      "mayNot": [
+        "BE_CREATED_BY_QUESTION_ANSWER",
+        "BE_INFERRED_FROM_APPROVAL_ALONE",
+        "BE_CREATED_BY_PROVIDER_OUTPUT_ALONE"
+      ]
+    },
+    "REALITY_READING": {
+      "authority": "CASE_AND_EVIDENCE_SCOPED_GOVERNED_READING",
+      "ownersAndGuards": [
+        "RMO",
+        "RDG",
+        "RRE",
+        "EXISTING_OPERATIONAL_JOURNEY_AUTHORITY"
+      ],
+      "currentRreActivation": "VALIDATION_ONLY",
+      "requires": [
+        "CASE_OR_GOVERNED_REALITY_CONTEXT",
+        "EVIDENCE_PROVENANCE",
+        "UNKNOWN_PRESERVATION",
+        "READING_AUTHORITY_GATES"
+      ],
+      "mayNot": [
+        "BE_CREATED_FROM_GENERIC_KNOWLEDGE_ANSWER",
+        "BE_CREATED_BY_PROVIDER_OR_AI_AS_REALITY_AUTHORITY",
+        "BE_ACTIVATED_BY_KAP_W0_W3"
+      ]
+    }
+  },
+  "invariants": {
+    "knowledgeNotAnswer": true,
+    "answerNotKnowledgeAuthority": true,
+    "answerNotPublication": true,
+    "answerNotRealityReading": true,
+    "publicationNotKnowledgeMutation": true,
+    "realityReadingNotGenericKnowledgeAnswer": true,
+    "realityReadingRequiresRealityContext": true,
+    "kapDoesNotMutateCanonicalKnowledge": true,
+    "kapDoesNotMutatePja": true,
+    "kapDoesNotMutateCar": true,
+    "kapDoesNotMutateRmo": true,
+    "kapDoesNotMutateRdg": true,
+    "kapDoesNotActivateRre": true
+  },
+  "predecessorEvidence": {
+    "ksarProductionFreeze": {
+      "path": "content/knowledge/source-access/freeze/ksar-r8-production-freeze-v1.json",
+      "sha256": "c5d16ad6d9aa6c95bc4143962c9ea1fc3cd26b70bc3114ddb7876b461dbc55cf"
+    },
+    "knowledgeAccessBoundary": {
+      "path": "content/knowledge/source-access/contracts/knowledge-source-access-boundary-v1.json",
+      "sha256": "25deb64016002e62f0f9a2ab42b1122fbc9abe09e248a55c288380917544f9d9"
+    },
+    "knowledgeAccessApi": {
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "0d1192a081849761a6a88e8623f14e95d70c9f94f007f2b99deeb9f723202fd5"
+    },
+    "pjaPublicationFreeze": {
+      "path": "content/knowledge/production/freeze/pja-publication-w1-freeze-v1.json",
+      "sha256": "2fe75eae06530a19cb02597f842229af8a3408a6a17bc624a4c79ad65ea7fe73"
+    },
+    "pjaPublishedKnowledgeAuthorityFreeze": {
+      "path": "content/knowledge/production/freeze/pja-published-knowledge-authority-w1-freeze-v1.json",
+      "sha256": "277c9d4d7033979b1624068186638db06fdb92beddd489b5d6e4cce33f436313"
+    },
+    "carAuthorityBoundary": {
+      "path": "content/professional/canonical-asset-runtime/audits/car-authority-boundary-v1.json",
+      "sha256": "d42dca01a97f8fe272ba90eb34b9916dbdaa96cca656c273a47d9e8f7f9ef0d2"
+    },
+    "rmoAuthorityAudit": {
+      "path": "content/runtime/reality-model-runtime/audits/rmo-reality-model-authority-audit-v1.json",
+      "sha256": "f8b87ec8026ef3cb9e014efadfbdbb5249b61a5a9841f6fe0011652f251d0cfb"
+    },
+    "rdgAuthorityBoundary": {
+      "path": "content/governance/reality-data-governance/audits/rdg-data-authority-boundary-v1.json",
+      "sha256": "91bc679d3b0f9146771c28b5fcc120fcbf6e0b90aacd5e3e51ead5b3898f13fa"
+    },
+    "rreReadingFreeze": {
+      "path": "content/runtime/reality-readout-engine/freeze/rre-w5-w10-reading-runtime-freeze-v1.json",
+      "sha256": "ce435f7b8e7464314af264cf7e1d796cabaadbadd53ab6531019f463509bd302"
+    }
+  }
+}
