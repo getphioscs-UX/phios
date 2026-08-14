@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "PHI-OS-MCD-1-PRODUCTION-ACTIVATION-RESOLUTION-v1.0.0",
+  "work": "MCD-1",
+  "baselineCommit": "29dc486571862b530c374e61d883e594dad1d27d",
+  "status": "AUTHORITY_GAPS_RESOLVED_FOR_AST_BZR_NUM_HDR_REMAINS_BLOCKED",
+  "authorityBoundary": {
+    "grantOwner": "MPA",
+    "mcdGrantAuthority": false,
+    "methodGovernanceOwnsPolicyAndLicenseFacts": true,
+    "coreRuntimeOwnsCalculationSemantics": true
+  },
+  "resolutions": {
+    "AST": {
+      "previousGap": "PRODUCTION_POLICIES_NOT_APPROVED",
+      "resolution": "VERSIONED_INITIAL_PRODUCTION_POLICY_SCOPE_APPROVED",
+      "authorityReference": "content/professional/method-governance/successors/ast-production-policy-successor-v1.json",
+      "mpaDispatchAllowed": true,
+      "scope": "PLANET_ONLY_INITIAL_SCOPE"
+    },
+    "BZR": {
+      "previousGap": "IMR_COMMERCIAL_LICENSE_UNCONDITIONAL_PASS_OR_VERSIONED_SUCCESSOR_REQUIRED",
+      "resolution": "VERSIONED_SCOPE_BOUND_LICENSE_SUCCESSOR_APPROVED",
+      "authorityReference": "content/professional/method-governance/successors/bzr-commercial-license-successor-v1.json",
+      "mpaDispatchAllowed": true
+    },
+    "NUM": {
+      "previousGap": "CANONICAL_COMMERCIAL_LICENSE_SUCCESSOR_REQUIRED_AND_EXPLICIT_PRODUCTION_GRANT",
+      "resolution": "INTERNAL_COMMERCIAL_SCOPE_SUCCESSOR_PLUS_EXPLICIT_MPA_PRODUCTION_AUTHORITY",
+      "authorityReference": "content/professional/method-governance/successors/num-commercial-scope-successor-v1.json",
+      "mpaDispatchAllowed": true
+    },
+    "HDR": {
+      "previousGap": "RESTRICTED_RIGHTS_MAPPING_STRUCTURE_AND_COMMERCIAL_AUTHORITY_UNRESOLVED",
+      "resolution": "NO_BYPASS_COMPLETE_REGISTRATION_BLOCKED",
+      "authorityReference": "content/professional/method-client-delivery/resolutions/mcd-1-hdr-restricted-method-resolution-v1.json",
+      "mpaDispatchAllowed": false
+    }
+  },
+  "productionDispatch": {
+    "authorityAllowedFor": [
+      "AST",
+      "BZR",
+      "NUM"
+    ],
+    "authorityBlockedFor": [
+      "HDR"
+    ],
+    "active": false,
+    "reason": "MCD-2_CANONICAL_RUNTIME_ADAPTER_REGISTRY_NOT_YET_BOUND",
+    "nextWork": "MCD-2"
+  },
+  "preservation": {
+    "mpaW30Mutated": false,
+    "mrImrFrozenV1Mutated": false,
+    "astFreezeMutated": false,
+    "bzrHistoricalManifestMutated": false,
+    "numFreezeMutated": false,
+    "hdrFreezeMutated": false
+  },
+  "acceptanceRule": "MCD-1 is complete when AST/BZR/NUM have explicit MPA-controlled dispatch authority for governed bound scopes, HDR is fully registered and blocked, and no Production API-to-Core binding is created before MCD-2.",
+  "sourceAttachmentBaseline": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+  "latestMainCompatibility": {
+    "commit": "29dc486571862b530c374e61d883e594dad1d27d",
+    "precedingCommit": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+    "reconciliation": "SAFE_NON_OVERLAPPING_VAP_L10N_DELTA_PACKAGE_SCRIPTS_MERGED"
+  }
+}

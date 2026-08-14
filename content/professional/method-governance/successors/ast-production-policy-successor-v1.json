@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "PHI-OS-AST-PRODUCTION-POLICY-SUCCESSOR-v1.0.0",
+  "successorCode": "AST-PRODUCTION-POLICY-SUCCESSOR-001",
+  "baselineCommit": "29dc486571862b530c374e61d883e594dad1d27d",
+  "methodCode": "ASTROLOGY",
+  "pluginCode": "AST",
+  "methodVersion": "0.1.0",
+  "status": "APPROVED_INITIAL_PRODUCTION_SCOPE_FOR_MPA_SUCCESSOR",
+  "authorityOwner": "PHI_OS_AST_METHOD_GOVERNANCE",
+  "predecessors": [
+    "content/professional/core-method-runtime/ast-production-freeze-v1.json",
+    "content/professional/method-production-activation/registries/mpa-ast-production-policy-blocker-v1.json",
+    "content/professional/method-production-activation/acceptance/mpa-w22-ast-activation-acceptance-v1.json"
+  ],
+  "policy": {
+    "planetSet": {
+      "included": true,
+      "policyCode": "PHI_OS_AST_PLANET_SET_CORE_10_V1",
+      "bodyCodes": [
+        "SUN",
+        "MOON",
+        "MERCURY",
+        "VENUS",
+        "MARS",
+        "JUPITER",
+        "SATURN",
+        "URANUS",
+        "NEPTUNE",
+        "PLUTO"
+      ]
+    },
+    "zodiac": {
+      "included": true,
+      "policyCode": "PHI_OS_AST_TROPICAL_ZODIAC_V1",
+      "frame": "TROPICAL_ECLIPTIC_LONGITUDE"
+    },
+    "nodePolicy": {
+      "included": false,
+      "policyCode": "PHI_OS_AST_NODE_NONE_V1",
+      "nodeBodies": [],
+      "reason": "Initial scope intentionally excludes lunar nodes."
+    },
+    "retrogradePolicy": {
+      "included": true,
+      "policyCode": "PHI_OS_AST_LONGITUDE_SPEED_RETROGRADE_V1",
+      "rule": "retrograde iff speedLongitudeDegreesPerDay < 0"
+    },
+    "precisionPolicy": {
+      "included": true,
+      "policyCode": "PHI_OS_AST_DECIMAL_12_V1",
+      "decimalPlaces": 12
+    },
+    "anglePolicy": {
+      "included": false,
+      "reason": "Angles require house/topocentric policy and are deferred."
+    },
+    "housePolicy": {
+      "included": false,
+      "reason": "No house system is authorized in initial scope; no implicit house default may be invented."
+    },
+    "aspectPolicy": {
+      "included": false,
+      "reason": "No Production aspect/orb set is authorized in initial scope; validation-only exact aspect history remains unchanged."
+    },
+    "minorAspects": {
+      "included": false
+    },
+    "applyingPolicy": {
+      "included": false
+    },
+    "priorityPolicy": {
+      "included": false
+    },
+    "normalizationPolicy": {
+      "included": true,
+      "policyCode": "PHI_OS_AST_LONGITUDE_0_360_V1",
+      "longitudeRange": "[0,360)",
+      "latitudeRange": "[-90,90]"
+    }
+  },
+  "astronomyDataAuthority": {
+    "engine": "ASTRONOMY_ENGINE_JS",
+    "engineVersion": "2.1.19",
+    "license": "MIT",
+    "trustedValidationReference": "NASA_JPL_HORIZONS",
+    "trustedReferenceRole": "VALIDATION_ONLY_NOT_RUNTIME_AUTHORITY",
+    "historicalTimezoneAuthority": "IANA_TZDB"
+  },
+  "supportedCalculationScope": [
+    "ASTRONOMY_CONTEXT",
+    "PLANET_EPHEMERIS_CORE_10"
+  ],
+  "clientProjectionScope": [
+    "PLANET"
+  ],
+  "explicitlyDeferred": [
+    "HOUSES",
+    "ANGLES",
+    "ASPECTS",
+    "LUNAR_NODES",
+    "INTERPRETATION",
+    "PROFESSIONAL_JUDGMENT"
+  ],
+  "boundaries": {
+    "implicitDefaultsAllowed": false,
+    "createsInterpretation": false,
+    "createsProfessionalJudgment": false,
+    "expansionRequiresVersionedSuccessor": true,
+    "legacyAstFreezeMutated": false
+  },
+  "mpaHandoff": {
+    "methodSpecificReadyAfterSuccessor": true,
+    "eligibleCapabilitiesRequested": [
+      "CALCULATION",
+      "PROJECTION"
+    ],
+    "professionalEligibilityRequested": false
+  },
+  "sourceAttachmentBaseline": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+  "latestMainCompatibility": {
+    "commit": "29dc486571862b530c374e61d883e594dad1d27d",
+    "precedingCommit": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+    "reconciliation": "SAFE_NON_OVERLAPPING_VAP_L10N_DELTA_PACKAGE_SCRIPTS_MERGED"
+  }
+}

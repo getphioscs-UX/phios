@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "PHI-OS-MCD-0-AUTHORITY-BOUNDARY-v1.0.0",
+  "work": "MCD-0",
+  "baselineCommit": "29dc486571862b530c374e61d883e594dad1d27d",
+  "status": "ACTIVE_BOUNDARY_MCD_DELIVERS_MPA_AUTHORIZED_METHODS_ONLY",
+  "position": {
+    "after": "KAP-W17",
+    "before": "KAP-W18",
+    "productionAuthorityPredecessor": "MPA-W30"
+  },
+  "definition": "MCD delivers deterministic Method Runtime capabilities only after MPA has granted Production authority through a versioned successor. MCD itself is delivery authority, not Method authority.",
+  "doesNotOwn": [
+    "METHOD_TRUTH",
+    "METHOD_CREATION",
+    "METHOD_REGISTRY_MUTATION",
+    "PRODUCTION_AUTHORITY",
+    "KNOWLEDGE_AUTHORITY",
+    "REALITY_TRUTH",
+    "INTERPRETATION",
+    "PROFESSIONAL_JUDGMENT"
+  ],
+  "owns": [
+    "CANONICAL_INPUT_DELIVERY",
+    "PRODUCTION_AUTHORIZED_DISPATCH_HANDOFF",
+    "ADAPTER_ISOLATION",
+    "CORE_RUNTIME_INVOCATION_HANDOFF",
+    "CANONICAL_RESULT_NORMALIZATION",
+    "DYNAMIC_PROJECTION",
+    "RENDERER_HANDOFF",
+    "CLIENT_DELIVERY"
+  ],
+  "authorityChain": [
+    "METHOD_REGISTRY",
+    "CORE_RUNTIME",
+    "MPA",
+    "MCD",
+    "CLIENT"
+  ],
+  "authorityOwners": {
+    "methodTruth": "METHOD_GOVERNANCE",
+    "coreCalculation": "CORE_METHOD_RUNTIME",
+    "productionEligibility": "MPA",
+    "productionDispatch": "MPA",
+    "clientDelivery": "MCD",
+    "interpretation": "SEPARATE_GOVERNED_RUNTIME",
+    "professionalJudgment": "PROFESSIONAL_RUNTIME"
+  },
+  "invariants": {
+    "implementedDoesNotEqualProduction": true,
+    "registeredDoesNotEqualDispatchAllowed": true,
+    "frontendVisibilityDoesNotEqualExecutionAuthority": true,
+    "rendererExistsDoesNotEqualProductionAvailability": true,
+    "apiCannotGrantAuthority": true,
+    "adapterCannotGrantAuthority": true,
+    "frontendCannotGrantAuthority": true,
+    "rendererCannotGrantAuthority": true,
+    "accountPlanCannotGrantAuthority": true,
+    "mcdCannotOverrideMpa": true,
+    "mcdCannotInferMissingAuthority": true
+  },
+  "phaseBoundary": {
+    "mcd0AndMcd1MayWireProductionAdapters": false,
+    "adapterRegistrationBeginsAt": "MCD-2",
+    "canonicalInputBeginsAt": "MCD-3",
+    "executionRequestBeginsAt": "MCD-4",
+    "productionEligibilityMayBeResolvedByVersionedMpaSuccessorAtMcd1": true,
+    "productionDispatchMayBeAuthorityAllowedWhilePhysicalAdapterBindingRemainsInactive": true
+  },
+  "frozenMpaPreservation": {
+    "predecessor": "MPA-W30",
+    "inPlaceMutationAllowed": false,
+    "successorRequired": true,
+    "baselineDigests": {
+      "mpaW30Freeze": {
+        "path": "content/professional/method-production-activation/freeze/mpa-production-activation-freeze-v1.json",
+        "sha256": "f12ded2642f6bd9c1d9931b218c40cce141ecaa9e2e7da7103b197179bf369ac"
+      },
+      "mpaW26Eligibility": {
+        "path": "content/professional/method-production-activation/registries/mpa-production-eligibility-decision-registry-v1.json",
+        "sha256": "6c120de6ee4f6b07115f3e9c508b530f873f8cb90dfdedd0b7ce0ebad0ae54f1"
+      },
+      "mpaW27Execution": {
+        "path": "content/professional/method-production-activation/registries/mpa-production-execution-gate-registry-v1.json",
+        "sha256": "a5bc99ab4e0bd4d7bfae2890ee71c1a00920b2439625a0db7ee638a2f4a349d9"
+      },
+      "methodRegistryV2": {
+        "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+        "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0"
+      },
+      "imrLicenseV1": {
+        "path": "content/professional/method-governance/imr-commercial-license-registry-v1.json",
+        "sha256": "9afa261817dbfef0ad7faa4fc2e242fad7f25319c36cf8bdc9f6b0d87b1e1a61"
+      },
+      "astFreezeV1": {
+        "path": "content/professional/core-method-runtime/ast-production-freeze-v1.json",
+        "sha256": "34eb0804d5f943017919dcdd9df1053332cf78857d846b5b1e25920191e95826"
+      },
+      "bzrRuntimeManifestV1": {
+        "path": "content/professional/core-method-runtime/bzr-runtime-manifest-v1.json",
+        "sha256": "83df7bff063d1f72b7fc6202a90935dceea3504e4c738c015a33b2a37be22b48"
+      },
+      "numFreezeV1": {
+        "path": "content/professional/core-method-runtime/num-production-freeze-v1.json",
+        "sha256": "324906b84df5f559717863c770ddaefb795611c7ab1da14a1e11a7d5da4816a9"
+      },
+      "hdrFreezeV1": {
+        "path": "content/professional/core-method-runtime/hdr-production-freeze-v1.json",
+        "sha256": "edc383857ae02ecd5c050291aa2b1ef3f47ae0ca8296c65f9e1ba29a9b9e5296"
+      }
+    }
+  },
+  "hdrBoundary": {
+    "registrationRequired": true,
+    "stateRequired": "BLOCKED",
+    "executionModeRequired": "validation_only",
+    "productionDispatchForbidden": true,
+    "professionalReleaseForbidden": true,
+    "customerProductionResultForbidden": true,
+    "internalHistoryPreserved": true
+  },
+  "nextWork": "MCD-1",
+  "sourceAttachmentBaseline": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+  "latestMainCompatibility": {
+    "commit": "29dc486571862b530c374e61d883e594dad1d27d",
+    "precedingCommit": "b7df645a7c4a5ab2fa5e80f5cae57a26e2803e39",
+    "reconciliation": "SAFE_NON_OVERLAPPING_VAP_L10N_DELTA_PACKAGE_SCRIPTS_MERGED"
+  }
+}

@@ -967,7 +967,10 @@
     "check:vap-l10n:r1-r5:preflight": "node scripts/check-vap-l10n-r1-r5-preflight.mjs",
     "check:vap-l10n:r1-r5": "node scripts/check-vap-l10n-r1-r5.mjs",
     "check:published-article-format": "node scripts/check-published-article-format-reconciliation.mjs",
-    "vap:l10n:r1-r5:gate-status": "node scripts/vap-l10n-r1-r5-gate-status.mjs"
+    "vap:l10n:r1-r5:gate-status": "node scripts/vap-l10n-r1-r5-gate-status.mjs",
+    "check:mcd-0": "node scripts/check-mcd-0-method-client-delivery-authority-boundary.mjs",
+    "check:mcd-1": "node scripts/check-mcd-1-production-method-selection.mjs",
+    "check:mcd-production-authority": "npm run check:mcd-0 && npm run check:mcd-1"
   },
   "type": "module"
 }
