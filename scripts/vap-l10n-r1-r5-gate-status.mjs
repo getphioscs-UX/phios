@@ -1,0 +1,15 @@
+import { humanGateState, PATHS } from './lib/visual-article-production/vap-l10n-r1-r5-v1.mjs';
+const state = humanGateState();
+console.log(`R1 review: ${state.review.exists ? (state.review.accepted ? 'ACCEPTED' : 'PRESENT_NOT_ACCEPTED') : 'MISSING'}`);
+if (state.review.digest) console.log(`reviewResolutionDigest: ${state.review.digest}`);
+console.log(`R1 approval: ${state.approval.exists ? (state.approval.approved ? 'APPROVED' : 'PRESENT_NOT_APPROVED') : 'MISSING'}`);
+if (state.approval.digest) console.log(`approvalResolutionDigest: ${state.approval.digest}`);
+console.log(`R1 publication: ${state.publication.exists ? (state.publication.published ? 'PUBLISH' : 'PRESENT_NOT_PUBLISHED') : 'MISSING'}`);
+if (state.publication.digest) console.log(`publicationResolutionDigest: ${state.publication.digest}`);
+if (!state.review.exists) console.log(`Next: copy ${PATHS.reviewTemplate} -> ${PATHS.review} and record the TL decision.`);
+else if (!state.review.accepted) console.log('Next: complete the TL review with decision ACCEPT and all review checks true.');
+else if (!state.approval.exists) console.log(`Next: copy ${PATHS.approvalTemplate} -> ${PATHS.approval}, paste reviewResolutionDigest, and record the TL approval decision.`);
+else if (!state.approval.approved) console.log('Next: complete the TL approval with decision APPROVE and the exact reviewResolutionDigest.');
+else if (!state.publication.exists) console.log(`Next: copy ${PATHS.publicationTemplate} -> ${PATHS.publication}, paste both upstream digests, and record the TL publication decision.`);
+else if (!state.publication.published) console.log('Next: complete the TL publication decision with PUBLISH and exact upstream digests.');
+else console.log('Next: npm run vap:l10n:r1-r5:apply');
