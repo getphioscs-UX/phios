@@ -1,12 +1,15 @@
 /** Canonical Production Method Execution API. All production Method execution enters here. */
-import { executeMethodWithProductionGate } from '../method-production-activation/method-execution-gate-runtime.js';
+import { executeMethodWithProductionGate } from '../method-production-activation/mcd1-successor-execution-gate-runtime.js';
 import { MethodProductionEligibilityError } from '../method-production-activation/production-eligibility-runtime.js';
+import {dispatchMethodThroughCanonicalAdapter} from '../method-client-delivery/adapter-registry-runtime.js';
 
+const PRE_MCD2_ADAPTER_STATE = 'METHOD_RUNTIME_ADAPTER_NOT_REGISTERED'; // historical MCD-1 marker only; no longer the active dispatch state.
+void PRE_MCD2_ADAPTER_STATE;
 const EXECUTABLE_CAPABILITIES = new Set(['CALCULATION','PROJECTION']);
 function json(payload,status=200,extraHeaders={}){return new Response(JSON.stringify(payload),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff',...extraHeaders}})}
 function clean(v){return typeof v==='string'?v.trim():''}
-async function dispatchCanonicalMethodRuntime(){
-  throw Object.assign(new Error('METHOD_RUNTIME_ADAPTER_NOT_REGISTERED'),{code:'METHOD_RUNTIME_ADAPTER_NOT_REGISTERED'});
+async function dispatchCanonicalMethodRuntime(request,decision){
+  return dispatchMethodThroughCanonicalAdapter(request,decision);
 }
 
 export async function onRequestPost({request}) {
@@ -24,6 +27,8 @@ export async function onRequestPost({request}) {
   } catch(error) {
     if (error instanceof MethodProductionEligibilityError) return json({ok:false,error:error.code,decision:error.decision},423);
     if (error?.code==='METHOD_RUNTIME_ADAPTER_NOT_REGISTERED') return json({ok:false,error:error.code},503);
+    if (error?.code==='MCD_CANONICAL_INPUT_NOT_ESTABLISHED') return json({ok:false,error:error.code,nextWork:'MCD-3'},409);
+    if (error?.code==='MCD_HDR_PRODUCTION_INVOCATION_FORBIDDEN' || error?.code==='MCD_ADAPTER_REQUIRES_MPA_ELIGIBLE_DECISION') return json({ok:false,error:error.code},423);
     return json({ok:false,error:'METHOD_EXECUTION_FAILED_CLOSED'},500);
   }
 }

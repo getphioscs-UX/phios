@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-MCD-2-HDR-ADAPTER-REGISTRATION-v1.0.0",
+  "work": "MCD-2",
+  "baselineCommit": "eb55edb1a183a173aca707e3d3f1a6f842e36271",
+  "status": "REGISTERED_VALIDATION_ONLY_PRODUCTION_INVOCATION_FORBIDDEN",
+  "methodCode": "HUMAN_DESIGN",
+  "pluginCode": "HDR",
+  "methodVersion": "1.0.0",
+  "registration": {
+    "adapterModule": "functions/method-client-delivery/adapters/hdr-adapter.js",
+    "coreBindingMetadataAllowed": true,
+    "coreFactoryProbeAllowed": true,
+    "validationFixtureExecutionAuthorityUnchanged": true,
+    "productionDispatchAllowed": false,
+    "customerResultAllowed": false,
+    "publicAliasActivated": false
+  },
+  "blockingAuthority": "content/professional/method-client-delivery/resolutions/mcd-1-hdr-restricted-method-resolution-v1.json",
+  "failClosedCodes": [
+    "METHOD_PRODUCTION_NOT_ELIGIBLE",
+    "MCD_HDR_PRODUCTION_INVOCATION_FORBIDDEN"
+  ],
+  "invariants": {
+    "adapterRegistrationDoesNotCreateProductionAuthority": true,
+    "mpaBlockedStateWins": true,
+    "directAdapterBypassStillBlocksProductionInvocation": true,
+    "coreValidationRegistrationDoesNotCreateCustomerResult": true,
+    "restrictedVocabularyNotExposedByApi": true
+  }
+}
