@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-RJX-ENTRY-OPENAI-OPT-IN-REPAIR-CANDIDATE-v1.0.0",
   "phase": "RJX",
   "scope": "Runtime Entry only",
-  "status": "CANDIDATE_APPLIED_FAIL_CLOSED_DEFAULT",
+  "status": "CANDIDATE_BLOCKED_BY_PDS_W0_FREEZE",
   "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
   "recordedAt": "2026-08-14",
   "rule": {
@@ -12,7 +12,7 @@
     "autoRouteMaySilentlyReachOpenAI": false,
     "providerFailurePreservesRuleResult": true
   },
-  "changedFiles": [
+  "proposedChanges": [
     {
       "path": "functions/runtime/entry/provider-router.js",
       "beforeSha256": "8e12b5a7df15c170135527c5f14fdf2d2d2c0a7a78b40dd244d61df28cd01d67",
@@ -24,6 +24,12 @@
       "afterSha256": "5312d7c4e75baa50b2955d179f65105740c1dca3c7354fe1ff9f1f52fc76f5db"
     }
   ],
+  "implementation": {
+    "applied": false,
+    "blocker": "PDS-W0 protected baseline files are immutable; modification authority was not granted.",
+    "protectedFilesRestored": true,
+    "productionBehaviourChanged": false
+  },
   "nonScope": [
     "Reading provider cost reconciliation",
     "Workers AI hard budget",

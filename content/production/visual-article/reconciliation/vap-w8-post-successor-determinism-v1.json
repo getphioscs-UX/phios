@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-VAP-W8-POST-SUCCESSOR-DETERMINISM-RECONCILIATION-v1.0.0",
+  "work": "VAP-W8-POST-SUCCESSOR-RECONCILIATION",
+  "status": "ACCEPTED_SUCCESSOR_COMPATIBILITY",
+  "recordedAt": "2026-08-14",
+  "purpose": "Preserve the accepted VAP-W8 validation and activation projections while allowing deterministic rebuilds to consume the later human-approved BOOK-W1D Canonical Registry and publication-ownership successors.",
+  "historicalAuthority": {
+    "validation": {
+      "path": "content/production/visual-article/validation/vap-article-batch-001-candidate-validation-v1.json",
+      "sha256": "e0c5f62a100318cf760d58e07791446453eb14deb2bd1e3249ed1fe3f7db0e75",
+      "rewritten": false
+    },
+    "activation": {
+      "path": "content/production/visual-article/activation/vap-w8-candidate-validation-pja-import-v1.json",
+      "sha256": "de29ee6bfdf2bdc6bd515511b5b47b8d9ffc4500bff0a83f8bd0bd6b584c5aa8",
+      "rewritten": false
+    }
+  },
+  "currentRebuild": {
+    "validationSha256": "67c866e9fb67d9cb9248b246f70360325422c39370cdd09815a26cdcff1fbc4e",
+    "activationSha256": "7577611f13f2e45968bb8970c8dfcb209bede923a8cec7e7eb14154d4e98b922",
+    "allowedValidationScalarDifferenceCount": 18,
+    "allowedActivationScalarDifferenceCount": 6,
+    "allowedDifferenceClasses": [
+      "canonical_brief_digest",
+      "candidate_digest",
+      "candidate_source_brief_digest"
+    ]
+  },
+  "successorAuthorities": [
+    {
+      "path": "content/knowledge/migrations/book-w1d/canonical-registry-reconciliation-active-v1.json",
+      "sha256": "ac3e5a744227829f8eab865b2c75ef41749bae4f077f8cca4b6359fa2869dece"
+    },
+    {
+      "path": "content/knowledge/migrations/book-w1d/publication-ownership-migration-active-v1.json",
+      "sha256": "07c6dc21defbbeb17a83de887e4299d39e42c56333b7a4ce69aa0a9b2c7da5cb"
+    }
+  ],
+  "authorityBoundary": {
+    "currentRebuildDigestMayReplaceHistoricalDigest": false,
+    "historicalCandidateApprovalCreated": false,
+    "historicalPublicationCreated": false,
+    "canonicalKnowledgeMutatedByReconciliation": false,
+    "successorLineageOnly": true
+  }
+}

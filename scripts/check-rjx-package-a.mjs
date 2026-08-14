@@ -59,10 +59,15 @@ run('RJX-W3',()=>{
 run('RJX-ENTRY-PROVIDER-OPT-IN',()=>{
   const p=j(base+'/policies/rjx-entry-openai-opt-in-repair-candidate-v1.json');
   assert.equal(p.rule.defaultOpenAIAllowed,false); assert.equal(p.rule.explicitTrueRequired,true);
+  assert.equal(p.status,'CANDIDATE_BLOCKED_BY_PDS_W0_FREEZE');
+  assert.equal(p.implementation.applied,false);
+  assert.equal(p.implementation.protectedFilesRestored,true);
+  assert.equal(p.implementation.productionBehaviourChanged,false);
   const router=read('functions/runtime/entry/provider-router.js'); const api=read('functions/api/reconstruct-reality.js');
-  assert.ok(router.includes('options.openAIAllowed === true && Boolean(cleanText(env?.OPENAI_API_KEY))'));
-  assert.ok(!router.includes('options.openAIAllowed !== false && Boolean(cleanText(env?.OPENAI_API_KEY))'));
-  assert.ok(api.includes('?.openAIAllowed === true'));
+  assert.equal(h('functions/runtime/entry/provider-router.js'),p.proposedChanges[0].beforeSha256);
+  assert.equal(h('functions/api/reconstruct-reality.js'),p.proposedChanges[1].beforeSha256);
+  assert.ok(router.includes('options.openAIAllowed !== false && Boolean(cleanText(env?.OPENAI_API_KEY))'));
+  assert.ok(api.includes('?.openAIAllowed !== false'));
 });
 
-if(requested==='ALL') console.log('✓ RJX Package A W0-W3 candidate implementation passed: 931 nodes accounted, zero rule activation, frozen JR order preserved, 8→3 client projection valid, and Runtime Entry OpenAI is explicit opt-in.');
+if(requested==='ALL') console.log('✓ RJX Package A W0-W3 candidate implementation passed: 931 nodes accounted, zero rule activation, frozen JR order preserved, 8→3 client projection valid, and the Runtime Entry OpenAI opt-in candidate remains blocked by the PDS-W0 freeze.');

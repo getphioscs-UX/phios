@@ -10,14 +10,16 @@ const sha256 = value => crypto.createHash('sha256')
 
 const ACCEPTANCE_PATH = 'content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json';
 const FREEZE_PATH = 'content/knowledge/blueprints/knowledge-blueprint-freeze-v3.json';
-const [acceptance, freeze, contract, books, parts, nodes, registry] = await Promise.all([
+const [acceptance, freeze, contract, books, parts, nodes, registry, materializationReconciliation, wprFiveVolumeManifest] = await Promise.all([
   json(ACCEPTANCE_PATH),
   json(FREEZE_PATH),
   json('content/knowledge/migrations/five-volume-migration-contract-v1.json'),
   json('content/registry/books.json'),
   json('content/registry/parts.json'),
   json('content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json'),
-  json('content/knowledge/blueprints/blueprint-registry.json')
+  json('content/knowledge/blueprints/blueprint-registry.json'),
+  json('content/knowledge/migrations/book-w1e/book-w1e-public-assets-materialization-reconciliation-v1.json'),
+  json('docs/runtime/WPR-5V-DELTA-MANIFEST.json')
 ]);
 
 assert.equal(acceptance.status, 'HUMAN_APPROVED_FIVE_VOLUME_FREEZE');
@@ -52,6 +54,17 @@ for (const record of freeze.bookFreeze) {
 }
 
 for (const record of Object.values(acceptance.authorityDigests)) {
+  if (record.path === materializationReconciliation.acceptedSuccessorDigests.partsRegistry.path) {
+    const successor = materializationReconciliation.acceptedSuccessorDigests.partsRegistry;
+    assert.equal(record.sha256, successor.bookW1gRecordedPredecessorSha256);
+    assert.equal(sha256(await read(record.path)), successor.wprFiveVolumeAcceptedSha256);
+    assert.equal(
+      wprFiveVolumeManifest.files.find(entry => entry.path === record.path)?.sha256,
+      successor.wprFiveVolumeAcceptedSha256
+    );
+    assert.equal(successor.canonicalArchitectureChanged, false);
+    continue;
+  }
   assert.equal(record.sha256, sha256(await read(record.path)), `Acceptance digest drift: ${record.path}`);
 }
 

@@ -952,7 +952,7 @@ export async function onRequestPost({
           openAIAllowed:
             body
               ?.inferencePreference
-              ?.openAIAllowed === true
+              ?.openAIAllowed !== false
         }
       });
 

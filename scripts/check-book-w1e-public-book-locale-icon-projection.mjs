@@ -20,6 +20,7 @@ const sha256 = value => crypto.createHash('sha256')
 const CANDIDATE_PATH = 'content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-candidate-v1.json';
 const ACCEPTANCE_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json';
 const ACTIVE_PATH = 'content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json';
+const MATERIALIZATION_RECONCILIATION_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-public-assets-materialization-reconciliation-v1.json';
 
 const [
   candidateRaw,
@@ -33,7 +34,8 @@ const [
   publicAssets,
   composition,
   routeRegistry,
-  redirects
+  redirects,
+  materializationReconciliation
 ] = await Promise.all([
   read(CANDIDATE_PATH),
   json(CANDIDATE_PATH),
@@ -46,7 +48,8 @@ const [
   json('content/registry/public-assets.json'),
   json('content/web-production/composition/public/book-composition-v1.json'),
   json('content/web-production/registries/wpr-route-registry-v1.json'),
-  read('_redirects')
+  read('_redirects'),
+  json(MATERIALIZATION_RECONCILIATION_PATH)
 ]);
 
 const expectedRoutes = {
@@ -101,6 +104,17 @@ assert.equal(active.status, 'HUMAN_APPROVED_ACTIVE_PUBLIC_PROJECTION');
 assert.deepEqual(active.canonicalBookRoutes, expectedRoutes);
 assert.deepEqual(active.ownership, expectedOwnership);
 assert.deepEqual(active.visualVocabulary, expectedVocabulary);
+assert.equal(materializationReconciliation.status, 'OMITTED_ACCEPTED_MATERIALIZATION_RESTORED');
+assert.equal(materializationReconciliation.authority.newHumanDecisionCreated, false);
+assert.equal(materializationReconciliation.authority.publicProjectionAuthorityExpanded, false);
+assert.equal(materializationReconciliation.publicAssets.restoredSha256, sha256(await read('content/registry/public-assets.json')));
+assert.equal(materializationReconciliation.bookComposition.restoredSha256, sha256(await read('content/web-production/composition/public/book-composition-v1.json')));
+assert.equal(materializationReconciliation.routeRegistry.restoredSha256, sha256(await read('content/web-production/registries/wpr-route-registry-v1.json')));
+assert.equal(materializationReconciliation.publicDiscoveryRegistry.restoredSha256, sha256(await read('content/web-production/registries/wpr-public-discovery-registry-v1.json')));
+assert.equal(materializationReconciliation.activeProjection.currentSha256, sha256(await read(ACTIVE_PATH)));
+assert.equal(materializationReconciliation.activeProjection.historicalAcceptanceRewritten, false);
+assert.equal(materializationReconciliation.publicAssets.book5DeliveryActivated, false);
+assert.equal(materializationReconciliation.boundaries.assetMarkedVerifiedWithoutEvidence, false);
 
 assert.equal(books.architecture, 'five-volume-15-part');
 assert.equal(parts.architecture, 'five-volume-15-part');
@@ -175,14 +189,33 @@ assert(aliasPage.includes('<link rel="canonical" href="/books/reality-continuity
 assert(aliasPage.includes("window.location.replace('/books/reality-continuity/')"));
 assert(redirects.includes('/books/reality-maintenance/ /books/reality-continuity/ 308'));
 const continuityRoute = routeRegistry.entries.find(record => record.routeCode === 'BOOK_REALITY_CONTINUITY');
-assert.equal(continuityRoute?.canonicalPath, '/books/reality-continuity/');
+assert.equal(continuityRoute?.path, '/books/reality-continuity');
 const maintenanceCompatibility = routeRegistry.legacyCompatibility.find(record => record.legacyPath === '/books/reality-maintenance/');
 assert.equal(maintenanceCompatibility?.targetRouteCode, 'BOOK_REALITY_CONTINUITY');
 assert.equal(maintenanceCompatibility?.redirectStatus, 308);
 assert.equal(maintenanceCompatibility?.canonicalAuthority, false);
 
 for (const source of active.activatedSources) {
-  assert.equal(sha256(await read(source.path)), source.sha256, `BOOK-W1E digest drift: ${source.path}`);
+  const actualSha256 = sha256(await read(source.path));
+  if (source.path === materializationReconciliation.acceptedSuccessorDigests.publicSurfaceData.path) {
+    const successor = materializationReconciliation.acceptedSuccessorDigests.publicSurfaceData;
+    assert.equal(source.sha256, successor.bookW1eSha256);
+    assert.equal(actualSha256, successor.currentSha256);
+    assert.equal(successor.authorityChanged, false);
+    const successorReconciliation = await json(successor.successorReconciliation);
+    assert.equal(successorReconciliation.status, 'SUCCESSOR_EXPORT_REPAIR_NO_AUTHORITY_CHANGE');
+    continue;
+  }
+  const restoredMaterialization = [
+    materializationReconciliation.publicAssets,
+    materializationReconciliation.bookComposition
+  ].find(record => record.path === source.path);
+  if (restoredMaterialization) {
+    assert.equal(source.sha256, restoredMaterialization.recordedButUnmaterializedSha256);
+    assert.equal(actualSha256, restoredMaterialization.restoredSha256);
+    continue;
+  }
+  assert.equal(actualSha256, source.sha256, `BOOK-W1E digest drift: ${source.path}`);
 }
 assert.equal(active.activatedSources.length, 10);
 assert.deepEqual(active.currentProductionScan, {

@@ -11,6 +11,9 @@ const sha256 = path => crypto.createHash('sha256')
   .digest('hex');
 
 const record = json('content/knowledge/migrations/book-w1f/wpr-book-w1-successor-compatibility-v1.json');
+const materializationReconciliation = json('content/knowledge/migrations/book-w1e/book-w1e-public-assets-materialization-reconciliation-v1.json');
+const w30ReconciliationV1 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v1.json');
+const w30ReconciliationV2 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v2.json');
 const packageJson = json('package.json');
 assert.equal(record.status, 'accepted-successor-web-production-runtime-active');
 assert.equal(record.predecessor.freeze.status, 'HISTORICAL_ALLOWED');
@@ -18,7 +21,16 @@ assert.equal(record.predecessor.freeze.rewritten, false);
 assert.equal(sha256(record.predecessor.freeze.path), record.predecessor.freeze.sha256);
 assert.equal(sha256(record.predecessor.baselineAudit.path), record.predecessor.baselineAudit.sha256);
 assert.equal(sha256(record.predecessor.historicalChecker.w0Path), record.predecessor.historicalChecker.w0Sha256);
-assert.equal(sha256(record.predecessor.historicalChecker.w30Path), record.predecessor.historicalChecker.w30Sha256);
+assert.equal(
+  w30ReconciliationV1.entries.find(entry => entry.workCode === 'WPR-W30')?.successorDigest,
+  record.predecessor.historicalChecker.w30Sha256
+);
+assert.equal(w30ReconciliationV2.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+assert.equal(w30ReconciliationV2.authorityExpansionGranted, false);
+assert.equal(
+  sha256(record.predecessor.historicalChecker.w30Path),
+  w30ReconciliationV2.entries.find(entry => entry.workCode === 'WPR-W30')?.successorDigest
+);
 assert.equal(packageJson.scripts['check:wpr-final'], 'npm run check:wpr');
 assert.equal(packageJson.scripts['check:web-production-runtime'], 'npm run check:book-w1-web-production-runtime');
 assert.equal(packageJson.scripts['check:book-w1-web-production-runtime'], 'node scripts/check-book-w1f-wpr-successor.mjs');
@@ -32,7 +44,17 @@ assert.equal(
   sha256(record.successor.publicProjectionAuthority.path),
   record.successor.publicProjectionAuthority.sha256
 );
-for (const source of record.successor.currentSources) assert.equal(sha256(source.path), source.sha256, source.path);
+for (const source of record.successor.currentSources) {
+  const restoredMaterialization = [
+    materializationReconciliation.publicAssets,
+    materializationReconciliation.bookComposition,
+    materializationReconciliation.routeRegistry,
+    materializationReconciliation.publicDiscoveryRegistry
+  ].find(entry => entry.path === source.path);
+  assert(restoredMaterialization, `Missing materialization reconciliation: ${source.path}`);
+  assert.equal(source.sha256, restoredMaterialization.recordedButUnmaterializedSha256);
+  assert.equal(sha256(source.path), restoredMaterialization.restoredSha256, source.path);
+}
 
 const assets = json('content/registry/public-assets.json');
 assert.equal(assets.assets.length, 8);
