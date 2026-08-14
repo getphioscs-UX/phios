@@ -932,7 +932,13 @@
     "ksar:r8:freeze": "node scripts/freeze-ksar-r8-production.mjs",
     "ksar:r8:close": "node scripts/close-ksar-r8-remote-and-freeze.mjs",
     "check:ksar-r8-state": "node scripts/check-ksar-r8-production-state.mjs",
-    "check:ksar-r8": "node scripts/check-ksar-r8-production-freeze.mjs"
+    "check:ksar-r8": "node scripts/check-ksar-r8-production-freeze.mjs",
+    "check:kap-w0": "node scripts/check-kap-w0-existing-runtime-capability-audit.mjs",
+    "check:kap-w1": "node scripts/check-kap-w1-authority-boundary.mjs",
+    "check:kap-w2": "node scripts/check-kap-w2-question-scoped-answer-object.mjs",
+    "check:kap-w3": "node scripts/check-kap-w3-client-answer-levels.mjs",
+    "check:kap-foundation": "node scripts/check-kap-w0-w3-authority-foundation.mjs",
+    "check:kap": "npm run check:kap-foundation"
   },
   "type": "module"
 }
