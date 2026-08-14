@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W4-W10-KNOWLEDGE-GROUNDING-FREEZE-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W4",
+    "KAP-W5",
+    "KAP-W6",
+    "KAP-W7",
+    "KAP-W8",
+    "KAP-W9",
+    "KAP-W10"
+  ],
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "status": "FROZEN_KNOWLEDGE_GROUNDING_RUNTIME_NO_ANSWER_COMPOSITION",
+  "frozenOutputs": [
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w4-question-intake-contract-v1.json",
+      "sha256": "b766deee687d842a682d5ca2201d4676ed57896cd057263ea7b2941fe0199a27"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/kap-question-intake-v1.schema.json",
+      "sha256": "e374a42397b8ddff22f8b1b91f4f7672523e53295ab81c7ec7e3bfda15ce21d3"
+    },
+    {
+      "path": "content/knowledge/answer-projection/fixtures/kap-question-intake.valid.json",
+      "sha256": "e53c5c036545238f94f37aef6daf4bebc8aed8c118d494cc594fb7dfe5a96f6e"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w5-question-normalization-contract-v1.json",
+      "sha256": "8734219788dc0eb6996cb641c88a643e09d39e987e320918913f34f2966fdb6a"
+    },
+    {
+      "path": "content/knowledge/answer-projection/registries/kap-w5-question-normalization-policy-v1.json",
+      "sha256": "93c07399b67678bc1bc57de17abef3e8865fed197f2c19e9723daf41971bc034"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w6-knowledge-retrieval-contract-v1.json",
+      "sha256": "888c9f3d2c183fdb9963e76c193bc36a27f22757f63ef41699029b97dfe13cb9"
+    },
+    {
+      "path": "content/knowledge/answer-projection/registries/kap-w6-knowledge-retrieval-source-registry-v1.json",
+      "sha256": "a471aa6f544baa2cdd15add7a30be7ac5640efa59e6fa6979501b0012135ec93"
+    },
+    {
+      "path": "content/knowledge/answer-projection/fixtures/kap-knowledge-retrieval.hybrid.valid.json",
+      "sha256": "870229d3660094a9069de51e56d090601a2fe174aaab99de01270aca83eccb1d"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w7-canonical-node-matching-contract-v1.json",
+      "sha256": "c61078704ab29415e7863508482bfa7893bad3a533749ed6af503463c4698526"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w8-relationship-expansion-contract-v1.json",
+      "sha256": "747767fdb61dab7d7a71b9e2a613fb3ecb6f1152a58aba200ab6296aaffdb4c7"
+    },
+    {
+      "path": "content/knowledge/answer-projection/registries/kap-w8-relationship-expansion-policy-v1.json",
+      "sha256": "39897105e59d7295fd163f47bdfc50f95304b0abea63f38acb7fb55fc0c2d516"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w9-knowledge-grounding-bundle-contract-v1.json",
+      "sha256": "edb79be18997a45c27ef24d524d0678ea39073aa66249f064296671483a0bd65"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/knowledge-grounding-bundle-v1.schema.json",
+      "sha256": "5622ebcb1000fbb47fdabd7a492e7c1744f0494ca271f89c3b098a7784e5558a"
+    },
+    {
+      "path": "content/knowledge/answer-projection/fixtures/knowledge-grounding-bundle.valid.json",
+      "sha256": "873599e1803b837c93c0fe3127a682babcc69f300848232f0fe50196b94e64dc"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w10-coverage-evaluation-contract-v1.json",
+      "sha256": "ee0ab8ec087644d4f4336e48dd811e7fb18cb22f004438ac5e2f4d2737154182"
+    },
+    {
+      "path": "content/knowledge/answer-projection/registries/kap-w10-coverage-policy-v1.json",
+      "sha256": "30d1f37549da7dfe1376821257fca2f9d30dbbf865359f188a61f0d3ca88f5c1"
+    },
+    {
+      "path": "content/knowledge/answer-projection/fixtures/kap-coverage-decision.valid.json",
+      "sha256": "24f408346fcc883e89a99fb044486bd88b31c32e4788b683d5e30949b55935a8"
+    },
+    {
+      "path": "functions/_lib/knowledge-answer-grounding.js",
+      "sha256": "b251475a4ff303b6c7428290d7ed231af5416b8fffa14077b9defe37952e5011"
+    },
+    {
+      "path": "content/knowledge/answer-projection/acceptance/kap-w4-w10-knowledge-grounding-acceptance-v1.json",
+      "sha256": "f031239c8b853c7279e547678b13032708a3942551c6ae0a12cbb2b4cea99a5d"
+    }
+  ],
+  "predecessorEvidence": [
+    {
+      "name": "kapPhase1Freeze",
+      "path": "content/knowledge/answer-projection/freeze/kap-w0-w3-authority-foundation-freeze-v1.json",
+      "sha256": "75fea46e1f4a1f414900743c1efca5afe3a59f88fcb85d8ff3aa61dee9a02a68"
+    },
+    {
+      "name": "knowledgeAccessApi",
+      "path": "functions/_lib/knowledge-access-api.js",
+      "sha256": "0d1192a081849761a6a88e8623f14e95d70c9f94f007f2b99deeb9f723202fd5"
+    },
+    {
+      "name": "publicKnowledgeApi",
+      "path": "functions/_lib/public-knowledge-api.js",
+      "sha256": "11e333b04587d4ab08b0d1943c0e1fbc246bac6980c0de034250bc5676058ab6"
+    },
+    {
+      "name": "ksarProductionFreeze",
+      "path": "content/knowledge/source-access/freeze/ksar-r8-production-freeze-v1.json",
+      "sha256": "c5d16ad6d9aa6c95bc4143962c9ea1fc3cd26b70bc3114ddb7876b461dbc55cf"
+    },
+    {
+      "name": "manuscriptBindingRegistry",
+      "path": "content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json",
+      "sha256": "9a06ef1cab9740508a732ed74976dd022e62a9c0ff7f53c1304969fc76d116b6"
+    },
+    {
+      "name": "reviewedCorpusRegistry",
+      "path": "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json",
+      "sha256": "87ad2425427f3583b890b2b8b785d4f52caa8969e3b986c7fa0b4c9c9027cefa"
+    },
+    {
+      "name": "publicRelationships",
+      "path": "content/knowledge/public/retrieval/relationships.json",
+      "sha256": "b7564ebc297b4a35ece504ffc8872991c857fee90b71b59ae32d3a1914806065"
+    },
+    {
+      "name": "mechanismExpansion",
+      "path": "content/knowledge/intelligence/expansion/relationship-mechanism-expansion.json",
+      "sha256": "a3fa398b9cf5527733b80caf93ce6966291ee51dbe38b498a515b5ac2855667f"
+    },
+    {
+      "name": "relationshipExpansionPolicy",
+      "path": "content/knowledge/runtime/knowledge-intelligence/package-k-b/relationship-mechanism-expansion-policy-v1.json",
+      "sha256": "60dbacd311c688bb54ffd9d62ef93095f1f4720e90a95161a6edaa2e7a6bdac5"
+    }
+  ],
+  "pipelineFreeze": {
+    "capability": "ASK_PHIOS",
+    "questionIntake": "ACTIVE",
+    "normalization": "DETERMINISTIC_NON_AUTHORITATIVE",
+    "retrievalAuthority": "KSAR",
+    "nodeMatching": "GOVERNED_MATCH_PROJECTION",
+    "relationshipExpansion": "PUBLISHED_GRAPH_ONLY_DEPTH_1_DISCLOSE_NOT_PROMOTE",
+    "groundingBundle": "GROUNDED_NON_AUTHORITATIVE_INPUT",
+    "coverageEvaluation": "DETERMINISTIC"
+  },
+  "authorityInvariants": {
+    "knowledgeAuthorityPreserved": true,
+    "answerAuthorityNotCreatedByPhase2": true,
+    "publicationAuthorityPreserved": true,
+    "realityReadingAuthorityPreserved": true,
+    "automaticSemanticBindingForbidden": true,
+    "unpublishedTargetContentInjectionForbidden": true,
+    "upstreamGroundedAnswerNotConsumed": true
+  },
+  "nonActivation": {
+    "answerComposition": false,
+    "aiRouting": false,
+    "guidedReading": false,
+    "realityJourneyMutation": false,
+    "mcd": false,
+    "publication": false,
+    "clientSurface": false,
+    "persistentCaseCreation": false
+  },
+  "nextPermittedWork": "KAP-W11_DETERMINISTIC_ANSWER_FIRST",
+  "successorRule": "Any change to KAP-W4-W10 grounding semantics must use a versioned successor and preserve the KAP-W0-W3 authority foundation."
+}

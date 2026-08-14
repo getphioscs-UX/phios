@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W10-COVERAGE-POLICY-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W10",
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "statuses": [
+    "STRONG_COVERAGE",
+    "PARTIAL_COVERAGE",
+    "INSUFFICIENT_COVERAGE",
+    "OUT_OF_SCOPE"
+  ],
+  "rules": {
+    "strongPublishedCoverage": [
+      "exact",
+      "strong"
+    ],
+    "hybridPublishedPlusManuscriptMayBeStrong": true,
+    "anyGovernedSourceWithoutStrongCriterionIsPartial": true,
+    "zeroGroundingSourcesIsInsufficient": true,
+    "outOfScopeRequiresExplicitScopeDisposition": true,
+    "coverageMayCreateAuthority": false,
+    "coverageMayRequireRealityJourney": false,
+    "coverageMayRequireGuidedReading": false,
+    "coverageMayRequireAi": false,
+    "bundleUnknownsRequireDisclosureEvenWhenCoverageStrong": true
+  },
+  "answerCompositionEligibility": {
+    "STRONG_COVERAGE": true,
+    "PARTIAL_COVERAGE": true,
+    "INSUFFICIENT_COVERAGE": false,
+    "OUT_OF_SCOPE": false
+  },
+  "unknownDisclosureRequired": {
+    "STRONG_COVERAGE": "WHEN_BUNDLE_UNKNOWNS_PRESENT",
+    "PARTIAL_COVERAGE": true,
+    "INSUFFICIENT_COVERAGE": true,
+    "OUT_OF_SCOPE": true
+  }
+}

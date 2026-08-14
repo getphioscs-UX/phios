@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {BASELINE,ROOT,readJson} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
+import {createKapQuestionIntake,normalizeKapQuestion} from '../functions/_lib/knowledge-answer-grounding.js';
+const c=readJson(`${ROOT}/contracts/kap-w5-question-normalization-contract-v1.json`);
+const p=readJson(`${ROOT}/registries/kap-w5-question-normalization-policy-v1.json`);
+assert.equal(c.step,'KAP-W5'); assert.equal(c.baselineCommit,BASELINE); assert.equal(c.rules.deterministic,true); assert.equal(c.rules.providerUsed,false); assert.equal(c.rules.aiUsed,false);
+assert.equal(p.rules.hintsAreMeaningAuthority,false); assert.equal(p.rules.hintsAreRealityEvidence,false); assert.equal(p.rules.automaticDiagnosisAllowed,false);
+const intake=createKapQuestionIntake({question:'  为什么我最近一直很累？  ',locale:'zh-Hans'});
+const a=normalizeKapQuestion(intake), b=normalizeKapQuestion(intake);
+assert.deepEqual(a,b); assert.equal(a.hints.questionType,'CAUSAL'); assert.equal(a.hints.subject,'SELF'); assert.equal(a.hints.timeScope,'RECENT');
+assert.equal(a.authority.hintsAreMeaningAuthority,false); assert.equal(a.authority.hintsAreRealityEvidence,false); assert.ok(a.tokens.length>0);
+const en=normalizeKapQuestion(createKapQuestionIntake({question:'Why am I tired lately?',locale:'en'}));
+assert.equal(en.hints.questionType,'CAUSAL'); assert.equal(en.hints.subject,'SELF'); assert.equal(en.hints.timeScope,'RECENT');
+console.log('✓ KAP-W5 Question Normalization passed.');

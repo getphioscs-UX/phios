@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {BASELINE,ROOT,readJson} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
+import {createKapQuestionIntake,KAP_GROUNDING_LIMITS} from '../functions/_lib/knowledge-answer-grounding.js';
+const c=readJson(`${ROOT}/contracts/kap-w4-question-intake-contract-v1.json`);
+const s=readJson(`${ROOT}/schemas/kap-question-intake-v1.schema.json`);
+const f=readJson(`${ROOT}/fixtures/kap-question-intake.valid.json`);
+assert.equal(c.step,'KAP-W4'); assert.equal(c.baselineCommit,BASELINE); assert.equal(c.capability,'ASK_PHIOS');
+assert.equal(c.rules.maximumQueryLength,500); assert.equal(KAP_GROUNDING_LIMITS.maximumQueryLength,500);
+assert.equal(s.properties.capability.const,'ASK_PHIOS'); assert.deepEqual(s.properties.locale.enum,['en','zh-Hans']);
+const actual=createKapQuestionIntake({question:f.question.originalText,locale:f.locale,sessionRef:f.sessionRef,surfaceContext:f.surfaceContext});
+assert.deepEqual(actual,f);
+for(const value of Object.values(actual.governance)) assert.equal(value,false);
+assert.throws(()=>createKapQuestionIntake({question:'',locale:'zh-Hans'}),/KAP_QUESTION_INVALID/);
+assert.throws(()=>createKapQuestionIntake({question:'x'.repeat(501),locale:'zh-Hans'}),/KAP_QUESTION_INVALID/);
+assert.throws(()=>createKapQuestionIntake({question:'why',locale:'fr'}),/KAP_LOCALE_UNSUPPORTED/);
+console.log('✓ KAP-W4 Question Intake passed.');

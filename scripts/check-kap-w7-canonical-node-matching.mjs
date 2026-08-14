@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {BASELINE,ROOT,readJson} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
+import {deriveKapNodeMatches} from '../functions/_lib/knowledge-answer-grounding.js';
+const c=readJson(`${ROOT}/contracts/kap-w7-canonical-node-matching-contract-v1.json`);
+const retrieval=readJson(`${ROOT}/fixtures/kap-knowledge-retrieval.hybrid.valid.json`);
+assert.equal(c.step,'KAP-W7'); assert.equal(c.baselineCommit,BASELINE); assert.equal(c.rules.pendingManuscriptBindingMayClaimNodeCode,false); assert.equal(c.rules.automaticSemanticBindingAllowed,false);
+const m=deriveKapNodeMatches(retrieval);
+assert.equal(m.primaryNodes[0].nodeCode,'KN-PREFACE-001'); assert.equal(m.primaryNodes[0].matchRole,'PRIMARY');
+assert.ok(m.supportingNodes.some(x=>x.nodeCode==='KN-PREFACE-004'&&x.approvedManuscriptBinding));
+assert.ok(m.pendingManuscriptSections.some(x=>x.sectionCode==='CM-B1V2-P1-S999'));
+assert.equal(m.matchedNodeCodes.includes('CM-B1V2-P1-S999'),false); assert.equal(m.canonicalAuthorityCreated,false); assert.equal(m.automaticSemanticBindingUsed,false);
+console.log('✓ KAP-W7 Canonical Node Matching passed.');

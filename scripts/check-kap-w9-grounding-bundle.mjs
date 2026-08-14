@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {BASELINE,ROOT,readJson} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
+import {createKapQuestionIntake,normalizeKapQuestion,deriveKapNodeMatches,expandKapRelationships,buildKnowledgeGroundingBundle} from '../functions/_lib/knowledge-answer-grounding.js';
+const c=readJson(`${ROOT}/contracts/kap-w9-knowledge-grounding-bundle-contract-v1.json`); const s=readJson(`${ROOT}/schemas/knowledge-grounding-bundle-v1.schema.json`); const expected=readJson(`${ROOT}/fixtures/knowledge-grounding-bundle.valid.json`); const retrieval=readJson(`${ROOT}/fixtures/kap-knowledge-retrieval.hybrid.valid.json`);
+assert.equal(c.step,'KAP-W9'); assert.equal(c.baselineCommit,BASELINE); assert.equal(s.properties.objectType.const,'KnowledgeGroundingBundle'); assert.equal(s.properties.authorityClass.const,'GROUNDED_NON_AUTHORITATIVE_INPUT');
+const intake=createKapQuestionIntake({question:'为什么人工智能是文明能力长期累积的结果？',locale:'zh-Hans',sessionRef:'SESSION-FOUNDATION-001',surfaceContext:{surfaceType:'KNOWLEDGE_SEARCH',nodeCode:'KN-PREFACE-001'}}); const normalized=normalizeKapQuestion(intake); const nodeMatches=deriveKapNodeMatches(retrieval);
+const rel=readJson('content/knowledge/public/retrieval/relationships.json'); const exp=readJson('content/knowledge/intelligence/expansion/relationship-mechanism-expansion.json'); const expansion=expandKapRelationships({nodeMatches,relationshipRecords:rel.records,mechanismExpansions:exp.records,locale:'zh-Hans'});
+const actual=buildKnowledgeGroundingBundle({intake,normalized,retrieval,nodeMatches,expansion}); assert.deepEqual(actual,expected);
+assert.equal(actual.retrieval.upstreamGroundedAnswerConsumed,false); assert.ok(actual.excludedMaterial.includes('UPSTREAM_GROUNDED_ANSWER_TEXT')); assert.ok(actual.excludedMaterial.includes('CLIENT_REALITY_EVIDENCE')); assert.ok(actual.excludedMaterial.includes('METHOD_CALCULATION_RESULT'));
+for(const value of Object.values(actual.governance)) assert.equal(value,false); assert.ok(actual.unknowns.some(x=>x.code==='CANONICAL_BINDING_PENDING')); assert.ok(actual.unknowns.some(x=>x.code==='RELATED_TARGET_NOT_PUBLISHED'));
+console.log('✓ KAP-W9 Knowledge Grounding Bundle passed.');

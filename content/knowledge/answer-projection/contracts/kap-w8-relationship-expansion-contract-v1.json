@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W8-RELATIONSHIP-EXPANSION-CONTRACT-v1.0.0",
+  "phase": "KAP",
+  "step": "KAP-W8",
+  "baselineCommit": "a1c724138c4fcb43599537e6b58cb0b8205253e4",
+  "status": "ACTIVE_BOUNDED_GOVERNED_EXPANSION",
+  "input": "KAP_NODE_MATCH_SET",
+  "output": "KAP_RELATIONSHIP_EXPANSION",
+  "policyPath": "content/knowledge/answer-projection/registries/kap-w8-relationship-expansion-policy-v1.json",
+  "predecessorAuthorities": {
+    "relationshipProjection": "content/knowledge/public/retrieval/relationships.json",
+    "mechanismExpansion": "content/knowledge/intelligence/expansion/relationship-mechanism-expansion.json",
+    "expansionPolicy": "content/knowledge/runtime/knowledge-intelligence/package-k-b/relationship-mechanism-expansion-policy-v1.json"
+  },
+  "rules": {
+    "maximumDepth": 1,
+    "unpublishedRelationshipTargetGroundingEligible": false,
+    "blockedContinuationDisclosureAllowed": true,
+    "providerUsed": false,
+    "unsupportedInferenceUsed": false,
+    "newRelationshipCreationAllowed": false
+  },
+  "nextStep": "KAP-W9_GROUNDING_BUNDLE"
+}
