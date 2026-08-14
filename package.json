@@ -998,7 +998,17 @@
     "check:rjx-package-a": "node scripts/check-rjx-package-a.mjs",
     "check:mcd-4-historical": "node scripts/check-mcd-4-execution.mjs && node scripts/check-mcd-4-execution-freeze.mjs",
     "check:mcd-5": "node scripts/check-mcd-5-canonical-method-projection.mjs && node scripts/check-mcd-5-canonical-projection-freeze.mjs",
-    "check:mcd-canonical-result": "npm run check:mcd-5"
+    "check:mcd-canonical-result": "npm run check:mcd-5",
+    "check:rjx-workspace": "node scripts/check-rjx-package-b.mjs RJX-W4",
+    "check:rjx-progressive-disclosure": "node scripts/check-rjx-package-b.mjs RJX-W5",
+    "check:rjx-simple-case": "node scripts/check-rjx-package-b.mjs RJX-W6",
+    "check:rjx-complex-case": "node scripts/check-rjx-package-b.mjs RJX-W7",
+    "check:rjx-method-provenance": "node scripts/check-rjx-package-b.mjs RJX-W7A",
+    "check:rjx-method-persistence": "node scripts/check-rjx-package-b.mjs RJX-W7B",
+    "check:rjx-hdr-boundary": "node scripts/check-rjx-package-b.mjs RJX-W7C",
+    "check:rjx-method-recalculation": "node scripts/check-rjx-package-b.mjs RJX-W7D",
+    "check:rjx-package-b": "node scripts/check-rjx-package-b.mjs",
+    "check:rjx-931-eligibility": "node scripts/check-rjx-931-rule-eligibility-classification.mjs"
   },
   "type": "module"
 }

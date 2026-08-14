@@ -1,0 +1,16 @@
+import fs from "node:fs"; import assert from "node:assert/strict";
+const j=p=>JSON.parse(fs.readFileSync(p,"utf8"));
+const reg=j("content/runtime/journey-runtime/registries/canonical-node-rule-eligibility-v1.json");
+assert.equal(reg.entries.length,931); assert.equal(reg.entries.filter(x=>x.humanAcceptance?.accepted===true).length,931); assert.equal(reg.entries.filter(x=>x.activeRule===true).length,0);
+const w=j("content/runtime/journey-runtime/contracts/reality-workspace-contract-v1.json"); assert.equal(w.canonicalRouteCandidate,"/reality/"); assert.equal(w.routeActivated,false); assert.deepEqual(w.clientStages,["Understand","Choose","Review"]);
+const routes=j("content/runtime/journey-runtime/compatibility/reality-route-compatibility-v1.json"); assert.equal(routes.canonicalRouteActivated,false); assert.equal(routes.routes.length,6); assert.equal(routes.routes.some(x=>x.redirectActivated),false);
+const d=j("content/runtime/journey-runtime/contracts/progressive-disclosure-contract-v1.json"); assert.equal(d.aiMayHideCriticalInformation,false); assert.ok(d.neverHidden.includes("BLOCKING_UNKNOWN"));
+const s=j("content/runtime/journey-runtime/fixtures/job-change-simple-case.valid.json"); assert.equal(s.requirements.aiRequired,false); assert.equal(s.requirements.methodRequired,false); assert.equal(s.requirements.singleDecisionOutputAllowed,false); assert.ok(s.requirements.minimumBoundedOptions>=2);
+for(const f of ["family-intergenerational-case","long-term-relationship-case","organization-resource-conflict-case","enterprise-multi-objective-case"]){const x=j(`content/runtime/journey-runtime/fixtures/${f}.valid.json`); assert.equal(x.mode,"COMPLEX_REALITY_CASE"); assert.equal(x.relationships.some(r=>r.inventedByAI),false)}
+const mp=j("content/runtime/journey-runtime/contracts/method-case-provenance-contract-v1.json"); assert.equal(mp.methodCalculationMayBeObserved,false); assert.equal(mp.rmoCompatibility.whenFrozenEnumCannotAddCalculated.state,"DERIVED");
+const mc=j("content/runtime/journey-runtime/registries/method-case-classification-registry-v1.json"); assert.equal(mc.classifications.find(x=>x.methodCode==="HDR").caseHandoffClassification,"NOT_ALLOWED");
+const hand=j("content/runtime/journey-runtime/contracts/method-result-case-handoff-contract-v1.json"); assert.equal(hand.automaticPersistenceIntoCase,false); assert.equal(hand.revokedConsentStopsFutureUse,true);
+const hdr=j("content/runtime/journey-runtime/contracts/hdr-reality-boundary-contract-v1.json"); assert.equal(hdr.guards.productionBlocked,true); assert.equal(hdr.guards.caseHandoffAllowed,false); assert.equal(hdr.guards.clientEvidenceAllowed,false); assert.equal(hdr.restrictedTrademarkVocabularyClientVisible,false);
+const mr=j("content/runtime/journey-runtime/contracts/method-result-successor-contract-v1.json"); assert.equal(mr.silentOverwriteAllowed,false); assert.equal(mr.caseImpactCandidateAutomaticallyMutatesReading,false); assert.equal(mr.caseImpactRequiresReview,true);
+const m5=j("content/professional/method-client-delivery/contracts/mcd-5-hdr-validation-only-projection-contract-v1.json"); assert.equal(m5.productionCustomerResult,false); assert.equal(m5.mpaDispatchAllowed,false);
+console.log("✓ RJX Package B W4-W7D passed: 931 eligibility accepted, 0 bindings active, workspace candidate not activated, method/HDR boundaries preserved.");

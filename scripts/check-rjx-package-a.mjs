@@ -37,7 +37,7 @@ run('RJX-W1-RULE-CANDIDATES',()=>{
   assert.equal(new Set(e.entries.map(x=>x.nodeCode)).size,931); assert.equal(new Set(b.bindings.map(x=>x.sourceNodeCodes[0])).size,931);
   assert.deepEqual(new Set(e.entries.map(x=>x.nodeCode)),new Set(canonical.nodes.map(x=>x.nodeCode)));
   const allowed=new Set(['EXECUTABLE_RULE','STATE_PRIMITIVE','EVIDENCE_QUESTION','EXPLANATION_FRAGMENT','RETRIEVAL_ONLY','CONTEXT_ONLY','PROFESSIONAL_GATED','NON_EXECUTABLE','DEFER']);
-  assert.ok(e.entries.every(x=>allowed.has(x.proposedDisposition ?? x.selectedDisposition)&&x.activeRule===false&&x.productionEffect==='none'&&x.canonicalMutation===false&&x.humanAcceptance===null));
+  assert.ok(e.entries.every(x=>allowed.has(x.proposedDisposition ?? x.selectedDisposition)&&x.activeRule===false&&x.productionEffect==='none'&&x.canonicalMutation===false&&x.humanAcceptance?.accepted===true));
   assert.ok(b.bindings.every(x=>x.sourceNodeCodes.length===1&&x.predicate===null&&x.activeRule===false&&x.productionEffect==='none'&&x.humanAcceptance===null));
   assert.equal(e.authority.canonicalRegistry.sha256,h(canonicalPath));
 });

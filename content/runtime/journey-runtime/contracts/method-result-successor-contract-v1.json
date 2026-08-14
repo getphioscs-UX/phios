@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-RJX-METHOD-RESULT-SUCCESSOR-v1.0.0",
+  "work": "RJX-W7D",
+  "status": "CANDIDATE",
+  "baselineCommit": "2bd7fd80da907a53f5f4a0f5c0e2db0a87100a4e",
+  "triggers": [
+    "INPUT_CHANGED",
+    "TIMEZONE_CORRECTED",
+    "BIRTH_TIME_CORRECTED",
+    "LOCATION_COORDINATES_CORRECTED",
+    "RUNTIME_VERSION_CHANGED",
+    "ADAPTER_VERSION_CHANGED",
+    "PROJECTION_VERSION_CHANGED",
+    "POLICY_CHANGED"
+  ],
+  "silentOverwriteAllowed": false,
+  "requiredLineage": [
+    "previousResultId",
+    "successorResultId",
+    "changeReason",
+    "inputDiff",
+    "calculationDiff",
+    "projectionDiff",
+    "policyDiff",
+    "createdAt"
+  ],
+  "diffFields": [
+    "inputChanged",
+    "calculationChanged",
+    "projectionChanged",
+    "versionChanged",
+    "policyChanged",
+    "meaningChanged",
+    "caseImpactCandidate",
+    "reviewRequired"
+  ],
+  "caseImpactCandidateAutomaticallyMutatesReading": false,
+  "caseImpactRequiresReview": true
+}
