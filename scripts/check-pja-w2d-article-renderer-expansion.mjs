@@ -378,11 +378,38 @@ const [publishedChinese, publishedEnglish] = await Promise.all([
   loadPublishedArticles('en')
 ]);
 globalThis.fetch = originalFetch;
+const visualArticleRelease = await readJson(
+  'content/knowledge/public/visual-article-release.json'
+);
+const englishPrefaceVisualRelease = (visualArticleRelease.records || []).find(record => (
+  record.nodeCode === 'KN-PREFACE-001' &&
+  record.locale === 'en' &&
+  record.status === 'published'
+));
+const publishedEnglishPreface = publishedEnglish.find(article => (
+  article.nodeCode === 'KN-PREFACE-001' && article.locale === 'en'
+));
 assert.equal(publishedChinese.length, vapW27Executed ? 4 : 3);
-assert.equal(publishedEnglish.length, 3);
+assert.equal(
+  publishedEnglish.length,
+  englishPrefaceVisualRelease ? 4 : 3,
+  'PJA-W2D English publication count must follow the governed VAP-L10N visual release successor.'
+);
+assert.equal(
+  Boolean(publishedEnglishPreface),
+  Boolean(englishPrefaceVisualRelease),
+  'KN-PREFACE-001 English may enter public article loading only through a published EN visual release successor.'
+);
+if (englishPrefaceVisualRelease) {
+  assert.equal(englishPrefaceVisualRelease.slug, 'ai-formation-from-civilizational-capability');
+  assert.equal(
+    englishPrefaceVisualRelease.path,
+    '/content/knowledge/public/visual-articles/en/ai-formation-from-civilizational-capability.json'
+  );
+}
 for (const publicArticle of [
   ...publishedChinese.filter(article => article.nodeCode !== 'KN-PREFACE-001'),
-  ...publishedEnglish
+  ...publishedEnglish.filter(article => article.nodeCode !== 'KN-PREFACE-001')
 ]) {
   const publicJson = JSON.stringify(publicArticle);
   assert.equal(publicArticle.publicSources.length, 1);
