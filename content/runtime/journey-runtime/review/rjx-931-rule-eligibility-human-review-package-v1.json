@@ -1,50 +1,9 @@
 {
-  "schemaVersion": "PHI-OS-RJX-RULE-ELIGIBILITY-v1.1.0",
-  "phase": "RJX",
-  "work": "RJX-W1",
-  "status": "CANDIDATE_CLASSIFIED_AWAITING_HUMAN_REVIEW",
+  "schemaVersion": "PHI-OS-RJX-931-RULE-ELIGIBILITY-HUMAN-REVIEW-v1.0.0",
+  "status": "OPEN_FOR_TL_REVIEW",
   "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
-  "authority": {
-    "canonicalRegistry": {
-      "path": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
-      "sha256": "5156bf1a591754ce31efabd8648dacb1e4b5f61b2cd47674fa3055b0cb402932"
-    },
-    "blueprintRegistry": {
-      "path": "content/knowledge/blueprints/blueprint-registry.json",
-      "sha256": "e234261da01a06a6098dfdbcc1319fe7f9fc5e63224e7c1c01d3eb18e2d20941"
-    },
-    "fiveVolume": {
-      "path": "content/knowledge/migrations/book-w1-five-volume-acceptance-v1.json",
-      "sha256": "e079410c9b06b530a29592cc1fed781f2eae57c6ab8281e42aeb34a7042fbfff"
-    },
-    "blueprints": {
-      "BOOK-1": {
-        "path": "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
-        "sha256": "c0b76c15b40ecd4daf7249d67ff14b0a500a7111e078adb25ab8d83e26b46ae3"
-      },
-      "BOOK-2": {
-        "path": "content/knowledge/blueprints/successors/book-w1d/book-2-knowledge-blueprint-v4.json",
-        "sha256": "e90c0720444db76b5a34f59759142f684479028e6d42641a7104347966e6495d"
-      },
-      "BOOK-3": {
-        "path": "content/knowledge/blueprints/successors/book-w1d/book-3-knowledge-blueprint-v2.json",
-        "sha256": "00232d7c2b6d9fb6fad7fc43f58dfb07adb4b00cd3d863867bfb6c03e51a7eac"
-      },
-      "BOOK-4": {
-        "path": "content/knowledge/blueprints/successors/book-w1d/book-4-knowledge-blueprint-v4.json",
-        "sha256": "c3c9253f4eb3e6bf764fab5ad0c18fbb8cf17e3c312e02d4dd14bf3358aa93c0"
-      },
-      "BOOK-5": {
-        "path": "content/knowledge/blueprints/successors/book-w1d/book-5-knowledge-blueprint-v2.json",
-        "sha256": "a0cd78865aaf46f67e1ff0b46687b416acac3ff45d695f73bf8eb95cd6a14d4c"
-      }
-    },
-    "classificationIsCandidateOnly": true,
-    "humanAcceptanceRequiredForActivation": true,
-    "automaticRuleActivationForbidden": true,
-    "canonicalMutationAllowed": false
-  },
-  "accounting": {
+  "sourceRegistry": "content/runtime/journey-runtime/registries/canonical-node-rule-eligibility-v1.json",
+  "summary": {
     "canonicalNodeCount": 931,
     "accountedNodeCount": 931,
     "byBook": {
@@ -89,23 +48,15 @@
     "automaticActiveRuleCount": 0,
     "humanAcceptedBindingCount": 0
   },
-  "policy": {
-    "allowedDispositions": [
-      "EXECUTABLE_RULE",
-      "STATE_PRIMITIVE",
-      "EVIDENCE_QUESTION",
-      "EXPLANATION_FRAGMENT",
-      "RETRIEVAL_ONLY",
-      "CONTEXT_ONLY",
-      "PROFESSIONAL_GATED",
-      "NON_EXECUTABLE",
-      "DEFER"
+  "decisionModel": {
+    "allowed": [
+      "ACCEPT_PROPOSAL",
+      "CHANGE_DISPOSITION",
+      "DEFER",
+      "REJECT_FOR_RULE_USE"
     ],
-    "selectedDispositionIsProposalOnly": true,
-    "executableRuleAlwaysRequiresTLReview": true,
-    "professionalGatedAlwaysRequiresTLReview": true,
-    "book4Default": "CONTEXTUAL_OR_RETRIEVAL_ONLY",
-    "unknownPolicy": "DO_NOT_INFER_MISSING_CASE_FACTS"
+    "activationEffect": "NONE",
+    "humanReviewDoesNotActivateRule": true
   },
   "entries": [
     {

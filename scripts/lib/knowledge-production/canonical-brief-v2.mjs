@@ -11,12 +11,15 @@ const stable = value => {
 };
 const serialize = value => `${JSON.stringify(stable(value), null, 2)}\n`;
 const digest = value => crypto.createHash('sha256').update(typeof value === 'string' || Buffer.isBuffer(value) || value instanceof Uint8Array ? value : serialize(value)).digest('hex');
+const digestTextSource = value => digest(Buffer.from(value).toString('utf8')
+  .replace(/^\uFEFF/, '')
+  .replace(/\r\n?/g, '\n'));
 
 async function digestInputs(root, files) {
   const entries=[];
   for (const relative of [...new Set(files)].filter(Boolean).sort()) {
     const bytes=await fs.readFile(path.join(root,relative));
-    entries.push({path:relative,sha256:digest(bytes)});
+    entries.push({path:relative,sha256:digestTextSource(bytes)});
   }
   return digest(entries);
 }
@@ -58,4 +61,4 @@ export async function buildCanonicalBriefV2(root,nodeCode,{commit}={}) {
   };
   return {...payload,briefDigest:digest(payload)};
 }
-export { serialize, digest };
+export { serialize, digest, digestTextSource };

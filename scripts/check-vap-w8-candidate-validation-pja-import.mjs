@@ -20,6 +20,7 @@ import {
   validationProjection
 } from './lib/visual-article-production/candidate-validation-pja-import-v1.mjs';
 import { importZhHansCandidate, validateZhHansCandidate } from './lib/knowledge-production/zh-hans-candidate-v1.mjs';
+import { digestTextSource } from './lib/knowledge-production/canonical-brief-v2.mjs';
 
 const root = process.cwd();
 const read = relative => JSON.parse(fs.readFileSync(path.join(root, relative), 'utf8'));
@@ -39,6 +40,12 @@ const scalarDiffs = (actual, expected, at = '') => {
   return [{ path: at, actual, expected }];
 };
 const nodeCodes = ['KN-B1-P1-006', 'KN-B1-P2-001', 'KN-B1-P2-009', 'KN-B1-P3-005', 'KN-B1-P3-015', 'KN-B1-P4-006'];
+
+assert.equal(
+  digestTextSource(Buffer.from('{"crossPlatform":true}\n', 'utf8')),
+  digestTextSource(Buffer.from('\uFEFF{"crossPlatform":true}\r\n', 'utf8')),
+  'Canonical Brief text-source digests must normalize UTF-8 BOM and CRLF before hashing.'
+);
 
 const contract = read(VAP_W8_CONTRACT);
 const policy = read(VAP_W8_POLICY);
