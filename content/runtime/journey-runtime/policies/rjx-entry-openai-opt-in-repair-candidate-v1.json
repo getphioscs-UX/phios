@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-RJX-ENTRY-OPENAI-OPT-IN-REPAIR-CANDIDATE-v1.0.0",
+  "phase": "RJX",
+  "scope": "Runtime Entry only",
+  "status": "CANDIDATE_APPLIED_FAIL_CLOSED_DEFAULT",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "recordedAt": "2026-08-14",
+  "rule": {
+    "defaultOpenAIAllowed": false,
+    "explicitTrueRequired": true,
+    "apiKeyStillRequired": true,
+    "autoRouteMaySilentlyReachOpenAI": false,
+    "providerFailurePreservesRuleResult": true
+  },
+  "changedFiles": [
+    {
+      "path": "functions/runtime/entry/provider-router.js",
+      "beforeSha256": "8e12b5a7df15c170135527c5f14fdf2d2d2c0a7a78b40dd244d61df28cd01d67",
+      "afterSha256": "6052e316b608ce41eb88ca5a3249290603135b1c67431103c9201cfbd7e6cae2"
+    },
+    {
+      "path": "functions/api/reconstruct-reality.js",
+      "beforeSha256": "83085d56a41e975fc6211699f79125c6e76d2139f7f0adbbc6b8cc8a139b8e77",
+      "afterSha256": "5312d7c4e75baa50b2955d179f65105740c1dca3c7354fe1ff9f1f52fc76f5db"
+    }
+  ],
+  "nonScope": [
+    "Reading provider cost reconciliation",
+    "Workers AI hard budget",
+    "W19 full provider cost reconciliation"
+  ],
+  "productionAuthorityCreated": false
+}

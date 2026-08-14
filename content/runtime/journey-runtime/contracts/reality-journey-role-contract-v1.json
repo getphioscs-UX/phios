@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-RJX-REALITY-JOURNEY-ROLE-CONTRACT-v1.0.0",
+  "phase": "RJX",
+  "work": "RJX-W0",
+  "status": "CANDIDATE_ONLY",
+  "baselineCommit": "655a6136919fa820f6d064237cf01a8fc4f8f667",
+  "recordedAt": "2026-08-14",
+  "role": {
+    "canonicalStatement": "Reality Journey is a bounded workspace for complex, persistent, multi-factor, case-specific, reality-dependent cases; it is not the default destination for all requests.",
+    "handles": [
+      "complex",
+      "persistent",
+      "multi-factor",
+      "case-specific",
+      "reality-dependent"
+    ],
+    "doesNotOwn": [
+      "knowledge search",
+      "article reading",
+      "method calculation",
+      "AI chat",
+      "professional judgment"
+    ]
+  },
+  "requestClasses": [
+    {
+      "code": "KNOWLEDGE_REQUEST",
+      "destination": "Knowledge Access / Public Knowledge Runtime"
+    },
+    {
+      "code": "METHOD_ONLY",
+      "destination": "Personal Runtime / Method Client Delivery"
+    },
+    {
+      "code": "SIMPLE_REALITY_CASE",
+      "destination": "Lightweight Reality Workspace candidate"
+    },
+    {
+      "code": "COMPLEX_REALITY_CASE",
+      "destination": "Full Reality Journey"
+    },
+    {
+      "code": "PROFESSIONAL_BOUNDARY",
+      "destination": "Professional Review / external regulated professional"
+    },
+    {
+      "code": "UNSUPPORTED",
+      "destination": "Fail-closed unsupported request response"
+    }
+  ],
+  "boundaries": {
+    "allQuestionsDefaultToJourney": false,
+    "knowledgeRequestCreatesPrivateCase": false,
+    "methodOnlyCreatesCase": false,
+    "highRiskGenericAiAnswerAllowed": false,
+    "routerOwnsRealityTruth": false,
+    "routerMayDiagnose": false
+  },
+  "activation": {
+    "humanAccepted": false,
+    "productionEffect": "none",
+    "candidateOnly": true
+  }
+}

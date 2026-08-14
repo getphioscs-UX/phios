@@ -978,7 +978,14 @@
     "check:mcd-adapter": "npm run check:mcd-production-authority && npm run check:mcd-2",
     "check:mcd-3": "node scripts/check-mcd-3-single-birth-input.mjs",
     "check:mcd-canonical-input": "npm run check:mcd-adapter && npm run check:mcd-3",
-    "check:mcd-1-3": "npm run check:mcd-canonical-input"
+    "check:mcd-1-3": "npm run check:mcd-canonical-input",
+    "check:rjx-role": "node scripts/check-rjx-package-a.mjs RJX-W0",
+    "check:rjx-authority": "node scripts/check-rjx-package-a.mjs RJX-W1-AUTHORITY",
+    "check:rjx-rule-candidates": "node scripts/check-rjx-package-a.mjs RJX-W1-RULE-CANDIDATES",
+    "check:rjx-state-projection": "node scripts/check-rjx-package-a.mjs RJX-W2",
+    "check:rjx-client-stages": "node scripts/check-rjx-package-a.mjs RJX-W3",
+    "check:rjx-entry-provider-opt-in": "node scripts/check-rjx-package-a.mjs RJX-ENTRY-PROVIDER-OPT-IN",
+    "check:rjx-package-a": "node scripts/check-rjx-package-a.mjs"
   },
   "type": "module"
 }

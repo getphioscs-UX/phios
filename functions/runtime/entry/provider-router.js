@@ -438,7 +438,7 @@ export async function routeRuntimeEntry({ env = {}, entryInput = {}, options = {
     }
   }
 
-  const openAIAllowed = options.openAIAllowed !== false && Boolean(cleanText(env?.OPENAI_API_KEY));
+  const openAIAllowed = options.openAIAllowed === true && Boolean(cleanText(env?.OPENAI_API_KEY));
 
   if (openAIAllowed) {
     try {
