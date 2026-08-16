@@ -26,6 +26,8 @@ const historical = buildPublishedKnowledgeAuthority(root);
 const expected = buildApsPublishedKnowledgeAuthoritySuccessor(root);
 const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
 const aps7Run = fs.existsSync(path.join(root, aps7RunPath)) ? json(aps7RunPath) : null;
+const abl5RunPath = 'content/production/article-simplification/bilingual/BATCH-001/publication-run.v1.json';
+const abl5Run = fs.existsSync(path.join(root, abl5RunPath)) ? json(abl5RunPath) : null;
 
 assert.equal(contract.policy.allThreeConditionsRequired, true);
 assert.equal(contract.policy.registryPresenceEqualsPublicAvailability, false);
@@ -35,7 +37,8 @@ for (const forbidden of ['modify_candidate','modify_review','modify_approval','m
 
 assert.equal(read(registryPath), stable(expected.registry), 'Published Knowledge Authority must rebuild deterministically with the governed VAP-W1 projection repair.');
 const aps7Published = aps7Run ? aps7Run.outcomes.filter(x => x.decision === 'publish' && x.publicationCreated === true && x.publicReleaseCreated === true) : [];
-assert.equal(actualRegistry.recordCount, 2 + aps7Published.length, 'Published Knowledge Authority may grow only through recorded APS-7 publish outcomes.');
+const abl5Published = abl5Run ? abl5Run.outcomes.filter(x => x.decision === 'publish' && x.publicationCreated === true && x.publicReleaseCreated === true && x.locale === 'en') : [];
+assert.equal(actualRegistry.recordCount, 2 + aps7Published.length + abl5Published.length, 'Published Knowledge Authority may grow only through recorded APS-7 or ABL-5 publish outcomes.');
 const identities = new Set();
 for (const record of actualRegistry.records) {
   const identity = `${record.nodeCode}:${record.locale}`;
@@ -55,9 +58,12 @@ for (const record of actualRegistry.records) {
 assert.ok(identities.has('KN-PREFACE-001:zh-Hans'));
 assert.ok(identities.has('KN-PREFACE-001:en'));
 
-if (aps7Run) {
-  const allowed = new Set(aps7Published.map(x => `${x.nodeCode}:${x.locale}`));
-  for (const record of actualRegistry.records.filter(x => x.nodeCode !== 'KN-PREFACE-001')) assert(allowed.has(`${record.nodeCode}:${record.locale}`), `Published Knowledge Authority extra record lacks APS-7 publish evidence: ${record.nodeCode}:${record.locale}`);
+if (aps7Run || abl5Run) {
+  const allowed = new Set([
+    ...aps7Published.map(x => `${x.nodeCode}:${x.locale}`),
+    ...abl5Published.map(x => `${x.nodeCode}:${x.locale}`)
+  ]);
+  for (const record of actualRegistry.records.filter(x => x.nodeCode !== 'KN-PREFACE-001')) assert(allowed.has(`${record.nodeCode}:${record.locale}`), `Published Knowledge Authority extra record lacks APS-7 / ABL-5 publish evidence: ${record.nodeCode}:${record.locale}`);
 }
 const historicalZh = historical.registry.records.find(x => x.nodeCode === 'KN-PREFACE-001' && x.locale === 'zh-Hans');
 const repairedZh = actualRegistry.records.find(x => x.nodeCode === 'KN-PREFACE-001' && x.locale === 'zh-Hans');
@@ -90,7 +96,7 @@ assert.equal(freeze.acceptance.reviewAuthorityChanged, false);
 assert.equal(freeze.acceptance.approvalAuthorityChanged, false);
 assert.equal(freeze.acceptance.publicationAuthorityChanged, false);
 
-console.log('✓ STEP63 Published Knowledge Authority compatibility passed with VAP-W1 integrity repair and additive APS-7 successor publication authority.');
+console.log('✓ STEP63 Published Knowledge Authority compatibility passed with VAP-W1 integrity repair and additive APS-7 / ABL-5 successor publication authority.');
 console.log('✓ Historical Publication Packages and STEP63 freeze remain immutable and reproducible.');
 console.log('✓ KN-PREFACE-001 zh-Hans summary is repaired only at Published Projection; lineage is unchanged and authorityDigest is recomputed.');
 

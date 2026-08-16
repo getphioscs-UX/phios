@@ -30,6 +30,8 @@ const VISUAL_ASSET_TYPES = Object.freeze([
 const cache = new Map();
 const VISUAL_RELEASE_MANIFEST =
   '/content/knowledge/public/visual-article-release.json';
+const ABL_BILINGUAL_RELEASE_MANIFEST =
+  '/content/knowledge/public/abl-bilingual-release.json';
 
 async function fetchJson(path) {
   const response = await fetch(path, {
@@ -156,6 +158,7 @@ async function loadLocale(locale) {
     fetchJson(REGISTRY_PATHS.assets),
     fetchJson(REGISTRY_PATHS.sources),
     fetchJson(VISUAL_RELEASE_MANIFEST).catch(() => ({ records: [] })),
+    fetchJson(ABL_BILINGUAL_RELEASE_MANIFEST).catch(() => ({ records: [] })),
     loadCanonicalBooks(),
     loadCanonicalParts(),
     loadFiveVolumePublicationContextRegistry()
@@ -165,6 +168,7 @@ async function loadLocale(locale) {
     assetRegistry,
     sourceRegistry,
     visualReleaseManifest,
+    ablBilingualReleaseManifest,
     booksRegistry,
     partsRegistry,
     publicationContextRegistry
@@ -225,7 +229,10 @@ async function loadLocale(locale) {
     }));
 
     const visualArticles = await Promise.all(
-      (visualReleaseManifest.records || [])
+      [
+        ...(visualReleaseManifest.records || []),
+        ...(ablBilingualReleaseManifest.records || [])
+      ]
         .filter(record => (
           record.locale === normalizedLocale &&
           record.status === 'published'

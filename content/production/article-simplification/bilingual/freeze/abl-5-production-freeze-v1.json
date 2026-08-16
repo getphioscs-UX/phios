@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-ABL-5-PRODUCTION-FREEZE-v1.0.0",
+  "work": "ABL-1-ABL-5",
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "status": "ABL_BILINGUAL_BATCH_PRODUCTION_CAPABILITY_FROZEN",
+  "capability": {
+    "localeIdentitySuccessor": true,
+    "independentEnglishBriefPromptBatch": true,
+    "independentEnglishCandidateBatch": true,
+    "independentEnglishHumanAuthorityBridge": true,
+    "publicationBackedSameRouteRelease": true
+  },
+  "immutableAblDigests": {
+    "content/production/article-simplification/bilingual/contracts/abl-1-locale-identity-successor-contract-v1.json": "8ef780bc7153c6cc381f67f318a9e8e1c1b40bfe4c4f92f52cbe19d0fbbf23e9",
+    "content/production/article-simplification/bilingual/contracts/abl-2-english-brief-batch-contract-v1.json": "2e0eacb88902866a7daa201d95c158c6fc4f154ea5e27f82241402e13bff53b6",
+    "content/production/article-simplification/bilingual/contracts/abl-3-english-candidate-batch-contract-v1.json": "345f4d28e27d9c06f21392eca2a3a7148255436f7dbfee23d7df62f8124f4680",
+    "content/production/article-simplification/bilingual/contracts/abl-4-bilingual-human-review-contract-v1.json": "c2c7cad6250722c86436cad08a5a7c8ed7c869e97a6390802a1070801f055cdf",
+    "content/production/article-simplification/bilingual/contracts/abl-5-same-route-publication-contract-v1.json": "52e984ec68569e487f88e081cda2905c3a3187bdc6a9f58960580d37883fc557",
+    "content/production/article-simplification/bilingual/acceptance/abl-5-production-acceptance-v1.json": "45526f8f3a6092dbbff159cfaa770e31418f28e43e164b0177c361d4311583af",
+    "scripts/article-bilingual.mjs": "633d0d0bc7b5688a5cf904c9935dabd1ed3b2ac74c64f0d2f8380ab4153d71d4",
+    "scripts/article-bilingual-publish.mjs": "3e7d68627a535fe6748fe4847f64cb25faf084decd225028245392714fc2e27f",
+    "scripts/lib/article-bilingual-production/abl-v1.mjs": "f0ea62b1c8db0bac432f37f60c5153cdef537771802201e1a27b7b3844404567",
+    "scripts/lib/article-bilingual-production/check-fixture-v1.mjs": "af0ff457013f448213fd1926512f148c609149a197deaec1b2bcf5badcd35f41",
+    "scripts/check-abl-1-locale-identity.mjs": "3bff0b65691b73cf8200793f7967ebcccfa9eb8cc186060fb5628b2ca489886a",
+    "scripts/check-abl-2-english-brief-batch.mjs": "08e5d8cf671e4f3954f9ad5a6680aa2c11bcea8373c769a637a72925d7f75645",
+    "scripts/check-abl-3-english-candidate-batch.mjs": "58a9bdbfbb812e4aefcac856657a6ecd8725c51586f8f0278f4b8dc141baf706",
+    "scripts/check-abl-4-bilingual-human-review.mjs": "69f1775257715f11427edafcd8d6f4e60386aa1bac9cdbdb7e415e4b2b234058"
+  },
+  "sharedSuccessorSemantics": {
+    "packageScriptsMustExpose": [
+      "article:bilingual",
+      "article:bilingual:publish",
+      "check:abl"
+    ],
+    "publicRuntimeMustMerge": "content/knowledge/public/abl-bilingual-release.json",
+    "publishedKnowledgeAuthorityMustAccept": "recorded ABL-5 publish outcomes in addition to historical + APS-7 authority",
+    "frozenVapManifestMustRemain": "content/knowledge/public/visual-article-release.json"
+  },
+  "dynamicStateNotFrozen": [
+    "content/production/article-simplification/bilingual/BATCH-*/identity-decisions.v1.json",
+    "content/production/article-simplification/bilingual/BATCH-*/locale-identity-authority.v1.json",
+    "content/production/article-simplification/bilingual/BATCH-*/candidate-submissions.v1.json",
+    "content/production/article-simplification/bilingual/BATCH-*/english-human-decisions.v1.json",
+    "content/production/article-simplification/bilingual/BATCH-*/publication-run.v1.json",
+    "content/knowledge/public/abl-bilingual-release.json",
+    "future English Candidate / Review / Approval / Publication / PKA / CPR projections"
+  ],
+  "authorityFreeze": {
+    "humanDecisionMayBeInferred": false,
+    "zhHansAuthorityMayBeInheritedByEnglish": false,
+    "frozenKnrL10nRegistryMayBeMutatedByAbl": false,
+    "frozenVapL10nManifestMayBeMutatedByAbl": false,
+    "paidAiMayBeInvokedImplicitly": false,
+    "visualAssetMayBypassCar": false
+  },
+  "historicalDrift": {
+    "pjaL10nW4EnglishBriefExpectedSha256": "10024c8577901c420fa2b9165d388280b61442f2f158d3bf4e3ccfe2d58f9409",
+    "baseline25ab44bEnglishBriefSha256": "075b2493a30be5227b2b258fc87be36701bc19256a1b96602482fc668de76723",
+    "policy": "record only; do not rewrite historical freeze to make ABL green"
+  }
+}

@@ -1053,7 +1053,15 @@
     "check:kap-w29": "node scripts/check-kap-reality-handoff.mjs W29",
     "check:kap-handoff": "node scripts/check-kap-reality-handoff.mjs ALL",
     "check:mcd-8-kap-w23-historical": "node scripts/check-mcd-8-kap-w23-successor.mjs",
-    "check:kap-complexity-historical": "node scripts/check-kap-reality-complexity.mjs ALL"
+    "check:kap-complexity-historical": "node scripts/check-kap-reality-complexity.mjs ALL",
+    "article:bilingual": "node scripts/article-bilingual.mjs",
+    "article:bilingual:publish": "node scripts/article-bilingual-publish.mjs",
+    "check:abl-1": "node scripts/check-abl-1-locale-identity.mjs",
+    "check:abl-2": "node scripts/check-abl-2-english-brief-batch.mjs",
+    "check:abl-3": "node scripts/check-abl-3-english-candidate-batch.mjs",
+    "check:abl-4": "node scripts/check-abl-4-bilingual-human-review.mjs",
+    "check:abl-5": "node scripts/check-abl-5-same-route-publication.mjs",
+    "check:abl": "npm run check:abl-1 && npm run check:abl-2 && npm run check:abl-3 && npm run check:abl-4 && npm run check:abl-5"
   },
   "type": "module"
 }
