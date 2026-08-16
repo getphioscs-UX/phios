@@ -155,7 +155,23 @@ function laneState({ localeReady, candidate, sameRouteReady }) {
 
 function localeLane(root, { nodeCode, locale, l10nMap, primarySlug }) {
   const metadata = localeMetadata(l10nMap, nodeCode, locale);
-  const candidate = resolveCandidate(root, nodeCode, locale);
+  // APS-4 is scoped to the frozen multilingual-node projection authority it owns.
+  // Later additive locale successors (for example ABL) may create governed Candidate/
+  // Review/Approval/Publication files without mutating that frozen locale registry.
+  // A locale that is not ready in the APS-4 authority source must therefore remain
+  // fail-closed here instead of having out-of-scope successor files silently counted
+  // as APS-4 reusable authority.
+  const candidate = metadata.ready ? resolveCandidate(root, nodeCode, locale) : {
+    state: 'CANDIDATE_NOT_PRESENT',
+    resolution: 'GOVERNED_CANDIDATE_GENERATION_REQUIRED',
+    path: null,
+    candidateCode: null,
+    candidateDigest: null,
+    fileDigest: null,
+    candidateState: null,
+    validCandidateOnlyBoundary: false,
+    blockers: ['CANDIDATE_NOT_PRESENT']
+  };
   const routeBlockers = [];
   if (metadata.record?.slug && primarySlug && metadata.record.slug !== primarySlug) routeBlockers.push('SAME_ROUTE_SLUG_MISMATCH');
   const sameRouteReady = Boolean(metadata.record?.slug && primarySlug && metadata.record.slug === primarySlug);
