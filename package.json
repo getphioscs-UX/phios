@@ -938,7 +938,7 @@
     "check:kap-w2": "node scripts/check-kap-w2-question-scoped-answer-object.mjs",
     "check:kap-w3": "node scripts/check-kap-w3-client-answer-levels.mjs",
     "check:kap-foundation": "node scripts/check-kap-w0-w3-authority-foundation.mjs",
-    "check:kap": "npm run check:kap-reconciliation && npm run check:kap-foundation && npm run check:kap-grounding && npm run check:kap-answer && npm run check:kap-guided && npm run check:kap-complexity",
+    "check:kap": "npm run check:kap-reconciliation && npm run check:kap-foundation && npm run check:kap-grounding && npm run check:kap-answer && npm run check:kap-guided && npm run check:kap-complexity && npm run check:kap-handoff",
     "check:kap-w4": "node scripts/check-kap-w4-question-intake.mjs",
     "check:kap-w5": "node scripts/check-kap-w5-question-normalization.mjs",
     "check:kap-w6": "node scripts/check-kap-w6-knowledge-retrieval.mjs",
@@ -1015,7 +1015,7 @@
     "check:mcd-5-historical": "node scripts/check-mcd-5-canonical-method-projection.mjs && node scripts/check-mcd-5-canonical-projection-freeze.mjs",
     "check:mcd-6-historical": "node scripts/check-mcd-6-dynamic-renderers.mjs && node scripts/check-mcd-6-dynamic-renderer-freeze.mjs",
     "check:mcd-7": "node scripts/check-mcd-7-personal-runtime-result-surface.mjs && node scripts/check-mcd-7-personal-runtime-result-surface-freeze.mjs",
-    "check:mcd-8": "node scripts/check-mcd-8-kap-w23-successor.mjs",
+    "check:mcd-8": "node scripts/check-mcd-8-kap-w26-successor.mjs",
     "check:wpr-w21-historical": "node scripts/check-wpr-w21-personal-runtime-surface.mjs",
     "check:aps-5": "node scripts/check-aps-5-review-batch-assembly.mjs",
     "check:aps-6": "node scripts/check-aps-6-human-decision-bridge.mjs",
@@ -1043,10 +1043,17 @@
     "check:kap-w23": "node scripts/check-kap-reality-complexity.mjs W23",
     "check:kap-w24": "node scripts/check-kap-reality-complexity.mjs W24",
     "check:kap-w25": "node scripts/check-kap-reality-complexity.mjs W25",
-    "check:kap-complexity": "node scripts/check-kap-reality-complexity.mjs ALL",
+    "check:kap-complexity": "node scripts/check-kap-reality-complexity-w26-successor.mjs",
     "check:mcd-2-historical": "node scripts/check-mcd-2-canonical-runtime-adapter.mjs",
     "check:mcd-8-historical": "node scripts/check-mcd-8-production-acceptance.mjs && node scripts/check-mcd-8-production-acceptance-freeze.mjs",
-    "check:mcd-8-kap-w18-historical": "node scripts/check-mcd-8-kap-w18-successor.mjs"
+    "check:mcd-8-kap-w18-historical": "node scripts/check-mcd-8-kap-w18-successor.mjs",
+    "check:kap-w26": "node scripts/check-kap-reality-handoff.mjs W26",
+    "check:kap-w27": "node scripts/check-kap-reality-handoff.mjs W27",
+    "check:kap-w28": "node scripts/check-kap-reality-handoff.mjs W28",
+    "check:kap-w29": "node scripts/check-kap-reality-handoff.mjs W29",
+    "check:kap-handoff": "node scripts/check-kap-reality-handoff.mjs ALL",
+    "check:mcd-8-kap-w23-historical": "node scripts/check-mcd-8-kap-w23-successor.mjs",
+    "check:kap-complexity-historical": "node scripts/check-kap-reality-complexity.mjs ALL"
   },
   "type": "module"
 }

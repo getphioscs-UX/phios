@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W27-EXPLICIT-CONSENT-CONTRACT-v1.0.0",
+  "work": "KAP-W27",
+  "baselineCommit": "25ab44b6d832bc5a1a3ff166d89e2b53c1257b44",
+  "status": "ACTIVE_EXPLICIT_ESCALATION_CONSENT_GATE",
+  "scope": "REALITY_JOURNEY_PERSISTENT_CASE_HANDOFF",
+  "transition": {
+    "from": "TEMPORARY_QUESTION_SESSION",
+    "to": "PERSISTENT_CASE_INTAKE"
+  },
+  "required": {
+    "explicit": true,
+    "accepted": true,
+    "scopeExact": true,
+    "consentTextVersionRequired": true,
+    "recordedAtRequired": true
+  },
+  "authorityBoundary": {
+    "kapConsentCreatesCanonicalCase": false,
+    "kapConsentCreatesRealityModel": false,
+    "kapConsentOverridesRdgPurposeRetentionDeletion": false,
+    "downstreamRdgGovernanceStillRequired": true,
+    "automaticConsent": false
+  }
+}

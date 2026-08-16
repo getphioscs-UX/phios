@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PHI OS KAP Reality Handoff Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "action",
+    "complexityEvaluation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-REALITY-HANDOFF-REQUEST-v1.0.0"
+    },
+    "action": {
+      "enum": [
+        "PREPARE",
+        "HANDOFF"
+      ]
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "complexityEvaluation": {
+      "type": "object"
+    },
+    "guidedContext": {
+      "type": "object"
+    },
+    "knowledgeGroundingBundle": {
+      "type": "object"
+    },
+    "methodProjections": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "maxItems": 3
+    },
+    "methodConsentCodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "maxItems": 3
+    },
+    "consent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "explicit": {
+          "type": "boolean"
+        },
+        "accepted": {
+          "type": "boolean"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "consentTextVersion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "recordedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
