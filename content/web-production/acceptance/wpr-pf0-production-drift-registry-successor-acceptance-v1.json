@@ -1,0 +1,39 @@
+{
+  "acceptanceCode": "PHI-OS-WPR-PF0-PRODUCTION-DRIFT-REGISTRY-SUCCESSOR-ACCEPTANCE-v1",
+  "acceptanceVersion": "1.0.0",
+  "phase": "WPR-PF",
+  "work": "WPR-PF0",
+  "baselineCommit": "65fe9cb7f039ca8672c3af20d44879baf8ed267b",
+  "status": "ACCEPTED",
+  "accepted": true,
+  "registry": "content/web-production/registries/wpr-production-drift-registry-v2.json",
+  "driftTypeCount": 11,
+  "driftTypes": [
+    "SOURCE_DRIFT",
+    "ROUTE_DRIFT",
+    "BOOK_DRIFT",
+    "ASSET_DRIFT",
+    "CPR_DRIFT",
+    "LOCALE_DRIFT",
+    "RUNTIME_ORPHAN",
+    "DEPLOYMENT_DRIFT",
+    "VOCABULARY_DRIFT",
+    "VISUAL_DRIFT",
+    "PRIVACY_DRIFT"
+  ],
+  "result": {
+    "singleSuccessorDriftTaxonomyEstablished": true,
+    "wprV1FreezeRewritten": false,
+    "wprW28ObservabilityRewritten": false,
+    "wprV2Created": false,
+    "productionPromotionPerformed": false,
+    "deploymentAcceptancePerformed": false,
+    "authorityExpansionGranted": false
+  },
+  "checker": {
+    "script": "scripts/check-wpr-pf0-production-drift-registry-successor.mjs",
+    "packageAlias": "check:wpr-pf0",
+    "phaseAlias": "check:wpr-production-assurance"
+  },
+  "nextWork": "WPR-PF1"
+}
