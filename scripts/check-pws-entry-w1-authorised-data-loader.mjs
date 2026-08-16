@@ -322,13 +322,58 @@ const protectedPageHashes = {
 const servicesReconciliation = JSON.parse(await read(
   'docs/pws/reconciliation/pws-entry-w1-wpr-d-services-reconciliation-v1.json'
 ));
+const professionalWorkspaceReconciliation = JSON.parse(await read(
+  'docs/pws/reconciliation/pws-entry-w1-mcd-8-professional-workspace-reconciliation-v1.json'
+));
 const publicVocabulary = JSON.parse(await read(
   'content/web-production/registries/wpr-public-vocabulary-registry-v1.json'
+));
+const mcd8Acceptance = JSON.parse(await read(
+  'content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json'
+));
+const mcd8Freeze = JSON.parse(await read(
+  'content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json'
 ));
 
 for (const [file, expected] of Object.entries(protectedPageHashes)) {
   const source = await read(file);
   const actual = hash(source);
+
+  if (file === 'professional-workspace.html' && actual !== expected) {
+    const reconciliation = professionalWorkspaceReconciliation;
+    assert.equal(reconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+    assert.equal(reconciliation.protectedArtifact.path, file);
+    assert.equal(reconciliation.protectedArtifact.baselineExpectedHash, expected);
+    assert.equal(reconciliation.protectedArtifact.baselineRewritten, false);
+    assert.equal(reconciliation.successor.runtime, 'MCD');
+    assert.equal(reconciliation.successor.phase, 'MCD-8_PRODUCTION_ACCEPTANCE');
+    assert.deepEqual(reconciliation.successor.works, ['MCD-7', 'MCD-8']);
+    assert.equal(reconciliation.successor.sha256, actual);
+    assert.equal(reconciliation.successor.authorityExpansionGranted, false);
+    assert.equal(reconciliation.pwsBoundary.authorisedDataLoaderChanged, false);
+    assert.equal(reconciliation.pwsBoundary.professionalAuthorisationChanged, false);
+    assert.equal(
+      reconciliation.pwsBoundary.identityEligibilityAssignmentConsentPurposeScopeOrderChanged,
+      false
+    );
+    assert.equal(reconciliation.pwsBoundary.deniedReadBoundaryChanged, false);
+    assert.equal(reconciliation.pwsBoundary.payloadFreeAuditBoundaryChanged, false);
+    assert.equal(reconciliation.pwsBoundary.publicSurfaceCopyOnly, true);
+
+    const frozenPage = mcd8Freeze.frozenOutputs.find(item => item.path === file);
+    assert.ok(frozenPage, 'MCD8_PROFESSIONAL_WORKSPACE_FREEZE_MISSING');
+    assert.equal(frozenPage.sha256, actual);
+    assert.equal(mcd8Acceptance.acceptedFacts.mpaSoleDispatchAuthority, true);
+    assert.equal(mcd8Acceptance.acceptedFacts.hdrBlocked, true);
+    assert.equal(mcd8Acceptance.acceptedFacts.frontendCannotGrant, true);
+    assert.equal(mcd8Acceptance.acceptedFacts.hdrProfessionalEligible, false);
+    assert.equal(mcd8Acceptance.acceptedFacts.hdrProfessionalReleaseAllowed, false);
+
+    assert.ok(source.includes('>Personal Runtime Projection</button>'));
+    assert.ok(source.includes('Restricted external method projections'));
+    assert.equal(source.includes('>Human Design</button>'), false);
+    continue;
+  }
 
   if (file === 'services.html' && actual !== expected) {
     assert.equal(servicesReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');

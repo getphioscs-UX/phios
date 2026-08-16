@@ -381,6 +381,30 @@ globalThis.fetch = originalFetch;
 const visualArticleRelease = await readJson(
   'content/knowledge/public/visual-article-release.json'
 );
+const ablBilingualRelease = await readJson(
+  'content/knowledge/public/abl-bilingual-release.json'
+);
+const publishedArticleIndex = await readJson(
+  'content/knowledge/public/published-articles.json'
+);
+const successorReleaseRecords = [
+  ...(visualArticleRelease.records || []),
+  ...(ablBilingualRelease.records || [])
+].filter(record => record.status === 'published');
+const expectedPublishedKeys = locale => new Set([
+  ...(publishedArticleIndex.records || [])
+    .filter(record => (
+      record.locale === locale &&
+      record.publicationStatus === 'published'
+    ))
+    .map(record => `${record.nodeCode}:${record.locale}`),
+  ...successorReleaseRecords
+    .filter(record => record.locale === locale)
+    .map(record => `${record.nodeCode}:${record.locale}`)
+]);
+const actualPublishedKeys = articles => new Set(
+  articles.map(article => `${article.nodeCode}:${article.locale}`)
+);
 const englishPrefaceVisualRelease = (visualArticleRelease.records || []).find(record => (
   record.nodeCode === 'KN-PREFACE-001' &&
   record.locale === 'en' &&
@@ -389,11 +413,15 @@ const englishPrefaceVisualRelease = (visualArticleRelease.records || []).find(re
 const publishedEnglishPreface = publishedEnglish.find(article => (
   article.nodeCode === 'KN-PREFACE-001' && article.locale === 'en'
 ));
-assert.equal(publishedChinese.length, vapW27Executed ? 4 : 3);
-assert.equal(
-  publishedEnglish.length,
-  englishPrefaceVisualRelease ? 4 : 3,
-  'PJA-W2D English publication count must follow the governed VAP-L10N visual release successor.'
+assert.deepEqual(
+  [...actualPublishedKeys(publishedChinese)].sort(),
+  [...expectedPublishedKeys('zh-Hans')].sort(),
+  'PJA-W2D Chinese publications must equal the governed predecessor and successor release records.'
+);
+assert.deepEqual(
+  [...actualPublishedKeys(publishedEnglish)].sort(),
+  [...expectedPublishedKeys('en')].sort(),
+  'PJA-W2D English publications must equal the governed predecessor and successor release records.'
 );
 assert.equal(
   Boolean(publishedEnglishPreface),
@@ -407,10 +435,17 @@ if (englishPrefaceVisualRelease) {
     '/content/knowledge/public/visual-articles/en/ai-formation-from-civilizational-capability.json'
   );
 }
+const predecessorPublicationKeys = new Set(
+  (publishedArticleIndex.records || []).map(record => (
+    `${record.nodeCode}:${record.locale}`
+  ))
+);
 for (const publicArticle of [
-  ...publishedChinese.filter(article => article.nodeCode !== 'KN-PREFACE-001'),
-  ...publishedEnglish.filter(article => article.nodeCode !== 'KN-PREFACE-001')
-]) {
+  ...publishedChinese,
+  ...publishedEnglish
+].filter(article => predecessorPublicationKeys.has(
+  `${article.nodeCode}:${article.locale}`
+))) {
   const publicJson = JSON.stringify(publicArticle);
   assert.equal(publicArticle.publicSources.length, 1);
   assert.equal(publicArticle.sections.length, 4);
@@ -426,6 +461,31 @@ for (const publicArticle of [
       publicJson.includes(privateField),
       false,
       `Published Projection leaked ${privateField}`
+    );
+  }
+}
+
+for (const release of successorReleaseRecords) {
+  const articles = release.locale === 'zh-Hans'
+    ? publishedChinese
+    : publishedEnglish;
+  const publicArticle = articles.find(article => (
+    article.nodeCode === release.nodeCode &&
+    article.locale === release.locale
+  ));
+  assert.ok(publicArticle, `Published successor is not loadable: ${release.nodeCode}:${release.locale}`);
+  assert.equal(publicArticle.slug, release.slug);
+  assert.equal(publicArticle.publicHref, release.href);
+  assert.equal(publicArticle.contentStatus, 'content_reviewed');
+  assert.equal(publicArticle.reviewStatus, 'approved');
+  assert.equal(publicArticle.publicationStatus, 'published');
+  assert.ok(publicArticle.sections.length > 0);
+  const publicJson = JSON.stringify(publicArticle);
+  for (const privateField of ['sourceClaimCodes', 'reviewedBy', 'reviewerId']) {
+    assert.equal(
+      publicJson.includes(privateField),
+      false,
+      `Published successor leaked ${privateField}`
     );
   }
 }

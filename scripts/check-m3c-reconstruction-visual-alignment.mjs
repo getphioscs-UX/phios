@@ -531,13 +531,56 @@ assert.deepEqual(registry.hashPolicy, {
 const reconstructionExperienceRegistry = await readJson(
   'content/registry/m3c-reconstruction-experience.json'
 );
+const mcd8ReadingReconciliation = await readJson(
+  'content/professional/method-client-delivery/reconciliation/m3c-w4-mcd-8-reconstruction-reading-successor-reconciliation-v1.json'
+);
+const mcd8Freeze = await readJson(
+  'content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json'
+);
 const authorizedW14Updates =
   reconstructionExperienceRegistry.authorizedFrozenArtifactUpdates || {};
 for (const [file, expectedHash] of Object.entries(registry.frozenArtifacts)) {
   if (file === 'wrangler.jsonc') { const reconciliation = await readJson('content/knowledge/registry/m3c-w3-wrangler-successor-reconciliation-v1.json'); assert.equal(reconciliation.predecessor.wranglerSha256, expectedHash); assert.equal(await sha256(file), reconciliation.successor.wranglerSha256); continue; }
+  const currentHash = await sha256(file);
+  const m3cAcceptedHash = authorizedW14Updates[file] || expectedHash;
+  if (
+    file === 'assets/js/modules/reconstruction-reading.js' &&
+    currentHash !== m3cAcceptedHash
+  ) {
+    const reconciliation = mcd8ReadingReconciliation;
+    assert.equal(reconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+    assert.equal(reconciliation.predecessor.path, file);
+    assert.equal(reconciliation.predecessor.m3cW4RegistrySha256, expectedHash);
+    assert.equal(reconciliation.predecessor.m3cW14AuthorizedSha256, m3cAcceptedHash);
+    assert.equal(reconciliation.predecessor.historicalDigestsRewritten, false);
+    assert.equal(reconciliation.successor.path, file);
+    assert.equal(reconciliation.successor.authority, 'MCD-8_PRODUCTION_ACCEPTANCE');
+    assert.equal(reconciliation.successor.sha256, currentHash);
+    assert.equal(reconciliation.successor.authorityExpansionGranted, false);
+    assert.equal(reconciliation.allowedDelta.publicVocabularyOnly, true);
+    assert.equal(reconciliation.preserved.runtimeContractChanged, false);
+    assert.equal(reconciliation.preserved.reconstructionRuleChanged, false);
+    assert.equal(reconciliation.preserved.readingInterpretationRuleChanged, false);
+    assert.equal(reconciliation.preserved.professionalRoutingChanged, false);
+    assert.equal(
+      reconciliation.preserved.externalReadersRemainSeparateFromVerifiedRuntimeEvidence,
+      true
+    );
+
+    const mcd8FrozenArtifact = mcd8Freeze.frozenOutputs.find(
+      item => item.path === file
+    );
+    assert.ok(mcd8FrozenArtifact, 'MCD8_RECONSTRUCTION_READING_FREEZE_MISSING');
+    assert.equal(mcd8FrozenArtifact.sha256, currentHash);
+
+    const source = await read(file);
+    assert.ok(source.includes(reconciliation.allowedDelta.newText));
+    assert.equal(source.includes(reconciliation.allowedDelta.oldText), false);
+    continue;
+  }
   assert.equal(
-    await sha256(file),
-    authorizedW14Updates[file] || expectedHash,
+    currentHash,
+    m3cAcceptedHash,
     `Frozen M3C-W4 artifact changed: ${file}`
   );
 }

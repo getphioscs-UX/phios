@@ -1,0 +1,46 @@
+{
+  "reconciliationCode": "PHI-OS-PWS-ENTRY-W1-MCD-8-PROFESSIONAL-WORKSPACE-RECONCILIATION-v1",
+  "reconciliationVersion": "1.0.0",
+  "status": "ACCEPTED_SUCCESSOR_RECONCILIATION",
+  "purpose": "Preserve the frozen PWS-ENTRY-W1 professional authorisation and authorised data-loader boundary while accepting the MCD-7/MCD-8 restricted public-vocabulary update of professional-workspace.html.",
+  "protectedArtifact": {
+    "path": "professional-workspace.html",
+    "baselineExpectedHash": "fc4f5fc7260a5b344acd0eb377c200f6c91102419fe66538abf94c537bfb0d14",
+    "baselineMeaning": "PWS-ENTRY-W1 historical public-page freeze digest",
+    "baselineRewritten": false
+  },
+  "successor": {
+    "runtime": "MCD",
+    "phase": "MCD-8_PRODUCTION_ACCEPTANCE",
+    "works": [
+      "MCD-7",
+      "MCD-8"
+    ],
+    "sha256": "3d8bba55b1ab1ad39d90ec91a1f89ad92d534ef90941bf9475e6d77ef173827f",
+    "reason": "The legacy public Human Design wording was replaced by controlled Personal Runtime Projection wording and an explicit restricted-method boundary without changing professional authorisation, consent, assignment, scope or authorised data loading.",
+    "authorityExpansionGranted": false
+  },
+  "mcdAuthority": {
+    "acceptance": "content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json",
+    "freeze": "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+    "publicLabel": "Personal Runtime Projection",
+    "restrictedMethodRemainsBlocked": true,
+    "mpaRemainsSoleDispatchAuthority": true,
+    "frontendMayGrantAuthority": false
+  },
+  "pwsBoundary": {
+    "authorisedDataLoaderChanged": false,
+    "professionalAuthorisationChanged": false,
+    "identityEligibilityAssignmentConsentPurposeScopeOrderChanged": false,
+    "deniedReadBoundaryChanged": false,
+    "payloadFreeAuditBoundaryChanged": false,
+    "publicSurfaceCopyOnly": true
+  },
+  "rules": {
+    "allOtherPwsEntryW1ProtectedPageHashesRemainExact": true,
+    "professionalWorkspaceSuccessorMustMatchExactHash": true,
+    "futureProfessionalWorkspaceChangeRequiresNewVersionedReconciliation": true,
+    "legacyRestrictedPublicVocabularyMayNotBeRestoredToSatisfyHistoricalDigest": true,
+    "mcdDoesNotGainProfessionalAuthorisationAuthority": true
+  }
+}
