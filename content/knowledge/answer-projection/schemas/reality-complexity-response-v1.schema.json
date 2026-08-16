@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KAP-REALITY-COMPLEXITY-RESPONSE-v1.0.0",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "capability",
+    "status",
+    "complexitySignals",
+    "complexityScore",
+    "realityModelRequirement",
+    "route",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-REALITY-COMPLEXITY-RESPONSE-v1.0.0"
+    },
+    "capability": {
+      "const": "REALITY_COMPLEXITY_GATE"
+    },
+    "status": {
+      "const": "EVALUATED"
+    },
+    "route": {
+      "enum": [
+        "KEEP_ASK_OR_GUIDED_READING",
+        "REALITY_JOURNEY_CANDIDATE"
+      ]
+    },
+    "complexitySignals": {
+      "type": "object"
+    },
+    "complexityScore": {
+      "type": "object"
+    },
+    "realityModelRequirement": {
+      "type": "object"
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

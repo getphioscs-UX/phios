@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W23-W25-REALITY-COMPLEXITY-FREEZE-v1.0.0",
+  "phase": "KAP",
+  "steps": [
+    "KAP-W23",
+    "KAP-W24",
+    "KAP-W25"
+  ],
+  "baselineCommit": "a6e6297fe5d353c56b859d0f80608e847eba9376",
+  "status": "FROZEN_COMPLEXITY_GATE_W24_FINAL_CONFIRMATION_NO_AUTO_REALITY_JOURNEY",
+  "predecessorEvidence": [
+    {
+      "path": "content/knowledge/answer-projection/freeze/kap-w18-w22-guided-reading-freeze-v1.json",
+      "sha256": "51da9537f515e902d0a1b3c605506543a2dc5f732d42bde2dc30f546f6893608"
+    },
+    {
+      "path": "content/professional/method-client-delivery/successors/mcd-8-kap-w18-guided-reading-consumption-successor-v1.json",
+      "sha256": "ab23f197db212d318628e6d8b8f44c93010c4abcc7cb5b95e66214843d4d2bc0",
+      "restoredOmittedArtifact": true
+    }
+  ],
+  "frozenOutputs": [
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w23-complexity-signals-contract-v1.json",
+      "sha256": "370fe51e6a27f06b7b0e2383a9c7b87ef719cca46b953c930269c1c50d271273"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w24-reality-model-requirement-test-contract-v1.json",
+      "sha256": "e800eb3187589dca9d81478ac6b3d5d853acbb06f0345131b2c40ee7f2521345"
+    },
+    {
+      "path": "content/knowledge/answer-projection/contracts/kap-w25-complexity-score-contract-v1.json",
+      "sha256": "dfcd9902679f2dad0612a5fc6ff326e8b0b49c991b1967fb4dbd9039fac6d31b"
+    },
+    {
+      "path": "content/knowledge/answer-projection/registries/kap-w23-w25-reality-complexity-policy-v1.json",
+      "sha256": "0cf623b289237db5ee4d3dede3ded2eb12eba60f54f060d6719dc2a27c8f131d"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/reality-complexity-request-v1.schema.json",
+      "sha256": "e26d6686a471e10206f122cae6f5af67708c0fb4a727a962c190d4083e850767"
+    },
+    {
+      "path": "content/knowledge/answer-projection/schemas/reality-complexity-response-v1.schema.json",
+      "sha256": "cfc368ef53ddce0b3436b5f0586ceff037d3262ab286aaac4025b2466ec3fdfe"
+    },
+    {
+      "path": "content/knowledge/answer-projection/reconciliation/kap-w22-w23-reality-complexity-successor-v1.json",
+      "sha256": "3085cef9c9044434711824dafb1c368abe6a9244091fbdacda9f6908c6966195"
+    },
+    {
+      "path": "functions/_lib/knowledge-reality-complexity.js",
+      "sha256": "66d0dcec5c5b384150ba862f5635c2876813bb60e89dc7d89e7292c250e3eb40"
+    },
+    {
+      "path": "functions/api/reality-complexity.js",
+      "sha256": "109612a95ed075c5990e3ade5721e3a7b1619f86e7183e86cdc4fa95ea309fec"
+    },
+    {
+      "path": "scripts/check-kap-reality-complexity.mjs",
+      "sha256": "9d921bbb0803e606def3f1eaa2bc69c1f9e9b19f26c243028ddc8224cac8616a"
+    },
+    {
+      "path": "content/knowledge/answer-projection/acceptance/kap-w23-w25-reality-complexity-acceptance-v1.json",
+      "sha256": "9892279df551748876e8f4ef37563a6494daca63b95c799b224555f31946cedf"
+    },
+    {
+      "path": "content/knowledge/answer-projection/reconciliation/kap-w18-mcd8-guided-handoff-artifact-restoration-v1.json",
+      "sha256": "35a049a0aa8afb7115a1cea43a948244a8d791cbe126453b31a2fee8aef93591"
+    }
+  ],
+  "production": {
+    "endpoint": "/api/reality-complexity",
+    "complexitySignalsActive": true,
+    "complexityScoreActive": true,
+    "realityModelRequirementTestActive": true,
+    "scoreDecisive": false,
+    "automaticRealityJourney": false,
+    "persistentRealityModelCreated": false
+  },
+  "authorityFreeze": {
+    "askPhios": "UNCHANGED",
+    "guidedReading": "BYTE_EXACT_PREDECESSOR",
+    "complexitySignals": "ROUTING_OBSERVATIONS_ONLY",
+    "complexityScore": "ROUTING_AID_ONLY",
+    "realityModelRequirement": "FINAL_ROUTING_CONFIRMATION_ONLY",
+    "realityJourney": "EXPLICIT_HANDOFF_REQUIRED_AFTER_W24_YES"
+  },
+  "successorRule": "Any future change that makes score decisive, creates a Reality Model, persists a case, or auto-activates Reality Journey requires a new authority-preserving successor."
+}
