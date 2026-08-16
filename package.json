@@ -977,8 +977,7 @@
     "check:mcd-production-authority": "npm run check:mcd-0 && npm run check:mcd-1",
     "check:aps-4": "node scripts/check-aps-4-candidate-orchestration.mjs",
     "check:aps-l10n": "node scripts/check-aps-l10n-integration.mjs",
-    "check:aps": "npm run check:aps-1 && npm run check:aps-2 && npm run check:aps-3 && npm run check:aps-4 && npm run check:aps-l10n",
-    "check:mcd-2-historical": "node scripts/check-mcd-2-canonical-runtime-adapter.mjs",
+    "check:aps": "npm run check:aps-1 && npm run check:aps-2 && npm run check:aps-3 && npm run check:aps-4 && npm run check:aps-5 && npm run check:aps-6 && npm run check:aps-7 && npm run check:aps-l10n && npm run check:aps-8",
     "check:mcd-2": "node scripts/check-mcd-2-mcd5-successor.mjs",
     "check:mcd-adapter": "npm run check:mcd-production-authority && npm run check:mcd-2",
     "check:mcd-3": "node scripts/check-mcd-3-single-birth-input.mjs",
@@ -1017,7 +1016,12 @@
     "check:mcd-6-historical": "node scripts/check-mcd-6-dynamic-renderers.mjs && node scripts/check-mcd-6-dynamic-renderer-freeze.mjs",
     "check:mcd-7": "node scripts/check-mcd-7-personal-runtime-result-surface.mjs && node scripts/check-mcd-7-personal-runtime-result-surface-freeze.mjs",
     "check:mcd-8": "node scripts/check-mcd-8-production-acceptance.mjs && node scripts/check-mcd-8-production-acceptance-freeze.mjs",
-    "check:wpr-w21-historical": "node scripts/check-wpr-w21-personal-runtime-surface.mjs"
+    "check:wpr-w21-historical": "node scripts/check-wpr-w21-personal-runtime-surface.mjs",
+    "check:aps-5": "node scripts/check-aps-5-review-batch-assembly.mjs",
+    "check:aps-6": "node scripts/check-aps-6-human-decision-bridge.mjs",
+    "check:aps-7": "node scripts/check-aps-7-one-command-publication.mjs",
+    "check:aps-8": "node scripts/check-aps-8-production-acceptance-freeze.mjs",
+    "article:publish": "node scripts/article-publish.mjs"
   },
   "type": "module"
 }

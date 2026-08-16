@@ -66,7 +66,10 @@ assert.equal(projected.summary.localeDiscoveryBlockedCount, 6);
 assert.equal(projected.summary.localeGenerationRequiredCount, 0);
 assert.equal(projected.summary.reusableHumanReviewCount, 6);
 assert.equal(projected.summary.reusableHumanApprovalCount, 6);
-assert.equal(projected.summary.localePublicationAuthorityPresentCount, 0);
+const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
+const aps7Run = fs.existsSync(path.join(root, aps7RunPath)) ? readJson(aps7RunPath) : null;
+const publishedOutcomes = aps7Run ? aps7Run.outcomes.filter(item => item.decision === 'publish' && item.publicationCreated === true) : [];
+assert.equal(projected.summary.localePublicationAuthorityPresentCount, publishedOutcomes.length);
 assert.deepEqual(projected.entries.map(entry => entry.nodeCode), expectedNodes);
 
 for (const entry of projected.entries) {
@@ -81,8 +84,9 @@ for (const entry of projected.entries) {
   assert.equal(zh.state, 'CANDIDATE_READY_FOR_LOCALE_AUTHORITY');
   assert.equal(zh.existingHumanEvidence.review.accepted, true);
   assert.equal(zh.existingHumanEvidence.approval.approved, true);
-  assert.equal(zh.existingHumanEvidence.publication.published, false);
-  assert.equal(zh.localeArticleAuthorityState, 'AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION');
+  const publishedOutcome = publishedOutcomes.find(item => item.nodeCode === entry.nodeCode && item.locale === 'zh-Hans');
+  assert.equal(zh.existingHumanEvidence.publication.published, Boolean(publishedOutcome));
+  assert.equal(zh.localeArticleAuthorityState, publishedOutcome ? 'LOCALE_ARTICLE_AUTHORITY_PRESENT' : 'AWAITING_EXPLICIT_HUMAN_PUBLICATION_DECISION');
   assert.equal(en.state, 'BLOCKED_LOCALE_AUTHORITY_DISCOVERY');
   assert(en.blockers.includes('LOCALE_DISCOVERY_REQUIRED'));
   assert(en.blockers.includes('LOCALE_AUTHORITY_UNASSIGNED'));
@@ -104,7 +108,7 @@ assert.equal(committed.nextWork, 'APS-5_REVIEW_BATCH_ASSEMBLY');
 
 console.log('✓ APS-4 Candidate Orchestration passed.');
 console.log('✓ BATCH-001 reuses all 6 existing governed zh-Hans PJA Candidates; no article prose is regenerated or overwritten.');
-console.log('✓ Existing digest-bound TL Review + Approval are discovered for APS-5 reuse, but Publication authority remains 0/6.');
+console.log(`✓ Existing digest-bound TL Review + Approval remain reusable; current locale Publication authority present ${projected.summary.localePublicationAuthorityPresentCount}/6 is successor-aware.`);
 console.log('✓ zh-Hans is candidate-ready; all 6 English lanes fail closed at locale discovery/authority instead of inheriting or translating authority.');
 console.log('✓ article:batch makes no implicit paid-AI/network call at APS-4.');
 console.log('→ Next: APS-5 Review Batch Assembly can reuse exact existing Human evidence and expose only unresolved decisions.');

@@ -19,13 +19,16 @@ assert.ok(fs.existsSync(path.join(root, reviewPath)), `${reviewPath} must exist 
 assert.ok(fs.existsSync(path.join(root, decisionsPath)), `${decisionsPath} must exist after article:batch`);
 
 const stored = readJson(reviewPath);
-const current = buildReviewBatch(root, orchestration, { createdAt: stored.createdAt });
+const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
+const aps7Run = fs.existsSync(path.join(root, aps7RunPath)) ? readJson(aps7RunPath) : null;
+const current = aps7Run ? null : buildReviewBatch(root, orchestration, { createdAt: stored.createdAt });
 assert.equal(stored.schemaVersion, 'PHI-OS-APS-5-REVIEW-BATCH-v1.0.0');
 assert.equal(stored.work, 'APS-5');
 assert.equal(stored.status, 'AWAITING_TL_PUBLICATION_DECISIONS');
 assert.equal(stored.implementationBaselineCommit, APS5_BASELINE);
 assert.equal(stored.sourceOrchestration.orchestrationDigest, orchestration.orchestrationDigest);
-assert.equal(stored.reviewBatchDigest, current.reviewBatchDigest);
+if (!aps7Run) assert.equal(stored.reviewBatchDigest, current.reviewBatchDigest);
+else assert.deepEqual(aps7Run.outcomes.map(item => item.nodeCode).sort(), stored.entries.map(item => item.nodeCode).sort(), 'APS-7 must consume the immutable APS-5 review scope.');
 assert.equal(stored.summary.activeReviewEntryCount, 6);
 assert.equal(stored.summary.excludedLocaleLaneCount, 6);
 assert.equal(stored.summary.reusedAcceptedReviewCount, 6);
@@ -82,7 +85,7 @@ for (const decision of decisions.entries) {
   assert.ok(['pending_human','human_decided','existing_authority_reused'].includes(decision.decisionState));
 }
 const initialTemplate = buildHumanDecisionInput(stored);
-if (decisions.status === 'PENDING_HUMAN' && decisions.entries.every(entry => entry.decisionState === 'pending_human')) {
+if (decisions.status === 'PENDING_HUMAN' && decisions.entries.every(entry => entry.decisionState === 'pending_human') && decisions.entries.every(entry => entry.publicationDecision === null)) {
   assert.deepEqual(decisions, initialTemplate);
 }
 
@@ -95,6 +98,6 @@ assert.match(articleBatchSource, /APS-5 Review Batch Assembly/);
 
 console.log('✓ APS-5 Review Batch Assembly passed.');
 console.log('✓ BATCH-001 now exposes one human-facing batch with 6 zh-Hans entries; all exact digest-bound TL Review + Approval authority is reused.');
-console.log('✓ Only Human Publication Decision remains unresolved for the 6 current entries; review-batch and human-decisions files create no authority by themselves.');
+console.log(`✓ APS-5 review-batch remains a non-authoritative historical envelope; current explicit Publication decisions complete ${decisions.entries.filter(entry => APS5_ALLOWED_PUBLICATION_DECISIONS.includes(entry.publicationDecision)).length}/6.`);
 console.log('✓ All 6 English lanes remain excluded and fail closed until independent English Candidate + locale identity/authority exist.');
 console.log('→ Next: APS-6 validates explicit per-node Human decisions and bridges them to governed publication authority without inventing decisions.');

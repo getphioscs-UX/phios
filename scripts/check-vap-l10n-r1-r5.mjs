@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import {
   ROOT, PATHS, HREF, SLUG, containsCjk, digest, fileDigest, humanGateState,
   buildR1Authority, buildR2Projection, buildR3Presentation, buildR4VisualArticle,
@@ -67,7 +68,28 @@ assert(/record\.locale === normalizedLocale/.test(publishedContent));
 assert(/visualArticles/.test(publishedContent));
 
 const acceptance = readJson(ROOT, PATHS.r5Acceptance);
-assert.deepEqual(acceptance, buildR5Acceptance(ROOT, { successorAuthority:r1, carProjection:r2, presentation:r3, visualArticle:r4 }));
+const currentAcceptance = buildR5Acceptance(ROOT, { successorAuthority:r1, carProjection:r2, presentation:r3, visualArticle:r4 });
+const frozenManifestProjection = { ...manifest, records: manifest.records.filter(record => record.nodeCode === 'KN-PREFACE-001' && ['zh-Hans','en'].includes(record.locale)) };
+const frozenManifestBytes = `${JSON.stringify(frozenManifestProjection, null, 2)}\n`;
+const frozenManifestDigest = crypto.createHash('sha256').update(frozenManifestBytes, 'utf8').digest('hex');
+assert.equal(frozenManifestDigest, acceptance.authorityReferences.manifestDigest, 'VAP-L10N R5 target manifest records/order must remain byte-reproducible inside an additive successor manifest.');
+const expectedFrozenBody = structuredClone(currentAcceptance);
+expectedFrozenBody.authorityReferences.manifestDigest = acceptance.authorityReferences.manifestDigest;
+delete expectedFrozenBody.acceptanceDigest;
+const expectedFrozenAcceptance = { ...expectedFrozenBody, acceptanceDigest: digest(expectedFrozenBody) };
+assert.deepEqual(acceptance, expectedFrozenAcceptance);
+const extraManifestRecords = manifest.records.filter(record => record.nodeCode !== 'KN-PREFACE-001');
+if (extraManifestRecords.length) {
+  const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
+  assert.equal(fs.existsSync(path.join(ROOT, aps7RunPath)), true, 'Additional visual release records require APS-7 successor evidence.');
+  const aps7Run = readJson(ROOT, aps7RunPath);
+  for (const record of extraManifestRecords) {
+    const outcome = aps7Run.outcomes.find(item => item.nodeCode === record.nodeCode && item.locale === record.locale);
+    assert(outcome && outcome.decision === 'publish' && outcome.publicReleaseCreated === true, `${record.nodeCode}:${record.locale}:ADDITIVE_MANIFEST_RECORD_LACKS_APS7_PUBLICATION_EVIDENCE`);
+    assert.equal(record.href, `/articles/${record.slug}`);
+    assert.equal(record.status, 'published');
+  }
+}
 const freeze = readJson(ROOT, PATHS.r5Freeze);
 assert.deepEqual(freeze, buildR5Freeze(acceptance));
 assert.equal(freeze.status, 'FROZEN');
@@ -78,5 +100,5 @@ console.log('✓ VAP-L10N-R1 English Article Successor Authority passed.');
 console.log('✓ VAP-L10N-R2 Shared Physical Figure / EN CAR Projection passed.');
 console.log('✓ VAP-L10N-R3 EN CPR Production Presentation passed.');
 console.log('✓ VAP-L10N-R4 EN Visual Article Projection passed.');
-console.log('✓ VAP-L10N-R5 Same-Route Locale Acceptance & Freeze passed.');
+console.log('✓ VAP-L10N-R5 Same-Route Locale Acceptance & Freeze passed; target lane remains frozen while unrelated APS-7 manifest records may append additively.');
 console.log(`✓ Same canonical route: ${HREF} → zh-Hans / en by runtime locale.`);

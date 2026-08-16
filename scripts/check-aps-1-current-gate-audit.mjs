@@ -104,14 +104,25 @@ assert.equal(packageManifest.entries.filter((x) => x.productionArticlePackageCre
 
 const publicationDecisions = readJson(publicationDecisionPath);
 assert.equal(publicationDecisions.entries.length, 6);
-assert.equal(publicationDecisions.entries.filter((x) => x.decision === 'publish').length, 0);
-assert.equal(publicationDecisions.entries.filter((x) => x.decisionState === 'pending_human').length, 6);
+const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
+const aps7Run = exists(aps7RunPath) ? readJson(aps7RunPath) : null;
+if (aps7Run) {
+  assert.equal(publicationDecisions.entries.filter((x) => x.decisionState === 'human_decided').length, 6, 'APS-7 successor publication requires six explicit Human decisions.');
+  for (const outcome of aps7Run.outcomes) {
+    const decision = publicationDecisions.entries.find(x => x.nodeCode === outcome.nodeCode);
+    assert.equal(decision?.decision, outcome.decision, `${outcome.nodeCode}:APS7_W11_DECISION_MISMATCH`);
+  }
+} else {
+  assert.equal(publicationDecisions.entries.filter((x) => x.decision === 'publish').length, 0);
+  assert.equal(publicationDecisions.entries.filter((x) => x.decisionState === 'pending_human').length, 6);
+}
 
 const publicationRegistry = readJson(publicationRegistryPath);
 const batchPublicationRecords = publicationRegistry.records.filter(
   (x) => NODES.includes(x.nodeCode) && x.locale === 'zh-Hans'
 );
-assert.equal(batchPublicationRecords.length, 0, 'Batch 001 must have no publication records at APS-1 baseline');
+const aps7PublishOutcomes = aps7Run ? aps7Run.outcomes.filter(x => x.decision === 'publish' && x.publicationCreated === true) : [];
+assert.equal(batchPublicationRecords.length, aps7PublishOutcomes.length, 'Current Batch 001 publications may grow only through the APS-7 successor; APS-1 historical snapshot remains unchanged.');
 
 const snapshot = audit.referenceBatchSnapshot;
 assert.deepEqual(snapshot.nodeCodes, NODES);
@@ -134,11 +145,13 @@ if (aps3SuccessorPresent) {
 } else {
   assert.equal(Boolean(pkg.scripts?.['article:batch']), false, 'APS-1 baseline must not prematurely expose article:batch');
 }
-assert.equal(Boolean(pkg.scripts?.['article:publish']), false, 'APS-1/APS-3 must not prematurely expose article:publish');
+const aps7SuccessorPresent = exists('content/production/article-simplification/contracts/aps-7-one-command-publication-contract-v1.json');
+if (aps7SuccessorPresent) assert.equal(pkg.scripts?.['article:publish'], 'node scripts/article-publish.mjs', 'APS-7 successor may expose article:publish without changing the APS-1 historical audit.');
+else assert.equal(Boolean(pkg.scripts?.['article:publish']), false, 'APS-1 baseline must not prematurely expose article:publish');
 
 console.log('✓ APS-1 Current Gate Audit passed.');
 console.log('✓ Baseline 6932c88 preserves the existing authority model and standardized published-article presentation.');
-console.log('✓ Batch 001: 6/6 upstream-ready, 6/6 Human-reviewed, 6/6 Human-approved, 0/6 Human Publication Decisions.');
+console.log('✓ APS-1 historical snapshot remains 6/6 upstream-ready, reviewed and approved with 0 baseline Publication decisions; later APS-7 successor state is reconciled separately.');
 console.log('✓ 24 current gates/transitions are inventoried and classified without mutating any authority.');
 console.log('✓ APS can simplify operator choreography without bypassing Canonical, Human, Publication, CAR, CPR or release authority.');
 console.log('→ Next: APS-2 Single Readiness Contract.');

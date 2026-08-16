@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-APS-6-HUMAN-DECISION-BRIDGE-CONTRACT-v1.0.0",
+  "work": "APS-6",
+  "status": "ACTIVE",
+  "baselineCommit": "94d5efa953ff83713505b133d0039764df577675",
+  "purpose": "Validate explicit per-node/per-locale TL publication decisions from the APS-5 human-decision input and map them into the existing VAP-W11 Human Publication Decision authority shape without inferring, bulk-authorizing or publishing anything.",
+  "input": {
+    "reviewBatch": "content/production/article-simplification/batches/BATCH-NNN/review-batch.v1.json",
+    "humanDecisions": "content/production/article-simplification/batches/BATCH-NNN/human-decisions.v1.json"
+  },
+  "requiredExplicitFieldsForEachDecision": [
+    "publicationDecision",
+    "publisherCode=TL",
+    "decidedAt",
+    "summary"
+  ],
+  "allowedPublicationDecisions": ["publish", "do_not_publish", "defer"],
+  "bridge": {
+    "targetAuthorityRuntime": "VAP-W11",
+    "targetPublisherAuthority": "TL Independent Publication Authority",
+    "sourceCandidateDigestMustMatch": true,
+    "sourceReviewMustRemainAccepted": true,
+    "sourceApprovalMustRemainApproved": true,
+    "frozenPublicationQueueLineageMustMatch": true,
+    "oneIndependentDecisionPerNodeLocale": true,
+    "bulkPublicationAuthorityAllowed": false
+  },
+  "governance": {
+    "humanDecisionInputEqualsPublicationAuthority": false,
+    "decisionBridgeEqualsPublicationRecord": false,
+    "aps6MayInferPublish": false,
+    "aps6MayChangeCandidate": false,
+    "aps6MayChangeReview": false,
+    "aps6MayChangeApproval": false,
+    "aps6MayCreatePublicProjection": false,
+    "localeAuthorityInheritanceAllowed": false
+  },
+  "nextWork": "APS-7_ONE_COMMAND_PUBLICATION"
+}

@@ -26,23 +26,33 @@ assert.equal(contract.governance.mayCreateOrChangeHumanDecision, false);
 assert.equal(contract.governance.mayPublish, false);
 
 const built = buildArticleReadiness(root, { bookCode: 'BOOK-1', locale: 'zh-Hans' });
-assert.deepEqual(built.summary.readyNodeCodes, expectedReady);
-assert.equal(built.summary.readyCount, 6);
+const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
+const aps7Run = fs.existsSync(path.join(root, aps7RunPath)) ? readJson(aps7RunPath) : null;
+const expectedCurrentReady = aps7Run ? aps7Run.outcomes.filter(item => item.decision !== 'publish').map(item => item.nodeCode) : expectedReady;
+assert.deepEqual(built.summary.readyNodeCodes, expectedCurrentReady);
+assert.equal(built.summary.readyCount, expectedCurrentReady.length);
 assert.equal(built.governance.humanDecisionCreationAllowed, false);
 assert.equal(built.governance.candidateCreationAllowed, false);
 assert.equal(built.governance.publicationAllowed, false);
 for (const nodeCode of expectedReady) {
   const entry = built.entries.find(item => item.nodeCode === nodeCode);
   assert.ok(entry, `${nodeCode} readiness missing`);
-  assert.equal(entry.state, 'ARTICLE_READY');
-  assert.deepEqual(entry.blockers, []);
-  for (const value of Object.values(entry.gates)) assert.equal(value, true, `${nodeCode} must pass every APS-2 gate`);
+  const publishedByAps7 = aps7Run?.outcomes.some(item => item.nodeCode === nodeCode && item.decision === 'publish' && item.publicationCreated === true) ?? false;
+  if (publishedByAps7) {
+    assert.equal(entry.state, 'ARTICLE_NOT_READY');
+    assert.equal(entry.gates.notAlreadyPublished, false);
+    assert(entry.blockers.includes('ARTICLE_ALREADY_PUBLISHED_FOR_LOCALE'));
+  } else {
+    assert.equal(entry.state, 'ARTICLE_READY');
+    assert.deepEqual(entry.blockers, []);
+    for (const value of Object.values(entry.gates)) assert.equal(value, true, `${nodeCode} must pass every APS-2 gate`);
+  }
 }
 
 assert.equal(fs.existsSync(path.join(root, APS2_DEFAULT_OUTPUT)), true, `${APS2_DEFAULT_OUTPUT} must exist`);
 const snapshot = readJson(APS2_DEFAULT_OUTPUT);
-assert.equal(snapshot.readinessDigest, built.readinessDigest, 'Committed APS-2 readiness snapshot must equal derived runtime result');
-assert.deepEqual(snapshot.summary.readyNodeCodes, expectedReady);
+if (!aps7Run) assert.equal(snapshot.readinessDigest, built.readinessDigest, 'Committed APS-2 readiness snapshot must equal derived runtime result before successor publication');
+assert.deepEqual(snapshot.summary.readyNodeCodes, expectedReady, 'Committed APS-2 snapshot preserves the pre-publication selection authority.');
 
 const preface4 = built.entries.find(item => item.nodeCode === 'KN-PREFACE-004');
 if (preface4) {
@@ -52,6 +62,6 @@ if (preface4) {
 }
 
 console.log('✓ APS-2 Single Readiness Contract passed.');
-console.log('✓ 6 current BOOK-1 zh-Hans nodes collapse to ARTICLE_READY; all other evaluated nodes fail closed with explicit blockers.');
+console.log(`✓ APS-2 current readiness contains ${built.summary.readyCount} ARTICLE_READY BOOK-1 zh-Hans nodes; APS-7 published nodes correctly become ARTICLE_NOT_READY without rewriting the frozen pre-publication snapshot.`);
 console.log('✓ APS-2 reads existing authorities only and creates no Human, C2/C3, Candidate, Provider or Publication authority.');
 console.log('→ Next: APS-3 Batch Orchestrator consumes ARTICLE_READY only.');

@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { buildPublishedKnowledgeAuthority, stable } from './lib/knowledge-public/published-authority-v1.mjs';
-import { buildVapW1RepairedPublishedKnowledgeAuthority, loadVapW1IntegrityRepair } from './lib/visual-article-production/published-knowledge-integrity-repair-v1.mjs';
+import { loadVapW1IntegrityRepair } from './lib/visual-article-production/published-knowledge-integrity-repair-v1.mjs';
+import { buildApsPublishedKnowledgeAuthoritySuccessor } from './lib/article-simplification/published-authority-successor-v1.mjs';
 
 const root = process.cwd();
 const read = rel => fs.readFileSync(path.join(root, rel), 'utf8');
@@ -22,7 +23,9 @@ const freeze = json(freezePath);
 const repair = loadVapW1IntegrityRepair(root);
 const actualRegistry = json(registryPath);
 const historical = buildPublishedKnowledgeAuthority(root);
-const expected = buildVapW1RepairedPublishedKnowledgeAuthority(root);
+const expected = buildApsPublishedKnowledgeAuthoritySuccessor(root);
+const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
+const aps7Run = fs.existsSync(path.join(root, aps7RunPath)) ? json(aps7RunPath) : null;
 
 assert.equal(contract.policy.allThreeConditionsRequired, true);
 assert.equal(contract.policy.registryPresenceEqualsPublicAvailability, false);
@@ -31,7 +34,8 @@ assert.equal(contract.policy.localeAuthorityIndependent, true);
 for (const forbidden of ['modify_candidate','modify_review','modify_approval','modify_publication','modify_knowledge_registry','publish_without_package','project_unreviewed_content']) assert.ok(contract.forbiddenOperations.includes(forbidden));
 
 assert.equal(read(registryPath), stable(expected.registry), 'Published Knowledge Authority must rebuild deterministically with the governed VAP-W1 projection repair.');
-assert.equal(actualRegistry.recordCount, 2);
+const aps7Published = aps7Run ? aps7Run.outcomes.filter(x => x.decision === 'publish' && x.publicationCreated === true && x.publicReleaseCreated === true) : [];
+assert.equal(actualRegistry.recordCount, 2 + aps7Published.length, 'Published Knowledge Authority may grow only through recorded APS-7 publish outcomes.');
 const identities = new Set();
 for (const record of actualRegistry.records) {
   const identity = `${record.nodeCode}:${record.locale}`;
@@ -51,10 +55,15 @@ for (const record of actualRegistry.records) {
 assert.ok(identities.has('KN-PREFACE-001:zh-Hans'));
 assert.ok(identities.has('KN-PREFACE-001:en'));
 
+if (aps7Run) {
+  const allowed = new Set(aps7Published.map(x => `${x.nodeCode}:${x.locale}`));
+  for (const record of actualRegistry.records.filter(x => x.nodeCode !== 'KN-PREFACE-001')) assert(allowed.has(`${record.nodeCode}:${record.locale}`), `Published Knowledge Authority extra record lacks APS-7 publish evidence: ${record.nodeCode}:${record.locale}`);
+}
 const historicalZh = historical.registry.records.find(x => x.nodeCode === 'KN-PREFACE-001' && x.locale === 'zh-Hans');
 const repairedZh = actualRegistry.records.find(x => x.nodeCode === 'KN-PREFACE-001' && x.locale === 'zh-Hans');
 assert.equal(historicalZh.authorityDigest, repair.historicalProjectionSnapshots.step63ZhAuthorityDigest);
-assert.equal(sha(stable(historical.registry)), freeze.digests[registryPath], 'Historical STEP63 registry must remain reproducible from immutable Publication Packages.');
+const historicalFrozenRegistry = { ...historical.registry, recordCount: 2, records: historical.registry.records.filter(x => x.nodeCode === 'KN-PREFACE-001' && ['en','zh-Hans'].includes(x.locale)) };
+assert.equal(sha(stable(historicalFrozenRegistry)), freeze.digests[registryPath], 'Historical STEP63 registry must remain reproducible from immutable Publication Packages.');
 assert.equal(sha(stable(historical.articleFiles[zhArticlePath])), freeze.digests[zhArticlePath], 'Historical STEP63 zh-Hans article must remain reproducible.');
 assert.equal(historicalZh.article.summary.includes('INSTALL.md'), true);
 assert.equal(repairedZh.article.summary, repair.replacement.summary);
@@ -81,7 +90,7 @@ assert.equal(freeze.acceptance.reviewAuthorityChanged, false);
 assert.equal(freeze.acceptance.approvalAuthorityChanged, false);
 assert.equal(freeze.acceptance.publicationAuthorityChanged, false);
 
-console.log('✓ STEP63 Published Knowledge Authority compatibility passed with VAP-W1 integrity repair.');
+console.log('✓ STEP63 Published Knowledge Authority compatibility passed with VAP-W1 integrity repair and additive APS-7 successor publication authority.');
 console.log('✓ Historical Publication Packages and STEP63 freeze remain immutable and reproducible.');
 console.log('✓ KN-PREFACE-001 zh-Hans summary is repaired only at Published Projection; lineage is unchanged and authorityDigest is recomputed.');
 

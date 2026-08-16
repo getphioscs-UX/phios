@@ -78,7 +78,11 @@ if (decided.length === 0) {
 }
 assert.equal(manifest.pjaPublicationRecordCountCreatedByW11, 0); assert.equal(manifest.publicProjectionCountCreatedByW11, 0);
 assert.equal(activation.pjaPublicationRegistryMutated, false); assert.equal(activation.publishedKnowledgeAuthorityMutated, false);
-assert.equal(publishedAuthority.recordCount, 2, 'VAP-W11 must not project Published Knowledge Authority.');
+const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
+const aps7Run = await fileExists(aps7RunPath) ? await readJson(aps7RunPath) : null;
+const aps7Published = aps7Run ? aps7Run.outcomes.filter(item => item.decision === 'publish' && item.publicationCreated === true && item.publicReleaseCreated === true) : [];
+assert.equal(publishedAuthority.recordCount, 2 + aps7Published.length, 'Published Knowledge Authority growth must be attributable to downstream APS-7 publication, never VAP-W11 itself.');
+for (const outcome of aps7Published) assert(publishedAuthority.records.some(record => record.nodeCode === outcome.nodeCode && record.locale === outcome.locale), `${outcome.nodeCode}:APS7_PUBLISHED_AUTHORITY_RECORD_MISSING`);
 
 const makePublishEnvelope = () => {
   const envelope = structuredClone(buildPendingPublicationDecisionEnvelope(queue)); envelope.status = 'HUMAN_PUBLICATION_DECISIONS_RECORDED';
