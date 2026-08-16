@@ -849,7 +849,7 @@ export function createReadingInput(
         'interpretive_reading',
 
       note:
-        'Human Design, Astrology, BaZi, Zi Wei and Gene Keys must remain separate from verified Runtime evidence.'
+        'External Readers, Astrology, BaZi, Zi Wei and Gene Keys must remain separate from verified Runtime evidence.'
     },
 
     inferencePreference: {

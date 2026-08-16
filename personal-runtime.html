@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Prepare PHI OS Personal Runtime birth inputs and view governed Method availability without executing a Method.">
+  <meta name="description" content="Enter birth inputs once, pass governed Method eligibility and view PHI OS Personal Runtime canonical results.">
   <meta name="robots" content="noindex,follow">
-  <title data-i18n="personalRuntime.metaTitle">Personal Runtime Setup — PHI OS</title>
+  <title data-i18n="personalRuntime.metaTitle">Personal Runtime — PHI OS</title>
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/design/foundation.css">
   <link rel="stylesheet" href="/assets/css/design/typography.css">
@@ -15,38 +15,85 @@
   <link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
   <link rel="stylesheet" href="/assets/css/wpr-personal-runtime.css">
+  <link rel="stylesheet" href="/assets/css/method-client-delivery/dynamic-renderers.css">
 </head>
-<body class="public-page wpr-personal-runtime" data-page="personal-runtime" data-public-section="reality" data-wpr-production-surface="PERSONAL_RUNTIME_SETUP">
-  <a class="phi-skip-link" href="#personal-runtime-main" data-i18n="personalRuntime.skip">Skip to Personal Runtime setup</a>
+<body class="public-page wpr-personal-runtime" data-page="personal-runtime" data-public-section="reality" data-wpr-production-surface="MCD7_PERSONAL_RUNTIME_RESULTS">
+  <a class="phi-skip-link" href="#personal-runtime-main" data-i18n="personalRuntime.skip">Skip to Personal Runtime</a>
   <div data-public-header-placeholder></div>
   <main id="personal-runtime-main">
     <section class="pr-hero"><div class="public-container pr-hero__grid">
-      <div><p class="public-eyebrow" data-i18n="personalRuntime.eyebrow">WPR-W21 · Personal Runtime</p><h1 class="public-display" data-i18n="personalRuntime.title">Prepare your birth inputs without activating a Method.</h1><p class="public-lead" data-i18n="personalRuntime.lead">Use this page to check whether your birth information is structurally ready. No Method calculation, interpretation, upload or persistence occurs here.</p></div>
-      <aside class="pr-boundary-card"><strong data-i18n="personalRuntime.privacyTitle">Birth data stays on this page only</strong><p data-i18n="personalRuntime.privacyCopy">This setup is ephemeral.</p><span class="pr-badge" data-i18n="personalRuntime.noStorage">No data sent · No browser storage · No calculation</span></aside>
+      <div>
+        <p class="public-eyebrow" data-i18n="personalRuntime.eyebrow">MCD-7 · Personal Runtime</p>
+        <h1 class="public-display" data-i18n="personalRuntime.title">Enter once. Process only what governance allows.</h1>
+        <p class="public-lead" data-i18n="personalRuntime.lead">Your birth input becomes one transient canonical request. MPA decides dispatch; PHI OS returns Canonical Method Projections without interpretation.</p>
+      </div>
+      <aside class="pr-boundary-card">
+        <strong data-i18n="personalRuntime.privacyTitle">Explicit processing only</strong>
+        <p data-i18n="personalRuntime.privacyCopy">Nothing is sent while you type. When you choose Process, selected Method requests are sent transiently for governed execution and are not stored by this surface.</p>
+        <span class="pr-badge" data-i18n="personalRuntime.noStorage">No browser storage · No persistence · No interpretation</span>
+      </aside>
+    </div></section>
+
+    <section class="public-section pr-flow-section"><div class="public-container">
+      <ol class="pr-flow" aria-label="Personal Runtime flow">
+        <li data-flow-step="input" data-state="active"><span>1</span><strong data-i18n="personalRuntime.flow.input">Input</strong></li>
+        <li data-flow-step="eligibility"><span>2</span><strong data-i18n="personalRuntime.flow.eligibility">Eligibility</strong></li>
+        <li data-flow-step="processing"><span>3</span><strong data-i18n="personalRuntime.flow.processing">Processing</strong></li>
+        <li data-flow-step="results"><span>4</span><strong data-i18n="personalRuntime.flow.results">Results</strong></li>
+      </ol>
     </div></section>
 
     <section class="public-section"><div class="public-container pr-layout">
       <section class="pr-panel" aria-labelledby="birth-input-title">
-        <div class="pr-section-heading"><p class="public-eyebrow">MPA-W8</p><h2 id="birth-input-title" data-i18n="personalRuntime.inputTitle">Birth initialization</h2><p data-i18n="personalRuntime.inputCopy"></p></div>
+        <div class="pr-section-heading">
+          <p class="public-eyebrow">MCD-3 → MCD-7</p>
+          <h2 id="birth-input-title" data-i18n="personalRuntime.inputTitle">Canonical birth input</h2>
+          <p data-i18n="personalRuntime.inputCopy">Unknown values stay unknown. Birth timezone and UTC offset at birth are separate values; this page never substitutes the browser timezone.</p>
+        </div>
         <form id="personalRuntimeInput" class="pr-form" autocomplete="off" novalidate>
           <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthDate">Birth date</span><input id="birthDate" name="BirthDate" type="date"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="BirthDatePrecision" data-precision-for="birthDate"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
           <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthTime">Birth time</span><input id="birthTime" name="BirthTime" type="time" step="60"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="BirthTimePrecision" data-precision-for="birthTime"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
-          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthPlace">Birth place</span><input id="birthPlace" name="BirthPlace" type="text" inputmode="text"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="BirthPlacePrecision" data-precision-for="birthPlace"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
-          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.timezone">Timezone</span><input id="birthTimezone" name="Timezone" type="text" placeholder="Asia/Kuala_Lumpur" spellcheck="false"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="TimezonePrecision" data-precision-for="birthTimezone"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div>
-          <fieldset class="pr-coordinate-fieldset"><legend data-i18n="personalRuntime.coordinates">Coordinates (optional)</legend><div class="pr-coordinate-grid"><label><span data-i18n="personalRuntime.latitude">Latitude</span><input id="birthLatitude" name="Latitude" type="number" min="-90" max="90" step="any"></label><label><span data-i18n="personalRuntime.longitude">Longitude</span><input id="birthLongitude" name="Longitude" type="number" min="-180" max="180" step="any"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="CoordinatesPrecision" data-precision-for="coordinates"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label></div></fieldset>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthPlace">Birth place</span><input id="birthPlace" name="BirthPlace" type="text" inputmode="text"></label><label><span data-i18n="personalRuntime.countryCode">Country code</span><input id="birthCountryCode" name="BirthCountryCode" type="text" inputmode="text" maxlength="2" placeholder="MY"></label></div>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.birthPlacePrecision">Place precision</span><select name="BirthPlacePrecision" data-precision-for="birthPlace"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label><span></span></div>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.timezone">Birth timezone</span><input id="birthTimezone" name="Timezone" type="text" placeholder="Asia/Kuala_Lumpur" spellcheck="false"></label><label><span data-i18n="personalRuntime.utcOffsetAtBirth">UTC offset at birth</span><input id="utcOffsetAtBirth" name="UtcOffsetAtBirth" type="text" placeholder="+08:00" spellcheck="false"></label></div>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.timezonePrecision">Timezone precision</span><select name="TimezonePrecision" data-precision-for="timezone"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label><p class="pr-field-help" data-i18n="personalRuntime.timezoneHelp">Use the historical offset that applied at birth. Current/browser timezone is never substituted.</p></div>
+          <fieldset class="pr-coordinate-fieldset"><legend data-i18n="personalRuntime.coordinates">Coordinates (optional)</legend><div class="pr-coordinate-grid"><label><span data-i18n="personalRuntime.latitude">Latitude</span><input id="birthLatitude" name="Latitude" type="number" min="-90" max="90" step="any"></label><label><span data-i18n="personalRuntime.longitude">Longitude</span><input id="birthLongitude" name="Longitude" type="number" min="-180" max="180" step="any"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="CoordinatesPrecision" data-precision-for="coordinates"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" selected data-i18n="personalRuntime.unknown">Unknown</option></select></label></div></fieldset>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.targetDate">Optional cycle date</span><input id="targetDate" name="TargetDate" type="date"></label><p class="pr-field-help" data-i18n="personalRuntime.targetDateHelp">Used only when a selected Method has an authorized date-cycle calculation. No date is assumed when blank.</p></div>
           <div class="pr-source"><span data-i18n="personalRuntime.source">Source</span><strong data-i18n="personalRuntime.sourceHuman">Human declaration</strong></div>
-          <label class="pr-confirm"><input id="customerConfirmation" name="CustomerConfirmation" type="checkbox"><span data-i18n="personalRuntime.confirm">I confirm that the information entered here reflects what I currently know.</span></label>
-          <div class="pr-actions"><button class="public-button" id="checkPersonalRuntimeInput" type="button" data-i18n="personalRuntime.check">Check input readiness</button><button class="pr-secondary" id="clearPersonalRuntimeInput" type="button" data-i18n="personalRuntime.clear">Clear inputs</button></div>
+          <label class="pr-confirm"><input id="customerConfirmation" name="CustomerConfirmation" type="checkbox"><span data-i18n="personalRuntime.confirm">I confirm these values reflect what I currently know.</span></label>
+
+          <fieldset class="pr-method-select"><legend data-i18n="personalRuntime.requestedMethods">Requested Methods</legend><div data-mcd7-method-selection class="pr-method-select__grid"></div></fieldset>
+          <label class="pr-confirm pr-consent-confirm"><input id="executionConsent" name="ExecutionConsent" type="checkbox"><span data-i18n="personalRuntime.executionConsent">I consent to transient processing of this input for the selected Personal Runtime Method projections.</span></label>
+          <div class="pr-actions"><button class="public-button" id="checkPersonalRuntimeInput" type="button" data-i18n="personalRuntime.check">Check eligibility</button><button class="public-button" id="processPersonalRuntime" type="button" disabled data-i18n="personalRuntime.process">Process selected Methods</button><button class="pr-secondary" id="clearPersonalRuntimeInput" type="button" data-i18n="personalRuntime.clear">Clear</button></div>
         </form>
-        <section class="pr-readiness" data-personal-runtime-readiness hidden aria-live="polite"><h3 data-i18n="personalRuntime.resultTitle">Input readiness</h3><p data-personal-runtime-readiness-message></p><ul data-personal-runtime-readiness-facts></ul></section>
+
+        <section class="pr-readiness" data-personal-runtime-readiness hidden aria-live="polite"><h3 data-i18n="personalRuntime.eligibilityTitle">Eligibility</h3><p data-personal-runtime-readiness-message></p><div data-mcd7-eligibility class="pr-eligibility-grid"></div></section>
+        <section class="pr-processing" data-mcd7-processing hidden aria-live="polite"><span class="pr-processing__dot" aria-hidden="true"></span><div><h3 data-i18n="personalRuntime.processingTitle">Processing</h3><p data-i18n="personalRuntime.processingCopy">MPA is evaluating each request before any Method execution.</p></div></section>
       </section>
 
       <aside class="pr-side">
-        <section class="pr-panel"><p class="public-eyebrow">MPA</p><h2 data-i18n="personalRuntime.methodsTitle">Method availability</h2><p data-i18n="personalRuntime.methodsCopy"></p><div class="pr-method-grid" data-personal-runtime-methods aria-live="polite"></div><p class="pr-note" data-i18n="personalRuntime.methodBoundary"></p><p class="pr-error" data-personal-runtime-authority-error hidden data-i18n="personalRuntime.authorityUnavailable"></p></section>
-        <section class="pr-panel pr-consent"><p class="public-eyebrow">RDG · MPA-W7</p><h2 data-i18n="personalRuntime.consentTitle">Execution consent is a later gate</h2><p data-i18n="personalRuntime.consentCopy"></p></section>
+        <section class="pr-panel"><p class="public-eyebrow">MCD-7B</p><h2 data-i18n="personalRuntime.overviewPreviewTitle">Result contract</h2><p data-i18n="personalRuntime.overviewPreviewCopy">Results arrive only as Canonical Method Projections. Unknown, Evidence, Version and Execution remain visible.</p><ul class="pr-contract-list"><li>Canonical Projection only</li><li>MPA dispatch evidence</li><li>Unknown remains visible</li><li>Interpretation excluded</li></ul></section>
+        <section class="pr-panel pr-consent"><p class="public-eyebrow">Restricted projection boundary</p><h2 data-i18n="personalRuntime.controlledAvailabilityTitle">Controlled availability</h2><strong data-i18n="personalRuntime.personalRuntimeProjection">Personal Runtime Projection</strong><p class="pr-unavailable" data-i18n="personalRuntime.currentlyUnavailable">Currently unavailable</p><p data-i18n="personalRuntime.visibilityBoundary">Visibility does not equal availability. No result tab, chart, interpretation or production report is created.</p></section>
       </aside>
     </div></section>
-    <section class="public-section public-section--soft"><div class="public-container pr-footer-actions"><a class="public-button" href="/reality-journey"><span data-i18n="personalRuntime.journeyAction">Return to Reality Journey</span><span aria-hidden="true">→</span></a><a class="pr-text-link" href="/services" data-i18n="personalRuntime.professionalAction">View professional services</a></div></section>
+
+    <section class="public-section public-section--soft pr-results-section" data-mcd7-results hidden><div class="public-container">
+      <div class="pr-results-heading"><p class="public-eyebrow">MCD-7 · Results</p><h2 data-i18n="personalRuntime.resultsTitle">Personal Runtime Results</h2><p data-i18n="personalRuntime.resultsCopy">Calculation, projection and reading remain separate layers.</p></div>
+      <div class="pr-tabs" role="tablist" aria-label="Personal Runtime results" data-mcd7-tabs>
+        <button type="button" role="tab" aria-selected="true" data-tab="overview" data-i18n="personalRuntime.tabs.overview">Overview</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="astrology" data-i18n="personalRuntime.tabs.astrology">Astrology</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="bazi" data-i18n="personalRuntime.tabs.bazi">BaZi</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="numeric" data-i18n="personalRuntime.tabs.numeric">Numeric</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="reading" data-i18n="personalRuntime.tabs.reading">Reading</button>
+      </div>
+      <section class="pr-tab-panel" role="tabpanel" data-panel="overview"><div data-mcd7-overview></div></section>
+      <section class="pr-tab-panel" role="tabpanel" data-panel="astrology" hidden><div data-mcd7-result="astrology"></div></section>
+      <section class="pr-tab-panel" role="tabpanel" data-panel="bazi" hidden><div data-mcd7-result="bazi"></div></section>
+      <section class="pr-tab-panel" role="tabpanel" data-panel="numeric" hidden><div data-mcd7-result="numeric"></div></section>
+      <section class="pr-tab-panel" role="tabpanel" data-panel="reading" hidden><div class="pr-reading-placeholder"><p class="public-eyebrow">MCD-7H</p><h3 data-i18n="personalRuntime.readingTitle">Reading is a separate next layer</h3><p data-i18n="personalRuntime.readingCopy">This tab does not calculate or interpret. After MCD-8 acceptance, Guided Reading may consume accepted projection references under its own authority.</p><div data-mcd7-reading-sources></div></div></section>
+    </div></section>
+
+    <section class="public-section"><div class="public-container pr-footer-actions"><a class="public-button" href="/reality-journey"><span data-i18n="personalRuntime.journeyAction">Return to Reality Journey</span><span aria-hidden="true">→</span></a><a class="pr-text-link" href="/services" data-i18n="personalRuntime.professionalAction">View professional services</a></div></section>
   </main>
   <div data-public-footer-placeholder></div>
   <script type="module" src="/assets/js/public-shell.js"></script>

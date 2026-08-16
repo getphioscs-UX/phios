@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-WPR-W21-MCD-7-PERSONAL-RUNTIME-SURFACE-SUCCESSOR-v1.0.0",
+  "work": "MCD-7-WPR-SUCCESSOR",
+  "baselineCommit": "94d5efa953ff83713505b133d0039764df577675",
+  "status": "ACTIVE_VERSIONED_SUCCESSOR_WPR21_PREDECESSOR_IMMUTABLE",
+  "route": "/personal-runtime",
+  "predecessor": {
+    "surfaceCode": "PERSONAL_RUNTIME_SETUP",
+    "dataHandling": "EPHEMERAL_BROWSER_ONLY",
+    "methodExecutionAllowed": false,
+    "historicalChecker": "scripts/check-wpr-w21-personal-runtime-surface.mjs",
+    "mutated": false
+  },
+  "successor": {
+    "surfaceCode": "MCD7_PERSONAL_RUNTIME_RESULTS",
+    "dataHandling": "EPHEMERAL_SERVER_REQUEST_NO_PERSISTENCE",
+    "methodExecutionAllowed": true,
+    "executionRoute": "/api/method-execute",
+    "executionAuthority": "MPA",
+    "canonicalClientResult": "CanonicalMethodProjection",
+    "serverSubmissionRequiresExplicitProcessAction": true,
+    "browserStorageAllowed": false,
+    "serverPersistenceAllowed": false,
+    "interpretationIncluded": false
+  },
+  "hdr": {
+    "productionResultTab": false,
+    "controlledAvailabilityOnly": true,
+    "publicLabelEn": "Personal Runtime Projection",
+    "publicLabelZhHans": "个人运行投射"
+  },
+  "authorityChange": {
+    "wpr21HistoricalAuthorityRewritten": false,
+    "mpaDispatchAuthorityChanged": false,
+    "mcd5ProjectionAuthorityChanged": false,
+    "mcd6RendererAuthorityChanged": false
+  }
+}
