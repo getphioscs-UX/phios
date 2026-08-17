@@ -1,0 +1,19 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const read=p=>fs.readFileSync(p,'utf8'); const j=p=>JSON.parse(read(p)); const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const freeze=j('content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json');
+const acceptance=j('content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json');
+const handoff=j('content/professional/method-client-delivery/registries/mcd-8-guided-reading-consumption-handoff-v1.json');
+const mpa=j('content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json');
+const reconciliation=j('content/professional/method-client-delivery/reconciliation/mcd-8-mir-4-renderer-leakage-successor-v1.json');
+const pkg=j('package.json');
+for(const item of freeze.frozenOutputs){if(item.path==='package.json')continue;assert.equal(sha(item.path),item.sha256,`MCD8_MIR4_UNAUTHORIZED_HISTORICAL_DRIFT:${item.path}`);}
+assert.equal(reconciliation.historicalCheckerMutated,false); assert.equal(sha('scripts/check-mcd-8-production-acceptance.mjs'),freeze.frozenOutputs.find(x=>x.path==='scripts/check-mcd-8-production-acceptance.mjs').sha256);
+assert.equal(reconciliation.authority.rendererCalculationAuthorityCreated,false); assert.equal(reconciliation.authority.rendererProjectionAuthorityCreated,false); assert.equal(reconciliation.authority.rendererInterpretationAuthorityCreated,false); assert.equal(reconciliation.authority.rendererMeaningAuthorityCreated,false); assert.equal(reconciliation.authority.mpaAuthorityChanged,false); assert.equal(reconciliation.authority.mcd8GuidedReadingHandoffChanged,false);
+assert.equal(pkg.scripts['check:mcd'],'npm run check:mcd-1 && npm run check:mcd-2 && npm run check:mcd-3 && npm run check:mcd-4 && npm run check:mcd-5 && npm run check:mcd-6 && npm run check:mcd-7 && npm run check:mcd-8'); assert.equal(pkg.scripts['check:mcd-8'],reconciliation.packageAliasSuccessor['check:mcd-8']);
+for(const code of ['AST','BZR','NUM']){const x=mpa.methods.find(m=>m.pluginCode===code);assert.equal(x.dispatchAllowed,true);assert.equal(x.productionEligible,true);} const hdr=mpa.methods.find(m=>m.pluginCode==='HDR');assert.equal(hdr.state,'BLOCKED');assert.equal(hdr.dispatchAllowed,false);assert.equal(hdr.productionEligible,false);
+assert.equal(acceptance.status,'ACCEPTED_MCD_PRODUCTION_GUIDED_READING_HANDOFF_OPEN'); assert.deepEqual(handoff.allowedPublicMethodCodesAfterAcceptance,['ASTROLOGY_PROJECTION','BAZI_PROJECTION','NUMEROLOGY_PROJECTION']); assert.deepEqual(handoff.blockedPublicMethodCodes,['PERSONAL_RUNTIME_PROJECTION']); assert.equal(handoff.authorityBoundary.guidedReadingMayRecalculate,false);
+const ps=read(reconciliation.scopedAllowedConsumer); assert.doesNotMatch(ps,/core-method-runtime|functions\/method-runtime|shared-calculation-runtime|shared-projection-runtime|canonical-meaning-runtime|reading-runtime|fetch\s*\(/i); for(const term of ['Human Design','人类图','HUMAN_DESIGN','BodyGraph'])assert.equal(ps.includes(term),false,term); for(const forbidden of reconciliation.stillForbidden.filter(x=>!['calculationRuntimeImport','HDR_BRANDED_PUBLIC_SURFACE'].includes(x)))assert.equal(ps.includes(forbidden),false,`forbidden successor raw field: ${forbidden}`); for(const allowed of reconciliation.allowedProjectedFields)assert.equal(ps.includes(allowed),true,`expected canonical projected field not consumed: ${allowed}`);
+const angle=read('assets/js/method-client-delivery/renderers/personal-structure-visual-angle.js'); assert.doesNotMatch(angle,/302|5\.625|0\.9375|GATE_WHEEL_ECLIPTIC_OFFSET/);
+console.log('✓ MCD-8 → MIR-4 scoped renderer leakage successor passed. Historical MCD-8 bytes are preserved; MIR-3 canonical Personal Structure projection fields are allowed only in the governed projection-only successor renderer.');
