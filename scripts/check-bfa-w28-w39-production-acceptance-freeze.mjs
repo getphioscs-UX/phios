@@ -15,6 +15,8 @@ const acceptance=read('content/production/bilingual-final-approval/acceptance/bf
 const freeze=read('content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json');assert.equal(freeze.invariant,'PRODUCTION_CAPABILITY_NOT_PRODUCTION_CONTENT');assert.ok(freeze.notFrozen.includes('specific BATCH-002 results'));
 const progressionSuccessorPath='content/production/bilingual-final-approval/progression-v2/freeze/bfa-progression-v2-capability-successor-freeze-v1.json';
 const progressionSuccessor=read(progressionSuccessorPath);
+const progressionDeferSuccessorPath='content/production/bilingual-final-approval/progression-v2/freeze/bfa-progression-v2-defer-successor-freeze-v1.json';
+const progressionDeferSuccessor=fs.existsSync(path.join(root,progressionDeferSuccessorPath))?read(progressionDeferSuccessorPath):null;
 assert.equal(progressionSuccessor.status,'FROZEN_ADDITIVE_BFA_PROGRESSION_V2_SUCCESSOR');
 assert.equal(progressionSuccessor.predecessorFreeze,'content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json');
 for(const [p,d] of Object.entries(freeze.files)){
@@ -27,9 +29,23 @@ for(const [p,d] of Object.entries(freeze.files)){
   }
   assert.equal(actual,d,`BFA-W39 frozen capability drift: ${p}`);
 }
-for(const [p,d] of Object.entries(progressionSuccessor.files)) assert.equal(shaFile(p),d,`BFA-PROG v2 frozen successor capability drift: ${p}`);
+for(const [p,d] of Object.entries(progressionSuccessor.files)){
+  const actual=shaFile(p);
+  if(actual!==d&&progressionDeferSuccessor?.reconciledPredecessorFiles?.[p]){
+    const successor=progressionDeferSuccessor.reconciledPredecessorFiles[p];
+    assert.equal(successor.predecessorSha256,d,`BFA-PROG v2.1 predecessor digest mismatch: ${p}`);
+    assert.equal(successor.successorSha256,actual,`BFA-PROG v2.1 successor digest mismatch: ${p}`);
+    continue;
+  }
+  assert.equal(actual,d,`BFA-PROG v2 frozen successor capability drift: ${p}`);
+}
+if(progressionDeferSuccessor){
+  assert.equal(progressionDeferSuccessor.status,'FROZEN_ADDITIVE_BFA_PROGRESSION_V2_DEFER_SUCCESSOR');
+  assert.equal(progressionDeferSuccessor.predecessorFreeze,progressionSuccessorPath);
+  for(const [p,d] of Object.entries(progressionDeferSuccessor.files)) assert.equal(shaFile(p),d,`BFA-PROG v2.1 defer successor capability drift: ${p}`);
+}
 console.log('✓ BFA-W28～W39 responsive/accessibility workspace, progress/resume/audit contracts, machine-human checker and historical reconciliation passed.');
 console.log('✓ BFA-W35 fixture proves 6 PASS / 2 WARNING / 1 FIGURE_PENDING / 1 BLOCKED; clean batch approval creates six package-scoped TL authorities.');
 console.log('✓ BFA-W36 no-approval publication fails closed with zero side effects; BFA-W37 rerun is byte-stable/idempotent.');
 console.log('✓ BFA-W38 production capability acceptance passed without fabricating real BATCH-002 content/publication evidence.');
-console.log(`✓ BFA-W39 historical capability freeze verified ${Object.keys(freeze.files).length} files; BFA-PROG v2 is accepted only through its digest-bound additive successor freeze.`);
+console.log(`✓ BFA-W39 historical capability freeze verified ${Object.keys(freeze.files).length} files; BFA-PROG v2 and the v2.1 explicit-defer lifecycle are accepted only through chained digest-bound additive successor freezes.`);

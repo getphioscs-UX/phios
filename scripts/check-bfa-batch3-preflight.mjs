@@ -1,1 +1,21 @@
 import './check-bfa-progression-v2.mjs';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+const root=process.cwd();const read=r=>JSON.parse(fs.readFileSync(path.join(root,r),'utf8'));const ex=r=>fs.existsSync(path.join(root,r));
+const decisions=read('content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json');
+assert.equal(decisions.actor,'TL');assert.equal(decisions.decisionAuthority,'HUMAN_C2_EDITORIAL_AUTHORITY');assert.equal(decisions.decisions.length,24);
+const approved=decisions.decisions.filter(x=>x.decision==='freeze_approved'), deferred=decisions.decisions.filter(x=>x.decision==='defer');assert.equal(approved.length,23);assert.deepEqual(deferred.map(x=>x.nodeCode),['KN-PREFACE-003']);
+const plan=read('content/production/article-simplification/batches/BATCH-003/batch-plan.v1.json');assert.equal(plan.selection.selectedCount,23);assert.equal(plan.selection.shortfallCount,1);assert.equal(plan.selection.explicitDeferredCount,1);assert.deepEqual(plan.selection.deferredNodeCodes,['KN-PREFACE-003']);assert.equal(plan.entries.some(x=>x.nodeCode==='KN-PREFACE-003'),false);
+const orch=read('content/production/article-simplification/batches/BATCH-003/candidate-orchestration.v1.json');assert.equal(orch.entries.length,23);
+const review=read('content/production/bilingual-final-approval/BATCH-003/review-data.json');assert.equal(review.summary.nodes,23);assert.equal(review.summary.localeCandidates,46);assert.equal(review.summary.articleReady,23);assert.equal(review.summary.warnings,0);assert.equal(review.summary.blocked,0);assert.equal(review.summary.finalApproved,0);assert.equal(review.summary.pending,23);assert.equal(review.summary.published,0);
+const reg=read('content/knowledge/production/registry/candidate-registry.json');
+for(const e of approved){for(const locale of ['zh-Hans','en']){const cp=`content/knowledge/production/candidates/${locale}/${e.nodeCode}/candidate.v1.json`;assert.ok(ex(cp),`missing ${cp}`);const c=read(cp);assert.equal(c.candidateState,'ready_for_human_review');assert.equal(c.authority.candidateContent,'candidate_only');assert.equal(c.authority.publication,'not_published');assert.equal(c.provenance.independentLocaleAuthoring,true);assert.ok(reg.records.some(r=>r.nodeCode===e.nodeCode&&r.locale===locale&&r.candidateDigest===c.candidateDigest),`registry orphan ${e.nodeCode}/${locale}`);}}
+assert.equal(ex('content/knowledge/production/candidates/zh-Hans/KN-PREFACE-003/candidate.v1.json'),false);assert.equal(ex('content/knowledge/production/candidates/en/KN-PREFACE-003/candidate.v1.json'),false);
+for(const e of review.entries){assert.ok(e.package,`package missing ${e.nodeCode}`);assert.equal(e.package.automaticEvidence.status,'PASS');assert.equal(e.package.publicationReadiness.state,'READY_FOR_FINAL_APPROVAL');for(const locale of ['zh-Hans','en']){const checks=e.package.automaticEvidence.byLocale[locale].checks;assert.equal(checks.find(x=>x.code==='PUBLIC_ARTICLE_GOVERNANCE_LEAKAGE')?.status,'PASS');assert.equal(checks.find(x=>x.code==='PUBLIC_ARTICLE_KNOWLEDGE_BOUNDARY_SECTION')?.status,'PASS');}}
+const ap='content/production/bilingual-final-approval/BATCH-003/approvals';assert.equal(ex(ap)?fs.readdirSync(path.join(root,ap)).filter(x=>x.endsWith('.json')).length:0,0);
+const backlog=read('content/production/bilingual-final-approval/progression-v2/deferred/BATCH-003-deferred-backlog-v1.json');assert.equal(backlog.records[0].nodeCode,'KN-PREFACE-003');assert.equal(backlog.records[0].reentryRequiresNewHumanDecision,true);
+console.log('✓ Real BATCH-003 post-C2 production integrity passed: 24-node progress window resolved as 23 freeze_approved + 1 explicit TL DEFER.');
+console.log('✓ 23 zh-Hans + 23 independent English Candidates have standard brief/prompt/registry lineage; deferred KN-PREFACE-003 has zero Candidate authority.');
+console.log('✓ 23/23 Complete Publication Packages are Automatic PASS and READY_FOR_FINAL_APPROVAL; 0 TL Final Approvals and 0 publications were synthesized.');
+console.log('✓ Same-batch refill is not required: BATCH-003 intentionally closes at 23 production articles after the explicit TL DEFER; the next batch continues from the next canonical cursor.');

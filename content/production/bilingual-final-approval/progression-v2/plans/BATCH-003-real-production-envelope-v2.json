@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BFA-PROG-REAL-PRODUCTION-BATCH-v2.0.0",
   "work": "BFA-PROG-7",
   "batchCode": "BATCH-003",
-  "status": "REAL_BATCH_INSTANTIATED_UPSTREAM_C2_REVIEW_REQUIRED",
+  "status": "REAL_BATCH_READY_FOR_BFA_FINAL_REVIEW",
   "bookCode": "BOOK-1",
   "plannedNodeCount": 24,
   "nodeCodes": [
@@ -33,11 +33,9 @@
   ],
   "batchCodeReserved": true,
   "emptyBatch": false,
-  "candidateProductionAllowedNow": false,
-  "blocking": [
-    "TL_C2_REVIEW_INCOMPLETE"
-  ],
-  "nextTransition": "AFTER_TL_C2_FREEZE_BUILD_C3_AND_PJA_CANDIDATES",
+  "candidateProductionAllowedNow": true,
+  "blocking": [],
+  "nextTransition": "TL_BFA_FINAL_REVIEW",
   "authorityBoundary": {
     "canonicalNodesReal": true,
     "fixture": false,
@@ -45,5 +43,12 @@
     "humanApprovalSynthesized": false,
     "candidateAuthoritySynthesized": false,
     "publicationSynthesized": false
-  }
+  },
+  "productionArticleCount": 23,
+  "deferredNodeCount": 1,
+  "deferredNodeCodes": [
+    "KN-PREFACE-003"
+  ],
+  "candidateLocaleCount": 46,
+  "completePublicationPackageCount": 23
 }
