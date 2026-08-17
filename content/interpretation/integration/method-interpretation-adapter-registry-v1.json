@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-MIR-7-METHOD-INTERPRETATION-ADAPTER-REGISTRY-v1.0.0",
+  "work": "MIR-7C/C2",
+  "status": "ACTIVE_PROJECTION_ONLY_ADAPTERS",
+  "adapters": [
+    {
+      "adapterCode": "AST_INTERPRETATION_ADAPTER",
+      "methodScope": "AST",
+      "publicMethodCode": "ASTROLOGY_PROJECTION",
+      "module": "functions/interpretation-runtime/adapters/ast-interpretation-adapter-v1.js",
+      "clientEligible": true,
+      "input": "CANONICAL_PROJECTION_ONLY",
+      "mayModifyKernelAuthority": false,
+      "mayRecalculate": false,
+      "mayCreateCanonicalMeaningIdentity": false
+    },
+    {
+      "adapterCode": "BZR_INTERPRETATION_ADAPTER",
+      "methodScope": "BZR",
+      "publicMethodCode": "BAZI_PROJECTION",
+      "module": "functions/interpretation-runtime/adapters/bzr-interpretation-adapter-v1.js",
+      "clientEligible": true,
+      "input": "CANONICAL_PROJECTION_ONLY",
+      "mayModifyKernelAuthority": false,
+      "mayRecalculate": false,
+      "mayCreateCanonicalMeaningIdentity": false
+    },
+    {
+      "adapterCode": "NUM_INTERPRETATION_ADAPTER",
+      "methodScope": "NUM",
+      "publicMethodCode": "NUMEROLOGY_PROJECTION",
+      "module": "functions/interpretation-runtime/adapters/num-interpretation-adapter-v1.js",
+      "clientEligible": true,
+      "input": "CANONICAL_PROJECTION_ONLY",
+      "mayModifyKernelAuthority": false,
+      "mayRecalculate": false,
+      "mayCreateCanonicalMeaningIdentity": false
+    },
+    {
+      "adapterCode": "HDR_INTERNAL_INTERPRETATION_ADAPTER",
+      "methodScope": "HDR_INTERNAL",
+      "publicMethodCode": "PERSONAL_RUNTIME_PROJECTION",
+      "module": "functions/interpretation-runtime/adapters/hdr-internal-interpretation-adapter-v1.js",
+      "clientEligible": false,
+      "input": "CANONICAL_PROJECTION_ONLY",
+      "mayModifyKernelAuthority": false,
+      "mayRecalculate": false,
+      "mayCreateCanonicalMeaningIdentity": false
+    },
+    {
+      "adapterCode": "PERSONAL_STRUCTURE_INTERPRETATION_ADAPTER",
+      "methodScope": "PERSONAL_STRUCTURE",
+      "publicMethodCode": "PHI_OS_PERSONAL_STRUCTURE",
+      "module": "functions/interpretation-runtime/adapters/personal-structure-interpretation-adapter-v1.js",
+      "clientEligible": true,
+      "input": "CANONICAL_PROJECTION_ONLY",
+      "mayModifyKernelAuthority": false,
+      "mayRecalculate": false,
+      "mayCreateCanonicalMeaningIdentity": false
+    }
+  ],
+  "hdrInternalOnly": true,
+  "personalStructureUsesPhiOsVocabulary": true
+}

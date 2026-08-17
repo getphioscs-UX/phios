@@ -1207,7 +1207,14 @@
     "check:bfa-prog": "node scripts/check-bfa-progression-v2.mjs",
     "bfa:prog:c2-review": "node scripts/bfa-prog-c2-review.mjs",
     "bfa:prog:apply-c2": "node scripts/apply-bfa-prog-c2-decisions.mjs",
-    "check:bfa-batch3": "node scripts/check-bfa-batch3-preflight.mjs"
+    "check:bfa-batch3": "node scripts/check-bfa-batch3-preflight.mjs",
+    "build:mir-7-registry-bundle": "node scripts/build-mir-7-registry-bundle.mjs",
+    "check:mir-7-registry-bundle": "node scripts/build-mir-7-registry-bundle.mjs --check",
+    "check:interpretation-method-integration": "node scripts/check-interpretation-method-integration.mjs",
+    "check:interpretation-lineage": "node scripts/check-interpretation-lineage.mjs",
+    "check:interpretation-composition": "node scripts/check-interpretation-composition.mjs",
+    "check:ir-w86-w103": "npm run check:interpretation-method-integration && npm run check:interpretation-lineage && npm run check:interpretation-composition",
+    "check:mir-7": "node scripts/check-mir-7-method-interpretation-result.mjs"
   },
   "type": "module",
   "dependencies": {

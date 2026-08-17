@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/interpretation/canonical-interpretation-result-v1.schema.json",
+  "title": "PHI OS CanonicalInterpretationResult v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "interpretationResultId",
+    "resultVersion",
+    "resultStatus",
+    "sourceType",
+    "sourceReference",
+    "locale",
+    "requestedDepth",
+    "observedStructure",
+    "calculatedStructure",
+    "derivedStructure",
+    "relationalConfiguration",
+    "runtimeState",
+    "carrierContext",
+    "experienceContext",
+    "interpretation",
+    "alternativeInterpretations",
+    "uncertainties",
+    "lineage",
+    "figureRefs",
+    "knowledgeRefs",
+    "evidenceRefs",
+    "canonicalMeaningRefs",
+    "acceptance",
+    "authority",
+    "derivationDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CANONICAL-INTERPRETATION-RESULT-v1.0.0"
+    },
+    "interpretationResultId": {
+      "type": "string",
+      "pattern": "^CIR-[A-F0-9]{24}$"
+    },
+    "resultVersion": {
+      "const": "1.0.0"
+    },
+    "resultStatus": {
+      "enum": [
+        "ACCEPTED_GOVERNED_INTERPRETATION",
+        "ACCEPTED_WITH_UNKNOWNS"
+      ]
+    },
+    "sourceType": {
+      "enum": [
+        "CANONICAL_METHOD_PROJECTION",
+        "PERSONAL_STRUCTURE_PROJECTION",
+        "CROSS_METHOD_COMPOSITION"
+      ]
+    },
+    "sourceReference": {
+      "type": "object"
+    },
+    "locale": {
+      "enum": [
+        "zh-Hans",
+        "en"
+      ]
+    },
+    "requestedDepth": {
+      "enum": [
+        "SHORT",
+        "STANDARD",
+        "DETAILED",
+        "PROFESSIONAL"
+      ]
+    },
+    "observedStructure": {
+      "type": "array"
+    },
+    "calculatedStructure": {
+      "type": "array"
+    },
+    "derivedStructure": {
+      "type": "array"
+    },
+    "relationalConfiguration": {
+      "type": "array"
+    },
+    "runtimeState": {
+      "type": "object"
+    },
+    "carrierContext": {},
+    "experienceContext": {},
+    "interpretation": {
+      "type": "object"
+    },
+    "alternativeInterpretations": {
+      "type": "array"
+    },
+    "uncertainties": {
+      "type": "array"
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "figureRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "knowledgeRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "canonicalMeaningRefs": {
+      "type": "array"
+    },
+    "acceptance": {
+      "type": "object"
+    },
+    "authority": {
+      "type": "object"
+    },
+    "derivationDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
