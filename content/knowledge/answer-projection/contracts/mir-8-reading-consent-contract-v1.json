@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "PHI-OS-MIR-8-READING-CONSENT-CONTRACT-v1.0.0",
+  "work": "MIR-8B",
+  "status": "ACTIVE",
+  "requiredFields": ["optedIn", "readingPermitted", "interpretationResultId"],
+  "rules": {
+    "optInRequired": true,
+    "readingPermittedMustBeTrue": true,
+    "consentMustBindExactInterpretationResultId": true,
+    "resultOnlyViewRequiresGuidedReadingConsent": false,
+    "methodExecutionConsentMaySubstituteReadingConsent": false,
+    "consentMayBeSynthesizedByAI": false
+  },
+  "outcomes": ["RESULT_ONLY_SELECTED", "CONSENT_REQUIRED", "CONSENT_GRANTED"]
+}
