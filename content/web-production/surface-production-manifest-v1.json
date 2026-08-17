@@ -1,0 +1,572 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H3-PRODUCTION-SURFACE-MANIFEST-v1.0.0",
+  "work": "BFR-H3",
+  "baselineCommit": "3b5ff152d1cdfe479ed4daf7c772e3faa926dc17",
+  "status": "CURRENT_BFR_PRODUCTION_SURFACE_MANIFEST",
+  "canonicalCurrentManifest": true,
+  "authorityBoundary": "CONSUMPTION_MANIFEST_NOT_SURFACE_AUTHORITY",
+  "recordCount": 18,
+  "surfaces": [
+    {
+      "surfaceCode": "HOMEPAGE",
+      "route": "/",
+      "surfaceFamily": "HOMEPAGE",
+      "authoritySources": [
+        "BOOK_REGISTRY",
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeSources": [
+        "WPR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "content/web-production/composition/public/homepage-composition-v1.1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_CURRENT_COMPOSITION"
+    },
+    {
+      "surfaceCode": "KNOWLEDGE_SEARCH",
+      "route": "/knowledge-search",
+      "surfaceFamily": "KNOWLEDGE_SEARCH",
+      "authoritySources": [
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLIC_RETRIEVAL"
+      ],
+      "runtimeSources": [
+        "KNR",
+        "KAP"
+      ],
+      "dataEndpoints": [
+        "/api/public-knowledge"
+      ],
+      "compositionContract": "STATIC_PDS_KNOWLEDGE_SEARCH",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "LOW",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE"
+    },
+    {
+      "surfaceCode": "LIBRARY",
+      "route": "/library",
+      "surfaceFamily": "LIBRARY",
+      "authoritySources": [
+        "PUBLISHED_KNOWLEDGE",
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "FIGURE_REGISTRY"
+      ],
+      "runtimeSources": [
+        "KNR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "content/web-production/composition/public/library-composition-v1.1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE"
+    },
+    {
+      "surfaceCode": "BOOKS",
+      "route": "/books",
+      "surfaceFamily": "BOOKS",
+      "authoritySources": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeSources": [
+        "BOOK_W1",
+        "WPR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "STATIC_PDS_BOOK_LIBRARY",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE"
+    },
+    {
+      "surfaceCode": "INDIVIDUAL_BOOK",
+      "route": "/books/:volume-slug",
+      "surfaceFamily": "INDIVIDUAL_BOOK",
+      "authoritySources": [
+        "BOOK_REGISTRY",
+        "PART_REGISTRY",
+        "FIGURE_REGISTRY",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeSources": [
+        "BOOK_W1",
+        "WPR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "STATIC_PDS_BOOK_DETAIL",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "MEDIUM_HIGH",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE"
+    },
+    {
+      "surfaceCode": "ARTICLE",
+      "route": "/articles/:slug",
+      "surfaceFamily": "ARTICLE",
+      "authoritySources": [
+        "PUBLISHED_KNOWLEDGE",
+        "PUBLICATION_OWNERSHIP",
+        "FIGURE_REGISTRY"
+      ],
+      "runtimeSources": [
+        "KNR",
+        "VAP",
+        "WPR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "content/web-production/composition/public/article-composition-v1.1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE"
+    },
+    {
+      "surfaceCode": "FIGURE",
+      "route": "/figure",
+      "surfaceFamily": "FIGURE",
+      "authoritySources": [
+        "FIGURE_REGISTRY",
+        "PUBLICATION_OWNERSHIP",
+        "PUBLIC_ASSET_REGISTRY"
+      ],
+      "runtimeSources": [
+        "CAR",
+        "WPR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "STATIC_PDS_FIGURE",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "HIGH",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE"
+    },
+    {
+      "surfaceCode": "ASK_PHIOS",
+      "route": "/knowledge-search",
+      "surfaceFamily": "ASK_PHI_OS",
+      "authoritySources": [
+        "PUBLISHED_KNOWLEDGE",
+        "KSAR",
+        "KNOWLEDGE_RETRIEVAL",
+        "RELATED_KNOWLEDGE"
+      ],
+      "runtimeSources": [
+        "GROUNDED_ANSWER"
+      ],
+      "dataEndpoints": [
+        "/api/ask-phios"
+      ],
+      "compositionContract": "KAP_CLIENT_ASK_COMPOSITION",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "informationDensity": "ADAPTIVE",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PUBLIC_ASK_ACTIVE"
+    },
+    {
+      "surfaceCode": "ACADEMY",
+      "route": "/academy",
+      "surfaceFamily": "ACADEMY",
+      "authoritySources": [
+        "PUBLISHED_KNOWLEDGE",
+        "ALR"
+      ],
+      "runtimeSources": [
+        "ALR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "STATIC_PDS_ACADEMY",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "DISCOVERY_ACTIVE_LIVE_LEARNING_GATED"
+    },
+    {
+      "surfaceCode": "REALITY_JOURNEY",
+      "route": "/reality-journey",
+      "surfaceFamily": "REALITY_JOURNEY",
+      "authoritySources": [
+        "JR",
+        "RDG"
+      ],
+      "runtimeSources": [
+        "JR",
+        "RRE",
+        "RNE"
+      ],
+      "dataEndpoints": [
+        "/api/reality-handoff",
+        "/api/read-runtime",
+        "/api/navigate-runtime"
+      ],
+      "compositionContract": "content/web-production/composition/customer/reality-journey-composition-v1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_READ_ONLY_PRODUCTION"
+    },
+    {
+      "surfaceCode": "PERSONAL_REALITY",
+      "route": "/personal-runtime",
+      "surfaceFamily": "PERSONAL_REALITY",
+      "authoritySources": [
+        "MPA",
+        "MCD"
+      ],
+      "runtimeSources": [
+        "MCD"
+      ],
+      "dataEndpoints": [
+        "/api/method-execute"
+      ],
+      "compositionContract": "content/web-production/composition/customer/personal-runtime-composition-v1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_METHOD_GATED_PRODUCTION"
+    },
+    {
+      "surfaceCode": "FINANCIAL_REALITY",
+      "route": "/professional/financial",
+      "surfaceFamily": "FINANCIAL_REALITY",
+      "authoritySources": [
+        "FINANCIAL_RUNTIME",
+        "PR"
+      ],
+      "runtimeSources": [
+        "FINANCIAL_RUNTIME"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "content/web-production/composition/professional/professional-financial-composition-v1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC",
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PUBLIC_DISCOVERY"
+    },
+    {
+      "surfaceCode": "ACCOUNT",
+      "route": "/account",
+      "surfaceFamily": "ACCOUNT",
+      "authoritySources": [
+        "ACCOUNT_RUNTIME"
+      ],
+      "runtimeSources": [
+        "ACCOUNT_RUNTIME"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "STATIC_ACCOUNT_SHELL",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "CUSTOMER"
+      ],
+      "informationDensity": "LOW",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "AUTHENTICATED_SURFACE"
+    },
+    {
+      "surfaceCode": "REALITY_DASHBOARD",
+      "route": "/reality-dashboard",
+      "surfaceFamily": "REALITY_DASHBOARD",
+      "authoritySources": [
+        "M3C_BROWSER_LOCAL",
+        "JR",
+        "RDG"
+      ],
+      "runtimeSources": [
+        "JR"
+      ],
+      "dataEndpoints": [
+        "/api/read-runtime",
+        "/api/navigate-runtime"
+      ],
+      "compositionContract": "content/web-production/composition/customer/reality-journey-composition-v1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "CUSTOMER"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "BROWSER_LOCAL_COMPATIBILITY"
+    },
+    {
+      "surfaceCode": "CUSTOMER_WORKSPACE",
+      "route": "/reality-dashboard",
+      "surfaceFamily": "CUSTOMER_WORKSPACE",
+      "authoritySources": [
+        "RMO",
+        "RRE",
+        "JR",
+        "RDG"
+      ],
+      "runtimeSources": [
+        "RMO",
+        "RRE",
+        "JR"
+      ],
+      "dataEndpoints": [
+        "/api/read-runtime",
+        "/api/navigate-runtime"
+      ],
+      "compositionContract": "WPR_CUSTOMER_WORKSPACE_COMPATIBILITY",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "CUSTOMER"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "PARTIAL_NO_DISTINCT_CANONICAL_WORKSPACE_ROUTE"
+    },
+    {
+      "surfaceCode": "SERVICES",
+      "route": "/services",
+      "surfaceFamily": "SERVICES",
+      "authoritySources": [
+        "SERVICES_REGISTRY",
+        "PR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeSources": [
+        "PR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "STATIC_PDS_SERVICES",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PUBLIC"
+      ],
+      "informationDensity": "MEDIUM",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_PRODUCTION_ACTIVE"
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "route": "/professional-workspace",
+      "surfaceFamily": "PROFESSIONAL_WORKSPACE",
+      "authoritySources": [
+        "PR",
+        "RDG",
+        "RR",
+        "FINANCIAL_RUNTIME"
+      ],
+      "runtimeSources": [
+        "PR",
+        "RR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "content/web-production/composition/professional/professional-financial-composition-v1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "PROFESSIONAL"
+      ],
+      "informationDensity": "HIGH",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "LIMITED_AUTHORIZED_SHELL"
+    },
+    {
+      "surfaceCode": "REPORT",
+      "route": "/professional-reports",
+      "surfaceFamily": "REPORT",
+      "authoritySources": [
+        "RR",
+        "PR",
+        "RDG"
+      ],
+      "runtimeSources": [
+        "RR",
+        "PR"
+      ],
+      "dataEndpoints": [],
+      "compositionContract": "content/web-production/composition/professional/report-workspace-composition-v1.json",
+      "PDSProfile": "PDS_CURRENT_WPR_INTEGRATION",
+      "visualAssets": [],
+      "assetResolver": "assets/js/runtime/web-production/asset-resolver.js",
+      "audience": [
+        "CUSTOMER",
+        "PROFESSIONAL"
+      ],
+      "informationDensity": "HIGH",
+      "locales": [
+        "en",
+        "zh-Hans"
+      ],
+      "responsiveProfile": "BFR_H12_MATRIX",
+      "accessibilityProfile": "BFR_H14_ACCEPTANCE",
+      "productionState": "UPSTREAM_AUTHORIZED_REPORT_ONLY"
+    }
+  ],
+  "rules": {
+    "backendUpgradeMustReconcileFrontend": true,
+    "r2AssetExistenceNeverEqualsHtmlConsumption": true,
+    "bookRegistryChangesMustNotBeHardcoded": true,
+    "groundedAnswerRequiresAskPhiosSurface": true
+  }
+}
