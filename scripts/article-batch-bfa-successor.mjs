@@ -17,7 +17,8 @@ const root=process.cwd(),count=Number(countRaw);
 const progressionCurrent=currentProgressionBatch(root,{bookCode});
 if(progressionCurrent && Number(progressionCurrent.batchCode.slice(6))>=3){
   if(requestedBatch && requestedBatch!==progressionCurrent.batchCode){console.error(`BFA_PROGRESSION_CURRENT_BATCH_IS_${progressionCurrent.batchCode}: later batch may not leapfrog the current canonical window.`);process.exit(2)}
-  if(count!==progressionCurrent.maximumNewArticles)console.log(`ℹ BFA Progression v2 freezes ${progressionCurrent.maximumNewArticles} nodes for ${progressionCurrent.batchCode}; requested --count ${count} is treated as an operator ceiling, not a reason to change the frozen window.`);
+  const progressionMaximum=progressionCurrent.maximumArticleUnits??progressionCurrent.maximumNewArticles??24;
+  if(count!==progressionMaximum)console.log(`ℹ BFA Article Composition progression allows up to ${progressionMaximum} public Article Composition Units in ${progressionCurrent.batchCode}; requested --count ${count} is an operator ceiling, not a reason to split canonical knowledge nodes into thin articles.`);
   const {plan,readiness}=buildCompatibleBatchPlan(root,progressionCurrent.batchCode);
   if(!plan){
     console.error(`BFA_PROGRESSION_UPSTREAM_REVIEW_REQUIRED: ${readiness.summary.productionReadyCount}/${readiness.summary.nodeCount} nodes are production-ready in ${progressionCurrent.batchCode}.`);
@@ -26,9 +27,17 @@ if(progressionCurrent && Number(progressionCurrent.batchCode.slice(6))>=3){
   }
   const batchDir=path.join(root,'content/production/article-simplification/batches',progressionCurrent.batchCode);fs.mkdirSync(batchDir,{recursive:true});const planPath=path.join(batchDir,'batch-plan.v1.json');
   if(fs.existsSync(planPath)){const old=JSON.parse(fs.readFileSync(planPath,'utf8'));if(old.batchDigest!==plan.batchDigest)throw new Error(`${progressionCurrent.batchCode} exists with different Progression v2 selection evidence`)}else fs.writeFileSync(planPath,JSON.stringify(plan,null,2)+'\n');
-  console.log(`✓ BFA Progression v2 activated ${progressionCurrent.batchCode}: ${plan.entries.length} canonical-order ARTICLE-ready nodes.`);
+  const isComposition=plan.entries?.some(e=>e.articleUnitCode);
+  console.log(isComposition?`✓ BFA Article Composition progression activated ${progressionCurrent.batchCode}: ${plan.entries.length} public articles covering ${plan.selection.canonicalNodeCoverageCount} Canonical Nodes.`:`✓ BFA Progression v2 activated ${progressionCurrent.batchCode}: ${plan.entries.length} canonical-order ARTICLE-ready nodes.`);
   const targetLocales=targetLocalesRaw?targetLocalesRaw.split(',').map(v=>v.trim()).filter(Boolean):[...DEFAULT_TARGET_LOCALES];
-  const candidateResult=writeCandidateOrchestration(root,plan,{targetLocales});
+  let candidateResult;
+  if(isComposition){
+    const outputPath=`content/production/article-simplification/batches/${progressionCurrent.batchCode}/candidate-orchestration.v1.json`;
+    if(!fs.existsSync(path.join(root,outputPath))) { console.error(`BFA_COMPOSITION_CANDIDATES_MISSING: run node scripts/generate-bfa-batch3-composition-repair.mjs`); process.exit(2); }
+    const existingOrchestration=JSON.parse(fs.readFileSync(path.join(root,outputPath),'utf8'));
+    if(existingOrchestration.articleUnitCount!==plan.entries.length)throw new Error(`${progressionCurrent.batchCode} composition orchestration does not match current Article Composition plan`);
+    candidateResult={reusedExistingOrchestration:true,outputPath};
+  } else candidateResult=writeCandidateOrchestration(root,plan,{targetLocales});
   console.log(`✓ Candidate orchestration ${candidateResult.reusedExistingOrchestration?'reused':'created'}: ${candidateResult.outputPath}`);
   const bfa=await buildBfaBatchFromAps(root,progressionCurrent.batchCode,{write:true});
   console.log(`✓ BFA package workspace: ${bfa.entries.filter(x=>x.package).length}/${bfa.entries.length} complete packages.`);

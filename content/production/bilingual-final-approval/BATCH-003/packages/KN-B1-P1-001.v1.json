@@ -6,38 +6,49 @@
   "nodeCode": "KN-B1-P1-001",
   "bookCode": "BOOK-1",
   "partCode": "P1",
+  "articleUnitCode": "ACU-B1-003",
+  "compositionNodeCodes": [
+    "KN-B1-P1-001",
+    "KN-B1-P1-002",
+    "KN-B1-P1-004",
+    "KN-B1-P1-005",
+    "KN-B1-P1-007"
+  ],
+  "compositionNodeCount": 5,
+  "publicArticleRole": "ARTICLE_COMPOSITION_UNIT",
   "canonicalAuthority": {
     "nodeCode": "KN-B1-P1-001",
-    "source": "Canonical Knowledge Registry + Human-frozen C2/C3 + PJA brief binding",
-    "nodeDigest": "c77c66ea7ff7564859e4bfb603f0bb60263fca99f9bc37427b30fffd39e5ab53",
+    "source": "Canonical member-node registry + Human-frozen C2/C3 + Article Composition brief binding",
+    "nodeDigest": "5f10e67f8dbf36f5c736b5975a9c7089ffaecf7957b1a876c1cd8df8b0258c76",
     "c2C3AuthorityPreserved": true,
-    "sourceDigest": "73dce963cc2c1ce7a7ec8034fb6f792f808820f23b1a7ed0cbb5f28be1fd493b"
+    "sourceDigest": "81625174eff042ec14d872482da143e443f91cf63b624b33a295351e71435adb"
   },
   "pjaBrief": {
     "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
     "nodeCode": "KN-B1-P1-001",
     "locale": "zh-Hans",
-    "sourceBriefCode": "BRIEF-KN-B1-P1-001-ZH-HANS-PROG-V1",
-    "sourceDigest": "6017e9ed754a249b36356726571102e2afa79e485ae734142db607affdff15c1",
-    "canonicalQuestion": "差异如何打开现实形成的可能",
-    "canonicalTitle": "差异如何打开现实形成的可能",
-    "canonicalMeaning": "差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。",
+    "sourceBriefCode": "BRIEF-ACU-B1-003-ZH-HANS-V1",
+    "sourceDigest": "b8fa4e1ee1aad6acdd5760d3eb4047604c6ae4ea5f6d3f32451a59265c2a9749",
+    "canonicalQuestion": "现实如何从差异走向可导航的结构",
+    "canonicalTitle": "现实如何从差异走向可导航的结构",
+    "canonicalMeaning": "现实形成并不是从完整对象开始，而是从可区分的差异开始。约束筛选路径，结构保存关系，区域与网络扩展这些差异，最终让位置、方向和可行路径变得可读取，导航才获得精度。",
     "requiredCoverage": [
-      "差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。"
+      "差异让关系第一次可以被区分",
+      "约束把可能性裁成可实现路径",
+      "结构通过配置与压缩保存关系",
+      "区域与网络让局部差异获得范围",
+      "导航需要位置、参考与可行路径"
     ],
-    "requiredDistinctions": [
-      "PHI OS 的一般框架 与 外部可验证事实",
-      "一般机制 与 个案判断"
-    ],
+    "requiredDistinctions": [],
     "mustPreserve": [
-      "解释该节点所描述的一般形成机制与关系。"
+      "整合 5 个相邻 Canonical Nodes 的形成链，不复制书稿章节。"
     ],
     "mustNotClaim": [
-      "不得从一般机制直接生成个人诊断、专业建议或价值判断。",
-      "不得把框架性解释写成已经被外部科学直接证明的唯一事实。"
+      "不得把差异直接等同于稳定结构。",
+      "不得把结构模型描述为唯一的物理宇宙起源解释。"
     ],
     "excludedScope": [
-      "具体个案判断、专业诊断与未经来源支持的外部事实。"
+      "个案诊断、专业判断与未经来源支持的具体外部事实。"
     ],
     "internalGovernanceConstraints": [],
     "sourceGovernanceRequirements": {
@@ -49,9 +60,10 @@
     },
     "terminology": [],
     "evidenceScope": [
-      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
       "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-      "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
     ],
     "figureRequirement": null,
     "localeRequirement": {
@@ -70,27 +82,28 @@
         "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
         "nodeCode": "KN-B1-P1-001",
         "locale": "en",
-        "sourceBriefCode": "BRIEF-KN-B1-P1-001-EN-BFA-PROG-V1",
-        "sourceDigest": "0d497c2f8eced6ebe4a402ab906ba788941b9bd8d5b5e6607672736b609bae1a",
-        "canonicalQuestion": "How Does Difference Open the Possibility of Reality Formation?",
-        "canonicalTitle": "How Does Difference Open the Possibility of Reality Formation?",
-        "canonicalMeaning": "Difference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the possibility of Structure, but it does not mean that Structure is already stable.",
+        "sourceBriefCode": "BRIEF-ACU-B1-003-EN-V1",
+        "sourceDigest": "d9c63aad3e2fbc5259334d6ca3f76cb158aca903884c22fe7283fe83ef9416d1",
+        "canonicalQuestion": "How Reality Moves from Difference to Navigable Structure",
+        "canonicalTitle": "How Reality Moves from Difference to Navigable Structure",
+        "canonicalMeaning": "Reality formation does not have to begin with complete objects. It can begin with distinguishable Difference. Constraint selects realizable paths, Structure preserves relations, regions and networks extend them, and stable references finally make position, direction, and navigation readable.",
         "requiredCoverage": [
-          "Difference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the possibility of Structure, but it does not mean that Structure is already stable."
+          "Difference makes relations distinguishable",
+          "Constraint turns possibility into realizable paths",
+          "Structure preserves relations through configuration and compression",
+          "Regions and networks give local differences range",
+          "Navigation requires position reference and viable paths"
         ],
-        "requiredDistinctions": [
-          "PHI OS general framework and externally verifiable facts",
-          "general mechanism and case-specific judgment"
-        ],
+        "requiredDistinctions": [],
         "mustPreserve": [
-          "Explain the general formation mechanism and relationships described by this node."
+          "Integrate the formation chain across 5 adjacent Canonical Nodes without reproducing manuscript chapters."
         ],
         "mustNotClaim": [
-          "Do not turn a general mechanism directly into a personal diagnosis, professional recommendation, or value judgment.",
-          "Do not present a framework explanation as the single fact directly proven by external science."
+          "Do not equate the appearance of Difference with a stable Structure.",
+          "Do not present this structural model as the single physical explanation of cosmic origins."
         ],
         "excludedScope": [
-          "Case-specific judgments, professional diagnosis, and external factual claims without supporting sources."
+          "Case-specific diagnosis, professional judgment, and unsupported specific external factual claims."
         ],
         "internalGovernanceConstraints": [],
         "sourceGovernanceRequirements": {
@@ -102,9 +115,10 @@
         },
         "terminology": [],
         "evidenceScope": [
-          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
           "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-          "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
         ],
         "figureRequirement": null,
         "localeRequirement": {
@@ -125,56 +139,72 @@
     "zh-Hans": {
       "nodeCode": "KN-B1-P1-001",
       "locale": "zh-Hans",
-      "candidateCode": "CANDIDATE-KN-B1-P1-001-ZH-HANS-V1",
-      "candidateDigest": "2b7f5401cb65592306446f4d68c93349151384fb30af592732ba64ff3149ebfb",
+      "candidateCode": "CANDIDATE-ACU-B1-003-ZH-HANS-V1",
+      "candidateDigest": "81e1425e0900844d958df52141daf973fde7feb02ed76e245f8031d9ae9b1a82",
       "article": {
-        "bodyMarkdown": "# 差异如何打开现实形成的可能\n\n差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
-        "sectionHeadings": [
-          "问题真正指向什么",
-          "机制如何形成",
-          "一般机制与个案判断必须分开",
-          "框架说明与外部事实必须分开",
-          "现实如何继续向下一层展开"
+        "articleUnitCode": "ACU-B1-003",
+        "bodyMarkdown": "# 现实如何从差异走向可导航的结构\n\n如果把现实理解成已经存在的一组对象，我们很容易直接讨论“这些对象是什么”。但从形成过程往回看，更早的问题是：为什么会出现可以区分的状态？为什么某些关系被保留下来，而另一些关系消失？为什么后来会出现区域、边界、网络和位置？\n\n从差异到导航，中间并不是一次跳跃，而是一条逐步增加可读性的形成链。差异让比较成为可能，约束筛选可实现路径，结构保存关系模式，结构差异形成区域与网络，最后这些稳定关系才提供位置和方向的参考。导航因此不是附加在现实上的最后一个功能，它建立在前面每一层已经形成的结构之上。\n\n## 差异让关系第一次可以被区分\n\n差异是关系、比较、边界与方向形成的前提。只有当两个状态不再完全等价，系统才可能说“这里与那里不同”“这个状态先于另一个状态”“这条路径改变了什么”。如果所有状态都不可区分，关系就没有可以依附的差别，比较也失去基础。\n\n差异并不要求先存在完整对象。它首先是一种可区分关系：强与弱、近与远、内与外、先与后、可达与不可达。对象可以在后续结构中逐渐稳定，但差异让这种稳定成为可能。\n\n同时，差异出现并不意味着结构已经形成。一个短暂差异如果不能被维持，很快就会消散。要让差异进入更持续的现实，还需要下一层：哪些变化被允许，哪些路径受到限制，哪些关系能够重复。\n\n## 约束把可能性裁成可实现路径\n\n约束会裁剪可实现路径并帮助差异持续。约束并不只是“禁止”，它更像是对可能空间的选择。一个系统面对很多理论可能，但真正可以发生、可以重复、可以长期维持的路径通常更少。\n\n正因为不是所有变化都同样容易发生，部分差异才能被保存。边界限制资源流向，规则限制行为范围，材料性质限制形态，时间与位置也会限制可达路径。约束让现实不再是无限可能同时展开，而开始拥有选择后的轨迹。\n\n约束本身也不保证稳定。有些约束会维持结构，有些约束会让结构失去适应能力。关键在于它们如何改变关系的可重复性，以及是否让系统形成能够持续的配置。\n\n## 结构通过配置与压缩保存关系\n\n结构通过配置、压缩与连续保存关系模式。当部分关系能够重复，系统开始不必每一次都从零形成。连接方式被保留下来，位置相对稳定，某些路径成为默认，复杂互动被压缩成较容易重复的组织形式。\n\n结构的意义不只在“元素连接起来”。同样一组元素以不同方式配置，可以形成完全不同的运行结果。结构真正保存的是关系模式：谁与谁连接、什么位于什么位置、哪些路径被优先、哪些边界需要被维持。\n\n压缩让系统不必重新处理全部历史。一个已经形成的结构把过去大量互动浓缩成当前配置。连续则让这个配置即使在部分组成变化时，仍保持可辨认性。正因为关系能够被保存，系统才开始拥有历史，而不是只有一连串彼此无关的瞬间。\n\n## 区域与网络让局部差异获得范围\n\n结构差异会形成区域、边界与连接网络。当不同位置拥有不同关系密度、资源条件或连接方式，现实开始出现“区域”。区域不是简单画在地图上的边界，而是某些关系在一个范围内更容易发生、在另一个范围内更难发生。\n\n网络则让这些区域不再孤立。连接把信息、资源和影响从一个位置带到另一个位置，使局部结构能够影响更大范围。网络结构同时决定传播速度、可达范围与脆弱点：有些位置成为枢纽，有些位置形成边缘，有些路径一旦中断会改变整个系统的连通性。\n\n从这一层开始，现实拥有了真正可讨论的“位置”。位置不只是空间坐标，而是一个节点处在怎样的关系网络中。两个看起来相同的对象，如果所处网络不同，就可能拥有完全不同的机会、限制与影响力。\n\n## 导航需要位置、参考与可行路径\n\n导航精度依赖稳定参考关系、位置与坐标。目标本身并不足以形成导航。一个人可以非常清楚自己想去哪里，却不知道自己现在在哪里，也不知道哪些路径在当前条件下可行。没有位置，方向只是愿望；没有结构，路径无法比较。\n\n结构提供参考点：当前状态与目标之间有哪些差异，哪些边界无法直接跨越，哪些网络可以利用，哪些约束必须先处理。坐标把这些关系组织成可读取的位置，而路径则把位置变化连接成过程。\n\n因此，导航的精度来自对现实结构的读取，而不是来自更强烈的目标感。越能看清差异、约束、结构和网络，越能知道“下一步”为什么是这一条路径而不是另一条。\n\n从差异开始，现实逐渐获得可区分性；经过约束，可能性变成路径；经过结构，路径获得持续性；经过区域与网络，关系获得范围；最后，导航在这些稳定关系中获得位置与方向。现实由此从“有变化”走向“可以被读取并继续移动的结构”。",
+        "compositionNodeCodes": [
+          "KN-B1-P1-001",
+          "KN-B1-P1-002",
+          "KN-B1-P1-004",
+          "KN-B1-P1-005",
+          "KN-B1-P1-007"
         ],
-        "summary": "差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。",
+        "sectionHeadings": [
+          "差异让关系第一次可以被区分",
+          "约束把可能性裁成可实现路径",
+          "结构通过配置与压缩保存关系",
+          "区域与网络让局部差异获得范围",
+          "导航需要位置、参考与可行路径"
+        ],
+        "summary": "现实形成并不是从完整对象开始，而是从可区分的差异开始。约束筛选路径，结构保存关系，区域与网络扩展这些差异，最终让位置、方向和可行路径变得可读取，导航才获得精度。",
         "terminologyTermsUsed": [],
-        "title": "差异如何打开现实形成的可能"
+        "title": "现实如何从差异走向可导航的结构"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-B1-P1-001-ZH-HANS-PROG-V1",
-        "briefDigest": "6017e9ed754a249b36356726571102e2afa79e485ae734142db607affdff15c1",
-        "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-003-ZH-HANS-V1",
+        "briefDigest": "b8fa4e1ee1aad6acdd5760d3eb4047604c6ae4ea5f6d3f32451a59265c2a9749",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "462d344b19ffeb2d4f742898ef8c481acb6a50c6602d0adb7530d72b0bdc3f5d",
-      "candidatePath": "content/knowledge/production/candidates/zh-Hans/KN-B1-P1-001/candidate.v1.json"
+      "promptDigest": "0a957ccee382b28119cb90eedea487d84c811c83f7e294928ac96005a0e04d7d",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-003/zh-Hans/candidate.v1.json"
     },
     "en": {
       "nodeCode": "KN-B1-P1-001",
       "locale": "en",
-      "candidateCode": "CANDIDATE-KN-B1-P1-001-EN-V1",
-      "candidateDigest": "43ef77ef66e15c906cb456bf5199f75fc6209b1a4c6dea3b14f56c1b5137b4b5",
+      "candidateCode": "CANDIDATE-ACU-B1-003-EN-V1",
+      "candidateDigest": "59b453cd13dfcef3dff50640d9cc874c44fe5aa1cd6432fc069908610cbde80b",
       "article": {
-        "bodyMarkdown": "# How Does Difference Open the Possibility of Reality Formation?\n\nDifference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the possibility of Structure, but it does not mean that Structure is already stable.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Difference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the possibility of Structure, but it does not mean that Structure is already stable. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
-        "sectionHeadings": [
-          "What the question is really asking",
-          "How the mechanism forms",
-          "General mechanism and case-specific judgment are different",
-          "A general framework and external facts are different",
-          "How reality continues into the next layer"
+        "articleUnitCode": "ACU-B1-003",
+        "bodyMarkdown": "# How Reality Moves from Difference to Navigable Structure\n\nWhen reality is treated as a collection of already completed objects, the first question is usually what those objects are. Looking backward through formation produces a different sequence of questions. How did distinguishable states appear? Why were some relations preserved while others disappeared? How did regions, boundaries, networks, and positions become possible?\n\nThe movement from Difference to navigation is not one jump. It is a chain in which reality becomes progressively more readable. Difference makes comparison possible. Constraint selects realizable paths. Structure preserves relational patterns. Structural differences form regions and networks. Only then do stable references exist from which position and direction can be read. Navigation is therefore not an extra function added at the end. It depends on the structures created by every earlier layer.\n\n## Difference makes relations distinguishable\n\nDifference is a prerequisite for relation, comparison, boundary, and direction. Only when two states are no longer equivalent can a system say that this is different from that, that one state precedes another, or that a path has changed something. If every state is indistinguishable, relations have no difference to attach to and comparison has no basis.\n\nDifference does not require complete objects to exist first. It can begin as a distinguishable relation: stronger and weaker, near and far, inside and outside, before and after, reachable and unreachable. Objects can stabilize later within structures, but Difference creates the possibility of that stabilization.\n\nThe appearance of Difference is not the same as stable Structure. A temporary difference that cannot be maintained may disappear quickly. For Difference to enter a more persistent reality, another layer is required: which changes remain possible, which paths are restricted, and which relations can repeat?\n\n## Constraint turns possibility into realizable paths\n\nConstraint narrows realizable paths and helps differences persist. Constraint is more than prohibition. It acts as selection within a space of possibilities. A system may contain many imaginable possibilities while only a smaller set can actually occur, repeat, and continue under its conditions.\n\nBecause not every change is equally realizable, some differences can be preserved. Boundaries restrict flows. Rules limit behavior. Material conditions limit form. Time and position limit reachable paths. Constraint prevents reality from unfolding as every possibility at once and gives it selected trajectories.\n\nConstraint alone does not guarantee stability. Some constraints preserve useful structure, while others make a system unable to adapt. The important question is how constraints change the repeatability of relations and whether those relations can form configurations that continue.\n\n## Structure preserves relations through configuration and compression\n\nStructure preserves relational patterns through configuration, compression, and continuity. Once some relations repeat, the system no longer has to form from zero each time. Connections persist, positions become more stable, some paths become easier to reuse, and complex interaction is compressed into organized form.\n\nStructure is not simply the fact that elements are connected. The same elements arranged differently can produce very different operation. What Structure preserves is a pattern of relations: what connects to what, where positions are located, which paths receive priority, and which boundaries must be maintained.\n\nCompression allows the system to avoid reprocessing its full history. A formed Structure condenses many previous interactions into a present configuration. Continuity allows that configuration to remain recognizable even when some components change. Because relations can persist, the system begins to possess history rather than only a series of unrelated moments.\n\n## Regions and networks give local differences range\n\nStructural differences form regions, boundaries, and connection networks. When positions have different relationship densities, resource conditions, or connection patterns, reality develops regions. A region is not merely a line on a map. It is a range in which some relations are easier to form and maintain than in another range.\n\nNetworks prevent those regions from remaining isolated. Connections carry information, resources, and influence from one position to another, allowing local Structure to affect a wider field. Network form also shapes propagation speed, reachable range, and vulnerability. Some positions become hubs, others become edges, and the loss of certain paths can change the connectivity of the system as a whole.\n\nAt this point, position becomes a meaningful structural idea. Position is not only a spatial coordinate. It is the place a node occupies within a relationship network. Two apparently similar objects can have very different opportunities, constraints, and influence if they occupy different network positions.\n\n## Navigation requires position reference and viable paths\n\nNavigation precision depends on stable reference relations, position, and coordinates. A target alone does not create navigation. A person can know clearly where they want to go while remaining uncertain about where they are now or which paths are viable under current conditions. Without position, direction is aspiration. Without Structure, paths cannot be compared.\n\nStructure supplies references: what differences separate the current state from the target, which boundaries cannot be crossed directly, which networks can be used, and which constraints must be resolved first. Coordinates organize these relations into a readable position. Paths connect changes of position through time.\n\nThe precision of navigation therefore comes from reading reality rather than intensifying desire. The more clearly Difference, Constraint, Structure, and network position can be seen, the more precisely a next move can be chosen.\n\nBeginning with Difference, reality gains distinguishability. Through Constraint, possibility becomes path. Through Structure, paths gain persistence. Through regions and networks, relations gain range. Finally, navigation gains position and direction inside those stable relations. Reality moves from merely changing to becoming a structure that can be read and moved through.",
+        "compositionNodeCodes": [
+          "KN-B1-P1-001",
+          "KN-B1-P1-002",
+          "KN-B1-P1-004",
+          "KN-B1-P1-005",
+          "KN-B1-P1-007"
         ],
-        "summary": "Difference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the …",
+        "sectionHeadings": [
+          "Difference makes relations distinguishable",
+          "Constraint turns possibility into realizable paths",
+          "Structure preserves relations through configuration and compression",
+          "Regions and networks give local differences range",
+          "Navigation requires position reference and viable paths"
+        ],
+        "summary": "Reality formation does not have to begin with complete objects. It can begin with distinguishable Difference. Constraint selects realizable paths, Structure preserves relations, regions and networks extend them, and stable references finally make position, direction, and navigation readable.",
         "terminologyTermsUsed": [],
-        "title": "How Does Difference Open the Possibility of Reality Formation?"
+        "title": "How Reality Moves from Difference to Navigable Structure"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-B1-P1-001-EN-BFA-PROG-V1",
-        "briefDigest": "0d497c2f8eced6ebe4a402ab906ba788941b9bd8d5b5e6607672736b609bae1a",
-        "briefSchemaVersion": "PHI-OS-BFA-ENGLISH-PRODUCTION-BRIEF-v1.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-003-EN-V1",
+        "briefDigest": "d9c63aad3e2fbc5259334d6ca3f76cb158aca903884c22fe7283fe83ef9416d1",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "2fb5587ee560e23be68c478fce1f1aee5bc90fedb2a2c9dd2807e20ee89b994b",
-      "candidatePath": "content/knowledge/production/candidates/en/KN-B1-P1-001/candidate.v1.json"
+      "promptDigest": "875cbb830ec15a825bbc873819c2658ab64a7e62a3e60d3cd0cec15948d6aa6e",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-003/en/candidate.v1.json"
     }
   },
   "localeIdentity": {
@@ -182,29 +212,29 @@
     "identityModel": "BFA_PACKAGE_SCOPED_BILINGUAL_IDENTITY_CANDIDATE",
     "identities": {
       "zh-Hans": {
-        "slug": "difference-opens-reality-formation",
-        "displayQuestion": "差异如何打开现实形成的可能",
-        "sourceAuthority": "KNR_L10N_CANONICAL"
+        "slug": "how-reality-moves-from-difference-to-navigable-structure",
+        "displayQuestion": "现实如何从差异走向可导航的结构",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       },
       "en": {
-        "slug": "difference-opens-reality-formation",
-        "displayQuestion": "How Does Difference Open the Possibility of Reality Formation?",
-        "sourceAuthority": "BFA_PACKAGE_SCOPED_EN_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
+        "slug": "how-reality-moves-from-difference-to-navigable-structure",
+        "displayQuestion": "How Reality Moves from Difference to Navigable Structure",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       }
     },
     "independentLocaleAuthority": true,
     "globalLocaleRegistryMutation": false,
-    "sourceDigest": "fe91670eef3e08468b97bc72c0648d10d8cb38ef7e394ba51b6dff470d6a332e"
+    "sourceDigest": "fe2a15726847d29e8e3fa075293e42a08e89b09318212783478e22ff808a3787"
   },
   "sameRouteIdentity": {
-    "canonicalRoute": "/articles/difference-opens-reality-formation",
-    "slug": "difference-opens-reality-formation",
+    "canonicalRoute": "/articles/how-reality-moves-from-difference-to-navigable-structure",
+    "slug": "how-reality-moves-from-difference-to-navigable-structure",
     "locales": [
       "zh-Hans",
       "en"
     ],
     "localePrefixAllowed": false,
-    "sourceDigest": "e541501d4211385942dfcd60ce207e974347c704255e0add0135ea247e5317c5"
+    "sourceDigest": "b73987568435b82dcc1e8abce357d58a64ae2c31db49d86227c0ca0a5b722ccc"
   },
   "figure": {
     "state": "FIGURE_NOT_REQUIRED",
@@ -471,24 +501,40 @@
         {
           "requirementCode": "COV-001",
           "kind": "coverage",
-          "zhHansRequirement": "差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。",
-          "enRequirement": "Difference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the possibility of Structure, but it does not mean that Structure is already stable.",
+          "zhHansRequirement": "差异让关系第一次可以被区分",
+          "enRequirement": "Difference makes relations distinguishable",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-001",
-          "kind": "distinction",
-          "zhHansRequirement": "PHI OS 的一般框架 与 外部可验证事实",
-          "enRequirement": "PHI OS general framework and externally verifiable facts",
+          "requirementCode": "COV-002",
+          "kind": "coverage",
+          "zhHansRequirement": "约束把可能性裁成可实现路径",
+          "enRequirement": "Constraint turns possibility into realizable paths",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-002",
-          "kind": "distinction",
-          "zhHansRequirement": "一般机制 与 个案判断",
-          "enRequirement": "general mechanism and case-specific judgment",
+          "requirementCode": "COV-003",
+          "kind": "coverage",
+          "zhHansRequirement": "结构通过配置与压缩保存关系",
+          "enRequirement": "Structure preserves relations through configuration and compression",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-004",
+          "kind": "coverage",
+          "zhHansRequirement": "区域与网络让局部差异获得范围",
+          "enRequirement": "Regions and networks give local differences range",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-005",
+          "kind": "coverage",
+          "zhHansRequirement": "导航需要位置、参考与可行路径",
+          "enRequirement": "Navigation requires position reference and viable paths",
           "zhHans": true,
           "en": true
         }
@@ -498,21 +544,21 @@
       "evidenceOnly": true,
       "humanAcceptance": false
     },
-    "sourceDigest": "9396e3656f582ff12346e010758dacda86a48b64fe0f7c0f66f85a87cce1ed5f"
+    "sourceDigest": "70cc1d789ad3cb707b2a9fe1c2885ebf9646427c6f15c004e5f72eaf07bed868"
   },
   "presentationPreview": {
     "previewType": "CPR_FINAL_PRESENTATION_PREVIEW",
     "authority": "CPR_PROJECTION_ONLY",
     "nodeCode": "KN-B1-P1-001",
     "sameRoute": {
-      "canonicalRoute": "/articles/difference-opens-reality-formation",
-      "slug": "difference-opens-reality-formation",
+      "canonicalRoute": "/articles/how-reality-moves-from-difference-to-navigable-structure",
+      "slug": "how-reality-moves-from-difference-to-navigable-structure",
       "locales": [
         "zh-Hans",
         "en"
       ],
       "localePrefixAllowed": false,
-      "sourceDigest": "e541501d4211385942dfcd60ce207e974347c704255e0add0135ea247e5317c5"
+      "sourceDigest": "b73987568435b82dcc1e8abce357d58a64ae2c31db49d86227c0ca0a5b722ccc"
     },
     "viewports": [
       "desktop",
@@ -521,25 +567,25 @@
     "articleShell": "PDS/CPR public article shell",
     "locales": {
       "zh-Hans": {
-        "title": "差异如何打开现实形成的可能",
-        "summary": "差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。",
-        "bodyMarkdown": "# 差异如何打开现实形成的可能\n\n差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，差异是现实形成能够开始的最低结构条件：只有状态之间出现可区分的不等价，关系、比较、边界与方向才获得形成条件；差异打开结构可能性，但不等于结构已经稳定。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
+        "title": "现实如何从差异走向可导航的结构",
+        "summary": "现实形成并不是从完整对象开始，而是从可区分的差异开始。约束筛选路径，结构保存关系，区域与网络扩展这些差异，最终让位置、方向和可行路径变得可读取，导航才获得精度。",
+        "bodyMarkdown": "# 现实如何从差异走向可导航的结构\n\n如果把现实理解成已经存在的一组对象，我们很容易直接讨论“这些对象是什么”。但从形成过程往回看，更早的问题是：为什么会出现可以区分的状态？为什么某些关系被保留下来，而另一些关系消失？为什么后来会出现区域、边界、网络和位置？\n\n从差异到导航，中间并不是一次跳跃，而是一条逐步增加可读性的形成链。差异让比较成为可能，约束筛选可实现路径，结构保存关系模式，结构差异形成区域与网络，最后这些稳定关系才提供位置和方向的参考。导航因此不是附加在现实上的最后一个功能，它建立在前面每一层已经形成的结构之上。\n\n## 差异让关系第一次可以被区分\n\n差异是关系、比较、边界与方向形成的前提。只有当两个状态不再完全等价，系统才可能说“这里与那里不同”“这个状态先于另一个状态”“这条路径改变了什么”。如果所有状态都不可区分，关系就没有可以依附的差别，比较也失去基础。\n\n差异并不要求先存在完整对象。它首先是一种可区分关系：强与弱、近与远、内与外、先与后、可达与不可达。对象可以在后续结构中逐渐稳定，但差异让这种稳定成为可能。\n\n同时，差异出现并不意味着结构已经形成。一个短暂差异如果不能被维持，很快就会消散。要让差异进入更持续的现实，还需要下一层：哪些变化被允许，哪些路径受到限制，哪些关系能够重复。\n\n## 约束把可能性裁成可实现路径\n\n约束会裁剪可实现路径并帮助差异持续。约束并不只是“禁止”，它更像是对可能空间的选择。一个系统面对很多理论可能，但真正可以发生、可以重复、可以长期维持的路径通常更少。\n\n正因为不是所有变化都同样容易发生，部分差异才能被保存。边界限制资源流向，规则限制行为范围，材料性质限制形态，时间与位置也会限制可达路径。约束让现实不再是无限可能同时展开，而开始拥有选择后的轨迹。\n\n约束本身也不保证稳定。有些约束会维持结构，有些约束会让结构失去适应能力。关键在于它们如何改变关系的可重复性，以及是否让系统形成能够持续的配置。\n\n## 结构通过配置与压缩保存关系\n\n结构通过配置、压缩与连续保存关系模式。当部分关系能够重复，系统开始不必每一次都从零形成。连接方式被保留下来，位置相对稳定，某些路径成为默认，复杂互动被压缩成较容易重复的组织形式。\n\n结构的意义不只在“元素连接起来”。同样一组元素以不同方式配置，可以形成完全不同的运行结果。结构真正保存的是关系模式：谁与谁连接、什么位于什么位置、哪些路径被优先、哪些边界需要被维持。\n\n压缩让系统不必重新处理全部历史。一个已经形成的结构把过去大量互动浓缩成当前配置。连续则让这个配置即使在部分组成变化时，仍保持可辨认性。正因为关系能够被保存，系统才开始拥有历史，而不是只有一连串彼此无关的瞬间。\n\n## 区域与网络让局部差异获得范围\n\n结构差异会形成区域、边界与连接网络。当不同位置拥有不同关系密度、资源条件或连接方式，现实开始出现“区域”。区域不是简单画在地图上的边界，而是某些关系在一个范围内更容易发生、在另一个范围内更难发生。\n\n网络则让这些区域不再孤立。连接把信息、资源和影响从一个位置带到另一个位置，使局部结构能够影响更大范围。网络结构同时决定传播速度、可达范围与脆弱点：有些位置成为枢纽，有些位置形成边缘，有些路径一旦中断会改变整个系统的连通性。\n\n从这一层开始，现实拥有了真正可讨论的“位置”。位置不只是空间坐标，而是一个节点处在怎样的关系网络中。两个看起来相同的对象，如果所处网络不同，就可能拥有完全不同的机会、限制与影响力。\n\n## 导航需要位置、参考与可行路径\n\n导航精度依赖稳定参考关系、位置与坐标。目标本身并不足以形成导航。一个人可以非常清楚自己想去哪里，却不知道自己现在在哪里，也不知道哪些路径在当前条件下可行。没有位置，方向只是愿望；没有结构，路径无法比较。\n\n结构提供参考点：当前状态与目标之间有哪些差异，哪些边界无法直接跨越，哪些网络可以利用，哪些约束必须先处理。坐标把这些关系组织成可读取的位置，而路径则把位置变化连接成过程。\n\n因此，导航的精度来自对现实结构的读取，而不是来自更强烈的目标感。越能看清差异、约束、结构和网络，越能知道“下一步”为什么是这一条路径而不是另一条。\n\n从差异开始，现实逐渐获得可区分性；经过约束，可能性变成路径；经过结构，路径获得持续性；经过区域与网络，关系获得范围；最后，导航在这些稳定关系中获得位置与方向。现实由此从“有变化”走向“可以被读取并继续移动的结构”。",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       },
       "en": {
-        "title": "How Does Difference Open the Possibility of Reality Formation?",
-        "summary": "Difference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the …",
-        "bodyMarkdown": "# How Does Difference Open the Possibility of Reality Formation?\n\nDifference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the possibility of Structure, but it does not mean that Structure is already stable.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Difference is the minimum condition from which reality formation can begin: only when states become distinguishable and unequal can relations, comparison, boundaries, and direction form. Difference opens the possibility of Structure, but it does not mean that Structure is already stable. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
+        "title": "How Reality Moves from Difference to Navigable Structure",
+        "summary": "Reality formation does not have to begin with complete objects. It can begin with distinguishable Difference. Constraint selects realizable paths, Structure preserves relations, regions and networks extend them, and stable references finally make position, direction, and navigation readable.",
+        "bodyMarkdown": "# How Reality Moves from Difference to Navigable Structure\n\nWhen reality is treated as a collection of already completed objects, the first question is usually what those objects are. Looking backward through formation produces a different sequence of questions. How did distinguishable states appear? Why were some relations preserved while others disappeared? How did regions, boundaries, networks, and positions become possible?\n\nThe movement from Difference to navigation is not one jump. It is a chain in which reality becomes progressively more readable. Difference makes comparison possible. Constraint selects realizable paths. Structure preserves relational patterns. Structural differences form regions and networks. Only then do stable references exist from which position and direction can be read. Navigation is therefore not an extra function added at the end. It depends on the structures created by every earlier layer.\n\n## Difference makes relations distinguishable\n\nDifference is a prerequisite for relation, comparison, boundary, and direction. Only when two states are no longer equivalent can a system say that this is different from that, that one state precedes another, or that a path has changed something. If every state is indistinguishable, relations have no difference to attach to and comparison has no basis.\n\nDifference does not require complete objects to exist first. It can begin as a distinguishable relation: stronger and weaker, near and far, inside and outside, before and after, reachable and unreachable. Objects can stabilize later within structures, but Difference creates the possibility of that stabilization.\n\nThe appearance of Difference is not the same as stable Structure. A temporary difference that cannot be maintained may disappear quickly. For Difference to enter a more persistent reality, another layer is required: which changes remain possible, which paths are restricted, and which relations can repeat?\n\n## Constraint turns possibility into realizable paths\n\nConstraint narrows realizable paths and helps differences persist. Constraint is more than prohibition. It acts as selection within a space of possibilities. A system may contain many imaginable possibilities while only a smaller set can actually occur, repeat, and continue under its conditions.\n\nBecause not every change is equally realizable, some differences can be preserved. Boundaries restrict flows. Rules limit behavior. Material conditions limit form. Time and position limit reachable paths. Constraint prevents reality from unfolding as every possibility at once and gives it selected trajectories.\n\nConstraint alone does not guarantee stability. Some constraints preserve useful structure, while others make a system unable to adapt. The important question is how constraints change the repeatability of relations and whether those relations can form configurations that continue.\n\n## Structure preserves relations through configuration and compression\n\nStructure preserves relational patterns through configuration, compression, and continuity. Once some relations repeat, the system no longer has to form from zero each time. Connections persist, positions become more stable, some paths become easier to reuse, and complex interaction is compressed into organized form.\n\nStructure is not simply the fact that elements are connected. The same elements arranged differently can produce very different operation. What Structure preserves is a pattern of relations: what connects to what, where positions are located, which paths receive priority, and which boundaries must be maintained.\n\nCompression allows the system to avoid reprocessing its full history. A formed Structure condenses many previous interactions into a present configuration. Continuity allows that configuration to remain recognizable even when some components change. Because relations can persist, the system begins to possess history rather than only a series of unrelated moments.\n\n## Regions and networks give local differences range\n\nStructural differences form regions, boundaries, and connection networks. When positions have different relationship densities, resource conditions, or connection patterns, reality develops regions. A region is not merely a line on a map. It is a range in which some relations are easier to form and maintain than in another range.\n\nNetworks prevent those regions from remaining isolated. Connections carry information, resources, and influence from one position to another, allowing local Structure to affect a wider field. Network form also shapes propagation speed, reachable range, and vulnerability. Some positions become hubs, others become edges, and the loss of certain paths can change the connectivity of the system as a whole.\n\nAt this point, position becomes a meaningful structural idea. Position is not only a spatial coordinate. It is the place a node occupies within a relationship network. Two apparently similar objects can have very different opportunities, constraints, and influence if they occupy different network positions.\n\n## Navigation requires position reference and viable paths\n\nNavigation precision depends on stable reference relations, position, and coordinates. A target alone does not create navigation. A person can know clearly where they want to go while remaining uncertain about where they are now or which paths are viable under current conditions. Without position, direction is aspiration. Without Structure, paths cannot be compared.\n\nStructure supplies references: what differences separate the current state from the target, which boundaries cannot be crossed directly, which networks can be used, and which constraints must be resolved first. Coordinates organize these relations into a readable position. Paths connect changes of position through time.\n\nThe precision of navigation therefore comes from reading reality rather than intensifying desire. The more clearly Difference, Constraint, Structure, and network position can be seen, the more precisely a next move can be chosen.\n\nBeginning with Difference, reality gains distinguishability. Through Constraint, possibility becomes path. Through Structure, paths gain persistence. Through regions and networks, relations gain range. Finally, navigation gains position and direction inside those stable relations. Reality moves from merely changing to becoming a structure that can be read and moved through.",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       }
     },
-    "sourceDigest": "79216154785bef19d457efe5b4b5058730aa4577f6e240eca0978beaaf1f022d"
+    "sourceDigest": "329abb48525fc917ed992fb12b285df750519520e675959b2c5c543bab3498eb"
   },
   "accessibility": {
     "status": "PASS",
@@ -563,8 +609,8 @@
     "blockers": [],
     "sourceDigest": "5bf097a33ff6234baa80f4165af7f70e38b199bc2971ae6bc9794a752c6ecd28"
   },
-  "assembledAt": "2026-08-17T10:22:47.645Z",
+  "assembledAt": "2026-08-17T12:10:28.539Z",
   "reviewState": "PENDING",
   "decisionState": "PENDING",
-  "finalPackageDigest": "80f9cc2ffdf7a7510f5c585d062557d154a5034d7cfb88a75a0cd61d7937f116"
+  "finalPackageDigest": "530aa1e812b8449617b286be935e0e965e08e93f8a02dd4f72a03430e69f47bf"
 }

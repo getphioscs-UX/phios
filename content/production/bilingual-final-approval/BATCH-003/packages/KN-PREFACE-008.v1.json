@@ -6,38 +6,48 @@
   "nodeCode": "KN-PREFACE-008",
   "bookCode": "BOOK-1",
   "partCode": "P0",
+  "articleUnitCode": "ACU-B1-002",
+  "compositionNodeCodes": [
+    "KN-PREFACE-008",
+    "KN-PREFACE-009",
+    "KN-PREFACE-011",
+    "KN-PREFACE-012"
+  ],
+  "compositionNodeCount": 4,
+  "publicArticleRole": "ARTICLE_COMPOSITION_UNIT",
   "canonicalAuthority": {
     "nodeCode": "KN-PREFACE-008",
-    "source": "Canonical Knowledge Registry + Human-frozen C2/C3 + PJA brief binding",
-    "nodeDigest": "1d4824a038cdbcf9b136402a6333f7a8828a6cd57ea805aa70e13a4de46d9c84",
+    "source": "Canonical member-node registry + Human-frozen C2/C3 + Article Composition brief binding",
+    "nodeDigest": "ebafee4f259b58fbf5fc52e92ad8f2daf8543f08805d2372289dd4225cedd6d5",
     "c2C3AuthorityPreserved": true,
-    "sourceDigest": "6430d9b7472cc86d533d74f37bfe1eb10217e7cf01313759c5b84a8901d6d3b2"
+    "sourceDigest": "ef9a44c1519e3ac1f180466f7903ac0372b311f2c2bc8601394fa4a7463728fd"
   },
   "pjaBrief": {
     "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
     "nodeCode": "KN-PREFACE-008",
     "locale": "zh-Hans",
-    "sourceBriefCode": "BRIEF-KN-PREFACE-008-ZH-HANS-PROG-V1",
-    "sourceDigest": "c1dc30ea4a60e05d4e4ac11bfb8a5b85f867b467602f54111d59410d68a4416c",
-    "canonicalQuestion": "系统速度失配如何形成现实压力？",
-    "canonicalTitle": "系统速度失配如何形成现实压力？",
-    "canonicalMeaning": "现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。",
+    "sourceBriefCode": "BRIEF-ACU-B1-002-ZH-HANS-V1",
+    "sourceDigest": "b9b723552e6079b588a6fdfba26aa89c31417085ec3e8c676509ea559103a906",
+    "canonicalQuestion": "为什么现实越来越难理解：速度失配、运行成本与现实语法",
+    "canonicalTitle": "为什么现实越来越难理解：速度失配、运行成本与现实语法",
+    "canonicalMeaning": "现实压力不只是来自“变快”，而来自多个系统以不同速度变化，以及维持这些系统所需的注意、时间、能量与更新成本。要理解这种复杂度，需要从孤立对象转向描述形成、运行与连续关系的现实语法。",
     "requiredCoverage": [
-      "现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。"
+      "压力来自多个“时钟”之间的失配",
+      "每一种稳定都需要持续支付运行成本",
+      "只描述对象的语言为什么越来越不够用",
+      "现实语法描述的是形成关系，而不是命运公式",
+      "从“它是什么”转向“它如何形成并继续”"
     ],
-    "requiredDistinctions": [
-      "PHI OS 的一般框架 与 外部可验证事实",
-      "一般机制 与 个案判断"
-    ],
+    "requiredDistinctions": [],
     "mustPreserve": [
-      "解释该节点所描述的一般形成机制与关系。"
+      "整合 4 个相邻 Canonical Nodes 的形成链，不复制书稿章节。"
     ],
     "mustNotClaim": [
-      "不得从一般机制直接生成个人诊断、专业建议或价值判断。",
-      "不得把框架性解释写成已经被外部科学直接证明的唯一事实。"
+      "不得把所有现代压力都归因于速度。",
+      "不得把现实语法描述成决定个体命运的固定公式。"
     ],
     "excludedScope": [
-      "具体个案判断、专业诊断与未经来源支持的外部事实。"
+      "个案诊断、专业判断与未经来源支持的具体外部事实。"
     ],
     "internalGovernanceConstraints": [],
     "sourceGovernanceRequirements": {
@@ -49,9 +59,10 @@
     },
     "terminology": [],
     "evidenceScope": [
-      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
       "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-      "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
     ],
     "figureRequirement": null,
     "localeRequirement": {
@@ -70,27 +81,28 @@
         "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
         "nodeCode": "KN-PREFACE-008",
         "locale": "en",
-        "sourceBriefCode": "BRIEF-KN-PREFACE-008-EN-BFA-PROG-V1",
-        "sourceDigest": "5d29ac767e71dcd86716fa43d3e0c478793f7e33b31270b5b4ffb840015f0c92",
-        "canonicalQuestion": "How Does Mismatch Between System Speeds Create Reality Pressure?",
-        "canonicalTitle": "How Does Mismatch Between System Speeds Create Reality Pressure?",
-        "canonicalMeaning": "Modern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim that the world is simply getting faster.",
+        "sourceBriefCode": "BRIEF-ACU-B1-002-EN-V1",
+        "sourceDigest": "93d5edc04c8cfd74f10c6da5d38a0c13179ad82db12357c41c30ea55839f7348",
+        "canonicalQuestion": "Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar",
+        "canonicalTitle": "Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar",
+        "canonicalMeaning": "Pressure does not come only from a world becoming faster. It also comes from systems changing at incompatible speeds and from the attention, time, energy, and maintenance required to keep them operating. Understanding this complexity requires a language of formation, operation, position, and continuity.",
         "requiredCoverage": [
-          "Modern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim that the world is simply getting faster."
+          "Pressure emerges when different system clocks fall out of alignment",
+          "Every stable state carries recurring operating costs",
+          "Why a language of isolated objects becomes insufficient",
+          "Reality Grammar describes formation relationships rather than destiny",
+          "From asking what something is to asking how it forms and continues"
         ],
-        "requiredDistinctions": [
-          "PHI OS general framework and externally verifiable facts",
-          "general mechanism and case-specific judgment"
-        ],
+        "requiredDistinctions": [],
         "mustPreserve": [
-          "Explain the general formation mechanism and relationships described by this node."
+          "Integrate the formation chain across 4 adjacent Canonical Nodes without reproducing manuscript chapters."
         ],
         "mustNotClaim": [
-          "Do not turn a general mechanism directly into a personal diagnosis, professional recommendation, or value judgment.",
-          "Do not present a framework explanation as the single fact directly proven by external science."
+          "Do not reduce all modern pressure to speed alone.",
+          "Do not present Reality Grammar as a fixed formula that determines individual destiny."
         ],
         "excludedScope": [
-          "Case-specific judgments, professional diagnosis, and external factual claims without supporting sources."
+          "Case-specific diagnosis, professional judgment, and unsupported specific external factual claims."
         ],
         "internalGovernanceConstraints": [],
         "sourceGovernanceRequirements": {
@@ -102,9 +114,10 @@
         },
         "terminology": [],
         "evidenceScope": [
-          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
           "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-          "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
         ],
         "figureRequirement": null,
         "localeRequirement": {
@@ -125,56 +138,70 @@
     "zh-Hans": {
       "nodeCode": "KN-PREFACE-008",
       "locale": "zh-Hans",
-      "candidateCode": "CANDIDATE-KN-PREFACE-008-ZH-HANS-V1",
-      "candidateDigest": "4fc297baf69b715422baef6c42b96966f967a8490fb3f64b7f14ad95e731c29d",
+      "candidateCode": "CANDIDATE-ACU-B1-002-ZH-HANS-V1",
+      "candidateDigest": "73e7cd41a6a85b8b519f3e949ccde676b148adf6b6ee73fe084990d878cd6101",
       "article": {
-        "bodyMarkdown": "# 系统速度失配如何形成现实压力？\n\n现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
-        "sectionHeadings": [
-          "问题真正指向什么",
-          "机制如何形成",
-          "一般机制与个案判断必须分开",
-          "框架说明与外部事实必须分开",
-          "现实如何继续向下一层展开"
+        "articleUnitCode": "ACU-B1-002",
+        "bodyMarkdown": "# 为什么现实越来越难理解：速度失配、运行成本与现实语法\n\n人们常说世界变快了，但“变快”只是表面现象。真正让现实变得难以承受的，往往是不同系统开始以彼此不兼容的速度运行：技术可以在几个月内更新，组织流程可能需要几年调整，人的学习、关系建立、身体恢复和价值判断却拥有各自不同的节奏。当这些速度无法重新协调，压力就不只是“事情很多”，而是系统之间持续失配。\n\n与此同时，每一次持续运行都要付出成本。注意力要被分配，信息要被更新，关系要被维护，结构要被修复，旧规则要被重新解释。现实不是一个摆在那里不需要维护的对象，而是一组不断形成、反馈、调整和延续的关系。只用描述静态对象的语言，很容易看见“有什么”，却看不见“为什么它正在这样运行”。\n\n## 压力来自多个“时钟”之间的失配\n\n系统速度失配会形成现实压力。一个变化本身未必造成问题，真正困难的是不同层级对变化的响应时间不同。软件可以瞬间复制，制度无法瞬间重写；市场信号可以快速变化，长期能力无法当天形成；消息可以即时抵达，理解与判断却需要时间。\n\n当外部变化速度持续高于学习和调整速度，系统就会积累延迟。人可能不断追赶新的要求，却来不及把变化整合成稳定能力；组织可能持续上线新工具，却没有时间重构流程；家庭和关系也可能在信息密度快速上升时，缺少足够空间重新建立共识。压力于是成为速度差本身的结果。\n\n反过来，速度过慢同样会产生问题。如果反馈已经显示现实发生变化，而结构迟迟不调整，旧规则会继续消耗资源。重要的并不是追求最快，而是让不同运行层级拥有可以彼此协调的节奏。\n\n## 每一种稳定都需要持续支付运行成本\n\n现实持续运行需要支付注意、时间、能量与维护成本。一个看似稳定的系统之所以能够持续，并不是因为它不再变化，而是因为大量维护工作持续发生：错误被修正，关系被更新，资源被重新分配，成员不断学习，边界被重新确认。\n\n很多成本在系统运行顺利时并不显眼。只有当维护停止，人们才发现原本的“稳定”需要持续投入。一个组织不更新知识会逐渐失去能力，一段关系不进行沟通会累积误解，一个技术系统不维护会产生安全和兼容问题。稳定因此更接近一种被持续实现的状态，而不是免费的默认状态。\n\n这也解释了为什么能力越复杂，维护成本往往越值得被单独观察。新增功能不只是增加收益，它也增加未来需要承担的更新、协调和修复工作。系统真正能够长期拥有的能力，是它能够持续支付其运行成本的能力。\n\n## 只描述对象的语言为什么越来越不够用\n\n复杂现实需要能够描述形成、运行、位置与连续性的共同语言。传统描述常把注意力放在对象上：一个人、一个组织、一项技术、一个市场、一种文化。但现实中的许多问题并不只存在于任何一个对象内部，而存在于对象之间的连接方式、时间差、反馈回路和结构位置中。\n\n例如，同一种工具进入不同组织，会因为结构不同而产生不同结果；同一项政策进入不同资源条件，会形成不同路径；同一个人处在不同关系网络中，也可能拥有完全不同的行动空间。如果语言只告诉我们“对象是什么”，这些关系差异就容易被遗漏。\n\n因此，需要一种能够跨层级描述关系的语言。它不要求把个人、组织、技术和文明变成同一种东西，而是寻找它们在形成过程中可能共享的结构问题：差异如何出现，约束如何筛选，结构如何维持，场如何扩散，什么被激活，反馈如何改变路径，以及一个状态如何继续。\n\n## 现实语法描述的是形成关系，而不是命运公式\n\nReality Grammar 描述差异、约束、结构、场、激活、反馈与连续的组织关系。它的作用不是给现实贴上一个最终标签，而是帮助我们把复杂变化拆成可以继续追踪的层次。\n\n差异让状态能够被区分；约束改变哪些路径可以实现；结构保存部分关系；场让局部结构获得更广范围的影响；激活让某些可能性进入实际运行；反馈把运行结果重新带回系统；连续则说明一个状态如何跨时间维持、改变或被替代。把这些关系放在一起，现实就不再只是“发生了什么”，而开始呈现“它是怎样形成的”。\n\n这样的语法不会预先决定某个人或某个系统的命运。相同的关系结构在不同资源、时间、位置和反馈条件下，可以产生不同结果。它提供的是读取变化的坐标，而不是替现实写好的结论。\n\n## 从“它是什么”转向“它如何形成并继续”\n\n当现实被理解为持续形成的过程，问题本身也会改变。我们不再只问“这个对象是什么”，还会问：它从什么差异开始？哪些约束让它成为现在的样子？什么结构正在维持它？哪些成本被持续支付？哪些反馈正在改变它？如果当前关系继续，它可能向哪里移动？\n\n这类问题能够把速度压力、维护成本和复杂系统重新放在同一个视野里。现实之所以难以理解，并不一定是因为信息太少，而可能是因为我们缺少描述关系变化的合适单位。\n\n现实语法的价值，就在于把散乱信息重新组织成形成路径。它让我们看见：现实不是一个完成的对象，而是一套正在运行的关系；理解现实，也不是找到一个永恒标签，而是逐步看清它如何形成、如何被维持，以及下一步可能如何继续。",
+        "compositionNodeCodes": [
+          "KN-PREFACE-008",
+          "KN-PREFACE-009",
+          "KN-PREFACE-011",
+          "KN-PREFACE-012"
         ],
-        "summary": "现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。",
+        "sectionHeadings": [
+          "压力来自多个“时钟”之间的失配",
+          "每一种稳定都需要持续支付运行成本",
+          "只描述对象的语言为什么越来越不够用",
+          "现实语法描述的是形成关系，而不是命运公式",
+          "从“它是什么”转向“它如何形成并继续”"
+        ],
+        "summary": "现实压力不只是来自“变快”，而来自多个系统以不同速度变化，以及维持这些系统所需的注意、时间、能量与更新成本。要理解这种复杂度，需要从孤立对象转向描述形成、运行与连续关系的现实语法。",
         "terminologyTermsUsed": [],
-        "title": "系统速度失配如何形成现实压力？"
+        "title": "为什么现实越来越难理解：速度失配、运行成本与现实语法"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-PREFACE-008-ZH-HANS-PROG-V1",
-        "briefDigest": "c1dc30ea4a60e05d4e4ac11bfb8a5b85f867b467602f54111d59410d68a4416c",
-        "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-002-ZH-HANS-V1",
+        "briefDigest": "b9b723552e6079b588a6fdfba26aa89c31417085ec3e8c676509ea559103a906",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "a59ba1f3568efc8d9c70c4b718e10b5c4ae342eeb7dd9e6139f7c7acf0adfd76",
-      "candidatePath": "content/knowledge/production/candidates/zh-Hans/KN-PREFACE-008/candidate.v1.json"
+      "promptDigest": "6155d9831f8cf8e151c484b82aafcc24161514b52c7c168755794a90cb92cca5",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-002/zh-Hans/candidate.v1.json"
     },
     "en": {
       "nodeCode": "KN-PREFACE-008",
       "locale": "en",
-      "candidateCode": "CANDIDATE-KN-PREFACE-008-EN-V1",
-      "candidateDigest": "c393eded34e3aed9e5b1f26746a004b92c8148711f32d7eee661a71e6beb3f45",
+      "candidateCode": "CANDIDATE-ACU-B1-002-EN-V1",
+      "candidateDigest": "a07c9398f6b4417149a366b45f7c6e42f24d6535966bc70e4eeebbf46c49f51c",
       "article": {
-        "bodyMarkdown": "# How Does Mismatch Between System Speeds Create Reality Pressure?\n\nModern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim that the world is simply getting faster.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Modern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim that the world is simply getting faster. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
-        "sectionHeadings": [
-          "What the question is really asking",
-          "How the mechanism forms",
-          "General mechanism and case-specific judgment are different",
-          "A general framework and external facts are different",
-          "How reality continues into the next layer"
+        "articleUnitCode": "ACU-B1-002",
+        "bodyMarkdown": "# Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar\n\nIt is common to say that the world is getting faster, but speed alone does not explain why reality can become difficult to carry. A deeper problem appears when different systems operate on clocks that no longer fit together. Technology may change within months. Organizational processes can take years to redesign. Human learning, trust, recovery, and judgment each move at still different rates. When these speeds stop coordinating, pressure is produced by mismatch rather than by speed in isolation.\n\nAt the same time, every continuing system carries cost. Attention must be allocated, information updated, relationships maintained, structures repaired, and old assumptions reconsidered. Reality is not a finished object that remains stable without work. It is a set of relationships that keeps forming, feeding back, adjusting, and continuing. A language that describes only static objects can tell us what exists while missing why those things are operating as they do.\n\n## Pressure emerges when different system clocks fall out of alignment\n\nMismatch between system speeds can create reality pressure. Change is not necessarily the problem. The difficulty comes from different layers requiring different amounts of time to respond. Software can be copied almost instantly while institutions cannot be redesigned instantly. Market signals can move rapidly while durable capability takes time to build. Messages arrive immediately while understanding and judgment remain slower processes.\n\nWhen external change repeatedly moves faster than learning and adaptation, delay accumulates. People may continuously chase new requirements without integrating them into stable capability. Organizations may adopt tools faster than they can redesign workflows. Families and communities may experience rising information density without enough time to renew shared understanding.\n\nSlowness can also create pressure. When feedback already shows that conditions have changed but structures remain fixed, obsolete rules continue consuming resources. The aim is therefore not maximum speed. It is coordination among the different clocks that make continued operation possible.\n\n## Every stable state carries recurring operating costs\n\nContinued reality operation requires attention, time, energy, and maintenance cost. A system that looks stable continues only because many forms of upkeep are happening: errors are corrected, relationships renewed, resources reallocated, members learn, and boundaries are adjusted.\n\nThese costs are easy to overlook while things work. Their importance becomes visible when maintenance stops. An organization that stops renewing knowledge gradually loses capability. A relationship without communication accumulates unresolved differences. A technical system without maintenance develops compatibility and reliability problems. Stability is therefore closer to an achieved operating condition than to a free default.\n\nThis is why growing complexity makes maintenance worth measuring in its own right. A new capability does not only create a benefit. It creates future updating, coordination, monitoring, and repair work. A system truly possesses a capability over time only if it can continue paying the costs required to carry that capability.\n\n## Why a language of isolated objects becomes insufficient\n\nComplex reality needs a shared language for formation, operation, position, and continuity. Many conventional descriptions focus on objects: a person, an organization, a technology, a market, a culture. Yet many important problems do not live inside any one object. They emerge from connections, time differences, feedback loops, and positions among objects.\n\nThe same tool can produce different outcomes in different organizational structures. The same policy can create different paths under different resource conditions. The same person can have very different possibilities in different relationship networks. A vocabulary that tells us only what each object is can miss the relational architecture producing those differences.\n\nA more useful language therefore needs to move across levels without pretending that people, organizations, technologies, and civilizations are identical. It can instead ask whether they share recurring formation questions: how Difference appears, how Constraint selects, how Structure persists, how Fields extend influence, what becomes activated, how Feedback changes a path, and how Continuity is maintained.\n\n## Reality Grammar describes formation relationships rather than destiny\n\nReality Grammar describes Difference, Constraint, Structure, Field, Activation, Feedback, and Continuity as organizing relationships. Its purpose is not to assign reality a final label. It is to separate complex change into layers that can be followed.\n\nDifference makes states distinguishable. Constraint changes which paths are realizable. Structure preserves some relations. Fields extend the influence of local structure. Activation moves some possibilities into operation. Feedback returns the effects of operation to the system. Continuity describes how a state persists, changes, or is replaced through time.\n\nThis grammar does not decide the fate of a person or system in advance. Similar relationships can produce different outcomes under different resources, timing, positions, and feedback. The grammar provides coordinates for reading change, not a conclusion written before reality unfolds.\n\n## From asking what something is to asking how it forms and continues\n\nWhen reality is treated as an ongoing formation process, the questions change. We still ask what something is, but we also ask: which differences began this pattern? Which constraints selected its current path? What structure keeps it in place? Which costs are continuously being paid? What feedback is changing it? If the current relationships continue, where can the system move next?\n\nThese questions bring speed pressure, operating cost, and complex systems into the same view. Reality may be difficult to understand not because information is missing, but because the units used to organize information are too static.\n\nThe value of Reality Grammar is that it reorganizes scattered information into formation paths. Reality becomes less like a completed object and more like a set of relationships in operation. Understanding then becomes the work of seeing how those relationships formed, how they are maintained, and how they may continue.",
+        "compositionNodeCodes": [
+          "KN-PREFACE-008",
+          "KN-PREFACE-009",
+          "KN-PREFACE-011",
+          "KN-PREFACE-012"
         ],
-        "summary": "Modern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim …",
+        "sectionHeadings": [
+          "Pressure emerges when different system clocks fall out of alignment",
+          "Every stable state carries recurring operating costs",
+          "Why a language of isolated objects becomes insufficient",
+          "Reality Grammar describes formation relationships rather than destiny",
+          "From asking what something is to asking how it forms and continues"
+        ],
+        "summary": "Pressure does not come only from a world becoming faster. It also comes from systems changing at incompatible speeds and from the attention, time, energy, and maintenance required to keep them operating. Understanding this complexity requires a language of formation, operation, position, and continuity.",
         "terminologyTermsUsed": [],
-        "title": "How Does Mismatch Between System Speeds Create Reality Pressure?"
+        "title": "Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-PREFACE-008-EN-BFA-PROG-V1",
-        "briefDigest": "5d29ac767e71dcd86716fa43d3e0c478793f7e33b31270b5b4ffb840015f0c92",
-        "briefSchemaVersion": "PHI-OS-BFA-ENGLISH-PRODUCTION-BRIEF-v1.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-002-EN-V1",
+        "briefDigest": "93d5edc04c8cfd74f10c6da5d38a0c13179ad82db12357c41c30ea55839f7348",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "2a836d863c4fc90d821680c17ec24df921b99eb5fe03a5b1b565587fda63c0be",
-      "candidatePath": "content/knowledge/production/candidates/en/KN-PREFACE-008/candidate.v1.json"
+      "promptDigest": "5241f9cdc09178c1b9bfb78f75edeafc5a7afca8e1edaff73ed6dc4e95bc0fb5",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-002/en/candidate.v1.json"
     }
   },
   "localeIdentity": {
@@ -182,29 +209,29 @@
     "identityModel": "BFA_PACKAGE_SCOPED_BILINGUAL_IDENTITY_CANDIDATE",
     "identities": {
       "zh-Hans": {
-        "slug": "how-system-speed-mismatch-creates-pressure",
-        "displayQuestion": "系统速度失配如何形成现实压力？",
-        "sourceAuthority": "KNR_L10N_CANONICAL"
+        "slug": "why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
+        "displayQuestion": "为什么现实越来越难理解：速度失配、运行成本与现实语法",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       },
       "en": {
-        "slug": "how-system-speed-mismatch-creates-pressure",
-        "displayQuestion": "How Does Mismatch Between System Speeds Create Reality Pressure?",
-        "sourceAuthority": "BFA_PACKAGE_SCOPED_EN_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
+        "slug": "why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
+        "displayQuestion": "Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       }
     },
     "independentLocaleAuthority": true,
     "globalLocaleRegistryMutation": false,
-    "sourceDigest": "30592100fb70b76343434cfa34b11f2583d823dc79a2a5c4a3d8d8e75b2628db"
+    "sourceDigest": "7e10763673f28c335b62e1eb06f039ae2d483df35e4daf17eafb74111493c2bc"
   },
   "sameRouteIdentity": {
-    "canonicalRoute": "/articles/how-system-speed-mismatch-creates-pressure",
-    "slug": "how-system-speed-mismatch-creates-pressure",
+    "canonicalRoute": "/articles/why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
+    "slug": "why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
     "locales": [
       "zh-Hans",
       "en"
     ],
     "localePrefixAllowed": false,
-    "sourceDigest": "dc0a03dd92d190fc8b976a7e4592e22607a6909e2ad6a45b5bfb170fa8c7a1fd"
+    "sourceDigest": "834c86c05ebfde54390f84945b0aaf574c07ab5bafe9653858b686adc66c2ebf"
   },
   "figure": {
     "state": "FIGURE_NOT_REQUIRED",
@@ -471,24 +498,40 @@
         {
           "requirementCode": "COV-001",
           "kind": "coverage",
-          "zhHansRequirement": "现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。",
-          "enRequirement": "Modern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim that the world is simply getting faster.",
+          "zhHansRequirement": "压力来自多个“时钟”之间的失配",
+          "enRequirement": "Pressure emerges when different system clocks fall out of alignment",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-001",
-          "kind": "distinction",
-          "zhHansRequirement": "PHI OS 的一般框架 与 外部可验证事实",
-          "enRequirement": "PHI OS general framework and externally verifiable facts",
+          "requirementCode": "COV-002",
+          "kind": "coverage",
+          "zhHansRequirement": "每一种稳定都需要持续支付运行成本",
+          "enRequirement": "Every stable state carries recurring operating costs",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-002",
-          "kind": "distinction",
-          "zhHansRequirement": "一般机制 与 个案判断",
-          "enRequirement": "general mechanism and case-specific judgment",
+          "requirementCode": "COV-003",
+          "kind": "coverage",
+          "zhHansRequirement": "只描述对象的语言为什么越来越不够用",
+          "enRequirement": "Why a language of isolated objects becomes insufficient",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-004",
+          "kind": "coverage",
+          "zhHansRequirement": "现实语法描述的是形成关系，而不是命运公式",
+          "enRequirement": "Reality Grammar describes formation relationships rather than destiny",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-005",
+          "kind": "coverage",
+          "zhHansRequirement": "从“它是什么”转向“它如何形成并继续”",
+          "enRequirement": "From asking what something is to asking how it forms and continues",
           "zhHans": true,
           "en": true
         }
@@ -498,21 +541,21 @@
       "evidenceOnly": true,
       "humanAcceptance": false
     },
-    "sourceDigest": "9f85b21c1567064da77b5e8f933d5b91a8dc85879cae2509e9146d9411fb7dc8"
+    "sourceDigest": "eed1b6a6c13fd35b9807b64c14758757a0f7079e400226985dc1e15f11e336a3"
   },
   "presentationPreview": {
     "previewType": "CPR_FINAL_PRESENTATION_PREVIEW",
     "authority": "CPR_PROJECTION_ONLY",
     "nodeCode": "KN-PREFACE-008",
     "sameRoute": {
-      "canonicalRoute": "/articles/how-system-speed-mismatch-creates-pressure",
-      "slug": "how-system-speed-mismatch-creates-pressure",
+      "canonicalRoute": "/articles/why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
+      "slug": "why-reality-is-harder-to-understand-speed-cost-and-reality-grammar",
       "locales": [
         "zh-Hans",
         "en"
       ],
       "localePrefixAllowed": false,
-      "sourceDigest": "dc0a03dd92d190fc8b976a7e4592e22607a6909e2ad6a45b5bfb170fa8c7a1fd"
+      "sourceDigest": "834c86c05ebfde54390f84945b0aaf574c07ab5bafe9653858b686adc66c2ebf"
     },
     "viewports": [
       "desktop",
@@ -521,25 +564,25 @@
     "articleShell": "PDS/CPR public article shell",
     "locales": {
       "zh-Hans": {
-        "title": "系统速度失配如何形成现实压力？",
-        "summary": "现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。",
-        "bodyMarkdown": "# 系统速度失配如何形成现实压力？\n\n现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，现代压力常来自系统变化速度与人的学习、恢复、协调和制度调整速度之间的失配，而不只是“世界变快”这一单一原因。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
+        "title": "为什么现实越来越难理解：速度失配、运行成本与现实语法",
+        "summary": "现实压力不只是来自“变快”，而来自多个系统以不同速度变化，以及维持这些系统所需的注意、时间、能量与更新成本。要理解这种复杂度，需要从孤立对象转向描述形成、运行与连续关系的现实语法。",
+        "bodyMarkdown": "# 为什么现实越来越难理解：速度失配、运行成本与现实语法\n\n人们常说世界变快了，但“变快”只是表面现象。真正让现实变得难以承受的，往往是不同系统开始以彼此不兼容的速度运行：技术可以在几个月内更新，组织流程可能需要几年调整，人的学习、关系建立、身体恢复和价值判断却拥有各自不同的节奏。当这些速度无法重新协调，压力就不只是“事情很多”，而是系统之间持续失配。\n\n与此同时，每一次持续运行都要付出成本。注意力要被分配，信息要被更新，关系要被维护，结构要被修复，旧规则要被重新解释。现实不是一个摆在那里不需要维护的对象，而是一组不断形成、反馈、调整和延续的关系。只用描述静态对象的语言，很容易看见“有什么”，却看不见“为什么它正在这样运行”。\n\n## 压力来自多个“时钟”之间的失配\n\n系统速度失配会形成现实压力。一个变化本身未必造成问题，真正困难的是不同层级对变化的响应时间不同。软件可以瞬间复制，制度无法瞬间重写；市场信号可以快速变化，长期能力无法当天形成；消息可以即时抵达，理解与判断却需要时间。\n\n当外部变化速度持续高于学习和调整速度，系统就会积累延迟。人可能不断追赶新的要求，却来不及把变化整合成稳定能力；组织可能持续上线新工具，却没有时间重构流程；家庭和关系也可能在信息密度快速上升时，缺少足够空间重新建立共识。压力于是成为速度差本身的结果。\n\n反过来，速度过慢同样会产生问题。如果反馈已经显示现实发生变化，而结构迟迟不调整，旧规则会继续消耗资源。重要的并不是追求最快，而是让不同运行层级拥有可以彼此协调的节奏。\n\n## 每一种稳定都需要持续支付运行成本\n\n现实持续运行需要支付注意、时间、能量与维护成本。一个看似稳定的系统之所以能够持续，并不是因为它不再变化，而是因为大量维护工作持续发生：错误被修正，关系被更新，资源被重新分配，成员不断学习，边界被重新确认。\n\n很多成本在系统运行顺利时并不显眼。只有当维护停止，人们才发现原本的“稳定”需要持续投入。一个组织不更新知识会逐渐失去能力，一段关系不进行沟通会累积误解，一个技术系统不维护会产生安全和兼容问题。稳定因此更接近一种被持续实现的状态，而不是免费的默认状态。\n\n这也解释了为什么能力越复杂，维护成本往往越值得被单独观察。新增功能不只是增加收益，它也增加未来需要承担的更新、协调和修复工作。系统真正能够长期拥有的能力，是它能够持续支付其运行成本的能力。\n\n## 只描述对象的语言为什么越来越不够用\n\n复杂现实需要能够描述形成、运行、位置与连续性的共同语言。传统描述常把注意力放在对象上：一个人、一个组织、一项技术、一个市场、一种文化。但现实中的许多问题并不只存在于任何一个对象内部，而存在于对象之间的连接方式、时间差、反馈回路和结构位置中。\n\n例如，同一种工具进入不同组织，会因为结构不同而产生不同结果；同一项政策进入不同资源条件，会形成不同路径；同一个人处在不同关系网络中，也可能拥有完全不同的行动空间。如果语言只告诉我们“对象是什么”，这些关系差异就容易被遗漏。\n\n因此，需要一种能够跨层级描述关系的语言。它不要求把个人、组织、技术和文明变成同一种东西，而是寻找它们在形成过程中可能共享的结构问题：差异如何出现，约束如何筛选，结构如何维持，场如何扩散，什么被激活，反馈如何改变路径，以及一个状态如何继续。\n\n## 现实语法描述的是形成关系，而不是命运公式\n\nReality Grammar 描述差异、约束、结构、场、激活、反馈与连续的组织关系。它的作用不是给现实贴上一个最终标签，而是帮助我们把复杂变化拆成可以继续追踪的层次。\n\n差异让状态能够被区分；约束改变哪些路径可以实现；结构保存部分关系；场让局部结构获得更广范围的影响；激活让某些可能性进入实际运行；反馈把运行结果重新带回系统；连续则说明一个状态如何跨时间维持、改变或被替代。把这些关系放在一起，现实就不再只是“发生了什么”，而开始呈现“它是怎样形成的”。\n\n这样的语法不会预先决定某个人或某个系统的命运。相同的关系结构在不同资源、时间、位置和反馈条件下，可以产生不同结果。它提供的是读取变化的坐标，而不是替现实写好的结论。\n\n## 从“它是什么”转向“它如何形成并继续”\n\n当现实被理解为持续形成的过程，问题本身也会改变。我们不再只问“这个对象是什么”，还会问：它从什么差异开始？哪些约束让它成为现在的样子？什么结构正在维持它？哪些成本被持续支付？哪些反馈正在改变它？如果当前关系继续，它可能向哪里移动？\n\n这类问题能够把速度压力、维护成本和复杂系统重新放在同一个视野里。现实之所以难以理解，并不一定是因为信息太少，而可能是因为我们缺少描述关系变化的合适单位。\n\n现实语法的价值，就在于把散乱信息重新组织成形成路径。它让我们看见：现实不是一个完成的对象，而是一套正在运行的关系；理解现实，也不是找到一个永恒标签，而是逐步看清它如何形成、如何被维持，以及下一步可能如何继续。",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       },
       "en": {
-        "title": "How Does Mismatch Between System Speeds Create Reality Pressure?",
-        "summary": "Modern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim …",
-        "bodyMarkdown": "# How Does Mismatch Between System Speeds Create Reality Pressure?\n\nModern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim that the world is simply getting faster.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Modern pressure often emerges from a mismatch between the speed of system change and the speed at which people can learn, recover, coordinate, and adapt institutions. It cannot be reduced to the single claim that the world is simply getting faster. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
+        "title": "Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar",
+        "summary": "Pressure does not come only from a world becoming faster. It also comes from systems changing at incompatible speeds and from the attention, time, energy, and maintenance required to keep them operating. Understanding this complexity requires a language of formation, operation, position, and continuity.",
+        "bodyMarkdown": "# Why Reality Is Harder to Understand: Speed Mismatch, Operating Cost, and Reality Grammar\n\nIt is common to say that the world is getting faster, but speed alone does not explain why reality can become difficult to carry. A deeper problem appears when different systems operate on clocks that no longer fit together. Technology may change within months. Organizational processes can take years to redesign. Human learning, trust, recovery, and judgment each move at still different rates. When these speeds stop coordinating, pressure is produced by mismatch rather than by speed in isolation.\n\nAt the same time, every continuing system carries cost. Attention must be allocated, information updated, relationships maintained, structures repaired, and old assumptions reconsidered. Reality is not a finished object that remains stable without work. It is a set of relationships that keeps forming, feeding back, adjusting, and continuing. A language that describes only static objects can tell us what exists while missing why those things are operating as they do.\n\n## Pressure emerges when different system clocks fall out of alignment\n\nMismatch between system speeds can create reality pressure. Change is not necessarily the problem. The difficulty comes from different layers requiring different amounts of time to respond. Software can be copied almost instantly while institutions cannot be redesigned instantly. Market signals can move rapidly while durable capability takes time to build. Messages arrive immediately while understanding and judgment remain slower processes.\n\nWhen external change repeatedly moves faster than learning and adaptation, delay accumulates. People may continuously chase new requirements without integrating them into stable capability. Organizations may adopt tools faster than they can redesign workflows. Families and communities may experience rising information density without enough time to renew shared understanding.\n\nSlowness can also create pressure. When feedback already shows that conditions have changed but structures remain fixed, obsolete rules continue consuming resources. The aim is therefore not maximum speed. It is coordination among the different clocks that make continued operation possible.\n\n## Every stable state carries recurring operating costs\n\nContinued reality operation requires attention, time, energy, and maintenance cost. A system that looks stable continues only because many forms of upkeep are happening: errors are corrected, relationships renewed, resources reallocated, members learn, and boundaries are adjusted.\n\nThese costs are easy to overlook while things work. Their importance becomes visible when maintenance stops. An organization that stops renewing knowledge gradually loses capability. A relationship without communication accumulates unresolved differences. A technical system without maintenance develops compatibility and reliability problems. Stability is therefore closer to an achieved operating condition than to a free default.\n\nThis is why growing complexity makes maintenance worth measuring in its own right. A new capability does not only create a benefit. It creates future updating, coordination, monitoring, and repair work. A system truly possesses a capability over time only if it can continue paying the costs required to carry that capability.\n\n## Why a language of isolated objects becomes insufficient\n\nComplex reality needs a shared language for formation, operation, position, and continuity. Many conventional descriptions focus on objects: a person, an organization, a technology, a market, a culture. Yet many important problems do not live inside any one object. They emerge from connections, time differences, feedback loops, and positions among objects.\n\nThe same tool can produce different outcomes in different organizational structures. The same policy can create different paths under different resource conditions. The same person can have very different possibilities in different relationship networks. A vocabulary that tells us only what each object is can miss the relational architecture producing those differences.\n\nA more useful language therefore needs to move across levels without pretending that people, organizations, technologies, and civilizations are identical. It can instead ask whether they share recurring formation questions: how Difference appears, how Constraint selects, how Structure persists, how Fields extend influence, what becomes activated, how Feedback changes a path, and how Continuity is maintained.\n\n## Reality Grammar describes formation relationships rather than destiny\n\nReality Grammar describes Difference, Constraint, Structure, Field, Activation, Feedback, and Continuity as organizing relationships. Its purpose is not to assign reality a final label. It is to separate complex change into layers that can be followed.\n\nDifference makes states distinguishable. Constraint changes which paths are realizable. Structure preserves some relations. Fields extend the influence of local structure. Activation moves some possibilities into operation. Feedback returns the effects of operation to the system. Continuity describes how a state persists, changes, or is replaced through time.\n\nThis grammar does not decide the fate of a person or system in advance. Similar relationships can produce different outcomes under different resources, timing, positions, and feedback. The grammar provides coordinates for reading change, not a conclusion written before reality unfolds.\n\n## From asking what something is to asking how it forms and continues\n\nWhen reality is treated as an ongoing formation process, the questions change. We still ask what something is, but we also ask: which differences began this pattern? Which constraints selected its current path? What structure keeps it in place? Which costs are continuously being paid? What feedback is changing it? If the current relationships continue, where can the system move next?\n\nThese questions bring speed pressure, operating cost, and complex systems into the same view. Reality may be difficult to understand not because information is missing, but because the units used to organize information are too static.\n\nThe value of Reality Grammar is that it reorganizes scattered information into formation paths. Reality becomes less like a completed object and more like a set of relationships in operation. Understanding then becomes the work of seeing how those relationships formed, how they are maintained, and how they may continue.",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       }
     },
-    "sourceDigest": "7d15dc82ebbe4f66aa404507592548aed05de555800d9f19b1999cebed48ee90"
+    "sourceDigest": "37a7d9678710b043d7e186520a2a028f1dda387108df8dc47b9f99aa50025f80"
   },
   "accessibility": {
     "status": "PASS",
@@ -563,8 +606,8 @@
     "blockers": [],
     "sourceDigest": "5bf097a33ff6234baa80f4165af7f70e38b199bc2971ae6bc9794a752c6ecd28"
   },
-  "assembledAt": "2026-08-17T10:22:47.636Z",
+  "assembledAt": "2026-08-17T12:10:28.536Z",
   "reviewState": "PENDING",
   "decisionState": "PENDING",
-  "finalPackageDigest": "37f298fd6a0e94f790bb3ba7dc80fdb184e532a7e3797f57cd5e175a2084a8ea"
+  "finalPackageDigest": "976599a5cf0ba84d6f6531b03a06d46f344608109cbf02606d65d8a18c5990fc"
 }

@@ -6,38 +6,49 @@
   "nodeCode": "KN-B1-P1-008",
   "bookCode": "BOOK-1",
   "partCode": "P1",
+  "articleUnitCode": "ACU-B1-004",
+  "compositionNodeCodes": [
+    "KN-B1-P1-008",
+    "KN-B1-P1-009",
+    "KN-B1-P1-010",
+    "KN-B1-P1-011",
+    "KN-B1-P1-012"
+  ],
+  "compositionNodeCount": 5,
+  "publicArticleRole": "ARTICLE_COMPOSITION_UNIT",
   "canonicalAuthority": {
     "nodeCode": "KN-B1-P1-008",
-    "source": "Canonical Knowledge Registry + Human-frozen C2/C3 + PJA brief binding",
-    "nodeDigest": "9d094aeddc4ae821be052361cefe76fe29e6f5c96fccd0d77b9d565cec47c57d",
+    "source": "Canonical member-node registry + Human-frozen C2/C3 + Article Composition brief binding",
+    "nodeDigest": "562e4081af4f40532e4e19734f32427b7d4601955a0f5c73ce09194e0a9bc876",
     "c2C3AuthorityPreserved": true,
-    "sourceDigest": "129e785299d160713dcbfe8eae6d61732901a91a0f69a1817615da14d5aae605"
+    "sourceDigest": "ba3fd440c9e896d79ae20b4f40851c00dcc00fc6b6ccf80033a367cfb85c9239"
   },
   "pjaBrief": {
     "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
     "nodeCode": "KN-B1-P1-008",
     "locale": "zh-Hans",
-    "sourceBriefCode": "BRIEF-KN-B1-P1-008-ZH-HANS-PROG-V1",
-    "sourceDigest": "26acc130bc4bfe4e5a59bde6b48672f48222afd8645729f8557533ed520afdab",
-    "canonicalQuestion": "持续结构如何形成场及其梯度与边界",
-    "canonicalTitle": "持续结构如何形成场及其梯度与边界",
-    "canonicalMeaning": "持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。",
+    "sourceBriefCode": "BRIEF-ACU-B1-004-ZH-HANS-V1",
+    "sourceDigest": "d198ccad5f5fa742264613d6a8e798ed67431090ad2671eb8bd667d62881a0b3",
+    "canonicalQuestion": "从场到接口：结构如何扩展成人工与合成现实",
+    "canonicalTitle": "从场到接口：结构如何扩展成人工与合成现实",
+    "canonicalMeaning": "持续结构会形成场，多个场会传播与重叠；人类进一步把规则、制度、技术和算法写入人工结构，使影响被规模化。最终，复杂运行需要通过有限接口被观察和操作，而接口只是现实的可读表面。",
     "requiredCoverage": [
-      "持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。"
+      "持续结构为什么会形成场",
+      "多个场如何传播、叠加并改变边界",
+      "人工结构把规则变成可重复路径",
+      "算法与平台如何形成合成场",
+      "运行表面把复杂系统变成可观察接口"
     ],
-    "requiredDistinctions": [
-      "PHI OS 的一般框架 与 外部可验证事实",
-      "一般机制 与 个案判断"
-    ],
+    "requiredDistinctions": [],
     "mustPreserve": [
-      "解释该节点所描述的一般形成机制与关系。"
+      "整合 5 个相邻 Canonical Nodes 的形成链，不复制书稿章节。"
     ],
     "mustNotClaim": [
-      "不得从一般机制直接生成个人诊断、专业建议或价值判断。",
-      "不得把框架性解释写成已经被外部科学直接证明的唯一事实。"
+      "不得把所有社会影响都简化为单一算法作用。",
+      "不得把运行接口等同于系统全部现实。"
     ],
     "excludedScope": [
-      "具体个案判断、专业诊断与未经来源支持的外部事实。"
+      "个案诊断、专业判断与未经来源支持的具体外部事实。"
     ],
     "internalGovernanceConstraints": [],
     "sourceGovernanceRequirements": {
@@ -49,9 +60,10 @@
     },
     "terminology": [],
     "evidenceScope": [
-      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
       "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-      "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
     ],
     "figureRequirement": null,
     "localeRequirement": {
@@ -70,27 +82,28 @@
         "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
         "nodeCode": "KN-B1-P1-008",
         "locale": "en",
-        "sourceBriefCode": "BRIEF-KN-B1-P1-008-EN-BFA-PROG-V1",
-        "sourceDigest": "43be3c197b8eee3551b3efa85a02b0cc63919f3e7d1a6c09c1860dc51c80cbca",
-        "canonicalQuestion": "How Does Persistent Structure Form Fields, Gradients, and Boundaries?",
-        "canonicalTitle": "How Does Persistent Structure Form Fields, Gradients, and Boundaries?",
-        "canonicalMeaning": "Persistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or maintain.",
+        "sourceBriefCode": "BRIEF-ACU-B1-004-EN-V1",
+        "sourceDigest": "a4a18d40825624f702614d61596b9cc49873d7e43ee63a2c7586c50fcb670e57",
+        "canonicalQuestion": "From Fields to Interfaces: How Structure Expands into Artificial and Synthetic Reality",
+        "canonicalTitle": "From Fields to Interfaces: How Structure Expands into Artificial and Synthetic Reality",
+        "canonicalMeaning": "Persistent Structure creates Fields; multiple Fields propagate and overlap. Humans then embed rules, institutions, technologies, and algorithms into artificial structures that scale influence. Complex operation finally has to be compressed into interfaces that can be observed and used.",
         "requiredCoverage": [
-          "Persistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or maintain."
+          "Why persistent Structure produces Fields",
+          "How multiple Fields propagate overlap and alter boundaries",
+          "Artificial Structure turns rules into repeatable paths",
+          "How algorithms and platforms form synthetic Fields",
+          "Runtime Surfaces make complex systems observable"
         ],
-        "requiredDistinctions": [
-          "PHI OS general framework and externally verifiable facts",
-          "general mechanism and case-specific judgment"
-        ],
+        "requiredDistinctions": [],
         "mustPreserve": [
-          "Explain the general formation mechanism and relationships described by this node."
+          "Integrate the formation chain across 5 adjacent Canonical Nodes without reproducing manuscript chapters."
         ],
         "mustNotClaim": [
-          "Do not turn a general mechanism directly into a personal diagnosis, professional recommendation, or value judgment.",
-          "Do not present a framework explanation as the single fact directly proven by external science."
+          "Do not reduce all social influence to a single algorithmic cause.",
+          "Do not equate an operating interface with the whole reality of a system."
         ],
         "excludedScope": [
-          "Case-specific judgments, professional diagnosis, and external factual claims without supporting sources."
+          "Case-specific diagnosis, professional judgment, and unsupported specific external factual claims."
         ],
         "internalGovernanceConstraints": [],
         "sourceGovernanceRequirements": {
@@ -102,9 +115,10 @@
         },
         "terminology": [],
         "evidenceScope": [
-          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
           "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-          "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
         ],
         "figureRequirement": null,
         "localeRequirement": {
@@ -125,56 +139,72 @@
     "zh-Hans": {
       "nodeCode": "KN-B1-P1-008",
       "locale": "zh-Hans",
-      "candidateCode": "CANDIDATE-KN-B1-P1-008-ZH-HANS-V1",
-      "candidateDigest": "90221847a32dc1f4e3695e58d418098b9c60250c8c056e74e71010c65c6377fe",
+      "candidateCode": "CANDIDATE-ACU-B1-004-ZH-HANS-V1",
+      "candidateDigest": "42a3ba25708486f547847ccc765c3b51c37e66ba090087e31a49e5f665600c14",
       "article": {
-        "bodyMarkdown": "# 持续结构如何形成场及其梯度与边界\n\n持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
-        "sectionHeadings": [
-          "问题真正指向什么",
-          "机制如何形成",
-          "一般机制与个案判断必须分开",
-          "框架说明与外部事实必须分开",
-          "现实如何继续向下一层展开"
+        "articleUnitCode": "ACU-B1-004",
+        "bodyMarkdown": "# 从场到接口：结构如何扩展成人工与合成现实\n\n结构一旦能够持续，就不只停留在自身内部。它会改变周围位置能够发生什么、哪些路径更容易形成、哪些状态更难维持。也就是说，结构开始产生范围性的影响。PHI OS 用“场”来描述这种由持续结构形成的不均匀影响分布。\n\n当多个场开始传播、重叠，人类又进一步把规则、制度、技术和算法嵌入人工结构，现实就进入更复杂的层级。影响不再只来自自然形成的关系，也来自被设计、编码、维护和规模化的关系。最后，复杂系统必须把内部运行压缩成有限界面，才能被人观察和操作。于是，从场到人工结构、合成场，再到运行表面，形成了一条从“影响”走向“可交互现实”的链。\n\n## 持续结构为什么会形成场\n\n持续结构会形成场、梯度与边界。只要一个结构在关系空间中持续存在，它就会让不同位置拥有不同条件。靠近某个资源中心与远离它，处在一个高连接区域与处在边缘位置，面对的可行路径并不相同。\n\n这种不均匀不是额外添加的装饰，而是结构持续后的结果。结构把某些关系固定下来，于是影响在空间和网络中出现差异。梯度描述这种差异如何随位置改变，边界则表现为某些关系跨过特定范围后发生明显变化。\n\n因此，场并不需要被理解成一个神秘实体。更重要的是看见：持续结构会改变周围状态的可能性分布。一个位置是否容易获得信息、资源、支持或注意，往往与它处在怎样的结构场中有关。\n\n## 多个场如何传播、叠加并改变边界\n\n多个场会传播、重叠并形成复合状态。一个结构产生的影响可以沿连接网络移动，与其他结构产生的影响相遇。某些影响彼此加强，某些互相抵消，还有一些会产生新的边界与过渡区域。\n\n这让现实很少只由单一关系决定。一个组织同时处在市场、法规、技术、文化和内部协作等多个影响场中；一个人也同时处在家庭、工作、社交、信息环境与身体状态等不同关系网络里。实际运行状态通常是这些影响叠加后的结果。\n\n场的传播能力取决于连接。网络越密集，影响越容易跨越局部范围，但传播并不保证结果一致。不同位置拥有不同结构和缓冲，同一种影响进入不同区域后可能形成不同响应。于是，场的意义不只是“有影响”，而是帮助我们读取影响如何获得范围、在哪里增强，以及在哪里被边界改变。\n\n## 人工结构把规则变成可重复路径\n\n人工结构通过规则、制度、技术与组织维持可重复路径。人类并不只是生活在已经存在的结构中，还会主动设计结构：道路决定移动路径，组织制度决定责任与权限，软件协议决定信息如何交换，学校课程决定知识怎样被排序和传递。\n\n当这些设计被长期维护，它们就不再只是一次性的决定，而会成为后来行动的现实条件。人们进入一个系统时，往往不是从无限可能开始，而是进入已经铺设好的流程、角色和接口。人工结构因此能够把过去的选择压缩成未来的默认路径。\n\n这种能力非常强大，因为它让协作可以规模化。但人工结构也会继承设计时的假设。如果环境变化而结构没有更新，曾经有效的路径可能变成新的限制。理解人工结构，需要同时看它提供了什么能力，以及它把哪些选择变得困难。\n\n## 算法与平台如何形成合成场\n\n算法、平台与网络会重组注意、资源与行为路径。当排序、推荐、匹配、定价或分发逻辑被写进大规模数字基础设施，它们就不只是执行单次计算，而开始持续改变哪些内容更容易被看见、哪些关系更容易形成、哪些行为获得更快反馈。\n\n这可以被理解为一种合成场：影响并不来自一个单独命令，而来自大量重复的排序和反馈。用户的行动产生数据，数据进入算法，算法改变下一轮呈现，新的呈现又改变下一轮行动。久而久之，系统形成自我强化或自我修正的路径。\n\n但不能把所有社会结果都归因于算法。算法始终处在更大的结构中，包括商业目标、制度规则、用户选择、资源分配和文化环境。合成场之所以复杂，正因为多种结构同时参与了反馈。\n\n## 运行表面把复杂系统变成可观察接口\n\nRuntime Surface 将复杂内部状态投影为有限、可读、可操作的接口。任何复杂系统如果要被使用，都必须决定哪些状态需要显示，哪些控制需要暴露，哪些细节可以隐藏。仪表盘、账户页面、报告、地图、搜索结果和提示信息，都是运行表面的不同形式。\n\n接口带来的价值是压缩。用户不需要理解系统内部所有连接，就能通过有限信号判断当前状态并采取行动。但压缩也意味着选择：被显示的指标会获得注意，被隐藏的过程更难进入判断。一个漂亮的界面可能呈现运行结果，却不代表用户已经看见产生结果的全部结构。\n\n因此，运行表面不能等同于系统全部现实。它是现实中被选择出来、用于观察和操作的部分。真正成熟的接口设计，不只是让信息更好看，而是让重要状态、关键边界和可行动路径以足够清楚的方式被看见。\n\n从持续结构形成场，到多个场相互作用，再到人工结构与算法把影响规模化，最后通过运行表面进入经验，现实逐渐从内部关系变成可交互的世界。理解这条链，可以帮助我们区分：什么是系统内部真正的组织，什么是它形成的影响范围，以及什么只是我们当前能够看见和操作的表面。",
+        "compositionNodeCodes": [
+          "KN-B1-P1-008",
+          "KN-B1-P1-009",
+          "KN-B1-P1-010",
+          "KN-B1-P1-011",
+          "KN-B1-P1-012"
         ],
-        "summary": "持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。",
+        "sectionHeadings": [
+          "持续结构为什么会形成场",
+          "多个场如何传播、叠加并改变边界",
+          "人工结构把规则变成可重复路径",
+          "算法与平台如何形成合成场",
+          "运行表面把复杂系统变成可观察接口"
+        ],
+        "summary": "持续结构会形成场，多个场会传播与重叠；人类进一步把规则、制度、技术和算法写入人工结构，使影响被规模化。最终，复杂运行需要通过有限接口被观察和操作，而接口只是现实的可读表面。",
         "terminologyTermsUsed": [],
-        "title": "持续结构如何形成场及其梯度与边界"
+        "title": "从场到接口：结构如何扩展成人工与合成现实"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-B1-P1-008-ZH-HANS-PROG-V1",
-        "briefDigest": "26acc130bc4bfe4e5a59bde6b48672f48222afd8645729f8557533ed520afdab",
-        "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-004-ZH-HANS-V1",
+        "briefDigest": "d198ccad5f5fa742264613d6a8e798ed67431090ad2671eb8bd667d62881a0b3",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "b7a22db63b3a2a5d23b97fe6acd9db6dc2a1641aa6e89fc8c0220c9463f0b3a7",
-      "candidatePath": "content/knowledge/production/candidates/zh-Hans/KN-B1-P1-008/candidate.v1.json"
+      "promptDigest": "044a6bdfd6bfa047690d4ba89e4d838ecd1311a71e97495a9ccb7713618bf3f1",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-004/zh-Hans/candidate.v1.json"
     },
     "en": {
       "nodeCode": "KN-B1-P1-008",
       "locale": "en",
-      "candidateCode": "CANDIDATE-KN-B1-P1-008-EN-V1",
-      "candidateDigest": "7cd12c445a875f5e013ce3b4e16ebf307b318b48ec3b5c3fe351d5085515da41",
+      "candidateCode": "CANDIDATE-ACU-B1-004-EN-V1",
+      "candidateDigest": "51603e1e716633d71368a16aeebe9074a3851667b8f1d9a162ccec383c59e218",
       "article": {
-        "bodyMarkdown": "# How Does Persistent Structure Form Fields, Gradients, and Boundaries?\n\nPersistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or maintain.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Persistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or maintain. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
-        "sectionHeadings": [
-          "What the question is really asking",
-          "How the mechanism forms",
-          "General mechanism and case-specific judgment are different",
-          "A general framework and external facts are different",
-          "How reality continues into the next layer"
+        "articleUnitCode": "ACU-B1-004",
+        "bodyMarkdown": "# From Fields to Interfaces: How Structure Expands into Artificial and Synthetic Reality\n\nOnce Structure persists, its effects do not remain confined inside itself. It changes what can happen around it, which paths become easier, and which states become difficult to maintain. PHI OS uses the idea of a Field to describe this uneven distribution of influence produced by persistent Structure.\n\nAs Fields propagate and overlap, humans add another layer by embedding rules, institutions, technologies, and algorithms into artificial structures. Influence is no longer only an outcome of relationships that emerged on their own. It can be designed, encoded, maintained, and scaled. Complex systems then face a final problem: their internal operation must be compressed into finite interfaces before people can observe and use them. Field, artificial Structure, synthetic Field, and Runtime Surface therefore form a chain from influence to interactive reality.\n\n## Why persistent Structure produces Fields\n\nPersistent Structure produces Fields, gradients, and boundaries. When a Structure remains stable in relational space, different positions begin to have different conditions. Being close to a resource center is not the same as being far from it. Occupying a highly connected network position is not the same as being at the edge. Available paths change with position.\n\nThis unevenness is not an extra decoration placed around Structure. It follows from Structure persisting. Some relations become stable, and influence is therefore distributed differently across positions. A gradient describes how those conditions change across a range. A boundary appears where relations change sharply as a position moves from one region to another.\n\nA Field does not need to be treated as a mysterious substance. The important point is that persistent Structure changes the distribution of possibilities around it. Access to information, resources, support, or attention can depend strongly on the structural Field in which a position is located.\n\n## How multiple Fields propagate overlap and alter boundaries\n\nMultiple Fields propagate, overlap, and form composite states. Influence can move along connection networks and meet influence generated by other structures. Some effects reinforce one another, others counteract one another, and some create new boundaries or transition zones.\n\nReality is therefore rarely organized by only one relationship. An organization can simultaneously exist within market, regulatory, technological, cultural, and internal coordination Fields. A person can simultaneously occupy family, work, social, information, and bodily networks. Actual operating state often emerges from the combination of these influences.\n\nPropagation depends on connection. Dense networks allow influence to travel beyond local regions, but propagation does not guarantee identical outcomes. Different positions contain different structures and buffers, so the same influence can produce different responses. Field language helps show not merely that influence exists, but how it gains range, where it intensifies, and where boundaries alter it.\n\n## Artificial Structure turns rules into repeatable paths\n\nArtificial Structure uses rules, institutions, technology, and organization to preserve repeatable paths. Humans do not only inhabit existing structures; they deliberately build them. Roads shape movement. Organizational rules allocate responsibility and permission. Software protocols define how information is exchanged. Educational programs order the sequence in which knowledge is encountered.\n\nWhen these designs are maintained, they stop being one-time decisions and become conditions for later action. A person entering a system rarely begins with unlimited possibility. They enter workflows, roles, interfaces, and defaults that have already been constructed. Artificial Structure compresses past choices into future pathways.\n\nThis ability makes cooperation scalable, but it also preserves assumptions from the time of design. When conditions change and Structure does not, a formerly useful path can become a new constraint. Reading artificial Structure therefore means seeing both the capability it enables and the alternatives it makes difficult.\n\n## How algorithms and platforms form synthetic Fields\n\nAlgorithms, platforms, and networks reorganize attention, resources, and behavior paths. When ranking, recommendation, matching, pricing, or distribution logic is embedded in large digital infrastructure, it no longer performs only isolated calculations. It continuously changes what becomes visible, which connections are easier to form, and which actions receive faster feedback.\n\nThis can be understood as a synthetic Field. Influence does not come from a single command. It emerges from repeated sorting and feedback. User behavior generates data; data enters algorithms; algorithms alter the next presentation; the new presentation shapes the next round of behavior. Over time, paths can reinforce themselves or be corrected by new feedback.\n\nNot every social result should be reduced to algorithms. Algorithms operate inside larger structures that include commercial goals, institutional rules, user choices, resource allocation, and culture. Synthetic Fields are complex precisely because many structures participate in the same feedback process.\n\n## Runtime Surfaces make complex systems observable\n\nRuntime Surface projects complex internal state into a finite, readable, operable interface. Any complex system that people must use has to decide which states to display, which controls to expose, and which internal details can remain hidden. Dashboards, account pages, reports, maps, search results, and alerts are all different Runtime Surfaces.\n\nThe value of an interface is compression. A user can act without understanding every internal connection. But compression also implies selection. Displayed indicators receive attention, while hidden processes are less likely to enter judgment. A clear interface can show the outcome of operation without showing the whole Structure that produced it.\n\nAn operating interface is therefore not the whole reality of a system. It is the portion selected for observation and action. Mature interface design does more than make information attractive. It makes important states, boundaries, and viable actions sufficiently visible.\n\nFrom persistent Structure to Fields, from overlapping influence to artificial and synthetic structures, and finally to Runtime Surfaces, internal relations become an interactive world. Following this chain makes it possible to distinguish the organization inside a system, the range of influence that organization produces, and the surface through which people currently experience and operate it.",
+        "compositionNodeCodes": [
+          "KN-B1-P1-008",
+          "KN-B1-P1-009",
+          "KN-B1-P1-010",
+          "KN-B1-P1-011",
+          "KN-B1-P1-012"
         ],
-        "summary": "Persistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or ma…",
+        "sectionHeadings": [
+          "Why persistent Structure produces Fields",
+          "How multiple Fields propagate overlap and alter boundaries",
+          "Artificial Structure turns rules into repeatable paths",
+          "How algorithms and platforms form synthetic Fields",
+          "Runtime Surfaces make complex systems observable"
+        ],
+        "summary": "Persistent Structure creates Fields; multiple Fields propagate and overlap. Humans then embed rules, institutions, technologies, and algorithms into artificial structures that scale influence. Complex operation finally has to be compressed into interfaces that can be observed and used.",
         "terminologyTermsUsed": [],
-        "title": "How Does Persistent Structure Form Fields, Gradients, and Boundaries?"
+        "title": "From Fields to Interfaces: How Structure Expands into Artificial and Synthetic Reality"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-B1-P1-008-EN-BFA-PROG-V1",
-        "briefDigest": "43be3c197b8eee3551b3efa85a02b0cc63919f3e7d1a6c09c1860dc51c80cbca",
-        "briefSchemaVersion": "PHI-OS-BFA-ENGLISH-PRODUCTION-BRIEF-v1.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-004-EN-V1",
+        "briefDigest": "a4a18d40825624f702614d61596b9cc49873d7e43ee63a2c7586c50fcb670e57",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "c3c0d28de220a2e9b2ec746878482f44df9f26285675c17b9882fd3c9bffaa7e",
-      "candidatePath": "content/knowledge/production/candidates/en/KN-B1-P1-008/candidate.v1.json"
+      "promptDigest": "e974d57aed93a8f1d5c86eb4f46d25374f7dcf9423cbb585e8ef509ba802cd11",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-004/en/candidate.v1.json"
     }
   },
   "localeIdentity": {
@@ -182,29 +212,29 @@
     "identityModel": "BFA_PACKAGE_SCOPED_BILINGUAL_IDENTITY_CANDIDATE",
     "identities": {
       "zh-Hans": {
-        "slug": "persistent-structure-forms-fields-gradients-and-boundaries",
-        "displayQuestion": "持续结构如何形成场及其梯度与边界",
-        "sourceAuthority": "KNR_L10N_CANONICAL"
+        "slug": "from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
+        "displayQuestion": "从场到接口：结构如何扩展成人工与合成现实",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       },
       "en": {
-        "slug": "persistent-structure-forms-fields-gradients-and-boundaries",
-        "displayQuestion": "How Does Persistent Structure Form Fields, Gradients, and Boundaries?",
-        "sourceAuthority": "BFA_PACKAGE_SCOPED_EN_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
+        "slug": "from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
+        "displayQuestion": "From Fields to Interfaces: How Structure Expands into Artificial and Synthetic Reality",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       }
     },
     "independentLocaleAuthority": true,
     "globalLocaleRegistryMutation": false,
-    "sourceDigest": "6a778bc5835f51140c49f34dbd56236291d25b120204e6cce303cb3ca07d8b89"
+    "sourceDigest": "d9cec60b3db8d78176ded16f2bfd207276282fe8ac0b61126bd5a49af95eed7c"
   },
   "sameRouteIdentity": {
-    "canonicalRoute": "/articles/persistent-structure-forms-fields-gradients-and-boundaries",
-    "slug": "persistent-structure-forms-fields-gradients-and-boundaries",
+    "canonicalRoute": "/articles/from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
+    "slug": "from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
     "locales": [
       "zh-Hans",
       "en"
     ],
     "localePrefixAllowed": false,
-    "sourceDigest": "728cf21a605048963e92445c1baa2accff856912e6cf42eb3b309d025fa167a5"
+    "sourceDigest": "e35564dfd7be7aed831c79e78c2df591d56f342d31c1dc00393e444409886c64"
   },
   "figure": {
     "state": "FIGURE_NOT_REQUIRED",
@@ -471,24 +501,40 @@
         {
           "requirementCode": "COV-001",
           "kind": "coverage",
-          "zhHansRequirement": "持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。",
-          "enRequirement": "Persistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or maintain.",
+          "zhHansRequirement": "持续结构为什么会形成场",
+          "enRequirement": "Why persistent Structure produces Fields",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-001",
-          "kind": "distinction",
-          "zhHansRequirement": "PHI OS 的一般框架 与 外部可验证事实",
-          "enRequirement": "PHI OS general framework and externally verifiable facts",
+          "requirementCode": "COV-002",
+          "kind": "coverage",
+          "zhHansRequirement": "多个场如何传播、叠加并改变边界",
+          "enRequirement": "How multiple Fields propagate overlap and alter boundaries",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-002",
-          "kind": "distinction",
-          "zhHansRequirement": "一般机制 与 个案判断",
-          "enRequirement": "general mechanism and case-specific judgment",
+          "requirementCode": "COV-003",
+          "kind": "coverage",
+          "zhHansRequirement": "人工结构把规则变成可重复路径",
+          "enRequirement": "Artificial Structure turns rules into repeatable paths",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-004",
+          "kind": "coverage",
+          "zhHansRequirement": "算法与平台如何形成合成场",
+          "enRequirement": "How algorithms and platforms form synthetic Fields",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-005",
+          "kind": "coverage",
+          "zhHansRequirement": "运行表面把复杂系统变成可观察接口",
+          "enRequirement": "Runtime Surfaces make complex systems observable",
           "zhHans": true,
           "en": true
         }
@@ -498,21 +544,21 @@
       "evidenceOnly": true,
       "humanAcceptance": false
     },
-    "sourceDigest": "7d219289d973042a62b595722a620c629107190c81208cb2da2ef53e9a0d82dd"
+    "sourceDigest": "cde3d11a01b2e3462a78debf940644be745df9a244575e63750af8bbfbf1fe32"
   },
   "presentationPreview": {
     "previewType": "CPR_FINAL_PRESENTATION_PREVIEW",
     "authority": "CPR_PROJECTION_ONLY",
     "nodeCode": "KN-B1-P1-008",
     "sameRoute": {
-      "canonicalRoute": "/articles/persistent-structure-forms-fields-gradients-and-boundaries",
-      "slug": "persistent-structure-forms-fields-gradients-and-boundaries",
+      "canonicalRoute": "/articles/from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
+      "slug": "from-fields-to-interfaces-how-structures-expand-into-synthetic-reality",
       "locales": [
         "zh-Hans",
         "en"
       ],
       "localePrefixAllowed": false,
-      "sourceDigest": "728cf21a605048963e92445c1baa2accff856912e6cf42eb3b309d025fa167a5"
+      "sourceDigest": "e35564dfd7be7aed831c79e78c2df591d56f342d31c1dc00393e444409886c64"
     },
     "viewports": [
       "desktop",
@@ -521,25 +567,25 @@
     "articleShell": "PDS/CPR public article shell",
     "locales": {
       "zh-Hans": {
-        "title": "持续结构如何形成场及其梯度与边界",
-        "summary": "持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。",
-        "bodyMarkdown": "# 持续结构如何形成场及其梯度与边界\n\n持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，持续结构会在关系空间中形成不均匀的影响分布，并由此出现场、梯度与边界，改变后续状态能够到达或维持的位置。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
+        "title": "从场到接口：结构如何扩展成人工与合成现实",
+        "summary": "持续结构会形成场，多个场会传播与重叠；人类进一步把规则、制度、技术和算法写入人工结构，使影响被规模化。最终，复杂运行需要通过有限接口被观察和操作，而接口只是现实的可读表面。",
+        "bodyMarkdown": "# 从场到接口：结构如何扩展成人工与合成现实\n\n结构一旦能够持续，就不只停留在自身内部。它会改变周围位置能够发生什么、哪些路径更容易形成、哪些状态更难维持。也就是说，结构开始产生范围性的影响。PHI OS 用“场”来描述这种由持续结构形成的不均匀影响分布。\n\n当多个场开始传播、重叠，人类又进一步把规则、制度、技术和算法嵌入人工结构，现实就进入更复杂的层级。影响不再只来自自然形成的关系，也来自被设计、编码、维护和规模化的关系。最后，复杂系统必须把内部运行压缩成有限界面，才能被人观察和操作。于是，从场到人工结构、合成场，再到运行表面，形成了一条从“影响”走向“可交互现实”的链。\n\n## 持续结构为什么会形成场\n\n持续结构会形成场、梯度与边界。只要一个结构在关系空间中持续存在，它就会让不同位置拥有不同条件。靠近某个资源中心与远离它，处在一个高连接区域与处在边缘位置，面对的可行路径并不相同。\n\n这种不均匀不是额外添加的装饰，而是结构持续后的结果。结构把某些关系固定下来，于是影响在空间和网络中出现差异。梯度描述这种差异如何随位置改变，边界则表现为某些关系跨过特定范围后发生明显变化。\n\n因此，场并不需要被理解成一个神秘实体。更重要的是看见：持续结构会改变周围状态的可能性分布。一个位置是否容易获得信息、资源、支持或注意，往往与它处在怎样的结构场中有关。\n\n## 多个场如何传播、叠加并改变边界\n\n多个场会传播、重叠并形成复合状态。一个结构产生的影响可以沿连接网络移动，与其他结构产生的影响相遇。某些影响彼此加强，某些互相抵消，还有一些会产生新的边界与过渡区域。\n\n这让现实很少只由单一关系决定。一个组织同时处在市场、法规、技术、文化和内部协作等多个影响场中；一个人也同时处在家庭、工作、社交、信息环境与身体状态等不同关系网络里。实际运行状态通常是这些影响叠加后的结果。\n\n场的传播能力取决于连接。网络越密集，影响越容易跨越局部范围，但传播并不保证结果一致。不同位置拥有不同结构和缓冲，同一种影响进入不同区域后可能形成不同响应。于是，场的意义不只是“有影响”，而是帮助我们读取影响如何获得范围、在哪里增强，以及在哪里被边界改变。\n\n## 人工结构把规则变成可重复路径\n\n人工结构通过规则、制度、技术与组织维持可重复路径。人类并不只是生活在已经存在的结构中，还会主动设计结构：道路决定移动路径，组织制度决定责任与权限，软件协议决定信息如何交换，学校课程决定知识怎样被排序和传递。\n\n当这些设计被长期维护，它们就不再只是一次性的决定，而会成为后来行动的现实条件。人们进入一个系统时，往往不是从无限可能开始，而是进入已经铺设好的流程、角色和接口。人工结构因此能够把过去的选择压缩成未来的默认路径。\n\n这种能力非常强大，因为它让协作可以规模化。但人工结构也会继承设计时的假设。如果环境变化而结构没有更新，曾经有效的路径可能变成新的限制。理解人工结构，需要同时看它提供了什么能力，以及它把哪些选择变得困难。\n\n## 算法与平台如何形成合成场\n\n算法、平台与网络会重组注意、资源与行为路径。当排序、推荐、匹配、定价或分发逻辑被写进大规模数字基础设施，它们就不只是执行单次计算，而开始持续改变哪些内容更容易被看见、哪些关系更容易形成、哪些行为获得更快反馈。\n\n这可以被理解为一种合成场：影响并不来自一个单独命令，而来自大量重复的排序和反馈。用户的行动产生数据，数据进入算法，算法改变下一轮呈现，新的呈现又改变下一轮行动。久而久之，系统形成自我强化或自我修正的路径。\n\n但不能把所有社会结果都归因于算法。算法始终处在更大的结构中，包括商业目标、制度规则、用户选择、资源分配和文化环境。合成场之所以复杂，正因为多种结构同时参与了反馈。\n\n## 运行表面把复杂系统变成可观察接口\n\nRuntime Surface 将复杂内部状态投影为有限、可读、可操作的接口。任何复杂系统如果要被使用，都必须决定哪些状态需要显示，哪些控制需要暴露，哪些细节可以隐藏。仪表盘、账户页面、报告、地图、搜索结果和提示信息，都是运行表面的不同形式。\n\n接口带来的价值是压缩。用户不需要理解系统内部所有连接，就能通过有限信号判断当前状态并采取行动。但压缩也意味着选择：被显示的指标会获得注意，被隐藏的过程更难进入判断。一个漂亮的界面可能呈现运行结果，却不代表用户已经看见产生结果的全部结构。\n\n因此，运行表面不能等同于系统全部现实。它是现实中被选择出来、用于观察和操作的部分。真正成熟的接口设计，不只是让信息更好看，而是让重要状态、关键边界和可行动路径以足够清楚的方式被看见。\n\n从持续结构形成场，到多个场相互作用，再到人工结构与算法把影响规模化，最后通过运行表面进入经验，现实逐渐从内部关系变成可交互的世界。理解这条链，可以帮助我们区分：什么是系统内部真正的组织，什么是它形成的影响范围，以及什么只是我们当前能够看见和操作的表面。",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       },
       "en": {
-        "title": "How Does Persistent Structure Form Fields, Gradients, and Boundaries?",
-        "summary": "Persistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or ma…",
-        "bodyMarkdown": "# How Does Persistent Structure Form Fields, Gradients, and Boundaries?\n\nPersistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or maintain.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Persistent Structure creates uneven distributions of influence across relational space. From these differences emerge Fields, gradients, and boundaries that change which positions later states can reach or maintain. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
+        "title": "From Fields to Interfaces: How Structure Expands into Artificial and Synthetic Reality",
+        "summary": "Persistent Structure creates Fields; multiple Fields propagate and overlap. Humans then embed rules, institutions, technologies, and algorithms into artificial structures that scale influence. Complex operation finally has to be compressed into interfaces that can be observed and used.",
+        "bodyMarkdown": "# From Fields to Interfaces: How Structure Expands into Artificial and Synthetic Reality\n\nOnce Structure persists, its effects do not remain confined inside itself. It changes what can happen around it, which paths become easier, and which states become difficult to maintain. PHI OS uses the idea of a Field to describe this uneven distribution of influence produced by persistent Structure.\n\nAs Fields propagate and overlap, humans add another layer by embedding rules, institutions, technologies, and algorithms into artificial structures. Influence is no longer only an outcome of relationships that emerged on their own. It can be designed, encoded, maintained, and scaled. Complex systems then face a final problem: their internal operation must be compressed into finite interfaces before people can observe and use them. Field, artificial Structure, synthetic Field, and Runtime Surface therefore form a chain from influence to interactive reality.\n\n## Why persistent Structure produces Fields\n\nPersistent Structure produces Fields, gradients, and boundaries. When a Structure remains stable in relational space, different positions begin to have different conditions. Being close to a resource center is not the same as being far from it. Occupying a highly connected network position is not the same as being at the edge. Available paths change with position.\n\nThis unevenness is not an extra decoration placed around Structure. It follows from Structure persisting. Some relations become stable, and influence is therefore distributed differently across positions. A gradient describes how those conditions change across a range. A boundary appears where relations change sharply as a position moves from one region to another.\n\nA Field does not need to be treated as a mysterious substance. The important point is that persistent Structure changes the distribution of possibilities around it. Access to information, resources, support, or attention can depend strongly on the structural Field in which a position is located.\n\n## How multiple Fields propagate overlap and alter boundaries\n\nMultiple Fields propagate, overlap, and form composite states. Influence can move along connection networks and meet influence generated by other structures. Some effects reinforce one another, others counteract one another, and some create new boundaries or transition zones.\n\nReality is therefore rarely organized by only one relationship. An organization can simultaneously exist within market, regulatory, technological, cultural, and internal coordination Fields. A person can simultaneously occupy family, work, social, information, and bodily networks. Actual operating state often emerges from the combination of these influences.\n\nPropagation depends on connection. Dense networks allow influence to travel beyond local regions, but propagation does not guarantee identical outcomes. Different positions contain different structures and buffers, so the same influence can produce different responses. Field language helps show not merely that influence exists, but how it gains range, where it intensifies, and where boundaries alter it.\n\n## Artificial Structure turns rules into repeatable paths\n\nArtificial Structure uses rules, institutions, technology, and organization to preserve repeatable paths. Humans do not only inhabit existing structures; they deliberately build them. Roads shape movement. Organizational rules allocate responsibility and permission. Software protocols define how information is exchanged. Educational programs order the sequence in which knowledge is encountered.\n\nWhen these designs are maintained, they stop being one-time decisions and become conditions for later action. A person entering a system rarely begins with unlimited possibility. They enter workflows, roles, interfaces, and defaults that have already been constructed. Artificial Structure compresses past choices into future pathways.\n\nThis ability makes cooperation scalable, but it also preserves assumptions from the time of design. When conditions change and Structure does not, a formerly useful path can become a new constraint. Reading artificial Structure therefore means seeing both the capability it enables and the alternatives it makes difficult.\n\n## How algorithms and platforms form synthetic Fields\n\nAlgorithms, platforms, and networks reorganize attention, resources, and behavior paths. When ranking, recommendation, matching, pricing, or distribution logic is embedded in large digital infrastructure, it no longer performs only isolated calculations. It continuously changes what becomes visible, which connections are easier to form, and which actions receive faster feedback.\n\nThis can be understood as a synthetic Field. Influence does not come from a single command. It emerges from repeated sorting and feedback. User behavior generates data; data enters algorithms; algorithms alter the next presentation; the new presentation shapes the next round of behavior. Over time, paths can reinforce themselves or be corrected by new feedback.\n\nNot every social result should be reduced to algorithms. Algorithms operate inside larger structures that include commercial goals, institutional rules, user choices, resource allocation, and culture. Synthetic Fields are complex precisely because many structures participate in the same feedback process.\n\n## Runtime Surfaces make complex systems observable\n\nRuntime Surface projects complex internal state into a finite, readable, operable interface. Any complex system that people must use has to decide which states to display, which controls to expose, and which internal details can remain hidden. Dashboards, account pages, reports, maps, search results, and alerts are all different Runtime Surfaces.\n\nThe value of an interface is compression. A user can act without understanding every internal connection. But compression also implies selection. Displayed indicators receive attention, while hidden processes are less likely to enter judgment. A clear interface can show the outcome of operation without showing the whole Structure that produced it.\n\nAn operating interface is therefore not the whole reality of a system. It is the portion selected for observation and action. Mature interface design does more than make information attractive. It makes important states, boundaries, and viable actions sufficiently visible.\n\nFrom persistent Structure to Fields, from overlapping influence to artificial and synthetic structures, and finally to Runtime Surfaces, internal relations become an interactive world. Following this chain makes it possible to distinguish the organization inside a system, the range of influence that organization produces, and the surface through which people currently experience and operate it.",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       }
     },
-    "sourceDigest": "d144b08aa05b36e7c0bb1b3bb24c85cde84b962cc1084cf754f4c9b83cb1512f"
+    "sourceDigest": "e179431050e035b0af91129330399740a1be2ccea6a0fbc9dc1db992d95fe1c5"
   },
   "accessibility": {
     "status": "PASS",
@@ -563,8 +609,8 @@
     "blockers": [],
     "sourceDigest": "5bf097a33ff6234baa80f4165af7f70e38b199bc2971ae6bc9794a752c6ecd28"
   },
-  "assembledAt": "2026-08-17T10:22:47.655Z",
+  "assembledAt": "2026-08-17T12:10:28.545Z",
   "reviewState": "PENDING",
   "decisionState": "PENDING",
-  "finalPackageDigest": "604054440aeb34976df2d4ffb32596095591d9f0ceea102ccc89fd773af2f0c7"
+  "finalPackageDigest": "8a3fc2790ed9623daed5d181dc03dcc561aae54a0cf38ca6f2854b5ebc5ca664"
 }

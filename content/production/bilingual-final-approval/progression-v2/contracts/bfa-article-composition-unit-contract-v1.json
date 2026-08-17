@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-UNIT-CONTRACT-v1.0.0",
+  "work": "BFA-ARTICLE-COMPOSITION-RECONCILIATION",
+  "baselineCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa",
+  "status": "ACTIVE_SUCCESSOR_CONTRACT",
+  "authorityBoundary": {
+    "canonicalNodeRemainsKnowledgeAuthorityUnit": true,
+    "canonicalNodeRemainsRetrievalAndRuleLineageUnit": true,
+    "publicArticleCreatesCanonicalMeaning": false,
+    "publicArticleMayComposeAdjacentCanonicalNodes": true,
+    "nodeToPublicArticleOneToOneRequired": false,
+    "historicalPublishedArticlesRewritten": false
+  },
+  "composition": {
+    "targetCanonicalNodesPerArticle": [4, 5],
+    "sameBookRequired": true,
+    "canonicalOrderRequired": true,
+    "partBoundaryCrossingAllowedOnlyWhenNeededForCoherentFourToFiveNodeUnit": true,
+    "memberNodeLineageRequired": true,
+    "anchorNodeIsPublicationIdentityAdapterNotMeaningOwner": true
+  },
+  "batching": {
+    "maximumPublicArticlesPerBatch": 24,
+    "batchSizeCountsArticleCompositionUnitsNotCanonicalNodes": true,
+    "explicitHumanDeferMayReduceCoverage": true,
+    "sameBatchRefillRequired": false
+  },
+  "editorialQuality": {
+    "fixedGovernanceHeadingTemplateForbidden": true,
+    "genericFrameworkVsFactSectionForbidden": true,
+    "genericMechanismVsCaseSectionForbidden": true,
+    "nodeSpecificStructureRequired": true,
+    "internalGovernanceRemainsPreflightOnly": true
+  },
+  "approvalStaleness": {
+    "compositionRepairChangesCandidateDigest": true,
+    "compositionRepairChangesFinalPackageDigest": true,
+    "priorFinalApprovalMayRemainHistoricalEvidence": true,
+    "priorFinalApprovalMayAuthorizeRepairedPackage": false
+  }
+}

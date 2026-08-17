@@ -6,38 +6,49 @@
   "nodeCode": "KN-B1-P2-002",
   "bookCode": "BOOK-1",
   "partCode": "P2",
+  "articleUnitCode": "ACU-B1-005",
+  "compositionNodeCodes": [
+    "KN-B1-P2-002",
+    "KN-B1-P2-003",
+    "KN-B1-P2-004",
+    "KN-B1-P2-005",
+    "KN-B1-P2-006"
+  ],
+  "compositionNodeCount": 5,
+  "publicArticleRole": "ARTICLE_COMPOSITION_UNIT",
   "canonicalAuthority": {
     "nodeCode": "KN-B1-P2-002",
-    "source": "Canonical Knowledge Registry + Human-frozen C2/C3 + PJA brief binding",
-    "nodeDigest": "597a72c98d463b7fc4956bd6de4b4850633377e7cd286c9a8b5d7d38e81c8ed8",
+    "source": "Canonical member-node registry + Human-frozen C2/C3 + Article Composition brief binding",
+    "nodeDigest": "bf67f2fe6832068316f8dfa252f6dcfd3adf5c5c651481bf994250a9f4cf7c96",
     "c2C3AuthorityPreserved": true,
-    "sourceDigest": "0c3b61bafe40c8aaa135c07e1865776053b165a8be8a7343edd51fbebfba1d95"
+    "sourceDigest": "d5dbc3668ea85468bfcbec1fe0cc1fd106048cf03818b70385a54e66d0c082a9"
   },
   "pjaBrief": {
     "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
     "nodeCode": "KN-B1-P2-002",
     "locale": "zh-Hans",
-    "sourceBriefCode": "BRIEF-KN-B1-P2-002-ZH-HANS-PROG-V1",
-    "sourceDigest": "b6bf20eae26953a17481f5e1a1324015a1bcab9883557ba2fcfd2ef37277d7f2",
-    "canonicalQuestion": "投影表面如何成为经验界面",
-    "canonicalTitle": "投影表面如何成为经验界面",
-    "canonicalMeaning": "投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。",
+    "sourceBriefCode": "BRIEF-ACU-B1-005-ZH-HANS-V1",
+    "sourceDigest": "d14293c48a71706816230f1baf6321e4cd5bcfc04aebac6e2630d7341619a80c",
+    "canonicalQuestion": "我们经验的世界如何被投影、压缩并赋予意义",
+    "canonicalTitle": "我们经验的世界如何被投影、压缩并赋予意义",
+    "canonicalMeaning": "系统无法一次经验无限复杂的现实，只能通过投影表面选择信息、压缩细节并形成可操作的世界版本。个人、组织与文明由此形成不同投影，而意义、符号与共同叙事进一步组织行动和连续性。",
     "requiredCoverage": [
-      "投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。"
+      "投影表面为什么是经验的入口",
+      "压缩与分辨率决定我们能看见什么",
+      "个人、组织与文明形成不同的世界版本",
+      "意义如何把经验组织成叙事与身份",
+      "符号与共同意义如何跨个体延续"
     ],
-    "requiredDistinctions": [
-      "PHI OS 的一般框架 与 外部可验证事实",
-      "一般机制 与 个案判断"
-    ],
+    "requiredDistinctions": [],
     "mustPreserve": [
-      "解释该节点所描述的一般形成机制与关系。"
+      "整合 5 个相邻 Canonical Nodes 的形成链，不复制书稿章节。"
     ],
     "mustNotClaim": [
-      "不得从一般机制直接生成个人诊断、专业建议或价值判断。",
-      "不得把框架性解释写成已经被外部科学直接证明的唯一事实。"
+      "不得把投影后的经验版本等同于无限复杂现实本身。",
+      "不得把共同叙事自动等同于客观事实。"
     ],
     "excludedScope": [
-      "具体个案判断、专业诊断与未经来源支持的外部事实。"
+      "个案诊断、专业判断与未经来源支持的具体外部事实。"
     ],
     "internalGovernanceConstraints": [],
     "sourceGovernanceRequirements": {
@@ -49,9 +60,10 @@
     },
     "terminology": [],
     "evidenceScope": [
-      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+      "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
       "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-      "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+      "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
     ],
     "figureRequirement": null,
     "localeRequirement": {
@@ -70,27 +82,28 @@
         "projectionType": "BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION",
         "nodeCode": "KN-B1-P2-002",
         "locale": "en",
-        "sourceBriefCode": "BRIEF-KN-B1-P2-002-EN-BFA-PROG-V1",
-        "sourceDigest": "e70b319c2f55edeccec9db3ae4162db89dc60960dfeedba8392f0d1f35638469",
-        "canonicalQuestion": "How Do Projection Surfaces Become Interfaces of Experience?",
-        "canonicalTitle": "How Do Projection Surfaces Become Interfaces of Experience?",
-        "canonicalMeaning": "Projection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited complexity itself.",
+        "sourceBriefCode": "BRIEF-ACU-B1-005-EN-V1",
+        "sourceDigest": "4eac4e3b2a9b9b8353743c8fb31f939aafb973c230527f9b8e1cdf94a0fb1a3e",
+        "canonicalQuestion": "How Experienced Worlds Are Projected, Compressed, and Given Meaning",
+        "canonicalTitle": "How Experienced Worlds Are Projected, Compressed, and Given Meaning",
+        "canonicalMeaning": "No observer or organization can experience unlimited complexity at once. Reality enters experience through projection surfaces that select information, compress detail, and create workable world versions. Meaning, symbols, and shared narratives then organize action and continuity.",
         "requiredCoverage": [
-          "Projection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited complexity itself."
+          "Why Projection Surfaces are the entry point of experience",
+          "Compression and resolution determine what can be seen",
+          "People organizations and civilizations form different world versions",
+          "How Meaning organizes experience into narrative and identity",
+          "How symbols and shared Meaning continue across individuals"
         ],
-        "requiredDistinctions": [
-          "PHI OS general framework and externally verifiable facts",
-          "general mechanism and case-specific judgment"
-        ],
+        "requiredDistinctions": [],
         "mustPreserve": [
-          "Explain the general formation mechanism and relationships described by this node."
+          "Integrate the formation chain across 5 adjacent Canonical Nodes without reproducing manuscript chapters."
         ],
         "mustNotClaim": [
-          "Do not turn a general mechanism directly into a personal diagnosis, professional recommendation, or value judgment.",
-          "Do not present a framework explanation as the single fact directly proven by external science."
+          "Do not equate a projected experiential version with the unlimited complexity of reality itself.",
+          "Do not automatically equate a shared narrative with objective fact."
         ],
         "excludedScope": [
-          "Case-specific judgments, professional diagnosis, and external factual claims without supporting sources."
+          "Case-specific diagnosis, professional judgment, and unsupported specific external factual claims."
         ],
         "internalGovernanceConstraints": [],
         "sourceGovernanceRequirements": {
@@ -102,9 +115,10 @@
         },
         "terminology": [],
         "evidenceScope": [
-          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition-repair/BATCH-003-article-composition-content-v1.json",
+          "content/production/bilingual-final-approval/progression-v2/composition/article-composition-unit-registry-v1.json",
           "content/production/bilingual-final-approval/progression-v2/human-decisions/BATCH-003-c2-human-decisions-v1.json",
-          "content/knowledge/reconciliation/kau-r3/book-1-approved-primary-bindings-v1.json"
+          "content/production/bilingual-final-approval/progression-v2/review/BATCH-003-c2-review-v1.json"
         ],
         "figureRequirement": null,
         "localeRequirement": {
@@ -125,56 +139,72 @@
     "zh-Hans": {
       "nodeCode": "KN-B1-P2-002",
       "locale": "zh-Hans",
-      "candidateCode": "CANDIDATE-KN-B1-P2-002-ZH-HANS-V1",
-      "candidateDigest": "c8d5523fb8f7d65eb32656d2164ef61f72773dd318b085544e464bfc0fd362b0",
+      "candidateCode": "CANDIDATE-ACU-B1-005-ZH-HANS-V1",
+      "candidateDigest": "3d64fd0c533189331b8a93fff7caa233f4be56b90d9453039172ba6cdb90a204",
       "article": {
-        "bodyMarkdown": "# 投影表面如何成为经验界面\n\n投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
-        "sectionHeadings": [
-          "问题真正指向什么",
-          "机制如何形成",
-          "一般机制与个案判断必须分开",
-          "框架说明与外部事实必须分开",
-          "现实如何继续向下一层展开"
+        "articleUnitCode": "ACU-B1-005",
+        "bodyMarkdown": "# 我们经验的世界如何被投影、压缩并赋予意义\n\n现实可以包含远超过任何单一观察者能够同时处理的差异。一个人无法一次感知所有声音、关系、历史、可能路径和系统状态；一个组织也不可能把全部信息同时带入每一次决策。要进入经验和行动，复杂现实必须先被选择、压缩和呈现。\n\n这就是投影的重要性。投影不是简单制造一个虚假世界，而是把复杂内部状态转化成有限、可读取、可行动的版本。不同投影选择不同信息、使用不同分辨率，并在不同层级形成世界。随后，意义把经验放入关系与叙事，符号又把意义压缩成可以跨个体传播的形式。于是，从投影表面到文明叙事，现实逐渐变成可以被经验、解释、协调和延续的世界。\n\n## 投影表面为什么是经验的入口\n\n投影表面把复杂内部状态转化为经验与行动界面。我们真正直接接触的，通常不是一个系统的全部内部结构，而是它对当前观察位置开放的表面：视觉、语言、指标、事件、反馈、界面和他人的表达。\n\n这种表面并不等于虚假。它是系统与观察者之间能够发生交互的层。一个仪表盘是真实系统的投影表面，一个价格是复杂供需关系的有限表达，一个人的一句话也是内部状态经过语言能力、情境和选择后形成的外部表面。\n\n理解投影表面的意义，在于知道“我们看见的”与“产生它的全部结构”并不是同一个范围。表面使行动成为可能，却也意味着大量内部细节没有同时进入经验。\n\n## 压缩与分辨率决定我们能看见什么\n\n投影压缩与分辨率决定哪些差异进入可经验现实。任何投影都有容量限制，因此必须合并部分细节、突出部分差异，并选择观察尺度。\n\n分辨率太低，关键差异可能被合并。例如只看一个组织的总收入，可能看不见不同业务之间完全不同的结构；只看一次事件的结果，也可能看不见形成结果的长期过程。分辨率过高，则可能让观察者被大量细节淹没，无法形成可行动的整体判断。\n\n好的投影不是“显示得越多越好”，而是在当前问题下保留足够重要的差异。不同任务需要不同分辨率：战略判断需要较大尺度的结构，具体修复则可能需要深入局部。投影因此总是与目的、位置和可操作性有关。\n\n## 个人、组织与文明形成不同的世界版本\n\n个人、组织与文明会形成层级不同的世界版本。个人投影受到身体、经验、注意和关系位置影响；组织需要把大量成员、资源、目标和流程压缩成共同指标与决策语言；文明则通过制度、知识、媒体、历史与符号，把更长时间尺度的现实组织成共享世界。\n\n这些世界版本彼此作用，却不能简单视为同一个视角。一个个人认为最重要的问题，可能不是组织当前最重要的约束；一个组织追求的效率，也可能与社会长期需要维护的稳定发生张力。不同层级拥有不同时间尺度、责任边界和信息容量。\n\n理解多层投影的意义，不是决定哪一个世界“绝对正确”，而是看清一个结论来自什么位置、服务什么尺度，以及它遗漏了哪些其他层级的差异。\n\n## 意义如何把经验组织成叙事与身份\n\n意义通过关系、叙事、信念与身份组织经验。同一个事件进入不同关系结构后，可能获得完全不同的重要性。一次失败可以被组织成学习、损失、羞耻、警讯或转向机会；这些意义会进一步影响下一步行动。\n\n意义并不是原始事件本身。它是系统把经验放进已有关系之后形成的解释组织。过去经验、当前目标、群体语言和身份位置都会影响这种组织过程。意义一旦稳定，会反过来选择注意：与既有叙事一致的信息更容易被看见，冲突信息可能被忽略或重新解释。\n\n因此，意义既能建立连续性，也可能形成限制。它帮助系统回答“这对我意味着什么”，让行动不必每次从零开始；但如果旧叙事不再适合现实，意义结构也需要被重新检查。\n\n## 符号与共同意义如何跨个体延续\n\n符号、原型与共享意义能够跨个体保存、传递并形成文明叙事。语言、图像、仪式、故事、制度名称和文化象征，都把复杂经验压缩成可以被重复识别的形式。符号使一个人没有亲历某段历史，也能够进入群体已经积累的意义网络。\n\n当大量个体长期使用相似符号和叙事，它们会成为协调工具。群体借此保存价值、角色和共同记忆，文明也因此能够跨世代延续某些结构。但共同叙事并不会因为被广泛共享就自动成为客观事实。它首先说明一个群体如何组织经验、保存意义和协调行动。\n\n从投影表面开始，现实被压缩成可经验版本；分辨率决定哪些差异被保留；不同层级形成各自世界；意义把经验组织成可行动的解释；符号则把这些解释带入更大的共同叙事。我们所经验的世界，因而既与现实结构有关，也与现实如何被选择、呈现、解释和传递有关。\n\n看清这条形成链，并不是否定经验，而是让经验拥有更清楚的位置：我们可以认真对待眼前世界，同时知道它是复杂现实经过投影后形成的一个可读取版本。",
+        "compositionNodeCodes": [
+          "KN-B1-P2-002",
+          "KN-B1-P2-003",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005",
+          "KN-B1-P2-006"
         ],
-        "summary": "投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。",
+        "sectionHeadings": [
+          "投影表面为什么是经验的入口",
+          "压缩与分辨率决定我们能看见什么",
+          "个人、组织与文明形成不同的世界版本",
+          "意义如何把经验组织成叙事与身份",
+          "符号与共同意义如何跨个体延续"
+        ],
+        "summary": "系统无法一次经验无限复杂的现实，只能通过投影表面选择信息、压缩细节并形成可操作的世界版本。个人、组织与文明由此形成不同投影，而意义、符号与共同叙事进一步组织行动和连续性。",
         "terminologyTermsUsed": [],
-        "title": "投影表面如何成为经验界面"
+        "title": "我们经验的世界如何被投影、压缩并赋予意义"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-B1-P2-002-ZH-HANS-PROG-V1",
-        "briefDigest": "b6bf20eae26953a17481f5e1a1324015a1bcab9883557ba2fcfd2ef37277d7f2",
-        "briefSchemaVersion": "PHI-OS-CANONICAL-PRODUCTION-BRIEF-v2.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-005-ZH-HANS-V1",
+        "briefDigest": "d14293c48a71706816230f1baf6321e4cd5bcfc04aebac6e2630d7341619a80c",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "20fd82d73e45fc8f75032ac434da3d2846321566116d283b2c4b1cdb8ec47a19",
-      "candidatePath": "content/knowledge/production/candidates/zh-Hans/KN-B1-P2-002/candidate.v1.json"
+      "promptDigest": "8901eb4256a2eefd908777cf95ab95ef719bcd771d9fb296ad4700948c72495c",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-005/zh-Hans/candidate.v1.json"
     },
     "en": {
       "nodeCode": "KN-B1-P2-002",
       "locale": "en",
-      "candidateCode": "CANDIDATE-KN-B1-P2-002-EN-V1",
-      "candidateDigest": "13486543c1128323fe3cce486457bae3b9ed92b4db84b1adbf8af14cb0ab7795",
+      "candidateCode": "CANDIDATE-ACU-B1-005-EN-V1",
+      "candidateDigest": "3cf363b07516922c6088bf5a6a7b2cb3b88014e1f7467550eb609c1354ca2c9a",
       "article": {
-        "bodyMarkdown": "# How Do Projection Surfaces Become Interfaces of Experience?\n\nProjection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited complexity itself.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Projection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited complexity itself. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
-        "sectionHeadings": [
-          "What the question is really asking",
-          "How the mechanism forms",
-          "General mechanism and case-specific judgment are different",
-          "A general framework and external facts are different",
-          "How reality continues into the next layer"
+        "articleUnitCode": "ACU-B1-005",
+        "bodyMarkdown": "# How Experienced Worlds Are Projected, Compressed, and Given Meaning\n\nReality can contain far more difference than any single observer can process at once. A person cannot simultaneously perceive every sound, relationship, history, possible path, and system state. An organization cannot bring all available information into every decision. Before complexity can enter experience and action, it has to be selected, compressed, and presented.\n\nThis is why projection matters. Projection does not have to mean the invention of a false world. It is the conversion of complex internal state into a finite version that can be read and acted upon. Different projections select different information, operate at different resolutions, and create worlds at different levels. Meaning then places experience into relations and narratives, while symbols compress Meaning into forms that can move across individuals. From Projection Surface to civilizational narrative, reality becomes something that can be experienced, interpreted, coordinated, and continued.\n\n## Why Projection Surfaces are the entry point of experience\n\nProjection Surface turns complex internal state into an interface for experience and action. What we directly encounter is rarely the complete internal Structure of a system. We encounter the surface available from our current position: visual signals, language, metrics, events, feedback, interfaces, and the expressions of other people.\n\nA surface is not necessarily false. It is the layer at which interaction becomes possible. A dashboard is a Projection Surface of an operating system. A price is a finite expression of more complex relationships. A spoken sentence is an external surface created from internal state through language, context, and choice.\n\nThe value of recognizing Projection Surfaces is the ability to distinguish what is visible from the larger Structure that produced it. The surface makes action possible precisely because it does not expose every internal detail at the same time.\n\n## Compression and resolution determine what can be seen\n\nProjection compression and resolution determine which differences enter experienced reality. Every projection has limited capacity, so some details must be merged, some differences emphasized, and some scale selected.\n\nAt very low resolution, important differences disappear. Looking only at total organizational revenue can hide completely different structures across business units. Looking only at the final result of an event can hide the long process that formed it. At extremely high resolution, however, an observer can become overwhelmed by detail and lose the ability to form an actionable whole.\n\nA useful projection is therefore not the one that displays the greatest possible amount of information. It is the one that preserves the differences that matter for the current question. Strategy often requires larger-scale Structure, while repair may require local detail. Projection is always related to purpose, position, and actionability.\n\n## People organizations and civilizations form different world versions\n\nPeople, organizations, and civilizations form world versions at different levels. Personal projection is shaped by the body, experience, attention, and relationship position. Organizations have to compress many people, resources, goals, and workflows into shared metrics and decision language. Civilizations organize longer time scales through institutions, knowledge, media, history, and symbols.\n\nThese world versions interact, but they should not be treated as the same viewpoint. What matters most to one person may not be the strongest constraint on an organization. What improves organizational efficiency can also conflict with the stability a society needs to maintain over decades. Different levels carry different time horizons, responsibilities, and information capacities.\n\nRecognizing layered projection is not primarily about declaring one world absolutely correct. It is about asking from which position a conclusion is formed, which scale it serves, and which differences at other levels it may leave outside the frame.\n\n## How Meaning organizes experience into narrative and identity\n\nMeaning organizes experience through relations, narratives, beliefs, and identity. The same event can acquire very different importance when it enters different relational structures. A failure can become learning, loss, shame, warning, or an opportunity to change direction. Those meanings then shape the next action.\n\nMeaning is not identical to the original event. It is the interpretive organization formed when experience enters existing relationships. Past experience, current goals, group language, and identity position all influence that organization. Once Meaning stabilizes, it also shapes attention: information that fits the existing narrative may become easier to notice, while conflicting information may be ignored or reinterpreted.\n\nMeaning can therefore create continuity and limitation at the same time. It helps a system answer what an experience means and prevents every decision from starting from zero. But when old narratives no longer fit current conditions, Meaning itself becomes something that may need to be reconsidered.\n\n## How symbols and shared Meaning continue across individuals\n\nSymbols, archetypes, and shared Meaning preserve, transmit, and coordinate experience across individuals into civilizational narratives. Language, images, rituals, stories, institutional names, and cultural symbols compress complex experience into recognizable forms. A person can enter a network of accumulated Meaning without personally living through every event that produced it.\n\nWhen many people repeatedly use similar symbols and narratives, those forms become tools of coordination. Groups preserve values, roles, and shared memory through them, and civilizations can continue some structures across generations. A shared narrative, however, does not automatically become objective fact merely because it is widely shared. It first tells us how a group organizes experience, preserves Meaning, and coordinates action.\n\nBeginning with Projection Surface, reality is compressed into an experienceable version. Resolution determines which differences remain visible. Different levels form different worlds. Meaning organizes experience into actionable interpretation. Symbols carry those interpretations into wider shared narratives.\n\nSeeing this chain does not invalidate experience. It gives experience a clearer position. We can take the world we encounter seriously while also recognizing that it is a readable version formed through selection, presentation, interpretation, and transmission within a much more complex reality.",
+        "compositionNodeCodes": [
+          "KN-B1-P2-002",
+          "KN-B1-P2-003",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005",
+          "KN-B1-P2-006"
         ],
-        "summary": "Projection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited comple…",
+        "sectionHeadings": [
+          "Why Projection Surfaces are the entry point of experience",
+          "Compression and resolution determine what can be seen",
+          "People organizations and civilizations form different world versions",
+          "How Meaning organizes experience into narrative and identity",
+          "How symbols and shared Meaning continue across individuals"
+        ],
+        "summary": "No observer or organization can experience unlimited complexity at once. Reality enters experience through projection surfaces that select information, compress detail, and create workable world versions. Meaning, symbols, and shared narratives then organize action and continuity.",
         "terminologyTermsUsed": [],
-        "title": "How Do Projection Surfaces Become Interfaces of Experience?"
+        "title": "How Experienced Worlds Are Projected, Compressed, and Given Meaning"
       },
       "sourceBrief": {
-        "briefCode": "BRIEF-KN-B1-P2-002-EN-BFA-PROG-V1",
-        "briefDigest": "e70b319c2f55edeccec9db3ae4162db89dc60960dfeedba8392f0d1f35638469",
-        "briefSchemaVersion": "PHI-OS-BFA-ENGLISH-PRODUCTION-BRIEF-v1.0.0",
-        "repositoryCommit": "4ca882d95f27b262bc21693a65eeff436a408905"
+        "briefCode": "BRIEF-ACU-B1-005-EN-V1",
+        "briefDigest": "4eac4e3b2a9b9b8353743c8fb31f939aafb973c230527f9b8e1cdf94a0fb1a3e",
+        "briefSchemaVersion": "PHI-OS-BFA-ARTICLE-COMPOSITION-BRIEF-v1.0.0",
+        "repositoryCommit": "a86f7343219b5939eed3e3cfbe09b1cde99531aa"
       },
-      "promptDigest": "18d0a0ae01d6dc7f4f44a9b6d4d6e4877584a907f788a9c76fc6238214156c3c",
-      "candidatePath": "content/knowledge/production/candidates/en/KN-B1-P2-002/candidate.v1.json"
+      "promptDigest": "b29688b9bfee666eb48c5ed6bba54f54265c5d29d7296cceff5ab5018b1bd80f",
+      "candidatePath": "content/knowledge/production/article-compositions/BATCH-003/ACU-B1-005/en/candidate.v1.json"
     }
   },
   "localeIdentity": {
@@ -182,29 +212,29 @@
     "identityModel": "BFA_PACKAGE_SCOPED_BILINGUAL_IDENTITY_CANDIDATE",
     "identities": {
       "zh-Hans": {
-        "slug": "projection-surfaces-become-experience-interfaces",
-        "displayQuestion": "投影表面如何成为经验界面",
-        "sourceAuthority": "KNR_L10N_CANONICAL"
+        "slug": "how-experienced-worlds-are-projected-compressed-and-given-meaning",
+        "displayQuestion": "我们经验的世界如何被投影、压缩并赋予意义",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       },
       "en": {
-        "slug": "projection-surfaces-become-experience-interfaces",
-        "displayQuestion": "How Do Projection Surfaces Become Interfaces of Experience?",
-        "sourceAuthority": "BFA_PACKAGE_SCOPED_EN_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
+        "slug": "how-experienced-worlds-are-projected-compressed-and-given-meaning",
+        "displayQuestion": "How Experienced Worlds Are Projected, Compressed, and Given Meaning",
+        "sourceAuthority": "BFA_ARTICLE_COMPOSITION_UNIT_IDENTITY_CANDIDATE_PENDING_TL_FINAL_APPROVAL"
       }
     },
     "independentLocaleAuthority": true,
     "globalLocaleRegistryMutation": false,
-    "sourceDigest": "ea1236c8636924f874efb2a16dff4d0c5057746b426d5d557cb288d4aaaf8168"
+    "sourceDigest": "1c69e258055a2d15a71f19d601796a2ba2fba5b6e01a09c86a2b586f73aac075"
   },
   "sameRouteIdentity": {
-    "canonicalRoute": "/articles/projection-surfaces-become-experience-interfaces",
-    "slug": "projection-surfaces-become-experience-interfaces",
+    "canonicalRoute": "/articles/how-experienced-worlds-are-projected-compressed-and-given-meaning",
+    "slug": "how-experienced-worlds-are-projected-compressed-and-given-meaning",
     "locales": [
       "zh-Hans",
       "en"
     ],
     "localePrefixAllowed": false,
-    "sourceDigest": "e73a6f704a0bdd16b4a8333c15a497ff8975500caa48cc3a505bd01c9e604b3c"
+    "sourceDigest": "f4bb2c0e542a59b140dae59bccc04699b5ce2967c0b4544732b8acc58a74bf1b"
   },
   "figure": {
     "state": "FIGURE_NOT_REQUIRED",
@@ -471,24 +501,40 @@
         {
           "requirementCode": "COV-001",
           "kind": "coverage",
-          "zhHansRequirement": "投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。",
-          "enRequirement": "Projection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited complexity itself.",
+          "zhHansRequirement": "投影表面为什么是经验的入口",
+          "enRequirement": "Why Projection Surfaces are the entry point of experience",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-001",
-          "kind": "distinction",
-          "zhHansRequirement": "PHI OS 的一般框架 与 外部可验证事实",
-          "enRequirement": "PHI OS general framework and externally verifiable facts",
+          "requirementCode": "COV-002",
+          "kind": "coverage",
+          "zhHansRequirement": "压缩与分辨率决定我们能看见什么",
+          "enRequirement": "Compression and resolution determine what can be seen",
           "zhHans": true,
           "en": true
         },
         {
-          "requirementCode": "DIST-002",
-          "kind": "distinction",
-          "zhHansRequirement": "一般机制 与 个案判断",
-          "enRequirement": "general mechanism and case-specific judgment",
+          "requirementCode": "COV-003",
+          "kind": "coverage",
+          "zhHansRequirement": "个人、组织与文明形成不同的世界版本",
+          "enRequirement": "People organizations and civilizations form different world versions",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-004",
+          "kind": "coverage",
+          "zhHansRequirement": "意义如何把经验组织成叙事与身份",
+          "enRequirement": "How Meaning organizes experience into narrative and identity",
+          "zhHans": true,
+          "en": true
+        },
+        {
+          "requirementCode": "COV-005",
+          "kind": "coverage",
+          "zhHansRequirement": "符号与共同意义如何跨个体延续",
+          "enRequirement": "How symbols and shared Meaning continue across individuals",
           "zhHans": true,
           "en": true
         }
@@ -498,21 +544,21 @@
       "evidenceOnly": true,
       "humanAcceptance": false
     },
-    "sourceDigest": "bc181955d3d4a2d54710e66d4529a8998dca2a7a184601d1e21e87c861bd99f3"
+    "sourceDigest": "8313113854f49ba773459f07e43d7f6d89008d01e64b0b3f8470c2cebc276fc0"
   },
   "presentationPreview": {
     "previewType": "CPR_FINAL_PRESENTATION_PREVIEW",
     "authority": "CPR_PROJECTION_ONLY",
     "nodeCode": "KN-B1-P2-002",
     "sameRoute": {
-      "canonicalRoute": "/articles/projection-surfaces-become-experience-interfaces",
-      "slug": "projection-surfaces-become-experience-interfaces",
+      "canonicalRoute": "/articles/how-experienced-worlds-are-projected-compressed-and-given-meaning",
+      "slug": "how-experienced-worlds-are-projected-compressed-and-given-meaning",
       "locales": [
         "zh-Hans",
         "en"
       ],
       "localePrefixAllowed": false,
-      "sourceDigest": "e73a6f704a0bdd16b4a8333c15a497ff8975500caa48cc3a505bd01c9e604b3c"
+      "sourceDigest": "f4bb2c0e542a59b140dae59bccc04699b5ce2967c0b4544732b8acc58a74bf1b"
     },
     "viewports": [
       "desktop",
@@ -521,25 +567,25 @@
     "articleShell": "PDS/CPR public article shell",
     "locales": {
       "zh-Hans": {
-        "title": "投影表面如何成为经验界面",
-        "summary": "投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。",
-        "bodyMarkdown": "# 投影表面如何成为经验界面\n\n投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。\n\n## 问题真正指向什么\n\n这篇文章讨论的不是某一个人、某一个组织或某一次事件应该得到什么结论，而是这个问题背后的关系如何在一般层面组织现实。只有把机制本身与具体结果分开，才能看见同一种关系为何可能在不同条件下产生不同表现。\n\n## 机制如何形成\n\n从系统角度看，投影表面把复杂内部状态转化为能够进入经验与行动的界面；系统实际接触的是被筛选、组织和呈现后的现实版本，而不是无限复杂度本身。 关键不在于把一个词变成标签，而在于理解不同状态之间如何通过关系、条件、反馈与持续形成可辨认的组织。只要条件改变，路径、强度与结果都可能随之改变，因此机制解释描述的是形成过程，而不是固定结局。\n\n## 一般机制与个案判断必须分开\n\n一般机制与个案判断必须分开。一般机制可以帮助我们理解某类关系为什么会出现，却不能仅凭这一层解释就替某个具体对象作出诊断、评价或行动结论。具体情况仍然需要对应的事实、位置、条件与证据。\n\n## 框架说明与外部事实必须分开\n\nPHI OS 的一般框架与外部可验证事实也必须分开。这里的框架用来整理关系和形成逻辑；当文章涉及具体物理、生物、社会或历史事实时，事实本身仍需要相应来源支持。框架可以帮助组织理解，但不会因为某个例子看起来相似，就把类比自动变成事实。\n\n## 现实如何继续向下一层展开\n\n当这一层关系被看清之后，现实就不再只是由孤立对象组成，而会显现为一连串可以继续追踪的结构变化。下一步不是重复同一个结论，而是继续观察这些关系在新的条件下如何连接、被限制、被放大或被投影，从而形成后续更复杂的现实版本。",
+        "title": "我们经验的世界如何被投影、压缩并赋予意义",
+        "summary": "系统无法一次经验无限复杂的现实，只能通过投影表面选择信息、压缩细节并形成可操作的世界版本。个人、组织与文明由此形成不同投影，而意义、符号与共同叙事进一步组织行动和连续性。",
+        "bodyMarkdown": "# 我们经验的世界如何被投影、压缩并赋予意义\n\n现实可以包含远超过任何单一观察者能够同时处理的差异。一个人无法一次感知所有声音、关系、历史、可能路径和系统状态；一个组织也不可能把全部信息同时带入每一次决策。要进入经验和行动，复杂现实必须先被选择、压缩和呈现。\n\n这就是投影的重要性。投影不是简单制造一个虚假世界，而是把复杂内部状态转化成有限、可读取、可行动的版本。不同投影选择不同信息、使用不同分辨率，并在不同层级形成世界。随后，意义把经验放入关系与叙事，符号又把意义压缩成可以跨个体传播的形式。于是，从投影表面到文明叙事，现实逐渐变成可以被经验、解释、协调和延续的世界。\n\n## 投影表面为什么是经验的入口\n\n投影表面把复杂内部状态转化为经验与行动界面。我们真正直接接触的，通常不是一个系统的全部内部结构，而是它对当前观察位置开放的表面：视觉、语言、指标、事件、反馈、界面和他人的表达。\n\n这种表面并不等于虚假。它是系统与观察者之间能够发生交互的层。一个仪表盘是真实系统的投影表面，一个价格是复杂供需关系的有限表达，一个人的一句话也是内部状态经过语言能力、情境和选择后形成的外部表面。\n\n理解投影表面的意义，在于知道“我们看见的”与“产生它的全部结构”并不是同一个范围。表面使行动成为可能，却也意味着大量内部细节没有同时进入经验。\n\n## 压缩与分辨率决定我们能看见什么\n\n投影压缩与分辨率决定哪些差异进入可经验现实。任何投影都有容量限制，因此必须合并部分细节、突出部分差异，并选择观察尺度。\n\n分辨率太低，关键差异可能被合并。例如只看一个组织的总收入，可能看不见不同业务之间完全不同的结构；只看一次事件的结果，也可能看不见形成结果的长期过程。分辨率过高，则可能让观察者被大量细节淹没，无法形成可行动的整体判断。\n\n好的投影不是“显示得越多越好”，而是在当前问题下保留足够重要的差异。不同任务需要不同分辨率：战略判断需要较大尺度的结构，具体修复则可能需要深入局部。投影因此总是与目的、位置和可操作性有关。\n\n## 个人、组织与文明形成不同的世界版本\n\n个人、组织与文明会形成层级不同的世界版本。个人投影受到身体、经验、注意和关系位置影响；组织需要把大量成员、资源、目标和流程压缩成共同指标与决策语言；文明则通过制度、知识、媒体、历史与符号，把更长时间尺度的现实组织成共享世界。\n\n这些世界版本彼此作用，却不能简单视为同一个视角。一个个人认为最重要的问题，可能不是组织当前最重要的约束；一个组织追求的效率，也可能与社会长期需要维护的稳定发生张力。不同层级拥有不同时间尺度、责任边界和信息容量。\n\n理解多层投影的意义，不是决定哪一个世界“绝对正确”，而是看清一个结论来自什么位置、服务什么尺度，以及它遗漏了哪些其他层级的差异。\n\n## 意义如何把经验组织成叙事与身份\n\n意义通过关系、叙事、信念与身份组织经验。同一个事件进入不同关系结构后，可能获得完全不同的重要性。一次失败可以被组织成学习、损失、羞耻、警讯或转向机会；这些意义会进一步影响下一步行动。\n\n意义并不是原始事件本身。它是系统把经验放进已有关系之后形成的解释组织。过去经验、当前目标、群体语言和身份位置都会影响这种组织过程。意义一旦稳定，会反过来选择注意：与既有叙事一致的信息更容易被看见，冲突信息可能被忽略或重新解释。\n\n因此，意义既能建立连续性，也可能形成限制。它帮助系统回答“这对我意味着什么”，让行动不必每次从零开始；但如果旧叙事不再适合现实，意义结构也需要被重新检查。\n\n## 符号与共同意义如何跨个体延续\n\n符号、原型与共享意义能够跨个体保存、传递并形成文明叙事。语言、图像、仪式、故事、制度名称和文化象征，都把复杂经验压缩成可以被重复识别的形式。符号使一个人没有亲历某段历史，也能够进入群体已经积累的意义网络。\n\n当大量个体长期使用相似符号和叙事，它们会成为协调工具。群体借此保存价值、角色和共同记忆，文明也因此能够跨世代延续某些结构。但共同叙事并不会因为被广泛共享就自动成为客观事实。它首先说明一个群体如何组织经验、保存意义和协调行动。\n\n从投影表面开始，现实被压缩成可经验版本；分辨率决定哪些差异被保留；不同层级形成各自世界；意义把经验组织成可行动的解释；符号则把这些解释带入更大的共同叙事。我们所经验的世界，因而既与现实结构有关，也与现实如何被选择、呈现、解释和传递有关。\n\n看清这条形成链，并不是否定经验，而是让经验拥有更清楚的位置：我们可以认真对待眼前世界，同时知道它是复杂现实经过投影后形成的一个可读取版本。",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       },
       "en": {
-        "title": "How Do Projection Surfaces Become Interfaces of Experience?",
-        "summary": "Projection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited comple…",
-        "bodyMarkdown": "# How Do Projection Surfaces Become Interfaces of Experience?\n\nProjection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited complexity itself.\n\n## What the question is really asking\n\nThis article is not a verdict about a particular person, organization, or event. It examines the relationship behind the question at a general systems level. Separating mechanism from outcome makes it possible to see why a similar relationship can appear differently under different conditions.\n\n## How the mechanism forms\n\nFrom a systems perspective, Projection surfaces transform complex internal states into interfaces that can enter experience and action. A system encounters a selected, organized, presented version of reality rather than unlimited complexity itself. The point is not to turn a concept into a label, but to understand how states become organized through relations, conditions, feedback, and continuity. When conditions change, the path, intensity, and result can also change. A mechanism therefore describes a formation process rather than a fixed destiny.\n\n## General mechanism and case-specific judgment are different\n\nGeneral mechanism and case-specific judgment must remain distinct. A general mechanism can clarify why a class of relationships may arise, but it cannot by itself diagnose, evaluate, or prescribe action for a particular case. A concrete case still depends on its own facts, position, constraints, and evidence.\n\n## A general framework and external facts are different\n\nThe PHI OS general framework and externally verifiable facts must also remain distinct. The framework organizes relationships and formation logic; specific physical, biological, social, or historical claims still require appropriate sources. An analogy can help understanding, but resemblance alone does not turn an example into evidence.\n\n## How reality continues into the next layer\n\nOnce this layer is visible, reality is easier to read as a sequence of structural changes rather than a collection of isolated objects. The next step is to follow how these relationships connect, become constrained, amplify, or project under new conditions, allowing more complex versions of reality to form.",
+        "title": "How Experienced Worlds Are Projected, Compressed, and Given Meaning",
+        "summary": "No observer or organization can experience unlimited complexity at once. Reality enters experience through projection surfaces that select information, compress detail, and create workable world versions. Meaning, symbols, and shared narratives then organize action and continuity.",
+        "bodyMarkdown": "# How Experienced Worlds Are Projected, Compressed, and Given Meaning\n\nReality can contain far more difference than any single observer can process at once. A person cannot simultaneously perceive every sound, relationship, history, possible path, and system state. An organization cannot bring all available information into every decision. Before complexity can enter experience and action, it has to be selected, compressed, and presented.\n\nThis is why projection matters. Projection does not have to mean the invention of a false world. It is the conversion of complex internal state into a finite version that can be read and acted upon. Different projections select different information, operate at different resolutions, and create worlds at different levels. Meaning then places experience into relations and narratives, while symbols compress Meaning into forms that can move across individuals. From Projection Surface to civilizational narrative, reality becomes something that can be experienced, interpreted, coordinated, and continued.\n\n## Why Projection Surfaces are the entry point of experience\n\nProjection Surface turns complex internal state into an interface for experience and action. What we directly encounter is rarely the complete internal Structure of a system. We encounter the surface available from our current position: visual signals, language, metrics, events, feedback, interfaces, and the expressions of other people.\n\nA surface is not necessarily false. It is the layer at which interaction becomes possible. A dashboard is a Projection Surface of an operating system. A price is a finite expression of more complex relationships. A spoken sentence is an external surface created from internal state through language, context, and choice.\n\nThe value of recognizing Projection Surfaces is the ability to distinguish what is visible from the larger Structure that produced it. The surface makes action possible precisely because it does not expose every internal detail at the same time.\n\n## Compression and resolution determine what can be seen\n\nProjection compression and resolution determine which differences enter experienced reality. Every projection has limited capacity, so some details must be merged, some differences emphasized, and some scale selected.\n\nAt very low resolution, important differences disappear. Looking only at total organizational revenue can hide completely different structures across business units. Looking only at the final result of an event can hide the long process that formed it. At extremely high resolution, however, an observer can become overwhelmed by detail and lose the ability to form an actionable whole.\n\nA useful projection is therefore not the one that displays the greatest possible amount of information. It is the one that preserves the differences that matter for the current question. Strategy often requires larger-scale Structure, while repair may require local detail. Projection is always related to purpose, position, and actionability.\n\n## People organizations and civilizations form different world versions\n\nPeople, organizations, and civilizations form world versions at different levels. Personal projection is shaped by the body, experience, attention, and relationship position. Organizations have to compress many people, resources, goals, and workflows into shared metrics and decision language. Civilizations organize longer time scales through institutions, knowledge, media, history, and symbols.\n\nThese world versions interact, but they should not be treated as the same viewpoint. What matters most to one person may not be the strongest constraint on an organization. What improves organizational efficiency can also conflict with the stability a society needs to maintain over decades. Different levels carry different time horizons, responsibilities, and information capacities.\n\nRecognizing layered projection is not primarily about declaring one world absolutely correct. It is about asking from which position a conclusion is formed, which scale it serves, and which differences at other levels it may leave outside the frame.\n\n## How Meaning organizes experience into narrative and identity\n\nMeaning organizes experience through relations, narratives, beliefs, and identity. The same event can acquire very different importance when it enters different relational structures. A failure can become learning, loss, shame, warning, or an opportunity to change direction. Those meanings then shape the next action.\n\nMeaning is not identical to the original event. It is the interpretive organization formed when experience enters existing relationships. Past experience, current goals, group language, and identity position all influence that organization. Once Meaning stabilizes, it also shapes attention: information that fits the existing narrative may become easier to notice, while conflicting information may be ignored or reinterpreted.\n\nMeaning can therefore create continuity and limitation at the same time. It helps a system answer what an experience means and prevents every decision from starting from zero. But when old narratives no longer fit current conditions, Meaning itself becomes something that may need to be reconsidered.\n\n## How symbols and shared Meaning continue across individuals\n\nSymbols, archetypes, and shared Meaning preserve, transmit, and coordinate experience across individuals into civilizational narratives. Language, images, rituals, stories, institutional names, and cultural symbols compress complex experience into recognizable forms. A person can enter a network of accumulated Meaning without personally living through every event that produced it.\n\nWhen many people repeatedly use similar symbols and narratives, those forms become tools of coordination. Groups preserve values, roles, and shared memory through them, and civilizations can continue some structures across generations. A shared narrative, however, does not automatically become objective fact merely because it is widely shared. It first tells us how a group organizes experience, preserves Meaning, and coordinates action.\n\nBeginning with Projection Surface, reality is compressed into an experienceable version. Resolution determines which differences remain visible. Different levels form different worlds. Meaning organizes experience into actionable interpretation. Symbols carry those interpretations into wider shared narratives.\n\nSeeing this chain does not invalidate experience. It gives experience a clearer position. We can take the world we encounter seriously while also recognizing that it is a readable version formed through selection, presentation, interpretation, and transmission within a much more complex reality.",
         "figurePlacement": null,
         "caption": null,
         "alt": null,
         "relatedContent": []
       }
     },
-    "sourceDigest": "d503fdbcca95c02d6d80a35592df2e07bc7e3e2cb6e7770d7a422fc6c58a8dfe"
+    "sourceDigest": "322ff1296f01ce5b159a6d33871f3d7edd07f2eef3109063a3beb2d352dedc40"
   },
   "accessibility": {
     "status": "PASS",
@@ -563,8 +609,8 @@
     "blockers": [],
     "sourceDigest": "5bf097a33ff6234baa80f4165af7f70e38b199bc2971ae6bc9794a752c6ecd28"
   },
-  "assembledAt": "2026-08-17T10:22:47.664Z",
+  "assembledAt": "2026-08-17T12:10:28.548Z",
   "reviewState": "PENDING",
   "decisionState": "PENDING",
-  "finalPackageDigest": "294c9a0ead15ae462d83f502b9f43dbe2ee85952909391ee82914a081de0e593"
+  "finalPackageDigest": "2a3d3b6cdaf74738b43c2eb413e45812c91f1268e2f16d16fad6bc598a07d3b6"
 }
