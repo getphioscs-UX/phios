@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import { spawnSync } from 'node:child_process';
+const run=(cmd,args)=>{const r=spawnSync(cmd,args,{stdio:'inherit',shell:process.platform==='win32'});assert.equal(r.status,0,`${cmd} ${args.join(' ')} failed`);};
+const npm=process.platform==='win32'?'npm.cmd':'npm';
+run(npm,['run','check:mir-1']);
+run(npm,['run','check:mfig']);
+run(npm,['run','check:ir-w6']);
+run(npm,['run','check:car-w4']);
+run(npm,['run','check:mcd-6']);
+const p='content/reconciliation/mir/mir-2-mfig-figure-authority-reconciliation-v1.json';
+const x=JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=q=>crypto.createHash('sha256').update(fs.readFileSync(q)).digest('hex');
+assert.equal(x.work,'MIR-2'); assert.equal(x.status,'COMPLETE'); assert.equal(x.mfigCount,50); assert.equal(x.canonicalTitleCount,50); assert.equal(x.authoritativeUnresolvedCount,0);
+assert.equal(sha(x.preservationEvidence.bookFigureRegistryPath),x.preservationEvidence.bookFigureRegistrySha256,'book figure registry drift');
+assert.equal(sha(x.preservationEvidence.mcd6IdentityOnlyBindingPath),x.preservationEvidence.mcd6IdentityOnlyBindingSha256,'historical MCD-6 MFIG binding drift');
+assert.equal(x.preservationEvidence.frozenPredecessorMutationCount,0);
+for (const [gate,value] of Object.entries(x.exitGate)) assert.equal(value,true,`MIR-2 exit gate failed: ${gate}`);
+for (const [path,digest] of Object.entries(x.artifacts)) { assert.ok(fs.existsSync(path),`missing MIR-2 artifact ${path}`); assert.equal(sha(path),digest,`MIR-2 artifact drift ${path}`); }
+console.log('✓ MIR-2 Canonical MFIG + Figure Authority Reconciliation passed. 50 identities frozen; CAR/MCD/IR remain separate; dependency never implies causality.');
