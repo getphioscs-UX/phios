@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-BFA-AUTO-C2C3-BOOK-SOURCE-AUTHORITY-SUCCESSOR-v1.0.0",
+  "work": "BFA-AUTO-C2C3-BOOK-SOURCE-AUTHORITY-SUCCESSOR",
+  "status": "ACTIVE_BOOK_SCOPED_SOURCE_AUTHORITY_SUCCESSOR",
+  "baselineCommit": "07f525b2047498364fea5a4ae0f9a51c37a47dd1",
+  "purpose": "Make Automatic C2/C3 consume the Human-accepted manuscript/mapping authority actually owned by each publication book instead of hard-coding BOOK-1 KAU-R3 and BOOK-1 section inventory semantics.",
+  "rules": {
+    "bookScopedSectionInventoryRequired": true,
+    "book1Inventory": "content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json",
+    "book2Inventory": "content/knowledge/manuscripts/extraction/book-2-full-section-inventory-v1.json",
+    "versionedKauHumanAcceptedAuthorityAllowed": true,
+    "acceptedKauAuthorityPattern": "^KAU-R\\d+_HUMAN_ACCEPTED_",
+    "book2KauR4PrimaryAuthorityIsNormalPath": true,
+    "humanAcceptedCompositeSourceCoverageMaySatisfySourceBinding": true,
+    "compositeCoverageRequiresExplicitHumanResolution": true,
+    "compositeCoverageDoesNotCreateNewHumanApproval": true,
+    "missingBookInventoryFailsClosed": true,
+    "missingOrUnacceptedCoverageFailsClosed": true,
+    "routineC2HumanReviewRemainsDisabled": true,
+    "routineC3HumanReviewRemainsDisabled": true,
+    "bfaFinalPublicationApprovalRemainsHuman": true
+  },
+  "book2CompositeAuthority": {
+    "coverageRegistry": "content/knowledge/reconciliation/kau-r4/book-2-canonical-coverage-v1.json",
+    "humanResolution": "content/knowledge/reconciliation/kau-r4/kau-r4-human-resolution-v1.json",
+    "acceptedDecision": "ACCEPT_COMPOSITE_SOURCE_COVERAGE",
+    "coveredNodes": [
+      "KN-B2-P6-005",
+      "KN-B2-P6-012"
+    ]
+  },
+  "authorityBoundary": {
+    "createsCanonicalMeaning": false,
+    "createsNewKauMappingAuthority": false,
+    "createsHumanC2Approval": false,
+    "createsHumanC3Approval": false,
+    "createsBfaFinalApproval": false,
+    "createsPublication": false
+  }
+}

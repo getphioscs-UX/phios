@@ -20,12 +20,14 @@ const progressionDeferSuccessor=fs.existsSync(path.join(root,progressionDeferSuc
 const compositionSuccessorPath='content/production/bilingual-final-approval/progression-v2/freeze/bfa-article-composition-successor-freeze-v1.json';
 const compositionSuccessor=fs.existsSync(path.join(root,compositionSuccessorPath))?read(compositionSuccessorPath):null;
 const autoC2C3SuccessorPath='content/production/bilingual-final-approval/progression-v2/freeze/bfa-auto-c2c3-successor-freeze-v1.json';
+const autoC2C3BookSuccessorPath='content/production/bilingual-final-approval/progression-v2/freeze/bfa-auto-c2c3-book-source-authority-successor-freeze-v1.json';
+const autoC2C3BookSuccessor=fs.existsSync(path.join(root,autoC2C3BookSuccessorPath))?read(autoC2C3BookSuccessorPath):null;
 const autoC2C3Successor=fs.existsSync(path.join(root,autoC2C3SuccessorPath))?read(autoC2C3SuccessorPath):null;
 assert.equal(progressionSuccessor.status,'FROZEN_ADDITIVE_BFA_PROGRESSION_V2_SUCCESSOR');
 assert.equal(progressionSuccessor.predecessorFreeze,'content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json');
 const latestBeforeComposition=(p,historical)=>progressionDeferSuccessor?.files?.[p]??progressionDeferSuccessor?.reconciledPredecessorFiles?.[p]?.successorSha256??progressionSuccessor?.files?.[p]??progressionSuccessor?.reconciledPredecessorFiles?.[p]?.successorSha256??historical;
 const compositionDigestFor=(p,historical)=>compositionSuccessor?.files?.[p]??compositionSuccessor?.reconciledPredecessorFiles?.[p]?.successorSha256??latestBeforeComposition(p,historical);
-const acceptAutoSuccessor=(p,actual,historical)=>{const successor=autoC2C3Successor?.reconciledPredecessorFiles?.[p];if(!successor)return false;assert.equal(successor.predecessorSha256,compositionDigestFor(p,historical),`BFA AUTO-C2/C3 predecessor digest mismatch: ${p}`);assert.equal(successor.successorSha256,actual,`BFA AUTO-C2/C3 successor digest mismatch: ${p}`);return true;};
+const acceptAutoSuccessor=(p,actual,historical)=>{const successor=autoC2C3Successor?.reconciledPredecessorFiles?.[p];if(!successor)return false;assert.equal(successor.predecessorSha256,compositionDigestFor(p,historical),`BFA AUTO-C2/C3 predecessor digest mismatch: ${p}`);const bookSuccessor=autoC2C3BookSuccessor?.reconciledPredecessorFiles?.[p];if(bookSuccessor){assert.equal(bookSuccessor.predecessorSha256,successor.successorSha256,`BFA AUTO-C2/C3 Book-source predecessor digest mismatch: ${p}`);assert.equal(bookSuccessor.successorSha256,actual,`BFA AUTO-C2/C3 Book-source successor digest mismatch: ${p}`);return true;}assert.equal(successor.successorSha256,actual,`BFA AUTO-C2/C3 successor digest mismatch: ${p}`);return true;};
 for(const [p,d] of Object.entries(freeze.files)){
   const actual=shaFile(p);
   if(actual===d)continue;
@@ -79,10 +81,20 @@ if(compositionSuccessor){
 if(autoC2C3Successor){
   assert.equal(autoC2C3Successor.status,'FROZEN_ADDITIVE_BFA_AUTO_C2C3_SUCCESSOR');
   assert.equal(autoC2C3Successor.predecessorFreeze,compositionSuccessorPath);
-  for(const [p,d] of Object.entries(autoC2C3Successor.files))assert.equal(shaFile(p),d,`BFA AUTO-C2/C3 successor capability drift: ${p}`);
+  for(const [p,d] of Object.entries(autoC2C3Successor.files)){
+    const actual=shaFile(p);if(actual===d)continue;
+    const successor=autoC2C3BookSuccessor?.reconciledPredecessorFiles?.[p];
+    if(successor){assert.equal(successor.predecessorSha256,d,`BFA AUTO-C2/C3 Book-source predecessor digest mismatch: ${p}`);assert.equal(successor.successorSha256,actual,`BFA AUTO-C2/C3 Book-source successor digest mismatch: ${p}`);continue;}
+    assert.equal(actual,d,`BFA AUTO-C2/C3 successor capability drift: ${p}`);
+  }
+}
+if(autoC2C3BookSuccessor){
+  assert.equal(autoC2C3BookSuccessor.status,'FROZEN_ADDITIVE_BFA_AUTO_C2C3_BOOK_SOURCE_AUTHORITY_SUCCESSOR');
+  assert.equal(autoC2C3BookSuccessor.predecessorFreeze,autoC2C3SuccessorPath);
+  for(const [p,d] of Object.entries(autoC2C3BookSuccessor.files))assert.equal(shaFile(p),d,`BFA AUTO-C2/C3 Book-source successor capability drift: ${p}`);
 }
 console.log('✓ BFA-W28～W39 responsive/accessibility workspace, progress/resume/audit contracts, machine-human checker and historical reconciliation passed.');
 console.log('✓ BFA-W35 fixture proves 6 PASS / 2 WARNING / 1 FIGURE_PENDING / 1 BLOCKED; clean batch approval creates six package-scoped TL authorities.');
 console.log('✓ BFA-W36 no-approval publication fails closed with zero side effects; BFA-W37 rerun is byte-stable/idempotent.');
 console.log('✓ BFA-W38 production capability acceptance passed without fabricating real BATCH-002 content/publication evidence.');
-console.log(`✓ BFA-W39 historical capability freeze verified ${Object.keys(freeze.files).length} files; BFA-PROG v2, explicit-defer v2.1, Article Composition v1, and AUTO-C2/C3 v1 are accepted only through chained digest-bound additive successor freezes.`);
+console.log(`✓ BFA-W39 historical capability freeze verified ${Object.keys(freeze.files).length} files; BFA-PROG v2, explicit-defer v2.1, Article Composition v1, AUTO-C2/C3 v1, and the cross-book source-authority successor are accepted only through chained digest-bound additive successor freezes.`);

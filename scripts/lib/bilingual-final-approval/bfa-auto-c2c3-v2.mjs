@@ -11,7 +11,12 @@ const PLAN='content/production/bilingual-final-approval/progression-v2/plans/com
 const ORDER='content/production/bilingual-final-approval/progression-v2/registries/canonical-publication-order-v1.json';
 const NODES='content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json';
 const BINDINGS='content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json';
-const INVENTORY='content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json';
+const INVENTORIES={
+ 'BOOK-1':'content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json',
+ 'BOOK-2':'content/knowledge/manuscripts/extraction/book-2-full-section-inventory-v1.json'
+};
+const BOOK2_COVERAGE='content/knowledge/reconciliation/kau-r4/book-2-canonical-coverage-v1.json';
+const BOOK2_HUMAN_RESOLUTION='content/knowledge/reconciliation/kau-r4/kau-r4-human-resolution-v1.json';
 const KSAR='content/knowledge/review/ksar-human-pdf-extract-review-resolution-v1.json';
 const REPAIRS='content/knowledge/review/ksar-r4-repair-final-verification-v1.json';
 const REVIEWED_CORPUS='content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json';
@@ -43,30 +48,42 @@ function effectiveSourceReview(root,sectionCode,mappingSha){
  if(directAccepted)return {ready:true,reviewMode:'DIRECT_HUMAN_APPROVAL',decision:direct.decision,effectiveReviewedTextSha256:direct.sourceDigest??mappingSha,sourceTextSha256:direct.sourceDigest??mappingSha,evidence:KSAR};
  return {ready:false,reviewMode:'NOT_ACCEPTED',decision:direct?.decision??null,effectiveReviewedTextSha256:null,sourceTextSha256:mappingSha,evidence:direct?KSAR:null};
 }
+function acceptedMappingAuthority(value){return /^KAU-R\d+_HUMAN_ACCEPTED_/.test(String(value??''));}
+function compositeCoverageMap(root,bookCode){
+ if(bookCode!=='BOOK-2'||!exists(root,BOOK2_COVERAGE)||!exists(root,BOOK2_HUMAN_RESOLUTION))return new Map();
+ const coverage=read(root,BOOK2_COVERAGE);const resolution=read(root,BOOK2_HUMAN_RESOLUTION);
+ const accepted=new Set((resolution.compositeSourceDecisions??[]).filter(x=>x.decision==='ACCEPT_COMPOSITE_SOURCE_COVERAGE').map(x=>x.nodeCode));
+ return new Map((coverage.records??[]).filter(x=>x.coverageType==='COMPOSITE_SOURCE_COVERAGE'&&x.humanAcceptance==='ACCEPTED'&&accepted.has(x.nodeCode)).map(x=>[x.nodeCode,x]));
+}
 function authorityInputs(root,batchCode){
  const plan=read(root,PLAN); const batch=plan.batches.find(x=>x.batchCode===batchCode); if(!batch)throw new Error(`AUTO_C2C3_UNKNOWN_BATCH:${batchCode}`);
  const order=read(root,ORDER); const orderMap=new Map(order.records.map(x=>[x.nodeCode,x]));
  const nodes=read(root,NODES); const nodeMap=new Map(nodes.nodes.map(x=>[x.nodeCode,x]));
  const bindings=read(root,BINDINGS); const primaries=new Map();
  for(const b of bindings.records.filter(x=>x.mappingRole==='PRIMARY')){const a=primaries.get(b.nodeCode)??[];a.push(b);primaries.set(b.nodeCode,a);}
- const inventory=read(root,INVENTORY); const sectionMap=new Map(inventory.sections.map(x=>[x.sectionCode,x]));
+ const inventoryRel=INVENTORIES[batch.bookCode]??null; const inventory=inventoryRel&&exists(root,inventoryRel)?read(root,inventoryRel):null; const sectionMap=new Map((inventory?.sections??[]).map(x=>[x.sectionCode,x]));
  const corpus=read(root,REVIEWED_CORPUS); const corpusRecord=corpus.records.find(x=>x.bookCode===batch.bookCode&&x.locale==='zh-Hans')??null;
- return {batch,orderMap,nodeMap,primaries,sectionMap,corpusRecord};
+ const composites=compositeCoverageMap(root,batch.bookCode);
+ return {batch,orderMap,nodeMap,primaries,sectionMap,corpusRecord,inventoryRel,composites};
 }
 function deriveEntry(root,batchCode,nodeCode,input){
- const {orderMap,nodeMap,primaries,sectionMap,corpusRecord}=input;
- const exceptions=[]; const o=orderMap.get(nodeCode); const n=nodeMap.get(nodeCode); const maps=primaries.get(nodeCode)??[];
+ const {orderMap,nodeMap,primaries,sectionMap,corpusRecord,inventoryRel,composites}=input;
+ const exceptions=[]; const o=orderMap.get(nodeCode); const n=nodeMap.get(nodeCode); const maps=primaries.get(nodeCode)??[]; const composite=composites.get(nodeCode)??null;
  if(!o)exceptions.push('CANONICAL_PUBLICATION_ORDER_MISSING');
  if(!n)exceptions.push('CANONICAL_NODE_MISSING');
  if(n&&['deprecated','superseded'].includes(String(n.registryStatus).toLowerCase()))exceptions.push('NODE_INACTIVE_OR_SUPERSEDED');
- if(maps.length===0)exceptions.push('PRIMARY_MAPPING_MISSING');
- const acceptedMaps=maps.filter(m=>m.status==='APPROVED'&&m.authorityStatus==='APPROVED'&&String(m.authority??'').startsWith('KAU-R3_HUMAN_ACCEPTED'));
+ if(!inventoryRel)exceptions.push('BOOK_MANUSCRIPT_INVENTORY_UNAVAILABLE');
+ const acceptedMaps=maps.filter(m=>m.status==='APPROVED'&&m.authorityStatus==='APPROVED'&&acceptedMappingAuthority(m.authority));
  if(maps.length&&acceptedMaps.length!==maps.length)exceptions.push('MAPPING_NOT_HUMAN_ACCEPTED');
- // KAU-R3 may intentionally bind one Canonical Node to multiple Human-accepted
- // PRIMARY sections via EXPANDED_MATCH. That is already Human mapping authority,
- // not a new ambiguity requiring C2 review. Only mixed/non-accepted mappings
- // escalate. All accepted PRIMARY source sections are therefore composed here.
+ if(maps.length===0&&!composite)exceptions.push('HUMAN_ACCEPTED_SOURCE_COVERAGE_MISSING');
+ // Human-accepted KAU authorities are versioned by book/reconciliation wave.
+ // A later KAU-R4 (or future KAU-Rn) Human Accepted authority is not weaker than
+ // KAU-R3 merely because the stage number differs. Multiple accepted PRIMARY
+ // EXPANDED_MATCH bindings and explicitly accepted COMPOSITE_SOURCE_COVERAGE
+ // are already upstream Human mapping/coverage decisions, so AUTO-C2 composes
+ // them without inventing a new Human C2 approval.
  const sourceBindings=acceptedMaps.map(m=>{const section=sectionMap.get(m.sectionCode);if(!section)exceptions.push('SOURCE_SECTION_INVENTORY_MISSING');const sourceReview=effectiveSourceReview(root,m.sectionCode,m.sectionTextSha256);if(!sourceReview?.ready)exceptions.push('SOURCE_SECTION_NOT_HUMAN_REVIEWED');return {mappingCode:m.mappingCode,sectionCode:m.sectionCode,mappingRole:m.mappingRole,reconciliationDecision:m.reconciliationDecision,mappingAuthority:m.authority,mappingAcceptedDate:m.acceptedDate,mappingSectionTextSha256:m.sectionTextSha256,sectionHeading:section?.heading??null,startPage:section?.startPage??null,endPage:section?.endPage??null,sourceReview};});
+ if(composite){for(const [i,sectionCode] of (composite.supportingSectionCodes??[]).entries()){const section=sectionMap.get(sectionCode);if(!section)exceptions.push('SOURCE_SECTION_INVENTORY_MISSING');const sectionSha=section?.textSha256??null;const sourceReview=effectiveSourceReview(root,sectionCode,sectionSha);if(!sourceReview?.ready)exceptions.push('SOURCE_SECTION_NOT_HUMAN_REVIEWED');sourceBindings.push({mappingCode:`KAU-R4-COMPOSITE-${nodeCode}-${String(i+1).padStart(2,'0')}`,sectionCode,mappingRole:'SUPPORTING_COMPOSITE',reconciliationDecision:'ACCEPT_COMPOSITE_SOURCE_COVERAGE',mappingAuthority:'KAU-R4_HUMAN_ACCEPTED_COMPOSITE_SOURCE_COVERAGE',mappingAcceptedDate:'2026-08-13',mappingSectionTextSha256:sectionSha,sectionHeading:section?.heading??null,startPage:section?.startPage??null,endPage:section?.endPage??null,sourceReview});}}
  if(!corpusRecord||corpusRecord.humanReadabilityStatus!=='HUMAN_REVIEW_COMPLETE')exceptions.push('REVIEWED_MANUSCRIPT_CORPUS_NOT_READY');
  const sourceBinding=sourceBindings[0]??null;
  const canonical={nodeCode,titleZhHans:o?.titleZhHans??nodeCode,canonicalQuestionKey:o?.canonicalQuestionKey??n?.canonicalQuestionKey??null,nodeType:n?.nodeType??null,knowledgeLevel:n?.knowledgeLevel??null,bookCode:o?.bookCode??m?.bookCode??null,partCode:o?.partCode??m?.partCode??null};
