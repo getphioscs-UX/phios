@@ -122,11 +122,19 @@ export function runAutomaticPreflight({ projection, candidate, locale, sameRoute
   return evidence;
 }
 
-export function compareCanonicalMeaningCoverage(projection, zhEvidence, enEvidence) {
-  const req = [...(projection.requiredCoverage??[]), ...(projection.requiredDistinctions??[])];
-  const byCode = e => new Map((e?.checks??[]).map(x=>[x.code,x]));
-  const z=byCode(zhEvidence), e=byCode(enEvidence);
-  return { comparisonType:'CANONICAL_MEANING_COVERAGE_NOT_LITERAL_TRANSLATION_DIFF', requirements:req.map(requirement=>({ requirement, zhHans:z.get('REQUIRED_CONCEPT_COVERAGE')?.status!=='BLOCKED' && z.get('REQUIRED_DISTINCTION_COVERAGE')?.status!=='BLOCKED', en:e.get('REQUIRED_CONCEPT_COVERAGE')?.status!=='BLOCKED' && e.get('REQUIRED_DISTINCTION_COVERAGE')?.status!=='BLOCKED' })) };
+export function compareCanonicalMeaningCoverage(zhProjection, enProjectionOrZhEvidence, zhEvidenceOrEnEvidence, maybeEnEvidence) {
+  const fourArg = maybeEnEvidence !== undefined;
+  const enProjection = fourArg ? enProjectionOrZhEvidence : zhProjection;
+  const zhEvidence = fourArg ? zhEvidenceOrEnEvidence : enProjectionOrZhEvidence;
+  const enEvidence = fourArg ? maybeEnEvidence : zhEvidenceOrEnEvidence;
+  const zConcept = (zhEvidence?.checks??[]).find(x=>x.code==='REQUIRED_CONCEPT_COVERAGE')?.status!=='BLOCKED';
+  const zDist = (zhEvidence?.checks??[]).find(x=>x.code==='REQUIRED_DISTINCTION_COVERAGE')?.status!=='BLOCKED';
+  const eConcept = (enEvidence?.checks??[]).find(x=>x.code==='REQUIRED_CONCEPT_COVERAGE')?.status!=='BLOCKED';
+  const eDist = (enEvidence?.checks??[]).find(x=>x.code==='REQUIRED_DISTINCTION_COVERAGE')?.status!=='BLOCKED';
+  const zhReq=[...(zhProjection?.requiredCoverage??[]).map((text,index)=>({requirementCode:`COV-${String(index+1).padStart(3,'0')}`,kind:'coverage',text})),...(zhProjection?.requiredDistinctions??[]).map((text,index)=>({requirementCode:`DIST-${String(index+1).padStart(3,'0')}`,kind:'distinction',text}))];
+  const enReq=[...(enProjection?.requiredCoverage??[]).map((text,index)=>({requirementCode:`COV-${String(index+1).padStart(3,'0')}`,kind:'coverage',text})),...(enProjection?.requiredDistinctions??[]).map((text,index)=>({requirementCode:`DIST-${String(index+1).padStart(3,'0')}`,kind:'distinction',text}))];
+  const enMap=new Map(enReq.map(x=>[x.requirementCode,x]));
+  return {comparisonType:'CANONICAL_MEANING_COVERAGE_NOT_LITERAL_TRANSLATION_DIFF',matchingBasis:'REQUIREMENT_CODE_SHARED_CANONICAL_MEANING',requirements:zhReq.map(z=>({requirementCode:z.requirementCode,kind:z.kind,zhHansRequirement:z.text,enRequirement:enMap.get(z.requirementCode)?.text??null,zhHans:z.kind==='coverage'?zConcept:zDist,en:z.kind==='coverage'?eConcept:eDist}))};
 }
 
 export function validateFigureRequirement(figure) {
