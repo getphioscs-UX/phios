@@ -1,0 +1,3 @@
+import assert from 'node:assert/strict';
+import {resolveGateLine} from '../functions/method-runtime/personal-structure/gate-line.js';
+const eps=1e-9;const starts=[302,302.9375,303.875,304.8125,305.75,306.6875];for(let i=0;i<6;i++){const a=resolveGateLine(starts[i]);assert.equal(a.gate,41);assert.equal(a.line,i+1);assert.equal(a.boundaryExact,true);assert.ok(Math.abs(a.positionWithinLineDeg)<eps);}assert.equal(resolveGateLine(307.624999999).line,6);assert.equal(resolveGateLine(307.625).gate,19);assert.equal(resolveGateLine(307.625).line,1);assert.equal(resolveGateLine(360).eclipticLongitude,0);console.log('✓ Personal Structure Gate/Line passed: [start,end) boundaries and explicit floating tolerance are stable.');

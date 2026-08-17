@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-PERSONAL-STRUCTURE-AUTHORITY-PRECEDENCE-v1.0.0",
+  "work": "MIR-3",
+  "status": "ACTIVE",
+  "precedence": [
+    {
+      "rank": 1,
+      "code": "EMOTIONAL",
+      "when": "SOLAR_PLEXUS defined"
+    },
+    {
+      "rank": 2,
+      "code": "SACRAL",
+      "when": "SACRAL defined"
+    },
+    {
+      "rank": 3,
+      "code": "SPLENIC",
+      "when": "SPLEEN defined"
+    },
+    {
+      "rank": 4,
+      "code": "SELF_PROJECTED",
+      "when": "connected(G,THROAT)"
+    },
+    {
+      "rank": 5,
+      "code": "EGO_MANIFESTED",
+      "when": "connected(EGO,THROAT)"
+    },
+    {
+      "rank": 6,
+      "code": "EGO_PROJECTED",
+      "when": "connected(EGO,G)"
+    },
+    {
+      "rank": 7,
+      "code": "MENTAL_ENVIRONMENTAL",
+      "when": "type PROJECTOR and definedCenters subset of {HEAD,AJNA,THROAT}"
+    },
+    {
+      "rank": 8,
+      "code": "LUNAR",
+      "when": "definedCenterCount == 0"
+    }
+  ],
+  "connectivityMeansSameDefinedGraphPath": true,
+  "example": "G↔THROAT↔EGO => SELF_PROJECTED before EGO_MANIFESTED"
+}
