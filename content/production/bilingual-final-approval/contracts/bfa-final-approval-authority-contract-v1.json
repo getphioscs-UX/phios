@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-BFA-FINAL-APPROVAL-AUTHORITY-CONTRACT-v1.0.0",
+  "work": "BFA-W0",
+  "status": "CONTRACT_ONLY_NO_DECISION_CREATED",
+  "authorityType": "BILINGUAL_FINAL_PUBLICATION_APPROVAL",
+  "authorityOwner": "TL",
+  "inputAuthority": "BFA_COMPLETE_PUBLICATION_PACKAGE",
+  "requiredBinding": {
+    "nodeCodeRequired": true,
+    "batchCodeRequired": true,
+    "finalPackageDigestRequired": true,
+    "finalPackageDigestPattern": "^[a-f0-9]{64}$",
+    "reviewerCode": "TL"
+  },
+  "allowedDecisions": [
+    "approve_for_publication",
+    "revise",
+    "defer",
+    "do_not_publish"
+  ],
+  "boundaries": {
+    "automaticEvidenceEqualsHumanApproval": false,
+    "automaticPassEqualsHumanApproval": false,
+    "candidateEqualsPublication": false,
+    "carApprovalEqualsBfaFinalApproval": false,
+    "bfaFinalApprovalEqualsPublicationExecution": false,
+    "oneUiActionEqualsUndifferentiatedBatchAuthority": false,
+    "approvalMayBindMoreThanOneLocaleWithinOneCompletePackage": true,
+    "approvalMayBindRequiredFigureWithinOneCompletePackage": true
+  },
+  "downstreamTransitionContract": {
+    "implementedAt": "BFA-W16",
+    "mayProduceMultipleGovernedConsequences": true,
+    "mayProduceMultipleHumanDecisions": false,
+    "everyTransitionMustReference": [
+      "sourceAuthorityType=BILINGUAL_FINAL_PUBLICATION_APPROVAL",
+      "sourceAuthorityDigest",
+      "finalPackageDigest",
+      "nodeCode"
+    ],
+    "transitionRecordsAreHumanEvidence": false
+  },
+  "staleness": {
+    "exactDigestBindingRequired": true,
+    "changedPackageInvalidatesPriorApproval": true,
+    "reReviewRequiredAfterDigestChange": true
+  }
+}

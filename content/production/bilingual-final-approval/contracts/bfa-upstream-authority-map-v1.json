@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "PHI-OS-BFA-UPSTREAM-AUTHORITY-MAP-v1.0.0",
+  "work": "BFA-W0",
+  "status": "FROZEN_BASELINE_MAP",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "authorities": [
+    {
+      "authority": "CANONICAL_KNOWLEDGE_AUTHORITY",
+      "owner": "Knowledge Registry Authority",
+      "contractPath": "content/knowledge/contracts/knowledge-registry-authority-v2.json",
+      "bfaRole": "READ_ONLY_BINDING",
+      "baselineSourceDigest": "9f254ebee08023fdf0eeca02f44a9d68a8638f252a07940c0e86a94c5053ac13"
+    },
+    {
+      "authority": "PJA_CANDIDATE",
+      "owner": "PJA Candidate Runtime",
+      "contractPath": "content/knowledge/production/contracts/candidate-execution-contract.json",
+      "bfaRole": "READ_ONLY_PACKAGE_INPUT",
+      "baselineSourceDigest": "8b728d88f556bcc4745f4c9a2909658c376c0f2fbedc5189932f9a567b4f458a"
+    },
+    {
+      "authority": "PJA_HUMAN_REVIEW_HISTORICAL",
+      "owner": "TL Human Review Authority",
+      "contractPath": "content/knowledge/production/contracts/human-review-contract.json",
+      "bfaRole": "HISTORICAL_MODEL_PRESERVED_NOT_RECREATED",
+      "baselineSourceDigest": "fc0e3d00ad83df438c1ef4349402cf0acc1d47952ffd0fecf7f142a560e62490"
+    },
+    {
+      "authority": "PJA_HUMAN_APPROVAL_HISTORICAL",
+      "owner": "TL Human Approval Authority",
+      "contractPath": "content/knowledge/production/contracts/human-approval-contract.json",
+      "bfaRole": "HISTORICAL_MODEL_PRESERVED_NOT_RECREATED",
+      "baselineSourceDigest": "b78eaacdab812a5dff9111e605e193c1725d7bda01590135cdbc37f49430beff"
+    },
+    {
+      "authority": "PJA_PUBLICATION",
+      "owner": "Independent Publication Authority",
+      "contractPath": "content/knowledge/production/contracts/publication-contract.json",
+      "freezePath": "content/knowledge/production/freeze/pja-publication-w1-freeze-v1.json",
+      "bfaRole": "DOWNSTREAM_AUTHORITY_NOT_OWNED",
+      "baselineSourceDigest": "545674a931d6f0db3015df65d9f6dae9ec281ee67816a2f67a90d2e7dadd3d69"
+    },
+    {
+      "authority": "PUBLISHED_KNOWLEDGE_AUTHORITY",
+      "owner": "Published Knowledge Authority",
+      "contractPath": "content/knowledge/production/contracts/published-knowledge-authority-v1.json",
+      "bfaRole": "DOWNSTREAM_AUTHORITY_NOT_OWNED",
+      "baselineSourceDigest": "bab0789e8029f7aae0d7e1eb66f851f537f7a20d38b3f9a0e10e9beab9929f1f"
+    },
+    {
+      "authority": "APS_1_TO_8",
+      "owner": "Article Production Simplification",
+      "contractRoot": "content/production/article-simplification/contracts",
+      "freezePath": "content/production/article-simplification/freeze/aps-8-production-freeze-v1.json",
+      "bfaRole": "HISTORICAL_ORCHESTRATION_BASELINE_PRESERVED",
+      "baselineSourceDigest": "6b496ebf9329ab7ddd42925bb6c1a62b74591e853791a59cb50ef26a30e545b9"
+    },
+    {
+      "authority": "ABL_1_TO_5",
+      "owner": "Article Bilingual Lane",
+      "contractRoot": "content/production/article-simplification/bilingual/contracts",
+      "freezePath": "content/production/article-simplification/bilingual/freeze/abl-5-production-freeze-v1.json",
+      "bfaRole": "HISTORICAL_BILINGUAL_AUTHORITY_BASELINE_PRESERVED",
+      "baselineSourceDigest": "32fe40490066503f417461fc4167d63d39dfac66e2068e16a460a1ae79f0c108"
+    },
+    {
+      "authority": "CAR",
+      "owner": "Canonical Asset Runtime",
+      "registryPath": "content/production/car/registries/published-asset-production-registry-v1.json",
+      "schemaPath": "content/production/car/schemas/car-published-asset-production-v1.schema.json",
+      "bfaRole": "DISPLAY_AND_BIND_RESULT_ONLY",
+      "baselineSourceDigest": "a359c807e5b53858757861446e9aaee65927dd5aad0eedfdeb066ae3d55f311d"
+    },
+    {
+      "authority": "CPR",
+      "owner": "Canonical Presentation Runtime",
+      "registryPath": "content/production/cpr/registries/cpr-production-instance-successor-registry-v3.json",
+      "bfaRole": "READ_PRESENTATION_PROJECTION_ONLY",
+      "baselineSourceDigest": "5a24a2a280d075075cec02879bd1a8f29eb50effe37baa2c538b1a7db7602045"
+    },
+    {
+      "authority": "VAP_L10N_R1_TO_R5",
+      "owner": "Visual Article Locale Successor",
+      "contractPath": "content/production/visual-article/l10n/contracts/vap-l10n-r1-r5-english-successor-v1.json",
+      "bfaRole": "FROZEN_REFERENCE_IMPLEMENTATION_PRESERVED",
+      "baselineSourceDigest": "671430107412cd74b6e270e3733d285020e2a2f5f8e95e5e7fbe2c9dde52f12a"
+    },
+    {
+      "authority": "SAME_ROUTE_LOCALE_RUNTIME",
+      "owner": "APS-L10N / runtime locale selection",
+      "contractPath": "content/production/article-simplification/contracts/aps-l10n-same-route-locale-release-contract-v1.json",
+      "bfaRole": "PRESERVE_CANONICAL_ROUTE_AND_LOCALE_INDEPENDENCE",
+      "baselineSourceDigest": "8ec22a057b9ac291a8e79482b648db660556d0103871e1ff6bd0078cf6a314c5"
+    }
+  ],
+  "freezeRules": {
+    "bfaMayMutateReferencedContracts": false,
+    "bfaMayInferMissingAuthority": false,
+    "bfaMayConvertAutomaticEvidenceToHumanAuthority": false,
+    "bfaMayConvertFinalApprovalDirectlyToPublishedKnowledge": false,
+    "bfaMayConvertFinalApprovalDirectlyToCarApproval": false,
+    "bfaMayConvertFinalApprovalDirectlyToCprAuthority": false
+  }
+}

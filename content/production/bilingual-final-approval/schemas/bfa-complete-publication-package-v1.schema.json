@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-BFA-COMPLETE-PUBLICATION-PACKAGE-v1",
+  "title": "BFA Complete Publication Package",
+  "type": "object",
+  "required": [
+    "packageType",
+    "packageSchemaVersion",
+    "packageCode",
+    "batchCode",
+    "nodeCode",
+    "bookCode",
+    "canonicalAuthority",
+    "pjaBrief",
+    "locales",
+    "localeIdentity",
+    "sameRouteIdentity",
+    "figure",
+    "automaticEvidence",
+    "presentationPreview",
+    "publicationReadiness",
+    "finalPackageDigest"
+  ],
+  "properties": {
+    "packageType": { "const": "BFA_COMPLETE_PUBLICATION_PACKAGE" },
+    "packageSchemaVersion": { "const": "PHI-OS-BFA-COMPLETE-PUBLICATION-PACKAGE-v1.0.0" },
+    "packageCode": { "type": "string", "pattern": "^BFA-PACKAGE-KN-[A-Z0-9-]+-v[0-9]+$" },
+    "batchCode": { "type": "string", "pattern": "^BATCH-[0-9]{3,}$" },
+    "nodeCode": { "type": "string", "pattern": "^KN-[A-Z0-9-]+$" },
+    "bookCode": { "type": "string", "pattern": "^BOOK-[0-9]+$" },
+    "canonicalAuthority": { "$ref": "#/$defs/digestBoundObject" },
+    "pjaBrief": { "$ref": "#/$defs/digestBoundObject" },
+    "locales": {
+      "type": "object",
+      "required": ["zh-Hans", "en"],
+      "properties": {
+        "zh-Hans": { "$ref": "#/$defs/localeCandidate" },
+        "en": { "$ref": "#/$defs/localeCandidate" }
+      },
+      "additionalProperties": false
+    },
+    "localeIdentity": { "$ref": "#/$defs/digestBoundObject" },
+    "sameRouteIdentity": { "$ref": "#/$defs/digestBoundObject" },
+    "figure": { "$ref": "#/$defs/digestBoundObject" },
+    "automaticEvidence": { "$ref": "#/$defs/digestBoundObject" },
+    "presentationPreview": { "$ref": "#/$defs/digestBoundObject" },
+    "publicationReadiness": { "$ref": "#/$defs/digestBoundObject" },
+    "assembledAt": { "type": "string" },
+    "reviewState": { "type": "string" },
+    "decisionState": { "type": "string" },
+    "finalPackageDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  },
+  "$defs": {
+    "digestBoundObject": {
+      "type": "object",
+      "required": ["sourceDigest"],
+      "properties": {
+        "sourceDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": true
+    },
+    "localeCandidate": {
+      "type": "object",
+      "required": ["locale", "candidateCode", "candidateDigest", "article"],
+      "properties": {
+        "locale": { "enum": ["zh-Hans", "en"] },
+        "candidateCode": { "type": "string", "minLength": 1 },
+        "candidateDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "article": {
+          "type": "object",
+          "required": ["title", "summary", "bodyMarkdown"],
+          "properties": {
+            "title": { "type": "string" },
+            "summary": { "type": "string" },
+            "bodyMarkdown": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}
