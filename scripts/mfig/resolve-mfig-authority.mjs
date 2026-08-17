@@ -1,0 +1,1 @@
+import {P,read,requestedIds,sourcePath} from './mfig-lib.mjs'; for(const id of requestedIds()){const s=read(sourcePath(id));console.log(`${id}\n`+s.sources.map(x=>`  ${x.sourceBindingId} ${x.authorityId} <- ${x.path} sha256:${x.digest}`).join('\n'));}

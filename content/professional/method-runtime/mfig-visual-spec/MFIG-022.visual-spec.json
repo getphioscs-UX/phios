@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-022",
+  "title": "AST-ASPECT-GOVERNANCE",
+  "scope": "AST",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "AST"
+  ],
+  "runtimeRefs": [
+    "content/professional/core-method-runtime/ast-aspect-governance-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CANONICAL_INPUT_OR_PROJECTION",
+      "displayLabel": "CANONICAL INPUT / PROJECTION",
+      "nodeType": "RESULT",
+      "authorityClass": "UPSTREAM",
+      "semanticRole": "INPUT",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "AST_ASPECT_GOVERNANCE",
+      "displayLabel": "AST ASPECT GOVERNANCE",
+      "nodeType": "GATE",
+      "authorityClass": "AUTHORITY_BOUNDARY",
+      "semanticRole": "BOUNDARY",
+      "container": "AST_ASPECT_GOVERNANCE",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "GOVERNED_HANDOFF",
+      "displayLabel": "GOVERNED HANDOFF",
+      "nodeType": "GATE",
+      "authorityClass": "DOWNSTREAM",
+      "semanticRole": "HANDOFF",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-022-E01",
+      "from": "CANONICAL_INPUT_OR_PROJECTION",
+      "to": "AST_ASPECT_GOVERNANCE",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-022-E02",
+      "from": "AST_ASPECT_GOVERNANCE",
+      "to": "GOVERNED_HANDOFF",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "AST_ASPECT_GOVERNANCE",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "AST_ASPECT_GOVERNANCE"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CANONICAL_INPUT_OR_PROJECTION",
+    "AST_ASPECT_GOVERNANCE",
+    "GOVERNED_HANDOFF"
+  ],
+  "mustState": [
+    "Authority boundary does not create runtime authority",
+    "Downstream authority remains separate"
+  ],
+  "statementSources": {
+    "Authority boundary does not create runtime authority": "SRC-002",
+    "Downstream authority remains separate": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

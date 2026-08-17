@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-048",
+  "title": "METHOD-INPUT-REQUIREMENT",
+  "scope": "CROSS_METHOD",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-client-delivery/registries/method-input-requirement-matrix-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CANONICAL_BIRTH_INPUT",
+      "displayLabel": "CANONICAL BIRTH INPUT",
+      "nodeType": "CONTRACT",
+      "authorityClass": "INPUT_REQUIREMENT",
+      "semanticRole": "INPUT_REQUIREMENT",
+      "container": "METHOD_INPUT_REQUIREMENT",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "METHOD_REQUIREMENT_MATRIX",
+      "displayLabel": "METHOD REQUIREMENT MATRIX",
+      "nodeType": "CONTRACT",
+      "authorityClass": "INPUT_REQUIREMENT",
+      "semanticRole": "INPUT_REQUIREMENT",
+      "container": "METHOD_INPUT_REQUIREMENT",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "AST_REQUIREMENTS",
+      "displayLabel": "AST REQUIREMENTS",
+      "nodeType": "METHOD",
+      "authorityClass": "INPUT_REQUIREMENT",
+      "semanticRole": "INPUT_REQUIREMENT",
+      "container": "METHOD_INPUT_REQUIREMENT",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "BZR_REQUIREMENTS",
+      "displayLabel": "BZR REQUIREMENTS",
+      "nodeType": "METHOD",
+      "authorityClass": "INPUT_REQUIREMENT",
+      "semanticRole": "INPUT_REQUIREMENT",
+      "container": "METHOD_INPUT_REQUIREMENT",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "NUM_REQUIREMENTS",
+      "displayLabel": "NUM REQUIREMENTS",
+      "nodeType": "METHOD",
+      "authorityClass": "INPUT_REQUIREMENT",
+      "semanticRole": "INPUT_REQUIREMENT",
+      "container": "METHOD_INPUT_REQUIREMENT",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "EXECUTION_GATE",
+      "displayLabel": "EXECUTION GATE",
+      "nodeType": "GATE",
+      "authorityClass": "EXECUTION",
+      "semanticRole": "INPUT_REQUIREMENT",
+      "container": "METHOD_INPUT_REQUIREMENT",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-048-E01",
+      "from": "CANONICAL_BIRTH_INPUT",
+      "to": "METHOD_REQUIREMENT_MATRIX",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-048-E02",
+      "from": "METHOD_REQUIREMENT_MATRIX",
+      "to": "AST_REQUIREMENTS",
+      "relation": "CLASSIFIES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-048-E03",
+      "from": "METHOD_REQUIREMENT_MATRIX",
+      "to": "BZR_REQUIREMENTS",
+      "relation": "CLASSIFIES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-048-E04",
+      "from": "METHOD_REQUIREMENT_MATRIX",
+      "to": "NUM_REQUIREMENTS",
+      "relation": "CLASSIFIES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-048-E05",
+      "from": "METHOD_REQUIREMENT_MATRIX",
+      "to": "EXECUTION_GATE",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_INPUT_REQUIREMENT",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "METHOD_REQUIREMENT_MATRIX"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME",
+        "EXECUTION_GATE"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CANONICAL_BIRTH_INPUT",
+    "METHOD_REQUIREMENT_MATRIX",
+    "AST_REQUIREMENTS",
+    "BZR_REQUIREMENTS",
+    "NUM_REQUIREMENTS",
+    "EXECUTION_GATE"
+  ],
+  "mustState": [
+    "Input readiness != dispatch authority",
+    "missingValuesMayNotBeGuessed=true",
+    "MPA decision precedes execution"
+  ],
+  "statementSources": {
+    "Input readiness != dispatch authority": "SRC-002",
+    "missingValuesMayNotBeGuessed=true": "SRC-002",
+    "MPA decision precedes execution": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

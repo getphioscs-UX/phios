@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-037",
+  "title": "NUM-NUMBER-STRUCTURE",
+  "scope": "NUM",
+  "role": "CALCULATION",
+  "methodRefs": [
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/professional/core-method-runtime/num-number-structure-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "SHARED_DATA_AUTHORITY",
+      "displayLabel": "SHARED DATA AUTHORITY",
+      "nodeType": "AUTHORITY",
+      "authorityClass": "DATA",
+      "semanticRole": "INPUT",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "NUM_NUMBER_STRUCTURE",
+      "displayLabel": "NUM NUMBER STRUCTURE",
+      "nodeType": "PROCESS",
+      "authorityClass": "SHARED_CALCULATION_RUNTIME",
+      "semanticRole": "METHOD_CALCULATION_STAGE",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CALCULATION_RESULT",
+      "displayLabel": "CALCULATION RESULT",
+      "nodeType": "RESULT",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "OUTPUT",
+      "container": "SHARED_CALCULATION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-037-E01",
+      "from": "SHARED_DATA_AUTHORITY",
+      "to": "NUM_NUMBER_STRUCTURE",
+      "relation": "PROVIDES_CANONICAL_INPUT",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-037-E02",
+      "from": "NUM_NUMBER_STRUCTURE",
+      "to": "CALCULATION_RESULT",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_CALCULATION_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "NUM_NUMBER_STRUCTURE",
+        "CALCULATION_RESULT"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "SHARED_DATA_AUTHORITY",
+    "NUM_NUMBER_STRUCTURE",
+    "CALCULATION_RESULT"
+  ],
+  "mustState": [
+    "calculationAuthority=SHARED_CALCULATION_RUNTIME",
+    "Calculation != Projection",
+    "Calculation != Interpretation",
+    "perMethodRuntimeAllowed=false"
+  ],
+  "statementSources": {
+    "calculationAuthority=SHARED_CALCULATION_RUNTIME": "SRC-002",
+    "Calculation != Projection": "SRC-002",
+    "Calculation != Interpretation": "SRC-002",
+    "perMethodRuntimeAllowed=false": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

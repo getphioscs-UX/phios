@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-050",
+  "title": "METHOD-PRODUCTION-ELIGIBILITY",
+  "scope": "CROSS_METHOD",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "AST",
+    "BZR",
+    "NUM"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-production-activation/registries/mpa-production-eligibility-decision-registry-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "AST",
+      "displayLabel": "AST",
+      "nodeType": "METHOD",
+      "authorityClass": "METHOD",
+      "semanticRole": "METHOD",
+      "container": "METHOD_PRODUCTION_ELIGIBILITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "BZR",
+      "displayLabel": "BZR",
+      "nodeType": "METHOD",
+      "authorityClass": "METHOD",
+      "semanticRole": "METHOD",
+      "container": "METHOD_PRODUCTION_ELIGIBILITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "NUM",
+      "displayLabel": "NUM",
+      "nodeType": "METHOD",
+      "authorityClass": "METHOD",
+      "semanticRole": "METHOD",
+      "container": "METHOD_PRODUCTION_ELIGIBILITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "MPA_PRODUCTION_ELIGIBILITY_REGISTRY",
+      "displayLabel": "MPA PRODUCTION ELIGIBILITY REGISTRY",
+      "nodeType": "AUTHORITY",
+      "authorityClass": "ELIGIBILITY",
+      "semanticRole": "AUTHORITY",
+      "container": "METHOD_PRODUCTION_ELIGIBILITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "ELIGIBILITY_DECISION",
+      "displayLabel": "ELIGIBILITY DECISION",
+      "nodeType": "STATE",
+      "authorityClass": "ELIGIBILITY",
+      "semanticRole": "DECISION",
+      "container": "METHOD_PRODUCTION_ELIGIBILITY",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "EXECUTION_GATE",
+      "displayLabel": "EXECUTION GATE",
+      "nodeType": "GATE",
+      "authorityClass": "EXECUTION",
+      "semanticRole": "GATE",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-050-E01",
+      "from": "AST",
+      "to": "MPA_PRODUCTION_ELIGIBILITY_REGISTRY",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-050-E02",
+      "from": "BZR",
+      "to": "MPA_PRODUCTION_ELIGIBILITY_REGISTRY",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-050-E03",
+      "from": "NUM",
+      "to": "MPA_PRODUCTION_ELIGIBILITY_REGISTRY",
+      "relation": "FEEDS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-050-E04",
+      "from": "MPA_PRODUCTION_ELIGIBILITY_REGISTRY",
+      "to": "ELIGIBILITY_DECISION",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-050-E05",
+      "from": "ELIGIBILITY_DECISION",
+      "to": "EXECUTION_GATE",
+      "relation": "GOVERNS",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_PRODUCTION_ELIGIBILITY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "MPA_PRODUCTION_ELIGIBILITY_REGISTRY",
+        "ELIGIBILITY_DECISION"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME",
+        "HDR",
+        "EXECUTION_GATE"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "AST",
+    "BZR",
+    "NUM",
+    "MPA_PRODUCTION_ELIGIBILITY_REGISTRY",
+    "ELIGIBILITY_DECISION",
+    "EXECUTION_GATE"
+  ],
+  "mustState": [
+    "MPA production eligibility registry decides method Production eligibility",
+    "Eligibility decision does not create execution authority",
+    "HDR Production is not granted by MFIG-050"
+  ],
+  "statementSources": {
+    "MPA production eligibility registry decides method Production eligibility": "SRC-002",
+    "Eligibility decision does not create execution authority": "SRC-002",
+    "HDR Production is not granted by MFIG-050": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME",
+    "HDR_PRODUCTION",
+    "PROFESSIONAL_DIAGNOSIS",
+    "MEANING_RUNTIME_AUTHORITY",
+    "INTERPRETATION_AUTHORITY"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

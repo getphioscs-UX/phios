@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-007",
+  "title": "METHOD-AUTHORITY-BOUNDARY",
+  "scope": "SHARED",
+  "role": "AUTHORITY_BOUNDARY",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/method-runtime-boundary.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "METHOD_DEFINITION",
+      "displayLabel": "METHOD DEFINITION",
+      "nodeType": "GATE",
+      "authorityClass": "METHOD_BOUNDARY",
+      "semanticRole": "METHOD_DEFINITION",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_DATA_AUTHORITY",
+      "displayLabel": "SHARED DATA AUTHORITY",
+      "nodeType": "GATE",
+      "authorityClass": "DATA",
+      "semanticRole": "SHARED_DATA_AUTHORITY",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_CALCULATION_RUNTIME",
+      "displayLabel": "SHARED CALCULATION RUNTIME",
+      "nodeType": "RUNTIME",
+      "authorityClass": "CALCULATION",
+      "semanticRole": "SHARED_CALCULATION_RUNTIME",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_PROJECTION_RUNTIME",
+      "displayLabel": "SHARED PROJECTION RUNTIME",
+      "nodeType": "RUNTIME",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "SHARED_PROJECTION_RUNTIME",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "SHARED_INTERPRETATION_RUNTIME",
+      "displayLabel": "SHARED INTERPRETATION RUNTIME",
+      "nodeType": "RUNTIME",
+      "authorityClass": "INTERPRETATION",
+      "semanticRole": "SHARED_INTERPRETATION_RUNTIME",
+      "container": "METHOD_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "PROFESSIONAL_HANDOFF",
+      "displayLabel": "PROFESSIONAL HANDOFF",
+      "nodeType": "GATE",
+      "authorityClass": "PROFESSIONAL",
+      "semanticRole": "PROFESSIONAL_HANDOFF",
+      "container": null,
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-007-E01",
+      "from": "METHOD_DEFINITION",
+      "to": "SHARED_DATA_AUTHORITY",
+      "relation": "REQUIRES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-007-E02",
+      "from": "SHARED_DATA_AUTHORITY",
+      "to": "SHARED_CALCULATION_RUNTIME",
+      "relation": "PROVIDES_CANONICAL_INPUT",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-007-E03",
+      "from": "SHARED_CALCULATION_RUNTIME",
+      "to": "SHARED_PROJECTION_RUNTIME",
+      "relation": "PROJECTS_TO",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-007-E04",
+      "from": "SHARED_PROJECTION_RUNTIME",
+      "to": "SHARED_INTERPRETATION_RUNTIME",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-007-E05",
+      "from": "SHARED_INTERPRETATION_RUNTIME",
+      "to": "PROFESSIONAL_HANDOFF",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "METHOD_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "METHOD_DEFINITION",
+        "SHARED_DATA_AUTHORITY",
+        "SHARED_CALCULATION_RUNTIME",
+        "SHARED_PROJECTION_RUNTIME",
+        "SHARED_INTERPRETATION_RUNTIME"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME",
+        "PROFESSIONAL_HANDOFF"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "METHOD_DEFINITION",
+    "SHARED_DATA_AUTHORITY",
+    "SHARED_CALCULATION_RUNTIME",
+    "SHARED_PROJECTION_RUNTIME",
+    "SHARED_INTERPRETATION_RUNTIME",
+    "PROFESSIONAL_HANDOFF"
+  ],
+  "mustState": [
+    "Method Runtime is singleton",
+    "perMethodRuntimeAllowed=false",
+    "Professional Runtime independent=true"
+  ],
+  "statementSources": {
+    "Method Runtime is singleton": "SRC-002",
+    "perMethodRuntimeAllowed=false": "SRC-002",
+    "Professional Runtime independent=true": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}

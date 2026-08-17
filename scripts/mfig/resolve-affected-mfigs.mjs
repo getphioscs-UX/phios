@@ -1,0 +1,1 @@
+import {read,P} from './mfig-lib.mjs'; const files=process.argv.slice(2).filter(x=>!x.startsWith('--'));const idx=read(`${P.prod}/affected-mfig-index-v1.json`);const set=new Set();for(const f of files){const r=idx.sources.find(x=>x.path===f);if(r)for(const id of r.mfigIds)set.add(id);}console.log([...set].sort().join('\n'));

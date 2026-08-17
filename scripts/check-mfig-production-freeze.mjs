@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {P,read,ids} from './mfig/mfig-lib.mjs';
+const f=read(`${P.prod}/acceptance/mfig-w0-w50-machine-production-freeze-v1.json`);
+assert.equal(f.status,'PRODUCTION_ACCEPTED_MACHINE_ONLY');
+assert.equal(f.baselineCommit,'07f525b2047498364fea5a4ae0f9a51c37a47dd1');
+assert.equal(f.humanReviewRequired,false);
+assert.equal(f.workSteps.length,51);
+assert.deepEqual(f.workSteps.map(x=>x.work),Array.from({length:51},(_,i)=>`MFIG-W${i}`));
+assert.ok(f.workSteps.every(x=>x.status==='COMPLETE'));
+assert.equal(f.actual.canonicalMfigCount,50);
+assert.equal(f.actual.machineAcceptedCount,50);
+assert.equal(f.actual.canonicalCarEligibleCount,43);
+assert.equal(f.actual.canonicalCarRestrictedCount,7);
+for(const k of ['staleCount','unsourcedEdgeCount','unauthorizedEdgeCount','duplicateNodeCount','crossFigureDriftCount','humanReviewDependencyCount','aiSemanticDependencyCount','carBypassCount','publicationAuthorityDuplicationCount']) assert.equal(f.actual[k],0,`${k} must be zero`);
+assert.equal(f.actual.carBoundCount,0);
+assert.equal(f.actual.publishedCount,0);
+console.log('✓ MFIG W0-W50 production freeze: machine-only tooling accepted; 50/50 MACHINE_ACCEPTED, CAR/publication authority preserved.');

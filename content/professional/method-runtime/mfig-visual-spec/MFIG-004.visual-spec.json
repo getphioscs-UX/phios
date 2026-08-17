@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "1.0.0",
+  "mfigId": "MFIG-004",
+  "title": "SHARED-PROJECTION-RUNTIME",
+  "scope": "SHARED",
+  "role": "PROJECTION",
+  "methodRefs": [
+    "SHARED_METHOD"
+  ],
+  "runtimeRefs": [
+    "content/professional/method-runtime/shared-projection-runtime-v1.json"
+  ],
+  "nodes": [
+    {
+      "nodeId": "CALCULATION_OUTPUT",
+      "displayLabel": "CALCULATION OUTPUT",
+      "nodeType": "RESULT",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "PROJECTION",
+      "container": "SHARED_PROJECTION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "NORMALIZATION",
+      "displayLabel": "NORMALIZATION",
+      "nodeType": "PROCESS",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "PROJECTION",
+      "container": "SHARED_PROJECTION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CANONICAL_PROJECTION",
+      "displayLabel": "CANONICAL PROJECTION",
+      "nodeType": "RESULT",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "PROJECTION",
+      "container": "SHARED_PROJECTION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    },
+    {
+      "nodeId": "CONSUMER_CONTRACT",
+      "displayLabel": "CONSUMER CONTRACT",
+      "nodeType": "RESULT",
+      "authorityClass": "PROJECTION",
+      "semanticRole": "PROJECTION",
+      "container": "SHARED_PROJECTION_RUNTIME",
+      "required": true,
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "MFIG-004-E01",
+      "from": "CALCULATION_OUTPUT",
+      "to": "NORMALIZATION",
+      "relation": "NORMALIZES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-004-E02",
+      "from": "NORMALIZATION",
+      "to": "CANONICAL_PROJECTION",
+      "relation": "PRODUCES",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    },
+    {
+      "edgeId": "MFIG-004-E03",
+      "from": "CANONICAL_PROJECTION",
+      "to": "CONSUMER_CONTRACT",
+      "relation": "GOVERNED_HANDOFF",
+      "direction": "FORWARD",
+      "required": true,
+      "authoritySource": {
+        "sourceBindingId": "SRC-002"
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "boundaryId": "SHARED_PROJECTION_RUNTIME",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "CALCULATION_OUTPUT",
+        "NORMALIZATION",
+        "CANONICAL_PROJECTION",
+        "CONSUMER_CONTRACT"
+      ],
+      "mustExclude": [
+        "CANONICAL_MEANING_RUNTIME",
+        "READING_RUNTIME",
+        "NAVIGATION_RUNTIME",
+        "JOURNEY_RUNTIME",
+        "KNOWLEDGE_RUNTIME"
+      ],
+      "sourceRef": "SRC-002"
+    }
+  ],
+  "mustShow": [
+    "CALCULATION_OUTPUT",
+    "NORMALIZATION",
+    "CANONICAL_PROJECTION",
+    "CONSUMER_CONTRACT"
+  ],
+  "mustState": [
+    "Projection != Interpretation",
+    "Projection consumes Calculation output",
+    "Projection has no Professional authority"
+  ],
+  "statementSources": {
+    "Projection != Interpretation": "SRC-002",
+    "Projection consumes Calculation output": "SRC-002",
+    "Projection has no Professional authority": "SRC-002"
+  },
+  "mustNotContain": [
+    "CANONICAL_MEANING_RUNTIME",
+    "READING_RUNTIME",
+    "NAVIGATION_RUNTIME",
+    "JOURNEY_RUNTIME",
+    "KNOWLEDGE_RUNTIME"
+  ],
+  "forbiddenClaims": [
+    "renderer owns calculation",
+    "projection equals interpretation",
+    "interpretation equals meaning",
+    "meaning equals reading",
+    "MFIG owns Method truth",
+    "MFIG owns CAR publication"
+  ],
+  "productionRules": {
+    "deterministicGeometryRequired": true,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedBoundariesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "repositoryPinnedStylingOnly": true
+  }
+}
