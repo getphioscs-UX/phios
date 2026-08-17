@@ -3,7 +3,7 @@
   "extensionCode": "PJA-PAGE-CAPABILITY-EXTENSION-001",
   "status": "active",
   "extendsFreezeId": "PJA-W0-v1.0.0-Frozen",
-  "reason": "Register post-freeze Public Knowledge Search, Academy Lesson presentation and Personal Runtime setup pages without mutating the frozen PJA-W0 contract.",
+  "reason": "Register post-freeze Public Knowledge Search, Academy Lesson presentation, Personal Runtime setup and MIR-8 Guided Reading successor pages without mutating the frozen PJA-W0 contract.",
   "pageCapabilities": [
     {
       "capabilityId": "knowledge-discovery",
@@ -49,6 +49,22 @@
         "MPA + RDG + WPR"
       ],
       "activationState": "limited_production_input_readiness_no_method_execution",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "guided-reading-explainable-reading",
+      "pages": [
+        "guided-reading.html"
+      ],
+      "sourceObjects": [
+        "Accepted Canonical Interpretation Result",
+        "MIR-8 Guided Reading v2 explainability projection",
+        "Governed Knowledge and Evidence References"
+      ],
+      "dependencyOwners": [
+        "MIR-7 Canonical Interpretation Result + MIR-8 KAP Guided Reading + Knowledge Runtime"
+      ],
+      "activationState": "production_successor_read_only_explainable_reading",
       "writeAuthority": "none"
     }
   ],

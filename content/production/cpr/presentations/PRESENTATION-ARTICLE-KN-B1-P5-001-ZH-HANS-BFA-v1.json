@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-CPR-APS-ARTICLE-PRESENTATION-SUCCESSOR-v1.0.0",
+  "presentationCode": "PRESENTATION-ARTICLE-KN-B1-P5-001-ZH-HANS-APS-v1",
+  "presentationVersion": "1.0.0",
+  "work": "APS-7_CPR_SUCCESSOR_ORCHESTRATION",
+  "status": "active_production_instance",
+  "surface": "WEBSITE",
+  "presentationType": "ARTICLE_PAGE",
+  "renderState": "ready_for_render",
+  "locale": "zh-Hans",
+  "audience": "CUSTOMER",
+  "inputs": {
+    "publishedArticle": {
+      "authorityRecordCode": "PKA-KN-B1-P5-001-ZH-HANS",
+      "authorityDigest": "42fd3fbb665b0dbebf9a4d9fe51b28dd65e8d9e74021719fae96cc2ebffd08a3",
+      "publicationCode": "PUBLICATION-BFA-KN-B1-P5-001-ZH-HANS-ac53fef081d3",
+      "publicationDigest": "4320db5b13e155f3acda61ee27c59e5abcaa2a747a37c2d72e3f7d7c79dc59c1",
+      "articleCode": "KA-B1-P5-001-ZH-HANS-ARTICLE",
+      "nodeCode": "KN-B1-P5-001",
+      "href": "/articles/consciousness-visibility-experience-and-self-model",
+      "version": "1.0.0"
+    },
+    "car": {
+      "required": false,
+      "state": "NOT_REQUIRED_NO_VISUAL_ASSET",
+      "publishedAssetReferences": []
+    }
+  },
+  "composition": [
+    {
+      "ordinal": 1,
+      "componentCode": "ARTICLE_HEADER",
+      "sourceReferences": [
+        "PKA-KN-B1-P5-001-ZH-HANS"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 2,
+      "componentCode": "ARTICLE_BODY",
+      "sourceReferences": [
+        "KA-B1-P5-001-ZH-HANS-ARTICLE"
+      ],
+      "bodyInsertions": [],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 3,
+      "componentCode": "SECONDARY_PROVENANCE",
+      "sourceReferences": [
+        "KN-B1-P5-001"
+      ],
+      "visibility": "VISIBLE"
+    },
+    {
+      "ordinal": 4,
+      "componentCode": "FOOTER",
+      "sourceReferences": [
+        "PDS_PUBLIC_SHELL"
+      ],
+      "visibility": "VISIBLE"
+    }
+  ],
+  "pdsReferences": {
+    "authority": "PDS",
+    "contracts": [
+      "content/registry/pds-w2-design-token-contract.json",
+      "content/registry/pds-w3-core-component-shell-contract.json",
+      "content/registry/pds-w7-reading-experience.json",
+      "content/registry/pds-w9-knowledge-professional.json"
+    ],
+    "styleReferences": [
+      "assets/css/tokens.css",
+      "assets/css/design/foundation.css",
+      "assets/css/design/typography.css",
+      "assets/css/public-experience.css",
+      "assets/css/knowledge-release.css",
+      "assets/css/article-renderer.css",
+      "assets/css/pds-w9-knowledge-professional.css",
+      "assets/css/wpr-public-production.css"
+    ]
+  },
+  "governance": {
+    "cprDecidesKnowledge": false,
+    "cprDecidesPublication": false,
+    "apsCreatesCarAuthority": false,
+    "carBypassAllowedWhenVisualAssetRequired": false,
+    "articleOnlyNoAssetPathAllowed": true
+  }
+}

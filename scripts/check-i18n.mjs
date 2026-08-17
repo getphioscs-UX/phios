@@ -59,10 +59,14 @@ for (const file of files) {
   if (relative.startsWith('assets/js/locales/')) continue;
 
   const source = await fs.readFile(file, 'utf8');
+  const importsGlobalI18nT = extension === '.js'
+    && /import\s*\{[^}]*\bt\b[^}]*\}\s*from\s*['"][^'"]*i18n\.js['"]/m.test(source);
   const keys = extension === '.html'
     ? collectMatches(source, /data-i18n(?:-[\w-]+)?\s*=\s*(["'])([^"']+)\1/g)
     : [
-        ...collectMatches(source, /\bt\(\s*(["'])([^"']+)\1/g),
+        ...(importsGlobalI18nT
+          ? collectMatches(source, /\bt\(\s*(["'])([^"']+)\1/g)
+          : []),
         ...collectTranslationMapKeys(source)
       ];
 
