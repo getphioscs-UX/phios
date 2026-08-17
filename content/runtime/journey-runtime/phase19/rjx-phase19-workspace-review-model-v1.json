@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "PHI-OS-RJX-PHASE19-WORKSPACE-REVIEW-MODEL-v1.0.0",
+  "work": "RJX-W11-W18",
+  "baselineCommit": "3b5ff152d1cdfe479ed4daf7c772e3faa926dc17",
+  "status": "REVIEW_MODEL_NO_RUNTIME_AUTHORITY",
+  "route": "/reality/",
+  "reviewOnly": true,
+  "runtimeWriteAuthority": false,
+  "persistenceAllowed": false,
+  "defaultComplexity": "SIMPLE",
+  "supportedComplexity": ["SIMPLE", "COMPLEX"],
+  "classifications": [
+    "OBSERVED",
+    "DERIVED",
+    "CALCULATED",
+    "PROJECTED",
+    "UNKNOWN",
+    "CONFLICTING",
+    "HISTORICAL"
+  ],
+  "stages": ["UNDERSTAND", "CHOOSE", "REVIEW"],
+  "workspace": {
+    "situation": {
+      "classification": "OBSERVED",
+      "title": {
+        "en": "Your Situation",
+        "zh-Hans": "你的情况"
+      },
+      "text": {
+        "en": "You are comparing your current role with an alternative while key conditions remain unverified.",
+        "zh-Hans": "你正在比较目前的工作与另一个选择，但部分关键条件仍未核实。"
+      },
+      "evidenceRefs": ["EVIDENCE-JOB-001"]
+    },
+    "reading": {
+      "oneSentence": {
+        "classification": "DERIVED",
+        "text": {
+          "en": "The decision appears constrained less by lack of options than by incomplete evidence about the alternative.",
+          "zh-Hans": "目前的决定似乎并非缺少选择，而是受到替代方案证据仍不完整的限制。"
+        },
+        "evidenceRefs": ["EVIDENCE-JOB-001"],
+        "unknownRefs": ["UNKNOWN-JOB-ALTERNATIVE-COMPENSATION"]
+      },
+      "sections": [
+        {
+          "code": "WHAT_CHANGED",
+          "classification": "HISTORICAL",
+          "title": {"en": "What Changed", "zh-Hans": "发生了什么变化"},
+          "text": {"en": "A new alternative became available after Reality v1.", "zh-Hans": "在现实版本 v1 之后出现了一个新的替代方案。"},
+          "evidenceRefs": ["EVIDENCE-ALT-001"]
+        },
+        {
+          "code": "WHAT_IMPORTANT",
+          "classification": "DERIVED",
+          "title": {"en": "What Appears Important", "zh-Hans": "什么看起来重要"},
+          "text": {"en": "Verified compensation, role conditions and timing are material before an irreversible choice.", "zh-Hans": "在作出不可逆选择前，已核实的薪酬、工作条件与时间因素都很重要。"},
+          "evidenceRefs": ["EVIDENCE-JOB-001"],
+          "ruleRefs": ["RULE-CANDIDATE-NOT-ACTIVE"]
+        },
+        {
+          "code": "WHAT_CONNECTED",
+          "classification": "PROJECTED",
+          "title": {"en": "What May Be Connected", "zh-Hans": "什么可能有关联"},
+          "text": {"en": "Timing, available resources and role constraints may interact, but the relationship is not yet established as causal.", "zh-Hans": "时间、可用资源与工作限制可能相互关联，但目前不能把这种关系当作已证实的因果。"},
+          "evidenceRefs": ["EVIDENCE-JOB-001", "EVIDENCE-ALT-001"]
+        },
+        {
+          "code": "ALTERNATIVE_READING",
+          "classification": "PROJECTED",
+          "title": {"en": "Another Possible Reading", "zh-Hans": "另一种可能的读取"},
+          "text": {"en": "The current role may still be viable if the alternative does not materially improve the constraints that matter most.", "zh-Hans": "如果替代方案没有实质改善最重要的限制，目前的工作仍可能是可行选择。"},
+          "evidenceRefs": ["EVIDENCE-JOB-001"],
+          "unknownRefs": ["UNKNOWN-JOB-ALTERNATIVE-COMPENSATION"]
+        },
+        {
+          "code": "UNKNOWN",
+          "classification": "UNKNOWN",
+          "title": {"en": "What Is Still Unknown", "zh-Hans": "仍然未知的部分"},
+          "text": {"en": "The alternative compensation and final working conditions have not been verified.", "zh-Hans": "替代方案的薪酬与最终工作条件尚未核实。"},
+          "unknownRefs": ["UNKNOWN-JOB-ALTERNATIVE-COMPENSATION"]
+        },
+        {
+          "code": "CHANGE_READING",
+          "classification": "DERIVED",
+          "title": {"en": "What Would Change This Reading", "zh-Hans": "什么会改变这次读取"},
+          "text": {"en": "A verified written offer or a material change in the current role would require a new reading.", "zh-Hans": "如果取得已核实的书面条件，或目前工作出现重大变化，就需要重新读取。"},
+          "evidenceRefs": ["EVIDENCE-JOB-001"]
+        }
+      ]
+    },
+    "complexity": {
+      "loadByDefault": false,
+      "entities": [
+        {"id": "PERSON-SELF", "type": "People", "label": {"en": "You", "zh-Hans": "你"}, "classification": "OBSERVED", "sourceRefs": ["EVIDENCE-JOB-001"]},
+        {"id": "ORG-CURRENT", "type": "Organizations", "label": {"en": "Current role", "zh-Hans": "目前工作"}, "classification": "OBSERVED", "sourceRefs": ["EVIDENCE-JOB-001"]},
+        {"id": "ORG-ALT", "type": "Organizations", "label": {"en": "Alternative role", "zh-Hans": "替代工作"}, "classification": "UNKNOWN", "sourceRefs": ["EVIDENCE-ALT-001"]}
+      ],
+      "relationships": [
+        {
+          "from": "PERSON-SELF",
+          "to": "ORG-CURRENT",
+          "classification": "OBSERVED",
+          "label": {"en": "current commitment", "zh-Hans": "目前承诺"},
+          "sourceRefs": ["EVIDENCE-JOB-001"]
+        },
+        {
+          "from": "PERSON-SELF",
+          "to": "ORG-ALT",
+          "classification": "UNKNOWN",
+          "label": {"en": "possible transition", "zh-Hans": "可能的转换"},
+          "sourceRefs": ["EVIDENCE-ALT-001"]
+        }
+      ],
+      "timeline": [
+        {
+          "eventType": "case_created",
+          "timeType": "RELATIVE",
+          "time": {"en": "Earlier", "zh-Hans": "较早之前"},
+          "label": {"en": "Reality v1 recorded", "zh-Hans": "记录现实版本 v1"},
+          "classification": "HISTORICAL",
+          "sourceRefs": ["REALITY-v1"]
+        },
+        {
+          "eventType": "evidence_added",
+          "timeType": "RELATIVE",
+          "time": {"en": "Later", "zh-Hans": "之后"},
+          "label": {"en": "Alternative opportunity added", "zh-Hans": "加入替代机会"},
+          "classification": "OBSERVED",
+          "sourceRefs": ["EVIDENCE-ALT-001"]
+        }
+      ]
+    },
+    "navigation": {
+      "options": [
+        {
+          "optionId": "OPTION-VERIFY-OFFER",
+          "Possible Action": {"en": "Request a written offer before deciding.", "zh-Hans": "在决定前先取得书面条件。"},
+          "Rationale": {"en": "It reduces a blocking information gap before an irreversible choice.", "zh-Hans": "这可以在不可逆选择前减少一个关键资料缺口。"},
+          "Constraint": {"en": "The written offer may not be available immediately.", "zh-Hans": "书面条件未必能够立即取得。"},
+          "Risk": {"en": "The decision may be delayed.", "zh-Hans": "决定时间可能因此延后。"},
+          "Unknown": ["UNKNOWN-JOB-ALTERNATIVE-COMPENSATION"],
+          "Expected Signal": {"en": "Verified compensation and conditions become available.", "zh-Hans": "取得已核实的薪酬与工作条件。"},
+          "reversibility": "HIGH",
+          "requiredResources": ["TIME"],
+          "professionalBoundary": null,
+          "reviewDateOrCondition": {"en": "Review after the verified offer arrives.", "zh-Hans": "取得已核实条件后再复核。"},
+          "evidenceBasis": ["EVIDENCE-JOB-001", "EVIDENCE-ALT-001"],
+          "alternativeOption": {"en": "Remain in the current role while gathering evidence.", "zh-Hans": "在收集证据期间继续目前工作。"},
+          "userChoiceRequired": true
+        },
+        {
+          "optionId": "OPTION-HOLD",
+          "Possible Action": {"en": "Keep the current position while defining the minimum conditions for a change.", "zh-Hans": "暂时保持目前位置，同时定义改变所需的最低条件。"},
+          "Rationale": {"en": "This preserves reversibility while clarifying what would make a change worthwhile.", "zh-Hans": "这能保留可逆性，同时澄清什么条件才值得改变。"},
+          "Constraint": {"en": "Current role constraints remain present during the review period.", "zh-Hans": "复核期间，目前工作的限制仍然存在。"},
+          "Risk": {"en": "The alternative may become unavailable.", "zh-Hans": "替代机会可能失效。"},
+          "Unknown": ["UNKNOWN-JOB-ALTERNATIVE-COMPENSATION"],
+          "Expected Signal": {"en": "A clear threshold for acceptable change is documented.", "zh-Hans": "形成清楚、可记录的改变门槛。"},
+          "reversibility": "HIGH",
+          "requiredResources": ["TIME", "REFLECTION"],
+          "professionalBoundary": null,
+          "reviewDateOrCondition": {"en": "Review when either role changes materially.", "zh-Hans": "任一工作条件出现重大变化时复核。"},
+          "evidenceBasis": ["EVIDENCE-JOB-001"],
+          "alternativeOption": {"en": "Request the verified offer now.", "zh-Hans": "现在就要求取得已核实条件。"},
+          "userChoiceRequired": true
+        }
+      ],
+      "automaticSelection": false,
+      "deterministicCommand": false
+    },
+    "review": {
+      "previousRealityVersion": "REALITY-v1",
+      "changeSummary": {
+        "classification": "OBSERVED",
+        "text": {"en": "A verified offer was added after the prior reading.", "zh-Hans": "在上一次读取后加入了一份已核实的条件。"},
+        "evidenceRefs": ["EVIDENCE-OFFER-VERIFIED-001"]
+      },
+      "unchangedSummary": {
+        "classification": "HISTORICAL",
+        "text": {"en": "Reality v1 remains preserved and unchanged.", "zh-Hans": "现实版本 v1 保持原样，没有被修改。"},
+        "evidenceRefs": ["REALITY-v1"]
+      },
+      "expectedSignalComparison": {
+        "classification": "DERIVED",
+        "text": {"en": "The expected signal was met because verified conditions became available.", "zh-Hans": "预期信号已经出现，因为已取得可核实的条件。"},
+        "evidenceRefs": ["EVIDENCE-OFFER-VERIFIED-001"]
+      },
+      "realityDiff": {
+        "diffId": "DIFF-001",
+        "predecessor": "REALITY-v1",
+        "changes": ["NEW_VERIFIED_OFFER"]
+      },
+      "realityVNext": {
+        "versionId": "REALITY-v2",
+        "predecessorVersionId": "REALITY-v1",
+        "diffId": "DIFF-001",
+        "candidateOnly": true
+      },
+      "closure": {
+        "status": "CONTINUE",
+        "continuationPolicy": "REVIEW_AFTER_TRIAL_PERIOD",
+        "reopenPolicy": "REOPEN_ON_MATERIAL_CHANGE"
+      }
+    }
+  }
+}
