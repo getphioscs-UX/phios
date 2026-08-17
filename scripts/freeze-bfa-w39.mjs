@@ -1,0 +1,29 @@
+import fs from 'node:fs';import crypto from 'node:crypto';
+const files=[
+'content/production/bilingual-final-approval/contracts/bfa-authority-boundary-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-upstream-authority-map-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-final-approval-authority-contract-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-complete-publication-package-contract-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-review-evidence-and-projection-contract-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-final-authority-and-publication-successor-contract-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-review-workspace-contract-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-machine-human-history-contract-v1.json',
+'content/production/bilingual-final-approval/contracts/bfa-aps8-operator-successor-reconciliation-v1.json',
+'content/production/bilingual-final-approval/schemas/bfa-complete-publication-package-v1.schema.json',
+'content/production/bilingual-final-approval/schemas/bfa-final-approval-v1.schema.json',
+'content/production/bilingual-final-approval/templates/review.html',
+'scripts/lib/bilingual-final-approval/bfa-package-v1.mjs',
+'scripts/lib/bilingual-final-approval/bfa-runtime-v1.mjs',
+'scripts/lib/bilingual-final-approval/bfa-review-store-v1.mjs',
+'scripts/lib/bilingual-final-approval/bfa-batch-builder-v1.mjs',
+'scripts/lib/bilingual-final-approval/bfa-publication-successor-v1.mjs',
+'scripts/bfa-build-batch.mjs',
+'scripts/bfa-review.mjs',
+'scripts/article-batch.mjs',
+'scripts/article-publish.mjs',
+'scripts/article-batch-bfa-successor.mjs',
+'scripts/article-publish-bfa-successor.mjs',
+'scripts/check-aps-8-bfa-successor-reconciliation.mjs',
+'scripts/check-aps-8-historical-preserved-copy.mjs'
+];
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');const frozen={schemaVersion:'PHI-OS-BFA-PRODUCTION-FREEZE-v1.0.0',work:'BFA-W39',status:'PRODUCTION_CAPABILITY_FROZEN',freezeScope:['BFA Final Approval Contract','Complete Publication Package Contract','HTML Review Workspace Contract','Automatic Evidence Contract','Figure Requirement Contract','Single Human Authority Contract','Publication Bridge Contract','same-route Contract'],notFrozen:['specific BATCH-002 results','specific articles','specific figures','future titles','future publication outcomes'],invariant:'PRODUCTION_CAPABILITY_NOT_PRODUCTION_CONTENT',files:Object.fromEntries(files.map(p=>[p,sha(p)]))};fs.mkdirSync('content/production/bilingual-final-approval/freeze',{recursive:true});fs.writeFileSync('content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json',JSON.stringify(frozen,null,2)+'\n');console.log(`✓ BFA-W39 froze ${files.length} capability files; no specific Batch content was frozen.`);
