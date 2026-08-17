@@ -12,9 +12,24 @@ const pub1=await runBfaPublication(temp,'BATCH-002',{apply:true,fixtureMode:true
 const failTemp=await fsp.mkdtemp(path.join(os.tmpdir(),'bfa-w36-'));const failTarget=path.join(failTemp,'content/production/bilingual-final-approval/BATCH-002/packages');await fsp.mkdir(failTarget,{recursive:true});await fsp.copyFile(path.join(root,fixture,'packages',`${pass[0].nodeCode}.v1.json`),path.join(failTarget,`${pass[0].nodeCode}.v1.json`));const before=fs.readdirSync(path.dirname(failTarget),{recursive:true}).map(String).sort();let blocked=false;try{await runBfaPublication(failTemp,'BATCH-002',{apply:true,fixtureMode:true})}catch(e){blocked=e.code==='BFA_FINAL_APPROVAL_REQUIRED'}assert.equal(blocked,true);const after=fs.readdirSync(path.dirname(failTarget),{recursive:true}).map(String).sort();assert.deepEqual(after,before,'fail-closed path must have zero side effects');
 const machine=read('content/production/bilingual-final-approval/contracts/bfa-machine-human-history-contract-v1.json');assert.equal(machine.machineHumanBoundary.approvalFromPassAloneAllowed,false);assert.equal(machine.historicalReconciliation['BATCH-001'],'HISTORICAL_APS_ABL_MULTI_GATE_AUTHORITY_VALID');for(const p of ['content/production/article-simplification/batches/BATCH-001/review-batch.v1.json','content/production/article-simplification/bilingual/BATCH-001/english-human-decisions.v1.json','content/production/article-simplification/bilingual/freeze/abl-5-production-freeze-v1.json'])assert.ok(fs.existsSync(path.join(root,p)),`historical authority missing: ${p}`);
 const acceptance=read('content/production/bilingual-final-approval/acceptance/bfa-production-acceptance-v1.json');assert.ok(Object.values(acceptance.acceptance).every(Boolean));assert.equal(acceptance.productionEvidenceBoundary.specificBatch002PublicationClaimed,false);
-const freeze=read('content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json');assert.equal(freeze.invariant,'PRODUCTION_CAPABILITY_NOT_PRODUCTION_CONTENT');assert.ok(freeze.notFrozen.includes('specific BATCH-002 results'));for(const [p,d] of Object.entries(freeze.files))assert.equal(shaFile(p),d,`BFA-W39 frozen capability drift: ${p}`);
+const freeze=read('content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json');assert.equal(freeze.invariant,'PRODUCTION_CAPABILITY_NOT_PRODUCTION_CONTENT');assert.ok(freeze.notFrozen.includes('specific BATCH-002 results'));
+const progressionSuccessorPath='content/production/bilingual-final-approval/progression-v2/freeze/bfa-progression-v2-capability-successor-freeze-v1.json';
+const progressionSuccessor=read(progressionSuccessorPath);
+assert.equal(progressionSuccessor.status,'FROZEN_ADDITIVE_BFA_PROGRESSION_V2_SUCCESSOR');
+assert.equal(progressionSuccessor.predecessorFreeze,'content/production/bilingual-final-approval/freeze/bfa-production-capability-freeze-v1.json');
+for(const [p,d] of Object.entries(freeze.files)){
+  const actual=shaFile(p);
+  if(p==='scripts/article-batch-bfa-successor.mjs'&&actual!==d){
+    const successor=progressionSuccessor.reconciledPredecessorFiles[p];
+    assert.equal(successor.predecessorSha256,d,'BFA-PROG v2 predecessor digest must bind W39 exactly');
+    assert.equal(successor.successorSha256,actual,'BFA-PROG v2 article-batch successor digest mismatch');
+    continue;
+  }
+  assert.equal(actual,d,`BFA-W39 frozen capability drift: ${p}`);
+}
+for(const [p,d] of Object.entries(progressionSuccessor.files)) assert.equal(shaFile(p),d,`BFA-PROG v2 frozen successor capability drift: ${p}`);
 console.log('✓ BFA-W28～W39 responsive/accessibility workspace, progress/resume/audit contracts, machine-human checker and historical reconciliation passed.');
 console.log('✓ BFA-W35 fixture proves 6 PASS / 2 WARNING / 1 FIGURE_PENDING / 1 BLOCKED; clean batch approval creates six package-scoped TL authorities.');
 console.log('✓ BFA-W36 no-approval publication fails closed with zero side effects; BFA-W37 rerun is byte-stable/idempotent.');
 console.log('✓ BFA-W38 production capability acceptance passed without fabricating real BATCH-002 content/publication evidence.');
-console.log(`✓ BFA-W39 production capability freeze verified ${Object.keys(freeze.files).length} frozen files; specific articles/figures/outcomes remain unfrozen.`);
+console.log(`✓ BFA-W39 historical capability freeze verified ${Object.keys(freeze.files).length} files; BFA-PROG v2 is accepted only through its digest-bound additive successor freeze.`);

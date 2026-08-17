@@ -18,7 +18,11 @@ assert.match(packageJson.scripts['check:abl'], /check:abl-1/);
 const sharedLoader = fs.readFileSync(path.join(source, 'assets/js/knowledge/published-content.js'), 'utf8');
 assert.match(sharedLoader, /abl-bilingual-release\.json/);
 const pkaChecker = fs.readFileSync(path.join(source, 'scripts/check-step63-published-knowledge-authority.mjs'), 'utf8');
-assert.match(pkaChecker, /abl5RunPath/);
+// STEP63 is now governed by the checker-state lifecycle successor: the historical ABL-5
+// implementation remains reproducible, while the current checker rebuilds PKA from current
+// Publication Registry + Publication Packages instead of carrying the old abl5RunPath symbol.
+assert.match(pkaChecker, /checker-state-lifecycle-contract-v1\.json/);
+assert.match(pkaChecker, /buildApsPublishedKnowledgeAuthoritySuccessor/);
 assert.equal(shaFile(path.join(source, 'scripts/lib/knowledge-production/english-brief-v1.mjs')), freeze.historicalDrift.baseline25ab44bEnglishBriefSha256);
 try {
   const protectedPaths = [
@@ -77,7 +81,7 @@ try {
   const publicationHistoricalStep63 = { ...publicationBeforeStep63, records: publicationBeforeStep63.records.filter(record => !String(record.publicationCode || '').startsWith('PUBLICATION-BFA-')) };
   fs.writeFileSync(path.join(fixture, pkaPath), `${JSON.stringify(pkaHistoricalProjection, null, 2)}\n`, 'utf8');
   fs.writeFileSync(path.join(fixture, publicationRegistryPath), `${JSON.stringify(publicationHistoricalStep63, null, 2)}\n`, 'utf8');
-  try { assert.match(runChecker(fixture,'scripts/check-step63-published-knowledge-authority.mjs'),/ABL-5 successor publication authority/); }
+  try { assert.match(runChecker(fixture,'scripts/check-step63-published-knowledge-authority.mjs'),/STEP63 historical freeze \+ current Published Knowledge Authority successor compatibility passed/); }
   finally {
     fs.writeFileSync(path.join(fixture, pkaPath), `${JSON.stringify(pkaBeforeHistoricalCheck, null, 2)}\n`, 'utf8');
     fs.writeFileSync(path.join(fixture, publicationRegistryPath), `${JSON.stringify(publicationBeforeStep63, null, 2)}\n`, 'utf8');
