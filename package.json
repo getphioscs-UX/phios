@@ -1110,7 +1110,7 @@
     "check:bfa-w2-w14": "node scripts/check-bfa-w2-w14-review-evidence.mjs",
     "check:bfa-w15-w27": "node scripts/check-bfa-w15-w27-final-authority-publication.mjs",
     "check:bfa-w28-w39": "node scripts/check-bfa-w28-w39-production-acceptance-freeze.mjs",
-    "check:bfa": "npm run check:bfa-w0-w1 && npm run check:bfa-w2-w14 && npm run check:bfa-w15-w27 && npm run check:bfa-w28-w39",
+    "check:bfa": "npm run check:bfa-w0-w1 && npm run check:bfa-w2-w14 && npm run check:bfa-w15-w27 && npm run check:bfa-w28-w39 && npm run check:bfa-purity",
     "check:aps-8:historical": "node scripts/check-aps-8-historical-preserved-copy.mjs",
     "check:kap-w30": "node scripts/check-kap-w30-w45-phase18-governance.mjs W30",
     "check:kap-w31": "node scripts/check-kap-w30-w45-phase18-governance.mjs W31",
@@ -1150,7 +1150,8 @@
     "check:bfr-h14": "node scripts/check-bfr-h-part-a.mjs BFR-H14",
     "check:bfr-h-part-a": "npm run check:client-surface-invariants && node scripts/check-bfr-h-part-a.mjs ALL",
     "check:bfr-h": "npm run check:bfr-h-part-a",
-    "check:bfa-batch2": "node scripts/check-bfa-batch2-real-production.mjs"
+    "check:bfa-batch2": "node scripts/check-bfa-batch2-real-production.mjs",
+    "check:bfa-purity": "node scripts/check-bfa-public-article-purity-repair.mjs"
   },
   "type": "module"
 }

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-BFA-PUBLIC-ARTICLE-PURITY-REPAIR-v1.0.0",
+  "work": "BATCH-002_PUBLIC_ARTICLE_PURITY_REPAIR",
+  "baselineCommit": "6eb067c8944d641d7fa40393ed00c15802d7208d",
+  "status": "ACTIVE_SUCCESSOR_REPAIR",
+  "purpose": "Prevent internal production/governance language from leaking into customer-facing PHI OS articles while preserving internal authority metadata and historical publication lineage.",
+  "publicSurfaceRules": {
+    "standaloneKnowledgeBoundarySectionAllowed": false,
+    "internalGovernanceVocabularyAllowed": false,
+    "readerFacingQualificationAllowed": true,
+    "readerFacingQualificationPlacement": "NATURAL_PROSE_IN_RELEVANT_SECTION",
+    "internalKnowledgeBoundaryMetadataMayRemainForAudit": true,
+    "internalKnowledgeBoundaryMetadataMayRenderToCustomer": false
+  },
+  "blockedPublicVocabulary": [
+    "C2", "C3", "PJA", "CAR", "CPR", "BFA", "KPP", "APS", "ABL",
+    "Canonical authority", "Publication authority", "Human Publication Authority",
+    "production choreography", "additive projection", "successor projection",
+    "Candidate Registry", "Figure Requirement runtime", "CAR Asset production"
+  ],
+  "bfaProjectionRule": {
+    "sourceBriefRemainsComplete": true,
+    "readerFacingRequirementsSeparatedFromInternalGovernanceConstraints": true,
+    "copyAuthoringPromptIncludesReaderFacingRequirementsOnly": true,
+    "automaticPreflightBlocksGovernanceLeakage": true,
+    "blockingCode": "PUBLIC_ARTICLE_GOVERNANCE_LEAKAGE",
+    "knowledgeBoundaryBlockingCode": "PUBLIC_ARTICLE_KNOWLEDGE_BOUNDARY_SECTION"
+  },
+  "historicalArticleRule": {
+    "batch001SourceAuthorityRewritten": false,
+    "preBatch001SourceAuthorityRewritten": false,
+    "historicalKnowledgeBoundaryMetadataDeleted": false,
+    "publicProjectionSuppressesKnowledgeBoundary": true,
+    "reason": "Remove an internal-governance UI component without silently rewriting historically approved article content or authority digests."
+  },
+  "batch002Repair": {
+    "candidateCount": 6,
+    "nodeCount": 3,
+    "candidateBodiesMustChange": true,
+    "candidateDigestMustChangeWhenBodyChanges": true,
+    "finalPackageDigestMustChangeWhenCandidateChanges": true,
+    "priorApprovalReusableAfterDigestChange": false,
+    "humanApprovalCreatedByRepair": false
+  },
+  "authorityBoundary": {
+    "createsCanonicalMeaning": false,
+    "changesC2C3Authority": false,
+    "changesCARAuthority": false,
+    "createsHumanApproval": false,
+    "createsPublication": false
+  }
+}

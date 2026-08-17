@@ -9,10 +9,70 @@ const normalize = value => String(value ?? '').normalize('NFKC').toLowerCase().r
 const han = /[\u3400-\u9fff]/u;
 const statusMax = values => values.reduce((a,b)=>STATUS_ORDER[b]>STATUS_ORDER[a]?b:a,'PASS');
 
+const INTERNAL_GOVERNANCE_PATTERNS = Object.freeze([
+  /\b(?:C2|C3|PJA|CAR|CPR|BFA|KPP|ABL|APS)\b/i,
+  /\b(?:canonical|publication|human publication|car asset) authority\b/i,
+  /\bproduction choreography\b/i,
+  /\badditive projection\b/i,
+  /\bsuccessor projection\b/i,
+  /\bcandidate registry\b/i,
+  /\bfigure requirement(?: runtime)?\b/i,
+  /\bcar asset production\b/i,
+  /\bgoverned car workflow\b/i,
+  /\bcanonical (?:thesis|knowledge|claim)\b/i,
+  /\blegacy (?:relationship|relationships|supporting|evidence|source)\b/i,
+  /\bhuman production decision\b/i,
+  /\bcross-node asset assembly\b/i,
+  /\bproduction role\b/i,
+  /内部治理/u,
+  /生产编排/u,
+  /发布权限/u,
+  /人工发布权限/u,
+  /候选注册/u
+]);
+const KNOWLEDGE_BOUNDARY_HEADING = /^(?:#{1,6}\s*)?(?:知识边界|knowledge boundary)(?:\s|$)/imu;
+const publicizeRequirement = (value, locale) => {
+  if (typeof value !== 'string') return value;
+  if (locale === 'zh-Hans') return value
+    .replace(/Canonical mechanism/gi,'一般框架解释')
+    .replace(/Canonical framework/gi,'一般框架');
+  return value
+    .replace(/A Canonical mechanism/gi,'A general framework explanation')
+    .replace(/Canonical mechanism/gi,'general framework explanation')
+    .replace(/Canonical framework/gi,'general framework');
+};
+const internalGovernanceRequirement = value => {
+  const text = String(typeof value === 'string' ? value : value?.requirement ?? value?.label ?? '');
+  return INTERNAL_GOVERNANCE_PATTERNS.some(pattern => pattern.test(text));
+};
+const splitGovernanceRequirements = (values, locale) => {
+  const publicItems=[], internalItems=[];
+  for (const sourceValue of values ?? []) {
+    const value=publicizeRequirement(sourceValue,locale);
+    (internalGovernanceRequirement(value) ? internalItems : publicItems).push(value);
+  }
+  return { publicItems, internalItems };
+};
+export function publicArticlePurityFindings(value) {
+  const text=String(value??'');
+  const findings=[];
+  for (const pattern of INTERNAL_GOVERNANCE_PATTERNS) {
+    const match=text.match(pattern);
+    if (match?.[0] && !findings.includes(match[0])) findings.push(match[0]);
+  }
+  return findings;
+}
+
 export function projectPjaBrief(brief, { locale = brief?.locale ?? 'zh-Hans', figureRequirement = null } = {}) {
   const boundary = brief?.articleBoundary ?? {};
   const meaning = brief?.canonicalMeaning ?? {};
   const terms = brief?.terminologyProjection?.terms ?? [];
+  const coverageSplit=splitGovernanceRequirements((boundary.mustEstablish ?? []).map(x => typeof x === 'string' ? x : x.requirement).filter(Boolean), locale);
+  const distinctionSplit=splitGovernanceRequirements(boundary.requiredDistinctions ?? [], locale);
+  const preserveSplit=splitGovernanceRequirements(boundary.includedScope ?? [], locale);
+  const excludedSplit=splitGovernanceRequirements(boundary.excludedScope ?? [], locale);
+  const mustNotSplit=splitGovernanceRequirements(boundary.mustNotClaim ?? [], locale);
+  const internalGovernanceConstraints=[...coverageSplit.internalItems,...distinctionSplit.internalItems,...preserveSplit.internalItems,...excludedSplit.internalItems,...mustNotSplit.internalItems];
   return {
     projectionType: 'BFA_PJA_BRIEF_HUMAN_REVIEW_PROJECTION',
     nodeCode: brief?.nodeCode ?? null,
@@ -22,10 +82,19 @@ export function projectPjaBrief(brief, { locale = brief?.locale ?? 'zh-Hans', fi
     canonicalQuestion: meaning.canonicalQuestion ?? null,
     canonicalTitle: meaning.canonicalTitle ?? null,
     canonicalMeaning: meaning.centralThesis ?? null,
-    requiredCoverage: (boundary.mustEstablish ?? []).map(x => typeof x === 'string' ? x : x.requirement).filter(Boolean),
-    requiredDistinctions: boundary.requiredDistinctions ?? [],
-    mustPreserve: boundary.includedScope ?? [],
-    mustNotClaim: boundary.mustNotClaim ?? [],
+    requiredCoverage: coverageSplit.publicItems,
+    requiredDistinctions: distinctionSplit.publicItems,
+    mustPreserve: preserveSplit.publicItems,
+    mustNotClaim: mustNotSplit.publicItems,
+    excludedScope: excludedSplit.publicItems,
+    internalGovernanceConstraints,
+    sourceGovernanceRequirements: {
+      requiredCoverage: coverageSplit.internalItems,
+      requiredDistinctions: distinctionSplit.internalItems,
+      mustPreserve: preserveSplit.internalItems,
+      excludedScope: excludedSplit.internalItems,
+      mustNotClaim: mustNotSplit.internalItems
+    },
     terminology: terms.map(t => ({ termCode:t.termCode, zhHans:t['zh-Hans'], en:t.en, translationLock:!!t.translationLock })),
     evidenceScope: brief?.sourceSnapshot?.inputFiles ?? [],
     figureRequirement,
@@ -68,6 +137,12 @@ export function buildAuthoringPrompt(projection, locale) {
     `Required distinctions:\n- ${(projection.requiredDistinctions ?? []).join('\n- ')}`,
     `Must not claim:\n- ${(projection.mustNotClaim ?? []).join('\n- ')}`,
     `Required terminology: ${(projection.terminology ?? []).map(t => locale==='en'?t.en:t.zhHans).filter(Boolean).join(', ')}`,
+    locale==='en'
+      ? 'Public-surface rule: write only reader-facing knowledge. Do not mention internal production/runtime/governance labels such as C2, C3, PJA, CAR, CPR, BFA, KPP, APS, ABL, authority digests, Candidate Registry, production choreography, successor projection, Figure Requirement runtime, or a section titled Knowledge Boundary.'
+      : '公开页面规则：只写读者需要理解的知识。不得出现 C2、C3、PJA、CAR、CPR、BFA、KPP、APS、ABL、authority digest、Candidate Registry、production choreography、successor projection、Figure Requirement runtime 等内部生产/治理术语，也不得建立“知识边界”独立章节。',
+    locale==='en'
+      ? 'If a limitation matters to readers (for example medical, legal, financial, evidentiary, or factual scope), express it naturally inside the relevant explanatory paragraph instead of a governance card or process note.'
+      : '如果医疗、法律、财务、证据或事实范围等限制对读者确有价值，应自然写进相关解释段落，而不是形成治理卡片或生产说明。',
     'Return title, summary and bodyMarkdown. Candidate production is not Human approval.'
   ].join('\n\n');
   return { prompt: text, promptDigest: sha256(text) };
@@ -88,10 +163,14 @@ export function runAutomaticPreflight({ projection, candidate, locale, sameRoute
   const body = String(article.bodyMarkdown ?? '');
   const title = String(article.title ?? '');
   const summary = String(article.summary ?? '');
+  const publicSurfaceText=`${title}\n${summary}\n${body}`;
+  const governanceLeaks=publicArticlePurityFindings(publicSurfaceText);
   add('CANDIDATE_INTEGRITY', candidate && title && body ? 'PASS':'BLOCKED', candidate ? 'candidate present':'candidate missing');
   add('CANONICAL_BINDING', candidate?.nodeCode === projection?.nodeCode ? 'PASS':'BLOCKED');
   add('BRIEF_DIGEST_BINDING', candidate?.sourceBrief?.briefDigest === projection?.sourceDigest || candidate?.briefDigest === projection?.sourceDigest ? 'PASS':'BLOCKED');
   add('PROMPT_BINDING', candidate?.promptDigest || candidate?.provenance?.promptDigest ? 'PASS':'WARNING','legacy/imported Candidates may not expose promptDigest');
+  add('PUBLIC_ARTICLE_GOVERNANCE_LEAKAGE', governanceLeaks.length ? 'BLOCKED':'PASS', governanceLeaks.join(' | '));
+  add('PUBLIC_ARTICLE_KNOWLEDGE_BOUNDARY_SECTION', KNOWLEDGE_BOUNDARY_HEADING.test(body) ? 'BLOCKED':'PASS', KNOWLEDGE_BOUNDARY_HEADING.test(body) ? 'Reader-facing articles must not expose a standalone Knowledge Boundary section.' : '');
   const coverageMiss = (projection?.requiredCoverage ?? []).filter(r=>!phraseCovered(body,r));
   add('REQUIRED_CONCEPT_COVERAGE', coverageMiss.length ? 'BLOCKED':'PASS', coverageMiss.join(' | '));
   const distinctionMiss = (projection?.requiredDistinctions ?? []).filter(r=>!phraseCovered(body,r));
