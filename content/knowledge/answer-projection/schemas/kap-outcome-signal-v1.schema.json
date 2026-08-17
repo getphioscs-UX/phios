@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KAP-OUTCOME-SIGNAL-v1",
+  "title": "KAP Outcome Signal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "event",
+    "locale",
+    "entrySurface",
+    "answerMode",
+    "privacy"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-W40-OUTCOME-SIGNAL-v1.0.0"
+    },
+    "event": {
+      "enum": [
+        "answerViewed",
+        "relatedKnowledgeOpened",
+        "followUpAsked",
+        "guidedStarted",
+        "journeyStarted",
+        "helpfulFeedback"
+      ]
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "entrySurface": {
+      "type": "string",
+      "minLength": 1
+    },
+    "answerMode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "clusterCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value": {},
+    "privacy": {
+      "type": "object",
+      "required": [
+        "dataClass",
+        "rawQuestionStored",
+        "rawAnswerStored",
+        "userIdStored",
+        "caseIdStored"
+      ],
+      "properties": {
+        "dataClass": {
+          "const": "ANONYMOUS_PRODUCT_SIGNAL"
+        },
+        "rawQuestionStored": {
+          "const": false
+        },
+        "rawAnswerStored": {
+          "const": false
+        },
+        "userIdStored": {
+          "const": false
+        },
+        "caseIdStored": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

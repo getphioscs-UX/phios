@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-KAP-METHOD-JOURNEY-ENTITLEMENT-v1",
+  "title": "KAP Method Journey Entitlement",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodCode",
+    "access",
+    "reason",
+    "authority"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-KAP-W45-METHOD-JOURNEY-ENTITLEMENT-v1.0.0"
+    },
+    "methodCode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "reason": {
+      "type": "string"
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}
