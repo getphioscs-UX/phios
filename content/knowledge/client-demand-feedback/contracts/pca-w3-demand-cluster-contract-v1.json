@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-PCA-W3-DEMAND-CLUSTER-CONTRACT-v1.0.0",
+  "phase": "PCA",
+  "step": "PCA-W3",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "status": "ACTIVE_DEMAND_CLUSTER_NON_CANONICAL",
+  "input": "QuestionDemandSignal[]",
+  "output": "QuestionDemandCluster",
+  "rules": {
+    "sameQuestionClusterCodeRequired": true,
+    "frequencySummed": true,
+    "ratesFrequencyWeighted": true,
+    "answerDifficultyUsesHighestObserved": true,
+    "matchedNodesUnionOnly": true
+  },
+  "authority": {
+    "clusterIsCanonicalKnowledge": false,
+    "clusterCreatesCanonicalNode": false,
+    "clusterCreatesMeaning": false,
+    "clusterChangesTruth": false
+  }
+}

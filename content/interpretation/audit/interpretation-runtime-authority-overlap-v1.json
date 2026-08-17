@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-MIR-1-INTERPRETATION-RUNTIME-AUTHORITY-OVERLAP-v1.0.0",
+  "work": [
+    "MIR-1",
+    "IR-W0"
+  ],
+  "status": "NO_UNRESOLVED_DUPLICATE_AUTHORITY",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "recordedAt": "2026-08-17",
+  "overlaps": [
+    {
+      "candidate": "SHARED_INTERPRETATION_RUNTIME vs future Interpretation Kernel",
+      "risk": "name suggests full interpretation ownership",
+      "resolution": "existing runtime frozen as candidate-only AI composition; deterministic derivation reserved to one future singleton kernel",
+      "state": "RESOLVED_BY_BOUNDARY"
+    },
+    {
+      "candidate": "Interpretation Kernel vs CANONICAL_MEANING_RUNTIME",
+      "risk": "derivation could redefine meaning vocabulary",
+      "resolution": "IR may derive/trace meaning but CMR alone owns canonical meaning codes/mappings",
+      "state": "RESOLVED_BY_BOUNDARY"
+    },
+    {
+      "candidate": "Interpretation Kernel vs RMO interpretation/inference boundary",
+      "risk": "RMO interpretation state could be mistaken for derivation authority",
+      "resolution": "RMO-W9 boundary decision explicitly creates neither interpretation nor inference content",
+      "state": "RESOLVED_BY_BOUNDARY"
+    },
+    {
+      "candidate": "Interpretation Kernel vs RRE",
+      "risk": "reading could become a second interpretation runtime",
+      "resolution": "RRE owns bounded case/evidence-scoped Reading; IR owns only future canonical derivation before Reading",
+      "state": "RESOLVED_BY_BOUNDARY"
+    },
+    {
+      "candidate": "Interpretation Kernel vs KAP",
+      "risk": "guided answer/recomposition could generate canonical derivation",
+      "resolution": "KAP may compose/explain accepted grounded inputs but cannot create canonical derivation, method result, or reality reading authority",
+      "state": "RESOLVED_BY_BOUNDARY"
+    },
+    {
+      "candidate": "Interpretation Kernel vs MCD Renderer/Surface",
+      "risk": "renderer or Reading tab could compute/interpret",
+      "resolution": "MCD-6 renderer is presentation-only; MCD-7 Reading is placeholder with interpretationAllowed=false; MCD-8 transfers no interpretation authority",
+      "state": "RESOLVED_BY_BOUNDARY"
+    },
+    {
+      "candidate": "Interpretation Kernel vs CAR/Figure",
+      "risk": "figure asset metadata could be treated as interpretation or figure-identity authority",
+      "resolution": "CAR remains asset/lineage authority only; MIR-1 creates no MFIG identity authority; MIR-2 must reconcile figure identity separately",
+      "state": "RESOLVED_BY_BOUNDARY"
+    },
+    {
+      "candidate": "Interpretation Kernel vs Professional Runtime",
+      "risk": "interpretation could become recommendation/judgment",
+      "resolution": "professional judgment stays PR v2 / governed professional runtime with human attribution",
+      "state": "RESOLVED_BY_BOUNDARY"
+    }
+  ],
+  "invariants": {
+    "noSecondInterpretationRuntime": true,
+    "noSecondMeaningRuntime": true,
+    "noRendererCalculationAuthority": true,
+    "noRendererInterpretationAuthority": true,
+    "noInterpretationProfessionalJudgment": true,
+    "noInterpretationNavigationAuthority": true
+  }
+}

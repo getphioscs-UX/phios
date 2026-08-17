@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/question-demand-signal-v1.schema.json",
+  "title": "QuestionDemandSignal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "signalId",
+    "questionClusterCode",
+    "window",
+    "matchedNodes",
+    "metrics",
+    "privacy",
+    "authority"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-QUESTION-DEMAND-SIGNAL-v1.0.0"
+    },
+    "signalId": {
+      "type": "string",
+      "pattern": "^PCA-QDS-[A-F0-9]{8}$"
+    },
+    "questionClusterCode": {
+      "type": "string",
+      "pattern": "^QCL-[A-Z0-9][A-Z0-9_-]{2,63}$"
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "matchedNodes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^KN-[A-Z0-9-]+$"
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frequency",
+        "coverageGap",
+        "followUpRate",
+        "answerDifficulty",
+        "journeyEscalationRate"
+      ],
+      "properties": {
+        "frequency": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "coverageGap": {
+          "enum": [
+            "NONE",
+            "PARTIAL",
+            "INSUFFICIENT"
+          ]
+        },
+        "followUpRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "answerDifficulty": {
+          "enum": [
+            "LOW",
+            "MEDIUM",
+            "HIGH"
+          ]
+        },
+        "journeyEscalationRate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataClass",
+        "rawQuestionStored",
+        "userIdentityStored",
+        "sessionIdentityStored"
+      ],
+      "properties": {
+        "dataClass": {
+          "const": "ANONYMOUS_AGGREGATED"
+        },
+        "rawQuestionStored": {
+          "const": false
+        },
+        "userIdentityStored": {
+          "const": false
+        },
+        "sessionIdentityStored": {
+          "const": false
+        }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "createsCanonicalKnowledge",
+        "changesCanonicalTruth",
+        "createsPublication"
+      ],
+      "properties": {
+        "createsCanonicalKnowledge": {
+          "const": false
+        },
+        "changesCanonicalTruth": {
+          "const": false
+        },
+        "createsPublication": {
+          "const": false
+        }
+      }
+    }
+  }
+}

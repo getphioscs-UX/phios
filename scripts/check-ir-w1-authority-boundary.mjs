@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const p='content/interpretation/governance/interpretation-authority-boundary-v1.json';
+assert.ok(fs.existsSync(p));
+const x=JSON.parse(fs.readFileSync(p,'utf8'));
+assert.equal(x.status,'FROZEN');
+assert.deepEqual(x.canonicalSeparation,['METHOD_CALCULATION','METHOD_PROJECTION','INTERPRETATION_DERIVATION','CANONICAL_MEANING','READING','NAVIGATION','PROFESSIONAL_JUDGMENT']);
+for (const forbidden of ['method_calculation_truth','method_algorithm_truth','professional_judgment','medical_diagnosis','financial_truth','legal_truth','publication_authority','navigation_action_authority','canonical_meaning_identity_or_mapping_authority']) assert.ok(x.interpretationMayNotOwn.includes(forbidden), forbidden);
+assert.equal(x.existingCompositionRuntime.classification,'CANDIDATE_ONLY_AI_COMPOSITION');
+assert.equal(x.existingCompositionRuntime.mayDeriveCanonicalRules,false);
+assert.equal(x.futureKernel.state,'RESERVED_SINGLETON_UNINSTANTIATED');
+assert.equal(x.futureKernel.instantiatedByMir1,false);
+assert.equal(x.objectDomainPrecedence.calculationOwner,'SHARED_CALCULATION_RUNTIME');
+assert.equal(x.objectDomainPrecedence.projectionOwner,'SHARED_PROJECTION_RUNTIME');
+assert.equal(x.objectDomainPrecedence.meaningOwner,'CANONICAL_MEANING_RUNTIME');
+assert.equal(x.objectDomainPrecedence.readingOwner,'RRE');
+console.log('✓ IR-W1 authority boundary passed: Calculation ≠ Projection ≠ Interpretation ≠ Meaning ≠ Reading ≠ Navigation ≠ Professional Judgment.');

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-PCA-W6-PJA-BRIEF-CONTRACT-v1.0.0",
+  "phase": "PCA",
+  "step": "PCA-W6",
+  "baselineCommit": "dcfcc7685aa31c6af4a32e77022365a01847493b",
+  "status": "ACTIVE_DEMAND_ORIGINATED_PJA_BRIEF_CANDIDATE",
+  "requiredFields": [
+    "scope",
+    "canonicalNodes",
+    "thesis",
+    "boundaries",
+    "sourceRefs",
+    "localeRequirements"
+  ],
+  "preconditions": [
+    "PCA_ARTICLE_CANDIDATE_ELIGIBLE",
+    "KPP_PRODUCTION_ROLE_ARTICLE",
+    "KPP_HUMAN_PRODUCTION_DECISION",
+    "KPP_FROZEN_PLAN_REFERENCE",
+    "KPP_FROZEN_WAVE_REFERENCE"
+  ],
+  "thesisRule": {
+    "allowedSources": [
+      "CANONICAL_THESIS",
+      "HUMAN_EDITORIAL"
+    ],
+    "demandDerivedThesisForbidden": true,
+    "aiInferredThesisForbidden": true
+  },
+  "humanReviewRequired": true,
+  "authority": {
+    "briefIsPjaApproval": false,
+    "briefMayPublish": false,
+    "pjaLifecycleStillRequired": true
+  },
+  "preservedEvidence": {
+    "kppPjaHandoff": {
+      "path": "content/knowledge/production-planning/contracts/kpp-pja-handoff-contract-v2.json",
+      "sha256": "2876309cc4dd52119035975490caa14a02d9d5a998d4d12571e0f1f9ac09cb1a"
+    }
+  }
+}

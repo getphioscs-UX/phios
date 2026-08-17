@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-PCA-DEMAND-THRESHOLD-POLICY-v1.0.0",
+  "policyVersion": "1.0.0",
+  "highDemand": {
+    "minimumFrequency": 20,
+    "alternate": {
+      "minimumFrequency": 10,
+      "minimumFollowUpRate": 0.25
+    }
+  },
+  "strongKnowledgeSupport": {
+    "allowedStatuses": [
+      "STRONG"
+    ],
+    "minimumCanonicalNodes": 1,
+    "minimumGovernedSourceRefs": 1
+  },
+  "reusability": {
+    "requiresReusable": true,
+    "personalSpecificityAllowed": false
+  },
+  "governance": {
+    "thresholdsCreateProductionAuthority": false,
+    "kppDecisionStillRequired": true,
+    "humanProductionDecisionStillRequired": true
+  }
+}
