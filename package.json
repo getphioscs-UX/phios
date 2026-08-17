@@ -4,6 +4,7 @@
     "ajv": "^8.17.1",
     "linkedom": "^0.18.13",
     "pdfjs-dist": "6.2.108",
+    "sharp": "0.35.2",
     "wrangler": "^4.0.0"
   },
   "name": "phios-platform-v2",
@@ -1157,7 +1158,7 @@
     "check:ir-w2": "node scripts/check-ir-w2-source-authority-hierarchy.mjs",
     "check:ir-w6": "node scripts/check-ir-w6-figure-reconciliation.mjs",
     "check:mir-1": "node scripts/check-mir-1-authority-baseline-reconciliation.mjs",
-    "check:mfig": "npm run check:mfig-identity && npm run check:mfig-semantic && npm run check:mfig-authority && npm run check:mfig-layout && npm run check:mfig-geometry && npm run check:mfig-determinism && npm run check:mfig-staleness && npm run check:mfig-visual-production && npm run check:mfig-visual-regression && npm run check:mfig-cross-figure-consistency && npm run check:mfig-car-boundary && npm run check:mfig-machine-acceptance && npm run check:mfig-production-freeze",
+    "check:mfig": "npm run check:mfig-identity && npm run check:mfig-semantic && npm run check:mfig-authority && npm run check:mfig-layout && npm run check:mfig-raster-backend && npm run check:mfig-geometry && npm run check:mfig-determinism && npm run check:mfig-staleness && npm run check:mfig-visual-production && npm run check:mfig-visual-regression && npm run check:mfig-cross-figure-consistency && npm run check:mfig-car-boundary && npm run check:mfig-machine-acceptance && npm run check:mfig-production-freeze",
     "check:mir-2": "node scripts/check-mir-2-mfig-figure-authority-reconciliation.mjs",
     "check:personal-structure:gate-wheel": "node scripts/check-personal-structure-gate-wheel.mjs",
     "check:personal-structure:gate-line": "node scripts/check-personal-structure-gate-line.mjs",
@@ -1246,7 +1247,8 @@
     "mfig:publish": "node scripts/mfig/mfig-publish-wrapper.mjs",
     "mfig:affected": "node scripts/mfig/resolve-affected-mfigs.mjs",
     "check:mfig-production-freeze": "node scripts/check-mfig-production-freeze.mjs",
-    "mfig:spec": "node scripts/mfig/resolve-mfig-authority.mjs"
+    "mfig:spec": "node scripts/mfig/resolve-mfig-authority.mjs",
+    "check:mfig-raster-backend": "node scripts/check-mfig-raster-backend.mjs"
   },
   "type": "module",
   "dependencies": {

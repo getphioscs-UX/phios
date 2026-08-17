@@ -1,7 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { spawnSync } from 'node:child_process';
+import { createRequire } from 'node:module';
+const require=createRequire(import.meta.url);
+let sharpModule;
 export const ROOT=process.cwd();
 export const BASE='07f525b2047498364fea5a4ae0f9a51c37a47dd1';
 export const P={reg:'content/professional/method-runtime/canonical-mfig-authority-registry-v1.json',role:'content/professional/method-runtime/canonical-mfig-role-classification-registry-v1.json',runtime:'content/professional/method-runtime/mfig-visual-accuracy-runtime-v1.json',specDir:'content/professional/method-runtime/mfig-visual-spec',sourceDir:'content/professional/method-runtime/mfig-source-bindings',prod:'content/professional/method-runtime/mfig-production',style:'content/professional/method-runtime/mfig-production/mfig-style-tokens-v1.json',car:'content/professional/canonical-asset-runtime/registries/mfig-car-binding-registry-v1.json',calc:'content/professional/method-runtime/mfig-calculation-runtime-binding-registry-v1.json',proj:'content/professional/method-runtime/mfig-projection-runtime-binding-registry-v1.json'};
@@ -30,5 +32,5 @@ let sy=style.canvas.height-86; const states=spec.mustState.slice(0,3).join('  ·
 export const geometryFingerprint=(spec,style)=>shaBytes(Buffer.from(stable(layout(spec,style))));
 export function ensureDir(p){fs.mkdirSync(p,{recursive:true});}
 export function writeFile(p,data){ensureDir(path.dirname(p));fs.writeFileSync(p,data);}
-export function rasterize(svg,png,webp){ensureDir(path.dirname(png));ensureDir(path.dirname(webp)); const cmd=process.platform==='win32'?'magick.exe':'magick'; const a=spawnSync(cmd,[svg,png],{encoding:'utf8'}); if(a.status!==0)throw new Error(`ImageMagick PNG export failed. Install ImageMagick and ensure magick is on PATH. ${a.stderr||a.error||''}`); const b=spawnSync(cmd,[svg,webp],{encoding:'utf8'}); if(b.status!==0)throw new Error(`ImageMagick WebP export failed. ${b.stderr||b.error||''}`);}
+export async function rasterize(svg,png,webp){ensureDir(path.dirname(png));ensureDir(path.dirname(webp)); try{sharpModule??=require('sharp');}catch(error){throw new Error(`Repository raster backend unavailable. Run npm ci so the pinned sharp dependency is installed. ${error?.message||error}`);} const input=fs.readFileSync(svg),opts={density:96,unlimited:false,failOn:'error'},image=sharpModule(input,opts); await Promise.all([image.clone().png({compressionLevel:6,adaptiveFiltering:false,palette:false,effort:4}).toFile(png),image.clone().webp({quality:92,alphaQuality:100,effort:4,smartSubsample:false,lossless:false}).toFile(webp)]);}
 export function entryById(id){const e=read(P.reg).entries.find(x=>x.mfigId===id); if(!e)throw new Error(`Unknown ${id}`); return e;}
