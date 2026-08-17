@@ -1217,7 +1217,11 @@
     "check:mir-7": "node scripts/check-mir-7-method-interpretation-result.mjs",
     "check:kap-guided-reading": "node scripts/check-mir-8-kap-guided-reading.mjs",
     "check:reading-surface": "node scripts/check-reading-surface.mjs",
-    "check:mir-8": "node scripts/check-mir-8-guided-reading-explainable-surface.mjs"
+    "check:mir-8": "node scripts/check-mir-8-guided-reading-explainable-surface.mjs",
+    "check:mir-8:mir-9-baseline": "node scripts/check-mir-8-to-mir-9-baseline.mjs",
+    "check:rjx": "npm run check:rjx-phase15 && node scripts/check-rjx-phase19-w11-w18.mjs && node scripts/check-rjx-mir9-successor.mjs",
+    "check:kap-rjx-handoff": "node scripts/check-kap-rjx-handoff.mjs",
+    "check:mir-9": "node scripts/check-mir-9-reality-escalation-rjx-integration.mjs"
   },
   "type": "module",
   "dependencies": {
