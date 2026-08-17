@@ -2,14 +2,16 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-const run = (cmd,args) => {
-  const r=spawnSync(cmd,args,{stdio:'inherit',shell:process.platform==='win32'});
+const run = (cmd,args,{shell=false}={}) => {
+  const r=spawnSync(cmd,args,{stdio:'inherit',shell});
   assert.equal(r.status,0,`${cmd} ${args.join(' ')} failed`);
 };
 run(process.execPath,['scripts/check-ir-w0-baseline-audit.mjs']);
 run(process.execPath,['scripts/check-ir-w1-authority-boundary.mjs']);
 run(process.execPath,['scripts/check-ir-w2-source-authority-hierarchy.mjs']);
-run(process.platform==='win32'?'npm.cmd':'npm',['run','check:mcd']);
+const npmExecPath = process.env.npm_execpath;
+if (npmExecPath) run(process.execPath,[npmExecPath,'run','check:mcd']);
+else run(process.platform==='win32'?'npm.cmd':'npm',['run','check:mcd'],{shell:process.platform==='win32'});
 const p='content/reconciliation/mir/mir-1-authority-baseline-reconciliation-v1.json';
 const x=JSON.parse(fs.readFileSync(p,'utf8'));
 const sha = q => crypto.createHash('sha256').update(fs.readFileSync(q)).digest('hex');

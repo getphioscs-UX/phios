@@ -326,6 +326,9 @@ export function normalizeArticleForRenderer(article) {
     title: requiredText(article.title, 'article_title'),
     shortAnswer: requiredText(article.shortAnswer, 'article_short_answer'),
     summary: requiredText(article.summary, 'article_summary'),
-    sections: article.sections.map(prepareArticleSectionForRendering)
+    sections: article.sections.map(prepareArticleSectionForRendering),
+    // Public Article Purity: source-level knowledge boundaries remain internal
+    // governance metadata and are never projected as a customer-facing card.
+    knowledgeBoundary: []
   };
 }

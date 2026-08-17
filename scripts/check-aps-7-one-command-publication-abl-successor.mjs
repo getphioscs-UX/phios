@@ -84,10 +84,12 @@ async function runMixedPrePublicationFixture() {
 async function runPublishedStateIdempotenceFixture(realRun) {
   const temp = await makeTempRoot();
   try {
+    const authorityBefore = JSON.parse(await fs.readFile(path.join(temp, 'content/knowledge/public/authority/published-knowledge-authority.json'), 'utf8'));
+    const preservedAuthorityCodes = authorityBefore.records.map(record => record.authorityRecordCode).sort();
     const before = await snapshot(temp, realRun.outcomes.filter(item => item.decision === 'publish'));
     const rerun = await runAps7Publication(temp, 'BATCH-001', { apply: true });
     assert.equal(rerun.result.runDigest, realRun.runDigest, 'Published successor rerun must reproduce the recorded APS-7 run digest.');
-    await validatePublishedState(temp, rerun.result, realRun.outcomes.filter(item => item.decision === 'publish').length);
+    await validatePublishedState(temp, rerun.result, realRun.outcomes.filter(item => item.decision === 'publish').length, { expectedAuthorityRecordCount: authorityBefore.recordCount, preservedAuthorityCodes });
     assert.deepEqual(await snapshot(temp, realRun.outcomes.filter(item => item.decision === 'publish')), before);
   } finally {
     await fs.rm(temp, { recursive: true, force: true });
@@ -104,7 +106,7 @@ async function makeTempRoot() {
   return temp;
 }
 
-async function validatePublishedState(temp, result, publishCount) {
+async function validatePublishedState(temp, result, publishCount, authorityExpectation = null) {
   assert.equal(sha(await fs.readFile(path.join(temp, frozenPath))), baselineFrozenDigest, 'Frozen PJA Publication W1 implementation mutated.');
   const publicationRegistry = JSON.parse(await fs.readFile(path.join(temp, 'content/knowledge/production/registry/publication-registry.json'), 'utf8'));
   for (const outcome of result.outcomes.filter(item => item.decision === 'publish')) {
@@ -133,7 +135,13 @@ async function validatePublishedState(temp, result, publishCount) {
     ablPublishCount = ablPublished.length;
     for (const outcome of ablPublished) assert(authority.records.some(record => record.nodeCode === outcome.nodeCode && record.locale === 'en'), `Missing ABL-5 PKA record for ${outcome.nodeCode}`);
   }
-  assert.equal(authority.recordCount, 2 + publishCount + ablPublishCount, 'Historical two PKA records plus APS-7 outcomes plus attributable ABL-5 additive authority expected.');
+  if (authorityExpectation) {
+    assert.equal(authority.recordCount, authorityExpectation.expectedAuthorityRecordCount, 'Published APS-7 idempotence must preserve the current PKA baseline, including later successor authorities.');
+    const currentCodes = new Set(authority.records.map(record => record.authorityRecordCode));
+    for (const code of authorityExpectation.preservedAuthorityCodes) assert(currentCodes.has(code), `Published APS-7 rerun lost pre-existing PKA authority ${code}`);
+  } else {
+    assert.ok(authority.recordCount >= 2 + publishCount + ablPublishCount, 'Historical two PKA records plus APS-7/ABL-5 attributable authority must remain present; additive later successor authority is allowed.');
+  }
   const manifest = JSON.parse(await fs.readFile(path.join(temp, 'content/knowledge/public/visual-article-release.json'), 'utf8'));
   assert.equal(manifest.records.filter(record => result.outcomes.some(item => item.nodeCode === record.nodeCode && item.decision === 'publish')).length, publishCount);
   const w11 = JSON.parse(await fs.readFile(path.join(temp, 'content/production/visual-article/decisions/vap-w11-batch-001-human-publication-decisions-v1.json'), 'utf8'));

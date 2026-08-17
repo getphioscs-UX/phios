@@ -231,9 +231,9 @@ export function createPublicArticleProjection(
     hero: publicHero(content.hero),
     keyConcepts: Object.freeze(publicKeyConcepts(content.keyConcepts)),
     sections: Object.freeze(publicSections(content.sections)),
-    knowledgeBoundary: Object.freeze(
-      publicBoundaries(content.knowledgeBoundary)
-    ),
+    // Historical source records may retain knowledgeBoundary for internal
+    // governance/audit. Public article projection intentionally suppresses it.
+    knowledgeBoundary: Object.freeze([]),
     publicSources: Object.freeze(publicSourceProjection(
       content.sourceReferences,
       registeredSources

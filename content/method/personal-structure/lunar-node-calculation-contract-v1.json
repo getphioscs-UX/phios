@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-LUNAR-NODE-CALCULATION-CONTRACT-v1.0.0",
+  "work": "MIR-3-NODE-SUCCESSOR",
+  "status": "FROZEN",
+  "authority": "SHARED_CALCULATION_RUNTIME",
+  "methodOwner": "ASTROLOGY",
+  "pluginOwner": "AST",
+  "nodePolicyCode": "PHI_OS_AST_TRUE_NODE_V1",
+  "nodeConvention": "TRUE_NODE.V1",
+  "engine": {
+    "code": "ASTRONOMY_ENGINE_JS",
+    "version": "2.1.19",
+    "package": "astronomy-engine",
+    "license": "MIT"
+  },
+  "northNodeAlgorithm": [
+    "GeoMoonState(time) returns geocentric Moon position+velocity in EQJ",
+    "Rotation_EQJ_ECT(time) defines EQJ -> true ecliptic of date",
+    "RotateState(rotation,state) rotates position and velocity to ECT",
+    "h = r × v",
+    "n = z_hat × h = (-h_y, h_x, 0)",
+    "longitude = normalize360(atan2(n_y,n_x) in degrees)"
+  ],
+  "southNodeAlgorithm": "normalize360(northNodeLongitude + 180)",
+  "forbidden": [
+    "MEAN_NODE_FALLBACK",
+    "FIXED_NODE_TABLE",
+    "AI_INFERENCE",
+    "HDR_SPECIFIC_NODE_MODEL",
+    "SECOND_GATE_MAPPER"
+  ],
+  "outputPrecisionDecimals": 12,
+  "gateMappingVersion": "PHI-OS-GATE-WHEEL-v1.0.0",
+  "gateWheelEclipticOffsetDeg": 302.0
+}

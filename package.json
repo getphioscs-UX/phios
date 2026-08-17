@@ -1174,7 +1174,14 @@
     "check:mir-3": "node scripts/check-mir-3-method-calculation-projection-reconciliation.mjs",
     "check:mir-4-renderer": "node scripts/check-mir-4-renderer-successor.mjs",
     "check:mir-4-surface": "node scripts/check-mir-4-client-surface-successor.mjs",
-    "check:mir-4": "node scripts/check-mir-4-dynamic-renderer-client-surface-reconciliation.mjs"
+    "check:mir-4": "node scripts/check-mir-4-dynamic-renderer-client-surface-reconciliation.mjs",
+    "check:personal-structure:lunar-node-successor": "node scripts/check-personal-structure-lunar-node-successor.mjs",
+    "check:mir-3-node-successor": "npm run check:mir-3 && npm run check:personal-structure:lunar-node-successor",
+    "check:personal-structure:lunar-node-engine": "node scripts/check-personal-structure-lunar-node-engine-integration.mjs",
+    "check:mir-3-node-production": "npm run check:mir-3-node-successor && npm run check:personal-structure:lunar-node-engine"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "astronomy-engine": "2.1.19"
+  }
 }
