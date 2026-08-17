@@ -1,0 +1,1 @@
+import {ids,read,sourcePath} from './figure-lib.mjs';const changed=process.argv.slice(2).filter(x=>!x.startsWith('--'));const out=[];for(const id of ids()){const sb=read(sourcePath(id));if(sb.sources.some(s=>changed.includes(s.path)))out.push(id);}console.log(out.length?out.join('\n'):'NO_AFFECTED_FIGURES');

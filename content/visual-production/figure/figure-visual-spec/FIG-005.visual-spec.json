@@ -1,0 +1,99 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-READING-EVIDENCE-NAVIGATION-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "GLOBAL",
+  "edges": [
+    {
+      "edgeId": "FIG-005-E01",
+      "from": "FIG-005-N01",
+      "relation": "GROUNDED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-005-SRC-01",
+      "to": "FIG-005-N02"
+    },
+    {
+      "edgeId": "FIG-005-E02",
+      "from": "FIG-005-N02",
+      "relation": "SUPPORTS",
+      "required": true,
+      "sourceBindingId": "FIG-005-SRC-02",
+      "to": "FIG-005-N04"
+    },
+    {
+      "edgeId": "FIG-005-E03",
+      "from": "FIG-005-N03",
+      "relation": "BOUNDS",
+      "required": true,
+      "sourceBindingId": "FIG-005-SRC-03",
+      "to": "FIG-005-N04"
+    },
+    {
+      "edgeId": "FIG-005-E04",
+      "from": "FIG-005-N04",
+      "relation": "REVIEWED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-005-SRC-04",
+      "to": "FIG-005-N05"
+    }
+  ],
+  "figureId": "FIG-005",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-005-N01",
+    "FIG-005-N02",
+    "FIG-005-N03",
+    "FIG-005-N04",
+    "FIG-005-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Reading",
+      "nodeId": "FIG-005-N01",
+      "required": true,
+      "semanticKey": "READING",
+      "sourceBindingId": "FIG-005-SRC-01"
+    },
+    {
+      "displayLabel": "Evidence",
+      "nodeId": "FIG-005-N02",
+      "required": true,
+      "semanticKey": "EVIDENCE",
+      "sourceBindingId": "FIG-005-SRC-01"
+    },
+    {
+      "displayLabel": "Unknowns",
+      "nodeId": "FIG-005-N03",
+      "required": true,
+      "semanticKey": "UNKNOWNS",
+      "sourceBindingId": "FIG-005-SRC-01"
+    },
+    {
+      "displayLabel": "Navigation",
+      "nodeId": "FIG-005-N04",
+      "required": true,
+      "semanticKey": "NAVIGATION",
+      "sourceBindingId": "FIG-005-SRC-01"
+    },
+    {
+      "displayLabel": "Review",
+      "nodeId": "FIG-005-N05",
+      "required": true,
+      "semanticKey": "REVIEW",
+      "sourceBindingId": "FIG-005-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "READING-EVIDENCE-NAVIGATION",
+  "title": "Reading → Evidence → Navigation"
+}

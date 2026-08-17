@@ -1,0 +1,99 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-APPROVAL-FLOW-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "PROFESSIONAL",
+  "edges": [
+    {
+      "edgeId": "FIG-048-E01",
+      "from": "FIG-048-N01",
+      "relation": "GROUNDS",
+      "required": true,
+      "sourceBindingId": "FIG-048-SRC-01",
+      "to": "FIG-048-N02"
+    },
+    {
+      "edgeId": "FIG-048-E02",
+      "from": "FIG-048-N02",
+      "relation": "SUPPORTS",
+      "required": true,
+      "sourceBindingId": "FIG-048-SRC-02",
+      "to": "FIG-048-N03"
+    },
+    {
+      "edgeId": "FIG-048-E03",
+      "from": "FIG-048-N03",
+      "relation": "REQUIRES",
+      "required": true,
+      "sourceBindingId": "FIG-048-SRC-03",
+      "to": "FIG-048-N04"
+    },
+    {
+      "edgeId": "FIG-048-E04",
+      "from": "FIG-048-N04",
+      "relation": "ALLOWS",
+      "required": true,
+      "sourceBindingId": "FIG-048-SRC-03",
+      "to": "FIG-048-N05"
+    }
+  ],
+  "figureId": "FIG-048",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-048-N01",
+    "FIG-048-N02",
+    "FIG-048-N03",
+    "FIG-048-N04",
+    "FIG-048-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Evidence",
+      "nodeId": "FIG-048-N01",
+      "required": true,
+      "semanticKey": "EVIDENCE",
+      "sourceBindingId": "FIG-048-SRC-01"
+    },
+    {
+      "displayLabel": "Professional Judgment",
+      "nodeId": "FIG-048-N02",
+      "required": true,
+      "semanticKey": "PRO_JUDGMENT",
+      "sourceBindingId": "FIG-048-SRC-01"
+    },
+    {
+      "displayLabel": "Recommendation",
+      "nodeId": "FIG-048-N03",
+      "required": true,
+      "semanticKey": "RECOMMENDATION",
+      "sourceBindingId": "FIG-048-SRC-01"
+    },
+    {
+      "displayLabel": "Approval",
+      "nodeId": "FIG-048-N04",
+      "required": true,
+      "semanticKey": "APPROVAL",
+      "sourceBindingId": "FIG-048-SRC-01"
+    },
+    {
+      "displayLabel": "Decision Materialization",
+      "nodeId": "FIG-048-N05",
+      "required": true,
+      "semanticKey": "MATERIALIZATION",
+      "sourceBindingId": "FIG-048-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "APPROVAL-FLOW",
+  "title": "Approval Flow"
+}

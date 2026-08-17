@@ -1,0 +1,1 @@
+import fs from 'node:fs';import {requestedIds,carPath} from './figure-lib.mjs';for(const id of requestedIds()){if(!fs.existsSync(carPath(id)))throw new Error(`${id}: build first`);console.log(`✓ ${id} CAR candidate exists (candidate-only; existing CAR/publication lifecycle preserved)`);}

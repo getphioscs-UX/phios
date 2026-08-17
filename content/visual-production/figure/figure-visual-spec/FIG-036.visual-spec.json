@@ -1,0 +1,114 @@
+{
+  "boundaries": [
+    {
+      "boundaryId": "EVIDENCE_DECISION_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "FIG-036-N01",
+        "FIG-036-N02",
+        "FIG-036-N03"
+      ],
+      "mustExclude": [
+        "FIG-036-N04",
+        "FIG-036-N05"
+      ],
+      "sourceBindingId": "FIG-036-SRC-01"
+    }
+  ],
+  "canonicalFilename": "PHIOS-FIGURE-EVIDENCE-DECISION-BOUNDARY-v1.svg",
+  "diagramRole": "BOUNDARY",
+  "domain": "FINANCIAL",
+  "edges": [
+    {
+      "edgeId": "FIG-036-E01",
+      "from": "FIG-036-N01",
+      "relation": "MAY_SUPPORT",
+      "required": true,
+      "sourceBindingId": "FIG-036-SRC-01",
+      "to": "FIG-036-N02"
+    },
+    {
+      "edgeId": "FIG-036-E02",
+      "from": "FIG-036-N02",
+      "relation": "INFORMS",
+      "required": true,
+      "sourceBindingId": "FIG-036-SRC-02",
+      "to": "FIG-036-N04"
+    },
+    {
+      "edgeId": "FIG-036-E03",
+      "from": "FIG-036-N03",
+      "relation": "QUALIFIES",
+      "required": true,
+      "sourceBindingId": "FIG-036-SRC-02",
+      "to": "FIG-036-N04"
+    },
+    {
+      "edgeId": "FIG-036-E04",
+      "from": "FIG-036-N04",
+      "relation": "SUPPORTS_NOT_OWNS",
+      "required": true,
+      "sourceBindingId": "FIG-036-SRC-02",
+      "to": "FIG-036-N05"
+    }
+  ],
+  "figureId": "FIG-036",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-036-N01",
+    "FIG-036-N02",
+    "FIG-036-N03",
+    "FIG-036-N04",
+    "FIG-036-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Source Evidence",
+      "nodeId": "FIG-036-N01",
+      "required": true,
+      "semanticKey": "SOURCE_EVIDENCE",
+      "sourceBindingId": "FIG-036-SRC-01"
+    },
+    {
+      "displayLabel": "Calculated",
+      "nodeId": "FIG-036-N02",
+      "required": true,
+      "semanticKey": "CALCULATED",
+      "sourceBindingId": "FIG-036-SRC-01"
+    },
+    {
+      "displayLabel": "Estimated / Projected",
+      "nodeId": "FIG-036-N03",
+      "required": true,
+      "semanticKey": "ESTIMATED",
+      "sourceBindingId": "FIG-036-SRC-01"
+    },
+    {
+      "displayLabel": "Professional Recommendation",
+      "nodeId": "FIG-036-N04",
+      "required": true,
+      "semanticKey": "PRO_RECOMMENDATION",
+      "sourceBindingId": "FIG-036-SRC-01"
+    },
+    {
+      "displayLabel": "Client Decision",
+      "nodeId": "FIG-036-N05",
+      "required": true,
+      "semanticKey": "CLIENT_DECISION",
+      "sourceBindingId": "FIG-036-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "EVIDENCE-DECISION-BOUNDARY",
+  "title": "Evidence → Decision Boundary"
+}

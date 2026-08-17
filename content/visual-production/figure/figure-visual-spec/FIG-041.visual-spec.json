@@ -1,0 +1,107 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-LEARNING-CONTINUITY-v1.svg",
+  "diagramRole": "LOOP",
+  "domain": "ACADEMY",
+  "edges": [
+    {
+      "edgeId": "FIG-041-E01",
+      "from": "FIG-041-N01",
+      "relation": "UPDATES",
+      "required": true,
+      "sourceBindingId": "FIG-041-SRC-01",
+      "to": "FIG-041-N02"
+    },
+    {
+      "edgeId": "FIG-041-E02",
+      "from": "FIG-041-N02",
+      "relation": "INFORMS",
+      "required": true,
+      "sourceBindingId": "FIG-041-SRC-02",
+      "to": "FIG-041-N03"
+    },
+    {
+      "edgeId": "FIG-041-E03",
+      "from": "FIG-041-N03",
+      "relation": "SUPPORTS",
+      "required": true,
+      "sourceBindingId": "FIG-041-SRC-02",
+      "to": "FIG-041-N04"
+    },
+    {
+      "edgeId": "FIG-041-E04",
+      "from": "FIG-041-N04",
+      "relation": "DECIDES",
+      "required": true,
+      "sourceBindingId": "FIG-041-SRC-02",
+      "to": "FIG-041-N05"
+    },
+    {
+      "edgeId": "FIG-041-E05",
+      "from": "FIG-041-N05",
+      "relation": "NEXT_CYCLE",
+      "required": true,
+      "sourceBindingId": "FIG-041-SRC-02",
+      "to": "FIG-041-N01"
+    }
+  ],
+  "figureId": "FIG-041",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-041-N01",
+    "FIG-041-N02",
+    "FIG-041-N03",
+    "FIG-041-N04",
+    "FIG-041-N05"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Learning Activity",
+      "nodeId": "FIG-041-N01",
+      "required": true,
+      "semanticKey": "LEARNING_ACTIVITY",
+      "sourceBindingId": "FIG-041-SRC-01"
+    },
+    {
+      "displayLabel": "Progress",
+      "nodeId": "FIG-041-N02",
+      "required": true,
+      "semanticKey": "PROGRESS",
+      "sourceBindingId": "FIG-041-SRC-01"
+    },
+    {
+      "displayLabel": "Feedback",
+      "nodeId": "FIG-041-N03",
+      "required": true,
+      "semanticKey": "FEEDBACK",
+      "sourceBindingId": "FIG-041-SRC-01"
+    },
+    {
+      "displayLabel": "Review",
+      "nodeId": "FIG-041-N04",
+      "required": true,
+      "semanticKey": "REVIEW",
+      "sourceBindingId": "FIG-041-SRC-01"
+    },
+    {
+      "displayLabel": "Continue / Adjust",
+      "nodeId": "FIG-041-N05",
+      "required": true,
+      "semanticKey": "CONTINUE",
+      "sourceBindingId": "FIG-041-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "LEARNING-CONTINUITY",
+  "title": "Learning Continuity"
+}

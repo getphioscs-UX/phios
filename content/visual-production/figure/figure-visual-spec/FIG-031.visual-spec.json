@@ -1,0 +1,83 @@
+{
+  "boundaries": [],
+  "canonicalFilename": "PHIOS-FIGURE-ASSETS-LIABILITIES-STRUCTURE-v1.svg",
+  "diagramRole": "FLOW",
+  "domain": "FINANCIAL",
+  "edges": [
+    {
+      "edgeId": "FIG-031-E01",
+      "from": "FIG-031-N01",
+      "relation": "CONTRIBUTES",
+      "required": true,
+      "sourceBindingId": "FIG-031-SRC-01",
+      "to": "FIG-031-N03"
+    },
+    {
+      "edgeId": "FIG-031-E02",
+      "from": "FIG-031-N02",
+      "relation": "OFFSETS",
+      "required": true,
+      "sourceBindingId": "FIG-031-SRC-02",
+      "to": "FIG-031-N03"
+    },
+    {
+      "edgeId": "FIG-031-E03",
+      "from": "FIG-031-N03",
+      "relation": "REQUIRES",
+      "required": true,
+      "sourceBindingId": "FIG-031-SRC-02",
+      "to": "FIG-031-N04"
+    }
+  ],
+  "figureId": "FIG-031",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-031-N01",
+    "FIG-031-N02",
+    "FIG-031-N03",
+    "FIG-031-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Assets",
+      "nodeId": "FIG-031-N01",
+      "required": true,
+      "semanticKey": "ASSETS",
+      "sourceBindingId": "FIG-031-SRC-01"
+    },
+    {
+      "displayLabel": "Liabilities",
+      "nodeId": "FIG-031-N02",
+      "required": true,
+      "semanticKey": "LIABILITIES",
+      "sourceBindingId": "FIG-031-SRC-01"
+    },
+    {
+      "displayLabel": "Net Worth",
+      "nodeId": "FIG-031-N03",
+      "required": true,
+      "semanticKey": "NET_WORTH",
+      "sourceBindingId": "FIG-031-SRC-01"
+    },
+    {
+      "displayLabel": "Source Lineage",
+      "nodeId": "FIG-031-N04",
+      "required": true,
+      "semanticKey": "SOURCE_LINEAGE",
+      "sourceBindingId": "FIG-031-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "ASSETS-LIABILITIES-STRUCTURE",
+  "title": "Assets / Liabilities Structure"
+}

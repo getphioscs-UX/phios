@@ -1,0 +1,97 @@
+{
+  "boundaries": [
+    {
+      "boundaryId": "KNOWN_EVIDENCE_BOUNDARY",
+      "boundaryType": "AUTHORITY_BOUNDARY",
+      "contains": [
+        "FIG-021-N01",
+        "FIG-021-N02"
+      ],
+      "mustExclude": [
+        "FIG-021-N03",
+        "FIG-021-N04"
+      ],
+      "sourceBindingId": "FIG-021-SRC-01"
+    }
+  ],
+  "canonicalFilename": "PHIOS-FIGURE-KNOWN-UNKNOWN-BOUNDARY-v1.svg",
+  "diagramRole": "BOUNDARY",
+  "domain": "JOURNEY",
+  "edges": [
+    {
+      "edgeId": "FIG-021-E01",
+      "from": "FIG-021-N01",
+      "relation": "SUPPORTED_BY",
+      "required": true,
+      "sourceBindingId": "FIG-021-SRC-01",
+      "to": "FIG-021-N02"
+    },
+    {
+      "edgeId": "FIG-021-E02",
+      "from": "FIG-021-N02",
+      "relation": "BOUNDS",
+      "required": true,
+      "sourceBindingId": "FIG-021-SRC-02",
+      "to": "FIG-021-N03"
+    },
+    {
+      "edgeId": "FIG-021-E03",
+      "from": "FIG-021-N03",
+      "relation": "MUST_NOT_HIDE",
+      "required": true,
+      "sourceBindingId": "FIG-021-SRC-02",
+      "to": "FIG-021-N04"
+    }
+  ],
+  "figureId": "FIG-021",
+  "mustNotContain": [],
+  "mustShow": [
+    "FIG-021-N01",
+    "FIG-021-N02",
+    "FIG-021-N03",
+    "FIG-021-N04"
+  ],
+  "mustState": [],
+  "nodes": [
+    {
+      "displayLabel": "Known",
+      "nodeId": "FIG-021-N01",
+      "required": true,
+      "semanticKey": "KNOWN",
+      "sourceBindingId": "FIG-021-SRC-01"
+    },
+    {
+      "displayLabel": "Evidence",
+      "nodeId": "FIG-021-N02",
+      "required": true,
+      "semanticKey": "EVIDENCE",
+      "sourceBindingId": "FIG-021-SRC-01"
+    },
+    {
+      "displayLabel": "Inference",
+      "nodeId": "FIG-021-N03",
+      "required": true,
+      "semanticKey": "INFERENCE",
+      "sourceBindingId": "FIG-021-SRC-01"
+    },
+    {
+      "displayLabel": "Unknown",
+      "nodeId": "FIG-021-N04",
+      "required": true,
+      "semanticKey": "UNKNOWN",
+      "sourceBindingId": "FIG-021-SRC-01"
+    }
+  ],
+  "productionRules": {
+    "aiGeneratedBoundariesAllowed": false,
+    "aiGeneratedEdgesAllowed": false,
+    "aiGeneratedLabelsAllowed": false,
+    "aiGeneratedNodesAllowed": false,
+    "generativeProductionStylingAllowed": false,
+    "humanReviewRequiredForMachineAcceptance": false,
+    "publicationLifecycleHumanRulesMayBeBypassed": false
+  },
+  "schemaVersion": "1.0.0",
+  "semanticName": "KNOWN-UNKNOWN-BOUNDARY",
+  "title": "Known / Unknown Boundary"
+}
