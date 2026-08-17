@@ -1254,7 +1254,22 @@
     "check:bfa-batch4": "node scripts/check-bfa-batch4-auto-production.mjs",
     "check:pca:mir10": "node scripts/check-pca-mir10-successor.mjs",
     "check:mir-10": "node scripts/check-mir-10-client-demand-production-loop.mjs",
-    "check:bfa-batch5": "node scripts/check-bfa-batch5-composition-production.mjs"
+    "check:bfa-batch5": "node scripts/check-bfa-batch5-composition-production.mjs",
+    "check:mir-10:mir-11-successor": "node scripts/check-mir-10-to-mir-11-successor.mjs",
+    "check:mir-11:fixtures": "node scripts/check-mir-11-interpretation-fixtures.mjs",
+    "check:mir-11:structure": "node scripts/check-mir-11-structural-hypothesis.mjs",
+    "check:mir-11:bindings": "node scripts/check-mir-11-figure-manuscript-regression.mjs",
+    "check:personal-structure:mir11": "node scripts/check-mir-11-personal-structure-regression.mjs",
+    "check:mir-11:book-runtime": "node scripts/check-mir-11-book-runtime-regression.mjs",
+    "check:mir-11:authority": "node scripts/check-mir-11-authority-unified-chain.mjs",
+    "check:interpretation-runtime": "node scripts/check-mir-11-interpretation-runtime.mjs",
+    "check:mir-baseline": "node scripts/check-mir-current-baseline.mjs",
+    "check:mir-11": "node scripts/check-mir-11-unified-regression.mjs",
+    "check:mir": "npm run check:mir-11 && npm run check:mir-11:full-repo",
+    "check:mir-11:personal-e2e": "node scripts/check-mir-11-personal-e2e.mjs",
+    "check:mir-11:route": "node scripts/check-mir-11-route-promotion.mjs",
+    "check:mir-11:acceptance": "node scripts/check-mir-11-production-acceptance.mjs",
+    "check:mir-11:full-repo": "node scripts/check-mir-11-full-repository-gate.mjs"
   },
   "type": "module",
   "dependencies": {

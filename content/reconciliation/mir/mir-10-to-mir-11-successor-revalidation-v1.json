@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-MIR-10-TO-MIR-11-SUCCESSOR-REVALIDATION-v1.0.0",
+  "work": "MIR-11M",
+  "baselineCommit": "3986cca72634d9a09bb4cfd38d1d11981bce571e",
+  "status": "SUCCESSOR_REVALIDATED_PUBLICATION_COVERAGE_GROWTH_ONLY",
+  "historicalMir10": {
+    "path": "content/reconciliation/mir/mir-10-pca-client-demand-production-loop-v1.json",
+    "sha256": "c1f60615d0c08088d4afb5d6fc0765697594f7d4b34ace09816840fe352e23dd",
+    "baselineCommit": "5726f4a06a4aefe9695325306b27933e5e33501a",
+    "mustRemainImmutable": true
+  },
+  "drift": [
+    {
+      "path": "content/knowledge/production/registry/publication-registry.json",
+      "historicalSha256": "07aee83b75d850d24da245d79471bf6f9e129fe4914019cdca2d1f63d7917f31",
+      "currentSha256": "a9d8d3c371f14ca2362246f8f3d99d4529886e39df9e916cc48aab55aec07688",
+      "historicalRecordCount": 30,
+      "currentRecordCount": 42,
+      "classification": "AUTHORIZED_PUBLICATION_REGISTRY_GROWTH",
+      "authorityMutation": false
+    },
+    {
+      "path": "content/knowledge/public/article-composition-coverage-registry-v1.json",
+      "historicalSha256": "581caccc79b96939f96b8e7fca2184c448d0d808ec7d97b7b13c198039c77ec6",
+      "currentSha256": "5bc3f993daaa56e274b047bc10dd340b768b6a939c301d253c1db26b43151305",
+      "historicalRecordCount": 5,
+      "currentRecordCount": 11,
+      "classification": "AUTHORIZED_ARTICLE_COMPOSITION_COVERAGE_GROWTH",
+      "authorityMutation": false
+    }
+  ],
+  "unchangedEvidence": {
+    "carPublished": {
+      "path": "content/production/car/registries/published-asset-production-registry-v1.json",
+      "sha256": "a359c807e5b53858757861446e9aaee65927dd5aad0eedfdeb066ae3d55f311d",
+      "matchesHistoricalMir10": true
+    }
+  },
+  "rules": {
+    "rewriteHistoricalMir10Hashes": false,
+    "rewriteHistoricalFreeze": false,
+    "currentMir10ValidationUsesSuccessor": true,
+    "canonicalTruthMutationAllowed": false,
+    "demandAuthorityExpansionAllowed": false
+  },
+  "exitGate": {
+    "historicalMir10Preserved": true,
+    "publicationGrowthClassified": true,
+    "compositionCoverageGrowthClassified": true,
+    "pcaAuthorityUnchanged": true,
+    "successorRequired": true
+  }
+}

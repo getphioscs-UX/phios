@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-MIR-11-ROUTE-PROMOTION-SUCCESSOR-v1.0.0",
+  "work": "MIR-11N",
+  "baselineCommit": "3986cca72634d9a09bb4cfd38d1d11981bce571e",
+  "status": "CURRENT_SUCCESSOR_ROUTES_RESOLVED_WITHOUT_FROZEN_PREDECESSOR_MUTATION",
+  "routes": [
+    {
+      "capability": "PERSONAL_RUNTIME",
+      "canonicalRoute": "/personal-runtime",
+      "surface": "personal-runtime.html",
+      "state": "CURRENT_ROUTE_PRESERVED",
+      "personalStructureProjectionState": "CAPABILITY_GATED_SUCCESSOR_RENDERER_ACCEPTED_NOT_FORCED_INTO_FROZEN_MCD7_TAB",
+      "historicalMcd7Mutated": false
+    },
+    {
+      "capability": "GUIDED_READING_V2",
+      "canonicalRoute": "/guided-reading",
+      "surface": "guided-reading.html",
+      "api": "/api/guided-reading-v2",
+      "state": "MIR11_CURRENT_SUCCESSOR_ROUTE",
+      "acceptedCanonicalInterpretationResultRequired": true,
+      "historicalKapGuidedReadingMutated": false
+    },
+    {
+      "capability": "REALITY_WORKSPACE",
+      "canonicalRoute": "/reality/",
+      "surface": "reality/index.html",
+      "state": "CURRENT_CANONICAL_WORKSPACE_CONFIRMED",
+      "frontendStages": [
+        "Understand",
+        "Choose",
+        "Review"
+      ],
+      "backendStateMachinePreserved": true
+    }
+  ],
+  "legacyRealityRoutes": {
+    "authority": "COMPATIBILITY_ONLY",
+    "mayCreateSecondJourneyAuthority": false
+  },
+  "rules": {
+    "routeStateMayNotTransferRuntimeAuthority": true,
+    "rendererReadinessBypassAllowed": false,
+    "guidedReadingMayRecalculateMethod": false,
+    "rjxDefaultEntryAllowed": false
+  }
+}
