@@ -1129,7 +1129,10 @@
     "check:kap-w44": "node scripts/check-kap-w30-w45-phase18-governance.mjs W44",
     "check:kap-w45": "node scripts/check-kap-w30-w45-phase18-governance.mjs W45",
     "check:kap-phase18": "node scripts/check-kap-w30-w45-phase18-governance.mjs ALL",
-    "check:kap-current": "npm run check:kap && npm run check:kap-phase18"
+    "check:kap-current": "npm run check:kap && npm run check:kap-phase18",
+    "check:client-surface-invariants": "node scripts/check-client-surface-global-invariants.mjs",
+    "check:bfr-h-invariants": "npm run check:client-surface-invariants",
+    "check:client-surface": "npm run check:client-surface-invariants"
   },
   "type": "module"
 }
