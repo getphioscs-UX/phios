@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {buildBfaArticleActivationReadiness} from './lib/bilingual-final-approval/bfa-article-activation-v1.mjs';
+import {approvalIsCurrent} from './lib/bilingual-final-approval/bfa-runtime-v1.mjs';
 import {validateZhHansCandidate} from './lib/knowledge-production/zh-hans-candidate-v1.mjs';
 import {validateEnglishCandidate,registryRecord as buildEnglishRegistryRecord} from './lib/knowledge-production/english-candidate-v1.mjs';
 import {validateZhHansProductionPrompt} from './lib/knowledge-production/production-prompt-v1.mjs';
@@ -28,9 +29,23 @@ const roles={
  'KN-B1-P1-003':'FRAGMENT','KN-B1-P4-003':'FIGURE','KN-B1-P4-004':'MULTI_ASSET'
 };
 for(const [n,role] of Object.entries(roles)){const d=read(`content/knowledge/production-planning/production/wave1/decisions/${n.toLowerCase()}-production-decision-v1.json`);assert.equal(d.productionRole,role);}
-const approvalRoot='content/production/bilingual-final-approval/BATCH-002/approvals';if(fs.existsSync(approvalRoot))assert.equal(fs.readdirSync(approvalRoot).filter(x=>x.endsWith('.json')).length,0);
-console.log('✓ Real BFA BATCH-002 production readiness passed: 3 nodes / 6 independent locale Candidates / 3 Complete Publication Packages.');
+const approvalRoot='content/production/bilingual-final-approval/BATCH-002/approvals';
+const approvalFiles=fs.existsSync(approvalRoot)?fs.readdirSync(approvalRoot).filter(x=>x.endsWith('.json')).sort():[];
+assert.ok(approvalFiles.length<=expected.length,'BATCH_002_APPROVAL_COUNT_OUT_OF_RANGE');
+let approvedForPublication=0;
+for(const file of approvalFiles){
+  const approval=read(`${approvalRoot}/${file}`);
+  assert.ok(expected.includes(approval.nodeCode),`${file}:UNEXPECTED_NODE_APPROVAL`);
+  const pkg=read(`content/production/bilingual-final-approval/BATCH-002/packages/${approval.nodeCode}.v1.json`);
+  assert.equal(approval.authorityType,'BILINGUAL_FINAL_PUBLICATION_APPROVAL',`${approval.nodeCode}:AUTHORITY_TYPE`);
+  assert.equal(approval.reviewerCode,'TL',`${approval.nodeCode}:REVIEWER`);
+  assert.equal(approvalIsCurrent(approval,pkg),true,`${approval.nodeCode}:STALE_FINAL_APPROVAL`);
+  if(approval.decision==='approve_for_publication')approvedForPublication++;
+}
+const phase=approvalFiles.length===0?'READY_FOR_FINAL_APPROVAL':approvalFiles.length<expected.length?'FINAL_REVIEW_IN_PROGRESS':approvedForPublication===expected.length?'READY_FOR_PUBLICATION':'FINAL_REVIEW_DECIDED_NOT_ALL_APPROVED';
+console.log('✓ Real BFA BATCH-002 production integrity passed: 3 nodes / 6 independent locale Candidates / 3 Complete Publication Packages.');
 console.log('✓ All six Candidates have valid standard PJA prompts and exact Candidate Registry lineage; no orphan Candidate remains.');
-console.log('✓ All three packages PASS automatic preflight and are READY_FOR_FINAL_APPROVAL with TL decision still PENDING.');
+console.log(`✓ BATCH-002 lifecycle: ${phase}; current package-scoped TL decisions ${approvalFiles.length}/3; approve_for_publication ${approvedForPublication}/3.`);
+console.log('✓ Every existing TL Final Approval is exact-current-finalPackageDigest bound; no approval is stale or synthetic.');
 console.log('✓ Historical FRAGMENT / FIGURE / MULTI_ASSET roles remain unchanged; successor ARTICLE projection is additive only.');
 console.log('✓ KN-PREFACE-004 remains excluded because existing Published Article reconciliation explicitly forbids new publication.');
