@@ -5,6 +5,7 @@ import { DEFAULT_TARGET_LOCALES, writeCandidateOrchestration } from './lib/artic
 import { buildBfaBatchFromAps, isSuccessorBatch } from './lib/bilingual-final-approval/bfa-batch-builder-v1.mjs';
 import { buildBfaArticleActivationReadiness, buildSuccessorBatchPlan } from './lib/bilingual-final-approval/bfa-article-activation-v1.mjs';
 import { currentProgressionBatch, buildCompatibleBatchPlan } from './lib/bilingual-final-approval/bfa-progression-v2.mjs';
+import { isAutomaticC2C3Batch, writeAutoC2C3State } from './lib/bilingual-final-approval/bfa-auto-c2c3-v2.mjs';
 const args=process.argv.slice(2),valueAfter=flag=>{const i=args.indexOf(flag);return i>=0?args[i+1]:null};
 const bookCode=valueAfter('--book'),countRaw=valueAfter('--count'),locale=valueAfter('--locale')||'zh-Hans',requestedBatch=valueAfter('--batch')||null,targetLocalesRaw=valueAfter('--locales');
 if(!bookCode){console.error('article:batch requires --book, for example --book BOOK-1');process.exit(2)}
@@ -19,10 +20,20 @@ if(progressionCurrent && Number(progressionCurrent.batchCode.slice(6))>=3){
   if(requestedBatch && requestedBatch!==progressionCurrent.batchCode){console.error(`BFA_PROGRESSION_CURRENT_BATCH_IS_${progressionCurrent.batchCode}: later batch may not leapfrog the current canonical window.`);process.exit(2)}
   const progressionMaximum=progressionCurrent.maximumArticleUnits??progressionCurrent.maximumNewArticles??24;
   if(count!==progressionMaximum)console.log(`ℹ BFA Article Composition progression allows up to ${progressionMaximum} public Article Composition Units in ${progressionCurrent.batchCode}; requested --count ${count} is an operator ceiling, not a reason to split canonical knowledge nodes into thin articles.`);
+  if(isAutomaticC2C3Batch(progressionCurrent.batchCode)){
+    const auto=writeAutoC2C3State(root,progressionCurrent.batchCode);
+    console.log(`✓ ${progressionCurrent.batchCode} AUTO-C2/C3: ${auto.c2.automaticFrozenCount}/${auto.c2.nodeCount} C2 frozen; ${auto.c3.summary.productionReadyCount}/${auto.c3.summary.nodeCount} C3 ready; ${auto.exceptions.recordCount} exceptions.`);
+    if(auto.exceptions.recordCount){
+      console.error(`BFA_AUTO_C2C3_EXCEPTION_ESCALATION_REQUIRED:${auto.exceptions.recordCount}`);
+      console.error(`Exception registry: content/production/bilingual-final-approval/progression-v2/auto-c2c3/exceptions/${progressionCurrent.batchCode}-exception-registry-v1.json`);
+      process.exit(2);
+    }
+  }
   const {plan,readiness}=buildCompatibleBatchPlan(root,progressionCurrent.batchCode);
   if(!plan){
-    console.error(`BFA_PROGRESSION_UPSTREAM_REVIEW_REQUIRED: ${readiness.summary.productionReadyCount}/${readiness.summary.nodeCount} nodes are production-ready in ${progressionCurrent.batchCode}.`);
-    console.error(`Review: npm run bfa:prog:c2-review -- --batch ${progressionCurrent.batchCode}`);
+    console.error(`BFA_PROGRESSION_UPSTREAM_AUTHORITY_REQUIRED: ${readiness.summary.productionReadyCount}/${readiness.summary.nodeCount} nodes are production-ready in ${progressionCurrent.batchCode}.`);
+    if(isAutomaticC2C3Batch(progressionCurrent.batchCode))console.error('Automatic C2/C3 is fail-closed; resolve the recorded source/mapping exception rather than creating a routine C2/C3 Human approval.');
+    else console.error(`Review: npm run bfa:prog:c2-review -- --batch ${progressionCurrent.batchCode}`);
     process.exit(2);
   }
   const batchDir=path.join(root,'content/production/article-simplification/batches',progressionCurrent.batchCode);fs.mkdirSync(batchDir,{recursive:true});const planPath=path.join(batchDir,'batch-plan.v1.json');
@@ -33,7 +44,13 @@ if(progressionCurrent && Number(progressionCurrent.batchCode.slice(6))>=3){
   let candidateResult;
   if(isComposition){
     const outputPath=`content/production/article-simplification/batches/${progressionCurrent.batchCode}/candidate-orchestration.v1.json`;
-    if(!fs.existsSync(path.join(root,outputPath))) { console.error(`BFA_COMPOSITION_CANDIDATES_MISSING: run node scripts/generate-bfa-batch3-composition-repair.mjs`); process.exit(2); }
+    if(!fs.existsSync(path.join(root,outputPath)) && isAutomaticC2C3Batch(progressionCurrent.batchCode)){
+      const contentBlueprint=`content/production/bilingual-final-approval/progression-v2/composition-production/${progressionCurrent.batchCode}-article-composition-content-v1.json`;
+      if(!fs.existsSync(path.join(root,contentBlueprint))){console.error(`BFA_COMPOSITION_CONTENT_BLUEPRINT_MISSING:${contentBlueprint}`);process.exit(2);}
+      const generated=spawnSync(process.execPath,['scripts/generate-bfa-composition-batch.mjs','--batch',progressionCurrent.batchCode],{stdio:'inherit',cwd:root});
+      if(generated.status!==0)process.exit(generated.status??2);
+    }
+    if(!fs.existsSync(path.join(root,outputPath))) { console.error(`BFA_COMPOSITION_CANDIDATES_MISSING:${progressionCurrent.batchCode}`); process.exit(2); }
     const existingOrchestration=JSON.parse(fs.readFileSync(path.join(root,outputPath),'utf8'));
     if(existingOrchestration.articleUnitCount!==plan.entries.length)throw new Error(`${progressionCurrent.batchCode} composition orchestration does not match current Article Composition plan`);
     candidateResult={reusedExistingOrchestration:true,outputPath};

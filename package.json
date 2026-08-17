@@ -1111,7 +1111,7 @@
     "check:bfa-w2-w14": "node scripts/check-bfa-w2-w14-review-evidence.mjs",
     "check:bfa-w15-w27": "node scripts/check-bfa-w15-w27-final-authority-publication.mjs",
     "check:bfa-w28-w39": "node scripts/check-bfa-w28-w39-production-acceptance-freeze.mjs",
-    "check:bfa": "npm run check:bfa-w0-w1 && npm run check:bfa-w2-w14 && npm run check:bfa-w15-w27 && npm run check:bfa-w28-w39 && npm run check:bfa-purity && npm run check:bfa-renderer && npm run check:bfa-prog",
+    "check:bfa": "npm run check:bfa-w0-w1 && npm run check:bfa-w2-w14 && npm run check:bfa-w15-w27 && npm run check:bfa-w28-w39 && npm run check:bfa-purity && npm run check:bfa-renderer && npm run check:bfa-prog && npm run check:bfa-auto-c2c3",
     "check:aps-8:historical": "node scripts/check-aps-8-historical-preserved-copy.mjs",
     "check:kap-w30": "node scripts/check-kap-w30-w45-phase18-governance.mjs W30",
     "check:kap-w31": "node scripts/check-kap-w30-w45-phase18-governance.mjs W31",
@@ -1248,7 +1248,10 @@
     "mfig:affected": "node scripts/mfig/resolve-affected-mfigs.mjs",
     "check:mfig-production-freeze": "node scripts/check-mfig-production-freeze.mjs",
     "mfig:spec": "node scripts/mfig/resolve-mfig-authority.mjs",
-    "check:mfig-raster-backend": "node scripts/check-mfig-raster-backend.mjs"
+    "check:mfig-raster-backend": "node scripts/check-mfig-raster-backend.mjs",
+    "bfa:auto-c2c3": "node scripts/bfa-auto-c2c3.mjs",
+    "check:bfa-auto-c2c3": "node scripts/check-bfa-auto-c2c3.mjs",
+    "check:bfa-batch4": "node scripts/check-bfa-batch4-auto-production.mjs"
   },
   "type": "module",
   "dependencies": {

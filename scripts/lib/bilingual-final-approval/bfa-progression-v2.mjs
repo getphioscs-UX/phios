@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { isAutomaticC2C3Batch, autoC3Path } from './bfa-auto-c2c3-v2.mjs';
 
 export const PROG_ROOT='content/production/bilingual-final-approval/progression-v2';
 export const CORPUS=`${PROG_ROOT}/registries/canonical-production-corpus-v2.json`;
@@ -39,10 +40,14 @@ export function currentProgressionBatch(root,{bookCode=null}={}){
  const published=publishedNodeSet(root); const plan=loadProgressionPlan(root);
  for(const b of plan.batches){
   if(bookCode&&b.bookCode!==bookCode)continue;
+  // BATCH-001~003 retain historical Human C2/defer semantics. From BATCH-004
+  // onward C2/C3 are machine-governed gates; only published coverage advances
+  // the normal cursor and unresolved authority is represented by exception state.
+  if(isAutomaticC2C3Batch(b.batchCode)){
+    if((b.nodeCodes??[]).some(n=>!published.has(n)))return b;
+    continue;
+  }
   const dmap=decisionMap(root,b.batchCode);
-  // An explicit TL defer resolves the node for the current publication cursor
-  // without creating C2/Candidate/publication authority. The deferred node is
-  // preserved for a later governed backlog/re-entry decision.
   if((b.nodeCodes??[]).some(n=>!published.has(n)&&dmap.get(n)?.decision!=='defer'))return b;
  }
  return null;
@@ -54,6 +59,12 @@ export function decisionMap(root,batchCode='BATCH-003'){
 }
 export function buildProgressionReadiness(root,batchCode='BATCH-003'){
  const batch=scheduledBatch(root,batchCode); if(!batch)throw new Error(`Unknown progression batch ${batchCode}`);
+ if(isAutomaticC2C3Batch(batchCode)){
+  const rel=autoC3Path(batchCode);
+  if(!exists(root,rel))return {schemaVersion:'PHI-OS-BFA-DETERMINISTIC-C3-v2.0.0',work:'BFA-AUTO-C2C3-2',batchCode,status:'AUTO_C2C3_NOT_MATERIALIZED',summary:{nodeCount:(batch.nodeCodes??[]).length,productionReadyCount:0,blockedCount:(batch.nodeCodes??[]).length,exceptionCount:0,unresolvedCount:(batch.nodeCodes??[]).length,deferredCount:0},entries:[],authorityBoundary:{c3IsReadinessCalculationOnly:true,humanC3DecisionRequired:false}};
+  const c3=read(root,rel);
+  return {...c3,summary:{...c3.summary,unresolvedCount:c3.summary.blockedCount??0,deferredCount:0}};
+ }
  const planReview=batchCode==='BATCH-003'?read(root,BATCH3_REVIEW):null;
  if(!planReview)throw new Error(`${batchCode} review package is not materialized yet`);
  const dmap=decisionMap(root,batchCode); const published=publishedNodeSet(root);
@@ -75,7 +86,7 @@ export function buildProgressionReadiness(root,batchCode='BATCH-003'){
  return {schemaVersion:'PHI-OS-BFA-PROG-BATCH-C3-READINESS-v1.1.0',work:'BFA-PROG-6',batchCode,status:unresolved===0?(deferred?'PRODUCTION_READY_WITH_EXPLICIT_DEFER':'PRODUCTION_READY'):'BLOCKED_AWAITING_TL_C2_REVIEW',summary:{nodeCount:entries.length,productionReadyCount:ready,deferredCount:deferred,unresolvedCount:unresolved,blockedCount:unresolved},entries,authorityBoundary:{c3IsDerivedReadinessOnly:true,c3DoesNotCreateHumanDecision:true,explicitHumanDeferMayResolveCursorWithoutCreatingCandidateAuthority:true,deferDoesNotEqualApproval:true,oldWave1PlanWaveChoreographyRequired:false,bfaFinalApprovalCreated:false}};
 }
 export function writeProgressionReadiness(root,batchCode='BATCH-003'){
- const out=buildProgressionReadiness(root,batchCode); const rel=batchCode==='BATCH-003'?BATCH3_READINESS:`${PROG_ROOT}/readiness/${batchCode}-c3-readiness-v1.json`;
+ const out=buildProgressionReadiness(root,batchCode); const rel=isAutomaticC2C3Batch(batchCode)?autoC3Path(batchCode):(batchCode==='BATCH-003'?BATCH3_READINESS:`${PROG_ROOT}/readiness/${batchCode}-c3-readiness-v1.json`);
  fs.mkdirSync(path.dirname(abs(root,rel)),{recursive:true}); fs.writeFileSync(abs(root,rel),stableJson(out)); return {out,rel};
 }
 export function buildCompatibleBatchPlan(root,batchCode='BATCH-003'){
@@ -89,8 +100,9 @@ export function buildCompatibleBatchPlan(root,batchCode='BATCH-003'){
    const registry=read(root,COMPOSITION_REGISTRY);const umap=new Map((registry.articleUnits??[]).map(x=>[x.articleUnitCode,x]));
    const readySet=new Set(readiness.entries.filter(x=>x.state==='PRODUCTION_READY').map(x=>x.nodeCode));
    const entries=(scheduled.articleUnitCodes??[]).map((code,i)=>{const u=umap.get(code);if(!u)throw new Error(`Unknown Article Composition Unit ${code}`);for(const n of u.memberNodeCodes)if(!readySet.has(n))throw new Error(`BFA_COMPOSITION_MEMBER_NOT_READY:${code}:${n}`);const pathsBase=`content/knowledge/production/article-compositions/${batchCode}/${code}`;const titlePath=`${pathsBase}/zh-Hans/production-brief.v1.json`;const articleTitle=exists(root,titlePath)?read(root,titlePath)?.localizedIdentity?.localizedTitle??read(root,titlePath)?.canonicalMeaning?.canonicalTitle??code:code;return {batchIndex:i+1,nodeCode:u.anchorNodeCode,articleUnitCode:code,bookCode:u.bookCode,partCode:u.partCodes?.[0]??null,locale:'zh-Hans',title:articleTitle,readinessState:'ARTICLE_COMPOSITION_READY',readinessBlockers:[],canonicalNodeCoverageCount:u.memberNodeCount,compositionUnit:{articleUnitCode:code,memberNodeCodes:u.memberNodeCodes,memberNodeCount:u.memberNodeCount,briefPaths:{'zh-Hans':`${pathsBase}/zh-Hans/production-brief.v1.json`,en:`${pathsBase}/en/production-brief.v1.json`},candidatePaths:{'zh-Hans':`${pathsBase}/zh-Hans/candidate.v1.json`,en:`${pathsBase}/en/candidate.v1.json`},promptPaths:{'zh-Hans':`${pathsBase}/zh-Hans/production-prompt.v1.json`,en:`${pathsBase}/en/production-prompt.v1.json`}}};});
+   const automatic=isAutomaticC2C3Batch(batchCode);
    const deferredNodeCodes=readiness.entries.filter(x=>x.state==='DEFERRED').map(x=>x.nodeCode);
-   const base={schemaVersion:'PHI-OS-APS-3-BFA-ARTICLE-COMPOSITION-v1.0.0',work:'APS-3',status:'READY_FOR_BFA_COMPOSITION_FINAL_REVIEW',implementationBaselineCommit:'a86f7343219b5939eed3e3cfbe09b1cde99531aa',batchCode,createdAt:existingCreatedAt??new Date().toISOString(),request:{bookCode:scheduled.bookCode,locale:'zh-Hans',requestedCount:scheduled.maximumArticleUnits??24,requestedCountMeaning:'maximum_article_composition_units_not_canonical_node_count'},sourceReadiness:{work:'BFA-PROG-6',readyCanonicalNodeCount:readiness.summary.productionReadyCount,deferredCount:readiness.summary.deferredCount},selection:{selectedArticleUnitCount:entries.length,canonicalNodeCoverageCount:entries.reduce((a,e)=>a+e.canonicalNodeCoverageCount,0),explicitDeferredCount:deferredNodeCodes.length,deferredNodeCodes,targetCanonicalNodesPerArticle:[4,5],articleUnitCodes:entries.map(e=>e.articleUnitCode)},entries,governance:{nonAuthoritativeOrchestrationPlan:true,canonicalNodeRemainsKnowledgeMinimum:true,publicArticleIsCompositionUnit:true,nodeToArticleOneToOneRequired:false,canonicalOrderLocked:true,readyNodeLeapfrogForbidden:true,explicitHumanDeferResolvesCurrentCursor:true,deferCreatesCandidateAuthority:false,deferCreatesPublicationAuthority:false,humanDecisionAuthorityCreated:false,publicationCreated:false},nextWork:'BFA_FINAL_REVIEW'};
+   const base={schemaVersion:automatic?'PHI-OS-APS-3-BFA-ARTICLE-COMPOSITION-AUTO-C2C3-v2.0.0':'PHI-OS-APS-3-BFA-ARTICLE-COMPOSITION-v1.0.0',work:'APS-3',status:'READY_FOR_BFA_COMPOSITION_FINAL_REVIEW',implementationBaselineCommit:automatic?'07f525b2047498364fea5a4ae0f9a51c37a47dd1':'a86f7343219b5939eed3e3cfbe09b1cde99531aa',batchCode,createdAt:existingCreatedAt??new Date().toISOString(),request:{bookCode:scheduled.bookCode,locale:'zh-Hans',requestedCount:scheduled.maximumArticleUnits??24,requestedCountMeaning:'maximum_article_composition_units_not_canonical_node_count'},sourceReadiness:automatic?{work:'BFA-AUTO-C2C3-2',automaticC2FrozenCount:readiness.summary.productionReadyCount,deterministicC3ProductionReadyCount:readiness.summary.productionReadyCount,exceptionCount:readiness.summary.exceptionCount??0,deferredCount:0}:{work:'BFA-PROG-6',readyCanonicalNodeCount:readiness.summary.productionReadyCount,deferredCount:readiness.summary.deferredCount},selection:{selectedArticleUnitCount:entries.length,canonicalNodeCoverageCount:entries.reduce((a,e)=>a+e.canonicalNodeCoverageCount,0),explicitDeferredCount:deferredNodeCodes.length,deferredNodeCodes,targetCanonicalNodesPerArticle:[4,5],articleUnitCodes:entries.map(e=>e.articleUnitCode)},entries,governance:{nonAuthoritativeOrchestrationPlan:true,canonicalNodeRemainsKnowledgeMinimum:true,publicArticleIsCompositionUnit:true,nodeToArticleIdentityOneToOneRequired:false,canonicalOrderLocked:true,readyNodeLeapfrogForbidden:true,explicitHumanDeferResolvesCurrentCursor:automatic?false:true,deferCreatesCandidateAuthority:false,deferCreatesPublicationAuthority:false,humanDecisionAuthorityCreated:false,routineC2HumanReviewRequired:automatic?false:true,routineC3HumanReviewRequired:automatic?false:true,exceptionOnlyHumanEscalation:automatic?true:false,automaticC2CreatesCanonicalMeaning:false,deterministicC3CreatesEditorialMeaning:false,publicationCreated:false},nextWork:'BFA_FINAL_REVIEW'};
    return {plan:{...base,batchDigest:`sha256:${sha(stable(base))}`},readiness};
  }
  const readySet=new Set(readiness.entries.filter(x=>x.state==='PRODUCTION_READY').map(x=>x.nodeCode));

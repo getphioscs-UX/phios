@@ -1,0 +1,62 @@
+{
+  "baselineCommit": "07f525b2047498364fea5a4ae0f9a51c37a47dd1",
+  "files": {
+    "content/production/bilingual-final-approval/progression-v2/auto-c2c3/acceptance/bfa-auto-c2c3-acceptance-v1.json": "3f240ec4612ce634579a875b7241afb4259f80f58a2f7439470476be2152508e",
+    "content/production/bilingual-final-approval/progression-v2/auto-c2c3/contracts/authority-reconciliation-v1.json": "44173e51801964ccddcfe9f9788c093ae6c661043a14047700d359b682892195",
+    "content/production/bilingual-final-approval/progression-v2/auto-c2c3/contracts/automatic-c2-contract-v2.json": "b49bc151df269bf92ba4b9e04ab905357b81e82034b1871052ca3df8d9e12483",
+    "content/production/bilingual-final-approval/progression-v2/auto-c2c3/contracts/deterministic-c3-readiness-contract-v2.json": "42678e180306b89dc6912719399e0bbdb34f26d27659734e84192b728ede3451",
+    "content/production/bilingual-final-approval/progression-v2/auto-c2c3/contracts/exception-escalation-contract-v1.json": "9c83c42633a1c5f52a0d0e7a29720e6b51eadba5099e41ad9a085069d186f022",
+    "content/production/bilingual-final-approval/progression-v2/auto-c2c3/contracts/historical-compatibility-contract-v1.json": "4fb593d9d29e204ff22d8f893e4e653ba76a00496911a248ea3cfaaa392aaeb7",
+    "scripts/article-batch-bfa-successor.mjs": "fbe966449454730c1907b28924ba668f9166abe844eeaac64341c119da1d0cea",
+    "scripts/bfa-auto-c2c3.mjs": "97311a31d5123b4fa26106a69baa1af9b05accc016c88bed207beb67bbe89066",
+    "scripts/check-bfa-auto-c2c3.mjs": "30ecf2921048b86e9dba3adff477fac3d32af53f477a99194171df269f29d497",
+    "scripts/check-bfa-batch4-auto-production.mjs": "3230c07d2b1fa11d58719dc47012350060382a425a12c3c2a868a8a5334fde78",
+    "scripts/check-bfa-progression-v2.mjs": "7b0799fe8125a51b0f44bee5b94c8717c872ad65eb129e9f830aa46ef77caa4c",
+    "scripts/generate-bfa-composition-batch.mjs": "0c89072b424d0719909a8254ba506a8464babbc8cc04ea286f60970513afa686",
+    "scripts/lib/bilingual-final-approval/bfa-auto-c2c3-v2.mjs": "6c00e2d87bedd45b40841e58595a58e0af3cd13998b206291e89c2ba3c390815",
+    "scripts/lib/bilingual-final-approval/bfa-batch-builder-v1.mjs": "e09d4b3f0c73b7bc294f6da181001605f8ff319943080dfee6ccf09a8e48b6b4",
+    "scripts/lib/bilingual-final-approval/bfa-progression-v2.mjs": "f6bb8eaff86420969f8dcd5e2ebffea913eac646e1293891caef69fa30893520"
+  },
+  "invariants": [
+    "BATCH_001_TO_003_HISTORICAL_HUMAN_C2C3_EVIDENCE_IMMUTABLE",
+    "BATCH_004_PLUS_ROUTINE_C2_HUMAN_REVIEW_NOT_REQUIRED",
+    "BATCH_004_PLUS_ROUTINE_C3_HUMAN_REVIEW_NOT_REQUIRED",
+    "AUTOMATIC_C2_IS_SOURCE_AND_MAPPING_BOUND_NOT_CANONICAL_MEANING_AUTHORITY",
+    "DETERMINISTIC_C3_IS_READINESS_ONLY",
+    "EXCEPTION_ESCALATION_FAILS_CLOSED",
+    "BFA_FINAL_PUBLICATION_APPROVAL_REMAINS_PACKAGE_SCOPED_TL_HUMAN_AUTHORITY",
+    "AUTOMATIC_PASS_NEVER_EQUALS_HUMAN_APPROVAL"
+  ],
+  "notFrozen": [
+    "specific Automatic C2/C3 batch state projections",
+    "specific future Article Composition prose",
+    "specific BFA Final Approval decisions",
+    "specific future publication outcomes"
+  ],
+  "predecessorFreeze": "content/production/bilingual-final-approval/progression-v2/freeze/bfa-article-composition-successor-freeze-v1.json",
+  "reconciledPredecessorFiles": {
+    "scripts/article-batch-bfa-successor.mjs": {
+      "predecessorSha256": "07e45d3240477a9107757457ec71ca7378c62c1ee85a578f1435a0869fa6a51c",
+      "reason": "BATCH-004+ replaces routine C2/C3 Human review with source-bound Automatic C2 plus deterministic C3 while preserving historical Human-era evidence and TL BFA Final Publication Approval.",
+      "successorSha256": "fbe966449454730c1907b28924ba668f9166abe844eeaac64341c119da1d0cea"
+    },
+    "scripts/check-bfa-progression-v2.mjs": {
+      "predecessorSha256": "1d97c2f1c3eaff76e65536b92c6b3b7c67707d9ff0ba650f57f64b1c07e641c5",
+      "reason": "BATCH-004+ replaces routine C2/C3 Human review with source-bound Automatic C2 plus deterministic C3 while preserving historical Human-era evidence and TL BFA Final Publication Approval.",
+      "successorSha256": "7b0799fe8125a51b0f44bee5b94c8717c872ad65eb129e9f830aa46ef77caa4c"
+    },
+    "scripts/lib/bilingual-final-approval/bfa-batch-builder-v1.mjs": {
+      "predecessorSha256": "83e3f8ab5915f062f52c08e5e1f36333851cdb37888d7e62a74867407bd4536a",
+      "reason": "BATCH-004+ replaces routine C2/C3 Human review with source-bound Automatic C2 plus deterministic C3 while preserving historical Human-era evidence and TL BFA Final Publication Approval.",
+      "successorSha256": "e09d4b3f0c73b7bc294f6da181001605f8ff319943080dfee6ccf09a8e48b6b4"
+    },
+    "scripts/lib/bilingual-final-approval/bfa-progression-v2.mjs": {
+      "predecessorSha256": "d7ca3c6a75d64ed153774fa93061a9d44c08aadfc14a7f0a21251b88be3f9fed",
+      "reason": "BATCH-004+ replaces routine C2/C3 Human review with source-bound Automatic C2 plus deterministic C3 while preserving historical Human-era evidence and TL BFA Final Publication Approval.",
+      "successorSha256": "f6bb8eaff86420969f8dcd5e2ebffea913eac646e1293891caef69fa30893520"
+    }
+  },
+  "schemaVersion": "PHI-OS-BFA-AUTO-C2C3-SUCCESSOR-FREEZE-v1.0.0",
+  "status": "FROZEN_ADDITIVE_BFA_AUTO_C2C3_SUCCESSOR",
+  "work": "BFA-AUTO-C2C3-7"
+}
