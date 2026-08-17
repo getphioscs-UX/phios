@@ -1110,7 +1110,7 @@
     "check:bfa-w2-w14": "node scripts/check-bfa-w2-w14-review-evidence.mjs",
     "check:bfa-w15-w27": "node scripts/check-bfa-w15-w27-final-authority-publication.mjs",
     "check:bfa-w28-w39": "node scripts/check-bfa-w28-w39-production-acceptance-freeze.mjs",
-    "check:bfa": "npm run check:bfa-w0-w1 && npm run check:bfa-w2-w14 && npm run check:bfa-w15-w27 && npm run check:bfa-w28-w39 && npm run check:bfa-purity",
+    "check:bfa": "npm run check:bfa-w0-w1 && npm run check:bfa-w2-w14 && npm run check:bfa-w15-w27 && npm run check:bfa-w28-w39 && npm run check:bfa-purity && npm run check:bfa-renderer",
     "check:aps-8:historical": "node scripts/check-aps-8-historical-preserved-copy.mjs",
     "check:kap-w30": "node scripts/check-kap-w30-w45-phase18-governance.mjs W30",
     "check:kap-w31": "node scripts/check-kap-w30-w45-phase18-governance.mjs W31",
@@ -1189,7 +1189,9 @@
     "check:mir-5:authority-conflict": "node scripts/check-mir-5-authority-conflict.mjs",
     "check:mir-5:loader": "node scripts/check-mir-5-directory-loader.mjs",
     "check:mir-5": "node scripts/check-mir-5-canonical-interpretation-foundation.mjs",
-    "check:mir-4:mir-5-successor": "node scripts/check-mir-4-to-mir-5-successor.mjs"
+    "check:mir-4:mir-5-successor": "node scripts/check-mir-4-to-mir-5-successor.mjs",
+    "check:bfa-renderer": "node scripts/check-bfa-public-renderer-body-mode-compatibility.mjs",
+    "check:bfa-batch3-preflight": "node scripts/check-bfa-batch3-preflight.mjs"
   },
   "type": "module",
   "dependencies": {

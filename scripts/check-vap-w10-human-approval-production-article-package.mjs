@@ -14,6 +14,7 @@ import {
 } from './lib/visual-article-production/human-approval-production-article-package-v1.mjs';
 import { validateHumanApproval } from './lib/knowledge-production/human-approval-v1.mjs';
 import { serialize } from './lib/knowledge-production/canonical-brief-v2.mjs';
+import { resolveVapW11PublishedSuccessorAuthority } from './lib/visual-article-production/publication-handoff-decision-v1.mjs';
 
 const root = process.cwd();
 const readJson = async rel => JSON.parse(await fs.readFile(path.join(root, rel), 'utf8'));
@@ -60,7 +61,15 @@ if (realHumanApprovalsApplied) {
     const body = await fs.readFile(path.join(root, `content/production/visual-article/packages/zh-Hans/${nodeCode}/article.md`), 'utf8'); assert.equal(body, candidate.article.bodyMarkdown, `${nodeCode}:ARTICLE_BODY_MUST_BE_BYTE_EQUIVALENT_TO_CANDIDATE`);
     const productionPackage = await readJson(`content/production/visual-article/packages/zh-Hans/${nodeCode}/production-article-package.v1.json`); const packageValid = validateProductionArticlePackage(productionPackage, { candidate, review, approval, articleBody: body }); assert.equal(packageValid.valid, true, `${nodeCode}:${JSON.stringify(packageValid.errors)}`);
     assert.equal(productionPackage.authority.publicationRecorded, false); assert.equal(productionPackage.governance.publicProjectionAllowed, false);
-    assert.equal(publicationRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === 'zh-Hans'), false, `${nodeCode}:PUBLICATION_MUST_NOT_EXIST`);
+    const successorPublication = publicationRegistry.records.find(
+      record => record.nodeCode === nodeCode && record.locale === 'zh-Hans'
+    );
+    if (successorPublication) {
+      const successorAuthority = await resolveVapW11PublishedSuccessorAuthority(root, nodeCode);
+      assert(successorAuthority?.humanPublicationAuthorized, `${nodeCode}:PUBLICATION_REQUIRES_W11_HUMAN_AUTHORITY`);
+      assert.equal(successorAuthority.publicationRecorded, true, `${nodeCode}:SUCCESSOR_PUBLICATION_RECORD_REQUIRED`);
+      assert.deepEqual(successorPublication, successorAuthority.record, `${nodeCode}:SUCCESSOR_PUBLICATION_REGISTRY_LINEAGE`);
+    }
   }
   const projected = await applyVapW10(root, decisions, { apply: false }); assert.equal(serialize(projected.packageManifest), serialize(packageManifest), 'VAP_W10_RESOLVED_PACKAGE_MANIFEST_NOT_DETERMINISTIC');
   assert.equal(projected.activation.humanApprovedCount, 6); assert.equal(projected.activation.productionArticlePackageCount, 6); assert.equal(projected.activation.publicationCount, 0);

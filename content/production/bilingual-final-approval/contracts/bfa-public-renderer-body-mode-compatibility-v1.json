@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-BFA-PUBLIC-RENDERER-BODY-MODE-COMPATIBILITY-v1.0.0",
+  "work": "BFA-PUBLIC-RENDERER-COMPATIBILITY",
+  "baselineCommit": "203edecf98763e27897c35aae2768d1a69b674d2",
+  "status": "ACTIVE_SUCCESSOR_COMPATIBILITY_CONTRACT",
+  "problem": "Published visual articles serialize the inactive section body mode as an empty array. The Renderer previously treated array presence as active content and rejected paragraphs=[...] + blocks=[] as dual-body content.",
+  "bodyModeRules": {
+    "legacyParagraphMode": "non-empty paragraphs + absent-or-empty blocks",
+    "structuredBlockMode": "non-empty blocks + absent-or-empty paragraphs",
+    "dualNonEmptyMode": "BLOCKED",
+    "bothEmptyMode": "BLOCKED"
+  },
+  "securityBoundary": {
+    "unsafeObjectValidationPreserved": true,
+    "unknownStructuredBlockValidationPreserved": true,
+    "nodeIdentityValidationPreserved": true,
+    "realDualBodyContentStillBlocked": true,
+    "emptyInactiveArrayIsNotSecondBodyAuthority": true,
+    "rendererSafetyRelaxed": false
+  },
+  "publicArticlePurity": {
+    "knowledgeBoundarySuppressionPreserved": true,
+    "internalGovernanceMayReenterPublicArticle": false
+  },
+  "acceptance": {
+    "allCurrentZhHansVisualArticlesMustNormalize": true,
+    "allCurrentEnglishVisualArticlesMustNormalize": true,
+    "batch001AndBatch002DetailRoutesMustUseSameNormalizer": true
+  }
+}

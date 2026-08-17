@@ -301,7 +301,7 @@ for (const file of [
   );
 }
 
-const protectedPageHashes = {
+const historicalPublicPageHashes = {
   'professional-workspace.html':
     'fc4f5fc7260a5b344acd0eb377c200f6c91102419fe66538abf94c537bfb0d14',
   'professional-consent-sharing.html':
@@ -315,18 +315,23 @@ const protectedPageHashes = {
   'reality-entry.html':
     '1d4c5ccd9e756f9f628e1abef66016c95c9c98aeae1f85af0108b26f598f2308',
   'reality-navigation.html':
-    // EXP-W6 changes customer projection only; authorisation/loader code is unchanged.
     '8eb829d1247f132ef5987d8712120fbbaa5eac315e34a131d5d526dfa6b32c04'
 };
 
+const checkerLifecycle = JSON.parse(await read(
+  'content/governance/runtime-checker-governance/contracts/checker-state-lifecycle-contract-v1.json'
+));
+const publicSurfaceAuthorityRetirement = JSON.parse(await read(
+  'docs/pws/reconciliation/pws-entry-w1-public-surface-byte-authority-retirement-v3.json'
+));
 const servicesReconciliation = JSON.parse(await read(
   'docs/pws/reconciliation/pws-entry-w1-wpr-d-services-reconciliation-v1.json'
 ));
+const servicesBfrHReconciliation = JSON.parse(await read(
+  'docs/pws/reconciliation/pws-entry-w1-bfr-h-services-reconciliation-v2.json'
+));
 const professionalWorkspaceReconciliation = JSON.parse(await read(
   'docs/pws/reconciliation/pws-entry-w1-mcd-8-professional-workspace-reconciliation-v1.json'
-));
-const publicVocabulary = JSON.parse(await read(
-  'content/web-production/registries/wpr-public-vocabulary-registry-v1.json'
 ));
 const mcd8Acceptance = JSON.parse(await read(
   'content/professional/method-client-delivery/acceptance/mcd-8-production-acceptance-v1.json'
@@ -335,77 +340,79 @@ const mcd8Freeze = JSON.parse(await read(
   'content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json'
 ));
 
-for (const [file, expected] of Object.entries(protectedPageHashes)) {
+assert.equal(checkerLifecycle.status, 'ACTIVE_SUCCESSOR_GOVERNANCE');
+assert.equal(checkerLifecycle.rules.historicalFreezeIsImmutableSnapshot, true);
+assert.equal(checkerLifecycle.rules.currentProductionIsVersionedSuccessorState, true);
+assert.equal(checkerLifecycle.rules.publicSurfaceByteDriftAloneMayInvalidatePwsAuthorization, false);
+assert.equal(publicSurfaceAuthorityRetirement.status, 'CURRENT_PUBLIC_SURFACE_BYTE_AUTHORITY_RETIRED_FROM_PWS');
+assert.equal(publicSurfaceAuthorityRetirement.authorityBoundary.pwsOwnsProfessionalAuthorisation, true);
+assert.equal(publicSurfaceAuthorityRetirement.authorityBoundary.pwsOwnsAuthorisedDataLoader, true);
+assert.equal(publicSurfaceAuthorityRetirement.authorityBoundary.pwsOwnsCurrentPublicPageBytes, false);
+assert.equal(publicSurfaceAuthorityRetirement.authorityBoundary.currentPageHashMismatchAloneIsPwsFailure, false);
+assert.equal(publicSurfaceAuthorityRetirement.rules.requireNewPwsHashReconciliationForFuturePublicCopyOrStyleChange, false);
+assert.deepEqual(
+  [...publicSurfaceAuthorityRetirement.protectedHistoricalPages].sort(),
+  Object.keys(historicalPublicPageHashes).sort()
+);
+
+// Historical public-page hashes remain evidence of the old PWS snapshot. They are
+// intentionally NOT compared with current page bytes: WPR/BFR/CPR/PDS own current
+// public presentation. PWS-W1 validates authorization behavior above, not HTML identity.
+for (const [file, historicalHash] of Object.entries(historicalPublicPageHashes)) {
+  assert.match(historicalHash, /^[a-f0-9]{64}$/);
   const source = await read(file);
-  const actual = hash(source);
-
-  if (file === 'professional-workspace.html' && actual !== expected) {
-    const reconciliation = professionalWorkspaceReconciliation;
-    assert.equal(reconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
-    assert.equal(reconciliation.protectedArtifact.path, file);
-    assert.equal(reconciliation.protectedArtifact.baselineExpectedHash, expected);
-    assert.equal(reconciliation.protectedArtifact.baselineRewritten, false);
-    assert.equal(reconciliation.successor.runtime, 'MCD');
-    assert.equal(reconciliation.successor.phase, 'MCD-8_PRODUCTION_ACCEPTANCE');
-    assert.deepEqual(reconciliation.successor.works, ['MCD-7', 'MCD-8']);
-    assert.equal(reconciliation.successor.sha256, actual);
-    assert.equal(reconciliation.successor.authorityExpansionGranted, false);
-    assert.equal(reconciliation.pwsBoundary.authorisedDataLoaderChanged, false);
-    assert.equal(reconciliation.pwsBoundary.professionalAuthorisationChanged, false);
-    assert.equal(
-      reconciliation.pwsBoundary.identityEligibilityAssignmentConsentPurposeScopeOrderChanged,
-      false
-    );
-    assert.equal(reconciliation.pwsBoundary.deniedReadBoundaryChanged, false);
-    assert.equal(reconciliation.pwsBoundary.payloadFreeAuditBoundaryChanged, false);
-    assert.equal(reconciliation.pwsBoundary.publicSurfaceCopyOnly, true);
-
-    const frozenPage = mcd8Freeze.frozenOutputs.find(item => item.path === file);
-    assert.ok(frozenPage, 'MCD8_PROFESSIONAL_WORKSPACE_FREEZE_MISSING');
-    assert.equal(frozenPage.sha256, actual);
-    assert.equal(mcd8Acceptance.acceptedFacts.mpaSoleDispatchAuthority, true);
-    assert.equal(mcd8Acceptance.acceptedFacts.hdrBlocked, true);
-    assert.equal(mcd8Acceptance.acceptedFacts.frontendCannotGrant, true);
-    assert.equal(mcd8Acceptance.acceptedFacts.hdrProfessionalEligible, false);
-    assert.equal(mcd8Acceptance.acceptedFacts.hdrProfessionalReleaseAllowed, false);
-
-    assert.ok(source.includes('>Personal Runtime Projection</button>'));
-    assert.ok(source.includes('Restricted external method projections'));
-    assert.equal(source.includes('>Human Design</button>'), false);
-    continue;
-  }
-
-  if (file === 'services.html' && actual !== expected) {
-    assert.equal(servicesReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
-    assert.equal(servicesReconciliation.protectedArtifact.path, file);
-    assert.equal(servicesReconciliation.protectedArtifact.baselineExpectedHash, expected);
-    assert.equal(servicesReconciliation.successor.runtime, 'WPR');
-    assert.equal(servicesReconciliation.successor.phase, 'WPR-D_PUBLIC_PRODUCTION_SURFACES');
-    assert.equal(servicesReconciliation.successor.sha256, actual);
-    assert.equal(servicesReconciliation.successor.authorityExpansionGranted, false);
-    assert.equal(servicesReconciliation.pwsBoundary.authorisedDataLoaderChanged, false);
-    assert.equal(servicesReconciliation.pwsBoundary.professionalAuthorisationChanged, false);
-    assert.equal(servicesReconciliation.pwsBoundary.publicSurfaceOnly, true);
-
-    const vocabulary = publicVocabulary.entries?.find(entry =>
-      Array.isArray(entry.internalCodes) && entry.internalCodes.includes('HUMAN_DESIGN')
-    );
-    assert.ok(vocabulary, 'WPR_PUBLIC_VOCABULARY_HUMAN_DESIGN_ENTRY_MISSING');
-    assert.equal(vocabulary.publicLabels?.en, 'Personal Runtime Projection');
-    assert.equal(vocabulary.publicLabels?.['zh-Hans'], '个人运行投射');
-
-    assert.ok(source.includes('href="/professional/personal-runtime"'));
-    assert.ok(source.includes('Personal Runtime Projection'));
-    assert.equal(source.includes('href="/professional/human-design"'), false);
-    assert.equal(source.includes('Human Design Foundation Report'), false);
-    assert.equal(source.includes('Human Design Runtime Interpretation'), false);
-    continue;
-  }
-
-  assert.equal(actual, expected, `Page changed: ${file}`);
+  assert.ok(source.length > 0, `Current public page missing: ${file}`);
 }
+
+// Preserve the already-recorded successor lineage as historical evidence without
+// turning either successor digest into a permanent current-page hash requirement.
+assert.equal(professionalWorkspaceReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+assert.equal(professionalWorkspaceReconciliation.protectedArtifact.path, 'professional-workspace.html');
+assert.equal(
+  professionalWorkspaceReconciliation.protectedArtifact.baselineExpectedHash,
+  historicalPublicPageHashes['professional-workspace.html']
+);
+assert.equal(professionalWorkspaceReconciliation.protectedArtifact.baselineRewritten, false);
+assert.equal(professionalWorkspaceReconciliation.successor.authorityExpansionGranted, false);
+assert.equal(professionalWorkspaceReconciliation.pwsBoundary.authorisedDataLoaderChanged, false);
+assert.equal(professionalWorkspaceReconciliation.pwsBoundary.professionalAuthorisationChanged, false);
+const frozenProfessionalWorkspace = mcd8Freeze.frozenOutputs.find(
+  item => item.path === 'professional-workspace.html'
+);
+assert.ok(frozenProfessionalWorkspace, 'MCD8_PROFESSIONAL_WORKSPACE_FREEZE_MISSING');
+assert.equal(
+  frozenProfessionalWorkspace.sha256,
+  professionalWorkspaceReconciliation.successor.sha256,
+  'Historical MCD-8 successor evidence must remain internally consistent.'
+);
+assert.equal(mcd8Acceptance.acceptedFacts.mpaSoleDispatchAuthority, true);
+assert.equal(mcd8Acceptance.acceptedFacts.frontendCannotGrant, true);
+
+assert.equal(servicesReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+assert.equal(servicesReconciliation.protectedArtifact.path, 'services.html');
+assert.equal(
+  servicesReconciliation.protectedArtifact.baselineExpectedHash,
+  historicalPublicPageHashes['services.html']
+);
+assert.equal(servicesReconciliation.pwsBoundary.authorisedDataLoaderChanged, false);
+assert.equal(servicesReconciliation.pwsBoundary.professionalAuthorisationChanged, false);
+assert.equal(servicesReconciliation.pwsBoundary.publicSurfaceOnly, true);
+assert.equal(servicesBfrHReconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+assert.equal(
+  servicesBfrHReconciliation.predecessor.reconciliationCode,
+  servicesReconciliation.reconciliationCode
+);
+assert.equal(
+  servicesBfrHReconciliation.predecessor.sha256,
+  servicesReconciliation.successor.sha256
+);
+assert.equal(servicesBfrHReconciliation.predecessor.rewritten, false);
+assert.equal(servicesBfrHReconciliation.successor.authorityExpansionGranted, false);
+assert.equal(servicesBfrHReconciliation.pwsBoundary.authorisedDataLoaderChanged, false);
+assert.equal(servicesBfrHReconciliation.pwsBoundary.professionalAuthorisationChanged, false);
+assert.equal(servicesBfrHReconciliation.pwsBoundary.publicSurfaceOnly, true);
 
 console.log('✓ PWS-ENTRY-W1 Professional authorisation and loader passed.');
 console.log('  Identity → eligibility → Assignment → Consent → purpose → scope.');
 console.log('  Denied access performs no read; audit records remain payload-free.');
-console.log('  Runtime registries, migrations and public page behavior are frozen.');
+console.log('  Historical public-page hashes remain evidence only; current presentation bytes are owned by WPR/BFR/CPR/PDS.');

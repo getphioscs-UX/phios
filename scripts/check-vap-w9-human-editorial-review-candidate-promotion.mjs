@@ -12,6 +12,7 @@ import {
 } from './lib/visual-article-production/human-editorial-review-candidate-promotion-v1.mjs';
 import { validateHumanReview } from './lib/knowledge-production/human-review-v1.mjs';
 import { serialize, digest } from './lib/knowledge-production/canonical-brief-v2.mjs';
+import { resolveVapW11PublishedSuccessorAuthority } from './lib/visual-article-production/publication-handoff-decision-v1.mjs';
 
 const root = process.cwd();
 const readJson = async rel => JSON.parse(await fs.readFile(path.join(root, rel), 'utf8'));
@@ -80,7 +81,15 @@ for (const nodeCode of VAP_W9_EXPECTED_NODE_CODES) {
     assert.equal(successorApproval.reviewCode, w10Decision.reviewCode); assert.equal(successorApproval.reviewDigest, w10Decision.reviewDigest);
     assert.equal(successorApproval.publication, 'not_published');
   } else assert.equal(w10Approved, false, `${nodeCode}:W10_APPROVAL_DECISION_REQUIRES_APPROVAL_RECORD`);
-  assert.equal(publicationRegistry.records.some(record => record.nodeCode === nodeCode && record.locale === 'zh-Hans'), false, `${nodeCode}:PUBLICATION_MUST_NOT_EXIST`);
+  const successorPublication = publicationRegistry.records.find(
+    record => record.nodeCode === nodeCode && record.locale === 'zh-Hans'
+  );
+  if (successorPublication) {
+    const successorAuthority = await resolveVapW11PublishedSuccessorAuthority(root, nodeCode);
+    assert(successorAuthority?.humanPublicationAuthorized, `${nodeCode}:PUBLICATION_REQUIRES_W11_HUMAN_AUTHORITY`);
+    assert.equal(successorAuthority.publicationRecorded, true, `${nodeCode}:SUCCESSOR_PUBLICATION_RECORD_REQUIRED`);
+    assert.deepEqual(successorPublication, successorAuthority.record, `${nodeCode}:SUCCESSOR_PUBLICATION_REGISTRY_LINEAGE`);
+  }
   assert.equal(await fileExists(`content/knowledge/production/reviews/zh-Hans/${nodeCode}/review.v1.json`), true);
 }
 

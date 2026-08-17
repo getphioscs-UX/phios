@@ -78,11 +78,16 @@ if (decided.length === 0) {
 }
 assert.equal(manifest.pjaPublicationRecordCountCreatedByW11, 0); assert.equal(manifest.publicProjectionCountCreatedByW11, 0);
 assert.equal(activation.pjaPublicationRegistryMutated, false); assert.equal(activation.publishedKnowledgeAuthorityMutated, false);
-const aps7RunPath = 'content/production/article-simplification/batches/BATCH-001/publication-run.v1.json';
-const aps7Run = await fileExists(aps7RunPath) ? await readJson(aps7RunPath) : null;
-const aps7Published = aps7Run ? aps7Run.outcomes.filter(item => item.decision === 'publish' && item.publicationCreated === true && item.publicReleaseCreated === true) : [];
-assert.equal(publishedAuthority.recordCount, 2 + aps7Published.length, 'Published Knowledge Authority growth must be attributable to downstream APS-7 publication, never VAP-W11 itself.');
-for (const outcome of aps7Published) assert(publishedAuthority.records.some(record => record.nodeCode === outcome.nodeCode && record.locale === outcome.locale), `${outcome.nodeCode}:APS7_PUBLISHED_AUTHORITY_RECORD_MISSING`);
+const checkerLifecycle = await readJson('content/governance/runtime-checker-governance/contracts/checker-state-lifecycle-contract-v1.json');
+assert.equal(checkerLifecycle.status, 'ACTIVE_SUCCESSOR_GOVERNANCE');
+assert.equal(checkerLifecycle.rules.upstreamCheckerMayForbidMutationByItsOwnStage, true);
+assert.equal(checkerLifecycle.rules.upstreamCheckerMayForbidLegitimateDownstreamStateExistence, false);
+assert.equal(checkerLifecycle.rules.currentAggregateCountMayBeHardCodedToHistoricalTotal, false);
+// W11 proves it creates zero PJA Publication / Public Projection records. Whether the
+// current repository later contains 8, 14, 20 or more Published Knowledge records is
+// downstream production state and is validated by the PKA/BFA/APS successor checkers.
+assert.equal(manifest.pjaPublicationRecordCountCreatedByW11, 0);
+assert.equal(manifest.publicProjectionCountCreatedByW11, 0);
 
 const makePublishEnvelope = () => {
   const envelope = structuredClone(buildPendingPublicationDecisionEnvelope(queue)); envelope.status = 'HUMAN_PUBLICATION_DECISIONS_RECORDED';

@@ -243,9 +243,19 @@ export function prepareArticleSectionForRendering(section) {
     );
   }
 
-  const hasLegacyParagraphs = Array.isArray(section.paragraphs);
-  const hasStructuredBlocks = Array.isArray(section.blocks);
+  const legacyParagraphs = Array.isArray(section.paragraphs)
+    ? textArray(section.paragraphs)
+    : [];
+  const structuredBlocks = Array.isArray(section.blocks)
+    ? section.blocks
+    : [];
+  const hasLegacyParagraphs = legacyParagraphs.length > 0;
+  const hasStructuredBlocks = structuredBlocks.length > 0;
 
+  // Historical/APS visual articles serialize the inactive body mode as an
+  // empty array (for example paragraphs=[...] + blocks=[]). Treat only
+  // non-empty content as an active mode. Real dual-body content remains
+  // invalid and therefore fail-closed.
   if (hasLegacyParagraphs === hasStructuredBlocks) {
     throw new ArticleRenderError(
       ARTICLE_RENDER_ERROR_CODES.INVALID_SECTION,
@@ -262,21 +272,14 @@ export function prepareArticleSectionForRendering(section) {
   };
 
   if (hasLegacyParagraphs) {
-    const paragraphs = textArray(section.paragraphs);
-    if (!paragraphs.length) {
-      throw new ArticleRenderError(
-        ARTICLE_RENDER_ERROR_CODES.INVALID_SECTION,
-        'legacy_paragraphs'
-      );
-    }
     return {
       ...normalized,
-      paragraphs,
+      paragraphs: legacyParagraphs,
       blocks: []
     };
   }
 
-  const blocks = section.blocks
+  const blocks = structuredBlocks
     .map(prepareArticleBlockForRendering)
     .filter(Boolean);
 
