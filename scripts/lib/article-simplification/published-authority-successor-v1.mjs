@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { buildPublishedKnowledgeAuthority, stable, hashValue } from '../knowledge-public/published-authority-v1.mjs';
 import { loadVapW1IntegrityRepair, shaText } from '../visual-article-production/published-knowledge-integrity-repair-v1.mjs';
+import { applyEditorialRevisionRegistryToAuthorityOutput } from '../article-editorial-revision/article-editorial-revision-v1.mjs';
 
 const fail = (code, message) => Object.assign(new Error(`${code}: ${message}`), { code });
 const readJson = (root, rel) => JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
@@ -41,7 +42,8 @@ export function buildApsPublishedKnowledgeAuthoritySuccessor(root = process.cwd(
   output.articleFiles[articlePath] = structuredClone(target);
   const index = output.registry.records.findIndex(record => record.authorityRecordCode === target.authorityRecordCode);
   output.registry.records[index] = structuredClone(target);
-  return { ...output, repairResult: { targetAuthorityRecordCode: target.authorityRecordCode, beforeAuthorityDigest, afterAuthorityDigest: target.authorityDigest } };
+  const editorial = applyEditorialRevisionRegistryToAuthorityOutput(root, output, hashValue);
+  return { ...editorial.output, repairResult: { targetAuthorityRecordCode: target.authorityRecordCode, beforeAuthorityDigest, afterAuthorityDigest: target.authorityDigest }, editorialRevisionResult: { applied: editorial.applied, appliedCount: editorial.applied.length } };
 }
 
 export function writeApsPublishedKnowledgeAuthoritySuccessor(root = process.cwd()) {

@@ -1293,7 +1293,9 @@
     "figure:car": "node scripts/figure/create-figure-car-candidate.mjs",
     "figure:affected": "node scripts/figure/resolve-affected-figures.mjs",
     "bfa:batch5:composition-repair": "node scripts/repair-bfa-batch5-public-meta-intro.mjs",
-    "check:bfa-batch5-meta": "node scripts/check-bfa-batch5-public-meta-intro-repair.mjs"
+    "check:bfa-batch5-meta": "node scripts/check-bfa-batch5-public-meta-intro-repair.mjs && node scripts/check-article-editorial-revisions.mjs",
+    "article:revision:apply": "node scripts/apply-article-editorial-revisions.mjs",
+    "check:article-revisions": "node scripts/check-article-editorial-revisions.mjs"
   },
   "type": "module",
   "dependencies": {

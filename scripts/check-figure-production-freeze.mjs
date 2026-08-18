@@ -1,1 +1,14 @@
-import {assert,P,read} from './figure/figure-check-lib.mjs';const r=read(P.acceptance),rt=read(P.runtime);assert.equal(r.allAccepted,true);assert.equal(r.entries.length,57);assert.equal(rt.productionRules.aiGeneratedLabelsAllowed,false);assert.equal(rt.productionRules.aiGeneratedNodesAllowed,false);assert.equal(rt.productionRules.aiGeneratedEdgesAllowed,false);assert.equal(rt.productionRules.publicationLifecycleHumanRulesMayBeBypassed,false);console.log('✓ FIG production freeze: 57/57 deterministic machine-accepted canonical client figures; CAR/publication authority preserved.');
+import { assert, P, read } from './figure/figure-check-lib.mjs';
+const r = read(P.acceptance), rt = read(P.runtime), loc = read(P.localization);
+assert.equal(r.allAccepted, true); assert.equal(r.entries.length, 57);
+assert.equal(rt.productionRules.aiGeneratedLabelsAllowed, false);
+assert.equal(rt.productionRules.aiGeneratedNodesAllowed, false);
+assert.equal(rt.productionRules.aiGeneratedEdgesAllowed, false);
+assert.equal(rt.productionRules.publicationLifecycleHumanRulesMayBeBypassed, false);
+assert.equal(rt.productionOutputs.canonical, 'SVG');
+assert.deepEqual(rt.productionOutputs.derivatives, ['PNG']);
+assert.equal(rt.productionOutputs.webpGenerated, false);
+assert.deepEqual(rt.productionOutputs.localizedPresentation, ['en', 'zh-Hans']);
+assert.equal(loc.canonicalSemanticsMutated, false);
+assert.equal(loc.canonicalEnglishLabelsPreserved, true);
+console.log('✓ FIG production freeze: 57/57 deterministic machine-accepted bilingual canonical client figures; SVG master + PNG only; CAR/publication authority preserved.');

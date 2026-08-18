@@ -90,5 +90,7 @@ for(const [code,snap] of approvalSnapshot){
   if(!approvalIsCurrent(approval,pkg)||pkg.finalPackageDigest!==snap.finalPackageDigest||approval.authorityDigest!==snap.approvalDigest)throw new Error(`APPROVED_PACKAGE_CHANGED:${code}`);
   if(!fs.readFileSync(path.join(root,pRel)).equals(snap.packageBytes)||!fs.readFileSync(path.join(root,aRel)).equals(snap.approvalBytes))throw new Error(`APPROVED_BYTES_CHANGED:${code}`);
 }
+const overlay=spawnSync(process.execPath,['scripts/apply-article-editorial-revisions.mjs'],{cwd:root,stdio:'inherit'});
+if(overlay.status!==0)process.exit(overlay.status??1);
 console.log(`✓ BATCH-005 approval-aware public composition repair completed: ${changed} unapproved Article Units repaired; ${approved.size} current TL-approved Article Units preserved byte-for-byte.`);
-console.log('✓ Public body no longer exposes Canonical Node / Article Composition production metadata in repaired units.');
+console.log('✓ Approved historical packages remain immutable; governed public editorial overlays remove legacy production metadata from customer-facing bodies.');
