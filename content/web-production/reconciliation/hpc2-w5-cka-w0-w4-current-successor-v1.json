@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-W5-CKA-W0-W4-CURRENT-SUCCESSOR-v1.0.0",
+  "work": "HPC2-W5-CKA-W0-W4-RECONCILIATION",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "status": "ACTIVE_ADDITIVE_CKA_HOMEPAGE_ENTRY_SUCCESSOR_W5_HISTORY_PRESERVED",
+  "purpose": "Reconcile the historical HPC2-W5 H04 Ask reservation with the independently governed CKA-W0 Homepage entry activation without rewriting either authority.",
+  "predecessor": {
+    "work": "HPC2-W5",
+    "observationScope": "H04 repository composition at W5 freeze time",
+    "homepageConsumerState": "MISSING_PENDING_CKA",
+    "routeState": "HOMEPAGE_ENTRY_BLOCKED_PENDING_CKA",
+    "functionalAskElements": 0,
+    "artifacts": [
+      {
+        "path": "content/web/homepage/hpc2/contracts/hpc2-w5-phios-runtime-composition-contract-v1.json",
+        "sha256": "20cfd8990349e49cb28bd533646759e16042f1b0b4e859ff301ad36afdcf5c5c"
+      },
+      {
+        "path": "content/web/homepage/hpc2/evidence/hpc2-w5-phios-runtime-composition-audit-v1.json",
+        "sha256": "4d685f5197976c70768ab3d6f461433b2f3ab1a90d7119efc38dc493bdffda08"
+      },
+      {
+        "path": "content/web/homepage/hpc2/acceptance/hpc2-w5-phios-runtime-composition-acceptance-v1.json",
+        "sha256": "81eaf97711a2cea7b7ce2c5aa5361d76d5b3f6cfdcfdddd1b4737d2784a1c294"
+      },
+      {
+        "path": "content/web/homepage/hpc2/freeze/hpc2-w5-phios-runtime-composition-freeze-v1.json",
+        "sha256": "046feb91025475aa76be7eccbe01c17a6797017075d3cf1e2dcb3606d3fc9439"
+      },
+      {
+        "path": "scripts/check-hpc2-w5.mjs",
+        "sha256": "204747fc5b9c9200965e9f39f06b2e89e0c334edda9a7b8f3f2675646d1fb703"
+      }
+    ],
+    "historicalObservationRewritten": false
+  },
+  "successor": {
+    "work": "CKA-W0-W4",
+    "homepageConsumerState": "ACTIVE_CKA_W0",
+    "routeState": "HOMEPAGE_ENTRY_ACTIVE_CKA_W0",
+    "route": "/knowledge-search?entrySurface=HOMEPAGE&mode=GLOBAL",
+    "entrySurface": "HOMEPAGE",
+    "mode": "GLOBAL",
+    "repositoryImplementationState": "ACCEPTED_HUMAN_BROWSER_ACCEPTANCE_PENDING",
+    "authorityArtifacts": [
+      {
+        "path": "content/client/knowledge-ask/contracts/cka-w0-ask-entry-contract-v1.json",
+        "sha256": "435f30db777be862cefa308115dfe3f380ebc0057179bf2d5135cc4575b5132b"
+      },
+      {
+        "path": "content/client/knowledge-ask/contracts/cka-w1-question-composer-contract-v1.json",
+        "sha256": "74788bfc6a0863fbb65dd5040467eeaf5b33d162c3e2ad947624bf9892b0bd4b"
+      },
+      {
+        "path": "content/client/knowledge-ask/contracts/cka-w2-answer-surface-contract-v1.json",
+        "sha256": "08a2df8d211e49c0962bd7d8709c1956c289da9b712448436b2c38ab0cf2d5ad"
+      },
+      {
+        "path": "content/client/knowledge-ask/contracts/cka-w3-knowledge-card-contract-v1.json",
+        "sha256": "3288017d9b5d164c39a92e44e427a9ed08a97938781dc7c712c52827636aea49"
+      },
+      {
+        "path": "content/client/knowledge-ask/contracts/cka-w4-follow-up-contract-v1.json",
+        "sha256": "21d676922c6d45be0bbab50f41550515175f649d27168dafd9f98ec78fd2779f"
+      },
+      {
+        "path": "content/client/knowledge-ask/registries/cka-entry-surface-registry-v1.json",
+        "sha256": "7eb8dec8a7afe68091627caa82e584051687c8b0509efce4f40bdeb3565783e9"
+      },
+      {
+        "path": "content/client/knowledge-ask/evidence/cka-w0-w4-authority-and-consumer-audit-v1.json",
+        "sha256": "17eb777b0df03f3ca6c231525fb0c59b023ecf40aa7536369a8245ee934ae5ea"
+      },
+      {
+        "path": "content/client/knowledge-ask/freeze/cka-w0-w4-batch-a-freeze-v1.json",
+        "sha256": "c8326a5dcf64ac4b0f7caf6c27f65d8253eae0bc8c84fe6e2ac499e15c397b3a"
+      },
+      {
+        "path": "content/client/knowledge-ask/acceptance/cka-w0-w4-batch-a-acceptance-v1.json",
+        "sha256": "3cd02601a19c1ea8297d173453911ed97a52b54acc8582a992c61c18f8fd8a0e"
+      }
+    ]
+  },
+  "runtimeTransition": {
+    "answerRuntimeReused": "functions/_lib/knowledge-answer-composition.js",
+    "retrievalRuntimeReused": "functions/_lib/knowledge-answer-grounding.js",
+    "clientProjection": "functions/_lib/client-knowledge-ask.js",
+    "askApi": {
+      "path": "functions/api/ask-phios.js",
+      "predecessorSha256": "117199473adb10cfdc1d2dc33901d5dd181fc3b8052c68b6b87cfea729c5f21c",
+      "currentSuccessorSha256": "02a780cdeddcabab6d5d5cca93d7b7f07255f25d3a80c1f242b1269c96e2780c",
+      "authorizedChange": "ADDITIVE_CKA_ENTRY_CONTEXT_CLIENT_PROJECTION_AND_TEMPORARY_FOLLOW_UP"
+    },
+    "secondAnswerRuntimeCreated": false,
+    "secondRetrievalRuntimeCreated": false,
+    "secondHomepageRuntimeCreated": false
+  },
+  "clientSurfaceTransition": {
+    "artifacts": [
+      {
+        "path": "assets/js/knowledge/ask-phios-client.js",
+        "predecessorSha256": "2b1be8856f721851baaee666eb81d79262c546dff2c0abc6619ca735b8f448f1",
+        "currentSuccessorSha256": "b8933924662aed291e3e3a930a002986a43dd2dedf850c32dad88cb984cc627f",
+        "change": "ADDITIVE_ENTRY_AND_TEMPORARY_FOLLOW_UP_CONTEXT"
+      },
+      {
+        "path": "assets/js/pages/knowledge-search.js",
+        "predecessorSha256": "a24dd31c87d401255f26260da8c98268a0ee6417898c012c1a092e222fdea671",
+        "currentSuccessorSha256": "d61da7ec0e24ba973e9d3653297419b5c47dc2677eee9c72f11cfffb3741a8ce",
+        "change": "CKA_SINGLE_QUESTION_SIX_SECTION_CARD_AND_ONE_FOLLOW_UP_CLIENT"
+      },
+      {
+        "path": "knowledge-search.html",
+        "predecessorSha256": "d541c1f4fc85433e76284186a0f91b6449e7cb8a8a05d04e69348458f3cced4d",
+        "currentSuccessorSha256": "054f7bdfc88685d99735fbc6a1b3fdf00946db35d7906de363ecd363932a75f0",
+        "change": "CKA_COMPOSER_AND_STRUCTURED_ANSWER_SURFACE"
+      },
+      {
+        "path": "assets/css/knowledge-search.css",
+        "predecessorSha256": "06f86266b0d94874ec1606f51406da691a2f07ef1c0daebc709c0a0af9131fbf",
+        "currentSuccessorSha256": "20cdc3fb0fc52222d8944006207762e7578647547a07c1a1bba4834762c1b084",
+        "change": "CKA_CLIENT_LAYOUT"
+      },
+      {
+        "path": "functions/_lib/client-knowledge-ask.js",
+        "predecessorSha256": null,
+        "currentSuccessorSha256": "8ed28b55d4bac3131fae8176a0673a694b4d5e1e07ea4690db06297e62f6ce20",
+        "change": "NEW_CLIENT_PROJECTION_REUSING_EXISTING_KAP_AUTHORITIES"
+      }
+    ],
+    "homepage": {
+      "path": "index.html",
+      "currentSuccessorSha256": "851f4d41c8e98473cd81d70f8c39edfccb032f1167f63cd3c0b0fd004a75c0e2",
+      "changedScope": "H04_ASK_RESERVATION_TO_CKA_W0_LINK_ONLY"
+    },
+    "legacyGuidedReadingAuthorityDeleted": false,
+    "guidedReadingActivatedByCkaW0W4": false
+  },
+  "checkerRoutingTransition": {
+    "historicalChecker": "scripts/check-hpc2-w5.mjs",
+    "historicalCheckerSha256": "204747fc5b9c9200965e9f39f06b2e89e0c334edda9a7b8f3f2675646d1fb703",
+    "frozenArtifactChecker": "scripts/check-hpc2-w5-frozen-artifacts.mjs",
+    "frozenArtifactCheckerSha256": "2debc453f34ef88201eab64ede10f965afadc32dd2fed699c6049edc2f925316",
+    "currentChecker": "scripts/check-hpc2-w5-current.mjs",
+    "frozenAlias": "node scripts/check-hpc2-w5-frozen-artifacts.mjs",
+    "currentAlias": "node scripts/check-hpc2-w5-current.mjs"
+  },
+  "boundaries": {
+    "genericChatAuthorityCreated": false,
+    "canonicalKnowledgeAuthorityCreated": false,
+    "readingAuthorityCreated": false,
+    "methodAuthorityCreated": false,
+    "professionalJudgmentAuthorityCreated": false,
+    "persistentCaseCreated": false,
+    "shadowAccountCreated": false,
+    "methodExecuted": false,
+    "realityJourneyActivated": false,
+    "realityRouteActivated": false,
+    "h05H09Implemented": false,
+    "v8ContentDeleted": false,
+    "humanAcceptanceClaimed": false,
+    "browserAcceptanceClaimed": false,
+    "productionDeploymentAcceptanceClaimed": false
+  },
+  "successorPolicy": {
+    "failClosed": true,
+    "deterministic": true,
+    "duplicateAuthorityForbidden": true,
+    "frozenPredecessorRewriteForbidden": true,
+    "futureCkaWorkMustUseVersionedAdditiveSuccessor": true,
+    "futureRealityJourneyActivationIndependentlyGated": true
+  }
+}

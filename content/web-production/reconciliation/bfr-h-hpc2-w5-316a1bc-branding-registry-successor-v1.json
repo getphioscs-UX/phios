@@ -42,9 +42,44 @@
     "changeClassification": "ADDITIVE_EXISTING_BRANDING_IDENTITIES_PLUS_SUMMARY_RECONCILIATION",
     "digestPolicy": "STRUCTURAL_PREDECESSOR_PROJECTION_AND_MEMBER_LEVEL_FAIL_CLOSED_VALIDATION"
   },
+  "visualRegistryTransition": {
+    "path": "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+    "historicalW5ObservationSha256": "3eccd56490936164a0f0aa31b1ecece38eceedda0e613403784fdc9c6ff53772",
+    "currentSuccessorSha256": "14adc3d2e1de48e7c0dda6494244f90a15f47ac1e068d92ecb9bd3d73573dc61",
+    "predecessorProjectionSha256": "3eccd56490936164a0f0aa31b1ecece38eceedda0e613403784fdc9c6ff53772",
+    "recordCount": 152,
+    "addedRecords": 0,
+    "removedRecords": 0,
+    "reorderedRecords": 0,
+    "changedMemberCount": 5,
+    "fieldChangesPerMember": 10,
+    "totalFieldChanges": 50,
+    "changedAssetCodes": [
+      "PHIOS-BRANDING-VOLUME-I-REALITY-FORMATION-V1",
+      "PHIOS-BRANDING-VOLUME-II-REALITY-RUNTIME-V1",
+      "PHIOS-BRANDING-VOLUME-III-REALITY-CONTINUITY-V1",
+      "PHIOS-BRANDING-VOLUME-IV-REALITY-CIVILIZATION-V1",
+      "PHIOS-BRANDING-VOLUME-V-REALITY-NAVIGATION-V1"
+    ],
+    "allowedChangedFields": [
+      "actualConsumerState",
+      "humanReview.evidence",
+      "humanReview.status",
+      "productionSpec.embeddedTextPolicy",
+      "productionSpec.localeMode",
+      "productionSpec.logoPolicy",
+      "productionSpec.masterFormat",
+      "productionSpec.productionFormat",
+      "r2.remoteVerified",
+      "state"
+    ],
+    "changeClassification": "FIVE_EXISTING_BRANDING_IDENTITIES_OWNER_SUPPLIED_REMOTE_DELIVERY_SUCCESSOR",
+    "digestPolicy": "STRUCTURAL_PREDECESSOR_PROJECTION_AND_EXACT_ALLOWED_FIELD_TRANSITION"
+  },
   "brandingAuthority": {
     "registry": "content/web-production/registries/client-visual-asset-registry-v1.2.json",
-    "registrySha256AtObservation": "3eccd56490936164a0f0aa31b1ecece38eceedda0e613403784fdc9c6ff53772",
+    "historicalRegistrySha256AtW5Observation": "3eccd56490936164a0f0aa31b1ecece38eceedda0e613403784fdc9c6ff53772",
+    "currentRegistrySha256AtSuccessor": "14adc3d2e1de48e7c0dda6494244f90a15f47ac1e068d92ecb9bd3d73573dc61",
     "recordCount": 5,
     "assetType": "BRANDING",
     "publicDeliveryFormat": "webp",
@@ -63,9 +98,13 @@
     "requiredHttpStatus": 200,
     "requiredContentType": "image/webp",
     "remoteVerifiedEvidenceMayNotBeDowngraded": true,
-    "visualPlanningRecordsRewritten": false,
-    "visualHumanReviewPromoted": false,
-    "actualConsumerPromoted": false
+    "visualPlanningRecordsAdvancedByExistingBriAuthority": true,
+    "brandingOwnerSuppliedReviewInherited": true,
+    "brandingOwnerSuppliedReviewRecords": 5,
+    "booksResolverBindingsInherited": 5,
+    "booksConsumerAcceptanceClaimed": false,
+    "homepageHumanReviewPromoted": false,
+    "homepageConsumerPromoted": false
   },
   "hpc2W5Successor": {
     "frozenChecker": "scripts/check-hpc2-w5.mjs",
@@ -86,6 +125,8 @@
     "unknownRegistryMemberFailsClosed": true,
     "brandingIdentityOrObjectKeyMutationFailsClosed": true,
     "brandingRemoteEvidenceDowngradeFailsClosed": true,
+    "visualRegistryUnexpectedFieldChangeFailsClosed": true,
+    "visualRegistryMemberAdditionRemovalOrReorderFailsClosed": true,
     "summaryDriftFailsClosed": true,
     "futureRegistryChangesRequireVersionedSuccessor": true
   },

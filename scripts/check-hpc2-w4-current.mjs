@@ -89,10 +89,10 @@ assert.equal(/href=["']\/reality\/?["']/.test(html), false);
 
 assert.equal(pkg.scripts['check:hpc2-w4-frozen'], 'node scripts/check-hpc2-w4.mjs');
 assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5.mjs');
+assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-frozen-artifacts.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
 
 console.log('HPC2-W4 current successor: ACCEPTED');
 console.log('  frozen H01-H03 preserved byte-for-byte at scene scope; immutable W4 evidence preserved');
 console.log('  additive H04 is governed by HPC2-W5; H05-H09 and /reality/ remain inactive');
-console.log('  Ask position is reserved but its Homepage consumer remains missing pending CKA');
+console.log('  W4 Ask reservation is preserved as predecessor history; current Homepage consumer is governed by CKA-W0');

@@ -143,10 +143,11 @@ assert.equal(pkg.scripts['check:hpc2-w3-frozen'], 'node scripts/check-hpc2-w3.mj
 assert.equal(pkg.scripts['check:hpc2-w3'], 'node scripts/check-hpc2-w3-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w4-frozen'], 'node scripts/check-hpc2-w4.mjs');
 assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5.mjs');
+assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-frozen-artifacts.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
 
 console.log('HPC2-W2 current successor: ACCEPTED');
 console.log('  frozen H01 preserved byte-for-byte at scene scope; immutable W2 evidence preserved');
-console.log('  additive H02-H04 are governed by HPC2-W3/W4/W5; H05-H09 and /reality/ remain inactive');
+console.log('  additive H02-H04 are governed by HPC2-W3/W4/W5; current H04 Ask activation is governed by CKA-W0');
+console.log('  H05-H09 and /reality/ remain inactive');
 console.log('  W2 Human/browser acceptance remains pending; no decision fabricated');
