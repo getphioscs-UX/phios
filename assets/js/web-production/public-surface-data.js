@@ -18,6 +18,15 @@ export const BOOK_COMPATIBILITY_ROUTES = Object.freeze({
   })
 });
 
+
+export const BOOK_BRANDING_ASSET_CODE_BY_ID = Object.freeze({
+  'book-1': 'PHIOS-BRANDING-VOLUME-I-REALITY-FORMATION-V1',
+  'book-2': 'PHIOS-BRANDING-VOLUME-II-REALITY-RUNTIME-V1',
+  'book-3': 'PHIOS-BRANDING-VOLUME-III-REALITY-CONTINUITY-V1',
+  'book-4': 'PHIOS-BRANDING-VOLUME-IV-REALITY-CIVILIZATION-V1',
+  'book-5': 'PHIOS-BRANDING-VOLUME-V-REALITY-NAVIGATION-V1'
+});
+
 export const BOOK_ASSET_CODE_BY_ID = Object.freeze({
   'book-1': 'BOOK-1-HARDCOVER',
   'book-2': 'BOOK-2-HARDCOVER',
@@ -124,6 +133,22 @@ export function figurePublicSrc(figure) {
   const raw = String(figure?.web_file || '').trim();
   if (!raw || raw.includes('..') || /^https?:\/\//i.test(raw)) return null;
   return `/${raw.replace(/^\/+/, '')}`;
+}
+
+
+export async function resolveBookBranding(bookId, options = {}) {
+  const assetCode = BOOK_BRANDING_ASSET_CODE_BY_ID[bookId];
+  if (!assetCode) return null;
+  try {
+    const resolved = await resolvePublicAssetForWeb(assetCode, {
+      surface: options.surface || 'BOOKS',
+      locale: options.locale || null,
+      variant: options.variant || 'ORIGINAL'
+    });
+    return resolved.renderable ? resolved : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function resolveBookCover(bookId, options = {}) {

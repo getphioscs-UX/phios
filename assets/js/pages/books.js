@@ -2,7 +2,8 @@ import { getLocale, onLocaleChange, t } from '../i18n.js';
 import {
   bookRoute,
   loadCanonicalBooks,
-  resolveBookCover
+  resolveBookCover,
+  resolveBookBranding
 } from '../web-production/public-surface-data.js';
 
 const grid = document.querySelector('[data-wpr-books-grid]');
@@ -23,12 +24,14 @@ async function render() {
     const registry = await loadCanonicalBooks();
     if (registry.books.length !== 5) throw new Error('WPR_FIVE_VOLUME_PROJECTION_REQUIRED');
     const cards = await Promise.all(registry.books.slice().sort((a,b) => a.volume-b.volume).map(async book => {
+      const branding = await resolveBookBranding(book.book_id, { surface: 'BOOKS', locale });
       const cover = await resolveBookCover(book.book_id, { surface: 'BOOK', locale, variant: 'CARD' })
         || await resolveBookCover(book.book_id, { surface: 'BOOK', locale });
       const title = book.title?.[locale] || book.title?.en || book.book_id;
       const subtitle = book.subtitle?.[locale] || book.subtitle?.en || '';
-      const visual = cover
-        ? `<img src="${escapeHtml(cover.src)}" alt="" loading="lazy">`
+      const visualAsset = branding || cover;
+      const visual = visualAsset
+        ? `<img src="${escapeHtml(visualAsset.src)}" alt="" loading="lazy" data-volume-identity="${branding ? 'branding' : 'cover-fallback'}">`
         : `<span class="wpr-volume-fallback" aria-hidden="true"><span>Φ</span><strong>${String(book.volume).padStart(2,'0')}</strong></span>`;
       return `
         <article class="wpr-volume-panel wpr-volume-${escapeHtml(book.volume)}">
