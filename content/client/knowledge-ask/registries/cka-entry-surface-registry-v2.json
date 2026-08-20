@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-CKA-ENTRY-SURFACE-REGISTRY-v2.0.0",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "route": "/knowledge-search",
+  "records": [
+    {
+      "surface": "Homepage",
+      "entrySurface": "HOMEPAGE",
+      "state": "ACTIVE",
+      "evidence": [
+        "H04",
+        "H05",
+        "H07"
+      ],
+      "secondaryH09": "NONE_BY_DESIGN_HPC2_H09_DEFERRED"
+    },
+    {
+      "surface": "Knowledge Search",
+      "entrySurface": "KNOWLEDGE_SEARCH",
+      "state": "ACTIVE"
+    },
+    {
+      "surface": "Library",
+      "entrySurface": "LIBRARY",
+      "state": "ACTIVE"
+    },
+    {
+      "surface": "Article",
+      "entrySurface": "ARTICLE",
+      "state": "ACTIVE"
+    },
+    {
+      "surface": "Book",
+      "entrySurface": "BOOK",
+      "state": "ACTIVE"
+    },
+    {
+      "surface": "Account",
+      "entrySurface": "ACCOUNT",
+      "state": "ACTIVE",
+      "boundary": "TRUSTED_ACCOUNT_PROVIDER_AND_RETENTION_FAIL_CLOSED"
+    },
+    {
+      "surface": "Reality Dashboard",
+      "entrySurface": "REALITY_DASHBOARD",
+      "state": "ACTIVE",
+      "boundary": "TRUSTED_AUTHORIZATION_AND_EXPLICIT_CONTEXT_DISCLOSURE"
+    },
+    {
+      "surface": "Figure if enabled",
+      "entrySurface": "FIGURE",
+      "state": "ACTIVE",
+      "boundary": "FIGURE_CODE_REQUIRED"
+    }
+  ],
+  "rules": {
+    "allExpectedExplicitlyAccountedFor": true,
+    "silentMissingAllowed": false,
+    "activeOrNoneByDesignOnly": true
+  }
+}

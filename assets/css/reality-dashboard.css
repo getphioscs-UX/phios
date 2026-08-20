@@ -544,3 +544,51 @@ html[lang="zh-Hans"] .journey-dashboard-metric small {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* CKA-W20: explicit Reality context disclosure; never a silent context consumer. */
+.cka-reality-dashboard__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.cka-reality-dashboard__controls {
+  display: grid;
+  gap: 1rem;
+}
+
+.cka-reality-dashboard details {
+  border: 1px solid rgba(17, 20, 26, .13);
+  border-radius: .8rem;
+  padding: .9rem 1rem;
+  background: var(--color-surface, #fff);
+}
+
+.cka-reality-dashboard summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.cka-reality-dashboard dl {
+  display: grid;
+  gap: .75rem;
+}
+
+.cka-reality-dashboard dl > div {
+  display: grid;
+  grid-template-columns: minmax(7rem, .35fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.cka-reality-dashboard dt { font-weight: 700; }
+.cka-reality-dashboard dd { margin: 0; overflow-wrap: anywhere; }
+
+@media (max-width: 768px) {
+  .cka-reality-dashboard__grid { grid-template-columns: 1fr; }
+  .cka-reality-dashboard dl > div { grid-template-columns: 1fr; gap: .25rem; }
+  .cka-reality-dashboard .public-button { width: 100%; justify-content: center; }
+}

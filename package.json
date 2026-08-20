@@ -1177,7 +1177,7 @@
     "check:cka-w4": "node scripts/check-cka-w0-w4.mjs W4",
     "check:cka-w5-w17": "node scripts/check-cka-w5-w17.mjs",
     "check:cka-a": "node scripts/check-cka-w0-w4.mjs ALL",
-    "check:cka": "npm run check:cka-a && npm run check:cka-w5-w17",
+    "check:cka": "npm run check:cka-a && npm run check:cka-w5-w17 && npm run check:cka-w18-w33",
     "check:bfr-h-current": "node scripts/check-bfr-h-current.mjs",
     "check:bfr-h": "npm run check:client-surface-invariants && npm run check:bfr-h-current && npm run check:hpc2-p0 && npm run check:hpc2-w0 && npm run check:hpc2-w1 && npm run check:hpc2-w2 && npm run check:hpc2-w3 && npm run check:hpc2-w4 && npm run check:cka && npm run check:hpc2-w5 && npm run check:hpc2-w6 && npm run check:hpc2-w7 && npm run check:hpc2-w8 && npm run check:hpc2-w9 && npm run check:hpc2-w10 && npm run check:hpc2-w11 && npm run check:hpc2-w12",
     "check:bfa-batch2": "node scripts/check-bfa-batch2-real-production.mjs",
@@ -1342,7 +1342,9 @@
     "check:hpc2-w9-frozen": "node scripts/check-hpc2-w9.mjs",
     "check:hpc2-w10": "node scripts/check-hpc2-w10.mjs",
     "check:hpc2-w11": "node scripts/check-hpc2-w11.mjs",
-    "check:hpc2-w12": "node scripts/check-hpc2-w12.mjs"
+    "check:hpc2-w12": "node scripts/check-hpc2-w12.mjs",
+    "check:cka-w18-w33": "node scripts/check-cka-w18-w33.mjs",
+    "check:cka-current": "npm run check:cka"
   },
   "type": "module",
   "dependencies": {

@@ -1,9 +1,6 @@
-const appendOptional = (params, values) => {
-  for (const [key, value] of Object.entries(values)) {
-    if (value !== undefined && value !== null && value !== '') params.set(key, String(value));
-  }
-  return params;
-};
+import '../pages/knowledge-search-c.js';
+
+const cleanObject = value => Object.fromEntries(Object.entries(value || {}).filter(([, item]) => item !== undefined && item !== null && item !== ''));
 
 export async function askPhios({
   query,
@@ -13,42 +10,50 @@ export async function askPhios({
   entryContext = {},
   followUpContext = {},
   guidedContext = {},
+  useCurrentRealityContext = false,
   signal
 } = {}) {
-  const params = appendOptional(new URLSearchParams({
+  const body = {
     q: String(query ?? ''),
     locale: String(locale || 'zh-Hans'),
     depth: String(depth || 'STANDARD'),
-    source: String(source || 'hybrid')
-  }), {
-    entrySurface: entryContext.entrySurface,
-    entryRoute: entryContext.entryRoute,
-    contextType: entryContext.contextType,
-    contextId: entryContext.contextId,
-    bookCode: entryContext.bookCode,
-    partCode: entryContext.partCode,
-    articleCode: entryContext.articleCode,
-    figureCode: entryContext.figureCode,
-    realityCaseId: entryContext.realityCaseId,
-    mode: entryContext.mode,
-    contextLabel: entryContext.contextLabel,
-    contextSummary: entryContext.contextSummary,
-    readingPath: entryContext.readingPath,
-    relatedKnowledgeRef: entryContext.relatedKnowledgeRef,
-    contextQuestion: followUpContext.contextQuestion,
-    parentAnswerId: followUpContext.parentAnswerId,
-    groundingBundleId: followUpContext.groundingBundleId,
-    followUpDepth: followUpContext.followUpDepth,
-    whatIsHappening: guidedContext.whatIsHappening,
-    howLong: guidedContext.howLong,
-    whoOrWhatIsInvolved: guidedContext.whoOrWhatIsInvolved,
-    whatChanged: guidedContext.whatChanged,
-    whatTried: guidedContext.whatTried,
-    whatMattersMostNow: guidedContext.whatMattersMostNow
-  });
-  const response = await fetch(`/api/ask-phios?${params}`, {
-    method: 'GET',
-    headers: { Accept: 'application/json' },
+    source: String(source || 'hybrid'),
+    entryContext: cleanObject({
+      entrySurface: entryContext.entrySurface,
+      entryRoute: entryContext.entryRoute,
+      contextType: entryContext.contextType,
+      contextId: entryContext.contextId,
+      bookCode: entryContext.bookCode,
+      partCode: entryContext.partCode,
+      articleCode: entryContext.articleCode,
+      figureCode: entryContext.figureCode,
+      mode: entryContext.mode,
+      contextLabel: entryContext.contextLabel,
+      contextSummary: entryContext.contextSummary,
+      readingPath: entryContext.readingPath,
+      relatedKnowledgeRef: entryContext.relatedKnowledgeRef
+    }),
+    followUpContext: cleanObject({
+      contextQuestion: followUpContext.contextQuestion,
+      parentAnswerId: followUpContext.parentAnswerId,
+      groundingBundleId: followUpContext.groundingBundleId,
+      followUpDepth: followUpContext.followUpDepth
+    }),
+    guidedContext: cleanObject({
+      whatIsHappening: guidedContext.whatIsHappening,
+      howLong: guidedContext.howLong,
+      whoOrWhatIsInvolved: guidedContext.whoOrWhatIsInvolved,
+      whatChanged: guidedContext.whatChanged,
+      whatTried: guidedContext.whatTried,
+      whatMattersMostNow: guidedContext.whatMattersMostNow
+    }),
+    useCurrentRealityContext: useCurrentRealityContext === true
+  };
+  const response = await fetch('/api/ask-phios-consumption', {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'content-type': 'application/json' },
+    cache: 'no-store',
+    body: JSON.stringify(body),
     signal
   });
   const payload = await response.json().catch(() => null);

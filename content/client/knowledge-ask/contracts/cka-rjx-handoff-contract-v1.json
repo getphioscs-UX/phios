@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-CKA-RJX-HANDOFF-CONTRACT-v1.0.0",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "owner": "CKA_TO_KAP_RJX_HANDOFF_PROJECTION",
+  "fields": {
+    "sourceQuestion": "string",
+    "sourceAnswer": "string",
+    "userSelectedContext": "array",
+    "observedSignals": "array ROUTING_SIGNAL_NOT_REALITY_TRUTH",
+    "unknowns": "array",
+    "suggestedReasonForJourney": "string",
+    "consentState": [
+      "NOT_REQUESTED",
+      "REQUIRED",
+      "GRANTED",
+      "DECLINED"
+    ]
+  },
+  "required": [
+    "sourceQuestion",
+    "sourceAnswer",
+    "userSelectedContext",
+    "observedSignals",
+    "unknowns",
+    "suggestedReasonForJourney",
+    "consentState"
+  ],
+  "prohibited": [
+    "pre-created Reality Truth",
+    "canonical Reality mutation",
+    "persistent case creation by CKA",
+    "automatic Reality Journey activation"
+  ],
+  "downstreamAuthority": [
+    "KAP W24 complexity requirement",
+    "KAP W26 escalation reason",
+    "KAP W27 explicit consent",
+    "ICR",
+    "RDG",
+    "RMO"
+  ],
+  "governance": {
+    "preCreatedRealityTruth": false,
+    "canonicalRealityCreated": false,
+    "observedSignalsAreRoutingOnly": true,
+    "explicitConsentRequiredBeforeHandoff": true
+  }
+}
