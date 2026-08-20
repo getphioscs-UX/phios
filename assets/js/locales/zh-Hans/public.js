@@ -54,6 +54,54 @@ const publicExperience = Object.freeze({
       knowledge: '浏览免费知识内容',
       professional: '了解专业服务'
     },
+    oneReality: {
+      eyebrow: '一个现实',
+      title: '先看见现实，再解释它。',
+      lead: '当前现实不是单一事件，也不是单一感受。它形成于相互连接的领域、可观察的讯号、亲身经验、关系与结构、投射，以及仍然未知的部分。',
+      fieldLabel: '围绕一个当前现实而相互连接的领域',
+      core: '当前现实',
+      coreNote: '一个相互连接的整体',
+      domainsLabel: '现实领域',
+      domains: {
+        work: '工作',
+        money: '金钱',
+        family: '家庭',
+        body: '身体',
+        relationship: '关系',
+        time: '时间',
+        identity: '身份',
+        history: '历史',
+        evidence: '证据',
+        unknown: '未知'
+      },
+      semanticsLabel: '现实讯号区分',
+      semantics: {
+        observed: '已观察',
+        experienced: '亲身体验',
+        relationalStructural: '关系／结构',
+        derived: '推导',
+        projected: '投射',
+        unknown: '未知'
+      },
+      figureCaption: '受治理的当前现实地图',
+      exampleEyebrow: '公开示例 · 不是个人案例',
+      examples: {
+        observedLabel: '已观察',
+        observedValue: '收入发生变化',
+        experiencedLabel: '亲身体验',
+        experiencedValue: '我感到筋疲力尽',
+        structuralLabel: '结构',
+        structuralValue: '家庭承载能力受到限制',
+        projectedLabel: '投射',
+        projectedValue: '某种方法提示存在时间压力',
+        unknownLabel: '未知',
+        unknownValue: '条件是否会改善',
+        navigationLabel: '导航',
+        navigationValue: '下一步可以测试什么'
+      },
+      boundary: '这些讯号不会自动变成同一个结论。进入导航之前，它们的来源与限制会保持可见。',
+      definitionBoundary: '完整的现实定义与玉石比喻，属于专门的现实导航说明。'
+    },
     value: {
       eyebrow: 'PHI OS 帮助你看见什么',
       title: '一个困难处境，通常不只是一个孤立问题。',

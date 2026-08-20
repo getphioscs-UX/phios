@@ -15,6 +15,9 @@ const preFreeze = read('content/web/homepage/hpc2-pre/freeze/hpc2-pre-v2-freeze-
 const w2Contract = read('content/web/homepage/hpc2/contracts/hpc2-w2-hero-production-composition-contract-v1.json');
 const w2Evidence = read('content/web/homepage/hpc2/evidence/hpc2-w2-hero-production-composition-audit-v1.json');
 const w2Freeze = read('content/web/homepage/hpc2/freeze/hpc2-w2-hero-production-composition-freeze-v1.json');
+const w3Contract = read('content/web/homepage/hpc2/contracts/hpc2-w3-one-reality-composition-contract-v1.json');
+const w3Evidence = read('content/web/homepage/hpc2/evidence/hpc2-w3-one-reality-composition-audit-v1.json');
+const w3Freeze = read('content/web/homepage/hpc2/freeze/hpc2-w3-one-reality-composition-freeze-v1.json');
 const index = fs.readFileSync('index.html', 'utf8');
 const home = fs.readFileSync('assets/js/pages/home-production.js', 'utf8');
 const data = fs.readFileSync('assets/js/web-production/public-surface-data.js', 'utf8');
@@ -91,6 +94,18 @@ assert.equal(w2Contract.heroAsset.secondResolverCreated, false);
 assert.equal(w2Freeze.structuralFreeze.h01MayBeChangedOnlyByVersionedSuccessor, true);
 assert.equal(w2Freeze.preservedBoundaries.h02H09Implemented, false);
 assert.equal(w2Freeze.preservedBoundaries.realityCandidateRouteActivated, false);
+assert.equal(w3Contract.predecessorAuthority.w2FreezeSha256, digest('content/web/homepage/hpc2/freeze/hpc2-w2-hero-production-composition-freeze-v1.json'));
+assert.equal(w3Contract.figureAsset.assetCode, 'FIG-054');
+assert.equal(w3Contract.figureAsset.existingResolverReused, true);
+assert.equal(w3Contract.figureAsset.secondResolverCreated, false);
+assert.equal(w3Evidence.implementationObservations.h01MarkupUnchangedFromW2, true);
+assert.deepEqual(w3Evidence.implementationObservations.sceneMarkers, { h01: 1, h02: 1, h03ThroughH09: 0 });
+assert.equal(w3Evidence.routeObservations.candidateRealityRouteActivatedByW3, false);
+assert.equal(w3Freeze.preservedBoundaries.h03H09Implemented, false);
+assert.equal(w3Freeze.preservedBoundaries.realityCandidateRouteActivated, false);
+assert.ok(index.includes('data-hpc2-scene="H02"'));
+assert.ok(index.includes('data-hpc2-figure="FIG-054"'));
+for (let scene = 3; scene <= 9; scene += 1) assert.equal(index.includes(`data-hpc2-scene="H0${scene}"`), false);
 
 assert.equal(human.records.length, 16);
 assert.ok(human.records.every(record => ['PENDING', 'ACCEPTED', 'REVISION_REQUIRED'].includes(record.decision)));
@@ -105,6 +120,6 @@ if (finalReadiness.state === 'HPC2_PRE_READY') {
   assert.ok(browser.matrix.every(record => record.decision === 'ACCEPTED'));
 }
 
-console.log('✓ HPC2-PRE current successor passed: frozen visual authority preserved; W2 H01 consumer drift is explicitly additive and structurally governed.');
+console.log('✓ HPC2-PRE current successor passed: frozen visual authority preserved; W2 H01 and W3 H02 consumer drift is explicitly additive and structurally governed.');
 console.log(`✓ Current truth state: ${finalReadiness.state}; critical Human Accepted ${accepted}/16; Remote Verified ${remote}/16; historical PRE browser matrix ${browser.matrix.filter(record => record.decision === 'ACCEPTED').length}/6.`);
-console.log('✓ Single resolver preserved; H02-H09 and /reality/ remain independently gated.');
+console.log('✓ Single resolver preserved; H03-H09 and /reality/ remain independently gated.');

@@ -54,6 +54,54 @@ const publicExperience = Object.freeze({
       knowledge: 'Browse free Knowledge',
       professional: 'Understand Professional services'
     },
+    oneReality: {
+      eyebrow: 'One Reality',
+      title: 'See the Reality before defining it.',
+      lead: 'A current reality is not one event or one feeling. It forms across connected domains, observable signals, lived experience, relationships and structures, projections, and what remains unknown.',
+      fieldLabel: 'Connected domains around one current reality',
+      core: 'CURRENT REALITY',
+      coreNote: 'One connected field',
+      domainsLabel: 'Reality domains',
+      domains: {
+        work: 'Work',
+        money: 'Money',
+        family: 'Family',
+        body: 'Body',
+        relationship: 'Relationship',
+        time: 'Time',
+        identity: 'Identity',
+        history: 'History',
+        evidence: 'Evidence',
+        unknown: 'Unknown'
+      },
+      semanticsLabel: 'Reality signal distinctions',
+      semantics: {
+        observed: 'Observed',
+        experienced: 'Experienced',
+        relationalStructural: 'Relational / Structural',
+        derived: 'Derived',
+        projected: 'Projected',
+        unknown: 'Unknown'
+      },
+      figureCaption: 'Governed Current Reality map',
+      exampleEyebrow: 'Public example · Not a personal case',
+      examples: {
+        observedLabel: 'OBSERVED',
+        observedValue: 'Income changed',
+        experiencedLabel: 'EXPERIENCED',
+        experiencedValue: 'I feel exhausted',
+        structuralLabel: 'STRUCTURAL',
+        structuralValue: 'Family capacity is constrained',
+        projectedLabel: 'PROJECTED',
+        projectedValue: 'A method suggests timing pressure',
+        unknownLabel: 'UNKNOWN',
+        unknownValue: 'Whether conditions will improve',
+        navigationLabel: 'NAVIGATION',
+        navigationValue: 'What can be tested next'
+      },
+      boundary: 'These signals do not become one conclusion automatically. Their sources and limits remain visible before navigation.',
+      definitionBoundary: 'The complete Reality definition and Jade metaphor belong in the dedicated Reality Navigation explanation.'
+    },
     value: {
       eyebrow: 'What PHI OS helps you see',
       title: 'A difficult situation is usually more than one isolated question.',
