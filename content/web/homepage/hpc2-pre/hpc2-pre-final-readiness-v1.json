@@ -8,14 +8,14 @@
     "CONSUMED_NOT_BROWSER_ACCEPTED",
     "HPC2_PRE_READY"
   ],
-  "state": "BLOCKED",
+  "state": "HPC2_PRE_READY",
   "counts": {
     "plannedRegistryIdentities": 152,
     "hero": 23,
     "figure": 57,
     "heroFigureTotal": 80,
     "criticalAssets": 16,
-    "criticalHumanAccepted": 0,
+    "criticalHumanAccepted": 16,
     "criticalRemoteVerified": 16
   },
   "gates": {
@@ -23,20 +23,20 @@
     "rjxConsumersReconciled": true,
     "visualRegistryV12Frozen": true,
     "canonicalContractsRepresented": true,
-    "criticalAssetsHumanAccepted": false,
+    "criticalAssetsHumanAccepted": true,
     "criticalAssetsRemoteVerified": true,
-    "publicAssetDeliveryOperational": false,
-    "heroActuallyVisible": false,
-    "fiveCoversActuallyVisible": false,
-    "governedFiguresActuallyVisible": false,
+    "publicAssetDeliveryOperational": true,
+    "heroActuallyVisible": true,
+    "fiveCoversActuallyVisible": true,
+    "governedFiguresActuallyVisible": true,
     "noLocalGovernedAssetBypass": true,
     "noDuplicateCanonicalObject": true,
     "noSecondAssetResolver": true,
     "noV8Deletion": true,
     "noPrematureRealityActivation": true,
     "noDuplicateAuthority": true,
-    "browserAcceptancePassed": false,
-    "customerVisibleDelta": false
+    "browserAcceptancePassed": true,
+    "customerVisibleDelta": true
   },
   "nextActions": [
     "Configure PHIOS_PUBLIC_ASSET_BASE_URL in Cloudflare production environment.",
@@ -46,5 +46,5 @@
     "Record browser acceptance with npm run hpc2-pre:accept-browser -- --reviewer TL --deployment-url <url> --confirm.",
     "Run npm run hpc2-pre:refresh-status then npm run check:hpc2-pre-ready."
   ],
-  "status": "FAIL_CLOSED_PENDING_EXTERNAL_AND_HUMAN_GATES"
+  "status": "HPC2_PRE_READY_FROZEN"
 }
