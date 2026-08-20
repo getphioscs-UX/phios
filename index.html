@@ -308,6 +308,54 @@
       </div>
     </section>
 
+    <section class="public-section hpc2-h05" id="h05-first-interaction" data-hpc2-scene="H05" data-hpc2-scene-title="First Interaction" data-hpc2-visual-mode="REAL_HTML_UI_NO_FAKE_UI_IMAGE" aria-labelledby="hpc2-h05-title">
+      <div class="public-container">
+        <header class="hpc2-h05__heading">
+          <p class="public-eyebrow" data-i18n="discover.firstInteraction.eyebrow">First interaction</p>
+          <h2 id="hpc2-h05-title" class="public-title" data-i18n="discover.firstInteraction.title">Begin with what is happening—not with a system.</h2>
+          <p class="public-lead" data-i18n="discover.firstInteraction.lead">Choose the smallest useful first step: describe one situation, ask one question or open the existing Personal Runtime setup.</p>
+        </header>
+
+        <div class="hpc2-h05__interaction-grid">
+          <form class="hpc2-h05__situation" id="h05-situation-entry" action="/knowledge-search" method="get" data-hpc2-first-interaction="SITUATION_TO_EXISTING_CKA" data-hpc2-consumer-state="ACTIVE_CKA_W0_REUSED" data-hpc2-persistence="NONE">
+            <input type="hidden" name="entrySurface" value="HOMEPAGE">
+            <input type="hidden" name="mode" value="GLOBAL">
+            <input type="hidden" name="contextType" value="FIRST_INTERACTION_SITUATION">
+            <div>
+              <p class="public-eyebrow" data-i18n="discover.firstInteraction.situationEyebrow">Start with a situation</p>
+              <h3 data-i18n="discover.firstInteraction.situationTitle">What is changing, difficult or unclear right now?</h3>
+            </div>
+            <label for="h05-situation" data-i18n="discover.firstInteraction.situationLabel">Briefly describe the situation in your own words.</label>
+            <textarea id="h05-situation" name="q" rows="4" maxlength="500" required autocomplete="off" aria-describedby="h05-situation-hint h05-simple-boundary" data-hpc2-user-input="QUESTION_SCOPED_TEMPORARY_HANDOFF"></textarea>
+            <p class="hpc2-h05__privacy" id="h05-situation-hint" data-i18n="discover.firstInteraction.situationHint">Do not include sensitive personal data in this public first step.</p>
+            <button class="public-button public-button--light hpc2-h05__submit" type="submit" data-i18n="discover.firstInteraction.situationAction">Tell PHI OS what is happening</button>
+            <p class="hpc2-h05__boundary" id="h05-simple-boundary" data-i18n="discover.firstInteraction.simpleBoundary">This opens the existing Simple Ask. It creates no account or persistent case, executes no Method and starts no Reality Journey.</p>
+          </form>
+
+          <div class="hpc2-h05__paths" aria-label="Other governed first steps" data-i18n-aria-label="discover.firstInteraction.pathsLabel">
+            <article class="hpc2-h05__path" data-hpc2-first-interaction="QUESTION_TO_EXISTING_CKA">
+              <p class="public-eyebrow" data-i18n="discover.firstInteraction.questionEyebrow">I just have a question</p>
+              <h3 data-i18n="discover.firstInteraction.questionTitle">Ask within governed PHI OS knowledge.</h3>
+              <p data-i18n="discover.firstInteraction.questionCopy">Use a question-scoped answer when personal context is not required.</p>
+              <a href="/knowledge-search?entrySurface=HOMEPAGE&amp;mode=GLOBAL&amp;contextType=FIRST_INTERACTION_QUESTION" data-cka-entry-surface="HOMEPAGE" data-cka-entry-mode="GLOBAL" data-i18n="discover.firstInteraction.questionAction">Ask a question</a>
+            </article>
+
+            <article class="hpc2-h05__path" data-hpc2-first-interaction="PERSONAL_RUNTIME_EXISTING_ROUTE">
+              <p class="public-eyebrow" data-i18n="discover.firstInteraction.personalEyebrow">Explore my personal reality</p>
+              <h3 data-i18n="discover.firstInteraction.personalTitle">Open the existing Personal Runtime setup.</h3>
+              <p data-i18n="discover.firstInteraction.personalCopy">This separate public setup is ephemeral and fail-closed. Opening it does not execute a Method.</p>
+              <a href="/personal-runtime" data-hpc2-route-state="EXISTING_WPR_W21_LIMITED_NO_METHOD_EXECUTION" data-i18n="discover.firstInteraction.personalAction">Explore Personal Runtime</a>
+            </article>
+          </div>
+        </div>
+
+        <aside class="hpc2-h05__financial" data-hpc2-first-interaction="FINANCIAL_REALITY_EXISTING_ROUTE">
+          <p><strong data-i18n="discover.firstInteraction.financialTitle">Working with financial evidence?</strong> <span data-i18n="discover.firstInteraction.financialCopy">Financial calculations and professional responsibility remain on their dedicated governed surface.</span></p>
+          <a href="/professional/financial" data-hpc2-route-state="EXISTING_WPR_ROUTE" data-i18n="discover.firstInteraction.financialAction">Explore Financial Reality</a>
+        </aside>
+      </div>
+    </section>
+
     <section class="public-section" aria-labelledby="value-title">
       <div class="public-container about-split">
         <div>

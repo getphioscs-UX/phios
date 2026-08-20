@@ -25,6 +25,7 @@ const paths = Object.freeze({
   w5Contract: 'content/web/homepage/hpc2/contracts/hpc2-w5-phios-runtime-composition-contract-v1.json',
   w5Evidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-phios-runtime-composition-audit-v1.json',
   w5Freeze: 'content/web/homepage/hpc2/freeze/hpc2-w5-phios-runtime-composition-freeze-v1.json',
+  w6Contract: 'content/web/homepage/hpc2/contracts/hpc2-w6-first-interaction-composition-contract-v1.json',
   index: 'index.html',
   css: 'assets/css/hpc2-pre-home-visuals.css',
   runtime: 'assets/js/pages/home-production.js',
@@ -43,6 +44,7 @@ const freeze = read(paths.freeze);
 const w5Contract = read(paths.w5Contract);
 const w5Evidence = read(paths.w5Evidence);
 const w5Freeze = read(paths.w5Freeze);
+const w6Contract = read(paths.w6Contract);
 const pkg = read(paths.package);
 const html = text(paths.index);
 const css = text(paths.css);
@@ -62,9 +64,12 @@ assert.equal(w5Contract.predecessorProtection.h02ChangedByW5, false);
 assert.equal(w5Contract.predecessorProtection.h03ChangedByW5, false);
 assert.equal(w5Evidence.implementationObservations.h03MarkupUnchangedFromW4, true);
 assert.equal(w5Freeze.structuralFreeze.h03MarkupSha256, w5Contract.predecessorProtection.h03MarkupSha256);
+assert.equal(w6Contract.predecessorAuthority.w5ContractSha256, sha256(paths.w5Contract));
+assert.equal(w6Contract.predecessorAuthority.w5FreezeSha256, sha256(paths.w5Freeze));
+assert.equal(w6Contract.predecessorProtection.h01H04ChangedByW6, false);
 
-for (const scene of ['H01', 'H02', 'H03', 'H04']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
-for (let scene = 5; scene <= 9; scene += 1) assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} implemented prematurely`);
+for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
+for (let scene = 6; scene <= 9; scene += 1) assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} implemented prematurely`);
 assert.equal(digestText(sceneMarkup(html, 'H01')), w5Contract.predecessorProtection.h01MarkupSha256, 'Frozen H01 markup drift');
 assert.equal(digestText(sceneMarkup(html, 'H02')), w5Contract.predecessorProtection.h02MarkupSha256, 'Frozen H02 markup drift');
 const h03Html = sceneMarkup(html, 'H03');
@@ -91,8 +96,9 @@ assert.equal(pkg.scripts['check:hpc2-w4-frozen'], 'node scripts/check-hpc2-w4.mj
 assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-frozen-artifacts.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6.mjs');
 
 console.log('HPC2-W4 current successor: ACCEPTED');
 console.log('  frozen H01-H03 preserved byte-for-byte at scene scope; immutable W4 evidence preserved');
-console.log('  additive H04 is governed by HPC2-W5; H05-H09 and /reality/ remain inactive');
-console.log('  W4 Ask reservation is preserved as predecessor history; current Homepage consumer is governed by CKA-W0');
+console.log('  additive H04/H05 are governed by HPC2-W5/W6; H06-H09 and /reality/ remain inactive');
+console.log('  W4 Ask reservation is preserved as predecessor history; current Homepage consumers reuse CKA-W0-W4');

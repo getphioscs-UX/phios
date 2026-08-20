@@ -26,6 +26,8 @@ const paths = Object.freeze({
   successorEvidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-public-asset-registry-successor-audit-v1.json',
   ckaSuccessorContract: 'content/web-production/reconciliation/hpc2-w5-cka-w0-w4-current-successor-v1.json',
   ckaSuccessorEvidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-cka-w0-homepage-entry-successor-audit-v1.json',
+  w6Contract: 'content/web/homepage/hpc2/contracts/hpc2-w6-first-interaction-composition-contract-v1.json',
+  w6CkaSuccessor: 'content/web-production/reconciliation/hpc2-w6-cka-client-surface-successor-v1.json',
   ckaW0Contract: 'content/client/knowledge-ask/contracts/cka-w0-ask-entry-contract-v1.json',
   ckaRegistry: 'content/client/knowledge-ask/registries/cka-entry-surface-registry-v1.json',
   ckaAudit: 'content/client/knowledge-ask/evidence/cka-w0-w4-authority-and-consumer-audit-v1.json',
@@ -63,6 +65,8 @@ const successor = read(paths.successorContract);
 const successorEvidence = read(paths.successorEvidence);
 const ckaSuccessor = read(paths.ckaSuccessorContract);
 const ckaSuccessorEvidence = read(paths.ckaSuccessorEvidence);
+const w6Contract = read(paths.w6Contract);
+const w6CkaSuccessor = read(paths.w6CkaSuccessor);
 const ckaW0 = read(paths.ckaW0Contract);
 const ckaRegistry = read(paths.ckaRegistry);
 const ckaAudit = read(paths.ckaAudit);
@@ -133,6 +137,12 @@ for (const boundary of Object.values(ckaSuccessor.boundaries)) assert.equal(boun
 assert.equal(ckaSuccessor.successorPolicy.failClosed, true);
 assert.equal(ckaSuccessor.successorPolicy.deterministic, true);
 assert.equal(ckaSuccessor.successorPolicy.duplicateAuthorityForbidden, true);
+assert.equal(w6Contract.predecessorAuthority.w5ContractSha256, sha256(paths.contract));
+assert.equal(w6Contract.predecessorAuthority.w5FreezeSha256, sha256(paths.freeze));
+assert.equal(w6Contract.predecessorProtection.h01H04ChangedByW6, false);
+assert.equal(w6CkaSuccessor.predecessor.contractSha256, sha256(paths.ckaSuccessorContract));
+assert.equal(w6CkaSuccessor.homepageConsumerTransition.secondHomepageRuntimeCreated, false);
+assert.equal(w6CkaSuccessor.homepageConsumerTransition.secondAskAuthorityCreated, false);
 assert.equal(contract.predecessorAuthority.sceneRegistrySha256, sha256(paths.sceneRegistry));
 assert.equal(contract.predecessorAuthority.w4ContractSha256, sha256(paths.w4Contract));
 assert.equal(contract.predecessorAuthority.w4FreezeSha256, sha256(paths.w4Freeze));
@@ -174,8 +184,8 @@ assert.equal(h04Authority.ckaRole, 'FIRST_FORMAL_CONTEXTUAL_ASK_ENTRY_AFTER_RUNT
 assert.equal(h04Authority.ctaDestinations[0].activationState, 'HOMEPAGE_ENTRY_BLOCKED_PENDING_CKA');
 assert.deepEqual(h04Authority.v8NarrativeLineage, contract.v8AndRouteBoundary.sourceBlocks);
 
-for (const scene of ['H01', 'H02', 'H03', 'H04']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
-for (let scene = 5; scene <= 9; scene += 1) assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} implemented prematurely`);
+for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
+for (let scene = 6; scene <= 9; scene += 1) assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} implemented prematurely`);
 assert.equal(digestText(sceneMarkup(html, 'H01')), contract.predecessorProtection.h01MarkupSha256, 'Frozen H01 markup drift');
 assert.equal(digestText(sceneMarkup(html, 'H02')), contract.predecessorProtection.h02MarkupSha256, 'Frozen H02 markup drift');
 assert.equal(digestText(sceneMarkup(html, 'H03')), contract.predecessorProtection.h03MarkupSha256, 'Frozen H03 markup drift');
@@ -431,15 +441,16 @@ assert.equal(pkg.scripts['check:hpc2-w4-frozen'], 'node scripts/check-hpc2-w4.mj
 assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-frozen-artifacts.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
-assert.ok(pkg.scripts['check:hpc2'].endsWith('&& npm run check:hpc2-w5'));
-assert.ok(pkg.scripts['check:bfr-h'].endsWith('&& npm run check:hpc2-w5'));
+assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6.mjs');
+assert.ok(pkg.scripts['check:hpc2'].endsWith('&& npm run check:hpc2-w6'));
+assert.ok(pkg.scripts['check:bfr-h'].endsWith('&& npm run check:hpc2-w6'));
 
 console.log('HPC2-W5 current successor: ACCEPTED (repository implementation)');
-console.log('  scenes: H01-H03 preserved + H04 implemented; H05-H09 remain deferred');
+console.log('  scenes: frozen H01-H04 preserved; additive H05 is governed by HPC2-W6; H06-H09 remain deferred');
 console.log('  composition: 8-stage runtime cycle + 4 values + 4 authority boundaries; execution/persistence = 0');
 console.log('  visual: FIG-056 remote-verified and rendered through the existing resolver with fail-closed states');
 console.log('  registry: frozen 144-member observation preserved; additive 5-member branding successor reconciled at 149 records');
 console.log('  visual authority: 152 identities preserved; 5 existing branding records advanced by BRI, Books consumer acceptance remains pending');
-console.log('  Ask PHI OS: historical W5 reservation preserved; one H04 link is active under CKA-W0');
-console.log('  Ask boundary: no Homepage form/API call, no persistent case, Method execution or forced Reality Journey');
+console.log('  Ask PHI OS: historical W5 reservation preserved; H04 link and H05 handoffs reuse CKA-W0-W4');
+console.log('  Ask boundary: H04 remains link-only; Homepage runtime makes no API call and creates no persistent case, Method execution or forced Reality Journey');
 console.log('  V8: 4 source blocks preserved; promotions/deletions = 0; Human/browser acceptance pending');
