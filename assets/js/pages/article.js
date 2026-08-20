@@ -16,6 +16,7 @@ import {
   loadPublishedArticles,
   toggleArticleSaved
 } from '../knowledge/published-content.js';
+import { createCkaEntryAction } from '../knowledge/cka-entry-links.js';
 
 const root = document.querySelector('[data-article-slug]');
 const slug = root?.dataset.articleSlug || '';
@@ -93,6 +94,32 @@ function updateDocumentMetadata(article) {
   }
 }
 
+function appendAskEntry(article) {
+  const boundary = document.createElement('aside');
+  boundary.className = 'knowledge-boundary cka-contextual-entry';
+  const copy = document.createElement('p');
+  copy.textContent = getLocale() === 'zh-Hans'
+    ? 'Ask 用来理解这篇已发布文章；它不会改变文章权威，也不会建立 Reality 案例。'
+    : 'Ask helps you understand this published article. It does not change article authority or create a Reality case.';
+  const context = article.publicationContext || {};
+  boundary.append(
+    copy,
+    createCkaEntryAction(document, {
+      entrySurface: 'ARTICLE',
+      contextType: 'PUBLISHED_ARTICLE',
+      contextId: article.nodeCode || slug,
+      articleCode: article.nodeCode || slug,
+      bookCode: context.bookCode,
+      partCode: context.partCode,
+      contextLabel: article.title,
+      contextSummary: article.summary,
+      readingPath: article.readingPath || context.readingPath,
+      relatedKnowledgeRef: article.nodeCode || slug
+    }, { kind: 'ARTICLE', locale: getLocale() })
+  );
+  root.append(boundary);
+}
+
 async function render() {
   if (!root) {
     return;
@@ -120,6 +147,7 @@ async function render() {
     root.replaceChildren(articleElement);
     updateDocumentMetadata(article);
     bindSave(article);
+    appendAskEntry(article);
   } catch (error) {
     if (error instanceof ArticleRenderError) {
       renderInvalidState();

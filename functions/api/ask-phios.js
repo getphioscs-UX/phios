@@ -6,6 +6,13 @@ import {
   normalizeCkaEntryContext,
   projectCkaClientAnswer
 } from '../_lib/client-knowledge-ask.js';
+import {
+  composeCkaContextualRetrievalQuestion,
+  composeCkaGuidedRetrievalQuestion,
+  normalizeCkaGuidedContext,
+  normalizeCkaKnowledgeContext,
+  projectCkaW5W17Envelope
+} from '../_lib/client-knowledge-ask-b.js';
 
 const JSON_HEADERS = Object.freeze({
   'content-type': 'application/json; charset=utf-8',
@@ -49,14 +56,35 @@ function requestInput(url) {
   });
   const followUpBoundary = classifyCkaFollowUpBoundary(q);
   if (!followUpBoundary.simpleAskAllowed) throw new Error('CKA_NOT_SIMPLE_ASK');
-  return { q, locale, depth, source, entryContext, followUpContext, followUpBoundary };
+  const guidedContext = normalizeCkaGuidedContext({
+    question: q,
+    whatIsHappening: url.searchParams.get('whatIsHappening'),
+    howLong: url.searchParams.get('howLong'),
+    whoOrWhatIsInvolved: url.searchParams.get('whoOrWhatIsInvolved'),
+    whatChanged: url.searchParams.get('whatChanged'),
+    whatTried: url.searchParams.get('whatTried'),
+    whatMattersMostNow: url.searchParams.get('whatMattersMostNow')
+  });
+  const knowledgeContext = normalizeCkaKnowledgeContext({
+    contextLabel: url.searchParams.get('contextLabel'),
+    contextSummary: url.searchParams.get('contextSummary'),
+    readingPath: url.searchParams.get('readingPath'),
+    relatedKnowledgeRef: url.searchParams.get('relatedKnowledgeRef')
+  });
+  return { q, locale, depth, source, entryContext, followUpContext, followUpBoundary, guidedContext, knowledgeContext };
 }
 
 export async function onRequestGet(context) {
   try {
     const url = new URL(context.request.url);
     const input = requestInput(url);
-    const retrievalQuestion = composeCkaRetrievalQuestion(input.followUpContext);
+    const retrievalQuestion = composeCkaContextualRetrievalQuestion(
+      composeCkaGuidedRetrievalQuestion(
+        composeCkaRetrievalQuestion(input.followUpContext),
+        input.guidedContext
+      ),
+      input.knowledgeContext
+    );
     const result = await runAskPhiosPipeline({
       input: {
         question: retrievalQuestion,
@@ -77,6 +105,12 @@ export async function onRequestGet(context) {
       followUpContext: input.followUpContext,
       displayQuestion: input.q
     });
+    const w5w17 = projectCkaW5W17Envelope(result, {
+      displayQuestion: input.q,
+      locale: input.locale,
+      guidedContext: input.guidedContext,
+      knowledgeContext: input.knowledgeContext
+    });
     return json({
       ok: true,
       ...result,
@@ -89,6 +123,7 @@ export async function onRequestGet(context) {
           guestLimitReached: input.followUpContext.followUpDepth >= 1
         },
         clientAnswer,
+        w5w17,
         governance: {
           clientSurfaceOnly: true,
           upstreamAnswerRuntimeReused: true,

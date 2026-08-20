@@ -8,6 +8,7 @@ import {
   loadCanonicalParts,
   loadFigureRegistry
 } from '../web-production/public-surface-data.js';
+import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
 
 const search = document.querySelector('#library-search');
 const category = document.querySelector('#library-category');
@@ -66,7 +67,14 @@ async function buildResources(locale) {
     href: bookRoute(book.book_id),
     title: `${t('knowledge.production.volume', { volume: book.volume })} · ${localized(book.title, locale)}`,
     description: localized(book.subtitle, locale),
-    parts: (book.parts || []).map(number => `P${number}`)
+    parts: (book.parts || []).map(number => `P${number}`),
+    askContext: {
+      contextType: 'CANONICAL_VOLUME',
+      bookCode: book.book_id,
+      contextLabel: localized(book.title, locale),
+      contextSummary: localized(book.subtitle, locale),
+      readingPath: `${bookRoute(book.book_id)}#book-parts`
+    }
   }));
 
   const bookOne = booksRegistry.books.find(book => book.book_id === 'book-1');
@@ -80,7 +88,16 @@ async function buildResources(locale) {
       href: articleHref(article),
       title: article.title,
       description: article.summary,
-      parts: article.publicationContext?.partCode ? [article.publicationContext.partCode] : []
+      parts: article.publicationContext?.partCode ? [article.publicationContext.partCode] : [],
+      askContext: {
+        contextType: 'PUBLISHED_ARTICLE',
+        articleCode: article.nodeCode,
+        bookCode: article.publicationContext?.bookCode,
+        partCode: article.publicationContext?.partCode,
+        contextLabel: article.title,
+        contextSummary: article.summary,
+        relatedKnowledgeRef: article.nodeCode
+      }
     })),
     {
       id: 'knowledge-access',
@@ -89,8 +106,8 @@ async function buildResources(locale) {
       href: '/knowledge-search',
       title: locale === 'zh-Hans' ? '询问 PHI OS Knowledge' : 'Ask PHI OS Knowledge',
       description: locale === 'zh-Hans'
-        ? '同时检索已发布知识与已完成书稿；书稿来源不会被冒充为 Published Article。'
-        : 'Search both published knowledge and completed manuscripts while preserving publication authority boundaries.'
+        ? 'Ask 用于理解知识；Search 与 Library 用于查找、浏览和发现，两者不会合并成重复产品。'
+        : 'Ask is for understanding knowledge; Search and Library are for finding, browsing and discovery without becoming duplicate products.'
     },
     {
       id: 'reality-navigation-thesis',
@@ -167,7 +184,20 @@ function render() {
       && (!query || searchable.includes(query));
   });
 
-  grid.innerHTML = visible.map(resource => `
+  grid.innerHTML = visible.map(resource => {
+    const askHref = buildCkaEntryHref({
+      entrySurface: 'LIBRARY',
+      contextId: resource.id,
+      contextLabel: resource.title,
+      contextSummary: resource.description,
+      ...(resource.askContext || {})
+    });
+    const openLabel = resource.category === 'figures'
+      ? (locale === 'zh-Hans' ? '查看 Figure' : 'View figure')
+      : ['articles', 'books', 'research'].includes(resource.category)
+        ? (locale === 'zh-Hans' ? '阅读' : 'Read')
+        : t('knowledge.common.open');
+    return `
     <article class="knowledge-card" data-resource-id="${escapeHtml(resource.id)}">
       <div class="knowledge-card__meta">
         <span class="knowledge-chip">${escapeHtml(t(CATEGORY_KEYS[resource.category]))}</span>
@@ -175,9 +205,13 @@ function render() {
       </div>
       <h2>${escapeHtml(resource.title)}</h2>
       <p>${escapeHtml(resource.description)}</p>
-      <p><a href="${escapeHtml(resource.href)}">${escapeHtml(t('knowledge.common.open'))}</a></p>
+      <p class="knowledge-actions">
+        <a href="${escapeHtml(resource.href)}">${escapeHtml(openLabel)}</a>
+        <a href="${escapeHtml(askHref)}" data-cka-contextual-entry="LIBRARY">${escapeHtml(ckaEntryLabel('KNOWLEDGE', locale))}</a>
+      </p>
     </article>
-  `).join('');
+  `;
+  }).join('');
 
   results.textContent = t('knowledge.library.results', { count: visible.length });
   empty.hidden = visible.length !== 0;
@@ -191,6 +225,9 @@ async function loadAndRender() {
   }
   render();
 }
+
+const initialQuery = new URLSearchParams(location.search).get('query');
+if (initialQuery && search) search.value = initialQuery.slice(0, 160);
 
 [search, category, status, partFilter].forEach(control => {
   control?.addEventListener('input', render);

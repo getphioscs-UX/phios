@@ -6,6 +6,7 @@ import {
   loadCanonicalParts,
   resolveBookCover
 } from '../web-production/public-surface-data.js';
+import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
 
 const root = document.querySelector('[data-wpr-book-volume]');
 const bookId = document.body.dataset.bookId || root?.dataset.bookId || 'book-1';
@@ -69,6 +70,17 @@ async function render() {
       ? `<a class="knowledge-action knowledge-action--primary" href="/checkout">${escapeHtml(t('knowledge.production.bookOnePurchase'))}</a>
          <a class="knowledge-action" href="/book-one-preview">${escapeHtml(t('knowledge.production.bookOnePreview'))}</a>`
       : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
+    const askHref = buildCkaEntryHref({
+      entrySurface: 'BOOK',
+      contextType: 'CANONICAL_VOLUME',
+      contextId: book.book_id,
+      bookCode: book.book_id,
+      contextLabel: title,
+      contextSummary: subtitle,
+      readingPath: `${canonicalRoute}#book-parts`,
+      relatedKnowledgeRef: parts.map(part => `P${part.number}`).join(',')
+    });
+    const askLabel = ckaEntryLabel('BOOK', locale);
 
     root.innerHTML = `
       <section class="knowledge-hero wpr-book-hero wpr-volume-${escapeHtml(book.volume)}">
@@ -78,7 +90,7 @@ async function render() {
             <h1>${escapeHtml(title)}</h1>
             <p class="knowledge-hero__lead">${escapeHtml(subtitle)}</p>
             <p>${escapeHtml(t('knowledge.production.registryLed'))}</p>
-            <div class="knowledge-actions">${bookOneActions}<a class="knowledge-action" href="/books">${escapeHtml(t('knowledge.production.allVolumes'))}</a></div>
+            <div class="knowledge-actions">${bookOneActions}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books">${escapeHtml(t('knowledge.production.allVolumes'))}</a></div>
           </div>
           <figure class="wpr-book-cover"><div>${heroVisual}</div><figcaption>${escapeHtml(t('knowledge.production.coverBoundary'))}</figcaption></figure>
         </div>

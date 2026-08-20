@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W5-W17-BATCH-B-CONTRACT-v1.0.0",
+  "batch": "BATCH-CKA-B",
+  "baselineCommit": "cfd9034cb695a1ccb1eccde86c2bbb6b2518cfd7",
+  "works": [
+    {
+      "work": "CKA-W5",
+      "capability": "GUIDED_CONTEXT",
+      "cta": "Help PHI OS understand your situation",
+      "minimalFields": [
+        "whatIsHappening",
+        "howLong",
+        "whoOrWhatIsInvolved",
+        "whatChanged",
+        "whatTried",
+        "whatMattersMostNow"
+      ],
+      "classifications": ["SIMPLE", "CONTEXTUAL", "PERSONALIZED", "COMPLEX", "PERSISTENT", "MULTI_FACTOR"],
+      "fullIcrCreated": false,
+      "classificationIsDiagnosis": false
+    },
+    {
+      "work": "CKA-W6",
+      "capability": "REALITY_JOURNEY_CTA_AND_HANDOFF",
+      "cta": "Explore this as a Reality Journey",
+      "authoritativeGate": "KAP_W24_REQUIREMENT_YES",
+      "explicitConsentRequired": true,
+      "automaticJourney": false,
+      "canonicalRealityCreatedByCka": false,
+      "downstreamOwners": ["ICR", "RDG", "RMO"]
+    },
+    {
+      "work": "CKA-W7",
+      "capability": "ACCOUNT_BOUNDARY",
+      "guestAllowed": ["ASK", "ANSWER", "ONE_LIMITED_FOLLOW_UP", "RELATED_KNOWLEDGE", "TEMPORARY_GUIDED_CONTEXT"],
+      "accountRequired": ["ANSWER_HISTORY", "SAVE_RESULT_OR_KNOWLEDGE", "METHOD_RESULT_PERSISTENCE", "CASE_PERSISTENCE", "REALITY_VERSION_HISTORY", "JOURNEY_CONTINUITY"],
+      "shadowAccountCreated": false
+    },
+    {
+      "work": "CKA-W8",
+      "capability": "RETRIEVAL_PIPELINE",
+      "pipeline": ["QUESTION", "INTENT", "KNOWLEDGE_RETRIEVAL", "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE", "GROUNDING", "ANSWER"],
+      "authorityPriority": ["CANONICAL_OR_PUBLISHED_PHI_OS", "REVIEWED_MANUSCRIPT_OR_KSAR", "GOVERNED_EXTERNAL_AUTHORITY", "AUTHORIZED_CLIENT_CONTEXT"],
+      "llmMemoryOnlyAnswerAllowed": false,
+      "authoritiesSilentlyCollapsed": false
+    },
+    {
+      "work": "CKA-W9",
+      "capability": "GROUNDED_ANSWER_BINDING",
+      "runtimeOwner": "KAP_GROUNDED_ANSWER",
+      "recordedFields": ["answerId", "questionId", "retrievalContext", "knowledgeRefs", "groundingState", "unknownState", "locale"],
+      "authoritativeAnswerGeneratedByCka": false,
+      "secondAnswerRuntimeCreated": false
+    },
+    {
+      "work": "CKA-W10",
+      "capability": "ANSWER_STATE_MODEL",
+      "states": ["ANSWERED", "PARTIALLY_ANSWERED", "UNKNOWN", "OUTSIDE_SCOPE", "NEEDS_CONTEXT", "NEEDS_CURRENT_AUTHORITY", "PROFESSIONAL_HANDOFF"]
+    },
+    {
+      "work": "CKA-W11",
+      "capability": "CURRENT_EXTERNAL_AUTHORITY_AND_PROFESSIONAL_BOUNDARY",
+      "unstableDomainsRequireCurrentAuthority": true,
+      "ckaMakesProfessionalJudgment": false,
+      "liveAuthorityInvented": false
+    },
+    {
+      "work": "CKA-W12",
+      "capability": "METHOD_BOUNDARY",
+      "askIsMethodExecution": false,
+      "birthDataTriggersMethod": false,
+      "personalRuntimePath": ["READINESS", "DISCLOSURE", "CONSENT", "MPA_ELIGIBILITY", "EXECUTION", "NORMALIZATION"]
+    },
+    {
+      "work": "CKA-W13",
+      "capability": "REALITY_CONTEXT_BOUNDARY",
+      "questionContextIsCanonicalRealityCase": false,
+      "simpleContextEphemeral": true,
+      "realityAwareRequires": ["ACCOUNT", "PERMISSION", "PRIVACY", "ENTITLEMENT", "EXISTING_CASE"],
+      "newCaseOnlyThroughRealityFlow": true
+    },
+    {
+      "work": "CKA-W14",
+      "capability": "RELATED_KNOWLEDGE",
+      "allowedAuthorities": ["RELATED_KNOWLEDGE_AUTHORITY", "READING_PATHS", "BOOK_PART_RELATIONSHIPS", "FIGURE_RELATIONSHIPS", "PUBLISHED_KNOWLEDGE_GRAPH"],
+      "cardFields": ["concept", "volume", "part", "description", "contentType", "href"],
+      "inventedCardsAllowed": false
+    },
+    {
+      "work": "CKA-W15",
+      "capability": "CONTEXTUAL_ASK",
+      "ctas": ["Ask about this volume", "Ask about this article", "Ask about this figure"],
+      "figureIsMethodClientResult": false
+    },
+    {
+      "work": "CKA-W16",
+      "capability": "SEARCH_ASK_INTEGRATION",
+      "searchPurpose": "FIND_KNOWLEDGE",
+      "askPurpose": "UNDERSTAND_KNOWLEDGE",
+      "duplicateProductCreated": false
+    },
+    {
+      "work": "CKA-W17",
+      "capability": "LIBRARY_ASK_INTEGRATION",
+      "libraryPurpose": "BROWSE_DISCOVER_COMPARE_FOLLOW_READING_PATHS",
+      "cardActions": ["READ", "VIEW_FIGURE", "ASK_PHI_OS"]
+    }
+  ],
+  "exitGate": {
+    "simpleToAnswer": true,
+    "contextualToGuidedContext": true,
+    "complexToConsentedRealityHandoff": true,
+    "methodLeakage": false,
+    "caseLeakage": false,
+    "llmMemoryOnlyAnswer": false,
+    "homepageRuntimeChanged": false,
+    "realityRouteActivated": false
+  }
+}

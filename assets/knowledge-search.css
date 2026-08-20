@@ -9,4 +9,176 @@
 .knowledge-search-fragments p{margin:0;line-height:1.75}
 .knowledge-search-boundary{padding:1rem;border-left:4px solid currentColor;background:rgba(127,127,127,.08)}
 @media(max-width:720px){.knowledge-search-form{grid-template-columns:1fr}.knowledge-search-form button{width:100%}}
-.knowledge-source-group{display:grid;gap:1rem}.knowledge-manuscript-results{display:grid;gap:1rem}.knowledge-manuscript-source{display:grid;gap:.75rem;padding:1rem;border:1px solid var(--color-border,#d7d2c8);border-radius:.75rem;background:rgba(127,127,127,.035)}.knowledge-manuscript-source h3{margin:0}.knowledge-manuscript-source p{margin:0;line-height:1.7}.knowledge-source-meta{font-size:.9rem;opacity:.76}
+.knowledge-guided-entry,.knowledge-guided-result{display:grid;gap:1rem;padding:1rem;border:1px solid var(--color-border,#d7d2c8);border-radius:1rem;background:rgba(127,127,127,.035)}
+.knowledge-guided-entry form{display:grid;gap:1rem}.knowledge-guided-entry fieldset{display:grid;gap:.55rem;border:1px solid var(--color-border,#d7d2c8);border-radius:.75rem;padding:1rem}.knowledge-guided-entry legend{font-weight:700;padding:0 .35rem}.knowledge-guided-entry fieldset label{display:flex;gap:.55rem;align-items:flex-start;font-weight:500}.knowledge-guided-observation{display:grid;gap:.5rem;font-weight:700}.knowledge-guided-observation textarea{width:100%;border:1px solid var(--color-border,#c9c6be);border-radius:.55rem;padding:.75rem;background:var(--color-surface,#fff);color:inherit;font:inherit}.knowledge-guided-result small{display:block;margin-top:.35rem}.knowledge-guided-error{color:#8b2f2f}
+
+.cka-composer,
+.cka-follow-up__form {
+  display: grid;
+  gap: .75rem;
+}
+
+.cka-composer label,
+.cka-follow-up__form label {
+  font-weight: 700;
+}
+
+.cka-composer textarea,
+.cka-follow-up__form textarea {
+  width: 100%;
+  border: 1px solid var(--color-border, #c9c6be);
+  border-radius: .7rem;
+  padding: .85rem;
+  background: var(--color-surface, #fff);
+  color: inherit;
+  font: inherit;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.cka-answer {
+  display: grid;
+  gap: 1.35rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid var(--color-border, #d7d2c8);
+  border-radius: 1rem;
+  background: var(--color-surface, #fff);
+}
+
+.cka-answer[hidden] {
+  display: none;
+}
+
+.cka-answer > section,
+.cka-grounding {
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border, #e2ded5);
+}
+
+.cka-answer h2 {
+  margin-top: 0;
+}
+
+.cka-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cka-card {
+  padding: 1rem;
+  border: 1px solid var(--color-border, #d7d2c8);
+  border-radius: .8rem;
+  background: rgba(127, 127, 127, .035);
+}
+
+.cka-card h3,
+.cka-card p {
+  margin-top: 0;
+}
+
+.cka-grounding > div {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cka-follow-up {
+  display: grid;
+  gap: .8rem;
+}
+
+.cka-answer-state,
+.cka-unknown-state {
+  width: fit-content;
+  margin: .5rem 0 0;
+  padding: .25rem .6rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.cka-guided,
+.cka-journey {
+  display: grid;
+  gap: 1rem;
+}
+
+.cka-guided__form {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border, #d7d2c8);
+  border-radius: .8rem;
+  background: rgba(127, 127, 127, .035);
+}
+
+.cka-guided__form[hidden],
+.cka-journey[hidden],
+.cka-journey__consent[hidden] {
+  display: none;
+}
+
+.cka-guided__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cka-guided__grid label {
+  display: grid;
+  gap: .45rem;
+  font-weight: 700;
+}
+
+.cka-guided__grid textarea {
+  width: 100%;
+  border: 1px solid var(--color-border, #c9c6be);
+  border-radius: .6rem;
+  padding: .75rem;
+  background: var(--color-surface, #fff);
+  color: inherit;
+  font: inherit;
+  resize: vertical;
+}
+
+.cka-journey {
+  padding: 1rem;
+  border: 1px solid var(--color-border, #d7d2c8);
+  border-radius: .8rem;
+  background: color-mix(in srgb, var(--color-surface, #fff) 90%, #c9d4ca);
+}
+
+.cka-journey__consent {
+  display: grid;
+  gap: .75rem;
+}
+
+.cka-source-group {
+  display: grid;
+  gap: .75rem;
+}
+
+.cka-source {
+  padding: .85rem;
+  border-left: 3px solid currentColor;
+  background: rgba(127, 127, 127, .035);
+}
+
+.cka-source__meta {
+  font-size: .85rem;
+  opacity: .72;
+}
+
+.cka-search-more {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .cka-card-grid,
+  .cka-guided__grid {
+    grid-template-columns: 1fr;
+  }
+}

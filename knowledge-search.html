@@ -15,7 +15,7 @@
 <body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-search">
   <a class="skip-link" href="#knowledge-search-main">Skip to main content</a>
   <header data-public-header-placeholder></header>
-  <main id="knowledge-search-main">
+  <main id="knowledge-search-main" data-cka-root data-cka-entry-surface="KNOWLEDGE_SEARCH">
     <section class="knowledge-hero">
       <div class="knowledge-shell cka-introduction">
         <p class="knowledge-eyebrow" data-cka-context-indicator>Asking PHI OS</p>
@@ -37,16 +37,18 @@
           <header class="cka-answer__question">
             <p class="knowledge-eyebrow">Your question</p>
             <h2 data-cka-answer-question></h2>
+            <p class="cka-answer-state" data-cka-answer-state></p>
           </header>
           <section data-cka-section="DIRECT_ANSWER"><h2>Direct answer</h2><div data-cka-direct-answer></div></section>
           <section data-cka-section="WHY_THIS_MAY_HAPPEN"><h2>Why this may happen</h2><div data-cka-why></div></section>
           <section data-cka-section="WHAT_TO_OBSERVE"><h2>What to observe</h2><div data-cka-observe></div></section>
-          <section data-cka-section="WHAT_PHIOS_DOES_NOT_YET_KNOW"><h2>What PHI OS does not yet know</h2><div data-cka-unknown></div></section>
+          <section data-cka-section="WHAT_PHIOS_DOES_NOT_YET_KNOW"><h2>What PHI OS does not yet know</h2><p class="cka-unknown-state" data-cka-unknown-state></p><div data-cka-unknown></div></section>
           <section data-cka-section="RELATED_KNOWLEDGE"><h2>Related knowledge</h2><div class="cka-card-grid" data-cka-related-knowledge></div></section>
           <details class="cka-grounding" data-cka-grounding>
             <summary>Sources and grounding</summary>
-            <div data-cka-grounding-list></div>
+            <div data-cka-sources></div>
           </details>
+          <aside class="knowledge-boundary cka-answer-boundary" data-cka-answer-boundary></aside>
           <section class="cka-follow-up" data-cka-follow-up>
             <h2>Ask one follow-up</h2>
             <form class="cka-follow-up__form" data-cka-follow-up-form>
@@ -56,17 +58,48 @@
             </form>
             <p data-cka-follow-up-boundary>Guest context is temporary and supports one follow-up only.</p>
           </section>
+
+          <section class="cka-guided" data-cka-guided>
+            <button class="knowledge-action" type="button" data-cka-guided-open>Help PHI OS understand your situation</button>
+            <form class="cka-guided__form" data-cka-guided-form hidden>
+              <p class="knowledge-eyebrow">Guided Context · temporary, not a full ICR</p>
+              <div class="cka-guided__grid">
+                <label>What is happening?<textarea name="whatIsHappening" maxlength="240" rows="2"></textarea></label>
+                <label>How long?<textarea name="howLong" maxlength="240" rows="2"></textarea></label>
+                <label>Who or what is involved?<textarea name="whoOrWhatIsInvolved" maxlength="240" rows="2"></textarea></label>
+                <label>What changed?<textarea name="whatChanged" maxlength="240" rows="2"></textarea></label>
+                <label>What have you tried?<textarea name="whatTried" maxlength="240" rows="2"></textarea></label>
+                <label>What matters most now?<textarea name="whatMattersMostNow" maxlength="240" rows="2"></textarea></label>
+              </div>
+              <button class="knowledge-action knowledge-action--primary" type="submit">Use this temporary context</button>
+            </form>
+            <p class="cka-guided__status" role="status" aria-live="polite" data-cka-guided-status></p>
+          </section>
+
+          <section class="cka-journey" data-cka-journey hidden>
+            <p class="knowledge-eyebrow">Reality complexity boundary</p>
+            <h2>When one answer is not enough</h2>
+            <p data-cka-journey-reason></p>
+            <button class="knowledge-action knowledge-action--primary" type="button" data-cka-journey-prepare>Explore this as a Reality Journey</button>
+            <div class="cka-journey__consent" data-cka-journey-consent hidden>
+              <label><input type="checkbox" data-cka-journey-consent-checkbox> I explicitly consent to prepare a temporary Reality entry seed for downstream ICR intake.</label>
+              <button class="knowledge-action" type="button" data-cka-journey-handoff>Continue with explicit consent</button>
+            </div>
+            <p role="status" aria-live="polite" data-cka-journey-status></p>
+          </section>
+
+          <p class="cka-search-more"><a class="knowledge-action" href="/library" data-cka-search-more>Search more knowledge</a></p>
         </article>
 
-        <aside class="knowledge-boundary">
-          <strong>Ask PHI OS boundary</strong>
-          <p>This client surface creates no Canonical Knowledge, Reality Reading, persistent case, Method execution, shadow account or automatic Reality Journey.</p>
+        <aside class="knowledge-boundary cka-entry-boundary">
+          <strong>Guest and Ask PHI OS boundary</strong>
+          <p>Guests can Ask, receive one limited follow-up, view Related Knowledge and use temporary context. An account is required for history, saved results, persistence and Journey continuity. Ask—including an Ask that sees birth data—does not execute a Method or turn question context into Canonical Reality.</p>
         </aside>
       </div>
     </section>
   </main>
   <footer data-public-footer-placeholder></footer>
   <script type="module" src="/assets/js/public-shell.js"></script>
-  <script type="module" src="/assets/js/pages/knowledge-search.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-search-b.js"></script>
 </body>
 </html>

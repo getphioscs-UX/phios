@@ -12,6 +12,7 @@ export async function askPhios({
   source = 'hybrid',
   entryContext = {},
   followUpContext = {},
+  guidedContext = {},
   signal
 } = {}) {
   const params = appendOptional(new URLSearchParams({
@@ -30,10 +31,20 @@ export async function askPhios({
     figureCode: entryContext.figureCode,
     realityCaseId: entryContext.realityCaseId,
     mode: entryContext.mode,
+    contextLabel: entryContext.contextLabel,
+    contextSummary: entryContext.contextSummary,
+    readingPath: entryContext.readingPath,
+    relatedKnowledgeRef: entryContext.relatedKnowledgeRef,
     contextQuestion: followUpContext.contextQuestion,
     parentAnswerId: followUpContext.parentAnswerId,
     groundingBundleId: followUpContext.groundingBundleId,
-    followUpDepth: followUpContext.followUpDepth
+    followUpDepth: followUpContext.followUpDepth,
+    whatIsHappening: guidedContext.whatIsHappening,
+    howLong: guidedContext.howLong,
+    whoOrWhatIsInvolved: guidedContext.whoOrWhatIsInvolved,
+    whatChanged: guidedContext.whatChanged,
+    whatTried: guidedContext.whatTried,
+    whatMattersMostNow: guidedContext.whatMattersMostNow
   });
   const response = await fetch(`/api/ask-phios?${params}`, {
     method: 'GET',
