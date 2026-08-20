@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-RJX-METRICS-CONTRACT-v1.0.0",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "status": "DEFINED_NOT_YET_PRODUCTION_MEASURED",
+  "productMetrics": [
+    "journeyEligibilityRate",
+    "simpleCaseRate",
+    "complexCaseRate",
+    "firstMeaningfulResultLatency",
+    "UnderstandCompletionRate",
+    "ChooseCompletionRate",
+    "ReviewReturnRate",
+    "RealityNextCreationRate",
+    "professionalHandoffRate"
+  ],
+  "ruleMetrics": [
+    "ruleCoverageRate",
+    "ruleOnlyCompletionRate",
+    "unknownPreservationRate",
+    "counterEvidenceRetentionRate",
+    "nodeRuleTraceabilityRate",
+    "humanOverrideRate",
+    "ruleConflictRate"
+  ],
+  "aiCostMetrics": [
+    "zeroModelRequestRate",
+    "workersAIRequestRate",
+    "workersAIAcceptedCandidateRate",
+    "workersAIMeteredCost",
+    "openAIRequestRate",
+    "openAIAcceptedCandidateRate",
+    "openAICost",
+    "providerFallbackRate",
+    "providerValidationFailureRate",
+    "costPerCompletedJourney"
+  ],
+  "safetyMetrics": {
+    "observedEvidenceMutationCount": {
+      "target": 0
+    },
+    "unknownFillCount": {
+      "target": 0
+    },
+    "methodObservedMutationCount": {
+      "target": 0
+    },
+    "HDRLeakCount": {
+      "target": 0
+    },
+    "professionalBoundaryViolationCount": {
+      "target": 0
+    },
+    "silentVersionOverwriteCount": {
+      "target": 0
+    },
+    "untraceableReadingClaimCount": {
+      "target": 0
+    },
+    "automaticIrreversibleActionCount": {
+      "target": 0
+    }
+  }
+}

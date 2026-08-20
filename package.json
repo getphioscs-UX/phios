@@ -1249,7 +1249,7 @@
     "check:reading-surface": "node scripts/check-reading-surface.mjs",
     "check:mir-8": "node scripts/check-mir-8-guided-reading-explainable-surface.mjs",
     "check:mir-8:mir-9-baseline": "node scripts/check-mir-8-to-mir-9-baseline.mjs",
-    "check:rjx": "npm run check:rjx-phase15 && node scripts/check-rjx-phase19-w11-w18.mjs && node scripts/check-rjx-mir9-successor.mjs",
+    "check:rjx": "npm run check:rjx-phase15 && node scripts/check-rjx-phase19-w11-w18.mjs && node scripts/check-rjx-mir9-successor.mjs && npm run check:rjx-package-e",
     "check:kap-rjx-handoff": "node scripts/check-kap-rjx-handoff.mjs",
     "check:mir-9": "node scripts/check-mir-9-reality-escalation-rjx-integration.mjs",
     "check:mfig-canonical": "node scripts/check-mfig-authority-registry.mjs",
@@ -1344,7 +1344,13 @@
     "check:hpc2-w11": "node scripts/check-hpc2-w11.mjs",
     "check:hpc2-w12": "node scripts/check-hpc2-w12.mjs",
     "check:cka-w18-w33": "node scripts/check-cka-w18-w33.mjs",
-    "check:cka-current": "npm run check:cka"
+    "check:cka-current": "npm run check:cka",
+    "check:rjx-provider-cost": "node scripts/check-rjx-package-e.mjs RJX-W19",
+    "check:rjx-compatibility": "node scripts/check-rjx-package-e.mjs RJX-W20",
+    "check:rjx-human-review": "node scripts/check-rjx-package-e.mjs RJX-W21",
+    "check:rjx-production-acceptance": "node scripts/check-rjx-package-e.mjs RJX-W23",
+    "check:rjx-freeze": "node scripts/check-rjx-package-e.mjs RJX-W24",
+    "check:rjx-package-e": "node scripts/check-rjx-package-e.mjs"
   },
   "type": "module",
   "dependencies": {
