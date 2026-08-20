@@ -20,8 +20,12 @@ const ckaW0Path = 'content/client/knowledge-ask/contracts/cka-w0-ask-entry-contr
 const ckaW4Path = 'content/client/knowledge-ask/contracts/cka-w4-follow-up-contract-v1.json';
 const ckaAcceptancePath = 'content/client/knowledge-ask/acceptance/cka-w0-w4-batch-a-acceptance-v1.json';
 const invariantSuccessorPath = 'content/web-production/reconciliation/client-surface-global-invariants-cka-successor-v1.json';
+const invariantCkaBSuccessorPath = 'content/web-production/reconciliation/client-surface-global-invariants-cka-b-successor-v1.json';
+const ckaBDeltaManifestPath = 'content/client/knowledge-ask/evidence/cka-w5-w17-delta-manifest-v1.json';
+const ckaBCurrentSuccessorPath = 'content/client/knowledge-ask/reconciliation/cka-w5-w17-current-successor-v1.json';
+const ckaBAcceptancePath = 'content/client/knowledge-ask/acceptance/cka-w5-w17-batch-b-acceptance-v1.json';
 
-for (const rel of [contractPath, registryPath, reconciliationPath, acceptancePath, freezePath, ckaSuccessorPath, ckaW0Path, ckaW4Path, ckaAcceptancePath, invariantSuccessorPath]) {
+for (const rel of [contractPath, registryPath, reconciliationPath, acceptancePath, freezePath, ckaSuccessorPath, ckaW0Path, ckaW4Path, ckaAcceptancePath, invariantSuccessorPath, invariantCkaBSuccessorPath, ckaBDeltaManifestPath, ckaBCurrentSuccessorPath, ckaBAcceptancePath]) {
   assert.ok(exists(rel), `${rel} missing`);
 }
 
@@ -35,6 +39,10 @@ const ckaW0 = readJson(ckaW0Path);
 const ckaW4 = readJson(ckaW4Path);
 const ckaAcceptance = readJson(ckaAcceptancePath);
 const invariantSuccessor = readJson(invariantSuccessorPath);
+const invariantCkaBSuccessor = readJson(invariantCkaBSuccessorPath);
+const ckaBDeltaManifest = readJson(ckaBDeltaManifestPath);
+const ckaBCurrentSuccessor = readJson(ckaBCurrentSuccessorPath);
+const ckaBAcceptance = readJson(ckaBAcceptancePath);
 
 for (const artifact of [contract, registry, reconciliation, acceptance, freeze]) {
   assert.equal(artifact.work, 'CLIENT-SURFACE-INV-01-INV-10');
@@ -48,6 +56,31 @@ assert.equal(sha256(invariantSuccessor.checkerRouting.frozenArtifactChecker), in
 assert.deepEqual(invariantSuccessor.preservedInvariants, Array.from({ length: 10 }, (_, i) => `INV-${String(i + 1).padStart(2, '0')}`));
 for (const value of Object.values(invariantSuccessor.authorityBoundary)) assert.equal(value, false);
 for (const value of Object.values(invariantSuccessor.acceptanceBoundary)) assert.equal(value, false);
+
+assert.equal(invariantCkaBSuccessor.status, 'ACTIVE_ADDITIVE_CKA_B_SUCCESSOR_ALL_TEN_INVARIANTS_PRESERVED');
+assert.equal(invariantCkaBSuccessor.baselineCommit, 'aab18446a012938ccd24043751469866831fe4e0');
+assert.equal(invariantCkaBSuccessor.predecessor.path, invariantSuccessorPath);
+assert.equal(invariantCkaBSuccessor.predecessor.sha256, sha256(invariantSuccessorPath));
+assert.equal(invariantCkaBSuccessor.predecessor.askApiCurrentObservationSha256, ckaSuccessor.runtimeTransition.askApi.currentSuccessorSha256);
+assert.equal(invariantCkaBSuccessor.ckaB.deltaManifest.path, ckaBDeltaManifestPath);
+assert.equal(invariantCkaBSuccessor.ckaB.deltaManifest.sha256, sha256(ckaBDeltaManifestPath));
+assert.equal(invariantCkaBSuccessor.ckaB.currentSuccessor, ckaBCurrentSuccessorPath);
+assert.equal(invariantCkaBSuccessor.ckaB.acceptance, ckaBAcceptancePath);
+assert.equal(ckaBDeltaManifest.batch, 'BATCH-CKA-B');
+assert.equal(ckaBCurrentSuccessor.status, 'ACTIVE_ADDITIVE_VERSIONED_CLIENT_SUCCESSOR');
+assert.equal(ckaBAcceptance.status, 'DETERMINISTIC_ACCEPTANCE_PASSED');
+const ckaBAskApiDelta = ckaBDeltaManifest.files.find(file => file.path === invariantCkaBSuccessor.ckaB.askApi.path);
+assert.ok(ckaBAskApiDelta, 'CKA-B Ask API delta missing');
+assert.equal(ckaBAskApiDelta.action, 'MODIFIED');
+assert.equal(invariantCkaBSuccessor.ckaB.askApi.predecessorSha256, ckaSuccessor.runtimeTransition.askApi.currentSuccessorSha256);
+assert.equal(invariantCkaBSuccessor.ckaB.askApi.currentSuccessorSha256, ckaBAskApiDelta.sha256);
+assert.equal(sha256(invariantCkaBSuccessor.ckaB.askApi.path), invariantCkaBSuccessor.ckaB.askApi.currentSuccessorSha256);
+assert.deepEqual(invariantCkaBSuccessor.preservedInvariants, Array.from({ length: 10 }, (_, i) => `INV-${String(i + 1).padStart(2, '0')}`));
+for (const value of Object.values(invariantCkaBSuccessor.authorityBoundary)) assert.equal(value, false);
+for (const value of Object.values(invariantCkaBSuccessor.acceptanceBoundary)) assert.equal(value, false);
+assert.equal(invariantCkaBSuccessor.successorPolicy.failClosed, true);
+assert.equal(invariantCkaBSuccessor.successorPolicy.deterministic, true);
+assert.equal(invariantCkaBSuccessor.successorPolicy.duplicateAuthorityForbidden, true);
 
 assert.equal(contract.status, 'ACTIVE_CROSS_AUTHORITY_INVARIANT_CONTRACT');
 assert.equal(contract.authorityBoundary.upstreamContractsMutatedByThisWork, false);
@@ -180,7 +213,8 @@ for (const evidence of reconciliation.upstreamEvidence) {
   assert.ok(exists(evidence.path), `Missing upstream evidence: ${evidence.path}`);
   if (evidence.path === 'functions/api/ask-phios.js') {
     assert.equal(evidence.sha256, ckaSuccessor.runtimeTransition.askApi.predecessorSha256, 'Frozen INV Ask endpoint observation changed');
-    assert.equal(sha256(evidence.path), ckaSuccessor.runtimeTransition.askApi.currentSuccessorSha256, 'Current CKA Ask API successor drift');
+    assert.equal(ckaSuccessor.runtimeTransition.askApi.currentSuccessorSha256, invariantCkaBSuccessor.ckaB.askApi.predecessorSha256, 'CKA-A Ask API successor observation changed');
+    assert.equal(sha256(evidence.path), invariantCkaBSuccessor.ckaB.askApi.currentSuccessorSha256, 'Current CKA-B Ask API successor drift');
   } else {
     assert.equal(sha256(evidence.path), evidence.sha256, `Upstream invariant evidence drift: ${evidence.path}`);
   }
@@ -219,10 +253,10 @@ assert.equal(pkg.scripts['check:client-surface-invariants-frozen'], 'node script
 assert.equal(pkg.scripts['check:client-surface-invariants'], 'node scripts/check-client-surface-global-invariants-current.mjs');
 assert.equal(pkg.scripts['check:bfr-h-invariants'], 'npm run check:client-surface-invariants');
 assert.equal(pkg.scripts['check:client-surface'], 'npm run check:client-surface-invariants');
-assert.equal(pkg.scripts['check:cka'], 'npm run check:cka-a');
+assert.equal(pkg.scripts['check:cka'], 'npm run check:cka-a && npm run check:cka-w5-w17');
 assert.equal(String(pkg.scripts.check || '').includes('check:client-surface'), false, 'Foundation invariant checker must not claim global Production acceptance.');
 
 console.log('✓ Client Surface Global Invariants INV-01–INV-10 passed.');
 console.log('✓ Existing WPR, KAP, MPA and MCD authorities are reconciled rather than duplicated.');
 console.log('✓ R2 Registry/Resolver, CKA Ask boundaries, temporary context, Method gates and guest access are enforced.');
-console.log('✓ CKA repository implementation is reconciled; Human/browser/deployment and global Production acceptance remain unclaimed.');
+console.log('✓ CKA-A history and the additive CKA-B successor are reconciled; Human/browser/deployment and global Production acceptance remain unclaimed.');

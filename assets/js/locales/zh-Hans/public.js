@@ -194,6 +194,42 @@ const publicExperience = Object.freeze({
       financialCopy: '财务计算与专业责任继续留在各自专门的受治理界面。',
       financialAction: '探索 Financial Reality'
     },
+    realitySurfaces: {
+      eyebrow: '现实界面',
+      title: '从与你当前需要理解的现实界面开始。',
+      lead: 'PHI OS 不会把每个内部 route 都变成一个选择。首页只保留四个面向客户的入口。',
+      personal: {
+        kind: '个人现实',
+        title: '看见你正在经历的个人配置。',
+        copy: '探索个人模式与承载能力，同时不把任何单一投射当成完整现实。',
+        patterns: '模式', timing: '时机', configuration: '配置', experience: '体验', identity: '身份', capacity: '承载能力',
+        action: '探索个人现实'
+      },
+      financial: {
+        kind: '财务现实',
+        title: '把财务条件读成一个彼此连接、带有日期的现实。',
+        copy: '让证据、计算、情境推演与专业责任继续清楚分开。',
+        income: '收入', cashFlow: '现金流', assets: '资产', liabilities: '负债', protection: '保障', constraints: '约束', scenarios: '情境推演',
+        action: '探索财务现实'
+      },
+      journey: {
+        kind: '现实旅程',
+        title: '当一个回答已经不足够时，才使用 Reality Journey。',
+        copy: '这个概览只面向持续、复杂并依赖特定案例现实的处境。打开概览不会建立案例，也不会激活 Journey。',
+        persistent: '持续性', complex: '复杂性', multiFactor: '多因素', caseSpecific: '特定案例', realityDependent: '依赖具体现实',
+        action: '了解 Reality Journey'
+      },
+      knowledge: {
+        kind: '知识与学习',
+        title: '通过不止一种形式继续知识路径。',
+        copy: '浏览、比较、阅读与学习，但不把公共知识活动变成个人现实案例。',
+        books: '书册', library: '知识库', figures: '图示', articles: '文章', readingPaths: '阅读路径', academy: '学院', ask: '向 PHI OS 提问',
+        action: '探索知识与学习'
+      },
+      visualAction: '探索视觉知识',
+      askAction: '向 PHI OS 询问从哪里开始',
+      boundary: '这些入口只披露现有界面；不会建立账户或案例，不会执行 Method、产生专业判断，也不会自动启动 Reality Journey。'
+    },
     value: {
       eyebrow: 'PHI OS 帮助你看见什么',
       title: '一个困难处境，通常不只是一个孤立问题。',

@@ -81,7 +81,8 @@ assert.equal(count(html, /data-hpc2-scene="H02"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H03"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H04"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H05"/g), 1);
-for (let scene = 6; scene <= 9; scene += 1) {
+assert.equal(count(html, /data-hpc2-scene="H06"/g), 1);
+for (let scene = 7; scene <= 9; scene += 1) {
   assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} was implemented before its owner work`);
 }
 
@@ -123,10 +124,12 @@ assert.equal(pkg.scripts['check:hpc2-w4-frozen'], 'node scripts/check-hpc2-w4.mj
 assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-frozen-artifacts.mjs');
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6.mjs');
+assert.equal(pkg.scripts['check:hpc2-w6-frozen'], 'node scripts/check-hpc2-w6.mjs');
+assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7.mjs');
 
 console.log('HPC2-W3 current successor: ACCEPTED');
 console.log('  frozen H01/H02 preserved byte-for-byte at scene scope; immutable W3 evidence preserved');
-console.log('  additive H03-H05 are governed by HPC2-W4/W5/W6; H04/H05 Ask entries reuse CKA-W0-W4');
-console.log('  H06-H09 and /reality/ remain inactive');
+console.log('  additive H03-H06 are governed by HPC2-W4/W5/W6/W7; Ask entries reuse CKA-W0-W17');
+console.log('  H07-H09 and /reality/ remain inactive');
 console.log('  W3 Human/browser acceptance remains pending; no decision fabricated');

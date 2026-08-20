@@ -194,6 +194,42 @@ const publicExperience = Object.freeze({
       financialCopy: 'Financial calculations and professional responsibility remain on their dedicated governed surface.',
       financialAction: 'Explore Financial Reality'
     },
+    realitySurfaces: {
+      eyebrow: 'Reality surfaces',
+      title: 'Choose the surface that matches what you need to understand.',
+      lead: 'PHI OS does not turn every internal route into a choice. The Homepage keeps four client-facing anchors.',
+      personal: {
+        kind: 'Personal Reality',
+        title: 'See the configuration you are living through.',
+        copy: 'Explore personal patterns and capacity without turning one projection into the whole Reality.',
+        patterns: 'patterns', timing: 'timing', configuration: 'configuration', experience: 'experience', identity: 'identity', capacity: 'capacity',
+        action: 'Explore Personal Reality'
+      },
+      financial: {
+        kind: 'Financial Reality',
+        title: 'Read financial conditions as a connected, dated reality.',
+        copy: 'Keep evidence, calculations, scenarios and professional responsibility visibly separated.',
+        income: 'income', cashFlow: 'cash flow', assets: 'assets', liabilities: 'liabilities', protection: 'protection', constraints: 'constraints', scenarios: 'scenarios',
+        action: 'Explore Financial Reality'
+      },
+      journey: {
+        kind: 'Reality Journey',
+        title: 'Use a Journey when one answer is not enough.',
+        copy: 'The overview is for situations that depend on a persistent, complex and case-specific Reality. Opening it creates no case and activates no Journey.',
+        persistent: 'persistent', complex: 'complex', multiFactor: 'multi-factor', caseSpecific: 'case-specific', realityDependent: 'reality-dependent',
+        action: 'Understand Reality Journey'
+      },
+      knowledge: {
+        kind: 'Knowledge & Learning',
+        title: 'Follow knowledge through more than one format.',
+        copy: 'Browse, compare, read and learn without turning public knowledge activity into a personal Reality case.',
+        books: 'Books', library: 'Library', figures: 'Figures', articles: 'Articles', readingPaths: 'Reading Paths', academy: 'Academy', ask: 'Ask PHI OS',
+        action: 'Explore Knowledge & Learning'
+      },
+      visualAction: 'Explore Visual Knowledge',
+      askAction: 'Ask PHI OS where to begin',
+      boundary: 'These anchors disclose existing surfaces. They create no account, case, Method execution, professional judgment or automatic Reality Journey.'
+    },
     value: {
       eyebrow: 'What PHI OS helps you see',
       title: 'A difficult situation is usually more than one isolated question.',
