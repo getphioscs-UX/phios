@@ -1,9 +1,39 @@
-export async function askPhios({ query, locale, depth = 'STANDARD', source = 'hybrid', signal } = {}) {
-  const params = new URLSearchParams({
+const appendOptional = (params, values) => {
+  for (const [key, value] of Object.entries(values)) {
+    if (value !== undefined && value !== null && value !== '') params.set(key, String(value));
+  }
+  return params;
+};
+
+export async function askPhios({
+  query,
+  locale,
+  depth = 'STANDARD',
+  source = 'hybrid',
+  entryContext = {},
+  followUpContext = {},
+  signal
+} = {}) {
+  const params = appendOptional(new URLSearchParams({
     q: String(query ?? ''),
     locale: String(locale || 'zh-Hans'),
     depth: String(depth || 'STANDARD'),
     source: String(source || 'hybrid')
+  }), {
+    entrySurface: entryContext.entrySurface,
+    entryRoute: entryContext.entryRoute,
+    contextType: entryContext.contextType,
+    contextId: entryContext.contextId,
+    bookCode: entryContext.bookCode,
+    partCode: entryContext.partCode,
+    articleCode: entryContext.articleCode,
+    figureCode: entryContext.figureCode,
+    realityCaseId: entryContext.realityCaseId,
+    mode: entryContext.mode,
+    contextQuestion: followUpContext.contextQuestion,
+    parentAnswerId: followUpContext.parentAnswerId,
+    groundingBundleId: followUpContext.groundingBundleId,
+    followUpDepth: followUpContext.followUpDepth
   });
   const response = await fetch(`/api/ask-phios?${params}`, {
     method: 'GET',

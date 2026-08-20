@@ -15,24 +15,90 @@
 <body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-search">
   <a class="skip-link" href="#knowledge-search-main">Skip to main content</a>
   <header data-public-header-placeholder></header>
-  <main id="knowledge-search-main">
-    <section class="knowledge-hero">
+  <main id="knowledge-search-main" data-cka-root data-cka-work="CKA-W0-W4">
+    <section class="knowledge-hero cka-hero">
       <div class="knowledge-shell">
-        <p class="knowledge-eyebrow">Ask PHI OS · Governed Knowledge Answer</p>
-        <h1>Ask PHI OS.</h1>
-        <p class="knowledge-hero__lead">Ask a question once. PHI OS grounds the answer in governed published knowledge and reviewed manuscript material without turning the answer into a Published Article or Reality Reading.</p>
+        <p class="knowledge-eyebrow">Ask PHI OS · Client Knowledge Ask</p>
+        <h1>What would you like to understand?</h1>
+        <p class="knowledge-hero__lead">Ask within governed PHI OS knowledge. A Simple Ask does not create a case, execute a Method or start a Reality Journey.</p>
       </div>
     </section>
+
     <section class="knowledge-section knowledge-section--paper">
-      <div class="knowledge-shell knowledge-search-panel">
-        <form class="knowledge-search-form" data-knowledge-search-form>
-          <label>Question<input data-knowledge-query name="q" maxlength="500" autocomplete="off" required></label>
-          <label>Answer depth<select data-answer-depth name="depth"><option value="QUICK">Quick</option><option value="STANDARD" selected>Standard</option><option value="DEEP">Deep</option></select></label>
-          <button class="knowledge-action knowledge-action--primary" type="submit">Ask PHI OS</button>
+      <div class="knowledge-shell cka-shell">
+        <div class="cka-context" data-cka-context-indicator role="status">Asking PHI OS</div>
+
+        <form class="cka-composer" data-cka-composer>
+          <label for="cka-question">What would you like to understand?</label>
+          <div class="cka-composer__control">
+            <textarea id="cka-question" data-cka-question name="q" rows="3" maxlength="500" autocomplete="off" required></textarea>
+            <button class="knowledge-action knowledge-action--primary" type="submit">Ask PHI OS</button>
+          </div>
         </form>
-        <p class="knowledge-search-status" role="status" aria-live="polite" data-knowledge-status>Enter a question to Ask PHI OS.</p>
-        <div class="knowledge-search-results" data-knowledge-results></div>
-        <div class="knowledge-boundary"><strong>Ask PHI OS boundary</strong><p>Answers are question-scoped, grounded projections. They do not publish an Article, create Canonical Knowledge, create a Reality Reading, expose the full manuscript, or require a generative AI provider.</p></div>
+
+        <p class="cka-status" role="status" aria-live="polite" data-cka-status>Enter a question to begin a Simple Ask.</p>
+
+        <article class="cka-answer" data-cka-answer hidden>
+          <header class="cka-answer__question">
+            <p class="knowledge-eyebrow">Question</p>
+            <h2 data-cka-answer-question></h2>
+          </header>
+
+          <section class="cka-answer__section cka-answer__section--direct" data-cka-section="DIRECT_ANSWER">
+            <p class="knowledge-eyebrow">Direct Answer</p>
+            <div data-cka-direct-answer></div>
+          </section>
+
+          <section class="cka-answer__section" data-cka-section="WHY_THIS_MAY_HAPPEN">
+            <div class="cka-answer__heading">
+              <h3>Why This May Happen</h3>
+              <span>Grounded or bounded explanation · not an observed fact</span>
+            </div>
+            <div data-cka-why></div>
+          </section>
+
+          <section class="cka-answer__section" data-cka-section="WHAT_TO_OBSERVE">
+            <h3>What To Observe</h3>
+            <div data-cka-observe></div>
+          </section>
+
+          <section class="cka-answer__section cka-answer__section--unknown" data-cka-section="WHAT_PHIOS_DOES_NOT_YET_KNOW">
+            <div class="cka-answer__heading">
+              <h3>What PHI OS Does Not Yet Know</h3>
+              <span data-cka-unknown-state>UNKNOWN</span>
+            </div>
+            <div data-cka-unknown></div>
+          </section>
+
+          <section class="cka-answer__section" data-cka-section="RELATED_KNOWLEDGE">
+            <h3>Related Knowledge</h3>
+            <div class="cka-card-grid" data-cka-related-knowledge></div>
+          </section>
+
+          <details class="cka-grounding" data-cka-grounding>
+            <summary>Sources / Grounding</summary>
+            <div data-cka-sources></div>
+          </details>
+
+          <aside class="cka-boundary" data-cka-boundary></aside>
+
+          <section class="cka-follow-up" data-cka-follow-up>
+            <p class="knowledge-eyebrow">Ask a follow-up</p>
+            <form data-cka-follow-up-form>
+              <label for="cka-follow-up-question">Clarify, compare, expand, apply or ask what to observe.</label>
+              <div class="cka-composer__control">
+                <textarea id="cka-follow-up-question" data-cka-follow-up-question rows="2" maxlength="500" required></textarea>
+                <button class="knowledge-action" type="submit">Ask follow-up</button>
+              </div>
+            </form>
+            <p data-cka-follow-up-status>Guest access includes one temporary follow-up. No history is saved.</p>
+          </section>
+        </article>
+
+        <aside class="knowledge-boundary cka-entry-boundary">
+          <strong>Simple Ask boundary</strong>
+          <p>Answers are question-scoped, grounded projections. They do not publish an Article, create Canonical Knowledge, create a Reality Reading, expose the full manuscript, silently create an account or persist a case.</p>
+        </aside>
       </div>
     </section>
   </main>
@@ -41,3 +107,4 @@
   <script type="module" src="/assets/js/pages/knowledge-search.js"></script>
 </body>
 </html>
+

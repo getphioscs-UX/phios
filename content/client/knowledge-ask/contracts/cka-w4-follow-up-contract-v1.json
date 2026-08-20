@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W4-FOLLOW-UP-CONTRACT-v1.0.0",
+  "phase": "CKA",
+  "work": "CKA-W4",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "status": "PRODUCTION_TEMPORARY_FOLLOW_UP_ACTIVE",
+  "recordedFields": [
+    "currentQuestion",
+    "answerContext",
+    "knowledgeContext",
+    "followUpDepth"
+  ],
+  "allowed": [
+    "CLARIFY",
+    "COMPARE",
+    "EXPAND",
+    "APPLICATION_QUESTION",
+    "OBSERVATION_QUESTION"
+  ],
+  "guest": {
+    "followUpAvailable": true,
+    "maximumTemporaryFollowUpDepth": 1,
+    "historyPersisted": false,
+    "shadowAccountCreated": false
+  },
+  "account": {
+    "history": "SUBJECT_TO_POLICY",
+    "depth": "SUBJECT_TO_POLICY",
+    "notActivatedByPublicGuestQuery": true
+  },
+  "simpleAskStopSignals": [
+    "PERSONAL_CASE_RECONSTRUCTION",
+    "PERSISTENT_CONTEXT",
+    "MULTI_FACTOR_RELATIONSHIPS",
+    "ACTION_TRACKING",
+    "OUTCOME_REVIEW"
+  ],
+  "outOfScopeSuccessor": {
+    "guidedContextActivated": false,
+    "realityJourneyActivated": false,
+    "nextPermittedWork": "CKA-W5"
+  },
+  "governance": {
+    "temporaryContextOnly": true,
+    "createsPersistentCase": false,
+    "classificationIsDiagnosis": false,
+    "automaticEscalation": false
+  }
+}
+

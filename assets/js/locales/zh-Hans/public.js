@@ -164,10 +164,10 @@ const publicExperience = Object.freeze({
         persistence: { label: '连续性受治理', copy: '公开说明不会建立案例或写入持久状态；同意与数据治理继续保持独立。' }
       },
       ask: {
-        eyebrow: 'Ask PHI OS · 情境入口位置已保留',
-        title: '当 Homepage 入口独立通过验收后，一个问题可以从这里开始。',
+        eyebrow: 'Ask PHI OS · Simple Ask',
+        title: '从一个问题开始，让回答保持有依据，也保持边界。',
         copy: 'Ask PHI OS 继续限定于问题并以知识为依据：没有通用聊天权威，不建立持久案例，不自动执行 Method，也不强制进入 Reality Journey。',
-        state: '尚未启用 · 等待 CKA'
+        state: '向 PHI OS 提问'
       },
       destinationBoundary: '完整的系统架构与解释边界，继续留在专门的 PHI OS 系统说明中。'
     },

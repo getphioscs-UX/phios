@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "PHI-OS-CKA-W0-ASK-ENTRY-CONTRACT-v1.0.0",
+  "phase": "CKA",
+  "work": "CKA-W0",
+  "baselineCommit": "316a1bcc8adc817bb8c8fb005260462bb316efdf",
+  "status": "PRODUCTION_CLIENT_ENTRY_ACTIVE",
+  "role": "GOVERNED_CLIENT_QA_ENTRY_NOT_GENERIC_CHAT_NOT_REALITY_JOURNEY_NOT_METHOD_ENTRY",
+  "route": "/knowledge-search",
+  "supportedEntrySurfaces": [
+    "HOMEPAGE",
+    "KNOWLEDGE_SEARCH",
+    "LIBRARY",
+    "ARTICLE",
+    "BOOK",
+    "ACCOUNT",
+    "REALITY_DASHBOARD",
+    "FIGURE"
+  ],
+  "entryContextFields": [
+    "entrySurface",
+    "entryRoute",
+    "contextType",
+    "contextId",
+    "bookCode",
+    "partCode",
+    "articleCode",
+    "figureCode",
+    "realityCaseId",
+    "accountState",
+    "locale"
+  ],
+  "modes": [
+    "GLOBAL",
+    "CONTEXTUAL",
+    "REALITY_AWARE"
+  ],
+  "modeRules": {
+    "GLOBAL": "ASK_WITHIN_AVAILABLE_PHI_OS_KNOWLEDGE",
+    "CONTEXTUAL": "ASK_WITHIN_CURRENT_BOOK_ARTICLE_FIGURE_OR_KNOWLEDGE_CONTEXT",
+    "REALITY_AWARE": "AUTHORIZED_CURRENT_REALITY_CONTEXT_ONLY"
+  },
+  "figureBoundary": {
+    "contextualOnly": true,
+    "copy": "Ask about this figure",
+    "figureCodeRequired": true
+  },
+  "realityAwareRequirements": [
+    "permission",
+    "privacy",
+    "entitlement",
+    "account",
+    "realityCaseId"
+  ],
+  "consumerActivation": {
+    "homepage": {
+      "state": "ACTIVE",
+      "source": "index.html#H04",
+      "href": "/knowledge-search?entrySurface=HOMEPAGE&mode=GLOBAL"
+    },
+    "knowledgeSearch": {
+      "state": "ACTIVE",
+      "source": "knowledge-search.html"
+    },
+    "contextualCallers": {
+      "state": "CONTRACT_READY",
+      "consumerOwnedInsertionRequired": true
+    }
+  },
+  "governance": {
+    "createsShadowAccount": false,
+    "createsPersistentCase": false,
+    "executesMethod": false,
+    "startsRealityJourney": false
+  }
+}
+

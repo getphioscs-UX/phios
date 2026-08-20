@@ -164,10 +164,10 @@ const publicExperience = Object.freeze({
         persistence: { label: 'Continuity is governed', copy: 'Public explanation creates no case and writes no persistent state; consent and data governance remain independent.' }
       },
       ask: {
-        eyebrow: 'Ask PHI OS · Contextual position reserved',
-        title: 'A question may begin here after its Homepage entry is independently accepted.',
+        eyebrow: 'Ask PHI OS · Simple Ask',
+        title: 'Begin with one question. Keep the answer grounded and bounded.',
         copy: 'Ask PHI OS remains question-scoped and grounded: no generic chat authority, no persistent case, no automatic Method execution and no forced Reality Journey.',
-        state: 'Not active · Pending CKA'
+        state: 'Ask PHI OS'
       },
       destinationBoundary: 'The complete system architecture and interpretation boundaries remain in the dedicated PHI OS system explanation.'
     },
