@@ -10,6 +10,7 @@ const exists = path => fs.existsSync(path);
 
 const predecessorReconciliationPath = 'content/web-production/reconciliation/bfr-h-part-a-7e2b212-current-source-successor-v1.json';
 const logoSuccessorPath = 'content/web-production/reconciliation/bfr-h-part-a-1e0ecd38-logo-registry-successor-v2.json';
+const brandingSuccessorPath = 'content/web-production/reconciliation/bfr-h-hpc2-w5-316a1bc-branding-registry-successor-v1.json';
 const acceptancePath = 'content/web-production/acceptance/bfr-h-part-a-acceptance-v1.json';
 const freezePath = 'content/web-production/freeze/bfr-h-part-a-freeze-v1.json';
 const h0Path = 'content/web-production/bfr-backend-capability-inventory-v1.json';
@@ -21,13 +22,15 @@ const publicAssetsPath = 'content/registry/public-assets.json';
 const hpc2PreR2SuccessorPath = 'content/web-production/reconciliation/wpr-w7-w10-hpc2-pre-successor-v1.json';
 const prePath = 'content/web/homepage/hpc2-pre/hpc2-pre-final-readiness-v1.json';
 const logoRegistryPath = 'content/web-production/registries/phios-logo-registry-v1.json';
+const visualRegistryPath = 'content/web-production/registries/client-visual-asset-registry-v1.2.json';
 
-for (const path of [predecessorReconciliationPath, logoSuccessorPath, acceptancePath, freezePath, h0Path, h1Path, h2Path, h3Path, h11Path, publicAssetsPath, hpc2PreR2SuccessorPath, prePath, logoRegistryPath]) {
+for (const path of [predecessorReconciliationPath, logoSuccessorPath, brandingSuccessorPath, acceptancePath, freezePath, h0Path, h1Path, h2Path, h3Path, h11Path, publicAssetsPath, hpc2PreR2SuccessorPath, prePath, logoRegistryPath, visualRegistryPath]) {
   assert.ok(exists(path), `Missing BFR-H current dependency: ${path}`);
 }
 
 const reconciliation = read(predecessorReconciliationPath);
 const logoSuccessor = read(logoSuccessorPath);
+const brandingSuccessor = read(brandingSuccessorPath);
 const acceptance = read(acceptancePath);
 const freeze = read(freezePath);
 const h0 = read(h0Path);
@@ -39,6 +42,7 @@ const publicAssets = read(publicAssetsPath);
 const hpc2PreR2Successor = read(hpc2PreR2SuccessorPath);
 const pre = read(prePath);
 const logoRegistry = read(logoRegistryPath);
+const visualRegistry = read(visualRegistryPath);
 
 assert.equal(reconciliation.status, 'ADDITIVE_CURRENT_SOURCE_SUCCESSOR_ACTIVE_HISTORICAL_EVIDENCE_PRESERVED');
 assert.equal(reconciliation.historicalBaselineCommit, '3b5ff152d1cdfe479ed4daf7c772e3faa926dc17');
@@ -78,6 +82,37 @@ assert.equal(logoSuccessor.successorPolicy.logoIdentityOrObjectKeyMutationFailsC
 assert.equal(logoSuccessor.successorPolicy.logoRemoteEvidenceMayAdvanceOnlyThroughGovernedVerification, true);
 assert.equal(logoSuccessor.successorPolicy.remoteVerifiedEvidenceMayNotBeDowngraded, true);
 
+assert.equal(brandingSuccessor.status, 'ADDITIVE_BRANDING_REGISTRY_SUCCESSOR_ACTIVE_HISTORICAL_EVIDENCE_PRESERVED');
+assert.equal(brandingSuccessor.observedBaselineCommit, '316a1bcc8adc817bb8c8fb005260462bb316efdf');
+assert.equal(brandingSuccessor.predecessor.path, logoSuccessorPath);
+assert.equal(brandingSuccessor.predecessor.publicAssetRegistrySha256, logoSuccessor.registryTransition.initialReconciledSha256);
+assert.equal(brandingSuccessor.predecessor.recordCount, 144);
+assert.equal(brandingSuccessor.observedRegistryState.sha256, '0cad2bf65a413cab9af8ef06ef17d03ec5f739dfb357364758c2d21eaa63225a');
+assert.equal(brandingSuccessor.observedRegistryState.recordCount, 149);
+assert.equal(brandingSuccessor.registryTransition.predecessorProjectionSha256, logoSuccessor.registryTransition.initialReconciledSha256);
+assert.equal(brandingSuccessor.registryTransition.predecessorRecordCount, 144);
+assert.equal(brandingSuccessor.registryTransition.currentRecordCount, 149);
+assert.equal(brandingSuccessor.registryTransition.addedRecordCount, 5);
+assert.equal(brandingSuccessor.registryTransition.changeClassification, 'ADDITIVE_EXISTING_BRANDING_IDENTITIES_PLUS_SUMMARY_RECONCILIATION');
+assert.equal(brandingSuccessor.registryTransition.digestPolicy, 'STRUCTURAL_PREDECESSOR_PROJECTION_AND_MEMBER_LEVEL_FAIL_CLOSED_VALIDATION');
+assert.equal(brandingSuccessor.brandingAuthority.registry, visualRegistryPath);
+assert.equal(brandingSuccessor.brandingAuthority.registrySha256AtObservation, sha256(visualRegistryPath));
+assert.equal(brandingSuccessor.brandingAuthority.existingVisualAuthorityReused, true);
+assert.equal(brandingSuccessor.brandingAuthority.existingPublicAssetRegistryReused, true);
+assert.equal(brandingSuccessor.brandingAuthority.existingPublicAssetResolverReused, true);
+assert.equal(brandingSuccessor.brandingAuthority.secondBrandingAuthorityCreated, false);
+assert.equal(brandingSuccessor.brandingAuthority.secondAssetRegistryCreated, false);
+assert.equal(brandingSuccessor.brandingAuthority.secondAssetResolverCreated, false);
+assert.equal(brandingSuccessor.hpc2W5Successor.frozenCheckerSha256, sha256(brandingSuccessor.hpc2W5Successor.frozenChecker));
+assert.equal(brandingSuccessor.hpc2W5Successor.frozenEvidenceSha256, sha256(brandingSuccessor.hpc2W5Successor.frozenEvidence));
+assert.equal(brandingSuccessor.successorPolicy.historicalBfrEvidenceRewritten, false);
+assert.equal(brandingSuccessor.successorPolicy.historicalHpc2W5EvidenceRewritten, false);
+assert.equal(brandingSuccessor.successorPolicy.historicalCheckerRewritten, false);
+assert.equal(brandingSuccessor.successorPolicy.predecessorMemberRemovalFailsClosed, true);
+assert.equal(brandingSuccessor.successorPolicy.predecessorMemberMutationFailsClosed, true);
+assert.equal(brandingSuccessor.successorPolicy.unknownRegistryMemberFailsClosed, true);
+assert.equal(brandingSuccessor.successorPolicy.summaryDriftFailsClosed, true);
+
 const expectedLogoCodes = Array.from({length: 12}, (_, index) => `LOGO-${String(index + 1).padStart(3, '0')}`);
 assert.deepEqual(logoSuccessor.registryTransition.addedAssetCodes, expectedLogoCodes);
 assert.equal(logoRegistry.records.length, 12);
@@ -87,15 +122,34 @@ assert.equal(new Set(logoRegistry.records.map(record => record.objectKey)).size,
 
 const logoCodeSet = new Set(expectedLogoCodes);
 const logoAssets = publicAssets.assets.filter(asset => logoCodeSet.has(asset.asset_code));
-assert.equal(publicAssets.assets.length, 144);
+const expectedBrandingCodes = brandingSuccessor.registryTransition.addedAssetCodes;
+const brandingCodeSet = new Set(expectedBrandingCodes);
+const brandingAssets = publicAssets.assets.filter(asset => brandingCodeSet.has(asset.asset_code));
+assert.equal(publicAssets.assets.length, 149);
+assert.equal(new Set(publicAssets.assets.map(asset => asset.asset_code)).size, 149, 'Public asset identity collision');
+assert.equal(new Set(publicAssets.assets.map(asset => asset.object_key)).size, 149, 'Public asset object-key collision');
 assert.equal(logoAssets.length, 12);
 assert.deepEqual(logoAssets.map(asset => asset.asset_code), expectedLogoCodes);
-assert.equal(publicAssets.summary.registeredAssetRecords, 144);
-assert.equal(publicAssets.summary.concreteRenderableMembers, 140);
+assert.equal(brandingAssets.length, 5);
+assert.deepEqual(brandingAssets.map(asset => asset.asset_code), expectedBrandingCodes);
+assert.equal(publicAssets.summary.registeredAssetRecords, 149);
+assert.equal(publicAssets.summary.concreteRenderableMembers, 145);
 assert.equal(publicAssets.summary.directoryGroups, 4);
 assert.equal(publicAssets.summary.canonicalLogoMembers, 12);
+assert.equal(publicAssets.summary.canonicalBrandingMembers, 5);
+assert.equal(publicAssets.summary.remoteVerifiedBrandingMembers, 5);
 
-const predecessorProjection = structuredClone(publicAssets);
+const brandingPredecessorProjection = structuredClone(publicAssets);
+brandingPredecessorProjection.assets = brandingPredecessorProjection.assets.filter(asset => !brandingCodeSet.has(asset.asset_code));
+brandingPredecessorProjection.summary.registeredAssetRecords = 144;
+brandingPredecessorProjection.summary.concreteRenderableMembers = 140;
+delete brandingPredecessorProjection.summary.canonicalBrandingMembers;
+delete brandingPredecessorProjection.summary.remoteVerifiedBrandingMembers;
+const brandingPredecessorProjectionSha256 = sha256Bytes(Buffer.from(`${JSON.stringify(brandingPredecessorProjection, null, 2)}\n`));
+assert.equal(brandingPredecessorProjection.assets.length, 144);
+assert.equal(brandingPredecessorProjectionSha256, brandingSuccessor.registryTransition.predecessorProjectionSha256, 'Branding predecessor projection changed');
+
+const predecessorProjection = structuredClone(brandingPredecessorProjection);
 predecessorProjection.assets = predecessorProjection.assets.filter(asset => !logoCodeSet.has(asset.asset_code));
 predecessorProjection.summary.registeredAssetRecords = 132;
 predecessorProjection.summary.concreteRenderableMembers = 128;
@@ -103,6 +157,35 @@ delete predecessorProjection.summary.canonicalLogoMembers;
 const predecessorProjectionSha256 = sha256Bytes(Buffer.from(`${JSON.stringify(predecessorProjection, null, 2)}\n`));
 assert.equal(predecessorProjection.assets.length, 132);
 assert.equal(predecessorProjectionSha256, logoSuccessor.registryTransition.predecessorSha256, 'Non-logo predecessor projection changed');
+
+for (const asset of brandingAssets) {
+  const authority = visualRegistry.assets.find(record => record.assetCode === asset.asset_code);
+  assert.ok(authority, `Missing existing branding authority: ${asset.asset_code}`);
+  assert.equal(authority.assetType, 'BRANDING');
+  assert.equal(authority.r2.objectKey, asset.object_key);
+  assert.equal(authority.productionSpec.width, 1600);
+  assert.equal(authority.productionSpec.height, 2000);
+  assert.equal(authority.actualConsumerState, 'MISSING');
+  assert.equal(authority.humanReview.status, 'PENDING');
+  assert.equal(asset.category, 'branding');
+  assert.equal(asset.family, 'BRANDING');
+  assert.equal(asset.format, 'webp');
+  assert.equal(asset.content_type, 'image/webp');
+  assert.equal(asset.width, 1600);
+  assert.equal(asset.height, 2000);
+  assert.equal(asset.aspect_ratio, '4:5');
+  assert.equal(asset.canonical, true);
+  assert.equal(asset.canonical_state, 'BRI_BRANDING_OWNER_SUPPLIED_REMOTE_VERIFIED_HUMAN_ACCEPTANCE_PENDING');
+  assert.equal(asset.source_registry, visualRegistryPath);
+  assert.equal(asset.status, 'remote-verified');
+  assert.equal(asset.verification, 'verified-remote-head-get');
+  assert.equal(asset.remote.http_status, 200);
+  assert.match(asset.remote.content_type, /image\/webp/i);
+  assert.ok(Number(asset.remote.content_length) > 0);
+  assert.ok(asset.remote.etag);
+  assert.ok(Number.isFinite(Date.parse(asset.remote.verified_at)));
+  assert.ok(asset.remote.requested_url.endsWith(asset.object_key));
+}
 
 let remoteVerifiedLogoCount = 0;
 for (const record of logoRegistry.records) {
@@ -148,7 +231,7 @@ for (const record of logoRegistry.records) {
 if (remoteVerifiedLogoCount === 0) {
   assert.equal(logoAssets.filter(asset => asset.status === 'uploaded-reported-by-owner').length, logoSuccessor.initialVerificationObservation.uploadedReportedByOwner);
   assert.equal(logoAssets.filter(asset => asset.status === 'production-ready-awaiting-upload').length, logoSuccessor.initialVerificationObservation.productionReadyAwaitingUpload);
-  assert.equal(sha256(publicAssetsPath), logoSuccessor.registryTransition.initialReconciledSha256);
+  assert.equal(brandingPredecessorProjectionSha256, logoSuccessor.registryTransition.initialReconciledSha256);
   assert.equal(sha256(logoRegistryPath), logoSuccessor.logoAuthority.registrySha256AtObservation);
 }
 assert.equal(logoSuccessor.initialVerificationObservation.remoteVerificationFabricated, false);
@@ -226,7 +309,7 @@ assert.equal(hpc2PreR2Successor.historicalRegisteredAssetObservation, 7);
 assert.equal(hpc2PreR2Successor.preHpc2CurrentRegistryRecordCount, 8);
 assert.equal(hpc2PreR2Successor.successorRules.registryMayAddConcreteMembersWithoutRewritingHistoricalObservation, true);
 assert.equal(hpc2PreR2Successor.successorRules.existingAssetResolverRemainsSingleAuthority, true);
-assert.equal(publicAssets.assets.length, 144);
+assert.equal(publicAssets.assets.length, 149);
 assert.equal(pre.state, 'HPC2_PRE_READY');
 assert.equal(pre.counts.plannedRegistryIdentities, 152);
 assert.equal(pre.gates.noSecondAssetResolver, true);
@@ -269,8 +352,19 @@ assert.equal(logoSuccessor.boundaries.productionRouteActivated, false);
 assert.equal(logoSuccessor.boundaries.realityRouteActivated, false);
 assert.equal(logoSuccessor.boundaries.humanDecisionCreated, false);
 assert.equal(logoSuccessor.boundaries.globalProductionAcceptanceClaimed, false);
+assert.equal(brandingSuccessor.boundaries.hpc2PreReadyPreserved, true);
+assert.equal(brandingSuccessor.boundaries.hpc2W0ThroughW5Preserved, true);
+assert.equal(brandingSuccessor.boundaries.homepageDomChanged, false);
+assert.equal(brandingSuccessor.boundaries.homepageNarrativeChanged, false);
+assert.equal(brandingSuccessor.boundaries.homepageRuntimeChanged, false);
+assert.equal(brandingSuccessor.boundaries.productionRouteActivated, false);
+assert.equal(brandingSuccessor.boundaries.realityRouteActivated, false);
+assert.equal(brandingSuccessor.boundaries.askHomepageConsumerActivated, false);
+assert.equal(brandingSuccessor.boundaries.humanDecisionCreated, false);
+assert.equal(brandingSuccessor.boundaries.browserDecisionCreated, false);
+assert.equal(brandingSuccessor.boundaries.globalProductionAcceptanceClaimed, false);
 
-console.log('✓ BFR-H current successor passed: historical H0-H14 evidence preserved; 3/3 mutable source paths and the additive logo transition are explicitly reconciled.');
+console.log('✓ BFR-H current successor passed: historical H0-H14 evidence preserved; 3/3 mutable source paths plus additive logo and five-volume branding transitions are explicitly reconciled.');
 console.log('✓ Current foundation remains 56 backend capabilities, 19 frontend surfaces, 18 manifest surfaces, and zero silent H2 orphans.');
-console.log(`✓ Historical BFR-H11 8-record observation is preserved; Public Asset Registry = 132 predecessor members + 12 governed logo members; remote-verified logos = ${remoteVerifiedLogoCount}/12.`);
-console.log('✓ HPC2_PRE_READY and the 152-identity Homepage Visual Registry remain preserved without a second Knowledge, Logo, Asset Registry, Resolver or Homepage authority.');
+console.log(`✓ Historical BFR-H11 8-record observation is preserved; Public Asset Registry = 132 predecessor + 12 logo + 5 governed branding members; remote-verified logos = ${remoteVerifiedLogoCount}/12.`);
+console.log('✓ HPC2_PRE_READY and the existing 152-identity Visual Registry remain preserved without a second Knowledge, Branding, Logo, Asset Registry, Resolver or Homepage authority.');
