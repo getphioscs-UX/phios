@@ -1,3 +1,5 @@
+import { resolvePublicAssetForWeb } from './runtime/web-production/asset-resolver.js';
+
 import {
   initializeI18n,
   onLocaleChange,
@@ -85,8 +87,14 @@ function headerMarkup(activeSection) {
           data-i18n-aria-label="home.brandHomeLabel"
           aria-label="PHI OS home"
         >
-          <span class="public-brand__mark" aria-hidden="true">Φ</span>
-          <span>PHI OS</span>
+          <span class="public-brand__fallback">
+            <span class="public-brand__fallback">
+              <span class="public-brand__mark" aria-hidden="true">Φ</span>
+              <span>PHI OS</span>
+            </span>
+            <img class="public-brand__logo" data-public-brand-asset="LOGO-010" alt="" hidden />
+          </span>
+          <img class="public-brand__logo" data-public-brand-asset="LOGO-003" alt="" hidden />
         </a>
         <button
           class="public-menu-toggle"
@@ -301,6 +309,42 @@ function bindMobileNavigation(header) {
   });
 }
 
+
+async function hydratePublicBranding() {
+  const logoTargets = [...document.querySelectorAll('[data-public-brand-asset]')];
+
+  await Promise.all(logoTargets.map(async image => {
+    const assetCode = image.dataset.publicBrandAsset;
+    try {
+      const resolved = await resolvePublicAssetForWeb(assetCode, { surface: 'PUBLIC_SHELL' });
+      if (!resolved?.renderable) return;
+      image.src = resolved.src;
+      image.decoding = 'async';
+      image.loading = 'eager';
+      image.removeAttribute('hidden');
+      image.closest('.public-brand')?.querySelector('.public-brand__fallback')?.setAttribute('hidden', '');
+    } catch {
+      // Fail closed to textual PHI OS identity.
+    }
+  }));
+
+  try {
+    const favicon = await resolvePublicAssetForWeb('LOGO-011', { surface: 'BROWSER_CHROME' });
+    if (!favicon?.renderable) return;
+    let link = document.querySelector('link[rel="icon"][data-phios-branding]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      link.dataset.phiosBranding = 'true';
+      document.head.append(link);
+    }
+    link.type = favicon.contentType || 'image/svg+xml';
+    link.href = favicon.src;
+  } catch {
+    // Browser keeps its existing/default favicon until LOGO-011 is verified.
+  }
+}
+
 export function initializePublicShell() {
   const header = replaceOrInsert(
     'header, [data-public-header-placeholder]',
@@ -317,6 +361,7 @@ export function initializePublicShell() {
   bindMobileNavigation(header);
   initializeI18n();
   translatePage();
+  void hydratePublicBranding();
 }
 
 initializePublicShell();
