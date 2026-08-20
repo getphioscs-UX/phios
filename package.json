@@ -35,10 +35,10 @@
     "check:book-w1c": "npm run check:book-w1-blueprints",
     "check:book-w1-canonical": "node scripts/check-book-w1d-canonical-registry-reconciliation.mjs",
     "check:book-w1d": "npm run check:book-w1-canonical",
-    "check:book-w1-public-projection": "node scripts/check-book-w1e-public-book-locale-icon-projection.mjs",
+    "check:book-w1-public-projection": "node scripts/check-book-w1e-public-book-locale-icon-projection-current.mjs",
     "check:book-w1e": "npm run check:book-w1-public-projection",
-    "check:book-w1-compatibility": "node scripts/check-book-w1f-compatibility.mjs && node scripts/check-book-w1f-wpr-successor.mjs",
-    "check:book-w1-web-production-runtime": "node scripts/check-book-w1f-wpr-successor.mjs",
+    "check:book-w1-compatibility": "node scripts/check-book-w1f-compatibility-current.mjs && node scripts/check-book-w1f-wpr-successor-current.mjs",
+    "check:book-w1-web-production-runtime": "node scripts/check-book-w1f-wpr-successor-current.mjs",
     "check:book-w1f": "npm run check:book-w1-compatibility",
     "check:book-w1-freeze": "node scripts/check-book-w1g-five-volume-freeze.mjs",
     "check:book-w1g": "npm run check:book-w1-freeze",
@@ -1350,7 +1350,10 @@
     "check:rjx-human-review": "node scripts/check-rjx-package-e.mjs RJX-W21",
     "check:rjx-production-acceptance": "node scripts/check-rjx-package-e.mjs RJX-W23",
     "check:rjx-freeze": "node scripts/check-rjx-package-e.mjs RJX-W24",
-    "check:rjx-package-e": "node scripts/check-rjx-package-e.mjs"
+    "check:rjx-package-e": "node scripts/check-rjx-package-e.mjs",
+    "check:book-w1-public-projection-historical": "node scripts/check-book-w1e-public-book-locale-icon-projection.mjs",
+    "check:book-w1-web-production-runtime-historical": "node scripts/check-book-w1f-wpr-successor.mjs",
+    "check:book-w1-compatibility-historical": "node scripts/check-book-w1f-compatibility.mjs && node scripts/check-book-w1f-wpr-successor.mjs"
   },
   "type": "module",
   "dependencies": {
