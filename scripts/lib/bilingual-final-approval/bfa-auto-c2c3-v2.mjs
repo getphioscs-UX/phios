@@ -17,6 +17,8 @@ const INVENTORIES={
 };
 const BOOK2_COVERAGE='content/knowledge/reconciliation/kau-r4/book-2-canonical-coverage-v1.json';
 const BOOK2_HUMAN_RESOLUTION='content/knowledge/reconciliation/kau-r4/kau-r4-human-resolution-v1.json';
+const KAU_R5_ACCEPTANCE='content/knowledge/reconciliation/kau-r5/kau-r5-acceptance-v1.json';
+const KAU_R5_NEW_BINDINGS='content/knowledge/reconciliation/kau-r5/book-2-new-node-approved-bindings-v1.json';
 const KSAR='content/knowledge/review/ksar-human-pdf-extract-review-resolution-v1.json';
 const REPAIRS='content/knowledge/review/ksar-r4-repair-final-verification-v1.json';
 const REVIEWED_CORPUS='content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json';
@@ -48,7 +50,20 @@ function effectiveSourceReview(root,sectionCode,mappingSha){
  if(directAccepted)return {ready:true,reviewMode:'DIRECT_HUMAN_APPROVAL',decision:direct.decision,effectiveReviewedTextSha256:direct.sourceDigest??mappingSha,sourceTextSha256:direct.sourceDigest??mappingSha,evidence:KSAR};
  return {ready:false,reviewMode:'NOT_ACCEPTED',decision:direct?.decision??null,effectiveReviewedTextSha256:null,sourceTextSha256:mappingSha,evidence:direct?KSAR:null};
 }
-function acceptedMappingAuthority(value){return /^KAU-R\d+_HUMAN_ACCEPTED_/.test(String(value??''));}
+function acceptedMappingAuthority(root,mapping){
+ const value=String(mapping?.authority??'');
+ if(/^KAU-R\d+_HUMAN_ACCEPTED_/.test(value))return true;
+ // KAU-R5 admitted two new BOOK-2 nodes from the already Human-resolved KAU-R4 reconciliation.
+ // Preserve that frozen authority wording and recognize it only when the exact R5 approved-binding
+ // record and the R5 acceptance evidence both exist. This is successor recognition, not a new
+ // mapping approval path.
+ if(value!=='KAU-R5_NEW_CANONICAL_NODE_ADMISSION')return false;
+ if(!exists(root,KAU_R5_ACCEPTANCE)||!exists(root,KAU_R5_NEW_BINDINGS))return false;
+ const acceptance=read(root,KAU_R5_ACCEPTANCE);
+ if(acceptance?.status!=='ACCEPTED_CANONICAL_AUTHORITY_SUCCESSOR'||acceptance?.acceptance?.r4HumanAcceptanceRecorded!==true||acceptance?.acceptance?.newCanonicalNodesAdded!==2)return false;
+ const approved=read(root,KAU_R5_NEW_BINDINGS);
+ return (approved.records??[]).some(r=>r.mappingCode===mapping.mappingCode&&r.nodeCode===mapping.nodeCode&&r.sectionCode===mapping.sectionCode&&r.status==='APPROVED'&&r.authorityStatus==='APPROVED'&&r.authority===value);
+}
 function compositeCoverageMap(root,bookCode){
  if(bookCode!=='BOOK-2'||!exists(root,BOOK2_COVERAGE)||!exists(root,BOOK2_HUMAN_RESOLUTION))return new Map();
  const coverage=read(root,BOOK2_COVERAGE);const resolution=read(root,BOOK2_HUMAN_RESOLUTION);
@@ -73,7 +88,7 @@ function deriveEntry(root,batchCode,nodeCode,input){
  if(!n)exceptions.push('CANONICAL_NODE_MISSING');
  if(n&&['deprecated','superseded'].includes(String(n.registryStatus).toLowerCase()))exceptions.push('NODE_INACTIVE_OR_SUPERSEDED');
  if(!inventoryRel)exceptions.push('BOOK_MANUSCRIPT_INVENTORY_UNAVAILABLE');
- const acceptedMaps=maps.filter(m=>m.status==='APPROVED'&&m.authorityStatus==='APPROVED'&&acceptedMappingAuthority(m.authority));
+ const acceptedMaps=maps.filter(m=>m.status==='APPROVED'&&m.authorityStatus==='APPROVED'&&acceptedMappingAuthority(root,m));
  if(maps.length&&acceptedMaps.length!==maps.length)exceptions.push('MAPPING_NOT_HUMAN_ACCEPTED');
  if(maps.length===0&&!composite)exceptions.push('HUMAN_ACCEPTED_SOURCE_COVERAGE_MISSING');
  // Human-accepted KAU authorities are versioned by book/reconciliation wave.
