@@ -26,7 +26,7 @@ const pkg = read('package.json');
 for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07', 'H08']) {
   assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1, `${scene} count drift`);
 }
-assert.equal(count(html, /data-hpc2-scene="H09"/g), 0, 'H09 implemented before HPC2-W10');
+assert.equal(count(html, /data-hpc2-scene="H09"/g), 1, 'H09 successor count drift after HPC2-W10');
 for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06']) {
   assert.equal(digest(sceneMarkup(html, scene)), w7Freeze.structuralFreeze[`${scene.toLowerCase()}MarkupSha256`], `Frozen W7 ${scene} markup drift`);
 }
@@ -38,4 +38,4 @@ assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7-current.m
 
 console.log('HPC2-W7 current successor: ACCEPTED');
 console.log('  frozen H01-H06 and immutable W7 evidence preserved; additive H07/H08 are governed by HPC2-W8/W9');
-console.log('  H09 and /reality/ remain inactive; no Human/browser decision fabricated');
+console.log('  H09 is governed by HPC2-W10; /reality/ remains independently governed; no Human/browser decision fabricated');

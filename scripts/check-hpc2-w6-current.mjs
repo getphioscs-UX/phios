@@ -48,7 +48,7 @@ assert.equal(w7.predecessorProtection.h01H05ChangedByW7, false);
 assert.equal(w7Freeze.preservedBoundaries.w2ThroughW6ImmutableEvidenceRewritten, false);
 
 for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07', 'H08']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
-assert.equal(count(html, /data-hpc2-scene="H09"/g), 0);
+assert.equal(count(html, /data-hpc2-scene="H09"/g), 1);
 for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05']) {
   assert.equal(digestText(sceneMarkup(html, scene)), w7.predecessorProtection[`${scene.toLowerCase()}MarkupSha256`], `Frozen ${scene} markup drift`);
 }
@@ -67,9 +67,11 @@ assert.equal(acceptance.counts.humanDecisionsCreated, 0);
 assert.equal(pkg.scripts['check:hpc2-w6-frozen'], 'node scripts/check-hpc2-w6.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8.mjs');
-assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9.mjs');
+assert.equal(pkg.scripts['check:hpc2-w8-frozen'], 'node scripts/check-hpc2-w8.mjs');
+assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w9-frozen'], 'node scripts/check-hpc2-w9.mjs');
+assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9-current.mjs');
 
 console.log('HPC2-W6 current successor: ACCEPTED');
 console.log('  frozen H01-H05 and immutable W6 evidence preserved; additive H06-H08 are governed by HPC2-W7/W8/W9');
-console.log('  H09 and /reality/ remain inactive; no Human/browser decision fabricated');
+console.log('  H09 is governed by HPC2-W10; /reality/ remains independently governed; no Human/browser decision fabricated');

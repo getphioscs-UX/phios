@@ -69,7 +69,7 @@ assert.equal(w6Contract.predecessorAuthority.w5FreezeSha256, sha256(paths.w5Free
 assert.equal(w6Contract.predecessorProtection.h01H04ChangedByW6, false);
 
 for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07', 'H08']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
-assert.equal(count(html, /data-hpc2-scene="H09"/g), 0, 'H09 implemented prematurely');
+assert.equal(count(html, /data-hpc2-scene="H09"/g), 1, 'H09 successor count drift after HPC2-W10');
 assert.equal(digestText(sceneMarkup(html, 'H01')), w5Contract.predecessorProtection.h01MarkupSha256, 'Frozen H01 markup drift');
 assert.equal(digestText(sceneMarkup(html, 'H02')), w5Contract.predecessorProtection.h02MarkupSha256, 'Frozen H02 markup drift');
 const h03Html = sceneMarkup(html, 'H03');
@@ -99,10 +99,12 @@ assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.m
 assert.equal(pkg.scripts['check:hpc2-w6-frozen'], 'node scripts/check-hpc2-w6.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8.mjs');
-assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9.mjs');
+assert.equal(pkg.scripts['check:hpc2-w8-frozen'], 'node scripts/check-hpc2-w8.mjs');
+assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w9-frozen'], 'node scripts/check-hpc2-w9.mjs');
+assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9-current.mjs');
 
 console.log('HPC2-W4 current successor: ACCEPTED');
 console.log('  frozen H01-H03 preserved byte-for-byte at scene scope; immutable W4 evidence preserved');
-console.log('  additive H04-H08 are governed by HPC2-W5 through W9; H09 and /reality/ remain inactive');
+console.log('  additive H04-H08 are governed by HPC2-W5 through W9; H09 is governed by HPC2-W10; /reality/ remains independently governed');
 console.log('  W4 Ask reservation is preserved as predecessor history; current Homepage consumers reuse CKA-W0-W17');
