@@ -102,6 +102,37 @@ const publicExperience = Object.freeze({
       boundary: '这些讯号不会自动变成同一个结论。进入导航之前，它们的来源与限制会保持可见。',
       definitionBoundary: '完整的现实定义与玉石比喻，属于专门的现实导航说明。'
     },
+    manyLenses: {
+      eyebrow: '多种视角 · 一个持续变化的现实',
+      titleLine1: 'AI 可以回答问题。',
+      titleLine2: '但现实仍然需要被导航。',
+      lead: '知识、AI、方法、亲身经验与专业证据都可能揭示一部分，但任何一种都不会自动成为完整现实。',
+      figureCaption: '受治理的多种视角／碎片化图示',
+      fragmentationThesis: '真正的问题往往不是“我没有答案”，而是“我有太多互相分离的答案”。',
+      fragmentationCopy: '缺少共同边界时，证据可能变成故事，投射可能变成事实，而看似肯定的综合也可能掩盖仍然未知的部分。',
+      guardrails: {
+        partNotWhole: '每一种视角都可以作出贡献，但不会成为完整现实。',
+        sourceAndType: '每项主张都保留其来源与类型。',
+        conflictAndUnknown: '冲突与未知保持可见。'
+      },
+      lensesLabel: '五种有边界的视角',
+      lenses: {
+        knowledge: { label: '知识', question: '已经有哪些知识被建立？', role: '背景与模型' },
+        ai: { label: 'AI', question: '什么可以被解释或综合？', role: '语言与综合' },
+        method: { label: '方法', question: '这个有边界的模型投射了什么？', role: '投射' },
+        experience: { label: '经验', question: '当事人正在经历并报告什么？', role: '第一人称经验' },
+        professionalEvidence: { label: '专业证据', question: '合资格评估可以确立什么？', role: '有范围的证据与判断' }
+      },
+      transitionEyebrow: '类别转场',
+      transitionTitle: '缺少的层不是另一种视角，而是一种让多种视角与现实相遇的受治理方式。',
+      stages: {
+        find: { label: '寻找', copy: '搜索定位信息。' },
+        explain: { label: '解释', copy: '通用 AI 生成并解释答案。' },
+        navigate: { label: '导航', copy: '现实导航让案例、边界与变化保持连接。' }
+      },
+      bridge: '许多人从自我发现开始。现实导航，是接下来的那一步。',
+      boundary: '完整的类别比较与 Human Reading Systems 研究，继续留在各自的专门说明中。'
+    },
     value: {
       eyebrow: 'PHI OS 帮助你看见什么',
       title: '一个困难处境，通常不只是一个孤立问题。',

@@ -102,6 +102,37 @@ const publicExperience = Object.freeze({
       boundary: 'These signals do not become one conclusion automatically. Their sources and limits remain visible before navigation.',
       definitionBoundary: 'The complete Reality definition and Jade metaphor belong in the dedicated Reality Navigation explanation.'
     },
+    manyLenses: {
+      eyebrow: 'Many lenses · One changing Reality',
+      titleLine1: 'AI can answer.',
+      titleLine2: 'Reality still has to be navigated.',
+      lead: 'Knowledge, AI, methods, lived experience and professional evidence can each reveal something. None of them automatically becomes the whole Reality.',
+      figureCaption: 'Governed Many Lenses / Fragmentation figure',
+      fragmentationThesis: 'The problem is often not “I have no answer.” It is “I have too many disconnected answers.”',
+      fragmentationCopy: 'Without shared boundaries, evidence can become story, projection can become fact, and confident synthesis can hide what remains unknown.',
+      guardrails: {
+        partNotWhole: 'Each lens can contribute without becoming the whole Reality.',
+        sourceAndType: 'Claims keep their source and type.',
+        conflictAndUnknown: 'Conflicts and unknowns remain visible.'
+      },
+      lensesLabel: 'Five bounded lenses',
+      lenses: {
+        knowledge: { label: 'Knowledge', question: 'What has already been learned?', role: 'Context and models' },
+        ai: { label: 'AI', question: 'What can be explained or synthesized?', role: 'Language and synthesis' },
+        method: { label: 'Method', question: 'What does this bounded model project?', role: 'Projection' },
+        experience: { label: 'Experience', question: 'What is being lived and reported?', role: 'First-person experience' },
+        professionalEvidence: { label: 'Professional evidence', question: 'What can qualified assessment establish?', role: 'Scoped evidence and judgment' }
+      },
+      transitionEyebrow: 'Category transition',
+      transitionTitle: 'The missing layer is not another lens. It is a governed way for lenses to meet Reality.',
+      stages: {
+        find: { label: 'FIND', copy: 'Search locates information.' },
+        explain: { label: 'EXPLAIN', copy: 'General AI generates and explains answers.' },
+        navigate: { label: 'NAVIGATE', copy: 'Reality Navigation keeps the case, boundaries and change connected.' }
+      },
+      bridge: 'Self-discovery is where many people begin. Reality Navigation is what comes next.',
+      boundary: 'The full category comparison and the Human Reading Systems research remain in their dedicated explanations.'
+    },
     value: {
       eyebrow: 'What PHI OS helps you see',
       title: 'A difficult situation is usually more than one isolated question.',

@@ -17,6 +17,8 @@ const heroScene = document.querySelector('[data-hpc2-scene="H01"]');
 const heroRoot = document.querySelector('[data-hpc2-hero="HERO-001"]');
 const realityScene = document.querySelector('[data-hpc2-scene="H02"]');
 const realityFigureRoot = realityScene?.querySelector('[data-hpc2-figure="FIG-054"]') || null;
+const lensesScene = document.querySelector('[data-hpc2-scene="H03"]');
+const lensesFigureRoot = lensesScene?.querySelector('[data-hpc2-figure="FIG-055"]') || null;
 const FIVE_VOLUME_FIGURE = 'FIG-001';
 const HOMEPAGE_SUCCESSOR_FIGURES = Object.freeze(['FIG-054', 'FIG-055', 'FIG-056', 'FIG-057']);
 
@@ -135,6 +137,13 @@ async function render() {
         : 'H02_FAIL_CLOSED_FIGURE_ASSET_NOT_RENDERED';
     }
 
+    const lensesFigureRendered = await renderAssetTarget(lensesFigureRoot, 'FIG-055', locale, visualRegistry);
+    if (lensesScene) {
+      lensesScene.dataset.hpc2SceneState = lensesFigureRendered
+        ? 'H03_PRODUCTION_COMPOSED_REMOTE_VERIFIED_ASSET_RENDERED'
+        : 'H03_FAIL_CLOSED_FIGURE_ASSET_NOT_RENDERED';
+    }
+
     booksRoot.innerHTML = (await Promise.all(
       booksRegistry.books
         .slice()
@@ -143,7 +152,7 @@ async function render() {
     )).join('');
 
     const staticTargets = [...document.querySelectorAll('[data-hpc2-figure], [data-hpc2-icon]')]
-      .filter(target => target !== realityFigureRoot);
+      .filter(target => target !== realityFigureRoot && target !== lensesFigureRoot);
     const staticResults = await Promise.all(staticTargets.map(target => {
       const assetCode = target.dataset.hpc2Figure || target.dataset.hpc2Icon;
       return renderAssetTarget(target, assetCode, locale, visualRegistry);
@@ -159,6 +168,7 @@ async function render() {
       });
       knowledgePulse.dataset.hpc2HeroRendered = String(heroRendered);
       knowledgePulse.dataset.hpc2RealityFigureRendered = String(realityFigureRendered);
+      knowledgePulse.dataset.hpc2LensesFigureRendered = String(lensesFigureRendered);
       knowledgePulse.dataset.hpc2StaticVisualsRendered = String(staticResults.filter(Boolean).length);
       knowledgePulse.dataset.hpc2SuccessorGalleryRendered = String(galleryCount);
     }
@@ -167,8 +177,10 @@ async function render() {
     if (visualsRoot) visualsRoot.innerHTML = '';
     if (heroRoot) heroRoot.replaceChildren();
     if (realityFigureRoot) realityFigureRoot.replaceChildren();
+    if (lensesFigureRoot) lensesFigureRoot.replaceChildren();
     if (heroScene) heroScene.dataset.hpc2SceneState = 'H01_FAIL_CLOSED_HOME_SOURCE_ERROR';
     if (realityScene) realityScene.dataset.hpc2SceneState = 'H02_FAIL_CLOSED_HOME_SOURCE_ERROR';
+    if (lensesScene) lensesScene.dataset.hpc2SceneState = 'H03_FAIL_CLOSED_HOME_SOURCE_ERROR';
     document.documentElement.dataset.hpc2HomeVisualError = error?.message || 'HPC2_PRE_HOME_VISUAL_ERROR';
   }
 }

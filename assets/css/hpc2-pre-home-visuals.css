@@ -1,5 +1,5 @@
-/* HPC2-PRE visual readiness plus additive HPC2-W2 H01 and HPC2-W3 H02 composition.
-   H03-H09 remain owned by later composition steps. */
+/* HPC2-PRE visual readiness plus additive HPC2-W2 H01, HPC2-W3 H02 and
+   HPC2-W4 H03 composition. H04-H09 remain owned by later composition steps. */
 .hpc2-h01 {
   position: relative;
   isolation: isolate;
@@ -441,6 +441,294 @@
   line-height: 1.65;
 }
 
+.hpc2-h03 {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(5rem, 10vw, 8.5rem);
+  background:
+    radial-gradient(circle at 84% 12%, rgb(60 112 146 / 10%), transparent 29rem),
+    linear-gradient(180deg, #f5f1e8, #eee8dc);
+  color: #152332;
+}
+
+.hpc2-h03::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(21 35 50 / 23%), transparent);
+  content: '';
+}
+
+.hpc2-h03 .public-container {
+  position: relative;
+}
+
+.hpc2-h03__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(19rem, 0.82fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: end;
+}
+
+.hpc2-h03__heading .public-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: calc(clamp(1.5rem, 5vw, 5rem) * -0.56);
+  color: #45677b;
+}
+
+.hpc2-h03__heading .public-title,
+.hpc2-h03__heading .public-lead {
+  margin: 0;
+  color: inherit;
+}
+
+.hpc2-h03__heading .public-title {
+  max-width: 15ch;
+  font-size: clamp(2.7rem, 5.3vw, 5.6rem);
+  line-height: 0.98;
+}
+
+.hpc2-h03__heading .public-title span {
+  display: block;
+}
+
+.hpc2-h03__heading .public-title span + span {
+  margin-top: 0.12em;
+  color: #435567;
+}
+
+.hpc2-h03__heading .public-lead {
+  max-width: 42rem;
+  color: rgb(21 35 50 / 70%);
+}
+
+.hpc2-h03__visual-frame {
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+  overflow: hidden;
+  border: 1px solid rgb(21 35 50 / 14%);
+  border-radius: clamp(1.2rem, 2.5vw, 2rem);
+  background: #07111f;
+  box-shadow: 0 26px 70px rgb(31 45 57 / 14%);
+}
+
+.hpc2-h03__governed-figure {
+  display: grid;
+  min-height: clamp(15rem, 31vw, 28rem);
+  margin: 0;
+  place-items: center;
+}
+
+.hpc2-h03__governed-figure[data-hpc2-asset-state="FAIL_CLOSED_NOT_RENDERED"]::before {
+  color: rgb(237 246 255 / 46%);
+  content: 'FIG-055';
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+
+.hpc2-h03__figure-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.hpc2-h03__figure-caption {
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  border-top: 1px solid rgb(237 246 255 / 11%);
+  color: rgb(237 246 255 / 50%);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hpc2-h03__fragmentation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.68fr);
+  gap: clamp(1.4rem, 4vw, 4rem);
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(1.5rem, 3vw, 2.6rem);
+  border-block: 1px solid rgb(21 35 50 / 14%);
+}
+
+.hpc2-h03__fragmentation > p {
+  margin: 0;
+  color: rgb(21 35 50 / 67%);
+  line-height: 1.7;
+}
+
+.hpc2-h03__fragmentation .hpc2-h03__thesis {
+  color: #152332;
+  font-family: var(--font-display, 'Newsreader', Georgia, serif);
+  font-size: clamp(1.65rem, 3vw, 2.65rem);
+  line-height: 1.15;
+}
+
+.hpc2-h03__guardrails {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgb(21 35 50 / 12%);
+  border-radius: 1rem;
+  background: rgb(21 35 50 / 12%);
+  list-style: none;
+}
+
+.hpc2-h03__guardrails li {
+  min-height: 5.8rem;
+  padding: 1.2rem;
+  background: rgb(255 255 255 / 44%);
+  color: rgb(21 35 50 / 72%);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.hpc2-h03__guardrails li::before {
+  display: block;
+  width: 1.8rem;
+  height: 2px;
+  margin-bottom: 0.8rem;
+  background: #527d94;
+  content: '';
+}
+
+.hpc2-h03__lens-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1.4vw, 1rem);
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.hpc2-lens-card {
+  display: flex;
+  min-height: 15rem;
+  flex-direction: column;
+  padding: clamp(1.1rem, 2.2vw, 1.6rem);
+  border: 1px solid rgb(21 35 50 / 13%);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 35%);
+}
+
+.hpc2-lens-card__index {
+  color: #527d94;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hpc2-lens-card h3 {
+  margin: 2.2rem 0 0;
+  color: #152332;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+}
+
+.hpc2-lens-card p {
+  margin: 0.7rem 0 1.4rem;
+  color: rgb(21 35 50 / 68%);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.hpc2-lens-card small {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgb(21 35 50 / 11%);
+  color: #45677b;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.hpc2-h03__transition {
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding: clamp(1.6rem, 4vw, 3.2rem);
+  border-radius: clamp(1.2rem, 2.5vw, 2rem);
+  background: #102539;
+  color: #edf6ff;
+}
+
+.hpc2-h03__transition-copy .public-eyebrow {
+  color: #8fc8e6;
+}
+
+.hpc2-h03__transition-copy h3 {
+  max-width: 21ch;
+  margin: 1rem 0 0;
+  color: inherit;
+  font-family: var(--font-display, 'Newsreader', Georgia, serif);
+  font-size: clamp(1.8rem, 3.4vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.hpc2-h03__category-stages {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hpc2-h03__category-stages li {
+  display: grid;
+  grid-template-columns: minmax(6rem, 0.34fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: 1.2rem;
+  border-top: 1px solid rgb(237 246 255 / 13%);
+}
+
+.hpc2-h03__category-stages li:first-child {
+  border-top: 0;
+}
+
+.hpc2-h03__category-stages strong {
+  color: #8fc8e6;
+  font-size: 0.72rem;
+  letter-spacing: 0.11em;
+}
+
+.hpc2-h03__category-stages span {
+  color: rgb(237 246 255 / 70%);
+  line-height: 1.55;
+}
+
+.hpc2-h03__bridge {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-top: clamp(1.3rem, 3vw, 2.4rem);
+  border-top: 1px solid rgb(237 246 255 / 13%);
+  color: #fff;
+  font-family: var(--font-display, 'Newsreader', Georgia, serif);
+  font-size: clamp(1.4rem, 2.7vw, 2.3rem);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.hpc2-h03__boundary {
+  margin-top: clamp(1.4rem, 3vw, 2.4rem);
+  text-align: center;
+}
+
+.hpc2-h03__boundary p {
+  max-width: 50rem;
+  margin: 0 auto;
+  color: rgb(21 35 50 / 56%);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
 .hpc2-entry-icon,
 .hpc2-runtime-icon {
   width: 2.25rem;
@@ -502,7 +790,10 @@
   }
 
   .hpc2-h02__heading,
-  .hpc2-h02__evidence-grid {
+  .hpc2-h02__evidence-grid,
+  .hpc2-h03__heading,
+  .hpc2-h03__fragmentation,
+  .hpc2-h03__transition {
     grid-template-columns: 1fr;
   }
 
@@ -520,6 +811,18 @@
 
   .hpc2-reality-semantics {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hpc2-h03__heading .public-eyebrow {
+    margin-bottom: calc(clamp(1.5rem, 5vw, 5rem) * -0.48);
+  }
+
+  .hpc2-h03__lens-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hpc2-lens-card:last-child {
+    grid-column: 1 / -1;
   }
 }
 
@@ -606,6 +909,35 @@
 
   .hpc2-h02__boundary {
     grid-template-columns: 1fr;
+  }
+
+  .hpc2-h03__heading {
+    gap: 1.35rem;
+  }
+
+  .hpc2-h03__heading .public-eyebrow {
+    margin-bottom: 0;
+  }
+
+  .hpc2-h03__heading .public-title {
+    font-size: clamp(2.5rem, 11vw, 3.8rem);
+  }
+
+  .hpc2-h03__fragmentation,
+  .hpc2-h03__guardrails,
+  .hpc2-h03__lens-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hpc2-lens-card,
+  .hpc2-lens-card:last-child {
+    grid-column: auto;
+    min-height: 12rem;
+  }
+
+  .hpc2-h03__category-stages li {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
   }
 
   .hpc2-runtime-figure img {
