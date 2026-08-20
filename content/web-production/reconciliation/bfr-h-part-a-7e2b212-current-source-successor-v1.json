@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H-PART-A-CURRENT-SOURCE-SUCCESSOR-v1.0.0",
+  "work": "BFR-H0-H14-CURRENT-SOURCE-RECONCILIATION",
+  "historicalBaselineCommit": "3b5ff152d1cdfe479ed4daf7c772e3faa926dc17",
+  "currentBaselineCommit": "7e2b21290d6f4a628f034533a5ca4b89c144db8f",
+  "status": "ADDITIVE_CURRENT_SOURCE_SUCCESSOR_ACTIVE_HISTORICAL_EVIDENCE_PRESERVED",
+  "historicalArtifactsRewritten": false,
+  "historicalCheckerRewritten": false,
+  "reason": "BFR-H0 captured mutable upstream source digests at its historical baseline. Later governed article publication and HPC2-PRE asset reconciliation changed three sources without invalidating the frozen H0-H14 inventory decision.",
+  "snapshotPolicy": {
+    "historicalDigestMeans": "SOURCE_STATE_AT_3B5FF15_BASELINE",
+    "historicalDigestDoesNotMean": "PERMANENT_IMMUTABILITY_OF_GOVERNED_UPSTREAM_SOURCE",
+    "currentDriftAllowedOnlyWhenExplicitlyReconciled": true,
+    "unknownCurrentDriftFailsClosed": true
+  },
+  "reconciledDrifts": [
+    {
+      "path": "content/knowledge/public/authority/published-knowledge-authority.json",
+      "historicalSha256": "5510dba24306d38b72cf8bd7e6d37c7bcdd30dfe0eb0e917d184d8faba912c4b",
+      "currentSha256": "6f37478d08a852a2fb45aa56cc3e920604800707e2951f987b8b8d22374cbe5a",
+      "governedSuccessorReason": "Published Knowledge expanded through governed BFA publication and editorial projection successors.",
+      "authorityRecreated": false
+    },
+    {
+      "path": "content/knowledge/public/retrieval/published-retrieval-index.json",
+      "historicalSha256": "b49f504e3a120ee2c15e49681662d6f05ac102d79c93208195b13237454dbd05",
+      "currentSha256": "5b5b6672091a41bd9c5ddcdd6f379d556fa0e69c1611c773df3f878dbf114d06",
+      "governedSuccessorReason": "Published retrieval projection followed the governed Published Knowledge successor.",
+      "authorityRecreated": false
+    },
+    {
+      "path": "content/registry/public-assets.json",
+      "historicalSha256": "60d58ca76e0f979033b8f27cf7a64b43357e3eb8ebdb5670f0987aa185d81fee",
+      "currentSha256": "5ee6a00031ce0d6bd722f9b46bf21e69f1a983b67b0eab8050cb9cf33ecb265f",
+      "governedSuccessorReason": "HPC2-PRE added concrete members and real remote-verification evidence through the existing Public Asset Registry and resolver.",
+      "authorityRecreated": false
+    }
+  ],
+  "successorEvidence": [
+    "content/knowledge/public/authority/published-knowledge-authority.json",
+    "content/knowledge/public/retrieval/published-retrieval-index.json",
+    "content/web-production/reconciliation/wpr-w7-w10-hpc2-pre-successor-v1.json",
+    "content/web/homepage/hpc2-pre/hpc2-pre-final-readiness-v1.json"
+  ],
+  "boundaries": {
+    "bfrH0H14DecisionPreserved": true,
+    "hpc2PreReadyPreserved": true,
+    "duplicateKnowledgeAuthorityCreated": false,
+    "duplicateAssetRegistryCreated": false,
+    "duplicateAssetResolverCreated": false,
+    "productionRouteActivated": false,
+    "humanDecisionCreated": false,
+    "globalProductionAcceptanceClaimed": false
+  }
+}
