@@ -230,6 +230,52 @@ const publicExperience = Object.freeze({
       askAction: '向 PHI OS 询问从哪里开始',
       boundary: '这些入口只披露现有界面；不会建立账户或案例，不会执行 Method、产生专业判断，也不会自动启动 Reality Journey。'
     },
+    fiveVolumeKnowledge: {
+      eyebrow: '五册知识体系',
+      title: '五册书，一套理解现实的完整架构。',
+      lead: '五册内容从现实形成、运行、维持、文明扩展走向读取与导航。每一册保持自己的范围，同时共同构成一个彼此连接的模型。',
+      progression: {
+        formation: '现实如何形成',
+        runtime: '现实如何运行',
+        continuity: '现实如何维持',
+        civilization: '现实如何扩展',
+        navigation: '现实如何被读取与导航'
+      },
+      figureCaption: 'Canonical Five-Volume Architecture 图把五册的顺序连接起来，同时不把不同册的范围压缩成一个没有区别的答案。',
+      coverUnavailable: '受治理封面暂时不可用',
+      actions: {
+        read: '已发布知识',
+        see: '图示与结构图',
+        ask: '向 PHI OS 提问',
+        learn: '学院'
+      },
+      boundary: '已发布知识、视觉知识、情境式 Ask 与 Academy 继续由各自的 authority 管理。本场景不会建立新的 Knowledge、Reading 或学习 authority。'
+    },
+    capabilitySupport: {
+      eyebrow: '能力建立与支持',
+      title: '建立能力，或取得有边界的人类专业支持。',
+      lead: '学习与专业支持是两条不同路径：前者发展理解 Reality Navigation 的能力；后者只在现实需要时，引入人类范围、同意与责任。',
+      build: {
+        title: '学习 Reality Navigation 如何运作。',
+        copy: '沿着受治理知识与结构化学习前进，同时不把进度、评估或证书变成 Knowledge authority。',
+        books: '书册', knowledge: '知识', academy: '学院', action: '探索学院'
+      },
+      support: {
+        title: '有些现实需要人类判断。',
+        copy: '查看有边界的支持方向，但不把空的 service registry 伪装成完整服务目录，也不在首页展示价格菜单。',
+        readout: '现实读取', navigation: '导航', financial: '财务现实', review: '专业复核', action: '探索服务'
+      },
+      authority: {
+        eyebrow: 'Authority 保持边界',
+        phiosTitle: 'PHI OS',
+        phiosCopy: '结构化现实导航。',
+        professionalTitle: 'PHI OS Professional',
+        professionalCopy: '具有明确范围与责任的人类案例复核。',
+        externalTitle: '合资格外部专业人士',
+        externalCopy: '医疗、心理、法律、受监管财务及其他持牌领域继续由相应的合资格 authority 负责。'
+      },
+      boundary: '这个首页组合不会激活任何 /professional successor route，不会载入私人 workspace、产生专业判断，也不会展示价格菜单。'
+    },
     value: {
       eyebrow: 'PHI OS 帮助你看见什么',
       title: '一个困难处境，通常不只是一个孤立问题。',

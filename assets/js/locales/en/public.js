@@ -230,6 +230,52 @@ const publicExperience = Object.freeze({
       askAction: 'Ask PHI OS where to begin',
       boundary: 'These anchors disclose existing surfaces. They create no account, case, Method execution, professional judgment or automatic Reality Journey.'
     },
+    fiveVolumeKnowledge: {
+      eyebrow: 'Five-volume knowledge',
+      title: 'Five volumes. One architecture for understanding Reality.',
+      lead: 'The books move from formation to runtime, continuity, civilization and navigation. Each volume keeps its own scope while contributing to one connected model.',
+      progression: {
+        formation: 'How Reality Forms',
+        runtime: 'How Reality Runs',
+        continuity: 'How Reality Continues',
+        civilization: 'How Reality Expands',
+        navigation: 'How Reality Is Read & Navigated'
+      },
+      figureCaption: 'The canonical Five-Volume Architecture figure connects the sequence without collapsing the volumes into one undifferentiated answer.',
+      coverUnavailable: 'Governed cover unavailable',
+      actions: {
+        read: 'Published Knowledge',
+        see: 'Figures & Diagrams',
+        ask: 'Ask PHI OS',
+        learn: 'Academy'
+      },
+      boundary: 'Published knowledge, visual knowledge, contextual Ask and Academy remain separate governed consumers. This scene creates no new Knowledge, Reading or learning authority.'
+    },
+    capabilitySupport: {
+      eyebrow: 'Capability and support',
+      title: 'Build capability—or get bounded human support.',
+      lead: 'Learning and professional support are different paths. One develops your ability to understand Reality Navigation; the other introduces human scope, consent and responsibility when a situation requires it.',
+      build: {
+        title: 'Learn how Reality Navigation works.',
+        copy: 'Move through governed knowledge and structured learning without turning progress, assessment or credentials into Knowledge authority.',
+        books: 'Books', knowledge: 'Knowledge', academy: 'Academy', action: 'Explore Academy'
+      },
+      support: {
+        title: 'Some realities need human judgment.',
+        copy: 'See bounded support orientations without presenting an empty service registry as a complete offer catalog or placing a price menu on the Homepage.',
+        readout: 'Reality Readout', navigation: 'Navigation', financial: 'Financial Reality', review: 'Professional Review', action: 'Explore Services'
+      },
+      authority: {
+        eyebrow: 'Authority remains bounded',
+        phiosTitle: 'PHI OS',
+        phiosCopy: 'Structured Reality Navigation.',
+        professionalTitle: 'PHI OS Professional',
+        professionalCopy: 'Human case review with explicit scope and responsibility.',
+        externalTitle: 'Qualified External Professional',
+        externalCopy: 'Medical, psychological, legal, regulated financial and other licensed domains remain with their qualified authorities.'
+      },
+      boundary: 'This Homepage composition activates no /professional successor route, loads no private workspace, creates no professional judgment and shows no price menu.'
+    },
     value: {
       eyebrow: 'What PHI OS helps you see',
       title: 'A difficult situation is usually more than one isolated question.',

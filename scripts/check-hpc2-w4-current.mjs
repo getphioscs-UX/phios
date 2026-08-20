@@ -68,8 +68,8 @@ assert.equal(w6Contract.predecessorAuthority.w5ContractSha256, sha256(paths.w5Co
 assert.equal(w6Contract.predecessorAuthority.w5FreezeSha256, sha256(paths.w5Freeze));
 assert.equal(w6Contract.predecessorProtection.h01H04ChangedByW6, false);
 
-for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
-for (let scene = 7; scene <= 9; scene += 1) assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} implemented prematurely`);
+for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07', 'H08']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
+assert.equal(count(html, /data-hpc2-scene="H09"/g), 0, 'H09 implemented prematurely');
 assert.equal(digestText(sceneMarkup(html, 'H01')), w5Contract.predecessorProtection.h01MarkupSha256, 'Frozen H01 markup drift');
 assert.equal(digestText(sceneMarkup(html, 'H02')), w5Contract.predecessorProtection.h02MarkupSha256, 'Frozen H02 markup drift');
 const h03Html = sceneMarkup(html, 'H03');
@@ -98,9 +98,11 @@ assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-fr
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6-frozen'], 'node scripts/check-hpc2-w6.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7.mjs');
+assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8.mjs');
+assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9.mjs');
 
 console.log('HPC2-W4 current successor: ACCEPTED');
 console.log('  frozen H01-H03 preserved byte-for-byte at scene scope; immutable W4 evidence preserved');
-console.log('  additive H04-H06 are governed by HPC2-W5/W6/W7; H07-H09 and /reality/ remain inactive');
+console.log('  additive H04-H08 are governed by HPC2-W5 through W9; H09 and /reality/ remain inactive');
 console.log('  W4 Ask reservation is preserved as predecessor history; current Homepage consumers reuse CKA-W0-W17');

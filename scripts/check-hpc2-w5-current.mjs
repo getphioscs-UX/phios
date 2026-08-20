@@ -191,8 +191,8 @@ assert.equal(h04Authority.ckaRole, 'FIRST_FORMAL_CONTEXTUAL_ASK_ENTRY_AFTER_RUNT
 assert.equal(h04Authority.ctaDestinations[0].activationState, 'HOMEPAGE_ENTRY_BLOCKED_PENDING_CKA');
 assert.deepEqual(h04Authority.v8NarrativeLineage, contract.v8AndRouteBoundary.sourceBlocks);
 
-for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
-for (let scene = 7; scene <= 9; scene += 1) assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} implemented prematurely`);
+for (const scene of ['H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07', 'H08']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1);
+assert.equal(count(html, /data-hpc2-scene="H09"/g), 0, 'H09 implemented prematurely');
 assert.equal(digestText(sceneMarkup(html, 'H01')), contract.predecessorProtection.h01MarkupSha256, 'Frozen H01 markup drift');
 assert.equal(digestText(sceneMarkup(html, 'H02')), contract.predecessorProtection.h02MarkupSha256, 'Frozen H02 markup drift');
 assert.equal(digestText(sceneMarkup(html, 'H03')), contract.predecessorProtection.h03MarkupSha256, 'Frozen H03 markup drift');
@@ -450,12 +450,14 @@ assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-fr
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6-frozen'], 'node scripts/check-hpc2-w6.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7.mjs');
-assert.ok(pkg.scripts['check:hpc2'].endsWith('&& npm run check:hpc2-w7'));
-assert.ok(pkg.scripts['check:bfr-h'].endsWith('&& npm run check:hpc2-w7'));
+assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8.mjs');
+assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9.mjs');
+assert.ok(pkg.scripts['check:hpc2'].endsWith('&& npm run check:hpc2-w9'));
+assert.ok(pkg.scripts['check:bfr-h'].endsWith('&& npm run check:hpc2-w9'));
 
 console.log('HPC2-W5 current successor: ACCEPTED (repository implementation)');
-console.log('  scenes: frozen H01-H04 preserved; additive H05/H06 are governed by HPC2-W6/W7; H07-H09 remain deferred');
+console.log('  scenes: frozen H01-H04 preserved; additive H05-H08 are governed by HPC2-W6 through W9; H09 remains deferred');
 console.log('  composition: 8-stage runtime cycle + 4 values + 4 authority boundaries; execution/persistence = 0');
 console.log('  visual: FIG-056 remote-verified and rendered through the existing resolver with fail-closed states');
 console.log('  registry: frozen 144-member observation preserved; additive 5-member branding successor reconciled at 149 records');

@@ -21,6 +21,9 @@ const lensesScene = document.querySelector('[data-hpc2-scene="H03"]');
 const lensesFigureRoot = lensesScene?.querySelector('[data-hpc2-figure="FIG-055"]') || null;
 const phiosRuntimeScene = document.querySelector('[data-hpc2-scene="H04"]');
 const phiosRuntimeFigureRoot = phiosRuntimeScene?.querySelector('[data-hpc2-figure="FIG-056"]') || null;
+const fiveVolumeScene = document.querySelector('[data-hpc2-scene="H07"]');
+const fiveVolumeFigureRoot = fiveVolumeScene?.querySelector('[data-hpc2-figure="FIG-001"]') || null;
+const capabilitySupportScene = document.querySelector('[data-hpc2-scene="H08"]');
 const FIVE_VOLUME_FIGURE = 'FIG-001';
 const HOMEPAGE_SUCCESSOR_FIGURES = Object.freeze(['FIG-054', 'FIG-055', 'FIG-056', 'FIG-057']);
 
@@ -80,10 +83,12 @@ async function bookCard(book, locale) {
   const volume = String(book.volume).padStart(2, '0');
   const visual = cover
     ? resolvedImageMarkup(cover, { alt: '', loading: 'lazy' })
-    : `<span class="wpr-volume-fallback" aria-hidden="true"><span>Φ</span><strong>${volume}</strong></span>`;
+    : `<span class="wpr-cover-unavailable" data-hpc2-cover-state="FAIL_CLOSED_NOT_RENDERED"><strong>${volume}</strong><span>${escapeHtml(t('discover.fiveVolumeKnowledge.coverUnavailable'))}</span></span>`;
 
-  return `
-    <a class="wpr-book-card wpr-volume-${escapeHtml(book.volume)}" href="${escapeHtml(bookRoute(book.book_id))}" data-hpc2-cover-consumer="BOOK-${escapeHtml(book.volume)}-HARDCOVER">
+  return {
+    coverRendered: Boolean(cover),
+    markup: `
+    <a class="wpr-book-card wpr-volume-${escapeHtml(book.volume)}" href="${escapeHtml(bookRoute(book.book_id))}" data-hpc2-cover-consumer="BOOK-${escapeHtml(book.volume)}-HARDCOVER" data-hpc2-cover-state="${cover ? 'REMOTE_VERIFIED_RENDERED' : 'FAIL_CLOSED_NOT_RENDERED'}">
       <span class="wpr-book-card__visual">${visual}</span>
       <span class="wpr-book-card__body">
         <span class="wpr-kicker">${escapeHtml(t('discover.production.volumeLabel', { volume }))}</span>
@@ -92,7 +97,8 @@ async function bookCard(book, locale) {
         <small>${escapeHtml(t(`discover.production.bookStatus.${book.status}`))}</small>
       </span>
     </a>
-  `;
+  `
+  };
 }
 
 async function renderSuccessorGallery(locale, visualRegistry) {
@@ -153,19 +159,36 @@ async function render() {
         : 'H04_FAIL_CLOSED_FIGURE_ASSET_NOT_RENDERED';
     }
 
-    booksRoot.innerHTML = (await Promise.all(
+    const fiveVolumeFigureRendered = await renderAssetTarget(fiveVolumeFigureRoot, 'FIG-001', locale, visualRegistry);
+    const bookCards = await Promise.all(
       booksRegistry.books
         .slice()
         .sort((a, b) => a.volume - b.volume)
         .map(book => bookCard(book, locale))
-    )).join('');
+    );
+    booksRoot.innerHTML = bookCards.map(card => card.markup).join('');
+    const renderedBookCoverCount = bookCards.filter(card => card.coverRendered).length;
+    booksRoot.dataset.hpc2RenderedCoverCount = String(renderedBookCoverCount);
+    if (fiveVolumeScene) {
+      fiveVolumeScene.dataset.hpc2SceneState = fiveVolumeFigureRendered && renderedBookCoverCount === 5
+        ? 'H07_PRODUCTION_COMPOSED_FIVE_COVERS_AND_FIGURE_RENDERED'
+        : 'H07_FAIL_CLOSED_GOVERNED_ASSET_NOT_RENDERED';
+    }
 
     const staticTargets = [...document.querySelectorAll('[data-hpc2-figure], [data-hpc2-icon]')]
-      .filter(target => target !== realityFigureRoot && target !== lensesFigureRoot && target !== phiosRuntimeFigureRoot);
+      .filter(target => target !== realityFigureRoot && target !== lensesFigureRoot && target !== phiosRuntimeFigureRoot && target !== fiveVolumeFigureRoot);
     const staticResults = await Promise.all(staticTargets.map(target => {
       const assetCode = target.dataset.hpc2Figure || target.dataset.hpc2Icon;
       return renderAssetTarget(target, assetCode, locale, visualRegistry);
     }));
+    const capabilitySupportRenderedCount = staticTargets.filter((target, index) => (
+      target.closest('[data-hpc2-scene="H08"]') && staticResults[index]
+    )).length;
+    if (capabilitySupportScene) {
+      capabilitySupportScene.dataset.hpc2SceneState = capabilitySupportRenderedCount === 3
+        ? 'H08_PRODUCTION_COMPOSED_THREE_GOVERNED_VISUALS_RENDERED'
+        : 'H08_FAIL_CLOSED_GOVERNED_ASSET_NOT_RENDERED';
+    }
 
     const galleryCount = await renderSuccessorGallery(locale, visualRegistry);
 
@@ -179,6 +202,9 @@ async function render() {
       knowledgePulse.dataset.hpc2RealityFigureRendered = String(realityFigureRendered);
       knowledgePulse.dataset.hpc2LensesFigureRendered = String(lensesFigureRendered);
       knowledgePulse.dataset.hpc2RuntimeFigureRendered = String(phiosRuntimeFigureRendered);
+      knowledgePulse.dataset.hpc2FiveVolumeFigureRendered = String(fiveVolumeFigureRendered);
+      knowledgePulse.dataset.hpc2BookCoversRendered = String(renderedBookCoverCount);
+      knowledgePulse.dataset.hpc2CapabilitySupportVisualsRendered = String(capabilitySupportRenderedCount);
       knowledgePulse.dataset.hpc2StaticVisualsRendered = String(staticResults.filter(Boolean).length);
       knowledgePulse.dataset.hpc2SuccessorGalleryRendered = String(galleryCount);
     }
@@ -189,10 +215,13 @@ async function render() {
     if (realityFigureRoot) realityFigureRoot.replaceChildren();
     if (lensesFigureRoot) lensesFigureRoot.replaceChildren();
     if (phiosRuntimeFigureRoot) phiosRuntimeFigureRoot.replaceChildren();
+    if (fiveVolumeFigureRoot) fiveVolumeFigureRoot.replaceChildren();
     if (heroScene) heroScene.dataset.hpc2SceneState = 'H01_FAIL_CLOSED_HOME_SOURCE_ERROR';
     if (realityScene) realityScene.dataset.hpc2SceneState = 'H02_FAIL_CLOSED_HOME_SOURCE_ERROR';
     if (lensesScene) lensesScene.dataset.hpc2SceneState = 'H03_FAIL_CLOSED_HOME_SOURCE_ERROR';
     if (phiosRuntimeScene) phiosRuntimeScene.dataset.hpc2SceneState = 'H04_FAIL_CLOSED_HOME_SOURCE_ERROR';
+    if (fiveVolumeScene) fiveVolumeScene.dataset.hpc2SceneState = 'H07_FAIL_CLOSED_HOME_SOURCE_ERROR';
+    if (capabilitySupportScene) capabilitySupportScene.dataset.hpc2SceneState = 'H08_FAIL_CLOSED_HOME_SOURCE_ERROR';
     document.documentElement.dataset.hpc2HomeVisualError = error?.message || 'HPC2_PRE_HOME_VISUAL_ERROR';
   }
 }

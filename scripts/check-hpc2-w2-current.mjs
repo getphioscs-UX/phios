@@ -105,9 +105,8 @@ assert.equal(count(html, /data-hpc2-scene="H03"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H04"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H05"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H06"/g), 1);
-for (let scene = 7; scene <= 9; scene += 1) {
-  assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} was implemented before its owner work`);
-}
+for (const scene of ['H07', 'H08']) assert.equal(count(html, new RegExp(`data-hpc2-scene="${scene}"`, 'g')), 1, `${scene} successor count drift`);
+assert.equal(count(html, /data-hpc2-scene="H09"/g), 0, 'H09 was implemented before HPC2-W10');
 const h01Html = sceneMarkup(html, 'H01');
 assert.equal(digestText(h01Html), w3Contract.predecessorProtection.h01MarkupSha256, 'Frozen W2 H01 markup drift');
 assert.equal(count(h01Html, /data-hpc2-hero="HERO-001"/g), 1);
@@ -154,10 +153,12 @@ assert.equal(pkg.scripts['check:hpc2-w5-frozen'], 'node scripts/check-hpc2-w5-fr
 assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6-frozen'], 'node scripts/check-hpc2-w6.mjs');
 assert.equal(pkg.scripts['check:hpc2-w6'], 'node scripts/check-hpc2-w6-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7.mjs');
+assert.equal(pkg.scripts['check:hpc2-w7'], 'node scripts/check-hpc2-w7-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8.mjs');
+assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9.mjs');
 
 console.log('HPC2-W2 current successor: ACCEPTED');
 console.log('  frozen H01 preserved byte-for-byte at scene scope; immutable W2 evidence preserved');
-console.log('  additive H02-H06 are governed by HPC2-W3/W4/W5/W6/W7; Ask entries reuse CKA-W0-W17');
-console.log('  H07-H09 and /reality/ remain inactive');
+console.log('  additive H02-H08 are governed by HPC2-W3 through W9; Ask entries reuse CKA-W0-W17');
+console.log('  H09 and /reality/ remain inactive');
 console.log('  W2 Human/browser acceptance remains pending; no decision fabricated');
