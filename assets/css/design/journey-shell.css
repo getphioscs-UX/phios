@@ -167,3 +167,47 @@
     scroll-behavior: auto;
   }
 }
+
+
+/* LOGO-W2 — Journey Shell canonical brand reconciliation */
+.brand .journey-brand__logo {
+  display: block;
+  width: auto;
+  height: 2.15rem;
+  max-width: min(11.5rem, 34vw);
+  object-fit: contain;
+}
+
+.brand.is-canonical-logo-ready > .phi,
+.brand.is-canonical-logo-ready > span:not(.phi) {
+  display: none;
+}
+
+.runtime-workspace-brand__logo {
+  display: block;
+  width: auto;
+  height: 2rem;
+  max-width: 9.75rem;
+  object-fit: contain;
+}
+
+.runtime-workspace-brand.is-canonical-logo-ready > span,
+.runtime-workspace-brand.is-canonical-logo-ready strong {
+  display: none;
+}
+
+.runtime-workspace-brand.is-canonical-logo-ready {
+  align-items: center;
+}
+
+@media (max-width: 30rem) {
+  .brand .journey-brand__logo {
+    height: 1.9rem;
+    max-width: 9.5rem;
+  }
+
+  .runtime-workspace-brand__logo {
+    height: 1.8rem;
+    max-width: 8.75rem;
+  }
+}

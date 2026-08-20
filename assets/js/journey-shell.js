@@ -1,3 +1,5 @@
+import { resolvePublicAssetForWeb } from './runtime/web-production/asset-resolver.js';
+
 import {
   initializeI18n,
   isI18nInitialized,
@@ -152,6 +154,94 @@ function update(shell, contract) {
   );
 }
 
+
+const JOURNEY_BRAND_ASSET_CODE = 'LOGO-010';
+const JOURNEY_FAVICON_ASSET_CODE = 'LOGO-011';
+
+function ensureJourneyBrandTargets() {
+  document.querySelectorAll('a.brand').forEach(brand => {
+    if (brand.querySelector('[data-journey-brand-asset]')) return;
+    const image = document.createElement('img');
+    image.className = 'journey-brand__logo';
+    image.dataset.journeyBrandAsset = JOURNEY_BRAND_ASSET_CODE;
+    image.alt = '';
+    image.hidden = true;
+    brand.append(image);
+  });
+
+  document.querySelectorAll('.runtime-workspace-brand').forEach(brand => {
+    if (brand.querySelector('[data-journey-brand-asset]')) return;
+    const image = document.createElement('img');
+    image.className = 'runtime-workspace-brand__logo';
+    image.dataset.journeyBrandAsset = JOURNEY_BRAND_ASSET_CODE;
+    image.alt = '';
+    image.hidden = true;
+    brand.prepend(image);
+  });
+}
+
+async function hydrateJourneyBrandImage(image) {
+  if (image.dataset.brandHydration === 'pending' || image.dataset.brandHydration === 'ready') return;
+  image.dataset.brandHydration = 'pending';
+
+  try {
+    const resolved = await resolvePublicAssetForWeb(image.dataset.journeyBrandAsset, {
+      surface: 'REALITY_JOURNEY_SHELL'
+    });
+    if (!resolved?.renderable) {
+      image.dataset.brandHydration = 'fallback';
+      return;
+    }
+
+    await new Promise((resolve, reject) => {
+      image.addEventListener('load', resolve, { once: true });
+      image.addEventListener('error', reject, { once: true });
+      image.src = resolved.src;
+    });
+
+    image.removeAttribute('hidden');
+    image.dataset.brandHydration = 'ready';
+    image.closest('a.brand, .runtime-workspace-brand')?.classList.add('is-canonical-logo-ready');
+  } catch {
+    image.dataset.brandHydration = 'fallback';
+  }
+}
+
+async function hydrateJourneyFavicon() {
+  try {
+    const favicon = await resolvePublicAssetForWeb(JOURNEY_FAVICON_ASSET_CODE, {
+      surface: 'REALITY_JOURNEY_BROWSER_CHROME'
+    });
+    if (!favicon?.renderable) return;
+
+    let link = document.querySelector('link[rel="icon"][data-phios-journey-branding]');
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      link.dataset.phiosJourneyBranding = 'true';
+      document.head.append(link);
+    }
+    link.type = favicon.contentType || 'image/svg+xml';
+    link.href = favicon.src;
+  } catch {
+    // Fail closed to browser default / existing icon.
+  }
+}
+
+function hydrateJourneyBranding() {
+  ensureJourneyBrandTargets();
+  document.querySelectorAll('[data-journey-brand-asset]').forEach(image => {
+    void hydrateJourneyBrandImage(image);
+  });
+  void hydrateJourneyFavicon();
+}
+
+function observeJourneyBranding() {
+  const observer = new MutationObserver(() => hydrateJourneyBranding());
+  observer.observe(document.body, { childList: true, subtree: true });
+  return observer;
+}
+
 function initializeJourneyShell() {
   const contract = PAGE_CONTRACTS[normalizedPath()];
   if (!contract || document.querySelector('.pds-journey-shell')) return;
@@ -185,4 +275,6 @@ function initializeJourneyShell() {
   });
 }
 
+hydrateJourneyBranding();
+observeJourneyBranding();
 initializeJourneyShell();
