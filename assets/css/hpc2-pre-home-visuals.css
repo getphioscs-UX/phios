@@ -1,5 +1,5 @@
-/* HPC2-PRE visual readiness plus additive HPC2-W2 H01, HPC2-W3 H02 and
-   HPC2-W4 H03 composition. H04-H09 remain owned by later composition steps. */
+/* HPC2-PRE visual readiness plus additive HPC2-W2 H01, HPC2-W3 H02,
+   HPC2-W4 H03 and HPC2-W5 H04 composition. H05-H09 remain later-owned. */
 .hpc2-h01 {
   position: relative;
   isolation: isolate;
@@ -729,6 +729,297 @@
   line-height: 1.6;
 }
 
+.hpc2-h04 {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(5rem, 10vw, 8.5rem);
+  background:
+    radial-gradient(circle at 14% 16%, rgb(74 166 219 / 15%), transparent 30rem),
+    radial-gradient(circle at 90% 70%, rgb(99 198 170 / 8%), transparent 28rem),
+    #07111f;
+  color: #edf6ff;
+}
+
+.hpc2-h04::before {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 2.2%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 2.2%) 1px, transparent 1px);
+  background-size: 64px 64px;
+  content: '';
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  pointer-events: none;
+}
+
+.hpc2-h04 .public-container {
+  position: relative;
+}
+
+.hpc2-h04__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: end;
+}
+
+.hpc2-h04__heading .public-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: calc(clamp(1.5rem, 5vw, 5rem) * -0.56);
+  color: #75c7ff;
+}
+
+.hpc2-h04__heading .public-title,
+.hpc2-h04__heading .public-lead {
+  margin: 0;
+  color: inherit;
+}
+
+.hpc2-h04__heading .public-title {
+  max-width: 16ch;
+  font-size: clamp(2.7rem, 5.3vw, 5.6rem);
+  line-height: 0.98;
+}
+
+.hpc2-h04__heading .public-lead {
+  max-width: 42rem;
+  color: rgb(237 246 255 / 68%);
+}
+
+.hpc2-h04__visual-frame {
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+  overflow: hidden;
+  border: 1px solid rgb(117 199 255 / 18%);
+  border-radius: clamp(1.2rem, 2.5vw, 2rem);
+  background: #050e1a;
+  box-shadow: 0 28px 80px rgb(0 0 0 / 25%);
+}
+
+.hpc2-h04__governed-figure {
+  display: grid;
+  min-height: clamp(18rem, 46vw, 40rem);
+  margin: 0;
+  place-items: center;
+}
+
+.hpc2-h04__governed-figure[data-hpc2-asset-state="FAIL_CLOSED_NOT_RENDERED"]::before {
+  color: rgb(237 246 255 / 46%);
+  content: 'FIG-056';
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}
+
+.hpc2-h04__figure-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.hpc2-h04__figure-caption {
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  border-top: 1px solid rgb(117 199 255 / 12%);
+  color: rgb(237 246 255 / 48%);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hpc2-runtime-cycle {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: clamp(2rem, 5vw, 4rem) 0 0;
+  padding: 1px;
+  overflow: hidden;
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  background: rgb(117 199 255 / 14%);
+  list-style: none;
+}
+
+.hpc2-runtime-cycle li {
+  display: flex;
+  min-height: 14rem;
+  flex-direction: column;
+  padding: clamp(1.2rem, 2.4vw, 1.8rem);
+  background: rgb(8 25 43 / 94%);
+}
+
+.hpc2-runtime-cycle__index {
+  color: #75c7ff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hpc2-runtime-cycle strong {
+  margin-top: 2.4rem;
+  color: #fff;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+}
+
+.hpc2-runtime-cycle p {
+  margin: 0.75rem 0 0;
+  color: rgb(237 246 255 / 63%);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.hpc2-h04__value-architecture {
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding: clamp(1.6rem, 4vw, 3.2rem);
+  border: 1px solid rgb(117 199 255 / 17%);
+  border-radius: clamp(1.2rem, 2.5vw, 2rem);
+  background: linear-gradient(135deg, rgb(19 51 77 / 86%), rgb(10 31 51 / 90%));
+}
+
+.hpc2-h04__value-architecture > header {
+  display: grid;
+  grid-template-columns: minmax(10rem, 0.35fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: baseline;
+}
+
+.hpc2-h04__value-architecture .public-eyebrow {
+  margin: 0;
+  color: #75c7ff;
+}
+
+.hpc2-h04__value-architecture h3 {
+  max-width: 25ch;
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display, 'Newsreader', Georgia, serif);
+  font-size: clamp(1.8rem, 3.5vw, 3.3rem);
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+.hpc2-h04__value-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1.4vw, 1rem);
+  margin-top: clamp(1.8rem, 4vw, 3rem);
+}
+
+.hpc2-h04__value-grid article {
+  min-height: 13.5rem;
+  padding: clamp(1.1rem, 2.2vw, 1.6rem);
+  border: 1px solid rgb(237 246 255 / 11%);
+  border-radius: 1rem;
+  background: rgb(5 17 30 / 42%);
+}
+
+.hpc2-h04__value-grid article > span {
+  color: #75c7ff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.hpc2-h04__value-grid h4 {
+  margin: 2rem 0 0;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.hpc2-h04__value-grid p {
+  margin: 0.7rem 0 0;
+  color: rgb(237 246 255 / 62%);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.hpc2-h04__boundaries {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  overflow: hidden;
+  border: 1px solid rgb(117 199 255 / 13%);
+  border-radius: 1.2rem;
+  background: rgb(117 199 255 / 13%);
+}
+
+.hpc2-h04__boundaries article {
+  min-height: 9rem;
+  padding: clamp(1.2rem, 2.6vw, 2rem);
+  background: #091a2d;
+}
+
+.hpc2-h04__boundaries h3 {
+  margin: 0;
+  color: #d6efff;
+  font-size: 0.92rem;
+}
+
+.hpc2-h04__boundaries p {
+  margin: 0.65rem 0 0;
+  color: rgb(237 246 255 / 57%);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.hpc2-h04__ask-reservation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.8fr);
+  gap: clamp(1.4rem, 4vw, 4rem);
+  align-items: center;
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px dashed rgb(215 177 92 / 46%);
+  border-radius: clamp(1rem, 2vw, 1.5rem);
+  background: rgb(215 177 92 / 6%);
+}
+
+.hpc2-h04__ask-reservation .public-eyebrow {
+  margin: 0;
+  color: #d7b15c;
+}
+
+.hpc2-h04__ask-reservation h3 {
+  max-width: 25ch;
+  margin: 0.9rem 0 0;
+  color: #fff;
+  font-family: var(--font-display, 'Newsreader', Georgia, serif);
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.hpc2-h04__ask-reservation p:not(.public-eyebrow) {
+  margin: 0;
+  color: rgb(237 246 255 / 62%);
+  line-height: 1.65;
+}
+
+.hpc2-h04__ask-reservation span {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.48rem 0.72rem;
+  border: 1px solid rgb(215 177 92 / 25%);
+  border-radius: 999px;
+  color: #d7b15c;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hpc2-h04__destination-boundary {
+  margin-top: clamp(1.4rem, 3vw, 2.4rem);
+  text-align: center;
+}
+
+.hpc2-h04__destination-boundary p {
+  max-width: 50rem;
+  margin: 0 auto;
+  color: rgb(237 246 255 / 48%);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
 .hpc2-entry-icon,
 .hpc2-runtime-icon {
   width: 2.25rem;
@@ -793,7 +1084,9 @@
   .hpc2-h02__evidence-grid,
   .hpc2-h03__heading,
   .hpc2-h03__fragmentation,
-  .hpc2-h03__transition {
+  .hpc2-h03__transition,
+  .hpc2-h04__heading,
+  .hpc2-h04__ask-reservation {
     grid-template-columns: 1fr;
   }
 
@@ -823,6 +1116,15 @@
 
   .hpc2-lens-card:last-child {
     grid-column: 1 / -1;
+  }
+
+  .hpc2-h04__heading .public-eyebrow {
+    margin-bottom: calc(clamp(1.5rem, 5vw, 5rem) * -0.48);
+  }
+
+  .hpc2-runtime-cycle,
+  .hpc2-h04__value-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -938,6 +1240,30 @@
   .hpc2-h03__category-stages li {
     grid-template-columns: 1fr;
     gap: 0.45rem;
+  }
+
+  .hpc2-h04__heading {
+    gap: 1.35rem;
+  }
+
+  .hpc2-h04__heading .public-eyebrow {
+    margin-bottom: 0;
+  }
+
+  .hpc2-h04__heading .public-title {
+    font-size: clamp(2.5rem, 11vw, 3.8rem);
+  }
+
+  .hpc2-runtime-cycle,
+  .hpc2-h04__value-architecture > header,
+  .hpc2-h04__value-grid,
+  .hpc2-h04__boundaries {
+    grid-template-columns: 1fr;
+  }
+
+  .hpc2-runtime-cycle li,
+  .hpc2-h04__value-grid article {
+    min-height: 11rem;
   }
 
   .hpc2-runtime-figure img {

@@ -133,6 +133,44 @@ const publicExperience = Object.freeze({
       bridge: 'Self-discovery is where many people begin. Reality Navigation is what comes next.',
       boundary: 'The full category comparison and the Human Reading Systems research remain in their dedicated explanations.'
     },
+    phiosRuntime: {
+      eyebrow: 'PHI OS Runtime',
+      title: 'The intelligence is not one model. It is an architecture.',
+      lead: 'PHI OS keeps a changing reality connected from reconstruction and reading through bounded navigation, action, outcome and review.',
+      figureCaption: 'Governed PHI OS Runtime Cycle',
+      stagesLabel: 'Eight-stage PHI OS runtime cycle',
+      stages: {
+        input: { label: 'Input', copy: 'Begin with a question or a changing situation—not an automatic conclusion.' },
+        realityModel: { label: 'Reality Model', copy: 'Reconstruct events, relationships, constraints, evidence and unknowns as distinct components.' },
+        reading: { label: 'Reading', copy: 'Organize what is observed, experienced, derived and projected without collapsing their authority.' },
+        navigation: { label: 'Navigation', copy: 'Form bounded options, constraints and signals. The system does not choose for you.' },
+        action: { label: 'Action', copy: 'A human or authorized professional chooses what is actually carried into Reality.' },
+        outcome: { label: 'Outcome', copy: 'Record what happened after action instead of treating advice as the result.' },
+        review: { label: 'Review', copy: 'Compare expectation with outcome while conflicts, limits and unknowns remain visible.' },
+        continuity: { label: 'Continuity', copy: 'Let the next reading begin from the changed Reality—not from a blank conversation.' }
+      },
+      valuesEyebrow: 'What changes the category',
+      valuesTitle: 'Keep what people value. Keep each authority bounded.',
+      values: {
+        resolution: { label: 'Reality Resolution', copy: 'Turn confusion into a structured representation without pretending every layer has equal authority.' },
+        personalization: { label: 'Governed Personalization', copy: 'Make the experience personally relevant without manufacturing certainty.' },
+        navigation: { label: 'Navigation', copy: 'Move from understanding into bounded choices, constraints, signals and action.' },
+        continuity: { label: 'Continuity', copy: 'Compare Reality versions and learn from outcome instead of restarting from zero.' }
+      },
+      boundaries: {
+        readout: { label: 'Reading remains bounded', copy: 'A readout does not create diagnosis, professional judgment or a navigation decision.' },
+        navigation: { label: 'Navigation is not command', copy: 'Options remain multiple and the decision remains human or belongs to an authorized professional.' },
+        outcome: { label: 'Outcome becomes new evidence', copy: 'What happened can change the next reading, but it does not retroactively prove the earlier reading was true.' },
+        persistence: { label: 'Continuity is governed', copy: 'Public explanation creates no case and writes no persistent state; consent and data governance remain independent.' }
+      },
+      ask: {
+        eyebrow: 'Ask PHI OS · Contextual position reserved',
+        title: 'A question may begin here after its Homepage entry is independently accepted.',
+        copy: 'Ask PHI OS remains question-scoped and grounded: no generic chat authority, no persistent case, no automatic Method execution and no forced Reality Journey.',
+        state: 'Not active · Pending CKA'
+      },
+      destinationBoundary: 'The complete system architecture and interpretation boundaries remain in the dedicated PHI OS system explanation.'
+    },
     value: {
       eyebrow: 'What PHI OS helps you see',
       title: 'A difficult situation is usually more than one isolated question.',

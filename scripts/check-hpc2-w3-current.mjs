@@ -25,6 +25,9 @@ const paths = Object.freeze({
   w4Contract: 'content/web/homepage/hpc2/contracts/hpc2-w4-many-lenses-category-transition-contract-v1.json',
   w4Evidence: 'content/web/homepage/hpc2/evidence/hpc2-w4-many-lenses-category-transition-audit-v1.json',
   w4Freeze: 'content/web/homepage/hpc2/freeze/hpc2-w4-many-lenses-category-transition-freeze-v1.json',
+  w5Contract: 'content/web/homepage/hpc2/contracts/hpc2-w5-phios-runtime-composition-contract-v1.json',
+  w5Evidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-phios-runtime-composition-audit-v1.json',
+  w5Freeze: 'content/web/homepage/hpc2/freeze/hpc2-w5-phios-runtime-composition-freeze-v1.json',
   index: 'index.html',
   css: 'assets/css/hpc2-pre-home-visuals.css',
   runtime: 'assets/js/pages/home-production.js',
@@ -42,6 +45,9 @@ const freeze = read(paths.freeze);
 const w4Contract = read(paths.w4Contract);
 const w4Evidence = read(paths.w4Evidence);
 const w4Freeze = read(paths.w4Freeze);
+const w5Contract = read(paths.w5Contract);
+const w5Evidence = read(paths.w5Evidence);
+const w5Freeze = read(paths.w5Freeze);
 const pkg = read(paths.package);
 const html = text(paths.index);
 const css = text(paths.css);
@@ -60,11 +66,16 @@ assert.equal(w4Contract.predecessorProtection.h01ChangedByW4, false);
 assert.equal(w4Contract.predecessorProtection.h02ChangedByW4, false);
 assert.equal(w4Evidence.implementationObservations.h02MarkupUnchangedFromW3, true);
 assert.equal(w4Freeze.structuralFreeze.h02MarkupSha256, w4Contract.predecessorProtection.h02MarkupSha256);
+assert.equal(w5Contract.predecessorAuthority.w4ContractSha256, sha256(paths.w4Contract));
+assert.equal(w5Contract.predecessorAuthority.w4FreezeSha256, sha256(paths.w4Freeze));
+assert.equal(w5Evidence.implementationObservations.h02MarkupUnchangedFromW3, true);
+assert.equal(w5Freeze.structuralFreeze.h02MarkupSha256, w4Contract.predecessorProtection.h02MarkupSha256);
 
 assert.equal(count(html, /data-hpc2-scene="H01"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H02"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H03"/g), 1);
-for (let scene = 4; scene <= 9; scene += 1) {
+assert.equal(count(html, /data-hpc2-scene="H04"/g), 1);
+for (let scene = 5; scene <= 9; scene += 1) {
   assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} was implemented before its owner work`);
 }
 
@@ -96,15 +107,17 @@ for (const [key, expected] of Object.entries(contract.copy['zh-Hans'])) assert.e
 assert.equal(acceptance.humanAcceptance.claimed, false);
 assert.equal(acceptance.browserAcceptance.claimed, false);
 assert.equal(acceptance.counts.humanDecisionsCreated, 0);
-assert.equal(w4Contract.successorBoundary.humanVisualAcceptanceClaimed, false);
-assert.equal(w4Contract.successorBoundary.browserAcceptanceClaimed, false);
-assert.equal(/href=["']\/reality\/?["']/.test(html), false, 'W4 must not activate /reality/');
+assert.equal(w5Contract.successorBoundary.humanVisualAcceptanceClaimed, false);
+assert.equal(w5Contract.successorBoundary.browserAcceptanceClaimed, false);
+assert.equal(/href=["']\/reality\/?["']/.test(html), false, 'W5 must not activate /reality/');
 
 assert.equal(pkg.scripts['check:hpc2-w3-frozen'], 'node scripts/check-hpc2-w3.mjs');
 assert.equal(pkg.scripts['check:hpc2-w3'], 'node scripts/check-hpc2-w3-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4.mjs');
+assert.equal(pkg.scripts['check:hpc2-w4-frozen'], 'node scripts/check-hpc2-w4.mjs');
+assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5.mjs');
 
 console.log('HPC2-W3 current successor: ACCEPTED');
 console.log('  frozen H01/H02 preserved byte-for-byte at scene scope; immutable W3 evidence preserved');
-console.log('  additive H03 is governed by HPC2-W4; H04-H09 and /reality/ remain inactive');
+console.log('  additive H03/H04 are governed by HPC2-W4/W5; H05-H09 and /reality/ remain inactive');
 console.log('  W3 Human/browser acceptance remains pending; no decision fabricated');

@@ -28,6 +28,9 @@ const paths = Object.freeze({
   w4Contract: 'content/web/homepage/hpc2/contracts/hpc2-w4-many-lenses-category-transition-contract-v1.json',
   w4Evidence: 'content/web/homepage/hpc2/evidence/hpc2-w4-many-lenses-category-transition-audit-v1.json',
   w4Freeze: 'content/web/homepage/hpc2/freeze/hpc2-w4-many-lenses-category-transition-freeze-v1.json',
+  w5Contract: 'content/web/homepage/hpc2/contracts/hpc2-w5-phios-runtime-composition-contract-v1.json',
+  w5Evidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-phios-runtime-composition-audit-v1.json',
+  w5Freeze: 'content/web/homepage/hpc2/freeze/hpc2-w5-phios-runtime-composition-freeze-v1.json',
   index: 'index.html',
   css: 'assets/css/hpc2-pre-home-visuals.css',
   runtime: 'assets/js/pages/home-production.js',
@@ -49,6 +52,9 @@ const w3Freeze = read(paths.w3Freeze);
 const w4Contract = read(paths.w4Contract);
 const w4Evidence = read(paths.w4Evidence);
 const w4Freeze = read(paths.w4Freeze);
+const w5Contract = read(paths.w5Contract);
+const w5Evidence = read(paths.w5Evidence);
+const w5Freeze = read(paths.w5Freeze);
 const pkg = read(paths.package);
 const html = text(paths.index);
 const css = text(paths.css);
@@ -73,6 +79,10 @@ assert.equal(w4Contract.predecessorAuthority.w3ContractSha256, sha256(paths.w3Co
 assert.equal(w4Contract.predecessorAuthority.w3FreezeSha256, sha256(paths.w3Freeze));
 assert.equal(w4Evidence.implementationObservations.h01MarkupUnchangedFromW2, true);
 assert.equal(w4Freeze.structuralFreeze.h01MarkupSha256, w3Contract.predecessorProtection.h01MarkupSha256);
+assert.equal(w5Contract.predecessorAuthority.w4ContractSha256, sha256(paths.w4Contract));
+assert.equal(w5Contract.predecessorAuthority.w4FreezeSha256, sha256(paths.w4Freeze));
+assert.equal(w5Evidence.implementationObservations.h01MarkupUnchangedFromW2, true);
+assert.equal(w5Freeze.structuralFreeze.h01MarkupSha256, w3Contract.predecessorProtection.h01MarkupSha256);
 
 const expectedW2ConsumerSnapshots = {
   'index.html': 'c30e0fb9d5f17f9325b383c43a7040b6bb66e42146ad0865873b75199f308ebc',
@@ -87,7 +97,8 @@ assert.deepEqual(Object.fromEntries(w3Evidence.baselineSnapshots.map(record => [
 assert.equal(count(html, /data-hpc2-scene="H01"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H02"/g), 1);
 assert.equal(count(html, /data-hpc2-scene="H03"/g), 1);
-for (let scene = 4; scene <= 9; scene += 1) {
+assert.equal(count(html, /data-hpc2-scene="H04"/g), 1);
+for (let scene = 5; scene <= 9; scene += 1) {
   assert.equal(count(html, new RegExp(`data-hpc2-scene="H0${scene}"`, 'g')), 0, `H0${scene} was implemented before its owner work`);
 }
 const h01Html = sceneMarkup(html, 'H01');
@@ -130,9 +141,11 @@ assert.equal(pkg.scripts['check:hpc2-w2-frozen'], 'node scripts/check-hpc2-w2.mj
 assert.equal(pkg.scripts['check:hpc2-w2'], 'node scripts/check-hpc2-w2-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w3-frozen'], 'node scripts/check-hpc2-w3.mjs');
 assert.equal(pkg.scripts['check:hpc2-w3'], 'node scripts/check-hpc2-w3-current.mjs');
-assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4.mjs');
+assert.equal(pkg.scripts['check:hpc2-w4-frozen'], 'node scripts/check-hpc2-w4.mjs');
+assert.equal(pkg.scripts['check:hpc2-w4'], 'node scripts/check-hpc2-w4-current.mjs');
+assert.equal(pkg.scripts['check:hpc2-w5'], 'node scripts/check-hpc2-w5.mjs');
 
 console.log('HPC2-W2 current successor: ACCEPTED');
 console.log('  frozen H01 preserved byte-for-byte at scene scope; immutable W2 evidence preserved');
-console.log('  additive H02/H03 are governed by HPC2-W3/W4; H04-H09 and /reality/ remain inactive');
+console.log('  additive H02-H04 are governed by HPC2-W3/W4/W5; H05-H09 and /reality/ remain inactive');
 console.log('  W2 Human/browser acceptance remains pending; no decision fabricated');

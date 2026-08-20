@@ -133,6 +133,44 @@ const publicExperience = Object.freeze({
       bridge: '许多人从自我发现开始。现实导航，是接下来的那一步。',
       boundary: '完整的类别比较与 Human Reading Systems 研究，继续留在各自的专门说明中。'
     },
+    phiosRuntime: {
+      eyebrow: 'PHI OS 运行循环',
+      title: 'PHI OS 的智能不是一个模型，而是一套架构。',
+      lead: 'PHI OS 让一个持续变化的现实，从重建与读取，经过有边界的导航、行动、结果与复盘，始终保持连接。',
+      figureCaption: '受治理的 PHI OS 运行循环',
+      stagesLabel: 'PHI OS 八阶段运行循环',
+      stages: {
+        input: { label: '输入', copy: '从一个问题或正在变化的处境开始，而不是从自动结论开始。' },
+        realityModel: { label: '现实模型', copy: '把事件、关系、限制、证据与未知重建为彼此分明的组成部分。' },
+        reading: { label: '读取', copy: '整理已观察、亲身体验、推导与投射，同时不混淆它们的权威边界。' },
+        navigation: { label: '导航', copy: '形成有边界的选项、限制与讯号；系统不会替你选择。' },
+        action: { label: '行动', copy: '由人或获授权的专业人员选择真正带入现实的行动。' },
+        outcome: { label: '结果', copy: '记录行动以后实际发生了什么，而不是把建议本身当成结果。' },
+        review: { label: '复盘', copy: '比较预期与结果，同时让冲突、限制与未知保持可见。' },
+        continuity: { label: '连续性', copy: '让下一次读取从已经改变的现实开始，而不是从一段空白对话重新开始。' }
+      },
+      valuesEyebrow: '什么真正改变类别',
+      valuesTitle: '保留人们重视的价值，同时让每一种权威保持边界。',
+      values: {
+        resolution: { label: '现实解析', copy: '把混乱转成结构化呈现，同时不假装每一层都拥有相同权威。' },
+        personalization: { label: '受治理的个性化', copy: '让体验与个人高度相关，但不制造虚假的确定感。' },
+        navigation: { label: '导航', copy: '从理解进入有边界的选择、限制、讯号与行动。' },
+        continuity: { label: '连续性', copy: '比较现实版本并从结果学习，而不是每一次从零开始。' }
+      },
+      boundaries: {
+        readout: { label: '读取保持边界', copy: 'Readout 不会创造诊断、专业判断或导航决定。' },
+        navigation: { label: '导航不是命令', copy: '选项必须保持多个，决定仍属于当事人或获授权的专业人员。' },
+        outcome: { label: '结果成为新证据', copy: '实际发生的结果可以改变下一次读取，但不会倒过来证明先前读取必然正确。' },
+        persistence: { label: '连续性受治理', copy: '公开说明不会建立案例或写入持久状态；同意与数据治理继续保持独立。' }
+      },
+      ask: {
+        eyebrow: 'Ask PHI OS · 情境入口位置已保留',
+        title: '当 Homepage 入口独立通过验收后，一个问题可以从这里开始。',
+        copy: 'Ask PHI OS 继续限定于问题并以知识为依据：没有通用聊天权威，不建立持久案例，不自动执行 Method，也不强制进入 Reality Journey。',
+        state: '尚未启用 · 等待 CKA'
+      },
+      destinationBoundary: '完整的系统架构与解释边界，继续留在专门的 PHI OS 系统说明中。'
+    },
     value: {
       eyebrow: 'PHI OS 帮助你看见什么',
       title: '一个困难处境，通常不只是一个孤立问题。',

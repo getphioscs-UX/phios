@@ -21,6 +21,9 @@ const w3Freeze = read('content/web/homepage/hpc2/freeze/hpc2-w3-one-reality-comp
 const w4Contract = read('content/web/homepage/hpc2/contracts/hpc2-w4-many-lenses-category-transition-contract-v1.json');
 const w4Evidence = read('content/web/homepage/hpc2/evidence/hpc2-w4-many-lenses-category-transition-audit-v1.json');
 const w4Freeze = read('content/web/homepage/hpc2/freeze/hpc2-w4-many-lenses-category-transition-freeze-v1.json');
+const w5Contract = read('content/web/homepage/hpc2/contracts/hpc2-w5-phios-runtime-composition-contract-v1.json');
+const w5Evidence = read('content/web/homepage/hpc2/evidence/hpc2-w5-phios-runtime-composition-audit-v1.json');
+const w5Freeze = read('content/web/homepage/hpc2/freeze/hpc2-w5-phios-runtime-composition-freeze-v1.json');
 const index = fs.readFileSync('index.html', 'utf8');
 const home = fs.readFileSync('assets/js/pages/home-production.js', 'utf8');
 const data = fs.readFileSync('assets/js/web-production/public-surface-data.js', 'utf8');
@@ -115,11 +118,24 @@ assert.equal(w4Evidence.implementationObservations.h02MarkupUnchangedFromW3, tru
 assert.deepEqual(w4Evidence.implementationObservations.sceneMarkers, { h01: 1, h02: 1, h03: 1, h04ThroughH09: 0 });
 assert.equal(w4Freeze.preservedBoundaries.h04H09Implemented, false);
 assert.equal(w4Freeze.preservedBoundaries.realityCandidateRouteActivated, false);
+assert.equal(w5Contract.predecessorAuthority.w4FreezeSha256, digest('content/web/homepage/hpc2/freeze/hpc2-w4-many-lenses-category-transition-freeze-v1.json'));
+assert.equal(w5Contract.figureAsset.assetCode, 'FIG-056');
+assert.equal(w5Contract.figureAsset.existingResolverReused, true);
+assert.equal(w5Contract.figureAsset.secondResolverCreated, false);
+assert.equal(w5Evidence.implementationObservations.h01MarkupUnchangedFromW2, true);
+assert.equal(w5Evidence.implementationObservations.h02MarkupUnchangedFromW3, true);
+assert.equal(w5Evidence.implementationObservations.h03MarkupUnchangedFromW4, true);
+assert.deepEqual(w5Evidence.implementationObservations.sceneMarkers, { h01: 1, h02: 1, h03: 1, h04: 1, h05ThroughH09: 0 });
+assert.equal(w5Freeze.preservedBoundaries.h05H09Implemented, false);
+assert.equal(w5Freeze.preservedBoundaries.askHomepageConsumerCompleted, false);
+assert.equal(w5Freeze.preservedBoundaries.realityCandidateRouteActivated, false);
 assert.ok(index.includes('data-hpc2-scene="H02"'));
 assert.ok(index.includes('data-hpc2-figure="FIG-054"'));
 assert.ok(index.includes('data-hpc2-scene="H03"'));
 assert.ok(index.includes('data-hpc2-figure="FIG-055"'));
-for (let scene = 4; scene <= 9; scene += 1) assert.equal(index.includes(`data-hpc2-scene="H0${scene}"`), false);
+assert.ok(index.includes('data-hpc2-scene="H04"'));
+assert.ok(index.includes('data-hpc2-figure="FIG-056"'));
+for (let scene = 5; scene <= 9; scene += 1) assert.equal(index.includes(`data-hpc2-scene="H0${scene}"`), false);
 
 assert.equal(human.records.length, 16);
 assert.ok(human.records.every(record => ['PENDING', 'ACCEPTED', 'REVISION_REQUIRED'].includes(record.decision)));
@@ -134,6 +150,6 @@ if (finalReadiness.state === 'HPC2_PRE_READY') {
   assert.ok(browser.matrix.every(record => record.decision === 'ACCEPTED'));
 }
 
-console.log('✓ HPC2-PRE current successor passed: frozen visual authority preserved; W2 H01, W3 H02 and W4 H03 consumer drift is explicitly additive and structurally governed.');
+console.log('✓ HPC2-PRE current successor passed: frozen visual authority preserved; W2 H01, W3 H02, W4 H03 and W5 H04 consumer drift is explicitly additive and structurally governed.');
 console.log(`✓ Current truth state: ${finalReadiness.state}; critical Human Accepted ${accepted}/16; Remote Verified ${remote}/16; historical PRE browser matrix ${browser.matrix.filter(record => record.decision === 'ACCEPTED').length}/6.`);
-console.log('✓ Single resolver preserved; H04-H09 and /reality/ remain independently gated.');
+console.log('✓ Single resolver preserved; H05-H09, Ask consumer activation and /reality/ remain independently gated.');
