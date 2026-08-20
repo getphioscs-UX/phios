@@ -128,9 +128,17 @@ for (const item of freeze.frozenOutputs) {
 
 const pkg = read('package.json');
 assert.equal(pkg.scripts['check:hpc2-p0'], 'node scripts/check-hpc2-p0.mjs');
-assert.equal(pkg.scripts['check:hpc2'], 'npm run check:hpc2-pre-ready && npm run check:hpc2-p0');
+assert.ok(
+  pkg.scripts['check:hpc2'].startsWith('npm run check:hpc2-pre-ready && npm run check:hpc2-p0'),
+  'check:hpc2 must preserve the HPC2-PRE → HPC2-P0 prefix'
+);
+assert.ok(pkg.scripts['check:hpc2'].includes('npm run check:hpc2-w0'), 'check:hpc2 must include the additive HPC2-W0 successor');
 assert.equal(pkg.scripts['check:bfr-h-current'], 'node scripts/check-bfr-h-current.mjs');
-assert.equal(pkg.scripts['check:bfr-h'], 'npm run check:client-surface-invariants && npm run check:bfr-h-current && npm run check:hpc2-p0');
+assert.ok(
+  pkg.scripts['check:bfr-h'].startsWith('npm run check:client-surface-invariants && npm run check:bfr-h-current && npm run check:hpc2-p0'),
+  'check:bfr-h must preserve the invariant → current BFR-H → HPC2-P0 prefix'
+);
+assert.ok(pkg.scripts['check:bfr-h'].includes('npm run check:hpc2-w0'), 'check:bfr-h must include the additive HPC2-W0 successor');
 
 console.log('✓ HPC2-P0 Homepage Capability Intake passed: 13 requirements, BFR-H7 10/10, H0 Homepage lineage 14/14.');
 console.log('✓ Current baseline remains explicit: ACTIVE 9, PARTIAL 3, MISSING ASK_PHIOS 1; no silent promotion.');
