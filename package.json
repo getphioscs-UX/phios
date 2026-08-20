@@ -1152,9 +1152,10 @@
     "check:bfr-h-part-a": "npm run check:client-surface-invariants && node scripts/check-bfr-h-part-a.mjs ALL",
     "check:hpc2-p0": "node scripts/check-hpc2-p0.mjs",
     "check:hpc2-w0": "node scripts/check-hpc2-w0.mjs",
-    "check:hpc2": "npm run check:hpc2-pre-ready && npm run check:hpc2-p0 && npm run check:hpc2-w0",
+    "check:hpc2-w1": "node scripts/check-hpc2-w1.mjs",
+    "check:hpc2": "npm run check:hpc2-pre-ready && npm run check:hpc2-p0 && npm run check:hpc2-w0 && npm run check:hpc2-w1",
     "check:bfr-h-current": "node scripts/check-bfr-h-current.mjs",
-    "check:bfr-h": "npm run check:client-surface-invariants && npm run check:bfr-h-current && npm run check:hpc2-p0 && npm run check:hpc2-w0",
+    "check:bfr-h": "npm run check:client-surface-invariants && npm run check:bfr-h-current && npm run check:hpc2-p0 && npm run check:hpc2-w0 && npm run check:hpc2-w1",
     "check:bfa-batch2": "node scripts/check-bfa-batch2-real-production.mjs",
     "check:bfa-purity": "node scripts/check-bfa-public-article-purity-repair.mjs",
     "check:ir-w0": "node scripts/check-ir-w0-baseline-audit.mjs",
@@ -1308,9 +1309,7 @@
     "hpc2-pre:r2-verify-critical": "node scripts/hpc2-pre/reconcile-r2-remote.mjs --critical",
     "hpc2-pre:accept-critical": "node scripts/hpc2-pre/accept-critical-assets.mjs",
     "hpc2-pre:accept-browser": "node scripts/hpc2-pre/accept-browser.mjs",
-    "hpc2-pre:refresh-status": "node scripts/hpc2-pre/refresh-status.mjs",
-    "check:logo": "node scripts/check-phios-logo-system.mjs",
-    "logo:r2-verify": "node scripts/branding/reconcile-logo-assets.mjs"
+    "hpc2-pre:refresh-status": "node scripts/hpc2-pre/refresh-status.mjs"
   },
   "type": "module",
   "dependencies": {
