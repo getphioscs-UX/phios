@@ -13,6 +13,7 @@ import {
 const booksRoot = document.querySelector('[data-wpr-home-books]');
 const visualsRoot = document.querySelector('[data-wpr-home-visuals]');
 const knowledgePulse = document.querySelector('[data-wpr-home-knowledge-pulse]');
+const heroScene = document.querySelector('[data-hpc2-scene="H01"]');
 const heroRoot = document.querySelector('[data-hpc2-hero="HERO-001"]');
 const FIVE_VOLUME_FIGURE = 'FIG-001';
 const HOMEPAGE_SUCCESSOR_FIGURES = Object.freeze(['FIG-054', 'FIG-055', 'FIG-056', 'FIG-057']);
@@ -119,6 +120,11 @@ async function render() {
     ]);
 
     const heroRendered = await renderAssetTarget(heroRoot, 'HERO-001', locale, visualRegistry);
+    if (heroScene) {
+      heroScene.dataset.hpc2SceneState = heroRendered
+        ? 'H01_PRODUCTION_COMPOSED_REMOTE_VERIFIED_ASSET_RENDERED'
+        : 'H01_FAIL_CLOSED_HERO_ASSET_NOT_RENDERED';
+    }
 
     booksRoot.innerHTML = (await Promise.all(
       booksRegistry.books
@@ -149,6 +155,7 @@ async function render() {
     booksRoot.innerHTML = `<p class="wpr-production-state">${escapeHtml(t('discover.production.sourceUnavailable'))}</p>`;
     if (visualsRoot) visualsRoot.innerHTML = '';
     if (heroRoot) heroRoot.replaceChildren();
+    if (heroScene) heroScene.dataset.hpc2SceneState = 'H01_FAIL_CLOSED_HOME_SOURCE_ERROR';
     document.documentElement.dataset.hpc2HomeVisualError = error?.message || 'HPC2_PRE_HOME_VISUAL_ERROR';
   }
 }

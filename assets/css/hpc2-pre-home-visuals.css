@@ -1,12 +1,26 @@
-/* HPC2-PRE visual-readiness successor. This adds governed asset slots to the
-   existing homepage; it does not define the final HPC2 narrative or 9-scene DOM. */
+/* HPC2-PRE visual readiness plus the additive HPC2-W2 H01 composition.
+   H02-H09 remain owned by later composition steps. */
+.hpc2-h01 {
+  position: relative;
+  isolation: isolate;
+  min-height: 94svh;
+  padding: 0;
+  overflow: hidden;
+  background: #0a0d12;
+  color: #fff;
+}
+
+.hpc2-h01::before {
+  display: none;
+}
+
 .hpc2-hero-layout {
   position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
+  z-index: 2;
+  display: flex;
+  min-height: inherit;
+  align-items: flex-end;
+  padding-block: clamp(6.5rem, 13svh, 10rem) clamp(4rem, 9svh, 7rem);
 }
 
 .hpc2-hero-visual,
@@ -17,11 +31,11 @@
 }
 
 .hpc2-hero-visual {
-  aspect-ratio: 16 / 9;
+  position: absolute;
+  z-index: -2;
+  inset: 0;
   overflow: hidden;
-  border-radius: clamp(1.1rem, 2vw, 1.8rem);
-  background: color-mix(in srgb, var(--surface, #fff) 80%, transparent);
-  box-shadow: 0 24px 70px rgb(10 19 35 / 14%);
+  background: #0a0d12;
 }
 
 .hpc2-hero-visual:empty,
@@ -44,6 +58,95 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+}
+
+.hpc2-h01__readability {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(5 8 13 / 86%) 0%, rgb(5 8 13 / 67%) 36%, rgb(5 8 13 / 22%) 68%, rgb(5 8 13 / 8%) 100%),
+    linear-gradient(0deg, rgb(5 8 13 / 72%) 0%, transparent 52%),
+    linear-gradient(180deg, rgb(5 8 13 / 38%) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+.hpc2-h01 .discover-hero__copy {
+  width: min(100%, 64rem);
+  max-width: none;
+}
+
+.hpc2-h01__brand,
+.hpc2-h01__platform,
+.hpc2-h01__principles {
+  margin: 0;
+  color: #fff;
+}
+
+.hpc2-h01__brand {
+  font-size: clamp(0.86rem, 1.15vw, 1rem);
+  font-weight: 650;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.hpc2-h01__platform {
+  margin-top: 0.55rem;
+  color: rgb(255 255 255 / 78%);
+  font-size: clamp(0.9rem, 1.3vw, 1.08rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.hpc2-h01__title {
+  max-width: 14ch;
+  margin-top: clamp(1.35rem, 3svh, 2.4rem);
+  color: #fff;
+  font-size: clamp(3rem, 7.2vw, 7.4rem);
+  line-height: 0.96;
+  text-shadow: 0 3px 28px rgb(0 0 0 / 34%);
+}
+
+.hpc2-h01__title span {
+  display: block;
+}
+
+.hpc2-h01__title span + span {
+  margin-top: 0.12em;
+  color: rgb(255 255 255 / 82%);
+}
+
+.hpc2-h01__principles {
+  margin-top: clamp(1.4rem, 3svh, 2.2rem);
+  color: rgb(255 255 255 / 78%);
+  font-size: clamp(0.82rem, 1.2vw, 0.98rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hpc2-h01__actions {
+  margin-top: clamp(1.5rem, 3.5svh, 2.5rem);
+}
+
+.hpc2-h01__actions .public-button {
+  min-width: min(100%, 13.5rem);
+  border-color: rgb(255 255 255 / 76%);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 16%);
+}
+
+.hpc2-h01__secondary {
+  border-color: rgb(255 255 255 / 48%);
+  background: rgb(5 8 13 / 24%);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.hpc2-h01__secondary:hover,
+.hpc2-h01__secondary:focus-visible {
+  border-color: #fff;
+  background: rgb(5 8 13 / 42%);
 }
 
 .hpc2-entry-icon,
@@ -95,23 +198,44 @@
 }
 
 @media (max-width: 900px) {
-  .hpc2-hero-layout {
-    grid-template-columns: 1fr;
+  .hpc2-h01 {
+    min-height: 92svh;
   }
 
-  .hpc2-hero-visual {
-    width: min(100%, 48rem);
+  .hpc2-h01__readability {
+    background:
+      linear-gradient(90deg, rgb(5 8 13 / 82%) 0%, rgb(5 8 13 / 54%) 62%, rgb(5 8 13 / 18%) 100%),
+      linear-gradient(0deg, rgb(5 8 13 / 78%) 0%, transparent 62%),
+      linear-gradient(180deg, rgb(5 8 13 / 42%) 0%, transparent 30%);
   }
 }
 
 @media (max-width: 600px) {
   .hpc2-hero-layout {
-    gap: 1.5rem;
+    padding-block: 6.5rem 3.5rem;
   }
 
-  .hpc2-hero-visual,
   .hpc2-section-figure--wide {
     border-radius: 1rem;
+  }
+
+  .hpc2-h01__title {
+    max-width: 11ch;
+    font-size: clamp(2.8rem, 13vw, 4.7rem);
+  }
+
+  .hpc2-h01__principles {
+    letter-spacing: 0.11em;
+  }
+
+  .hpc2-h01__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: min(100%, 22rem);
+  }
+
+  .hpc2-h01__actions .public-button {
+    width: 100%;
   }
 
   .hpc2-runtime-figure img {
