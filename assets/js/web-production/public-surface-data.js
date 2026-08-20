@@ -57,6 +57,33 @@ export async function loadFigureRegistry() {
   return registry;
 }
 
+const CLIENT_VISUAL_REGISTRY_V12 = '/content/web-production/registries/client-visual-asset-registry-v1.2.json';
+
+export async function loadClientVisualRegistry() {
+  const registry = await fetchJson(CLIENT_VISUAL_REGISTRY_V12);
+  if (registry?.schemaVersion !== '1.2.0' || !Array.isArray(registry.assets) || registry.assets.length !== 152) {
+    throw new Error('HPC2_PRE_VISUAL_REGISTRY_INVALID');
+  }
+  return registry;
+}
+
+export function clientVisualRecord(registry, assetCode) {
+  return registry?.assets?.find(record => record.sequence === assetCode || record.assetCode === assetCode) || null;
+}
+
+export async function resolveCanonicalVisual(assetCode, options = {}) {
+  try {
+    const resolved = await resolvePublicAssetForWeb(assetCode, {
+      surface: options.surface || 'HOME',
+      locale: options.locale || null,
+      variant: options.variant || 'ORIGINAL'
+    });
+    return resolved.renderable ? resolved : null;
+  } catch {
+    return null;
+  }
+}
+
 export function bookRoute(bookId) {
   return BOOK_ROUTE_BY_ID[bookId] || '/books/';
 }

@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0.0",
+  "manifestCode": "HPC2-PRE-V2-EXECUTION-MANIFEST-v1",
+  "executionBaselineCommit": "f78aec2bc74b772494ba6f2831c010da31f83fb4",
+  "masterWorkStep": "docs/web/HPC2-PRE-HOMEPAGE-VISUAL-READINESS-PACK-v2.md",
+  "repositoryImplementationStatus": "COMPLETE_FAIL_CLOSED",
+  "currentFinalReadinessState": "BLOCKED",
+  "reasonFinalReadinessBlocked": [
+    "16/16 TL critical visual acceptance incomplete",
+    "6/6 deployed browser visual acceptance incomplete"
+  ],
+  "steps": [
+    {
+      "work": "HPC2-PRE-0",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "hpc2-pre-baseline-reconciliation-v1.json",
+        "hpc2-pre-authority-boundary-v1.json",
+        "hpc2-pre-hero-figure-canonical-contract-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-1",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "PENDING",
+      "outputs": [
+        "r2-actual-object-inventory-v1.json",
+        "r2-public-asset-registry-reconciliation-v1.json",
+        "hero-figure-format-drift-report-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-2",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "hpc2-pre-visual-registry-rjx-reconciliation-v1.json",
+        "../../web-production/registries/client-visual-asset-registry-v1.2.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-3",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "homepage-visual-slot-coverage-audit-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-4",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "hpc2-pre-critical-asset-registry-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-5",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "hpc2-pre-icon-family-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-6",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "PENDING",
+      "outputs": [
+        "hpc2-pre-canonical-asset-brief-v1.json",
+        "review/critical-assets-human-review-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-7",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "hpc2-pre-production-format-responsive-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-8",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "PENDING",
+      "outputs": [
+        "hpc2-pre-r2-upload-remote-verification-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-9",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "PENDING",
+      "outputs": [
+        "hpc2-pre-public-delivery-activation-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-10",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "hpc2-pre-homepage-consumption-v1.json",
+        "evidence/homepage-consumer-static-audit-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-11",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "NOT_REQUIRED_OR_REPOSITORY_ONLY",
+      "outputs": [
+        "hpc2-pre-rjx-route-safety-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-12",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "PENDING",
+      "outputs": [
+        "hpc2-pre-browser-visual-acceptance-v1.json",
+        "review/browser-visual-review-v1.json"
+      ]
+    },
+    {
+      "work": "HPC2-PRE-13",
+      "repositoryImplementation": "COMPLETE",
+      "externalOrHumanGate": "PENDING",
+      "outputs": [
+        "hpc2-pre-final-readiness-v1.json",
+        "acceptance/hpc2-pre-repository-readiness-acceptance-v1.json",
+        "freeze/hpc2-pre-v2-freeze-v1.json"
+      ]
+    }
+  ],
+  "nextCommandSequence": [
+    "npm run check:hpc2-pre",
+    "$env:PHIOS_PUBLIC_ASSET_BASE_URL=\"https://<verified-public-asset-base>\"",
+    "npm run hpc2-pre:r2-verify",
+    "npm run hpc2-pre:accept-critical -- --reviewer TL --confirm",
+    "deploy",
+    "npm run hpc2-pre:accept-browser -- --reviewer TL --deployment-url https://<deployed-homepage-origin> --confirm",
+    "npm run hpc2-pre:refresh-status",
+    "npm run check:hpc2-pre-ready"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "work": "HPC2-PRE-7",
+  "schemaVersion": "1.0.0",
+  "executionBaselineCommit": "f78aec2bc74b772494ba6f2831c010da31f83fb4",
+  "formats": {
+    "Hero": "WebP canonical master",
+    "Figure": "SVG canonical master",
+    "Book Covers": "existing canonical WebP",
+    "Icons": "SVG",
+    "Illustration": "WebP",
+    "Instruction": "WebP / SVG according to asset type"
+  },
+  "figureFallback": {
+    "canonical": "SVG",
+    "derivedFallback": "WEBP_OPTIONAL",
+    "derivedFallbackCanonical": false,
+    "registrationRequired": true
+  },
+  "heroResponsive": {
+    "sameCanonicalAssetAllowed": true,
+    "registeredMobileVariantAllowed": true,
+    "unrelatedMobileArtForbidden": true
+  },
+  "delivery": {
+    "hero001": "eager/high",
+    "aboveFoldFigure": "priority_by_composition",
+    "belowFold": "lazy",
+    "dimensionsDeclared": true,
+    "svgViewBoxRequired": true,
+    "masterPngServedDirectly": false
+  },
+  "status": "FORMAT_RESPONSIVE_CONTRACT_FROZEN"
+}

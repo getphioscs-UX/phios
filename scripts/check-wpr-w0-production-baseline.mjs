@@ -17,6 +17,16 @@ for (const [p,d] of Object.entries(audit.sourceDigests)) {
     assert.equal(successor.after.architecture,'five-volume-15-part');
     continue;
   }
+  if (p === 'content/registry/public-assets.json' && sha256(p) !== d) {
+    const successor=readJson('content/web-production/reconciliation/wpr-w7-w10-hpc2-pre-successor-v1.json');
+    const current=readJson(p);
+    assert.equal(successor.historicalWprEvidencePreserved,true);
+    assert.equal(successor.successorRules.registryMayAddConcreteMembersWithoutRewritingHistoricalObservation,true);
+    assert.equal(current.registry_version,'1.2.0');
+    assert.equal(current.bucket,'phios-public-assets');
+    assert.equal(current.resolution_policy.fail_closed,true);
+    continue;
+  }
   assert.equal(sha256(p),d,`WPR-W0 baseline source drift: ${p}`);
 }
 const routes=readJson(`${b}/wpr-route-baseline-v1.json`); assert.ok(routes.rootHtmlRouteCount>=40); assert.equal(routes.observations.routeAuthorityCurrentlyCentralized,false);

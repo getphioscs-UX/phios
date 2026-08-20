@@ -82,6 +82,10 @@ export function resolvePublicAsset({ registry, assetCode, publicBaseUrl, variant
   return {
     assetCode: asset.asset_code,
     category: asset.category,
+    family: asset.family ?? null,
+    objectKey,
+    contentType: asset.content_type ?? null,
+    canonicalFormat: asset.format ?? null,
     variant: selected.code,
     surface,
     locale,

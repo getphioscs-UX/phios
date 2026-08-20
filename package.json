@@ -1296,7 +1296,15 @@
     "check:bfa-batch5-meta": "node scripts/check-bfa-batch5-public-meta-intro-repair.mjs && node scripts/check-article-editorial-revisions.mjs",
     "article:revision:apply": "node scripts/apply-article-editorial-revisions.mjs",
     "check:article-revisions": "node scripts/check-article-editorial-revisions.mjs",
-    "check:bfa-batch6": "node scripts/check-bfa-batch6-composition-production.mjs"
+    "check:bfa-batch6": "node scripts/check-bfa-batch6-composition-production.mjs",
+    "check:hpc2-pre": "node scripts/check-hpc2-pre.mjs",
+    "check:hpc2-pre-ready": "node scripts/check-hpc2-pre-ready.mjs",
+    "check:hpc2-pre-r2-live": "node scripts/hpc2-pre/reconcile-r2-remote.mjs --dry-run --critical",
+    "hpc2-pre:r2-verify": "node scripts/hpc2-pre/reconcile-r2-remote.mjs --all",
+    "hpc2-pre:r2-verify-critical": "node scripts/hpc2-pre/reconcile-r2-remote.mjs --critical",
+    "hpc2-pre:accept-critical": "node scripts/hpc2-pre/accept-critical-assets.mjs",
+    "hpc2-pre:accept-browser": "node scripts/hpc2-pre/accept-browser.mjs",
+    "hpc2-pre:refresh-status": "node scripts/hpc2-pre/refresh-status.mjs"
   },
   "type": "module",
   "dependencies": {

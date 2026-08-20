@@ -1,0 +1,120 @@
+/* HPC2-PRE visual-readiness successor. This adds governed asset slots to the
+   existing homepage; it does not define the final HPC2 narrative or 9-scene DOM. */
+.hpc2-hero-layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.hpc2-hero-visual,
+.hpc2-section-figure,
+.hpc2-runtime-figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.hpc2-hero-visual {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: clamp(1.1rem, 2vw, 1.8rem);
+  background: color-mix(in srgb, var(--surface, #fff) 80%, transparent);
+  box-shadow: 0 24px 70px rgb(10 19 35 / 14%);
+}
+
+.hpc2-hero-visual:empty,
+.hpc2-section-figure:empty,
+.hpc2-runtime-figure:empty,
+.hpc2-entry-icon:empty,
+.hpc2-runtime-icon:empty {
+  display: none;
+}
+
+.hpc2-hero-visual img,
+.hpc2-section-figure img,
+.hpc2-runtime-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hpc2-hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hpc2-entry-icon,
+.hpc2-runtime-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.hpc2-entry-icon:not(:empty),
+.hpc2-runtime-icon:not(:empty) {
+  display: inline-flex;
+}
+
+.hpc2-entry-icon img,
+.hpc2-runtime-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.hpc2-section-figure--wide {
+  max-width: 1120px;
+  margin: clamp(1.4rem, 3vw, 2.6rem) auto;
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+
+.hpc2-runtime-figure:not(:empty) {
+  margin: 0.85rem 0 1rem;
+  padding: 0.35rem;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, currentColor 3%, transparent);
+}
+
+.hpc2-runtime-figure img {
+  max-height: 15rem;
+  object-fit: contain;
+}
+
+.hpc2-visual-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .hpc2-hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hpc2-hero-visual {
+    width: min(100%, 48rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .hpc2-hero-layout {
+    gap: 1.5rem;
+  }
+
+  .hpc2-hero-visual,
+  .hpc2-section-figure--wide {
+    border-radius: 1rem;
+  }
+
+  .hpc2-runtime-figure img {
+    max-height: 12rem;
+  }
+}

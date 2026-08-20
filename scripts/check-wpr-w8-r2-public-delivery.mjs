@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
 import {readJson,readText,exists,BASELINE,W8,PUBLIC_ASSET_REGISTRY} from './lib/web-production/wpr-assets-v1.mjs';
 const d=readJson(W8), registry=readJson(PUBLIC_ASSET_REGISTRY);
+const successor=readJson('content/web-production/reconciliation/wpr-w7-w10-hpc2-pre-successor-v1.json');
 assert.equal(d.baselineCommit,BASELINE); assert.equal(d.work,'WPR-W8'); assert.equal(d.bucket,'phios-public-assets'); assert.equal(d.deliveryModel.environmentVariable,'PHIOS_PUBLIC_ASSET_BASE_URL'); assert.equal(d.deliveryModel.browserEndpoint,'/api/public-asset-config');
-assert.equal(d.currentCanonicalObservation.publicBaseUrl,registry.public_base_url); assert.equal(d.currentCanonicalObservation.publicDomainStatus,registry.public_domain_status); assert.equal(d.currentCanonicalObservation.registeredAssets,registry.assets.length); assert.equal(d.currentCanonicalObservation.productionDeliveryActivated,false);
+// WPR-W8 is frozen historical evidence. HPC2-PRE is an additive successor and must not rewrite that observation.
+assert.equal(d.currentCanonicalObservation.publicBaseUrl,null); assert.equal(d.currentCanonicalObservation.publicDomainStatus,'verification_required'); assert.equal(d.currentCanonicalObservation.registeredAssets,successor.historicalRegisteredAssetObservation); assert.equal(d.currentCanonicalObservation.productionDeliveryActivated,false);
+assert.equal(successor.historicalWprEvidencePreserved,true); assert.equal(successor.successorRules.registryMayAddConcreteMembersWithoutRewritingHistoricalObservation,true); assert.ok(registry.assets.length>=successor.preHpc2CurrentRegistryRecordCount); assert.equal(registry.registry_version,'1.2.0'); assert.equal(registry.bucket,'phios-public-assets'); assert.equal(registry.resolution_policy.environment_variable,'PHIOS_PUBLIC_ASSET_BASE_URL'); assert.equal(registry.resolution_policy.fail_closed,true);
 assert.equal(d.verification.liveCheckerInAggregate,false); assert.equal(d.verification.upstreamVerificationMustRemainAuthoritative,true); for(const value of Object.values(d.failClosed)) assert.equal(value,true);
 assert.ok(exists(d.deliveryModel.serverConfigBridge)); const src=readText(d.deliveryModel.serverConfigBridge); for(const marker of ['PHIOS_PUBLIC_ASSET_BASE_URL','PUBLIC_ASSET_BASE_URL_UNAVAILABLE','503','Cache-Control']) assert.ok(src.includes(marker),marker); assert.ok(!/SECRET|ACCESS_KEY|API_KEY/.test(src.replace('PHIOS_PUBLIC_ASSET_BASE_URL','')),'public config bridge must not expose credentials');
 for(const value of Object.values(d.nonActivation)) assert.equal(value,false);
-console.log('✓ WPR-W8 R2/Public Base URL Delivery Contract passed.');
-console.log('✓ Public config bridge fails closed until PHIOS_PUBLIC_ASSET_BASE_URL is configured; no R2 mutation or upstream verification promotion occurs.');
+console.log('✓ WPR-W8 historical R2/Public Base URL Delivery Contract passed with additive HPC2-PRE successor reconciliation.');
+console.log(`✓ Historical observation remains ${d.currentCanonicalObservation.registeredAssets} records; current registry may expand to ${registry.assets.length} concrete members without rewriting frozen WPR evidence.`);
