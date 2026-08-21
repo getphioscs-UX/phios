@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-WPR-PF8-PRIVACY-ACCEPTANCE-v2.0.0",
+  "work": "WPR-PF8",
+  "baselineCommit": "4e1ae1fe55725f7968acee6109dfa840069eb805",
+  "status": "PRIVACY_ACCEPTED_REPOSITORY_POLICY_SCOPE_WPR26_SUCCESSOR",
+  "accepted": true,
+  "predecessor": {
+    "path": "content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf8-privacy-acceptance-v1.json",
+    "sha256": "ac3c4bfa89a9c03b60942935823d74f41cd7fe5352a239b91201740378d1e84e",
+    "mutated": false
+  },
+  "authoritySource": "content/web-production/registries/wpr-response-security-registry-v1.json",
+  "audienceLayers": [
+    "PUBLIC",
+    "CUSTOMER",
+    "PROFESSIONAL"
+  ],
+  "gates": {
+    "cacheIsolation": true,
+    "hydrationIsolation": true,
+    "storageIsolation": true,
+    "responseHeaders": true,
+    "privateNoindex": true,
+    "dataPurposeBounded": true,
+    "consentPreserved": true,
+    "professionalAuthorizationRequired": true
+  },
+  "privateHeaderRoutes": [
+    "/reality-dashboard*",
+    "/personal-runtime*",
+    "/professional-workspace*",
+    "/professional-reports*",
+    "/account*",
+    "/checkout*"
+  ],
+  "legacyRouteReconciliation": {
+    "/reality-entry*": "COMPATIBILITY_SHELL_TO_PUBLIC_REALITY_ROUTE_NOT_WPR26_PRIVATE_RESPONSE_ROUTE",
+    "/academy-lesson*": "NOT_REGISTERED_AS_WPR26_PRIVATE_RESPONSE_ROUTE"
+  },
+  "authorityBoundary": {
+    "wpr26PrivacyAuthorityChanged": false,
+    "rdgPrivacyAuthorityChanged": false,
+    "routePrivacyInferredFromAudienceOnly": false,
+    "legacyRouteHeaderRequirementPreservedWithoutAuthority": false
+  },
+  "evidence": [
+    "_headers",
+    "content/web-production/registries/wpr-response-security-registry-v1.json",
+    "content/web-production/contracts/wpr-privacy-security-production-v1.json",
+    "scripts/check-wpr-w26-privacy-security-production.mjs",
+    "content/governance/reality-data-governance/freeze/rdg-w16-w20-access-privacy-rights-freeze-v1.json"
+  ]
+}

@@ -9,7 +9,7 @@ const digest = file => crypto.createHash('sha256')
   .digest('hex');
 
 const BASE = '021007b80fa20739a726fb28bcda4a9369af48e4';
-const RECONCILIATION = 'docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v2.json';
+const RECONCILIATION = 'docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v3.json';
 
 const contract = readJson('content/web-production/contracts/wpr-freeze-contract-v1.json');
 assert.equal(contract.work, 'WPR-W30');
@@ -25,10 +25,10 @@ assert.equal(w29.accepted, true);
 assert.equal(w29.fullProductionPromotion, false);
 
 const reconciliation = readJson(RECONCILIATION);
-assert.equal(reconciliation.reconciliationCode, 'PHI-OS-WPR-W30-POST-FREEZE-CHECKER-RECONCILIATION-v2');
+assert.equal(reconciliation.reconciliationCode, 'PHI-OS-WPR-W30-POST-FREEZE-CHECKER-RECONCILIATION-v3');
 assert.equal(reconciliation.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
-assert.equal(reconciliation.reconciliationVersion, '2.0.0');
-assert.equal(reconciliation.predecessorReconciliation, 'docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v1.json');
+assert.equal(reconciliation.reconciliationVersion, '3.0.0');
+assert.equal(reconciliation.predecessorReconciliation, 'docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v2.json');
 assert.equal(reconciliation.baselineCommit, BASE);
 assert.equal(reconciliation.wprFreezeRewritten, false);
 assert.equal(reconciliation.checkerManifestRewritten, false);
@@ -68,7 +68,8 @@ const pkg = readJson('package.json');
 assert.equal(pkg.scripts['check:wpr-w30'], 'node scripts/check-wpr-w30-freeze.mjs');
 assert.equal(pkg.scripts['check:wpr-freeze'], 'npm run check:wpr-w30');
 assert.equal(pkg.scripts['check:wpr-final'], 'npm run check:wpr');
-assert.equal(pkg.scripts['check:web-production-runtime'], 'npm run check:wpr-final');
+assert.equal(pkg.scripts['check:web-production-runtime'], 'npm run check:book-w1-web-production-runtime');
+assert.equal(pkg.scripts['check:book-w1-web-production-runtime'], 'node scripts/check-book-w1f-wpr-successor-current.mjs');
 
 const post = String(pkg.scripts.postcheck)
   .split('&&')

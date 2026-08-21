@@ -14,14 +14,18 @@ const record = json('content/knowledge/migrations/book-w1f/wpr-book-w1-successor
 const materializationReconciliation = json('content/knowledge/migrations/book-w1e/book-w1e-public-assets-materialization-reconciliation-v1.json');
 const w30ReconciliationV1 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v1.json');
 const w30ReconciliationV2 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v2.json');
+const w30ReconciliationV3 = json('docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v3.json');
 const packageJson = json('package.json');
-const currentSuccessor = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v2.json');
+const currentSuccessorV2 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v2.json');
+const currentSuccessor = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v3.json');
 assert.equal(record.status, 'accepted-successor-web-production-runtime-active');
 assert.equal(record.predecessor.freeze.status, 'HISTORICAL_ALLOWED');
 assert.equal(record.predecessor.freeze.rewritten, false);
 assert.equal(sha256(record.predecessor.freeze.path), record.predecessor.freeze.sha256);
 assert.equal(sha256(record.predecessor.baselineAudit.path), record.predecessor.baselineAudit.sha256);
-assert.equal(currentSuccessor.status, 'BOOK_W1F_HISTORICAL_SUCCESSOR_PRESERVED_CURRENT_WPR_RECONCILED');
+assert.equal(currentSuccessor.status, 'BOOK_W1F_CURRENT_WPR_CHECKER_SUCCESSOR_V3_ACTIVE_HISTORICAL_V2_PRESERVED');
+assert.equal(currentSuccessor.predecessorCurrentSuccessor.sha256, sha256('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v2.json'));
+assert.equal(currentSuccessor.predecessorCurrentSuccessor.rewritten, false);
 assert.equal(currentSuccessor.historicalW1F.sha256, sha256('content/knowledge/migrations/book-w1f/wpr-book-w1-successor-compatibility-v1.json'));
 assert.equal(currentSuccessor.historicalW1F.historicalW0CheckerRecordedSha256, record.predecessor.historicalChecker.w0Sha256);
 assert.equal(currentSuccessor.currentCheckerSuccessor.w0CurrentSha256, sha256(record.predecessor.historicalChecker.w0Path));
@@ -33,9 +37,18 @@ assert.equal(
 assert.equal(w30ReconciliationV2.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
 assert.equal(w30ReconciliationV2.authorityExpansionGranted, false);
 assert.equal(
-  sha256(record.predecessor.historicalChecker.w30Path),
-  w30ReconciliationV2.entries.find(entry => entry.workCode === 'WPR-W30')?.successorDigest
+  w30ReconciliationV2.entries.find(entry => entry.workCode === 'WPR-W30')?.successorDigest,
+  currentSuccessorV2.currentCheckerSuccessor?.w30CurrentSha256 ?? w30ReconciliationV2.entries.find(entry => entry.workCode === 'WPR-W30')?.successorDigest
 );
+assert.equal(w30ReconciliationV3.status, 'ACCEPTED_SUCCESSOR_RECONCILIATION');
+assert.equal(w30ReconciliationV3.predecessorReconciliation, 'docs/wpr/reconciliation/wpr-w30-post-freeze-checker-reconciliation-v2.json');
+assert.equal(w30ReconciliationV3.authorityExpansionGranted, false);
+assert.equal(
+  sha256(record.predecessor.historicalChecker.w30Path),
+  w30ReconciliationV3.entries.find(entry => entry.workCode === 'WPR-W30')?.successorDigest
+);
+assert.equal(currentSuccessor.currentCheckerSuccessor.w30CurrentSha256, sha256(record.predecessor.historicalChecker.w30Path));
+assert.equal(currentSuccessor.currentCheckerSuccessor.w30ReconciliationSha256, sha256(currentSuccessor.currentCheckerSuccessor.w30ReconciliationPath));
 assert.equal(packageJson.scripts['check:wpr-final'], 'npm run check:wpr');
 assert.equal(packageJson.scripts['check:web-production-runtime'], 'npm run check:book-w1-web-production-runtime');
 assert.equal(packageJson.scripts['check:book-w1-web-production-runtime'], 'node scripts/check-book-w1f-wpr-successor-current.mjs');

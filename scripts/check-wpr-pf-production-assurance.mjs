@@ -17,7 +17,7 @@ const j = {
   pf5:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf5-route-acceptance-v1.json',
   pf6:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf6-asset-acceptance-v1.json',
   pf7:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf7-composition-acceptance-v1.json',
-  pf8:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf8-privacy-acceptance-v1.json',
+  pf8:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf8-privacy-acceptance-v2.json',
   pf9:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf9-terminology-acceptance-v1.json',
   pf10:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf10-runtime-consumption-acceptance-v1.json',
   pf11:'content/web-production/post-freeze/wpr-pf/acceptance/wpr-pf11-visual-coverage-acceptance-v1.json',
@@ -81,8 +81,11 @@ run(7,()=>{
 });
 
 run(8,()=>{
-  const out=read(j.pf8), manifest=read('content/web-production/surface-production-manifest-v1.json'); assert.equal(out.status,'PRIVACY_ACCEPTED_REPOSITORY_POLICY_SCOPE'); for(const v of Object.values(out.gates)) assert.equal(v,true); const heads=text('_headers');
-  for(const p of ['/account*','/reality-dashboard*','/personal-runtime*','/professional-workspace*','/professional-reports*','/reality-entry*']){assert.ok(heads.includes(p),`headers missing ${p}`); const block=heads.slice(heads.indexOf(p),heads.indexOf(p)+300); assert.match(block,/no-store/); assert.match(block,/noindex/);}
+  const out=read(j.pf8), manifest=read('content/web-production/surface-production-manifest-v1.json'); assert.equal(out.status,'PRIVACY_ACCEPTED_REPOSITORY_POLICY_SCOPE_WPR26_SUCCESSOR'); for(const v of Object.values(out.gates)) assert.equal(v,true);
+  const historicalFreeze=read('content/web-production/post-freeze/wpr-pf/freeze/wpr-pf-repository-production-assurance-freeze-v1.json');const predecessorFrozen=historicalFreeze.artifacts.find(item=>item.path===out.predecessor.path);assert.ok(predecessorFrozen,'PF8 predecessor must remain in the repository-assurance freeze');assert.equal(out.predecessor.mutated,false);assert.equal(out.predecessor.sha256,predecessorFrozen.sha256);assert.equal(sha(out.predecessor.path),out.predecessor.sha256);
+  const responseSecurity=read(out.authoritySource);for(const p of out.privateHeaderRoutes)assert.ok(responseSecurity.privateNoStoreRoutes.includes(p),`PF8 route lacks WPR-W26 authority: ${p}`);for(const value of Object.values(out.authorityBoundary))assert.equal(value,false);
+  const heads=text('_headers'); for(const p of out.privateHeaderRoutes){assert.ok(heads.includes(p),`headers missing ${p}`); const block=heads.slice(heads.indexOf(p),heads.indexOf(p)+300); assert.match(block,/no-store/); assert.match(block,/noindex/);}
+  assert.equal(out.legacyRouteReconciliation['/reality-entry*'],'COMPATIBILITY_SHELL_TO_PUBLIC_REALITY_ROUTE_NOT_WPR26_PRIVATE_RESPONSE_ROUTE');assert.equal(out.legacyRouteReconciliation['/academy-lesson*'],'NOT_REGISTERED_AS_WPR26_PRIVATE_RESPONSE_ROUTE');
   assert.ok(manifest.surfaces.some(s=>s.audience.includes('PUBLIC'))); assert.ok(manifest.surfaces.some(s=>s.audience.includes('CUSTOMER'))); assert.ok(manifest.surfaces.some(s=>s.audience.includes('PROFESSIONAL'))); const pro=manifest.surfaces.find(s=>s.surfaceCode==='PROFESSIONAL_WORKSPACE'); assert.deepEqual(pro.audience,['PROFESSIONAL']);
   const w26=text('scripts/check-wpr-w26-privacy-security-production.mjs'); assert.match(w26,/no-store/i); assert.match(w26,/professional/i);
 });

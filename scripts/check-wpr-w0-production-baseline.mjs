@@ -27,6 +27,16 @@ for (const [p,d] of Object.entries(audit.sourceDigests)) {
     assert.equal(current.resolution_policy.fail_closed,true);
     continue;
   }
+  if (p === 'content/knowledge/public/authority/published-knowledge-authority.json' && sha256(p) !== d) {
+    const successor=readJson('content/web-production/reconciliation/bfr-h-part-a-7e2b212-current-source-successor-v1.json');
+    const transition=successor.reconciledDrifts.find(item=>item.path===p);
+    assert.equal(successor.status,'ADDITIVE_CURRENT_SOURCE_SUCCESSOR_ACTIVE_HISTORICAL_EVIDENCE_PRESERVED');
+    assert.equal(successor.historicalArtifactsRewritten,false);
+    assert.ok(transition,'WPR-W0 Published Knowledge successor reconciliation required');
+    assert.equal(transition.currentSha256,sha256(p).replace('sha256:',''),'WPR-W0 Published Knowledge current successor drift');
+    assert.equal(transition.authorityRecreated,false);
+    continue;
+  }
   assert.equal(sha256(p),d,`WPR-W0 baseline source drift: ${p}`);
 }
 const routes=readJson(`${b}/wpr-route-baseline-v1.json`); assert.ok(routes.rootHtmlRouteCount>=40); assert.equal(routes.observations.routeAuthorityCurrentlyCentralized,false);
