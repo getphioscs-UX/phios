@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "PHI-OS-POC-A10-LIVE-RESPONSIVE-MATRIX-CONTRACT-v1.0.0",
+  "work": "POC-A10",
+  "productionOrigin": "https://phios-github.pages.dev",
+  "status": "LIVE_BROWSER_182_STATE_REVALIDATION_CONTRACTED_NOT_YET_ACCEPTED",
+  "authority": {
+    "responsiveMatrix": {
+      "path": "content/web-production/bfr-responsive-production-matrix-v1.json",
+      "sha256": "2bc7988c84604a35e13ed97cd45f504b47884fc42af8e9fe5a4d59ef737292f8",
+      "schemaVersion": "PHI-OS-BFR-H12-RESPONSIVE-PRODUCTION-MATRIX-v1.0.0",
+      "rewritten": false
+    },
+    "responsiveCriteria": {
+      "path": "content/web-production/bfr-responsive-acceptance-v1.json",
+      "sha256": "ecadcd7cdd4fc5775bcfba11c24692b2210b6f7647fc8c1be864ca7bab2b39bb",
+      "schemaVersion": "PHI-OS-BFR-H13-RESPONSIVE-ACCEPTANCE-v1.0.0",
+      "rewritten": false
+    },
+    "frontendSurfaceInventory": {
+      "path": "content/web-production/bfr-frontend-surface-inventory-v1.json",
+      "sha256": "c07b22a2734620782b03dc940b32b6741a97f7404116f25a6f229f56cc1e0794",
+      "rewritten": false
+    }
+  },
+  "matrix": {
+    "viewports": [
+      360,
+      390,
+      430,
+      768,
+      1024,
+      1280,
+      1440
+    ],
+    "locales": [
+      "en",
+      "zh-Hans"
+    ],
+    "surfaceFamilies": [
+      "Homepage",
+      "Library",
+      "Book",
+      "Article",
+      "Figure",
+      "Ask PHI OS",
+      "Academy",
+      "Journey",
+      "Personal Runtime",
+      "Financial",
+      "Customer Workspace",
+      "Professional Workspace",
+      "Report"
+    ],
+    "primaryCheckCount": 182,
+    "requiredStateCount": 182
+  },
+  "representativeSurfaces": [
+    {
+      "surfaceFamily": "Homepage",
+      "route": "/",
+      "expectedSelector": "#discover-main"
+    },
+    {
+      "surfaceFamily": "Library",
+      "route": "/library",
+      "expectedSelector": "#library-main"
+    },
+    {
+      "surfaceFamily": "Book",
+      "route": "/books/reality-formation",
+      "expectedSelector": "#book-main[data-book-id=\"book-1\"]"
+    },
+    {
+      "surfaceFamily": "Article",
+      "route": "/articles/why-phi-os-is-needed",
+      "expectedSelector": "#article-main[data-article-slug=\"why-phi-os-is-needed\"]"
+    },
+    {
+      "surfaceFamily": "Figure",
+      "route": "/figure?id=FIG-001",
+      "expectedSelector": "#figure-main"
+    },
+    {
+      "surfaceFamily": "Ask PHI OS",
+      "route": "/knowledge-search",
+      "expectedSelector": "#knowledge-search-main[data-cka-root]"
+    },
+    {
+      "surfaceFamily": "Academy",
+      "route": "/academy",
+      "expectedSelector": "#academy-main"
+    },
+    {
+      "surfaceFamily": "Journey",
+      "route": "/reality-journey",
+      "expectedSelector": "#journey-main"
+    },
+    {
+      "surfaceFamily": "Personal Runtime",
+      "route": "/personal-runtime",
+      "expectedSelector": "#personal-runtime-main"
+    },
+    {
+      "surfaceFamily": "Financial",
+      "route": "/professional/financial",
+      "expectedSelector": "#financial-main"
+    },
+    {
+      "surfaceFamily": "Customer Workspace",
+      "route": "/reality-dashboard",
+      "expectedSelector": "#dashboard-main"
+    },
+    {
+      "surfaceFamily": "Professional Workspace",
+      "route": "/professional-workspace",
+      "expectedSelector": "#professionalWorkspaceMain"
+    },
+    {
+      "surfaceFamily": "Report",
+      "route": "/professional-reports",
+      "expectedSelector": "#reportMain"
+    }
+  ],
+  "criteria": [
+    "NO_HORIZONTAL_OVERFLOW",
+    "NO_CLIPPED_NAVIGATION",
+    "NO_BROKEN_GRID",
+    "NO_UNREADABLE_CARDS",
+    "NO_OVERLAPPING_TEXT",
+    "NO_FIXED_WIDTH_DESKTOP_LEAKAGE",
+    "NO_UNUSABLE_FORM_CONTROLS",
+    "NO_VISUAL_ASSET_OVERFLOW",
+    "NO_BROKEN_LOCALE_WRAPPING"
+  ],
+  "execution": {
+    "engine": "CHROMIUM_CDP_SINGLE_RUNNER",
+    "headlessRequired": true,
+    "localeSelection": "QUERY_PARAMETER_LANG_PRECEDENCE",
+    "viewportHeightsByWidth": {
+      "360": 800,
+      "390": 844,
+      "430": 932,
+      "768": 1024,
+      "1024": 768,
+      "1280": 800,
+      "1440": 900
+    },
+    "horizontalTolerancePx": 3,
+    "defaultSettleMs": 700,
+    "failureScreenshots": "OPTIONAL_LOCAL_EVIDENCE",
+    "browserEvidenceRequired": true,
+    "screenshotsAloneAreNotAcceptance": true
+  },
+  "acceptanceGate": {
+    "all182StatesMustPass": true,
+    "allNineResponsiveCriteriaMustPassPerState": true,
+    "representativeSurfaceSelectorMustResolve": true,
+    "productionDocumentHttp200Required": true,
+    "localeDocumentLangMustMatch": true,
+    "partialMatrixAcceptanceAllowed": false,
+    "humanVisualAcceptanceInferred": false
+  },
+  "authorityBoundary": {
+    "browserRevalidationOnly": true,
+    "createsBreakpointAuthority": false,
+    "mutatesPds": false,
+    "rewritesHistoricalBfrMatrix": false,
+    "rewritesResponsiveCriteria": false,
+    "humanVisualAcceptance": false,
+    "accessibilityAcceptance": false,
+    "deploymentShaAcceptance": false,
+    "customDomainAcceptance": false,
+    "globalProductionAccepted": false
+  },
+  "executionBaselineCommit": "85a6cf68a4ca458142f20b8a5bd9a58f3e7b8d67",
+  "candidateBinding": {
+    "mode": "EXPLICIT_FULL_SHA_AT_LIVE_EXECUTION",
+    "requires40CharacterSha": true,
+    "cloudflareDeploymentShaReconciliation": "POC_A2_EXTERNAL_EVIDENCE_REQUIRED"
+  },
+  "artifacts": {
+    "runner": "scripts/run-poc-a10-live-responsive-matrix.mjs",
+    "checker": "scripts/check-poc-a10-live-responsive-matrix.mjs",
+    "evidence": "content/web-production/production-operational-closure/poc-a/evidence/poc-a10-live-responsive-matrix-evidence-v1.json",
+    "acceptance": "content/web-production/production-operational-closure/poc-a/acceptance/poc-a10-live-responsive-matrix-acceptance-v1.json"
+  }
+}

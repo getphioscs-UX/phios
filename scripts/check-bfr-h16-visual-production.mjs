@@ -1,22 +1,29 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { runBfrHCriticalRegressions } from './check-bfr-h-critical-regressions.mjs';
 
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'));
 const readText = (path) => readFileSync(path, 'utf8');
 const mustExist = (path) => assert.ok(existsSync(path), `Missing evidence: ${path}`);
+const sha256 = (path) => createHash('sha256').update(readFileSync(path)).digest('hex');
 
 const h15Path = 'content/web-production/acceptance/bfr-capability-consumption-acceptance-v1.json';
 const visualAcceptancePath = 'content/web-production/acceptance/wpr-post-freeze-visual-acceptance-v1.json';
 const finalPath = 'content/web-production/acceptance/bfr-production-surface-acceptance-v1.json';
 const visualRegistryPath = 'content/web-production/registries/client-visual-asset-registry-v1.2.json';
 const publicAssetsPath = 'content/registry/public-assets.json';
+const currentPublicAssetVerificationSuccessorPath = 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json';
 
-for (const path of [h15Path, visualAcceptancePath, finalPath, visualRegistryPath, publicAssetsPath]) mustExist(path);
+for (const path of [h15Path, visualAcceptancePath, finalPath, visualRegistryPath, publicAssetsPath, currentPublicAssetVerificationSuccessorPath]) mustExist(path);
 const h15 = readJson(h15Path);
 const visualAcceptance = readJson(visualAcceptancePath);
 const finalAcceptance = readJson(finalPath);
 const visualRegistry = readJson(visualRegistryPath);
 const publicAssets = readJson(publicAssetsPath);
+const currentPublicAssetVerificationSuccessor = readJson(currentPublicAssetVerificationSuccessorPath);
+
+runBfrHCriticalRegressions();
 
 assert.equal(h15.status, 'BFR_H15_CAPABILITY_CONSUMPTION_ACCEPTED_CURRENT_SUCCESSOR');
 assert.equal(h15.summary.silentProductionRuntimeOrphanCount, 0);
@@ -118,11 +125,22 @@ const unknownLifecycle = visualRegistry.assets.filter((asset) => !['UPLOADED','P
 assert.equal(unknownLifecycle.length, 0, 'Unknown visual lifecycle creates a silent orphan');
 assert.equal(visualAcceptance.assetAccounting.silentGovernedVisualOrphanCount, 0);
 
-assert.equal(visualAcceptance.publicAssetRegistry.recordCount, publicAssets.assets.length);
+assert.equal(visualAcceptance.publicAssetRegistry.recordCount, 149);
+assert.equal(visualAcceptance.publicAssetRegistry.computedRemoteVerifiedMemberCount, 123);
+assert.equal(currentPublicAssetVerificationSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_POC_A_REMOTE_VERIFICATION_MATERIALIZATION_RECONCILED');
+assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.path, publicAssetsPath);
+assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.predecessorSha256, visualAcceptance.publicAssetRegistry.sha256);
+assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.currentSha256, sha256(publicAssetsPath));
+assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.recordCount, publicAssets.assets.length);
 assert.equal(publicAssets.assets.length, 149);
 const computedRemoteVerified = publicAssets.assets.filter((asset) => asset.verification === 'verified-remote-head-get').length;
-assert.equal(visualAcceptance.publicAssetRegistry.computedRemoteVerifiedMemberCount, computedRemoteVerified);
-assert.equal(computedRemoteVerified, 123);
+assert.equal(currentPublicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount, 10);
+assert.equal(computedRemoteVerified, visualAcceptance.publicAssetRegistry.computedRemoteVerifiedMemberCount + currentPublicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount);
+assert.equal(computedRemoteVerified, 133);
+assert.equal(currentPublicAssetVerificationSuccessor.authorityBoundary.verificationMaterializationOnly, true);
+assert.equal(currentPublicAssetVerificationSuccessor.authorityBoundary.historicalBookW1eAcceptanceRewritten, false);
+assert.equal(currentPublicAssetVerificationSuccessor.authorityBoundary.secondPublicProjectionAuthorityCreated, false);
+assert.equal(currentPublicAssetVerificationSuccessor.authorityBoundary.globalProductionAccepted, false);
 assert.equal(publicAssets.resolution_policy.fail_closed, true);
 assert.equal(publicAssets.resolution_policy.environment_variable, 'PHIOS_PUBLIC_ASSET_BASE_URL');
 assert.equal(publicAssets.resolution_policy.fallback, 'none');
