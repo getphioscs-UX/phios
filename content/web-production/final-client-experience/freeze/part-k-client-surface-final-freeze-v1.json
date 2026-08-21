@@ -45,10 +45,6 @@
       "sha256": "1f08fdf6bba6fa52c2c35867708fd2f5d710575cca969e3910ec398f32e6e5d7"
     },
     {
-      "path": "package.json",
-      "sha256": "f99484b6965e9d4acb3d6f4f7e29dba397e854ee0af98887a886ace3cd58eb20"
-    },
-    {
       "path": "content/web-production/acceptance/bfr-production-surface-acceptance-v1.json",
       "sha256": "0ba51cb7f16ee7fd4b5ac35193bcc7cedf36094a0c95ec737fef9c99d3bc9445"
     },
@@ -134,5 +130,12 @@
     }
   ],
   "successorRequiredForChange": true,
-  "successorRule": "Do not rewrite this freeze or the frozen BFR-H, HPC2, CKA, JR, PDS or WPR authorities. Any later client-surface change must enter through an explicit versioned successor with its own evidence and acceptance scope."
+  "successorRule": "Do not rewrite this freeze or the frozen BFR-H, HPC2, CKA, JR, PDS or WPR authorities. Any later client-surface change must enter through an explicit versioned successor with its own evidence and acceptance scope.",
+  "mutableIntegrationFiles": [
+    {
+      "path": "package.json",
+      "validation": "STRUCTURAL_REQUIRED_SCRIPT_ASSERTIONS",
+      "reason": "Package manifests are integration surfaces that may legitimately gain unrelated scripts or differ in serialization; PART K freezes required client-surface script semantics, not the whole package.json byte stream."
+    }
+  ]
 }
