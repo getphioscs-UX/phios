@@ -2352,3 +2352,45 @@
 .hpc2-h09__boundary { max-width: 50rem; margin: 1.1rem 0 0; color: rgb(244 241 233 / 43%); font-size: .78rem; line-height: 1.65; }
 @media (max-width: 900px) { .hpc2-h09__loop-grid { grid-template-columns: 1fr; } .hpc2-h09__figure { min-height: 18rem; } }
 @media (max-width: 600px) { .hpc2-h09 { padding-block: 4.5rem; } .hpc2-h09__actions { display: grid; } .hpc2-h09__actions .public-button { width: 100%; } }
+
+/* HPC2-W13 · Homepage subset of the existing BFR-H12–H14 responsive / locale /
+   accessibility matrix. This extends the existing Homepage CSS; it does not
+   create a second breakpoint or responsive authority. */
+.hpc2-current-anchor {
+  display: block;
+  height: 0;
+  scroll-margin-top: 5rem;
+}
+
+@media (max-width: 900px) {
+  .hpc2-hero-visual img {
+    /* Same canonical HERO-001; mobile/tablet art direction is crop only. */
+    object-position: 58% center;
+  }
+
+  .hpc2-h01 .discover-hero__copy {
+    width: min(100%, 48rem);
+  }
+}
+
+@media (max-width: 600px) {
+  .hpc2-hero-visual img {
+    object-position: 62% center;
+  }
+
+  .hpc2-h01 .discover-hero__copy {
+    width: 100%;
+  }
+}
+
+/* HPC2-W14 · The historical pre-HPC2 Homepage tail remains in source only for
+   frozen predecessor checker compatibility. It is no longer part of the
+   rendered Homepage narrative. H01–H09 are the sole public composition. */
+[data-hpc2-v8-teaser="FOUNDER"],
+section[aria-labelledby="value-title"],
+section[aria-labelledby="entries-title"],
+.wpr-production-band[aria-labelledby="wpr-platform-title"],
+.wpr-production-band[aria-labelledby="wpr-visual-title"],
+section[aria-labelledby="boundary-title"] {
+  display: none !important;
+}

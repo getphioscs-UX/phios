@@ -1356,7 +1356,12 @@
     "check:book-w1-compatibility-historical": "node scripts/check-book-w1f-compatibility.mjs && node scripts/check-book-w1f-wpr-successor.mjs",
     "check:m3a-public-experience-frozen": "node scripts/check-m3a-public-experience.mjs",
     "check:hpc2-w13": "node scripts/check-hpc2-w13.mjs",
-    "check:hpc2-w14": "node scripts/check-hpc2-w14.mjs"
+    "check:hpc2-w14": "node scripts/check-hpc2-w14.mjs",
+    "check:hpc2-cka-direct-mapping": "node scripts/check-hpc2-cka-direct-mapping.mjs",
+    "check:hpc2-cka": "npm run check:hpc2-cka-direct-mapping",
+    "check:hpc2-part-d": "npm run check:hpc2 && npm run check:hpc2-cka-direct-mapping",
+    "check:bfr-h-cka-direct-mapping": "node scripts/check-bfr-h-cka-direct-mapping.mjs",
+    "check:bfr-h-part-e": "npm run check:bfr-h && npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping"
   },
   "type": "module",
   "dependencies": {

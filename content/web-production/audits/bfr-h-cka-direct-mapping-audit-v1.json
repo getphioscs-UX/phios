@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H-CKA-DIRECT-MAPPING-AUDIT-v1.0.0",
+  "part": "PART-E",
+  "baselineCommit": "64ead9a9addf56f4f83c28736bf205cdc9380c10",
+  "findings": [
+    {
+      "subject": "Grounded Answer",
+      "finding": "BFR-H0 already records GROUNDED_ANSWER as ACTIVE and CKA-W9 explicitly reuses KAP grounded-answer ownership.",
+      "currentState": "ACTIVE"
+    },
+    {
+      "subject": "Knowledge Retrieval",
+      "finding": "BFR-H0 already records KNOWLEDGE_RETRIEVAL as ACTIVE and CKA-W8 binds it into the governed Ask retrieval pipeline.",
+      "currentState": "ACTIVE"
+    },
+    {
+      "subject": "Published Knowledge",
+      "finding": "BFR-H0 historical PARTIAL state reflected missing Homepage consumption, not missing CKA consumption; CKA-W8/W31 now consume published knowledge as grounding authority.",
+      "currentState": "ACTIVE"
+    },
+    {
+      "subject": "Related Knowledge",
+      "finding": "BFR-H0 historical PARTIAL state predated contextual integrations; CKA-W14 and current Book/Article/Figure entry wiring complete the CKA role without rewriting the old inventory.",
+      "currentState": "ACTIVE"
+    },
+    {
+      "subject": "Book / Article / Figure",
+      "finding": "Current page modules use the shared CKA contextual-entry helper; Figure is ACTIVE in the current implementation rather than NONE_BY_DESIGN.",
+      "currentState": "ACTIVE"
+    },
+    {
+      "subject": "Reality Runtime",
+      "finding": "Reality-aware Ask is server-authorized, explicitly disclosed and fail-closed when authorization is absent.",
+      "currentState": "CONDITIONAL"
+    },
+    {
+      "subject": "Account",
+      "finding": "Account continuity is hidden unless a trusted account provider returns retention-allowed data; Guest history/save is not silently persisted.",
+      "currentState": "CONDITIONAL"
+    },
+    {
+      "subject": "Journey",
+      "finding": "Journey escalation requires the governed complexity requirement plus explicit consent and does not replace a simple answer path.",
+      "currentState": "CONDITIONAL"
+    },
+    {
+      "subject": "Method Runtime",
+      "finding": "CKA exposes a handoff boundary only; Ask transport and envelopes explicitly preserve methodExecuted=false.",
+      "currentState": "NO_DIRECT_EXECUTION"
+    }
+  ],
+  "result": "PART_E_MAPPING_COMPLETE_CURRENT_CONSUMPTION_ONLY"
+}

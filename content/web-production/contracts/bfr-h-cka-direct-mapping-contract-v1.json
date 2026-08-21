@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H-CKA-DIRECT-MAPPING-CONTRACT-v1.0.0",
+  "part": "PART-E",
+  "title": "BFR-H × CKA Mapping",
+  "currentBaselineCommit": "64ead9a9addf56f4f83c28736bf205cdc9380c10",
+  "authorityInvariant": {
+    "bfrOwnsCka": false,
+    "ckaOwnsBfr": false,
+    "bfrInventoriesCapabilitiesAndSurfaces": true,
+    "ckaConsumesGovernedCapabilities": true,
+    "historicalBfrSnapshotsRewritten": false,
+    "historicalCkaAcceptanceRewritten": false
+  },
+  "allowedMappingStates": [
+    "ACTIVE",
+    "CONDITIONAL",
+    "NO_DIRECT_EXECUTION",
+    "NONE_BY_DESIGN"
+  ],
+  "mappings": [
+    {
+      "subject": "Grounded Answer",
+      "bfrKind": "BACKEND_CAPABILITY",
+      "bfrCode": "GROUNDED_ANSWER",
+      "ckaRole": "GROUNDED_ANSWER_BINDING",
+      "ckaWork": "CKA-W9",
+      "state": "ACTIVE",
+      "rule": "CKA projects the KAP grounded answer; it does not create a second answer runtime."
+    },
+    {
+      "subject": "Knowledge Retrieval",
+      "bfrKind": "BACKEND_CAPABILITY",
+      "bfrCode": "KNOWLEDGE_RETRIEVAL",
+      "ckaRole": "RETRIEVAL_PIPELINE",
+      "ckaWork": "CKA-W8",
+      "state": "ACTIVE",
+      "rule": "CKA retrieval must use governed knowledge authorities and may not answer from LLM memory alone."
+    },
+    {
+      "subject": "Published Knowledge",
+      "bfrKind": "BACKEND_CAPABILITY",
+      "bfrCode": "PUBLISHED_KNOWLEDGE",
+      "ckaRole": "PUBLISHED_OR_AUTHORIZED_KNOWLEDGE_SOURCE",
+      "ckaWork": "CKA-W8/CKA-W31",
+      "state": "ACTIVE",
+      "rule": "Published PHI OS knowledge is an active grounding authority for production Ask."
+    },
+    {
+      "subject": "Related Knowledge",
+      "bfrKind": "BACKEND_CAPABILITY",
+      "bfrCode": "RELATED_KNOWLEDGE",
+      "ckaRole": "RELATED_KNOWLEDGE",
+      "ckaWork": "CKA-W14",
+      "state": "ACTIVE",
+      "rule": "Related Knowledge cards are authority-backed and may not be invented by the client."
+    },
+    {
+      "subject": "Book",
+      "bfrKind": "FRONTEND_SURFACE",
+      "bfrCode": "INDIVIDUAL_BOOK",
+      "ckaRole": "CONTEXTUAL_ENTRY",
+      "ckaWork": "CKA-W15",
+      "state": "ACTIVE",
+      "rule": "Book pages may hand off book context to Ask PHI OS without transferring Book authority to CKA."
+    },
+    {
+      "subject": "Article",
+      "bfrKind": "FRONTEND_SURFACE",
+      "bfrCode": "ARTICLE",
+      "ckaRole": "CONTEXTUAL_ENTRY",
+      "ckaWork": "CKA-W15",
+      "state": "ACTIVE",
+      "rule": "Article pages may hand off article context to Ask PHI OS without changing publication authority."
+    },
+    {
+      "subject": "Figure",
+      "bfrKind": "FRONTEND_SURFACE",
+      "bfrCode": "FIGURE",
+      "ckaRole": "CONTEXTUAL_ENTRY",
+      "ckaWork": "CKA-W15/CKA-W32",
+      "state": "ACTIVE",
+      "allowedAlternativeState": "NONE_BY_DESIGN",
+      "rule": "Current Figure detail is CKA-enabled; a future figure class may be NONE_BY_DESIGN only when explicitly registered."
+    },
+    {
+      "subject": "Reality Runtime",
+      "bfrKind": "BACKEND_CAPABILITY",
+      "bfrCode": "REALITY_RUNTIME",
+      "ckaRole": "REALITY_AWARE_MODE",
+      "ckaWork": "CKA-W13/CKA-W20/CKA-W25/CKA-W26",
+      "state": "CONDITIONAL",
+      "conditions": [
+        "ACCOUNT",
+        "PERMISSION",
+        "PRIVACY",
+        "ENTITLEMENT",
+        "EXISTING_CASE",
+        "EXPLICIT_CONTEXT_DISCLOSURE"
+      ],
+      "rule": "CKA may consume authorized current Reality context but may not silently create or mutate canonical Reality."
+    },
+    {
+      "subject": "Account",
+      "bfrKind": "FRONTEND_SURFACE",
+      "bfrCode": "ACCOUNT",
+      "ckaRole": "HISTORY_SAVE_CONTINUITY",
+      "ckaWork": "CKA-W7/CKA-W19/CKA-W25/CKA-W26",
+      "state": "CONDITIONAL",
+      "conditions": [
+        "TRUSTED_ACCOUNT_PROVIDER",
+        "RETENTION_POLICY"
+      ],
+      "rule": "History and save are account-only; Guest Ask remains non-persistent."
+    },
+    {
+      "subject": "Journey",
+      "bfrKind": "BACKEND_CAPABILITY_AND_SURFACE",
+      "bfrCode": "REALITY_JOURNEY",
+      "ckaRole": "ESCALATION_HANDOFF",
+      "ckaWork": "CKA-W6/CKA-W21/CKA-W28",
+      "state": "CONDITIONAL",
+      "conditions": [
+        "KAP_W24_REQUIREMENT_YES",
+        "EXPLICIT_CONSENT"
+      ],
+      "rule": "Simple questions remain answers; Journey is only a governed complex-case escalation."
+    },
+    {
+      "subject": "Method Runtime",
+      "bfrKind": "BACKEND_CAPABILITY",
+      "bfrCode": "METHOD_RUNTIME",
+      "ckaRole": "METHOD_BOUNDARY",
+      "ckaWork": "CKA-W12/CKA-W26",
+      "state": "NO_DIRECT_EXECUTION",
+      "rule": "Ask PHI OS never directly executes Method Runtime; eligible users hand off to the governed Personal Runtime / MPA path."
+    }
+  ]
+}

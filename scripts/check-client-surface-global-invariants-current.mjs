@@ -21,11 +21,15 @@ const ckaW4Path = 'content/client/knowledge-ask/contracts/cka-w4-follow-up-contr
 const ckaAcceptancePath = 'content/client/knowledge-ask/acceptance/cka-w0-w4-batch-a-acceptance-v1.json';
 const invariantSuccessorPath = 'content/web-production/reconciliation/client-surface-global-invariants-cka-successor-v1.json';
 const invariantCkaBSuccessorPath = 'content/web-production/reconciliation/client-surface-global-invariants-cka-b-successor-v1.json';
+const invariantCkaCSuccessorPath = 'content/web-production/reconciliation/client-surface-global-invariants-cka-c-successor-v1.json';
+const ckaCDeltaManifestPath = 'content/client/knowledge-ask/evidence/cka-w18-w33-delta-manifest-v1.json';
+const ckaCReconciliationPath = 'content/client/knowledge-ask/reconciliation/cka-kap-phase18-client-consumption-reconciliation-v1.json';
+const ckaCProductionAcceptancePath = 'content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json';
 const ckaBDeltaManifestPath = 'content/client/knowledge-ask/evidence/cka-w5-w17-delta-manifest-v1.json';
 const ckaBCurrentSuccessorPath = 'content/client/knowledge-ask/reconciliation/cka-w5-w17-current-successor-v1.json';
 const ckaBAcceptancePath = 'content/client/knowledge-ask/acceptance/cka-w5-w17-batch-b-acceptance-v1.json';
 
-for (const rel of [contractPath, registryPath, reconciliationPath, acceptancePath, freezePath, ckaSuccessorPath, ckaW0Path, ckaW4Path, ckaAcceptancePath, invariantSuccessorPath, invariantCkaBSuccessorPath, ckaBDeltaManifestPath, ckaBCurrentSuccessorPath, ckaBAcceptancePath]) {
+for (const rel of [contractPath, registryPath, reconciliationPath, acceptancePath, freezePath, ckaSuccessorPath, ckaW0Path, ckaW4Path, ckaAcceptancePath, invariantSuccessorPath, invariantCkaBSuccessorPath, invariantCkaCSuccessorPath, ckaBDeltaManifestPath, ckaBCurrentSuccessorPath, ckaBAcceptancePath, ckaCDeltaManifestPath, ckaCReconciliationPath, ckaCProductionAcceptancePath]) {
   assert.ok(exists(rel), `${rel} missing`);
 }
 
@@ -40,6 +44,10 @@ const ckaW4 = readJson(ckaW4Path);
 const ckaAcceptance = readJson(ckaAcceptancePath);
 const invariantSuccessor = readJson(invariantSuccessorPath);
 const invariantCkaBSuccessor = readJson(invariantCkaBSuccessorPath);
+const invariantCkaCSuccessor = readJson(invariantCkaCSuccessorPath);
+const ckaCDeltaManifest = readJson(ckaCDeltaManifestPath);
+const ckaCReconciliation = readJson(ckaCReconciliationPath);
+const ckaCProductionAcceptance = readJson(ckaCProductionAcceptancePath);
 const ckaBDeltaManifest = readJson(ckaBDeltaManifestPath);
 const ckaBCurrentSuccessor = readJson(ckaBCurrentSuccessorPath);
 const ckaBAcceptance = readJson(ckaBAcceptancePath);
@@ -81,6 +89,31 @@ for (const value of Object.values(invariantCkaBSuccessor.acceptanceBoundary)) as
 assert.equal(invariantCkaBSuccessor.successorPolicy.failClosed, true);
 assert.equal(invariantCkaBSuccessor.successorPolicy.deterministic, true);
 assert.equal(invariantCkaBSuccessor.successorPolicy.duplicateAuthorityForbidden, true);
+
+assert.equal(invariantCkaCSuccessor.status, 'ACTIVE_ADDITIVE_CKA_W18_W33_SUCCESSOR_ALL_TEN_INVARIANTS_PRESERVED');
+assert.equal(invariantCkaCSuccessor.predecessor.path, invariantCkaBSuccessorPath);
+assert.equal(invariantCkaCSuccessor.predecessor.sha256, sha256(invariantCkaBSuccessorPath));
+assert.equal(invariantCkaCSuccessor.predecessor.rewritten, false);
+assert.equal(invariantCkaCSuccessor.ckaW18W33.deltaManifest.path, ckaCDeltaManifestPath);
+assert.equal(invariantCkaCSuccessor.ckaW18W33.deltaManifest.sha256, sha256(ckaCDeltaManifestPath));
+assert.equal(invariantCkaCSuccessor.ckaW18W33.reconciliation.path, ckaCReconciliationPath);
+assert.equal(invariantCkaCSuccessor.ckaW18W33.reconciliation.sha256, sha256(ckaCReconciliationPath));
+assert.equal(invariantCkaCSuccessor.ckaW18W33.productionAcceptance.path, ckaCProductionAcceptancePath);
+assert.equal(invariantCkaCSuccessor.ckaW18W33.productionAcceptance.sha256, sha256(ckaCProductionAcceptancePath));
+assert.equal(ckaCDeltaManifest.status, 'CKA_W18_W33_DELTA_READY');
+assert.equal(ckaCReconciliation.status, 'CLOSED_AT_CKA_SCOPE');
+assert.equal(ckaCReconciliation.noDuplicateAuthority, true);
+assert.equal(ckaCReconciliation.globalProductionAccepted, false);
+assert.equal(ckaCProductionAcceptance.status, 'CKA_PRODUCTION_READY');
+assert.equal(ckaCProductionAcceptance.globalProductionAccepted, false);
+assert.equal(sha256(invariantCkaCSuccessor.ckaW18W33.consumptionApi.path), invariantCkaCSuccessor.ckaW18W33.consumptionApi.sha256);
+assert.deepEqual(invariantCkaCSuccessor.preservedInvariants, Array.from({ length: 10 }, (_, i) => `INV-${String(i + 1).padStart(2, '0')}`));
+for (const value of Object.values(invariantCkaCSuccessor.authorityBoundary)) assert.equal(value, false);
+for (const value of Object.values(invariantCkaCSuccessor.acceptanceBoundary)) assert.equal(value, false);
+assert.equal(invariantCkaCSuccessor.successorPolicy.failClosed, true);
+assert.equal(invariantCkaCSuccessor.successorPolicy.duplicateAuthorityForbidden, true);
+assert.equal(invariantCkaCSuccessor.successorPolicy.currentCheckerMayRecognizeW18W33, true);
+assert.equal(invariantCkaCSuccessor.successorPolicy.frozenFoundationCheckerRewritten, false);
 
 assert.equal(contract.status, 'ACTIVE_CROSS_AUTHORITY_INVARIANT_CONTRACT');
 assert.equal(contract.authorityBoundary.upstreamContractsMutatedByThisWork, false);
@@ -253,10 +286,10 @@ assert.equal(pkg.scripts['check:client-surface-invariants-frozen'], 'node script
 assert.equal(pkg.scripts['check:client-surface-invariants'], 'node scripts/check-client-surface-global-invariants-current.mjs');
 assert.equal(pkg.scripts['check:bfr-h-invariants'], 'npm run check:client-surface-invariants');
 assert.equal(pkg.scripts['check:client-surface'], 'npm run check:client-surface-invariants');
-assert.equal(pkg.scripts['check:cka'], 'npm run check:cka-a && npm run check:cka-w5-w17 && npm run check:cka-w18-w33');
+assert.equal(pkg.scripts['check:cka'], invariantCkaCSuccessor.ckaW18W33.packageCheckCka);
 assert.equal(String(pkg.scripts.check || '').includes('check:client-surface'), false, 'Foundation invariant checker must not claim global Production acceptance.');
 
 console.log('✓ Client Surface Global Invariants INV-01–INV-10 passed.');
 console.log('✓ Existing WPR, KAP, MPA and MCD authorities are reconciled rather than duplicated.');
 console.log('✓ R2 Registry/Resolver, CKA Ask boundaries, temporary context, Method gates and guest access are enforced.');
-console.log('✓ CKA-A history and the additive CKA-B successor are reconciled; Human/browser/deployment and global Production acceptance remain unclaimed.');
+console.log('✓ CKA-A, CKA-B and CKA-W18–W33 successors are reconciled; frozen foundation evidence remains unchanged and global Production acceptance remains unclaimed.');

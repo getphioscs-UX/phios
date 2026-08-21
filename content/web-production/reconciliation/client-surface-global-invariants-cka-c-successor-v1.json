@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-CLIENT-SURFACE-GLOBAL-INVARIANTS-CKA-C-SUCCESSOR-v1.0.0",
+  "work": "CLIENT-SURFACE-INV-01-INV-10-CKA-W18-W33-SUCCESSOR",
+  "baselineCommit": "64ead9a9addf56f4f83c28736bf205cdc9380c10",
+  "status": "ACTIVE_ADDITIVE_CKA_W18_W33_SUCCESSOR_ALL_TEN_INVARIANTS_PRESERVED",
+  "predecessor": {
+    "path": "content/web-production/reconciliation/client-surface-global-invariants-cka-b-successor-v1.json",
+    "sha256": "1db19ad6568896ce9d3bd0d3cd6829da3ca8e815c4474b99c3b34bc5404cff71",
+    "rewritten": false
+  },
+  "ckaW18W33": {
+    "deltaManifest": {
+      "path": "content/client/knowledge-ask/evidence/cka-w18-w33-delta-manifest-v1.json",
+      "sha256": "be6f4e980666502057731d1a15496416e8c0edeec655316d83feb75c285888da"
+    },
+    "reconciliation": {
+      "path": "content/client/knowledge-ask/reconciliation/cka-kap-phase18-client-consumption-reconciliation-v1.json",
+      "sha256": "35e079299bdb4841dfe354cd4e91660e1c6ec22832b118307f7fc3baa7b817cd"
+    },
+    "productionAcceptance": {
+      "path": "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+      "sha256": "8184cc33daa284a96af92bb2c054c4b07238c14ec7d8dbe6c7a899a9d24a24c4",
+      "status": "CKA_PRODUCTION_READY"
+    },
+    "consumptionApi": {
+      "path": "functions/api/ask-phios-consumption.js",
+      "sha256": "d0a674d0aaaaabce1f071a368226905c1516a26cc3795e153347a17a8acc8375",
+      "transport": "POST_JSON_NO_STORE"
+    },
+    "packageCheckCka": "npm run check:cka-a && npm run check:cka-w5-w17 && npm run check:cka-w18-w33"
+  },
+  "preservedInvariants": [
+    "INV-01",
+    "INV-02",
+    "INV-03",
+    "INV-04",
+    "INV-05",
+    "INV-06",
+    "INV-07",
+    "INV-08",
+    "INV-09",
+    "INV-10"
+  ],
+  "authorityBoundary": {
+    "secondKnowledgeAuthorityCreated": false,
+    "secondAnswerRuntimeCreated": false,
+    "secondRetrievalRuntimeCreated": false,
+    "secondMethodAuthorityCreated": false,
+    "secondRealityAuthorityCreated": false,
+    "secondProfessionalAuthorityCreated": false,
+    "persistentCaseCreatedByCka": false,
+    "automaticRealityJourneyActivated": false,
+    "privateContextSilentlyConsumed": false
+  },
+  "acceptanceBoundary": {
+    "predecessorEvidenceRewritten": false,
+    "globalProductionAcceptanceClaimed": false
+  },
+  "successorPolicy": {
+    "failClosed": true,
+    "deterministic": true,
+    "duplicateAuthorityForbidden": true,
+    "currentCheckerMayRecognizeW18W33": true,
+    "frozenFoundationCheckerRewritten": false
+  }
+}
