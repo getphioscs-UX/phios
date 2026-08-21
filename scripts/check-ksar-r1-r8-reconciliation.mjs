@@ -80,11 +80,17 @@ const freeExplore=fs.readFileSync('assets/js/pages/free-explore.js','utf8');
 const library=fs.readFileSync('assets/js/pages/library.js','utf8');
 const kapAnswerAcceptance=json('content/knowledge/answer-projection/acceptance/kap-w11-w17-answer-composition-acceptance-v1.json');
 const kapGuidedSuccessor=json('content/knowledge/answer-projection/reconciliation/kap-w17-w18-guided-reading-surface-successor-v1.json');
+const hpc2CkaClientSuccessor=json('content/web-production/reconciliation/hpc2-w6-cka-client-surface-successor-v1.json');
 assert.equal(kapAnswerAcceptance.status,'ACCEPTED_ASK_PHIOS_INDEPENDENT_DETERMINISTIC_PRODUCTION');
 assert.equal(kapAnswerAcceptance.acceptance.upstreamGroundedAnswerConsumed,false);
 assert.equal(kapGuidedSuccessor.status,'ACTIVE_ADDITIVE_SURFACE_SUCCESSOR');
 assert.equal(kapGuidedSuccessor.authorizedDrift.path,'assets/js/pages/knowledge-search.js');
-assert.equal(sha(kapGuidedSuccessor.authorizedDrift.path),kapGuidedSuccessor.authorizedDrift.successorSha256);
+assert.equal(hpc2CkaClientSuccessor.currentClientSurface.path,kapGuidedSuccessor.authorizedDrift.path);
+assert.equal(sha(hpc2CkaClientSuccessor.currentClientSurface.path),hpc2CkaClientSuccessor.currentClientSurface.sha256);
+assert.equal(hpc2CkaClientSuccessor.currentClientSurface.ckaW0W4CheckerAccepted,true);
+assert.equal(hpc2CkaClientSuccessor.authorityBoundary.kapW11W17AuthorityRewritten,false);
+assert.equal(hpc2CkaClientSuccessor.authorityBoundary.knowledgeAuthorityCreated,false);
+assert.equal(hpc2CkaClientSuccessor.authorityBoundary.guidedContextActivated,false);
 assert.equal(kapGuidedSuccessor.authorityBoundary.askPhiosSemanticsChanged,false);
 assert.equal(kapGuidedSuccessor.authorityBoundary.askPhiosAiProviderActivated,false);
 assert.equal(kapGuidedSuccessor.authorityBoundary.askPhiosMethodExecutionActivated,false);
@@ -94,7 +100,13 @@ const directAskRender=knowledgeSearch.includes('render(await askPhios(');
 const guidedSuccessorAskRender=
   knowledgeSearch.includes('lastAskPayload=await askPhios(') &&
   knowledgeSearch.includes('render(lastAskPayload)');
-assert(directAskRender||guidedSuccessorAskRender,'Ask PHI OS response must be rendered directly or through the accepted KAP-W18 surface successor.');
+const hpc2CkaSuccessorAskRender=
+  knowledgeSearch.includes('const payload = await askPhios({') &&
+  knowledgeSearch.includes('renderAnswer(payload)');
+assert(
+  directAskRender||guidedSuccessorAskRender||hpc2CkaSuccessorAskRender,
+  'Ask PHI OS response must be rendered directly or through an accepted KAP/HPC2 CKA client successor.'
+);
 assert(knowledgeSearch.includes("new URLSearchParams(location.search).get('q')"));
 assert(freeExplore.includes('/knowledge-search'));
 assert(library.includes("id: 'knowledge-access'"));

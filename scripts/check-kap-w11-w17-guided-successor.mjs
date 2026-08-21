@@ -15,6 +15,8 @@ const paths = Object.freeze({
   guidedSuccessor: 'content/knowledge/answer-projection/reconciliation/kap-w17-w18-guided-reading-surface-successor-v1.json',
   historicalCkaSuccessor: 'content/web-production/reconciliation/hpc2-w5-cka-w0-w4-current-successor-v1.json',
   currentCkaSuccessor: 'content/web-production/reconciliation/hpc2-w6-cka-client-surface-successor-v1.json',
+  ckaBSuccessor: 'content/web-production/reconciliation/client-surface-global-invariants-cka-b-successor-v1.json',
+  ckaCDelta: 'content/client/knowledge-ask/evidence/cka-w18-w33-delta-manifest-v1.json',
   ckaAcceptance: 'content/client/knowledge-ask/acceptance/cka-w0-w4-batch-a-acceptance-v1.json',
   homepage: 'index.html',
   homepageRuntime: 'assets/js/pages/home-production.js'
@@ -38,10 +40,15 @@ const freeze = read(paths.freeze);
 const guidedSuccessor = read(paths.guidedSuccessor);
 const historicalCka = read(paths.historicalCkaSuccessor);
 const currentCka = read(paths.currentCkaSuccessor);
+const ckaB = read(paths.ckaBSuccessor);
+const ckaBDelta = read(ckaB.ckaB.deltaManifest.path);
+const ckaCDelta = read(paths.ckaCDelta);
 const ckaAcceptance = read(paths.ckaAcceptance);
 const homepage = text(paths.homepage);
 const homepageRuntime = text(paths.homepageRuntime);
 const ckaCurrent = new Map(historicalCka.clientSurfaceTransition.artifacts.map(item => [item.path, item]));
+const ckaBCurrent = new Map(ckaBDelta.files.map(item => [item.path, item]));
+const ckaCCurrent = new Map(ckaCDelta.files.map(item => [item.path, item]));
 
 assert.equal(freeze.status, 'FROZEN_ASK_PHIOS_DETERMINISTIC_PRODUCTION_NO_AI_PROVIDER_NO_READING_ESCALATION');
 assert.equal(guidedSuccessor.status, 'ACTIVE_ADDITIVE_SURFACE_SUCCESSOR');
@@ -69,13 +76,27 @@ assert.equal(guidedSuccessor.authorityBoundary.askPhiosSemanticsChanged, false);
 assert.equal(guidedSuccessor.authorityBoundary.guidedReadingIsSeparateCapability, true);
 
 assert.equal(historicalCka.status, 'ACTIVE_ADDITIVE_CKA_HOMEPAGE_ENTRY_SUCCESSOR_W5_HISTORY_PRESERVED');
-assert.equal(sha256('functions/api/ask-phios.js'), historicalCka.runtimeTransition.askApi.currentSuccessorSha256);
+assert.equal(historicalCka.runtimeTransition.askApi.currentSuccessorSha256, ckaB.ckaB.askApi.predecessorSha256);
+assert.equal(sha256(ckaB.ckaB.askApi.path), ckaB.ckaB.askApi.currentSuccessorSha256);
+for (const boundary of Object.values(ckaB.authorityBoundary)) assert.equal(boundary, false);
 for (const item of historicalCka.clientSurfaceTransition.artifacts) {
   if (item.path === currentCka.currentClientSurface.path) {
     assert.equal(item.currentSuccessorSha256, currentCka.predecessor.historicalDeclaredCurrentSha256);
     continue;
   }
-  assert.equal(sha256(item.path), item.currentSuccessorSha256, `CKA_CURRENT_SURFACE_DRIFT:${item.path}`);
+  const bRecord = ckaBCurrent.get(item.path);
+  const cRecord = ckaCCurrent.get(item.path);
+  if (cRecord) {
+    assert.ok(bRecord, `CKA_B_PREDECESSOR_MISSING:${item.path}`);
+    assert.equal(cRecord.predecessorSha256, bRecord.sha256, `CKA_C_PREDECESSOR_MISMATCH:${item.path}`);
+    assert.equal(sha256(item.path), cRecord.sha256, `CKA_C_CURRENT_SURFACE_DRIFT:${item.path}`);
+    continue;
+  }
+  if (bRecord) {
+    assert.equal(sha256(item.path), bRecord.sha256, `CKA_B_CURRENT_SURFACE_DRIFT:${item.path}`);
+    continue;
+  }
+  assert.equal(sha256(item.path), item.currentSuccessorSha256, `CKA_A_CURRENT_SURFACE_DRIFT:${item.path}`);
 }
 assert.equal(historicalCka.clientSurfaceTransition.guidedReadingActivatedByCkaW0W4, false);
 

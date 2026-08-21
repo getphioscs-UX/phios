@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-PHASE21-FINAL-PRODUCTION-ACCEPTANCE-FREEZE-v1.0.0",
+  "phase": "PHASE 21",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "status": "PHASE21_REPOSITORY_ACCEPTANCE_FROZEN_EXTERNAL_GATES_PRESERVED",
+  "predecessor": {
+    "path": "content/production-integration/phase20/acceptance/phase20-unified-production-integration-acceptance-v1.json",
+    "sha256": "e96e4ab96b994562e5be25b0dda86bdbf3aa12b4f014dd9e58597522e5533f22"
+  },
+  "artifacts": [
+    {
+      "path": "content/production-integration/phase21/contracts/phase21-final-production-acceptance-contract-v1.json",
+      "sha256": "204a6018ec4a247775c44f06b1b6f2b3581d7dda37f5f32419f02e90e582c516"
+    },
+    {
+      "path": "content/production-integration/phase21/acceptance/phase21-final-production-acceptance-v1.json",
+      "sha256": "42edd8319ae67ad7d7e400a620973556260d5d6208ece362140e8ba33d6284a3"
+    }
+  ],
+  "accepted": {
+    "domainCount": 9,
+    "factCount": 44,
+    "failedFactCount": 0,
+    "hdrRemainsBlocked": true,
+    "deterministicFallbackPreserved": true
+  },
+  "notClaimed": {
+    "globalProductionFreeze": true,
+    "liveDeploymentAcceptance": true,
+    "humanBrowserAcceptance": true,
+    "hdrProductionActivation": true,
+    "academyLiveDeliveryActivation": true
+  },
+  "successorRule": "Any acceptance change requires a versioned successor; a repository acceptance freeze cannot close external operational or human gates by assertion."
+}
