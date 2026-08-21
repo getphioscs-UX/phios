@@ -992,10 +992,10 @@
     "check:aps-4": "node scripts/check-aps-4-candidate-orchestration.mjs",
     "check:aps-l10n": "node scripts/check-aps-l10n-integration.mjs",
     "check:aps": "npm run check:aps-1 && npm run check:aps-2 && npm run check:aps-3 && npm run check:aps-4 && npm run check:aps-5 && npm run check:aps-6 && npm run check:aps-7 && npm run check:aps-l10n && npm run check:aps-8",
-    "check:mcd-2": "node scripts/check-mcd-2-mcd5-successor.mjs",
+    "check:mcd-2": "node scripts/check-mcd-2-ast-bzr-production-successor.mjs",
     "check:mcd-adapter": "npm run check:mcd-production-authority && npm run check:mcd-2",
     "check:mcd-3": "node scripts/check-mcd-3-single-birth-input.mjs",
-    "check:mcd-4": "node scripts/check-mcd-4-mcd5-successor.mjs",
+    "check:mcd-4": "node scripts/check-mcd-4-ast-bzr-production-successor.mjs",
     "check:mcd-execution": "npm run check:mcd-4",
     "check:mcd": "npm run check:mcd-1 && npm run check:mcd-2 && npm run check:mcd-3 && npm run check:mcd-4 && npm run check:mcd-5 && npm run check:mcd-6 && npm run check:mcd-7 && npm run check:mcd-8",
     "check:mcd-1-historical": "node scripts/check-mcd-1-production-method-selection.mjs",
@@ -1010,7 +1010,7 @@
     "check:rjx-entry-provider-opt-in": "node scripts/check-rjx-package-a.mjs RJX-ENTRY-PROVIDER-OPT-IN",
     "check:rjx-package-a": "node scripts/check-rjx-package-a.mjs",
     "check:mcd-4-historical": "node scripts/check-mcd-4-execution.mjs && node scripts/check-mcd-4-execution-freeze.mjs",
-    "check:mcd-5": "node scripts/check-mcd-5-canonical-method-projection.mjs && node scripts/check-mcd-5-mcd8-successor-freeze.mjs",
+    "check:mcd-5": "node scripts/check-mcd-5-canonical-method-projection.mjs && node scripts/check-mcd-5-ast-bzr-production-successor-freeze.mjs",
     "check:mcd-canonical-result": "npm run check:mcd-5",
     "check:rjx-workspace": "node scripts/check-rjx-package-b.mjs RJX-W4",
     "check:rjx-progressive-disclosure": "node scripts/check-rjx-package-b.mjs RJX-W5",
@@ -1384,7 +1384,8 @@
     "check:wpr-pf12": "node scripts/check-wpr-pf-production-assurance.mjs PF12",
     "check:wpr-pf": "npm run check:wpr-pf0 && npm run check:wpr-pf1 && npm run check:wpr-pf2 && npm run check:wpr-pf3 && npm run check:wpr-pf4 && npm run check:wpr-pf5 && npm run check:wpr-pf6 && npm run check:wpr-pf7 && npm run check:wpr-pf8 && npm run check:wpr-pf9 && npm run check:wpr-pf10 && npm run check:wpr-pf11 && npm run check:wpr-pf12",
     "check:wpr-pf-all": "npm run check:wpr-pf",
-    "check:wpr-production-assurance-current": "npm run check:wpr-pf"
+    "check:wpr-production-assurance-current": "npm run check:wpr-pf",
+    "check:mcd-ast-bzr-production": "node scripts/check-mcd-ast-bzr-production-successor.mjs"
   },
   "type": "module",
   "dependencies": {

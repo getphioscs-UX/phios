@@ -47,7 +47,8 @@ const paths = {
   tokenRegistry: 'content/professional/canonical-presentation-runtime/registries/pds-token-reference-registry-v1.json',
   tokensCss: 'assets/css/tokens.css',
   articlePdsCss: 'assets/css/design/article-presentation.css',
-  pkg: 'package.json'
+  pkg: 'package.json',
+  retrievalProjectionSuccessor: 'content/production/visual-article/reconciliation/vap-w22-w24-retrieval-projection-successor-v1.json'
 };
 
 const [
@@ -56,7 +57,7 @@ const [
   canonicalResponsive, canonicalLocale, canonicalAccessibility, articleZh,
   articleEn, figure, carRegistry, relationships, reading, compression,
   publicNodes, publicBookMetadata, parts, pds, tokenRegistry, tokensCss,
-  articlePdsCss, pkg, canonicalRegistrySource
+  articlePdsCss, pkg, canonicalRegistrySource, retrievalProjectionSuccessor
 ] = await Promise.all([
   readJson(paths.contract22),
   readJson(paths.contract23),
@@ -87,7 +88,8 @@ const [
   read(paths.tokensCss),
   read(paths.articlePdsCss),
   readJson(paths.pkg),
-  read(paths.canonicalRegistry)
+  read(paths.canonicalRegistry),
+  readJson(paths.retrievalProjectionSuccessor)
 ]);
 
 // VAP-W22: active production registry is separate from the frozen CPR registry.
@@ -174,7 +176,37 @@ const publicNode = publicNodes.records.find(record => (
   record.nodeCode === instance.inputs.publishedArticle.nodeCode && record.locale === instance.locale
 ));
 assert(publicNode);
-assert.equal(publicNodes.digest, instance.inputs.readingContext.nodeProjectionDigest);
+// The presentation pins the published-node projection that existed at VAP-W22.
+// Later governed publication may expand the current retrieval projection without rewriting
+// that historical presentation context. The successor record must therefore prove both
+// the immutable predecessor digest and the unchanged node authority consumed by CPR.
+const stableJson = value => JSON.stringify(value, (key, item) => (
+  item && typeof item === 'object' && !Array.isArray(item)
+    ? Object.fromEntries(Object.entries(item).sort(([a], [b]) => a.localeCompare(b)))
+    : item
+), 2) + '\n';
+assert.equal(publicNodes.recordCount, publicNodes.records.length);
+assert.equal(publicNodes.digest, sha256(stableJson(publicNodes.records)));
+assert.equal(retrievalProjectionSuccessor.historicalBaselineCommit, contract22.baselineCommit);
+assert.equal(retrievalProjectionSuccessor.nodeProjection.path, paths.publicNodes);
+assert.equal(retrievalProjectionSuccessor.nodeProjection.historical.digest, instance.inputs.readingContext.nodeProjectionDigest);
+assert.equal(retrievalProjectionSuccessor.nodeProjection.current.digest, publicNodes.digest);
+assert.equal(retrievalProjectionSuccessor.nodeProjection.current.recordCount, publicNodes.recordCount);
+assert(retrievalProjectionSuccessor.nodeProjection.current.recordCount >= retrievalProjectionSuccessor.nodeProjection.historical.recordCount);
+assert.equal(retrievalProjectionSuccessor.rules.historicalPresentationDigestMayBeRewritten, false);
+assert.equal(retrievalProjectionSuccessor.rules.historicalProjectionSnapshotMayBeRewritten, false);
+assert.equal(retrievalProjectionSuccessor.rules.presentationNodeIdentityMustRemainResolvable, true);
+assert.equal(retrievalProjectionSuccessor.rules.presentationNodeAuthorityMustRemainIdentical, true);
+assert.equal(retrievalProjectionSuccessor.rules.unknownOrUnreconciledNodeMutationFailsClosed, true);
+const preservedPresentationRecord = retrievalProjectionSuccessor.nodeProjection.preservedPresentationRecord;
+assert.equal(preservedPresentationRecord.nodeCode, instance.inputs.publishedArticle.nodeCode);
+assert.equal(preservedPresentationRecord.locale, instance.locale);
+assert.equal(preservedPresentationRecord.authorityRecordCode, instance.inputs.publishedArticle.authorityRecordCode);
+assert.equal(preservedPresentationRecord.authorityDigest, instance.inputs.publishedArticle.authorityDigest);
+assert.equal(publicNode.authorityRecordCode, preservedPresentationRecord.authorityRecordCode);
+assert.equal(publicNode.authorityDigest, preservedPresentationRecord.authorityDigest);
+assert.equal(publicNode.publicationCode, preservedPresentationRecord.publicationCode);
+assert.equal(publicNode.href, preservedPresentationRecord.href);
 assert.equal(publicNode.bookCode, instance.inputs.readingContext.bookCode);
 assert.equal(publicNode.partCode, instance.inputs.readingContext.partCode);
 const publicBook = publicBookMetadata.records.find(record => record.bookCode === publicNode.bookCode);
@@ -205,15 +237,35 @@ assert.equal(await exists(figure.publicSrc.replace(/^\//, '')), true);
 assert.equal(instance.figurePresentation.captionSource, 'PUBLISHED_FIGURE_ALT_TEXT_VERBATIM');
 assert.equal(instance.figurePresentation.caption, figure.altText);
 
-// Knowledge relations and continuity are projected upstream; unpublished targets are never promoted to links.
-assert.equal(relationships.digest, instance.inputs.knowledgeRelationships.projectionDigest);
+// Knowledge relationships are also presentation-time retrieval snapshots.
+// The VAP-W22 presentation records KN-PREFACE-002 as unpublished; later governed
+// publication may legitimately flip the current retrieval edge to targetPublished=true
+// without rewriting the historical presentation or inventing a different relationship.
+assert.equal(relationships.recordCount, relationships.records.length);
+assert.equal(relationships.digest, sha256(stableJson(relationships.records)));
+assert.equal(retrievalProjectionSuccessor.relationshipProjection.path, paths.relationships);
+assert.equal(retrievalProjectionSuccessor.relationshipProjection.historical.digest, instance.inputs.knowledgeRelationships.projectionDigest);
+assert.equal(retrievalProjectionSuccessor.relationshipProjection.current.digest, relationships.digest);
+assert.equal(retrievalProjectionSuccessor.relationshipProjection.current.recordCount, relationships.recordCount);
+assert(retrievalProjectionSuccessor.relationshipProjection.current.recordCount >= retrievalProjectionSuccessor.relationshipProjection.historical.recordCount);
 for (const relationshipCode of instance.inputs.knowledgeRelationships.relationshipCodes) {
+  const historicalRelationship = retrievalProjectionSuccessor.relationshipProjection.preservedPresentationRelationships
+    .find(record => record.relationshipCode === relationshipCode);
+  assert(historicalRelationship);
+  assert.equal(historicalRelationship.locale, instance.locale);
+  assert.equal(historicalRelationship.sourceNodeCode, instance.inputs.publishedArticle.nodeCode);
+  assert.equal(historicalRelationship.targetNodeCode, 'KN-PREFACE-002');
+  assert.equal(historicalRelationship.targetPublished, false);
   const relationship = relationships.records.find(record => record.relationshipCode === relationshipCode);
   assert(relationship);
-  assert.equal(relationship.locale, instance.locale);
-  assert.equal(relationship.sourceNodeCode, instance.inputs.publishedArticle.nodeCode);
-  assert.equal(relationship.targetNodeCode, 'KN-PREFACE-002');
-  assert.equal(relationship.targetPublished, false);
+  assert.equal(relationship.locale, historicalRelationship.locale);
+  assert.equal(relationship.sourceNodeCode, historicalRelationship.sourceNodeCode);
+  assert.equal(relationship.targetNodeCode, historicalRelationship.targetNodeCode);
+  assert.equal(relationship.type, historicalRelationship.type);
+  const currentTarget = publicNodes.records.find(record => (
+    record.nodeCode === relationship.targetNodeCode && record.locale === relationship.locale
+  ));
+  assert.equal(relationship.targetPublished, Boolean(currentTarget));
 }
 const continuityPath = reading.paths.find(record => (
   record.catalogPathCode === instance.inputs.readingContinuity.catalogPathCode

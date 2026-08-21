@@ -1,5 +1,5 @@
 /** Canonical MCD Production Method Execution API. MPA evaluates authority before MCD execution; clients receive only MCD-5 CanonicalMethodProjection. */
-import {executeAndProjectMcd5Request} from '../method-client-delivery/canonical-projection-runtime.js';
+import {executeAndProjectMcd5CurrentRequest} from '../method-client-delivery/canonical-projection-runtime-current.js';
 
 const EXECUTABLE_CAPABILITIES=new Set(['CALCULATION','PROJECTION']);
 const REQUEST_SCHEMAS=new Set(['PHI-OS-MPA-METHOD-EXECUTION-REQUEST-v1.0.0','PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0']);
@@ -24,7 +24,7 @@ export async function onRequestPost({request}){
     return json({ok:false,error:'METHOD_EXECUTION_REQUEST_INVALID'},400);
   }
   try{
-    const {execution,canonicalProjection}=await executeAndProjectMcd5Request(executionRequest);
+    const {execution,canonicalProjection}=await executeAndProjectMcd5CurrentRequest(executionRequest);
     if(execution.executionStatus==='BLOCKED_BY_MPA'){
       if(executionRequest.methodCode==='HUMAN_DESIGN') return json(hdrBlockedPayload(execution.reasonCodes),423);
       return json({ok:false,error:'METHOD_PRODUCTION_NOT_ELIGIBLE',reasonCodes:execution.reasonCodes},423);
