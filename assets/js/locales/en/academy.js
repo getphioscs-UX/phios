@@ -5,10 +5,10 @@ const academyLearning = Object.freeze({
     skipDashboard: 'Skip to Academy dashboard',
     skipLesson: 'Skip to lesson preview',
     status: {
-      eyebrow: 'ALR-I · Presentation',
+      eyebrow: 'Learning · Presentation',
       label: 'Validation projection',
       boundary: 'Course delivery, learner progress, assessment results and credentials are not activated.',
-      wprDiscoveryBoundary: 'Academy discovery is public. Live entitlement, progress, assessment and credential delivery remain governed separately and are not activated by WPR.',
+      wprDiscoveryBoundary: 'Academy discovery is public. Live entitlement, progress, assessment and credential delivery remain governed separately and are not activated on this public surface.',
       progressUnavailable: 'Learner progress not provided',
       progressExplanation: 'This view does not infer “not started” and does not write a learning record.'
     },
@@ -28,7 +28,7 @@ const academyLearning = Object.freeze({
       openLesson: 'Open lesson preview',
       progressEyebrow: 'Progress boundary',
       progressTitle: 'No learner state is created by viewing this dashboard.',
-      progressCopy: 'A future progress view must read governed ALR Progress references. Missing data remains “not provided”.',
+      progressCopy: 'A future progress view must read governed learning-progress references. Missing data remains “not provided”.',
       accessEyebrow: 'Access boundary',
       accessTitle: 'Presentation is separate from access and delivery.',
       accessCopy: 'Academy entitlement, enrolment, content unlock and credential decisions remain with their governing authorities.'

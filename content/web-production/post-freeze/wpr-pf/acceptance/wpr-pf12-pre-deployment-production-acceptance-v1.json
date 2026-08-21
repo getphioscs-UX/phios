@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-WPR-PF12-PRE-DEPLOYMENT-PRODUCTION-ACCEPTANCE-v1.0.0",
+  "work": "WPR-PF12",
+  "baselineCommit": "cae0e6e56993bcf215e588fc7a3196ca33754eb5",
+  "status": "PRE_DEPLOYMENT_REPOSITORY_PRODUCTION_ACCEPTED",
+  "accepted": true,
+  "repositoryLevelAccepted": true,
+  "deploymentAccepted": false,
+  "deploymentState": "NOT_YET_ACCEPTED",
+  "liveClosurePhase": "POC-A",
+  "requiredPredecessors": [
+    "WPR-PF1",
+    "WPR-PF2",
+    "WPR-PF3",
+    "WPR-PF4",
+    "WPR-PF5",
+    "WPR-PF6",
+    "WPR-PF7",
+    "WPR-PF8",
+    "WPR-PF9",
+    "WPR-PF10",
+    "WPR-PF11"
+  ],
+  "gates": {
+    "bookDriftFree": true,
+    "assetDriftFreeAtProductionEligibleScope": true,
+    "runtimeOrphanFree": true,
+    "sourceAccepted": true,
+    "routeAccepted": true,
+    "assetAccepted": true,
+    "compositionAccepted": true,
+    "privacyAccepted": true,
+    "terminologyAccepted": true,
+    "runtimeConsumptionAccepted": true,
+    "visualCoverageAccepted": true
+  },
+  "externalGatesStillRequired": [
+    "LIVE_DEPLOYMENT_SHA",
+    "PRODUCTION_ROUTE_HTTP_ACCEPTANCE",
+    "LIVE_R2_RESOLUTION",
+    "PRODUCTION_BROWSER_MATRIX",
+    "CACHE_HEADER_LIVE_VERIFICATION",
+    "POC-A_LIVE_PRODUCTION_CLOSURE"
+  ],
+  "globalProductionAccepted": false,
+  "next": "POC-A_LIVE_PRODUCTION_CLOSURE"
+}

@@ -9,30 +9,35 @@ import { bookRoute, loadCanonicalBooks } from '../web-production/public-surface-
 const LESSONS = Object.freeze([
   {
     code: 'ALR-LO-LESSON-EVIDENCE-DISTINCTION',
+    slug: 'evidence-distinction',
     key: 'evidenceDistinction',
     level: 'FOUNDATION',
     source: '/articles/why-explanation-does-not-equal-understanding'
   },
   {
     code: 'ALR-LO-LESSON-BOUNDED-READING',
+    slug: 'bounded-reading',
     key: 'boundedReading',
     level: 'READER',
     source: '/articles/why-explanation-does-not-equal-understanding'
   },
   {
     code: 'ALR-LO-LESSON-CONSTRAINT-AWARE-NAVIGATION',
+    slug: 'constraint-aware-navigation',
     key: 'constraintNavigation',
     level: 'NAVIGATOR',
     source: '/articles/why-navigation-begins-with-reality-position'
   },
   {
     code: 'ALR-LO-LESSON-REVIEW-CONTINUITY',
+    slug: 'review-continuity',
     key: 'reviewContinuity',
     level: 'NAVIGATOR',
     source: '/articles/why-phi-os-is-needed'
   },
   {
     code: 'ALR-LO-LESSON-BOUNDED-PROFESSIONAL-FORMATION',
+    slug: 'professional-boundaries',
     key: 'professionalBoundaries',
     level: 'PROFESSIONAL',
     source: '/articles/why-phi-os-is-needed'
@@ -50,7 +55,7 @@ function element(tag, className, text) {
 }
 
 function lessonHref(lesson) {
-  return `/academy-lesson?lesson=${encodeURIComponent(lesson.code)}`;
+  return `/academy-lesson?lesson=${encodeURIComponent(lesson.slug)}`;
 }
 
 function renderDashboard() {
@@ -78,7 +83,7 @@ function renderDashboard() {
 
 function requestedLesson() {
   const code = new URLSearchParams(window.location.search).get('lesson');
-  return LESSONS.find(lesson => lesson.code === code) ?? LESSONS[0];
+  return LESSONS.find(lesson => lesson.slug === code || lesson.code === code) ?? LESSONS[0];
 }
 
 function renderLessonNavigation(selected) {

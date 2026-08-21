@@ -5,10 +5,10 @@ const academyLearning = Object.freeze({
     skipDashboard: '跳至学院仪表板',
     skipLesson: '跳至课程预览',
     status: {
-      eyebrow: 'ALR-I · 呈现',
+      eyebrow: '学习 · 呈现',
       label: '验证投影',
       boundary: '课程交付、学习进度、评估结果与凭证尚未启用。',
-      wprDiscoveryBoundary: 'Academy Discovery 可以公开；live entitlement、progress、assessment 与 credential delivery 仍由各自治理层管理，不由 WPR 激活。',
+      wprDiscoveryBoundary: 'Academy Discovery 可以公开；live entitlement、progress、assessment 与 credential delivery 仍由各自治理层管理，不由当前公开界面激活。',
       progressUnavailable: '未提供学习进度',
       progressExplanation: '本视图不会推断“尚未开始”，也不会写入学习记录。'
     },
@@ -28,7 +28,7 @@ const academyLearning = Object.freeze({
       openLesson: '打开课程预览',
       progressEyebrow: '进度边界',
       progressTitle: '查看本仪表板不会建立任何学习者状态。',
-      progressCopy: '未来的进度视图必须读取受治理的 ALR Progress 引用；缺少的数据保持为“未提供”。',
+      progressCopy: '未来的进度视图必须读取受治理的 学习进度 引用；缺少的数据保持为“未提供”。',
       accessEyebrow: '访问边界',
       accessTitle: '呈现与访问、交付彼此分离。',
       accessCopy: '学院权限、注册、内容解锁与凭证决定仍归各自的治理权威所有。'
