@@ -21,7 +21,8 @@ const CANDIDATE_PATH = 'content/knowledge/migrations/book-w1e/public-book-locale
 const ACCEPTANCE_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-human-acceptance-v1.json';
 const ACTIVE_PATH = 'content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json';
 const MATERIALIZATION_RECONCILIATION_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-public-assets-materialization-reconciliation-v1.json';
-const CURRENT_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-current-consumer-successor-v2.json';
+const CURRENT_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-current-consumer-successor-v3.json';
+const LOCALE_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-hpc2-locale-consumer-successor-v1.json';
 
 const [
   candidateRaw,
@@ -37,7 +38,8 @@ const [
   routeRegistry,
   redirects,
   materializationReconciliation,
-  currentConsumerSuccessor
+  currentConsumerSuccessor,
+  localeConsumerSuccessor
 ] = await Promise.all([
   read(CANDIDATE_PATH),
   json(CANDIDATE_PATH),
@@ -52,7 +54,8 @@ const [
   json('content/web-production/registries/wpr-route-registry-v1.json'),
   read('_redirects'),
   json(MATERIALIZATION_RECONCILIATION_PATH),
-  json(CURRENT_CONSUMER_SUCCESSOR_PATH)
+  json(CURRENT_CONSUMER_SUCCESSOR_PATH),
+  json(LOCALE_CONSUMER_SUCCESSOR_PATH)
 ]);
 
 const expectedRoutes = {
@@ -110,7 +113,18 @@ assert.deepEqual(active.visualVocabulary, expectedVocabulary);
 assert.equal(materializationReconciliation.status, 'OMITTED_ACCEPTED_MATERIALIZATION_RESTORED');
 assert.equal(materializationReconciliation.authority.newHumanDecisionCreated, false);
 assert.equal(materializationReconciliation.authority.publicProjectionAuthorityExpanded, false);
-assert.equal(currentConsumerSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_CURRENT_CONSUMERS_SUCCESSOR_RECONCILED');
+assert.equal(currentConsumerSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_CURRENT_HPC2_LOCALE_CONSUMERS_SUCCESSOR_RECONCILED');
+assert.equal(localeConsumerSuccessor.status, 'CURRENT_HPC2_DESTINATION_LOCALE_CONSUMER_RECONCILED_NO_AUTHORITY_CHANGE');
+assert.equal(localeConsumerSuccessor.evidence.baselineLocaleRestoreProducedMissingI18nKeyCount, 145);
+assert.equal(localeConsumerSuccessor.evidence.affectedCurrentSurfaceCount, 8);
+assert.equal(localeConsumerSuccessor.authority.bookW1eHumanAcceptanceRewritten, false);
+assert.equal(localeConsumerSuccessor.authority.bookW1eCanonicalRoutesChanged, false);
+assert.equal(localeConsumerSuccessor.authority.canonicalKnowledgeChanged, false);
+assert.equal(localeConsumerSuccessor.authority.localeConsumerEvolutionOnly, true);
+assert.equal(currentConsumerSuccessor.predecessorSuccessor.sha256, sha256(await read(currentConsumerSuccessor.predecessorSuccessor.path)));
+assert.equal(currentConsumerSuccessor.predecessorSuccessor.rewritten, false);
+assert.equal(currentConsumerSuccessor.localeConsumerSuccessor.sha256, sha256(await read(LOCALE_CONSUMER_SUCCESSOR_PATH)));
+assert.equal(currentConsumerSuccessor.localeConsumerSuccessor.authorityChanged, false);
 assert.equal(currentConsumerSuccessor.baselineCommit, '311fad7653785b8f0d14d5a0a154cce3f1303eb5');
 assert.equal(currentConsumerSuccessor.historicalAuthority.activeProjectionSha256, sha256(await read(ACTIVE_PATH)));
 assert.equal(currentConsumerSuccessor.historicalAuthority.materializationReconciliationSha256, sha256(await read(MATERIALIZATION_RECONCILIATION_PATH)));

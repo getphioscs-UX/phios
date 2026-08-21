@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-W1E-HPC2-LOCALE-CONSUMER-SUCCESSOR-v1.0.0",
+  "status": "CURRENT_HPC2_DESTINATION_LOCALE_CONSUMER_RECONCILED_NO_AUTHORITY_CHANGE",
+  "recordedAt": "2026-08-21",
+  "baselineCommit": "311fad7653785b8f0d14d5a0a154cce3f1303eb5",
+  "purpose": "Reconcile current additive Homepage/PHI OS destination locale consumers that post-date the BOOK-W1E accepted projection without rewriting BOOK-W1E Human Acceptance, canonical book routes, ownership or Knowledge authority.",
+  "evidence": {
+    "baselineLocaleRestoreProducedMissingI18nKeyCount": 145,
+    "affectedCurrentSurfaceCount": 8,
+    "affectedSurfaces": [
+      "index.html",
+      "about/founder/index.html",
+      "about/reality-navigation/index.html",
+      "about/why-phios/index.html",
+      "professional/index.html",
+      "professional/authority/index.html",
+      "research/human-reading-systems/index.html",
+      "research/why-reality-navigation/index.html"
+    ],
+    "requiredKeyFamilies": [
+      "discover.continuityFinal.*",
+      "hpc2Destinations.founderTeaser.*",
+      "hpc2Destinations.founder.*",
+      "hpc2Destinations.reality.*",
+      "hpc2Destinations.why.*",
+      "hpc2Destinations.professional.*",
+      "hpc2Destinations.authority.*",
+      "hpc2Destinations.systems.*",
+      "hpc2Destinations.research.*",
+      "hpc2Destinations.common.*"
+    ],
+    "baseline311fad7LocaleSha256": {
+      "assets/js/locales/en/public.js": "f1875ea9dad48909a6f95838543945b2e9bfb40094fd7c4233934eef39138852",
+      "assets/js/locales/zh-Hans/public.js": "f4d051d1fbf5ec927cfb6c244cac8353260255de6a11ef47415d85e3839f4f04"
+    },
+    "currentHpc2LocaleSha256": {
+      "assets/js/locales/en/public.js": "d130477fe796e169bd78d665987a5f86bcb428fe0d718e60acc56e2256deaa94",
+      "assets/js/locales/zh-Hans/public.js": "8e9ad7dac23a483c46b6a6f45f753c45b39f571c7996edc65a1eccaa0c70dd9b"
+    }
+  },
+  "authority": {
+    "newHumanDecisionCreated": false,
+    "bookW1eHumanAcceptanceRewritten": false,
+    "bookW1eCanonicalRoutesChanged": false,
+    "bookOrPartOwnershipChanged": false,
+    "canonicalKnowledgeChanged": false,
+    "secondPublicProjectionAuthorityCreated": false,
+    "localeConsumerEvolutionOnly": true
+  },
+  "requiredValidation": [
+    "npm run check:i18n",
+    "npm run check:book-w1-public-projection",
+    "npm run check:book-w1-compatibility",
+    "npm run check:book-w1-freeze",
+    "npm run check"
+  ]
+}
