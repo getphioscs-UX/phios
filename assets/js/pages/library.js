@@ -6,7 +6,9 @@ import {
   bookStatusKind,
   loadCanonicalBooks,
   loadCanonicalParts,
-  loadFigureRegistry
+  loadFigureRegistry,
+  resolveBookCover,
+  resolveCanonicalVisual
 } from '../web-production/public-surface-data.js';
 import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.js';
 
@@ -17,6 +19,7 @@ const partFilter = document.querySelector('#library-part');
 const grid = document.querySelector('[data-library-grid]');
 const results = document.querySelector('[data-library-results]');
 const empty = document.querySelector('[data-library-empty]');
+const heroVisual = document.querySelector('[data-bfr-library-hero="HERO-002"]');
 
 const CATEGORY_KEYS = Object.freeze({
   articles: 'knowledge.library.articles',
@@ -60,25 +63,31 @@ async function buildResources(locale) {
     loadPublishedArticles(locale).catch(() => [])
   ]);
 
-  const bookResources = booksRegistry.books.map(book => ({
-    id: book.book_id,
-    category: 'books',
-    status: bookStatusKind(book),
-    href: bookRoute(book.book_id),
-    title: `${t('knowledge.production.volume', { volume: book.volume })} · ${localized(book.title, locale)}`,
-    description: localized(book.subtitle, locale),
-    parts: (book.parts || []).map(number => `P${number}`),
-    askContext: {
-      contextType: 'CANONICAL_VOLUME',
-      bookCode: book.book_id,
-      contextLabel: localized(book.title, locale),
-      contextSummary: localized(book.subtitle, locale),
-      readingPath: `${bookRoute(book.book_id)}#book-parts`
-    }
+  const bookResources = await Promise.all(booksRegistry.books.map(async book => {
+    const cover = await resolveBookCover(book.book_id, { surface: 'LIBRARY', locale, variant: 'CARD' })
+      || await resolveBookCover(book.book_id, { surface: 'LIBRARY', locale });
+    return {
+      id: book.book_id,
+      category: 'books',
+      status: bookStatusKind(book),
+      href: bookRoute(book.book_id),
+      title: `${t('knowledge.production.volume', { volume: book.volume })} · ${localized(book.title, locale)}`,
+      description: localized(book.subtitle, locale),
+      parts: (book.parts || []).map(number => `P${number}`),
+      visual: cover ? { src: cover.src, kind: 'BOOK_COVER' } : null,
+      askContext: {
+        contextType: 'CANONICAL_VOLUME',
+        bookCode: book.book_id,
+        contextLabel: localized(book.title, locale),
+        contextSummary: localized(book.subtitle, locale),
+        readingPath: `${bookRoute(book.book_id)}#book-parts`
+      }
+    };
   }));
 
   const bookOne = booksRegistry.books.find(book => book.book_id === 'book-1');
   const alignedFigureCount = alignedFiguresForBook(bookOne, figuresRegistry, partsRegistry).length;
+  const knowledgeMap = await resolveCanonicalVisual('FIG-007', { surface: 'LIBRARY', locale });
 
   return [
     ...articles.map(article => ({
@@ -140,7 +149,8 @@ async function buildResources(locale) {
       status: 'available',
       href: '/figures',
       title: t('knowledge.production.figuresTitle'),
-      description: t('knowledge.production.figuresCopy', { count: alignedFigureCount })
+      description: t('knowledge.production.figuresCopy', { count: alignedFigureCount }),
+      visual: knowledgeMap ? { src: knowledgeMap.src, kind: 'KNOWLEDGE_FIGURE' } : null
     },
     {
       id: 'book-one-glossary',
@@ -197,8 +207,12 @@ function render() {
       : ['articles', 'books', 'research'].includes(resource.category)
         ? (locale === 'zh-Hans' ? '阅读' : 'Read')
         : t('knowledge.common.open');
+    const visual = resource.visual?.src
+      ? `<div class="bfr-library-card-visual" data-bfr-library-visual-kind="${escapeHtml(resource.visual.kind || 'GOVERNED_VISUAL')}" aria-hidden="true"><img src="${escapeHtml(resource.visual.src)}" alt="" loading="lazy"></div>`
+      : '';
     return `
     <article class="knowledge-card" data-resource-id="${escapeHtml(resource.id)}">
+      ${visual}
       <div class="knowledge-card__meta">
         <span class="knowledge-chip">${escapeHtml(t(CATEGORY_KEYS[resource.category]))}</span>
         <span class="knowledge-status knowledge-status--${escapeHtml(resource.status)}">${escapeHtml(t(STATUS_KEYS[resource.status]))}</span>
@@ -217,11 +231,32 @@ function render() {
   empty.hidden = visible.length !== 0;
 }
 
+async function hydrateHero(locale) {
+  if (!heroVisual) return;
+  const image = heroVisual.querySelector('img');
+  if (!image) return;
+  const visual = await resolveCanonicalVisual('HERO-002', { surface: 'LIBRARY', locale });
+  if (!visual?.src) {
+    heroVisual.hidden = true;
+    image.removeAttribute('src');
+    return;
+  }
+  image.src = visual.src;
+  if (visual.srcset) image.srcset = visual.srcset;
+  if (visual.sizes) image.sizes = visual.sizes;
+  heroVisual.hidden = false;
+}
+
 async function loadAndRender() {
+  const locale = getLocale();
   try {
-    resources = await buildResources(getLocale());
+    [resources] = await Promise.all([
+      buildResources(locale),
+      hydrateHero(locale)
+    ]);
   } catch {
     resources = [];
+    if (heroVisual) heroVisual.hidden = true;
   }
   render();
 }

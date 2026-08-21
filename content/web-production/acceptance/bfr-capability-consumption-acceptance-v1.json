@@ -1,0 +1,1464 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H15-CAPABILITY-CONSUMPTION-ACCEPTANCE-v1.0.0",
+  "work": "BFR-H15",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "status": "BFR_H15_CAPABILITY_CONSUMPTION_ACCEPTED_CURRENT_SUCCESSOR",
+  "scope": "REPOSITORY_CURRENT_CONSUMPTION_ACCEPTANCE",
+  "rule": "Every Production Backend Capability has actual Client consumer OR NONE_BY_DESIGN.",
+  "historicalInventory": {
+    "path": "content/web-production/bfr-backend-capability-inventory-v1.json",
+    "sha256": "c2e5237632e3309fa269ca46437e8bc1a054e001383e9a1738d5e87131d59677",
+    "recordCount": 56,
+    "rewritten": false
+  },
+  "authorityBoundary": {
+    "historicalBfrH0Rewritten": false,
+    "secondBackendAuthorityCreated": false,
+    "clientConsumerMayReclassifyCanonicalAuthority": false,
+    "noneByDesignMustBeExplicit": true,
+    "globalProductionAccepted": false
+  },
+  "recordCount": 56,
+  "records": [
+    {
+      "capabilityCode": "BOOK_REGISTRY",
+      "category": "BOOKS",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK",
+        "HOMEPAGE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "books/index.html",
+        "assets/js/pages/books.js",
+        "assets/js/pages/book-volume.js",
+        "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json",
+        "content/registry/books.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PART_REGISTRY",
+      "category": "BOOKS",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "LIBRARY",
+        "INDIVIDUAL_BOOK"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "LIBRARY",
+        "INDIVIDUAL_BOOK"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "books/index.html",
+        "assets/js/pages/books.js",
+        "assets/js/pages/book-volume.js",
+        "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json",
+        "content/registry/parts.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "FIVE_VOLUME_OWNERSHIP",
+      "category": "BOOKS",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "MISSING_CONSUMER",
+      "historicalActualConsumer": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK",
+        "HOMEPAGE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "books/index.html",
+        "assets/js/pages/books.js",
+        "assets/js/pages/book-volume.js",
+        "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json",
+        "content/registry/books.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "BOOK_ROUTES",
+      "category": "BOOKS",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "BOOKS",
+        "INDIVIDUAL_BOOK"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "books/index.html",
+        "assets/js/pages/books.js",
+        "assets/js/pages/book-volume.js",
+        "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json",
+        "content/web-production/registries/wpr-route-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PUBLICATION_OWNERSHIP",
+      "category": "BOOKS",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "ARTICLE",
+        "FIGURE",
+        "LIBRARY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ARTICLE",
+        "FIGURE",
+        "LIBRARY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "books/index.html",
+        "assets/js/pages/books.js",
+        "assets/js/pages/book-volume.js",
+        "content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json",
+        "content/knowledge/migrations/node-publication-ownership-v2.json",
+        "content/web-production/registries/wpr-five-volume-publication-context-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "CANONICAL_KNOWLEDGE",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "NONE_BY_DESIGN",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "NONE_BY_DESIGN"
+      ],
+      "productionEligibleForCurrentClient": false,
+      "currentConsumptionState": "NONE_BY_DESIGN",
+      "actualClientConsumers": [],
+      "noneByDesignReason": "INTERNAL_AUTHORITY_NOT_A_DIRECT_CLIENT_SURFACE",
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/registry/nodes.json"
+      ],
+      "notes": [
+        "Canonical KNR authority remains internal; client surfaces consume governed projections."
+      ]
+    },
+    {
+      "capabilityCode": "PUBLISHED_KNOWLEDGE",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "MISSING_CONSUMER",
+      "historicalActualConsumer": [
+        "LIBRARY",
+        "ARTICLE",
+        "ASK_PHIOS"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "LIBRARY",
+        "ARTICLE",
+        "ASK_PHIOS",
+        "HOMEPAGE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/public/authority/published-knowledge-authority.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REVIEWED_MANUSCRIPT_CORPUS",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "ASK_PHIOS"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ASK_PHIOS"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/source-access/registries/manuscript-reviewed-corpus-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "KNOWLEDGE_RETRIEVAL",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "KNOWLEDGE_SEARCH",
+        "ASK_PHIOS"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "KNOWLEDGE_SEARCH",
+        "ASK_PHIOS"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/public/retrieval/published-retrieval-index.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "GROUNDED_ANSWER",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "ASK_PHIOS"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ASK_PHIOS"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/answer-projection/freeze/kap-w11-w17-answer-composition-freeze-v1.json",
+        "functions/api/ask-phios.js"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "READING_PATHS",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "LIBRARY",
+        "ACADEMY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "LIBRARY",
+        "ACADEMY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/public/public-reading-paths.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "COLLECTIONS",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "LIBRARY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "LIBRARY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/registry/collections.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "RELATED_KNOWLEDGE",
+      "category": "KNOWLEDGE",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "ASK_PHIOS"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ASK_PHIOS",
+        "INDIVIDUAL_BOOK",
+        "ARTICLE",
+        "FIGURE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "library.html",
+        "knowledge-search.html",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/knowledge/public/retrieval/relationships.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "FIGURES",
+      "category": "VISUAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "historicalActualConsumer": [
+        "FIGURE",
+        "LIBRARY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "FIGURE",
+        "LIBRARY",
+        "HOMEPAGE",
+        "ARTICLE_CONTENT_DEPENDENT"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+        "content/registry/public-assets.json",
+        "assets/js/runtime/web-production/asset-resolver.js",
+        "content/registry/figures.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "DIAGRAMS",
+      "category": "VISUAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "historicalActualConsumer": [],
+      "productionEligibleForCurrentClient": false,
+      "currentConsumptionState": "NONE_BY_DESIGN",
+      "actualClientConsumers": [],
+      "noneByDesignReason": "GENERIC_FAMILY_NO_CONCRETE_PRODUCTION_MEMBER",
+      "evidence": [
+        "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+        "content/registry/public-assets.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ],
+      "notes": [
+        "No concrete diagram member is admitted in the current public asset registry; the generic family may not be invented into a client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "ILLUSTRATIONS",
+      "category": "VISUAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "historicalActualConsumer": [],
+      "productionEligibleForCurrentClient": false,
+      "currentConsumptionState": "NONE_BY_DESIGN",
+      "actualClientConsumers": [],
+      "noneByDesignReason": "PLANNED_MEMBERS_NOT_PRODUCTION_READY",
+      "evidence": [
+        "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+        "content/registry/public-assets.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ],
+      "notes": [
+        "Current illustration identities are explicit PLANNED lifecycle records and are not silently promoted into production consumers."
+      ]
+    },
+    {
+      "capabilityCode": "ICONS",
+      "category": "VISUAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "historicalActualConsumer": [],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "HOMEPAGE",
+        "ACADEMY",
+        "SERVICES"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+        "content/registry/public-assets.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "THESIS_VISUALS",
+      "category": "VISUAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "historicalActualConsumer": [],
+      "productionEligibleForCurrentClient": false,
+      "currentConsumptionState": "NONE_BY_DESIGN",
+      "actualClientConsumers": [],
+      "noneByDesignReason": "DIRECTORY_GROUP_NOT_RENDERABLE",
+      "evidence": [
+        "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+        "content/registry/public-assets.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ],
+      "notes": [
+        "Current thesis record is a directory-group inventory placeholder, not a concrete renderable production member."
+      ]
+    },
+    {
+      "capabilityCode": "KNOWLEDGE_VISUALS",
+      "category": "VISUAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "historicalActualConsumer": [
+        "LIBRARY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "LIBRARY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+        "content/registry/public-assets.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PREVIEW_ASSETS",
+      "category": "VISUAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "VISUAL_ASSET_UNCONSUMED",
+      "historicalActualConsumer": [
+        "LIBRARY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "LIBRARY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+        "content/registry/public-assets.json",
+        "assets/js/runtime/web-production/asset-resolver.js"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PERSONAL_RUNTIME",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PERSONAL_REALITY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json",
+        "content/professional/method-client-delivery/contracts/mcd-7-personal-runtime-result-surface-contract-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_RUNTIME",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-model-runtime/freeze/rmo-v1-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_JOURNEY",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/journey-runtime/freeze/jr-v2-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "READING_RUNTIME",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-readout-engine/freeze/rre-w5-w10-reading-runtime-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "NAVIGATION_RUNTIME",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_JOURNEY",
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-navigation-engine/freeze/rne-w5-w9-navigation-decision-support-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "FINANCIAL_REALITY",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "HOMEPAGE",
+        "FINANCIAL_REALITY",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "HOMEPAGE",
+        "FINANCIAL_REALITY",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/registry/m4a-financial-reality-navigation.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_VERSION",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "MISSING_SURFACE",
+      "historicalActualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_DIFF",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "MISSING_SURFACE",
+      "historicalActualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "CONTINUITY",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-model-runtime/freeze/rmo-w0-w14-content-preservation-manifest-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "CUSTOMER_WORKSPACE",
+      "category": "REALITY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "MISSING_SURFACE",
+      "historicalActualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/web-production/registries/wpr-surface-registry-v1.json",
+        "content/web-production/registries/wpr-route-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_DASHBOARD",
+      "category": "REALITY",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "reality-dashboard.html",
+        "reality-journey.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/registry/m3c-journey-dashboard.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "METHOD_RUNTIME",
+      "category": "METHOD",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PERSONAL_REALITY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "personal-runtime.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/professional/method-production-activation/registries/method-registry-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "CALCULATION_RUNTIME",
+      "category": "METHOD",
+      "historicalConsumerState": "NONE_BY_DESIGN",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "NONE_BY_DESIGN"
+      ],
+      "productionEligibleForCurrentClient": false,
+      "currentConsumptionState": "NONE_BY_DESIGN",
+      "actualClientConsumers": [],
+      "noneByDesignReason": "NO_DIRECT_CLIENT_EXECUTION",
+      "evidence": [
+        "personal-runtime.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/professional/method-runtime/shared-calculation-runtime-v1.json"
+      ],
+      "notes": [
+        "Calculation authority is intentionally not a direct client surface; Method handoff remains governed."
+      ]
+    },
+    {
+      "capabilityCode": "PROJECTION_RUNTIME",
+      "category": "METHOD",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PERSONAL_REALITY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "personal-runtime.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/professional/method-runtime/shared-projection-runtime-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "MPA_ELIGIBILITY",
+      "category": "METHOD",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PERSONAL_REALITY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "personal-runtime.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/professional/method-production-activation/registries/method-registry-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "METHOD_CLIENT_DELIVERY",
+      "category": "METHOD",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "PERSONAL_REALITY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PERSONAL_REALITY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "personal-runtime.html",
+        "content/web-production/acceptance/wpr-w21-personal-runtime-surface-acceptance-v1.json",
+        "content/client/knowledge-ask/acceptance/cka-production-acceptance-v1.json",
+        "content/professional/method-client-delivery/freeze/mcd-8-production-acceptance-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "ACADEMY",
+      "category": "ACADEMY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "HOMEPAGE",
+        "ACADEMY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "HOMEPAGE",
+        "ACADEMY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "academy.html",
+        "academy-lesson.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "LEARNING_RUNTIME",
+      "category": "ACADEMY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "ACADEMY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ACADEMY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "academy.html",
+        "academy-lesson.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/academy/academy-learning-runtime/freeze/alr-v2-freeze-v1.json",
+        "content/academy/academy-learning-runtime/registries/learning-object-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PROGRESS",
+      "category": "ACADEMY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "ACADEMY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ACADEMY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "academy.html",
+        "academy-lesson.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/academy/academy-learning-runtime/registries/learning-progress-state-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "ASSESSMENT",
+      "category": "ACADEMY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "ACADEMY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ACADEMY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "academy.html",
+        "academy-lesson.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/academy/academy-learning-runtime/registries/assessment-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "ACADEMY_READING_PATHS",
+      "category": "ACADEMY",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "ACADEMY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ACADEMY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "academy.html",
+        "academy-lesson.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/academy/academy-learning-runtime/registries/learning-path-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "FIVE_VOLUME_LEARNING_ARCHITECTURE",
+      "category": "ACADEMY",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "ACADEMY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "ACADEMY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "academy.html",
+        "academy-lesson.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/academy/academy-learning-runtime/freeze/alr-w10-w14-learning-architecture-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "SERVICES",
+      "category": "SERVICES",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "STALE_PROJECTION",
+      "historicalActualConsumer": [
+        "HOMEPAGE",
+        "SERVICES"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "HOMEPAGE",
+        "SERVICES"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "services.html",
+        "reality-dashboard.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/knowledge/registry/services.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REALITY_READOUT",
+      "category": "SERVICES",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "SERVICES",
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "SERVICES",
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "services.html",
+        "reality-dashboard.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-readout-engine/freeze/rre-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "SERVICE_NAVIGATION",
+      "category": "SERVICES",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "SERVICES",
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "SERVICES",
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "services.html",
+        "reality-dashboard.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/reality-navigation-engine/freeze/rne-w5-w9-navigation-decision-support-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "SERVICE_FINANCIAL_REALITY",
+      "category": "SERVICES",
+      "historicalConsumerState": "ACTIVE",
+      "historicalGapClassification": "NO_GAP",
+      "historicalActualConsumer": [
+        "SERVICES",
+        "FINANCIAL_REALITY"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "SERVICES",
+        "FINANCIAL_REALITY"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "services.html",
+        "reality-dashboard.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/registry/m4a-financial-reality-navigation.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_SERVICES",
+      "category": "SERVICES",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "HOMEPAGE",
+        "SERVICES",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "HOMEPAGE",
+        "SERVICES",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "services.html",
+        "reality-dashboard.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "SERVICE_CUSTOMER_WORKSPACE",
+      "category": "SERVICES",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "MISSING_SURFACE",
+      "historicalActualConsumer": [
+        "REALITY_DASHBOARD"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REALITY_DASHBOARD"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "services.html",
+        "reality-dashboard.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/web-production/registries/wpr-surface-registry-v1.json",
+        "content/web-production/registries/wpr-route-registry-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "REPORTS",
+      "category": "SERVICES",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "REPORT",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "REPORT",
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "services.html",
+        "reality-dashboard.html",
+        "content/web-production/bfr-academy-services-professional-reconciliation-v1.json",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/customer-report-runtime/freeze/rr-v2-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_WORKSPACE",
+      "category": "PROFESSIONAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PROFESSIONAL_WORKSPACE"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "professional-reports.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/freeze/pr-v2-freeze-v1.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_EVIDENCE",
+      "category": "PROFESSIONAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "professional-reports.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/contracts/professional-evidence-package-contract-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "PROFESSIONAL_JUDGMENT_BOUNDARY",
+      "category": "PROFESSIONAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "professional-reports.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/contracts/professional-judgment-contract-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "APPROVAL",
+      "category": "PROFESSIONAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "professional-reports.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/contracts/professional-approval-lifecycle-contract-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "ACTION",
+      "category": "PROFESSIONAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "professional-reports.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/registries/professional-lifecycle-state-registry-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "OUTCOME",
+      "category": "PROFESSIONAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "professional-reports.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/registries/professional-outcome-kind-registry-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    },
+    {
+      "capabilityCode": "EXTERNAL_AUTHORITY",
+      "category": "PROFESSIONAL",
+      "historicalConsumerState": "PARTIAL",
+      "historicalGapClassification": "PARTIAL_CONSUMPTION",
+      "historicalActualConsumer": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "productionEligibleForCurrentClient": true,
+      "currentConsumptionState": "ACTIVE_CLIENT_CONSUMER",
+      "actualClientConsumers": [
+        "PROFESSIONAL_WORKSPACE",
+        "REPORT"
+      ],
+      "noneByDesignReason": null,
+      "evidence": [
+        "professional/index.html",
+        "professional-workspace.html",
+        "professional-reports.html",
+        "content/web-production/acceptance/wpr-w22-professional-financial-acceptance-v1.json",
+        "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json"
+      ],
+      "notes": [
+        "Current successor preserves the historical inventory record and proves at least one governed client consumer."
+      ]
+    }
+  ],
+  "summary": {
+    "inventoryCount": 56,
+    "activeClientConsumerCount": 51,
+    "noneByDesignCount": 5,
+    "silentProductionRuntimeOrphanCount": 0,
+    "unknownConsumptionStateCount": 0
+  },
+  "exitGate": {
+    "everyCapabilitySettled": true,
+    "silentProductionRuntimeOrphanCount": 0,
+    "accepted": true
+  },
+  "globalProductionAccepted": false,
+  "next": "BFR-H16"
+}
