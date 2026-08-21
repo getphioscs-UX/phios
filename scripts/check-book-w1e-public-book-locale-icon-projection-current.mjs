@@ -23,6 +23,7 @@ const ACTIVE_PATH = 'content/knowledge/migrations/book-w1e/public-book-locale-ic
 const MATERIALIZATION_RECONCILIATION_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-public-assets-materialization-reconciliation-v1.json';
 const CURRENT_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-current-consumer-successor-v3.json';
 const LOCALE_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-hpc2-locale-consumer-successor-v1.json';
+const PUBLIC_ASSET_VERIFICATION_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json';
 
 const [
   candidateRaw,
@@ -39,7 +40,8 @@ const [
   redirects,
   materializationReconciliation,
   currentConsumerSuccessor,
-  localeConsumerSuccessor
+  localeConsumerSuccessor,
+  publicAssetVerificationSuccessor
 ] = await Promise.all([
   read(CANDIDATE_PATH),
   json(CANDIDATE_PATH),
@@ -55,7 +57,8 @@ const [
   read('_redirects'),
   json(MATERIALIZATION_RECONCILIATION_PATH),
   json(CURRENT_CONSUMER_SUCCESSOR_PATH),
-  json(LOCALE_CONSUMER_SUCCESSOR_PATH)
+  json(LOCALE_CONSUMER_SUCCESSOR_PATH),
+  json(PUBLIC_ASSET_VERIFICATION_SUCCESSOR_PATH)
 ]);
 
 const expectedRoutes = {
@@ -130,7 +133,57 @@ assert.equal(currentConsumerSuccessor.historicalAuthority.activeProjectionSha256
 assert.equal(currentConsumerSuccessor.historicalAuthority.materializationReconciliationSha256, sha256(await read(MATERIALIZATION_RECONCILIATION_PATH)));
 assert.equal(currentConsumerSuccessor.historicalAuthority.humanAcceptanceRewritten, false);
 assert.equal(materializationReconciliation.publicAssets.restoredSha256, '60d58ca76e0f979033b8f27cf7a64b43357e3eb8ebdb5670f0987aa185d81fee');
-assert.equal(currentConsumerSuccessor.currentMaterializationFacts.publicAssetRegistrySha256, sha256(await read('content/registry/public-assets.json')));
+assert.equal(
+  publicAssetVerificationSuccessor.status,
+  'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_POC_A_REMOTE_VERIFICATION_MATERIALIZATION_RECONCILED'
+);
+assert.equal(
+  publicAssetVerificationSuccessor.predecessorConsumerSuccessor.sha256,
+  sha256(await read(CURRENT_CONSUMER_SUCCESSOR_PATH))
+);
+assert.equal(
+  publicAssetVerificationSuccessor.predecessorConsumerSuccessor.rewritten,
+  false
+);
+assert.equal(
+  publicAssetVerificationSuccessor.publicAssetRegistry.predecessorSha256,
+  currentConsumerSuccessor.currentMaterializationFacts.publicAssetRegistrySha256
+);
+assert.equal(
+  publicAssetVerificationSuccessor.publicAssetRegistry.currentSha256,
+  sha256(await read('content/registry/public-assets.json'))
+);
+assert.equal(
+  publicAssetVerificationSuccessor.publicAssetRegistry.recordCount,
+  publicAssets.assets.length
+);
+assert.deepEqual(
+  publicAssetVerificationSuccessor.remoteVerificationAdvancement.targetAssetCodes,
+  ['HERO-007','HERO-008','HERO-009','HERO-010','HERO-011','HERO-019','HERO-020','HERO-021','HERO-022','HERO-023']
+);
+assert.equal(
+  publicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount,
+  10
+);
+for (const code of publicAssetVerificationSuccessor.remoteVerificationAdvancement.targetAssetCodes) {
+  const asset = publicAssets.assets.find(item => item.asset_code === code);
+  assert.ok(asset, `Missing POC-A verified asset: ${code}`);
+  assert.equal(asset.status, 'remote-verified');
+  assert.equal(asset.verification, 'verified-remote-head-get');
+  assert.equal(asset.remote?.http_status, 200);
+  assert.equal(asset.remote?.content_type, 'image/webp');
+}
+assert.equal(
+  publicAssetVerificationSuccessor.authorityBoundary.verificationMaterializationOnly,
+  true
+);
+for (const [key, value] of Object.entries(
+  publicAssetVerificationSuccessor.authorityBoundary
+)) {
+  if (key !== 'verificationMaterializationOnly') {
+    assert.equal(value, false, key);
+  }
+}
 assert.equal(currentConsumerSuccessor.currentMaterializationFacts.publicAssetRecordCount, publicAssets.assets.length);
 assert.equal(currentConsumerSuccessor.currentMaterializationFacts.bookCompositionSha256, sha256(await read('content/web-production/composition/public/book-composition-v1.json')));
 assert.equal(currentConsumerSuccessor.currentMaterializationFacts.routeRegistrySha256, sha256(await read('content/web-production/registries/wpr-route-registry-v1.json')));
@@ -230,7 +283,24 @@ for (const source of active.activatedSources) {
   const successor = currentSuccessorByPath.get(source.path);
   assert(successor, `BOOK-W1E current consumer successor missing: ${source.path}`);
   assert.equal(successor.bookW1eActivatedSha256, source.sha256);
-  assert.equal(successor.currentSha256, actualSha256, `BOOK-W1E successor digest drift: ${source.path}`);
+  const expectedCurrentSha256 =
+    source.path === publicAssetVerificationSuccessor.publicAssetRegistry.path
+      ? publicAssetVerificationSuccessor.publicAssetRegistry.currentSha256
+      : successor.currentSha256;
+
+  if (source.path === publicAssetVerificationSuccessor.publicAssetRegistry.path) {
+    assert.equal(
+      successor.currentSha256,
+      publicAssetVerificationSuccessor.publicAssetRegistry.predecessorSha256,
+      'POC-A public asset verification successor must advance exactly from BOOK-W1E v3'
+    );
+  }
+
+  assert.equal(
+    expectedCurrentSha256,
+    actualSha256,
+    `BOOK-W1E successor digest drift: ${source.path}`
+  );
   assert.equal(successor.changedSinceBookW1E, actualSha256 !== source.sha256);
   assert.equal(successor.governanceSha256, sha256(await read(successor.governancePath)), `BOOK-W1E successor governance drift: ${source.path}`);
   if (source.path === materializationReconciliation.acceptedSuccessorDigests.publicSurfaceData.path) {
