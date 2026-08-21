@@ -1393,14 +1393,18 @@
     "check:bfr-h15": "node scripts/check-bfr-h15-capability-consumption.mjs",
     "check:bfr-h16": "node scripts/check-bfr-h16-visual-production.mjs",
     "postcheck:bfr-h": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:bfr-h16",
-    "check:web-production-current": "npm run check:web-production-runtime && npm run check:wpr-pf",
     "check:client-visual-consumption-current": "node scripts/check-client-visual-consumption-current.mjs",
     "check:client-visual-consumption-live": "node scripts/check-client-visual-consumption-live.mjs",
     "check:part-h5": "npm run check:client-visual-consumption-current",
     "client-visual:verify-branding": "node scripts/client-visual/verify-branding-r2.mjs",
     "check:client-visual-consumption-h5a": "node scripts/check-client-visual-consumption-h5a.mjs",
     "check:part-h5a": "npm run check:client-visual-consumption-current && npm run check:client-visual-consumption-h5a && npm run check:client-visual-consumption-live",
-    "client-visual:verify-branding-h5a": "node scripts/client-visual/verify-branding-r2-h5a.mjs"
+    "client-visual:verify-branding-h5a": "node scripts/client-visual/verify-branding-r2-h5a.mjs",
+    "check:part-j": "node scripts/check-part-j-final-client-experience.mjs",
+    "check:part-k": "node scripts/check-part-k-final-freeze.mjs",
+    "check:client-surface-final": "npm run check:bfr-h && npm run check:part-j && npm run check:part-k",
+    "check:client-surface-production-final": "npm run check:client-surface-final",
+    "check:web-production-current": "npm run check:web-production-runtime && npm run check:wpr-pf"
   },
   "type": "module",
   "dependencies": {

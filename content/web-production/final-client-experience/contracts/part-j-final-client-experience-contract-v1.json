@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "PHI-OS-PART-J-FINAL-CLIENT-EXPERIENCE-CONTRACT-v1.0.0",
+  "work": "PART-J",
+  "baselineCommit": "ee27b8f7e9ca5369419b2516c7db9f6ae38a484e",
+  "status": "FINAL_CLIENT_EXPERIENCE_INTEGRATION_CONTRACT_ACTIVE",
+  "scope": "BFR_H_HPC2_CKA_INTEGRATED_CLIENT_EXPERIENCE",
+  "authority": {
+    "bfrH": "DECIDES_WHAT_BACKEND_CAPABILITY_MUST_HAVE_A_PRODUCTION_CLIENT_CONSUMER",
+    "hpc2": "DECIDES_HOW_THE_HOMEPAGE_COMPOSES_THE_CLIENT_NARRATIVE",
+    "cka": "DECIDES_HOW_THE_CLIENT_ASKS_AND_RECEIVES_GROUNDED_KNOWLEDGE",
+    "jr": "OWNS_CANONICAL_REALITY_JOURNEY_WORKFLOW_STATE",
+    "rmo": "OWNS_REALITY_ACTION_OUTCOME_VERSION_AND_DIFF_AUTHORITIES",
+    "pds": "OWNS_DESIGN_RESPONSIVE_AND_ACCESSIBILITY_SEMANTICS",
+    "wpr": "OWNS_WEB_PRODUCTION_PROJECTION_AND_CONSUMPTION",
+    "newDomainAuthorityCreated": false,
+    "secondHomepageAuthorityCreated": false,
+    "secondAskAuthorityCreated": false,
+    "secondJourneyAuthorityCreated": false
+  },
+  "homepageExperience": {
+    "visibleSceneAuthority": [
+      "H01",
+      "H02",
+      "H03",
+      "H04",
+      "H05",
+      "H06",
+      "H07",
+      "H08",
+      "H09"
+    ],
+    "arrival": "I arrive at PHI OS",
+    "orientation": [
+      "I see one Reality, not a product catalogue",
+      "I understand that multiple signals and lenses are fragmented",
+      "I see how PHI OS reconstructs, reads and navigates Reality"
+    ],
+    "firstInteraction": {
+      "askPhios": "QUESTION_TO_EXISTING_CKA",
+      "personalInput": "PERSONAL_RUNTIME_EXISTING_ROUTE",
+      "realSituation": "SITUATION_TO_EXISTING_CKA"
+    },
+    "finalEndpoint": "H09_CONTINUITY",
+    "realityJourneyDefaultEntry": false,
+    "legacyCompatibilityTailVisible": false
+  },
+  "answerRouting": {
+    "simple": {
+      "route": "ANSWER",
+      "requiredClientResults": [
+        "DIRECT_ANSWER",
+        "RELATED_KNOWLEDGE",
+        "ONE_LIMITED_FOLLOW_UP",
+        "GROUNDING",
+        "UNKNOWN_WHEN_APPLICABLE"
+      ]
+    },
+    "needsContext": {
+      "route": "TEMPORARY_GUIDED_CONTEXT",
+      "cta": "Help PHI OS understand your situation",
+      "result": "PERSONALIZED_GROUNDED_ANSWER_WHEN_CONTEXT_SUPPORTS_IT",
+      "persistentCaseCreated": false,
+      "canonicalRealityCreated": false
+    },
+    "complex": {
+      "route": "REALITY_JOURNEY_CANDIDATE",
+      "requires": [
+        "KAP_W24_COMPLEXITY_YES",
+        "EXPLICIT_CLIENT_CONSENT"
+      ],
+      "automaticJourneyActivation": false,
+      "experienceSemanticSequence": [
+        "RECONSTRUCTION",
+        "READING",
+        "NAVIGATION",
+        "ACTION",
+        "OUTCOME",
+        "REVIEW",
+        "CONTINUITY"
+      ],
+      "authorityMapping": {
+        "RECONSTRUCTION": "JR reconstruction + RMO Reality model authority",
+        "READING": "JR reading + RRE Reading authority",
+        "NAVIGATION": "JR navigation + RNE Navigation authority",
+        "ACTION": "RMO Action authority",
+        "OUTCOME": "RMO Outcome authority",
+        "REVIEW": "JR review + Reality Diff",
+        "CONTINUITY": "JR continuity + append-only Reality versioning"
+      },
+      "canonicalJrStageOrderRewritten": false
+    }
+  },
+  "knowledgePath": {
+    "sequence": [
+      "HOMEPAGE",
+      "FIVE_VOLUMES",
+      "PUBLISHED_KNOWLEDGE",
+      "ARTICLES_FIGURES_READING_PATHS",
+      "ASK_PHIOS",
+      "ACADEMY"
+    ],
+    "surfaces": {
+      "HOMEPAGE": "/",
+      "FIVE_VOLUMES": "/books/",
+      "PUBLISHED_KNOWLEDGE": "/library",
+      "ARTICLES": "/articles",
+      "FIGURES": "/figures",
+      "READING_PATHS": "/library",
+      "ASK_PHIOS": "/knowledge-search",
+      "ACADEMY": "/academy"
+    },
+    "pathIsCapabilityProgressionNotNewKnowledgeAuthority": true
+  },
+  "professionalPath": {
+    "sequence": [
+      "PUBLIC_OR_CUSTOMER",
+      "STRUCTURED_PHI_OS_SUPPORT",
+      "PHI_OS_PROFESSIONAL_WHEN_HUMAN_JUDGMENT_IS_NEEDED",
+      "QUALIFIED_EXTERNAL_PROFESSIONAL_WHEN_AUTHORITY_REQUIRES"
+    ],
+    "professionalJudgmentMayBeCreatedByCka": false,
+    "regulatedAuthorityMayBeCollapsedIntoPhios": false
+  },
+  "successConditions": {
+    "homepageIsCapabilityCatalogue": false,
+    "askPhiosIsGenericChatbot": false,
+    "realityJourneyIsDefaultForAllQuestions": false,
+    "v8SemanticContentLost": false,
+    "r2AssetExistenceWithoutConsumerIsAccepted": false,
+    "fiveVolumeConsumed": true,
+    "knowledgeConsumed": true,
+    "realityConsumed": true,
+    "financialConsumed": true,
+    "academyConsumed": true,
+    "servicesConsumed": true,
+    "professionalConsumed": true,
+    "askPhiosConsumed": true
+  },
+  "liveAcceptanceBoundary": {
+    "pocA10MachineBrowserResponsiveAcceptanceRequired": true,
+    "pocA11AccessibilityLiveAcceptanceOwnedHere": false,
+    "humanVisualAcceptanceOwnedHere": false,
+    "deploymentShaAcceptanceOwnedHere": false,
+    "customDomainAcceptanceOwnedHere": false,
+    "globalProductionAcceptanceOwnedHere": false
+  }
+}
