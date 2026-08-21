@@ -5,6 +5,7 @@ import crypto from 'node:crypto';
 const CONTRACT_PATH = 'content/web-production/production-operational-closure/poc-a/contracts/poc-a10-live-responsive-matrix-contract-v1.json';
 const EVIDENCE_PATH = 'content/web-production/production-operational-closure/poc-a/evidence/poc-a10-live-responsive-matrix-evidence-v1.json';
 const ACCEPTANCE_PATH = 'content/web-production/production-operational-closure/poc-a/acceptance/poc-a10-live-responsive-matrix-acceptance-v1.json';
+const READINESS_BOUNDARY_PATH = 'content/web-production/production-operational-closure/poc-a/audits/poc-a10-surface-readiness-boundary-v1.json';
 
 const mode = process.argv.includes('--live') ? 'live' : 'repository';
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
@@ -13,6 +14,8 @@ const readJson = async file => JSON.parse((await readRaw(file)).replace(/^\uFEFF
 
 const contractRaw = await readRaw(CONTRACT_PATH);
 const contract = JSON.parse(contractRaw.replace(/^\uFEFF/, ''));
+const readinessRaw = await readRaw(READINESS_BOUNDARY_PATH);
+const readiness = JSON.parse(readinessRaw.replace(/^\uFEFF/, ''));
 
 assert.equal(contract.schemaVersion, 'PHI-OS-POC-A10-LIVE-RESPONSIVE-MATRIX-CONTRACT-v1.0.0');
 assert.equal(contract.work, 'POC-A10');
@@ -40,10 +43,32 @@ assert.deepEqual(contract.criteria, [
   'NO_BROKEN_LOCALE_WRAPPING'
 ]);
 assert.equal(contract.representativeSurfaces.length, 13);
+
+assert.equal(readiness.schemaVersion, 'PHI-OS-POC-A10-SURFACE-READINESS-BOUNDARY-v1.0.0');
+assert.equal(readiness.status, 'SURFACE_READINESS_BOUNDARY_RECORDED_NO_COMPLETION_PROMOTION');
+assert.equal(readiness.surfaceReadinessSnapshot.length, 13);
+assert.equal(readiness.predecessorAuthority.path, contract.authority.frontendSurfaceInventory.path);
+assert.equal(readiness.predecessorAuthority.sha256, contract.authority.frontendSurfaceInventory.sha256);
+assert.equal(readiness.predecessorAuthority.rewritten, false);
+assert.equal(readiness.predecessorAuthority.routeFileExistenceNeverEqualsProduction, true);
+assert.deepEqual(new Set(readiness.surfaceReadinessSnapshot.map(item => item.surfaceFamily)), new Set(contract.matrix.surfaceFamilies));
+assert.ok(readiness.surfaceReadinessSnapshot.every(item => item.surfaceCompletionAcceptedByA10 === false));
+assert.equal(readiness.interpretation.surfaceProductionStatesPromotedByA10, false);
+assert.ok(readiness.interpretation.responsivePassDoesNotMean.includes('SURFACE_COMPLETE'));
+assert.ok(readiness.interpretation.responsivePassDoesNotMean.includes('GLOBAL_PRODUCTION_ACCEPTED'));
+assert.equal(readiness.authorityBoundary.responsiveAcceptanceMayBeEmitted, true);
+for (const [key, value] of Object.entries(readiness.authorityBoundary)) {
+  if (key !== 'responsiveAcceptanceMayBeEmitted') assert.equal(value, false, `readiness.${key}`);
+}
 assert.equal(contract.artifacts.runner, 'scripts/run-poc-a10-live-responsive-matrix.mjs');
 assert.equal(contract.artifacts.checker, 'scripts/check-poc-a10-live-responsive-matrix.mjs');
 assert.equal(contract.artifacts.evidence, EVIDENCE_PATH);
 assert.equal(contract.artifacts.acceptance, ACCEPTANCE_PATH);
+assert.equal(contract.artifacts.surfaceReadinessBoundary, READINESS_BOUNDARY_PATH);
+assert.equal(contract.interpretationBoundary.responsiveAcceptanceEqualsPageCompletion, false);
+assert.equal(contract.interpretationBoundary.responsiveAcceptanceEqualsSurfaceCompletion, false);
+assert.equal(contract.interpretationBoundary.responsiveAcceptancePromotesProductionState, false);
+assert.equal(contract.interpretationBoundary.a12HumanProductionDecisionRemainsSeparate, true);
 await fs.access(contract.artifacts.runner);
 await fs.access(contract.artifacts.checker);
 assert.deepEqual(new Set(contract.representativeSurfaces.map(item => item.surfaceFamily)), new Set(contract.matrix.surfaceFamilies));
@@ -129,6 +154,9 @@ for (const [key, value] of Object.entries(evidence.authorityBoundary)) {
   if (!['browserRevalidationOnly', 'screenshotsAreSupplementalOnly'].includes(key)) assert.equal(value, false, key);
 }
 assert.equal(evidence.authorityBoundary.screenshotsAreSupplementalOnly, true);
+assert.equal(evidence.authorityBoundary.pageCompletionAccepted, false);
+assert.equal(evidence.authorityBoundary.surfaceCompletionAccepted, false);
+assert.equal(evidence.authorityBoundary.productionStatePromoted, false);
 
 assert.equal(acceptance.schemaVersion, 'PHI-OS-POC-A10-LIVE-RESPONSIVE-MATRIX-ACCEPTANCE-v1.0.0');
 assert.equal(acceptance.status, 'LIVE_RESPONSIVE_182_STATE_MATRIX_ACCEPTED_MACHINE_BROWSER_SCOPE');
@@ -145,6 +173,9 @@ assert.equal(acceptance.criteria.allCriteriaPassedPerState, true);
 assert.equal(acceptance.historicalAuthority.responsiveMatrixRewritten, false);
 assert.equal(acceptance.historicalAuthority.responsiveCriteriaRewritten, false);
 assert.equal(acceptance.authorityBoundary.machineBrowserResponsiveAcceptanceOnly, true);
+assert.equal(acceptance.authorityBoundary.pageCompletionAccepted, false);
+assert.equal(acceptance.authorityBoundary.surfaceCompletionAccepted, false);
+assert.equal(acceptance.authorityBoundary.productionStatePromoted, false);
 for (const [key, value] of Object.entries(acceptance.authorityBoundary)) {
   if (key !== 'machineBrowserResponsiveAcceptanceOnly') assert.equal(value, false, key);
 }

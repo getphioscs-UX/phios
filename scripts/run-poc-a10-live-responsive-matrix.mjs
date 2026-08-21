@@ -365,7 +365,8 @@ function browserEvaluationSource({ expectedLocale, expectedSelector, tolerance }
       if (!compactNative && (r.width < 24 || r.height < 24)) {
         formFailures.push({ element:label(control), reason:'CONTROL_TOO_SMALL', width:r.width, height:r.height });
       }
-      if (r.left < -tolerance || r.right > vw + tolerance) {
+      const intentionallyScrollable = hasScrollableAncestor(control);
+      if (!intentionallyScrollable && (r.left < -tolerance || r.right > vw + tolerance)) {
         formFailures.push({ element:label(control), reason:'CONTROL_OUTSIDE_VIEWPORT', left:r.left, right:r.right });
       }
       if (clippedText(control)) formFailures.push({ element:label(control), reason:'CONTROL_TEXT_CLIPPED' });
@@ -723,7 +724,10 @@ async function main() {
       historicalBfrMatrixRewritten: false,
       deploymentShaAccepted: false,
       customDomainAccepted: false,
-      globalProductionAccepted: false
+      globalProductionAccepted: false,
+      pageCompletionAccepted: false,
+      surfaceCompletionAccepted: false,
+      productionStatePromoted: false
     }
   };
 
@@ -762,7 +766,10 @@ async function main() {
         accessibilityAcceptance: false,
         deploymentShaAcceptance: false,
         customDomainAcceptance: false,
-        globalProductionAccepted: false
+        globalProductionAccepted: false,
+        pageCompletionAccepted: false,
+        surfaceCompletionAccepted: false,
+        productionStatePromoted: false
       }
     };
     await fs.mkdir(path.dirname(ACCEPTANCE_PATH), { recursive: true });
