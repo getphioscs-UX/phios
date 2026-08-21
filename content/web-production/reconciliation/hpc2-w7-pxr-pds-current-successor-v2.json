@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-W7-PXR-PDS-CURRENT-SUCCESSOR-v2.0.0",
+  "work": "HPC2-W7-PXR-PDS-CURRENT-SUCCESSOR",
+  "baselineCommit": "f968210",
+  "status": "ACTIVE_ADDITIVE_PXR_PDS_CURRENT_SUCCESSOR_HPC2_W7_HISTORY_PRESERVED",
+  "purpose": "Reconcile the current HPC2-W7 checker with the PXR-governed PDS-W0 asset-resolver successor while preserving the frozen W7 successor and all historical homepage/CKA/PDS authority.",
+  "predecessor": {
+    "w7Successor": "content/web-production/reconciliation/hpc2-w7-aab1844-current-successor-v1.json",
+    "w7SuccessorSha256": "51b12ec429fc25a37f18d7d9039f27edf225540866aadc3ab88f1c4ef0cdcf57",
+    "rewritten": false
+  },
+  "pdsTransition": {
+    "historicalPdsSuccessor": "content/web-production/reconciliation/pds-w0-hpc2-pre-asset-resolver-successor-v1.json",
+    "historicalPdsSuccessorSha256": "9128015d7556f1876d0c336f90ecd5544ea37c56fc2e87d63ce7e60236451392",
+    "currentPdsSuccessor": "content/web-production/reconciliation/pds-w0-pxr-asset-resolver-successor-v2.json",
+    "currentPdsSuccessorSha256": "4f1da784c93414e5c9102ef1b82e4afc7db3201da1d8a43febe5879547efd0cc",
+    "currentChecker": "scripts/check-pds-w0-current.mjs",
+    "currentCheckerSha256": "379f8a058445ff495c7a35a62d56cc7dabca790932ffc9e9a52b4c284bf59fb6",
+    "resolverIdentityChanged": false,
+    "secondResolverCreated": false
+  },
+  "authorityBoundary": {
+    "hpc2W7FreezeRewritten": false,
+    "hpc2W7SuccessorV1Rewritten": false,
+    "pdsBaselineReopened": false,
+    "pdsHistoricalSuccessorRewritten": false,
+    "homepageRuntimeAuthorityChanged": false,
+    "ckaAuthorityChanged": false,
+    "routeAuthorityChanged": false,
+    "visualRegistryAuthorityChanged": false,
+    "assetRegistryAuthorityChanged": false,
+    "methodAuthorityChanged": false,
+    "globalProductionAcceptanceGranted": false
+  },
+  "successorPolicy": {
+    "additive": true,
+    "failClosed": true,
+    "historicalEvidencePreserved": true,
+    "futureDriftRequiresVersionedSuccessor": true
+  }
+}

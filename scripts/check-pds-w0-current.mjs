@@ -36,6 +36,7 @@ const paths = Object.freeze({
   historicalChecker: 'scripts/check-pds-w0-baseline-boundary.mjs',
   postFreezeRegistry: 'docs/design-system/pds-w0-post-freeze-protected-path-additions-v1.json',
   successor: 'content/web-production/reconciliation/pds-w0-hpc2-pre-asset-resolver-successor-v1.json',
+  pxrResolverSuccessor: 'content/web-production/reconciliation/pds-w0-pxr-asset-resolver-successor-v2.json',
   migrationRegistry: 'content/registry/runtime-migrations.json',
   package: 'package.json'
 });
@@ -46,6 +47,7 @@ const contract = read(paths.contract);
 const fixture = read(paths.fixture);
 const postFreezeRegistry = read(paths.postFreezeRegistry);
 const successor = read(paths.successor);
+const pxrResolverSuccessor = read(paths.pxrResolverSuccessor);
 const migrationRegistry = read(paths.migrationRegistry);
 const pkg = read(paths.package);
 
@@ -84,8 +86,19 @@ assert.equal(originalEntry.immutable, true);
 assert.equal(gitObjectExists(`${contract.baseline.commit}:${transition.path}`), false, 'ASSET_RESOLVER_EXISTED_IN_PDS_BASELINE');
 assert.equal(git(['rev-parse', `${transition.originalWprBCommit}:${transition.path}`]), transition.originalWprBBlobSha);
 assert.equal(git(['rev-parse', `${transition.successorCommit}:${transition.path}`]), transition.successorBlobSha);
-assert.equal(canonicalTextGitBlobSha(transition.path), transition.successorBlobSha, 'PDS_W0_CURRENT_ASSET_RESOLVER_BLOB_DRIFT');
-assert.equal(canonicalTextSha256(transition.path), transition.successorSha256, 'PDS_W0_CURRENT_ASSET_RESOLVER_SHA256_DRIFT');
+assert.equal(pxrResolverSuccessor.work, 'PDS-W0-PXR-ASSET-RESOLVER-CURRENT-SUCCESSOR');
+assert.equal(pxrResolverSuccessor.status, 'ACTIVE_ADDITIVE_PXR_GROUP_MEMBER_SUCCESSOR_PDS_W0_HISTORY_PRESERVED');
+assert.equal(pxrResolverSuccessor.predecessor.path, transition.path);
+assert.equal(pxrResolverSuccessor.predecessor.sha256, transition.successorSha256);
+assert.equal(pxrResolverSuccessor.predecessor.gitBlobSha, transition.successorBlobSha);
+assert.equal(pxrResolverSuccessor.predecessor.rewritten, false);
+assert.equal(pxrResolverSuccessor.pxrAuthority.path, 'content/web-production/pxr/successors/pxr-asset-resolver-group-member-successor-v1.json');
+assert.equal(canonicalTextSha256(pxrResolverSuccessor.pxrAuthority.path), pxrResolverSuccessor.pxrAuthority.sha256);
+assert.equal(canonicalTextGitBlobSha(transition.path), pxrResolverSuccessor.current.gitBlobSha, 'PDS_W0_CURRENT_ASSET_RESOLVER_BLOB_DRIFT');
+assert.equal(canonicalTextSha256(transition.path), pxrResolverSuccessor.current.sha256, 'PDS_W0_CURRENT_ASSET_RESOLVER_SHA256_DRIFT');
+assert.equal(pxrResolverSuccessor.current.singleResolverIdentityPreserved, true);
+assert.equal(pxrResolverSuccessor.current.groupMemberOnlyExtension, true);
+for (const value of Object.values(pxrResolverSuccessor.authorityBoundary)) assert.equal(value, false);
 assert.equal(transition.resolverIdentityChanged, false);
 assert.equal(transition.secondResolverCreated, false);
 assert.equal(transition.urlResolutionAuthorityChanged, false);

@@ -105,6 +105,38 @@ export function resolvePublicAsset({ registry, assetCode, publicBaseUrl, variant
   };
 }
 
+export function resolvePublicAssetGroupMember({ registry, assetCode, publicBaseUrl, memberObjectKey, surface = null, locale = null } = {}) {
+  const baseUrl = normalizePublicAssetBaseUrl(publicBaseUrl);
+  if (!baseUrl) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_UNAVAILABLE');
+  const asset = findPublicAsset(registry, assetCode);
+  const groupKey = normalizePublicAssetObjectKey(asset.object_key);
+  if (!groupKey.endsWith('/')) {
+    throw new PublicAssetResolutionError('PUBLIC_ASSET_NOT_GROUP', 'Registered asset is not a collection.', { assetCode });
+  }
+  const requested = normalizePublicAssetObjectKey(memberObjectKey);
+  const objectKey = requested.startsWith(groupKey)
+    ? requested
+    : `${groupKey}${requested.replace(/^\/+/, '')}`;
+  if (!objectKey.startsWith(groupKey) || objectKey === groupKey || objectKey.endsWith('/')) {
+    throw new PublicAssetResolutionError('PUBLIC_ASSET_GROUP_MEMBER_INVALID', 'Requested member is outside the registered collection.', { assetCode, memberObjectKey });
+  }
+  return {
+    assetCode: asset.asset_code,
+    category: asset.category,
+    objectKey,
+    canonicalFormat: asset.format ?? null,
+    contentType: asset.content_type ?? (asset.format === 'webp' ? 'image/webp' : null),
+    surface,
+    locale,
+    src: `${baseUrl}/${encodedObjectKey(objectKey)}`,
+    renderable: false,
+    runtimeProbeAllowed: true,
+    deliveryState: 'REGISTERED_GROUP_MEMBER_RUNTIME_PROBE_REQUIRED',
+    verification: asset.verification,
+    sourceReference: 'content/registry/public-assets.json'
+  };
+}
+
 export async function fetchPublicAssetRegistry({ fetchImpl = fetch, registryUrl = DEFAULT_REGISTRY_URL } = {}) {
   const response = await fetchImpl(registryUrl, { headers: { Accept: 'application/json' } });
   if (!response.ok) throw new PublicAssetResolutionError('PUBLIC_ASSET_REGISTRY_INVALID');
@@ -116,6 +148,27 @@ export async function fetchPublicAssetConfig({ fetchImpl = fetch, configUrl = DE
   const payload = await response.json().catch(() => ({}));
   if (!response.ok || !payload.success || !payload.publicAssetBaseUrl) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_UNAVAILABLE');
   return payload;
+}
+
+export async function resolvePublicAssetGroupMemberForWeb(assetCode, memberObjectKey, options = {}) {
+  const registry = options.registry ?? await fetchPublicAssetRegistry(options);
+  const registryBase = normalizePublicAssetBaseUrl(registry.public_base_url);
+  let configBase = null;
+  if (!registryBase) {
+    const config = options.publicConfig ?? await fetchPublicAssetConfig(options);
+    configBase = normalizePublicAssetBaseUrl(config.publicAssetBaseUrl);
+  } else if (options.publicConfig?.publicAssetBaseUrl) {
+    configBase = normalizePublicAssetBaseUrl(options.publicConfig.publicAssetBaseUrl);
+    if (configBase !== registryBase) throw new PublicAssetResolutionError('PUBLIC_ASSET_BASE_URL_CONFLICT');
+  }
+  return resolvePublicAssetGroupMember({
+    registry,
+    assetCode,
+    memberObjectKey,
+    publicBaseUrl: registryBase ?? configBase,
+    surface: options.surface,
+    locale: options.locale
+  });
 }
 
 export async function resolvePublicAssetForWeb(assetCode, options = {}) {

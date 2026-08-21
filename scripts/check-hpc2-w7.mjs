@@ -26,7 +26,9 @@ const paths = Object.freeze({
   acceptance: 'content/web/homepage/hpc2/acceptance/hpc2-w7-reality-surface-acceptance-v1.json',
   freeze: 'content/web/homepage/hpc2/freeze/hpc2-w7-reality-surface-freeze-v1.json',
   successor: 'content/web-production/reconciliation/hpc2-w7-aab1844-current-successor-v1.json',
+  currentSuccessor: 'content/web-production/reconciliation/hpc2-w7-pxr-pds-current-successor-v2.json',
   pdsSuccessor: 'content/web-production/reconciliation/pds-w0-hpc2-pre-asset-resolver-successor-v1.json',
+  pdsCurrentSuccessor: 'content/web-production/reconciliation/pds-w0-pxr-asset-resolver-successor-v2.json',
   pdsChecker: 'scripts/check-pds-w0-current.mjs',
   sceneRegistry: 'content/web/homepage/hpc2/homepage-scene-registry-v2.json',
   w6Contract: 'content/web/homepage/hpc2/contracts/hpc2-w6-first-interaction-composition-contract-v1.json',
@@ -60,6 +62,7 @@ const evidence = read(paths.evidence);
 const acceptance = read(paths.acceptance);
 const freeze = read(paths.freeze);
 const successor = read(paths.successor);
+const currentSuccessor = read(paths.currentSuccessor);
 const pdsSuccessor = read(paths.pdsSuccessor);
 const scenes = read(paths.sceneRegistry);
 const w6Contract = read(paths.w6Contract);
@@ -94,7 +97,16 @@ assert.equal(contract.predecessorAuthority.ckaBatchBContractSha256, sha256(paths
 for (const artifact of w6Freeze.immutableArtifacts) assert.equal(sha256(artifact.path), artifact.sha256, `HPC2-W6 frozen artifact drift: ${artifact.path}`);
 
 assert.equal(successor.pdsTransition.successorSha256, sha256(paths.pdsSuccessor));
-assert.equal(successor.pdsTransition.checkerSha256, sha256(paths.pdsChecker));
+assert.equal(successor.pdsTransition.checkerSha256, 'f6024ec335d3799fd6318c143aefa1ef0441086f5cf9da7b0b1c57e5bc37c1c0');
+assert.equal(currentSuccessor.work, 'HPC2-W7-PXR-PDS-CURRENT-SUCCESSOR');
+assert.equal(currentSuccessor.status, 'ACTIVE_ADDITIVE_PXR_PDS_CURRENT_SUCCESSOR_HPC2_W7_HISTORY_PRESERVED');
+assert.equal(currentSuccessor.predecessor.w7Successor, paths.successor);
+assert.equal(currentSuccessor.predecessor.w7SuccessorSha256, sha256(paths.successor));
+assert.equal(currentSuccessor.pdsTransition.currentPdsSuccessor, paths.pdsCurrentSuccessor);
+assert.equal(currentSuccessor.pdsTransition.currentPdsSuccessorSha256, sha256(paths.pdsCurrentSuccessor));
+assert.equal(currentSuccessor.pdsTransition.currentChecker, paths.pdsChecker);
+assert.equal(currentSuccessor.pdsTransition.currentCheckerSha256, sha256(paths.pdsChecker));
+for (const value of Object.values(currentSuccessor.authorityBoundary)) assert.equal(value, false);
 assert.equal(successor.pdsTransition.digestMode, 'UTF8_BOM_STRIPPED_LF');
 assert.equal(pdsSuccessor.successorPolicy.textDigestNormalization, successor.pdsTransition.digestMode);
 assert.equal(successor.pdsTransition.pdsContractCanonicalLfSha256, 'fce81ed714020127e8678c7c05c7cb836c101785eced35697a4f4db95828875b');

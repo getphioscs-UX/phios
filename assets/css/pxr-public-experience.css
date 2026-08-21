@@ -1,0 +1,210 @@
+/* PXR-P0..P3 — additive public presentation successor.
+   Runtime and governance remain behind the interface; this layer changes only public presentation. */
+
+:root {
+  --pxr-hero-max: 1600px;
+  --pxr-story-max: 1220px;
+}
+
+/* Current icon batch is explicitly transitional. H.5 identity/consumer evidence remains
+   intact, but automatically generated decorative rails are not part of the PXR visual language. */
+.client-visual-icon-rail,
+.client-visual-signature {
+  display: none !important;
+}
+
+/* Full-surface hero: the verified hero is the visual surface, not an image sitting above a white tray. */
+.client-visual-masthead {
+  width: min(var(--pxr-hero-max), calc(100% - 2 * clamp(.75rem, 2.5vw, 2.25rem))) !important;
+  margin: clamp(.65rem, 1.6vw, 1.2rem) auto clamp(1.8rem, 4vw, 4rem) !important;
+  border: 0 !important;
+  border-radius: clamp(1.1rem, 2.2vw, 2rem);
+  background: transparent !important;
+  box-shadow: 0 1.8rem 5rem rgba(15, 23, 42, .12);
+  overflow: clip;
+}
+
+.client-visual-masthead__figure {
+  aspect-ratio: auto !important;
+  height: clamp(28rem, 68vh, 52rem) !important;
+  min-height: 0;
+  max-height: none !important;
+  background: #e9ecef;
+}
+
+.client-visual-masthead__figure::after {
+  height: 26%;
+  background: linear-gradient(to bottom, transparent, rgba(7, 12, 20, .12));
+}
+
+.client-visual-masthead__image,
+.client-visual-managed-hero-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Managed Homepage/Library hero media must also behave as a single uninterrupted image surface. */
+[data-hpc2-hero],
+[data-bfr-library-hero] {
+  overflow: hidden;
+}
+
+[data-hpc2-hero] .client-visual-managed-hero-image,
+[data-bfr-library-hero] .client-visual-managed-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Shared visual narrative component */
+.pxr-visual-story {
+  width: min(var(--pxr-story-max), calc(100% - 2 * clamp(1rem, 4vw, 3rem)));
+  margin: clamp(2rem, 5vw, 5rem) auto;
+}
+
+.pxr-visual-story__heading {
+  max-width: 760px;
+  margin-bottom: clamp(1rem, 2.2vw, 1.6rem);
+}
+
+.pxr-visual-story__eyebrow {
+  margin: 0 0 .55rem;
+  font-size: .78rem;
+  font-weight: 650;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  opacity: .68;
+}
+
+.pxr-visual-story__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.6rem);
+}
+
+.pxr-visual-story__card {
+  margin: 0;
+  overflow: clip;
+  border: 1px solid rgba(17, 24, 39, .10);
+  border-radius: clamp(1rem, 1.8vw, 1.45rem);
+  background: rgba(255, 255, 255, .78);
+  box-shadow: 0 1rem 3.2rem rgba(15, 23, 42, .07);
+}
+
+.pxr-visual-story__media {
+  position: relative;
+  min-height: 260px;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, rgba(15, 23, 42, .05), rgba(15, 23, 42, .015));
+}
+
+.pxr-visual-story__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pxr-visual-story__copy {
+  padding: clamp(1rem, 2.3vw, 1.4rem);
+}
+
+.pxr-visual-story__copy h2,
+.pxr-visual-story__copy h3 {
+  margin: 0;
+  font-family: var(--phi-font-display, Newsreader, Georgia, serif);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.pxr-visual-story__copy p {
+  margin: .65rem 0 0;
+  color: var(--phi-text-muted, #5f6873);
+  line-height: 1.65;
+}
+
+/* Technical presentation is kept in the repository/runtime, but not shown in a customer view. */
+[data-pxr-hidden="true"] {
+  display: none !important;
+}
+
+/* Academy: remove validation-dashboard feel and let the learning path breathe. */
+body[data-page="academy"] .academy-hero__grid {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 900px;
+}
+body[data-page="academy"] .academy-metrics {
+  margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Ask: keep one obvious starting action. */
+body[data-page="knowledge-search"] .cka-introduction {
+  max-width: 800px;
+}
+body[data-page="knowledge-search"] .knowledge-search-panel {
+  max-width: 900px;
+}
+
+/* Personal Reality: customer task first, technical result contracts removed from default layer. */
+body[data-page="personal-runtime"] .pr-layout {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 980px;
+}
+body[data-page="personal-runtime"] .pr-hero__grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+}
+
+/* Preview loading/failure: never show the browser's native broken-image presentation. */
+.preview-page__media {
+  position: relative;
+  min-height: 18rem;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(15, 23, 42, .05), rgba(15, 23, 42, .015));
+}
+.preview-page__media::before {
+  content: '';
+  width: 2.2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid rgba(15, 23, 42, .14);
+  border-top-color: rgba(15, 23, 42, .56);
+  animation: pxr-spin .8s linear infinite;
+}
+.preview-page__media[data-state="ready"]::before,
+.preview-page__media[data-state="failed"]::before { display: none; }
+.preview-page__media img { opacity: 0; transition: opacity .2s ease; }
+.preview-page__media[data-state="ready"] img { opacity: 1; }
+.preview-page__fallback {
+  display: none;
+  max-width: 32rem;
+  padding: 2rem;
+  text-align: center;
+  color: var(--phi-text-muted, #5f6873);
+}
+.preview-page__media[data-state="failed"] .preview-page__fallback { display: block; }
+
+@keyframes pxr-spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 900px) {
+  .client-visual-masthead__figure { height: clamp(22rem, 54vh, 38rem); }
+  body[data-page="personal-runtime"] .pr-hero__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .client-visual-masthead {
+    width: calc(100% - 1rem);
+    border-radius: 1rem;
+    margin-top: .5rem;
+  }
+  .client-visual-masthead__figure {
+    height: clamp(20rem, 58vh, 32rem);
+  }
+  .pxr-visual-story { width: calc(100% - 1.5rem); }
+  .pxr-visual-story__media { min-height: 200px; aspect-ratio: 4 / 3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-page__media::before { animation: none; }
+  .preview-page__media img { transition: none; }
+}

@@ -8,6 +8,12 @@ import {
   readPreviewProgress,
   savePreviewProgress
 } from '../knowledge/reading-progress.js';
+import {
+  fetchPublicAssetConfig,
+  fetchPublicAssetRegistry,
+  normalizePublicAssetBaseUrl,
+  resolvePublicAssetGroupMember
+} from '../runtime/web-production/asset-resolver.js';
 
 const pagesContainer = document.querySelector('[data-preview-pages]');
 const tocContainer = document.querySelector('[data-preview-toc]');
@@ -21,6 +27,7 @@ const resumePage = document.querySelector('[data-preview-resume-page]');
 let preview;
 let currentPage = 1;
 let pageObserver;
+let previewAssetContext;
 
 function escapeHtml(value) {
   return String(value)
@@ -50,12 +57,23 @@ function sectionForPage(page) {
   };
 }
 
-function pagePath(page) {
+function pageObjectKey(page) {
   const pageNumber = String(page).padStart(
     preview.publicRender.pageNumberPadding,
     '0'
   );
-  return preview.publicRender.pathPattern.replace('{page}', pageNumber);
+  return preview.publicRender.objectKeyPattern.replace('{page}', pageNumber);
+}
+
+function pagePath(page) {
+  if (!previewAssetContext) throw new Error('PREVIEW_ASSET_CONTEXT_UNAVAILABLE');
+  return resolvePublicAssetGroupMember({
+    registry: previewAssetContext.registry,
+    publicBaseUrl: previewAssetContext.publicBaseUrl,
+    assetCode: preview.publicRender.assetCode,
+    memberObjectKey: pageObjectKey(page),
+    surface: 'BOOK_ONE_PREVIEW'
+  }).src;
 }
 
 function updateControls(page, persist = true) {
@@ -124,19 +142,22 @@ function render() {
         data-preview-page="${page}"
         data-preview-section="${escapeHtml(section.id)}"
       >
-        <img
-          src="${escapeHtml(pagePath(page))}"
-          alt="${escapeHtml(t('knowledge.preview.pageAlt', {
-            page,
-            total: preview.publicRender.pageCount,
-            section: localizedTitle(section)
-          }))}"
-          width="${width}"
-          height="${height}"
-          loading="${eager}"
-          fetchpriority="${priority}"
-          decoding="async"
-        >
+        <div class="preview-page__media" data-preview-page-media data-state="loading">
+          <img
+            src="${escapeHtml(pagePath(page))}"
+            alt="${escapeHtml(t('knowledge.preview.pageAlt', {
+              page,
+              total: preview.publicRender.pageCount,
+              section: localizedTitle(section)
+            }))}"
+            width="${width}"
+            height="${height}"
+            loading="${eager}"
+            fetchpriority="${priority}"
+            decoding="async"
+          >
+          <p class="preview-page__fallback" role="status">${escapeHtml(t('knowledge.preview.loadError'))}</p>
+        </div>
         <figcaption>
           ${escapeHtml(t('knowledge.preview.pageStatus', {
             page,
@@ -148,8 +169,32 @@ function render() {
     `;
   }).join('');
 
+  bindPreviewImageStates();
   observePages();
   updateControls(currentPage, false);
+}
+
+function bindPreviewImageStates() {
+  document.querySelectorAll('[data-preview-page-media]').forEach(media => {
+    const image = media.querySelector('img');
+    if (!image) return;
+    const ready = () => {
+      media.dataset.state = 'ready';
+      image.hidden = false;
+    };
+    const failed = () => {
+      media.dataset.state = 'failed';
+      image.hidden = true;
+      image.removeAttribute('src');
+      image.removeAttribute('srcset');
+    };
+    if (image.complete && image.naturalWidth > 0) ready();
+    else if (image.complete) failed();
+    else {
+      image.addEventListener('load', ready, { once: true });
+      image.addEventListener('error', failed, { once: true });
+    }
+  });
 }
 
 function observePages() {
@@ -193,13 +238,20 @@ document.addEventListener('keydown', event => {
   if (event.key === 'ArrowRight' && currentPage < preview.publicRender.pageCount) scrollToPage(currentPage + 1);
 });
 
-fetch('/content/registry/book-1-free-preview.json')
-  .then(response => {
+Promise.all([
+  fetch('/content/registry/book-1-free-preview.json').then(response => {
     if (!response.ok) throw new Error(`Preview manifest request failed: ${response.status}`);
     return response.json();
+  }),
+  fetchPublicAssetRegistry().then(async registry => {
+    const registryBase = normalizePublicAssetBaseUrl(registry.public_base_url);
+    const publicBaseUrl = registryBase || normalizePublicAssetBaseUrl((await fetchPublicAssetConfig()).publicAssetBaseUrl);
+    return { registry, publicBaseUrl };
   })
-  .then(previewManifest => {
+])
+  .then(([previewManifest, assetContext]) => {
     preview = previewManifest;
+    previewAssetContext = assetContext;
     initializeResume();
     render();
   })

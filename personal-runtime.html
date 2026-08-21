@@ -24,13 +24,13 @@
     <section class="pr-hero"><div class="public-container pr-hero__grid">
       <div>
         <p class="public-eyebrow" data-i18n="personalRuntime.eyebrow">Personal Runtime</p>
-        <h1 class="public-display" data-i18n="personalRuntime.title">Enter once. Process only what governance allows.</h1>
-        <p class="public-lead" data-i18n="personalRuntime.lead">Your birth input becomes one transient canonical request. Governed eligibility decides whether processing may continue; PHI OS returns Canonical Method Projections without interpretation.</p>
+        <h1 class="public-display" data-i18n="personalRuntime.title">Start with the information you already know.</h1>
+        <p class="public-lead" data-i18n="personalRuntime.lead">Enter your birth information once, choose the perspectives you want to explore, and confirm before anything is processed.</p>
       </div>
       <aside class="pr-boundary-card">
-        <strong data-i18n="personalRuntime.privacyTitle">Explicit processing only</strong>
-        <p data-i18n="personalRuntime.privacyCopy">Nothing is sent while you type. When you choose Process, selected Method requests are sent transiently for governed execution and are not stored by this surface.</p>
-        <span class="pr-badge" data-i18n="personalRuntime.noStorage">No browser storage · No persistence · No interpretation</span>
+        <strong data-i18n="personalRuntime.privacyTitle">Nothing happens until you choose</strong>
+        <p data-i18n="personalRuntime.privacyCopy">Nothing is sent while you type. When you confirm, only the perspectives you selected are processed for this request.</p>
+        <span class="pr-badge" data-i18n="personalRuntime.noStorage">Temporary processing · No automatic interpretation</span>
       </aside>
     </div></section>
 
@@ -46,8 +46,8 @@
     <section class="public-section"><div class="public-container pr-layout">
       <section class="pr-panel" aria-labelledby="birth-input-title">
         <div class="pr-section-heading">
-          <p class="public-eyebrow">Input → Governed processing</p>
-          <h2 id="birth-input-title" data-i18n="personalRuntime.inputTitle">Canonical birth input</h2>
+          <p class="public-eyebrow">Your information</p>
+          <h2 id="birth-input-title" data-i18n="personalRuntime.inputTitle">What do you currently know?</h2>
           <p data-i18n="personalRuntime.inputCopy">Unknown values stay unknown. Birth timezone and UTC offset at birth are separate values; this page never substitutes the browser timezone.</p>
         </div>
         <form id="personalRuntimeInput" class="pr-form" autocomplete="off" novalidate>
@@ -62,16 +62,16 @@
           <div class="pr-source"><span data-i18n="personalRuntime.source">Source</span><strong data-i18n="personalRuntime.sourceHuman">Human declaration</strong></div>
           <label class="pr-confirm"><input id="customerConfirmation" name="CustomerConfirmation" type="checkbox"><span data-i18n="personalRuntime.confirm">I confirm these values reflect what I currently know.</span></label>
 
-          <fieldset class="pr-method-select"><legend data-i18n="personalRuntime.requestedMethods">Requested Methods</legend><div data-mcd7-method-selection class="pr-method-select__grid"></div></fieldset>
-          <label class="pr-confirm pr-consent-confirm"><input id="executionConsent" name="ExecutionConsent" type="checkbox"><span data-i18n="personalRuntime.executionConsent">I consent to transient processing of this input for the selected Personal Runtime Method projections.</span></label>
-          <div class="pr-actions"><button class="public-button" id="checkPersonalRuntimeInput" type="button" data-i18n="personalRuntime.check">Check eligibility</button><button class="public-button" id="processPersonalRuntime" type="button" disabled data-i18n="personalRuntime.process">Process selected Methods</button><button class="pr-secondary" id="clearPersonalRuntimeInput" type="button" data-i18n="personalRuntime.clear">Clear</button></div>
+          <fieldset class="pr-method-select"><legend data-i18n="personalRuntime.requestedMethods">Choose what you want to explore</legend><div data-mcd7-method-selection class="pr-method-select__grid"></div></fieldset>
+          <label class="pr-confirm pr-consent-confirm"><input id="executionConsent" name="ExecutionConsent" type="checkbox"><span data-i18n="personalRuntime.executionConsent">I agree to process this information for the options I selected.</span></label>
+          <div class="pr-actions"><button class="public-button" id="checkPersonalRuntimeInput" type="button" data-i18n="personalRuntime.check">Review my information</button><button class="public-button" id="processPersonalRuntime" type="button" disabled data-i18n="personalRuntime.process">Explore selected perspectives</button><button class="pr-secondary" id="clearPersonalRuntimeInput" type="button" data-i18n="personalRuntime.clear">Clear</button></div>
         </form>
 
-        <section class="pr-readiness" data-personal-runtime-readiness hidden aria-live="polite"><h3 data-i18n="personalRuntime.eligibilityTitle">Eligibility</h3><p data-personal-runtime-readiness-message></p><div data-mcd7-eligibility class="pr-eligibility-grid"></div></section>
-        <section class="pr-processing" data-mcd7-processing hidden aria-live="polite"><span class="pr-processing__dot" aria-hidden="true"></span><div><h3 data-i18n="personalRuntime.processingTitle">Processing</h3><p data-i18n="personalRuntime.processingCopy">Eligibility and authorization are evaluated before any Method execution.</p></div></section>
+        <section class="pr-readiness" data-personal-runtime-readiness hidden aria-live="polite"><h3 data-i18n="personalRuntime.eligibilityTitle">Ready to continue</h3><p data-personal-runtime-readiness-message></p><div data-mcd7-eligibility class="pr-eligibility-grid"></div></section>
+        <section class="pr-processing" data-mcd7-processing hidden aria-live="polite"><span class="pr-processing__dot" aria-hidden="true"></span><div><h3 data-i18n="personalRuntime.processingTitle">Processing</h3><p data-i18n="personalRuntime.processingCopy">Your choices are checked before processing begins.</p></div></section>
       </section>
 
-      <aside class="pr-side">
+      <aside class="pr-side" data-pxr-hidden="true" aria-hidden="true" hidden>
         <section class="pr-panel"><p class="public-eyebrow">Governed result boundary</p><h2 data-i18n="personalRuntime.overviewPreviewTitle">Result contract</h2><p data-i18n="personalRuntime.overviewPreviewCopy">Results arrive only as Canonical Method Projections. Unknown, Evidence, Version and Execution remain visible.</p><ul class="pr-contract-list"><li>Canonical Projection only</li><li>Eligibility and dispatch evidence</li><li>Unknown remains visible</li><li>Interpretation excluded</li></ul></section>
         <section class="pr-panel pr-consent"><p class="public-eyebrow">Restricted projection boundary</p><h2 data-i18n="personalRuntime.controlledAvailabilityTitle">Controlled availability</h2><strong data-i18n="personalRuntime.personalRuntimeProjection">Personal Runtime Projection</strong><p class="pr-unavailable" data-i18n="personalRuntime.currentlyUnavailable">Currently unavailable</p><p data-i18n="personalRuntime.visibilityBoundary">Visibility does not equal availability. No result tab, chart, interpretation or production report is created.</p></section>
       </aside>

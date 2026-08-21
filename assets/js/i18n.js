@@ -529,3 +529,10 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     document.documentElement.dataset.clientVisualConsumption = 'BOOTSTRAP_FAILED';
   });
 }
+
+/* PXR public presentation successor bootstrap */
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  void import('./public-experience/pxr-public-experience.js').catch(() => {
+    document.documentElement.dataset.pxr = 'BOOTSTRAP_FAILED';
+  });
+}

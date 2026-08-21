@@ -25,6 +25,7 @@ const paths = Object.freeze({
   successorContract: 'content/web-production/reconciliation/bfr-h-hpc2-w5-316a1bc-branding-registry-successor-v1.json',
   successorEvidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-public-asset-registry-successor-audit-v1.json',
   pocAVerificationSuccessor: 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json',
+  pxrResolverSuccessor: 'content/web-production/pxr/successors/pxr-asset-resolver-group-member-successor-v1.json',
   bfrCurrentVerificationSuccessor: 'content/web-production/reconciliation/bfr-h-current-poc-a-public-asset-verification-successor-v1.json',
   partH5ABrandingSuccessor: 'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json',
   partH5AReconciliation: 'content/web-production/client-visual-consumption/reconciliation/part-h5a-branding-r2-evidence-reconciliation-v1.json',
@@ -69,6 +70,7 @@ const freeze = read(paths.freeze);
 const successor = read(paths.successorContract);
 const successorEvidence = read(paths.successorEvidence);
 const pocAVerificationSuccessor = read(paths.pocAVerificationSuccessor);
+const pxrResolverSuccessor = read(paths.pxrResolverSuccessor);
 const bfrCurrentVerificationSuccessor = read(paths.bfrCurrentVerificationSuccessor);
 const partH5ABrandingSuccessor = read(paths.partH5ABrandingSuccessor);
 const partH5AReconciliation = read(paths.partH5AReconciliation);
@@ -196,6 +198,19 @@ for (const record of evidence.immutableAuthoritySnapshots) {
     assert.equal(record.sha256, successor.registryTransition.predecessorProjectionSha256, 'Historical W5 Public Asset Registry observation changed');
   } else if (record.path === paths.visualRegistry) {
     assert.equal(record.sha256, successor.visualRegistryTransition.predecessorProjectionSha256, 'Historical W5 Visual Registry observation changed');
+  } else if (record.path === paths.resolver) {
+    assert.equal(record.sha256, pxrResolverSuccessor.predecessor.sha256, 'Historical W5 asset-resolver observation changed');
+    assert.equal(pxrResolverSuccessor.predecessor.rewritten, false);
+    assert.equal(pxrResolverSuccessor.current.path, paths.resolver);
+    assert.equal(sha256(paths.resolver), pxrResolverSuccessor.current.sha256, 'PXR asset-resolver successor drift');
+    assert.equal(pxrResolverSuccessor.current.singleResolverIdentityPreserved, true);
+    assert.equal(pxrResolverSuccessor.semantics.registeredGroupRequired, true);
+    assert.equal(pxrResolverSuccessor.semantics.memberMustRemainWithinRegisteredObjectKeyPrefix, true);
+    assert.equal(pxrResolverSuccessor.semantics.existingPublicBaseResolutionReused, true);
+    assert.equal(pxrResolverSuccessor.semantics.groupMemberRemoteVerificationPromoted, false);
+    assert.equal(pxrResolverSuccessor.semantics.hardcodedR2HostAdded, false);
+    assert.equal(pxrResolverSuccessor.semantics.existingResolvePublicAssetSemanticsChanged, false);
+    for (const boundary of Object.values(pxrResolverSuccessor.authorityBoundary)) assert.equal(boundary, false);
   } else {
     assert.equal(sha256(record.path), record.sha256, `Authority drift: ${record.path}`);
   }

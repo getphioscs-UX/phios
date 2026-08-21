@@ -1392,7 +1392,8 @@
     "precheck:bfr-h": "npm run check:bfr-h-required-files",
     "check:bfr-h15": "node scripts/check-bfr-h15-capability-consumption.mjs",
     "check:bfr-h16": "node scripts/check-bfr-h16-visual-production.mjs",
-    "postcheck:bfr-h": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:bfr-h16",
+    "postcheck:bfr-h": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:pxr && npm run check:bfr-h16",
+    "check:web-production-current": "npm run check:web-production-runtime && npm run check:wpr-pf",
     "check:client-visual-consumption-current": "node scripts/check-client-visual-consumption-current.mjs",
     "check:client-visual-consumption-live": "node scripts/check-client-visual-consumption-live.mjs",
     "check:part-h5": "npm run check:client-visual-consumption-current",
@@ -1404,7 +1405,11 @@
     "check:part-k": "node scripts/check-part-k-final-freeze.mjs",
     "check:client-surface-final": "npm run check:bfr-h && npm run check:part-j && npm run check:part-k",
     "check:client-surface-production-final": "npm run check:client-surface-final",
-    "check:web-production-current": "npm run check:web-production-runtime && npm run check:wpr-pf"
+    "check:pxr-p0": "node scripts/check-pxr-p0-public-layer-emergency-cleanup.mjs",
+    "check:pxr-p1": "node scripts/check-pxr-p1-unified-visual-consumption.mjs",
+    "check:pxr-p2": "node scripts/check-pxr-p2-core-surface-recomposition.mjs",
+    "check:pxr-p3": "node scripts/check-pxr-p3-public-experience-acceptance.mjs",
+    "check:pxr": "npm run check:pxr-p0 && npm run check:pxr-p1 && npm run check:pxr-p2 && npm run check:pxr-p3"
   },
   "type": "module",
   "dependencies": {

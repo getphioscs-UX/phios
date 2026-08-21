@@ -69,11 +69,10 @@ function renderDashboard() {
     const meta = element('p', 'academy-path-card__meta', t(`academyLearning.levels.${lesson.level}`));
     const title = element('h3', '', t(keyFor(lesson, 'title')));
     const summary = element('p', '', t(keyFor(lesson, 'summary')));
-    const state = element('p', 'academy-path-card__state', t('academyLearning.status.progressUnavailable'));
     const link = element('a', 'academy-text-link', t('academyLearning.dashboard.openLesson'));
     link.href = lessonHref(lesson);
     link.setAttribute('aria-label', `${t('academyLearning.dashboard.openLesson')}: ${t(keyFor(lesson, 'title'))}`);
-    body.append(meta, title, summary, state, link);
+    body.append(meta, title, summary, link);
     item.append(sequence, body);
     return item;
   });
