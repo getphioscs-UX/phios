@@ -253,7 +253,7 @@ assert.equal(pkg.scripts['check:client-surface-invariants-frozen'], 'node script
 assert.equal(pkg.scripts['check:client-surface-invariants'], 'node scripts/check-client-surface-global-invariants-current.mjs');
 assert.equal(pkg.scripts['check:bfr-h-invariants'], 'npm run check:client-surface-invariants');
 assert.equal(pkg.scripts['check:client-surface'], 'npm run check:client-surface-invariants');
-assert.equal(pkg.scripts['check:cka'], 'npm run check:cka-a && npm run check:cka-w5-w17');
+assert.equal(pkg.scripts['check:cka'], 'npm run check:cka-a && npm run check:cka-w5-w17 && npm run check:cka-w18-w33');
 assert.equal(String(pkg.scripts.check || '').includes('check:client-surface'), false, 'Foundation invariant checker must not claim global Production acceptance.');
 
 console.log('✓ Client Surface Global Invariants INV-01–INV-10 passed.');

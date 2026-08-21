@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "PHI-OS-HPC2-CKA-DIRECT-MAPPING-CONTRACT-v1.0.0",
+  "work": "PART-D-HPC2-X-CKA-DIRECT-MAPPING",
+  "baselineCommit": "64ead9a9addf56f4f83c28736bf205cdc9380c10",
+  "status": "CURRENT_H01_H09_CKA_CONSUMPTION_MAPPING_DEFINED",
+  "invariant": {
+    "hpc2OwnsCka": false,
+    "hpc2ConsumesCkaEntry": true,
+    "ckaRuntimeOwner": "CKA",
+    "groundedAnswerOwner": "KAP",
+    "homepageRuntimeOwnerChanged": false,
+    "secondAskRuntimeCreated": false,
+    "secondAnswerRuntimeCreated": false,
+    "methodAuthorityChanged": false,
+    "realityAuthorityChanged": false,
+    "professionalJudgmentAuthorityChanged": false
+  },
+  "predecessorAuthority": {
+    "sceneRegistry": "content/web/homepage/hpc2/homepage-scene-registry-v2.json",
+    "ckaW0W4": "content/client/knowledge-ask/contracts/cka-w0-ask-entry-contract-v1.json",
+    "ckaW5W17": "content/client/knowledge-ask/contracts/cka-w5-w17-batch-b-contract-v1.json",
+    "ckaW18W33": "content/client/knowledge-ask/contracts/cka-w18-w33-client-consumption-contract-v1.json",
+    "h09Composition": "content/web/homepage/hpc2/contracts/hpc2-w10-continuity-final-cta-contract-v1.json"
+  },
+  "mapping": [
+    {
+      "scene": "H01",
+      "title": "Hero",
+      "ckaRole": "NO_FULL_ASK_UI",
+      "rule": "Keep focus on platform entry",
+      "currentConsumption": "NONE_BY_DESIGN",
+      "requiredEvidence": ["NO_CKA_COMPOSER", "NO_CKA_ANSWER_SURFACE", "NO_ASK_PRIMARY"]
+    },
+    {
+      "scene": "H02",
+      "title": "One Reality",
+      "ckaRole": "PUBLIC_EXAMPLE_QUESTIONS_ALLOWED",
+      "rule": "No private context",
+      "currentConsumption": "PUBLIC_EXAMPLE_ONLY",
+      "requiredEvidence": ["SYNTHETIC_PUBLIC_EXAMPLE", "NO_CKA_RUNTIME", "NO_PRIVATE_CONTEXT"]
+    },
+    {
+      "scene": "H03",
+      "title": "Fragmentation",
+      "ckaRole": "EXPLAIN_ASK_IS_NOT_ANOTHER_DISCONNECTED_ANSWER",
+      "rule": "No chat UI",
+      "currentConsumption": "EXPLANATION_ONLY",
+      "requiredEvidence": ["DISCONNECTED_ANSWERS_THESIS", "NO_CKA_COMPOSER", "NO_CKA_ANSWER_SURFACE", "H04_IS_FIRST_FORMAL_ASK"]
+    },
+    {
+      "scene": "H04",
+      "title": "PHI OS Runtime",
+      "ckaRole": "FIRST_FORMAL_ASK_PHI_OS_CTA",
+      "rule": "CKA entry",
+      "currentConsumption": "ACTIVE_CKA_ENTRY",
+      "entry": {"route": "/knowledge-search", "entrySurface": "HOMEPAGE", "mode": "GLOBAL"}
+    },
+    {
+      "scene": "H05",
+      "title": "First Interaction",
+      "ckaRole": "ASK_SITUATION_PERSONAL_RUNTIME_SPLIT",
+      "rule": "No forced Journey",
+      "currentConsumption": "ACTIVE_SPLIT_ENTRY",
+      "paths": ["SITUATION_TO_EXISTING_CKA", "QUESTION_TO_EXISTING_CKA", "PERSONAL_RUNTIME_EXISTING_ROUTE"],
+      "automaticJourney": false
+    },
+    {
+      "scene": "H06",
+      "title": "Reality Surfaces",
+      "ckaRole": "CROSS_SURFACE_INTERACTION",
+      "rule": "Ask is not a fifth giant card",
+      "currentConsumption": "ACTIVE_INLINE_CROSS_SURFACE_CKA",
+      "surfaceCardCount": 4,
+      "askPlacement": "WITHIN_KNOWLEDGE_AND_LEARNING_SURFACE"
+    },
+    {
+      "scene": "H07",
+      "title": "Five Volumes",
+      "ckaRole": "CONTEXTUAL_CKA",
+      "rule": "Ask Book / Article / Figure",
+      "currentConsumption": "ACTIVE_CONTEXTUAL_CKA",
+      "homepageContextType": "FIVE_VOLUME_KNOWLEDGE",
+      "ckaContextualCtas": ["Ask about this volume", "Ask about this article", "Ask about this figure"]
+    },
+    {
+      "scene": "H08",
+      "title": "Academy / Professional",
+      "ckaRole": "ESCALATE_ONLY_WHEN_ANSWER_OR_AUTHORITY_REQUIRES",
+      "rule": "No forced professional",
+      "currentConsumption": "BOUNDARY_ONLY_NO_DIRECT_CKA",
+      "forcedProfessional": false,
+      "authorityLevels": ["PHIOS", "PHIOS_PROFESSIONAL", "QUALIFIED_EXTERNAL_PROFESSIONAL"]
+    },
+    {
+      "scene": "H09",
+      "title": "Continuity",
+      "ckaRole": "FOLLOW_UP_ASK_AGAIN_JOURNEY_IF_COMPLEX",
+      "rule": "Continuity without over-escalation",
+      "currentConsumption": "ACTIVE_SECONDARY_CKA",
+      "askHierarchy": "SECONDARY",
+      "journeyHierarchy": "TERTIARY_CONTEXTUAL_COMPLEX_ONLY",
+      "automaticJourney": false
+    }
+  ],
+  "currentPlacementSummary": {
+    "firstFormalAskScene": "H04",
+    "activeCkaScenes": ["H04", "H05", "H06", "H07", "H09"],
+    "nonCkaScenesByDesign": ["H01", "H02", "H03", "H08"],
+    "fullAnswerUiOnHomepage": false,
+    "genericChatUiOnHomepage": false
+  }
+}

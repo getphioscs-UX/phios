@@ -455,8 +455,12 @@ assert.equal(pkg.scripts['check:hpc2-w8-frozen'], 'node scripts/check-hpc2-w8.mj
 assert.equal(pkg.scripts['check:hpc2-w8'], 'node scripts/check-hpc2-w8-current.mjs');
 assert.equal(pkg.scripts['check:hpc2-w9-frozen'], 'node scripts/check-hpc2-w9.mjs');
 assert.equal(pkg.scripts['check:hpc2-w9'], 'node scripts/check-hpc2-w9-current.mjs');
-assert.ok(pkg.scripts['check:hpc2'].endsWith('&& npm run check:hpc2-w12'));
-assert.ok(pkg.scripts['check:bfr-h'].endsWith('&& npm run check:hpc2-w12'));
+assert.ok(pkg.scripts['check:hpc2'].includes('npm run check:hpc2-w12'));
+assert.ok(pkg.scripts['check:hpc2'].endsWith('&& npm run check:hpc2-w14'));
+assert.ok(pkg.scripts['check:hpc2'].includes('npm run check:hpc2-w13'));
+assert.ok(pkg.scripts['check:bfr-h'].includes('npm run check:hpc2-w12'));
+assert.ok(pkg.scripts['check:bfr-h'].endsWith('&& npm run check:hpc2-w14'));
+assert.ok(pkg.scripts['check:bfr-h'].includes('npm run check:hpc2-w13'));
 
 console.log('HPC2-W5 current successor: ACCEPTED (repository implementation)');
 console.log('  scenes: frozen H01-H04 preserved; additive H05-H08 are governed by HPC2-W6 through W9; H09 is governed by HPC2-W10');
