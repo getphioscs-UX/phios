@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-RJX-VERTICAL-SLICE-ORGANIZATION-v1.0.0",
+  "status": "VALIDATION_ONLY_VERTICAL_SLICE_FIXTURE",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "mode": "COMPLEX_REALITY_CASE",
+  "scope": "ORGANIZATION",
+  "organization": {
+    "id": "ORG-1",
+    "roles": [
+      {
+        "id": "ROLE-OPS",
+        "sourceRef": "ORG-CHART-1"
+      },
+      {
+        "id": "ROLE-FINANCE",
+        "sourceRef": "ORG-CHART-1"
+      },
+      {
+        "id": "ROLE-DELIVERY",
+        "sourceRef": "ORG-CHART-1"
+      }
+    ]
+  },
+  "resourceAllocation": [
+    {
+      "resourceId": "RESOURCE-1",
+      "requestedBy": [
+        "ROLE-OPS",
+        "ROLE-DELIVERY"
+      ],
+      "constraintRef": "INFRA-1"
+    }
+  ],
+  "systemConstraints": [
+    {
+      "id": "INFRA-1",
+      "type": "INFRASTRUCTURE_CAPACITY",
+      "scopeType": "ORGANIZATION",
+      "scopeId": "ORG-1",
+      "sourceRef": "CAPACITY-RECORD-1",
+      "personalIdentityAttribution": false
+    }
+  ],
+  "objectives": [
+    {
+      "id": "OBJ-1",
+      "label": "RELIABILITY"
+    },
+    {
+      "id": "OBJ-2",
+      "label": "COST_CONTROL"
+    },
+    {
+      "id": "OBJ-3",
+      "label": "DELIVERY_SPEED"
+    }
+  ],
+  "book4ContextGate": {
+    "systemScaleEvidencePresent": true,
+    "activationAllowedOnlyWithSystemScaleEvidence": true,
+    "candidateNodeCode": "KN-B3-P10-026",
+    "contextProjectionAllowed": true,
+    "ruleBindingActivated": false
+  },
+  "professionalBoundary": {
+    "businessJudgmentCreatedByRJX": false,
+    "professionalConclusionCreatedByRJX": false,
+    "handoffRequiredWhenProfessionalAuthorityNeeded": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-RJX-CENTRAL-CHECKER-MANIFEST-v2.0.0",
+  "baselineCommit": "167bce2a82734cf96207b78abb47cdcd8cf82522",
+  "status": "READ_ONLY_FINAL_EVIDENCE_SUCCESSOR",
+  "predecessor": {
+    "path": "content/runtime/journey-runtime/audits/rjx-central-checker-manifest-v1.json",
+    "sha256": "53ee75d9804c3758aed157c29c5edf6fee5a7a00e62ff741132a9ff5ac3dde78",
+    "rewritten": false
+  },
+  "commands": [
+    "check:rjx-minimum-slices",
+    "check:rjx-metrics",
+    "check:rjx-final-acceptance",
+    "check:rjx-authorization-scope",
+    "check:rjx-package-f",
+    "check:rjx",
+    "check"
+  ],
+  "checkerMutationPolicy": {
+    "repairAllowed": false,
+    "generateAllowed": false,
+    "approveAllowed": false,
+    "publishAllowed": false,
+    "hashUpdateAllowed": false
+  },
+  "finalStatePolicy": {
+    "technicalCheckerMayPassWhileFinalAcceptanceBlocked": true,
+    "humanAcceptanceMayBeSynthesized": false,
+    "browserAcceptanceMayBeSynthesized": false,
+    "providerIntegrationMayBeSynthesized": false,
+    "globalFreezeMayBeSynthesized": false
+  }
+}
