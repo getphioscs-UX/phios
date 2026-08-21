@@ -521,3 +521,11 @@ export default {
   onLocaleChange,
   t
 };
+
+
+/* PART H.5 client visual consumption bootstrap */
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  void import('./client-visual-consumption.js').catch(() => {
+    document.documentElement.dataset.clientVisualConsumption = 'BOOTSTRAP_FAILED';
+  });
+}

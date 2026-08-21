@@ -13,6 +13,9 @@ const logoSuccessorPath = 'content/web-production/reconciliation/bfr-h-part-a-1e
 const brandingSuccessorPath = 'content/web-production/reconciliation/bfr-h-hpc2-w5-316a1bc-branding-registry-successor-v1.json';
 const pocAVerificationSuccessorPath = 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json';
 const bfrCurrentVerificationSuccessorPath = 'content/web-production/reconciliation/bfr-h-current-poc-a-public-asset-verification-successor-v1.json';
+const partH5ABrandingSuccessorPath = 'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json';
+const partH5AReconciliationPath = 'content/web-production/client-visual-consumption/reconciliation/part-h5a-branding-r2-evidence-reconciliation-v1.json';
+const partH5AEvidencePath = 'content/web-production/client-visual-consumption/evidence/branding-r2-live-verification-v1.json';
 const acceptancePath = 'content/web-production/acceptance/bfr-h-part-a-acceptance-v1.json';
 const freezePath = 'content/web-production/freeze/bfr-h-part-a-freeze-v1.json';
 const h0Path = 'content/web-production/bfr-backend-capability-inventory-v1.json';
@@ -26,7 +29,7 @@ const prePath = 'content/web/homepage/hpc2-pre/hpc2-pre-final-readiness-v1.json'
 const logoRegistryPath = 'content/web-production/registries/phios-logo-registry-v1.json';
 const visualRegistryPath = 'content/web-production/registries/client-visual-asset-registry-v1.2.json';
 
-for (const path of [predecessorReconciliationPath, logoSuccessorPath, brandingSuccessorPath, pocAVerificationSuccessorPath, bfrCurrentVerificationSuccessorPath, acceptancePath, freezePath, h0Path, h1Path, h2Path, h3Path, h11Path, publicAssetsPath, hpc2PreR2SuccessorPath, prePath, logoRegistryPath, visualRegistryPath]) {
+for (const path of [predecessorReconciliationPath, logoSuccessorPath, brandingSuccessorPath, pocAVerificationSuccessorPath, bfrCurrentVerificationSuccessorPath, partH5ABrandingSuccessorPath, partH5AReconciliationPath, partH5AEvidencePath, acceptancePath, freezePath, h0Path, h1Path, h2Path, h3Path, h11Path, publicAssetsPath, hpc2PreR2SuccessorPath, prePath, logoRegistryPath, visualRegistryPath]) {
   assert.ok(exists(path), `Missing BFR-H current dependency: ${path}`);
 }
 
@@ -35,6 +38,9 @@ const logoSuccessor = read(logoSuccessorPath);
 const brandingSuccessor = read(brandingSuccessorPath);
 const pocAVerificationSuccessor = read(pocAVerificationSuccessorPath);
 const bfrCurrentVerificationSuccessor = read(bfrCurrentVerificationSuccessorPath);
+const partH5ABrandingSuccessor = read(partH5ABrandingSuccessorPath);
+const partH5AReconciliation = read(partH5AReconciliationPath);
+const partH5AEvidence = read(partH5AEvidencePath);
 const acceptance = read(acceptancePath);
 const freeze = read(freezePath);
 const h0 = read(h0Path);
@@ -146,9 +152,14 @@ assert.equal(bfrCurrentVerificationSuccessor.historicalLogoSuccessor.sha256, sha
 assert.equal(bfrCurrentVerificationSuccessor.historicalLogoSuccessor.predecessorProjectionSha256, logoSuccessor.registryTransition.predecessorSha256);
 assert.equal(bfrCurrentVerificationSuccessor.historicalLogoSuccessor.rewritten, false);
 assert.equal(bfrCurrentVerificationSuccessor.currentProjectionFacts.publicAssetRegistryPath, publicAssetsPath);
-assert.equal(bfrCurrentVerificationSuccessor.currentProjectionFacts.publicAssetRegistrySha256, sha256(publicAssetsPath));
+assert.equal(bfrCurrentVerificationSuccessor.currentProjectionFacts.publicAssetRegistrySha256, partH5ABrandingSuccessor.publicAssetRegistry.predecessorSha256);
+assert.equal(partH5ABrandingSuccessor.publicAssetRegistry.currentSha256, sha256(publicAssetsPath));
+assert.equal(partH5ABrandingSuccessor.logoRegistry.currentSha256, sha256(logoRegistryPath));
+assert.equal(partH5ABrandingSuccessor.remoteVerificationAdvancement.targetCount, 12);
+assert.equal(partH5AReconciliation.evidence.sha256, sha256(partH5AEvidencePath));
+assert.equal(partH5AEvidence.all12RemoteVerified, true);
 assert.equal(bfrCurrentVerificationSuccessor.currentProjectionFacts.recordCount, publicAssets.assets.length);
-assert.equal(pocAVerificationSuccessor.publicAssetRegistry.currentSha256, sha256(publicAssetsPath));
+assert.equal(pocAVerificationSuccessor.publicAssetRegistry.currentSha256, partH5ABrandingSuccessor.publicAssetRegistry.predecessorSha256);
 assert.equal(pocAVerificationSuccessor.publicAssetRegistry.recordCount, publicAssets.assets.length);
 assert.equal(pocAVerificationSuccessor.remoteVerificationAdvancement.targetCount, 10);
 assert.equal(bfrCurrentVerificationSuccessor.authorityBoundary.remoteVerificationEvidenceOnly, true);
@@ -190,7 +201,8 @@ delete brandingPredecessorProjection.summary.remoteVerifiedBrandingMembers;
 const brandingPredecessorProjectionSha256 = sha256Bytes(Buffer.from(`${JSON.stringify(brandingPredecessorProjection, null, 2)}\n`));
 assert.equal(brandingPredecessorProjection.assets.length, 144);
 assert.equal(brandingSuccessor.registryTransition.predecessorProjectionSha256, bfrCurrentVerificationSuccessor.historicalBrandingSuccessor.predecessorProjectionSha256, 'Historical branding predecessor authority changed');
-assert.equal(brandingPredecessorProjectionSha256, bfrCurrentVerificationSuccessor.currentProjectionFacts.brandingRemovedCurrentProjectionSha256, 'Current branding-removed projection drifted outside the governed POC-A verification successor');
+assert.equal(partH5AReconciliation.predecessors.bfrCurrentVerificationSuccessor.sha256, sha256(bfrCurrentVerificationSuccessorPath), 'PART H.5A BFR predecessor digest drift');
+assert.equal(brandingPredecessorProjectionSha256, partH5AReconciliation.materialization.brandingRemovedCurrentProjectionSha256, 'Current branding-removed projection drifted outside PART H.5A branding successor');
 
 const predecessorProjection = structuredClone(brandingPredecessorProjection);
 predecessorProjection.assets = predecessorProjection.assets.filter(asset => !logoCodeSet.has(asset.asset_code));
@@ -314,14 +326,19 @@ for (const record of logoRegistry.records) {
     assert.equal(record.verification, 'verified-remote-head-get');
     assert.equal(asset.remote.http_status, 200);
     assert.match(asset.remote.content_type, /image\/svg\+xml/i);
-    assert.ok(asset.remote.etag);
     assert.ok(Number.isFinite(Date.parse(asset.remote.verified_at)));
     assert.equal(record.remote.httpStatus, 200);
     assert.match(record.remote.contentType, /image\/svg\+xml/i);
     assert.equal(record.remote.requestedURL, asset.remote.requested_url);
-    assert.equal(record.remote.etag, asset.remote.etag);
     assert.equal(record.remote.verifiedAt, asset.remote.verified_at);
     assert.ok(asset.remote.requested_url.endsWith(asset.object_key));
+    const h5aEvidence = partH5AEvidence.results.find(item => item.assetCode === record.assetCode);
+    assert.ok(h5aEvidence, `Missing PART H.5A logo evidence: ${record.assetCode}`);
+    assert.equal(h5aEvidence.httpStatus, 200);
+    assert.equal(h5aEvidence.contentType, 'image/svg+xml');
+    assert.equal(h5aEvidence.liveVerified, true);
+    assert.equal(asset.remote.etag_recorded, false);
+    assert.equal(record.remote.etagRecorded, false);
   } else if (asset.status === 'uploaded-reported-by-owner') {
     assert.equal(asset.verification, 'pending-remote-verification');
     assert.equal(Object.hasOwn(asset, 'remote'), false);

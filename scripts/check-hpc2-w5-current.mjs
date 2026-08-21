@@ -26,6 +26,8 @@ const paths = Object.freeze({
   successorEvidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-public-asset-registry-successor-audit-v1.json',
   pocAVerificationSuccessor: 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json',
   bfrCurrentVerificationSuccessor: 'content/web-production/reconciliation/bfr-h-current-poc-a-public-asset-verification-successor-v1.json',
+  partH5ABrandingSuccessor: 'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json',
+  partH5AReconciliation: 'content/web-production/client-visual-consumption/reconciliation/part-h5a-branding-r2-evidence-reconciliation-v1.json',
   ckaSuccessorContract: 'content/web-production/reconciliation/hpc2-w5-cka-w0-w4-current-successor-v1.json',
   ckaSuccessorEvidence: 'content/web/homepage/hpc2/evidence/hpc2-w5-cka-w0-homepage-entry-successor-audit-v1.json',
   w6Contract: 'content/web/homepage/hpc2/contracts/hpc2-w6-first-interaction-composition-contract-v1.json',
@@ -68,6 +70,8 @@ const successor = read(paths.successorContract);
 const successorEvidence = read(paths.successorEvidence);
 const pocAVerificationSuccessor = read(paths.pocAVerificationSuccessor);
 const bfrCurrentVerificationSuccessor = read(paths.bfrCurrentVerificationSuccessor);
+const partH5ABrandingSuccessor = read(paths.partH5ABrandingSuccessor);
+const partH5AReconciliation = read(paths.partH5AReconciliation);
 const ckaSuccessor = read(paths.ckaSuccessorContract);
 const ckaSuccessorEvidence = read(paths.ckaSuccessorEvidence);
 const w6Contract = read(paths.w6Contract);
@@ -117,7 +121,10 @@ assert.equal(successorEvidence.decisionObservations.ownerSuppliedBriDecisionCrea
 assert.equal(successorEvidence.decisionObservations.homepageHumanAcceptanceClaimed, false);
 assert.equal(successorEvidence.decisionObservations.booksConsumerAcceptanceClaimed, false);
 assert.equal(pocAVerificationSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_POC_A_REMOTE_VERIFICATION_MATERIALIZATION_RECONCILED');
-assert.equal(pocAVerificationSuccessor.publicAssetRegistry.currentSha256, sha256(paths.publicAssets));
+assert.equal(pocAVerificationSuccessor.publicAssetRegistry.currentSha256, partH5ABrandingSuccessor.publicAssetRegistry.predecessorSha256);
+assert.equal(partH5ABrandingSuccessor.publicAssetRegistry.currentSha256, sha256(paths.publicAssets));
+assert.equal(partH5ABrandingSuccessor.remoteVerificationAdvancement.targetCount, 12);
+assert.equal(partH5AReconciliation.materialization.brandingRemovedCurrentProjectionSha256, (() => { const projection = structuredClone(publicAssets); const codes = new Set(successor.registryTransition.addedAssetCodes); projection.assets = projection.assets.filter(asset => !codes.has(asset.asset_code)); projection.summary.registeredAssetRecords = 144; projection.summary.concreteRenderableMembers = 140; delete projection.summary.canonicalBrandingMembers; delete projection.summary.remoteVerifiedBrandingMembers; return digestText(`${JSON.stringify(projection, null, 2)}\n`); })());
 assert.equal(pocAVerificationSuccessor.remoteVerificationAdvancement.targetCount, 10);
 assert.equal(bfrCurrentVerificationSuccessor.status, 'BFR_H_CURRENT_HISTORICAL_LOGO_BRANDING_PREDECESSORS_PRESERVED_POC_A_REMOTE_VERIFICATION_RECONCILED');
 assert.equal(bfrCurrentVerificationSuccessor.upstreamVerificationSuccessor.path, paths.pocAVerificationSuccessor);
@@ -312,7 +319,7 @@ delete predecessorProjection.summary.canonicalBrandingMembers;
 delete predecessorProjection.summary.remoteVerifiedBrandingMembers;
 assert.equal(predecessorProjection.assets.length, successor.registryTransition.predecessorRecordCount);
 assert.equal(successor.registryTransition.predecessorProjectionSha256, bfrCurrentVerificationSuccessor.historicalBrandingSuccessor.predecessorProjectionSha256, 'Historical W5 Public Asset Registry predecessor authority changed');
-assert.equal(digestText(`${JSON.stringify(predecessorProjection, null, 2)}\n`), bfrCurrentVerificationSuccessor.currentProjectionFacts.brandingRemovedCurrentProjectionSha256, 'W5 current Public Asset predecessor projection drifted outside governed POC-A remote verification');
+assert.equal(digestText(`${JSON.stringify(predecessorProjection, null, 2)}\n`), partH5AReconciliation.materialization.brandingRemovedCurrentProjectionSha256, 'W5 current Public Asset predecessor projection drifted outside PART H.5A branding successor');
 const verificationTargets = pocAVerificationSuccessor.remoteVerificationAdvancement.targetAssetCodes;
 assert.equal(verificationTargets.length, 10);
 assert.equal(verificationTargets.some(code => brandingCodeSet.has(code)), false, 'POC-A verification target may not be a W5 branding identity');

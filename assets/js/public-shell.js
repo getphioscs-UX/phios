@@ -88,11 +88,8 @@ function headerMarkup(activeSection) {
           aria-label="PHI OS home"
         >
           <span class="public-brand__fallback">
-            <span class="public-brand__fallback">
-              <span class="public-brand__mark" aria-hidden="true">Φ</span>
-              <span>PHI OS</span>
-            </span>
-            <img class="public-brand__logo" data-public-brand-asset="LOGO-010" alt="" hidden />
+            <span class="public-brand__mark" aria-hidden="true">Φ</span>
+            <span>PHI OS</span>
           </span>
           <img class="public-brand__logo" data-public-brand-asset="LOGO-003" alt="" hidden />
         </a>
@@ -132,9 +129,12 @@ function footerMarkup() {
     <footer class="public-footer" data-public-footer>
       <div class="public-footer__inner">
         <div>
-          <a class="public-brand" href="/">
-            <span class="public-brand__mark" aria-hidden="true">Φ</span>
-            <span>PHI OS</span>
+          <a class="public-brand public-brand--footer" href="/" aria-label="PHI OS home">
+            <span class="public-brand__fallback">
+              <span class="public-brand__mark" aria-hidden="true">Φ</span>
+              <span>PHI OS</span>
+            </span>
+            <img class="public-brand__logo" data-public-brand-asset="LOGO-010" alt="" hidden />
           </a>
           <p class="public-footer__statement" data-i18n="publicShell.footer.statement"></p>
         </div>
@@ -342,6 +342,23 @@ async function hydratePublicBranding() {
     link.href = favicon.src;
   } catch {
     // Browser keeps its existing/default favicon until LOGO-011 is verified.
+  }
+
+  try {
+    const appIcon = await resolvePublicAssetForWeb('LOGO-012', { surface: 'APP_INSTALL_CHROME' });
+    if (appIcon?.renderable) {
+      let link = document.querySelector('link[rel="apple-touch-icon"][data-phios-app-icon]');
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'apple-touch-icon';
+        link.dataset.phiosAppIcon = 'true';
+        document.head.append(link);
+      }
+      link.type = appIcon.contentType || 'image/svg+xml';
+      link.href = appIcon.src;
+    }
+  } catch {
+    // App-install chrome remains fail-closed until LOGO-012 is verified.
   }
 }
 

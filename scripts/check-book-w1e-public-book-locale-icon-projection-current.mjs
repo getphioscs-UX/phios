@@ -24,6 +24,7 @@ const MATERIALIZATION_RECONCILIATION_PATH = 'content/knowledge/migrations/book-w
 const CURRENT_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-current-consumer-successor-v3.json';
 const LOCALE_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-hpc2-locale-consumer-successor-v1.json';
 const PUBLIC_ASSET_VERIFICATION_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json';
+const PART_H5A_BRANDING_SUCCESSOR_PATH = 'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json';
 
 const [
   candidateRaw,
@@ -60,6 +61,7 @@ const [
   json(LOCALE_CONSUMER_SUCCESSOR_PATH),
   json(PUBLIC_ASSET_VERIFICATION_SUCCESSOR_PATH)
 ]);
+const partH5ABrandingSuccessor = await json(PART_H5A_BRANDING_SUCCESSOR_PATH);
 
 const expectedRoutes = {
   'BOOK-1': '/books/reality-formation/',
@@ -151,7 +153,7 @@ assert.equal(
 );
 assert.equal(
   publicAssetVerificationSuccessor.publicAssetRegistry.currentSha256,
-  sha256(await read('content/registry/public-assets.json'))
+  partH5ABrandingSuccessor.publicAssetRegistry.predecessorSha256
 );
 assert.equal(
   publicAssetVerificationSuccessor.publicAssetRegistry.recordCount,
@@ -165,6 +167,18 @@ assert.equal(
   publicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount,
   10
 );
+assert.equal(partH5ABrandingSuccessor.status, 'PART_H5A_CURRENT_BRANDING_REMOTE_VERIFIED_AND_CLIENT_BOUND');
+assert.equal(partH5ABrandingSuccessor.publicAssetRegistry.predecessorSha256, publicAssetVerificationSuccessor.publicAssetRegistry.currentSha256);
+assert.equal(partH5ABrandingSuccessor.publicAssetRegistry.currentSha256, sha256(await read('content/registry/public-assets.json')));
+assert.equal(partH5ABrandingSuccessor.remoteVerificationAdvancement.targetCount, 12);
+for (const code of partH5ABrandingSuccessor.remoteVerificationAdvancement.targetAssetCodes) {
+  const asset = publicAssets.assets.find(item => item.asset_code === code);
+  assert.ok(asset, `Missing PART H.5A verified logo: ${code}`);
+  assert.equal(asset.status, 'remote-verified');
+  assert.equal(asset.verification, 'verified-remote-head-get');
+  assert.equal(asset.remote?.http_status, 200);
+  assert.equal(asset.remote?.content_type, 'image/svg+xml');
+}
 for (const code of publicAssetVerificationSuccessor.remoteVerificationAdvancement.targetAssetCodes) {
   const asset = publicAssets.assets.find(item => item.asset_code === code);
   assert.ok(asset, `Missing POC-A verified asset: ${code}`);
@@ -285,7 +299,7 @@ for (const source of active.activatedSources) {
   assert.equal(successor.bookW1eActivatedSha256, source.sha256);
   const expectedCurrentSha256 =
     source.path === publicAssetVerificationSuccessor.publicAssetRegistry.path
-      ? publicAssetVerificationSuccessor.publicAssetRegistry.currentSha256
+      ? partH5ABrandingSuccessor.publicAssetRegistry.currentSha256
       : successor.currentSha256;
 
   if (source.path === publicAssetVerificationSuccessor.publicAssetRegistry.path) {

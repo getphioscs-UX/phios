@@ -14,14 +14,16 @@ const finalPath = 'content/web-production/acceptance/bfr-production-surface-acce
 const visualRegistryPath = 'content/web-production/registries/client-visual-asset-registry-v1.2.json';
 const publicAssetsPath = 'content/registry/public-assets.json';
 const currentPublicAssetVerificationSuccessorPath = 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json';
+const partH5ABrandingSuccessorPath = 'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json';
 
-for (const path of [h15Path, visualAcceptancePath, finalPath, visualRegistryPath, publicAssetsPath, currentPublicAssetVerificationSuccessorPath]) mustExist(path);
+for (const path of [h15Path, visualAcceptancePath, finalPath, visualRegistryPath, publicAssetsPath, currentPublicAssetVerificationSuccessorPath, partH5ABrandingSuccessorPath]) mustExist(path);
 const h15 = readJson(h15Path);
 const visualAcceptance = readJson(visualAcceptancePath);
 const finalAcceptance = readJson(finalPath);
 const visualRegistry = readJson(visualRegistryPath);
 const publicAssets = readJson(publicAssetsPath);
 const currentPublicAssetVerificationSuccessor = readJson(currentPublicAssetVerificationSuccessorPath);
+const partH5ABrandingSuccessor = readJson(partH5ABrandingSuccessorPath);
 
 runBfrHCriticalRegressions();
 
@@ -130,13 +132,14 @@ assert.equal(visualAcceptance.publicAssetRegistry.computedRemoteVerifiedMemberCo
 assert.equal(currentPublicAssetVerificationSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_POC_A_REMOTE_VERIFICATION_MATERIALIZATION_RECONCILED');
 assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.path, publicAssetsPath);
 assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.predecessorSha256, visualAcceptance.publicAssetRegistry.sha256);
-assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.currentSha256, sha256(publicAssetsPath));
+assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.currentSha256, partH5ABrandingSuccessor.publicAssetRegistry.predecessorSha256);
+assert.equal(partH5ABrandingSuccessor.publicAssetRegistry.currentSha256, sha256(publicAssetsPath));
 assert.equal(currentPublicAssetVerificationSuccessor.publicAssetRegistry.recordCount, publicAssets.assets.length);
 assert.equal(publicAssets.assets.length, 149);
 const computedRemoteVerified = publicAssets.assets.filter((asset) => asset.verification === 'verified-remote-head-get').length;
 assert.equal(currentPublicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount, 10);
-assert.equal(computedRemoteVerified, visualAcceptance.publicAssetRegistry.computedRemoteVerifiedMemberCount + currentPublicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount);
-assert.equal(computedRemoteVerified, 133);
+assert.equal(partH5ABrandingSuccessor.remoteVerificationAdvancement.targetCount, 12);
+assert.equal(computedRemoteVerified, visualAcceptance.publicAssetRegistry.computedRemoteVerifiedMemberCount + currentPublicAssetVerificationSuccessor.remoteVerificationAdvancement.targetCount + partH5ABrandingSuccessor.remoteVerificationAdvancement.targetCount);
 assert.equal(currentPublicAssetVerificationSuccessor.authorityBoundary.verificationMaterializationOnly, true);
 assert.equal(currentPublicAssetVerificationSuccessor.authorityBoundary.historicalBookW1eAcceptanceRewritten, false);
 assert.equal(currentPublicAssetVerificationSuccessor.authorityBoundary.secondPublicProjectionAuthorityCreated, false);

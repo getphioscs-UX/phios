@@ -1,0 +1,1110 @@
+{
+  "schemaVersion": "PHI-OS-CLIENT-VISUAL-CONSUMER-MAP-v1.0.0",
+  "work": "PART-H.5",
+  "baselineCommit": "4e018485935ab090f1bd72eb9636b28686b42693",
+  "status": "ACTIVE_ADDITIVE_CLIENT_VISUAL_CONSUMPTION_SUCCESSOR",
+  "authority": {
+    "assetIdentityAuthority": "content/web-production/registries/client-visual-asset-registry-v1.2.json",
+    "publicDeliveryAuthority": "content/registry/public-assets.json",
+    "logoIdentityAuthority": "content/web-production/registries/phios-logo-registry-v1.json",
+    "resolver": "assets/js/runtime/web-production/asset-resolver.js",
+    "secondAssetAuthorityCreated": false,
+    "secondAssetResolverCreated": false
+  },
+  "runtime": {
+    "consumerModule": "assets/js/client-visual-consumption.js",
+    "stylesheet": "assets/css/client-visual-consumption.css",
+    "bootstrap": "assets/js/i18n.js",
+    "bootstrapReason": "All current public, journey, customer and professional client surfaces already consume i18n; additive visual bootstrap preserves frozen page bytes and runtime ownership."
+  },
+  "rules": {
+    "verifiedHeroRequiredForAutoMasthead": true,
+    "verifiedIconRequiredForSupportRail": true,
+    "logoRemainsFailClosedUntilRemoteVerified": true,
+    "normalProductionFallbackForbiddenAfterLogoVerification": true,
+    "frozenDestinationPageHtmlMutationForbidden": true,
+    "existingHomepageAndLibraryHeroConsumersReused": true,
+    "v8ContentRemovalForbidden": true,
+    "privateContextConsumptionCreated": false,
+    "runtimeExecutionAuthorityCreated": false
+  },
+  "records": [
+    {
+      "surfaceCode": "HOME",
+      "routes": [
+        "/"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-001",
+        "mode": "EXISTING_MANAGED"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-001",
+          "ICON-003",
+          "ICON-007",
+          "ICON-008",
+          "ICON-009"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "LIBRARY",
+      "routes": [
+        "/library"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-002",
+        "mode": "EXISTING_MANAGED"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-002",
+          "ICON-006"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "KNOWLEDGE_SEARCH",
+      "routes": [
+        "/knowledge-search"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-002",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-006",
+          "ICON-018"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "ARTICLES",
+      "routes": [
+        "/articles"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-004",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-004"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "ARTICLE",
+      "routes": [
+        "/articles/*"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-004",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-004"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "FIGURES",
+      "routes": [
+        "/figures"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-005",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-005"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "FIGURE",
+      "routes": [
+        "/figure"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-005",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-005"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "BOOKS",
+      "routes": [
+        "/books"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-003",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-003"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "BOOK_1",
+      "routes": [
+        "/books/reality-formation",
+        "/book-one"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-019",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-003"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "BOOK_2",
+      "routes": [
+        "/books/reality-runtime"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-020",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-003"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "BOOK_3",
+      "routes": [
+        "/books/reality-continuity"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-021",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-003"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "BOOK_4",
+      "routes": [
+        "/books/reality-civilization"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-022",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-003"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "BOOK_5",
+      "routes": [
+        "/books/reality-navigation"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-023",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-003"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "BOOK_PREVIEW",
+      "routes": [
+        "/book-one-preview"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-018",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-042"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "CHECKOUT",
+      "routes": [
+        "/checkout"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-018",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-038"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PAYMENT_SUCCESS",
+      "routes": [
+        "/payment-success"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-018",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-039",
+          "ICON-042"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PAYMENT_FAILURE",
+      "routes": [
+        "/payment-failure"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-040"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "ACADEMY",
+      "routes": [
+        "/academy"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-013",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-014",
+          "ICON-028",
+          "ICON-029",
+          "ICON-030",
+          "ICON-031",
+          "ICON-032"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "ACADEMY_LESSON",
+      "routes": [
+        "/academy-lesson"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-013",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-028",
+          "ICON-029",
+          "ICON-033"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "REALITY_JOURNEY",
+      "routes": [
+        "/reality-journey"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-006",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-009",
+          "ICON-019",
+          "ICON-021",
+          "ICON-022",
+          "ICON-023",
+          "ICON-025",
+          "ICON-026"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "REALITY_DASHBOARD",
+      "routes": [
+        "/reality-dashboard"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-006",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-026"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "REALITY_ENTRY",
+      "routes": [
+        "/reality-entry"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-007",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-019"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "FREE_OBSERVATION",
+      "routes": [
+        "/free-observation"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-007",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-020"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "REALITY_RECONSTRUCTION",
+      "routes": [
+        "/reality-reconstruction"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-008",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-021"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "REALITY_READING",
+      "routes": [
+        "/reality-reading"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-009",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-010",
+          "ICON-011",
+          "ICON-022",
+          "ICON-027"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "REALITY_NAVIGATION",
+      "routes": [
+        "/reality-navigation"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-010",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-012",
+          "ICON-023",
+          "ICON-024"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "REALITY_REVIEW",
+      "routes": [
+        "/reality-review"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-011",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-013",
+          "ICON-025",
+          "ICON-026"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "MY_REALITY",
+      "routes": [
+        "/my-reality"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-012",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-013"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PERSONAL_RUNTIME",
+      "routes": [
+        "/personal-runtime",
+        "/professional/personal-runtime"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-012",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-007"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "ACCOUNT",
+      "routes": [
+        "/account"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-017",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-017"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "ACCOUNT_MY_REALITY",
+      "routes": [
+        "/account-my-reality"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-012",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-031",
+          "ICON-034",
+          "ICON-035",
+          "ICON-036",
+          "ICON-037"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "MEMBERSHIP",
+      "routes": [
+        "/membership"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-017",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-034",
+          "ICON-043"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "SERVICES",
+      "routes": [
+        "/services"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-016",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-008",
+          "ICON-015"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "EXTERNAL_READER_INTAKE",
+      "routes": [
+        "/external-reader-intake",
+        "/professional/external-readers"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-016",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-015"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_APPOINTMENTS",
+      "routes": [
+        "/professional-appointments"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-016",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-036"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_BOUNDARY",
+      "routes": [
+        "/professional-boundary"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-014",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-015"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_REPORTS",
+      "routes": [
+        "/professional-reports"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-014",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-016",
+          "ICON-027"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_WORKSPACE",
+      "routes": [
+        "/professional-workspace"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-014",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-011",
+          "ICON-015"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "FINANCIAL",
+      "routes": [
+        "/professional/financial"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-015",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-008"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_CONSENT_SHARING",
+      "routes": [
+        "/professional-consent-sharing"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-015"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PROFESSIONAL_DATA_PRIVACY",
+      "routes": [
+        "/professional-data-privacy"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-041"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "EXPLORE",
+      "routes": [
+        "/explore"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-002",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-006"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "THESIS",
+      "routes": [
+        "/thesis"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-004",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-006",
+          "ICON-011"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "GLOSSARY",
+      "routes": [
+        "/glossary"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-006",
+          "ICON-018"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "PRIVACY",
+      "routes": [
+        "/privacy"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-041"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "DIGITAL_PRODUCT_POLICY",
+      "routes": [
+        "/digital-product-policy"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-034",
+          "ICON-041"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "AI_DISCLOSURE",
+      "routes": [
+        "/ai-disclosure"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-011"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "CONTACT",
+      "routes": [
+        "/contact"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-015"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "TERMS",
+      "routes": [
+        "/terms"
+      ],
+      "visualState": "NONE_BY_DESIGN",
+      "hero": {
+        "assetCode": null,
+        "mode": "NONE"
+      },
+      "icons": {
+        "assetCodes": [],
+        "mode": "NONE"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "ABOUT",
+      "routes": [
+        "/about"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-001",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-001"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": false
+    },
+    {
+      "surfaceCode": "V8_WHY_PHIOS",
+      "routes": [
+        "/about/why-phios"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-001",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-006"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": true
+    },
+    {
+      "surfaceCode": "V8_REALITY_NAVIGATION",
+      "routes": [
+        "/about/reality-navigation"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-001",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-012"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": true
+    },
+    {
+      "surfaceCode": "V8_RESEARCH_REALITY_NAVIGATION",
+      "routes": [
+        "/research/why-reality-navigation"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-004",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-011"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": true
+    },
+    {
+      "surfaceCode": "V8_HUMAN_READING_SYSTEMS",
+      "routes": [
+        "/research/human-reading-systems"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-004",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-006"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": true
+    },
+    {
+      "surfaceCode": "V8_PROFESSIONAL",
+      "routes": [
+        "/professional"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-014",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-015"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": true
+    },
+    {
+      "surfaceCode": "V8_PROFESSIONAL_AUTHORITY",
+      "routes": [
+        "/professional/authority"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-014",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-011"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": true
+    },
+    {
+      "surfaceCode": "V8_FOUNDER",
+      "routes": [
+        "/about/founder"
+      ],
+      "visualState": "ACTIVE_REQUIRED",
+      "hero": {
+        "assetCode": "HERO-001",
+        "mode": "AUTO_MASTHEAD"
+      },
+      "icons": {
+        "assetCodes": [
+          "ICON-001"
+        ],
+        "mode": "SUPPORT_RAIL"
+      },
+      "destinationVisualUpgrade": true
+    }
+  ],
+  "summary": {
+    "recordCount": 57,
+    "autoMastheadCount": 46,
+    "existingManagedHeroCount": 2,
+    "iconRailSurfaceCount": 56,
+    "noneByDesignCount": 1,
+    "v8DestinationUpgradeCount": 7,
+    "heroIdentityCoverage": "23/23",
+    "iconIdentityCoverage": "43/43",
+    "allMappedHeroIconAssetsRequireRemoteVerification": true,
+    "logoLiveVerificationOwnedSeparately": true
+  }
+}
