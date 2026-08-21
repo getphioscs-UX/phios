@@ -7,6 +7,7 @@ const r=readJson('content/professional/method-production-activation/registries/m
 const regressionSuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-mir3-dependency-regression-successor-v1.json');
 const visualRasterSuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-visual-raster-dependency-regression-successor-v2.json');
 const dependencySuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-mcd-package-script-regression-successor-v3.json');
+const bfrCheckerSuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-bfr-h-central-checker-package-script-successor-v4.json');
 const lunarNodeSuccessor=readJson('content/reconciliation/mir/mir-3-lunar-node-successor-v1.json');
 const pkg=readJson('package.json');
 const packageLock=readJson('package-lock.json');
@@ -62,12 +63,28 @@ for(const f of r.fingerprints.filter(x=>x.path)){
   assert.equal(f.sha256,regressionSuccessor.predecessor.packageLockSha256);
   assert.equal(dependencySuccessor.successor.packageLockSha256,actual,`REGRESSION_FINGERPRINT_DRIFT:${f.path}`);
 }
-assert.equal(dependencySuccessor.successor.packageJsonSha256,sha256File('package.json'),'PACKAGE_JSON_DEPENDENCY_SUCCESSOR_DRIFT');
-assert.equal(sha256File(dependencySuccessor.successor.checkerPath),dependencySuccessor.successor.checkerSha256,'MPA_W14_SUCCESSOR_CHECKER_DRIFT');
+assert.equal(bfrCheckerSuccessor.status,'AUTHORIZED_PACKAGE_JSON_SCRIPT_SUCCESSOR_BFR_H_CENTRAL_ENTRY_DEPENDENCY_FREEZE_PRESERVED');
+assert.equal(bfrCheckerSuccessor.predecessor.path,'content/professional/method-production-activation/successors/mpa-w14-mcd-package-script-regression-successor-v3.json');
+assert.equal(sha256File(bfrCheckerSuccessor.predecessor.path),bfrCheckerSuccessor.predecessor.sha256,'MPA_W14_V4_PREDECESSOR_DRIFT');
+assert.equal(bfrCheckerSuccessor.predecessor.packageJsonSha256,dependencySuccessor.successor.packageJsonSha256);
+assert.equal(bfrCheckerSuccessor.predecessor.checkerSha256,dependencySuccessor.successor.checkerSha256);
+assert.equal(bfrCheckerSuccessor.authorizedPackageJsonChange.dependenciesChanged,false);
+assert.equal(bfrCheckerSuccessor.authorizedPackageJsonChange.devDependenciesChanged,false);
+assert.equal(sha256Json(pkg.dependencies),bfrCheckerSuccessor.authorizedPackageJsonChange.dependenciesSha256);
+assert.equal(sha256Json(pkg.devDependencies),bfrCheckerSuccessor.authorizedPackageJsonChange.devDependenciesSha256);
+for(const [script,command] of Object.entries(bfrCheckerSuccessor.authorizedPackageJsonChange.scripts)) assert.equal(pkg.scripts[script],command,`AUTHORIZED_BFR_H_SCRIPT_DRIFT:${script}`);
+for(const script of bfrCheckerSuccessor.authorizedPackageJsonChange.frozenPredecessorScriptsUnchanged) assert.ok(typeof pkg.scripts[script]==='string' && pkg.scripts[script].length>0,`FROZEN_PREDECESSOR_SCRIPT_MISSING:${script}`);
+assert.equal(bfrCheckerSuccessor.boundaries.packageLockChanged,false);
+assert.equal(bfrCheckerSuccessor.boundaries.dependencyChanged,false);
+assert.equal(bfrCheckerSuccessor.boundaries.methodProductionEligibilityChanged,false);
+assert.equal(bfrCheckerSuccessor.boundaries.professionalEligibilityChanged,false);
+assert.equal(bfrCheckerSuccessor.successor.packageLockSha256,dependencySuccessor.successor.packageLockSha256);
+assert.equal(bfrCheckerSuccessor.successor.packageJsonSha256,sha256File('package.json'),'PACKAGE_JSON_BFR_H_SUCCESSOR_DRIFT');
+assert.equal(sha256File(bfrCheckerSuccessor.successor.checkerPath),bfrCheckerSuccessor.successor.checkerSha256,'MPA_W14_V4_SUCCESSOR_CHECKER_DRIFT');
 assert.equal(r.rules.anyTriggerChangeRequiresRegression,true);
 assert.equal(r.rules.timezoneLibraryUpgradeRequiresBoundaryFixtures,true);
 assert.equal(r.rules.ephemerisUpgradeRequiresReferenceComparison,true);
 assert.equal(r.productionEligibilityChanged,false);
 
 console.log('✓ MPA-W14 Regression Runtime current successor passed.');
-console.log('  Visual raster dependency authority remains frozen; AST/BZR MCD package.json evolution is scripts-only, astronomy-engine 2.1.19 and sharp 0.35.2 remain unchanged.');
+console.log('  Visual raster dependency authority remains frozen; AST/BZR MCD and PART G/H package.json evolution are scripts-only, astronomy-engine 2.1.19 and sharp 0.35.2 remain unchanged.');

@@ -1385,7 +1385,15 @@
     "check:wpr-pf": "npm run check:wpr-pf0 && npm run check:wpr-pf1 && npm run check:wpr-pf2 && npm run check:wpr-pf3 && npm run check:wpr-pf4 && npm run check:wpr-pf5 && npm run check:wpr-pf6 && npm run check:wpr-pf7 && npm run check:wpr-pf8 && npm run check:wpr-pf9 && npm run check:wpr-pf10 && npm run check:wpr-pf11 && npm run check:wpr-pf12",
     "check:wpr-pf-all": "npm run check:wpr-pf",
     "check:wpr-production-assurance-current": "npm run check:wpr-pf",
-    "check:mcd-ast-bzr-production": "node scripts/check-mcd-ast-bzr-production-successor.mjs"
+    "check:mcd-ast-bzr-production": "node scripts/check-mcd-ast-bzr-production-successor.mjs",
+    "check:cka-contracts": "node scripts/check-cka-canonical-contract-projections.mjs",
+    "precheck:cka": "npm run check:cka-contracts",
+    "check:bfr-h-required-files": "node scripts/check-bfr-h-required-files-contracts.mjs",
+    "precheck:bfr-h": "npm run check:bfr-h-required-files",
+    "check:bfr-h15": "node scripts/check-bfr-h15-capability-consumption.mjs",
+    "check:bfr-h16": "node scripts/check-bfr-h16-visual-production.mjs",
+    "postcheck:bfr-h": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:bfr-h16",
+    "check:web-production-current": "npm run check:web-production-runtime && npm run check:wpr-pf"
   },
   "type": "module",
   "dependencies": {

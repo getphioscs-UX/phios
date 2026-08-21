@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-BFR-H-CENTRAL-CHECKER-ARCHITECTURE-v1.0.0",
+  "baselineCommit": "579618c93fbc674d8528cd5b6a18df868c5e7e42",
+  "status": "ACTIVE_SINGLE_FINAL_ENTRY_WITH_FROZEN_PREDECESSOR_COMPATIBILITY",
+  "publicFinalEntry": "npm run check:bfr-h",
+  "developerEntries": [
+    "npm run check:hpc2",
+    "npm run check:cka",
+    "npm run check:bfr-h"
+  ],
+  "finalValidationEntries": [
+    "npm run check:bfr-h",
+    "npm run check:web-production-current",
+    "npm run check"
+  ],
+  "logicalOrder": [
+    "BFR-H0_BACKEND_INVENTORY",
+    "BFR-H1_FRONTEND_INVENTORY",
+    "BFR-H2_GAP_MATRIX",
+    "BFR-H3_SURFACE_MANIFEST",
+    "BFR-H4_PDS_CPR_WPR_LINEAGE",
+    "BFR-H5_FIVE_VOLUME_VISUAL",
+    "BFR-H6_AUDIENCE_DENSITY",
+    "HPC2_P0_W14",
+    "CKA_W0_W33",
+    "BFR-H8_H11_OTHER_SURFACE_R2",
+    "BFR-H12_H14_RESPONSIVE_ACCESSIBILITY",
+    "BFR-H15_CAPABILITY_CONSUMPTION",
+    "BFR-H16_PRODUCTION_ACCEPTANCE"
+  ],
+  "npmLifecycle": {
+    "precheck:bfr-h": "PART_G_REQUIRED_FILES_AND_CANONICAL_CONTRACT_PROJECTIONS",
+    "check:bfr-h": "FROZEN_COMPATIBLE_CURRENT_BFR_H_HPC2_CKA_CHAIN",
+    "postcheck:bfr-h": "DIRECT_MAPPING_PLUS_H15_H16_FINAL_CLOSURE"
+  },
+  "compatibility": {
+    "existingCheckBfrHCommandStringPreserved": true,
+    "reason": "Historical HPC2 successor checkers bind the predecessor command shape; npm pre/post lifecycle extends the final entry without mutating that predecessor contract.",
+    "manualPerWorkExecutionRequiredForTL": false,
+    "secondAuthorityCreated": false
+  }
+}
