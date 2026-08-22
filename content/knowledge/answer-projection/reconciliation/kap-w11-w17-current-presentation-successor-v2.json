@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W11-W17-CURRENT-PRESENTATION-SUCCESSOR-v2.0.0",
+  "work": "KAP-W11-W17-CURRENT-PRESENTATION-FINGERPRINT-DECOUPLING",
+  "status": "CURRENT_KAP_CKA_PRESENTATION_FINGERPRINT_DECOUPLED_RUNTIME_AUTHORITY_PRESERVED",
+  "historicalChecker": {
+    "path": "scripts/check-kap-w11-w17-guided-successor.mjs",
+    "sha256": "43d276d1ba58a1bb3b84260058e2fdc3701f33120fe7848b58da5285ac8f875c",
+    "rewritten": false,
+    "role": "HISTORICAL_FREEZE_EVIDENCE_ONLY"
+  },
+  "presentationSurfaces": [
+    {
+      "path": "knowledge-search.html",
+      "currentValidation": "SEMANTIC_AND_HOOK_VALIDATION",
+      "wholeFileSha256Required": false,
+      "requiredMarkers": [
+        "data-cka-root",
+        "data-cka-entry-surface=\"KNOWLEDGE_SEARCH\"",
+        "data-cka-composer",
+        "data-cka-question",
+        "data-cka-answer",
+        "data-cka-section=\"DIRECT_ANSWER\"",
+        "data-cka-section=\"WHAT_PHIOS_DOES_NOT_YET_KNOW\"",
+        "data-cka-grounding",
+        "data-cka-follow-up-form",
+        "data-cka-guided-form",
+        "data-cka-journey-consent-checkbox",
+        "data-cka-journey-handoff",
+        "Ask PHI OS",
+        "/assets/js/pages/knowledge-search-b.js"
+      ],
+      "forbiddenMarkers": [
+        "core-method-runtime",
+        "adapter-registry-runtime",
+        "canonical-projection-runtime"
+      ]
+    },
+    {
+      "path": "assets/css/knowledge-search.css",
+      "currentValidation": "PRESENCE_ONLY_PRESENTATION_LAYER",
+      "wholeFileSha256Required": false
+    }
+  ],
+  "runtimeFingerprintPolicy": {
+    "presentationWholeFileFingerprint": false,
+    "runtimeJavascriptExactFingerprintPreserved": true,
+    "apiExactFingerprintPreserved": true,
+    "historicalFreezeEvidencePreserved": true,
+    "futurePresentationDriftRequiresFingerprintSuccessor": false,
+    "futureRuntimeAuthorityDriftRequiresVersionedSuccessor": true
+  },
+  "boundaries": {
+    "answerSemanticsChanged": false,
+    "knowledgeAuthorityChanged": false,
+    "retrievalAuthorityChanged": false,
+    "unknownBoundaryChanged": false,
+    "guidedReadingAuthorityChanged": false,
+    "realityHandoffConsentChanged": false,
+    "methodAuthorityChanged": false,
+    "persistentCaseCreated": false,
+    "historicalFreezeRewritten": false
+  }
+}

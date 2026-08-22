@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { PATHS, readJson, assertBaseline } from './lib/runtime-maturity/mrm-s-phase-a-lib.mjs';
+const binding=readJson(PATHS.s4binding), stale=readJson(PATHS.s4staleness); assertBaseline(binding,'MRM_S4_BINDING'); assertBaseline(stale,'MRM_S4_STALENESS');
+for(const f of ['runtimeCode','capabilityCode','runtimeVersion','capabilityVersion','artifactDigest']) assert.ok(binding.requiredBindings.includes(f),`MRM_S4_BINDING_FIELD_MISSING_${f}`);
+assert.equal(binding.rules.evidenceNeverSilentlyCarriesAcrossMaterialVersionChange,true);
+assert.deepEqual(stale.states,['CURRENT','AGING','STALE','PARTIALLY_REUSABLE','REVALIDATION_REQUIRED','INVALIDATED','SUPERSEDED']);
+for(const trigger of ['CALCULATION_ALGORITHM_CHANGED','MEANING_MAPPING_CHANGED','INPUT_CONTRACT_CHANGED','OUTPUT_SCHEMA_CHANGED','SCOPE_EXPANDED','INTERPRETATION_POLICY_CHANGED','PROFESSIONAL_POLICY_CHANGED']) assert.ok(stale.materialChangeTriggers.includes(trigger),`MRM_S4_TRIGGER_MISSING_${trigger}`);
+assert.equal(stale.rules.invalidatedEvidenceCannotContributeToEm,true);
+console.log('✓ MRM-S4 Evidence Version / Staleness Contract passed.');
+console.log('  Material version or scope changes require explicit evidence reassessment; stale evidence cannot silently keep EM.');

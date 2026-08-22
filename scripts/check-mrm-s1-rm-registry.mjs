@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import { PATHS, readJson, assertBaseline, RM_CODES } from './lib/runtime-maturity/mrm-s-phase-a-lib.mjs';
+const doc=readJson(PATHS.s1); assertBaseline(doc,'MRM_S1');
+assert.equal(doc.work,'MRM-S1'); assert.equal(doc.scope,'CAPABILITY_LEVEL_ONLY');
+assert.deepEqual(doc.levels.map(x=>x.code),RM_CODES,'MRM_S1_RM_CODE_ORDER_DRIFT');
+assert.deepEqual(doc.levels.map(x=>x.ordinal),[0,1,2,3,4,5,6,7,8,9]);
+assert.equal(new Set(doc.levels.map(x=>x.name)).size,10,'MRM_S1_DUPLICATE_RM_NAME');
+for(const x of doc.levels) assert.ok(x.definition?.length>20,`MRM_S1_DEFINITION_MISSING_${x.code}`);
+assert.equal(doc.rules.rmIsCapabilityLevel,true); assert.equal(doc.rules.rmDoesNotEqualEm,true); assert.equal(doc.rules.passFailCannotSetRm,true); assert.equal(doc.rules.highestRmMustBeArtifactDerived,true);
+console.log('✓ MRM-S1 Runtime Maturity Vocabulary passed.');
+console.log('  RM-0 REGISTERED → RM-9 RECOVERABLE is capability-level; PASS/FAIL cannot assign RM.');

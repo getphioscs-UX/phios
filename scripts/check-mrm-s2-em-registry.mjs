@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { PATHS, readJson, assertBaseline, EM_CODES } from './lib/runtime-maturity/mrm-s-phase-a-lib.mjs';
+const doc=readJson(PATHS.s2); assertBaseline(doc,'MRM_S2');
+assert.equal(doc.work,'MRM-S2'); assert.deepEqual(doc.levels.map(x=>x.code),EM_CODES,'MRM_S2_EM_CODE_ORDER_DRIFT');
+assert.deepEqual(doc.levels.map(x=>x.ordinal),[0,1,2,3,4,5,6,7,8,9]);
+assert.equal(doc.rules.highestSatisfiedContiguousLevelOnly,true); assert.equal(doc.rules.passFailCannotSetEm,true); assert.equal(doc.rules.realGovernedCaseRequiredForEm3,true);
+const em3=doc.levels.find(x=>x.code==='EM-3'); assert.ok(em3.requiredEvidenceClasses.includes('PILOT') && em3.requiredEvidenceClasses.includes('CASE'),'MRM_S2_EM3_REAL_CASE_REQUIREMENT_DRIFT');
+const em5=doc.levels.find(x=>x.code==='EM-5'); assert.equal(em5.longitudinalRequired,true);
+const em6=doc.levels.find(x=>x.code==='EM-6'); assert.equal(em6.validationRequired,true);
+const em9=doc.levels.find(x=>x.code==='EM-9'); assert.equal(em9.monitoringRequired,true); assert.equal(em9.driftDetectionRequired,true);
+console.log('✓ MRM-S2 Evidence Maturity Canonical Registry passed.');
+console.log('  EM promotion is contiguous, version-specific and evidence-derived; EM-3 requires a real governed Pilot case.');
