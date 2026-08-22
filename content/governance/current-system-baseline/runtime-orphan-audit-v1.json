@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "PHI-OS-RUNTIME-ORPHAN-AUDIT-v1.0.0",
+  "work": "CBS-W5",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "NO_UNKNOWN_CURRENT_RUNTIME_NO_SAFE_REMOVAL_CLAIM",
+  "runtimeRecords": [
+    {
+      "runtimeId": "MCD",
+      "classification": "CURRENT",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "MIR",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "KAP",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "KAU",
+      "classification": "CURRENT",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "CAR",
+      "classification": "BLOCKED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "CPR",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "RDG",
+      "classification": "CURRENT",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "ICR",
+      "classification": "CURRENT",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "RMO",
+      "classification": "BLOCKED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "RJX",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "WPR",
+      "classification": "CURRENT",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "CKA",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "HPC2",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "MPA",
+      "classification": "BLOCKED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "HDR",
+      "classification": "BLOCKED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "AST",
+      "classification": "BLOCKED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "BZR",
+      "classification": "BLOCKED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "NUM",
+      "classification": "BLOCKED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "ICH",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    },
+    {
+      "runtimeId": "TAR",
+      "classification": "DEFERRED",
+      "orphan": false,
+      "deletionAllowed": false
+    }
+  ],
+  "successorReplacedArtifacts": [
+    {
+      "artifact": "content/client/knowledge-ask/reconciliation/cka-w5-w17-current-successor-v1.json",
+      "classification": "SUCCESSOR_REPLACED",
+      "successor": "content/knowledge/answer-projection/reconciliation/kap-w11-w17-current-presentation-successor-v2.json",
+      "deletionAllowed": false
+    },
+    {
+      "artifact": "content/professional/canonical-presentation-runtime/audits/cpr-baseline-audit-v1.json",
+      "classification": "LEGACY_REQUIRED",
+      "successorEvidence": "content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json",
+      "deletionAllowed": false
+    }
+  ],
+  "unknownArtifacts": [
+    {
+      "artifact": "assets/js/thesis.js",
+      "classification": "UNKNOWN",
+      "deletionAllowed": false,
+      "reason": "Not referenced by scanned HTML and contains one or more unresolved relative imports; insufficient evidence for removal"
+    },
+    {
+      "artifact": "assets/js/my-reality.js",
+      "classification": "UNKNOWN",
+      "deletionAllowed": false,
+      "reason": "Not referenced by scanned HTML and contains one or more unresolved relative imports; insufficient evidence for removal"
+    },
+    {
+      "artifact": "assets/js/about.js",
+      "classification": "UNKNOWN",
+      "deletionAllowed": false,
+      "reason": "Not referenced by scanned HTML and contains one or more unresolved relative imports; insufficient evidence for removal"
+    }
+  ],
+  "staticImportAudit": {
+    "relativeImportsChecked": 821,
+    "missingRelativeImportCount": 7,
+    "missingRelativeImports": [
+      {
+        "file": "assets/js/thesis.js",
+        "specifier": "../i18n.js"
+      },
+      {
+        "file": "assets/js/my-reality.js",
+        "specifier": "../i18n.js"
+      },
+      {
+        "file": "assets/js/my-reality.js",
+        "specifier": "../modules/runtime-workspace.js"
+      },
+      {
+        "file": "assets/js/my-reality.js",
+        "specifier": "../modules/runtime-workspace-state.js"
+      },
+      {
+        "file": "assets/js/my-reality.js",
+        "specifier": "../shared.js"
+      },
+      {
+        "file": "assets/js/my-reality.js",
+        "specifier": "../modules/runtime-transition-engine.js"
+      },
+      {
+        "file": "assets/js/about.js",
+        "specifier": "../i18n.js"
+      }
+    ]
+  },
+  "duplicateAuthorityAudit": {
+    "duplicateCurrentAuthorityCount": 0,
+    "basis": "CBS-W1 unique current owner per domain"
+  },
+  "safeToRemoveCount": 0,
+  "allowedClassifications": [
+    "CURRENT",
+    "LEGACY_REQUIRED",
+    "SUCCESSOR_REPLACED",
+    "DEFERRED",
+    "BLOCKED",
+    "SAFE_TO_REMOVE",
+    "UNKNOWN"
+  ],
+  "rules": {
+    "unknownMayBeDeleted": false,
+    "safeToRemoveRequiresPositiveProof": true,
+    "noCurrentRuntimeMayRemainUnknown": true
+  }
+}
