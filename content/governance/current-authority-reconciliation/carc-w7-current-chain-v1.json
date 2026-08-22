@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W7-CURRENT-CHAIN-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W7",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "CURRENT_CHAIN_DEFINED_WITH_PHASE_1_EXIT_GATE",
+  "npmAlias": "check:current",
+  "checks": [
+    {
+      "id": "CBS_CURRENT",
+      "command": "node scripts/check-current-system-baseline-current.mjs",
+      "class": "CURRENT"
+    },
+    {
+      "id": "CARC",
+      "command": "node scripts/check-current-authority-reconciliation.mjs ALL --pre-exit",
+      "class": "CURRENT"
+    },
+    {
+      "id": "BOOK_CANONICAL",
+      "command": "npm run check:book-w1-canonical",
+      "class": "CURRENT"
+    },
+    {
+      "id": "BOOK_PUBLIC",
+      "command": "npm run check:book-w1-public-projection",
+      "class": "CURRENT"
+    },
+    {
+      "id": "KAP_RELATIONSHIP",
+      "command": "node scripts/check-kap-w8-relationship-expansion.mjs",
+      "class": "CURRENT"
+    },
+    {
+      "id": "MIR_BASELINE",
+      "command": "node scripts/check-mir-current-baseline.mjs",
+      "class": "CURRENT"
+    },
+    {
+      "id": "WPR_ROUTE",
+      "command": "npm run check:wpr-w4",
+      "class": "CURRENT"
+    },
+    {
+      "id": "WPR_DEPLOYMENT",
+      "command": "npm run check:wpr-w28",
+      "class": "CURRENT"
+    },
+    {
+      "id": "CAR",
+      "command": "npm run check:car-preserved",
+      "class": "CURRENT"
+    },
+    {
+      "id": "CKA_CURRENT",
+      "command": "npm run check:cka-current",
+      "class": "CURRENT"
+    },
+    {
+      "id": "CPR_CURRENT",
+      "command": "npm run check:cpr-current",
+      "class": "CURRENT"
+    },
+    {
+      "id": "FDR_CURRENT",
+      "command": "npm run check:fdr",
+      "class": "CURRENT"
+    },
+    {
+      "id": "DAR_CURRENT",
+      "command": "npm run check:dar",
+      "class": "CURRENT"
+    },
+    {
+      "id": "RRP_FOUNDATION",
+      "command": "npm run check:rrp-foundation",
+      "class": "CURRENT"
+    },
+    {
+      "id": "SERVICE_CONTINUITY",
+      "command": "npm run check:service-continuity-batch3",
+      "class": "CURRENT"
+    },
+    {
+      "id": "CARC_EXIT",
+      "command": "node scripts/check-current-authority-reconciliation.mjs W8",
+      "class": "CURRENT"
+    }
+  ],
+  "historicalAliasesForbidden": [
+    "check:current-system-baseline",
+    "check:cka",
+    "check:cpr"
+  ],
+  "rules": {
+    "dailyGateIsCheckCurrent": true,
+    "historicalAggregateIsNotCurrentProductionGate": true,
+    "externalDeploymentAcceptanceRemainsSeparateAndFailClosed": true
+  }
+}

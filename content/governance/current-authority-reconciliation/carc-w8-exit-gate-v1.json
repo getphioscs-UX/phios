@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-CARC-W8-CURRENT-AUTHORITY-RECONCILIATION-FREEZE-v1.0.0",
+  "phase": "CARC",
+  "work": "CARC-W8",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "PHASE_1_CURRENT_AUTHORITY_RECONCILIATION_FROZEN",
+  "preExitGate": {
+    "command": "npm run check:current",
+    "result": "PASS_BEFORE_W8_FREEZE",
+    "note": "The same current chain passed with CARC W0-W7 and all dependency gates before W8 was written."
+  },
+  "frozenEvidence": [
+    {
+      "work": "CARC-W0",
+      "path": "content/governance/current-authority-reconciliation/carc-w0-canonical-node-reconciliation-v1.json",
+      "sha256": "b23e25d37aa1ee988e29862b7192d7619baadd68516cd32d6b53f2cf20733e21"
+    },
+    {
+      "work": "CARC-W1",
+      "path": "content/governance/current-authority-reconciliation/carc-w1-knowledge-relationship-reconciliation-v1.json",
+      "sha256": "f72dc2db72b9841c8fbcbee9f326f869d9333b74df4c9b15714d2e353b7b3c45"
+    },
+    {
+      "work": "CARC-W2",
+      "path": "content/governance/current-authority-reconciliation/carc-w2-mir-reconciliation-v1.json",
+      "sha256": "023036513a2aaae12826d36e3cf5c94dee2fb0c1556d748dc0a0e7a77a617558"
+    },
+    {
+      "work": "CARC-W3",
+      "path": "content/governance/current-authority-reconciliation/carc-w3-wpr-route-reconciliation-v1.json",
+      "sha256": "a02eba499462d1d10071e906f4d685c454017f07839d451f01fdb958af8184bd"
+    },
+    {
+      "work": "CARC-W4",
+      "path": "content/governance/current-authority-reconciliation/carc-w4-deployment-evidence-v1.json",
+      "sha256": "ac9258c4acd0dfbd5917765c106548062323976173d6bafdcacea1ca71ab1e22"
+    },
+    {
+      "work": "CARC-W5",
+      "path": "content/governance/current-authority-reconciliation/carc-w5-public-asset-base-v1.json",
+      "sha256": "bedbf96236c78edb3bac80c5a7952200c643f347c77d1cb1f2d142a51f015972"
+    },
+    {
+      "work": "CARC-W6",
+      "path": "content/governance/current-authority-reconciliation/carc-w6-checker-lifecycle-registry-v1.json",
+      "sha256": "e1f8a922d97b891f99c63afd1af291ea630a1c12e1b45967cf08185b5df9b526"
+    },
+    {
+      "work": "CARC-W7",
+      "path": "content/governance/current-authority-reconciliation/carc-w7-current-chain-v1.json",
+      "sha256": "43ab1ca25ceccc1c77cd7075ea48f3d9fce841e43d91c89a115e40c2ccb3e01c"
+    },
+    {
+      "work": "SUPPORT",
+      "path": "content/governance/current-authority-reconciliation/current-authority-successor-registry-v1.json",
+      "sha256": "2321ed265150be09cb0e9ff91db07e9c6c9f9c26a5525232d115818eadbae36a"
+    },
+    {
+      "work": "SUPPORT",
+      "path": "content/governance/current-authority-reconciliation/carc-current-dependency-backfill-v1.json",
+      "sha256": "e2d1269463825e80ea11f8b498572ce3bbcca3758e0a289f4e2aa4556b8e1d92"
+    }
+  ],
+  "exitGate": {
+    "unexplainedCanonicalDrift": 0,
+    "unexplainedMirDrift": 0,
+    "unexplainedKapDrift": 0,
+    "currentHistoricalCheckerAmbiguity": 0,
+    "unknownProductionAuthority": 0
+  },
+  "productionAcceptance": {
+    "currentRepositorySha": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+    "currentRepositoryDeploymentAccepted": false,
+    "reason": "BUILD_SHA_NOT_OBSERVED_AND_RECORDED_CLOUDFLARE_SHA_IS_STALE"
+  },
+  "dependencyBackfill": {
+    "required": true,
+    "artifact": "content/governance/current-authority-reconciliation/carc-current-dependency-backfill-v1.json",
+    "reason": "Current main omitted exact prior DAR and MRM authority-dependency bytes required by declared current checkers; restored without authority mutation."
+  },
+  "rules": {
+    "cbsHistoricalFreezeRewritten": false,
+    "kapDigestDirectlyAccepted": false,
+    "mirSecondInterpretationRuntimeCreated": false,
+    "deploymentAcceptanceFabricated": false,
+    "futureAuthorityDriftRequiresVersionedSuccessor": true,
+    "dailyCurrentGate": "npm run check:current"
+  }
+}
