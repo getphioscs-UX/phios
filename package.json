@@ -1383,8 +1383,9 @@
     "check:dar-w15-w24": "node scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
     "check:dar": "npm run check:dar-w0-w14 && npm run check:dar-w15-w24",
     "check:part-k-historical": "node scripts/check-part-k-final-freeze.mjs",
-    "check:service-continuity-batch3": "node scripts/check-service-continuity-batch3.mjs"
-   
+    "check:service-continuity-batch3": "node scripts/check-service-continuity-batch3.mjs",
+    "check:runtime-frontend-parity": "node scripts/check-runtime-frontend-parity.mjs",
+    "check:pcm": "npm run check:runtime-frontend-parity"
   },
   "type": "module",
   "dependencies": {
