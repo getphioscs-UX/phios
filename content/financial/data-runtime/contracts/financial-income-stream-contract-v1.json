@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W8-INCOME-STREAM-CONTRACT-v1.0.0",
+  "work": "FDR-W8",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "incomeStreamId",
+    "incomeType",
+    "recipientReference",
+    "amountFact",
+    "frequency",
+    "currency",
+    "effectivePeriod",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "payerReference",
+    "entityReference",
+    "grossOrNet",
+    "taxTreatmentReported",
+    "variability",
+    "documentReferences"
+  ],
+  "frequency": [
+    "MONTHLY",
+    "ANNUAL",
+    "IRREGULAR",
+    "ONE_OFF",
+    "OTHER"
+  ],
+  "rules": {
+    "annualizationCalculationInFdr": false,
+    "grossToNetCalculationInFdr": false,
+    "foreignIncomeConversionInFdr": false,
+    "rangeAmountAllowed": true,
+    "missingAmountDoesNotBecomeZero": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

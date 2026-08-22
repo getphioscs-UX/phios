@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W15-PROGRESSIVE-DISCLOSURE-CONTRACT-v1.0.0",
+  "work": "FDR-W15",
+  "status": "ACTIVE",
+  "levels": [
+    "QUICK",
+    "PLANNING",
+    "VERIFIED",
+    "PROFESSIONAL"
+  ],
+  "levelRequirements": {
+    "QUICK": {
+      "exactAmountsRequired": false,
+      "rangesAllowed": true,
+      "documentEvidenceRequired": false,
+      "professionalReviewRequired": false
+    },
+    "PLANNING": {
+      "exactAmountsRequired": false,
+      "rangesAllowed": true,
+      "documentEvidenceRequired": "SELECTIVE",
+      "professionalReviewRequired": false
+    },
+    "VERIFIED": {
+      "exactAmountsRequired": "WHERE_AVAILABLE",
+      "rangesAllowed": true,
+      "documentEvidenceRequired": "MATERIAL_FACTS",
+      "professionalReviewRequired": false
+    },
+    "PROFESSIONAL": {
+      "exactAmountsRequired": "SERVICE_SCOPE_DEPENDENT",
+      "rangesAllowed": true,
+      "documentEvidenceRequired": "SERVICE_SCOPE_DEPENDENT",
+      "professionalReviewRequired": true
+    }
+  },
+  "transitionRules": {
+    "lowerLevelDataPreserved": true,
+    "upgradeRequiresExplicitAdditionalDisclosure": true,
+    "noExactAmountBlocksWholeCustomer": false,
+    "missingOneDomainBlocksUnrelatedDomains": false,
+    "declinedDataMayRemainDeclined": true,
+    "unknownMayRemainUnknown": true,
+    "professionalLevelDoesNotGrantProfessionalJudgmentToFdr": true
+  }
+}

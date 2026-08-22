@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W9-EXPENSE-CONTRACT-v1.0.0",
+  "work": "FDR-W9",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "expenseId",
+    "expenseType",
+    "payerReference",
+    "amountFact",
+    "frequency",
+    "currency",
+    "effectivePeriod",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "beneficiaryReference",
+    "relatedLiabilityReference",
+    "entityReference",
+    "notes",
+    "documentReferences"
+  ],
+  "frequency": [
+    "MONTHLY",
+    "ANNUAL",
+    "IRREGULAR",
+    "ONE_OFF"
+  ],
+  "rules": {
+    "monthlyNormalizationCalculationInFdr": false,
+    "annualizationCalculationInFdr": false,
+    "rangeAmountAllowed": true,
+    "irregularExpenseAllowed": true,
+    "missingAmountDoesNotBecomeZero": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W2-PERSON-CONTRACT-v1.0.0",
+  "work": "FDR-W2",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "requiredFields": [
+    "personId",
+    "roles",
+    "relationshipToHousehold",
+    "disclosureState",
+    "evidence"
+  ],
+  "optionalFields": [
+    "customerReference",
+    "displayName",
+    "dateOfBirth",
+    "dependencyStatus",
+    "residencyJurisdiction",
+    "citizenshipJurisdiction",
+    "notes"
+  ],
+  "references": {
+    "roles": "financial-person-role-registry-v1.json",
+    "evidence": "financial-fact-evidence-contract-v1.json"
+  },
+  "rules": {
+    "samePersonMayHaveMultipleRoles": true,
+    "personIdIsNotAccountId": true,
+    "accountReferenceIsExternal": true,
+    "legalRoleFactDoesNotConferLegalAuthority": true,
+    "missingPersonalDataMayRemainUnknown": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W10-POLICY-CONTRACT-v1.0.0",
+  "work": "FDR-W10",
+  "status": "ACTIVE",
+  "authorityOwner": "FDR",
+  "policyTypes": [
+    "LIFE",
+    "TERM_LIFE",
+    "WHOLE_LIFE",
+    "INVESTMENT_LINKED",
+    "MEDICAL",
+    "CRITICAL_ILLNESS",
+    "PERSONAL_ACCIDENT",
+    "DISABILITY_INCOME",
+    "GENERAL",
+    "BUSINESS",
+    "OTHER"
+  ],
+  "requiredFields": [
+    "policyId",
+    "owner",
+    "insured",
+    "beneficiary",
+    "policyType",
+    "provider",
+    "sumAssured",
+    "premium",
+    "cashValue",
+    "term",
+    "nominationStatus",
+    "coverageScope",
+    "disclosureState",
+    "evidence"
+  ],
+  "fieldRules": {
+    "owner": "person/entity reference or UNKNOWN",
+    "insured": "one or more person/entity references",
+    "beneficiary": "reported beneficiary fact; may be unknown; not estate instruction",
+    "sumAssured": "fact representation supports exact/approx/range/unknown",
+    "premium": "fact representation supports exact/approx/range/unknown",
+    "cashValue": "fact representation supports exact/approx/range/unknown",
+    "nominationStatus": "fact only; validity is external legal/professional domain"
+  },
+  "rules": {
+    "premiumOnlyPolicyRecordForbidden": true,
+    "coverageGapCalculationInFdr": false,
+    "beneficiaryFactDoesNotCreateDistributionInstruction": true,
+    "nominationStatusDoesNotEstablishLegalValidity": true,
+    "missingCashValueDoesNotBecomeZero": true,
+    "allAtomicFinancialFactsUseFactEnvelope": true
+  },
+  "factEnvelopeReference": "financial-fact-contract-v1.json"
+}

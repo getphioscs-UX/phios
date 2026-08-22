@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W0-AUTHORITY-BASELINE-v1.0.0",
+  "phase": "FDR",
+  "work": "FDR-W0",
+  "baselineCommit": "812d7c8",
+  "status": "ACTIVE_FOUNDATION_BOUNDARY",
+  "authority": {
+    "runtimeCode": "FDR",
+    "owns": [
+      "CANONICAL_FINANCIAL_FACTS",
+      "FINANCIAL_FACT_IDENTITY",
+      "FINANCIAL_FACT_LINEAGE",
+      "FINANCIAL_DISCLOSURE_STATE",
+      "FINANCIAL_FACT_EVIDENCE_BINDING"
+    ],
+    "doesNotOwn": [
+      "FINANCIAL_CALCULATION",
+      "FINANCIAL_ANALYSIS",
+      "PROFESSIONAL_JUDGMENT",
+      "PROFESSIONAL_RECOMMENDATION",
+      "REPORT_ASSEMBLY",
+      "ACCOUNT_IDENTITY",
+      "REALITY_MODEL_AUTHORITY",
+      "CONSENT_AUTHORITY",
+      "RETENTION_AUTHORITY",
+      "ESTATE_DISTRIBUTION_INSTRUCTION",
+      "LEGAL_CLAUSE",
+      "WILL_VALIDITY"
+    ]
+  },
+  "reconciliation": {
+    "legacyFinancialProfessional": {
+      "authority": "professional qualification and permitted service scope",
+      "relationship": "PRESERVE_AND_CONSUME_FDR_FACTS_LATER",
+      "duplicateFactAuthorityCreated": false
+    },
+    "legacyFinancialSchema": {
+      "authority": "storage/infrastructure schema including calculated and professional records",
+      "relationship": "NOT_CANONICAL_FACT_AUTHORITY",
+      "silentMigrationAllowed": false
+    },
+    "account": {
+      "authority": "authentication, account identity and account settings",
+      "relationship": "REFERENCE_ONLY",
+      "fdrCreatesSecondAccountAuthority": false
+    },
+    "icr": {
+      "authority": "canonical input/case normalization",
+      "relationship": "MAY_ADAPT_INTAKE_LATER_NOT_FINANCIAL_FACT_OWNER"
+    },
+    "rmo": {
+      "authority": "general canonical Reality snapshot and component model",
+      "relationship": "FDR_IS_DOMAIN_FACT_OBJECT_NOT_SECOND_RMO"
+    },
+    "rdg": {
+      "authority": "data governance, permission, persistence, consent, retention and deletion",
+      "relationship": "FDR_FACTS_MUST_REMAIN_RDG_GOVERNED"
+    },
+    "professionalRuntime": {
+      "authority": "human-attributed observation, judgment, recommendation, approval and liability",
+      "relationship": "CONSUMER_ONLY_NO_FDR_JUDGMENT"
+    },
+    "reportRuntime": {
+      "authority": "report assembly and release lifecycle",
+      "relationship": "CONSUMER_ONLY_NO_FDR_REPORT_AUTHORITY"
+    },
+    "dar": {
+      "baselinePresence": "NOT_PRESENT_IN_812d7c8_BASELINE",
+      "relationship": "FUTURE_EXPLICIT_CONSUMER_ONLY",
+      "rule": "DAR may reference FDR estate and asset facts but may not mutate them"
+    },
+    "privacyConsent": {
+      "authority": "existing RDG and Professional governance",
+      "relationship": "FDR_W18_SPECIALIZES_PURPOSE_SCOPES_WITHOUT_REPLACING_UPSTREAM_GOVERNANCE"
+    }
+  },
+  "frozenPredecessors": [
+    {
+      "code": "LEGACY_FINANCIAL_PROFESSIONAL_AUTHORITY",
+      "path": "content/registry/financial-authority-boundary.json",
+      "sha256": "e8708450a169dc41f7cb26a1e83378a6ad06587f7b39d02fd90808e5bd73beb4"
+    },
+    {
+      "code": "LEGACY_FINANCIAL_SCHEMA",
+      "path": "content/registry/financial-schema-registry.json",
+      "sha256": "c5c0527c32fcb91844477c719f9865763ea5408c54ce6e7a3f547465b48e0eae"
+    },
+    {
+      "code": "LEGACY_FINANCIAL_INTAKE_CALCULATION",
+      "path": "content/registry/m4a-w2c-financial-intake-calculation.json",
+      "sha256": "057bc4bb713c68418b7b6d0bcda8a72b82bd22278fbb94adf9c872159048736f"
+    },
+    {
+      "code": "ACCOUNT",
+      "path": "functions/account/account-contract.js",
+      "sha256": "1b48df6d353dc0fddd60a7dbcee2c7437bd400738bfbadf8ecd6459a7d2d3de9"
+    },
+    {
+      "code": "ICR",
+      "path": "content/runtime/input-case-runtime/contracts/canonical-input-contract-v1.json",
+      "sha256": "6e3872b8e1f656c3dd3f70d5fb69535368c11f10d8d0911d204f4a6cba5159f9"
+    },
+    {
+      "code": "RMO",
+      "path": "content/runtime/reality-model-runtime/contracts/canonical-reality-object-v1.json",
+      "sha256": "27c5b2276a065865deb39aa6a8808cfbe3c82e61914c7aee259da9837f66bcf3"
+    },
+    {
+      "code": "RDG_DATA_OBJECT",
+      "path": "content/governance/reality-data-governance/contracts/canonical-data-object-contract-v1.json",
+      "sha256": "b2daf0d13a3761d9f8ec294cada1c33da1512f75eef4aa53a46d961dfad064b9"
+    },
+    {
+      "code": "RDG_PERMISSION",
+      "path": "content/governance/reality-data-governance/contracts/data-permission-contract-v1.json",
+      "sha256": "0a6ee3e2a67127399acfe0991b871776d5983a1e203fe52a762b7fdcf47c1957"
+    },
+    {
+      "code": "PROFESSIONAL_RUNTIME",
+      "path": "content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json",
+      "sha256": "b280fe736bcaa9802463c1941b9d1b3448f0848b7eb19dce9ff2dd7b645b6f7d"
+    },
+    {
+      "code": "REPORT_RUNTIME",
+      "path": "content/runtime/customer-report-runtime/contracts/report-assembly-contract-v2.json",
+      "sha256": "b04d257713ebf4ece7d9d3ec477988622fbfa799dfaf71451e6ace30aae7ab94"
+    },
+    {
+      "code": "PROFESSIONAL_DATA_GOVERNANCE",
+      "path": "content/registry/professional-data-governance.json",
+      "sha256": "b6228787975daaf335b4ad57de05304beb47ddf54078503b5b2e00b6532c4b64"
+    },
+    {
+      "code": "PROFESSIONAL_CONSENT",
+      "path": "content/registry/professional-consent-sharing.json",
+      "sha256": "b258ce68c103e45dbc9739ce606bd2f361631664e5393da329d598370652d3e1"
+    }
+  ],
+  "invariants": {
+    "oneCanonicalFinancialFactAuthority": true,
+    "createsSecondAccountAuthority": false,
+    "createsSecondRealityAuthority": false,
+    "calculationAuthorityInFdr": false,
+    "analysisAuthorityInFdr": false,
+    "professionalJudgmentAuthorityInFdr": false,
+    "estateDistributionInstructionAuthorityInFdr": false,
+    "silentMigrationAllowed": false,
+    "upstreamMutationRequired": false,
+    "missingDataMayBeInvented": false,
+    "declinedDataMayBecomeZero": false,
+    "unknownMayBecomeZero": false
+  },
+  "exitGate": {
+    "duplicateFinancialFactAuthorityCount": 0,
+    "secondAccountAuthorityCount": 0,
+    "silentMigrationCount": 0
+  }
+}

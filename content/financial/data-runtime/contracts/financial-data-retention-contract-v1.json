@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-FDR-W18-DATA-RETENTION-CONTRACT-v1.0.0",
+  "work": "FDR-W18",
+  "status": "ACTIVE_SPECIALIZATION_UNDER_RDG",
+  "upstreamAuthorityReference": "content/governance/reality-data-governance/contracts/retention-runtime-contract-v1.json",
+  "requiredFields": [
+    "retentionId",
+    "financialRealityId",
+    "purposeScope",
+    "retentionClass",
+    "retentionTrigger",
+    "expiresAt",
+    "legalHoldReference",
+    "deletionBehavior"
+  ],
+  "retentionClasses": [
+    "SERVICE_ONLY",
+    "CONTINUITY_REVIEW",
+    "USER_SELECTED_UNTIL",
+    "LEGAL_BASIS_LIMITED"
+  ],
+  "deletionBehaviors": [
+    "DELETE",
+    "ANONYMIZE_IF_ELIGIBLE",
+    "REVIEW_REQUIRED"
+  ],
+  "rules": {
+    "consentAloneAuthorizesRetention": false,
+    "silentIndefiniteRetentionAllowed": false,
+    "purposeBoundRetentionRequired": true,
+    "sourceDocumentMayHaveShorterRetentionThanCanonicalFact": true,
+    "legalHoldMustBeExplicit": true,
+    "retentionChangeMustBeVersioned": true
+  }
+}
