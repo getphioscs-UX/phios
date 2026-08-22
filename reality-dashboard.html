@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
   <link rel="stylesheet" href="/assets/css/wpr-reality-journey-production.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
+  <link rel="stylesheet" href="/assets/css/runtime-spine.css">
 </head>
 <body class="public-page journey-dashboard-page" data-page="reality-dashboard" data-public-section="reality" data-wpr-production-surface="REALITY_JOURNEY_LOCAL" data-wpr-work="WPR-W20">
   <a class="phi-skip-link" href="#dashboard-main" data-i18n="journeyDashboard.skip">
@@ -34,6 +35,17 @@
   <div data-public-header-placeholder></div>
 
   <main id="dashboard-main">
+<section class="rs-hero" data-runtime-spine-surface="REALITY_DASHBOARD" aria-label="Reality Dashboard">
+  <div class="rs-hero__media" aria-hidden="true"><img data-rs-asset="HERO-006" alt="" decoding="async" fetchpriority="high"><div class="rs-hero__wash"></div></div>
+  <div class="rs-shell rs-hero__content">
+    <p class="rs-kicker" data-rs-en="Reality Dashboard" data-rs-zh="现实仪表板">Reality Dashboard</p>
+    <h1 data-rs-en="Return to the Reality you already established." data-rs-zh="回到你已经建立的现实。">Return to the Reality you already established.</h1>
+    <p class="rs-hero__lead" data-rs-en="See where you are, what changed, and the next explicit choice before you continue." data-rs-zh="在继续之前，看清你现在在哪里、发生了什么变化，以及下一步需要由你确认的选择。">See where you are, what changed, and the next explicit choice before you continue.</p>
+    <div class="rs-hero__actions"><a class="rs-hero__primary" href="/reality/" data-rs-en="Open Reality Workspace →" data-rs-zh="打开现实工作区 →">Open Reality Workspace →</a><a class="rs-hero__link" href="/reality-journey" data-rs-en="How the journey works" data-rs-zh="了解现实旅程">How the journey works</a></div>
+  </div>
+</section>
+<section class="rs-context-band" aria-label="Runtime surface boundaries"><div class="rs-shell rs-context-band__grid"><div><small data-rs-en="Current state" data-rs-zh="当前状态">Current state</small><strong data-rs-en="Read before changing anything" data-rs-zh="先读取，再决定是否改变">Read before changing anything</strong></div><div><small data-rs-en="History" data-rs-zh="历史">History</small><strong data-rs-en="Earlier Reality remains visible" data-rs-zh="之前的现实保持可见">Earlier Reality remains visible</strong></div><div><small data-rs-en="Next step" data-rs-zh="下一步">Next step</small><strong data-rs-en="Resume, revise or begin separately" data-rs-zh="继续、修订或另开现实">Resume, revise or begin separately</strong></div></div></section>
+
     <section class="journey-dashboard-hero" aria-labelledby="dashboard-title">
       <div class="public-container journey-dashboard-hero__grid">
         <div>
@@ -120,6 +132,14 @@
       </div>
     </section>
 
+
+<section class="rs-visual-section" data-runtime-spine-visual="ILL-010">
+  <div class="rs-shell rs-visual-grid"><div class="rs-visual-copy">
+    <p class="rs-kicker" data-rs-en="Continuity" data-rs-zh="持续">Continuity</p>
+    <h2 data-rs-en="Reality keeps moving between visits." data-rs-zh="现实会在两次回来之间继续变化。">Reality keeps moving between visits.</h2>
+    <p data-rs-en="A useful dashboard preserves what was established, what changed, and the choice to continue without rewriting the past." data-rs-zh="一个有用的仪表板会保留已经建立的现实、后来发生的变化，以及是否继续的选择，而不会改写过去。">A useful dashboard preserves what was established, what changed, and the choice to continue without rewriting the past.</p>
+  </div><figure class="rs-figure"><img data-rs-asset="ILL-010" loading="lazy" decoding="async" alt="Reality Workspace continuity illustration"><figcaption data-rs-en="Reality Workspace continuity illustration" data-rs-zh="现实工作区持续性插图">Reality Workspace continuity illustration</figcaption></figure></div>
+</section>
     <div id="dashboardWorkspace" class="hidden">
       <section class="public-section journey-dashboard-summary" aria-labelledby="dashboard-summary-title">
         <div class="public-container">
@@ -302,6 +322,14 @@
         </div>
       </section>
 
+
+<section class="rs-visual-section rs-visual-section--deep" data-runtime-spine-visual="FIG-020">
+  <div class="rs-shell rs-visual-grid"><div class="rs-visual-copy">
+    <p class="rs-kicker" data-rs-en="Review and continuity" data-rs-zh="复核与持续">Review and continuity</p>
+    <h2 data-rs-en="Compare what you expected with what actually changed." data-rs-zh="把预期与实际发生的变化放在一起比较。">Compare what you expected with what actually changed.</h2>
+    <p data-rs-en="Review creates continuity only when new evidence stays distinguishable from the earlier Reality." data-rs-zh="只有把新证据与之前的现实清楚分开，复核才真正形成持续。">Review creates continuity only when new evidence stays distinguishable from the earlier Reality.</p>
+  </div><figure class="rs-figure"><img data-rs-asset="FIG-020" loading="lazy" decoding="async" alt="Feedback and continuity figure"><figcaption data-rs-en="Feedback and continuity figure" data-rs-zh="反馈与持续结构图">Feedback and continuity figure</figcaption></figure></div>
+</section>
       <section class="public-section journey-dashboard-timeline" aria-labelledby="dashboard-timeline-title">
         <div class="public-container journey-dashboard-timeline__grid">
           <header>
@@ -335,5 +363,6 @@
   <script type="module" src="/assets/js/pages/reality-dashboard.js"></script>
   <script type="module" src="/assets/js/pages/reality-dashboard-jr-v2.js"></script>
   <script type="module" src="/assets/js/pages/reality-dashboard-cka.js"></script>
+  <script type="module" src="/assets/js/pages/runtime-spine-visuals.js"></script>
 </body>
 </html>
