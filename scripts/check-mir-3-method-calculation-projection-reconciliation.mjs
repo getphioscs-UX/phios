@@ -18,8 +18,19 @@ const sha = (path) => crypto.createHash('sha256').update(fs.readFileSync(path)).
 run('check:mir-2');
 for (const script of ['check:mcd-1','check:mcd-2','check:mcd-3','check:mcd-4','check:mcd-5','check:mfig']) run(script);
 
-// Keep the governing Method Production Authority and historical HDR deterministic baseline green.
-for (const script of ['check:mpa-w21','check:mpa-w22','check:mpa-w23','check:mpa-w24','check:mpa-w26-w27','check:hdr-w2']) run(script);
+// Keep the governing Method Production Authority current without depending on removed MPA npm sub-aliases.
+const runNode = (file) => {
+  const r = spawnSync(process.execPath, [file], { stdio: 'inherit', shell: false });
+  assert.equal(r.status, 0, `node ${file} failed`);
+};
+for (const file of [
+  'scripts/check-mpa-w21-num-activation-current.mjs',
+  'scripts/check-mpa-w22-ast-activation-current.mjs',
+  'scripts/check-mpa-w23-bzr-activation-current.mjs',
+  'scripts/check-mpa-w24-hdr-boundary-current.mjs',
+  'scripts/check-mpa-w26-w27-mcd5-successor-current.mjs'
+]) runNode(file);
+run('check:hdr-w2');
 
 // MIR-3 deterministic Personal Structure successor contract.
 for (const script of [
