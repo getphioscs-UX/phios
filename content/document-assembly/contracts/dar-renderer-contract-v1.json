@@ -1,0 +1,35 @@
+{
+  "contractCode": "PHI-OS-DAR-W20-RENDERER-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W20",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_IR_ONLY_RENDERERS",
+  "renderers": [
+    {
+      "renderer": "dar-html-renderer",
+      "file": "functions/document-assembly/renderers/dar-html-renderer.js",
+      "format": "HTML"
+    },
+    {
+      "renderer": "dar-pdf-renderer",
+      "file": "functions/document-assembly/renderers/dar-pdf-renderer.js",
+      "format": "PDF"
+    },
+    {
+      "renderer": "dar-docx-renderer",
+      "file": "functions/document-assembly/renderers/dar-docx-renderer.js",
+      "format": "DOCX"
+    }
+  ],
+  "inputAuthority": "Document Assembly IR only",
+  "rules": {
+    "clauseRegistryAccessForbidden": true,
+    "inputIntakeAccessForbidden": true,
+    "clauseSelectionForbidden": true,
+    "legalTextMutationForbidden": true,
+    "renderBlockedIrForbidden": true,
+    "unresolvedPlaceholderForbidden": true,
+    "pdfUnsupportedGlyphsFailClosed": true,
+    "rendererLegalAuthorityForbidden": true
+  }
+}

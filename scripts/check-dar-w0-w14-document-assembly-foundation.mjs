@@ -134,7 +134,9 @@ assert.deepEqual(acceptance.proofs,{ duplicateAuthorityCount:0, approvedLegalCla
 assert.equal(acceptance.sourceLimitation.fullWillReferenceBinaryPresent,false);
 
 const packageJson = readJson('package.json');
-assert.equal(Object.prototype.hasOwnProperty.call(packageJson.scripts || {}, 'check:dar'), false, 'DAR_W24_FINAL_PACKAGE_CHECK_REGISTERED_TOO_EARLY');
+const darFinalFreezeExists = exists('content/document-assembly/freeze/dar-production-freeze-v1.json');
+if (darFinalFreezeExists) assert.equal(typeof packageJson.scripts?.['check:dar'], 'string', 'DAR_W24_FINAL_PACKAGE_CHECK_MISSING_AFTER_FREEZE');
+else assert.equal(Object.prototype.hasOwnProperty.call(packageJson.scripts || {}, 'check:dar'), false, 'DAR_W24_FINAL_PACKAGE_CHECK_REGISTERED_TOO_EARLY');
 
 // No legal clause text may sneak into the foundation registry before W12 admission.
 assert.equal(/"approvedText"\s*:\s*"/.test(text(paths.clauses)), false, 'DAR_AI_OR_UNREVIEWED_APPROVED_CLAUSE_TEXT_DETECTED');
@@ -142,4 +144,4 @@ assert.equal(/"approvedText"\s*:\s*"/.test(text(paths.clauses)), false, 'DAR_AI_
 console.log('✓ DAR-W0–W14 Document Assembly foundation passed.');
 console.log('  0 duplicate authority; 0 approved/legal AI clauses; Malaysia remains LEGAL_VALIDATION_REQUIRED; share integrity is deterministic and never repairs shares.');
 console.log('  W9 reference sections are registered as candidates only because Full Set of Will Example.docx is not present in the aligned baseline.');
-console.log('  package.json check:dar intentionally remains deferred to DAR-W24.');
+console.log(darFinalFreezeExists ? '  DAR-W24 successor freeze detected; package.json check:dar is now admitted.' : '  package.json check:dar intentionally remains deferred to DAR-W24.');

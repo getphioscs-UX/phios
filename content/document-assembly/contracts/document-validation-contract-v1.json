@@ -1,0 +1,35 @@
+{
+  "contractCode": "PHI-OS-DAR-W17-DOCUMENT-VALIDATION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W17",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_FAIL_CLOSED_VALIDATION",
+  "runtime": "functions/document-assembly/document-validator.js",
+  "checks": [
+    "missing field",
+    "unresolved placeholder",
+    "unknown beneficiary",
+    "share mismatch",
+    "invalid reference",
+    "duplicate clause",
+    "illegal clause combination",
+    "unsupported jurisdiction"
+  ],
+  "placeholderPatterns": [
+    "[Beneficiary]",
+    "【Your Name】",
+    "@3clause",
+    "{{field:path}}"
+  ],
+  "result": [
+    "PASS",
+    "FAIL"
+  ],
+  "rules": {
+    "anyUnresolvedPlaceholderFails": true,
+    "shareRepairForbidden": true,
+    "unknownReferenceFails": true,
+    "unsupportedJurisdictionFails": true,
+    "validationIsNotLegalJudgment": true
+  }
+}

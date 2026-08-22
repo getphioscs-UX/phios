@@ -1,0 +1,29 @@
+{
+  "contractCode": "PHI-OS-DAR-W21-DOCUMENT-VERSION-DIGEST-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W21",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_IMMUTABLE_EXPORT_VERSIONING",
+  "runtime": "functions/document-assembly/document-version.js",
+  "exportRecordFields": [
+    "documentId",
+    "documentVersion",
+    "assemblyVersion",
+    "templateVersion",
+    "clauseVersions",
+    "inputDigest",
+    "assemblyDigest",
+    "outputDigest",
+    "format",
+    "createdAt",
+    "previousVersionId"
+  ],
+  "rules": {
+    "changedInputCreatesNewVersion": true,
+    "changedAssemblyCreatesNewVersion": true,
+    "changedOutputCreatesNewVersion": true,
+    "sameDigestsReuseExistingVersion": true,
+    "silentMutationForbidden": true,
+    "createdAtIsExportMetadataNotAssemblyIr": true
+  }
+}

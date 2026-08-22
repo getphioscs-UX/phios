@@ -1,0 +1,44 @@
+{
+  "contractCode": "PHI-OS-DAR-W16-DETERMINISTIC-CLAUSE-RESOLVER-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W16",
+  "baselineCommit": "1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf",
+  "status": "ACTIVE_FAIL_CLOSED_DETERMINISTIC_RESOLUTION",
+  "runtimeFiles": [
+    "functions/document-assembly/clause-resolver.js",
+    "functions/document-assembly/document-assembler.js"
+  ],
+  "determinismBasis": [
+    "inputDigest",
+    "templateVersion",
+    "templateDigest",
+    "clauseRegistryVersion",
+    "clauseRegistryDigest",
+    "selectionRulesVersion",
+    "selectionRulesDigest",
+    "resolverVersion"
+  ],
+  "em1": "Same immutable input digest + immutable template version/content + immutable clause registry version/content produces the same Assembly IR. Registry versions are immutable; content drift under an unchanged version is forbidden.",
+  "approvedClauseRequirements": [
+    "approvalStatus = APPROVED_TEMPLATE_COMPONENT",
+    "approvedText is non-empty",
+    "approvalDigest is non-empty",
+    "version is non-empty",
+    "jurisdiction matches explicit document jurisdiction"
+  ],
+  "parameterBinding": {
+    "syntax": "{{field:path.to.value}}",
+    "onlyRequiredFieldsMayBind": true,
+    "missingBinding": "BLOCK",
+    "unknownBinding": "BLOCK",
+    "unresolvedPlaceholder": "BLOCK",
+    "freeTextGenerationForbidden": true
+  },
+  "invariants": {
+    "aiMayNotDraftText": true,
+    "resolverMayNotGuessFields": true,
+    "resolverMayNotInferJurisdiction": true,
+    "duplicateClauseIdsDeduplicatedByDeclaredTemplateOrderOnly": true,
+    "unapprovedClauseBlocksAssembly": true
+  }
+}
