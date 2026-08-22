@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-FMA-W0-W3-ACCEPTANCE-v1.0.0",
+  "work": "FMA-W0-W3",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "ACCEPTED_FOUNDATION_NO_METHOD_PROMOTION",
+  "acceptedArtifacts": [
+    "content/governance/full-method-availability/audits/full-method-availability-authority-baseline-v1.json",
+    "content/governance/full-method-availability/contracts/production-capability-status-contract-v2.json",
+    "content/governance/full-method-availability/contracts/method-production-availability-contract-v1.json",
+    "content/governance/full-method-availability/registries/canonical-method-production-scope-registry-v1.json",
+    "scripts/check-fma-w0-w3.mjs"
+  ],
+  "exitGate": {
+    "availabilityAndExecutionStatusSeparated": true,
+    "allRequiredAvailabilityGatesDefined": true,
+    "canonicalV1ScopeRegistered": true,
+    "pcmV1StillCurrent": true,
+    "astBzrNumPromotedToAvailable": false
+  },
+  "artifactDigests": {
+    "content/governance/full-method-availability/audits/full-method-availability-authority-baseline-v1.json": "0b535c7e256323b130a255f4dbb3dda85257a26a39fa393cad1de4a5454a919e",
+    "content/governance/full-method-availability/contracts/production-capability-status-contract-v2.json": "1957a8c7dea7db52ab980a8dae155ee5e4166970a96b119988bc7840c7fb552a",
+    "content/governance/full-method-availability/contracts/method-production-availability-contract-v1.json": "0b0a3e7471dd09aa09c233daf0ce1d948d8aa8630d7e57990574c20163322cec",
+    "content/governance/full-method-availability/registries/canonical-method-production-scope-registry-v1.json": "ab44705103e52d9cc4a92ee0acc8d482f920acbc9ee5cec96c1403dbd143ba40",
+    "scripts/check-fma-w0-w3.mjs": "eb400673a12efcafdbd6f1ff1aebe33ae2c02bfe4142abbed6bfa830ab4803e6"
+  },
+  "packageScripts": {
+    "check:fma-w0-w3": "node scripts/check-fma-w0-w3.mjs",
+    "check:fma-a": "npm run check:fma-w0-w3 && npm run check:cmp-w0-w6"
+  }
+}

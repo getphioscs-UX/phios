@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-METHOD-PRODUCTION-AVAILABILITY-CONTRACT-v1.0.0",
+  "work": "FMA-W2",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "ACTIVE_FAIL_CLOSED_AVAILABILITY_GATE_CONTRACT",
+  "availableRequiredGates": [
+    "authority",
+    "calculation",
+    "validated",
+    "projection",
+    "meaning",
+    "productionConsumer",
+    "frontendExecutable",
+    "acceptance"
+  ],
+  "conditionalRequiredGates": [
+    {
+      "gate": "persistenceGoverned",
+      "requiredWhen": "METHOD_OR_PRODUCT_PERSISTS_RESULT"
+    }
+  ],
+  "gateSemantics": {
+    "authority": "Current versioned Method production authority exists for declared scope.",
+    "calculation": "Declared scope has executable deterministic calculation runtime.",
+    "validated": "Calculation/projection fixtures and regressions passed.",
+    "projection": "CanonicalMethodProjection contains every admitted production output required by the declared scope.",
+    "meaning": "Production-admitted CanonicalMeaningBundle coverage is complete for the declared scope.",
+    "productionConsumer": "A governed production consumer consumes the canonical result without recalculation.",
+    "frontendExecutable": "A user can intentionally invoke the Method through an accepted frontend route.",
+    "acceptance": "Versioned production acceptance freezes the exact scope and authorities.",
+    "persistenceGoverned": "Persisted inputs/results obey consent, purpose and provenance contracts."
+  },
+  "decisionRule": {
+    "AVAILABLE": "ALL_REQUIRED_GATES_TRUE",
+    "OTHERWISE": "FAIL_CLOSED_NON_AVAILABLE"
+  },
+  "prohibitions": [
+    "IMPLEMENTED_ONLY_CANNOT_YIELD_AVAILABLE",
+    "PROJECTION_ONLY_CANNOT_YIELD_AVAILABLE",
+    "FRONTEND_ROUTE_ONLY_CANNOT_YIELD_AVAILABLE",
+    "SEVEN_OF_EIGHT_GATES_CANNOT_YIELD_AVAILABLE",
+    "PROFESSIONAL_JUDGMENT_IS_NOT_REQUIRED_FOR_SELF_SERVICE_METHOD_AVAILABILITY"
+  ]
+}

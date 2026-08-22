@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-CMP-W0-W6-ACCEPTANCE-v1.0.0",
+  "work": "CMP-W0-W6",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "ACCEPTED_PRODUCTION_MEANING_FOUNDATION_NOT_USER_ACTIVATED",
+  "acceptedArtifacts": [
+    "content/professional/canonical-meaning-production/authority/canonical-meaning-production-authority-baseline-v1.json",
+    "content/professional/canonical-meaning-production/contracts/canonical-meaning-production-contract-v1.json",
+    "content/professional/canonical-meaning-production/registries/canonical-meaning-admission-registry-v1.json",
+    "content/professional/canonical-meaning-production/registries/canonical-method-meaning-mapping-v1.json",
+    "content/professional/canonical-meaning-production/contracts/canonical-meaning-bundle-production-contract-v1.json",
+    "content/professional/canonical-meaning-production/schemas/canonical-meaning-production-bundle-v1.schema.json",
+    "content/professional/canonical-meaning-production/contracts/canonical-meaning-provenance-contract-v1.json",
+    "functions/canonical-meaning-production/meaning-resolver.js",
+    "functions/canonical-meaning-production/meaning-bundle-builder.js",
+    "content/professional/canonical-meaning-production/fixtures/cmp-w4-num-life-path-8.foundation.valid.json",
+    "scripts/check-cmp-w0-w6.mjs"
+  ],
+  "exitGate": {
+    "cmrW15Preserved": true,
+    "canonicalMethodProjectionIsOnlyProjectionInputAuthority": true,
+    "admissionRegistryCreated": true,
+    "currentProjectionCompatibleMappingsCreated": true,
+    "deterministicResolverCreated": true,
+    "bundleContractCreated": true,
+    "provenanceContractCreated": true,
+    "productionActivated": false,
+    "frontendBound": false,
+    "rrpProductionMeaningAvailable": false
+  },
+  "artifactDigests": {
+    "content/professional/canonical-meaning-production/authority/canonical-meaning-production-authority-baseline-v1.json": "59b820726131e98e94019ea02dcb24fe5dc24f0d507678605b0490ebcbce5439",
+    "content/professional/canonical-meaning-production/contracts/canonical-meaning-production-contract-v1.json": "4dfe33e7c42a48a01a9114a94ca9bdbd9b6f0d62443b433885f983e81e10c9c9",
+    "content/professional/canonical-meaning-production/registries/canonical-meaning-admission-registry-v1.json": "4a1277de39120891a959e005013a1c3cfa1c00798c912163795336740acd8739",
+    "content/professional/canonical-meaning-production/registries/canonical-method-meaning-mapping-v1.json": "cedcc2204ee805396f1d8f1f76a52ffb91226d18d4f6058dd1f77e98ced2e71b",
+    "content/professional/canonical-meaning-production/contracts/canonical-meaning-bundle-production-contract-v1.json": "b7ea4b4dcecab3317025f5ebd8354995594db3883cf0c31d114df1265d3b6183",
+    "content/professional/canonical-meaning-production/schemas/canonical-meaning-production-bundle-v1.schema.json": "25d06ebf0c2e271d331b891faf72edf737489f28cf646c9897444be4b468c95b",
+    "content/professional/canonical-meaning-production/contracts/canonical-meaning-provenance-contract-v1.json": "a3942ca3cfb23b9233fbe899431cee8c7c00f2bd9e9d5ba055f11be31df27886",
+    "functions/canonical-meaning-production/meaning-resolver.js": "3c5c1a32220502f433eb8393d8e14745fd6ed1be06322112e98ecba845a031d2",
+    "functions/canonical-meaning-production/meaning-bundle-builder.js": "deb6bfef2741daab69b9a19bdd4b86764d2e849ef8f7cdc9c49bd65939dbff23",
+    "content/professional/canonical-meaning-production/fixtures/cmp-w4-num-life-path-8.foundation.valid.json": "e12fff105e7edc36a2ae54dee0aa83314f39a7a20a7a28bfd275e0658622c71f",
+    "scripts/check-cmp-w0-w6.mjs": "a673392aa0bc2ce7ac7415dbad879a6cc0a0953d3d5e0b108b1f39919e4eddf0"
+  },
+  "packageScripts": {
+    "check:cmp-w0-w6": "node scripts/check-cmp-w0-w6.mjs",
+    "check:cmp": "npm run check:cmp-w0-w6"
+  }
+}

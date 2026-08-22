@@ -1410,7 +1410,12 @@
     "check:carc-w8": "node scripts/check-current-authority-reconciliation.mjs W8",
     "check:carc": "node scripts/check-current-authority-reconciliation.mjs ALL",
     "check:current": "node scripts/check-current.mjs",
-    "check:rrp": "node scripts/check-rrp-w24-canonical-report-payload.mjs && node scripts/check-rrp-w25-visual-reference-binding.mjs && node scripts/check-rrp-w26-product-fixtures.mjs && node scripts/check-rrp-w27-mrm-evidence-binding.mjs && node scripts/check-rrp-w28-rr-handoff-freeze.mjs"
+    "check:rrp": "node scripts/check-rrp-w24-canonical-report-payload.mjs && node scripts/check-rrp-w25-visual-reference-binding.mjs && node scripts/check-rrp-w26-product-fixtures.mjs && node scripts/check-rrp-w27-mrm-evidence-binding.mjs && node scripts/check-rrp-w28-rr-handoff-freeze.mjs",
+    "check:fma-w0-w3": "node scripts/check-fma-w0-w3.mjs",
+    "check:cmp-w0-w6": "node scripts/check-cmp-w0-w6.mjs",
+    "check:cmp": "npm run check:cmp-w0-w6",
+    "check:fma-a": "npm run check:fma-w0-w3 && npm run check:cmp-w0-w6",
+    "check:symbolic-method": "node scripts/check-symbolic-method.mjs"
   },
   "type": "module",
   "dependencies": {

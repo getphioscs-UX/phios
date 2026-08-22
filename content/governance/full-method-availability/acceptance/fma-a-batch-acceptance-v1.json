@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-FMA-A-BATCH-ACCEPTANCE-v1.0.0",
+  "batch": "FMA-A",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "ACCEPTED_FOUNDATION_CONTINUE_TO_FMA_B",
+  "works": [
+    "FMA-W0",
+    "FMA-W1",
+    "FMA-W2",
+    "FMA-W3",
+    "CMP-W0",
+    "CMP-W1",
+    "CMP-W2",
+    "CMP-W3",
+    "CMP-W4",
+    "CMP-W5",
+    "CMP-W6"
+  ],
+  "productionStateAfterBatch": {
+    "AST": "LIMITED_SCOPED",
+    "BZR": "LIMITED_SCOPED",
+    "NUM": "LIMITED_SCOPED",
+    "CMP": "FOUNDATION_NOT_USER_ACTIVATED"
+  },
+  "nextBatch": "FMA-B: CMP-W7-W12 + NUMA-W0-W10",
+  "rules": {
+    "noPrematureAvailablePromotion": true,
+    "noHistoricalFreezeRewrite": true,
+    "noFrontendMeaningConsumptionYet": true
+  },
+  "acceptanceEvidence": {
+    "fmaW0W3": {
+      "path": "content/governance/full-method-availability/acceptance/fma-w0-w3-acceptance-v1.json",
+      "sha256": "61ef06bf8b08faf80c62535ae66a4180495130077843d4298063e41410338a60"
+    },
+    "cmpW0W6": {
+      "path": "content/professional/canonical-meaning-production/acceptance/cmp-w0-w6-acceptance-v1.json",
+      "sha256": "961c179915871180a52c01a9c7759707f31ab661f189276b303011bb5f335542"
+    }
+  },
+  "packageScripts": {
+    "check:fma-w0-w3": "node scripts/check-fma-w0-w3.mjs",
+    "check:cmp-w0-w6": "node scripts/check-cmp-w0-w6.mjs",
+    "check:cmp": "npm run check:cmp-w0-w6",
+    "check:fma-a": "npm run check:fma-w0-w3 && npm run check:cmp-w0-w6"
+  }
+}

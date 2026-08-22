@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-MEANING-PROVENANCE-CONTRACT-v1.0.0",
+  "work": "CMP-W6",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "ACTIVE_FAIL_CLOSED_PROVENANCE_CONTRACT",
+  "requiredTrace": [
+    "CanonicalMeaningItem.meaningId",
+    "CanonicalMeaningItem.mappingLineage",
+    "CanonicalMeaningItem.sourceProjectionRef",
+    "CanonicalMeaningItem.sourceFields",
+    "CanonicalMeaningItem.knowledgeAuthority",
+    "CanonicalMethodProjection.projectionId",
+    "CanonicalMethodProjection.evidence"
+  ],
+  "traceDirection": [
+    "MEANING_ITEM",
+    "CMP_MAPPING",
+    "CANONICAL_METHOD_PROJECTION_FIELD",
+    "MCD_PROJECTION",
+    "METHOD_CALCULATION_EVIDENCE",
+    "CANONICAL_INPUT_LINEAGE"
+  ],
+  "rules": {
+    "meaningWithoutProjectionRefAllowed": false,
+    "meaningWithoutMappingLineageAllowed": false,
+    "meaningWithoutKnowledgeAuthorityAllowed": false,
+    "sourceProjectionMayBeMutated": false,
+    "calculationMayBeRepeatedByMeaningRuntime": false,
+    "opaqueMethodInternalIdentityMayBeDeprotected": false
+  }
+}

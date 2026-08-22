@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-PRODUCTION-CAPABILITY-STATUS-CONTRACT-v2.0.0",
+  "work": "FMA-W1",
+  "baselineCommit": "1d9b248f314308ef4f2a06354fb962ca46fff5c4",
+  "status": "SUCCESSOR_CONTRACT_DEFINED_NOT_YET_CURRENT_PCM_REGISTRY",
+  "predecessor": "content/governance/production-capability-matrix/contracts/pcm-status-projection-contract-v1.json",
+  "currentRegistryUntilFMAW13": "content/governance/production-capability-matrix/registries/production-capability-registry-v1.json",
+  "dimensions": {
+    "capabilityAvailability": {
+      "authority": "METHOD_CAPABILITY_STATE",
+      "values": [
+        "AVAILABLE",
+        "LIMITED",
+        "PREVIEW",
+        "BLOCKED",
+        "COMING_LATER"
+      ],
+      "meaning": "Whether the declared canonical production scope is globally executable and accepted."
+    },
+    "executionCompleteness": {
+      "authority": "ONE_EXECUTION_RESULT_STATE",
+      "values": [
+        "COMPLETE",
+        "PARTIAL",
+        "INPUT_REQUIRED",
+        "FAILED",
+        "UNAVAILABLE"
+      ],
+      "meaning": "Whether one user execution has enough admissible input and runtime output for its declared scope."
+    }
+  },
+  "rules": {
+    "missingBirthTimeMayReduceExecutionCompletenessWithoutReducingCapabilityAvailability": true,
+    "optionalTargetDateMissingMayReduceExecutionCompletenessWithoutReducingCapabilityAvailability": true,
+    "globalCapabilityMayBeAvailableWhileOneExecutionIsPartial": true,
+    "frontendMayNotInferCapabilityAvailabilityFromExecutionCompleteness": true,
+    "pcmV1RemainsCurrentUntilVersionedRegistrySuccessor": true
+  },
+  "examples": [
+    {
+      "methodCode": "BAZI",
+      "capabilityAvailability": "AVAILABLE",
+      "executionCompleteness": "PARTIAL",
+      "reason": "BIRTH_TIME_UNAVAILABLE",
+      "globalDowngradeForbidden": true
+    }
+  ]
+}
