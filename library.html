@@ -16,13 +16,14 @@
   <link rel="stylesheet" href="/assets/css/knowledge-release.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
   <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-spine.css">
   <link rel="stylesheet" href="/assets/css/bfr-h16-library-visual-acceptance.css">
 </head>
-<body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-library">
+<body class="knowledge-page" data-knowledge-spine-surface="LIBRARY" data-public-section="knowledge" data-page="knowledge-library">
   <a class="skip-link" href="#library-main" data-i18n="knowledge.common.skip">Skip to main content</a>
   <header data-public-header-placeholder></header>
   <main id="library-main">
-    <section class="knowledge-hero" data-bfr-h16-library-visual="MEDIUM_HIGH">
+    <section class="knowledge-hero" data-bfr-h16-library-visual="MEDIUM_HIGH" data-pxr-hidden="true" hidden aria-hidden="true">
       <div class="knowledge-shell knowledge-hero__layout">
         <div>
           <p class="knowledge-eyebrow" data-i18n="knowledge.library.eyebrow">M3B · Knowledge Release</p>
@@ -41,7 +42,13 @@
       </div>
     </section>
 
-    <section class="knowledge-section knowledge-section--paper" aria-label="Library resources">
+    <section class="ks-hero" aria-label="Knowledge surface introduction">
+      <div class="ks-hero__media" aria-hidden="true"><img data-ks-asset="HERO-002" alt="" loading="eager" fetchpriority="high"></div><div class="ks-hero__wash" aria-hidden="true"></div>
+      <div class="ks-shell ks-hero__content"><p class="ks-kicker">Knowledge Library</p><h1 data-ks-en="Find the right way into PHI OS knowledge." data-ks-zh="找到进入 PHI OS 知识的合适路径。">Find the right way into PHI OS knowledge.</h1><p class="ks-hero__lead" data-ks-en="Search by question, move across the five volumes, or open a figure when structure is easier to understand visually." data-ks-zh="从问题开始检索，跨五册阅读，或在结构更适合视觉理解时直接打开 Figure。">Search by question, move across the five volumes, or open a figure when structure is easier to understand visually.</p><div class="ks-actions"><a class="ks-action ks-action--primary" href="#library-resources">Browse the Library →</a><a class="ks-action ks-action--quiet" href="/knowledge-search">Ask PHI OS</a></div></div>
+    </section>
+    <section class="ks-context"><div class="ks-shell ks-context__grid"><div><small>Start with</small><strong>One question</strong></div><div><small>Read across</small><strong>Five volumes · fifteen Parts</strong></div><div><small>See structure</small><strong>Articles + Figures + glossary</strong></div></div></section>
+
+    <section id="library-resources" class="knowledge-section knowledge-section--paper" aria-label="Library resources">
       <div class="knowledge-shell">
         <div class="knowledge-controls">
           <div class="knowledge-field">
@@ -92,6 +99,8 @@
       </div>
     </section>
 
+<section class="ks-feature"><div class="ks-shell ks-feature__grid"><div class="ks-feature__copy"><p class="knowledge-eyebrow">Knowledge discovery</p><h2 data-ks-en="One library, several ways in." data-ks-zh="一个知识库，多种进入方式。">One library, several ways in.</h2><p data-ks-en="The Library does not force one reading order. Search, books, articles and figures are different projections of the same governed knowledge system." data-ks-zh="Library 不强迫单一路径。搜索、书籍、文章与 Figure 是同一套受治理知识系统的不同投影。">The Library does not force one reading order. Search, books, articles and figures are different projections of the same governed knowledge system.</p></div><figure class="ks-visual"><img data-ks-asset="ILL-001" data-ks-kind="illustration" alt="" loading="lazy"><figcaption>Library Knowledge Landscape · supporting illustration</figcaption></figure></div></section>
+
     <section class="knowledge-section" data-knowledge-article-section>
       <div class="knowledge-shell">
         <div class="knowledge-section__heading">
@@ -111,5 +120,6 @@
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/library.js"></script>
   <script type="module" src="/assets/js/pages/knowledge-connections.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-spine-visuals.js"></script>
 </body>
 </html>

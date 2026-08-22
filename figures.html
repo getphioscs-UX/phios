@@ -16,19 +16,25 @@
   <link rel="stylesheet" href="/assets/css/knowledge-release.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
   <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-spine.css">
 </head>
-<body class="knowledge-page" data-public-section="knowledge" data-page="figures">
+<body class="knowledge-page" data-knowledge-spine-surface="FIGURES" data-public-section="knowledge" data-page="figures">
   <a class="skip-link" href="#figures-main" data-i18n="knowledge.common.skip">Skip to main content</a>
   <header data-public-header-placeholder></header>
   <main id="figures-main" data-wpr-production-surface="FIGURE">
-    <section class="knowledge-hero">
+    <section class="knowledge-hero" data-pxr-hidden="true" hidden aria-hidden="true">
       <div class="knowledge-shell">
         <p class="knowledge-eyebrow" data-i18n="knowledge.figures.eyebrow">Figure Gallery</p>
         <h1 data-i18n="knowledge.figures.title">Visual maps for Book I.</h1>
         <p class="knowledge-hero__lead" data-i18n="knowledge.figures.lead">Browse registry-led public web editions by canonical Part ownership.</p>
       </div>
     </section>
-    <section class="knowledge-section knowledge-section--paper">
+    <section class="ks-hero" aria-label="Knowledge surface introduction">
+      <div class="ks-hero__media" aria-hidden="true"><img data-ks-asset="HERO-005" alt="" loading="eager" fetchpriority="high"></div><div class="ks-hero__wash" aria-hidden="true"></div>
+      <div class="ks-shell ks-hero__content"><p class="ks-kicker">Visual Knowledge</p><h1 data-ks-en="See relationships that are harder to hold in prose." data-ks-zh="看见文字难以同时承载的关系。">See relationships that are harder to hold in prose.</h1><p class="ks-hero__lead" data-ks-en="Figures show governed structure, sequence and boundaries. They support knowledge reading; they do not replace the source text behind them." data-ks-zh="Figure 用来呈现受治理的结构、顺序与边界。它支持知识阅读，但不取代背后的来源文本。">Figures show governed structure, sequence and boundaries. They support knowledge reading; they do not replace the source text behind them.</p><div class="ks-actions"><a class="ks-action ks-action--primary" href="#figure-gallery">Open the gallery →</a><a class="ks-action ks-action--quiet" href="/articles">Read articles</a></div></div>
+    </section>
+    <section class="ks-feature"><div class="ks-shell ks-feature__grid"><div class="ks-feature__copy"><p class="knowledge-eyebrow">Visual discovery</p><h2 data-ks-en="Use the picture to find the structure, then return to the source." data-ks-zh="先用图找到结构，再回到来源。">Use the picture to find the structure, then return to the source.</h2><p data-ks-en="The gallery is a visual index into canonical material, not a separate explanation authority." data-ks-zh="Gallery 是进入 canonical material 的视觉索引，不是另一套解释权威。">The gallery is a visual index into canonical material, not a separate explanation authority.</p></div><figure class="ks-visual"><img data-ks-asset="ILL-003" data-ks-kind="illustration" alt="" loading="lazy"><figcaption>Visual Knowledge Discovery · supporting illustration</figcaption></figure></div></section>
+    <section id="figure-gallery" class="knowledge-section knowledge-section--paper">
       <div class="knowledge-shell">
         <div class="knowledge-field">
           <label for="figure-part" data-i18n="knowledge.figures.filterLabel">Filter by Part</label>
@@ -50,5 +56,6 @@
   <footer data-public-footer-placeholder></footer>
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/figures.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-spine-visuals.js"></script>
 </body>
 </html>

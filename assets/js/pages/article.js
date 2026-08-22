@@ -1,3 +1,4 @@
+import { hydrateKnowledgeSpineVisuals } from './knowledge-spine-visuals.js';
 import {
   getLocale,
   onLocaleChange,
@@ -19,6 +20,7 @@ import {
 import { createCkaEntryAction } from '../knowledge/cka-entry-links.js';
 
 const root = document.querySelector('[data-article-slug]');
+if (root) root.setAttribute('data-knowledge-spine-surface', 'ARTICLE');
 const slug = root?.dataset.articleSlug || '';
 
 function renderLoadingState() {
@@ -148,6 +150,7 @@ async function render() {
     updateDocumentMetadata(article);
     bindSave(article);
     appendAskEntry(article);
+    hydrateKnowledgeSpineVisuals(root);
   } catch (error) {
     if (error instanceof ArticleRenderError) {
       renderInvalidState();

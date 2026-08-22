@@ -15,12 +15,17 @@
   <link rel="stylesheet" href="/assets/css/knowledge-release.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
   <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-spine.css">
 </head>
-<body class="knowledge-page" data-public-section="knowledge" data-page="figure-detail">
+<body class="knowledge-page" data-knowledge-spine-surface="FIGURE" data-public-section="knowledge" data-page="figure-detail">
   <a class="skip-link" href="#figure-main" data-i18n="knowledge.common.skip">Skip to main content</a>
   <header data-public-header-placeholder></header>
   <main id="figure-main" data-wpr-production-surface="FIGURE_DETAIL">
-    <section class="knowledge-section knowledge-section--paper">
+    <section class="ks-hero" aria-label="Knowledge surface introduction">
+      <div class="ks-hero__media" aria-hidden="true"><img data-ks-asset="HERO-005" alt="" loading="eager" fetchpriority="high"></div><div class="ks-hero__wash" aria-hidden="true"></div>
+      <div class="ks-shell ks-hero__content"><p class="ks-kicker">Figure Detail</p><h1 data-ks-en="Read the diagram as structure, not decoration." data-ks-zh="把 Figure 当作结构阅读，而不是装饰。">Read the diagram as structure, not decoration.</h1><p class="ks-hero__lead" data-ks-en="Each Figure remains tied to its canonical ownership and related knowledge. Open the visual first, then use the source context beside it." data-ks-zh="每一张 Figure 都保持与 canonical ownership 和相关知识的连接。先看结构，再阅读旁边的来源语境。">Each Figure remains tied to its canonical ownership and related knowledge. Open the visual first, then use the source context beside it.</p><div class="ks-actions"><a class="ks-action ks-action--primary" href="#figure-detail-content">Read this Figure →</a><a class="ks-action ks-action--quiet" href="/figures">All Figures</a></div></div>
+    </section>
+    <section id="figure-detail-content" class="knowledge-section knowledge-section--paper ks-figure-detail-shell">
       <div class="knowledge-shell">
         <p><a href="/figures">← <span data-i18n="knowledge.figures.detailBack">Back to all figures</span></a></p>
         <div class="figure-detail" data-figure-detail></div>
@@ -31,5 +36,6 @@
   <footer data-public-footer-placeholder></footer>
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/figure-detail.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-spine-visuals.js"></script>
 </body>
 </html>

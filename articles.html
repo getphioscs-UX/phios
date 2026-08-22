@@ -16,12 +16,13 @@
   <link rel="stylesheet" href="/assets/css/knowledge-release.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
   <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/knowledge-spine.css">
 </head>
-<body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-articles">
+<body class="knowledge-page" data-knowledge-spine-surface="ARTICLES" data-public-section="knowledge" data-page="knowledge-articles">
   <a class="skip-link" href="#articles-main" data-i18n="knowledge.common.skip">Skip to main content</a>
   <header data-public-header-placeholder></header>
   <main id="articles-main" data-wpr-production-surface="ARTICLE_INDEX">
-    <section class="knowledge-hero knowledge-articles-hero">
+    <section class="knowledge-hero knowledge-articles-hero" data-pxr-hidden="true" hidden aria-hidden="true">
       <div class="knowledge-shell">
         <p class="knowledge-eyebrow" data-i18n="knowledge.articles.eyebrow">Blueprint-led Knowledge</p>
         <h1 data-i18n="knowledge.articles.title">Published questions for understanding Reality.</h1>
@@ -35,6 +36,12 @@
         </div>
       </div>
     </section>
+
+    <section class="ks-hero" aria-label="Knowledge surface introduction">
+      <div class="ks-hero__media" aria-hidden="true"><img data-ks-asset="HERO-004" alt="" loading="eager" fetchpriority="high"></div><div class="ks-hero__wash" aria-hidden="true"></div>
+      <div class="ks-shell ks-hero__content"><p class="ks-kicker">Published Knowledge</p><h1 data-ks-en="Read one question deeply, then continue through the knowledge graph." data-ks-zh="从一个问题深入阅读，再沿知识网络继续。">Read one question deeply, then continue through the knowledge graph.</h1><p class="ks-hero__lead" data-ks-en="Articles turn reviewed canonical knowledge into a readable public path without changing the source authority behind it." data-ks-zh="文章把经过审阅的 canonical knowledge 转成可阅读的公开路径，同时不改变其背后的来源权威。">Articles turn reviewed canonical knowledge into a readable public path without changing the source authority behind it.</p><div class="ks-actions"><a class="ks-action ks-action--primary" href="#published-articles-title">Browse published articles →</a><a class="ks-action ks-action--quiet" href="/library">Knowledge Library</a></div></div>
+    </section>
+    <section class="ks-feature ks-feature--paper"><div class="ks-shell ks-feature__grid"><div class="ks-feature__copy"><p class="knowledge-eyebrow">Reading path</p><h2 data-ks-en="From canonical node to a readable article." data-ks-zh="从 canonical node 到可阅读文章。">From canonical node to a readable article.</h2><p data-ks-en="Publication does not invent a second knowledge source. It makes reviewed knowledge readable, connected and traceable to its volume and Part." data-ks-zh="Publication 不会创造第二套知识来源，而是让已审阅知识变得可读、可连接，并可追溯到其卷册与 Part。">Publication does not invent a second knowledge source. It makes reviewed knowledge readable, connected and traceable to its volume and Part.</p></div><figure class="ks-visual"><img data-ks-asset="ILL-002" data-ks-kind="illustration" alt="" loading="lazy"><figcaption>Reading Path Landscape · supporting illustration</figcaption></figure></div></section>
 
     <section class="knowledge-section knowledge-section--paper" aria-labelledby="published-articles-title">
       <div class="knowledge-shell">
@@ -59,5 +66,6 @@
   <footer data-public-footer-placeholder></footer>
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/articles.js"></script>
+  <script type="module" src="/assets/js/pages/knowledge-spine-visuals.js"></script>
 </body>
 </html>
