@@ -1,0 +1,389 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "family-with-children",
+  "description": "Family household with dependent child and policy addition.",
+  "synthetic": true,
+  "sourceAdapter": "EXCEL",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "dependentChildPresent": true,
+    "policyAdded": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-FAMILY-S0",
+      "financialRealityId": "FR-FAMILY",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-FAMILY",
+        "householdReference": "HH-FAMILY",
+        "customerReferences": [
+          "CUST-F1"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-F1",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "personId": "P-F2",
+            "roles": [
+              "SPOUSE"
+            ],
+            "relationshipToHousehold": "SPOUSE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "personId": "P-CH",
+            "roles": [
+              "CHILD",
+              "DEPENDENT"
+            ],
+            "relationshipToHousehold": "CHILD",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [
+          {
+            "goalId": "G-EDU",
+            "goalType": "EDUCATION",
+            "target": {
+              "amount": 300000,
+              "currency": "MYR"
+            },
+            "targetDate": "2045-01-01",
+            "priority": "HIGH",
+            "owner": "P-F1",
+            "fundingSource": "UNKNOWN",
+            "status": "ACTIVE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "1151ce292f44915628972f4c3cb7b0350ccf3680e7b5376ec2ab29eab10abd91"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "INITIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "8e268a6c3558318f102169dd98c8a9f26c0d9da2c8d5ee0b9ae6b5e6e90fb4e3"
+    },
+    {
+      "snapshotId": "FR-FAMILY-S1",
+      "financialRealityId": "FR-FAMILY",
+      "sequence": 1,
+      "timepoint": "t1",
+      "asOfDate": "2026-02-15",
+      "financialRealityVersion": 2,
+      "snapshotPayload": {
+        "financialRealityId": "FR-FAMILY",
+        "householdReference": "HH-FAMILY",
+        "customerReferences": [
+          "CUST-F1"
+        ],
+        "asOfDate": "2026-02-15",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-F1",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "personId": "P-F2",
+            "roles": [
+              "SPOUSE"
+            ],
+            "relationshipToHousehold": "SPOUSE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          },
+          {
+            "personId": "P-CH",
+            "roles": [
+              "CHILD",
+              "DEPENDENT"
+            ],
+            "relationshipToHousehold": "CHILD",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [
+          {
+            "policyId": "POL-FAM",
+            "owner": "P-F1",
+            "insured": [
+              "P-F1"
+            ],
+            "beneficiary": "P-F2",
+            "policyType": "LIFE",
+            "provider": "SYNTHETIC_PROVIDER",
+            "sumAssured": {
+              "factId": "POL-FAM-SA",
+              "factCode": "POLICY_SUM_ASSURED",
+              "value": 500000,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-15",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-15",
+              "recordedAt": "2026-02-15T00:00:00Z"
+            },
+            "premium": {
+              "factId": "POL-FAM-PREM",
+              "factCode": "POLICY_PREMIUM",
+              "value": 300,
+              "valueRepresentation": "EXACT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-15",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-15",
+              "recordedAt": "2026-02-15T00:00:00Z"
+            },
+            "cashValue": {
+              "factId": "POL-FAM-CV",
+              "factCode": "POLICY_CASH_VALUE",
+              "value": null,
+              "valueRepresentation": "UNKNOWN",
+              "disclosureState": "UNKNOWN",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-15",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-15",
+              "recordedAt": "2026-02-15T00:00:00Z"
+            },
+            "term": {
+              "factId": "POL-FAM-TERM",
+              "factCode": "POLICY_TERM",
+              "value": "20Y",
+              "valueRepresentation": "TEXT",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-15",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-15",
+              "recordedAt": "2026-02-15T00:00:00Z"
+            },
+            "nominationStatus": {
+              "factId": "POL-FAM-NOM",
+              "factCode": "POLICY_NOMINATION_STATUS",
+              "value": "REPORTED",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-15",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-15",
+              "recordedAt": "2026-02-15T00:00:00Z"
+            },
+            "coverageScope": {
+              "factId": "POL-FAM-COV",
+              "factCode": "POLICY_COVERAGE_SCOPE",
+              "value": "LIFE",
+              "valueRepresentation": "ENUM",
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-02-15",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-02-15",
+              "recordedAt": "2026-02-15T00:00:00Z"
+            },
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-02-15",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "goals": [
+          {
+            "goalId": "G-EDU",
+            "goalType": "EDUCATION",
+            "target": {
+              "amount": 300000,
+              "currency": "MYR"
+            },
+            "targetDate": "2045-01-01",
+            "priority": "HIGH",
+            "owner": "P-F1",
+            "fundingSource": "UNKNOWN",
+            "status": "ACTIVE",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK"
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 2,
+        "digest": "6814e14270b72df184fa6ad04cd4b3cd7a92f5dfec20bb0cedd9992410bb48b8"
+      },
+      "previousSnapshotDigest": "8e268a6c3558318f102169dd98c8a9f26c0d9da2c8d5ee0b9ae6b5e6e90fb4e3",
+      "changeEventReferences": [
+        "EV-FAM-1"
+      ],
+      "createdAt": "2026-02-15T00:00:00Z",
+      "creationReason": "VALIDATED_CHANGE",
+      "consentReference": "CONSENT-FP",
+      "digest": "4fd437d18ce335287e1235a21b9663f1aadbbf7fe064ecda8b88201234e460f5"
+    }
+  ],
+  "changeEvents": [
+    {
+      "eventId": "EV-FAM-1",
+      "financialRealityId": "FR-FAMILY",
+      "eventType": "POLICY_ADDED",
+      "occurredAt": "2026-02-15",
+      "recordedAt": "2026-02-15T12:00:00Z",
+      "subjectReference": "POL-FAM",
+      "factReferences": [
+        "POL-FAM-SA"
+      ],
+      "fromSnapshotId": "FR-FAMILY-S0",
+      "toSnapshotId": "FR-FAMILY-S1",
+      "source": "SYNTHETIC_FIXTURE",
+      "validationState": "VALIDATED",
+      "consentReference": "CONSENT-FP",
+      "digest": "5c5b269c2f54b9429c44d8349035757a03d8a9b38ca6128f525e33b603971c30"
+    }
+  ]
+}

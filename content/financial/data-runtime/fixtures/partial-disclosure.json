@@ -1,0 +1,125 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "partial-disclosure",
+  "description": "Partial financial reality remains usable without exact completion.",
+  "synthetic": true,
+  "sourceAdapter": "FORM",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "partialDisclosurePreserved": true,
+    "missingNotZero": true
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-PART-S0",
+      "financialRealityId": "FR-PART",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-PART",
+        "householdReference": "HH-PART",
+        "customerReferences": [
+          "CUST-PART"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-PART",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-PART",
+            "assetType": "PROPERTY",
+            "ownership": {
+              "ownershipId": "OWN-PART",
+              "assetId": "A-PART",
+              "ownershipMode": "UNKNOWN",
+              "ownerReferences": [],
+              "disclosureState": "UNKNOWN",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-PART",
+              "factCode": "ASSET_VALUE",
+              "value": null,
+              "valueRepresentation": "UNKNOWN",
+              "disclosureState": "NOT_YET_PROVIDED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "NOT_YET_PROVIDED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK",
+          "missingCount": 1,
+          "declinedCount": 0,
+          "unknownCount": 1
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "6dce04484add415fc62e2a4b666591b41a03120352349ce5ed13c08205f4f797"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "PARTIAL_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "ba5bff82be9cc19c45060aa1046adc081c888bc99f268c696933ba97ce403b3e"
+    }
+  ],
+  "changeEvents": []
+}

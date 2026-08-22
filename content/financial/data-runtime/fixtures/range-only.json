@@ -1,0 +1,129 @@
+{
+  "fixtureVersion": "PHI-OS-FDR-W22-FIXTURE-v1.0.0",
+  "scenario": "range-only",
+  "description": "Quick intake using ranges only; no collapse to exact values.",
+  "synthetic": true,
+  "sourceAdapter": "CSV",
+  "purposeScope": "FINANCIAL_PLANNING",
+  "expectedProperties": {
+    "rangePreserved": true,
+    "exactAmountRequired": false
+  },
+  "snapshots": [
+    {
+      "snapshotId": "FR-RANGE-S0",
+      "financialRealityId": "FR-RANGE",
+      "sequence": 0,
+      "timepoint": "t0",
+      "asOfDate": "2026-01-01",
+      "financialRealityVersion": 1,
+      "snapshotPayload": {
+        "financialRealityId": "FR-RANGE",
+        "householdReference": "HH-RANGE",
+        "customerReferences": [
+          "CUST-RANGE"
+        ],
+        "asOfDate": "2026-01-01",
+        "currencyContext": {
+          "baseCurrency": "MYR"
+        },
+        "people": [
+          {
+            "personId": "P-RANGE",
+            "roles": [
+              "CUSTOMER"
+            ],
+            "relationshipToHousehold": "PRIMARY",
+            "disclosureState": "SELF_REPORTED",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "entities": [],
+        "assets": [
+          {
+            "assetId": "A-RANGE",
+            "assetType": "UNIT_TRUST",
+            "ownership": {
+              "ownershipId": "OWN-RANGE",
+              "assetId": "A-RANGE",
+              "ownershipMode": "SOLE",
+              "ownerReferences": [
+                "P-RANGE"
+              ],
+              "disclosureState": "SELF_REPORTED",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              }
+            },
+            "valueFact": {
+              "factId": "F-RANGE",
+              "factCode": "ASSET_VALUE",
+              "value": {
+                "min": 100000,
+                "max": 150000,
+                "currency": "MYR"
+              },
+              "valueRepresentation": "RANGE",
+              "disclosureState": "RANGE_ONLY",
+              "evidence": {
+                "evidenceType": "SELF_DECLARATION",
+                "source": "SYNTHETIC_FIXTURE",
+                "verifiedAt": null,
+                "effectiveDate": "2026-01-01",
+                "documentReference": null,
+                "confidence": 0.7
+              },
+              "effectiveDate": "2026-01-01",
+              "recordedAt": "2026-01-01T00:00:00Z"
+            },
+            "jurisdiction": "MY",
+            "disclosureState": "RANGE_ONLY",
+            "evidence": {
+              "evidenceType": "SELF_DECLARATION",
+              "source": "SYNTHETIC_FIXTURE",
+              "verifiedAt": null,
+              "effectiveDate": "2026-01-01",
+              "documentReference": null,
+              "confidence": 0.7
+            }
+          }
+        ],
+        "liabilities": [],
+        "incomeStreams": [],
+        "expenses": [],
+        "policies": [],
+        "goals": [],
+        "estateFacts": [],
+        "documents": [],
+        "disclosureSummary": {
+          "level": "QUICK",
+          "rangeOnly": true
+        },
+        "evidenceSummary": {
+          "state": "PARTIAL"
+        },
+        "version": 1,
+        "digest": "6ac03f14adbc5c809225a2d8a87b72a4cfbccd893b93f1a7daee28c06961c5af"
+      },
+      "previousSnapshotDigest": null,
+      "changeEventReferences": [],
+      "createdAt": "2026-01-01T00:00:00Z",
+      "creationReason": "RANGE_ONLY_DISCLOSURE",
+      "consentReference": "CONSENT-FP",
+      "digest": "1c0998ef7b4d2ee145d3cd9e5ebda75e522094ab1ceafd126945c91f28142ee4"
+    }
+  ],
+  "changeEvents": []
+}

@@ -219,4 +219,4 @@ console.log('✓ FDR-W0–W18 Financial Data Runtime foundation passed.');
 console.log('  FDR owns canonical financial facts only; Calculation, Analysis, Professional Judgment, Account, RMO, RR and legal/estate instruction authority remain external.');
 console.log('  Household/person/entity, assets/ownership, liabilities/guarantees, income/expenses, protection, goals, estate facts, disclosure/evidence, documents and purpose-scoped consent are canonicalized.');
 console.log('  Partial/range disclosure is preserved; declined/unknown values never become zero; FINANCIAL_PLANNING does not imply WILL_ASSEMBLY consent.');
-console.log('  FDR-W19–W24 remain explicitly deferred; no final FDR freeze or check:fdr claim is made in this batch.');
+console.log('  Historical W0–W18 checkpoint remains byte-governed: W19–W24 were deferred at that predecessor checkpoint; successor completion is checked separately by check:fdr.');
