@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S3-EVIDENCE-OBJECT-CONTRACT-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S3",
+  "baselineCommit": "ef4d0b5a2e3a75e5557045c7e4bc59a2f3672cd5",
+  "status": "ACTIVE",
+  "requiredFields": [
+    "evidenceId",
+    "runtimeCode",
+    "capabilityCode",
+    "evidenceClass",
+    "source",
+    "environment",
+    "version",
+    "createdAt",
+    "producer",
+    "reviewStatus",
+    "result",
+    "artifactDigest",
+    "scope",
+    "limitations",
+    "evidenceState"
+  ],
+  "optionalFields": [
+    "caseId",
+    "fixtureId"
+  ],
+  "rules": {
+    "artifactDigestRequired": true,
+    "scopeRequired": true,
+    "limitationsRequired": true,
+    "versionBindingRequired": true,
+    "caseIdRequiredFor": [
+      "PILOT",
+      "CASE",
+      "FOLLOW_UP",
+      "OUTCOME"
+    ],
+    "fixtureIdRequiredFor": [
+      "REFERENCE_FIXTURE",
+      "EDGE_FIXTURE",
+      "NEGATIVE_FIXTURE",
+      "REGRESSION_FIXTURE"
+    ],
+    "evidenceObjectDoesNotChangeRuntimeAuthority": true
+  }
+}

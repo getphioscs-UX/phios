@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-SYMBOLIC-METHOD-INTERPRETATION-CONTRACT-v1.0.0",
+  "phase": "SYM",
+  "work": "SYM-W5",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "BOUND_TO_EXISTING_MIR_AUTHORITY",
+  "authorityEvidence": {
+    "interpretationBoundaryPath": "content/interpretation/governance/interpretation-authority-boundary-v1.json",
+    "interpretationBoundarySha256": "7c390aa6e4987f415a6a8f2b7dc16a16fb0c25f84424fa128c88e16a76846a27",
+    "sharedCompositionPath": "content/professional/method-runtime/shared-interpretation-runtime-v1.json",
+    "sharedCompositionSha256": "620302fcad136c603a3d65d1eda6b2e781ffcdf2254939d5fed67fcf9e3832b4",
+    "sharedPrimitiveRegistryPath": "content/interpretation/integration/shared-method-interpretation-registry-v1.json",
+    "sharedPrimitiveRegistrySha256": "286892d2417b5b1cf65459480c67d224ae676486a1841f45ba4a09a4c61753ac",
+    "canonicalMeaningPath": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json",
+    "canonicalMeaningSha256": "a88c8dd422e222fee7efd4ee4ce9f3cc4b9e780f4b7fbc11ac0c4d0250c55936"
+  },
+  "requiredBindings": [
+    "SOURCE_BOUND",
+    "PERSPECTIVE_BOUND",
+    "CONFIDENCE_BOUND",
+    "PROJECTION_LINEAGE_BOUND"
+  ],
+  "candidateRecordMinimum": [
+    "methodCode",
+    "projectionReference",
+    "sourceId",
+    "perspectiveId",
+    "confidence",
+    "claim",
+    "provenance"
+  ],
+  "rules": {
+    "unqualifiedUniversalMeaningAllowed": false,
+    "sourcePerspectiveMayBeNamed": true,
+    "commonStructuralLensMayBeUsedWhenProvenanceSupportsIt": true,
+    "crossSourceDifferencesMustRemainVisible": true,
+    "aiMayMergeSourcesIntoSingleTrueMeaning": false,
+    "interpretationMayPredictGuaranteedOutcome": false,
+    "interpretationMayOverrideCanonicalMeaningAuthority": false,
+    "secondInterpretationRuntimeCreated": false
+  }
+}
