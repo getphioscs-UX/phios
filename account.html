@@ -8,12 +8,13 @@
   <link rel="stylesheet" href="/assets/css/design/typography.css"><link rel="stylesheet" href="/assets/css/design/layout.css">
   <link rel="stylesheet" href="/assets/css/design/components.css"><link rel="stylesheet" href="/assets/css/public-experience.css">
   <link rel="stylesheet" href="/assets/css/account-membership.css"><link rel="stylesheet" href="/assets/css/i18n.css">
+  <link rel="stylesheet" href="/assets/css/service-continuity.css">
 </head>
-<body class="public-page" data-page="account">
+<body class="public-page" data-page="account" data-service-continuity-surface="ACCOUNT">
   <a class="phi-skip-link" href="#main" data-i18n="accountPublic.skip">Skip to account</a>
   <div data-public-header-placeholder></div>
   <main id="main">
-    <section class="account-hero"><div class="public-container">
+    <section class="sc-hero account-hero"><div class="sc-hero__media" aria-hidden="true"><img data-sc-asset="HERO-017" alt="" loading="eager" fetchpriority="high"></div><div class="sc-hero__wash" aria-hidden="true"></div><div class="public-container">
       <p class="public-eyebrow" data-i18n="accountPublic.eyebrow">M4C Account</p>
       <h1 class="public-display" data-i18n="accountPublic.title">One account. Clear control.</h1>
       <p class="public-lead" data-i18n="accountPublic.lead">Manage identity, privacy and account lifecycle without mixing account data with Runtime evidence.</p>
@@ -28,7 +29,9 @@
       <article class="account-card"><h2 data-i18n="accountPublic.privacy">Privacy settings</h2><p data-i18n="accountPublic.lead">Manage identity, privacy and account lifecycle.</p></article>
       <article class="account-card"><h2 data-i18n="accountPublic.deletion">Delete account</h2><p data-i18n="accountPublic.deletionCopy">Deletion requires a verified request and final confirmation.</p></article>
     </div></section>
-    <section class="public-section public-section--soft" data-cka-account hidden aria-labelledby="cka-account-title">
+    
+<section class="sc-bridge" data-sc-support="ACCOUNT" aria-label="Keep identity, saved work and Reality visibly separated."><div class="sc-shell sc-bridge__grid"><div class="sc-bridge__copy"><p class="sc-kicker" data-sc-en="Continuity without hidden memory" data-sc-zh="连续，不等于隐藏记忆">Continuity without hidden memory</p><h2 data-sc-en="Keep identity, saved work and Reality visibly separated." data-sc-zh="让身份、已保存内容与 Reality 保持清楚分层。">Keep identity, saved work and Reality visibly separated.</h2><p data-sc-en="Account continuity should help you return to work without silently turning account activity into Reality evidence or private context." data-sc-zh="账户连续性应帮助你回到原来的工作，但不会把账户活动静默转换成 Reality evidence 或私人上下文。">Account continuity should help you return to work without silently turning account activity into Reality evidence or private context.</p></div><div class="sc-visual-stack"><figure class="sc-visual"><img data-sc-asset="ILL-009" data-sc-kind="illustration" alt="" loading="lazy"><figcaption>ILL-009</figcaption></figure><figure class="sc-visual"><img data-sc-asset="FIG-053" alt="" loading="lazy"><figcaption>Account Reality Structure</figcaption></figure></div></div></section>
+<section class="public-section public-section--soft" data-cka-account hidden aria-labelledby="cka-account-title">
       <div class="public-container">
         <p class="public-eyebrow">Ask PHI OS · Account only</p>
         <h2 id="cka-account-title" class="public-title" data-cka-account-title>Your Ask continuity</h2>
@@ -42,4 +45,5 @@
     </div></section>
   </main>
   <div data-public-footer-placeholder></div><script type="module" src="/assets/js/public-shell.js"></script><script type="module" src="/assets/js/pages/account-cka.js"></script>
+  <script type="module" src="/assets/js/pages/service-continuity-visuals.js"></script>
 </body></html>

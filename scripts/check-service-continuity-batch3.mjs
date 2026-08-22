@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+const text=p=>fs.readFileSync(p,'utf8').replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n');
+const read=p=>JSON.parse(text(p));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const successorPath='content/web-production/successors/service-continuity-batch3-presentation-successor-v1.json';
+const registryPath='content/web-production/registries/client-visual-asset-registry-v1.6.json';
+const s=read(successorPath), r=read(registryPath);
+assert.equal(s.status,'SERVICE_CONTINUITY_BATCH3_PRESENTATION_SUCCESSOR_ACTIVE');
+assert.equal(s.baselineCommit,'1fcbb4216db77cbc6d0e2cabb85dafcce1488bdf');
+assert.equal(s.presentationFingerprintPolicy.wholeHtmlSha256Required,false);
+assert.equal(s.presentationFingerprintPolicy.wholeCssSha256Required,false);
+assert.equal(s.presentationFingerprintPolicy.runtimeAuthorityExactFingerprintPreserved,true);
+assert.equal(s.presentationFingerprintPolicy.plannedIllustrationFailsClosed,true);
+for(const v of Object.values(s.boundaries)) assert.equal(v,false);
+assert.equal(r.status,'SERVICE_CONTINUITY_BATCH3_PRESENTATION_SUCCESSOR');
+assert.equal(r.schemaVersion,'PHI-OS-CLIENT-VISUAL-ASSET-REGISTRY-v1.6.0');
+assert.equal(sha(registryPath),s.sharedPresentation.visualRegistrySha256,'SERVICE_CONTINUITY_VISUAL_REGISTRY_DRIFT');
+for(const [path,spec] of Object.entries(s.surfaces)){
+ assert.ok(fs.existsSync(path),`SERVICE_CONTINUITY_SURFACE_MISSING:${path}`);
+ const src=text(path);
+ for(const marker of [`data-service-continuity-surface="${spec.code}"`,'/assets/css/service-continuity.css','/assets/js/pages/service-continuity-visuals.js',`data-sc-asset="${spec.hero}"`,`data-sc-asset="${spec.figure}"`,`data-sc-support="${spec.code}"`]) assert.ok(src.includes(marker),`SERVICE_CONTINUITY_MARKER_MISSING:${path}:${marker}`);
+ assert.equal((src.match(/<h1\b/gi)||[]).length,1,`SERVICE_CONTINUITY_H1_COUNT:${path}`);
+ const coverage=r.surfaceCoverage.find(x=>x.htmlFile===path);
+ assert.ok(coverage,`SERVICE_CONTINUITY_COVERAGE_MISSING:${path}`);
+ assert.equal(coverage.status,'CURRENT_CANONICAL_CONSUMER',`SERVICE_CONTINUITY_COVERAGE_STATE:${path}`);
+ assert.equal(coverage.presentationSuccessor,'SERVICE_CONTINUITY_BATCH3',`SERVICE_CONTINUITY_PRESENTATION_SUCCESSOR:${path}`);
+}
+for(const [path,digest] of Object.entries(s.authorityPreservation)) assert.equal(sha(path),digest,`SERVICE_CONTINUITY_AUTHORITY_DRIFT:${path}`);
+const visual=text(s.sharedPresentation.visualRuntime);
+for(const forbidden of ['localStorage','sessionStorage','indexedDB','document.cookie','fetch(\'/api/professional','fetch("/api/professional']) assert.ok(!visual.includes(forbidden),`SERVICE_CONTINUITY_PRESENTATION_AUTHORITY_LEAK:${forbidden}`);
+assert.ok(visual.includes("resolvePublicAssetForWeb"),'SERVICE_CONTINUITY_CANONICAL_ASSET_RESOLVER_MISSING');
+assert.ok(visual.includes('SERVICE_CONTINUITY_ILLUSTRATION_NOT_VERIFIED'),'SERVICE_CONTINUITY_PLANNED_ILLUSTRATION_FAIL_CLOSED_MISSING');
+const pkg=read('package.json');
+assert.equal(pkg.scripts['check:service-continuity-batch3'],'node scripts/check-service-continuity-batch3.mjs');
+console.log('✓ Service / Continuity Batch 3 presentation successor passed.');
+console.log('  10 client surfaces share one presentation layer; runtime/service/consent/privacy authorities remain upstream and presentation whole-file fingerprints are not current authority.');

@@ -18,14 +18,15 @@
   <link rel="stylesheet" href="/assets/css/public-experience.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
+  <link rel="stylesheet" href="/assets/css/service-continuity.css">
 </head>
-<body class="public-page" data-page="services" data-public-section="professional">
+<body class="public-page" data-page="services" data-public-section="professional" data-service-continuity-surface="SERVICES">
   <a class="phi-skip-link" href="#services-main" data-i18n="servicesPublic.skip">
     Skip to Professional applications
   </a>
   <div data-public-header-placeholder></div>
   <main id="services-main">
-    <section class="legal-hero">
+    <section class="sc-hero legal-hero"><div class="sc-hero__media" aria-hidden="true"><img data-sc-asset="HERO-016" alt="" loading="eager" fetchpriority="high"></div><div class="sc-hero__wash" aria-hidden="true"></div>
       <div class="public-container">
         <p class="public-eyebrow" data-i18n="servicesPublic.heroEyebrow">Professional</p>
         <h1 class="public-display" data-i18n="servicesPublic.heroTitle">
@@ -51,7 +52,9 @@
         </div>
       </div>
     </section>
-    <section class="public-section public-section--soft" aria-labelledby="service-comparison-title">
+    
+<section class="sc-bridge" data-sc-support="SERVICES" aria-label="Choose help by the kind of judgment required."><div class="sc-shell sc-bridge__grid"><div class="sc-bridge__copy"><p class="sc-kicker" data-sc-en="Service boundary" data-sc-zh="服务边界">Service boundary</p><h2 data-sc-en="Choose help by the kind of judgment required." data-sc-zh="按真正需要的判断类型选择服务。">Choose help by the kind of judgment required.</h2><p data-sc-en="The service layer should make clear where evidence ends, interpretation begins, consent is required and professional responsibility takes over." data-sc-zh="服务层应清楚显示：证据在哪里结束、解释从哪里开始、何时需要同意，以及何时进入专业责任。">The service layer should make clear where evidence ends, interpretation begins, consent is required and professional responsibility takes over.</p></div><div class="sc-visual-stack"><figure class="sc-visual"><img data-sc-asset="ILL-008" data-sc-kind="illustration" alt="" loading="lazy"><figcaption>ILL-008</figcaption></figure><figure class="sc-visual"><img data-sc-asset="FIG-051" alt="" loading="lazy"><figcaption>Professional Guidance Full Flow</figcaption></figure></div></div></section>
+<section class="public-section public-section--soft" aria-labelledby="service-comparison-title">
       <div class="public-container">
         <p class="public-eyebrow" data-i18n="servicesPublic.comparisonEyebrow">Service comparison</p>
         <h2 class="public-title" id="service-comparison-title" data-i18n="servicesPublic.comparisonTitle">Runtime evidence remains primary in every service.</h2>
@@ -130,5 +133,6 @@
   </main>
   <div data-public-footer-placeholder></div>
   <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/service-continuity-visuals.js"></script>
 </body>
 </html>

@@ -8,13 +8,13 @@ const text = path => fs.readFileSync(path, 'utf8');
 const read = path => JSON.parse(text(path));
 const sha256 = path => crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
 const count = (source, pattern) => [...source.matchAll(pattern)].length;
-const isPresentationPath = path => path === 'knowledge-search.html' || path === 'assets/css/knowledge-search.css';
+const isPresentationPath = path => presentationRecords?.has(path) ?? false;
 
 const paths = Object.freeze({
   package: 'package.json',
   freeze: 'content/knowledge/answer-projection/freeze/kap-w11-w17-answer-composition-freeze-v1.json',
   guidedSuccessor: 'content/knowledge/answer-projection/reconciliation/kap-w17-w18-guided-reading-surface-successor-v1.json',
-  presentationSuccessor: 'content/knowledge/answer-projection/reconciliation/kap-w11-w17-current-presentation-successor-v2.json',
+  presentationSuccessor: 'content/knowledge/answer-projection/reconciliation/kap-w11-w17-current-presentation-successor-v3.json',
   historicalCkaSuccessor: 'content/web-production/reconciliation/hpc2-w5-cka-w0-w4-current-successor-v1.json',
   currentCkaSuccessor: 'content/web-production/reconciliation/hpc2-w6-cka-client-surface-successor-v1.json',
   ckaBSuccessor: 'content/web-production/reconciliation/client-surface-global-invariants-cka-b-successor-v1.json',
@@ -68,10 +68,10 @@ const presentationRecords = new Map(presentationSuccessor.presentationSurfaces.m
 for (const record of presentationSuccessor.presentationSurfaces) {
   assert.ok(fs.existsSync(record.path), `KAP_CURRENT_PRESENTATION_MISSING:${record.path}`);
   assert.equal(record.wholeFileSha256Required, false, `KAP_PRESENTATION_SHA_POLICY_DRIFT:${record.path}`);
-  if (record.path === 'knowledge-search.html') {
+  if (Array.isArray(record.requiredMarkers)) {
     const source = text(record.path);
-    for (const marker of record.requiredMarkers) assert.ok(source.includes(marker), `KAP_CURRENT_PRESENTATION_MARKER_MISSING:${marker}`);
-    for (const marker of record.forbiddenMarkers) assert.ok(!source.includes(marker), `KAP_CURRENT_PRESENTATION_FORBIDDEN_MARKER:${marker}`);
+    for (const marker of record.requiredMarkers) assert.ok(source.includes(marker), `KAP_CURRENT_PRESENTATION_MARKER_MISSING:${record.path}:${marker}`);
+    for (const marker of record.forbiddenMarkers || []) assert.ok(!source.includes(marker), `KAP_CURRENT_PRESENTATION_FORBIDDEN_MARKER:${record.path}:${marker}`);
   }
 }
 
@@ -116,7 +116,11 @@ for (const item of historicalCka.clientSurfaceTransition.artifacts) {
   if (cRecord) {
     assert.ok(bRecord, `CKA_B_PREDECESSOR_MISSING:${item.path}`);
     assert.equal(cRecord.predecessorSha256, bRecord.sha256, `CKA_C_PREDECESSOR_MISMATCH:${item.path}`);
-    assert.equal(sha256(item.path), cRecord.sha256, `CKA_C_CURRENT_RUNTIME_DRIFT:${item.path}`);
+    if (presentationRecords.has(item.path)) {
+      assert.equal(presentationRecords.get(item.path).wholeFileSha256Required, false, `CKA_C_PRESENTATION_POLICY_DRIFT:${item.path}`);
+    } else {
+      assert.equal(sha256(item.path), cRecord.sha256, `CKA_C_CURRENT_RUNTIME_DRIFT:${item.path}`);
+    }
     continue;
   }
   if (bRecord) {

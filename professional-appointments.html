@@ -3,11 +3,12 @@
 <title data-i18n="professionalAppointments.metaTitle">Appointments and Payments — PHI OS</title>
 <link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/css/design/foundation.css"><link rel="stylesheet" href="/assets/css/design/typography.css"><link rel="stylesheet" href="/assets/css/design/components.css"><link rel="stylesheet" href="/assets/css/professional-workspace.css"><link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
-</head><body class="professional-workspace-page appointment-page">
+  <link rel="stylesheet" href="/assets/css/service-continuity.css">
+</head><body class="professional-workspace-page appointment-page" data-service-continuity-surface="PROFESSIONAL_APPOINTMENTS">
 <a class="phi-skip-link" href="#appointmentMain" data-i18n="professionalAppointments.skip">Skip to appointment</a>
 <header class="professional-workspace-header"><a href="/" class="professional-workspace-brand">Φ <span>PHI OS</span></a><div class="professional-workspace-language"><button type="button" data-locale="en">EN</button><button type="button" data-locale="zh-Hans">中文</button></div></header>
 <main id="appointmentMain" class="professional-workspace-shell appointment-shell">
-<header class="professional-workspace-hero"><div><p data-i18n="professionalAppointments.eyebrow">M4B Appointments and Payments</p><h1 data-i18n="professionalAppointments.title">Prepare the service before the appointment begins.</h1><p data-i18n="professionalAppointments.lead">Booking, payment status, consent and required materials remain separate and visible.</p></div></header>
+<header class="sc-hero professional-workspace-hero"><div class="sc-hero__media" aria-hidden="true"><img data-sc-asset="HERO-016" alt="" loading="eager" fetchpriority="high"></div><div class="sc-hero__wash" aria-hidden="true"></div><div><p data-i18n="professionalAppointments.eyebrow">M4B Appointments and Payments</p><h1 data-i18n="professionalAppointments.title">Prepare the service before the appointment begins.</h1><p data-i18n="professionalAppointments.lead">Booking, payment status, consent and required materials remain separate and visible.</p></div></header>
 <aside id="appointmentUnavailable" class="professional-workspace-unavailable"><strong data-i18n="professionalAppointments.unavailableTitle">No authorised appointment is loaded</strong><p data-i18n="professionalAppointments.unavailableCopy">This page does not create a booking, charge a payment method or send a message automatically.</p></aside>
 <article id="professionalAppointment" class="professional-appointment" hidden>
   <header class="appointment-summary"><div><p id="appointmentService"></p><h2 id="appointmentTime"></h2><p id="appointmentMethod"></p></div><strong id="appointmentStatus"></strong></header>
@@ -17,10 +18,13 @@
     <button type="button" data-appointment-view="payment" aria-pressed="false" data-i18n="professionalAppointments.payment">Payment record</button>
     <button type="button" data-appointment-view="notifications" aria-pressed="false" data-i18n="professionalAppointments.notifications">Messages</button>
   </nav>
-  <section id="appointmentOverview" data-appointment-panel="overview"></section>
+  
+<section class="sc-bridge" data-sc-support="PROFESSIONAL_APPOINTMENTS" aria-label="Make approval, preparation and payment visible before work begins."><div class="sc-shell sc-bridge__grid"><div class="sc-bridge__copy"><p class="sc-kicker" data-sc-en="Before the session" data-sc-zh="会面之前">Before the session</p><h2 data-sc-en="Make approval, preparation and payment visible before work begins." data-sc-zh="在工作开始前，让批准、准备与付款状态都可见。">Make approval, preparation and payment visible before work begins.</h2><p data-sc-en="Appointments coordinate service readiness; they do not create evidence, professional judgment or consent on the client’s behalf." data-sc-zh="Appointments 只协调服务准备状态；不会代替客户建立证据、专业判断或同意。">Appointments coordinate service readiness; they do not create evidence, professional judgment or consent on the client’s behalf.</p></div><div class="sc-visual-stack"><figure class="sc-visual"><img data-sc-asset="ILL-007" data-sc-kind="illustration" alt="" loading="lazy"><figcaption>ILL-007</figcaption></figure><figure class="sc-visual"><img data-sc-asset="FIG-048" alt="" loading="lazy"><figcaption>Approval Flow</figcaption></figure></div></div></section>
+<section id="appointmentOverview" data-appointment-panel="overview"></section>
   <section id="appointmentPrecheck" data-appointment-panel="precheck" hidden></section>
   <section id="appointmentPayment" data-appointment-panel="payment" hidden></section>
   <section id="appointmentNotifications" data-appointment-panel="notifications" hidden></section>
   <footer class="appointment-boundary"><strong data-i18n="professionalAppointments.boundaryTitle">Professional boundary</strong><p data-i18n="professionalAppointments.boundary">An appointment or payment does not turn interpretation into Runtime Evidence and does not authorise work outside the agreed service and consent scope.</p></footer>
 </article>
-</main><script type="module" src="/assets/js/pages/professional-appointments.js"></script></body></html>
+</main><script type="module" src="/assets/js/pages/professional-appointments.js"></script>  <script type="module" src="/assets/js/pages/service-continuity-visuals.js"></script>
+</body></html>

@@ -20,15 +20,16 @@
   <link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
   <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
+  <link rel="stylesheet" href="/assets/css/service-continuity.css">
 </head>
-<body class="public-page academy-page" data-page="academy" data-public-section="knowledge" data-academy-view="dashboard">
+<body class="public-page academy-page" data-page="academy" data-public-section="knowledge" data-academy-view="dashboard" data-service-continuity-surface="ACADEMY">
   <a class="phi-skip-link" href="#academy-main" data-i18n="academyLearning.skipDashboard">
     Skip to Academy dashboard
   </a>
   <div data-public-header-placeholder></div>
 
   <main id="academy-main" data-wpr-academy-discovery data-wpr-production-surface="ACADEMY_DISCOVERY">
-    <section class="academy-hero" aria-labelledby="academy-title">
+    <section class="sc-hero academy-hero" aria-labelledby="academy-title"><div class="sc-hero__media" aria-hidden="true"><img data-sc-asset="HERO-013" alt="" loading="eager" fetchpriority="high"></div><div class="sc-hero__wash" aria-hidden="true"></div>
       <div class="public-container academy-hero__grid">
         <div>
           <p class="public-eyebrow" data-i18n="academyLearning.dashboard.eyebrow">
@@ -56,7 +57,9 @@
     </section>
 
     <div class="public-container" data-pxr-hidden="true" aria-hidden="true" hidden><p class="wpr-academy-production-note" data-i18n="academyLearning.status.wprDiscoveryBoundary">Academy discovery is public. Live entitlement, progress, assessment and credential delivery remain governed separately and are not activated on this public surface.</p></div>
-    <section class="public-section academy-summary" aria-labelledby="academy-summary-title">
+    
+<section class="sc-bridge" data-sc-support="ACADEMY" aria-label="Move from knowledge to practice without collapsing the five volumes."><div class="sc-shell sc-bridge__grid"><div class="sc-bridge__copy"><p class="sc-kicker" data-sc-en="Learning continuity" data-sc-zh="学习连续性">Learning continuity</p><h2 data-sc-en="Move from knowledge to practice without collapsing the five volumes." data-sc-zh="从知识走向练习，同时保持五册边界。">Move from knowledge to practice without collapsing the five volumes.</h2><p data-sc-en="Academy learning follows the same Reality architecture: understand the concept, see its evidence boundary, practise the distinction and continue across the five-volume path." data-sc-zh="Academy 学习沿用同一套 Reality 架构：理解概念、看清证据边界、练习区分，再沿五册路径继续。">Academy learning follows the same Reality architecture: understand the concept, see its evidence boundary, practise the distinction and continue across the five-volume path.</p></div><div class="sc-visual-stack"><figure class="sc-visual"><img data-sc-asset="ILL-006" data-sc-kind="illustration" alt="" loading="lazy"><figcaption>ILL-006</figcaption></figure><figure class="sc-visual"><img data-sc-asset="FIG-042" alt="" loading="lazy"><figcaption>Five-Volume Academy Path</figcaption></figure></div></div></section>
+<section class="public-section academy-summary" aria-labelledby="academy-summary-title">
       <div class="public-container">
         <p class="public-eyebrow" data-i18n="academyLearning.dashboard.summaryEyebrow">Academy structure</p>
         <h2 id="academy-summary-title" class="public-title" data-i18n="academyLearning.dashboard.summaryTitle">
@@ -141,5 +144,6 @@
   <div data-public-footer-placeholder></div>
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/academy.js"></script>
+  <script type="module" src="/assets/js/pages/service-continuity-visuals.js"></script>
 </body>
 </html>

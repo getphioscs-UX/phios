@@ -7,13 +7,16 @@
   <link rel="stylesheet" href="/assets/css/design/typography.css"><link rel="stylesheet" href="/assets/css/design/components.css">
   <link rel="stylesheet" href="/assets/css/professional-workspace.css"><link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
+  <link rel="stylesheet" href="/assets/css/service-continuity.css">
 </head>
-<body class="professional-workspace-page">
+<body class="professional-workspace-page" data-service-continuity-surface="PROFESSIONAL_CONSENT_SHARING">
   <a class="phi-skip-link" href="#consentMain" data-i18n="consentSharing.skip">Skip to consent</a>
   <header class="professional-workspace-header"><a href="/" class="professional-workspace-brand">Φ <span>PHI OS</span></a><div class="professional-workspace-language"><button type="button" data-locale="en">EN</button><button type="button" data-locale="zh-Hans">中文</button></div></header>
   <main id="consentMain" class="professional-workspace-shell consent-shell">
-    <header class="professional-workspace-hero consent-hero"><div><p data-i18n="consentSharing.eyebrow">M4B Consent and Sharing</p><h1 data-i18n="consentSharing.title">Choose exactly what a professional may access.</h1><p data-i18n="consentSharing.lead">Nothing is selected by default. Every resource, duration and acknowledgement remains explicit and revocable.</p></div><span data-i18n="consentSharing.memoryOnly">Current-page preview only</span></header>
-    <form id="consentSharingForm" class="intake-form">
+    <header class="sc-hero professional-workspace-hero consent-hero"><div class="sc-hero__media" aria-hidden="true"><img data-sc-asset="HERO-014" alt="" loading="eager" fetchpriority="high"></div><div class="sc-hero__wash" aria-hidden="true"></div><div><p data-i18n="consentSharing.eyebrow">M4B Consent and Sharing</p><h1 data-i18n="consentSharing.title">Choose exactly what a professional may access.</h1><p data-i18n="consentSharing.lead">Nothing is selected by default. Every resource, duration and acknowledgement remains explicit and revocable.</p></div><span data-i18n="consentSharing.memoryOnly">Current-page preview only</span></header>
+    
+<section class="sc-bridge" data-sc-support="PROFESSIONAL_CONSENT_SHARING" aria-label="Sharing starts with a specific, revocable choice."><div class="sc-shell sc-bridge__grid"><div class="sc-bridge__copy"><p class="sc-kicker" data-sc-en="Explicit access" data-sc-zh="明确授权">Explicit access</p><h2 data-sc-en="Sharing starts with a specific, revocable choice." data-sc-zh="分享从具体、可撤回的选择开始。">Sharing starts with a specific, revocable choice.</h2><p data-sc-en="Resources, duration and acknowledgements remain explicit. Consent permits access; it does not promote interpretation into Reality evidence." data-sc-zh="资源、时限与确认都保持明确。同意只允许访问，不会把解释提升为 Reality evidence。">Resources, duration and acknowledgements remain explicit. Consent permits access; it does not promote interpretation into Reality evidence.</p></div><div class="sc-visual-stack"><figure class="sc-visual"><img data-sc-asset="ILL-007" data-sc-kind="illustration" alt="" loading="lazy"><figcaption>ILL-007</figcaption></figure><figure class="sc-visual"><img data-sc-asset="FIG-047" alt="" loading="lazy"><figcaption>Consent and Sharing</figcaption></figure></div></div></section>
+<form id="consentSharingForm" class="intake-form">
       <section class="intake-section"><h2 data-i18n="consentSharing.resources">Resources to share</h2><div class="consent-scope-grid">
         <label><input type="checkbox" name="scope" value="entry"><span data-i18n="consentSharing.entry">Entry</span></label>
         <label><input type="checkbox" name="scope" value="reconstruction"><span data-i18n="consentSharing.reconstruction">Reconstruction</span></label>
@@ -49,4 +52,5 @@
     <footer class="professional-workspace-boundary"><strong data-i18n="consentSharing.footer">Consent permits access only. It never converts interpretation into Runtime Evidence.</strong></footer>
   </main>
   <script type="module" src="/assets/js/pages/professional-consent-sharing.js"></script>
+  <script type="module" src="/assets/js/pages/service-continuity-visuals.js"></script>
 </body></html>

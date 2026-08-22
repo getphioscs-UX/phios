@@ -1352,7 +1352,7 @@
     "check:part-h5a": "npm run check:client-visual-consumption-current && npm run check:client-visual-consumption-h5a && npm run check:client-visual-consumption-live",
     "client-visual:verify-branding-h5a": "node scripts/client-visual/verify-branding-r2-h5a.mjs",
     "check:part-j": "node scripts/check-part-j-final-client-experience.mjs",
-    "check:part-k": "node scripts/check-part-k-final-freeze.mjs",
+    "check:part-k": "node scripts/check-part-k-current.mjs",
     "check:client-surface-final": "npm run check:bfr-h && npm run check:part-j && npm run check:part-k",
     "check:client-surface-production-final": "npm run check:client-surface-final",
     "check:pxr-p0": "node scripts/check-pxr-p0-public-layer-emergency-cleanup.mjs",
@@ -1380,7 +1380,9 @@
     "check:fdr": "npm run check:fdr-w0-w18 && npm run check:fdr-authority && npm run check:fdr-schema && npm run check:fdr-ownership && npm run check:fdr-evidence && npm run check:fdr-disclosure && npm run check:fdr-privacy && npm run check:fdr-versioning && npm run check:fdr-dar-boundary",
     "check:dar-w0-w14": "node scripts/check-dar-w0-w14-document-assembly-foundation.mjs",
     "check:dar-w15-w24": "node scripts/check-dar-w15-w24-document-assembly-runtime.mjs",
-    "check:dar": "npm run check:dar-w0-w14 && npm run check:dar-w15-w24"
+    "check:dar": "npm run check:dar-w0-w14 && npm run check:dar-w15-w24",
+    "check:part-k-historical": "node scripts/check-part-k-final-freeze.mjs",
+    "check:service-continuity-batch3": "node scripts/check-service-continuity-batch3.mjs"
   },
   "type": "module",
   "dependencies": {
