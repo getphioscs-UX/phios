@@ -50,7 +50,7 @@ for (const href of [
   '/thesis',
   '/book-one',
   '/explore',
-  '/reality-journey',
+  '/reality/',
   '/services',
   '/about',
   '/privacy',
@@ -126,8 +126,8 @@ assert.equal(
   'node scripts/check-pds-w3-core-component-shell.mjs'
 );
 
-console.log('✓ PDS-W3 Core Component Contract and Global Shell aligned');
-console.log('  Canonical PDS primary navigation validated');
+console.log('✓ PDS-W3 Current Core Component Contract and Global Shell aligned');
+console.log('  Canonical PDS primary navigation validated; Reality customer entry is /reality/.');
 console.log('  Mobile focus, Escape, outside-click and locale-close behavior validated');
 console.log('  Responsive contracts: 360px, 768px, 1440px');
 console.log('  Runtime, Runtime SDK, APIs and storage keys unchanged');
