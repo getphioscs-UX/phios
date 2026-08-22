@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict'; import {readJson,runFarFixture} from './lib/far/far-check-lib.mjs';
+const reg=readJson('content/financial/analysis-runtime/fixtures/far-fixture-registry-v1.json'); for(const s of ['strong-position','liquidity-gap','retirement-gap','business-concentration','cross-border','estate-gap','protection-gap','unknown-heavy','contradictory','range-heavy']) assert.ok(reg.requiredScenarios.includes(s));
+for(const file of reg.fixtures.filter(x=>!['anti-advice-block.json','scenario-sensitivity.json'].includes(x))){ const spec=readJson(`content/financial/analysis-runtime/fixtures/${file}`); const {far}=await runFarFixture(file); const got=new Set(far.findings.map(x=>x.findingCode)); for(const c of spec.expectedFindingCodes||[]) assert.ok(got.has(c),`${file} missing ${c}`); }
+const scen=readJson('content/financial/analysis-runtime/fixtures/scenario-sensitivity.json'); const {far}=await runFarFixture('scenario-sensitivity.json'); for(const c of scen.expectedFindingCodes) assert.ok(far.findings.some(x=>x.findingCode===c));
+console.log(`✓ FAR-W21 fixtures passed: ${reg.fixtures.length} governed fixtures.`);

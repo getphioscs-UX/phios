@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W22-ACCEPTANCE-v1.0.0",
+  "phase": "FAR",
+  "work": "FAR-W22",
+  "baselineCommit": "f010b29",
+  "status": "ACCEPTED_READY_FOR_V1_FREEZE",
+  "gates": {
+    "findingsTraceToCalculation": true,
+    "noIndependentRecalculation": true,
+    "noProfessionalAdvice": true,
+    "unknownPreserved": true,
+    "confidenceReflectsEvidence": true,
+    "crossDomainAnalysisAllowed": true,
+    "recommendationBoundaryPreserved": true,
+    "policyThresholdsVersioned": true,
+    "fdrReadOnly": true
+  },
+  "proof": {
+    "authorityChecker": "scripts/check-far-authority.mjs",
+    "contractChecker": "scripts/check-far-contracts.mjs",
+    "runtimeChecker": "scripts/check-far-runtime.mjs",
+    "provenanceChecker": "scripts/check-far-provenance.mjs",
+    "confidenceChecker": "scripts/check-far-confidence.mjs",
+    "antiAdviceChecker": "scripts/check-far-anti-advice.mjs",
+    "fixtureChecker": "scripts/check-far-fixtures.mjs",
+    "finalGate": "npm run check:far",
+    "fcrFdrBoundaryChecker": "scripts/check-far-fcr-boundary.mjs"
+  },
+  "permanentBoundary": "FAR interprets structural relationships already present in canonical FCR results and linked FDR evidence; FAR does not create advice, product selection or professional judgment."
+}

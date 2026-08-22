@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "PHI-OS-FAR-W3-W19-FINDING-SOURCE-REGISTRY-v1.0.0",
+  "phase": "FAR",
+  "status": "ACTIVE",
+  "sources": [
+    {
+      "findingCode": "ASSET_TRANSFER_COMPLEXITY",
+      "source": "FCR estate lineage + FDR asset jurisdiction/ownership metadata",
+      "supportState": "SUPPORTED_METADATA_ONLY"
+    },
+    {
+      "findingCode": "BUSINESS_CONCENTRATION",
+      "source": "FCR:BUSINESS_WEALTH.businessConcentration",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "BUSINESS_LIABILITY_DEPENDENCY",
+      "source": "FCR guarantee + business dependency metrics",
+      "supportState": "SUPPORTED_CROSS_DOMAIN"
+    },
+    {
+      "findingCode": "CASH_FLOW_DEFICIT",
+      "source": "FCR:CASH_FLOW.deficit",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "CASH_FLOW_SURPLUS",
+      "source": "FCR:CASH_FLOW.surplus",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "CONTROL_DILUTION_EXPOSURE",
+      "source": "FCR control-dilution metric",
+      "supportState": "NOT_AVAILABLE_NO_INFERENCE"
+    },
+    {
+      "findingCode": "CROSS_BORDER_ASSET_COMPLEXITY",
+      "source": "FDR asset jurisdiction/type metadata via matching FCR lineage",
+      "supportState": "SUPPORTED_METADATA_ONLY"
+    },
+    {
+      "findingCode": "DISCLOSURE_CONTRADICTION",
+      "source": "FDR fact envelope consistency metadata",
+      "supportState": "SUPPORTED_METADATA_ONLY"
+    },
+    {
+      "findingCode": "DIVIDEND_DEPENDENCE",
+      "source": "FCR:BUSINESS_WEALTH.familyWealthDependency + dividendContribution",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "EDUCATION_FUNDING_GAP",
+      "source": "FCR:EDUCATION_FUNDING.fundingGap",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "ESTATE_LIQUIDITY_SHORTFALL",
+      "source": "FCR:ESTATE_LIQUIDITY.estimatedLiquidityGap",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "GUARANTEE_EXPOSURE_PRESENT",
+      "source": "FCR:CONTINGENT_EXPOSURE.exposure",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "HIGH_DEBT_SERVICE",
+      "source": "FCR:DEBT.debtServiceRatio",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "HIGH_FIXED_COST",
+      "source": "FCR fixed-cost composition metric",
+      "supportState": "NOT_AVAILABLE_NO_INFERENCE"
+    },
+    {
+      "findingCode": "HIGH_LEVERAGE",
+      "source": "FCR:DEBT.debtToAsset",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "INCOME_VOLATILITY",
+      "source": "FCR historical income volatility metric",
+      "supportState": "NOT_AVAILABLE_NO_INFERENCE"
+    },
+    {
+      "findingCode": "LIQUIDITY_STRENGTH",
+      "source": "FCR:LIQUIDITY.monthsOfExpenses",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "LOW_LIQUIDITY_CONCENTRATION",
+      "source": "FCR:ALLOCATION.cashPercent",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "LOW_LIQUIDITY_RELATIVE_TO_EXPENSES",
+      "source": "FCR:LIQUIDITY.monthsOfExpenses",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "MATURITY_CONCENTRATION",
+      "source": "FCR debt maturity distribution metric",
+      "supportState": "NOT_AVAILABLE_NO_INFERENCE"
+    },
+    {
+      "findingCode": "MISSING_CALCULATION_EVIDENCE",
+      "source": "FCR UNKNOWN outputs + FDR evidence metadata",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "MULTI_CURRENCY_EXPOSURE",
+      "source": "FCR:CURRENCY metrics",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "MULTI_DOMAIN_DEPENDENCY",
+      "source": "two or more existing FAR findings",
+      "supportState": "SUPPORTED_CROSS_DOMAIN"
+    },
+    {
+      "findingCode": "OWNER_DEPENDENCE",
+      "source": "FCR:BUSINESS_WEALTH.familyWealthDependency",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "PROPERTY_CONCENTRATION",
+      "source": "FCR:ALLOCATION.propertyPercent",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "PROTECTION_UNDERFUNDED",
+      "source": "FCR:PROTECTION_NEED.coverageGap",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "RETIREMENT_BUSINESS_DEPENDENCY",
+      "source": "FCR:RETIREMENT.shortfall + FCR:BUSINESS_WEALTH.familyWealthDependency",
+      "supportState": "SUPPORTED_CROSS_DOMAIN"
+    },
+    {
+      "findingCode": "RETIREMENT_FUNDING_GAP",
+      "source": "FCR:RETIREMENT.shortfall",
+      "supportState": "SUPPORTED"
+    },
+    {
+      "findingCode": "RETIREMENT_INHERITANCE_DEPENDENCY",
+      "source": "FCR:RETIREMENT.shortfall + explicit FDR retirement funding-source metadata",
+      "supportState": "SUPPORTED_METADATA_ONLY"
+    },
+    {
+      "findingCode": "SCENARIO_OUTCOME_SENSITIVITY",
+      "source": "two or more canonical FCR results sharing one FDR digest",
+      "supportState": "SUPPORTED_COMPARISON"
+    },
+    {
+      "findingCode": "SUCCESSION_UNDEFINED",
+      "source": "FDR succession disclosure metadata",
+      "supportState": "SUPPORTED_METADATA_ONLY"
+    }
+  ],
+  "rule": "NOT_AVAILABLE_NO_INFERENCE findings are never synthesized from substitute arithmetic."
+}
