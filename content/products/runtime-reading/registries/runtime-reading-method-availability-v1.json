@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W3-METHOD-AVAILABILITY-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W3",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "CURRENT_FAIL_CLOSED_METHOD_AVAILABILITY",
+  "authorities": {
+    "mpaSuccessor": "content/professional/method-production-activation/successors/mpa-w30-mcd5-projection-successor-v1.json",
+    "mcdProjectionContract": "content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json",
+    "mcdAcceptance": "content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json",
+    "cmr": "content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json"
+  },
+  "availabilityStates": [
+    "AVAILABLE",
+    "PARTIAL",
+    "PROFESSIONAL_ONLY",
+    "UNAVAILABLE"
+  ],
+  "capabilityStates": [
+    "AVAILABLE",
+    "UNAVAILABLE",
+    "PROFESSIONAL_ONLY"
+  ],
+  "methods": [
+    {
+      "methodCode": "AST",
+      "canonicalMethodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "PARTIAL",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "MPA_PRODUCTION_BOUND_SCOPE_CALCULATION_PROJECTION",
+        "MCD_CANONICAL_PROJECTION_AVAILABLE",
+        "CMR_VALIDATION_ONLY_NO_PRODUCTION_MEANING"
+      ]
+    },
+    {
+      "methodCode": "BZR",
+      "canonicalMethodCode": "BAZI",
+      "methodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "PARTIAL",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "MPA_PRODUCTION_BOUND_SCOPE_CALCULATION_PROJECTION",
+        "MCD_CANONICAL_PROJECTION_AVAILABLE",
+        "CMR_VALIDATION_ONLY_NO_PRODUCTION_MEANING"
+      ]
+    },
+    {
+      "methodCode": "NUM",
+      "canonicalMethodCode": "NUMEROLOGY",
+      "methodVersion": "0.1.0-candidate",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "PARTIAL",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "MPA_PRODUCTION_BOUND_SCOPE_CALCULATION_PROJECTION",
+        "MCD_CANONICAL_PROJECTION_AVAILABLE",
+        "CMR_VALIDATION_ONLY_NO_PRODUCTION_MEANING"
+      ]
+    },
+    {
+      "methodCode": "HDR",
+      "canonicalMethodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "calculation": "UNAVAILABLE",
+      "projection": "UNAVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "UNAVAILABLE",
+      "selfServiceAllowed": false,
+      "reasonCodes": [
+        "MPA_DISPATCH_BLOCKED",
+        "MCD_VALIDATION_ONLY_NOT_CLIENT_DISPATCHABLE",
+        "RESTRICTED_METHOD_BOUNDARY"
+      ]
+    },
+    {
+      "methodCode": "ZWR",
+      "canonicalMethodCode": "ZI_WEI",
+      "methodVersion": null,
+      "calculation": "UNAVAILABLE",
+      "projection": "UNAVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "UNAVAILABLE",
+      "selfServiceAllowed": false,
+      "reasonCodes": [
+        "NO_CANONICAL_METHOD_RUNTIME",
+        "NO_MPA_PRODUCTION_AUTHORITY",
+        "NO_CANONICAL_PROJECTION_AUTHORITY"
+      ]
+    }
+  ],
+  "rules": {
+    "attachmentPresenceDoesNotGrantMethodAvailability": true,
+    "birthDataPresenceDoesNotExecuteMethod": true,
+    "partialProjectionMayBeReportedAsCalculatedStructureOnly": true,
+    "partialDoesNotPermitInventedMeaning": true,
+    "unavailableMethodMustNotBlockOtherSelectedAvailableSources": true,
+    "unavailableMethodMustRemainExplicit": true
+  }
+}

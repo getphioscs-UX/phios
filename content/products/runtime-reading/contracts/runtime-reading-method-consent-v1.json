@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W4-METHOD-CONSENT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W4",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_METHOD_SCOPED_CONSENT_CONTRACT",
+  "authorityReferences": {
+    "rdgConsentClassRegistry": "content/governance/reality-data-governance/registries/canonical-consent-class-registry-v1.json",
+    "rdgPurposeRegistry": "content/governance/reality-data-governance/registries/canonical-data-purpose-registry-v1.json",
+    "mcdExecutionRequestSchema": "content/professional/method-client-delivery/schemas/mcd-method-execution-request-v1.schema.json"
+  },
+  "requiredFlow": [
+    "USER_SELECTS_METHOD",
+    "METHOD_SPECIFIC_CONSENT_RECORDED",
+    "PURPOSE_BOUND",
+    "AVAILABILITY_CHECKED",
+    "MCD_REQUEST_CARRIES_CONSENT_REFERENCE",
+    "MPA_GATE_EVALUATED_BEFORE_DISPATCH"
+  ],
+  "consentRecordMinimumFields": [
+    "consentRecordId",
+    "subjectReference",
+    "methodCode",
+    "methodVersion",
+    "purposeCode",
+    "consentClass",
+    "grantedAt",
+    "status"
+  ],
+  "allowedConsentClass": "EXPLICIT_CONSENT",
+  "allowedPurposeCode": "SERVICE_DELIVERY",
+  "statusValues": [
+    "GRANTED",
+    "WITHDRAWN",
+    "EXPIRED"
+  ],
+  "rules": {
+    "oneConsentDecisionPerSelectedMethod": true,
+    "birthdayEnteredImpliesAllMethods": false,
+    "singleGlobalMethodConsentAllowed": false,
+    "unselectedMethodMayExecute": false,
+    "withdrawnConsentMayExecute": false,
+    "missingConsentFailsClosed": true,
+    "consentMayBeInferredFromPriorPurpose": false,
+    "rrpStoresConsentPayload": false,
+    "rdgRemainsConsentAuthority": true
+  }
+}

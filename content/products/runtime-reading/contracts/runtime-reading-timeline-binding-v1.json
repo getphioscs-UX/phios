@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W13-TIMELINE-BINDING-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W13",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_PROVENANCE_TYPED_TIMELINE_BINDING",
+  "canonicalSlots": [
+    "t-2",
+    "t-1",
+    "t0"
+  ],
+  "turningPointField": "turningPoint[]",
+  "provenanceTypes": [
+    "USER_REPORTED",
+    "SYSTEM_CALCULATED",
+    "SYSTEM_INTERPRETED",
+    "PROFESSIONAL_OBSERVED"
+  ],
+  "authorityRules": {
+    "USER_REPORTED": "Requires canonical input/evidence reference; remains user-reported fact.",
+    "SYSTEM_CALCULATED": "Requires deterministic runtime/calculation reference; is not interpretation.",
+    "SYSTEM_INTERPRETED": "Requires governed interpretation/readout authority and source lineage; raw data plus LLM is forbidden.",
+    "PROFESSIONAL_OBSERVED": "Requires PR record and explicit human attribution."
+  },
+  "rules": {
+    "chronologyMayBeInvented": false,
+    "missingTurningPointMayBeInferred": false,
+    "calculatedAndInterpretedMayBeMerged": false,
+    "professionalObservedMayBeSystemGenerated": false,
+    "timelineDoesNotPredictFutureTruth": true
+  }
+}

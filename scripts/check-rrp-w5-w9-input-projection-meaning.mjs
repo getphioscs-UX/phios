@@ -1,0 +1,93 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+
+const readJson = p => JSON.parse(fs.readFileSync(p, 'utf8'));
+const text = p => fs.readFileSync(p, 'utf8');
+const BASE = 'content/products/runtime-reading';
+const prefix = '812d7c8';
+const w5 = readJson(`${BASE}/contracts/runtime-reading-input-bundle-contract-v1.json`);
+const w6 = readJson(`${BASE}/contracts/runtime-reading-input-completeness-v1.json`);
+const w7 = readJson(`${BASE}/contracts/runtime-reading-calculation-intake-v1.json`);
+const w8 = readJson(`${BASE}/contracts/runtime-reading-projection-envelope-v1.json`);
+const w9 = readJson(`${BASE}/contracts/runtime-reading-meaning-admission-v1.json`);
+const birth = readJson('content/runtime/input-case-runtime/contracts/birth-data-contract-v1.json');
+const icrInput = readJson('content/runtime/input-case-runtime/contracts/canonical-input-contract-v1.json');
+const mcdProjection = readJson('content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json');
+const mcdProjectionSchema = readJson('content/professional/method-client-delivery/schemas/canonical-method-projection-v1.schema.json');
+const mcdRequest = readJson('content/professional/method-client-delivery/schemas/mcd-method-execution-request-v1.schema.json');
+const mpaExecution = readJson('content/professional/method-production-activation/successors/mpa-w30-mcd4-execution-successor-v1.json');
+const cmr = readJson('content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json');
+const cmrFreeze = readJson('content/professional/canonical-meaning-runtime/freeze/cmr-w15-full-freeze-v1.json');
+
+for (const doc of [w5,w6,w7,w8,w9]) assert.ok(String(doc.baselineCommit).startsWith(prefix), `${doc.work} baseline drift`);
+
+assert.equal(w5.work, 'RRP-W5');
+assert.equal(w5.canonicalObject, 'RuntimeReadingInputBundle');
+for (const f of ['identity','birthData','selectedMethods','currentReality','timeline','environment','carrier','relationships','financial','professionalContext']) assert.ok(w5.requiredRootFields.includes(f), `W5 missing ${f}`);
+assert.equal(w5.fieldContracts.birthData.mode, 'ICR_REFERENCE_ONLY');
+assert.equal(w5.fieldContracts.birthData.authority, 'content/runtime/input-case-runtime/contracts/birth-data-contract-v1.json');
+assert.equal(w5.fieldContracts.birthData.rawBirthFactDuplicationAllowed, false);
+assert.equal(w5.fieldContracts.selectedMethods.consentReferenceRequiredPerMethod, true);
+assert.equal(w5.fieldContracts.currentReality.initialStructureSubstitutionAllowed, false);
+assert.equal(w5.fieldContracts.carrier.personalityInferenceAllowed, false);
+assert.equal(w5.rules.bundleMayBecomeSecondFactAuthority, false);
+assert.equal(w5.rules.manualWordTemplateIsCanonicalInput, false);
+assert.equal(w5.rules.aiMayFillMissingField, false);
+assert.equal(birth.rules.providerMayInferMissingBirthTime, false);
+assert.equal(icrInput.rules.silentInferenceAllowed, false);
+
+assert.equal(w6.work, 'RRP-W6');
+for (const label of ['REQUIRED','OPTIONAL','NOT_PROVIDED','UNKNOWN','NOT_APPLICABLE']) assert.ok(w6.requiredDisclosureLabels.includes(label), `W6 missing ${label}`);
+assert.deepEqual(w6.requirementClassValues, ['REQUIRED','OPTIONAL']);
+assert.deepEqual(w6.availabilityStateValues, ['PROVIDED','NOT_PROVIDED','UNKNOWN','NOT_APPLICABLE']);
+assert.equal(w6.rules.notProvidedAndUnknownAreDistinct, true);
+assert.equal(w6.rules.missingDataMayBeSilentlyDefaulted, false);
+assert.equal(w6.rules.missingDataMayBeInferredByAi, false);
+assert.equal(w6.rules.missingBirthTimeMayDefaultToNoon, false);
+assert.equal(w6.rules.unknownMustPropagateDownstream, true);
+
+assert.equal(w7.work, 'RRP-W7');
+assert.deepEqual(w7.requiredExecutionPath, ['RRP_SELECTED_METHOD','MCD_METHOD_EXECUTION_REQUEST','MPA_ELIGIBILITY_AND_DISPATCH_GATE','CORE_METHOD_RUNTIME_INTERNAL_TO_MCD','MCD_CANONICAL_METHOD_PROJECTION','RRP_PROJECTION_INTAKE']);
+assert.ok(mcdRequest.required.includes('methodCode'));
+assert.ok(mcdRequest.required.includes('consentRecordId'));
+assert.equal(mpaExecution.productionAuthority.HDR.dispatchAllowed, false);
+assert.equal(w7.rules.rrpMayCallCoreMethodRuntimeDirectly, false);
+assert.equal(w7.rules.rrpMayImportAstEngineInternalFunction, false);
+assert.equal(w7.rules.rrpMayImportBzrEngineInternalFunction, false);
+assert.equal(w7.rules.rrpMayBypassMpa, false);
+assert.equal(w7.rules.rrpMayBypassMcd, false);
+assert.equal(w7.rules.canonicalMethodProjectionIsOnlyAcceptedMethodResult, true);
+assert.equal(w7.rules.rawCoreResultAccepted, false);
+
+assert.equal(w8.work, 'RRP-W8');
+assert.equal(w8.canonicalObject, 'RuntimeReadingProjectionEnvelope');
+assert.deepEqual(w8.requiredFields, ['methodCode','methodVersion','calculationDigest','projectionVersion','projection','unknowns','limitations']);
+assert.equal(w8.authorityReference, 'content/professional/method-client-delivery/contracts/mcd-5-canonical-method-projection-contract-v1.json');
+assert.equal(mcdProjection.canonicalObject, 'CanonicalMethodProjection');
+assert.equal(mcdProjection.interpretation.included, false);
+assert.ok(mcdProjectionSchema.required.includes('unknown'));
+assert.ok(mcdProjectionSchema.required.includes('evidence'));
+assert.equal(w8.rules.rawCoreSchemaAllowed, false);
+assert.equal(w8.rules.unknownMayBeDropped, false);
+assert.equal(w8.rules.limitationMayBeHidden, false);
+assert.equal(w8.rules.projectionEnvelopeCreatesMeaningAuthority, false);
+const w8Text = text(`${BASE}/contracts/runtime-reading-projection-envelope-v1.json`);
+for (const bad of ['rawAstResult','rawBzrResult','coreRuntimePayload']) assert.equal(w8Text.includes(`"${bad}"`), false, `W8 forbidden raw field ${bad}`);
+
+assert.equal(w9.work, 'RRP-W9');
+assert.equal(w9.meaningAuthority, 'content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json');
+assert.equal(cmr.productionStatus, 'validation_only');
+assert.equal(cmrFreeze.productionStatus, 'validation_only');
+assert.equal(cmrFreeze.productionActivated, false);
+assert.equal(w9.currentAuthorityState.cmrProductionStatus, 'validation_only');
+assert.equal(w9.currentAuthorityState.automaticMethodMeaningAdmission, 'UNAVAILABLE');
+assert.deepEqual(w9.currentAuthorityState.affectedCurrentMethods, ['AST','BZR','NUM','HDR']);
+assert.equal(w9.rules.llmMayCreateMissingMeaning, false);
+assert.equal(w9.rules.providerMayCreateMissingMeaning, false);
+assert.equal(w9.rules.projectionMayBeTreatedAsMeaning, false);
+assert.equal(w9.rules.validationOnlyMeaningMayEnterAutomaticCustomerReading, false);
+assert.equal(w9.rules.missingMeaningMustBecomeUnknownOrLimitation, true);
+assert.equal(w9.rules.calculatedStructureMayRemainReportableWithoutMeaning, true);
+
+console.log('✓ RRP-W5–W9 Input Bundle, Completeness, Calculation Intake, Projection Envelope and Meaning Admission passed.');
+console.log('  Inputs are reference-led and unknown-preserving; RRP consumes only MPA-gated MCD CanonicalMethodProjection and CMR validation-only meaning cannot enter automatic Runtime Reading interpretation.');

@@ -1363,7 +1363,12 @@
     "check:reality-workspace-current": "node scripts/check-reality-workspace-canonical-current.mjs",
     "check:mpa": "node scripts/check-mpa-current.mjs",
     "check:mcd-7-historical": "node scripts/check-mcd-7-personal-runtime-result-surface-freeze.mjs",
-    "check:mcd-8-mir4-historical": "node scripts/check-mcd-8-mir-4-successor.mjs"
+    "check:mcd-8-mir4-historical": "node scripts/check-mcd-8-mir-4-successor.mjs",
+    "check:rrp-w0-w4": "node scripts/check-rrp-w0-w4-authority-product-consent.mjs",
+    "check:rrp-w5-w9": "node scripts/check-rrp-w5-w9-input-projection-meaning.mjs",
+    "check:rrp-w10-w14": "node scripts/check-rrp-w10-w14-binding-evidence.mjs",
+    "check:rrp-w0-w14": "npm run check:rrp-w0-w4 && npm run check:rrp-w5-w9 && npm run check:rrp-w10-w14",
+    "check:rrp-foundation": "npm run check:rrp-w0-w14"
   },
   "type": "module",
   "dependencies": {
