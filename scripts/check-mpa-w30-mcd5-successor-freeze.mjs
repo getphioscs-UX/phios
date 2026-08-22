@@ -17,9 +17,11 @@ const w14v2 = json(`${base}/successors/mpa-w14-visual-raster-dependency-regressi
 const w14v3 = json(`${base}/successors/mpa-w14-mcd-package-script-regression-successor-v3.json`);
 const w14v4 = json(`${base}/successors/mpa-w14-bfr-h-central-checker-package-script-successor-v4.json`);
 const w14v5 = json(`${base}/successors/mpa-w14-pxr-checker-package-script-successor-v5.json`);
+const w14v6 = json(`${base}/successors/mpa-w14-pxr-package-fingerprint-reconciliation-successor-v6.json`);
 const w30v2 = json(`${base}/successors/mpa-w30-w14-dependency-successor-v2.json`);
 const w30v3 = json(`${base}/successors/mpa-w30-current-checker-and-mcd-ast-bzr-successor-v3.json`);
 const w30v4 = json(`${base}/successors/mpa-w30-pxr-w14-v5-successor-v4.json`);
+const w30v5 = json(`${base}/successors/mpa-w30-pxr-w14-v6-successor-v5.json`);
 const pkg = json('package.json');
 
 assert.equal(freeze.status, 'MPA-v1.0.0-FROZEN');
@@ -49,8 +51,11 @@ assert.equal(sha256(w14v4.predecessor.path), w14v4.predecessor.sha256);
 assert.equal(w14v5.predecessor.packageJsonSha256, w14v4.successor.packageJsonSha256);
 assert.equal(w14v5.predecessor.checkerSha256, w14v4.successor.checkerSha256);
 assert.equal(sha256(w14v5.predecessor.path), w14v5.predecessor.sha256);
-assert.equal(sha256('package.json'), w14v5.successor.packageJsonSha256);
-assert.equal(sha256(w14v5.successor.checkerPath), w14v5.successor.checkerSha256);
+assert.ok(w14v6.predecessor.acceptedSha256Variants.includes(sha256(`${base}/successors/mpa-w14-pxr-checker-package-script-successor-v5.json`)), 'MPA_W30_W14_V5_VARIANT_DRIFT');
+assert.ok(w14v6.predecessor.acceptedPackageJsonSha256.includes(w14v5.successor.packageJsonSha256), 'MPA_W30_W14_V5_PACKAGE_VARIANT_DRIFT');
+assert.equal(w14v5.successor.checkerSha256, w14v6.predecessor.checkerSha256);
+assert.equal(sha256('package.json'), w14v6.successor.packageJsonSha256);
+assert.equal(sha256(w14v6.successor.checkerPath), w14v6.successor.checkerSha256);
 
 assert.equal(w30v3.status, 'AUTHORIZED_POST_FREEZE_CURRENT_SUCCESSOR_MCD_AST_BZR_AND_W14_V4');
 assert.equal(sha256(w30v3.predecessor.path), w30v3.predecessor.sha256);
@@ -75,6 +80,15 @@ assert.equal(w30v4.w14PXRSuccessor.packageJsonSha256, w14v5.successor.packageJso
 assert.equal(w30v4.w14PXRSuccessor.w14CheckerSha256, w14v5.successor.checkerSha256);
 for (const boundary of Object.values(w30v4.boundaries)) assert.equal(boundary, false);
 
+assert.equal(w30v5.status, 'AUTHORIZED_POST_FREEZE_PXR_W14_V6_SUCCESSOR');
+assert.equal(w30v5.predecessor.path, `${base}/successors/mpa-w30-pxr-w14-v5-successor-v4.json`);
+assert.ok(w30v5.predecessor.acceptedSha256Variants.includes(sha256(w30v5.predecessor.path)), 'MPA_W30_V4_PREDECESSOR_VARIANT_DRIFT');
+assert.equal(w30v5.predecessor.checkerSha256, w30v4.successor.checkerSha256);
+assert.equal(sha256(w30v5.w14PXRSuccessor.path), w30v5.w14PXRSuccessor.sha256);
+assert.equal(w30v5.w14PXRSuccessor.packageJsonSha256, w14v6.successor.packageJsonSha256);
+assert.equal(w30v5.w14PXRSuccessor.w14CheckerSha256, w14v6.successor.checkerSha256);
+for (const boundary of Object.values(w30v5.boundaries)) assert.equal(boundary, false);
+
 for (const record of manifest.entries) {
   if (record.reference === d5.path) {
     assert.equal(record.sha256, d2.predecessorSha256);
@@ -86,7 +100,7 @@ for (const record of manifest.entries) {
     assert.equal(w14v2.successor.checkerSha256, w14v3.predecessor.checkerSha256);
     assert.equal(w14v3.successor.checkerSha256, w14v4.predecessor.checkerSha256);
     assert.equal(w14v4.successor.checkerSha256, w14v5.predecessor.checkerSha256);
-    assert.equal(sha256(record.reference), w14v5.successor.checkerSha256, 'Unauthorized MPA-W14 current successor drift');
+    assert.equal(sha256(record.reference), w14v6.successor.checkerSha256, 'Unauthorized MPA-W14 current successor drift');
   } else {
     assert.equal(sha256(record.reference), record.sha256, `Unauthorized MPA freeze drift: ${record.reference}`);
   }
@@ -103,7 +117,8 @@ assert.equal(mcd5.productionAuthority.HDR.dispatchAllowed, false);
 assert.equal(pkg.scripts['check:mpa-w30'], 'node scripts/check-mpa-w30-mcd5-successor-freeze.mjs');
 assert.equal(pkg.scripts['check:mpa-freeze'], 'npm run check:mpa-w30');
 assert.equal(w30v4.predecessor.checkerSha256, w30v3.successor.checkerSha256, 'MPA_W30_V3_CHECKER_EVIDENCE_DRIFT');
-assert.equal(sha256(w30v4.successor.checkerPath), w30v4.successor.checkerSha256, 'MPA_W30_V4_SUCCESSOR_CHECKER_DRIFT');
+assert.equal(w30v4.successor.checkerSha256, w30v5.predecessor.checkerSha256, 'MPA_W30_V4_CHECKER_PREDECESSOR_DRIFT');
+assert.equal(sha256(w30v5.successor.checkerPath), w30v5.successor.checkerSha256, 'MPA_W30_V5_SUCCESSOR_CHECKER_DRIFT');
 
 console.log('✓ MPA-W30 current successor freeze passed.');
-console.log('  Historical MPA W0-W29 freeze remains immutable; MCD-5 → AST/BZR production API and W14 v1→v5 PXR package/checker evolution are versioned current successors only.');
+console.log('  Historical MPA W0-W29 freeze remains immutable; MCD-5 → AST/BZR production API and W14 v1→v6 PXR package/checker evolution is versioned current-successor-only, including exact package fingerprint reconciliation.');

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W14-PXR-PACKAGE-FINGERPRINT-RECONCILIATION-SUCCESSOR-v6.0.0",
+  "work": "MPA-W14-PXR-PACKAGE-FINGERPRINT-RECONCILIATION",
+  "baselineCommit": "f968210",
+  "status": "AUTHORIZED_EXACT_PXR_PACKAGE_FINGERPRINT_RECONCILIATION",
+  "objective": "Reconcile the exact PXR package.json fingerprint variants produced during delta materialization without changing PXR scripts semantics, dependency authority, package-lock, Method production eligibility or Professional eligibility.",
+  "predecessor": {
+    "path": "content/professional/method-production-activation/successors/mpa-w14-pxr-checker-package-script-successor-v5.json",
+    "acceptedSha256Variants": [
+      "397368a7d74c581eeb092a969dc6225bbce1869cb5d83190f5afd6a5f5365986",
+      "02540d3567ea2a191afb776422beffaf5b5e725208cf5fbc081a80279f5d1449"
+    ],
+    "acceptedPackageJsonSha256": [
+      "0a68d557362c1cd4a198705462bec58e3f0b511589964807adfae6dd24d9249c",
+      "90a11e4b68139d21e9edde772431cf79d654ca548794ad09ae88db1cfb8b8f88"
+    ],
+    "checkerSha256": "de38b8d35a3a8d9a972b59b371ba854e66625475ca705529abdb88c905c4c467",
+    "rewritten": false
+  },
+  "authorizedReconciliation": {
+    "scope": "FINGERPRINT_RECONCILIATION_ONLY",
+    "scriptSemanticsChanged": false,
+    "dependenciesChanged": false,
+    "devDependenciesChanged": false,
+    "packageLockChanged": false,
+    "dependenciesSha256": "fdb26beafb30c99afae2d8cd362236425a4be4a48d52263f27ef4aa083aca8dc",
+    "devDependenciesSha256": "b86c1a6248172fb90efe608000cb7ee507afa3f664e9e179d69c1aee7d643384",
+    "requiredScripts": {
+      "check:pxr-p0": "node scripts/check-pxr-p0-public-layer-emergency-cleanup.mjs",
+      "check:pxr-p1": "node scripts/check-pxr-p1-unified-visual-consumption.mjs",
+      "check:pxr-p2": "node scripts/check-pxr-p2-core-surface-recomposition.mjs",
+      "check:pxr-p3": "node scripts/check-pxr-p3-public-experience-acceptance.mjs",
+      "check:pxr": "npm run check:pxr-p0 && npm run check:pxr-p1 && npm run check:pxr-p2 && npm run check:pxr-p3",
+      "postcheck:bfr-h": "npm run check:hpc2-cka-direct-mapping && npm run check:bfr-h-cka-direct-mapping && npm run check:bfr-h15 && npm run check:pxr && npm run check:bfr-h16"
+    }
+  },
+  "successor": {
+    "packageJsonSha256": "0a68d557362c1cd4a198705462bec58e3f0b511589964807adfae6dd24d9249c",
+    "packageLockSha256": "7059fc59f0e4963605efe517723b8ea316a046c0ba2fe8c9074abdd36252a176",
+    "checkerPath": "scripts/check-mpa-w14-regression-runtime.mjs",
+    "checkerSha256": "707366af6b9d2e31513d21207900b94941a62deb0570b9562db6f22e5668274f"
+  },
+  "boundaries": {
+    "historicalRegressionRegistryMutated": false,
+    "v5SuccessorMutated": false,
+    "packageLockChanged": false,
+    "dependencyChanged": false,
+    "methodProductionEligibilityChanged": false,
+    "professionalEligibilityChanged": false,
+    "secondMethodAuthorityCreated": false,
+    "pxrRuntimeBecameMethodAuthority": false
+  },
+  "policy": {
+    "futurePackageOrCheckerDriftRequiresVersionedSuccessor": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-MPA-W30-PXR-W14-V6-SUCCESSOR-v5.0.0",
+  "work": "MPA-W30-PXR-W14-V6-CURRENT-SUCCESSOR-CLOSURE",
+  "baselineCommit": "f968210",
+  "status": "AUTHORIZED_POST_FREEZE_PXR_W14_V6_SUCCESSOR",
+  "purpose": "Extend MPA-W30 current post-freeze lineage to the exact W14 v6 PXR package-fingerprint reconciliation while preserving historical W0-W29 freeze, MCD AST/BZR authority and Method/Professional eligibility.",
+  "predecessor": {
+    "path": "content/professional/method-production-activation/successors/mpa-w30-pxr-w14-v5-successor-v4.json",
+    "acceptedSha256Variants": [
+      "f628537583028fb9125eab0013c89166750b4b2981bbf27a8fff6ccf7a47578c",
+      "171ddf4cc055425adb0fc794e09ca2e03e89f10cc2444bae81f204b956a86a13"
+    ],
+    "checkerPath": "scripts/check-mpa-w30-mcd5-successor-freeze.mjs",
+    "checkerSha256": "3127360c30b26f6eefa5bc5d829e5208a4f2d716bdd94dceb8a248099cf1b689",
+    "rewritten": false
+  },
+  "w14PXRSuccessor": {
+    "path": "content/professional/method-production-activation/successors/mpa-w14-pxr-package-fingerprint-reconciliation-successor-v6.json",
+    "sha256": "7695d9f17d6ffff2ddbd92fce37404c4531193dc83074a888c4fe033787f988f",
+    "packageJsonSha256": "0a68d557362c1cd4a198705462bec58e3f0b511589964807adfae6dd24d9249c",
+    "w14CheckerSha256": "707366af6b9d2e31513d21207900b94941a62deb0570b9562db6f22e5668274f"
+  },
+  "successor": {
+    "checkerPath": "scripts/check-mpa-w30-mcd5-successor-freeze.mjs",
+    "checkerSha256": "9b74c7fe737781f1fc339d5e5bc8c172761e36c83fb26f284a3d4a6121380865"
+  },
+  "boundaries": {
+    "historicalFreezeMutated": false,
+    "historicalManifestMutated": false,
+    "w30v4SuccessorMutated": false,
+    "w14v6AuthorityExpanded": false,
+    "methodProductionEligibilityChangedByPXR": false,
+    "professionalEligibilityChangedByPXR": false,
+    "mcdAstBzrAuthorityChangedByPXR": false
+  },
+  "policy": {
+    "futureW14OrW30CheckerDriftRequiresVersionedSuccessor": true
+  }
+}

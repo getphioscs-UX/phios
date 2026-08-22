@@ -9,6 +9,7 @@ const visualRasterSuccessor=readJson('content/professional/method-production-act
 const dependencySuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-mcd-package-script-regression-successor-v3.json');
 const bfrCheckerSuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-bfr-h-central-checker-package-script-successor-v4.json');
 const pxrCheckerSuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-pxr-checker-package-script-successor-v5.json');
+const pxrFingerprintSuccessor=readJson('content/professional/method-production-activation/successors/mpa-w14-pxr-package-fingerprint-reconciliation-successor-v6.json');
 const lunarNodeSuccessor=readJson('content/reconciliation/mir/mir-3-lunar-node-successor-v1.json');
 const pkg=readJson('package.json');
 const packageLock=readJson('package-lock.json');
@@ -107,8 +108,24 @@ assert.equal(pxrCheckerSuccessor.boundaries.methodProductionEligibilityChanged,f
 assert.equal(pxrCheckerSuccessor.boundaries.professionalEligibilityChanged,false);
 assert.equal(pxrCheckerSuccessor.boundaries.secondMethodAuthorityCreated,false);
 assert.equal(pxrCheckerSuccessor.successor.packageLockSha256,bfrCheckerSuccessor.successor.packageLockSha256);
-assert.equal(pxrCheckerSuccessor.successor.packageJsonSha256,sha256File('package.json'),'PACKAGE_JSON_PXR_SUCCESSOR_DRIFT');
-assert.equal(sha256File(pxrCheckerSuccessor.successor.checkerPath),pxrCheckerSuccessor.successor.checkerSha256,'MPA_W14_V5_SUCCESSOR_CHECKER_DRIFT');
+
+assert.equal(pxrFingerprintSuccessor.status,'AUTHORIZED_EXACT_PXR_PACKAGE_FINGERPRINT_RECONCILIATION');
+assert.equal(pxrFingerprintSuccessor.predecessor.path,'content/professional/method-production-activation/successors/mpa-w14-pxr-checker-package-script-successor-v5.json');
+assert.ok(pxrFingerprintSuccessor.predecessor.acceptedSha256Variants.includes(sha256File(pxrFingerprintSuccessor.predecessor.path)),'MPA_W14_V5_PREDECESSOR_VARIANT_DRIFT');
+assert.ok(pxrFingerprintSuccessor.predecessor.acceptedPackageJsonSha256.includes(pxrCheckerSuccessor.successor.packageJsonSha256),'MPA_W14_V5_PACKAGE_FINGERPRINT_VARIANT_DRIFT');
+assert.equal(pxrCheckerSuccessor.successor.checkerSha256,pxrFingerprintSuccessor.predecessor.checkerSha256,'MPA_W14_V5_CHECKER_PREDECESSOR_DRIFT');
+assert.equal(pxrFingerprintSuccessor.authorizedReconciliation.scope,'FINGERPRINT_RECONCILIATION_ONLY');
+assert.equal(pxrFingerprintSuccessor.authorizedReconciliation.scriptSemanticsChanged,false);
+assert.equal(pxrFingerprintSuccessor.authorizedReconciliation.dependenciesChanged,false);
+assert.equal(pxrFingerprintSuccessor.authorizedReconciliation.devDependenciesChanged,false);
+assert.equal(pxrFingerprintSuccessor.authorizedReconciliation.packageLockChanged,false);
+assert.equal(sha256Json(pkg.dependencies),pxrFingerprintSuccessor.authorizedReconciliation.dependenciesSha256);
+assert.equal(sha256Json(pkg.devDependencies),pxrFingerprintSuccessor.authorizedReconciliation.devDependenciesSha256);
+for(const [script,command] of Object.entries(pxrFingerprintSuccessor.authorizedReconciliation.requiredScripts)) assert.equal(pkg.scripts[script],command,`PXR_V6_REQUIRED_SCRIPT_DRIFT:${script}`);
+assert.equal(pxrFingerprintSuccessor.successor.packageJsonSha256,sha256File('package.json'),'PACKAGE_JSON_PXR_V6_SUCCESSOR_DRIFT');
+assert.equal(pxrFingerprintSuccessor.successor.packageLockSha256,sha256File('package-lock.json'),'PACKAGE_LOCK_PXR_V6_SUCCESSOR_DRIFT');
+assert.equal(sha256File(pxrFingerprintSuccessor.successor.checkerPath),pxrFingerprintSuccessor.successor.checkerSha256,'MPA_W14_V6_SUCCESSOR_CHECKER_DRIFT');
+for(const boundary of Object.values(pxrFingerprintSuccessor.boundaries)) assert.equal(boundary,false);
 
 assert.equal(r.rules.anyTriggerChangeRequiresRegression,true);
 assert.equal(r.rules.timezoneLibraryUpgradeRequiresBoundaryFixtures,true);
@@ -116,4 +133,4 @@ assert.equal(r.rules.ephemerisUpgradeRequiresReferenceComparison,true);
 assert.equal(r.productionEligibilityChanged,false);
 
 console.log('✓ MPA-W14 Regression Runtime current successor passed.');
-console.log('  Visual raster dependency authority remains frozen; AST/BZR MCD, PART G/H and PXR package.json evolution are scripts-only, astronomy-engine 2.1.19 and sharp 0.35.2 remain unchanged.');
+console.log('  Visual raster dependency authority remains frozen; PXR package fingerprint reconciliation is exact/current-only, scripts semantics and dependencies remain unchanged, astronomy-engine 2.1.19 and sharp 0.35.2 remain unchanged.');
