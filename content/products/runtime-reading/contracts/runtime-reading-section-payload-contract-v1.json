@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W24-SECTION-PAYLOAD-CONTRACT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W24.2",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_CANONICAL_SECTION_PAYLOAD",
+  "canonicalType": "RuntimeReadingSectionPayload",
+  "sectionRegistry": "content/products/runtime-reading/registries/runtime-reading-section-registry-v1.json",
+  "requiredFields": [
+    "sectionId",
+    "sectionType",
+    "sectionVersion",
+    "titleSemanticCode",
+    "statements",
+    "unknowns",
+    "contradictions",
+    "limitations",
+    "sourceReferences",
+    "meaningReferences",
+    "interpretationReferences",
+    "professionalReferences",
+    "visualSemanticReferences",
+    "evidenceSummary",
+    "completionState"
+  ],
+  "completionStates": [
+    "COMPLETE",
+    "PARTIAL",
+    "UNKNOWN",
+    "NOT_INCLUDED",
+    "UNAVAILABLE",
+    "PROFESSIONAL_COMPLETION_REQUIRED"
+  ],
+  "rules": {
+    "sectionIdMustExistInRegistry": true,
+    "statementPayloadContractRequired": true,
+    "unknownsCannotBeSilentlyDropped": true,
+    "contradictionsCannotBeSilentlyDropped": true,
+    "presentationFieldsForbidden": true,
+    "layoutFieldsForbidden": true
+  },
+  "forbiddenFields": [
+    "fontSize",
+    "cssClass",
+    "grid",
+    "pageNumber",
+    "pageBreak",
+    "mobileLayout",
+    "cardStyle",
+    "heroPosition",
+    "position",
+    "width",
+    "height",
+    "page",
+    "column",
+    "mobileOrder",
+    "printScale",
+    "style"
+  ]
+}

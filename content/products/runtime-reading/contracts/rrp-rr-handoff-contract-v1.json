@@ -3,7 +3,7 @@
   "phase": "RRP",
   "work": "RRP-W23",
   "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
-  "status": "ACTIVE_PRE_PAYLOAD_RR_HANDOFF_BOUNDARY",
+  "status": "ACTIVE_FINAL_RRP_TO_RR_CANDIDATE_SUBMISSION_BOUNDARY",
   "authorityFlow": [
     "RRP",
     "REPORT_CANDIDATE_PACKAGE",
@@ -21,7 +21,7 @@
   "handoffObject": "RuntimeReadingReportCandidate",
   "payloadContractDeferredTo": "RRP-W24",
   "submissionContractCompletionDeferredTo": "RRP-W28",
-  "rrpTerminalState": "REPORT_CANDIDATE_PACKAGE_READY_FOR_RR_INTAKE",
+  "rrpTerminalState": "CANDIDATE",
   "rrOwnsStates": [
     "ASSEMBLED",
     "CANDIDATE",
@@ -41,6 +41,61 @@
     "rrpMayOwnPdfRendering": false,
     "rrRevalidatesAssemblyAgainstItsOwnRegistry": true,
     "sourceTraceMustSurviveHandoff": true,
-    "unknownsAndContradictionsMustSurviveHandoff": true
-  }
+    "unknownsAndContradictionsMustSurviveHandoff": true,
+    "candidateSubmissionIsNotFinalReport": true,
+    "rrpCannotSetReviewState": true,
+    "rrpCannotSetApprovedState": true,
+    "rrpCannotSetFinalState": true,
+    "rrpCannotSetRevisedState": true,
+    "rrpCannotSetSupersededState": true,
+    "rrSubmissionMustCarryCandidateDigest": true,
+    "rrSubmissionMustCarryUnknownContradictionLimitationCounts": true,
+    "customerReferenceIsSubjectReferenceNotAuthorization": true
+  },
+  "workFinalizedBy": "RRP-W28.1",
+  "baselineCommitFinalization": "f010b292e2c778c744913f1789148c53db89926f",
+  "submissionObject": "RRReportCandidateSubmission",
+  "candidateContract": "content/products/runtime-reading/contracts/runtime-reading-report-candidate-contract-v1.json",
+  "requiredSubmissionFields": [
+    "rrpCandidateReference",
+    "rrpCandidateDigest",
+    "caseReference",
+    "customerReference",
+    "reportProductCode",
+    "productVersion",
+    "sectionCount",
+    "sourceAuthorityReferences",
+    "professionalCompletionRequired",
+    "unknownCount",
+    "contradictionCount",
+    "limitationCount",
+    "visualSemanticReferences",
+    "submittedAt"
+  ],
+  "rrDownstreamStates": [
+    "REVIEW",
+    "APPROVED",
+    "FINAL",
+    "REVISED",
+    "SUPERSEDED"
+  ],
+  "rrCompatibilityMap": {
+    "REVIEW": "RR lifecycle review states",
+    "APPROVED": "RR APPROVED",
+    "FINAL": "RR canonical finalization authority",
+    "REVISED": "RR revision authority",
+    "SUPERSEDED": "RR supersession authority"
+  },
+  "forbiddenRrpStatesAndFields": [
+    "released",
+    "customerVisible",
+    "published",
+    "downloadReady",
+    "customerAuthorization",
+    "releaseEligibility",
+    "audienceAccess",
+    "clientVisibleFiltering",
+    "workspaceProjection",
+    "PDFProjection"
+  ]
 }

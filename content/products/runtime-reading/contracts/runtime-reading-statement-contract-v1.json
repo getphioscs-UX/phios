@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W24-STATEMENT-CONTRACT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W24.3",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_CANONICAL_STATEMENT_PAYLOAD",
+  "canonicalType": "RuntimeReadingStatement",
+  "w17Registry": "content/products/runtime-reading/registries/runtime-reading-statement-type-registry-v1.json",
+  "requiredFields": [
+    "statementId",
+    "statementType",
+    "semanticCode",
+    "contentCanonical",
+    "sourceType",
+    "sourceReferences",
+    "evidenceLevel",
+    "confidenceState",
+    "unknownState",
+    "limitationReferences",
+    "professionalAuthorship"
+  ],
+  "allowedStatementTypes": [
+    "CALCULATED_FACT",
+    "USER_REPORTED_FACT",
+    "CANONICAL_MEANING",
+    "SYSTEM_INTERPRETATION",
+    "PROFESSIONAL_JUDGMENT",
+    "NAVIGATION_OPTION",
+    "UNKNOWN",
+    "BOUNDARY"
+  ],
+  "w24SuccessorExtension": {
+    "statementType": "BOUNDARY",
+    "w17Reserved": true,
+    "purpose": "Explicit governance/scope boundary statement; never a new fact or judgment."
+  },
+  "typeRules": {
+    "CALCULATED_FACT": {
+      "projectionSourceRequired": true
+    },
+    "CANONICAL_MEANING": {
+      "meaningReferencesRequired": true
+    },
+    "SYSTEM_INTERPRETATION": {
+      "meaningReferencesRequired": true,
+      "interpretationReferencesRequired": true
+    },
+    "PROFESSIONAL_JUDGMENT": {
+      "professionalReferencesRequired": true,
+      "professionalAuthorshipRequired": true,
+      "prAuthorityRequired": true
+    },
+    "UNKNOWN": {
+      "reasonCodeRequired": true,
+      "unknownStateMustNotBeNone": true
+    },
+    "BOUNDARY": {
+      "governanceSourceRequired": true
+    }
+  },
+  "rules": {
+    "everyStatementHasSource": true,
+    "llmMayInventSource": false,
+    "professionalJudgmentWithoutPrFails": true,
+    "systemInterpretationWithoutMeaningFails": true,
+    "unknownMustRemainExplicit": true
+  }
+}

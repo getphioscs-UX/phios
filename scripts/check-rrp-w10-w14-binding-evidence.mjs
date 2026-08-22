@@ -85,7 +85,12 @@ assert.equal(pkg.scripts['check:rrp-w5-w9'], 'node scripts/check-rrp-w5-w9-input
 assert.equal(pkg.scripts['check:rrp-w10-w14'], 'node scripts/check-rrp-w10-w14-binding-evidence.mjs');
 assert.equal(pkg.scripts['check:rrp-w0-w14'], 'npm run check:rrp-w0-w4 && npm run check:rrp-w5-w9 && npm run check:rrp-w10-w14');
 assert.equal(pkg.scripts['check:rrp-foundation'], 'npm run check:rrp-w0-w14');
-assert.equal(Object.hasOwn(pkg.scripts, 'check:rrp'), false, 'Do not claim a full RRP checker before W15-W28');
+const finalFreezeExists = fs.existsSync('content/products/runtime-reading/freeze/runtime-reading-product-freeze-v1.json');
+if (finalFreezeExists) {
+  assert.equal(pkg.scripts['check:rrp'], 'node scripts/check-rrp-w24-canonical-report-payload.mjs && node scripts/check-rrp-w25-visual-reference-binding.mjs && node scripts/check-rrp-w26-product-fixtures.mjs && node scripts/check-rrp-w27-mrm-evidence-binding.mjs && node scripts/check-rrp-w28-rr-handoff-freeze.mjs', 'Full RRP checker is only admitted after W28 freeze exists.');
+} else {
+  assert.equal(Object.hasOwn(pkg.scripts, 'check:rrp'), false, 'Do not claim a full RRP checker before W15-W28');
+}
 
 console.log('✓ RRP-W10–W14 Cross-Method, Reality, Carrier, Timeline and Evidence Binding passed.');
 console.log('  Convergence cannot become objective truth; current reality remains separate from birth structure; Carrier remains non-personality/non-medical; timeline provenance is typed; every future report statement must remain internally traceable.');

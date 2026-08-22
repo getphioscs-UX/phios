@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "PHI-OS-MRM-RRP-W27-BINDING-SUCCESSOR-v1.0.0",
+  "phase": "MRM-S",
+  "work": "RRP-W27",
+  "baselineCommit": "f010b292e2c778c744913f1789148c53db89926f",
+  "status": "ACTIVE_RRP_CAPABILITY_LEVEL_RM_EM_BINDING",
+  "predecessors": {
+    "capabilityInventory": {
+      "path": "content/runtime-maturity/registries/master-runtime-capability-inventory-v1.json",
+      "sha256": "1a1b0b45ef03319eb468c2c88c7b31822a73df590dd0d95108ac02d5b5f355f9"
+    },
+    "runtimeMatrix": {
+      "path": "content/runtime-maturity/matrices/master-runtime-maturity-matrix-v1.json",
+      "sha256": "811cb1e2f6efe821bb268c57fde5d4a0f9ff90eeecb9beb96c111ad7fb01d456"
+    },
+    "evidenceMatrix": {
+      "path": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.1.json",
+      "sha256": "c42f4c15c84c5a4a99f6920267b5a314b17f546f6ccde2921928580f031ad053"
+    },
+    "claimMatrix": {
+      "path": "content/runtime-maturity/matrices/runtime-claim-eligibility-matrix-v1.json",
+      "sha256": "3c87473b4611e2058fd2d80e42701b19bf89c2df4fd0557ea5fd4f211d61351b"
+    }
+  },
+  "successors": {
+    "capabilityInventory": "content/runtime-maturity/registries/master-runtime-capability-inventory-v1.1.json",
+    "runtimeMatrix": "content/runtime-maturity/matrices/master-runtime-maturity-matrix-v1.1.json",
+    "architectureEvidence": "content/runtime-maturity/evidence/architecture/architectural-evidence-registry-v1.1.json",
+    "determinismEvidence": "content/runtime-maturity/evidence/determinism/determinism-evidence-registry-v1.json",
+    "fixtureEvidence": [
+      "content/runtime-maturity/evidence/fixtures/reference-fixture-registry-v1.json",
+      "content/runtime-maturity/evidence/fixtures/edge-case-fixture-registry-v1.json",
+      "content/runtime-maturity/evidence/fixtures/negative-fixture-registry-v1.json",
+      "content/runtime-maturity/evidence/fixtures/regression-fixture-registry-v1.json"
+    ],
+    "evidenceMatrix": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.2.json",
+    "claimMatrix": "content/runtime-maturity/matrices/runtime-claim-eligibility-matrix-v1.1.json"
+  },
+  "registeredRuntime": "RRP",
+  "registeredCapabilityCount": 9,
+  "capabilityCodes": [
+    "RRP-INPUT-BUNDLE",
+    "RRP-PROJECTION-INTAKE",
+    "RRP-MEANING-ADMISSION",
+    "RRP-CONVERGENCE",
+    "RRP-REALITY-BINDING",
+    "RRP-CARRIER-BINDING",
+    "RRP-REPORT-COMPOSITION",
+    "RRP-VISUAL-REFERENCE",
+    "RRP-RR-HANDOFF"
+  ],
+  "rules": {
+    "historicalMrmFilesMutated": false,
+    "rmAndEmAreCapabilityLevel": true,
+    "emDerivedFromGovernedEvidence": true,
+    "manualDirectEmAssignmentForbidden": true,
+    "passAloneCannotPromote": true,
+    "pilotRequiredForEM3": true,
+    "globalMRMS8S9CompletionClaimed": false
+  }
+}
