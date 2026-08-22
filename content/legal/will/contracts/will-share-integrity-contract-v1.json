@@ -1,0 +1,33 @@
+{
+  "contractCode": "PHI-OS-DAR-W7-WILL-SHARE-INTEGRITY-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W7",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_DETERMINISTIC_VALIDATION_NO_REPAIR",
+  "statuses": [
+    "VALID",
+    "INVALID",
+    "INCOMPLETE",
+    "PROFESSIONAL_REVIEW_REQUIRED"
+  ],
+  "checks": [
+    "residue total = 100%",
+    "no negative shares",
+    "no share > 100%",
+    "no duplicate conflicting assignment",
+    "no unresolved beneficiary"
+  ],
+  "precedence": [
+    "INVALID",
+    "INCOMPLETE",
+    "PROFESSIONAL_REVIEW_REQUIRED",
+    "VALID"
+  ],
+  "rules": {
+    "automaticShareRepairForbidden": true,
+    "normalizationToOneHundredForbidden": true,
+    "inputMutationForbidden": true,
+    "validationIsNotLegalJudgment": true
+  },
+  "runtime": "functions/legal/will/share-integrity.js"
+}

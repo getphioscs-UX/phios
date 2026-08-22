@@ -1,0 +1,39 @@
+{
+  "contractCode": "PHI-OS-DAR-W12-WILL-LEGAL-REVIEW-ADMISSION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "work": "DAR-W12",
+  "baselineCommit": "812d7c820318be5bc4376888f15447a5cf05fb88",
+  "status": "ACTIVE_ADMISSION_GATE_NO_CURRENT_ADMISSIONS",
+  "transition": {
+    "from": "REFERENCE_CLAUSE_CANDIDATE",
+    "to": "APPROVED_TEMPLATE_COMPONENT",
+    "automatic": false
+  },
+  "requiredReviewRecordFields": [
+    "reviewer",
+    "reviewerQualificationOrAuthorityReference",
+    "jurisdiction",
+    "reviewDate",
+    "legalScope",
+    "version",
+    "limitations",
+    "approvedText",
+    "approvalDigest"
+  ],
+  "admissionRequirements": [
+    "source text reviewed by an eligible legal reviewer",
+    "jurisdiction matches clause record",
+    "version is immutable for admitted text",
+    "limitations recorded",
+    "approval digest binds exact reviewed text",
+    "approvedText copied exactly from reviewed admission artifact"
+  ],
+  "forbidden": [
+    "AI-generated approvedText",
+    "AI rewrite of reviewer-approved text",
+    "approval without named reviewer evidence",
+    "cross-jurisdiction admission reuse without separate approval",
+    "silent replacement of a superseded clause"
+  ],
+  "currentAdmissions": []
+}
