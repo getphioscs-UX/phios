@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-RRP-W23-RR-HANDOFF-CONTRACT-v1.0.0",
+  "phase": "RRP",
+  "work": "RRP-W23",
+  "baselineCommit": "3e4f22cf33e55a93b4eaf9764ab17202acf3b844",
+  "status": "ACTIVE_PRE_PAYLOAD_RR_HANDOFF_BOUNDARY",
+  "authorityFlow": [
+    "RRP",
+    "REPORT_CANDIDATE_PACKAGE",
+    "RR",
+    "REVIEW",
+    "APPROVAL",
+    "RELEASE"
+  ],
+  "rrAuthorityReferences": {
+    "reportAssembly": "content/runtime/customer-report-runtime/contracts/report-assembly-contract-v2.json",
+    "reportCandidate": "content/runtime/customer-report-runtime/contracts/report-candidate-contract-v2.json",
+    "lifecycle": "content/runtime/customer-report-runtime/registries/report-lifecycle-state-registry-v2.json",
+    "canonicalSections": "content/runtime/customer-report-runtime/registries/canonical-report-section-registry-v2.json"
+  },
+  "handoffObject": "RuntimeReadingReportCandidate",
+  "payloadContractDeferredTo": "RRP-W24",
+  "submissionContractCompletionDeferredTo": "RRP-W28",
+  "rrpTerminalState": "REPORT_CANDIDATE_PACKAGE_READY_FOR_RR_INTAKE",
+  "rrOwnsStates": [
+    "ASSEMBLED",
+    "CANDIDATE",
+    "REVIEW_BLOCKED",
+    "REVIEW_PASSED",
+    "APPROVAL_BLOCKED",
+    "APPROVED",
+    "RELEASED",
+    "SUPERSEDED_BY_REVISION"
+  ],
+  "rules": {
+    "rrpCreatesSecondReportRuntime": false,
+    "rrpMayFinalizeReport": false,
+    "rrpMayApproveReport": false,
+    "rrpMayReleaseReport": false,
+    "rrpMaySetCustomerVisible": false,
+    "rrpMayOwnPdfRendering": false,
+    "rrRevalidatesAssemblyAgainstItsOwnRegistry": true,
+    "sourceTraceMustSurviveHandoff": true,
+    "unknownsAndContradictionsMustSurviveHandoff": true
+  }
+}

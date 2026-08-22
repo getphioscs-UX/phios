@@ -13,8 +13,14 @@ const w1 = readJson(`${BASE}/contracts/runtime-reading-product-contract-v1.json`
 const w2 = readJson(`${BASE}/registries/runtime-reading-source-authority-registry-v1.json`);
 const w3 = readJson(`${BASE}/registries/runtime-reading-method-availability-v1.json`);
 const w4 = readJson(`${BASE}/contracts/runtime-reading-method-consent-v1.json`);
-const mrm0 = readJson('content/runtime-maturity/authority/master-runtime-authority-baseline-v1.json');
-const mrm5 = readJson('content/runtime-maturity/registries/master-runtime-capability-inventory-v1.json');
+const legacyMrmAuthorityPath = 'content/runtime-maturity/authority/master-runtime-authority-baseline-v1.json';
+const legacyMrmCapabilityPath = 'content/runtime-maturity/registries/master-runtime-capability-inventory-v1.json';
+const currentMrmArchitecturePath = 'content/runtime-maturity/evidence/architecture/architectural-evidence-registry-v1.json';
+const currentMrmMatrixPath = 'content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.1.json';
+const mrm0 = fs.existsSync(legacyMrmAuthorityPath) ? readJson(legacyMrmAuthorityPath) : null;
+const mrm5 = fs.existsSync(legacyMrmCapabilityPath) ? readJson(legacyMrmCapabilityPath) : null;
+const currentMrmArchitecture = fs.existsSync(currentMrmArchitecturePath) ? readJson(currentMrmArchitecturePath) : null;
+const currentMrmMatrix = fs.existsSync(currentMrmMatrixPath) ? readJson(currentMrmMatrixPath) : null;
 const mpa = readJson('content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json');
 const mcd = readJson('content/professional/method-client-delivery/acceptance/mcd-5-canonical-projection-acceptance-v1.json');
 const cmr = readJson('content/professional/canonical-meaning-runtime/contracts/canonical-meaning-runtime-v1.json');
@@ -37,9 +43,15 @@ for (const forbidden of ['CALCULATION_RUNTIME','MEANING_AUTHORITY','PROFESSIONAL
 assert.equal(w0.reconciliationResult.duplicateRrpAuthorityDetected, false);
 assert.equal(w0.reconciliationResult.upstreamAuthorityRewritten, false);
 assert.equal(w0.reconciliationResult.historicalFreezeMutated, false);
-assert.ok(mrm0.reservedFutureRuntimeCodes.includes('RRP'), 'W0 must preserve RRP as MRM-S reserved until W27');
-assert.ok(mrm5.reservedFutureRuntimeCodes.includes('RRP'), 'W0 must preserve capability inventory reservation');
-assert.equal(mrm5.capabilities.some(x=>x.runtimeCode==='RRP'), false, 'W0-W14 must not prematurely register RRP capability maturity');
+if (mrm0 && mrm5) {
+  assert.ok(mrm0.reservedFutureRuntimeCodes.includes('RRP'), 'W0 must preserve RRP as MRM-S reserved until W27');
+  assert.ok(mrm5.reservedFutureRuntimeCodes.includes('RRP'), 'W0 must preserve capability inventory reservation');
+  assert.equal(mrm5.capabilities.some(x=>x.runtimeCode==='RRP'), false, 'W0-W14 must not prematurely register RRP capability maturity');
+} else {
+  assert.ok(currentMrmArchitecture && currentMrmMatrix, 'Current MRM-S successor evidence must exist when legacy reservation files are absent');
+  assert.equal((currentMrmArchitecture.runtimeIndex ?? []).some(x=>x.runtimeCode==='RRP'), false, 'RRP must remain absent from MRM-S architectural evidence until W27');
+  assert.equal((currentMrmMatrix.rows ?? currentMrmMatrix.capabilities ?? []).some(x=>x.runtimeCode==='RRP'), false, 'RRP must remain absent from current MRM-S maturity matrix until W27');
+}
 
 assert.equal(w1.work, 'RRP-W1');
 assert.deepEqual(w1.productTypes.map(x=>x.productType), ['RRP-SELF','RRP-PRO']);
