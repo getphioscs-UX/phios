@@ -53,7 +53,7 @@ function copy() {
       loading: '正在读取受治理的 PHI OS 知识…',
       failed: '目前无法完成 Ask PHI OS 回答。',
       notSimple: '这个问题已超出 Simple Ask 边界。请先缩小问题，或从一个知识问题开始；系统不会自动启动 Reality Journey。',
-      complete: '受治理回答已完成',
+      complete: '回答已准备好',
       followLimit: 'Guest 可进行一次临时追问；不会保存历史。',
       followDone: 'Guest 临时追问已使用；没有保存历史。',
       emptyWhy: '目前没有足够依据补充机制解释。',
@@ -65,7 +65,7 @@ function copy() {
       preparingContext: '正在以临时 Guided Context 重新检索同一个 Grounded Answer runtime…',
       contextDone: 'Guided Context 已应用；这是分类与路由讯号，不是诊断，也不是完整 ICR。',
       noJourney: '当前结构仍可留在 Ask / Guided Context；未自动建议 Reality Journey。',
-      currentAuthority: '这个问题需要最新外部权威。CKA 不会以模型记忆或旧知识替代当前来源。',
+      currentAuthority: '这个问题需要当前可靠来源。实时外部来源尚未接入时，PHI OS 不会用不相关的内部资料代替。',
       professional: '这个问题需要专业人员判断。CKA 只呈现边界与 handoff，不作医疗、法律或财务专业判断。',
       prepareFailed: '暂时无法准备 handoff。',
       consentNeeded: '已确认复杂度门槛。若要继续，请显式同意准备临时 entry seed。',
@@ -79,7 +79,7 @@ function copy() {
     loading: 'Reading governed PHI OS knowledge…',
     failed: 'Ask PHI OS could not complete this answer.',
     notSimple: 'This question is beyond the Simple Ask boundary. Narrow it to a knowledge question first; no Reality Journey starts automatically.',
-    complete: 'Governed answer complete',
+    complete: 'Answer ready',
     followLimit: 'Guest access includes one temporary follow-up. No history is saved.',
     followDone: 'The Guest follow-up has been used. No history was saved.',
     emptyWhy: 'There is not enough grounding for an additional mechanism explanation.',
@@ -91,7 +91,7 @@ function copy() {
     preparingContext: 'Re-retrieving through the same Grounded Answer runtime with temporary Guided Context…',
     contextDone: 'Guided Context applied. Its classifications are routing signals, not a diagnosis or a full ICR.',
     noJourney: 'The current structure can remain in Ask / Guided Context; no Reality Journey is recommended automatically.',
-    currentAuthority: 'This question needs current external authority. CKA will not substitute model memory or stale knowledge for a current source.',
+    currentAuthority: 'This question needs current reliable sources. Until live external retrieval is connected, PHI OS will not substitute unrelated internal material.',
     professional: 'This question needs professional judgment. CKA presents a boundary and handoff; it does not make medical, legal or financial judgments.',
     prepareFailed: 'The handoff could not be prepared.',
     consentNeeded: 'The complexity threshold is confirmed. Explicitly consent to prepare a temporary entry seed if you want to continue.',
@@ -164,7 +164,7 @@ function renderSources(envelope) {
   }
   target.innerHTML = available.map(group => `
     <section class="cka-source-group">
-      <h3>${escapeHtml(group.authorityClass)}</h3>
+      <h3>${escapeHtml(group.authorityClass === 'GOVERNED_EXTERNAL_AUTHORITY' ? (getLocale() === 'zh-Hans' ? '当前可靠来源' : 'Current reliable sources') : group.authorityClass === 'REVIEWED_MANUSCRIPT_OR_KSAR' ? (getLocale() === 'zh-Hans' ? 'PHI OS 书稿资料' : 'PHI OS manuscript sources') : (getLocale() === 'zh-Hans' ? 'PHI OS 已发布知识' : 'Published PHI OS knowledge'))}</h3>
       ${group.sources.map(source => {
         const href = safeHref(source.href);
         return `<article class="cka-source">
@@ -190,10 +190,11 @@ function renderAnswer(payload) {
   if (!answer || !envelope) throw new Error('CKA_CLIENT_PROJECTION_MISSING');
   answerRoot.querySelector('[data-cka-answer-question]').textContent = answer.question;
   answerRoot.querySelector('[data-cka-answer-state]').textContent = envelope.answerState;
+  const needsCurrentAuthority = envelope.answerState === 'NEEDS_CURRENT_AUTHORITY';
   answerRoot.querySelector('[data-cka-direct-answer]').innerHTML = `<p>${escapeHtml(publicDirectAnswer(answer, envelope))}</p>`;
   answerRoot.querySelector('[data-cka-unknown-state]').textContent = envelope.record.unknownState;
-  renderItems(answerRoot.querySelector('[data-cka-why]'), answer.whyThisMayHappen, copy().emptyWhy);
-  renderItems(answerRoot.querySelector('[data-cka-observe]'), answer.whatToObserve, copy().emptyObserve);
+  renderItems(answerRoot.querySelector('[data-cka-why]'), needsCurrentAuthority ? [] : answer.whyThisMayHappen, copy().emptyWhy);
+  renderItems(answerRoot.querySelector('[data-cka-observe]'), needsCurrentAuthority ? [] : answer.whatToObserve, copy().emptyObserve);
   renderItems(answerRoot.querySelector('[data-cka-unknown]'), answer.unknown?.details, copy().emptyUnknown);
   renderCards(envelope.relatedKnowledgeCards);
   renderSources(envelope);
@@ -214,7 +215,7 @@ function renderAnswer(payload) {
   const searchMore = answerRoot.querySelector('[data-cka-search-more]');
   searchMore.href = `/library?query=${encodeURIComponent(state.firstQuestion)}`;
   answerRoot.hidden = false;
-  setStatus(`${copy().complete} · ${envelope.answerState}`, 'complete');
+  setStatus(copy().complete, 'complete');
 }
 
 function formFields(formElement) {

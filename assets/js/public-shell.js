@@ -10,7 +10,7 @@ import {
 const NAVIGATION = Object.freeze([
   { id: 'discover', href: '/', key: 'publicShell.nav.discover' },
   { id: 'knowledge', href: '/library', key: 'publicShell.nav.knowledge' },
-  { id: 'reality', href: '/reality-journey', key: 'publicShell.nav.realityJourney' },
+  { id: 'reality', href: '/reality/', key: 'publicShell.nav.realityJourney' },
   { id: 'professional', href: '/services', key: 'publicShell.nav.professional' },
   { id: 'about', href: '/about', key: 'publicShell.nav.about' }
 ]);
@@ -21,7 +21,7 @@ const FOOTER_LINKS = Object.freeze([
   { href: '/thesis', key: 'publicShell.footer.thesis' },
   { href: '/book-one', key: 'publicShell.footer.books' },
   { href: '/explore', key: 'publicShell.footer.atlas' },
-  { href: '/reality-journey', key: 'publicShell.nav.realityJourney' },
+  { href: '/reality/', key: 'publicShell.nav.realityJourney' },
   { href: '/services', key: 'publicShell.nav.professional' },
   { href: '/about', key: 'publicShell.nav.about' },
   { href: '/privacy', key: 'publicShell.footer.privacy' },

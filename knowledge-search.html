@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/assets/css/knowledge-release.css">
   <link rel="stylesheet" href="/assets/css/knowledge-search.css">
   <link rel="stylesheet" href="/assets/css/runtime-spine.css">
+  <link rel="stylesheet" href="/assets/css/client-production-surfaces.css">
 </head>
 <body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-search">
   <a class="skip-link" href="#knowledge-search-main">Skip to main content</a>
@@ -49,12 +50,12 @@
           <header class="cka-answer__question">
             <p class="knowledge-eyebrow">Your question</p>
             <h2 data-cka-answer-question></h2>
-            <p class="cka-answer-state" data-cka-answer-state></p>
+            <p class="cka-answer-state cps-internal-state" data-cka-answer-state aria-hidden="true"></p>
           </header>
           <section data-cka-section="DIRECT_ANSWER"><h2>Direct answer</h2><div data-cka-direct-answer></div></section>
           <section data-cka-section="WHY_THIS_MAY_HAPPEN"><h2>Why this may happen</h2><div data-cka-why></div></section>
           <section data-cka-section="WHAT_TO_OBSERVE"><h2>What to observe</h2><div data-cka-observe></div></section>
-          <section data-cka-section="WHAT_PHIOS_DOES_NOT_YET_KNOW"><h2>What PHI OS does not yet know</h2><p class="cka-unknown-state" data-cka-unknown-state></p><div data-cka-unknown></div></section>
+          <section data-cka-section="WHAT_PHIOS_DOES_NOT_YET_KNOW"><h2>What PHI OS does not yet know</h2><p class="cka-unknown-state cps-internal-state" data-cka-unknown-state aria-hidden="true"></p><div data-cka-unknown></div></section>
           <section data-cka-section="RELATED_KNOWLEDGE"><h2>Related knowledge</h2><div class="cka-card-grid" data-cka-related-knowledge></div></section>
           <details class="cka-grounding" data-cka-grounding>
             <summary>Sources and grounding</summary>
@@ -121,5 +122,6 @@
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/knowledge-search-b.js"></script>
   <script type="module" src="/assets/js/pages/runtime-spine-visuals.js"></script>
+  <script type="module" src="/assets/js/pages/client-production-surfaces.js"></script>
 </body>
 </html>

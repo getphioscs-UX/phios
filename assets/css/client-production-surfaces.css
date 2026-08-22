@@ -1,0 +1,49 @@
+/* PHI OS Client Production Surface Consolidation W0-W12 */
+:root{--cps-max:74rem;--cps-gutter:clamp(1rem,4vw,2rem);--cps-radius:1.5rem;--cps-text:#11151c;--cps-muted:#596170;--cps-line:rgba(17,21,28,.12);--cps-paper:#fbfaf7}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+.cps-internal-state,[data-pxr-hidden="true"][hidden]{display:none!important}
+[data-public-header-placeholder],header[data-public-header-placeholder]{min-height:72px}
+.public-display,.ks-hero h1,.rw-hero h1,.pr-hero h1,.academy-hero h1,.legal-hero h1{font-size:clamp(2.35rem,9vw,5.5rem)!important;line-height:.98!important;letter-spacing:-.045em!important;text-wrap:balance}
+.public-lead,.ks-hero__lead,.rw-hero__lead,.academy-hero p,.legal-hero p{font-size:clamp(1rem,3.8vw,1.35rem)!important;line-height:1.55!important;max-width:44rem}
+/* one canonical hero per consolidated surface */
+.wpr-personal-runtime .pr-hero{padding-top:clamp(3rem,8vw,6rem);padding-bottom:clamp(2.5rem,7vw,5rem)}
+.wpr-personal-runtime .pr-hero__grid{grid-template-columns:minmax(0,1fr)!important;gap:1.25rem!important}
+.wpr-personal-runtime .pr-boundary-card{max-width:40rem}
+/* mobile progressive disclosure */
+.cps-filter-toggle{display:none;border:1px solid var(--cps-line);background:#fff;border-radius:999px;padding:.75rem 1rem;font:inherit;font-weight:650}
+.cps-advanced-filters{display:contents}
+@media(max-width:760px){
+  body{font-size:16px}
+  [data-public-header-placeholder],header[data-public-header-placeholder]{min-height:64px}
+  .public-container,.knowledge-shell,.ks-shell,.rw-shell,.sc-shell{padding-left:1rem!important;padding-right:1rem!important}
+  .public-display,.ks-hero h1,.rw-hero h1,.pr-hero h1,.academy-hero h1,.legal-hero h1{font-size:clamp(2.35rem,11.5vw,3.5rem)!important;line-height:1.01!important}
+  .ks-hero,.rw-hero,.sc-hero,.pr-hero{min-height:auto!important}
+  .ks-hero__content,.rw-hero__content,.sc-hero__content{padding-top:3rem!important;padding-bottom:3rem!important}
+  .ks-context__grid,.rs-context-band__grid{grid-template-columns:1fr!important;gap:.8rem!important}
+  .knowledge-controls{grid-template-columns:1fr!important;gap:.9rem!important}
+  .cps-filter-toggle{display:inline-flex;align-items:center;gap:.5rem;margin:.2rem 0 .25rem}
+  .cps-advanced-filters{display:none}
+  .cps-advanced-filters.is-open{display:contents}
+  .knowledge-field select,.knowledge-field input,.pr-form input,.pr-form select{min-height:48px;font-size:16px}
+  .pr-layout{grid-template-columns:1fr!important}
+  .pr-form{gap:1rem!important}
+  .pr-field-pair,.pr-coordinate-grid{grid-template-columns:1fr!important}
+  .pr-coordinate-fieldset,.pr-field-help{font-size:.95rem}
+  .pr-method-select__grid{grid-template-columns:1fr!important}
+  .pr-actions{display:grid!important;grid-template-columns:1fr!important;gap:.75rem!important}
+  .pr-actions button{width:100%;min-height:50px}
+  .cka-answer h1,.cka-answer h2,.knowledge-search-answer h1,.knowledge-search-answer h2{font-size:clamp(1.65rem,7vw,2.35rem)!important;line-height:1.08!important}
+  [data-cka-answer]{padding-inline:1rem!important}
+  .cka-source-group h3{font-size:1rem!important}
+  .academy-grid,.financial-grid{grid-template-columns:1fr!important}
+  img[loading="lazy"]{content-visibility:auto}
+}
+/* client vocabulary: raw enums and authority class names must never be visually dominant */
+.cka-answer-state,.cka-unknown-state{display:none!important}
+.cka-source-group>h3{font-size:.78rem;text-transform:none;letter-spacing:.02em;color:var(--cps-muted);font-weight:600}
+/* reduce above-the-fold media cost */
+@media(max-width:600px){
+  .ks-feature,.rs-visual-section,.sc-feature{content-visibility:auto;contain-intrinsic-size:1px 700px}
+  figure img[loading="lazy"]{max-height:70vh;object-fit:cover}
+}
