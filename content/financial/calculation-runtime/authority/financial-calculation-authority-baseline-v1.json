@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "PHI-OS-FCR-W0-AUTHORITY-BASELINE-v1.0.0",
+  "phase": "FCR",
+  "work": "FCR-W0",
+  "baselineCommit": "3e4f22c",
+  "status": "ACTIVE_CANONICAL_CALCULATION_AUTHORITY",
+  "authority": {
+    "runtimeCode": "FCR",
+    "owns": [
+      "DETERMINISTIC_FINANCIAL_CALCULATION",
+      "FINANCIAL_CALCULATION_RESULT_IDENTITY",
+      "FINANCIAL_CALCULATION_TRACE",
+      "VERSIONED_FINANCIAL_ASSUMPTION_BINDING",
+      "FINANCIAL_SCENARIO_PROJECTION"
+    ],
+    "doesNotOwn": [
+      "CANONICAL_FINANCIAL_FACTS",
+      "FINANCIAL_ANALYSIS",
+      "FINANCIAL_ADVICE",
+      "PROFESSIONAL_JUDGMENT",
+      "PROFESSIONAL_RECOMMENDATION",
+      "PRODUCT_SELECTION",
+      "LEGAL_JUDGMENT",
+      "ESTATE_DISTRIBUTION_INSTRUCTION"
+    ]
+  },
+  "reconciliation": {
+    "FDR": {
+      "path": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+      "relationship": "SOLE_CANONICAL_FINANCIAL_FACT_INPUT_AUTHORITY",
+      "mutationAllowed": false
+    },
+    "legacyFinancialCalculation": {
+      "paths": [
+        "content/registry/financial-formula-registry.json",
+        "functions/professional/financial/financial-calculation-layer.js"
+      ],
+      "relationship": "COMPATIBILITY_PREDECESSOR_NOT_FCR_AUTHORITY",
+      "silentReplacementAllowed": false
+    },
+    "legacyFinancialAssumptions": {
+      "path": "content/registry/financial-assumption-registry.json",
+      "relationship": "PREDECESSOR_TYPE_REGISTRY_BOUND_AND_EXTENDED_BY_FCR",
+      "globalDefaultsAdopted": false
+    },
+    "MPASharedCalculationGovernance": {
+      "path": "content/professional/method-production-activation/contracts/mpa-deterministic-calculation-contract-v1.json",
+      "relationship": "DETERMINISM_AND_LINEAGE_GOVERNANCE_PATTERN_ONLY",
+      "financialFormulaAuthorityGranted": false
+    },
+    "NUM": {
+      "path": "content/professional/core-method-runtime/num-runtime-manifest-v1.json",
+      "relationship": "NO_FINANCIAL_METHOD_AUTHORITY",
+      "reusedAlgorithms": false
+    }
+  },
+  "knownUpstreamGap": {
+    "code": "FDR_GUARANTEE_SNAPSHOT_MEMBERSHIP",
+    "fact": "FDR-W7 guarantee contract exists, but guarantees are not a required Financial Reality top-level field in the frozen FDR-W1 contract.",
+    "fcrPolicy": "If an entity references a guarantee but the structured guarantee object is absent from the FDR snapshot payload, contingent exposure returns UNKNOWN; FCR never invents zero.",
+    "fdrMutationPerformed": false
+  },
+  "invariants": {
+    "fdrFactsMutated": false,
+    "analysisAllowed": false,
+    "adviceAllowed": false,
+    "professionalJudgmentAllowed": false,
+    "hiddenAssumptionsAllowed": false,
+    "missingMayBecomeZero": false,
+    "rangeMayCollapseToMidpoint": false,
+    "deterministic": true
+  },
+  "frozenPredecessors": [
+    {
+      "code": "FDR_FREEZE",
+      "path": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+      "sha256": "921a5cbc4ff0102d4d26bd37d71a5fafcabca82bd608e6bc985660bb000ac1b1"
+    },
+    {
+      "code": "LEGACY_FINANCIAL_FORMULA",
+      "path": "content/registry/financial-formula-registry.json",
+      "sha256": "ebcdc35619679bd974c97159ececb266c266f6cbefd2a227063e65da321361db"
+    },
+    {
+      "code": "LEGACY_FINANCIAL_ASSUMPTION",
+      "path": "content/registry/financial-assumption-registry.json",
+      "sha256": "a776f7b831d1ca5c513039d4f81fa0f24a57b9d55a71aae44cd6ea80cfd1d05c"
+    },
+    {
+      "code": "LEGACY_FINANCIAL_CALCULATION_LAYER",
+      "path": "functions/professional/financial/financial-calculation-layer.js",
+      "sha256": "6e4fc8da92c17c0b25feb24d9dbb09e1d6fab1cbe5c225b20da1b7acfd92536e"
+    },
+    {
+      "code": "MPA_DETERMINISTIC_CALCULATION",
+      "path": "content/professional/method-production-activation/contracts/mpa-deterministic-calculation-contract-v1.json",
+      "sha256": "561a432aff013a293a9958869a2f7452c7fc3afd0a2fecf08182d288b7aba2cd"
+    },
+    {
+      "code": "MPA_CALCULATION_DATA_AUTHORITY",
+      "path": "content/professional/method-production-activation/contracts/mpa-calculation-data-authority-v1.json",
+      "sha256": "fce7d73838bd5230f8df150086cd78ada4c3ea6a29d67000bf6d739b09b6a3fd"
+    },
+    {
+      "code": "NUM_RUNTIME",
+      "path": "content/professional/core-method-runtime/num-runtime-manifest-v1.json",
+      "sha256": "1616f582852d000efd56ea16cc62f0c174bee8ca6d7831517f7b0db6a75504d6"
+    }
+  ]
+}

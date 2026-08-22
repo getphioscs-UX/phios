@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "PHI-OS-FCR-W3-W16-ENGINE-REGISTRY-v1.0.0",
+  "status": "ACTIVE",
+  "authorityOwner": "FCR",
+  "runtime": "functions/financial/calculation-runtime/financial-calculation-runtime.js",
+  "entries": [
+    {
+      "engineCode": "CURRENCY",
+      "work": "FCR-W3",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "NET_WORTH",
+      "work": "FCR-W4",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "LIQUIDITY",
+      "work": "FCR-W5",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "CASH_FLOW",
+      "work": "FCR-W6",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "DEBT",
+      "work": "FCR-W7",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "CONTINGENT_EXPOSURE",
+      "work": "FCR-W8",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "EMERGENCY_RESERVE",
+      "work": "FCR-W9",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "PROTECTION_NEED",
+      "work": "FCR-W10",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "EDUCATION_FUNDING",
+      "work": "FCR-W11",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "RETIREMENT",
+      "work": "FCR-W12",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "INVESTMENT_PROJECTION",
+      "work": "FCR-W13",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "ESTATE_LIQUIDITY",
+      "work": "FCR-W14",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "BUSINESS_WEALTH",
+      "work": "FCR-W15",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    },
+    {
+      "engineCode": "ALLOCATION",
+      "work": "FCR-W16",
+      "deterministic": true,
+      "createsAnalysis": false,
+      "createsAdvice": false,
+      "createsProfessionalJudgment": false
+    }
+  ],
+  "governedPolicies": {
+    "liquidAssetTypes": [
+      "CASH",
+      "BANK_ACCOUNT",
+      "FIXED_DEPOSIT"
+    ],
+    "allocationBuckets": {
+      "cash": [
+        "CASH",
+        "BANK_ACCOUNT",
+        "FIXED_DEPOSIT"
+      ],
+      "property": [
+        "PROPERTY"
+      ],
+      "business": [
+        "PRIVATE_COMPANY_SHARE",
+        "BUSINESS_INTEREST"
+      ],
+      "investment": [
+        "UNIT_TRUST",
+        "LISTED_SECURITY",
+        "DIGITAL_ASSET"
+      ],
+      "retirement": [
+        "EPF",
+        "PRS"
+      ]
+    }
+  },
+  "governedConstants": {
+    "MONTHS_PER_YEAR": 12,
+    "PERCENT_SCALE": 100,
+    "MEAN_DAYS_PER_YEAR_FOR_HORIZON": 365.2425,
+    "MONEY_ROUNDING_DECIMALS": 8,
+    "purpose": "mathematical/calendar conventions; not financial assumptions"
+  }
+}

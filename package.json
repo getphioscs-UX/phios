@@ -1385,7 +1385,15 @@
     "check:part-k-historical": "node scripts/check-part-k-final-freeze.mjs",
     "check:service-continuity-batch3": "node scripts/check-service-continuity-batch3.mjs",
     "check:runtime-frontend-parity": "node scripts/check-runtime-frontend-parity.mjs",
-    "check:pcm": "npm run check:runtime-frontend-parity"
+    "check:pcm": "npm run check:runtime-frontend-parity",
+    "check:fcr-authority": "node scripts/check-fcr-authority.mjs",
+    "check:fcr-contracts": "node scripts/check-fcr-contracts.mjs",
+    "check:fcr-runtime": "node scripts/check-fcr-runtime.mjs",
+    "check:fcr-scenarios": "node scripts/check-fcr-scenarios.mjs",
+    "check:fcr-determinism": "node scripts/check-fcr-determinism.mjs",
+    "check:fcr-fdr-boundary": "node scripts/check-fcr-fdr-boundary.mjs",
+    "check:fcr-freeze": "node scripts/check-fcr-freeze.mjs",
+    "check:fcr": "node scripts/check-fcr-authority.mjs && node scripts/check-fcr-contracts.mjs && node scripts/check-fcr-runtime.mjs && node scripts/check-fcr-scenarios.mjs && node scripts/check-fcr-determinism.mjs && node scripts/check-fcr-fdr-boundary.mjs && node scripts/check-fcr-freeze.mjs"
   },
   "type": "module",
   "dependencies": {

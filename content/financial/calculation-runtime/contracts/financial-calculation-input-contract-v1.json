@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-FCR-W1-INPUT-CONTRACT-v1.0.0",
+  "work": "FCR-W1",
+  "status": "ACTIVE",
+  "authorityOwner": "FCR",
+  "requiredFields": [
+    "calculationId",
+    "scenarioCode",
+    "fdrSnapshot",
+    "assumptionSet"
+  ],
+  "allowedControlFields": [
+    "runtimeCode",
+    "requestedEngines"
+  ],
+  "numericAuthorityInputs": [
+    "fdrSnapshot",
+    "assumptionSet"
+  ],
+  "rules": {
+    "onlyFdrSnapshotPlusVersionedAssumptionsProvideNumericAuthority": true,
+    "liveMutableFinancialRealityAllowed": false,
+    "snapshotDigestRequired": true,
+    "assumptionDigestRequiredOrDeterministicallyDerived": true,
+    "missingInputMayBeInvented": false,
+    "professionalOverrideAllowed": false,
+    "promptArithmeticAllowed": false
+  }
+}
