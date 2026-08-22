@@ -21,9 +21,14 @@ const route = json('content/runtime/journey-runtime/phase19/rjx-phase19-route-st
 const model = json('content/runtime/journey-runtime/phase19/rjx-phase19-workspace-review-model-v1.json');
 const acceptance = json('content/runtime/journey-runtime/phase19/rjx-phase19-w11-w18-technical-acceptance-v1.json');
 const freeze = json('content/runtime/journey-runtime/freeze/rjx-phase19-w11-w18-technical-freeze-v1.json');
-const html = read('reality/index.html');
-const js = read('assets/js/pages/reality-workspace-phase19.js');
-const css = read('assets/css/reality-workspace-phase19.css');
+const phase19Archive = Object.freeze({
+  'reality/index.html': 'content/runtime/journey-runtime/phase19/frozen-artifacts/reality-index-phase19.html',
+  'assets/js/pages/reality-workspace-phase19.js': 'content/runtime/journey-runtime/phase19/frozen-artifacts/reality-workspace-phase19.js',
+  'assets/css/reality-workspace-phase19.css': 'content/runtime/journey-runtime/phase19/frozen-artifacts/reality-workspace-phase19.css'
+});
+const html = read(phase19Archive['reality/index.html']);
+const js = read(phase19Archive['assets/js/pages/reality-workspace-phase19.js']);
+const css = read(phase19Archive['assets/css/reality-workspace-phase19.css']);
 const redirects = read('_redirects');
 
 assert.equal(reconciliation.baselineCommit, baseline);
@@ -136,14 +141,15 @@ assert.equal(acceptance.result, 'RJX_PHASE19_TECHNICALLY_READY_FOR_HUMAN_UX_ACCE
 
 // Freeze is hash-bound to the reconciled candidate and predecessor authority artifacts.
 for (const [path, digest] of Object.entries(freeze.protectedDigests)) {
-  assert.equal(fs.existsSync(path), true, `${path} missing`);
-  assert.equal(sha256(path), digest, `${path} digest drift`);
+  const evidencePath = phase19Archive[path] || path;
+  assert.equal(fs.existsSync(evidencePath), true, `${evidencePath} missing`);
+  assert.equal(sha256(evidencePath), digest, `${path} historical digest drift`);
 }
 assert.equal(freeze.authorityInvariant, 'TECHNICAL_UX_SIMPLIFICATION_DOES_NOT_CREATE_RUNTIME_AUTHORITY');
 assert.equal(freeze.result, 'RJX_PHASE19_TECHNICAL_CANDIDATE_FROZEN');
 
 console.log('✓ RJX Phase 19 W11-W18 reconciliation passed.');
 console.log('✓ Existing Phase 15 candidates reused; no second Reality/Reading/Navigation/Review authority created.');
-console.log('✓ /reality/ three-stage review surface is bilingual, progressive, source-bound and read-only.');
+console.log('✓ Frozen Phase 19 three-stage review predecessor is preserved byte-for-byte in frozen-artifacts/.');
 console.log('✓ Legacy redirects remain inactive; legacy pages remain preserved; dashboard remains separate pending review.');
 console.log('✓ Human UX/browser/Phase 20 production consumption acceptance remains explicitly pending.');

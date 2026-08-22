@@ -3,48 +3,229 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <title>PHI OS Reality Workspace — Phase 19 Review</title>
-  <link rel="stylesheet" href="/assets/css/reality-workspace-phase19.css">
+  <meta name="description" content="Use the PHI OS Reality Workspace to understand one changing situation, compare bounded directions, and return to review what actually changed.">
+  <meta name="robots" content="index,follow">
+  <title>Reality Workspace — PHI OS</title>
+  <link rel="canonical" href="/reality/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/design/foundation.css">
+  <link rel="stylesheet" href="/assets/css/design/typography.css">
+  <link rel="stylesheet" href="/assets/css/design/layout.css">
+  <link rel="stylesheet" href="/assets/css/design/components.css">
+  <link rel="stylesheet" href="/assets/css/design/motion.css">
+  <link rel="stylesheet" href="/assets/css/public-experience.css">
+  <link rel="stylesheet" href="/assets/css/reality-workspace.css">
+  <link rel="stylesheet" href="/assets/css/i18n.css">
 </head>
-<body>
-  <main class="rjx19-shell" data-rjx19-review-only="true">
-    <header class="rjx19-header">
-      <div class="rjx19-header__topline">
-        <p class="rjx19-eyebrow" data-copy="eyebrow"></p>
-        <div class="rjx19-locale" role="group" aria-label="Language">
-          <button type="button" data-locale="en" aria-pressed="true">EN</button>
-          <button type="button" data-locale="zh-Hans" aria-pressed="false">简中</button>
-        </div>
-      </div>
-      <h1 data-copy="title"></h1>
-      <p class="rjx19-lede" data-copy="lede"></p>
-      <div class="rjx19-boundary" role="note" data-copy="boundary"></div>
-      <nav class="rjx19-stages" aria-label="Reality workspace stages">
-        <button type="button" data-stage="UNDERSTAND" class="is-active" aria-current="step"></button>
-        <button type="button" data-stage="CHOOSE"></button>
-        <button type="button" data-stage="REVIEW"></button>
-      </nav>
-    </header>
+<body class="public-page reality-workspace-page" data-page="reality-workspace" data-public-section="reality" data-public-visual-surface="REALITY_WORKSPACE">
+  <a class="phi-skip-link" href="#realityWorkspaceMain" data-rw-copy="skip">Skip to Reality Workspace</a>
+  <div data-public-header-placeholder></div>
 
-    <section class="rjx19-toolbar" aria-label="Review controls">
-      <div>
-        <span class="rjx19-toolbar__label" data-copy="complexityLabel"></span>
-        <div class="rjx19-segmented" role="group" aria-label="Case complexity">
-          <button type="button" data-complexity="SIMPLE" class="is-active" aria-pressed="true"></button>
-          <button type="button" data-complexity="COMPLEX" aria-pressed="false"></button>
+  <main id="realityWorkspaceMain">
+    <section class="rw-hero" aria-labelledby="rwHeroTitle" data-rw-visual="HERO-006">
+      <div class="rw-hero__media" data-client-visual-hero="HERO-006" aria-hidden="true">
+        <img data-rw-asset="HERO-006" alt="" decoding="async" fetchpriority="high">
+        <div class="rw-hero__wash"></div>
+      </div>
+      <div class="rw-shell rw-hero__content">
+        <p class="rw-eyebrow" data-rw-copy="heroEyebrow">Reality Workspace</p>
+        <h1 id="rwHeroTitle" data-rw-copy="heroTitle">See your reality clearly enough to move.</h1>
+        <p class="rw-hero__lead" data-rw-copy="heroLead">Bring one changing situation into focus. Separate what is known from what is uncertain, compare possible directions, then return to see what actually changed.</p>
+        <div class="rw-actions">
+          <a id="rwPrimaryAction" class="public-button public-button--primary" href="/reality-entry">
+            <span data-rw-copy="start">Start with my reality</span><span aria-hidden="true">→</span>
+          </a>
+          <a class="rw-text-link" href="#how-it-works" data-rw-copy="howItWorks">How Reality Workspace works</a>
         </div>
       </div>
-      <p class="rjx19-toolbar__hint" data-copy="complexityHint"></p>
     </section>
 
-    <section id="workspace" class="rjx19-workspace" aria-live="polite" aria-busy="true"></section>
+    <section class="rw-section rw-section--summary" aria-labelledby="currentRealityTitle">
+      <div class="rw-shell">
+        <div class="rw-current" data-rw-state="empty">
+          <div class="rw-current__head">
+            <div>
+              <p class="rw-eyebrow" data-rw-copy="currentEyebrow">Your current reality</p>
+              <h2 id="currentRealityTitle" data-rw-current-title data-rw-copy="emptyRealityTitle">No current Reality yet.</h2>
+              <p class="rw-current__summary" data-rw-current-summary data-rw-copy="emptyRealitySummary">Start with one change you can describe. You do not need a complete explanation.</p>
+            </div>
+            <a class="rw-round-link" data-rw-resume href="/reality-entry" aria-label="Continue current reality"><span data-rw-copy="continue">Continue</span><span aria-hidden="true">→</span></a>
+          </div>
+          <dl class="rw-current__facts">
+            <div><dt data-rw-copy="currentFocus">Current focus</dt><dd data-rw-focus data-rw-copy="notEstablished">Not established</dd></div>
+            <div><dt data-rw-copy="stillUnresolved">Still unresolved</dt><dd data-rw-unknowns data-rw-copy="notEstablished">Not established</dd></div>
+            <div><dt data-rw-copy="lastReviewed">Last updated</dt><dd data-rw-updated data-rw-copy="notEstablished">Not established</dd></div>
+            <div><dt data-rw-copy="next">Next</dt><dd data-rw-next data-rw-copy="beginWithSituation">Describe what is changing</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
 
-    <footer class="rjx19-footer">
-      <p data-copy="footer"></p>
-      <p><code>/reality/</code> · <span data-copy="redirectState"></span></p>
-    </footer>
+    <section class="rw-stage-shell" aria-label="Reality Workspace stages">
+      <div class="rw-shell">
+        <nav class="rw-stage-nav" aria-label="Reality Workspace stages">
+          <button type="button" data-rw-stage="UNDERSTAND" class="is-active" aria-current="step"><span>01</span><strong data-rw-copy="UNDERSTAND">Understand</strong></button>
+          <span class="rw-stage-nav__line" aria-hidden="true"></span>
+          <button type="button" data-rw-stage="CHOOSE"><span>02</span><strong data-rw-copy="CHOOSE">Choose</strong></button>
+          <span class="rw-stage-nav__line" aria-hidden="true"></span>
+          <button type="button" data-rw-stage="REVIEW"><span>03</span><strong data-rw-copy="REVIEW">Review</strong></button>
+        </nav>
+      </div>
+    </section>
+
+    <section class="rw-section rw-stage-panel" data-rw-panel="UNDERSTAND" aria-labelledby="understandTitle">
+      <div class="rw-shell">
+        <header class="rw-section-heading">
+          <p class="rw-eyebrow" data-rw-copy="understandEyebrow">Understand</p>
+          <h2 id="understandTitle" data-rw-copy="understandTitle">Start with what is supported now.</h2>
+          <p data-rw-copy="understandLead">Keep observations, interpretations and unknowns visibly separate so that the next step does not depend on false certainty.</p>
+        </header>
+
+        <div class="rw-primary-grid">
+          <article class="rw-feature-card rw-feature-card--situation">
+            <span class="rw-evidence-tag is-observed" data-rw-copy="observed">Observed</span>
+            <p class="rw-card-kicker" data-rw-copy="yourSituation">Your situation</p>
+            <h3 data-rw-situation-title data-rw-copy="noSituation">No situation has been recorded yet.</h3>
+            <p data-rw-situation-text data-rw-copy="noSituationHelp">Begin with one recent change and describe what it affects.</p>
+          </article>
+          <article class="rw-feature-card rw-feature-card--reading">
+            <span class="rw-evidence-tag is-inferred" data-rw-copy="inferred">Inferred</span>
+            <p class="rw-card-kicker" data-rw-copy="currentReading">Current reading</p>
+            <h3 data-rw-reading-title data-rw-copy="readingNotReady">A reading is not ready yet.</h3>
+            <p data-rw-reading-text data-rw-copy="readingNotReadyHelp">Once your situation has enough support, the current Reading will appear here with its limits visible.</p>
+          </article>
+        </div>
+
+        <div class="rw-map-grid" aria-label="Current Reality map">
+          <article><span class="rw-evidence-tag is-earlier" data-rw-copy="earlier">Earlier</span><h3 data-rw-copy="whatChanged">What changed</h3><p data-rw-changed data-rw-copy="notEstablished">Not established</p></article>
+          <article><span class="rw-evidence-tag is-inferred" data-rw-copy="inferred">Inferred</span><h3 data-rw-copy="whatMatters">What appears important</h3><p data-rw-matters data-rw-copy="notEstablished">Not established</p></article>
+          <article><span class="rw-evidence-tag is-possible" data-rw-copy="possible">Possible</span><h3 data-rw-copy="whatConnected">What may be connected</h3><p data-rw-connected data-rw-copy="notEstablished">Not established</p></article>
+          <article><span class="rw-evidence-tag is-unknown" data-rw-copy="unknown">Unknown</span><h3 data-rw-copy="stillUnknown">Still unknown</h3><p data-rw-still-unknown data-rw-copy="notEstablished">Not established</p></article>
+        </div>
+
+        <details class="rw-complex" data-rw-complex>
+          <summary><span data-rw-copy="connectedReality">View connected Reality</span><span aria-hidden="true">＋</span></summary>
+          <div class="rw-complex__grid">
+            <section aria-labelledby="relationshipsTitle"><h3 id="relationshipsTitle" data-rw-copy="relationships">Relationships</h3><div data-rw-relationships class="rw-relationship-list"><p data-rw-copy="noRelationships">No connected relationships are available yet.</p></div></section>
+            <section aria-labelledby="timelineTitle"><h3 id="timelineTitle" data-rw-copy="timeline">Timeline</h3><ol data-rw-timeline class="rw-timeline"><li data-rw-copy="noTimeline">No Reality timeline is available yet.</li></ol></section>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="rw-visual-break" aria-labelledby="continuityVisualTitle" data-rw-visual="ILL-010">
+      <div class="rw-shell rw-visual-break__grid">
+        <div class="rw-visual-break__copy">
+          <p class="rw-eyebrow" data-rw-copy="continuityEyebrow">Reality keeps moving</p>
+          <h2 id="continuityVisualTitle" data-rw-copy="continuityVisualTitle">A useful reading should be able to change when reality changes.</h2>
+          <p data-rw-copy="continuityVisualLead">Observe what is here now, choose a direction you can review, act in the real world, then return with what actually happened.</p>
+        </div>
+        <figure class="rw-visual-break__media">
+          <img data-rw-asset="ILL-010" alt="Reality Workspace continuity" loading="lazy" decoding="async">
+          <figcaption data-rw-copy="continuityCaption">Observation, direction, real-world change and return stay connected without turning the illustration into a technical diagram.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="rw-section rw-stage-panel" data-rw-panel="CHOOSE" hidden aria-labelledby="chooseTitle">
+      <div class="rw-shell">
+        <header class="rw-section-heading">
+          <p class="rw-eyebrow" data-rw-copy="chooseEyebrow">Choose</p>
+          <h2 id="chooseTitle" data-rw-copy="chooseTitle">Compare directions without handing over the decision.</h2>
+          <p data-rw-copy="chooseLead">Each direction should show its reason, constraints, evidence to watch and review point. PHI OS does not automatically select the final action for you.</p>
+        </header>
+        <div data-rw-options class="rw-option-grid"></div>
+        <div data-rw-options-empty class="rw-empty-card">
+          <h3 data-rw-copy="optionsNotReady">Directions are not ready yet.</h3>
+          <p data-rw-copy="optionsNotReadyHelp">Complete the current Reading first. Existing Navigation will appear here when bounded paths are available.</p>
+          <a class="public-button" href="/reality-reading"><span data-rw-copy="continueReading">Continue Reading</span><span aria-hidden="true">→</span></a>
+        </div>
+
+        <article class="rw-next-step" data-rw-next-step hidden>
+          <div><p class="rw-eyebrow" data-rw-copy="myNextStep">My next step</p><h3 data-rw-selected-title></h3><p data-rw-selected-action></p></div>
+          <dl>
+            <div><dt data-rw-copy="lookFor">I will look for</dt><dd data-rw-selected-evidence></dd></div>
+            <div><dt data-rw-copy="reviewWhen">Review when</dt><dd data-rw-selected-review></dd></div>
+          </dl>
+          <a class="public-button public-button--primary" href="/reality-navigation"><span data-rw-copy="reviewChoice">Review this choice</span><span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="rw-section rw-stage-panel" data-rw-panel="REVIEW" hidden aria-labelledby="reviewTitle">
+      <div class="rw-shell">
+        <header class="rw-section-heading">
+          <p class="rw-eyebrow" data-rw-copy="reviewEyebrow">Review</p>
+          <h2 id="reviewTitle" data-rw-copy="reviewTitle">Return with what actually happened.</h2>
+          <p data-rw-copy="reviewLead">Compare the signal you expected with what you observed. A later Reality can differ from an earlier one without rewriting the earlier record.</p>
+        </header>
+
+        <div class="rw-review-grid">
+          <article><p class="rw-card-kicker" data-rw-copy="expected">Expected</p><h3 data-rw-expected data-rw-copy="notEstablished">Not established</h3></article>
+          <article><p class="rw-card-kicker" data-rw-copy="observedOutcome">Observed</p><h3 data-rw-observed-outcome data-rw-copy="notEstablished">Not established</h3></article>
+          <article><p class="rw-card-kicker" data-rw-copy="changed">Changed</p><h3 data-rw-review-changed data-rw-copy="notEstablished">Not established</h3></article>
+          <article><p class="rw-card-kicker" data-rw-copy="unchanged">Unchanged</p><h3 data-rw-review-unchanged data-rw-copy="notEstablished">Not established</h3></article>
+        </div>
+
+        <div class="rw-review-action">
+          <div><h3 data-rw-copy="reviewActionTitle">Ready to record what happened?</h3><p data-rw-copy="reviewActionCopy">Use Review to record what happened. Opening this workspace alone does not create a new Reality or rewrite history.</p></div>
+          <a class="public-button" href="/reality-review"><span data-rw-copy="openReview">Open Review</span><span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="rw-section rw-how" aria-labelledby="howTitle">
+      <div class="rw-shell rw-how__grid">
+        <div class="rw-section-heading">
+          <p class="rw-eyebrow" data-rw-copy="howEyebrow">How the workspace moves</p>
+          <h2 id="howTitle" data-rw-copy="howTitle">One Reality can be understood, acted on and revisited.</h2>
+          <p data-rw-copy="howLead">The workspace presents a simple three-stage client view while more detailed evidence, reading, navigation and continuity processing stays governed behind it.</p>
+        </div>
+        <figure class="rw-how__figure" data-rw-visual="FIG-012">
+          <img data-rw-asset="FIG-012" alt="Reality Journey overview" loading="lazy" decoding="async">
+          <figcaption data-rw-copy="figureCaption">Reality Journey structure</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="rw-continuity" aria-labelledby="realityContinuityTitle">
+      <div class="rw-shell rw-continuity__grid">
+        <div>
+          <p class="rw-eyebrow" data-rw-copy="continuityBandEyebrow">Reality continuity</p>
+          <h2 id="realityContinuityTitle" data-rw-copy="continuityBandTitle">Keep the past. Record the difference. Continue from what is now true.</h2>
+          <p data-rw-copy="continuityBandLead">Review creates a successor only through an explicit choice. Earlier Reality remains available as history rather than being silently overwritten.</p>
+          <div class="rw-version-flow" aria-label="Reality continuity">
+            <span data-rw-version-before>Reality earlier</span><b aria-hidden="true">→</b><span data-rw-version-diff data-rw-copy="whatChangedShort">What changed</span><b aria-hidden="true">→</b><span data-rw-version-next>Reality next</span>
+          </div>
+          <div class="rw-actions"><a data-rw-continuity-action class="public-button public-button--primary" href="/my-reality#continuity"><span data-rw-copy="continueReality">Continue this Reality</span><span aria-hidden="true">→</span></a></div>
+        </div>
+        <figure class="rw-continuity__figure" data-rw-visual="FIG-020">
+          <img data-rw-asset="FIG-020" alt="Feedback and continuity" loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <section class="rw-section rw-ask" aria-labelledby="askRealityTitle">
+      <div class="rw-shell rw-ask__grid">
+        <div>
+          <p class="rw-eyebrow" data-rw-copy="askEyebrow">Ask PHI OS</p>
+          <h2 id="askRealityTitle" data-rw-copy="askTitle">Ask about the Reality you are viewing.</h2>
+          <p data-rw-copy="askLead">You can inspect what context would be carried forward before opening Ask PHI OS.</p>
+        </div>
+        <div class="rw-ask__card">
+          <details><summary data-rw-copy="contextSummary">See what context would be used</summary><ul data-rw-context-list><li data-rw-copy="contextNone">No private Reality context is currently available.</li></ul></details>
+          <a data-rw-ask class="public-button public-button--primary" href="/knowledge-search?entrySurface=REALITY_WORKSPACE&amp;mode=GLOBAL"><span data-rw-copy="askAction">Ask PHI OS</span><span aria-hidden="true">→</span></a>
+          <p class="rw-ask__boundary" data-rw-copy="askBoundary">Other saved Realities, personal method results and account history are not silently included.</p>
+        </div>
+      </div>
+    </section>
   </main>
-  <script type="module" src="/assets/js/pages/reality-workspace-phase19.js"></script>
+
+  <div data-public-footer-placeholder></div>
+  <script type="module" src="/assets/js/public-shell.js"></script>
+  <script type="module" src="/assets/js/pages/reality-workspace.js"></script>
 </body>
 </html>

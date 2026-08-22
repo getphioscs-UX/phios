@@ -19,16 +19,23 @@ const preview = text(previewPath);
 const redirects = text('_redirects');
 const internalReality = text('reality/index.html');
 const compatibilityEntry = text('reality-entry.html');
+const routePromotion = json('content/web-production/successors/mir-11-route-promotion-successor-v1.json');
+const canonicalReality = routePromotion.routes.find(item => item.capability === 'REALITY_WORKSPACE');
 
 assert.equal(contract.work, 'PXR-P0-P3');
 assert.equal(contract.p0.realityReviewOnlyRoutePubliclyRedirected, true);
 assert.equal(contract.p0.bookPreviewBrokenNativeImageForbidden, true);
 assert.equal(contract.p0.rawBooleanStatusForbidden, true);
-assert.match(redirects, /^\/reality\s+\/reality-journey\s+308$/m);
-assert.match(redirects, /^\/reality\/\s+\/reality-journey\s+308$/m);
-assert.match(internalReality, /noindex,nofollow/);
-assert.match(internalReality, /data-rjx19-review-only="true"/);
-assert.match(compatibilityEntry, /url=\/reality\//); // historical shell preserved; public /reality now redirects.
+assert.equal(canonicalReality?.canonicalRoute, '/reality/');
+assert.equal(canonicalReality?.state, 'CURRENT_CANONICAL_WORKSPACE_CONFIRMED');
+assert.doesNotMatch(redirects, /^\/reality\/?\s+/m);
+assert.doesNotMatch(internalReality, /noindex,nofollow/);
+assert.doesNotMatch(internalReality, /data-rjx19-review-only="true"/);
+assert.match(internalReality, /assets\/js\/pages\/reality-workspace\.js/);
+assert.match(internalReality, /data-rw-stage="UNDERSTAND"/);
+assert.match(internalReality, /data-rw-stage="CHOOSE"/);
+assert.match(internalReality, /data-rw-stage="REVIEW"/);
+assert.match(compatibilityEntry, /url=\/reality\//); // historical shell now hands off to the promoted canonical workspace.
 
 assert.match(resolver, /resolvePublicAssetGroupMember/);
 assert.match(resolver, /REGISTERED_GROUP_MEMBER_RUNTIME_PROBE_REQUIRED/);
@@ -50,4 +57,4 @@ assert.match(runtime, /customerSafeText/);
 assert.match(runtime, /data\.pxrHidden|dataset\.pxrHidden/);
 
 console.log('✓ PXR-P0 Public Layer Emergency Cleanup passed.');
-console.log('  /reality review-only route is shielded by public redirect; Book Preview uses the registered R2 collection path with runtime image-load probing; public technical/raw state guard is active.');
+console.log('  Historical PXR redirect shielding is preserved as predecessor evidence; MIR-11 promotes /reality/ to the canonical customer workspace while Book Preview and technical/raw state guards remain active.');

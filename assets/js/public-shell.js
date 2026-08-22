@@ -206,6 +206,8 @@ function activeSectionFromPage() {
   if (path === '/explore' || path === '/thesis') return 'knowledge';
   if (
     path === '/free-observation' ||
+    path === '/reality' ||
+    path === '/reality/' ||
     path === '/reality-journey' ||
     path === '/reality-dashboard' ||
     path === '/reality-entry' ||
