@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "PHI-OS-PFR-W17-CUSTOMER-DISCUSSION-v1.0.0",
+  "work": "PFR-W17",
+  "requiredFields": [
+    "discussionId",
+    "discussedAt",
+    "questions",
+    "customerPreference",
+    "rejectedRecommendations",
+    "acceptedRecommendations",
+    "discussionDigest"
+  ],
+  "rules": {
+    "customerPreferenceIsRecordedNotInvented": true,
+    "rejectedRecommendationRemainsInLineage": true,
+    "discussionDoesNotMutateRecommendation": true
+  }
+}

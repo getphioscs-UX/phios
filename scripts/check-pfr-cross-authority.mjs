@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {readJson,read,buildPfrBase,reviewFinancialFact,reviewFinancialCalculation,reviewFinancialFinding,fullSignedContribution} from './lib/pfr/pfr-check-lib.mjs';
+const b=await buildPfrBase();
+const fdr=structuredClone(b.upstream.input.fdrSnapshot), fcr=structuredClone(b.upstream.input.fcrResult), far=structuredClone(b.upstream.input.farResult);
+await reviewFinancialFact(b.caseInReview,b.upstream.input.fdrSnapshot,{reviewId:'X-F',professionalId:b.professionalId,factReference:b.factReference,action:'QUESTION',reviewedAt:'2026-08-23T09:00:00Z'});
+await reviewFinancialCalculation(b.caseInReview,b.upstream.input.fcrResult,{reviewId:'X-C',professionalId:b.professionalId,calculationReference:b.calculationReference,action:'REQUEST_RECALCULATION',reviewedAt:'2026-08-23T09:01:00Z'});
+await reviewFinancialFinding(b.caseInReview,b.upstream.input.farResult,{reviewId:'X-A',professionalId:b.professionalId,findingReference:b.findingReference,action:'REJECT',reviewedAt:'2026-08-23T09:02:00Z'});
+assert.deepEqual(b.upstream.input.fdrSnapshot,fdr); assert.deepEqual(b.upstream.input.fcrResult,fcr); assert.deepEqual(b.upstream.input.farResult,far);
+const x=await fullSignedContribution(); const payload=JSON.stringify(x.contribution); for(const forbidden of ['reportRelease','pdfBytes','renderedPdf','RR_FINAL','customerVisibleRelease']) assert.equal(payload.includes(forbidden),false);
+const boundary=readJson('content/financial/professional-review/contracts/pfr-cross-authority-boundary-contract-v1.json'); assert.equal(boundary.rules.pfrOwnsReport,false); assert.equal(boundary.routes.FACT_CORRECTION,'FDR_CHANGE_EVENT'); assert.equal(boundary.routes.CALCULATION_CHALLENGE,'FCR_RERUN');
+const binding=readJson('content/financial/professional-review/bindings/pfr-hfp-contribution-binding-v1.json'); assert.equal(binding.rules.hfpFrozenArtifactsMutated,false); assert.equal(binding.rules.hfpBaseRuntimeAutoPromoted,false);
+const runtime=read('functions/financial/professional-review/professional-financial-review-runtime.js'); assert.doesNotMatch(runtime,/writeFile|UPDATE\s+financial|INSERT\s+INTO|renderPdf|releaseReport/);
+console.log('✓ PFR-W23 cross-authority boundary passed.');
+console.log('  FDR/FCR/FAR remain immutable; RR release and PDF presentation remain outside PFR.');

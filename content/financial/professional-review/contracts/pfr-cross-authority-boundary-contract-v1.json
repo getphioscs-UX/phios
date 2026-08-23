@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-PFR-W23-CROSS-AUTHORITY-v1.0.0",
+  "work": "PFR-W23",
+  "forbiddenMutations": [
+    "FDR_FACT",
+    "FCR_RESULT",
+    "FAR_FINDING",
+    "RR_FINAL_STATE",
+    "RR_RELEASE",
+    "PDF_RENDER"
+  ],
+  "routes": {
+    "FACT_CORRECTION": "FDR_CHANGE_EVENT",
+    "CALCULATION_CHALLENGE": "FCR_RERUN",
+    "FINDING_DISPOSITION": "PFR_ANNOTATION_ONLY",
+    "REPORT_ASSEMBLY": "RR",
+    "REPORT_PRESENTATION": "CPR_CUST"
+  },
+  "rules": {
+    "pfrOwnsReport": false,
+    "pfrOwnsPdf": false,
+    "pfrOwnsFact": false,
+    "pfrOwnsCalculation": false,
+    "pfrOwnsFinding": false
+  }
+}

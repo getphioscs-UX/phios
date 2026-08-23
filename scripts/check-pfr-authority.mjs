@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readJson,read} from './lib/pfr/pfr-check-lib.mjs';
+const a=readJson('content/financial/professional-review/authority/financial-professional-authority-successor-v1.json');
+assert.equal(a.baselineCommit,'ec0f8d4b9ba37599affda909a47d1e41a1033037');
+assert.equal(a.status,'ACTIVE_FINANCIAL_SPECIALIZATION_UNDER_PR_AUTHORITY');
+assert.equal(a.authorityRoot.runtime,'PR');
+const pr=readJson('content/runtime/professional-runtime/contracts/professional-authority-boundary-v2.json');
+assert.equal(pr.rules.onlyPrW4MayCreateProfessionalJudgment,true); assert.equal(pr.rules.professionalJudgmentRequiresHumanAttribution,true); assert.equal(pr.rules.rrRemainsReportAssemblyAuthority,true);
+const judgment=readJson('content/runtime/professional-runtime/contracts/professional-judgment-contract-v2.json'); assert.equal(judgment.rules.humanProfessionalAttributable,true); assert.equal(judgment.rules.aiOrProviderMayNotBeAttributionAuthority,true);
+assert.equal(a.compatibilityPredecessor.autoPromoted,false);
+for(const k of ['pfrMayMutateFdr','pfrMayOverrideFcr','pfrMayRewriteFar','pfrMayFinalizeRr','pfrMayReleaseReport','pfrMayRenderPdf','aiMayAuthorProfessionalFinancialJudgment']) assert.equal(a.rules[k],false,`PFR authority leak: ${k}`);
+const src=read('functions/financial/professional-review/professional-financial-review-runtime.js');
+assert.doesNotMatch(src,/calculateFinancialProjection|analyzeFinancialStructure|releaseReport|renderPdf|renderPDF/);
+console.log('✓ PFR-W0 Professional authority successor passed.');
+console.log('  PFR is a financial-domain specialization under canonical PR; no second Professional authority was created.');
