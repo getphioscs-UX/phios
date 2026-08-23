@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createIChingRuntime,ICHING_RUNTIME_CODE} from '../functions/core-method-runtime/iching-runtime.js';
+import {createIChingHexagramProjector} from '../functions/core-method-runtime/iching-hexagram-projection-mapper.js';
+import {adaptIChingProjection} from '../functions/interpretation-runtime/adapters/iching-interpretation-adapter-v1.js';
+import {composeIChingRealityLens} from '../functions/interpretation-runtime/iching-reality-composition-v1.js';
+import {prepareIChingRealityJourneyHandoff} from '../functions/reality-journey-runtime/iching-reality-journey-handoff-v1.js';
+import {manualLines} from './lib/iching/iching-fixtures-v1.mjs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const hex=j('content/professional/core-method-runtime/iching-hexagram-registry-v1.json');const sources=j('content/interpretation/iching/registries/iching-source-registry-v1.json');const perspectives=j('content/interpretation/iching/registries/iching-interpretation-perspective-registry-v1.json');const corpus=j('content/interpretation/iching/corpus/iching-public-domain-minimum-corpus-v1.json');
+const contract=j('content/interpretation/iching/contracts/iching-reality-journey-handoff-contract-v1.json');
+const calc=await createIChingRuntime().calculate({runtimeCode:ICHING_RUNTIME_CODE,calculationId:'ICHI-HANDOFF-1',evidence:manualLines([9,7,8,8,7,8])});const projection=await createIChingHexagramProjector().project({calculationResult:calc,projectionVersion:'1.0.0'});const bundle=adaptIChingProjection(projection,{hexagramRegistry:hex,sourceRegistry:sources,perspectiveRegistry:perspectives,corpus});const interpretation=composeIChingRealityLens(bundle);
+assert.throws(()=>prepareIChingRealityJourneyHandoff({projection,interpretation,userSelectedRelevance:[{selected:true,note:'Relevant to an observable work transition.'}],consentState:'REQUIRED'}),/EXPLICIT_CONSENT/);
+assert.throws(()=>prepareIChingRealityJourneyHandoff({projection,interpretation,userSelectedRelevance:[],consentState:'GRANTED'}),/USER_SELECTED_RELEVANCE/);
+const h=prepareIChingRealityJourneyHandoff({projection,interpretation,userSelectedRelevance:[{selected:true,note:'I want to compare this lens with what I can observe now.'}],consentState:'GRANTED'});
+assert.deepEqual(contract.allowedPayload,['projection','interpretation','userSelectedRelevance']);assert.equal(h.authority.fateConclusionIncluded,false);assert.equal(h.authority.preCreatedRealityTruth,false);assert.equal(h.authority.canonicalCaseCreated,false);assert.equal(h.persistencePerformed,false);assert.equal(h.activationPerformed,false);
+console.log('✓ ICHI-W9 Reality Journey handoff passed.');
+console.log('  Handoff carries projection + provenance-preserved interpretation + explicit user-selected relevance; no fate conclusion or automatic case persistence.');

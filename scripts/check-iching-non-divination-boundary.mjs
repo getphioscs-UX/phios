@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createIChingRuntime,ICHING_RUNTIME_CODE} from '../functions/core-method-runtime/iching-runtime.js';
+import {createIChingHexagramProjector} from '../functions/core-method-runtime/iching-hexagram-projection-mapper.js';
+import {adaptIChingProjection} from '../functions/interpretation-runtime/adapters/iching-interpretation-adapter-v1.js';
+import {composeIChingRealityLens} from '../functions/interpretation-runtime/iching-reality-composition-v1.js';
+import {manualLines} from './lib/iching/iching-fixtures-v1.mjs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const contract=j('content/interpretation/iching/contracts/iching-non-divination-boundary-v1.json');
+assert.equal(contract.work,'ICHI-W8');assert.equal(contract.sourcePreservationBoundary.historicalSourceLanguageMayContainDivinatoryOrAuspiceVocabulary,true);assert.equal(contract.sourcePreservationBoundary.sourceLanguageMayNotBePromotedToSystemClaim,true);
+const corpus=j('content/interpretation/iching/corpus/iching-public-domain-minimum-corpus-v1.json');
+for(const e of corpus.entries){assert.equal(e.provenance.originalTextVendored,false);assert.ok(e.sourceId&&e.perspectiveId&&e.provenance);}
+const hex=j('content/professional/core-method-runtime/iching-hexagram-registry-v1.json');const sources=j('content/interpretation/iching/registries/iching-source-registry-v1.json');const perspectives=j('content/interpretation/iching/registries/iching-interpretation-perspective-registry-v1.json');
+const calc=await createIChingRuntime().calculate({runtimeCode:ICHING_RUNTIME_CODE,calculationId:'ICHI-NONDIV-1',evidence:manualLines([9,9,9,9,9,9])});const projection=await createIChingHexagramProjector().project({calculationResult:calc,projectionVersion:'1.0.0'});const bundle=adaptIChingProjection(projection,{hexagramRegistry:hex,sourceRegistry:sources,perspectiveRegistry:perspectives,corpus});const out=composeIChingRealityLens(bundle);
+const generated=JSON.stringify({structuralPattern:out.structuralPattern,transitionStatus:out.possibleTransition.status,questionsForReflection:out.questionsForReflection,authority:out.authority});
+for(const phrase of contract.generatedOutputForbiddenClaims) assert.equal(generated.toLowerCase().includes(phrase.toLowerCase()),false,phrase);
+assert.ok(out.possibleTension.candidates.every(x=>x.sourceId&&x.perspectiveId&&x.provenance));
+assert.ok(out.possibleTransition.sourceBoundRelatingLenses.every(x=>x.sourceId&&x.perspectiveId&&x.provenance));
+console.log('✓ ICHI-W8 non-divination boundary passed.');
+console.log('  Source-bound historical language stays attributable; PHI OS generated framing does not promote it to fate, guaranteed future, or reality truth.');
