@@ -1492,7 +1492,12 @@
     "check:zwr-w2-freeze": "node scripts/check-zwr-w2-human-freeze.mjs",
     "check:zwr-w2": "npm run check:zwr-w2-authority",
     "check:zi-wei-policy": "npm run check:zwr-w2-authority",
-    "check:zwr-foundation": "npm run check:zwr-w0-w6"
+    "check:zwr-foundation": "npm run check:zwr-w0-w6",   
+    "check:mrm-s-pilot": "node scripts/check-mrm-s10-pilot-campaign.mjs && node scripts/check-mrm-s11-pilot-campaign-promotion.mjs && node scripts/check-mrm-s10-s11-pilot-campaign-freeze.mjs",
+    "pilot:evaluate-case": "node scripts/evaluate-mrm-pilot-case.mjs",
+    "pilot:case-template": "node scripts/generate-mrm-pilot-case-template.mjs"
+    
+
   },
   "type": "module",
   "dependencies": {
@@ -1500,5 +1505,6 @@
   },
   "imports": {
     "#cmp-production-api": "./functions/canonical-meaning-production/api-method-meaning-handler.js"
+    
   }
 }

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S11-EM3-PILOT-PROMOTION-POLICY-v2.0.0",
+  "phase": "MRM-S",
+  "work": "S11-PILOT-CAMPAIGN",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE",
+  "supersedes": {
+    "path": "content/runtime-maturity/promotion/em3-pilot-promotion-policy-v1.json",
+    "sha256": "e8a7d0e62a7dcac248127d6c9cb2299ba9cefc9a1e3a8fc4e2ced08cce172f6c"
+  },
+  "prerequisites": [
+    "EVALUATED_EM_2",
+    "ADMITTED_REAL_GOVERNED_CASE",
+    "COMPLETE_QUALIFYING_VERTICAL_SLICE",
+    "EXPLICIT_PURPOSE_BOUND_CONSENT",
+    "REAL_INPUT",
+    "REAL_RUNTIME_EXECUTION",
+    "NO_HIDDEN_MANUAL_REPAIR",
+    "ALL_REQUIRED_STAGES_PRESENT",
+    "ALL_REQUIRED_OUTPUTS_VERSIONED",
+    "UNKNOWN_PRESERVED",
+    "SOURCE_TRACEABLE",
+    "CUSTOMER_BINDING_CORRECT",
+    "RELEASE_EXPLICIT_WHERE_APPLICABLE",
+    "PRIVATE_EVIDENCE_BOUNDARY_SATISFIED"
+  ],
+  "promotionResult": "EM-3",
+  "rules": {
+    "promotionScopeIsCapabilitySpecific": true,
+    "executedCapabilityRequired": true,
+    "priorEm2Required": true,
+    "caseCompletionAloneDoesNotPromoteLowerEmCapability": true,
+    "oneCaseMayPromoteMultipleEligibleCapabilitiesOnlyIfEachWasActuallyExecutedAndTraced": true,
+    "wholeProductPromotionForbidden": true,
+    "api200Insufficient": true,
+    "pdfGeneratedInsufficient": true,
+    "fixtureInsufficient": true,
+    "manualRepairedJsonInsufficient": true
+  }
+}

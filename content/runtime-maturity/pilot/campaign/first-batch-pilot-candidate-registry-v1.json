@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S10-FIRST-BATCH-PILOT-CANDIDATE-REGISTRY-v1.0.0",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE_AWAITING_REAL_CASE_ADMISSION",
+  "campaignId": "MRM-PILOT-CAMPAIGN-001",
+  "candidateCount": 3,
+  "qualifyingPilotCaseCount": 0,
+  "candidates": [
+    {
+      "campaignCaseId": "PILOT-DAR-001",
+      "product": "DAR",
+      "status": "AWAITING_REAL_CASE",
+      "verticalSliceReference": "DAR",
+      "candidatePromotionCapabilities": [
+        "DAR-CLAUSE-RESOLUTION",
+        "DAR-DOCUMENT-ASSEMBLY",
+        "DAR-DOCUMENT-VALIDATION",
+        "DAR-RENDERING",
+        "DAR-VERSIONING"
+      ],
+      "observedNonPromotableCapabilities": [],
+      "requiredConsentSemantics": [
+        "WILL_ASSEMBLY"
+      ],
+      "requiredStageEvidence": [
+        "Customer",
+        "Consent",
+        "FDR shared facts where authorised",
+        "Will Intake",
+        "Clause selection",
+        "DAR",
+        "Review",
+        "Export",
+        "Execution checklist"
+      ],
+      "blockers": [
+        "NO_REAL_CUSTOMER_REFERENCE",
+        "NO_EXPLICIT_REAL_CASE_CONSENT_REFERENCE",
+        "NO_REAL_INPUT_EVIDENCE",
+        "NO_REAL_RUNTIME_EXECUTION",
+        "NO_REAL_HUMAN_REVIEW",
+        "NO_REAL_EXPORT_OR_EXECUTION_CHECKLIST_EVIDENCE"
+      ],
+      "admissionNote": "Reservation only. It is not a Pilot case and cannot be counted until a real governed case passes admission.",
+      "requiredProductBindings": [
+        "willIntakeReference",
+        "clauseRegistryVersion",
+        "humanReviewReference",
+        "exportReference",
+        "executionChecklistReference"
+      ]
+    },
+    {
+      "campaignCaseId": "PILOT-RRP-001",
+      "product": "RRP",
+      "status": "AWAITING_REAL_CASE",
+      "verticalSliceReference": "RRP",
+      "candidatePromotionCapabilities": [
+        "RRP-REPORT-COMPOSITION"
+      ],
+      "observedNonPromotableCapabilities": [],
+      "requiredConsentSemantics": [
+        "EXPLICIT_PURPOSE_BOUND_RUNTIME_CONSENT"
+      ],
+      "requiredStageEvidence": [
+        "Customer",
+        "Consent",
+        "Reality",
+        "Selected Methods",
+        "MPA / MCD",
+        "Meaning",
+        "RRP",
+        "RR",
+        "Release",
+        "CPR-CUST",
+        "Customer"
+      ],
+      "blockers": [
+        "NO_REAL_CUSTOMER_REFERENCE",
+        "NO_EXPLICIT_REAL_CASE_CONSENT_REFERENCE",
+        "NO_REAL_REALITY_INPUT",
+        "NO_REAL_METHOD_EXECUTION",
+        "NO_REAL_RR_RELEASE",
+        "NO_REAL_CPR_CUSTOMER_DELIVERY"
+      ],
+      "admissionNote": "Reservation only. Select one actual method scope at admission; a complete RRP slice does not promote all RRP methods.",
+      "requiredProductBindings": [
+        "selectedMethodCodes",
+        "meaningBundleReference",
+        "rrCandidateReference",
+        "rrReleaseReference",
+        "cprDeliveryReference"
+      ]
+    },
+    {
+      "campaignCaseId": "PILOT-FINANCIAL-001",
+      "product": "FINANCIAL",
+      "status": "AWAITING_REAL_CASE",
+      "verticalSliceReference": "FINANCIAL",
+      "candidatePromotionCapabilities": [
+        "FCR-NET-WORTH",
+        "FCR-LIQUIDITY",
+        "FCR-CASH-FLOW",
+        "FCR-DEBT",
+        "FCR-SCENARIO",
+        "FCR-TRACE",
+        "HFP-COMPOSITION",
+        "HFP-PROFESSIONAL-BINDING",
+        "HFP-RR-HANDOFF"
+      ],
+      "observedNonPromotableCapabilities": [
+        "FAR findings executed in the slice remain at their prior EM until contiguous prerequisites are satisfied",
+        "PFR human judgment evidence may be admitted but PFR capability EM cannot skip from EM-0 to EM-3"
+      ],
+      "requiredConsentSemantics": [
+        "FINANCIAL_PLANNING",
+        "PROFESSIONAL_REVIEW",
+        "REPORT"
+      ],
+      "requiredStageEvidence": [
+        "Customer",
+        "Progressive disclosure",
+        "FDR",
+        "FCR",
+        "FAR",
+        "HFP Draft",
+        "PFR",
+        "HFP Final",
+        "RR",
+        "Release",
+        "CPR-CUST",
+        "Customer"
+      ],
+      "blockers": [
+        "NO_REAL_CUSTOMER_REFERENCE",
+        "NO_REAL_FINANCIAL_DISCLOSURE",
+        "NO_REAL_FDR_SNAPSHOT",
+        "NO_REAL_FCR_EXECUTION",
+        "NO_REAL_FAR_EXECUTION",
+        "NO_REAL_PFR_HUMAN_CONTRIBUTION",
+        "NO_REAL_HFP_FINAL",
+        "NO_REAL_RR_RELEASE",
+        "NO_REAL_CPR_CUSTOMER_DELIVERY"
+      ],
+      "admissionNote": "Reservation only. Promotion may apply only to executed capabilities that were already EM-2 before this Pilot; FAR/PFR evidence is retained without skipping EM prerequisites.",
+      "requiredProductBindings": [
+        "farFindingReferences",
+        "pfrContributionReference",
+        "hfpFinalReference",
+        "rrReleaseReference",
+        "cprDeliveryReference"
+      ]
+    }
+  ],
+  "rules": {
+    "candidateReservationIsNotPilotEvidence": true,
+    "candidateReservationCannotChangeEM": true,
+    "realCaseAdmissionMustCreateSeparateImmutableCaseRecord": true
+  }
+}

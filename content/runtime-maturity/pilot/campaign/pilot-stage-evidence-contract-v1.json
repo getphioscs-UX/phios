@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S10-PILOT-STAGE-EVIDENCE-CONTRACT-v1.0.0",
+  "phase": "MRM-S",
+  "work": "S10A",
+  "baselineCommit": "007fee6f24071d0653ce120be9ec832efc5c11a4",
+  "status": "ACTIVE",
+  "requiredFields": [
+    "stageCode",
+    "stageAuthority",
+    "runtimeVersion",
+    "inputReference",
+    "inputDigest",
+    "outputReference",
+    "outputDigest",
+    "executedAt",
+    "evidenceState"
+  ],
+  "evidenceStates": [
+    "CURRENT",
+    "FAILED",
+    "UNKNOWN",
+    "WITHDRAWN",
+    "INVALIDATED"
+  ],
+  "rules": {
+    "stageOrderMustMatchVerticalSlice": true,
+    "digestCannotBeBlank": true,
+    "failedAndUnknownEvidencePreserved": true,
+    "manualRepairCannotReplaceRuntimeExecution": true,
+    "fixtureReferenceForbiddenForQualifyingPilot": true
+  }
+}
