@@ -1492,7 +1492,7 @@
     "check:zwr-w2-freeze": "node scripts/check-zwr-w2-human-freeze.mjs",
     "check:zwr-w2": "npm run check:zwr-w2-authority && npm run check:zwr-w2-freeze && npm run check:zwr-w2h",
     "check:zi-wei-policy": "npm run check:zwr-w2-authority",
-    "check:zwr-foundation": "npm run check:zwr-w0-w6",   
+    "check:zwr-foundation": "npm run check:zwr-w0-w6",
     "check:mrm-s-pilot": "node scripts/check-mrm-s10-pilot-campaign.mjs && node scripts/check-mrm-s11-pilot-campaign-promotion.mjs && node scripts/check-mrm-s10-s11-pilot-campaign-freeze.mjs",
     "pilot:evaluate-case": "node scripts/evaluate-mrm-pilot-case.mjs",
     "pilot:case-template": "node scripts/generate-mrm-pilot-case-template.mjs",
@@ -1504,8 +1504,17 @@
     "check:tarot-decision-boundary": "node scripts/check-tarot-decision-boundary.mjs",
     "check:tarot-interpretation-reality": "node scripts/check-tarot-interpretation-reality.mjs",
     "check:zwr-w2h": "node scripts/check-zwr-w2h-human-policy-freeze.mjs",
-    "check:zwr-human-freeze": "npm run check:zwr-w2"    
-
+    "check:zwr-human-freeze": "npm run check:zwr-w2",
+    "check:zwr-w7-w13": "node scripts/check-zwr-w7-w13-calculation-projection.mjs",
+    "check:zwr-w7": "npm run check:zwr-w7-w13",
+    "check:zwr-w8": "npm run check:zwr-w7-w13",
+    "check:zwr-w9": "npm run check:zwr-w7-w13",
+    "check:zwr-w10": "npm run check:zwr-w7-w13",
+    "check:zwr-w11": "npm run check:zwr-w7-w13",
+    "check:zwr-w12": "npm run check:zwr-w7-w13",
+    "check:zwr-w13": "npm run check:zwr-w7-w13",
+    "check:zi-wei-calculation": "npm run check:zwr-w2 && npm run check:zwr-w7-w13",
+    "check:zwr-batch8": "npm run check:zwr-w2 && npm run check:zwr-w0-w6 && npm run check:zwr-w7-w13"
   },
   "type": "module",
   "dependencies": {
@@ -1513,6 +1522,5 @@
   },
   "imports": {
     "#cmp-production-api": "./functions/canonical-meaning-production/api-method-meaning-handler.js"
-    
   }
 }

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-ZWR-CROSS-REFERENCE-VALIDATION-v1.0.0",
+  "work": "ZWR-W12",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "VALIDATED_WITH_DECLARED_NON_AUTHORITY_REFERENCES",
+  "methodCode": "ZI_WEI_DOU_SHU",
+  "principle": "External references validate the Human-frozen PHI OS policy and implementation; they do not silently become runtime authority.",
+  "references": [
+    {
+      "referenceId": "ZWR-XREF-HKO",
+      "kind": "CALENDAR_VALIDATION_AUTHORITY",
+      "name": "Hong Kong Observatory Gregorian-Lunar Calendar Conversion",
+      "url": "https://www.hko.gov.hk/en/gts/time/conversion.htm",
+      "usedFor": [
+        "1901-2100 supported conversion range",
+        "fixture date cross-checks"
+      ],
+      "runtimeAuthority": false
+    },
+    {
+      "referenceId": "ZWR-XREF-IZTRO-PALACE",
+      "kind": "OPEN_SOURCE_CROSS_REFERENCE",
+      "name": "iztro palace calculation source",
+      "url": "https://github.com/SylarLong/iztro/blob/main/src/astro/palace.ts",
+      "usedFor": [
+        "Five Tiger Dun",
+        "Life/Body palace",
+        "five-element bureau examples"
+      ],
+      "runtimeAuthority": false
+    },
+    {
+      "referenceId": "ZWR-XREF-IZTRO-LOCATION",
+      "kind": "OPEN_SOURCE_CROSS_REFERENCE",
+      "name": "iztro star location source",
+      "url": "https://github.com/SylarLong/iztro/blob/main/src/star/location.ts",
+      "usedFor": [
+        "Zi Wei start examples",
+        "six support star placement formulas"
+      ],
+      "runtimeAuthority": false
+    },
+    {
+      "referenceId": "ZWR-XREF-IZTRO-MAJOR",
+      "kind": "OPEN_SOURCE_CROSS_REFERENCE",
+      "name": "iztro main star source",
+      "url": "https://github.com/SylarLong/iztro/blob/main/src/star/majorStar.ts",
+      "usedFor": [
+        "Zi Wei/Tian Fu group sequence offsets"
+      ],
+      "runtimeAuthority": false
+    },
+    {
+      "referenceId": "ZWR-XREF-SOLARLUNAR-TABLE",
+      "kind": "OPEN_SOURCE_EXECUTABLE_TABLE_PROVENANCE",
+      "name": "SolarLunar 1900-2100 lunarInfo-style table",
+      "url": "https://github.com/yize/solarlunar",
+      "license": "ISC",
+      "notice": "content/professional/zi-wei-runtime/evidence/ZWR-LUNAR-TABLE-THIRD-PARTY-NOTICE.md",
+      "usedFor": [
+        "embedded deterministic month/leap table representation"
+      ],
+      "runtimeAuthority": false
+    }
+  ],
+  "validatedClaims": [
+    {
+      "claim": "Five-element bureau examples BING/ZI=WATER_2, XIN/WEI=EARTH_5, GENG/SHEN=WOOD_3",
+      "result": "MATCH"
+    },
+    {
+      "claim": "Zi Wei start examples day27 Wood3=XU, day13 Fire6=HAI, day6 Earth5=WEI",
+      "result": "MATCH"
+    },
+    {
+      "claim": "Zuo/You, Chang/Qu and Kui/Yue formulas match frozen six-support-star scope",
+      "result": "MATCH"
+    },
+    {
+      "claim": "14-main-star fixed Zi Wei/Tian Fu sequences match frozen registry",
+      "result": "MATCH"
+    }
+  ],
+  "limitations": [
+    "No external site is consumed at runtime.",
+    "Cross-reference agreement does not grant Production dispatch.",
+    "Meaning and reading are outside W7-W13."
+  ]
+}
