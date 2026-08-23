@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {adaptTarotProjections} from '../functions/interpretation-runtime/adapters/tarot-interpretation-adapter-v1.js';
+import {tariAuthorities,projectOne,projectThree} from './lib/tarot/tari-fixtures-v1.mjs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const contract=j('content/interpretation/tarot/contracts/tarot-source-bound-meaning-contract-v1.json');
+const schema=j('content/interpretation/tarot/contracts/tarot-interpretation-entry-v1.schema.json');
+assert.equal(contract.work,'TARI-W0');
+assert.equal(contract.separation.canonicalCardIdentityIsInterpretation,false);
+assert.equal(contract.rules.unqualifiedCardMeansClaimAllowed,false);
+assert.deepEqual(contract.requiredInterpretationBindings,['cardId','sourceId','perspectiveId','orientation','spreadScope','provenance']);
+assert.ok(schema.required.includes('cardId')&&schema.required.includes('sourceId')&&schema.required.includes('perspectiveId')&&schema.required.includes('orientation')&&schema.required.includes('spreadScope')&&schema.required.includes('provenance'));
+const projections=await projectThree();
+const bundle=adaptTarotProjections(projections,{cardRegistry:tariAuthorities.cardRegistry,sourceRegistry:tariAuthorities.sourceRegistry,perspectiveRegistry:tariAuthorities.perspectiveRegistry,symbolDimensionRegistry:tariAuthorities.symbolDimensionRegistry,corpus:tariAuthorities.corpus});
+assert.equal(bundle.cards.length,3);assert.equal(bundle.authority.adapterMayOverrideCardIdentity,false);assert.equal(bundle.authority.adapterMayCreateUniversalMeaning,false);assert.equal(bundle.productionEligible,false);
+for(const card of bundle.cards){assert.equal(card.structuralCard.cardIdentity,card.sourceProjection.projectionValue.card.cardIdentity);assert.ok(card.commentaryCandidates.every(x=>x.sourceBound&&x.universalMeaning===false&&x.realityTruth===false&&x.prediction===false&&x.decisionAuthority===false&&x.canonicalIdentityOverride===false));}
+const death=adaptTarotProjections(await projectOne('RWS-MAJOR-13','TARI-DEATH'),{cardRegistry:tariAuthorities.cardRegistry,sourceRegistry:tariAuthorities.sourceRegistry,perspectiveRegistry:tariAuthorities.perspectiveRegistry,symbolDimensionRegistry:tariAuthorities.symbolDimensionRegistry,corpus:tariAuthorities.corpus});
+assert.equal(death.cards[0].coverage,'SOURCE_COMMENTARY_NOT_YET_INGESTED');assert.equal(death.cards[0].commentaryCandidates.length,0);assert.equal(JSON.stringify(death.cards[0].symbolDimensions).toLowerCase().includes('transformation'),false);
+console.log('✓ TARI-W0/W2 canonical card identity remains separate from source/perspective-bound interpretation.');
+console.log('  Death has no hard-coded universal transformation meaning; unavailable commentary remains explicit.');

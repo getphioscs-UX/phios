@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/tarot/tarot-interpretation-entry-v1.schema.json",
+  "title": "PHI OS Tarot Source-bound Interpretation Entry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claimId",
+    "cardId",
+    "sourceId",
+    "perspectiveId",
+    "orientation",
+    "spreadScope",
+    "lensLabel",
+    "claim",
+    "provenance"
+  ],
+  "properties": {
+    "claimId": {"type": "string", "pattern": "^TAR-CLM-"},
+    "cardId": {"type": "string", "pattern": "^RWS-"},
+    "sourceId": {"type": "string", "pattern": "^TAR-SRC-"},
+    "perspectiveId": {"type": "string", "pattern": "^TAR-PERSPECTIVE-"},
+    "orientation": {"enum": ["UPRIGHT", "REVERSED", "ANY"]},
+    "spreadScope": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"}
+    },
+    "lensLabel": {"type": "string", "minLength": 1},
+    "claim": {"type": "string", "minLength": 1},
+    "provenance": {"type": "object"}
+  }
+}
