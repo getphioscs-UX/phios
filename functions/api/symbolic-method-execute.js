@@ -1,0 +1,3 @@
+const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','referrer-policy':'no-referrer'};const json=(x,s=200)=>new Response(JSON.stringify(x),{status:s,headers});
+export async function onRequestPost(){return json({ok:false,error:{code:'SYMBOLIC_LIMITED_PRODUCTION_NOT_ACTIVATED',message:'Public execution remains closed until human acceptance, verified persistence identity binding, browser acceptance and live production SHA alignment are complete.'},production:{state:'HUMAN_ACCEPTANCE_PENDING',runAllowed:false}},423);}
+export async function onRequestGet(){return json({ok:false,error:{code:'METHOD_NOT_ALLOWED'}},405);}

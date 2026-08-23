@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-SYMBOLIC-SENSITIVE-DOMAIN-GUARD-v1.0.0",
+  "phase": "PROD",
+  "work": "PROD-W4",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "domains": [
+    "MEDICAL",
+    "FINANCIAL",
+    "LEGAL",
+    "DEATH",
+    "PREGNANCY",
+    "RELATIONSHIP",
+    "MENTAL_HEALTH"
+  ],
+  "authority": {
+    "factAuthority": false,
+    "diagnosisAuthority": false,
+    "professionalAuthority": false,
+    "decisionAuthority": false
+  },
+  "rules": {
+    "symbolicLensAllowed": true,
+    "sensitiveInputMayBeSilentlyConvertedToFact": false,
+    "professionalInstructionAllowed": false,
+    "guaranteedOutcomeAllowed": false
+  }
+}

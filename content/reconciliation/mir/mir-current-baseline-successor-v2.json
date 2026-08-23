@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-MIR-CURRENT-BASELINE-SUCCESSOR-v2.0.0",
+  "work": "MIR-CURRENT-SUCCESSOR",
+  "baselineCommit": "4c1aff3fdbf630ba94f1ef552af1d744b4b7cde6",
+  "status": "CURRENT_SUCCESSOR_RECONCILED_WITH_HISTORICAL_MIR8_PAGE_HASH_PRESERVED",
+  "predecessor": {
+    "checker": "scripts/check-mir-current-baseline.mjs",
+    "checkerSha256": "56dc1555bf3056a975ab4b60facb2d54d5eda6cf531934637bc15287da38a1cf",
+    "mir8Reconciliation": "content/reconciliation/mir/mir-8-guided-reading-explainable-surface-v1.json",
+    "mir8ReconciliationSha256": "1592ed98feb1d06f0af350efdca7ab49d2a2c958337549683a48aba900736430",
+    "historicalGuidedReadingSha256": "67a79e86541468b99e9ab89b9df3b7fb2c50538254265207fed7a49d74ca751d",
+    "mutated": false
+  },
+  "currentSuccessor": {
+    "surface": "guided-reading.html",
+    "sha256": "488a473142d057eea64994f43abe862ede6755019098d89bd5dabe4e672945f1",
+    "routeSuccessor": "content/web-production/successors/mir-11-route-promotion-successor-v1.json",
+    "routeSuccessorSha256": "74abfe1a273d4aca9d5aaf84b2b7340b9930a002e9ba3e017dc2f00ea6bcf445",
+    "semanticAcceptanceChecks": [
+      "node scripts/check-mir-8-kap-guided-reading.mjs",
+      "node scripts/check-reading-surface.mjs"
+    ]
+  },
+  "reconciliation": {
+    "historicalMIR8HashRemainsHistoricalFact": true,
+    "currentGuidedReadingMayHaveSuccessorBytes": true,
+    "successorBytesDoNotTransferMethodAuthority": true,
+    "acceptedCanonicalInterpretationResultStillRequired": true,
+    "guidedReadingMayRecalculateMethod": false,
+    "guidedReadingMayCreateSecondInterpretationAuthority": false,
+    "historicalFrozenArtifactRewritten": false
+  }
+}
