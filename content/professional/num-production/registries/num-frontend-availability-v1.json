@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-NUM-FRONTEND-AVAILABILITY-v1.0.0",
+  "work": "NUMA-W6",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_AVAILABLE_FRONTEND_SUCCESSOR",
+  "route": "/personal-runtime",
+  "resultTab": "numeric",
+  "calculationEndpoint": "/api/method-execute",
+  "meaningEndpoint": "/api/method-meaning",
+  "bridge": "assets/js/pages/num-production-meaning.js",
+  "style": "assets/css/num-production-meaning.css",
+  "capabilityAvailability": "AVAILABLE",
+  "executionCompletenessStates": ["COMPLETE", "PARTIAL", "INPUT_REQUIRED", "FAILED", "UNAVAILABLE"],
+  "rules": {
+    "meaningEndpointConsumesCanonicalProjectionOnly": true,
+    "meaningEndpointMayRecalculate": false,
+    "missingTargetDateMayProducePartialExecution": true,
+    "partialExecutionDoesNotDowngradeGlobalCapability": true,
+    "frozenMcd7RuntimeJsMutated": false
+  }
+}

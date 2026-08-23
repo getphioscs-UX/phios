@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));const exists=p=>fs.existsSync(p);
+const current=json('content/governance/production-capability-matrix/reconciliation/production-capability-current-successor-v2.json');
+const registry=json(current.currentRegistry);const projection=json(current.currentStatusProjection);const old=json(current.predecessorRegistry);
+assert.equal(current.status,'CURRENT_REGISTRY_POINTER');assert.equal(current.predecessorMutated,false);assert.equal(registry.registryVersion,'2.0.0');
+const expected={HDR:['BLOCKED','Blocked'],AST:['LIMITED_SCOPED','Limited'],BZR:['LIMITED_SCOPED','Limited'],NUM:['AVAILABLE','Available'],ICH:['REGISTERED_NOT_IMPLEMENTED','Coming later'],TAR:['REGISTERED_NOT_IMPLEMENTED','Coming later']};
+for(const [plugin,[classification,status]] of Object.entries(expected)){const c=registry.capabilities.find(x=>x.methodRuntime.pluginCode===plugin);assert(c,plugin);assert.equal(c.classification,classification);assert.equal(c.statusProjection,status);for(const e of c.evidence||[])assert(exists(e),`missing v2 evidence ${e}`);}
+const num=registry.capabilities.find(x=>x.methodRuntime.pluginCode==='NUM');for(const gate of ['implemented','validated','projected','meaningReady','readingReady','userExecutable','productionAccepted'])assert.equal(num[gate],true,`NUM ${gate}`);assert.equal(num.capabilityAvailability,'AVAILABLE');assert.equal(num.deploymentVerified,false);assert.equal(num.deploymentState,'PENDING_EXTERNAL_DEPLOYMENT_VERIFICATION');assert.equal(num.frontendRoute,'/personal-runtime');assert(exists(num.frontendMeaningConsumer.script));assert(exists('functions/api/method-meaning.js'));
+const mpa=json('content/professional/method-production-activation/successors/mpa-mcd-1-production-authority-successor-v1.json');const exec=mpa.methods.find(x=>x.methodCode==='NUMEROLOGY'&&x.methodVersion===num.methodRuntime.executionAuthorityMethodVersion);assert(exec);assert.equal(exec.dispatchAllowed,true);assert.equal(exec.productionEligible,true);
+const activation=json('content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v1.json');assert.equal(activation.methods.find(x=>x.pluginCode==='NUM').productionActivated,true);for(const code of ['BZR','AST'])assert.equal(activation.methods.find(x=>x.pluginCode===code).productionActivated,false);
+const oldNum=old.capabilities.find(x=>x.methodRuntime.pluginCode==='NUM');assert.equal(oldNum.classification,'LIMITED_SCOPED');
+assert.equal(projection.source,current.currentRegistry);assert.equal(projection.items.find(x=>x.pluginCode==='NUM').status,'Available');assert.ok(projection.items.some(x=>x.status!=='Available'));
+console.log('✓ PCM v2 runtime/frontend parity successor passed.');
+console.log('  NUM is Available only because authority + runtime + projection + Production meaning + reading + frontend + acceptance all exist; AST/BZR remain Limited and historical PCM v1 remains unchanged.');

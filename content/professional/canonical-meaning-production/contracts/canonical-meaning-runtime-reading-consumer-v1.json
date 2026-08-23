@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "PHI-OS-CMP-RRP-CONSUMER-CONTRACT-v1.0.0",
+  "work": "CMP-W8",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_NUM_BOUND_RRP_CONSUMER",
+  "input": [
+    "CanonicalMeaningProductionBundle",
+    "CanonicalMeaningLocaleProjection"
+  ],
+  "output": "RuntimeReadingMeaningEnvelope",
+  "consumer": "functions/runtime-reading/canonical-meaning-consumer.js",
+  "rrpSuccessor": "content/products/runtime-reading/successors/runtime-reading-meaning-admission-successor-v2.json",
+  "rules": {
+    "consumerMayRecalculate": false,
+    "consumerMayCreateMissingMeaning": false,
+    "consumerMayCreateProfessionalJudgment": false,
+    "consumerMayMutateProjection": false,
+    "meaningReferencesRequired": true
+  }
+}

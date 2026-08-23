@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-MEANING-SAFETY-BOUNDARY-v1.0.0",
+  "work": "CMP-W9",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "meaningNotEqual": [
+    "PROFESSIONAL_JUDGMENT",
+    "FORTUNE_PREDICTION",
+    "MEDICAL_DIAGNOSIS",
+    "LEGAL_ADVICE",
+    "FINANCIAL_ADVICE",
+    "REALITY_FACT",
+    "IDENTITY_FACT"
+  ],
+  "forbiddenClaimPatterns": [
+    "CERTAIN_FUTURE_OUTCOME",
+    "DETERMINISTIC_DESTINY",
+    "DIAGNOSIS_FROM_METHOD",
+    "COMMANDING_LIFE_DECISION"
+  ],
+  "rules": {
+    "aiMayExpandCanonicalMeaning": false,
+    "providerMayExpandCanonicalMeaning": false,
+    "localeMayChangeSemanticScope": false,
+    "readingMayComposeOnlyAdmittedMeaning": true,
+    "professionalJudgmentRequiresSeparateAuthority": true
+  }
+}

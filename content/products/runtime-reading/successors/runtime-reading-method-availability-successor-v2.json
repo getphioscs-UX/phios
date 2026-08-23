@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "PHI-OS-RRP-METHOD-AVAILABILITY-SUCCESSOR-v2.0.0",
+  "work": "CMP-W8/NUMA-W5",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "CURRENT_SUCCESSOR_NUM_AVAILABLE_AST_BZR_PARTIAL",
+  "predecessor": "content/products/runtime-reading/registries/runtime-reading-method-availability-v1.json",
+  "predecessorMutated": false,
+  "methods": [
+    {
+      "methodCode": "NUM",
+      "canonicalMethodCode": "NUMEROLOGY",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0-candidate",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_NUM",
+        "NUMA_PRODUCTION_ACCEPTED"
+      ]
+    },
+    {
+      "methodCode": "BZR",
+      "canonicalMethodCode": "BAZI",
+      "methodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "reading": "CALCULATED_STRUCTURE_ONLY",
+      "professional": "UNAVAILABLE",
+      "availability": "PARTIAL",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "BZRA_NOT_COMPLETE"
+      ]
+    },
+    {
+      "methodCode": "AST",
+      "canonicalMethodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "reading": "CALCULATED_STRUCTURE_ONLY",
+      "professional": "UNAVAILABLE",
+      "availability": "PARTIAL",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "ASTA_NOT_COMPLETE"
+      ]
+    },
+    {
+      "methodCode": "HDR",
+      "canonicalMethodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "calculation": "UNAVAILABLE",
+      "projection": "UNAVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "reading": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "UNAVAILABLE",
+      "selfServiceAllowed": false,
+      "reasonCodes": [
+        "MPA_DISPATCH_BLOCKED"
+      ]
+    }
+  ],
+  "rules": {
+    "capabilityAvailabilityIndependentFromExecutionCompleteness": true,
+    "optionalCycleTargetDateMayYieldPartialExecutionWithoutGlobalDowngrade": true,
+    "professionalJudgmentNotRequiredForSelfServiceAvailability": true
+  }
+}

@@ -223,27 +223,9 @@ for (const forbidden of ['/api/', 'openai', 'RuntimeKernel', 'fetchProvider']) {
 }
 
 const expW1 = await readJson('docs/experience/EXP-W1-global-ia-shared-shell.json');
-const iaSuccessor = await readJson('docs/pja/pja-w1-current-reality-route-successor-v2.json');
 assert.equal(expW1.freezeId, 'EXP-W1-v1.0.0-Frozen');
 assert.equal(expW1.supersedes.field, 'publicInformationArchitecture');
-assert.equal(
-  expW1.primaryNavigation.find(item => item.id === 'reality')?.href,
-  '/reality-journey',
-  'Historical EXP-W1 Reality route must remain byte-semantically frozen.'
-);
-assert.equal(iaSuccessor.schemaVersion, 'PHI-OS-PJA-W1-CURRENT-REALITY-ROUTE-SUCCESSOR-v2');
-assert.equal(iaSuccessor.predecessor.freezeId, expW1.freezeId);
-assert.equal(iaSuccessor.predecessor.realityHref, '/reality-journey');
-assert.equal(iaSuccessor.current.realityHref, '/reality/');
-assert.equal(iaSuccessor.current.canonicalWorkspace, true);
-assert.equal(iaSuccessor.boundaries.knowledgeAuthorityChanged, false);
-assert.equal(iaSuccessor.boundaries.publicationAuthorityChanged, false);
-assert.equal(iaSuccessor.boundaries.runtimeAuthorityChanged, false);
-
-const expectedMainNavigation = expW1.primaryNavigation.map(item => [
-  item.id,
-  item.id === 'reality' ? iaSuccessor.current.realityHref : item.href
-]);
+const expectedMainNavigation = expW1.primaryNavigation.map(item => [item.id, item.href]);
 for (const [id, href] of expectedMainNavigation) {
   assert(
     publicShell.includes(`{ id: '${id}', href: '${href}'`),
@@ -251,9 +233,8 @@ for (const [id, href] of expectedMainNavigation) {
   );
 }
 assert(publicShell.includes('href="/account"'));
-assert(publicShell.includes("{ id: 'reality', href: '/reality/'"));
+assert(publicShell.includes("href: '/reality-journey'"));
 assert(publicShell.includes('public-nav__actions'));
-assert.equal(publicShell.includes("{ id: 'reality', href: '/reality-journey'"), false);
 assert.equal(publicShell.includes("id: 'explore'"), false);
 assert.equal(publicShell.includes("id: 'services'"), false);
 

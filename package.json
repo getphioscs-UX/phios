@@ -1384,7 +1384,7 @@
     "check:dar": "npm run check:dar-w0-w14 && npm run check:dar-w15-w24",
     "check:part-k-historical": "node scripts/check-part-k-final-freeze.mjs",
     "check:service-continuity-batch3": "node scripts/check-service-continuity-batch3.mjs",
-    "check:runtime-frontend-parity": "node scripts/check-runtime-frontend-parity.mjs",
+    "check:runtime-frontend-parity": "npm run check:runtime-frontend-parity-v1 && node scripts/check-runtime-frontend-parity-v2.mjs",
     "check:pcm": "npm run check:runtime-frontend-parity",
     "check:fcr-authority": "node scripts/check-fcr-authority.mjs",
     "check:fcr-contracts": "node scripts/check-fcr-contracts.mjs",
@@ -1415,10 +1415,31 @@
     "check:cmp-w0-w6": "node scripts/check-cmp-w0-w6.mjs",
     "check:cmp": "npm run check:cmp-w0-w6",
     "check:fma-a": "npm run check:fma-w0-w3 && npm run check:cmp-w0-w6",
-    "check:symbolic-method": "node scripts/check-symbolic-method.mjs"
+    "check:symbolic-method": "node scripts/check-symbolic-method.mjs",
+    "check:cmp-w7-w12": "node scripts/check-cmp-w7-w12.mjs",
+    "check:num-production": "node scripts/check-num-production.mjs",
+    "check:runtime-frontend-parity-v1": "node scripts/check-runtime-frontend-parity.mjs",
+    "check:pcm-v2": "node scripts/check-runtime-frontend-parity-v2.mjs",
+    "check:fma-b": "npm run check:canonical-meaning-production && npm run check:num-production && npm run check:runtime-frontend-parity",
+    "check:cmp-current": "npm run check:cmp-w0-w6 && npm run check:cmp-w7-w12",
+    "check:canonical-meaning-production": "npm run check:cmp-current",
+    "check:far-authority": "node scripts/check-far-authority.mjs",
+    "check:far-contracts": "node scripts/check-far-contracts.mjs",
+    "check:far-runtime": "node scripts/check-far-runtime.mjs",
+    "check:far-provenance": "node scripts/check-far-provenance.mjs",
+    "check:far-confidence": "node scripts/check-far-confidence.mjs",
+    "check:far-anti-advice": "node scripts/check-far-anti-advice.mjs",
+    "check:far-fixtures": "node scripts/check-far-fixtures.mjs",
+    "check:far-fcr-boundary": "node scripts/check-far-fcr-boundary.mjs",
+    "check:far-freeze": "node scripts/check-far-freeze.mjs",
+    "check:far": "node scripts/check-far-authority.mjs && node scripts/check-far-contracts.mjs && node scripts/check-far-runtime.mjs && node scripts/check-far-provenance.mjs && node scripts/check-far-confidence.mjs && node scripts/check-far-anti-advice.mjs && node scripts/check-far-fixtures.mjs && node scripts/check-far-fcr-boundary.mjs && node scripts/check-far-freeze.mjs"
+  
   },
   "type": "module",
   "dependencies": {
     "astronomy-engine": "2.1.19"
+  },
+  "imports": {
+    "#cmp-production-api": "./functions/canonical-meaning-production/api-method-meaning-handler.js"
   }
 }
