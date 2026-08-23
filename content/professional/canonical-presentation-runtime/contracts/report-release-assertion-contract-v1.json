@@ -1,0 +1,50 @@
+{
+  "contractCode": "PHI-OS-REPORT-RELEASE-ASSERTION-CONTRACT-v1",
+  "contractVersion": "1.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W1",
+  "status": "CURRENT_RELEASE_ELIGIBILITY_CONTRACT",
+  "requiredFields": [
+    "releaseId",
+    "reportId",
+    "reportVersion",
+    "reportDigest",
+    "customerId",
+    "professionalId",
+    "consentReference",
+    "releaseChannel",
+    "releasedAt",
+    "releasedBy",
+    "releaseReason",
+    "releaseStatus",
+    "previousReleaseReference",
+    "supersedesReleaseReference",
+    "signatureReference",
+    "releaseDigest"
+  ],
+  "releaseStatuses": [
+    "ACTIVE",
+    "REVOKED",
+    "SUPERSEDED",
+    "EXPIRED"
+  ],
+  "releaseChannels": [
+    "CUSTOMER_WORKSPACE",
+    "SECURE_PDF",
+    "APP"
+  ],
+  "preconditions": [
+    "REPORT_STATUS_FINAL",
+    "SIGNED_REPORT_EXISTS",
+    "CUSTOMER_MATCHES_REPORT_CLIENT",
+    "CONSENT_ACTIVE_AND_REPORT_SHARING_NOT_REVOKED",
+    "PROFESSIONAL_AUTHORISED",
+    "EXPLICIT_RELEASE_ACTION"
+  ],
+  "rules": {
+    "mutatesReport": false,
+    "clonesReportAuthority": false,
+    "grantsPresentationAuthority": false,
+    "releaseDigestBindsAssertion": true
+  }
+}

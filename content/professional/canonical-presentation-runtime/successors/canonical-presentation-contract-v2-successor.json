@@ -1,0 +1,37 @@
+{
+  "contractCode": "PHI-OS-CANONICAL-PRESENTATION-CONTRACT-v2-SUCCESSOR",
+  "contractVersion": "2.0.0",
+  "phase": "CPR-CUST",
+  "work": "CPR-CUST-W3",
+  "status": "VERSIONED_SUCCESSOR_EXTENSION",
+  "predecessor": {
+    "path": "content/professional/canonical-presentation-runtime/contracts/canonical-presentation-contract-v1.json",
+    "sha256": "3a5021ba3932b47b8a61eeaffc749cf75b57c8787a67dd0e50b03cefa9cedf93",
+    "mutated": false
+  },
+  "presentationModes": {
+    "ASSET_BASED": {
+      "sourceAssetReferences": {
+        "minItems": 1
+      },
+      "releasedReportReference": "optional"
+    },
+    "REPORT_BASED": {
+      "sourceAssetReferences": {
+        "minItems": 0
+      },
+      "releasedReportReference": "required"
+    },
+    "MIXED": {
+      "sourceAssetReferences": {
+        "minItems": 0
+      },
+      "releasedReportReference": "required"
+    }
+  },
+  "rules": {
+    "fakeAssetForMinItemsForbidden": true,
+    "reportModeDoesNotPublishAssets": true,
+    "releaseReferenceDoesNotCreateReportAuthority": true
+  }
+}
