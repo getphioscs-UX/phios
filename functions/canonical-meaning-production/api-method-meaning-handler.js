@@ -2,12 +2,13 @@
 import { buildCanonicalMeaningProductionBundle } from '../canonical-meaning-production/meaning-bundle-builder-production.js';
 import { projectCanonicalMeaningLocale } from '../canonical-meaning-production/locale-projector.js';
 import { buildNumRuntimeReadingIR } from '../runtime-reading/num-reading-ir.js';
+import { buildBzrRuntimeReadingIR } from '../runtime-reading/bzr-reading-ir.js';
 import {
   CMP_PRODUCTION_ADMISSION_REGISTRY,
   CMP_PRODUCTION_MAPPING_REGISTRY,
   CMP_PRODUCTION_ACTIVATION_REGISTRY,
   CMP_PRODUCTION_LOCALE_REGISTRY
-} from '../canonical-meaning-production/production-registry-current.js';
+} from '../canonical-meaning-production/production-registry-current-v2.js';
 
 const REQUEST_SCHEMA='PHI-OS-CMP-METHOD-MEANING-REQUEST-v1.0.0';
 function json(payload,status=200,headers={}){return new Response(JSON.stringify(payload),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff',...headers}})}
@@ -26,11 +27,12 @@ export async function onRequestPost({request}){
  const locale=safeLocale(clean(body?.locale));
  try{
   const projection=validateProjection(body?.canonicalProjection);
-  if(projection.method?.publicMethodCode!=='NUMEROLOGY_PROJECTION')return json({ok:false,error:'CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED',publicMethodCode:projection.method?.publicMethodCode||null},423);
+  const publicMethodCode=projection.method?.publicMethodCode;
+  if(!['NUMEROLOGY_PROJECTION','BAZI_PROJECTION'].includes(publicMethodCode))return json({ok:false,error:'CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED',publicMethodCode:publicMethodCode||null},423);
   const meaningBundle=await buildCanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY,mode:'production'});
   if(!meaningBundle.items.length)return json({ok:false,error:'CMP_PRODUCTION_MEANING_UNRESOLVED'},422);
   const localeProjection=await projectCanonicalMeaningLocale({bundle:meaningBundle,localeRegistry:CMP_PRODUCTION_LOCALE_REGISTRY,locale});
-  const reading=buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
+  const reading=publicMethodCode==='BAZI_PROJECTION'?buildBzrRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection}):buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
   return json({ok:true,capabilityAvailability:'AVAILABLE',capabilityVersion:'1.0.0',executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading},200);
  }catch(error){
   const code=error?.code||'CMP_MEANING_FAILED_CLOSED';

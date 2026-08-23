@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const r=json('content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v3.json');
+assert.equal(r.status,'CURRENT_SUCCESSOR_NUM_BZR_AVAILABLE_AST_PARTIAL');
+const by=Object.fromEntries(r.methods.map(x=>[x.methodCode,x]));
+assert.equal(by.NUM.availability,'AVAILABLE');assert.equal(by.NUM.meaning,'AVAILABLE');
+assert.equal(by.BZR.availability,'AVAILABLE');assert.equal(by.BZR.meaning,'AVAILABLE');assert.equal(by.BZR.reading,'AVAILABLE');assert.equal(by.BZR.professional,'UNAVAILABLE');
+assert.equal(by.AST.availability,'PARTIAL');assert.equal(by.AST.meaning,'UNAVAILABLE');assert.equal(by.HDR.availability,'UNAVAILABLE');
+assert.equal(r.rules.capabilityAvailabilityIndependentFromExecutionCompleteness,true);
+console.log('✓ RRP current method-availability successor v3 passed.');
+console.log('  NUM/BZR are Available for self-service Runtime Reading; AST remains Partial and HDR unavailable.');

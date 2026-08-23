@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-RRP-MEANING-ADMISSION-SUCCESSOR-v3.0.0",
+  "work": "BZRA-W7",
+  "baselineCommit": "b536eb5a6f69a50d7549426a09b7f123bde35c74",
+  "status": "CURRENT_SUCCESSOR_NUM_BZR_PRODUCTION_MEANING_ACTIVE",
+  "predecessor": "content/products/runtime-reading/successors/runtime-reading-meaning-admission-successor-v2.json",
+  "predecessorMutated": false,
+  "meaningAuthority": "content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v2.json",
+  "requiredFlow": [
+    "CANONICAL_METHOD_PROJECTION",
+    "CMP_PRODUCTION_ACTIVATION_GATE",
+    "CANONICAL_MEANING_PRODUCTION_BUNDLE",
+    "RRP_CANONICAL_MEANING_CONSUMER"
+  ],
+  "methodStates": {
+    "NUM": "AVAILABLE",
+    "BZR": "AVAILABLE",
+    "AST": "UNAVAILABLE_PENDING_ASTA",
+    "HDR": "UNAVAILABLE"
+  },
+  "rules": {
+    "llmMayCreateMissingMeaning": false,
+    "providerMayCreateMissingMeaning": false,
+    "projectionMayBeTreatedAsMeaning": false,
+    "onlyProductionBundleMayEnterAutomaticCustomerReading": true,
+    "missingMeaningMustRemainExplicit": true
+  }
+}
