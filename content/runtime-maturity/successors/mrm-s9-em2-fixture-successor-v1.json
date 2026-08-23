@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "PHI-OS-MRM-S9-EM2-FIXTURE-SUCCESSOR-v1.0.0",
+  "phase": "MRM-S",
+  "work": "MRM-S9",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE_FIXTURE_VALIDATION_SUCCESSOR",
+  "predecessor": {
+    "path": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.3.json",
+    "sha256": "35204344acca903b0782c8d1f015ad1488ac8f8b526242f998d87c417dd905cf"
+  },
+  "successor": {
+    "path": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.4.json",
+    "sha256": "9039d345e7d8a47a6d7bd5789bdb88fb74de1669ca6c357293730d6a6c912b93"
+  },
+  "promotedCapabilities": [
+    "DAR-CLAUSE-RESOLUTION",
+    "DAR-DOCUMENT-ASSEMBLY",
+    "DAR-DOCUMENT-VALIDATION",
+    "DAR-RENDERING",
+    "DAR-VERSIONING",
+    "FCR-ALLOCATION",
+    "FCR-BUSINESS-WEALTH",
+    "FCR-CASH-FLOW",
+    "FCR-CONTINGENT-EXPOSURE",
+    "FCR-CURRENCY",
+    "FCR-DEBT",
+    "FCR-EDUCATION-FUNDING",
+    "FCR-EMERGENCY-RESERVE",
+    "FCR-ESTATE-LIQUIDITY",
+    "FCR-INVESTMENT-PROJECTION",
+    "FCR-LIQUIDITY",
+    "FCR-NET-WORTH",
+    "FCR-PROTECTION-NEED",
+    "FCR-RETIREMENT",
+    "FCR-SCENARIO",
+    "FCR-TRACE"
+  ],
+  "preservedEM2": [
+    "RRP-REPORT-COMPOSITION"
+  ],
+  "fixtureSuitesAudited": {
+    "FCR": {
+      "capabilities": [
+        "FCR-CURRENCY",
+        "FCR-NET-WORTH",
+        "FCR-LIQUIDITY",
+        "FCR-CASH-FLOW",
+        "FCR-DEBT",
+        "FCR-CONTINGENT-EXPOSURE",
+        "FCR-EMERGENCY-RESERVE",
+        "FCR-PROTECTION-NEED",
+        "FCR-EDUCATION-FUNDING",
+        "FCR-RETIREMENT",
+        "FCR-INVESTMENT-PROJECTION",
+        "FCR-ESTATE-LIQUIDITY",
+        "FCR-BUSINESS-WEALTH",
+        "FCR-ALLOCATION",
+        "FCR-SCENARIO",
+        "FCR-TRACE"
+      ],
+      "promotableUnderS9": true,
+      "checker": "scripts/check-fcr-runtime.mjs"
+    },
+    "DAR": {
+      "capabilities": [
+        "DAR-CLAUSE-RESOLUTION",
+        "DAR-DOCUMENT-ASSEMBLY",
+        "DAR-DOCUMENT-VALIDATION",
+        "DAR-RENDERING",
+        "DAR-VERSIONING"
+      ],
+      "promotableUnderS9": true,
+      "checker": "scripts/check-dar-w15-w24-document-assembly-runtime.mjs"
+    },
+    "FAR": {
+      "capabilities": [
+        "FAR-LIQUIDITY",
+        "FAR-CASHFLOW",
+        "FAR-DEBT",
+        "FAR-GUARANTEE",
+        "FAR-CONCENTRATION",
+        "FAR-PROTECTION",
+        "FAR-RETIREMENT",
+        "FAR-ESTATE",
+        "FAR-SCENARIO",
+        "FAR-CROSS-DOMAIN",
+        "FAR-CONFIDENCE-PROVENANCE"
+      ],
+      "promotableUnderS9": false,
+      "checker": "scripts/check-far-fixtures.mjs"
+    },
+    "HFP": {
+      "capabilities": [
+        "HFP-COMPOSITION",
+        "HFP-PROFESSIONAL-BINDING",
+        "HFP-RR-HANDOFF",
+        "HFP-CONTINUITY"
+      ],
+      "promotableUnderS9": true,
+      "checker": "scripts/check-hfp-fixtures.mjs"
+    },
+    "PFR": {
+      "capabilities": [
+        "PFR-CASE-REVIEW",
+        "PFR-RECOMMENDATION-AUTHORING",
+        "PFR-SIGNATURE-LINEAGE",
+        "PFR-AI-ASSISTANCE-BOUNDARY",
+        "PFR-HFP-CONTRIBUTION"
+      ],
+      "promotableUnderS9": false,
+      "checker": "scripts/check-pfr-fixtures.mjs"
+    }
+  },
+  "notPromoted": {
+    "FAR": "Fixture suite passes but formal EM-1 determinism admission is absent; contiguous promotion forbids EM-2.",
+    "PFR": "Human professional judgment cannot be converted into a determinism claim; fixtures remain governed evidence without EM-2 promotion.",
+    "HFP": "HFP W27 already self-governs four EM-2 capabilities; master adoption occurs in S18 successor inventory."
+  },
+  "rules": {
+    "noPilotEvidenceCreated": true,
+    "noRealCaseCreated": true,
+    "historicalFreezeMutated": false,
+    "productionAuthorityChanged": false
+  }
+}
