@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-FMA-DEPLOYMENT-ACCEPTANCE-v1.0.0",
+  "work": "FMA-W12",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "SOURCE_DEPLOYABILITY_ACCEPTED_LIVE_VERIFICATION_PENDING",
+  "sourceAcceptance": {
+    "localGovernanceChecks": true,
+    "productionConsumersPresent": true,
+    "frontendRoutesPresent": true,
+    "freshApplyReplayRequired": true
+  },
+  "liveDeployment": {
+    "verified": false,
+    "reason": "ZIP_BASELINE_HAS_NO_LIVE_CLOUDFLARE_DEPLOYMENT_EVIDENCE",
+    "requiredFutureEvidence": [
+      "DEPLOYED_COMMIT_SHA",
+      "PRODUCTION_ROUTE_PROBE",
+      "PRODUCTION_API_PROBE"
+    ]
+  },
+  "rule": "CAPABILITY_AVAILABLE_DOES_NOT_EQUAL_LIVE_DEPLOYMENT_VERIFIED"
+}

@@ -1384,7 +1384,7 @@
     "check:dar": "npm run check:dar-w0-w14 && npm run check:dar-w15-w24",
     "check:part-k-historical": "node scripts/check-part-k-final-freeze.mjs",
     "check:service-continuity-batch3": "node scripts/check-service-continuity-batch3.mjs",
-    "check:runtime-frontend-parity": "npm run check:runtime-frontend-parity-v1 && node scripts/check-runtime-frontend-parity-v2.mjs && node scripts/check-runtime-frontend-parity-v3.mjs && node scripts/check-runtime-frontend-parity-v4.mjs",
+    "check:runtime-frontend-parity": "npm run check:runtime-frontend-parity-v1 && node scripts/check-runtime-frontend-parity-v2.mjs && node scripts/check-runtime-frontend-parity-v3.mjs && node scripts/check-runtime-frontend-parity-v4.mjs && node scripts/check-runtime-frontend-parity-v5.mjs",
     "check:pcm": "npm run check:runtime-frontend-parity",
     "check:fcr-authority": "node scripts/check-fcr-authority.mjs",
     "check:fcr-contracts": "node scripts/check-fcr-contracts.mjs",
@@ -1469,7 +1469,11 @@
     "check:asta-w11-w24": "node scripts/check-asta-w11-w24.mjs",
     "check:ast-production": "npm run check:ast-production-scope && npm run check:asta-w11-w24",
     "check:fma-e": "npm run check:ast-production && npm run check:rrp-method-availability-current && npm run check:runtime-frontend-parity",
-    "check:px2": "node scripts/check-px2-w0-w13-public-experience-v2.mjs"
+    "check:px2": "node scripts/check-px2-w0-w13-public-experience-v2.mjs",
+    "check:runtime-frontend-parity-v5": "node scripts/check-runtime-frontend-parity-v5.mjs",
+    "check:no-fake-method-availability": "node scripts/check-no-fake-method-availability.mjs",
+    "check:fma-w4-w16": "node scripts/check-fma-w4-w16.mjs",
+    "check:fma-f": "npm run check:fma-e && npm run check:fma-w4-w16 && npm run check:no-fake-method-availability && npm run check:runtime-frontend-parity"
   },
   "type": "module",
   "dependencies": {

@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "PHI-OS-CANONICAL-METHOD-PRODUCTION-SCOPE-REGISTRY-v2.0.0",
+  "work": "FMA-W13",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "CURRENT_CANONICAL_V1_SCOPES_PRODUCTION_ACCEPTED",
+  "rules": {
+    "availableMeansDeclaredScopeComplete": true,
+    "scopeRegistrationDoesNotGrantAvailability": true,
+    "scopeExpansionRequiresVersionedSuccessor": true,
+    "allHistoricalSchoolsRequired": false
+  },
+  "methods": [
+    {
+      "methodCode": "NUMEROLOGY",
+      "pluginCode": "NUM",
+      "scopeCode": "NUMERIC_RUNTIME_V1",
+      "scopeVersion": "1.0.0",
+      "scopeStatus": "PRODUCTION_ACCEPTED",
+      "currentProductionScope": [
+        "BIRTH_NUMBER",
+        "NUMBER_STRUCTURE",
+        "EXPLICIT_DATE_CYCLE_PROJECTION"
+      ],
+      "includedFeatures": [
+        "BIRTH_NUMBER",
+        "LIFE_PATH_PRIMARY_NUMBER_STRUCTURE",
+        "CANONICAL_NUMBER_STRUCTURE",
+        "CANONICAL_CYCLES"
+      ],
+      "excludedFeatures": [
+        "UNBOUNDED_FORTUNE_NUMBER_CLAIMS",
+        "PROFESSIONAL_JUDGMENT"
+      ],
+      "deferredFeatures": [
+        "NAME_NUMEROLOGY",
+        "ADDITIONAL_HISTORICAL_NUMEROLOGY_SCHOOLS"
+      ],
+      "inputRequirements": [
+        "CANONICAL_BIRTH_DATE",
+        "TARGET_DATE_WHEN_CYCLE_REQUESTED",
+        "GOVERNED_TIMEZONE_CONTEXT_WHEN_REQUIRED"
+      ],
+      "calculationPolicy": "VERSIONED_NUM_AUTHORITY_REQUIRED",
+      "projectionPolicy": "CANONICAL_METHOD_PROJECTION_ONLY",
+      "meaningPolicy": "CMP_PRODUCTION_SUCCESSOR_ONLY",
+      "readingPolicy": "RRP_GOVERNED_COMPOSITION_ONLY"
+    },
+    {
+      "methodCode": "BAZI",
+      "pluginCode": "BZR",
+      "scopeCode": "BAZI_STRUCTURAL_RUNTIME_V1",
+      "scopeVersion": "1.0.0",
+      "scopeStatus": "PRODUCTION_ACCEPTED",
+      "currentProductionScope": [
+        "FOUR_PILLARS",
+        "GOVERNED_SOLAR_CONTEXT",
+        "CONDITIONAL_LUCK_CYCLE"
+      ],
+      "includedFeatures": [
+        "CANONICAL_CALENDAR_CONVERSION",
+        "TRUE_SOLAR_TIME_WHERE_AUTHORITY_REQUIRES",
+        "FOUR_PILLARS",
+        "HEAVENLY_STEMS",
+        "EARTHLY_BRANCHES",
+        "PILLAR_STRUCTURE",
+        "CONDITIONAL_LUCK_CYCLE"
+      ],
+      "excludedFeatures": [
+        "UNBOUNDED_DESTINY_CLAIMS",
+        "PROFESSIONAL_JUDGMENT"
+      ],
+      "deferredFeatures": [
+        "ALL_HISTORICAL_BAZI_SCHOOLS",
+        "UNFROZEN_ADVANCED_RELATIONAL_SYSTEMS"
+      ],
+      "inputRequirements": [
+        "CANONICAL_BIRTH_DATE",
+        "GOVERNED_TIMEZONE_CONTEXT",
+        "BIRTH_TIME_FOR_TIME_DEPENDENT_COMPONENTS",
+        "EXPLICIT_TRADITIONAL_CALCULATION_SEX_WHEN_LUCK_CYCLE_POLICY_REQUIRES"
+      ],
+      "calculationPolicy": "VERSIONED_BZR_AUTHORITY_REQUIRED",
+      "projectionPolicy": "CANONICAL_METHOD_PROJECTION_ONLY",
+      "meaningPolicy": "CMP_PRODUCTION_SUCCESSOR_ONLY",
+      "readingPolicy": "RRP_GOVERNED_COMPOSITION_ONLY"
+    },
+    {
+      "methodCode": "ASTROLOGY",
+      "pluginCode": "AST",
+      "scopeCode": "AST_STRUCTURAL_RUNTIME_V1",
+      "scopeVersion": "1.0.0",
+      "scopeStatus": "PRODUCTION_ACCEPTED",
+      "currentProductionScope": [
+        "CORE_10_PLANETS",
+        "TRUE_LUNAR_NODE",
+        "ASC_MC_DSC_IC",
+        "TWELVE_HOUSES",
+        "MAJOR_ASPECTS"
+      ],
+      "includedFeatures": [
+        "CORE_10_PLANETS",
+        "TRUE_LUNAR_NODE",
+        "ASC_MC_DSC_IC",
+        "TWELVE_HOUSES",
+        "MAJOR_ASPECTS"
+      ],
+      "excludedFeatures": [
+        "UNBOUNDED_FATE_PREDICTION",
+        "PROFESSIONAL_JUDGMENT"
+      ],
+      "deferredFeatures": [
+        "ASTEROIDS",
+        "FIXED_STARS",
+        "MINOR_ASPECTS",
+        "PROGRESSIONS",
+        "DIRECTIONS",
+        "ALL_ASTROLOGY_SCHOOLS"
+      ],
+      "inputRequirements": [
+        "CANONICAL_BIRTH_DATE",
+        "GOVERNED_TIMEZONE_CONTEXT",
+        "COORDINATES_FOR_TIME_LOCATION_DEPENDENT_COMPONENTS",
+        "BIRTH_TIME_FOR_ANGLES_AND_HOUSES"
+      ],
+      "calculationPolicy": "AST_PRODUCTION_POLICY_SUCCESSOR_REQUIRED",
+      "projectionPolicy": "CANONICAL_METHOD_PROJECTION_ONLY",
+      "meaningPolicy": "CMP_PRODUCTION_SUCCESSOR_ONLY",
+      "readingPolicy": "RRP_GOVERNED_COMPOSITION_ONLY"
+    }
+  ],
+  "predecessor": "content/governance/full-method-availability/registries/canonical-method-production-scope-registry-v1.json",
+  "predecessorMutated": false
+}

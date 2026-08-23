@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-FMA-FRONTEND-PARITY-CONTRACT-v2.0.0",
+  "work": "FMA-W5",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "ACTIVE",
+  "availableMethodRequirements": [
+    "CURRENT_PCM_AVAILABLE",
+    "CANONICAL_RUNTIME_AUTHORITY",
+    "CANONICAL_PROJECTION_AUTHORITY",
+    "PRODUCTION_MEANING_AUTHORITY",
+    "RUNTIME_READING_AUTHORITY",
+    "EXECUTABLE_FRONTEND_ROUTE",
+    "PRODUCTION_ACCEPTANCE"
+  ],
+  "methods": {
+    "AST": {
+      "route": "/personal-runtime",
+      "projectionApi": "/api/ast-structural-execute",
+      "meaningApi": "/api/method-meaning",
+      "consumer": "assets/js/pages/ast-production-meaning.js"
+    },
+    "BZR": {
+      "route": "/personal-runtime",
+      "projectionApi": "/api/method-execute",
+      "meaningApi": "/api/method-meaning",
+      "consumer": "assets/js/pages/bzr-production-meaning.js"
+    },
+    "NUM": {
+      "route": "/personal-runtime",
+      "projectionApi": "/api/method-execute",
+      "meaningApi": "/api/method-meaning",
+      "consumer": "assets/js/pages/num-production-meaning.js"
+    }
+  },
+  "forbidden": [
+    "AVAILABLE_WITHOUT_FRONTEND",
+    "FRONTEND_AVAILABLE_WITHOUT_PCM",
+    "AVAILABLE_WITHOUT_MEANING",
+    "AVAILABLE_WITHOUT_ACCEPTANCE"
+  ]
+}
