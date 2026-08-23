@@ -1,2 +1,2 @@
-import { hydrateUnifiedPublicVisuals } from '../runtime/web-production/unified-public-visual-resolver.js';
+import { hydrateUnifiedPublicVisuals } from '../public-v2/unified-public-visual-resolver.js';
 void hydrateUnifiedPublicVisuals();

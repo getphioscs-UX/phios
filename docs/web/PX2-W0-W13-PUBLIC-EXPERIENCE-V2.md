@@ -38,7 +38,7 @@ Current visual registry pointer:
 
 Unified resolver:
 
-`assets/js/runtime/web-production/unified-public-visual-resolver.js`
+`assets/js/public-v2/unified-public-visual-resolver.js`
 
 The resolver first consumes existing canonical public assets, then the current verified client-visual registry. Public pages no longer need page-specific ILL/FIG R2 resolvers. Unavailable assets collapse rather than reserving blank frames.
 
