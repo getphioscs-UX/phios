@@ -1448,7 +1448,9 @@
     "check:bzr-production": "npm run check:bzr-w0 && npm run check:bzr-w1 && npm run check:bzr-w2 && npm run check:bzr-w3 && npm run check:bzr-w4 && npm run check:bzr-w5 && npm run check:bzr-w6 && npm run check:cmp-bzr-successor && npm run check:bzra-w0-w13",
     "check:runtime-frontend-parity-v3": "node scripts/check-runtime-frontend-parity-v3.mjs",
     "check:fma-c": "npm run check:canonical-meaning-production-current && npm run check:bzr-production && npm run check:rrp-method-availability-current && npm run check:runtime-frontend-parity",
-    "check:rrp-method-availability-current": "node scripts/check-rrp-method-availability-current-v3.mjs"
+    "check:rrp-method-availability-current": "node scripts/check-rrp-method-availability-current-v3.mjs",
+    "check:ast-production-scope": "node scripts/check-asta-w0-w10.mjs",
+    "check:fma-d": "npm run check:ast-production-scope && npm run check:runtime-frontend-parity"
   },
   "type": "module",
   "dependencies": {
