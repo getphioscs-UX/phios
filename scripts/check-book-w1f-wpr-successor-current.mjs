@@ -19,7 +19,8 @@ const packageJson = json('package.json');
 const currentSuccessorV2 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v2.json');
 const currentSuccessorV3 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v3.json');
 const currentSuccessorV4 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v4.json');
-const currentSuccessor = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v5.json');
+const currentSuccessorV5 = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v5.json');
+const currentSuccessor = json('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v6.json');
 const partH5ABrandingSuccessor = json('content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json');
 const publicAssetVerificationSuccessor = json('content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json');
 assert.equal(record.status, 'accepted-successor-web-production-runtime-active');
@@ -27,9 +28,10 @@ assert.equal(record.predecessor.freeze.status, 'HISTORICAL_ALLOWED');
 assert.equal(record.predecessor.freeze.rewritten, false);
 assert.equal(sha256(record.predecessor.freeze.path), record.predecessor.freeze.sha256);
 assert.equal(sha256(record.predecessor.baselineAudit.path), record.predecessor.baselineAudit.sha256);
-assert.equal(currentSuccessor.status, 'BOOK_W1F_CURRENT_WPR_CHECKER_SUCCESSOR_V5_ACTIVE_PART_H5A_BRANDING_REMOTE_VERIFICATION_PRESERVED');
-assert.equal(currentSuccessor.predecessorCurrentSuccessor.path, 'content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v4.json');
-assert.equal(currentSuccessor.predecessorCurrentSuccessor.sha256, sha256('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v4.json'));
+assert.equal(currentSuccessor.status, 'BOOK_W1F_CURRENT_WPR_CHECKER_SUCCESSOR_V6_ACTIVE_PX2_PRIMARY_SURFACES');
+assert.equal(currentSuccessor.predecessorCurrentSuccessor.path, 'content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v5.json');
+assert.equal(currentSuccessor.predecessorCurrentSuccessor.sha256, sha256('content/knowledge/migrations/book-w1f/wpr-book-w1-current-successor-v5.json'));
+assert.equal(currentSuccessorV5.status, 'BOOK_W1F_CURRENT_WPR_CHECKER_SUCCESSOR_V5_ACTIVE_PART_H5A_BRANDING_REMOTE_VERIFICATION_PRESERVED');
 assert.equal(currentSuccessorV4.status, 'BOOK_W1F_CURRENT_WPR_CHECKER_SUCCESSOR_V4_ACTIVE_POC_A_PUBLIC_ASSET_VERIFICATION_V3_PRESERVED');
 assert.equal(currentSuccessorV3.status, 'BOOK_W1F_CURRENT_WPR_CHECKER_SUCCESSOR_V3_ACTIVE_HISTORICAL_V2_PRESERVED');
 assert.equal(currentSuccessor.predecessorCurrentSuccessor.rewritten, false);
@@ -43,6 +45,7 @@ assert.equal(currentSuccessor.publicAssets.governanceSha256, sha256(currentSucce
 assert.equal(currentSuccessor.publicAssets.historicalGovernanceRewritten, false);
 assert.equal(currentSuccessor.authority.pocARemoteVerificationMaterializationOnly, true);
 assert.equal(currentSuccessor.authority.partH5aBrandingRemoteVerificationOnly, true);
+assert.equal(currentSuccessor.authority.px2PresentationSuccessorOnly, true);
 assert.equal(currentSuccessor.historicalW1F.sha256, sha256('content/knowledge/migrations/book-w1f/wpr-book-w1-successor-compatibility-v1.json'));
 assert.equal(currentSuccessor.historicalW1F.historicalW0CheckerRecordedSha256, record.predecessor.historicalChecker.w0Sha256);
 assert.equal(currentSuccessor.currentCheckerSuccessor.w0CurrentSha256, sha256(record.predecessor.historicalChecker.w0Path));
@@ -149,6 +152,17 @@ assert.deepEqual(observation.productionStates, ['LIMITED_PRODUCTION']);
 assert.equal(observation.cprProductionRecordCount, 0);
 assert.equal(observation.carPublicationCount, 0);
 
+const px2Successor = json(currentSuccessor.presentationSuccessor.governancePath);
+assert.equal(px2Successor.status, 'ACTIVE');
+assert.equal(currentSuccessor.presentationSuccessor.governanceSha256, sha256(currentSuccessor.presentationSuccessor.governancePath));
+assert.equal(currentSuccessor.presentationSuccessor.checkerSha256, sha256(currentSuccessor.presentationSuccessor.checkerPath));
+assert.equal(currentSuccessor.presentationSuccessor.financialCheckerSha256, sha256(currentSuccessor.presentationSuccessor.financialCheckerPath));
+assert.equal(currentSuccessor.presentationSuccessor.pdsCheckerSha256, sha256(currentSuccessor.presentationSuccessor.pdsCheckerPath));
+assert.equal(currentSuccessor.presentationSuccessor.historicalCheckersRewritten, false);
+for (const checker of currentSuccessor.presentationSuccessor.supersededHistoricalChecks) {
+  assert.equal(checker.sha256, sha256(checker.path), `Historical WPR presentation checker drift: ${checker.path}`);
+}
+
 const compatibleHistoricalChecks = [
   'scripts/check-wpr-w1-authority-boundary.mjs',
   'scripts/check-wpr-w2-canonical-web-production.mjs',
@@ -162,19 +176,15 @@ const compatibleHistoricalChecks = [
   'scripts/check-wpr-w11-canonical-composition-resolver.mjs',
   'scripts/check-wpr-w12-locale-projection.mjs',
   'scripts/check-wpr-w13-public-vocabulary.mjs',
-  'scripts/check-wpr-w14-homepage-production.mjs',
-  'scripts/check-wpr-w15-library-production.mjs',
   'scripts/check-wpr-w16-article-production.mjs',
   'scripts/check-wpr-w17-figure-diagram-production.mjs',
   'scripts/check-wpr-w18-books-production.mjs',
   'scripts/check-wpr-w19-academy-production.mjs',
   'scripts/check-wpr-w20-reality-journey-production.mjs',
   'scripts/check-wpr-w21-mcd7-successor.mjs',
-  'scripts/check-wpr-w22-professional-financial-production.mjs',
   'scripts/check-wpr-w23-report-workspace-production.mjs',
   'scripts/check-wpr-w24-hydration-runtime.mjs',
   'scripts/check-wpr-w26-privacy-security-production.mjs',
-  'scripts/check-wpr-w27-pds-responsive-accessibility.mjs',
   'scripts/check-wpr-w29-full-production-acceptance.mjs'
 ];
 for (const checker of compatibleHistoricalChecks) {
@@ -182,5 +192,14 @@ for (const checker of compatibleHistoricalChecks) {
   assert.equal(result.status, 0, `Successor-compatible WPR checker failed: ${checker}`);
 }
 
-console.log('✓ BOOK-W1F current WPR successor compatibility passed; historical WPR/BOOK-W1F records preserved.');
+for (const checker of [
+  currentSuccessor.presentationSuccessor.checkerPath,
+  currentSuccessor.presentationSuccessor.financialCheckerPath,
+  currentSuccessor.presentationSuccessor.pdsCheckerPath
+]) {
+  const result = spawnSync(process.execPath, [checker], { stdio: 'inherit' });
+  assert.equal(result.status, 0, `Current WPR presentation successor failed: ${checker}`);
+}
+
+console.log('✓ BOOK-W1F current WPR successor compatibility passed; PX2 primary presentation and historical WPR/BOOK-W1F records preserved.');
 console.log('  WPR v1 freeze/history remains immutable; current WPR validates five canonical routes plus one noindex compatibility redirect.');

@@ -12,6 +12,12 @@ const sha256 = async relative => crypto
   .digest('hex');
 
 const contract = JSON.parse(await read('docs/experience/EXP-W4A-public-reality-demo-retirement-contract.json'));
+const px2Successor = JSON.parse(await read(
+  'content/web-production/px2/successors/px2-w11-checker-successor-v1.json'
+));
+const realityRouteSuccessor = JSON.parse(await read(
+  'content/web-production/successors/pds-w3-current-reality-route-successor-v2.json'
+));
 assert.equal(contract.freezeId, 'EXP-W4A-Public-Reality-Demo-Retired');
 assert.equal(contract.baselineCommit, 'b34ac06692a375515d3df05a78687b6ed105e327');
 assert.equal(contract.status, 'retired');
@@ -22,6 +28,11 @@ assert.equal(contract.redirect.singleHop, true);
 assert.equal(contract.replacement.newDemoCreated, false);
 assert.equal(contract.replacement.oldContentMigrated, false);
 assert.equal(Object.values(contract.boundaries).every(value => value === false), true);
+assert.equal(px2Successor.successorCode, 'PX2-W11-CHECKER-SUCCESSOR');
+assert.equal(px2Successor.status, 'ACTIVE');
+assert.equal(realityRouteSuccessor.status, 'CURRENT');
+assert.equal(realityRouteSuccessor.predecessor.realityFooterHref, '/reality-journey');
+assert.equal(realityRouteSuccessor.successor.realityNavigationHref, '/reality/');
 
 for (const retired of [
   'reality-demo.html',
@@ -57,10 +68,26 @@ for (const page of activePages) {
   const source = await read(page);
   assert.doesNotMatch(source, /href=["']\/reality-demo(?:\.html)?["']/i, `${page} retains a Demo link`);
   assert.doesNotMatch(source, /Reality Demo|现实演示|互动证据边界实验|evidence experiment/i, `${page} retains customer Demo copy`);
-  assert.match(source, /(?:data-public-header-placeholder|<header)/, `${page} has no accessible public shell`);
+  const hasLegacyPublicShell = /(?:data-public-header-placeholder|<header)/.test(source);
+  const hasPx2PublicShell = /data-puxr-header/.test(source) &&
+    /\/assets\/css\/phios-public-v2\.css/.test(source) &&
+    /\/assets\/js\/public-shell-v2\.js/.test(source);
+  assert.equal(
+    hasLegacyPublicShell || hasPx2PublicShell,
+    true,
+    `${page} has no accessible public shell`
+  );
 }
 for (const page of ['index.html', 'ai-disclosure.html', 'free-observation.html']) {
-  assert.match(await read(page), /href="\/reality-journey"/);
+  const source = await read(page);
+  assert.equal(
+    [
+      realityRouteSuccessor.predecessor.realityFooterHref,
+      realityRouteSuccessor.successor.realityNavigationHref
+    ].some(route => source.includes(`href="${route}"`)),
+    true,
+    `${page} has no current or preserved Reality entry`
+  );
 }
 
 for (const locale of [
