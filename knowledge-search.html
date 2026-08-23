@@ -1,120 +1,152 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ask PHI OS with one governed, grounded question.">
+  <meta name="description" content="Ask PHI OS with one bounded question.">
   <title>Ask PHI OS — PHI OS</title>
-  <link rel="stylesheet" href="/assets/css/tokens.css">
-  <link rel="stylesheet" href="/assets/css/design/foundation.css">
-  <link rel="stylesheet" href="/assets/css/design/typography.css">
-  <link rel="stylesheet" href="/assets/css/public-experience.css">
-  <link rel="stylesheet" href="/assets/css/knowledge-release.css">
-  <link rel="stylesheet" href="/assets/css/knowledge-search.css">
-  <link rel="stylesheet" href="/assets/css/runtime-spine.css">
-  <link rel="stylesheet" href="/assets/css/client-production-surfaces.css">
+  <link rel="canonical" href="/knowledge-search">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/puxr-v8.css">
 </head>
-<body class="knowledge-page" data-public-section="knowledge" data-page="knowledge-search">
-  <a class="skip-link" href="#knowledge-search-main">Skip to main content</a>
-  <header data-public-header-placeholder></header>
-  <main id="knowledge-search-main" data-cka-root data-cka-entry-surface="KNOWLEDGE_SEARCH">
-<section class="rs-hero" data-runtime-spine-surface="KNOWLEDGE_SEARCH" aria-label="Ask PHI OS">
-  <div class="rs-hero__media" aria-hidden="true"><img data-rs-asset="HERO-002" alt="" decoding="async" fetchpriority="high"><div class="rs-hero__wash"></div></div>
-  <div class="rs-shell rs-hero__content">
-    <p class="rs-kicker" data-rs-en="Ask PHI OS" data-rs-zh="询问 PHI OS">Ask PHI OS</p>
-    <h1 data-rs-en="Ask one question. See what is known, why, and what remains uncertain." data-rs-zh="从一个问题开始，看见已知、理由与仍然未知的部分。">Ask one question. See what is known, why, and what remains uncertain.</h1>
-    <p class="rs-hero__lead" data-rs-en="PHI OS answers from governed knowledge, shows the boundary of the answer, and hands complex situations to Reality only with your consent." data-rs-zh="PHI OS 从受治理的知识中回答，明确显示答案边界；只有在你同意时，复杂情况才会进入 Reality。">PHI OS answers from governed knowledge, shows the boundary of the answer, and hands complex situations to Reality only with your consent.</p>
-    <div class="rs-hero__actions"><a class="rs-hero__primary" href="#cka-question" data-rs-en="Ask a question →" data-rs-zh="提出问题 →">Ask a question →</a><a class="rs-hero__link" href="/library" data-rs-en="Explore the Knowledge Library" data-rs-zh="浏览知识库">Explore the Knowledge Library</a></div>
-  </div>
-</section>
-<section class="rs-context-band" aria-label="Runtime surface boundaries"><div class="rs-shell rs-context-band__grid"><div><small data-rs-en="Question" data-rs-zh="问题">Question</small><strong data-rs-en="One bounded question at a time" data-rs-zh="一次处理一个有边界的问题">One bounded question at a time</strong></div><div><small data-rs-en="Grounding" data-rs-zh="依据">Grounding</small><strong data-rs-en="Sources and unknowns remain visible" data-rs-zh="来源与未知保持可见">Sources and unknowns remain visible</strong></div><div><small data-rs-en="Handoff" data-rs-zh="交接">Handoff</small><strong data-rs-en="Complexity moves to Reality by consent" data-rs-zh="复杂情况经同意后进入 Reality">Complexity moves to Reality by consent</strong></div></div></section>
-
-    <section class="knowledge-section knowledge-section--paper">
-      <div class="knowledge-shell knowledge-search-panel">
-        <p class="knowledge-eyebrow cka-context-indicator" data-cka-context-indicator>Asking PHI OS</p>
-        <form class="cka-composer" data-cka-composer>
-          <label for="cka-question">Question</label>
-          <textarea id="cka-question" data-cka-question name="q" maxlength="500" rows="3" autocomplete="off" required></textarea>
-          <button class="knowledge-action knowledge-action--primary" type="submit">Ask PHI OS</button>
-        </form>
-        <p class="knowledge-search-status" role="status" aria-live="polite" data-cka-status>Enter one question to Ask PHI OS.</p>
-
-        <article class="cka-answer" data-cka-answer hidden>
-          <header class="cka-answer__question">
-            <p class="knowledge-eyebrow">Your question</p>
-            <h2 data-cka-answer-question></h2>
-            <p class="cka-answer-state cps-internal-state" data-cka-answer-state aria-hidden="true"></p>
-          </header>
-          <section data-cka-section="DIRECT_ANSWER"><h2>Direct answer</h2><div data-cka-direct-answer></div></section>
-          <section data-cka-section="WHY_THIS_MAY_HAPPEN"><h2>Why this may happen</h2><div data-cka-why></div></section>
-          <section data-cka-section="WHAT_TO_OBSERVE"><h2>What to observe</h2><div data-cka-observe></div></section>
-          <section data-cka-section="WHAT_PHIOS_DOES_NOT_YET_KNOW"><h2>What PHI OS does not yet know</h2><p class="cka-unknown-state cps-internal-state" data-cka-unknown-state aria-hidden="true"></p><div data-cka-unknown></div></section>
-          <section data-cka-section="RELATED_KNOWLEDGE"><h2>Related knowledge</h2><div class="cka-card-grid" data-cka-related-knowledge></div></section>
-          <details class="cka-grounding" data-cka-grounding>
-            <summary>Sources and grounding</summary>
-            <div data-cka-sources></div>
-          </details>
-          <aside class="knowledge-boundary cka-answer-boundary" data-cka-answer-boundary></aside>
-          <section class="cka-follow-up" data-cka-follow-up>
-            <h2>Ask one follow-up</h2>
-            <form class="cka-follow-up__form" data-cka-follow-up-form>
-              <label for="cka-follow-up-question">Follow-up question</label>
-              <textarea id="cka-follow-up-question" data-cka-follow-up-question maxlength="500" rows="2"></textarea>
-              <button class="knowledge-action" type="submit">Ask follow-up</button>
-            </form>
-            <p data-cka-follow-up-boundary>Guest context is temporary and supports one follow-up only.</p>
-          </section>
-
-          <section class="cka-guided" data-cka-guided>
-            <button class="knowledge-action" type="button" data-cka-guided-open>Help PHI OS understand your situation</button>
-            <form class="cka-guided__form" data-cka-guided-form hidden>
-              <p class="knowledge-eyebrow">Guided Context · temporary, not a full ICR</p>
-              <div class="cka-guided__grid">
-                <label>What is happening?<textarea name="whatIsHappening" maxlength="240" rows="2"></textarea></label>
-                <label>How long?<textarea name="howLong" maxlength="240" rows="2"></textarea></label>
-                <label>Who or what is involved?<textarea name="whoOrWhatIsInvolved" maxlength="240" rows="2"></textarea></label>
-                <label>What changed?<textarea name="whatChanged" maxlength="240" rows="2"></textarea></label>
-                <label>What have you tried?<textarea name="whatTried" maxlength="240" rows="2"></textarea></label>
-                <label>What matters most now?<textarea name="whatMattersMostNow" maxlength="240" rows="2"></textarea></label>
-              </div>
-              <button class="knowledge-action knowledge-action--primary" type="submit">Use this temporary context</button>
-            </form>
-            <p class="cka-guided__status" role="status" aria-live="polite" data-cka-guided-status></p>
-          </section>
-
-          <section class="cka-journey" data-cka-journey hidden>
-            <p class="knowledge-eyebrow">Reality complexity boundary</p>
-            <h2>When one answer is not enough</h2>
-            <p data-cka-journey-reason></p>
-            <button class="knowledge-action knowledge-action--primary" type="button" data-cka-journey-prepare>Explore this as a Reality Journey</button>
-            <div class="cka-journey__consent" data-cka-journey-consent hidden>
-              <label><input type="checkbox" data-cka-journey-consent-checkbox> I explicitly consent to prepare a temporary Reality entry seed for downstream ICR intake.</label>
-              <button class="knowledge-action" type="button" data-cka-journey-handoff>Continue with explicit consent</button>
-            </div>
-            <p role="status" aria-live="polite" data-cka-journey-status></p>
-          </section>
-
-          <p class="cka-search-more"><a class="knowledge-action" href="/library" data-cka-search-more>Search more knowledge</a></p>
-        </article>
-
-        <aside class="knowledge-boundary cka-entry-boundary">
-          <strong>Guest and Ask PHI OS boundary</strong>
-          <p>Guests can Ask, receive one limited follow-up, view Related Knowledge and use temporary context. An account is required for history, saved results, persistence and Journey continuity. Ask—including an Ask that sees birth data—does not execute a Method or turn question context into Canonical Reality.</p>
+<body class="puxr-page--soft" data-puxr-nav="ask">
+  <a class="puxr-skip" href="#main">Skip to content</a>
+  <div data-puxr-header></div>
+  <main id="main" class="puxr-main">
+    <section class="puxr-hero">
+      <div class="puxr-wrap puxr-hero__grid">
+        <div>
+          <p class="puxr-eyebrow">Ask PHI OS</p>
+          <h1 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">从一个问题开始，看见已知、理由、未知与下一步边界。</span><span class="puxr-lang-block puxr-lang-en">Begin with one question and see what is known, why, what remains unknown and where the boundary sits.</span></h1>
+          <p class="puxr-lead"><span class="puxr-lang-block puxr-lang-zh">Ask PHI OS 不应该伪装成无所不知的 generic chat。它应该一次处理一个问题，保留 grounding，并在相关性不足时明确拒绝用表面相似但实质无关的内容来回答。</span><span class="puxr-lang-block puxr-lang-en">Ask PHI OS should not behave like a generic omniscient chat. It should answer one bounded question at a time, keep grounding visible and fail closed when relevance is insufficient.</span></p>
+        </div>
+        <aside class="puxr-hero__card">
+          <h3><span class="puxr-lang-zh">Ask boundary</span><span class="puxr-lang-en">Ask boundary</span></h3>
+          <p class="big"><span class="puxr-lang-block puxr-lang-zh">Ask 负责 knowledge question，不负责直接替代现实专业判断。</span><span class="puxr-lang-block puxr-lang-en">Ask is for knowledge questions. It does not replace professional judgment about a live reality case.</span></p>
+          <div class="puxr-stack">
+            <div class="puxr-stack__row"><strong>Question</strong><span><span class="puxr-lang-zh">一次只处理一个问题。</span><span class="puxr-lang-en">Handle one question at a time.</span></span></div>
+            <div class="puxr-stack__row"><strong>Grounding</strong><span><span class="puxr-lang-zh">显示来源与未知。</span><span class="puxr-lang-en">Keep sources and unknowns visible.</span></span></div>
+            <div class="puxr-stack__row"><strong>Handoff</strong><span><span class="puxr-lang-zh">复杂现实问题经同意后再进入 Reality Journey。</span><span class="puxr-lang-en">Complex reality questions move to Reality Journey only by consent.</span></span></div>
+          </div>
         </aside>
       </div>
     </section>
-<section class="rs-visual-section" data-runtime-spine-visual="FIG-011">
-  <div class="rs-shell rs-visual-grid"><div class="rs-visual-copy">
-    <p class="rs-kicker" data-rs-en="Knowledge discovery" data-rs-zh="知识发现">Knowledge discovery</p>
-    <h2 data-rs-en="One question can open more than one governed knowledge route." data-rs-zh="一个问题可以打开不止一条受治理的知识路径。">One question can open more than one governed knowledge route.</h2>
-    <p data-rs-en="Direct answers, related knowledge, source grounding and Reality handoff remain different actions instead of collapsing into one generic chat response." data-rs-zh="直接回答、相关知识、来源依据与 Reality 交接保持为不同动作，而不是被压成一个通用聊天答案。">Direct answers, related knowledge, source grounding and Reality handoff remain different actions instead of collapsing into one generic chat response.</p>
-  </div><figure class="rs-figure"><img data-rs-asset="FIG-011" loading="lazy" decoding="async" alt="Knowledge discovery model"><figcaption data-rs-en="Knowledge discovery model" data-rs-zh="知识发现模型">Knowledge discovery model</figcaption></figure></div>
-</section>
+
+    <section class="puxr-section">
+      <div class="puxr-wrap puxr-ask-grid" data-cka-root data-cka-entry-surface="KNOWLEDGE_SEARCH">
+        <div>
+          <form class="puxr-ask-form" data-cka-composer>
+            <p class="puxr-eyebrow"><span class="puxr-lang-zh">提出问题</span><span class="puxr-lang-en">Ask a question</span></p>
+            <label for="cka-question"><span class="puxr-lang-zh">问题</span><span class="puxr-lang-en">Question</span></label>
+            <textarea id="cka-question" data-cka-question maxlength="500" rows="4" autocomplete="off" required placeholder="例如：我的手为什么突然很痒？ / e.g. Why did my hand suddenly become itchy?"></textarea>
+            <div class="puxr-actions"><button class="knowledge-action knowledge-action--primary" type="submit"><span class="puxr-lang-zh">询问 PHI OS</span><span class="puxr-lang-en">Ask PHI OS</span></button></div>
+            <p class="knowledge-search-status" role="status" aria-live="polite" data-cka-status></p>
+          </form>
+
+          <article class="cka-answer" data-cka-answer hidden>
+            <header class="cka-answer__question">
+              <p class="puxr-eyebrow"><span class="puxr-lang-zh">你的问题</span><span class="puxr-lang-en">Your question</span></p>
+              <h2 data-cka-answer-question></h2>
+            </header>
+
+            <section class="cka-answer__section">
+              <p class="puxr-card__kicker"><span class="puxr-lang-zh">回答状态</span><span class="puxr-lang-en">Answer state</span></p>
+              <p data-cka-answer-state></p>
+            </section>
+
+            <section class="cka-answer__section">
+              <h3><span class="puxr-lang-zh">直接回答</span><span class="puxr-lang-en">Direct answer</span></h3>
+              <div data-cka-direct-answer></div>
+            </section>
+
+            <section class="cka-answer__section">
+              <h3><span class="puxr-lang-zh">为什么可能会这样</span><span class="puxr-lang-en">Why this may happen</span></h3>
+              <div class="cka-answer__items" data-cka-why></div>
+            </section>
+
+            <section class="cka-answer__section">
+              <h3><span class="puxr-lang-zh">可以观察什么</span><span class="puxr-lang-en">What to observe</span></h3>
+              <div class="cka-answer__items" data-cka-observe></div>
+            </section>
+
+            <section class="cka-answer__section">
+              <h3><span class="puxr-lang-zh">未知与适用边界</span><span class="puxr-lang-en">Unknowns and application boundary</span></h3>
+              <p data-cka-unknown-state></p>
+              <div class="cka-answer__items" data-cka-unknown></div>
+            </section>
+
+            <section class="cka-answer__section">
+              <h3><span class="puxr-lang-zh">相关知识</span><span class="puxr-lang-en">Related knowledge</span></h3>
+              <div class="cka-answer__related" data-cka-related-knowledge></div>
+            </section>
+
+            <section class="cka-answer__section">
+              <h3><span class="puxr-lang-zh">来源与 grounding</span><span class="puxr-lang-en">Sources and grounding</span></h3>
+              <div class="cka-answer__sources" data-cka-sources></div>
+            </section>
+
+            <section class="cka-answer__section" data-cka-answer-boundary></section>
+
+            <form class="cka-followup" data-cka-follow-up-form hidden>
+              <h3><span class="puxr-lang-zh">追问一次</span><span class="puxr-lang-en">Ask one follow-up</span></h3>
+              <label for="cka-follow-up-question"><span class="puxr-lang-zh">补充、比较、延伸，或继续询问要观察什么。</span><span class="puxr-lang-en">Clarify, compare, expand or continue with what to observe.</span></label>
+              <textarea id="cka-follow-up-question" data-cka-follow-up-question maxlength="500" rows="3"></textarea>
+              <div class="puxr-actions"><button class="knowledge-action" type="submit"><span class="puxr-lang-zh">继续询问</span><span class="puxr-lang-en">Ask follow-up</span></button></div>
+              <p class="knowledge-search-status" data-cka-follow-up-boundary></p>
+            </form>
+
+            <section class="cka-guided">
+              <h3><span class="puxr-lang-zh">需要更清楚的上下文？</span><span class="puxr-lang-en">Need clearer context?</span></h3>
+              <p><span class="puxr-lang-zh">如果一个问题太宽、太模糊，先给 Ask 一个临时 guided context，而不是直接跳进 Reality Journey。</span><span class="puxr-lang-en">If the question is too broad or vague, give Ask temporary guided context instead of jumping straight into a Reality Journey.</span></p>
+              <div class="puxr-actions"><button class="knowledge-action knowledge-action--secondary" type="button" data-cka-guided-open><span class="puxr-lang-zh">补充临时上下文</span><span class="puxr-lang-en">Add temporary context</span></button></div>
+              <form class="cka-guided" data-cka-guided-form hidden>
+                <div class="puxr-grid-2">
+                  <div><label for="guided-1">What is happening now?</label><textarea id="guided-1" name="whatIsHappening" rows="3"></textarea></div>
+                  <div><label for="guided-2">How long has this been happening?</label><textarea id="guided-2" name="howLong" rows="3"></textarea></div>
+                  <div><label for="guided-3">Who or what is involved?</label><textarea id="guided-3" name="whoOrWhatIsInvolved" rows="3"></textarea></div>
+                  <div><label for="guided-4">What changed recently?</label><textarea id="guided-4" name="whatChanged" rows="3"></textarea></div>
+                  <div><label for="guided-5">What has already been tried?</label><textarea id="guided-5" name="whatTried" rows="3"></textarea></div>
+                  <div><label for="guided-6">What matters most now?</label><textarea id="guided-6" name="whatMattersMostNow" rows="3"></textarea></div>
+                </div>
+                <div class="puxr-actions"><button class="knowledge-action" type="submit"><span class="puxr-lang-zh">用临时上下文重试</span><span class="puxr-lang-en">Retry with temporary context</span></button></div>
+                <p class="cka-guided__status" role="status" aria-live="polite" data-cka-guided-status></p>
+              </form>
+            </section>
+
+            <section class="cka-journey" data-cka-journey hidden>
+              <h3><span class="puxr-lang-zh">当一个答案已经不够</span><span class="puxr-lang-en">When one answer is not enough</span></h3>
+              <p data-cka-journey-reason></p>
+              <button class="knowledge-action knowledge-action--primary" type="button" data-cka-journey-prepare><span class="puxr-lang-zh">准备进入 Reality Journey</span><span class="puxr-lang-en">Prepare Reality Journey handoff</span></button>
+              <div class="rs-compact-note" data-cka-journey-consent hidden>
+                <label><input type="checkbox" data-cka-journey-consent-checkbox> <span class="puxr-lang-zh">我明确同意仅为下游 ICR intake 准备临时 entry seed。</span><span class="puxr-lang-en">I explicitly consent to preparing a temporary entry seed for downstream ICR intake only.</span></label>
+                <div class="puxr-actions"><button class="knowledge-action" type="button" data-cka-journey-handoff><span class="puxr-lang-zh">继续</span><span class="puxr-lang-en">Continue</span></button></div>
+              </div>
+              <p role="status" aria-live="polite" data-cka-journey-status></p>
+            </section>
+
+            <p><a class="knowledge-action knowledge-action--secondary" href="/library" data-cka-search-more><span class="puxr-lang-zh">搜索更多知识</span><span class="puxr-lang-en">Search more knowledge</span></a></p>
+          </article>
+        </div>
+
+        <aside class="puxr-ask-aside">
+          <p class="puxr-eyebrow"><span class="puxr-lang-zh">当前上下文</span><span class="puxr-lang-en">Current context</span></p>
+          <p class="rs-compact-note" data-cka-context-indicator></p>
+          <div class="rs-compact-note" style="margin-top:14px">
+            <strong><span class="puxr-lang-zh">Guest 与 Ask PHI OS 的边界</span><span class="puxr-lang-en">Guest and Ask PHI OS boundary</span></strong>
+            <p><span class="puxr-lang-block puxr-lang-zh">Guests 可以 Ask、追问一次、查看相关知识并使用 temporary context。要保存历史、持续性或 Journey continuity，仍然需要 account。Ask 不会自动创建 Reality case，也不会替你执行专业判断。</span><span class="puxr-lang-block puxr-lang-en">Guests can Ask, use one follow-up, view related knowledge and use temporary context. History, persistence and Journey continuity still require an account. Ask does not automatically create a Reality case or make professional judgments for you.</span></p>
+          </div>
+          <div class="rs-compact-note" style="margin-top:14px">
+            <strong><span class="puxr-lang-zh">什么时候不该继续 Ask</span><span class="puxr-lang-en">When Ask is not enough</span></strong>
+            <p><span class="puxr-lang-block puxr-lang-zh">如果问题依赖最新外部事实、需要医疗/法律/财务专业判断，或已经成为多因素持续现实问题，Ask 应该显示边界并 handoff。</span><span class="puxr-lang-block puxr-lang-en">If the question depends on current external facts, licensed medical/legal/financial judgment, or an ongoing multi-factor reality case, Ask should surface the boundary and hand off.</span></p>
+          </div>
+        </aside>
+      </div>
+    </section>
   </main>
-  <footer data-public-footer-placeholder></footer>
-  <script type="module" src="/assets/js/public-shell.js"></script>
+  <div data-puxr-footer></div>
+  <script type="module" src="/assets/js/puxr-shell.js"></script>
   <script type="module" src="/assets/js/pages/knowledge-search-b.js"></script>
-  <script type="module" src="/assets/js/pages/runtime-spine-visuals.js"></script>
-  <script type="module" src="/assets/js/pages/client-production-surfaces.js"></script>
 </body>
 </html>

@@ -1,108 +1,75 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Browse PHI OS research, books, Atlas routes, figures, glossary terms and public downloads.">
-  <title data-i18n="knowledge.library.metaTitle">Library — PHI OS Knowledge</title>
+  <meta name="description" content="PHI OS 五册系统、已发布文章与 Ask PHI OS 的统一知识入口。">
+  <title>五册与知识 — PHI OS</title>
   <link rel="canonical" href="/library">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/tokens.css">
-  <link rel="stylesheet" href="/assets/css/design/foundation.css">
-  <link rel="stylesheet" href="/assets/css/design/typography.css">
-  <link rel="stylesheet" href="/assets/css/public-experience.css">
-  <link rel="stylesheet" href="/assets/css/knowledge-release.css">
-  <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
-  <link rel="stylesheet" href="/assets/css/wpr-public-production.css">
-  <link rel="stylesheet" href="/assets/css/knowledge-spine.css">
-  <link rel="stylesheet" href="/assets/css/bfr-h16-library-visual-acceptance.css">
-  <link rel="stylesheet" href="/assets/css/client-production-surfaces.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/puxr-v8.css">
 </head>
-<body class="knowledge-page" data-knowledge-spine-surface="LIBRARY" data-public-section="knowledge" data-page="knowledge-library">
-  <a class="skip-link" href="#library-main" data-i18n="knowledge.common.skip">Skip to main content</a>
-  <header data-public-header-placeholder></header>
-  <main id="library-main">
-    <section class="ks-hero" aria-label="Knowledge surface introduction">
-      <div class="ks-hero__media" aria-hidden="true"><img data-ks-asset="HERO-002" alt="" loading="eager" fetchpriority="high"></div><div class="ks-hero__wash" aria-hidden="true"></div>
-      <div class="ks-shell ks-hero__content"><p class="ks-kicker">Knowledge Library</p><h1 data-ks-en="Find the right way into PHI OS knowledge." data-ks-zh="找到进入 PHI OS 知识的合适路径。">Find the right way into PHI OS knowledge.</h1><p class="ks-hero__lead" data-ks-en="Search by question, move across the five volumes, or open a figure when structure is easier to understand visually." data-ks-zh="从问题开始检索，跨五册阅读，或在结构更适合视觉理解时直接打开 Figure。">Search by question, move across the five volumes, or open a figure when structure is easier to understand visually.</p><div class="ks-actions"><a class="ks-action ks-action--primary" href="#library-resources">Browse the Library →</a><a class="ks-action ks-action--quiet" href="/knowledge-search">Ask PHI OS</a></div></div>
-    </section>
-    <section class="ks-context"><div class="ks-shell ks-context__grid"><div><small data-cps-en="Start with" data-cps-zh="从这里开始">Start with</small><strong data-cps-en="One question" data-cps-zh="一个问题">One question</strong></div><div><small data-cps-en="Read across" data-cps-zh="继续阅读">Read across</small><strong data-cps-en="Five volumes" data-cps-zh="五册体系">Five volumes</strong></div><div><small data-cps-en="See structure" data-cps-zh="看见结构">See structure</small><strong data-cps-en="Articles, figures and glossary" data-cps-zh="文章、图解与词汇">Articles, figures and glossary</strong></div></div></section>
-
-    <section id="library-resources" class="knowledge-section knowledge-section--paper" aria-label="Library resources">
-      <div class="knowledge-shell">
-        <div class="knowledge-controls">
-          <div class="knowledge-field">
-            <label for="library-search" data-i18n="knowledge.library.searchLabel">Search the Library</label>
-            <input id="library-search" type="search" data-i18n-placeholder="knowledge.library.searchPlaceholder" placeholder="Search titles, descriptions or categories" autocomplete="off">
-          </div>
-          <div class="knowledge-field">
-            <label for="library-category" data-i18n="knowledge.library.categoryLabel">Category</label>
-            <select id="library-category">
-              <option value="all" data-i18n="knowledge.library.allCategories">All categories</option>
-              <option value="articles" data-i18n="knowledge.library.articles">Articles</option>
-              <option value="research" data-i18n="knowledge.library.research">Research</option>
-              <option value="books" data-i18n="knowledge.library.books">Books</option>
-              <option value="atlas" data-i18n="knowledge.library.atlas">Atlas</option>
-              <option value="figures" data-i18n="knowledge.library.figures">Figures</option>
-              <option value="glossary" data-i18n="knowledge.library.glossary">Glossary</option>
-              <option value="academy" data-i18n="knowledge.library.academy">Academy</option>
-              <option value="downloads" data-i18n="knowledge.library.downloads">Downloads</option>
-            </select>
-          </div>
-          <div class="knowledge-field">
-            <label for="library-part">Part</label>
-            <select id="library-part">
-              <option value="all">All Parts</option>
-              <option value="P1">P1</option><option value="P2">P2</option><option value="P3">P3</option><option value="P4">P4</option>
-              <option value="P5">P5</option><option value="P6">P6</option><option value="P7">P7</option><option value="P8">P8</option><option value="P9">P9</option>
-              <option value="P10">P10</option><option value="P11">P11</option><option value="P12">P12</option><option value="P13">P13</option><option value="P14">P14</option><option value="P15">P15</option>
-            </select>
-          </div>
-          <div class="knowledge-field">
-            <label for="library-status" data-i18n="knowledge.library.statusLabel">Status</label>
-            <select id="library-status">
-              <option value="all" data-i18n="knowledge.library.allStatuses">All statuses</option>
-              <option value="published" data-i18n="knowledge.articles.published">Published</option>
-              <option value="available" data-i18n="knowledge.common.available">Available</option>
-              <option value="preview" data-i18n="knowledge.common.preview">Preview</option>
-              <option value="development" data-i18n="knowledge.common.development">In development</option>
-              <option value="architecture" data-i18n="knowledge.common.architecture">Architecture registered</option>
-            </select>
-          </div>
+<body class="puxr-page--soft" data-puxr-nav="library">
+  <a class="puxr-skip" href="#main">Skip to content</a>
+  <div data-puxr-header></div>
+  <main id="main" class="puxr-main">
+    <section class="puxr-hero">
+      <div class="puxr-wrap puxr-hero__grid">
+        <div>
+          <p class="puxr-eyebrow"><span class="puxr-lang-zh">统一知识入口</span><span class="puxr-lang-en">Unified knowledge entry</span></p>
+          <h1 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">五册、文章与 Ask，现在应该作为同一条清楚的知识路径出现。</span><span class="puxr-lang-block puxr-lang-en">Books, articles and Ask should now appear as one coherent knowledge pathway.</span></h1>
+          <p class="puxr-lead"><span class="puxr-lang-block puxr-lang-zh">这一页不再依赖 knowledge-spine、knowledge-connections 与多层旧样式堆叠，而是直接把五册系统、文章入口与 Ask PHI OS 放回正确顺序。</span><span class="puxr-lang-block puxr-lang-en">This page replaces the heavy multi-module knowledge composition with a direct, readable structure: five books, article entry points and Ask PHI OS.</span></p>
+          <div class="puxr-actions"><a class="puxr-btn puxr-btn--dark" href="/books/"><span class="puxr-lang-zh">查看五册</span><span class="puxr-lang-en">View the books</span></a><a class="puxr-btn" href="/articles"><span class="puxr-lang-zh">查看文章</span><span class="puxr-lang-en">View articles</span></a><a class="puxr-btn" href="/knowledge-search"><span class="puxr-lang-zh">Ask PHI OS</span><span class="puxr-lang-en">Ask PHI OS</span></a></div>
         </div>
-        <p class="knowledge-results" aria-live="polite" data-library-results></p>
-        <div class="knowledge-grid" data-library-grid></div>
-        <p class="knowledge-empty" hidden data-library-empty data-i18n="knowledge.library.empty">No resources match these filters.</p>
-        <p class="knowledge-boundary">
-          Library is for browsing, discovery, comparison and reading paths. Search finds knowledge; Ask PHI OS helps you understand it. Availability reflects public access, and “Preview” does not mean the complete source is downloadable.
-        </p>
+        <aside class="puxr-hero__card">
+          <h3><span class="puxr-lang-zh">知识层级</span><span class="puxr-lang-en">Knowledge layers</span></h3>
+          <p class="big"><span class="puxr-lang-block puxr-lang-zh">先看到架构，再选择入口，而不是先掉进随机页面。</span><span class="puxr-lang-block puxr-lang-en">See the architecture first, then choose an entry point.</span></p>
+          <div class="puxr-stack">
+            <div class="puxr-stack__row"><strong>01</strong><span><span class="puxr-lang-zh">五册：拥有完整模型。</span><span class="puxr-lang-en">Books: the complete model.</span></span></div>
+            <div class="puxr-stack__row"><strong>02</strong><span><span class="puxr-lang-zh">文章：把节点公开化。</span><span class="puxr-lang-en">Articles: public node entry points.</span></span></div>
+            <div class="puxr-stack__row"><strong>03</strong><span><span class="puxr-lang-zh">Ask：围绕一个问题检索与回答。</span><span class="puxr-lang-en">Ask: retrieve and answer one question.</span></span></div>
+            <div class="puxr-stack__row"><strong>04</strong><span><span class="puxr-lang-zh">Reality / Professional：当问题需要更深的 case context 与责任。</span><span class="puxr-lang-en">Reality / Professional: when deeper case context and responsibility are needed.</span></span></div>
+          </div>
+        </aside>
       </div>
     </section>
 
-<section class="ks-feature"><div class="ks-shell ks-feature__grid"><div class="ks-feature__copy"><p class="knowledge-eyebrow">Knowledge discovery</p><h2 data-ks-en="One library, several ways in." data-ks-zh="一个知识库，多种进入方式。">One library, several ways in.</h2><p data-ks-en="The Library does not force one reading order. Search, books, articles and figures are different projections of the same governed knowledge system." data-ks-zh="Library 不强迫单一路径。搜索、书籍、文章与 Figure 是同一套受治理知识系统的不同投影。">The Library does not force one reading order. Search, books, articles and figures are different projections of the same governed knowledge system.</p></div><figure class="ks-visual"><img data-ks-asset="ILL-001" data-ks-kind="illustration" alt="" loading="lazy"><figcaption>Library Knowledge Landscape · supporting illustration</figcaption></figure></div></section>
-
-    <section class="knowledge-section" data-knowledge-article-section>
-      <div class="knowledge-shell">
-        <div class="knowledge-section__heading">
-          <div>
-            <p class="knowledge-eyebrow" data-i18n="knowledge.articles.hubEyebrow">Published articles</p>
-            <h2 data-i18n="knowledge.articles.hubTitle">Start with three canonical questions.</h2>
-          </div>
-          <p class="knowledge-section__copy" data-i18n="knowledge.articles.hubLead">
-            These articles are drawn from registered Book I nodes and remain separate from personal or professional work.
-          </p>
+    <section class="puxr-section">
+      <div class="puxr-wrap">
+        <p class="puxr-eyebrow"><span class="puxr-lang-zh">五册地图</span><span class="puxr-lang-en">Five-volume map</span></p>
+        <div class="puxr-grid-3">
+          <article class="puxr-card puxr-book puxr-book--gold"><div><div class="puxr-card__kicker">Book I</div><h3>Reality Formation</h3><p>现实如何形成</p></div><ul class="puxr-list"><li>差异、约束、结构、场域</li><li>激活、载体、运行</li></ul></article>
+          <article class="puxr-card puxr-book puxr-book--purple"><div><div class="puxr-card__kicker">Book II</div><h3>Reality Runtime</h3><p>世界如何运行</p></div><ul class="puxr-list"><li>Conscious runtime</li><li>Relational runtime</li><li>Collective runtime</li></ul></article>
+          <article class="puxr-card puxr-book puxr-book--green"><div><div class="puxr-card__kicker">Book III</div><h3>Reality Continuity</h3><p>世界如何继续</p></div><ul class="puxr-list"><li>生命连续</li><li>连接连续</li><li>结构连续</li></ul></article>
+          <article class="puxr-card puxr-book puxr-book--blue"><div><div class="puxr-card__kicker">Book IV</div><h3>Reality Civilization</h3><p>世界如何扩展</p></div><ul class="puxr-list"><li>城市、文明、地图</li><li>知识网络、文明轨道</li></ul></article>
+          <article class="puxr-card puxr-book puxr-book--gold2"><div><div class="puxr-card__kicker">Book V</div><h3>Reality Navigation</h3><p>世界将如何继续</p></div><ul class="puxr-list"><li>读取、证据、导航</li><li>持续、AI、未来</li></ul></article>
+          <article class="puxr-card"><div class="puxr-card__kicker"><span class="puxr-lang-zh">为什么这很重要</span><span class="puxr-lang-en">Why this matters</span></div><h3><span class="puxr-lang-zh">PHI OS 不是从 Ask 开始定义自己，而是从五册拥有模型开始。</span><span class="puxr-lang-en">PHI OS is not defined by Ask first. It is defined by the five-volume model first.</span></h3><p><span class="puxr-lang-zh">这也意味着首页与知识入口应该优先显示书与文章，再引导进入 Ask、Reality 与 Professional surface。</span><span class="puxr-lang-en">That is why the homepage and knowledge entry should foreground books and articles before leading into Ask, Reality and professional surfaces.</span></p></article>
         </div>
-        <div class="knowledge-grid" data-knowledge-article-grid data-limit="3"></div>
+      </div>
+    </section>
+
+    <section class="puxr-section">
+      <div class="puxr-wrap">
+        <p class="puxr-eyebrow"><span class="puxr-lang-zh">公开文章</span><span class="puxr-lang-en">Public articles</span></p>
+        <h2 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">已发布内容应该直接成为可浏览的入口。</span><span class="puxr-lang-block puxr-lang-en">Published content should become a visible browsing surface.</span></h2>
+        <p class="puxr-body"><span class="puxr-lang-block puxr-lang-zh">下面直接读取当前已发布 article authority，展示其中一部分作为知识入口。完整列表在 Articles 页面继续。</span><span class="puxr-lang-block puxr-lang-en">The cards below are loaded from the currently published article authority. Continue to the Articles page for the broader set.</span></p>
+        <div class="puxr-article-grid" data-puxr-publications data-puxr-publications-limit="9"></div>
+        <div class="puxr-actions"><a class="puxr-btn puxr-btn--dark" href="/articles"><span class="puxr-lang-zh">浏览全部文章</span><span class="puxr-lang-en">Browse all articles</span></a></div>
+      </div>
+    </section>
+
+    <section class="puxr-section">
+      <div class="puxr-wrap puxr-grid-3">
+        <article class="puxr-card"><div class="puxr-card__kicker">Ask</div><h3><span class="puxr-lang-zh">从一个问题进入</span><span class="puxr-lang-en">Enter through a question</span></h3><p><span class="puxr-lang-zh">当你已经知道自己要问什么，Ask PHI OS 是最短路径。</span><span class="puxr-lang-en">If you already know the question, Ask PHI OS is the shortest path.</span></p><div class="puxr-actions"><a class="puxr-btn" href="/knowledge-search">Ask PHI OS</a></div></article>
+        <article class="puxr-card"><div class="puxr-card__kicker">Runtime</div><h3><span class="puxr-lang-zh">从 Personal Runtime 进入</span><span class="puxr-lang-en">Enter through Personal Runtime</span></h3><p><span class="puxr-lang-zh">当你需要 method-based secondary lens，而不是 generic answer。</span><span class="puxr-lang-en">When you need a method-based secondary lens instead of a generic answer.</span></p><div class="puxr-actions"><a class="puxr-btn" href="/professional/personal-runtime/">Personal Runtime</a></div></article>
+        <article class="puxr-card"><div class="puxr-card__kicker">Financial</div><h3><span class="puxr-lang-zh">从 Financial Reality 进入</span><span class="puxr-lang-en">Enter through Financial Reality</span></h3><p><span class="puxr-lang-zh">当问题已经进入资产、现金流、保障与约束的现实层。</span><span class="puxr-lang-en">When the question already lives in assets, cash flow, protection and constraint.</span></p><div class="puxr-actions"><a class="puxr-btn" href="/professional/financial/">Financial Reality</a></div></article>
       </div>
     </section>
   </main>
-  <footer data-public-footer-placeholder></footer>
-  <script type="module" src="/assets/js/public-shell.js"></script>
-  <script type="module" src="/assets/js/pages/library.js"></script>
-  <script type="module" src="/assets/js/pages/knowledge-connections.js"></script>
-  <script type="module" src="/assets/js/pages/knowledge-spine-visuals.js"></script>
-  <script type="module" src="/assets/js/pages/client-production-surfaces.js"></script>
+  <div data-puxr-footer></div>
+  <script type="module" src="/assets/js/puxr-shell.js"></script>
+  <script type="module" src="/assets/js/puxr-publications.js"></script>
 </body>
 </html>
