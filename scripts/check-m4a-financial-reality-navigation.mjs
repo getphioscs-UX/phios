@@ -110,10 +110,13 @@ assert.ok(PRE_APPOINTMENT_CHECKS.includes('missing_evidence_identified'));
 assert.equal(FINANCIAL_APPOINTMENT_MATERIALS.length, 10);
 assert.equal(FINANCIAL_MATERIAL_DELIVERY_BOUNDARY.ordinary_email_sensitive_documents_allowed, false);
 
-for (const token of [
-  'financialPublic.whatTitle', 'financialPublic.differenceTitle',
-  'financialPublic.privacyTitle', 'financialPublic.boundary'
-]) assert.ok(page.includes(token));
+// PX2 public-presentation successor preserves the M4A financial service identity without predecessor i18n markup coupling.
+const px2 = JSON.parse(await fs.readFile(path.join(root, 'content/web-production/px2/successors/px2-w11-checker-successor-v1.json'), 'utf8'));
+assert.equal(px2.status, 'ACTIVE');
+assert.ok(page.includes('/assets/css/phios-public-v2.css'));
+assert.ok(page.includes('Financial Reality Navigation'));
+assert.ok(page.includes('Financial Stamina Analysis'));
+assert.ok(page.includes('Financial Navigation Plan'));
 assert.ok(services.includes('/professional/financial'));
 assert.ok(en.includes('financialPublic')); assert.ok(zh.includes('financialPublic'));
 for (const changed of Object.values(registry.boundaries)) assert.equal(changed, false);

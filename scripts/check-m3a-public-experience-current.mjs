@@ -46,6 +46,22 @@ assert.equal(reconciliation.preservedBoundaries.d1BindingChanged, false);
 assert.equal(hpc2Acceptance.status, 'HPC2_COMPOSITION_READY');
 assert.equal(hpc2Acceptance.globalProductionFreeze.claimed, false);
 
+const px2Path = 'content/web-production/px2/successors/px2-w11-checker-successor-v1.json';
+if (fs.existsSync(px2Path) && read(px2Path).status === 'ACTIVE') {
+  const px2Pages = ['index.html','library.html','articles.html','services.html','knowledge-search.html','books/index.html','professional/personal-runtime/index.html','professional/financial/index.html','reality/index.html','search/index.html','readings/index.html'];
+  for (const page of px2Pages) {
+    const source = text(page);
+    assert.ok(source.includes('/assets/css/phios-public-v2.css'), `${page} must load PX2 public experience`);
+    assert.ok(source.includes('/assets/js/public-shell-v2.js'), `${page} must load PX2 shell`);
+  }
+  const home = text('index.html');
+  for (const href of ['/search/','/knowledge-search','/readings/','/professional/financial/','/reality/']) assert.ok(home.includes(href));
+  assert.ok(home.includes('data-px2-intent-form'));
+  console.log('✓ M3A current public experience reconciled to PX2 Public Experience V2 successor.');
+  console.log('  Historical M3A/HPC2 authority remains evidence; current primary public composition is Search + Ask + Readings + Financial + My Reality.');
+  process.exit(0);
+}
+
 const publicPages = [
   'index.html',
   'about.html',

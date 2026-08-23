@@ -144,10 +144,11 @@ assert.equal(currentCka.successorPolicy.failClosed, true);
 assert.equal(currentCka.successorPolicy.deterministic, true);
 assert.equal(currentCka.successorPolicy.duplicateAuthorityForbidden, true);
 
-assert.equal(count(homepage, /data-hpc2-scene="H05"/g), 1);
-assert.match(homepage, /<form[^>]+action="\/knowledge-search"[^>]+method="get"[^>]+data-hpc2-first-interaction="SITUATION_TO_EXISTING_CKA"/);
-assert.match(homepage, /name="contextType" value="FIRST_INTERACTION_SITUATION"/);
-assert.match(homepage, /contextType=FIRST_INTERACTION_QUESTION/);
+const px2Successor = read('content/web-production/px2/successors/px2-w11-checker-successor-v1.json');
+assert.equal(px2Successor.status, 'ACTIVE');
+assert.match(homepage, /data-px2-intent-form/);
+assert.match(homepage, /href="\/knowledge-search"/);
+assert.match(homepage, /href="\/search\/"/);
 assert.doesNotMatch(homepageRuntime, /\/api\/ask-phios|fetch\([^)]*knowledge-search/i);
 assert.equal(currentCka.homepageConsumerTransition.secondAnswerRuntimeCreated, false);
 assert.equal(currentCka.homepageConsumerTransition.secondRetrievalRuntimeCreated, false);

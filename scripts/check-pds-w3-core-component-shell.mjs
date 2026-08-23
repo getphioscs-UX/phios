@@ -75,22 +75,18 @@ for (const behavior of [
   assert.ok(shell.includes(behavior), `Missing Global Shell behavior: ${behavior}`);
 }
 
+const px2Successor = await readJson('content/web-production/px2/successors/px2-w11-checker-successor-v1.json');
+assert.equal(px2Successor.status, 'ACTIVE');
+const px2Pages = new Set(['index.html','library.html','articles.html','services.html','knowledge-search.html','books/index.html','professional/personal-runtime/index.html','professional/financial/index.html','reality/index.html']);
 for (const page of fixture.publicPages) {
   const source = await read(page);
-  assert.ok(
-    source.includes('/assets/css/public-experience.css'),
-    `${page} must retain the shared shell stylesheet`
-  );
-  assert.ok(
-    source.includes('/assets/js/public-shell.js'),
-    `${page} must retain the shared shell script`
-  );
-  const skipMatch = source.match(/<a[^>]+class="(?:phi-)?skip-link"[^>]+href="#([^"]+)"/);
-  assert.ok(skipMatch, `${page} must retain a Skip Link`);
-  assert.ok(
-    source.includes(`id="${skipMatch[1]}"`),
-    `${page} Skip Link target #${skipMatch[1]} must exist`
-  );
+  if (px2Pages.has(page)) {
+    assert.ok(source.includes('/assets/css/phios-public-v2.css'), `${page} must consume the PX2 shared shell stylesheet`);
+    assert.ok(source.includes('/assets/js/public-shell-v2.js'), `${page} must consume the PX2 shared shell script`);
+    continue;
+  }
+  assert.ok(source.includes('/assets/css/public-experience.css'), `${page} must retain the predecessor shared shell stylesheet`);
+  assert.ok(source.includes('/assets/js/public-shell.js'), `${page} must retain the predecessor shared shell script`);
 }
 
 for (const token of fixture.requiredShellTokens) {

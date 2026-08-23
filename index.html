@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/puxr-v8.css">
+  <link rel="stylesheet" href="/assets/css/phios-public-v2.css">
 </head>
-<body data-puxr-nav="discover">
+<body data-puxr-nav="" data-px2-surface="HOME">
   <a class="puxr-skip" href="#main">Skip to content</a>
   <div data-puxr-header></div>
   <main id="main" class="puxr-main">
@@ -23,15 +23,23 @@
             <span class="puxr-lang-en">Reality Navigation Platform</span>
           </p>
           <h1 class="puxr-title">
-            <span class="puxr-lang-block puxr-lang-zh">五册解释模型，平台把它用于现实，Academy 建立能力。</span>
-            <span class="puxr-lang-block puxr-lang-en">Books explain the model. The platform applies it. The Academy builds capability.</span>
+            <span class="puxr-lang-block puxr-lang-zh">今天，你想看清什么？</span>
+            <span class="puxr-lang-block puxr-lang-en">What do you want to understand today?</span>
           </h1>
           <p class="puxr-lead">
-            <span class="puxr-lang-block puxr-lang-zh">PHI OS 不应该再是同时堆叠旧 hero、旧 CSS、旧 logo 与 generic chat 的页面集合，而应该清楚呈现：五册系统、已发布文章、Ask PHI OS、Personal Runtime、Financial Reality Navigation 与 Professional Services 各自的角色。</span>
-            <span class="puxr-lang-block puxr-lang-en">PHI OS should clearly surface its five-volume knowledge system, published articles, Ask PHI OS, Personal Runtime, Financial Reality Navigation and professional services—instead of collapsing them into duplicated heroes and a generic chat surface.</span>
+            <span class="puxr-lang-block puxr-lang-zh">搜索资料、询问 AI、从个人读取看见另一种视角、重建财务现实，或把这些线索带回同一个 My Reality。PHI OS 的价值不是再给你一个答案，而是把分散的答案重新连接。</span>
+            <span class="puxr-lang-block puxr-lang-en">Search what exists, ask AI, use personal readings as bounded lenses, reconstruct financial reality, or bring these signals back into one My Reality. PHI OS reconnects fragmented answers instead of adding another disconnected answer.</span>
           </p>
+          <form class="px2-intent" data-px2-intent-form><input name="q" maxlength="500" placeholder="事业、关系、金钱、自己、一个正在发生的问题…" aria-label="What do you want to understand?"><button type="submit">Ask PHI OS →</button></form>
+          <div class="px2-mode-grid">
+            <a class="px2-mode" href="/search/"><strong>Search</strong><span>找资料 / Find</span></a>
+            <a class="px2-mode" href="/knowledge-search"><strong>Ask</strong><span>问问题 / Explain</span></a>
+            <a class="px2-mode" href="/readings/"><strong>Readings</strong><span>个人读取 / Project</span></a>
+            <a class="px2-mode" href="/professional/financial/"><strong>Financial</strong><span>财务现实 / Plan</span></a>
+            <a class="px2-mode" href="/reality/"><strong>My Reality</strong><span>整合 / Navigate</span></a>
+          </div>
           <div class="puxr-actions">
-            <a class="puxr-btn puxr-btn--primary" href="/library"><span class="puxr-lang-zh">进入五册与知识</span><span class="puxr-lang-en">Enter books & knowledge</span></a>
+            <a class="puxr-btn puxr-btn--primary" href="/readings/"><span class="puxr-lang-zh">探索个人读取</span><span class="puxr-lang-en">Explore Readings</span></a>
             <a class="puxr-btn" href="/knowledge-search"><span class="puxr-lang-zh">Ask PHI OS</span><span class="puxr-lang-en">Ask PHI OS</span></a>
             <a class="puxr-btn" href="/services"><span class="puxr-lang-zh">专业服务</span><span class="puxr-lang-en">Professional services</span></a>
           </div>
@@ -131,7 +139,8 @@
     </section>
   </main>
   <div data-puxr-footer></div>
-  <script type="module" src="/assets/js/puxr-shell.js"></script>
-  <script type="module" src="/assets/js/puxr-publications.js"></script>
+  <script type="module" src="/assets/js/public-shell-v2.js"></script>
+  <script type="module" src="/assets/js/components/publications-v2.js"></script>
+  <script type="module" src="/assets/js/pages/home-v2.js"></script>
 </body>
 </html>

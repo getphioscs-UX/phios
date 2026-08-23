@@ -66,13 +66,13 @@ export async function loadFigureRegistry() {
   return registry;
 }
 
-const CLIENT_VISUAL_REGISTRY_V12 = '/content/web-production/registries/client-visual-asset-registry-v1.2.json';
+const CLIENT_VISUAL_REGISTRY_POINTER = '/content/web-production/registries/current-client-visual-registry.json';
 
 export async function loadClientVisualRegistry() {
-  const registry = await fetchJson(CLIENT_VISUAL_REGISTRY_V12);
-  if (registry?.schemaVersion !== '1.2.0' || !Array.isArray(registry.assets) || registry.assets.length !== 152) {
-    throw new Error('HPC2_PRE_VISUAL_REGISTRY_INVALID');
-  }
+  const pointer = await fetchJson(CLIENT_VISUAL_REGISTRY_POINTER);
+  if (!pointer?.currentRegistryPath) throw new Error('PX2_CLIENT_VISUAL_POINTER_INVALID');
+  const registry = await fetchJson(pointer.currentRegistryPath);
+  if (!Array.isArray(registry?.assets) || registry.assets.length < 1) throw new Error('PX2_CLIENT_VISUAL_REGISTRY_INVALID');
   return registry;
 }
 

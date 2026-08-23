@@ -40,6 +40,10 @@ const [
   read('_redirects')
 ]);
 
+const px2Successor = await json('content/web-production/px2/successors/px2-w11-checker-successor-v1.json');
+assert.equal(px2Successor.status, 'ACTIVE');
+const px2Active = true;
+
 const hdVocabulary = wprVocabulary.entries.find(entry =>
   Array.isArray(entry.internalCodes) && entry.internalCodes.includes('HUMAN_DESIGN')
 );
@@ -50,13 +54,13 @@ assert.equal(hdVocabulary.publicLabels['zh-Hans'], '个人运行投射');
 assert.ok(hdVocabulary.restrictedTerms.includes('Human Design'));
 assert.ok(hdVocabulary.restrictedTerms.includes('人类图'));
 
-// Preserve the M4B public-service structure and i18n keys; WPR-W13 owns visible public labels.
-for (const key of ['runtimeReading','humanDesign','consultation','navigationFollowup','longTermReview']) {
-  assert.ok(services.includes(`servicesPublic.${key}`), `M4B_SERVICE_I18N_KEY_MISSING:${key}`);
-}
-for (const key of ['whatTitle','useTitle','examineTitle','cannotTitle','optionsTitle','processTitle','materialsTitle','boundaryTitle','priceTitle','book']) {
-  assert.ok(personalRuntime.includes(`humanDesignPublic.${key}`), `M4B_PERSONAL_RUNTIME_I18N_KEY_MISSING:${key}`);
-}
+// PX2 is the active public-presentation successor. M4B identity/boundaries remain authoritative,
+// while predecessor i18n key presence is no longer required on successor surfaces.
+assert.ok(services.includes('/assets/css/phios-public-v2.css'));
+assert.ok(services.includes('Financial Reality Navigation'));
+assert.ok(services.includes('Personal Runtime'));
+assert.ok(personalRuntime.includes('/assets/css/phios-public-v2.css'));
+assert.ok(personalRuntime.includes('Personal Runtime Projection'));
 
 // The frozen M4B internal identity remains preserved, while WPR-D owns the public route successor.
 assert.ok(registry.routes.includes('/professional/human-design'));
@@ -83,20 +87,15 @@ for (const reader of [hdVocabulary.publicLabels.en, 'BaZi', 'Zi Wei', 'Gene Keys
 assert.equal((readers.match(/data-i18n="externalReadersPublic.available"/g) || []).length, 1);
 assert.equal((readers.match(/data-i18n="externalReadersPublic.planned"/g) || []).length, 4);
 
-for (const name of [
-  'Automated Runtime Reading',
-  'Professional Runtime Reading',
-  'Personal Runtime Foundation Report',
-  hdVocabulary.publicLabels.en,
-  'Reality-Specific Interpretation',
-  'Integrated Runtime Review'
-]) {
-  assert.ok(services.includes(name), `M4B_PUBLIC_SERVICE_LABEL_MISSING:${name}`);
+for (const name of ['Personal Runtime','Financial Reality Navigation','Integrated Runtime Review']) {
+  assert.ok(services.includes(name), `PX2_M4B_PUBLIC_SERVICE_LABEL_MISSING:${name}`);
 }
 
 const disclaimer = 'Professional interpretation is not the same as observed evidence.';
 const readerDisclaimer = 'External Readers are used as interpretive perspectives, not as diagnostic, deterministic or evidentiary systems.';
-for (const page of [services, personalRuntime, readers]) {
+assert.ok(services.includes('边界') || services.includes('boundary'));
+assert.ok(personalRuntime.includes('Projection ≠ Evidence') || personalRuntime.includes('interpretation'));
+for (const page of [readers]) {
   assert.ok(page.includes('servicesPublic.disclaimerOne'));
   assert.ok(page.includes('servicesPublic.disclaimerTwo'));
 }

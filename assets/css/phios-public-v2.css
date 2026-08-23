@@ -135,7 +135,15 @@ html[data-puxr-locale="zh-Hans"] .puxr-lang-block.puxr-lang-zh{display:block}
 .puxr-article{border:1px solid var(--line);border-radius:22px;padding:22px;text-decoration:none;background:rgba(255,255,255,.03)}
 .puxr-section--soft .puxr-article,.puxr-page--soft .puxr-article{border-color:rgba(20,24,33,.1);background:#fff}
 .puxr-article h3{margin:10px 0 10px;font-size:22px;line-height:1.22}
-.puxr-article p{margin:0;color:var(--muted);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.puxr-article p{
+  margin:0;
+  color:var(--muted);
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
 .puxr-section--soft .puxr-article p,.puxr-page--soft .puxr-article p{color:#5d6470}
 .puxr-article small{display:flex;justify-content:space-between;gap:10px;color:var(--gold-soft);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
 .puxr-section--soft .puxr-article small,.puxr-page--soft .puxr-article small{color:#92753d}
@@ -209,3 +217,7 @@ html[data-puxr-locale="zh-Hans"] .puxr-lang-block.puxr-lang-zh{display:block}
 .cka-source-group h3{margin:0;font-size:18px}
 .cka-source{border:1px solid rgba(20,24,33,.08);border-radius:18px;padding:16px;background:#fcfbf8}
 .cka-source__meta{color:#92753d;font-size:12px}
+/* PX2 V2 extensions */
+.px2-intent{margin-top:30px;display:grid;grid-template-columns:1fr auto;gap:10px;max-width:820px}.px2-intent input{width:100%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);border-radius:999px;padding:16px 20px;font-size:16px}.puxr-page--soft .px2-intent input{background:#fff;color:var(--ink);border-color:var(--line-dark)}.px2-intent button{border:0;border-radius:999px;padding:0 22px;background:var(--gold-soft);color:#20190d;font-weight:800;cursor:pointer}.px2-mode-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:18px}.px2-mode{display:block;text-decoration:none;border:1px solid var(--line);border-radius:18px;padding:16px;background:rgba(255,255,255,.03)}.puxr-page--soft .px2-mode{border-color:var(--line-dark);background:#fff}.px2-mode strong{display:block}.px2-mode span{font-size:12px;color:var(--muted)}.px2-search-results{display:grid;gap:12px;margin-top:24px}.px2-result{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:20px;border:1px solid rgba(20,24,33,.10);border-radius:20px;background:#fff;text-decoration:none}.px2-result small{color:#92753d;text-transform:uppercase;letter-spacing:.12em}.px2-result h3{margin:4px 0 8px;font-size:22px}.px2-result p{margin:0;color:#5d6470}.px2-method-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.px2-method{position:relative}.px2-status{display:inline-flex;margin-top:14px;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:700;background:rgba(20,24,33,.06)}.px2-status--ready{background:rgba(137,181,138,.22)}.px2-status--gated{background:rgba(212,177,102,.22)}.px2-status--holding{background:rgba(140,123,180,.18)}.px2-integration{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch}.px2-integration>div{border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}.puxr-page--soft .px2-integration>div{border-color:var(--line-dark);background:#fff}.px2-integration-core{grid-column:2/5;background:linear-gradient(135deg,rgba(212,177,102,.20),rgba(255,255,255,.03))!important}.px2-hero-media{margin-top:24px;border-radius:28px;overflow:hidden;border:1px solid var(--line);max-height:520px}.px2-hero-media img{width:100%;height:auto;object-fit:cover}.px2-hero-media[data-asset-status="unavailable"]{display:none}
+@media(max-width:900px){.px2-mode-grid,.px2-integration{grid-template-columns:repeat(2,minmax(0,1fr))}.px2-integration-core{grid-column:auto}.px2-method-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.px2-intent{grid-template-columns:1fr}.px2-intent button{padding:14px 20px}.px2-mode-grid,.px2-method-grid,.px2-integration{grid-template-columns:1fr}.px2-result{grid-template-columns:1fr}}

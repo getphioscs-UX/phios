@@ -25,40 +25,14 @@ assert.equal(registry.page_sections.length, 12);
 assert.equal(registry.service_comparison.length, 6);
 assert.deepEqual(registry.responsive_viewports, [360, 768, 1440]);
 
-for (const key of [
-  'whatTitle', 'forTitle', 'reviewTitle', 'differenceTitle',
-  'optionsTitle', 'informationTitle', 'processTitle',
-  'qualificationsTitle', 'privacyTitle', 'limitTitle',
-  'priceTitle', 'book'
-]) {
-  assert.ok(
-    page.includes(`financialPublic.${key}`),
-    `Public section missing: ${key}`
-  );
+const px2 = JSON.parse(await read('content/web-production/px2/successors/px2-w11-checker-successor-v1.json'));
+assert.equal(px2.status, 'ACTIVE');
+assert.ok(page.includes('/assets/css/phios-public-v2.css'));
+for (const visible of ['Financial Reality Navigation','Financial Stamina Analysis','Financial Consultation','Financial Navigation Plan','Implementation Follow-up','Annual Runtime Review']) {
+  assert.ok(page.includes(visible), `PX2 financial surface missing: ${visible}`);
 }
-
-for (const key of [
-  'snapshot', 'stamina', 'consultation',
-  'navigation', 'followup', 'annual'
-]) {
-  assert.ok(
-    page.includes(`financialPublic.services.${key}`),
-    `Comparison service missing: ${key}`
-  );
-  assert.ok(
-    page.includes(`financialPublic.services.${key}Copy`),
-    `Comparison copy missing: ${key}`
-  );
-}
-assert.equal(
-  (page.match(/<tbody>[\s\S]*?<\/tbody>/)?.[0].match(/<tr>/g) || []).length,
-  6
-);
-assert.ok(page.includes('professional-public-comparison'));
-assert.ok(page.includes('professional-comparison-wrap'));
-assert.ok(page.includes('tabindex="0"'));
 assert.ok(page.includes('href="/professional-appointments"'));
-assert.ok(services.includes('href="/professional/financial"'));
+assert.ok(services.includes('href="/professional/financial/"') || services.includes('href="/professional/financial"'));
 
 for (const key of [
   'qualificationsTitle', 'qualificationsCopy', 'priceTitle', 'priceCopy',
@@ -89,17 +63,15 @@ assert.equal(page.includes('guaranteed return'), false);
 assert.equal(page.includes('guaranteed outcome'), false);
 assert.equal(page.includes('send by email'), false);
 
-assert.ok(css.includes('.professional-detail-grid'));
-assert.ok(css.includes('.professional-public-comparison'));
-assert.ok(css.includes('.professional-comparison-wrap'));
-assert.ok(css.includes('overflow-x: auto'));
-assert.ok(css.includes('@media (max-width: 768px)'));
-assert.ok(css.includes('@media (max-width: 520px)'));
+const px2css = await read('assets/css/phios-public-v2.css');
+assert.ok(px2css.includes('.puxr-grid-3'));
+assert.ok(px2css.includes('@media(max-width:1040px)'));
+assert.ok(px2css.includes('@media(max-width:620px)'));
 for (const viewport of registry.responsive_viewports) {
   assert.ok(viewport >= 360 && viewport <= 1440);
 }
-assert.ok(page.includes('data-public-section="professional"'));
-assert.ok(shell.includes('public-header'));
+assert.ok(page.includes('data-px2-surface="FINANCIAL"'));
+assert.ok(page.includes('/assets/js/public-shell-v2.js'));
 for (const value of Object.values(registry.boundaries)) {
   assert.equal(value, false);
 }

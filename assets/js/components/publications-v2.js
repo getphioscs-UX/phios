@@ -1,4 +1,4 @@
-import { currentLocale } from './puxr-shell.js';
+import { currentLocale } from '../public-shell-v2.js';
 const INDEX_URL = '/content/knowledge/public/retrieval/publications.json';
 const copy = {
   'zh-Hans': { empty: '暂时没有可显示的文章。', more: '查看全部文章', featured: '精选文章', article: '文章' },

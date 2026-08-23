@@ -1,12 +1,12 @@
 const STORAGE_KEY = 'phios-puxr-locale';
 const LEGACY_LOCALE_STORAGE_KEY = 'phiOSLocale';
 const NAV = [
-  { id: 'discover', href: '/', zh: '首页', en: 'Discover' },
-  { id: 'library', href: '/library', zh: '五册与知识', en: 'Books & Knowledge' },
-  { id: 'ask', href: '/knowledge-search', zh: 'Ask PHI OS', en: 'Ask PHI OS' },
-  { id: 'personal', href: '/professional/personal-runtime/', zh: 'Personal Runtime', en: 'Personal Runtime' },
-  { id: 'financial', href: '/professional/financial/', zh: 'Financial Runtime', en: 'Financial Runtime' },
-  { id: 'professional', href: '/services', zh: '专业服务', en: 'Professional' }
+  { id: 'ask', href: '/knowledge-search', zh: 'Ask PHI OS', en: 'Ask' },
+  { id: 'search', href: '/search/', zh: '搜索', en: 'Search' },
+  { id: 'readings', href: '/readings/', zh: '个人读取', en: 'Readings' },
+  { id: 'financial', href: '/professional/financial/', zh: '财务现实', en: 'Financial' },
+  { id: 'reality', href: '/reality/', zh: '我的现实', en: 'Reality' },
+  { id: 'library', href: '/library', zh: '五册与文章', en: 'Books & Articles' }
 ];
 const FOOTER = [
   { href: '/books/', zh: '五册系统', en: 'Five volumes' },
@@ -66,6 +66,7 @@ function headerMarkup(active = '') {
             <button type="button" data-puxr-locale-button="en">EN</button>
             <button type="button" data-puxr-locale-button="zh-Hans">中文</button>
           </div>
+          <a class="puxr-nav__link" href="/account"><span class="puxr-lang-zh">My PHI OS</span><span class="puxr-lang-en">My PHI OS</span></a>
         </div>
       </div>
     </header>
