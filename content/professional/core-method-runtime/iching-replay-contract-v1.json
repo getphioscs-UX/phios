@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-REPLAY-CONTRACT-v1.0.0",
+  "phase": "ICH",
+  "work": "ICH-W9",
+  "status": "FROZEN_REPLAY_REQUIREMENT",
+  "requiredRuns": 1000,
+  "sameEvidenceMustProduceIdenticalResult": true,
+  "sameEvidenceMustProduceIdenticalProjection": true,
+  "systemRandomRule": "consume persisted selectedSymbols + seed + entropyEvidence + replayToken; never reroll inside calculation",
+  "comparisonFields": [
+    "inputDigest",
+    "outputDigest",
+    "primary.hexagramId",
+    "changingLines",
+    "relating.hexagramId",
+    "projectionCode"
+  ]
+}
