@@ -942,3 +942,91 @@ html[lang="zh-Hans"] .navigation-customer-view header p {
     width: fit-content;
   }
 }
+
+
+/* PUXR-W3 — Reality Navigation usable desktop geometry */
+.navigation-page .runtime-workspace-layout {
+  width: 100%;
+  grid-template-columns: clamp(13.75rem, 18vw, 17.5rem) minmax(0, 1fr);
+  align-items: start;
+}
+
+.navigation-page .runtime-workspace-layout > [data-runtime-workspace],
+.navigation-page .runtime-workspace-main {
+  min-width: 0;
+}
+
+.navigation-page .runtime-workspace-main.navigation-shell {
+  width: min(82.5rem, calc(100% - (2 * clamp(1rem, 3vw, 2.5rem))));
+  max-width: none;
+  margin-inline: auto;
+  padding: clamp(2rem, 4vw, 4rem) 0 clamp(3rem, 6vw, 5rem);
+  box-sizing: border-box;
+}
+
+.navigation-page .navigation-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: end;
+  padding-bottom: clamp(1.8rem, 4vw, 3.25rem);
+}
+
+.navigation-page .navigation-intro > div:first-child {
+  max-width: 48rem;
+}
+
+.navigation-page .navigation-intro h1 {
+  max-width: 10ch;
+  font-size: clamp(3rem, 5.2vw, 5.25rem);
+  line-height: .95;
+}
+
+.navigation-page .navigation-boundary {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.navigation-page .navigation-empty {
+  max-width: 44rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.navigation-page .navigation-loading {
+  min-height: 8rem;
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+}
+
+.navigation-page .navigation-main {
+  min-height: 0;
+}
+
+@media (max-width: 1080px) {
+  .navigation-page .navigation-intro {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .navigation-page .navigation-boundary {
+    max-width: 44rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .navigation-page .runtime-workspace-layout {
+    grid-template-columns: 1fr;
+  }
+  .navigation-page .runtime-workspace-main.navigation-shell {
+    width: min(100% - 2rem, 82.5rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .navigation-page .runtime-workspace-main.navigation-shell {
+    width: min(100% - 1rem, 82.5rem);
+    padding-top: 1.25rem;
+  }
+  .navigation-page .navigation-intro h1 {
+    font-size: clamp(2.65rem, 14vw, 4rem);
+  }
+}

@@ -263,7 +263,7 @@ function renderAsk(data) {
 
 async function resolveRealityWorkspaceIllustration() {
   const [response, publicConfig] = await Promise.all([
-    fetch('/content/web-production/registries/client-visual-asset-registry-v1.3.json', { headers:{ Accept:'application/json' } }),
+    fetch('/content/web-production/registries/client-visual-asset-registry-v1.7.json', { headers:{ Accept:'application/json' } }),
     fetchPublicAssetConfig()
   ]);
   if (!response.ok) throw new Error('reality_workspace_visual_successor_unavailable');
@@ -285,6 +285,24 @@ async function resolveRealityWorkspaceIllustration() {
   });
 }
 
+function setAssetUnavailable(image) {
+  image.classList.add('is-unavailable');
+  const media = image.closest('figure');
+  if (media) {
+    media.hidden = true;
+    media.parentElement?.classList.add('is-media-unavailable');
+  }
+}
+
+function setAssetReady(image) {
+  image.classList.add('is-ready');
+  const media = image.closest('figure');
+  if (media) {
+    media.hidden = false;
+    media.parentElement?.classList.remove('is-media-unavailable');
+  }
+}
+
 async function hydrateAsset(code, image) {
   try {
     const asset = code === 'ILL-010'
@@ -296,10 +314,11 @@ async function hydrateAsset(code, image) {
     if (asset.sizes) image.sizes = asset.sizes;
     if (asset.width) image.width = asset.width;
     if (asset.height) image.height = asset.height;
-    image.addEventListener('load', () => image.classList.add('is-ready'), { once:true });
-    image.addEventListener('error', () => image.classList.add('is-unavailable'), { once:true });
+    if (image.complete && image.naturalWidth > 0) setAssetReady(image);
+    else image.addEventListener('load', () => setAssetReady(image), { once:true });
+    image.addEventListener('error', () => setAssetUnavailable(image), { once:true });
   } catch {
-    image.classList.add('is-unavailable');
+    setAssetUnavailable(image);
   }
 }
 

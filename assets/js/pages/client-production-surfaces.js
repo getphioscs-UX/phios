@@ -10,7 +10,8 @@ const STATE_COPY = Object.freeze({
   OUTSIDE_SCOPE: ['This question needs a different source', '这个问题需要其他来源'],
   NEEDS_CONTEXT: ['A little more context would help', '还需要一点背景'],
   NEEDS_CURRENT_AUTHORITY: ['Current reliable sources are needed', '需要当前可靠来源'],
-  PROFESSIONAL_HANDOFF: ['Professional review may be appropriate', '这个问题可能需要专业人员审阅']
+  PROFESSIONAL_HANDOFF: ['Professional review may be appropriate', '这个问题可能需要专业人员审阅'],
+  INSUFFICIENT_RELEVANCE: ['No sufficiently relevant governed source was found', '没有找到足够相关的受治理资料']
 });
 
 function translateInlineCopy(){

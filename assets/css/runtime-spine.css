@@ -8,3 +8,11 @@
 .wpr-personal-runtime .pr-flow-section{border-bottom:1px solid var(--rs-line);background:#fff}.wpr-personal-runtime .pr-results-section{background:var(--rs-soft)}
 .professional-workspace-page .professional-workspace-shell{max-width:var(--rs-max)}.professional-workspace-page .professional-workspace-unavailable{margin-top:clamp(2rem,4vw,3rem);border-radius:1.2rem}.professional-workspace-page .professional-workspace-tabs{margin-top:2rem;border-radius:1rem;border:1px solid var(--rs-line);overflow:auto;background:#fff}.professional-workspace-page .professional-workspace-panel{margin-top:1.25rem;border-radius:1.2rem}.professional-workspace-page .professional-workspace-boundary{margin-top:3rem;border-radius:1.2rem}.report-page .professional-workspace-hero{margin-top:2rem;padding:1.25rem 0 1.5rem;border-bottom:1px solid var(--rs-line);display:flex;align-items:center;justify-content:space-between;gap:1.5rem}.report-page .professional-workspace-hero h1{font-size:clamp(1.6rem,3vw,2.4rem);margin:.25rem 0}.professional-report{border-radius:1.35rem;overflow:hidden}
 @media(max-width:900px){.rs-visual-grid,.rs-context-band__grid{grid-template-columns:1fr}}@media(max-width:640px){.rs-shell{width:calc(100% - 1.5rem)}.rs-hero{min-height:36rem}.rs-hero__wash{background:linear-gradient(0deg,rgba(7,15,21,.83),rgba(7,15,21,.22))}.rs-hero h1{font-size:clamp(3rem,15vw,4.5rem)}.rs-hero__actions,.report-page .professional-workspace-hero{align-items:flex-start;flex-direction:column}}@media(prefers-reduced-motion:reduce){.rs-hero__media img,.rs-figure img{transition:none}}
+
+/* PUXR-W2 — supporting visuals must never reserve a blank panel */
+.rs-visual-grid.is-media-unavailable{grid-template-columns:minmax(0,48rem);justify-content:start}
+.rs-figure[hidden]{display:none}
+.rs-figure img{object-fit:contain;min-height:0;background:var(--rs-soft)}
+.knowledge-page[data-page="knowledge-search"] .knowledge-section--paper{padding:clamp(2rem,4vw,3.75rem) 0 clamp(3rem,6vw,5rem)}
+.knowledge-page[data-page="knowledge-search"] .cka-composer{padding:clamp(1rem,2.4vw,1.4rem)}
+@media(max-width:720px){.knowledge-page[data-page="knowledge-search"] .knowledge-section--paper{padding-top:1.35rem}}

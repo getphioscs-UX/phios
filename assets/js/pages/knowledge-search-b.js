@@ -1,5 +1,6 @@
 import { getLocale, onLocaleChange } from '../i18n.js';
 import { askPhios } from '../knowledge/ask-phios-client.js';
+import { isAnswerQuestionRelevant } from '../knowledge/answer-relevance-guard.js';
 
 const root = document.querySelector('[data-cka-root]');
 const form = document.querySelector('[data-cka-composer]');
@@ -69,7 +70,8 @@ function copy() {
       professional: '这个问题需要专业人员判断。CKA 只呈现边界与 handoff，不作医疗、法律或财务专业判断。',
       prepareFailed: '暂时无法准备 handoff。',
       consentNeeded: '已确认复杂度门槛。若要继续，请显式同意准备临时 entry seed。',
-      handoffReady: '临时 Reality entry seed 已准备完毕，等待下游 ICR / RDG 接受；尚未建立案例，也未激活 Reality Journey。'
+      handoffReady: '临时 Reality entry seed 已准备完毕，等待下游 ICR / RDG 接受；尚未建立案例，也未激活 Reality Journey。',
+      relevanceInsufficient: '现有受治理资料与这个问题没有足够直接的匹配。PHI OS 不会用只是在字面上碰巧相似、但实际上无关的内容来回答。请换一个 PHI OS 知识范围内的问题，或补充更具体的上下文。'
     };
   }
   return {
@@ -95,7 +97,8 @@ function copy() {
     professional: 'This question needs professional judgment. CKA presents a boundary and handoff; it does not make medical, legal or financial judgments.',
     prepareFailed: 'The handoff could not be prepared.',
     consentNeeded: 'The complexity threshold is confirmed. Explicitly consent to prepare a temporary entry seed if you want to continue.',
-    handoffReady: 'A temporary Reality entry seed is ready for downstream ICR / RDG acceptance. No case or Reality Journey has been activated.'
+    handoffReady: 'A temporary Reality entry seed is ready for downstream ICR / RDG acceptance. No case or Reality Journey has been activated.',
+    relevanceInsufficient: 'The governed sources do not match this question closely enough. PHI OS will not answer with material that is only lexically similar but substantively unrelated. Ask a question within the PHI OS knowledge scope or add more specific context.'
   };
 }
 
@@ -178,9 +181,10 @@ function renderSources(envelope) {
   `).join('');
 }
 
-function publicDirectAnswer(answer, envelope) {
+function publicDirectAnswer(answer, envelope, relevant = true) {
   if (envelope.answerState === 'NEEDS_CURRENT_AUTHORITY') return copy().currentAuthority;
   if (envelope.answerState === 'PROFESSIONAL_HANDOFF') return copy().professional;
+  if (!relevant) return copy().relevanceInsufficient;
   return answer.directAnswer;
 }
 
@@ -189,18 +193,26 @@ function renderAnswer(payload) {
   const envelope = payload?.cka?.w5w17;
   if (!answer || !envelope) throw new Error('CKA_CLIENT_PROJECTION_MISSING');
   answerRoot.querySelector('[data-cka-answer-question]').textContent = answer.question;
-  answerRoot.querySelector('[data-cka-answer-state]').textContent = envelope.answerState;
+  const relevant = isAnswerQuestionRelevant(answer, envelope);
+  answerRoot.querySelector('[data-cka-answer-state]').textContent = relevant ? envelope.answerState : 'INSUFFICIENT_RELEVANCE';
   const needsCurrentAuthority = envelope.answerState === 'NEEDS_CURRENT_AUTHORITY';
-  answerRoot.querySelector('[data-cka-direct-answer]').innerHTML = `<p>${escapeHtml(publicDirectAnswer(answer, envelope))}</p>`;
-  answerRoot.querySelector('[data-cka-unknown-state]').textContent = envelope.record.unknownState;
-  renderItems(answerRoot.querySelector('[data-cka-why]'), needsCurrentAuthority ? [] : answer.whyThisMayHappen, copy().emptyWhy);
-  renderItems(answerRoot.querySelector('[data-cka-observe]'), needsCurrentAuthority ? [] : answer.whatToObserve, copy().emptyObserve);
-  renderItems(answerRoot.querySelector('[data-cka-unknown]'), answer.unknown?.details, copy().emptyUnknown);
-  renderCards(envelope.relatedKnowledgeCards);
-  renderSources(envelope);
+  const suppressGrounding = !relevant && ['ANSWERED', 'PARTIALLY_ANSWERED'].includes(envelope.answerState);
+  answerRoot.querySelector('[data-cka-direct-answer]').innerHTML = `<p>${escapeHtml(publicDirectAnswer(answer, envelope, relevant))}</p>`;
+  answerRoot.querySelector('[data-cka-unknown-state]').textContent = suppressGrounding ? 'INSUFFICIENT_RELEVANCE' : envelope.record.unknownState;
+  renderItems(answerRoot.querySelector('[data-cka-why]'), (needsCurrentAuthority || suppressGrounding) ? [] : answer.whyThisMayHappen, copy().emptyWhy);
+  renderItems(answerRoot.querySelector('[data-cka-observe]'), (needsCurrentAuthority || suppressGrounding) ? [] : answer.whatToObserve, copy().emptyObserve);
+  renderItems(answerRoot.querySelector('[data-cka-unknown]'), suppressGrounding ? [copy().relevanceInsufficient] : answer.unknown?.details, copy().emptyUnknown);
+  renderCards(suppressGrounding ? [] : envelope.relatedKnowledgeCards);
+  if (suppressGrounding) {
+    const sourceTarget = answerRoot.querySelector('[data-cka-sources]');
+    if (sourceTarget) sourceTarget.innerHTML = `<p class="cka-empty">${escapeHtml(copy().emptySources)}</p>`;
+  } else {
+    renderSources(envelope);
+  }
 
   const boundary = [
-    ...(answer.unknown?.details || []),
+    suppressGrounding ? copy().relevanceInsufficient : null,
+    ...(!suppressGrounding ? (answer.unknown?.details || []) : []),
     envelope.externalAuthority.required ? copy().currentAuthority : null,
     envelope.externalAuthority.professionalJudgmentRequested ? copy().professional : null
   ].filter(Boolean);

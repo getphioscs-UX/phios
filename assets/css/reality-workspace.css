@@ -158,3 +158,30 @@
 @media (prefers-reduced-motion: reduce) {
   .rw-hero__media img, .rw-visual-break__media img, .rw-how__figure img, .rw-continuity__figure img { transition: none; }
 }
+
+
+/* PUXR-W2 — fail-soft visuals + tighter workspace rhythm */
+.rw-section { padding: clamp(3rem, 6vw, 5.5rem) 0; }
+.rw-hero { min-height: clamp(29rem, 62vh, 42rem); }
+.rw-hero__media img { object-position: center 48%; }
+.rw-visual-break { padding: clamp(3rem, 6vw, 5.5rem) 0; }
+.rw-visual-break__media { min-height: 0; }
+.rw-visual-break__media img {
+  min-height: 0;
+  object-fit: contain;
+  background: #e9ebe8;
+}
+.rw-visual-break__grid.is-media-unavailable,
+.rw-how__grid.is-media-unavailable,
+.rw-continuity__grid.is-media-unavailable {
+  grid-template-columns: minmax(0, 48rem);
+  justify-content: start;
+}
+.rw-visual-break__media[hidden],
+.rw-how__figure[hidden],
+.rw-continuity__figure[hidden] {
+  display: none;
+}
+@media (max-width: 640px) {
+  .rw-hero { min-height: 31rem; }
+}

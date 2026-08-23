@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "PHI-OS-PUXR-W1-W4-PAGE-USABILITY-REPAIR-SUCCESSOR-v1.0.0",
+  "work": "PUXR-W1-W4",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "baselineLabel": "fix PDS",
+  "status": "ACTIVE_ADDITIVE_PAGE_USABILITY_REPAIR_SUCCESSOR",
+  "purpose": "Repair public-page usability failures observed on the eb1b067-aligned client: duplicate hero presentation, oversized Ask answer typography, irrelevant Ask answer display, cropped or blank visual panels, and unusable Reality Navigation geometry.",
+  "workstreams": {
+    "PUXR-W1": {
+      "name": "Ask PHI OS Presentation Consolidation",
+      "outcome": [
+        "one canonical Ask hero/H1",
+        "legacy duplicate hero removed from DOM",
+        "question and section heading scale bounded",
+        "composer and answer vertical rhythm reduced"
+      ]
+    },
+    "PUXR-W2": {
+      "name": "Visual Fail-Soft and Full-Asset Rendering",
+      "outcome": [
+        "ILL-010 resolves through verified client visual registry v1.7",
+        "supporting figures use contain rather than destructive crop",
+        "failed supporting media collapses instead of reserving blank height",
+        "copy reflows to readable single-column state when media is unavailable"
+      ]
+    },
+    "PUXR-W3": {
+      "name": "Reality Navigation Geometry Repair",
+      "outcome": [
+        "bounded desktop stage rail",
+        "flexible readable main workspace",
+        "intro copy and boundary card no longer crush each other",
+        "single-column responsive fallback below 900px",
+        "loading/empty states stop creating oversized dead space"
+      ]
+    },
+    "PUXR-W4": {
+      "name": "Ask PHI OS Question-Relevance Guard",
+      "outcome": [
+        "unrelated upstream answers are suppressed fail-closed",
+        "insufficient relevance is explained instead of showing nonsense",
+        "relevant grounded answers remain renderable",
+        "no second retrieval or answer authority is created"
+      ]
+    }
+  },
+  "invariants": {
+    "kapGroundingAuthorityChanged": false,
+    "kapCompositionAuthorityChanged": false,
+    "secondRetrievalRuntimeCreated": false,
+    "secondAnswerAuthorityCreated": false,
+    "methodAuthorityChanged": false,
+    "realityAuthorityChanged": false,
+    "canonicalIll010ObjectKeyChanged": false,
+    "historicalPredecessorCheckersRewritten": false,
+    "frozenKapAuthoritySha256": {
+      "functions/_lib/knowledge-answer-grounding.js": "b251475a4ff303b6c7428290d7ed231af5416b8fffa14077b9defe37952e5011",
+      "functions/_lib/knowledge-answer-composition.js": "601cdfe9c75affe453f86b31deedd524c515613e08e15c6ab017707f1cbee965",
+      "functions/knowledge-runtime/manuscript-source-runtime.js": "ec2bdc9aa6a3d04c506c9cac30fe71810e4d5300c8eb7d3696d5cde44a3abec4"
+    }
+  },
+  "compatibilityNotes": [
+    "The predecessor reality-workspace current checker still asserts client-visual-asset-registry-v1.3.json. PUXR intentionally consumes verified v1.7 while preserving the same ILL-010 object key; the historical checker is not rewritten in this batch.",
+    "The eb1b067-aligned baseline already contains a stale CKA W5-W17 current-successor fingerprint for assets/js/pages/knowledge-search-b.js. PUXR does not rewrite that historical authority record.",
+    "A pre-existing client-visual-consumption-current assertion concerning the Library HERO-002 marker is outside this batch and is not used as PUXR acceptance."
+  ],
+  "acceptanceCommands": [
+    "node scripts/check-eb1b067-page-usability-repair.mjs",
+    "npm run check:m3c-navigation-visual-alignment",
+    "npm run check:kap-answer"
+  ],
+  "deltaFiles": [
+    {
+      "path": "knowledge-search.html",
+      "sha256": "303fde42b44c610f552aff3a84a27b645a98834fa8891a2345b21ec037719ee7"
+    },
+    {
+      "path": "assets/css/knowledge-search.css",
+      "sha256": "3282c568f9067ff23991f4b025b7586f2c48efefe9bc895d1286e272f176376f"
+    },
+    {
+      "path": "assets/js/pages/knowledge-search-b.js",
+      "sha256": "67fc819d7de03f2e922e1273b8d4781400bce36f2548bb3dc12de3bcbf3504c7"
+    },
+    {
+      "path": "assets/js/knowledge/answer-relevance-guard.js",
+      "sha256": "a214a7893463e43eee258d5cd4478c6c733ce92b5dcf69eca640aa7f95a4b7b6"
+    },
+    {
+      "path": "assets/js/pages/client-production-surfaces.js",
+      "sha256": "96bbaa0cc03e1aab8013d43217a2fb831653de131e038e2639f7a87dbf895540"
+    },
+    {
+      "path": "assets/js/pages/reality-workspace.js",
+      "sha256": "9c7d150444033040b63428938b6f4837d224a3ccfca97fee9bbc1d971a7ffc40"
+    },
+    {
+      "path": "assets/css/reality-workspace.css",
+      "sha256": "3b84ab45ffa292b885bab4d1198218b94a749a1f3e191d33ac6a37ed00b1d1ec"
+    },
+    {
+      "path": "assets/js/pages/runtime-spine-visuals.js",
+      "sha256": "3d9d2678431a23a98323c213ce6b3305f94adf748406f82793b34ab4bd280ea6"
+    },
+    {
+      "path": "assets/css/runtime-spine.css",
+      "sha256": "0067e064a298f6d0da894ee139bab45e7fad47fa3b7382580b2021825cbc2fea"
+    },
+    {
+      "path": "assets/css/navigation-visual-alignment.css",
+      "sha256": "81926e85811781d5f8c6644886a5993a75a7c6f5ae02992a835a1d2d14182668"
+    },
+    {
+      "path": "scripts/check-eb1b067-page-usability-repair.mjs",
+      "sha256": "fe94303f3a400e771787a6f8aafb28933c7c3ce6280bca711b49f7ba86a99e45"
+    }
+  ]
+}
