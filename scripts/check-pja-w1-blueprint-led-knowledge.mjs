@@ -224,6 +224,9 @@ for (const forbidden of ['/api/', 'openai', 'RuntimeKernel', 'fetchProvider']) {
 
 const expW1 = await readJson('docs/experience/EXP-W1-global-ia-shared-shell.json');
 const iaSuccessor = await readJson('docs/pja/pja-w1-current-reality-route-successor-v2.json');
+const px2Successor = await readJson(
+  'content/web-production/px2/successors/px2-w11-checker-successor-v1.json'
+);
 assert.equal(expW1.freezeId, 'EXP-W1-v1.0.0-Frozen');
 assert.equal(expW1.supersedes.field, 'publicInformationArchitecture');
 assert.equal(
@@ -239,6 +242,13 @@ assert.equal(iaSuccessor.current.canonicalWorkspace, true);
 assert.equal(iaSuccessor.boundaries.knowledgeAuthorityChanged, false);
 assert.equal(iaSuccessor.boundaries.publicationAuthorityChanged, false);
 assert.equal(iaSuccessor.boundaries.runtimeAuthorityChanged, false);
+assert.equal(px2Successor.successorCode, 'PX2-W11-CHECKER-SUCCESSOR');
+assert.equal(px2Successor.status, 'ACTIVE');
+assert.equal(
+  px2Successor.checker,
+  'scripts/check-px2-w0-w13-public-experience-v2.mjs'
+);
+assert(px2Successor.preservesRuntimeAuthority.includes('published knowledge authority'));
 
 const expectedMainNavigation = expW1.primaryNavigation.map(item => [
   item.id,
@@ -261,10 +271,27 @@ const requiredPages = [
   ...evidence.publicInformationArchitecture.requiredPages,
   ...evidence.publicInformationArchitecture.articlePages
 ];
+const px2MigratedPjaPages = new Set([
+  'index.html',
+  'library.html',
+  'articles.html'
+]);
 for (const page of requiredPages) {
   assert.equal(await exists(page), true, `Missing PJA-W1 page: ${page}`);
   const html = await read(page);
-  assert(html.includes('/assets/js/public-shell.js'));
+  const expectedShell = px2MigratedPjaPages.has(page)
+    ? '/assets/js/public-shell-v2.js'
+    : '/assets/js/public-shell.js';
+  assert(
+    html.includes(expectedShell),
+    `PJA-W1 page does not consume its governed current shell: ${page}`
+  );
+  assert.equal(
+    html.includes('/assets/js/public-shell.js') &&
+      html.includes('/assets/js/public-shell-v2.js'),
+    false,
+    `PJA-W1 page loads both historical and PX2 shells: ${page}`
+  );
 }
 for (const page of evidence.publicInformationArchitecture.articlePages) {
   const html = await read(page);
@@ -277,8 +304,16 @@ assert.equal(expW2.freezeId, 'EXP-W2-v1.0.0-Frozen');
 assert.equal((await read('index.html')).includes('data-knowledge-article-grid'), false);
 for (const page of ['library.html', 'book-one.html', 'thesis.html', 'explore.html']) {
   const html = await read(page);
-  assert(html.includes('data-knowledge-article-grid'));
-  assert(html.includes('/assets/js/pages/knowledge-connections.js'));
+  if (page === 'library.html') {
+    const px2Publications = await read('assets/js/components/publications-v2.js');
+    assert(html.includes('data-puxr-publications'));
+    assert(html.includes('/assets/js/components/publications-v2.js'));
+    assert(px2Publications.includes('/content/knowledge/public/retrieval/publications.json'));
+    assert(px2Publications.includes("record.status === 'published'"));
+  } else {
+    assert(html.includes('data-knowledge-article-grid'));
+    assert(html.includes('/assets/js/pages/knowledge-connections.js'));
+  }
 }
 
 function publicTargetToFile(href) {

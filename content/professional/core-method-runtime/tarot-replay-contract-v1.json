@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-REPLAY-CONTRACT-v1.0.0",
+  "phase": "TAR",
+  "work": "TAR-W10",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "STORED_DRAW_EVIDENCE_REPLAY_FROZEN_V1",
+  "replayInputs": [
+    "deckId",
+    "deckVersion",
+    "spreadId",
+    "spreadVersion",
+    "orientationPolicyId",
+    "eligibleCards",
+    "drawOrder",
+    "orientationResult",
+    "spreadPositions",
+    "draws",
+    "seed",
+    "entropyEvidence",
+    "replayToken",
+    "runtimeVersion",
+    "projectionVersion"
+  ],
+  "rules": {
+    "storedDrawEvidenceIsAuthoritativeForReplay": true,
+    "rerandomizeDuringReplayAllowed": false,
+    "reselectDuringCalculationAllowed": false,
+    "sameEvidenceMustRestoreSameCardProjections": true,
+    "replayRunCount": 1000,
+    "aiInReplayAllowed": false
+  }
+}

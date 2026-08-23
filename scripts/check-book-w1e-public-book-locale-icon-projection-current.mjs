@@ -22,6 +22,7 @@ const ACCEPTANCE_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-human-ac
 const ACTIVE_PATH = 'content/knowledge/migrations/book-w1e/public-book-locale-icon-projection-active-v1.json';
 const MATERIALIZATION_RECONCILIATION_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-public-assets-materialization-reconciliation-v1.json';
 const CURRENT_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-current-consumer-successor-v3.json';
+const PX2_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-current-consumer-successor-v4.json';
 const LOCALE_CONSUMER_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-hpc2-locale-consumer-successor-v1.json';
 const PUBLIC_ASSET_VERIFICATION_SUCCESSOR_PATH = 'content/knowledge/migrations/book-w1e/book-w1e-poc-a-public-asset-verification-successor-v1.json';
 const PART_H5A_BRANDING_SUCCESSOR_PATH = 'content/web-production/client-visual-consumption/successors/part-h5a-current-branding-successor-v1.json';
@@ -41,6 +42,7 @@ const [
   redirects,
   materializationReconciliation,
   currentConsumerSuccessor,
+  px2ConsumerSuccessor,
   localeConsumerSuccessor,
   publicAssetVerificationSuccessor
 ] = await Promise.all([
@@ -58,6 +60,7 @@ const [
   read('_redirects'),
   json(MATERIALIZATION_RECONCILIATION_PATH),
   json(CURRENT_CONSUMER_SUCCESSOR_PATH),
+  json(PX2_CONSUMER_SUCCESSOR_PATH),
   json(LOCALE_CONSUMER_SUCCESSOR_PATH),
   json(PUBLIC_ASSET_VERIFICATION_SUCCESSOR_PATH)
 ]);
@@ -119,6 +122,16 @@ assert.equal(materializationReconciliation.status, 'OMITTED_ACCEPTED_MATERIALIZA
 assert.equal(materializationReconciliation.authority.newHumanDecisionCreated, false);
 assert.equal(materializationReconciliation.authority.publicProjectionAuthorityExpanded, false);
 assert.equal(currentConsumerSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_CURRENT_HPC2_LOCALE_CONSUMERS_SUCCESSOR_RECONCILED');
+assert.equal(px2ConsumerSuccessor.schemaVersion, 'PHI-OS-BOOK-W1E-CURRENT-CONSUMER-SUCCESSOR-v4.0.0');
+assert.equal(px2ConsumerSuccessor.status, 'BOOK_W1E_HISTORICAL_ACCEPTANCE_PRESERVED_PX2_VISUAL_POINTER_CONSUMER_SUCCESSOR_RECONCILED');
+assert.equal(px2ConsumerSuccessor.baselineCommit, 'c42784848b3d9e5495d34e5a0d827460a7108a89');
+assert.equal(px2ConsumerSuccessor.predecessorSuccessor.path, CURRENT_CONSUMER_SUCCESSOR_PATH);
+assert.equal(px2ConsumerSuccessor.predecessorSuccessor.sha256, sha256(await read(CURRENT_CONSUMER_SUCCESSOR_PATH)));
+assert.equal(px2ConsumerSuccessor.predecessorSuccessor.rewritten, false);
+assert.equal(px2ConsumerSuccessor.px2PresentationSuccessor.sha256, sha256(await read(px2ConsumerSuccessor.px2PresentationSuccessor.path)));
+assert.equal(px2ConsumerSuccessor.px2PresentationSuccessor.status, 'ACTIVE');
+assert.equal(px2ConsumerSuccessor.px2PresentationSuccessor.authorityChanged, false);
+assert.equal(px2ConsumerSuccessor.currentOverrides.length, 1);
 assert.equal(localeConsumerSuccessor.status, 'CURRENT_HPC2_DESTINATION_LOCALE_CONSUMER_RECONCILED_NO_AUTHORITY_CHANGE');
 assert.equal(localeConsumerSuccessor.evidence.baselineLocaleRestoreProducedMissingI18nKeyCount, 145);
 assert.equal(localeConsumerSuccessor.evidence.affectedCurrentSurfaceCount, 8);
@@ -203,6 +216,7 @@ assert.equal(currentConsumerSuccessor.currentMaterializationFacts.bookCompositio
 assert.equal(currentConsumerSuccessor.currentMaterializationFacts.routeRegistrySha256, sha256(await read('content/web-production/registries/wpr-route-registry-v1.json')));
 assert.equal(currentConsumerSuccessor.currentMaterializationFacts.publicDiscoveryRegistrySha256, sha256(await read('content/web-production/registries/wpr-public-discovery-registry-v1.json')));
 for (const value of Object.values(currentConsumerSuccessor.authority)) assert.equal(value, value === currentConsumerSuccessor.authority.consumerEvolutionOnly ? true : false);
+for (const value of Object.values(px2ConsumerSuccessor.authority)) assert.equal(value, value === px2ConsumerSuccessor.authority.consumerEvolutionOnly ? true : false);
 assert.equal(materializationReconciliation.bookComposition.restoredSha256, sha256(await read('content/web-production/composition/public/book-composition-v1.json')));
 assert.equal(materializationReconciliation.routeRegistry.restoredSha256, sha256(await read('content/web-production/registries/wpr-route-registry-v1.json')));
 assert.equal(materializationReconciliation.publicDiscoveryRegistry.restoredSha256, sha256(await read('content/web-production/registries/wpr-public-discovery-registry-v1.json')));
@@ -291,16 +305,28 @@ assert.equal(maintenanceCompatibility?.redirectStatus, 308);
 assert.equal(maintenanceCompatibility?.canonicalAuthority, false);
 
 const currentSuccessorByPath = new Map(currentConsumerSuccessor.currentActivatedSources.map(record => [record.path, record]));
+const px2OverrideByPath = new Map(px2ConsumerSuccessor.currentOverrides.map(record => [record.path, record]));
 assert.equal(currentSuccessorByPath.size, active.activatedSources.length);
 for (const source of active.activatedSources) {
   const actualSha256 = sha256(await read(source.path));
   const successor = currentSuccessorByPath.get(source.path);
+  const px2Override = px2OverrideByPath.get(source.path);
   assert(successor, `BOOK-W1E current consumer successor missing: ${source.path}`);
   assert.equal(successor.bookW1eActivatedSha256, source.sha256);
   const expectedCurrentSha256 =
     source.path === publicAssetVerificationSuccessor.publicAssetRegistry.path
       ? partH5ABrandingSuccessor.publicAssetRegistry.currentSha256
-      : successor.currentSha256;
+      : px2Override?.currentSha256 || successor.currentSha256;
+
+  if (px2Override) {
+    assert.equal(px2Override.predecessorSha256, successor.currentSha256);
+    assert.equal(px2Override.governanceSha256, sha256(await read(px2Override.governancePath)));
+    assert.equal(px2Override.changedSincePredecessor, true);
+    const sourceText = await read(source.path);
+    for (const semantic of px2Override.requiredSemantics) {
+      assert(sourceText.includes(semantic), `BOOK-W1E PX2 successor semantic missing: ${semantic}`);
+    }
+  }
 
   if (source.path === publicAssetVerificationSuccessor.publicAssetRegistry.path) {
     assert.equal(
@@ -315,7 +341,7 @@ for (const source of active.activatedSources) {
     actualSha256,
     `BOOK-W1E successor digest drift: ${source.path}`
   );
-  assert.equal(successor.changedSinceBookW1E, actualSha256 !== source.sha256);
+  assert.equal(px2Override?.changedSinceBookW1E ?? successor.changedSinceBookW1E, actualSha256 !== source.sha256);
   assert.equal(successor.governanceSha256, sha256(await read(successor.governancePath)), `BOOK-W1E successor governance drift: ${source.path}`);
   if (source.path === materializationReconciliation.acceptedSuccessorDigests.publicSurfaceData.path) {
     const historicalSuccessor = materializationReconciliation.acceptedSuccessorDigests.publicSurfaceData;

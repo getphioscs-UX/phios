@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-MACHINE-ACCEPTANCE-v1.0.0",
+  "phase": "TAR",
+  "work": "TAR-W11",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "MACHINE_ACCEPTANCE_CONTRACT_FROZEN",
+  "requiredCommands": [
+    "check:tarot-identity",
+    "check:tarot-deck",
+    "check:tarot-spread",
+    "check:tarot-selection",
+    "check:tarot-no-ai-draw-authority",
+    "check:tarot-projection",
+    "check:tarot-replay",
+    "check:tarot-freeze"
+  ],
+  "aggregateCommand": "check:tarot",
+  "additionalCommands": [
+    "check:iching",
+    "check:iching-interpretation-reality",
+    "check:symbolic-method",
+    "check:current-system-baseline-current",
+    "check:px2",
+    "check:runtime-frontend-parity"
+  ],
+  "acceptanceAssertions": [
+    "EXISTING_TAROT_TAR_CARD_IDENTITY_REUSED",
+    "ONE_DECK_FAMILY_ONLY",
+    "78_DECK_BOUND_CARD_IDENTITIES",
+    "UPRIGHT_ONLY_POLICY",
+    "ONLY_ONE_AND_THREE_CARD_SPREADS",
+    "NON_PREDICTIVE_THREE_CARD_POSITIONS",
+    "MANUAL_AND_SYSTEM_RANDOM_SELECTION",
+    "FULL_RANDOM_EVIDENCE_PERSISTED",
+    "NO_AI_DRAW_AUTHORITY",
+    "SHARED_CARD_PROJECTION_ONLY",
+    "1000_RUN_STORED_EVIDENCE_REPLAY",
+    "SOURCE_NEUTRAL_NO_BOOK_INGESTION",
+    "PRODUCTION_ACTIVATION_CLOSED"
+  ]
+}

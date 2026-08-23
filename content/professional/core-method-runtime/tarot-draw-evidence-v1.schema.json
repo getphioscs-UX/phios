@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/tarot/tarot-draw-evidence-v1.schema.json",
+  "title": "PHI OS Tarot Draw Evidence v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodId",
+    "sessionId",
+    "inputMode",
+    "selectionMode",
+    "deckId",
+    "deckVersion",
+    "spreadId",
+    "spreadVersion",
+    "orientationPolicyId",
+    "orientationPolicyVersion",
+    "eligibleCards",
+    "drawOrder",
+    "orientationResult",
+    "spreadPositions",
+    "draws",
+    "aiSelected",
+    "runtimeVersion",
+    "projectionVersion",
+    "timestamp"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-TAROT-DRAW-EVIDENCE-v1.0.0"
+    },
+    "methodId": {
+      "const": "TAROT"
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputMode": {
+      "enum": [
+        "MANUAL_SELECTION",
+        "SYSTEM_RANDOM"
+      ]
+    },
+    "selectionMode": {
+      "enum": [
+        "MANUAL_SELECTION",
+        "SYSTEM_RANDOM"
+      ]
+    },
+    "deckId": {
+      "const": "RWS_1909_STRUCTURAL_FAMILY"
+    },
+    "deckVersion": {
+      "const": "1.0.0"
+    },
+    "spreadId": {
+      "enum": [
+        "ONE_CARD",
+        "THREE_CARD"
+      ]
+    },
+    "spreadVersion": {
+      "const": "1.0.0"
+    },
+    "orientationPolicyId": {
+      "const": "TAROT_ORIENTATION_UPRIGHT_ONLY"
+    },
+    "orientationPolicyVersion": {
+      "const": "1.0.0"
+    },
+    "eligibleCards": {
+      "type": "array",
+      "minItems": 78,
+      "maxItems": 78,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "drawOrder": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "orientationResult": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "const": "UPRIGHT"
+      }
+    },
+    "spreadPositions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "positionId",
+          "order",
+          "label"
+        ],
+        "properties": {
+          "positionId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "draws": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "drawIndex",
+          "cardId",
+          "orientation",
+          "position"
+        ],
+        "properties": {
+          "drawIndex": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "cardId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "orientation": {
+            "const": "UPRIGHT"
+          },
+          "position": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "positionId",
+              "order",
+              "label"
+            ],
+            "properties": {
+              "positionId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 3
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "aiSelected": {
+      "const": false
+    },
+    "seed": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entropyEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "digest"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "replayToken": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtimeVersion": {
+      "const": "1.0.0"
+    },
+    "projectionVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "selectionMode": {
+            "const": "SYSTEM_RANDOM"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "seed",
+          "entropyEvidence",
+          "replayToken"
+        ]
+      }
+    }
+  ]
+}

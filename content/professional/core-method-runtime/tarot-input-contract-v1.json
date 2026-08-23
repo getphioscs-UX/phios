@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-INPUT-CONTRACT-v1.0.0",
+  "phase": "TAR",
+  "work": "TAR-W6",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "STRUCTURAL_SELECTION_INPUT_CONTRACT_PRODUCTION_GATE_CLOSED",
+  "methodCode": "TAROT",
+  "pluginCode": "TAR",
+  "deckId": "RWS_1909_STRUCTURAL_FAMILY",
+  "deckVersion": "1.0.0",
+  "sharedSymbolicEvidenceContract": "content/professional/symbolic-method/schemas/symbolic-method-evidence-v1.schema.json",
+  "tarotDrawEvidenceSchema": "content/professional/core-method-runtime/tarot-draw-evidence-v1.schema.json",
+  "supportedInputModes": [
+    "MANUAL_SELECTION",
+    "SYSTEM_RANDOM"
+  ],
+  "reservedInputModes": [
+    "PHYSICAL_DECK_EVIDENCE"
+  ],
+  "modeContracts": {
+    "MANUAL_SELECTION": {
+      "selectionMode": "MANUAL_SELECTION",
+      "requires": [
+        "spreadId",
+        "selectedCardIds"
+      ],
+      "duplicateCardSelectionAllowed": false
+    },
+    "SYSTEM_RANDOM": {
+      "selectionMode": "SYSTEM_RANDOM",
+      "requires": [
+        "spreadId",
+        "seed",
+        "entropyEvidence",
+        "replayToken"
+      ],
+      "drawOccursWithoutReplacement": true,
+      "rerollInsideCalculationAllowed": false
+    }
+  },
+  "rules": {
+    "aiSelectionAllowed": false,
+    "llmMeaningfulCardChoiceAllowed": false,
+    "unregisteredDeckAllowed": false,
+    "unregisteredSpreadAllowed": false,
+    "sourceTextRequired": false,
+    "interpretationRequired": false,
+    "productionUseAllowed": false
+  }
+}

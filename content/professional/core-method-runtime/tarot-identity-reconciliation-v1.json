@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-IDENTITY-RECONCILIATION-v1.0.0",
+  "phase": "TAR",
+  "work": "TAR-W0",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "RECONCILED_EXISTING_IDENTITY_NO_SECOND_AUTHORITY",
+  "canonicalIdentity": {
+    "methodCode": "TAROT",
+    "pluginCode": "TAR",
+    "projectionType": "CARD"
+  },
+  "predecessors": {
+    "methodRegistryV1": {
+      "path": "content/professional/method-runtime/method-registry-v1.json",
+      "sha256": "a16b6f316365592acec4be4588a5305aedd3f760b9445ecae1c63b4bcb1161e1"
+    },
+    "methodRegistryV2": {
+      "path": "content/professional/method-production-activation/registries/method-registry-v2.json",
+      "sha256": "7cab1dca382de4a796a8a92de3fb0105ae23689f91e4661a48ea1e4e4ca563b0"
+    },
+    "symbolicCategorySuccessor": {
+      "path": "content/professional/method-production-activation/successors/method-registry-symbolic-category-successor-v1.json",
+      "sha256": "a03ee16423fb56a9d7c00c2dee9d96759836d87330462a601a398ddc9669a64c"
+    },
+    "symbolicEvidenceSchema": {
+      "path": "content/professional/symbolic-method/schemas/symbolic-method-evidence-v1.schema.json",
+      "sha256": "9378e7cfcb5ede07958affa168b4598ffe328e4cb6f44073bfbe8fcb18cb7c55"
+    },
+    "sharedProjectionContract": {
+      "path": "content/professional/method-runtime/shared-projection-runtime-v1.json",
+      "sha256": "8ffa3bf46930025cbf8ec3352223e7cdc5cc420b9f40016aa9e3edde6e981f13"
+    },
+    "sharedProjectionSchema": {
+      "path": "content/professional/method-runtime/canonical-projection-v1.schema.json",
+      "sha256": "3b764f08eb1d3b95f2f513803e94cb0b077030f1188f32f23984c50581e84474"
+    },
+    "ichingRuntimeFreeze": {
+      "path": "content/professional/core-method-runtime/iching-runtime-freeze-v1.json",
+      "sha256": "bce78462f278c4206029c375ea7001d84f8bbe07ac07d0e4b96669ba6af9da01"
+    }
+  },
+  "phaseEntryGate": {
+    "requiredPredecessor": "I Ching Runtime Frozen v1",
+    "satisfied": true,
+    "predecessorPath": "content/professional/core-method-runtime/iching-runtime-freeze-v1.json",
+    "predecessorSha256": "bce78462f278c4206029c375ea7001d84f8bbe07ac07d0e4b96669ba6af9da01"
+  },
+  "rules": {
+    "newMethodIdentityCreated": false,
+    "newPluginIdentityCreated": false,
+    "newProjectionTypeCreated": false,
+    "predecessorMutationAllowed": false,
+    "productionActivationGranted": false
+  }
+}

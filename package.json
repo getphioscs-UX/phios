@@ -1473,7 +1473,16 @@
     "check:runtime-frontend-parity-v5": "node scripts/check-runtime-frontend-parity-v5.mjs",
     "check:no-fake-method-availability": "node scripts/check-no-fake-method-availability.mjs",
     "check:fma-w4-w16": "node scripts/check-fma-w4-w16.mjs",
-    "check:fma-f": "npm run check:fma-e && npm run check:fma-w4-w16 && npm run check:no-fake-method-availability && npm run check:runtime-frontend-parity"
+    "check:fma-f": "npm run check:fma-e && npm run check:fma-w4-w16 && npm run check:no-fake-method-availability && npm run check:runtime-frontend-parity",
+    "check:tarot-identity": "node scripts/check-tarot-identity.mjs",
+    "check:tarot-deck": "node scripts/check-tarot-deck.mjs",
+    "check:tarot-spread": "node scripts/check-tarot-spread.mjs",
+    "check:tarot-selection": "node scripts/check-tarot-selection.mjs",
+    "check:tarot-no-ai-draw-authority": "node scripts/check-tarot-no-ai-draw-authority.mjs",
+    "check:tarot-projection": "node scripts/check-tarot-projection.mjs",
+    "check:tarot-replay": "node scripts/check-tarot-replay.mjs",
+    "check:tarot-freeze": "node scripts/check-tarot-freeze.mjs",
+    "check:tarot": "npm run check:tarot-identity && npm run check:tarot-deck && npm run check:tarot-spread && npm run check:tarot-selection && npm run check:tarot-no-ai-draw-authority && npm run check:tarot-projection && npm run check:tarot-replay && npm run check:tarot-freeze"
   },
   "type": "module",
   "dependencies": {

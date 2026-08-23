@@ -101,6 +101,15 @@ for (const downstreamRoute of [
 }
 
 const shell = await read('assets/js/public-shell.js');
+const routeSuccessor = await readJson(
+  'content/web-production/successors/pds-w3-current-reality-route-successor-v2.json'
+);
+assert.equal(routeSuccessor.status, 'CURRENT');
+assert.equal(routeSuccessor.predecessor.realityFooterHref, '/reality-journey');
+assert.equal(routeSuccessor.successor.realityNavigationHref, '/reality/');
+assert.equal(routeSuccessor.successor.realityFooterHref, '/reality/');
+assert.equal(routeSuccessor.boundaries.runtimeChanged, false);
+assert.equal(routeSuccessor.boundaries.historicalCheckerRetained, true);
 const navigationBlock = shell.slice(
   shell.indexOf('const NAVIGATION'),
   shell.indexOf('const FOOTER_LINKS')
@@ -109,9 +118,9 @@ const footerBlock = shell.slice(
   shell.indexOf('const FOOTER_LINKS'),
   shell.indexOf('function navigationMarkup')
 );
-assert.match(navigationBlock, /id: 'reality', href: '\/reality-journey'/);
+assert(navigationBlock.includes(`id: 'reality', href: '${routeSuccessor.successor.realityNavigationHref}'`));
 assert.doesNotMatch(shell, /class="public-nav__journey"/);
-assert.match(footerBlock, /href: '\/reality-journey'/);
+assert(footerBlock.includes(`href: '${routeSuccessor.successor.realityFooterHref}'`));
 
 const pjaW1 = await readJson(
   'docs/pja/pja-w1-blueprint-led-public-knowledge-ecosystem-v1.json'

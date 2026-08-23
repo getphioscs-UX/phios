@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-RUNTIME-MANIFEST-v1.0.0",
+  "phase": "TAR",
+  "work": "TAR-W11",
+  "baselineCommit": "c42784848b3d9e5495d34e5a0d827460a7108a89",
+  "status": "TAROT_RUNTIME_FROZEN_V1_VALIDATION_ONLY",
+  "runtimeVersion": "1.0.0",
+  "identity": {
+    "methodCode": "TAROT",
+    "pluginCode": "TAR",
+    "projectionType": "CARD",
+    "deckId": "RWS_1909_STRUCTURAL_FAMILY",
+    "deckVersion": "1.0.0"
+  },
+  "runtimeImplementations": [
+    "functions/core-method-runtime/tarot-selection-runtime.js",
+    "functions/core-method-runtime/tarot-runtime.js",
+    "functions/core-method-runtime/tarot-card-projection-mapper.js"
+  ],
+  "activation": {
+    "ichingV1PrerequisiteSatisfied": true,
+    "structuralSelectionRuntimeImplemented": true,
+    "structuralCalculationRuntimeImplemented": true,
+    "sharedCardProjectionImplemented": true,
+    "interpretationImplemented": false,
+    "bookCorpusRequired": false,
+    "productionExecutionAllowed": false,
+    "publicExecutionAllowed": false,
+    "professionalExecutionAllowed": false
+  },
+  "governedV1": {
+    "orientationPolicy": "UPRIGHT_ONLY",
+    "spreads": [
+      "ONE_CARD",
+      "THREE_CARD"
+    ],
+    "threeCardPositions": [
+      "SITUATION",
+      "TENSION",
+      "CONSIDERATION"
+    ],
+    "inputModes": [
+      "MANUAL_SELECTION",
+      "SYSTEM_RANDOM"
+    ],
+    "reservedInputModes": [
+      "PHYSICAL_DECK_EVIDENCE"
+    ]
+  },
+  "authorityBoundary": {
+    "aiDrawAuthority": false,
+    "decklessCardAllowed": false,
+    "arbitrarySpreadAllowed": false,
+    "pageOrientationOverrideAllowed": false,
+    "interpretationInsideStructuralRuntimeAllowed": false,
+    "sharedProjectionRuntimeReused": true
+  }
+}
