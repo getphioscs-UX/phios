@@ -53,9 +53,12 @@ export function createAstStructuralProductionRuntime({astronomyModuleLoader}={})
    const node=await shared.execute({calculationId:`${requestId}-ASTA-NODE`,runtimeCode:SHARED_CALCULATION_RUNTIME_CODE,methodCode:'ASTROLOGY',pluginCode:'AST',algorithmCode:ASTA_NODE_ALGORITHM_CODE,algorithmVersion:'1.0.0',inputRecords:[birth],referenceVersions:{nodePolicyCode:ASTA_NODE_POLICY_CODE,nodeConvention:AST_TRUE_NODE_CONVENTION,engineCode:'ASTRONOMY_ENGINE_JS',engineVersion:'2.1.19'}});
    const nodePositions=node.output.positions;const pointPositions=[...planetBodies.map(p=>({bodyCode:p.bodyCode,longitude:p.longitude})),...nodePositions.map(p=>({bodyCode:p.bodyCode,longitude:p.longitude}))];const points=sharedRecord(`SDA-${requestId}-ASTA-POINTS`,'ASTA_PROJECTABLE_POINTS',{positions:pointPositions});
    const hasCoordinates=Number.isFinite(canonicalInput.birthPlace?.latitude)&&Number.isFinite(canonicalInput.birthPlace?.longitude);
-   const house=hasCoordinates?await shared.execute({calculationId:`${requestId}-ASTA-HOUSE`,runtimeCode:SHARED_CALCULATION_RUNTIME_CODE,methodCode:'ASTROLOGY',pluginCode:'AST',algorithmCode:ASTA_ANGLE_HOUSE_ALGORITHM_CODE,algorithmVersion:'1.0.0',inputRecords:[birth,points],referenceVersions:{houseSystemCode:ASTA_HOUSE_SYSTEM_CODE,anglePolicyCode:ASTA_ANGLE_POLICY_CODE,zodiacPolicyCode:ASTA_ZODIAC_POLICY_CODE,precisionPolicyCode:ASTA_PRECISION_POLICY_CODE}}):null;
+   const exactBirthTime=canonicalInput.timeAccuracy==='EXACT';
+   const houseEligible=hasCoordinates&&exactBirthTime;
+   const house=houseEligible?await shared.execute({calculationId:`${requestId}-ASTA-HOUSE`,runtimeCode:SHARED_CALCULATION_RUNTIME_CODE,methodCode:'ASTROLOGY',pluginCode:'AST',algorithmCode:ASTA_ANGLE_HOUSE_ALGORITHM_CODE,algorithmVersion:'1.0.0',inputRecords:[birth,points],referenceVersions:{houseSystemCode:ASTA_HOUSE_SYSTEM_CODE,anglePolicyCode:ASTA_ANGLE_POLICY_CODE,zodiacPolicyCode:ASTA_ZODIAC_POLICY_CODE,precisionPolicyCode:ASTA_PRECISION_POLICY_CODE}}):null;
    const aspects=await shared.execute({calculationId:`${requestId}-ASTA-ASPECT`,runtimeCode:SHARED_CALCULATION_RUNTIME_CODE,methodCode:'ASTROLOGY',pluginCode:'AST',algorithmCode:ASTA_ASPECT_ALGORITHM_CODE,algorithmVersion:'1.0.0',inputRecords:[points],referenceVersions:{aspectSetCode:ASTA_ASPECT_SET_CODE,aspectPolicyCode:ASTA_ASPECT_POLICY_CODE,applyingSeparatingPolicy:'NOT_COMPUTED_V1'}});
-   return Object.freeze({node,house,aspects,hasCoordinates,reasonCodes:Object.freeze(hasCoordinates?[]:['AST_HOUSES_ANGLES_NOT_CALCULATED_COORDINATES_REQUIRED'])});
+   const reasonCodes=houseEligible?[]:[!hasCoordinates?'AST_HOUSES_ANGLES_NOT_CALCULATED_COORDINATES_REQUIRED':'AST_HOUSES_ANGLES_NOT_CALCULATED_EXACT_TIME_REQUIRED'];
+   return Object.freeze({node,house,aspects,hasCoordinates,exactBirthTime,houseEligible,reasonCodes:Object.freeze(reasonCodes)});
   }
  });
 }
