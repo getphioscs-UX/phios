@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W25-RR-HANDOFF-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W25",
+  "status": "ACTIVE_CANDIDATE_SUBMISSION_BOUNDARY",
+  "sourceObject": "HolisticFinancialPlanCandidate",
+  "submissionObject": "RRReportCandidateSubmission",
+  "targetRuntime": "RR",
+  "rrReferences": {
+    "reportCandidate": "content/runtime/customer-report-runtime/contracts/report-candidate-contract-v2.json",
+    "cprHandoff": "content/runtime/customer-report-runtime/contracts/rr-cpr-handoff-contract-v2.json"
+  },
+  "requiredSubmissionFields": [
+    "hfpCandidateReference",
+    "hfpCandidateDigest",
+    "caseReference",
+    "customerReference",
+    "reportProductCode",
+    "productVersion",
+    "sectionCount",
+    "sourceAuthorityReferences",
+    "professionalCompletionRequired",
+    "unknownCount",
+    "limitationCount",
+    "visualSemanticReferences",
+    "submittedAt"
+  ],
+  "forbiddenHfpStates": [
+    "ASSEMBLED",
+    "REVIEW_PASSED",
+    "APPROVED",
+    "RELEASED",
+    "FINAL",
+    "PUBLISHED"
+  ],
+  "rules": {
+    "hfpStopsAtSubmission": true,
+    "rrRevalidatesCandidate": true,
+    "rrOwnsReportLifecycle": true,
+    "hfpMayNotRelease": false,
+    "cprCustRemainsPresentationAuthority": true,
+    "hfpMayApprove": false,
+    "hfpMayRelease": false
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "PHI-OS-MRM-HFP-W27-BINDING-SUCCESSOR-v1.0.0",
+  "phase": "MRM-S",
+  "work": "HFP-W27",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_HFP_CAPABILITY_LEVEL_RM_EM_BINDING",
+  "predecessorReferences": {
+    "rmVocabulary": {
+      "path": "content/runtime-maturity/registries/runtime-maturity-state-registry-v1.json",
+      "sha256": "a72ff6c9fc2e0924dc10969668b27b81fa7c9a3fa9cd72864412eaac9c60cc77"
+    },
+    "emVocabulary": {
+      "path": "content/runtime-maturity/registries/evidence-maturity-level-registry-v1.json",
+      "sha256": "06e4f16ac5c2b6759901bf973d75cfb882bbc9b95b22aee9179d204ddd4a5fcc"
+    },
+    "capabilityInventory": {
+      "path": "content/runtime-maturity/registries/master-runtime-capability-inventory-v1.1.json",
+      "sha256": "e9375dadf22129819473c2f7380247b191f2eb8b16ddae1a725768e7dce6dc22"
+    }
+  },
+  "registeredRuntime": "HFP",
+  "capabilityCount": 4,
+  "capabilities": [
+    {
+      "capabilityCode": "HFP-COMPOSITION",
+      "currentRM": "RM-5",
+      "currentEM": "EM-2",
+      "rmEvidence": [
+        "holistic-financial-plan-candidate-contract-v1.json",
+        "holistic-financial-planning-runtime.js",
+        "hfp-fixture-registry-v1.json",
+        "hfp-rr-handoff-contract-v1.json"
+      ],
+      "emEvidence": [
+        "ARCHITECTURE",
+        "DETERMINISM",
+        "REFERENCE_FIXTURE",
+        "EDGE_FIXTURE",
+        "NEGATIVE_FIXTURE",
+        "REGRESSION_FIXTURE"
+      ],
+      "blockedPromotion": "NO_REAL_PILOT_CASE"
+    },
+    {
+      "capabilityCode": "HFP-PROFESSIONAL-BINDING",
+      "currentRM": "RM-4",
+      "currentEM": "EM-2",
+      "rmEvidence": [
+        "hfp-pfr-contribution-reference-contract-v1.json",
+        "holistic-financial-planning-runtime.js",
+        "professional.json",
+        "pfr-production-block.json"
+      ],
+      "emEvidence": [
+        "ARCHITECTURE",
+        "DETERMINISM",
+        "REFERENCE_FIXTURE",
+        "EDGE_FIXTURE",
+        "NEGATIVE_FIXTURE",
+        "REGRESSION_FIXTURE"
+      ],
+      "blockedPromotion": "CANONICAL_PFR_RUNTIME_NOT_INSTALLED"
+    },
+    {
+      "capabilityCode": "HFP-RR-HANDOFF",
+      "currentRM": "RM-5",
+      "currentEM": "EM-2",
+      "rmEvidence": [
+        "hfp-rr-handoff-contract-v1.json",
+        "holistic-financial-planning-runtime.js",
+        "hfp-fixture-registry-v1.json"
+      ],
+      "emEvidence": [
+        "ARCHITECTURE",
+        "DETERMINISM",
+        "REFERENCE_FIXTURE",
+        "EDGE_FIXTURE",
+        "NEGATIVE_FIXTURE",
+        "REGRESSION_FIXTURE"
+      ],
+      "blockedPromotion": "NO_REAL_PILOT_CASE"
+    },
+    {
+      "capabilityCode": "HFP-CONTINUITY",
+      "currentRM": "RM-4",
+      "currentEM": "EM-2",
+      "rmEvidence": [
+        "hfp-continuity-contract-v1.json",
+        "holistic-financial-planning-runtime.js",
+        "continuity-t0-t1-t2.json"
+      ],
+      "emEvidence": [
+        "ARCHITECTURE",
+        "DETERMINISM",
+        "REFERENCE_FIXTURE",
+        "EDGE_FIXTURE",
+        "NEGATIVE_FIXTURE",
+        "REGRESSION_FIXTURE"
+      ],
+      "blockedPromotion": "NO_REAL_LONGITUDINAL_CASE_EM5"
+    }
+  ],
+  "rules": {
+    "historicalMrmFilesMutated": false,
+    "rmAndEmCapabilitySpecific": true,
+    "emDerivedFromGovernedEvidence": true,
+    "passAloneCannotPromote": true,
+    "pilotRequiredForEM3": true,
+    "longitudinalRealEvidenceRequiredForEM5": true,
+    "productionMatureClaimed": false
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W21-ACTION-PLAN-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W21",
+  "requiredFields": [
+    "actionId",
+    "owner",
+    "due",
+    "dependency",
+    "status",
+    "relatedGoal",
+    "sourceAuthority",
+    "sourceReference"
+  ],
+  "optionalFields": [
+    "professionalSource"
+  ],
+  "allowedSourceAuthorities": [
+    "PFR",
+    "CUSTOMER",
+    "ACCOUNT"
+  ],
+  "rules": {
+    "hfpMayInventAction": false,
+    "professionalActionRequiresPfr": true,
+    "actionStatusIsComposedNotJourneyState": true,
+    "missingActionSourceFailClosed": true
+  }
+}

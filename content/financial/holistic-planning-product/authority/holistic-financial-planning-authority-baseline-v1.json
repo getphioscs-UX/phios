@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W0-AUTHORITY-BASELINE-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W0",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_CANONICAL_PRODUCT_COMPOSITION_AUTHORITY",
+  "canonicalStatement": "HFP composes governed financial facts, calculations, findings and attributable professional contributions into a canonical HolisticFinancialPlanCandidate. HFP creates no fact authority, calculation, analysis, professional recommendation, report lifecycle state, customer presentation or Will instruction.",
+  "authoritySeparations": [
+    "HFP_NE_FDR",
+    "HFP_NE_FCR",
+    "HFP_NE_FAR",
+    "HFP_NE_PFR",
+    "HFP_NE_RR",
+    "HFP_NE_CPR_CUST",
+    "HFP_NE_DAR",
+    "HFP_NE_JR"
+  ],
+  "upstreamAuthorities": {
+    "FDR": "content/financial/data-runtime/authority/fdr-w0-w24-freeze-manifest-v1.json",
+    "FCR": "content/financial/calculation-runtime/authority/fcr-w0-w22-freeze-manifest-v1.json",
+    "FAR": "content/financial/analysis-runtime/authority/far-w0-w22-freeze-manifest-v1.json",
+    "PFR": null,
+    "DAR": "content/document-assembly/freeze/dar-production-freeze-v1.json",
+    "ACCOUNT": "REFERENCE_ONLY"
+  },
+  "downstreamAuthorities": {
+    "RR": "content/runtime/customer-report-runtime/contracts/report-candidate-contract-v2.json",
+    "CPR_CUST": "content/runtime/customer-report-runtime/contracts/rr-cpr-handoff-contract-v2.json",
+    "JR": "content/runtime/journey-runtime/contracts/canonical-journey-contract-v2.json"
+  },
+  "baselineObservation": {
+    "pfrCanonicalRuntimePresent": false,
+    "compatibilityPredecessor": "functions/professional/financial/financial-navigation-recommendation-contract.js",
+    "compatibilityPredecessorIsPfrAuthority": false,
+    "productionProfessionalModeUntilPfrInstalled": "FAIL_CLOSED"
+  },
+  "rules": {
+    "hfpMayMutateFdr": false,
+    "hfpMayCalculate": false,
+    "hfpMayAnalyze": false,
+    "hfpMayGenerateRecommendation": false,
+    "hfpMayGenerateSuitabilityJudgment": false,
+    "hfpMayOwnReportLifecycle": false,
+    "hfpMayOwnPresentation": false,
+    "hfpMayAuthorWillInstruction": false,
+    "hfpMayOwnJourneyStage": false,
+    "unknownMustRemainVisible": true
+  }
+}

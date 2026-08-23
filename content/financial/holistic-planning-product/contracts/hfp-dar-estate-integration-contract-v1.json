@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W15-DAR-INTEGRATION-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W15",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "REFERENCE_ONLY",
+  "allowedDarStateFields": [
+    "willStatus",
+    "estateReadiness",
+    "assetCoverage",
+    "nominationCompleteness"
+  ],
+  "forbiddenDarFields": [
+    "clauses",
+    "willInstructions",
+    "distributionInstructions",
+    "legalValidity",
+    "legalAdvice"
+  ],
+  "rules": {
+    "hfpMayDisplayDarState": true,
+    "hfpMayInferDarState": false,
+    "darOwnsWillInstructions": true,
+    "darOwnsClauseAssembly": true,
+    "missingDarStateBecomesUnknown": true
+  }
+}

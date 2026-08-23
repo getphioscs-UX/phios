@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-HFP-W1-PRODUCT-CONTRACT-v1.0.0",
+  "phase": "HFP",
+  "work": "HFP-W1",
+  "baselineCommit": "eb1b0671eddb4933303b9b5444ead82bd7480945",
+  "status": "ACTIVE_CANONICAL_PRODUCT_CONTRACT",
+  "productCode": "HFP",
+  "canonicalType": "HolisticFinancialPlanCandidate",
+  "modes": {
+    "PRELIMINARY": {
+      "requires": [
+        "FDR"
+      ],
+      "permitsPartialSources": true,
+      "professionalContributionRequired": false
+    },
+    "PLANNING": {
+      "requires": [
+        "FDR",
+        "FCR",
+        "FAR"
+      ],
+      "permitsPartialSources": false,
+      "professionalContributionRequired": false
+    },
+    "VERIFIED": {
+      "requires": [
+        "FDR",
+        "FCR",
+        "FAR",
+        "VERIFICATION_STATE"
+      ],
+      "verificationStateRequired": "VERIFIED",
+      "professionalContributionRequired": false
+    },
+    "PROFESSIONAL": {
+      "requires": [
+        "FDR",
+        "FCR",
+        "FAR",
+        "PFR"
+      ],
+      "pfrProductionAuthorityRequired": true,
+      "professionalContributionRequired": true
+    }
+  },
+  "terminalState": "CANDIDATE",
+  "downstreamAuthority": "RR",
+  "rules": {
+    "candidateIsFinalReport": false,
+    "candidateIsCustomerPresentation": false,
+    "candidateIsAdviceAuthority": false,
+    "candidateIsCalculationAuthority": false,
+    "candidateIsAnalysisAuthority": false,
+    "unknownsRequired": true,
+    "sourceLineageRequired": true,
+    "candidateDigestRequired": true,
+    "sameCanonicalInputSameCandidateDigest": true
+  }
+}

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {readJson,read} from './lib/hfp/hfp-check-lib.mjs';
+const a=readJson('content/financial/holistic-planning-product/authority/holistic-financial-planning-authority-baseline-v1.json');
+assert.equal(a.baselineCommit,'eb1b0671eddb4933303b9b5444ead82bd7480945');
+for(const x of ['HFP_NE_FDR','HFP_NE_FCR','HFP_NE_FAR','HFP_NE_PFR','HFP_NE_RR','HFP_NE_CPR_CUST','HFP_NE_DAR','HFP_NE_JR']) assert.ok(a.authoritySeparations.includes(x),`Missing authority separation ${x}`);
+for(const [k,v] of Object.entries(a.rules)) if(k.startsWith('hfpMay')) assert.equal(v,false,`HFP authority leak: ${k}`);
+assert.equal(a.rules.unknownMustRemainVisible,true);
+assert.equal(a.baselineObservation.pfrCanonicalRuntimePresent,false);
+assert.equal(a.baselineObservation.compatibilityPredecessorIsPfrAuthority,false);
+const src=readJson('content/financial/holistic-planning-product/registries/holistic-financial-source-authority-registry-v1.json');
+for(const code of ['FDR','FCR','FAR','PFR','DAR','ACCOUNT']) assert.ok(src.sources.some(x=>x.code===code),`Missing source ${code}`);
+assert.equal(src.sources.find(x=>x.code==='PFR').status,'RESERVED_UPSTREAM_AUTHORITY_NOT_INSTALLED');
+const runtime=read('functions/financial/holistic-planning-product/holistic-financial-planning-runtime.js');
+assert.doesNotMatch(runtime,/calculateFinancialProjection|analyzeFinancialStructure/,'HFP runtime must not call FCR/FAR engines.');
+console.log('✓ HFP-W0 authority reconciliation passed.');
