@@ -1678,7 +1678,11 @@
     "check:tarot-corpus": "node scripts/check-tarot-corpus.mjs",
     "check:tarot-product-activation-phase-e": "npm run check:tarot-product-activation-phase-d && npm run check:tarot-corpus",
     "check:financial-product-stage14": "node scripts/check-stage14-financial-runtime-product-activation.mjs",
-    "check:financial-runtime-product": "npm run check:fcr && npm run check:far && npm run check:financial-product-stage14"
+    "check:financial-runtime-product": "npm run check:fcr && npm run check:far && npm run check:financial-product-stage14",
+    "check:tarot-tari-successor": "node scripts/check-tarot-tari-successor.mjs",
+    "check:tarot-product-activation-phase-f": "npm run check:tarot-product-activation-phase-e && npm run check:tarot-tari-successor",
+    "check:tarot-product-surface": "node scripts/check-tarot-product-surface.mjs",
+    "check:tarot-product-activation-phase-g": "npm run check:tarot-product-activation-phase-f && npm run check:tarot-product-surface"
   },
   "type": "module",
   "dependencies": {

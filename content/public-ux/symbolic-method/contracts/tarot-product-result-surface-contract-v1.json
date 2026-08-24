@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PRODUCT-RESULT-SURFACE-CONTRACT-v1.0.0",
+  "phase": "TPA-G",
+  "work": "TPA-W27",
+  "baselineCommit": "60411a80e0247a99f26d6321ea6a4f6305042b5f",
+  "status": "SOURCE_BOUND_PRODUCT_SURFACE_READY_EXECUTION_STILL_GATED",
+  "methodCode": "TAROT",
+  "consumerIr": "PHI-OS-TAROT-READING-IR-v1.0.0",
+  "layers": [
+    {
+      "order": 1,
+      "id": "YOUR_INPUT",
+      "required": true
+    },
+    {
+      "order": 2,
+      "id": "METHOD_EVIDENCE",
+      "required": true,
+      "fields": [
+        "deck",
+        "draw",
+        "orientation",
+        "spread",
+        "position"
+      ]
+    },
+    {
+      "order": 3,
+      "id": "PROJECTION",
+      "required": true,
+      "fields": [
+        "cards",
+        "position",
+        "artwork"
+      ]
+    },
+    {
+      "order": 4,
+      "id": "SYMBOLIC_INTERPRETATION",
+      "publicLabel": "SYMBOLIC_PERSPECTIVE",
+      "required": true,
+      "fields": [
+        "visibleObservation",
+        "waitePerspective",
+        "reflectivePerspective",
+        "psychologicalReflectivePerspective",
+        "sourceComparison"
+      ]
+    },
+    {
+      "order": 5,
+      "id": "REALITY_COMPARISON",
+      "required": true,
+      "fields": [
+        "supportingEvidence",
+        "contradictoryEvidence",
+        "unknown",
+        "observation"
+      ]
+    },
+    {
+      "order": 6,
+      "id": "WHAT_REMAINS_UNCERTAIN",
+      "required": true
+    },
+    {
+      "order": 7,
+      "id": "POSSIBLE_NEXT_QUESTIONS_ACTIONS",
+      "required": true
+    }
+  ],
+  "rules": {
+    "readingIrIsSingleSurfaceInput": true,
+    "rawAiLongformMayReplaceHierarchy": false,
+    "layersMayBeSilentlyCollapsed": false,
+    "rccMayBeHidden": false,
+    "agencyMayBeHidden": false,
+    "unavailablePerspectiveMustRemainVisible": true,
+    "visualObservationMayBePresentedAsMeaning": false,
+    "sourceClaimMayBePresentedAsRealityFact": false,
+    "userDecisionAuthorityVisible": true
+  },
+  "activationBoundary": {
+    "surfaceSourceReady": true,
+    "publicRunAllowedChanged": false,
+    "productionCapabilityPromoted": false,
+    "liveBrowserAcceptanceClaimed": false
+  }
+}
