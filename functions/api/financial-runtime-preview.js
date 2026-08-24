@@ -1,0 +1,5 @@
+import { runFinancialProduct } from '../financial/product-activation/financial-product-runtime.js';
+const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
+const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers});
+export async function onRequestPost({request}){let body;try{body=await request.json()}catch{return json({ok:false,error:'INVALID_JSON'},400)};try{const u=new URL('/content/financial/analysis-runtime/policies/financial-analysis-policy-set-base-v1.json',request.url);const r=await fetch(u,{headers:{accept:'application/json'},cache:'no-store'});if(!r.ok)throw Object.assign(new Error('FAR_POLICY_UNAVAILABLE'),{code:'FAR_POLICY_UNAVAILABLE',status:503});const analysisPolicySet=await r.json();const result=await runFinancialProduct({input:body,analysisPolicySet});return json({ok:true,result},200)}catch(e){return json({ok:false,error:e.code||e.message||'FINANCIAL_RUNTIME_FAILED'},e.status||500)}}
+export async function onRequestGet(){return json({ok:false,error:'FINANCIAL_RUNTIME_POST_ONLY'},405)}

@@ -1676,7 +1676,9 @@
     "check:tarot-source-bound-corpus": "node scripts/check-tarot-source-bound-corpus.mjs",
     "check:tarot-product-activation-phase-d": "npm run check:tarot-visual && npm run check:tarot-source-bound-corpus",
     "check:tarot-corpus": "node scripts/check-tarot-corpus.mjs",
-    "check:tarot-product-activation-phase-e": "npm run check:tarot-product-activation-phase-d && npm run check:tarot-corpus"
+    "check:tarot-product-activation-phase-e": "npm run check:tarot-product-activation-phase-d && npm run check:tarot-corpus",
+    "check:financial-product-stage14": "node scripts/check-stage14-financial-runtime-product-activation.mjs",
+    "check:financial-runtime-product": "npm run check:fcr && npm run check:far && npm run check:financial-product-stage14"
   },
   "type": "module",
   "dependencies": {
