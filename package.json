@@ -1672,7 +1672,9 @@
     "check:cwa": "npm run check:current-web-authority && npm run check:current-source-admission && npm run check:current-source-freshness && npm run check:no-source-voting && npm run check:current-evidence-ir && npm run check:current-authority-conflict",
     "check:ask2-w0-w3": "node scripts/check-ask2-w0-w3-runtime-orchestration.mjs",
     "check:ask-runtime-orchestration": "npm run check:ask2-w0-w3",
-    "check:tarot-visual": "node scripts/check-tarot-visual.mjs"
+    "check:tarot-visual": "node scripts/check-tarot-visual.mjs",
+    "check:tarot-source-bound-corpus": "node scripts/check-tarot-source-bound-corpus.mjs",
+    "check:tarot-product-activation-phase-d": "npm run check:tarot-visual && npm run check:tarot-source-bound-corpus"
   },
   "type": "module",
   "dependencies": {
