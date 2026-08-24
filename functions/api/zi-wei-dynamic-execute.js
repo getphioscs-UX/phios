@@ -1,0 +1,4 @@
+import {buildZiWeiDynamicProjection} from '../zi-wei-dynamic/dynamic-runtime.js';
+function json(payload,status=200){return new Response(JSON.stringify(payload),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'}});}
+export async function onRequestPost({request}){let body;try{body=await request.json();}catch{return json({ok:false,error:'INVALID_JSON'},400);}if(body?.schemaVersion!=='PHI-OS-ZWD-EXECUTION-REQUEST-v1.0.0')return json({ok:false,error:'ZWD_EXECUTION_SCHEMA_INVALID'},400);try{const result=await buildZiWeiDynamicProjection(body);return json({ok:true,result},200);}catch(error){return json({ok:false,error:error?.code||'ZWD_EXECUTION_FAILED_CLOSED',reasonCodes:[error?.code||'ZWD_EXECUTION_FAILED_CLOSED']},error?.status||422);}}
+export async function onRequestGet(){return json({ok:false,error:'ZWD_EXECUTION_POST_ONLY'},405);}
