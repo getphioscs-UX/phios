@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-HRX-W34-PROMOTION-SUCCESSOR-POLICY-v2.0.0",
+  "work": "HRX-W34-SUCCESSOR-PROMOTION",
+  "successorOf": "hrx-w34-limited-production-promotion-v1.json",
+  "baselineCommit": "13364abcedc47d935829dbc4dec1a8da4a3adee9",
+  "promotionCommand": "npm run hrx:promote-w34",
+  "requiredEvidenceFile": "dist/hrx-live-evidence/hrx-w33-live-evidence.json",
+  "promotionOutput": "content/health/health-reality-runtime/acceptance/hrx-w34-limited-production-promotion-successor-v2.json",
+  "freezeOutput": "content/health/health-reality-runtime/freeze/hrx-w35-health-runtime-freeze-successor-v3.json",
+  "promotionRules": {
+    "allW33EvidenceMustPass": true,
+    "deployedShaMustEqualExpectedSha": true,
+    "evidenceMaximumAgeHours": 24,
+    "publicHealthExecutionMayBecomeLimitedProduction": true,
+    "healthPersistenceRemainsDisabled": true,
+    "diagnosisAllowed": false,
+    "treatmentPrescriptionAllowed": false,
+    "professionalJudgmentAllowed": false,
+    "symbolicHealthDiagnosisAllowed": false
+  },
+  "currentPromotionState": "AWAITING_MACHINE_CAPTURED_W33_EVIDENCE",
+  "noFakePromotion": true
+}
