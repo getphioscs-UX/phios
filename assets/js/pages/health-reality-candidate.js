@@ -1,17 +1,7 @@
-const form = document.querySelector('[data-health-reality-form]');
-const output = document.querySelector('[data-health-reality-output]');
-if (form && output) {
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    const fd = new FormData(form);
-    const concern = String(fd.get('concern') || '').trim();
-    const observedAt = String(fd.get('observedAt') || '').trim();
-    output.hidden = false;
-    output.innerHTML = '';
-    const title = document.createElement('h2'); title.textContent = 'Current health observation';
-    const p = document.createElement('p'); p.textContent = concern || 'No observation entered.';
-    const meta = document.createElement('p'); meta.textContent = observedAt ? `Observed: ${observedAt}` : 'Date not provided — kept as unknown.';
-    const boundary = document.createElement('p'); boundary.textContent = 'This candidate organizes observations only. It does not diagnose, rule out disease, or prescribe treatment.';
-    output.append(title,p,meta,boundary);
-  });
-}
+const form=document.querySelector('[data-health-reality-form]');
+const output=document.querySelector('[data-health-reality-output]');
+const status=document.querySelector('[data-health-route-status]');
+const esc=s=>String(s??'');
+function renderLocal(concern,observedAt){output.hidden=false;output.innerHTML='';const h=document.createElement('h2');h.textContent='Current health observation';const p=document.createElement('p');p.textContent=concern||'No observation entered.';const m=document.createElement('p');m.textContent=observedAt?`Observed: ${observedAt}`:'Date not provided — kept as unknown.';const b=document.createElement('p');b.textContent='This surface organizes observations and routing only. It does not diagnose, rule out disease, or prescribe treatment.';output.append(h,p,m,b);}
+function appendRouting(payload){const section=document.createElement('section');const h=document.createElement('h3');h.textContent='Health routing';const p=document.createElement('p');p.textContent=payload.route==='HRX_SAFETY_FIRST'?'This concern needs safety-first real-world care routing.':payload.route==='HRX_AUTHORITY_REQUIRED'?'Health facts require an admitted current health authority source before PHI OS can answer them.':payload.route==='HRX_GUIDED_CONTEXT'?'PHI OS can help organize the current health reality without diagnosing it.':payload.route==='HRX_GROUNDED_HEALTH'?'Approved current health authority is available for grounded explanation.':'This question stays with standard PHI OS knowledge.';section.append(h,p);for(const item of payload.guided?.prompts||[]){const q=document.createElement('p');q.textContent=`• ${esc(item.label)}`;section.append(q)}output.append(section)}
+if(form&&output){form.addEventListener('submit',async event=>{event.preventDefault();const fd=new FormData(form);const concern=esc(fd.get('concern')).trim();const observedAt=esc(fd.get('observedAt')).trim();const consent=fd.get('processingConsent')==='GRANTED';renderLocal(concern,observedAt);if(!consent){if(status)status.textContent='Guided health processing was not requested.';return}if(status)status.textContent='Organizing health context…';try{const response=await fetch('/api/ask-phios-health',{method:'POST',headers:{'content-type':'application/json'},cache:'no-store',credentials:'same-origin',body:JSON.stringify({question:concern,caseRef:'EPHEMERAL-HEALTH-CANDIDATE',consentState:'GRANTED'})});const payload=await response.json();if(!response.ok||!payload.ok)throw new Error(payload?.error?.code||'HEALTH_ROUTE_FAILED');appendRouting(payload);if(status)status.textContent='Health context organized. Nothing was saved by this candidate.'}catch(error){if(status)status.textContent=`Health routing unavailable: ${esc(error.message)}`}})}
