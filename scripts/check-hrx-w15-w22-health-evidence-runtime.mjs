@@ -21,7 +21,7 @@ const required = [
   'content/health/health-reality-runtime/contracts/ask-health-evidence-grounding-contract-v1.json',
   'content/health/health-reality-runtime/registries/health-client-surface-candidate-v1.json',
   'content/health/health-reality-runtime/acceptance/hrx-w15-w22-acceptance-v1.json',
-  'functions/health/health-authority-runtime.js','functions/health/health-document-ingestion.js','functions/health/health-timeline-runtime.js','functions/health/health-version-runtime.js','functions/health/ask-health-grounding-adapter.js','health-reality.html','assets/js/runtime/health/health-reality-candidate.js'
+  'functions/health/health-authority-runtime.js','functions/health/health-document-ingestion.js','functions/health/health-timeline-runtime.js','functions/health/health-version-runtime.js','functions/health/ask-health-grounding-adapter.js','health-reality.html','assets/js/pages/health-reality-candidate.js'
 ];
 for (const rel of required) assert.equal(fs.existsSync(path.join(root, rel)), true, `missing ${rel}`);
 
@@ -79,7 +79,7 @@ const currentManifest=read('content/web-production/surface-production-manifest-v
 const acceptance=json(required[7]);
 assert.equal(acceptance.status,'HRX_EVIDENCE_RUNTIME_PRODUCTION_CANDIDATE_NOT_LIVE_VERIFIED');
 assert.equal(acceptance.activation.liveBrowserVerified,false); assert.equal(acceptance.activation.productionHealthFactExecutionAllowed,false); assert.equal(acceptance.activation.currentProductionManifestMutated,false);
-const clientJs=read('assets/js/runtime/health/health-reality-candidate.js'); assert.match(clientJs,/addEventListener\('submit'/); assert.match(clientJs,/does not diagnose/);
+const clientJs=read('assets/js/pages/health-reality-candidate.js'); assert.match(clientJs,/addEventListener\('submit'/); assert.match(clientJs,/does not diagnose/);
 
 console.log('✓ HRX-W15–W22 Health evidence runtime and client candidate passed.');
 console.log('  Approved-authority policy, source admission, document IR, timeline, version/diff and Ask grounding are fail-closed.');

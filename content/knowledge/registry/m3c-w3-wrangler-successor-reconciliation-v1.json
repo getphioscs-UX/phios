@@ -7,13 +7,28 @@
     "wranglerSha256": "fd7d7e06f14509bc13216f3999bb4e21efb2cdcdb6efd14f7724153b15808ae0"
   },
   "successor": {
-    "authorizedCommit": "e69f22bc6a192ea02776abf05db78540c5556d4c",
-    "reason": "knowledge-runtime authorized the private manuscript R2 binding after M3C-W3 froze entry presentation artifacts.",
-    "wranglerSha256": "32f6e3f14bc7ee48c02fbd2d25f3839f12efbddedd95d53776dd890f961a2327"
+    "authorizedCommit": "3599c1af0818d5bbba10c8255983dab8e6c8d127",
+    "authorizedLineage": [
+      {
+        "commit": "e69f22bc6a192ea02776abf05db78540c5556d4c",
+        "change": "ADD_PRIVATE_MANUSCRIPT_R2_BINDING",
+        "wranglerSha256": "32f6e3f14bc7ee48c02fbd2d25f3839f12efbddedd95d53776dd890f961a2327"
+      },
+      {
+        "commit": "3599c1af0818d5bbba10c8255983dab8e6c8d127",
+        "change": "ADD_CLOUDFLARE_NODE_COMPATIBILITY_FLAG",
+        "wranglerSha256": "fa9cbedec4530f24af6b104de8f6457ad5f86200c37c04489a09ebeb250c6669"
+      }
+    ],
+    "reason": "knowledge-runtime authorized the private manuscript R2 binding and the later Cloudflare Node compatibility gate without changing M3C-W3 entry presentation artifacts.",
+    "wranglerSha256": "fa9cbedec4530f24af6b104de8f6457ad5f86200c37c04489a09ebeb250c6669"
   },
   "allowedDelta": {
     "r2Binding": "MANUSCRIPTS",
-    "bucketName": "phios-private-manuscripts"
+    "bucketName": "phios-private-manuscripts",
+    "compatibilityFlags": [
+      "nodejs_compat"
+    ]
   },
   "preserved": {
     "m3cEntryArtifacts": true,
