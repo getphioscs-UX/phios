@@ -20,8 +20,9 @@ const RECONCILIATION = 'content/web-production/reconciliation/m3a-hpc2-public-ex
 const HPC2_ACCEPTANCE = 'content/web/homepage/hpc2/acceptance/homepage-composition-acceptance-v2.json';
 const HPC2_SCENES = 'content/web/homepage/hpc2/homepage-scene-registry-v2.json';
 const HPC2_CSS = 'assets/css/hpc2-pre-home-visuals.css';
+const STAGE16_SUCCESSOR = 'content/web-production/px2/successors/px2-stage16-public-ia-successor-v2.json';
 
-for (const path of [HISTORICAL_CHECKER, RECONCILIATION, HPC2_ACCEPTANCE, HPC2_SCENES, HPC2_CSS]) {
+for (const path of [HISTORICAL_CHECKER, RECONCILIATION, HPC2_ACCEPTANCE, HPC2_SCENES, HPC2_CSS, STAGE16_SUCCESSOR]) {
   assert.ok(fs.existsSync(path), `Missing M3A successor dependency: ${path}`);
 }
 
@@ -45,6 +46,64 @@ assert.equal(reconciliation.preservedBoundaries.runtimeContractsChanged, false);
 assert.equal(reconciliation.preservedBoundaries.d1BindingChanged, false);
 assert.equal(hpc2Acceptance.status, 'HPC2_COMPOSITION_READY');
 assert.equal(hpc2Acceptance.globalProductionFreeze.claimed, false);
+
+const stage16Successor = read(STAGE16_SUCCESSOR);
+if (stage16Successor.status === 'ACTIVE_STAGE16_CLIENT_INTENT_SUCCESSOR') {
+  assert.equal(stage16Successor.predecessorMutated, false);
+  assert.deepEqual(stage16Successor.previousPrimaryJourney, ['SEARCH','ASK','READ','FINANCIAL','MY_REALITY']);
+  assert.deepEqual(stage16Successor.currentPublicSurfaces, ['ASK','KNOWLEDGE','PERSONAL','FINANCIAL','MY_REALITY','JOURNEY','LEARN_WORK']);
+  assert.deepEqual(stage16Successor.questionLedIntents, ['CURRENT','DECISION','RELATIONSHIP','TIME','DOMAIN','STRUCTURE']);
+  assert.equal(stage16Successor.rules.searchRemainsAvailableInsideKnowledge, true);
+  assert.equal(stage16Successor.rules.readingsRemainAvailableAsAdvancedOrProductSpecificSurface, true);
+  assert.equal(stage16Successor.rules.methodTaxonomyNotHomepagePrimary, true);
+  assert.equal(stage16Successor.rules.realityJourneyNotFirstVisitDefault, true);
+
+  const stage16Destinations = [
+    'index.html',
+    'library.html',
+    'articles.html',
+    'services.html',
+    'personal-runtime.html',
+    'financial-reality.html',
+    'my-reality.html',
+    'reality-journey.html'
+  ];
+  for (const page of stage16Destinations) {
+    assert.ok(fs.existsSync(page), `Stage 16 destination is missing: ${page}`);
+    assert.ok(text(page).length > 0, `Stage 16 destination is empty: ${page}`);
+  }
+  for (const page of ['index.html','library.html','articles.html','services.html','financial-reality.html']) {
+    const source = text(page);
+    assert.ok(source.includes('/assets/css/phios-public-v2.css'), `${page} must load the Stage 16 public experience`);
+    assert.ok(source.includes('/assets/js/public-shell-v2.js'), `${page} must load the Stage 16 shell`);
+  }
+
+  const home = text('index.html');
+  for (const href of ['/ask','/library','/personal-runtime','/financial-reality','/my-reality','/reality-journey','/academy','/services']) {
+    assert.ok(home.includes(`href="${href}"`), `Current Homepage is missing ${href}`);
+  }
+  assert.ok(home.includes('data-cir-root'));
+  assert.equal(count(home, /data-cir-intent=/g), 6);
+  assert.equal(home.includes('data-px2-intent-form'), false);
+  assert.equal(home.includes('class="px2-mode-grid"'), false);
+
+  const shell = text('assets/js/public-shell-v2.js');
+  for (const href of ['/ask','/library','/personal-runtime','/financial-reality','/my-reality','/reality-journey']) {
+    assert.ok(shell.includes(`href: '${href}'`), `Current public shell is missing ${href}`);
+  }
+  assert.ok(shell.includes('href="/account"'), 'Current public shell is missing /account');
+  for (const staleHref of ["href: '/readings/'", "href: '/professional/financial/'", "href: '/knowledge-search'"]) {
+    assert.equal(shell.includes(staleHref), false, `Current public shell retained stale primary route ${staleHref}`);
+  }
+
+  assert.equal(fs.existsSync('reality-demo.html'), false, 'Retired Reality Demo page must be absent');
+  assert.equal(fs.existsSync('assets/js/pages/reality-demo.js'), false, 'Retired Reality Demo controller must be absent');
+  assert.match(text('_redirects'), /^\/reality-demo \/reality-journey 308$/m);
+
+  console.log('✓ M3A current public experience reconciled to the active Stage 16 Client Intent successor.');
+  console.log('  Historical M3A/HPC2/PX2 authority remains evidence; current public IA is question-led and method-hidden.');
+  process.exit(0);
+}
 
 const px2Path = 'content/web-production/px2/successors/px2-w11-checker-successor-v1.json';
 if (fs.existsSync(px2Path) && read(px2Path).status === 'ACTIVE') {

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-PRODUCTION-ACTIVATION-READINESS-v1.0.0",
+  "work": "ICH-PROD-W16",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "status": "SOURCE_AND_MACHINE_READY_EXTERNAL_AND_CONTENT_GATES_PENDING",
+  "sourceGates": {
+    "structuralRuntimeFrozen": true,
+    "interpretationRealityRuntimeComplete": true,
+    "productRuntimeComplete": true,
+    "publicSurfaceStaticAccepted": true,
+    "machine64HexagramAccepted": true,
+    "productReplayAccepted": true,
+    "sensitiveDomainBoundaryAccepted": true,
+    "sharedD1PersistenceSourceAccepted": true,
+    "liveStatusAndSmokeImplemented": true
+  },
+  "contentReadiness": {
+    "canonicalStructureCoverage": "64/64",
+    "sourceBoundCommentaryCoverage": "2/64",
+    "sourceGapsExplicit": true,
+    "modelMayFillSourceGap": false,
+    "fullCommercialContentReadiness": false,
+    "limitedTransparentSourceGapPilotMayBeReviewed": true
+  },
+  "externalGates": {
+    "minimumHumanAcceptedSessions": 20,
+    "targetHumanSessions": 24,
+    "acceptedHumanSessions": 0,
+    "zeroCriticalBoundaryFailures": null,
+    "globalVerifiedAccountProviderConnected": false,
+    "verifiedLiveD1AccountPersistence": false,
+    "liveBrowserAccepted": false,
+    "liveProductionShaAligned": false
+  },
+  "currentAuthority": {
+    "fullyActivated": false,
+    "limitedProductionAllowed": false,
+    "publicRunAllowed": false,
+    "productionCapabilityPromoted": false,
+    "state": "ACTIVATION_EVIDENCE_PENDING"
+  },
+  "nextRequiredActions": [
+    "CONNECT_TRUSTED_GLOBAL_ACCOUNT_IDENTITY_PROVIDER",
+    "DEPLOY_AND_VERIFY_RUNTIME_DB_ACCOUNT_PERSISTENCE",
+    "COMPLETE_AT_LEAST_20_OF_24_HUMAN_ACCEPTANCE_SESSIONS_WITH_ZERO_CRITICAL_FAILURES",
+    "RUN_REAL_BROWSER_ACCEPTANCE",
+    "ALIGN_AND_VERIFY_CF_PAGES_COMMIT_SHA",
+    "PROMOTE_PCM_AND_PUBLIC_CATALOG_ONLY_AFTER_ALL_GATES_PASS",
+    "EXPAND_RIGHTS_CLEARED_SOURCE_BOUND_COMMENTARY_FOR_FULL_CONTENT_READINESS"
+  ]
+}

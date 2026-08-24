@@ -20,6 +20,9 @@ const paths = Object.freeze({
   ckaBSuccessor: 'content/web-production/reconciliation/client-surface-global-invariants-cka-b-successor-v1.json',
   ckaCDelta: 'content/client/knowledge-ask/evidence/cka-w18-w33-delta-manifest-v1.json',
   ckaAcceptance: 'content/client/knowledge-ask/acceptance/cka-w0-w4-batch-a-acceptance-v1.json',
+  ask2Acceptance: 'content/governance/ask2/acceptance/ask2-w4-w10-public-consumption-acceptance-v1.json',
+  ask2Freeze: 'content/governance/ask2/freeze/ask2-w4-w10-public-consumption-freeze-v1.json',
+  stage16Successor: 'content/web-production/px2/successors/px2-stage16-public-ia-successor-v2.json',
   homepage: 'index.html',
   homepageRuntime: 'assets/js/pages/home-production.js'
 });
@@ -47,6 +50,9 @@ const ckaB = read(paths.ckaBSuccessor);
 const ckaBDelta = read(ckaB.ckaB.deltaManifest.path);
 const ckaCDelta = read(paths.ckaCDelta);
 const ckaAcceptance = read(paths.ckaAcceptance);
+const ask2Acceptance = read(paths.ask2Acceptance);
+const ask2Freeze = read(paths.ask2Freeze);
+const stage16Successor = read(paths.stage16Successor);
 const homepage = text(paths.homepage);
 const homepageRuntime = text(paths.homepageRuntime);
 const ckaCurrent = new Map(historicalCka.clientSurfaceTransition.artifacts.map(item => [item.path, item]));
@@ -116,7 +122,21 @@ for (const item of historicalCka.clientSurfaceTransition.artifacts) {
   if (cRecord) {
     assert.ok(bRecord, `CKA_B_PREDECESSOR_MISSING:${item.path}`);
     assert.equal(cRecord.predecessorSha256, bRecord.sha256, `CKA_C_PREDECESSOR_MISMATCH:${item.path}`);
-    if (presentationRecords.has(item.path)) {
+    if (
+      item.path === 'assets/js/knowledge/ask-phios-client.js' &&
+      ask2Acceptance.productionState === 'ASK2_PUBLIC_SOURCE_ACCEPTED_LIVE_BROWSER_PENDING'
+    ) {
+      const ask2Client = text(item.path);
+      assert.equal(cRecord.sha256, 'b610370c03588224f27c03612661eb0af173934b877da570ee7531a048753758');
+      assert.ok(ask2Client.includes("fetch('/api/ask-phios-orchestrated'"));
+      assert.ok(ask2Client.includes('renderAsk2Disclosure(payload)'));
+      assert.ok(ask2Client.includes('capability gate'));
+      assert.ok(ask2Client.includes('模型不能自行补算 Method'));
+      assert.equal(ask2Acceptance.sourceAcceptance.existingAskClientBound, true);
+      assert.equal(ask2Acceptance.sourceAcceptance.existingCkaEndpointMutated, false);
+      assert.equal(ask2Freeze.freeze.existingCkaAuthorityPreserved, true);
+      assert.equal(ask2Freeze.freeze.modelCalculationAllowed, false);
+    } else if (presentationRecords.has(item.path)) {
       assert.equal(presentationRecords.get(item.path).wholeFileSha256Required, false, `CKA_C_PRESENTATION_POLICY_DRIFT:${item.path}`);
     } else {
       assert.equal(sha256(item.path), cRecord.sha256, `CKA_C_CURRENT_RUNTIME_DRIFT:${item.path}`);
@@ -146,9 +166,18 @@ assert.equal(currentCka.successorPolicy.duplicateAuthorityForbidden, true);
 
 const px2Successor = read('content/web-production/px2/successors/px2-w11-checker-successor-v1.json');
 assert.equal(px2Successor.status, 'ACTIVE');
-assert.match(homepage, /data-px2-intent-form/);
-assert.match(homepage, /href="\/knowledge-search"/);
-assert.match(homepage, /href="\/search\/"/);
+if (stage16Successor.status === 'ACTIVE_STAGE16_CLIENT_INTENT_SUCCESSOR') {
+  assert.equal(stage16Successor.predecessorMutated, false);
+  assert.match(homepage, /data-cir-root/);
+  assert.match(homepage, /href="\/ask"/);
+  assert.match(homepage, /href="\/library"/);
+  assert.match(homepage, /href="\/personal-runtime"/);
+  assert.doesNotMatch(homepage, /data-px2-intent-form/);
+} else {
+  assert.match(homepage, /data-px2-intent-form/);
+  assert.match(homepage, /href="\/knowledge-search"/);
+  assert.match(homepage, /href="\/search\/"/);
+}
 assert.doesNotMatch(homepageRuntime, /\/api\/ask-phios|fetch\([^)]*knowledge-search/i);
 assert.equal(currentCka.homepageConsumerTransition.secondAnswerRuntimeCreated, false);
 assert.equal(currentCka.homepageConsumerTransition.secondRetrievalRuntimeCreated, false);
