@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-VIS-MACHINE-ACCEPTANCE-v1.0.0",
+  "phase": "TPA-C",
+  "work": "TPA-W10",
+  "baselineCommit": "e10dcd3cfe0c51cf76e5ddd1b129fb5761a73673",
+  "status": "ACCEPTED_LOCAL_MACHINE_CANONICAL_VISUAL_CORPUS",
+  "coverage": {
+    "structuralCards": 78,
+    "visualObservations": 78,
+    "evidenceLocators": 78,
+    "majorArcana": 22,
+    "wands": 14,
+    "cups": 14,
+    "swords": 14,
+    "pentacles": 14
+  },
+  "accepted": {
+    "visualObservationSchemaFrozen": true,
+    "cardIdentityBindingExact": true,
+    "artworkIdentityUnique": true,
+    "visualObservationIsNotInterpretation": true,
+    "meaningAttachedFalseForAll": true,
+    "sourceIsRightsClearedT0": true,
+    "oneEvidenceLocatorPerCard": true,
+    "privateReferenceTextUsed": false,
+    "modernRecolorsAdmitted": false,
+    "runtimeConsumerRebound": false,
+    "runAllowedChanged": false,
+    "productionCapabilityPromoted": false
+  },
+  "artifacts": {
+    "schema": {
+      "path": "content/interpretation/tarot/contracts/tarot-visual-observation-entry-v1.schema.json",
+      "sha256": "0d261d614181a32b13fc13dfb8cff088c0ede46883030e8cdfe2082e93730196"
+    },
+    "corpus": {
+      "path": "content/interpretation/tarot/corpus/tarot-rws-visual-observation-corpus-v1.json",
+      "sha256": "27ed64240b52db5f03bfdc0285d71dd92364a8bcc400bc18981e2a35b4acaea0"
+    },
+    "locator": {
+      "path": "content/interpretation/tarot/registries/tarot-visual-evidence-locator-v1.json",
+      "sha256": "03fdac5aeabdefcabe6f425924698c84337250fed9becf98659c95b3ab9f1248"
+    },
+    "successor": {
+      "path": "content/interpretation/tarot/reconciliation/tarot-visual-corpus-current-successor-v1.json",
+      "sha256": "b42ca488a9361751f1eca8a49dac6b5100401b14fd49d2fd703abfd942a21637"
+    },
+    "checker": {
+      "path": "scripts/check-tarot-visual.mjs",
+      "sha256": "fcbb1dc642dad14e369a15c130b1baa0252e4b25beb20743a50364bd1f222950"
+    }
+  },
+  "validationCommands": [
+    "npm run check:tarot-visual",
+    "npm run check:tarot-product-activation-phase-b",
+    "npm run check:tarot-current",
+    "npm run check:symbolic-method",
+    "npm run check:runtime-frontend-parity"
+  ],
+  "productionBoundary": {
+    "tarotProductActivated": false,
+    "publicRunAllowed": false,
+    "tariRebindDeferredTo": "TPA-W21",
+    "nextPhase": "PHASE_D_TAR_SRC_WAITE_78_CARD_MAPPING"
+  }
+}
