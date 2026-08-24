@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-CWA-FIXTURES-v1.0.0",
+  "fixtures": [
+    {
+      "id": "EVERGREEN_BAZI",
+      "question": "What is BaZi?",
+      "domain": "GENERAL_CURRENT",
+      "currentness": "CURRENTNESS_NONE",
+      "expected": "CWA_NOT_CALLED"
+    },
+    {
+      "id": "CURRENT_OPR",
+      "question": "What is Malaysia's current OPR?",
+      "domain": "FINANCIAL_MARKETS",
+      "currentness": "CURRENTNESS_REQUIRED",
+      "expected": "CWA_REQUIRED"
+    },
+    {
+      "id": "CURRENT_HEALTH",
+      "question": "最近马来西亚 dengue 很严重，我发烧是不是 dengue？",
+      "domain": "HEALTH",
+      "currentness": "CURRENTNESS_CRITICAL",
+      "expected": "HEALTH_SAFETY_PLUS_CWA_NO_DIAGNOSIS"
+    },
+    {
+      "id": "CONFLICT",
+      "question": "What is the current rate?",
+      "domain": "FINANCIAL_MARKETS",
+      "currentness": "CURRENTNESS_REQUIRED",
+      "expected": "CONFLICT_VISIBLE_NOT_VOTED"
+    }
+  ]
+}

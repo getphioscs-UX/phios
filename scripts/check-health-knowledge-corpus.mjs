@@ -1,0 +1,1 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));const c=j('content/health/health-knowledge/corpus/health-minimum-core-corpus-v1.json');assert.ok(c.packets.length>=10);assert.ok(c.packets.every(x=>(x.sourceIds||[]).length>0));console.log(`✓ Health knowledge corpus passed: ${c.packets.length} source-bound packets.`);

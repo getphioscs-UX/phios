@@ -1,0 +1,1 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));const a=j('content/health/health-knowledge/authority/health-authority-class-registry-v1.json');assert.ok(a.classes.length>=3);assert.ok(a.excludedFromAuthority.includes('REFLECTIVE_SPIRITUAL_SOURCE'));console.log('✓ Health source authority passed.');
