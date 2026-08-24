@@ -1623,7 +1623,14 @@
     "check:lrr-w2": "node scripts/check-lrr-w0-w3-lens-router.mjs",
     "check:lrr-w3": "node scripts/check-lrr-w0-w3-lens-router.mjs",
     "check:lens-router": "npm run check:lrr-w0-w3",
-    "check:master-6": "npm run check:master-5 && npm run check:lrr-w0-w3"
+    "check:master-6": "npm run check:master-5 && npm run check:lrr-w0-w3",
+    "check:ccr-w0-w3": "node scripts/check-ccr-w0-w3-current-context-runtime.mjs",
+    "check:ccr-w0": "npm run check:ccr-w0-w3",
+    "check:ccr-w1": "npm run check:ccr-w0-w3",
+    "check:ccr-w2": "npm run check:ccr-w0-w3",
+    "check:ccr-w3": "npm run check:ccr-w0-w3",
+    "check:current-context": "npm run check:ccr-w0-w3",
+    "check:master-7": "npm run check:master-6 && npm run check:ccr-w0-w3"
   },
   "type": "module",
   "dependencies": {
