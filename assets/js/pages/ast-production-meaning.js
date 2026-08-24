@@ -21,6 +21,7 @@ async function requestFullAst(executionRequest){
   const structural=await previousFetch('/api/ast-structural-execute',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},cache:'no-store',body:JSON.stringify(executionRequest)});
   const structuralPayload=await structural.json();if(!structural.ok||structuralPayload?.ok!==true)return blocked(structuralPayload?.error||'AST_STRUCTURAL_PROJECTION_UNAVAILABLE');
   const projection=structuralPayload.result;
+  document.dispatchEvent(new CustomEvent('phios:ast-structural-projection',{detail:{projection,executionRequest}}));
   const meaning=await previousFetch('/api/method-meaning',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},cache:'no-store',body:JSON.stringify({schemaVersion:'PHI-OS-CMP-METHOD-MEANING-REQUEST-v1.0.0',locale:zh()?'zh-Hans':'en',canonicalProjection:projection})});
   const payload=await meaning.json();if(!meaning.ok||payload?.ok!==true)return blocked(payload?.error||'CMP_AST_MEANING_UNAVAILABLE');render(payload);
  }catch{blocked('AST_STRUCTURAL_READING_NETWORK_FAILURE');}
