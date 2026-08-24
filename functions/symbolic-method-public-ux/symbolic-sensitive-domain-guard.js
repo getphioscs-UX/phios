@@ -12,7 +12,9 @@ const domainPatterns=Object.freeze({
 const prohibitedSystemClaims=Object.freeze([
  /\byou (?:have|will have)\b/i,/\byou will\b/i,/\bwill (?:die|marry|divorce|get rich|get sick)\b/i,
  /\byou should (?:invest|quit|leave|stop)\b/i,/\bstop (?:treatment|medication)\b/i,
- /\bthis (?:proves|confirms|diagnoses)\b/i,/\blegally you (?:must|should|are)\b/i
+ /\bthis (?:proves|confirms|diagnoses)\b/i,/\blegally you (?:must|should|are)\b/i,
+ /\byou are pregnant\b/i,/\byour partner (?:is|was|has been) (?:cheating|unfaithful)\b/i,
+ /\b(?:he|she|they) (?:is|are) secretly (?:cheating|lying|in love|planning)\b/i
 ]);
 const clean=v=>String(v??'').normalize('NFKC').trim();
 export function detectSensitiveDomains(text){const s=clean(text);return Object.freeze(SENSITIVE_DOMAINS.filter(d=>domainPatterns[d].test(s)));}
