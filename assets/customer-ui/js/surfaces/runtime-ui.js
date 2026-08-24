@@ -1,0 +1,10 @@
+export const locale=()=>document.documentElement.lang==='zh-Hans'?'zh-Hans':'en';
+export const tr=(en,zh)=>locale()==='zh-Hans'?zh:en;
+export const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export const arr=value=>Array.isArray(value)?value:[];
+export async function postJson(url,body){const response=await fetch(url,{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},cache:'no-store',credentials:'same-origin',body:JSON.stringify(body)});const payload=await response.json().catch(()=>({}));if(!response.ok||payload?.ok!==true){const error=new Error('REQUEST_FAILED');error.code=payload?.error?.code||payload?.error||'REQUEST_FAILED';throw error}return payload}
+export function setStatus(node,message,state=''){if(!node)return;node.textContent=message;node.dataset.state=state}
+export function money(value,currency='MYR'){return typeof value==='number'&&Number.isFinite(value)?new Intl.NumberFormat(locale()==='zh-Hans'?'zh-CN':'en-US',{style:'currency',currency,maximumFractionDigits:0}).format(value):'—'}
+export function valueText(value){if(value===null||value===undefined||value==='')return '—';if(Array.isArray(value))return value.join(' · ')||'—';if(typeof value==='object')return '—';return String(value)}
+export function installTabs(root=document){root.querySelectorAll('[data-cx-tablist]').forEach(tablist=>{const buttons=[...tablist.querySelectorAll('[data-cx-tab]')];const scope=tablist.closest('[data-cx-workspace]')||root;const activate=id=>{buttons.forEach(button=>button.setAttribute('aria-selected',String(button.dataset.cxTab===id)));scope.querySelectorAll('[data-cx-panel]').forEach(panel=>{panel.hidden=panel.dataset.cxPanel!==id})};buttons.forEach(button=>button.addEventListener('click',()=>activate(button.dataset.cxTab)));if(buttons[0])activate(buttons.find(b=>b.getAttribute('aria-selected')==='true')?.dataset.cxTab||buttons[0].dataset.cxTab)})}
+export function reRenderOnLocale(render){window.addEventListener('phios:localechange',()=>render?.())}

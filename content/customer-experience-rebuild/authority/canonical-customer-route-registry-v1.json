@@ -4,9 +4,9 @@
     "CX-R1A-W0",
     "CX-R2"
   ],
-  "baselineCommit": "6eb24e4e55a77859b0068836da7fa89e946ae3b1",
-  "recordedAt": "2026-08-24T13:49:00Z",
-  "status": "CANONICAL_ROUTE_AUTHORITY_DEFINED_CUTOVER_PROGRESSIVE",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "recordedAt": "2026-08-24T15:10:00Z",
+  "status": "P1_CORE_ROUTES_CX_CODE_CUTOVER_BROWSER_ACCEPTANCE_PENDING",
   "authorityBoundary": {
     "createsBackendAuthority": false,
     "presentationRoutingOnly": true,
@@ -58,7 +58,7 @@
       "label": "My Reality",
       "canonicalPath": "/reality/",
       "currentOperationalPath": "/reality/",
-      "activation": "LEGACY_PRESENTATION_CANONICAL_PATH",
+      "activation": "P1_CX_CODE_ACTIVE_BROWSER_PENDING",
       "domain": "REALITY"
     },
     {
@@ -98,7 +98,7 @@
       "label": "Ask PHI OS",
       "canonicalPath": "/ask",
       "currentOperationalPath": "/ask",
-      "activation": "ACTIVE_CURRENT_ROUTE_LEGACY_PRESENTATION",
+      "activation": "P1_CX_CODE_ACTIVE_BROWSER_PENDING",
       "domain": "UTILITY"
     },
     {
@@ -116,6 +116,22 @@
       "currentOperationalPath": null,
       "activation": "CLIENT_UTILITY",
       "domain": "UTILITY"
+    },
+    {
+      "routeId": "PERSONAL_REALITY",
+      "label": "Personal Reality",
+      "canonicalPath": "/perspectives/personal/",
+      "currentOperationalPath": "/perspectives/personal/",
+      "activation": "P1_CX_CODE_ACTIVE_BROWSER_PENDING",
+      "domain": "PERSPECTIVES"
+    },
+    {
+      "routeId": "FINANCIAL_REALITY",
+      "label": "Financial Reality",
+      "canonicalPath": "/professional/financial/",
+      "currentOperationalPath": "/professional/financial/",
+      "activation": "P1_CX_CODE_ACTIVE_BROWSER_PENDING",
+      "domain": "PROFESSIONAL"
     }
   ],
   "legacyAliases": [
@@ -134,25 +150,81 @@
       "activation": "ACTIVE_REDIRECT"
     },
     {
+      "path": "/my-reality",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/my-reality.html",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/reality-dashboard",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/reality-dashboard.html",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/personal-runtime",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/personal-runtime.html",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
       "path": "/professional/personal-runtime",
-      "canonicalRouteId": "PERSPECTIVES",
-      "destination": "/personal-runtime",
-      "redirectStatus": 302,
-      "activation": "TRANSITIONAL_EXISTING"
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
     },
     {
       "path": "/financial",
-      "canonicalRouteId": "PROFESSIONAL",
-      "destination": "/financial-reality",
-      "redirectStatus": 302,
-      "activation": "TRANSITIONAL_EXISTING"
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/financial-reality",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/financial-reality.html",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "P1_ACTIVE_REDIRECT"
     }
   ],
   "legacyDebt": {
-    "realityDashboard": "contextual legacy route remains quarantined until CX-R10/P1 cutover",
+    "realityDashboard": "P1 route retired to /reality/; legacy file retained only until production browser acceptance and physical-delete gate.",
     "realityJourney": "may remain only as contextual progression until CX-R10; forbidden as new top-level navigation",
-    "personalRuntime": "operational legacy route retained until CX-R12 replacement acceptance",
-    "financialReality": "operational legacy route retained until CX-R13 replacement acceptance"
+    "personalRuntime": "P1 route retired to /perspectives/personal/; legacy file retained only until production browser acceptance and physical-delete gate.",
+    "financialReality": "P1 route retired to /professional/financial/; legacy file retained only until production browser acceptance and physical-delete gate."
   },
   "rules": {
     "newCxMayReferenceKnowledgeSearch": false,

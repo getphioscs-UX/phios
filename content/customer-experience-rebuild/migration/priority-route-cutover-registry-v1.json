@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-CX-P1-PRIORITY-ROUTE-CUTOVER-v1.0.0",
+  "work": "PRIORITY_CUTOVER_P1",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "status": "CODE_CUTOVER_COMPLETE_PRODUCTION_BROWSER_ACCEPTANCE_PENDING",
+  "surfaces": [
+    {
+      "surfaceId": "MY_REALITY",
+      "canonicalPath": "/reality/",
+      "htmlPath": "reality/index.html",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "legacyRoutes": [
+        "/my-reality",
+        "/reality-dashboard"
+      ]
+    },
+    {
+      "surfaceId": "PERSONAL_REALITY",
+      "canonicalPath": "/perspectives/personal/",
+      "htmlPath": "perspectives/personal/index.html",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "legacyRoutes": [
+        "/personal-runtime",
+        "/professional/personal-runtime"
+      ]
+    },
+    {
+      "surfaceId": "FINANCIAL_REALITY",
+      "canonicalPath": "/professional/financial/",
+      "htmlPath": "professional/financial/index.html",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "legacyRoutes": [
+        "/financial-reality",
+        "/financial"
+      ]
+    },
+    {
+      "surfaceId": "ASK",
+      "canonicalPath": "/ask",
+      "htmlPath": "ask.html",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "legacyRoutes": [
+        "/knowledge-search"
+      ]
+    }
+  ],
+  "codeAcceptance": {
+    "legacyStylesheetsOnP1": 0,
+    "legacyShellImportsOnP1": 0,
+    "hardCodedPhiOnP1": 0,
+    "legacyAskRouteEntriesOnP1": 0,
+    "canonicalRedirectsInstalled": true
+  },
+  "productionHumanAcceptance": {
+    "required": true,
+    "status": "PENDING_DEPLOYMENT",
+    "matrix": [
+      "DESKTOP_EN_GUEST",
+      "DESKTOP_ZH_GUEST",
+      "DESKTOP_EN_ACCOUNT",
+      "DESKTOP_ZH_ACCOUNT",
+      "MOBILE_EN_GUEST",
+      "MOBILE_ZH_GUEST",
+      "MOBILE_EN_ACCOUNT",
+      "MOBILE_ZH_ACCOUNT"
+    ]
+  },
+  "physicalDelete": {
+    "status": "BLOCKED_UNTIL_PRODUCTION_BROWSER_ACCEPTANCE",
+    "mandatoryAfterAcceptance": true
+  }
+}

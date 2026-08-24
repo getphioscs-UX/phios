@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-CX-R9-CURRENT-FACTS-GATEWAY-CONTRACT-v1.0.0",
+  "work": "CX-R9-W7",
+  "status": "SERVER_GATEWAY_IMPLEMENTED_PROVIDER_FAIL_CLOSED",
+  "flow": [
+    "QUESTION",
+    "PUBLIC_CURRENT_FACT_CLASSIFICATION",
+    "SERVER_SIDE_RETRIEVAL",
+    "CWA_SOURCE_ADMISSION",
+    "SOURCE_TIMESTAMP_FRESHNESS_DISCLOSURE",
+    "BOUNDED_ANSWER"
+  ],
+  "provider": {
+    "environmentVariable": "PHIOS_CURRENT_FACTS_ENDPOINT",
+    "apiKeyVariable": "PHIOS_CURRENT_FACTS_API_KEY",
+    "allowedHostsVariable": "PHIOS_CURRENT_FACTS_ALLOWED_HOSTS",
+    "browserDirectRetrieval": false,
+    "providerRequiredForLiveCurrentFacts": true
+  },
+  "boundaries": {
+    "currentFactsAreCanonicalKnowledge": false,
+    "arbitraryBrowserScrapingAllowed": false,
+    "unadmittedProviderResultMayEnterAnswer": false,
+    "missingProviderMayBePretendedCurrent": false
+  }
+}
