@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "id": "PHI-OS-CLOUDFLARE-FUNCTION-SOURCE-DEPLOYABILITY-INVARIANT-v1",
+  "version": "1.0.0",
+  "status": "ACTIVE",
+  "baselineCommit": "13364abcedc47d935829dbc4dec1a8da4a3adee9",
+  "scope": [
+    "functions/**/*.js",
+    "functions/**/*.mjs",
+    "functions/**/*.cjs"
+  ],
+  "purpose": "Fail locally when Pages Functions source uses syntax known to be rejected by the current Cloudflare Pages/Wrangler production bundling path.",
+  "rules": {
+    "unsupportedJsonImportAttributesAllowed": false,
+    "repositoryValidationEqualsLiveVerification": false,
+    "deploymentRequiredForLiveVerified": true
+  },
+  "knownCompatibleJsonImportForm": "import value from './file.json';",
+  "knownRejectedIncidentPattern": "import value from './file.json' with { type: 'json' };",
+  "checker": "scripts/check-cloudflare-function-import-compat.mjs",
+  "npmScript": "check:cloudflare-function-import-compat",
+  "failureMode": "FAIL_CLOSED",
+  "truthModel": {
+    "checkerPassProves": [
+      "SOURCE_COMPATIBILITY_VALIDATED"
+    ],
+    "checkerPassDoesNotProve": [
+      "DEPLOYED",
+      "LIVE_VERIFIED",
+      "PILOT_VERIFIED"
+    ]
+  }
+}
