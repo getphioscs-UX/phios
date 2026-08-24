@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const __dirname=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(__dirname,'../..');
-const authorityPath=path.join(root,'content/professional/zi-wei-runtime/successors/zwr-w7-w13-internal-calculation-activation-v1.json');
+const authorityPath=path.join(root,'content/zi-wei-runtime/successors/zwr-w7-w13-internal-calculation-activation-v1.json');
 export function loadZiWeiInternalActivation(){ return JSON.parse(fs.readFileSync(authorityPath,'utf8')); }
 export function assertZiWeiInternalCalculationActivated(options={}){
   if(options.executionMode!=='INTERNAL_VALIDATION'){

@@ -1,4 +1,5 @@
 import { renderCanonicalMethodProjection } from './dynamic-renderer-runtime.js';
+import { renderZiWeiCanonicalProjection } from './renderers/zi-wei-renderer.js';
 
 export const MCD7_SURFACE_VERSION = 'MCD-7-PERSONAL-RUNTIME-SURFACE-v1.0.0';
 export const MCD7_CANONICAL_INPUT_VERSION = 'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0';
@@ -68,12 +69,13 @@ export function evaluateSurfaceEligibility(entry,canonicalInput,{targetDate=null
   const reasons=[];
   if(entry.publicMethodCode==='BAZI_PROJECTION' && !present(canonicalInput.birthTime)) reasons.push('BIRTH_TIME_UNKNOWN_DEGRADED_SCOPE');
   if(entry.publicMethodCode==='ASTROLOGY_PROJECTION' && canonicalInput.timeAccuracy==='APPROXIMATE') reasons.push('BIRTH_TIME_APPROXIMATE');
+  if(entry.publicMethodCode==='ZI_WEI_PROJECTION' && canonicalInput.timeAccuracy!=='EXACT') missing.push('timeAccuracy.EXACT');
   if(entry.publicMethodCode==='NUMEROLOGY_PROJECTION' && targetDate && (!present(canonicalInput.timezone?.iana)||!present(canonicalInput.timezone?.utcOffsetAtBirth))) reasons.push('NUM_CYCLE_TIMEZONE_CONTEXT_REQUIRED');
   return Object.freeze({state:missing.length?'INPUT_INCOMPLETE':reasons.length?'REQUESTABLE_WITH_DECLARED_LIMITS':'REQUESTABLE',missingFields:Object.freeze(missing),reasonCodes:Object.freeze(reasons),mpaDecisionPending:true,dispatchAllowed:null});
 }
 
 export function createExecutionRequest(entry,{canonicalInput,consentRecordId,requestId,targetDate=null}={}){
-  if(!entry?.methodCode || entry.productionTab!==true || !['ASTROLOGY_PROJECTION','BAZI_PROJECTION','NUMEROLOGY_PROJECTION'].includes(entry.publicMethodCode)) throw Object.assign(new Error('MCD7_METHOD_REQUEST_FORBIDDEN'),{code:'MCD7_METHOD_REQUEST_FORBIDDEN'});
+  if(!entry?.methodCode || entry.productionTab!==true || !['ASTROLOGY_PROJECTION','BAZI_PROJECTION','NUMEROLOGY_PROJECTION','ZI_WEI_PROJECTION'].includes(entry.publicMethodCode)) throw Object.assign(new Error('MCD7_METHOD_REQUEST_FORBIDDEN'),{code:'MCD7_METHOD_REQUEST_FORBIDDEN'});
   if(!consentRecordId || canonicalInput?.consent?.granted!==true) throw Object.assign(new Error('MCD7_EXECUTION_CONSENT_REQUIRED'),{code:'MCD7_EXECUTION_CONSENT_REQUIRED'});
   return Object.freeze({
     schemaVersion:MCD7_REQUEST_SCHEMA,
@@ -93,7 +95,7 @@ export async function executeCanonicalProjection(entry,options,{fetchImpl=global
   const request=createExecutionRequest(entry,options);
   let response;
   try{
-    response=await fetchImpl('/api/method-execute',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},cache:'no-store',body:JSON.stringify(request)});
+    response=await fetchImpl(entry.publicMethodCode==='ZI_WEI_PROJECTION'?'/api/zi-wei-execute':'/api/method-execute',{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},cache:'no-store',body:JSON.stringify(request)});
   }catch{return publicError('METHOD_EXECUTION_NETWORK_FAILURE');}
   let payload;
   try{payload=await response.json();}catch{return publicError('METHOD_EXECUTION_RESPONSE_INVALID');}
@@ -115,6 +117,7 @@ export function assertClientCanonicalProjection(canonical){
 
 export function renderSurfaceProjection(canonical,{locale='en'}={}){
   assertClientCanonicalProjection(canonical);
+  if(canonical?.method?.publicMethodCode==='ZI_WEI_PROJECTION') return renderZiWeiCanonicalProjection(canonical,{locale:locale==='zh-Hans'?'zh-Hans':'en'});
   return renderCanonicalMethodProjection(canonical,{locale:locale==='zh-Hans'?'zh-Hans':'en',mode:'PRODUCTION'});
 }
 

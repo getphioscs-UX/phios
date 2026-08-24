@@ -5,6 +5,8 @@ import { projectCanonicalMeaningLocale } from './locale-projector.js';
 import { buildNumRuntimeReadingIR } from '../runtime-reading/num-reading-ir.js';
 import { buildBzrRuntimeReadingIR } from '../runtime-reading/bzr-reading-ir.js';
 import { buildAstRuntimeReadingIR } from '../runtime-reading/ast-reading-ir.js';
+import { buildZiWeiCanonicalMeaningBundle, projectZiWeiMeaningLocale } from './zi-wei-meaning-runtime.js';
+import { buildZiWeiRuntimeReadingIR } from '../runtime-reading/zi-wei-reading-ir.js';
 import {
   CMP_PRODUCTION_ADMISSION_REGISTRY,
   CMP_PRODUCTION_MAPPING_REGISTRY,
@@ -36,17 +38,23 @@ export async function onRequestPost({request}){
  try{
   const projection=validateProjection(body?.canonicalProjection);
   const publicMethodCode=projection.method?.publicMethodCode;
-  if(!['NUMEROLOGY_PROJECTION','BAZI_PROJECTION','ASTROLOGY_PROJECTION'].includes(publicMethodCode))return json({ok:false,error:'CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED',publicMethodCode:publicMethodCode||null},423);
-  const meaningBundle=publicMethodCode==='ASTROLOGY_PROJECTION'
-   ?await buildAstV2CanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY})
-   :await buildCanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY,mode:'production'});
+  if(!['NUMEROLOGY_PROJECTION','BAZI_PROJECTION','ASTROLOGY_PROJECTION','ZI_WEI_PROJECTION'].includes(publicMethodCode))return json({ok:false,error:'CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED',publicMethodCode:publicMethodCode||null},423);
+  const meaningBundle=publicMethodCode==='ZI_WEI_PROJECTION'
+   ?buildZiWeiCanonicalMeaningBundle(projection)
+   :publicMethodCode==='ASTROLOGY_PROJECTION'
+    ?await buildAstV2CanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY})
+    :await buildCanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY,mode:'production'});
   if(!meaningBundle.items.length)return json({ok:false,error:'CMP_PRODUCTION_MEANING_UNRESOLVED'},422);
-  const localeProjection=await projectCanonicalMeaningLocale({bundle:meaningBundle,localeRegistry:CMP_PRODUCTION_LOCALE_REGISTRY,locale});
-  const reading=publicMethodCode==='ASTROLOGY_PROJECTION'
-   ?buildAstRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
-   :publicMethodCode==='BAZI_PROJECTION'
-    ?buildBzrRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
-    :buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
+  const localeProjection=publicMethodCode==='ZI_WEI_PROJECTION'
+   ?projectZiWeiMeaningLocale(meaningBundle,locale)
+   :await projectCanonicalMeaningLocale({bundle:meaningBundle,localeRegistry:CMP_PRODUCTION_LOCALE_REGISTRY,locale});
+  const reading=publicMethodCode==='ZI_WEI_PROJECTION'
+   ?buildZiWeiRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
+   :publicMethodCode==='ASTROLOGY_PROJECTION'
+    ?buildAstRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
+    :publicMethodCode==='BAZI_PROJECTION'
+     ?buildBzrRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
+     :buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
   return json({ok:true,capabilityAvailability:'AVAILABLE',capabilityVersion:'1.0.0',executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading},200);
  }catch(error){
   const code=error?.code||'CMP_MEANING_FAILED_CLOSED';

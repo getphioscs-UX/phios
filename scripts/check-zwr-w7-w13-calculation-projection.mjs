@@ -9,21 +9,21 @@ const text=(p)=>fs.readFileSync(path.join(root,p),'utf8');
 const exists=(p)=>fs.existsSync(path.join(root,p));
 
 const policy=json('content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json');
-const recon=json('content/professional/zi-wei-runtime/reconciliation/zwr-w2h-reconciliation-on-4c1aff3-v1.json');
+const recon=json('content/zi-wei-runtime/reconciliation/zwr-w2h-reconciliation-on-4c1aff3-v1.json');
 const oldCal=json('content/professional/zi-wei-runtime/contracts/zi-wei-calendar-conversion-runtime-contract-v1.json');
 const oldPal=json('content/professional/zi-wei-runtime/contracts/zi-wei-palace-construction-runtime-contract-v1.json');
-const calSucc=json('content/professional/zi-wei-runtime/successors/zi-wei-calendar-conversion-runtime-successor-v2.json');
-const palSucc=json('content/professional/zi-wei-runtime/successors/zi-wei-palace-construction-runtime-successor-v2.json');
-const mainReg=json('content/professional/zi-wei-runtime/registries/zi-wei-main-star-placement-registry-v1.json');
-const supportReg=json('content/professional/zi-wei-runtime/registries/zi-wei-support-star-scope-registry-v1.json');
-const transContract=json('content/professional/zi-wei-runtime/contracts/zi-wei-four-transformations-runtime-contract-v1.json');
-const irContract=json('content/professional/zi-wei-runtime/contracts/zi-wei-calculation-ir-contract-v1.json');
-const fixtures=json('content/professional/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json');
-const xref=json('content/professional/zi-wei-runtime/evidence/zi-wei-cross-reference-validation-v1.json');
-const projContract=json('content/professional/zi-wei-runtime/contracts/zi-wei-canonical-projection-contract-v1.json');
-const activation=json('content/professional/zi-wei-runtime/successors/zwr-w7-w13-internal-calculation-activation-v1.json');
-const evidenceV2=json('content/professional/zi-wei-runtime/evidence/zi-wei-source-evidence-registry-v2.json');
-const acceptance=json('content/professional/zi-wei-runtime/acceptance/zwr-w7-w13-calculation-validation-projection-acceptance-v1.json');
+const calSucc=json('content/zi-wei-runtime/successors/zi-wei-calendar-conversion-runtime-successor-v2.json');
+const palSucc=json('content/zi-wei-runtime/successors/zi-wei-palace-construction-runtime-successor-v2.json');
+const mainReg=json('content/zi-wei-runtime/registries/zi-wei-main-star-placement-registry-v1.json');
+const supportReg=json('content/zi-wei-runtime/registries/zi-wei-support-star-scope-registry-v1.json');
+const transContract=json('content/zi-wei-runtime/contracts/zi-wei-four-transformations-runtime-contract-v1.json');
+const irContract=json('content/zi-wei-runtime/contracts/zi-wei-calculation-ir-contract-v1.json');
+const fixtures=json('content/zi-wei-runtime/fixtures/zi-wei-validation-fixture-corpus-v1.json');
+const xref=json('content/zi-wei-runtime/evidence/zi-wei-cross-reference-validation-v1.json');
+const projContract=json('content/zi-wei-runtime/contracts/zi-wei-canonical-projection-contract-v1.json');
+const activation=json('content/zi-wei-runtime/successors/zwr-w7-w13-internal-calculation-activation-v1.json');
+const evidenceV2=json('content/zi-wei-runtime/evidence/zi-wei-source-evidence-registry-v2.json');
+const acceptance=json('content/zi-wei-runtime/acceptance/zwr-w7-w13-calculation-validation-projection-acceptance-v1.json');
 
 // W2H reconciliation is explicit and the exact authority remains Human-frozen.
 assert.equal(recon.status,'PRIOR_HUMAN_FREEZE_RESTORED_AS_EXPLICIT_PREDECESSOR_EVIDENCE');
@@ -143,7 +143,7 @@ assert.equal(xref.status,'VALIDATED_WITH_DECLARED_NON_AUTHORITY_REFERENCES');
 assert.ok(xref.references.length>=4); assert.ok(xref.references.every(x=>x.runtimeAuthority===false));
 assert.equal(evidenceV2.externalWebsiteAsRuntimeAuthorityAllowed,false);
 assert.equal(evidenceV2.doctrinalRuleSourcesAdmittedAtRuntime,0);
-assert.ok(exists('content/professional/zi-wei-runtime/evidence/ZWR-LUNAR-TABLE-THIRD-PARTY-NOTICE.md'));
+assert.ok(exists('content/zi-wei-runtime/evidence/ZWR-LUNAR-TABLE-THIRD-PARTY-NOTICE.md'));
 assert.ok(xref.references.some(x=>x.referenceId==='ZWR-XREF-SOLARLUNAR-TABLE' && x.license==='ISC' && x.runtimeAuthority===false));
 
 // Internal activation successor exists, but Production/MPA/MCD/frontend gates remain closed.

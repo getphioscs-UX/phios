@@ -9,7 +9,7 @@ import {
   validateCanonicalInputShape
 } from '../method-client-delivery/personal-runtime-surface-runtime.js';
 
-const SURFACE_REGISTRY_URL='/content/professional/method-client-delivery/registries/mcd-7-personal-runtime-result-surface-registry-v1.json';
+const SURFACE_REGISTRY_URL='/content/professional/method-client-delivery/successors/mcd-7-personal-runtime-result-surface-registry-v2.json';
 let registry=null;
 let results=new Map();
 let lastCanonicalInput=null;

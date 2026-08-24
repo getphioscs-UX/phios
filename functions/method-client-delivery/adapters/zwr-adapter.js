@@ -1,0 +1,3 @@
+import {executeAndProjectZwrProduction} from '../zwr-canonical-projection-runtime.js';
+export function probeZwrProductionAdapter(){return Object.freeze({adapterCode:'MCD_ZWR_PRODUCTION_ADAPTER',methodCode:'ZI_WEI_DOU_SHU',methodVersion:'1.0.0',productionBinding:true,validationOnly:false,capabilities:Object.freeze(['CALCULATION','PROJECTION'])});}
+export async function dispatchZwrProductionAdapter(request,decision){if(decision?.authorityOwner!=='MPA'||decision?.dispatchAllowed!==true)throw Object.assign(new Error('MCD_ZWR_ADAPTER_REQUIRES_MPA'),{code:'MCD_ZWR_ADAPTER_REQUIRES_MPA'});return executeAndProjectZwrProduction(request,decision);}

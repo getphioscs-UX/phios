@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "PHI-OS-RRP-METHOD-AVAILABILITY-SUCCESSOR-v5.0.0",
+  "work": "ZWR-W20",
+  "baselineCommit": "37117eafa943589a8a9c012e969bb1827a800c2f",
+  "status": "CURRENT_SUCCESSOR_NUM_BZR_AST_ZWR_AVAILABLE",
+  "predecessor": "content/products/runtime-reading/successors/runtime-reading-method-availability-successor-v4.json",
+  "predecessorMutated": false,
+  "methods": [
+    {
+      "methodCode": "NUM",
+      "canonicalMethodCode": "NUMEROLOGY",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0-candidate",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_NUM",
+        "NUMA_PRODUCTION_ACCEPTED"
+      ]
+    },
+    {
+      "methodCode": "BZR",
+      "canonicalMethodCode": "BAZI",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_BZR",
+        "BZRA_PRODUCTION_ACCEPTED"
+      ],
+      "executionCompletenessIndependent": true
+    },
+    {
+      "methodCode": "AST",
+      "canonicalMethodCode": "ASTROLOGY",
+      "methodVersion": "0.1.0",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "ASTA_V2_PROJECTION_ACTIVE",
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_AST",
+        "ASTA_PRODUCTION_ACCEPTED"
+      ],
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0",
+      "executionCompletenessIndependent": true
+    },
+    {
+      "methodCode": "HDR",
+      "canonicalMethodCode": "HUMAN_DESIGN",
+      "methodVersion": "1.0.0",
+      "calculation": "UNAVAILABLE",
+      "projection": "UNAVAILABLE",
+      "meaning": "UNAVAILABLE",
+      "reading": "UNAVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "UNAVAILABLE",
+      "selfServiceAllowed": false,
+      "reasonCodes": [
+        "MPA_DISPATCH_BLOCKED"
+      ]
+    },
+    {
+      "methodCode": "ZWR",
+      "canonicalMethodCode": "ZI_WEI_DOU_SHU",
+      "capabilityVersion": "1.0.0",
+      "executionAuthorityMethodVersion": "0.1.0-candidate",
+      "calculation": "AVAILABLE",
+      "projection": "AVAILABLE",
+      "meaning": "AVAILABLE",
+      "reading": "AVAILABLE",
+      "professional": "UNAVAILABLE",
+      "availability": "AVAILABLE",
+      "selfServiceAllowed": true,
+      "reasonCodes": [
+        "ZWR_W7_W13_CALCULATION_VALIDATED",
+        "CMP_PRODUCTION_MEANING_ACTIVE_FOR_ZWR",
+        "ZWR_PRODUCTION_ACCEPTED"
+      ],
+      "executionCompletenessIndependent": true
+    }
+  ],
+  "rules": {
+    "capabilityAvailabilityIndependentFromExecutionCompleteness": true,
+    "optionalCycleTargetDateMayYieldPartialExecutionWithoutGlobalDowngrade": true,
+    "professionalJudgmentNotRequiredForSelfServiceAvailability": true
+  }
+}
