@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-BZR-TEMPORAL-INPUT-CONTRACT-v1.0.0",
+  "work": "BZT-W1",
+  "status": "FROZEN",
+  "sourceInput": "CanonicalBirthInput",
+  "targetContext": {
+    "required": ["targetDate", "targetTimezone.iana", "targetTimezone.utcOffsetAtTarget"],
+    "targetDate": "YYYY-MM-DD",
+    "targetTime": "HH:mm:ss or null; required only when targetDate is the local Li Chun boundary date",
+    "targetTimezone.iana": "explicit user-declared IANA timezone label",
+    "targetTimezone.utcOffsetAtTarget": "explicit ±HH:MM offset for the target date/time"
+  },
+  "luckCycleInput": {
+    "traditionalCalculationSex": ["MALE", "FEMALE", null],
+    "useScope": "LUCK_CYCLE_DIRECTION_ONLY",
+    "identityInferenceAllowed": false,
+    "absenceEffect": "ANNUAL_CONTEXT_REMAINS_AVAILABLE; CURRENT_LUCK_CYCLE_BECOMES_PARTIAL"
+  },
+  "rules": {
+    "browserTimezoneInferenceAllowed": false,
+    "serverCurrentDateInferenceAllowed": false,
+    "targetDateDefaultAllowed": false,
+    "missingTargetTimeMayBeAssumedNoon": false,
+    "canonicalBirthInputMutationAllowed": false
+  }
+}

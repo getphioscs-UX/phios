@@ -1,0 +1,136 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {executeBzrTemporalRequest} from '../functions/api/bzr-temporal-execute.js';
+import {buildBzrTemporalMeaningBundle} from '../functions/bzr-temporal/temporal-meaning-runtime.js';
+import {buildBzrTemporalReadingIR} from '../functions/bzr-temporal/temporal-reading-ir.js';
+
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const read=p=>fs.readFileSync(p,'utf8');
+const root='content/professional/bzr-temporal';
+
+const scope=j(`${root}/contracts/bzr-temporal-scope-v1.json`);
+const inputContract=j(`${root}/contracts/bzr-temporal-input-contract-v1.json`);
+const luckAuthority=j(`${root}/authority/bzr-temporal-luck-boundary-authority-v1.json`);
+const annualAuthority=j(`${root}/authority/bzr-annual-cycle-authority-v1.json`);
+const projectionContract=j(`${root}/contracts/bzr-temporal-projection-contract-v1.json`);
+const ontology=j(`${root}/registries/bzr-temporal-meaning-ontology-v1.json`);
+const readingContract=j(`${root}/contracts/bzr-temporal-reading-ir-v1.json`);
+const frontend=j(`${root}/registries/bzr-temporal-frontend-availability-v1.json`);
+const validationAcceptance=j(`${root}/acceptance/bzr-temporal-validation-acceptance-v1.json`);
+const productionAcceptance=j(`${root}/acceptance/bzr-temporal-production-acceptance-v1.json`);
+const ml1=j('content/governance/multi-lens/registries/multi-lens-capability-state-registry-v1.json');
+const ml2=j('content/governance/multi-lens/successors/multi-lens-capability-state-registry-v2.json');
+const lens2=j('content/governance/multi-lens/successors/canonical-lens-registry-v2.json');
+const current=j('content/governance/multi-lens/successors/multi-lens-current-successor-v2.json');
+
+assert.equal(scope.scopeCode,'BZR_TEMPORAL_RUNTIME_V2');
+assert.equal(scope.capabilityVersion,'2.0.0');
+for(const x of ['TEN_GODS','USEFUL_GOD','PATTERN_CLASSIFICATION','FORTUNE_PREDICTION','EVENT_PREDICTION','GOOD_BAD_SCORING','METHOD_VOTING']) assert(scope.excludedFeatures.includes(x));
+assert.equal(inputContract.rules.browserTimezoneInferenceAllowed,false);
+assert.equal(inputContract.rules.serverCurrentDateInferenceAllowed,false);
+assert.equal(inputContract.rules.targetDateDefaultAllowed,false);
+assert.equal(inputContract.rules.missingTargetTimeMayBeAssumedNoon,false);
+assert.equal(luckAuthority.currentCycleBoundaryPolicy.precision,'CIVIL_DATE');
+assert.equal(luckAuthority.currentCycleBoundaryPolicy.transitionDatePolicy,'DO_NOT_SELECT_ONE_SIDE; return TRANSITION_DAY candidates');
+assert.equal(annualAuthority.yearBoundary,'EXACT_LI_CHUN_INSTANT');
+assert.equal(annualAuthority.targetBoundaryPolicy.sameLocalBoundaryDateWithoutTargetTime,'PARTIAL_BOUNDARY_TIME_REQUIRED');
+assert.equal(projectionContract.rules.projectionMayCreatePrediction,false);
+assert.equal(ontology.meaningCount,7);
+assert.equal(readingContract.boundaries.goodBadScoreCreated,false);
+assert.equal(frontend.executeEndpoint,'/api/bzr-temporal-execute');
+assert.equal(frontend.meaningEndpoint,'/api/bzr-temporal-meaning');
+assert.equal(validationAcceptance.status,'ACCEPTED_BY_EXECUTABLE_CHECKER');
+assert.equal(productionAcceptance.availability,'AVAILABLE');
+assert.equal(productionAcceptance.deployment.liveProductionProbePerformed,false);
+
+const bzr1=ml1.records.find(x=>x.pluginCode==='BZR');
+const bzr2=ml2.records.find(x=>x.pluginCode==='BZR');
+assert.equal(bzr1.currentScope,'BAZI_STRUCTURAL_RUNTIME_V1');
+assert.equal(bzr2.currentScope,'BZR_TEMPORAL_RUNTIME_V2');
+assert.equal(bzr2.subCapabilities.NATAL.availability,'AVAILABLE');
+assert.equal(bzr2.subCapabilities.TEMPORAL.availability,'AVAILABLE');
+assert.equal(bzr2.subCapabilities.MONTHLY.availability,'NOT_ACTIVATED');
+assert.equal(bzr2.subCapabilities.DAILY.availability,'NOT_ACTIVATED');
+assert.equal(bzr2.subCapabilities.HOURLY.availability,'NOT_ACTIVATED');
+assert.equal(ml2.predecessorMutated,false);
+assert.equal(lens2.lenses.find(x=>x.pluginCode==='BZR').lensCode,'TIME');
+assert.equal(lens2.lenses.find(x=>x.pluginCode==='BZR').currentGovernedScope,'BZR_TEMPORAL_RUNTIME_V2');
+assert.equal(current.activatedExpansion,'BZR_TEMPORAL_RUNTIME_V2');
+assert.equal(current.roleChanges,false);
+
+const refs={285:'1989-01-05T08:45:57.000Z',315:'1989-02-03T20:27:10.000Z',345:'1989-03-05T14:34:09.000Z',15:'1989-04-04T19:29:54.000Z',45:'1989-05-05T12:53:55.000Z',75:'1989-06-05T17:05:13.000Z',105:'1989-07-07T03:19:26.000Z',135:'1989-08-07T13:03:53.000Z',165:'1989-09-07T15:53:54.000Z',195:'1989-10-08T07:27:19.000Z',225:'1989-11-07T10:33:32.000Z',255:'1989-12-07T03:20:57.000Z'};
+const astronomyFixture=Object.freeze({Body:Object.freeze({}),MakeTime(d){return {ut:0,tt:0,date:d}},GeoVector(){return {x:1,y:0,z:0}},Ecliptic(){return {elon:0,elat:0}},SearchSunLongitude(lon,start){const y=start.getUTCFullYear();if(y===1989&&refs[lon])return {date:new Date(refs[lon])};const month={285:0,315:1,345:2,15:3,45:4,75:5,105:6,135:7,165:8,195:9,225:10,255:11}[lon]??0;return {date:new Date(Date.UTC(y,month,lon===315?4:5,8,0,0))};}});
+const loader=async()=>astronomyFixture;
+const canonicalInput={birthDate:'1989-11-15',birthTime:'22:50:00',birthPlace:{displayName:'Taiping',countryCode:'MY',latitude:4.85,longitude:100.7333},timezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtBirth:'+08:00',source:'HUMAN_DECLARATION',confidence:'HIGH'},timeAccuracy:'EXACT',locale:'en',consent:{recordId:'C-BZT',granted:true,purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',persistence:'NONE'},inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'};
+const target=(date='2026-08-24',time='10:00:00')=>({targetDate:date,targetTime:time,targetTimezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtTarget:'+08:00'}});
+const body=(id,targetContext=target(),sex='FEMALE')=>({schemaVersion:'PHI-OS-BZR-TEMPORAL-EXECUTION-REQUEST-v1.0.0',requestId:id,canonicalInput,targetContext,executionParameters:sex?{traditionalCalculationSex:sex}:{},consentRecordId:'C-BZT'});
+
+const a=await executeBzrTemporalRequest(body('BZT-DETERMINISM'),{astronomyModuleLoader:loader});
+const b=await executeBzrTemporalRequest(body('BZT-DETERMINISM'),{astronomyModuleLoader:loader});
+assert.equal(a.projection.projectionId,b.projection.projectionId);
+assert.equal(a.projection.executionCompleteness,'COMPLETE');
+assert.equal(a.projection.annualContext.annualPillar.year,2026);
+assert.deepEqual([a.projection.annualContext.annualPillar.stemCode,a.projection.annualContext.annualPillar.branchCode],['BING','WU']);
+assert.equal(a.projection.currentLuckCycle.state,'ACTIVE');
+assert.equal(a.projection.currentLuckCycle.current.cycleNumber,3);
+assert.equal(a.projection.currentLuckCycle.current.startDate,'2017-01-17');
+assert.equal(a.projection.currentLuckCycle.current.endDate,'2027-01-17');
+assert.deepEqual([a.projection.currentLuckCycle.current.pillar.stemCode,a.projection.currentLuckCycle.current.pillar.branchCode],['WU','YIN']);
+assert(a.projection.relations.length>=9);
+for(const key of ['fortunePredictionCreated','eventPredictionCreated','professionalJudgmentCreated','goodBadScoreCreated','methodVotingCreated'])assert.equal(a.projection.boundaries[key],false);
+
+const m1=await buildBzrTemporalMeaningBundle({projection:a.projection,locale:'en'});
+const m2=await buildBzrTemporalMeaningBundle({projection:a.projection,locale:'en'});
+assert.equal(m1.bundleDigest,m2.bundleDigest);
+assert(m1.items.length>0);
+assert(m1.items.every(x=>!/(fortune|will happen|good luck|bad luck|发财|离婚|必然)/i.test(`${x.label} ${x.definition}`)));
+const reading=buildBzrTemporalReadingIR({projection:a.projection,meaningBundle:m1});
+assert.equal(reading.executionCompleteness,'COMPLETE');
+assert.equal(reading.sections.currentLongCycle.current.cycleNumber,3);
+assert.equal(reading.sections.currentAnnualContext.annualPillar.year,2026);
+for(const key of ['fortunePredictionCreated','eventPredictionCreated','professionalJudgmentCreated','goodBadScoreCreated','methodVotingCreated'])assert.equal(reading.boundaries[key],false);
+
+const before=await executeBzrTemporalRequest(body('BZT-BEFORE',target('2026-02-03','12:00:00')),{astronomyModuleLoader:loader});
+assert.equal(before.projection.annualContext.annualPillar.year,2025);
+const after=await executeBzrTemporalRequest(body('BZT-AFTER',target('2026-02-05','12:00:00')),{astronomyModuleLoader:loader});
+assert.equal(after.projection.annualContext.annualPillar.year,2026);
+const boundary=await executeBzrTemporalRequest(body('BZT-BOUNDARY',target('2026-02-04',null)),{astronomyModuleLoader:loader});
+assert.equal(boundary.projection.executionCompleteness,'PARTIAL');
+assert.equal(boundary.projection.annualContext.annualPillar,null);
+assert(boundary.projection.unknown.some(x=>x.code==='BZT_ANNUAL_BOUNDARY_TIME_REQUIRED'));
+const transition=await executeBzrTemporalRequest(body('BZT-LUCK-TRANSITION',target('2017-01-17','12:00:00')),{astronomyModuleLoader:loader});
+assert.equal(transition.projection.currentLuckCycle.state,'TRANSITION_DAY');
+assert.equal(transition.projection.executionCompleteness,'PARTIAL');
+assert(transition.projection.currentLuckCycle.candidates.length>=1);
+const noSex=await executeBzrTemporalRequest(body('BZT-NO-SEX',target(),'') ,{astronomyModuleLoader:loader});
+assert.equal(noSex.projection.annualContext.status,'AVAILABLE');
+assert.equal(noSex.projection.currentLuckCycle.status,'UNAVAILABLE');
+assert.equal(noSex.projection.executionCompleteness,'PARTIAL');
+
+const html=read('personal-runtime.html');
+const js=read('assets/js/pages/bzr-temporal-runtime.js');
+const api=read('functions/api/bzr-temporal-execute.js');
+assert.match(html,/data-bzr-temporal-runtime/);
+for(const id of ['targetDate','targetTime','targetTimezone','targetUtcOffsetAtTarget','bzrTraditionalCalculationSex'])assert.match(html,new RegExp(`id="${id}"`));
+assert.match(html,/\/assets\/js\/pages\/bzr-temporal-runtime\.js/);
+assert.match(html,/\/assets\/css\/bzr-temporal-runtime\.css/);
+assert.doesNotMatch(js,/resolvedOptions|Intl\.DateTimeFormat|new Date\(\)\.toISOString\(\)\.slice\(0,10\)/);
+assert.match(js,/\/api\/bzr-temporal-execute/);
+assert.match(js,/\/api\/bzr-temporal-meaning/);
+assert.doesNotMatch(api,/TEN_GODS|USEFUL_GOD|fortunePrediction\s*:\s*true|eventPrediction\s*:\s*true/);
+
+const pkg=j('package.json');
+assert.equal(pkg.scripts['check:bzt-w0-w9'],'node scripts/check-bzt-w0-w9-bzr-temporal-runtime.mjs');
+assert.equal(pkg.scripts['check:bzr-temporal'],'npm run check:bzt-w0-w9');
+assert.equal(pkg.scripts['check:master-2'],'npm run check:master-1 && npm run check:bzt-w0-w9');
+
+const freeze=j(`${root}/freeze/bzr-temporal-production-freeze-v1.json`);
+assert.equal(freeze.status,'FROZEN_MASTER_2_BZR_TEMPORAL_RUNTIME');
+for(const item of freeze.immutableArtifacts)assert.equal(sha(item.path),item.sha256,`BZT frozen artifact drift: ${item.path}`);
+
+console.log('✓ BZT-W0–W9 BZR Temporal Runtime passed.');
+console.log('  BZR TIME lens now has Natal + governed current Luck Cycle + exact-Li-Chun Annual temporal structure.');
+console.log('  Target date/time/timezone are explicit; no browser timezone, current date, calculation sex, boundary instant or prediction is inferred.');
+console.log('  Multi-Lens v1 authority remains historical; v2 successor activates only BZR Temporal while monthly/daily/hourly remain deferred.');

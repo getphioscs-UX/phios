@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "PHI-OS-MULTI-LENS-CAPABILITY-STATE-REGISTRY-v2.0.0",
+  "work": "BZT-W9",
+  "baselineCommit": "cf87fbffa44cf41fa25681c560b49963d204b82d",
+  "status": "CURRENT_MULTI_LENS_STATE_V2_BZR_TEMPORAL_ACTIVE",
+  "publicProductionAuthority": "content/governance/production-capability-matrix/registries/production-capability-registry-v6.json",
+  "executionCompletenessModel": "PER_EXECUTION_ONLY",
+  "records": [
+    {
+      "pluginCode": "AST",
+      "lensCode": "FUNCTION",
+      "methodCode": "ASTROLOGY",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "AST_STRUCTURAL_RUNTIME_V1",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "AST_TRANSIT_RUNTIME_V2"
+    },
+    {
+      "pluginCode": "BZR",
+      "lensCode": "TIME",
+      "methodCode": "BAZI",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "BZR_TEMPORAL_RUNTIME_V2",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "BZR_MONTHLY_DAILY_TEMPORAL_SUCCESSOR_NOT_IN_V2",
+      "subCapabilities": {
+        "NATAL": {
+          "availability": "AVAILABLE",
+          "scope": "BAZI_STRUCTURAL_RUNTIME_V1"
+        },
+        "TEMPORAL": {
+          "availability": "AVAILABLE",
+          "scope": "NATAL_PLUS_CURRENT_LUCK_PLUS_ANNUAL",
+          "capabilityVersion": "2.0.0"
+        },
+        "MONTHLY": {
+          "availability": "NOT_ACTIVATED"
+        },
+        "DAILY": {
+          "availability": "NOT_ACTIVATED"
+        },
+        "HOURLY": {
+          "availability": "NOT_ACTIVATED"
+        }
+      }
+    },
+    {
+      "pluginCode": "ZWR",
+      "lensCode": "DOMAIN",
+      "methodCode": "ZI_WEI_DOU_SHU",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "ZI_WEI_NATAL_STRUCTURAL_RUNTIME_V1",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "ZI_WEI_DYNAMIC_DOMAIN_RUNTIME_V2"
+    },
+    {
+      "pluginCode": "HDR",
+      "lensCode": "OPERATION",
+      "methodCode": "HUMAN_DESIGN",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "RESTRICTED_INTERNAL",
+      "publicExecutionAllowed": false,
+      "internalAccessClass": "GOVERNED_INTERNAL_VALIDATION",
+      "currentScope": "HDR_W0_W6_IMPLEMENTED_FROZEN_VALIDATION_ONLY",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "HDR2_INTERNAL_OPERATING_LENS",
+      "pcmPublicProductionState": "BLOCKED",
+      "publicTrademarkUseAllowed": false,
+      "publicSelfServiceAllowed": false,
+      "manualProfessionalExtensions": {
+        "PHS": "MANUAL_INPUT_ONLY",
+        "DREAM_RAVE": "MANUAL_INPUT_ONLY"
+      },
+      "automaticProfessionalExtensionCalculationAllowed": false
+    },
+    {
+      "pluginCode": "NUM",
+      "lensCode": "RHYTHM",
+      "methodCode": "NUMEROLOGY",
+      "internalCapabilityAvailability": "AVAILABLE",
+      "publicCapabilityAvailability": "AVAILABLE",
+      "publicExecutionAllowed": true,
+      "internalAccessClass": "PRODUCTION_AND_GOVERNED_INTERNAL",
+      "currentScope": "NUMERIC_RUNTIME_V1",
+      "executionCompleteness": "PER_EXECUTION",
+      "nextExpansion": "NONE_REQUIRED_FOR_ROLE_FREEZE"
+    }
+  ],
+  "rules": {
+    "publicStateDerivedFromCurrentPcmForPublicMethods": true,
+    "hdrInternalStateIsAdditiveSuccessorVisibilityOnly": true,
+    "hdrHistoricalPublicBlockPreserved": true,
+    "noFutureDynamicRuntimeActivated": false,
+    "noPublicSurfaceChangedByMaster1": true,
+    "bztTemporalActivationOnly": true,
+    "bztDoesNotActivateMonthlyDailyHourly": true
+  },
+  "predecessor": "content/governance/multi-lens/registries/multi-lens-capability-state-registry-v1.json",
+  "predecessorMutated": false
+}

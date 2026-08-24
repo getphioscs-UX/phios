@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/assets/css/client-production-surfaces.css">
   <link rel="stylesheet" href="/assets/css/num-production-meaning.css">
   <link rel="stylesheet" href="/assets/css/bzr-production-meaning.css">
+  <link rel="stylesheet" href="/assets/css/bzr-temporal-runtime.css">
   <link rel="stylesheet" href="/assets/css/ast-production-meaning.css">
 </head>
 <body class="public-page wpr-personal-runtime" data-page="personal-runtime" data-public-section="reality" data-wpr-production-surface="MCD7_PERSONAL_RUNTIME_RESULTS">
@@ -65,7 +66,9 @@
           <div class="pr-field-pair"><label><span data-i18n="personalRuntime.timezone">Birth timezone</span><input id="birthTimezone" name="Timezone" type="text" placeholder="Asia/Kuala_Lumpur" spellcheck="false"></label><label><span data-i18n="personalRuntime.utcOffsetAtBirth">UTC offset at birth</span><input id="utcOffsetAtBirth" name="UtcOffsetAtBirth" type="text" placeholder="+08:00" spellcheck="false"></label></div>
           <div class="pr-field-pair"><label><span data-i18n="personalRuntime.timezonePrecision">Timezone precision</span><select name="TimezonePrecision" data-precision-for="timezone"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" data-i18n="personalRuntime.unknown">Unknown</option></select></label><p class="pr-field-help" data-i18n="personalRuntime.timezoneHelp">Use the historical offset that applied at birth. Current/browser timezone is never substituted.</p></div>
           <fieldset class="pr-coordinate-fieldset"><legend data-i18n="personalRuntime.coordinates">Coordinates (optional)</legend><div class="pr-coordinate-grid"><label><span data-i18n="personalRuntime.latitude">Latitude</span><input id="birthLatitude" name="Latitude" type="number" min="-90" max="90" step="any"></label><label><span data-i18n="personalRuntime.longitude">Longitude</span><input id="birthLongitude" name="Longitude" type="number" min="-180" max="180" step="any"></label><label><span data-i18n="personalRuntime.precision">Precision</span><select name="CoordinatesPrecision" data-precision-for="coordinates"><option value="exact" data-i18n="personalRuntime.exact">Exact</option><option value="approximate" data-i18n="personalRuntime.approximate">Approximate</option><option value="unknown" selected data-i18n="personalRuntime.unknown">Unknown</option></select></label></div></fieldset>
-          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.targetDate">Optional cycle date</span><input id="targetDate" name="TargetDate" type="date"></label><p class="pr-field-help" data-i18n="personalRuntime.targetDateHelp">Used only when a selected Method has an authorized date-cycle calculation. No date is assumed when blank.</p></div>
+          <div class="pr-field-pair"><label><span data-i18n="personalRuntime.targetDate">Optional cycle date</span><input id="targetDate" name="TargetDate" type="date"></label><label><span data-bzt-label="targetTime">Target time (boundary-day only)</span><input id="targetTime" name="TargetTime" type="time" step="60"></label></div>
+          <div class="pr-field-pair"><label><span data-bzt-label="targetTimezone">Target timezone</span><input id="targetTimezone" name="TargetTimezone" type="text" placeholder="Asia/Kuala_Lumpur" spellcheck="false"></label><label><span data-bzt-label="targetOffset">Target UTC offset</span><input id="targetUtcOffsetAtTarget" name="TargetUtcOffsetAtTarget" type="text" placeholder="+08:00" spellcheck="false"></label></div>
+          <div class="pr-field-pair"><label><span data-bzt-label="calculationSex">BaZi luck-cycle calculation input</span><select id="bzrTraditionalCalculationSex" name="BzrTraditionalCalculationSex"><option value="">Not provided</option><option value="MALE">Male rule</option><option value="FEMALE">Female rule</option></select></label><p class="pr-field-help" data-bzt-label="targetHelp">Used only for governed date-cycle calculations. No current date, browser timezone or calculation sex is inferred.</p></div>
           <div class="pr-source"><span data-i18n="personalRuntime.source">Information source</span><strong data-i18n="personalRuntime.sourceHuman">Provided by you</strong></div>
           <label class="pr-confirm"><input id="customerConfirmation" name="CustomerConfirmation" type="checkbox"><span data-i18n="personalRuntime.confirm">I confirm these values reflect what I currently know.</span></label>
 
@@ -96,7 +99,7 @@
       </div>
       <section class="pr-tab-panel" role="tabpanel" data-panel="overview"><div data-mcd7-overview></div></section>
       <section class="pr-tab-panel" role="tabpanel" data-panel="astrology" hidden><div data-mcd7-result="astrology"></div><div data-ast-production-meaning aria-live="polite"></div></section>
-      <section class="pr-tab-panel" role="tabpanel" data-panel="bazi" hidden><div data-mcd7-result="bazi"></div><div data-bzr-production-meaning aria-live="polite"></div></section>
+      <section class="pr-tab-panel" role="tabpanel" data-panel="bazi" hidden><div data-mcd7-result="bazi"></div><div data-bzr-production-meaning aria-live="polite"></div><div data-bzr-temporal-runtime aria-live="polite"></div></section>
       <section class="pr-tab-panel" role="tabpanel" data-panel="numeric" hidden><div data-mcd7-result="numeric"></div><div data-num-production-meaning aria-live="polite"></div></section>
       <section class="pr-tab-panel" role="tabpanel" data-panel="ziwei" hidden><div data-mcd7-result="ziwei"></div><div data-zwr-production-meaning aria-live="polite"></div></section>
       <section class="pr-tab-panel" role="tabpanel" data-panel="reading" hidden><div class="pr-reading-placeholder"><p class="public-eyebrow">Reading boundary</p><h3 data-i18n="personalRuntime.readingTitle">Reading is a separate next layer</h3><p data-i18n="personalRuntime.readingCopy">This tab does not calculate or interpret. Guided Reading may consume accepted projection references only when its own governed acceptance and authority permit it.</p><div data-mcd7-reading-sources></div></div></section>
@@ -116,6 +119,7 @@
   <script type="module" src="/assets/js/public-shell.js"></script>
   <script type="module" src="/assets/js/pages/num-production-meaning.js"></script>
   <script type="module" src="/assets/js/pages/bzr-production-meaning.js"></script>
+  <script type="module" src="/assets/js/pages/bzr-temporal-runtime.js"></script>
   <script type="module" src="/assets/js/pages/ast-production-meaning.js"></script>
   <script type="module" src="/assets/js/pages/zwr-production-meaning.js"></script>
   <script type="module" src="/assets/js/pages/personal-runtime.js"></script>
