@@ -195,10 +195,17 @@ assert.equal(successor.successorPolicy.baselineFileModificationOrDeletionForbidd
 
 assert.equal(pkg.scripts['check:pds-w0'], 'node scripts/check-pds-w0-baseline-boundary.mjs');
 assert.equal(pkg.scripts['check:pds-w0-current'], 'node scripts/check-pds-w0-current.mjs');
-assert.ok(pkg.scripts.precheck.startsWith('node scripts/check-pds-w0-current.mjs &&'));
+assert.deepEqual(
+  pkg.scripts.precheck.split(' && ').slice(0, 2),
+  [
+    'npm run check:cloudflare-function-import-compat',
+    'node scripts/check-pds-w0-current.mjs'
+  ],
+  'CLOUDFLARE_FUNCTION_IMPORT_COMPAT_AND_PDS_W0_CURRENT_PRECHECK_ORDER_DRIFT'
+);
 assert.equal(pkg.scripts.precheck.includes('nodescripts/'), false, 'PDS_W0_CURRENT_PRECHECK_COMMAND_CONCATENATION_DRIFT');
 
-console.log('✓ PDS-W0 current protected-path successor passed.');
-console.log('✓ Frozen PDS-W0 artifacts remain canonical-text exact across LF/CRLF checkout policy; the original WPR-B registry is unchanged.');
-console.log('✓ HPC2-PRE asset-resolver successor ec25872c is accepted from its exact commit/blob and freeze evidence.');
-console.log('✓ Four existing WPR resolver identities remain singular; baseline mutation and unregistered drift remain fail-closed.');
+console.log('âœ“ PDS-W0 current protected-path successor passed.');
+console.log('âœ“ Frozen PDS-W0 artifacts remain canonical-text exact across LF/CRLF checkout policy; the original WPR-B registry is unchanged.');
+console.log('âœ“ HPC2-PRE asset-resolver successor ec25872c is accepted from its exact commit/blob and freeze evidence.');
+console.log('âœ“ Four existing WPR resolver identities remain singular; baseline mutation and unregistered drift remain fail-closed.');
