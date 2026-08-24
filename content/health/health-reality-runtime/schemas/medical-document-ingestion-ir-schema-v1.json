@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-HRX-MEDICAL-DOCUMENT-IR-v1.0.0",
+  "title": "Medical Document / Lab Ingestion IR",
+  "required": [
+    "documentRef",
+    "documentType",
+    "source",
+    "observations",
+    "provenance",
+    "governance"
+  ],
+  "documentTypes": [
+    "LAB_REPORT",
+    "IMAGING_REPORT",
+    "DISCHARGE_SUMMARY",
+    "CLINIC_NOTE",
+    "PRESCRIPTION_LIST",
+    "HEALTH_SCREENING",
+    "OTHER"
+  ],
+  "observationTypes": [
+    "MEASUREMENT",
+    "REFERENCE_RANGE",
+    "DOCUMENT_STATEMENT",
+    "CLINICIAN_ATTRIBUTION",
+    "DATE",
+    "MEDICATION_ENTRY"
+  ],
+  "governanceRules": [
+    "EXTRACTION_DOES_NOT_CREATE_DIAGNOSIS",
+    "REFERENCE_RANGE_IS_DOCUMENT_CONTEXT_NOT_UNIVERSAL_TRUTH",
+    "NO_CAUSAL_INFERENCE_FROM_DOCUMENT",
+    "UNRESOLVED_TEXT_REMAINS_UNKNOWN"
+  ]
+}

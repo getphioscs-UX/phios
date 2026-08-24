@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-HRX-SOURCE-ADMISSION-v1.0.0",
+  "requiredFields": [
+    "sourceId",
+    "authorityId",
+    "url",
+    "title",
+    "retrievedAt",
+    "contentDigest",
+    "locale",
+    "claimTypes"
+  ],
+  "admissionStates": [
+    "ADMITTED",
+    "REJECTED_AUTHORITY",
+    "REJECTED_HOST",
+    "REJECTED_PROVENANCE",
+    "REJECTED_CLAIM_CLASS",
+    "STALE_REVIEW_REQUIRED"
+  ],
+  "rules": [
+    "PUBLISHER_APPROVAL_DOES_NOT_AUTO_ADMIT_EVERY_PAGE",
+    "URL_HOST_MUST_MATCH_APPROVED_AUTHORITY",
+    "CONTENT_DIGEST_REQUIRED",
+    "RETRIEVAL_TIME_REQUIRED",
+    "CLAIMS_MUST_REFERENCE_SOURCE_ID",
+    "SOURCE_TEXT_IS_NOT_VENDORED_BY_THIS CONTRACT"
+  ]
+}
