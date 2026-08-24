@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-PRX-CURRENT-CAPABILITY-STATE-MODEL-v2.0.0",
+  "work": "PRX-W0-SUCCESSOR",
+  "baselineCommit": "6f2b4c6791c552c065ac699b12e08ebe4aa1e7fe",
+  "status": "CURRENT_STAGE0_TRUTH_MODEL",
+  "supersedesConceptually": "PRX-W0 acceptanceModel.states without mutating historical PRX-W0 evidence",
+  "states": [
+    "REGISTERED",
+    "IMPLEMENTED",
+    "VALIDATED",
+    "PROJECTED",
+    "CLIENT_CONSUMED",
+    "PRODUCTION_ACCEPTED",
+    "DEPLOYED",
+    "LIVE_VERIFIED",
+    "PILOT_VERIFIED",
+    "BLOCKED",
+    "DEFERRED"
+  ],
+  "truthPlanes": [
+    "runtimeTruth",
+    "productTruth",
+    "liveTruth"
+  ],
+  "rules": {
+    "oneCurrentStatePerCapability": true,
+    "historicalDoesNotEqualCurrent": true,
+    "repositoryAcceptanceDoesNotEqualLiveVerification": true,
+    "availableDoesNotEqualLiveDeploymentVerified": true,
+    "noStatePromotionWithoutExplicitEvidence": true,
+    "liveTruthCannotBeInferredFromRepositoryCheckers": true
+  },
+  "derivationNotes": {
+    "VALIDATED": "Requires admitted EM-2 fixture evidence in the current 186 inventory unless a stronger explicit product state exists.",
+    "PRODUCTION_ACCEPTED": "Only explicit production-bound/accepted capability status is promoted here; this does not imply deployment or live verification.",
+    "CLIENT_CONSUMED": "Explicit client-consumption/client-delivery status only.",
+    "BLOCKED": "Explicit blocked/not-executable status only."
+  }
+}

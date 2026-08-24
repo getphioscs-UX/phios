@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "PHI-OS-PRX-W0-CURRENT-TRUTH-SUCCESSOR-v2.0.0",
+  "work": "PRX-W0-SUCCESSOR",
+  "baselineCommit": "6f2b4c6791c552c065ac699b12e08ebe4aa1e7fe",
+  "status": "CURRENT_TRUTH_FROZEN_FOR_STAGE1",
+  "sourceAuthorities": {
+    "frozen186Inventory": "content/runtime-maturity/registries/master-runtime-capability-inventory-v1.3.json",
+    "runtimeMaturity": "content/runtime-maturity/matrices/master-runtime-maturity-matrix-v1.3.json",
+    "evidenceMaturity": "content/runtime-maturity/matrices/master-evidence-maturity-matrix-v1.5.json",
+    "historicalPrxW0": "content/product-activation/prx/audit/prx-w0-real-user-capability-audit-v1.json"
+  },
+  "counts": {
+    "runtimeFamilies": 42,
+    "capabilities": 186,
+    "stateCounts": {
+      "BLOCKED": 3,
+      "CLIENT_CONSUMED": 13,
+      "IMPLEMENTED": 127,
+      "PRODUCTION_ACCEPTED": 12,
+      "REGISTERED": 5,
+      "VALIDATED": 26
+    },
+    "primaryClientExperienceCounts": {
+      "KNOW_MYSELF": 24,
+      "LEARN": 19,
+      "NAVIGATE": 10,
+      "NONE_BY_DESIGN": 33,
+      "UNDERSTAND": 14,
+      "UNDERSTAND_MONEY": 39,
+      "UNDERSTAND_MY_REALITY": 20,
+      "WORK_WITH_PROFESSIONAL": 27
+    },
+    "postInventoryFamiliesTracked": 4
+  },
+  "postInventoryFamilies": [
+    {
+      "runtimeFamily": "ZWR",
+      "canonicalMethod": "ZI_WEI_DOU_SHU",
+      "inventoryRelation": "POST_MRM_V1_3_NOT_COUNTED_IN_42_186",
+      "currentState": "PRODUCTION_ACCEPTED",
+      "lensRole": "REALITY_DOMAIN_TOPOLOGY",
+      "clientExperiences": [
+        "KNOW_MYSELF",
+        "UNDERSTAND_MY_REALITY"
+      ],
+      "evidence": [
+        "content/zi-wei-runtime/acceptance/zi-wei-production-acceptance-v1.json"
+      ],
+      "liveVerified": false,
+      "note": "Current production acceptance explicitly allows bounded self-service dispatch but deployment remains externally unverified."
+    },
+    {
+      "runtimeFamily": "ICH",
+      "canonicalMethod": "I_CHING",
+      "inventoryRelation": "POST_MRM_V1_3_NOT_COUNTED_IN_42_186",
+      "currentState": "VALIDATED",
+      "lensRole": "SYMBOLIC_REFLECTION",
+      "clientExperiences": [
+        "KNOW_MYSELF",
+        "UNDERSTAND_MY_REALITY"
+      ],
+      "evidence": [
+        "content/professional/core-method-runtime/iching-machine-acceptance-v1.json",
+        "content/interpretation/iching/acceptance/iching-interpretation-reality-acceptance-v1.json"
+      ],
+      "liveVerified": false,
+      "note": "Machine and interpretation validation exist; production activation remains closed."
+    },
+    {
+      "runtimeFamily": "TAR",
+      "canonicalMethod": "TAROT",
+      "inventoryRelation": "POST_MRM_V1_3_NOT_COUNTED_IN_42_186",
+      "currentState": "VALIDATED",
+      "lensRole": "SYMBOLIC_REFLECTION",
+      "clientExperiences": [
+        "KNOW_MYSELF",
+        "UNDERSTAND_MY_REALITY"
+      ],
+      "evidence": [
+        "content/professional/core-method-runtime/tarot-machine-acceptance-v1.json",
+        "content/interpretation/tarot/acceptance/tarot-interpretation-reality-acceptance-v1.json"
+      ],
+      "liveVerified": false,
+      "note": "Machine and interpretation validation exist; production activation remains closed."
+    },
+    {
+      "runtimeFamily": "HRX",
+      "canonicalMethod": null,
+      "inventoryRelation": "POST_MRM_V1_3_NOT_COUNTED_IN_42_186",
+      "currentState": "VALIDATED",
+      "lensRole": "NONE_BY_DESIGN",
+      "clientExperiences": [
+        "UNDERSTAND_MY_REALITY",
+        "WORK_WITH_PROFESSIONAL"
+      ],
+      "evidence": [
+        "content/health/health-reality-runtime/acceptance/hrx-w0-w14-acceptance-v1.json"
+      ],
+      "liveVerified": false,
+      "note": "Health Reality foundation is validated but knowledge corpus, external clinical authority and public surface are not activated."
+    }
+  ],
+  "truthRules": {
+    "oneCurrentStatePerCapability": true,
+    "historicalDoesNotEqualCurrent": true,
+    "repositoryAcceptanceDoesNotEqualLiveVerification": true,
+    "availableDoesNotEqualLiveDeploymentVerified": true,
+    "noStatePromotionWithoutExplicitEvidence": true,
+    "liveTruthCannotBeInferredFromRepositoryCheckers": true
+  },
+  "criticalFinding": "The canonical 42-family / 186-capability inventory is still internally consistent, but Zi Wei, I Ching, Tarot and Health Reality now exist outside that frozen inventory and require an MRM inventory successor before they may be counted inside 42/186."
+}
