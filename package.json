@@ -1555,7 +1555,14 @@
     "check:zwr-batch9": "npm run check:zwr-batch8 && npm run check:zwr-production",
     "check:runtime-frontend-parity-v6": "node scripts/check-runtime-frontend-parity-v6.mjs",
     "check:hrx-w0-w14": "node scripts/check-hrx-w0-w14-health-reality-runtime.mjs",
-    "check:health-reality": "npm run check:hrx-w0-w14"
+    "check:health-reality": "npm run check:hrx-w0-w14",
+    "check:ml-w0-w3": "node scripts/check-ml-w0-w3-multi-lens-authority-role-freeze.mjs",
+    "check:ml-w0": "npm run check:ml-w0-w3",
+    "check:ml-w1": "npm run check:ml-w0-w3",
+    "check:ml-w2": "npm run check:ml-w0-w3",
+    "check:ml-w3": "npm run check:ml-w0-w3",
+    "check:multi-lens-authority": "npm run check:ml-w0-w3",
+    "check:master-1": "npm run check:ml-w0-w3"
   },
   "type": "module",
   "dependencies": {
