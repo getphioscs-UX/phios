@@ -1701,7 +1701,14 @@
     "check:iching-product-runtime": "node scripts/check-iching-product-runtime.mjs",
     "check:iching-product-runtime-historical": "node scripts/check-iching-product-runtime.mjs",
     "check:iching-product-runtime-current": "node scripts/check-iching-product-runtime-current.mjs",
-    "check:iching-product-current": "npm run check:iching-current && npm run check:iching-product-runtime-current"
+    "check:iching-product-current": "npm run check:iching-current && npm run check:iching-product-runtime-current",
+    "check:cx-no-legacy-route-reference": "node scripts/check-cx-no-legacy-route-reference.mjs",
+    "check:cx-r1a": "npm run check:cx-r1 && node scripts/check-cx-r1a-hard-cutover-preparation.mjs && npm run check:cx-no-legacy-route-reference",
+    "check:cx-r2": "npm run check:cx-r1a && node scripts/check-cx-r2-information-architecture.mjs",
+    "check:cx-r3": "npm run check:cx-r2 && node scripts/check-cx-r3-customer-design-system.mjs && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy",
+    "check:cx-r4": "npm run check:cx-r3 && node scripts/check-cx-r4-visual-assets.mjs",
+    "check:cx-r5": "npm run check:cx-r4 && node scripts/check-cx-r5-global-shell.mjs",
+    "check:cx-foundation": "npm run check:cx-r5"
   },
   "type": "module",
   "dependencies": {

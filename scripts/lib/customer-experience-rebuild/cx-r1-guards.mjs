@@ -57,7 +57,10 @@ export function stylesheetRefs(html) {
 }
 
 export function legacyNamespaceHits(text, prefixes) {
-  return prefixes.filter((prefix) => text.includes(prefix));
+  return prefixes.filter((prefix) => {
+    const escaped = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`(?:^|[^A-Za-z0-9_-])${escaped}`).test(text);
+  });
 }
 
 export function signatureHits(text, signatures) {

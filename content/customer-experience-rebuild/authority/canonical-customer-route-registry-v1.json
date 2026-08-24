@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "PHI-OS-CX-CANONICAL-CUSTOMER-ROUTE-REGISTRY-v1.0.0",
+  "work": [
+    "CX-R1A-W0",
+    "CX-R2"
+  ],
+  "baselineCommit": "6eb24e4e55a77859b0068836da7fa89e946ae3b1",
+  "recordedAt": "2026-08-24T13:49:00Z",
+  "status": "CANONICAL_ROUTE_AUTHORITY_DEFINED_CUTOVER_PROGRESSIVE",
+  "authorityBoundary": {
+    "createsBackendAuthority": false,
+    "presentationRoutingOnly": true,
+    "oneCanonicalDestinationPerPublicIntent": true,
+    "legacyHtmlIsNotCompatibilityAuthority": true,
+    "compatibilityAuthority": "_redirects"
+  },
+  "primaryNavigation": [
+    "EXPLORE",
+    "MY_REALITY",
+    "PERSPECTIVES",
+    "KNOWLEDGE",
+    "PROFESSIONAL"
+  ],
+  "utilities": [
+    "SEARCH",
+    "ASK",
+    "ACCOUNT",
+    "LOCALE"
+  ],
+  "forbiddenPrimaryNavigation": [
+    "REALITY_JOURNEY",
+    "READINGS",
+    "FINANCIAL",
+    "SERVICES",
+    "ACADEMY",
+    "REPORTS",
+    "BOOKS"
+  ],
+  "routes": [
+    {
+      "routeId": "HOME",
+      "label": "PHI OS",
+      "canonicalPath": "/",
+      "currentOperationalPath": "/",
+      "activation": "ACTIVE_CURRENT",
+      "domain": "ROOT"
+    },
+    {
+      "routeId": "EXPLORE",
+      "label": "Explore",
+      "canonicalPath": "/explore/",
+      "currentOperationalPath": "/explore",
+      "activation": "TARGET_PENDING_CX_SURFACE",
+      "domain": "EXPLORE"
+    },
+    {
+      "routeId": "MY_REALITY",
+      "label": "My Reality",
+      "canonicalPath": "/reality/",
+      "currentOperationalPath": "/reality/",
+      "activation": "LEGACY_PRESENTATION_CANONICAL_PATH",
+      "domain": "REALITY"
+    },
+    {
+      "routeId": "PERSPECTIVES",
+      "label": "Perspectives",
+      "canonicalPath": "/perspectives/",
+      "currentOperationalPath": "/readings/",
+      "activation": "TARGET_PENDING_CX_SURFACE",
+      "domain": "PERSPECTIVES"
+    },
+    {
+      "routeId": "KNOWLEDGE",
+      "label": "Knowledge",
+      "canonicalPath": "/knowledge/",
+      "currentOperationalPath": "/library",
+      "activation": "TARGET_PENDING_CX_SURFACE",
+      "domain": "KNOWLEDGE"
+    },
+    {
+      "routeId": "PROFESSIONAL",
+      "label": "Professional",
+      "canonicalPath": "/professional/",
+      "currentOperationalPath": "/professional/",
+      "activation": "LEGACY_PRESENTATION_CANONICAL_PATH",
+      "domain": "PROFESSIONAL"
+    },
+    {
+      "routeId": "SEARCH",
+      "label": "Search",
+      "canonicalPath": "/search/",
+      "currentOperationalPath": "/search/",
+      "activation": "ACTIVE_CURRENT",
+      "domain": "UTILITY"
+    },
+    {
+      "routeId": "ASK",
+      "label": "Ask PHI OS",
+      "canonicalPath": "/ask",
+      "currentOperationalPath": "/ask",
+      "activation": "ACTIVE_CURRENT_ROUTE_LEGACY_PRESENTATION",
+      "domain": "UTILITY"
+    },
+    {
+      "routeId": "ACCOUNT",
+      "label": "Account",
+      "canonicalPath": "/account/",
+      "currentOperationalPath": "/account",
+      "activation": "TARGET_PENDING_CX_SURFACE",
+      "domain": "UTILITY"
+    },
+    {
+      "routeId": "LOCALE",
+      "label": "Locale",
+      "canonicalPath": null,
+      "currentOperationalPath": null,
+      "activation": "CLIENT_UTILITY",
+      "domain": "UTILITY"
+    }
+  ],
+  "legacyAliases": [
+    {
+      "path": "/knowledge-search",
+      "canonicalRouteId": "ASK",
+      "destination": "/ask",
+      "redirectStatus": 308,
+      "activation": "ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/knowledge-search.html",
+      "canonicalRouteId": "ASK",
+      "destination": "/ask",
+      "redirectStatus": 308,
+      "activation": "ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/professional/personal-runtime",
+      "canonicalRouteId": "PERSPECTIVES",
+      "destination": "/personal-runtime",
+      "redirectStatus": 302,
+      "activation": "TRANSITIONAL_EXISTING"
+    },
+    {
+      "path": "/financial",
+      "canonicalRouteId": "PROFESSIONAL",
+      "destination": "/financial-reality",
+      "redirectStatus": 302,
+      "activation": "TRANSITIONAL_EXISTING"
+    }
+  ],
+  "legacyDebt": {
+    "realityDashboard": "contextual legacy route remains quarantined until CX-R10/P1 cutover",
+    "realityJourney": "may remain only as contextual progression until CX-R10; forbidden as new top-level navigation",
+    "personalRuntime": "operational legacy route retained until CX-R12 replacement acceptance",
+    "financialReality": "operational legacy route retained until CX-R13 replacement acceptance"
+  },
+  "rules": {
+    "newCxMayReferenceKnowledgeSearch": false,
+    "newCxMayUseRealityJourneyAsPrimaryNavigation": false,
+    "newCxMayUseRealityDashboardAsPrimaryCTA": false,
+    "oldUrlMayRemainAsRedirect": true,
+    "oldHtmlMayRemainAsCompatibilityAuthority": false,
+    "inlineJavascriptRedirectAllowed": false
+  }
+}
