@@ -1,0 +1,8 @@
+export const LRR_CAPABILITY_SNAPSHOT_VERSION='MULTI_LENS_CAPABILITY_V5_FOR_LRR_V1';
+export const LRR_CAPABILITIES=Object.freeze({
+  AST:Object.freeze({lensCode:'FUNCTION',internalCapabilityAvailability:'AVAILABLE',publicCapabilityAvailability:'AVAILABLE',publicExecutionAllowed:true,subCapabilities:Object.freeze({NATAL:'AVAILABLE',CURRENT_DYNAMIC:'AVAILABLE',PROGRESSIONS:'NOT_ACTIVATED',RETURNS:'NOT_ACTIVATED',RELATIONAL:'NOT_ACTIVATED'})}),
+  BZR:Object.freeze({lensCode:'TIME',internalCapabilityAvailability:'AVAILABLE',publicCapabilityAvailability:'AVAILABLE',publicExecutionAllowed:true,subCapabilities:Object.freeze({NATAL:'AVAILABLE',TEMPORAL:'AVAILABLE',MONTHLY:'NOT_ACTIVATED',DAILY:'NOT_ACTIVATED',HOURLY:'NOT_ACTIVATED'})}),
+  ZWR:Object.freeze({lensCode:'DOMAIN',internalCapabilityAvailability:'AVAILABLE',publicCapabilityAvailability:'AVAILABLE',publicExecutionAllowed:true,subCapabilities:Object.freeze({NATAL:'AVAILABLE',DYNAMIC_DOMAIN:'AVAILABLE',MONTHLY:'NOT_ACTIVATED',DAILY:'NOT_ACTIVATED',HOURLY:'NOT_ACTIVATED',RELATIONAL:'NOT_ACTIVATED'})}),
+  HDR:Object.freeze({lensCode:'OPERATION',internalCapabilityAvailability:'AVAILABLE',publicCapabilityAvailability:'RESTRICTED_INTERNAL',publicExecutionAllowed:false,subCapabilities:Object.freeze({EXISTING_CALCULATION:'AVAILABLE',OPERATING_PROJECTION:'AVAILABLE',OPERATING_READING:'AVAILABLE',PROFESSIONAL_MANUAL_EXTENSIONS:'AVAILABLE_WITH_MANUAL_INPUT',RESTRICTED_EXTENSION_AUTOMATIC_CALCULATION:'NOT_ALLOWED',PUBLIC_SELF_SERVICE:'RESTRICTED_INTERNAL',RELATIONAL:'NOT_ACTIVATED',TRANSIT:'NOT_ACTIVATED'})}),
+  NUM:Object.freeze({lensCode:'RHYTHM',internalCapabilityAvailability:'AVAILABLE',publicCapabilityAvailability:'AVAILABLE',publicExecutionAllowed:true,subCapabilities:Object.freeze({})})
+});
