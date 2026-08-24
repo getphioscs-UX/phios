@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-ASK2-PUBLIC-DOMAIN-ORDER-v1.0.0",
+  "work": "ASK2-W7",
+  "order": [
+    "HEALTH_SAFETY_AND_HEALTH_K1",
+    "CURRENT_AUTHORITY_CWA",
+    "CURRENT_CONTEXT_CCR",
+    "RELATIONAL_RUNTIME",
+    "LENS_ROUTER_RUNTIME",
+    "EVERGREEN_CKA"
+  ],
+  "rules": {
+    "healthCannotBeOverriddenBySymbolicLens": true,
+    "healthK1TermsMayPromoteToHealthDomainWithoutMedicalCausality": true,
+    "evergreenKnowledgeMustNotBeForcedIntoLens": true,
+    "currentFactMustNotUseModelMemory": true
+  },
+  "canonicalRegression": {
+    "question": "为什么我的手会起红疹",
+    "expectedDomain": "HEALTH",
+    "forbiddenFallback": "CKA_NEEDS_CONTEXT_AS_PRIMARY_ROUTE"
+  }
+}
