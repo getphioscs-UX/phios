@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-STAGE15-REALITY-ORCHESTRATION-SOURCE-ADAPTER-REGISTRY-v1.0.0",
+  "adapters": [
+    {
+      "sourceType": "ASK",
+      "authority": "ASK2/CKA",
+      "allowedLanes": [
+        "USER_QUESTION",
+        "USER_REPORTED_CONTEXT",
+        "GOVERNED_EXTERNAL_EVIDENCE",
+        "UNKNOWN"
+      ],
+      "forbiddenPromotion": [
+        "ANSWER_AS_FACT",
+        "MODEL_INFERENCE_AS_EVIDENCE"
+      ]
+    },
+    {
+      "sourceType": "SEARCH",
+      "authority": "KNR/PUBLIC_KNOWLEDGE",
+      "allowedLanes": [
+        "GOVERNED_KNOWLEDGE_REFERENCE",
+        "UNKNOWN"
+      ],
+      "forbiddenPromotion": [
+        "SEARCH_RESULT_AS_REALITY_FACT",
+        "SEARCH_RANK_AS_AUTHORITY"
+      ]
+    },
+    {
+      "sourceType": "PERSONAL_RUNTIME",
+      "authority": "MCD/MPA",
+      "allowedLanes": [
+        "GOVERNED_PERSPECTIVE_REFERENCE",
+        "UNKNOWN"
+      ],
+      "forbiddenPromotion": [
+        "METHOD_PROJECTION_AS_REALITY_FACT",
+        "CROSS_METHOD_SYNTHESIS"
+      ]
+    },
+    {
+      "sourceType": "FINANCIAL_REALITY",
+      "authority": "FDR/FCR/FAR",
+      "allowedLanes": [
+        "USER_REPORTED_FINANCIAL_STATE",
+        "DETERMINISTIC_CALCULATION",
+        "BOUNDED_FINDING",
+        "UNKNOWN"
+      ],
+      "forbiddenPromotion": [
+        "CALCULATION_AS_PROFESSIONAL_JUDGMENT",
+        "FINDING_AS_RECOMMENDATION"
+      ]
+    }
+  ]
+}

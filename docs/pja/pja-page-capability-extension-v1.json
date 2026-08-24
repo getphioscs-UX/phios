@@ -3,7 +3,7 @@
   "extensionCode": "PJA-PAGE-CAPABILITY-EXTENSION-001",
   "status": "active",
   "extendsFreezeId": "PJA-W0-v1.0.0-Frozen",
-  "reason": "Register post-freeze Public Knowledge Search, Academy Lesson presentation, Personal Runtime setup, MIR-8 Guided Reading successor and HRX Health Reality candidate pages without mutating the frozen PJA-W0 contract.",
+  "reason": "Register post-freeze Public Knowledge Search, question-led Ask orchestration, Academy Lesson presentation, Personal Runtime setup, MIR-8 Guided Reading successor and HRX Health Reality candidate pages without mutating the frozen PJA-W0 contract.",
   "pageCapabilities": [
     {
       "capabilityId": "knowledge-discovery",
@@ -17,6 +17,23 @@
         "Knowledge Runtime Public Projection + PJA Public Architecture"
       ],
       "activationState": "production_projection",
+      "writeAuthority": "none"
+    },
+    {
+      "capabilityId": "question-led-ask-orchestration",
+      "pages": [
+        "ask.html"
+      ],
+      "sourceObjects": [
+        "Question Route",
+        "Governed Runtime Projection",
+        "Bounded Answer Composition",
+        "Ephemeral Current Context"
+      ],
+      "dependencyOwners": [
+        "ASK2 + CKA + KAP + Core Runtime + UX Lens Public Presentation"
+      ],
+      "activationState": "source_accepted_live_browser_pending",
       "writeAuthority": "none"
     },
     {

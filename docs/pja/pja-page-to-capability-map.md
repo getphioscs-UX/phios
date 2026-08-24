@@ -22,6 +22,16 @@ has `writeAuthority: none`.
 | Professional operations projection | `professional-workspace.html`, `professional-reports.html`, `external-reader-intake.html` | Consent; Assignment / Workspace; Queue; Deliverable | inactive/read-only until PWS-I5/I6/I8 read models exist |
 | Policy and consent orientation | `professional-consent-sharing.html`, `professional-data-privacy.html`, `privacy.html`, `ai-disclosure.html`, `terms.html` | Consent; Provider | policy projection; no consent validity or Provider accounting write |
 
+## Post-freeze page extensions
+
+The frozen baseline table above remains historical authority. Additive pages are
+registered in `docs/pja/pja-page-capability-extension-v1.json` and inherit the
+same `writeAuthority: none` boundary.
+
+| PJA capability | Pages | Canonical dependencies | Current activation boundary |
+| --- | --- | --- | --- |
+| Question-led Ask orchestration | `ask.html` | Question Route; Governed Runtime Projection; Bounded Answer Composition; Ephemeral Current Context | ASK2 / CKA / KAP / Core Runtime projection is source-accepted; live-browser acceptance remains pending |
+
 ## Capability rules
 
 | Capability verb | Meaning in PJA | Required owner result |
