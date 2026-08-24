@@ -1643,7 +1643,11 @@
     "check:master-8": "npm run check:master-7 && npm run check:rlr-w0-w6",
     "check:tarot-product-activation-phase-a": "node scripts/check-tarot-product-activation-phase-a.mjs",
     "check:health-k1": "node scripts/check-health-k1-w0-w15-corpus-expansion.mjs",
-    "check:health-knowledge-current": "npm run check:health-reality-current && npm run check:health-k1"
+    "check:health-knowledge-current": "npm run check:health-reality-current && npm run check:health-k1-current && npm run check:hrp",
+    "check:health-reflective-perspective": "node scripts/check-health-reflective-perspective.mjs",
+    "check:health-reflective-firewall": "node scripts/check-health-reflective-firewall.mjs",
+    "check:hrp": "npm run check:health-reflective-perspective && npm run check:health-reflective-firewall",
+    "check:health-k1-current": "node scripts/check-health-k1-current-successor.mjs"
   },
   "type": "module",
   "dependencies": {

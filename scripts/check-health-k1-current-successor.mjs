@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
+const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');const j=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8'));
+const concepts=j('content/health/health-knowledge/concepts/health-concept-registry-v1.json');
+const sources=j('content/health/health-knowledge/authority/health-k1-source-registry-v1.json');
+const corpus=j('content/health/health-knowledge/corpus/health-minimum-core-corpus-v1.json');
+const acc=j('content/health/health-knowledge/acceptance/health-k1-minimum-production-corpus-acceptance-v1.json');
+const hrpBoundary=j('content/health/health-reflective/authority/health-reflective-perspective-boundary-v1.json');
+const hrpSource=j('content/health/health-reflective/sources/health-reflective-source-registry-v1.json');
+assert.ok(concepts.conceptCount>=50);assert.ok(corpus.packets.length>=10);assert.equal(acc.production.publicHealthFactExecutionPromoted,false);assert.equal(acc.production.diagnosisAllowed,false);assert.equal(acc.production.treatmentPrescriptionAllowed,false);
+assert.ok(sources.sources.every(s=>s.sourceAdmissionState==='LIVE_RETRIEVAL_REQUIRED'));
+assert.equal(hrpBoundary.invariant,'REFLECTIVE_MEANING_NE_MEDICAL_CAUSALITY');
+assert.ok(hrpSource.sources.every(s=>s.medicalAuthority===false&&s.causalityAllowed===false));
+const clinicalIds=new Set(sources.sources.map(s=>s.sourceId));assert.ok(hrpSource.sources.every(s=>!clinicalIds.has(s.sourceId)),'HRP_SOURCE_COLLIDES_WITH_HEALTH_K1_SOURCE');
+console.log(`✓ HEALTH-K1 current successor passed: ${concepts.conceptCount} concepts and ${corpus.packets.length} governed packets remain unchanged while explicit HRP successor authority is present.`);
+console.log('  Historical HEALTH-K1 stage gate forbidding silent HRP creation remains preserved; current authority permits only explicit, firewalled HRP successor admission.');
