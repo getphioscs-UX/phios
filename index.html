@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/phios-public-v2.css">
+  <link rel="stylesheet" href="/assets/css/client-intent-router.css">
 </head>
 <body data-puxr-nav="" data-px2-surface="HOME">
   <a class="puxr-skip" href="#main">Skip to content</a>
@@ -30,32 +31,24 @@
             <span class="puxr-lang-block puxr-lang-zh">搜索资料、询问 AI、从个人读取看见另一种视角、重建财务现实，或把这些线索带回同一个 My Reality。PHI OS 的价值不是再给你一个答案，而是把分散的答案重新连接。</span>
             <span class="puxr-lang-block puxr-lang-en">Search what exists, ask AI, use personal readings as bounded lenses, reconstruct financial reality, or bring these signals back into one My Reality. PHI OS reconnects fragmented answers instead of adding another disconnected answer.</span>
           </p>
-          <form class="px2-intent" data-px2-intent-form><input name="q" maxlength="500" placeholder="事业、关系、金钱、自己、一个正在发生的问题…" aria-label="What do you want to understand?"><button type="submit">Ask PHI OS →</button></form>
-          <div class="px2-mode-grid">
-            <a class="px2-mode" href="/search/"><strong>Search</strong><span>找资料 / Find</span></a>
-            <a class="px2-mode" href="/knowledge-search"><strong>Ask</strong><span>问问题 / Explain</span></a>
-            <a class="px2-mode" href="/readings/"><strong>Readings</strong><span>个人读取 / Project</span></a>
-            <a class="px2-mode" href="/professional/financial/"><strong>Financial</strong><span>财务现实 / Plan</span></a>
-            <a class="px2-mode" href="/reality/"><strong>My Reality</strong><span>整合 / Navigate</span></a>
-          </div>
-          <div class="puxr-actions">
-            <a class="puxr-btn puxr-btn--primary" href="/readings/"><span class="puxr-lang-zh">探索个人读取</span><span class="puxr-lang-en">Explore Readings</span></a>
-            <a class="puxr-btn" href="/knowledge-search"><span class="puxr-lang-zh">Ask PHI OS</span><span class="puxr-lang-en">Ask PHI OS</span></a>
-            <a class="puxr-btn" href="/services"><span class="puxr-lang-zh">专业服务</span><span class="puxr-lang-en">Professional services</span></a>
+          <div data-cir-root>
+            <form class="px2-intent" data-cir-form><input name="q" data-cir-question maxlength="500" placeholder="事业、关系、金钱、自己、一个正在发生的问题…" aria-label="What are you trying to understand?"><button type="submit">Ask PHI OS →</button></form>
+            <div class="cir-intents" aria-label="Question intent">
+              <button class="cir-intent" type="button" data-cir-intent="CURRENT" aria-pressed="false"><strong>我的当前处境</strong><span>My current situation</span></button>
+              <button class="cir-intent" type="button" data-cir-intent="DECISION" aria-pressed="false"><strong>一个决定</strong><span>A decision</span></button>
+              <button class="cir-intent" type="button" data-cir-intent="RELATIONSHIP" aria-pressed="false"><strong>一段关系</strong><span>A relationship</span></button>
+              <button class="cir-intent" type="button" data-cir-intent="TIME" aria-pressed="false"><strong>我的长期方向</strong><span>My longer-term direction</span></button>
+              <button class="cir-intent" type="button" data-cir-intent="DOMAIN" aria-pressed="false"><strong>某个生活领域</strong><span>A life area</span></button>
+              <button class="cir-intent" type="button" data-cir-intent="STRUCTURE" aria-pressed="false"><strong>我的运行模式</strong><span>My operating pattern</span></button>
+            </div>
+            <p class="cir-method-boundary"><span class="puxr-lang-zh">你不需要先选择 Astrology、BaZi、Zi Wei 或 Numerology。需要 Method 时，由 Lens Router 在 capability gate 后决定。</span><span class="puxr-lang-en">You do not need to choose Astrology, BaZi, Zi Wei or Numerology first. When a method is useful, the Lens Router decides after the capability gate.</span></p>
+            <p class="cir-status" data-cir-status aria-live="polite"></p>
           </div>
         </div>
         <aside class="puxr-hero__card">
-          <h3><span class="puxr-lang-zh">产品结构</span><span class="puxr-lang-en">Product structure</span></h3>
-          <p class="big">
-            <span class="puxr-lang-block puxr-lang-zh">不是一个页面解决一切，而是让不同 surface 回到正确位置。</span>
-            <span class="puxr-lang-block puxr-lang-en">Not one page for everything. Put each surface back in its proper role.</span>
-          </p>
-          <div class="puxr-stack">
-            <div class="puxr-stack__row"><strong>Books</strong><span><span class="puxr-lang-zh">解释 Reality 如何形成、运行、维持、扩展与被导航。</span><span class="puxr-lang-en">Explain how Reality forms, runs, continues, expands and can be navigated.</span></span></div>
-            <div class="puxr-stack__row"><strong>Articles</strong><span><span class="puxr-lang-zh">把书中的节点变成可进入的公开知识入口。</span><span class="puxr-lang-en">Turn the books into accessible public knowledge entry points.</span></span></div>
-            <div class="puxr-stack__row"><strong>Ask</strong><span><span class="puxr-lang-zh">一次处理一个问题，并保留依据、未知与边界。</span><span class="puxr-lang-en">Handle one bounded question at a time while keeping grounding and unknowns visible.</span></span></div>
-            <div class="puxr-stack__row"><strong>Runtime</strong><span><span class="puxr-lang-zh">Personal 与 Financial runtime 属于高价值专业 surface，不应被埋没。</span><span class="puxr-lang-en">Personal and Financial runtime surfaces are high-value entry points and should be visible.</span></span></div>
-          </div>
+          <h3><span class="puxr-lang-zh">从问题开始，不从工具开始</span><span class="puxr-lang-en">Start with the question, not the tool</span></h3>
+          <p class="big"><span class="puxr-lang-block puxr-lang-zh">PHI OS 会先区分当前现实、决定、关系、长期方向、生活领域与运行模式，再决定是否需要知识、Reality context 或某个受治理 Lens。</span><span class="puxr-lang-block puxr-lang-en">PHI OS first distinguishes current reality, decisions, relationships, longer-term direction, life areas and operating patterns, then decides whether knowledge, Reality context or a governed Lens is useful.</span></p>
+          <p class="puxr-micro"><span class="puxr-lang-zh">Reality Journey 是复杂与持续性个案的深层 workflow，不是第一次访问必须进入的大系统。</span><span class="puxr-lang-en">Reality Journey is a deeper workflow for complex or continuing cases—not a mandatory first-visit system.</span></p>
         </aside>
       </div>
     </section>
@@ -94,31 +87,30 @@
       </div>
     </section>
 
-    <section class="puxr-section puxr-section--soft">
+        <section class="puxr-section puxr-section--soft">
       <div class="puxr-wrap">
-        <p class="puxr-eyebrow"><span class="puxr-lang-zh">核心 surface</span><span class="puxr-lang-en">Core surfaces</span></p>
-        <h2 class="puxr-title">
-          <span class="puxr-lang-block puxr-lang-zh">把真正有价值的 runtime 放回前台。</span>
-          <span class="puxr-lang-block puxr-lang-en">Bring the highest-value runtime surfaces back to the front.</span>
-        </h2>
-        <div class="puxr-pillars" style="margin-top:34px">
-          <article class="puxr-pillar"><div class="puxr-pillar__no">01</div><div><h3>Ask PHI OS</h3><p><span class="puxr-lang-zh">只回答一个有边界的问题，保留依据、未知与 handoff，不再抢走整个平台的视觉中心。</span><span class="puxr-lang-en">Answer one bounded question with grounding, unknowns and handoff—without taking over the whole platform.</span></p></div></article>
-          <article class="puxr-pillar"><div class="puxr-pillar__no">02</div><div><h3>Personal Runtime Projection</h3><p><span class="puxr-lang-zh">作为 secondary lens，查看人格、决策、环境与现实经验之间的可能对应，但不把 projection 混成现实证据。</span><span class="puxr-lang-en">Use a bounded interpretive lens to examine possible correspondences without turning projection into evidence.</span></p></div></article>
-          <article class="puxr-pillar"><div class="puxr-pillar__no">03</div><div><h3>Financial Reality Navigation</h3><p><span class="puxr-lang-zh">围绕收入、资产、负债、保障、目标与约束做 dated reconstruction，支持真正可复核的财务判断。</span><span class="puxr-lang-en">Reconstruct income, assets, liabilities, protection, goals and constraints in a dated, reviewable financial reality.</span></p></div></article>
-          <article class="puxr-pillar"><div class="puxr-pillar__no">04</div><div><h3>Reality Journey</h3><p><span class="puxr-lang-zh">Reality Journey 仍然重要，但它应该是后续 deeper case flow，而不是遮住所有其他入口的巨大空白页。</span><span class="puxr-lang-en">Reality Journey still matters, but it should support deeper cases instead of blocking every other important entry point.</span></p></div></article>
+        <p class="puxr-eyebrow"><span class="puxr-lang-zh">七个客户入口</span><span class="puxr-lang-en">Seven client entry points</span></p>
+        <h2 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">前台保持简单，后台继续复杂。</span><span class="puxr-lang-block puxr-lang-en">Keep the client experience simple while the runtime system stays deep.</span></h2>
+        <div class="cir-destinations">
+          <a class="cir-destination" href="/ask"><small>Question</small><div><h3>Ask PHI OS</h3><p><span class="puxr-lang-zh">从一个现实问题开始，由系统判断需要什么。</span><span class="puxr-lang-en">Start with one reality question and let PHI OS determine what is needed.</span></p></div><em>Ask →</em></a>
+          <a class="cir-destination" href="/library"><small>Knowledge</small><div><h3>Explore Knowledge</h3><p><span class="puxr-lang-zh">浏览五册、文章、figure 与已发布知识。</span><span class="puxr-lang-en">Browse the five volumes, articles, figures and published knowledge.</span></p></div><em>Explore →</em></a>
+          <a class="cir-destination" href="/personal-runtime"><small>Personal</small><div><h3>Personal Runtime</h3><p><span class="puxr-lang-zh">一次输入，进入受治理的个人结构与动态视角。</span><span class="puxr-lang-en">Enter once, then explore governed structural and dynamic personal perspectives.</span></p></div><em>Open →</em></a>
+          <a class="cir-destination" href="/financial-reality"><small>Financial</small><div><h3>Financial Reality</h3><p><span class="puxr-lang-zh">从当前财务事实、计算、snapshot 与 finding 开始。</span><span class="puxr-lang-en">Start from current financial facts, calculations, snapshots and bounded findings.</span></p></div><em>Build →</em></a>
+          <a class="cir-destination" href="/my-reality"><small>Reality</small><div><h3>My Reality</h3><p><span class="puxr-lang-zh">把问题、观察、证据与已接受的 perspective 带回当前现实。</span><span class="puxr-lang-en">Bring questions, observations, evidence and accepted perspectives back into current Reality.</span></p></div><em>Continue →</em></a>
+          <a class="cir-destination cir-deep" href="/reality-journey"><small>Continuity</small><div><h3>Reality Journey</h3><p><span class="puxr-lang-zh">只有复杂、长期或需要持续 review 的情况才进入深层 workflow。</span><span class="puxr-lang-en">Use the deeper workflow only for complex, long-running or continuity-heavy situations.</span></p></div><em>Enter deeper →</em></a>
         </div>
-        <div class="puxr-actions"><a class="puxr-btn puxr-btn--dark" href="/professional/personal-runtime/"><span class="puxr-lang-zh">查看 Personal Runtime</span><span class="puxr-lang-en">View Personal Runtime</span></a><a class="puxr-btn puxr-btn--dark" href="/professional/financial/"><span class="puxr-lang-zh">查看 Financial Runtime</span><span class="puxr-lang-en">View Financial Runtime</span></a></div>
+        <div class="cir-learnwork"><a class="puxr-btn" href="/academy"><span class="puxr-lang-zh">学习 PHI OS</span><span class="puxr-lang-en">Learn PHI OS</span></a><a class="puxr-btn" href="/services"><span class="puxr-lang-zh">与 PHI OS 合作</span><span class="puxr-lang-en">Work with PHI OS</span></a></div>
       </div>
     </section>
 
-    <section class="puxr-section">
+<section class="puxr-section">
       <div class="puxr-wrap">
         <p class="puxr-eyebrow"><span class="puxr-lang-zh">已发布文章</span><span class="puxr-lang-en">Published articles</span></p>
         <div class="puxr-split">
           <div>
             <h2 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">辛苦准备的 article 应该被看见，而不是继续藏在后台。</span><span class="puxr-lang-block puxr-lang-en">Published articles should be visible instead of remaining buried behind the interface.</span></h2>
             <p class="puxr-body"><span class="puxr-lang-block puxr-lang-zh">这里直接读取已发布 authority，显示可进入的公开文章入口。它们是五册架构与 Ask PHI OS 之间的重要桥梁。</span><span class="puxr-lang-block puxr-lang-en">This surface reads the published authority directly and exposes public article entry points. They form the bridge between the five-volume architecture and Ask PHI OS.</span></p>
-            <div class="puxr-actions"><a class="puxr-btn" href="/articles"><span class="puxr-lang-zh">浏览文章</span><span class="puxr-lang-en">Browse articles</span></a><a class="puxr-btn" href="/knowledge-search"><span class="puxr-lang-zh">从问题进入</span><span class="puxr-lang-en">Enter through a question</span></a></div>
+            <div class="puxr-actions"><a class="puxr-btn" href="/articles"><span class="puxr-lang-zh">浏览文章</span><span class="puxr-lang-en">Browse articles</span></a><a class="puxr-btn" href="/ask"><span class="puxr-lang-zh">从问题进入</span><span class="puxr-lang-en">Enter through a question</span></a></div>
           </div>
           <div class="puxr-callout"><span class="puxr-lang-block puxr-lang-zh">Published Article 不是 generic content dump，而是 PHI OS knowledge architecture 的公开投影。</span><span class="puxr-lang-block puxr-lang-en">A published article is not a generic content dump. It is a public projection of the PHI OS knowledge architecture.</span></div>
         </div>
@@ -142,5 +134,6 @@
   <script type="module" src="/assets/js/public-shell-v2.js"></script>
   <script type="module" src="/assets/js/components/publications-v2.js"></script>
   <script type="module" src="/assets/js/pages/home-v2.js"></script>
+  <script type="module" src="/assets/js/pages/client-intent-router.js"></script>
 </body>
 </html>

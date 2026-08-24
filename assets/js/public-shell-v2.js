@@ -1,18 +1,23 @@
 const STORAGE_KEY = 'phios-puxr-locale';
 const LEGACY_LOCALE_STORAGE_KEY = 'phiOSLocale';
 const NAV = [
-  { id: 'ask', href: '/knowledge-search', zh: 'Ask PHI OS', en: 'Ask' },
-  { id: 'search', href: '/search/', zh: '搜索', en: 'Search' },
-  { id: 'readings', href: '/readings/', zh: '个人读取', en: 'Readings' },
-  { id: 'financial', href: '/professional/financial/', zh: '财务现实', en: 'Financial' },
-  { id: 'reality', href: '/reality/', zh: '我的现实', en: 'Reality' },
-  { id: 'library', href: '/library', zh: '五册与文章', en: 'Books & Articles' }
+  { id: 'ask', href: '/ask', zh: 'Ask PHI OS', en: 'Ask PHI OS' },
+  { id: 'knowledge', href: '/library', zh: '探索知识', en: 'Knowledge' },
+  { id: 'personal', href: '/personal-runtime', zh: '个人运行', en: 'Personal' },
+  { id: 'financial', href: '/financial-reality', zh: '财务现实', en: 'Financial' },
+  { id: 'reality', href: '/my-reality', zh: '我的现实', en: 'My Reality' },
+  { id: 'journey', href: '/reality-journey', zh: 'Reality Journey', en: 'Journey' }
 ];
 const FOOTER = [
   { href: '/books/', zh: '五册系统', en: 'Five volumes' },
   { href: '/articles', zh: '文章', en: 'Articles' },
   { href: '/library', zh: '知识入口', en: 'Knowledge entry' },
-  { href: '/knowledge-search', zh: 'Ask PHI OS', en: 'Ask PHI OS' },
+  { href: '/ask', zh: 'Ask PHI OS', en: 'Ask PHI OS' },
+  { href: '/personal-runtime', zh: '个人运行', en: 'Personal Runtime' },
+  { href: '/financial-reality', zh: '财务现实', en: 'Financial Reality' },
+  { href: '/my-reality', zh: '我的现实', en: 'My Reality' },
+  { href: '/reality-journey', zh: 'Reality Journey', en: 'Reality Journey' },
+  { href: '/academy', zh: '学习 PHI OS', en: 'Learn PHI OS' },
   { href: '/services', zh: '专业服务', en: 'Professional services' },
   { href: '/professional-boundary', zh: '专业边界', en: 'Professional boundary' },
   { href: '/about', zh: '关于', en: 'About' },

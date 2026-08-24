@@ -1479,7 +1479,7 @@
     "check:asta-w11-w24": "node scripts/check-asta-w11-w24.mjs",
     "check:ast-production": "npm run check:ast-production-scope && npm run check:asta-w11-w24",
     "check:fma-e": "npm run check:ast-production && npm run check:rrp-method-availability-current && npm run check:runtime-frontend-parity",
-    "check:px2": "node scripts/check-px2-w0-w13-public-experience-v2.mjs",
+    "check:px2": "node scripts/check-px2-stage16-successor.mjs",
     "check:runtime-frontend-parity-v5": "node scripts/check-runtime-frontend-parity-v5.mjs",
     "check:no-fake-method-availability": "node scripts/check-no-fake-method-availability.mjs",
     "check:fma-w4-w16": "node scripts/check-fma-w4-w16.mjs",
@@ -1688,7 +1688,12 @@
     "check:cx-no-legacy-selectors": "node scripts/check-cx-no-legacy-selectors.mjs",
     "check:cx-no-old-component-copy": "node scripts/check-cx-no-old-component-copy.mjs",
     "check:cx-r1-quarantine": "node scripts/check-cx-r1-quarantine.mjs",
-    "check:cx-r1": "npm run check:cx-r0 && npm run check:cx-r1-quarantine && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy"
+    "check:cx-r1": "npm run check:cx-r0 && npm run check:cx-r1-quarantine && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy",
+    "check:client-intent-router": "node scripts/check-stage16-client-intent-router.mjs",
+    "check:stage16": "npm run check:client-intent-router && npm run check:px2",
+    "check:stage16-browser-live": "node scripts/check-stage16-public-browser-live.mjs",
+    "check:public-client-experience-current": "npm run check:stage16 && npm run check:financial-runtime-product && npm run check:wpr-personal-runtime && npm run check:ask2-w0-w3 && npm run check:current-context && npm run check:relational-runtime",
+    "check:px2-historical": "node scripts/check-px2-w0-w13-public-experience-v2.mjs"
   },
   "type": "module",
   "dependencies": {

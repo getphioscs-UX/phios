@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';
+const root=process.cwd(),read=p=>fs.readFileSync(path.join(root,p),'utf8'),json=p=>JSON.parse(read(p));
+const predecessor=json('content/web-production/px2/freeze/px2-w1-public-ia-freeze-v1.json');assert.equal(predecessor.status,'FROZEN');assert.deepEqual(predecessor.primaryJourney,['SEARCH','ASK','READ','FINANCIAL','MY_REALITY']);
+const successor=json('content/web-production/px2/successors/px2-stage16-public-ia-successor-v2.json');assert.equal(successor.status,'ACTIVE_STAGE16_CLIENT_INTENT_SUCCESSOR');assert.equal(successor.predecessorMutated,false);assert.deepEqual(successor.currentPublicSurfaces,['ASK','KNOWLEDGE','PERSONAL','FINANCIAL','MY_REALITY','JOURNEY','LEARN_WORK']);
+const pointer=json('content/web-production/registries/current-client-visual-registry.json');assert.match(pointer.currentRegistryPath,/client-visual-asset-registry-v1\.[0-9]+\.json$/);const visual=read('assets/js/public-v2/unified-public-visual-resolver.js');assert.match(visual,/current-client-visual-registry\.json/);
+const zero=json('content/web-production/px2/deletion/px2-w12-zero-consumer-legacy-audit-v1.json');assert.equal(zero.status,'PASS');const del=json('content/web-production/px2/deletion/px2-w13-physical-deletion-v1.json');for(const p of del.deleted)assert.equal(fs.existsSync(path.join(root,p)),false);
+const home=read('index.html');assert.match(home,/data-cir-root/);assert.equal((home.match(/data-cir-intent=/g)||[]).length,6);assert.ok(!home.includes('class="px2-mode-grid"'));
+const shell=read('assets/js/public-shell-v2.js');for(const href of ['/ask','/library','/personal-runtime','/financial-reality','/my-reality','/reality-journey','/account'])assert.ok(shell.includes(href),`current shell route ${href}`);
+for(const old of ["href: '/readings/'","href: '/professional/financial/'","href: '/knowledge-search'"])assert.ok(!shell.includes(old),`old primary shell route retained ${old}`);
+assert.match(read('search/index.html'),/data-px2-search-results/);assert.match(read('assets/js/pages/search-v2.js'),/public\/retrieval\/publications\.json/);assert.match(read('knowledge-search.html'),/knowledge-search-b\.js/);
+const methods=json('content/web-production/px2/registries/public-method-catalog-v1.json');assert.ok(methods.methods.every(x=>x.runAllowed===false));
+console.log('✓ PX2 → STAGE16 public IA successor passed.');
+console.log('  Frozen PX2 product-mode IA remains historical evidence; current public IA is question-led and method-hidden.');
