@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-GUEST-PERSISTENCE-CONTRACT-v1.0.0",
+  "phase": "TPA-H",
+  "work": "TPA-W32",
+  "baselineCommit": "306b84652102583690a7f7665167f8dfdbb82541",
+  "status": "ACTIVE_NO_HIDDEN_GUEST_PERSISTENCE",
+  "methodCode": "TAROT",
+  "guestCan": ["RUN_WHEN_PRODUCT_GATE_OPENS", "VIEW_CURRENT_RESULT"],
+  "guestCannot": ["SAVE_READING", "LOAD_HISTORY", "PERSIST_NOTES", "SILENTLY_LINK_REALITY"],
+  "rules": {
+    "hiddenPersistentReadingHistory": false,
+    "localBrowserReadingHistory": false,
+    "automaticQuestionRetention": false,
+    "automaticNotesRetention": false,
+    "localStorageReadingPersistenceAllowed": false,
+    "sessionStorageReadingPersistenceAllowed": false,
+    "guestIdentityFabricationAllowed": false
+  }
+}
