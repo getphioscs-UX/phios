@@ -1611,7 +1611,12 @@
     "check:zwd-w7": "npm run check:zwd-w0-w9",
     "check:zwd-w8": "npm run check:zwd-w0-w9",
     "check:zwd-w9": "npm run check:zwd-w0-w9",
-    "check:master-4": "npm run check:master-3 && npm run check:zwd-w0-w9"
+    "check:master-4": "npm run check:master-3 && npm run check:zwd-w0-w9",
+    "check:hdr-public-brand-leak": "node scripts/check-hdr-public-brand-leak.mjs",
+    "check:hdr-no-restricted-auto-calculation": "node scripts/check-hdr-no-restricted-auto-calculation.mjs",
+    "check:hdr2-w0-w12": "node scripts/check-hdr2-w0-w12-internal-operating-lens.mjs && npm run check:hdr-public-brand-leak && npm run check:hdr-no-restricted-auto-calculation",
+    "check:hdr2-internal-operating-lens": "npm run check:hdr2-w0-w12",
+    "check:master-5": "npm run check:master-4 && npm run check:hdr2-w0-w12"
   },
   "type": "module",
   "dependencies": {
