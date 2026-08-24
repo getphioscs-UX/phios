@@ -1675,9 +1675,8 @@
     "check:tarot-visual": "node scripts/check-tarot-visual.mjs",
     "check:tarot-source-bound-corpus": "node scripts/check-tarot-source-bound-corpus.mjs",
     "check:tarot-product-activation-phase-d": "npm run check:tarot-visual && npm run check:tarot-source-bound-corpus",
-    "check:ux-lens": "node scripts/check-ux-lens-w0-w14.mjs",
-    "check:ux-lens-frontend-parity": "npm run check:ux-lens && npm run check:ask2-w0-w3 && npm run check:health-knowledge-current && npm run check:lens-router",
-    "check:ux-lens-browser-live": "node scripts/check-ux-lens-browser-live.mjs"
+    "check:tarot-corpus": "node scripts/check-tarot-corpus.mjs",
+    "check:tarot-product-activation-phase-e": "npm run check:tarot-product-activation-phase-d && npm run check:tarot-corpus"
   },
   "type": "module",
   "dependencies": {
