@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "PHI-OS-HRX-EVIDENCE-REGISTRY-v1.0.0",
+  "levels": [
+    {"code":"E0_USER_FEELING","rank":0,"authority":"SUBJECTIVE_CONTEXT"},
+    {"code":"E1_USER_OBSERVED_SYMPTOM","rank":1,"authority":"USER_REPORTED_OBSERVATION"},
+    {"code":"E2_HOME_MEASUREMENT","rank":2,"authority":"USER_MEASURED"},
+    {"code":"E3_DEVICE_MEASUREMENT","rank":3,"authority":"DEVICE_RECORDED"},
+    {"code":"E4_LAB_OR_IMAGING_RESULT","rank":4,"authority":"DOCUMENTED_CLINICAL_EVIDENCE"},
+    {"code":"E5_CLINICIAN_FINDING","rank":5,"authority":"CLINICIAN_REPORTED_FINDING"},
+    {"code":"E6_CONFIRMED_DIAGNOSIS","rank":6,"authority":"CLINICIAN_CONFIRMED_DIAGNOSIS"}
+  ],
+  "rules": [
+    "INFERENCE_MUST_NOT_BE_RELABELED_AS_MEASUREMENT",
+    "USER_SUSPICION_MUST_NOT_BE_RELABELED_AS_DIAGNOSIS",
+    "EVIDENCE_RANK_DOES_NOT_MEAN_AUTOMATIC_CAUSALITY"
+  ]
+}

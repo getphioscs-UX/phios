@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-HRX-AUTHORITY-v1.0.0",
+  "runtimeCode": "HRX",
+  "title": "Health Reality Runtime Authority Boundary",
+  "status": "FOUNDATION_VALIDATION_ONLY",
+  "purpose": "Organize health reality, evidence, uncertainty, care-navigation context and continuity without establishing diagnosis or treatment authority.",
+  "allowed": [
+    "EXPLAIN_HEALTH_INFORMATION_FROM_APPROVED_AUTHORITY",
+    "STRUCTURE_USER_REPORTED_OBSERVATIONS",
+    "ORGANIZE_SYMPTOM_TIMELINES",
+    "NORMALIZE_USER_SUPPLIED_MEASUREMENTS_AND_DOCUMENT_FACTS",
+    "SURFACE_UNKNOWNS_AND_CONTRADICTIONS",
+    "ROUTE_TO_APPROPRIATE_CARE_URGENCY_CLASS",
+    "PREPARE_CLINICIAN_QUESTIONS_AND_HANDOFF_SUMMARY",
+    "COMPARE_HEALTH_REALITY_VERSIONS"
+  ],
+  "forbidden": [
+    "ESTABLISH_DIAGNOSIS_AS_FACT",
+    "RULE_OUT_SERIOUS_DISEASE",
+    "PRESCRIBE_TREATMENT",
+    "START_STOP_OR_CHANGE_MEDICATION",
+    "REPLACE_CLINICIAN_EXAMINATION",
+    "INFER_DISEASE_FROM_SYMBOLIC_METHOD",
+    "PREDICT_ILLNESS_FROM_SYMBOLIC_METHOD",
+    "ESTIMATE_LIFESPAN_FROM_SYMBOLIC_METHOD",
+    "OVERRIDE_MEDICAL_EVIDENCE_WITH_INTERPRETIVE_OUTPUT"
+  ],
+  "authoritySeparation": {
+    "phiosKnowledge": "REALITY_CONCEPTS_ONLY",
+    "healthFacts": "APPROVED_EXTERNAL_HEALTH_AUTHORITY_REQUIRED",
+    "professionalJudgment": "LICENSED_CLINICIAN_ONLY",
+    "symbolicMethods": "NO_HEALTH_FACT_AUTHORITY"
+  },
+  "activation": {
+    "runtimeImplemented": true,
+    "publicExecutionAllowed": false,
+    "professionalExecutionAllowed": false,
+    "liveHealthAuthorityConnected": false,
+    "productionAccepted": false
+  }
+}
