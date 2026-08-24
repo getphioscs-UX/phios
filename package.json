@@ -1721,7 +1721,14 @@
     "check:professional-workspace-current": "npm run check:professional-workspace && npm run check:stage17",
     "check:tarot-machine-campaign": "node scripts/check-tarot-machine-campaign.mjs",
     "check:tarot-machine-acceptance": "npm run check:tarot-machine-campaign",
-    "check:tarot-product-activation-phase-i": "npm run check:tarot-product-activation-phase-g && npm run check:tarot-machine-campaign"
+    "check:tarot-product-activation-phase-i": "npm run check:tarot-product-activation-phase-g && npm run check:tarot-machine-campaign",
+    "check:tarot-persistence-reconciliation": "npm run check:tarot-persistence-current",
+    "check:tarot-product-activation-phase-hr": "npm run check:tarot-product-activation-phase-h && npm run check:tarot-machine-campaign",
+    "check:tarot-product-activation-prehuman": "npm run check:tarot-product-activation-phase-i",
+    "check:tarot-human-review-readiness": "node scripts/check-tarot-human-review-readiness.mjs",
+    "check:tarot-human-acceptance": "node scripts/check-tarot-human-acceptance.mjs",
+    "check:tarot-product-activation-phase-j-readiness": "npm run check:tarot-product-activation-prehuman && npm run check:tarot-human-review-readiness",
+    "check:tarot-product-activation-phase-j": "npm run check:tarot-product-activation-prehuman && npm run check:tarot-human-acceptance"
   },
   "type": "module",
   "dependencies": {

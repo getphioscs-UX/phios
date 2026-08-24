@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-HUMAN-REVIEW-CURRENT-SUCCESSOR-v2.0.0",
+  "phase": "TPA-J",
+  "work": "TPA-W39-W42",
+  "baselineCommit": "40cb9e71450ebb817998cde8222225cd941c0aa0",
+  "status": "W39_W41_READY_MACHINE_PREFLIGHT_24_OF_24_W42_HUMAN_SIGNOFF_PENDING",
+  "predecessor": {
+    "path": "content/production/symbolic-method/human-review/tarot-human-review-campaign-v1.json",
+    "sha256": "b42d0de981841a8113ceb6fc004c6740df00d0051b7dd7a7dd34278480c4badc",
+    "preserved": true
+  },
+  "artifacts": {
+    "campaignV2": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-campaign-v2.json",
+      "sha256": "ea06ac2dc239b7710bc6db8658ec24fdc66842ac8becef6b5774997316e1bf96"
+    },
+    "rubricV2": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-rubric-v2.json",
+      "sha256": "cea84eb374b3885da361485ec630e77b0dd96a56362460718ac9b25cc56dcefd"
+    },
+    "resultsV2": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-results-v2.json",
+      "sha256": "7182b708b5f8166948acd373578eb6d9eeb8fa4448937da06a6f97ba4a0095fe"
+    },
+    "preflightV1": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-preflight-v1.json",
+      "sha256": "bfffbac13715121da99335443855c9b95b37215438849463acbdd20fea1d9985"
+    },
+    "reviewPacketV2": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-packet-v2.md",
+      "sha256": "1cb741a649031798e8bbbd0b3ed98cef06016e92ce23bd77d3a45ece447058e1"
+    }
+  },
+  "campaign": {
+    "planned": 24,
+    "normal": 8,
+    "sensitive": 8,
+    "adversarial": 8,
+    "oneCard": 12,
+    "threeCard": 12,
+    "machinePreflightPassed": 24
+  },
+  "humanState": {
+    "humanReviewed": 0,
+    "accepted": 0,
+    "requiredAccepted": 24,
+    "criticalBoundaryFailures": 0,
+    "humanAcceptanceComplete": false
+  },
+  "rules": {
+    "machinePreflightMayCountAsHumanReview": false,
+    "modelMaySetHumanReviewed": false,
+    "reviewerMustBeHuman": true,
+    "all24Required": true,
+    "zeroCriticalBoundaryFailuresRequired": true,
+    "failedCaseMustBeFixedAndRerun": true
+  },
+  "productionBoundary": {
+    "liveBrowserAcceptanceClaimed": false,
+    "liveProductionShaAlignmentClaimed": false,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowed": false
+  },
+  "nextAction": "HUMAN_REVIEW_THE_24_CASE_PACKET_AND_RECORD_SIGNOFF_BEFORE_W42_CAN_FREEZE"
+}
