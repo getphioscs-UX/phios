@@ -1683,8 +1683,12 @@
     "check:tarot-tari-successor": "node scripts/check-tarot-tari-successor.mjs",
     "check:tarot-product-activation-phase-f": "npm run check:tarot-product-activation-phase-e && npm run check:tarot-tari-successor",
     "check:tarot-product-surface": "node scripts/check-tarot-product-surface.mjs",
-    "check:tarot-product-activation-phase-g": "npm run check:tarot-product-activation-phase-f && npm run check:tarot-product-surface"
-
+    "check:tarot-product-activation-phase-g": "npm run check:tarot-product-activation-phase-f && npm run check:tarot-product-surface",
+    "check:cx-no-legacy-css": "node scripts/check-cx-no-legacy-css.mjs",
+    "check:cx-no-legacy-selectors": "node scripts/check-cx-no-legacy-selectors.mjs",
+    "check:cx-no-old-component-copy": "node scripts/check-cx-no-old-component-copy.mjs",
+    "check:cx-r1-quarantine": "node scripts/check-cx-r1-quarantine.mjs",
+    "check:cx-r1": "npm run check:cx-r0 && npm run check:cx-r1-quarantine && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy"
   },
   "type": "module",
   "dependencies": {

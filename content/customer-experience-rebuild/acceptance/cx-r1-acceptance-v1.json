@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-CX-R1-ACCEPTANCE-v1.0.0",
+  "work": "CX-R1-ACCEPTANCE",
+  "status": "READY_FOR_CHECKER",
+  "predecessorR0BaselineCommit": "60411a80e0247a99f26d6321ea6a4f6305042b5f",
+  "quarantineCaptureCommit": "306b84652102583690a7f7665167f8dfdbb82541",
+  "recordedAt": "2026-08-24T13:05:00Z",
+  "requiredExitStates": [
+    "LEGACY_PRESENTATION_QUARANTINED",
+    "NEW_CUSTOMER_SURFACES_CLEAN_ROOM_READY"
+  ],
+  "evidence": [
+    "content/customer-experience-rebuild/legacy/legacy-customer-presentation-registry-v2.json",
+    "content/customer-experience-rebuild/legacy/legacy-css-freeze-v1.json",
+    "content/customer-experience-rebuild/legacy/legacy-component-signature-registry-v1.json",
+    "scripts/check-cx-no-legacy-css.mjs",
+    "scripts/check-cx-no-legacy-selectors.mjs",
+    "scripts/check-cx-no-old-component-copy.mjs",
+    "scripts/check-cx-r1-quarantine.mjs"
+  ],
+  "rules": {
+    "physicalDeletePerformed": false,
+    "legacyProductionMayContinueTemporarily": true,
+    "newCxImportsLegacyPresentation": false,
+    "backendAuthorityTouched": false
+  }
+}
