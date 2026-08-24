@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/assets/css/design/typography.css">
   <link rel="stylesheet" href="/assets/css/design/components.css">
   <link rel="stylesheet" href="/assets/css/professional-workspace.css">
+  <link rel="stylesheet" href="/assets/css/professional-lens-workspace.css">
   <link rel="stylesheet" href="/assets/css/i18n.css">
   <link rel="stylesheet" href="/assets/css/pds-w9-knowledge-professional.css">
   <link rel="stylesheet" href="/assets/css/runtime-spine.css">
@@ -61,6 +62,8 @@
     <nav class="professional-workspace-tabs" data-i18n-aria-label="professionalWorkspace.viewsAria" aria-label="Professional Workspace views">
       <button type="button" data-professional-view="clients" aria-pressed="true" data-i18n="professionalWorkspace.clientList">Client List</button>
       <button type="button" data-professional-view="runtime" aria-pressed="false" data-i18n="professionalWorkspace.runtimeView">Runtime View</button>
+      <button type="button" data-professional-view="lenses" aria-pressed="false">Professional Lenses</button>
+      <button type="button" data-professional-view="manual-extensions" aria-pressed="false">Manual Extensions</button>
       <button type="button" data-professional-view="human-design" aria-pressed="false" data-i18n="professionalWorkspace.humanDesignView">Personal Runtime Projection</button>
       <button type="button" data-professional-view="financial" aria-pressed="false" data-i18n="professionalWorkspace.financialReality">Financial Reality</button>
       <button type="button" data-professional-view="notes" aria-pressed="false" data-i18n="professionalWorkspace.notes">Professional Notes</button>
@@ -96,6 +99,28 @@
     </section>
     <section class="professional-workspace-panel" data-professional-panel="runtime" hidden>
       <div id="professionalRuntimeView"></div>
+    </section>
+    <section class="professional-workspace-panel" data-professional-panel="lenses" hidden>
+      <header class="professional-reader-heading"><div><p>Stage 17</p><h2>Professional Lens Workspace</h2></div><strong>GOVERNED RESULTS ONLY</strong></header>
+      <p class="professional-contract-boundary">AST, BaZi, Zi Wei, Numerology and the Internal Operating Lens remain separate authorities. This workspace does not recalculate them.</p>
+      <div id="professionalLensWorkspace"></div>
+    </section>
+    <section class="professional-workspace-panel" data-professional-panel="manual-extensions" hidden>
+      <header class="professional-reader-heading"><div><p>Professional Manual Extensions</p><h2>PHS · DreamRave · Variables</h2></div><strong>MANUAL PROFESSIONAL INPUT</strong></header>
+      <p class="professional-contract-boundary">Manual extensions are professional-declared context only. They are not PHI OS calculations, Reality evidence or client facts.</p>
+      <form class="pro-manual-form" data-stage17-manual-form>
+        <div class="pro-manual-form-grid">
+          <label>Extension<select name="extensionCode" required><option value="PHS">PHS</option><option value="DREAM_RAVE">DreamRave</option><option value="VARIABLES">Variables</option></select></label>
+          <label>enteredBy<input name="enteredBy" required autocomplete="off"></label>
+          <label>sourceRef<input name="sourceRef" required autocomplete="off" placeholder="chart / consultation / source reference"></label>
+          <label>professionalScope<input name="professionalScope" required autocomplete="off" placeholder="declared professional scope"></label>
+        </div>
+        <label>value<textarea name="value" required></textarea></label>
+        <input type="hidden" name="sourceType" value="PROFESSIONAL_MANUAL_INPUT">
+        <button type="submit">Add manual professional context</button>
+        <p aria-live="polite" data-stage17-manual-status></p>
+      </form>
+      <section data-stage17-manual-drafts></section>
     </section>
     <section class="professional-workspace-panel" data-professional-panel="human-design" hidden>
       <div id="professionalHumanDesign"></div>
@@ -163,6 +188,7 @@
     </footer>
   </main>
   <script type="module" src="/assets/js/pages/professional-workspace.js"></script>
+  <script type="module" src="/assets/js/pages/professional-lens-workspace.js"></script>
   <script type="module" src="/assets/js/pages/runtime-spine-visuals.js"></script>
 </body>
 </html>

@@ -1708,7 +1708,10 @@
     "check:cx-r3": "npm run check:cx-r2 && node scripts/check-cx-r3-customer-design-system.mjs && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy",
     "check:cx-r4": "npm run check:cx-r3 && node scripts/check-cx-r4-visual-assets.mjs",
     "check:cx-r5": "npm run check:cx-r4 && node scripts/check-cx-r5-global-shell.mjs",
-    "check:cx-foundation": "npm run check:cx-r5"
+    "check:cx-foundation": "npm run check:cx-r5",
+    "check:stage17": "node scripts/check-stage17-professional-lens-workspace.mjs",
+    "check:professional-lens-workspace": "npm run check:stage17",
+    "check:professional-workspace-current": "npm run check:professional-workspace && npm run check:stage17"
   },
   "type": "module",
   "dependencies": {
