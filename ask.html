@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ask PHI OS through a question-led Reality Lens experience.">
+  <title>Ask PHI OS</title>
+  <link rel="canonical" href="/ask">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/phios-public-v2.css">
+  <link rel="stylesheet" href="/assets/css/ux-lens.css">
+</head>
+<body class="puxr-page--soft" data-puxr-nav="ask" data-uxl-root>
+  <a class="puxr-skip" href="#main">Skip to content</a>
+  <div data-puxr-header></div>
+  <main id="main" class="uxl-shell">
+    <div class="uxl-wrap">
+      <header class="uxl-intro">
+        <p class="uxl-eyebrow"><span class="puxr-lang-zh">Ask PHI OS</span><span class="puxr-lang-en">Ask PHI OS</span></p>
+        <h1><span class="puxr-lang-zh">你正在试图理解什么？</span><span class="puxr-lang-en">What are you trying to understand?</span></h1>
+        <p><span class="puxr-lang-block puxr-lang-zh">从现实问题开始。PHI OS 会先判断问题属于健康、当前事实、关系、知识，还是适合某个 Reality Lens；不会要求你先学会 Method taxonomy。</span><span class="puxr-lang-block puxr-lang-en">Start with the reality question. PHI OS first decides whether it belongs to health, current facts, relationships, knowledge, or a Reality Lens—you do not need to learn the method taxonomy first.</span></p>
+      </header>
+
+      <section class="uxl-workspace" aria-labelledby="uxl-question-label">
+        <form data-uxl-form>
+          <div class="uxl-question">
+            <label id="uxl-question-label" for="uxl-question"><span class="puxr-lang-zh">你的问题</span><span class="puxr-lang-en">Your question</span></label>
+            <textarea id="uxl-question" name="question" maxlength="500" required data-uxl-question placeholder="例如：为什么我最近越来越想换工作？"></textarea>
+          </div>
+          <p class="uxl-hint-title"><span class="puxr-lang-zh">如果有帮助，可以先选你主要想理解的方向：</span><span class="puxr-lang-en">If helpful, choose what you are mainly trying to understand:</span></p>
+          <div class="uxl-intents" data-uxl-intents>
+            <button class="uxl-chip" type="button" data-taxonomy-hint="CURRENT"><span class="puxr-lang-zh">我的当前处境</span><span class="puxr-lang-en">My current situation</span></button>
+            <button class="uxl-chip" type="button" data-taxonomy-hint="DECISION"><span class="puxr-lang-zh">一个决定</span><span class="puxr-lang-en">A decision</span></button>
+            <button class="uxl-chip" type="button" data-taxonomy-hint="RELATIONSHIP"><span class="puxr-lang-zh">一段关系</span><span class="puxr-lang-en">A relationship</span></button>
+            <button class="uxl-chip" type="button" data-taxonomy-hint="TIME"><span class="puxr-lang-zh">我的长期方向</span><span class="puxr-lang-en">My longer-term direction</span></button>
+            <button class="uxl-chip" type="button" data-taxonomy-hint="DOMAIN"><span class="puxr-lang-zh">某个生活领域</span><span class="puxr-lang-en">A life area</span></button>
+            <button class="uxl-chip" type="button" data-taxonomy-hint="STRUCTURE"><span class="puxr-lang-zh">我的运行模式</span><span class="puxr-lang-en">My operating pattern</span></button>
+          </div>
+          <div class="uxl-actions"><button class="uxl-primary" type="submit"><span class="puxr-lang-zh">继续理解</span><span class="puxr-lang-en">Continue</span></button></div>
+          <p class="uxl-status" role="status" aria-live="polite" data-uxl-status></p>
+        </form>
+
+        <section class="uxl-context-panel" data-uxl-context-panel hidden>
+          <p class="uxl-eyebrow"><span class="puxr-lang-zh">当前现实</span><span class="puxr-lang-en">Current reality</span></p>
+          <h3><span class="puxr-lang-zh">这里需要一点现实上下文</span><span class="puxr-lang-en">A little current context matters here</span></h3>
+          <p data-uxl-context-lead></p>
+          <form data-uxl-context-form>
+            <div class="uxl-context-grid">
+              <label><span class="puxr-lang-zh">现在正在发生什么？</span><span class="puxr-lang-en">What is happening now?</span><textarea name="whatIsHappening"></textarea></label>
+              <label><span class="puxr-lang-zh">持续多久了？</span><span class="puxr-lang-en">How long?</span><textarea name="howLong"></textarea></label>
+              <label><span class="puxr-lang-zh">最近什么发生了变化？</span><span class="puxr-lang-en">What changed recently?</span><textarea name="whatChanged"></textarea></label>
+              <label><span class="puxr-lang-zh">现在最重要的是什么？</span><span class="puxr-lang-en">What matters most now?</span><textarea name="whatMattersMostNow"></textarea></label>
+            </div>
+            <div class="uxl-actions"><button class="uxl-primary" type="submit"><span class="puxr-lang-zh">用这个上下文继续</span><span class="puxr-lang-en">Continue with this context</span></button></div>
+          </form>
+        </section>
+      </section>
+
+      <article class="uxl-result" data-uxl-result hidden>
+        <header class="uxl-result-head">
+          <p class="uxl-eyebrow" data-uxl-domain></p>
+          <h2 data-uxl-result-question></h2>
+        </header>
+        <div class="uxl-result-body">
+          <section class="uxl-section" data-uxl-see><h3><span class="puxr-lang-zh">PHI OS 看见什么</span><span class="puxr-lang-en">What PHI OS sees</span></h3><div data-uxl-see-body></div></section>
+          <section class="uxl-section" data-uxl-shaping><h3><span class="puxr-lang-zh">什么正在影响它</span><span class="puxr-lang-en">What is shaping this</span></h3><div data-uxl-shaping-body></div></section>
+          <section class="uxl-section" data-uxl-lens hidden><h3><span class="puxr-lang-zh">使用的视角</span><span class="puxr-lang-en">Perspective used</span></h3><div class="uxl-lens-card" data-uxl-lens-body></div></section>
+          <section class="uxl-section" data-uxl-unknown><h3><span class="puxr-lang-zh">仍然未知什么</span><span class="puxr-lang-en">What remains uncertain</span></h3><div data-uxl-unknown-body></div></section>
+          <section class="uxl-section" data-uxl-observe><h3><span class="puxr-lang-zh">接下来可以观察什么</span><span class="puxr-lang-en">What you can observe next</span></h3><div data-uxl-observe-body></div></section>
+          <section class="uxl-section" data-uxl-sources hidden><h3><span class="puxr-lang-zh">当前来源与依据</span><span class="puxr-lang-en">Current sources & grounding</span></h3><div data-uxl-source-body></div></section>
+          <section class="uxl-section"><h3><span class="puxr-lang-zh">可以怎样继续</span><span class="puxr-lang-en">Possible next move</span></h3><div class="uxl-next" data-uxl-next></div></section>
+        </div>
+      </article>
+
+      <div class="uxl-methods">
+        <details><summary><span class="puxr-lang-zh">Advanced · 按 Method 探索</span><span class="puxr-lang-en">Advanced · Explore by method</span></summary>
+          <div class="uxl-method-list"><span class="uxl-method-pill">Astrology</span><span class="uxl-method-pill">BaZi</span><span class="uxl-method-pill">Zi Wei</span><span class="uxl-method-pill">Numeric</span></div>
+        </details>
+      </div>
+    </div>
+  </main>
+  <div data-puxr-footer></div>
+  <script type="module" src="/assets/js/public-shell-v2.js"></script>
+  <script type="module" src="/assets/js/pages/ux-lens.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@ import { routeHealthSafety } from '../health/health-reality-runtime.js';
 const LENS_SIGNAL = /(今年|流年|现在|最近|事业.*位置|生命.*结构|做决定|决定|关系|我们.*吵|节奏|周期|current|this year|career.*structure|decision|relationship|rhythm|cycle|transit)/i;
 const CURRENT_SIGNAL = /(current|today|latest|recent|now|opr|interest rate|market|economy|policy|news|weather|outbreak|cases|今天|目前|现在|最新|利率|市场|经济|政策|新闻|天气|病例|疫情)/i;
 const EVERGREEN_KNOWLEDGE = /^(what is|what are|define|explain|什么是|何谓|解释一下)/i;
-const HEALTH_K1_SIGNAL = /(rash|redness|itch|itching|hives|swelling|blister|eczema|allerg|numbness|nausea|vomit|diarrhea|constipation|headache|cough|palpitation|皮疹|红疹|红斑|红点|瘙痒|痒|荨麻疹|红肿|肿胀|水泡|湿疹|过敏|麻木|恶心|呕吐|腹泻|便秘|头痛|咳嗽)/i;
+const HEALTH_K1_SIGNAL = /(rash|redness|itch|itching|hives|swelling|blister|eczema|allerg|numbness|nausea|vomit|diarrhea|constipation|headache|cough|palpitation|skin sensitivity|sensitive skin|skin irritation|skin reaction|皮肤敏感|敏感肌|皮肤刺激|皮肤反应|泛红|干燥|脱皮|皮疹|红疹|红斑|红点|瘙痒|痒|荨麻疹|红肿|肿胀|水泡|湿疹|过敏|麻木|恶心|呕吐|腹泻|便秘|头痛|咳嗽)/i;
 
 export function classifyAsk2Consumption({ question, env = {} } = {}) {
   const q = String(question || '').trim();

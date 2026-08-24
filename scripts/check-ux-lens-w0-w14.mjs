@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const text=p=>fs.readFileSync(p,'utf8'); const json=p=>JSON.parse(text(p));
+const html=text('ask.html'), js=text('assets/js/pages/ux-lens.js'), css=text('assets/css/ux-lens.css'), legacy=text('knowledge-search.html'), ask2=text('functions/ask2/ask2-consumption-runtime.js');
+const acceptance=json('content/governance/ux-lens/acceptance/ux-lens-w0-w14-public-acceptance-v1.json');
+assert.equal(acceptance.completed.length,15); assert.equal(acceptance.status,'UX_LENS_SOURCE_ACCEPTED_LIVE_BROWSER_PENDING');
+assert.match(html,/What are you trying to understand\?/); assert.match(html,/你正在试图理解什么/);
+for(const marker of ['My current situation','A decision','A relationship','My longer-term direction','A life area','My operating pattern']) assert.match(html,new RegExp(marker));
+assert.doesNotMatch(html,/data-cka-answer-state|NEEDS_CONTEXT|Ask is for knowledge questions/);
+assert.match(html,/Advanced · Explore by method/); assert.doesNotMatch(html,/>Human Design<|>HDR<|DreamRave|PHS|Variables/);
+assert.match(js,/\/api\/ask-phios-orchestrated/); assert.match(js,/data-uxl-context-form/); assert.match(js,/CURRENT_CONTEXT_REQUIRED/); assert.match(js,/ASK2_INPUT_REQUIRED/);
+assert.match(ask2,/皮肤敏感/); assert.match(ask2,/sensitive skin/);
+assert.match(css,/@media\(max-width:700px\)/); assert.match(css,/grid-template-columns:1fr/);
+assert.match(legacy,/UXL-W0 public successor redirect/); assert.match(legacy,/location\.replace\("\/ask"\+location\.search\+location\.hash\)/);
+assert.match(legacy,/data-cka-root/); assert.match(legacy,/knowledge-search-b\.js/);
+const health=json('content/governance/ux-lens/contracts/health-public-experience-v1.json'); assert.equal(health.canonicalRegression.expectedMode,'HEALTH'); assert.equal(health.rules.symbolicLensMayExplainHealthSymptom,false);
+const state=json('content/governance/ux-lens/contracts/responsive-public-state-v1.json'); assert.equal(state.publicStateProjection.ANSWERED,null); assert.equal(state.responsive.staticSidebarRequired,false);
+console.log('✓ UXL-W0–W14 source acceptance passed: question-led public Ask replaces the knowledge-search mental model while preserving historical CKA compatibility.');
