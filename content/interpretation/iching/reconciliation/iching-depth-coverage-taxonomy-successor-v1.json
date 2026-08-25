@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "PHI-OS-ICHI-DEPTH-COVERAGE-TAXONOMY-SUCCESSOR-v1.0.0",
+  "phase": "ICHI-DEPTH",
+  "work": "ICHI-DEPTH-W0",
+  "baselineCommit": "d2c485af29481179d8e4530780148a1d32981e92",
+  "status": "ACTIVE_COVERAGE_CLASSES_SEPARATED_CUSTOMER_DEPTH_NOT_YET_READY",
+  "predecessors": [
+    {
+      "path": "content/interpretation/iching/corpus/iching-public-domain-canonical-corpus-v2.json",
+      "sha256": "af59615e4aba68a61f680275b7cc8d58a30884699e0b1bd4028eb1cffaa6b1f5",
+      "mutated": false,
+      "role": "CANONICAL_TEXT_WITNESS"
+    },
+    {
+      "path": "content/interpretation/iching/contracts/iching-interpretation-entry-v1.schema.json",
+      "sha256": "0ec8e493f0499642fe9121ace5e092bb57c3731d84287eb864a2e2a9fbc2d60c",
+      "mutated": false,
+      "role": "HISTORICAL_SOURCE_BOUND_ENTRY_SCHEMA"
+    },
+    {
+      "path": "functions/interpretation-runtime/adapters/iching-interpretation-adapter-v1.js",
+      "sha256": "84e6e3dea21c45b3b935a7f1de59749d4550a0db1931a429edd758643dca454c",
+      "mutated": false,
+      "role": "FROZEN_V1_PRODUCT_ADAPTER"
+    }
+  ],
+  "coverageClasses": [
+    {
+      "coverageCode": "CANONICAL_STRUCTURE",
+      "expected": 64,
+      "current": 64,
+      "unit": "HEXAGRAM",
+      "customerInterpretation": false
+    },
+    {
+      "coverageCode": "CANONICAL_HEXAGRAM_TEXT",
+      "expected": 64,
+      "current": 64,
+      "unit": "HEXAGRAM_TEXT",
+      "customerInterpretation": false
+    },
+    {
+      "coverageCode": "CANONICAL_LINE_TEXT",
+      "expected": 384,
+      "current": 384,
+      "unit": "LINE_TEXT",
+      "customerInterpretation": false
+    },
+    {
+      "coverageCode": "HISTORICAL_SOURCE_COMMENTARY_HEXAGRAM",
+      "expected": 64,
+      "current": 2,
+      "unit": "HEXAGRAM",
+      "customerInterpretation": false
+    },
+    {
+      "coverageCode": "HISTORICAL_SOURCE_COMMENTARY_LINE",
+      "expected": 384,
+      "current": 12,
+      "unit": "LINE",
+      "customerInterpretation": false
+    },
+    {
+      "coverageCode": "PHIOS_PLAIN_LANGUAGE_HEXAGRAM",
+      "expected": 64,
+      "current": 0,
+      "unit": "HEXAGRAM",
+      "customerInterpretation": true
+    },
+    {
+      "coverageCode": "PHIOS_PLAIN_LANGUAGE_LINE",
+      "expected": 384,
+      "current": 0,
+      "unit": "LINE",
+      "customerInterpretation": true
+    },
+    {
+      "coverageCode": "PHIOS_DEPTH_HEXAGRAM",
+      "expected": 64,
+      "current": 0,
+      "unit": "HEXAGRAM",
+      "customerInterpretation": true
+    },
+    {
+      "coverageCode": "PHIOS_DEPTH_LINE",
+      "expected": 384,
+      "current": 0,
+      "unit": "LINE",
+      "customerInterpretation": true
+    },
+    {
+      "coverageCode": "LOCALE_PROJECTION_ZH_HANS",
+      "expected": 448,
+      "current": 0,
+      "unit": "EDITORIAL_UNIT",
+      "customerInterpretation": true
+    },
+    {
+      "coverageCode": "LOCALE_PROJECTION_EN",
+      "expected": 448,
+      "current": 0,
+      "unit": "EDITORIAL_UNIT",
+      "customerInterpretation": true
+    },
+    {
+      "coverageCode": "HUMAN_EDITORIAL_APPROVAL",
+      "expected": 448,
+      "current": 0,
+      "unit": "EDITORIAL_UNIT",
+      "customerInterpretation": true
+    }
+  ],
+  "classificationRules": {
+    "canonicalWitnessMayCountAsHistoricalCommentary": false,
+    "canonicalWitnessMayCountAsPhiosEditorialInterpretation": false,
+    "historicalCommentaryMayCountAsHumanApprovedDepth": false,
+    "sourceClaimMayBecomeRealityTruth": false,
+    "modelCandidateMayCountAsHumanApproved": false,
+    "bilingualProjectionRequiresIndependentLocaleReview": true,
+    "coverageMayGrantProductionAuthority": false
+  },
+  "runtimeBinding": {
+    "classifier": "functions/interpretation-runtime/iching-depth-coverage-taxonomy-v1.js",
+    "frozenAdapterMutated": false,
+    "publicViewMutated": false,
+    "activationAuthorityChanged": false,
+    "nextRuntimeBindingWork": "ICHI-DEPTH-W3-W6"
+  }
+}
+
