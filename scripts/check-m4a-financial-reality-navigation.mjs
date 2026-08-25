@@ -110,13 +110,33 @@ assert.ok(PRE_APPOINTMENT_CHECKS.includes('missing_evidence_identified'));
 assert.equal(FINANCIAL_APPOINTMENT_MATERIALS.length, 10);
 assert.equal(FINANCIAL_MATERIAL_DELIVERY_BOUNDARY.ordinary_email_sensitive_documents_allowed, false);
 
-// PX2 public-presentation successor preserves the M4A financial service identity without predecessor i18n markup coupling.
+// CX-P1 succeeds the PX2 presentation while preserving M4A financial authority.
+// The current surface must consume the one customer design system; re-importing
+// phios-public-v2.css would violate the frozen legacy-CSS boundary.
 const px2 = JSON.parse(await fs.readFile(path.join(root, 'content/web-production/px2/successors/px2-w11-checker-successor-v1.json'), 'utf8'));
 assert.equal(px2.status, 'ACTIVE');
-assert.ok(page.includes('/assets/css/phios-public-v2.css'));
-assert.ok(page.includes('Financial Reality Navigation'));
-assert.ok(page.includes('Financial Stamina Analysis'));
-assert.ok(page.includes('Financial Navigation Plan'));
+const cx = JSON.parse(await fs.readFile(path.join(root, 'content/customer-experience-rebuild/migration/px2-cx-p1-public-ia-successor-v1.json'), 'utf8'));
+const cutover = JSON.parse(await fs.readFile(path.join(root, cx.currentAuthority.priorityCutover), 'utf8'));
+const financialSurface = cutover.surfaces.find(surface => surface.surfaceId === 'FINANCIAL_REALITY');
+assert.equal(cx.status, 'ACTIVE_CX_P1_PUBLIC_IA_SUCCESSOR');
+assert.equal(cx.priorityCanonicalDestinations.FINANCIAL_REALITY, '/professional/financial/');
+assert.equal(financialSurface?.canonicalPath, '/professional/financial/');
+assert.equal(financialSurface?.htmlPath, 'professional/financial/index.html');
+for (const marker of [
+  'data-cx-surface="FINANCIAL_REALITY"',
+  '/assets/customer-ui/tokens.css',
+  '/assets/customer-ui/surfaces/p1.css',
+  '/assets/customer-ui/js/shell.js',
+  '/assets/customer-ui/js/surfaces/financial-reality.js',
+  'data-cx-financial-form',
+  'data-cx-financial-results',
+  'Financial Reality'
+]) assert.ok(page.includes(marker), `CX financial surface missing: ${marker}`);
+assert.equal(page.includes('/assets/css/phios-public-v2.css'), false);
+assert.equal(page.includes('/assets/js/public-shell-v2.js'), false);
+for (const authorityLabel of ['Financial Reality Navigation', 'Financial Stamina Analysis', 'Financial Navigation Plan']) {
+  assert.ok(en.includes(authorityLabel), `M4A English authority missing: ${authorityLabel}`);
+}
 assert.ok(services.includes('/professional/financial'));
 assert.ok(en.includes('financialPublic')); assert.ok(zh.includes('financialPublic'));
 for (const changed of Object.values(registry.boundaries)) assert.equal(changed, false);

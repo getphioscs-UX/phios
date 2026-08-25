@@ -4,16 +4,15 @@ import path from 'node:path';
 
 const root = process.cwd();
 const read = file => fs.readFile(path.join(root, file), 'utf8');
-const [page, css, en, zh, pricing, registry, services, shell] =
+const [page, cxCss, en, zh, pricing, registry, services] =
   await Promise.all([
     read('professional/financial/index.html'),
-    read('assets/css/public-experience.css'),
+    read('assets/customer-ui/surfaces/p1.css'),
     read('assets/js/locales/en/professional.js'),
     read('assets/js/locales/zh-Hans/professional.js'),
     read('content/registry/professional-pricing-policy.json').then(JSON.parse),
     read('content/registry/m4a-w6-financial-public-pages.json').then(JSON.parse),
-    read('services.html'),
-    read('assets/js/public-shell.js')
+    read('services.html')
   ]);
 
 assert.equal(
@@ -27,11 +26,27 @@ assert.deepEqual(registry.responsive_viewports, [360, 768, 1440]);
 
 const px2 = JSON.parse(await read('content/web-production/px2/successors/px2-w11-checker-successor-v1.json'));
 assert.equal(px2.status, 'ACTIVE');
-assert.ok(page.includes('/assets/css/phios-public-v2.css'));
+const cx = JSON.parse(await read('content/customer-experience-rebuild/migration/px2-cx-p1-public-ia-successor-v1.json'));
+const cutover = JSON.parse(await read(cx.currentAuthority.priorityCutover));
+const financialSurface = cutover.surfaces.find(surface => surface.surfaceId === 'FINANCIAL_REALITY');
+assert.equal(cx.status, 'ACTIVE_CX_P1_PUBLIC_IA_SUCCESSOR');
+assert.equal(financialSurface?.canonicalPath, '/professional/financial/');
+assert.equal(financialSurface?.htmlPath, 'professional/financial/index.html');
+for (const marker of [
+  'data-cx-surface="FINANCIAL_REALITY"',
+  '/assets/customer-ui/tokens.css',
+  '/assets/customer-ui/surfaces/p1.css',
+  '/assets/customer-ui/js/shell.js',
+  '/assets/customer-ui/js/surfaces/financial-reality.js',
+  'data-cx-financial-form',
+  'data-cx-financial-results'
+]) assert.ok(page.includes(marker), `CX financial surface missing: ${marker}`);
+assert.equal(page.includes('/assets/css/phios-public-v2.css'), false);
+assert.equal(page.includes('/assets/js/public-shell-v2.js'), false);
 for (const visible of ['Financial Reality Navigation','Financial Stamina Analysis','Financial Consultation','Financial Navigation Plan','Implementation Follow-up','Annual Runtime Review']) {
-  assert.ok(page.includes(visible), `PX2 financial surface missing: ${visible}`);
+  assert.ok(en.includes(visible), `M4A English service authority missing: ${visible}`);
 }
-assert.ok(page.includes('href="/professional-appointments"'));
+assert.ok(page.includes('href="/professional/appointments/"'));
 assert.ok(services.includes('href="/professional/financial/"') || services.includes('href="/professional/financial"'));
 
 for (const key of [
@@ -63,17 +78,14 @@ assert.equal(page.includes('guaranteed return'), false);
 assert.equal(page.includes('guaranteed outcome'), false);
 assert.equal(page.includes('send by email'), false);
 
-const px2css = await read('assets/css/phios-public-v2.css');
-assert.ok(px2css.includes('.puxr-grid-3'));
-assert.ok(px2css.includes('@media(max-width:1040px)'));
-assert.ok(px2css.includes('@media(max-width:620px)'));
+assert.ok(cxCss.includes('.cx-p1-grid--3'));
+assert.ok(cxCss.includes('@media(max-width:900px)'));
+assert.ok(cxCss.includes('@media(max-width:620px)'));
 for (const viewport of registry.responsive_viewports) {
   assert.ok(viewport >= 360 && viewport <= 1440);
 }
-assert.ok(page.includes('data-px2-surface="FINANCIAL"'));
-assert.ok(page.includes('/assets/js/public-shell-v2.js'));
 for (const value of Object.values(registry.boundaries)) {
   assert.equal(value, false);
 }
 
-console.log('✓ M4A-W6 Financial Public Pages passed: complete service orientation, six-service comparison, transparent pricing policy and three-part public boundary are bilingual and responsive.');
+console.log('✓ M4A-W6 Financial Public Pages passed: M4A service authority and boundary copy remain bilingual while the responsive CX-P1 Financial Reality surface consumes the one customer design system.');

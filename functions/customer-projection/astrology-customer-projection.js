@@ -1,0 +1,32 @@
+import {deepFreeze,localeOf} from './projection-common.js';
+
+const SIGNS=Object.freeze(['ARIES','TAURUS','GEMINI','CANCER','LEO','VIRGO','LIBRA','SCORPIO','SAGITTARIUS','CAPRICORN','AQUARIUS','PISCES']);
+const PLANET_ORDER=Object.freeze(['SUN','MOON','MERCURY','VENUS','MARS','JUPITER','SATURN','URANUS','NEPTUNE','PLUTO','NORTH_NODE','SOUTH_NODE']);
+const LABELS=Object.freeze({
+ en:{SUN:'Sun',MOON:'Moon',MERCURY:'Mercury',VENUS:'Venus',MARS:'Mars',JUPITER:'Jupiter',SATURN:'Saturn',URANUS:'Uranus',NEPTUNE:'Neptune',PLUTO:'Pluto',NORTH_NODE:'North Node',SOUTH_NODE:'South Node',ASC:'Ascendant',MC:'Midheaven',DSC:'Descendant',IC:'Imum Coeli',ARIES:'Aries',TAURUS:'Taurus',GEMINI:'Gemini',CANCER:'Cancer',LEO:'Leo',VIRGO:'Virgo',LIBRA:'Libra',SCORPIO:'Scorpio',SAGITTARIUS:'Sagittarius',CAPRICORN:'Capricorn',AQUARIUS:'Aquarius',PISCES:'Pisces',CONJUNCTION:'Conjunction',SEXTILE:'Sextile',SQUARE:'Square',TRINE:'Trine',OPPOSITION:'Opposition'},
+ 'zh-Hans':{SUN:'太阳',MOON:'月亮',MERCURY:'水星',VENUS:'金星',MARS:'火星',JUPITER:'木星',SATURN:'土星',URANUS:'天王星',NEPTUNE:'海王星',PLUTO:'冥王星',NORTH_NODE:'北交点',SOUTH_NODE:'南交点',ASC:'上升点',MC:'天顶',DSC:'下降点',IC:'天底',ARIES:'白羊座',TAURUS:'金牛座',GEMINI:'双子座',CANCER:'巨蟹座',LEO:'狮子座',VIRGO:'处女座',LIBRA:'天秤座',SCORPIO:'天蝎座',SAGITTARIUS:'射手座',CAPRICORN:'摩羯座',AQUARIUS:'水瓶座',PISCES:'双鱼座',CONJUNCTION:'合相',SEXTILE:'六合',SQUARE:'四分相',TRINE:'三分相',OPPOSITION:'对分相'}
+});
+function norm(v){const n=Number(v);return Number.isFinite(n)?((n%360)+360)%360:null;}
+function signFor(longitude){const n=norm(longitude);return n===null?null:SIGNS[Math.floor(n/30)];}
+function degreeInSign(longitude){const n=norm(longitude);return n===null?null:Number((n%30).toFixed(2));}
+function group(projection,code){return (projection?.calculation?.structures||[]).find(x=>x.code===code)||null;}
+function labels(locale){return LABELS[locale]||LABELS.en;}
+function meaningText(refs){return (refs||[]).filter(x=>x?.definition||x?.label).map(x=>({code:x.meaningCode||null,label:x.label||null,definition:x.definition||null}));}
+function placementMap(projection){return new Map((group(projection,'HOUSE_PLACEMENTS')?.items||[]).map(x=>[x.code,Number(x.value)]));}
+function byCode(arr){return new Map((arr||[]).map(x=>[x.bodyCode,x]));}
+function customerStatement(body,locale){const lang=locale==='zh-Hans';const refs=meaningText(body.meaningRefs);if(!refs.length)return null;const parts=refs.map(x=>x.definition).filter(Boolean);if(!parts.length)return null;return {title:lang?`${labels(locale)[body.bodyCode]||body.bodyCode}：怎样阅读这个位置`:`${labels(locale)[body.bodyCode]||body.bodyCode}: how to read this placement`,body:parts.join(lang?'； ':' '),meaningRefs:refs};}
+export function projectAstrologyForCustomer({canonicalProjection,meaningPayload,locale='en'}={}){
+ const lang=localeOf(locale);const l=labels(lang);const projection=canonicalProjection||{};const reading=meaningPayload?.reading||{};const readingBodies=reading?.sections?.compositeStructure?.bodies||[];const readBy=byCode(readingBodies);const placements=placementMap(projection);
+ const positions=(projection?.calculation?.positions||[]).filter(x=>x&&x.code).sort((a,b)=>PLANET_ORDER.indexOf(a.code)-PLANET_ORDER.indexOf(b.code));
+ const bodies=positions.map(pos=>{const rb=readBy.get(pos.code)||{};const sign=rb.signCode||signFor(pos.value);const house=rb.houseNumber||placements.get(pos.code)||null;return deepFreeze({code:pos.code,label:l[pos.code]||pos.code,longitude:norm(pos.value),signCode:sign,signLabel:l[sign]||sign||null,degreeInSign:degreeInSign(pos.value),houseNumber:house,retrograde:pos.meta?.speedLongitudeDegreesPerDay!=null?Number(pos.meta.speedLongitudeDegreesPerDay)<0:null,nodeType:pos.meta?.nodeType||null,meaningRefs:meaningText(rb.meaningRefs)});});
+ const angles=(group(projection,'ANGLES')?.items||[]).map(x=>deepFreeze({code:x.code,label:l[x.code]||x.code,longitude:norm(x.value),signCode:signFor(x.value),signLabel:l[signFor(x.value)]||signFor(x.value),degreeInSign:degreeInSign(x.value)}));
+ const houses=(group(projection,'HOUSE_CUSPS')?.items||[]).map(x=>deepFreeze({houseNumber:x.meta?.houseNumber||Number(String(x.code).replace('HOUSE_','')),longitude:norm(x.value),signCode:signFor(x.value),signLabel:l[signFor(x.value)]||signFor(x.value)}));
+ const aspects=(reading?.sections?.compositeStructure?.aspects||[]).map(x=>deepFreeze({fromCode:x.fromCode,toCode:x.toCode,fromLabel:l[x.fromCode]||x.fromCode,toLabel:l[x.toCode]||x.toCode,type:x.aspectType,typeLabel:l[x.aspectType]||x.aspectType,orbDegrees:Number.isFinite(Number(x.orbDegrees))?Number(Number(x.orbDegrees).toFixed(2)):null,relationMeaning:x.relationMeaning?{label:x.relationMeaning.label||null,definition:x.relationMeaning.definition||null}:null}));
+ const statements=bodies.map(x=>customerStatement(readBy.get(x.code)||x,lang)).filter(Boolean);
+ const wheelBodies=bodies.filter(x=>x.longitude!==null).map(x=>deepFreeze({code:x.code,label:x.label,longitude:x.longitude,kind:x.nodeType&&x.nodeType!=='NONE'?'NODE':'BODY'}));
+ const wheelAngles=angles.filter(x=>x.longitude!==null).map(x=>deepFreeze({code:x.code,label:x.label,longitude:x.longitude,kind:'ANGLE'}));
+ const summary=lang==='zh-Hans'
+  ?`这张出生结构图已经建立 ${bodies.length} 个星体与交点位置${houses.length===12?'、12 个宫位':''}${aspects.length?`，并识别 ${aspects.length} 个主要相位`:''}。先看整体结构，再进入单一位置，会比逐项读取标签更容易理解。`
+  :`This birth structure contains ${bodies.length} planetary and nodal positions${houses.length===12?', 12 houses':''}${aspects.length?`, and ${aspects.length} major aspects`:''}. Read the pattern as a whole before treating any single placement as the answer.`;
+ return deepFreeze({schemaVersion:'PHI-OS-CX-ASTROLOGY-CUSTOMER-PROJECTION-v1.0.0',projectionId:projection.projectionId||null,locale:lang,executionCompleteness:meaningPayload?.executionCompleteness||reading?.executionCompleteness||projection?.projection?.status||'UNKNOWN',summary,bodies,angles,houses,aspects,interpretation:{statements,canonicalMeaningCount:meaningPayload?.meaningBundle?.items?.length||0},visualModel:{zodiacSegments:SIGNS.map((code,index)=>({code,label:l[code]||code,startLongitude:index*30})),bodies:wheelBodies,angles:wheelAngles,aspects:aspects.map(x=>({fromCode:x.fromCode,toCode:x.toCode,type:x.type}))},unknowns:(reading?.sections?.unknownAndLimitations?.unknowns||[]).map(x=>({code:x.code,category:x.category,scope:x.scope})),boundary:{calculationCreatedHere:false,meaningCreatedHere:false,recommendationCreatedHere:false,sourceProjectionRequired:true}});
+}
