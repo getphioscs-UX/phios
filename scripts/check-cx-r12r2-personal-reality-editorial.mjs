@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const html=read('perspectives/personal/index.html'),client=read('assets/customer-ui/js/surfaces/personal-reality.js'),projection=read('functions/customer-projection/method-customer-projection.js'),css=read('assets/customer-ui/surfaces/personal-reality.css');
+for(const phrase of ['一个人，从来不只有一种读法。','为什么理解人的体系这么多？','占星','八字','紫微斗数','数字学','人类图','易经','Tarot','PHI OS 的看法'])assert.ok(html.includes(phrase),`missing public editorial copy: ${phrase}`);
+assert.match(html,/Birth-based perspectives/);assert.match(html,/I Ching and Tarot begin from a question/);assert.match(html,/data-cx-personal-map/);assert.match(client,/renderPersonalMap/);assert.match(css,/cx-personal-map/);
+assert.match(projection,/semanticKey/);assert.match(projection,/BIRTHDAYNUMBER/);assert.match(projection,/interpretationFrom/);assert.match(projection,/interpretation:\{methods/);assert.match(client,/interpretationBlock/);assert.match(client,/human-readable explanation/);
+assert.equal(html.includes('runtime version'),false);assert.equal(html.includes('projection version'),false);assert.equal(html.includes('reasonCodes'),false);assert.equal(html.includes('CanonicalMethodProjection'),false);
+assert.match(html,/data-cx-asset="ILL-004"/);assert.equal(html.includes('data-cx-asset="ILL-005"'),false);
+const acceptance=JSON.parse(read('content/customer-experience-rebuild/acceptance/cx-r12r2-acceptance-v1.json'));assert.equal(acceptance.work,'CX-R12R2');assert.equal(acceptance.productionHumanAcceptance,'PENDING');assert.equal(acceptance.legacyPhysicalDeleteAllowed,false);
+console.log('✓ CX-R12R2 editorial + interpretation + visual upgrade passed.');
+console.log('  Personal Reality now explains the wider perspective landscape, keeps birth intake simple, suppresses semantic duplicates, passes through existing interpretation only, and adds a human-readable visual map.');

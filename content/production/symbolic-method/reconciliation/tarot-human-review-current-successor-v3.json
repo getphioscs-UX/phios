@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-HUMAN-REVIEW-CURRENT-SUCCESSOR-v3.0.0",
+  "phase": "TPA-JR",
+  "work": "J-R1-J-R5",
+  "baselineCommit": "90f87b962cc0f9a77996d2bb6deca5bfa38a1634",
+  "status": "REAL_HUMAN_ACCEPTED_24_OF_24_LIVE_BROWSER_SHA_AND_PROMOTION_GATES_REMAIN",
+  "successorOf": {
+    "path": "content/production/symbolic-method/reconciliation/tarot-human-review-current-successor-v2.json",
+    "sha256": "2714986a5e8d57c230ba8ca55b935b4daa377aa399829e7cf4ec91865b7d089d",
+    "preserved": true
+  },
+  "j0Authority": {
+    "path": "content/interpretation/tarot/freeze/tarot-product-interpretation-freeze-v1.json",
+    "sha256": "cddd6ac2b81252f8677248ded9d9f651a46f9dcf9bc57c0cae0e22713122dfda"
+  },
+  "artifacts": {
+    "campaignV3": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-campaign-v3.json",
+      "sha256": "2b9a6e49f73a3b1fd579d6f587e61e9f750fa227b9bf36d822df079fe0b7810b"
+    },
+    "rubricV3": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-rubric-v3.json",
+      "sha256": "13fc0d65412220e6b4e53a77c00d6768a9f5aeb80c19b7602de8a1e521f1f78b"
+    },
+    "preflightV2": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-preflight-v2.json",
+      "sha256": "f6dff7dc1cb4b537f0cedfded99b1093af6b551ae8caf3fb21605534b8d125f2"
+    },
+    "reviewPacketV3": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-packet-v3.md",
+      "sha256": "254fde4a6b30765a96d6bfa1227af9f59ab988224bd371f590497da5a2f9ec0d"
+    },
+    "resultsV3": {
+      "path": "content/production/symbolic-method/human-review/tarot-human-review-results-v3.json",
+      "mutableUntilHumanSignoff": true
+    },
+    "pendingFreezeV3": {
+      "path": "content/production/symbolic-method/freeze/tarot-human-acceptance-freeze-v3.json",
+      "mutableOnlyByHumanSignoffFinalizer": true
+    }
+  },
+  "campaign": {
+    "planned": 24,
+    "normal": 8,
+    "sensitive": 8,
+    "adversarial": 8,
+    "oneCard": 12,
+    "threeCard": 12,
+    "machinePreflightPassed": 24
+  },
+  "humanState": {
+    "humanReviewed": 24,
+    "accepted": 24,
+    "requiredAccepted": 24,
+    "humanAcceptanceComplete": true
+  },
+  "rules": {
+    "oldV2PreflightMayBeSignedOffAgainstJ0": false,
+    "machinePreflightMayCountAsHumanReview": false,
+    "modelMaySetHumanReviewed": false,
+    "reviewerMustBeHuman": true,
+    "all24Required": true,
+    "allApplicableCriticalCriteriaRequired": true,
+    "normalCaseMustBeSubstantive": true,
+    "sensitiveCaseMustBeBoundedButUseful": true,
+    "adversarialCaseMustFailClosedWithSafeReframe": true
+  },
+  "productionBoundary": {
+    "liveBrowserAcceptanceClaimed": false,
+    "liveProductionShaAlignmentClaimed": false,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowed": false
+  },
+  "nextAction": "PHASE_K_LIVE_BROWSER_ACCEPTANCE"
+}
