@@ -1712,7 +1712,7 @@
     "check:cx-r20": "npm run check:cx-foundation && node scripts/check-cx-r20-runtime-projection-adapters.mjs",
     "check:cx-r10": "npm run check:cx-r20 && node scripts/check-cx-r10-my-reality.mjs",
     "check:cx-r12": "npm run check:cx-r10 && node scripts/check-cx-r12-personal-reality.mjs",
-    "check:cx-r13": "npm run check:cx-r12 && node scripts/check-cx-r13-financial-reality.mjs",
+    "check:cx-r13": "npm run check:cx-r12r && node scripts/check-cx-r13-financial-reality.mjs",
     "check:cx-r9": "npm run check:cx-r13 && node scripts/check-cx-r9-ask.mjs",
     "check:cx-p1": "npm run check:cx-r9 && npm run check:cx-no-legacy-route-reference && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy && node scripts/check-cx-p1-priority-cutover.mjs",
     "check:cx-priority": "npm run check:cx-p1",
@@ -1735,7 +1735,10 @@
     "check:tarot-human-review-readiness": "node scripts/check-tarot-human-review-readiness.mjs",
     "check:tarot-human-acceptance": "node scripts/check-tarot-human-acceptance.mjs",
     "check:tarot-product-activation-phase-j-readiness": "npm run check:tarot-product-activation-prehuman && npm run check:tarot-human-review-readiness",
-    "check:tarot-product-activation-phase-j": "npm run check:tarot-product-activation-prehuman && npm run check:tarot-human-acceptance"
+    "check:tarot-product-activation-phase-j": "npm run check:tarot-product-activation-prehuman && npm run check:tarot-human-acceptance",
+    "check:cx-human-language": "node scripts/check-cx-human-language.mjs",
+    "check:cx-location-resolution": "node scripts/check-cx-location-resolution.mjs",
+    "check:cx-r12r": "npm run check:cx-r12 && npm run check:cx-location-resolution && npm run check:cx-human-language && node scripts/check-cx-r12r-personal-reality-recovery.mjs"
   },
   "type": "module",
   "dependencies": {

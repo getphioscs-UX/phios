@@ -1,0 +1,4 @@
+import {resolveBirthPlace} from '../location/place-resolver.js';
+const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'};const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
+export async function onRequestPost(context){let body;try{body=await context.request.json()}catch{return json({ok:false,error:'INVALID_JSON'},400)};try{const location=await resolveBirthPlace(body?.providerRef,{birthDate:body?.birthDate||null,birthTime:body?.birthTime||null,locale:body?.locale==='zh-Hans'?'zh-Hans':'en',env:context.env});return json({ok:true,location})}catch(error){const code=error?.code||'LOCATION_RESOLUTION_FAILED';return json({ok:false,error:code},code==='LOCATION_SELECTION_REQUIRED'?400:422)}}
+export async function onRequestGet(){return json({ok:false,error:'METHOD_NOT_ALLOWED'},405)}

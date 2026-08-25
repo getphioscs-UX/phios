@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Personal Reality brings governed personal perspectives into one clear customer result surface.">
+  <meta name="description" content="Personal Reality brings several personal perspectives into one clear place, so you can compare structure, context and lived experience without being reduced to a single label.">
   <title>Personal Reality — PHI OS</title>
   <link rel="canonical" href="/perspectives/personal/">
   <link rel="stylesheet" href="/assets/customer-ui/tokens.css">
@@ -14,33 +14,168 @@
   <link rel="stylesheet" href="/assets/customer-ui/motion.css">
   <link rel="stylesheet" href="/assets/customer-ui/utilities.css">
   <link rel="stylesheet" href="/assets/customer-ui/surfaces/p1.css">
+  <link rel="stylesheet" href="/assets/customer-ui/surfaces/personal-reality.css">
 </head>
 <body data-cx-surface="PERSONAL_REALITY" data-cx-nav="PERSPECTIVES">
-  <a class="cx-skip" href="#main">Skip to content</a><div data-cx-header></div>
-  <main id="main" class="cx-p1-main">
-    <section class="cx-p1-hero"><div class="cx-container cx-p1-hero__grid"><div class="cx-stack"><p class="cx-eyebrow">PERSONAL REALITY</p><h1 class="cx-display" data-cx-en="One person. Several bounded perspectives." data-cx-zh="同一个人，多个有边界的视角。">One person. Several bounded perspectives.</h1><p class="cx-lead" data-cx-en="Enter what you know once, choose the perspectives you want to explore, and see their governed outputs together without turning any method into a separate product kingdom." data-cx-zh="只输入一次你知道的资料，选择想探索的视角，再把受治理的输出放在同一个结果空间里，而不是把每一种方法变成独立产品王国。">Enter what you know once, choose the perspectives you want to explore, and see their governed outputs together without turning any method into a separate product kingdom.</p><p class="cx-p1-note" data-cx-en="These are perspectives, not facts about your life and not guaranteed predictions." data-cx-zh="这些是视角，不是关于你人生的事实，也不是保证性预测。">These are perspectives, not facts about your life and not guaranteed predictions.</p></div><figure class="cx-visual"><img data-cx-asset="ILL-005" alt="Personal Reality scene"><figcaption class="cx-meta" style="padding:.85rem 1rem" data-cx-en="Perspective stays separate from lived Reality." data-cx-zh="视角始终与现实经历保持区分。">Perspective stays separate from lived Reality.</figcaption></figure></div></section>
-    <section class="cx-section--tight"><div class="cx-container cx-grid cx-grid--2">
-      <section class="cx-card"><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="ABOUT YOU" data-cx-zh="关于你">ABOUT YOU</p><h2 class="cx-title" data-cx-en="Birth information you currently know" data-cx-zh="你目前知道的出生资料">Birth information you currently know</h2><p class="cx-body cx-muted" data-cx-en="Unknown information stays unknown. Your browser timezone is never substituted for your birth timezone." data-cx-zh="未知资料会保持未知。浏览器当前时区不会替代你的出生时区。">Unknown information stays unknown. Your browser timezone is never substituted for your birth timezone.</p></div>
-        <form class="cx-p1-form" data-cx-personal-form>
-          <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Birth date" data-cx-zh="出生日期">Birth date</span><input type="date" name="birthDate" required></label><label class="cx-p1-field"><span data-cx-en="Birth time" data-cx-zh="出生时间">Birth time</span><input type="time" name="birthTime" step="60"><small data-cx-en="Leave blank if unknown." data-cx-zh="不知道就留空。">Leave blank if unknown.</small></label></div>
-          <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Birth place" data-cx-zh="出生地点">Birth place</span><input name="birthPlace" placeholder="Kuala Lumpur"></label><label class="cx-p1-field"><span data-cx-en="Country code" data-cx-zh="国家代码">Country code</span><input name="countryCode" maxlength="2" placeholder="MY"></label></div>
-          <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Birth timezone" data-cx-zh="出生时区">Birth timezone</span><input name="birthTimezone" placeholder="Asia/Kuala_Lumpur"></label><label class="cx-p1-field"><span data-cx-en="UTC offset at birth" data-cx-zh="出生时 UTC 偏移">UTC offset at birth</span><input name="utcOffsetAtBirth" placeholder="+08:00"></label></div>
-          <label class="cx-p1-field"><span data-cx-en="What you want to explore" data-cx-zh="你想探索什么？">What you want to explore</span><textarea name="intent" maxlength="500" placeholder="A current question, a pattern, or something you want to understand more clearly."></textarea></label>
-          <fieldset class="cx-p1-field"><legend data-cx-en="Perspectives used" data-cx-zh="使用的视角">Perspectives used</legend><div class="cx-p1-checks"><label class="cx-p1-check"><input type="checkbox" name="methods" value="astrology" checked><span><strong>Astrology</strong><small data-cx-en="Structural birth-chart projection" data-cx-zh="出生结构投射">Structural birth-chart projection</small></span></label><label class="cx-p1-check"><input type="checkbox" name="methods" value="bazi"><span><strong>BaZi</strong><small data-cx-en="Four-pillars structural projection" data-cx-zh="四柱结构投射">Four-pillars structural projection</small></span></label><label class="cx-p1-check"><input type="checkbox" name="methods" value="numeric"><span><strong>Numerology</strong><small data-cx-en="Deterministic numeric projection" data-cx-zh="确定性数字投射">Deterministic numeric projection</small></span></label><label class="cx-p1-check"><input type="checkbox" name="methods" value="ziwei"><span><strong>Zi Wei</strong><small data-cx-en="Governed Zi Wei projection" data-cx-zh="受治理的紫微投射">Governed Zi Wei projection</small></span></label></div></fieldset>
-          <label class="cx-p1-consent"><input type="checkbox" name="consent" required><span data-cx-en="I agree to process the information above only for the perspectives I selected. Nothing is saved automatically." data-cx-zh="我同意只为我选择的视角处理以上资料。任何内容都不会自动保存。">I agree to process the information above only for the perspectives I selected. Nothing is saved automatically.</span></label>
-          <div class="cx-p1-inline"><button class="cx-button cx-button--primary" type="submit" data-cx-en="Explore perspectives" data-cx-zh="探索这些视角">Explore perspectives</button><button class="cx-button" type="reset" data-cx-en="Clear" data-cx-zh="清除">Clear</button></div><p class="cx-p1-status" data-cx-personal-status role="status"></p>
-        </form>
-      </section>
-      <aside class="cx-stack"><article class="cx-card cx-card--soft"><p class="cx-eyebrow" data-cx-en="HOW RESULTS WORK" data-cx-zh="结果如何呈现">HOW RESULTS WORK</p><h3 class="cx-heading" data-cx-en="Methods stay as perspectives used." data-cx-zh="方法只作为“使用的视角”。">Methods stay as perspectives used.</h3><p class="cx-body cx-muted" data-cx-en="Results are grouped into Overview, Structure, Current Context, Patterns and Details. The page does not invent a combined verdict." data-cx-zh="结果统一整理为总览、结构、当前上下文、模式与细节。页面不会自行创造综合结论。">Results are grouped into Overview, Structure, Current Context, Patterns and Details. The page does not invent a combined verdict.</p></article><article class="cx-card"><p class="cx-eyebrow" data-cx-en="CURRENT CONTEXT" data-cx-zh="当前上下文">CURRENT CONTEXT</p><p class="cx-body" data-cx-en="Current context is shown only when a governed projection actually contains it. The page does not fill it from today's date." data-cx-zh="只有受治理的投射真实包含当前上下文时才会显示。页面不会用今天的日期自行补上。">Current context is shown only when a governed projection actually contains it. The page does not fill it from today's date.</p></article></aside>
-    </div></section>
-    <section class="cx-section--tight" data-cx-personal-results hidden><div class="cx-container"><div class="cx-p1-workspace" data-cx-workspace><aside class="cx-p1-rail"><nav data-cx-tablist aria-label="Personal Reality result sections"><button class="cx-p1-tab" type="button" data-cx-tab="overview" aria-selected="true" data-cx-en="Overview" data-cx-zh="总览">Overview</button><button class="cx-p1-tab" type="button" data-cx-tab="structure" data-cx-en="Structure" data-cx-zh="结构">Structure</button><button class="cx-p1-tab" type="button" data-cx-tab="context" data-cx-en="Current Context" data-cx-zh="当前上下文">Current Context</button><button class="cx-p1-tab" type="button" data-cx-tab="patterns" data-cx-en="Patterns" data-cx-zh="模式">Patterns</button><button class="cx-p1-tab" type="button" data-cx-tab="details" data-cx-en="Details" data-cx-zh="细节">Details</button></nav></aside><div>
-      <section class="cx-p1-panel" data-cx-panel="overview"><div class="cx-p1-section-head"><p class="cx-eyebrow">OVERVIEW</p><h2 class="cx-title" data-cx-en="Perspectives used" data-cx-zh="使用的视角">Perspectives used</h2></div><div data-cx-personal-overview></div><div class="cx-p1-actions"><button class="cx-button cx-button--primary" type="button" data-cx-personal-handoff disabled data-cx-en="Add this perspective to My Reality" data-cx-zh="把这个视角加入 My Reality">Add this perspective to My Reality</button></div></section>
-      <section class="cx-p1-panel" data-cx-panel="structure" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">STRUCTURE</p><h2 class="cx-title" data-cx-en="What the selected systems calculated" data-cx-zh="所选系统计算出的结构">What the selected systems calculated</h2></div><div data-cx-personal-structure></div></section>
-      <section class="cx-p1-panel" data-cx-panel="context" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">CURRENT CONTEXT</p><h2 class="cx-title" data-cx-en="Current context, only when established" data-cx-zh="只有在已建立时才显示当前上下文">Current context, only when established</h2></div><div data-cx-personal-context></div></section>
-      <section class="cx-p1-panel" data-cx-panel="patterns" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">PATTERNS</p><h2 class="cx-title" data-cx-en="Structured output groups" data-cx-zh="结构化输出组">Structured output groups</h2></div><div data-cx-personal-patterns></div></section>
-      <section class="cx-p1-panel" data-cx-panel="details" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">DETAILS</p><h2 class="cx-title" data-cx-en="Execution, versions and unknowns" data-cx-zh="执行、版本与未知项">Execution, versions and unknowns</h2></div><div data-cx-personal-details></div></section>
-    </div></div></div></section>
+  <a class="cx-skip" href="#main">Skip to content</a>
+  <div data-cx-header></div>
+  <main id="main" class="cx-p1-main cx-personal">
+    <section class="cx-p1-hero cx-personal-hero">
+      <div class="cx-container cx-p1-hero__grid">
+        <div class="cx-stack cx-personal-hero__copy">
+          <p class="cx-eyebrow">PERSONAL REALITY</p>
+          <h1 class="cx-display" data-cx-en="You are more than one way of being read." data-cx-zh="你不需要被一种方法定义。">You are more than one way of being read.</h1>
+          <p class="cx-lead" data-cx-en="Personal Reality places several personal perspectives beside the same life, so you can see what looks stable, what belongs to the present, what repeats, and what still needs to be lived before it can mean anything." data-cx-zh="Personal Reality 把不同的个人视角放回同一个人的现实里。你可以分清哪些较稳定、哪些属于当下、哪些主题反复出现，也能看见哪些内容仍要回到真实生活里观察，才知道它是否有意义。">Personal Reality places several personal perspectives beside the same life, so you can see what looks stable, what belongs to the present, what repeats, and what still needs to be lived before it can mean anything.</p>
+          <p class="cx-personal-trust" data-cx-en="Start with the facts you know. We will ask for more only when a perspective genuinely needs it." data-cx-zh="从你确定的资料开始。只有某个视角真正需要更多资料时，我们才会再问。">Start with the facts you know. We will ask for more only when a perspective genuinely needs it.</p>
+        </div>
+        <figure class="cx-visual cx-personal-visual">
+          <img data-cx-asset="ILL-004" alt="Personal Reality illustration" hidden>
+          <div class="cx-personal-visual-fallback" data-cx-asset-fallback hidden>
+            <span class="cx-eyebrow" data-cx-en="PERSONAL REALITY" data-cx-zh="PERSONAL REALITY">PERSONAL REALITY</span>
+            <strong data-cx-en="One life. More than one lens." data-cx-zh="同一个人生，不止一个观察角度。">One life. More than one lens.</strong>
+          </div>
+          <figcaption class="cx-meta" data-cx-en="Different perspectives can sit beside each other without becoming a verdict." data-cx-zh="不同视角可以并列存在，而不必被合成一个结论。">Different perspectives can sit beside each other without becoming a verdict.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="cx-section--tight">
+      <div class="cx-container cx-personal-intro-grid">
+        <article class="cx-personal-intro-card">
+          <p class="cx-eyebrow" data-cx-en="WHAT THIS HELPS YOU SEE" data-cx-zh="这里帮助你看见什么">WHAT THIS HELPS YOU SEE</p>
+          <h2 class="cx-title" data-cx-en="Separate what is structural from what is simply happening now." data-cx-zh="把长期结构，与正在发生的当下分开来看。">Separate what is structural from what is simply happening now.</h2>
+          <p class="cx-body" data-cx-en="Some personal systems describe patterns built from birth information. Others add timing, cycles or changing conditions. Reading them together is useful only when those layers stay distinct." data-cx-zh="有些个人系统关注由出生资料形成的长期结构，有些还会加入时间、周期与变化条件。把它们放在一起的价值，不是混成一个答案，而是让不同层次保持清楚。">Some personal systems describe patterns built from birth information. Others add timing, cycles or changing conditions. Reading them together is useful only when those layers stay distinct.</p>
+        </article>
+        <article class="cx-personal-intro-card">
+          <p class="cx-eyebrow" data-cx-en="HOW TO USE IT" data-cx-zh="怎样使用这些内容">HOW TO USE IT</p>
+          <h2 class="cx-title" data-cx-en="Notice what helps you observe your life more clearly." data-cx-zh="留意什么真正帮助你更清楚地观察自己的生活。">Notice what helps you observe your life more clearly.</h2>
+          <p class="cx-body" data-cx-en="A useful perspective should make something easier to notice, compare or revisit. If it does not fit your experience, that matters too. Personal Reality leaves room for agreement, uncertainty and disagreement." data-cx-zh="一个有用的视角，应该让某些事情更容易被你观察、比较或重新检视。如果它与你的经历并不相符，这同样重要。Personal Reality 会保留符合、未知与不符合，而不是要求你接受一个固定答案。">A useful perspective should make something easier to notice, compare or revisit. If it does not fit your experience, that matters too. Personal Reality leaves room for agreement, uncertainty and disagreement.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cx-section--tight">
+      <div class="cx-container cx-personal-start-grid">
+        <section class="cx-card cx-personal-form-card">
+          <div class="cx-p1-section-head">
+            <p class="cx-eyebrow" data-cx-en="START WITH WHAT YOU KNOW" data-cx-zh="从你知道的资料开始">START WITH WHAT YOU KNOW</p>
+            <h2 class="cx-title" data-cx-en="Three simple details are enough to begin." data-cx-zh="先从三个基本资料开始。">Three simple details are enough to begin.</h2>
+            <p class="cx-body cx-muted" data-cx-en="Your birth date, birth time and birth place give each perspective a shared starting point. If your time is uncertain, say so. We will not fill in what you do not know." data-cx-zh="出生日期、出生时间与出生地点，会成为不同视角共同的起点。如果时间不确定，可以直接说明；不知道的资料不会被自动补上。">Your birth date, birth time and birth place give each perspective a shared starting point. If your time is uncertain, say so. We will not fill in what you do not know.</p>
+          </div>
+
+          <form class="cx-p1-form cx-personal-form" data-cx-personal-form autocomplete="off">
+            <label class="cx-p1-field">
+              <span data-cx-en="Birth date" data-cx-zh="出生日期">Birth date</span>
+              <input type="date" name="birthDate" required>
+            </label>
+
+            <div class="cx-personal-time-row">
+              <label class="cx-p1-field">
+                <span data-cx-en="Birth time" data-cx-zh="出生时间">Birth time</span>
+                <input type="time" name="birthTime" step="60" required>
+              </label>
+              <label class="cx-personal-time-unknown">
+                <input type="checkbox" name="birthTimeUnknown" value="true">
+                <span data-cx-en="I do not know the exact time" data-cx-zh="我不知道准确时间">I do not know the exact time</span>
+              </label>
+            </div>
+
+            <div class="cx-p1-field cx-place-field" data-cx-place-field>
+              <label for="cx-birth-place" data-cx-en="Birth place" data-cx-zh="出生地点">Birth place</label>
+              <div class="cx-place-input-wrap">
+                <input id="cx-birth-place" type="search" name="birthPlaceQuery" placeholder="Start typing a city or town" data-cx-place-input autocomplete="off" aria-autocomplete="list" aria-controls="cx-place-results" aria-expanded="false" required>
+                <span class="cx-place-spinner" data-cx-place-spinner hidden aria-hidden="true"></span>
+              </div>
+              <div id="cx-place-results" class="cx-place-results" data-cx-place-results role="listbox" hidden></div>
+              <div class="cx-place-confirmed" data-cx-place-confirmed hidden>
+                <span aria-hidden="true">✓</span>
+                <div><small data-cx-en="Birth place confirmed" data-cx-zh="已确认出生地点">Birth place confirmed</small><strong data-cx-place-confirmed-label></strong></div>
+                <button type="button" data-cx-place-change data-cx-en="Change" data-cx-zh="更改">Change</button>
+              </div>
+              <p class="cx-place-help" data-cx-en="Choose one place from the list so the location and time zone can be matched correctly." data-cx-zh="请从列表中选择一个地点，这样才能正确对应出生坐标与时区。">Choose one place from the list so the location and time zone can be matched correctly.</p>
+              <p class="cx-place-attribution"><span data-cx-en="Place search:" data-cx-zh="地点资料：">Place search:</span> <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a></p>
+            </div>
+
+            <fieldset class="cx-personal-perspectives">
+              <legend data-cx-en="Perspectives you want to explore" data-cx-zh="你想探索的视角">Perspectives you want to explore</legend>
+              <p class="cx-body cx-muted" data-cx-en="You can choose one or several. They will be shown together, but each keeps its own way of looking." data-cx-zh="可以选择一个或多个。结果会放在同一个空间里阅读，但每个视角仍保留自己的观察方式。">You can choose one or several. They will be shown together, but each keeps its own way of looking.</p>
+              <div class="cx-p1-checks cx-personal-methods">
+                <label class="cx-p1-check"><input type="checkbox" name="methods" value="astrology" checked><span><strong data-cx-en="Astrology" data-cx-zh="占星">Astrology</strong><small data-cx-en="Birth structure, relationships between placements and timing when available." data-cx-zh="观察出生结构、位置之间的关系，以及在资料足够时加入时间层。">Birth structure, relationships between placements and timing when available.</small></span></label>
+                <label class="cx-p1-check"><input type="checkbox" name="methods" value="bazi" checked><span><strong data-cx-en="BaZi" data-cx-zh="八字">BaZi</strong><small data-cx-en="Four-pillar structure, elemental balance and time-based cycles when available." data-cx-zh="观察四柱结构、五行关系，以及在资料足够时加入时间周期。">Four-pillar structure, elemental balance and time-based cycles when available.</small></span></label>
+                <label class="cx-p1-check"><input type="checkbox" name="methods" value="numeric"><span><strong data-cx-en="Numerology" data-cx-zh="数字学">Numerology</strong><small data-cx-en="A date-based numerical perspective with a different, simpler structure." data-cx-zh="从出生日期形成另一种更简洁的数字结构视角。">A date-based numerical perspective with a different, simpler structure.</small></span></label>
+                <label class="cx-p1-check"><input type="checkbox" name="methods" value="ziwei"><span><strong data-cx-en="Zi Wei" data-cx-zh="紫微斗数">Zi Wei</strong><small data-cx-en="A palace-based view of personal structure and, when requested later, changing life periods." data-cx-zh="以宫位观察个人结构；在需要时，还可以进一步加入不同人生阶段。">A palace-based view of personal structure and, when requested later, changing life periods.</small></span></label>
+              </div>
+            </fieldset>
+
+            <section class="cx-personal-conditional" data-cx-traditional-sex hidden>
+              <p class="cx-eyebrow" data-cx-en="ONE EXTRA DETAIL" data-cx-zh="还需要一个资料">ONE EXTRA DETAIL</p>
+              <h3 class="cx-heading" data-cx-en="Zi Wei uses a traditional calculation rule for some time-based readings." data-cx-zh="紫微在部分时间周期计算中，会使用一个传统的顺逆规则。">Zi Wei uses a traditional calculation rule for some time-based readings.</h3>
+              <p class="cx-body cx-muted" data-cx-en="Choose the rule used for the calculation. This choice is used only for that calculation." data-cx-zh="请选择计算时使用的规则。这个选择只用于相应计算。">Choose the rule used for the calculation. This choice is used only for that calculation.</p>
+              <div class="cx-personal-choice-row">
+                <label><input type="radio" name="traditionalCalculationSex" value="MALE"><span data-cx-en="Male rule" data-cx-zh="男性规则">Male rule</span></label>
+                <label><input type="radio" name="traditionalCalculationSex" value="FEMALE"><span data-cx-en="Female rule" data-cx-zh="女性规则">Female rule</span></label>
+              </div>
+            </section>
+
+            <label class="cx-p1-field">
+              <span data-cx-en="What would you like to understand? (optional)" data-cx-zh="你现在最想理解什么？（可选）">What would you like to understand? (optional)</span>
+              <textarea name="intent" maxlength="500" placeholder="A pattern, a current question, or something you want to look at more clearly."></textarea>
+            </label>
+
+            <label class="cx-p1-consent cx-personal-consent"><input type="checkbox" name="consent" required><span data-cx-en="Use these details to prepare the perspectives I selected. Do not save them unless I choose to continue later." data-cx-zh="使用这些资料准备我选择的视角；除非之后由我主动选择继续，否则不要保存。">Use these details to prepare the perspectives I selected. Do not save them unless I choose to continue later.</span></label>
+
+            <div class="cx-p1-inline"><button class="cx-button cx-button--primary" type="submit" data-cx-en="Explore my perspectives" data-cx-zh="开始探索">Explore my perspectives</button><button class="cx-button" type="reset" data-cx-en="Clear" data-cx-zh="清除">Clear</button></div>
+            <p class="cx-p1-status" data-cx-personal-status role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <aside class="cx-personal-guide">
+          <article class="cx-card cx-card--soft">
+            <p class="cx-eyebrow" data-cx-en="WHY PLACE MATTERS" data-cx-zh="为什么出生地点重要">WHY PLACE MATTERS</p>
+            <h3 class="cx-heading" data-cx-en="A place name is not enough on its own." data-cx-zh="只有地点名称，并不足够。">A place name is not enough on its own.</h3>
+            <p class="cx-body" data-cx-en="When you choose a place from the list, PHI OS matches it to its real-world coordinates and time zone. That lets time-sensitive perspectives use the correct local birth context instead of guessing from your current device." data-cx-zh="当你从列表中选择地点后，PHI OS 会把它对应到现实中的坐标与时区。这样，需要时间位置的视角就能使用出生当时的本地条件，而不是猜测你现在设备所在的位置。">When you choose a place from the list, PHI OS matches it to its real-world coordinates and time zone. That lets time-sensitive perspectives use the correct local birth context instead of guessing from your current device.</p>
+          </article>
+          <article class="cx-card">
+            <p class="cx-eyebrow" data-cx-en="READING DIFFERENCE" data-cx-zh="怎样理解不同结果">READING DIFFERENCE</p>
+            <h3 class="cx-heading" data-cx-en="Similarity is interesting. Difference is useful too." data-cx-zh="相似值得留意，不一致也有价值。">Similarity is interesting. Difference is useful too.</h3>
+            <p class="cx-body" data-cx-en="If two perspectives describe something in similar language, notice it—but do not treat agreement as proof. If they differ, keep the difference visible. The goal is a clearer observation of your life, not a vote on who you are." data-cx-zh="如果两个视角用不同方式谈到相似主题，可以留意，但不需要把一致当成证明；如果它们并不一致，也保留这种差异。这里的目标，是帮助你更清楚地观察自己的生活，而不是投票决定“你是谁”。">If two perspectives describe something in similar language, notice it—but do not treat agreement as proof. If they differ, keep the difference visible. The goal is a clearer observation of your life, not a vote on who you are.</p>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <section class="cx-section--tight cx-personal-results" data-cx-personal-results hidden>
+      <div class="cx-container">
+        <header class="cx-personal-results-intro">
+          <p class="cx-eyebrow" data-cx-en="YOUR PERSONAL REALITY" data-cx-zh="你的 Personal Reality">YOUR PERSONAL REALITY</p>
+          <h2 class="cx-title" data-cx-en="Read the layers separately before you connect them." data-cx-zh="先把不同层次分开看，再决定它们怎样与你的现实连接。">Read the layers separately before you connect them.</h2>
+          <p class="cx-body cx-muted" data-cx-en="Begin with the overall picture. Then move into structure, current context and recurring patterns. The final step is not to accept a label—it is to decide what is worth carrying back into your own observation." data-cx-zh="先看整体，再进入结构、当前上下文与反复出现的模式。最后一步不是接受一个标签，而是决定哪些内容值得带回自己的观察里继续验证。">Begin with the overall picture. Then move into structure, current context and recurring patterns. The final step is not to accept a label—it is to decide what is worth carrying back into your own observation.</p>
+        </header>
+        <div class="cx-p1-workspace" data-cx-workspace>
+          <aside class="cx-p1-rail"><nav data-cx-tablist aria-label="Personal Reality sections">
+            <button class="cx-p1-tab" type="button" data-cx-tab="overview" aria-selected="true" data-cx-en="Overview" data-cx-zh="总览">Overview</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="structure" data-cx-en="Structure" data-cx-zh="结构">Structure</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="context" data-cx-en="Current Context" data-cx-zh="当前上下文">Current Context</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="patterns" data-cx-en="Patterns" data-cx-zh="模式">Patterns</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="reality" data-cx-en="Reality Connection" data-cx-zh="与你的现实对照">Reality Connection</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="details" data-cx-en="What remains open" data-cx-zh="仍然未确定">What remains open</button>
+          </nav></aside>
+          <div>
+            <section class="cx-p1-panel" data-cx-panel="overview"><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="OVERVIEW" data-cx-zh="总览">OVERVIEW</p><h2 class="cx-title" data-cx-en="The perspectives that were ready" data-cx-zh="已经准备好的视角">The perspectives that were ready</h2><p class="cx-body cx-muted" data-cx-en="Each perspective keeps its own language. This overview helps you see what is available before you go deeper." data-cx-zh="每个视角保留自己的语言。总览先让你知道哪些内容已经准备好，再决定从哪里深入。">Each perspective keeps its own language. This overview helps you see what is available before you go deeper.</p></div><div data-cx-personal-overview></div></section>
+            <section class="cx-p1-panel" data-cx-panel="structure" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="STRUCTURE" data-cx-zh="结构">STRUCTURE</p><h2 class="cx-title" data-cx-en="What stays relatively stable" data-cx-zh="哪些内容相对稳定">What stays relatively stable</h2><p class="cx-body cx-muted" data-cx-en="This section keeps birth-based structure separate from changing circumstances. It is the part to revisit when you want to understand the underlying map rather than today's mood." data-cx-zh="这里把由出生资料形成的结构，与后来变化的环境分开。它更适合用来理解长期底图，而不是解释今天的情绪。">This section keeps birth-based structure separate from changing circumstances. It is the part to revisit when you want to understand the underlying map rather than today's mood.</p></div><div data-cx-personal-structure></div></section>
+            <section class="cx-p1-panel" data-cx-panel="context" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="CURRENT CONTEXT" data-cx-zh="当前上下文">CURRENT CONTEXT</p><h2 class="cx-title" data-cx-en="What belongs to the present, when it is available" data-cx-zh="哪些内容属于当下——只有资料足够时才显示">What belongs to the present, when it is available</h2><p class="cx-body cx-muted" data-cx-en="Present-day context is a different layer from birth structure. If a selected perspective did not establish that layer, it stays empty rather than being filled with a generic reading." data-cx-zh="当下条件与出生结构是不同层次。如果所选视角没有真正建立这一层，这里会保持空白，而不是用泛泛的文字把它填满。">Present-day context is a different layer from birth structure. If a selected perspective did not establish that layer, it stays empty rather than being filled with a generic reading.</p></div><div data-cx-personal-context></div></section>
+            <section class="cx-p1-panel" data-cx-panel="patterns" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="PATTERNS" data-cx-zh="模式">PATTERNS</p><h2 class="cx-title" data-cx-en="Themes inside each perspective" data-cx-zh="每个视角内部反复出现的主题">Themes inside each perspective</h2><p class="cx-body cx-muted" data-cx-en="Patterns are shown inside the perspective that produced them. You can compare them across methods, but the page does not turn similarity into a single verdict." data-cx-zh="模式会保留在产生它的视角里。你可以跨方法比较，但页面不会把相似之处自动合成为一个结论。">Patterns are shown inside the perspective that produced them. You can compare them across methods, but the page does not turn similarity into a single verdict.</p></div><div data-cx-personal-patterns></div></section>
+            <section class="cx-p1-panel" data-cx-panel="reality" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="REALITY CONNECTION" data-cx-zh="与你的现实对照">REALITY CONNECTION</p><h2 class="cx-title" data-cx-en="What matters is what you can actually observe." data-cx-zh="真正重要的，是你在现实里能不能观察到。">What matters is what you can actually observe.</h2><p class="cx-body cx-muted" data-cx-en="Choose how these perspectives currently relate to your experience. You can carry the perspective forward without turning it into a fact about yourself." data-cx-zh="你可以记录这些视角目前与你的经历有多大关系，再决定是否带入 My Reality 继续观察；它不会因此变成关于你的事实。">Choose how these perspectives currently relate to your experience. You can carry the perspective forward without turning it into a fact about yourself.</p></div><div class="cx-personal-reality-choice" data-cx-reality-choice><button type="button" data-value="RESONATES" data-cx-en="This resonates" data-cx-zh="这与我的经历很接近">This resonates</button><button type="button" data-value="PARTLY" data-cx-en="Partly" data-cx-zh="部分接近">Partly</button><button type="button" data-value="UNCLEAR" data-cx-en="Not clear yet" data-cx-zh="现在还看不出来">Not clear yet</button><button type="button" data-value="DOES_NOT_FIT" data-cx-en="This does not fit" data-cx-zh="这与我的经历不符合">This does not fit</button></div><label class="cx-p1-field"><span data-cx-en="What would you like to keep observing? (optional)" data-cx-zh="接下来你想继续观察什么？（可选）">What would you like to keep observing? (optional)</span><textarea data-cx-reality-note maxlength="500"></textarea></label><div class="cx-p1-actions"><button class="cx-button cx-button--primary" type="button" data-cx-personal-handoff disabled data-cx-en="Continue in My Reality" data-cx-zh="带到 My Reality 继续">Continue in My Reality</button></div></section>
+            <section class="cx-p1-panel" data-cx-panel="details" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="WHAT REMAINS OPEN" data-cx-zh="仍然未确定">WHAT REMAINS OPEN</p><h2 class="cx-title" data-cx-en="Keep uncertainty visible." data-cx-zh="把不知道的部分保留下来。">Keep uncertainty visible.</h2><p class="cx-body cx-muted" data-cx-en="Missing information, unavailable perspectives and unresolved details are shown here in plain language. An honest gap is more useful than a confident guess." data-cx-zh="缺少的资料、暂时不能使用的视角，以及还没有答案的部分，会在这里用简单文字说明。清楚地保留空白，比自信地猜一个答案更有价值。">Missing information, unavailable perspectives and unresolved details are shown here in plain language. An honest gap is more useful than a confident guess.</p></div><div data-cx-personal-details></div></section>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
-  <dialog class="cx-dialog" id="cx-personal-handoff-dialog"><div class="cx-dialog__body"><h2 class="cx-heading" data-cx-en="Add this perspective to My Reality?" data-cx-zh="把这个视角加入 My Reality？">Add this perspective to My Reality?</h2><p class="cx-body cx-muted" data-cx-en="Only the accepted perspective references and declared unknowns are carried forward. The method result does not become a Reality fact." data-cx-zh="只会带入你接受的视角引用与已声明的未知项。方法结果不会变成 Reality 事实。">Only the accepted perspective references and declared unknowns are carried forward. The method result does not become a Reality fact.</p><label class="cx-p1-consent"><input type="checkbox" data-cx-personal-handoff-consent><span data-cx-en="I choose to bring these perspective references into My Reality." data-cx-zh="我选择把这些视角引用带入 My Reality。">I choose to bring these perspective references into My Reality.</span></label><p class="cx-p1-status" data-cx-personal-handoff-status></p><div class="cx-p1-dialog-actions"><button class="cx-button" type="button" data-cx-dialog-close data-cx-en="Cancel" data-cx-zh="取消">Cancel</button><button class="cx-button cx-button--primary" type="button" data-cx-personal-handoff-confirm data-cx-en="Continue" data-cx-zh="继续">Continue</button></div></div></dialog>
-  <div data-cx-footer></div><script type="module" src="/assets/customer-ui/js/shell.js"></script><script type="module" src="/assets/customer-ui/js/surfaces/personal-reality.js"></script>
-</body></html>
+
+  <dialog class="cx-dialog" id="cx-personal-handoff-dialog"><div class="cx-dialog__body"><h2 class="cx-heading" data-cx-en="Continue this in My Reality?" data-cx-zh="把这次观察带到 My Reality 继续？">Continue this in My Reality?</h2><p class="cx-body cx-muted" data-cx-en="Your selected perspective references, your response to them and any note you wrote can be carried forward. Nothing becomes a fact simply because you continue." data-cx-zh="可以把你选择的视角、你对它们的回应，以及刚才写下的观察带到 My Reality。继续保存，并不代表这些内容自动成为事实。">Your selected perspective references, your response to them and any note you wrote can be carried forward. Nothing becomes a fact simply because you continue.</p><label class="cx-p1-consent"><input type="checkbox" data-cx-personal-handoff-consent><span data-cx-en="Yes, continue with this context in My Reality." data-cx-zh="是的，把这些内容带到 My Reality 继续。">Yes, continue with this context in My Reality.</span></label><p class="cx-p1-status" data-cx-personal-handoff-status></p><div class="cx-p1-dialog-actions"><button class="cx-button" type="button" data-cx-dialog-close data-cx-en="Cancel" data-cx-zh="取消">Cancel</button><button class="cx-button cx-button--primary" type="button" data-cx-personal-handoff-confirm data-cx-en="Continue" data-cx-zh="继续">Continue</button></div></div></dialog>
+  <div data-cx-footer></div>
+  <script type="module" src="/assets/customer-ui/js/shell.js"></script>
+  <script type="module" src="/assets/customer-ui/js/surfaces/personal-reality.js"></script>
+</body>
+</html>
