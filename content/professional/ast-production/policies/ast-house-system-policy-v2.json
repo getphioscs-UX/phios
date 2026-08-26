@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-AST-HOUSE-SYSTEM-POLICY-v2.0.0",
+  "work": "CX-R12R3A-HOUSE-SYSTEM-RECONCILIATION",
+  "status": "ACTIVE_SUCCESSOR",
+  "successorOf": "content/professional/ast-production/policies/ast-house-system-policy-v1.json",
+  "historicalPredecessorMutated": false,
+  "defaultCustomerHouseSystem": "PLACIDUS_V1",
+  "supportedHouseSystems": [
+    {
+      "houseSystemCode": "PLACIDUS_V1",
+      "customerLabel": {"en": "Placidus", "zh-Hans": "普拉西德宫制"},
+      "calculationClass": "TIME_BASED_QUADRANT",
+      "requiresExactBirthTime": true,
+      "requiresCoordinates": true,
+      "polarPolicy": "UNAVAILABLE_WHEN_PLACIDUS_UNDEFINED"
+    },
+    {
+      "houseSystemCode": "WHOLE_SIGN_V1",
+      "customerLabel": {"en": "Whole Sign", "zh-Hans": "整宫制"},
+      "calculationClass": "SIGN_BASED",
+      "requiresExactBirthTime": true,
+      "requiresCoordinates": true,
+      "compatibilityRole": "SUPPORTED_NON_DEFAULT"
+    }
+  ],
+  "customerPolicy": {
+    "showHouseSystemUsed": true,
+    "showInternalAlgorithmCodes": false,
+    "defaultUserMustChooseHouseSystem": false,
+    "silentHouseSystemGuessAllowed": false,
+    "fallbackFromPlacidusToWholeSignWithoutDisclosureAllowed": false
+  },
+  "authorityBoundary": {
+    "houseSystemChangesPlanetLongitude": false,
+    "houseSystemChangesZodiacSign": false,
+    "houseSystemMayChangePlanetHouse": true,
+    "customerLayerMayRecalculateCusps": false,
+    "customerLayerMayInventHousePlacement": false
+  }
+}

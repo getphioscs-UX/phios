@@ -1,5 +1,7 @@
 export const ASTA_SCOPE_CODE='AST_STRUCTURAL_RUNTIME_V1';
+// Historical v1 authority remains Whole Sign. New customer-facing default is versioned separately.
 export const ASTA_HOUSE_SYSTEM_CODE='WHOLE_SIGN_V1';
+export {ASTA_DEFAULT_HOUSE_SYSTEM_CODE,ASTA_HOUSE_SYSTEM_PLACIDUS,ASTA_HOUSE_SYSTEM_WHOLE_SIGN,ASTA_HOUSE_SYSTEMS,getAstHouseSystemPolicy} from './ast-house-system-registry.js';
 export const ASTA_ANGLE_POLICY_CODE='PHI_OS_AST_ANGLES_MEEUS_V1';
 export const ASTA_NODE_POLICY_CODE='PHI_OS_AST_TRUE_NODE_V1';
 export const ASTA_ASPECT_SET_CODE='MAJOR_ASPECTS_V1';
