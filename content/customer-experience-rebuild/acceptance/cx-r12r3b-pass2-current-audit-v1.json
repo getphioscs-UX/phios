@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-PASS2-CURRENT-AUDIT-v1.0.0",
+  "work": "CX-R12R3B-PASS2-AUDIT",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "alignedArchive": {
+    "name": "docs(1).zip",
+    "sha256": "c9bc76ba5cc04aa330bb3ffa2bde429389f27d3aa2822760a482947240b5926c"
+  },
+  "w0ToW60": {
+    "developmentAcceptancePath": "content/customer-experience-rebuild/acceptance/cx-r12r3b-machine-development-acceptance-v1.json",
+    "status": "DEVELOPMENT_ACCEPTED",
+    "confirmed": true,
+    "fourRuntimePathsConnected": true,
+    "fourInterpretationPathsConnected": true,
+    "fourGraphPathsConnected": true,
+    "fixturesPass": true,
+    "npmRunCheckExitCode": 0
+  },
+  "humanReview": {
+    "campaignPath": "content/customer-experience-rebuild/review/cx-r12r3b-96-case-human-review-campaign-v1.json",
+    "caseCount": 96,
+    "dualAccepted": 0,
+    "reviewReady": false,
+    "reason": "CANDIDATE_MATERIALIZATION_AND_PREFLIGHT_REMEDIATION_REQUIRED"
+  },
+  "coverage": {
+    "currentCustomerPublishableCoverage": 0,
+    "customerPublishableMethods": []
+  },
+  "blockers": [
+    {
+      "blockerId": "HR-MATERIALIZATION-001",
+      "severity": "CRITICAL",
+      "scope": [
+        "AST",
+        "NUM",
+        "BZR",
+        "ZWR"
+      ],
+      "finding": "The 96-case campaign records fixedVariant labels but no case-specific candidateSnapshotRef / interpretation snapshot / graph snapshot.",
+      "evidence": {
+        "campaignPath": "content/customer-experience-rebuild/review/cx-r12r3b-96-case-human-review-campaign-v1.json",
+        "caseCount": 96,
+        "candidateSnapshotsPresent": 0
+      },
+      "effect": "External reviewers cannot verify the actual composed interpretation for each fixed case; dual human acceptance cannot truthfully start."
+    },
+    {
+      "blockerId": "COMPOSITION-SELECTION-001",
+      "severity": "CRITICAL",
+      "scope": [
+        "AST",
+        "BZR",
+        "ZWR"
+      ],
+      "finding": "Current composer uses first-N admitted meanings through pickMeanings(context, ...) instead of selecting meaning refs from each unit actual projection selector.",
+      "evidence": {
+        "runtimePath": "functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js",
+        "pickMeaningsPresent": true,
+        "genericComposerCalls": 4
+      },
+      "effect": "A structurally valid candidate can bind unrelated atomic meanings to a placement, pillar or palace. Method-fidelity review must not approve these candidates."
+    },
+    {
+      "blockerId": "CUSTOMER-LANGUAGE-001",
+      "severity": "HIGH",
+      "scope": [
+        "NUM",
+        "BZR"
+      ],
+      "finding": "Current admitted locale corpus contains internal semantic-slot prose such as “PHI OS canonical … semantic slot”, which is not ordinary-reader customer language.",
+      "evidence": {
+        "localeAuthority": "content/professional/canonical-meaning-production/successors/canonical-meaning-locale-registry-v3.json",
+        "knownInternalPhrase": "PHI OS canonical"
+      },
+      "effect": "Customer Clarity acceptance must fail or remain pending until an admitted plain-language successor exists; AI gap-fill is forbidden."
+    },
+    {
+      "blockerId": "ZWR-REVIEW-EXECUTION-001",
+      "severity": "HIGH",
+      "scope": [
+        "ZWR"
+      ],
+      "finding": "The current Node review path cannot directly execute the Zi Wei meaning runtime because functions/** intentionally uses bundler-compatible JSON imports without Node JSON import attributes.",
+      "evidence": {
+        "runtimePath": "functions/canonical-meaning-production/zi-wei-meaning-runtime.js",
+        "cloudflareBoundary": "scripts/check-cloudflare-function-import-compat.mjs"
+      },
+      "effect": "The review campaign needs a dedicated deterministic review materializer that consumes governed Zi Wei JSON authorities without changing Cloudflare runtime import style."
+    }
+  ],
+  "decision": {
+    "developmentAcceptedPreserved": true,
+    "humanReviewMayBeDeclaredComplete": false,
+    "controlledProductionMayStart": false,
+    "productionFreezeMayRun": false,
+    "nextRequiredState": "REVIEW_CANDIDATE_MATERIALIZATION_AND_PREFLIGHT_REMEDIATION"
+  }
+}
