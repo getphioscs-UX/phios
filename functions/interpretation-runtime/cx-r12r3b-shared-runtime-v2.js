@@ -136,7 +136,10 @@ function meaningContext(payload){
         item?.mappingLineage?.mappingCode?`MAP:${item.mappingLineage.mappingCode}`:null,
         item?.sourceProjectionRef?.projectionId?`PROJECTION:${item.sourceProjectionRef.projectionId}`:null
       ]),
-      productionStatus:item.status||bundle?.status||null
+      productionStatus:item.status||bundle?.status||null,
+      sourceProjectionRef:clone(item?.sourceProjectionRef||null),
+      selector:clone(item?.sourceProjectionRef?.selector||null),
+      mappingCode:item?.mappingLineage?.mappingCode||null
     });
   });
   const sourceAdmitted=refs.length>0&&refs.every(x=>x.productionStatus==='PRODUCTION')&&Boolean(bundle?.bundleCode);
@@ -176,7 +179,57 @@ function resolveCandidateReferences(candidate,projection,meaning){
   return uniq(failures);
 }
 
-function pickMeanings(context,count=4){return context.refs.slice(0,Math.max(1,count));}
+function selectorMatches(selector,{methodId,projection,subject=null,relatedSubject=null,aspect=null,house=null,pillarPrefix=null,pillarItems=[],valueItem=null,palace=null,starCodes=[],transformationCodes=[]}={}){
+  if(!selector||typeof selector!=='object')return false;
+  const op=selector.operator;
+  if(methodId==='AST'){
+    if(op==='position_code_match')return [subject,relatedSubject].filter(Boolean).includes(selector.code);
+    if(op==='position_longitude_segment'){
+      const positions=list(projection?.calculation?.positions).filter(x=>[subject,relatedSubject].includes(x.code));
+      return positions.some(x=>Number.isFinite(Number(x.value))&&Number(x.value)>=Number(selector.minInclusive)&&Number(x.value)<Number(selector.maxExclusive));
+    }
+    if(op==='structure_item_code_match'&&selector.groupCode==='HOUSE_CUSPS')return house!=null&&selector.itemCode===`HOUSE_${house}`;
+    if(op==='structure_item_meta_match'&&selector.groupCode==='ASPECTS')return Boolean(aspect)&&selector.metaKey==='type'&&selector.metaValue===aspect?.meta?.type;
+  }
+  if(methodId==='NUM'){
+    if(op==='array_object_match'&&selector.path==='calculation.values'){
+      const match=selector.match||{};return Boolean(valueItem)&&Object.entries(match).every(([k,v])=>valueItem?.[k]===v);
+    }
+    if(op==='array_object_exists'&&selector.path==='calculation.cycles'){
+      const match=selector.match||{};return list(projection?.calculation?.cycles).some(x=>Object.entries(match).every(([k,v])=>x?.[k]===v));
+    }
+  }
+  if(methodId==='BZR'){
+    if(op==='nested_array_object_match'&&selector.outerMatch?.code==='FOUR_PILLARS'){
+      const match=selector.childMatch||{};
+      return pillarItems.some(item=>{
+        if(match.codePrefix&&!String(item?.code||'').startsWith(match.codePrefix))return false;
+        if(match.codeSuffix&&!String(item?.code||'').endsWith(match.codeSuffix))return false;
+        if(Object.prototype.hasOwnProperty.call(match,'value')&&item?.value!==match.value)return false;
+        return true;
+      });
+    }
+    if(op==='array_object_exists'&&selector.path==='calculation.cycles'){
+      const match=selector.match||{};return list(projection?.calculation?.cycles).some(x=>Object.entries(match).every(([k,v])=>x?.[k]===v));
+    }
+  }
+  if(methodId==='ZWR'){
+    if(op==='structure_item_code_match'){
+      const code=selector.code||selector.itemCode;
+      if(selector.groupCode==='ZI_WEI_PALACES')return palace?.code===code;
+      if(selector.groupCode==='ZI_WEI_STARS')return starCodes.includes(code);
+      if(selector.groupCode==='ZI_WEI_TRANSFORMATIONS')return transformationCodes.includes(code);
+    }
+  }
+  return false;
+}
+
+function selectMeanings(context,query,{limit=4,allowFallback=false}={}){
+  const matched=context.refs.filter(ref=>selectorMatches(ref.selector,query));
+  if(matched.length)return matched.slice(0,Math.max(1,limit));
+  const legacySelectorless=context.refs.length>0&&context.refs.every(ref=>!ref.selector);
+  return (allowFallback||legacySelectorless)?context.refs.slice(0,Math.max(1,limit)):[];
+}
 function meaningText(refs,locale){
   const definitions=refs.map(x=>clean(x.definition)).filter(Boolean).slice(0,3);
   if(definitions.length)return definitions.join(locale==='zh-Hans'?'；':' ');
@@ -222,7 +275,7 @@ function composeAst(input,context,projectionDigest){
     const other=aspect?.meta?.fromCode===body.code?aspect?.meta?.toCode:aspect?.meta?.fromCode;
     const bodyLabel=labelForAst(body.code,locale),otherLabel=other?labelForAst(other,locale):t(locale,'the wider chart','全盘其他位置');
     const house=placements.get(body.code)||null,relation=aspect?.meta?.type==='SQUARE'||aspect?.meta?.type==='OPPOSITION'?'TENSION':aspect?'SUPPORT':'DEPENDENCY';
-    const refs=pickMeanings(context,4);
+    const refs=selectMeanings(context,{methodId:'AST',projection:p,subject:body.code,relatedSubject:other,aspect,house},{limit:4});
     const structuralReason=t(locale,
       `This theme comes from ${bodyLabel}${house?` in House ${house}`:''} read together with ${otherLabel}, using ${houseSystemLabel(p,locale)}, rather than from one symbol alone.`,
       `这一主题来自${bodyLabel}${house?`落在第 ${house} 宫`:''}与${otherLabel}的共同关系，并严格采用${houseSystemId(p)==='PLACIDUS_V1'?'普拉西德宫制':'本次记录的宫制'}，不是从单一符号直接推断。`);
@@ -234,8 +287,9 @@ function composeAst(input,context,projectionDigest){
 }
 
 function composeNum(input,context,projectionDigest){
-  const p=input.canonicalMethodProjection,locale=input.locale,values=list(p.calculation?.values),cycles=list(p.calculation?.cycles),refs=pickMeanings(context,3);
+  const p=input.canonicalMethodProjection,locale=input.locale,values=list(p.calculation?.values),cycles=list(p.calculation?.cycles);
   return values.slice(0,5).map((value,index)=>{
+    const refs=selectMeanings(context,{methodId:'NUM',projection:p,valueItem:value},{limit:3});
     const role=codeLabel(value.code,locale),path=list(value.reductionSteps).length?value.reductionSteps:[value.rawValue,value.value].filter(x=>x!==null&&x!==undefined);
     const relation=path.length>1?'TRANSITION':cycles.length?'ACTIVATION':'DEPENDENCY';
     const structuralReason=t(locale,`This theme comes from the ${role} role and its recorded path ${path.join(' → ')||value.value}; it is not a free-standing meaning for the final digit.`,`这一主题来自“${role}”这一计算角色及其实际推导路径 ${path.join(' → ')||value.value}，不是只看最终数字的独立标签。`);
@@ -249,8 +303,10 @@ function bzrPairs(p){
   return prefixes.map(prefix=>({prefix,stem:items.find(x=>x.code===`${prefix}_STEM`),branch:items.find(x=>x.code===`${prefix}_BRANCH`)})).filter(x=>x.stem||x.branch);
 }
 function composeBzr(input,context,projectionDigest){
-  const p=input.canonicalMethodProjection,locale=input.locale,pairs=bzrPairs(p),refs=pickMeanings(context,4);const month=pairs.find(x=>x.prefix==='MONTH'),day=pairs.find(x=>x.prefix==='DAY');
+  const p=input.canonicalMethodProjection,locale=input.locale,pairs=bzrPairs(p);const month=pairs.find(x=>x.prefix==='MONTH'),day=pairs.find(x=>x.prefix==='DAY');
   return pairs.slice(0,4).map((pair,index)=>{
+    const pillarItems=[pair.stem,pair.branch].filter(Boolean);
+    const refs=selectMeanings(context,{methodId:'BZR',projection:p,pillarPrefix:pair.prefix,pillarItems},{limit:4});
     const pillar=t(locale,`${codeLabel(pair.prefix,locale)} Pillar`,`${{YEAR:'年柱',MONTH:'月柱',DAY:'日柱',HOUR:'时柱'}[pair.prefix]}`),stem=labelForBzr(pair.stem?.value,locale),branch=labelForBzr(pair.branch?.value,locale),dayStem=labelForBzr(day?.stem?.value,locale),monthBranch=labelForBzr(month?.branch?.value,locale);
     const structuralReason=t(locale,`This theme comes from the role of the ${pillar}, its stem ${stem}, its branch ${branch}, and its relationship to the day reference ${dayStem} under the month context ${monthBranch}.`,`这一主题来自${pillar}的柱位角色、天干${stem}、地支${branch}，以及它与日主${dayStem}在月令${monthBranch}之下的关系，不是由单一干支直接推断。`);
     const relationContext=t(locale,`The ${pillar} is interpreted through day-reference and seasonal context; roots, ten-god or clash claims are omitted unless present in the projection.`,`${pillar}必须经日主与季节情境组合；若投射中没有根气、十神或合冲刑害，就不会补写相关结论。`);
@@ -260,10 +316,11 @@ function composeBzr(input,context,projectionDigest){
 
 function zwiPalaces(p){return list(group(p,'ZI_WEI_PALACES')?.items);}
 function composeZwr(input,context,projectionDigest){
-  const p=input.canonicalMethodProjection,locale=input.locale,palaces=zwiPalaces(p),stars=list(group(p,'ZI_WEI_STARS')?.items),transformations=list(group(p,'ZI_WEI_TRANSFORMATIONS')?.items),refs=pickMeanings(context,4);
+  const p=input.canonicalMethodProjection,locale=input.locale,palaces=zwiPalaces(p),stars=list(group(p,'ZI_WEI_STARS')?.items),transformations=list(group(p,'ZI_WEI_TRANSFORMATIONS')?.items);
   const selected=[...palaces.filter(x=>x.meta?.isLifePalace||x.meta?.isBodyPalace),...palaces].filter((x,i,a)=>a.findIndex(y=>y.code===x.code)===i).slice(0,3);
   return selected.map((palace,index)=>{
     const label=labelForPalace(palace.code,locale),here=stars.filter(x=>x.meta?.palaceCode===palace.code),opposite=palaces[(palaces.indexOf(palace)+6)%Math.max(palaces.length,1)],changes=transformations.filter(x=>x.meta?.palaceCode===palace.code);
+    const refs=selectMeanings(context,{methodId:'ZWR',projection:p,palace,starCodes:here.map(x=>x.code),transformationCodes:changes.map(x=>x.code)},{limit:4});
     const other=opposite?labelForPalace(opposite.code,locale):t(locale,'the palace network','宫位网络');
     const structuralReason=t(locale,`This theme comes from ${label}, its ${here.length} admitted star placement(s), ${changes.length} recorded transformation(s), and its network relation with ${other}; the palace is not interpreted in isolation.`,`这一主题来自${label}、其中 ${here.length} 个已纳入的星曜落位、${changes.length} 个已记录的四化，以及它与${other}的宫位网络关系；不会把单一宫位孤立解释。`);
     const relationContext=t(locale,`The palace is read through life/body emphasis and the recorded opposite or triad network; no unapproved school or time overlay is mixed in.`,`该宫位经命身重点及已记录的对宫／三方网络阅读；不会混入未经批准的流派或时间叠层。`);

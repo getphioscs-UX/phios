@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-PASS2A-HUMAN-REVIEW-MATERIALIZATION-ACCEPTANCE-v1.0.0",
+  "work": "CX-R12R3B-PASS2A",
+  "baselineCommit": "0db5e11ed84829e28c5cd56244dab774059b3839",
+  "status": "HUMAN_REVIEW_MATERIALIZED_EXTERNAL_REVIEW_REQUIRED",
+  "developmentAcceptancePreserved": true,
+  "remediation": {
+    "compositionSelector": {
+      "status": "PASS",
+      "firstNMeaningSelectionRemoved": true,
+      "selectorBoundMeaningSelection": true,
+      "unrelatedAtomicMeaningFallbackForbiddenWhenSelectorsExist": true
+    },
+    "customerLanguage": {
+      "status": "PASS_FOR_REVIEW",
+      "authorityRef": "content/customer-experience-rebuild/authority/cx-r12r3b-customer-language-authority-v1.json",
+      "scope": ["NUM", "BZR"],
+      "meaningIdentityChanged": false,
+      "newTraditionalMeaningCreated": false,
+      "internalSemanticSlotLanguageVisibleInMaterializedCandidates": false
+    },
+    "ziWeiReviewMaterialization": {
+      "status": "PASS",
+      "cloudflareRuntimeImportStyleChanged": false,
+      "governedJsonAuthoritiesConsumedDirectlyByReviewTooling": true
+    },
+    "humanReviewPack": {
+      "caseCount": 96,
+      "materialized": 96,
+      "reviewEligible": 96,
+      "dualAccepted": 0,
+      "humanAcceptanceFabricated": false,
+      "manifestRef": "content/customer-experience-rebuild/review/materialized/v1/cx-r12r3b-human-review-materialization-manifest-v1.json",
+      "campaignRef": "content/customer-experience-rebuild/review/cx-r12r3b-96-case-human-review-campaign-v3.json",
+      "reviewHtmlRef": "tools/review/cx-r12r3b-human-review-materialized-v1.html"
+    }
+  },
+  "resolvedBlockers": [
+    "HR-MATERIALIZATION-001",
+    "COMPOSITION-SELECTION-001",
+    "CUSTOMER-LANGUAGE-001",
+    "ZWR-REVIEW-EXECUTION-001"
+  ],
+  "claims": {
+    "humanReviewReady": true,
+    "humanAccepted": false,
+    "customerPublishableCoverageComplete": false,
+    "liveBrowserAccepted": false,
+    "controlledProduction": false,
+    "fullProduction": false
+  },
+  "nextRequiredState": "EXTERNAL_DUAL_HUMAN_REVIEW_96_CASES"
+}

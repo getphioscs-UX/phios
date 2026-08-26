@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-GRAPH-CASE-v1.0.0",
+  "caseId": "CX-R12R3B-HR-BZR-05",
+  "methodId": "BZR",
+  "localized": [
+    {
+      "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-GRAPH-SNAPSHOT-v1.0.0",
+      "caseId": "CX-R12R3B-HR-BZR-05",
+      "methodId": "BZR",
+      "locale": "en",
+      "projectionDigest": "d9cf1a7cbcdab558388bedf9bb34becfd9b161fb597a1abf57c65facedda26d2",
+      "graphDigest": "09538d96496338acbf809686a644d5c4ce68baca0b032b429694ef0f273f0c75",
+      "graphType": "FOUR_PILLARS",
+      "houseSystemId": null,
+      "nodes": [
+        {
+          "nodeId": "BZR-YEAR-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:YEAR_STEM",
+          "label": "YEAR_STEM",
+          "localizedLabel": "Yang Wood",
+          "role": "STEM",
+          "value": "Yang Wood",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01"
+          ],
+          "groupId": "BZR-YEAR"
+        },
+        {
+          "nodeId": "BZR-YEAR-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:YEAR_BRANCH",
+          "label": "YEAR_BRANCH",
+          "localizedLabel": "Rat",
+          "role": "BRANCH",
+          "value": "Rat",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01"
+          ],
+          "groupId": "BZR-YEAR"
+        },
+        {
+          "nodeId": "BZR-MONTH-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:MONTH_STEM",
+          "label": "MONTH_STEM",
+          "localizedLabel": "Yang Fire",
+          "role": "STEM",
+          "value": "Yang Fire",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-02"
+          ],
+          "groupId": "BZR-MONTH"
+        },
+        {
+          "nodeId": "BZR-MONTH-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:MONTH_BRANCH",
+          "label": "MONTH_BRANCH",
+          "localizedLabel": "Tiger",
+          "role": "BRANCH",
+          "value": "Tiger",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01",
+            "CXI-BZR-D9CF1A7CBCDA-02",
+            "CXI-BZR-D9CF1A7CBCDA-03",
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-MONTH"
+        },
+        {
+          "nodeId": "BZR-DAY-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY_STEM",
+          "label": "DAY_STEM",
+          "localizedLabel": "Yang Metal",
+          "role": "STEM",
+          "value": "Yang Metal",
+          "state": "CALCULATED",
+          "priority": "PRIMARY",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-01",
+            "CXI-BZR-D9CF1A7CBCDA-02",
+            "CXI-BZR-D9CF1A7CBCDA-03",
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-DAY"
+        },
+        {
+          "nodeId": "BZR-DAY-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY_BRANCH",
+          "label": "DAY_BRANCH",
+          "localizedLabel": "Monkey",
+          "role": "BRANCH",
+          "value": "Monkey",
+          "state": "CALCULATED",
+          "priority": "PRIMARY",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-03"
+          ],
+          "groupId": "BZR-DAY"
+        },
+        {
+          "nodeId": "BZR-HOUR-STEM",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:HOUR_STEM",
+          "label": "HOUR_STEM",
+          "localizedLabel": "Yang Water",
+          "role": "STEM",
+          "value": "Yang Water",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-HOUR"
+        },
+        {
+          "nodeId": "BZR-HOUR-BRANCH",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:HOUR_BRANCH",
+          "label": "HOUR_BRANCH",
+          "localizedLabel": "Rat",
+          "role": "BRANCH",
+          "value": "Rat",
+          "state": "CALCULATED",
+          "priority": "SUPPORTING",
+          "interpretationUnitRefs": [
+            "CXI-BZR-D9CF1A7CBCDA-04"
+          ],
+          "groupId": "BZR-HOUR"
+        }
+      ],
+      "edges": [
+        {
+          "edgeId": "BZR-YEAR-PAIR",
+          "sourceNodeId": "BZR-YEAR-STEM",
+          "targetNodeId": "BZR-YEAR-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:YEAR:PAIR",
+          "interpretationUnitRefs": []
+        },
+        {
+          "edgeId": "BZR-MONTH-PAIR",
+          "sourceNodeId": "BZR-MONTH-STEM",
+          "targetNodeId": "BZR-MONTH-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:MONTH:PAIR",
+          "interpretationUnitRefs": []
+        },
+        {
+          "edgeId": "BZR-DAY-PAIR",
+          "sourceNodeId": "BZR-DAY-STEM",
+          "targetNodeId": "BZR-DAY-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY:PAIR",
+          "interpretationUnitRefs": []
+        },
+        {
+          "edgeId": "BZR-HOUR-PAIR",
+          "sourceNodeId": "BZR-HOUR-STEM",
+          "targetNodeId": "BZR-HOUR-BRANCH",
+          "relationType": "DEPENDENCY",
+          "canonicalRelationRef": "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:HOUR:PAIR",
+          "interpretationUnitRefs": []
+        }
+      ],
+      "groups": [
+        {
+          "groupId": "BZR-YEAR",
+          "label": "Year Pillar"
+        },
+        {
+          "groupId": "BZR-MONTH",
+          "label": "Month Pillar"
+        },
+        {
+          "groupId": "BZR-DAY",
+          "label": "Day Pillar"
+        },
+        {
+          "groupId": "BZR-HOUR",
+          "label": "Hour Pillar"
+        }
+      ],
+      "overlays": [
+        {
+          "overlayId": "BZR-CYCLE-1",
+          "canonicalRef": "CMP-BZRA-W13-FIXTURE-0001#CYCLE:1",
+          "label": "Cycle 1",
+          "active": false
+        }
+      ],
+      "legend": [
+        {
+          "code": "STEM",
+          "label": "Stem"
+        },
+        {
+          "code": "BRANCH",
+          "label": "Branch"
+        }
+      ],
+      "textEquivalent": {
+        "summary": "Every node and relationship is also available in the table fallback.",
+        "nodeCount": 8,
+        "edgeCount": 4
+      },
+      "reviewFocus": {
+        "focusInterpretationUnitRefs": [
+          "CXI-BZR-D9CF1A7CBCDA-02"
+        ],
+        "focusNodeRefs": [
+          "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:DAY_STEM"
+        ],
+        "focusRelationRefs": [
+          "CMP-BZRA-W13-FIXTURE-0001#FOUR_PILLARS:YEAR:PAIR"
+        ],
+        "scenario": "supporting relation",
+        "caseType": "TYPICAL_STRUCTURE",
+        "variantMode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "calculationVariantInvented": false
+      },
+      "customerInterpretationBindingsAccepted": false
+    }
+  ]
+}

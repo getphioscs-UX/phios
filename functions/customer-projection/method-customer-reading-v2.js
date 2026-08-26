@@ -13,6 +13,7 @@ import {
   CMP_PRODUCTION_LOCALE_REGISTRY
 } from '../canonical-meaning-production/production-registry-current-v3.js';
 import {createMethodInterpretationInput,createMethodInterpretationCandidate,projectMethodGraph} from '../interpretation-runtime/cx-r12r3b-shared-runtime-v2.js';
+import {projectCxR12R3bCustomerLanguage} from './cx-r12r3b-customer-language-v1.js';
 
 const METHOD_ID=Object.freeze({ASTROLOGY_PROJECTION:'AST',NUMEROLOGY_PROJECTION:'NUM',BAZI_PROJECTION:'BZR',ZI_WEI_PROJECTION:'ZWR'});
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const item of Object.values(value))freeze(item)}return value};
@@ -37,7 +38,8 @@ export async function buildMethodMeaningPayloadV2({canonicalProjection,locale='e
       :publicMethodCode==='NUMEROLOGY_PROJECTION'
         ?buildNumRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
         :buildZiWeiRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection});
-  return freeze({executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading});
+  const projected=projectCxR12R3bCustomerLanguage({meaningPayload:{executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading},methodId:METHOD_ID[publicMethodCode],locale:useLocale});
+  return freeze(projected);
 }
 
 export async function buildMethodCustomerDevelopmentResult({canonicalProjection,locale='en',requestedDepth='STANDARD',acceptedInterpretation=null}={}){

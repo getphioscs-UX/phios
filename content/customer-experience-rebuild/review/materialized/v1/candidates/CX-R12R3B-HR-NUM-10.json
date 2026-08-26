@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-CASE-v1.0.0",
+  "caseId": "CX-R12R3B-HR-NUM-10",
+  "methodId": "NUM",
+  "reviewLocales": [
+    "zh-Hans"
+  ],
+  "caseType": "RELATION_DENSE",
+  "scenario": "counterbalance network",
+  "localized": [
+    {
+      "schemaVersion": "PHI-OS-CX-R12R3B-HUMAN-REVIEW-CANDIDATE-SNAPSHOT-v1.0.0",
+      "caseId": "CX-R12R3B-HR-NUM-10",
+      "methodId": "NUM",
+      "locale": "zh-Hans",
+      "caseType": "RELATION_DENSE",
+      "scenario": "counterbalance network",
+      "fixedInputRef": "content/professional/num-production/fixtures/num-production-determinism-fixtures-v1.json",
+      "fixedVariant": "RELATION_DENSE-04",
+      "variantDisclosure": {
+        "mode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "doesNotClaimDistinctCalculationUnlessFixtureDiffers": true
+      },
+      "sourceReference": {
+        "projectionId": "CMP-000000000000000000000003",
+        "projectionVersion": "1.0.0",
+        "projectionDigest": "7a9fddcf358e22b1e83bd5658b92843967409fd8e301ab76ea836c3b6749afcd"
+      },
+      "projectionDigest": "7a9fddcf358e22b1e83bd5658b92843967409fd8e301ab76ea836c3b6749afcd",
+      "interpretationDigest": "905bb290bd1ebbeb9f36ccad4c8cb25477dce07c86cb640a229490f9e55c55cb",
+      "candidateId": "CXIC-NUM-905BB290BD1EBBEB9F36",
+      "status": "HUMAN_REVIEW_REQUIRED",
+      "lifecycle": {
+        "sequence": [
+          "CALCULATED",
+          "PROJECTED",
+          "MEANING_AVAILABLE",
+          "SOURCE_ADMITTED",
+          "LOCALE_COMPLETE",
+          "COMPOSITION_SUPPORTED",
+          "HUMAN_REVIEWED",
+          "CUSTOMER_PUBLISHABLE"
+        ],
+        "flags": {
+          "CALCULATED": true,
+          "PROJECTED": true,
+          "MEANING_AVAILABLE": true,
+          "SOURCE_ADMITTED": true,
+          "LOCALE_COMPLETE": true,
+          "COMPOSITION_SUPPORTED": true,
+          "HUMAN_REVIEWED": false,
+          "CUSTOMER_PUBLISHABLE": false
+        },
+        "currentStage": "COMPOSITION_SUPPORTED",
+        "customerPublishable": false
+      },
+      "validation": {
+        "valid": true,
+        "failures": [],
+        "failureMode": "NONE"
+      },
+      "interpretationUnits": [
+        {
+          "interpretationUnitId": "CXI-NUM-7A9FDDCF358E-01",
+          "methodId": "NUM",
+          "projectionRefs": [
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH",
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:1",
+            "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:2"
+          ],
+          "meaningRefs": [
+            "CM-NUMBER-ORIENTATION-NO08@1.0.0"
+          ],
+          "ruleRefs": [
+            "CX-COMP-NUM-ROLE-NUMBER-PATH-v1"
+          ],
+          "title": "life path：角色与推导",
+          "plainLanguageExplanation": "这一主题来自“life path”这一计算角色及其实际推导路径 35 → 8，不是只看最终数字的独立标签。 建设性的表现可能是有意识地运用这一角色，同时保留推导路径的差异：生命路径 · 8只在产生它的计算角色与化简路径中阅读。数字本身不会单独定义人格、人生目的、能力、命运，也不会预告未来事件。 若把最终数字当成完整身份，推导情境会被抹去，解释也容易变得僵化。",
+          "structuralReason": "这一主题来自“life path”这一计算角色及其实际推导路径 35 → 8，不是只看最终数字的独立标签。",
+          "relationContext": "这一角色需结合原数和化简路径阅读；本次没有建立获准的活动周期。",
+          "constructiveExpression": "建设性的表现可能是有意识地运用这一角色，同时保留推导路径的差异：生命路径 · 8只在产生它的计算角色与化简路径中阅读。数字本身不会单独定义人格、人生目的、能力、命运，也不会预告未来事件。",
+          "frictionExpression": "若把最终数字当成完整身份，推导情境会被抹去，解释也容易变得僵化。",
+          "activationConditions": [
+            "这一角色需结合原数和化简路径阅读；本次没有建立获准的活动周期。"
+          ],
+          "observableSignals": [
+            "观察“life path”在不同责任情境中是否以不同方式出现。"
+          ],
+          "alternativeInterpretations": [
+            "当这一角色需结合原数和化简路径阅读；本次没有建立获准的活动周期。没有在同一情境启动时，也可能出现另一种表现。"
+          ],
+          "uncertainties": [],
+          "confidenceBoundary": "这是有条件的结构解释，不是对现实经历的事实判定。",
+          "sourceLineage": [
+            "CMP:CMPB-007EFA2822C381E852C4F80E",
+            "MAP:CMP2-MAP-NUM-LIFE_PATH-8-TO-NO08",
+            "PROJECTION:CMP-000000000000000000000003"
+          ],
+          "priority": "PRIMARY",
+          "subject": "LIFE_PATH",
+          "relationType": "TRANSITION",
+          "realityComparisonQuestions": [
+            "哪一个现实情境最能说明这个角色如何运作，而不只是“对上数字标签”？"
+          ],
+          "customerPublicationStatus": "HUMAN_REVIEW_REQUIRED"
+        }
+      ],
+      "reviewFocus": {
+        "focusInterpretationUnitRefs": [
+          "CXI-NUM-7A9FDDCF358E-01"
+        ],
+        "focusNodeRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:STEP:2"
+        ],
+        "focusRelationRefs": [
+          "CMP-000000000000000000000003#VALUE:LIFE_PATH:REDUCTION:1"
+        ],
+        "scenario": "counterbalance network",
+        "caseType": "RELATION_DENSE",
+        "variantMode": "REVIEW_LENS_OVER_GOVERNED_FIXED_PROJECTION",
+        "calculationVariantInvented": false
+      },
+      "languagePreflight": {
+        "internalPhraseFree": true,
+        "rawCodeFree": true
+      },
+      "customerLanguageAuthority": {
+        "version": "CX-R12R3B-CUSTOMER-LANGUAGE-v1.0.0",
+        "methodId": "NUM",
+        "locale": "zh-Hans",
+        "meaningIdentityChanged": false,
+        "selectorChanged": false,
+        "sourceMeaningChanged": false,
+        "newMethodClaimCreated": false,
+        "purpose": "ORDINARY_READER_WORDING_ONLY"
+      },
+      "meaningSelection": {
+        "selectorBound": true,
+        "firstNSelectionForbidden": true
+      },
+      "humanReview": {
+        "methodFidelityAccepted": null,
+        "customerClarityAccepted": null,
+        "reviewerRef": null,
+        "evidenceRef": null
+      },
+      "customerPublishable": false
+    }
+  ],
+  "machinePreflightPassed": true,
+  "reviewEligible": true
+}
