@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-LIMITED-PRODUCTION-RUNTIME-FINGERPRINT-v1.0.0",
+  "work": "ICH-PROD-W32R1-SUCCESSOR-SHA-OBSERVATION-REBIND",
+  "baselineCommit": "5c1d05f400bd01e5d278327c97dffb5322940129",
+  "historicalFirstLiveAdmissionSha": "025588253432e411b130a61bf4b38fe540cfcf54",
+  "status": "CURRENT_SUCCESSOR_SHA_RUNTIME_FINGERPRINT_AUTHORITY",
+  "purpose": "Allow W32 observation on a later exact deployed commit only when I Ching-owned runtime bytes remain exact and shared symbolic surfaces preserve the I Ching semantic contract.",
+  "exactArtifacts": [
+    {
+      "path": "functions/iching-limited-production/iching-limited-production-v1.js",
+      "sha256": "d1150295d7f6bf0f33f3d683d9ef7d695ee263789e6439792eb58d8d0e91c537"
+    },
+    {
+      "path": "functions/api/iching-limited-session-v2.js",
+      "sha256": "b48c5520d6258812b60c2e8a5a90927e3e36627df73466c303648873fc5e3bfc"
+    },
+    {
+      "path": "functions/api/symbolic-method-execute-v4.js",
+      "sha256": "c123b691936deef605813914359869cae9d1d6da47662bbf14bcfdcdf1167c51"
+    },
+    {
+      "path": "functions/api/iching-runtime-status.js",
+      "sha256": "c7cb5b308478924c468f0b2da8e53353969694c45bfc6d28ca9283ef5094bb21"
+    },
+    {
+      "path": "functions/iching-product-runtime/iching-product-runtime-v2.js",
+      "sha256": "15bff68db3e0e46d0f9a96ae4571ca68fe53fb9d73469c01c31483a5957ebbaa"
+    },
+    {
+      "path": "functions/interpretation-runtime/iching-depth-editorial-runtime-v2.js",
+      "sha256": "dce0cd4cba1006c8a790b835c03c666f7664ac38cf449ec3e5b6f3c2f308cf9b"
+    },
+    {
+      "path": "functions/symbolic-method-public-ux/iching-product-view-model-v2.js",
+      "sha256": "6457f15db26e80c6a8983d936a833a76329fbce03f4455e64c0cb3a6ac98ba71"
+    },
+    {
+      "path": "content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v2.json",
+      "sha256": "cd32a92b8b7b98051d056c2e6d4fac1479db44a8528f931041bd1b164598addd"
+    },
+    {
+      "path": "content/production/symbolic-method/freeze/iching-limited-production-implementation-freeze-v2.json",
+      "sha256": "c7ca32f02f57848f8c6f73938b913d8e86a702bec3ffc041565c73ba8057c4d5"
+    },
+    {
+      "path": "content/interpretation/iching/reconciliation/iching-persistence-current-successor-v4.json",
+      "sha256": "c70cf79f5eb6fe98d9066d7c17b5edcc625a351d767bcda54ecc56c94e7ec229"
+    },
+    {
+      "path": "content/production/symbolic-method/rights/iching-limited-production-rights-scope-v1.json",
+      "sha256": "a28dbb38c4a804d840f911f2ba84583e81084f4efa35aab11f1a4daa63163a77"
+    }
+  ],
+  "sharedSemanticSurfaces": [
+    {
+      "path": "functions/api/_middleware.js",
+      "requiredMarkers": [
+        "verifyIChingLimitedSession",
+        "applyIChingLimitedAuthority",
+        "executeIChingLimited",
+        "url.pathname==='/api/symbolic-method-execute'",
+        "String(body?.method||'').toUpperCase()==='I_CHING'"
+      ],
+      "forbiddenMarkers": []
+    },
+    {
+      "path": "functions/api/symbolic-method-execute.js",
+      "requiredMarkers": [
+        "inspectIChingExecutionAuthority(context)",
+        "method==='I_CHING'",
+        "SYMBOLIC_LIMITED_PRODUCTION_NOT_ACTIVATED"
+      ],
+      "forbiddenMarkers": []
+    },
+    {
+      "path": "functions/api/symbolic-method-context.js",
+      "requiredMarkers": [
+        "inspectIChingExecutionAuthority(context)",
+        "symbolicPersistenceProviderState(context)",
+        "automaticPersistence:false"
+      ],
+      "forbiddenMarkers": [
+        "localStorage",
+        "sessionStorage",
+        "indexedDB"
+      ]
+    },
+    {
+      "path": "functions/api/symbolic-method-save.js",
+      "requiredMarkers": [
+        "RETENTION_POLICY_REQUIRED",
+        "localStorageFallbackAllowed:false",
+        "runtimeDbD1Used:true"
+      ],
+      "forbiddenMarkers": []
+    }
+  ],
+  "candidateRules": {
+    "candidateMustBeFortyCharacterCommitSha": true,
+    "candidateMustDifferFromHistoricalFirstLiveAdmissionSha": true,
+    "historicalFirstLiveAdmissionMustBeGitAncestor": true,
+    "localHeadMustEqualObservedCandidate": true,
+    "exactArtifactsMustMatchCandidateGitBytes": true,
+    "sharedSurfacesCheckedSemantically": true,
+    "packageJsonExcludedFromRuntimeFingerprint": true,
+    "unrelatedCxVisualOrchestrationChangesMayAdvanceCandidateSha": true
+  },
+  "productionBoundary": {
+    "limitedProductionOnly": true,
+    "fullProductionGranted": false,
+    "globalPublicExecutionGranted": false,
+    "fingerprintAloneMayGrantRunAuthority": false
+  }
+}
