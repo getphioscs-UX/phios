@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-PRODUCTION-CAPABILITY-PROMOTION-CONTRACT-v1.0.0",
+  "phase": "TPA-M",
+  "work": "M-W51-M-W58",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "ACTIVE_FAIL_CLOSED_PROMOTION_CONTRACT",
+  "prerequisites": {
+    "humanAcceptance24Of24": true,
+    "liveBrowserAcceptance": true,
+    "phaseLCurrentDeploymentExactShaRequired": true,
+    "existingRuntimeDbRequired": true,
+    "newMigrationAllowed": false
+  },
+  "promotion": {
+    "authorityRecordRuntimeId": "system_capability_tarot_limited_production",
+    "authorityRecordUserId": "__phios_system_authority__",
+    "approvedCommitMustEqualDeployedCommit": true,
+    "approvedCommitMustEqualOriginMain": true,
+    "serverD1Only": true,
+    "clientMayGrantAuthority": false,
+    "staticRegistryMayGrantRunAllowed": false
+  },
+  "persistence": {
+    "binding": "RUNTIME_DB",
+    "reuseExistingSchema": true,
+    "guestPersistence": false,
+    "accountSaveRequiresVerifiedServerIdentity": true,
+    "accountSaveRequiresRetentionPolicy": true
+  },
+  "liveSmoke": [
+    "ONE_CARD",
+    "THREE_CARD",
+    "BILINGUAL_PRODUCT_FIELDS",
+    "SENSITIVE_BOUNDARY",
+    "ADVERSARIAL_BOUNDARY",
+    "GUEST_SAVE_REJECTED"
+  ],
+  "finalBoundaries": {
+    "fortuneTellingAuthority": false,
+    "predictionAuthority": false,
+    "diagnosticAuthority": false,
+    "hiddenStateAuthority": false,
+    "professionalDirectiveAuthority": false,
+    "decisionAuthority": "USER"
+  }
+}

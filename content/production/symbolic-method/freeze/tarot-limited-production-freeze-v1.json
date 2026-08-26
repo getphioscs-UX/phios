@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-LIMITED-PRODUCTION-FREEZE-v1.0.0",
+  "phase": "TPA-M",
+  "work": "M-W58",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "FROZEN_PROMOTION_RULES_LIVE_STATE_SERVER_DYNAMIC",
+  "promotionRulesFrozen": true,
+  "liveStateAuthority": "RUNTIME_DB_D1_COMMIT_PINNED_RECORD",
+  "liveEvidenceStorage": ".runtime-evidence/tarot-production-capability-live-evidence-v1.json",
+  "staticRunAllowed": false,
+  "boundaries": {
+    "fortuneTellingAuthority": false,
+    "predictionAuthority": false,
+    "diagnosticAuthority": false,
+    "hiddenStateAuthority": false,
+    "professionalDirectiveAuthority": false,
+    "decisionAuthority": "USER"
+  },
+  "persistence": {
+    "binding": "RUNTIME_DB",
+    "reuseExistingSchema": true,
+    "guestPersistence": false,
+    "accountSaveRequiresVerifiedServerIdentity": true,
+    "accountSaveRequiresRetentionPolicy": true
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "PHI-OS-FMA-ACCOUNT-METHOD-STATUS-PROJECTION-v2.0.0",
+  "work": "TPA-M-M-W53",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "status": "ACTIVE_PUBLIC_STATUS_ONLY_DYNAMIC_TAROT_AUTHORITY",
+  "source": "content/governance/production-capability-matrix/projections/production-capability-status-projection-v7.json",
+  "predecessor": "content/governance/full-method-availability/registries/account-method-status-projection-v1.json",
+  "route": "/account",
+  "items": [
+    {
+      "pluginCode": "AST",
+      "label": "Astrology",
+      "status": "Available"
+    },
+    {
+      "pluginCode": "BZR",
+      "label": "BaZi",
+      "status": "Available"
+    },
+    {
+      "pluginCode": "NUM",
+      "label": "Numeric",
+      "status": "Available"
+    },
+    {
+      "pluginCode": "TAR",
+      "label": "Tarot",
+      "status": "Limited",
+      "runtimeAuthorityEndpoint": "/api/tarot-production-status",
+      "runAllowedIsDynamic": true
+    },
+    {
+      "pluginCode": "ZWR",
+      "label": "Zi Wei",
+      "status": "Available"
+    }
+  ],
+  "privacyBoundary": {
+    "showsMethodResults": false,
+    "showsBirthInputs": false,
+    "loadsSavedHistory": false,
+    "createsPersistence": false,
+    "staticProjectionMayGrantExecution": false
+  }
+}
