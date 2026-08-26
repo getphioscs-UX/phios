@@ -1,0 +1,73 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import {inspectIChingDepthAdmission,selectIChingDepthInterpretation,composeIChingDepthReadingSupplement} from '../functions/interpretation-runtime/iching-depth-editorial-runtime-v2.js';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+
+const historicalV1=read('content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v1.json');
+const corpus=read('content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v2.json');
+assert.equal(historicalV1.coverage.total,'0/448');
+assert.equal(historicalV1.publicRuntimeBound,false);
+assert.equal(corpus.successorOf,'content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v1.json');
+assert.equal(corpus.historicalPredecessorMutated,false);
+assert.equal(corpus.coverage.hexagram,'64/64');
+assert.equal(corpus.coverage.line,'384/384');
+assert.equal(corpus.coverage.total,'448/448');
+assert.equal(corpus.coverage.zhHans,'448/448');
+assert.equal(corpus.coverage.en,'448/448');
+assert.equal(corpus.humanEditorialComplete,true);
+assert.equal(corpus.publicRuntimeBound,false);
+assert.equal(corpus.productionAuthorityChanged,false);
+assert.equal(corpus.entries.length,448);
+assert.equal(new Set(corpus.entries.map(x=>x.interpretationId)).size,448);
+for(const entry of corpus.entries){
+  assert.equal(entry.review.status,'HUMAN_APPROVED');
+  assert.equal(entry.review.humanApproved,true);
+  assert.equal(entry.review.reviewer,'TL');
+  assert.equal(entry.review.sourceFidelityChecked,true);
+  assert.equal(entry.review.localeFidelityChecked,true);
+  assert.equal(entry.review.boundaryChecked,true);
+  assert.equal(entry.publicationProjectionRules.omitInternalCandidateReviewStatusWarning,true);
+  assert.equal(entry.publicationProjectionRules.mayCreateNewMeaning,false);
+}
+const inspection=inspectIChingDepthAdmission(corpus);
+assert.equal(inspection.admitted,448);
+assert.equal(inspection.hexagram,64);
+assert.equal(inspection.line,384);
+assert.equal(inspection.humanEditorialComplete,true);
+assert.equal(inspection.publicDepthReady,false);
+const selection=selectIChingDepthInterpretation({hexagramId:'HEXAGRAM-01',changingLines:[1,6],locale:'zh-Hans',admittedCorpus:corpus});
+assert.equal(selection.status,'AVAILABLE');
+assert.equal(selection.hexagram.interpretationId,'ICH-DEPTH-HEX-01-EDITORIAL-v1');
+assert.deepEqual(selection.lines.map(x=>x.linePosition),[1,6]);
+const supplement=composeIChingDepthReadingSupplement({readingIr:{schemaVersion:'PHI-OS-ICHING-READING-IR-v1.0.0',methodCode:'I_CHING',structuralProjection:{projectionCode:'CHECK-DEPTH-V3',primary:{hexagramId:'HEXAGRAM-01'},changingLines:[1,6]}},selection});
+assert.equal(supplement.status,'AVAILABLE');
+assert.equal(supplement.authority.existingReadingIrMutated,false);
+assert.equal(supplement.authority.candidateFallbackUsed,false);
+assert.equal(supplement.authority.runtimeModelGenerationUsed,false);
+assert.equal(supplement.authority.publicProductionEligible,false);
+
+const predecessor=read('content/interpretation/iching/reconciliation/iching-depth-current-successor-v2.json');
+const current=read('content/interpretation/iching/reconciliation/iching-depth-current-successor-v3.json');
+assert.equal(current.successorOf,'content/interpretation/iching/reconciliation/iching-depth-current-successor-v2.json');
+assert.equal(current.historicalPredecessorMutated,false);
+assert.equal(current.baselineCommit,'df9a79c85e342d71a069eae16232165b8b056c61');
+assert.equal(current.admittedCoverage.humanApproved,'448/448');
+assert.equal(current.productionBoundary.publicRunAllowed,false);
+assert.equal(current.checkerGovernance.packageJsonIsMutableOrchestrationSurface,true);
+assert.equal(current.checkerGovernance.packageJsonExcludedFromDomainFreeze,true);
+assert.equal(current.checkerGovernance.npmAliasesCheckedSemantically,true);
+assert.equal(current.checkerGovernance.predecessorV2PackageHashPreservedForHistory,true);
+assert.ok(predecessor.artifacts.some(x=>x.path==='package.json'&&x.sha256==='0e42f1b6bcdffee81a90118f87da5ba9fc4c8e81fe402cfac40462d0be162827'));
+assert.ok(!current.domainArtifacts.some(x=>x.path==='package.json'));
+for(const artifact of current.domainArtifacts) assert.equal(sha(artifact.path),artifact.sha256,`ICHI-DEPTH v3 domain artifact drift: ${artifact.path}`);
+
+const pkg=read('package.json');
+assert.equal(pkg.scripts['check:iching-depth-current'],'node scripts/check-iching-depth-current-v3.mjs');
+assert.equal(pkg.scripts['check:iching-depth-current-v2-historical'],'node scripts/check-iching-depth-current-v2.mjs');
+assert.equal(pkg.scripts['check:iching-current'],'node scripts/check-iching-current-v5.mjs');
+assert.equal(pkg.scripts['check:iching-current-v4-historical'],'node scripts/check-iching-current-v4.mjs');
+
+console.log('✓ ICHI-DEPTH current v3 successor passed: 448/448 HUMAN_APPROVED depth remains frozen while mutable package orchestration is checked semantically, not by whole-file SHA.');
+console.log('  v2 remains historical evidence; no historical artifact was rewritten and public production authority remains fail-closed.');
