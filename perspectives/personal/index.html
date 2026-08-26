@@ -91,16 +91,16 @@
             <div class="cx-p1-field cx-place-field" data-cx-place-field>
               <label for="cx-birth-place" data-cx-en="Birth place" data-cx-zh="出生地点">Birth place</label>
               <div class="cx-place-input-wrap">
-                <input id="cx-birth-place" type="search" name="birthPlaceQuery" placeholder="Start typing a city or town" data-cx-en-placeholder="Start typing a city or town, for example Seremban" data-cx-zh-placeholder="输入城市或地区，例如 Seremban 或 芙蓉" data-cx-place-input autocomplete="off" aria-autocomplete="list" aria-controls="cx-place-results" aria-expanded="false" required>
+                <input id="cx-birth-place" type="search" name="birthPlaceQuery" placeholder="Start typing a city or town" data-cx-place-input autocomplete="off" aria-autocomplete="list" aria-controls="cx-place-results" aria-expanded="false" required>
                 <span class="cx-place-spinner" data-cx-place-spinner hidden aria-hidden="true"></span>
               </div>
-              <div id="cx-place-results" class="cx-place-results" data-cx-place-results role="listbox" aria-label="Place suggestions" data-cx-en-aria-label="Place suggestions" data-cx-zh-aria-label="地点建议" hidden></div>
+              <div id="cx-place-results" class="cx-place-results" data-cx-place-results role="listbox" hidden></div>
               <div class="cx-place-confirmed" data-cx-place-confirmed hidden>
                 <span aria-hidden="true">✓</span>
                 <div><small data-cx-en="Birth place confirmed" data-cx-zh="已确认出生地点">Birth place confirmed</small><strong data-cx-place-confirmed-label></strong></div>
                 <button type="button" data-cx-place-change data-cx-en="Change" data-cx-zh="更改">Change</button>
               </div>
-              <p class="cx-place-help" data-cx-en="Type the city or place name you know, then choose the matching place from the suggestions below." data-cx-zh="输入你熟悉的城市或地区名称，再从输入框下方的建议中选择最符合的一项。">Type the city or place name you know, then choose the matching place from the suggestions below.</p>
+              <p class="cx-place-help" data-cx-en="Choose one place from the list so the location and time zone can be matched correctly." data-cx-zh="请从列表中选择一个地点，这样才能正确对应出生坐标与时区。">Choose one place from the list so the location and time zone can be matched correctly.</p>
               <p class="cx-place-attribution"><span data-cx-en="Place search:" data-cx-zh="地点资料：">Place search:</span> <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a></p>
             </div>
 
@@ -127,7 +127,7 @@
 
             <label class="cx-p1-field">
               <span data-cx-en="What would you like to understand? (optional)" data-cx-zh="你现在最想理解什么？（可选）">What would you like to understand? (optional)</span>
-              <textarea name="intent" maxlength="500" placeholder="A pattern, a current question, or something you want to look at more clearly." data-cx-en-placeholder="A pattern, a current question, or something you want to look at more clearly." data-cx-zh-placeholder="一个反复出现的模式、正在面对的问题，或你想进一步看清的事情。"></textarea>
+              <textarea name="intent" maxlength="500" placeholder="A pattern, a current question, or something you want to look at more clearly."></textarea>
             </label>
 
             <label class="cx-p1-consent cx-personal-consent"><input type="checkbox" name="consent" required><span data-cx-en="Use these details to prepare the perspectives I selected. Do not save them unless I choose to continue later." data-cx-zh="使用这些资料准备我选择的视角；除非之后由我主动选择继续，否则不要保存。">Use these details to prepare the perspectives I selected. Do not save them unless I choose to continue later.</span></label>
@@ -138,6 +138,11 @@
         </section>
 
         <aside class="cx-personal-guide">
+          <article class="cx-card cx-card--soft">
+            <p class="cx-eyebrow" data-cx-en="WHY PLACE MATTERS" data-cx-zh="为什么出生地点重要">WHY PLACE MATTERS</p>
+            <h3 class="cx-heading" data-cx-en="A place name is not enough on its own." data-cx-zh="只有地点名称，并不足够。">A place name is not enough on its own.</h3>
+            <p class="cx-body" data-cx-en="When you choose a place from the list, PHI OS matches it to its real-world coordinates and time zone. That lets time-sensitive perspectives use the correct local birth context instead of guessing from your current device." data-cx-zh="当你从列表中选择地点后，PHI OS 会把它对应到现实中的坐标与时区。这样，需要时间位置的视角就能使用出生当时的本地条件，而不是猜测你现在设备所在的位置。">When you choose a place from the list, PHI OS matches it to its real-world coordinates and time zone. That lets time-sensitive perspectives use the correct local birth context instead of guessing from your current device.</p>
+          </article>
           <article class="cx-card">
             <p class="cx-eyebrow" data-cx-en="READING DIFFERENCE" data-cx-zh="怎样理解不同结果">READING DIFFERENCE</p>
             <h3 class="cx-heading" data-cx-en="Similarity is interesting. Difference is useful too." data-cx-zh="相似值得留意，不一致也有价值。">Similarity is interesting. Difference is useful too.</h3>
@@ -157,14 +162,16 @@
         <div class="cx-p1-workspace" data-cx-workspace>
           <aside class="cx-p1-rail"><nav data-cx-tablist aria-label="Personal Reality sections">
             <button class="cx-p1-tab" type="button" data-cx-tab="overview" aria-selected="true" data-cx-en="Overview" data-cx-zh="总览">Overview</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="graph" data-cx-en="Graph" data-cx-zh="结构图">Graph</button>
             <button class="cx-p1-tab" type="button" data-cx-tab="structure" data-cx-en="Structure" data-cx-zh="结构">Structure</button>
-            <button class="cx-p1-tab" type="button" data-cx-tab="context" data-cx-en="Current Context" data-cx-zh="当前上下文">Current Context</button>
             <button class="cx-p1-tab" type="button" data-cx-tab="patterns" data-cx-en="Patterns" data-cx-zh="模式">Patterns</button>
-            <button class="cx-p1-tab" type="button" data-cx-tab="reality" data-cx-en="Reality Connection" data-cx-zh="与你的现实对照">Reality Connection</button>
-            <button class="cx-p1-tab" type="button" data-cx-tab="details" data-cx-en="What remains open" data-cx-zh="仍然未确定">What remains open</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="context" data-cx-en="Context" data-cx-zh="情境">Context</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="reality" data-cx-en="Reality Comparison" data-cx-zh="现实对照">Reality Comparison</button>
+            <button class="cx-p1-tab" type="button" data-cx-tab="details" data-cx-en="Technical Details" data-cx-zh="技术详情">Technical Details</button>
           </nav></aside>
           <div>
             <section class="cx-p1-panel" data-cx-panel="overview"><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="OVERVIEW" data-cx-zh="总览">OVERVIEW</p><h2 class="cx-title" data-cx-en="See the whole reading before the details." data-cx-zh="先看整幅图，再进入细节。">See the whole reading before the details.</h2><p class="cx-body cx-muted" data-cx-en="The map below shows which perspectives were prepared. It is a visual index, not a claim that the systems agree with one another." data-cx-zh="下面的图先告诉你这次有哪些视角已经准备好。它是一张阅读地图，不代表这些体系彼此同意。">The map below shows which perspectives were prepared. It is a visual index, not a claim that the systems agree with one another.</p></div><div data-cx-personal-map></div><div data-cx-personal-overview></div></section>
+            <section class="cx-p1-panel" data-cx-panel="graph" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="GRAPH" data-cx-zh="结构图">GRAPH</p><h2 class="cx-title" data-cx-en="See how each method's calculated structure connects." data-cx-zh="看见每种方法的计算结构怎样连接。">See how each method's calculated structure connects.</h2><p class="cx-body cx-muted" data-cx-en="Each graph is generated from the same projection digest as its text result. Graph lines show calculated relationships only; they do not create a new meaning." data-cx-zh="每张图都与文字结果绑定同一个投射摘要。图中的连线只表达已计算关系，不会创造新的意义。">Each graph is generated from the same projection digest as its text result. Graph lines show calculated relationships only; they do not create a new meaning.</p></div><div data-cx-personal-graphs></div></section>
             <section class="cx-p1-panel" data-cx-panel="structure" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="STRUCTURE" data-cx-zh="结构">STRUCTURE</p><h2 class="cx-title" data-cx-en="What each perspective actually calculated—and what it means when an explanation is available." data-cx-zh="看见每个视角真正算出了什么，以及在已有解释时，它为什么值得注意。">What each perspective actually calculated—and what it means when an explanation is available.</h2><p class="cx-body cx-muted" data-cx-en="Numbers, pillars, palaces and placements are only the raw structure. A useful reading also needs a human explanation. When an explanation has not yet been established, the page says so instead of pretending that a table is enough." data-cx-zh="数字、四柱、宫位与星体位置只是结构本身。真正有用的阅读，还需要人能够理解的解释。如果某个结果目前只有结构、还没有建立足够解释，页面会直接说明，而不是假装一张表格已经足够。">Numbers, pillars, palaces and placements are only the raw structure. A useful reading also needs a human explanation. When an explanation has not yet been established, the page says so instead of pretending that a table is enough.</p></div><div data-cx-personal-structure></div></section>
             <section class="cx-p1-panel" data-cx-panel="context" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="CURRENT CONTEXT" data-cx-zh="当前上下文">CURRENT CONTEXT</p><h2 class="cx-title" data-cx-en="What belongs to the present, when it is available" data-cx-zh="哪些内容属于当下——只有资料足够时才显示">What belongs to the present, when it is available</h2><p class="cx-body cx-muted" data-cx-en="Present-day context is a different layer from birth structure. If a selected perspective did not establish that layer, it stays empty rather than being filled with a generic reading." data-cx-zh="当下条件与出生结构是不同层次。如果所选视角没有真正建立这一层，这里会保持空白，而不是用泛泛的文字把它填满。">Present-day context is a different layer from birth structure. If a selected perspective did not establish that layer, it stays empty rather than being filled with a generic reading.</p></div><div data-cx-personal-context></div></section>
             <section class="cx-p1-panel" data-cx-panel="patterns" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="PATTERNS" data-cx-zh="模式">PATTERNS</p><h2 class="cx-title" data-cx-en="Themes inside each perspective" data-cx-zh="每个视角内部反复出现的主题">Themes inside each perspective</h2><p class="cx-body cx-muted" data-cx-en="Patterns are shown inside the perspective that produced them. You can compare them across methods, but the page does not turn similarity into a single verdict." data-cx-zh="模式会保留在产生它的视角里。你可以跨方法比较，但页面不会把相似之处自动合成为一个结论。">Patterns are shown inside the perspective that produced them. You can compare them across methods, but the page does not turn similarity into a single verdict.</p></div><div data-cx-personal-patterns></div></section>

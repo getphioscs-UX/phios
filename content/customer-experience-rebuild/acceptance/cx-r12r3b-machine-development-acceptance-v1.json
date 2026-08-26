@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R3B-MACHINE-DEVELOPMENT-ACCEPTANCE-v1.0.0",
+  "work": "CX-R12R3B-W51-W60",
+  "baselineCommit": "526547698894de0d33d09447aed0b93b83558114",
+  "status": "DEVELOPMENT_ACCEPTED",
+  "componentCoverageCampaign": {
+    "admittedCalculatedItemsMapped": "FIXTURE_VALIDATED",
+    "customerVisibleItemsLocalized": "FIXTURE_VALIDATED",
+    "coreMeaningsReviewed": "EXISTING_ATOMIC_AUTHORITY_ONLY_COMPOSED_RESULTS_PENDING_HUMAN_REVIEW",
+    "compositionRulesVersioned": true,
+    "graphNodesEdgesTraceable": true
+  },
+  "determinismCampaign": {
+    "fixedInputs": ["CANONICAL_METHOD_PROJECTION", "CALCULATION_VERSION", "PROJECTION_VERSION", "MEANING_VERSION", "COMPOSITION_VERSION", "LOCALE", "DEPTH"],
+    "fixedOutputs": ["INTERPRETATION_DIGEST", "SEMANTIC_DIGEST", "GRAPH_DIGEST"],
+    "sameInputSameOutputRequired": true
+  },
+  "metamorphicCampaign": [
+    "INPUT_OBJECT_KEY_ORDER_DOES_NOT_CHANGE_DIGEST",
+    "LOCALE_CHANGE_DOES_NOT_CHANGE_SEMANTIC_DIGEST",
+    "DEPTH_CHANGE_DOES_NOT_CHANGE_SEMANTIC_DIGEST",
+    "MISSING_DATA_REMOVES_UNSUPPORTED_SECTION",
+    "GRAPH_DISABLED_DOES_NOT_CHANGE_TEXT_SEMANTICS",
+    "GRAPH_ENABLED_INTRODUCES_NO_MEANING"
+  ],
+  "antiGenericCampaign": {
+    "forbidden": ["COPY_PASTED_PARAGRAPHS", "SAME_EXPLANATION_ACROSS_UNRELATED_ITEMS", "UNKNOWN_PLACEHOLDER_AS_CONTENT", "METHOD_NEUTRAL_DEEP_INTERPRETATION", "ISOLATED_SYMBOL_AS_WHOLE_PERSON_CONCLUSION"],
+    "primaryInsightFloor": ["STRUCTURAL_REASON", "RELATION_OR_CONTEXT", "CONSTRUCTIVE_EXPRESSION", "FRICTION_OR_ALTERNATIVE_EXPRESSION", "OBSERVABLE_SIGNAL", "REALITY_COMPARISON_QUESTION"]
+  },
+  "graphFidelityCampaign": ["NODE_IDENTITY", "NODE_COUNT", "EDGE_IDENTITY", "EDGE_COUNT", "RELATION_DIRECTION", "PLACEMENT", "LABEL", "VALUE", "OVERLAY_STATE", "PROJECTION_DIGEST", "SAME_CANONICAL_REFS_AS_TEXT"],
+  "crossMethodBoundary": {
+    "calculateIndependently": true,
+    "interpretThroughOneSharedRuntimeWithMethodSpecificFacts": true,
+    "acceptIndependently": true,
+    "rawMethodSymbolComparisonForbidden": true,
+    "crossPerspectiveInput": "INDEPENDENTLY_CUSTOMER_PUBLISHABLE_METHOD_INTERPRETATIONS_ONLY",
+    "sharedThemeRegistry": ["AUTONOMY", "RELATIONSHIP", "STABILITY", "CHANGE", "EXPRESSION", "RESPONSIBILITY", "BOUNDARY", "DIRECTION"],
+    "themeLineageRequired": ["methodSource", "interpretationUnitRefs", "projectionRefs"]
+  },
+  "checkerReconciliation": {
+    "existingDiscovered": ["check:interpretation-method-integration", "check:mir-7", "check:mcd", "check:cx-r12r3a"],
+    "existingResults": {
+      "check:interpretation-method-integration": "PASS",
+      "check:mir-7": "BASELINE_FAILS_BECAUSE_HISTORICAL_MCD7_FREEZE_EXPECTS_PRE_ZWR_RUNTIME_WHILE_CURRENT_V4_SUCCESSOR_GOVERNS_THE_CURRENT_RUNTIME",
+      "check:mcd": "PASS",
+      "check:cx-r12r3a": "PASS"
+    },
+    "mir7BaselineFailureIntroducedByCxR12R3B": false,
+    "mir7HistoricalCheckerMutated": false,
+    "currentMcd7SuccessorValidatedInstead": "content/professional/method-client-delivery/reconciliation/mcd-7-personal-runtime-result-surface-current-successor-v4.json",
+    "successorChecker": "scripts/check-cx-r12r3b-method-interpretation-layer.mjs",
+    "methodSpecificCheckerKingdomCreated": false,
+    "graphSpecificAggregateKingdomCreated": false,
+    "oneAggregate": "npm run check:cx-r12r3b",
+    "wiredIntoNpmCheck": true
+  },
+  "legacyDrift": {
+    "activeRoute": "perspectives/personal/index.html",
+    "requiredZero": ["LEGACY_STYLESHEET", "LEGACY_COMPONENT_SELECTOR", "OLD_LOGO", "OLD_SHELL", "DUPLICATE_NAVIGATION", "RAW_CODE_BY_DEFAULT", "PLACEHOLDER_INTERPRETATION", "DEVELOPER_ONLY_COPY"]
+  },
+  "developmentGate": {
+    "fourRuntimePathsConnected": true,
+    "fourInterpretationPathsConnected": true,
+    "fourGraphPathsConnected": true,
+    "fixturesPass": true,
+    "npmRunCheckExitCode": 0,
+    "verifiedOn": "2026-08-26",
+    "verificationCommand": "npm run check"
+  },
+  "claims": {
+    "developmentAccepted": true,
+    "humanAccepted": false,
+    "liveBrowserAccepted": false,
+    "fullProduction": false
+  },
+  "requiredStopStates": ["DEVELOPMENT_ACCEPTED", "HUMAN_REVIEW_REQUIRED", "LIVE_BROWSER_REQUIRED"],
+  "ordinaryReaderFiveMinuteTest": {
+    "preparedIn": "content/customer-experience-rebuild/review/cx-r12r3b-96-case-human-review-campaign-v1.json",
+    "status": "NOT_RUN_EXTERNAL_EVIDENCE_REQUIRED",
+    "requiredBeforeProductionFreeze": true
+  },
+  "workCoverage": [51, 52, 53, 54, 55, 56, "56A", 57, 58, 59, 60]
+}
