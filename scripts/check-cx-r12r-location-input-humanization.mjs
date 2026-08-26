@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const html=read('perspectives/personal/index.html');const client=read('assets/customer-ui/js/surfaces/personal-reality.js');const css=read('assets/customer-ui/surfaces/personal-reality.css');const locale=read('assets/customer-ui/js/locale.js');const search=read('functions/location/place-search.js');const resolver=read('functions/location/place-resolver.js');
+assert.match(html,/data-cx-zh-placeholder="输入城市或地区，例如 Seremban 或 芙蓉"/);
+assert.match(html,/data-cx-en-placeholder="Start typing a city or town, for example Seremban"/);
+assert.equal(html.includes('只有地点名称，并不足够。'),false,'internal location explanation card must be removed from customer surface');
+assert.equal(html.includes('A place name is not enough on its own.'),false,'internal location explanation card must be removed from customer surface');
+assert.equal(html.includes('WHY PLACE MATTERS'),false,'location implementation explainer must not remain as a customer card');
+assert.match(html,/输入你熟悉的城市或地区名称，再从输入框下方的建议中选择最符合的一项。/);
+assert.match(locale,/data-cx-en-placeholder/);assert.match(locale,/data-cx-zh-placeholder/);
+assert.match(search,/namedetails/);assert.match(search,/hasLatin/);assert.match(search,/primaryLabel/);assert.match(search,/secondaryLabel/);
+assert.match(resolver,/customerLabel/);assert.match(resolver,/localizedName/);assert.match(resolver,/englishName/);
+assert.match(client,/primaryLabel\|\|c\.label/);assert.match(client,/place\.customerLabel\|\|place\.displayName/);assert.match(client,/scrollIntoView/);assert.match(client,/ArrowDown/);assert.match(client,/aria-activedescendant/);
+assert.match(css,/\.cx-place-results\{position:relative/);assert.equal(css.includes('.cx-place-results{position:fixed'),false,'mobile place suggestions must remain attached to the input instead of moving to a detached bottom sheet');
+const acceptance=JSON.parse(read('content/customer-experience-rebuild/acceptance/cx-r12r-location-input-humanization-acceptance-v1.json'));assert.equal(acceptance.status,'SOURCE_ACCEPTED_PRODUCTION_HUMAN_ACCEPTANCE_PENDING');assert.equal(acceptance.customerSurface.internalLocationExplainerVisible,false);assert.equal(acceptance.mixedScriptSearchRequired,true);
+console.log('✓ CX-R12R location input humanization passed: English/Chinese place-name search is bilingual, suggestions stay next to the field, placeholders localize, and internal location-explainer copy is removed.');
