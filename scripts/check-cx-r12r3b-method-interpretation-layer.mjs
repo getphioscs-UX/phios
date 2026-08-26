@@ -157,11 +157,14 @@ assert(review.cases.every(x=>x.methodFidelityReview.methodFidelityAccepted===nul
 assert.equal(review.ordinaryReaderFiveMinuteTest.status,'NOT_RUN_EXTERNAL_EVIDENCE_REQUIRED');
 assert.equal(review.ordinaryReaderFiveMinuteTest.questions.length,6);
 
-const html=text('perspectives/personal/index.html'),client=text('assets/customer-ui/js/surfaces/personal-reality.js'),graphClient=text('assets/customer-ui/js/method-graph-v1.js'),css=text('assets/customer-ui/surfaces/personal-reality.css'),api=text('functions/api/customer-personal-reality.js');
+const html=text('perspectives/personal/index.html'),client=text('assets/customer-ui/js/surfaces/personal-reality.js'),graphClient=text('assets/customer-ui/js/method-graph-v1.js'),css=text('assets/customer-ui/surfaces/personal-reality.css'),api=text('functions/api/customer-personal-reality.js'),customerProjection=text('functions/customer-projection/method-customer-reading-v2.js');
 for(const token of ['Overview','Graph','Structure','Patterns','Context','Reality Comparison','Technical Details'])assert(html.includes(token),`shared customer result surface missing ${token}`);
 for(const token of ['cx-method-insight','cx-method-evidence','cx-method-alternative','cx-method-uncertainty','cx-method-observation','cx-method-technical-detail','cx-method-graph-panel'])assert(css.includes(`.${token}`)||graphClient.includes(token),`shared component missing ${token}`);
 for(const token of ['<title','<desc','tabindex="0"','tableFallback','data-relation'])assert(graphClient.includes(token),`graph accessibility missing ${token}`);
-assert(client.includes('renderMethodGraph'));assert(api.includes('buildMethodCustomerDevelopmentResult'));assert(api.includes('candidateResultsNotCustomerPublished:true'));
+assert(client.includes('renderMethodGraph'));assert(customerProjection.includes('buildMethodCustomerDevelopmentResult'),'R12R3B development builder authority must remain available');
+const developmentSurface=api.includes('buildMethodCustomerDevelopmentResult')&&api.includes('candidateResultsNotCustomerPublished:true');
+const acceptedR12R4aSuccessor=api.includes('buildAcceptedMethodCustomerResult')&&api.includes('candidateResultsNotCustomerPublished:false');
+assert(developmentSurface||acceptedR12R4aSuccessor,'customer API must consume the R12R3B development result or its human-admitted R12R4A presentation successor');
 assert.equal(html.includes('legacy.css'),false);assert.equal(html.includes('DETERMINISTIC badge'),false);assert.equal(graphClient.includes('placeholder interpretation'),false);
 
 const packageJson=read('package.json');
