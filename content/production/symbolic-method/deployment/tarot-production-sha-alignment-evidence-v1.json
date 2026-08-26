@@ -1,33 +1,120 @@
 {
   "alignment": {
-    "deployedCommit": null,
-    "exactCommitMatch": false,
-    "originMainCommit": null,
-    "verified": false
+    "deployedCommit": "9a9a0b26bf077523b915375afdf6c4058d44bf30",
+    "exactCommitMatch": true,
+    "originMainCommit": "9a9a0b26bf077523b915375afdf6c4058d44bf30",
+    "verified": true
   },
   "baselineCommit": "526547698894de0d33d09447aed0b93b83558114",
   "checks": {
-    "deploymentCommitClean": false,
-    "deploymentSuccessful": false,
-    "exactProductionCommit": false,
-    "productionBranchMain": false,
-    "productionEnvironment": false,
-    "productionUrlReachable": false,
-    "remoteRuntimeAssetsMatch": false,
-    "runtimeWitnessShaMatch": false
+    "deploymentCommitClean": true,
+    "deploymentSuccessful": true,
+    "exactProductionCommit": true,
+    "productionBranchMain": true,
+    "productionCommitIsFullGitSha": true,
+    "productionEnvironment": true,
+    "productionUrlReachable": true,
+    "remoteRuntimeAssetsMatch": true,
+    "runtimeWitnessShaMatch": true
   },
-  "cloudflare": null,
+  "cloudflare": {
+    "accountId": "0b9f36bdf56f38d7d09aebe388f15204",
+    "accountName": "Getphios.cs@gmail.com's Account",
+    "authenticationType": "oauth",
+    "deployment": {
+      "aliasHosts": [
+        "88ae934e.phios-github.pages.dev"
+      ],
+      "aliases": [],
+      "branch": "main",
+      "commitDirty": false,
+      "commitHash": "9a9a0b26bf077523b915375afdf6c4058d44bf30",
+      "createdOn": "2026-08-26T02:09:07.144195Z",
+      "environment": "production",
+      "id": "88ae934e-f7b6-4fa2-a4b4-fb3c7127ddfb",
+      "index": 0,
+      "modifiedOn": "2026-08-26T02:09:55.528518Z",
+      "projectName": "phios-github",
+      "shortId": "88ae934e",
+      "stageName": "deploy",
+      "stageStatus": "success",
+      "triggerType": "github:push",
+      "url": "https://88ae934e.phios-github.pages.dev"
+    },
+    "environment": "production",
+    "metadataAuthority": "CLOUDFLARE_PAGES_DEPLOYMENTS_REST_API_AUTHENTICATED_BY_WRANGLER",
+    "productionUrl": "https://phios-github.pages.dev/",
+    "projectName": "phios-github",
+    "rawDeploymentCount": 25,
+    "selectionMode": "NEWEST_SUCCESSFUL_PRODUCTION_DEPLOYMENT"
+  },
+  "effects": {
+    "deploymentChanged": false,
+    "deploymentCreated": false,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowedChanged": false,
+    "rollbackPerformed": false
+  },
   "phase": "TPA-L",
   "productionBoundary": {
     "productionCapabilityPromoted": false,
     "publicRunAllowed": false,
     "verifiedPersistenceProvider": false
   },
-  "remoteAssets": null,
-  "repository": null,
-  "runtimeWitness": null,
+  "reachability": {
+    "cfRayObserved": true,
+    "finalUrl": "https://phios-github.pages.dev/",
+    "server": "cloudflare",
+    "status": 200
+  },
+  "remoteAssets": [
+    {
+      "canonicalTextSha256": "34c733bbe46a9cac3ed3034d95ecf9b9472600d97f36ce3560080e5043c76f2b",
+      "expectedCanonicalTextSha256": "34c733bbe46a9cac3ed3034d95ecf9b9472600d97f36ce3560080e5043c76f2b",
+      "finalUrl": "https://phios-github.pages.dev/readings/symbolic/",
+      "id": "publicHtml",
+      "match": true,
+      "publicPath": "/readings/symbolic/",
+      "status": 200
+    },
+    {
+      "canonicalTextSha256": "e925d78905652ff6fc79f54d37896f87910912252540dc9b92bab36dea60e9ea",
+      "expectedCanonicalTextSha256": "e925d78905652ff6fc79f54d37896f87910912252540dc9b92bab36dea60e9ea",
+      "finalUrl": "https://phios-github.pages.dev/assets/js/pages/symbolic-perspective.js",
+      "id": "publicClient",
+      "match": true,
+      "publicPath": "/assets/js/pages/symbolic-perspective.js",
+      "status": 200
+    },
+    {
+      "canonicalTextSha256": "ad018e54151b50b00d7e7b427110f1228d19af40eff0e4bbc9c73c548b5855ce",
+      "expectedCanonicalTextSha256": "ad018e54151b50b00d7e7b427110f1228d19af40eff0e4bbc9c73c548b5855ce",
+      "finalUrl": "https://phios-github.pages.dev/assets/css/symbolic-perspective.css",
+      "id": "publicCss",
+      "match": true,
+      "publicPath": "/assets/css/symbolic-perspective.css",
+      "status": 200
+    }
+  ],
+  "repository": {
+    "branch": "main",
+    "head": "9a9a0b26bf077523b915375afdf6c4058d44bf30",
+    "originMain": "9a9a0b26bf077523b915375afdf6c4058d44bf30"
+  },
+  "runtimeWitness": {
+    "contentType": "application/json; charset=utf-8",
+    "deployedSha": "9a9a0b26bf077523b915375afdf6c4058d44bf30",
+    "path": "/api/ask2-runtime-status",
+    "sourceBaselineSha": "cb396cc5b8ab75679e278e47a2a78cb7489f3b70",
+    "status": 200
+  },
   "schemaVersion": "PHI-OS-TAROT-PRODUCTION-SHA-ALIGNMENT-EVIDENCE-v1.0.0",
-  "status": "PENDING_LIVE_PRODUCTION_VERIFICATION",
-  "verifiedAt": null,
+  "security": {
+    "cloudflareMutationPerformed": false,
+    "credentialLogged": false,
+    "credentialPersisted": false
+  },
+  "status": "VERIFIED_CURRENT_MAIN_DEPLOYED_EXACT_SHA_AND_RUNTIME_ASSETS_ALIGNED",
+  "verifiedAt": "2026-08-26T02:11:15.309Z",
   "work": "L-W51-L-W56"
 }

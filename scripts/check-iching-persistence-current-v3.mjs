@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';import crypto from 'node:crypto';import fs from 'node:fs';
+import {normalizeVerifiedSymbolicAccountIdentity,symbolicPersistenceProviderState} from '../functions/symbolic-method-persistence/symbolic-account-identity-v1.js';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const predecessor=read('content/interpretation/iching/reconciliation/iching-persistence-current-successor-v2.json');const current=read('content/interpretation/iching/reconciliation/iching-persistence-current-successor-v3.json');const evolution=read(current.evolutionAuthority.path);
+assert.equal(current.successorOf,'content/interpretation/iching/reconciliation/iching-persistence-current-successor-v2.json');assert.equal(current.historicalPredecessorMutated,false);
+assert.notEqual(predecessor.currentArtifacts.sharedContextApi.sha256,current.currentArtifacts.sharedContextApi.sha256);assert.equal(current.currentArtifacts.sharedContextApi.sha256,'f3389cf8975208d7fe90c009d6fcf2ce99fd4ec961c918da4ae32d49f2e4ff7a');
+assert.equal(evolution.artifacts.contextApi.sha256,current.currentArtifacts.sharedContextApi.sha256);assert.equal(sha(current.evolutionAuthority.path),current.evolutionAuthority.sha256);
+for(const item of Object.values(current.currentArtifacts)) assert.equal(sha(item.path),item.sha256,`current persistence drift: ${item.path}`);
+const context=fs.readFileSync(current.currentArtifacts.sharedContextApi.path,'utf8');for(const token of ["METHODS=new Set(['I_CHING','TAROT'])",'symbolicPersistenceProviderState(context)','verifiedIdentityBound:persistence.verifiedIdentityBound','persistenceProviderBound:persistence.d1Bound','automaticPersistence:false']) assert.ok(context.includes(token),`shared context marker missing: ${token}`);
+assert.equal(normalizeVerifiedSymbolicAccountIdentity({userId:'request-user',providerId:'request-provider'}),null);assert.equal(symbolicPersistenceProviderState({env:{},data:{symbolicAccountIdentity:{userId:'u',providerId:'p',verified:true,authenticated:true}}}).providerReady,false);
+for(const [key,value] of Object.entries(current.accepted)) assert.equal(value,key==='automaticPersistenceCreated'?false:true);
+for(const value of Object.values(current.productionBoundary)) assert.equal(value,false);
+console.log('✓ ICH-PROD-W22 current persistence successor passed: latest shared symbolic context evolution is consumed without rewriting historical I Ching persistence evidence.');
+console.log('  Verified live identity + D1 remain required; persistence cannot grant I Ching execution authority by itself.');
