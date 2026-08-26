@@ -168,6 +168,12 @@ function createStoryCard(spec, resolved, index) {
   const figure = document.createElement('figure');
   figure.className = 'pxr-visual-story__card';
   figure.dataset.pxrVisualAsset = spec.assetCode;
+  figure.dataset.cxExpandableFigure = '';
+  figure.dataset.cxFigureSrc = resolved.src;
+  figure.dataset.cxFigureTitle = localeText(spec.title);
+  figure.dataset.cxFigureCaption = localeText(spec.caption);
+  figure.tabIndex = 0;
+  figure.setAttribute('role','button');
 
   const media = document.createElement('div');
   media.className = 'pxr-visual-story__media';
@@ -179,6 +185,10 @@ function createStoryCard(spec, resolved, index) {
   if (resolved.srcset) image.srcset = resolved.srcset;
   if (resolved.sizes) image.sizes = resolved.sizes;
   media.append(image);
+  const expand = document.createElement('button');
+  expand.type = 'button'; expand.className = 'pxr-visual-story__expand';
+  expand.textContent = getLocale() === 'zh-Hans' ? '查看大图' : 'View full figure';
+  media.append(expand);
 
   const copy = document.createElement('figcaption');
   copy.className = 'pxr-visual-story__copy';
@@ -299,3 +309,4 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, { once: true });
   else void run();
 }
+import('/assets/customer-ui/js/figure-viewer.js').then(({installExpandableFigures})=>installExpandableFigures(document)).catch(()=>{});

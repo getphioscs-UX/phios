@@ -65,8 +65,8 @@
       "routeId": "PERSPECTIVES",
       "label": "Perspectives",
       "canonicalPath": "/perspectives/",
-      "currentOperationalPath": "/readings/",
-      "activation": "TARGET_PENDING_CX_SURFACE",
+      "currentOperationalPath": "/perspectives/",
+      "activation": "CX_SYMBOLIC_IA_ACTIVE",
       "domain": "PERSPECTIVES"
     },
     {
@@ -132,6 +132,22 @@
       "currentOperationalPath": "/professional/financial/",
       "activation": "P1_CX_CODE_ACTIVE_BROWSER_PENDING",
       "domain": "PROFESSIONAL"
+    },
+    {
+      "routeId": "I_CHING_PERSPECTIVE",
+      "label": "I Ching",
+      "canonicalPath": "/perspectives/iching/",
+      "currentOperationalPath": "/perspectives/iching/",
+      "activation": "CX_SURFACE_ACTIVE_EXECUTION_AUTHORITY_GATED",
+      "domain": "PERSPECTIVES"
+    },
+    {
+      "routeId": "TAROT_PERSPECTIVE",
+      "label": "Tarot",
+      "canonicalPath": "/perspectives/tarot/",
+      "currentOperationalPath": "/perspectives/tarot/",
+      "activation": "CX_SURFACE_ACTIVE_EXECUTION_AUTHORITY_GATED",
+      "domain": "PERSPECTIVES"
     }
   ],
   "legacyAliases": [
@@ -218,6 +234,20 @@
       "destination": "/professional/financial/",
       "redirectStatus": 308,
       "activation": "P1_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/readings/symbolic",
+      "canonicalRouteId": "PERSPECTIVES",
+      "destination": "/perspectives/",
+      "redirectStatus": 308,
+      "activation": "CX_SYMBOLIC_ACTIVE_REDIRECT"
+    },
+    {
+      "path": "/readings/symbolic/",
+      "canonicalRouteId": "PERSPECTIVES",
+      "destination": "/perspectives/",
+      "redirectStatus": 308,
+      "activation": "CX_SYMBOLIC_ACTIVE_REDIRECT"
     }
   ],
   "legacyDebt": {

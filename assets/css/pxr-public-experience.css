@@ -208,3 +208,8 @@ body[data-page="personal-runtime"] .pr-hero__grid {
   .preview-page__media::before { animation: none; }
   .preview-page__media img { transition: none; }
 }
+/* CX figure correction: diagrams use intrinsic ratio and are never cropped. */
+.pxr-visual-story__media{min-height:0;aspect-ratio:auto;display:grid;place-items:center;padding:.75rem}
+.pxr-visual-story__media img{width:100%;height:auto;max-height:none;object-fit:contain}
+.pxr-visual-story__card{cursor:zoom-in}
+.pxr-visual-story__expand{position:absolute;right:1rem;bottom:1rem;border:1px solid rgba(17,24,39,.14);border-radius:999px;background:rgba(255,255,255,.94);padding:.55rem .85rem;cursor:pointer}
