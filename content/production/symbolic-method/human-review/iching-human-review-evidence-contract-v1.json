@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-HUMAN-REVIEW-EVIDENCE-CONTRACT-v1.0.0",
+  "phase": "ICH-HR",
+  "work": "ICH-HR-W1",
+  "baselineCommit": "d2c485af29481179d8e4530780148a1d32981e92",
+  "status": "ACTIVE_REVIEW_EVIDENCE_CONTRACT",
+  "recordSchema": {
+    "required": ["sessionId", "machinePreflightPassed", "machineEvidenceDigest", "humanReviewed", "decision", "reviewerId", "reviewedAt", "deploymentSha", "environmentUrl", "locale", "viewport", "accountMode", "runtimeEvidence", "screenshotRefs", "criteria", "criticalBoundaryFailure", "notes"],
+    "rules": {
+      "sessionId": "MUST_MATCH_ONE_CAMPAIGN_V2_SESSION",
+      "machineEvidenceDigest": "LOWERCASE_SHA256_FROM_FIXED_INPUT_PREFLIGHT",
+      "humanReviewed": "MUST_BE_SET_ONLY_BY_A_REAL_HUMAN_REVIEWER",
+      "decision": "ACCEPTED_OR_REJECTED_OR_NEEDS_FIX_WHEN_REVIEWED",
+      "reviewerId": "NON_EMPTY_AUTHENTICATED_REVIEWER_ID",
+      "reviewedAt": "VALID_ISO_8601_TIMESTAMP",
+      "deploymentSha": "40_CHARACTER_LOWERCASE_GIT_SHA",
+      "environmentUrl": "HTTPS_REVIEW_ENVIRONMENT_URL",
+      "viewport": "WIDTH_AND_HEIGHT_POSITIVE_INTEGERS",
+      "runtimeEvidence": "FIXED_REQUEST_AND_PUBLIC_VIEW_DIGESTS_PLUS_EXPECTED_AND_ACTUAL_PROJECTION",
+      "screenshotRefs": "AT_LEAST_ONE_REVIEWER_CONTROLLED_REFERENCE_FOR_ACCEPTED_SESSION",
+      "criteria": "EVERY_RUBRIC_CRITERION_EXPLICIT_BOOLEAN",
+      "criticalBoundaryFailure": "TRUE_IF_ANY_CRITICAL_CRITERION_FAILS",
+      "notes": "HUMAN_NOTES_OR_NULL"
+    }
+  },
+  "immutability": {
+    "machineEvidenceMayBeEditedByReviewer": false,
+    "rejectedRecordMayBeFlippedInPlace": false,
+    "failedCaseRequiresCodeFixAndNewReviewEvidence": true,
+    "browserLocalPersistenceAllowed": false,
+    "automaticServerPersistenceAllowed": false
+  },
+  "authority": {
+    "machinePreflightIsHumanAcceptance": false,
+    "aiMayActAsReviewer": false,
+    "reviewHarnessMayPromoteProduction": false,
+    "resultsFileMayGrantPublicRunAuthority": false,
+    "humanAcceptanceRequiresChecker": true,
+    "externalActivationGatesRemainSeparate": true
+  }
+}
