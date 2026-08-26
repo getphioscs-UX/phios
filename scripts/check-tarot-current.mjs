@@ -1,1 +1,29 @@
-import {spawnSync} from 'node:child_process';import fs from 'node:fs';import assert from 'node:assert/strict';for(const c of ['check:tarot','check:tarot-interpretation-reality','check:symbolic-public-ux','check:symbolic-sensitive-domain-guard','check:symbolic-browser','check:symbolic-human-review-gate','check:symbolic-production-candidate']){const r=spawnSync('npm',['run',c],{stdio:'inherit',shell:true});if(r.status!==0)process.exit(r.status??1);}const a=JSON.parse(fs.readFileSync('content/production/symbolic-method/acceptance/tarot-machine-acceptance-v1.json','utf8'));assert.match(a.status,/MACHINE_CANDIDATE/);assert.equal(a.machineAcceptanceComplete,false);assert.equal(a.browserAcceptance.staticContractPassed,true);assert.equal(a.browserAcceptance.liveBrowserVerified,false);assert.equal(a.liveProductionSha.verified,false);assert.equal(a.limitedProductionAllowed,false);console.log('✓ Tarot current chain passed: local machine/static-browser candidate + UX/boundaries ready; live browser, human review, persistence identity and live production SHA still block execution.');
+import {spawnSync} from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+
+const ROOT=process.cwd();
+const run=name=>{const r=spawnSync('npm',['run',name],{stdio:'inherit',shell:true});if(r.status!==0)process.exit(r.status??1);};
+const readJson=p=>JSON.parse(fs.readFileSync(path.join(ROOT,p),'utf8'));
+const sha256=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(ROOT,p))).digest('hex');
+
+run('check:tarot-product-activation-phase-k');
+const successorPath='content/production/symbolic-method/reconciliation/tarot-current-checker-successor-v1.json';
+assert.ok(fs.existsSync(successorPath),`missing ${successorPath}`);
+const s=readJson(successorPath);
+assert.equal(s.status,'CURRENT_MACHINE_HUMAN_AND_REAL_BROWSER_SOURCE_ACCEPTED_LIVE_SHA_PERSISTENCE_AND_PROMOTION_PENDING');
+assert.equal(s.current.machineAcceptanceComplete,true);
+assert.equal(s.current.humanAcceptance.accepted,24);
+assert.equal(s.current.humanAcceptance.required,24);
+assert.equal(s.current.browserAcceptance.complete,true);
+assert.equal(s.current.browserAcceptance.realBrowserEngine,true);
+for(const [name,item] of Object.entries(s.checkers)){assert.ok(fs.existsSync(item.path),`missing current checker ${name}`);assert.equal(item.sha256,sha256(item.path),`current checker drift ${name}`);}
+assert.equal(s.productionBoundary.verifiedPersistenceProvider,false);
+assert.equal(s.productionBoundary.liveProductionShaAlignment,false);
+assert.equal(s.productionBoundary.productionCapabilityPromoted,false);
+assert.equal(s.productionBoundary.publicRunAllowed,false);
+assert.equal(s.productionBoundary.clientMayGrantAuthority,false);
+console.log('✓ Tarot current chain passed: machine acceptance + 24/24 real-human acceptance + real-Chromium source-browser acceptance are current.');
+console.log('  Live production SHA, verified persistence authority, PCM promotion and public runAllowed remain fail-closed for the next phases.');

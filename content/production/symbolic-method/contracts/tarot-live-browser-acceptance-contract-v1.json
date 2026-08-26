@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-LIVE-BROWSER-ACCEPTANCE-CONTRACT-v1.0.0",
+  "phase": "TPA-K",
+  "work": "K-W43-K-W50",
+  "baselineCommit": "d2c485af29481179d8e4530780148a1d32981e92",
+  "status": "REAL_BROWSER_SOURCE_ACCEPTANCE_REQUIRED_DEPLOYED_SHA_SEPARATE",
+  "browserModes": {
+    "sourceHarness": "A real Chromium-family browser may execute exact repository HTML/CSS/JS in an isolated source harness when the environment blocks local HTTP/file navigation.",
+    "externalReplay": "PHIOS_TAROT_BROWSER_BASE_URL may point the same acceptance runner at a deployed URL without changing production authority."
+  },
+  "required": {
+    "K_W43_TarotEntryAndMethodContext": true,
+    "K_W44_OneCardBrowserExecution": true,
+    "K_W45_ThreeCardBrowserExecution": true,
+    "K_W46_EnglishAndZhHansDynamicRendering": true,
+    "K_W47_SourceArtworkRccUncertaintyAgencyVisibility": true,
+    "K_W48_EightSensitiveAndEightAdversarialCases": true,
+    "K_W49_KeyboardFocusResponsiveAccessibility": true,
+    "K_W50_AggregateBrowserGate": true
+  },
+  "fixtureRules": {
+    "mustConsumeJ0RegeneratedHumanReviewedPublicViews": true,
+    "mustMatchHumanReviewPublicViewDigest": true,
+    "networkExecutionMayBeAcceptanceHarnessed": true,
+    "acceptanceHarnessMayGrantProductionAuthority": false,
+    "acceptanceHarnessMayChangeRunAllowed": false,
+    "backendMachineAcceptanceRemainsSeparate": true
+  },
+  "productionBoundary": {
+    "humanAcceptanceComplete": true,
+    "sourceBrowserAcceptanceMayComplete": true,
+    "verifiedPersistenceProviderRequiredLater": true,
+    "liveProductionShaAlignmentRequiredLater": true,
+    "pcmPromotionRequiredLater": true,
+    "publicRunAllowed": false
+  }
+}

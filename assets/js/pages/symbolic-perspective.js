@@ -18,7 +18,12 @@ function setMethod(next){
 }
 function productionCopy(state){
   if(!state)return '';
-  return isZh()?human(state).replace('Human Acceptance Pending','人工验收待完成'):human(state);
+  const labels={
+    HUMAN_ACCEPTANCE_PENDING:{en:'Human acceptance pending',zh:'人工验收待完成'},
+    HUMAN_AND_SOURCE_BROWSER_ACCEPTED_LIVE_PERSISTENCE_SHA_PROMOTION_PENDING:{en:'Human + browser acceptance complete · live activation gates remain',zh:'人工与浏览器验收已完成 · live activation gates 仍待完成'},
+    LIMITED_PRODUCTION:{en:'Limited Production',zh:'有限生产'}
+  };
+  return labels[state]?.[isZh()?'zh':'en']||human(state);
 }
 async function loadContext(){
   const use=q('[data-use-reality-context]')?.checked===true;
@@ -81,10 +86,13 @@ function interpretationMarkup(data={}){
     const psy=card.psychologicalReflectivePerspective||{};
     const trad=card.traditionalPerspective||{};
     const question=isZh()?ref.question?.questionZhHans:ref.question?.questionEn;
+    const productLead=isZh()?card.productInterpretation?.productLeadZhHans:card.productInterpretation?.productLeadEn;
+    const waiteClaims=arr(waite.editorialClaims).map(x=>isZh()?(x.claimZhHans||x.claim||x.paraphrase||x.summary||x.text):(x.claimEn||x.claim||x.paraphrase||x.summary||x.text)).filter(Boolean);
     return `<article class="sp-perspective-card">
       <header><div><p class="sp-kicker">${escape(card.position?.positionId||'CARD')}</p><h4>${escape(card.canonicalTitle||card.cardId)}</h4></div><span class="sp-status">${escape(card.orientation||'UPRIGHT')}</span></header>
+      ${productLead?`<section class="sp-product-lead"><h5>${localeText('Product interpretation','产品解读')}</h5><p>${escape(productLead)}</p></section>`:''}
       <section><h5>${localeText('What is visible','可见内容')}</h5>${list(compactObservation(card.visibleObservation),{empty:localeText('No additional visual observations are listed.','没有列出更多可见观察。')})}</section>
-      <section><h5>${localeText('Waite source perspective','Waite 来源视角')}</h5><p class="sp-meta">${escape(sourceAvailabilityLabel(waite.availability))}</p>${waite.editorialClaims?.length?list(waite.editorialClaims.map(x=>x.claim||x.paraphrase||x.summary||x.text).filter(Boolean)):`<p class="sp-empty">${localeText('A governed source locator exists; an editorial paraphrase has not been ingested for this card.','已有受治理的来源定位；此牌尚未录入编辑性释义。')}</p>`}</section>
+      <section><h5>${localeText('Waite source perspective','Waite 来源视角')}</h5><p class="sp-meta">${escape(sourceAvailabilityLabel(waite.availability))}</p>${waiteClaims.length?list(waiteClaims):`<p class="sp-empty">${localeText('A governed source locator exists; an editorial paraphrase has not been ingested for this card.','已有受治理的来源定位；此牌尚未录入编辑性释义。')}</p>`}</section>
       <section><h5>${localeText('Reflective perspective','反思视角')}</h5>${question?`<p class="sp-reflective-question">${escape(question)}</p>`:`<p class="sp-empty">${localeText('No reflective prompt is available.','暂无反思问题。')}</p>`}</section>
       <section><h5>${localeText('Psychological-reflective lens','心理反思视角')}</h5><p class="sp-meta">${escape(sourceAvailabilityLabel(psy.availability))}</p><p>${localeText('Non-diagnostic inquiry only. It does not establish an unconscious or clinical fact.','仅用于非诊断性的反思，不建立潜意识或临床事实。')}</p></section>
       ${trad.availability?`<section><h5>${localeText('Other traditional perspective','其他传统视角')}</h5><p class="sp-meta">${escape(sourceAvailabilityLabel(trad.availability))}</p></section>`:''}

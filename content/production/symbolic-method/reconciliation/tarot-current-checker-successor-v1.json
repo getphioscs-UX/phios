@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-CURRENT-CHECKER-SUCCESSOR-v1.0.0",
+  "phase": "TPA-K",
+  "work": "K-W50_CURRENT_CHECKER_RECONCILIATION",
+  "baselineCommit": "d2c485af29481179d8e4530780148a1d32981e92",
+  "status": "CURRENT_MACHINE_HUMAN_AND_REAL_BROWSER_SOURCE_ACCEPTED_LIVE_SHA_PERSISTENCE_AND_PROMOTION_PENDING",
+  "successorOf": {
+    "historicalChecker": {
+      "path": "scripts/check-tarot-current-historical.mjs",
+      "sha256": "0f0b371934fcabd26f13f6f54c4d367f5a6d679bd97f021a974f935b59b9b734",
+      "preserved": true
+    },
+    "historicalMessageSuperseded": "local machine/static-browser candidate + UX/boundaries ready; live browser, human review, persistence identity and live production SHA still block execution."
+  },
+  "checkers": {
+    "current": {
+      "path": "scripts/check-tarot-current.mjs",
+      "sha256": "50375cef779e0b899aac92224ffc3663443ea5e72a0db6cf3def3e91cfc0a38b"
+    },
+    "machineCurrent": {
+      "path": "scripts/check-tarot-machine-campaign-current.mjs",
+      "sha256": "527c0d6ff5ebfaa54d0cabf165226deeb68e0f9d038692c1ce28555d3b35ff07"
+    },
+    "productSurfaceCurrent": {
+      "path": "scripts/check-tarot-product-surface-current.mjs",
+      "sha256": "79d6b1fc14056b70c46de23b7a46ab908539518ebd7f7ac483afd5d569e346c8"
+    },
+    "liveBrowser": {
+      "path": "scripts/check-tarot-live-browser-acceptance.mjs",
+      "sha256": "8c04a3245bac3ecce1d77c4c0e8d169f77ff55cb69a9e2b30132583c32b3036f"
+    }
+  },
+  "current": {
+    "machineAcceptanceComplete": true,
+    "humanAcceptance": {
+      "complete": true,
+      "accepted": 24,
+      "required": 24,
+      "criticalFailures": 0
+    },
+    "browserAcceptance": {
+      "complete": true,
+      "realBrowserEngine": true,
+      "oneCard": true,
+      "threeCard": true,
+      "en": true,
+      "zhHans": true,
+      "sensitive": 8,
+      "adversarial": 8,
+      "accessibility": true
+    }
+  },
+  "authority": {
+    "liveBrowserSuccessor": "content/production/symbolic-method/reconciliation/tarot-live-browser-current-successor-v1.json",
+    "liveBrowserFreeze": "content/production/symbolic-method/freeze/tarot-live-browser-acceptance-freeze-v1.json",
+    "executionAuthority": "functions/tarot-product-runtime/tarot-execution-authority-v1.js"
+  },
+  "productionBoundary": {
+    "verifiedPersistenceProvider": false,
+    "liveProductionShaAlignment": false,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowed": false,
+    "clientMayGrantAuthority": false
+  },
+  "nextAction": "PHASE_L_PRODUCTION_SHA_ALIGNMENT"
+}
