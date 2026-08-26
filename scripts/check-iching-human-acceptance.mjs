@@ -46,10 +46,10 @@ for(const row of results.sessions){
 }
 
 const reviewed=results.sessions.filter(x=>x.humanReviewed).length;
-const accepted=results.sessions.filter(x=>x.decision==='ACCEPTED').length;
-const rejected=results.sessions.filter(x=>x.decision==='REJECTED').length;
-const needsFix=results.sessions.filter(x=>x.decision==='NEEDS_FIX').length;
-const critical=results.sessions.filter(x=>x.criticalBoundaryFailure===true).length;
+const accepted=results.sessions.filter(x=>x.humanReviewed&&x.decision==='ACCEPTED').length;
+const rejected=results.sessions.filter(x=>x.humanReviewed&&x.decision==='REJECTED').length;
+const needsFix=results.sessions.filter(x=>x.humanReviewed&&x.decision==='NEEDS_FIX').length;
+const critical=results.sessions.filter(x=>x.humanReviewed&&x.criticalBoundaryFailure===true).length;
 assert.equal(results.humanReviewed,reviewed);
 assert.equal(results.accepted,accepted);
 assert.equal(results.rejected,rejected);
@@ -64,4 +64,3 @@ assert.equal(results.publicRunAllowed,false,'human acceptance alone may not open
 
 console.log(`✓ ICH-HR-W4 human acceptance passed: ${accepted}/24 accepted (${reviewed} reviewed), zero critical boundary failures.`);
 console.log('  Public activation remains closed until verified account/D1, live browser, deployed SHA and rights gates pass.');
-

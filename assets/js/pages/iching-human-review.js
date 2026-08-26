@@ -12,8 +12,8 @@ function rowFor(id){return state.results?.sessions?.find(item=>item.sessionId===
 function sessionFor(id){return state.campaign?.sessions?.find(item=>item.sessionId===id);}
 
 function totals(){
-  const rows=arr(state.results?.sessions);const reviewed=rows.filter(x=>x.humanReviewed).length;const accepted=rows.filter(x=>x.decision==='ACCEPTED').length;const critical=rows.filter(x=>x.criticalBoundaryFailure===true).length;
-  state.results.humanReviewed=reviewed;state.results.accepted=accepted;state.results.rejected=rows.filter(x=>x.decision==='REJECTED').length;state.results.needsFix=rows.filter(x=>x.decision==='NEEDS_FIX').length;state.results.criticalBoundaryFailures=critical;state.results.humanAcceptanceComplete=accepted>=state.results.minimumAccepted&&critical===0;state.results.productionPromotionAllowed=false;state.results.publicRunAllowed=false;
+  const rows=arr(state.results?.sessions);const reviewed=rows.filter(x=>x.humanReviewed).length;const accepted=rows.filter(x=>x.humanReviewed&&x.decision==='ACCEPTED').length;const critical=rows.filter(x=>x.humanReviewed&&x.criticalBoundaryFailure===true).length;
+  state.results.humanReviewed=reviewed;state.results.accepted=accepted;state.results.rejected=rows.filter(x=>x.humanReviewed&&x.decision==='REJECTED').length;state.results.needsFix=rows.filter(x=>x.humanReviewed&&x.decision==='NEEDS_FIX').length;state.results.criticalBoundaryFailures=critical;state.results.humanAcceptanceComplete=accepted>=state.results.minimumAccepted&&critical===0;state.results.productionPromotionAllowed=false;state.results.publicRunAllowed=false;
   q('[data-progress]').textContent=`${reviewed} / ${state.results.planned} reviewed`;q('[data-accepted]').textContent=`${accepted} accepted · ${critical} critical`;
 }
 
@@ -83,6 +83,9 @@ async function init(){
   try{const response=await fetch(ENDPOINT,{headers:{accept:'application/json'},cache:'no-store'});const payload=await response.json();if(!response.ok||!payload.ok)throw new Error(payload?.error?.code||'REVIEW_AUTHORITY_REQUIRED');Object.assign(state,{campaign:payload.campaign,rubric:payload.rubric,results:payload.results,review:payload.review});setAuthority(true,`HUMAN_REVIEW · ${payload.review.reviewerId}`,`Deployment ${payload.review.deploymentSha} · public runAllowed remains false`);totals();renderCaseList();q('[data-export-results]').disabled=false;q('[data-empty-state] h2').textContent='Select the first fixed case';q('[data-empty-state] p').textContent='Complete all 24 where possible; acceptance requires at least 20 accepted and zero critical boundary failures.';}catch(error){setAuthority(false,'Review route locked',`${error.message}. Check Access policy, reviewer allowlist and deployed SHA.`);}
 }
 
-q('[data-execute-case]').addEventListener('click',executeCase);q('[data-review-form]').addEventListener('submit',recordReview);q('[data-export-results]').addEventListener('click',exportResults);q('[data-import-results]').addEventListener('change',event=>event.target.files?.[0]&&importResults(event.target.files[0]));
-init();
-
+if(new URL(location.href).searchParams.get('mode')==='depth'){
+  import('/assets/js/pages/iching-depth-human-review.js').then(module=>module.initIChingDepthHumanReview());
+}else{
+  q('[data-execute-case]').addEventListener('click',executeCase);q('[data-review-form]').addEventListener('submit',recordReview);q('[data-export-results]').addEventListener('click',exportResults);q('[data-import-results]').addEventListener('change',event=>event.target.files?.[0]&&importResults(event.target.files[0]));
+  init();
+}

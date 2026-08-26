@@ -13,7 +13,6 @@ function allowlisted(email,value){
   if(!normalized) return false;
   return text(value).split(',').map(x=>x.trim().toLowerCase()).filter(Boolean).includes(normalized);
 }
-
 function trustedContextAuthority(context){
   const authority=context?.data?.symbolicHumanReviewAuthority?.I_CHING;
   const deploymentSha=text(context?.env?.CF_PAGES_COMMIT_SHA).toLowerCase();
@@ -63,4 +62,3 @@ export function inspectIChingHumanReviewAuthority(context={}){
     clientMayGrantAuthority:false
   });
 }
-

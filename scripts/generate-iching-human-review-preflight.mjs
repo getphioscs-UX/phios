@@ -80,4 +80,3 @@ if(process.argv.includes('--initialize-results')){
 
 console.log(`✓ ICH-HR-W3 generated deterministic machine preflight ${snapshots.length}/${campaign.targetSessionCount}.`);
 console.log('  Machine preflight is not human review and cannot promote public execution.');
-

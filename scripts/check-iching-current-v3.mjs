@@ -25,7 +25,7 @@ for(const path of [
   'scripts/check-iching-persistence-current-v2.mjs',
   'scripts/check-iching-live-activation.mjs',
   'scripts/check-iching-line-corpus-current.mjs',
-  'scripts/check-iching-depth-w0-w2.mjs',
+  'scripts/check-iching-depth-w0-w8.mjs',
   'scripts/check-iching-human-review-readiness.mjs',
   'scripts/check-iching-activation-readiness-current-v2.mjs'
 ]) run(path);
@@ -34,4 +34,4 @@ const current=JSON.parse(fs.readFileSync('content/production/symbolic-method/rec
 assert.equal(current.contentReadiness.sourceBoundCanonicalLineWitnessCoverage,'384/384');
 assert.equal(current.currentAuthority.fullyActivated,false);
 
-console.log('✓ I Ching current v3 chain passed: frozen predecessors + 64/64 canonical text + 384/384 line Runtime coverage + ICHI-DEPTH-W0-W2 foundation + ICH-HR-W0-W4 human-review readiness.');
+console.log('✓ I Ching current v3 chain passed: frozen predecessors + 64/64 canonical text + 384/384 line Runtime coverage + ICHI-DEPTH-W0-W8 governed depth chain + ICH-HR-W0-W4 human-review readiness.');

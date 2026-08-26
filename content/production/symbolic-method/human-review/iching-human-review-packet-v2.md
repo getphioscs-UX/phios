@@ -33,4 +33,3 @@ At least 20 of the 24 sessions must be accepted by a real human reviewer, and th
 A rejected or `NEEDS_FIX` record is historical evidence. Do not flip it in place. Repair the underlying code, create new execution evidence, and perform a new human review.
 
 Human acceptance alone does not activate I Ching. Verified account identity, live D1 persistence, live-browser acceptance, deployed-SHA alignment and jurisdictional rights review remain separate gates.
-

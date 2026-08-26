@@ -9,7 +9,6 @@ async function digest(value){
   const bytes=await globalThis.crypto.subtle.digest('SHA-256',encoder.encode(JSON.stringify(value)));
   return [...new Uint8Array(bytes)].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-
 function questionFor(session){
   return session.locale==='zh-Hans'?text(session.questionZhHans):text(session.questionEn);
 }
@@ -121,4 +120,3 @@ export async function runIChingHumanReviewPreflight(campaign={},authorities={}){
   for(const session of arr(campaign.sessions)) snapshots.push((await executeIChingHumanReviewSession(session,authorities)).snapshot);
   return Object.freeze(snapshots);
 }
-

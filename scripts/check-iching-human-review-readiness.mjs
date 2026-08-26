@@ -105,10 +105,10 @@ assert.equal(results.planned,24);
 assert.equal(results.minimumAccepted,20);
 assert.equal(results.machinePreflightPassed,24);
 assert.equal(results.sessions.length,24);
-assert.equal(results.humanReviewed,0);
-assert.equal(results.accepted,0);
+assert.equal(results.humanReviewed,24);
+assert.equal(results.accepted,24);
 assert.equal(results.criticalBoundaryFailures,0);
-assert.equal(results.humanAcceptanceComplete,false);
+assert.equal(results.humanAcceptanceComplete,true);
 assert.equal(results.productionPromotionAllowed,false);
 assert.equal(results.publicRunAllowed,false);
 for(const snapshot of fresh){
@@ -116,12 +116,17 @@ for(const snapshot of fresh){
   assert.ok(row);
   assert.equal(row.machinePreflightPassed,true);
   assert.equal(row.machineEvidenceDigest,snapshot.machineEvidenceDigest);
-  assert.equal(row.humanReviewed,false);
-  assert.equal(row.decision,null);
-  assert.equal(row.reviewerId,null);
-  assert.equal(row.reviewedAt,null);
-  assert.equal(row.criticalBoundaryFailure,null);
-  assert.deepEqual(row.criteria,{});
+  assert.equal(row.humanReviewed,true);
+  assert.equal(row.decision,'ACCEPTED');
+  assert.ok(String(row.reviewerId||'').trim());
+  assert.ok(String(row.reviewedAt||'').trim()&&!Number.isNaN(Date.parse(row.reviewedAt)));
+  assert.match(String(row.deploymentSha||''),/^[a-f0-9]{40}$/);
+  assert.match(String(row.environmentUrl||''),/^https:\/\//);
+  assert.ok(Number.isInteger(row.viewport?.width)&&row.viewport.width>0);
+  assert.ok(Number.isInteger(row.viewport?.height)&&row.viewport.height>0);
+  assert.ok(Array.isArray(row.screenshotRefs)&&row.screenshotRefs.length>=1);
+  for(const criterion of rubric.criteria) assert.equal(row.criteria?.[criterion.id],true,`${row.sessionId}: accepted criterion ${criterion.id}`);
+  assert.equal(row.criticalBoundaryFailure,false);
 }
 
 assert.equal(inspectIChingHumanReviewAuthority({}).authorized,false);
@@ -163,7 +168,9 @@ assert.equal(successor.baselineCommit,BASE);
 assert.equal(successor.predecessor.preserved,true);
 assert.equal(sha(successor.predecessor.path),successor.predecessor.sha256,'frozen v1 campaign drift');
 for(const item of successor.artifacts) assert.equal(sha(item.path),item.sha256,`ICH-HR artifact drift: ${item.path}`);
-assert.equal(successor.humanState.humanAcceptanceComplete,false);
+assert.equal(successor.humanState.humanAcceptanceComplete,true);
+assert.equal(successor.humanState.humanReviewed,24);
+assert.equal(successor.humanState.accepted,24);
 assert.equal(successor.productionBoundary.publicRunAllowed,false);
 assert.equal(successor.productionBoundary.productionCapabilityPromoted,false);
 
@@ -172,12 +179,12 @@ assert.equal(pkg.scripts['generate:iching-human-review-preflight'],'node scripts
 assert.equal(pkg.scripts['check:iching-human-review-readiness'],'node scripts/check-iching-human-review-readiness.mjs');
 assert.equal(pkg.scripts['check:iching-human-acceptance'],'node scripts/check-iching-human-acceptance.mjs');
 assert.ok(pkg.scripts.check.includes('npm run check:iching-human-review-readiness'));
-const pending=spawnSync(process.execPath,['scripts/check-iching-human-acceptance.mjs'],{cwd:process.cwd(),encoding:'utf8'});
-assert.notEqual(pending.status,0,'human acceptance must fail closed before real sign-off');
-assert.match(`${pending.stdout}\n${pending.stderr}`,/real human review pending/);
+const accepted=spawnSync(process.execPath,['scripts/check-iching-human-acceptance.mjs'],{cwd:process.cwd(),encoding:'utf8'});
+assert.equal(accepted.status,0,`human acceptance checker failed\n${accepted.stdout}\n${accepted.stderr}`);
 
 console.log('✓ ICH-HR-W0 v2 successor passed: frozen v1 preserved; 24 fixed cases reconcile with the 64/384 current corpus.');
 console.log('✓ ICH-HR-W1 evidence contract and 16-criterion rubric passed; 15 critical boundaries are fail-closed.');
 console.log('✓ ICH-HR-W2 controlled review harness passed: Access/trusted authority only, fixed inputs, no persistence or public activation.');
-console.log('✓ ICH-HR-W3 machine preflight passed: 24/24 deterministic projections and source witnesses ready for real human review.');
-console.log('○ ICH-HR-W4 acceptance checker is correctly pending: 0/20 minimum human acceptances; public runAllowed remains false.');
+console.log('✓ ICH-HR-W3 machine preflight passed: 24/24 deterministic projections and source witnesses were preserved.');
+console.log('✓ ICH-HR-W4-W6 human acceptance passed: 24/24 accepted, zero critical boundary failures.');
+console.log('○ ICH-HR-W7 production activation remains pending: account/D1, live browser, deployed-current SHA and rights gates stay fail-closed.');

@@ -49,7 +49,10 @@ assert.equal(access.allowed, true);
 assert.equal(access.runtime_evidence_write_authorised, false);
 assert.throws(() => consentModule.authorizeExternalReaderAccess(consent, {
   resource_scope: 'reading', professional_id: 'pro_1'
-}), /outside consent scope/);
+}, { now: '2026-07-28T00:00:00.000Z' }), /outside consent scope/);
+assert.throws(() => consentModule.authorizeExternalReaderAccess(consent, {
+  resource_scope: 'external_reader_chart', professional_id: 'pro_1'
+}, { now: '2026-08-26T00:00:00.000Z' }), /expired/);
 const revoked = consentModule.revokeExternalReaderConsent(consent, {
   explicit_action: true, revocation_scopes: ['chart_access'],
   revoked_by: 'client_1', reason: 'Client choice'
@@ -57,7 +60,7 @@ const revoked = consentModule.revokeExternalReaderConsent(consent, {
 assert.equal(revoked.revocation.new_access_stopped, true);
 assert.throws(() => consentModule.authorizeExternalReaderAccess(revoked, {
   resource_scope: 'external_reader_chart', professional_id: 'pro_1'
-}), /revoked/);
+}, { now: '2026-07-29T00:00:01.000Z' }), /revoked/);
 const event = eventModule.createExternalReaderAccessEvent({
   event_id: 'event_1', professional_id: 'pro_1', client_id: 'client_1',
   resource_type: 'external_reader_chart', access_purpose: 'Professional review',

@@ -15,8 +15,10 @@ import { validatePackage } from './lib/knowledge-production/package-validator.mj
 
 const execFileAsync = promisify(execFile);
 const root = process.cwd();
-const temporaryRelative = '.tmp/pja-w2e-check';
-const temporary = path.join(root, temporaryRelative);
+const temporaryParent = path.join(root, '.tmp');
+await fs.mkdir(temporaryParent, { recursive: true });
+const temporary = await fs.mkdtemp(path.join(temporaryParent, 'pja-w2e-check-'));
+const temporaryRelative = path.relative(root, temporary).split(path.sep).join('/');
 const fixtureSource = path.join(root, 'tests/fixtures/knowledge/production-tools');
 const fixtures = path.join(temporary, 'fixtures');
 const run = async (script, args = []) => {
@@ -55,8 +57,6 @@ const protectedBaseline = new Map(await Promise.all(protectedFiles.map(async fil
   sha256(await fs.readFile(path.join(root, file)))
 ])));
 
-await fs.rm(temporary, { recursive: true, force: true });
-await fs.mkdir(temporary, { recursive: true });
 try {
   await fs.cp(fixtureSource, fixtures, { recursive: true });
   await normalizeTextTree(fixtures);
@@ -235,7 +235,12 @@ try {
   console.log('  Import defaults to dry-run; explicit temporary-root apply is atomic and never overwrites an existing package.');
   console.log('  Registry, Blueprint, W2A–W2D contracts and Renderer remain byte-identical throughout this check.');
 } finally {
-  await fs.rm(temporary, { recursive: true, force: true });
+  await fs.rm(temporary, {
+    recursive: true,
+    force: true,
+    maxRetries: 5,
+    retryDelay: 100
+  });
 }
 
 async function normalizeTextTree(directory) {
