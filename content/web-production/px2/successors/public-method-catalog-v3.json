@@ -1,0 +1,81 @@
+{
+  "registryCode": "PX2-PUBLIC-METHOD-CATALOG",
+  "version": "1.0.0",
+  "baselineCommit": "fc2c3dd6ab4910581fd9c859dc303e8c89697ec0",
+  "authorityNote": "Presentation state follows current governed runtime evidence. A card does not grant production eligibility.",
+  "methods": [
+    {
+      "methodCode": "ASTROLOGY",
+      "label": "Astrology",
+      "labelZh": "占星",
+      "category": "STRUCTURAL_READING",
+      "route": "/readings/#astrology",
+      "publicState": "TECHNICAL_RUNTIME_READY_POLICY_GATED",
+      "runAllowed": false
+    },
+    {
+      "methodCode": "BAZI",
+      "label": "BaZi",
+      "labelZh": "八字",
+      "category": "STRUCTURAL_READING",
+      "route": "/readings/#bazi",
+      "publicState": "TECHNICAL_RUNTIME_READY_EXECUTION_GATED",
+      "runAllowed": false
+    },
+    {
+      "methodCode": "HUMAN_DESIGN",
+      "label": "Human Design",
+      "labelZh": "人类图",
+      "category": "STRUCTURAL_READING",
+      "route": "/professional/personal-runtime/",
+      "publicState": "RESTRICTED_PROFESSIONAL_BOUNDARY",
+      "runAllowed": false
+    },
+    {
+      "methodCode": "NUMEROLOGY",
+      "label": "Numerology",
+      "labelZh": "数字学",
+      "category": "STRUCTURAL_READING",
+      "route": "/readings/#numerology",
+      "publicState": "TECHNICAL_RUNTIME_READY_EXECUTION_GATED",
+      "runAllowed": false
+    },
+    {
+      "methodCode": "I_CHING",
+      "label": "I Ching",
+      "labelZh": "易经",
+      "category": "QUESTION_READING",
+      "route": "/readings/#i-ching",
+      "publicState": "CALCULATION_RUNTIME_FROZEN_INTERPRETATION_NEXT_PHASE",
+      "runAllowed": false
+    },
+    {
+      "methodCode": "TAROT",
+      "label": "Tarot",
+      "labelZh": "塔罗",
+      "category": "QUESTION_READING",
+      "route": "/readings/symbolic/?method=TAROT",
+      "publicState": "LIMITED_PRODUCTION_SERVER_GATED",
+      "runAllowed": false,
+      "capabilityAvailability": "LIMITED",
+      "runtimeAuthorityEndpoint": "/api/tarot-production-status",
+      "staticCatalogMayGrantRunAllowed": false
+    },
+    {
+      "methodCode": "ZI_WEI_DOU_SHU",
+      "label": "Zi Wei Dou Shu",
+      "labelZh": "紫微斗数",
+      "category": "STRUCTURAL_READING",
+      "route": "/personal-runtime",
+      "publicState": "AVAILABLE_NATAL_STRUCTURAL_V1",
+      "runAllowed": true,
+      "productionEndpoint": "/api/zi-wei-execute",
+      "capabilityVersion": "1.0.0"
+    }
+  ],
+  "predecessor": "content/web-production/px2/successors/public-method-catalog-v2.json",
+  "predecessorMutated": false,
+  "work": "TPA-M-M-W53-M-W55",
+  "schemaVersion": "PHI-OS-PX2-PUBLIC-METHOD-CATALOG-v3.0.0",
+  "status": "CURRENT_TAROT_LIMITED_DYNAMIC_SERVER_AUTHORITY"
+}
