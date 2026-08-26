@@ -1,0 +1,10 @@
+import {spawnSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const run=name=>{const r=spawnSync('npm',['run',name],{stdio:'inherit',shell:true});if(r.status!==0)process.exit(r.status??1);};const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+run('check:tarot-product-activation-phase-k');run('check:tarot-production-sha-readiness');
+const cc=j('content/production/symbolic-method/reconciliation/tarot-current-checker-successor-v2.json');for(const item of Object.values(cc.checkers))assert.equal(item.sha256,sha(item.path),`current checker drift ${item.path}`);assert.equal(cc.productionBoundary.verifiedPersistenceProvider,false);assert.equal(cc.productionBoundary.productionCapabilityPromoted,false);assert.equal(cc.productionBoundary.publicRunAllowed,false);assert.equal(cc.productionBoundary.clientMayGrantAuthority,false);
+const s=j('content/production/symbolic-method/reconciliation/tarot-production-sha-current-successor-v1.json');
+if(s.productionBoundary.liveProductionShaAlignment===true){run('check:tarot-production-sha-alignment');assert.equal(cc.status,'CURRENT_MACHINE_HUMAN_BROWSER_AND_PRODUCTION_SHA_ACCEPTED_PERSISTENCE_AND_PROMOTION_PENDING');assert.equal(cc.current.productionShaAlignment,true);console.log('✓ Tarot current chain passed: machine + 24/24 human + real-browser + exact production SHA alignment are current.');console.log('  Verified persistence authority, PCM promotion and public runAllowed remain fail-closed for Phase M.');}
+else{assert.equal(cc.status,'CURRENT_PHASE_L_ALIGNMENT_PENDING');assert.equal(cc.current.productionShaAlignment,false);console.log('✓ Tarot current chain is Phase-L ready: machine + 24/24 human + real-browser acceptance are current.');console.log('  Live production SHA verification is pending; verified persistence, PCM promotion and public runAllowed remain fail-closed.');}

@@ -1534,7 +1534,7 @@
     "check:iching-current": "node scripts/check-iching-current-v3.mjs",
     "check:iching-current-v2-historical": "node scripts/check-iching-current-v2.mjs",
     "check:iching-line-corpus-current": "node --no-warnings scripts/check-iching-line-corpus-current.mjs",
-    "check:tarot-current": "node scripts/check-tarot-current.mjs",
+    "check:tarot-current": "node scripts/check-tarot-current-v2.mjs",
     "check:future-method-contract": "node scripts/check-future-method-contract.mjs",
     "check:symbolic-phase10-12": "node scripts/check-symbolic-phase10-12.mjs",
     "check:mir-current-baseline-v2": "node scripts/check-mir-current-baseline-v2.mjs",
@@ -1770,7 +1770,14 @@
     "check:tarot-product-activation-phase-k": "npm run check:tarot-product-activation-phase-j && npm run check:tarot-live-browser-acceptance",
     "check:tarot-current-historical": "node scripts/check-tarot-current-historical.mjs",
     "check:tarot-machine-campaign-historical": "node scripts/check-tarot-machine-campaign.mjs",
-    "check:tarot-machine-campaign-current": "node scripts/check-tarot-machine-campaign-current.mjs"
+    "check:tarot-machine-campaign-current": "node scripts/check-tarot-machine-campaign-current.mjs",
+    "generate:tarot-production-sha-manifest": "node scripts/generate-tarot-production-sha-manifest.mjs",
+    "verify:tarot-production-sha": "node scripts/verify-tarot-production-sha-alignment.mjs",
+    "check:tarot-production-sha-readiness": "node scripts/check-tarot-production-sha-readiness.mjs",
+    "check:tarot-production-sha-alignment": "node scripts/check-tarot-production-sha-alignment.mjs",
+    "check:tarot-product-activation-phase-l-readiness": "npm run check:tarot-product-activation-phase-k && npm run check:tarot-production-sha-readiness",
+    "check:tarot-product-activation-phase-l": "npm run check:tarot-product-activation-phase-k && npm run check:tarot-production-sha-alignment",
+    "check:tarot-current-phase-k": "node scripts/check-tarot-current.mjs"
   },
   "type": "module",
   "dependencies": {

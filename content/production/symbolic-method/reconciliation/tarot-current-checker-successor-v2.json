@@ -1,0 +1,47 @@
+{
+  "baselineCommit": "526547698894de0d33d09447aed0b93b83558114",
+  "checkers": {
+    "current": {
+      "path": "scripts/check-tarot-current-v2.mjs",
+      "sha256": "94489bcd99a91f15c8169af578f65d60defa4f02dbb6d7183edeadd58b3b0854"
+    },
+    "phaseK": {
+      "path": "scripts/check-tarot-live-browser-acceptance.mjs",
+      "sha256": "8c04a3245bac3ecce1d77c4c0e8d169f77ff55cb69a9e2b30132583c32b3036f"
+    },
+    "readiness": {
+      "path": "scripts/check-tarot-production-sha-readiness.mjs",
+      "sha256": "62a383789aa54570e1af77ce92ea2c456bebc962f24241b42a98914cf9e32718"
+    },
+    "strict": {
+      "path": "scripts/check-tarot-production-sha-alignment.mjs",
+      "sha256": "2cfffd7604b97f0737a7038fb2adcc13d5091bf613787da27d8026b8c44a692f"
+    },
+    "verifier": {
+      "path": "scripts/verify-tarot-production-sha-alignment.mjs",
+      "sha256": "7c8c1d31cdb4876d3f66fd5b595426af6a4f8cec39378d7b7710c2359159d407"
+    }
+  },
+  "current": {
+    "browserAcceptanceComplete": true,
+    "deployedCommit": null,
+    "humanAcceptance24Of24": true,
+    "machineAcceptanceComplete": true,
+    "productionShaAlignment": false
+  },
+  "nextAction": "RUN_VERIFY_TAROT_PRODUCTION_SHA_ALIGNMENT",
+  "phase": "TPA-L",
+  "productionBoundary": {
+    "clientMayGrantAuthority": false,
+    "productionCapabilityPromoted": false,
+    "publicRunAllowed": false,
+    "verifiedPersistenceProvider": false
+  },
+  "schemaVersion": "PHI-OS-TAROT-CURRENT-CHECKER-SUCCESSOR-v2.0.0",
+  "status": "CURRENT_PHASE_L_ALIGNMENT_PENDING",
+  "successorOf": {
+    "path": "content/production/symbolic-method/reconciliation/tarot-current-checker-successor-v1.json",
+    "preserved": true
+  },
+  "work": "L-W56_CURRENT_CHECKER_RECONCILIATION"
+}
