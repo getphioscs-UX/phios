@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');const json=p=>JSON.parse(read(p));
+const html=read('perspectives/personal/index.html'),js=read('assets/customer-ui/js/surfaces/personal-reality.js'),css=read('assets/customer-ui/surfaces/personal-reality.css');
+const workspace=json('content/customer-experience-rebuild/contracts/cx-r12r4-result-workspace-contract-v1.json');
+const campaign=json('content/customer-experience-rebuild/review/cx-r12r4-visual-human-acceptance-campaign-v1.json');
+const claims=json('content/customer-experience-rebuild/contracts/cx-r12r4-reading-claim-authority-map-v1.json');
+const acceptance=json('content/customer-experience-rebuild/acceptance/cx-r12r4-source-acceptance-v1.json');
+const iconRecon=json('content/customer-experience-rebuild/registries/cx-r12r4-icon-reconciliation-v1.json');
+assert.deepEqual(workspace.tabs,['Overview','Graph','Structure','Patterns','Context','Reality Comparison','Technical Details']);
+assert.equal(workspace.graph.rendererCreatesMeaning,false);assert.equal(workspace.structure.atomicMeaningDirectPublicationForbidden,true);assert.equal(workspace.patterns.rawSymbolConsensusForbidden,true);assert.equal(workspace.realityComparison.resonatesIsEvidence,false);assert.equal(workspace.handoff.realityFactPromotion,false);
+for(const token of ['graphBoundaryBlock','WHAT THIS GRAPH SHOWS','WHAT IT DOES NOT ESTABLISH','renderCrossPerspectiveComparison','renderSourcesAndBoundaries','CALCULATED STRUCTURE','WHAT REMAINS OPEN'])assert(js.includes(token),`R12R4 result workspace missing ${token}`);
+for(const asset of ['PHIOS-FIGURE-CROSS-PERSPECTIVE-PATTERN-MAP-v1.svg','PHIOS-FIGURE-CROSS-PERSPECTIVE-PATTERN-MAP-v1-mobile.svg','PHIOS-FIGURE-PERSPECTIVE-TO-REALITY-CONTINUITY-v1.svg','PHIOS-FIGURE-PERSPECTIVE-TO-REALITY-CONTINUITY-v1-mobile.svg'])assert(html.includes(asset),`R12R4 P2 figure missing ${asset}`);
+assert.match(html,/data-cx-pattern-comparison/);assert.match(html,/data-cx-personal-sources/);assert.match(html,/SOURCES &amp; BOUNDARIES/);assert.match(html,/Resonates is not evidence by itself/);assert.match(html,/data-cx-authority-layer="NAVIGATION_THRESHOLD"/);
+for(const panel of claims.resultPanels){const re=new RegExp(`data-cx-panel="${panel.panel}"[^>]*data-cx-authority-layer="([^"]+)"`);const match=html.match(re);assert(match,`untyped R12R4 result panel ${panel.panel}`);for(const layer of panel.authorityLayers)assert(match[1].split(/\s+/).includes(layer),`${panel.panel} missing authority layer ${layer}`)}
+assert.match(read('functions/api/customer-reality-handoff.js'),/reportedContext:\[clean\(view\.realityResponse\),clean\(view\.realityNote\)\]/);assert.match(read('functions/reality-orchestration/reality-orchestrator.js'),/authorityClass:'USER_REPORTED_CONTEXT',realityFact:false/);
+assert.match(css,/cx-graph-boundary/);assert.match(css,/cx-cross-perspective-compare/);assert.match(css,/cx-source-boundary-list/);assert.match(css,/@media\(max-width:620px\)/);
+assert.equal(iconRecon.authorityBoundary.pagePrivateIconAuthorityForbidden,true);assert.equal(iconRecon.forbiddenNewIdentities.includes('PERSPECTIVE_NOT_FACT'),true);assert.equal(html.includes('PHIOS-ICON-PERSPECTIVE-NOT-FACT'),false);
+assert.equal(campaign.status,'PENDING_REAL_BROWSER_AND_HUMAN_REVIEW');assert.equal(campaign.claims.realBrowserAccepted,false);assert.equal(campaign.claims.humanVisualAccepted,false);
+const packageJson=json('package.json');assert(packageJson.scripts.check.endsWith('&& npm run check:cx-r12r4'),'CX-R12R4 must be the current global CX aggregate');assert(packageJson.scripts['check:cx-r12r4'].startsWith('npm run check:cx-r12r3b &&'),'CX-R12R4 must preserve R12R3B predecessor gate');
+assert.equal(acceptance.work,'CX-R12R4-W0-W19');assert.equal(acceptance.claims.sourceAccepted,true);assert.equal(acceptance.claims.realBrowserAccepted,false);assert.equal(acceptance.claims.humanVisualAccepted,false);assert.equal(acceptance.claims.fullProduction,false);
+console.log('✓ CX-R12R4 W10–W19 source completion passed.');
+console.log('  Governed graph/structure/pattern/context/reality/source layers, explicit handoff context, responsive P2 figures and claim authority typing are source-accepted; W18 real-browser + human visual acceptance remains pending.');

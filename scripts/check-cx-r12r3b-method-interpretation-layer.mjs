@@ -166,7 +166,7 @@ assert.equal(html.includes('legacy.css'),false);assert.equal(html.includes('DETE
 
 const packageJson=read('package.json');
 assert.equal(packageJson.scripts['check:cx-r12r3b'],'node scripts/check-cx-r12r3b-method-interpretation-layer.mjs');
-assert(packageJson.scripts.check.endsWith('&& npm run check:cx-r12r3b'),'CX-R12R3B aggregate must be last in npm run check');
+const r12r4Aggregate=packageJson.scripts['check:cx-r12r4'];assert(typeof r12r4Aggregate==='string'&&r12r4Aggregate.startsWith('npm run check:cx-r12r3b &&'),'CX-R12R4 successor must preserve CX-R12R3B as its first aggregate gate');assert(packageJson.scripts.check.endsWith('&& npm run check:cx-r12r4'),'CX-R12R4 successor aggregate must be last in npm run check while preserving CX-R12R3B internally');
 assert.equal(acceptance.claims.humanAccepted,false);assert.equal(acceptance.claims.liveBrowserAccepted,false);assert.equal(acceptance.claims.fullProduction,false);
 assert.deepEqual(acceptance.requiredStopStates,['DEVELOPMENT_ACCEPTED','HUMAN_REVIEW_REQUIRED','LIVE_BROWSER_REQUIRED']);
 
