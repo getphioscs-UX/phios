@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-CURRENT-AUTHORITY-v1.0.0",
+  "methodCode": "I_CHING",
+  "releaseId": "ICHING-1.0.0",
+  "releaseManifest": "content/production/symbolic-method/releases/iching/ICHING-1.0.0.json",
+  "currentChecker": "scripts/check-iching-release-current.mjs",
+  "stateContract": {
+    "targetState": "FULL_PRODUCTION",
+    "globalPublicExecution": true,
+    "guestPersistenceAllowed": true,
+    "liveAuthorityProvider": "RUNTIME_DB_D1",
+    "exactDeployedCommitRequired": true,
+    "operationalEvidenceCommitted": false,
+    "operationalEvidencePath": ".runtime-evidence/iching-full-production-live-evidence-v1.json"
+  },
+  "governance": {
+    "singleCurrentAuthorityPointer": true,
+    "historicalSuccessorFilesRemainAuditOnly": true,
+    "futureDeploymentDoesNotCreateNewCurrentVNumber": true,
+    "newReleaseRequiredOnlyForSemanticRuntimeCorpusOrContractChange": true,
+    "w31W32R1W33EvidenceRewritten": false,
+    "humanAcceptanceReopened": false,
+    "depthAdmissionReopened": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-FULL-PRODUCTION-CONTRACT-v1.0.0",
+  "releaseId": "ICHING-1.0.0",
+  "methodCode": "I_CHING",
+  "targetState": "FULL_PRODUCTION",
+  "globalPublicExecution": true,
+  "guestPersistenceAllowed": true,
+  "executionAuthority": {
+    "provider": "RUNTIME_DB_D1",
+    "exactDeployedCommitRequired": true,
+    "clientMayGrantAuthority": false,
+    "staticRegistryMayGrantAuthority": false,
+    "countryAllowlistRequired": false
+  },
+  "guestPersistence": {
+    "allowed": true,
+    "automaticPersistence": false,
+    "explicitSaveActionRequired": true,
+    "explicitRetentionConsentRequired": true,
+    "retentionPolicyVersion": "ICHING-GUEST-RETENTION-v1",
+    "defaultRetentionDays": 30,
+    "maximumRetentionDays": 90,
+    "signedServerGuestSessionRequired": true,
+    "browserLocalFallbackAllowed": false,
+    "readOwnSessionHistoryAllowed": true,
+    "deleteOwnSessionReadingAllowed": true,
+    "canonicalRealityCreatedBySave": false,
+    "expiredRecordCleanup": "ON_SESSION_ACCESS_OR_EXPLICIT_DELETE",
+    "orphanGuestIdentityCleanup": true
+  },
+  "interpretationBoundary": {
+    "humanApprovedDepthCoverage": "448/448",
+    "bilingualRuntimeCases": "896/896",
+    "candidateFallbackAllowed": false,
+    "runtimeModelGapFillAllowed": false,
+    "fortuneTellingAuthority": false,
+    "predictionAuthority": false,
+    "diagnosticAuthority": false,
+    "hiddenStateAuthority": false,
+    "professionalDirectiveAuthority": false,
+    "decisionAuthority": "USER"
+  }
+}
