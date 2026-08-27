@@ -6,6 +6,8 @@ import {buildAstRuntimeReadingIR} from '../runtime-reading/ast-reading-ir.js';
 import {buildBzrRuntimeReadingIR} from '../runtime-reading/bzr-reading-ir.js';
 import {buildNumRuntimeReadingIR} from '../runtime-reading/num-reading-ir.js';
 import {buildZiWeiRuntimeReadingIR} from '../runtime-reading/zi-wei-reading-ir.js';
+import {buildEcrRuntimeReadingIR} from '../runtime-reading/ecr-reading-ir.js';
+import {buildEcrCanonicalMeaningBundle,projectEcrMeaningLocale} from '../canonical-meaning-production/ecr-meaning-runtime.js';
 import {
   CMP_PRODUCTION_ADMISSION_REGISTRY,
   CMP_PRODUCTION_MAPPING_REGISTRY,
@@ -17,8 +19,8 @@ import {resolveCustomerCompositionAdmission} from '../interpretation-runtime/cus
 import {executeAdmittedCustomerInterpretation} from '../interpretation-runtime/admitted-customer-interpretation-runtime-v1.js';
 import {projectCxR12R3bCustomerLanguage} from './cx-r12r3b-customer-language-v1.js';
 
-const METHOD_ID=Object.freeze({ASTROLOGY_PROJECTION:'AST',NUMEROLOGY_PROJECTION:'NUM',BAZI_PROJECTION:'BZR',ZI_WEI_PROJECTION:'ZWR'});
-const METHOD_LABELS=Object.freeze({AST:Object.freeze({en:'Astrology','zh-Hans':'占星'}),BZR:Object.freeze({en:'BaZi','zh-Hans':'八字'}),NUM:Object.freeze({en:'Numerology','zh-Hans':'数字学'}),ZWR:Object.freeze({en:'Zi Wei','zh-Hans':'紫微斗数'})});
+const METHOD_ID=Object.freeze({ASTROLOGY_PROJECTION:'AST',NUMEROLOGY_PROJECTION:'NUM',BAZI_PROJECTION:'BZR',ZI_WEI_PROJECTION:'ZWR',EMBODIED_CONFIGURATION_PROJECTION:'ECR'});
+const METHOD_LABELS=Object.freeze({AST:Object.freeze({en:'Astrology','zh-Hans':'占星'}),BZR:Object.freeze({en:'BaZi','zh-Hans':'八字'}),NUM:Object.freeze({en:'Numerology','zh-Hans':'数字学'}),ZWR:Object.freeze({en:'Zi Wei','zh-Hans':'紫微斗数'}),ECR:Object.freeze({en:'Embodied Configuration','zh-Hans':'载体构型读取'})});
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const item of Object.values(value))freeze(item)}return value};
 
 function customerVisualModel(graph){
@@ -100,22 +102,28 @@ export async function buildMethodMeaningPayloadV2({canonicalProjection,locale='e
   const publicMethodCode=canonicalProjection?.method?.publicMethodCode;
   if(!METHOD_ID[publicMethodCode])throw Object.assign(new Error('CX_R12R3B_METHOD_NOT_SUPPORTED'),{code:'CX_R12R3B_METHOD_NOT_SUPPORTED'});
   const ziWei=publicMethodCode==='ZI_WEI_PROJECTION'?await import('../canonical-meaning-production/zi-wei-meaning-runtime.js'):null;
-  const meaningBundle=publicMethodCode==='ZI_WEI_PROJECTION'
-    ?ziWei.buildZiWeiCanonicalMeaningBundle(canonicalProjection)
-    :publicMethodCode==='ASTROLOGY_PROJECTION'
-      ?await buildAstV2CanonicalMeaningProductionBundle({projection:canonicalProjection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY})
-      :await buildCanonicalMeaningProductionBundle({projection:canonicalProjection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY,mode:'production'});
+  const meaningBundle=publicMethodCode==='EMBODIED_CONFIGURATION_PROJECTION'
+    ?await buildEcrCanonicalMeaningBundle(canonicalProjection)
+    :publicMethodCode==='ZI_WEI_PROJECTION'
+      ?ziWei.buildZiWeiCanonicalMeaningBundle(canonicalProjection)
+      :publicMethodCode==='ASTROLOGY_PROJECTION'
+        ?await buildAstV2CanonicalMeaningProductionBundle({projection:canonicalProjection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY})
+        :await buildCanonicalMeaningProductionBundle({projection:canonicalProjection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY,mode:'production'});
   const useLocale=locale==='zh-Hans'?'zh-Hans':'en';
-  const localeProjection=publicMethodCode==='ZI_WEI_PROJECTION'
-    ?ziWei.projectZiWeiMeaningLocale(meaningBundle,useLocale)
-    :await projectCanonicalMeaningLocale({bundle:meaningBundle,localeRegistry:CMP_PRODUCTION_LOCALE_REGISTRY,locale:useLocale});
-  const reading=publicMethodCode==='ASTROLOGY_PROJECTION'
-    ?buildAstRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
-    :publicMethodCode==='BAZI_PROJECTION'
-      ?buildBzrRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
-      :publicMethodCode==='NUMEROLOGY_PROJECTION'
-        ?buildNumRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
-        :buildZiWeiRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection});
+  const localeProjection=publicMethodCode==='EMBODIED_CONFIGURATION_PROJECTION'
+    ?projectEcrMeaningLocale(meaningBundle,useLocale)
+    :publicMethodCode==='ZI_WEI_PROJECTION'
+      ?ziWei.projectZiWeiMeaningLocale(meaningBundle,useLocale)
+      :await projectCanonicalMeaningLocale({bundle:meaningBundle,localeRegistry:CMP_PRODUCTION_LOCALE_REGISTRY,locale:useLocale});
+  const reading=publicMethodCode==='EMBODIED_CONFIGURATION_PROJECTION'
+    ?buildEcrRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
+    :publicMethodCode==='ASTROLOGY_PROJECTION'
+      ?buildAstRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
+      :publicMethodCode==='BAZI_PROJECTION'
+        ?buildBzrRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
+        :publicMethodCode==='NUMEROLOGY_PROJECTION'
+          ?buildNumRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection})
+          :buildZiWeiRuntimeReadingIR({projection:canonicalProjection,bundle:meaningBundle,localeProjection});
   const projected=projectCxR12R3bCustomerLanguage({meaningPayload:{executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading},methodId:METHOD_ID[publicMethodCode],locale:useLocale});
   return freeze(projected);
 }

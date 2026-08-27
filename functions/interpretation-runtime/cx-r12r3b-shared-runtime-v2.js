@@ -20,7 +20,8 @@ const METHODS=Object.freeze({
   AST:Object.freeze({publicMethodCode:'ASTROLOGY_PROJECTION',graphType:'NATAL_CHART',labels:{en:'Astrology', 'zh-Hans':'占星'}}),
   NUM:Object.freeze({publicMethodCode:'NUMEROLOGY_PROJECTION',graphType:'NUMBER_DERIVATION',labels:{en:'Numerology','zh-Hans':'数字学'}}),
   BZR:Object.freeze({publicMethodCode:'BAZI_PROJECTION',graphType:'FOUR_PILLARS',labels:{en:'BaZi','zh-Hans':'八字'}}),
-  ZWR:Object.freeze({publicMethodCode:'ZI_WEI_PROJECTION',graphType:'TWELVE_PALACES',labels:{en:'Zi Wei','zh-Hans':'紫微斗数'}})
+  ZWR:Object.freeze({publicMethodCode:'ZI_WEI_PROJECTION',graphType:'TWELVE_PALACES',labels:{en:'Zi Wei','zh-Hans':'紫微斗数'}}),
+  ECR:Object.freeze({publicMethodCode:'EMBODIED_CONFIGURATION_PROJECTION',graphType:'ECR_RUNTIME_COORDINATE',labels:{en:'Embodied Configuration','zh-Hans':'载体构型读取'}})
 });
 const METHOD_BY_PUBLIC=new Map(Object.entries(METHODS).map(([id,x])=>[x.publicMethodCode,id]));
 const RELATIONS=new Set(['SUPPORT','TENSION','REINFORCEMENT','COUNTERBALANCE','REPETITION','DEPENDENCY','ACTIVATION','TRANSITION']);
@@ -32,7 +33,8 @@ const THEMES=new Set(['AUTONOMY','RELATIONSHIP','STABILITY','CHANGE','EXPRESSION
 const COMPOSITION_RULES=new Set([
   'CX-COMP-AST-PLANET-SIGN-HOUSE-v1','CX-COMP-AST-ASPECT-v1','CX-COMP-AST-PLACEMENT-v1',
   'CX-COMP-NUM-ROLE-NUMBER-PATH-v1','CX-COMP-NUM-CYCLE-v1','CX-COMP-BZR-PILLAR-DAY-SEASON-v1',
-  'CX-COMP-ZWR-PALACE-NETWORK-v1','CX-COMP-ZWR-FOUR-TRANSFORMATION-v1'
+  'CX-COMP-ZWR-PALACE-NETWORK-v1','CX-COMP-ZWR-FOUR-TRANSFORMATION-v1',
+  'CX-COMP-ECR-CONTEXT-GRAMMAR-QUESTION-v1','CX-COMP-ECR-QUESTION-CAPABILITY-v1','CX-COMP-ECR-DRIVER-PRIORITY-v1','CX-COMP-ECR-MOTION-CONFIGURATION-v1','CX-COMP-ECR-CONFIGURATION-ACTIVATION-v1'
 ]);
 const THEME_RULES=Object.freeze([
   Object.freeze({ruleRef:'CX-THEME-RELATION-SUPPORT-v1',relationTypes:Object.freeze(['SUPPORT','REINFORCEMENT']),theme:'STABILITY'}),
@@ -165,6 +167,8 @@ function projectionReferenceCatalog(projection,methodId){
     refs.push(...list(group(projection,'ZI_WEI_PALACES')?.items).map(x=>canonicalRef(projection,`PALACE:${x.code}`)));
     refs.push(...list(group(projection,'ZI_WEI_STARS')?.items).map(x=>canonicalRef(projection,`STAR:${x.code}`)));
     refs.push(...list(group(projection,'ZI_WEI_TRANSFORMATIONS')?.items).map(x=>canonicalRef(projection,`TRANSFORMATION:${x.code}`)));
+  }else if(methodId==='ECR'){
+    for(const groupCode of ['ECR_CONTEXT','ECR_GRAMMAR','ECR_QUESTION','ECR_CAPABILITIES','ECR_DRIVER_PRIORITY','ECR_MOTION','ECR_CONFIGURATION','ECR_ACTIVATION'])refs.push(...list(group(projection,groupCode)?.items).map(x=>canonicalRef(projection,`${groupCode}:${x.code}`)));
   }
   return new Set(refs);
 }
@@ -179,7 +183,7 @@ function resolveCandidateReferences(candidate,projection,meaning){
   return uniq(failures);
 }
 
-function selectorMatches(selector,{methodId,projection,subject=null,relatedSubject=null,aspect=null,house=null,pillarPrefix=null,pillarItems=[],valueItem=null,palace=null,starCodes=[],transformationCodes=[]}={}){
+function selectorMatches(selector,{methodId,projection,subject=null,relatedSubject=null,aspect=null,house=null,pillarPrefix=null,pillarItems=[],valueItem=null,palace=null,starCodes=[],transformationCodes=[],ecrCodes=[]}={}){
   if(!selector||typeof selector!=='object')return false;
   const op=selector.operator;
   if(methodId==='AST'){
@@ -220,6 +224,10 @@ function selectorMatches(selector,{methodId,projection,subject=null,relatedSubje
       if(selector.groupCode==='ZI_WEI_STARS')return starCodes.includes(code);
       if(selector.groupCode==='ZI_WEI_TRANSFORMATIONS')return transformationCodes.includes(code);
     }
+  }
+  if(methodId==='ECR'&&op==='structure_item_code_match'){
+    const code=selector.code||selector.itemCode;
+    return ['ECR_CONTEXT','ECR_GRAMMAR','ECR_QUESTION','ECR_CAPABILITIES','ECR_DRIVER_PRIORITY','ECR_MOTION','ECR_CONFIGURATION','ECR_ACTIVATION'].includes(selector.groupCode)&&ecrCodes.includes(code);
   }
   return false;
 }
@@ -328,7 +336,22 @@ function composeZwr(input,context,projectionDigest){
   });
 }
 
-const COMPOSERS=Object.freeze({AST:composeAst,NUM:composeNum,BZR:composeBzr,ZWR:composeZwr});
+function composeEcr(input,context,projectionDigest){
+  const p=input.canonicalMethodProjection,locale=input.locale;
+  const one=code=>list(group(p,code)?.items)[0]||null,all=code=>list(group(p,code)?.items);
+  const cc=one('ECR_CONTEXT'),g=one('ECR_GRAMMAR'),q=one('ECR_QUESTION'),caps=all('ECR_CAPABILITIES'),primaryCap=caps.find(x=>x.value==='PRIMARY')||caps[0],drivers=all('ECR_DRIVER_PRIORITY').slice().sort((a,b)=>(a.meta?.rank||99)-(b.meta?.rank||99)),primaryDriver=drivers[0],m=one('ECR_MOTION'),h=one('ECR_CONFIGURATION'),a=one('ECR_ACTIVATION');
+  const refsFor=codes=>selectMeanings(context,{methodId:'ECR',projection:p,ecrCodes:codes.filter(Boolean)},{limit:6});
+  const units=[];
+  const push=(index,{title,subject,relation,codes,projectionRefs,ruleRef,reason,contextText,constructive,friction,signal,question})=>units.push(unit({index,methodId:'ECR',projection:p,projectionDigest,locale,title,subject,relation,projectionRefs,meanings:refsFor(codes),ruleRefs:[ruleRef],priority:'PRIMARY',structuralReason:reason,relationContext:contextText,constructiveExpression:constructive,frictionExpression:friction,observableSignals:[signal],question,uncertainties:list(p.unknown).map(x=>x.code)}));
+  push(0,{title:t(locale,'Background, grammar and active question','长期背景、现实语法与基础问题'),subject:g?.code||'ECR_BACKGROUND',relation:'DEPENDENCY',codes:[cc?.code,g?.code,q?.code],projectionRefs:[cc&&canonicalRef(p,`ECR_CONTEXT:${cc.code}`),g&&canonicalRef(p,`ECR_GRAMMAR:${g.code}`),q&&canonicalRef(p,`ECR_QUESTION:${q.code}`)],ruleRef:'CX-COMP-ECR-CONTEXT-GRAMMAR-QUESTION-v1',reason:t(locale,`This theme combines the recorded long-range context ${cc?.code||''}, Reality Grammar ${g?.code||''}, and its paired baseline question ${q?.code||''}; none of the three is treated as a personality label.`,`这一主题把长期方向背景 ${cc?.code||''}、现实语法 ${g?.code||''} 与配对的基础问题 ${q?.code||''} 放在同一条运行坐标中阅读，不把任何一层当成人格标签。`),contextText:t(locale,'The grammar locates a baseline development position while the question identifies the kind of response demand attached to that position.','语法定位基线发展位置，问题则指出该位置所对应的回应需求。'),constructive:t(locale,`A useful expression is to distinguish background from demand: ${meaningText(refsFor([g?.code,q?.code]),locale)}`,`较有用的理解方式是把背景与需求分开：${meaningText(refsFor([g?.code,q?.code]),locale)}`),friction:t(locale,'If a baseline coordinate is treated as a fixed life verdict, the ECR reading becomes more certain than its authority supports.','如果把基线坐标当成固定人生结论，ECR 就会被解释得比其权威所允许的更确定。'),signal:t(locale,'Observe whether the stated question actually becomes important in the situations where this grammar pattern appears.','观察这个基础问题是否真的会在对应语法模式出现时变得重要。'),question:t(locale,'Where does this baseline question match lived reality, and where does another question become more important?','这个基础问题在哪里符合现实经验，哪里又是另一个问题更重要？')});
+  push(1,{title:t(locale,'Available response capability','可调用的回应能力'),subject:primaryCap?.code||'ECR_CAPABILITY',relation:'SUPPORT',codes:[q?.code,primaryCap?.code],projectionRefs:[q&&canonicalRef(p,`ECR_QUESTION:${q.code}`),primaryCap&&canonicalRef(p,`ECR_CAPABILITIES:${primaryCap.code}`)],ruleRef:'CX-COMP-ECR-QUESTION-CAPABILITY-v1',reason:t(locale,`The baseline question ${q?.code||''} resolves to ${primaryCap?.code||''} as the primary capability in the versioned ECR question-capability matrix.`,`基础问题 ${q?.code||''} 按版本化 ECR 问题—能力矩阵，首先调用 ${primaryCap?.code||''}。`),contextText:t(locale,'Capability describes what kind of response can be organized; it does not claim that this capability is always strong in lived reality.','能力描述可以组织哪一种回应，并不宣称现实中这项能力永远很强。'),constructive:t(locale,`When this capability is available, it can support the current demand by: ${meaningText(refsFor([primaryCap?.code]),locale)}`,`当这项能力可用时，它可以这样支持当前需求：${meaningText(refsFor([primaryCap?.code]),locale)}`),friction:t(locale,'When the required capability is unavailable or overloaded, the same demand may remain unresolved even when the structural coordinate is clear.','当所需能力不可用或负荷过高时，即使结构坐标清楚，同一需求也可能继续未解决。'),signal:t(locale,'Observe whether this capability is actually available under pressure, not only when conditions are easy.','观察这项能力在压力下是否仍然可用，而不只是条件轻松时可用。'),question:t(locale,'What real evidence shows that this capability is available right now?','什么现实证据能说明这项能力目前真的可用？')});
+  push(2,{title:t(locale,'Baseline driver priority','基线驱动优先级'),subject:primaryDriver?.code||'ECR_DRIVER',relation:'REINFORCEMENT',codes:drivers.slice(0,3).map(x=>x.code),projectionRefs:drivers.slice(0,3).map(x=>canonicalRef(p,`ECR_DRIVER_PRIORITY:${x.code}`)),ruleRef:'CX-COMP-ECR-DRIVER-PRIORITY-v1',reason:t(locale,`All twelve driver identities remain present. The birth-coordinate baseline ranks ${primaryDriver?.code||''} first by the ECR solar-anchor sector-distance rule; this is not a claim about the current Reality driver priority.`,`十二种驱动始终存在。出生坐标基线按照 ECR 太阳锚点扇区距离规则，把 ${primaryDriver?.code||''} 排在首位；这不是对当前现实驱动优先级的判定。`),contextText:t(locale,'Current Reality evidence may later reweight the driver stack; the birth projection only supplies a baseline affinity.','当前现实证据以后可以重新调整驱动权重；出生投射只提供基线亲和度。'),constructive:t(locale,`The leading baseline driver can be read as an organizing tendency: ${meaningText(refsFor([primaryDriver?.code]),locale)}`,`首位基线驱动可以作为一种组织倾向阅读：${meaningText(refsFor([primaryDriver?.code]),locale)}`),friction:t(locale,'Treating baseline affinity as a live priority can hide the effect of present constraints, feedback and resources.','把基线亲和度当成实时优先级，会遮蔽当前约束、反馈和资源的影响。'),signal:t(locale,'Compare the leading baseline driver with what actually receives attention and energy in the current situation.','把首位基线驱动与当前现实中真正获得注意力和能量的方向作比较。'),question:t(locale,'Does the current Reality reinforce this driver, or has another driver become more important?','当前现实是在强化这个驱动，还是已经有另一个驱动变得更重要？')});
+  push(3,{title:t(locale,'Motion and environment-first configuration','运动与环境优先配置'),subject:h?.code||'ECR_CONFIGURATION',relation:'TRANSITION',codes:[m?.code,h?.code],projectionRefs:[m&&canonicalRef(p,`ECR_MOTION:${m.code}`),h&&canonicalRef(p,`ECR_CONFIGURATION:${h.code}`)],ruleRef:'CX-COMP-ECR-MOTION-CONFIGURATION-v1',reason:t(locale,`The solar anchor resolves to motion ${m?.code||''} and environment-first configuration ${h?.code||''}; the upper trigram is used as environment priority and the lower trigram as embodied response position.`,`太阳锚点落入运动 ${m?.code||''} 与环境优先配置 ${h?.code||''}；上卦用于环境优先位，下卦用于载体回应位置。`),contextText:t(locale,'The configuration reuses canonical I Ching structural identity but does not import I Ching customer meaning or fortune language.','该配置复用易经 canonical 结构身份，但不导入易经客户意义或吉凶语言。'),constructive:t(locale,`The change pattern can be read through the relation between surrounding field and embodied response: ${meaningText(refsFor([m?.code,h?.code]),locale)}`,`变化方式可以从外部场域与载体回应之间的关系来阅读：${meaningText(refsFor([m?.code,h?.code]),locale)}`),friction:t(locale,'If environment and response position are collapsed into one meaning, the environment-first distinction is lost.','如果把环境与回应位置压成同一个意义，环境优先这一关键区别就会消失。'),signal:t(locale,'Observe whether the surrounding field and your actual response are moving in the same way or in different ways.','观察周围场域与你的实际回应是在以同一种方式运动，还是以不同方式运动。'),question:t(locale,'What changes when the environment supports a different motion than the embodied response?','当环境支持的运动方式与载体回应不同，会发生什么变化？')});
+  push(4,{title:t(locale,'Activation stage of the configuration','配置的激活阶段'),subject:a?.code||'ECR_ACTIVATION',relation:'ACTIVATION',codes:[h?.code,a?.code],projectionRefs:[h&&canonicalRef(p,`ECR_CONFIGURATION:${h.code}`),a&&canonicalRef(p,`ECR_ACTIVATION:${a.code}`)],ruleRef:'CX-COMP-ECR-CONFIGURATION-ACTIVATION-v1',reason:t(locale,`Within configuration ${h?.code||''}, the solar anchor occupies activation stage ${a?.code||''}. Activation describes position within the runtime window, not luck, success or a fixed outcome.`,`在配置 ${h?.code||''} 内，太阳锚点位于激活阶段 ${a?.code||''}。激活描述运行窗口中的位置，不代表吉凶、成功程度或必然事件。`),contextText:t(locale,'Activation is a structural stage that may be compared with current evidence later; it does not by itself establish what is happening now.','激活是一个可以稍后与当前现实证据对照的结构阶段，本身不能证明现在正在发生什么。'),constructive:t(locale,`This stage can help frame what to observe about entry, amplification, alignment, decay or closure: ${meaningText(refsFor([a?.code]),locale)}`,`这个阶段可以帮助观察入口、放大、对齐、衰退或闭合：${meaningText(refsFor([a?.code]),locale)}`),friction:t(locale,'Reading activation as destiny would turn a structural timing convention into an unsupported prediction.','把激活阶段读成命运，会把结构性时间约定变成没有依据的预测。'),signal:t(locale,'Observe whether the current situation shows the opening, strengthening, over-amplification, decay or closure implied by this stage.','观察当前情境是否真的呈现这个阶段所描述的开启、强化、过度放大、衰退或闭合。'),question:t(locale,'Which part of this activation stage is supported by current evidence, and which part remains open?','这个激活阶段有哪些部分得到当前证据支持，哪些仍然开放？')});
+  return units;
+}
+
+const COMPOSERS=Object.freeze({AST:composeAst,NUM:composeNum,BZR:composeBzr,ZWR:composeZwr,ECR:composeEcr});
 
 function lifecycleFor(projection,meaning,units,humanReview=null){
   const flags={
@@ -460,7 +483,13 @@ function zwrGraph(p,digest,locale,meaningPayload){
   for(let i=0;i<palaces.length/2;i++)edges.push({edgeId:`ZWR-OPPOSITE-${i+1}`,sourceNodeId:`ZWR-PALACE-${palaces[i].code}`,targetNodeId:`ZWR-PALACE-${palaces[i+6].code}`,relationType:'COUNTERBALANCE',canonicalRelationRef:canonicalRef(p,`OPPOSITE:${palaces[i].code}:${palaces[i+6].code}`),interpretationUnitRefs:[]});
   return graphBase('ZWR',p,digest,locale,nodes,edges,palaces.map(x=>({groupId:`ZWR-GROUP-${x.code}`,label:labelForPalace(x.code,locale),canonicalRef:canonicalRef(p,`PALACE:${x.code}`)})),[]);
 }
-const GRAPHERS=Object.freeze({AST:astGraph,NUM:numGraph,BZR:bzrGraph,ZWR:zwrGraph});
+function ecrGraph(p,digest,locale){
+  const nodes=[],edges=[];const labels={ECR_CONTEXT:['Context','方向背景'],ECR_GRAMMAR:['Grammar','现实语法'],ECR_QUESTION:['Question','基础问题'],ECR_CAPABILITIES:['Capability','回应能力'],ECR_DRIVER_PRIORITY:['Driver','驱动'],ECR_MOTION:['Motion','运动'],ECR_CONFIGURATION:['Configuration','配置'],ECR_ACTIVATION:['Activation','激活']};
+  const groups=['ECR_CONTEXT','ECR_GRAMMAR','ECR_QUESTION','ECR_CAPABILITIES','ECR_DRIVER_PRIORITY','ECR_MOTION','ECR_CONFIGURATION','ECR_ACTIVATION'];let previous=[];
+  for(const groupCode of groups){let items=list(group(p,groupCode)?.items);if(groupCode==='ECR_DRIVER_PRIORITY')items=items.slice().sort((a,b)=>(a.meta?.rank||99)-(b.meta?.rank||99)).slice(0,3);const current=[];for(const item of items){const nodeId=`ECR-${groupCode}-${item.code}`;nodes.push({nodeId,canonicalRef:canonicalRef(p,`${groupCode}:${item.code}`),label:item.code,localizedLabel:item.meta?.labelZhHans&&locale==='zh-Hans'?item.meta.labelZhHans:item.meta?.label||item.meta?.questionZhHans&&locale==='zh-Hans'?item.meta.questionZhHans:item.meta?.question||item.code,role:groupCode,value:item.value,state:'CALCULATED',priority:item.value==='PRIMARY'||item.meta?.rank===1?'PRIMARY':'SUPPORTING',interpretationUnitRefs:[]});current.push(nodeId)}if(previous.length&&current.length)edges.push({edgeId:`ECR-${groups[groups.indexOf(groupCode)-1]}-${groupCode}`,sourceNodeId:previous[0],targetNodeId:current[0],relationType:groupCode==='ECR_ACTIVATION'?'ACTIVATION':'TRANSITION',canonicalRelationRef:canonicalRef(p,`FLOW:${groups[groups.indexOf(groupCode)-1]}:${groupCode}`),interpretationUnitRefs:[]});previous=current;}
+  return graphBase('ECR',p,digest,locale,nodes,edges,groups.map(code=>({groupId:`ECR-GROUP-${code}`,label:t(locale,labels[code][0],labels[code][1])})),[]);
+}
+const GRAPHERS=Object.freeze({AST:astGraph,NUM:numGraph,BZR:bzrGraph,ZWR:zwrGraph,ECR:ecrGraph});
 
 export async function projectMethodGraph({input,acceptedInterpretation=null,candidate=null,meaningPayload=null}={}){
   assertInterpretationInput(input);const digest=await digestProjection(input.canonicalMethodProjection);if(digest!==input.calculationDigest)fail('CX_R12R3B_GRAPH_PROJECTION_DIGEST_MISMATCH');

@@ -32,8 +32,10 @@ export function getEcrCanonicalOntology(){
       ecrForksCoreQuestions:false,
       ecrForksCoreCapabilities:false,
       ecrForksCoreDrivers:false,
-      customerMeaningCreated:false,
-      calculationImplemented:false
+      customerMeaningCreated:true,
+      calculationImplemented:true,
+      interpretationCandidateIntegrated:true,
+      customerPublicationAdmitted:false
     })
   });
 }

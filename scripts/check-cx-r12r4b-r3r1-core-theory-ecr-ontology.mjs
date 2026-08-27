@@ -95,15 +95,25 @@ assert.equal(ontology.coreTheory.drivers.length,12);
 assert.equal(ontology.ecrSpecific.motions.length,8);
 assert.equal(ontology.ecrSpecific.configurations.length,64);
 assert.equal(ontology.ecrSpecific.activations.length,8);
-assert.equal(ontology.boundary.calculationImplemented,false);
-assert.equal(ontology.boundary.customerMeaningCreated,false);
+const r4SuccessorPresent=Boolean(pkg.scripts['check:cx-r12r4b:r4']);
+assert.equal(ontology.boundary.calculationImplemented,r4SuccessorPresent);
+assert.equal(ontology.boundary.customerMeaningCreated,r4SuccessorPresent);
+assert.equal(ontology.boundary.customerPublicationAdmitted,false);
 
 assert.equal(source.status,'FIRST_PARTY_REFERENCE_ACCEPTED_FOR_ONTOLOGY_RECONCILIATION');
 assert.equal(source.references.length,4);
 for(const ref of source.references)assert.match(ref.sha256,/^[a-f0-9]{64}$/);
-assert.equal(theory.status,'CORE_THEORY_RECONCILED_READY_FOR_W31R');
 assert.equal(theory.boundaries.activationA8MayProceedToCalculationSpecification,true);
-assert.equal(theory.boundaries.calculationImplemented,false);
+if(r4SuccessorPresent){
+  assert.equal(theory.status,'R4_CALCULATION_MEANING_IMPLEMENTED_HUMAN_REVIEW_PENDING');
+  assert.equal(theory.boundaries.calculationImplemented,true);
+  assert.equal(theory.boundaries.customerMeaningImplemented,true);
+  assert.equal(theory.boundaries.customerInterpretationImplemented,true);
+  assert.equal(theory.boundaries.customerPublicationAdmitted,false);
+}else{
+  assert.equal(theory.status,'CORE_THEORY_RECONCILED_READY_FOR_W31R');
+  assert.equal(theory.boundaries.calculationImplemented,false);
+}
 assert.equal(acceptance.status,'R4B_R3R1_ACCEPTED_BY_EXECUTABLE_CHECKS');
 assert.equal(acceptance.claims.ecrReconciledToBook,true);
 assert.equal(acceptance.claims.bookRewrittenToMatchEcr,false);
@@ -113,7 +123,12 @@ assert.equal(acceptance.nextSequentialWork,'CX-R12R4B-R4-W31R_ECR_CALCULATION_SP
 const r2Checker=fs.readFileSync('scripts/check-cx-r12r4b-r2-external-profile-confirmation-shadow.mjs','utf8');
 assert.match(r2Checker,/check:cx-r12r4b:r2[\s\S]*check:cx-r12r4b:r3r1/);
 assert.equal(pkg.scripts['check:cx-r12r4b:r3r1'],'node scripts/generate-ecr-book-aligned-ontology-projection.mjs --check && node scripts/check-cx-r12r4b-r3r1-core-theory-ecr-ontology.mjs');
-assert(pkg.scripts['check:cx-r12r4b'].endsWith('&& npm run check:cx-r12r4b:r3r1'));
+if(r4SuccessorPresent){
+  assert.match(pkg.scripts['check:cx-r12r4b'],/check:cx-r12r4b:r3r1[\s\S]*check:cx-r12r4b:r4/);
+  assert(pkg.scripts['check:cx-r12r4b'].endsWith('&& npm run check:cx-r12r4b:r4'));
+}else{
+  assert(pkg.scripts['check:cx-r12r4b'].endsWith('&& npm run check:cx-r12r4b:r3r1'));
+}
 
 for(const file of ['functions/embodied-configuration/ecr-ontology-registry.js','functions/embodied-configuration/ecr-specific-ontology-runtime.js']){
   const text=fs.readFileSync(file,'utf8');
