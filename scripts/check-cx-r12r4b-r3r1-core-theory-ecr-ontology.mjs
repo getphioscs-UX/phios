@@ -103,7 +103,15 @@ assert.equal(ontology.coreTheory.drivers.length,12);
 assert.equal(ontology.ecrSpecific.motions.length,8);
 assert.equal(ontology.ecrSpecific.configurations.length,64);
 assert.equal(ontology.ecrSpecific.activations.length,8);
-const r4SuccessorPresent=Boolean(pkg.scripts['check:cx-r12r4b:r4']);
+const r4ArtifactsPresent=[
+  'content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-acceptance-v1.json',
+  'scripts/check-cx-r12r4b-r4-ecr-calculation-meaning.mjs',
+  'scripts/generate-ecr-r4-authorities.mjs',
+  'scripts/generate-cx-r12r4b-r4-ecr-campaign.mjs'
+].every(file=>fs.existsSync(file));
+const r4ScriptRegistered=Boolean(pkg.scripts['check:cx-r12r4b:r4']);
+if(r4ArtifactsPresent)assert.equal(r4ScriptRegistered,true,'CX_R12R4B_R4_SUCCESSOR_SCRIPT_MISSING_FROM_PACKAGE_JSON');
+const r4SuccessorPresent=r4ArtifactsPresent&&r4ScriptRegistered;
 assert.equal(ontology.boundary.calculationImplemented,r4SuccessorPresent);
 assert.equal(ontology.boundary.customerMeaningCreated,r4SuccessorPresent);
 assert.equal(ontology.boundary.customerPublicationAdmitted,false);

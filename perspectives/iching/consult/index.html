@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Ask one focused question, choose a casting method, form six lines from bottom to top, and read the I Ching with human-reviewed interpretation and changing-line context.">
+  <title>I Ching Reading — PHI OS</title>
+  <link rel="canonical" href="/perspectives/iching/consult/">
+  <link rel="stylesheet" href="/assets/customer-ui/tokens.css">
+  <link rel="stylesheet" href="/assets/customer-ui/base.css">
+  <link rel="stylesheet" href="/assets/customer-ui/typography.css">
+  <link rel="stylesheet" href="/assets/customer-ui/layout.css">
+  <link rel="stylesheet" href="/assets/customer-ui/components.css">
+  <link rel="stylesheet" href="/assets/customer-ui/motion.css">
+  <link rel="stylesheet" href="/assets/customer-ui/utilities.css">
+  <link rel="stylesheet" href="/assets/customer-ui/surfaces/iching-consult.css">
+</head>
+<body data-cx-surface="ICHING_CONSULT" data-cx-nav="PERSPECTIVES">
+<a class="cx-skip" href="#main">Skip to content</a>
+<div data-cx-header></div>
+<main id="main" class="icx-main">
+  <section class="icx-hero">
+    <div class="cx-container icx-hero__inner">
+      <div>
+        <p class="cx-eyebrow" data-cx-en="I CHING · 易经" data-cx-zh="I CHING · 易经">I CHING · 易经</p>
+        <h1 data-cx-en="Ask clearly. Cast once. Read the change in order." data-cx-zh="问清楚一件事，起一卦，再按顺序读懂变化。">Ask clearly. Cast once. Read the change in order.</h1>
+        <p data-cx-en="Begin with one situation you genuinely want to understand. PHI OS can cast for you, or you can record your own coins or six-line result." data-cx-zh="先放进一件你真正想理解的事。你可以让 PHI OS 起卦，也可以记录自己的投币结果或已经取得的六爻。">Begin with one situation you genuinely want to understand.</p>
+      </div>
+      <ol class="icx-steps" aria-label="Reading steps">
+        <li class="is-active"><span>1</span><b data-cx-en="Ask" data-cx-zh="提问">Ask</b></li>
+        <li><span>2</span><b data-cx-en="Cast" data-cx-zh="起卦">Cast</b></li>
+        <li><span>3</span><b data-cx-en="Read" data-cx-zh="阅读">Read</b></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="cx-container icx-workflow" data-workflow>
+    <div class="icx-workflow__body" data-workflow-body>
+      <section class="icx-panel icx-question-panel" aria-labelledby="iching-question-title">
+        <div class="icx-panel__head">
+          <span class="icx-step-badge">1</span>
+          <div>
+            <p class="cx-eyebrow" data-cx-en="YOUR QUESTION" data-cx-zh="你的问题">YOUR QUESTION</p>
+            <h2 id="iching-question-title" data-cx-en="What are you trying to understand?" data-cx-zh="你正在试图理解什么？">What are you trying to understand?</h2>
+          </div>
+        </div>
+        <p class="icx-help" data-cx-en="A useful question stays with one situation and asks what to understand, notice, or consider—not for a guaranteed prediction." data-cx-zh="好的问题只聚焦一个处境，问“我需要理解、注意或考虑什么”，而不是要求一个被保证的预测。">A useful question stays with one situation.</p>
+        <div class="icx-prompt-chips" aria-label="Question prompts">
+          <button type="button" data-question-prompt data-en="What should I understand about this situation before I act?" data-zh="在采取行动前，我需要先看清这个处境的什么？">What should I understand about this situation before I act?</button>
+          <button type="button" data-question-prompt data-en="What part of this change deserves my attention now?" data-zh="这场变化中，现在最值得我注意的是什么？">What part of this change deserves my attention now?</button>
+          <button type="button" data-question-prompt data-en="What am I not seeing clearly in this relationship?" data-zh="这段关系里，有什么是我目前还没有看清的？">What am I not seeing clearly in this relationship?</button>
+        </div>
+        <label class="icx-question-field" for="iching-consult-question">
+          <span data-cx-en="Write one clear question" data-cx-zh="写下一个清楚的问题">Write one clear question</span>
+          <textarea id="iching-consult-question" data-consult-question rows="5" maxlength="800" autocomplete="off" spellcheck="true" data-cx-en-placeholder="Describe the situation in your own words…" data-cx-zh-placeholder="用你自己的话描述这个处境……" placeholder="Describe the situation in your own words…"></textarea>
+          <small><span data-question-count>0</span>/800</small>
+        </label>
+        <p class="icx-service-message" data-service-message role="status" aria-live="polite" hidden></p>
+      </section>
+
+      <section class="icx-panel" aria-labelledby="iching-method-title">
+        <div class="icx-panel__head">
+          <span class="icx-step-badge">2</span>
+          <div>
+            <p class="cx-eyebrow" data-cx-en="CHOOSE HOW TO CAST" data-cx-zh="选择起卦方式">CHOOSE HOW TO CAST</p>
+            <h2 id="iching-method-title" data-cx-en="How would you like to form the six lines?" data-cx-zh="你想怎样取得这六个爻？">How would you like to form the six lines?</h2>
+          </div>
+        </div>
+
+        <div class="icx-method-tabs" role="tablist" aria-label="Casting methods">
+          <button type="button" role="tab" aria-selected="true" data-method="SYSTEM_RANDOM"><strong data-cx-en="PHI OS casts for me" data-cx-zh="PHI OS 为我起卦">PHI OS casts for me</strong><span data-cx-en="Fastest · guided" data-cx-zh="最快 · 引导式">Fastest · guided</span></button>
+          <button type="button" role="tab" aria-selected="false" data-method="COIN_CAST"><strong data-cx-en="I will toss three coins" data-cx-zh="我自己投三枚硬币">I will toss three coins</strong><span data-cx-en="Traditional coin workflow" data-cx-zh="完整记录投币过程">Traditional coin workflow</span></button>
+          <button type="button" role="tab" aria-selected="false" data-method="MANUAL_LINES"><strong data-cx-en="I already have six lines" data-cx-zh="我已经有六爻结果">I already have six lines</strong><span data-cx-en="Enter 6 / 7 / 8 / 9" data-cx-zh="直接输入 6 / 7 / 8 / 9">Enter 6 / 7 / 8 / 9</span></button>
+        </div>
+
+        <div class="icx-method-panel" data-method-panel="SYSTEM_RANDOM">
+          <div class="icx-method-intro">
+            <div>
+              <h3 data-cx-en="One cast, six lines, bottom to top" data-cx-zh="一次起卦，六爻从下往上形成">One cast, six lines, bottom to top</h3>
+              <p data-cx-en="PHI OS creates one server-side three-coin sample and then uses those exact six lines for the reading. Your question frames the reading but does not choose the result." data-cx-zh="PHI OS 会在服务器端完成一次三钱取样，并用同一组六爻进入阅读。你的问题用来界定这次阅读，但不会参与挑选结果。">PHI OS creates one server-side three-coin sample.</p>
+            </div>
+            <button class="cx-button cx-button--primary icx-primary-action" type="button" data-start-system-cast data-cx-en="Cast and read" data-cx-zh="开始起卦并阅读">Cast and read</button>
+          </div>
+          <div class="icx-cast-progress" data-cast-progress hidden>
+            <div class="icx-progress-head"><strong data-cx-en="Building your hexagram" data-cx-zh="正在形成这次卦象">Building your hexagram</strong><span data-cast-progress-label></span></div>
+            <ol class="icx-six-line-list" data-cast-lines aria-live="polite"></ol>
+          </div>
+        </div>
+
+        <div class="icx-method-panel" data-method-panel="COIN_CAST" hidden>
+          <div class="icx-coin-recorder">
+            <div class="icx-coin-recorder__head">
+              <div>
+                <h3 data-cx-en="Toss three real coins once for each line" data-cx-zh="每一爻都投三枚真实硬币一次">Toss three real coins once for each line</h3>
+                <p data-cx-en="Choose one face as 3 / yang and the other as 2 / yin before you begin, then keep that convention for all six tosses." data-cx-zh="开始前先约定一面代表 3 / 阳，另一面代表 2 / 阴；六次投掷都保持同一个定义。">Choose one face as 3 / yang and the other as 2 / yin.</p>
+              </div>
+              <button class="cx-button cx-button--quiet" type="button" data-open-three-coin-guide data-cx-en="See illustrated guide" data-cx-zh="查看图解教学">See illustrated guide</button>
+            </div>
+            <div class="icx-current-toss">
+              <p><span data-cx-en="Recording" data-cx-zh="正在记录">Recording</span> <strong data-current-line-label></strong></p>
+              <div class="icx-coin-set" data-coin-set>
+                <fieldset><legend data-cx-en="Coin 1" data-cx-zh="硬币 1">Coin 1</legend><button type="button" data-coin-choice="1" data-value="3" data-cx-en="3 · Yang" data-cx-zh="3 · 阳">3 · Yang</button><button type="button" data-coin-choice="1" data-value="2" data-cx-en="2 · Yin" data-cx-zh="2 · 阴">2 · Yin</button></fieldset>
+                <fieldset><legend data-cx-en="Coin 2" data-cx-zh="硬币 2">Coin 2</legend><button type="button" data-coin-choice="2" data-value="3" data-cx-en="3 · Yang" data-cx-zh="3 · 阳">3 · Yang</button><button type="button" data-coin-choice="2" data-value="2" data-cx-en="2 · Yin" data-cx-zh="2 · 阴">2 · Yin</button></fieldset>
+                <fieldset><legend data-cx-en="Coin 3" data-cx-zh="硬币 3">Coin 3</legend><button type="button" data-coin-choice="3" data-value="3" data-cx-en="3 · Yang" data-cx-zh="3 · 阳">3 · Yang</button><button type="button" data-coin-choice="3" data-value="2" data-cx-en="2 · Yin" data-cx-zh="2 · 阴">2 · Yin</button></fieldset>
+              </div>
+              <div class="icx-toss-total"><span data-cx-en="This line" data-cx-zh="这一爻">This line</span><strong data-current-total>—</strong><small data-current-line-meaning></small></div>
+              <button class="cx-button cx-button--primary" type="button" data-record-line disabled data-cx-en="Record this line" data-cx-zh="记录这一爻">Record this line</button>
+            </div>
+            <ol class="icx-recorded-lines" data-recorded-lines></ol>
+            <button class="cx-button cx-button--primary icx-generate-reading" type="button" data-read-coins hidden data-cx-en="Read these six lines" data-cx-zh="阅读这组六爻">Read these six lines</button>
+          </div>
+        </div>
+
+        <div class="icx-method-panel" data-method-panel="MANUAL_LINES" hidden>
+          <div class="icx-manual-head">
+            <div><h3 data-cx-en="Enter the six values you already obtained" data-cx-zh="输入你已经取得的六个爻值">Enter the six values you already obtained</h3><p data-cx-en="Line 1 is always the bottom line; line 6 is the top line." data-cx-zh="第 1 爻永远是最下面的初爻；第 6 爻是上爻。">Line 1 is always the bottom line.</p></div>
+            <button class="cx-button cx-button--quiet" type="button" data-open-method-overview data-cx-en="Which method did I use?" data-cx-zh="我刚才用的是哪种方法？">Which method did I use?</button>
+          </div>
+          <div class="icx-manual-grid">
+            <label><span data-cx-en="1 · Bottom line" data-cx-zh="1 · 初爻">1 · Bottom line</span><select data-manual-line="1"><option value="6" data-cx-en="6 · old yin · changing" data-cx-zh="6 · 老阴 · 变爻">6 · old yin · changing</option><option value="7" data-cx-en="7 · young yang · stable" data-cx-zh="7 · 少阳 · 静爻">7 · young yang · stable</option><option value="8" data-cx-en="8 · young yin · stable" data-cx-zh="8 · 少阴 · 静爻">8 · young yin · stable</option><option value="9" data-cx-en="9 · old yang · changing" data-cx-zh="9 · 老阳 · 变爻">9 · old yang · changing</option></select></label>
+            <label><span>2</span><select data-manual-line="2"><option value="6" data-cx-en="6 · old yin · changing" data-cx-zh="6 · 老阴 · 变爻">6 · old yin · changing</option><option value="7" data-cx-en="7 · young yang · stable" data-cx-zh="7 · 少阳 · 静爻">7 · young yang · stable</option><option value="8" data-cx-en="8 · young yin · stable" data-cx-zh="8 · 少阴 · 静爻">8 · young yin · stable</option><option value="9" data-cx-en="9 · old yang · changing" data-cx-zh="9 · 老阳 · 变爻">9 · old yang · changing</option></select></label>
+            <label><span>3</span><select data-manual-line="3"><option value="6" data-cx-en="6 · old yin · changing" data-cx-zh="6 · 老阴 · 变爻">6 · old yin · changing</option><option value="7" data-cx-en="7 · young yang · stable" data-cx-zh="7 · 少阳 · 静爻">7 · young yang · stable</option><option value="8" data-cx-en="8 · young yin · stable" data-cx-zh="8 · 少阴 · 静爻">8 · young yin · stable</option><option value="9" data-cx-en="9 · old yang · changing" data-cx-zh="9 · 老阳 · 变爻">9 · old yang · changing</option></select></label>
+            <label><span>4</span><select data-manual-line="4"><option value="6" data-cx-en="6 · old yin · changing" data-cx-zh="6 · 老阴 · 变爻">6 · old yin · changing</option><option value="7" data-cx-en="7 · young yang · stable" data-cx-zh="7 · 少阳 · 静爻">7 · young yang · stable</option><option value="8" data-cx-en="8 · young yin · stable" data-cx-zh="8 · 少阴 · 静爻">8 · young yin · stable</option><option value="9" data-cx-en="9 · old yang · changing" data-cx-zh="9 · 老阳 · 变爻">9 · old yang · changing</option></select></label>
+            <label><span>5</span><select data-manual-line="5"><option value="6" data-cx-en="6 · old yin · changing" data-cx-zh="6 · 老阴 · 变爻">6 · old yin · changing</option><option value="7" data-cx-en="7 · young yang · stable" data-cx-zh="7 · 少阳 · 静爻">7 · young yang · stable</option><option value="8" data-cx-en="8 · young yin · stable" data-cx-zh="8 · 少阴 · 静爻">8 · young yin · stable</option><option value="9" data-cx-en="9 · old yang · changing" data-cx-zh="9 · 老阳 · 变爻">9 · old yang · changing</option></select></label>
+            <label><span data-cx-en="6 · Top line" data-cx-zh="6 · 上爻">6 · Top line</span><select data-manual-line="6"><option value="6" data-cx-en="6 · old yin · changing" data-cx-zh="6 · 老阴 · 变爻">6 · old yin · changing</option><option value="7" data-cx-en="7 · young yang · stable" data-cx-zh="7 · 少阳 · 静爻">7 · young yang · stable</option><option value="8" data-cx-en="8 · young yin · stable" data-cx-zh="8 · 少阴 · 静爻">8 · young yin · stable</option><option value="9" data-cx-en="9 · old yang · changing" data-cx-zh="9 · 老阳 · 变爻">9 · old yang · changing</option></select></label>
+          </div>
+          <button class="cx-button cx-button--primary icx-primary-action" type="button" data-read-manual data-cx-en="Read these six lines" data-cx-zh="阅读这组六爻">Read these six lines</button>
+        </div>
+
+        <details class="icx-method-guide" data-method-guide>
+          <summary data-cx-en="I want to learn how to cast for myself" data-cx-zh="我想先学习怎样自己起卦">I want to learn how to cast for myself</summary>
+          <div class="icx-guide-body">
+            <figure data-guide-overview><picture><source data-guide-overview-source><img data-guide-overview-img alt="I Ching casting method overview" loading="lazy"></picture><figcaption data-cx-en="Overview: PHI OS cast, three coins, six coins, and yarrow stalks." data-cx-zh="总览：PHI OS 起卦、三枚硬币、六枚铜钱与蓍草法。">Overview of casting methods.</figcaption></figure>
+            <figure data-guide-three-coin><picture><source data-guide-three-coin-source><img data-guide-three-coin-img alt="Three-coin I Ching casting guide" loading="lazy"></picture><figcaption data-cx-en="Three-coin method: six tosses, one line at a time, bottom to top." data-cx-zh="三枚硬币法：连续投六次，每次形成一爻，从初爻到上爻。">Three-coin method guide.</figcaption></figure>
+            <div class="icx-guide-notes">
+              <section><h4 data-cx-en="Three coins" data-cx-zh="三枚硬币法">Three coins</h4><p data-cx-en="3+3+3=9; 3+3+2=8; 3+2+2=7; 2+2+2=6. Values 6 and 9 are changing lines." data-cx-zh="3+3+3=9；3+3+2=8；3+2+2=7；2+2+2=6。6 与 9 是变爻。">Three-coin values.</p></section>
+              <section><h4 data-cx-en="Six coins" data-cx-zh="六枚铜钱法">Six coins</h4><p data-cx-en="Useful for forming a static six-line structure quickly. If your method does not separately define moving lines, record yang as 7 and yin as 8." data-cx-zh="适合快速形成一个静态六爻结构。如果你的具体方法没有另外定义变爻机制，可把阳记为 7、阴记为 8。">Six-coin method.</p></section>
+              <section><h4 data-cx-en="Yarrow stalks" data-cx-zh="蓍草法">Yarrow stalks</h4><p data-cx-en="The traditional 50-stalk method works with 49 stalks and three transformations for each line. The final working totals 24, 28, 32, and 36 map to 6, 7, 8, and 9." data-cx-zh="传统方法用 50 根蓍草，取 1 根不用，以 49 根操作；每一爻完成三变。最后 24、28、32、36 分别对应 6、7、8、9。">Yarrow-stalk method.</p></section>
+            </div>
+          </div>
+        </details>
+      </section>
+    </div>
+
+    <div class="icx-workflow-complete" data-workflow-complete hidden>
+      <div><strong data-cx-en="Casting complete" data-cx-zh="起卦已完成">Casting complete</strong><span data-cx-en="Your reading is shown below." data-cx-zh="这次阅读已经显示在下方。">Your reading is shown below.</span></div>
+      <button class="cx-button cx-button--quiet" type="button" data-toggle-workflow data-cx-en="Review question & cast" data-cx-zh="查看问题与起卦过程">Review question & cast</button>
+    </div>
+  </section>
+
+  <section class="cx-container icx-reading" data-reading hidden tabindex="-1" aria-live="polite">
+    <div class="icx-reading-loading" data-reading-loading hidden><span class="icx-spinner"></span><strong data-cx-en="Preparing your reading…" data-cx-zh="正在整理这次阅读……">Preparing your reading…</strong></div>
+    <div data-reading-content></div>
+    <div class="icx-reading-actions" data-reading-actions hidden>
+      <button class="cx-button cx-button--primary" type="button" data-save-reading data-cx-en="Save this reading" data-cx-zh="保存这次阅读">Save this reading</button>
+      <button class="cx-button" type="button" data-new-reading data-cx-en="Start a new reading" data-cx-zh="开始新的阅读">Start a new reading</button>
+      <a class="cx-button" href="/ask" data-cx-en="Ask PHI OS" data-cx-zh="Ask PHI OS">Ask PHI OS</a>
+      <a class="cx-button" href="/reality/" data-cx-en="Continue in My Reality" data-cx-zh="继续到 My Reality">Continue in My Reality</a>
+    </div>
+    <p class="icx-save-status" data-save-status role="status" aria-live="polite"></p>
+  </section>
+</main>
+<div data-cx-footer></div>
+<script type="module" src="/assets/customer-ui/js/shell.js"></script>
+<script type="module" src="/assets/customer-ui/js/surfaces/iching-consult.js"></script>
+</body>
+</html>

@@ -14,7 +14,8 @@ initializeCustomerShell().then(async()=>{
     await import('./surfaces/iching-customer-entry.js');
   }
   if(document.body.dataset.cxSurface==='ICHING_FULL_PRODUCTION'){
-    await import('./surfaces/iching-casting.js');
-    await import('./surfaces/iching-customer-reading.js');
+    await import('./surfaces/iching-run-cutover.js');
+    if(document.body.dataset.ichingRunCutover==='redirecting')return;
+    return import('./surfaces/iching-casting.js');
   }
 }).catch(error=>console.error('CX_SHELL_INITIALIZATION_FAILED',error));
