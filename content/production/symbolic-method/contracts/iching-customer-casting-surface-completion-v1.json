@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-CUSTOMER-CASTING-SURFACE-COMPLETION-v1.0.0",
+  "releaseId": "ICHING-1.0.0",
+  "methodCode": "I_CHING",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "CUSTOMER_CASTING_SURFACE_COMPLETED_WITHOUT_CORE_RELEASE_MUTATION",
+  "scope": {
+    "governedCastingAdapter": true,
+    "customerCastingUx": true,
+    "existingManualLinesPreserved": true,
+    "existingCoinRecordingPreserved": true,
+    "existingProductRuntimeConsumedUnchanged": true,
+    "existingInterpretationRuntimeConsumedUnchanged": true
+  },
+  "authority": {
+    "singleCurrentAuthorityPointer": "content/production/symbolic-method/authority/iching-current-authority.json",
+    "releaseManifest": "content/production/symbolic-method/releases/iching/ICHING-1.0.0.json",
+    "newCurrentVNumberCreated": false,
+    "releaseIdChanged": false,
+    "clientMayGrantProductionAuthority": false,
+    "fullProductionAuthorityProvider": "RUNTIME_DB_D1"
+  },
+  "casting": {
+    "defaultCustomerMode": "SYSTEM_RANDOM",
+    "inputModes": [
+      "SYSTEM_RANDOM",
+      "MANUAL_LINES",
+      "COIN_CAST"
+    ],
+    "systemRandomAlgorithm": "ICHING_SERVER_THREE_COIN_CSPRNG",
+    "lineOrder": "BOTTOM_TO_TOP",
+    "serverCSPRNGRequired": true,
+    "questionSemanticsInfluenceSelection": false,
+    "aiSelected": false,
+    "favorableOutcomeSelectionAllowed": false,
+    "automaticRerollAllowed": false,
+    "calculationRerollAllowed": false,
+    "explicitNewCastRequiredForReroll": true,
+    "questionDigestBindsCastEvidence": true,
+    "rawQuestionPersistedByCastingAdapter": false,
+    "replayTokenRequired": true,
+    "entropyEvidenceDigestRequired": true
+  },
+  "boundaries": {
+    "symbolicSamplingEvidenceOnly": true,
+    "realityEvidence": false,
+    "fortuneTellingAuthority": false,
+    "predictionAuthority": false,
+    "diagnosticAuthority": false,
+    "hiddenStateAuthority": false,
+    "professionalDirectiveAuthority": false,
+    "decisionAuthority": "USER"
+  },
+  "frozenCore": {
+    "corpusReopened": false,
+    "depthHumanAcceptanceReopened": false,
+    "depthCoverage": "448/448",
+    "bilingualRuntimeCases": "896/896",
+    "interpretationRuntimeChanged": false,
+    "productRuntimeChanged": false,
+    "releaseManifestChanged": false
+  },
+  "surfaceArtifacts": [
+    "functions/iching-casting/iching-casting-adapter-v1.js",
+    "functions/api/iching-full-cast.js",
+    "assets/customer-ui/js/surfaces/iching-casting.js",
+    "assets/customer-ui/surfaces/iching-casting.css",
+    "assets/customer-ui/js/shell.js",
+    "scripts/check-iching-customer-casting-surface.mjs"
+  ]
+}
