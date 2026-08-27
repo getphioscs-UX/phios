@@ -12,56 +12,87 @@ import {
   CMP_PRODUCTION_ACTIVATION_REGISTRY,
   CMP_PRODUCTION_LOCALE_REGISTRY
 } from '../canonical-meaning-production/production-registry-current-v3.js';
-import {createMethodInterpretationInput,createMethodInterpretationCandidate,projectMethodGraph,promoteAcceptedInterpretation} from '../interpretation-runtime/cx-r12r3b-shared-runtime-v2.js';
+import {createMethodInterpretationInput,createMethodInterpretationCandidate,projectMethodGraph} from '../interpretation-runtime/cx-r12r3b-shared-runtime-v2.js';
+import {resolveCustomerCompositionAdmission} from '../interpretation-runtime/customer-composition-admission-resolver-v1.js';
+import {executeAdmittedCustomerInterpretation} from '../interpretation-runtime/admitted-customer-interpretation-runtime-v1.js';
 import {projectCxR12R3bCustomerLanguage} from './cx-r12r3b-customer-language-v1.js';
-import {customerCompositionAdmissionFor} from './r12r3b-composition-admission-consumer-v1.js';
 
 const METHOD_ID=Object.freeze({ASTROLOGY_PROJECTION:'AST',NUMEROLOGY_PROJECTION:'NUM',BAZI_PROJECTION:'BZR',ZI_WEI_PROJECTION:'ZWR'});
 const METHOD_LABELS=Object.freeze({AST:Object.freeze({en:'Astrology','zh-Hans':'占星'}),BZR:Object.freeze({en:'BaZi','zh-Hans':'八字'}),NUM:Object.freeze({en:'Numerology','zh-Hans':'数字学'}),ZWR:Object.freeze({en:'Zi Wei','zh-Hans':'紫微斗数'})});
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const item of Object.values(value))freeze(item)}return value};
 
+function customerVisualModel(graph){
+  const {projectionDigest:_projectionDigest,graphDigest:_graphDigest,sourceRefs:_sourceRefs,...base}=graph;
+  return {
+    ...base,
+    nodes:(graph.nodes||[]).map(({canonicalRef:_canonicalRef,interpretationUnitRefs:_interpretationUnitRefs,...node})=>node),
+    edges:(graph.edges||[]).map(({canonicalRelationRef:_canonicalRelationRef,interpretationUnitRefs:_interpretationUnitRefs,...edge})=>edge),
+    groups:(graph.groups||[]).map(({canonicalRef:_canonicalRef,...group})=>group),
+    overlays:(graph.overlays||[]).map(({canonicalRef:_canonicalRef,...overlay})=>overlay),
+    customerInterpretationBindingsAccepted:true
+  };
+}
+
 function acceptedCustomerResult({canonicalProjection,input,candidate,acceptedInterpretation,graph,admission}){
   const methodId=input.methodId,label=METHOD_LABELS[methodId]?.[input.locale]||METHOD_LABELS[methodId]?.en||'Perspective';
   const uncertaintyCount=acceptedInterpretation.interpretationUnits.reduce((count,item)=>count+(item.uncertainties?.length||0),0);
+  const openQuestions=[...new Set(acceptedInterpretation.interpretationUnits.flatMap(item=>item.realityComparisonQuestions||[]))];
+  const insights=acceptedInterpretation.interpretationUnits.map(item=>Object.freeze({
+    insightId:item.unitId,
+    title:item.title,
+    summary:item.summary,
+    body:item.body,
+    plainLanguageExplanation:item.plainLanguageExplanation,
+    observableSignals:item.observableSignals,
+    alternativeInterpretations:item.alternativeInterpretations,
+    openQuestions:item.realityComparisonQuestions,
+    confidenceBoundary:item.confidenceBoundary
+  }));
   return freeze({
-    schemaVersion:'PHI-OS-CX-R12R4A-ACCEPTED-CUSTOMER-METHOD-VIEW-v1.0.0',
+    schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0',
     methodId,
-    publicMethodCode:canonicalProjection.method.publicMethodCode,
-    label,
-    projectionId:canonicalProjection.projectionId,
-    projectionDigest:candidate.projectionDigest,
-    houseSystemId:candidate.houseSystemId,
+    methodLabel:label,
     locale:input.locale,
-    lifecycle:acceptedInterpretation.lifecycle,
-    state:'CUSTOMER_PUBLISHABLE',
-    customerState:'READY_TO_READ',
-    customerStateLabel:input.locale==='zh-Hans'?'可以阅读':'Ready to read',
+    state:'READY_TO_READ',
+    stateLabel:input.locale==='zh-Hans'?'可以阅读':'Ready to read',
     summary:input.locale==='zh-Hans'
       ?`${label}已经形成 ${acceptedInterpretation.interpretationUnits.length} 项经过审核的重点。`
       :`${label} has ${acceptedInterpretation.interpretationUnits.length} reviewed highlights ready to read.`,
-    insights:acceptedInterpretation.interpretationUnits,
-    graph:{...graph,customerInterpretationBindingsAccepted:true},
-    structureOnly:false,
-    readingMap:Object.freeze({
-      established:true,
-      readableInsightCount:acceptedInterpretation.interpretationUnits.length,
-      needsMoreInformation:uncertaintyCount>0,
-      openItemCount:uncertaintyCount
+    insights,
+    visualModel:customerVisualModel(graph),
+    source:Object.freeze({
+      label:input.locale==='zh-Hans'?'受治理的方法解释':'Governed method interpretation',
+      lineageAvailable:true
     }),
-    technicalDetails:Object.freeze({
+    openQuestions,
+    technical:Object.freeze({
       methodId,
       publicMethodCode:canonicalProjection.method.publicMethodCode,
       projectionId:canonicalProjection.projectionId,
       projectionDigest:candidate.projectionDigest,
       interpretationResultId:acceptedInterpretation.interpretationResultId,
+      semanticDigest:acceptedInterpretation.semanticDigest,
       derivationDigest:acceptedInterpretation.derivationDigest,
+      graphDigest:graph.graphDigest,
+      graphSourceRefs:graph.sourceRefs,
       lifecycle:acceptedInterpretation.lifecycle,
-      admissionAuthorityRef:admission.sourceAuthorityRef,
-      humanReviewEvidenceRef:admission.humanReview.evidenceRef,
-      houseSystemId:candidate.houseSystemId
-    }),
-    development:Object.freeze({candidatePrepared:true,humanReviewRequired:false,candidateNotCustomerPublished:false}),
-    boundary:Object.freeze({atomicMeaningPublishedDirectly:false,rendererCreatesMeaning:false,aiCreatesMeaning:false,realityKnown:false,professionalJudgmentCreated:false})
+      meaningBundleCode:acceptedInterpretation.meaningBundleCode,
+      compositionRuleVersion:acceptedInterpretation.compositionRuleVersion,
+      admissionRef:acceptedInterpretation.admissionRef,
+      acceptanceBasis:acceptedInterpretation.acceptanceBasis,
+      humanReviewEvidenceRef:admission.reviewEvidenceRef,
+      interpretationUnits:acceptedInterpretation.interpretationUnits.map(item=>({
+        unitId:item.unitId,
+        semanticTags:item.semanticTags,
+        projectionRefs:item.projectionRefs,
+        meaningRefs:item.meaningRefs,
+        derivationRefs:item.derivationRefs,
+        boundaryRefs:item.boundaryRefs
+      })),
+      houseSystemId:candidate.houseSystemId,
+      openItemCount:uncertaintyCount,
+      boundary:acceptedInterpretation.boundary
+    })
   });
 }
 
@@ -121,13 +152,21 @@ export async function buildMethodCustomerDevelopmentResult({canonicalProjection,
  */
 export async function buildAcceptedMethodCustomerResult({canonicalProjection,locale='en',requestedDepth='STANDARD'}={}){
   const methodId=METHOD_ID[canonicalProjection?.method?.publicMethodCode];
-  const admission=customerCompositionAdmissionFor(methodId);
-  if(!admission?.compositionCustomerPublishable)throw Object.assign(new Error('CX_R12R4A_COMPOSITION_NOT_ADMITTED'),{code:'CX_R12R4A_COMPOSITION_NOT_ADMITTED'});
   const meaningPayload=await buildMethodMeaningPayloadV2({canonicalProjection,locale});
-  const input=await createMethodInterpretationInput({canonicalProjection,methodId,locale:locale==='zh-Hans'?'zh-Hans':'en',requestedDepth,availableContext:{timing:'UPSTREAM_AUTHORISED_ONLY'},authorityState:{meaningBundleCode:meaningPayload.meaningBundle.bundleCode,humanReviewedCompositionAdmissionRef:admission.sourceAuthorityRef}});
+  const input=await createMethodInterpretationInput({canonicalProjection,methodId,locale:locale==='zh-Hans'?'zh-Hans':'en',requestedDepth,availableContext:{timing:'UPSTREAM_AUTHORISED_ONLY'},authorityState:{meaningBundleCode:meaningPayload.meaningBundle.bundleCode,humanReviewedCompositionAdmissionRef:'RESOLVED_AFTER_CANDIDATE_VALIDATION'}});
   const candidate=await createMethodInterpretationCandidate({input,meaningPayload});
   if(candidate.validation.valid!==true)throw Object.assign(new Error('CX_R12R4A_ACCEPTED_CANDIDATE_VALIDATION_REQUIRED'),{code:'CX_R12R4A_ACCEPTED_CANDIDATE_VALIDATION_REQUIRED',failures:candidate.validation.failures});
-  const acceptedInterpretation=await promoteAcceptedInterpretation(candidate,admission.humanReview);
+  const admission=resolveCustomerCompositionAdmission({
+    methodId,
+    candidateSchemaVersion:candidate.schemaVersion,
+    meaningBundleCode:meaningPayload.meaningBundle.bundleCode,
+    compositionRuleVersion:candidate.compositionVersion,
+    locale:input.locale,
+    projectionAuthorityVersion:candidate.sourceReference.projectionVersion,
+    methodParameters:{houseSystemId:candidate.houseSystemId}
+  });
+  if(admission.publicationAllowed!==true)throw Object.assign(new Error('CX_R12R4B_COMPOSITION_NOT_ADMITTED'),{code:'CX_R12R4B_COMPOSITION_NOT_ADMITTED',constraints:admission.constraints});
+  const acceptedInterpretation=await executeAdmittedCustomerInterpretation({canonicalProjection,meaningPayload,candidate,admission});
   const graph=await projectMethodGraph({input,candidate,acceptedInterpretation,meaningPayload});
   return acceptedCustomerResult({canonicalProjection,input,candidate,acceptedInterpretation,graph,admission});
 }

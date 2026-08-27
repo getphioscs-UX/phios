@@ -163,8 +163,11 @@ for(const token of ['cx-method-insight','cx-method-evidence','cx-method-alternat
 for(const token of ['<title','<desc','tabindex="0"','tableFallback','data-relation'])assert(graphClient.includes(token),`graph accessibility missing ${token}`);
 assert(client.includes('renderMethodGraph'));assert(customerProjection.includes('buildMethodCustomerDevelopmentResult'),'R12R3B development builder authority must remain available');
 const developmentSurface=api.includes('buildMethodCustomerDevelopmentResult')&&api.includes('candidateResultsNotCustomerPublished:true');
-const acceptedR12R4aSuccessor=api.includes('buildAcceptedMethodCustomerResult')&&api.includes('candidateResultsNotCustomerPublished:false');
-assert(developmentSurface||acceptedR12R4aSuccessor,'customer API must consume the R12R3B development result or its human-admitted R12R4A presentation successor');
+const acceptedR12R4Successor=api.includes('buildAcceptedMethodCustomerResult')&&(
+  api.includes('candidateResultsNotCustomerPublished:false')||
+  (api.includes('PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0')&&api.includes('methods:readingMethods'))
+);
+assert(developmentSurface||acceptedR12R4Successor,'customer API must consume the R12R3B development result or an admitted R12R4 presentation successor');
 assert.equal(html.includes('legacy.css'),false);assert.equal(html.includes('DETERMINISTIC badge'),false);assert.equal(graphClient.includes('placeholder interpretation'),false);
 
 const packageJson=read('package.json');

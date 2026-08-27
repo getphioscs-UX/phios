@@ -1,4 +1,6 @@
-import activationAuthority from '../../content/zi-wei-runtime/successors/zwr-w7-w13-internal-calculation-activation-v1.json';
+import {ZWR_RUNTIME_AUTHORITIES} from './zi-wei-runtime-authorities.generated.js';
+
+const activationAuthority=ZWR_RUNTIME_AUTHORITIES.internalCalculationActivation;
 
 export function loadZiWeiInternalActivation() {
   return activationAuthority;

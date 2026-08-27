@@ -1,4 +1,6 @@
-import policy from '../../content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json';
+import {ZWR_RUNTIME_AUTHORITIES} from './zi-wei-runtime-authorities.generated.js';
+
+const policy=ZWR_RUNTIME_AUTHORITIES.calculationPolicy;
 
 export function loadZiWeiPolicy() {
   return policy;

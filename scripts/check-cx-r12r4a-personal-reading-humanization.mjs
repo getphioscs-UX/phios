@@ -59,11 +59,24 @@ assert.equal(assetById.get('CXICON-GLOBAL-PROJECTION').publicUrl,'/assets/icons/
 
 assert.match(api,/buildAcceptedMethodCustomerResult/);
 assert.doesNotMatch(api,/buildMethodCustomerDevelopmentResult/);
-assert.match(api,/state:readable\.length===projections\.length\?'READY_TO_READ'/);
+const r12r4bSuccessor=api.includes('PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0')&&api.includes('view=freeze({...stripLegacyInterpretation(baseView),astrology,reading})');
+if(r12r4bSuccessor){
+  assert.match(api,/const readingState=allReadable\?'READY_TO_READ':readable\.length\?'PARTIALLY_PREPARED':'NEEDS_ATTENTION'/);
+  assert.match(api,/methods:readingMethods/);
+  assert.doesNotMatch(api,/methodResults\s*:/);
+}else{
+  assert.match(api,/state:readable\.length===projections\.length\?'READY_TO_READ'/);
+}
 assert.doesNotMatch(api,/interpretationGate:\{state:'HUMAN_REVIEW_REQUIRED'/);
-assert.match(surface,/WHAT_HAS_BEEN_ESTABLISHED|What has been established/);
-assert.match(surface,/What you can read now/);
-assert.match(surface,/What still needs more information/);
+if(r12r4bSuccessor){
+  assert.match(surface,/view\?\.reading\?\.map/);
+  assert.match(surface,/Six-stage reading map/);
+  assert.doesNotMatch(surface,/view\?\.methodResults|view\?\.interpretation/);
+}else{
+  assert.match(surface,/WHAT_HAS_BEEN_ESTABLISHED|What has been established/);
+  assert.match(surface,/What you can read now/);
+  assert.match(surface,/What still needs more information/);
+}
 assert.match(surface,/results\.length!==4/);
 assert.match(surface,/\['AST','BZR','NUM','ZWR'\]\.every/);
 assert.doesNotMatch(surface,/r\.state\.replaceAll/);
@@ -81,16 +94,28 @@ assert.match(css,/cx-reading-map-live article\[data-state="READY"\]/);
 
 const numProjection=json('content/interpretation/integration/fixtures/numerology-projection.valid.json').fixture;
 const accepted=await buildAcceptedMethodCustomerResult({canonicalProjection:numProjection,locale:'en'});
-assert.equal(accepted.schemaVersion,'PHI-OS-CX-R12R4A-ACCEPTED-CUSTOMER-METHOD-VIEW-v1.0.0');
-assert.equal(accepted.label,'Numerology');
-assert.equal(accepted.state,'CUSTOMER_PUBLISHABLE');
-assert.equal(accepted.customerState,'READY_TO_READ');
-assert(accepted.insights.length>0);
-assert.equal(accepted.graph.customerInterpretationBindingsAccepted,true);
-assert.equal(accepted.structureOnly,false);
-assert.equal(accepted.boundary.rendererCreatesMeaning,false);
-assert.equal(accepted.boundary.realityKnown,false);
-assert.equal(accepted.technicalDetails.admissionAuthorityRef,admissionPath);
+if(accepted.schemaVersion==='PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0'){
+  assert.equal(accepted.methodLabel,'Numerology');
+  assert.equal(accepted.state,'READY_TO_READ');
+  assert(accepted.insights.length>0);
+  assert.equal(accepted.visualModel.customerInterpretationBindingsAccepted,true);
+  assert.equal(accepted.technical.boundary.rendererCreatesMeaning,false);
+  assert.equal(accepted.technical.boundary.realityKnown,false);
+  assert.equal(accepted.technical.acceptanceBasis,'ADMITTED_COMPOSITION_RULESET');
+  assert.match(accepted.technical.admissionRef,/cx-r12r3b-human-reviewed-composition-admission-v1\.json/);
+  assert.equal(accepted.technical.lifecycle.liveCustomerHumanReviewed,false);
+}else{
+  assert.equal(accepted.schemaVersion,'PHI-OS-CX-R12R4A-ACCEPTED-CUSTOMER-METHOD-VIEW-v1.0.0');
+  assert.equal(accepted.label,'Numerology');
+  assert.equal(accepted.state,'CUSTOMER_PUBLISHABLE');
+  assert.equal(accepted.customerState,'READY_TO_READ');
+  assert(accepted.insights.length>0);
+  assert.equal(accepted.graph.customerInterpretationBindingsAccepted,true);
+  assert.equal(accepted.structureOnly,false);
+  assert.equal(accepted.boundary.rendererCreatesMeaning,false);
+  assert.equal(accepted.boundary.realityKnown,false);
+  assert.equal(accepted.technicalDetails.admissionAuthorityRef,admissionPath);
+}
 
 assert.equal(acceptance.work,'CX-R12R4A');
 assert.equal(acceptance.claims.acceptedCustomerInterpretationViewModelActive,true);
@@ -103,4 +128,4 @@ assert.equal(acceptance.claims.humanVisualAccepted,false);
 assert.equal(acceptance.claims.fullProduction,false);
 
 console.log('✓ CX-R12R4A Personal Reading Experience cutover and humanization passed.');
-console.log('  PASS2B customer-publishable interpretation view models now drive the customer surface; internal method/status identifiers are humanized, technical provenance is progressively disclosed, and the three-question Reading Map remains truthful about limits.');
+console.log('  PASS2B customer-publishable interpretation view models now drive the customer surface; internal method/status identifiers are humanized, technical provenance is progressively disclosed, and the active Reading Map remains truthful about limits.');

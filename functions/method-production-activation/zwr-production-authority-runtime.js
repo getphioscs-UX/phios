@@ -1,4 +1,6 @@
-import authority from '../../content/professional/method-production-activation/successors/mpa-zwr-production-activation-successor-v1.json';
+import {ZWR_RUNTIME_AUTHORITIES} from '../zi-wei-runtime/zi-wei-runtime-authorities.generated.js';
+
+const authority=ZWR_RUNTIME_AUTHORITIES.productionActivation;
 
 const clean = v => typeof v === 'string' ? v.trim() : '';
 

@@ -1,8 +1,7 @@
 import crypto from 'node:crypto';
-import ONTOLOGY from '../../content/zi-wei-runtime/meaning/zi-wei-meaning-ontology-v1.json';
-import MAPPING from '../../content/zi-wei-runtime/meaning/zi-wei-meaning-mapping-v1.json';
-import LOCALE from '../../content/zi-wei-runtime/meaning/zi-wei-meaning-locale-v1.json';
-import ACTIVATION from '../../content/professional/canonical-meaning-production/successors/canonical-meaning-production-activation-v4.json';
+import {ZWR_MEANING_AUTHORITIES} from './zi-wei-meaning-authorities.generated.js';
+
+const {ontology:ONTOLOGY,mapping:MAPPING,locale:LOCALE,activation:ACTIVATION}=ZWR_MEANING_AUTHORITIES;
 
 const stable=v=>{const canon=x=>Array.isArray(x)?x.map(canon):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canon(x[k])])):x;return crypto.createHash('sha256').update(JSON.stringify(canon(v))).digest('hex')};
 const group=(p,c)=>(p.calculation?.structures||[]).find(x=>x.code===c);
