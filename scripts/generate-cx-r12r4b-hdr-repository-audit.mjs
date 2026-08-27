@@ -5,7 +5,7 @@ import path from 'node:path';
 
 const OUTPUT='content/customer-experience-rebuild/r12r4b/cx-r12r4b-hdr-definitive-repository-audit-v1.json';
 const ROOTS=['content/professional','content/governance/production-capability-matrix','content/interpretation/integration','functions','assets/customer-ui','assets/js/method-client-delivery','scripts'];
-const EXCLUDED=new Set([OUTPUT,'scripts/generate-cx-r12r4b-hdr-repository-audit.mjs','functions/external-profile/external-profile-contract.js','functions/external-profile/external-profile-extraction-ir.js','functions/external-profile/hd-profile-parser.js','functions/api/customer-external-profile-intake.js']);
+const EXCLUDED=new Set([OUTPUT,'scripts/generate-cx-r12r4b-hdr-repository-audit.mjs','functions/external-profile/external-profile-contract.js','functions/external-profile/external-profile-extraction-ir.js','functions/external-profile/hd-profile-parser.js','functions/external-profile/upload-document-extractor.js','functions/external-profile/external-profile-confirmation.js','functions/external-profile/hdr-shadow-validation.js','functions/api/customer-external-profile-intake.js','functions/api/customer-external-profile-confirm.js','functions/api/customer-external-profile-shadow-check.js']);
 const DOMAIN_PATH=/(?:^|\/)(?:[^/]*(?:hdr|human[-_ ]?design|bodygraph)[^/]*)(?:\/|$)/i;
 const DOMAIN_TEXT=/\bHUMAN_DESIGN(?:_PROJECTION)?\b|\bbodygraph\b/i;
 const TEXT_EXTENSIONS=new Set(['.json','.js','.mjs','.html','.css','.md','.svg']);

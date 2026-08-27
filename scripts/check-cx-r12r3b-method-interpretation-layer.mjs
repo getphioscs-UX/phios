@@ -172,7 +172,7 @@ assert.equal(html.includes('legacy.css'),false);assert.equal(html.includes('DETE
 
 const packageJson=read('package.json');
 assert.equal(packageJson.scripts['check:cx-r12r3b'],'node scripts/check-cx-r12r3b-method-interpretation-layer.mjs');
-const r12r4Aggregate=packageJson.scripts['check:cx-r12r4'];assert(typeof r12r4Aggregate==='string'&&r12r4Aggregate.startsWith('npm run check:cx-r12r3b &&'),'CX-R12R4 successor must preserve CX-R12R3B as its first aggregate gate');assert(packageJson.scripts.check.endsWith('&& npm run check:cx-r12r4'),'CX-R12R4 successor aggregate must be last in npm run check while preserving CX-R12R3B internally');
+const r12r4Aggregate=packageJson.scripts['check:cx-r12r4'];assert(typeof r12r4Aggregate==='string'&&r12r4Aggregate.startsWith('npm run check:cx-r12r3b &&'),'CX-R12R4 successor must preserve CX-R12R3B as its first aggregate gate');const globalCheck=packageJson.scripts.check;const r3Index=globalCheck.indexOf('npm run check:cx-r12r3b'),r4Index=globalCheck.indexOf('npm run check:cx-r12r4');assert(r3Index>=0&&r4Index>r3Index,'CX-R12R4 successor aggregate must remain after the explicit CX-R12R3B gate; later independent production gates may follow it');
 assert.equal(acceptance.claims.humanAccepted,false);assert.equal(acceptance.claims.liveBrowserAccepted,false);assert.equal(acceptance.claims.fullProduction,false);
 assert.deepEqual(acceptance.requiredStopStates,['DEVELOPMENT_ACCEPTED','HUMAN_REVIEW_REQUIRED','LIVE_BROWSER_REQUIRED']);
 

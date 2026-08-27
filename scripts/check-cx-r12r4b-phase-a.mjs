@@ -191,7 +191,7 @@ assert.equal(acceptance.claims.fullR12R4BProduction,false);
 
 const packageJson=read('package.json');
 assert.equal(packageJson.scripts['check:cx-r12r4b:phase-a'],'node scripts/generate-zwr-meaning-authorities-runtime-projection.mjs --check && node scripts/generate-zwr-runtime-authorities-projection.mjs --check && node scripts/generate-cx-r12r4b-phase-a-replay-campaign.mjs --check && node scripts/check-cx-r12r4b-phase-a.mjs');
-assert.equal(packageJson.scripts['check:cx-r12r4b'],'npm run check:cx-r12r4b:phase-a && npm run check:cx-r12r4b:hdr-audit && npm run check:cx-r12r4b:r1');
+assert(packageJson.scripts['check:cx-r12r4b'].startsWith('npm run check:cx-r12r4b:phase-a && npm run check:cx-r12r4b:hdr-audit && npm run check:cx-r12r4b:r1'),'CX-R12R4B aggregate must preserve Phase A, HDR audit and R1 in order before later successor gates');
 assert(packageJson.scripts['check:cx-r12r4'].endsWith('&& npm run check:cx-r12r4b'));
 
 console.log('✓ CX-R12R4B W00–W08 Phase A four-method live cutover passed.');

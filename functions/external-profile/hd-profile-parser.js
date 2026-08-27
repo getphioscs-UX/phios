@@ -13,13 +13,28 @@ const FIELD_SPECS=Object.freeze([
   ['motivation',['motivation','动机','動機']],
   ['trajectory',['trajectory','轨迹','軌跡','运行方向','運行方向']]
 ]);
+const STRUCTURAL_SPECS=Object.freeze({
+  channels:['channels','channel','通道'],
+  definedCenters:['defined centers','defined center','定义中心','定義中心','已定义中心','已定義中心'],
+  openCenters:['open centers','open center','undefined centers','undefined center','开放中心','開放中心','未定义中心','未定義中心'],
+  designActivations:['design activated gate','design activated gates','design activations','设计激活闸门','設計激活閘門','设计激活','設計激活'],
+  personalityActivations:['personality activated gate','personality activated gates','personality activations','人格激活闸门','人格激活閘門','人格激活']
+});
+const CENTER_ALIASES=Object.freeze([
+  ['HEAD',['head','头','頭','头顶','頭頂']],['AJNA',['ajna','逻辑中心','邏輯中心','阿基那']],['THROAT',['throat','喉咙','喉嚨','喉中心']],['G',['g center','g-center','g中心','方向中心']],['EGO',['ego','will','heart','意志','意志力','心脏','心臟']],['SPLEEN',['spleen','脾','脾中心']],['SOLAR_PLEXUS',['solar plexus','emotional','情绪中心','情緒中心','太阳神经丛','太陽神經叢']],['SACRAL',['sacral','骶骨','薦骨']],['ROOT',['root','根部','根中心']]
+]);
+const BODY_ALIASES=Object.freeze([
+  ['SUN',['sun','太阳','太陽']],['EARTH',['earth','地球']],['MOON',['moon','月亮']],['NORTH_NODE',['north node','northnode','北交点','北交點']],['SOUTH_NODE',['south node','southnode','南交点','南交點']],['MERCURY',['mercury','水星']],['VENUS',['venus','金星']],['MARS',['mars','火星']],['JUPITER',['jupiter','木星']],['SATURN',['saturn','土星']],['URANUS',['uranus','天王星']],['NEPTUNE',['neptune','海王星']],['PLUTO',['pluto','冥王星']]
+]);
 
-const compact=value=>cleanExternalProfileText(value,600).replace(/^[\s:：\-|]+|[\s|]+$/g,'').trim();
+const compact=value=>cleanExternalProfileText(value,1200).replace(/^[\s:：\-|]+|[\s|]+$/g,'').trim();
 const normalizedLabel=value=>String(value??'').toLowerCase().replace(/[\s_\-()（）]/g,'');
 const ALIAS_TO_FIELD=new Map(FIELD_SPECS.flatMap(([field,aliases])=>aliases.map(alias=>[normalizedLabel(alias),field])));
+const CENTER_LOOKUP=new Map(CENTER_ALIASES.flatMap(([code,aliases])=>aliases.map(alias=>[normalizedLabel(alias),code])));
+const BODY_LOOKUP=new Map(BODY_ALIASES.flatMap(([code,aliases])=>aliases.map(alias=>[normalizedLabel(alias),code])));
 
 function parseLabelValue(line){
-  const explicit=line.match(/^\s*([^:：]{1,48})\s*[:：]\s*(.+?)\s*$/);
+  const explicit=line.match(/^\s*([^:：]{1,64})\s*[:：]\s*(.+?)\s*$/);
   if(explicit){
     const field=ALIAS_TO_FIELD.get(normalizedLabel(explicit[1]));
     if(field)return {field,value:compact(explicit[2]),confidence:'HIGH',matchType:'EXPLICIT_LABEL'};
@@ -33,50 +48,44 @@ function parseLabelValue(line){
   }
   return null;
 }
+function candidate(field,value,lineNumber,confidence,matchType,sourceType,sourceRegionPrefix){return Object.freeze({field,rawValue:value,normalizedValue:value,sourceType,sourceRegion:`${sourceRegionPrefix}:LINE_${lineNumber}`,extractionConfidence:confidence,extractionRule:matchType,customerConfirmed:false,phiosCalculated:false})}
+function structuralCandidate(field,value,lineNumber,confidence,matchType,sourceType,sourceRegionPrefix){return Object.freeze({field,rawValue:value,normalizedValue:value,sourceType,sourceRegion:`${sourceRegionPrefix}:LINE_${lineNumber}`,extractionConfidence:confidence,extractionRule:matchType,customerConfirmed:false,phiosCalculated:false})}
+function prefixedValue(line,aliases){for(const alias of aliases){const re=new RegExp(`^\\s*${alias.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\s*(?:[:：]|\\s)\\s*(.+?)\\s*$`,'i');const match=line.match(re);if(match)return compact(match[1])}return null}
+function gateLineTokens(value){return [...String(value||'').matchAll(/\b([1-9]|[1-5]\d|6[0-4])\s*[.]\s*([1-6])\b/g)].map(match=>`${Number(match[1])}.${Number(match[2])}`)}
+function parseChannels(value){const out=[];for(const match of String(value||'').matchAll(/\b([1-9]|[1-5]\d|6[0-4])\s*[–—-]\s*([1-9]|[1-5]\d|6[0-4])\b/g)){const a=Number(match[1]),b=Number(match[2]);if(a===b)continue;out.push(`${a}-${b}`)}return [...new Set(out)]}
+function parseCenters(value){const text=String(value||'');const found=[];for(const [code,aliases] of CENTER_ALIASES){if(aliases.some(alias=>new RegExp(`(^|[^A-Za-z])${alias.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}([^A-Za-z]|$)`,'i').test(text)))found.push(code)}return [...new Set(found)]}
+function parseBodyGatePairs(line,layer){const pairs=[];for(const [body,aliases] of BODY_ALIASES){for(const alias of aliases){const re=new RegExp(`${alias.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}\\s*[:：]?\\s*([1-9]|[1-5]\\d|6[0-4])\\s*[.]\\s*([1-6])`,'i');const m=line.match(re);if(m){pairs.push(Object.freeze({layer,bodyCode:body,gateLine:`${Number(m[1])}.${Number(m[2])}`}));break}}}return pairs}
+function bodyCodeFromToken(value){return BODY_LOOKUP.get(normalizedLabel(value))||null}
+function parseCompactBodyPairs(line,layer){const tokens=line.split(/\s+/),out=[];for(let i=0;i<tokens.length-1;i++){const body=bodyCodeFromToken(tokens[i]);const gate=tokens[i+1]?.match(/^([1-9]|[1-5]\d|6[0-4])[.]([1-6])$/);if(body&&gate)out.push(Object.freeze({layer,bodyCode:body,gateLine:`${Number(gate[1])}.${Number(gate[2])}`}))}return out}
+function detectLayerHeading(line){const token=normalizedLabel(line);if(['design','设计','設計','designside'].map(normalizedLabel).includes(token))return 'DESIGN';if(['personality','人格','personalityside'].map(normalizedLabel).includes(token))return 'PERSONALITY';return null}
 
-function candidate(field,value,lineNumber,confidence,matchType){
-  return Object.freeze({
-    field,
-    rawValue:value,
-    normalizedValue:value,
-    sourceType:'CUSTOMER_PASTED_TEXT',
-    sourceRegion:`PASTED_TEXT:LINE_${lineNumber}`,
-    extractionConfidence:confidence,
-    extractionRule:matchType,
-    customerConfirmed:false,
-    phiosCalculated:false
-  });
-}
-
-export function parseHumanDesignProfileText(text){
-  const source=cleanExternalProfileText(text,12000);
-  if(!source)return Object.freeze({candidates:Object.freeze([]),unresolved:Object.freeze([]),conflicts:Object.freeze([])});
-  const byField=new Map();
-  const conflicts=[];
-  const lines=source.split(/\r?\n/);
+export function parseHumanDesignProfileText(text,{sourceType='CUSTOMER_PASTED_TEXT',sourceRegionPrefix='PASTED_TEXT'}={}){
+  const source=cleanExternalProfileText(text,24000);
+  if(!source)return Object.freeze({candidates:Object.freeze([]),structuralCandidates:Object.freeze([]),unresolved:Object.freeze([]),conflicts:Object.freeze([])});
+  const byField=new Map(),conflicts=[],structure={channels:[],definedCenters:[],openCenters:[],activations:[]};
+  const lines=source.split(/\r?\n/);let activeLayer=null;
   lines.forEach((raw,index)=>{
-    const line=compact(raw);
-    if(!line)return;
+    const line=compact(raw);if(!line)return;
+    const heading=detectLayerHeading(line);if(heading){activeLayer=heading;return}
     const parsed=parseLabelValue(line);
-    if(!parsed||!parsed.value)return;
-    const next=candidate(parsed.field,parsed.value,index+1,parsed.confidence,parsed.matchType);
-    const existing=byField.get(parsed.field);
-    if(!existing)byField.set(parsed.field,next);
-    else if(existing.normalizedValue!==next.normalizedValue)conflicts.push(Object.freeze({
-      field:parsed.field,
-      values:Object.freeze([existing.normalizedValue,next.normalizedValue]),
-      sourceRegions:Object.freeze([existing.sourceRegion,next.sourceRegion]),
-      status:'CUSTOMER_REVIEW_REQUIRED'
-    }));
+    if(parsed&&parsed.value){const next=candidate(parsed.field,parsed.value,index+1,parsed.confidence,parsed.matchType,sourceType,sourceRegionPrefix),existing=byField.get(parsed.field);if(!existing)byField.set(parsed.field,next);else if(existing.normalizedValue!==next.normalizedValue)conflicts.push(Object.freeze({field:parsed.field,values:Object.freeze([existing.normalizedValue,next.normalizedValue]),sourceRegions:Object.freeze([existing.sourceRegion,next.sourceRegion]),status:'CUSTOMER_REVIEW_REQUIRED'}));}
+    const channelText=prefixedValue(line,STRUCTURAL_SPECS.channels);if(channelText)structure.channels.push(...parseChannels(channelText));
+    const definedText=prefixedValue(line,STRUCTURAL_SPECS.definedCenters);if(definedText)structure.definedCenters.push(...parseCenters(definedText));
+    const openText=prefixedValue(line,STRUCTURAL_SPECS.openCenters);if(openText)structure.openCenters.push(...parseCenters(openText));
+    const designText=prefixedValue(line,STRUCTURAL_SPECS.designActivations);if(designText)structure.activations.push(...gateLineTokens(designText).map(gateLine=>Object.freeze({layer:'DESIGN',bodyCode:null,gateLine})));
+    const personalityText=prefixedValue(line,STRUCTURAL_SPECS.personalityActivations);if(personalityText)structure.activations.push(...gateLineTokens(personalityText).map(gateLine=>Object.freeze({layer:'PERSONALITY',bodyCode:null,gateLine})));
+    if(activeLayer){structure.activations.push(...parseBodyGatePairs(line,activeLayer));structure.activations.push(...parseCompactBodyPairs(line,activeLayer));}
   });
-  const candidates=[...byField.values()];
-  const unresolved=[];
-  if(!candidates.some(item=>item.field==='type'))unresolved.push('TYPE_NOT_FOUND_IN_PASTED_TEXT');
-  if(!candidates.some(item=>item.field==='authority'))unresolved.push('AUTHORITY_NOT_FOUND_IN_PASTED_TEXT');
-  if(!candidates.some(item=>item.field==='profile'))unresolved.push('PROFILE_NOT_FOUND_IN_PASTED_TEXT');
-  return Object.freeze({
-    candidates:Object.freeze(candidates),
-    unresolved:Object.freeze(unresolved),
-    conflicts:Object.freeze(conflicts)
-  });
+  structure.channels=[...new Set(structure.channels)].sort();structure.definedCenters=[...new Set(structure.definedCenters)].sort();structure.openCenters=[...new Set(structure.openCenters)].sort();
+  const activationMap=new Map();for(const item of structure.activations){const key=`${item.layer}:${item.bodyCode||''}:${item.gateLine}`;if(!activationMap.has(key))activationMap.set(key,item)}structure.activations=[...activationMap.values()];
+  const structuralCandidates=[];
+  if(structure.activations.length)structuralCandidates.push(structuralCandidate('activations',Object.freeze(structure.activations),1,'MEDIUM','STRUCTURAL_ACTIVATION_PARSE',sourceType,sourceRegionPrefix));
+  if(structure.channels.length)structuralCandidates.push(structuralCandidate('channels',Object.freeze(structure.channels),1,'HIGH','EXPLICIT_CHANNEL_PARSE',sourceType,sourceRegionPrefix));
+  if(structure.definedCenters.length)structuralCandidates.push(structuralCandidate('definedCenters',Object.freeze(structure.definedCenters),1,'HIGH','EXPLICIT_DEFINED_CENTER_PARSE',sourceType,sourceRegionPrefix));
+  if(structure.openCenters.length)structuralCandidates.push(structuralCandidate('openCenters',Object.freeze(structure.openCenters),1,'HIGH','EXPLICIT_OPEN_CENTER_PARSE',sourceType,sourceRegionPrefix));
+  const candidates=[...byField.values()],unresolved=[];
+  if(!candidates.some(item=>item.field==='type'))unresolved.push('TYPE_NOT_FOUND');
+  if(!candidates.some(item=>item.field==='authority'))unresolved.push('AUTHORITY_NOT_FOUND');
+  if(!candidates.some(item=>item.field==='profile'))unresolved.push('PROFILE_NOT_FOUND');
+  return Object.freeze({candidates:Object.freeze(candidates),structuralCandidates:Object.freeze(structuralCandidates),unresolved:Object.freeze(unresolved),conflicts:Object.freeze(conflicts)});
 }

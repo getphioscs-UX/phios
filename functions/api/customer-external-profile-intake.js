@@ -7,16 +7,14 @@ import {
   validateExternalProfileFile
 } from '../external-profile/external-profile-contract.js';
 import {buildExternalProfileExtractionIr} from '../external-profile/external-profile-extraction-ir.js';
+import {extractUploadedExternalProfileDocument} from '../external-profile/upload-document-extractor.js';
+import {buildExternalProfileConfirmationDraft} from '../external-profile/external-profile-confirmation.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const child of Object.values(value))freeze(child)}return value};
 
-async function sha256File(file){
-  const bytes=await file.arrayBuffer();
-  return crypto.createHash('sha256').update(Buffer.from(bytes)).digest('hex');
-}
-
+async function sha256File(file){const bytes=await file.arrayBuffer();return crypto.createHash('sha256').update(Buffer.from(bytes)).digest('hex')}
 function sourceTypeForFile(meta){return meta.extension==='pdf'?'CUSTOMER_UPLOADED_DOCUMENT':'CUSTOMER_UPLOADED_IMAGE'}
 
 export async function onRequestPost(context){
@@ -31,24 +29,19 @@ export async function onRequestPost(context){
   const hasFile=typeof File!=='undefined'&&file instanceof File&&file.size>0;
   const hasManual=Object.values(manualFields).some(Boolean);
   if(!hasFile&&!pastedText&&!hasManual)return json({ok:false,error:'EXTERNAL_PROFILE_INPUT_REQUIRED'},422);
-  const sources=[];
+  const sources=[];let documentExtraction=null;
   if(hasFile){
     let meta;
     try{meta=validateExternalProfileFile(file)}catch(error){return json({ok:false,error:error?.code||'EXTERNAL_PROFILE_FILE_INVALID'},422)}
-    sources.push(freeze({
-      sourceType:sourceTypeForFile(meta),
-      fileName:meta.name,
-      fileType:meta.extension,
-      mimeType:meta.mimeType,
-      fileSize:meta.size,
-      sha256:await sha256File(file),
-      fileContentPersisted:false,
-      sourceAuthority:'CUSTOMER'
-    }));
+    const sourceType=sourceTypeForFile(meta),sha256=await sha256File(file);
+    sources.push(freeze({sourceType,fileName:meta.name,fileType:meta.extension,mimeType:meta.mimeType,fileSize:meta.size,sha256,fileContentPersisted:false,sourceAuthority:'CUSTOMER'}));
+    documentExtraction=await extractUploadedExternalProfileDocument({file,env:context.env});
   }
   if(pastedText)sources.push(freeze({sourceType:'CUSTOMER_PASTED_TEXT',characterCount:pastedText.length,sourceAuthority:'CUSTOMER'}));
   const intakeId=`XPF-${crypto.randomUUID()}`;
-  const extractionIr=buildExternalProfileExtractionIr({intakeId,sources,pastedText,manualFields});
+  const extractionIr=buildExternalProfileExtractionIr({intakeId,sources,pastedText,manualFields,documentExtraction});
+  const hasConfirmable=extractionIr.candidates.length||extractionIr.manualFields.length;
+  const confirmationDraft=hasConfirmable?buildExternalProfileConfirmationDraft(extractionIr):null;
   return json({
     ok:true,
     externalProfileIntake:freeze({
@@ -58,9 +51,10 @@ export async function onRequestPost(context){
       profileFamily:EXTERNAL_PROFILE_FAMILY,
       authorityClass:'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT',
       extractionIr,
-      nextAction:extractionIr.candidates.length||extractionIr.manualFields.length?'CUSTOMER_CONFIRMATION_REQUIRED':'DOCUMENT_EXTRACTION_REQUIRED',
+      confirmationDraft,
+      nextAction:confirmationDraft?'CUSTOMER_CONFIRMATION_REQUIRED':documentExtraction?.status==='FAILED'?'DOCUMENT_EXTRACTION_FAILED':'DOCUMENT_EXTRACTION_REQUIRED',
       privacy:{saved:false,fileContentPersisted:false,runtimeMemoryWritten:false},
-      boundary:{phiosCalculated:false,hdrShadowUsed:false,customerReportAuthorityCreated:false}
+      boundary:{phiosCalculated:false,hdrShadowUsed:false,customerReportAuthorityCreated:false,workersAiUsedForDocumentConversion:documentExtraction?.aiServiceUsed===true,workersAiCreatesMeaning:false}
     })
   });
 }

@@ -1790,7 +1790,7 @@
     "check:cx-r12r3b": "node scripts/check-cx-r12r3b-method-interpretation-layer.mjs",
     "check:cx-r12r4": "npm run check:cx-r12r3b && node scripts/check-cx-r12r4-personal-reading-experience.mjs && node scripts/check-cx-r12r4-reading-experience-completion.mjs && npm run check:cx-r12r4a && npm run check:cx-r12r4b",
     "check:cx-r12r4a": "node scripts/check-cx-r12r4a-personal-reading-humanization.mjs",
-    "check:cx-r12r4b": "npm run check:cx-r12r4b:phase-a && npm run check:cx-r12r4b:hdr-audit && npm run check:cx-r12r4b:r1",
+    "check:cx-r12r4b": "npm run check:cx-r12r4b:phase-a && npm run check:cx-r12r4b:hdr-audit && npm run check:cx-r12r4b:r1 && npm run check:cx-r12r4b:r2",
     "check:cx-r12r4b:phase-a": "node scripts/generate-zwr-meaning-authorities-runtime-projection.mjs --check && node scripts/generate-zwr-runtime-authorities-projection.mjs --check && node scripts/generate-cx-r12r4b-phase-a-replay-campaign.mjs --check && node scripts/check-cx-r12r4b-phase-a.mjs",
     "check:cx-r12r4b:hdr-audit": "node scripts/generate-cx-r12r4b-hdr-repository-audit.mjs --check && node scripts/check-cx-r12r4b-hdr-audit.mjs",
     "cx-r12r3b:prepare-human-review": "node scripts/generate-cx-r12r3b-human-review-campaign.mjs",
@@ -1862,7 +1862,8 @@
     "check:tarot-full-production-eligibility": "node scripts/check-tarot-full-production-eligibility.mjs",
     "check:tarot-product-activation-phase-n-readiness": "npm run check:tarot-product-activation-phase-mr-readiness && npm run check:tarot-limited-production-stabilization-static && npm run check:tarot-limited-production-observation-harness",
     "check:tarot-product-activation-phase-n": "npm run check:tarot-product-activation-phase-n-readiness && npm run check:tarot-production-sha-alignment && npm run check:tarot-production-capability-live && npm run check:tarot-limited-production-stability-live",
-    "check:cx-r12r4b:r1": "node scripts/check-cx-r12r4b-r1-external-profile-intake.mjs"
+    "check:cx-r12r4b:r1": "node scripts/check-cx-r12r4b-r1-external-profile-intake.mjs",
+    "check:cx-r12r4b:r2": "node scripts/check-cx-r12r4b-r2-external-profile-confirmation-shadow.mjs"
   },
   "type": "module",
   "dependencies": {
