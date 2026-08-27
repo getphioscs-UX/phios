@@ -5,6 +5,8 @@ import fs from 'node:fs';
 const ROOT='content/embodied-configuration';
 const CONFIG_PATH=`${ROOT}/ecr-environment-first-configuration-v1.json`;
 const RUNTIME_PATH='functions/embodied-configuration/ecr-specific-ontology-runtime.js';
+const CORE_PATH=`${ROOT}/ecr-book-core-theory-projection-v1.json`;
+const CORE_RUNTIME_PATH='functions/embodied-configuration/ecr-book-core-theory-runtime.js';
 const SOURCES={
   context:`${ROOT}/ecr-cosmological-context-registry-v1.json`,
   motion:`${ROOT}/ecr-motion-registry-v1.json`,
@@ -16,11 +18,16 @@ const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha256=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const stableJson=value=>`${JSON.stringify(value,null,2)}\n`;
 
+const core=readJson(CORE_PATH);
 const context=readJson(SOURCES.context);
 const motion=readJson(SOURCES.motion);
 const activation=readJson(SOURCES.activation);
 const trigrams=readJson(SOURCES.trigram);
 const hexagrams=readJson(SOURCES.hexagram);
+assert.equal(core.grammar.length,16);
+assert.equal(core.questions.length,16);
+assert.equal(core.capabilities.length,9);
+assert.equal(core.drivers.length,12);
 assert.equal(context.entries.length,12);
 assert.equal(motion.entries.length,8);
 assert.equal(activation.entries.length,8);
@@ -74,6 +81,20 @@ const configuration={
 };
 const configRendered=stableJson(configuration);
 
+const coreRuntimePayload={
+  schemaVersion:'PHI-OS-ECR-BOOK-CORE-THEORY-RUNTIME-v1.0.0',
+  source:{path:CORE_PATH,sha256:sha256(CORE_PATH)},
+  grammarCodes:core.grammar.map(x=>x[0]),
+  grammars:Object.fromEntries(core.grammar.map(([code,label,chineseLabel])=>[code,{code,label,chineseLabel}])),
+  questionCodes:core.questions.map(x=>x[0]),
+  questions:Object.fromEntries(core.questions.map(([questionId,question,questionZhHans])=>[questionId,{questionId,question,questionZhHans}])),
+  capabilities:core.capabilities.map(([id,label,bookZh])=>({id,label,bookZh,zh:bookZh.replace(/能力$/,'')})),
+  drivers:core.drivers.map(([id,label,zh])=>({id,label,zh})),
+  boundary:core.rules
+};
+const coreDigest=crypto.createHash('sha256').update(JSON.stringify(coreRuntimePayload)).digest('hex');
+const coreRuntimeRendered=`/* GENERATED FILE. Do not edit by hand.\n * Source: ${CORE_PATH}\n */\nexport const ECR_BOOK_CORE_THEORY_RUNTIME = Object.freeze(${JSON.stringify({...coreRuntimePayload,authorityDigest:coreDigest},null,2)});\nexport default ECR_BOOK_CORE_THEORY_RUNTIME;\n`;
+
 const authorityDigests={
   context:{path:SOURCES.context,sha256:sha256(SOURCES.context)},
   motion:{path:SOURCES.motion,sha256:sha256(SOURCES.motion)},
@@ -95,11 +116,14 @@ const runtimeRendered=`/* GENERATED FILE. Do not edit by hand.\n * Source: scrip
 if(process.argv.includes('--check')){
   assert.ok(fs.existsSync(CONFIG_PATH),'ECR_ENVIRONMENT_FIRST_CONFIGURATION_MISSING');
   assert.equal(fs.readFileSync(CONFIG_PATH,'utf8'),configRendered,'ECR_ENVIRONMENT_FIRST_CONFIGURATION_DRIFT');
+  assert.ok(fs.existsSync(CORE_RUNTIME_PATH),'ECR_BOOK_CORE_THEORY_RUNTIME_MISSING');
+  assert.equal(fs.readFileSync(CORE_RUNTIME_PATH,'utf8'),coreRuntimeRendered,'ECR_BOOK_CORE_THEORY_RUNTIME_DRIFT');
   assert.ok(fs.existsSync(RUNTIME_PATH),'ECR_SPECIFIC_ONTOLOGY_RUNTIME_MISSING');
   assert.equal(fs.readFileSync(RUNTIME_PATH,'utf8'),runtimeRendered,'ECR_SPECIFIC_ONTOLOGY_RUNTIME_DRIFT');
-  console.log('✓ ECR book-aligned CC12/M8/H64/A8 projections are deterministic and current.');
+  console.log('✓ ECR book-aligned core projection + CC12/M8/H64/A8 projections are deterministic and current.');
 }else{
   fs.writeFileSync(CONFIG_PATH,configRendered);
+  fs.writeFileSync(CORE_RUNTIME_PATH,coreRuntimeRendered);
   fs.writeFileSync(RUNTIME_PATH,runtimeRendered);
-  console.log(`Generated ${CONFIG_PATH} and ${RUNTIME_PATH}.`);
+  console.log(`Generated ${CONFIG_PATH}, ${CORE_RUNTIME_PATH} and ${RUNTIME_PATH}.`);
 }

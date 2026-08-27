@@ -6,10 +6,12 @@
   "methodCode": "EMBODIED_CONFIGURATION",
   "authorityClass": "PHIOS_FIRST_PARTY",
   "bookAuthority": {
-    "grammar": "functions/runtime/formation/grammar-registry.js",
-    "questions": "functions/runtime/formation/fundamental-question-registry.js",
-    "capabilities": "functions/runtime/formation/book-1-runtime-model.js#RUNTIME_CAPABILITIES",
-    "drivers": "functions/runtime/formation/book-1-runtime-model.js#RUNTIME_DRIVERS"
+    "founderReference": "content/embodied-configuration/ecr-founder-reference-authority-v1.json",
+    "machineProjection": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json",
+    "protectedRuntimeCompatibility": [
+      "functions/runtime/formation/grammar-registry.js",
+      "functions/runtime/formation/book-1-runtime-model.js"
+    ]
   },
   "ecrSpecificAuthority": {
     "cosmologicalContext": "content/embodied-configuration/ecr-cosmological-context-registry-v1.json",
@@ -42,6 +44,8 @@
     "calculationImplemented": true,
     "customerMeaningImplemented": true,
     "customerInterpretationImplemented": true,
-    "customerPublicationAdmitted": false
+    "customerPublicationAdmitted": false,
+    "pdsProtectedRuntimeMutated": false,
+    "bookAlignedProjectionIsDerivedBridge": true
   }
 }

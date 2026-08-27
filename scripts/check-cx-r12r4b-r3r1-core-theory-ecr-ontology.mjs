@@ -1,12 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { GRAMMAR_CODES, GRAMMAR_REGISTRY } from '../functions/runtime/formation/grammar-registry.js';
-import {
-  FUNDAMENTAL_QUESTION_CODES,
-  FUNDAMENTAL_QUESTION_REGISTRY,
-  validateFundamentalQuestionRegistry
-} from '../functions/runtime/formation/fundamental-question-registry.js';
 import { RUNTIME_CAPABILITIES, RUNTIME_DRIVERS } from '../functions/runtime/formation/book-1-runtime-model.js';
+import { ECR_BOOK_CORE_THEORY_RUNTIME } from '../functions/embodied-configuration/ecr-book-core-theory-runtime.js';
 import { getEcrCanonicalOntology, validateEcrCanonicalOntology } from '../functions/embodied-configuration/ecr-ontology-registry.js';
 
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -27,7 +23,15 @@ const expectedGrammar=[
   ['G13','Settlement','沉淀'],['G14','Reconfiguration','重组'],['G15','Emergence','涌现'],['G16','Continuity','持续']
 ];
 assert.deepEqual(GRAMMAR_CODES,expectedGrammar.map(x=>x[0]));
-for(const [code,en,zh] of expectedGrammar){assert.equal(GRAMMAR_REGISTRY[code].label,en);assert.equal(GRAMMAR_REGISTRY[code].chineseLabel,zh)}
+assert.deepEqual(ECR_BOOK_CORE_THEORY_RUNTIME.grammarCodes,expectedGrammar.map(x=>x[0]));
+for(const [code,en,zh] of expectedGrammar){
+  assert.equal(GRAMMAR_REGISTRY[code].label,en);
+  assert.equal(ECR_BOOK_CORE_THEORY_RUNTIME.grammars[code].label,en);
+  assert.equal(ECR_BOOK_CORE_THEORY_RUNTIME.grammars[code].chineseLabel,zh);
+}
+// PDS-W0 keeps protected Runtime display labels immutable; ECR consumes a Book-aligned derived projection instead of rewriting functions/runtime.
+assert.equal(GRAMMAR_REGISTRY.G10.chineseLabel,'行动主体');
+assert.equal(GRAMMAR_REGISTRY.G13.chineseLabel,'沉降');
 
 const expectedQuestions=[
   ['Q1','究竟发生了什么？'],['Q2','什么值得相信？'],['Q3','什么是真实？'],['Q4','是否进入新的阶段？'],
@@ -35,18 +39,21 @@ const expectedQuestions=[
   ['Q9','如何回应其他现实？'],['Q10','如何组织差异？'],['Q11','什么值得共同承载？'],['Q12','如何维持共同稳定？'],
   ['Q13','旧组织还支持未来吗？'],['Q14','谁承载改变？'],['Q15','新的组织如何稳定？'],['Q16','如何继续存在？']
 ];
-assert.deepEqual(FUNDAMENTAL_QUESTION_CODES,expectedQuestions.map(x=>x[0]));
-for(const [id,zh] of expectedQuestions)assert.equal(FUNDAMENTAL_QUESTION_REGISTRY[id].questionZhHans,zh);
-assert.equal(validateFundamentalQuestionRegistry().valid,true);
+assert.deepEqual(ECR_BOOK_CORE_THEORY_RUNTIME.questionCodes,expectedQuestions.map(x=>x[0]));
+for(const [id,zh] of expectedQuestions)assert.equal(ECR_BOOK_CORE_THEORY_RUNTIME.questions[id].questionZhHans,zh);
 
-assert.deepEqual(RUNTIME_CAPABILITIES.map(x=>[x.id,x.label,x.bookZh]),[
+const expectedCapabilities=[
   ['R1','Direction','方向能力'],['R2','Understanding','理解能力'],['R3','Expression','表达能力'],['R4','Position','位置能力'],['R5','Resources','资源能力'],['R6','Execution','执行能力'],['R7','Relational','关系能力'],['R8','Survival','生存能力'],['R9','Drive','驱动能力']
-]);
-assert.deepEqual(RUNTIME_DRIVERS.map(x=>[x.id,x.label,x.zh]),[
+];
+assert.deepEqual(ECR_BOOK_CORE_THEORY_RUNTIME.capabilities.map(x=>[x.id,x.label,x.bookZh]),expectedCapabilities);
+assert.deepEqual(RUNTIME_CAPABILITIES.map(x=>[x.id,x.label]),expectedCapabilities.map(x=>x.slice(0,2)));
+const expectedDrivers=[
   ['D1','Solar','太阳驱动'],['D2','Lunar','月亮驱动'],['D3','Mercurial','水星驱动'],['D4','Venusian','金星驱动'],
   ['D5','Martial','火星驱动'],['D6','Jovian','木星驱动'],['D7','Saturnian','土星驱动'],['D8','Uranian','天王星驱动'],
   ['D9','Neptunian','海王星驱动'],['D10','Plutonian','冥王星驱动'],['D11','Chiron','凯龙星驱动'],['D12','Nodal','交点驱动']
-]);
+];
+assert.deepEqual(ECR_BOOK_CORE_THEORY_RUNTIME.drivers.map(x=>[x.id,x.label,x.zh]),expectedDrivers);
+assert.deepEqual(RUNTIME_DRIVERS.map(x=>[x.id,x.label]),expectedDrivers.map(x=>x.slice(0,2)));
 
 assert.deepEqual(motion.entries.map(x=>[x.motionId,x.trigramCode,x.labelZhHans]),[
   ['M1','KUN','承载运动'],['M2','ZHEN','启动运动'],['M3','KAN','流动运动'],['M4','XUN','渗透运动'],
@@ -81,10 +88,11 @@ assert.equal(layers.rules.ecrOwnsSeparateG16,false);
 assert.equal(layers.rules.ecrOwnsSeparateQ16,false);
 assert.equal(layers.rules.ecrOwnsSeparateR9,false);
 assert.equal(layers.rules.ecrOwnsSeparateD12,false);
-assert.match(layers.layers.find(x=>x.code==='G').authorityRef,/grammar-registry\.js$/);
-assert.match(layers.layers.find(x=>x.code==='Q').authorityRef,/fundamental-question-registry\.js$/);
-assert.match(layers.layers.find(x=>x.code==='R').authorityRef,/book-1-runtime-model\.js#RUNTIME_CAPABILITIES$/);
-assert.match(layers.layers.find(x=>x.code==='D').authorityRef,/book-1-runtime-model\.js#RUNTIME_DRIVERS$/);
+assert.match(layers.layers.find(x=>x.code==='G').authorityRef,/ecr-book-core-theory-projection-v1\.json#grammar$/);
+assert.match(layers.layers.find(x=>x.code==='Q').authorityRef,/ecr-book-core-theory-projection-v1\.json#questions$/);
+assert.match(layers.layers.find(x=>x.code==='R').authorityRef,/ecr-book-core-theory-projection-v1\.json#capabilities$/);
+assert.match(layers.layers.find(x=>x.code==='D').authorityRef,/ecr-book-core-theory-projection-v1\.json#drivers$/);
+assert.equal(layers.rules.pdsProtectedRuntimeRemainsImmutable,true);
 
 const ontology=getEcrCanonicalOntology();
 assert.equal(validateEcrCanonicalOntology().valid,true);
@@ -118,6 +126,9 @@ assert.equal(acceptance.status,'R4B_R3R1_ACCEPTED_BY_EXECUTABLE_CHECKS');
 assert.equal(acceptance.claims.ecrReconciledToBook,true);
 assert.equal(acceptance.claims.bookRewrittenToMatchEcr,false);
 assert.equal(acceptance.claims.activationCalculationBlocked,false);
+assert.equal(acceptance.claims.pdsProtectedRuntimeMutated,false);
+assert.equal(acceptance.claims.bookAlignedDerivedProjectionCreated,true);
+assert.equal(fs.existsSync('functions/runtime/formation/fundamental-question-registry.js'),false);
 assert.equal(acceptance.nextSequentialWork,'CX-R12R4B-R4-W31R_ECR_CALCULATION_SPECIFICATION_AND_CANONICAL_PROJECTION');
 
 const r2Checker=fs.readFileSync('scripts/check-cx-r12r4b-r2-external-profile-confirmation-shadow.mjs','utf8');

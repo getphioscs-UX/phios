@@ -32,12 +32,12 @@ export const ECR_CALCULATION_SPEC_RUNTIME = Object.freeze({
       "rule": "EQUAL_SECTOR",
       "count": 16,
       "sectorDegrees": 22.5,
-      "source": "functions/runtime/formation/grammar-registry.js"
+      "source": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#grammar"
     },
     "Q16": {
       "rule": "GRAMMAR_ORDINAL_PAIR",
       "description": "Qn pairs with Gn for the baseline ECR coordinate; current Reality may later activate a different question through Runtime Decision Stack evidence.",
-      "source": "functions/runtime/formation/fundamental-question-registry.js"
+      "source": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json#questions"
     },
     "R9": {
       "rule": "QUESTION_CAPABILITY_MATRIX_V1",
@@ -176,6 +176,10 @@ export const ECR_CALCULATION_SPEC_RUNTIME = Object.freeze({
     "rawHumanDesignMechanicsConsumed": false,
     "currentRealityPriorityClaimed": false,
     "customerMeaningCreatedByCalculation": false
+  },
+  "governance": {
+    "pdsProtectedRuntimeMutationRequired": false,
+    "bookCoreTheoryProjection": "content/embodied-configuration/ecr-book-core-theory-projection-v1.json"
   }
 });
 export default ECR_CALCULATION_SPEC_RUNTIME;
