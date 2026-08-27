@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {spawnSync} from 'node:child_process';
+import {LIVE_SHA_EVIDENCE,LIVE_CAPABILITY_EVIDENCE,readJson,writeJson,git,resolveCloudflareSession,resolveRuntimeDbConfig,verifyRuntimeDbSchema,writeAuthorityRecord,waitForTarotAuthority,runLiveSmoke,fail} from './lib/tarot/production-capability-promotion-v2.mjs';
+const root=process.cwd();
+const readiness=spawnSync('npm',['run','check:tarot-product-activation-phase-m-readiness'],{cwd:root,stdio:'inherit',shell:true});if(readiness.status!==0)process.exit(readiness.status??1);
+try{git('fetch','origin','--quiet');}catch(error){throw fail('TAROT_M_GIT_FETCH_FAILED',error?.message||'git fetch failed');}
+const head=git('rev-parse','HEAD'),originMain=git('rev-parse','origin/main');assert.equal(head,originMain,'Promote only the pushed origin/main commit.');
+const phaseL=readJson(LIVE_SHA_EVIDENCE);assert.equal(phaseL.alignment?.verified,true,'Run verify:tarot-production-sha for this release first.');assert.equal(phaseL.alignment.deployedCommit,head,'Phase-L evidence must match current HEAD.');assert.equal(phaseL.repository?.originMain,head,'Phase-L origin/main mismatch.');
+const session=await resolveCloudflareSession(root);const db=resolveRuntimeDbConfig(root);const schema=await verifyRuntimeDbSchema(session,db,phaseL);
+let authority=null,smoke=null,status=null;
+try{authority=await writeAuthorityRecord(session,db,phaseL,{active:true});status=await waitForTarotAuthority({sha:head});smoke=await runLiveSmoke({sha:head});}
+catch(error){try{await writeAuthorityRecord(session,db,phaseL,{active:false,reason:error?.code||error?.message||'LIVE_SMOKE_FAILED'});}catch{}throw error;}
+const evidence={schemaVersion:'PHI-OS-TAROT-PRODUCTION-CAPABILITY-LIVE-EVIDENCE-v1.0.0',phase:'TPA-M',work:'M-W57-M-W58',status:'LIMITED_PRODUCTION_LIVE_VERIFIED',verifiedAt:new Date().toISOString(),commit:head,phaseL:{evidencePath:LIVE_SHA_EVIDENCE,deployedCommit:phaseL.alignment.deployedCommit,verified:true},cloudflare:{accountId:phaseL.cloudflare.accountId,projectName:phaseL.cloudflare.projectName,productionUrl:phaseL.cloudflare.productionUrl},runtimeDb:{...db,...schema,newMigrationCreated:false},authority:{schemaVersion:authority.schemaVersion,state:authority.state,runAllowed:authority.runAllowed,approvedCommitSha:authority.approvedCommitSha,productionCapabilityPromoted:authority.productionCapabilityPromoted},statusWitness:{status:status.status,production:status.payload.production},smoke,boundaries:authority.boundaries,persistence:authority.persistence};writeJson(LIVE_CAPABILITY_EVIDENCE,evidence);
+console.log('✓ TPA-MR Tarot LIMITED_PRODUCTION promotion verified.');console.log(`  approved/deployed SHA: ${head}`);console.log(`  D1: ${db.databaseName} (${db.binding})`);console.log('  live smoke: 1-card + 3-card + bilingual + sensitive + adversarial + guest persistence boundary passed.');console.log(`  operational evidence: ${LIVE_CAPABILITY_EVIDENCE}`);

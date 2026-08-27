@@ -1,0 +1,1 @@
+import {spawnSync} from 'node:child_process';for(const s of ['check:tarot-product-activation-phase-mr-readiness']){const r=spawnSync('npm',['run',s],{stdio:'inherit',shell:true});if(r.status!==0)process.exit(r.status??1);}console.log('✓ Tarot current v4 passed: M-R canonical route source is ready; live promotion remains exact-SHA server-gated.');
