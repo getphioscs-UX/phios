@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-HDR-SHADOW-BOUNDARY-v1.0.0",
+  "work": "CX-R12R4B-W11R",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "HDR_SHADOW_VALIDATION_ONLY_PRESERVED",
+  "methodId": "HDR",
+  "methodCode": "HUMAN_DESIGN",
+  "authorityClass": "INTERNAL_VALIDATION_ONLY",
+  "existingAuthorityRefs": [
+    "content/professional/core-method-runtime/hdr-production-freeze-v1.json",
+    "content/professional/hdr2/audits/hdr2-existing-calculation-authority-audit-v1.json",
+    "content/professional/method-production-activation/registries/mpa-hdr-boundary-readiness-v1.json"
+  ],
+  "allowedUses": [
+    "INTERNAL_VALIDATION",
+    "QA",
+    "DISCREPANCY_DETECTION",
+    "DEVELOPMENT_REPLAY"
+  ],
+  "forbiddenUses": [
+    "CUSTOMER_CALCULATED_HUMAN_DESIGN",
+    "CUSTOMER_REPORT_AUTHORITY",
+    "CROSS_METHOD_CONSENSUS_AUTHORITY",
+    "AUTO_FILL_CUSTOMER_CONFIRMED_EXTERNAL_PROFILE",
+    "CUSTOMER_MEANING_AUTHORITY"
+  ],
+  "production": {
+    "customerVisible": false,
+    "reportEligible": false,
+    "crossMethodEligible": false,
+    "productionEligible": false,
+    "validationOnly": true
+  },
+  "boundary": {
+    "customerSuppliedXpfIsSeparateAuthority": true,
+    "shadowMismatchMayOnlyCreateDiscrepancyFlag": true,
+    "shadowMayNotOverwriteCustomerInput": true,
+    "noNewHdrCalculationAuthorityCreated": true
+  }
+}

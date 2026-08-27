@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-EXTERNAL-PROFILE-EXTRACTION-IR-v1.0.0",
+  "title": "PHI OS External Profile Extraction IR",
+  "type": "object",
+  "required": ["schemaVersion", "intakeId", "profileFamily", "status", "sources", "candidates", "manualFields", "unresolved", "conflicts", "boundary"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-EXTERNAL-PROFILE-EXTRACTION-IR-v1.0.0"},
+    "intakeId": {"type": "string", "minLength": 1},
+    "profileFamily": {"const": "HUMAN_DESIGN"},
+    "status": {"enum": ["DOCUMENT_ACCEPTED_EXTRACTION_PENDING", "EXTRACTION_CANDIDATES_READY", "MANUAL_FIELDS_READY", "MIXED_INPUT_READY"]},
+    "sources": {"type": "array"},
+    "candidates": {"type": "array"},
+    "manualFields": {"type": "array"},
+    "unresolved": {"type": "array"},
+    "conflicts": {"type": "array"},
+    "boundary": {"type": "object"}
+  },
+  "additionalProperties": false
+}

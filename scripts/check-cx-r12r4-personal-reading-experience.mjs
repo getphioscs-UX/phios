@@ -37,7 +37,7 @@ assert.match(html,/One person\. More than one perspective\./);assert.match(html,
 assert.match(html,/PHIOS-FIGURE-READING-AUTHORITY-STACK-v1\.svg/);assert.match(html,/PHIOS-FIGURE-PERSONAL-PERSPECTIVE-CONSTELLATION-v1\.svg/);assert.match(html,/PHIOS-FIGURE-PERSONAL-READING-FLOW-v1\.svg/);
 assert(html.indexOf('data-cx-method-selection')<html.indexOf('name="birthDate"'),'method selection must appear before birth inputs');
 assert.equal((html.match(/name="methods"/g)||[]).length,4,'only four birth-based methods may be selectable here');
-assert.match(html,/href="\/perspectives\/iching\/"/);assert.match(html,/href="\/perspectives\/tarot\/"/);assert.match(html,/Not available here yet/);
+assert.match(html,/href="\/perspectives\/iching\/"/);assert.match(html,/href="\/perspectives\/tarot\/"/);assert.match(html,/Optional external context/);assert.equal((html.match(/name="methods"/g)||[]).length,4,'Human Design external context must not become a calculated method checkbox');
 assert.match(html,/data-cx-adaptive-input/);assert.match(html,/data-cx-reading-contract/);assert.match(html,/data-cx-reading-map/);
 assert.match(js,/METHOD_REQUIREMENTS/);assert.match(js,/requirementsFor/);assert.match(js,/renderReadingMap/);assert.match(js,/req\.place&&!selectedCandidate/);assert.match(api,/const needsPlace=selected\.some/);assert.match(api,/location=null;\s*if\(needsPlace\)/);assert.match(api,/const birthPlace=location\s*\?/);assert.match(api,/source:'GOVERNED_RESOLUTION'/);assert.match(api,/source:'UNKNOWN'/);
 assert.equal(iconRecon.authorityBoundary.createsSecondGlobalIconAuthority,false);assert.equal(iconRecon.authorityBoundary.createsSecondAssetResolver,false);assert.equal(iconRecon.forbiddenNewIdentities.includes('PERSPECTIVE_NOT_FACT'),true);
