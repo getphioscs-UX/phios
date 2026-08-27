@@ -16,7 +16,8 @@ function productionCopy(state){
   const labels={
     HUMAN_ACCEPTANCE_PENDING:{en:'Human acceptance pending',zh:'人工验收待完成'},
     HUMAN_AND_SOURCE_BROWSER_ACCEPTED_LIVE_PERSISTENCE_SHA_PROMOTION_PENDING:{en:'Human + browser acceptance complete · live activation gates remain',zh:'人工与浏览器验收已完成 · live activation gates 仍待完成'},
-    LIMITED_PRODUCTION:{en:'Limited Production',zh:'有限生产'}
+    LIMITED_PRODUCTION:{en:'Limited Production',zh:'有限生产'},
+    FULL_PRODUCTION:{en:'Full Production · Permanent authority',zh:'正式生产 · 永久授权'}
   };
   return labels[state]?.[isZh()?'zh':'en']||human(state);
 }
@@ -32,15 +33,25 @@ async function loadContext(){
     if(!contextPayload?.ok)throw new Error('context');
     const contextRun=contextPayload.production?.runAllowed===true;
     const statusRun=statusPayload?.production?.runAllowed===true;
-    const sameCommit=!contextRun||!statusRun||contextPayload.production?.approvedCommitSha===statusPayload.production?.approvedCommitSha;
-    const serverAuthorityOk=contextRun&&statusRun&&sameCommit&&statusPayload?.production?.clientMayGrantAuthority===false;
+    const sameRelease=!contextRun||!statusRun||(!contextPayload.production?.releaseId&&!statusPayload?.production?.releaseId)||contextPayload.production?.releaseId===statusPayload.production?.releaseId;
+    const sameAuthorityDigest=!contextRun||!statusRun||(!contextPayload.production?.authorityDigest&&!statusPayload?.production?.authorityDigest)||contextPayload.production?.authorityDigest===statusPayload.production?.authorityDigest;
+    const serverAuthorityOk=contextRun&&statusRun&&sameRelease&&sameAuthorityDigest&&statusPayload?.production?.clientMayGrantAuthority===false;
     const methodName=method==='I_CHING'?'I Ching · 易经':'Tarot · 塔罗';
     q('[data-method-context]').innerHTML=`<strong>${escape(methodName)}</strong><p>${escape(isZh()?'这个方法提供结构化的解释视角。它不建立事实，也不保证预测结果。':contextPayload.contextCopy)}</p>`;
     q('[data-symbolic-production-state]').textContent=productionCopy(contextPayload.production.state);
     const d=contextPayload.realityContext;
     q('[data-reality-context-disclosure]').innerHTML=`<strong>${escape(d.label)}</strong>${d.contextItems?.length?`<ul>${d.contextItems.map(x=>`<li>${escape(x.label)}: ${escape(x.value)}</li>`).join('')}</ul>`:''}`;
     const execute=q('[data-symbolic-execute]');
-    if(execute)execute.disabled=!serverAuthorityOk;
+    if(execute){
+      execute.disabled=!serverAuthorityOk;
+      execute.setAttribute('aria-disabled',String(!serverAuthorityOk));
+    }
+    const executionStatus=q('[data-execution-status]');
+    if(executionStatus){
+      executionStatus.textContent=serverAuthorityOk
+        ?localeText('Tarot Full Production is active. Enter a question and explore the perspective.','Tarot 正式生产已启用。输入问题后即可探索视角。')
+        :localeText(`Tarot execution is not active: ${statusPayload?.production?.state||contextPayload.production?.state||'SERVER_AUTHORITY_UNAVAILABLE'}`,`Tarot 执行尚未启用：${statusPayload?.production?.state||contextPayload.production?.state||'SERVER_AUTHORITY_UNAVAILABLE'}`);
+    }
     q('[data-symbolic-save]').disabled=!(contextPayload.account?.saveContractAvailable&&currentView);
     q('[data-save-status]').textContent=contextPayload.account?.state==='ACCOUNT'
       ?localeText('Save requires verified identity + configured persistence provider.','保存需要经过验证的账号身份与已配置的持久化服务。')
