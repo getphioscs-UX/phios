@@ -37,16 +37,7 @@ function installStyles(){
 function setText(node,en,zh){if(!node)return;const next=t(en,zh);if(text(node.textContent)!==next)node.textContent=next;}
 
 function sanitizeCustomerCopy(){
-  const gate=q('.cx-iching-gate');
-  if(gate){
-    setText(gate.querySelector('.cx-eyebrow'),'READING STATUS','阅读状态');
-    setText(gate.querySelector('.cx-title'),
-      'Choose how you want to form the hexagram, then continue into the reading.',
-      '选择你想采用的起卦方式，然后继续进入这次阅读。');
-    setText(gate.querySelector('.cx-muted'),
-      'PHI OS checks that the reading service is available before it begins. You do not need to manage any technical settings.',
-      'PHI OS 会在开始前自动确认阅读服务是否可用；你不需要处理任何技术设置。');
-  }
+  prepareCustomerWorkspace();
   const intro=q('[data-iching-results] .cx-iching-result-intro');
   if(intro){
     setText(intro.querySelector('.cx-eyebrow'),'YOUR READING','这次阅读');
@@ -61,6 +52,59 @@ function sanitizeCustomerCopy(){
   if(sources)setText(sources,'View original sources','查看原典来源');
   sanitizeProductionState();
   syncManualOptions();
+}
+
+function prepareCustomerWorkspace(){
+  const question=q('[data-iching-question]');
+  if(question){
+    question.disabled=false;
+    question.readOnly=false;
+    question.removeAttribute('aria-disabled');
+    question.style.pointerEvents='auto';
+    question.style.position='relative';
+    question.style.zIndex='1';
+    if(question.tabIndex<0)question.tabIndex=0;
+  }
+
+  const boundary=q('.cx-iching-boundary');
+  if(boundary){
+    const hero=boundary.closest('.cx-iching-hero');
+    boundary.remove();
+    if(hero)hero.style.gridTemplateColumns='minmax(0,1fr)';
+  }
+
+  const casting=q('.cx-casting-surface');
+  const gate=q('.cx-iching-gate');
+  const execute=q('[data-iching-execute]');
+  const executionStatus=q('[data-execution-status]');
+  if(casting&&gate&&execute&&!q('[data-customer-reading-action]')){
+    const bar=document.createElement('div');
+    bar.className='cx-reading-action-bar';
+    bar.dataset.customerReadingAction='';
+    bar.innerHTML=`<div><strong>${escape(t('Continue when your casting input is ready','起卦资料准备好后继续'))}</strong><span>${escape(t('The reading will appear directly below.','完成后会直接带你进入下方阅读结果。'))}</span></div>`;
+    if(executionStatus)bar.append(executionStatus);
+    bar.append(execute);
+    const guide=casting.querySelector('[data-self-casting-guide]');
+    if(guide)casting.insertBefore(bar,guide);else casting.append(bar);
+    const gateSection=gate.closest('section');
+    if(gateSection)gateSection.hidden=true;else gate.hidden=true;
+  }else if(gate){
+    const gateSection=gate.closest('section');
+    if(gateSection)gateSection.hidden=true;else gate.hidden=true;
+  }
+
+  const context=q('[data-reality-context-disclosure]');
+  if(context&&/not being used|没有使用 Reality context/i.test(text(context.textContent)))context.hidden=true;
+
+  for(const button of qa('[data-iching-cast-mode]')){
+    if(button.dataset.customerGuideBinding==='true')continue;
+    button.dataset.customerGuideBinding='true';
+    button.addEventListener('click',()=>{
+      const mode=button.dataset.ichingCastMode;
+      const guide=q('[data-self-casting-guide]');
+      if(guide&&(mode==='MANUAL_LINES'||mode==='COIN_CAST'))guide.open=true;
+    });
+  }
 }
 
 function sanitizeProductionState(){
@@ -276,6 +320,8 @@ function simplifySources(){
 
 function enhanceResults(view=latestView){
   if(!view)return;
+  const resultRoot=q('[data-iching-results]');
+  if(resultRoot)resultRoot.dataset.customerEnhanced='true';
   sanitizeCustomerCopy();
   enhanceMethodEvidence(view);
   enhanceInterpretation(view);
@@ -340,6 +386,7 @@ function installStatusObservers(){
 function installBodyObserver(){
   if(bodyObserver)return;
   bodyObserver=new MutationObserver(()=>{
+    prepareCustomerWorkspace();
     decorateCastingGuide();
     sanitizeCustomerCopy();
     observeResults();
@@ -356,6 +403,8 @@ function installExecuteCapture(){
     const url=urlOf(input);
     let nextInit=init;
     if(url.includes('/api/iching-full-execute')&&typeof init?.body==='string'){
+      const resultRoot=q('[data-iching-results]');
+      if(resultRoot)delete resultRoot.dataset.customerEnhanced;
       try{
         const body=JSON.parse(init.body);
         body.locale=locale();
@@ -377,6 +426,7 @@ function installExecuteCapture(){
 }
 
 function onLocaleChange(){
+  prepareCustomerWorkspace();
   sanitizeCustomerCopy();
   decorateCastingGuide();
   syncManualOptions();

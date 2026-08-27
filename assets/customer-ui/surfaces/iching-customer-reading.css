@@ -1,8 +1,14 @@
+/* Customer-only presentation extension for the frozen ICHING-1.0.1 runtime. */
+body[data-iching-customer-reading="ready"] .cx-iching-boundary{display:none!important}
+body[data-iching-customer-reading="ready"] .cx-iching-hero{grid-template-columns:minmax(0,1fr)!important;max-width:70rem}
+body[data-iching-customer-reading="ready"] .cx-iching-gate{display:none!important}
+body[data-iching-customer-reading="ready"] [data-reality-context-disclosure][hidden]{display:none!important}
+body[data-iching-customer-reading="ready"] [data-iching-question]{pointer-events:auto!important;position:relative;z-index:1}
+.cx-reading-action-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;border:1px solid var(--cx-border,#ddd8ce);border-radius:1rem;background:#f8f4e8}
+.cx-reading-action-bar>div{display:grid;gap:.2rem}.cx-reading-action-bar span{font-size:.88rem;color:var(--cx-text-muted,#6b675f)}
+.cx-reading-action-bar [data-execution-status]{margin:0;flex:1}.cx-reading-action-bar [data-iching-execute]{flex:0 0 auto}
 /* ICHING customer reading experience: presentation-only extension.
    Does not alter corpus, calculation, interpretation authority, or Full Production authority. */
-
-.cx-iching-gate .cx-title{max-width:24ch}
-.cx-iching-gate [data-iching-production-state][data-customer-state="ready"]{letter-spacing:.04em}
 
 .cx-iching-fieldset[data-reading-complete="true"]>*:not([data-reading-complete-summary]){display:none!important}
 .cx-reading-complete-summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.1rem;border:1px solid var(--cx-border,#ddd8ce);border-radius:1rem;background:var(--cx-surface-soft,#f3f0e8)}
@@ -70,3 +76,5 @@
   .cx-reading-depth__header{display:grid}
   .cx-reading-approved{justify-self:start}
 }
+
+@media(max-width:760px){.cx-reading-action-bar{align-items:flex-start;flex-direction:column}.cx-reading-action-bar [data-iching-execute]{width:100%}}
