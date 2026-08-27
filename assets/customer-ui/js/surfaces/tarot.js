@@ -12,52 +12,40 @@ const localeText=(en,zh)=>isZh()?zh:en;
 const human=v=>String(v??'').replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase());
 
 function productionCopy(state){
-  if(!state)return '';
-  const labels={
-    HUMAN_ACCEPTANCE_PENDING:{en:'Human acceptance pending',zh:'人工验收待完成'},
-    HUMAN_AND_SOURCE_BROWSER_ACCEPTED_LIVE_PERSISTENCE_SHA_PROMOTION_PENDING:{en:'Human + browser acceptance complete · live activation gates remain',zh:'人工与浏览器验收已完成 · live activation gates 仍待完成'},
-    LIMITED_PRODUCTION:{en:'Limited Production',zh:'有限生产'},
-    FULL_PRODUCTION:{en:'Full Production · Permanent authority',zh:'正式生产 · 永久授权'}
-  };
-  return labels[state]?.[isZh()?'zh':'en']||human(state);
+  if(state==='FULL_PRODUCTION')return localeText('Full Production · Permanent release authority','正式生产 · 永久 Release Authority');
+  if(state==='FULL_PRODUCTION_EXPLICITLY_REVOKED')return localeText('Full Production · explicitly revoked','正式生产 · 已显式撤销');
+  return human(state||'CHECKING');
 }
 async function loadContext(){
   const use=q('[data-use-reality-context]')?.checked===true;
+  const execute=q('[data-symbolic-execute]');
+  if(execute)execute.disabled=true;
   try{
-    const [r,statusResponse]=await Promise.all([
+    const [contextResponse,statusResponse]=await Promise.all([
       fetch(`/api/symbolic-method-context?method=${encodeURIComponent(method)}&useCurrentRealityContext=${use?'1':'0'}`,{cache:'no-store'}),
       fetch('/api/tarot-production-status',{cache:'no-store'})
     ]);
-    contextPayload=await r.json();
+    contextPayload=await contextResponse.json().catch(()=>null);
     const statusPayload=await statusResponse.json().catch(()=>null);
-    if(!contextPayload?.ok)throw new Error('context');
-    const contextRun=contextPayload.production?.runAllowed===true;
-    const statusRun=statusPayload?.production?.runAllowed===true;
-    const sameRelease=!contextRun||!statusRun||(!contextPayload.production?.releaseId&&!statusPayload?.production?.releaseId)||contextPayload.production?.releaseId===statusPayload.production?.releaseId;
-    const sameAuthorityDigest=!contextRun||!statusRun||(!contextPayload.production?.authorityDigest&&!statusPayload?.production?.authorityDigest)||contextPayload.production?.authorityDigest===statusPayload.production?.authorityDigest;
-    const serverAuthorityOk=contextRun&&statusRun&&sameRelease&&sameAuthorityDigest&&statusPayload?.production?.clientMayGrantAuthority===false;
-    const methodName=method==='I_CHING'?'I Ching · 易经':'Tarot · 塔罗';
-    q('[data-method-context]').innerHTML=`<strong>${escape(methodName)}</strong><p>${escape(isZh()?'这个方法提供结构化的解释视角。它不建立事实，也不保证预测结果。':contextPayload.contextCopy)}</p>`;
-    q('[data-symbolic-production-state]').textContent=productionCopy(contextPayload.production.state);
-    const d=contextPayload.realityContext;
-    q('[data-reality-context-disclosure]').innerHTML=`<strong>${escape(d.label)}</strong>${d.contextItems?.length?`<ul>${d.contextItems.map(x=>`<li>${escape(x.label)}: ${escape(x.value)}</li>`).join('')}</ul>`:''}`;
-    const execute=q('[data-symbolic-execute]');
-    if(execute){
-      execute.disabled=!serverAuthorityOk;
-      execute.setAttribute('aria-disabled',String(!serverAuthorityOk));
-    }
-    const executionStatus=q('[data-execution-status]');
-    if(executionStatus){
-      executionStatus.textContent=serverAuthorityOk
-        ?localeText('Tarot Full Production is active. Enter a question and explore the perspective.','Tarot 正式生产已启用。输入问题后即可探索视角。')
-        :localeText(`Tarot execution is not active: ${statusPayload?.production?.state||contextPayload.production?.state||'SERVER_AUTHORITY_UNAVAILABLE'}`,`Tarot 执行尚未启用：${statusPayload?.production?.state||contextPayload.production?.state||'SERVER_AUTHORITY_UNAVAILABLE'}`);
-    }
+    if(!contextResponse.ok||!contextPayload?.ok)throw new Error(contextPayload?.error?.code||'CONTEXT_UNAVAILABLE');
+    if(!statusResponse.ok||!statusPayload?.ok)throw new Error(statusPayload?.error?.code||'STATUS_UNAVAILABLE');
+    const a=contextPayload.production||{},b=statusPayload.production||{};
+    const sameRelease=a.releaseId&&a.releaseId===b.releaseId;
+    const sameDigest=a.authorityDigest&&a.authorityDigest===b.authorityDigest;
+    const serverAuthorityOk=a.runAllowed===true&&b.runAllowed===true&&a.state==='FULL_PRODUCTION'&&b.state==='FULL_PRODUCTION'&&sameRelease&&sameDigest&&b.clientMayGrantAuthority===false;
+    q('[data-method-context]').innerHTML=`<strong>${escape(localeText('Tarot · governed symbolic perspective','Tarot · 受治理的象征视角'))}</strong><p>${escape(localeText('The server performs the draw through the governed Tarot runtime. Interpretation does not establish facts or guaranteed outcomes.','服务器通过受治理的 Tarot Runtime 执行抽牌。解释不会建立事实，也不会保证预测结果。'))}</p>`;
+    q('[data-symbolic-production-state]').textContent=productionCopy(b.state||a.state);
+    const d=contextPayload.realityContext||{};
+    q('[data-reality-context-disclosure]').innerHTML=`<strong>${escape(d.label||localeText('Current Reality context is not being used.','Current Reality context 未被使用。'))}</strong>${d.contextItems?.length?`<ul>${d.contextItems.map(x=>`<li>${escape(x.label)}: ${escape(x.value)}</li>`).join('')}</ul>`:''}`;
+    if(execute)execute.disabled=!serverAuthorityOk;
+    q('[data-execution-status]').textContent=serverAuthorityOk?'':localeText(`Tarot is not runnable: ${b.state||a.state||'AUTHORITY_UNAVAILABLE'}`,`Tarot 尚不能运行：${b.state||a.state||'AUTHORITY_UNAVAILABLE'}`);
     q('[data-symbolic-save]').disabled=!(contextPayload.account?.saveContractAvailable&&currentView);
-    q('[data-save-status]').textContent=contextPayload.account?.state==='ACCOUNT'
-      ?localeText('Save requires verified identity + configured persistence provider.','保存需要经过验证的账号身份与已配置的持久化服务。')
-      :localeText('Guest sessions have no hidden persistent reading history.','访客会话不会建立隐藏的持久化读取历史。');
-  }catch{
-    q('[data-method-context]').textContent=localeText('Method context is unavailable. No execution was started.','方法上下文目前不可用，系统没有启动执行。');
+    q('[data-save-status]').textContent=contextPayload.account?.state==='ACCOUNT'?localeText('Saving requires verified identity, retention consent and the persistence provider.','保存需要已验证身份、保留同意与持久化服务。'):localeText('Guest sessions have no hidden persistent reading history.','访客会话不会建立隐藏的持久化读取历史。');
+  }catch(error){
+    if(execute)execute.disabled=true;
+    q('[data-symbolic-production-state]').textContent=localeText('Authority unavailable','授权不可用');
+    q('[data-method-context]').textContent=localeText('Tarot context could not be loaded.','Tarot 上下文无法载入。');
+    q('[data-execution-status]').textContent=localeText(`Tarot is not runnable: ${error.message}`,`Tarot 尚不能运行：${error.message}`);
   }
 }
 function list(items,{empty='—'}={}){
@@ -175,10 +163,10 @@ async function execute(){
   finally{await loadContext();}
 }
 
-qa('[data-method]').forEach(b=>b.setAttribute('aria-pressed','true'));
 q('[data-use-reality-context]')?.addEventListener('change',loadContext);
-q('[data-view-sources]')?.addEventListener('click',event=>{const s=q('[data-source-list]');const open=s.hidden; s.hidden=!open;event.currentTarget.setAttribute('aria-expanded',String(open));});
+q('[data-view-sources]')?.addEventListener('click',event=>{const source=q('[data-source-list]');const open=source.hidden;source.hidden=!open;event.currentTarget.setAttribute('aria-expanded',String(open));});
 q('[data-symbolic-execute]')?.addEventListener('click',execute);
-q('[data-symbolic-save]')?.addEventListener('click',async()=>{if(!currentView)return;const body={question:q('[data-symbolic-question]').value,methodEvidence:currentView.hierarchy?.[1]?.data,projection:currentView.hierarchy?.[2]?.data,reading:currentView,userNotes:''};const r=await fetch('/api/symbolic-method-save',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});const p=await r.json().catch(()=>null);q('[data-save-status]').textContent=p?.ok?localeText('Saved.','已保存。'):p?.error?.code||localeText('Save unavailable.','暂时无法保存。');});
-window.addEventListener('puxr:localechange',()=>{loadContext();if(currentView)renderSymbolicView(currentView);});
-setMethod(method);
+q('[data-symbolic-question]')?.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();q('[data-symbolic-execute]')?.click();}});
+q('[data-symbolic-save]')?.addEventListener('click',async()=>{if(!currentView)return;const body={question:q('[data-symbolic-question]').value,methodEvidence:currentView.hierarchy?.[1]?.data,projection:currentView.hierarchy?.[2]?.data,reading:currentView,userNotes:''};const r=await fetch('/api/symbolic-method-save',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});const payload=await r.json().catch(()=>null);q('[data-save-status]').textContent=payload?.ok?localeText('Saved.','已保存。'):payload?.error?.code||localeText('Save unavailable.','暂时无法保存。');});
+window.addEventListener('phios:localechange',()=>{loadContext();if(currentView)renderSymbolicView(currentView);});
+loadContext();

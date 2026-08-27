@@ -1,4 +1,4 @@
-import {resolveTarotExecutionAuthority} from '../tarot-product-runtime/tarot-production-authority-v3.js';
+import {resolveTarotExecutionAuthority} from '../tarot-product-runtime/tarot-production-authority.js';
 const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','referrer-policy':'no-referrer','x-content-type-options':'nosniff'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers});
 export async function onRequestGet(context){

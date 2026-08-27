@@ -1,7 +1,7 @@
 import {normalizeTrustedCkaAccess,assertCkaRealityContextAuthorization,projectCkaRealityContextDisclosure} from '../_lib/client-knowledge-ask-c.js';
 import {inspectIChingExecutionAuthority} from '../iching-product-runtime/iching-execution-authority-v1.js';
 import {symbolicPersistenceProviderState} from '../symbolic-method-persistence/symbolic-account-identity-v1.js';
-import {resolveTarotExecutionAuthority} from '../tarot-product-runtime/tarot-production-authority-v3.js';
+import {resolveTarotExecutionAuthority} from '../tarot-product-runtime/tarot-production-authority.js';
 const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','referrer-policy':'no-referrer','x-content-type-options':'nosniff'};const json=(x,s=200)=>new Response(JSON.stringify(x),{status:s,headers});
 const METHODS=new Set(['I_CHING','TAROT']);
 const SOURCE_READY=Object.freeze({sourceReady:true,structuralRuntimeFrozen:true,interpretationSourceBound:true,automaticPersistence:false});

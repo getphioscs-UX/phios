@@ -1,7 +1,7 @@
 import {executeIChingProductRuntime} from '../iching-product-runtime/iching-product-runtime-v1.js';
 import {inspectIChingExecutionAuthority} from '../iching-product-runtime/iching-execution-authority-v1.js';
-import {resolveTarotExecutionAuthority} from '../tarot-product-runtime/tarot-production-authority-v3.js';
-import {executeTarotProductRuntime} from '../tarot-product-runtime/tarot-product-runtime-v2.js';
+import {resolveTarotExecutionAuthority} from '../tarot-product-runtime/tarot-production-authority.js';
+import {executeTarotProductRuntime} from '../tarot-product-runtime/tarot-product-runtime.js';
 
 const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','referrer-policy':'no-referrer'};
 const json=(x,s=200)=>new Response(JSON.stringify(x),{status:s,headers});
@@ -37,17 +37,16 @@ async function loadAuthority(context,path,code){
 }
 async function loadAuthorities(context,paths,code){const entries=await Promise.all(Object.entries(paths).map(async([key,path])=>[key,await loadAuthority(context,path,code)]));return Object.freeze(Object.fromEntries(entries));}
 function closed(state='PRODUCTION_AUTHORITY_PENDING'){
-  return json({ok:false,error:{code:'SYMBOLIC_LIMITED_PRODUCTION_NOT_ACTIVATED',message:'Public execution is available only when the trusted server-side production authority is active for the exact deployed commit.'},production:{state,runAllowed:false}},423);
+  return json({ok:false,error:{code:'SYMBOLIC_PRODUCTION_AUTHORITY_NOT_ACTIVE',message:'Public execution is unavailable because the trusted server-side production authority is not active.'},production:{state,runAllowed:false}},423);
 }
 async function executeIChing(context,request){
   const activation=inspectIChingExecutionAuthority(context);if(!activation.authorized)return closed(activation.state);
   try{const authorities=await loadAuthorities(context,ICHING_AUTHORITY_PATHS,'ICHING');const result=await executeIChingProductRuntime({...request,method:'I_CHING'},authorities);return json({...result,production:{...result.production,state:activation.state,runAllowed:true,limitedProductionActivated:true}},200);}
   catch(error){return json({ok:false,error:{code:'ICHING_PRODUCT_EXECUTION_REJECTED',message:String(error?.message||'Execution rejected.')},production:{state:activation.state,runAllowed:true}},400);}
 }
-function tarotClosed(state='FULL_PRODUCTION_AUTHORITY_PENDING'){return json({ok:false,error:{code:'TAROT_FULL_PRODUCTION_AUTHORITY_NOT_ACTIVE',message:'Tarot execution requires the trusted release-scoped FULL_PRODUCTION server authority.'},production:{state,runAllowed:false}},423);}
 async function executeTarot(context,request){
-  const activation=await resolveTarotExecutionAuthority(context);if(!activation.authorized)return tarotClosed(activation.state);
-  try{const authorities=await loadAuthorities(context,TAROT_PRODUCTION_AUTHORITY_PATHS,'TAROT');const result=await executeTarotProductRuntime({...request,method:'TAROT'},authorities);return json({...result,production:{...result.production,state:activation.state,runAllowed:true,fullProduction:true,limitedProductionActivated:false,authorityScope:activation.authorityScope,authorityDigest:activation.authorityDigest,promotionCommitSha:activation.promotionCommitSha}},200);}
+  const activation=await resolveTarotExecutionAuthority(context);if(!activation.authorized)return closed(activation.state);
+  try{const authorities=await loadAuthorities(context,TAROT_PRODUCTION_AUTHORITY_PATHS,'TAROT');const result=await executeTarotProductRuntime({...request,method:'TAROT'},authorities);return json({...result,production:{...result.production,state:activation.state,runAllowed:true,fullProduction:true,limitedProductionActivated:false,releaseId:activation.releaseId,authorityDigest:activation.authorityDigest}},200);}
   catch(error){return json({ok:false,error:{code:'TAROT_PRODUCT_EXECUTION_REJECTED',message:String(error?.message||'Execution rejected.')},production:{state:activation.state,runAllowed:true}},400);}
 }
 export async function onRequestPost(context){

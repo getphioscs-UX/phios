@@ -1,21 +1,21 @@
 {
-  "schemaVersion": "PHI-OS-TAROT-FULL-PRODUCTION-CONTRACT-v1.0.0",
+  "schemaVersion": "PHI-OS-TAROT-FULL-PRODUCTION-CONTRACT-v1.1.0",
   "releaseId": "TAROT-1.0.0",
   "methodCode": "TAROT",
   "targetState": "FULL_PRODUCTION",
   "globalPublicExecution": true,
   "executionAuthority": {
-    "provider": "RUNTIME_DB_D1",
+    "provider": "DEPLOYED_RELEASE_AUTHORITY",
     "authorityScope": "RELEASE",
-    "authorityDigest": "37390abc285242db253759beab14d7f83a7a1f6489f1e0ec42917cbdd85593b6",
-    "initialPromotionExactDeployedCommitRequired": true,
-    "subsequentExactDeployedCommitRequired": false,
+    "authorityDigest": "1af9a57c7e7e2e23e235d709dda6c0cfc48d73f5d6f74878bc843dcbd01bca4a",
+    "runtimeDbActivationRecordRequired": false,
+    "ordinaryDeploymentRequiresRepromotion": false,
     "deploymentContinuityAcrossUnrelatedCommits": true,
     "releaseIdMustRemainCurrent": true,
     "authorityDigestMustMatch": true,
     "clientMayGrantAuthority": false,
-    "staticRegistryMayGrantAuthority": false,
-    "timeExpiryAllowed": false
+    "timeExpiryAllowed": false,
+    "explicitServerRevocationSupported": true
   },
   "temporaryAuthority": {
     "betaSessionMayExpire": true,
@@ -23,6 +23,7 @@
     "fullProductionAuthorityMayExpire": false
   },
   "persistence": {
+    "executionDoesNotRequireAccountPersistence": true,
     "guestPersistence": false,
     "accountSaveRequiresVerifiedServerIdentity": true,
     "accountSaveRequiresRetentionPolicy": true
