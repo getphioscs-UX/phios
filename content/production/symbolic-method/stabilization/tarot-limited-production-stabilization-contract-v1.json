@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-LIMITED-PRODUCTION-STABILIZATION-CONTRACT-v1.0.0",
+  "phase": "TPA-N",
+  "work": "N-W59-N-W67",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "ACTIVE_LIMITED_PRODUCTION_STABILIZATION",
+  "methodCode": "TAROT",
+  "productionState": "LIMITED_PRODUCTION",
+  "canonicalRoute": "/perspectives/tarot/",
+  "runtimeAuthorityEndpoint": "/api/tarot-production-status",
+  "executeEndpoint": "/api/symbolic-method-execute",
+  "contextEndpoint": "/api/symbolic-method-context?method=TAROT",
+  "saveEndpoint": "/api/symbolic-method-save",
+  "runtimeShaWitness": "/api/ask2-runtime-status",
+  "workstream": {
+    "N-W59": {
+      "name": "Production Observability",
+      "mode": "OPERATOR_PROBE_BASED",
+      "records": [
+        "statusClass",
+        "latencyMs",
+        "authorityState",
+        "denialCode",
+        "deployedSha",
+        "approvedSha"
+      ],
+      "mustNotRecord": [
+        "questionText",
+        "readingText",
+        "userNotes",
+        "email",
+        "accountId",
+        "ipAddress",
+        "accessCookie",
+        "authorizationHeader"
+      ]
+    },
+    "N-W60": {
+      "name": "Runtime Error Taxonomy",
+      "registry": "content/production/symbolic-method/stabilization/tarot-production-error-taxonomy-v1.json",
+      "unknownErrorsFailClosed": true
+    },
+    "N-W61": {
+      "name": "Production Replay Integrity",
+      "manualReplayCases": 2,
+      "sameGovernedInputMustProduceSameSemanticDigest": true,
+      "volatileFieldsExcluded": [
+        "sessionId",
+        "timestamp",
+        "generatedAt"
+      ]
+    },
+    "N-W62": {
+      "name": "SHA Rollover Fail-Closed Campaign",
+      "previousApprovedSha": "a9556d446cb289787fceea611341d7dd67de5dcf",
+      "requiresFutureSuccessorDeployment": true,
+      "beforeRepromotionRunAllowed": false,
+      "executeStatusBeforeRepromotion": 423,
+      "oldAuthorityMayAuthorizeNewSha": false
+    },
+    "N-W63": {
+      "name": "Sensitive Domain Production Sampling",
+      "domains": [
+        "MEDICAL",
+        "MENTAL_HEALTH",
+        "FINANCIAL",
+        "LEGAL",
+        "PREGNANCY",
+        "DEATH",
+        "RELATIONSHIP",
+        "THIRD_PARTY_HIDDEN_STATE"
+      ],
+      "predictionAuthority": false,
+      "diagnosticAuthority": false,
+      "hiddenStateAuthority": false,
+      "professionalDirectiveAuthority": false
+    },
+    "N-W64": {
+      "name": "Abuse Reroll Authority Pressure",
+      "pressureCases": [
+        "REROLL_UNTIL_DESIRED",
+        "CERTAINTY_PRESSURE",
+        "DECISION_DELEGATION",
+        "HIDDEN_STATE_PRESSURE"
+      ],
+      "decisionAuthority": "USER",
+      "tarotMayCompelAction": false
+    },
+    "N-W65": {
+      "name": "Account Persistence Activation Readiness",
+      "guestHiddenPersistence": false,
+      "guestSaveMustRemainBlocked": true,
+      "accountSaveRequiresVerifiedServerIdentityAndRetention": true,
+      "automaticPersistence": false
+    },
+    "N-W66": {
+      "name": "Limited Production Stability Window",
+      "minimumHours": 24,
+      "minimumObservations": 3,
+      "minimumSpacingHours": 4,
+      "allObservationsMustUseExactPromotedSha": true,
+      "zeroUnauthorizedPersistenceRequired": true,
+      "zeroAuthorityBoundaryFailuresRequired": true
+    },
+    "N-W67": {
+      "name": "Full Production Eligibility Gate",
+      "stabilizationDoesNotAutoPromote": true,
+      "fullProductionDefault": false,
+      "requiresRolloverEvidence": true,
+      "requiresCompletedStabilityWindow": true,
+      "requiresExplicitFuturePromotionWork": true
+    }
+  },
+  "evidencePolicy": {
+    "operationalDirectory": ".runtime-evidence",
+    "committed": false,
+    "ledger": ".runtime-evidence/tarot-limited-production-stability-ledger-v1.json",
+    "rollover": ".runtime-evidence/tarot-sha-rollover-evidence-v1.json",
+    "fullProductionEligibility": ".runtime-evidence/tarot-full-production-eligibility-v1.json"
+  },
+  "authorityBoundary": {
+    "observabilityMayGrantRunAllowed": false,
+    "stabilityEvidenceMayGrantFullProduction": false,
+    "staticRegistryMayGrantRunAllowed": false,
+    "clientMayGrantAuthority": false,
+    "newMigrationAllowed": false,
+    "decisionAuthority": "USER"
+  }
+}

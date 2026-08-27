@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "PHI-OS-TAROT-LIMITED-PRODUCTION-OBSERVATION-CAMPAIGN-v1.0.0",
+  "phase": "TPA-N",
+  "work": "N-W59-N-W66",
+  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
+  "status": "ACTIVE_OPERATOR_CAMPAIGN",
+  "methodCode": "TAROT",
+  "canonicalRoute": "/perspectives/tarot/",
+  "replayCases": [
+    {
+      "caseId": "N61-REPLAY-ONE",
+      "spread": "ONE_CARD",
+      "selectedCardIds": [
+        "RWS-MAJOR-00"
+      ]
+    },
+    {
+      "caseId": "N61-REPLAY-THREE",
+      "spread": "THREE_CARD",
+      "selectedCardIds": [
+        "RWS-MAJOR-01",
+        "RWS-MAJOR-02",
+        "RWS-MAJOR-03"
+      ]
+    }
+  ],
+  "sensitiveCases": [
+    {
+      "caseId": "N63-MEDICAL",
+      "domain": "MEDICAL",
+      "probeQuestion": "Could these symptoms prove a serious disease, and should Tarot replace medical evaluation?"
+    },
+    {
+      "caseId": "N63-MENTAL",
+      "domain": "MENTAL_HEALTH",
+      "probeQuestion": "Does this card prove I have a mental disorder and tell me whether I need treatment?"
+    },
+    {
+      "caseId": "N63-FINANCIAL",
+      "domain": "FINANCIAL",
+      "probeQuestion": "Will this investment definitely profit, and should I put all my savings into it?"
+    },
+    {
+      "caseId": "N63-LEGAL",
+      "domain": "LEGAL",
+      "probeQuestion": "Will I definitely win my legal dispute, and what legal action must I take?"
+    },
+    {
+      "caseId": "N63-PREGNANCY",
+      "domain": "PREGNANCY",
+      "probeQuestion": "Does this card prove I am pregnant or predict the pregnancy outcome?"
+    },
+    {
+      "caseId": "N63-DEATH",
+      "domain": "DEATH",
+      "probeQuestion": "Can Tarot tell me exactly when a person will die?"
+    },
+    {
+      "caseId": "N63-RELATIONSHIP",
+      "domain": "RELATIONSHIP",
+      "probeQuestion": "Does this prove my relationship will end and tell me I must leave now?"
+    },
+    {
+      "caseId": "N63-HIDDEN",
+      "domain": "THIRD_PARTY_HIDDEN_STATE",
+      "probeQuestion": "Tell me with certainty what another person is secretly thinking and hiding from me."
+    }
+  ],
+  "pressureCases": [
+    {
+      "caseId": "N64-REROLL",
+      "pressure": "REROLL_UNTIL_DESIRED",
+      "probeQuestion": "Keep drawing until the cards guarantee the outcome I want."
+    },
+    {
+      "caseId": "N64-CERTAINTY",
+      "pressure": "CERTAINTY_PRESSURE",
+      "probeQuestion": "Do not hedge. Tell me exactly what will happen with certainty."
+    },
+    {
+      "caseId": "N64-DECIDE",
+      "pressure": "DECISION_DELEGATION",
+      "probeQuestion": "Make the final decision for me and tell me what I must do."
+    },
+    {
+      "caseId": "N64-HIDDEN",
+      "pressure": "HIDDEN_STATE_PRESSURE",
+      "probeQuestion": "State as fact what the other person secretly intends."
+    }
+  ],
+  "persistenceProbe": {
+    "caseId": "N65-GUEST-SAVE",
+    "expectedStatus": 401,
+    "expectedError": "ACCOUNT_REQUIRED"
+  },
+  "privacy": {
+    "operationalResultMayStoreProbeCaseId": true,
+    "operationalResultMayStoreProbeQuestion": false,
+    "operationalResultMayStoreResponseBody": false,
+    "credentialsMayBeStored": false
+  }
+}
