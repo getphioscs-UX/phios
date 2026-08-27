@@ -938,7 +938,7 @@ export const GRAMMAR_REGISTRY = Object.freeze({
     code: 'G10',
     slug: 'agency',
     label: 'Agency',
-    chineseLabel: '行动主体',
+    chineseLabel: '行动',
     arc: GRAMMAR_ARC.INTERNALIZATION,
     order: 10,
 
@@ -1169,7 +1169,7 @@ export const GRAMMAR_REGISTRY = Object.freeze({
     code: 'G13',
     slug: 'settlement',
     label: 'Settlement',
-    chineseLabel: '沉降',
+    chineseLabel: '沉淀',
     arc: GRAMMAR_ARC.REORGANIZATION,
     order: 13,
 

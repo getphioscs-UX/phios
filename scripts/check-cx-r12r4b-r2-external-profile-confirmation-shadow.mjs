@@ -110,7 +110,8 @@ for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"
 
 const pkg=readJson('package.json');
 assert.equal(pkg.scripts['check:cx-r12r4b:r2'],'node scripts/check-cx-r12r4b-r2-external-profile-confirmation-shadow.mjs');
-assert(pkg.scripts['check:cx-r12r4b'].endsWith('&& npm run check:cx-r12r4b:r2'));
+assert(pkg.scripts['check:cx-r12r4b'].includes('npm run check:cx-r12r4b:r2'));
+assert(pkg.scripts['check:cx-r12r4b'].indexOf('npm run check:cx-r12r4b:r2') < pkg.scripts['check:cx-r12r4b'].indexOf('npm run check:cx-r12r4b:r3r1'));
 assert.equal(acceptance.status,'R4B_R2_ACCEPTED_BY_EXECUTABLE_CHECKS');
 assert.equal(acceptance.claims.liveCloudflareDocumentConversionClaimed,false);
 assert.equal(acceptance.claims.liveHdrShadowCalculationClaimed,false);

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-ECR-THEORY-AUTHORITY-v1.0.0",
+  "work": "CX-R12R4B-R3R1",
+  "status": "CORE_THEORY_RECONCILED_READY_FOR_W31R",
+  "methodId": "ECR",
+  "methodCode": "EMBODIED_CONFIGURATION",
+  "authorityClass": "PHIOS_FIRST_PARTY",
+  "bookAuthority": {
+    "grammar": "functions/runtime/formation/grammar-registry.js",
+    "questions": "functions/runtime/formation/fundamental-question-registry.js",
+    "capabilities": "functions/runtime/formation/book-1-runtime-model.js#RUNTIME_CAPABILITIES",
+    "drivers": "functions/runtime/formation/book-1-runtime-model.js#RUNTIME_DRIVERS"
+  },
+  "ecrSpecificAuthority": {
+    "cosmologicalContext": "content/embodied-configuration/ecr-cosmological-context-registry-v1.json",
+    "motion": "content/embodied-configuration/ecr-motion-registry-v1.json",
+    "configuration": "content/embodied-configuration/ecr-environment-first-configuration-v1.json",
+    "activation": "content/embodied-configuration/ecr-activation-registry-v1.json"
+  },
+  "continuousRuntimeStatement": "Question × Capability × Driver × Motion × Activation",
+  "decisionStack": [
+    "ENTRY",
+    "GRAMMAR",
+    "QUESTION",
+    "CAPABILITY",
+    "DRIVERS",
+    "DRIVER_PRIORITY",
+    "RUNTIME_COORDINATE",
+    "MOTION",
+    "CONFIGURATION",
+    "ACTIVATION",
+    "RUNTIME_PROCESSING",
+    "REALITY_STATE"
+  ],
+  "boundaries": {
+    "ecrDoesNotForkCoreGrammar": true,
+    "ecrDoesNotForkCoreQuestions": true,
+    "ecrDoesNotForkCoreCapabilities": true,
+    "ecrDoesNotForkCoreDrivers": true,
+    "configurationUsesUpperTrigramAsEnvironmentPriorityConvention": true,
+    "activationA8MayProceedToCalculationSpecification": true,
+    "calculationImplemented": false,
+    "customerMeaningImplemented": false,
+    "customerInterpretationImplemented": false
+  }
+}

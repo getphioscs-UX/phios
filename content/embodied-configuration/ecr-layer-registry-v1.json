@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "PHI-OS-ECR-LAYER-REGISTRY-v1.0.0",
+  "work": "CX-R12R4B-R3R1-W22R-W30R",
+  "status": "BOOK_ALIGNED_CANONICAL_ONTOLOGY",
+  "methodId": "ECR",
+  "methodCode": "EMBODIED_CONFIGURATION",
+  "authorityClass": "PHIOS_FIRST_PARTY",
+  "continuousRuntimeComposition": [
+    "QUESTION",
+    "CAPABILITY",
+    "DRIVER",
+    "MOTION",
+    "ACTIVATION"
+  ],
+  "contextualPreconditions": [
+    "COSMOLOGICAL_CONTEXT",
+    "REALITY_GRAMMAR"
+  ],
+  "layers": [
+    {
+      "order": 0,
+      "layerId": "COSMOLOGICAL_CONTEXT",
+      "code": "CC",
+      "cardinality": 12,
+      "question": "现实为什么拥有长期方向？",
+      "authorityRef": "content/embodied-configuration/ecr-cosmological-context-registry-v1.json"
+    },
+    {
+      "order": 1,
+      "layerId": "REALITY_GRAMMAR",
+      "code": "G",
+      "cardinality": 16,
+      "question": "现实当前已经发展到哪里？",
+      "authorityRef": "functions/runtime/formation/grammar-registry.js",
+      "ownership": "PHI_OS_CORE_THEORY_REFERENCE"
+    },
+    {
+      "order": 2,
+      "layerId": "QUESTION",
+      "code": "Q",
+      "cardinality": 16,
+      "question": "现实正在回应什么？",
+      "authorityRef": "functions/runtime/formation/fundamental-question-registry.js",
+      "ownership": "PHI_OS_CORE_THEORY_REFERENCE"
+    },
+    {
+      "order": 3,
+      "layerId": "CAPABILITY_REGION",
+      "code": "R",
+      "cardinality": 9,
+      "question": "现实能够回应什么？",
+      "authorityRef": "functions/runtime/formation/book-1-runtime-model.js#RUNTIME_CAPABILITIES",
+      "ownership": "PHI_OS_CORE_THEORY_REFERENCE",
+      "guardrail": "ECR R1-R9 references Book I capabilities; it does not redefine the separate runtimeRegions contract."
+    },
+    {
+      "order": 4,
+      "layerId": "DRIVER",
+      "code": "D",
+      "cardinality": 12,
+      "question": "现实优先回应什么？",
+      "authorityRef": "functions/runtime/formation/book-1-runtime-model.js#RUNTIME_DRIVERS",
+      "ownership": "PHI_OS_CORE_THEORY_REFERENCE"
+    },
+    {
+      "order": 5,
+      "layerId": "MOTION",
+      "code": "M",
+      "cardinality": 8,
+      "question": "现实如何持续改变？",
+      "authorityRef": "content/embodied-configuration/ecr-motion-registry-v1.json"
+    },
+    {
+      "order": 6,
+      "layerId": "CONFIGURATION",
+      "code": "H",
+      "cardinality": 64,
+      "question": "环境优先的运行配置是什么？",
+      "authorityRef": "content/embodied-configuration/ecr-environment-first-configuration-v1.json"
+    },
+    {
+      "order": 7,
+      "layerId": "ACTIVATION",
+      "code": "A",
+      "cardinality": 8,
+      "question": "现实此刻能够发生多少？",
+      "authorityRef": "content/embodied-configuration/ecr-activation-registry-v1.json"
+    }
+  ],
+  "rules": {
+    "ecrOwnsSeparateG16": false,
+    "ecrOwnsSeparateQ16": false,
+    "ecrOwnsSeparateR9": false,
+    "ecrOwnsSeparateD12": false,
+    "upperTrigramEnvironmentPriority": true,
+    "atomicIdentityIsNotCustomerInterpretation": true,
+    "calculationSpecMayProceedAfterOntologyAcceptance": true
+  }
+}

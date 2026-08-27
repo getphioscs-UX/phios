@@ -33,22 +33,22 @@ export const CARRIER_CONFIGURATION_LAYERS = Object.freeze([
 ]);
 
 export const RUNTIME_CAPABILITIES = Object.freeze([
-  { id: 'R1', label: 'Direction', zh: '方向' },
-  { id: 'R2', label: 'Understanding', zh: '理解' },
-  { id: 'R3', label: 'Expression', zh: '表达' },
-  { id: 'R4', label: 'Position', zh: '位置' },
-  { id: 'R5', label: 'Resources', zh: '资源' },
-  { id: 'R6', label: 'Execution', zh: '执行' },
-  { id: 'R7', label: 'Relational', zh: '关系' },
-  { id: 'R8', label: 'Survival', zh: '生存' },
-  { id: 'R9', label: 'Drive', zh: '驱动' }
+  { id: 'R1', label: 'Direction', zh: '方向', bookZh: '方向能力' },
+  { id: 'R2', label: 'Understanding', zh: '理解', bookZh: '理解能力' },
+  { id: 'R3', label: 'Expression', zh: '表达', bookZh: '表达能力' },
+  { id: 'R4', label: 'Position', zh: '位置', bookZh: '位置能力' },
+  { id: 'R5', label: 'Resources', zh: '资源', bookZh: '资源能力' },
+  { id: 'R6', label: 'Execution', zh: '执行', bookZh: '执行能力' },
+  { id: 'R7', label: 'Relational', zh: '关系', bookZh: '关系能力' },
+  { id: 'R8', label: 'Survival', zh: '生存', bookZh: '生存能力' },
+  { id: 'R9', label: 'Drive', zh: '驱动', bookZh: '驱动能力' }
 ]);
 
 export const RUNTIME_DRIVERS = Object.freeze([
-  ['D1', 'Solar'], ['D2', 'Lunar'], ['D3', 'Mercurial'], ['D4', 'Venusian'],
-  ['D5', 'Martial'], ['D6', 'Jovian'], ['D7', 'Saturnian'], ['D8', 'Uranian'],
-  ['D9', 'Neptunian'], ['D10', 'Plutonian'], ['D11', 'Chiron'], ['D12', 'Nodal']
-].map(([id, label]) => Object.freeze({ id, label })));
+  ['D1', 'Solar', '太阳驱动'], ['D2', 'Lunar', '月亮驱动'], ['D3', 'Mercurial', '水星驱动'], ['D4', 'Venusian', '金星驱动'],
+  ['D5', 'Martial', '火星驱动'], ['D6', 'Jovian', '木星驱动'], ['D7', 'Saturnian', '土星驱动'], ['D8', 'Uranian', '天王星驱动'],
+  ['D9', 'Neptunian', '海王星驱动'], ['D10', 'Plutonian', '冥王星驱动'], ['D11', 'Chiron', '凯龙星驱动'], ['D12', 'Nodal', '交点驱动']
+].map(([id, label, zh]) => Object.freeze({ id, label, zh })));
 
 function evidenceFor(runtimeEntry, target) {
   return list(runtimeEntry?.reconstructionEvidence)
