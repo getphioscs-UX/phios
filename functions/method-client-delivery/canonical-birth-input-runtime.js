@@ -44,8 +44,7 @@ const RULES=Object.freeze({
   ASTROLOGY:Object.freeze({pluginCode:'AST',required:Object.freeze(['birthDate','birthTime','birthPlace.displayName','timezone.iana','timezone.utcOffsetAtBirth'])}),
   BAZI:Object.freeze({pluginCode:'BZR',required:Object.freeze(['birthDate','birthPlace.displayName','timezone.iana'])}),
   NUMEROLOGY:Object.freeze({pluginCode:'NUM',required:Object.freeze(['birthDate'])}),
-  HUMAN_DESIGN:Object.freeze({pluginCode:'HDR',required:Object.freeze(['birthDate','birthTime','birthPlace.displayName','birthPlace.latitude','birthPlace.longitude','timezone.iana','timezone.utcOffsetAtBirth'])}),
-  EMBODIED_CONFIGURATION:Object.freeze({pluginCode:'ECR',required:Object.freeze(['birthDate','birthTime','birthPlace.displayName','timezone.iana','timezone.utcOffsetAtBirth'])})
+  HUMAN_DESIGN:Object.freeze({pluginCode:'HDR',required:Object.freeze(['birthDate','birthTime','birthPlace.displayName','birthPlace.latitude','birthPlace.longitude','timezone.iana','timezone.utcOffsetAtBirth'])})
 });
 export function evaluateMethodInputReadiness(methodCode,input,{targetDate=null}={}){
   const rule=RULES[methodCode]; if(!rule) return Object.freeze({state:'BLOCKED',missingFields:Object.freeze([]),reasonCodes:Object.freeze(['METHOD_INPUT_PROFILE_NOT_REGISTERED'])});
