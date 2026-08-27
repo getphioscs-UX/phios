@@ -1,13 +1,17 @@
 {
-  "schemaVersion": "PHI-OS-ICHING-FULL-PRODUCTION-CONTRACT-v1.0.0",
-  "releaseId": "ICHING-1.0.0",
+  "schemaVersion": "PHI-OS-ICHING-FULL-PRODUCTION-CONTRACT-v1.1.0",
+  "releaseId": "ICHING-1.0.1",
   "methodCode": "I_CHING",
   "targetState": "FULL_PRODUCTION",
   "globalPublicExecution": true,
   "guestPersistenceAllowed": true,
   "executionAuthority": {
     "provider": "RUNTIME_DB_D1",
-    "exactDeployedCommitRequired": true,
+    "authorityScope": "RELEASE",
+    "initialPromotionExactDeployedCommitRequired": true,
+    "subsequentExactDeployedCommitRequired": false,
+    "deploymentContinuityAcrossUnrelatedCommits": true,
+    "releaseIdMustRemainCurrent": true,
     "clientMayGrantAuthority": false,
     "staticRegistryMayGrantAuthority": false,
     "countryAllowlistRequired": false

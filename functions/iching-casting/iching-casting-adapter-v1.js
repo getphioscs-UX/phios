@@ -1,5 +1,5 @@
 /**
- * ICHING-1.0.0 customer casting surface completion.
+ * ICHING-1.0.1 customer casting surface completion.
  *
  * This adapter produces a governed SYSTEM_RANDOM evidence package before the
  * existing I Ching product runtime executes. It does not interpret the

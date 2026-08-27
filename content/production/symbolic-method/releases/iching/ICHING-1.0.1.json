@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-RELEASE-MANIFEST-v1.1.0",
+  "releaseId": "ICHING-1.0.1",
+  "methodCode": "I_CHING",
+  "baselineCommit": "c3576a70fb371457480e120784efaf0de478a01c",
+  "status": "SOURCE_FROZEN_DURABLE_FULL_PRODUCTION_PROMOTABLE",
+  "successorOf": "content/production/symbolic-method/releases/iching/ICHING-1.0.0.json",
+  "releaseReason": "CUSTOMER_SELF_CASTING_GUIDE_AND_RELEASE_SCOPED_FULL_PRODUCTION_DEPLOYMENT_CONTINUITY",
+  "authorityModel": {
+    "singleCurrentPointer": "content/production/symbolic-method/authority/iching-current-authority.json",
+    "singleCurrentChecker": "scripts/check-iching-release-current.mjs",
+    "historicalCurrentVFilesAuditOnly": true,
+    "futureDeploymentDoesNotCreateNewCurrentVersion": true,
+    "ordinaryUnrelatedDeploymentDoesNotRevokeReleaseAuthority": true,
+    "newReleaseRequiredForSemanticChangeOnly": true
+  },
+  "acceptedEvidence": {
+    "baseHumanAcceptance": "24/24",
+    "depthHumanAcceptance": "448/448",
+    "hexagrams": "64/64",
+    "lines": "384/384",
+    "bilingualRuntimeCases": "896/896",
+    "w31HistoricalFirstLivePreserved": true,
+    "w32R1Controls": "6/6",
+    "w32R1Execution": "14/14",
+    "w32R1Sensitive": "8/8",
+    "w33FinalLimitedProductionAccepted": true
+  },
+  "productionContract": {
+    "targetState": "FULL_PRODUCTION",
+    "globalPublicExecution": true,
+    "guestPersistenceAllowed": true,
+    "guestPersistenceRequiresExplicitConsent": true,
+    "automaticPersistence": false,
+    "liveAuthorityProvider": "RUNTIME_DB_D1",
+    "authorityScope": "RELEASE",
+    "initialPromotionExactDeployedCommitRequired": true,
+    "subsequentExactDeployedCommitRequired": false,
+    "deploymentContinuityAcrossUnrelatedCommits": true,
+    "globalRightsAttestationRequiredAtPromotion": true,
+    "operationalEvidencePath": ".runtime-evidence/iching-full-production-live-evidence-v1.json",
+    "operationalEvidenceCommitted": false
+  },
+  "customerCasting": {
+    "systemRandom": true,
+    "manualLines": true,
+    "recordedThreeCoin": true,
+    "completeSelfCastingGuide": true,
+    "sixCoinStaticReferenceMethod": true,
+    "traditionalYarrowGuide": true,
+    "lineOrder": "BOTTOM_TO_TOP"
+  },
+  "preservedCore": {
+    "corpusChanged": false,
+    "depthHumanAcceptanceReopened": false,
+    "humanApprovedDepth": "448/448",
+    "bilingualRuntime": "896/896",
+    "interpretationRuntimeChanged": false,
+    "productRuntimeChanged": false,
+    "w31W32R1W33EvidenceRewritten": false
+  },
+  "boundaries": {
+    "fortuneTellingAuthority": false,
+    "predictionAuthority": false,
+    "diagnosticAuthority": false,
+    "hiddenStateAuthority": false,
+    "professionalDirectiveAuthority": false,
+    "decisionAuthority": "USER",
+    "candidateFallbackAllowed": false,
+    "runtimeModelGapFillAllowed": false
+  },
+  "artifacts": [
+    {
+      "path": "content/production/symbolic-method/acceptance/iching-final-limited-production-acceptance-v1.json",
+      "sha256": "90e1374db4cf592963f2e1cafff7ed254889c00befcd87b67d039358ec09a7f3"
+    },
+    {
+      "path": "content/production/symbolic-method/observation/iching-limited-production-observation-results-v2.json",
+      "sha256": "833858565a906b22b7d5913ab2f5c8b3e85c31b9b2de93f257c4e5f6c6662170"
+    },
+    {
+      "path": "content/production/symbolic-method/acceptance/iching-limited-production-observation-acceptance-v2.json",
+      "sha256": "baf11d2e32c2a15114de2c568646e0fc037e10402c1c75a5c7c2ce291e1e01bc"
+    },
+    {
+      "path": "content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v2.json",
+      "sha256": "cd32a92b8b7b98051d056c2e6d4fac1479db44a8528f931041bd1b164598addd"
+    },
+    {
+      "path": "content/interpretation/iching/corpus/iching-public-domain-canonical-corpus-v2.json",
+      "sha256": "af59615e4aba68a61f680275b7cc8d58a30884699e0b1bd4028eb1cffaa6b1f5"
+    },
+    {
+      "path": "content/interpretation/iching/registries/iching-source-registry-v2.json",
+      "sha256": "0b5e7001dce719d177593264cf64351fb73d8e0c3c4167c3924fe415b7a0cdeb"
+    },
+    {
+      "path": "content/interpretation/iching/registries/iching-interpretation-perspective-registry-v2.json",
+      "sha256": "33bfdf1078f1d45f5c209db2237ba46006ad8e3f1d2c8714b28f6422ceb5bf70"
+    },
+    {
+      "path": "content/professional/core-method-runtime/iching-hexagram-registry-v1.json",
+      "sha256": "6d359cadfe5555ce6892b88dc6eb32708fe9b6a43dd74b9c72579c398dc83902"
+    },
+    {
+      "path": "functions/iching-product-runtime/iching-product-runtime-v2.js",
+      "sha256": "15bff68db3e0e46d0f9a96ae4571ca68fe53fb9d73469c01c31483a5957ebbaa"
+    },
+    {
+      "path": "functions/interpretation-runtime/iching-depth-editorial-runtime-v2.js",
+      "sha256": "dce0cd4cba1006c8a790b835c03c666f7664ac38cf449ec3e5b6f3c2f308cf9b"
+    },
+    {
+      "path": "functions/symbolic-method-public-ux/iching-product-view-model-v2.js",
+      "sha256": "6457f15db26e80c6a8983d936a833a76329fbce03f4455e64c0cb3a6ac98ba71"
+    },
+    {
+      "path": "functions/iching-full-production/iching-full-production-v1.js",
+      "sha256": "7bfaf2554091c29065eb628551dd42d4e611dd3a9ecebf8b3b87a10c296a246e"
+    },
+    {
+      "path": "functions/iching-full-production/iching-full-persistence-v1.js",
+      "sha256": "c7c14e30fa943a6826cef0d51c040023e047b9de8b2899c3493a162ada73b64f"
+    },
+    {
+      "path": "functions/symbolic-method-persistence/symbolic-reading-store-d1-v2.js",
+      "sha256": "c790114cb0fc9fc9ad6794fd90fac3a68e91d1b094bad89d201e5e5626e068a2"
+    },
+    {
+      "path": "functions/api/iching-full-production-status.js",
+      "sha256": "12907e1ec2e1462ffd3d302c57aa9ce995f95e9cd2afb785aba44f26b341069f"
+    },
+    {
+      "path": "functions/api/iching-full-context.js",
+      "sha256": "a421abd64c40edb8a3bf92564a95df4544f42f1320703b61861ca2c1dae91ed3"
+    },
+    {
+      "path": "functions/api/iching-full-execute.js",
+      "sha256": "ba6ecdabd7866b35fb5f71d881d2db5cc2473f0929313b6e1c512d7056d03853"
+    },
+    {
+      "path": "functions/api/iching-full-save.js",
+      "sha256": "ee5d31fbca1ab1a23b4b4dbfa4cc30b0f2fbff04a16c8187da61e1d56779af7a"
+    },
+    {
+      "path": "functions/api/iching-full-readings.js",
+      "sha256": "2eeca6dd4d9de29007d0041cac6cb5f445da8e7b8cec194039d9f6d65e69e2d9"
+    },
+    {
+      "path": "content/production/symbolic-method/contracts/iching-full-production-contract-v1.json",
+      "sha256": "8b00a62978f7b9c5288843d37a2138d9a819041613f5f654b5a4a7a0331c5e1b"
+    },
+    {
+      "path": "content/production/symbolic-method/rights/iching-full-production-rights-scope-v1.json",
+      "sha256": "09391286e7d244b0cdda7fd8e30f13bde0a2167774724c18617858b1f317816a"
+    },
+    {
+      "path": "perspectives/iching/run/index.html",
+      "sha256": "993a2f4338abf61c51e426b5a526c30ab2796fc79f1cbc17f2dcf297a8e29887"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/iching-full.js",
+      "sha256": "a3630311a602bbc7c1c52e6db946bed1db12c98ae18288b6fd873c23abaea8c6"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/iching-entry.js",
+      "sha256": "fdee1514387b946d65030f71fbeea9217a8a06f151f4d036b9cc626f9a28c867"
+    },
+    {
+      "path": "scripts/check-iching-full-production-static-v1.mjs",
+      "sha256": "7612a8e375eb182ea1f006db8f18250e1cf2ceafc069bff1454934d708033627"
+    },
+    {
+      "path": "scripts/promote-iching-full-production.mjs",
+      "sha256": "a65df02f338aa40a971560f2d45f8c2fccb5284b175d4a4c956fe4bd37647e63"
+    },
+    {
+      "path": "scripts/lib/iching/full-production-promotion-v1.mjs",
+      "sha256": "f41b7caf6b08d2430526060abdbbad26e954ca2477d0a77ad2a298609a74018c"
+    },
+    {
+      "path": "functions/iching-casting/iching-casting-adapter-v1.js",
+      "sha256": "3aa33fe8797c7cacffd702c496bbb7988466a2861eb0bb50e97bfdf6e34c3f25"
+    },
+    {
+      "path": "functions/api/iching-full-cast.js",
+      "sha256": "a0d3aa2421eba52a72d7f26ed2bb4e73bc05809a599e671c8680b6564acdc8d6"
+    },
+    {
+      "path": "assets/customer-ui/js/surfaces/iching-casting.js",
+      "sha256": "c89bd2281d486a2a39fc7c277154be277089becd91d05ee0365562482c37614a"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/iching-casting.css",
+      "sha256": "17491c3ec56b58b86117795f65c41b57909f5ef0e07017333d0ece402bfa6c69"
+    },
+    {
+      "path": "content/production/symbolic-method/contracts/iching-customer-casting-surface-completion-v1.json",
+      "sha256": "974afdc11496e910b04d546a24c9eb0f5e4f613d5013c2b1b63d11473776a227"
+    },
+    {
+      "path": "content/production/symbolic-method/contracts/iching-customer-self-casting-guide-v1.json",
+      "sha256": "d160fa9d2305f59d2d09095398f6550c345fa7aac74f166304df8e3fe39c36d1"
+    },
+    {
+      "path": "content/production/symbolic-method/contracts/iching-full-production-deployment-continuity-v1.json",
+      "sha256": "77673ca4b621ad07245e131f89667f1409171fcce6c81748f51dcff2292ba020"
+    },
+    {
+      "path": "scripts/check-iching-customer-casting-surface.mjs",
+      "sha256": "294471e330356a8b2fdaf870bf8bc62be76dd7edbf23f3de6b2dac5fd1fc9fd7"
+    },
+    {
+      "path": "scripts/check-iching-customer-self-casting-guide.mjs",
+      "sha256": "0b90cb076dd10a3eebd8308d9b6e1738de7516aa08d7f9f56b9cb9fbe1ba1ea5"
+    },
+    {
+      "path": "scripts/check-iching-full-production-deployment-continuity.mjs",
+      "sha256": "1b6dadd15afd243dce22da7ca1b1528ba77001914e42b0aba343dcc99c482cfd"
+    }
+  ]
+}

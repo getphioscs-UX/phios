@@ -1,18 +1,20 @@
 /**
  * PHI OS I Ching FULL_PRODUCTION server authority.
  *
- * Authority lives in RUNTIME_DB and is pinned to the exact deployed commit.
+ * Authority lives in RUNTIME_DB and is promoted once per immutable I Ching release.
+ * The promotion commit is recorded as evidence, while later unrelated site deployments
+ * may continue consuming the same release-scoped authority.
  * Static files, client state, request bodies, query parameters, countries and
  * headers cannot promote production. Global public execution is a property of
  * the promoted D1 authority record, and guest persistence remains explicit-
  * consent-only through a signed anonymous session.
  */
-export const ICHING_FULL_PRODUCTION_AUTHORITY_SCHEMA='PHI-OS-ICHING-FULL-PRODUCTION-AUTHORITY-v1.0.0';
+export const ICHING_FULL_PRODUCTION_AUTHORITY_SCHEMA='PHI-OS-ICHING-FULL-PRODUCTION-AUTHORITY-v1.1.0';
 export const ICHING_FULL_PRODUCTION_AUTHORITY_RUNTIME_ID='system_capability_iching_full_production';
 export const ICHING_FULL_PRODUCTION_AUTHORITY_ARTIFACT_ID='system_capability_iching_full_production_authority';
 export const ICHING_FULL_PRODUCTION_AUTHORITY_USER_ID='__phios_system_authority__';
 export const ICHING_FULL_PRODUCTION_AUTHORITY_ARTIFACT_TYPE='system_capability_authority';
-export const ICHING_FULL_PRODUCTION_RELEASE_ID='ICHING-1.0.0';
+export const ICHING_FULL_PRODUCTION_RELEASE_ID='ICHING-1.0.1';
 export const ICHING_GUEST_COOKIE='__Host-PHIOS_ICHING_GUEST';
 export const ICHING_GUEST_PROVIDER='PHIOS_ICHING_GUEST_SESSION_V1';
 
@@ -37,20 +39,22 @@ export function validateIChingFullProductionAuthorityRecord(record={},liveSha=''
   const payload=parse(record);const sha=clean(liveSha);const secret=clean(env.ICHING_FULL_PRODUCTION_GUEST_SESSION_SECRET);
   if(!fullProductionEnabled(env))return denied('FULL_PRODUCTION_DISABLED_BY_ENV',{liveProductionSha:fullSha(sha)?sha:null});
   if(!payload||payload.schemaVersion!==ICHING_FULL_PRODUCTION_AUTHORITY_SCHEMA||payload.methodCode!=='I_CHING')return denied('FULL_PRODUCTION_AUTHORITY_NOT_PROMOTED');
-  if(fullSha(payload.approvedCommitSha)&&fullSha(sha)&&payload.approvedCommitSha!==sha)return denied('DEPLOYED_SHA_NOT_PROMOTED',{approvedCommitSha:payload.approvedCommitSha,liveProductionSha:sha});
-  const gates=payload.gates||{};
-  const ok=payload.releaseId===ICHING_FULL_PRODUCTION_RELEASE_ID&&payload.state==='FULL_PRODUCTION'&&payload.runAllowed===true&&
+  const gates=payload.gates||{};const promotionSha=clean(payload.promotionCommitSha||payload.approvedCommitSha);
+  const releaseAligned=payload.releaseId===ICHING_FULL_PRODUCTION_RELEASE_ID&&payload.authorityScope==='RELEASE';
+  const ok=releaseAligned&&payload.state==='FULL_PRODUCTION'&&payload.runAllowed===true&&
     payload.fullProduction===true&&payload.globalPublicExecution===true&&payload.guestPersistenceAllowed===true&&payload.productionCapabilityPromoted===true&&
     gates.w33FinalLimitedProductionAcceptance===true&&gates.humanApprovedDepth448===true&&gates.bilingualRuntime896===true&&
-    gates.liveProductionShaAlignment===true&&gates.verifiedPersistenceProvider===true&&gates.globalRightsReviewAttested===true&&
-    gates.guestPersistenceExplicitConsentRequired===true&&fullSha(payload.approvedCommitSha)&&fullSha(sha)&&payload.approvedCommitSha===sha&&secret.length>=32;
+    gates.initialPromotionExactShaVerified===true&&gates.releaseScopedDeploymentContinuity===true&&gates.verifiedPersistenceProvider===true&&gates.globalRightsReviewAttested===true&&
+    gates.guestPersistenceExplicitConsentRequired===true&&fullSha(promotionSha)&&fullSha(sha)&&secret.length>=32;
   if(!ok)return denied(secret.length<32?'GUEST_SESSION_SECRET_NOT_CONFIGURED':'FULL_PRODUCTION_AUTHORITY_INVALID_OR_INCOMPLETE',{
-    approvedCommitSha:fullSha(payload.approvedCommitSha)?payload.approvedCommitSha:null,liveProductionSha:fullSha(sha)?sha:null
+    approvedCommitSha:fullSha(promotionSha)?promotionSha:null,promotionCommitSha:fullSha(promotionSha)?promotionSha:null,liveProductionSha:fullSha(sha)?sha:null,
+    releaseId:payload?.releaseId||null,authorityScope:payload?.authorityScope||null
   });
   return Object.freeze({
     authorized:true,state:'FULL_PRODUCTION',runAllowed:true,fullProduction:true,limitedProduction:false,
     globalPublicExecution:true,guestPersistenceAllowed:true,productionCapabilityPromoted:true,
-    approvedCommitSha:payload.approvedCommitSha,liveProductionSha:sha,promotedAt:payload.promotedAt||null,
+    approvedCommitSha:promotionSha,promotionCommitSha:promotionSha,liveProductionSha:sha,
+    deploymentContinuityApplied:promotionSha!==sha,authorityScope:'RELEASE',promotedAt:payload.promotedAt||null,
     releaseId:payload.releaseId,rightsReviewId:payload.rightsReviewId||null,rightsScope:'GLOBAL',
     guestRetentionDays:days(payload?.persistence?.guestRetentionDays),clientMayGrantAuthority:false
   });
@@ -74,14 +78,16 @@ export async function resolveIChingFullProductionAuthority(context={}){
 
 export function createIChingFullProductionAuthorityPayload({approvedCommitSha,rightsReviewId,guestRetentionDays=30,promotedAt=new Date().toISOString(),active=true}={}){
   const sha=clean(approvedCommitSha);const rights=clean(rightsReviewId);
-  if(!fullSha(sha))throw new TypeError('ICHING_FULL_PRODUCTION_APPROVED_COMMIT_SHA_REQUIRED');
+  if(!fullSha(sha))throw new TypeError('ICHING_FULL_PRODUCTION_PROMOTION_COMMIT_SHA_REQUIRED');
   if(!rights)throw new TypeError('ICHING_FULL_PRODUCTION_GLOBAL_RIGHTS_REVIEW_ID_REQUIRED');
   return Object.freeze({
-    schemaVersion:ICHING_FULL_PRODUCTION_AUTHORITY_SCHEMA,authorityVersion:'1.0.0',releaseId:ICHING_FULL_PRODUCTION_RELEASE_ID,methodCode:'I_CHING',
+    schemaVersion:ICHING_FULL_PRODUCTION_AUTHORITY_SCHEMA,authorityVersion:'1.1.0',releaseId:ICHING_FULL_PRODUCTION_RELEASE_ID,methodCode:'I_CHING',authorityScope:'RELEASE',
     state:active?'FULL_PRODUCTION':'REVOKED',runAllowed:active,fullProduction:active,globalPublicExecution:active,guestPersistenceAllowed:active,
-    productionCapabilityPromoted:active,approvedCommitSha:sha,promotedAt,rightsReviewId:rights,rightsScope:'GLOBAL',
-    gates:Object.freeze({w33FinalLimitedProductionAcceptance:true,humanApprovedDepth448:true,bilingualRuntime896:true,liveProductionShaAlignment:true,
-      verifiedPersistenceProvider:true,globalRightsReviewAttested:true,guestPersistenceExplicitConsentRequired:true}),
+    productionCapabilityPromoted:active,approvedCommitSha:sha,promotionCommitSha:sha,promotedAt,rightsReviewId:rights,rightsScope:'GLOBAL',
+    gates:Object.freeze({w33FinalLimitedProductionAcceptance:true,humanApprovedDepth448:true,bilingualRuntime896:true,initialPromotionExactShaVerified:true,
+      releaseScopedDeploymentContinuity:true,verifiedPersistenceProvider:true,globalRightsReviewAttested:true,guestPersistenceExplicitConsentRequired:true}),
+    deploymentContinuity:Object.freeze({mode:'RELEASE_SCOPED',initialPromotionCommitSha:sha,subsequentExactShaMatchRequired:false,
+      unrelatedDeploymentMayRemainActive:true,releaseIdMustRemainCurrent:true,explicitRevocationSupported:true}),
     boundaries:Object.freeze({fortuneTellingAuthority:false,predictionAuthority:false,diagnosticAuthority:false,hiddenStateAuthority:false,professionalDirectiveAuthority:false,decisionAuthority:'USER'}),
     persistence:Object.freeze({provider:'RUNTIME_DB_D1',guestPersistence:true,guestPersistenceRequiresExplicitConsent:true,automaticPersistence:false,
       guestRetentionDays:days(guestRetentionDays),browserLocalFallback:false,canonicalRealityCreated:false}),
@@ -97,7 +103,8 @@ export async function verifyIChingGuestSession(context,{clock=Date.now}={}){
   const parts=token.split('.');if(parts.length!==2)return null;let supplied;try{supplied=unb64(parts[1]);}catch{return null;}
   const expected=await hmac(secret,parts[0]);if(supplied.length!==expected.length||!await crypto.subtle.verify('HMAC',await hmacKey(secret),supplied,enc.encode(parts[0])))return null;
   let payload;try{payload=JSON.parse(dec.decode(unb64(parts[0])));}catch{return null;}
-  if(payload?.v!==1||payload?.providerId!==ICHING_GUEST_PROVIDER||payload?.releaseId!==ICHING_FULL_PRODUCTION_RELEASE_ID||!/^iching_guest_[A-Za-z0-9_-]{20,64}$/.test(clean(payload.userId)))return null;
+  const acceptedGuestReleaseIds=new Set(['ICHING-1.0.0',ICHING_FULL_PRODUCTION_RELEASE_ID]);
+  if(payload?.v!==1||payload?.providerId!==ICHING_GUEST_PROVIDER||!acceptedGuestReleaseIds.has(clean(payload?.releaseId))||!/^iching_guest_[A-Za-z0-9_-]{20,64}$/.test(clean(payload.userId)))return null;
   const now=Math.floor(Number(clock())/1000);if(Number(payload.exp)<=now||Number(payload.iat)>now+30)return null;
   return Object.freeze(payload);
 }

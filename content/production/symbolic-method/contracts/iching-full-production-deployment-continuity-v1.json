@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-ICHING-FULL-PRODUCTION-DEPLOYMENT-CONTINUITY-v1.0.0",
+  "releaseId": "ICHING-1.0.1",
+  "methodCode": "I_CHING",
+  "status": "RELEASE_SCOPED_FULL_PRODUCTION_CONTINUITY",
+  "problemClosed": "EXACT_DEPLOYMENT_SHA_REPROMOTION_ON_UNRELATED_SITE_COMMITS",
+  "authority": {
+    "provider": "RUNTIME_DB_D1",
+    "scope": "RELEASE",
+    "initialPromotionExactSha": true,
+    "subsequentExactShaRequired": false,
+    "currentReleaseIdRequired": true,
+    "explicitRevocationSupported": true,
+    "environmentKillSwitch": "ICHING_FULL_PRODUCTION_ENABLED"
+  },
+  "continuity": {
+    "ordinaryCxCommitMayRemainActive": true,
+    "ordinaryKnowledgeCommitMayRemainActive": true,
+    "ordinarySiteAssetCommitMayRemainActive": true,
+    "releaseSemanticChangeRequiresNewReleaseAndPromotion": true,
+    "authorityRecordLossFailsClosed": true,
+    "guestSecretLossFailsClosed": true
+  },
+  "preserved": {
+    "globalPublicExecution": true,
+    "guestPersistenceAllowed": true,
+    "explicitRetentionConsentRequired": true,
+    "automaticPersistence": false,
+    "humanApprovedDepth": "448/448",
+    "bilingualRuntime": "896/896",
+    "corpusReopened": false,
+    "interpretationRuntimeReopened": false
+  }
+}

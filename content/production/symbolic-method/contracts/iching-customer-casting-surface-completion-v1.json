@@ -1,9 +1,9 @@
 {
   "schemaVersion": "PHI-OS-ICHING-CUSTOMER-CASTING-SURFACE-COMPLETION-v1.0.0",
-  "releaseId": "ICHING-1.0.0",
+  "releaseId": "ICHING-1.0.1",
   "methodCode": "I_CHING",
-  "baselineCommit": "a9556d446cb289787fceea611341d7dd67de5dcf",
-  "status": "CUSTOMER_CASTING_SURFACE_COMPLETED_WITHOUT_CORE_RELEASE_MUTATION",
+  "baselineCommit": "c3576a70fb371457480e120784efaf0de478a01c",
+  "status": "CUSTOMER_CASTING_SURFACE_AND_SELF_CASTING_GUIDE_RELEASED_WITH_DURABLE_FULL_PRODUCTION",
   "scope": {
     "governedCastingAdapter": true,
     "customerCastingUx": true,
@@ -14,9 +14,9 @@
   },
   "authority": {
     "singleCurrentAuthorityPointer": "content/production/symbolic-method/authority/iching-current-authority.json",
-    "releaseManifest": "content/production/symbolic-method/releases/iching/ICHING-1.0.0.json",
+    "releaseManifest": "content/production/symbolic-method/releases/iching/ICHING-1.0.1.json",
     "newCurrentVNumberCreated": false,
-    "releaseIdChanged": false,
+    "releaseIdChanged": true,
     "clientMayGrantProductionAuthority": false,
     "fullProductionAuthorityProvider": "RUNTIME_DB_D1"
   },
@@ -58,7 +58,7 @@
     "bilingualRuntimeCases": "896/896",
     "interpretationRuntimeChanged": false,
     "productRuntimeChanged": false,
-    "releaseManifestChanged": false
+    "releaseManifestChanged": true
   },
   "surfaceArtifacts": [
     "functions/iching-casting/iching-casting-adapter-v1.js",
@@ -67,5 +67,15 @@
     "assets/customer-ui/surfaces/iching-casting.css",
     "assets/customer-ui/js/shell.js",
     "scripts/check-iching-customer-casting-surface.mjs"
-  ]
+  ],
+  "selfCastingGuide": {
+    "lineValueReference": true,
+    "bottomToTopOrder": true,
+    "threeCoinMethod": true,
+    "sixCoinStaticMethodFromUserReference": true,
+    "traditionalYarrowMethod": true,
+    "methodProbabilityDifferencesDisclosed": true,
+    "coinFaceConventionMustRemainConsistentWithinCast": true,
+    "copyrightedSourceTextReproduced": false
+  }
 }

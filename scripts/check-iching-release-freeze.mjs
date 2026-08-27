@@ -1,16 +1,23 @@
 import assert from 'node:assert/strict';
-import crypto from 'node:crypto';
 import fs from 'node:fs';
-const path='content/production/symbolic-method/releases/iching/ICHING-1.0.0.json';
+import crypto from 'node:crypto';
+const current=JSON.parse(fs.readFileSync('content/production/symbolic-method/authority/iching-current-authority.json','utf8'));
+const path=current.releaseManifest;
+assert.equal(current.releaseId,'ICHING-1.0.1');
+assert.equal(path,'content/production/symbolic-method/releases/iching/ICHING-1.0.1.json');
+assert.ok(fs.existsSync(path),`current release manifest missing: ${path}`);
 const release=JSON.parse(fs.readFileSync(path,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-assert.equal(release.schemaVersion,'PHI-OS-ICHING-RELEASE-MANIFEST-v1.0.0');
-assert.equal(release.releaseId,'ICHING-1.0.0');assert.equal(release.methodCode,'I_CHING');
-assert.equal(release.status,'SOURCE_FROZEN_FULL_PRODUCTION_PROMOTABLE');
+assert.equal(release.releaseId,current.releaseId);assert.equal(release.methodCode,'I_CHING');
+assert.equal(release.authorityModel.singleCurrentPointer,'content/production/symbolic-method/authority/iching-current-authority.json');
+assert.equal(release.authorityModel.singleCurrentChecker,'scripts/check-iching-release-current.mjs');
+assert.equal(release.productionContract.targetState,'FULL_PRODUCTION');assert.equal(release.productionContract.globalPublicExecution,true);assert.equal(release.productionContract.guestPersistenceAllowed,true);
+assert.equal(release.productionContract.authorityScope,'RELEASE');assert.equal(release.productionContract.initialPromotionExactDeployedCommitRequired,true);assert.equal(release.productionContract.subsequentExactDeployedCommitRequired,false);assert.equal(release.productionContract.deploymentContinuityAcrossUnrelatedCommits,true);
 assert.equal(release.acceptedEvidence.depthHumanAcceptance,'448/448');assert.equal(release.acceptedEvidence.bilingualRuntimeCases,'896/896');
-assert.equal(release.acceptedEvidence.w33FinalLimitedProductionAccepted,true);
-assert.equal(release.productionContract.targetState,'FULL_PRODUCTION');assert.equal(release.productionContract.globalPublicExecution,true);assert.equal(release.productionContract.guestPersistenceAllowed,true);assert.equal(release.productionContract.guestPersistenceRequiresExplicitConsent,true);assert.equal(release.productionContract.automaticPersistence,false);
-assert.equal(release.authorityModel.singleCurrentChecker,'scripts/check-iching-release-current.mjs');assert.equal(release.authorityModel.futureDeploymentDoesNotCreateNewCurrentVersion,true);
-for(const item of release.artifacts){assert.ok(fs.existsSync(item.path),`release artifact missing: ${item.path}`);assert.equal(sha(item.path),item.sha256,`ICHING-1.0.0 artifact drift: ${item.path}`);}
-console.log(`✓ ${release.releaseId} immutable source release freeze passed across ${release.artifacts.length} artifacts.`);
-console.log('  One unversioned current authority pointer governs the release; deployment promotions no longer create current-vN successors.');
+assert.ok(Array.isArray(release.artifacts)&&release.artifacts.length>=30);
+const paths=release.artifacts.map(x=>x.path);assert.equal(new Set(paths).size,paths.length,'release artifact paths must be unique');
+for(const item of release.artifacts){assert.ok(fs.existsSync(item.path),`release artifact missing: ${item.path}`);assert.equal(sha(item.path),item.sha256,`ICHING-1.0.1 artifact drift: ${item.path}`);}
+for(const preserved of ['content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v2.json','functions/interpretation-runtime/iching-depth-editorial-runtime-v2.js','functions/iching-product-runtime/iching-product-runtime-v2.js'])assert.ok(paths.includes(preserved),`core freeze missing: ${preserved}`);
+for(const completion of ['functions/iching-casting/iching-casting-adapter-v1.js','functions/api/iching-full-cast.js','assets/customer-ui/js/surfaces/iching-casting.js','assets/customer-ui/surfaces/iching-casting.css','content/production/symbolic-method/contracts/iching-customer-self-casting-guide-v1.json','content/production/symbolic-method/contracts/iching-full-production-deployment-continuity-v1.json'])assert.ok(paths.includes(completion),`1.0.1 completion freeze missing: ${completion}`);
+console.log(`✓ ${release.releaseId} release freeze passed: ${release.artifacts.length}/${release.artifacts.length} frozen artifacts match SHA-256.`);
+console.log('  Durable release-scoped Full Production + complete customer casting guidance are frozen without reopening the admitted corpus or interpretation runtime.');

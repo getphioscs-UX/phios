@@ -13,24 +13,24 @@ const read=path=>fs.readFileSync(path,'utf8');
 
 const contract=readJson('content/production/symbolic-method/contracts/iching-customer-casting-surface-completion-v1.json');
 const current=readJson('content/production/symbolic-method/authority/iching-current-authority.json');
-const release=readJson('content/production/symbolic-method/releases/iching/ICHING-1.0.0.json');
+const release=readJson('content/production/symbolic-method/releases/iching/ICHING-1.0.1.json');
 
 assert.equal(contract.schemaVersion,'PHI-OS-ICHING-CUSTOMER-CASTING-SURFACE-COMPLETION-v1.0.0');
-assert.equal(contract.releaseId,'ICHING-1.0.0');
-assert.equal(contract.status,'CUSTOMER_CASTING_SURFACE_COMPLETED_WITHOUT_CORE_RELEASE_MUTATION');
+assert.equal(contract.releaseId,'ICHING-1.0.1');
+assert.equal(contract.status,'CUSTOMER_CASTING_SURFACE_AND_SELF_CASTING_GUIDE_RELEASED_WITH_DURABLE_FULL_PRODUCTION');
 assert.equal(contract.authority.singleCurrentAuthorityPointer,'content/production/symbolic-method/authority/iching-current-authority.json');
 assert.equal(contract.authority.newCurrentVNumberCreated,false);
-assert.equal(contract.authority.releaseIdChanged,false);
+assert.equal(contract.authority.releaseIdChanged,true);
 assert.equal(contract.frozenCore.corpusReopened,false);
 assert.equal(contract.frozenCore.depthHumanAcceptanceReopened,false);
 assert.equal(contract.frozenCore.depthCoverage,'448/448');
 assert.equal(contract.frozenCore.bilingualRuntimeCases,'896/896');
 assert.equal(contract.frozenCore.interpretationRuntimeChanged,false);
 assert.equal(contract.frozenCore.productRuntimeChanged,false);
-assert.equal(contract.frozenCore.releaseManifestChanged,false);
-assert.equal(current.releaseId,'ICHING-1.0.0');
-assert.equal(current.releaseManifest,'content/production/symbolic-method/releases/iching/ICHING-1.0.0.json');
-assert.equal(release.releaseId,'ICHING-1.0.0');
+assert.equal(contract.frozenCore.releaseManifestChanged,true);
+assert.equal(current.releaseId,'ICHING-1.0.1');
+assert.equal(current.releaseManifest,'content/production/symbolic-method/releases/iching/ICHING-1.0.1.json');
+assert.equal(release.releaseId,'ICHING-1.0.1');
 assert.equal(release.acceptedEvidence.depthHumanAcceptance,'448/448');
 assert.equal(release.acceptedEvidence.bilingualRuntimeCases,'896/896');
 
@@ -164,9 +164,11 @@ for(const path of [
   'functions/iching-casting/iching-casting-adapter-v1.js',
   'functions/api/iching-full-cast.js',
   'assets/customer-ui/js/surfaces/iching-casting.js',
-  'assets/customer-ui/surfaces/iching-casting.css'
-])assert.equal(frozenPaths.has(path),false,`casting surface extension must not rewrite the immutable source release manifest: ${path}`);
+  'assets/customer-ui/surfaces/iching-casting.css',
+  'content/production/symbolic-method/contracts/iching-customer-self-casting-guide-v1.json'
+])assert.equal(frozenPaths.has(path),true,`ICHING-1.0.1 must freeze the completed customer casting surface: ${path}`);
 
-console.log('✓ ICHING-1.0.0 customer casting surface completion passed.');
-console.log('  PHI OS governed cast + manual lines + recorded three-coin input converge on the existing product runtime without changing corpus, 448/448 admission, interpretation runtime or the single current release authority.');
+assert.equal(contract.selfCastingGuide.lineValueReference,true);assert.equal(contract.selfCastingGuide.threeCoinMethod,true);assert.equal(contract.selfCastingGuide.sixCoinStaticMethodFromUserReference,true);assert.equal(contract.selfCastingGuide.traditionalYarrowMethod,true);
+console.log('✓ ICHING-1.0.1 customer casting surface completion passed.');
+console.log('  PHI OS governed cast + manual lines + recorded three-coin input + complete self-casting guide converge on the existing product runtime without reopening corpus, 448/448 admission or interpretation runtime.');
 console.log('  System casting is server CSPRNG evidence, question-bound and replay-tokened; AI selection, favorable-result selection and automatic reroll remain forbidden.');
