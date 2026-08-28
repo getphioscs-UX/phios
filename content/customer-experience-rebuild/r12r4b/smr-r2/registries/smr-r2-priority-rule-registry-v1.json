@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-PRIORITY-RULE-REGISTRY-v1.0.0",
+  "work": "R2-W3",
+  "objective": "Resolve customer reading priority deterministically from admitted method claims without renderer judgment or a second method runtime.",
+  "methodNativePriorityAuthorityRef": "functions/single-method-reading/smr-registry-v1.js#SMR_METHOD_PRIORITY_REGISTRY",
+  "domainAuthorityRef": "functions/single-method-reading/smr-registry-v1.js#SMR_DOMAIN_REGISTRY",
+  "featureWeights": {
+    "upstreamPriority": {
+      "PRIMARY": 34,
+      "SECONDARY": 18,
+      "UNSPECIFIED": 8
+    },
+    "findingCentralityPerRef": 4,
+    "findingCentralityCap": 12,
+    "evidenceDensityPerRef": 2,
+    "evidenceDensityCap": 16,
+    "sharedEvidencePerRef": 3,
+    "sharedEvidenceCap": 12,
+    "counterEvidencePerRef": 3,
+    "counterEvidenceCap": 9,
+    "questionDirectDomainMatch": 16,
+    "questionTextOverlapPerToken": 2,
+    "questionTextOverlapCap": 8,
+    "semanticRepetitionPenaltyPerExtraClaim": -4,
+    "semanticRepetitionPenaltyFloor": -12,
+    "customerUsefulness": {
+      "CORE_PATTERN": 10,
+      "SUPPORT": 7,
+      "TENSION": 11,
+      "CONDITION": 9,
+      "TRADEOFF": 11,
+      "OPEN": 6,
+      "TEMPORAL_ACTIVATION": 8,
+      "OBSERVATION": 8
+    },
+    "relationImportance": {
+      "CORE_PATTERN": 4,
+      "SUPPORT": 5,
+      "TENSION": 8,
+      "CONDITION": 7,
+      "TRADEOFF": 8,
+      "OPEN": 5,
+      "TEMPORAL_ACTIVATION": 6,
+      "OBSERVATION": 5
+    }
+  },
+  "classThresholds": {
+    "PRIMARY": 78,
+    "SECONDARY": 60,
+    "SUPPORTING": 42,
+    "CONDITIONAL": 28
+  },
+  "firstScreen": {
+    "maxClaimRefs": 3,
+    "allowedClasses": [
+      "PRIMARY",
+      "SECONDARY"
+    ]
+  },
+  "intentDomainMap": {
+    "DIRECTION": [
+      "ENVIRONMENT_DIRECTION",
+      "ACTION_RHYTHM"
+    ],
+    "WORK": [
+      "WORK_RESOURCES"
+    ],
+    "RELATIONSHIP": [
+      "RELATIONSHIP_EXCHANGE"
+    ],
+    "PRESSURE": [
+      "REGULATION_PRESSURE"
+    ],
+    "EXPRESSION": [
+      "IDENTITY_EXPRESSION",
+      "COMMUNICATION_EXCHANGE"
+    ],
+    "ENVIRONMENT": [
+      "ENVIRONMENT_DIRECTION",
+      "REGULATION_PRESSURE"
+    ],
+    "OBSERVATION": [
+      "CORE_STRUCTURE"
+    ],
+    "OPEN": []
+  },
+  "rules": {
+    "llmPriorityAllowed": false,
+    "paragraphLengthMaySetPriority": false,
+    "tagCountMaySetPriority": false,
+    "rendererMaySetPriority": false,
+    "methodNativePriorityConsumedNotRecalculated": true,
+    "questionRelevanceMustBeDeterministic": true,
+    "priorityReasonRefsRequired": true,
+    "tiesResolveByClaimId": true
+  }
+}

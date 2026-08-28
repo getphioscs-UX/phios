@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-CUSTOMER-THEME-IR-CONTRACT-v1.0.0",
+  "work": "R2-W4",
+  "irSchemaVersion": "PHI-OS-CUSTOMER-THEME-IR-v1.0.0",
+  "collectionSchemaVersion": "PHI-OS-CUSTOMER-THEME-IR-COLLECTION-v1.0.0",
+  "requiredFields": [
+    "themeId", "headline", "primaryClaimRef", "supportClaimRefs", "tensionClaimRefs",
+    "conditionClaimRefs", "whatStandsOut", "whyItMatters", "howItMayShow",
+    "whenItMayDiffer", "realityQuestionRefs", "lineageRefs"
+  ],
+  "rules": {
+    "claimsBecomeThemesByDeterministicSemanticCluster": true,
+    "themeHeadlineMustComeFromPrimaryClaim": true,
+    "themeNarrativeTextMustComeFromAdmittedClaimText": true,
+    "composerMayInventCustomerMeaning": false,
+    "composerMayEraseTension": false,
+    "composerMayEraseConditions": false,
+    "fiveClaimsNeedNotBecomeFiveParagraphs": true,
+    "rendererMayCreateTheme": false
+  }
+}

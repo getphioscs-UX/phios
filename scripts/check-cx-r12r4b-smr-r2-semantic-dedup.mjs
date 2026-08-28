@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {deduplicateEvidence} from '../functions/single-method-reading-r2/evidence-deduplicator.js';
+import {deduplicateClaims} from '../functions/single-method-reading-r2/claim-deduplicator.js';
+import {deduplicateNarrativeBlocks} from '../functions/single-method-reading-r2/narrative-deduplicator.js';
+const contract=JSON.parse(fs.readFileSync('content/customer-experience-rebuild/r12r4b/smr-r2/contracts/smr-r2-semantic-dedup-contract-v1.json','utf8'));assert.deepEqual(contract.levels,['EVIDENCE','CLAIM','NARRATIVE']);assert.equal(contract.rules.evidenceLineageMayBeDeleted,false);assert.equal(contract.rules.crossSectionFullExplanationMax,1);
+const c=(id,text,{type='CORE_PATTERN',score=80,evidence=['E1'],dim='METHOD_NATIVE:AST:SUN'}={})=>({claimId:id,methodId:'AST',semanticDimension:dim,claimType:type,headline:text,structuralMeaning:text,evidenceRefs:evidence,priorityScore:score});
+const claims=[c('C1','稳定结构需要明确边界。',{score:90,evidence:['E1','E2']}),c('C2','稳定结构需要明确边界。',{score:70,evidence:['E1','E2']}),c('C3','稳定结构需要明确边界，但在压力场景会更谨慎。',{type:'TENSION',score:75,evidence:['E1'],dim:'METHOD_NATIVE:AST:SUN'})];
+const evidence=deduplicateEvidence({claims});assert.equal(evidence.boundary.evidenceDeleted,false);assert.equal(evidence.evidence.find(x=>x.evidenceRef==='E1').primaryClaimRef,'C1');
+const dedup=deduplicateClaims({claims});assert.equal(dedup.semanticClusters[0].fullExplanationCount,1);assert.equal(dedup.decisions.find(x=>x.claimRef==='C1').decision,'PRIMARY_EXPLANATION');assert.equal(dedup.decisions.find(x=>x.claimRef==='C2').decision,'SUPPRESSED_DUPLICATE');assert.ok(['CONTEXT_DERIVATIVE','SECONDARY_REFERENCE'].includes(dedup.decisions.find(x=>x.claimRef==='C3').decision));
+const narrative=deduplicateNarrativeBlocks({blocks:[{narrativeRef:'N1',text:'同一个核心解释。',contextKey:'OVERVIEW'},{narrativeRef:'N2',text:'同一个核心解释。',contextKey:'OVERVIEW'},{narrativeRef:'N3',text:'同一个核心解释。',contextKey:'WORK',newInformationRefs:['WORK-EVIDENCE']} ]});assert.equal(narrative.blocks[0].dedupDecision,'PRIMARY_EXPLANATION');assert.equal(narrative.blocks[1].dedupDecision,'SUPPRESSED_DUPLICATE');assert.equal(narrative.blocks[2].dedupDecision,'CONTEXT_DERIVATIVE');
+console.log('✓ CX-R12R4B SMR-R2 W5 semantic dedup passed across evidence, claim and narrative levels with one primary explanation per cluster.');
