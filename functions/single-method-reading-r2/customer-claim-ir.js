@@ -54,7 +54,16 @@ export function buildCustomerClaimIR({acceptedMethodReadingEnvelope,customerInte
         priorityClass:unit.priorityClass||'UNSPECIFIED',
         noveltyClass:'UNASSESSED',
         confidenceClass:boundaries.length?'ADMITTED_WITH_BOUNDARY':'ADMITTED_AUTHORITY',
-        conditions:[],
+        // Preserve admitted AST detail without synthesising new claims, rules,
+        // priority or meanings. The existing IR permits structured conditions.
+        conditions:unit.interpretationDetail?.schemaVersion==='PHI-OS-AST-INTERPRETATION-DETAIL-v1.0.0'?[{
+          kind:'UPSTREAM_INTERPRETATION_DETAIL',
+          interpretationUnitRef:unit.interpretationUnitId,
+          ...unit.interpretationDetail,
+          observableSignals:list(unit.observableSignals),
+          alternativeInterpretations:list(unit.alternativeInterpretations),
+          realityComparisonQuestions:list(unit.realityComparisonQuestions)
+        },...list(unit.realityComparisonQuestions).map(q=>`QUESTION:${q}`)]:[],
         boundaries,
         questionRelevance:questionRelevance(customerIntent),
         sectionCandidates:[],

@@ -48,7 +48,17 @@ function acceptedCustomerResult({canonicalProjection,input,candidate,acceptedInt
     observableSignals:item.observableSignals,
     alternativeInterpretations:item.alternativeInterpretations,
     openQuestions:item.realityComparisonQuestions,
-    confidenceBoundary:item.confidenceBoundary
+    confidenceBoundary:item.confidenceBoundary,
+    ...(methodId==='AST'?{interpretationDetail:{
+      schemaVersion:'PHI-OS-AST-INTERPRETATION-DETAIL-v1.0.0',
+      structuralReason:item.structuralReason,
+      relationContext:item.relationContext,
+      constructiveExpression:item.constructiveExpression,
+      frictionExpression:item.frictionExpression,
+      activationConditions:item.activationConditions||[],
+      uncertainties:item.uncertainties||[],
+      sourceLineage:item.sourceLineage||[]
+    }}:{})
   }));
   return freeze({
     schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0',

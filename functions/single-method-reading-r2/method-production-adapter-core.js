@@ -20,6 +20,7 @@ function inspectUnit(methodResult,lineage){
     alternativeInterpretations:list(insight.alternativeInterpretations),
     realityComparisonQuestions:list(insight.openQuestions),
     confidenceBoundary:insight.confidenceBoundary||null,
+    ...(methodResult.methodId==='AST'&&insight.interpretationDetail?{interpretationDetail:insight.interpretationDetail}:{}),
     semanticTags:tags,
     subject:tags[1]||null,
     relationType,

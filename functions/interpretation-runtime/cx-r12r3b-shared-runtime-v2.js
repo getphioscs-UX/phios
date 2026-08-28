@@ -6,6 +6,7 @@
  * do not become independent interpretation systems or meaning authorities.
  */
 import {assertDepth,assertLocale,clone,deepFreeze,sha256Stable,stableStringify,uniq} from './mir7-utils.js';
+import {AST_FP_COMPOSITION_VERSION,AST_FP_RULES,composeAstFullProductionCandidate} from './ast-full-production-composer-v1.js';
 
 export const CX_R12R3B_RUNTIME_VERSION='2.0.0';
 export const CX_R12R3B_COMPOSITION_VERSION='CX-R12R3B-COMPOSITION-RULES-v1.0.0';
@@ -154,6 +155,8 @@ function projectionReferenceCatalog(projection,methodId){
   if(methodId==='AST'){
     refs.push(...list(projection.calculation?.positions).map(x=>canonicalRef(projection,`POSITION:${x.code}`)));
     refs.push(...list(group(projection,'ASPECTS')?.items).map(x=>canonicalRef(projection,`ASPECT:${x.code}`)));
+    refs.push(...list(group(projection,'HOUSE_PLACEMENTS')?.items).map(x=>canonicalRef(projection,`HOUSE_PLACEMENT:${x.code}`)));
+    refs.push(...list(group(projection,'HOUSE_CUSPS')?.items).map(x=>canonicalRef(projection,`HOUSE_CUSP:${x.code}`)));
     if(houseSystemId(projection))refs.push(canonicalRef(projection,`HOUSE_SYSTEM:${houseSystemId(projection)}`));
   }else if(methodId==='NUM'){
     for(const value of list(projection.calculation?.values)){
@@ -175,10 +178,11 @@ function projectionReferenceCatalog(projection,methodId){
 
 function resolveCandidateReferences(candidate,projection,meaning){
   const failures=[],projectionRefs=projectionReferenceCatalog(projection,candidate.methodId),meaningRefs=new Set(meaning.refs.map(x=>x.meaningRef));
+  const rules=compositionRulesFor(candidate);
   for(const item of list(candidate.interpretationUnits)){
     for(const ref of item.projectionRefs)if(!projectionRefs.has(ref))failures.push(`PROJECTION_REF_UNRESOLVED:${ref}`);
     for(const ref of item.meaningRefs)if(!meaningRefs.has(ref))failures.push(`MEANING_REF_UNRESOLVED:${ref}`);
-    for(const ref of item.ruleRefs)if(!COMPOSITION_RULES.has(ref))failures.push(`RULE_REF_UNRESOLVED:${ref}`);
+    for(const ref of item.ruleRefs)if(!rules.has(ref))failures.push(`RULE_REF_UNRESOLVED:${ref}`);
   }
   return uniq(failures);
 }
@@ -371,8 +375,13 @@ function lifecycleFor(projection,meaning,units,humanReview=null){
 
 function customerText(unit){return [unit.title,unit.plainLanguageExplanation,unit.structuralReason,unit.relationContext,unit.constructiveExpression,unit.frictionExpression,...unit.observableSignals,...unit.alternativeInterpretations,...unit.realityComparisonQuestions].join(' ');}
 
+function compositionRulesFor(candidate){
+  return candidate?.methodId==='AST'&&candidate?.compositionVersion===AST_FP_COMPOSITION_VERSION?new Set(AST_FP_RULES):COMPOSITION_RULES;
+}
+
 export function validateInterpretationCandidate(candidate){
   const failures=[];const seen=new Set();
+  const rules=compositionRulesFor(candidate);
   if(candidate?.schemaVersion!=='PHI-OS-METHOD-INTERPRETATION-CANDIDATE-v2.0.0')failures.push('CANDIDATE_SCHEMA_INVALID');
   if(!METHODS[candidate?.methodId])failures.push('METHOD_INVALID');
   if(!candidate?.projectionDigest||candidate?.projectionDigest!==candidate?.sourceReference?.projectionDigest)failures.push('PROJECTION_DIGEST_MISMATCH');
@@ -382,7 +391,7 @@ export function validateInterpretationCandidate(candidate){
     for(const field of ['projectionRefs','meaningRefs','ruleRefs','activationConditions','observableSignals','alternativeInterpretations','sourceLineage','realityComparisonQuestions'])if(!list(item?.[field]).length)failures.push(`UNIT_${field.toUpperCase()}_MISSING`);
     for(const ref of list(item?.projectionRefs))if(!clean(candidate?.sourceReference?.projectionId)||!ref.startsWith(`${candidate.sourceReference.projectionId}#`))failures.push('UNIT_PROJECTION_REF_INVALID');
     for(const ref of list(item?.meaningRefs))if(!/^.+@\d+\.\d+\.\d+$/.test(ref))failures.push('UNIT_MEANING_REF_INVALID');
-    for(const ref of list(item?.ruleRefs))if(!COMPOSITION_RULES.has(ref))failures.push('UNIT_RULE_REF_INVALID');
+    for(const ref of list(item?.ruleRefs))if(!rules.has(ref))failures.push('UNIT_RULE_REF_INVALID');
     for(const ref of list(item?.sourceLineage))if(!/^(?:CMP|MAP|PROJECTION):/.test(ref))failures.push('UNIT_SOURCE_LINEAGE_INVALID');
     if(item.priority==='PRIMARY'&&(!item.structuralReason||!item.relationContext||!item.constructiveExpression||!item.frictionExpression||!item.observableSignals?.length||!item.realityComparisonQuestions?.length))failures.push('INTERPRETATION_QUALITY_FLOOR_FAILED');
     const text=customerText(item);if(RAW_PINYIN_CODES.test(text)||RAW_TECHNICAL_COPY.test(text)||text.includes('结构项'))failures.push('RAW_CUSTOMER_CODE');if(SENSITIVE.test(text))failures.push('SENSITIVE_DOMAIN_LANGUAGE');
@@ -392,16 +401,21 @@ export function validateInterpretationCandidate(candidate){
   return deepFreeze({valid:failures.length===0,failures:uniq(failures),failureMode:failures.length?'STRUCTURE_ONLY':'NONE'});
 }
 
-export async function createMethodInterpretationCandidate({input,meaningPayload,humanReview=null}={}){
+export async function createMethodInterpretationCandidate({input,meaningPayload,humanReview=null,compositionVersion=CX_R12R3B_COMPOSITION_VERSION}={}){
   assertInterpretationInput(input);
+  const astFp=input.methodId==='AST'&&compositionVersion===AST_FP_COMPOSITION_VERSION;
+  if(compositionVersion!==CX_R12R3B_COMPOSITION_VERSION&&!astFp)fail('CX_COMPOSITION_PROFILE_UNSUPPORTED');
+  if(astFp&&humanReview)fail('AST_FP_REQUIRES_VERSIONED_ADMISSION_NOT_INLINE_REVIEW');
   const projection=input.canonicalMethodProjection;
   const calculated=await digestProjection(projection);if(calculated!==input.calculationDigest)fail('CX_R12R3B_CALCULATION_DIGEST_MISMATCH');
   const meaning=meaningContext(meaningPayload);
   const projectionDigest=calculated;
   const composer=COMPOSERS[input.methodId];
-  const units=meaning.refs.length&&meaning.sourceAdmitted&&meaning.localeComplete?composer(input,meaning,projectionDigest):[];
+  const canCompose=meaning.refs.length&&meaning.sourceAdmitted&&meaning.localeComplete;
+  const enriched=astFp&&canCompose?composeAstFullProductionCandidate(input,meaning,projectionDigest,{unit,canonicalRef,labelForAst,selectMeanings,t}):null;
+  const units=canCompose?(astFp?enriched.units:composer(input,meaning,projectionDigest)):[];
   const semanticCore=units.map(x=>({methodId:x.methodId,projectionRefs:x.projectionRefs,meaningRefs:x.meaningRefs,ruleRefs:x.ruleRefs,priority:x.priority,subject:x.subject,relationType:x.relationType}));
-  const semanticDigest=await sha256Stable({methodId:input.methodId,projectionDigest,compositionVersion:CX_R12R3B_COMPOSITION_VERSION,semanticCore});
+  const semanticDigest=await sha256Stable({methodId:input.methodId,projectionDigest,compositionVersion,semanticCore});
   const interpretationDigest=await sha256Stable({semanticDigest,locale:input.locale,requestedDepth:input.requestedDepth,units});
   const lifecycle=lifecycleFor(projection,meaning,units,humanReview);
   const base={
@@ -415,7 +429,8 @@ export async function createMethodInterpretationCandidate({input,meaningPayload,
     calculationDigest:input.calculationDigest,
     houseSystemId:input.methodId==='AST'?houseSystemId(projection):null,
     sourceReference:{projectionId:projection.projectionId,projectionVersion:input.projectionVersion,projectionDigest},
-    compositionVersion:CX_R12R3B_COMPOSITION_VERSION,
+    compositionVersion,
+    ...(astFp?{reviewProfile:{engineeringOnly:true,productionAllowed:false,sourceBooksAdmitted:false},coverage:enriched?.coverage||null}:{}),
     interpretationUnits:units,
     atomicMeaningPublishedDirectly:false,
     lifecycle,
@@ -432,6 +447,7 @@ export async function createMethodInterpretationCandidate({input,meaningPayload,
 }
 
 export async function promoteAcceptedInterpretation(candidate,humanReview){
+  if(candidate?.compositionVersion===AST_FP_COMPOSITION_VERSION)fail('AST_FP_VERSIONED_PRODUCTION_ADMISSION_REQUIRED');
   const validation=validateInterpretationCandidate(candidate);
   if(!validation.valid||candidate?.validation?.valid!==true)fail('CX_R12R3B_CANDIDATE_VALIDATION_REQUIRED');
   if(!CX_R12R3B_LIFECYCLE.slice(0,6).every(stage=>candidate?.lifecycle?.flags?.[stage]===true))fail('CX_R12R3B_CANDIDATE_LIFECYCLE_INCOMPLETE');

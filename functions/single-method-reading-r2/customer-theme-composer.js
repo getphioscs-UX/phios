@@ -23,15 +23,16 @@ export function composeCustomerThemes({priorityResolution}={}){
   const themes=[...groups.values()].map(group=>{
     const claims=[...group.claims].sort((a,b)=>b.priorityScore-a.priorityScore||a.claimId.localeCompare(b.claimId));
     const primary=claims[0];
+    const detail=primary.methodId==='AST'?list(primary.conditions).find(c=>c?.kind==='UPSTREAM_INTERPRETATION_DETAIL'&&c.schemaVersion==='PHI-OS-AST-INTERPRETATION-DETAIL-v1.0.0'):null;
     const support=claims.filter(c=>c.claimId!==primary.claimId&&c.claimType==='SUPPORT');
     const tension=claims.filter(c=>c.claimId!==primary.claimId&&['TENSION','TRADEOFF'].includes(c.claimType));
     const condition=claims.filter(c=>c.claimId!==primary.claimId&&['CONDITION','OPEN','TEMPORAL_ACTIVATION'].includes(c.claimType));
     const secondary=claims.filter(c=>c.claimId!==primary.claimId&&!support.includes(c)&&!tension.includes(c)&&!condition.includes(c));
     const clusterSeed=[primary.methodId,group.domain,...claims.map(c=>c.claimId).sort()].join('|');
     const what=primary.structuralMeaning;
-    const why=distinctText([...support,...secondary],what);
-    const how=distinctText(condition,what)||distinctText(secondary,why||what);
-    const differs=distinctText(tension,what)||distinctText(condition,how||why||what);
+    const why=detail?.relationContext||distinctText([...support,...secondary],what);
+    const how=detail?.constructiveExpression||distinctText(condition,what)||distinctText(secondary,why||what);
+    const differs=detail?.frictionExpression||distinctText(tension,what)||distinctText(condition,how||why||what);
     const refs=uniq(claims.flatMap(lineageRefs));
     const realityQuestionRefs=uniq(claims.flatMap(c=>list(c.conditions).filter(v=>typeof v==='string'&&v.startsWith('QUESTION:'))));
     return freeze({
