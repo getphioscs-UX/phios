@@ -1,0 +1,348 @@
+<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ZIWEI Pattern Source Claim Batch 002 Review</title><style>
+:root{--bg:#f7f5ef;--card:#fff;--ink:#171914;--muted:#6c6b63;--line:#dedbd1;--accent:#7f5b17;--yes:#215d45;--no:#8a3434}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Noto Sans SC","Microsoft YaHei",sans-serif}header{max-width:1100px;margin:auto;padding:44px 24px 28px}h1{font:700 42px/1.15 Georgia,"Noto Serif SC",serif;margin:0 0 16px}header p{max-width:900px;color:var(--muted)}.bar{position:sticky;top:0;z-index:5;background:#f7f5efeF;backdrop-filter:blur(10px);border-block:1px solid var(--line)}.bar>div{max-width:1100px;margin:auto;padding:12px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}button{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 14px;cursor:pointer;font-weight:650}button:hover{border-color:#aaa}#admitAll{background:#e7f2eb;color:var(--yes)}#export{background:#171914;color:white}#progress{margin-left:auto;color:var(--muted)}main{max-width:1100px;margin:auto;padding:24px}.claim{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;margin:0 0 18px}.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}h2{display:inline;margin:0 10px;font-size:25px}.num{font:600 15px Georgia,serif;color:var(--accent)}code{font-size:12px;color:var(--muted)}a{color:var(--accent);text-decoration:none;white-space:nowrap}h3{font-size:14px;margin:20px 0 6px;color:var(--accent)}.meta{margin-top:12px;color:var(--muted)}pre{white-space:pre-wrap;background:#f4f2ec;border-radius:12px;padding:14px;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;overflow:auto}.flag,.okflag{display:inline-block;margin:6px 7px 0 0;padding:3px 8px;border-radius:999px;font-size:12px;background:#fff2d7;color:#744e00}.okflag{background:#edf3ef;color:#315a47}.choices{display:flex;gap:8px;margin-top:18px}.choices button.active[data-choice="ADMIT"]{background:#dff0e6;color:var(--yes);border-color:#8bb59f}.choices button.active[data-choice="NEEDS_REVISION"]{background:#fff0cb;color:#765300;border-color:#d8b35d}.choices button.active[data-choice="REJECT"]{background:#f8dfdf;color:var(--no);border-color:#c89191}textarea{width:100%;min-height:60px;margin-top:10px;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit}footer{max-width:1100px;margin:auto;padding:20px 24px 60px;color:var(--muted)}
+</style></head><body><header><div class="num">ZIWEI Source-Claim Admission</div><h1>Batch 002｜格局规则来源审核</h1><p>本页只审核「古典文本是否支持这条结构规则，以及正规化是否忠实」。ADMIT 不等于认可古典吉凶结论，不等于实证验证，也不会直接开放客户解释。W8 Runtime 在这批规则未正式 admission 前保持 fail-closed。</p></header><div class="bar"><div><button id="admitAll">全部 ADMIT</button><button id="clear">清除决定</button><button id="export">导出审核 JSON</button><span id="progress">0 / 11</span></div></div><main><section class="claim" data-claim="ZWR-SC-W8-ZI_FU_TONG_GONG-001">
+<div class="top"><div><span class="num">01</span><h2>紫府同宫</h2><code>ZWR-SC-W8-ZI_FU_TONG_GONG-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%BA%8C" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 安天府图 · 紫府同宫</div>
+<h3>来源约束改写</h3><p>The placement witness states that Zi Wei and Tian Fu share a palace only in Yin and Shen. The normalized pattern candidate therefore requires both stars in one palace and limits that palace branch to Yin or Shen.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;ZI_FU_TONG_GONG&quot;,
+  &quot;labelZh&quot;: &quot;紫府同宫&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;SAME_PALACE_STARS&quot;,
+          &quot;starCodes&quot;: [
+            &quot;ZI_WEI&quot;,
+            &quot;TIAN_FU&quot;
+          ],
+          &quot;branches&quot;: [
+            &quot;YIN&quot;,
+            &quot;SHEN&quot;
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="okflag">无额外风险旗标</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-LU_MA_JIAO_CHI-001">
+<div class="top"><div><span class="num">02</span><h2>禄马交驰</h2><code>ZWR-SC-W8-LU_MA_JIAO_CHI-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%80" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 问天马星所主若何？ · 禄马交驰</div>
+<h3>来源约束改写</h3><p>The Tian Ma section explicitly names Tian Ma and Lu Cun occupying the same palace as 禄马交驰. The normalized rule records only that structural co-location and carries no outcome claim.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;LU_MA_JIAO_CHI&quot;,
+  &quot;labelZh&quot;: &quot;禄马交驰&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;SAME_PALACE_STARS&quot;,
+          &quot;starCodes&quot;: [
+            &quot;TIAN_MA&quot;,
+            &quot;LU_CUN&quot;
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="okflag">无额外风险旗标</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-TAN_LING_BING_SHOU-001">
+<div class="top"><div><span class="num">03</span><h2>贪铃并守</h2><code>ZWR-SC-W8-TAN_LING_BING_SHOU-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%80" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 斗数骨髓赋 · 贪铃并守</div>
+<h3>来源约束改写</h3><p>The Bone Marrow verse pairs Tan Lang and Ling Xing with the wording 并守. The candidate normalizes this only as same-palace co-presence and deliberately omits the verse’s status or outcome language.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;TAN_LING_BING_SHOU&quot;,
+  &quot;labelZh&quot;: &quot;贪铃并守&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;SAME_PALACE_STARS&quot;,
+          &quot;starCodes&quot;: [
+            &quot;TAN_LANG&quot;,
+            &quot;LING_XING&quot;
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="flag">OUTCOME_LANGUAGE_EXCLUDED_FROM_RUNTIME_RULE</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-TAN_HUO_XIANG_FENG-001">
+<div class="top"><div><span class="num">04</span><h2>贪火相逢</h2><code>ZWR-SC-W8-TAN_HUO_XIANG_FENG-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 定贵局 · 贪火相逢</div>
+<h3>来源约束改写</h3><p>The pattern list defines 贪火相逢 as Tan Lang and Huo Xing guarding the Life Palace together while both are in temple/prosperous states. The normalized rule therefore requires same Life Palace plus MIAO/WANG state for both stars.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;TAN_HUO_XIANG_FENG&quot;,
+  &quot;labelZh&quot;: &quot;贪火相逢&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;SAME_PALACE_STARS&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;,
+          &quot;starCodes&quot;: [
+            &quot;TAN_LANG&quot;,
+            &quot;HUO_XING&quot;
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;STAR_STATE_IN&quot;,
+          &quot;starCode&quot;: &quot;TAN_LANG&quot;,
+          &quot;stateCodes&quot;: [
+            &quot;MIAO&quot;,
+            &quot;WANG&quot;
+          ]
+        },
+        {
+          &quot;type&quot;: &quot;STAR_STATE_IN&quot;,
+          &quot;starCode&quot;: &quot;HUO_XING&quot;,
+          &quot;stateCodes&quot;: [
+            &quot;MIAO&quot;,
+            &quot;WANG&quot;
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="okflag">无额外风险旗标</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-JUN_CHEN_QING_HUI-001">
+<div class="top"><div><span class="num">05</span><h2>君臣庆会</h2><code>ZWR-SC-W8-JUN_CHEN_QING_HUI-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 定贵局 · 君臣庆会</div>
+<h3>来源约束改写</h3><p>The pattern list defines 君臣庆会 by Zi Wei, Zuo Fu and You Bi jointly guarding the Life Palace; it additionally says meeting Tian Xiang, Wu Qu and Tai Yin is especially favorable. Qualification is normalized to the three-star Life Palace core only, while the additional stars remain non-qualifying optional evidence for later interpretation work.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;JUN_CHEN_QING_HUI&quot;,
+  &quot;labelZh&quot;: &quot;君臣庆会&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;SAME_PALACE_STARS&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;,
+          &quot;starCodes&quot;: [
+            &quot;ZI_WEI&quot;,
+            &quot;ZUO_FU&quot;,
+            &quot;YOU_BI&quot;
+          ]
+        }
+      ]
+    }
+  ],
+  &quot;optionalEvidence&quot;: {
+    &quot;type&quot;: &quot;NETWORK_HAS_STARS&quot;,
+    &quot;palaceCode&quot;: &quot;LIFE&quot;,
+    &quot;starCodes&quot;: [
+      &quot;TIAN_XIANG&quot;,
+      &quot;WU_QU&quot;,
+      &quot;TAI_YIN&quot;
+    ]
+  }
+}</pre>
+<div class="flags"><span class="flag">OPTIONAL_SUPPORTING_STARS_NOT_QUALIFICATION_REQUIRED</span><span class="flag">OUTCOME_LANGUAGE_EXCLUDED_FROM_RUNTIME_RULE</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-JIN_YU_FU_JIA-001">
+<div class="top"><div><span class="num">06</span><h2>金舆扶驾</h2><code>ZWR-SC-W8-JIN_YU_FU_JIA-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 定贵局 · 金舆扶驾</div>
+<h3>来源约束改写</h3><p>The source defines 金舆扶驾 as Zi Wei guarding the Life Palace with Sun and Moon in the two flanking palaces. The normalized rule preserves the two-sided flank geometry without assigning meaning.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;JIN_YU_FU_JIA&quot;,
+  &quot;labelZh&quot;: &quot;金舆扶驾&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;STAR_IN_PALACE&quot;,
+          &quot;starCode&quot;: &quot;ZI_WEI&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;
+        },
+        {
+          &quot;type&quot;: &quot;FLANK_STARS_AROUND_PALACE&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;,
+          &quot;starCodes&quot;: [
+            &quot;TAI_YANG&quot;,
+            &quot;TAI_YIN&quot;
+          ],
+          &quot;unordered&quot;: true
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="okflag">无额外风险旗标</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-JU_JI_TONG_GONG-001">
+<div class="top"><div><span class="num">07</span><h2>巨机同宫</h2><code>ZWR-SC-W8-JU_JI_TONG_GONG-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%B8%80" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 斗数骨髓赋 · 巨机同宫</div>
+<h3>来源约束改写</h3><p>The verse explicitly describes Ju Men and Tian Ji as 同宫. The normalized candidate is restricted to same-palace co-presence and excludes the verse’s rank/outcome assertion.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;JU_JI_TONG_GONG&quot;,
+  &quot;labelZh&quot;: &quot;巨机同宫&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;SAME_PALACE_STARS&quot;,
+          &quot;starCodes&quot;: [
+            &quot;JU_MEN&quot;,
+            &quot;TIAN_JI&quot;
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="flag">OUTCOME_LANGUAGE_EXCLUDED_FROM_RUNTIME_RULE</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-WU_QU_SHOU_YUAN-001">
+<div class="top"><div><span class="num">08</span><h2>武曲守垣</h2><code>ZWR-SC-W8-WU_QU_SHOU_YUAN-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 定贵局 · 武曲守垣</div>
+<h3>来源约束改写</h3><p>The source glosses 武曲守垣 as Wu Qu guarding the Life Palace in Mao and explicitly excludes other positions. The normalized rule therefore requires Wu Qu in Life with the Life Palace branch at Mao.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;WU_QU_SHOU_YUAN&quot;,
+  &quot;labelZh&quot;: &quot;武曲守垣&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;STAR_IN_PALACE_BRANCH&quot;,
+          &quot;starCode&quot;: &quot;WU_QU&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;,
+          &quot;branch&quot;: &quot;MAO&quot;
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="okflag">无额外风险旗标</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-RI_CHU_FU_SANG-001">
+<div class="top"><div><span class="num">09</span><h2>日出扶桑</h2><code>ZWR-SC-W8-RI_CHU_FU_SANG-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 定贵局 · 日出扶桑</div>
+<h3>来源约束改写</h3><p>The source defines 日出扶桑 as Tai Yang in Mao guarding either the Life Palace or the Career Palace. The normalized rule keeps those as two explicit alternatives.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;RI_CHU_FU_SANG&quot;,
+  &quot;labelZh&quot;: &quot;日出扶桑&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;STAR_IN_PALACE_BRANCH&quot;,
+          &quot;starCode&quot;: &quot;TAI_YANG&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;,
+          &quot;branch&quot;: &quot;MAO&quot;
+        }
+      ]
+    },
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;STAR_IN_PALACE_BRANCH&quot;,
+          &quot;starCode&quot;: &quot;TAI_YANG&quot;,
+          &quot;palaceCode&quot;: &quot;CAREER&quot;,
+          &quot;branch&quot;: &quot;MAO&quot;
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="okflag">无额外风险旗标</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-YUE_LANG_TIAN_MEN-001">
+<div class="top"><div><span class="num">10</span><h2>月朗天门</h2><code>ZWR-SC-W8-YUE_LANG_TIAN_MEN-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 定贵局 · 月落亥宫／月朗天门</div>
+<h3>来源约束改写</h3><p>The source states that Tai Yin in Hai guarding the Life Palace is also called 月朗天门. The normalized rule requires Tai Yin in the Life Palace whose branch is Hai.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;YUE_LANG_TIAN_MEN&quot;,
+  &quot;labelZh&quot;: &quot;月朗天门&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;STAR_IN_PALACE_BRANCH&quot;,
+          &quot;starCode&quot;: &quot;TAI_YIN&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;,
+          &quot;branch&quot;: &quot;HAI&quot;
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="okflag">无额外风险旗标</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section>
+<section class="claim" data-claim="ZWR-SC-W8-CAI_LU_JIA_MA-001">
+<div class="top"><div><span class="num">11</span><h2>财禄夹马</h2><code>ZWR-SC-W8-CAI_LU_JIA_MA-001</code></div><a href="https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD" target="_blank" rel="noreferrer">打开古典见证 ↗</a></div>
+<div class="meta"><b>出处</b> 定富局 · 财禄夹马</div>
+<h3>来源约束改写</h3><p>The source glosses 财禄夹马 as Tian Ma guarding the Life Palace while Wu Qu and Lu Cun occupy the two flanking palaces. The normalized rule preserves only that star and flank geometry.</p>
+<h3>正规化规则</h3><pre>{
+  &quot;patternCode&quot;: &quot;CAI_LU_JIA_MA&quot;,
+  &quot;labelZh&quot;: &quot;财禄夹马&quot;,
+  &quot;ruleVersion&quot;: &quot;1.0.0&quot;,
+  &quot;alternatives&quot;: [
+    {
+      &quot;predicates&quot;: [
+        {
+          &quot;type&quot;: &quot;STAR_IN_PALACE&quot;,
+          &quot;starCode&quot;: &quot;TIAN_MA&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;
+        },
+        {
+          &quot;type&quot;: &quot;FLANK_STARS_AROUND_PALACE&quot;,
+          &quot;palaceCode&quot;: &quot;LIFE&quot;,
+          &quot;starCodes&quot;: [
+            &quot;WU_QU&quot;,
+            &quot;LU_CUN&quot;
+          ],
+          &quot;unordered&quot;: true
+        }
+      ]
+    }
+  ]
+}</pre>
+<div class="flags"><span class="flag">OUTCOME_LANGUAGE_EXCLUDED_FROM_RUNTIME_RULE</span></div>
+<div class="choices"><button data-choice="ADMIT">ADMIT</button><button data-choice="NEEDS_REVISION">NEEDS_REVISION</button><button data-choice="REJECT">REJECT</button></div>
+<textarea placeholder="备注（可选）"></textarea>
+</section></main><footer>导出文件名：<code>ziwei-source-claim-batch-002-patterns-human-review-result.json</code></footer><script>
+const decisions=new Map();
+function update(){document.querySelector('#progress').textContent=`${decisions.size} / 11`;document.querySelectorAll('.claim').forEach(c=>c.querySelectorAll('.choices button').forEach(b=>b.classList.toggle('active',decisions.get(c.dataset.claim)?.decision===b.dataset.choice)));}
+document.querySelectorAll('.claim').forEach(c=>c.querySelectorAll('.choices button').forEach(b=>b.onclick=()=>{decisions.set(c.dataset.claim,{decision:b.dataset.choice,notes:c.querySelector('textarea').value||null});update();}));
+document.querySelector('#admitAll').onclick=()=>{document.querySelectorAll('.claim').forEach(c=>decisions.set(c.dataset.claim,{decision:'ADMIT',notes:c.querySelector('textarea').value||null}));update();};
+document.querySelector('#clear').onclick=()=>{decisions.clear();update();};
+document.querySelector('#export').onclick=()=>{const missing=[...document.querySelectorAll('.claim')].filter(c=>!decisions.has(c.dataset.claim));if(missing.length){alert(`还有 ${missing.length} 条未决定。`);missing[0].scrollIntoView({behavior:'smooth'});return;}const result={schemaVersion:'PHI-OS-ZIWEI-SOURCE-CLAIM-HUMAN-REVIEW-RESULT-v2.0.0',batchId:'ZIWEI-SOURCE-CLAIM-BATCH-002-PATTERNS',reviewedAt:new Date().toISOString(),decisions:[...document.querySelectorAll('.claim')].map(c=>({claimId:c.dataset.claim,...decisions.get(c.dataset.claim),notes:c.querySelector('textarea').value||decisions.get(c.dataset.claim).notes||null}))};const blob=new Blob([JSON.stringify(result,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ziwei-source-claim-batch-002-patterns-human-review-result.json';a.click();URL.revokeObjectURL(a.href);};update();
+</script></body></html>
