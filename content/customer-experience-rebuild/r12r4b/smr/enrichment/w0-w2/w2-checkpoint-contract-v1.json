@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "PHIOS-SMR-W2-CHECKPOINT-CONTRACT-v1",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "work": "CX-R12R4B-SMR-ENRICHMENT-W0-W2",
+  "recordedAt": "2026-08-28",
+  "status": "RESEARCH_ONLY_NOT_PRODUCTION",
+  "productionAllowed": false,
+  "customerCutoverAllowed": false,
+  "frozenAt": "W0_W1_CHECKPOINT",
+  "executionOrder": [
+    "AST-S01",
+    "AST-S02",
+    "AST-S03",
+    "AST-S04",
+    "AST-S05"
+  ],
+  "expectedCardCounts": {
+    "AST-S01": 4,
+    "AST-S02": 5,
+    "AST-S03": 6,
+    "AST-S04": 4,
+    "AST-S05": 6
+  },
+  "plannedTotalCards": 25,
+  "statesAtThisCheckpoint": [
+    {
+      "sourceId": "AST-S01",
+      "state": "PENDING_SEPARATE_BOOK_PACKAGE"
+    },
+    {
+      "sourceId": "AST-S02",
+      "state": "PENDING_SEPARATE_BOOK_PACKAGE"
+    },
+    {
+      "sourceId": "AST-S03",
+      "state": "PENDING_SEPARATE_BOOK_PACKAGE"
+    },
+    {
+      "sourceId": "AST-S04",
+      "state": "PENDING_SEPARATE_BOOK_PACKAGE"
+    },
+    {
+      "sourceId": "AST-S05",
+      "state": "PENDING_SEPARATE_BOOK_PACKAGE"
+    }
+  ],
+  "bookFilePattern": "w2/AST-Sxx-extractions-v1.json",
+  "requiredFields": [
+    "cardId",
+    "sourceId",
+    "chapter",
+    "anchor",
+    "sourceParaphrase",
+    "reportUseHypothesis",
+    "requirements",
+    "doNotInfer",
+    "gapIds",
+    "disposition",
+    "productionAdmitted"
+  ],
+  "saveEachBookBeforeStartingNext": true,
+  "rawBookOrOcrRedistribution": false,
+  "wholeBookExtractionClaimAllowed": false,
+  "w3Allowed": false,
+  "finalValidation": "Run book checker on all five packages, verify source hashes and authority boundary; keep specialist review pending."
+}
