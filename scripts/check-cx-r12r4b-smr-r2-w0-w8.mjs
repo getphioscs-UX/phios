@@ -59,7 +59,7 @@ for(const methodId of methods){
   assert.equal(narrative.boundary.genericEndingCreated,false);
   assert.equal(narrative.boundary.suppressedDuplicateRenderable,false);
   assert.equal(narrative.technicalAppendix.defaultCollapsed,true);
-  const admittedTexts=new Set(priority.claims.map(claim=>claim.structuralMeaning));
+  const admittedTexts=new Set(priority.claims.flatMap(claim=>[claim.structuralMeaning,...claim.conditions.flatMap(condition=>condition&&typeof condition==='object'?[condition.structuralReason,condition.relationContext,condition.constructiveExpression,condition.frictionExpression,...(condition.activationConditions||[]),...(condition.observableSignals||[]),...(condition.alternativeInterpretations||[])]:[])]).filter(Boolean));
   const blocks=[];
   const visit=value=>{if(!value||typeof value!=='object')return;if(value.narrativeRef)blocks.push(value);for(const nested of Object.values(value))if(nested&&typeof nested==='object')visit(nested)};
   visit(narrative);

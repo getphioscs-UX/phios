@@ -57,7 +57,7 @@ assert.ok(first.observationQuestions.includes('QUESTION:When does this pattern c
 assert.ok(first.deeperSections.some(section=>section.sectionId==='CORE_THEMES'));
 assert.ok(first.deeperSections.some(section=>section.sectionId==='WORK'));
 assert.ok(first.whyThisReading.every(item=>item.priorityReasonRefs.length>0&&item.evidenceRefs.length>0&&item.lineageRefs.length>0));
-const admittedTexts=new Set(claims.map(item=>item.structuralMeaning));
+const admittedTexts=new Set(claims.flatMap(item=>[item.structuralMeaning,...item.conditions.flatMap(condition=>condition&&typeof condition==='object'?[condition.structuralReason,condition.relationContext,condition.constructiveExpression,condition.frictionExpression,...(condition.activationConditions||[]),...(condition.observableSignals||[]),...(condition.alternativeInterpretations||[])]:[])]).filter(Boolean));
 const blocks=[];
 const visit=value=>{if(!value||typeof value!=='object')return;if(value.narrativeRef)blocks.push(value);for(const nested of Object.values(value))if(nested&&typeof nested==='object')visit(nested)};
 visit(first);

@@ -15,6 +15,24 @@ function blockCandidate({narrativeRef,text,contextKey,sourceClaimRefs=[],themeRe
   return {narrativeRef,text,contextKey,sourceClaimRefs:uniq(sourceClaimRefs),themeRef,newInformationRefs:uniq(newInformationRefs)};
 }
 function normaliseText(value){return String(value??'').toUpperCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
+
+function admittedTextSet(claim){
+  const texts=new Set();
+  const add=value=>{if(typeof value==='string'&&value.trim())texts.add(value)};
+  add(claim?.structuralMeaning);
+  for(const condition of list(claim?.conditions)){
+    if(!condition||typeof condition!=='object'||condition.kind!=='UPSTREAM_INTERPRETATION_DETAIL')continue;
+    add(condition.structuralReason);add(condition.relationContext);add(condition.constructiveExpression);add(condition.frictionExpression);
+    for(const value of list(condition.activationConditions))add(value);
+    for(const value of list(condition.observableSignals))add(value);
+    for(const value of list(condition.alternativeInterpretations))add(value);
+  }
+  return texts;
+}
+function candidateTextIsAdmitted(candidate,claimById){
+  if(!candidate?.text)return true;
+  return list(candidate.sourceClaimRefs).some(ref=>admittedTextSet(claimById.get(ref)).has(candidate.text));
+}
 function buildPublicBlockMap(dedup){
   const output=new Map(),seenTextOwner=new Map();
   for(const dedupBlock of list(dedup.blocks)){
@@ -91,6 +109,7 @@ export function buildCustomerNarrativeIR({priorityResolution,themeCollection,sec
     for(const ref of section.newClaimRefs){const claim=claimById.get(ref);if(claim)candidates.push(blockCandidate({narrativeRef:`SMR2-NARRATIVE:SECTION:${section.sectionId}:${ref}`,text:claim.structuralMeaning,contextKey:`DEEPER_SECTION_${section.sectionId}`,sourceClaimRefs:[ref],themeRef:list(themeCollection.themes).find(theme=>theme.claimRefs.includes(ref))?.themeId||null,newInformationRefs:[ref,...section.newRelationRefs,...section.newConditionRefs,...section.newCounterEvidenceRefs,...section.newObservationRefs]}))}
   }
   const cleanCandidates=candidates.filter(Boolean);
+  for(const candidate of cleanCandidates)if(!candidateTextIsAdmitted(candidate,claimById))fail('SMR_R2_NARRATIVE_TEXT_NOT_IN_CLAIM_IR',{narrativeRef:candidate.narrativeRef,sourceClaimRefs:candidate.sourceClaimRefs});
   const dedup=deduplicateNarrativeBlocks({blocks:cleanCandidates});
   const publicBlocks=buildPublicBlockMap(dedup);
 
