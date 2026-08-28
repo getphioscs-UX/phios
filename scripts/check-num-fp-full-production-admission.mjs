@@ -1,6 +1,6 @@
-import fs from 'node:fs';
-const p='content/professional/num-production/full-production/rich-meaning/admission/num-r8-w18-full-production-cutover-v1.json';
-const gate=JSON.parse(fs.readFileSync(p,'utf8'));
-const g=gate.preCutoverGates||{};
-if(g.numR7HumanAcceptance12Pass!==true||g.richClaimRuntimeAdmission!==true||g.defaultCustomerCutover!==true){console.error('NUM_R8_FULL_PRODUCTION_CUTOVER_BLOCKED');for(const x of gate.blockingReasons||[])console.error(`- ${x}`);console.error('Review: content/professional/num-production/full-production/rich-meaning/review/num-r7-human-review.html');process.exit(1)}
-console.log('✓ NUM-R8 / NUM-FP Full Production cutover gate passed.');
+import assert from 'node:assert/strict'; import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8')); const base='content/professional/num-production/full-production';
+const r8=j(`${base}/rich-meaning/admission/num-r8-w18-full-production-cutover-v1.json`), w18=j(`${base}/admission/num-fp-w18-full-production-gate-v1.json`), r3=j(`${base}/rich-meaning/review/num-r3-source-claim-human-review-results-v1.json`), r7=j(`${base}/rich-meaning/review/num-r7-human-review-results-v1.json`);
+assert.equal(r3.status,'HUMAN_ADMITTED'); assert.equal(r3.admitted,48); assert.equal(r7.status,'HUMAN_ACCEPTED'); assert.equal(r7.accepted,12); assert.equal(r8.status,'FULL_PRODUCTION_CUTOVER_ACTIVE'); assert.equal(r8.runtimeUseAllowed,true); assert.equal(r8.preCutoverGates.richClaimRuntimeAdmission,true); assert.equal(r8.preCutoverGates.defaultCustomerCutover,true); assert.deepEqual(r8.blockingReasons,[]); assert.equal(w18.status,'FULL_PRODUCTION_CUTOVER_ACTIVE_VIA_NUM_R8'); assert.equal(w18.gates.defaultCustomerCutover,true); assert.equal(w18.gates.lifePeriodRequiredForTarget,false);
+console.log('✓ NUM-R8 / NUM-FP W18 Full Production cutover gate passed.');
+console.log('  Human admission 48/48 claims + 12/12 rich readings; runtimeUseAllowed=true; default customer surface active; unsupported method conflicts remain fail-closed.');

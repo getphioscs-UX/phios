@@ -1,18 +1,9 @@
-# NUM-FP-W0–W18｜Predecessor Reconciliation
+# NUM-FP-W0–W18｜Full Production Cutover
 
 Baseline: `c9f0970d7f3148924e85ee1735139558f0cad140`
 
-NUM-FP W0–W16 结构链与 64/64 machine campaign 保留。W17 上传结果记录 12/12 case decisions ACCEPT，但 criteria 字段仍为 null，因此不得改写成 criterion-attested `HUMAN_ACCEPTED`。
+NUM-FP W0–W16 与 64/64 machine campaign 保留。历史 W17 的 criteria=null 证据不被改写；其 human gate 已由 criterion-attested NUM-R7 12/12 HUMAN_ACCEPTED successor 取代。
 
-Rich numerology successor 已迁移到 `NUM-R1–R8`：
+NUM-R3 48/48 source claims 已 HUMAN_ADMITTED；R3–R6 支持项 `runtimeUseAllowed=true`；NUM-R8 / W18 已执行 Full Production Cutover，默认客户 Numerology surface 消费 rich role reading + relationship synthesis + admitted 1–9 cycle themes。
 
-- R1 source eligibility
-- R2 48 source-bound claims
-- R3 role × number claim candidates
-- R4 master / karmic tradition candidates
-- R5 Personal Year / Month / Day 1–9 semantic themes
-- R6 integrated composition candidate
-- R7 second-round human review
-- R8 explicit customer cutover gate
-
-Default customer cutover remains closed until NUM-R7 is explicitly human accepted with all criteria true. Life Period is deferred out of R8 scope because current calculation authority does not contain it.
+仍 fail closed：Attitude 11/22/33 rich semantics、Birthday 33、name-based roles、Life Period，以及任何事件预测/经验身份断言。

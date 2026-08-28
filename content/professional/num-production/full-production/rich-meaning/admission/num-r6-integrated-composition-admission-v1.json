@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-NUM-R6-INTEGRATED-COMPOSITION-ADMISSION-v1.0.0",
   "workCode": "NUM-R6",
   "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
-  "status": "COMPOSITION_AUTHORITY_CANDIDATE_READY_R7_HUMAN_REVIEW_REQUIRED",
+  "status": "HUMAN_ADMITTED_RUNTIME_ENABLED",
   "inputAuthority": [
     "NUM-R2-CLAIM-BATCH-001",
     "NUM-R3",
@@ -34,6 +34,7 @@
     "maxStandoutThemes": 3,
     "maxReflectionPrompts": 3
   },
-  "runtimeUseAllowed": false,
-  "admissionGate": "NUM-R7_HUMAN_ACCEPTANCE"
+  "runtimeUseAllowed": true,
+  "admissionGate": "SATISFIED_NUM_R7_HUMAN_ACCEPTANCE",
+  "humanAdmissionEvidence": "content/professional/num-production/full-production/rich-meaning/review/num-r7-human-review-results-v1.json"
 }

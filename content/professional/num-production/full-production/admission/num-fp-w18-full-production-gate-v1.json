@@ -3,7 +3,7 @@
   "workCode": "NUM-FP-W18",
   "requestedWorkCode": "NUM-W18",
   "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
-  "status": "SUPERSEDED_BY_NUM_R8_HUMAN_GATE",
+  "status": "FULL_PRODUCTION_CUTOVER_ACTIVE_VIA_NUM_R8",
   "targetCapability": "NUMEROLOGY_FULL_READING_V2",
   "predecessorCapability": {
     "code": "NUMERIC_RUNTIME_V1",
@@ -28,18 +28,14 @@
     "customerReportIAImplemented": true,
     "responsiveCandidateSurfaceImplemented": true,
     "machineCampaign64Pass": true,
-    "humanAcceptance12Pass": false,
-    "richNumberMeaningSourceAdmission": false,
-    "richRoleSpecificMeaningAdmission": false,
+    "humanAcceptance12Pass": true,
+    "richNumberMeaningSourceAdmission": true,
+    "richRoleSpecificMeaningAdmission": true,
     "lifePeriodAuthority": false,
-    "defaultCustomerCutover": false
+    "defaultCustomerCutover": true,
+    "lifePeriodRequiredForTarget": false
   },
-  "blockingReasons": [
-    "NUM_FP_W17_HUMAN_ACCEPTANCE_PENDING",
-    "RICH_NUMEROLOGY_SOURCE_CLAIMS_NOT_ADMITTED",
-    "ROLE_SPECIFIC_RICH_MEANING_NOT_ADMITTED",
-    "LIFE_PERIOD_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
-  ],
+  "blockingReasons": [],
   "productionRules": {
     "machinePassCannotSubstituteHumanAcceptance": true,
     "structuralMeaningCannotBeRelabeledAsRichTraditionalMeaning": true,
@@ -47,6 +43,6 @@
     "predecessorNumericRuntimeRemainsAvailable": true,
     "customerCutoverRequiresExplicitSuccessorAdmission": true
   },
-  "nextAction": "Complete NUM-FP-W17 human review and a source-claim admission campaign for rich number/role meanings; decide whether Life Period belongs in the target Full Production scope.",
+  "nextAction": "None for NUM-R8 target. Life Period and name-based numerology remain separately governed future expansions.",
   "successor": "content/professional/num-production/full-production/rich-meaning/admission/num-r8-w18-full-production-cutover-v1.json"
 }
