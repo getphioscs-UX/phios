@@ -1,4 +1,3 @@
-/** Canonical Tarot FULL_PRODUCTION product runtime. Core deterministic v1 remains frozen. */
-import {executeTarotProductRuntime as executeV1,TAROT_PRODUCTION_RUNTIME_VERSION as CORE_VERSION} from './tarot-product-runtime-v1.js';
-export const TAROT_PRODUCT_RUNTIME_VERSION='TAROT-1.0.0';
-export async function executeTarotProductRuntime(request={},authorities={}){const result=await executeV1(request,authorities);const publicView=structuredClone(result.publicView);publicView.production={...publicView.production,state:'FULL_PRODUCTION',runAllowed:true,fullProduction:true,limitedProductionActivated:false,productionCapabilityPromoted:true};return Object.freeze({...result,runtimeVersion:TAROT_PRODUCT_RUNTIME_VERSION,publicView:Object.freeze(publicView),production:Object.freeze({...result.production,state:'FULL_PRODUCTION',runAllowed:true,fullProduction:true,limitedProductionActivated:false,productionCapabilityPromoted:true,releaseId:'TAROT-1.0.0',authorityScope:'RELEASE',coreRuntimeVersion:CORE_VERSION})});}
+/** Canonical Tarot TAROT-1.1.0 FULL_PRODUCTION runtime. TSCP spread/composition authority is current. */
+export {executeTarotProductRuntime,TAROT_PRODUCTION_RUNTIME_VERSION} from './tarot-product-runtime-v3.js';
+export const TAROT_PRODUCT_RUNTIME_VERSION='TAROT-1.1.0';

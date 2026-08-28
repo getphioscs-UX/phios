@@ -1541,7 +1541,7 @@
     "check:iching-current-v3-historical": "node scripts/check-iching-current-v3.mjs",
     "check:iching-current-v2-historical": "node scripts/check-iching-current-v2.mjs",
     "check:iching-line-corpus-current": "node --no-warnings scripts/check-iching-line-corpus-current.mjs",
-    "check:tarot-current": "node scripts/check-tarot-full-production-current.mjs",
+    "check:tarot-current": "node scripts/check-tarot-current-v8.mjs && npm run check:tarot-r2-artwork",
     "check:future-method-contract": "node scripts/check-future-method-contract.mjs",
     "check:symbolic-phase10-12": "node scripts/check-symbolic-phase10-12.mjs",
     "check:mir-current-baseline-v2": "node scripts/check-mir-current-baseline-v2.mjs",
@@ -1867,7 +1867,10 @@
     "check:iching-customer-reading-experience": "node scripts/check-iching-customer-reading-experience.mjs",
     "check:cx-r12r4b:r4": "node scripts/generate-ecr-r4-authorities.mjs --check && node scripts/generate-cx-r12r4b-r4-ecr-campaign.mjs --check && node scripts/check-cx-r12r4b-r4-ecr-calculation-meaning.mjs",
     "check:tarot-tscp": "node scripts/check-tarot-tscp-w0-w7.mjs",
-    "generate:tarot-tscp-human-review": "node scripts/generate-tarot-tscp-human-review.mjs"
+    "generate:tarot-tscp-human-review": "node scripts/generate-tarot-tscp-human-review.mjs",
+    "check:tarot-tscp-full-production": "node scripts/check-tarot-tscp-full-production-v1.mjs",
+    "check:tarot-question-guidance": "node scripts/check-tarot-tscp-full-production-v1.mjs",
+    "check:tarot-r2-artwork": "node scripts/check-tarot-r2-artwork-current.mjs"
   },
   "type": "module",
   "dependencies": {

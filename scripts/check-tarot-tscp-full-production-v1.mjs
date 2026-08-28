@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
+const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');const T=p=>fs.readFileSync(path.join(ROOT,p),'utf8');const J=p=>JSON.parse(T(p));
+const hr=J('content/production/symbolic-method/human-review/tarot-tscp-human-review-results-v1.json');assert.equal(hr.humanReviewed,8);assert.equal(hr.accepted,8);assert.equal(hr.humanAcceptanceComplete,true);assert.equal(hr.criticalBoundaryFailures,0);
+const release=J('content/production/symbolic-method/releases/tarot/TAROT-1.1.0.json');assert.equal(release.status,'PROMOTED_FULL_PRODUCTION');assert.equal(release.authorityDigest,'4762f2df7ae7bc950ae8e62a6a101c1dd49c18b89b9e664358b16ca67ef6b204');assert.equal(release.normalProductionExpiry,null);
+const qg=J('content/interpretation/tarot/registries/tarot-question-guidance-registry-v1.json');assert.equal(qg.intents.length,8);assert.equal(qg.rules.broadQuestionPolicy,'NARROW_BEFORE_DRAW');
+const api=T('functions/api/symbolic-method-execute.js');assert.match(api,/tarot-spread-registry-v2\.json/);assert.match(api,/tarot-position-semantics-registry-v1\.json/);assert.match(api,/tarot-spread-composition-contract-v1\.json/);
+const auth=T('functions/tarot-product-runtime/tarot-production-authority.js');assert.match(auth,/TAROT-1\.1\.0/);assert.match(auth,/4762f2df7ae7bc950ae8e62a6a101c1dd49c18b89b9e664358b16ca67ef6b204/);
+const runtime=T('functions/tarot-product-runtime/tarot-product-runtime.js');assert.match(runtime,/tarot-product-runtime-v3\.js/);
+const html=T('perspectives/tarot/index.html');assert.match(html,/data-question-intents/);assert.doesNotMatch(html,/data-view-sources|See interpretation sources|查看解释来源/);
+const js=T('assets/customer-ui/js/surfaces/tarot.js');assert.match(js,/QUESTION_GUIDE_URL/);assert.match(js,/questionIssues/);assert.match(js,/recommendedSpreadId/);assert.match(js,/NARROW|TOO_MANY_LIFE_AREAS/);
+console.log('✓ TSCP-W8/W9 + question guidance passed: 8/8 human accepted; TAROT-1.1.0 FULL_PRODUCTION; deterministic focus guidance, broad-question narrowing and explainable spread recommendation are current.');

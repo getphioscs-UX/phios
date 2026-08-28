@@ -1,9 +1,9 @@
 /** PHI OS canonical Tarot FULL_PRODUCTION authority.
- * Release-scoped and permanent for TAROT-1.0.0. Normal execution is not a D1 activation lease.
+ * Release-scoped and permanent for TAROT-1.1.0. Normal execution is not a D1 activation lease.
  * D1 may carry an explicit release revocation, but missing D1 never expires an accepted release.
  */
-export const TAROT_FULL_PRODUCTION_RELEASE_ID='TAROT-1.0.0';
-export const TAROT_FULL_PRODUCTION_AUTHORITY_DIGEST='1af9a57c7e7e2e23e235d709dda6c0cfc48d73f5d6f74878bc843dcbd01bca4a';
+export const TAROT_FULL_PRODUCTION_RELEASE_ID='TAROT-1.1.0';
+export const TAROT_FULL_PRODUCTION_AUTHORITY_DIGEST='4762f2df7ae7bc950ae8e62a6a101c1dd49c18b89b9e664358b16ca67ef6b204';
 export const TAROT_FULL_PRODUCTION_AUTHORITY_SCHEMA='PHI-OS-TAROT-FULL-PRODUCTION-AUTHORITY-v1.1.0';
 export const TAROT_REVOCATION_RUNTIME_ID='system_capability_tarot_full_production';
 export const TAROT_REVOCATION_ARTIFACT_ID='system_capability_tarot_full_production_authority';

@@ -10,8 +10,10 @@ function artworkFor(observation){
   return Object.freeze({
     artworkId:e.artworkId||null,
     sourceId:e.sourceId||null,
-    src:e.originalFileUrl||null,
+    src:e.deliveryAssetUrl||e.originalFileUrl||null,
     sourcePage:e.commonsFilePage||null,
+    originalFileUrl:e.originalFileUrl||null,
+    originalFileUrl:e.originalFileUrl||null,
     rightsStatus:e.rightsClass||null,
     authorityTier:e.authorityTier||null,
     repoBundledAsset:e.repoBundledAsset===true,

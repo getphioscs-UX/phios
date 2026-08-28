@@ -14,7 +14,9 @@ const ICHING_AUTHORITY_PATHS=Object.freeze({
 export const TAROT_PRODUCTION_AUTHORITY_PATHS=Object.freeze({
   deckContract:'/content/professional/core-method-runtime/tarot-deck-contract-v1.json',
   cardRegistry:'/content/professional/core-method-runtime/tarot-card-registry-v1.json',
-  spreadRegistry:'/content/professional/core-method-runtime/tarot-spread-registry-v1.json',
+  spreadRegistry:'/content/professional/core-method-runtime/tarot-spread-registry-v2.json',
+  positionSemanticsRegistry:'/content/interpretation/tarot/registries/tarot-position-semantics-registry-v1.json',
+  spreadCompositionContract:'/content/interpretation/tarot/contracts/tarot-spread-composition-contract-v1.json',
   orientationPolicy:'/content/professional/core-method-runtime/tarot-orientation-policy-v1.json',
   visualCorpus:'/content/interpretation/tarot/corpus/tarot-rws-visual-observation-corpus-v1.json',
   visualLocator:'/content/interpretation/tarot/registries/tarot-visual-evidence-locator-v1.json',

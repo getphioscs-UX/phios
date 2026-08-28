@@ -32,27 +32,21 @@
     <div class="cx-container cx-tarot-reading-flow">
       <section class="cx-card cx-stack cx-tarot-question-card" data-reading-step="question">
         <div class="cx-tarot-step-heading"><span>1</span><div><p class="cx-eyebrow" data-cx-en="YOUR QUESTION" data-cx-zh="你的问题">YOUR QUESTION</p><h2 class="cx-title" data-cx-en="What are you trying to understand?" data-cx-zh="你现在最想看清什么？">What are you trying to understand?</h2></div></div>
+        <div class="cx-tarot-question-guide">
+          <p class="cx-eyebrow" data-cx-en="START WITH A FOCUS" data-cx-zh="先选择你想理解什么">START WITH A FOCUS</p>
+          <div class="cx-tarot-intent-options" data-question-intents role="radiogroup" aria-label="Question focus"></div>
+          <div class="cx-tarot-guidance-note" data-question-guidance aria-live="polite"></div>
+        </div>
         <label class="cx-form-field">
-          <span data-cx-en="Write the situation as a question." data-cx-zh="把你正在面对的情况写成一个问题。">Write the situation as a question.</span>
-          <textarea class="cx-symbolic-question" data-symbolic-question maxlength="800" rows="5" data-cx-en-placeholder="For example: What should I understand about changing jobs now?" data-cx-zh-placeholder="例如：关于现在换工作这件事，我最需要看清什么？" placeholder="For example: What should I understand about changing jobs now?"></textarea>
+          <span data-cx-en="Write one focused situation as a question." data-cx-zh="把一个具体局面写成一个聚焦的问题。">Write one focused situation as a question.</span>
+          <textarea class="cx-symbolic-question" data-symbolic-question maxlength="360" rows="5" data-cx-en-placeholder="For example: What should I understand about changing jobs now?" data-cx-zh-placeholder="例如：关于现在换工作这件事，我最需要看清什么？" placeholder="For example: What should I understand about changing jobs now?"></textarea>
         </label>
-        <p class="cx-meta" data-cx-en="Questions about what to understand, notice or compare usually produce a more useful reading than asking for a guaranteed outcome." data-cx-zh="与其问一个必然结果，不如问：我需要理解什么、注意什么、比较什么。这样的读取通常更有用。">Questions about what to understand usually produce a more useful reading.</p>
+        <div class="cx-tarot-question-quality" data-question-quality aria-live="polite"></div>
       </section>
 
       <section class="cx-card cx-stack" data-reading-step="spread">
-        <div class="cx-tarot-step-heading"><span>2</span><div><p class="cx-eyebrow" data-cx-en="CHOOSE A SPREAD" data-cx-zh="选择牌阵">CHOOSE A SPREAD</p><h2 class="cx-title" data-cx-en="How many cards do you want to work with?" data-cx-zh="这次你想用几张牌来看？">How many cards do you want to work with?</h2></div></div>
-        <div class="cx-tarot-spread-options" role="radiogroup" aria-label="Tarot spread">
-          <button type="button" class="cx-tarot-spread" data-spread="THREE_CARD" aria-pressed="true">
-            <strong data-cx-en="Three cards · recommended" data-cx-zh="三张牌 · 推荐">Three cards · recommended</strong>
-            <span data-cx-en="Situation · Tension · Consideration" data-cx-zh="当前局面 · 主要张力 · 可以考虑什么">Situation · Tension · Consideration</span>
-            <small data-cx-en="Best when the question has more than one moving part." data-cx-zh="适合关系、工作、选择等具有多个变量的问题。">Best when the question has more than one moving part.</small>
-          </button>
-          <button type="button" class="cx-tarot-spread" data-spread="ONE_CARD" aria-pressed="false">
-            <strong data-cx-en="One card · quick focus" data-cx-zh="一张牌 · 快速聚焦">One card · quick focus</strong>
-            <span data-cx-en="What deserves attention" data-cx-zh="此刻最值得注意什么">What deserves attention</span>
-            <small data-cx-en="Use when you want one clear symbolic focus." data-cx-zh="适合只想得到一个明确观察焦点的时候。">Use when you want one clear symbolic focus.</small>
-          </button>
-        </div>
+        <div class="cx-tarot-step-heading"><span>2</span><div><p class="cx-eyebrow" data-cx-en="CHOOSE A SPREAD" data-cx-zh="选择牌阵">CHOOSE A SPREAD</p><h2 class="cx-title" data-cx-en="Choose the spread that fits your question" data-cx-zh="选择最适合这个问题的牌阵">How many cards do you want to work with?</h2></div></div>
+        <div class="cx-tarot-spread-options" data-spread-options role="radiogroup" aria-label="Tarot spread"></div>
         <label class="cx-tarot-consent"><input type="checkbox" data-use-reality-context> <span data-cx-en="Compare the reading with my current Reality context" data-cx-zh="把读取与我当前的 Reality context 一起比较">Compare the reading with my current Reality context</span></label>
         <p class="cx-meta" data-reality-context-disclosure></p>
       </section>
@@ -93,8 +87,6 @@
       <section class="cx-card cx-stack" data-customer-layer="INTERPRETATION">
         <h3 data-cx-en="What the reading brings into focus" data-cx-zh="这次读取把什么带到焦点">What the reading brings into focus</h3>
         <div data-interpretation-display></div>
-        <button class="cx-button cx-button--quiet cx-tarot-source-toggle" type="button" data-view-sources aria-expanded="false" aria-controls="tarot-source-list"><span data-cx-en="See interpretation sources" data-cx-zh="查看解释来源">See interpretation sources</span></button>
-        <div id="tarot-source-list" data-source-list hidden></div>
       </section>
 
       <section class="cx-card cx-stack" data-customer-layer="REALITY">
