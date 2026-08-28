@@ -7,6 +7,7 @@ import {projectMethodsForCustomer} from '../customer-projection/method-customer-
 import {projectAstrologyForCustomer} from '../customer-projection/astrology-customer-projection.js';
 import {buildAstrologyCustomerReading} from '../customer-projection/astrology-customer-reading.js';
 import {buildAcceptedMethodCustomerResult} from '../customer-projection/method-customer-reading-v2.js';
+import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/single-method-reading-production.js';
 import {resolveBirthPlace} from '../location/place-resolver.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
@@ -98,6 +99,8 @@ async function executeOne(context,input,key,consentRecordId,parameters){
   let readingMethod;
   try{
     readingMethod=await buildAcceptedMethodCustomerResult({canonicalProjection:payload.result,locale:context.locale,requestedDepth:'STANDARD'});
+    const singleMethodReading=await maybeBuildProductionSingleMethodReading({methodResult:readingMethod,customerIntent:context.customerIntent,locale:context.locale});
+    if(singleMethodReading)readingMethod=freeze({...readingMethod,singleMethodReading});
   }catch(error){
     readingMethod=limitedReadingMethod(spec,context.locale,error,payload.result);
   }
@@ -145,7 +148,8 @@ function buildReadingView({methods,selectedCount,calculationCount,locale}){
       rawProjectionUsedAsCustomerInterpretation:false,
       currentRealityAssumed:false,
       persistence:false
-    }
+    },
+    combinedReading:{state:'NOT_STARTED',crossMethodCompositionPerformed:false}
   });
 }
 
@@ -180,6 +184,7 @@ export async function onRequestPost(context){
 
   const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';
   context.locale=locale;
+  context.customerIntent=body?.intent||null;
   let location=null;
   if(needsPlace){
     try{location=await resolveBirthPlace(body.placeRef,{birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime),locale,env:context.env})}

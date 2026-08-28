@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "PHI-OS-SINGLE-METHOD-READING-CONTRACT-v1.0.0",
+  "input": {
+    "required": ["methodResult", "acceptedInterpretationResult", "locale"],
+    "optional": ["customerIntent", "availableTimingContext", "currentRealityRefs"],
+    "methodIds": ["AST", "BZR", "NUM", "ZWR"],
+    "requiredMethodState": "READY_TO_READ",
+    "requiredAcceptanceBasis": "ADMITTED_COMPOSITION_RULESET"
+  },
+  "output": "PHI-OS-SINGLE-METHOD-READING-IR-v1.0.0",
+  "futureCompatibleMethodIds": ["ECR"],
+  "boundary": {
+    "rawProjectionFallback": false,
+    "newMeaningCreation": false,
+    "crossMethodInference": false,
+    "currentRealityAssumption": false,
+    "timingWithoutAuthority": false
+  }
+}
+
