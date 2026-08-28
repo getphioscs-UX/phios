@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-STAR-STATE-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W4",
+  "status": "ENGINEERING_COMPLETE_SOURCE_GATED",
+  "runtime": "functions/zi-wei-full-production/ziwei-star-state-runtime.js",
+  "registry": "content/professional/zi-wei-full-production/registries/ziwei-star-state-registry-v1.json",
+  "outputSchema": "PHI-OS-ZIWEI-STAR-STATE-RESULT-v1.0.0",
+  "vocabulary": [
+    "MIAO",
+    "WANG",
+    "DE",
+    "LI",
+    "PING",
+    "BU",
+    "XIAN",
+    "UNSPECIFIED"
+  ],
+  "rules": {
+    "stateIsClassificationNotNumericScore": true,
+    "missingSourceCellBecomesUnspecified": true,
+    "unspecifiedNeverMeansPing": true,
+    "noGoodBadInference": true,
+    "noInterpretation": true,
+    "authorityVersionRequired": true,
+    "productionEligible": false,
+    "reviewableRegistryAndExecutableMirrorMustMatch": true
+  },
+  "executableAuthorityMirror": "functions/zi-wei-full-production/ziwei-star-state-authority-v1.js"
+}

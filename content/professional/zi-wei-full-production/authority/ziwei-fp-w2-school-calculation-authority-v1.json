@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-SCHOOL-CALCULATION-AUTHORITY-v1.0.0",
+  "work": "ZIWEI-FP-W2",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "status": "ENGINEERING_FROZEN_PRODUCTION_SOURCE_ADMISSION_PENDING",
+  "profileCode": "PHI_OS_ZIWEI_COMPONENT_AUTHORITY_PROFILE_V1",
+  "principle": "Zi Wei authority is frozen per calculation component. No source or school is allowed to silently govern a different component.",
+  "currentHumanFrozenAuthority": {
+    "policyRef": "content/professional/core-method-runtime/zi-wei-calculation-policy-v1.json",
+    "status": "HUMAN_FROZEN",
+    "preserveExactly": true,
+    "components": {
+      "calendar": "HKO_GREGORIAN_LUNAR_TABLE_V1",
+      "dayBoundary": "ZI_INITIAL_23_00_NEXT_DAY_V1",
+      "palaces": "STANDARD_YIN_MONTH_REVERSE_HOUR_PALACES_V1",
+      "mainStars": "STANDARD_14_MAIN_STARS_FIVE_ELEMENT_BUREAU_V1",
+      "supportStars": "SIX_SUPPORT_STARS_V1",
+      "natalTransformations": "BIRTH_YEAR_STEM_FOUR_TRANSFORMATIONS_SOUTHERN_TABLE_V1"
+    }
+  },
+  "dynamicAuthority": {
+    "policyRef": "content/professional/zi-wei-dynamic/authority/zi-wei-dynamic-policy-v2.json",
+    "status": "HUMAN_FROZEN",
+    "scope": [
+      "DA_XIAN",
+      "LIU_NIAN"
+    ],
+    "reuseNotRebuild": true
+  },
+  "fullProductionEngineeringSuccessor": {
+    "starPlacementExtension": {
+      "scopeCode": "PLATFORM_BASELINE_28_STARS_V1",
+      "newStars": [
+        "LU_CUN",
+        "QING_YANG",
+        "TUO_LUO",
+        "HUO_XING",
+        "LING_XING",
+        "DI_KONG",
+        "DI_JIE",
+        "TIAN_MA"
+      ],
+      "classicalWitness": "紫微斗数全书",
+      "ruleFamily": "year-stem Lu Cun; adjacent Qing Yang/Tuo Luo; year-branch Tian Ma; year-branch+hour Fire/Bell; Hai-start hour Earth Void/Earth Robbery",
+      "sourceAdmissionState": "PENDING_HUMAN_ADMISSION",
+      "productionEligible": false
+    },
+    "starState": {
+      "authorityVersion": "ZIWEI_STAR_STATE_CLASSICAL_WITNESS_V1",
+      "classicalWitness": "紫微斗数全书",
+      "normalizationVocabulary": [
+        "MIAO",
+        "WANG",
+        "DE",
+        "LI",
+        "PING",
+        "BU",
+        "XIAN",
+        "UNSPECIFIED"
+      ],
+      "rule": "Only explicitly witnessed branch-state cells are emitted. Missing cells are UNSPECIFIED and never inferred as PING.",
+      "sourceAdmissionState": "PENDING_HUMAN_ADMISSION",
+      "productionEligible": false
+    }
+  },
+  "knownAuthorityConflict": {
+    "code": "REN_HUA_KE_TARGET_CONFLICT",
+    "currentFrozenProduction": [
+      "TIAN_LIANG",
+      "ZI_WEI",
+      "ZUO_FU",
+      "WU_QU"
+    ],
+    "classicalWitnessVariant": [
+      "TIAN_LIANG",
+      "ZI_WEI",
+      "TIAN_FU",
+      "WU_QU"
+    ],
+    "action": "DO_NOT_CHANGE_CURRENT_FROZEN_PRODUCTION_TABLE",
+    "reason": "This is exactly the kind of school/table divergence W2 must make explicit. A future transformation successor requires its own source admission and human freeze."
+  },
+  "mixingRules": {
+    "noGlobalSchoolLabelWithoutComponentScope": true,
+    "noSilentFallbackAcrossSchools": true,
+    "noClassicalWitnessMayRewriteCurrentFrozenTable": true,
+    "allNewRulesVersioned": true,
+    "allNewRulesSourceAdmittedBeforeProduction": true
+  }
+}
