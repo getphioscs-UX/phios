@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-PATTERN-RUNTIME-CONTRACT-v1.2.0",
+  "work": "BAZI-FP-W5",
+  "status": "SOURCE_ADMITTED_DETAILED_V2_RULESET_FROZEN",
+  "inputs": [
+    "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0",
+    "PHI-OS-BAZI-TEN-GOD-STRUCTURAL-IR-v1.0.0",
+    "PHI-OS-BAZI-STEM-BRANCH-RELATIONSHIPS-v1.0.0"
+  ],
+  "rules": {
+    "monthCommandIsStartingContextNotAutomaticVerdict": true,
+    "hiddenStemCandidatesMustRemainVisible": true,
+    "visibleStemMatchesMustBeRecorded": true,
+    "monthBranchRelationsMustBeRecorded": true,
+    "combinationTransformationMayNotBeAssumed": true,
+    "qualityScoreForbidden": true,
+    "lifeOutcomeForbidden": true,
+    "productionPatternVerdictRequiresHumanAdmittedSourceClaims": true,
+    "humanAdmittedSourceClaimsAvailable": true,
+    "primaryPatternAssignmentRequiresDetailedFormationRuleCoverage": false,
+    "primaryPatternAssignmentRequiresAllRulePrerequisitesResolved": true
+  },
+  "output": "PHI-OS-BAZI-PATTERN-CANDIDATE-IR-v1.0.0",
+  "predecessorRef": "content/professional/bzr-production/contracts/bazi-pattern-runtime-contract-v1.1.json",
+  "currentBaselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "rulesetRef": "content/interpretation/bazi/rulesets/bazi-pattern-ruleset-v2.json",
+  "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+  "decisionCoverage": {
+    "candidateFamilyClassification": "SUPPORTED",
+    "treatmentClass": "SUPPORTED",
+    "variationEvidenceEvaluation": "SUPPORTED",
+    "formationDefeatRescueCounterEvidence": "SUPPORTED_CONDITIONAL",
+    "jianluYuejieSpecialPath": "SUPPORTED",
+    "primaryPatternFormation": "FAIL_CLOSED_UNLESS_ALL_REQUIRED_EVIDENCE_RESOLVED",
+    "qualityRanking": "FORBIDDEN",
+    "lifeOutcomePrediction": "FORBIDDEN"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-LIU-NIAN-INTERACTION-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W8",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "purpose": "Join governed natal Chart IR, W7 Da Yun structural records and the existing BZR Temporal annual/current-cycle authority into a deterministic structural interaction IR. W8 does not recalculate annual pillars, select luck cycles independently, or create W9 semantic findings.",
+  "inputs": {
+    "chartSchema": "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0",
+    "daYunSchema": "PHI-OS-BAZI-DA-YUN-STRUCTURAL-IR-v1.0.0",
+    "temporalProjectionSchema": "PHI-OS-BZR-TEMPORAL-PROJECTION-v1.0.0"
+  },
+  "output": {
+    "schema": "PHI-OS-BAZI-NATAL-DA-YUN-LIU-NIAN-INTERACTION-IR-v1.0.0",
+    "fields": [
+      "Liu Nian stem/branch identity",
+      "Liu Nian stem Ten-God",
+      "Liu Nian branch hidden Ten-Gods",
+      "Liu Nian to natal structural relations",
+      "Liu Nian to current Da Yun structural relations",
+      "W7 current Da Yun to natal evidence reuse",
+      "cross-layer three-harmony/meeting/punishment presence"
+    ]
+  },
+  "authority": {
+    "annualPillarOwner": "BZR_TEMPORAL_RUNTIME_V2_EXACT_LI_CHUN",
+    "currentDaYunSelectionOwner": "BZR_TEMPORAL_RUNTIME_V2_LUCK_BOUNDARY",
+    "daYunStructuralOwner": "BAZI-FP-W7",
+    "natalChartOwner": "BAZI-FP-W1",
+    "relationshipDerivationPredecessor": "BAZI-FP-W3",
+    "tenGodDerivationPredecessor": "BAZI-FP-W4"
+  },
+  "rules": {
+    "mustReuseTemporalAnnualFact": true,
+    "mayRecalculateAnnualPillar": false,
+    "mustReuseTemporalCurrentLuckSelection": true,
+    "maySelectCurrentLuckIndependently": false,
+    "mustMatchTemporalLuckPillarToW7StructuralRecord": true,
+    "combinationPresenceMayNotEstablishTransformation": true,
+    "transitionDayMayNotPickOneLuckCycle": true,
+    "w5W6RulesConsumedAtW8": false,
+    "mayCreateW9Finding": false,
+    "mayCreateCustomerInterpretation": false
+  },
+  "runtimeRef": "functions/bzr-full-production/bazi-liu-nian-interaction-runtime.js",
+  "fixtureRef": "content/professional/bzr-full-production/fixtures/bazi-liu-nian-interaction-fixture-v1.json",
+  "handoff": "BAZI-FP-W9 consumes W1–W8 structural evidence and owns semantic Structural Finding Registry."
+}

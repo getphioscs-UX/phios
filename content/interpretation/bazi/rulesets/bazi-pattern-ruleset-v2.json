@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-PATTERN-RULESET-v2.0.0",
+  "work": "BAZI-FP-W5",
+  "rulesetId": "BAZI-W5-ZI-PING-MONTH-COMMAND-RULESET-v2",
+  "rulesetVersion": "2.0.0-candidate",
+  "status": "FROZEN_SOURCE_ADMITTED_DETAILED_V2",
+  "active": true,
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "predecessor": "content/interpretation/bazi/rulesets/bazi-pattern-ruleset-v1.json",
+  "claimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.1.json",
+  "evaluationModel": {
+    "stages": [
+      "MONTH_COMMAND_CANDIDATE",
+      "FORMATION_PATHS",
+      "DEFEAT_CONDITIONS",
+      "TABOO_COUNTER_EVIDENCE",
+      "RESCUE_CONDITIONS",
+      "VARIATION_RECHECK",
+      "JIANLU_YUEJIE_SPECIAL_PATH"
+    ],
+    "formationDoesNotEraseCounterEvidence": true,
+    "formationAndRescueExamplesNotDeclaredExhaustive": true
+  },
+  "familyRules": [
+    {
+      "family": "ZHENG_GUAN",
+      "formationClaimRefs": [
+        "BZR-CLM-ZPZQ-09-ZHENGGUAN-FORMATION-013"
+      ],
+      "defeatClaimRefs": [
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020"
+      ],
+      "rescueClaimRefs": [
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022"
+      ]
+    },
+    {
+      "family": "CAI",
+      "formationClaimRefs": [
+        "BZR-CLM-ZPZQ-09-CAI-FORMATION-014"
+      ],
+      "defeatClaimRefs": [
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020"
+      ],
+      "rescueClaimRefs": [
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022"
+      ]
+    },
+    {
+      "family": "YIN",
+      "formationClaimRefs": [
+        "BZR-CLM-ZPZQ-09-YIN-FORMATION-015"
+      ],
+      "defeatClaimRefs": [
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020"
+      ],
+      "rescueClaimRefs": [
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022"
+      ]
+    },
+    {
+      "family": "SHI_SHEN",
+      "formationClaimRefs": [
+        "BZR-CLM-ZPZQ-09-SHISHEN-FORMATION-016"
+      ],
+      "defeatClaimRefs": [
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020"
+      ],
+      "rescueClaimRefs": [
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022"
+      ]
+    },
+    {
+      "family": "QI_SHA",
+      "formationClaimRefs": [
+        "BZR-CLM-ZPZQ-09-QISHA-FORMATION-017"
+      ],
+      "defeatClaimRefs": [
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020"
+      ],
+      "rescueClaimRefs": [
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022"
+      ]
+    },
+    {
+      "family": "SHANG_GUAN",
+      "formationClaimRefs": [
+        "BZR-CLM-ZPZQ-09-SHANGGUAN-FORMATION-018"
+      ],
+      "defeatClaimRefs": [
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020"
+      ],
+      "rescueClaimRefs": [
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022"
+      ]
+    },
+    {
+      "family": "JIANLU_YUEJIE_SPECIAL",
+      "formationClaimRefs": [
+        "BZR-CLM-ZPZQ-09-JIANLU-YUEJIE-FORMATION-019",
+        "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-DETAIL-023"
+      ],
+      "defeatClaimRefs": [
+        "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020"
+      ],
+      "rescueClaimRefs": [
+        "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022"
+      ]
+    }
+  ],
+  "globalCounterEvidenceClaims": [
+    "BZR-CLM-ZPZQ-09-TABOO-WITHIN-FORMATION-021"
+  ],
+  "activationGate": {
+    "humanAdmissionRequired": true,
+    "allReferencedClaimsRuntimeUseAllowedRequired": true,
+    "activeRulesetReplacementRequiresNewFreeze": true,
+    "humanAdmissionSatisfied": true,
+    "allReferencedClaimsRuntimeUseAllowedSatisfied": true
+  },
+  "freezeBaselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "predecessorCandidateRef": "content/interpretation/bazi/rulesets/bazi-pattern-ruleset-v2.candidate.json",
+  "authority": {
+    "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.3.json",
+    "admissionRecordRef": "content/interpretation/bazi/admission/bzr-r1-claim-batch-002-admission-v1.json",
+    "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-002-human-review-result-v1.json",
+    "allReferencedBatch002ClaimsHumanAdmitted": true
+  },
+  "decisionCoverage": {
+    "familySpecificFormationRules": "SUPPORTED_CONDITIONAL",
+    "familySpecificDefeatRules": "SUPPORTED_CONDITIONAL",
+    "counterEvidenceRetention": "SUPPORTED_REQUIRED",
+    "rescueRules": "SUPPORTED_CONDITIONAL",
+    "jianluYuejieSpecialPath": "SUPPORTED",
+    "primaryPatternAutomaticAssignment": "FAIL_CLOSED_UNLESS_ALL_REQUIRED_EVIDENCE_RESOLVED",
+    "qualityRanking": "FORBIDDEN"
+  }
+}
