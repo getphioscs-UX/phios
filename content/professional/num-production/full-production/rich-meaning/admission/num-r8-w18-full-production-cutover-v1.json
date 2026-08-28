@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R8-W18-FULL-PRODUCTION-CUTOVER-v1.0.0",
+  "workCode": "NUM-R8",
+  "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "targetCapability": "NUMEROLOGY_FULL_READING_V2",
+  "status": "CUTOVER_ENGINEERING_READY_HUMAN_GATE_OPEN",
+  "scopeDecision": {
+    "lifePeriod": "DEFERRED_OUT_OF_NUM_R8_TARGET",
+    "reason": "Not present in current calculation authority; Pinnacle + Challenge + Personal Year/Month/Day remain in-scope."
+  },
+  "preCutoverGates": {
+    "predecessorNumFpW0W16Machine64Pass": true,
+    "predecessorW17CaseDecisions12Accepted": true,
+    "predecessorW17CriterionAttestationComplete": false,
+    "numR1SourceSetApproved": true,
+    "numR2ClaimsExtracted": true,
+    "numR3RoleClaimCandidatesBuilt": true,
+    "numR4MasterKarmicCandidatesBuilt": true,
+    "numR5CycleCandidatesBuilt": true,
+    "numR6CompositionCandidateBuilt": true,
+    "numR7HumanAcceptance12Pass": false,
+    "richClaimRuntimeAdmission": false,
+    "defaultCustomerCutover": false,
+    "numR3SourceClaimHumanAdmission": false
+  },
+  "blockingReasons": [
+    "NUM_R3_SOURCE_CLAIM_HUMAN_ADMISSION_PENDING",
+    "NUM_R7_HUMAN_ACCEPTANCE_PENDING",
+    "RICH_SOURCE_CLAIMS_NOT_HUMAN_ADMITTED",
+    "ROLE_AND_CYCLE_COMPOSITION_NOT_HUMAN_ADMITTED"
+  ],
+  "productionRules": {
+    "machinePassCannotSubstituteHumanAcceptance": true,
+    "caseDecisionAcceptWithoutCriteriaDoesNotEqualCriterionAttestation": true,
+    "sourceEligibilityDoesNotEqualClaimAdmission": true,
+    "customerCutoverRequiresExplicitR8GateFlip": true,
+    "lifePeriodCannotBeSynthesized": true
+  },
+  "nextAction": "First review the 48 NUM-R3 source claims, then complete NUM-R7 12-case rich composition review. R8 opens only when both human gates are explicitly admitted."
+}

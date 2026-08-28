@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/num/num-source-claim-v1.schema.json",
+  "title": "PHI OS Numerology Source Claim v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "claimId",
+    "work",
+    "claimType",
+    "primarySourceId",
+    "locator",
+    "sourceBoundParaphrase",
+    "normalizedPayload",
+    "reviewState",
+    "runtimeUseAllowed",
+    "epistemicBoundary"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-NUM-SOURCE-CLAIM-v1.0.0"
+    },
+    "claimId": {
+      "type": "string",
+      "pattern": "^NUM-SC-"
+    },
+    "work": {
+      "enum": [
+        "NUM-R2",
+        "NUM-R3",
+        "NUM-R4",
+        "NUM-R5"
+      ]
+    },
+    "claimType": {
+      "enum": [
+        "NUMBER_THEME",
+        "ROLE_THEME",
+        "ROLE_DEFINITION",
+        "MASTER_THEME",
+        "KARMIC_TRADITION_THEME",
+        "CYCLE_THEME",
+        "COMPOUND_CONTEXT",
+        "DERIVED_ROLE_COMPOSITION"
+      ]
+    },
+    "primarySourceId": {
+      "type": "string",
+      "pattern": "^NUM-SRC-"
+    },
+    "supportingClaimIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "locator": {
+      "type": "object"
+    },
+    "sourceBoundParaphrase": {
+      "type": "object",
+      "required": [
+        "en",
+        "zhHans"
+      ]
+    },
+    "normalizedPayload": {
+      "type": "object"
+    },
+    "reviewState": {
+      "enum": [
+        "EXTRACTED_PENDING_HUMAN_REVIEW",
+        "HUMAN_ADMITTED",
+        "HUMAN_REJECTED",
+        "NEEDS_REVISION"
+      ]
+    },
+    "runtimeUseAllowed": {
+      "type": "boolean"
+    },
+    "epistemicBoundary": {
+      "type": "object"
+    },
+    "reviewEvidenceRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

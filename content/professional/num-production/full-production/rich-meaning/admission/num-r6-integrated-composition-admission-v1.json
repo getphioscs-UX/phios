@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R6-INTEGRATED-COMPOSITION-ADMISSION-v1.0.0",
+  "workCode": "NUM-R6",
+  "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "status": "COMPOSITION_AUTHORITY_CANDIDATE_READY_R7_HUMAN_REVIEW_REQUIRED",
+  "inputAuthority": [
+    "NUM-R2-CLAIM-BATCH-001",
+    "NUM-R3",
+    "NUM-R4",
+    "NUM-R5",
+    "NUM-FP-W6",
+    "NUM-FP-W7"
+  ],
+  "compositionOrder": [
+    "CALCULATED_ROLE",
+    "ADMITTED_ROLE_MEANING",
+    "REPEATED_VALUE_RELATION",
+    "MASTER_OR_COMPOUND_CONTEXT",
+    "TARGET_DATE_CYCLE_THEME",
+    "SEMANTIC_DEDUP",
+    "PRIORITY_THEME_CLUSTER",
+    "INTEGRATED_NARRATIVE",
+    "REALITY_REFLECTION"
+  ],
+  "rules": {
+    "oneGenericNumberDefinitionPerReadingMaximum": true,
+    "roleSpecificMeaningOverridesGenericRepetition": true,
+    "sameValueDifferentRoleMustBeComparedNotDuplicated": true,
+    "cycleMeaningCannotPredictEvent": true,
+    "karmicMeaningCannotBeIdentityFact": true,
+    "unsupportedAttitudeMasterMeaningMustFailClosed": true,
+    "unsupportedNameRoleMustFailClosed": true,
+    "rawReductionPathRemainsEvidenceNotNarrative": true,
+    "maxStandoutThemes": 3,
+    "maxReflectionPrompts": 3
+  },
+  "runtimeUseAllowed": false,
+  "admissionGate": "NUM-R7_HUMAN_ACCEPTANCE"
+}

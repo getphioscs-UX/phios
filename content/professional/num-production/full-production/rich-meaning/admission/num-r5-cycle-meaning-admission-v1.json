@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R5-CYCLE-MEANING-ADMISSION-v1.0.0",
+  "workCode": "NUM-R5",
+  "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "status": "CYCLE_THEME_CANDIDATES_READY_R7_HUMAN_REVIEW_REQUIRED",
+  "cycleRoles": [
+    "PERSONAL_YEAR",
+    "PERSONAL_MONTH",
+    "PERSONAL_DAY"
+  ],
+  "values": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "claimIds": [
+    "NUM-SC-CYCLE-01",
+    "NUM-SC-CYCLE-02",
+    "NUM-SC-CYCLE-03",
+    "NUM-SC-CYCLE-04",
+    "NUM-SC-CYCLE-05",
+    "NUM-SC-CYCLE-06",
+    "NUM-SC-CYCLE-07",
+    "NUM-SC-CYCLE-08",
+    "NUM-SC-CYCLE-09",
+    "NUM-SC-CYCLE-HIERARCHY"
+  ],
+  "runtimeUseAllowed": false,
+  "blockedValues": [
+    {
+      "values": [
+        11,
+        22,
+        33
+      ],
+      "reason": "PRIMARY_SOURCE_DESCRIBES_1_TO_9_CALENDAR_CYCLE_PATTERN_WHILE_PHI_CALCULATION_CAN_PRESERVE_MASTER_TOTALS"
+    }
+  ],
+  "rules": {
+    "cycleThemeIsEventPrediction": false,
+    "yearMonthDayShareThemeFamily": true,
+    "shorterScaleMustUseLowerClaimStrength": true,
+    "targetDateRequired": true
+  }
+}

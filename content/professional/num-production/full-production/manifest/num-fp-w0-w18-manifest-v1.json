@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-NUM-FP-W0-W18-MANIFEST-v1.0.0",
-  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
-  "status": "PRE_ADMISSION_IMPLEMENTATION_COMPLETE",
+  "baselineCommit": "c9f0970d7f3148924e85ee1735139558f0cad140",
+  "status": "PREDECESSOR_IMPLEMENTATION_RECONCILED_WITH_NUM_R1_R8",
   "successorWorkIdentity": "NUM-FP",
   "historicalNumW0W6Mutated": false,
   "works": [
@@ -93,29 +93,29 @@
     {
       "workCode": "NUM-FP-W17",
       "requestedWorkCode": "NUM-W17",
-      "status": "PENDING_HUMAN_REVIEW_0_OF_12"
+      "status": "CASE_DECISIONS_ACCEPTED_12_OF_12_CRITERIA_UNATTESTED"
     },
     {
       "workCode": "NUM-FP-W18",
       "requestedWorkCode": "NUM-W18",
-      "status": "BLOCKED_PRE_FULL_PRODUCTION"
+      "status": "SUPERSEDED_BY_NUM_R8_HUMAN_GATE"
     }
   ],
   "validation": {
     "check:num-fp": "PASS",
     "machineCampaign": "64/64 PASS",
-    "humanReview": "0/12 PENDING",
-    "fullProductionAdmission": "BLOCKED_BY_DESIGN",
+    "humanReview": "12/12 case decisions ACCEPT; criteria null, so not criterion-attested HUMAN_ACCEPTED",
+    "fullProductionAdmission": "BLOCKED_PENDING_NUM_R7_HUMAN_ACCEPTANCE",
     "legacyCheckNumProduction": "BASELINE_MCD7_DIGEST_DRIFT_OUTSIDE_BATCH"
   },
   "files": [
     {
       "path": "assets/js/pages/num-production-meaning.js",
-      "sha256": "1b6491fdd789788bfd18d5509d6d21f129c4962e1e5f05d6a8f2025b16975a13"
+      "sha256": "ca5db842ab6715b91d44012d501d8c19d35d9caf2dba0613a526cf29434ed15b"
     },
     {
       "path": "assets/css/num-production-meaning.css",
-      "sha256": "d35cf2939d5bae4ef089dc4a746a54f82ca30cee90991748da3d43eb5bc7fed4"
+      "sha256": "cdd16ebf8138e104416fc16372fe2d6ec3a8267feff61dfd3f1954d601e2d0bd"
     },
     {
       "path": "functions/canonical-meaning-production/api-method-meaning-handler.js",
@@ -127,19 +127,19 @@
     },
     {
       "path": "functions/num-full-production/num-integrated-reading-runtime.js",
-      "sha256": "143aa8c2051e67c55bf788aff7cea1a449e7da5570c559693ebaacb9ab19d935"
+      "sha256": "9b6e2005301ec5b7cdd266c70505a6b876c06921319bc99bf5b1f45d1a0f21d8"
     },
     {
       "path": "scripts/build-num-fp-w16-machine-campaign.mjs",
-      "sha256": "04356b3cd92c853dc1ea08e1013bb57ddc3284bc98e5f4c06833482506e45e53"
+      "sha256": "13fb36081ee571b7115ae218826046cf0cc33d0003faecc63cd7f02df1f09ba9"
     },
     {
       "path": "scripts/build-num-fp-w17-human-review.mjs",
-      "sha256": "4a40420b6a120826b000aa77e32ddba4b99cda4c23d5350f21450c3ed558c891"
+      "sha256": "74dc84402430c305a0577c9af571c9b0ce254cd1fa4e9a371a9296dfcd6b8eee"
     },
     {
       "path": "scripts/check-num-fp-w0-w18.mjs",
-      "sha256": "008954e2a2cfac0fe1ca86fdfd67d25ed7412a0e8774497cf4840fc3590281db"
+      "sha256": "3f06bae95e04cbf510275c498bd77536503941f0fedbd09d8fd47257651502f6"
     },
     {
       "path": "scripts/check-num-fp-full-production-admission.mjs",
@@ -147,7 +147,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "f8d3dcf017d880e3d8e15870013fa5c894e2f0d5b71b3587cfd7db53d0a47ed4"
+      "sha256": "7e0d271c097266e2083f2e53d1731145448d3dd29501d0f08dec240b8ee10ec5"
     },
     {
       "path": "docs/num/full-production/NUM-FULL-PRODUCTION-W0-W18-STATUS.zh-Hans.md",
@@ -155,87 +155,87 @@
     },
     {
       "path": "content/professional/num-production/full-production/admission/num-fp-w18-full-production-gate-v1.json",
-      "sha256": "e8f6b9025c062fbc25b37593feeeb1e050025240aad365286db13e6f76f36c35"
+      "sha256": "ad63544f753e31fbb80ff14845066fccccecec4365f82eab87a8320ca3274dd9"
     },
     {
       "path": "content/professional/num-production/full-production/audit/num-fp-w0-current-authority-audit-v1.json",
-      "sha256": "2c80803463f6cb74ec53899d90f452dd37905313173da44941b9be989b50a607"
+      "sha256": "1399005fe9c7c93fde37862f519c1605de0df0d65b04a64e92941a1252e2803f"
     },
     {
       "path": "content/professional/num-production/full-production/authority/num-fp-w1-method-authority-freeze-v1.json",
-      "sha256": "10f50ce1cd8d9e8afdba0fcecb673cbcb4e926474061a4008ecb1be76cf2e62d"
+      "sha256": "c15bed3c6c80bb0cc7245b0e0f69ce42248e99eaa639ea1f6b1b7ea351ce3d33"
     },
     {
       "path": "content/professional/num-production/full-production/authority/numerology-source-authority-v2.json",
-      "sha256": "a72360d32f1bbc69e4ab41a0e83190ce72d157246dc48dd600879629c1d5c39e"
+      "sha256": "0a2ea091b923fa7c2ad68d3bc0655d1e5d12326c1ed4beed509f59e245fa5e26"
     },
     {
       "path": "content/professional/num-production/full-production/contracts/num-fp-w10-interpretation-ir-v1.json",
-      "sha256": "36c9efe77e934e982324530929c9ec4327dbd4d412201bc8f44917996322f184"
+      "sha256": "41a0173864982d1e9b4554b23833a5d8c0a15be184f0bf080c803c429fdb05f2"
     },
     {
       "path": "content/professional/num-production/full-production/contracts/num-fp-w11-semantic-dedup-v1.json",
-      "sha256": "04d7785639c3e488d90f911823ee19a3cdb4b6b17967b7c8bafa5c95d5eadfc1"
+      "sha256": "012197a2be3471ef3628b53957da28c1db439f8e25ec04d71befce9ee005465f"
     },
     {
       "path": "content/professional/num-production/full-production/contracts/num-fp-w12-integrated-reading-v1.json",
-      "sha256": "f512cdf900b9abd6c0e7b12dcc629698215387b727986e4d67afe09d850e4e44"
+      "sha256": "93e1c4f49bee1b35e8a663d1163ff8402b7f34d55ceddf37f6fdf4cdce6b74ef"
     },
     {
       "path": "content/professional/num-production/full-production/contracts/num-fp-w13-reality-reflection-v1.json",
-      "sha256": "63806e924f5a6525b185b52a88e4bc46c3429ec69043f3194a32132ee7906065"
+      "sha256": "ef5144b92399fed38fe33ba80eb3ff9df60ee621dbb6d020de795e4d883808e5"
     },
     {
       "path": "content/professional/num-production/full-production/contracts/num-fp-w14-customer-report-ia-v1.json",
-      "sha256": "36fec7d802a61c4db83629153d5f2c1ab3e4f58162533b0bacfcf36f632f5cbc"
+      "sha256": "e625f84947bccda4b1a32cbcb764ca0d54ec6d4c31134ca6be670c3f350b067f"
     },
     {
       "path": "content/professional/num-production/full-production/contracts/num-fp-w15-responsive-surface-v1.json",
-      "sha256": "bd78146d86c2f3c41c9b9c8da95eb3cdd22a7504a2ab8de75e65104491472957"
+      "sha256": "4429e629305484f34133cef770f27f04bcbacb46be7c6ec817d6f1667e5134d9"
     },
     {
       "path": "content/professional/num-production/full-production/machine/num-fp-w16-machine-campaign-v1.json",
-      "sha256": "44b6f9713bd598ab7d4aa0e71de0dfecdab9b2041041ff07da3f069111921a8b"
+      "sha256": "63b4d475c78fe19c61d7ad079ce9d496c77cf4d695d495aec309ba8432d68b21"
     },
     {
       "path": "content/professional/num-production/full-production/machine/num-fp-w16-machine-fixture-corpus-v1.json",
-      "sha256": "f03fb24e2451dfd5ada80e9422f533ea45f15d142c38e14e529aeb471eabee39"
+      "sha256": "a185bb82f4d4799a060110ebd75f76c17e9ea8f3ae5f94081bf975404dbd4558"
     },
     {
       "path": "content/professional/num-production/full-production/registries/num-fp-w2-calculation-projection-registry-v1.json",
-      "sha256": "7327dfdaef99956977b524dcff12206120739c142670cc15eadaacc12fdef32c"
+      "sha256": "76e8b36cc25a1de2843edb224a9764a5055720f12c418409f1276226457b7076"
     },
     {
       "path": "content/professional/num-production/full-production/registries/num-fp-w3-number-meaning-registry-v1.json",
-      "sha256": "d9a6341dc6ef63c4027d6464d2a9cfeb51790465fcd48037b0533df62ff4bf3a"
+      "sha256": "e6bfd55be3f2212ea4bba8e351fa8d13699320bffa17a10e632bdd1717c60e50"
     },
     {
       "path": "content/professional/num-production/full-production/registries/num-fp-w4-role-number-matrix-v1.json",
-      "sha256": "9eb931309745646002639e569f62eba4acfbb9cfb37f2c7d5766c6fd122cf5ee"
+      "sha256": "7b9a761ed1b1729cb6109b5861c38c3a8359deac5352d36c5c696339a1169822"
     },
     {
       "path": "content/professional/num-production/full-production/registries/num-fp-w5-master-karmic-reduction-rules-v1.json",
-      "sha256": "f87a71abfc0cc9e97c8ca9cab7c40df5976c92e8a4c9c08d63c28a0e555a98fd"
+      "sha256": "ff940ec712c4e114a136919ce99513120cb882e7aa78c07473b2c2a2552e6d62"
     },
     {
       "path": "content/professional/num-production/full-production/registries/num-fp-w7-theme-priority-v1.json",
-      "sha256": "15b8ee98b0707dd4bdd6b068f58dfdeb8e58dbb12c2dca5ffc3872d9f5c33150"
+      "sha256": "23a5317d3c66839a5090c6ea62ffad4113fddf0781d04bd9cea799bc0beff63f"
     },
     {
       "path": "content/professional/num-production/full-production/registries/num-fp-w8-life-stage-registry-v1.json",
-      "sha256": "a21b5b0d7c3d5c001b8c37c97bff6c8bf906ff18aff1dc59625c8f4771b7b9cb"
+      "sha256": "d281f9c8e1ab05943a34277054f6f26606d28317d9ddef3190030e6d899e76cd"
     },
     {
       "path": "content/professional/num-production/full-production/registries/num-fp-w9-personal-cycle-registry-v1.json",
-      "sha256": "e10d604b331b67253a7187af04383e70c0515c9458f820edb848c236a2e532c3"
+      "sha256": "3f676141e151ac97362200302b18d649fc5dec7e3f338ae00e6c182173d12aca"
     },
     {
       "path": "content/professional/num-production/full-production/registries/numerology-composition-rules-v2.json",
-      "sha256": "a097b635668639fc5e513e82eb1aee9532ac57a692ad3c29da65ea1722e3be91"
+      "sha256": "c9d1f8b1b161aa26da5e19d4fa8b47ffb68685bc7f0fb5b42f9c0f2c6456f1e5"
     },
     {
       "path": "content/professional/num-production/full-production/registries/numerology-relational-meaning-registry-v2.json",
-      "sha256": "42b62835107a53189693a88f66bd3f746c1fe3099f8976218816623a03faa0e4"
+      "sha256": "a06af50e486a7f7ec49bfedf66071b7a57976b57b5bf5386c2c844e61867c7c4"
     },
     {
       "path": "content/professional/num-production/full-production/review/num-fp-rich-meaning-source-claim-template-v1.json",
@@ -243,15 +243,16 @@
     },
     {
       "path": "content/professional/num-production/full-production/review/num-fp-w17-human-review-cases-v1.json",
-      "sha256": "1498b8c3e077eb2344d83574f584962a2f087a7efb8aff2664512ee0c03f61bd"
+      "sha256": "537ed5d7f0e6944a15c85d65171939368f8c9fe3aff088ff87afa783cd9f87f9"
     },
     {
       "path": "content/professional/num-production/full-production/review/num-fp-w17-human-review-results-v1.json",
-      "sha256": "75e2b43f706490710872909f1818e7738cdfd9cd3b0a0d2bb6a9a387836c866c"
+      "sha256": "f07856ba732fce5a27993497cdb234328f6062fa836862575949dc35c39c9759"
     },
     {
       "path": "content/professional/num-production/full-production/review/num-fp-w17-human-review.html",
-      "sha256": "5ea269c07444c67190e9096fe8b995693e51897117be2f5699cfd5ccbff41c46"
+      "sha256": "b068e7688858198ba01d0cdca264ba915a9f8621d4bcfb652a33e2223a67c839"
     }
-  ]
+  ],
+  "successor": "content/professional/num-production/full-production/rich-meaning/manifest/num-r1-r8-manifest-v1.json"
 }
