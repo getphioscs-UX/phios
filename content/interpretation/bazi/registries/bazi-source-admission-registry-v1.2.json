@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-SOURCE-ADMISSION-REGISTRY-v1.2.0",
+  "work": "BZR-R1",
+  "status": "BATCH_001_ADMITTED_ACTIVE; BATCH_002_EXTRACTED_PENDING_HUMAN_REVIEW",
+  "states": [
+    "REGISTERED_PUBLIC_DOMAIN_UNDERLYING_WORK",
+    "WITNESS_REGISTERED_EDITION_CHECK_PENDING",
+    "CLAIM_EXTRACTED_PENDING_HUMAN_REVIEW",
+    "HUMAN_ADMITTED_RULE_CLAIM",
+    "RESEARCH_ONLY",
+    "EXCLUDED"
+  ],
+  "sources": [
+    {
+      "sourceId": "BZR-SRC-SAN-MING-TONG-HUI",
+      "state": "HUMAN_ADMITTED_RULE_CLAIMS_AVAILABLE",
+      "productionRuleClaimsAdmitted": 1,
+      "extractedClaimCount": 1,
+      "pendingHumanReviewClaims": 0
+    },
+    {
+      "sourceId": "BZR-SRC-ZI-PING-ZHEN-QUAN",
+      "state": "HUMAN_ADMITTED_RULE_CLAIMS_AVAILABLE",
+      "productionRuleClaimsAdmitted": 7,
+      "extractedClaimCount": 18,
+      "pendingHumanReviewClaims": 11
+    },
+    {
+      "sourceId": "BZR-SRC-DI-TIAN-SUI",
+      "state": "HUMAN_ADMITTED_RULE_CLAIMS_AVAILABLE",
+      "productionRuleClaimsAdmitted": 4,
+      "extractedClaimCount": 13,
+      "pendingHumanReviewClaims": 9
+    }
+  ],
+  "governance": {
+    "metadataMayEnableProductionVerdict": false,
+    "modelMayApproveSourceClaim": false,
+    "humanSourceFidelityReviewRequired": true,
+    "editionWitnessMustBeRecorded": true,
+    "schoolOrCommentaryLayerMustBeNamed": true,
+    "runtimeGapFillAllowed": false
+  },
+  "productionVerdictGate": {
+    "strengthVerdict": false,
+    "patternRuleEvaluation": true,
+    "patternPrimaryVerdict": false,
+    "usefulGodRuleEvaluation": true,
+    "usefulGodElementSelectionVerdict": false,
+    "tiaohouRuleEvaluation": true,
+    "tiaohouElementSelectionVerdict": false,
+    "reason": "BATCH_001_FOUNDATION_RULESETS_REMAIN_ACTIVE; BATCH_002_DETAILED_CANDIDATES_ARE_REVIEW_ONLY_UNTIL_HUMAN_ADMISSION"
+  },
+  "claimBatches": [
+    {
+      "batchId": "BZR-R1-CLAIM-BATCH-001",
+      "predecessorPath": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v1.json",
+      "admittedPath": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v1.1.json",
+      "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-001-human-review-result-v1.json",
+      "admissionRecordRef": "content/interpretation/bazi/admission/bzr-r1-claim-batch-001-admission-v1.json",
+      "state": "HUMAN_ADMITTED",
+      "extractedClaims": 12,
+      "humanAdmittedClaims": 12,
+      "runtimeUseAllowedClaims": 12
+    },
+    {
+      "batchId": "BZR-R1-CLAIM-BATCH-002",
+      "extractedPath": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.json",
+      "humanReviewRef": "content/interpretation/bazi/review/bzr-r1-claim-batch-002-human-review-v1.json",
+      "state": "EXTRACTED_PENDING_HUMAN_REVIEW",
+      "extractedClaims": 20,
+      "humanAdmittedClaims": 0,
+      "runtimeUseAllowedClaims": 0
+    }
+  ],
+  "registryVersion": "1.2.0",
+  "predecessorRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json",
+  "currentBaselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804"
+}

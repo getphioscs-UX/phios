@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-TIAOHOU-RULESET-CANDIDATE-v2.0.0",
+  "work": "BAZI-FP-W6",
+  "rulesetId": "BAZI-W6-DI-TIAN-SUI-CLIMATE-TIAOHOU-RULESET-v2-CANDIDATE",
+  "status": "DRAFT_SOURCE_CLAIMS_PENDING_HUMAN_ADMISSION",
+  "active": false,
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "predecessor": "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v1.json",
+  "claimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.json",
+  "thermalRules": [
+    {
+      "when": "COLD_BIAS_ESTABLISHED",
+      "candidateElementClasses": [
+        "WOOD",
+        "FIRE"
+      ],
+      "purpose": "WARMING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-THERMAL-ELEMENT-027"
+    },
+    {
+      "when": "WARM_BIAS_ESTABLISHED",
+      "candidateElementClasses": [
+        "METAL",
+        "WATER"
+      ],
+      "purpose": "COOLING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-THERMAL-ELEMENT-027"
+    }
+  ],
+  "moistureRules": [
+    {
+      "when": "EXCESS_WET_BIAS_ESTABLISHED",
+      "purpose": "DRYING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-DRY-WET-RECIPROCAL-028",
+      "elementSelection": "NOT_EXHAUSTIVELY_SUPPORTED"
+    },
+    {
+      "when": "EXCESS_DRY_BIAS_ESTABLISHED",
+      "purpose": "MOISTENING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-DRY-WET-RECIPROCAL-028",
+      "elementSelection": "NOT_EXHAUSTIVELY_SUPPORTED"
+    },
+    {
+      "when": "WOOD_FIRE_SHANG_GUAN_CONTEXT_ESTABLISHED",
+      "purpose": "MOISTENING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-SHANGGUAN-EXAMPLES-029"
+    },
+    {
+      "when": "METAL_WATER_SHANG_GUAN_CONTEXT_ESTABLISHED",
+      "purpose": "DRYING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-SHANGGUAN-EXAMPLES-029"
+    }
+  ],
+  "gates": {
+    "seasonAloneMayEstablishBias": false,
+    "humanAdmissionRequired": true,
+    "exhaustiveDayMasterMonthTableAvailable": false,
+    "unsupportedTableCompletionForbidden": true
+  },
+  "orderedElementExamples": [
+    {
+      "when": "SOURCE_SPECIFIC_FIRE_EARTH_DRYING_CASE_ESTABLISHED",
+      "orderedCandidateElements": [
+        "EARTH",
+        "FIRE"
+      ],
+      "purpose": "DRYING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-FIRE-EARTH-DRYING-PRIORITY-031",
+      "scope": "EXAMPLE_NOT_UNIVERSAL_TABLE"
+    },
+    {
+      "when": "SOURCE_SPECIFIC_DRY_METAL_MOISTENING_CASE_ESTABLISHED",
+      "orderedCandidateElements": [
+        "METAL",
+        "WATER"
+      ],
+      "purpose": "MOISTENING",
+      "claimRef": "BZR-CLM-DTS-CLIMATE-METAL-MOISTENING-PRIORITY-032",
+      "scope": "EXAMPLE_NOT_UNIVERSAL_TABLE"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-DA-YUN-STRUCTURAL-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W7",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "purpose": "Integrate already-governed Da Yun facts from the Canonical Method Projection into the Canonical BaZi Chart structural layer without recalculating luck cycles or creating interpretation.",
+  "input": {
+    "chartSchema": "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0",
+    "canonicalProjectionSchema": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+    "requiredProjectionCycleCode": "LUCK_CYCLE"
+  },
+  "output": {
+    "schema": "PHI-OS-BAZI-DA-YUN-STRUCTURAL-IR-v1.0.0",
+    "cycleFacts": [
+      "cycleNumber",
+      "startAge",
+      "endAge",
+      "pillar",
+      "certainty"
+    ],
+    "derivedStructuralFields": [
+      "cycleStemTenGod",
+      "cycleBranchHiddenTenGods",
+      "DaYun-to-natal stem/branch relations",
+      "three-harmony/meeting/punishment group presence with Da Yun"
+    ]
+  },
+  "authority": {
+    "luckCycleCalculationOwner": "BZR_LUCK_CYCLE_RUNTIME",
+    "canonicalProjectionOwner": "MCD_CANONICAL_PROJECTION_RUNTIME",
+    "chartOwner": "BAZI-FP-W1",
+    "relationshipPredecessor": "BAZI-FP-W3",
+    "tenGodPredecessor": "BAZI-FP-W4"
+  },
+  "rules": {
+    "mustReuseCanonicalProjectionCycleFacts": true,
+    "mayRecalculateLuckCycle": false,
+    "mayInferDirectionWhenProjectionOmitsIt": false,
+    "mayReconstructExactStartAgeFromRoundedProjection": false,
+    "maySelectCurrentCycleWithoutTargetContext": false,
+    "mayCreateLiuNian": false,
+    "mayCreateCustomerInterpretation": false
+  },
+  "handoff": "BAZI-FP-W8 consumes W7 Da Yun structural records together with the existing governed temporal/annual authority; W9 later owns semantic Structural Finding Registry.",
+  "runtimeRef": "functions/bzr-full-production/bazi-da-yun-runtime.js"
+}
