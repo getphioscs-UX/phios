@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/cx/customer-reading-narrative-ir-v1.schema.json",
+  "title": "PHI OS Customer Reading Narrative IR v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion","methodId","readingAuthorityRef","semanticDigest","openingSynthesis","primaryThemes","supportTensionSummary","deeperSections","observationQuestions","whyThisReading","technicalAppendix","narrativeDedup","closingText","boundary"],
+  "properties": {
+    "schemaVersion": {"const":"PHI-OS-CUSTOMER-READING-NARRATIVE-IR-v1.0.0"},
+    "methodId": {"type":"string","minLength":2},
+    "readingAuthorityRef": {"type":"string","minLength":1},
+    "semanticDigest": {"type":"string","minLength":1},
+    "openingSynthesis": {"type":"object"},
+    "primaryThemes": {"type":"array","items":{"type":"object"}},
+    "supportTensionSummary": {"type":"object"},
+    "deeperSections": {"type":"array","items":{"type":"object"}},
+    "observationQuestions": {"type":"array","items":{"type":"string"}},
+    "whyThisReading": {"type":"array","items":{"type":"object"}},
+    "technicalAppendix": {"type":"object"},
+    "narrativeDedup": {"type":"object"},
+    "closingText": {"type":["string","null"]},
+    "boundary": {"type":"object"}
+  }
+}
