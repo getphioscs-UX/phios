@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-R5-ECR-PRODUCTION-ADMISSION-v1.0.0",
+  "work": "CX-R12R4B-R5-W33R",
+  "baselineCommit": "850b382f363a83e2968b16db7942da6af9432377",
+  "status": "ECR_PRODUCTION_COMPOSITION_ADMITTED",
+  "methodAdmission": {
+    "ECR": {
+      "acceptedCases": 48,
+      "requiredCases": 48,
+      "humanReviewed": true,
+      "compositionCustomerPublishable": true,
+      "acceptanceBasis": "ADMITTED_COMPOSITION_RULESET"
+    }
+  },
+  "evidence": {
+    "machineCampaignRef": "content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json",
+    "machineCampaignSha256": "f3831283135556fb8ca4976779f0748c11feb5be457885747021aa204dbff0a6",
+    "machineCaseCount": 64,
+    "humanReviewCasesRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-cases-v1.json",
+    "humanReviewCasesSha256": "6cc2a99bc2968ddbb96e74654db9afffe3f679608ff8f933161216321d994cc4",
+    "humanReviewResultsRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json",
+    "humanReviewResultsSha256": "222e52e8f497c158ab74d8e38040e92d2ade5c960d33a3cfa7441bde08c34d5b",
+    "humanAcceptedCaseCount": 48,
+    "meaningAuthorityRef": "content/embodied-configuration/meaning/ecr-atomic-meaning-registry-v1.json",
+    "meaningAuthoritySha256": "8db6a80ed7cc10cc20b3598af65b01fd0b5af9d716db7b0ba7285df4c819b54e",
+    "atomicMeaningCount": 145,
+    "calculationAuthorityRef": "content/embodied-configuration/ecr-calculation-spec-v1.json",
+    "calculationAuthoritySha256": "98ce791c9a0f459b6b16d3a31f73bca70f20834ab381ae7ea5d94188ebf7db44"
+  },
+  "composition": {
+    "sharedRuntimeVersion": "2.0.0",
+    "compositionRuleVersion": "CX-R12R3B-COMPOSITION-RULES-v1.0.0",
+    "ecrRuleRefs": [
+      "CX-COMP-ECR-CONTEXT-GRAMMAR-QUESTION-v1",
+      "CX-COMP-ECR-QUESTION-CAPABILITY-v1",
+      "CX-COMP-ECR-DRIVER-PRIORITY-v1",
+      "CX-COMP-ECR-MOTION-CONFIGURATION-v1",
+      "CX-COMP-ECR-CONFIGURATION-ACTIVATION-v1"
+    ]
+  },
+  "boundaries": {
+    "calculationAuthorityChanged": false,
+    "atomicMeaningAuthorityChanged": false,
+    "compositionRulesChangedByAdmission": false,
+    "admissionCreatesNewMeaning": false,
+    "liveCustomerHumanReviewClaimed": false,
+    "currentRealityAssumed": false,
+    "humanDesignAuthorityConsumed": false,
+    "xpfExternalProfileConsumed": false,
+    "crossPerspectiveCompositionStarted": false,
+    "rendererCreatesMeaning": false,
+    "aiCreatesMeaning": false
+  },
+  "publication": {
+    "publicationAllowed": true,
+    "customerPublishable": true,
+    "methodId": "ECR",
+    "publicMethodCode": "EMBODIED_CONFIGURATION_PROJECTION"
+  }
+}

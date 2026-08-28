@@ -2,6 +2,7 @@ import {validateCanonicalBirthInput} from '../method-client-delivery/canonical-b
 import {onRequestPost as runMethodExecute} from './method-execute.js';
 import {onRequestPost as runAstStructuralExecute} from './ast-structural-execute.js';
 import {onRequestPost as runZiWeiExecute} from './zi-wei-execute.js';
+import {onRequestPost as runEcrExecute} from './ecr-execute.js';
 import {projectMethodsForCustomer} from '../customer-projection/method-customer-projection.js';
 import {projectAstrologyForCustomer} from '../customer-projection/astrology-customer-projection.js';
 import {buildAstrologyCustomerReading} from '../customer-projection/astrology-customer-reading.js';
@@ -13,13 +14,14 @@ const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:
 const clean=value=>String(value??'').trim();
 const nullable=value=>clean(value)||null;
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const item of Object.values(value))freeze(item)}return value};
-const METHOD_ID=Object.freeze({ASTROLOGY:'AST',BAZI:'BZR',NUMEROLOGY:'NUM',ZI_WEI_DOU_SHU:'ZWR'});
-const METHOD_ID_BY_PUBLIC=Object.freeze({ASTROLOGY_PROJECTION:'AST',BAZI_PROJECTION:'BZR',NUMEROLOGY_PROJECTION:'NUM',ZI_WEI_PROJECTION:'ZWR'});
+const METHOD_ID=Object.freeze({ASTROLOGY:'AST',BAZI:'BZR',NUMEROLOGY:'NUM',ZI_WEI_DOU_SHU:'ZWR',EMBODIED_CONFIGURATION:'ECR'});
+const METHOD_ID_BY_PUBLIC=Object.freeze({ASTROLOGY_PROJECTION:'AST',BAZI_PROJECTION:'BZR',NUMEROLOGY_PROJECTION:'NUM',ZI_WEI_PROJECTION:'ZWR',EMBODIED_CONFIGURATION_PROJECTION:'ECR'});
 const METHODS=Object.freeze({
   astrology:{methodCode:'ASTROLOGY',methodVersion:'0.1.0',publicMethodCode:'ASTROLOGY_PROJECTION',label:{en:'Astrology',zh:'占星'},endpoint:'/api/ast-structural-execute'},
   bazi:{methodCode:'BAZI',methodVersion:'0.1.0',publicMethodCode:'BAZI_PROJECTION',label:{en:'BaZi',zh:'八字'},endpoint:'/api/method-execute'},
   numeric:{methodCode:'NUMEROLOGY',methodVersion:'0.1.0-candidate',publicMethodCode:'NUMEROLOGY_PROJECTION',label:{en:'Numerology',zh:'数字学'},endpoint:'/api/method-execute'},
-  ziwei:{methodCode:'ZI_WEI_DOU_SHU',methodVersion:'1.0.0',publicMethodCode:'ZI_WEI_PROJECTION',label:{en:'Zi Wei',zh:'紫微斗数'},endpoint:'/api/zi-wei-execute'}
+  ziwei:{methodCode:'ZI_WEI_DOU_SHU',methodVersion:'1.0.0',publicMethodCode:'ZI_WEI_PROJECTION',label:{en:'Zi Wei',zh:'紫微斗数'},endpoint:'/api/zi-wei-execute'},
+  ecr:{methodCode:'EMBODIED_CONFIGURATION',methodVersion:'1.0.0',publicMethodCode:'EMBODIED_CONFIGURATION_PROJECTION',label:{en:'Embodied Configuration',zh:'载体构型读取'},endpoint:'/api/ecr-execute'}
 });
 
 function canonicalInput(body,location,consentRecordId,locale){
@@ -84,9 +86,11 @@ function limitedReadingMethod(spec,locale,error,projection=null){
 async function executeOne(context,input,key,consentRecordId,parameters){
   const spec=METHODS[key];
   const requestId=`CX-${spec.methodCode}-${crypto.randomUUID()}`;
-  const body={schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:spec.methodCode,methodVersion:spec.methodVersion,capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:input,executionParameters:parameters,consentRecordId,requestId};
+  const body=spec.methodCode==='EMBODIED_CONFIGURATION'
+    ?{canonicalInput:input,consent:true,requestId}
+    :{schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:spec.methodCode,methodVersion:spec.methodVersion,capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:input,executionParameters:parameters,consentRecordId,requestId};
   const request=new Request(new URL(spec.endpoint,context.request.url),{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body)});
-  const handler=spec.endpoint.includes('zi-wei')?runZiWeiExecute:spec.endpoint.includes('ast-structural')?runAstStructuralExecute:runMethodExecute;
+  const handler=spec.endpoint.includes('ecr-execute')?runEcrExecute:spec.endpoint.includes('zi-wei')?runZiWeiExecute:spec.endpoint.includes('ast-structural')?runAstStructuralExecute:runMethodExecute;
   const response=await handler({request});
   const payload=await response.json().catch(()=>({}));
   if(!response.ok||payload?.ok!==true)return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:payload?.reasonCodes||[payload?.error||'METHOD_EXECUTION_FAILED']};
@@ -171,7 +175,7 @@ export async function onRequestPost(context){
   if(body?.consent!==true)return json({ok:false,error:'PERSONAL_REALITY_PROCESSING_CONSENT_REQUIRED'},403);
   const selected=[...(Array.isArray(body?.methods)?body.methods:[])].map(value=>clean(value).toLowerCase()).filter(key=>METHODS[key]);
   if(!selected.length)return json({ok:false,error:'PERSONAL_REALITY_METHOD_REQUIRED'},400);
-  const needsPlace=selected.some(key=>['astrology','bazi','ziwei'].includes(key));
+  const needsPlace=selected.some(key=>['astrology','bazi','ziwei','ecr'].includes(key));
   if(needsPlace&&!clean(body?.placeRef))return json({ok:false,error:'LOCATION_SELECTION_REQUIRED'},422);
 
   const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';

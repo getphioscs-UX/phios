@@ -112,20 +112,24 @@ const r4ArtifactsPresent=[
 const r4ScriptRegistered=Boolean(pkg.scripts['check:cx-r12r4b:r4']);
 if(r4ArtifactsPresent)assert.equal(r4ScriptRegistered,true,'CX_R12R4B_R4_SUCCESSOR_SCRIPT_MISSING_FROM_PACKAGE_JSON');
 const r4SuccessorPresent=r4ArtifactsPresent&&r4ScriptRegistered;
+const r5ArtifactsPresent=['content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json','content/customer-experience-rebuild/r12r4b/cx-r12r4b-r5-acceptance-v1.json','scripts/check-cx-r12r4b-r5-ecr-production-admission.mjs','scripts/generate-cx-r12r4b-r5-ecr-production-admission.mjs'].every(file=>fs.existsSync(file));
+const r5ScriptRegistered=Boolean(pkg.scripts['check:cx-r12r4b:r5']);
+if(r5ArtifactsPresent)assert.equal(r5ScriptRegistered,true,'CX_R12R4B_R5_SUCCESSOR_SCRIPT_MISSING_FROM_PACKAGE_JSON');
+const r5SuccessorPresent=r5ArtifactsPresent&&r5ScriptRegistered;
 assert.equal(ontology.boundary.calculationImplemented,r4SuccessorPresent);
 assert.equal(ontology.boundary.customerMeaningCreated,r4SuccessorPresent);
-assert.equal(ontology.boundary.customerPublicationAdmitted,false);
+assert.equal(ontology.boundary.customerPublicationAdmitted,r5SuccessorPresent);
 
 assert.equal(source.status,'FIRST_PARTY_REFERENCE_ACCEPTED_FOR_ONTOLOGY_RECONCILIATION');
 assert.equal(source.references.length,4);
 for(const ref of source.references)assert.match(ref.sha256,/^[a-f0-9]{64}$/);
 assert.equal(theory.boundaries.activationA8MayProceedToCalculationSpecification,true);
 if(r4SuccessorPresent){
-  assert.equal(theory.status,'R4_CALCULATION_MEANING_IMPLEMENTED_HUMAN_REVIEW_PENDING');
+  assert.equal(theory.status,r5SuccessorPresent?'R5_PRODUCTION_COMPOSITION_ADMITTED':'R4_CALCULATION_MEANING_IMPLEMENTED_HUMAN_REVIEW_PENDING');
   assert.equal(theory.boundaries.calculationImplemented,true);
   assert.equal(theory.boundaries.customerMeaningImplemented,true);
   assert.equal(theory.boundaries.customerInterpretationImplemented,true);
-  assert.equal(theory.boundaries.customerPublicationAdmitted,false);
+  assert.equal(theory.boundaries.customerPublicationAdmitted,r5SuccessorPresent);
 }else{
   assert.equal(theory.status,'CORE_THEORY_RECONCILED_READY_FOR_W31R');
   assert.equal(theory.boundaries.calculationImplemented,false);
@@ -142,7 +146,10 @@ assert.equal(acceptance.nextSequentialWork,'CX-R12R4B-R4-W31R_ECR_CALCULATION_SP
 const r2Checker=fs.readFileSync('scripts/check-cx-r12r4b-r2-external-profile-confirmation-shadow.mjs','utf8');
 assert.match(r2Checker,/check:cx-r12r4b:r2[\s\S]*check:cx-r12r4b:r3r1/);
 assert.equal(pkg.scripts['check:cx-r12r4b:r3r1'],'node scripts/generate-ecr-book-aligned-ontology-projection.mjs --check && node scripts/check-cx-r12r4b-r3r1-core-theory-ecr-ontology.mjs');
-if(r4SuccessorPresent){
+if(r5SuccessorPresent){
+  assert.match(pkg.scripts['check:cx-r12r4b'],/check:cx-r12r4b:r3r1[\s\S]*check:cx-r12r4b:r4[\s\S]*check:cx-r12r4b:r5/);
+  assert(pkg.scripts['check:cx-r12r4b'].endsWith('&& npm run check:cx-r12r4b:r5'));
+}else if(r4SuccessorPresent){
   assert.match(pkg.scripts['check:cx-r12r4b'],/check:cx-r12r4b:r3r1[\s\S]*check:cx-r12r4b:r4/);
   assert(pkg.scripts['check:cx-r12r4b'].endsWith('&& npm run check:cx-r12r4b:r4'));
 }else{

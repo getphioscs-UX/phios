@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-R5-ACCEPTANCE-v1.0.0",
+  "work": "CX-R12R4B-R5-W33R",
+  "baselineCommit": "850b382f363a83e2968b16db7942da6af9432377",
+  "status": "ECR_MACHINE_HUMAN_PRODUCTION_ADMISSION_ACCEPTED",
+  "machine": {
+    "required": 64,
+    "accepted": 64,
+    "evidenceRef": "content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json"
+  },
+  "human": {
+    "required": 48,
+    "accepted": 48,
+    "rejected": 0,
+    "pending": 0,
+    "evidenceRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json",
+    "reviewedBy": "TL",
+    "reviewedAt": "2026-08-28T00:01:57.148Z"
+  },
+  "productionAdmission": {
+    "created": true,
+    "authorityRef": "content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json",
+    "authoritySha256": "4e0fac8bff7fd2b7c9396f4de5cbe9467e345e2d19cd0c6f7c5af98f860c7cee",
+    "customerPublicationAllowed": true
+  },
+  "customerSurface": {
+    "sharedCustomerReadingSupported": true,
+    "customerPersonalRealityApiSupportsEcr": true,
+    "customerSelectorExposed": false,
+    "selectorCutoverDeferred": true
+  },
+  "boundaries": {
+    "xpfRemainsCustomerSuppliedExternalContext": true,
+    "hdrRemainsInternalValidationOnly": true,
+    "ecrIsPhiOsFirstParty": true,
+    "crossMethodReadingNotStarted": true,
+    "currentRealityNotAssumed": true,
+    "liveCustomerHumanReviewClaimed": false
+  },
+  "nextSequentialWork": "CX-R12R4B-W34_SHARED_SEMANTIC_DIMENSION_REGISTRY"
+}

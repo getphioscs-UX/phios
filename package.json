@@ -1790,7 +1790,7 @@
     "check:cx-r12r3b": "node scripts/check-cx-r12r3b-method-interpretation-layer.mjs",
     "check:cx-r12r4": "npm run check:cx-r12r3b && node scripts/check-cx-r12r4-personal-reading-experience.mjs && node scripts/check-cx-r12r4-reading-experience-completion.mjs && npm run check:cx-r12r4a && npm run check:cx-r12r4b",
     "check:cx-r12r4a": "node scripts/check-cx-r12r4a-personal-reading-humanization.mjs",
-    "check:cx-r12r4b": "npm run check:cx-r12r4b:phase-a && npm run check:cx-r12r4b:hdr-audit && npm run check:cx-r12r4b:r1 && npm run check:cx-r12r4b:r2 && npm run check:cx-r12r4b:r3r1 && npm run check:cx-r12r4b:r4",
+    "check:cx-r12r4b": "npm run check:cx-r12r4b:phase-a && npm run check:cx-r12r4b:hdr-audit && npm run check:cx-r12r4b:r1 && npm run check:cx-r12r4b:r2 && npm run check:cx-r12r4b:r3r1 && npm run check:cx-r12r4b:r4 && npm run check:cx-r12r4b:r5",
     "check:cx-r12r4b:phase-a": "node scripts/generate-zwr-meaning-authorities-runtime-projection.mjs --check && node scripts/generate-zwr-runtime-authorities-projection.mjs --check && node scripts/generate-cx-r12r4b-phase-a-replay-campaign.mjs --check && node scripts/check-cx-r12r4b-phase-a.mjs",
     "check:cx-r12r4b:hdr-audit": "node scripts/generate-cx-r12r4b-hdr-repository-audit.mjs --check && node scripts/check-cx-r12r4b-hdr-audit.mjs",
     "cx-r12r3b:prepare-human-review": "node scripts/generate-cx-r12r3b-human-review-campaign.mjs",
@@ -1870,7 +1870,8 @@
     "generate:tarot-tscp-human-review": "node scripts/generate-tarot-tscp-human-review.mjs",
     "check:tarot-tscp-full-production": "node scripts/check-tarot-tscp-full-production-v1.mjs",
     "check:tarot-question-guidance": "node scripts/check-tarot-tscp-full-production-v1.mjs",
-    "check:tarot-r2-artwork": "node scripts/check-tarot-r2-artwork-current.mjs"
+    "check:tarot-r2-artwork": "node scripts/check-tarot-r2-artwork-current.mjs",
+    "check:cx-r12r4b:r5": "node scripts/generate-cx-r12r4b-r5-ecr-production-admission.mjs --check && node scripts/check-cx-r12r4b-r5-ecr-production-admission.mjs"
   },
   "type": "module",
   "dependencies": {

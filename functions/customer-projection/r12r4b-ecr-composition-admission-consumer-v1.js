@@ -1,0 +1,6 @@
+/** Generated runtime projection of ECR R5 production admission. */
+const AUTHORITY_REF='content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json';
+const AUTHORITY_SHA256='4e0fac8bff7fd2b7c9396f4de5cbe9467e345e2d19cd0c6f7c5af98f860c7cee';
+const EVIDENCE_REF='content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json';
+export const CX_R12R4B_ECR_COMPOSITION_ADMISSION_CONSUMER=Object.freeze({schemaVersion:'PHI-OS-CX-R12R4B-ECR-COMPOSITION-ADMISSION-CONSUMER-v1.0.0',sourceAuthorityRef:AUTHORITY_REF,sourceAuthoritySha256:AUTHORITY_SHA256,evidenceRef:EVIDENCE_REF,status:'CONSUMES_ECR_HUMAN_REVIEWED_COMPOSITION_ADMISSION',methodId:'ECR',acceptedCases:48,requiredCases:48,boundary:Object.freeze({createsMeaningAuthority:false,createsInterpretationAuthority:false,changesAtomicMeaning:false,changesCompositionRules:false,liveCustomerHumanReviewClaimed:false})});
+export function ecrCompositionAdmissionFor(methodId){if(methodId!=='ECR')return null;return Object.freeze({methodId:'ECR',sourceAuthorityRef:AUTHORITY_REF,sourceAuthoritySha256:AUTHORITY_SHA256,compositionCustomerPublishable:true,humanReview:Object.freeze({methodFidelityAccepted:true,customerClarityAccepted:true,evidenceRef:EVIDENCE_REF,reviewerRefs:Object.freeze([AUTHORITY_REF])})});}

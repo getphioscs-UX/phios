@@ -2,7 +2,7 @@ import { ECR_BOOK_CORE_THEORY_RUNTIME } from './ecr-book-core-theory-runtime.js'
 import { ECR_SPECIFIC_ONTOLOGY_RUNTIME } from './ecr-specific-ontology-runtime.js';
 
 export const ECR_ONTOLOGY_SCHEMA='PHI-OS-ECR-CANONICAL-ONTOLOGY-v1.0.0';
-export const ECR_ONTOLOGY_VERSION='1.0.1';
+export const ECR_ONTOLOGY_VERSION='1.0.2';
 
 export function getEcrCanonicalOntology(){
   return Object.freeze({
@@ -21,7 +21,7 @@ export function getEcrCanonicalOntology(){
       customerMeaningCreated:true,
       calculationImplemented:true,
       interpretationCandidateIntegrated:true,
-      customerPublicationAdmitted:false
+      customerPublicationAdmitted:true
     })
   });
 }
