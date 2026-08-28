@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-BAZI-SOURCE-ADMISSION-REGISTRY-v1.0.0",
   "work": "BZR-R1",
-  "status": "FAIL_CLOSED_NO_PRODUCTION_RULE_CLAIMS_ADMITTED",
+  "status": "CLAIMS_EXTRACTED_PENDING_HUMAN_ADMISSION_PRODUCTION_GATES_CLOSED",
   "states": [
     "REGISTERED_PUBLIC_DOMAIN_UNDERLYING_WORK",
     "WITNESS_REGISTERED_EDITION_CHECK_PENDING",
@@ -13,18 +13,21 @@
   "sources": [
     {
       "sourceId": "BZR-SRC-SAN-MING-TONG-HUI",
-      "state": "REGISTERED_PUBLIC_DOMAIN_UNDERLYING_WORK",
-      "productionRuleClaimsAdmitted": 0
+      "state": "CLAIM_EXTRACTED_PENDING_HUMAN_REVIEW",
+      "productionRuleClaimsAdmitted": 0,
+      "extractedClaimCount": 1
     },
     {
       "sourceId": "BZR-SRC-ZI-PING-ZHEN-QUAN",
-      "state": "REGISTERED_PUBLIC_DOMAIN_UNDERLYING_WORK",
-      "productionRuleClaimsAdmitted": 0
+      "state": "CLAIM_EXTRACTED_PENDING_HUMAN_REVIEW",
+      "productionRuleClaimsAdmitted": 0,
+      "extractedClaimCount": 7
     },
     {
       "sourceId": "BZR-SRC-DI-TIAN-SUI",
-      "state": "REGISTERED_PUBLIC_DOMAIN_UNDERLYING_WORK",
-      "productionRuleClaimsAdmitted": 0
+      "state": "CLAIM_EXTRACTED_PENDING_HUMAN_REVIEW",
+      "productionRuleClaimsAdmitted": 0,
+      "extractedClaimCount": 4
     }
   ],
   "governance": {
@@ -40,6 +43,16 @@
     "patternVerdict": false,
     "usefulGodVerdict": false,
     "tiaohouVerdict": false,
-    "reason": "NO_HUMAN_ADMITTED_RULE_CLAIMS_YET"
-  }
+    "reason": "FIRST_CLAIM_BATCH_EXTRACTED_BUT_NO_HUMAN_ADMITTED_RULE_CLAIMS_YET"
+  },
+  "claimBatches": [
+    {
+      "batchId": "BZR-R1-CLAIM-BATCH-001",
+      "path": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v1.json",
+      "state": "PENDING_HUMAN_SOURCE_FIDELITY_REVIEW",
+      "extractedClaims": 12,
+      "humanAdmittedClaims": 0,
+      "runtimeUseAllowedClaims": 0
+    }
+  ]
 }
