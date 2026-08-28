@@ -3,6 +3,7 @@ import { buildCanonicalMeaningProductionBundle } from './meaning-bundle-builder-
 import { buildAstV2CanonicalMeaningProductionBundle } from './meaning-bundle-builder-ast-v2.js';
 import { projectCanonicalMeaningLocale } from './locale-projector.js';
 import { buildNumRuntimeReadingIR } from '../runtime-reading/num-reading-ir.js';
+import { buildNumIntegratedReadingIR } from '../num-full-production/num-integrated-reading-runtime.js';
 import { buildBzrRuntimeReadingIR } from '../runtime-reading/bzr-reading-ir.js';
 import { buildAstRuntimeReadingIR } from '../runtime-reading/ast-reading-ir.js';
 import { buildZiWeiCanonicalMeaningBundle, projectZiWeiMeaningLocale } from './zi-wei-meaning-runtime.js';
@@ -55,7 +56,10 @@ export async function onRequestPost({request}){
     :publicMethodCode==='BAZI_PROJECTION'
      ?buildBzrRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
      :buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
-  return json({ok:true,capabilityAvailability:'AVAILABLE',capabilityVersion:'1.0.0',executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading},200);
+  const integratedReading=publicMethodCode==='NUMEROLOGY_PROJECTION'
+   ?buildNumIntegratedReadingIR({projection,bundle:meaningBundle,localeProjection})
+   :null;
+  return json({ok:true,capabilityAvailability:'AVAILABLE',capabilityVersion:'1.0.0',executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading,...(integratedReading?{integratedReading}: {})},200);
  }catch(error){
   const code=error?.code||'CMP_MEANING_FAILED_CLOSED';
   const status=code==='CMP_METHOD_PRODUCTION_NOT_ACTIVATED'?423:code.includes('PROJECTION')||code.includes('BOUNDARY')?422:500;

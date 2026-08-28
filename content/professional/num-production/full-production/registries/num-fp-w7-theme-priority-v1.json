@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-NUM-FP-W7-THEME-PRIORITY-v1.0.0",
+  "workCode": "NUM-FP-W7",
+  "requestedWorkCode": "NUM-W7",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "DETERMINISTIC_STRUCTURAL_PRIORITY_ACTIVE",
+  "themeClasses": [
+    {
+      "class": "REPETITION",
+      "score": 100,
+      "basis": "same reduced value in 2+ core roles"
+    },
+    {
+      "class": "MASTER_PRESERVATION",
+      "score": 88,
+      "basis": "masterNumberPreserved=true"
+    },
+    {
+      "class": "CORE_CYCLE_ECHO_PERSONAL_YEAR",
+      "score": 78,
+      "basis": "Personal Year equals a core value"
+    },
+    {
+      "class": "CORE_CYCLE_ECHO_MONTH_DAY",
+      "score": 68,
+      "basis": "Personal Month/Day equals a core value"
+    },
+    {
+      "class": "PRIMARY_ROLE_FALLBACK",
+      "score": "60/50",
+      "basis": "Life Path then Birthday/Attitude"
+    }
+  ],
+  "tieBreak": "priority desc -> code -> value",
+  "rules": {
+    "genericMeaningLengthMayNotIncreasePriority": true,
+    "sourceDepthDoesNotGetFabricatedByPriority": true
+  }
+}

@@ -1,0 +1,3249 @@
+{
+  "schemaVersion": "PHI-OS-NUM-FP-W17-HUMAN-REVIEW-CASES-v1.0.0",
+  "workCode": "NUM-FP-W17",
+  "requestedWorkCode": "NUM-W17",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "READY_FOR_HUMAN_REVIEW",
+  "caseCount": 12,
+  "criteria": [
+    "methodFidelity",
+    "relationFidelity",
+    "semanticDedup",
+    "wholeChartUsefulness",
+    "nonGeneric",
+    "nonFortuneTelling",
+    "customerClarity",
+    "sourceLineage"
+  ],
+  "cases": [
+    {
+      "reviewCaseId": "NUM-FP-HR-01",
+      "sourceMachineCaseId": "NUM-FP-MC-01",
+      "birthDate": "1989-11-15",
+      "targetDate": "2026-08-28",
+      "locale": "zh-Hans",
+      "projectionId": "CMP-DBC1A73EDFD977D2DF0902E8",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "生命路径",
+          "value": 8,
+          "rawValue": 35,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "生日数",
+          "value": 6,
+          "rawValue": 15,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "态度数",
+          "value": 8,
+          "rawValue": 26,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "出生年数",
+          "value": 9,
+          "rawValue": 27,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "出生月数",
+          "value": 11,
+          "rawValue": 11,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "出生日数",
+          "value": 6,
+          "rawValue": 15,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_8",
+          "priority": 100,
+          "title": "数字 8 在多个位置重复",
+          "summary": "生命路径、态度数得到同一个归约值 8。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "LIFE_PATH",
+              "value": 8
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "ATTITUDE_NUMBER",
+              "value": 8
+            }
+          ]
+        },
+        {
+          "themeCode": "MASTER_11",
+          "priority": 88,
+          "title": "出生月数保留主数 11",
+          "summary": "当前归约规则在出生月数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。",
+          "evidence": [
+            {
+              "type": "MASTER_PRESERVED",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 11
+            }
+          ]
+        },
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_YEAR_9",
+          "priority": 78,
+          "title": "个人年与核心位置出现同值",
+          "summary": "个人年为 9，与出生年数的数值相同。它可作为现实观察线索，但不构成事件预测。",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_YEAR",
+              "roles": [
+                "BIRTH_YEAR_NUMBER"
+              ],
+              "value": 9
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 8,
+          "roles": [
+            "LIFE_PATH",
+            "ATTITUDE_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "数字 8 在多个位置重复",
+          "summary": "生命路径、态度数得到同一个归约值 8。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 11,
+          "roles": [
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "出生月数保留主数 11",
+          "summary": "当前归约规则在出生月数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 9,
+          "roles": [
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_YEAR",
+          "priority": 78,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "个人年与核心位置出现同值",
+          "summary": "个人年为 9，与出生年数的数值相同。它可作为现实观察线索，但不构成事件预测。"
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 8,
+          "roles": [
+            "LIFE_PATH",
+            "ATTITUDE_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_MONTH",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "个人月与核心位置出现同值",
+          "summary": "个人月为 8，与生命路径、态度数的数值相同。它可作为现实观察线索，但不构成事件预测。"
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 9,
+          "roles": [
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_DAY",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "个人日与核心位置出现同值",
+          "summary": "个人日为 9，与出生年数的数值相同。它可作为现实观察线索，但不构成事件预测。"
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 9,
+            "rawValue": 27,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 8,
+            "rawValue": 17,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 9,
+            "rawValue": 36,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 28,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 6,
+            "rawValue": null,
+            "startAge": 29,
+            "endAge": 37,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 38,
+            "endAge": 46,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 47,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 28,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 3,
+            "rawValue": null,
+            "startAge": 29,
+            "endAge": 37,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 38,
+            "endAge": 46,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 47,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "这次数字结构的主要位置是生命路径 8、生日数 6、态度数 8。",
+        "其中 8 在生命路径、态度数重复，因此综合阅读应把“同值、不同角色”放在一起比较，而不是把同一段数字说明重复两次。",
+        "目标日期周期为个人年 9、个人月 8、个人日 9。这些周期只提供结构化观察视角，不证明未来事件。"
+      ],
+      "realityReflection": [
+        "在现实经验中，生命路径、态度数这几个位置是否真的呈现相似之处？哪些情境反而能看出它们的角色差异？",
+        "当个人年与核心位置出现同一个数值 9 时，当前现实里有什么主题值得你特别观察，而不是预先假定会发生什么？",
+        "哪些部分与你的经验不吻合？保留这些反例有助于避免把数字解释成完整身份。"
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-02",
+      "sourceMachineCaseId": "NUM-FP-MC-02",
+      "birthDate": "1990-01-15",
+      "targetDate": "2026-08-23",
+      "locale": "en",
+      "projectionId": "CMP-FFCF0CB42F0CAA5579CB7CD7",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "Life Path",
+          "value": 8,
+          "rawValue": 26,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "Birthday Number",
+          "value": 6,
+          "rawValue": 15,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "Attitude Number",
+          "value": 7,
+          "rawValue": 16,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "Birth Year Number",
+          "value": 1,
+          "rawValue": 19,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "Birth Month Number",
+          "value": 1,
+          "rawValue": 1,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "Birth Day Number",
+          "value": 6,
+          "rawValue": 15,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_1",
+          "priority": 82,
+          "title": "1 repeats across roles",
+          "summary": "Birth Year Number and Birth Month Number resolve to the same value 1. This is a structural repetition; the roles remain distinct.",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_YEAR_NUMBER",
+              "value": 1
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_YEAR_8",
+          "priority": 78,
+          "title": "Personal Year echoes a core value",
+          "summary": "Personal Year is 8, matching Life Path. It can be used as a reflection cue, not an event prediction.",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_YEAR",
+              "roles": [
+                "LIFE_PATH"
+              ],
+              "value": 8
+            }
+          ]
+        },
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_MONTH_7",
+          "priority": 68,
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 7, matching Attitude Number. It can be used as a reflection cue, not an event prediction.",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_MONTH",
+              "roles": [
+                "ATTITUDE_NUMBER"
+              ],
+              "value": 7
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 1,
+          "roles": [
+            "BIRTH_YEAR_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 82,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "1 repeats across roles",
+          "summary": "Birth Year Number and Birth Month Number resolve to the same value 1. This is a structural repetition; the roles remain distinct."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 8,
+          "roles": [
+            "LIFE_PATH"
+          ],
+          "cycleRole": "PERSONAL_YEAR",
+          "priority": 78,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Year echoes a core value",
+          "summary": "Personal Year is 8, matching Life Path. It can be used as a reflection cue, not an event prediction."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 7,
+          "roles": [
+            "ATTITUDE_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_MONTH",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 7, matching Attitude Number. It can be used as a reflection cue, not an event prediction."
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 8,
+            "rawValue": 17,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 7,
+            "rawValue": 16,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 3,
+            "rawValue": 30,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 28,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 29,
+            "endAge": 37,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 38,
+            "endAge": 46,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 47,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 28,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 29,
+            "endAge": 37,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 38,
+            "endAge": 46,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 47,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "The primary calculated positions are Life Path 8, Birthday Number 6, and Attitude Number 7.",
+        "Value 1 repeats in Birth Year Number and Birth Month Number, so the integrated reading compares the same value across distinct roles instead of repeating one definition.",
+        "Target-date cycles are Personal Year 8, Personal Month 7, and Personal Day 3. They are structural reflection lenses, not evidence of future events."
+      ],
+      "realityReflection": [
+        "In lived experience, where do Birth Year Number and Birth Month Number seem similar, and where do their different roles become clearer?",
+        "When Personal Year repeats the core value 8, what is worth observing now without assuming a specific event will occur?",
+        "Which parts do not fit your experience? Keeping counterexamples prevents a numeric reading from becoming a total identity claim."
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-03",
+      "sourceMachineCaseId": "NUM-FP-MC-03",
+      "birthDate": "2000-02-29",
+      "targetDate": "2026-02-28",
+      "locale": "zh-Hans",
+      "projectionId": "CMP-E0724EAEA2FDEAE65F6F54A4",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "生命路径",
+          "value": 6,
+          "rawValue": 15,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "生日数",
+          "value": 11,
+          "rawValue": 29,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "态度数",
+          "value": 4,
+          "rawValue": 31,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "出生年数",
+          "value": 2,
+          "rawValue": 2,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "出生月数",
+          "value": 2,
+          "rawValue": 2,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "出生日数",
+          "value": 11,
+          "rawValue": 29,
+          "masterNumberPreserved": true
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "MASTER_11",
+          "priority": 88,
+          "title": "生日数保留主数 11",
+          "summary": "当前归约规则在生日数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。",
+          "evidence": [
+            {
+              "type": "MASTER_PRESERVED",
+              "role": "BIRTHDAY_NUMBER",
+              "value": 11
+            }
+          ]
+        },
+        {
+          "themeCode": "REPETITION_2",
+          "priority": 82,
+          "title": "数字 2 在多个位置重复",
+          "summary": "出生年数、出生月数得到同一个归约值 2。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_YEAR_NUMBER",
+              "value": 2
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 11,
+          "roles": [
+            "BIRTHDAY_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "生日数保留主数 11",
+          "summary": "当前归约规则在生日数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 11,
+          "roles": [
+            "BIRTH_DAY_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "出生日数保留主数 11",
+          "summary": "当前归约规则在出生日数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        },
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 2,
+          "roles": [
+            "BIRTH_YEAR_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 82,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "数字 2 在多个位置重复",
+          "summary": "出生年数、出生月数得到同一个归约值 2。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。"
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 5,
+            "rawValue": 32,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 7,
+            "rawValue": 7,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 8,
+            "rawValue": 35,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 30,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 31,
+            "endAge": 39,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 40,
+            "endAge": 48,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 49,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 30,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 31,
+            "endAge": 39,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 40,
+            "endAge": 48,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 49,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "这次数字结构的主要位置是生命路径 6、生日数 11、态度数 4。",
+        "其中 2 在出生年数、出生月数重复，因此综合阅读应把“同值、不同角色”放在一起比较，而不是把同一段数字说明重复两次。",
+        "目标日期周期为个人年 5、个人月 7、个人日 8。这些周期只提供结构化观察视角，不证明未来事件。"
+      ],
+      "realityReflection": [
+        "在现实经验中，出生年数、出生月数这几个位置是否真的呈现相似之处？哪些情境反而能看出它们的角色差异？",
+        "如果把这些数字只当作不同计算位置，而不是人格标签，哪一个位置最容易与你现在的现实经验进行核对？",
+        "哪些部分与你的经验不吻合？保留这些反例有助于避免把数字解释成完整身份。"
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-04",
+      "sourceMachineCaseId": "NUM-FP-MC-04",
+      "birthDate": "1988-03-20",
+      "targetDate": "2027-01-01",
+      "locale": "en",
+      "projectionId": "CMP-0B2873FF3B055190C9D75F00",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "Life Path",
+          "value": 4,
+          "rawValue": 31,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "Birthday Number",
+          "value": 2,
+          "rawValue": 20,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "Attitude Number",
+          "value": 5,
+          "rawValue": 23,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "Birth Year Number",
+          "value": 8,
+          "rawValue": 26,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "Birth Month Number",
+          "value": 3,
+          "rawValue": 3,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "Birth Day Number",
+          "value": 2,
+          "rawValue": 20,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_MONTH_8",
+          "priority": 68,
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 8, matching Birth Year Number. It can be used as a reflection cue, not an event prediction.",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_MONTH",
+              "roles": [
+                "BIRTH_YEAR_NUMBER"
+              ],
+              "value": 8
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 8,
+          "roles": [
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_MONTH",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 8, matching Birth Year Number. It can be used as a reflection cue, not an event prediction."
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 11,
+            "rawValue": 11,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 7,
+            "rawValue": 34,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 8,
+            "rawValue": 8,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 9,
+            "rawValue": 9,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 32,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 33,
+            "endAge": 41,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 6,
+            "rawValue": null,
+            "startAge": 42,
+            "endAge": 50,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 51,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 32,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 6,
+            "rawValue": null,
+            "startAge": 33,
+            "endAge": 41,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 42,
+            "endAge": 50,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 51,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "The primary calculated positions are Life Path 4, Birthday Number 2, and Attitude Number 5.",
+        "No primary repeated value requires merging, so the reading keeps each role distinct.",
+        "Target-date cycles are Personal Year 7, Personal Month 8, and Personal Day 9. They are structural reflection lenses, not evidence of future events."
+      ],
+      "realityReflection": [
+        "When Personal Month repeats the core value 8, what is worth observing now without assuming a specific event will occur?",
+        "If these numbers are treated as distinct calculated roles rather than personality labels, which role is easiest to compare with your current reality?",
+        "Which parts do not fit your experience? Keeping counterexamples prevents a numeric reading from becoming a total identity claim."
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-05",
+      "sourceMachineCaseId": "NUM-FP-MC-05",
+      "birthDate": "2020-11-05",
+      "targetDate": "2030-12-31",
+      "locale": "zh-Hans",
+      "projectionId": "CMP-567B9F5E42CBFC416F6C5863",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "生命路径",
+          "value": 11,
+          "rawValue": 11,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "生日数",
+          "value": 5,
+          "rawValue": 5,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "态度数",
+          "value": 7,
+          "rawValue": 16,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "出生年数",
+          "value": 4,
+          "rawValue": 4,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "出生月数",
+          "value": 11,
+          "rawValue": 11,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "出生日数",
+          "value": 5,
+          "rawValue": 5,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_11",
+          "priority": 100,
+          "title": "数字 11 在多个位置重复",
+          "summary": "生命路径、出生月数得到同一个归约值 11。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "LIFE_PATH",
+              "value": 11
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 11
+            }
+          ]
+        },
+        {
+          "themeCode": "MASTER_11",
+          "priority": 88,
+          "title": "生命路径保留主数 11",
+          "summary": "当前归约规则在生命路径保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。",
+          "evidence": [
+            {
+              "type": "MASTER_PRESERVED",
+              "role": "LIFE_PATH",
+              "value": 11
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 11,
+          "roles": [
+            "LIFE_PATH",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "数字 11 在多个位置重复",
+          "summary": "生命路径、出生月数得到同一个归约值 11。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 11,
+          "roles": [
+            "LIFE_PATH"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "生命路径保留主数 11",
+          "summary": "当前归约规则在生命路径保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 11,
+          "roles": [
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "出生月数保留主数 11",
+          "summary": "当前归约规则在出生月数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 5,
+            "rawValue": 5,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 3,
+            "rawValue": 21,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 6,
+            "rawValue": 15,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 1,
+            "rawValue": 37,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 34,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 9,
+            "rawValue": null,
+            "startAge": 35,
+            "endAge": 43,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 44,
+            "endAge": 52,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 6,
+            "rawValue": null,
+            "startAge": 53,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 3,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 34,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 35,
+            "endAge": 43,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 44,
+            "endAge": 52,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 53,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "这次数字结构的主要位置是生命路径 11、生日数 5、态度数 7。",
+        "其中 11 在生命路径、出生月数重复，因此综合阅读应把“同值、不同角色”放在一起比较，而不是把同一段数字说明重复两次。",
+        "目标日期周期为个人年 3、个人月 6、个人日 1。这些周期只提供结构化观察视角，不证明未来事件。"
+      ],
+      "realityReflection": [
+        "在现实经验中，生命路径、出生月数这几个位置是否真的呈现相似之处？哪些情境反而能看出它们的角色差异？",
+        "如果把这些数字只当作不同计算位置，而不是人格标签，哪一个位置最容易与你现在的现实经验进行核对？",
+        "哪些部分与你的经验不吻合？保留这些反例有助于避免把数字解释成完整身份。"
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-06",
+      "sourceMachineCaseId": "NUM-FP-MC-06",
+      "birthDate": "1992-07-07",
+      "targetDate": "2026-07-07",
+      "locale": "en",
+      "projectionId": "CMP-41F366899EF682AA3CCE7232",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "Life Path",
+          "value": 8,
+          "rawValue": 35,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "Birthday Number",
+          "value": 7,
+          "rawValue": 7,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "Attitude Number",
+          "value": 5,
+          "rawValue": 14,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "Birth Year Number",
+          "value": 3,
+          "rawValue": 21,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "Birth Month Number",
+          "value": 7,
+          "rawValue": 7,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "Birth Day Number",
+          "value": 7,
+          "rawValue": 7,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_7",
+          "priority": 100,
+          "title": "7 repeats across roles",
+          "summary": "Birthday Number and Birth Month Number resolve to the same value 7. This is a structural repetition; the roles remain distinct.",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTHDAY_NUMBER",
+              "value": 7
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 7
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 7,
+          "roles": [
+            "BIRTHDAY_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "7 repeats across roles",
+          "summary": "Birthday Number and Birth Month Number resolve to the same value 7. This is a structural repetition; the roles remain distinct."
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 6,
+            "rawValue": 15,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 4,
+            "rawValue": 13,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 11,
+            "rawValue": 11,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 28,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 29,
+            "endAge": 37,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 6,
+            "rawValue": null,
+            "startAge": 38,
+            "endAge": 46,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 47,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 28,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 29,
+            "endAge": 37,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 38,
+            "endAge": 46,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 47,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "The primary calculated positions are Life Path 8, Birthday Number 7, and Attitude Number 5.",
+        "Value 7 repeats in Birthday Number and Birth Month Number, so the integrated reading compares the same value across distinct roles instead of repeating one definition.",
+        "Target-date cycles are Personal Year 6, Personal Month 4, and Personal Day 11. They are structural reflection lenses, not evidence of future events."
+      ],
+      "realityReflection": [
+        "In lived experience, where do Birthday Number and Birth Month Number seem similar, and where do their different roles become clearer?",
+        "If these numbers are treated as distinct calculated roles rather than personality labels, which role is easiest to compare with your current reality?",
+        "Which parts do not fit your experience? Keeping counterexamples prevents a numeric reading from becoming a total identity claim."
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-07",
+      "sourceMachineCaseId": "NUM-FP-MC-07",
+      "birthDate": "1977-11-22",
+      "targetDate": "2026-11-22",
+      "locale": "zh-Hans",
+      "projectionId": "CMP-07A7052E2EFBF2F49A2017FC",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "生命路径",
+          "value": 3,
+          "rawValue": 30,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "生日数",
+          "value": 22,
+          "rawValue": 22,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "态度数",
+          "value": 33,
+          "rawValue": 33,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "出生年数",
+          "value": 6,
+          "rawValue": 24,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "出生月数",
+          "value": 11,
+          "rawValue": 11,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "出生日数",
+          "value": 22,
+          "rawValue": 22,
+          "masterNumberPreserved": true
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "MASTER_11",
+          "priority": 88,
+          "title": "出生月数保留主数 11",
+          "summary": "当前归约规则在出生月数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。",
+          "evidence": [
+            {
+              "type": "MASTER_PRESERVED",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 11
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 11,
+          "roles": [
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "出生月数保留主数 11",
+          "summary": "当前归约规则在出生月数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 22,
+          "roles": [
+            "BIRTHDAY_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "生日数保留主数 22",
+          "summary": "当前归约规则在生日数保留 22，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 22,
+          "roles": [
+            "BIRTH_DAY_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "出生日数保留主数 22",
+          "summary": "当前归约规则在出生日数保留 22，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 33,
+          "roles": [
+            "ATTITUDE_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "态度数保留主数 33",
+          "summary": "当前归约规则在态度数保留 33，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 7,
+            "rawValue": 34,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 9,
+            "rawValue": 18,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 4,
+            "rawValue": 31,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 6,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 33,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 34,
+            "endAge": 42,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 43,
+            "endAge": 51,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 52,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 33,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 34,
+            "endAge": 42,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 43,
+            "endAge": 51,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 52,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "这次数字结构的主要位置是生命路径 3、生日数 22、态度数 33。",
+        "主要位置没有出现需要优先合并的同值重复，因此本次读取保留各角色的区别。",
+        "目标日期周期为个人年 7、个人月 9、个人日 4。这些周期只提供结构化观察视角，不证明未来事件。"
+      ],
+      "realityReflection": [
+        "如果把这些数字只当作不同计算位置，而不是人格标签，哪一个位置最容易与你现在的现实经验进行核对？",
+        "哪些部分与你的经验不吻合？保留这些反例有助于避免把数字解释成完整身份。"
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-08",
+      "sourceMachineCaseId": "NUM-FP-MC-08",
+      "birthDate": "1984-04-13",
+      "targetDate": "2026-04-13",
+      "locale": "en",
+      "projectionId": "CMP-01DD586438443BE822C5FB1D",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "Life Path",
+          "value": 3,
+          "rawValue": 30,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "Birthday Number",
+          "value": 4,
+          "rawValue": 13,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "Attitude Number",
+          "value": 8,
+          "rawValue": 17,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "Birth Year Number",
+          "value": 22,
+          "rawValue": 22,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "Birth Month Number",
+          "value": 4,
+          "rawValue": 4,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "Birth Day Number",
+          "value": 4,
+          "rawValue": 13,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_4",
+          "priority": 100,
+          "title": "4 repeats across roles",
+          "summary": "Birthday Number and Birth Month Number resolve to the same value 4. This is a structural repetition; the roles remain distinct.",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTHDAY_NUMBER",
+              "value": 4
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "themeCode": "MASTER_22",
+          "priority": 88,
+          "title": "Birth Year Number preserves master number 22",
+          "summary": "The current reduction rule preserves 22 in Birth Year Number. This states calculation state only; no unadmitted personality or destiny meaning is added.",
+          "evidence": [
+            {
+              "type": "MASTER_PRESERVED",
+              "role": "BIRTH_YEAR_NUMBER",
+              "value": 22
+            }
+          ]
+        },
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_MONTH_4",
+          "priority": 68,
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 4, matching Birthday Number and Birth Month Number. It can be used as a reflection cue, not an event prediction.",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_MONTH",
+              "roles": [
+                "BIRTHDAY_NUMBER",
+                "BIRTH_MONTH_NUMBER"
+              ],
+              "value": 4
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 4,
+          "roles": [
+            "BIRTHDAY_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "4 repeats across roles",
+          "summary": "Birthday Number and Birth Month Number resolve to the same value 4. This is a structural repetition; the roles remain distinct."
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 22,
+          "roles": [
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Birth Year Number preserves master number 22",
+          "summary": "The current reduction rule preserves 22 in Birth Year Number. This states calculation state only; no unadmitted personality or destiny meaning is added."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 4,
+          "roles": [
+            "BIRTHDAY_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_MONTH",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 4, matching Birthday Number and Birth Month Number. It can be used as a reflection cue, not an event prediction."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 8,
+          "roles": [
+            "ATTITUDE_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_DAY",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Day echoes a core value",
+          "summary": "Personal Day is 8, matching Attitude Number. It can be used as a reflection cue, not an event prediction."
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 9,
+            "rawValue": 18,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 4,
+            "rawValue": 13,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 8,
+            "rawValue": 17,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 33,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 34,
+            "endAge": 42,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 43,
+            "endAge": 51,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 52,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 33,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 34,
+            "endAge": 42,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 43,
+            "endAge": 51,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 52,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "The primary calculated positions are Life Path 3, Birthday Number 4, and Attitude Number 8.",
+        "Value 4 repeats in Birthday Number and Birth Month Number, so the integrated reading compares the same value across distinct roles instead of repeating one definition.",
+        "Target-date cycles are Personal Year 9, Personal Month 4, and Personal Day 8. They are structural reflection lenses, not evidence of future events."
+      ],
+      "realityReflection": [
+        "In lived experience, where do Birthday Number and Birth Month Number seem similar, and where do their different roles become clearer?",
+        "When Personal Month repeats the core value 4, what is worth observing now without assuming a specific event will occur?",
+        "Which parts do not fit your experience? Keeping counterexamples prevents a numeric reading from becoming a total identity claim."
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-09",
+      "sourceMachineCaseId": "NUM-FP-MC-09",
+      "birthDate": "1995-05-14",
+      "targetDate": "2026-05-14",
+      "locale": "zh-Hans",
+      "projectionId": "CMP-4F6828A89E01BDAE3CCB510B",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "生命路径",
+          "value": 7,
+          "rawValue": 34,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "生日数",
+          "value": 5,
+          "rawValue": 14,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "态度数",
+          "value": 1,
+          "rawValue": 19,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "出生年数",
+          "value": 6,
+          "rawValue": 24,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "出生月数",
+          "value": 5,
+          "rawValue": 5,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "出生日数",
+          "value": 5,
+          "rawValue": 14,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_5",
+          "priority": 100,
+          "title": "数字 5 在多个位置重复",
+          "summary": "生日数、出生月数得到同一个归约值 5。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTHDAY_NUMBER",
+              "value": 5
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_MONTH_7",
+          "priority": 68,
+          "title": "个人月与核心位置出现同值",
+          "summary": "个人月为 7，与生命路径的数值相同。它可作为现实观察线索，但不构成事件预测。",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_MONTH",
+              "roles": [
+                "LIFE_PATH"
+              ],
+              "value": 7
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 5,
+          "roles": [
+            "BIRTHDAY_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "数字 5 在多个位置重复",
+          "summary": "生日数、出生月数得到同一个归约值 5。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。"
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 7,
+          "roles": [
+            "LIFE_PATH"
+          ],
+          "cycleRole": "PERSONAL_MONTH",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "个人月与核心位置出现同值",
+          "summary": "个人月为 7，与生命路径的数值相同。它可作为现实观察线索，但不构成事件预测。"
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 2,
+            "rawValue": 20,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 7,
+            "rawValue": 7,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 3,
+            "rawValue": 21,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 29,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 30,
+            "endAge": 38,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 3,
+            "rawValue": null,
+            "startAge": 39,
+            "endAge": 47,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 48,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 29,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 30,
+            "endAge": 38,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 39,
+            "endAge": 47,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 48,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "这次数字结构的主要位置是生命路径 7、生日数 5、态度数 1。",
+        "其中 5 在生日数、出生月数重复，因此综合阅读应把“同值、不同角色”放在一起比较，而不是把同一段数字说明重复两次。",
+        "目标日期周期为个人年 2、个人月 7、个人日 3。这些周期只提供结构化观察视角，不证明未来事件。"
+      ],
+      "realityReflection": [
+        "在现实经验中，生日数、出生月数这几个位置是否真的呈现相似之处？哪些情境反而能看出它们的角色差异？",
+        "当个人月与核心位置出现同一个数值 7 时，当前现实里有什么主题值得你特别观察，而不是预先假定会发生什么？",
+        "哪些部分与你的经验不吻合？保留这些反例有助于避免把数字解释成完整身份。"
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-10",
+      "sourceMachineCaseId": "NUM-FP-MC-10",
+      "birthDate": "2001-08-16",
+      "targetDate": "2026-08-16",
+      "locale": "en",
+      "projectionId": "CMP-6AADDDCFEABD9C4EDC30C631",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "Life Path",
+          "value": 9,
+          "rawValue": 18,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "Birthday Number",
+          "value": 7,
+          "rawValue": 16,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "Attitude Number",
+          "value": 6,
+          "rawValue": 24,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "Birth Year Number",
+          "value": 3,
+          "rawValue": 3,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "Birth Month Number",
+          "value": 8,
+          "rawValue": 8,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "Birth Day Number",
+          "value": 7,
+          "rawValue": 16,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_YEAR_7",
+          "priority": 78,
+          "title": "Personal Year echoes a core value",
+          "summary": "Personal Year is 7, matching Birthday Number. It can be used as a reflection cue, not an event prediction.",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_YEAR",
+              "roles": [
+                "BIRTHDAY_NUMBER"
+              ],
+              "value": 7
+            }
+          ]
+        },
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_MONTH_6",
+          "priority": 68,
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 6, matching Attitude Number. It can be used as a reflection cue, not an event prediction.",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_MONTH",
+              "roles": [
+                "ATTITUDE_NUMBER"
+              ],
+              "value": 6
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 7,
+          "roles": [
+            "BIRTHDAY_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_YEAR",
+          "priority": 78,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Year echoes a core value",
+          "summary": "Personal Year is 7, matching Birthday Number. It can be used as a reflection cue, not an event prediction."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 6,
+          "roles": [
+            "ATTITUDE_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_MONTH",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 6, matching Attitude Number. It can be used as a reflection cue, not an event prediction."
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 7,
+            "rawValue": 25,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 6,
+            "rawValue": 15,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 22,
+            "rawValue": 22,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 6,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 27,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 28,
+            "endAge": 36,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 37,
+            "endAge": 45,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 46,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 27,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 4,
+            "rawValue": null,
+            "startAge": 28,
+            "endAge": 36,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 3,
+            "rawValue": null,
+            "startAge": 37,
+            "endAge": 45,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 5,
+            "rawValue": null,
+            "startAge": 46,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "The primary calculated positions are Life Path 9, Birthday Number 7, and Attitude Number 6.",
+        "No primary repeated value requires merging, so the reading keeps each role distinct.",
+        "Target-date cycles are Personal Year 7, Personal Month 6, and Personal Day 22. They are structural reflection lenses, not evidence of future events."
+      ],
+      "realityReflection": [
+        "When Personal Year repeats the core value 7, what is worth observing now without assuming a specific event will occur?",
+        "If these numbers are treated as distinct calculated roles rather than personality labels, which role is easiest to compare with your current reality?",
+        "Which parts do not fit your experience? Keeping counterexamples prevents a numeric reading from becoming a total identity claim."
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-11",
+      "sourceMachineCaseId": "NUM-FP-MC-11",
+      "birthDate": "1979-10-19",
+      "targetDate": "2026-10-19",
+      "locale": "zh-Hans",
+      "projectionId": "CMP-1CAC790F09F93CD02CB36049",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "生命路径",
+          "value": 1,
+          "rawValue": 37,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "生日数",
+          "value": 1,
+          "rawValue": 19,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "态度数",
+          "value": 11,
+          "rawValue": 29,
+          "masterNumberPreserved": true
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "出生年数",
+          "value": 8,
+          "rawValue": 26,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "出生月数",
+          "value": 1,
+          "rawValue": 10,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "出生日数",
+          "value": 1,
+          "rawValue": 19,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_1",
+          "priority": 100,
+          "title": "数字 1 在多个位置重复",
+          "summary": "生命路径、生日数、出生月数得到同一个归约值 1。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "LIFE_PATH",
+              "value": 1
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTHDAY_NUMBER",
+              "value": 1
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "themeCode": "MASTER_11",
+          "priority": 88,
+          "title": "态度数保留主数 11",
+          "summary": "当前归约规则在态度数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。",
+          "evidence": [
+            {
+              "type": "MASTER_PRESERVED",
+              "role": "ATTITUDE_NUMBER",
+              "value": 11
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 1,
+          "roles": [
+            "LIFE_PATH",
+            "BIRTHDAY_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "数字 1 在多个位置重复",
+          "summary": "生命路径、生日数、出生月数得到同一个归约值 1。这说明多个计算位置出现结构重复，但这些角色仍须分别阅读。"
+        },
+        {
+          "code": "MASTER_NUMBER_PRESERVED",
+          "value": 11,
+          "roles": [
+            "ATTITUDE_NUMBER"
+          ],
+          "priority": 88,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "态度数保留主数 11",
+          "summary": "当前归约规则在态度数保留 11，没有继续化简。此处只陈述计算状态，不附加尚未准入的主数人格或命运含义。"
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 3,
+            "rawValue": 30,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 4,
+            "rawValue": 13,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 5,
+            "rawValue": 23,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 35,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 9,
+            "rawValue": null,
+            "startAge": 36,
+            "endAge": 44,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 2,
+            "rawValue": null,
+            "startAge": 45,
+            "endAge": 53,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 9,
+            "rawValue": null,
+            "startAge": 54,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 35,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 36,
+            "endAge": 44,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 45,
+            "endAge": 53,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 7,
+            "rawValue": null,
+            "startAge": 54,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "这次数字结构的主要位置是生命路径 1、生日数 1、态度数 11。",
+        "其中 1 在生命路径、生日数、出生月数重复，因此综合阅读应把“同值、不同角色”放在一起比较，而不是把同一段数字说明重复两次。",
+        "目标日期周期为个人年 3、个人月 4、个人日 5。这些周期只提供结构化观察视角，不证明未来事件。"
+      ],
+      "realityReflection": [
+        "在现实经验中，生命路径、生日数、出生月数这几个位置是否真的呈现相似之处？哪些情境反而能看出它们的角色差异？",
+        "如果把这些数字只当作不同计算位置，而不是人格标签，哪一个位置最容易与你现在的现实经验进行核对？",
+        "哪些部分与你的经验不吻合？保留这些反例有助于避免把数字解释成完整身份。"
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    },
+    {
+      "reviewCaseId": "NUM-FP-HR-12",
+      "sourceMachineCaseId": "NUM-FP-MC-12",
+      "birthDate": "1999-09-09",
+      "targetDate": "2026-09-09",
+      "locale": "en",
+      "projectionId": "CMP-2DF77CAF7654911BF16B85EB",
+      "coreNumbers": [
+        {
+          "role": "LIFE_PATH",
+          "label": "Life Path",
+          "value": 1,
+          "rawValue": 46,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTHDAY_NUMBER",
+          "label": "Birthday Number",
+          "value": 9,
+          "rawValue": 9,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "ATTITUDE_NUMBER",
+          "label": "Attitude Number",
+          "value": 9,
+          "rawValue": 18,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_YEAR_NUMBER",
+          "label": "Birth Year Number",
+          "value": 1,
+          "rawValue": 28,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_MONTH_NUMBER",
+          "label": "Birth Month Number",
+          "value": 9,
+          "rawValue": 9,
+          "masterNumberPreserved": false
+        },
+        {
+          "role": "BIRTH_DAY_NUMBER",
+          "label": "Birth Day Number",
+          "value": 9,
+          "rawValue": 9,
+          "masterNumberPreserved": false
+        }
+      ],
+      "standoutThemes": [
+        {
+          "themeCode": "REPETITION_1",
+          "priority": 100,
+          "title": "1 repeats across roles",
+          "summary": "Life Path and Birth Year Number resolve to the same value 1. This is a structural repetition; the roles remain distinct.",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "LIFE_PATH",
+              "value": 1
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_YEAR_NUMBER",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "themeCode": "REPETITION_9",
+          "priority": 100,
+          "title": "9 repeats across roles",
+          "summary": "Birthday Number, Attitude Number, and Birth Month Number resolve to the same value 9. This is a structural repetition; the roles remain distinct.",
+          "evidence": [
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTHDAY_NUMBER",
+              "value": 9
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "ATTITUDE_NUMBER",
+              "value": 9
+            },
+            {
+              "type": "ROLE_VALUE",
+              "role": "BIRTH_MONTH_NUMBER",
+              "value": 9
+            }
+          ]
+        },
+        {
+          "themeCode": "CYCLE_ECHO_PERSONAL_YEAR_1",
+          "priority": 78,
+          "title": "Personal Year echoes a core value",
+          "summary": "Personal Year is 1, matching Life Path and Birth Year Number. It can be used as a reflection cue, not an event prediction.",
+          "evidence": [
+            {
+              "type": "CYCLE_ECHO",
+              "cycleRole": "PERSONAL_YEAR",
+              "roles": [
+                "LIFE_PATH",
+                "BIRTH_YEAR_NUMBER"
+              ],
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 1,
+          "roles": [
+            "LIFE_PATH",
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "1 repeats across roles",
+          "summary": "Life Path and Birth Year Number resolve to the same value 1. This is a structural repetition; the roles remain distinct."
+        },
+        {
+          "code": "REPEATED_CORE_VALUE",
+          "value": 9,
+          "roles": [
+            "BIRTHDAY_NUMBER",
+            "ATTITUDE_NUMBER",
+            "BIRTH_MONTH_NUMBER"
+          ],
+          "priority": 100,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "9 repeats across roles",
+          "summary": "Birthday Number, Attitude Number, and Birth Month Number resolve to the same value 9. This is a structural repetition; the roles remain distinct."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 1,
+          "roles": [
+            "LIFE_PATH",
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_YEAR",
+          "priority": 78,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Year echoes a core value",
+          "summary": "Personal Year is 1, matching Life Path and Birth Year Number. It can be used as a reflection cue, not an event prediction."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 1,
+          "roles": [
+            "LIFE_PATH",
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_MONTH",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Month echoes a core value",
+          "summary": "Personal Month is 1, matching Life Path and Birth Year Number. It can be used as a reflection cue, not an event prediction."
+        },
+        {
+          "code": "CORE_CYCLE_ECHO",
+          "value": 1,
+          "roles": [
+            "LIFE_PATH",
+            "BIRTH_YEAR_NUMBER"
+          ],
+          "cycleRole": "PERSONAL_DAY",
+          "priority": 68,
+          "customerMeaningDepth": "STRUCTURAL_RELATION_ONLY",
+          "title": "Personal Day echoes a core value",
+          "summary": "Personal Day is 1, matching Life Path and Birth Year Number. It can be used as a reflection cue, not an event prediction."
+        }
+      ],
+      "timing": {
+        "calendar": [
+          {
+            "code": "UNIVERSAL_YEAR",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_YEAR",
+            "value": 1,
+            "rawValue": 19,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_MONTH",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PERSONAL_DAY",
+            "value": 1,
+            "rawValue": 10,
+            "startAge": null,
+            "endAge": null,
+            "cycleNumber": null,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "pinnacles": [
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 9,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 35,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 36,
+            "endAge": 44,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 45,
+            "endAge": 53,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "PINNACLE_CYCLE",
+            "value": 1,
+            "rawValue": null,
+            "startAge": 54,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "challenges": [
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 0,
+            "rawValue": null,
+            "startAge": 0,
+            "endAge": 35,
+            "cycleNumber": 1,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 36,
+            "endAge": 44,
+            "cycleNumber": 2,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 45,
+            "endAge": 53,
+            "cycleNumber": 3,
+            "certainty": "DETERMINISTIC"
+          },
+          {
+            "code": "CHALLENGE_CYCLE",
+            "value": 8,
+            "rawValue": null,
+            "startAge": 54,
+            "endAge": null,
+            "cycleNumber": 4,
+            "certainty": "DETERMINISTIC"
+          }
+        ],
+        "lifePeriod": {
+          "availability": "BLOCKED_NOT_IN_CURRENT_CALCULATION_AUTHORITY"
+        }
+      },
+      "integratedNarrative": [
+        "The primary calculated positions are Life Path 1, Birthday Number 9, and Attitude Number 9.",
+        "Value 1 repeats in Life Path and Birth Year Number, so the integrated reading compares the same value across distinct roles instead of repeating one definition.",
+        "Target-date cycles are Personal Year 1, Personal Month 1, and Personal Day 1. They are structural reflection lenses, not evidence of future events."
+      ],
+      "realityReflection": [
+        "In lived experience, where do Life Path and Birth Year Number seem similar, and where do their different roles become clearer?",
+        "When Personal Year repeats the core value 1, what is worth observing now without assuming a specific event will occur?",
+        "Which parts do not fit your experience? Keeping counterexamples prevents a numeric reading from becoming a total identity claim."
+      ],
+      "semanticDepth": {
+        "numberMeaning": "STRUCTURAL_SLOT_ONLY",
+        "roleNumberRichMeaning": "NOT_ADMITTED",
+        "relationships": "STRUCTURAL_RELATION_ONLY",
+        "timingMeaning": "STRUCTURAL_CYCLE_ONLY"
+      },
+      "boundaries": {
+        "fortunePredictionCreated": false,
+        "professionalJudgmentCreated": false,
+        "recalculated": false,
+        "meaningInvented": false,
+        "karmicDebtMeaningAsserted": false,
+        "lifePeriodInvented": false,
+        "identityFactCreated": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-NUMEROLOGY-RELATIONAL-MEANING-REGISTRY-v2.0.0",
+  "workCode": "NUM-FP-W6",
+  "requestedWorkCode": "NUM-W6",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "STRUCTURAL_RELATION_ENGINE_ACTIVE",
+  "relations": [
+    {
+      "code": "REPEATED_CORE_VALUE",
+      "inputs": [
+        "calculation.values"
+      ],
+      "meaningDepth": "STRUCTURAL_RELATION_ONLY",
+      "priority": 100
+    },
+    {
+      "code": "MASTER_NUMBER_PRESERVED",
+      "inputs": [
+        "calculation.values.masterNumberPreserved"
+      ],
+      "meaningDepth": "STRUCTURAL_RELATION_ONLY",
+      "priority": 88
+    },
+    {
+      "code": "CORE_CYCLE_ECHO",
+      "inputs": [
+        "calculation.values",
+        "calculation.cycles PERSONAL_YEAR/PERSONAL_MONTH/PERSONAL_DAY"
+      ],
+      "meaningDepth": "STRUCTURAL_RELATION_ONLY",
+      "priority": "78/68"
+    },
+    {
+      "code": "ROLE_DIFFERENCE_SAME_VALUE",
+      "inputs": [
+        "same value in multiple role codes"
+      ],
+      "meaningDepth": "COMPOSITION_RULE",
+      "priority": 95
+    }
+  ],
+  "forbiddenDerivedRelations": [
+    "compatibility claim",
+    "fate claim",
+    "event prediction",
+    "personality diagnosis",
+    "absence equals deficit",
+    "karmic-debt meaning without admission",
+    "repetition created only by a derivation alias"
+  ],
+  "runtime": "functions/num-full-production/num-integrated-reading-runtime.js",
+  "derivationAliases": [
+    {
+      "role": "BIRTH_DAY_NUMBER",
+      "canonicalCustomerRole": "BIRTHDAY_NUMBER",
+      "reason": "Both are derived from birth day in the current runtime; alias duplication must not become a repetition theme."
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "PHI-OS-NUM-FP-W2-CALCULATION-PROJECTION-REGISTRY-v1.0.0",
+  "workCode": "NUM-FP-W2",
+  "requestedWorkCode": "NUM-W2",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "CURRENT_PROJECTION_SURFACE_REGISTERED",
+  "projectionSchema": "PHI-OS-CANONICAL-METHOD-PROJECTION-v1.0.0",
+  "roles": [
+    {
+      "code": "LIFE_PATH",
+      "group": "CORE",
+      "calculationBasis": "ALL_BIRTH_DATE_DIGITS",
+      "semanticRole": "PRIMARY_DATE_BASED_ROLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": true
+    },
+    {
+      "code": "BIRTHDAY_NUMBER",
+      "group": "CORE",
+      "calculationBasis": "BIRTH_DAY",
+      "semanticRole": "DAY_OF_BIRTH_ROLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": true
+    },
+    {
+      "code": "ATTITUDE_NUMBER",
+      "group": "CORE",
+      "calculationBasis": "BIRTH_MONTH_PLUS_DAY",
+      "semanticRole": "MONTH_DAY_COMPOSITE_ROLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": true
+    },
+    {
+      "code": "BIRTH_YEAR_NUMBER",
+      "group": "SUPPORTING",
+      "calculationBasis": "BIRTH_YEAR_DIGITS",
+      "semanticRole": "YEAR_ROLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    },
+    {
+      "code": "BIRTH_MONTH_NUMBER",
+      "group": "SUPPORTING",
+      "calculationBasis": "BIRTH_MONTH",
+      "semanticRole": "MONTH_ROLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    },
+    {
+      "code": "BIRTH_DAY_NUMBER",
+      "group": "SUPPORTING",
+      "calculationBasis": "BIRTH_DAY",
+      "semanticRole": "DAY_ROLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false,
+      "derivationAliasOf": "BIRTHDAY_NUMBER",
+      "customerCompositionRole": "EVIDENCE_SUPPORTING_ONLY"
+    },
+    {
+      "code": "UNIVERSAL_YEAR",
+      "group": "TIMING",
+      "calculationBasis": "TARGET_YEAR_DIGITS",
+      "semanticRole": "TARGET_YEAR_CYCLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    },
+    {
+      "code": "PERSONAL_YEAR",
+      "group": "TIMING",
+      "calculationBasis": "BIRTH_MONTH_PLUS_DAY_PLUS_UNIVERSAL_YEAR",
+      "semanticRole": "PERSONAL_YEAR_CYCLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    },
+    {
+      "code": "PERSONAL_MONTH",
+      "group": "TIMING",
+      "calculationBasis": "PERSONAL_YEAR_PLUS_TARGET_MONTH",
+      "semanticRole": "PERSONAL_MONTH_CYCLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    },
+    {
+      "code": "PERSONAL_DAY",
+      "group": "TIMING",
+      "calculationBasis": "PERSONAL_MONTH_PLUS_TARGET_DAY",
+      "semanticRole": "PERSONAL_DAY_CYCLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    },
+    {
+      "code": "PINNACLE_CYCLE",
+      "group": "LIFE_STAGE",
+      "calculationBasis": "CURRENT_CYCLE_POLICY_PINNACLE_FORMULAS",
+      "semanticRole": "AGE_BANDED_PINNACLE",
+      "meaningRequired": true,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    },
+    {
+      "code": "CHALLENGE_CYCLE",
+      "group": "LIFE_STAGE",
+      "calculationBasis": "CURRENT_CYCLE_POLICY_CHALLENGE_FORMULAS",
+      "semanticRole": "AGE_BANDED_CHALLENGE",
+      "meaningRequired": false,
+      "customerLabelRequired": true,
+      "customerPrimaryEligible": false
+    }
+  ],
+  "structures": [
+    {
+      "code": "NUMBER_FACTS",
+      "customerSurface": "CALCULATION_DETAILS_ONLY"
+    },
+    {
+      "code": "DIGIT_FREQUENCY",
+      "customerSurface": "EVIDENCE_ONLY",
+      "absenceMeansDeficit": false
+    },
+    {
+      "code": "MASTER_NUMBER_STATE",
+      "customerSurface": "STRUCTURAL_HIGHLIGHT_ELIGIBLE"
+    }
+  ],
+  "explicitNoMeaningStates": [
+    {
+      "role": "CHALLENGE_CYCLE",
+      "value": 0,
+      "reason": "ZERO_HAS_NO_CANONICAL_NUMBER_ORIENTATION_IDENTITY"
+    }
+  ],
+  "rules": {
+    "customerMaySeeRawInternalCodeAsPrimaryLabel": false,
+    "calculatedFactMayDisappearSilently": false,
+    "interpretationMayRecalculate": false,
+    "derivationAliasMustNotCreateFalseRepetitionTheme": true
+  }
+}

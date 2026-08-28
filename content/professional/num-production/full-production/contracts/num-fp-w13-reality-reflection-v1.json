@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "PHI-OS-NUM-FP-W13-REALITY-REFLECTION-v1.0.0",
+  "workCode": "NUM-FP-W13",
+  "requestedWorkCode": "NUM-W13",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "status": "IMPLEMENTED",
+  "promptSources": [
+    "repeated-role relation",
+    "core-cycle echo",
+    "fallback role distinction",
+    "counterexample request"
+  ],
+  "maxPrompts": 3,
+  "rules": {
+    "promptMustNotPresumeClaimTrue": true,
+    "promptMustAllowCounterexample": true,
+    "promptMustNotPredictEvent": true,
+    "oneGenericQuestionPerCardForbidden": true
+  }
+}
