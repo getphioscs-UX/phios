@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-USEFUL-GOD-TIAOHOU-CONTRACT-v1.1.0",
+  "work": "BAZI-FP-W6",
+  "status": "SOURCE_ADMITTED_MULTI_SCHOOL_FOUNDATION_RULESETS_FROZEN",
+  "inputs": [
+    "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0",
+    "PHI-OS-BAZI-STRENGTH-SEASONAL-EVIDENCE-v1.0.0",
+    "PHI-OS-BAZI-PATTERN-CANDIDATE-IR-v1.0.0"
+  ],
+  "rules": {
+    "usefulGodTermMustBeSchoolQualified": true,
+    "ziPingMonthCommandUseMustNotBeMergedWithTiYongBalance": true,
+    "tiaohouMustRemainSeparateClimateLens": true,
+    "seasonAloneMayNotSelectUsefulGod": true,
+    "strengthEvidenceAloneMayNotSelectUsefulGod": true,
+    "numericUsefulGodScoreForbidden": true,
+    "silentCrossSchoolSynthesisForbidden": true,
+    "productionVerdictRequiresHumanAdmittedSourceClaims": true,
+    "humanAdmittedSourceClaimsAvailable": true,
+    "elementSelectionRequiresElementSpecificRuleCoverage": true
+  },
+  "output": "PHI-OS-BAZI-USEFUL-GOD-TIAOHOU-MULTI-SCHOOL-IR-v1.0.0",
+  "predecessorRef": "content/professional/bzr-production/contracts/bazi-useful-god-tiaohou-contract-v1.json",
+  "currentBaselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "rulesetRefs": [
+    "content/interpretation/bazi/rulesets/bazi-zi-ping-month-command-use-ruleset-v1.json",
+    "content/interpretation/bazi/rulesets/bazi-di-tian-sui-ti-yong-ruleset-v1.json",
+    "content/interpretation/bazi/rulesets/bazi-di-tian-sui-tiaohou-ruleset-v1.json"
+  ],
+  "sourceAdmissionRegistryRef": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.1.json",
+  "decisionCoverage": {
+    "ZI_PING_MONTH_COMMAND_USE_v1": {
+      "schoolQualifiedEvidenceEvaluation": "SUPPORTED",
+      "usefulGodElementSelection": "UNRESOLVED_REQUIRES_DETAILED_PATTERN_CONDITION_AND_SELECTION_CLAIMS",
+      "customerOutcomePrediction": "FORBIDDEN"
+    },
+    "DI_TIAN_SUI_TI_YONG_BALANCE_v1": {
+      "schoolQualifiedEvidenceEvaluation": "SUPPORTED",
+      "multipleCandidateRepresentation": "SUPPORTED",
+      "priorityPrinciple": "SUPPORTED",
+      "factorSelectionAndPriorityTable": "UNRESOLVED_REQUIRES_ADDITIONAL_SOURCE_CLAIMS",
+      "numericScore": "FORBIDDEN"
+    },
+    "DI_TIAN_SUI_CLIMATE_TIAOHOU_v1": {
+      "climateDimensionRepresentation": "SUPPORTED",
+      "seasonContext": "SUPPORTED",
+      "moistureVerdictFromSeasonAlone": "FORBIDDEN",
+      "tiaohouElementSelection": "UNRESOLVED_REQUIRES_ELEMENT_SPECIFIC_SOURCE_CLAIMS"
+    }
+  }
+}
