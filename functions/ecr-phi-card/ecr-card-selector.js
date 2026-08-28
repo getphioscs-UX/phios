@@ -1,0 +1,18 @@
+const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);for(const x of Object.values(v))freeze(x)}return v};
+const list=v=>Array.isArray(v)?v:[];
+const byCode=(coord,group)=>list(coord?.[group]).map(x=>x?.code).filter(Boolean);
+const driverItems=coord=>list(coord?.ECR_DRIVER_PRIORITY).filter(x=>x?.code);
+const add=(scores,id,w=1,reason=null)=>{if(!id||!Number.isFinite(w))return;scores.set(id,{score:(scores.get(id)?.score||0)+w,reasons:[...(scores.get(id)?.reasons||[]),...(reason?[reason]:[])]});};
+const pick=scores=>[...scores.entries()].sort((a,b)=>b[1].score-a[1].score||a[0].localeCompare(b[0]))[0]||null;
+const mapCodes=(scores,codes,map,weight,reasonPrefix)=>{for(const code of codes){const id=map?.[code];if(id)add(scores,id,weight,`${reasonPrefix}:${code}`)}};
+const allCodes=coord=>new Set(Object.values(coord||{}).flatMap(v=>list(v).map(x=>x?.code).filter(Boolean)));
+function tensionScores(coord,rules){const out=new Map(), codes=allCodes(coord), drivers=driverItems(coord).slice().sort((a,b)=>(a?.meta?.rank??99)-(b?.meta?.rank??99));const values=drivers.map(x=>Number(x?.value)).filter(Number.isFinite);for(const r of list(rules)){const c=r.when||{};let ok=true;if(c.anyCode)ok=ok&&c.anyCode.some(x=>codes.has(x));if(c.andActivationAny)ok=ok&&c.andActivationAny.some(x=>codes.has(x));if(c.driverTopTwoGapLTE!=null){ok=ok&&values.length>=2&&Math.abs(values[0]-values[1])<=c.driverTopTwoGapLTE}if(c.driverTopFourRangeLTE!=null){const x=values.slice(0,4);ok=ok&&x.length===4&&(Math.max(...x)-Math.min(...x)<=c.driverTopFourRangeLTE)}if(ok)add(out,r.cardId,Number(r.weight)||1,r.ruleId)}return out}
+export function selectEcrPhiCards({coordinate,interpretationUnits,customerPublishable=false},mapping,deck){if(customerPublishable!==true)throw new TypeError('ECR_PHI_CARD_CUSTOMER_PUBLISHABLE_RESULT_REQUIRED');if(!coordinate||!list(interpretationUnits).length)throw new TypeError('ECR_PHI_CARD_ACCEPTED_INTERPRETATION_REQUIRED');const gm=mapping.groupMappings||{}, selected={};
+ {const s=new Map();mapCodes(s,byCode(coordinate,'ECR_GRAMMAR'),gm.CORE?.codeToCard,2,'GRAMMAR');mapCodes(s,byCode(coordinate,'ECR_QUESTION'),gm.CORE?.codeToCard,2,'QUESTION');selected.CORE=pick(s)}
+ {const s=new Map();for(const x of driverItems(coordinate)){const id=gm.DRIVER?.codeToCard?.[x.code],v=Number(x.value),rank=Number(x?.meta?.rank)||99;add(s,id,Number.isFinite(v)?v:1/rank,`DRIVER:${x.code}`)}selected.DRIVER=pick(s)}
+ {const s=new Map();for(const x of list(coordinate.ECR_CAPABILITIES)){const id=gm.GIFT?.codeToCard?.[x.code],w=x?.value==='PRIMARY'||x?.meta?.priority==='PRIMARY'?2:1;add(s,id,w,`CAPABILITY:${x.code}`)}selected.GIFT=pick(s)}
+ {const s=tensionScores(coordinate,gm.TENSION?.rules);selected.TENSION=pick(s)}
+ {const s=new Map();mapCodes(s,byCode(coordinate,'ECR_MOTION'),gm.FIELD?.motionCodeToCard,2,'MOTION');mapCodes(s,byCode(coordinate,'ECR_CONFIGURATION'),gm.FIELD?.configurationCodeToCard,1,'CONFIGURATION');selected.FIELD=pick(s)}
+ {const s=new Map();mapCodes(s,byCode(coordinate,'ECR_ACTIVATION'),gm.PHASE?.codeToCard,1,'ACTIVATION');selected.PHASE=pick(s)}
+ const cardsById=new Map(list(deck?.cards).map(c=>[c.cardId,c]));const groups={};for(const [g,p] of Object.entries(selected)){groups[g]=p?{cardId:p[0],score:p[1].score,reasons:p[1].reasons,card:cardsById.get(p[0])||null}:null}return freeze({schemaVersion:'PHI-OS-ECR-PHI-CARD-SELECTION-v1.0.0',methodId:'ECR',selectionMode:'DETERMINISTIC_PRESENTATION_FROM_CUSTOMER_PUBLISHABLE_ECR',groups,boundaries:{random:false,newMeaningCreated:false,currentRealityInferred:false,tensionIsCurrentFact:false,phasePredictsFuture:false}})}
+export default Object.freeze({selectEcrPhiCards});
