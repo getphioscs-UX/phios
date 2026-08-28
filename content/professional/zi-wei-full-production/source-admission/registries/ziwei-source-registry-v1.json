@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-SOURCE-REGISTRY-v1.0.0",
+  "work": "ZIWEI-SOURCE-CLAIM-ADMISSION-001",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "status": "ACTIVE_WITNESS_REGISTRY",
+  "sources": [
+    {
+      "sourceId": "ZWR-SRC-ZIWEI-DOUSHU-QUANSHU",
+      "title": "紫微斗数全书",
+      "sourceClass": "CLASSICAL_PUBLIC_DOMAIN_UNDERLYING_WORK",
+      "rightsClass": "PUBLIC_DOMAIN_UNDERLYING_WORK",
+      "authorAttribution": "NOT_FROZEN_IN_THIS_WORK",
+      "runtimeClaimAuthority": "PENDING_HUMAN_ADMISSION",
+      "coverage": [
+        "W3_STAR_PLACEMENT",
+        "W4_STAR_STATE_ROWS"
+      ],
+      "witnesses": [
+        {
+          "witnessId": "ZWR-WIT-WIKISOURCE-ZWDS-V2",
+          "provider": "Wikisource",
+          "editionLabel": "紫微斗数全书/卷二 digital witness",
+          "url": "https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%8D%B7%E4%BA%8C",
+          "use": "CLASSICAL_PLACEMENT_RULE_WITNESS",
+          "digitalWitnessPolicy": "LINK_AND_LOCATOR_ONLY_NO_RUNTIME_FETCH"
+        },
+        {
+          "witnessId": "ZWR-WIT-WIKISOURCE-ZWDS-FULL",
+          "provider": "Wikisource",
+          "editionLabel": "紫微斗数全书/全览 digital witness",
+          "url": "https://zh.wikisource.org/zh-hans/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8/%E5%85%A8%E8%A6%BD",
+          "use": "CLASSICAL_STAR_STATE_ROW_WITNESS",
+          "digitalWitnessPolicy": "LINK_AND_LOCATOR_ONLY_NO_RUNTIME_FETCH"
+        }
+      ]
+    },
+    {
+      "sourceId": "ZWR-SRC-IZTRO-PUBLIC-IMPLEMENTATION",
+      "title": "iztro public Zi Wei implementation",
+      "sourceClass": "PUBLIC_IMPLEMENTATION_WITNESS_NOT_CLASSICAL_AUTHORITY",
+      "rightsClass": "REFERENCE_ONLY_DO_NOT_VENDOR_CODE",
+      "runtimeClaimAuthority": "CORROBORATION_ONLY_PENDING_HUMAN_REVIEW",
+      "coverage": [
+        "HUO_LING_HOUR_PROGRESSION",
+        "KONG_JIE_OPERATIONAL_NAMING"
+      ],
+      "witnesses": [
+        {
+          "witnessId": "ZWR-WIT-IZTRO-STAR-LOCATION",
+          "provider": "GitHub",
+          "editionLabel": "iztro main/src/star/location.ts",
+          "url": "https://github.com/SylarLong/iztro/blob/main/src/star/location.ts",
+          "use": "CONTEMPORARY_OPERATIONAL_CORROBORATION_ONLY",
+          "digitalWitnessPolicy": "PARAPHRASE_AND_LINK_ONLY"
+        }
+      ]
+    }
+  ],
+  "governance": {
+    "classicalSourceHasPriorityForClassicalTextClaims": true,
+    "publicImplementationMayResolveOperationalConventionOnlyAfterHumanReview": true,
+    "publicImplementationCannotSilentlyOverrideClassicalVariant": true,
+    "webAvailabilityNotRuntimeDependency": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-SOURCE-ADMISSION-STRATEGY-v1.0.0",
+  "work": "ZIWEI-SOURCE-CLAIM-ADMISSION-001",
+  "baselineCommit": "07d01b39a98d07ff237f1516852f3b29d058a47e",
+  "status": "CLAIM_BATCH_EXTRACTED_HUMAN_SOURCE_FIDELITY_REVIEW_PENDING",
+  "objective": "Convert the W3 eight-star placement extension and W4 explicit star-state rows into source-bound, human-reviewable claims before production eligibility changes.",
+  "principles": {
+    "existingW0W4EngineeringAuthorityMutated": false,
+    "modelMaySelfAdmitClaims": false,
+    "humanSourceFidelityReviewRequired": true,
+    "sourceClaimAdmissionConfirmsSourceFidelityNotEmpiricalTruth": true,
+    "classicalAndContemporaryWitnessLayersMustRemainSeparate": true,
+    "schoolVariantOrAliasRiskMustBeVisible": true,
+    "runtimeUseRemainsClosedUntilHumanAdmission": true,
+    "customerInterpretationUnaffected": true
+  },
+  "scope": {
+    "w3PlacementClaims": 8,
+    "w4StarStateRowClaims": 21,
+    "totalClaims": 29
+  },
+  "sourceRegistry": "content/professional/zi-wei-full-production/source-admission/registries/ziwei-source-registry-v1.json",
+  "admissionRegistry": "content/professional/zi-wei-full-production/source-admission/registries/ziwei-source-admission-registry-v1.json",
+  "claimContract": "content/professional/zi-wei-full-production/source-admission/contracts/ziwei-source-claim-contract-v1.json",
+  "claimBatch": "content/professional/zi-wei-full-production/source-admission/claims/ziwei-source-claim-batch-001-v1.json",
+  "humanReviewPacket": "content/professional/zi-wei-full-production/source-admission/review/ziwei-source-claim-batch-001-human-review-v1.json",
+  "humanReviewHtml": "docs/ziwei/review/ZIWEI-SOURCE-CLAIM-BATCH-001-review.html",
+  "nextGate": "29/29 claims human-decided; W3/W4 production activation may occur only for admitted claims. W5/W6 remain blocked until that admission result is applied."
+}
