@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-FP-W1-CANONICAL-CHART-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W1",
+  "status": "ACTIVE_SUCCESSOR_IR_CONTRACT",
+  "runtime": "functions/bzr-full-production/bazi-chart-runtime.js",
+  "authority": {
+    "inputOwner": "MCD_CANONICAL_METHOD_PROJECTION",
+    "outputClass": "DERIVED_BAZI_CHART_IR_NOT_SECOND_PROJECTION_AUTHORITY",
+    "mayRecalculateFourPillars": false,
+    "mayChangeProjectionId": false
+  },
+  "requiredSections": [
+    "sourceProjection",
+    "pillars",
+    "dayMaster",
+    "monthCommand",
+    "fiveElementInventory",
+    "yinYangInventory",
+    "unknowns",
+    "lineage",
+    "boundaries"
+  ],
+  "pillarFields": [
+    "position",
+    "stem",
+    "branch",
+    "hiddenStems"
+  ],
+  "identityFields": [
+    "code",
+    "zh",
+    "element",
+    "polarity"
+  ],
+  "rules": {
+    "hourPillarMayBeMissingOnlyWhenUpstreamUnknown": true,
+    "rawPinyinMayExistInTechnicalCodeButCustomerLabelMustUseLocalizedIdentity": true,
+    "hiddenStemFactsAreRegistryDerivedAndSourceGated": true,
+    "weightedHiddenStemStrengthForbidden": true,
+    "interpretationCreated": false
+  }
+}

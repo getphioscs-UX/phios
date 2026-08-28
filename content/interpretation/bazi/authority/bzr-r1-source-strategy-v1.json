@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-BZR-R1-SOURCE-STRATEGY-v1.0.0",
+  "work": "BZR-R1",
+  "baselineCommit": "14b6735b1ffb804c160b0b5306646994ee1ab1dd",
+  "status": "ACTIVE_SOURCE_STRATEGY_CLAIM_EXTRACTION_PENDING",
+  "objective": "Build enough source authority for production-grade Zi Ping structural analysis without buying books until a documented gap remains after public-domain and public-reference coverage.",
+  "tierOrder": [
+    "TIER_1_CLASSICAL_PUBLIC_DOMAIN",
+    "TIER_2_PUBLIC_ACADEMIC_WITNESS",
+    "TIER_3_MODERN_PUBLIC_PROFESSIONAL_REFERENCE",
+    "TIER_4_COMMERCIAL_GAP_FILL_ONLY"
+  ],
+  "rules": {
+    "tier1First": true,
+    "tier2UsedForEditionPaginationWitnessChecking": true,
+    "tier3MayModernizeExplanationButNotOverrideClassicalRuleAuthority": true,
+    "tier4PurchaseRequiresNamedCoverageGap": true,
+    "physicalOrDigitalOwnershipDoesNotCreatePublicReuseRights": true,
+    "underlyingPublicDomainAndDigitalWitnessRightsTrackedSeparately": true,
+    "sourceMetadataDoesNotGrantRuntimeMeaningAuthority": true,
+    "sourceClaimRequiresHumanAdmission": true,
+    "conflictingSchoolsMustRemainExplicit": true,
+    "silentSynthesisForbidden": true
+  },
+  "sourceRegistry": "content/interpretation/bazi/registries/bazi-source-registry-v1.json",
+  "tierRegistry": "content/interpretation/bazi/registries/bazi-source-tier-registry-v1.json",
+  "admissionRegistry": "content/interpretation/bazi/registries/bazi-source-admission-registry-v1.json",
+  "coverageMatrix": "content/interpretation/bazi/registries/bazi-source-coverage-matrix-v1.json",
+  "claimContract": "content/interpretation/bazi/contracts/bazi-source-claim-contract-v1.json",
+  "nextActions": [
+    "VERIFY_TIER_1_DIGITAL_WITNESSES",
+    "EXTRACT_RULE_CLAIMS_BY_TOPIC",
+    "HUMAN_REVIEW_SOURCE_FIDELITY",
+    "ADMIT_VERSIONED_RULE_CLAIMS",
+    "ONLY_THEN_ENABLE_PRODUCTION_VERDICTS_IN_W2_W6"
+  ]
+}
