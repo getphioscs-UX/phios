@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R13-LIFE-PERIOD-AUTHORITY-v1.0.0",
+  "workCode": "NUM-R13",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "status": "BANDS_RECOVERED_FORMULA_AUTHORITY_WITHHELD",
+  "observedModel": {
+    "bands": [
+      {
+        "startAge": 21,
+        "endAge": 40
+      },
+      {
+        "startAge": 41,
+        "endAge": 60
+      },
+      {
+        "startAge": 61,
+        "endAge": 80
+      }
+    ],
+    "examples": [
+      {
+        "birthDate": "1992-09-12",
+        "page": 2,
+        "patterns": [
+          "639",
+          "999",
+          "459"
+        ]
+      },
+      {
+        "birthDate": "1989-11-15",
+        "page": 3,
+        "patterns": [
+          "516",
+          "876",
+          "189"
+        ]
+      }
+    ],
+    "evidencePages": [
+      2,
+      3
+    ]
+  },
+  "recoveryAssessment": {
+    "bandBoundariesRecovered": true,
+    "patternWidthRecovered": "three digits",
+    "derivationFormulaRecovered": false,
+    "zeroPolicyRecovered": false,
+    "masterPolicyRecovered": false,
+    "pre21PolicyRecovered": false,
+    "post80PolicyRecovered": false
+  },
+  "calculationAuthorityGranted": false,
+  "runtimeUseAllowed": false,
+  "customerPublishable": false,
+  "failClosedReason": "Two examples are insufficient to uniquely recover the three-digit pattern derivation.",
+  "runtime": "functions/num-expansion/num-life-period-recovery.js"
+}

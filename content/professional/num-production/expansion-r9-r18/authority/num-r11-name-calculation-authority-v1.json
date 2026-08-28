@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R11-NAME-CALCULATION-AUTHORITY-v1.0.0",
+  "workCode": "NUM-R11",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "status": "CALCULATION_AUTHORITY_CANDIDATE_R18_PENDING",
+  "schoolAuthorityId": "ENERGY_NUMEROLOGY_LEARNING_RECONSTRUCTED_V1",
+  "inputContract": "content/professional/num-production/expansion-r9-r18/contracts/num-r11-canonical-numerology-identity-input-v1.schema.json",
+  "alphabet": {
+    "systemId": "PYTHAGOREAN_LATIN_1_9_V1",
+    "mapping": {
+      "1": "AJS",
+      "2": "BKT",
+      "3": "CLU",
+      "4": "DMV",
+      "5": "ENW",
+      "6": "FOX",
+      "7": "GPY",
+      "8": "HQZ",
+      "9": "IR"
+    },
+    "evidencePages": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ]
+  },
+  "calculations": {
+    "EXPRESSION": {
+      "formula": "sum(all normalized Latin letters)",
+      "finalReduction": "single digit; retain full reduction chain"
+    },
+    "SOUL_URGE": {
+      "formula": "sum(A,E,I,O,U)",
+      "finalReduction": "single digit; retain full reduction chain"
+    },
+    "PERSONALITY": {
+      "formula": "sum(consonants)",
+      "finalReduction": "single digit; retain full reduction chain"
+    },
+    "MATURITY": {
+      "formula": "singleDigit(lifePath) + singleDigit(expression)",
+      "finalReduction": "single digit; retain full reduction chain"
+    }
+  },
+  "normalization": {
+    "asciiLatinOnly": true,
+    "removeSpacesHyphensApostrophesSlashesPeriodsForCalculation": true,
+    "automaticTransliterationForbidden": true,
+    "aliasesMayNotBeSilentlyAddedToFullBirthName": true
+  },
+  "masterHandling": {
+    "sourceStyle": "intermediate 11/22/33 can be retained in reductionSteps but final displayed school value is single digit",
+    "existingR8MasterPolicyOverridden": false
+  },
+  "runtime": "functions/num-expansion/num-name-runtime.js",
+  "semanticMeaningAuthorityGranted": false,
+  "customerPublishable": false
+}

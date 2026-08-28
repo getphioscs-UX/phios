@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R10-DIGIT-DISTRIBUTION-POLICY-v1.0.0",
+  "workCode": "NUM-R10",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "status": "STRUCTURAL_RUNTIME_READY_R18_PENDING",
+  "inputAuthorities": [
+    {
+      "inputScope": "CANONICAL_BIRTH_DATE_DIGITS",
+      "authority": "functions/core-method-runtime/num-number-structure-runtime.js",
+      "productionEligibleAfterR18": true
+    },
+    {
+      "inputScope": "ENERGY_TRIANGLE_INNER_OUTER_DIGITS",
+      "authority": "NOT_AVAILABLE_FORMULA_NOT_FROZEN",
+      "productionEligibleAfterR18": false
+    }
+  ],
+  "rules": {
+    "missingDefinition": "occurrenceCount == 0",
+    "repeatedDefinition": "occurrenceCount >= 2",
+    "absenceMeansDeficit": false,
+    "repetitionMeansIdentity": false,
+    "blackHoleLabelCustomerAllowed": false,
+    "meaningState": "STRUCTURAL_ONLY"
+  },
+  "runtime": "functions/num-expansion/num-digit-distribution-runtime.js"
+}

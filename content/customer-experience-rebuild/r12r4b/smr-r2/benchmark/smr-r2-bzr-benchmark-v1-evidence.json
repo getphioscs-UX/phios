@@ -1,0 +1,309 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-METHOD-BENCHMARK-EVIDENCE-v1.0.0",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "workCode": "R2-W13",
+  "methodId": "BZR",
+  "caseId": "SMR-R2-BZR-BENCHMARK-001",
+  "inputDigest": "af2d02277a4ba06e9f2906c45da5ac6fcc33e61c7651b893318a733cb0f55d57",
+  "inputClass": "GOVERNED_DETERMINISTIC_BENCHMARK_NOT_LIVE_CUSTOMER",
+  "structurallyDifferentFromLegacyCampaign": true,
+  "legacySemanticDigest": "3f81a1e3c14c5e6e37c49c0ae3795cafeb92be6eb476e272e6f1fd0c8e368073",
+  "currentSemanticDigest": "f77a0412e2f9cd53ace194a5163963d48e3166504c88bbd99d34ae3d920c94a7",
+  "projectionId": "CMP-F8D346FAC59CBD3047AB680F",
+  "readingAuthorityRef": "CIR2-67734CB0FDFF0CA6DC575DBE",
+  "productionAdmissionRef": "content/customer-experience-rebuild/admission/cx-r12r3b-human-reviewed-composition-admission-v1.json#methodAdmission/BZR",
+  "questionIntent": {
+    "intentId": "WORK",
+    "prompt": "Explore work and resource themes where evidence exists."
+  },
+  "counts": {
+    "methodInsights": 4,
+    "claims": 4,
+    "themes": 4,
+    "eligibleSections": 3,
+    "firstScreenBlocks": 6,
+    "firstScreenThemes": 3,
+    "renderedDuplicateTexts": 0
+  },
+  "eligibleSectionRefs": [
+    "WHAT_STANDS_OUT",
+    "YOUR_CORE_THEMES",
+    "WHY_THIS_READING"
+  ],
+  "criteria": [
+    {
+      "criterionId": "DAY_MASTER",
+      "label": "Day Master / day reference",
+      "state": "PASS",
+      "evidenceRefs": [
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:YEAR_STEM",
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:YEAR_BRANCH",
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:DAY_STEM",
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:MONTH_BRANCH",
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:MONTH_STEM",
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:DAY_BRANCH",
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:HOUR_STEM",
+        "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:HOUR_BRANCH"
+      ],
+      "note": "Day stem remains the primary reference.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "MONTH_COMMAND",
+      "label": "Month Command",
+      "state": "PARTIAL",
+      "evidenceRefs": [
+        "CM-CARRIER-CONTEXT-CC06@1.0.0",
+        "CM-RUNTIME-PHASE-RP01@1.0.0",
+        "CM-TEMPORAL-POSITION-TP01@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ06@1.0.0",
+        "CM-CARRIER-CONTEXT-CC07@1.0.0",
+        "CM-TEMPORAL-POSITION-TP02@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ07@1.0.0",
+        "CM-CARRIER-CONTEXT-CC02@1.0.0",
+        "CM-TEMPORAL-POSITION-TP03@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ10@1.0.0",
+        "CM-TEMPORAL-POSITION-TP04@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ05@1.0.0"
+      ],
+      "note": "Month branch context is present, but no separately admitted Month Command verdict is exposed.",
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_MONTH_COMMAND"
+    },
+    {
+      "criterionId": "SEASON",
+      "label": "Seasonal structure",
+      "state": "PARTIAL",
+      "evidenceRefs": [
+        "CM-CARRIER-CONTEXT-CC06@1.0.0",
+        "CM-RUNTIME-PHASE-RP01@1.0.0",
+        "CM-TEMPORAL-POSITION-TP01@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ06@1.0.0",
+        "CM-CARRIER-CONTEXT-CC07@1.0.0",
+        "CM-TEMPORAL-POSITION-TP02@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ07@1.0.0",
+        "CM-CARRIER-CONTEXT-CC02@1.0.0",
+        "CM-TEMPORAL-POSITION-TP03@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ10@1.0.0",
+        "CM-TEMPORAL-POSITION-TP04@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ05@1.0.0"
+      ],
+      "note": "Season is referenced conditionally; a versioned strength/season verdict is not exposed in the accepted customer envelope.",
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_SEASON_VERDICT"
+    },
+    {
+      "criterionId": "ROOT",
+      "label": "Root / rootedness",
+      "state": "UPSTREAM_GAP",
+      "evidenceRefs": [
+        "CM-CARRIER-CONTEXT-CC06@1.0.0",
+        "CM-RUNTIME-PHASE-RP01@1.0.0",
+        "CM-TEMPORAL-POSITION-TP01@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ06@1.0.0",
+        "CM-CARRIER-CONTEXT-CC07@1.0.0",
+        "CM-TEMPORAL-POSITION-TP02@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ07@1.0.0",
+        "CM-CARRIER-CONTEXT-CC02@1.0.0",
+        "CM-TEMPORAL-POSITION-TP03@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ10@1.0.0",
+        "CM-TEMPORAL-POSITION-TP04@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ05@1.0.0"
+      ],
+      "note": "No admitted rootedness claim reaches the shared customer result.",
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_ROOT"
+    },
+    {
+      "criterionId": "TEN_GODS",
+      "label": "Ten Gods",
+      "state": "UPSTREAM_GAP",
+      "evidenceRefs": [
+        "CM-CARRIER-CONTEXT-CC06@1.0.0",
+        "CM-RUNTIME-PHASE-RP01@1.0.0",
+        "CM-TEMPORAL-POSITION-TP01@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ06@1.0.0",
+        "CM-CARRIER-CONTEXT-CC07@1.0.0",
+        "CM-TEMPORAL-POSITION-TP02@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ07@1.0.0",
+        "CM-CARRIER-CONTEXT-CC02@1.0.0",
+        "CM-TEMPORAL-POSITION-TP03@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ10@1.0.0",
+        "CM-TEMPORAL-POSITION-TP04@1.0.0",
+        "CM-ACTIVATION-QUALITY-AQ05@1.0.0"
+      ],
+      "note": "The shared accepted result does not expose a governed Ten-Gods analysis layer as a customer claim.",
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_TEN_GODS"
+    },
+    {
+      "criterionId": "STEM_BRANCH_RELATIONS",
+      "label": "Stem / branch relations",
+      "state": "PARTIAL",
+      "evidenceRefs": [
+        "BZR-YEAR-PAIR",
+        "BZR-MONTH-PAIR",
+        "BZR-DAY-PAIR",
+        "BZR-HOUR-PAIR"
+      ],
+      "note": "Pillar stem-branch dependency is visible; cross-pillar combinations/clashes are not exposed as admitted customer claims.",
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_STEM_BRANCH_RELATIONS"
+    },
+    {
+      "criterionId": "WHOLE_CHART_FLOW",
+      "label": "Whole-chart flow",
+      "state": "PARTIAL",
+      "evidenceRefs": [
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-02",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-03",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-01",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-04"
+      ],
+      "note": "All four pillars are represented, but composition remains pillar-centric rather than a fully admitted flow verdict.",
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_WHOLE_CHART_FLOW"
+    },
+    {
+      "criterionId": "SUPPORT_TENSION",
+      "label": "Support / tension",
+      "state": "PARTIAL",
+      "evidenceRefs": [
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-02",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-03",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-01",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-04"
+      ],
+      "note": "Alternative/friction language is preserved, but structural support/tension classification is not yet method-deep.",
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_SUPPORT_TENSION"
+    },
+    {
+      "criterionId": "QUESTION_RELEVANCE",
+      "label": "Question relevance",
+      "state": "PASS",
+      "evidenceRefs": [
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-02",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-03",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-01",
+        "SMR2-CLAIM-BZR-CXI-BZR-E4E350B706A9-04"
+      ],
+      "note": "R2 priority resolver records relevance without inventing method meaning.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "DEDUP",
+      "label": "Semantic / narrative deduplication",
+      "state": "PASS",
+      "evidenceRefs": [],
+      "note": "Rendered duplicate text count: 0.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "LAYOUT",
+      "label": "Reading IA + responsive layout",
+      "state": "PASS",
+      "evidenceRefs": [
+        "WHAT_STANDS_OUT",
+        "YOUR_CORE_THEMES",
+        "WHY_THIS_READING"
+      ],
+      "note": "Same IA feeds desktop/mobile/print; technical detail stays collapsed.",
+      "gapCode": null
+    }
+  ],
+  "summary": {
+    "pass": 4,
+    "partial": 5,
+    "upstreamGap": 2,
+    "fail": 0,
+    "notApplicable": 0
+  },
+  "benchmarkState": "BENCHMARK_GENERATED_UPSTREAM_GAPS_OPEN",
+  "upstreamGapTickets": [
+    {
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_MONTH_COMMAND",
+      "criterionId": "MONTH_COMMAND",
+      "state": "PARTIAL",
+      "note": "Month branch context is present, but no separately admitted Month Command verdict is exposed."
+    },
+    {
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_SEASON_VERDICT",
+      "criterionId": "SEASON",
+      "state": "PARTIAL",
+      "note": "Season is referenced conditionally; a versioned strength/season verdict is not exposed in the accepted customer envelope."
+    },
+    {
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_ROOT",
+      "criterionId": "ROOT",
+      "state": "UPSTREAM_GAP",
+      "note": "No admitted rootedness claim reaches the shared customer result."
+    },
+    {
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_TEN_GODS",
+      "criterionId": "TEN_GODS",
+      "state": "UPSTREAM_GAP",
+      "note": "The shared accepted result does not expose a governed Ten-Gods analysis layer as a customer claim."
+    },
+    {
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_STEM_BRANCH_RELATIONS",
+      "criterionId": "STEM_BRANCH_RELATIONS",
+      "state": "PARTIAL",
+      "note": "Pillar stem-branch dependency is visible; cross-pillar combinations/clashes are not exposed as admitted customer claims."
+    },
+    {
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_WHOLE_CHART_FLOW",
+      "criterionId": "WHOLE_CHART_FLOW",
+      "state": "PARTIAL",
+      "note": "All four pillars are represented, but composition remains pillar-centric rather than a fully admitted flow verdict."
+    },
+    {
+      "gapCode": "BZR_FULL_PRODUCTION_GAP_SUPPORT_TENSION",
+      "criterionId": "SUPPORT_TENSION",
+      "state": "PARTIAL",
+      "note": "Alternative/friction language is preserved, but structural support/tension classification is not yet method-deep."
+    }
+  ],
+  "lineage": {
+    "interpretationUnitRefs": [
+      "CXI-BZR-E4E350B706A9-01",
+      "CXI-BZR-E4E350B706A9-02",
+      "CXI-BZR-E4E350B706A9-03",
+      "CXI-BZR-E4E350B706A9-04"
+    ],
+    "sourceLineage": [
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:YEAR_STEM",
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:YEAR_BRANCH",
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:DAY_STEM",
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:MONTH_BRANCH",
+      "CM-CARRIER-CONTEXT-CC06@1.0.0",
+      "CM-RUNTIME-PHASE-RP01@1.0.0",
+      "CM-TEMPORAL-POSITION-TP01@1.0.0",
+      "CM-ACTIVATION-QUALITY-AQ06@1.0.0",
+      "CX-R12R4B:R1_CALCULATION_NOT_INTERPRETATION",
+      "CX-R12R4B:R3_RULESET_ADMISSION_NOT_LIVE_CUSTOMER_REVIEW",
+      "CX-R12R4B:R10_NO_EVIDENCE_REMAINS_OPEN",
+      "PROJECTION:CMP-F8D346FAC59CBD3047AB680F",
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:MONTH_STEM",
+      "CM-CARRIER-CONTEXT-CC07@1.0.0",
+      "CM-TEMPORAL-POSITION-TP02@1.0.0",
+      "CM-ACTIVATION-QUALITY-AQ07@1.0.0",
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:DAY_BRANCH",
+      "CM-CARRIER-CONTEXT-CC02@1.0.0",
+      "CM-TEMPORAL-POSITION-TP03@1.0.0",
+      "CM-ACTIVATION-QUALITY-AQ10@1.0.0",
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:HOUR_STEM",
+      "CMP-F8D346FAC59CBD3047AB680F#FOUR_PILLARS:HOUR_BRANCH",
+      "CM-TEMPORAL-POSITION-TP04@1.0.0",
+      "CM-ACTIVATION-QUALITY-AQ05@1.0.0"
+    ],
+    "ruleLineage": [
+      "COMPOSITION_RULE:CX-COMP-BZR-PILLAR-DAY-SEASON-v1"
+    ],
+    "boundaryFlags": [
+      "CX-R12R4B:R1_CALCULATION_NOT_INTERPRETATION",
+      "CX-R12R4B:R3_RULESET_ADMISSION_NOT_LIVE_CUSTOMER_REVIEW",
+      "CX-R12R4B:R10_NO_EVIDENCE_REMAINS_OPEN"
+    ]
+  },
+  "governance": {
+    "rawProjectionCreatesCustomerConclusion": false,
+    "rendererCreatesMeaning": false,
+    "webMeaningAuthority": false,
+    "liveCustomerIndividuallyHumanReviewed": false,
+    "benchmarkHumanAccepted": false
+  }
+}

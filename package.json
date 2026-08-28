@@ -1937,7 +1937,11 @@
     "check:ziwei-fp-w9-w10": "node scripts/check-ziwei-fp-w9-w10.mjs",
     "check:ziwei-fp-w9": "npm run check:ziwei-fp-w9-w10",
     "check:ziwei-fp-w10": "npm run check:ziwei-fp-w9-w10",
-    "check:ziwei-source-admission-current": "npm run check:ziwei-source-admission && npm run check:ziwei-fp-w8-admission"
+    "check:ziwei-source-admission-current": "npm run check:ziwei-source-admission && npm run check:ziwei-fp-w8-admission",
+    "build:num-r18": "node scripts/build-num-r18-human-review.mjs",
+    "check:num-r9-r18": "node scripts/check-num-r9-r18.mjs",
+    "check:num-r18:admission": "node scripts/check-num-r18-human-admission.mjs",
+    "check:num-r9-r18:final": "npm run check:num-r9-r18 && npm run check:num-r18:admission"
   },
   "type": "module",
   "dependencies": {

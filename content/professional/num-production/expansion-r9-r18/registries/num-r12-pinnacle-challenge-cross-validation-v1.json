@@ -1,0 +1,213 @@
+{
+  "schemaVersion": "PHI-OS-NUM-R12-PINNACLE-CHALLENGE-CROSS-VALIDATION-v1.0.0",
+  "workCode": "NUM-R12",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "status": "VALUE_FORMULAS_CROSS_VALIDATED_8_OF_8",
+  "learningCorpusFormula": {
+    "base": "A=month single digit; B=day single digit; C=year single digit; D=whole birth date single digit",
+    "pinnacles": [
+      "E=A+B",
+      "F=B+C",
+      "G=E+F",
+      "H=A+C"
+    ],
+    "challenges": [
+      "I=ABS(A-B)",
+      "J=ABS(B-C)",
+      "K=ABS(I-J)",
+      "L=ABS(A-C)"
+    ],
+    "evidencePages": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ]
+  },
+  "currentRuntime": "functions/core-method-runtime/num-cycle-runtime.js",
+  "crossValidationScope": "PINNACLE_AND_CHALLENGE_VALUES_ONLY",
+  "ageBandAuthority": "NOT_VALIDATED_BY_LEARNING_CORPUS",
+  "fixtures": [
+    {
+      "birthDate": "1989-11-15",
+      "page": 20,
+      "base": [
+        2,
+        6,
+        9,
+        8
+      ],
+      "pinnacles": [
+        8,
+        6,
+        5,
+        2
+      ],
+      "challenges": [
+        4,
+        3,
+        1,
+        7
+      ]
+    },
+    {
+      "birthDate": "1988-03-20",
+      "page": 21,
+      "base": [
+        3,
+        2,
+        8,
+        4
+      ],
+      "pinnacles": [
+        5,
+        1,
+        6,
+        2
+      ],
+      "challenges": [
+        1,
+        6,
+        5,
+        5
+      ]
+    },
+    {
+      "birthDate": "2025-06-10",
+      "page": 22,
+      "base": [
+        6,
+        1,
+        9,
+        7
+      ],
+      "pinnacles": [
+        7,
+        1,
+        8,
+        6
+      ],
+      "challenges": [
+        5,
+        8,
+        3,
+        3
+      ]
+    },
+    {
+      "birthDate": "2020-11-05",
+      "page": 23,
+      "base": [
+        2,
+        5,
+        4,
+        2
+      ],
+      "pinnacles": [
+        7,
+        9,
+        7,
+        6
+      ],
+      "challenges": [
+        3,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "birthDate": "1992-03-07",
+      "page": 24,
+      "base": [
+        3,
+        7,
+        3,
+        4
+      ],
+      "pinnacles": [
+        1,
+        1,
+        2,
+        6
+      ],
+      "challenges": [
+        4,
+        4,
+        0,
+        0
+      ]
+    },
+    {
+      "birthDate": "1994-04-07",
+      "page": 25,
+      "base": [
+        4,
+        7,
+        5,
+        7
+      ],
+      "pinnacles": [
+        2,
+        3,
+        5,
+        9
+      ],
+      "challenges": [
+        3,
+        2,
+        1,
+        1
+      ]
+    },
+    {
+      "birthDate": "1996-11-27",
+      "page": 26,
+      "base": [
+        2,
+        9,
+        7,
+        9
+      ],
+      "pinnacles": [
+        2,
+        7,
+        9,
+        9
+      ],
+      "challenges": [
+        7,
+        2,
+        5,
+        5
+      ]
+    },
+    {
+      "birthDate": "1987-11-15",
+      "page": 27,
+      "base": [
+        2,
+        6,
+        7,
+        6
+      ],
+      "pinnacles": [
+        8,
+        4,
+        3,
+        9
+      ],
+      "challenges": [
+        4,
+        1,
+        3,
+        5
+      ]
+    }
+  ],
+  "decision": "CURRENT_VALUE_FORMULAS_CONFIRMED; DO_NOT_REPLACE_CURRENT_RUNTIME; retain current boundary policy as separate existing authority."
+}

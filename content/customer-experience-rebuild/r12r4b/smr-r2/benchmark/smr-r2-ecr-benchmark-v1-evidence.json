@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-METHOD-BENCHMARK-EVIDENCE-v1.0.0",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "workCode": "R2-W16",
+  "methodId": "ECR",
+  "caseId": "SMR-R2-ECR-BENCHMARK-001",
+  "inputDigest": "a1ee23998938ec97c71779721d9e8f3b200eec0046f1ead1c48149b9dfe17016",
+  "inputClass": "GOVERNED_DETERMINISTIC_BENCHMARK_NOT_LIVE_CUSTOMER",
+  "structurallyDifferentFromLegacyCampaign": true,
+  "legacySemanticDigest": "a3b46d03395d904425087355d22cb72df86ed958f964f1ceb9e2ab9c9cbf4f11",
+  "currentSemanticDigest": "19aa946ba54602fe14a8ebb9b2b655edd28c3525c9c89c11ab341dfa33b3c5ad",
+  "projectionId": "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E",
+  "readingAuthorityRef": "CIR2-385863C06761EAD860DC6693",
+  "productionAdmissionRef": "content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json#methodAdmission/ECR",
+  "questionIntent": {
+    "intentId": "OBSERVATION",
+    "prompt": "Identify observable signals to compare with reality."
+  },
+  "counts": {
+    "methodInsights": 5,
+    "claims": 5,
+    "themes": 1,
+    "eligibleSections": 5,
+    "firstScreenBlocks": 5,
+    "firstScreenThemes": 1,
+    "renderedDuplicateTexts": 0
+  },
+  "eligibleSectionRefs": [
+    "WHAT_STANDS_OUT",
+    "YOUR_CORE_THEMES",
+    "WHAT_SUPPORTS_YOU",
+    "WHAT_THIS_MAY_LOOK_LIKE_IN_REALITY",
+    "WHY_THIS_READING"
+  ],
+  "criteria": [
+    {
+      "criterionId": "CUSTOMER_PUBLISHABLE_ONLY",
+      "label": "Only customer-publishable interpretation units",
+      "state": "PASS",
+      "evidenceRefs": [
+        "CXI-ECR-661A8EE8932C-01",
+        "CXI-ECR-661A8EE8932C-02",
+        "CXI-ECR-661A8EE8932C-03",
+        "CXI-ECR-661A8EE8932C-04",
+        "CXI-ECR-661A8EE8932C-05"
+      ],
+      "note": "R2 consumes accepted customer interpretation units, not raw symbolic constructs.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "NO_SYMBOLIC_REDERIVATION",
+      "label": "No bottom-up symbolic re-derivation",
+      "state": "PASS",
+      "evidenceRefs": [
+        "CX-R12R4B:R1_CALCULATION_NOT_INTERPRETATION",
+        "CX-R12R4B:R3_RULESET_ADMISSION_NOT_LIVE_CUSTOMER_REVIEW",
+        "CX-R12R4B:R10_NO_EVIDENCE_REMAINS_OPEN"
+      ],
+      "note": "Projection refs stay evidence/lineage; renderer creates no meaning.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "QUESTION_CAPABILITY",
+      "label": "Question → capability relation",
+      "state": "PASS",
+      "evidenceRefs": [
+        "ECR-CC-CC03@1.0.0",
+        "ECR-G-G4@1.0.0",
+        "ECR-Q-Q4@1.0.0",
+        "ECR-R-R1@1.0.0",
+        "ECR-D-D2@1.0.0",
+        "ECR-D-D3@1.0.0",
+        "ECR-D-D4@1.0.0",
+        "ECR-M-M2@1.0.0",
+        "ECR-H-ECR-H14@1.0.0",
+        "ECR-A-A6@1.0.0"
+      ],
+      "note": "Question/capability composition is admitted.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "DRIVER_CONTEXT",
+      "label": "Driver context bounded from current reality",
+      "state": "PASS",
+      "evidenceRefs": [
+        "ECR-CC-CC03@1.0.0",
+        "ECR-G-G4@1.0.0",
+        "ECR-Q-Q4@1.0.0",
+        "ECR-R-R1@1.0.0",
+        "ECR-D-D2@1.0.0",
+        "ECR-D-D3@1.0.0",
+        "ECR-D-D4@1.0.0",
+        "ECR-M-M2@1.0.0",
+        "ECR-H-ECR-H14@1.0.0",
+        "ECR-A-A6@1.0.0"
+      ],
+      "note": "Baseline affinity is not relabeled as live priority.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "CONFIGURATION_ACTIVATION",
+      "label": "Configuration + activation",
+      "state": "PASS",
+      "evidenceRefs": [
+        "ECR-CC-CC03@1.0.0",
+        "ECR-G-G4@1.0.0",
+        "ECR-Q-Q4@1.0.0",
+        "ECR-R-R1@1.0.0",
+        "ECR-D-D2@1.0.0",
+        "ECR-D-D3@1.0.0",
+        "ECR-D-D4@1.0.0",
+        "ECR-M-M2@1.0.0",
+        "ECR-H-ECR-H14@1.0.0",
+        "ECR-A-A6@1.0.0"
+      ],
+      "note": "Environment/response and activation boundaries remain explicit.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "QUESTION_RELEVANCE",
+      "label": "Question relevance",
+      "state": "PASS",
+      "evidenceRefs": [
+        "SMR2-CLAIM-ECR-CXI-ECR-661A8EE8932C-01",
+        "SMR2-CLAIM-ECR-CXI-ECR-661A8EE8932C-05",
+        "SMR2-CLAIM-ECR-CXI-ECR-661A8EE8932C-04",
+        "SMR2-CLAIM-ECR-CXI-ECR-661A8EE8932C-02",
+        "SMR2-CLAIM-ECR-CXI-ECR-661A8EE8932C-03"
+      ],
+      "note": "R2 priority resolver records relevance without inventing method meaning.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "DEDUP",
+      "label": "Semantic / narrative deduplication",
+      "state": "PASS",
+      "evidenceRefs": [],
+      "note": "Rendered duplicate text count: 0.",
+      "gapCode": null
+    },
+    {
+      "criterionId": "LAYOUT",
+      "label": "Reading IA + responsive layout",
+      "state": "PASS",
+      "evidenceRefs": [
+        "WHAT_STANDS_OUT",
+        "YOUR_CORE_THEMES",
+        "WHAT_SUPPORTS_YOU",
+        "WHAT_THIS_MAY_LOOK_LIKE_IN_REALITY",
+        "WHY_THIS_READING"
+      ],
+      "note": "Same IA feeds desktop/mobile/print; technical detail stays collapsed.",
+      "gapCode": null
+    }
+  ],
+  "summary": {
+    "pass": 8,
+    "partial": 0,
+    "upstreamGap": 0,
+    "fail": 0,
+    "notApplicable": 0
+  },
+  "benchmarkState": "BENCHMARK_MACHINE_READY",
+  "upstreamGapTickets": [],
+  "lineage": {
+    "interpretationUnitRefs": [
+      "CXI-ECR-661A8EE8932C-01",
+      "CXI-ECR-661A8EE8932C-02",
+      "CXI-ECR-661A8EE8932C-03",
+      "CXI-ECR-661A8EE8932C-04",
+      "CXI-ECR-661A8EE8932C-05"
+    ],
+    "sourceLineage": [
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_CONTEXT:CC03",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_GRAMMAR:G4",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_QUESTION:Q4",
+      "ECR-CC-CC03@1.0.0",
+      "ECR-G-G4@1.0.0",
+      "ECR-Q-Q4@1.0.0",
+      "CX-R12R4B:R1_CALCULATION_NOT_INTERPRETATION",
+      "CX-R12R4B:R3_RULESET_ADMISSION_NOT_LIVE_CUSTOMER_REVIEW",
+      "CX-R12R4B:R10_NO_EVIDENCE_REMAINS_OPEN",
+      "PROJECTION:CMP-ECR-E4A16A7CD6A7AC6FBD911A1E",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_CAPABILITIES:R1",
+      "ECR-R-R1@1.0.0",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_DRIVER_PRIORITY:D3",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_DRIVER_PRIORITY:D4",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_DRIVER_PRIORITY:D2",
+      "ECR-D-D2@1.0.0",
+      "ECR-D-D3@1.0.0",
+      "ECR-D-D4@1.0.0",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_MOTION:M2",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_CONFIGURATION:ECR-H14",
+      "ECR-M-M2@1.0.0",
+      "ECR-H-ECR-H14@1.0.0",
+      "CMP-ECR-E4A16A7CD6A7AC6FBD911A1E#ECR_ACTIVATION:A6",
+      "ECR-A-A6@1.0.0"
+    ],
+    "ruleLineage": [
+      "COMPOSITION_RULE:CX-COMP-ECR-CONTEXT-GRAMMAR-QUESTION-v1",
+      "COMPOSITION_RULE:CX-COMP-ECR-QUESTION-CAPABILITY-v1",
+      "COMPOSITION_RULE:CX-COMP-ECR-DRIVER-PRIORITY-v1",
+      "COMPOSITION_RULE:CX-COMP-ECR-MOTION-CONFIGURATION-v1",
+      "COMPOSITION_RULE:CX-COMP-ECR-CONFIGURATION-ACTIVATION-v1"
+    ],
+    "boundaryFlags": [
+      "CX-R12R4B:R1_CALCULATION_NOT_INTERPRETATION",
+      "CX-R12R4B:R3_RULESET_ADMISSION_NOT_LIVE_CUSTOMER_REVIEW",
+      "CX-R12R4B:R10_NO_EVIDENCE_REMAINS_OPEN"
+    ]
+  },
+  "governance": {
+    "rawProjectionCreatesCustomerConclusion": false,
+    "rendererCreatesMeaning": false,
+    "webMeaningAuthority": false,
+    "liveCustomerIndividuallyHumanReviewed": false,
+    "benchmarkHumanAccepted": false
+  }
+}
