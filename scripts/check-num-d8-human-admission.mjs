@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const base='content/professional/num-production/depth-d1-d8';const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const r=read(`${base}/review/num-d8-human-review-results-v1.json`);const a=read(`${base}/admission/num-d8-human-admission-v1.json`);
+assert.equal(r.claimPending,0,'NUM_D8_SOURCE_CLAIM_HUMAN_ADMISSION_PENDING');
+assert.equal(r.claimAccepted,121,'NUM_D8_REQUIRES_121_ADMITTED_SOURCE_SEMANTIC_CLAIMS');
+assert.equal(r.claimAdmissions.length,121);
+for(const c of r.claimAdmissions){assert.equal(c.decision,'ACCEPT');for(const [k,v] of Object.entries(c.criteria||{}))assert.equal(v,true,`${c.claimId} criterion ${k}`)}
+assert.equal(r.pending,0,'NUM_D8_COMPOSITION_HUMAN_REVIEW_PENDING');assert.equal(r.accepted,24,'NUM_D8_REQUIRES_24_ACCEPTED_CASES');
+for(const c of r.cases){assert.equal(c.decision,'ACCEPT');for(const [k,v] of Object.entries(c.criteria||{}))assert.equal(v,true,`${c.caseId} criterion ${k}`)}
+assert.equal(r.runtimeUseAllowed,true);assert.equal(a.status,'HUMAN_ADMIT_COMPLETE');assert.equal(a.sourceClaimsRuntimeUseAllowed,true);assert.equal(a.compositionRuntimeUseAllowed,true);console.log('✓ NUM-D8 human admission complete: 121/121 claims + 24/24 composition cases.');

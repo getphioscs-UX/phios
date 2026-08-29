@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-NUM-D8-DEDUP-PRIORITY-HUMAN-ADMISSION-v1.0.0",
+  "workCode": "NUM-D8",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "status": "HUMAN_REVIEW_PENDING",
+  "priorityOrder": [
+    "CORE_NAME_ROLE",
+    "CORE_DATE_ROLE",
+    "ROLE_RELATIONSHIP",
+    "LONG_CYCLE",
+    "CURRENT_TIMING",
+    "SECONDARY_CHART",
+    "ENERGY_PATTERN",
+    "RAW_CALCULATION_EVIDENCE"
+  ],
+  "dedupKeys": [
+    "school",
+    "semanticFamily",
+    "role",
+    "value",
+    "pattern",
+    "sourceClaimId"
+  ],
+  "rules": {
+    "sameNumericValueDifferentRoleIsNotDuplicate": true,
+    "sameMeaningSameRoleAcrossSourcesMayMerge": true,
+    "sameEnergyPatternRepeatedAcrossBaselineFlowPhaseMayBeMentionedOnceWithMultipleEvidenceRefs": true,
+    "sourceBoundaryMustSurviveDedup": true,
+    "contradictionMustRemainVisible": true,
+    "unadmittedClaimsMayNotEnterDefaultCustomerSurface": true,
+    "humanAdmissionRequiredForRuntimeUse": true
+  },
+  "humanAdmission": {
+    "claimBatchCount": 121,
+    "compositionCaseCount": 24,
+    "runtimeUseAllowed": false,
+    "claimAccepted": 0,
+    "claimPending": 121,
+    "compositionAccepted": 0,
+    "compositionPending": 24
+  },
+  "claimBatchCount": 121,
+  "requiredHumanAdmission": {
+    "sourceSemanticClaims": 121,
+    "compositionCases": 24
+  }
+}

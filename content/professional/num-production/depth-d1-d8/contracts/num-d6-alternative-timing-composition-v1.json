@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "PHI-OS-NUM-D6-ALTERNATIVE-TIMING-COMPOSITION-v1.0.0",
+  "workCode": "NUM-D6",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "status": "ENGINEERING_COMPLETE_PENDING_D8_HUMAN_ADMISSION",
+  "inputs": [
+    "R13_ACTIVE_LIFE_PERIOD_PATTERN",
+    "R15_FLOW_YEAR_CODE",
+    "R15_CURRENT_PHASE_PATTERN",
+    "D5_ADMITTED_PATTERN_MEANINGS"
+  ],
+  "compositionOrder": [
+    "BASELINE_LIFE_PERIOD",
+    "FLOW_YEAR",
+    "CURRENT_PHASE",
+    "STRUCTURAL_ECHO",
+    "COUNTER_THEME"
+  ],
+  "rules": {
+    "sameSchoolRequired": true,
+    "westernPersonalCyclesMayNotBeMergedIntoEnergyTiming": true,
+    "exactPatternMeaningRequiresAdmittedD5Claim": true,
+    "unknownPatternRemainsStructuralOnly": true,
+    "eventPredictionAllowed": false,
+    "financialForecastAllowed": false
+  },
+  "runtimeUseAllowed": false
+}

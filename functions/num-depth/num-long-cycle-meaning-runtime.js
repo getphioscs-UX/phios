@@ -1,0 +1,8 @@
+import {freezeDeep,NUMBER_THEMES,NUM_DEPTH_WESTERN_SCHOOL} from './num-depth-rules.js';
+export const NUM_D4_LONG_CYCLE_SCHEMA='PHI-OS-NUM-D4-LONG-CYCLE-MEANING-CANDIDATE-v1.0.0';
+export function buildNumLongCycleMeaningCandidate({role,value,locale='en'}={}){
+ const n=Number(value),zh=locale==='zh-Hans';let theme=NUMBER_THEMES[n];if(role==='CHALLENGE_CYCLE'&&n===0)theme={en:'a diffuse challenge field without one dominant numeric obstacle',zhHans:'没有单一主导障碍的较分散挑战场',frictionEn:'loss of focus or failure to choose a developmental priority',frictionZh:'失去聚焦或难以选择当前最需要处理的发展重点'};
+ if(!theme||!['PERIOD_CYCLE','PINNACLE_CYCLE','CHALLENGE_CYCLE'].includes(role))return null;
+ const text=role==='PERIOD_CYCLE'?(zh?`这一 ${n} Period Cycle 是长期阶段视角，主要围绕${theme.zhHans}观察；不用于保证事件。`:`This ${n} Period Cycle is a long-chapter lens around ${theme.en}; it does not guarantee events.`):role==='PINNACLE_CYCLE'?(zh?`这一 ${n} Pinnacle 以${theme.zhHans}来观察长期阶段的氛围、机会与发展重点；不用于保证事件。`:`This ${n} Pinnacle frames long-term atmosphere, opportunity and development around ${theme.en}; it does not guarantee events.`):(zh?`Challenge ${n} 以${theme.zhHans}作为发展性摩擦视角，并留意${theme.frictionZh}；不把它当作诊断。`:`Challenge ${n} uses ${theme.en} as a developmental-friction lens and watches for ${theme.frictionEn}; it is not a diagnosis.`);
+ return freezeDeep({schemaVersion:NUM_D4_LONG_CYCLE_SCHEMA,workCode:'NUM-D4',school:NUM_DEPTH_WESTERN_SCHOOL,role,value:n,text,sourceClaimId:`NUM-D4-${role}-${String(n).padStart(2,'0')}`,reviewState:'PENDING_D8_HUMAN_ADMISSION',runtimeUseAllowed:false,customerPublishable:false,boundaries:{eventPredictionAllowed:false,empiricalTruthClaimed:false}});
+}

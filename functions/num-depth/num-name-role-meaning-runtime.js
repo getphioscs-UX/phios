@@ -1,0 +1,10 @@
+import {freezeDeep,NUMBER_THEMES,NAME_ROLE_META,NUM_DEPTH_WESTERN_SCHOOL} from './num-depth-rules.js';
+export const NUM_D1_NAME_MEANING_SCHEMA='PHI-OS-NUM-D1-NAME-ROLE-MEANING-CANDIDATE-v1.1.0';
+function roleKey(role){return role==='EXPRESSION'?'expression':role==='SOUL_URGE'?'soulUrge':role==='PERSONALITY'?'personality':role==='MATURITY'?'maturity':null}
+export function buildNumNameRoleMeaningCandidate({role,value,locale='en',secondaryChart,currentNameProfile}={}){
+ const meta=NAME_ROLE_META[role],theme=NUMBER_THEMES[Number(value)];if(!meta||!theme)throw new TypeError('NUM_D1_UNSUPPORTED_ROLE_OR_VALUE');const key=roleKey(role),current=Number(value),src=secondaryChart?.sourceAlignedCore;let alignment='SOURCE_ALIGNMENT_REQUIRED',eligible=false,sourceValue=null,currentValue=currentNameProfile?.values?.[key]?.reducedValue??current;
+ if(src?.eligible){sourceValue=src?.[key]?.value;eligible=Number(sourceValue)===Number(currentValue);alignment=eligible?'SOURCE_ALIGNED_VALUE_CONFIRMED':'SOURCE_ALIGNMENT_VALUE_MISMATCH'}else if(src?.availability)alignment=src.availability;
+ const zh=locale==='zh-Hans';const text=zh?`${meta.labelZh}关注${meta.roleZh}。在这一实践者传统中，数值 ${current} 可围绕${theme.zhHans}来阅读；失衡时可留意${theme.frictionZh}。`:`${meta.labelEn} concerns ${meta.roleEn}. In this practitioner tradition, value ${current} is read through ${theme.en}; imbalance may involve ${theme.frictionEn}.`;
+ return freezeDeep({schemaVersion:NUM_D1_NAME_MEANING_SCHEMA,workCode:'NUM-D1',school:NUM_DEPTH_WESTERN_SCHOOL,role,value:current,text,sourceClaimId:`NUM-D1-${role}-${String(current).padStart(2,'0')}`,methodAlignment:{state:alignment,eligible,required:true,sourceAlignedValue:sourceValue,currentValue:Number(currentValue)},reviewState:'PENDING_D8_HUMAN_ADMISSION',runtimeUseAllowed:false,customerPublishable:false,boundaries:{symbolicTraditionOnly:true,identityTotalizationAllowed:false,fortunePredictionAllowed:false,sourceCalculationOverrideAllowed:false}});
+}
+export default Object.freeze({buildNumNameRoleMeaningCandidate});
