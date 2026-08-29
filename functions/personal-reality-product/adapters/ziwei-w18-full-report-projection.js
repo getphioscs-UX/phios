@@ -1,4 +1,4 @@
-import {freeze,list,text,localeOf,fail} from '../product-envelope-core.js';
+import {freeze,list,text,localeOf,fail} from './product-envelope-core.js';
 import {sha256Stable,stableStringify} from '../../zi-wei-runtime/zwr-utils.js';
 
 export const ZIWEI_CX_R1_W8_REPORT_PROJECTION_SCHEMA='PHI-OS-ZIWEI-CX-R1-W18-FULL-REPORT-PROJECTION-v1.0.0';

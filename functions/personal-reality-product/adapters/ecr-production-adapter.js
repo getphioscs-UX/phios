@@ -1,4 +1,4 @@
-import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from '../product-envelope-core.js';
+import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from './product-envelope-core.js';
 function reportSectionPayload(item){return {card:item.card,acceptedInterpretation:item.acceptedInterpretation};}
 export function adaptEcrPersonalRealityProduct({readingIR,phiCardSpread=null,fullReport=null,customerAdmission=null,locale=readingIR?.locale||phiCardSpread?.locale||'en'}={}){
  if(readingIR?.schemaVersion!=='PHI-OS-ECR-RUNTIME-READING-IR-v1.0.0')fail('PPR_R2_ECR_READING_IR_REQUIRED');

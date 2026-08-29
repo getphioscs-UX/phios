@@ -1,4 +1,4 @@
-import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from '../product-envelope-core.js';
+import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from './product-envelope-core.js';
 const renderer=Object.freeze({rendererId:'PPR_R3_NUM_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['METHOD_NAVIGATION_SLOT','CHART_FIRST_READING','NUMEROLOGY_VISUALS','RESPONSIVE_SPECIALIST_SURFACE']});
 export function adaptNumerologyPersonalRealityProduct({reading,customerEnvelope=null,locale=reading?.locale||customerEnvelope?.locale||'en'}={}){
  if(reading?.schemaVersion!=='PHI-OS-NUM-INTEGRATED-READING-IR-v1.0.0'||reading.customerPublishable!==true)fail('PPR_R2_NUM_INTEGRATED_READING_REQUIRED');

@@ -1,5 +1,5 @@
 import {BAZI_FULL_PRODUCTION_GATE} from '../../bzr-full-production/bazi-production-gate-runtime.js';
-import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from '../product-envelope-core.js';
+import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from './product-envelope-core.js';
 const renderer=Object.freeze({rendererId:'PPR_R3_BAZI_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['METHOD_NAVIGATION_SLOT','WHOLE_CHART_READING','FOUR_PILLAR_VISUAL','CUSTOMER_SAFE_GRAPH','TIMING']});
 function adaptMethodNative(product,locale){
  const l=localeOf(locale),decision=product.publicationDecision||{},allowed=decision.customerPublishable===true&&decision.defaultCustomerSurfaceAllowed!==false;

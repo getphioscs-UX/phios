@@ -1,5 +1,5 @@
 import {AST_R2_METHOD_SCOPED_ADMISSION} from '../../ast-full-production/ast-r2-production-admission-authority.js';
-import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from '../product-envelope-core.js';
+import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from './product-envelope-core.js';
 export function adaptAstPersonalRealityProduct({workspace,locale=workspace?.locale||'en'}={}){
  if(workspace?.schemaVersion!=='PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0')fail('PPR_R2_AST_WORKSPACE_REQUIRED');
  const l=localeOf(locale),allowed=AST_R2_METHOD_SCOPED_ADMISSION.customerPublicationAllowed===true&&AST_R2_METHOD_SCOPED_ADMISSION.customerCutoverAllowed===true&&workspace.governance?.customerPublicationAllowed===true;
