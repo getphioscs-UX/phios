@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-CROSS-R2-PRODUCTION-GOVERNANCE-v1.0.0",
   "baselineCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
   "work": "R2-W26",
-  "status": "FROZEN_PRE_ADMISSION_GOVERNANCE",
+  "status": "PRODUCTION_GOVERNANCE_ACTIVE",
   "authorityOrder": [
     "CUSTOMER_PUBLISHABLE_METHOD_CLAIM",
     "CROSS_SEMANTIC_MAPPING",
@@ -38,8 +38,16 @@
     "readingMustRetainSemanticMatrixDigest": true
   },
   "surface": {
-    "crossCustomerCutoverCurrentlyAllowed": false,
-    "combinedReadingStateBeforeAdmission": "NOT_STARTED",
-    "singleMethodReadingUnaffected": true
+    "crossCustomerCutoverCurrentlyAllowed": true,
+    "combinedReadingState": "PRODUCTION",
+    "singleMethodReadingUnaffected": true,
+    "currentRealityIntegrationActivated": false
+  },
+  "productionAdmissionCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "admission": {
+    "w24Machine": "MACHINE_ACCEPTED_64_OF_64",
+    "w25Human": "HUMAN_ACCEPTED_36_OF_36",
+    "w25AdmissionRef": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w25-human-admission-v1.json",
+    "w26AdmissionRef": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w26-final-production-admission-v1.json"
   }
 }

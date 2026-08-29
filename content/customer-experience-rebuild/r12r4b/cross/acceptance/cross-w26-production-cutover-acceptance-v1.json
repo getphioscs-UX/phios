@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-R2-W26-PRODUCTION-CUTOVER-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "work": "R2-W26",
+  "status": "PRODUCTION_CUTOVER_ACCEPTED",
+  "gates": {
+    "w21InputFreeze": "PASS",
+    "w22SemanticFoundation": "PASS",
+    "w23Composition": "PASS",
+    "w24Machine": {
+      "accepted": 64,
+      "rejected": 0
+    },
+    "w25Human": {
+      "accepted": 36,
+      "rejected": 0,
+      "pending": 0
+    },
+    "noSmrProseBackfeed": true,
+    "minimumTwoCustomerPublishableMethodsPerCrossClaim": true
+  },
+  "runtime": {
+    "productionBuilder": "functions/runtime-reading/cross-reading-production.js",
+    "customerApi": "functions/api/customer-personal-reality.js",
+    "customerViewPath": "view.reading.combinedReading",
+    "customerRenderer": "assets/customer-ui/js/surfaces/personal-reality.js",
+    "singleMethodReadingUnaffected": true,
+    "currentRealityIntegrationActivated": false
+  },
+  "productionAllowed": true,
+  "customerCrossCutoverAllowed": true,
+  "liveCustomerIndividuallyHumanReviewed": false
+}

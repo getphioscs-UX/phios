@@ -1,21 +1,26 @@
 {
   "schemaVersion": "PHI-OS-CROSS-R2-W26-FINAL-PRODUCTION-ADMISSION-v1.0.0",
-  "baselineCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
   "work": "R2-W26",
-  "status": "BLOCKED_PENDING_W25_36_OF_36_HUMAN_ACCEPTANCE",
+  "status": "PRODUCTION_ACCEPTED",
   "prerequisites": {
     "w21": "PASS",
     "w22": "PASS",
     "w23": "PASS",
     "w24": "64_ACCEPTED_0_REJECTED",
-    "w25": "0_ACCEPTED_0_REJECTED_36_PENDING"
+    "w25": "36_ACCEPTED_0_REJECTED_0_PENDING"
   },
-  "productionAllowed": false,
-  "customerCrossCutoverAllowed": false,
-  "currentApiMutationApplied": false,
-  "combinedReadingState": "NOT_STARTED",
+  "productionAllowed": true,
+  "customerCrossCutoverAllowed": true,
+  "currentApiMutationApplied": true,
+  "combinedReadingState": "PRODUCTION",
   "governanceRef": "content/customer-experience-rebuild/r12r4b/cross/governance/cross-production-governance-v1.json",
   "contractRef": "content/customer-experience-rebuild/r12r4b/cross/contracts/cross-final-production-admission-contract-v1.json",
-  "blocker": "R2_W25_REQUIRES_36_HUMAN_ACCEPTED_0_REJECTED_0_PENDING",
-  "next": "After explicit human acceptance, record W25 admission then activate W26 production cutover and strict final-production gate."
+  "blocker": null,
+  "next": "CROSS PRODUCTION ACTIVE; Current Reality integration remains separately gated.",
+  "humanAdmissionRef": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w25-human-admission-v1.json",
+  "productionRuntime": "functions/runtime-reading/cross-reading-production.js",
+  "customerApi": "/api/customer-personal-reality",
+  "customerViewPath": "view.reading.combinedReading",
+  "finalGate": "check:cross-final-production-admission"
 }
