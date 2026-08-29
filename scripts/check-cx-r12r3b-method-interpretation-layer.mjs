@@ -158,7 +158,21 @@ assert.equal(review.ordinaryReaderFiveMinuteTest.status,'NOT_RUN_EXTERNAL_EVIDEN
 assert.equal(review.ordinaryReaderFiveMinuteTest.questions.length,6);
 
 const html=text('perspectives/personal/index.html'),client=text('assets/customer-ui/js/surfaces/personal-reality.js'),graphClient=text('assets/customer-ui/js/method-graph-v1.js'),css=text('assets/customer-ui/surfaces/personal-reality.css'),api=text('functions/api/customer-personal-reality.js'),customerProjection=text('functions/customer-projection/method-customer-reading-v2.js');
-for(const token of ['Overview','Graph','Structure','Patterns','Context','Reality Comparison','Technical Details'])assert(html.includes(token),`shared customer result surface missing ${token}`);
+const legacySurfaceTokens=['Overview','Graph','Structure','Patterns','Context','Reality Comparison','Technical Details'];
+const legacySharedSurface=legacySurfaceTokens.every(token=>html.includes(token));
+const pprR3AuthorityPath='content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json';
+const pprR3HostPath='assets/customer-ui/js/personal-products/personal-product-renderers.js';
+const pprR3SpecialistHostPath='assets/customer-ui/js/personal-products/specialist-renderer-host.js';
+const pprR3SuccessorSurface=fs.existsSync(pprR3AuthorityPath)&&fs.existsSync(pprR3HostPath)&&fs.existsSync(pprR3SpecialistHostPath)&&(()=>{
+  const successor=read(pprR3AuthorityPath),productHost=text(pprR3HostPath),specialistHost=text(pprR3SpecialistHostPath);
+  return successor.status==='FROZEN_PPR_R3_SPECIALIST_HOST'&&
+    successor.summary?.canonicalCustomerRoute==='/perspectives/personal/'&&
+    html.includes('data-cx-specialist-products')&&
+    productHost.includes('mountApprovedSpecialistRenderer')&&
+    productHost.includes('data-ppr-r3-specialist-host')&&
+    specialistHost.includes("canonicalRoute:'/perspectives/personal/'");
+})();
+assert(legacySharedSurface||pprR3SuccessorSurface,'shared customer result surface must preserve the historical R12R3B surface or its frozen PPR-R3 specialist-host successor');
 for(const token of ['cx-method-insight','cx-method-evidence','cx-method-alternative','cx-method-uncertainty','cx-method-observation','cx-method-technical-detail','cx-method-graph-panel'])assert(css.includes(`.${token}`)||graphClient.includes(token),`shared component missing ${token}`);
 for(const token of ['<title','<desc','tabindex="0"','tableFallback','data-relation'])assert(graphClient.includes(token),`graph accessibility missing ${token}`);
 assert(client.includes('renderMethodGraph'));assert(customerProjection.includes('buildMethodCustomerDevelopmentResult'),'R12R3B development builder authority must remain available');

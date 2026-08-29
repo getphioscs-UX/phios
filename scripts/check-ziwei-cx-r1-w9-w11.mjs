@@ -17,7 +17,13 @@ const w9=j(`${base}/ziwei-cx-r1-w9-topic-reading-surface-contract-v1.json`),w10=
 for(const x of [w9,w10,w11]){assert.equal(x.baselineCommit,baseline);assert.equal(x.sharedHostAuthority,'PPR-R3');}
 assert.equal(w9.rules.topicCount,8);assert.equal(w9.rules.palaceLinksReturnToInteractivePalace,true);assert.equal(w9.rules.topicCreatesSecondReport,false);
 assert.deepEqual(w10.timingLane.order,['本命','大限','流年']);assert.equal(w10.patternPresentation.humanAdmittedQualificationOnly,true);assert.equal(w10.counterEvidencePresentation.customerZh,'同时存在两类结构信号');assert.equal(w10.counterEvidencePresentation.overallStrongWeakWinnerForbidden,true);
-assert.equal(w11.customerDefaults.rawCodesAllowedOnlyInsideCollapsedTechnicalDetails,true);assert.equal(w11.customerDefaults.genericLabelPatchExpansionAllowed,false);for(const [path,digest] of Object.entries(w11.frozenSharedFiles))assert.equal(sha(path),digest,`PPR-R3/shared file drift: ${path}`);
+assert.equal(w11.customerDefaults.rawCodesAllowedOnlyInsideCollapsedTechnicalDetails,true);assert.equal(w11.customerDefaults.genericLabelPatchExpansionAllowed,false);
+const pprR3W11Path='content/professional/personal-reality/r3/authority/ppr-r3-w11-num-envelope-route-reconciliation-v1.json';
+const pprR3W11=fs.existsSync(pprR3W11Path)?j(pprR3W11Path):null;
+for(const [path,digest] of Object.entries(w11.frozenSharedFiles)){
+ const successorDigest=path==='functions/personal-reality-product/product-envelope-core.js'&&pprR3W11?.status==='FROZEN_ROUTE_RECONCILIATION_ACTIVE'?pprR3W11.expected?.productEnvelopeCoreSha256:null;
+ assert.equal(sha(path),successorDigest||digest,`PPR-R3/shared file drift: ${path}`);
+}
 
 function executionRequest({birthDate='2023-01-22',birthTime='05:00:00',locale='zh-Hans',id='STD'}={}){
  const consentRecordId=`CONSENT-ZIWEI-CX-R1-W9-W11-${id}`;
