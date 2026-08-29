@@ -1,0 +1,3 @@
+import {isZiweiW18FullReportProduct,renderZiweiW18FullReport,ensureZiweiW18FullReportCss} from '../../personal-products/ziwei-w18-full-report-renderer.js';
+export function renderZiweiProduct({product,mount}={}){if(!isZiweiW18FullReportProduct(product))return Object.freeze({status:'NOT_HANDLED',reason:'ZIWEI_W18_PRODUCT_REQUIRED'});ensureZiweiW18FullReportCss(mount?.host?.ownerDocument||globalThis.document);const readingHtml=renderZiweiW18FullReport(product);return Object.freeze({status:'RENDERED',navigationHtml:'',visualHtml:'',readingHtml});}
+export default Object.freeze({renderZiweiProduct});

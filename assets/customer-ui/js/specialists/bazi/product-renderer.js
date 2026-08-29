@@ -1,0 +1,3 @@
+import {isBaziNativeProduct,renderBaziWholeChartFirst} from '../../surfaces/bazi-professional-reading.js';
+export function renderBaziProduct({product}={}){const native=product?.sourceProduct;if(!isBaziNativeProduct(native))return Object.freeze({status:'NOT_HANDLED',reason:'BAZI_METHOD_NATIVE_PRODUCT_REQUIRED'});const readingHtml=renderBaziWholeChartFirst(native);if(!readingHtml)return Object.freeze({status:'NOT_HANDLED',reason:'BAZI_SPECIALIST_HTML_EMPTY'});return Object.freeze({status:'RENDERED',navigationHtml:'',visualHtml:'',readingHtml});}
+export default Object.freeze({renderBaziProduct});
