@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-SEMANTIC-DEDUP-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W16",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "purpose": "Eliminate repeated Zi Wei explanations by assigning one full-explanation owner per semantic cluster while preserving network, evidence and temporal context as derivatives or references.",
+  "inputSchemas": [
+    "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-CONTRADICTION-RESOLUTION-IR-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-ZIWEI-SEMANTIC-DEDUP-IR-v1.0.0",
+  "decisions": [
+    "PRIMARY_EXPLANATION",
+    "CONTEXT_DERIVATIVE",
+    "REFERENCE_ONLY"
+  ],
+  "rules": {
+    "semanticKeyAndTemporalContextDefineCluster": true,
+    "fullExplanationMaxPerSemanticCluster": 1,
+    "palaceCorePreferredAsPrimaryOverNetworkContext": true,
+    "networkContextWithNewEvidenceBecomesContextDerivative": true,
+    "sameSemanticKeyDifferentTemporalContextMustNotDedup": true,
+    "dedupMayNotDeleteEvidence": true,
+    "dedupMayNotChangeContradictionResolution": true,
+    "dedupMayNotCreateMeaning": true,
+    "dedupMayNotCreateCustomerNarrative": true
+  },
+  "runtimeRef": "functions/zi-wei-full-production/ziwei-semantic-dedup-runtime.js",
+  "handoff": "ZIWEI-FP-W17 consumes W16 primary render owners plus W15 qualifiers to build the Zi Wei Reading IR.",
+  "customerCutoverAllowed": false
+}
