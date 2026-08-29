@@ -40,11 +40,14 @@ export function validateW01(d){
 }
 export function checkW01(root=process.cwd()){
  const d=loadW01(root);validateW01(d);
- for(const f of d.baseline.protectedFiles){const raw=fs.readFileSync(path.join(root,f.path),'utf8');assert.equal(hash(raw.replace(/\r\n/g,'\n')),f.lfNormalizedSha256,`Protected baseline changed: ${f.path}`);}
+ const legacyManifest=read(path.join(root,'content/customer-experience-rebuild/r12r4b/smr/history/v1/legacy-smr-v1-evidence-manifest.json'));
+ const archiveByOriginal=new Map(legacyManifest.records.filter(row=>row.archivePath).map(row=>[row.originalPath,row.archivePath]));
+ const historicalPath=original=>path.join(root,archiveByOriginal.get(original)||original);
+ for(const f of d.baseline.protectedFiles){const resolved=historicalPath(f.path);assert.ok(fs.existsSync(resolved),`Protected baseline missing after canonical cleanup: ${f.path}`);const raw=fs.readFileSync(resolved,'utf8');assert.equal(hash(raw.replace(/\r\n/g,'\n')),f.lfNormalizedSha256,`Protected baseline changed: ${f.path}`);}
  assert.deepEqual(d.metrics,measureDepth(root));
- const actual=read(path.join(root,'content/customer-experience-rebuild/r12r4b/smr/admission/smr-production-admission-v1.json'));
+ const actual=read(path.join(root,'content/customer-experience-rebuild/r12r4b/smr/history/v1/admission/smr-production-admission-v1.json'));
  assert.equal(actual.productionAllowed,false);assert.equal(actual.customerCutoverAllowed,false);
- const human=read(path.join(root,'content/customer-experience-rebuild/r12r4b/smr/review/smr-human-review-results-v1.json'));
+ const human=read(path.join(root,'content/customer-experience-rebuild/r12r4b/smr/history/v1/review/smr-human-review-results-v1.json'));
  assert.equal(human.accepted,0);assert.equal(human.rejected,0);assert.equal(human.pending,48);
  const mutate=[x=>x.registry.productionAllowed=true,x=>x.registry.sources[0].sourceType='COMPLETED_MANUSCRIPT',x=>x.registry.sources[0].rights.productionUseAllowed=true,x=>x.registry.sources[0].bibliographicEvidence.pdfPage=9999,x=>x.registry.sources[1].sourceId=x.registry.sources[0].sourceId,x=>x.registry.sources[0].isbn='0000000000001',x=>x.audit.gates.humanAccepted=48,x=>x.contract.w3Allowed=true];
  for(const change of mutate){const copy=structuredClone(d);change(copy);assert.throws(()=>validateW01(copy));}

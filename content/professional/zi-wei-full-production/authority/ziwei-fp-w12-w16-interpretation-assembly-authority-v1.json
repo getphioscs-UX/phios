@@ -2,25 +2,52 @@
   "schemaVersion": "PHI-OS-ZIWEI-FP-W12-W16-INTERPRETATION-ASSEMBLY-AUTHORITY-v1.0.0",
   "work": "ZIWEI-FP-W12-W16",
   "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
-  "status": "ENGINEERING_AUTHORITY_FROZEN",
+  "status": "FROZEN_ENGINEERING_AUTHORITY",
+  "purpose": "Freeze the W12-W16 interpretation-assembly ownership chain without granting customer narrative or production authority.",
   "owners": {
-    "structuralFindings": "ZIWEI-FP-W12",
-    "interpretationEvidenceGraph": "ZIWEI-FP-W13",
-    "crossFindingComposition": "ZIWEI-FP-W14",
-    "contradictionAndCounterEvidenceResolution": "ZIWEI-FP-W15",
-    "semanticDeduplication": "ZIWEI-FP-W16"
+    "W12_STRUCTURAL_FINDINGS": {
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-structural-finding-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-STRUCTURAL-FINDING-COLLECTION-v1.0.0"
+    },
+    "W13_EVIDENCE_GRAPH": {
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-interpretation-evidence-graph-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0"
+    },
+    "W14_CROSS_FINDING_COMPOSITION": {
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-cross-finding-composition-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-IR-v1.0.0"
+    },
+    "W15_CONTRADICTION_RESOLUTION": {
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-contradiction-resolver-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-CONTRADICTION-RESOLUTION-IR-v1.0.0"
+    },
+    "W16_SEMANTIC_DEDUP": {
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-semantic-dedup-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-SEMANTIC-DEDUP-IR-v1.0.0"
+    }
   },
-  "boundaries": {
-    "newCalculationAuthorityCreated": false,
-    "newMeaningAuthorityCreated": false,
-    "customerNarrativeAuthorityCreated": false,
-    "overallStrongWeakWinnerAllowed": false,
-    "counterEvidenceDeletionAllowed": false,
-    "unknownSemanticGapSuppressionAllowed": false,
-    "multipleFullExplanationsPerSemanticClusterAllowed": false,
-    "goodBadScoreAllowed": false,
-    "eventPredictionAllowed": false,
+  "upstreamAuthorities": [
+    "PHI-OS-ZIWEI-CANONICAL-CHART-IR-v1.0.0",
+    "PHI-OS-ZIWEI-PALACE-RELATIONSHIP-ENGINE-v1.0.0",
+    "PHI-OS-ZIWEI-STAR-COMBINATION-RUNTIME-v1.0.0",
+    "PHI-OS-ZIWEI-PATTERN-RUNTIME-v1.0.0",
+    "PHI-OS-ZIWEI-DA-XIAN-INTEGRATION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-LIU-NIAN-INTEGRATION-IR-v1.0.0",
+    "PHI-OS-ZIWEI-FP-W11-MEANING-CONTEXT-v1.0.0"
+  ],
+  "invariants": {
+    "counterEvidencePreserved": true,
+    "unknownBoundariesPreserved": true,
+    "onePrimaryExplanationPerSemanticCluster": true,
+    "overallStrongWeakWinnerForbidden": true,
+    "goodBadScoreForbidden": true,
+    "eventPredictionForbidden": true,
+    "customerNarrativeCreated": false,
     "customerCutoverAllowed": false
   },
-  "handoff": "ZIWEI-FP-W17 consumes W16 primary render owners, W15 resolution qualifiers and W13 evidence lineage."
+  "handoff": {
+    "nextWork": "ZIWEI-FP-W17",
+    "consumer": "Zi Wei Reading IR",
+    "mayCreateCustomerNarrativeOnlyUnderW17Authority": true
+  }
 }

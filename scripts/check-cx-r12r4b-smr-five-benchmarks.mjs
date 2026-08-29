@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {METHODS,BASELINE_COMMIT} from './smr-benchmark-support.mjs';
+import {checkMethodBenchmark} from './check-cx-r12r4b-smr-method-benchmark.mjs';
+const acceptance=JSON.parse(fs.readFileSync('content/customer-experience-rebuild/r12r4b/smr/smr-w12-w16-acceptance-v1.json','utf8'));assert.equal(acceptance.baselineCommit,BASELINE_COMMIT);assert.deepEqual(acceptance.work,['R2-W12','R2-W13','R2-W14','R2-W15','R2-W16']);assert.equal(acceptance.benchmarks.length,5);for(const m of METHODS){const e=await checkMethodBenchmark(m);const row=acceptance.benchmarks.find(x=>x.methodId===m);assert.ok(row);assert.equal(row.benchmarkState,e.benchmarkState);assert.deepEqual(row.summary,e.summary);assert.deepEqual(row.upstreamGapTickets,e.upstreamGapTickets.map(g=>g.gapCode))}assert.deepEqual(acceptance.humanAcceptance,{accepted:0,rejected:0,pending:5,productionAdmissionAffected:false});assert.equal(acceptance.next,'R2-W17 FOUNDER BENCHMARK REVIEW');console.log('✓ CX-R12R4B SMR-R2 W12-W16 five method benchmark pack is current; human acceptance remains 0/0/5 pending.');

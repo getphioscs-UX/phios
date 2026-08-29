@@ -80,12 +80,12 @@ assert.equal(acceptance.result.humanAccepted,16);assert.equal(acceptance.result.
 assert.equal(acceptance.boundaries.sourceUseBasisEstablished,false);assert.equal(acceptance.boundaries.wholeChartSynthesisAcceptanceEstablished,false);assert.equal(acceptance.boundaries.independentEphemerisAccuracyCertificationEstablished,false);assert.equal(acceptance.boundaries.professionalPlatformParityEstablished,false);assert.equal(acceptance.boundaries.finalCustomerReportHumanAcceptanceEstablished,false);assert.equal(acceptance.boundaries.customerCutover,false);assert.equal(acceptance.boundaries.productionAllowed,false);assert.equal(acceptance.boundaries.deploymentPerformed,false);
 
 // This admission must not rewrite or silently pass the superseded legacy SMR review campaign.
-const legacyHuman=read('content/customer-experience-rebuild/r12r4b/smr/review/smr-human-review-results-v1.json');
-const legacyAdmission=read('content/customer-experience-rebuild/r12r4b/smr/admission/smr-production-admission-v1.json');
+const legacyHuman=read('content/customer-experience-rebuild/r12r4b/smr/history/v1/review/smr-human-review-results-v1.json');
+const legacyAdmission=read('content/customer-experience-rebuild/r12r4b/smr/history/v1/admission/smr-production-admission-v1.json');
 assert.equal(legacyHuman.accepted,0);assert.equal(legacyHuman.pending,48);assert.equal(legacyAdmission.productionAllowed,false);assert.equal(legacyAdmission.customerCutoverAllowed,false);
 const engineering=read('content/professional/ast-full-production/contracts/ast-fp-engineering-contract-v1.json');
 assert.equal(engineering.candidate.productionAllowed,false);assert.equal(engineering.candidate.customerCutoverAllowed,false);assert.equal(engineering.gates.fullProductionClaimAllowed,false);
-const benchmark=read('content/customer-experience-rebuild/r12r4b/smr-r2/benchmark/smr-r2-ast-benchmark-v1-evidence.json');
+const benchmark=read('content/customer-experience-rebuild/r12r4b/smr/benchmark/smr-ast-benchmark-v1-evidence.json');
 assert.equal(benchmark.governance.benchmarkHumanAccepted,false,'R2 candidate acceptance is not the final SMR-R2 report acceptance');
 assert.ok(benchmark.upstreamGapTickets.some(x=>x.gapCode==='AST_FULL_PRODUCTION_GAP_PLANET_SIGN'));
 assert.ok(benchmark.upstreamGapTickets.some(x=>x.gapCode==='AST_FULL_PRODUCTION_GAP_TENSION_SELECTION'));

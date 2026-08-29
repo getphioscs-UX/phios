@@ -1,16 +1,65 @@
 {
-  "schemaVersion": "PHI-OS-SMR-PRODUCTION-ADMISSION-v1.0.0",
-  "machineCampaignRequired": 64,
-  "humanReportsRequired": 48,
+  "schemaVersion": "PHI-OS-SMR-R2-PRODUCTION-ADMISSION-v1.0.0",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "workCode": "R2-W20",
+  "status": "PRODUCTION",
   "methods": {
-    "AST": {"targetState": "AST_SINGLE_METHOD_READING_PRODUCTION", "state": "BLOCKED_PENDING_HUMAN_REVIEW"},
-    "BZR": {"targetState": "BZR_SINGLE_METHOD_READING_PRODUCTION", "state": "BLOCKED_PENDING_HUMAN_REVIEW"},
-    "ZWR": {"targetState": "ZWR_SINGLE_METHOD_READING_PRODUCTION", "state": "BLOCKED_PENDING_HUMAN_REVIEW"},
-    "NUM": {"targetState": "NUM_SINGLE_METHOD_READING_PRODUCTION", "state": "BLOCKED_PENDING_HUMAN_REVIEW"}
+    "AST": {
+      "targetState": "AST_SINGLE_METHOD_READING_R2",
+      "state": "PRODUCTION"
+    },
+    "BZR": {
+      "targetState": "BZR_SINGLE_METHOD_READING_R2",
+      "state": "PRODUCTION"
+    },
+    "ZWR": {
+      "targetState": "ZWR_SINGLE_METHOD_READING_R2",
+      "state": "PRODUCTION"
+    },
+    "NUM": {
+      "targetState": "NUM_SINGLE_METHOD_READING_R2",
+      "state": "PRODUCTION"
+    },
+    "ECR": {
+      "targetState": "ECR_SINGLE_METHOD_READING_R2",
+      "state": "PRODUCTION"
+    }
   },
-  "productionAllowed": false,
-  "customerCutoverAllowed": false,
-  "blocker": "SMR_48_OF_48_HUMAN_ACCEPTANCE_REQUIRED",
-  "truthfulGate": true
+  "humanReviewPrerequisites": {
+    "benchmark5of5": "content/customer-experience-rebuild/r12r4b/smr/admission/smr-w17-five-benchmark-human-admission-v1.json",
+    "integration20of20": "content/customer-experience-rebuild/r12r4b/smr/admission/smr-w19-product-integration-human-admission-v1.json"
+  },
+  "machinePrerequisites": {
+    "structuralDiversity40of40": "content/customer-experience-rebuild/r12r4b/smr/campaign/smr-structural-diversity-campaign-v1.json"
+  },
+  "humanReviewedProductComposition": true,
+  "liveCustomerIndividuallyHumanReviewed": false,
+  "productionAllowed": true,
+  "customerCutoverAllowed": true,
+  "singleApi": "/api/customer-personal-reality",
+  "methodSpecificApiCreated": false,
+  "targetViewContract": {
+    "singleSelect": "view.singleMethodReading",
+    "multiSelect": "view.singleMethodReading = null",
+    "combinedReadingBeforeCrossAdmission": "NOT_STARTED"
+  },
+  "currentApiMutationApplied": true,
+  "legacyActiveProductionPathRetired": true,
+  "oldSmrHardReplacementApplied": true,
+  "legacyPhysicalCleanup": "COMPLETED_W20B",
+  "blocker": null,
+  "governance": {
+    "rawProjectionCreatesCustomerConclusion": false,
+    "rendererCreatesMeaning": false,
+    "methodCalculationRebuilt": false,
+    "crossMethodCompositionPerformed": false,
+    "singleMethodOnlyUntilCrossAdmission": true,
+    "legacyImplementationExecutable": false,
+    "constructionNamespaceActive": false
+  },
+  "canonicalNamespace": "SMR",
+  "canonicalRuntimePath": "functions/single-method-reading",
+  "canonicalContentPath": "content/customer-experience-rebuild/r12r4b/smr",
+  "canonicalRenameApplied": true,
+  "legacyAbsenceGateRequired": true
 }
-

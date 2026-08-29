@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-CURRENT-BASELINE-v1.0.0",
+  "work": "CX-R12R4B-SMR-R2-W0",
+  "baselineCommit": "abab6b358bff574c65b9dfacc7985d5de564d674",
+  "historicalSmr": {
+    "campaignRef": "content/customer-experience-rebuild/r12r4b/smr/history/v1/review/smr-human-review-cases-v1.json",
+    "machineCampaignRef": "content/customer-experience-rebuild/r12r4b/smr/history/v1/machine/smr-machine-campaign-v1.json",
+    "caseCount": 48,
+    "methodCounts": {
+      "AST": 12,
+      "BZR": 12,
+      "ZWR": 12,
+      "NUM": 12
+    },
+    "machineStatus": "64_OF_64_MACHINE_ACCEPTED",
+    "humanReviewStatus": "PENDING_HUMAN_REVIEW",
+    "productionAllowed": false,
+    "customerCutoverAllowed": false,
+    "evidenceState": "HISTORICAL_CONTENT_QUALITY_EVIDENCE",
+    "lifecycle": "SUPERSEDED"
+  },
+  "measured": {
+    "averageSectionsPerReport": 11.75,
+    "averageParagraphsPerReport": 39.75,
+    "averageParagraphCharacters": 286.13,
+    "averageExactDuplicateParagraphsPerReport": 22.63,
+    "totalExactDuplicateParagraphOccurrences": 1086,
+    "reportsWithExactDuplicates": 48,
+    "reportsWithCrossSectionRestatement": 48,
+    "averageCrossSectionRestatedUnitsPerReport": 3.5,
+    "reportsWithSemanticRestatement": 48,
+    "sameMethodLocaleIntentGroups": 8,
+    "questionResponsiveGroups": 0
+  },
+  "auditConclusion": {
+    "contentQualityAccepted": false,
+    "old48MayBePromotedToAccepted": false,
+    "old48MayBeMutatedToPass": false,
+    "requiresR2Regeneration": true,
+    "reasonCodes": [
+      "HIGH_EXACT_DUPLICATION",
+      "CROSS_SECTION_RESTATEMENT",
+      "QUESTION_VARIANTS_DO_NOT_CHANGE_BODY",
+      "ONE_STRUCTURAL_AUTHORITY_PER_METHOD_CAMPAIGN",
+      "DENSITY_WITHOUT_INFORMATION_GAIN_GATE"
+    ]
+  },
+  "boundary": {
+    "methodRuntimeRecalculatedByAudit": false,
+    "meaningAuthorityChanged": false,
+    "humanResultsRewritten": false,
+    "productionAdmissionChanged": false
+  }
+}

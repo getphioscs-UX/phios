@@ -3,11 +3,11 @@ import Ajv from 'ajv/dist/2020.js';
 import {chartFixtures,projectChart,candidateFor,readJson} from './ast-fp-test-support.mjs';
 import {createMethodInterpretationCandidate} from '../functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js';
 import {buildAcceptedMethodCustomerResult} from '../functions/customer-projection/method-customer-reading-v2.js';
-import {adaptAstrologyProductionInput} from '../functions/single-method-reading-r2/astrology-production-adapter.js';
-import {buildCustomerClaimIR} from '../functions/single-method-reading-r2/customer-claim-ir.js';
-import {resolveCustomerPriorities} from '../functions/single-method-reading-r2/customer-priority-resolver.js';
-import {composeCustomerThemes} from '../functions/single-method-reading-r2/customer-theme-composer.js';
-const validate=new Ajv({strict:false}).compile(readJson('content/customer-experience-rebuild/r12r4b/smr-r2/contracts/customer-reading-claim-ir-v1.schema.json'));
+import {adaptAstrologyProductionInput} from '../functions/single-method-reading/astrology-production-adapter.js';
+import {buildCustomerClaimIR} from '../functions/single-method-reading/customer-claim-ir.js';
+import {resolveCustomerPriorities} from '../functions/single-method-reading/customer-priority-resolver.js';
+import {composeCustomerThemes} from '../functions/single-method-reading/customer-theme-composer.js';
+const validate=new Ajv({strict:false}).compile(readJson('content/customer-experience-rebuild/r12r4b/smr/contracts/customer-reading-claim-ir-v1.schema.json'));
 const baseline=readJson('content/professional/ast-full-production/fixtures/ast-fp-legacy-vectors-v1.json');
 let checked=0,themeCount=0;
 for(const chart of chartFixtures.cases){

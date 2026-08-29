@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const root='content/customer-experience-rebuild/r12r4b/smr/audit';
+const baseline=read(`${root}/smr-current-baseline-v1.json`),failures=read(`${root}/smr-report-failure-registry-v1.json`),sections=read(`${root}/smr-section-duplication-matrix-v1.json`),layout=read(`${root}/smr-layout-gap-matrix-v1.json`);
+const oldResults=read('content/customer-experience-rebuild/r12r4b/smr/history/v1/review/smr-human-review-results-v1.json'),oldAdmission=read('content/customer-experience-rebuild/r12r4b/smr/history/v1/admission/smr-production-admission-v1.json');
+assert.equal(baseline.baselineCommit,'abab6b358bff574c65b9dfacc7985d5de564d674');
+assert.equal(baseline.historicalSmr.caseCount,48);assert.equal(baseline.historicalSmr.lifecycle,'SUPERSEDED');assert.equal(baseline.historicalSmr.evidenceState,'HISTORICAL_CONTENT_QUALITY_EVIDENCE');
+assert.equal(baseline.auditConclusion.contentQualityAccepted,false);assert.equal(baseline.auditConclusion.old48MayBeMutatedToPass,false);assert.equal(baseline.measured.reportsWithExactDuplicates,48);assert.equal(baseline.measured.reportsWithCrossSectionRestatement,48);assert.equal(baseline.measured.questionResponsiveGroups,0);assert.ok(baseline.measured.averageExactDuplicateParagraphsPerReport>20);
+assert.deepEqual(failures.summary.observed,['F01','F02','F03','F05','F07','F08','F11','F14','F15']);assert.equal(failures.taxonomy.length,15);assert.ok(sections.matrix.length>=10);assert.equal(sections.intentResponsiveness.every(x=>x.questionResponsive===false),true);assert.equal(layout.conclusion,'R2_LAYOUT_CONTRACT_REQUIRED');
+assert.equal(oldResults.status,'PENDING_HUMAN_REVIEW');assert.equal(oldResults.accepted,0);assert.equal(oldResults.pending,48);assert.equal(oldAdmission.productionAllowed,false);assert.equal(oldAdmission.customerCutoverAllowed,false);
+console.log('✓ CX-R12R4B SMR-R2 W0 failure audit passed: legacy 48 remains SUPERSEDED, not promoted.');

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-W20-PRODUCTION-CUTOVER-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "workCode": "R2-W20",
+  "status": "PRODUCTION_ACCEPTED",
+  "prerequisites": {
+    "w17FiveBenchmarkHuman": "5_ACCEPTED_0_REJECTED_0_PENDING",
+    "w18StructuralDiversity": "40_OF_40_MACHINE_ACCEPTED",
+    "w19ProductIntegrationHuman": "20_ACCEPTED_0_REJECTED_0_PENDING"
+  },
+  "methods": {
+    "AST": "AST_SINGLE_METHOD_READING_R2",
+    "BZR": "BZR_SINGLE_METHOD_READING_R2",
+    "ZWR": "ZWR_SINGLE_METHOD_READING_R2",
+    "NUM": "NUM_SINGLE_METHOD_READING_R2",
+    "ECR": "ECR_SINGLE_METHOD_READING_R2"
+  },
+  "customerSurface": {
+    "api": "/api/customer-personal-reality",
+    "singleSelect": "view.singleMethodReading",
+    "multiSelect": "view.singleMethodReading = null",
+    "crossMethodComposition": "NOT_STARTED",
+    "renderer": "assets/customer-ui/js/surfaces/single-method-reading.js"
+  },
+  "runtime": {
+    "productionBuilder": "functions/single-method-reading/single-method-reading-production.js",
+    "legacyComposerProductionImportPresent": false,
+    "legacyComposerDirectoryState": "DELETED_AND_REPLACED_BY_CANONICAL_SUCCESSOR",
+    "r2NativePriorityAuthority": "functions/single-method-reading/smr-native-authority.js",
+    "oldSmrPhysicalDeletionApplied": true,
+    "canonicalRenameApplied": true,
+    "constructionNamespaceActive": false
+  },
+  "governance": {
+    "humanReviewedProductComposition": true,
+    "liveCustomerIndividuallyHumanReviewed": false,
+    "rawProjectionCreatesCustomerConclusion": false,
+    "rendererCreatesMeaning": false,
+    "methodRuntimeRecalculated": false,
+    "crossMethodCompositionPerformed": false,
+    "productionAllowed": true,
+    "customerCutoverAllowed": true,
+    "legacyImplementationExecutable": false,
+    "constructionNamespaceActive": false
+  },
+  "next": "SMR IS NOW CANONICAL; CROSS-METHOD WORK MAY START ONLY UNDER ITS OWN ADMISSION."
+}

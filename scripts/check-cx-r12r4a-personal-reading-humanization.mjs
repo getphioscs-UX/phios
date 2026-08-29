@@ -59,11 +59,11 @@ assert.equal(assetById.get('CXICON-GLOBAL-PROJECTION').publicUrl,'/assets/icons/
 
 assert.match(api,/buildAcceptedMethodCustomerResult/);
 assert.doesNotMatch(api,/buildMethodCustomerDevelopmentResult/);
-const r12r4bSuccessor=api.includes('PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0')&&api.includes('const reading=buildReadingView({methods:readingMethods');
+const r12r4bSuccessor=api.includes('PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0')&&api.includes('const reading=buildReadingView(')&&/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),astrology,reading(?:,singleMethodReading)?\}\)/.test(api);
 if(r12r4bSuccessor){
   assert.match(api,/const readingState=allReadable\?'READY_TO_READ':readable\.length\?'PARTIALLY_PREPARED':'NEEDS_ATTENTION'/);
   assert.match(api,/methods:readingMethods/);
-  assert.match(api,/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),[^}]*,reading(?:,|\})/);
+  assert.match(api,/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),astrology,reading(?:,singleMethodReading)?\}\)/);
   assert.doesNotMatch(api,/methodResults\s*:/);
 }else{
   assert.match(api,/state:readable\.length===projections\.length\?'READY_TO_READ'/);

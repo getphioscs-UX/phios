@@ -62,7 +62,8 @@ assert.equal(resolveCustomerCompositionAdmission({methodId:'AST',candidateSchema
 
 assert.match(api,/buildAcceptedMethodCustomerResult/);
 assert.match(api,/includeLegacyInterpretation:false/);
-assert.match(api,/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),[^}]*\bastrology\b[^}]*\breading\b[^}]*\}\)/);
+assert.match(api,/const reading=buildReadingView\(/);
+assert.match(api,/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),astrology,reading(?:,singleMethodReading)?\}\)/);
 assert.match(api,/methods:readingMethods/);
 assert.match(api,/map:\[/);
 for(const stage of ['DATA','METHOD_CALCULATION','METHOD_INTERPRETATION','COMBINED_READING','CURRENT_REALITY','FULL_REPORT'])assert(api.includes(`'${stage}'`),`missing Reading Map stage ${stage}`);

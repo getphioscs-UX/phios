@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "PHI-OS-CX-R12R4B-SMR-R2-W6-W8-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "2211d9bd1cdecb2d238f4c05d1f58345efd11804",
+  "commitUnit": "R2-3",
+  "work": ["R2-W6", "R2-W7", "R2-W8"],
+  "predecessor": "content/customer-experience-rebuild/r12r4b/smr/smr-w3-w5-acceptance-v1.json",
+  "status": "ENGINEERING_ACCEPTED_READY_FOR_W9",
+  "w6": {
+    "sectionInformationGain": "PASS",
+    "outputSchemaVersion": "PHI-OS-SMR-R2-SECTION-INFORMATION-GAIN-v1.0.0",
+    "requiredInformationFields": ["newClaimRefs", "newRelationRefs", "newConditionRefs", "newCounterEvidenceRefs", "newObservationRefs"],
+    "emptyFiveFieldsMeansSectionNotEligible": true,
+    "conditionalSectionsRequireNewInformation": true,
+    "timingRequiresExplicitTemporalClaim": true,
+    "technicalDetailBodyEligibleByDefault": false,
+    "technicalAppendixDefaultCollapsed": true
+  },
+  "w7": {
+    "contradictionPreservation": "PASS",
+    "states": ["SUPPORT", "TENSION", "CONDITIONAL", "COUNTERBALANCED", "OPEN"],
+    "dedupMayEraseRequiredContradiction": false,
+    "counterEvidenceDeleted": false,
+    "oneSidedCollapseAllowed": false
+  },
+  "w8": {
+    "customerNarrativeIr": "PASS",
+    "schemaVersion": "PHI-OS-CUSTOMER-READING-NARRATIVE-IR-v1.0.0",
+    "admittedClaimTextOnly": true,
+    "genericIntroCreated": false,
+    "genericEndingCreated": false,
+    "repeatedMethodDisclaimer": false,
+    "exactRenderableTextOwnerUnique": true,
+    "suppressedDuplicateRenderable": false,
+    "technicalAppendixDefaultCollapsed": true
+  },
+  "realMethodRegression": {
+    "methods": ["AST", "BZR", "ZWR", "NUM", "ECR"],
+    "AST": {"claims":3,"themes":3,"eligibleSections":["OVERVIEW","SUPPORT_TENSION"],"contradictionCounts":{"SUPPORT":3,"TENSION":0,"CONDITIONAL":0,"COUNTERBALANCED":0,"OPEN":0},"primaryThemes":3,"deeperSections":[],"renderableNarrativeBlocks":3},
+    "BZR": {"claims":4,"themes":4,"eligibleSections":["OVERVIEW","CORE_THEMES","SUPPORT_TENSION"],"contradictionCounts":{"SUPPORT":3,"TENSION":0,"CONDITIONAL":1,"COUNTERBALANCED":0,"OPEN":0},"primaryThemes":4,"deeperSections":["CORE_THEMES"],"renderableNarrativeBlocks":4},
+    "ZWR": {"claims":3,"themes":3,"eligibleSections":["OVERVIEW","SUPPORT_TENSION"],"contradictionCounts":{"SUPPORT":0,"TENSION":0,"CONDITIONAL":2,"COUNTERBALANCED":0,"OPEN":0},"primaryThemes":3,"deeperSections":[],"renderableNarrativeBlocks":3},
+    "NUM": {"claims":5,"themes":4,"eligibleSections":["OVERVIEW","CORE_THEMES","RESOURCES"],"contradictionCounts":{"SUPPORT":0,"TENSION":0,"CONDITIONAL":0,"COUNTERBALANCED":0,"OPEN":0},"primaryThemes":2,"deeperSections":["CORE_THEMES","RESOURCES"],"renderableNarrativeBlocks":5},
+    "ECR": {"claims":5,"themes":1,"eligibleSections":["OVERVIEW","CORE_THEMES","SUPPORT_TENSION"],"contradictionCounts":{"SUPPORT":2,"TENSION":0,"CONDITIONAL":1,"COUNTERBALANCED":0,"OPEN":0},"primaryThemes":1,"deeperSections":["CORE_THEMES"],"renderableNarrativeBlocks":4},
+    "status": "PASS"
+  },
+  "boundaries": {
+    "duplicateMethodRuntimeCreated": false,
+    "rawProjectionCustomerConclusionCreated": false,
+    "rendererMeaningCreated": false,
+    "rendererSectionEligibilityCreated": false,
+    "genericNarrativeFillerCreated": false,
+    "contradictionSilentlyRemoved": false,
+    "unsupportedTimingCreated": false,
+    "humanEvidenceRewritten": false,
+    "oldSmrReplacedBeforeCutover": false,
+    "w9Started": false
+  },
+  "next": "R2-W9 CUSTOMER READING INFORMATION ARCHITECTURE v2",
+  "production": {
+    "r2CustomerCutover": false,
+    "reason": "W9-W20_NOT_COMPLETE"
+  }
+}

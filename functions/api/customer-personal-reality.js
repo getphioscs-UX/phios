@@ -7,7 +7,7 @@ import {projectMethodsForCustomer} from '../customer-projection/method-customer-
 import {projectAstrologyForCustomer} from '../customer-projection/astrology-customer-projection.js';
 import {buildAstrologyCustomerReading} from '../customer-projection/astrology-customer-reading.js';
 import {buildAcceptedMethodCustomerResult} from '../customer-projection/method-customer-reading-v2.js';
-import {maybeBuildProductionSingleMethodReadingR2} from '../single-method-reading-r2/single-method-reading-production.js';
+import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/single-method-reading-production.js';
 import {resolveBirthPlace} from '../location/place-resolver.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
@@ -209,7 +209,7 @@ export async function onRequestPost(context){
   const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale});
   let singleMethodReading=null;
   if(selected.length===1&&readingMethods[0]?.state==='READY_TO_READ'){
-    try{singleMethodReading=await maybeBuildProductionSingleMethodReadingR2({methodResult:readingMethods[0],customerIntent:context.customerIntent,locale})}
+    try{singleMethodReading=await maybeBuildProductionSingleMethodReading({methodResult:readingMethods[0],customerIntent:context.customerIntent,locale})}
     catch{singleMethodReading=null}
   }
   const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
