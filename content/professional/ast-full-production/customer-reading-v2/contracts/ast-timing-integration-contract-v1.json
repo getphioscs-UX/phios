@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-AST-TIMING-INTEGRATION-CONTRACT-v1.0.0",
+  "workCode": "R2-W15",
+  "methodId": "AST",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "status": "ENGINEERING_FROZEN_REUSES_ASTT_PRODUCTION_AUTHORITY",
+  "sourceAuthority": "ASTT-W10 / AST_CURRENT_DYNAMIC v2.0.0",
+  "requiredInput": [
+    "accepted natal canonical projection",
+    "explicit target date",
+    "explicit target time",
+    "explicit target IANA timezone",
+    "explicit target UTC offset"
+  ],
+  "targetIR": "PHI-OS-AST-GOVERNED-TEMPORAL-READING-IR-v1.0.0",
+  "targetSection": "TIMING",
+  "rules": {
+    "browserTimezoneInferenceAllowed": false,
+    "serverCurrentTimeInferenceAllowed": false,
+    "targetDateDefaultAllowed": false,
+    "natalRecalculationAllowed": false,
+    "eventPredictionAllowed": false,
+    "fortunePredictionAllowed": false,
+    "goodBadScoringAllowed": false,
+    "timingMeaningMustComeFromAsttAdmittedMeaning": true,
+    "timingSectionAbsentWithoutExplicitTarget": true
+  },
+  "asttProductionAcceptance": "content/professional/ast-transit/acceptance/ast-transit-production-acceptance-v1.json",
+  "customerInteraction": {
+    "initialNatalReadingMayRunWithoutTarget": true,
+    "targetControlsExposedOnlyAfterActiveWorkspaceCapability": true,
+    "targetControlsFields": [
+      "targetDate",
+      "targetTime",
+      "targetTimezone.iana",
+      "targetTimezone.utcOffsetAtTarget"
+    ],
+    "rerunRequiredAfterTargetEntry": true
+  }
+}

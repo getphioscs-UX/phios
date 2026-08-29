@@ -11,9 +11,10 @@ function reportHtml(report){return `<article class="cx-smr-report">${executive(r
 export function renderSingleMethodReading(view){
   const tab=document.querySelector('[data-cx-tab="my-reading"]'),panel=document.querySelector('[data-cx-panel="my-reading"]'),node=document.querySelector('[data-cx-single-method-reading]');
   if(!tab||!panel||!node)return;
-  const available=reports(view);
-  tab.hidden=!available.length;panel.dataset.available=String(Boolean(available.length));
-  if(!available.length){panel.hidden=true;node.innerHTML='';return}
+  const workspaceActive=view?.astrologyWorkspace?.surfaceCutoverActive===true;
+  const available=reports(view).filter(report=>!(workspaceActive&&report?.methodId==='AST'));
+  tab.hidden=!available.length&&!workspaceActive;panel.dataset.available=String(Boolean(available.length||workspaceActive));
+  if(!available.length){node.innerHTML='';if(!workspaceActive)panel.hidden=true;return}
   node.innerHTML=available.map(reportHtml).join('');
 }
 

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R2-W13-W16-VALIDATION-v1.0.0",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "alignedArchive": "ask.zip",
+  "status": "ENGINEERING_SCOPED_PASS_RELEASE_GATED_FULL_AST_AGGREGATE_ENV_DEPENDENCY_BLOCKED",
+  "scoped": {
+    "syntax": "PASS",
+    "astCurrentBaseline": "PASS",
+    "r4aHumanAdmission": "PASS_21_OF_21",
+    "r5WholeChartSynthesis": "PASS_FINAL_RENDERED_SURFACE_HUMAN_ACCEPTANCE_STILL_REQUIRED",
+    "r2W9W12": "PASS",
+    "r2W13W16": "PASS",
+    "sharedSmrW0W11": "PASS",
+    "asttW0W10": "PASS"
+  },
+  "w13": {
+    "implementation": "PASS",
+    "singleNarrativeOwner": "AST_INTERACTIVE_WORKSPACE",
+    "legacyAstNarrativeSuppressionWhenActive": true,
+    "surfaceCutoverActive": false
+  },
+  "w14": {
+    "intentProfiles": 6,
+    "deterministic": true,
+    "llmClassificationUsed": false,
+    "meaningRewriteAllowed": false
+  },
+  "w15": {
+    "asttProductionAuthorityReused": true,
+    "asttW0W10Check": "PASS",
+    "explicitTargetRequired": true,
+    "targetControlsFailClosedUntilActiveCapability": true,
+    "eventPredictionCreated": false
+  },
+  "w16": {
+    "interactiveWorkspace": "PASS",
+    "navigationRendered": true,
+    "themeInspectorSingleNarrativeOwner": true,
+    "chartStructureOnly": true,
+    "technicalDefaultCollapsed": true,
+    "previewDigests": {
+      "enPressureWithSyntheticTiming": "b8d9534572b4d26f9611b9e8b9f8f580a474d1018cb2075cf72191925fdf3b5d",
+      "zhExpressionNatal": "d6fc2e13c1242d43ea744a443512bab440cb04308e777f7a7632499b33a14608"
+    },
+    "previewTimingEvidence": "SYNTHETIC_PRESENTATION_ONLY_NOT_R3_EVIDENCE"
+  },
+  "releaseBlockers": [
+    "R5_FINAL_RENDERED_SURFACE_HUMAN_ACCEPTANCE",
+    "R3_INDEPENDENT_EPHEMERIS_CERTIFICATION"
+  ],
+  "environment": {
+    "astFullProductionAggregate": {
+      "exitCode": 1,
+      "stoppedAt": "scripts/check-ast-fp-fidelity.mjs",
+      "reason": "ERR_MODULE_NOT_FOUND: ajv"
+    },
+    "r3IndependentCalculation": {
+      "exitCode": 1,
+      "reason": "ERR_MODULE_NOT_FOUND: astronomy-engine"
+    },
+    "interpretation": "Dependency availability boundary in this aligned archive/runtime; no W13-W16 assertion failed."
+  },
+  "production": {
+    "customerRuntimeUseAllowed": false,
+    "customerPublicationAllowed": false,
+    "productionAllowed": false,
+    "customerCutoverAllowed": false
+  }
+}

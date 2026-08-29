@@ -1,0 +1,21 @@
+/** R2-W16 interactive workspace view model. One selected theme owns full theme narrative at a time. */
+const list=v=>Array.isArray(v)?v:[];const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);for(const x of Object.values(v))freeze(x)}return v};
+const fail=code=>{throw Object.assign(new Error(code),{code})};
+const group=(p,c)=>list(p?.calculation?.structures).find(x=>x.code===c)?.items||[];
+const pick=(o,l,f='')=>o?.[l]??o?.en??f;const SIGNS=['ARIES','TAURUS','GEMINI','CANCER','LEO','VIRGO','LIBRA','SCORPIO','SAGITTARIUS','CAPRICORN','AQUARIUS','PISCES'];
+const signCode=v=>SIGNS[Math.floor((((Number(v)%360)+360)%360)/30)]||null;
+function section(reading,id){return list(reading.sections).find(x=>x.sectionId===id)}
+export function buildAstInteractiveWorkspace({canonicalProjection,reading,intentResolution,languageRegistry,cutoverGate,temporalIR=null}={}){
+ if(canonicalProjection?.schemaVersion!=='PHI-OS-CANONICAL-METHOD-PROJECTION-v2.0.0'||canonicalProjection?.method?.publicMethodCode!=='ASTROLOGY_PROJECTION')fail('AST_WORKSPACE_CANONICAL_AST_REQUIRED');
+ if(reading?.schemaVersion!=='PHI-OS-AST-CUSTOMER-READING-IA-v2.0.0')fail('AST_WORKSPACE_READING_V2_REQUIRED');
+ const locale=reading.locale||'en',core=section(reading,'CORE_THEMES'),overview=section(reading,'OVERVIEW'),support=section(reading,'SUPPORT_TENSION'),intent=section(reading,'INTENT'),timing=section(reading,'TIMING'),deep=section(reading,'DEEP_DIVE'),technical=section(reading,'TECHNICAL');
+ const themes=list(core?.items).map(x=>({themeRef:x.themeRef,rank:x.rank,tier:x.tier,readerTitle:x.readerTitle,narrativeRef:x.narrativeRef,renderOwnerId:x.renderOwnerId,readerText:x.text,technicalLabel:x.technicalLabel,sourceRefs:[...(x.sourceRefs||[])]}));
+ const deepByTheme=new Map(list(deep?.items).map(x=>[x.themeRef,x]));for(const x of themes)x.detail=deepByTheme.get(x.themeRef)||null;
+ const positions=list(canonicalProjection.calculation?.positions).filter(x=>['SUN','MOON','MERCURY','VENUS','MARS','JUPITER','SATURN','URANUS','NEPTUNE','PLUTO'].includes(x.code)).map(x=>({code:x.code,label:pick(languageRegistry.bodyLabels?.[x.code],locale,x.code),longitude:Number(x.value),signCode:signCode(x.value),signLabel:pick(languageRegistry.signLabels?.[signCode(x.value)],locale,signCode(x.value)),retrograde:Number(x.meta?.speedLongitudeDegreesPerDay)<0}));
+ const angles=group(canonicalProjection,'ANGLES').map(x=>({code:x.code,label:({ASC:'Ascendant',MC:'Midheaven',DSC:'Descendant',IC:'Imum Coeli'})[x.code]||x.code,longitude:Number(x.value)}));
+ const houses=group(canonicalProjection,'HOUSE_CUSPS').map(x=>({houseNumber:Number(x.meta?.houseNumber||String(x.code).replace('HOUSE_','')),longitude:Number(x.value)}));
+ const aspects=group(canonicalProjection,'ASPECTS').map(x=>({code:x.code,fromCode:x.meta?.fromCode,toCode:x.meta?.toCode,type:x.meta?.type,orb:Number(x.meta?.orb??0)}));
+ const active=Boolean(cutoverGate?.surfaceCutoverActive===true&&cutoverGate?.customerCutoverAllowed===true);
+ return freeze({schemaVersion:'PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0',workCode:'R2-W16',methodId:'AST',locale,projectionId:canonicalProjection.projectionId||null,surfaceCutoverActive:active,navigation:['READING','CHART','THEMES',...(timing?.render?['CURRENT_ACTIVATION']:[]),'DETAILS'],defaultView:'READING',overview:list(overview?.items)[0]||null,themes,defaultThemeRef:themes[0]?.themeRef||null,supportTension:list(support?.items),intent:list(intent?.items)[0]||null,intentResolution,timing:timing?.render?{targetContext:temporalIR?.targetContext||timing.targetContext||null,items:list(timing.items)}:null,chartModel:{positions,angles,houses,aspects,structureOnly:true},technical:{defaultCollapsed:true,items:list(technical?.items)},governance:{singleNarrativeOwner:'AST_INTERACTIVE_WORKSPACE',themeListRepeatsFullNarrative:false,themeInspectorOwnsSelectedNarrative:true,chartCreatesMeaning:false,legacyAstSmrSuppressedWhenActive:true,legacyAstStructureNarrativeSuppressedWhenActive:true,legacyAstGraphNarrativeSuppressedWhenActive:true,legacyAstPatternNarrativeSuppressedWhenActive:true,customerRuntimeUseAllowed:active,customerPublicationAllowed:active,productionAllowed:active,customerCutoverAllowed:active}});
+}
+export default Object.freeze({buildAstInteractiveWorkspace});

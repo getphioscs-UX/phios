@@ -15,7 +15,7 @@ const resolveHistoricalPath=p=>archivedLegacyPath.get(p)||p;
 const w01=loadW01();validateW01(w01);
 assert.equal(current.baselineCommit,'2211d9bd1cdecb2d238f4c05d1f58345efd11804');
 assert.equal(current.historicalBaselineRewritten,false);
-assert.equal(current.currentReconciledMainCommit,'a30a38d45a273fa0de603dcb9da827bf4c4ca307');
+assert.equal(current.currentReconciledMainCommit,'3f6825a9b57dc9e62e34fb69bc55d2aac2c39768');
 assert.equal(current.packageValidationPolicy?.mode,'AST_SCRIPT_PROJECTION');
 assert.equal(current.protectedFileReconciliation.length,w01.baseline.protectedFiles.length);
 for(const row of current.protectedFileReconciliation){
@@ -34,7 +34,7 @@ for(const row of current.protectedFileReconciliation){
   // NUM/SMR/other successors may append unrelated scripts without invalidating AST.
   assert.equal(row.validationMode,'AST_SCRIPT_PROJECTION','AST package validation must stay projection-scoped');
   const pkg=JSON.parse(normalized);
-  const projection={checkAstProduction:pkg.scripts?.['check:ast-production'],checkAstFullProduction:pkg.scripts?.['check:ast-full-production'],checkAstFpR2:pkg.scripts?.['check:ast-fp-r2'],checkAstFpR3:pkg.scripts?.['check:ast-fp-r3'],checkAstFpR4:pkg.scripts?.['check:ast-fp-r4'],checkAstFpR4a:pkg.scripts?.['check:ast-fp-r4a'],checkAstFpR5:pkg.scripts?.['check:ast-fp-r5'],checkAstFpR2W9W12:pkg.scripts?.['check:ast-fp-r2-w9-w12']};
+  const projection={checkAstProduction:pkg.scripts?.['check:ast-production'],checkAstFullProduction:pkg.scripts?.['check:ast-full-production'],checkAstFpR2:pkg.scripts?.['check:ast-fp-r2'],checkAstFpR3:pkg.scripts?.['check:ast-fp-r3'],checkAstFpR4:pkg.scripts?.['check:ast-fp-r4'],checkAstFpR4a:pkg.scripts?.['check:ast-fp-r4a'],checkAstFpR5:pkg.scripts?.['check:ast-fp-r5'],checkAstFpR2W9W12:pkg.scripts?.['check:ast-fp-r2-w9-w12'],checkAstFpR2W13W16:pkg.scripts?.['check:ast-fp-r2-w13-w16']};
   assert.equal(hash(JSON.stringify(projection)),row.astScriptProjectionSha256,'AST package-script authority projection changed');
   assert.ok(projection.checkAstFullProduction?.includes('check-ast-fp-current.mjs'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2'));
@@ -43,6 +43,8 @@ for(const row of current.protectedFileReconciliation){
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r4a'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r5'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2-w9-w12'));
+  assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2-w13-w16'));
+  assert.equal(projection.checkAstFpR2W13W16,'node scripts/check-ast-fp-r2-w13-w16.mjs');
  }else assert.equal(hash(normalized),row.currentSha256,`Current protected file changed: ${row.path}`);
  if(row.currentSha256!==row.main2211Sha256)assert.ok(['AST_FP_EXPLICIT_SUCCESSOR','SHARED_MAIN_SUCCESSOR'].includes(row.changeCategory),`Unsupported protected successor category: ${row.path}`);
 }

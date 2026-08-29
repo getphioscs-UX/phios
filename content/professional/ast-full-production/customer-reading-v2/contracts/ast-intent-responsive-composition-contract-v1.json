@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "PHI-OS-AST-INTENT-RESPONSIVE-COMPOSITION-CONTRACT-v1.0.0",
+  "workCode": "R2-W14",
+  "methodId": "AST",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "status": "ENGINEERING_FROZEN",
+  "input": {
+    "rawIntent": "optional customer-provided text",
+    "explicitProfileId": "optional OPEN|EXPRESSION|WORK|RELATIONSHIP|PRESSURE|DIRECTION"
+  },
+  "output": "PHI-OS-AST-INTENT-RESOLUTION-v1.0.0",
+  "rules": {
+    "deterministic": true,
+    "llmClassificationUsed": false,
+    "intentMayChangeThemeOrder": true,
+    "intentMayRewriteMeaning": false,
+    "intentMayCreateNewAstrologyClaim": false,
+    "fallback": "OPEN",
+    "customerTextStoredBeyondRequest": false
+  },
+  "customerPublicationAllowedOnlyInsideAcceptedFinalSurface": true
+}
