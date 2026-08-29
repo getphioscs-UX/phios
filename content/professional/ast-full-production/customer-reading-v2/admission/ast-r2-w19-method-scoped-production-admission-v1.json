@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-AST-R2-W19-METHOD-SCOPED-PRODUCTION-ADMISSION-v1.0.0",
+  "workCode": "R2-W19",
+  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "status": "METHOD_SCOPED_GATE_READY_BLOCKED_BY_R3",
+  "methodFlags": {
+    "AST": false
+  },
+  "prerequisites": {
+    "w17MachineAcceptanceSatisfied": true,
+    "w18FinalCustomerHumanAcceptanceSatisfied": true,
+    "r3IndependentEphemerisCertificationSatisfied": false
+  },
+  "scope": {
+    "otherMethodProductionAdmissionRequired": false,
+    "baziGateRequired": false,
+    "numerologyGateRequired": false,
+    "ziWeiGateRequired": false,
+    "ecrGateRequired": false,
+    "legacySmr48GateRequired": false,
+    "legacySmr48MayBePromoted": false,
+    "astMayCutOverIndependentlyWhenItsOwnPrerequisitesPass": true
+  },
+  "customerRuntimeUseAllowed": false,
+  "customerPublicationAllowed": false,
+  "productionAllowed": false,
+  "customerCutoverAllowed": false,
+  "blockers": [
+    "AST-FP-R3_INDEPENDENT_EPHEMERIS_RUNTIME_CERTIFICATION"
+  ],
+  "humanAdmissionRef": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w18-final-customer-human-admission-v1.json"
+}

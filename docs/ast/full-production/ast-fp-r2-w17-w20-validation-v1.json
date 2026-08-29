@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R2-W17-W20-VALIDATION-v1.0.0",
+  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "status": "W17_MACHINE_PASS_W18_HUMAN_ACCEPTED_W19_R3_BLOCKED_W20_DEPLOYMENT_PENDING",
+  "w17": {
+    "machineAssertions": 241,
+    "accepted": 241,
+    "failed": 0,
+    "acceptanceRate": 1,
+    "status": "PASS"
+  },
+  "w18": {
+    "reviewCases": 24,
+    "accepted": 24,
+    "needsRevision": 0,
+    "rejected": 0,
+    "pending": 0,
+    "caseBundleDigest": "fd14e13d35af098117ca2097924da4ddd4d2d2a3413089e5f91417fcf80e2eee",
+    "status": "HUMAN_ACCEPTED_24_OF_24"
+  },
+  "w19": {
+    "w17Satisfied": true,
+    "w18Satisfied": true,
+    "r3Satisfied": false,
+    "methodFlags": {
+      "AST": false
+    },
+    "otherMethodProductionAdmissionRequired": false,
+    "legacySmr48GateRequired": false,
+    "customerCutoverAllowed": false,
+    "blocker": "AST-FP-R3_INDEPENDENT_EPHEMERIS_RUNTIME_CERTIFICATION"
+  },
+  "w20": {
+    "engineeringDeploymentReadiness": true,
+    "desktop": true,
+    "mobile": true,
+    "print": true,
+    "rollbackFrozen": true,
+    "deploymentPerformed": false,
+    "liveSmokeExecuted": false,
+    "astFullProductionFrozen": false
+  },
+  "executedChecks": [
+    "npm run check:ast-r2-w17-w20",
+    "npm run check:ast-fp-r2-w13-w16",
+    "npm run check:ast-fp-r4a",
+    "npm run check:ast-fp-r5",
+    "node scripts/check-ast-fp-current.mjs",
+    "npm run check:package-aliases"
+  ],
+  "boundaries": {
+    "finalCustomerHumanAcceptanceEstablished": true,
+    "r3IndependentEphemerisCertificationEstablished": false,
+    "astCustomerCutoverAllowed": false,
+    "cloudflareLiveSmokeEstablished": false,
+    "astFullProductionFrozen": false
+  }
+}

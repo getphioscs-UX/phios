@@ -10,7 +10,6 @@ import {buildAcceptedMethodCustomerResult} from '../customer-projection/method-c
 import {buildProductionMethodMeaningPayload} from '../canonical-meaning-production/api-method-meaning-handler.js';
 import {buildNumerologyCustomerReadingEnvelope,projectNumerologyEnvelopeForCustomer} from '../customer-projection/numerology-customer-reading-envelope-v1.js';
 import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/single-method-reading-production.js';
-import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-reading-production.js';
 import {resolveBirthPlace} from '../location/place-resolver.js';
 import {maybeBuildActiveAstCustomerWorkspace,getAstCustomerWorkspaceCapability} from '../ast-full-production/ast-customer-reading-production.js';
 
@@ -76,14 +75,14 @@ function validateNumerologyExpansionRequest(body,selected){
   return null;
 }
 
-function methodLabel(spec,locale){return spec.label[locale==='zh-Hans'?'zh':'en']}
-
 function astTargetContext(body){
   const date=clean(body?.astTargetDate),time=clean(body?.astTargetTime),iana=clean(body?.astTargetTimezone),offset=clean(body?.astTargetUtcOffsetAtTarget),values=[date,time,iana,offset];
   if(values.every(x=>!x))return null;
-  if(values.some(x=>!x)){const e=new Error('AST_TARGET_CONTEXT_INCOMPLETE');e.code='AST_TARGET_CONTEXT_INCOMPLETE';throw e;}
+  if(values.some(x=>!x)){const e=new Error('AST_TARGET_CONTEXT_INCOMPLETE');e.code='AST_TARGET_CONTEXT_INCOMPLETE';throw e}
   return freeze({targetDate:date,targetTime:time.length===5?`${time}:00`:time,targetTimezone:freeze({iana,utcOffsetAtTarget:offset})});
 }
+
+function methodLabel(spec,locale){return spec.label[locale==='zh-Hans'?'zh':'en']}
 
 function limitedReadingMethod(spec,locale,error,projection=null){
   const message=locale==='zh-Hans'
@@ -155,7 +154,7 @@ function stage(locale,stageId,state,enLabel,zhLabel,enDetail,zhDetail){
   return freeze({stageId,state,label:locale==='zh-Hans'?zhLabel:enLabel,detail:locale==='zh-Hans'?zhDetail:enDetail});
 }
 
-function buildReadingView({methods,selectedCount,calculationCount,locale,combinedReading=null}){
+function buildReadingView({methods,selectedCount,calculationCount,locale}){
   const readable=methods.filter(item=>item.state==='READY_TO_READ');
   const allCalculated=calculationCount===selectedCount;
   const allReadable=readable.length===selectedCount;
@@ -163,12 +162,6 @@ function buildReadingView({methods,selectedCount,calculationCount,locale,combine
   const customerLabel=locale==='zh-Hans'
     ?allReadable?'所选视角都可以阅读':readable.length?'部分视角可以阅读':'还需要更多资料'
     :allReadable?'All selected perspectives are ready to read':readable.length?'Some perspectives are ready to read':'More information is needed';
-  const combinedReady=combinedReading?.schemaVersion==='PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2.0.0'&&combinedReading?.state==='PRODUCTION';
-  const combinedExpected=selectedCount>=2;
-  const combinedStageState=combinedReady?'READABLE':combinedExpected&&allReadable?'NEEDS_INFORMATION':'NOT_STARTED';
-  const combinedDetail=locale==='zh-Hans'
-    ?combinedReady?'跨视角读取已由获准的客户可发布方法 claim 组成；它不会把方法一致解释为事实。':combinedExpected&&allReadable?'本次方法读取已准备，但跨视角组合没有通过完整治理门。':'只有至少两个已准备的方法视角才会形成跨视角读取。'
-    :combinedReady?'The cross-perspective reading is composed from admitted customer-publishable method claims; agreement is not treated as proof.':combinedExpected&&allReadable?'The method readings are ready, but cross-perspective composition did not clear every governed gate.':'At least two ready method perspectives are required for a cross-perspective reading.';
   return freeze({
     schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0',
     state:readingState,
@@ -180,7 +173,7 @@ function buildReadingView({methods,selectedCount,calculationCount,locale,combine
       stage(locale,'DATA','PREPARED','Information','资料','Required information was validated for this run.','本次所需资料已经通过验证。'),
       stage(locale,'METHOD_CALCULATION',allCalculated?'PREPARED':'NEEDS_INFORMATION','Method calculation','方法计算',allCalculated?'All selected calculations completed.':'Some selected calculations still need attention.',allCalculated?'所选方法都已完成计算。':'部分所选方法仍需要补充资料。'),
       stage(locale,'METHOD_INTERPRETATION',allReadable?'READABLE':readable.length?'READABLE':'NEEDS_INFORMATION','Method interpretation','方法解释',allReadable?'All selected method readings are ready.':readable.length?'Some method readings are ready; the remaining methods stay open.':'No customer-readable method interpretation is ready yet.',allReadable?'所选方法的解释都可以阅读。':readable.length?'部分方法解释可以阅读，其余部分继续保持开放。':'目前还没有可面向客户阅读的方法解释。'),
-      stage(locale,'COMBINED_READING',combinedStageState,'Combined reading','综合读取',combinedDetail,combinedDetail),
+      stage(locale,'COMBINED_READING','NOT_STARTED','Combined reading','综合读取','Cross-method composition has not been performed in this phase.','本阶段尚未进行跨方法综合。'),
       stage(locale,'CURRENT_REALITY','NOT_STARTED','Current Reality','当前现实','No current-reality evidence has been added or assumed.','尚未加入或假定任何当前现实证据。'),
       stage(locale,'FULL_REPORT','NOT_STARTED','Full report','完整报告','The full Personal Reading Report has not been composed yet.','完整 Personal Reading Report 尚未生成。')
     ],
@@ -191,7 +184,7 @@ function buildReadingView({methods,selectedCount,calculationCount,locale,combine
       currentRealityAssumed:false,
       persistence:false
     },
-    combinedReading:combinedReady?combinedReading:freeze({state:combinedExpected&&allReadable?'NEEDS_ATTENTION':'NOT_STARTED',crossMethodCompositionPerformed:false})
+    combinedReading:{state:'NOT_STARTED',crossMethodCompositionPerformed:false}
   });
 }
 
@@ -254,12 +247,7 @@ export async function onRequestPost(context){
     const limited=limitedReadingMethod(result.spec,locale,error);
     return publicBlocked?.message?freeze({...limited,summary:publicBlocked.message,openQuestions:[publicBlocked.message]}):limited;
   });
-  let combinedReading=null;
-  if(selected.length>=2&&selected.length<=5&&readingMethods.every(method=>method?.state==='READY_TO_READ')){
-    try{combinedReading=await maybeBuildProductionCombinedReading({acceptedMethodReadings:readingMethods,customerIntent:context.customerIntent})}
-    catch{combinedReading=null}
-  }
-  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading});
+  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale});
   let singleMethodReading=null;
   if(selected.length===1&&readingMethods[0]?.state==='READY_TO_READ'){
     try{singleMethodReading=await maybeBuildProductionSingleMethodReading({methodResult:readingMethods[0],customerIntent:context.customerIntent,locale})}
@@ -270,11 +258,10 @@ export async function onRequestPost(context){
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
   let astrologyWorkspace=null;
   if(selected.length===1&&selected[0]==='astrology'&&astrologyResult?.canonicalProjection){
-    try{astrologyWorkspace=await maybeBuildActiveAstCustomerWorkspace({canonicalProjection:astrologyResult.canonicalProjection,rawIntent:body?.intent||'',explicitIntentProfileId:body?.astIntentProfileId||null,locale,targetContext,consentRecordId,sourceMainCommit:'3f6825a9b57dc9e62e34fb69bc55d2aac2c39768'})}catch{astrologyWorkspace=null}
+    try{astrologyWorkspace=await maybeBuildActiveAstCustomerWorkspace({canonicalProjection:astrologyResult.canonicalProjection,rawIntent:body?.intent||'',explicitIntentProfileId:body?.astIntentProfileId||null,locale,targetContext,consentRecordId,sourceMainCommit:'343773fd6fb61fbf1b37aa861537d7e8f091ec24'})}catch{astrologyWorkspace=null}
   }
   const astrologyWorkspaceCapability=getAstCustomerWorkspaceCapability();
-  let view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading});
-  view=freeze({...view,astrologyWorkspace,astrologyWorkspaceCapability});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,astrologyWorkspace,astrologyWorkspaceCapability});
   return json({
     ok:true,
     view,

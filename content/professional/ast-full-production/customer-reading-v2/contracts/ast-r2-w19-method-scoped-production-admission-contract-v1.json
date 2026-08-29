@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-AST-R2-W19-METHOD-SCOPED-PRODUCTION-ADMISSION-CONTRACT-v1.0.0",
+  "workCode": "R2-W19",
+  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "methodId": "AST",
+  "prerequisites": [
+    "R2-W17_MACHINE_ACCEPTED_100_PERCENT",
+    "R2-W18_FINAL_CUSTOMER_REPORTS_HUMAN_ACCEPTED_EXACT_DIGEST_BOUND",
+    "AST-FP-R3_INDEPENDENT_EPHEMERIS_RUNTIME_CERTIFICATION_PASS"
+  ],
+  "scopeRules": {
+    "otherMethodProductionAdmissionRequired": false,
+    "baziGateRequired": false,
+    "numerologyGateRequired": false,
+    "ziWeiGateRequired": false,
+    "ecrGateRequired": false,
+    "legacySmr48GateRequired": false,
+    "legacySmr48MayBePromoted": false,
+    "astMayCutOverIndependentlyWhenItsOwnPrerequisitesPass": true
+  },
+  "activation": {
+    "methodScopedFlag": "AST",
+    "eligibleValue": true,
+    "ineligibleValue": false,
+    "customerCutoverAllowedEqualsAstFlag": true
+  }
+}

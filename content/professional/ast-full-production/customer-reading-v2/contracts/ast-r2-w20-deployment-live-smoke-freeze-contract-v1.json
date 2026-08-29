@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-AST-R2-W20-DEPLOYMENT-LIVE-SMOKE-FREEZE-CONTRACT-v1.0.0",
+  "workCode": "R2-W20",
+  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "requiredBeforeFreeze": {
+    "w17MachineAccepted100Percent": true,
+    "w18FinalCustomerHumanAccepted": true,
+    "w19AstMethodScopedCutoverAllowed": true,
+    "r3IndependentEphemerisCertification": true,
+    "canonicalRoute": "/perspectives/personal/",
+    "liveApi": "/api/customer-personal-reality",
+    "localDesktopLayoutGate": true,
+    "localMobileLayoutGate": true,
+    "localPrintLayoutGate": true,
+    "liveCanonicalHtmlSmoke": true,
+    "liveCustomerAssetsSmoke": true,
+    "liveApiConsentBoundarySmoke": true,
+    "liveAstEndToEndApiSmoke": true,
+    "deployedCommitMatchesExpected": true,
+    "rollbackPlanFrozen": true
+  },
+  "liveSmokeEnvironment": {
+    "baseUrl": "PHIOS_AST_SMOKE_BASE_URL",
+    "expectedCommit": "PHIOS_AST_SMOKE_EXPECTED_COMMIT",
+    "placeRefForEndToEnd": "PHIOS_AST_SMOKE_PLACE_REF"
+  },
+  "rules": {
+    "currentProductionSmokeBeforeDeployMayCount": false,
+    "localPreviewMayCountAsCloudflareSmoke": false,
+    "missingSmokeMayBeWaived": false,
+    "freezeMayBeDeclaredBeforeExactDeployedCommitIsKnown": false,
+    "rollbackMustDisableOnlyAstMethodScopedFlag": true
+  }
+}

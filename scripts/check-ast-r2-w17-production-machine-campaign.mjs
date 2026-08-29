@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {generateW17Campaign,readJson,digest,W17_CAMPAIGN_PATH} from './lib/ast-full-production/ast-r2-w17-w20-support.mjs';
+const contract=readJson('content/professional/ast-full-production/customer-reading-v2/contracts/ast-r2-w17-production-machine-campaign-contract-v1.json');
+const saved=readJson(W17_CAMPAIGN_PATH);const acceptance=readJson('content/professional/ast-full-production/customer-reading-v2/acceptance/ast-r2-w17-production-machine-acceptance-v1.json');
+const generated=await generateW17Campaign();
+assert.equal(digest(generated),digest(saved),'W17 campaign is stale; regenerate it.');
+const c=saved.coverage,r=contract.required;
+assert.equal(saved.status,'MACHINE_ACCEPTED_100_PERCENT');assert.equal(c.acceptanceRate,r.expectedOutcomeAcceptanceRate);assert.equal(c.accepted,c.totalAssertions);assert.equal(c.failed,0);
+assert(c.sourceBirthCases>=r.minimumSourceBirthCases);assert(c.distinctBirthTimes>=r.minimumDistinctBirthTimes);assert(c.distinctLatitudes>=r.minimumDistinctLatitudes);assert(c.houseSystems.length>=r.minimumHouseSystems);
+assert.deepEqual([...c.intentVariants].sort(),[...r.requiredIntentVariants].sort());assert.deepEqual([...c.locales].sort(),[...r.requiredLocales].sort());assert.equal(c.partialCasesContainUndeterminedDynamics,true);assert.equal(c.expectedFailClosedCases,1);
+assert.equal(c.allExactNarrativeDuplicatesZero,true);assert.equal(c.allOneNarrativeOwner,true);assert.equal(c.allChartStructureOnly,true);assert.equal(c.allTechnicalCollapsed,true);assert.equal(c.allIntentResolved,true);assert.equal(c.allTimingAbsentWithoutExplicitTarget,true);
+assert.equal(acceptance.status,'MACHINE_ACCEPTED_241_OF_241');assert.equal(acceptance.actual.accepted,c.totalAssertions);assert.equal(acceptance.actual.failed,0);assert.equal(acceptance.humanAcceptedFinalCustomerReports,false);assert.equal(acceptance.r3IndependentEphemerisCertificationEstablished,false);assert.equal(acceptance.customerCutoverAllowed,false);
+assert.equal(saved.boundary.directProductionEphemerisRuntimeExecuted,false);assert.equal(saved.boundary.r3IndependentEphemerisCertificationEstablished,false);assert.equal(saved.boundary.oldAtomicHumanApprovalUsedAsFinalReportApproval,false);
+console.log(JSON.stringify({status:'PASS',workCode:'R2-W17',machineAccepted:`${c.accepted}/${c.totalAssertions}`,renderedSurfaceCases:c.renderedSurfaceCases,fullSurfaceCases:c.fullSurfaceCases,partialSurfaceCases:c.partialSurfaceCases,expectedFailClosedCases:c.expectedFailClosedCases,sourceBirthCases:c.sourceBirthCases,distinctBirthTimes:c.distinctBirthTimes,latitudeRange:[c.latitudeMin,c.latitudeMax],houseSystems:c.houseSystems,intents:c.intentVariants,locales:c.locales,r3CertificationEstablished:false,customerCutoverAllowed:false},null,2));

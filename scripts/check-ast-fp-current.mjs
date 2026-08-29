@@ -15,7 +15,7 @@ const resolveHistoricalPath=p=>archivedLegacyPath.get(p)||p;
 const w01=loadW01();validateW01(w01);
 assert.equal(current.baselineCommit,'2211d9bd1cdecb2d238f4c05d1f58345efd11804');
 assert.equal(current.historicalBaselineRewritten,false);
-assert.equal(current.currentReconciledMainCommit,'3f6825a9b57dc9e62e34fb69bc55d2aac2c39768');
+assert.equal(current.currentReconciledMainCommit,'343773fd6fb61fbf1b37aa861537d7e8f091ec24');
 assert.equal(current.packageValidationPolicy?.mode,'AST_SCRIPT_PROJECTION');
 assert.equal(current.protectedFileReconciliation.length,w01.baseline.protectedFiles.length);
 for(const row of current.protectedFileReconciliation){
@@ -34,18 +34,8 @@ for(const row of current.protectedFileReconciliation){
   // NUM/SMR/other successors may append unrelated scripts without invalidating AST.
   assert.equal(row.validationMode,'AST_SCRIPT_PROJECTION','AST package validation must stay projection-scoped');
   const pkg=JSON.parse(normalized);
-  const projection={checkAstProduction:pkg.scripts?.['check:ast-production'],checkAstFullProduction:pkg.scripts?.['check:ast-full-production'],checkAstFpR2:pkg.scripts?.['check:ast-fp-r2'],checkAstFpR3:pkg.scripts?.['check:ast-fp-r3'],checkAstFpR4:pkg.scripts?.['check:ast-fp-r4'],checkAstFpR4a:pkg.scripts?.['check:ast-fp-r4a'],checkAstFpR5:pkg.scripts?.['check:ast-fp-r5'],checkAstFpR2W9W12:pkg.scripts?.['check:ast-fp-r2-w9-w12'],checkAstFpR2W13W16:pkg.scripts?.['check:ast-fp-r2-w13-w16']};
-  const currentProjectionSha256=hash(JSON.stringify(projection));
-  const r2W13W16Command='npm run check:ast-fp-r2-w13-w16';
-  const r2W13W16InFullProduction=projection.checkAstFullProduction?.includes('check:ast-fp-r2-w13-w16')===true;
-  if(currentProjectionSha256!==row.astScriptProjectionSha256){
-    const packageRegistry=read('content/governance/runtime-checker-governance/registries/package-checker-alias-registry-v1.json');
-    const quarantine=packageRegistry.parallelPackageReconciliation?.candidate062542;
-    assert.equal(quarantine?.admission,'NOT_MERGED_CHECKER_FAILS_CURRENT_MAIN','AST package projection changed without governed quarantine');
-    assert.equal(r2W13W16InFullProduction,false,'Quarantined AST R2-W13-W16 gate entered full-production orchestration');
-    const candidateProjection={...projection,checkAstFullProduction:`${projection.checkAstFullProduction} && ${r2W13W16Command}`};
-    assert.equal(hash(JSON.stringify(candidateProjection)),row.astScriptProjectionSha256,'AST package projection differs by more than the governed quarantined append');
-  }
+  const projection={checkAstProduction:pkg.scripts?.['check:ast-production'],checkAstFullProduction:pkg.scripts?.['check:ast-full-production'],checkAstFpR2:pkg.scripts?.['check:ast-fp-r2'],checkAstFpR3:pkg.scripts?.['check:ast-fp-r3'],checkAstFpR4:pkg.scripts?.['check:ast-fp-r4'],checkAstFpR4a:pkg.scripts?.['check:ast-fp-r4a'],checkAstFpR5:pkg.scripts?.['check:ast-fp-r5'],checkAstFpR2W9W12:pkg.scripts?.['check:ast-fp-r2-w9-w12'],checkAstFpR2W13W16:pkg.scripts?.['check:ast-fp-r2-w13-w16'],checkAstR2W17:pkg.scripts?.['check:ast-r2-w17'],checkAstR2W18:pkg.scripts?.['check:ast-r2-w18'],checkAstR2W19:pkg.scripts?.['check:ast-r2-w19'],checkAstR2W20:pkg.scripts?.['check:ast-r2-w20'],checkAstR2W17W20:pkg.scripts?.['check:ast-r2-w17-w20'],smokeAstR2W20Live:pkg.scripts?.['smoke:ast-r2-w20-live']};
+  assert.equal(hash(JSON.stringify(projection)),row.astScriptProjectionSha256,'AST package-script authority projection changed');
   assert.ok(projection.checkAstFullProduction?.includes('check-ast-fp-current.mjs'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r3'));
@@ -53,8 +43,15 @@ for(const row of current.protectedFileReconciliation){
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r4a'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r5'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2-w9-w12'));
-  if(currentProjectionSha256===row.astScriptProjectionSha256)assert.equal(r2W13W16InFullProduction,true);
+  assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2-w13-w16'));
+  assert.ok(projection.checkAstFullProduction?.includes('check:ast-r2-w17-w20'));
   assert.equal(projection.checkAstFpR2W13W16,'node scripts/check-ast-fp-r2-w13-w16.mjs');
+  assert.equal(projection.checkAstR2W17,'node scripts/check-ast-r2-w17-production-machine-campaign.mjs');
+  assert.equal(projection.checkAstR2W18,'node scripts/check-ast-r2-w18-final-customer-human-acceptance.mjs');
+  assert.equal(projection.checkAstR2W19,'node scripts/check-ast-r2-w19-method-scoped-production-admission.mjs');
+  assert.equal(projection.checkAstR2W20,'node scripts/check-ast-r2-w20-deployment-readiness.mjs');
+  assert.equal(projection.checkAstR2W17W20,'npm run check:ast-r2-w17 && npm run check:ast-r2-w18 && npm run check:ast-r2-w19 && npm run check:ast-r2-w20');
+  assert.equal(projection.smokeAstR2W20Live,'node scripts/smoke-ast-r2-w20-live.mjs');
  }else assert.equal(hash(normalized),row.currentSha256,`Current protected file changed: ${row.path}`);
  if(row.currentSha256!==row.main2211Sha256)assert.ok(['AST_FP_EXPLICIT_SUCCESSOR','SHARED_MAIN_SUCCESSOR'].includes(row.changeCategory),`Unsupported protected successor category: ${row.path}`);
 }
