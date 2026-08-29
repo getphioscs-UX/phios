@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-ECR-PHI-CARD-CUSTOMER-ADMISSION-v1.0.0",
   "work": "ECR-PC-R1-S7",
-  "status": "HUMAN_REVIEW_PENDING",
+  "status": "CUSTOMER_ADMITTED",
   "requirements": {
     "registryFrozen": true,
     "canonicalCustomerMeaningFrozen": true,
@@ -15,10 +15,13 @@
     "r2NetworkVerificationRequired": false
   },
   "humanReview": {
-    "accepted": 0,
+    "accepted": 12,
     "required": 12,
-    "resultsRef": "PHI-OS-ECR-PHI-CARD-HUMAN-REVIEW-RESULTS-v1.0.0"
+    "resultsRef": "PHI-OS-ECR-PHI-CARD-HUMAN-REVIEW-RESULTS-v1.0.0",
+    "decision": "ACCEPTED_12_OF_12",
+    "reviewAuthority": "USER_HUMAN_ATTESTATION"
   },
-  "customerAdmission": false,
-  "failClosedReason": "ECR-PC-R1-S7 human benchmark acceptance has not yet been recorded."
+  "customerAdmission": true,
+  "admittedAt": "2026-08-29",
+  "admissionBasis": "ECR-PC-R1-S7 benchmark human acceptance 12/12."
 }
