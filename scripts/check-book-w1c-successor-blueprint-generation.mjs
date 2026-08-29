@@ -274,7 +274,7 @@ assert.equal(contract.w1cCandidatePreparation.humanBlueprintAcceptanceSatisfied,
 assert.equal(contract.w1cCandidatePreparation.activeBlueprintRegistryMutated, false);
 assert.equal(contract.boundaries.successorBlueprintCandidatePreparationCreatesAuthority, false);
 assert.equal(packageJson.scripts['check:book-w1-blueprints'], 'node scripts/check-book-w1c-successor-blueprint-generation.mjs');
-assert.equal(packageJson.scripts['check:book-w1c'], 'npm run check:book-w1-blueprints');
+assert.equal(packageJson.scripts['check:book-w1c'], 'npm run check:legacy -- book-w1c');
 assert.equal((packageJson.scripts.precheck.match(/npm run check:book-w1-blueprints/g) ?? []).length, 1);
 assert(audit.includes('4 successor Blueprint candidates'));
 assert(audit.includes('Active Blueprint Registry remains byte-identical'));

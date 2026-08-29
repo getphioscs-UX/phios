@@ -59,11 +59,11 @@ assert.equal(assetById.get('CXICON-GLOBAL-PROJECTION').publicUrl,'/assets/icons/
 
 assert.match(api,/buildAcceptedMethodCustomerResult/);
 assert.doesNotMatch(api,/buildMethodCustomerDevelopmentResult/);
-const r12r4bSuccessor=api.includes('PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0')&&api.includes('buildReadingView(')&&api.includes('stripLegacyInterpretation(baseView)')&&api.includes('reading,singleMethodReading')&&api.includes('methodNativeReading');
+const r12r4bSuccessor=api.includes('PHI-OS-CX-R12R4B-CUSTOMER-READING-VIEW-v1.0.0')&&api.includes('const reading=buildReadingView(')&&/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),astrology,(?:numerology,)?reading(?:,singleMethodReading)?\}\)/.test(api);
 if(r12r4bSuccessor){
   assert.match(api,/const readingState=allReadable\?'READY_TO_READ':readable\.length\?'PARTIALLY_PREPARED':'NEEDS_ATTENTION'/);
   assert.match(api,/methods:readingMethods/);
-  assert.match(api,/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze\(methodNativeReading\)\}\)/);
+  assert.match(api,/view=freeze\(\{\.\.\.stripLegacyInterpretation\(baseView\),astrology,(?:numerology,)?reading(?:,singleMethodReading)?\}\)/);
   assert.doesNotMatch(api,/methodResults\s*:/);
 }else{
   assert.match(api,/state:readable\.length===projections\.length\?'READY_TO_READ'/);
@@ -78,8 +78,17 @@ if(r12r4bSuccessor){
   assert.match(surface,/What you can read now/);
   assert.match(surface,/What still needs more information/);
 }
-assert.match(surface,/results\.length!==4/);
-assert.match(surface,/\['AST','BZR','NUM','ZWR'\]\.every/);
+const crossProductionSuccessor=surface.includes('view?.reading?.combinedReading')&&surface.includes('PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2.0.0')&&surface.includes('combined.claims');
+if(crossProductionSuccessor){
+  assert.match(surface,/view\?\.reading\?\.combinedReading/);
+  assert.match(surface,/PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2\.0\.0/);
+  assert.match(surface,/combined\.claims/);
+  assert.doesNotMatch(surface,/results\.length!==4/);
+  assert.doesNotMatch(surface,/\['AST','BZR','NUM','ZWR'\]\.every/);
+}else{
+  assert.match(surface,/results\.length!==4/);
+  assert.match(surface,/\['AST','BZR','NUM','ZWR'\]\.every/);
+}
 assert.doesNotMatch(surface,/r\.state\.replaceAll/);
 assert.doesNotMatch(surface,/<strong>\$\{esc\(result\.methodId\)\}<\/strong>/);
 assert.match(surface,/Internal method code/);
@@ -89,7 +98,12 @@ assert.match(graphRenderer,/METHOD_LABELS/);
 assert.match(graphRenderer,/roleLabel\(row\.role\)/);
 assert.match(graphRenderer,/stateLabel\(row\.state\)/);
 assert.match(html,/Start with three questions: what has been established, what you can read now, and what still needs more information/);
-assert.match(html,/Cross-perspective comparison opens only when all four accepted method readings are present/);
+if(crossProductionSuccessor){
+  assert.match(html,/When at least two selected method readings are ready, the governed Cross layer may compose only customer-publishable claims/);
+  assert.doesNotMatch(html,/Cross-perspective comparison opens only when all four accepted method readings are present/);
+}else{
+  assert.match(html,/Cross-perspective comparison opens only when all four accepted method readings are present/);
+}
 assert.match(css,/cx-personal-overview-highlights/);
 assert.match(css,/cx-reading-map-live article\[data-state="READY"\]/);
 

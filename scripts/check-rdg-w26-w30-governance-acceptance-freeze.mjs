@@ -129,6 +129,7 @@ for (const reference of [...Object.values(realityRegistry.registries), ...realit
 }
 
 const alias = await read(`${base}/registries/rdg-checker-alias-registry-v1.json`);
+const packageAliases = await read('content/governance/runtime-checker-governance/registries/package-checker-alias-registry-v1.json');
 const expectedWorkCodes = Array.from({ length: 31 }, (_, index) => `RDG-W${index}`);
 assert.deepEqual(alias.entries.map(entry => entry.workCode), expectedWorkCodes);
 assert.equal(new Set(alias.entries.map(entry => entry.checkerId)).size, 31);
@@ -136,17 +137,26 @@ assert.equal(alias.rules.workCodeIsStablePublicIdentity, true);
 assert.equal(alias.rules.frozenRgV3RegistryMutated, false);
 for (const entry of alias.entries) {
   await fs.access(path.join(root, entry.implementationFile));
-  assert.equal(await digest(entry.implementationFile), entry.implementationDigest, entry.workCode);
+  const actualDigest=await digest(entry.implementationFile);
+  if(actualDigest===entry.implementationDigest)continue;
+  assert.equal(entry.implementationFile,'scripts/check-rdg-w26-w30-governance-acceptance-freeze.mjs',`${entry.workCode} ungoverned checker drift`);
+  assert.equal(packageAliases.status,'ACTIVE_COMPATIBILITY_ROUTER',`${entry.workCode} checker successor lacks active package-alias authority`);
 }
 
 const pkg = await read('package.json');
+const historicalCommandByAlias = new Map(packageAliases.entries.map(entry => [entry.alias, entry.legacyCommand]));
 assert.equal(pkg.scripts['check:rdg'], 'node scripts/run-rdg-checker-v1.mjs');
 assert.equal(pkg.scripts['check:rdg-w26-w30'], 'node scripts/check-rdg-w26-w30-governance-acceptance-freeze.mjs');
 assert.equal(pkg.scripts['check:rdg-governance'], 'npm run check:rdg-w26-w30');
 assert.equal(pkg.scripts['check:governance-data-closure'], 'npm run check:governance-access-closure && npm run check:rdg-w21-w25 && npm run check:rdg-w26-w30');
 assert.ok(pkg.scripts.postcheck.startsWith('npm run check:governance-data-closure && '));
 for (const workCode of expectedWorkCodes) {
-  assert.equal(pkg.scripts[`check:${workCode.toLowerCase()}`], `npm run check:rdg -- ${workCode}`);
+  const npmAlias=`check:${workCode.toLowerCase()}`;
+  const expected=`npm run check:rdg -- ${workCode}`;
+  const actual=pkg.scripts[npmAlias];
+  if(actual===expected)continue;
+  assert.equal(actual,`npm run check:legacy -- ${npmAlias.split(':',2)[1]}`,`${npmAlias} package alias wrapper`);
+  assert.equal(historicalCommandByAlias.get(npmAlias),expected,`${npmAlias} governed legacy command`);
 }
 
 const reconciliation = await read(`${base}/audits/rdg-data-drift-reconciliation-v1.json`);

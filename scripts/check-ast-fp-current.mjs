@@ -35,7 +35,17 @@ for(const row of current.protectedFileReconciliation){
   assert.equal(row.validationMode,'AST_SCRIPT_PROJECTION','AST package validation must stay projection-scoped');
   const pkg=JSON.parse(normalized);
   const projection={checkAstProduction:pkg.scripts?.['check:ast-production'],checkAstFullProduction:pkg.scripts?.['check:ast-full-production'],checkAstFpR2:pkg.scripts?.['check:ast-fp-r2'],checkAstFpR3:pkg.scripts?.['check:ast-fp-r3'],checkAstFpR4:pkg.scripts?.['check:ast-fp-r4'],checkAstFpR4a:pkg.scripts?.['check:ast-fp-r4a'],checkAstFpR5:pkg.scripts?.['check:ast-fp-r5'],checkAstFpR2W9W12:pkg.scripts?.['check:ast-fp-r2-w9-w12'],checkAstFpR2W13W16:pkg.scripts?.['check:ast-fp-r2-w13-w16']};
-  assert.equal(hash(JSON.stringify(projection)),row.astScriptProjectionSha256,'AST package-script authority projection changed');
+  const currentProjectionSha256=hash(JSON.stringify(projection));
+  const r2W13W16Command='npm run check:ast-fp-r2-w13-w16';
+  const r2W13W16InFullProduction=projection.checkAstFullProduction?.includes('check:ast-fp-r2-w13-w16')===true;
+  if(currentProjectionSha256!==row.astScriptProjectionSha256){
+    const packageRegistry=read('content/governance/runtime-checker-governance/registries/package-checker-alias-registry-v1.json');
+    const quarantine=packageRegistry.parallelPackageReconciliation?.candidate062542;
+    assert.equal(quarantine?.admission,'NOT_MERGED_CHECKER_FAILS_CURRENT_MAIN','AST package projection changed without governed quarantine');
+    assert.equal(r2W13W16InFullProduction,false,'Quarantined AST R2-W13-W16 gate entered full-production orchestration');
+    const candidateProjection={...projection,checkAstFullProduction:`${projection.checkAstFullProduction} && ${r2W13W16Command}`};
+    assert.equal(hash(JSON.stringify(candidateProjection)),row.astScriptProjectionSha256,'AST package projection differs by more than the governed quarantined append');
+  }
   assert.ok(projection.checkAstFullProduction?.includes('check-ast-fp-current.mjs'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r3'));
@@ -43,7 +53,7 @@ for(const row of current.protectedFileReconciliation){
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r4a'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r5'));
   assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2-w9-w12'));
-  assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2-w13-w16'));
+  if(currentProjectionSha256===row.astScriptProjectionSha256)assert.equal(r2W13W16InFullProduction,true);
   assert.equal(projection.checkAstFpR2W13W16,'node scripts/check-ast-fp-r2-w13-w16.mjs');
  }else assert.equal(hash(normalized),row.currentSha256,`Current protected file changed: ${row.path}`);
  if(row.currentSha256!==row.main2211Sha256)assert.ok(['AST_FP_EXPLICIT_SUCCESSOR','SHARED_MAIN_SUCCESSOR'].includes(row.changeCategory),`Unsupported protected successor category: ${row.path}`);

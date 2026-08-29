@@ -171,7 +171,7 @@ assert.equal(contract.boundaries.successorBlueprintGenerationAllowedBeforeW1BAcc
 
 assert.equal(packageJson.scripts['check:book-w1-outline'],
   'npm run check:book-w1a && node scripts/check-book-w1b-part-outline-reconciliation.mjs');
-assert.equal(packageJson.scripts['check:book-w1b'], 'npm run check:book-w1-outline');
+assert.equal(packageJson.scripts['check:book-w1b'], 'npm run check:legacy -- book-w1b');
 assert.equal((packageJson.scripts.precheck.match(/npm run check:book-w1-outline/g) ?? []).length, 1);
 
 const recommendationTotals = actualMaps.reduce((totals, map) => {
