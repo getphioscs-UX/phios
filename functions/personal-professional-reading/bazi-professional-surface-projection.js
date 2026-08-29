@@ -1,3 +1,4 @@
+import {buildBaziCustomerSafeStructureGraph} from './bazi-customer-safe-graph-projection.js';
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const x of Object.values(value))freeze(x)}return value};
 const list=value=>Array.isArray(value)?value:[];
 const ownerFor=(readingIR,type,schoolCode=null)=>list(readingIR?.renderOwners).find(x=>x.compositionType===type&&(!schoolCode||x.schoolCode===schoolCode))||null;
@@ -36,9 +37,10 @@ function timingModule(readingIR,temporalState){
 export function buildBaziProfessionalSurfaceModules({readingIR,report,temporalState='UNAVAILABLE'}={}){
  if(readingIR?.schemaVersion!=='PHI-OS-BAZI-FULL-READING-IR-v1.0.0')throw Object.assign(new Error('PPR_C1_W7_W9_BAZI_READING_IR_REQUIRED'),{code:'PPR_C1_W7_W9_BAZI_READING_IR_REQUIRED'});
  return freeze({
-  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'PPR-C1-W7-W9-v1.0.0',
+  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'PPR-C1-W10-v1.0.0',
   pattern:patternModule(readingIR),schools:schoolModules(readingIR,report),timing:timingModule(readingIR,temporalState),
-  boundaries:freeze({createsMeaning:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false})
+  customerSafeGraph:buildBaziCustomerSafeStructureGraph({readingIR,temporalState}),
+  boundaries:freeze({createsMeaning:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false,recalculatesEvidenceGraph:false,exposesRawEvidenceGraphIds:false})
  });
 }
 export default Object.freeze({buildBaziProfessionalSurfaceModules});

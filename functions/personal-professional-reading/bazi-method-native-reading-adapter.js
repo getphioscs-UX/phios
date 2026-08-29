@@ -50,9 +50,9 @@ function baziEnvelope({report,readingIR,publicationDecision,temporalProjection,t
   governance:{
    sourceProduct:'BAZI-FP-v1.0.0',sourceReportSchema:report.schemaVersion,
    temporalAuthority:temporalState==='EXPLICIT'?'BZR_TEMPORAL_RUNTIME_V2':'PPR_C1_NO_TARGET_BOUNDARY_ONLY',
-   natalProjectionReused:true,natalRecalculatedForTemporal:false,legacyComposeBzrConsumed:false,professionalStructureSurfaceAuthorized:true,wholeChartFirstIaAuthorized:true,patternProfessionalSurfaceAuthorized:true,threeSchoolProfessionalSurfaceAuthorized:true,temporalExperienceAuthorized:true,
+   natalProjectionReused:true,natalRecalculatedForTemporal:false,legacyComposeBzrConsumed:false,professionalStructureSurfaceAuthorized:true,wholeChartFirstIaAuthorized:true,patternProfessionalSurfaceAuthorized:true,threeSchoolProfessionalSurfaceAuthorized:true,temporalExperienceAuthorized:true,customerSafeEvidenceGraphAuthorized:true,
    noTargetDoesNotInferCurrentDate:true,noTargetDoesNotInferBrowserTimezone:true,
-   fortunePredictionCreated:false,eventCertaintyCreated:false,silentSchoolMergeCreated:false
+   fortunePredictionCreated:false,eventCertaintyCreated:false,silentSchoolMergeCreated:false,sharedPersonalRealitySurfaceModified:false
   }
  });
 }
