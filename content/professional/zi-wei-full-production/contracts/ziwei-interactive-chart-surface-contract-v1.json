@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-INTERACTIVE-CHART-SURFACE-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W19",
+  "baselineCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "status": "ENGINEERING_FROZEN",
+  "inputSchema": "PHI-OS-ZIWEI-CUSTOMER-REPORT-v1.0.0",
+  "outputSchema": "PHI-OS-ZIWEI-INTERACTIVE-CHART-SURFACE-v1.0.0",
+  "surface": "personal-runtime.html#ziwei-chart",
+  "purpose": "Build one interactive 12-palace customer chart surface from the W18 customer report without creating a second interpretation system.",
+  "requiredSections": [
+    "READING_FIRST",
+    "FOUNDATION",
+    "PALACES",
+    "TIMING",
+    "OPEN_BOUNDARIES",
+    "WHY_THIS_READING"
+  ],
+  "layoutRules": {
+    "layoutType": "BRANCH_GRID_4X4",
+    "palaceCellCount": 12,
+    "centerPanelSpansTwoByTwo": true,
+    "defaultSelectedPalacePriority": [
+      "LIFE_PALACE",
+      "FIRST_STRUCTURAL_FOCUS",
+      "FIRST_PALACE_IN_LAYOUT"
+    ],
+    "oneInspectorOwnerPerPalace": true,
+    "cellTeaserParagraphCount": 1,
+    "longTechnicalEvidenceDefault": "COLLAPSED"
+  },
+  "interactionRules": {
+    "palaceClickOpensOwnedInspector": true,
+    "triadOppositeFlankStayContextInsideSameInspector": true,
+    "openBoundaryVisible": true,
+    "timingFocusBadgesVisible": true,
+    "tableFallbackRequired": true,
+    "keyboardNavigable": true
+  },
+  "customerLanguageRules": {
+    "workCodesOnDefaultSurface": "FORBIDDEN",
+    "internalLineageCodesOnDefaultSurface": "FORBIDDEN",
+    "resolutionStateCodesOnDefaultSurface": "HUMAN_LABEL_ONLY",
+    "goodBadScoreOnDefaultSurface": "FORBIDDEN",
+    "overallStrongWeakWinnerOnDefaultSurface": "FORBIDDEN",
+    "fortunePredictionOnDefaultSurface": "FORBIDDEN"
+  },
+  "failClosed": "IF_W18_REPORT_UNAVAILABLE_OR_INCOMPLETE_KEEP_EXISTING_NON_INTERACTIVE_RESULT_SURFACE",
+  "customerCutoverAllowed": false
+}
