@@ -1,3 +1,4 @@
+import {adaptNumIntegratedReadingEnvelope} from './numerology-d8-production-adapter.js';
 import {adaptAcceptedMethodReadingEnvelope} from './method-production-adapter-core.js';
 import {buildCustomerClaimIR} from './customer-claim-ir.js';
 import {resolveCustomerPriorities} from './customer-priority-resolver.js';
@@ -24,10 +25,11 @@ export const SMR_PRODUCTION_ADMISSION=freeze({
   crossMethodComposition:false
 });
 
-export async function maybeBuildProductionSingleMethodReading({methodResult,customerIntent=null,locale='en'}={}){
+export async function maybeBuildProductionSingleMethodReading({methodResult,customerIntent=null,locale='en',numerologyEnvelope=null}={}){
   const methodId=methodResult?.methodId;
   if(SMR_PRODUCTION_ADMISSION.productionAllowed!==true||SMR_PRODUCTION_ADMISSION.methods[methodId]!==true)return null;
   if(methodResult?.state!=='READY_TO_READ')return null;
+  if(methodId==='NUM'&&numerologyEnvelope?.integratedReading?.customerPublishable===true)return adaptNumIntegratedReadingEnvelope({numerologyEnvelope,locale});
   const envelope=adaptAcceptedMethodReadingEnvelope(methodResult,{expectedMethodId:methodId});
   const claims=buildCustomerClaimIR({acceptedMethodReadingEnvelope:envelope,customerIntent});
   const priority=resolveCustomerPriorities({claimCollection:claims,customerIntent});

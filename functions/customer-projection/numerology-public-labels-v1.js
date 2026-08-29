@@ -1,0 +1,10 @@
+const LABELS=Object.freeze({
+ LIFE_PATH:['Life Path','生命路径'],BIRTHDAY_NUMBER:['Birthday Number','生日数'],ATTITUDE_NUMBER:['Attitude Number','态度数'],BIRTH_YEAR_NUMBER:['Birth Year Number','出生年数'],BIRTH_MONTH_NUMBER:['Birth Month Number','出生月数'],BIRTH_DAY_NUMBER:['Birth Day Number','出生日数'],
+ EXPRESSION:['Expression','表达数'],SOUL_URGE:['Soul Urge','灵魂驱动数'],PERSONALITY:['Personality','人格数'],MATURITY:['Maturity','成熟数'],HIDDEN_PASSION:['Hidden Passion','隐藏热情'],KARMIC_LESSON:['Karmic Lesson','业力课题'],BALANCE:['Balance','平衡数'],RATIONAL_THOUGHT:['Rational Thought','理性思维数'],PLANES_OF_EXPRESSION:['Planes of Expression','表达平面'],BRIDGE:['Bridge','桥梁数'],SUBCONSCIOUS_SELF:['Subconscious Self','潜意识自我'],
+ PERIOD_CYCLE:['Period Cycle','长周期'],PINNACLE_CYCLE:['Pinnacle','高峰周期'],CHALLENGE_CYCLE:['Challenge','挑战周期'],PERSONAL_YEAR:['Personal Year','个人年'],PERSONAL_MONTH:['Personal Month','个人月'],PERSONAL_DAY:['Personal Day','个人日'],DIGIT_FREQUENCY:['Digit Frequency','数字出现频率'],MASTER_NUMBER_STATE:['Master Number State','主数状态'],ENERGY_PATTERN:['Energy Pattern','能量组合'],RELATIONSHIP_NUMBER:['Relationship Number','关系数'],RELATIONSHIP_STRUCTURE:['Relationship Structure','关系结构'],REPEATED_NUMBER:['Repeated Number','重复数字'],MISSING_NUMBER:['Unrepresented Number','未出现数字']
+});
+const clean=value=>String(value??'').trim();
+const humanize=code=>clean(code).toLowerCase().replace(/[_-]+/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+export function numerologyPublicLabel(code,locale='en'){const key=clean(code).toUpperCase();const row=LABELS[key];if(row)return locale==='zh-Hans'?row[1]:row[0];const fallback=humanize(key);return locale==='zh-Hans'?fallback:fallback}
+export function numerologyLabelRegistry(){return LABELS}
+export default Object.freeze({numerologyPublicLabel,numerologyLabelRegistry});
