@@ -11,12 +11,17 @@ const contract=read('content/professional/ast-full-production/contracts/ast-fp-e
 const w01=loadW01();validateW01(w01);
 assert.equal(current.baselineCommit,'2211d9bd1cdecb2d238f4c05d1f58345efd11804');
 assert.equal(current.historicalBaselineRewritten,false);
+assert.equal(current.currentReconciledMainCommit,'6ef755efbf874b0f236871989e4f3ecaaeda5ccc');
+assert.equal(current.packageValidationPolicy?.mode,'AST_SCRIPT_PROJECTION');
 assert.equal(current.protectedFileReconciliation.length,w01.baseline.protectedFiles.length);
 for(const row of current.protectedFileReconciliation){
  const historical=w01.baseline.protectedFiles.find(x=>x.path===row.path);assert.ok(historical);
  assert.equal(row.historicalSha256,historical.lfNormalizedSha256);
  const normalized=fs.readFileSync(row.path,'utf8').replace(/\r\n/g,'\n');
- if(row.path==='package.json'&&row.validationMode==='AST_SCRIPT_PROJECTION'){
+ if(row.path==='package.json'){
+  // package.json is shared orchestration, not AST semantic authority.
+  // NUM/SMR/other successors may append unrelated scripts without invalidating AST.
+  assert.equal(row.validationMode,'AST_SCRIPT_PROJECTION','AST package validation must stay projection-scoped');
   const pkg=JSON.parse(normalized);
   const projection={checkAstProduction:pkg.scripts?.['check:ast-production'],checkAstFullProduction:pkg.scripts?.['check:ast-full-production'],checkAstFpR2:pkg.scripts?.['check:ast-fp-r2']};
   assert.equal(hash(JSON.stringify(projection)),row.astScriptProjectionSha256,'AST package-script authority projection changed');

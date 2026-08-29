@@ -200,7 +200,18 @@
     },
     {
       "path": "package.json",
-      "sha256": "ffb2450c36620103595b7f2895ab72e455b192bfaf5c32967c40d9c7e961cbc4"
+      "sha256": "90cb9b5ccc67218e0104e3ac97d0f10d92a1a6fb0e0b59895102f66a33b162b5",
+      "validationMode": "NUM_SCRIPT_PROJECTION",
+      "numScriptProjectionSha256": "c11d47efd2658cc63e197448b0e75e4ec2385294d542a1252af7a663aa22081e",
+      "projectionKeys": [
+        "checkNumFp",
+        "checkNumR1R8",
+        "checkNumR8Admission",
+        "checkNumR8Customer",
+        "checkNumR9R18",
+        "checkNumR18Admission",
+        "checkNumR18Final"
+      ]
     },
     {
       "path": "personal-runtime.html",
@@ -212,7 +223,7 @@
     },
     {
       "path": "scripts/check-num-r1-r8.mjs",
-      "sha256": "61619733e6819929299c7e76a3223d77a017d5d67df5821566c8a74316c5df88"
+      "sha256": "1dbff450870641109c9a4793b0c317bae4a90a4db60b6b56ab5d004946563e3c"
     },
     {
       "path": "scripts/check-num-r18-final-production.mjs",
@@ -237,5 +248,12 @@
     "defaultCustomerCutover": true,
     "acceptanceBasis": "EXPLICIT_USER_ATTESTATION_IN_CHAT_ALL_HUMAN_ACCEPTED"
   },
-  "currentBaselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d"
+  "currentBaselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "packageValidationPolicy": {
+    "mode": "NUM_SCRIPT_PROJECTION",
+    "unrelatedSharedPackageChangesAllowed": true,
+    "fullPackageHashIsInformationalOnly": true,
+    "numAuthorityChangesStillFail": true
+  },
+  "currentBaselineMessage": "num"
 }

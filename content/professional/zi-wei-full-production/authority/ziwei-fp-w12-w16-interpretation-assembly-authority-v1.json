@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-W12-W16-INTERPRETATION-ASSEMBLY-AUTHORITY-v1.0.0",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "status": "ENGINEERING_FROZEN_W17_READING_IR_NEXT_CUSTOMER_CUTOVER_BLOCKED",
+  "works": [
+    "ZIWEI-FP-W12",
+    "ZIWEI-FP-W13",
+    "ZIWEI-FP-W14",
+    "ZIWEI-FP-W15",
+    "ZIWEI-FP-W16"
+  ],
+  "principle": "W12-W16 assemble existing governed Zi Wei calculation and meaning evidence into traceable, composable and deduplicated interpretation IR. They do not create a second method, new atomic meaning, customer narrative, fortune verdict or production cutover.",
+  "stages": {
+    "ZIWEI-FP-W12": {
+      "owner": "STRUCTURAL_FINDING_REGISTRY",
+      "contractRef": "content/professional/zi-wei-full-production/contracts/ziwei-structural-finding-contract-v1.json",
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-structural-finding-runtime.js",
+      "registryRef": "content/professional/zi-wei-full-production/registries/ziwei-structural-finding-type-registry-v1.json",
+      "outputSchema": "PHI-OS-ZIWEI-STRUCTURAL-FINDING-COLLECTION-v1.0.0"
+    },
+    "ZIWEI-FP-W13": {
+      "owner": "INTERPRETATION_EVIDENCE_GRAPH",
+      "contractRef": "content/professional/zi-wei-full-production/contracts/ziwei-interpretation-evidence-graph-contract-v1.json",
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-interpretation-evidence-graph-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0"
+    },
+    "ZIWEI-FP-W14": {
+      "owner": "CROSS_FINDING_COMPOSITION",
+      "contractRef": "content/professional/zi-wei-full-production/contracts/ziwei-cross-finding-composition-contract-v1.json",
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-cross-finding-composition-runtime.js",
+      "registryRef": "content/professional/zi-wei-full-production/registries/ziwei-cross-finding-composition-rule-registry-v1.json",
+      "outputSchema": "PHI-OS-ZIWEI-CROSS-FINDING-COMPOSITION-IR-v1.0.0"
+    },
+    "ZIWEI-FP-W15": {
+      "owner": "CONTRADICTION_AND_COUNTER_EVIDENCE_RESOLUTION",
+      "contractRef": "content/professional/zi-wei-full-production/contracts/ziwei-contradiction-counter-evidence-resolution-contract-v1.json",
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-contradiction-resolver-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-CONTRADICTION-RESOLUTION-IR-v1.0.0"
+    },
+    "ZIWEI-FP-W16": {
+      "owner": "SEMANTIC_DEDUPLICATION",
+      "contractRef": "content/professional/zi-wei-full-production/contracts/ziwei-semantic-dedup-contract-v1.json",
+      "runtimeRef": "functions/zi-wei-full-production/ziwei-semantic-dedup-runtime.js",
+      "outputSchema": "PHI-OS-ZIWEI-SEMANTIC-DEDUP-IR-v1.0.0"
+    }
+  },
+  "upstreamAuthorities": [
+    "content/professional/zi-wei-full-production/authority/ziwei-fp-w11-meaning-authority-v1.json",
+    "content/professional/zi-wei-full-production/authority/ziwei-fp-w10-liu-nian-integration-authority-v1.json",
+    "content/professional/zi-wei-full-production/authority/ziwei-fp-w9-da-xian-integration-authority-v1.json"
+  ],
+  "boundaries": {
+    "upstreamCalculationOrProjectionMutated": false,
+    "secondZiWeiMethodCreated": false,
+    "secondMeaningSystemCreated": false,
+    "atomicMeaningCreatedByAssembly": false,
+    "customerNarrativeCreated": false,
+    "overallStrongWeakWinnerAllowed": false,
+    "counterEvidenceDeletionAllowed": false,
+    "unknownSemanticGapSuppressionAllowed": false,
+    "fullExplanationMaxPerSemanticCluster": 1,
+    "eventOrFortunePredictionAllowed": false,
+    "customerCutoverAllowed": false
+  },
+  "handoff": {
+    "nextWork": "ZIWEI-FP-W17｜Zi Wei Reading IR",
+    "consumerMayUse": [
+      "W16_PRIMARY_EXPLANATION_OWNERS",
+      "W16_CONTEXT_DERIVATIVES",
+      "W15_QUALIFIERS_AND_COUNTER_EVIDENCE",
+      "W13_EVIDENCE_MEANING_AUTHORITY_LINEAGE"
+    ],
+    "customerPublicationOpen": false
+  }
+}
