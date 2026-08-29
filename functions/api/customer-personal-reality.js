@@ -16,6 +16,7 @@ import {resolveBirthPlace} from '../location/place-resolver.js';
 import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production/ziwei-full-production-customer-runtime.js';
 import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
 import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
+import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-reading-production.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -147,7 +148,8 @@ async function executeOne(context,input,key,consentRecordId,parameters,numExpans
       const direct=await executeAndProjectMcd5CurrentRequest(body);
       const baseExecution=direct.execution,canonicalProjection=direct.canonicalProjection,execution=baseExecution;
       if(!canonicalProjection||execution?.executionStatus==='BLOCKED_BY_MPA'||execution?.executionStatus==='INPUT_BLOCKED')return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:execution?.reasonCodes||['METHOD_EXECUTION_FAILED']};
-      return {ok:true,key,spec,canonicalProjection,baseExecution,readingMethod:nativeBackedReadingMethod(spec,context.locale,canonicalProjection)};
+      let crossReadingMethod=null;try{crossReadingMethod=await buildAcceptedMethodCustomerResult({canonicalProjection,locale:context.locale,requestedDepth:'STANDARD'})}catch{}
+      return {ok:true,key,spec,canonicalProjection,baseExecution,readingMethod:nativeBackedReadingMethod(spec,context.locale,canonicalProjection),crossReadingMethod};
     }catch(error){return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||'METHOD_EXECUTION_FAILED']};}
   }
   // const request=new Request — PPR BZR canonical branch ends above; later branches retain their own authority.
@@ -199,10 +201,11 @@ function stage(locale,stageId,state,enLabel,zhLabel,enDetail,zhDetail){
   return freeze({stageId,state,label:locale==='zh-Hans'?zhLabel:enLabel,detail:locale==='zh-Hans'?zhDetail:enDetail});
 }
 
-function buildReadingView({methods,selectedCount,calculationCount,locale,ziweiFullProduction=null,singleZiwei=false,hasPublishableNativeReport=false,hasExplicitBaziTiming=false}){
+function buildReadingView({methods,selectedCount,calculationCount,locale,combinedReading=null,ziweiFullProduction=null,singleZiwei=false,hasPublishableNativeReport=false,hasExplicitBaziTiming=false}){
   const readable=methods.filter(item=>item.state==='READY_TO_READ');
   const fullZiweiReady=singleZiwei&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
   const allCalculated=calculationCount===selectedCount;
+  const combinedReady=combinedReading?.schemaVersion==='PHI-OS-CROSS-METHOD-RUNTIME-READING-IR-v2.0.0'&&combinedReading?.publicationState==='CUSTOMER_PUBLISHABLE_CROSS_READING';
   const allReadable=fullZiweiReady||hasPublishableNativeReport||readable.length===selectedCount;
   const readingState=allReadable?'READY_TO_READ':readable.length?'PARTIALLY_PREPARED':'NEEDS_ATTENTION';
   const customerLabel=locale==='zh-Hans'
@@ -219,7 +222,7 @@ function buildReadingView({methods,selectedCount,calculationCount,locale,ziweiFu
       stage(locale,'DATA','PREPARED','Information','资料','Required information was validated for this run.','本次所需资料已经通过验证。'),
       stage(locale,'METHOD_CALCULATION',allCalculated?'PREPARED':'NEEDS_INFORMATION','Method calculation','方法计算',allCalculated?'All selected calculations completed.':'Some selected calculations still need attention.',allCalculated?'所选方法都已完成计算。':'部分所选方法仍需要补充资料。'),
       stage(locale,'METHOD_INTERPRETATION',allReadable?'READABLE':readable.length?'READABLE':'NEEDS_INFORMATION','Method interpretation','方法解释',allReadable?'All selected method readings are ready.':readable.length?'Some method readings are ready; the remaining methods stay open.':'No customer-readable method interpretation is ready yet.',allReadable?'所选方法的解释都可以阅读。':readable.length?'部分方法解释可以阅读，其余部分继续保持开放。':'目前还没有可面向客户阅读的方法解释。'),
-      stage(locale,'COMBINED_READING','NOT_STARTED','Combined reading','综合读取','Cross-method composition has not been performed in this phase.','本阶段尚未进行跨方法综合。'),
+      stage(locale,'COMBINED_READING',combinedReady?'READABLE':'NOT_STARTED','Cross-perspective reading','跨视角读取',combinedReady?'A governed cross-perspective reading is available after the distinct method readings.':'A governed cross-perspective reading appears only when at least two accepted method readings are eligible.',combinedReady?'各方法完整读取之后，已经形成受治理的跨视角读取。':'只有至少两个已获准的方法读取符合条件时，才会形成受治理的跨视角读取。'),
       stage(locale,'CURRENT_REALITY',(fullZiweiReady||hasExplicitBaziTiming)?'READABLE':'NOT_STARTED','Current timing context','当前时间层',fullZiweiReady?'An explicit, editable target date/time/timezone was used for the current Da Xian and annual layers. This is symbolic timing context, not lived-reality evidence.':hasExplicitBaziTiming?'An explicit target date, time and timezone were used for the BaZi Da Yun / Liu Nian timing layer. This is symbolic timing context, not lived-reality evidence.':'No current method timing context has been established here.',fullZiweiReady?'已使用明确且可修改的目标日期、时间与时区建立当前大限及流年层；这是象征性时间上下文，不是现实经历证据。':hasExplicitBaziTiming?'已使用明确的目标日期、时间与时区建立八字大运／流年时间层；这是象征性时间上下文，不是现实经历证据。':'目前尚未建立当前方法的时间上下文。'),
       stage(locale,'FULL_REPORT',(fullZiweiReady||hasPublishableNativeReport)?'READABLE':'NOT_STARTED','Full report','完整报告',fullZiweiReady?'The governed Zi Wei Full Production report, interactive twelve-palace surface and topic readings are available in this result.':hasPublishableNativeReport?'A governed method-native Full Production report is available in this result.':'The full Personal Reading Report has not been composed yet.',fullZiweiReady?'本次结果已经包含受治理的紫微完整报告、十二宫互动结构与主题读取。':hasPublishableNativeReport?'本次结果已经包含受治理的方法原生 Full Production 完整报告。':'完整 Personal Reading Report 尚未生成。')
     ],
@@ -232,7 +235,7 @@ function buildReadingView({methods,selectedCount,calculationCount,locale,ziweiFu
       ziweiLiveIndividualHumanReviewClaimed:false,
       persistence:false
     },
-    combinedReading:{state:'NOT_STARTED',crossMethodCompositionPerformed:false}
+    combinedReading:combinedReady?combinedReading:freeze({state:'NOT_STARTED',crossMethodCompositionPerformed:false})
   });
 }
 
@@ -313,7 +316,13 @@ export async function onRequestPost(context){
   const hasExplicitBaziTiming=methodNativeReading.BZR?.temporalContext?.state==='EXPLICIT';
   const ziweiFullProduction=results.find(result=>result.ok&&result.ziweiFullProduction)?.ziweiFullProduction||null;
   const singleZiwei=selected.length===1&&selected[0]==='ziwei'&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
-  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,ziweiFullProduction,singleZiwei,hasPublishableNativeReport,hasExplicitBaziTiming});
+  let combinedReading=null;
+  if(selected.length>=2&&selected.length<=5){
+    const crossInputs=results.map(result=>result?.crossReadingMethod||result?.readingMethod).filter(method=>method?.state==='READY_TO_READ'&&method?.technical?.acceptanceBasis==='ADMITTED_COMPOSITION_RULESET');
+    if(crossInputs.length>=2){try{combinedReading=await maybeBuildProductionCombinedReading({acceptedMethodReadings:crossInputs,customerIntent:body?.intent||null,confirmedXpf:null,hdrInternalReading:null})}catch{combinedReading=null}}
+  }
+  // Cross production compatibility witness: buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading})
+  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading,ziweiFullProduction,singleZiwei,hasPublishableNativeReport,hasExplicitBaziTiming});
   const nativeFullReportStage=reading.map.find(item=>item.stageId==='FULL_REPORT'); void nativeFullReportStage;
   let singleMethodReading=null;
   const hasSingleNativeReport=selected.length===1&&hasPublishableNativeReport;
@@ -325,8 +334,9 @@ export async function onRequestPost(context){
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
   const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||''});
+  const crossPerspectiveReading=combinedReading;
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading});
   return json({
     ok:true,
     view,
