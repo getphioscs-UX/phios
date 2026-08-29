@@ -22,9 +22,24 @@ assert.equal(ia.work,'NUM-CX-W5');assert.equal(ia.status,'CHART_FIRST_PRIMARY_CU
 assert.equal(spec.work,'NUM-CX-W6');assert.equal(spec.status,'PRIMARY_CUSTOMER_CHART_SYSTEM');for(const id of ['CORE_NUMBER_MAP','WHOLE_CHART_PATTERN','NAME_LAYER_MAP','LONG_CYCLE_TIMELINE','CURRENT_TIMING','ENERGY_PATTERN_MAP','RELATIONSHIP_OVERLAY'])assert(spec.charts.some(x=>x.chartId===id),id);assert(spec.charts.every(x=>x.meaningCreated===false));
 for(const key of ['priorityNarrative','readingIA','chartSpecVersion'])assert(contract.chartBlocks.includes(key),key);
 
-// W7 client surface ownership
-assert(html.includes('/assets/customer-ui/surfaces/numerology-reading.css'));assert(html.includes('data-cx-numerology-reading'));assert(client.includes("../numerology/reading-renderer.js"));assert(client.includes('renderNumerologyReading(view)'));assert(smrClient.includes('numerologyChartFirst'));assert(css.includes('Chart-first Numerology primary customer surface'));
-assert(!client.includes('NUMEROLOGY · PRIMARY DATA BRIDGE'),'W0-W3 bridge prose must not remain primary presentation copy.');
+// W7 client surface ownership. PPR-R3 moves NUM specialist loading behind the governed specialist renderer host.
+const pprR3NumRenderer=t('assets/customer-ui/js/specialists/num/product-renderer.js');
+const pprR3Registry=t('assets/customer-ui/js/personal-products/specialist-renderer-registry.js');
+const pprR3Active=pprR3Registry.includes("rendererId:'PPR_R3_NUM_PRODUCT_V1'")&&pprR3Registry.includes("module:'/assets/customer-ui/js/specialists/num/product-renderer.js'");
+if(pprR3Active){
+ assert(pprR3NumRenderer.includes("../../numerology/reading-renderer.js"));
+ assert(pprR3NumRenderer.includes("/assets/customer-ui/surfaces/numerology-reading.css"));
+ assert(pprR3NumRenderer.includes('buildNumerologyReadingHtml'));
+ assert(pprR3NumRenderer.includes('installNumerologyReadingInteractions'));
+ assert(pprR3NumRenderer.includes("status:'RENDERED'"));
+}else{
+ assert(html.includes('/assets/customer-ui/surfaces/numerology-reading.css'));
+ assert(html.includes('data-cx-numerology-reading'));
+ assert(client.includes("../numerology/reading-renderer.js"));
+ assert(client.includes('renderNumerologyReading(view)'));
+}
+if(!pprR3Active)assert(smrClient.includes('numerologyChartFirst'));assert(css.includes('Chart-first Numerology primary customer surface'));
+if(!pprR3Active)assert(!client.includes('NUMEROLOGY · PRIMARY DATA BRIDGE'),'W0-W3 bridge prose must not remain primary presentation copy.');
 
 async function run(body){const response=await executeCustomerPersonalReality({request:new Request('https://phios.local/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env:{}});const payload=await response.json();assert.equal(response.status,200,JSON.stringify(payload));assert.equal(payload.ok,true);return payload.view}
 const minimal=await run({birthDate:'1990-01-15',birthTimeUnknown:true,methods:['numeric'],consent:true,locale:'zh-Hans'});
@@ -33,8 +48,21 @@ for(const view of [minimal,full]){const num=view.numerology;assert(num);assert.e
 assert.equal(minimal.numerology.chartModel.nameLayerMap,null);assert.equal(minimal.numerology.chartModel.relationshipOverlay,null);
 assert(full.numerology.chartModel.nameLayerMap);assert(full.numerology.chartModel.secondaryChartMap);assert(full.numerology.chartModel.energyPatternMap.patterns.length);assert(full.numerology.chartModel.relationshipOverlay);
 
-// W8 NUM-specific SMR successor is active on the primary single-method route.
-assert(full.singleMethodReading,'NUM-only primary request must have a single-method reading.');assert.equal(full.singleMethodReading.methodId,'NUM');assert.equal(full.singleMethodReading.numChartFirst.customerReadingRef,'PHI-OS-NUM-CX-INTEGRATED-READING-PUBLIC-v1.0.0');assert.equal(full.singleMethodReading.layout.presentation,'CHART_FIRST');assert.equal(full.singleMethodReading.governance.predecessorGenericNumSmrSuppressedOnPrimarySurface,true);
+// W8 successor: predecessor used a NUM-specific SMR projection; PPR-R3 mounts the method-native product behind the approved specialist renderer instead.
+if(pprR3Active){
+ assert(full.productRoute,'NUM-only PPR-R3 request must have a specialist product route.');
+ assert.equal(full.productRoute.mode,'SINGLE_METHOD');
+ assert.equal(full.productRoute.methodId,'NUM');
+ assert.equal(full.productRoute.primaryProduct?.productType,'NUMEROLOGY_PROFESSIONAL_READING');
+ assert.equal(full.productRoute.primaryProduct?.specialistRenderer?.rendererId,'PPR_R3_NUM_PRODUCT_V1');
+ assert.equal(full.productRoute.primaryProduct?.sourceProduct?.schemaVersion,'PHI-OS-NUM-CX-CUSTOMER-READING-ENVELOPE-v1.0.0');
+}else{
+ assert(full.singleMethodReading,'NUM-only primary request must have a single-method reading.');
+ assert.equal(full.singleMethodReading.methodId,'NUM');
+ assert.equal(full.singleMethodReading.numChartFirst.customerReadingRef,'PHI-OS-NUM-CX-INTEGRATED-READING-PUBLIC-v1.0.0');
+ assert.equal(full.singleMethodReading.layout.presentation,'CHART_FIRST');
+ assert.equal(full.singleMethodReading.governance.predecessorGenericNumSmrSuppressedOnPrimarySurface,true);
+}
 
 // W7 rendered DOM contract, evaluated from the same public envelope.
 globalThis.document={documentElement:{lang:'zh-Hans'}};

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import {buildMethodProductEnvelope,section,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from '../functions/personal-reality-product/product-envelope-core.js';
+import {buildMethodProductEnvelope,section,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from '../functions/personal-reality-product/adapters/product-envelope-core.js';
 import {PPR_R3_SPECIALIST_RENDERER_REGISTRY,PPR_R3_SPECIALIST_RENDERER_ROOT,resolveSpecialistRendererDescriptor,isApprovedSpecialistModulePath} from '../assets/customer-ui/js/personal-products/specialist-renderer-registry.js';
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8')),t=p=>fs.readFileSync(p,'utf8'),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const commit='9b0eaeff8f88a1a78f5bc9395a88f28c4ceecb9c';

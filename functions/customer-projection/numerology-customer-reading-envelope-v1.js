@@ -1,5 +1,6 @@
 import {numerologyPublicLabel} from './numerology-public-labels-v1.js';
 import {buildNumerologyPriorityNarrative} from './numerology-priority-narrative-v1.js';
+import {buildNumerologyRadialOverview} from './numerology-radial-overview-v1.js';
 const SCHEMA='PHI-OS-NUM-CX-CUSTOMER-READING-ENVELOPE-v1.0.0';
 const CHART_SCHEMA='PHI-OS-NUM-CX-CHART-MODEL-v1.0.0';
 const CORE_ROLES=new Set(['LIFE_PATH','BIRTHDAY_NUMBER','ATTITUDE_NUMBER']);
@@ -64,7 +65,9 @@ export function buildNumerologyChartModel({integratedReading,locale='en'}={}){
  const snapshot=arr(integratedReading.sections?.snapshot);const expansion=integratedReading.sections?.expansion;const depth=integratedReading.sections?.depth;
  const base={schemaVersion:CHART_SCHEMA,chartSpecVersion:'PHI-OS-NUM-CX-CHART-SPEC-v1.0.0',methodId:'NUM',locale,overviewTiles:snapshot.filter(x=>CORE_ROLES.has(x.role)).map(x=>snapshotNode(x,locale)),coreNumberMap:{nodes:snapshot.map(x=>snapshotNode(x,locale)),relations:arr(integratedReading.sections?.relationships).map(relationshipEdge)},wholeChartPattern:buildPatternBoard(expansion),nameLayerMap:buildNameLayer(expansion,locale),secondaryChartMap:buildSecondaryChart(depth),cycleTimeline:buildCycleTimeline(integratedReading,locale),timingBand:buildTimingBand(integratedReading,locale),energyPatternMap:buildEnergyPatternMap(integratedReading),relationshipOverlay:buildRelationshipOverlay(integratedReading),priorityThemes:arr(integratedReading.sections?.standoutThemes).slice(0,5).map(x=>freeze({themeCode:x.themeCode,priority:x.priority,title:x.title,summary:x.summary,evidence:arr(x.evidence)}))};
  const priorityNarrative=buildNumerologyPriorityNarrative({integratedReading,chartModel:base,locale,limit:5});
- return freeze({...base,priorityNarrative,readingIA:buildReadingIA(base),boundaries:{chartCreatesMeaning:false,chartChangesCalculation:false,schoolMergeCreated:false,compatibilityScoreCreated:false,fortunePredictionCreated:false}})
+ const enriched={...base,priorityNarrative};
+ const radialOverview=buildNumerologyRadialOverview({chartModel:enriched,integratedReading:projectPublicIntegratedReading(integratedReading,{locale}),locale});
+ return freeze({...enriched,radialOverview,readingIA:buildReadingIA(enriched),boundaries:{chartCreatesMeaning:false,chartChangesCalculation:false,schoolMergeCreated:false,compatibilityScoreCreated:false,fortunePredictionCreated:false}})
 }
 export function buildNumerologyCustomerReadingEnvelope({canonicalProjection,meaningPayload,expansionInput={},locale='en'}={}){
  if(canonicalProjection?.method?.publicMethodCode!=='NUMEROLOGY_PROJECTION')fail('NUM_CX_NUMEROLOGY_PROJECTION_REQUIRED');
