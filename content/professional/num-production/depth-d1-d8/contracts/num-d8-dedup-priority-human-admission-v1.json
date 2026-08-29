@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-NUM-D8-DEDUP-PRIORITY-HUMAN-ADMISSION-v1.0.0",
   "workCode": "NUM-D8",
   "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
-  "status": "HUMAN_REVIEW_PENDING",
+  "status": "HUMAN_ADMITTED_FULL_PRODUCTION_ACTIVE",
   "priorityOrder": [
     "CORE_NAME_ROLE",
     "CORE_DATE_ROLE",
@@ -33,15 +33,20 @@
   "humanAdmission": {
     "claimBatchCount": 121,
     "compositionCaseCount": 24,
-    "runtimeUseAllowed": false,
-    "claimAccepted": 0,
-    "claimPending": 121,
-    "compositionAccepted": 0,
-    "compositionPending": 24
+    "runtimeUseAllowed": true,
+    "claimAccepted": 121,
+    "claimPending": 0,
+    "compositionAccepted": 24,
+    "compositionPending": 0
   },
   "claimBatchCount": 121,
   "requiredHumanAdmission": {
     "sourceSemanticClaims": 121,
     "compositionCases": 24
+  },
+  "fullProduction": {
+    "currentMainCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+    "defaultCustomerCutoverAllowed": true,
+    "publicationState": "CUSTOMER_PUBLISHABLE"
   }
 }

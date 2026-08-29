@@ -1,4 +1,4 @@
-import {freezeDeep} from './num-depth-rules.js';
+import {freezeDeep,NUM_DEPTH_PRODUCTION_ACTIVE} from './num-depth-rules.js';
 export const NUM_D8_COMPOSER_SCHEMA='PHI-OS-NUM-D8-DEPTH-COMPOSITION-CANDIDATE-v1.1.0';
 const PRIORITY={NAME_CORE:100,DATE_CORE:95,ROLE_RELATIONSHIP:88,LONG_CYCLE:78,CURRENT_TIMING:74,SECONDARY:68,ENERGY_PATTERN:62,RAW_EVIDENCE:10};
 const stable=x=>JSON.stringify(x,Object.keys(x||{}).sort());
@@ -12,6 +12,6 @@ export function composeNumDepthCandidate({nameRoleMeanings=[],hiddenPassionMeani
  if(relationship)for(const r of relationship.roleComparisons||[])if(r.availability!=='MISSING_INPUT')add('ROLE_RELATIONSHIP',`REL:${r.role}:${r.leftValue}:${r.rightValue}`,PRIORITY.ROLE_RELATIONSHIP,r,{workCode:'NUM-D7',role:r.role,leftValue:r.leftValue,rightValue:r.rightValue});
  const byKey=new Map();for(const u of units){if(!byKey.has(u.key)){byKey.set(u.key,{family:u.family,key:u.key,priority:u.priority,payload:u.payload,evidenceCount:1,evidenceRefs:[u.evidenceRef]});continue;}const row=byKey.get(u.key);row.evidenceCount++;const sig=stable(u.evidenceRef);if(!row.evidenceRefs.some(x=>stable(x)===sig))row.evidenceRefs.push(u.evidenceRef);}
  const deduped=[...byKey.values()].sort((a,b)=>b.priority-a.priority||a.key.localeCompare(b.key));const lineagePreserved=deduped.every(x=>x.evidenceRefs.length>=1&&x.evidenceRefs.length<=x.evidenceCount);
- return freezeDeep({schemaVersion:NUM_D8_COMPOSER_SCHEMA,workCode:'NUM-D8',publicationState:'HUMAN_REVIEW_CANDIDATE',customerPublishable:false,runtimeUseAllowed:false,sections:{priorityUnits:deduped,secondaryChart,alternativeTiming,relationship},deduplication:{before:units.length,after:deduped.length,duplicateCount:units.length-deduped.length,sameValueDifferentRolePreserved:true,canonicalEnergyAliasDedup:true,sourceLineagePreserved:lineagePreserved},boundaries:{unadmittedClaimsOnDefaultCustomerSurface:false,fortunePredictionCreated:false,compatibilityScoreCreated:false,schoolSilentMergeCreated:false}});
+ return freezeDeep({schemaVersion:NUM_D8_COMPOSER_SCHEMA,workCode:'NUM-D8',publicationState:'CUSTOMER_PUBLISHABLE',customerPublishable:NUM_DEPTH_PRODUCTION_ACTIVE,runtimeUseAllowed:NUM_DEPTH_PRODUCTION_ACTIVE,sections:{priorityUnits:deduped,secondaryChart,alternativeTiming,relationship},deduplication:{before:units.length,after:deduped.length,duplicateCount:units.length-deduped.length,sameValueDifferentRolePreserved:true,canonicalEnergyAliasDedup:true,sourceLineagePreserved:lineagePreserved},boundaries:{unadmittedClaimsOnDefaultCustomerSurface:false,fortunePredictionCreated:false,compatibilityScoreCreated:false,schoolSilentMergeCreated:false}});
 }
 export default Object.freeze({composeNumDepthCandidate});
