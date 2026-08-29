@@ -1,0 +1,3 @@
+import {AST_R2_METHOD_SCOPED_ADMISSION} from '../ast-full-production/ast-r2-production-admission-authority.js';
+const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff'};
+export async function onRequestGet(context){const commitSha=String(context?.env?.CF_PAGES_COMMIT_SHA||context?.env?.PHIOS_DEPLOYED_SHA||'').trim()||null;return new Response(JSON.stringify({ok:true,method:'AST',deployment:{commitSha},admission:{methodFlag:AST_R2_METHOD_SCOPED_ADMISSION.methodFlags?.AST===true,customerCutoverAllowed:AST_R2_METHOD_SCOPED_ADMISSION.customerCutoverAllowed===true,status:AST_R2_METHOD_SCOPED_ADMISSION.status}}),{status:200,headers:H});}

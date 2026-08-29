@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import {buildAstCustomerWorkspaceCandidate} from '../../../functions/ast-full-production/ast-customer-reading-production.js';
+import {AST_SURFACE_CUTOVER_GATE} from '../../../functions/ast-full-production/ast-customer-reading-authority-v2.js';
 
 export const BASELINE_COMMIT='343773fd6fb61fbf1b37aa861537d7e8f091ec24';
 export const R3_REFERENCE_PATH='content/professional/ast-full-production/fixtures/ast-fp-r3-independent-reference-v1.json';
@@ -64,7 +65,7 @@ export function housePlacementFingerprint(referenceCase,houseSystem){
 
 export async function buildSurfaceBundle({referenceCase,houseSystem,intent,locale,partialSpeed=false}){
   const projection=projectionFromReference(referenceCase,houseSystem,{partialSpeed});
-  const bundle=await buildAstCustomerWorkspaceCandidate({canonicalProjection:projection,rawIntent:intent.rawIntent,locale,sourceMainCommit:BASELINE_COMMIT});
+  const bundle=await buildAstCustomerWorkspaceCandidate({canonicalProjection:projection,rawIntent:intent.rawIntent,locale,sourceMainCommit:BASELINE_COMMIT,cutoverGateOverride:AST_SURFACE_CUTOVER_GATE});
   return {projection,bundle};
 }
 

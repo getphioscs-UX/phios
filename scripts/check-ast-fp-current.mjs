@@ -15,7 +15,7 @@ const resolveHistoricalPath=p=>archivedLegacyPath.get(p)||p;
 const w01=loadW01();validateW01(w01);
 assert.equal(current.baselineCommit,'2211d9bd1cdecb2d238f4c05d1f58345efd11804');
 assert.equal(current.historicalBaselineRewritten,false);
-assert.equal(current.currentReconciledMainCommit,'343773fd6fb61fbf1b37aa861537d7e8f091ec24');
+assert.equal(current.currentReconciledMainCommit,'a06506cbbc9bf0bdd11ff1c740f7be65276d84d9');
 assert.equal(current.packageValidationPolicy?.mode,'AST_SCRIPT_PROJECTION');
 assert.equal(current.protectedFileReconciliation.length,w01.baseline.protectedFiles.length);
 for(const row of current.protectedFileReconciliation){

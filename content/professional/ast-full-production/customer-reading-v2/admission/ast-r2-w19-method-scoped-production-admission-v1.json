@@ -1,15 +1,15 @@
 {
   "schemaVersion": "PHI-OS-AST-R2-W19-METHOD-SCOPED-PRODUCTION-ADMISSION-v1.0.0",
   "workCode": "R2-W19",
-  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
-  "status": "METHOD_SCOPED_GATE_READY_BLOCKED_BY_R3",
+  "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status": "AST_METHOD_SCOPED_PRODUCTION_ADMITTED",
   "methodFlags": {
-    "AST": false
+    "AST": true
   },
   "prerequisites": {
     "w17MachineAcceptanceSatisfied": true,
     "w18FinalCustomerHumanAcceptanceSatisfied": true,
-    "r3IndependentEphemerisCertificationSatisfied": false
+    "r3IndependentEphemerisCertificationSatisfied": true
   },
   "scope": {
     "otherMethodProductionAdmissionRequired": false,
@@ -21,12 +21,13 @@
     "legacySmr48MayBePromoted": false,
     "astMayCutOverIndependentlyWhenItsOwnPrerequisitesPass": true
   },
-  "customerRuntimeUseAllowed": false,
-  "customerPublicationAllowed": false,
-  "productionAllowed": false,
-  "customerCutoverAllowed": false,
-  "blockers": [
-    "AST-FP-R3_INDEPENDENT_EPHEMERIS_RUNTIME_CERTIFICATION"
-  ],
-  "humanAdmissionRef": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w18-final-customer-human-admission-v1.json"
+  "customerRuntimeUseAllowed": true,
+  "customerPublicationAllowed": true,
+  "productionAllowed": true,
+  "customerCutoverAllowed": true,
+  "blockers": [],
+  "humanAdmissionRef": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w18-final-customer-human-admission-v1.json",
+  "r3CertificationFreezeRef": "content/professional/ast-full-production/freeze/ast-fp-r3-independent-calculation-certification-freeze-v1.json",
+  "admittedAt": "2026-08-29T08:57:00.000Z",
+  "admissionBasis": "AST_OWNED_GATES_ONLY"
 }

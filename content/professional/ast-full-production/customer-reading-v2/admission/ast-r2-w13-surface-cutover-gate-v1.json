@@ -1,13 +1,13 @@
 {
   "schemaVersion": "PHI-OS-AST-R2-W13-CUSTOMER-SURFACE-CUTOVER-GATE-v1.0.0",
   "workCode": "R2-W13",
-  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
-  "status": "ENGINEERING_COMPLETE_FINAL_HUMAN_ACCEPTED_BLOCKED_BY_R3_CERTIFICATION",
+  "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status": "SUPERSEDED_BY_R2_W19_METHOD_SCOPED_ADMISSION",
   "requirements": {
     "r4aHumanAdmissionSatisfied": true,
     "r4aAccepted": 21,
     "r5FinalCustomerSurfaceHumanAcceptanceSatisfied": true,
-    "r3IndependentEphemerisCertificationSatisfied": false,
+    "r3IndependentEphemerisCertificationSatisfied": true,
     "w9W12EngineeringSatisfied": true,
     "w14IntentResponsiveEngineeringSatisfied": true,
     "w15AsttTimingIntegrationEngineeringSatisfied": true,
@@ -19,5 +19,7 @@
   "productionAllowed": false,
   "customerCutoverAllowed": false,
   "activationRule": "The exact final R2 customer report/workspace bundle is human accepted. Set surfaceCutoverActive/customerCutoverAllowed true only after AST-FP-R3 independent calculation certification is PASS and R2-W19 admits AST.",
-  "humanAcceptanceRef": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w18-final-customer-human-admission-v1.json"
+  "humanAcceptanceRef": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w18-final-customer-human-admission-v1.json",
+  "successorRef": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w19-method-scoped-production-admission-v1.json",
+  "note": "Static R2-W13 historical gate remains closed. Active customer authority is R2-W19, which is AST:true after W17/W18/R3."
 }

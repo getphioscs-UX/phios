@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-AST-R2-W20-DEPLOYMENT-LIVE-SMOKE-FREEZE-CONTRACT-v1.0.0",
   "workCode": "R2-W20",
-  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
   "requiredBeforeFreeze": {
     "w17MachineAccepted100Percent": true,
     "w18FinalCustomerHumanAccepted": true,
@@ -22,13 +22,17 @@
   "liveSmokeEnvironment": {
     "baseUrl": "PHIOS_AST_SMOKE_BASE_URL",
     "expectedCommit": "PHIOS_AST_SMOKE_EXPECTED_COMMIT",
-    "placeRefForEndToEnd": "PHIOS_AST_SMOKE_PLACE_REF"
+    "placeRefForEndToEnd": "PHIOS_AST_SMOKE_PLACE_REF",
+    "evidenceOut": "PHIOS_AST_SMOKE_EVIDENCE_OUT",
+    "deploymentStatusEndpoint": "/api/ast-full-production-status"
   },
   "rules": {
     "currentProductionSmokeBeforeDeployMayCount": false,
     "localPreviewMayCountAsCloudflareSmoke": false,
     "missingSmokeMayBeWaived": false,
     "freezeMayBeDeclaredBeforeExactDeployedCommitIsKnown": false,
-    "rollbackMustDisableOnlyAstMethodScopedFlag": true
+    "rollbackMustDisableOnlyAstMethodScopedFlag": true,
+    "deployedCommitMustComeFromServerEnvironment": true,
+    "finalFreezeMustConsumePassedLiveSmokeEvidence": true
   }
 }

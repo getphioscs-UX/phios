@@ -1,8 +1,8 @@
 {
   "schemaVersion": "PHI-OS-AST-R2-W20-FULL-PRODUCTION-FREEZE-v1.0.0",
   "workCode": "R2-W20",
-  "baselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
-  "status": "DEPLOYMENT_READY_HUMAN_ACCEPTED_GATED_BY_R3_W19_AND_LIVE_SMOKE",
+  "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+  "status": "AST_ADMITTED_AWAITING_EXACT_DEPLOYMENT_AND_LIVE_SMOKE",
   "methodId": "AST",
   "engineering": {
     "canonicalRouteIntegrated": true,
@@ -15,8 +15,8 @@
   "releaseGates": {
     "w17MachineAccepted100Percent": true,
     "w18FinalCustomerHumanAccepted": true,
-    "w19AstMethodScopedCutoverAllowed": false,
-    "r3IndependentEphemerisCertification": false,
+    "w19AstMethodScopedCutoverAllowed": true,
+    "r3IndependentEphemerisCertification": true,
     "liveCanonicalHtmlSmoke": false,
     "liveCustomerAssetsSmoke": false,
     "liveApiConsentBoundarySmoke": false,
@@ -29,8 +29,12 @@
   "astFullProductionFrozen": false,
   "customerCutoverAllowed": false,
   "blockers": [
-    "AST-FP-R3_INDEPENDENT_EPHEMERIS_RUNTIME_CERTIFICATION",
-    "R2-W19_AST_METHOD_SCOPED_ADMISSION",
     "POST_DEPLOY_CLOUDFLARE_LIVE_SMOKE"
-  ]
+  ],
+  "predeployAdmission": {
+    "astMethodFlag": true,
+    "r3CertificationFrozen": true,
+    "w18FinalCustomerHumanAccepted": true,
+    "codeReadyForExactDeployment": true
+  }
 }

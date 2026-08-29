@@ -1,9 +1,9 @@
 {
   "schemaVersion": "PHI-OS-AST-FP-R3-INDEPENDENT-CALCULATION-CERTIFICATION-v1.0.0",
   "workCode": "AST-FP-R3",
-  "sourceMainCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "sourceMainCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
   "predecessor": "content/professional/ast-full-production/acceptance/ast-fp-r2-human-admission-acceptance-v1.json",
-  "status": "REFERENCE_AND_REMEDIATION_READY_RUNTIME_CERTIFICATION_GATE_PENDING",
+  "status": "INDEPENDENT_EPHEMERIS_RUNTIME_CERTIFIED_FROZEN",
   "evidence": {
     "authorityRef": "content/professional/ast-full-production/authority/ast-fp-r3-independent-reference-authority-v1.json",
     "authorityLfNormalizedSha256": "89bb9b714c910d3d50999d956d5dc8efd8e3648de233e8b45f316975d1a94410",
@@ -19,7 +19,10 @@
     "newEdgeCases": 2,
     "core10ReferenceRows": 100,
     "trueNodeReferenceRows": 20,
-    "houseSystems": ["PLACIDUS_V1", "WHOLE_SIGN_V1"],
+    "houseSystems": [
+      "PLACIDUS_V1",
+      "WHOLE_SIGN_V1"
+    ],
     "naturalMajorAspectCounts": {
       "CONJUNCTION": 33,
       "SEXTILE": 30,
@@ -59,13 +62,19 @@
   "runtimeCertificationGate": {
     "command": "npm run check:ast-fp-r3",
     "requiredResult": "PASS",
-    "currentExecutionState": "ENVIRONMENT_DEPENDENCY_BLOCKED",
-    "currentError": "ERR_MODULE_NOT_FOUND: astronomy-engine",
+    "currentExecutionState": "PASS",
+    "currentError": null,
     "codeAssertionFailureObserved": false,
-    "mayBePromotedToCertifiedWithoutRuntimePass": false
+    "mayBePromotedToCertifiedWithoutRuntimePass": false,
+    "certificationEvidenceOrigin": "USER_ATTESTED_DIRECT_COMMAND_PASS",
+    "certificationAttestedAt": "2026-08-29T08:57:00.000Z",
+    "certificationBaselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
+    "attestedCommand": "npm run check:ast-fp-r3",
+    "locallyRecapturedInThisArtifactBuild": false,
+    "localRecaptureReason": "Aligned ZIP does not include installed node_modules; this freeze records the user-supplied direct PASS without fabricating a second console run."
   },
   "boundaries": {
-    "independentEphemerisAccuracyCertificationEstablished": false,
+    "independentEphemerisAccuracyCertificationEstablished": true,
     "sourceUseBasisEstablished": false,
     "wholeChartSynthesisAcceptanceEstablished": false,
     "professionalPlatformParityEstablished": false,
@@ -74,5 +83,5 @@
     "productionAllowed": false,
     "deploymentPerformed": false
   },
-  "next": "Run npm run check:ast-fp-r3 in a dependency-complete workspace. Only after PASS may R3 be frozen as independently certified and AST-FP-R4 begin."
+  "next": "R3 is certified. Customer production remains governed separately by R2-W17 machine acceptance, R2-W18 final customer human acceptance, R2-W19 method-scoped admission, and R2-W20 exact deployed-commit live smoke."
 }
