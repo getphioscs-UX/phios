@@ -2,8 +2,8 @@
   "schemaVersion": "PHI-OS-SMR-R2-PRIORITY-RULE-REGISTRY-v1.0.0",
   "work": "R2-W3",
   "objective": "Resolve customer reading priority deterministically from admitted method claims without renderer judgment or a second method runtime.",
-  "methodNativePriorityAuthorityRef": "functions/single-method-reading/smr-registry-v1.js#SMR_METHOD_PRIORITY_REGISTRY",
-  "domainAuthorityRef": "functions/single-method-reading/smr-registry-v1.js#SMR_DOMAIN_REGISTRY",
+  "methodNativePriorityAuthorityRef": "functions/single-method-reading-r2/smr-r2-native-authority.js#SMR_METHOD_PRIORITY_REGISTRY",
+  "domainAuthorityRef": "functions/single-method-reading-r2/smr-r2-native-authority.js#SMR_DOMAIN_REGISTRY",
   "featureWeights": {
     "upstreamPriority": {
       "PRIMARY": 34,
@@ -93,5 +93,10 @@
     "questionRelevanceMustBeDeterministic": true,
     "priorityReasonRefsRequired": true,
     "tiesResolveByClaimId": true
-  }
+  },
+  "predecessorAuthorityRefs": [
+    "functions/single-method-reading/smr-registry-v1.js#SMR_METHOD_PRIORITY_REGISTRY",
+    "functions/single-method-reading/smr-registry-v1.js#SMR_DOMAIN_REGISTRY"
+  ],
+  "predecessorState": "HISTORICAL_FROZEN_NOT_ACTIVE_RUNTIME"
 }

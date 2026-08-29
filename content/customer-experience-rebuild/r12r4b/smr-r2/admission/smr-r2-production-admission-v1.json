@@ -1,19 +1,26 @@
 {
   "schemaVersion": "PHI-OS-SMR-R2-PRODUCTION-ADMISSION-v1.0.0",
-  "baselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "baselineCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
   "workCode": "R2-W20",
-  "status": "BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE",
+  "status": "PRODUCTION",
   "methods": {
-    "AST": {"targetState":"AST_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
-    "BZR": {"targetState":"BZR_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
-    "ZWR": {"targetState":"ZWR_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
-    "NUM": {"targetState":"NUM_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
-    "ECR": {"targetState":"ECR_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"}
+    "AST": {"targetState":"AST_SINGLE_METHOD_READING_R2","state":"PRODUCTION"},
+    "BZR": {"targetState":"BZR_SINGLE_METHOD_READING_R2","state":"PRODUCTION"},
+    "ZWR": {"targetState":"ZWR_SINGLE_METHOD_READING_R2","state":"PRODUCTION"},
+    "NUM": {"targetState":"NUM_SINGLE_METHOD_READING_R2","state":"PRODUCTION"},
+    "ECR": {"targetState":"ECR_SINGLE_METHOD_READING_R2","state":"PRODUCTION"}
   },
-  "humanReviewedProductComposition": false,
+  "humanReviewPrerequisites": {
+    "benchmark5of5": "content/customer-experience-rebuild/r12r4b/smr-r2/admission/smr-r2-w17-five-benchmark-human-admission-v1.json",
+    "integration20of20": "content/customer-experience-rebuild/r12r4b/smr-r2/admission/smr-r2-w19-product-integration-human-admission-v1.json"
+  },
+  "machinePrerequisites": {
+    "structuralDiversity40of40": "content/customer-experience-rebuild/r12r4b/smr-r2/campaign/smr-r2-structural-diversity-campaign-v1.json"
+  },
+  "humanReviewedProductComposition": true,
   "liveCustomerIndividuallyHumanReviewed": false,
-  "productionAllowed": false,
-  "customerCutoverAllowed": false,
+  "productionAllowed": true,
+  "customerCutoverAllowed": true,
   "singleApi": "/api/customer-personal-reality",
   "methodSpecificApiCreated": false,
   "targetViewContract": {
@@ -21,7 +28,16 @@
     "multiSelect": "view.singleMethodReading = null",
     "combinedReadingBeforeCrossAdmission": "NOT_STARTED"
   },
-  "currentApiMutationApplied": false,
+  "currentApiMutationApplied": true,
+  "legacyActiveProductionPathRetired": true,
   "oldSmrHardReplacementApplied": false,
-  "blocker": "R2_W19_20_OF_20_HUMAN_ACCEPTANCE_REQUIRED"
+  "legacyPhysicalCleanup": "DEFERRED_TO_POST_CUTOVER_CANONICAL_RENAME_AND_ABSENCE_GATE",
+  "blocker": null,
+  "governance": {
+    "rawProjectionCreatesCustomerConclusion": false,
+    "rendererCreatesMeaning": false,
+    "methodCalculationRebuilt": false,
+    "crossMethodCompositionPerformed": false,
+    "singleMethodOnlyUntilCrossAdmission": true
+  }
 }

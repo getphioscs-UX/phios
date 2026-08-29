@@ -1,4 +1,4 @@
-import {SMR_DOMAIN_REGISTRY,SMR_METHOD_PRIORITY_REGISTRY} from '../single-method-reading/smr-registry-v1.js';
+import {SMR_DOMAIN_REGISTRY,SMR_METHOD_PRIORITY_REGISTRY} from './smr-r2-native-authority.js';
 
 export const SMR_R2_PRIORITY_RULES=Object.freeze({
   schemaVersion:'PHI-OS-SMR-R2-PRIORITY-RULE-REGISTRY-v1.0.0',
