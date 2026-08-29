@@ -3,7 +3,7 @@ const list=value=>Array.isArray(value)?value:[];
 export const METHOD_NATIVE_CUSTOMER_READING_SCHEMA='PHI-OS-METHOD-NATIVE-CUSTOMER-READING-v1.0.0';
 export const METHOD_NATIVE_PRODUCT_VERSION='PPR-C1-v1.0.0';
 
-export function buildMethodNativeCustomerReading({methodId,productVersion=METHOD_NATIVE_PRODUCT_VERSION,summary,structuralModel=null,readingSections=[],temporalContext={},openVerdicts=[],evidence={},publicationDecision={},governance={}}={}){
+export function buildMethodNativeCustomerReading({methodId,productVersion=METHOD_NATIVE_PRODUCT_VERSION,summary,structuralModel=null,readingSections=[],temporalContext={},openVerdicts=[],evidence={},publicationDecision={},professionalModules={},governance={}}={}){
  if(!['BZR','NUM','ZWR','AST','ECR'].includes(methodId))throw Object.assign(new Error('PPR_C1_METHOD_NATIVE_METHOD_ID_INVALID'),{code:'PPR_C1_METHOD_NATIVE_METHOD_ID_INVALID'});
  if(!summary||typeof summary!=='object')throw Object.assign(new Error('PPR_C1_METHOD_NATIVE_SUMMARY_REQUIRED'),{code:'PPR_C1_METHOD_NATIVE_SUMMARY_REQUIRED'});
  return freeze({
@@ -16,6 +16,7 @@ export function buildMethodNativeCustomerReading({methodId,productVersion=METHOD
   openVerdicts:freeze(list(openVerdicts)),
   evidence:freeze({...evidence}),
   publicationDecision:freeze({...publicationDecision}),
+  professionalModules:freeze({...professionalModules}),
   governance:freeze({
    createsSecondInterpretationRuntime:false,
    methodCalculationRebuilt:false,

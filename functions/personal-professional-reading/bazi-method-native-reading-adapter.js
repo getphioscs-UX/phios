@@ -2,6 +2,7 @@ import {sha256} from '../method-runtime/shared-calculation-runtime.js';
 import {buildBzrTemporalProjection,BZR_TEMPORAL_PROJECTION_SCHEMA} from '../bzr-temporal/temporal-runtime.js';
 import {buildBaziFullReading} from '../api/bazi-full-reading.js';
 import {buildMethodNativeCustomerReading} from './method-native-reading-product.js';
+import {buildBaziProfessionalSurfaceModules} from './bazi-professional-surface-projection.js';
 
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const x of Object.values(value))freeze(x)}return value};
 const clean=value=>String(value??'').trim();
@@ -33,7 +34,7 @@ async function noTargetTemporalBoundary(canonicalProjection,reasonCode){
  });
 }
 
-function baziEnvelope({report,publicationDecision,temporalProjection,temporalState}){
+function baziEnvelope({report,readingIR,publicationDecision,temporalProjection,temporalState}){
  const open=report.sections.find(x=>x.code==='OPEN');
  const technical=report.technicalEvidence||{};
  return buildMethodNativeCustomerReading({
@@ -45,10 +46,11 @@ function baziEnvelope({report,publicationDecision,temporalProjection,temporalSta
   openVerdicts:list(open?.items),
   evidence:{evidenceCount:technical.evidenceCount??null,authorityCount:technical.authorityCount??null,reportDigest:report.reportDigest,sourceNatalProjectionId:temporalProjection.sourceNatalProjectionId},
   publicationDecision,
+  professionalModules:buildBaziProfessionalSurfaceModules({readingIR,report,temporalState}),
   governance:{
    sourceProduct:'BAZI-FP-v1.0.0',sourceReportSchema:report.schemaVersion,
    temporalAuthority:temporalState==='EXPLICIT'?'BZR_TEMPORAL_RUNTIME_V2':'PPR_C1_NO_TARGET_BOUNDARY_ONLY',
-   natalProjectionReused:true,natalRecalculatedForTemporal:false,legacyComposeBzrConsumed:false,professionalStructureSurfaceAuthorized:true,wholeChartFirstIaAuthorized:true,
+   natalProjectionReused:true,natalRecalculatedForTemporal:false,legacyComposeBzrConsumed:false,professionalStructureSurfaceAuthorized:true,wholeChartFirstIaAuthorized:true,patternProfessionalSurfaceAuthorized:true,threeSchoolProfessionalSurfaceAuthorized:true,temporalExperienceAuthorized:true,
    noTargetDoesNotInferCurrentDate:true,noTargetDoesNotInferBrowserTimezone:true,
    fortunePredictionCreated:false,eventCertaintyCreated:false,silentSchoolMergeCreated:false
   }
@@ -71,7 +73,7 @@ export async function buildBaziMethodNativeReading({canonicalProjection,canonica
  }
  const result=await buildBaziFullReading({schemaVersion:'PHI-OS-BAZI-FULL-READING-REQUEST-v1.0.0',canonicalProjection,temporalProjection,locale:locale==='zh-Hans'?'zh-Hans':'en'});
  if(result.publicationDecision?.customerPublishable!==true)throw Object.assign(new Error('PPR_C1_BAZI_FULL_PRODUCTION_NOT_CUSTOMER_PUBLISHABLE'),{code:'PPR_C1_BAZI_FULL_PRODUCTION_NOT_CUSTOMER_PUBLISHABLE'});
- return baziEnvelope({report:result.report,publicationDecision:result.publicationDecision,temporalProjection,temporalState});
+ return baziEnvelope({report:result.report,readingIR:result.readingIR,publicationDecision:result.publicationDecision,temporalProjection,temporalState});
 }
 
 export default Object.freeze({PPR_C1_BAZI_PRODUCT_VERSION,normalizeBaziTargetContext,buildBaziMethodNativeReading});
