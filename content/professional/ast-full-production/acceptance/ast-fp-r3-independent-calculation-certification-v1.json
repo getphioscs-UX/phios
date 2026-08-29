@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R3-INDEPENDENT-CALCULATION-CERTIFICATION-v1.0.0",
+  "workCode": "AST-FP-R3",
+  "sourceMainCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "predecessor": "content/professional/ast-full-production/acceptance/ast-fp-r2-human-admission-acceptance-v1.json",
+  "status": "REFERENCE_AND_REMEDIATION_READY_RUNTIME_CERTIFICATION_GATE_PENDING",
+  "evidence": {
+    "authorityRef": "content/professional/ast-full-production/authority/ast-fp-r3-independent-reference-authority-v1.json",
+    "authorityLfNormalizedSha256": "89bb9b714c910d3d50999d956d5dc8efd8e3648de233e8b45f316975d1a94410",
+    "contractRef": "content/professional/ast-full-production/contracts/ast-fp-r3-independent-calculation-certification-contract-v1.json",
+    "contractLfNormalizedSha256": "93590cf6a646c6f4af8bea55d52754c79f423f1466f609bc86fbb794f21a20d5",
+    "referenceFixtureRef": "content/professional/ast-full-production/fixtures/ast-fp-r3-independent-reference-v1.json",
+    "referenceFixtureLfNormalizedSha256": "7e5ce4c82bb03ceeee763fac9e1878cd960706421e69372375f2e9cc51219911",
+    "runtimeChecker": "scripts/check-ast-fp-r3-independent-calculation.mjs"
+  },
+  "referenceCampaign": {
+    "cases": 10,
+    "existingR2Cases": 8,
+    "newEdgeCases": 2,
+    "core10ReferenceRows": 100,
+    "trueNodeReferenceRows": 20,
+    "houseSystems": ["PLACIDUS_V1", "WHOLE_SIGN_V1"],
+    "naturalMajorAspectCounts": {
+      "CONJUNCTION": 33,
+      "SEXTILE": 30,
+      "SQUARE": 24,
+      "TRINE": 24,
+      "OPPOSITION": 17
+    },
+    "robustMajorAspectCounts": {
+      "CONJUNCTION": 32,
+      "SEXTILE": 29,
+      "SQUARE": 23,
+      "TRINE": 24,
+      "OPPOSITION": 17
+    },
+    "syntheticOrbBoundaryChecksRequired": 10
+  },
+  "sourceIndependentShadowValidation": {
+    "status": "PASS",
+    "scope": "UTC + PHI_OS_ANGLE_HOUSE_FORMULAS_VS_STATIC_SWISS_REFERENCE; DOES_NOT_SUBSTITUTE_DIRECT_ASTRONOMY_ENGINE_RUNTIME_GATE",
+    "maxAngleErrorDegrees": 0.035726894,
+    "maxPlacidusCuspErrorDegrees": 0.035726894,
+    "stableHousePlacementReferenceRows": 227,
+    "boundarySensitiveHousePlacementRowsSkippedByContract": 1,
+    "polarCase": "ASTR3-10",
+    "preFixPolarAscendantErrorDegrees": 179.995275265,
+    "postFixPolarAscendantErrorDegrees": 0.004724735,
+    "quarterHourOffsetCase": "ASTR3-09"
+  },
+  "defectClosure": {
+    "code": "AST_R3_EASTERN_ASCENDANT_BRANCH",
+    "productionFile": "functions/ast-production/ast-structural-calculation-runtime.js",
+    "state": "IMPLEMENTED",
+    "existingR2FixtureBranchChoiceUnchanged": true,
+    "newPolarWholeSignBranchCorrected": true,
+    "placidusPolarFailClosedPreserved": true
+  },
+  "runtimeCertificationGate": {
+    "command": "npm run check:ast-fp-r3",
+    "requiredResult": "PASS",
+    "currentExecutionState": "ENVIRONMENT_DEPENDENCY_BLOCKED",
+    "currentError": "ERR_MODULE_NOT_FOUND: astronomy-engine",
+    "codeAssertionFailureObserved": false,
+    "mayBePromotedToCertifiedWithoutRuntimePass": false
+  },
+  "boundaries": {
+    "independentEphemerisAccuracyCertificationEstablished": false,
+    "sourceUseBasisEstablished": false,
+    "wholeChartSynthesisAcceptanceEstablished": false,
+    "professionalPlatformParityEstablished": false,
+    "finalCustomerReportHumanAcceptanceEstablished": false,
+    "customerCutover": false,
+    "productionAllowed": false,
+    "deploymentPerformed": false
+  },
+  "next": "Run npm run check:ast-fp-r3 in a dependency-complete workspace. Only after PASS may R3 be frozen as independently certified and AST-FP-R4 begin."
+}

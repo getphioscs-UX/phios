@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R3-VALIDATION-v1.0.0",
+  "sourceMainCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "status": "REFERENCE_AND_REMEDIATION_PASS_RUNTIME_CROSSCHECK_ENV_DEPENDENCY_BLOCKED",
+  "commands": [
+    {
+      "command": "node scripts/check-ast-fp-current.mjs",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:ast-fp-r2",
+      "exitCode": 0,
+      "status": "PASS",
+      "result": "16/16 human accepted; customer publication and production remain false"
+    },
+    {
+      "command": "node --check functions/ast-production/ast-structural-calculation-runtime.js",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "node --check scripts/check-ast-fp-r3-independent-calculation.mjs",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:ast-fp-r3",
+      "exitCode": 1,
+      "status": "ENVIRONMENT_DEPENDENCY_BLOCKED",
+      "error": "ERR_MODULE_NOT_FOUND: astronomy-engine",
+      "codeAssertionFailureObserved": false
+    }
+  ],
+  "independentReference": {
+    "generator": "Swiss Ephemeris 2.10.03 / PySwissEph build 20230604",
+    "planetBackend": "MOSEPH_MOSHIER_FALLBACK",
+    "referenceFixture": "content/professional/ast-full-production/fixtures/ast-fp-r3-independent-reference-v1.json",
+    "referenceFixtureLfNormalizedSha256": "7e5ce4c82bb03ceeee763fac9e1878cd960706421e69372375f2e9cc51219911",
+    "cases": 10,
+    "core10Rows": 100,
+    "allFiveMajorAspectTypesPresent": true
+  },
+  "shadowStructuralValidation": {
+    "status": "PASS",
+    "maxAngleErrorDegrees": 0.035726894,
+    "maxPlacidusCuspErrorDegrees": 0.035726894,
+    "configuredAngleToleranceDegrees": 0.06,
+    "configuredPlacidusCuspToleranceDegrees": 0.06,
+    "polarAscendantPreFixErrorDegrees": 179.995275265,
+    "polarAscendantPostFixErrorDegrees": 0.004724735,
+    "placidusPolarFailClosed": true,
+    "wholeSignPolarAvailableAfterFix": true
+  },
+  "package": {
+    "sourceMain6efLfNormalizedSha256": "90cb9b5ccc67218e0104e3ac97d0f10d92a1a6fb0e0b59895102f66a33b162b5",
+    "postR3LfNormalizedSha256": "c73767ddc047bbfdfcbde353c6914b3036c8b4dd95d8706f2eff93339ec11bf2",
+    "astScriptProjectionSha256": "5b6a6718b4f18c96762b45f20215ba8e66d45d1b769693c7ad315c78c7bf27b7"
+  },
+  "notEstablishedUntilRuntimeGatePasses": [
+    "INDEPENDENT_EPHEMERIS_ACCURACY_CERTIFICATION",
+    "SOURCE_USE_BASIS",
+    "WHOLE_CHART_SYNTHESIS_ACCEPTANCE",
+    "PROFESSIONAL_PLATFORM_PARITY",
+    "FINAL_CUSTOMER_REPORT_HUMAN_ACCEPTANCE",
+    "CUSTOMER_CUTOVER",
+    "DEPLOYMENT_AND_LIVE_SMOKE"
+  ],
+  "next": "DEPENDENCY_COMPLETE_R3_RUNTIME_GATE"
+}

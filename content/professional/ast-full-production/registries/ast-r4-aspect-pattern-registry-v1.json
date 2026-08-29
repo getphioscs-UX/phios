@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "PHI-OS-AST-R4-ASPECT-PATTERN-REGISTRY-v1.0.0",
+  "workCode": "AST-FP-R4",
+  "baselineCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "aspectScope": [
+    "CONJUNCTION",
+    "SEXTILE",
+    "SQUARE",
+    "TRINE",
+    "OPPOSITION"
+  ],
+  "patterns": [
+    {
+      "patternCode": "GRAND_TRINE",
+      "bodyCount": 3,
+      "requiredEdgeMultiset": {
+        "TRINE": 3
+      },
+      "label": {
+        "en": "Grand Trine",
+        "zh-Hans": "大三角"
+      },
+      "candidateMeaning": {
+        "en": "Three bodies form a closed trine network. R4 records the repeated supportive geometry without treating ease as an automatic ability or result.",
+        "zh-Hans": "三个星体形成闭合三分相网络。R4 只记录重复的顺畅几何，不把顺畅直接等同能力或结果。"
+      }
+    },
+    {
+      "patternCode": "T_SQUARE",
+      "bodyCount": 3,
+      "requiredEdgeMultiset": {
+        "OPPOSITION": 1,
+        "SQUARE": 2
+      },
+      "label": {
+        "en": "T-Square",
+        "zh-Hans": "T三角"
+      },
+      "candidateMeaning": {
+        "en": "An opposition is connected to a third body by two squares. R4 records a concentrated tension network and identifies the geometric apex without assigning a fixed problem or fate.",
+        "zh-Hans": "一组对分相的两端同时与第三星体形成两个四分相。R4 记录集中张力网络与几何顶点，不把它定成固定问题或命运。"
+      }
+    },
+    {
+      "patternCode": "GRAND_CROSS",
+      "bodyCount": 4,
+      "requiredEdgeMultiset": {
+        "OPPOSITION": 2,
+        "SQUARE": 4
+      },
+      "label": {
+        "en": "Grand Cross",
+        "zh-Hans": "大十字"
+      },
+      "candidateMeaning": {
+        "en": "Four bodies form two oppositions and four squares. R4 records a closed high-tension geometry; no good/bad verdict is created.",
+        "zh-Hans": "四个星体形成两组对分与四个四分相。R4 只记录闭合的高张力几何，不产生吉凶判断。"
+      }
+    },
+    {
+      "patternCode": "KITE",
+      "bodyCount": 4,
+      "requiredEdgeMultiset": {
+        "TRINE": 3,
+        "SEXTILE": 2,
+        "OPPOSITION": 1
+      },
+      "label": {
+        "en": "Kite",
+        "zh-Hans": "风筝格局"
+      },
+      "candidateMeaning": {
+        "en": "A Grand Trine is linked to a fourth body through one opposition and two sextiles. R4 records the combined geometry without promising talent or opportunity.",
+        "zh-Hans": "一个大三角通过一组对分与两组六合连接第四星体。R4 记录组合几何，不保证天赋、机会或结果。"
+      }
+    },
+    {
+      "patternCode": "MYSTIC_RECTANGLE",
+      "bodyCount": 4,
+      "requiredEdgeMultiset": {
+        "OPPOSITION": 2,
+        "TRINE": 2,
+        "SEXTILE": 2
+      },
+      "label": {
+        "en": "Mystic Rectangle",
+        "zh-Hans": "神秘矩形"
+      },
+      "candidateMeaning": {
+        "en": "Two oppositions are linked by two trines and two sextiles. R4 records the alternating support/tension geometry without importing outcome claims.",
+        "zh-Hans": "两组对分通过两组三分与两组六合相连。R4 只记录支持与张力交替的几何，不引入结果断言。"
+      }
+    }
+  ],
+  "excludedPatterns": [
+    {
+      "patternCode": "YOD",
+      "reason": "QUINCUNX_NOT_IN_CURRENT_PRODUCTION_ASPECT_SET"
+    },
+    {
+      "patternCode": "STELLIUM",
+      "reason": "DEFINITION_AND_SIGN_HOUSE_THRESHOLD_REQUIRE_SEPARATE_POLICY"
+    }
+  ],
+  "governance": {
+    "patternRequiresAllRegisteredEdges": true,
+    "missingAspectMayNotBeInferred": true,
+    "patternMayOverlapAnotherPattern": true,
+    "patternGeometryIsNotOutcomeMeaning": true,
+    "customerCutoverAllowed": false
+  }
+}

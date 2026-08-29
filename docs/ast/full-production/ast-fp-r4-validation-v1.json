@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R4-VALIDATION-v1.0.0",
+  "workCode": "AST-FP-R4",
+  "sourceMainCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
+  "sourceArchive": "account(1).zip",
+  "sourceArchiveAlignedToMain": true,
+  "r3CarryForward": {
+    "requiredBecauseLatestMainDidNotContainPreviousR3Delta": true,
+    "strategy": "CUMULATIVE_R3_R4_DELTA_WITHOUT_OVERWRITING_LATEST_SHARED_PACKAGE_STATE",
+    "r3CertificationState": "PENDING_DIRECT_RUNTIME_PASS"
+  },
+  "checks": [
+    {
+      "command": "node scripts/check-ast-fp-current.mjs",
+      "result": "PASS"
+    },
+    {
+      "command": "npm run check:ast-fp-r2",
+      "result": "PASS",
+      "humanAccepted": 16,
+      "pending": 0
+    },
+    {
+      "command": "npm run check:ast-fp-r4",
+      "result": "PASS",
+      "angles": 4,
+      "houseRulers": 12,
+      "dispositorChains": 10,
+      "supportedPatterns": [
+        "GRAND_TRINE",
+        "T_SQUARE",
+        "GRAND_CROSS",
+        "KITE",
+        "MYSTIC_RECTANGLE"
+      ],
+      "aspectDynamicStates": [
+        "APPLYING",
+        "SEPARATING",
+        "EXACT",
+        "UNDETERMINED"
+      ]
+    },
+    {
+      "command": "npm run check:ast-fp-r3",
+      "result": "ENVIRONMENT_DEPENDENCY_INCOMPLETE",
+      "detail": "npm ci timed out and left an incomplete astronomy-engine package; no R3 assertion failure was converted into a PASS"
+    }
+  ],
+  "semanticBundleDigest": "b609d2336955e4e18b3ff4227b0f50ac1c0a9f6ba72d9a708f3b300d72ed6046",
+  "boundaries": {
+    "canonicalAstV2Mutated": false,
+    "r2HumanAcceptanceReusedForR4": false,
+    "newCustomerProductionMeaningAdmitted": false,
+    "productionAllowed": false,
+    "customerCutoverAllowed": false
+  },
+  "next": "AST-FP-R5｜Whole-Chart Synthesis engineering, while R3 certification and R4 human-admission remain explicit release gates."
+}

@@ -5,7 +5,7 @@
   "historicalBaselineRewritten": false,
   "historicalCheckerRetained": true,
   "currentChecker": "scripts/check-ast-fp-current.mjs",
-  "reason": "Preserve the abab W0-W2 checkpoint and 2211 AST engineering baseline while reconciling current main 6ef755e. package.json is an intentionally shared orchestration surface: AST authority is validated only through the pinned AST script projection, so later Numerology/SMR/shared check additions cannot masquerade as AST authority drift. Full-file hashing remains mandatory for every other protected AST file.",
+  "reason": "Preserve the historical AST checkpoints while reconciling latest main f52b6a3. package.json remains a shared orchestration surface: AST authority is protected by a five-command AST script projection. R3 independent-calculation certification and R4 professional-semantic engineering are explicit AST successors; unrelated BaZi/Zi Wei/NUM/SMR additions remain authorized shared-main evolution.",
   "protectedFileReconciliation": [
     {
       "path": "content/customer-experience-rebuild/admission/cx-r12r3b-human-reviewed-composition-admission-v1.json",
@@ -438,13 +438,14 @@
       "path": "package.json",
       "historicalSha256": "f38dc068cf0044fee28e51ac93fa8d6b8dadf0daa4a55bde5a6cba21744d8bf2",
       "main2211Sha256": "c3768a8a13c1658eb0f11bc576a88da992f7644354ad79e6fab623539b28ec48",
-      "currentSha256": "90cb9b5ccc67218e0104e3ac97d0f10d92a1a6fb0e0b59895102f66a33b162b5",
+      "currentSha256": "b68a3c01f7c473691f82b09d2c97f446b15cafec97159092d4a966a8adb171b8",
       "changeCategory": "AST_FP_EXPLICIT_SUCCESSOR",
-      "successorNote": "Current main 6ef755e adds Numerology and other shared package scripts after AST-FP. The whole-file digest is recorded for traceability only. AST-FP protects only check:ast-production, check:ast-full-production, and check:ast-fp-r2 via astScriptProjectionSha256; unrelated shared scripts are authorized successors and must not trigger AST drift.",
+      "successorNote": "Latest main f52b6a3 is the aligned source. The whole package file includes unrelated shared-runtime evolution; AST-FP freezes check:ast-production, check:ast-full-production, check:ast-fp-r2, check:ast-fp-r3 and check:ast-fp-r4. R3/R4 are explicit AST successors.",
       "sourceMain31f0Sha256": "7aac00a9cb6564976c3e28b6d14d4e37c03f6fd61c9ad8b5beba4d4d53bbbc94",
       "validationMode": "AST_SCRIPT_PROJECTION",
-      "astScriptProjectionSha256": "20d11a01a98772fb771757e10b80e27a63d55804b03ed6f96729dc896e1ccfbf",
-      "sourceMain6efSha256": "90cb9b5ccc67218e0104e3ac97d0f10d92a1a6fb0e0b59895102f66a33b162b5"
+      "astScriptProjectionSha256": "502bce136ea19b7afb443c4ff7159567a7544629662031ce42908e82713340cb",
+      "sourceMain6efSha256": "90cb9b5ccc67218e0104e3ac97d0f10d92a1a6fb0e0b59895102f66a33b162b5",
+      "sourceMainF52Sha256": "e31b3361e9c5a496a745138bd1a07db235cc61601c7e7eb6f1ddd4456aa0d07f"
     },
     {
       "path": "scripts/check-bazi-fp-w0-w4.mjs",
@@ -557,7 +558,7 @@
   ],
   "newSourceAdmission": false,
   "newHumanAcceptance": false,
-  "currentReconciledMainCommit": "6ef755efbf874b0f236871989e4f3ecaaeda5ccc",
+  "currentReconciledMainCommit": "f52b6a3c4f1d94e6bf707af47f34e8c7dfca8837",
   "currentReconciledMainMessage": "NUM",
   "reconciliationState": "AST_FP_R0_RECONCILED",
   "packageValidationPolicy": {

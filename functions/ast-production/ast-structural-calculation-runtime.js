@@ -19,12 +19,21 @@ function byType(records,type){return records.find(x=>x.recordType===type)?.paylo
 function jdFromUtc(utcIso){const ms=Date.parse(utcIso);if(!Number.isFinite(ms))throw new TypeError('ASTA_VALID_UTC_REQUIRED');return ms/86400000+2440587.5;}
 function meanObliquity(jd){const t=(jd-2451545)/36525;return 23+26/60+(21.448-46.815*t-0.00059*t*t+0.001813*t*t*t)/3600;}
 function gmst(jd){const t=(jd-2451545)/36525;return norm(280.46061837+360.98564736629*(jd-2451545)+0.000387933*t*t-(t*t*t)/38710000);}
+function risingAscendant(ascRaw,lst,eps){
+ const e=eps*RAD,candidates=[norm(ascRaw),norm(ascRaw+180)];
+ for(const candidate of candidates){
+  const l=candidate*RAD,ra=norm(Math.atan2(Math.sin(l)*Math.cos(e),Math.cos(l))*DEG);
+  let hourAngle=norm(lst-ra);if(hourAngle>180)hourAngle-=360;
+  if(hourAngle<0)return candidate;
+ }
+ return candidates[0];
+}
 function calculateAngles(utcIso,latitude,longitude){
  if(!Number.isFinite(latitude)||latitude<-90||latitude>90)throw new TypeError('ASTA_LATITUDE_INVALID');
  if(!Number.isFinite(longitude)||longitude<-180||longitude>180)throw new TypeError('ASTA_LONGITUDE_INVALID');
  const jd=jdFromUtc(utcIso),eps=meanObliquity(jd),lst=norm(gmst(jd)+longitude),th=lst*RAD,e=eps*RAD,phi=latitude*RAD;
  const ascRaw=Math.atan2(Math.cos(th),-(Math.sin(th)*Math.cos(e)+Math.tan(phi)*Math.sin(e)))*DEG;
- const asc=norm(ascRaw);
+ const asc=risingAscendant(ascRaw,lst,eps);
  const mc=norm(Math.atan2(Math.sin(th)/Math.cos(e),Math.cos(th))*DEG);
  return Object.freeze({julianDayUtc:Number(jd.toFixed(9)),gmstDegrees:gmst(jd),localSiderealTimeDegrees:lst,meanObliquityDegrees:Number(eps.toFixed(12)),ascendantLongitude:asc,midheavenLongitude:mc,descendantLongitude:norm(asc+180),imumCoeliLongitude:norm(mc+180)});
 }
