@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R2-W9-W12-VALIDATION-v1.0.0",
+  "sourceMainCommit": "a30a38d45a273fa0de603dcb9da827bf4c4ca307",
+  "validatedAt": "2026-08-29",
+  "status": "SCOPED_ENGINEERING_PASS",
+  "commands": [
+    "node scripts/check-ast-fp-current.mjs",
+    "npm run check:ast-fp-r4a",
+    "npm run check:ast-fp-r5",
+    "npm run check:ast-fp-r2-w9-w12",
+    "npm run check:cx-r12r4b:smr-w0-w11"
+  ],
+  "results": {
+    "r4aHumanAcceptance": "21/21",
+    "r5Engineering": "PASS_R4A_ADMITTED",
+    "r2W9W12": "PASS_ZERO_RESTATEMENT_LAYOUT_LANGUAGE",
+    "sharedSmrRegression": "PASS_W0_W11",
+    "customerPublicationAllowed": false,
+    "astCurrentBaseline": "PASS",
+    "r4aHumanAdmission": "PASS_21_OF_21",
+    "aggregateAstFullProduction": "ENVIRONMENT_BLOCKED_BEFORE_FIDELITY_BY_MISSING_AJV"
+  },
+  "boundaries": [
+    "R5_FINAL_CUSTOMER_READING_HUMAN_ACCEPTANCE_REQUIRED",
+    "R3_INDEPENDENT_EPHEMERIS_CERTIFICATION_REMAINS_SEPARATE_RELEASE_GATE",
+    "R2_W13_LIVE_SURFACE_CUTOVER_NOT_PERFORMED"
+  ],
+  "environment": {
+    "nodeModulesPresent": false,
+    "ajvAvailable": false,
+    "astronomyEngineAvailable": false,
+    "aggregateFailure": "ERR_MODULE_NOT_FOUND: ajv in scripts/check-ast-fp-fidelity.mjs",
+    "classification": "EXECUTION_ENVIRONMENT_DEPENDENCY_MISSING_NOT_R2_W9_W12_ASSERTION_FAILURE"
+  }
+}
