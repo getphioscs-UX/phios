@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-CUSTOMER-ROUTE-AUTHORITY-v1.0.0",
+  "work": "ZIWEI-CX-R1-W0",
+  "integrationBaselineCommit": "343773fd6fb61fbf1b37aa861537d7e8f091ec24",
+  "ziweiFullProductionSemanticBaselineCommit": "d16d757a477e2a9f7e3c7a38e4e5d044ce7e4aaf",
+  "status": "ACTIVE_CANONICAL_ROUTE_AUTHORITY",
+  "canonicalCustomerSurface": {
+    "route": "/perspectives/personal/",
+    "html": "perspectives/personal/index.html",
+    "api": "/api/customer-personal-reality",
+    "client": "assets/customer-ui/js/surfaces/personal-reality.js",
+    "pageOwner": "PPR-C1_CANONICAL_PERSONAL_SURFACE",
+    "pageOwnerCount": 1
+  },
+  "ziweiProductAuthority": {
+    "owner": "ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT",
+    "mayOwnRoute": false,
+    "mayOwnPageShell": false,
+    "mayOwnMethodNativePayload": true,
+    "mustEnterThroughCanonicalApi": true
+  },
+  "rules": {
+    "personalRuntimeHtmlMayOwnCurrentRoute": false,
+    "genericZwrRendererMayOwnCompleteZiweiReport": false,
+    "smrRendererMayOwnCompleteZiweiReport": false,
+    "canonicalApiIsOnlyLiveZiweiCustomerBindingPoint": true,
+    "customerRendererMayCreateMeaning": false
+  }
+}

@@ -1,7 +1,6 @@
 import {validateCanonicalBirthInput} from '../method-client-delivery/canonical-birth-input-runtime.js';
 import {onRequestPost as runMethodExecute} from './method-execute.js';
 import {onRequestPost as runAstStructuralExecute} from './ast-structural-execute.js';
-import {onRequestPost as runZiWeiExecute} from './zi-wei-execute.js';
 import {onRequestPost as runEcrExecute} from './ecr-execute.js';
 import {projectMethodsForCustomer} from '../customer-projection/method-customer-projection.js';
 import {projectAstrologyForCustomer} from '../customer-projection/astrology-customer-projection.js';
@@ -11,7 +10,8 @@ import {buildProductionMethodMeaningPayload} from '../canonical-meaning-producti
 import {buildNumerologyCustomerReadingEnvelope,projectNumerologyEnvelopeForCustomer} from '../customer-projection/numerology-customer-reading-envelope-v1.js';
 import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/single-method-reading-production.js';
 import {resolveBirthPlace} from '../location/place-resolver.js';
-import {maybeBuildActiveAstCustomerWorkspace,getAstCustomerWorkspaceCapability} from '../ast-full-production/ast-customer-reading-production.js';
+import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production/ziwei-full-production-customer-runtime.js';
+import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -74,12 +74,24 @@ function validateNumerologyExpansionRequest(body,selected){
   if(body?.numerologyNameConfirmed===true&&!name)return 'NUM_CX_CONFIRMED_NAME_REQUIRED';
   return null;
 }
-
-function astTargetContext(body){
-  const date=clean(body?.astTargetDate),time=clean(body?.astTargetTime),iana=clean(body?.astTargetTimezone),offset=clean(body?.astTargetUtcOffsetAtTarget),values=[date,time,iana,offset];
-  if(values.every(x=>!x))return null;
-  if(values.some(x=>!x)){const e=new Error('AST_TARGET_CONTEXT_INCOMPLETE');e.code='AST_TARGET_CONTEXT_INCOMPLETE';throw e}
-  return freeze({targetDate:date,targetTime:time.length===5?`${time}:00`:time,targetTimezone:freeze({iana,utcOffsetAtTarget:offset})});
+function ziweiTargetContextInput(body,selected){
+  if(!selected.includes('ziwei'))return null;
+  return freeze({
+    targetDate:clean(body?.ziweiTargetDate),
+    targetTime:clean(body?.ziweiTargetTime),
+    targetTimezone:freeze({iana:clean(body?.ziweiTargetTimezoneIana),utcOffsetAtTarget:clean(body?.ziweiTargetUtcOffset)}),
+    source:clean(body?.ziweiTargetContextSource).toUpperCase()
+  });
+}
+function ziweiCompatibilityReadingMethod(spec,locale,fullProduct,projection){
+  const report=fullProduct?.report;
+  const summary=report?.subtitle||report?.title||(locale==='zh-Hans'?'紫微完整读取已经准备好。':'The full Zi Wei reading is ready.');
+  return freeze({
+    schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0',
+    methodId:'ZWR',methodLabel:methodLabel(spec,locale),locale,state:'READY_TO_READ',stateLabel:locale==='zh-Hans'?'可以阅读':'Ready to read',summary,insights:[],visualModel:null,
+    source:{label:locale==='zh-Hans'?'紫微 Full Production 已准备':'Zi Wei Full Production ready',lineageAvailable:true},openQuestions:[],
+    technical:{methodId:'ZWR',publicMethodCode:spec.publicMethodCode,projectionId:projection?.projectionId||null,compatibilityOnly:true,completeZiweiReportOwner:false,fullProductRef:'view.ziweiFullProduction',boundary:{rendererCreatesMeaning:false,aiCreatesMeaning:false,realityKnown:false}}
+  });
 }
 
 function methodLabel(spec,locale){return spec.label[locale==='zh-Hans'?'zh':'en']}
@@ -112,14 +124,25 @@ function limitedReadingMethod(spec,locale,error,projection=null){
   });
 }
 
-async function executeOne(context,input,key,consentRecordId,parameters,numExpansionInput){
+async function executeOne(context,input,key,consentRecordId,parameters,numExpansionInput,ziweiTargetContext){
   const spec=METHODS[key];
   const requestId=`CX-${spec.methodCode}-${crypto.randomUUID()}`;
   const body=spec.methodCode==='EMBODIED_CONFIGURATION'
     ?{canonicalInput:input,consent:true,requestId}
     :{schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:spec.methodCode,methodVersion:spec.methodVersion,capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:input,executionParameters:parameters,consentRecordId,requestId};
+  if(spec.methodCode==='ZI_WEI_DOU_SHU'){
+    try{
+      const fullRuntime=await buildZiweiFullProductionCustomerRuntime({executionRequest:body,targetContext:ziweiTargetContext,locale:context.locale});
+      let readingMethod;
+      try{readingMethod=await buildAcceptedMethodCustomerResult({canonicalProjection:fullRuntime.canonicalProjection,locale:context.locale,requestedDepth:'STANDARD'})}
+      catch{readingMethod=ziweiCompatibilityReadingMethod(spec,context.locale,fullRuntime.customerProduct,fullRuntime.canonicalProjection)}
+      return {ok:true,key,spec,canonicalProjection:fullRuntime.canonicalProjection,readingMethod,ziweiFullProduction:fullRuntime.customerProduct,ziweiExecutionReuse:fullRuntime.executionReuse};
+    }catch(error){
+      return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||'ZIWEI_CX_R1_FULL_PRODUCTION_UNAVAILABLE']};
+    }
+  }
   const request=new Request(new URL(spec.endpoint,context.request.url),{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body)});
-  const handler=spec.endpoint.includes('ecr-execute')?runEcrExecute:spec.endpoint.includes('zi-wei')?runZiWeiExecute:spec.endpoint.includes('ast-structural')?runAstStructuralExecute:runMethodExecute;
+  const handler=spec.endpoint.includes('ecr-execute')?runEcrExecute:spec.endpoint.includes('ast-structural')?runAstStructuralExecute:runMethodExecute;
   const response=await handler({request});
   const payload=await response.json().catch(()=>({}));
   if(!response.ok||payload?.ok!==true)return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:payload?.reasonCodes||[payload?.error||'METHOD_EXECUTION_FAILED']};
@@ -154,10 +177,11 @@ function stage(locale,stageId,state,enLabel,zhLabel,enDetail,zhDetail){
   return freeze({stageId,state,label:locale==='zh-Hans'?zhLabel:enLabel,detail:locale==='zh-Hans'?zhDetail:enDetail});
 }
 
-function buildReadingView({methods,selectedCount,calculationCount,locale}){
+function buildReadingView({methods,selectedCount,calculationCount,locale,ziweiFullProduction=null,singleZiwei=false}){
   const readable=methods.filter(item=>item.state==='READY_TO_READ');
+  const fullZiweiReady=singleZiwei&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
   const allCalculated=calculationCount===selectedCount;
-  const allReadable=readable.length===selectedCount;
+  const allReadable=fullZiweiReady||readable.length===selectedCount;
   const readingState=allReadable?'READY_TO_READ':readable.length?'PARTIALLY_PREPARED':'NEEDS_ATTENTION';
   const customerLabel=locale==='zh-Hans'
     ?allReadable?'所选视角都可以阅读':readable.length?'部分视角可以阅读':'还需要更多资料'
@@ -174,14 +198,16 @@ function buildReadingView({methods,selectedCount,calculationCount,locale}){
       stage(locale,'METHOD_CALCULATION',allCalculated?'PREPARED':'NEEDS_INFORMATION','Method calculation','方法计算',allCalculated?'All selected calculations completed.':'Some selected calculations still need attention.',allCalculated?'所选方法都已完成计算。':'部分所选方法仍需要补充资料。'),
       stage(locale,'METHOD_INTERPRETATION',allReadable?'READABLE':readable.length?'READABLE':'NEEDS_INFORMATION','Method interpretation','方法解释',allReadable?'All selected method readings are ready.':readable.length?'Some method readings are ready; the remaining methods stay open.':'No customer-readable method interpretation is ready yet.',allReadable?'所选方法的解释都可以阅读。':readable.length?'部分方法解释可以阅读，其余部分继续保持开放。':'目前还没有可面向客户阅读的方法解释。'),
       stage(locale,'COMBINED_READING','NOT_STARTED','Combined reading','综合读取','Cross-method composition has not been performed in this phase.','本阶段尚未进行跨方法综合。'),
-      stage(locale,'CURRENT_REALITY','NOT_STARTED','Current Reality','当前现实','No current-reality evidence has been added or assumed.','尚未加入或假定任何当前现实证据。'),
-      stage(locale,'FULL_REPORT','NOT_STARTED','Full report','完整报告','The full Personal Reading Report has not been composed yet.','完整 Personal Reading Report 尚未生成。')
+      stage(locale,'CURRENT_REALITY',fullZiweiReady?'READABLE':'NOT_STARTED','Current timing context','当前时间层',fullZiweiReady?'An explicit, editable target date/time/timezone was used for the current Da Xian and annual layers. This is symbolic timing context, not lived-reality evidence.':'No current method timing context has been established here.',fullZiweiReady?'已使用明确且可修改的目标日期、时间与时区建立当前大限及流年层；这是象征性时间上下文，不是现实经历证据。':'目前尚未建立当前方法的时间上下文。'),
+      stage(locale,'FULL_REPORT',fullZiweiReady?'READABLE':'NOT_STARTED','Full report','完整报告',fullZiweiReady?'The governed Zi Wei Full Production report, interactive twelve-palace surface and topic readings are available in this result.':'The full Personal Reading Report has not been composed yet.',fullZiweiReady?'本次结果已经包含受治理的紫微完整报告、十二宫互动结构与主题读取。':'完整 Personal Reading Report 尚未生成。')
     ],
     governance:{
       acceptanceBasis:'ADMITTED_COMPOSITION_RULESET',
       liveCustomerHumanReviewClaimed:false,
       rawProjectionUsedAsCustomerInterpretation:false,
       currentRealityAssumed:false,
+      ziweiProductionCompositionHumanAccepted:fullZiweiReady,
+      ziweiLiveIndividualHumanReviewClaimed:false,
       persistence:false
     },
     combinedReading:{state:'NOT_STARTED',crossMethodCompositionPerformed:false}
@@ -222,7 +248,6 @@ export async function onRequestPost(context){
   const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';
   context.locale=locale;
   context.customerIntent=body?.intent||null;
-  let targetContext=null;try{targetContext=astTargetContext(body)}catch(error){return json({ok:false,error:error.code},422)}
   let location=null;
   if(needsPlace){
     try{location=await resolveBirthPlace(body.placeRef,{birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime),locale,env:context.env})}
@@ -235,7 +260,10 @@ export async function onRequestPost(context){
 
   const parameters=executionParameters(body);
   const numExpansionInput=numerologyExpansionInput(body);
-  const results=await Promise.all(selected.map(key=>executeOne(context,input,key,consentRecordId,parameters,numExpansionInput)));
+  const ziweiTargetContextRaw=ziweiTargetContextInput(body,selected);
+  let ziweiTargetContext=null;
+  if(ziweiTargetContextRaw){try{ziweiTargetContext=resolveZiweiLiveTargetContext(ziweiTargetContextRaw)}catch(error){return json({ok:false,error:error?.code||'ZIWEI_CX_R1_TARGET_CONTEXT_INVALID'},error?.status||422)}}
+  const results=await Promise.all(selected.map(key=>executeOne(context,input,key,consentRecordId,parameters,numExpansionInput,ziweiTargetContext)));
   const projections=results.filter(result=>result.ok).map(result=>result.canonicalProjection);
   const blocked=results.filter(result=>!result.ok);
   const baseView=projectMethodsForCustomer({projections,blocked,intent:body?.intent,locale,includeLegacyInterpretation:false});
@@ -247,21 +275,18 @@ export async function onRequestPost(context){
     const limited=limitedReadingMethod(result.spec,locale,error);
     return publicBlocked?.message?freeze({...limited,summary:publicBlocked.message,openQuestions:[publicBlocked.message]}):limited;
   });
-  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale});
+  const ziweiFullProduction=results.find(result=>result.ok&&result.ziweiFullProduction)?.ziweiFullProduction||null;
+  const singleZiwei=selected.length===1&&selected[0]==='ziwei'&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
+  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,ziweiFullProduction,singleZiwei});
   let singleMethodReading=null;
-  if(selected.length===1&&readingMethods[0]?.state==='READY_TO_READ'){
+  if(!singleZiwei&&selected.length===1&&readingMethods[0]?.state==='READY_TO_READ'){
     try{singleMethodReading=await maybeBuildProductionSingleMethodReading({methodResult:readingMethods[0],customerIntent:context.customerIntent,locale})}
     catch{singleMethodReading=null}
   }
-  const astrologyResult=results.find(result=>result.ok&&result.spec?.methodCode==='ASTROLOGY');
-  const astrology=stripAstrologyTechnicalProjection(astrologyResult?.customerProjection||null);
+  const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
-  let astrologyWorkspace=null;
-  if(selected.length===1&&selected[0]==='astrology'&&astrologyResult?.canonicalProjection){
-    try{astrologyWorkspace=await maybeBuildActiveAstCustomerWorkspace({canonicalProjection:astrologyResult.canonicalProjection,rawIntent:body?.intent||'',explicitIntentProfileId:body?.astIntentProfileId||null,locale,targetContext,consentRecordId,sourceMainCommit:'343773fd6fb61fbf1b37aa861537d7e8f091ec24'})}catch{astrologyWorkspace=null}
-  }
-  const astrologyWorkspaceCapability=getAstCustomerWorkspaceCapability();
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,astrologyWorkspace,astrologyWorkspaceCapability});
+  const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,ziweiFullProduction,primaryCustomerProduct});
   return json({
     ok:true,
     view,
