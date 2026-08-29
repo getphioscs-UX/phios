@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-NUM-R13-LIFE-PERIOD-AUTHORITY-v1.0.0",
   "workCode": "NUM-R13",
   "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
-  "status": "BANDS_RECOVERED_FORMULA_AUTHORITY_WITHHELD",
+  "status": "CALCULATION_AUTHORITY_ACTIVE_PUBLICLY_CORROBORATED",
   "observedModel": {
     "bands": [
       {
@@ -46,15 +46,23 @@
   "recoveryAssessment": {
     "bandBoundariesRecovered": true,
     "patternWidthRecovered": "three digits",
-    "derivationFormulaRecovered": false,
-    "zeroPolicyRecovered": false,
-    "masterPolicyRecovered": false,
+    "derivationFormulaRecovered": true,
+    "zeroPolicyRecovered": "PRESERVE_STRUCTURAL_ZERO_NO_SEMANTIC_MEANING",
+    "masterPolicyRecovered": "SINGLE_DIGIT_SCHOOL_NO_MASTER_PRESERVATION",
     "pre21PolicyRecovered": false,
     "post80PolicyRecovered": false
   },
-  "calculationAuthorityGranted": false,
-  "runtimeUseAllowed": false,
-  "customerPublishable": false,
-  "failClosedReason": "Two examples are insufficient to uniquely recover the three-digit pattern derivation.",
-  "runtime": "functions/num-expansion/num-life-period-recovery.js"
+  "calculationAuthorityGranted": true,
+  "runtimeUseAllowed": true,
+  "customerPublishable": true,
+  "runtime": "functions/num-expansion/num-life-period-recovery.js",
+  "currentBaselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "formula": {
+    "LP_21_40": "XWS",
+    "LP_41_60": "QPR",
+    "LP_61_80": "VUT",
+    "positionDerivation": "See num-r13-r16-public-source-reconciliation-v1.json"
+  },
+  "meaningAuthorityGranted": false,
+  "publicSourceReconciliation": "content/professional/num-production/expansion-r9-r18/sources/num-r13-r16-public-source-reconciliation-v1.json"
 }

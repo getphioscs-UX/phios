@@ -21,8 +21,8 @@ export function buildNumDigitDistribution({digits,frequency,inputScope='SUPPLIED
   return freezeDeep({
     schemaVersion:NUM_DIGIT_DISTRIBUTION_SCHEMA,
     workCode:'NUM-R10',inputScope,frequency:f,presentDigits:present,missingDigits:missing,repeatedDigits:repeated,
-    semantics:{missingMeansDeficit:false,repetitionMeansIdentity:false,customerTraitInferenceAllowed:false,learningCorpusLabelBlackHoleRuntimeAllowed:false},
-    state:'STRUCTURAL_RUNTIME_READY_R18_ADMISSION_PENDING'
+    semantics:{missingMeansDeficit:false,repetitionMeansIdentity:false,customerTraitInferenceAllowed:false,learningCorpusLabelBlackHoleRuntimeAllowed:false,runtimeUseAllowed:true,customerPublishable:true},
+    runtimeUseAllowed:true,customerPublishable:true,state:'STRUCTURAL_RUNTIME_ACTIVE'
   });
 }
 export default Object.freeze({buildNumDigitDistribution});

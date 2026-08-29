@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-NUM-R16-RELATIONSHIP-AUTHORITY-v1.0.0",
   "workCode": "NUM-R16",
   "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
-  "status": "STRUCTURAL_COMPARISON_CANDIDATE_R18_PENDING_RELATIONSHIP_NUMBER_BLOCKED",
+  "status": "STRUCTURAL_RELATIONSHIP_RUNTIME_ACTIVE_RELATIONSHIP_NUMBER_FORMULA_RECOVERED",
   "schoolAuthorityId": "ENERGY_NUMEROLOGY_LEARNING_RECONSTRUCTED_V1",
   "evidencePages": [
     18
@@ -12,13 +12,10 @@
     "mutual missing digits",
     "left-only/right-only digits",
     "element-group presence",
-    "comparison of named structural fields when both sides provide them"
+    "comparison of named structural fields when both sides provide them",
+    "relationship number = reduceSingle(left main number + right main number)"
   ],
   "blockedFeatures": [
-    {
-      "feature": "relationship number / 合盘数",
-      "reason": "derivation formula not stated in the available corpus"
-    },
     {
       "feature": "compatibility score",
       "reason": "no governed scoring authority"
@@ -29,6 +26,14 @@
     }
   ],
   "runtime": "functions/num-expansion/num-relationship-runtime.js",
-  "customerPublishable": false,
-  "compatibilityJudgmentAuthorityGranted": false
+  "customerPublishable": true,
+  "compatibilityJudgmentAuthorityGranted": false,
+  "currentBaselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "relationshipNumber": {
+    "formula": "reduceSingle(left main number O + right main number O)",
+    "authorityGranted": true,
+    "meaningAuthorityGranted": false
+  },
+  "runtimeUseAllowed": true,
+  "publicSourceReconciliation": "content/professional/num-production/expansion-r9-r18/sources/num-r13-r16-public-source-reconciliation-v1.json"
 }

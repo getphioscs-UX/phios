@@ -11,6 +11,7 @@ export default {
     flow: { input: '输入', eligibility: '资格检查', processing: '处理', results: '结果' },
     inputTitle: 'Canonical 出生输入',
     inputCopy: '未知就保持未知。出生时区与出生当时 UTC offset 是两个独立值；本页面绝不会用当前浏览器时区替代。',
+    numerologyDetails: '数字学补充资料（选填）', fullBirthName: '出生时完整姓名', relationshipBirthDate: '关系比较对象出生日期', nameConfirmation: '我确认以上姓名是本次数字学姓名计算要使用的出生姓名。', numerologyDetailsHelp: '选填。确认后的出生姓名可计算表现数、内驱数、个特数与成熟数；比较对象出生日期可建立关系结构，但不会产生兼容度或关系结果断言。',
     birthDate: '出生日期', birthTime: '出生时间', birthPlace: '出生地点', countryCode: '国家代码', birthPlacePrecision: '地点精确度',
     timezone: '出生时区', utcOffsetAtBirth: '出生当时 UTC offset', timezonePrecision: '时区精确度', timezoneHelp: '请使用出生当时实际适用的 offset；当前时区或浏览器时区不会被代入。',
     coordinates: '坐标（选填）', latitude: '纬度', longitude: '经度', targetDate: '周期日期（选填）', targetDateHelp: '只在所选 Method 拥有已授权日期周期计算时使用；留空不会自动代入任何日期。',

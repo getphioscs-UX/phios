@@ -5,6 +5,6 @@ export function buildNumEnergyGrouping({frequency,inputScope='SUPPLIED_DIGIT_FRE
  if(!frequency||typeof frequency!=='object')throw new TypeError('NUM_R14_FREQUENCY_REQUIRED');
  const axes=Object.fromEntries(Object.entries(ENERGY_AXES).map(([code,group])=>[code,{digits:group,count:count(group,frequency)}]));
  const elements=Object.fromEntries(Object.entries(ENERGY_ELEMENT_GROUPS).map(([code,group])=>[code,{digits:group,count:count(group,frequency)}]));
- return freezeDeep({schemaVersion:NUM_ENERGY_GROUPING_SCHEMA,workCode:'NUM-R14',inputScope,axes,elements,interpretationState:'UNADMITTED_LEARNING_SCHOOL_SEMANTICS',structuralCountsRuntimeReady:true,customerTraitInferenceAllowed:false,state:'STRUCTURAL_CANDIDATE_R18_ADMISSION_PENDING'});
+ return freezeDeep({schemaVersion:NUM_ENERGY_GROUPING_SCHEMA,workCode:'NUM-R14',inputScope,axes,elements,interpretationState:'HUMAN_ADMITTED_SCHOOL_LABELS_STRUCTURAL_ONLY',structuralCountsRuntimeReady:true,runtimeUseAllowed:true,customerPublishable:true,customerTraitInferenceAllowed:false,state:'STRUCTURAL_RUNTIME_ACTIVE'});
 }
 export default Object.freeze({buildNumEnergyGrouping});

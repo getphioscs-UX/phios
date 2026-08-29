@@ -1890,7 +1890,7 @@
     "check:cx-r12r4b:smr-e2e": "node scripts/check-cx-r12r4b-smr.mjs e2e",
     "check:cx-r12r4b:smr": "node scripts/generate-cx-r12r4b-smr-campaign.mjs --check && node scripts/check-cx-r12r4b-smr.mjs all",
     "check:bazi-fp-w0-w4": "node scripts/check-bazi-fp-w0-w4.mjs",
-    "check:bazi-full-production": "npm run check:bazi-fp-w0-w4 && npm run check:bazi-fp-w5-w6 && npm run check:bazi-fp-w7-bzr-r1-batch2 && npm run check:bazi-fp-w8-bzr-r1-batch2-admission && npm run check:bazi-fp-w9-w10",
+    "check:bazi-full-production": "npm run check:bazi-fp-w0-w4 && npm run check:bazi-fp-w5-w6 && npm run check:bazi-fp-w7-bzr-r1-batch2 && npm run check:bazi-fp-w8-bzr-r1-batch2-admission && npm run check:bazi-fp-w9-w10 && npm run check:bazi-fp-w11-w13",
     "check:bazi-fp-w5-w6": "node scripts/check-bazi-fp-w5-w6.mjs",
     "check:ziwei-fp-w0-w4": "node scripts/check-ziwei-fp-w0-w4.mjs",
     "check:ziwei-full-production": "npm run check:ziwei-fp-w0-w4 && npm run check:ziwei-source-admission && npm run check:ziwei-fp-w5-w6 && npm run check:ziwei-fp-w7-w8 && npm run check:ziwei-fp-w8-admission && npm run check:ziwei-fp-w9-w10 && npm run check:ziwei-fp-w11",
@@ -1942,8 +1942,10 @@
     "build:num-r18": "node scripts/build-num-r18-human-review.mjs",
     "check:num-r9-r18": "node scripts/check-num-r9-r18.mjs",
     "check:num-r18:admission": "node scripts/check-num-r18-human-admission.mjs",
-    "check:num-r9-r18:final": "npm run check:num-r9-r18 && npm run check:num-r18:admission",
-    "check:ziwei-fp-w11": "node scripts/check-ziwei-fp-w11.mjs"
+    "check:num-r9-r18:final": "npm run check:num-r18:final",
+    "check:num-r18:final": "npm run check:num-r18:admission && npm run check:num-r9-r18 && node scripts/check-num-r18-final-production.mjs && npm run check:num-fp && npm run check:num-r1-r8 && npm run check:num-r8:admission && npm run check:num-r8:customer && npm run check:cx-r12r4b:smr-num",
+    "check:ziwei-fp-w11": "node scripts/check-ziwei-fp-w11.mjs",
+    "check:bazi-fp-w11-w13": "node scripts/check-bazi-fp-w11-w13.mjs"
   },
   "type": "module",
   "dependencies": {

@@ -57,12 +57,12 @@ export async function onRequestPost({request}){
      ?buildBzrRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
      :buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
   const integratedReading=publicMethodCode==='NUMEROLOGY_PROJECTION'
-   ?buildNumIntegratedReadingIR({projection,bundle:meaningBundle,localeProjection})
+   ?buildNumIntegratedReadingIR({projection,bundle:meaningBundle,localeProjection,expansionInput:body?.numerologyExpansionInput||{}})
    :null;
   return json({ok:true,capabilityAvailability:'AVAILABLE',capabilityVersion:'1.0.0',executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading,...(integratedReading?{integratedReading}: {})},200);
  }catch(error){
   const code=error?.code||'CMP_MEANING_FAILED_CLOSED';
-  const status=code==='CMP_METHOD_PRODUCTION_NOT_ACTIVATED'?423:code.includes('PROJECTION')||code.includes('BOUNDARY')?422:500;
+  const status=code==='CMP_METHOD_PRODUCTION_NOT_ACTIVATED'?423:code.includes('PROJECTION')||code.includes('BOUNDARY')||code.startsWith('NUM_R18_')?422:500;
   return json({ok:false,error:code},status);
  }
 }

@@ -11,6 +11,7 @@ export default {
     flow: { input: 'Input', eligibility: 'Eligibility', processing: 'Processing', results: 'Results' },
     inputTitle: 'Canonical birth input',
     inputCopy: 'Unknown values stay unknown. Birth timezone and UTC offset at birth are separate values; this page never substitutes the browser timezone.',
+    numerologyDetails: 'Numerology details (optional)', fullBirthName: 'Full birth name', relationshipBirthDate: 'Comparison birth date', nameConfirmation: 'I confirm the name above is the name I want used for this numerology calculation.', numerologyDetailsHelp: 'Optional. A confirmed birth name enables Expression, Soul Urge, Personality and Maturity calculations. A comparison birth date enables structural relationship comparison; neither creates a compatibility verdict.',
     birthDate: 'Birth date', birthTime: 'Birth time', birthPlace: 'Birth place', countryCode: 'Country code', birthPlacePrecision: 'Place precision',
     timezone: 'Birth timezone', utcOffsetAtBirth: 'UTC offset at birth', timezonePrecision: 'Timezone precision', timezoneHelp: 'Use the historical offset that applied at birth. Current/browser timezone is never substituted.',
     coordinates: 'Coordinates (optional)', latitude: 'Latitude', longitude: 'Longitude', targetDate: 'Optional cycle date', targetDateHelp: 'Used only when a selected Method has an authorized date-cycle calculation. No date is assumed when blank.',

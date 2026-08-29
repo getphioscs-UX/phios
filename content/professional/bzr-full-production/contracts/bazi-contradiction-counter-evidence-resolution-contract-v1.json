@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CONTRADICTION-COUNTER-EVIDENCE-RESOLUTION-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W12",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "purpose": "Classify support, explicit counter-evidence, open alternatives, school-qualified views and unknown boundaries without deleting losing evidence or inventing a winner.",
+  "inputSchemas": [
+    "PHI-OS-BAZI-CROSS-FINDING-COMPOSITION-IR-v1.0.0",
+    "PHI-OS-BAZI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+    "PHI-OS-BAZI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-BAZI-CONTRADICTION-RESOLUTION-IR-v1.0.0",
+  "resolutionStates": [
+    "SUPPORTED",
+    "QUALIFIED",
+    "BOUNDED_BY_UNKNOWN",
+    "ALTERNATIVES_OPEN",
+    "SCHOOL_VIEW_OPEN",
+    "COUNTERBALANCED",
+    "PARTIAL"
+  ],
+  "rules": {
+    "explicitCounterEvidenceMustRemainAttached": true,
+    "multiplePatternCandidatesMustRemainAlternativesUntilUpstreamPrimaryVerdict": true,
+    "differentSchoolsAreParallelViewsNotMajorityVote": true,
+    "unknownBoundaryMustNotBeConvertedToNegativeEvidence": true,
+    "unestablishedTransformationIsAQualifierNotAFailure": true,
+    "resolverMayNotDeleteFinding": true,
+    "resolverMayNotSelectWinningSchool": true,
+    "resolverMayNotInventStrengthPatternUsefulGodOrTiaohouVerdict": true,
+    "resolverMayNotCreateCustomerNarrative": true,
+    "resolverMayNotPredictEvents": true
+  },
+  "runtimeRef": "functions/bzr-full-production/bazi-contradiction-resolver-runtime.js",
+  "handoff": "BAZI-FP-W13 assigns one primary render owner per semantic cluster while retaining W12 qualifiers, alternatives and counter-evidence."
+}

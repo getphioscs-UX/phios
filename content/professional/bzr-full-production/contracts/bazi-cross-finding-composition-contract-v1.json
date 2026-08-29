@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CROSS-FINDING-COMPOSITION-CONTRACT-v1.0.0",
+  "work": "BAZI-FP-W11",
+  "status": "ENGINEERING_COMPLETE",
+  "baselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "purpose": "Assemble W9 chart-level findings into a small set of typed composition units while preserving W10 evidence lineage, unresolved alternatives, school boundaries and temporal context. W11 creates no customer prose and resolves no contradiction.",
+  "inputSchemas": [
+    "PHI-OS-BAZI-STRUCTURAL-FINDING-COLLECTION-v1.0.0",
+    "PHI-OS-BAZI-INTERPRETATION-EVIDENCE-GRAPH-v1.0.0"
+  ],
+  "outputSchema": "PHI-OS-BAZI-CROSS-FINDING-COMPOSITION-IR-v1.0.0",
+  "unitSchema": "PHI-OS-BAZI-COMPOSITION-UNIT-v1.0.0",
+  "compositionTypes": [
+    "NATAL_FOUNDATION",
+    "NATAL_RELATIONSHIP_STRUCTURE",
+    "PATTERN_CANDIDATE_SET",
+    "SCHOOL_QUALIFIED_VIEW",
+    "CURRENT_TEMPORAL_STRUCTURE"
+  ],
+  "requiredUnitFields": [
+    "compositionId",
+    "compositionType",
+    "semanticKey",
+    "findingRefs",
+    "evidenceRefs",
+    "authorityRefs",
+    "unknownRefs",
+    "counterEvidenceRefs",
+    "schoolCode",
+    "temporalContext",
+    "semanticFingerprint"
+  ],
+  "rules": {
+    "pillarPositionAloneNeverCreatesCompositionUnit": true,
+    "natalFoundationCombinesDayMasterMonthCommandRootAndTenGodContext": true,
+    "patternCandidatesRemainOneAlternativeSetWithoutWinnerSelection": true,
+    "eachSchoolViewGetsItsOwnCompositionUnit": true,
+    "daYunLiuNianAndCrossLayerFindingsComposeAsOneCurrentTemporalStructure": true,
+    "allFindingEvidenceAuthorityUnknownAndCounterRefsAreUnionPreserved": true,
+    "compositionMayNotCreateNewFinding": true,
+    "compositionMayNotCreateCustomerMeaning": true,
+    "compositionMayNotResolveContradiction": true,
+    "compositionMayNotMergeSchools": true,
+    "compositionMayNotPredictEvents": true,
+    "compositionMayNotAssignGoodBadScore": true
+  },
+  "runtimeRef": "functions/bzr-full-production/bazi-cross-finding-composition-runtime.js",
+  "registryRef": "content/professional/bzr-full-production/registries/bazi-cross-finding-composition-rule-registry-v1.json",
+  "handoff": "BAZI-FP-W12 consumes composition units plus W10 graph and preserves contradictions/counter-evidence before W13 render ownership is assigned."
+}

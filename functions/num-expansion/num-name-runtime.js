@@ -29,8 +29,8 @@ export function calculateNumNameProfile({identityInput,lifePathValue}={}){
     schemaVersion:NUM_NAME_RUNTIME_SCHEMA,workCode:'NUM-R11',schoolAuthorityId:NUM_EXPANSION_SCHOOL,
     input:{fullBirthName:identityInput.fullBirthName,normalizedName:name.normalizedDisplay,customerConfirmed:true,alphabetSystemId:NAME_ALPHABET_SYSTEM,nameNormalizationPolicy:NAME_NORMALIZATION_POLICY},
     values:{expression,soulUrge,personality,maturity},lifePathForMaturity:lifePathSingle,letterSequence,
-    semantics:{calculationOnly:true,traitMeaningCreated:false,destinyClaimCreated:false,customerPublishable:false},
-    state:'CALCULATION_CANDIDATE_R18_ADMISSION_PENDING'
+    semantics:{calculationOnly:true,traitMeaningCreated:false,destinyClaimCreated:false,runtimeUseAllowed:true,customerPublishable:true},
+    runtimeUseAllowed:true,customerPublishable:true,state:'CALCULATION_RUNTIME_ACTIVE'
   });
 }
 export default Object.freeze({calculateNumNameProfile});
