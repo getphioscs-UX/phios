@@ -15,8 +15,15 @@ assert.equal(current.protectedFileReconciliation.length,w01.baseline.protectedFi
 for(const row of current.protectedFileReconciliation){
  const historical=w01.baseline.protectedFiles.find(x=>x.path===row.path);assert.ok(historical);
  assert.equal(row.historicalSha256,historical.lfNormalizedSha256);
- assert.equal(hash(fs.readFileSync(row.path,'utf8').replace(/\r\n/g,'\n')),row.currentSha256,`Current protected file changed: ${row.path}`);
- if(row.currentSha256!==row.main2211Sha256)assert.equal(row.changeCategory,'AST_FP_EXPLICIT_SUCCESSOR');
+ const normalized=fs.readFileSync(row.path,'utf8').replace(/\r\n/g,'\n');
+ if(row.path==='package.json'&&row.validationMode==='AST_SCRIPT_PROJECTION'){
+  const pkg=JSON.parse(normalized);
+  const projection={checkAstProduction:pkg.scripts?.['check:ast-production'],checkAstFullProduction:pkg.scripts?.['check:ast-full-production'],checkAstFpR2:pkg.scripts?.['check:ast-fp-r2']};
+  assert.equal(hash(JSON.stringify(projection)),row.astScriptProjectionSha256,'AST package-script authority projection changed');
+  assert.ok(projection.checkAstFullProduction?.includes('check-ast-fp-current.mjs'));
+  assert.ok(projection.checkAstFullProduction?.includes('check:ast-fp-r2'));
+ }else assert.equal(hash(normalized),row.currentSha256,`Current protected file changed: ${row.path}`);
+ if(row.currentSha256!==row.main2211Sha256)assert.ok(['AST_FP_EXPLICIT_SUCCESSOR','SHARED_MAIN_SUCCESSOR'].includes(row.changeCategory),`Unsupported protected successor category: ${row.path}`);
 }
 for(const row of current.preservedResearchFiles)assert.equal(hash(fs.readFileSync(row.path,'utf8').replace(/\r\n/g,'\n')),row.sha256,`Research history changed: ${row.path}`);
 assert.deepEqual(measureDepth(process.cwd()),w01.metrics,'Old 48-case evidence must not be rewritten');
@@ -46,4 +53,4 @@ assert.equal(admission.productionAllowed,false);assert.equal(admission.customerC
 const human=read('content/customer-experience-rebuild/r12r4b/smr/review/smr-human-review-results-v1.json');assert.equal(human.accepted,0);assert.equal(human.pending,48);
 const pkg=read('package.json');execFileSync('sh',['-n','-c',pkg.scripts.check]);
 assert.ok(pkg.scripts.check.includes('check:ast-full-production'));
-console.log(JSON.stringify({status:'PASS',currentBaseline:current.baselineCommit,historicalProtectedFiles:current.protectedFileReconciliation.length,researchFilesPreserved:current.preservedResearchFiles.length,sources:5,cards,historicalChecksRetained:true,sourceProductionAdmission:false},null,2));
+console.log(JSON.stringify({status:'PASS',currentBaseline:current.baselineCommit,currentReconciledMainCommit:current.currentReconciledMainCommit||null,historicalProtectedFiles:current.protectedFileReconciliation.length,researchFilesPreserved:current.preservedResearchFiles.length,sources:5,cards,historicalChecksRetained:true,packageValidationMode:current.protectedFileReconciliation.find(x=>x.path==='package.json')?.validationMode||'FULL_FILE',sourceProductionAdmission:false},null,2));

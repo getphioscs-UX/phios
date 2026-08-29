@@ -5,7 +5,7 @@
   "historicalBaselineRewritten": false,
   "historicalCheckerRetained": true,
   "currentChecker": "scripts/check-ast-fp-current.mjs",
-  "reason": "Preserve abab W0-W2 checkpoint exactly; reconcile known later main changes and explicit AST engineering successors without treating unrelated BaZi evolution as corruption. Current successor reconciliation also admits the shared package-script-only SMR-R2 W9-W11 aggregate advance while preserving AST Full Production runtime, source, candidate and admission authority.",
+  "reason": "Preserve the abab W0-W2 checkpoint and 2211 AST engineering baseline while reconciling current main 31f0cb5 and the AST-FP-R2 admission checker. package.json is now validated through an AST-script projection so unrelated shared-system check additions do not repeatedly masquerade as AST authority drift; AST production commands and the R2 gate remain pinned.",
   "protectedFileReconciliation": [
     {
       "path": "content/customer-experience-rebuild/admission/cx-r12r3b-human-reviewed-composition-admission-v1.json",
@@ -438,9 +438,12 @@
       "path": "package.json",
       "historicalSha256": "f38dc068cf0044fee28e51ac93fa8d6b8dadf0daa4a55bde5a6cba21744d8bf2",
       "main2211Sha256": "c3768a8a13c1658eb0f11bc576a88da992f7644354ad79e6fab623539b28ec48",
-      "currentSha256": "83f7b0db2c0ede18cceaecdf71a11dd247ae1b5fea4f141137d77af2ec08c586",
+      "currentSha256": "00d96b8b85b990d024b8c63973be1969aff0500c5b4185e4bdf735852bf1f83b",
       "changeCategory": "AST_FP_EXPLICIT_SUCCESSOR",
-      "successorNote": "Shared package orchestration explicitly advances SMR-R2 aggregate from W0-W5 to W0-W11; AST Full Production command remains present and unchanged."
+      "successorNote": "Source main 31f0cb5 adds shared SMR-R2 W12-W16 and other method work. AST-FP-R2 then adds check:ast-fp-r2 to check:ast-full-production. Future unrelated package script additions are ignored by the AST current-baseline gate unless they change the pinned AST script projection.",
+      "sourceMain31f0Sha256": "7aac00a9cb6564976c3e28b6d14d4e37c03f6fd61c9ad8b5beba4d4d53bbbc94",
+      "validationMode": "AST_SCRIPT_PROJECTION",
+      "astScriptProjectionSha256": "20d11a01a98772fb771757e10b80e27a63d55804b03ed6f96729dc896e1ccfbf"
     },
     {
       "path": "scripts/check-bazi-fp-w0-w4.mjs",
@@ -552,5 +555,8 @@
     }
   ],
   "newSourceAdmission": false,
-  "newHumanAcceptance": false
+  "newHumanAcceptance": false,
+  "currentReconciledMainCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "currentReconciledMainMessage": "NUM",
+  "reconciliationState": "AST_FP_R0_RECONCILED"
 }

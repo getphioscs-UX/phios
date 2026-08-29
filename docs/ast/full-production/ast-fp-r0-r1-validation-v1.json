@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-R0-R1-VALIDATION-v1.0.0",
+  "baselineCommit": "d576387f33e2a1ca76f196dba5059e15499d1b4d",
+  "status": "R0_R1_SCOPED_PASS_FULL_AST_AGGREGATE_ENV_DEPENDENCY_BLOCKED",
+  "commands": [
+    {
+      "command": "node scripts/check-ast-fp-r0-r1-reconciliation.mjs",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "node scripts/check-ast-fp-current.mjs",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:cx-r12r4b:smr-r2-w0-w8",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:cx-r12r4b:smr-r2-w0-w11",
+      "exitCode": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "npm run check:ast-full-production",
+      "exitCode": 1,
+      "status": "ENVIRONMENT_DEPENDENCY_BLOCKED",
+      "completedThrough": "check-ast-fp-current.mjs",
+      "error": "ERR_MODULE_NOT_FOUND: node_modules/ajv/dist/2020.js",
+      "codeChangeFailure": false
+    }
+  ],
+  "r0": {
+    "protectedFiles": 64,
+    "preReconciliationDrift": 1,
+    "preReconciliationDriftPath": "package.json",
+    "postReconciliationDrift": 0,
+    "sharedPackageSuccessor": true,
+    "packageNormalizedSha256": "686d8d1336407037002cd31d50328eb29913c1d8cbeb1b57fcf6edca06e3d6a6",
+    "historicalEvidencePreserved": true
+  },
+  "r1": {
+    "smrR2W0W8": "PASS",
+    "smrR2W0W11Compatibility": "PASS",
+    "astRelationContextRegression": "CLOSED",
+    "astRenderableNarrativeBlocks": 10,
+    "astSuppressedNarrativeDuplicates": 9,
+    "timingWithoutTemporalClaim": "SUPPRESSED"
+  },
+  "next": "AST-FP-R2",
+  "environmentNote": "The supplied archive does not include node_modules. npm ci timed out in this execution environment, so the later AJV-dependent AST fidelity/candidate stages could not be re-executed here. R0 current-baseline and R1 W0-W11 gates completed successfully before that dependency boundary."
+}
