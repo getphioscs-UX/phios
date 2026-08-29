@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R2-W2-ACCEPTED-METHOD-READING-ENVELOPE-CONTRACT-v1.0.0",
+  "workCode": "PPR-R2-W2",
+  "status": "FROZEN",
+  "runtimeSchema": "PHI-OS-PERSONAL-REALITY-METHOD-PRODUCT-ENVELOPE-v1.0.0",
+  "methods": ["AST","BZR","NUM","ZWR","ECR"],
+  "requiredFields": [
+    "schemaVersion","methodId","productType","locale","state","publication","hero","navigation","sections","visuals","lineage","boundaries"
+  ],
+  "publicationStates": ["CUSTOMER_PUBLISHABLE","UPSTREAM_CUTOVER_BLOCKED","PRODUCT_AUTHORITY_INCOMPLETE"],
+  "hardBoundaries": {
+    "newMeaningCreated": false,
+    "methodRuntimeExecuted": false,
+    "canonicalProjectionCreated": false,
+    "rawProjectionPromotedToCustomerConclusion": false,
+    "rendererMeaningCreated": false,
+    "blockedUpstreamAuthorityPromoted": false
+  },
+  "lineageRule": "Every customer narrative payload remains owned by an upstream admitted method product or accepted interpretation authority; the adapter only projects product shape.",
+  "routingRule": "W8+ may route CUSTOMER_PUBLISHABLE envelopes; blocked or incomplete envelopes remain visible as unavailable and may not be silently downgraded into generic prose."
+}

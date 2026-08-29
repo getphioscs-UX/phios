@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-AST-R2-W20-FULL-PRODUCTION-FREEZE-v1.0.0",
   "workCode": "R2-W20",
   "baselineCommit": "a06506cbbc9bf0bdd11ff1c740f7be65276d84d9",
-  "status": "AST_ADMITTED_AWAITING_EXACT_DEPLOYMENT_AND_LIVE_SMOKE",
+  "status": "AST_FULL_PRODUCTION_FROZEN",
   "methodId": "AST",
   "engineering": {
     "canonicalRouteIntegrated": true,
@@ -17,24 +17,24 @@
     "w18FinalCustomerHumanAccepted": true,
     "w19AstMethodScopedCutoverAllowed": true,
     "r3IndependentEphemerisCertification": true,
-    "liveCanonicalHtmlSmoke": false,
-    "liveCustomerAssetsSmoke": false,
-    "liveApiConsentBoundarySmoke": false,
-    "liveAstEndToEndApiSmoke": false,
-    "deployedCommitMatchesExpected": false
+    "liveCanonicalHtmlSmoke": true,
+    "liveCustomerAssetsSmoke": true,
+    "liveApiConsentBoundarySmoke": true,
+    "liveAstEndToEndApiSmoke": true,
+    "deployedCommitMatchesExpected": true
   },
-  "deployedCommit": null,
-  "productionBaseUrl": null,
-  "smokeExecutedAt": null,
-  "astFullProductionFrozen": false,
-  "customerCutoverAllowed": false,
-  "blockers": [
-    "POST_DEPLOY_CLOUDFLARE_LIVE_SMOKE"
-  ],
+  "deployedCommit": "1cb363ae4fe9b45b2206f5e1ec22d4a166345e99",
+  "productionBaseUrl": "https://phios-github.pages.dev",
+  "smokeExecutedAt": "2026-08-29T10:06:03.194Z",
+  "astFullProductionFrozen": true,
+  "customerCutoverAllowed": true,
+  "blockers": [],
   "predeployAdmission": {
     "astMethodFlag": true,
     "r3CertificationFrozen": true,
     "w18FinalCustomerHumanAccepted": true,
     "codeReadyForExactDeployment": true
-  }
+  },
+  "liveSmokeEvidenceDigest": "42d50731d079b9269a0655de81d997e0d3b5873d21460410dfd30f8949ebac3a",
+  "liveSmokeEvidenceSource": "ast-r2-w20-live-smoke-evidence.json"
 }

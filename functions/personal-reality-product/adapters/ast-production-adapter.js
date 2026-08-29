@@ -1,0 +1,16 @@
+import {AST_R2_METHOD_SCOPED_ADMISSION} from '../../ast-full-production/ast-r2-production-admission-authority.js';
+import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail} from '../product-envelope-core.js';
+export function adaptAstPersonalRealityProduct({workspace,locale=workspace?.locale||'en'}={}){
+ if(workspace?.schemaVersion!=='PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0')fail('PPR_R2_AST_WORKSPACE_REQUIRED');
+ const l=localeOf(locale),allowed=AST_R2_METHOD_SCOPED_ADMISSION.customerPublicationAllowed===true&&AST_R2_METHOD_SCOPED_ADMISSION.customerCutoverAllowed===true&&workspace.governance?.customerPublicationAllowed===true;
+ const themes=list(workspace.themes),support=list(workspace.supportTension?.support||workspace.supportTension?.items).filter(x=>!x?.kind||x.kind==='SUPPORT_SIGNAL'),tension=list(workspace.supportTension?.tension||workspace.supportTension?.items).filter(x=>x?.kind==='TENSION_SIGNAL');
+ const sections=[
+  section({sectionId:'READING',title:text(l,'Whole-chart reading','整盘读取'),summary:workspace.overview?.readerSummary||workspace.overview?.summary||null,payload:workspace.overview||null,sourceRefs:list(workspace.overview?.sourceRefs)}),
+  section({sectionId:'THEMES',title:text(l,'Whole-chart themes','整盘主题'),payload:themes,sourceRefs:themes.flatMap(x=>list(x.sourceRefs))}),
+  section({sectionId:'SUPPORT_TENSION',title:text(l,'Support and tension','支持与张力'),payload:{support,tension},sourceRefs:[...support,...tension].flatMap(x=>list(x.sourceRefs))}),
+  ...(workspace.timing?.state&&workspace.timing.state!=='UNAVAILABLE'?[section({sectionId:'CURRENT_ACTIVATION',title:text(l,'Current activation','当前激活'),payload:workspace.timing,sourceRefs:list(workspace.timing?.sourceRefs)})]:[]),
+  section({sectionId:'DETAILS',title:text(l,'Evidence & lineage','证据与来源'),payload:workspace.technical||null,kind:'EVIDENCE',sourceRefs:list(workspace.technical?.items).flatMap(x=>list(x.sourceRefs))})
+ ];
+ return buildMethodProductEnvelope({methodId:'AST',productType:'ASTROLOGY_PROFESSIONAL_READING',locale:l,state:allowed?'CUSTOMER_PUBLISHABLE':'UPSTREAM_CUTOVER_BLOCKED',publication:{customerPublishable:allowed,authorityRef:'functions/ast-full-production/ast-r2-production-admission-authority.js',status:AST_R2_METHOD_SCOPED_ADMISSION.status,blockers:allowed?[]:['R3_INDEPENDENT_EPHEMERIS_CERTIFICATION_REQUIRED']},hero:{eyebrow:text(l,'ASTROLOGY · WHOLE-CHART READING','占星 · 整盘读取'),title:workspace.overview?.readerTitle||text(l,'Start with the chart as a whole','先从整张盘开始'),summary:workspace.overview?.readerSummary||workspace.overview?.summary||null,highlights:themes.slice(0,3).map(x=>x.readerTitle).filter(Boolean)},navigation:list(workspace.navigation).length?workspace.navigation:sections.map(x=>x.sectionId),sections,visuals:[visual({visualId:'AST_CHART',type:'ASTROLOGY_CHART',title:text(l,'Natal chart','出生星盘'),payload:workspace.chartModel||null,sourceRefs:[workspace.projectionId].filter(Boolean)})],lineage:{projectionId:workspace.projectionId||null,workspaceSchema:workspace.schemaVersion,productionAdmissionRef:'AST-R2-W19',sourceRefs:list(workspace.technical?.items).flatMap(x=>list(x.sourceRefs))},boundaries:{currentRealityKnown:false,fortunePredictionCreated:false,liveIndividualHumanReviewClaimed:false},sourceProduct:workspace});
+}
+export default Object.freeze({adaptAstPersonalRealityProduct});
