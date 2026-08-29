@@ -15,6 +15,7 @@ import {buildBaziMethodNativeReading} from '../personal-professional-reading/baz
 import {resolveBirthPlace} from '../location/place-resolver.js';
 import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production/ziwei-full-production-customer-runtime.js';
 import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
+import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -177,7 +178,7 @@ async function executeOne(context,input,key,consentRecordId,parameters,numExpans
     try{
       const meaningPayload=await buildProductionMethodMeaningPayload({canonicalProjection:payload.result,locale:context.locale,numerologyExpansionInput:numExpansionInput||{}});
       const numerologyEnvelope=buildNumerologyCustomerReadingEnvelope({canonicalProjection:payload.result,meaningPayload,expansionInput:numExpansionInput||{},locale:context.locale});
-      return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod,numerologyEnvelope};
+      return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod,numerologyEnvelope,numerologyIntegratedReading:meaningPayload.integratedReading||null};
     }catch(error){
       return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||error?.message||'NUM_CX_PRODUCTION_READING_UNAVAILABLE']};
     }
@@ -192,6 +193,7 @@ async function executeOne(context,input,key,consentRecordId,parameters,numExpans
   }
   return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod,customerProjection:projectAstrologyForCustomer({canonicalProjection:payload.result,meaningPayload,locale:context.locale})};
 }
+
 
 function stage(locale,stageId,state,enLabel,zhLabel,enDetail,zhDetail){
   return freeze({stageId,state,label:locale==='zh-Hans'?zhLabel:enLabel,detail:locale==='zh-Hans'?zhDetail:enDetail});
@@ -322,8 +324,9 @@ export async function onRequestPost(context){
   const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
+  const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||''});
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute});
   return json({
     ok:true,
     view,
