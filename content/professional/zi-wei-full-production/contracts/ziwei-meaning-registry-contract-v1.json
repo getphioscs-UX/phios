@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-FP-W11-MEANING-REGISTRY-CONTRACT-v1.0.0",
+  "work": "ZIWEI-FP-W11",
+  "baselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "status": "FROZEN_ENGINEERING_CONTRACT",
+  "requiredMeaningFields": [
+    "meaningCode",
+    "meaningVersion",
+    "kind",
+    "sourceCode",
+    "meaningType",
+    "label",
+    "definition",
+    "authorityClass",
+    "availability",
+    "sourceRefs",
+    "semanticDigest"
+  ],
+  "supportedKinds": [
+    "PALACE",
+    "STAR",
+    "TRANSFORMATION",
+    "EMPHASIS",
+    "STAR_STATE",
+    "PALACE_RELATIONSHIP",
+    "PATTERN",
+    "TEMPORAL"
+  ],
+  "resolution": {
+    "key": "meaningCode",
+    "locales": [
+      "en",
+      "zh-Hans"
+    ],
+    "missingMeaningBehavior": "FAIL_CLOSED_OR_EXPLICIT_BLOCKED_COVERAGE",
+    "duplicateMeaningCodeAllowed": false
+  },
+  "compositionBoundary": {
+    "atomicMeaningIsFinding": false,
+    "atomicMeaningIsCustomerInterpretation": false,
+    "multipleMeaningsMayBeComposedOnlyByW12Plus": true,
+    "patternMeaningMayStateQualificationOnly": true,
+    "patternOutcomeTextAllowed": false,
+    "stateMeaningMayCreateStrengthScore": false,
+    "relationshipMeaningMayInferSupportOrConflict": false
+  },
+  "lineageBoundary": {
+    "legacy36Mutated": false,
+    "zwdMeaningsMutated": false,
+    "sourceAdmissionDoesNotAutoCreateInterpretiveMeaning": true,
+    "extensionStarStandaloneMeaningRequiresSeparateMeaningSourceAdmission": true
+  },
+  "customerCutoverAllowed": false
+}

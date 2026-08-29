@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-SMR-R2-PRODUCTION-ADMISSION-v1.0.0",
+  "baselineCommit": "31f0cb5dcf47c1e9419ef67ac89968d06834b35d",
+  "workCode": "R2-W20",
+  "status": "BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE",
+  "methods": {
+    "AST": {"targetState":"AST_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
+    "BZR": {"targetState":"BZR_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
+    "ZWR": {"targetState":"ZWR_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
+    "NUM": {"targetState":"NUM_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"},
+    "ECR": {"targetState":"ECR_SINGLE_METHOD_READING_R2","state":"BLOCKED_PENDING_R2_W19_HUMAN_ACCEPTANCE"}
+  },
+  "humanReviewedProductComposition": false,
+  "liveCustomerIndividuallyHumanReviewed": false,
+  "productionAllowed": false,
+  "customerCutoverAllowed": false,
+  "singleApi": "/api/customer-personal-reality",
+  "methodSpecificApiCreated": false,
+  "targetViewContract": {
+    "singleSelect": "view.singleMethodReading",
+    "multiSelect": "view.singleMethodReading = null",
+    "combinedReadingBeforeCrossAdmission": "NOT_STARTED"
+  },
+  "currentApiMutationApplied": false,
+  "oldSmrHardReplacementApplied": false,
+  "blocker": "R2_W19_20_OF_20_HUMAN_ACCEPTANCE_REQUIRED"
+}
