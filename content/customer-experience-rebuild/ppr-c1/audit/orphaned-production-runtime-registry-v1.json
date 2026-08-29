@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-PPR-C1-ORPHANED-PRODUCTION-RUNTIME-REGISTRY-v1.0.0",
+  "work": "PPR-C1-W0",
+  "baselineCommit": "3f6825a9b57dc9e62e34fb69bc55d2aac2c39768",
+  "status": "AUDITED",
+  "canonicalRoute": "/perspectives/personal/",
+  "entries": [
+    {
+      "methodId": "BZR",
+      "capability": "BAZI-FP-v1.0.0",
+      "backendState": "FULL_PRODUCTION_FROZEN",
+      "publicationState": "CUSTOMER_PUBLISHABLE",
+      "backendEntry": "functions/api/bazi-full-reading.js",
+      "legacyConsumer": "personal-runtime.html + assets/js/pages/bazi-full-reading.js",
+      "canonicalConsumerBeforePprC1": false,
+      "pprC1State": "CLOSED_BY_W3_METHOD_NATIVE_ADAPTER",
+      "customerEligibility": true
+    },
+    {
+      "methodId": "NUM",
+      "capability": "NUM-D8 Full Production",
+      "backendState": "FULL_PRODUCTION_ACTIVE",
+      "publicationState": "CUSTOMER_PUBLISHABLE",
+      "backendEntry": "functions/num-depth/num-depth-production-runtime.js",
+      "legacyConsumer": "personal-runtime.html + assets/js/pages/num-production-meaning.js",
+      "canonicalConsumerBeforePprC1": false,
+      "pprC1State": "OPEN_FOR_FUTURE_NUM_METHOD_NATIVE_ADAPTER",
+      "customerEligibility": true
+    },
+    {
+      "methodId": "ZWR",
+      "capability": "ZIWEI-FP-W18–W23 engineering chain",
+      "backendState": "ENGINEERING_COMPLETE_MACHINE_96_OF_96",
+      "publicationState": "HUMAN_REVIEW_PENDING_0_OF_24_AT_BASELINE",
+      "backendEntry": "functions/zi-wei-full-production/ziwei-customer-report-runtime.js",
+      "legacyConsumer": null,
+      "canonicalConsumerBeforePprC1": false,
+      "pprC1State": "NOT_ORPHANED_PRODUCTION_RELEASE_GATE_CLOSED",
+      "customerEligibility": false
+    },
+    {
+      "methodId": "AST",
+      "capability": "AST R5 whole-chart + R2-W9-W12 customer reading",
+      "backendState": "ENGINEERING_ACCEPTED_R4A_HUMAN_ADMITTED",
+      "publicationState": "FINAL_R5_HUMAN_ACCEPTANCE_AND_RELEASE_GATES_PENDING",
+      "backendEntry": "functions/ast-full-production/ast-customer-reading-v2-runtime.js",
+      "legacyConsumer": "existing astrology projection/customer path only",
+      "canonicalConsumerBeforePprC1": false,
+      "pprC1State": "NOT_ORPHANED_PRODUCTION_RELEASE_GATE_CLOSED",
+      "customerEligibility": false
+    }
+  ],
+  "summary": {
+    "productionPublishableButCanonicalUnconsumedBeforePprC1": [
+      "BZR",
+      "NUM"
+    ],
+    "releaseGatedNotYetEligible": [
+      "ZWR",
+      "AST"
+    ],
+    "closedThisBatch": [
+      "BZR"
+    ],
+    "remainingProductionOrphan": [
+      "NUM"
+    ]
+  },
+  "boundary": {
+    "backendCapabilityDoesNotEqualCanonicalConsumption": true,
+    "engineeringCompleteDoesNotEqualCustomerEligibility": true
+  }
+}

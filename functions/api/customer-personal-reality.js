@@ -7,9 +7,10 @@ import {projectMethodsForCustomer} from '../customer-projection/method-customer-
 import {projectAstrologyForCustomer} from '../customer-projection/astrology-customer-projection.js';
 import {buildAstrologyCustomerReading} from '../customer-projection/astrology-customer-reading.js';
 import {buildAcceptedMethodCustomerResult} from '../customer-projection/method-customer-reading-v2.js';
+import {buildProductionMethodMeaningPayload} from '../canonical-meaning-production/api-method-meaning-handler.js';
+import {buildNumerologyCustomerReadingEnvelope,projectNumerologyEnvelopeForCustomer} from '../customer-projection/numerology-customer-reading-envelope-v1.js';
 import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/single-method-reading-production.js';
 import {resolveBirthPlace} from '../location/place-resolver.js';
-import {maybeBuildActiveAstCustomerWorkspace,getAstCustomerWorkspaceCapability} from '../ast-full-production/ast-customer-reading-production.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -49,20 +50,31 @@ function canonicalInput(body,location,consentRecordId,locale){
 function executionParameters(body){
   const traditional=clean(body?.traditionalCalculationSex).toUpperCase();
   const houseSystem=clean(body?.astrologyHouseSystem).toUpperCase();
+  const targetDate=clean(body?.numerologyTargetDate);
   const out={};
   if(traditional==='MALE'||traditional==='FEMALE')out.traditionalCalculationSex=traditional;
   if(houseSystem==='WHOLE_SIGN_V1'||houseSystem==='PLACIDUS_V1')out.houseSystemCode=houseSystem;
+  if(targetDate)out.targetDate=targetDate;
   return freeze(out);
+}
+function isoDate(value){const v=clean(value);if(!v)return null;if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return null;const d=new Date(`${v}T00:00:00.000Z`);return !Number.isNaN(d.valueOf())&&d.toISOString().slice(0,10)===v?v:null}
+function numerologyExpansionInput(body){
+  const fullBirthName=clean(body?.numerologyFullBirthName);
+  const targetDate=clean(body?.numerologyTargetDate);
+  const comparisonBirthDate=clean(body?.numerologyComparisonBirthDate);
+  const identityInput=fullBirthName?freeze({fullBirthName,customerConfirmed:body?.numerologyNameConfirmed===true,alphabetSystemId:'PYTHAGOREAN_LATIN_1_9_V1',nameNormalizationPolicy:'ASCII_LATIN_LETTERS_ONLY_V1'}):null;
+  return freeze({birthDate:nullable(body?.birthDate),...(targetDate?{targetDate}:{}),...(identityInput?{identityInput}:{}),...(comparisonBirthDate?{relationship:freeze({comparisonBirthDate})}:{})});
+}
+function validateNumerologyExpansionRequest(body,selected){
+  if(!selected.includes('numeric'))return null;
+  const target=clean(body?.numerologyTargetDate),comparison=clean(body?.numerologyComparisonBirthDate),name=clean(body?.numerologyFullBirthName);
+  if(target&&!isoDate(target))return 'NUM_CX_TARGET_DATE_INVALID';
+  if(comparison&&!isoDate(comparison))return 'NUM_CX_COMPARISON_BIRTH_DATE_INVALID';
+  if(body?.numerologyNameConfirmed===true&&!name)return 'NUM_CX_CONFIRMED_NAME_REQUIRED';
+  return null;
 }
 
 function methodLabel(spec,locale){return spec.label[locale==='zh-Hans'?'zh':'en']}
-
-function astTargetContext(body){
-  const date=clean(body?.astTargetDate),time=clean(body?.astTargetTime),iana=clean(body?.astTargetTimezone),offset=clean(body?.astTargetUtcOffsetAtTarget),values=[date,time,iana,offset];
-  if(values.every(x=>!x))return null;
-  if(values.some(x=>!x)){const e=new Error('AST_TARGET_CONTEXT_INCOMPLETE');e.code='AST_TARGET_CONTEXT_INCOMPLETE';throw e;}
-  return freeze({targetDate:date,targetTime:time.length===5?`${time}:00`:time,targetTimezone:freeze({iana,utcOffsetAtTarget:offset})});
-}
 
 function limitedReadingMethod(spec,locale,error,projection=null){
   const message=locale==='zh-Hans'
@@ -92,7 +104,7 @@ function limitedReadingMethod(spec,locale,error,projection=null){
   });
 }
 
-async function executeOne(context,input,key,consentRecordId,parameters){
+async function executeOne(context,input,key,consentRecordId,parameters,numExpansionInput){
   const spec=METHODS[key];
   const requestId=`CX-${spec.methodCode}-${crypto.randomUUID()}`;
   const body=spec.methodCode==='EMBODIED_CONFIGURATION'
@@ -109,6 +121,15 @@ async function executeOne(context,input,key,consentRecordId,parameters){
     readingMethod=await buildAcceptedMethodCustomerResult({canonicalProjection:payload.result,locale:context.locale,requestedDepth:'STANDARD'});
   }catch(error){
     readingMethod=limitedReadingMethod(spec,context.locale,error,payload.result);
+  }
+  if(spec.methodCode==='NUMEROLOGY'){
+    try{
+      const meaningPayload=await buildProductionMethodMeaningPayload({canonicalProjection:payload.result,locale:context.locale,numerologyExpansionInput:numExpansionInput||{}});
+      const numerologyEnvelope=buildNumerologyCustomerReadingEnvelope({canonicalProjection:payload.result,meaningPayload,expansionInput:numExpansionInput||{},locale:context.locale});
+      return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod,numerologyEnvelope};
+    }catch(error){
+      return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||error?.message||'NUM_CX_PRODUCTION_READING_UNAVAILABLE']};
+    }
   }
   if(spec.methodCode!=='ASTROLOGY')return {ok:true,key,spec,canonicalProjection:payload.result,readingMethod};
 
@@ -188,10 +209,11 @@ export async function onRequestPost(context){
   const needsPlace=selected.some(key=>['astrology','bazi','ziwei','ecr'].includes(key));
   if(needsPlace&&!clean(body?.placeRef))return json({ok:false,error:'LOCATION_SELECTION_REQUIRED'},422);
 
+  const expansionError=validateNumerologyExpansionRequest(body,selected);
+  if(expansionError)return json({ok:false,error:expansionError},422);
   const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';
   context.locale=locale;
   context.customerIntent=body?.intent||null;
-  let targetContext=null;try{targetContext=astTargetContext(body)}catch(error){return json({ok:false,error:error.code},422)}
   let location=null;
   if(needsPlace){
     try{location=await resolveBirthPlace(body.placeRef,{birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime),locale,env:context.env})}
@@ -203,7 +225,8 @@ export async function onRequestPost(context){
   if(!shape.valid)return json({ok:false,error:'PERSONAL_REALITY_INPUT_INVALID',reasonCodes:shape.reasonCodes},422);
 
   const parameters=executionParameters(body);
-  const results=await Promise.all(selected.map(key=>executeOne(context,input,key,consentRecordId,parameters)));
+  const numExpansionInput=numerologyExpansionInput(body);
+  const results=await Promise.all(selected.map(key=>executeOne(context,input,key,consentRecordId,parameters,numExpansionInput)));
   const projections=results.filter(result=>result.ok).map(result=>result.canonicalProjection);
   const blocked=results.filter(result=>!result.ok);
   const baseView=projectMethodsForCustomer({projections,blocked,intent:body?.intent,locale,includeLegacyInterpretation:false});
@@ -221,14 +244,9 @@ export async function onRequestPost(context){
     try{singleMethodReading=await maybeBuildProductionSingleMethodReading({methodResult:readingMethods[0],customerIntent:context.customerIntent,locale})}
     catch{singleMethodReading=null}
   }
-  const astrologyResult=results.find(result=>result.ok&&result.spec?.methodCode==='ASTROLOGY');
-  const astrology=stripAstrologyTechnicalProjection(astrologyResult?.customerProjection||null);
-  let astrologyWorkspace=null;
-  if(selected.length===1&&selected[0]==='astrology'&&astrologyResult?.canonicalProjection){
-    try{astrologyWorkspace=await maybeBuildActiveAstCustomerWorkspace({canonicalProjection:astrologyResult.canonicalProjection,rawIntent:body?.intent||'',explicitIntentProfileId:body?.astIntentProfileId||null,locale,targetContext,consentRecordId,sourceMainCommit:'3f6825a9b57dc9e62e34fb69bc55d2aac2c39768'})}catch{astrologyWorkspace=null}
-  }
-  const astrologyWorkspaceCapability=getAstCustomerWorkspaceCapability();
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,reading,singleMethodReading,astrologyWorkspace,astrologyWorkspaceCapability});
+  const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
+  const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading});
   return json({
     ok:true,
     view,

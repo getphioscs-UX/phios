@@ -29,8 +29,8 @@ const api=fs.readFileSync('functions/api/customer-personal-reality.js','utf8');
 assert.match(api,/\.\.\/single-method-reading\/single-method-reading-production\.js/);
 assert.doesNotMatch(api,/single-method-reading-r2\//);
 assert.match(api,/selected\.length===1&&readingMethods\[0\]\?\.state==='READY_TO_READ'/);
-assert.match(api,/reading,singleMethodReading/);
-const ui=fs.readFileSync('assets/customer-ui/surfaces/single-method-reading.js','utf8');
+assert.match(api,/reading(?::readingForView)?,singleMethodReading/);
+const ui=fs.readFileSync('assets/customer-ui/js/surfaces/single-method-reading.js','utf8');
 const css=fs.readFileSync('assets/customer-ui/surfaces/single-method-reading.css','utf8');
 assert.match(ui,/PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2\.0\.0/);assert.equal(fs.existsSync('assets/css/single-method-reading.css'),false);assert.equal(fs.existsSync('assets/customer-ui/surfaces/single-method-reading.css'),true);assert.ok(css.includes('.cx-smr-report')); assert.match(ui,/ECR:/);assert.doesNotMatch(ui,/data-smr-version="R2"/);
 

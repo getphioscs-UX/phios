@@ -31,38 +31,42 @@ function validateProjection(projection){
  if(projection.interpretation?.included!==false||projection.interpretation?.meaningAuthorityCreated!==false)throw Object.assign(new Error('CMP_UPSTREAM_MEANING_BOUNDARY_INVALID'),{code:'CMP_UPSTREAM_MEANING_BOUNDARY_INVALID'});
  return projection;
 }
+export async function buildProductionMethodMeaningPayload({canonicalProjection,locale='en',numerologyExpansionInput={}}={}){
+ const safe=safeLocale(clean(locale));
+ const projection=validateProjection(canonicalProjection);
+ const publicMethodCode=projection.method?.publicMethodCode;
+ if(!['NUMEROLOGY_PROJECTION','BAZI_PROJECTION','ASTROLOGY_PROJECTION','ZI_WEI_PROJECTION'].includes(publicMethodCode))throw Object.assign(new Error('CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED'),{code:'CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED'});
+ const meaningBundle=publicMethodCode==='ZI_WEI_PROJECTION'
+  ?buildZiWeiCanonicalMeaningBundle(projection)
+  :publicMethodCode==='ASTROLOGY_PROJECTION'
+   ?await buildAstV2CanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY})
+   :await buildCanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY,mode:'production'});
+ if(!meaningBundle.items.length)throw Object.assign(new Error('CMP_PRODUCTION_MEANING_UNRESOLVED'),{code:'CMP_PRODUCTION_MEANING_UNRESOLVED'});
+ const localeProjection=publicMethodCode==='ZI_WEI_PROJECTION'
+  ?projectZiWeiMeaningLocale(meaningBundle,safe)
+  :await projectCanonicalMeaningLocale({bundle:meaningBundle,localeRegistry:CMP_PRODUCTION_LOCALE_REGISTRY,locale:safe});
+ const reading=publicMethodCode==='ZI_WEI_PROJECTION'
+  ?buildZiWeiRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
+  :publicMethodCode==='ASTROLOGY_PROJECTION'
+   ?buildAstRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
+   :publicMethodCode==='BAZI_PROJECTION'
+    ?buildBzrRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
+    :buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
+ const integratedReading=publicMethodCode==='NUMEROLOGY_PROJECTION'
+  ?buildNumIntegratedReadingIR({projection,bundle:meaningBundle,localeProjection,expansionInput:numerologyExpansionInput||{}})
+  :null;
+ return {ok:true,capabilityAvailability:'AVAILABLE',capabilityVersion:'1.0.0',executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading,...(integratedReading?{integratedReading}:{})};
+}
 export async function onRequestPost({request}){
  let body;try{body=await request.json();}catch{return json({ok:false,error:'INVALID_JSON'},400)}
  if(clean(body?.schemaVersion)!==REQUEST_SCHEMA)return json({ok:false,error:'CMP_MEANING_REQUEST_SCHEMA_INVALID'},400);
  const locale=safeLocale(clean(body?.locale));
  if(body?.canonicalProjection?.method?.publicMethodCode==='ASTROLOGY_PROJECTION'&&body?.canonicalProjection?.schemaVersion!==V2)return json({ok:false,error:'CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED',publicMethodCode:'ASTROLOGY_PROJECTION',requiredProjectionSchemaVersion:V2},423);
  try{
-  const projection=validateProjection(body?.canonicalProjection);
-  const publicMethodCode=projection.method?.publicMethodCode;
-  if(!['NUMEROLOGY_PROJECTION','BAZI_PROJECTION','ASTROLOGY_PROJECTION','ZI_WEI_PROJECTION'].includes(publicMethodCode))return json({ok:false,error:'CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED',publicMethodCode:publicMethodCode||null},423);
-  const meaningBundle=publicMethodCode==='ZI_WEI_PROJECTION'
-   ?buildZiWeiCanonicalMeaningBundle(projection)
-   :publicMethodCode==='ASTROLOGY_PROJECTION'
-    ?await buildAstV2CanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY})
-    :await buildCanonicalMeaningProductionBundle({projection,admissionRegistry:CMP_PRODUCTION_ADMISSION_REGISTRY,mappingRegistry:CMP_PRODUCTION_MAPPING_REGISTRY,activationRegistry:CMP_PRODUCTION_ACTIVATION_REGISTRY,mode:'production'});
-  if(!meaningBundle.items.length)return json({ok:false,error:'CMP_PRODUCTION_MEANING_UNRESOLVED'},422);
-  const localeProjection=publicMethodCode==='ZI_WEI_PROJECTION'
-   ?projectZiWeiMeaningLocale(meaningBundle,locale)
-   :await projectCanonicalMeaningLocale({bundle:meaningBundle,localeRegistry:CMP_PRODUCTION_LOCALE_REGISTRY,locale});
-  const reading=publicMethodCode==='ZI_WEI_PROJECTION'
-   ?buildZiWeiRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
-   :publicMethodCode==='ASTROLOGY_PROJECTION'
-    ?buildAstRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
-    :publicMethodCode==='BAZI_PROJECTION'
-     ?buildBzrRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection})
-     :buildNumRuntimeReadingIR({projection,bundle:meaningBundle,localeProjection});
-  const integratedReading=publicMethodCode==='NUMEROLOGY_PROJECTION'
-   ?buildNumIntegratedReadingIR({projection,bundle:meaningBundle,localeProjection,expansionInput:body?.numerologyExpansionInput||{}})
-   :null;
-  return json({ok:true,capabilityAvailability:'AVAILABLE',capabilityVersion:'1.0.0',executionCompleteness:reading.executionCompleteness,meaningBundle,localeProjection,reading,...(integratedReading?{integratedReading}: {})},200);
+  return json(await buildProductionMethodMeaningPayload({canonicalProjection:body?.canonicalProjection,locale,numerologyExpansionInput:body?.numerologyExpansionInput||{}}),200);
  }catch(error){
   const code=error?.code||'CMP_MEANING_FAILED_CLOSED';
-  const status=code==='CMP_METHOD_PRODUCTION_NOT_ACTIVATED'?423:code.includes('PROJECTION')||code.includes('BOUNDARY')||code.startsWith('NUM_R18_')?422:500;
+  const status=['CMP_METHOD_PRODUCTION_NOT_ACTIVATED','CMP_METHOD_PRODUCTION_MEANING_NOT_ACTIVATED'].includes(code)?423:code==='CMP_PRODUCTION_MEANING_UNRESOLVED'||code.includes('PROJECTION')||code.includes('BOUNDARY')||code.startsWith('NUM_R18_')?422:500;
   return json({ok:false,error:code},status);
  }
 }

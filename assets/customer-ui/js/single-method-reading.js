@@ -2,6 +2,7 @@ import {arr,esc,tr} from './runtime-ui.js';
 
 function methodTitle(methodId){return ({AST:tr('Your Astrology reading','你的占星读取'),BZR:tr('Your BaZi reading','你的八字读取'),ZWR:tr('Your Zi Wei reading','你的紫微读取'),NUM:tr('Your Numerology reading','你的数字读取'),ECR:tr('Your Embodied Configuration reading','你的载体构型读取')})[methodId]||tr('Your reading','你的读取')}
 function reports(view){const direct=view?.singleMethodReading?[view.singleMethodReading]:[];if(direct.length)return direct;return arr(view?.reading?.methods).map(item=>item?.singleMethodReading).filter(Boolean)}
+function nativeReports(view){return Object.values(view?.methodNativeReading||{}).filter(x=>x?.schemaVersion==='PHI-OS-METHOD-NATIVE-CUSTOMER-READING-v1.0.0'&&x?.publicationDecision?.customerPublishable===true)}
 function isCanonicalSmr(report){return report?.schemaVersion==='PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2.0.0'}
 const sectionLabels={WHAT_STANDS_OUT:['What stands out','最值得先看的地方'],YOUR_CORE_THEMES:['Your core themes','你的核心主题'],WHAT_SUPPORTS_YOU:['What supports you','什么支持这套结构'],WHERE_TENSION_APPEARS:['Where tension appears','张力出现在哪里'],WHEN_THE_PATTERN_CHANGES:['When the pattern changes','模式在什么情况下会改变'],WHAT_THIS_MAY_LOOK_LIKE_IN_REALITY:['What this may look like in reality','这在现实里可能如何呈现'],WHAT_TO_OBSERVE:['What to observe','接下来可以观察什么'],WHY_THIS_READING:['Why this reading','为什么这样读']};
 function labelFor(section){const x=sectionLabels[section.sectionId];return x?tr(x[0],x[1]):String(section.customerLabel||section.sectionId||'').replaceAll('_',' ')}
@@ -17,6 +18,14 @@ function r2Executive(report){const sections=arr(report?.readingIA?.sections),ope
 function r2Technical(report){const t=report?.technical||{};return `<details class="cx-smr-technical"><summary>${esc(tr('View sources and structure details','查看来源与结构详情'))}</summary><dl><dt>${esc(tr('Perspective','视角'))}</dt><dd>${esc(report.methodId)}</dd><dt>${esc(tr('Reading authority','读取权威'))}</dt><dd><code>${esc(report.readingAuthorityRef||'')}</code></dd><dt>${esc(tr('Interpretation units','解释单元'))}</dt><dd>${arr(t.interpretationUnitRefs).map(x=>`<code>${esc(x)}</code>`).join(' ')}</dd></dl></details>`}
 function r2ReportHtml(report){const sections=arr(report?.readingIA?.sections);return `<article class="cx-smr-report" data-smr-version="V2">${r2Executive(report)}<div class="cx-smr-body">${sections.filter(x=>x.sectionId!=='WHAT_STANDS_OUT'&&x.sectionId!=='YOUR_CORE_THEMES').map(r2Section).join('')}${r2Technical(report)}</div></article>`}
 
+function nativeSection(section){
+  const head=`<header><span>${esc(section.state||'')}</span><h3>${esc(section.title||section.code||'')}</h3>${section.dek?`<p>${esc(section.dek)}</p>`:''}</header>`;
+  if(section.code==='SCHOOLS')return `<section class="cx-native-section" data-section="${esc(section.code)}">${head}<div class="cx-native-school-grid">${arr(section.blocks).map(b=>`<article><strong>${esc(b.title||'')}</strong><p>${esc(b.text||'')}</p></article>`).join('')}</div></section>`;
+  if(section.code==='OPEN')return `<section class="cx-native-section" data-section="${esc(section.code)}">${head}<ul>${arr(section.items).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></section>`;
+  return `<section class="cx-native-section" data-section="${esc(section.code||'')}">${head}${arr(section.paragraphs).map(p=>`<p>${esc(p)}</p>`).join('')}</section>`;
+}
+function nativeReportHtml(product){const s=product.summary||{},struct=product.structuralModel||{},timing=product.temporalContext||{},evidence=product.evidence||{};return `<article class="cx-smr-report cx-native-reading" data-method-native="${esc(product.methodId)}"><header class="cx-smr-executive"><p class="cx-eyebrow">${esc(tr('METHOD-NATIVE READING','方法原生读取'))}</p><h2>${esc(s.title||methodTitle(product.methodId))}</h2>${s.subtitle?`<p>${esc(s.subtitle)}</p>`:''}${s.boundary?`<p class="cx-native-boundary">${esc(s.boundary)}</p>`:''}<div class="cx-smr-theme-grid">${arr(s.keyPoints).slice(0,5).map(text=>`<article><span>${esc(tr('Key structure','关键结构'))}</span><p>${esc(text)}</p></article>`).join('')}</div></header><div class="cx-smr-body">${arr(product.readingSections).map(nativeSection).join('')}<details class="cx-smr-technical"><summary>${esc(tr('View sources and structure details','查看来源与结构详情'))}</summary><dl><dt>${esc(tr('Product','产品'))}</dt><dd><code>${esc(product.productVersion||'')}</code></dd><dt>${esc(tr('Timing context','时间情境'))}</dt><dd>${esc(timing.state||'UNAVAILABLE')}</dd><dt>${esc(tr('Evidence','证据'))}</dt><dd>${esc(evidence.evidenceCount??'—')}</dd><dt>${esc(tr('Authorities','权威'))}</dt><dd>${esc(evidence.authorityCount??'—')}</dd></dl></details></div></article>`}
+
 function legacyExplanation(report){return arr(report.whyThisReading).map(item=>`<details class="cx-smr-why"><summary>${esc(item.summary)}</summary><p>${esc(tr('This explanation remains linked to the accepted structures used in the reading.','这项说明继续绑定到本次读取所使用的已获接受结构。'))}</p></details>`).join('')}
 function legacyExecutive(report){const value=report.executiveReading||{};return `<header class="cx-smr-executive"><p class="cx-eyebrow">${esc(tr('READING FIRST','先看读取'))}</p><h2>${esc(methodTitle(report.methodId))}</h2><p>${esc(report.governance?.reportBoundary||'')}</p><div class="cx-smr-theme-grid">${arr(value.coreThemes).map(theme=>`<article><span>${esc(theme.tier==='CORE_THEME'?tr('Core theme','核心主题'):tr('Supporting theme','支持主题'))}</span><h3>${esc(theme.headline)}</h3></article>`).join('')}</div></header>`}
 function legacySection(section){if(section.state!=='AVAILABLE'||!arr(section.paragraphs).length)return '';return `<section class="cx-smr-section" data-section="${esc(section.sectionId)}"><h3>${esc(section.title)}</h3>${arr(section.paragraphs).map(item=>item.kind==='REALITY_QUESTION'?`<blockquote>${esc(item.text)}</blockquote>`:`<p>${esc(item.text)}</p>`).join('')}</section>`}
@@ -26,8 +35,10 @@ function reportHtml(report){return isCanonicalSmr(report)?r2ReportHtml(report):l
 export function renderSingleMethodReading(view){
   const tab=document.querySelector('[data-cx-tab="my-reading"]'),panel=document.querySelector('[data-cx-panel="my-reading"]'),node=document.querySelector('[data-cx-single-method-reading]');
   if(!tab||!panel||!node)return;
-  const available=reports(view);
-  tab.hidden=!available.length;panel.dataset.available=String(Boolean(available.length));
-  if(!available.length){panel.hidden=true;node.innerHTML='';return}
-  node.innerHTML=available.map(reportHtml).join('');
+  const native=nativeReports(view),nativeMethods=new Set(native.map(x=>x.methodId));
+  const available=reports(view).filter(x=>!nativeMethods.has(x?.methodId));
+  const count=native.length+available.length;
+  tab.hidden=!count;panel.dataset.available=String(Boolean(count));
+  if(!count){panel.hidden=true;node.innerHTML='';return}
+  node.innerHTML=native.map(nativeReportHtml).join('')+available.map(reportHtml).join('');
 }
