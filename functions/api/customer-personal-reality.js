@@ -10,6 +10,8 @@ import {buildAcceptedMethodCustomerResult} from '../customer-projection/method-c
 import {buildProductionMethodMeaningPayload} from '../canonical-meaning-production/api-method-meaning-handler.js';
 import {buildNumerologyCustomerReadingEnvelope,projectNumerologyEnvelopeForCustomer} from '../customer-projection/numerology-customer-reading-envelope-v1.js';
 import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/single-method-reading-production.js';
+import {executeAndProjectMcd5CurrentRequest} from '../method-client-delivery/canonical-projection-runtime-current.js';
+import {buildBaziMethodNativeReading} from '../personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {resolveBirthPlace} from '../location/place-resolver.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
@@ -104,12 +106,37 @@ function limitedReadingMethod(spec,locale,error,projection=null){
   });
 }
 
+function nativeBackedReadingMethod(spec,locale,projection,{available=true,reasonCode=null}={}){
+  const ready=available===true;
+  const message=locale==='zh-Hans'
+    ?(ready?'专业八字读取已由方法原生 Full Production 报告提供；旧逐柱解释链不再参与本页面。':'八字计算结构已建立，但方法原生客户报告这次未能发布。')
+    :(ready?'The professional BaZi reading is supplied by the method-native Full Production report; the legacy pillar-by-pillar composer is not used on this page.':'The BaZi calculation is established, but the method-native customer report could not be published this time.');
+  return freeze({
+    schemaVersion:'PHI-OS-CX-R12R4B-CUSTOMER-READING-METHOD-v1.0.0',
+    methodId:'BZR',methodLabel:methodLabel(spec,locale),locale,
+    state:ready?'READY_TO_READ':'NEEDS_ATTENTION',stateLabel:ready?(locale==='zh-Hans'?'可以阅读':'Ready to read'):(locale==='zh-Hans'?'需要补充':'Needs attention'),
+    summary:message,insights:[],visualModel:null,source:{label:'BAZI-FP-v1.0.0',lineageAvailable:Boolean(projection?.projectionId)},openQuestions:ready?[]:[message],
+    technical:{methodId:'BZR',publicMethodCode:spec.publicMethodCode,projectionId:projection?.projectionId||null,reasonCode,acceptanceBasis:'PPR-C1_METHOD_NATIVE_BAZI',legacyComposerUsed:false,boundary:{rendererCreatesMeaning:false,aiCreatesMeaning:false,realityKnown:false}}
+  });
+}
+
 async function executeOne(context,input,key,consentRecordId,parameters,numExpansionInput){
   const spec=METHODS[key];
   const requestId=`CX-${spec.methodCode}-${crypto.randomUUID()}`;
   const body=spec.methodCode==='EMBODIED_CONFIGURATION'
     ?{canonicalInput:input,consent:true,requestId}
     :{schemaVersion:'PHI-OS-MCD-METHOD-EXECUTION-REQUEST-v1.0.0',methodCode:spec.methodCode,methodVersion:spec.methodVersion,capability:'CALCULATION',purposeCode:'PERSONAL_RUNTIME_METHOD_PROJECTION',canonicalInput:input,executionParameters:parameters,consentRecordId,requestId};
+  if(spec.methodCode==='BAZI'){
+    try{
+      const direct=await executeAndProjectMcd5CurrentRequest(body);
+      const baseExecution=direct.execution,canonicalProjection=direct.canonicalProjection;
+      const execution=baseExecution;
+      if(!canonicalProjection||execution?.executionStatus==='BLOCKED_BY_MPA'||execution?.executionStatus==='INPUT_BLOCKED')return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:execution?.reasonCodes||['METHOD_EXECUTION_FAILED']};
+      return {ok:true,key,spec,canonicalProjection,baseExecution,readingMethod:nativeBackedReadingMethod(spec,context.locale,canonicalProjection)};
+    }catch(error){
+      return {ok:false,key,spec,methodCode:spec.methodCode,publicMethodCode:spec.publicMethodCode,label:methodLabel(spec,context.locale),reasonCodes:[error?.code||'METHOD_EXECUTION_FAILED']};
+    }
+  }
   const request=new Request(new URL(spec.endpoint,context.request.url),{method:'POST',headers:{'content-type':'application/json','accept':'application/json'},body:JSON.stringify(body)});
   const handler=spec.endpoint.includes('ecr-execute')?runEcrExecute:spec.endpoint.includes('zi-wei')?runZiWeiExecute:spec.endpoint.includes('ast-structural')?runAstStructuralExecute:runMethodExecute;
   const response=await handler({request});
@@ -180,6 +207,11 @@ function buildReadingView({methods,selectedCount,calculationCount,locale}){
   });
 }
 
+function withNativeReportStage(reading,{hasPublishableNativeReport=false,locale='en'}={}){
+  if(!hasPublishableNativeReport)return reading;
+  return freeze({...reading,map:reading.map.map(item=>item.stageId==='FULL_REPORT'?stage(locale,'FULL_REPORT','READABLE','Full report','完整报告','A method-native Full Production report is ready on this canonical surface.','方法原生 Full Production 报告已经进入这个唯一客户页面。'):item)});
+}
+
 function stripLegacyInterpretation(baseView){
   const structure={methods:(baseView.structure?.methods||[]).map(method=>({
     methodId:METHOD_ID_BY_PUBLIC[method.publicMethodCode],
@@ -227,6 +259,16 @@ export async function onRequestPost(context){
   const parameters=executionParameters(body);
   const numExpansionInput=numerologyExpansionInput(body);
   const results=await Promise.all(selected.map(key=>executeOne(context,input,key,consentRecordId,parameters,numExpansionInput)));
+  const methodNativeReading={};
+  const baziResult=results.find(result=>result.ok&&result.spec?.methodCode==='BAZI');
+  if(baziResult){
+    try{
+      methodNativeReading.BZR=await buildBaziMethodNativeReading({canonicalProjection:baziResult.canonicalProjection,canonicalInput:input,baseExecution:baziResult.baseExecution,locale,targetContext:body?.baziTemporalContext||null});
+      baziResult.readingMethod=nativeBackedReadingMethod(baziResult.spec,locale,baziResult.canonicalProjection);
+    }catch(error){
+      baziResult.readingMethod=nativeBackedReadingMethod(baziResult.spec,locale,baziResult.canonicalProjection,{available:false,reasonCode:error?.code||'PPR_C1_BAZI_METHOD_NATIVE_UNAVAILABLE'});
+    }
+  }
   const projections=results.filter(result=>result.ok).map(result=>result.canonicalProjection);
   const blocked=results.filter(result=>!result.ok);
   const baseView=projectMethodsForCustomer({projections,blocked,intent:body?.intent,locale,includeLegacyInterpretation:false});
@@ -238,15 +280,17 @@ export async function onRequestPost(context){
     const limited=limitedReadingMethod(result.spec,locale,error);
     return publicBlocked?.message?freeze({...limited,summary:publicBlocked.message,openQuestions:[publicBlocked.message]}):limited;
   });
-  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale});
+  const hasPublishableNativeReport=Object.values(methodNativeReading).some(product=>product?.publicationDecision?.customerPublishable===true);
+  const reading=withNativeReportStage(buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale}),{hasPublishableNativeReport,locale});
   let singleMethodReading=null;
-  if(selected.length===1&&readingMethods[0]?.state==='READY_TO_READ'){
+  const hasSingleNativeReport=selected.length===1&&hasPublishableNativeReport;
+  if(!hasSingleNativeReport&&selected.length===1&&readingMethods[0]?.state==='READY_TO_READ'){
     try{singleMethodReading=await maybeBuildProductionSingleMethodReading({methodResult:readingMethods[0],customerIntent:context.customerIntent,locale})}
     catch{singleMethodReading=null}
   }
   const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading)});
   return json({
     ok:true,
     view,

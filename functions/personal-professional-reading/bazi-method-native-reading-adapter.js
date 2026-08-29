@@ -6,7 +6,7 @@ import {buildMethodNativeCustomerReading} from './method-native-reading-product.
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const x of Object.values(value))freeze(x)}return value};
 const clean=value=>String(value??'').trim();
 const list=value=>Array.isArray(value)?value:[];
-export const PPR_C1_BAZI_PRODUCT_VERSION='BAZI-FP-v1.0.0@PPR-C1-W3';
+export const PPR_C1_BAZI_PRODUCT_VERSION='BAZI-FP-v1.0.0@PPR-C1-W6';
 
 export function normalizeBaziTargetContext(value){
  const v=value&&typeof value==='object'?value:{};
@@ -48,7 +48,7 @@ function baziEnvelope({report,publicationDecision,temporalProjection,temporalSta
   governance:{
    sourceProduct:'BAZI-FP-v1.0.0',sourceReportSchema:report.schemaVersion,
    temporalAuthority:temporalState==='EXPLICIT'?'BZR_TEMPORAL_RUNTIME_V2':'PPR_C1_NO_TARGET_BOUNDARY_ONLY',
-   natalProjectionReused:true,natalRecalculatedForTemporal:false,
+   natalProjectionReused:true,natalRecalculatedForTemporal:false,legacyComposeBzrConsumed:false,professionalStructureSurfaceAuthorized:true,wholeChartFirstIaAuthorized:true,
    noTargetDoesNotInferCurrentDate:true,noTargetDoesNotInferBrowserTimezone:true,
    fortunePredictionCreated:false,eventCertaintyCreated:false,silentSchoolMergeCreated:false
   }
