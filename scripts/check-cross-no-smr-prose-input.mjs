@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildBenchmark,METHODS} from './smr-benchmark-support.mjs';
+import {assertNoSmrProseBackfeed,buildCrossPerspectiveInputIR} from '../functions/runtime-reading/cross-perspective-input-ir.js';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const contract=j('content/customer-experience-rebuild/r12r4b/cross/contracts/cross-input-freeze-v1.json');
+assert.equal(contract.status,'FROZEN_ACCEPTED_METHOD_ENVELOPE_ONLY');
+assert.deepEqual(contract.publicMethodInputs.allowedMethods,['AST','BZR','ZWR','NUM','ECR']);
+assert.equal(contract.fork.singleMethodProseMayFeedCrossBranch,false);
+assert.equal(contract.optionalInputs.XPF.countsTowardMethodAgreement,false);
+assert.equal(contract.optionalInputs.HDR.publicLeakForbidden,true);
+const built=[];for(const method of METHODS)built.push(await buildBenchmark(method));
+const xpf={schemaVersion:'PHI-OS-CONFIRMED-EXTERNAL-PROFILE-v1.0.0',methodId:'XPF',authorityClass:'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT',intakeId:'XPF-CROSS-W21',profileFamily:'HUMAN_DESIGN',confirmedAt:'2026-08-29T00:00:00.000Z',records:[{field:'authority',value:'Example confirmed decision context',sourceType:'CUSTOMER_CONFIRMED',customerConfirmed:true,phiosCalculated:false},{field:'environment',value:'Example confirmed environment context',sourceType:'CUSTOMER_CONFIRMED',customerConfirmed:true,phiosCalculated:false}],sourceRefs:[],provenance:{customerConfirmed:true,phiosCalculated:false,hdrShadowMayValidateButMayNotOverwrite:true},boundary:{canonicalMethodProjection:false,calculatedMethodConsensusEligible:false,meaningCreated:false,interpretationCreated:false,persisted:false},profileDigest:'a'.repeat(64)};
+const hdr={schemaVersion:'PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0',visibility:'INTERNAL_ONLY',readingDigest:'b'.repeat(64),sections:{},boundaries:{automaticInterpretationCreated:false,professionalJudgmentCreated:false,fatePredictionCreated:false,eventPredictionCreated:false,diagnosisCreated:false,goodBadScoreCreated:false,methodVotingCreated:false,publicResultCreated:false}};
+const input=await buildCrossPerspectiveInputIR({acceptedMethodReadingEnvelopes:built.map(x=>x.envelope),claimCollections:built.map(x=>x.claims),confirmedXpf:xpf,hdrInternalReading:hdr});
+assert.equal(input.schemaVersion,'PHI-OS-CROSS-PERSPECTIVE-INPUT-IR-v1.0.0');
+assert.equal(input.methodInputs.length,5);assert.equal(new Set(input.methodInputs.map(x=>x.methodId)).size,5);
+assert(input.methodInputs.every(x=>x.publicationState==='CUSTOMER_PUBLISHABLE'));
+assert(input.methodInputs.every(x=>x.claims.every(c=>c.publicationState==='CUSTOMER_PUBLISHABLE')));
+assert.equal(input.xpfContext.countsTowardMethodAgreement,false);assert.equal(input.hdrInternalContext.publicLeakAllowed,false);
+assert.equal(input.boundaries.smrProseConsumed,false);assert.equal(input.boundaries.rawProjectionConsumedAsCrossConclusion,false);assert.equal(input.boundaries.currentRealityInputActivated,false);
+const two=await buildCrossPerspectiveInputIR({acceptedMethodReadingEnvelopes:built.slice(0,2).map(x=>x.envelope),claimCollections:built.slice(0,2).map(x=>x.claims)});assert.equal(two.methodInputs.length,2);
+assert.throws(()=>assertNoSmrProseBackfeed({schemaVersion:'PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2.0.0'}),e=>e?.code==='CROSS_SMR_PROSE_SCHEMA_FORBIDDEN');
+await assert.rejects(()=>buildCrossPerspectiveInputIR({acceptedMethodReadingEnvelopes:built.slice(0,2).map(x=>x.envelope),claimCollections:built.slice(0,2).map(x=>x.claims),singleMethodReading:{schemaVersion:'PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2.0.0'}}),e=>e?.code==='CROSS_INPUT_FIELD_NOT_ALLOWED');
+const runtimeFiles=['functions/runtime-reading/cross-perspective-input-ir.js','functions/runtime-reading/semantic-evidence-matrix.js','functions/runtime-reading/cross-method-reading-ir-v2.js'];
+for(const file of runtimeFiles){const text=fs.readFileSync(file,'utf8');assert.doesNotMatch(text,/from\s+['\"][^'\"]*(single-method-reading-production|customer-narrative-ir|customer-reading-ia|smr-reading-layout)[^'\"]*['\"]/i,`${file} must not import SMR prose pipeline`)}
+console.log(`✓ R2-W21/W21A Cross input freeze passed: ${input.methodInputs.length}/5 CUSTOMER_PUBLISHABLE methods; XPF confirmed context optional; HDR internal-only; SMR prose backfeed rejected.`);

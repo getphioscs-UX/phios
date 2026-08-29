@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-INPUT-FREEZE-v1.0.0",
+  "work": "R2-W21/W21A",
+  "baselineCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "status": "FROZEN_ACCEPTED_METHOD_ENVELOPE_ONLY",
+  "purpose": "Freeze Cross Perspective input before semantic convergence so Cross can consume admitted method claims without consuming Single Method Reading prose, raw method symbols or renderer output.",
+  "publicMethodInputs": {
+    "allowedMethods": ["AST", "BZR", "ZWR", "NUM", "ECR"],
+    "minimumDistinctMethods": 2,
+    "maximumDistinctMethods": 5,
+    "requiredEnvelopeSchema": "PHI-OS-ACCEPTED-METHOD-READING-ENVELOPE-v1.0.0",
+    "requiredClaimCollectionSchema": "PHI-OS-CUSTOMER-READING-CLAIM-IR-COLLECTION-v1.0.0",
+    "normalizedPublicationState": "CUSTOMER_PUBLISHABLE",
+    "requiredBoundary": "acceptedAuthorityOnly=true"
+  },
+  "optionalInputs": {
+    "XPF": {
+      "schemaVersion": "PHI-OS-CONFIRMED-EXTERNAL-PROFILE-v1.0.0",
+      "required": false,
+      "customerConfirmed": true,
+      "use": "CONTEXT_ONLY",
+      "countsTowardMethodAgreement": false
+    },
+    "HDR": {
+      "schemaVersion": "PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0",
+      "required": false,
+      "visibility": "INTERNAL_ONLY",
+      "use": "INTERNAL_CONTEXT_ONLY",
+      "countsTowardMethodAgreement": false,
+      "publicLeakForbidden": true
+    }
+  },
+  "fork": {
+    "source": "Accepted Method Reading Envelope",
+    "singleMethodBranch": "SingleMethodReadingIR",
+    "crossBranch": "CrossPerspectiveInputIR",
+    "singleMethodProseMayFeedCrossBranch": false
+  },
+  "forbiddenInputs": [
+    "PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2.0.0",
+    "PHI-OS-CUSTOMER-READING-NARRATIVE-IR-v1.0.0",
+    "PHI-OS-CUSTOMER-READING-IA-v2.0.0",
+    "SMR rendered HTML",
+    "SMR layout output",
+    "raw Canonical Method Projection as cross conclusion",
+    "raw method symbols as cross semantic authority"
+  ],
+  "reservedNotActivated": {
+    "currentRealityInput": false,
+    "currentRealityRefsInMatrix": "MUST_REMAIN_EMPTY_UNTIL_SEPARATE_ADMISSION",
+    "crossCustomerCutover": false
+  },
+  "gate": "check:cross-no-smr-prose-input"
+}

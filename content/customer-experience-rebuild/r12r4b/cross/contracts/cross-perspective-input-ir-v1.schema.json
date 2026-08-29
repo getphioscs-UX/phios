@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getphios.com/schemas/cross-perspective-input-ir-v1.schema.json",
+  "title": "PHI OS Cross Perspective Input IR v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "methodInputs", "xpfContext", "hdrInternalContext", "sourceDigests", "inputDigest", "boundaries"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CROSS-PERSPECTIVE-INPUT-IR-v1.0.0"},
+    "methodInputs": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["methodId", "publicationState", "readingAuthorityRef", "productionAdmissionRef", "semanticDigest", "claimRefs", "claims"],
+        "properties": {
+          "methodId": {"enum": ["AST", "BZR", "ZWR", "NUM", "ECR"]},
+          "publicationState": {"const": "CUSTOMER_PUBLISHABLE"},
+          "readingAuthorityRef": {"type": "string", "minLength": 1},
+          "productionAdmissionRef": {"type": "string", "minLength": 1},
+          "semanticDigest": {"type": "string", "minLength": 1},
+          "claimRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+          "claims": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["claimId", "methodId", "publicationState", "semanticDimension", "claimType", "headline", "structuralMeaning", "evidenceRefs", "counterEvidenceRefs", "conditionKinds", "boundaryRefs", "interpretationUnitRefs"],
+              "properties": {
+                "claimId": {"type": "string", "minLength": 1},
+                "methodId": {"enum": ["AST", "BZR", "ZWR", "NUM", "ECR"]},
+                "publicationState": {"const": "CUSTOMER_PUBLISHABLE"},
+                "semanticDimension": {"type": "string", "minLength": 1},
+                "claimType": {"enum": ["CORE_PATTERN", "SUPPORT", "TENSION", "CONDITION", "TRADEOFF", "OPEN", "TEMPORAL_ACTIVATION", "OBSERVATION"]},
+                "headline": {"type": "string", "minLength": 1},
+                "structuralMeaning": {"type": "string", "minLength": 1},
+                "evidenceRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+                "counterEvidenceRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+                "conditionKinds": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+                "boundaryRefs": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+                "interpretationUnitRefs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}
+              }
+            }
+          }
+        }
+      }
+    },
+    "xpfContext": {
+      "type": ["object", "null"],
+      "properties": {
+        "methodId": {"const": "XPF"},
+        "authorityClass": {"const": "CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT"},
+        "profileDigest": {"type": "string", "minLength": 1},
+        "intakeId": {"type": "string", "minLength": 1},
+        "contextRecords": {"type": "array"},
+        "countsTowardMethodAgreement": {"const": false}
+      },
+      "required": ["methodId", "authorityClass", "profileDigest", "intakeId", "contextRecords", "countsTowardMethodAgreement"],
+      "additionalProperties": false
+    },
+    "hdrInternalContext": {
+      "type": ["object", "null"],
+      "properties": {
+        "schemaVersion": {"const": "PHI-OS-INTERNAL-OPERATING-READING-IR-v1.0.0"},
+        "visibility": {"const": "INTERNAL_ONLY"},
+        "readingDigest": {"type": "string", "minLength": 1},
+        "contextRef": {"type": "string", "minLength": 1},
+        "countsTowardMethodAgreement": {"const": false},
+        "publicLeakAllowed": {"const": false}
+      },
+      "required": ["schemaVersion", "visibility", "readingDigest", "contextRef", "countsTowardMethodAgreement", "publicLeakAllowed"],
+      "additionalProperties": false
+    },
+    "sourceDigests": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string"}},
+    "inputDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "boundaries": {"type": "object"}
+  }
+}

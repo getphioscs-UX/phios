@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "PHI-OS-CROSS-R2-W21-INPUT-FREEZE-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "0692037d3a3f522de9f0eb11d37f738df3a2bae6",
+  "work": "R2-W21/W21A",
+  "status": "ENGINEERING_ACCEPTED_CROSS_INPUT_FROZEN",
+  "acceptedPublicMethods": ["AST", "BZR", "ZWR", "NUM", "ECR"],
+  "requiredPublicationState": "CUSTOMER_PUBLISHABLE",
+  "optional": {"confirmedXpf":"CONTEXT_ONLY", "hdr":"INTERNAL_ONLY"},
+  "gates": {
+    "acceptedMethodReadingEnvelopeOnly": true,
+    "customerClaimIrOnly": true,
+    "smrProseBackfeedRejected": true,
+    "rawProjectionConclusionRejected": true,
+    "xpfDoesNotCountTowardAgreement": true,
+    "hdrDoesNotCountTowardAgreement": true,
+    "hdrPublicLeakRejected": true,
+    "currentRealityInputNotActivated": true
+  },
+  "checker": "scripts/check-cross-no-smr-prose-input.mjs",
+  "customerCrossCutoverAllowed": false
+}
