@@ -41,20 +41,27 @@ for(const oldRoute of ['/personal-runtime ','/personal-runtime.html ','/professi
 assert.equal(legacy.entries.find(x=>x.path==='personal-runtime.html')?.mayOwnCustomerRoute,false);
 assert.equal(legacy.entries.find(x=>x.path==='assets/customer-ui/js/surfaces/single-method-reading.js')?.mayOwnCompleteZiweiReport,false);
 assert.equal(legacy.entries.find(x=>x.path==='functions/single-method-reading/single-method-reading-production.js')?.mayOwnCompleteZiweiReport,false);
-const w22v2=j(`${fp}/authority/ziwei-fp-w22-human-review-authority-v2.json`);
-assert.equal(w22v2.baselineCommit,'3f6825a9b57dc9e62e34fb69bc55d2aac2c39768');
-assert.equal(w22v2.status,'HUMAN_ACCEPTED_24_OF_24_ADMITTED');
-assert.equal(w22v2.actualAcceptance,'24/24 ACCEPT');
-assert.equal(w22v2.customerCutoverGateSatisfied,true);
-const w23v2=j(`${fp}/authority/ziwei-fp-w23-production-cutover-authority-v2.json`);
-assert.equal(w23v2.baselineCommit,'3f6825a9b57dc9e62e34fb69bc55d2aac2c39768');
-assert.equal(w23v2.status,'FULL_PRODUCTION_ACTIVE');
-assert.equal(w23v2.productionAllowed,true);
-assert.equal(w23v2.customerCutoverAllowed,true);
-assert.equal(w23v2.runtimeUseAllowed,true);
-assert.equal(w23v2.defaultCustomerCutover,true);
-assert.equal(w23v2.preservedFailClosedGaps?.extensionStarStandaloneMeaningCountBlocked,8);
-assert.equal(w23v2.preservedFailClosedGaps?.genericMeaningFallbackAllowed,false);
+// The actual W22/W23 admission artifacts are the current evidence. Do not require nonexistent successor authority files.
+const w22Admission=j(`${fp}/admission/ziwei-fp-w22-human-admission-v1.json`);
+const w22Acceptance=j(`${fp}/acceptance/ziwei-fp-w22-human-review-acceptance-v1.json`);
+assert.equal(w22Admission.baselineCommit,'3f6825a9b57dc9e62e34fb69bc55d2aac2c39768');
+assert.equal(w22Admission.status,'HUMAN_ADMITTED_24_OF_24');
+assert.equal(w22Admission.actual?.accepted,24);
+assert.equal(w22Admission.allDecisionsAccept,true);
+assert.equal(w22Admission.customerCutoverGateSatisfied,true);
+assert.equal(w22Acceptance.status,'HUMAN_ACCEPTED_24_OF_24');
+assert.equal(w22Acceptance.gates?.ALL_24_DECISIONS_ACCEPT,true);
+const w23Cutover=j(`${fp}/admission/ziwei-fp-w23-full-production-cutover-v1.json`);
+const w23Acceptance=j(`${fp}/acceptance/ziwei-fp-w23-production-cutover-acceptance-v1.json`);
+assert.equal(w23Cutover.status,'FULL_PRODUCTION_ACTIVE');
+assert.equal(w23Cutover.publicationState,'CUSTOMER_PUBLISHABLE');
+assert.equal(w23Cutover.runtimeUseAllowed,true);
+assert.equal(w23Cutover.defaultCustomerCutover,true);
+assert.equal(w23Cutover.preservedFailClosedGaps?.extensionStarStandaloneMeaningCountBlocked,8);
+assert.equal(w23Cutover.preservedFailClosedGaps?.genericMeaningFallbackAllowed,false);
+assert.equal(w23Acceptance.decision,'PRODUCTION_CUTOVER_ALLOWED');
+assert.equal(w23Acceptance.productionAllowed,true);
+assert.equal(w23Acceptance.customerCutoverAllowed,true);
 
 // W2 — explicit, visible target context with no birth-time fallback.
 const target=resolveZiweiLiveTargetContext({
