@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {buildAstProfessionalSemanticProjection} from '../functions/ast-full-production/ast-professional-semantic-runtime.js';
+import {buildAstWholeChartSynthesis} from '../functions/ast-full-production/ast-whole-chart-synthesis-runtime.js';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const digest=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
+const baseline='0692037d3a3f522de9f0eb11d37f738df3a2bae6';
+const r4Fixture=j('content/professional/ast-full-production/fixtures/ast-fp-r4-professional-semantic-fixture-v1.json');
+const authority=j('content/professional/ast-full-production/authority/ast-fp-r4-professional-semantic-authority-v1.json');
+const registries={angles:j('content/professional/ast-full-production/registries/ast-r4-angle-semantic-registry-v1.json'),rulership:j('content/professional/ast-full-production/registries/ast-r4-rulership-registry-v1.json'),elementModality:j('content/professional/ast-full-production/registries/ast-r4-element-modality-registry-v1.json'),aspectPatterns:j('content/professional/ast-full-production/registries/ast-r4-aspect-pattern-registry-v1.json'),aspectDynamics:j('content/professional/ast-full-production/registries/ast-r4-aspect-dynamics-policy-v1.json')};
+const r4=buildAstProfessionalSemanticProjection({canonicalProjection:r4Fixture.inputProjection,authority,registries});
+const common={canonicalProjection:r4Fixture.inputProjection,professionalSemanticProjection:r4,meaningOntology:j('content/professional/ast-production/meaning/ast-meaning-ontology-v1.json'),r4aClaims:j('content/professional/ast-full-production/claims/ast-fp-r4a-professional-semantic-candidate-claims-v1.json'),r4aAdmission:j('content/professional/ast-full-production/admission/ast-fp-r4a-professional-semantic-human-admission-v1.json'),compositionRules:j('content/professional/ast-full-production/registries/ast-r5-whole-chart-composition-rule-registry-v1.json')};
+const enPressure=buildAstWholeChartSynthesis({...common,locale:'en',customerIntent:{intentId:'PRESSURE'}});
+const zhExpression=buildAstWholeChartSynthesis({...common,locale:'zh-Hans',customerIntent:{intentId:'EXPRESSION'}});
+const out={schemaVersion:'PHI-OS-AST-FP-R5-WHOLE-CHART-SYNTHESIS-FIXTURE-v1.0.0',workCode:'AST-FP-R5',baselineCommit:baseline,sourceR4FixtureRef:'content/professional/ast-full-production/fixtures/ast-fp-r4-professional-semantic-fixture-v1.json',generated:{enPressure,zhExpression},digests:{enPressure:digest(enPressure),zhExpression:digest(zhExpression)},expected:{themeCountRange:[3,5],supportSignals:3,tensionSignals:3,r4aHumanAdmissionSatisfied:false,customerPublicationAllowed:false,pressureTopFamily:'PATTERN_NETWORK',expressionIntentChangesRankingOrPriority:true}};
+fs.writeFileSync('content/professional/ast-full-production/fixtures/ast-fp-r5-whole-chart-synthesis-fixture-v1.json',JSON.stringify(out,null,2)+'\n');
+console.log(JSON.stringify({status:'BUILT',enPressure:out.digests.enPressure,zhExpression:out.digests.zhExpression,enThemes:enPressure.coreThemes.map(x=>[x.rank,x.familyCode,x.priority]),zhThemes:zhExpression.coreThemes.map(x=>[x.rank,x.familyCode,x.priority])},null,2));
