@@ -7,6 +7,16 @@ const reportBlock=(report,schoolCode)=>list(list(report?.sections).find(x=>x.cod
 const ELEMENT_ORDER=Object.freeze(['WOOD','FIRE','EARTH','METAL','WATER']);
 const GENERATES=Object.freeze({WOOD:'FIRE',FIRE:'EARTH',EARTH:'METAL',METAL:'WATER',WATER:'WOOD'});
 const CONTROLS=Object.freeze({WOOD:'EARTH',EARTH:'WATER',WATER:'FIRE',FIRE:'METAL',METAL:'WOOD'});
+const TEN_GOD_ORDER=Object.freeze(['BI_JIAN','JIE_CAI','SHI_SHEN','SHANG_GUAN','ZHENG_CAI','PIAN_CAI','ZHENG_GUAN','QI_SHA','ZHENG_YIN','PIAN_YIN']);
+const TEN_GOD_META=Object.freeze({
+ BI_JIAN:Object.freeze({zh:'比肩',en:'Peer',group:'PEER'}),JIE_CAI:Object.freeze({zh:'劫财',en:'Rob Wealth',group:'PEER'}),
+ SHI_SHEN:Object.freeze({zh:'食神',en:'Eating God',group:'OUTPUT'}),SHANG_GUAN:Object.freeze({zh:'伤官',en:'Hurting Officer',group:'OUTPUT'}),
+ ZHENG_CAI:Object.freeze({zh:'正财',en:'Direct Wealth',group:'WEALTH'}),PIAN_CAI:Object.freeze({zh:'偏财',en:'Indirect Wealth',group:'WEALTH'}),
+ ZHENG_GUAN:Object.freeze({zh:'正官',en:'Direct Officer',group:'OFFICER'}),QI_SHA:Object.freeze({zh:'七杀',en:'Seven Killings',group:'OFFICER'}),
+ ZHENG_YIN:Object.freeze({zh:'正印',en:'Direct Resource',group:'RESOURCE'}),PIAN_YIN:Object.freeze({zh:'偏印',en:'Indirect Resource',group:'RESOURCE'})
+});
+const TEN_GOD_GROUP_ORDER=Object.freeze(['PEER','OUTPUT','WEALTH','OFFICER','RESOURCE']);
+const TEN_GOD_GROUP_MEMBERS=Object.freeze(Object.fromEntries(TEN_GOD_GROUP_ORDER.map(group=>[group,Object.freeze(TEN_GOD_ORDER.filter(code=>TEN_GOD_META[code].group===group))])));
 const addInventory=(out,src)=>{for(const key of ELEMENT_ORDER)out[key]+=(Number(src?.[key])||0);return out};
 function monthCommandRelation(element,monthElement){
  if(!element||!monthElement)return 'MONTH_COMMAND_RELATION_UNAVAILABLE';
@@ -43,6 +53,44 @@ function fiveElementModule(readingIR){
   tenGodPreview:freeze({...foundation.tenGodDistribution?.visiblePlusHiddenUnweighted}),items:freeze(items),
   correction:freeze({mode:'QUALITATIVE_MONTH_COMMAND_RELATION_ONLY',numericWeightedStrengthAvailable:false,weightedHiddenStemScoringApplied:inventory.weightedHiddenStemScoringApplied===true}),
   boundaries:freeze({rawRatioIsStrengthScore:false,seasonRelationIsFinalStrongWeakVerdict:false,hiddenStemWeightsInvented:false,goodBadScoreCreated:false,fortunePredictionCreated:false})
+ });
+}
+
+function tenGodModule(readingIR,pattern){
+ const foundation=readingIR?.sections?.foundation||{},pillars=list(readingIR?.pillars),dist=foundation.tenGodDistribution?.visiblePlusHiddenUnweighted||{};
+ const visibleSources=[],hiddenSources=[];
+ for(const pillar of pillars){
+  const role=pillar?.stemRole||{};
+  if(role.classification==='TEN_GOD'&&role.tenGodCode)visibleSources.push(freeze({tenGodCode:role.tenGodCode,pillar:pillar.position,location:role.location||`${pillar.position}_STEM`,stemCode:role.stemCode||pillar?.stem?.code||null,stemZh:role.stemZh||pillar?.stem?.zh||null,layer:'VISIBLE_STEM'}));
+  for(const hidden of list(pillar?.hiddenStems)){if(!hidden?.tenGodCode)continue;hiddenSources.push(freeze({tenGodCode:hidden.tenGodCode,pillar:pillar.position,location:`${pillar.position}_BRANCH_HIDDEN_${hidden.order}`,branchCode:pillar?.branch?.code||null,branchZh:pillar?.branch?.zh||null,order:hidden.order,stemCode:hidden.stemCode||null,stemZh:hidden.stemZh||null,layer:'HIDDEN_STEM'}));}
+ }
+ const total=TEN_GOD_ORDER.reduce((sum,code)=>sum+(Number(dist?.[code])||0),0);
+ const monthPillar=pillars.find(x=>x.position==='MONTH')||null,day=foundation.dayMaster||{},month=foundation.monthCommand||{};
+ const candidates=list(pattern?.candidates);
+ const items=TEN_GOD_ORDER.map(code=>{
+  const meta=TEN_GOD_META[code],visible=visibleSources.filter(x=>x.tenGodCode===code),hidden=hiddenSources.filter(x=>x.tenGodCode===code),count=visible.length+hidden.length;
+  const patternLinks=candidates.filter(x=>x.tenGodCode===code).map(x=>freeze({candidateId:x.candidateId,patternFamily:x.patternFamily,treatmentClass:x.treatmentClass,hiddenStemCode:x.hiddenStemCode,hiddenStemZh:x.hiddenStemZh,hiddenOrder:x.hiddenOrder,visibleStemMatch:x.visibleStemMatch===true,visiblePillars:list(x.visiblePillars),priorityVerdict:x.priorityVerdict??null}));
+  const monthHidden=hidden.filter(x=>x.pillar==='MONTH').map(x=>freeze({branchCode:x.branchCode,branchZh:x.branchZh,order:x.order,stemCode:x.stemCode,stemZh:x.stemZh}));
+  return freeze({
+   code,zh:meta.zh,en:meta.en,functionGroup:meta.group,count,rawRatio:total?Math.round((count/total)*1000)/10:0,
+   sourceBreakdown:freeze({visibleStemCount:visible.length,hiddenStemCount:hidden.length}),visibleSources:freeze(visible),hiddenSources:freeze(hidden),pillars:freeze([...new Set([...visible,...hidden].map(x=>x.pillar))]),
+   visibility:count===0?'ABSENT':visible.length&&hidden.length?'VISIBLE_AND_HIDDEN':visible.length?'VISIBLE_ONLY':'HIDDEN_ONLY',
+   repeated:count>=2,monthCommandHidden:freeze(monthHidden),monthCommandOrder:monthHidden.length?Math.min(...monthHidden.map(x=>Number(x.order)||99)):null,patternLinks:freeze(patternLinks),
+   patternRole:patternLinks.length?(pattern?.verdict?.primaryPattern&&patternLinks.some(x=>x.patternFamily===pattern.verdict.primaryPattern)?'PRIMARY_PATTERN_LINK':'PATTERN_CANDIDATE_LINK'):'NO_PATTERN_LINK'
+  });
+ });
+ const groups=TEN_GOD_GROUP_ORDER.map(group=>{const members=TEN_GOD_GROUP_MEMBERS[group],memberItems=items.filter(x=>members.includes(x.code)),count=memberItems.reduce((sum,x)=>sum+x.count,0),visibleStemCount=memberItems.reduce((sum,x)=>sum+x.sourceBreakdown.visibleStemCount,0),hiddenStemCount=memberItems.reduce((sum,x)=>sum+x.sourceBreakdown.hiddenStemCount,0),max=Math.max(0,...memberItems.map(x=>x.count));return freeze({group,members:freeze(members),count,rawRatio:total?Math.round((count/total)*1000)/10:0,visibleStemCount,hiddenStemCount,dominantCodes:freeze(memberItems.filter(x=>x.count===max&&max>0).map(x=>x.code)),presentCodes:freeze(memberItems.filter(x=>x.count>0).map(x=>x.code))})});
+ const maxCount=Math.max(0,...items.map(x=>x.count)),maxGroupCount=Math.max(0,...groups.map(x=>x.count)),leaders=items.filter(x=>x.count===maxCount&&maxCount>0).map(x=>x.code),groupLeaders=groups.filter(x=>x.count===maxGroupCount&&maxGroupCount>0).map(x=>x.group);
+ const repeated=items.filter(x=>x.repeated).map(x=>x.code),hiddenOnly=items.filter(x=>x.visibility==='HIDDEN_ONLY').map(x=>x.code),absent=items.filter(x=>x.visibility==='ABSENT').map(x=>x.code);
+ return freeze({
+  schemaVersion:'PHI-OS-BAZI-CX-PRO-TEN-GOD-PROFESSIONAL-COMPOSITION-v1.0.0',work:'BAZI-CX-PRO-W3',
+  sourceTenGodSchema:'PHI-OS-BAZI-TEN-GOD-STRUCTURAL-IR-v1.0.0',sourceReadingDigest:readingIR?.readingDigest||null,distributionMode:'VISIBLE_STEMS_PLUS_HIDDEN_STEMS_UNWEIGHTED',weightsApplied:false,total,
+  dayMaster:freeze({code:day?.code||null,zh:day?.zh||null,element:day?.element||null,polarity:day?.polarity||null}),
+  monthCommand:freeze({branchCode:month?.branch?.code||monthPillar?.branch?.code||null,branchZh:month?.branch?.zh||monthPillar?.branch?.zh||null,element:month?.branch?.element||monthPillar?.branch?.element||null,season:month?.season||null}),
+  items:freeze(items),groups:freeze(groups),
+  concentration:freeze({topCount:maxCount,topRatio:total?Math.round((maxCount/total)*1000)/10:0,leaderCodes:freeze(leaders),coLeaderCount:leaders.length,topGroupCount:maxGroupCount,topGroupRatio:total?Math.round((maxGroupCount/total)*1000)/10:0,leaderGroups:freeze(groupLeaders),repeatedCodes:freeze(repeated),hiddenOnlyCodes:freeze(hiddenOnly),absentCodes:freeze(absent),presentCodeCount:items.filter(x=>x.count>0).length}),
+  patternContext:freeze({primaryPattern:pattern?.verdict?.primaryPattern||null,candidateCount:candidates.length,monthCommandCandidateCodes:freeze(candidates.map(x=>x.tenGodCode).filter(Boolean)),unresolved:!pattern?.verdict?.primaryPattern}),
+  boundaries:freeze({ratioIsUnweightedStructuralShare:true,ratioIsStrengthScore:false,absenceIsAbilityAbsence:false,repetitionIsDestinyVerdict:false,hiddenOnlyIsWeaknessVerdict:false,patternCandidateIsPrimaryPattern:false,rendererMayCreateNewTenGodVerdict:false,goodBadScoreCreated:false,fortunePredictionCreated:false})
  });
 }
 
@@ -110,12 +158,13 @@ function realityComparisonModule(readingIR,temporalState){
 
 export function buildBaziProfessionalSurfaceModules({readingIR,report,temporalState='UNAVAILABLE'}={}){
  if(readingIR?.schemaVersion!=='PHI-OS-BAZI-FULL-READING-IR-v1.0.0')throw Object.assign(new Error('PPR_C1_W7_W12_BAZI_READING_IR_REQUIRED'),{code:'PPR_C1_W7_W12_BAZI_READING_IR_REQUIRED'});
+ const pattern=patternModule(readingIR);
  return freeze({
-  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W2-v1.0.0',
-  fiveElements:fiveElementModule(readingIR),pattern:patternModule(readingIR),schools:schoolModules(readingIR,report),timing:timingModule(readingIR,temporalState),
+  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W3-v1.0.0',
+  fiveElements:fiveElementModule(readingIR),tenGods:tenGodModule(readingIR,pattern),pattern,schools:schoolModules(readingIR,report),timing:timingModule(readingIR,temporalState),
   customerSafeGraph:buildBaziCustomerSafeStructureGraph({readingIR,temporalState}),
   realityComparison:realityComparisonModule(readingIR,temporalState),
-  boundaries:freeze({createsMeaning:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false,recalculatesEvidenceGraph:false,exposesRawEvidenceGraphIds:false,usesPprR3SpecialistPort:true,modifiesSharedPersonalRealitySurface:false})
+  boundaries:freeze({createsMeaning:false,createsNewMethodVerdict:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false,recalculatesEvidenceGraph:false,exposesRawEvidenceGraphIds:false,usesPprR3SpecialistPort:true,modifiesSharedPersonalRealitySurface:false})
  });
 }
 export default Object.freeze({buildBaziProfessionalSurfaceModules});

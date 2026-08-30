@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-TEN-GOD-PROFESSIONAL-COMPOSITION-CONTRACT-v1.0.0",
+  "work": "BAZI-CX-PRO-W3",
+  "status": "ENGINEERING_COMPLETE",
+  "projectionSchema": "PHI-OS-BAZI-CX-PRO-TEN-GOD-PROFESSIONAL-COMPOSITION-v1.0.0",
+  "sourceTenGodSchema": "PHI-OS-BAZI-TEN-GOD-STRUCTURAL-IR-v1.0.0",
+  "tenGodOrder": [
+    "BI_JIAN", "JIE_CAI", "SHI_SHEN", "SHANG_GUAN", "ZHENG_CAI",
+    "PIAN_CAI", "ZHENG_GUAN", "QI_SHA", "ZHENG_YIN", "PIAN_YIN"
+  ],
+  "ratio": {
+    "source": "visiblePlusHiddenUnweighted",
+    "includes": ["VISIBLE_TEN_GOD_STEMS_EXCEPT_DAY_MASTER", "HIDDEN_STEMS_UNWEIGHTED"],
+    "excludes": ["DAY_MASTER_STEM"],
+    "display": "PERCENT_OF_TEN_GOD_SOURCE_LOCATIONS",
+    "weightsApplied": false,
+    "isStrengthScore": false,
+    "isGoodBadScore": false
+  },
+  "functionalGroups": {
+    "PEER": ["BI_JIAN", "JIE_CAI"],
+    "OUTPUT": ["SHI_SHEN", "SHANG_GUAN"],
+    "WEALTH": ["ZHENG_CAI", "PIAN_CAI"],
+    "OFFICER": ["ZHENG_GUAN", "QI_SHA"],
+    "RESOURCE": ["ZHENG_YIN", "PIAN_YIN"]
+  },
+  "sourceProjection": {
+    "visibleStemLocationsRequired": true,
+    "hiddenStemLocationsRequired": true,
+    "pillarCoordinatesRequired": ["YEAR", "MONTH", "DAY", "HOUR"],
+    "hiddenStemOrderPreserved": true,
+    "absenceRemainsVisible": true
+  },
+  "repetitionAndConcentration": {
+    "repeatedDefinition": "RAW_SOURCE_COUNT_GTE_2",
+    "topTenGodShareDisplayed": true,
+    "topFunctionalGroupShareDisplayed": true,
+    "tiesPreserved": true,
+    "repetitionMayBecomeDestinyVerdict": false,
+    "absenceMayBecomeAbilityAbsence": false,
+    "hiddenOnlyMayBecomeWeaknessVerdict": false
+  },
+  "professionalComposition": {
+    "dayMasterContextRequired": true,
+    "monthCommandContextRequired": true,
+    "patternCandidateLinksRequiredWherePresent": true,
+    "visibleStemMatchRequiredForPatternLink": true,
+    "patternCandidateMayBePromotedToPrimaryByRenderer": false,
+    "customerCopyMustExplainFunctionBeforeRealityComparison": true
+  },
+  "customerVisual": {
+    "tenColoredRolesRequired": true,
+    "fiveFunctionalGroupCardsRequired": true,
+    "fourPillarSourceMapRequired": true,
+    "repetitionConcentrationPanelRequired": true,
+    "dayMasterMonthCommandPatternCompositionRequired": true
+  },
+  "prohibitedFabrication": {
+    "hiddenStemWeightsInvented": false,
+    "fakeStrengthPercentCreated": false,
+    "goodBadScoreCreated": false,
+    "fortunePredictionCreated": false,
+    "personalityScoreCreated": false
+  }
+}

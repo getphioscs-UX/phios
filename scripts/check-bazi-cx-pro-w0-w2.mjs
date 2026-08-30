@@ -122,7 +122,7 @@ assert.match(rendered.readingHtml,/校正倾向/);
 assert.match(rendered.readingHtml,/相对日主/);
 assert.match(rendered.readingHtml,/原始占比/);
 assert.match(rendered.readingHtml,/季节校正/);
-assert.match(rendered.readingHtml,/十神结构预览/);
+assert.match(rendered.readingHtml,/十神结构预览|十神 · 10 神分布/,'W2 preview or its W3 successor must remain customer-visible.');
 assert.match(rendered.readingHtml,/不等同旺衰分数/);
 assert.doesNotMatch(rendered.readingHtml,/五行力量百分比|五行旺衰百分比|吉凶分数|大吉|大凶|必发财|必结婚/);
 
