@@ -10,7 +10,7 @@ const commit='9b0eaeff8f88a1a78f5bc9395a88f28c4ceecb9c';
 const base='content/professional/personal-reality/r3';
 const w0=j(`${base}/audit/ppr-r3-w0-authority-reconciliation-v1.json`);assert.equal(w0.baselineCommit,commit);assert.equal(w0.status,'RECONCILED');assert(w0.cxR12R4bOwns.includes('Personal Reading Report IR'));assert(w0.cxR12R4bOwns.includes('Report cutover'));assert(w0.pprR3Owns.includes('specialist renderer port'));assert(!w0.pprR3Owns.includes('Personal Reading Report IR'));
 const ecrMandalaSuccessor=j('content/embodied-configuration/ecr-customer-mandala-authority-audit-v1.json');
-const {r4}=assertPprC1CurrentSuccessor();
+const {r4,postR4Proof,w10aProof}=assertPprC1CurrentSuccessor();
 function assertRetiredBaselineFile(p,label){
  const retired=ecrMandalaSuccessor?.baselineRetiredFiles?.[p];
  assert(retired,`${label} missing without baseline-retirement reconciliation: ${p}`);
@@ -31,10 +31,12 @@ for(const [p,d] of Object.entries(w0.protectedConvergenceFiles)){
   assert(successor,`PPR-R3 W0 missing predecessor successor chain before PPR-R4: ${p}`);
   assert.equal(successor.predecessorSha256,d,`PPR-R3 W0 predecessor-chain mismatch: ${p}`);
   assert.equal(successor.successorSha256,r4Proof.predecessorSha256,`PPR-R3 W0 PPR-R4 predecessor is not the admitted current-main predecessor: ${p}`);
-  assert.equal(r4Proof.successorSha256,current,`PPR-R3 W0 PPR-R4 successor digest drift: ${p}`);
   assert.equal(r4Proof.changeClass,'PPR_R4_METHOD_INPUT_EXTENSION_ONLY',`PPR-R3 W0 PPR-R4 successor class not admitted: ${p}`);
+  if(current!==r4Proof.successorSha256){const later=postR4Proof(p);assert(later,`PPR-R3 W0 PPR-R4 current successor proof missing: ${p}`);assert.equal(later.predecessorSha256,r4Proof.successorSha256,`PPR-R3 W0 post-R4 predecessor mismatch: ${p}`);assert.equal(later.successorSha256,current,`PPR-R3 W0 post-R4 successor digest drift: ${p}`);}else assert.equal(r4Proof.successorSha256,current);
   continue;
  }
+ const astShared=w10aProof(p);
+ if(astShared){assert.equal(astShared.predecessorSha256,d,`PPR-R3 W0 W10A predecessor mismatch: ${p}`);assert.equal(astShared.successorSha256,current,`PPR-R3 W0 W10A successor digest drift: ${p}`);assert.match(astShared.changeClass,/^AST_TARGET_CONTEXT_/);continue;}
  assert(successor,`PPR-R3 W0 protected convergence drift without governed successor: ${p}`);
  assert.equal(successor.predecessorSha256,d,`PPR-R3 W0 successor predecessor mismatch: ${p}`);
  assert.equal(successor.successorSha256,current,`PPR-R3 W0 successor digest drift: ${p}`);
