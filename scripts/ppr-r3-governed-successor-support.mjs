@@ -9,7 +9,7 @@ const R4V1='content/professional/personal-reality/r4/authority/ppr-r4-method-inp
 const R4V2='content/professional/personal-reality/r4/authority/ppr-r4-ast-target-context-input-successor-v2.json';
 const CURRENT='content/professional/personal-reality/r4/authority/ppr-r4-current-main-shared-successor-reconciliation-7c61264-v1.json';
 const R5='content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json';
-const HD='content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-successor-v1.json';
+const AST_MFP_R_SMR='content/professional/personal-reality/r3/authority/ppr-r3-w10c-ast-mfp-r-smr-adapter-successor-v1.json';
 
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const optional=p=>fs.existsSync(p)?j(p):null;
@@ -36,7 +36,7 @@ export function assertPprR3RetiredPath(path,label='PPR-R3'){
 function edge(path,from,to,kind,validate){return from&&to?{path,from,to,kind,validate}:null}
 function edgesFor(path){
  const edges=[];
- const ecr=optional(ECR),w10a=optional(W10A),w10b=optional(W10B),r4v1=optional(R4V1),r4v2=optional(R4V2),current=optional(CURRENT),r5=optional(R5),hd=optional(HD);
+ const ecr=optional(ECR),w10a=optional(W10A),w10b=optional(W10B),r4v1=optional(R4V1),r4v2=optional(R4V2),current=optional(CURRENT),r5=optional(R5),astMfpRSmr=optional(AST_MFP_R_SMR);
  const ep=ecr?.protectedSuccessors?.[path];if(ep)edges.push(edge(path,ep.predecessorSha256,ep.successorSha256,'ECR',()=>{
   const allowed={
    'perspectives/personal/index.html':'ECR_BRAND_ASSET_CORRECTION_ONLY',
@@ -68,15 +68,20 @@ function edgesFor(path){
   for(const k of ['createsMeaning','createsCalculation','createsProjection','replacesPprR3RendererAuthority','changesMethodInputSemantics','changesApiContract'])assert.equal(r5p[k],false,`PPR-R5 ${k} must stay false: ${path}`);
   assert.equal(allFalse(r5.boundaries),true,'PPR-R5 boundary changed');
  }));
+ const astSmr=astMfpRSmr?.authorizedFile;if(astSmr?.path===path)edges.push(edge(path,astSmr.predecessorSha256,astSmr.successorSha256,'AST-MFP-R-SMR',()=>{
+  assert.equal(astMfpRSmr.status,'AUTHORIZED_AST_METHOD_OWNED_SMR_ADAPTER_SUCCESSOR','AST MFP-R SMR successor status changed');
+  assert.equal(astMfpRSmr.ownerProgram,'AST_FULL_PRODUCTION','AST MFP-R SMR successor owner changed');
+  assert.equal(astMfpRSmr.ownerGap,'MFP-R-AST-001','AST MFP-R SMR successor gap changed');
+  assert.equal(astSmr.changeClass,'AST_MFP_R_PLANET_SIGN_RECOVERY_WRAPPER_ONLY',`AST MFP-R SMR successor class mismatch: ${path}`);
+  assert.equal(astSmr.expectedMethodId,'AST',`AST MFP-R SMR expected method changed: ${path}`);
+  assert.equal(astSmr.futureDriftAuthorized,false,`AST MFP-R SMR successor must fail closed on future drift: ${path}`);
+  assert.equal(allFalse(astMfpRSmr.boundaries),true,'AST MFP-R SMR successor boundary changed');
+  const admission=optional(astMfpRSmr.sourceProductionAdmission);assert(admission,'AST MFP-R source production admission missing');
+  assert.equal(admission.status,'PRODUCTION_ADMITTED');assert.equal(admission.ownerProgram,'AST_FULL_PRODUCTION');assert.equal(admission.customerRuntimeUseAllowed,true);assert.equal(admission.customerPublicationAllowed,true);
+  const src=fs.readFileSync(path,'utf8');for(const token of astSmr.requiredTokens||[])assert(src.includes(token),`AST MFP-R SMR successor token missing: ${token}`);
+ }));
  const rv2=r4v2?.sharedFileSuccessorProof?.[path];if(rv2)edges.push(edge(path,rv2.predecessorSha256,rv2.successorSha256,'PPR-R4-v2',()=>{
   assert.equal(r4v2.status,'ACTIVE_SUCCESSOR_RECONCILING_PPR_R4_WITH_AST_W10A');assert.equal(rv2.changeClass,'PPR_R4_METHOD_INPUT_EXTENSION_ONLY');assert.equal(allFalse(r4v2.boundaries),true,'PPR-R4 v2 boundary changed');
- }));
- const hdp=hd?.sharedFileSuccessorProof?.[path];if(hdp)edges.push(edge(path,hdp.predecessorSha256,hdp.successorSha256,'HD-PRO-R2',()=>{
-  assert.equal(hd.status,'HD_PRO_R2_EXTERNAL_PROFILE_SUCCESSOR_IMPLEMENTED','HD-PRO-R2 successor status changed');
-  assert.equal(hd.canonicalRoute,'/perspectives/personal/','HD-PRO-R2 canonical route changed');
-  assert.equal(hdp.changeClass,'HD_PRO_R2_EXTERNAL_PROFILE_SUCCESSOR',`HD-PRO-R2 successor class mismatch: ${path}`);
-  for(const k of ['createsPHIOSHumanDesignCalculationAuthority','createsHdrPublicExecutionAuthority','createsAutomaticVariableCalculationAuthority','replacesPprR3RendererAuthority'])assert.equal(hdp[k],false,`HD-PRO-R2 ${k} must stay false: ${path}`);
-  assert.equal(allFalse(hd.boundaries),true,'HD-PRO-R2 governance boundary changed');
  }));
  if(w10b?.reconciledFile?.path===path){const x=w10b.reconciledFile;edges.push(edge(path,x.currentMainSha256,x.reconciledSha256,'PPR-R3-W10B',()=>{
   assert.equal(w10b.status,'AUTHORIZED_CONCURRENT_SUCCESSOR_RECONCILIATION_IMPLEMENTED');assert.equal(allFalse(w10b.boundaries),true,'W10B boundary changed');
@@ -98,8 +103,7 @@ export function assertPprR3GovernedPath(path,predecessorSha,label='PPR-R3'){
 export function assertPprR4AstInputSuccessorIntegrity(){
  const v2=j(R4V2),reg=j('content/professional/personal-reality/r4/registries/ppr-r4-method-input-registry-v2.json'),contract=j('content/professional/personal-reality/r4/contracts/ppr-r4-ast-target-context-input-extension-contract-v1.json');
  assert.equal(v2.status,'ACTIVE_SUCCESSOR_RECONCILING_PPR_R4_WITH_AST_W10A');assert.equal(reg.status,'ACTIVE');assert.equal(contract.status,'ACTIVE_METHOD_INPUT_SUCCESSOR_CONTRACT');assert.equal(allFalse(v2.boundaries),true);
- const hd=optional(HD),jsPath='assets/customer-ui/js/surfaces/personal-reality.js',hdJs=hd?.sharedFileSuccessorProof?.[jsPath]||null;
- if(hdJs){assert.equal(hdJs.predecessorSha256,v2.sharedFileSuccessorProof[jsPath].successorSha256,'HD-PRO-R2 must succeed the AST/PPR-R4 input host');assert.equal(sha(jsPath),hdJs.successorSha256,'HD-PRO-R2 current client digest drift');const client=fs.readFileSync(jsPath,'utf8');for(const token of ['collectMethodInputExtensions','astTargetContext','baziTemporalContext'])assert(client.includes(token),`HD-PRO-R2 must preserve PPR-R4 method input token: ${token}`);}else assert.equal(sha(jsPath),v2.sharedFileSuccessorProof[jsPath].successorSha256);
+ assert.equal(sha('assets/customer-ui/js/surfaces/personal-reality.js'),v2.sharedFileSuccessorProof['assets/customer-ui/js/surfaces/personal-reality.js'].successorSha256);
  assert.equal(sha('assets/customer-ui/js/personal-inputs/method-input-extension-registry.js'),v2.genericFileSuccessorProof['assets/customer-ui/js/personal-inputs/method-input-extension-registry.js'].successorSha256);
  assert.equal(sha('assets/customer-ui/js/specialists/ast/input-extension.js'),v2.methodOwnedFiles['assets/customer-ui/js/specialists/ast/input-extension.js']);
  assert.equal(sha('assets/customer-ui/surfaces/astrology-input-extension.css'),v2.methodOwnedFiles['assets/customer-ui/surfaces/astrology-input-extension.css']);

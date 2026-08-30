@@ -20,7 +20,7 @@ for(const [p,d] of Object.entries(freeze.protectedConvergenceFiles)){
  if(!fs.existsSync(p)){assertPprR3RetiredPath(p,'PPR-R3 W10 protected convergence');continue;}
  assertPprR3GovernedPath(p,d,'PPR-R3 W10 protected convergence');
 }
-for(const [p,d] of Object.entries(freeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`W10 SMR drift ${p}`);
+for(const [p,d] of Object.entries(freeze.sharedSingleMethodReadingFiles))assertPprR3GovernedPath(p,d,'PPR-R3 W10 SMR');
 // W10 freezes the shared PPR-R3 host. Its own successor rule explicitly permits
 // method-owned specialist adapters/renderers to evolve behind the approved port.
 // Package/checker files are governance wiring rather than frozen runtime payload.
