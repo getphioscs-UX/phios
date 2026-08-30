@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
+const ROOT='content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3';
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const census=readJson('content/customer-experience-rebuild/hd-pro-r3/coverage/human-design-semantic-coverage-census-v1.json');
+const census=readJson(`${ROOT}/coverage/human-design-semantic-coverage-census-v1.json`);
 const source=readJson('knowledge/external-readers/human-design/registry/entries.json');
 const structure=readJson('content/professional/canonical-meaning-runtime/registries/hdr-structure-mapping-registry-v1.json');
-const html=fs.readFileSync('content/customer-experience-rebuild/hd-pro-r3/coverage/HD-PRO-R3-W1-COVERAGE.html','utf8');
+const html=fs.readFileSync(`${ROOT}/coverage/HD-PRO-R3-W1-COVERAGE.html`,'utf8');
 
 assert.equal(census.schemaVersion,'PHI-OS-HD-PRO-R3-W1-SEMANTIC-COVERAGE-CENSUS-v1.0.0');
 assert.equal(census.baselineCommit,'dae24c1dd8de49a6c238ddffb8d52b388e8da10d');
@@ -45,8 +46,8 @@ assert.equal(census.headline.r2CustomerPublishedStillActive,true);
 for(const row of census.coverage){
   assert.equal(row.structuralCoveragePct,100,`${row.category} structural census incomplete`);
   assert.equal(row.categorySourceWitnessPresent,true,`${row.category} lacks category source witness`);
-  assert.equal(row.valueSpecificSemanticUnitsSourceAdmitted,0,`${row.category} falsely claims value-specific admission`);
-  assert.equal(row.valueSpecificSemanticCoveragePct,0,`${row.category} falsely reports semantic coverage`);
+  assert.equal(row.valueSpecificSemanticUnitsSourceAdmitted,0,`${row.category} W1 baseline was rewritten after the census`);
+  assert.equal(row.valueSpecificSemanticCoveragePct,0,`${row.category} W1 baseline was rewritten after the census`);
   assert.equal(row.compositionSupportedUnits,0,`${row.category} falsely reports R3 composition support`);
   assert.equal(row.customerPublishableR3Units,0,`${row.category} falsely reports R3 customer publication`);
   assert.equal(row.admissionState,'SOURCE_PENDING');
@@ -60,5 +61,5 @@ assert.equal(census.publication.r3CustomerCutoverAllowed,false);
 
 for(const token of ['Structural inventory','Value-specific semantics','R3 customer-publishable','SOURCE_PENDING','R2 remains CUSTOMER_PUBLISHED'])assert(html.includes(token),`W1 HTML missing ${token}`);
 
-console.log('✓ HD-PRO-R3-W1 Semantic Coverage Census passed.');
-console.log('  Structural inventory 100%; category source witnesses 100%; value-specific semantic/composition/customer-publishable R3 coverage 0% (SOURCE_PENDING, fail-closed).');
+console.log('✓ HD-PRO-R3-W1 Semantic Coverage Census baseline passed.');
+console.log('  W1 remains the pre-admission census; W2 may add source-admitted units without rewriting this historical census.');

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W2-SOURCE-SCHOOL-AUTHORITY-REGISTRY-v1.0.0",
+  "work": "HD-PRO-R3-W2",
+  "baselineCommit": "791e1a130750affa13831f248e89a8b921e54743",
+  "status": "SOURCE_SCHOOL_AUTHORITY_REGISTRY_ACTIVE_R3_SHADOW",
+  "publication": {
+    "r2State": "CUSTOMER_PUBLISHED",
+    "r3State": "SHADOW_CANDIDATE",
+    "r3CustomerCutoverAllowed": false,
+    "r2HumanReviewInheritedByR3": false
+  },
+  "hardBoundaries": {
+    "phiosHumanDesignBirthCalculationAuthority": false,
+    "externalConfirmedChartAuthority": true,
+    "importedReportEqualsPhiosCalculatedChart": false,
+    "sourceAdmissionEqualsSemanticAdmission": false,
+    "semanticAdmissionEqualsCompositionSupport": false,
+    "compositionSupportEqualsCustomerPublication": false,
+    "thirdPartyDrivePresenceEqualsReproductionRights": false,
+    "aiMayFillSourceGap": false
+  },
+  "reusedOwners": {
+    "semanticRegistry": "knowledge/external-readers/human-design/registry/entries.json",
+    "mirSourceHierarchy": "content/interpretation/governance/interpretation-source-authority-hierarchy-v1.json",
+    "gateLineSourceRegistry": "content/interpretation/source/gate-line-source-registry-v1.json",
+    "profileRoleSourceRegistry": "content/interpretation/source/profile-role-source-registry-v1.json",
+    "variableSourceRegistry": "content/interpretation/source/variable-source-registry-v1.json",
+    "activationRoleSourceRegistry": "content/interpretation/source/activation-role-source-registry-v1.json",
+    "sequenceSourceRegistry": "content/interpretation/source/sequence-source-registry-v1.json"
+  },
+  "validAdmissionStates": [
+    "SOURCE_ADMITTED",
+    "SOURCE_PENDING",
+    "SCHOOL_VARIANT",
+    "NOT_APPLICABLE",
+    "LICENSE_RESTRICTED",
+    "BOUNDARY_REWRITE_REQUIRED"
+  ],
+  "sourceClasses": [
+    {
+      "classId": "USER_AUTHORED_PRIMARY",
+      "precedenceWithinHdSemanticSources": 1,
+      "allowedUses": [
+        "VALUE_SPECIFIC_SOURCE_UNITS",
+        "SEMANTIC_CLAIM_CANDIDATES",
+        "EDITORIAL_PATTERN",
+        "REPORT_PRODUCT_BLUEPRINT"
+      ],
+      "automaticCustomerPublication": false,
+      "directLongFormReuseAllowedOnlyWhen": "USER_AUTHORED_SOURCE_AND_EDITORIAL_ADMISSION_PASSES"
+    },
+    {
+      "classId": "USER_PRODUCED_PRODUCT_EXAMPLE",
+      "precedenceWithinHdSemanticSources": 2,
+      "allowedUses": [
+        "REPORT_STRUCTURE_COMPARISON",
+        "MODULE_SELECTION_EVIDENCE",
+        "PRODUCT_QA",
+        "EDITORIAL_GRAMMAR"
+      ],
+      "independentSemanticAuthority": false,
+      "automaticCustomerPublication": false
+    },
+    {
+      "classId": "SUPPORTING_REFERENCE",
+      "precedenceWithinHdSemanticSources": 3,
+      "allowedUses": [
+        "TERMINOLOGY_RECONCILIATION",
+        "SOURCE_WITNESS",
+        "SCOPE_CROSS_CHECK"
+      ],
+      "directLongFormReuseAllowed": false,
+      "licenseMustBeResolvedBeforeQuotationOrReproduction": true
+    },
+    {
+      "classId": "SPECIALIST_SCOPE",
+      "precedenceWithinHdSemanticSources": 3,
+      "allowedUses": [
+        "SCHOOL_SPECIFIC_OR_SPECIALIST_RECONCILIATION"
+      ],
+      "universalCoreMeaningAuthority": false,
+      "requiresExplicitScopeTag": true
+    },
+    {
+      "classId": "SOURCE_PENDING",
+      "precedenceWithinHdSemanticSources": 99,
+      "allowedUses": [],
+      "customerPublicationAllowed": false
+    }
+  ],
+  "sourceArtifacts": {
+    "w2a": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W2A-user-authored-source-admission-v1.json",
+    "w2aUnits": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W2A-user-authored-source-units-v1.json",
+    "w2b": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W2B-google-drive-source-census-v1.json",
+    "w2c": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/source/HD-PRO-R3-W2C-source-school-reconciliation-v1.json"
+  }
+}

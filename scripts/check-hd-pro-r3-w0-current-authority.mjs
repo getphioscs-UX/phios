@@ -2,10 +2,11 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 
+const ROOT='content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3';
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
-const map=readJson('content/customer-experience-rebuild/hd-pro-r3/audit/HD-PRO-R3-W0-current-owner-map.json');
-const protectedFiles=readJson('content/customer-experience-rebuild/hd-pro-r3/audit/HD-PRO-R3-W0-protected-files.json');
+const map=readJson(`${ROOT}/audit/HD-PRO-R3-W0-current-owner-map.json`);
+const protectedFiles=readJson(`${ROOT}/audit/HD-PRO-R3-W0-protected-files.json`);
 const publish=readJson('content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json');
 const r2Cutover=readJson('content/customer-experience-rebuild/hd-pro-r2/hd-w10-production-cutover-v1.json');
 const hdrFreeze=readJson('content/professional/core-method-runtime/hdr-production-freeze-v1.json');
@@ -24,7 +25,7 @@ assert.equal(map.hardBoundaries.r2HumanReviewMayAutoAdmitR3Semantics,false);
 
 for(const [role,record] of Object.entries(map.owners)){
   assert.equal(fs.existsSync(record.path),true,`${role} owner missing: ${record.path}`);
-  assert.equal(record.sha256,sha(record.path),`${role} owner drifted during W0/W1`);
+  assert.equal(record.sha256,sha(record.path),`${role} owner drifted after W0 freeze`);
 }
 for(const item of protectedFiles.protectedFiles){
   assert.equal(fs.existsSync(item.path),true,`protected HD file missing: ${item.path}`);
@@ -45,7 +46,7 @@ assert.equal(map.r3SuccessorPolicy.r3DefaultPublicationState,'SHADOW_CANDIDATE')
 
 const pkg=readJson('package.json');
 assert.equal(pkg.scripts['check:hd-pro-r3:w0'],'node scripts/check-hd-pro-r3-w0-current-authority.mjs');
-assert.equal(pkg.scripts['check:hd-pro-r3'],'node scripts/check-hd-pro-r3-w0-current-authority.mjs && node scripts/check-hd-pro-r3-w1-semantic-coverage.mjs');
+assert.equal(pkg.scripts['check:hd-pro-r3'],'node scripts/check-hd-pro-r3.mjs');
 
 console.log('✓ HD-PRO-R3-W0 Current Authority & Owner Freeze passed.');
 console.log('  R2 remains CUSTOMER_PUBLISHED; R3 is SHADOW_CANDIDATE; no Human Design calculation authority was created.');
