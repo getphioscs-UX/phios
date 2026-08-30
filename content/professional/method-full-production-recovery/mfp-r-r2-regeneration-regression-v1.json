@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-MFP-R-W3-R2-REGENERATION-REGRESSION-v1.0.0",
+  "workCode": "MFP-R-W3",
+  "baselineCommit": "402735ec373fba021235187312e4f526ba919807",
+  "status": "WAITING_FOR_SELECTIVE_FP_CLOSURE",
+  "closureRef": "content/professional/method-full-production-recovery/mfp-r-w2-selective-fp-closure-v1.json",
+  "regressions": [],
+  "pendingGapIds": [
+    "MFP-R-AST-001"
+  ],
+  "requiredPipeline": [
+    "Full Production Result",
+    "AcceptedMethodReadingEnvelope",
+    "Claim IR",
+    "Theme",
+    "Semantic Dedup",
+    "Information Gain",
+    "Narrative IR",
+    "Customer Reading"
+  ],
+  "requiredDimensions": [
+    "claim count",
+    "unique semantic owner count",
+    "evidence coverage",
+    "counter-evidence preservation",
+    "tension preservation",
+    "priority stability",
+    "dedup rate",
+    "paragraph repetition",
+    "information gain",
+    "source lineage",
+    "rule lineage",
+    "timing boundaries",
+    "customer readability"
+  ],
+  "governance": {
+    "rendererMeaningRegressionAllowed": false,
+    "regressedDecisionAllowed": false,
+    "backendOnlyImprovementSufficient": false,
+    "moreClaimsAloneMeansImprovement": false
+  }
+}

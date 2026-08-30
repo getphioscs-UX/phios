@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "PHI-OS-MFP-R-W4-PRE-CURRENT-REALITY-FREEZE-v1.0.0",
+  "workCode": "MFP-R-W4",
+  "baselineCommit": "402735ec373fba021235187312e4f526ba919807",
+  "status": "PRE_CURRENT_REALITY_FREEZE_BLOCKED",
+  "methods": {
+    "AST": {
+      "methodProductionAdmissionRef": "content/professional/ast-full-production/customer-reading-v2/freeze/ast-r2-w20-full-production-freeze-v1.json",
+      "readingProductRef": "functions/personal-reality-product/adapters/ast-production-adapter.js",
+      "acceptedEnvelopeRef": "content/customer-experience-rebuild/r12r4b/smr/benchmark/smr-ast-benchmark-v1-evidence.json",
+      "machineEvidenceRef": "content/professional/ast-full-production/customer-reading-v2/acceptance/ast-r2-w17-production-machine-acceptance-v1.json",
+      "humanEvidenceRef": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w18-final-customer-human-admission-v1.json",
+      "state": "CUSTOMER_PUBLISHABLE",
+      "recoveryState": "MATERIAL_GAP_OPEN",
+      "blockingGapRefs": [
+        "MFP-R-AST-001"
+      ],
+      "semanticDigest": "4bbe4ed32e383d8dce43e05fd7d8b6397b656958806662657d7c485e91f4fffb"
+    },
+    "BZR": {
+      "methodProductionAdmissionRef": "content/professional/bzr-full-production/freeze/bazi-fp-w19-full-production-freeze-v1.json",
+      "readingProductRef": "functions/personal-reality-product/adapters/bazi-production-adapter.js",
+      "acceptedEnvelopeRef": "content/customer-experience-rebuild/r12r4b/smr/benchmark/smr-bzr-benchmark-v1-evidence.json",
+      "machineEvidenceRef": "content/professional/bzr-full-production/acceptance/bazi-fp-w17-machine-acceptance-v1.json",
+      "humanEvidenceRef": "content/professional/bzr-full-production/admission/bazi-fp-w18-human-admission-v1.json",
+      "state": "CUSTOMER_PUBLISHABLE",
+      "recoveryState": "READY",
+      "blockingGapRefs": [],
+      "semanticDigest": "55a769b9d49aacefb7c12607b6d2508e7da31bb8520615affbf322ddd93e6417"
+    },
+    "ZWR": {
+      "methodProductionAdmissionRef": "content/professional/zi-wei-full-production/admission/ziwei-fp-w23-full-production-cutover-v1.json",
+      "readingProductRef": "functions/personal-reality-product/adapters/ziwei-production-adapter.js",
+      "acceptedEnvelopeRef": "content/customer-experience-rebuild/r12r4b/smr/benchmark/smr-zwr-benchmark-v1-evidence.json",
+      "machineEvidenceRef": "content/professional/zi-wei-full-production/acceptance/ziwei-fp-w21-machine-campaign-acceptance-v1.json",
+      "humanEvidenceRef": "content/professional/zi-wei-full-production/admission/ziwei-fp-w22-human-admission-v1.json",
+      "state": "CUSTOMER_PUBLISHABLE",
+      "recoveryState": "READY",
+      "blockingGapRefs": [],
+      "semanticDigest": "f6ce11eceae56de76a78822ede2fc29c6b475f187a3c2a9696f6e7b68d581aa1"
+    },
+    "NUM": {
+      "methodProductionAdmissionRef": "content/professional/num-production/full-production/admission/num-fp-w18-full-production-gate-v1.json",
+      "readingProductRef": "functions/personal-reality-product/adapters/numerology-production-adapter.js",
+      "acceptedEnvelopeRef": "content/customer-experience-rebuild/r12r4b/smr/benchmark/smr-num-benchmark-v1-evidence.json",
+      "machineEvidenceRef": "content/professional/num-production/full-production/machine/num-fp-w16-machine-campaign-v1.json",
+      "humanEvidenceRef": "content/professional/num-production/depth-d1-d8/admission/num-d8-human-admission-v1.json",
+      "state": "CUSTOMER_PUBLISHABLE",
+      "recoveryState": "READY",
+      "blockingGapRefs": [],
+      "semanticDigest": "4430a42a8e863ac43f337348b9c14753d5b6c1f1f2c679abddf80dc10551db51"
+    },
+    "ECR": {
+      "methodProductionAdmissionRef": "content/customer-experience-rebuild/r12r4b/admission/ecr-production-admission-v1.json",
+      "readingProductRef": "functions/personal-reality-product/adapters/ecr-production-adapter.js",
+      "acceptedEnvelopeRef": "content/customer-experience-rebuild/r12r4b/smr/benchmark/smr-ecr-benchmark-v1-evidence.json",
+      "machineEvidenceRef": "content/customer-experience-rebuild/r12r4b/cx-r12r4b-r4-ecr-machine-campaign-v1.json",
+      "humanEvidenceRef": "content/customer-experience-rebuild/r12r4b/review/ecr-v1/ecr-human-review-results-v1.json",
+      "state": "CUSTOMER_PUBLISHABLE",
+      "recoveryState": "READY",
+      "blockingGapRefs": [],
+      "fullReadingProductRef": "functions/ecr-full-report/ecr-customer-full-report.js",
+      "phiCardVisualCompanionRef": "content/ecr-phi-card/admission/ecr-phi-card-customer-admission-v1.json",
+      "semanticDigest": "314096999b6702bd2deb81d0e7dfd36386c3f9fe511ad0dd17cc703938b54cb8"
+    }
+  },
+  "cross": {
+    "productionAdmissionRef": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w26-final-production-admission-v1.json",
+    "machineEvidenceRef": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w24-machine-acceptance-v1.json",
+    "humanEvidenceRef": "content/customer-experience-rebuild/r12r4b/cross/acceptance/cross-w25-human-admission-v1.json",
+    "state": "CUSTOMER_PUBLISHABLE"
+  },
+  "unresolvedBlockingOrMaterialGaps": [
+    "MFP-R-AST-001"
+  ],
+  "unresolvedNonBlockingGaps": [],
+  "currentRealityEntryAllowed": false,
+  "blocker": "AST R2 is already customer-publishable at its existing production boundary, but MFP-R identified one material customer-reading semantic-completeness gap (planet × sign composition). W42 must remain blocked until that method-owned successor is machine-verified, human-accepted, production-admitted, and regenerated through R2."
+}
