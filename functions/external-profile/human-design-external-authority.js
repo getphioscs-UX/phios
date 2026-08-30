@@ -8,8 +8,8 @@ export const HD_EXTERNAL_PRODUCTION=Object.freeze({
   canonicalChartCustomerVisible:true,
   readingCandidateMachineExecutable:true,
   humanReviewRequired:true,
-  humanReviewAccepted:false,
-  customerReadingPublicationAllowed:false,
+  humanReviewAccepted:true,
+  customerReadingPublicationAllowed:true,
   phiosHumanDesignCalculationAllowed:false,
   hdrPublicExecutionAllowed:false,
   advancedVariableAutomaticCalculationAllowed:false

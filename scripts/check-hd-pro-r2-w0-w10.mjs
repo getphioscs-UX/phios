@@ -29,6 +29,9 @@ const w10=readJson(`${root}/hd-w10-production-cutover-v1.json`);
 const hdrFreeze=readJson('content/professional/core-method-runtime/hdr-production-freeze-v1.json');
 const hdrReadiness=readJson('content/professional/method-production-activation/registries/mpa-hdr-boundary-readiness-v1.json');
 const sharedSuccessor=readJson('content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-successor-v1.json');
+const publishSuccessor=readJson('content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json');
+const reviewCases=readJson(`${root}/review/hd-w9-human-review-cases-v1.json`);
+const reviewResults=readJson(`${root}/review/hd-w9-human-review-results-v1.json`);
 
 assert.equal(w0.baselineCommit,'3d66a5037a0c184ba2059c958a5f7e580696b786');
 assert.equal(w0.methodBoundary.authorityClass,'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT');
@@ -46,20 +49,49 @@ assert.deepEqual(w1.coreFields,['type','strategy','authority','profile','definit
 assert.deepEqual(w4.centers,HD_CENTER_CODES);
 assert.equal(w5.compositionLevel,'CATEGORY_LEVEL_ONLY');
 assert.equal(w6.rules.automaticCalculationAllowed,false);
-assert.equal(w7.publication.customerPublishable,false);
+assert.equal(w7.publication.humanReviewAccepted,true);
+assert.equal(w7.publication.customerPublishable,true);
 assert.equal(w8.rules.createsRuntimeEvidence,false);
-assert.equal(w9h.status,'PENDING_HUMAN_REVIEW');
-assert.equal(w9h.acceptedCount,0);
-assert.equal(w10.cutover.customerInterpretiveReading,'BLOCKED_PENDING_HUMAN_ACCEPTANCE');
+assert.equal(w8.publication.humanReviewAccepted,true);
+assert.equal(w8.publication.customerPublishable,true);
+assert.equal(w9h.status,'HUMAN_ACCEPTED_24_OF_24');
+assert.equal(w9h.acceptedCount,24);
+assert.equal(w9h.rejectedCount,0);
+assert.equal(w9h.pendingCount,0);
+assert.equal(w10.cutover.customerInterpretiveReading,'CUSTOMER_PUBLISHED');
+assert.equal(w10.cutover.realityComposition,'CUSTOMER_PUBLISHED');
 assert.equal(w10.cutover.hdrPublicCalculation,'UNCHANGED_BLOCKED');
 assert.equal(w9m.status,'MACHINE_VERIFIED_24_OF_24');
 assert.equal(w9m.passedCount,24);
+assert.equal(HD_EXTERNAL_PRODUCTION.humanReviewAccepted,true);
+assert.equal(HD_EXTERNAL_PRODUCTION.customerReadingPublicationAllowed,true);
+assert.equal(reviewCases.cases.length,24);
+assert.equal(reviewResults.status,'HUMAN_ACCEPTED_24_OF_24');
+assert.deepEqual(reviewResults.summary,{accepted:24,rejected:0,pending:0});
+assert.deepEqual(reviewResults.cases.map(item=>item.caseId),reviewCases.cases.map(item=>item.caseId));
+assert(reviewResults.cases.every(item=>item.decision==='ACCEPT'));
 assert.equal(sharedSuccessor.status,'HD_PRO_R2_EXTERNAL_PROFILE_SUCCESSOR_IMPLEMENTED');
 assert.equal(sharedSuccessor.baselineCommit,w0.baselineCommit);
-for(const [path,proof] of Object.entries(sharedSuccessor.sharedFileSuccessorProof)){assert.equal(proof.successorSha256,sha(path),`HD shared successor digest drift: ${path}`);assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false);}
-for(const [path,proof] of Object.entries(sharedSuccessor.addedRuntimeFiles))assert.equal(proof.sha256,sha(path),`HD added runtime digest drift: ${path}`);
+assert.equal(publishSuccessor.status,'HD_PRO_R2_CUSTOMER_PUBLISHED_SUCCESSOR_ACTIVE');
+assert.equal(publishSuccessor.baselineCommit,'0c5a4bc220131b5f468fddcbacb849f30b32e99a');
+assert.equal(publishSuccessor.humanAdmission.status,'HUMAN_ACCEPTED_24_OF_24');
+assert.equal(publishSuccessor.cutover.customerPublicationState,'CUSTOMER_PUBLISHED');
+for(const [path,proof] of Object.entries(sharedSuccessor.sharedFileSuccessorProof)){
+  const successor=publishSuccessor.runtimeSuccessorProof[path];
+  if(successor){assert.equal(successor.predecessorSha256,proof.successorSha256,`HD publish predecessor digest mismatch: ${path}`);assert.equal(successor.successorSha256,sha(path),`HD publish successor digest drift: ${path}`)}
+  else assert.equal(proof.successorSha256,sha(path),`HD shared successor digest drift without declared publication successor: ${path}`);
+  assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false);
+}
+for(const [path,proof] of Object.entries(sharedSuccessor.addedRuntimeFiles)){
+  const successor=publishSuccessor.runtimeSuccessorProof[path];
+  if(successor){assert.equal(successor.predecessorSha256,proof.sha256,`HD publish runtime predecessor digest mismatch: ${path}`);assert.equal(successor.successorSha256,sha(path),`HD publish runtime digest drift: ${path}`)}
+  else assert.equal(proof.sha256,sha(path),`HD added runtime digest drift without declared publication successor: ${path}`);
+}
+for(const [path,proof] of Object.entries(publishSuccessor.runtimeSuccessorProof)){assert.equal(proof.successorSha256,sha(path),`HD publication runtime proof drift: ${path}`);assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false)}
+for(const [path,proof] of Object.entries(publishSuccessor.admissionArtifacts))assert.equal(proof.sha256,sha(path),`HD admission artifact digest drift: ${path}`);
 assert.equal(fs.existsSync('tools/review/HD-PRO-R2-W9-HUMAN-REVIEW.html'),true);
 assert.equal(fs.existsSync(`${root}/review/hd-w9-human-review-cases-v1.json`),true);
+assert.equal(fs.existsSync(`${root}/review/hd-w9-human-review-results-v1.json`),true);
 
 const parsed=parseHumanDesignProfileText(`Type: Generator\nStrategy: Wait to Respond\nAuthority: Emotional\nProfile: 5/1\nDefinition: Triple Split Definition\nIncarnation Cross: Example Cross\nSignature: Satisfaction\nNot-Self Theme: Frustration\nChannels: 43-23 | 29-46\nDefined Centers: Ajna, Throat, G Center, Sacral\nOpen Centers: Head, Spleen, Root\nDesign activated Gates: 29.1 30.2\nPersonality activated Gates: 43.5 23.5`);
 const parsedMap=Object.fromEntries(parsed.candidates.map(item=>[item.field,item.normalizedValue]));
@@ -105,8 +137,8 @@ for(let i=0;i<24;i++){
   assert.equal(chart.provenance.automaticHumanDesignCalculationUsed,false);
   assert.equal(reading.publicationDecision.machineCandidate,true);
   assert.equal(reading.publicationDecision.humanReviewRequired,true);
-  assert.equal(reading.publicationDecision.humanReviewAccepted,false);
-  assert.equal(reading.publicationDecision.customerPublishable,false);
+  assert.equal(reading.publicationDecision.humanReviewAccepted,true);
+  assert.equal(reading.publicationDecision.customerPublishable,true);
   assert.equal(reading.boundaries.hdrPublicExecutionUsed,false);
   assert.equal(reading.boundaries.automaticVariableCalculationUsed,false);
   assert.equal(reading.boundaries.interpretationCreatesRealityFact,false);
@@ -132,9 +164,9 @@ assert.equal(intakeResponse.status,200);const intakePayload=await intakeResponse
 assert.equal(intakePayload.ok,true);assert.equal(intakePayload.externalProfileIntake.intakeState,'NEEDS_CONFIRMATION');
 assert.equal(intakePayload.externalProfileIntake.confirmationDraft.fields.type.value,'Generator');
 assert.deepEqual(intakePayload.externalProfileIntake.confirmationDraft.structure.channels.value,['29-46','43-23']);
-const confirmResponse=await confirmApi({request:new Request('https://example.test/api/customer-external-profile-confirm',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({confirmationDraft:intakePayload.externalProfileIntake.confirmationDraft,edits:{authority:'Sacral Authority'},structureEdits:{channels:'43-23, 37-40',definedCenters:'Ajna, Throat, G, Sacral',openCenters:'Head, Spleen, Root'},consent:true})})});
+const confirmResponse=await confirmApi({request:new Request('https://example.test/api/customer-external-profile-confirm',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({confirmationDraft:intakePayload.externalProfileIntake.confirmationDraft,edits:{authority:'Sacral Authority'},structureEdits:{channels:'43-23, 37-40',definedCenters:'Ajna, Throat, G, Sacral',openCenters:'Head, Spleen, Root'},locale:'zh-Hans',intent:'publication check',consent:true})})});
 assert.equal(confirmResponse.status,200);const confirmPayload=await confirmResponse.json();
-assert.equal(confirmPayload.ok,true);assert.equal(confirmPayload.canonicalHumanDesignChart.core.authority.value,'Sacral Authority');assert.deepEqual(confirmPayload.canonicalHumanDesignChart.structure.channels,['37-40','43-23']);assert.equal(confirmPayload.canonicalHumanDesignChart.provenance.phiosCalculated,false);assert.equal(confirmPayload.readingAvailability.state,'HUMAN_REVIEW_PENDING');assert.equal(confirmPayload.readingAvailability.customerPublishable,false);
+assert.equal(confirmPayload.ok,true);assert.equal(confirmPayload.canonicalHumanDesignChart.core.authority.value,'Sacral Authority');assert.deepEqual(confirmPayload.canonicalHumanDesignChart.structure.channels,['37-40','43-23']);assert.equal(confirmPayload.canonicalHumanDesignChart.provenance.phiosCalculated,false);assert.equal(confirmPayload.readingAvailability.state,'CUSTOMER_PUBLISHED');assert.equal(confirmPayload.readingAvailability.humanReviewAccepted,true);assert.equal(confirmPayload.readingAvailability.customerPublishable,true);assert.equal(confirmPayload.humanDesignReading.publicationDecision.customerPublishable,true);assert.equal(confirmPayload.humanDesignReading.publicationDecision.humanReviewAccepted,true);assert.equal(confirmPayload.humanDesignReading.locale,'zh-Hans');assert.equal(confirmPayload.humanDesignRealityComposition.prompts.length,5);assert.equal(confirmPayload.humanDesignRealityComposition.prompts.at(-1).code,'CONTRADICTION');assert.equal(confirmPayload.humanDesignReading.boundaries.hdrPublicExecutionUsed,false);
 
 for(const category of w5.admittedCategories)assert(HD_EXTERNAL_CATEGORY_AUTHORITY[category]?.sourceRef?.includes('knowledge/external-readers/human-design/registry/entries.json'));
 for(const category of w6.authorityCategories)assert(HD_EXTERNAL_CATEGORY_AUTHORITY[category]);
@@ -142,9 +174,9 @@ for(const category of w6.authorityCategories)assert(HD_EXTERNAL_CATEGORY_AUTHORI
 const html=fs.readFileSync('perspectives/personal/index.html','utf8');
 const client=fs.readFileSync('assets/customer-ui/js/surfaces/personal-reality.js','utf8');
 const css=fs.readFileSync('assets/customer-ui/surfaces/personal-reality.css','utf8');
-for(const token of ['data-cx-external-profile-process','data-cx-external-profile-processing-consent','name="manualType"','name="manualStrategy"','name="manualChannels"','data-cx-hd-canonical-chart','Read this chart'])assert(html.includes(token),`HD W3 surface missing ${token}`);
-for(const token of ['prepareExternalProfileIntake','collectExternalProfileEdits','renderCanonicalHumanDesignChart','EXTERNAL_PROFILE_PROCESS_FIRST','canonicalHumanDesignChart','externalProfileProcessingConsent','data-cx-external-profile-edit','data-cx-external-profile-structure-edit','collectExternalProfileStructureEdits'])assert(client.includes(token),`HD W3 client binding missing ${token}`);
-for(const token of ['.cx-hd-intake-steps','.cx-hd-process-row','.cx-hd-canonical-chart','.cx-hd-confirm-field'])assert(css.includes(token),`HD W3 style missing ${token}`);
+for(const token of ['data-cx-external-profile-process','data-cx-external-profile-processing-consent','name="manualType"','name="manualStrategy"','name="manualChannels"','data-cx-hd-canonical-chart','data-cx-hd-published-reading','data-cx-hd-reading-sections','data-cx-hd-reality-bridge','Read this chart'])assert(html.includes(token),`HD W3 surface missing ${token}`);
+for(const token of ['prepareExternalProfileIntake','collectExternalProfileEdits','renderCanonicalHumanDesignChart','renderPublishedHumanDesignReading','EXTERNAL_PROFILE_PROCESS_FIRST','canonicalHumanDesignChart','humanDesignReading','humanDesignRealityComposition','externalProfileProcessingConsent','data-cx-external-profile-edit','data-cx-external-profile-structure-edit','collectExternalProfileStructureEdits'])assert(client.includes(token),`HD W3 client binding missing ${token}`);
+for(const token of ['.cx-hd-intake-steps','.cx-hd-process-row','.cx-hd-canonical-chart','.cx-hd-confirm-field','.cx-hd-published-reading','.cx-hd-reading-section','.cx-hd-reality-prompts'])assert(css.includes(token),`HD W3 style missing ${token}`);
 for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"','name="externalDefinedCenters"','name="externalOpenCenters"'])assert.equal(html.includes(forbidden),false,`Legacy normal structural field must remain absent: ${forbidden}`);
 
 const pkg=readJson('package.json');
@@ -153,4 +185,4 @@ assert(pkg.scripts.check.includes('npm run check:hd-pro-r2'));
 
 console.log(`✓ HD-PRO-R2 W0-W10 machine campaign passed ${passCount}/${w9m.caseCount}.`);
 console.log('  Customer-supplied chart intake now has explicit Read -> editable confirmation -> canonical chart flow; HDR public calculation and automatic Variable/PHS calculation remain blocked.');
-console.log('  W9 human review remains 0/24 accepted and customer interpretive reading publication remains blocked until actual review admission.');
+console.log('  W9 human review is 24/24 accepted; the admitted external-chart reading and Reality Comparison are CUSTOMER_PUBLISHED on the canonical personal route.');

@@ -5,17 +5,28 @@
     "standaloneIntake": "ACTIVE",
     "customerConfirmation": "ACTIVE",
     "canonicalExternalChart": "ACTIVE",
-    "machineReadingCandidate": "ACTIVE_INTERNAL_REVIEW",
-    "customerInterpretiveReading": "BLOCKED_PENDING_HUMAN_ACCEPTANCE",
+    "machineReadingCandidate": "ACTIVE_ADMITTED",
+    "customerInterpretiveReading": "CUSTOMER_PUBLISHED",
     "hdrPublicCalculation": "UNCHANGED_BLOCKED",
-    "advancedVariableAutomaticCalculation": "FORBIDDEN"
+    "advancedVariableAutomaticCalculation": "FORBIDDEN",
+    "realityComposition": "CUSTOMER_PUBLISHED"
   },
-  "productionState": "STAGED_INPUT_PRODUCTION_READING_REVIEW_PENDING",
+  "productionState": "CUSTOMER_PUBLISHED_EXTERNAL_HUMAN_DESIGN_READING",
   "customerRoute": "/perspectives/personal/",
   "rules": {
     "noUnreviewedReadingTextPublished": true,
     "noHumanAcceptanceFabricated": true,
-    "externalAuthorityLabelPreserved": true
+    "externalAuthorityLabelPreserved": true,
+    "humanAcceptanceAdmissionRequired": true
   },
-  "status": "STAGED_CUTOVER"
+  "status": "CUSTOMER_PUBLISHED",
+  "currentMainCommit": "0c5a4bc220131b5f468fddcbacb849f30b32e99a",
+  "humanAdmission": {
+    "campaignId": "HD-PRO-R2-HUMAN-24",
+    "acceptedCount": 24,
+    "rejectedCount": 0,
+    "pendingCount": 0,
+    "status": "HUMAN_ACCEPTED_24_OF_24",
+    "resultsRef": "content/customer-experience-rebuild/hd-pro-r2/review/hd-w9-human-review-results-v1.json"
+  }
 }

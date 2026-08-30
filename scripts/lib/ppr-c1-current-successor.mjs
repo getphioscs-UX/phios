@@ -13,7 +13,30 @@ const CURRENT_PATH='content/professional/personal-reality/r4/authority/ppr-r4-cu
 const W10A_PATH='content/professional/personal-reality/r3/authority/ppr-r3-w10a-ast-target-context-shared-input-successor-v1.json';
 const R5_PATH='content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json';
 const HD_PATH='content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-successor-v1.json';
+const HD_PUBLISH_PATH='content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json';
 const R4V2_PATH='content/professional/personal-reality/r4/authority/ppr-r4-ast-target-context-input-successor-v2.json';
+
+
+function assertHdPublicationSuccessor(hd,hdPublish,path,label='HD-PRO-R2'){
+ const hdProof=hd?.sharedFileSuccessorProof?.[path]||hd?.addedRuntimeFiles?.[path]||null;
+ const publishProof=hdPublish?.runtimeSuccessorProof?.[path]||null;
+ if(publishProof){
+  assert(hdProof,`${label} publication successor has no HD predecessor proof: ${path}`);
+  const predecessor=hdProof.successorSha256||hdProof.sha256;
+  assert.equal(publishProof.predecessorSha256,predecessor,`${label} publication predecessor mismatch: ${path}`);
+  assert.equal(publishProof.successorSha256,sha(path),`${label} publication successor drift: ${path}`);
+  assert.equal(publishProof.createsPHIOSHumanDesignCalculationAuthority,false);
+  assert.equal(publishProof.createsHdrPublicExecutionAuthority,false);
+  assert.equal(publishProof.createsAutomaticVariableCalculationAuthority,false);
+  return publishProof;
+ }
+ if(hdProof){
+  const current=hdProof.successorSha256||hdProof.sha256;
+  assert.equal(current,sha(path),`${label} successor drift: ${path}`);
+  return hdProof;
+ }
+ return null;
+}
 
 function assertPostR4SharedSuccessor(r4,current,path){
  const proof=current?.sharedFileSuccessorProof?.[path];
@@ -44,6 +67,7 @@ export function assertPprC1CurrentSuccessor(){
  const w10a=readJson(W10A_PATH);
  const r5=fs.existsSync(R5_PATH)?readJson(R5_PATH):null;
  const hd=fs.existsSync(HD_PATH)?readJson(HD_PATH):null;
+ const hdPublish=fs.existsSync(HD_PUBLISH_PATH)?readJson(HD_PUBLISH_PATH):null;
  const r4v2=fs.existsSync(R4V2_PATH)?readJson(R4V2_PATH):null;
  assert.equal(recon.baselineCommit,BASELINE);
  assert.equal(recon.status,'RECONCILED_TO_CURRENT_SUCCESSOR_AUTHORITY');
@@ -91,6 +115,14 @@ export function assertPprC1CurrentSuccessor(){
   assert.equal(hd.boundaries.hdrPublicExecutionAuthorityCreated,false);
   assert.equal(hd.boundaries.unreviewedHumanDesignReadingPublished,false);
  }
+ if(hdPublish){
+  assert.equal(hdPublish.predecessorAuthority,HD_PATH);
+  assert.equal(hdPublish.status,'HD_PRO_R2_CUSTOMER_PUBLISHED_SUCCESSOR_ACTIVE');
+  assert.equal(hdPublish.humanAdmission.status,'HUMAN_ACCEPTED_24_OF_24');
+  assert.equal(hdPublish.cutover.customerPublicationState,'CUSTOMER_PUBLISHED');
+  assert.equal(hdPublish.boundaries.phiosHumanDesignCalculationAuthorityCreated,false);
+  assert.equal(hdPublish.boundaries.hdrPublicExecutionAuthorityCreated,false);
+ }
  for(const [path,historicalProof] of Object.entries(current.sharedFileSuccessorProof||{})){
   const editorialProof=r5?.sharedFileSuccessorProof?.[path]||null;
   if(editorialProof){
@@ -101,14 +133,14 @@ export function assertPprC1CurrentSuccessor(){
    assert.equal(editorialProof.createsProjection,false,`PPR-R5 must not create projection: ${path}`);
    assert.equal(editorialProof.replacesPprR3RendererAuthority,false,`PPR-R5 must not replace PPR-R3 renderer authority: ${path}`);
    const hdProof=hd?.sharedFileSuccessorProof?.[path]||null;
-   if(hdProof){assert.equal(hdProof.predecessorSha256,editorialProof.successorSha256,`HD-PRO-R2 predecessor mismatch: ${path}`);assert.equal(hdProof.successorSha256,sha(path),`HD-PRO-R2 successor digest drift: ${path}`);assert.equal(hdProof.changeClass,'HD_PRO_R2_EXTERNAL_PROFILE_SUCCESSOR');assert.equal(hdProof.replacesPprR3RendererAuthority,false);}else assert.equal(editorialProof.successorSha256,sha(path),`PPR-R5 successor digest drift: ${path}`);
+   if(hdProof){assert.equal(hdProof.predecessorSha256,editorialProof.successorSha256,`HD-PRO-R2 predecessor mismatch: ${path}`);assert.equal(hdProof.changeClass,'HD_PRO_R2_EXTERNAL_PROFILE_SUCCESSOR');assert.equal(hdProof.replacesPprR3RendererAuthority,false);assertHdPublicationSuccessor(hd,hdPublish,path);}else assert.equal(editorialProof.successorSha256,sha(path),`PPR-R5 successor digest drift: ${path}`);
   }else assertPostR4SharedSuccessor(r4,current,path);
  }
  for(const [path,proof] of Object.entries(current.unchangedR4SuccessorProof||{})){
   assert.equal(proof.remainsExactPprR4Successor,true);
   assert.equal(proof.sha256,r4.sharedFileSuccessorProof?.[path]?.successorSha256,`PPR-R4 unchanged successor record mismatch: ${path}`);
   const r4v2Proof=r4v2?.sharedFileSuccessorProof?.[path]||null,hdProof=hd?.sharedFileSuccessorProof?.[path]||null;
-  if(r4v2Proof){assert.equal(r4v2Proof.predecessorSha256,proof.sha256,`PPR-R4 v2 predecessor mismatch: ${path}`);if(hdProof){assert.equal(hdProof.predecessorSha256,r4v2Proof.successorSha256,`HD-PRO-R2 post-R4-v2 predecessor mismatch: ${path}`);assert.equal(hdProof.successorSha256,sha(path),`HD-PRO-R2 post-R4-v2 successor drift: ${path}`);}else assert.equal(r4v2Proof.successorSha256,sha(path),`PPR-R4 v2 successor drift: ${path}`);}else if(hdProof){assert.equal(hdProof.predecessorSha256,proof.sha256,`HD-PRO-R2 predecessor mismatch: ${path}`);assert.equal(hdProof.successorSha256,sha(path),`HD-PRO-R2 successor drift: ${path}`);}else assert.equal(proof.sha256,sha(path),`PPR-R4 unchanged successor drift: ${path}`);
+  if(r4v2Proof){assert.equal(r4v2Proof.predecessorSha256,proof.sha256,`PPR-R4 v2 predecessor mismatch: ${path}`);if(hdProof){assert.equal(hdProof.predecessorSha256,r4v2Proof.successorSha256,`HD-PRO-R2 post-R4-v2 predecessor mismatch: ${path}`);assertHdPublicationSuccessor(hd,hdPublish,path);}else assert.equal(r4v2Proof.successorSha256,sha(path),`PPR-R4 v2 successor drift: ${path}`);}else if(hdProof){assert.equal(hdProof.predecessorSha256,proof.sha256,`HD-PRO-R2 predecessor mismatch: ${path}`);assertHdPublicationSuccessor(hd,hdPublish,path);}else assert.equal(proof.sha256,sha(path),`PPR-R4 unchanged successor drift: ${path}`);
  }
  if(r5){
   for(const [path,proof] of Object.entries(r5.addedFiles||{})){
@@ -119,8 +151,8 @@ export function assertPprC1CurrentSuccessor(){
   for(const [path,proof] of Object.entries(r5.protectedFiles||{})){
    assert.equal(proof.mustRemainUnchanged,true,`PPR-R5 protected file contract missing: ${path}`);
    const hdProof=hd?.sharedFileSuccessorProof?.[path]||null;
-   if(hdProof){const latestPredecessor=r4v2?.sharedFileSuccessorProof?.[path]?.successorSha256||proof.sha256;assert.equal(hdProof.predecessorSha256,latestPredecessor,`HD-PRO-R2 protected successor predecessor mismatch: ${path}`);assert.equal(hdProof.successorSha256,sha(path),`HD-PRO-R2 protected successor digest drift: ${path}`);assert.equal(hdProof.replacesPprR3RendererAuthority,false);}else assert.equal(proof.sha256,sha(path),`PPR-R5 protected file drift: ${path}`);
+   if(hdProof){const latestPredecessor=r4v2?.sharedFileSuccessorProof?.[path]?.successorSha256||proof.sha256;assert.equal(hdProof.predecessorSha256,latestPredecessor,`HD-PRO-R2 protected successor predecessor mismatch: ${path}`);assertHdPublicationSuccessor(hd,hdPublish,path);assert.equal(hdProof.replacesPprR3RendererAuthority,false);}else assert.equal(proof.sha256,sha(path),`PPR-R5 protected file drift: ${path}`);
   }
  }
- return Object.freeze({recon,r4,w10a,current,r5,hd,postR4Proof:path=>{const r5Proof=r5?.sharedFileSuccessorProof?.[path]||null;if(!r5Proof)return current.sharedFileSuccessorProof?.[path]||null;const r4Proof=r4?.sharedFileSuccessorProof?.[path]||null;return Object.freeze({...r5Proof,predecessorSha256:r4Proof?.successorSha256||r5Proof.predecessorSha256,successorSha256:r5Proof.successorSha256,successorChain:[current.sharedFileSuccessorProof?.[path]||null,r5Proof].filter(Boolean)});},historicalPostR4Proof:path=>current.sharedFileSuccessorProof?.[path]||null,w10aProof:path=>w10a.authorizedFiles?.[path]||null});
+ return Object.freeze({recon,r4,w10a,current,r5,hd,hdPublish,postR4Proof:path=>{const r5Proof=r5?.sharedFileSuccessorProof?.[path]||null;if(!r5Proof)return current.sharedFileSuccessorProof?.[path]||null;const r4Proof=r4?.sharedFileSuccessorProof?.[path]||null;return Object.freeze({...r5Proof,predecessorSha256:r4Proof?.successorSha256||r5Proof.predecessorSha256,successorSha256:r5Proof.successorSha256,successorChain:[current.sharedFileSuccessorProof?.[path]||null,r5Proof].filter(Boolean)});},historicalPostR4Proof:path=>current.sharedFileSuccessorProof?.[path]||null,w10aProof:path=>w10a.authorizedFiles?.[path]||null});
 }
