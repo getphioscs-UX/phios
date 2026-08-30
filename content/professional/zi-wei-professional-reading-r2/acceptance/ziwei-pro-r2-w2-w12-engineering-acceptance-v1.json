@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-PRO-R2-W2-W12-ENGINEERING-ACCEPTANCE-v1.0.0",
+  "work": "ZIWEI-PRO-R2-W2-W12",
+  "baselineCommit": "0c5a4bc220131b5f468fddcbacb849f30b32e99a",
+  "status": "ENGINEERING_ACCEPTED_W2_W12",
+  "w2HumanAdmission": "8/8 ACCEPT",
+  "activatedStandaloneStars": "28/28",
+  "professionalDimensionCells": "252/252",
+  "customerReadyStarPalacePairs": "336/336",
+  "w8W12Composed": true,
+  "w13W17Pending": true,
+  "ziweiProfessionalReadingV2Active": false,
+  "boundaries": {
+    "machineDoesNotSubstituteHuman": true,
+    "professionalProductionCutoverNotClaimed": true
+  },
+  "machineValidation": {
+    "focusedChecker": "PASS",
+    "realApiDomW14": "PASS_96_OF_96",
+    "cloudflareFunctionImportCompat": "PASS",
+    "currentSystemBaselineCurrent": "PASS",
+    "packageAliases": "PASS"
+  },
+  "baselinePreexistingBlockers": [
+    {
+      "check": "check:ziwei-cx-r1-w15-w16",
+      "file": "perspectives/personal/index.html",
+      "reason": "current about.zip digest is not represented in the historical W16 PPR successor edge graph",
+      "reproducedOnUntouchedBaseline": true
+    },
+    {
+      "check": "check:ppr-r3",
+      "file": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "reason": "current about.zip digest differs from the older PPR-R4 AST-input successor integrity expectation",
+      "reproducedOnUntouchedBaseline": true
+    }
+  ]
+}

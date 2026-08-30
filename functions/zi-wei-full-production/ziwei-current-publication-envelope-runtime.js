@@ -16,7 +16,7 @@ export const ZIWEI_CX_R1_CURRENT_PUBLICATION_AUTHORITY=Object.freeze({
 const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);for(const x of Object.values(v))freeze(x)}return v};
 function fail(code){const e=new Error(code);e.code=code;throw e;}
 
-export function buildZiweiCurrentPublicationEnvelope({report,interactiveSurface,topics,targetContext,sourceDigests,locale}={}){
+export function buildZiweiCurrentPublicationEnvelope({report,interactiveSurface,topics,targetContext,sourceDigests,professionalTimingNavigation=null,locale}={}){
   if(report?.schemaVersion!=='PHI-OS-ZIWEI-CUSTOMER-REPORT-v1.0.0')fail('ZIWEI_CX_R1_W3_W18_REPORT_REQUIRED');
   if(interactiveSurface?.schemaVersion!=='PHI-OS-ZIWEI-INTERACTIVE-CHART-SURFACE-v1.0.0')fail('ZIWEI_CX_R1_W3_W19_SURFACE_REQUIRED');
   if(topics?.schemaVersion!=='PHI-OS-ZIWEI-TOPIC-READING-v1.0.0')fail('ZIWEI_CX_R1_W3_W20_TOPICS_REQUIRED');
@@ -40,6 +40,7 @@ export function buildZiweiCurrentPublicationEnvelope({report,interactiveSurface,
     interactiveSurface,
     topics,
     targetContext,
+    professionalTimingNavigation,
     currentAuthority:authority,
     sourceDigests:freeze({...sourceDigests}),
     governance:freeze({
@@ -53,7 +54,7 @@ export function buildZiweiCurrentPublicationEnvelope({report,interactiveSurface,
       customerRendererMayCreateMeaning:false
     })
   };
-  const envelopeDigest=sha256Stable({schemaVersion:base.schemaVersion,methodId:base.methodId,locale:base.locale,state:base.state,reportDigest:report.reportDigest,surfaceDigest:interactiveSurface.surfaceDigest,topicReadingDigest:topics.topicReadingDigest,targetContext,sourceDigests:base.sourceDigests,currentAuthority:authority});
+  const envelopeDigest=sha256Stable({schemaVersion:base.schemaVersion,methodId:base.methodId,locale:base.locale,state:base.state,reportDigest:report.reportDigest,surfaceDigest:interactiveSurface.surfaceDigest,topicReadingDigest:topics.topicReadingDigest,targetContext,professionalTimingNavigationDigest:professionalTimingNavigation?.navigationDigest||null,sourceDigests:base.sourceDigests,currentAuthority:authority});
   if([report,interactiveSurface,topics,targetContext].map(stableStringify).some((x,i)=>x!==snaps[i]))fail('ZIWEI_CX_R1_W3_INPUT_MUTATION_FORBIDDEN');
   return freeze({...base,envelopeDigest});
 }
