@@ -77,6 +77,9 @@ assert.match(production,/export async function maybeBuildProductionSingleMethodR
 assert.doesNotMatch(production,/export async function maybeBuildProductionSingleMethodReadingR2/);
 
 const manifest=read(`${canonicalContent}/history/v1/legacy-smr-v1-evidence-manifest.json`);
+const pprR3FreezePath='content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json';
+const pprR3Freeze=exists(pprR3FreezePath)?read(pprR3FreezePath):null;
+const governedSuccessorDigests=new Map(Object.entries({...(pprR3Freeze?.protectedConvergenceFiles||{}),...(pprR3Freeze?.sharedSingleMethodReadingFiles||{}),...(pprR3Freeze?.successorFiles||{})}));
 assert.equal(manifest.status,'HISTORICAL_EVIDENCE_ARCHIVED_LEGACY_IMPLEMENTATION_DELETED');
 assert.equal(manifest.policy.legacyRuntimeMayExecute,false);assert.equal(manifest.policy.historicalEvidenceImmutable,true);assert.equal(manifest.policy.archivedEvidenceMayBeUsedAsProductionAuthority,false);
 let archived=0,deleted=0,replaced=0;
@@ -86,7 +89,7 @@ for(const row of manifest.records){
   }else if(row.disposition==='DELETED_LEGACY_IMPLEMENTATION'){
     deleted++;assert.equal(exists(row.originalPath),false,`deleted legacy implementation reappeared: ${row.originalPath}`);
   }else if(row.disposition==='REPLACED_BY_CANONICAL_SUCCESSOR_AT_SAME_PATH'){
-    replaced++;if(row.archivePath){assert.ok(exists(row.archivePath),`replaced predecessor archive missing: ${row.originalPath}`);assert.equal(hashFile(row.archivePath),row.sha256,`replaced predecessor archive mutated: ${row.originalPath}`);}assert.ok(row.canonicalSuccessorPath&&exists(row.canonicalSuccessorPath));assert.notEqual(hashFile(row.canonicalSuccessorPath),row.sha256,'canonical successor still equals deleted legacy implementation');assert.equal(hashFile(row.canonicalSuccessorPath),row.canonicalSuccessorSha256);
+    replaced++;if(row.archivePath){assert.ok(exists(row.archivePath),`replaced predecessor archive missing: ${row.originalPath}`);assert.equal(hashFile(row.archivePath),row.sha256,`replaced predecessor archive mutated: ${row.originalPath}`);}assert.ok(row.canonicalSuccessorPath&&exists(row.canonicalSuccessorPath));assert.notEqual(hashFile(row.canonicalSuccessorPath),row.sha256,'canonical successor still equals deleted legacy implementation');const currentSuccessorDigest=hashFile(row.canonicalSuccessorPath),governedSuccessorDigest=governedSuccessorDigests.get(row.canonicalSuccessorPath);assert.ok(currentSuccessorDigest===row.canonicalSuccessorSha256||(governedSuccessorDigest&&currentSuccessorDigest===governedSuccessorDigest),`canonical successor drift without governed successor authority: ${row.canonicalSuccessorPath}`);
   }else assert.fail(`unknown legacy manifest disposition: ${row.disposition}`);
 }
 

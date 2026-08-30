@@ -19,6 +19,7 @@ const graphRenderer=read('assets/customer-ui/js/method-graph-v1.js');
 const api=read('functions/api/customer-personal-reality.js');
 const html=read('perspectives/personal/index.html');
 const css=read('assets/customer-ui/surfaces/personal-reality.css');
+const pprR3SpecialistHost=html.includes('data-cx-specialist-products')&&fs.existsSync('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
 
 assert.equal(contract.work,'CX-R12R4A');
 assert.equal(contract.baselineCommit,'5c1d05f400bd01e5d278327c97dffb5322940129');
@@ -97,15 +98,26 @@ assert.match(surface,/<details><summary>\$\{esc\(tr\('Technical Details'/);
 assert.match(graphRenderer,/METHOD_LABELS/);
 assert.match(graphRenderer,/roleLabel\(row\.role\)/);
 assert.match(graphRenderer,/stateLabel\(row\.state\)/);
-assert.match(html,/Start with three questions: what has been established, what you can read now, and what still needs more information/);
-if(crossProductionSuccessor){
-  assert.match(html,/When at least two selected method readings are ready, the governed Cross layer may compose only customer-publishable claims/);
-  assert.doesNotMatch(html,/Cross-perspective comparison opens only when all four accepted method readings are present/);
+if(pprR3SpecialistHost){
+  const pprR3=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
+  const productRenderers=read('assets/customer-ui/js/personal-products/personal-product-renderers.js');
+  const specialistHost=read('assets/customer-ui/js/personal-products/specialist-renderer-host.js');
+  assert.equal(pprR3.status,'FROZEN_PPR_R3_SPECIALIST_HOST');
+  assert.match(html,/data-cx-specialist-products/);
+  assert.match(surface,/renderProductRoute\(view\.productRoute/);
+  assert.match(productRenderers,/mountApprovedSpecialistRenderer/);
+  assert.match(specialistHost,/mountApprovedSpecialistRenderer/);
 }else{
-  assert.match(html,/Cross-perspective comparison opens only when all four accepted method readings are present/);
+  assert.match(html,/Start with three questions: what has been established, what you can read now, and what still needs more information/);
+  if(crossProductionSuccessor){
+    assert.match(html,/When at least two selected method readings are ready, the governed Cross layer may compose only customer-publishable claims/);
+    assert.doesNotMatch(html,/Cross-perspective comparison opens only when all four accepted method readings are present/);
+  }else{
+    assert.match(html,/Cross-perspective comparison opens only when all four accepted method readings are present/);
+  }
 }
 assert.match(css,/cx-personal-overview-highlights/);
-assert.match(css,/cx-reading-map-live article\[data-state="READY"\]/);
+if(pprR3SpecialistHost)assert.match(css,/cx-specialist-products/);else assert.match(css,/cx-reading-map-live article\[data-state="READY"\]/);
 
 const numProjection=json('content/interpretation/integration/fixtures/numerology-projection.valid.json').fixture;
 const accepted=await buildAcceptedMethodCustomerResult({canonicalProjection:numProjection,locale:'en'});
@@ -143,4 +155,4 @@ assert.equal(acceptance.claims.humanVisualAccepted,false);
 assert.equal(acceptance.claims.fullProduction,false);
 
 console.log('✓ CX-R12R4A Personal Reading Experience cutover and humanization passed.');
-console.log('  PASS2B customer-publishable interpretation view models now drive the customer surface; internal method/status identifiers are humanized, technical provenance is progressively disclosed, and the active Reading Map remains truthful about limits.');
+console.log(pprR3SpecialistHost?'  PASS2B humanization contracts remain valid, while the frozen PPR-R3 specialist product host now owns the live reading surface; historical Reading Map copy is no longer required as a static HTML mount.':'  PASS2B customer-publishable interpretation view models now drive the customer surface; internal method/status identifiers are humanized, technical provenance is progressively disclosed, and the active Reading Map remains truthful about limits.');

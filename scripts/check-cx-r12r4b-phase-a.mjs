@@ -93,7 +93,17 @@ assert.equal(customerApiPayload.view.reading.methods[0].methodId,'NUM');
 for(const retired of ['overview','interpretation','methodResults','interpretationGate','handoff','details','patterns'])assert.equal(Object.hasOwn(customerApiPayload.view,retired),false,`retired live customer API path leaked: ${retired}`);
 const primaryApiView=structuredClone(customerApiPayload.view);
 for(const method of primaryApiView.reading.methods)delete method.technical;
-assert.doesNotMatch(JSON.stringify(primaryApiView),/\b(?:AVAILABLE|PARTIAL|DETERMINISTIC|STRUCTURE_ONLY|HUMAN_REVIEW_REQUIRED|COMPOSITION_SUPPORTED|SOURCE_ADMITTED)\b|projectionId|projectionDigest|reasonCode/);
+const pprR3ProductRoute=primaryApiView.productRoute?.primaryProduct?.schemaVersion==='PHI-OS-PERSONAL-REALITY-METHOD-PRODUCT-ENVELOPE-v1.0.0';
+if(pprR3ProductRoute){
+  const product=primaryApiView.productRoute.primaryProduct;
+  assert.equal(product.boundaries?.rawProjectionPromotedToCustomerConclusion,false);
+  assert.equal(product.boundaries?.rendererMeaningCreated,false);
+  if(product.methodId==='NUM'&&product.sourceProduct)assert.equal(Object.hasOwn(product.sourceProduct,'canonicalProjection'),false,'PPR-R3 NUM sourceProduct must not expose raw canonicalProjection');
+  const historicalPrimary={schemaVersion:primaryApiView.schemaVersion,surface:primaryApiView.surface,locale:primaryApiView.locale,intent:primaryApiView.intent,structure:primaryApiView.structure,currentContext:primaryApiView.currentContext,astrology:primaryApiView.astrology,reading:primaryApiView.reading};
+  assert.doesNotMatch(JSON.stringify(historicalPrimary),/\b(?:AVAILABLE|PARTIAL|DETERMINISTIC|STRUCTURE_ONLY|HUMAN_REVIEW_REQUIRED|COMPOSITION_SUPPORTED|SOURCE_ADMITTED)\b|projectionId|projectionDigest|reasonCode/);
+}else{
+  assert.doesNotMatch(JSON.stringify(primaryApiView),/\b(?:AVAILABLE|PARTIAL|DETERMINISTIC|STRUCTURE_ONLY|HUMAN_REVIEW_REQUIRED|COMPOSITION_SUPPORTED|SOURCE_ADMITTED)\b|projectionId|projectionDigest|reasonCode/);
+}
 
 assert.equal(campaign.caseCount,48);
 assert.equal(campaign.cases.length,48);
