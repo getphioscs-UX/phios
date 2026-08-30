@@ -2,7 +2,6 @@ import {arr,esc,installTabs,locale,reRenderOnLocale,setStatus,tr,valueText} from
 import {handoffToMyReality} from '../handoff.js';
 import {hydrateCustomerAssets} from '../assets.js';
 import {renderAcceptedInsight,renderMethodGraph} from '../method-graph-v1.js';
-import {renderSingleMethodReading} from './single-method-reading.js';
 import {isBaziNativeProduct,renderBaziProfessionalStructure,renderBaziPatternSurface,renderBaziSchoolSurface,renderBaziTimingSurface} from './bazi-professional-reading.js';
 import {renderProductRoute,renderCrossPerspective} from '../personal-products/personal-product-renderers.js';
 

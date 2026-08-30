@@ -13,7 +13,24 @@ const natal=j('content/professional/bzr-full-production/fixtures/bazi-da-yun-int
 const numReading={schemaVersion:'PHI-OS-NUM-INTEGRATED-READING-IR-v1.0.0',customerPublishable:true,publicationState:'CUSTOMER_PUBLISHABLE',sourceProjectionId:'NUM-P',sourceMeaningBundleCode:'NUM-M',sections:{snapshot:[{role:'LIFE_PATH',label:'Life Path',value:8}],standoutThemes:[],relationships:[],integratedNarrative:['Integrated'],timing:null,realityReflection:[],expansion:null,depth:null},boundaries:{}};
 const numEnvelope={schemaVersion:'PHI-OS-NUM-CX-CUSTOMER-READING-ENVELOPE-v1.0.0',methodId:'NUM',locale:'zh-Hans',canonicalProjection:{private:true},chartModel:{overviewTiles:[],priorityNarrative:{items:[]},coreNumberMap:{nodes:[],relations:[]}},integratedReading:{customerPublishable:true},calculationSummary:[],sourceLineage:{},inputCoverage:{},boundaries:{},readingDigest:'NUM-TEST'};const numRoute=await buildPersonalRealityProductRoute({selectedKeys:['numeric'],results:[{ok:true,key:'numeric',spec:{methodCode:'NUMEROLOGY'},numerologyIntegratedReading:numReading,numerologyEnvelope:numEnvelope}],locale:'zh-Hans'});assert.equal(numRoute.primaryProduct?.methodId,'NUM');assert.equal(numRoute.primaryProduct?.sourceProduct?.schemaVersion,'PHI-OS-NUM-CX-CUSTOMER-READING-ENVELOPE-v1.0.0');assert.equal(Object.hasOwn(numRoute.primaryProduct.sourceProduct,'canonicalProjection'),false);assert.equal(resolveSpecialistRendererDescriptor(numRoute.primaryProduct)?.rendererId,'PPR_R3_NUM_PRODUCT_V1');
 const w9=j(`${base}/acceptance/ppr-r3-w9-ownership-regression-v1.json`);for(const v of Object.values(w9.assertions))assert.equal(v,false);const host=t('assets/customer-ui/js/personal-products/specialist-renderer-host.js');assert.doesNotMatch(host,/tenGod|palaceCode|Life Path|planet|aspect|ECR_SIX_CARD_SPREAD/i);assert.doesNotMatch(host,/fetch\(|customer-personal-reality/);assert.match(host,/hostOwnsMeaning:false/);assert.match(host,/hostRunsCalculation:false/);assert.match(host,/hostRunsProjection:false/);
-const freeze=j(`${base}/authority/ppr-r3-w10-successor-freeze-v1.json`);assert.equal(freeze.status,'FROZEN_PPR_R3_SPECIALIST_HOST');for(const [p,d] of Object.entries(freeze.protectedConvergenceFiles))assert.equal(sha(p),d,`W10 protected drift ${p}`);for(const [p,d] of Object.entries(freeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`W10 SMR drift ${p}`);
+const freeze=j(`${base}/authority/ppr-r3-w10-successor-freeze-v1.json`);assert.equal(freeze.status,'FROZEN_PPR_R3_SPECIALIST_HOST');const ecrMandalaSuccessor=j('content/embodied-configuration/ecr-customer-mandala-authority-audit-v1.json');
+function assertRetiredBaselineFile(p,label){
+ const retired=ecrMandalaSuccessor?.baselineRetiredFiles?.[p];
+ assert(retired,`${label} missing without baseline-retirement reconciliation: ${p}`);
+ assert.equal(retired.baselineCommit,ecrMandalaSuccessor.baselineCommit,`${label} retirement baseline mismatch: ${p}`);
+ assert.equal(retired.state,'ABSENT_ON_BASELINE',`${label} retirement state mismatch: ${p}`);
+ assert.equal(retired.baselineFactOnly,true,`${label} retirement must remain a baseline fact: ${p}`);
+ assert.equal(retired.createsRetirementAuthority,false,`${label} retirement record must not create new authority: ${p}`);
+ for(const witness of retired.replacementWitnesses||[])assert(fs.existsSync(witness),`${label} retirement witness missing: ${witness}`);
+ assert(fs.existsSync(retired.canonicalSurfaceWitness),`${label} canonical surface witness missing: ${retired.canonicalSurfaceWitness}`);
+ const surface=t(retired.canonicalSurfaceWitness);assert.doesNotMatch(surface,/single-method-reading\.js/,`${label} canonical surface still references retired renderer: ${p}`);assert.match(surface,/renderProductRoute/,`${label} canonical surface does not witness the PPR product route: ${p}`);
+}
+for(const [p,d] of Object.entries(freeze.protectedConvergenceFiles)){
+ if(!fs.existsSync(p)){assertRetiredBaselineFile(p,'W10 protected convergence');continue;}
+ const current=sha(p);if(current===d)continue;
+ const successor=ecrMandalaSuccessor?.protectedSuccessors?.[p];assert(successor,`W10 protected drift without governed successor ${p}`);assert.equal(successor.predecessorSha256,d,`W10 protected successor predecessor mismatch ${p}`);assert.equal(successor.successorSha256,current,`W10 protected successor digest drift ${p}`);const admittedClass=p==='perspectives/personal/index.html'?'ECR_BRAND_ASSET_CORRECTION_ONLY':p==='assets/customer-ui/js/surfaces/personal-reality.js'?'BASELINE_RETIRED_RENDERER_DANGLING_IMPORT_REMOVAL_ONLY':null;assert.equal(successor.changeClass,admittedClass,`W10 protected successor class not admitted ${p}`);
+}
+for(const [p,d] of Object.entries(freeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`W10 SMR drift ${p}`);
 // W10 freezes the shared PPR-R3 host. Its own successor rule explicitly permits
 // method-owned specialist adapters/renderers to evolve behind the approved port.
 // Package/checker files are governance wiring rather than frozen runtime payload.
@@ -24,7 +41,14 @@ const methodOwnedOrGovernanceSuccessor=p=>
   p==='package.json'||p.startsWith('scripts/');
 for(const [p,d] of Object.entries(freeze.successorFiles)){
   assert(fs.existsSync(p),`W10 successor file missing ${p}`);
-  if(!methodOwnedOrGovernanceSuccessor(p))assert.equal(sha(p),d,`W10 frozen shared-host drift ${p}`);
+  if(methodOwnedOrGovernanceSuccessor(p))continue;
+  const current=sha(p);if(current===d)continue;
+  const successor=ecrMandalaSuccessor?.protectedSuccessors?.[p];
+  assert(successor,`W10 frozen shared-host drift without governed successor ${p}`);
+  assert.equal(successor.predecessorSha256,d,`W10 successor predecessor mismatch ${p}`);
+  assert.equal(successor.successorSha256,current,`W10 successor digest drift ${p}`);
+  assert.equal(successor.changeClass,'ECR_MANDALA_PROJECTION_WIRING_ONLY',`W10 successor class not admitted ${p}`);
+  assert.equal(successor.forbiddenAuthorityCreation,true,`W10 successor must prohibit authority creation ${p}`);
 }
 assert.equal(freeze.successorRule,'Future specialist work must use the governed renderer registry and method-owned modules. Shared host changes require a later PPR successor; CX-R12R4B report authorities remain separate.');assert.equal(freeze.summary.protectedConvergenceFilesModified,0);assert.equal(freeze.summary.sharedSingleMethodReadingFilesModified,0);assert.equal(freeze.summary.specialistRendererCount,5);
 const manifest=j(`${base}/manifest/ppr-r3-w0-w10-manifest-v1.json`);assert.equal(manifest.status,'W0_W10_ENGINEERING_COMPLETE');assert.equal(manifest.works.length,11);assert(manifest.works.every(x=>x.status==='ENGINEERING_COMPLETE'));

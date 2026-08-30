@@ -30,9 +30,15 @@ assert.match(api,/\.\.\/single-method-reading\/single-method-reading-production\
 assert.doesNotMatch(api,/single-method-reading-r2\//);
 assert.match(api,/selected\.length===1&&readingMethods\[0\]\?\.state==='READY_TO_READ'/);
 assert.match(api,/reading(?::readingForView)?,singleMethodReading/);
-const ui=fs.readFileSync('assets/customer-ui/js/surfaces/single-method-reading.js','utf8');
+const legacyUiPath='assets/customer-ui/js/surfaces/single-method-reading.js';
 const css=fs.readFileSync('assets/customer-ui/surfaces/single-method-reading.css','utf8');
-assert.match(ui,/PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2\.0\.0/);assert.equal(fs.existsSync('assets/css/single-method-reading.css'),false);assert.equal(fs.existsSync('assets/customer-ui/surfaces/single-method-reading.css'),true);assert.ok(css.includes('.cx-smr-report')); assert.match(ui,/ECR:/);assert.doesNotMatch(ui,/data-smr-version="R2"/);
+if(fs.existsSync(legacyUiPath)){
+ const ui=fs.readFileSync(legacyUiPath,'utf8');assert.match(ui,/PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2\.0\.0/);assert.match(ui,/ECR:/);assert.doesNotMatch(ui,/data-smr-version="R2"/);
+}else{
+ const baselineAudit=read('content/embodied-configuration/ecr-customer-mandala-authority-audit-v1.json'),retired=baselineAudit?.baselineRetiredFiles?.[legacyUiPath];assert(retired,'W20 retired customer renderer requires explicit baseline reconciliation');assert.equal(retired.baselineCommit,'1189c0519f1c5e9376965324b6010c00c212a3a1');assert.equal(retired.state,'ABSENT_ON_BASELINE');assert.equal(retired.baselineFactOnly,true);assert.equal(retired.createsRetirementAuthority,false);
+ const personalUi=fs.readFileSync(retired.canonicalSurfaceWitness,'utf8');assert.doesNotMatch(personalUi,/single-method-reading\.js/);assert.match(personalUi,/renderProductRoute/);const registryUi=fs.readFileSync('assets/customer-ui/js/personal-products/specialist-renderer-registry.js','utf8');assert.match(registryUi,/PPR_R3_ECR_PRODUCT_V1/);
+}
+assert.equal(fs.existsSync('assets/css/single-method-reading.css'),false);assert.equal(fs.existsSync('assets/customer-ui/surfaces/single-method-reading.css'),true);assert.ok(css.includes('.cx-smr-report'));
 
 for(const methodId of METHODS){
   const b=await buildBenchmark(methodId);
