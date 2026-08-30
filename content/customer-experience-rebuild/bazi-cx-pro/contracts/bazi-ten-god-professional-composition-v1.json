@@ -1,65 +1,50 @@
 {
-  "schemaVersion": "PHI-OS-BAZI-CX-PRO-TEN-GOD-PROFESSIONAL-COMPOSITION-CONTRACT-v1.0.0",
-  "work": "BAZI-CX-PRO-W3",
-  "status": "ENGINEERING_COMPLETE",
-  "projectionSchema": "PHI-OS-BAZI-CX-PRO-TEN-GOD-PROFESSIONAL-COMPOSITION-v1.0.0",
-  "sourceTenGodSchema": "PHI-OS-BAZI-TEN-GOD-STRUCTURAL-IR-v1.0.0",
-  "tenGodOrder": [
-    "BI_JIAN", "JIE_CAI", "SHI_SHEN", "SHANG_GUAN", "ZHENG_CAI",
-    "PIAN_CAI", "ZHENG_GUAN", "QI_SHA", "ZHENG_YIN", "PIAN_YIN"
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-TEN-GOD-CONTRACT-v1.0.0",
+  "workId": "BAZI-CX-PRO-W3",
+  "title": "Ten-God Visual Projection & Professional Composition",
+  "status": "ADMITTED",
+  "objective": "Project Ten-God ratio, five functional groups, pillar/stem/hidden-stem sources, repetition and concentration, and month-command / pattern integration into a customer-readable professional surface.",
+  "sourceInputs": [
+    "PHI-OS-BAZI-FULL-READING-IR-v1.0.0.sections.foundation.tenGodDistribution",
+    "PHI-OS-BAZI-FULL-READING-IR-v1.0.0.pillars[*].stemRole",
+    "PHI-OS-BAZI-FULL-READING-IR-v1.0.0.pillars[*].hiddenStems[*]",
+    "PHI-OS-BAZI-FULL-READING-IR-v1.0.0.sections.patterns"
   ],
-  "ratio": {
-    "source": "visiblePlusHiddenUnweighted",
-    "includes": ["VISIBLE_TEN_GOD_STEMS_EXCEPT_DAY_MASTER", "HIDDEN_STEMS_UNWEIGHTED"],
-    "excludes": ["DAY_MASTER_STEM"],
-    "display": "PERCENT_OF_TEN_GOD_SOURCE_LOCATIONS",
-    "weightsApplied": false,
-    "isStrengthScore": false,
-    "isGoodBadScore": false
+  "surfaceOutput": {
+    "moduleSchemaVersion": "PHI-OS-BAZI-CX-PRO-TEN-GOD-PROFESSIONAL-COMPOSITION-v1.0.0",
+    "requiredFields": [
+      "dayMaster",
+      "monthCommand",
+      "totalTouches",
+      "functionGroups",
+      "items",
+      "boundaries"
+    ],
+    "requiredPerItemFields": [
+      "tenGodCode",
+      "count",
+      "ratio",
+      "functionGroup",
+      "visibleCount",
+      "hiddenCount",
+      "sources",
+      "repeatState",
+      "concentration",
+      "monthCommandRelation",
+      "patternFamilies"
+    ]
   },
-  "functionalGroups": {
-    "PEER": ["BI_JIAN", "JIE_CAI"],
-    "OUTPUT": ["SHI_SHEN", "SHANG_GUAN"],
-    "WEALTH": ["ZHENG_CAI", "PIAN_CAI"],
-    "OFFICER": ["ZHENG_GUAN", "QI_SHA"],
-    "RESOURCE": ["ZHENG_YIN", "PIAN_YIN"]
-  },
-  "sourceProjection": {
-    "visibleStemLocationsRequired": true,
-    "hiddenStemLocationsRequired": true,
-    "pillarCoordinatesRequired": ["YEAR", "MONTH", "DAY", "HOUR"],
-    "hiddenStemOrderPreserved": true,
-    "absenceRemainsVisible": true
-  },
-  "repetitionAndConcentration": {
-    "repeatedDefinition": "RAW_SOURCE_COUNT_GTE_2",
-    "topTenGodShareDisplayed": true,
-    "topFunctionalGroupShareDisplayed": true,
-    "tiesPreserved": true,
-    "repetitionMayBecomeDestinyVerdict": false,
-    "absenceMayBecomeAbilityAbsence": false,
-    "hiddenOnlyMayBecomeWeaknessVerdict": false
-  },
-  "professionalComposition": {
-    "dayMasterContextRequired": true,
-    "monthCommandContextRequired": true,
-    "patternCandidateLinksRequiredWherePresent": true,
-    "visibleStemMatchRequiredForPatternLink": true,
-    "patternCandidateMayBePromotedToPrimaryByRenderer": false,
-    "customerCopyMustExplainFunctionBeforeRealityComparison": true
-  },
-  "customerVisual": {
-    "tenColoredRolesRequired": true,
-    "fiveFunctionalGroupCardsRequired": true,
-    "fourPillarSourceMapRequired": true,
-    "repetitionConcentrationPanelRequired": true,
-    "dayMasterMonthCommandPatternCompositionRequired": true
-  },
-  "prohibitedFabrication": {
+  "rendererRequirements": [
+    "Use differentiated colors by functional group so the Ten-God distribution is visually prominent.",
+    "Show a ratio overview, five functional-group summaries and individual Ten-God cards.",
+    "Expose pillar / visible-stem / hidden-stem sources, repetition and concentration, and customer-safe integration notes.",
+    "Keep ratios structural and occurrence-based only; do not convert them into good-bad or personality scores."
+  ],
+  "boundaries": {
+    "ratioIsOccurrenceOnly": true,
     "hiddenStemWeightsInvented": false,
-    "fakeStrengthPercentCreated": false,
     "goodBadScoreCreated": false,
-    "fortunePredictionCreated": false,
-    "personalityScoreCreated": false
+    "personalityScoreCreated": false,
+    "fortunePredictionCreated": false
   }
 }
