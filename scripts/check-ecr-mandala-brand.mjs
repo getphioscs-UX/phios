@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const personal=fs.readFileSync('perspectives/personal/index.html','utf8');
+assert.match(personal,/data-method="ecr"[^\n]+data-cx-asset="LOGO-001"/);
+assert.doesNotMatch(personal,/data-method="ecr"[^\n]+cx-method-monogram/);
+assert.doesNotMatch(personal,/>Φ</);
+assert.match(personal,/ecr-specialist\.css/);
+const css=fs.readFileSync('assets/customer-ui/surfaces/ecr-specialist.css','utf8');
+assert.doesNotMatch(css,/(^|\n)\s*(body|html|:root|\.cx-card\b|\.cx-button\b|svg\b|article\b|section\b)\s*[{,]/,'ECR CSS must remain specialist-scoped');
+assert.equal(fs.readFileSync('assets/customer-ui/js/specialists/ecr/product-renderer.js','utf8').includes('<style>'),false);
+console.log('✓ ECR Mandala brand/scoped-CSS gate passed: LOGO-001 remains authoritative and the specialist stylesheet does not create a global design layer.');

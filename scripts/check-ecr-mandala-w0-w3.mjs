@@ -45,7 +45,9 @@ assert.doesNotMatch(personal,/cx-method-monogram/);
 assert.doesNotMatch(personal,/>Φ</);
 const successor=audit.protectedSuccessors['perspectives/personal/index.html'];
 assert.equal(successor.predecessorSha256,'81a46efab60d5337fc4802ac5ffff26dab3fdf7ec388de5298de2c38e60c3d3c');
-assert.equal(successor.successorSha256,sha('perspectives/personal/index.html'));
+const currentPersonalSha=sha('perspectives/personal/index.html');
+if(currentPersonalSha===successor.successorSha256){assert.equal(successor.requiredReplacement,'LOGO-001');}
+else{const w19=json('content/embodied-configuration/ecr-mandala-w19-scoped-css-successor-v1.json');assert.equal(w19.predecessorSha256,successor.successorSha256);assert.equal(w19.successorSha256,currentPersonalSha);assert.equal(w19.changeClass,'ECR_SCOPED_STYLESHEET_LINK_ONLY');assert.equal(w19.requiredStylesheet,'/assets/customer-ui/surfaces/ecr-specialist.css');assert.equal(w19.stylesheetSha256,sha('assets/customer-ui/surfaces/ecr-specialist.css'));}
 assert.equal(successor.requiredReplacement,'LOGO-001');
 
 const runtimeSource=read('functions/embodied-configuration/ecr-customer-mandala-projection.js');

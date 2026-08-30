@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {buildFixtureProjection,buildFixtureProduct} from './lib/ecr-mandala-acceptance-fixture.mjs';
+import {renderPhiMandalaVisual} from '../assets/customer-ui/js/specialists/ecr/mandala-renderer.js';
+import {renderCoordinateStoryVisual} from '../assets/customer-ui/js/specialists/ecr/coordinate-story-renderer.js';
+import {renderDriverProfileVisual} from '../assets/customer-ui/js/specialists/ecr/driver-profile-renderer.js';
+import {renderEcrReadingReport} from '../assets/customer-ui/js/specialists/ecr/reading-report-renderer.js';
+const p=buildFixtureProjection(),visual={title:'你的 PHI 构型',payload:p},html=[renderPhiMandalaVisual(visual),renderCoordinateStoryVisual(visual),renderDriverProfileVisual(visual),renderEcrReadingReport(buildFixtureProduct(),null)].join('');
+assert.match(html,/天蝎背景区间/);assert.match(html,/CC08 · 长期方向背景/);
+assert.match(html,/身份/);assert.match(html,/G11 · 现实语法/);
+assert.match(html,/什么值得共同承载/);assert.match(html,/Q11 · 基础问题/);
+assert.match(html,/关系能力/);assert.match(html,/R7 · 主要回应能力/);
+assert.match(html,/你的出生基线中，哪些驱动更接近太阳锚点？/);
+assert.match(html,/PHI OS 解读/);assert.match(html,/基于你上方的构型坐标/);
+assert.doesNotMatch(html,/已获准的 ECR 解释/);
+assert.match(html,/不代表你此刻现实中真正最重要的驱动力/);
+console.log('✓ ECR Mandala customer-language gate passed: human labels lead, technical codes remain secondary, and governance jargon is not the customer headline.');
