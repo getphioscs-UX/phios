@@ -30,6 +30,7 @@ const paths={
 };
 for(const p of Object.values(paths))assert.ok(fs.existsSync(p),`missing ${p}`);
 const contract=j(paths.contract),printContract=j(paths.printContract),authority=j(paths.authority),shared=j(paths.shared),acceptance=j(paths.acceptance),replay=j(paths.replay),roadmap=j(paths.roadmap),w14=j(paths.w14),w15=j(paths.w15),w16=j(paths.w16),route=j(paths.route),w0w4=j(paths.w0w4),fp23=j(paths.fp23);
+const currentSharedSuccessorPath=`${BASE}/authority/ziwei-cx-r1-w17r-current-shared-baseline-v1.json`;const currentShared=fs.existsSync(currentSharedSuccessorPath)?j(currentSharedSuccessorPath):shared;
 for(const x of [contract,printContract,authority,shared,acceptance,replay,roadmap])assert.equal(x.integrationBaselineCommit,BASELINE,`${x.schemaVersion} baseline drift`);
 
 // W23 semantic production + trusted server facade + canonical customer API.
@@ -65,7 +66,7 @@ assert.doesNotMatch(printSource,/buildZiWei|calculateZiwei|resolveZiwei|window\.
 for(const token of ['@media print','@page{margin:14mm 13mm 16mm','data-ziwei-print-cover','break-after:page','[data-ziwei-inspector-index][hidden]{display:grid!important}','[data-ziwei-topic-panel-index][hidden]{display:grid!important}','details:not([open])>*:not(summary)','orphans:3','widows:3'])assert.ok((css+printSource).includes(token),`print token missing ${token}`);
 
 // W17 inherits the current 402735e shared PPR baseline without changing it.
-for(const row of shared.files){assert.ok(fs.existsSync(row.path),`shared current path missing ${row.path}`);assert.equal(sha(row.path),row.sha256,`W17 shared mutation detected: ${row.path}`);assert.equal(fs.statSync(row.path).size,row.sizeBytes,`W17 shared size drift: ${row.path}`);}for(const p of shared.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
+for(const row of currentShared.files){assert.ok(fs.existsSync(row.path),`shared current path missing ${row.path}`);assert.equal(sha(row.path),row.sha256,`current governed shared baseline drift: ${row.path}`);assert.equal(fs.statSync(row.path).size,row.sizeBytes,`current governed shared size drift: ${row.path}`);}for(const p of currentShared.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
 
 // One current live API -> full product -> specialist DOM + print witness.
 function mockExternalFetch(){return async input=>{const url=String(input?.url||input);if(url.includes('nominatim.openstreetmap.org/lookup'))return new Response(JSON.stringify([{name:'Hong Kong',lat:'22.3193',lon:'114.1694',display_name:'Hong Kong',address:{city:'Hong Kong',country:'Hong Kong',country_code:'hk'},namedetails:{'name:en':'Hong Kong','name:zh':'香港'}}]),{status:200,headers:{'content-type':'application/json'}});if(url.includes('timeapi.io/api/TimeZone/coordinate'))return new Response(JSON.stringify({timeZone:'Asia/Hong_Kong'}),{status:200,headers:{'content-type':'application/json'}});throw new Error(`ZIWEI_CX_R1_W17_UNEXPECTED_FETCH:${url}`);};}
