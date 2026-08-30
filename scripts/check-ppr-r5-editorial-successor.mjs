@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 
 const BASELINE='ffb6e102bd3bccf02d2fb620df68561e98ba4b9f';
 const PAGE='perspectives/personal/index.html';
@@ -28,7 +29,7 @@ assert.equal(authority.predecessorPageSha256,'45ce923352d91dca8d7b3d3cc4dde47b70
 const editorialPageProof=authority.sharedFileSuccessorProof[PAGE],hdPageProof=hd.sharedFileSuccessorProof[PAGE],publishedPageProof=hdPublish.runtimeSuccessorProof[PAGE];
 assert.equal(hdPageProof.predecessorSha256,editorialPageProof.successorSha256);
 assert.equal(publishedPageProof.predecessorSha256,hdPageProof.successorSha256);
-assert.equal(publishedPageProof.successorSha256,sha(PAGE));
+assertPprCurrentSharedOwner(PAGE,{historicalDigest:publishedPageProof.successorSha256,label:'PPR-R5 page'});
 assert.equal(authority.addedFiles[CSS].sha256,sha(CSS));
 const historicalProtected=authority.protectedFiles[JS],liveJsSha=sha(JS),r4v2Proof=r4v2.sharedFileSuccessorProof[JS],reconciliation=protectedRecon.protectedFileReconciliation[JS];
 assert.equal(historicalProtected.sha256,'34edad8d56cb00c1425674b2228eb9ba66ed9003521cc2d986a02f70269f5c2c');
@@ -39,7 +40,7 @@ assert.equal(r4v2Proof.changeClass,'PPR_R4_METHOD_INPUT_EXTENSION_ONLY');
 const hdJsProof=hd.sharedFileSuccessorProof[JS],publishedJsProof=hdPublish.runtimeSuccessorProof[JS];
 assert.equal(hdJsProof.predecessorSha256,r4v2Proof.successorSha256);
 assert.equal(publishedJsProof.predecessorSha256,hdJsProof.successorSha256);
-assert.equal(publishedJsProof.successorSha256,liveJsSha);
+assertPprCurrentSharedOwner(JS,{historicalDigest:publishedJsProof.successorSha256,label:'PPR-R5 client'});
 assert.equal(protectedRecon.status,'HISTORICAL_STALE_PROTECTED_WITNESS_RECONCILED_TO_PREEXISTING_R4V2');
 assert.equal(reconciliation.historicalPprR5ProtectedSha256,historicalProtected.sha256);
 assert.equal(reconciliation.r4v2PredecessorSha256,r4v2Proof.predecessorSha256);

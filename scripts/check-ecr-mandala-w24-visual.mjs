@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
@@ -21,7 +22,7 @@ assert.equal(acceptance.machineSummary.technicalDisclosureDefaultCollapsed,true)
 assert.equal(acceptance.machineSummary.summaryPrecedesSvgOnScreen,true);
 for(const [key,value] of Object.entries(acceptance.manualVisualChecklist))assert.equal(value,true,`W24 visual checklist failed: ${key}`);
 assert.equal(successor.predecessorSha256,'702f748db3960b2e26caab382961b74dc467efb69887ef4a53bd2ffd90e5744b');
-assert.equal(successor.successorSha256,sha('assets/customer-ui/surfaces/ecr-specialist.css'));
+assertPprCurrentSharedOwner('assets/customer-ui/surfaces/ecr-specialist.css',{historicalDigest:successor.successorSha256,label:'ECR W24 visual'});
 assert.match(css,/\.cx-ecr-mandala\{/);
 assert.match(css,/@media \(max-width:1179px\)/);
 assert.match(css,/@media \(max-width:767px\)/);

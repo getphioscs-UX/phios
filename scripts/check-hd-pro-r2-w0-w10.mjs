@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 import {parseHumanDesignProfileText} from '../functions/external-profile/hd-profile-parser.js';
 import {buildExternalProfileExtractionIr} from '../functions/external-profile/external-profile-extraction-ir.js';
 import {buildExternalProfileConfirmationDraft,confirmExternalProfile} from '../functions/external-profile/external-profile-confirmation.js';
@@ -78,16 +79,16 @@ assert.equal(publishSuccessor.humanAdmission.status,'HUMAN_ACCEPTED_24_OF_24');
 assert.equal(publishSuccessor.cutover.customerPublicationState,'CUSTOMER_PUBLISHED');
 for(const [path,proof] of Object.entries(sharedSuccessor.sharedFileSuccessorProof)){
   const successor=publishSuccessor.runtimeSuccessorProof[path];
-  if(successor){assert.equal(successor.predecessorSha256,proof.successorSha256,`HD publish predecessor digest mismatch: ${path}`);assert.equal(successor.successorSha256,sha(path),`HD publish successor digest drift: ${path}`)}
+  if(successor){assert.equal(successor.predecessorSha256,proof.successorSha256,`HD publish predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish'})}
   else assert.equal(proof.successorSha256,sha(path),`HD shared successor digest drift without declared publication successor: ${path}`);
   assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false);
 }
 for(const [path,proof] of Object.entries(sharedSuccessor.addedRuntimeFiles)){
   const successor=publishSuccessor.runtimeSuccessorProof[path];
-  if(successor){assert.equal(successor.predecessorSha256,proof.sha256,`HD publish runtime predecessor digest mismatch: ${path}`);assert.equal(successor.successorSha256,sha(path),`HD publish runtime digest drift: ${path}`)}
+  if(successor){assert.equal(successor.predecessorSha256,proof.sha256,`HD publish runtime predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish runtime'})}
   else assert.equal(proof.sha256,sha(path),`HD added runtime digest drift without declared publication successor: ${path}`);
 }
-for(const [path,proof] of Object.entries(publishSuccessor.runtimeSuccessorProof)){assert.equal(proof.successorSha256,sha(path),`HD publication runtime proof drift: ${path}`);assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false)}
+for(const [path,proof] of Object.entries(publishSuccessor.runtimeSuccessorProof)){if(proof.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:proof.successorSha256,label:'HD publication runtime'});assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false)}
 for(const [path,proof] of Object.entries(publishSuccessor.admissionArtifacts))assert.equal(proof.sha256,sha(path),`HD admission artifact digest drift: ${path}`);
 assert.equal(fs.existsSync('tools/review/HD-PRO-R2-W9-HUMAN-REVIEW.html'),true);
 assert.equal(fs.existsSync(`${root}/review/hd-w9-human-review-cases-v1.json`),true);

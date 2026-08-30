@@ -39,5 +39,6 @@ export function buildFixtureProjection(){return buildEcrCustomerMandalaProjectio
 
 export function buildFixtureProduct(){
   const readingIR=buildFixtureReadingIR(),mandalaProjection=buildEcrCustomerMandalaProjection(readingIR);
-  return adaptEcrPersonalRealityProduct({readingIR,mandalaProjection,locale:fixture.locale});
+  const fullReport={schemaVersion:'PHI-OS-ECR-CUSTOMER-FULL-REPORT-v1.0.0',publicationState:'CUSTOMER_PUBLISHABLE',title:'Fixture ECR report',subtitle:'Acceptance fixture',sections:[{sectionId:'FIXTURE',title:'Fixture',card:{oneLineInsight:'Fixture',flowingExpression:'Observable flowing expression',strainedExpression:'Observable strained expression'},acceptedInterpretation:{interpretationUnitId:'ECR-FIXTURE-U1',plainLanguageExplanation:'Governed fixture interpretation',observableSignals:['Observable signal'],openQuestions:['Open reality question'],alternativeInterpretations:['Alternative interpretation']},sourceRefs:['ECR-FIXTURE-U1']}],deeperReading:[],evidenceAndBoundaries:{interpretationResultId:'ECR-FIXTURE-IR',admissionRef:'ECR-FIXTURE-ADMISSION',boundaries:{currentRealityKnown:false}},sourceRefs:['ECR-FIXTURE-U1']};
+  return adaptEcrPersonalRealityProduct({readingIR,mandalaProjection,fullReport,locale:fixture.locale});
 }

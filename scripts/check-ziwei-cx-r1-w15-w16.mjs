@@ -51,7 +51,7 @@ for(const row of freeze.files){
  assert.ok(fs.existsSync(row.path),`shared frozen path missing ${row.path}`);
  const governed=assertPprR3GovernedPath(row.path,row.sha256,'ZIWEI-CX-R1 W16 shared freeze');
  if(governed.state==='UNCHANGED')assert.equal(fs.statSync(row.path).size,row.sizeBytes,`PPR shared size drift: ${row.path}`);
- else assert.equal(governed.state,'GOVERNED_SUCCESSOR',`PPR shared path is neither frozen nor governed successor: ${row.path}`);
+ else assert(['GOVERNED_SUCCESSOR','CURRENT_OWNER_SUCCESSOR'].includes(governed.state),`PPR shared path is neither frozen nor governed successor: ${row.path}`);
 }
 for(const p of freeze.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
 // One real current canonical API -> activated product -> specialist DOM witness.

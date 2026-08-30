@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {assertPprCurrentSharedOwner} from './ppr-current-shared-owner.mjs';
 
 const BASELINE='492ecdddc1f84e5a915f416c60c61ed23e4fcb7f';
 const CURRENT_MAIN='7b7fe69c6fe72cee9e8205969e3d24c18cd98719';
@@ -24,7 +25,7 @@ function assertHdPublicationSuccessor(hd,hdPublish,path,label='HD-PRO-R2'){
   assert(hdProof,`${label} publication successor has no HD predecessor proof: ${path}`);
   const predecessor=hdProof.successorSha256||hdProof.sha256;
   assert.equal(publishProof.predecessorSha256,predecessor,`${label} publication predecessor mismatch: ${path}`);
-  assert.equal(publishProof.successorSha256,sha(path),`${label} publication successor drift: ${path}`);
+  if(publishProof.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:publishProof.successorSha256,label:`${label} publication`});
   assert.equal(publishProof.createsPHIOSHumanDesignCalculationAuthority,false);
   assert.equal(publishProof.createsHdrPublicExecutionAuthority,false);
   assert.equal(publishProof.createsAutomaticVariableCalculationAuthority,false);

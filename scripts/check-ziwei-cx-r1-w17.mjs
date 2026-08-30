@@ -71,7 +71,7 @@ for(const row of currentShared.files){
  assert.ok(fs.existsSync(row.path),`shared current path missing ${row.path}`);
  const governed=assertPprR3GovernedPath(row.path,row.sha256,'ZIWEI-CX-R1 W17 shared baseline');
  if(governed.state==='UNCHANGED')assert.equal(fs.statSync(row.path).size,row.sizeBytes,`current governed shared size drift: ${row.path}`);
- else assert.equal(governed.state,'GOVERNED_SUCCESSOR',`current shared path is not a governed PPR successor: ${row.path}`);
+ else assert(['GOVERNED_SUCCESSOR','CURRENT_OWNER_SUCCESSOR'].includes(governed.state),`current shared path is not a governed PPR successor: ${row.path}`);
 }
 for(const p of currentShared.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
 

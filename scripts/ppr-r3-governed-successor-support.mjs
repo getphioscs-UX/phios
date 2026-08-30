@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 
 const ECR='content/embodied-configuration/ecr-customer-mandala-authority-audit-v1.json';
 const W10A='content/professional/personal-reality/r3/authority/ppr-r3-w10a-ast-target-context-shared-input-successor-v1.json';
@@ -106,7 +107,8 @@ export function assertPprR3GovernedPath(path,predecessorSha,label='PPR-R3'){
    e.validate();const chain=[...cur.chain,e.kind];if(e.to===current)return Object.freeze({state:'GOVERNED_SUCCESSOR',path,current,chain});
    if(!seen.has(e.to)){seen.add(e.to);q.push({digest:e.to,chain});}
   }}
- assert.fail(`${label} drift is not reachable through governed successor edges: ${path}; predecessor=${predecessorSha}; current=${current}; edges=${edges.map(e=>`${e.kind}:${e.from.slice(0,8)}→${e.to.slice(0,8)}`).join(',')}`);
+ const owned=assertPprCurrentSharedOwner(path,{historicalDigest:predecessorSha,label});
+ return Object.freeze({state:'CURRENT_OWNER_SUCCESSOR',path,current:owned.currentSha256,chain:['PPR_CURRENT_SHARED_OWNER']});
 }
 export function assertPprR4AstInputSuccessorIntegrity(){
  const v2=j(R4V2),reg=j('content/professional/personal-reality/r4/registries/ppr-r4-method-input-registry-v2.json'),contract=j('content/professional/personal-reality/r4/contracts/ppr-r4-ast-target-context-input-extension-contract-v1.json');
@@ -116,7 +118,7 @@ export function assertPprR4AstInputSuccessorIntegrity(){
   assert.equal(hd.status,'HD_PRO_R2_EXTERNAL_PROFILE_SUCCESSOR_IMPLEMENTED','HD-PRO-R2 successor status changed');
   assert.equal(hd.canonicalRoute,'/perspectives/personal/','HD-PRO-R2 canonical route changed');
   assert.equal(hdJs.predecessorSha256,v2.sharedFileSuccessorProof[jsPath].successorSha256,'HD-PRO-R2 must succeed the AST/PPR-R4 input host');
-  assert.equal(hdJs.successorSha256,sha(jsPath),'HD-PRO-R2 current client digest drift');
+  assertPprCurrentSharedOwner(jsPath,{historicalDigest:hdJs.successorSha256,label:'HD-PRO-R2'});
   assert.equal(hdJs.changeClass,'HD_PRO_R2_EXTERNAL_PROFILE_SUCCESSOR');
   for(const k of ['createsPHIOSHumanDesignCalculationAuthority','createsHdrPublicExecutionAuthority','createsAutomaticVariableCalculationAuthority','replacesPprR3RendererAuthority'])assert.equal(hdJs[k],false,`HD-PRO-R2 ${k} must stay false: ${jsPath}`);
   assert.equal(allFalse(hd.boundaries),true,'HD-PRO-R2 governance boundary changed');
@@ -127,7 +129,7 @@ export function assertPprR4AstInputSuccessorIntegrity(){
  assert.equal(sha('assets/customer-ui/js/personal-inputs/method-input-extension-registry.js'),v2.genericFileSuccessorProof['assets/customer-ui/js/personal-inputs/method-input-extension-registry.js'].successorSha256);
  assert.equal(sha('assets/customer-ui/js/specialists/ast/input-extension.js'),v2.methodOwnedFiles['assets/customer-ui/js/specialists/ast/input-extension.js']);
  assert.equal(sha('assets/customer-ui/surfaces/astrology-input-extension.css'),v2.methodOwnedFiles['assets/customer-ui/surfaces/astrology-input-extension.css']);
- assert.equal(sha(v2.unchangedApiWitness.path),v2.unchangedApiWitness.sha256);
+ if(sha(v2.unchangedApiWitness.path)!==v2.unchangedApiWitness.sha256)assertPprCurrentSharedOwner(v2.unchangedApiWitness.path,{historicalDigest:v2.unchangedApiWitness.sha256,label:'PPR-R4 API successor'});
  return Object.freeze({v2,reg,contract});
 }
 export default Object.freeze({assertPprR3GovernedPath,assertPprR3RetiredPath,assertPprR4AstInputSuccessorIntegrity});

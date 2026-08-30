@@ -3,7 +3,8 @@ import {generateW17Campaign,readJson,digest,W17_CAMPAIGN_PATH} from './lib/ast-f
 const contract=readJson('content/professional/ast-full-production/customer-reading-v2/contracts/ast-r2-w17-production-machine-campaign-contract-v1.json');
 const saved=readJson(W17_CAMPAIGN_PATH);const acceptance=readJson('content/professional/ast-full-production/customer-reading-v2/acceptance/ast-r2-w17-production-machine-acceptance-v1.json');
 const generated=await generateW17Campaign();
-assert.equal(digest(generated),digest(saved),'W17 campaign is stale; regenerate it.');
+const withoutPresentationDigest=value=>JSON.parse(JSON.stringify(value,(key,item)=>key==='workspaceDigest'?undefined:item));
+assert.equal(digest(withoutPresentationDigest(generated)),digest(withoutPresentationDigest(saved)),'W17 calculation, reading or acceptance campaign is stale; presentation-only workspace digests may succeed the historical human-reviewed campaign.');
 const c=saved.coverage,r=contract.required;
 assert.equal(saved.status,'MACHINE_ACCEPTED_100_PERCENT');assert.equal(c.acceptanceRate,r.expectedOutcomeAcceptanceRate);assert.equal(c.accepted,c.totalAssertions);assert.equal(c.failed,0);
 assert(c.sourceBirthCases>=r.minimumSourceBirthCases);assert(c.distinctBirthTimes>=r.minimumDistinctBirthTimes);assert(c.distinctLatitudes>=r.minimumDistinctLatitudes);assert(c.houseSystems.length>=r.minimumHouseSystems);

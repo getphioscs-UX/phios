@@ -129,9 +129,9 @@ const html=txt('perspectives/personal/index.html');
 const client=txt('assets/customer-ui/js/surfaces/personal-reality.js');
 assert.match(html,/data-cx-ziwei-target-context/);
 for(const name of ['ziweiTargetDate','ziweiTargetTime','ziweiTargetTimezoneIana','ziweiTargetUtcOffset','ziweiTargetContextSource'])assert.match(html,new RegExp(`name="${name}"`));
-assert.match(html,/data-cx-en="The fields start with this device's current context and stay visible so you can edit them\./);
-assert.match(client,/function seedZiweiTargetContext/);
-assert.match(client,/Intl\.DateTimeFormat\(\)\.resolvedOptions\(\)\.timeZone/);
+assert.match(html,/data-cx-en="Enter the target date, time and timezone explicitly\./);
+assert.doesNotMatch(html,/DEVICE_DEFAULT|device's current context/);
+assert.doesNotMatch(client,/function seedZiweiTargetContext|new Date\s*\(|resolvedOptions\(\)\.timeZone|DEVICE_DEFAULT/);
 assert.match(client,/source\.value='CUSTOMER_EDITED'/);
 for(const name of ['ziweiTargetDate','ziweiTargetTime','ziweiTargetTimezoneIana','ziweiTargetUtcOffset','ziweiTargetContextSource'])assert.ok(client.includes(name));
 
