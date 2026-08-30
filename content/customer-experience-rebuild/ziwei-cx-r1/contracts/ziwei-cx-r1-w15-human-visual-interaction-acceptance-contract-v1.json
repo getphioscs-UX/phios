@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-W15-HUMAN-VISUAL-INTERACTION-ACCEPTANCE-CONTRACT-v1.0.0",
+  "work": "ZIWEI-CX-R1-W15",
+  "integrationBaselineCommit": "1189c0519f1c5e9376965324b6010c00c212a3a1",
+  "prerequisite": {
+    "work": "ZIWEI-CX-R1-W14",
+    "status": "MACHINE_ACCEPTED_96_OF_96_REAL_API_DOM",
+    "campaignRef": "content/customer-experience-rebuild/ziwei-cx-r1/campaign/ziwei-cx-r1-w14-real-api-dom-machine-campaign-v1.json"
+  },
+  "reviewCaseCount": 12,
+  "selectionRequirements": {
+    "lifePalaceBranches": 12,
+    "localeSplit": {"zh-Hans": 6, "en": 6},
+    "traditionalCalculationSexSplit": {"MALE": 6, "FEMALE": 6}
+  },
+  "responsiveWitnessViewports": [375, 430, 768, 1024, 1280, 1440, 1920],
+  "reviewScope": [
+    "professional information hierarchy",
+    "4x4 twelve-palace readability",
+    "palace inspector ownership and legibility",
+    "eight topic discoverability and topic-to-palace navigation",
+    "natal to Da Xian to Liu Nian timing clarity",
+    "counter-evidence customer-language clarity",
+    "open-boundary visibility",
+    "raw-code absence from default customer UI",
+    "legacy generic ZWR/SMR absence",
+    "responsive behavior across required viewports"
+  ],
+  "interactionTasks": [
+    "switch topic tabs",
+    "open a topic-linked palace",
+    "select a second palace directly",
+    "inspect timing and cross-layer content",
+    "open Technical Details only to confirm raw lineage stays collapsed"
+  ],
+  "decisionStates": ["PENDING", "ACCEPT", "NEEDS_REVISION", "REJECT"],
+  "acceptanceRule": "12/12 ACCEPT",
+  "machineReviewCannotSubstituteHumanDecision": true,
+  "semanticReReviewRequired": false,
+  "sharedLayerMutationAllowed": false,
+  "customerSurfaceActivationAllowedBeforeAcceptance": false
+}

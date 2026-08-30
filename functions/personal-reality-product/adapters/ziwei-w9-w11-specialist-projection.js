@@ -1,5 +1,6 @@
 import {freeze,list,text,localeOf,fail} from './product-envelope-core.js';
 import {sha256Stable,stableStringify} from '../../zi-wei-runtime/zwr-utils.js';
+import {STAR_ZH,TRANSFORMATION_ZH,STAR_STATE_VOCABULARY} from '../../zi-wei-full-production/ziwei-structural-registry.js';
 
 export const ZIWEI_CX_R1_W9_W11_SPECIALIST_PRESENTATION_SCHEMA='PHI-OS-ZIWEI-CX-R1-W9-W11-SPECIALIST-PRESENTATION-v1.0.0';
 export const ZIWEI_CX_R1_W9_W11_SPECIALIST_VISUAL_TYPE='ZIWEI_SPECIALIST_PRESENTATION';
@@ -10,6 +11,15 @@ const STEM_ZH=Object.freeze({JIA:'甲',YI:'乙',BING:'丙',DING:'丁',WU:'戊',J
 const STEM_EN=Object.freeze({JIA:'Jia',YI:'Yi',BING:'Bing',DING:'Ding',WU:'Wu',JI:'Ji',GENG:'Geng',XIN:'Xin',REN:'Ren',GUI:'Gui'});
 const BUREAU_ZH=Object.freeze({WATER_2:'水二局',WOOD_3:'木三局',METAL_4:'金四局',EARTH_5:'土五局',FIRE_6:'火六局'});
 const BUREAU_EN=Object.freeze({WATER_2:'Water 2 Bureau',WOOD_3:'Wood 3 Bureau',METAL_4:'Metal 4 Bureau',EARTH_5:'Earth 5 Bureau',FIRE_6:'Fire 6 Bureau'});
+const PATTERN_ZH=Object.freeze({ZI_FU_TONG_GONG:'紫府同宫',LU_MA_JIAO_CHI:'禄马交驰',TAN_LING_BING_SHOU:'贪铃并守',TAN_HUO_XIANG_FENG:'贪火相逢',JUN_CHEN_QING_HUI:'君臣庆会',JIN_YU_FU_JIA:'金舆扶驾',JU_JI_TONG_GONG:'巨机同宫',WU_QU_SHOU_YUAN:'武曲守垣',RI_CHU_FU_SANG:'日出扶桑',YUE_LANG_TIAN_MEN:'月朗天门',CAI_LU_JIA_MA:'财禄夹马'});
+const titleCaseCode=code=>String(code||'').toLowerCase().split('_').filter(Boolean).map(x=>x.charAt(0).toUpperCase()+x.slice(1)).join(' ');
+const STAR_EN=Object.freeze(Object.fromEntries(Object.keys(STAR_ZH).map(code=>[code,titleCaseCode(code)])));
+const TRANSFORMATION_EN=Object.freeze(Object.fromEntries(Object.keys(TRANSFORMATION_ZH).map(code=>[code,titleCaseCode(code)])));
+const STATE_ZH=Object.freeze(Object.fromEntries(Object.entries(STAR_STATE_VOCABULARY).map(([code,row])=>[code,row.zh||code])));
+const STATE_EN=Object.freeze(Object.fromEntries(Object.keys(STAR_STATE_VOCABULARY).map(code=>[code,code==='UNSPECIFIED'?'Unspecified':titleCaseCode(code)])));
+const PATTERN_EN=Object.freeze(Object.fromEntries(Object.keys(PATTERN_ZH).map(code=>[code,titleCaseCode(code)])));
+const escRe=value=>String(value).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const replaceMapCodes=(value,map)=>Object.keys(map).sort((a,b)=>b.length-a.length).reduce((s,code)=>s.replace(new RegExp(`\\b${escRe(code)}\\b`,'g'),map[code]),value);
 const RAW_RE=/\b[A-Z]{2,}(?:_[A-Z0-9]+)+\b/g;
 const INTERNAL_RE=/\b(?:COUNTERBALANCED|DISTINCT_DOMAIN_EMPHASIS|PARALLEL_CONTEXT|BOUNDED_BY_UNKNOWN|MULTI_PATTERN_CONTEXT|SUPPORTED|QUALIFIED|PARTIAL)\b/g;
 const uniq=values=>[...new Set(list(values).filter(Boolean))];
@@ -26,6 +36,14 @@ export function ziweiPublicLabel(value,locale='en'){
 }
 function replaceKnownRaw(value,l){let s=clean(value);if(!s)return '';
   s=s.replace(/\bW15\s*(?:therefore|因此)?\s*/gi,'');
+  // W14 regression closure: W19 can legitimately carry governed structural identifiers
+  // such as JU_MEN（MIAO） into the specialist projection. Translate only identifiers
+  // that already exist in Zi Wei's frozen structural/admitted registries; unknown codes
+  // still fail closed below rather than being prettified generically.
+  s=replaceMapCodes(s,l==='zh-Hans'?STAR_ZH:STAR_EN);
+  s=replaceMapCodes(s,l==='zh-Hans'?TRANSFORMATION_ZH:TRANSFORMATION_EN);
+  s=replaceMapCodes(s,l==='zh-Hans'?PATTERN_ZH:PATTERN_EN);
+  s=replaceMapCodes(s,l==='zh-Hans'?STATE_ZH:STATE_EN);
   for(const code of Object.keys(BUREAU_ZH))s=s.replace(new RegExp(`\\b${code}\\b`,'g'),ziweiPublicLabel(code,l));
   for(const code of Object.keys(BRANCH_ZH))s=s.replace(new RegExp(`\\b${code}\\b`,'g'),ziweiPublicLabel(code,l));
   for(const code of Object.keys(STEM_ZH))s=s.replace(new RegExp(`\\b${code}\\b`,'g'),ziweiPublicLabel(code,l));

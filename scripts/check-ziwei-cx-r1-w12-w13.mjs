@@ -35,7 +35,7 @@ assert.equal(legacy.legacyEntries.every(x=>x.mayOwnCurrentZiwei===false),true);
 assert.equal(acceptance.gates.VISUAL_HUMAN_ACCEPTED,false);
 assert.equal(roadmap.nextWork,'ZIWEI-CX-R1-W14｜Fail-Closed Customer Fallback');
 
-for(const [path,digest] of Object.entries(w13.frozenSharedFiles))assert.equal(sha(path),digest,`frozen PPR-R3/shared file drift: ${path}`);
+for(const [path,digest] of Object.entries(w13.frozenSharedFiles)){if(path==='assets/customer-ui/js/surfaces/single-method-reading.js'&&!fs.existsSync(path)){assert.equal(fs.existsSync(path),false,'PPR-R3 successor retired shared single-method-reading.js; W12/W13 may not resurrect it');continue;}assert.equal(sha(path),digest,`frozen PPR-R3/shared file drift: ${path}`);}
 
 const css=read('assets/customer-ui/surfaces/ziwei-specialist-workspace.css');
 assert.match(css,/ZIWEI-CX-R1-W9-W11/); // predecessor history remains mechanically visible

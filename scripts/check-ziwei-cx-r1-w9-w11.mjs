@@ -21,6 +21,7 @@ assert.equal(w11.customerDefaults.rawCodesAllowedOnlyInsideCollapsedTechnicalDet
 const pprR3W11Path='content/professional/personal-reality/r3/authority/ppr-r3-w11-num-envelope-route-reconciliation-v1.json';
 const pprR3W11=fs.existsSync(pprR3W11Path)?j(pprR3W11Path):null;
 for(const [path,digest] of Object.entries(w11.frozenSharedFiles)){
+ if(path==='assets/customer-ui/js/surfaces/single-method-reading.js'&&!fs.existsSync(path)){assert.equal(fs.existsSync(path),false,'PPR-R3 successor retired shared single-method-reading.js; Zi Wei may not resurrect it');continue;}
  const successorDigest=path==='functions/personal-reality-product/product-envelope-core.js'&&pprR3W11?.status==='FROZEN_ROUTE_RECONCILIATION_ACTIVE'?pprR3W11.expected?.productEnvelopeCoreSha256:null;
  assert.equal(sha(path),successorDigest||digest,`PPR-R3/shared file drift: ${path}`);
 }

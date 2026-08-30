@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-ZIWEI-CX-R1-W14-ENGLISH-RAW-CODE-REGRESSION-v1.0.0",
+  "work": "ZIWEI-CX-R1-W14",
+  "integrationBaselineCommit": "d1db21e6481c30d657ca3238ffb521c37560656a",
+  "purpose": "Freeze the live customer-route regression discovered by W14 where a governed W19 star/state display such as JU_MEN（MIAO） caused the Zi Wei specialist product adapter to fail closed before reaching the customer DOM.",
+  "input": {
+    "birthDate": "1988-01-15",
+    "birthTime": "07:00",
+    "traditionalCalculationSex": "MALE",
+    "locale": "en",
+    "placeRef": "N123",
+    "targetDate": "2026-08-30",
+    "targetTime": "12:00",
+    "targetTimezone": "Asia/Kuala_Lumpur",
+    "targetUtcOffset": "+08:00"
+  },
+  "expected": {
+    "apiStatus": 200,
+    "productRouteMode": "SINGLE_METHOD",
+    "methodId": "ZWR",
+    "productState": "CUSTOMER_PUBLISHABLE",
+    "rendererId": "ZIWEI_CX_R1_W12_W13_SPECIALIST_WORKSPACE",
+    "knownStructuralIdentifierPresentation": "Ju Men（Miao）",
+    "rawIdentifierPresentationForbidden": "JU_MEN（MIAO）",
+    "unknownRawIdentifiersStillFailClosed": true
+  }
+}
