@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "PHI-OS-AST-CX-R3-W3-W4-PROJECTION-ADAPTER-ACCEPTANCE-v1.0.0",
+  "workCode": "AST-CX-R3-W3-W4",
+  "baselineCommit": "150ebe1dd255e4570a0a345fa330b598ebc2a4f8",
+  "status": "ENGINEERING_ACCEPTED",
+  "projectionRuntime": "functions/ast-full-production/ast-customer-product-projection-v3.js",
+  "projectionSchema": "PHI-OS-AST-CUSTOMER-PRODUCT-PROJECTION-v3.0.0",
+  "expectedFixtureSemanticDigest": "ce664dcf37e78d70b768b70bf005a167e3f3a47170ac43138719c4c3c45088b5",
+  "deterministicReplayPassed": true,
+  "adapter": "functions/personal-reality-product/adapters/ast-production-adapter.js",
+  "rendererId": "PPR_R3_AST_PRODUCT_V1",
+  "pprProductState": "CUSTOMER_PUBLISHABLE",
+  "pprLineageProjectionSchema": "PHI-OS-AST-CUSTOMER-PRODUCT-PROJECTION-v3.0.0",
+  "pprLineageSemanticDigest": "ce664dcf37e78d70b768b70bf005a167e3f3a47170ac43138719c4c3c45088b5",
+  "compatibilityCarrierSchema": "PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0",
+  "compatibilityPolicy": "W0-W4 keeps the admitted AST W16 workspace as the specialist-renderer carrier while the PPR adapter and visual payload are projected from v3. W5+ may move the AST renderer to direct v3 consumption without shared PPR mutation.",
+  "assertions": {
+    "existingCanonicalAstProjectionConsumed": true,
+    "existingR4SemanticProjectionConsumed": true,
+    "existingR4aAdmissionPreserved": true,
+    "existingR5SynthesisConsumed": true,
+    "existingCustomerReadingV2Consumed": true,
+    "newCalculationCreated": false,
+    "newMeaningCreated": false,
+    "newReadingAuthorityCreated": false,
+    "newCrossMethodCompositionCreated": false,
+    "newCurrentRealityCreated": false,
+    "rendererCreatesMeaning": false
+  },
+  "pprR3SharedFilesModified": 0,
+  "sharedSingleMethodReadingModified": 0,
+  "otherMethodFilesModified": 0
+}

@@ -5,6 +5,7 @@ import {buildAstCustomerReadingV2} from './ast-customer-reading-v2-runtime.js';
 import {resolveAstCustomerIntent} from './ast-intent-responsive-composition.js';
 import {buildAstGovernedTemporalReadingIR} from './ast-temporal-reading-adapter.js';
 import {buildAstInteractiveWorkspace} from './ast-interactive-workspace-runtime.js';
+import {buildAstCustomerProductProjectionV3} from './ast-customer-product-projection-v3.js';
 import {executeAstTransitRequest} from '../ast-transit/transit-runtime.js';
 import {buildAstTransitMeaningBundle} from '../ast-transit/transit-meaning-runtime.js';
 import {buildAstTransitReadingIR} from '../ast-transit/transit-reading-ir.js';
@@ -25,9 +26,10 @@ export async function buildAstCustomerWorkspaceCandidate({canonicalProjection,ra
   temporalIR=buildAstGovernedTemporalReadingIR({projection:transit.projection,reading:transitReading,meaningBundle,languageRegistry:AST_READER_LANGUAGE_REGISTRY,locale});astt=freeze({projection:transit.projection,meaningBundle,reading:transitReading});
  }
  const reading=buildAstCustomerReadingV2({synthesis,professionalSemanticProjection,languageRegistry:AST_READER_LANGUAGE_REGISTRY,iaContract:AST_READING_IA,ownershipContract:AST_CONTENT_OWNERSHIP,layoutContract:AST_READING_LAYOUT,r4aAdmission:AST_R4A_ADMISSION,temporalIR,sourceMainCommit});
+ const customerProductProjection=await buildAstCustomerProductProjectionV3({canonicalProjection,professionalSemanticProjection,synthesis,reading,intentResolution,languageRegistry:AST_READER_LANGUAGE_REGISTRY,temporalIR});
  const workspaceGate=cutoverGateOverride||EFFECTIVE_AST_CUTOVER_GATE;
- const workspace=buildAstInteractiveWorkspace({canonicalProjection,reading,intentResolution,languageRegistry:AST_READER_LANGUAGE_REGISTRY,cutoverGate:workspaceGate,temporalIR});
- return freeze({schemaVersion:'PHI-OS-AST-CUSTOMER-WORKSPACE-CANDIDATE-BUNDLE-v1.0.0',intentResolution,professionalSemanticProjection,synthesis,temporalIR,astt,reading,workspace,cutoverGate:workspaceGate});
+ const workspace=buildAstInteractiveWorkspace({canonicalProjection,reading,intentResolution,languageRegistry:AST_READER_LANGUAGE_REGISTRY,cutoverGate:workspaceGate,temporalIR,customerProductProjection});
+ return freeze({schemaVersion:'PHI-OS-AST-CUSTOMER-WORKSPACE-CANDIDATE-BUNDLE-v1.0.0',intentResolution,professionalSemanticProjection,synthesis,temporalIR,astt,reading,customerProductProjection,workspace,cutoverGate:workspaceGate});
 }
 export async function maybeBuildActiveAstCustomerWorkspace(args={}){if(EFFECTIVE_AST_CUTOVER_GATE.customerCutoverAllowed!==true||EFFECTIVE_AST_CUTOVER_GATE.surfaceCutoverActive!==true)return null;const bundle=await buildAstCustomerWorkspaceCandidate(args);return bundle.workspace.governance.customerPublicationAllowed?bundle.workspace:null;}
 export default Object.freeze({getAstCustomerWorkspaceCapability,buildAstCustomerWorkspaceCandidate,maybeBuildActiveAstCustomerWorkspace});

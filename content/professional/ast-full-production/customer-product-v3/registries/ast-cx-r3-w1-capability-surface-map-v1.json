@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "PHI-OS-AST-CX-R3-CAPABILITY-SURFACE-MAP-v1.0.0",
+  "workCode": "AST-CX-R3-W1",
+  "baselineCommit": "150ebe1dd255e4570a0a345fa330b598ebc2a4f8",
+  "status": "ALL_GOVERNED_CAPABILITIES_HAVE_CUSTOMER_PRODUCT_OWNERS",
+  "rule": "Existing AST production capability must have one customer-product projection owner before visual work begins. The map assigns presentation ownership only and does not create astrology semantics.",
+  "capabilities": [
+    {"capabilityId":"NATAL_POSITIONS","upstreamOwner":"Canonical AST Projection v2","projectionOwner":"chart.positions","futureSurfaceOwner":"Natal Chart / Planets & Houses"},
+    {"capabilityId":"HOUSE_CUSPS","upstreamOwner":"Canonical AST Projection v2","projectionOwner":"chart.houses","futureSurfaceOwner":"Natal Chart / Planets & Houses"},
+    {"capabilityId":"ANGLES","upstreamOwner":"AST-FP-R4","projectionOwner":"chart.angles","futureSurfaceOwner":"Core Configuration / Natal Chart"},
+    {"capabilityId":"MAJOR_ASPECTS","upstreamOwner":"Canonical AST Projection v2","projectionOwner":"aspectNetwork.aspects","futureSurfaceOwner":"Aspects & Patterns"},
+    {"capabilityId":"APPLYING_SEPARATING","upstreamOwner":"AST-FP-R4","projectionOwner":"aspectNetwork.dynamics","futureSurfaceOwner":"Aspects & Patterns"},
+    {"capabilityId":"HIGHER_ORDER_PATTERNS","upstreamOwner":"AST-FP-R4 + R4A","projectionOwner":"aspectNetwork.patterns","futureSurfaceOwner":"Aspects & Patterns"},
+    {"capabilityId":"CHART_RULER","upstreamOwner":"AST-FP-R4","projectionOwner":"rulership.chartRuler","futureSurfaceOwner":"Core Configuration / Rulership"},
+    {"capabilityId":"HOUSE_RULERS","upstreamOwner":"AST-FP-R4","projectionOwner":"rulership.houseRulers","futureSurfaceOwner":"Rulership"},
+    {"capabilityId":"PLANETARY_DISPOSITORS","upstreamOwner":"AST-FP-R4","projectionOwner":"rulership.planetaryDispositors","futureSurfaceOwner":"Rulership"},
+    {"capabilityId":"DISPOSITOR_CHAINS","upstreamOwner":"AST-FP-R4","projectionOwner":"rulership.dispositorChains","futureSurfaceOwner":"Rulership"},
+    {"capabilityId":"FINAL_DISPOSITORS","upstreamOwner":"AST-FP-R4","projectionOwner":"rulership.finalDispositors","futureSurfaceOwner":"Rulership"},
+    {"capabilityId":"DISPOSITOR_CYCLES","upstreamOwner":"AST-FP-R4","projectionOwner":"rulership.cycles","futureSurfaceOwner":"Rulership"},
+    {"capabilityId":"ELEMENT_DISTRIBUTION","upstreamOwner":"AST-FP-R4","projectionOwner":"distribution.elementCounts","futureSurfaceOwner":"Elements & Modes"},
+    {"capabilityId":"MODALITY_DISTRIBUTION","upstreamOwner":"AST-FP-R4","projectionOwner":"distribution.modalityCounts","futureSurfaceOwner":"Elements & Modes"},
+    {"capabilityId":"WHOLE_CHART_SYNTHESIS","upstreamOwner":"AST-FP-R5","projectionOwner":"wholeChartReading","futureSurfaceOwner":"Overview / My Reading"},
+    {"capabilityId":"SUPPORT_TENSION","upstreamOwner":"AST-FP-R5 + AST R2","projectionOwner":"wholeChartReading.support / wholeChartReading.tension","futureSurfaceOwner":"My Reading"},
+    {"capabilityId":"INTENT_PRIORITY","upstreamOwner":"AST R2 intent routing","projectionOwner":"intentViews","futureSurfaceOwner":"Reading Lens"},
+    {"capabilityId":"GOVERNED_TIMING","upstreamOwner":"ASTT + AST R2 temporal adapter","projectionOwner":"timing","futureSurfaceOwner":"Timing & Activation"},
+    {"capabilityId":"UNKNOWN_BOUNDARY","upstreamOwner":"Canonical AST Projection / governed readings","projectionOwner":"wholeChartReading.unknowns","futureSurfaceOwner":"My Reading / Sources & Technical"},
+    {"capabilityId":"LINEAGE","upstreamOwner":"AST production authorities","projectionOwner":"technical","futureSurfaceOwner":"Sources & Technical"}
+  ],
+  "unownedCapabilities": [],
+  "boundaries": {"frontendMeaningCreationAllowed":false,"newCalculationAllowed":false,"newProjectionAuthorityAllowed":false,"sharedPprNavigationLabelsOwned":false}
+}
