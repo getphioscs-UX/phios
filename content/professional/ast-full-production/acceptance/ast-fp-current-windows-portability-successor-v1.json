@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "PHI-OS-AST-FP-CURRENT-WINDOWS-PORTABILITY-SUCCESSOR-v1.0.0",
+  "work": "AST-FP-CURRENT-WINDOWS-PORTABILITY",
+  "baselineCommit": "7b7fe69c6fe72cee9e8205969e3d24c18cd98719",
+  "status": "PORTABLE_CHECKER_SUCCESSOR_ACCEPTED",
+  "path": "scripts/check-ast-fp-current.mjs",
+  "predecessorSha256": "d007ff93e52e01ab8a69741e3ba91a32ce03dfcfc33b9717189d99f8a313ff1a",
+  "successorSha256": "e0978919452a900a302c800d7a8a3ce353579e4401c652f038ec80c286fb7a3b",
+  "changeClass": "WINDOWS_PORTABILITY_ONLY",
+  "problem": {
+    "failingCall": "execFileSync('sh',['-n','-c',pkg.scripts.check])",
+    "windowsFailure": "spawnSync sh ENOENT",
+    "rootCause": "The checker required a POSIX sh executable only to syntax-check the package check chain. Windows PowerShell/npm execution does not guarantee sh is installed."
+  },
+  "successorBehavior": {
+    "usesOsSpecificShell": false,
+    "validatesPackageCheckIsString": true,
+    "validatesSingleLineCommandChain": true,
+    "validatesExplicitAndAndChain": true,
+    "validatesNodeAndNpmRunCommandsOnly": true,
+    "rejectsShellSpecificLaunchers": ["sh", "bash", "zsh", "cmd", "powershell", "pwsh"],
+    "executesPackageCheckChain": false
+  },
+  "boundaries": {
+    "astSemanticAuthorityChanged": false,
+    "astCalculationChanged": false,
+    "astMeaningChanged": false,
+    "productionAdmissionChanged": false,
+    "packageJsonChanged": false,
+    "historicalEvidenceRewritten": false
+  },
+  "astSemanticAuthorityChanged": false,
+  "productionAdmissionChanged": false,
+  "packageCheckChainExecutedByThisChecker": false
+}

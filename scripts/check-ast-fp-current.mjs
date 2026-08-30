@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {execFileSync} from 'node:child_process';
 import {hash,RESEARCH,measureDepth} from './audit-cx-smr-enrichment-depth.mjs';
 import {loadW01,validateW01} from './check-cx-smr-enrichment-w01.mjs';
 import {validateBook} from './check-cx-smr-enrichment-w2.mjs';
@@ -81,6 +80,30 @@ assert.equal(contract.gates.fullProductionClaimAllowed,false);
 const admission=read('content/customer-experience-rebuild/r12r4b/smr/history/v1/admission/smr-production-admission-v1.json');
 assert.equal(admission.productionAllowed,false);assert.equal(admission.customerCutoverAllowed,false);
 const human=read('content/customer-experience-rebuild/r12r4b/smr/history/v1/review/smr-human-review-results-v1.json');assert.equal(human.accepted,0);assert.equal(human.pending,48);
-const pkg=read('package.json');execFileSync('sh',['-n','-c',pkg.scripts.check]);
-assert.ok(pkg.scripts.check.includes('check:ast-full-production'));
+function assertPortablePackageCheckScript(script){
+ assert.equal(typeof script,'string','package.json scripts.check must be a string');
+ assert.ok(script.trim().length>0,'package.json scripts.check must not be empty');
+ assert.doesNotMatch(script,/\r|\n/,'package.json scripts.check must remain a single-line portable command chain');
+ assert.doesNotMatch(script,/(^|\s)(?:sh|bash|zsh|cmd|powershell|pwsh)(?:\s|$)/i,'package.json scripts.check must not require an OS-specific shell');
+ const commands=script.split(/\s*&&\s*/).map(command=>command.trim());
+ assert.ok(commands.length>1,'package.json scripts.check must remain an explicit && command chain');
+ for(const command of commands){
+  assert.ok(command,`Empty command in package.json scripts.check: ${script}`);
+  const npmRun=/^npm run [A-Za-z0-9:._-]+$/.test(command);
+  const nodeRun=/^node(?:\s+--no-warnings)?\s+[A-Za-z0-9_./:-]+(?:\s+[A-Za-z0-9_./:=-]+)*$/.test(command);
+  assert.ok(npmRun||nodeRun,`Non-portable package.json scripts.check command: ${command}`);
+ }
+ return commands;
+}
+const pkg=read('package.json');
+const portableCheckCommands=assertPortablePackageCheckScript(pkg.scripts.check);
+assert.ok(portableCheckCommands.includes('npm run check:ast-full-production'));
+const portability=read('content/professional/ast-full-production/acceptance/ast-fp-current-windows-portability-successor-v1.json');
+assert.equal(portability.baselineCommit,'7b7fe69c6fe72cee9e8205969e3d24c18cd98719');
+assert.equal(portability.predecessorSha256,'d007ff93e52e01ab8a69741e3ba91a32ce03dfcfc33b9717189d99f8a313ff1a');
+assert.equal(portability.successorSha256,hash(fs.readFileSync('scripts/check-ast-fp-current.mjs','utf8').replace(/\r\n/g,'\n')));
+assert.equal(portability.changeClass,'WINDOWS_PORTABILITY_ONLY');
+assert.equal(portability.astSemanticAuthorityChanged,false);
+assert.equal(portability.productionAdmissionChanged,false);
+assert.equal(portability.packageCheckChainExecutedByThisChecker,false);
 console.log(JSON.stringify({status:'PASS',currentBaseline:current.baselineCommit,currentReconciledMainCommit:current.currentReconciledMainCommit||null,historicalProtectedFiles:current.protectedFileReconciliation.length,researchFilesPreserved:current.preservedResearchFiles.length,sources:5,cards,historicalChecksRetained:true,packageValidationMode:current.protectedFileReconciliation.find(x=>x.path==='package.json')?.validationMode||'FULL_FILE',sourceProductionAdmission:false},null,2));

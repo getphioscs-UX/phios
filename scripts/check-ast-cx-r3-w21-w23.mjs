@@ -11,8 +11,9 @@ const base='content/professional/ast-full-production/customer-product-v3';
 const baseline='492ecdddc1f84e5a915f416c60c61ed23e4fcb7f';
 globalThis.document={documentElement:{lang:'zh-Hans'}};
 
-const shared=assertAstCxR3CurrentSharedBoundary('AST-CX-R3 W21-W23');
-assert.equal(shared.baselineCommit,baseline);
+assertAstCxR3CurrentSharedBoundary('AST-CX-R3 W21-W23');
+const historicalShared=json(`${base}/authority/ast-cx-r3-w21-current-shared-baseline-v1.json`);
+assert.equal(historicalShared.baselineCommit,baseline);assert.equal(historicalShared.status,'CURRENT_SHARED_SUCCESSOR_BASELINE_RECONCILED');
 const w21=json(`${base}/contracts/ast-cx-r3-w21-specialist-css-cutover-contract-v1.json`);
 const w22=json(`${base}/contracts/ast-cx-r3-w22-responsive-professional-layout-contract-v1.json`);
 const w23=json(`${base}/contracts/ast-cx-r3-w23-print-product-contract-v1.json`);

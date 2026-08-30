@@ -26,24 +26,26 @@ const w19=json(`${base}/contracts/ast-cx-r3-w19-technical-disclosure-contract-v1
 const w20=json(`${base}/contracts/ast-cx-r3-w20-raw-code-elimination-contract-v1.json`);
 for(const [doc,work] of [[w17,'AST-CX-R3-W17'],[w18,'AST-CX-R3-W18'],[w19,'AST-CX-R3-W19'],[w20,'AST-CX-R3-W20']]){assert.equal(doc.workCode,work);assert.equal(doc.baselineCommit,baseline)}
 
-// W17 — real canonical route audit. Inputs exist in frozen HTML, but the frozen orchestrator/API/product assembly do not carry them into AST.
+// W17 — historical finding remains immutable, while current successor reachability is recertified.
 const html=text('perspectives/personal/index.html');
 const sharedUi=text('assets/customer-ui/js/surfaces/personal-reality.js');
 const api=text('functions/api/customer-personal-reality.js');
 const assembly=text('functions/personal-reality-product/product-assembly.js');
 const astProduction=text('functions/ast-full-production/ast-customer-reading-production.js');
-for(const name of ['astTargetDate','astTargetTime','astTargetTimezone','astTargetUtcOffsetAtTarget'])assert(html.includes(`name="${name}"`),`existing AST target field missing ${name}`);
-assert.match(html,/data-cx-ast-target-input hidden/);
-assert.doesNotMatch(sharedUi,/astTargetContext/);
-assert.doesNotMatch(sharedUi,/fd\.get\('astTargetDate'\)|fd\.get\("astTargetDate"\)/);
-assert.doesNotMatch(api,/astTargetContext/);
-assert.doesNotMatch(assembly,/astTargetContext/);
-assert.match(assembly,/buildAstCustomerWorkspaceCandidate\(\{canonicalProjection:ast\.canonicalProjection,rawIntent:intent\|\|'',locale,sourceMainCommit:/);
-assert.doesNotMatch(assembly,/buildAstCustomerWorkspaceCandidate\(\{[^}]*targetContext/s);
-assert.match(astProduction,/targetContext=null/);
-assert.match(astProduction,/if\(targetComplete\(targetContext\)\)/);
-assert.equal(w17.currentFinding,'PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED');
-assert.equal(w18.canonicalCustomerActivationState,'BLOCKED_BY_W17_SHARED_INPUT_REACHABILITY');
+const astInput=text('assets/customer-ui/js/specialists/ast/input-extension.js');
+const inputRegistry=text('assets/customer-ui/js/personal-inputs/method-input-extension-registry.js');
+assert.match(html,/data-ppr-r4-method-input-mount/);
+assert.match(inputRegistry,/PPR_R4_AST_INPUT_EXTENSION_V1/);
+for(const name of ['astCxTargetDate','astCxTargetTime','astCxTargetTimezone','astCxTargetUtcOffset'])assert(astInput.includes(`name="${name}"`),`PPR-R4 AST target field missing ${name}`);
+assert.match(astInput,/PPR_R4_AST_TARGET_CONTEXT_INCOMPLETE/);
+assert.match(sharedUi,/astTargetContext/);
+assert.match(api,/resolveAstTargetContextInput/);assert.match(api,/astTargetContext/);
+assert.match(assembly,/astTargetContext=null/);assert.match(assembly,/targetContext:astTargetContext/);assert.match(assembly,/consentRecordId/);
+assert.match(astProduction,/targetContext=null/);assert.match(astProduction,/if\(targetComplete\(targetContext\)\)/);
+assert.equal(w17.currentFinding,'PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED'); // historical record
+assert.equal(w18.canonicalCustomerActivationState,'BLOCKED_BY_W17_SHARED_INPUT_REACHABILITY'); // historical record
+const recert=json(`${base}/acceptance/ast-cx-r3-w17-current-reachability-recertification-7c61264-v1.json`);
+assert.equal(recert.status,'CANONICAL_AST_TARGET_CONTEXT_REACHABILITY_RECERTIFIED');assert.equal(recert.historicalFindingRewritten,false);assert.equal(recert.expectedW24Proof.apiCases,240);assert.equal(recert.expectedW24Proof.timingAvailable,240);for(const v of Object.values(recert.boundaries))assert.equal(v,false);
 
 const fixture=json('content/professional/ast-full-production/fixtures/ast-fp-r4-professional-semantic-fixture-v1.json');
 const route=await buildPersonalRealityProductRoute({selectedKeys:['astrology'],results:[{ok:true,key:'astrology',spec:{methodCode:'ASTROLOGY'},canonicalProjection:fixture.inputProjection}],locale:'zh-Hans',intent:'work role direction'});
@@ -98,15 +100,16 @@ assert.doesNotMatch(surfaceSource,/executeAstTransitRequest|createAstronomyEngin
 assert.match(surfaceSource,/buildTimingActivationHtml/);
 assert.match(surfaceSource,/buildTechnicalDisclosureHtml/);
 const acceptance=json(`${base}/acceptance/ast-cx-r3-w17-w20-timing-technical-acceptance-v1.json`);
-assert.equal(acceptance.status,'ENGINEERING_ACCEPTED_WITH_CANONICAL_TIMING_ACTIVATION_BLOCKED');
+assert.equal(acceptance.status,'ENGINEERING_ACCEPTED_WITH_CANONICAL_TIMING_ACTIVATION_BLOCKED'); // historical W17-W20 acceptance remains immutable
 assert.equal(acceptance.w17CanonicalReachability,'PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED');
 assert.equal(acceptance.w18SpecialistPresentationReady,true);
 assert.equal(acceptance.w18CanonicalCustomerActivation,false);
+assert.equal(recert.status,'CANONICAL_AST_TARGET_CONTEXT_REACHABILITY_RECERTIFIED');
 assert.equal(acceptance.w19TechnicalDisclosurePassed,true);
 assert.equal(acceptance.w20RawCodeEliminationPassed,true);
 assert.equal(acceptance.pprR3SharedFilesModified,0);
 assert.equal(acceptance.sharedSingleMethodReadingModified,0);
 assert.equal(acceptance.otherMethodFilesModified,0);
 
-console.log('✓ AST-CX-R3 W17-W20 passed with one explicit boundary: W17 proves the frozen canonical PPR route does not yet carry AST targetContext, so W18 customer timing activation remains blocked rather than mutating PPR-R3.');
-console.log('  W18 timing presentation is engineering-ready for admitted temporal IR; W19 technical disclosure is progressive; W20 customer-visible raw enum/code leakage is 0 for the governed fixture.');
+console.log('✓ AST-CX-R3 W17-W20 passed: the historical W17 blocked finding is preserved, while the current PPR-R4/W10B successor chain now carries explicit AST targetContext into the existing ASTT runtime.');
+console.log('  W18 timing presentation remains renderer-only; W19 technical disclosure is progressive; W20 customer-visible raw enum/code leakage is 0 for the governed fixture. W24 supplies the 240/240 current-route timing proof.');
