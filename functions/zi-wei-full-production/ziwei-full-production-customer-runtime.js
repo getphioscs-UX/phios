@@ -24,6 +24,7 @@ import {resolveZiweiLiveTargetContext,projectZiweiTargetContextForDynamic} from 
 import {buildZiweiCurrentPublicationEnvelope} from './ziwei-current-publication-envelope-runtime.js';
 import {stableStringify} from '../zi-wei-runtime/zwr-utils.js';
 import {buildZiweiProfessionalTimingNavigation} from './ziwei-professional-timing-navigation-runtime.js';
+import {buildZiweiProfessionalChartDensity} from './ziwei-professional-chart-density-runtime.js';
 
 export const ZIWEI_CX_R1_FULL_PRODUCTION_CUSTOMER_RUNTIME_SCHEMA='PHI-OS-ZIWEI-CX-R1-FULL-PRODUCTION-CUSTOMER-RUNTIME-v1.0.0';
 const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);for(const x of Object.values(v))freeze(x)}return v};
@@ -79,6 +80,8 @@ export async function buildZiweiFullProductionCustomerRuntime({executionRequest,
   const interactiveSurface=buildZiweiInteractiveChartSurface({customerReport:report,locale:l});
   const topics=buildZiweiTopicReadings({customerReport:report,interactiveSurface,locale:l});
 
+  const chartProfessionalDensity=buildZiweiProfessionalChartDensity({chart,placement,canonicalInput:executionRequest.canonicalInput,locale:l});
+
   const professionalTimingNavigation=await buildZiweiProfessionalTimingNavigation({canonicalInput:executionRequest.canonicalInput,natalProjection:canonicalProjection,normalizedTarget,consentRecordId:executionRequest.consentRecordId,executionParameters:{traditionalCalculationSex:executionRequest.executionParameters?.traditionalCalculationSex},requestId:`${executionRequest.requestId}-ZIWEI-PRO-R2-W12`});
 
   const sourceDigests=freeze({
@@ -91,7 +94,7 @@ export async function buildZiweiFullProductionCustomerRuntime({executionRequest,
     interactiveSurfaceDigest:interactiveSurface.surfaceDigest,
     topicReadingDigest:topics.topicReadingDigest
   });
-  const publicationEnvelope=buildZiweiCurrentPublicationEnvelope({report,interactiveSurface,topics,targetContext:normalizedTarget,sourceDigests,professionalTimingNavigation,locale:l});
+  const publicationEnvelope=buildZiweiCurrentPublicationEnvelope({report,interactiveSurface,topics,targetContext:normalizedTarget,sourceDigests,professionalTimingNavigation,chartProfessionalDensity,locale:l});
   const base={
     schemaVersion:ZIWEI_CX_R1_FULL_PRODUCTION_CUSTOMER_RUNTIME_SCHEMA,
     work:'ZIWEI-CX-R1-W1-W4',
