@@ -29,7 +29,7 @@ export function adaptAstPersonalRealityProduct({workspace,locale=workspace?.loca
   ...(workspace.timing?.state&&workspace.timing.state!=='UNAVAILABLE'?[section({sectionId:'CURRENT_ACTIVATION',title:text(l,'Current activation','当前激活'),payload:workspace.timing,sourceRefs:list(workspace.timing?.sourceRefs)})]:[]),
   section({sectionId:'DETAILS',title:text(l,'Evidence & lineage','证据与来源'),payload:workspace.technical||null,kind:'EVIDENCE',sourceRefs:list(workspace.technical?.items).flatMap(x=>list(x.sourceRefs))})
  ];
- const specialistRenderer={rendererId:'PPR_R3_AST_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['METHOD_NAVIGATION_SLOT','NATAL_CHART_VISUAL','WHOLE_CHART_READING','TIMING','AST_CUSTOMER_PRODUCT_PROJECTION_V3','AST_PROFESSIONAL_IA','AST_NATAL_CHART_V2','AST_CHART_EXPLORER','AST_CORE_CONFIGURATION']};
+ const specialistRenderer={rendererId:'PPR_R3_AST_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['METHOD_NAVIGATION_SLOT','NATAL_CHART_VISUAL','WHOLE_CHART_READING','TIMING','AST_CUSTOMER_PRODUCT_PROJECTION_V3','AST_PROFESSIONAL_IA','AST_NATAL_CHART_V2','AST_CHART_EXPLORER','AST_CORE_CONFIGURATION','AST_PLANETS_HOUSES_EXPLORER','AST_ASPECT_PATTERN_NETWORK','AST_RULERSHIP_NETWORK','AST_ELEMENT_MODALITY_MATRIX']};
  const summary=v3?.overview?.readerSummary||workspace.overview?.readerSummary||workspace.overview?.summary||null;
  const chart=v3?.chart||workspace.chartModel||null;
  return buildMethodProductEnvelope({
