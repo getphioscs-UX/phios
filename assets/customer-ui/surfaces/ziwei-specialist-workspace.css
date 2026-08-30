@@ -12,3 +12,44 @@
 @media(max-width:560px){.cx-ziwei-specialist-hero,.cx-ziwei-specialist-section,.cx-ziwei-specialist-chart{border-radius:var(--cx-radius-md);padding:.8rem}.cx-ziwei-specialist-hero__anchors,.cx-ziwei-foundation-facts,.cx-ziwei-evidence-facts{grid-template-columns:1fr}.cx-ziwei-specialist-chart__grid{grid-template-rows:repeat(4,minmax(5.2rem,auto))}.cx-ziwei-specialist-chart>header p{font-size:.86rem}.cx-ziwei-specialist-inspector{padding:.8rem}.cx-ziwei-specialist-inspector h3{font-size:1.35rem}.cx-ziwei-topic-tabs{margin-inline:-.15rem;padding-inline:.15rem}}
 @media(max-width:400px){.cx-ziwei-specialist-chart__grid{gap:.22rem;grid-template-rows:repeat(4,minmax(4.8rem,auto))}.cx-ziwei-specialist-palace,.cx-ziwei-specialist-chart__center{padding:.34rem}.cx-ziwei-specialist-palace>strong{font-size:.7rem}.cx-ziwei-specialist-palace em{display:none}.cx-ziwei-specialist-chart__center strong{font-size:.62rem}.cx-ziwei-specialist-chart__center small{font-size:.5rem}}
 @media(prefers-reduced-motion:reduce){.cx-ziwei-specialist-workspace *{scroll-behavior:auto!important;transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}}
+
+/* ZIWEI-CX-R1-W17 — professional printable product. Print composes admitted customer content only. */
+.cx-ziwei-print-only{display:none}
+@media print{
+ @page{margin:14mm 13mm 16mm;size:auto}
+ html,body{background:#fff!important}
+ .cx-ziwei-print-only{display:block!important}
+ .cx-ziwei-print-cover{min-height:235mm;display:flex!important;flex-direction:column;justify-content:space-between;break-after:page;padding:20mm 8mm 12mm;color:#111;background:#fff}
+ .cx-ziwei-print-cover h1{max-width:22ch;margin:5mm 0 4mm;font:600 28pt/1.08 var(--cx-font-serif,Georgia,serif)}
+ .cx-ziwei-print-cover__summary{max-width:64ch;font-size:11pt;line-height:1.65}
+ .cx-ziwei-print-cover dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5mm;margin-top:14mm}
+ .cx-ziwei-print-cover dl>div{border-top:1px solid #999;padding-top:3mm}
+ .cx-ziwei-print-cover dt{font-size:8pt;color:#555}.cx-ziwei-print-cover dd{margin:1mm 0 0;font-size:10pt;font-weight:700}
+ .cx-ziwei-print-cover footer{font-size:8pt;color:#666}
+ .cx-ziwei-nav,.cx-ziwei-specialist-hero__actions,.cx-ziwei-topic-tabs,.cx-ziwei-overlap-list button{display:none!important}
+ .cx-ziwei-specialist-chart,.cx-ziwei-specialist-workspace,.cx-ziwei-specialist-technical{-webkit-print-color-adjust:exact;print-color-adjust:exact;color:#111;background:#fff}
+ .cx-ziwei-specialist-chart,.cx-ziwei-specialist-workspace{display:block!important;max-width:none;overflow:visible}
+ .cx-ziwei-specialist-chart{break-before:page;border:0;border-radius:0;padding:0;margin:0 0 8mm;background:#fff}
+ .cx-ziwei-specialist-chart__layout{display:block}.cx-ziwei-specialist-chart__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(28mm,auto));gap:2mm;margin-bottom:8mm}
+ .cx-ziwei-specialist-palace{min-height:0;padding:3mm;border:1px solid #aaa;border-radius:2mm;background:#fff;color:#111;box-shadow:none;break-inside:avoid}
+ .cx-ziwei-specialist-palace p,.cx-ziwei-specialist-palace small{display:block!important;font-size:7.5pt}.cx-ziwei-specialist-palace em{font-size:7pt}
+ .cx-ziwei-specialist-chart__center{padding:4mm;border:1px solid #777;border-radius:2mm;background:#f8f8f8;color:#111}
+ .cx-ziwei-specialist-chart__inspectors{position:static!important;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4mm}
+ .cx-ziwei-specialist-chart__inspectors [data-ziwei-inspector-index][hidden]{display:grid!important}
+ .cx-ziwei-specialist-inspector{display:grid!important;break-inside:avoid;border:1px solid #aaa;border-radius:2mm;background:#fff;padding:4mm;color:#111}
+ .cx-ziwei-specialist-inspector header{display:block}.cx-ziwei-specialist-tags{justify-content:flex-start;margin-top:2mm}
+ .cx-ziwei-specialist-inspector__copy p,.cx-ziwei-specialist-inspector dd{font-size:9.5pt;line-height:1.55}.cx-ziwei-specialist-inspector details{display:block!important}
+ .cx-ziwei-specialist-section,.cx-ziwei-specialist-hero{display:block;break-inside:auto;border:0;border-radius:0;box-shadow:none;background:#fff;color:#111;margin:0 0 8mm;padding:0}
+ .cx-ziwei-specialist-hero{break-before:page}.cx-ziwei-specialist-hero__anchors,.cx-ziwei-foundation-facts,.cx-ziwei-evidence-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:3mm}
+ .cx-ziwei-topic-panels [data-ziwei-topic-panel-index][hidden]{display:grid!important}.cx-ziwei-topic-panel{display:grid!important;break-inside:auto;margin:0 0 7mm;padding-bottom:5mm;border-bottom:1px solid #bbb}
+ .cx-ziwei-topic-palaces{grid-template-columns:1fr 1fr}.cx-ziwei-topic-palaces button{appearance:none;border:1px solid #bbb;background:#fff;color:#111;box-shadow:none;break-inside:avoid}
+ .cx-ziwei-patterns{grid-template-columns:repeat(2,minmax(0,1fr));gap:4mm}.cx-ziwei-patterns article{break-inside:avoid;background:#fff;border-color:#aaa}
+ .cx-ziwei-timing-lane{grid-template-columns:1fr auto 1fr auto 1fr;gap:3mm}.cx-ziwei-timing-arrow{transform:none!important}.cx-ziwei-timing-node,.cx-ziwei-cross-layer{break-inside:avoid;background:#fff;border-color:#aaa}
+ .cx-ziwei-open-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:3mm}.cx-ziwei-open-list article{break-inside:avoid;background:#fff;border-color:#aaa}
+ .cx-ziwei-specialist-workspace details:not([open])>*:not(summary),.cx-ziwei-specialist-technical:not([open])>*:not(summary){display:block!important}
+ .cx-ziwei-specialist-workspace details>summary,.cx-ziwei-specialist-technical>summary{display:none!important}
+ #ziwei-topics,#ziwei-patterns,#ziwei-timing{break-before:page}
+ .cx-ziwei-specialist-technical{display:block!important;break-before:page;border:0;padding:0;box-shadow:none;overflow:visible}
+ .cx-ziwei-specialist-technical pre{max-height:none;overflow:visible;border:1px solid #bbb;background:#fff;font-size:7.5pt;white-space:pre-wrap;word-break:break-word}
+ .cx-ziwei-specialist-workspace *,.cx-ziwei-specialist-chart *,.cx-ziwei-specialist-technical *{orphans:3;widows:3}
+}
