@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-HD-PRO-R3-W4-CURRENT-OWNER-RECONCILIATION-v1.0.0",
+  "work": "HD-PRO-R3-W4",
+  "baselineCommit": "90ddc484ffb603a1f3a10e50dc638a0526eac717",
+  "status": "SAME_OWNER_PATH_DRIFT_RECONCILED_NO_HD_OWNER_FORK",
+  "w0FreezeBaselineCommit": "dae24c1dd8de49a6c238ddffb8d52b388e8da10d",
+  "policy": {
+    "historicalW0FreezeRewritten": false,
+    "sameOwnerPathMayReconcileDigestOnNewMain": true,
+    "ownerPathMayChangeWithoutExplicitSuccessor": false,
+    "protectedR2AuthorityFilesRemainStrictlyFrozen": true,
+    "secondCustomerRendererCreated": false,
+    "secondCustomerRouteCreated": false
+  },
+  "reconciledOwners": [
+    {
+      "role": "customerRendererOwner",
+      "path": "assets/customer-ui/js/surfaces/personal-reality.js",
+      "w0FrozenSha256": "83899a7aaf6382b1d1395a0a68c9c4f5e8950852355b0e09cd5c02a7e5ca6952",
+      "currentMainSha256": "37428794e618dc6952dc52f624d222d6596d00e0ba26587330ec2b3d47762bd1",
+      "ownerPathChanged": false,
+      "reason": "Current main changed the existing shared customer surface while preserving the same canonical owner path. HD-PRO-R3 W4 does not create a replacement renderer or route."
+    },
+    {
+      "role": "customerRouteOwner",
+      "path": "perspectives/personal/index.html",
+      "w0FrozenSha256": "880ccf69ce172dbd615c47f70507f02351c66083ed4e6ebe9ae25cefeae897a9",
+      "currentMainSha256": "b787b38f0e47c34d71d01b1085752c2d6e48eb6b128d160b3cc17c4c4017ceb9",
+      "ownerPathChanged": false,
+      "reason": "Current main changed the existing shared customer surface while preserving the same canonical owner path. HD-PRO-R3 W4 does not create a replacement renderer or route."
+    }
+  ],
+  "publication": {
+    "r2State": "CUSTOMER_PUBLISHED",
+    "r3State": "SHADOW_CANDIDATE"
+  }
+}

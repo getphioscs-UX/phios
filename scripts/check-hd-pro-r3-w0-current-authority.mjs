@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 
 const ROOT='content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3';
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -24,12 +23,27 @@ assert.equal(map.hardBoundaries.atomicMeaningEqualsCustomerReading,false);
 assert.equal(map.hardBoundaries.automaticVariableOrPHSCalculationAllowed,false);
 assert.equal(map.hardBoundaries.r2HumanReviewMayAutoAdmitR3Semantics,false);
 
-const successorEligibleSharedOwners=new Set(['assets/customer-ui/js/surfaces/personal-reality.js','perspectives/personal/index.html']);
+const reconciliationPath=`${ROOT}/audit/HD-PRO-R3-W4-current-owner-reconciliation-v1.json`;
+const reconciliation=fs.existsSync(reconciliationPath)?readJson(reconciliationPath):null;
+const reconciledByRole=new Map((reconciliation?.reconciledOwners||[]).map(x=>[x.role,x]));
+if(reconciliation){
+  assert.equal(reconciliation.schemaVersion,'PHI-OS-HD-PRO-R3-W4-CURRENT-OWNER-RECONCILIATION-v1.0.0');
+  assert.equal(reconciliation.status,'SAME_OWNER_PATH_DRIFT_RECONCILED_NO_HD_OWNER_FORK');
+  assert.equal(reconciliation.policy.historicalW0FreezeRewritten,false);
+  assert.equal(reconciliation.policy.secondCustomerRendererCreated,false);
+  assert.equal(reconciliation.policy.secondCustomerRouteCreated,false);
+}
 for(const [role,record] of Object.entries(map.owners)){
   assert.equal(fs.existsSync(record.path),true,`${role} owner missing: ${record.path}`);
-  const currentDigest=sha(record.path);
-  if(record.sha256!==currentDigest&&successorEligibleSharedOwners.has(record.path))assertPprCurrentSharedOwner(record.path,{historicalDigest:record.sha256,label:`HD-PRO-R3-W0 ${role}`});
-  else assert.equal(record.sha256,currentDigest,`${role} owner drifted after W0 freeze without a registered successor`);
+  const currentSha=sha(record.path);
+  if(record.sha256!==currentSha){
+    const reconciled=reconciledByRole.get(role);
+    assert(reconciled,`${role} owner drifted after W0 freeze without successor reconciliation`);
+    assert.equal(reconciled.path,record.path,`${role} owner path changed during reconciliation`);
+    assert.equal(reconciled.w0FrozenSha256,record.sha256,`${role} reconciliation lost W0 frozen digest`);
+    assert.equal(reconciled.currentMainSha256,currentSha,`${role} reconciliation digest does not match current main`);
+    assert.equal(reconciled.ownerPathChanged,false,`${role} must remain the same canonical owner path`);
+  }
 }
 for(const item of protectedFiles.protectedFiles){
   assert.equal(fs.existsSync(item.path),true,`protected HD file missing: ${item.path}`);
