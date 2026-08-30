@@ -220,3 +220,17 @@
   .cx-ecr-spread__grid{grid-template-columns:repeat(3,1fr)}
   .cx-ecr-technical{break-before:page}
 }
+
+/* ECR product recovery: native system explanation + complete PHI Card display. */
+.cx-ecr-system-explainer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin:1rem 0}
+.cx-ecr-system-explainer article{padding:.9rem;border:1px solid var(--cx-line,#d8d3c7);border-radius:14px;background:color-mix(in srgb,var(--cx-accent,#9b6a16) 4%,var(--cx-surface,#fff));color:var(--cx-ink,#111)}
+.cx-ecr-system-explainer article strong{display:block;margin-bottom:.3rem;color:var(--cx-ink,#111)}
+.cx-ecr-system-explainer article p{margin:0;color:var(--cx-ink,#111)}
+.cx-ecr-spread__grid article{color:var(--cx-ink,#111)}
+.cx-ecr-spread__grid img{height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;background:var(--cx-surface,#fff)}
+.cx-ecr-spread__grid article>div{background:var(--cx-surface,#fff);color:var(--cx-ink,#111)}
+.cx-ecr-spread__grid h4,.cx-ecr-spread__grid p{color:var(--cx-ink,#111)}
+.cx-ecr-spread__grid small{color:var(--cx-muted,#6b675f)}
+@media(max-width:767px){.cx-ecr-system-explainer{grid-template-columns:1fr}.cx-ecr-spread__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.cx-ecr-spread__grid{display:grid;grid-auto-flow:row;grid-template-columns:1fr;overflow:visible;scroll-snap-type:none;padding-bottom:0}.cx-ecr-spread__grid article{scroll-snap-align:none}}
+@media(max-width:390px){.cx-ecr-spread__grid{grid-template-columns:1fr}}

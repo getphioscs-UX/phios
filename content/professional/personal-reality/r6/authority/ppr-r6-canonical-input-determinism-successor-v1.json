@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R6-CANONICAL-INPUT-DETERMINISM-SUCCESSOR-v1.0.0",
+  "work": "PPR-R6-CANONICAL-INPUT-DETERMINISM",
+  "baselineCommit": "0c5a4bc220131b5f468fddcbacb849f30b32e99a",
+  "status": "CANONICAL_INPUT_DETERMINISM_SUCCESSOR_IMPLEMENTED",
+  "canonicalRoute": "/perspectives/personal/",
+  "goal": "Freeze a confirmed birth-location snapshot once, reuse it across the canonical Personal Reality request, and remove device-now inference from Zi Wei timing so repeated identical inputs cannot silently change natal method results.",
+  "sharedFileSuccessorProof": {
+    "perspectives/personal/index.html": {
+      "predecessorSha256": "901f281ea71fa6e3c0e884a6504a297387aa78495992611b62422f04e42feab6",
+      "successorSha256": "e04e52de3161c7187ad5a636ea9942de9eedd7177b9ee6a2c31792c5b40cbc03",
+      "changeClass": "EXPLICIT_ZIWEI_TARGET_CONTEXT_COPY_AND_SOURCE_ONLY"
+    },
+    "assets/customer-ui/js/surfaces/personal-reality.js": {
+      "predecessorSha256": "a6a9df13a54c2cd66b792854df5e23aa5044294d84c47416b7411d75bc736659",
+      "successorSha256": "e7cda70f6878ef2b608c262d2c3b78f4daf07886bd5ea881291ab8e7fdb379fe",
+      "changeClass": "CONFIRMED_LOCATION_SNAPSHOT_TRANSPORT_AND_NO_DEVICE_NOW_ONLY"
+    },
+    "functions/api/customer-personal-reality.js": {
+      "predecessorSha256": "eedd72ed2fa5129f64b19788ba42da6bfd2141b8cb5c5da390db8378fb0a6822",
+      "successorSha256": "774377f95849e3ada48e84f33ece1e5ade8545a679fcf269809136edde0c8fc1",
+      "changeClass": "CONFIRMED_LOCATION_SNAPSHOT_CONSUMPTION_ONLY"
+    }
+  },
+  "supportingFiles": {
+    "functions/api/location-resolve.js": "6d3ddbb1002a78669017a0a13fcf119fd2e8920f5fd6bc964e5cb9d8e8505e13",
+    "functions/location/confirmed-birth-location-snapshot.js": "a4d7f0e151ddbdf48b024d83b0c5a907d482c9872abdd017060306bd989d282b",
+    "scripts/check-ppr-r6-canonical-input-determinism.mjs": "0d70ecca3cf921b56ea4424d3fd3fb2ccb6cdbab5144ce234103fc8befc2162a"
+  },
+  "determinismContract": {
+    "sameConfirmedBirthInputSameCanonicalLocation": true,
+    "providerResolvedAtExcludedFromSnapshot": true,
+    "repeatSubmitDoesNotRequeryPlaceProvider": true,
+    "browserNowInferenceAllowed": false,
+    "deviceTimezoneInferenceAllowedForZiweiTarget": false,
+    "explicitTimingMayChangeTimingLayer": true,
+    "explicitTimingMayChangeNatalBaseline": false
+  },
+  "methodScope": [
+    "AST",
+    "BZR",
+    "NUM",
+    "ZWR",
+    "ECR"
+  ],
+  "boundaries": {
+    "createsMeaning": false,
+    "createsCalculation": false,
+    "createsProjection": false,
+    "replacesSpecialistRendererAuthority": false,
+    "rewritesHistoricalFreeze": false,
+    "createsCurrentRealityAuthority": false
+  }
+}

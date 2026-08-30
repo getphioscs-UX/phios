@@ -13,6 +13,7 @@ import {maybeBuildProductionSingleMethodReading} from '../single-method-reading/
 import {executeAndProjectMcd5CurrentRequest} from '../method-client-delivery/canonical-projection-runtime-current.js';
 import {buildBaziMethodNativeReading} from '../personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {resolveBirthPlace} from '../location/place-resolver.js';
+import {consumeConfirmedBirthLocationSnapshot} from '../location/confirmed-birth-location-snapshot.js';
 import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production/ziwei-full-production-customer-runtime.js';
 import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
 import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
@@ -97,12 +98,10 @@ export function resolveAstTargetContextInput(body,selected=[]){
 }
 function ziweiTargetContextInput(body,selected){
   if(!selected.includes('ziwei'))return null;
-  return freeze({
-    targetDate:clean(body?.ziweiTargetDate),
-    targetTime:clean(body?.ziweiTargetTime),
-    targetTimezone:freeze({iana:clean(body?.ziweiTargetTimezoneIana),utcOffsetAtTarget:clean(body?.ziweiTargetUtcOffset)}),
-    source:clean(body?.ziweiTargetContextSource).toUpperCase()
-  });
+  const targetDate=clean(body?.ziweiTargetDate),targetTime=clean(body?.ziweiTargetTime),iana=clean(body?.ziweiTargetTimezoneIana),utcOffsetAtTarget=clean(body?.ziweiTargetUtcOffset),source=clean(body?.ziweiTargetContextSource).toUpperCase();
+  const supplied=[targetDate,targetTime,iana,utcOffsetAtTarget].filter(Boolean).length;
+  if(supplied===0)return null;
+  return freeze({targetDate,targetTime,targetTimezone:freeze({iana,utcOffsetAtTarget}),source:source||'EXPLICIT_REQUEST'});
 }
 function ziweiCompatibilityReadingMethod(spec,locale,fullProduct,projection){
   const report=fullProduct?.report;
@@ -291,8 +290,11 @@ export async function onRequestPost(context){
   context.customerIntent=body?.intent||null;
   let location=null;
   if(needsPlace){
-    try{location=await resolveBirthPlace(body.placeRef,{birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime),locale,env:context.env})}
-    catch(error){return json({ok:false,error:error?.code||'LOCATION_RESOLUTION_FAILED'},422)}
+    const snapshot=body?.birthLocationSnapshot||null;
+    try{
+      if(snapshot)location=consumeConfirmedBirthLocationSnapshot(snapshot,{providerRef:body.placeRef,birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime)});
+      else location=await resolveBirthPlace(body.placeRef,{birthDate:nullable(body.birthDate),birthTime:body?.birthTimeUnknown?null:nullable(body.birthTime),locale,env:context.env});
+    }catch(error){return json({ok:false,error:error?.code||'LOCATION_RESOLUTION_FAILED'},422)}
   }
   const consentRecordId=`CX-CONSENT-${crypto.randomUUID()}`;
   const input=canonicalInput(body,location,consentRecordId,locale);

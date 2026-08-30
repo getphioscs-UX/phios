@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {renderEcrReadingReport,renderEcrNavigation} from '../assets/customer-ui/js/specialists/ecr/reading-report-renderer.js';
+const t=p=>fs.readFileSync(p,'utf8');
+const product={methodId:'ECR',productType:'PHI_CONFIGURATION_READING',locale:'zh-Hans',sections:[{title:'基础结构',payload:{acceptedInterpretation:{plainLanguageExplanation:'受治理解释',observableSignals:['不应进入默认 ECR 页面'],openQuestions:['不应进入默认 ECR 页面'],alternativeInterpretations:['不应进入默认 ECR 页面'],confidenceBoundary:'不应进入默认 ECR 页面'},card:{}}}]};
+const cardVisual={payload:{cards:[{title:'聚焦',subtitle:'FOCUS',oneLineInsight:'把注意力带回当前结构。',asset:{objectKey:'cards/focus.webp'}}]}};
+const html=renderEcrReadingReport(product,cardVisual),nav=renderEcrNavigation(product),css=t('assets/customer-ui/surfaces/ecr-specialist.css'),calc=t('assets/customer-ui/js/specialists/ecr/calculation-story-renderer.js');
+assert.match(html,/六张 PHI Cards/);assert.match(html,/不是随机抽牌/);assert.match(html,/聚焦/);assert.doesNotMatch(html,/带回现实|现实对照问题|替代解释|观察提示|确定性边界/,'default ECR reading must not expand Reality Comparison evidence cards');
+assert.doesNotMatch(html,/顺畅表达|张力表达/,'empty flowing/strained sections must be suppressed');
+assert.doesNotMatch(nav,/现实对照/);assert.doesNotMatch(nav,/08 顺畅表达|09 张力表达/,'navigation must not point to suppressed empty sections');
+assert.match(css,/object-fit:contain!important/);assert.match(css,/aspect-ratio:auto!important/);assert.match(css,/grid-template-columns:1fr;overflow:visible/);
+for(const token of ['Solar Anchor v1','G1–G16 → Q1–Q16','R1–R9','M1–M8 → H1–H64','A1–A8','If you know Human Design'])assert.ok(calc.includes(token),`missing ECR native explanation token: ${token}`);
+for(const forbidden of ['Chiron as','multi-planet activation chart. It does not calculate'])void forbidden;
+assert.match(calc,/does not calculate Earth, Chiron, lunar nodes or a multi-planet activation chart/);
+console.log('✓ ECR Product R2 Solar Anchor explanation + PHI Card presentation passed.');
+console.log('  Solar Anchor v1 stays single-anchor; default Reality Comparison card wall is removed; empty flow/tension sections suppress; PHI Cards render complete and readable.');
