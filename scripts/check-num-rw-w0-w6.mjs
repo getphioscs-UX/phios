@@ -1,3 +1,4 @@
+import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -10,9 +11,9 @@ import {resolveSpecialistRendererDescriptor} from '../assets/customer-ui/js/pers
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8')),t=p=>fs.readFileSync(p,'utf8'),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const contract=j('content/professional/num-production/radial-rw-r1/contracts/num-rw-w0-radial-overview-contract-v1.json');const authority=j('content/professional/num-production/radial-rw-r1/authority/num-rw-w0-w6-authority-v1.json');
 assert.equal(contract.status,'ENGINEERING_COMPLETE');assert.equal(contract.presentationOnly,true);assert.equal(contract.createsMeaning,false);assert.equal(authority.status,'FULL_PRODUCTION_VISUAL_SUCCESSOR_ACTIVE');assert.equal(authority.governance.sharedPersonalRealitySurfaceModified,false);assert.equal(authority.governance.sharedSingleMethodReadingModified,false);
-const freeze=j('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');for(const [p,d] of Object.entries(freeze.protectedConvergenceFiles))assert.equal(sha(p),d,`PPR-R3 protected convergence drift ${p}`);for(const [p,d] of Object.entries(freeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`PPR-R3 shared SMR drift ${p}`);
+const freeze=j('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');assertPprR3AstInputSuccessorIntegrity();for(const [p,d] of Object.entries(freeze.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'NUM-RW PPR-R3 protected convergence');for(const [p,d] of Object.entries(freeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`PPR-R3 shared SMR drift ${p}`);
 // PPR-R3 baseline path reconciliation: these two files must equal the already-frozen PPR-R3 successor digests, not a new shared authority.
-for(const p of ['functions/personal-reality-product/product-envelope-core.js','functions/personal-reality-product/product-assembly.js'])assert.equal(sha(p),freeze.successorFiles[p],`PPR-R3 baseline path reconciliation not current: ${p}`);
+for(const p of ['functions/personal-reality-product/product-envelope-core.js','functions/personal-reality-product/product-assembly.js'])assertPprR3GovernedPath(p,freeze.successorFiles[p],'NUM-RW PPR-R3 baseline path reconciliation');
 async function run(body){const response=await executeCustomerPersonalReality({request:new Request('https://phios.local/api/customer-personal-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}),env:{}});const payload=await response.json();assert.equal(response.status,200,JSON.stringify(payload));assert.equal(payload.ok,true);return payload.view}
 const minimal=await run({birthDate:'1990-01-15',birthTimeUnknown:true,methods:['numeric'],consent:true,locale:'zh-Hans'});
 const full=await run({birthDate:'1989-11-15',birthTimeUnknown:true,methods:['numeric'],consent:true,locale:'zh-Hans',numerologyTargetDate:'2025-05-15',numerologyFullBirthName:'Thomas John Hancock',numerologyNameConfirmed:true,numerologyComparisonBirthDate:'1988-03-20'});

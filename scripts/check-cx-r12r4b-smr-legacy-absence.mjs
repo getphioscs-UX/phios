@@ -79,7 +79,10 @@ assert.doesNotMatch(production,/export async function maybeBuildProductionSingle
 const manifest=read(`${canonicalContent}/history/v1/legacy-smr-v1-evidence-manifest.json`);
 const pprR3FreezePath='content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json';
 const pprR3Freeze=exists(pprR3FreezePath)?read(pprR3FreezePath):null;
-const governedSuccessorDigests=new Map(Object.entries({...(pprR3Freeze?.protectedConvergenceFiles||{}),...(pprR3Freeze?.sharedSingleMethodReadingFiles||{}),...(pprR3Freeze?.successorFiles||{})}));
+const astInputSuccessorPath='content/professional/personal-reality/r3/authority/ppr-r3-w10a-ast-target-context-shared-input-successor-v1.json';
+const astInputSuccessor=exists(astInputSuccessorPath)?read(astInputSuccessorPath):null;
+const astInputSuccessorDigests=Object.fromEntries(Object.entries(astInputSuccessor?.authorizedFiles||{}).map(([p,r])=>[p,r.successorSha256]));
+const governedSuccessorDigests=new Map(Object.entries({...(pprR3Freeze?.protectedConvergenceFiles||{}),...(pprR3Freeze?.sharedSingleMethodReadingFiles||{}),...(pprR3Freeze?.successorFiles||{}),...astInputSuccessorDigests}));
 assert.equal(manifest.status,'HISTORICAL_EVIDENCE_ARCHIVED_LEGACY_IMPLEMENTATION_DELETED');
 assert.equal(manifest.policy.legacyRuntimeMayExecute,false);assert.equal(manifest.policy.historicalEvidenceImmutable,true);assert.equal(manifest.policy.archivedEvidenceMayBeUsedAsProductionAuthority,false);
 let archived=0,deleted=0,replaced=0;

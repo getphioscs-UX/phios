@@ -1,3 +1,5 @@
+import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
+import {resolveAstTargetContextInput} from '../functions/api/customer-personal-reality.js';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -18,7 +20,8 @@ globalThis.document={documentElement:{lang:'zh-Hans'}};
 
 // Frozen PPR-R3 remains byte-stable. AST may report a shared input need; it may not edit the host from this ticket.
 const pprFreeze=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
-const currentBaselineExpectedAbsent=new Set(['assets/customer-ui/js/surfaces/single-method-reading.js']);for(const [p,d] of Object.entries(pprFreeze.protectedConvergenceFiles)){if(currentBaselineExpectedAbsent.has(p)){assert.equal(fs.existsSync(p),false,`AST-CX-R3 W17-W20 retired baseline path unexpectedly restored: ${p}`);continue}assert.equal(sha(p),d,`AST-CX-R3 W17-W20 protected PPR drift: ${p}`)};
+assertPprR3AstInputSuccessorIntegrity();
+for(const [p,d] of Object.entries(pprFreeze.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'AST-CX-R3 protected PPR convergence');
 for(const [p,d] of Object.entries(pprFreeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`AST-CX-R3 W17-W20 shared SMR drift: ${p}`);
 for(const p of ['assets/customer-ui/js/personal-products/personal-product-renderers.js','assets/customer-ui/js/personal-products/specialist-renderer-host.js','assets/customer-ui/js/personal-products/specialist-renderer-registry.js','assets/customer-ui/surfaces/ppr-r3-specialist-host.css'])assert.equal(sha(p),pprFreeze.successorFiles[p],`AST-CX-R3 W17-W20 shared host drift: ${p}`);
 
@@ -26,9 +29,10 @@ const w17=json(`${base}/contracts/ast-cx-r3-w17-canonical-timing-reachability-co
 const w18=json(`${base}/contracts/ast-cx-r3-w18-timing-activation-contract-v1.json`);
 const w19=json(`${base}/contracts/ast-cx-r3-w19-technical-disclosure-contract-v1.json`);
 const w20=json(`${base}/contracts/ast-cx-r3-w20-raw-code-elimination-contract-v1.json`);
+const w17Resolution=json(`${base}/acceptance/ast-cx-r3-w17-shared-input-successor-resolution-v1.json`);
 for(const [doc,work] of [[w17,'AST-CX-R3-W17'],[w18,'AST-CX-R3-W18'],[w19,'AST-CX-R3-W19'],[w20,'AST-CX-R3-W20']]){assert.equal(doc.workCode,work);assert.equal(doc.baselineCommit,baseline)}
 
-// W17 — real canonical route audit. Inputs exist in frozen HTML, but the frozen orchestrator/API/product assembly do not carry them into AST.
+// W17 — preserve the historical gate result, then prove the separately authorized PPR-R3 W10A successor resolves it.
 const html=text('perspectives/personal/index.html');
 const sharedUi=text('assets/customer-ui/js/surfaces/personal-reality.js');
 const api=text('functions/api/customer-personal-reality.js');
@@ -36,16 +40,31 @@ const assembly=text('functions/personal-reality-product/product-assembly.js');
 const astProduction=text('functions/ast-full-production/ast-customer-reading-production.js');
 for(const name of ['astTargetDate','astTargetTime','astTargetTimezone','astTargetUtcOffsetAtTarget'])assert(html.includes(`name="${name}"`),`existing AST target field missing ${name}`);
 assert.match(html,/data-cx-ast-target-input hidden/);
-assert.doesNotMatch(sharedUi,/astTargetContext/);
-assert.doesNotMatch(sharedUi,/fd\.get\('astTargetDate'\)|fd\.get\("astTargetDate"\)/);
-assert.doesNotMatch(api,/astTargetContext/);
-assert.doesNotMatch(assembly,/astTargetContext/);
-assert.match(assembly,/buildAstCustomerWorkspaceCandidate\(\{canonicalProjection:ast\.canonicalProjection,rawIntent:intent\|\|'',locale,sourceMainCommit:/);
-assert.doesNotMatch(assembly,/buildAstCustomerWorkspaceCandidate\(\{[^}]*targetContext/s);
+assert.match(sharedUi,/astTargetContext/);
+assert.match(sharedUi,/const astTargetValues=\['astTargetDate','astTargetTime','astTargetTimezone','astTargetUtcOffsetAtTarget'\]/);
+assert.match(sharedUi,/map\(name=>String\(fd\.get\(name\)/);
+assert.match(api,/resolveAstTargetContextInput/);
+assert.match(api,/astTargetContext/);
+assert.match(assembly,/astTargetContext=null/);
+assert.match(assembly,/targetContext:astTargetContext/);
+assert.match(assembly,/consentRecordId/);
 assert.match(astProduction,/targetContext=null/);
 assert.match(astProduction,/if\(targetComplete\(targetContext\)\)/);
-assert.equal(w17.currentFinding,'PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED');
-assert.equal(w18.canonicalCustomerActivationState,'BLOCKED_BY_W17_SHARED_INPUT_REACHABILITY');
+assert.equal(w17.currentFinding,'PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED'); // historical gate remains truthful
+assert.equal(w18.canonicalCustomerActivationState,'BLOCKED_BY_W17_SHARED_INPUT_REACHABILITY'); // historical contract remains immutable
+assert.equal(w17Resolution.status,'CANONICAL_TIMING_REACHABILITY_RESOLVED');
+assert.equal(w17Resolution.historicalGateFinding,w17.currentFinding);
+assert.equal(w17Resolution.currentReachability,'CANONICAL_AST_TARGET_CONTEXT_REACHABLE');
+assert.equal(w17Resolution.w18.canonicalCustomerActivation,true);
+assert.equal(w17Resolution.w18.liveBrowserHumanAcceptanceClaimedByThisSuccessor,false);
+for(const value of Object.values(w17Resolution.boundaries))assert.equal(value,false);
+
+// Shared API input normalization is explicit and fail-closed.
+assert.equal(resolveAstTargetContextInput({},['astrology']),null);
+assert.throws(()=>resolveAstTargetContextInput({astTargetContext:{targetDate:'2026-08-30'}},['astrology']),e=>e?.code==='AST_CX_R3_TARGET_CONTEXT_INCOMPLETE');
+assert.throws(()=>resolveAstTargetContextInput({astTargetContext:{targetDate:'2026-08-30',targetTime:'09:30',targetTimezone:{iana:'NOT/A_ZONE',utcOffsetAtTarget:'+08:00'}}},['astrology']),e=>e?.code==='AST_CX_R3_TARGET_TIMEZONE_INVALID');
+const normalizedTarget=resolveAstTargetContextInput({astTargetContext:{targetDate:'2026-08-30',targetTime:'09:30',targetTimezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtTarget:'+08:00'}}},['astrology']);
+assert.deepEqual(normalizedTarget,{targetDate:'2026-08-30',targetTime:'09:30:00',targetTimezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtTarget:'+08:00'}});
 
 const fixture=json('content/professional/ast-full-production/fixtures/ast-fp-r4-professional-semantic-fixture-v1.json');
 const route=await buildPersonalRealityProductRoute({selectedKeys:['astrology'],results:[{ok:true,key:'astrology',spec:{methodCode:'ASTROLOGY'},canonicalProjection:fixture.inputProjection}],locale:'zh-Hans',intent:'work role direction'});
@@ -56,6 +75,20 @@ const unavailableTiming=buildTimingActivationHtml(p);
 assert.match(unavailableTiming,/本命读取已经准备好；当前激活尚未附加/);
 assert.match(unavailableTiming,/不会从浏览器或服务器时钟自行推断/);
 assert.doesNotMatch(unavailableTiming,/AST_TEMPORAL_AUTHORITY_NOT_SUPPLIED|PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED/);
+
+// W17 successor executable witness: an accepted natal projection + the explicit target reaches the existing ASTT chain.
+const acceptedTransitProjection=structuredClone(fixture.inputProjection);
+acceptedTransitProjection.projection={...acceptedTransitProjection.projection,productionResult:true,clientRenderable:true};
+acceptedTransitProjection.execution={...(acceptedTransitProjection.execution||{}),mpaDecision:{authorityOwner:'MPA',decision:'ELIGIBLE',dispatchAllowed:true}};
+acceptedTransitProjection.evidence=[...(acceptedTransitProjection.evidence||[]),{type:'PRODUCTION_DISPATCH_AUTHORITY',status:'AVAILABLE'}];
+const transitBodies=['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
+const transitLongitude={Sun:10,Moon:65,Mercury:120,Venus:180,Mars:90,Jupiter:240,Saturn:300,Uranus:45,Neptune:150,Pluto:330};
+const astronomyWitness=Object.freeze({Body:Object.freeze(Object.fromEntries(transitBodies.map(name=>[name,name]))),MakeTime(date){return {ut:(date.valueOf()/86400000)-10957.5,tt:(date.valueOf()/86400000)-10957.4992}},GeoVector(body,date){return {x:1,y:0,z:0,body,date}},Ecliptic(vector){return {elon:transitLongitude[vector.body]??0,elat:0}},SearchSunLongitude(){return {date:new Date('2026-02-04T00:00:00Z')}}});
+const liveTimedBundle=await buildAstCustomerWorkspaceCandidate({canonicalProjection:acceptedTransitProjection,rawIntent:'work role direction',locale:'zh-Hans',targetContext:normalizedTarget,consentRecordId:'AST-CX-R3-W17-SUCCESSOR-WITNESS',astronomyModuleLoader:async()=>astronomyWitness,sourceMainCommit:w17Resolution.sourceBaselineCommit});
+assert.equal(liveTimedBundle.customerProductProjection.timing.state,'AVAILABLE');
+assert.equal(liveTimedBundle.customerProductProjection.timing.owner,'ASTT_GOVERNED_TEMPORAL_READING_IR');
+assert.equal(liveTimedBundle.temporalIR?.customerPublicationAllowed,true);
+assert.ok(liveTimedBundle.astt?.projection?.projectionId?.startsWith('ASTT-'));
 
 // W18 — specialist presentation is complete behind the gate. Use a governed temporal-IR-shaped synthetic witness; no renderer calculation is allowed.
 const bundle=await buildAstCustomerWorkspaceCandidate({canonicalProjection:fixture.inputProjection,rawIntent:'work role direction',locale:'zh-Hans',sourceMainCommit:baseline});
@@ -100,7 +133,7 @@ assert.doesNotMatch(surfaceSource,/executeAstTransitRequest|createAstronomyEngin
 assert.match(surfaceSource,/buildTimingActivationHtml/);
 assert.match(surfaceSource,/buildTechnicalDisclosureHtml/);
 const acceptance=json(`${base}/acceptance/ast-cx-r3-w17-w20-timing-technical-acceptance-v1.json`);
-assert.equal(acceptance.status,'ENGINEERING_ACCEPTED_WITH_CANONICAL_TIMING_ACTIVATION_BLOCKED');
+assert.equal(acceptance.status,'ENGINEERING_ACCEPTED_WITH_CANONICAL_TIMING_ACTIVATION_BLOCKED'); // historical acceptance retained
 assert.equal(acceptance.w17CanonicalReachability,'PPR_R3_SHARED_INPUT_EXTENSION_REQUIRED');
 assert.equal(acceptance.w18SpecialistPresentationReady,true);
 assert.equal(acceptance.w18CanonicalCustomerActivation,false);
@@ -109,6 +142,8 @@ assert.equal(acceptance.w20RawCodeEliminationPassed,true);
 assert.equal(acceptance.pprR3SharedFilesModified,0);
 assert.equal(acceptance.sharedSingleMethodReadingModified,0);
 assert.equal(acceptance.otherMethodFilesModified,0);
+assert.equal(w17Resolution.boundaries.historicalAstW17GateRewritten,false);
+assert.equal(w17Resolution.boundaries.historicalAstW18ContractRewritten,false);
 
-console.log('✓ AST-CX-R3 W17-W20 passed with one explicit boundary: W17 proves the frozen canonical PPR route does not yet carry AST targetContext, so W18 customer timing activation remains blocked rather than mutating PPR-R3.');
-console.log('  W18 timing presentation is engineering-ready for admitted temporal IR; W19 technical disclosure is progressive; W20 customer-visible raw enum/code leakage is 0 for the governed fixture.');
+console.log('✓ AST-CX-R3 W17-W20 passed: the historical W17 gate remains immutable, and authorized PPR-R3 W10A now carries explicit AST targetContext through the canonical route into the existing ASTT runtime.');
+console.log('  W18 canonical timing is engineering-reachable only when all explicit target fields are supplied; natal-only remains fail-closed. W19/W20 remain passed; no new live-browser human acceptance is claimed.');

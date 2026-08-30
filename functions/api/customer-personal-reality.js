@@ -79,6 +79,22 @@ function validateNumerologyExpansionRequest(body,selected){
   if(body?.numerologyNameConfirmed===true&&!name)return 'NUM_CX_CONFIRMED_NAME_REQUIRED';
   return null;
 }
+function validClockTime(value){return /^(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d)?$/.test(clean(value))}
+function validUtcOffset(value){return /^[+-](?:0\d|1[0-4]):[0-5]\d$/.test(clean(value))}
+function validIanaTimezone(value){const iana=clean(value);if(!iana)return false;try{new Intl.DateTimeFormat('en-US',{timeZone:iana}).format(new Date(0));return true}catch{return false}}
+export function resolveAstTargetContextInput(body,selected=[]){
+  if(!selected.includes('astrology'))return null;
+  const targetDate=clean(body?.astTargetContext?.targetDate),rawTime=clean(body?.astTargetContext?.targetTime),iana=clean(body?.astTargetContext?.targetTimezone?.iana),utcOffsetAtTarget=clean(body?.astTargetContext?.targetTimezone?.utcOffsetAtTarget);
+  const supplied=[targetDate,rawTime,iana,utcOffsetAtTarget].filter(Boolean).length;
+  if(supplied===0)return null;
+  if(supplied!==4){const e=new Error('AST_CX_R3_TARGET_CONTEXT_INCOMPLETE');e.code='AST_CX_R3_TARGET_CONTEXT_INCOMPLETE';e.status=422;throw e}
+  if(!isoDate(targetDate)){const e=new Error('AST_CX_R3_TARGET_DATE_INVALID');e.code='AST_CX_R3_TARGET_DATE_INVALID';e.status=422;throw e}
+  if(!validClockTime(rawTime)){const e=new Error('AST_CX_R3_TARGET_TIME_INVALID');e.code='AST_CX_R3_TARGET_TIME_INVALID';e.status=422;throw e}
+  if(!validIanaTimezone(iana)){const e=new Error('AST_CX_R3_TARGET_TIMEZONE_INVALID');e.code='AST_CX_R3_TARGET_TIMEZONE_INVALID';e.status=422;throw e}
+  if(!validUtcOffset(utcOffsetAtTarget)){const e=new Error('AST_CX_R3_TARGET_UTC_OFFSET_INVALID');e.code='AST_CX_R3_TARGET_UTC_OFFSET_INVALID';e.status=422;throw e}
+  const targetTime=rawTime.length===5?`${rawTime}:00`:rawTime;
+  return freeze({targetDate,targetTime,targetTimezone:freeze({iana,utcOffsetAtTarget})});
+}
 function ziweiTargetContextInput(body,selected){
   if(!selected.includes('ziwei'))return null;
   return freeze({
@@ -285,6 +301,8 @@ export async function onRequestPost(context){
 
   const parameters=executionParameters(body);
   const numExpansionInput=numerologyExpansionInput(body);
+  let astTargetContext=null;
+  try{astTargetContext=resolveAstTargetContextInput(body,selected)}catch(error){return json({ok:false,error:error?.code||'AST_CX_R3_TARGET_CONTEXT_INVALID'},error?.status||422)}
   const ziweiTargetContextRaw=ziweiTargetContextInput(body,selected);
   let ziweiTargetContext=null;
   if(ziweiTargetContextRaw){try{ziweiTargetContext=resolveZiweiLiveTargetContext(ziweiTargetContextRaw)}catch(error){return json({ok:false,error:error?.code||'ZIWEI_CX_R1_TARGET_CONTEXT_INVALID'},error?.status||422)}}
@@ -333,7 +351,7 @@ export async function onRequestPost(context){
   const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
-  const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||''});
+  const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
   const crossPerspectiveReading=combinedReading;
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
   const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading});

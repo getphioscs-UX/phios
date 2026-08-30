@@ -1,3 +1,4 @@
+import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -14,7 +15,8 @@ const base='content/professional/ast-full-production/customer-product-v3';
 globalThis.document={documentElement:{lang:'zh-Hans'}};
 
 const pprFreeze=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
-const astCxCurrentBaselineAbsent=new Set(['assets/customer-ui/js/surfaces/single-method-reading.js']);for(const [p,d] of Object.entries(pprFreeze.protectedConvergenceFiles)){if(astCxCurrentBaselineAbsent.has(p)){assert.equal(fs.existsSync(p),false,`AST-CX-R3 current baseline retired path unexpectedly restored: ${p}`);continue}assert.equal(sha(p),d,`AST-CX-R3 W5-W8 protected PPR drift: ${p}`)};
+assertPprR3AstInputSuccessorIntegrity();
+for(const [p,d] of Object.entries(pprFreeze.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'AST-CX-R3 protected PPR convergence');
 for(const [p,d] of Object.entries(pprFreeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`AST-CX-R3 W5-W8 shared SMR drift: ${p}`);
 for(const p of ['assets/customer-ui/js/personal-products/personal-product-renderers.js','assets/customer-ui/js/personal-products/specialist-renderer-host.js','assets/customer-ui/js/personal-products/specialist-renderer-registry.js','assets/customer-ui/surfaces/ppr-r3-specialist-host.css'])assert.equal(sha(p),pprFreeze.successorFiles[p],`AST-CX-R3 W5-W8 shared PPR-R3 host drift: ${p}`);
 

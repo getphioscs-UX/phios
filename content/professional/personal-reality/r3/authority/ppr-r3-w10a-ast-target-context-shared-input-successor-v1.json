@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R3-W10A-AST-TARGET-CONTEXT-SHARED-INPUT-SUCCESSOR-v1.0.0",
+  "workCode": "PPR-R3-W10A",
+  "sourceBaselineCommit": "492ecdddc1f84e5a915f416c60c61ed23e4fcb7f",
+  "status": "AUTHORIZED_SHARED_INPUT_SUCCESSOR_IMPLEMENTED",
+  "predecessorFreeze": "content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json",
+  "authorization": "User explicitly authorized the minimal shared PPR input extension required by AST-CX-R3 W17.",
+  "goal": "Carry one explicit, optional Astrology targetContext through the canonical Personal Reality route into the already-governed ASTT runtime without creating calculation, meaning, forecast, or current-reality authority in shared PPR.",
+  "canonicalPath": [
+    "/perspectives/personal/",
+    "assets/customer-ui/js/surfaces/personal-reality.js",
+    "POST /api/customer-personal-reality",
+    "functions/personal-reality-product/product-assembly.js",
+    "buildAstCustomerWorkspaceCandidate()",
+    "executeAstTransitRequest()",
+    "ASTT governed temporal reading"
+  ],
+  "targetContextShape": {
+    "targetDate": "YYYY-MM-DD",
+    "targetTime": "HH:mm:ss",
+    "targetTimezone": {
+      "iana": "IANA",
+      "utcOffsetAtTarget": "+08:00"
+    }
+  },
+  "authorizedFiles": {
+    "assets/customer-ui/js/surfaces/personal-reality.js": {
+      "predecessorSha256": "88e730714d505692e09382f31de1b30dbf43c53a6ea7bc81c694dc5ffc69bfb0",
+      "successorSha256": "ce62d529148ac07faadf6114e822e4bfbfe1279609f16283982c16f3f3be72a1",
+      "changeClass": "AST_TARGET_CONTEXT_VISIBILITY_VALIDATION_SERIALIZATION_ONLY",
+      "createsMeaning": false,
+      "createsCalculation": false,
+      "createsProjection": false,
+      "createsCurrentReality": false
+    },
+    "functions/api/customer-personal-reality.js": {
+      "predecessorSha256": "12ad48f7cdea156b86f3b75f682d3ffc09cc80a270633af0b798089bb43a292a",
+      "successorSha256": "eedd72ed2fa5129f64b19788ba42da6bfd2141b8cb5c5da390db8378fb0a6822",
+      "changeClass": "AST_TARGET_CONTEXT_VALIDATION_CONSUMPTION_TRANSPORT_ONLY",
+      "createsMeaning": false,
+      "createsCalculation": false,
+      "createsProjection": false,
+      "createsCurrentReality": false
+    },
+    "functions/personal-reality-product/product-assembly.js": {
+      "predecessorSha256": "2664b4ff349b58b631896de25ef5b8cc336d22e49dba9c9d9b548074802b9df2",
+      "successorSha256": "175a8b4da37fa5c71f8ac136ae2d709c0b06babf149a1115b201285f060977e7",
+      "changeClass": "AST_TARGET_CONTEXT_AND_CONSENT_PASS_THROUGH_ONLY",
+      "createsMeaning": false,
+      "createsCalculation": false,
+      "createsProjection": false,
+      "createsCurrentReality": false
+    }
+  },
+  "unchangedExistingInputMarkup": "perspectives/personal/index.html#data-cx-ast-target-input",
+  "w17SuccessorVerdict": "CANONICAL_AST_TARGET_CONTEXT_REACHABLE",
+  "w18CanonicalCustomerActivation": "ENABLED_WHEN_EXPLICIT_TARGET_CONTEXT_IS_COMPLETE",
+  "boundaries": {
+    "historicalFreezeRecordRewritten": false,
+    "newAstCalculator": false,
+    "newTransitCalculator": false,
+    "browserTransitCalculation": false,
+    "browserClockInference": false,
+    "serverClockInference": false,
+    "sharedPprMeaningAuthorityCreated": false,
+    "sharedPprForecastAuthorityCreated": false,
+    "sharedPprCurrentRealityAuthorityCreated": false,
+    "otherMethodInputSemanticsChanged": false,
+    "sharedSingleMethodReadingModified": false
+  },
+  "failClosedRules": [
+    "Astrology target context is optional.",
+    "Zero of four fields means natal-only Astrology.",
+    "One to three supplied fields returns AST_CX_R3_TARGET_CONTEXT_INCOMPLETE.",
+    "Four supplied fields are syntax/timezone validated before product assembly.",
+    "No current time, timezone, or target moment is inferred by PPR."
+  ]
+}

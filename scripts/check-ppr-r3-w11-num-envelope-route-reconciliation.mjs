@@ -1,3 +1,4 @@
+import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -8,7 +9,7 @@ const json=p=>JSON.parse(read(p));
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(new URL(`../${p}`,import.meta.url))).digest('hex');
 const authority=json('content/professional/personal-reality/r3/authority/ppr-r3-w11-num-envelope-route-reconciliation-v1.json');
 assert.equal(authority.status,'FROZEN_ROUTE_RECONCILIATION_ACTIVE');
-assert.equal(sha('functions/personal-reality-product/product-assembly.js'),authority.expected.productAssemblySha256);
+assertPprR3AstInputSuccessorIntegrity();assertPprR3GovernedPath('functions/personal-reality-product/product-assembly.js',authority.expected.productAssemblySha256,'PPR-R3 W11 product assembly');
 assert.equal(sha('functions/personal-reality-product/product-envelope-core.js'),authority.expected.productEnvelopeCoreSha256);
 const assembly=read('functions/personal-reality-product/product-assembly.js');
 assert.match(assembly,/projectNumerologyEnvelopeForCustomer/);
@@ -22,7 +23,7 @@ assert.equal(route.primaryProduct?.sourceProduct?.schemaVersion,authority.expect
 assert.equal(Object.hasOwn(route.primaryProduct.sourceProduct,'canonicalProjection'),false);
 assert.equal(resolveSpecialistRendererDescriptor(route.primaryProduct)?.rendererId,authority.expected.rendererId);
 const w10=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
-for(const [p,d] of Object.entries(w10.protectedConvergenceFiles))assert.equal(sha(p),d,`PPR-R3 protected convergence drift: ${p}`);
+for(const [p,d] of Object.entries(w10.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'PPR-R3 W11 protected convergence');
 for(const [p,d] of Object.entries(w10.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`PPR-R3 shared SMR drift: ${p}`);
 console.log('✓ PPR-R3 W11 NUM customer-envelope route reconciliation passed.');
 console.log('  NUM specialist sourceProduct now carries the public customer envelope, not the raw integrated-reading IR, while protected convergence and shared SMR files remain byte-stable.');

@@ -1,3 +1,4 @@
+import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -25,11 +26,8 @@ function assertRetiredBaselineFile(p,label){
  assert(fs.existsSync(retired.canonicalSurfaceWitness),`${label} canonical surface witness missing: ${retired.canonicalSurfaceWitness}`);
  const surface=t(retired.canonicalSurfaceWitness);assert.doesNotMatch(surface,/single-method-reading\.js/,`${label} canonical surface still references retired renderer: ${p}`);assert.match(surface,/renderProductRoute/,`${label} canonical surface does not witness the PPR product route: ${p}`);
 }
-for(const [p,d] of Object.entries(freeze.protectedConvergenceFiles)){
- if(!fs.existsSync(p)){assertRetiredBaselineFile(p,'W10 protected convergence');continue;}
- const current=sha(p);if(current===d)continue;
- const successor=ecrMandalaSuccessor?.protectedSuccessors?.[p];assert(successor,`W10 protected drift without governed successor ${p}`);assert.equal(successor.predecessorSha256,d,`W10 protected successor predecessor mismatch ${p}`);assert.equal(successor.successorSha256,current,`W10 protected successor digest drift ${p}`);const admittedClass=p==='perspectives/personal/index.html'?'ECR_BRAND_ASSET_CORRECTION_ONLY':p==='assets/customer-ui/js/surfaces/personal-reality.js'?'BASELINE_RETIRED_RENDERER_DANGLING_IMPORT_REMOVAL_ONLY':null;assert.equal(successor.changeClass,admittedClass,`W10 protected successor class not admitted ${p}`);
-}
+assertPprR3AstInputSuccessorIntegrity();
+for(const [p,d] of Object.entries(freeze.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'PPR-R3 W10 protected convergence');
 for(const [p,d] of Object.entries(freeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`W10 SMR drift ${p}`);
 // W10 freezes the shared PPR-R3 host. Its own successor rule explicitly permits
 // method-owned specialist adapters/renderers to evolve behind the approved port.
@@ -42,13 +40,7 @@ const methodOwnedOrGovernanceSuccessor=p=>
 for(const [p,d] of Object.entries(freeze.successorFiles)){
   assert(fs.existsSync(p),`W10 successor file missing ${p}`);
   if(methodOwnedOrGovernanceSuccessor(p))continue;
-  const current=sha(p);if(current===d)continue;
-  const successor=ecrMandalaSuccessor?.protectedSuccessors?.[p];
-  assert(successor,`W10 frozen shared-host drift without governed successor ${p}`);
-  assert.equal(successor.predecessorSha256,d,`W10 successor predecessor mismatch ${p}`);
-  assert.equal(successor.successorSha256,current,`W10 successor digest drift ${p}`);
-  assert.equal(successor.changeClass,'ECR_MANDALA_PROJECTION_WIRING_ONLY',`W10 successor class not admitted ${p}`);
-  assert.equal(successor.forbiddenAuthorityCreation,true,`W10 successor must prohibit authority creation ${p}`);
+  assertPprR3GovernedPath(p,d,'PPR-R3 W10 frozen shared-host');
 }
 assert.equal(freeze.successorRule,'Future specialist work must use the governed renderer registry and method-owned modules. Shared host changes require a later PPR successor; CX-R12R4B report authorities remain separate.');assert.equal(freeze.summary.protectedConvergenceFilesModified,0);assert.equal(freeze.summary.sharedSingleMethodReadingFilesModified,0);assert.equal(freeze.summary.specialistRendererCount,5);
 const manifest=j(`${base}/manifest/ppr-r3-w0-w10-manifest-v1.json`);assert.equal(manifest.status,'W0_W10_ENGINEERING_COMPLETE');assert.equal(manifest.works.length,11);assert(manifest.works.every(x=>x.status==='ENGINEERING_COMPLETE'));
