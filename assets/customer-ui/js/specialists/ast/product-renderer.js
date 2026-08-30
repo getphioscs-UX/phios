@@ -1,3 +1,29 @@
+import {buildAstrologySpecialistSurfaceV3,installAstrologySpecialistInteractions} from './ast-specialist-surface-v3.js';
 import {buildAstrologyWorkspaceHtml,installAstrologyWorkspaceInteractions} from '../../surfaces/astrology-workspace.js';
-export function renderAstrologyProduct({product}={}){const workspace=product?.sourceProduct;if(workspace?.schemaVersion!=='PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0'||workspace?.surfaceCutoverActive!==true)return Object.freeze({status:'NOT_HANDLED',reason:'AST_SPECIALIST_WORKSPACE_UNAVAILABLE'});const readingHtml=buildAstrologyWorkspaceHtml(workspace);if(!readingHtml)return Object.freeze({status:'NOT_HANDLED',reason:'AST_SPECIALIST_HTML_EMPTY'});return Object.freeze({status:'RENDERED',navigationHtml:'',visualHtml:'',readingHtml,afterMount:mount=>installAstrologyWorkspaceInteractions(mount?.reading,workspace)});}
+
+const CSS_HREF='/assets/customer-ui/surfaces/astrology-specialist-v3.css';
+function ensureCss(doc=globalThis.document){
+  if(!doc?.head)return null;
+  let link=doc.querySelector?.('link[data-ast-cx-r3-css="true"]');
+  if(link)return link;
+  link=doc.createElement('link');link.rel='stylesheet';link.href=CSS_HREF;link.dataset.astCxR3Css='true';doc.head.appendChild(link);return link;
+}
+function v3Of(product){
+  const p=product?.sourceProduct?.customerProductProjection;
+  return p?.schemaVersion==='PHI-OS-AST-CUSTOMER-PRODUCT-PROJECTION-v3.0.0'?p:null;
+}
+function legacyCompatibilityPlan(workspace){
+  if(workspace?.schemaVersion!=='PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0'||workspace?.surfaceCutoverActive!==true)return Object.freeze({status:'NOT_HANDLED',reason:'AST_CUSTOMER_PRODUCT_V3_UNAVAILABLE'});
+  const readingHtml=buildAstrologyWorkspaceHtml(workspace);
+  if(!readingHtml)return Object.freeze({status:'NOT_HANDLED',reason:'AST_SPECIALIST_HTML_EMPTY'});
+  return Object.freeze({status:'RENDERED',navigationHtml:'',visualHtml:'',readingHtml,compatibilityOnly:true,afterMount:mount=>installAstrologyWorkspaceInteractions(mount?.reading,workspace)});
+}
+export function renderAstrologyProduct({product,mount}={}){
+  const projection=v3Of(product);
+  if(!projection)return legacyCompatibilityPlan(product?.sourceProduct);
+  ensureCss(mount?.host?.ownerDocument||globalThis.document);
+  const plan=buildAstrologySpecialistSurfaceV3(projection);
+  if(plan.status!=='RENDERED')return plan;
+  return Object.freeze({...plan,compatibilityOnly:false,afterMount:slots=>installAstrologySpecialistInteractions(slots?.host,projection)});
+}
 export default Object.freeze({renderAstrologyProduct});
