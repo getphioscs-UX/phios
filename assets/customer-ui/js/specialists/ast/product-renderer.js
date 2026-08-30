@@ -12,6 +12,10 @@ function v3Of(product){
   const p=product?.sourceProduct?.customerProductProjection;
   return p?.schemaVersion==='PHI-OS-AST-CUSTOMER-PRODUCT-PROJECTION-v3.0.0'?p:null;
 }
+function experienceOf(product){
+  const x=product?.sourceProduct?.customerExperienceProjection;
+  return x?.schemaVersion==='PHI-OS-AST-CX-R3-CUSTOMER-EXPERIENCE-PROJECTION-v1.0.0'?x:null;
+}
 function legacyCompatibilityPlan(workspace){
   if(workspace?.schemaVersion!=='PHI-OS-AST-INTERACTIVE-WORKSPACE-v1.0.0'||workspace?.surfaceCutoverActive!==true)return Object.freeze({status:'NOT_HANDLED',reason:'AST_CUSTOMER_PRODUCT_V3_UNAVAILABLE'});
   const readingHtml=buildAstrologyWorkspaceHtml(workspace);
@@ -22,8 +26,9 @@ export function renderAstrologyProduct({product,mount}={}){
   const projection=v3Of(product);
   if(!projection)return legacyCompatibilityPlan(product?.sourceProduct);
   ensureCss(mount?.host?.ownerDocument||globalThis.document);
-  const plan=buildAstrologySpecialistSurfaceV3(projection);
+  const experience=experienceOf(product);
+  const plan=buildAstrologySpecialistSurfaceV3(projection,experience);
   if(plan.status!=='RENDERED')return plan;
-  return Object.freeze({...plan,compatibilityOnly:false,afterMount:slots=>installAstrologySpecialistInteractions(slots?.host,projection)});
+  return Object.freeze({...plan,compatibilityOnly:false,afterMount:slots=>installAstrologySpecialistInteractions(slots?.host,projection,experience)});
 }
 export default Object.freeze({renderAstrologyProduct});

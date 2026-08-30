@@ -29,7 +29,7 @@ export function adaptAstPersonalRealityProduct({workspace,locale=workspace?.loca
   ...(workspace.timing?.state&&workspace.timing.state!=='UNAVAILABLE'?[section({sectionId:'CURRENT_ACTIVATION',title:text(l,'Current activation','当前激活'),payload:workspace.timing,sourceRefs:list(workspace.timing?.sourceRefs)})]:[]),
   section({sectionId:'DETAILS',title:text(l,'Evidence & lineage','证据与来源'),payload:workspace.technical||null,kind:'EVIDENCE',sourceRefs:list(workspace.technical?.items).flatMap(x=>list(x.sourceRefs))})
  ];
- const specialistRenderer={rendererId:'PPR_R3_AST_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['METHOD_NAVIGATION_SLOT','NATAL_CHART_VISUAL','WHOLE_CHART_READING','TIMING','AST_CUSTOMER_PRODUCT_PROJECTION_V3','AST_PROFESSIONAL_IA','AST_NATAL_CHART_V2','AST_CHART_EXPLORER','AST_CORE_CONFIGURATION','AST_PLANETS_HOUSES_EXPLORER','AST_ASPECT_PATTERN_NETWORK','AST_RULERSHIP_NETWORK','AST_ELEMENT_MODALITY_MATRIX']};
+ const specialistRenderer={rendererId:'PPR_R3_AST_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['METHOD_NAVIGATION_SLOT','NATAL_CHART_VISUAL','WHOLE_CHART_READING','TIMING','AST_CUSTOMER_PRODUCT_PROJECTION_V3','AST_PROFESSIONAL_IA','AST_NATAL_CHART_V2','AST_CHART_EXPLORER','AST_CORE_CONFIGURATION','AST_PLANETS_HOUSES_EXPLORER','AST_ASPECT_PATTERN_NETWORK','AST_RULERSHIP_NETWORK','AST_ELEMENT_MODALITY_MATRIX','AST_WHOLE_CHART_READING_V3','AST_SINGLE_NARRATIVE_OWNER','AST_INTENT_LENS','AST_REALITY_COMPARISON_BINDING']};
  const summary=v3?.overview?.readerSummary||workspace.overview?.readerSummary||workspace.overview?.summary||null;
  const chart=v3?.chart||workspace.chartModel||null;
  return buildMethodProductEnvelope({
@@ -39,8 +39,8 @@ export function adaptAstPersonalRealityProduct({workspace,locale=workspace?.loca
   navigation:list(workspace.navigation).length?workspace.navigation:sections.map(x=>x.sectionId),sections,
   visuals:[visual({visualId:'AST_CHART',type:'ASTROLOGY_CHART',title:text(l,'Natal chart','出生星盘'),payload:chart,sourceRefs:[workspace.projectionId].filter(Boolean)})],
   specialistRenderer,
-  lineage:{projectionId:workspace.projectionId||null,workspaceSchema:workspace.schemaVersion,customerProductProjectionSchema:v3?.schemaVersion||null,customerProductSemanticDigest:v3?.semanticDigest||null,productionAdmissionRef:'AST-R2-W19',sourceRefs:v3?list(v3.technical?.sourceRefs):list(workspace.technical?.items).flatMap(x=>list(x.sourceRefs))},
-  boundaries:{currentRealityKnown:false,fortunePredictionCreated:false,liveIndividualHumanReviewClaimed:false,customerProductProjectionCreatesMeaning:false},
+  lineage:{projectionId:workspace.projectionId||null,workspaceSchema:workspace.schemaVersion,customerProductProjectionSchema:v3?.schemaVersion||null,customerProductSemanticDigest:v3?.semanticDigest||null,customerExperienceProjectionSchema:workspace?.customerExperienceProjection?.schemaVersion||null,customerExperienceSemanticDigest:workspace?.customerExperienceProjection?.semanticDigest||null,productionAdmissionRef:'AST-R2-W19',sourceRefs:v3?list(v3.technical?.sourceRefs):list(workspace.technical?.items).flatMap(x=>list(x.sourceRefs))},
+  boundaries:{currentRealityKnown:workspace?.customerExperienceProjection?.realityComparison?.state==='BOUND',fortunePredictionCreated:false,liveIndividualHumanReviewClaimed:false,customerProductProjectionCreatesMeaning:false,customerExperienceProjectionCreatesMeaning:false,realityAuthorityCreated:false},
   // Keep the W16 workspace as the renderer compatibility carrier for W0-W4.
   // AST-CX-R3 W5+ will move the specialist renderer to the v3 projection directly.
   sourceProduct:workspace

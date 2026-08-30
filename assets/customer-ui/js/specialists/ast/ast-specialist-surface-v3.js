@@ -25,6 +25,8 @@ const ELEMENT_MODALITY_SIGN=Object.freeze({FIRE:{CARDINAL:'ARIES',FIXED:'LEO',MU
 const ASPECT_LABELS=Object.freeze({CONJUNCTION:['Conjunction','合相'],SEXTILE:['Sextile','六合'],SQUARE:['Square','四分'],TRINE:['Trine','三分'],OPPOSITION:['Opposition','对分']});
 const DYNAMIC_LABELS=Object.freeze({APPLYING:['Applying','正在趋近'],SEPARATING:['Separating','正在分离'],EXACT:['Exact','精确'],UNDETERMINED:['Undetermined','未确定']});
 const HOUSE_SYSTEM_LABELS=Object.freeze({PLACIDUS_V1:['Placidus','普拉西德宫制'],WHOLE_SIGN_V1:['Whole Sign','整宫制']});
+const REALITY_RESPONSE_LABELS=Object.freeze({CURRENTLY_RESONANT:['Matches my current reality','这很符合我现在的现实'],PARTIALLY_RESONANT:['Partly matches','部分符合'],CURRENTLY_NOT_RESONANT:['Does not match right now','目前不符合'],OPEN:["I'm not sure",'我不确定']});
+const INTENT_FALLBACK_LABELS=Object.freeze({OPEN:['Open reading','开放探索'],EXPRESSION:['Expression & communication','表达与沟通'],WORK:['Work & role','工作与角色'],RELATIONSHIP:['Relationship','关系'],PRESSURE:['Pressure & friction','压力与摩擦'],DIRECTION:['Direction','方向']});
 const fmt=n=>Number.isFinite(Number(n))?Number(n).toFixed(Number(n)%1?1:0):'—';
 const norm=n=>((Number(n)||0)%360+360)%360;
 const byCode=(xs,key,value)=>arr(xs).find(x=>x?.[key]===value)||null;
@@ -46,6 +48,10 @@ const patternMatchesRef=(x,ref)=>ref===x?.patternCode||String(ref||'').startsWit
 const relatedThemesForBody=(p,code)=>arr(p?.keyConfigurations).filter(t=>arr(t.bodyCodes).includes(code));
 const relatedThemesForHouse=(p,n)=>arr(p?.keyConfigurations).filter(t=>arr(t.houseNumbers).includes(Number(n)));
 const relatedThemesForAspect=(p,ref)=>arr(p?.keyConfigurations).filter(t=>arr(t.evidenceRefs).includes(ref));
+const experienceOk=x=>x?.schemaVersion==='PHI-OS-AST-CX-R3-CUSTOMER-EXPERIENCE-PROJECTION-v1.0.0'&&x?.methodId==='AST';
+const readingUnit=(x,ref)=>arr(x?.wholeChartReading?.readingUnits).find(u=>u.themeRef===ref)||null;
+const intentView=(x,id)=>arr(x?.intentLens?.views).find(v=>v.intentId===id)||null;
+const realityResponseLabel=code=>localPair(REALITY_RESPONSE_LABELS[code])||code||'—';
 
 function polar(longitude,r,ascLongitude){
   const deg=norm(longitude-(Number(ascLongitude)||0)+180);
@@ -97,6 +103,7 @@ export function buildNatalChartV2(p){
 }
 
 function relatedThemeLinks(themes){return arr(themes).length?`<div class="ast-cx-r3-related"><span>${esc(tr('Related whole-chart themes','关联整盘主题'))}</span>${arr(themes).map(t=>`<button type="button" data-astcx-select-kind="theme" data-astcx-ref="${esc(t.themeRef)}">${esc(t.readerTitle)}</button>`).join('')}</div>`:''}
+function fullReadingOwnerLink(themeRef){return `<button type="button" class="ast-cx-r3-owner-link" data-astcx-jump-theme-owner="${esc(themeRef)}">${esc(tr('Read the full explanation in My Reading','前往「我的读取」查看完整解释'))}</button>`}
 function inspectorHeader(kicker,title,summary=''){return `<p class="ast-cx-r3-kicker">${esc(kicker)}</p><h3>${esc(title)}</h3>${summary?`<p>${esc(summary)}</p>`:''}`}
 export function buildAstExplorerInspectorHtml(p,kind,ref){
   if(kind==='planet'){
@@ -121,7 +128,7 @@ export function buildAstExplorerInspectorHtml(p,kind,ref){
   }
   if(kind==='theme'){
     const t=themeByRef(p,ref);if(!t)return '';
-    return `${inspectorHeader(tr('WHOLE-CHART THEME','整盘主题'),t.readerTitle,t.readerText)}<dl class="ast-cx-r3-facts"><dt>${esc(tr('Bodies','行星'))}</dt><dd>${esc(arr(t.bodyCodes).map(c=>bodyName(p,c)).join(' · ')||'—')}</dd><dt>${esc(tr('Houses','宫位'))}</dt><dd>${esc(arr(t.houseNumbers).map(n=>houseLabel(n)).join(' · ')||'—')}</dd><dt>${esc(tr('Pattern','格局'))}</dt><dd>${esc(t.technicalLabel||tr('Not pattern-owned','非格局主导'))}</dd></dl>`;
+    return `${inspectorHeader(tr('WHOLE-CHART THEME','整盘主题'),t.readerTitle,tr('The full admitted explanation has one owner in My Reading. This inspector shows structure only.','完整获准解释在「我的读取」只有一个正文所有者；这里仅显示结构关联。'))}<dl class="ast-cx-r3-facts"><dt>${esc(tr('Bodies','行星'))}</dt><dd>${esc(arr(t.bodyCodes).map(c=>bodyName(p,c)).join(' · ')||'—')}</dd><dt>${esc(tr('Houses','宫位'))}</dt><dd>${esc(arr(t.houseNumbers).map(n=>houseLabel(n)).join(' · ')||'—')}</dd><dt>${esc(tr('Pattern','格局'))}</dt><dd>${esc(t.technicalLabel||tr('Not pattern-owned','非格局主导'))}</dd></dl>${fullReadingOwnerLink(t.themeRef)}`;
   }
   return `${inspectorHeader(tr('CHART EXPLORER','星盘探索器'),tr('Select a chart structure','选择一个命盘结构'),tr('Planet, house, aspect and pattern selections reveal only already-projected structure and admitted reading links.','行星、宫位、相位与格局的选择，只显示已经投射的结构与已获准读取关联。'))}<p class="ast-cx-r3-boundary">${esc(tr('The browser renderer does not calculate astrology or create new meaning.','浏览器 renderer 不计算占星，也不创造新的意义。'))}</p>`;
 }
@@ -141,7 +148,27 @@ export function buildCoreConfigurationHtml(p){
 }
 
 function overviewHtml(p){return `<section class="ast-cx-r3-panel ast-cx-r3-overview" data-astcx-section="overview" tabindex="-1"><p class="ast-cx-r3-kicker">${esc(tr('ASTROLOGY · PROFESSIONAL READING','占星 · 专业读取'))}</p><h1>${esc(p?.overview?.readerTitle||tr('Your astrology reading','你的占星读取'))}</h1><p class="ast-cx-r3-lead">${esc(p?.overview?.readerSummary||'')}</p><div class="ast-cx-r3-meta"><span>${esc(houseSystemLabel(p?.houseSystemId))}</span><span>${esc(tr('Whole-chart synthesis first','整盘综合优先'))}</span><span>${esc(tr('Method-native specialist surface','方法原生专业界面'))}</span></div></section>`}
-function myReadingHtml(p){const themes=arr(p?.keyConfigurations);return `<section class="ast-cx-r3-panel" data-astcx-section="my-reading" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('MY READING','我的读取'))}</p><h2>${esc(tr('Start with the chart-wide themes','先看整张盘反复出现的主线'))}</h2><p>${esc(tr('Each theme already has one admitted narrative owner. Selecting it links the reading back to the chart without creating a second interpretation.','每个主题已经拥有唯一获准正文所有者。点击主题只把读取重新连回星盘，不会产生第二份解释。'))}</p></header><div class="ast-cx-r3-theme-grid">${themes.map((t,i)=>`<article class="ast-cx-r3-theme-card" data-astcx-theme-card="${esc(t.themeRef)}"><button type="button" data-astcx-select-kind="theme" data-astcx-ref="${esc(t.themeRef)}"><span>${String(i+1).padStart(2,'0')}</span><strong>${esc(t.readerTitle)}</strong><small>${esc(t.technicalLabel||tr('Whole-chart structure','整盘结构'))}</small></button><p>${esc(t.readerText)}</p></article>`).join('')}</div></section>`}
+function intentLensHtml(x){
+  if(!experienceOk(x))return '';
+  const views=arr(x.intentLens?.views),active=x.intentLens?.activeIntentId||'OPEN',activeView=intentView(x,active);
+  return `<section class="ast-cx-r3-intent-lens" aria-label="${esc(tr('Reading focus','阅读重点'))}"><div class="ast-cx-r3-intent-head"><span>${esc(tr('Reading focus','阅读重点'))}</span><small>${esc(tr('This changes order and focus only; the admitted meanings do not change.','这里只调整顺序与焦点；已获准的占星意义不会改变。'))}</small></div><div class="ast-cx-r3-intent-buttons" role="group">${views.map(v=>`<button type="button" data-astcx-intent="${esc(v.intentId)}" aria-pressed="${v.intentId===active?'true':'false'}">${esc(v.label||localPair(INTENT_FALLBACK_LABELS[v.intentId])||v.intentId)}</button>`).join('')}</div><p class="ast-cx-r3-intent-copy" data-astcx-intent-copy>${esc(activeView?.readerText||tr('Open reading keeps the whole-chart order without changing meaning.','开放探索保持整盘顺序，不改变任何占星意义。'))}</p></section>`;
+}
+function themeEvidenceFacts(p,t,u){
+  const bodies=arr(t.bodyCodes).map(c=>bodyName(p,c)),houses=arr(t.houseNumbers).map(n=>houseLabel(n)),angles=arr(t.angleCodes),bits=[];
+  if(t.technicalLabel)bits.push(`<span>${esc(t.technicalLabel)}</span>`);
+  if(bodies.length)bits.push(`<span>${esc(bodies.join(' · '))}</span>`);
+  if(houses.length)bits.push(`<span>${esc(houses.join(' · '))}</span>`);
+  if(angles.length)bits.push(`<span>${esc(angles.join(' · '))}</span>`);
+  if(u?.evidenceCount)bits.push(`<span>${esc(tr(`${u.evidenceCount} governed evidence reference(s)`,`${u.evidenceCount} 条受治理证据引用`))}</span>`);
+  return bits.join('');
+}
+function signalItems(signals,refs){const set=new Set(arr(refs));return arr(signals).filter(x=>set.has(x.signalRef))}
+function myReadingHtml(p,x=null){
+  const themes=arr(p?.keyConfigurations),exp=experienceOk(x)?x:null,units=new Map(arr(exp?.wholeChartReading?.readingUnits).map(u=>[u.themeRef,u])),support=arr(exp?.wholeChartReading?.support||p?.wholeChartReading?.support),tension=arr(exp?.wholeChartReading?.tension||p?.wholeChartReading?.tension),unknowns=arr(exp?.wholeChartReading?.unknowns||p?.wholeChartReading?.unknowns);
+  const cards=themes.map((t,i)=>{const u=units.get(t.themeRef)||{},supports=signalItems(support,u.supportSignalRefs),tensions=signalItems(tension,u.tensionSignalRefs);return `<article class="ast-cx-r3-theme-card ast-cx-r3-reading-owner" data-astcx-theme-card="${esc(t.themeRef)}" data-astcx-theme-owner="${esc(t.themeRef)}" data-astcx-theme-tier="${esc(t.tier||'')}" data-astcx-theme-rank="${esc(t.rank||i+1)}"><header><button type="button" data-astcx-select-kind="theme" data-astcx-ref="${esc(t.themeRef)}"><span data-astcx-theme-order>${String(i+1).padStart(2,'0')}</span><strong>${esc(t.readerTitle)}</strong><small>${esc(t.tier==='CORE_THEME'?tr('Core theme','核心主题'):tr('Supporting theme','支持主题'))}</small></button></header><div class="ast-cx-r3-owner-narrative"><p>${esc(t.readerText)}</p></div><details class="ast-cx-r3-why"><summary>${esc(tr('Why this appears','为什么出现这项内容'))}</summary><div class="ast-cx-r3-evidence-chips">${themeEvidenceFacts(p,t,u)}</div>${supports.length||tensions.length?`<div class="ast-cx-r3-signal-columns">${supports.length?`<div><strong>${esc(tr('Supporting connections','支持连接'))}</strong><ul>${supports.map(s=>`<li>${esc(s.readerText)}</li>`).join('')}</ul></div>`:''}${tensions.length?`<div><strong>${esc(tr('Tension connections','张力连接'))}</strong><ul>${tensions.map(s=>`<li>${esc(s.readerText)}</li>`).join('')}</ul></div>`:''}</div>`:''}</details></article>`}).join('');
+  const globalSignals=`<div class="ast-cx-r3-reading-context"><article><span>${esc(tr('Supporting connections','支持连接'))}</span><strong>${support.length}</strong><p>${esc(tr('These are already-admitted lower-friction or supporting relationship signals; they do not guarantee outcomes.','这些是已经获准的较低摩擦或支持性关系信号，不保证任何结果。'))}</p></article><article><span>${esc(tr('Tension connections','张力连接'))}</span><strong>${tension.length}</strong><p>${esc(tr('These preserve friction and counter-pressure instead of smoothing the chart into one positive story.','这里保留摩擦与反向压力，不把整张盘抹平成单一正向故事。'))}</p></article><article><span>${esc(tr('Still open','仍然开放'))}</span><strong>${unknowns.length}</strong><p>${esc(unknowns.length?tr('Unknown or unresolved items remain visible rather than being filled with generic personality prose.','未知或未解决项目继续保持可见，不用通用人格文字填补。'):tr('No additional open item is attached to this projection.','这次投射没有附加新的开放项。'))}</p></article></div>`;
+  return `<section class="ast-cx-r3-panel ast-cx-r3-reading" data-astcx-section="my-reading" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('MY READING','我的读取'))}</p><h2>${esc(tr('Read the chart as a whole before opening individual objects','先读整张盘，再进入单颗行星与单一结构'))}</h2><p>${esc(tr('Each admitted theme has one full narrative owner here. Other chart areas only link back to it, so the report does not repeat the same essay in multiple places.','每个获准主题只在这里拥有一个完整正文所有者；其他星盘区域只链接回来，因此不会在多个位置重复同一篇解释。'))}</p></header>${intentLensHtml(exp)}<div class="ast-cx-r3-theme-grid ast-cx-r3-theme-grid--reading" data-astcx-theme-owner-list>${cards}</div>${globalSignals}</section>`;
+}
 
 function houseDirectoryRow(p,h){
   const ruler=arr(p?.rulership?.houseRulers).find(x=>Number(x.houseNumber)===Number(h.houseNumber)),occupants=arr(p?.chart?.positions).filter(x=>Number(x.houseNumber)===Number(h.houseNumber)),themes=relatedThemesForHouse(p,h.houseNumber);
@@ -185,13 +212,18 @@ export function buildElementModalityMatrixHtml(p){
   return `<section class="ast-cx-r3-panel" data-astcx-section="elements-modes" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('ELEMENT × MODALITY MATRIX','元素 × 模式矩阵'))}</p><h2>${esc(tr('See the full distribution without turning a count into a personality verdict','查看完整分布，而不把计数变成人格判定'))}</h2><p>${esc(tr('The matrix rearranges the upstream sign counts into the fixed zodiac element × modality layout. Row and column totals come from the governed CORE_10 unweighted distribution; tie states remain intact.','矩阵只是把上游星座计数重新排入固定的黄道元素 × 模式布局。行列总数来自受治理的 CORE_10 非加权分布；并列状态保持不变。'))}</p></header><div class="ast-cx-r3-matrix-wrap"><table class="ast-cx-r3-matrix"><thead><tr><th>${esc(tr('Element / mode','元素 / 模式'))}</th>${head}</tr></thead><tbody>${rows}</tbody></table></div><div class="ast-cx-r3-distribution"><div><h3>${esc(tr('Element totals','元素总数'))}</h3>${distributionMeters(ec,ELEMENT_LABELS)}<p>${esc(leaderText(d.elementLeader,ELEMENT_LABELS))}</p></div><div><h3>${esc(tr('Mode totals','模式总数'))}</h3>${distributionMeters(mc,MODALITY_LABELS)}<p>${esc(leaderText(d.modalityLeader,MODALITY_LABELS))}</p></div></div><p class="ast-cx-r3-boundary">${esc(tr(`Scope: ${d.scope||'CORE_10_PLANETS_UNWEIGHTED'}. Angles and nodes are not mixed into these totals. A distribution leader is not treated as a psychological fact.`,`范围：${d.scope||'CORE_10_PLANETS_UNWEIGHTED'}。角点与交点不会混入这些总数；分布领先也不会被当作心理事实。`))}</p></section>`;
 }
 function timingPreview(p){const available=p?.timing?.state==='AVAILABLE';return `<section class="ast-cx-r3-panel" data-astcx-section="timing-activation" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('TIMING & ACTIVATION','时间与激活'))}</p><h2>${esc(available?tr('Governed timing is available for this reading','这次读取已有受治理时间层'):tr('No governed timing layer is attached yet','目前尚未附加受治理时间层'))}</h2><p>${esc(available?tr('Timing remains separate from natal structure and uses only admitted temporal output.','时间层与本命结构保持分离，只使用已获准的时间输出。'):tr('Natal interpretation remains complete on its own. This surface will not calculate transits in the browser.','本命读取本身仍可完整阅读；这个前端不会自行计算行运。'))}</p></header></section>`}
-function realityPreview(p){return `<section class="ast-cx-r3-panel" data-astcx-section="reality-comparison" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('REALITY COMPARISON','现实对照'))}</p><h2>${esc(p?.realityComparison?.state==='NOT_BOUND'?tr('Not yet compared with your current reality','尚未与你当前现实进行对照'):tr('Reality comparison is available','现实对照已可用'))}</h2><p>${esc(tr('Current Reality remains owned by the governed Personal Reading runtime; Astrology does not infer your present situation from the chart.','当前现实继续由受治理的 Personal Reading runtime 负责；占星不会从命盘自行推断你现在的现实状态。'))}</p></header></section>`}
+function realityPreview(p,x=null){
+  const r=experienceOk(x)?x.realityComparison:p?.realityComparison,items=arr(r?.items),bound=r?.state==='BOUND'&&items.length>0;
+  const cards=bound?`<div class="ast-cx-r3-reality-grid">${items.map(item=>{const theme=themeByRef(p,item.themeRef);return `<article class="ast-cx-r3-reality-card"><span>${esc(tr('CUSTOMER SELF-REPORT','客户自述'))}</span><h3>${esc(theme?.readerTitle||tr('Whole-chart theme','整盘主题'))}</h3><strong>${esc(realityResponseLabel(item.customerResponse))}</strong><button type="button" data-astcx-jump-theme-owner="${esc(item.themeRef)}">${esc(tr('Return to the astrology reading','回到占星读取'))}</button></article>`}).join('')}</div>`:'';
+  return `<section class="ast-cx-r3-panel" data-astcx-section="reality-comparison" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('REALITY COMPARISON','现实对照'))}</p><h2>${esc(bound?tr('Your own reality comparison is attached','已经附加你的现实对照'):tr('Not yet compared with your current reality','尚未与你当前现实进行对照'))}</h2><p>${esc(tr('Current Reality remains owned by the governed Personal Reading runtime. Astrology only displays explicit customer comparison records linked by theme reference; it never treats agreement as proof that the chart is objectively true.','当前现实继续由受治理的 Personal Reading runtime 负责。占星只显示通过主题引用明确绑定的客户现实对照记录；即使客户觉得符合，也不会把它升级成命盘客观为真的证明。'))}</p></header>${cards}${!bound?`<p class="ast-cx-r3-boundary">${esc(tr('No governed Reality Comparison handoff is present on this route yet. The chart will not guess one.','当前路径尚未提供受治理的 Reality Comparison handoff；命盘不会自行猜测现实状态。'))}</p>`:''}</section>`;
+}
 function technicalHtml(p){const t=p?.technical||{};return `<section data-astcx-section="sources-technical" tabindex="-1"><details class="ast-cx-r3-technical"><summary>${esc(tr('Sources & Technical','来源与技术'))}</summary><p>${esc(tr('Technical lineage is preserved here and stays collapsed by default.','技术 lineage 在这里保留，并默认折叠。'))}</p><dl><dt>${esc(tr('House system','宫制'))}</dt><dd>${esc(t.houseSystemId||p?.houseSystemId||'—')}</dd><dt>${esc(tr('Projection','投射'))}</dt><dd><code>${esc(t.projectionId||p?.projectionId||'—')}</code></dd><dt>${esc(tr('Semantic projection','语义投射'))}</dt><dd><code>${esc(t.professionalSemanticSchema||'—')}</code></dd><dt>${esc(tr('Whole-chart synthesis','整盘综合'))}</dt><dd><code>${esc(t.synthesisSchema||'—')}</code></dd><dt>${esc(tr('Reading schema','读取 schema'))}</dt><dd><code>${esc(t.readingSchema||'—')}</code></dd><dt>${esc(tr('Meaning authority','意义权威'))}</dt><dd><code>${esc(t.meaningOntologyVersion||'—')}</code></dd><dt>${esc(tr('Composition rule','组合规则'))}</dt><dd><code>${esc(t.compositionRuleVersion||'—')}</code></dd></dl></details></section>`}
 
-export function buildAstrologySpecialistSurfaceV3(p){
+export function buildAstrologySpecialistSurfaceV3(p,x=null){
   if(p?.schemaVersion!=='PHI-OS-AST-CUSTOMER-PRODUCT-PROJECTION-v3.0.0'||p?.methodId!=='AST')return Object.freeze({status:'NOT_HANDLED',reason:'AST_CUSTOMER_PRODUCT_V3_REQUIRED'});
-  const visualHtml=`<article class="ast-cx-r3" data-ast-cx-r3-surface="${AST_CX_R3_SURFACE_SCHEMA}">${overviewHtml(p)}${myReadingHtml(p)}${buildNatalChartV2(p)}`;
-  const readingHtml=`${buildCoreConfigurationHtml(p)}${buildPlanetsHousesExplorerHtml(p)}${buildAspectsPatternsHtml(p)}${buildRulershipNetworkHtml(p)}${buildElementModalityMatrixHtml(p)}${timingPreview(p)}${realityPreview(p)}</article>`;
+  const exp=experienceOk(x)?x:null;
+  const visualHtml=`<article class="ast-cx-r3" data-ast-cx-r3-surface="${AST_CX_R3_SURFACE_SCHEMA}">${overviewHtml(p)}${myReadingHtml(p,exp)}${buildNatalChartV2(p)}`;
+  const readingHtml=`${buildCoreConfigurationHtml(p)}${buildPlanetsHousesExplorerHtml(p)}${buildAspectsPatternsHtml(p)}${buildRulershipNetworkHtml(p)}${buildElementModalityMatrixHtml(p)}${timingPreview(p)}${realityPreview(p,exp)}</article>`;
   return Object.freeze({status:'RENDERED',navigationHtml:navHtml(),visualHtml,readingHtml,technicalHtml:technicalHtml(p)});
 }
 
@@ -221,15 +253,37 @@ function setAspectFilter(root,filter){
   root.querySelectorAll?.('[data-astcx-aspect-filter]').forEach(el=>el.setAttribute?.('aria-pressed',String(el.dataset.astcxAspectFilter===filter)));
   root.querySelectorAll?.('[data-astcx-aspect-row]').forEach(el=>{el.hidden=filter!=='ALL'&&el.dataset.astcxAspectDynamic!==filter});
 }
-export function installAstrologySpecialistInteractions(root,p){
+export function orderedThemeRefsForIntent(x,intentId){
+  if(!experienceOk(x))return [];
+  const view=intentView(x,intentId)||intentView(x,'OPEN');return arr(view?.priorityThemeRefs);
+}
+function jumpToThemeOwner(root,ref){
+  const owner=arr(root.querySelectorAll?.('[data-astcx-theme-owner]')).find(el=>String(el.dataset.astcxThemeOwner)===String(ref));
+  owner?.scrollIntoView?.({behavior:'smooth',block:'start'});owner?.focus?.();return owner||null;
+}
+function setIntentLens(root,x,intentId){
+  if(!experienceOk(x))return;
+  const view=intentView(x,intentId)||intentView(x,'OPEN');if(!view)return;
+  root.querySelectorAll?.('[data-astcx-intent]').forEach(el=>el.setAttribute?.('aria-pressed',String(el.dataset.astcxIntent===view.intentId)));
+  const copy=root.querySelector?.('[data-astcx-intent-copy]');if(copy)copy.textContent=view.readerText||tr('Open reading keeps the whole-chart order without changing meaning.','开放探索保持整盘顺序，不改变任何占星意义。');
+  const listNode=root.querySelector?.('[data-astcx-theme-owner-list]');if(!listNode)return;
+  const cards=arr(listNode.querySelectorAll?.('[data-astcx-theme-owner]')),byRef=new Map(cards.map(el=>[el.dataset.astcxThemeOwner,el]));
+  orderedThemeRefsForIntent(x,view.intentId).forEach(ref=>{const el=byRef.get(ref);if(el)listNode.appendChild?.(el)});
+  arr(listNode.querySelectorAll?.('[data-astcx-theme-owner]')).forEach((el,i)=>{const order=el.querySelector?.('[data-astcx-theme-order]');if(order)order.textContent=String(i+1).padStart(2,'0')});
+  listNode.dataset.astcxActiveIntent=view.intentId;
+}
+export function installAstrologySpecialistInteractions(root,p,x=null){
   if(!root||!p||root.dataset.astCxR3Interactions==='true')return;
   root.addEventListener?.('click',event=>{
+    const jump=event.target?.closest?.('[data-astcx-jump-theme-owner]');if(jump){jumpToThemeOwner(root,jump.dataset.astcxJumpThemeOwner);return}
+    const intent=event.target?.closest?.('[data-astcx-intent]');if(intent){setIntentLens(root,x,intent.dataset.astcxIntent);return}
     const mode=event.target?.closest?.('[data-astcx-directory-mode]');if(mode){setDirectoryMode(root,mode.dataset.astcxDirectoryMode);return}
     const filter=event.target?.closest?.('[data-astcx-aspect-filter]');if(filter){setAspectFilter(root,filter.dataset.astcxAspectFilter);return}
     const trigger=event.target?.closest?.('[data-astcx-select-kind]');if(!trigger)return;activateSelection(root,p,trigger.dataset.astcxSelectKind,trigger.dataset.astcxRef)
   });
   root.addEventListener?.('keydown',event=>{if(event.key!=='Enter'&&event.key!==' ')return;const trigger=event.target?.closest?.('[data-astcx-select-kind]');if(!trigger)return;event.preventDefault?.();activateSelection(root,p,trigger.dataset.astcxSelectKind,trigger.dataset.astcxRef)});
+  if(experienceOk(x))setIntentLens(root,x,x.intentLens?.activeIntentId||'OPEN');
   root.dataset.astCxR3Interactions='true';
 }
 
-export default Object.freeze({AST_CX_R3_SURFACE_SCHEMA,AST_CX_R3_IA,buildNatalChartV2,buildAstExplorerInspectorHtml,buildCoreConfigurationHtml,buildPlanetsHousesExplorerHtml,buildAspectsPatternsHtml,buildRulershipNetworkSvg,buildRulershipNetworkHtml,buildElementModalityMatrixHtml,buildAstrologySpecialistSurfaceV3,installAstrologySpecialistInteractions});
+export default Object.freeze({AST_CX_R3_SURFACE_SCHEMA,AST_CX_R3_IA,buildNatalChartV2,buildAstExplorerInspectorHtml,buildCoreConfigurationHtml,buildPlanetsHousesExplorerHtml,buildAspectsPatternsHtml,buildRulershipNetworkSvg,buildRulershipNetworkHtml,buildElementModalityMatrixHtml,orderedThemeRefsForIntent,buildAstrologySpecialistSurfaceV3,installAstrologySpecialistInteractions});

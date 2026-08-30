@@ -85,7 +85,9 @@ assert(aspectInspector.includes(`${Number(firstAspect.orbDegrees).toFixed(Number
 const patternInspector=buildAstExplorerInspectorHtml(projection,'pattern',`${firstPattern.patternCode}:${firstPattern.bodyCodes.join('|')}:0`);
 assert(patternInspector.includes(firstPattern.label));
 const themeInspector=buildAstExplorerInspectorHtml(projection,'theme',firstTheme.themeRef);
-assert(themeInspector.includes(firstTheme.readerText));
+const narrativeOwnerSuccessor=fs.existsSync('content/professional/ast-full-production/customer-product-v3/contracts/ast-cx-r3-w14-one-narrative-owner-contract-v1.json');
+if(narrativeOwnerSuccessor){assert(!themeInspector.includes(firstTheme.readerText));assert.match(themeInspector,/data-astcx-jump-theme-owner=/)}
+else assert(themeInspector.includes(firstTheme.readerText));
 
 const core=buildCoreConfigurationHtml(projection);
 for(const label of ['太阳','月亮','上升点','天顶','命盘守护星','元素分布','模式分布'])assert(core.includes(label),`core config missing ${label}`);
