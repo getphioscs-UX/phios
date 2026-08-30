@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-ECR-MANDALA-W27-PPR-R3-BOUNDARY-REGRESSION-v1.0.0",
+  "work": "ECR-PHI-MANDALA-W27",
+  "baselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "TARGETED_PPR_R3_BOUNDARY_REGRESSION_ACCEPTED",
+  "sharedAndOtherMethodFiles": [
+    {
+      "path": "assets/customer-ui/js/personal-products/specialist-renderer-registry.js",
+      "sha256": "8702bf51ec9a0537f856879034f0f9df2a70166935cd3c8f7b4ba8d2d024802c"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/specialist-renderer-host.js",
+      "sha256": "bb7a33f237076433a4cf8d4b79e85876b4c2b712d057dcd45fd64242b3c96a23"
+    },
+    {
+      "path": "assets/customer-ui/js/personal-products/personal-product-renderers.js",
+      "sha256": "9d64e9db9cff8215ecdb743f3b1d6e030f792125ddb543faf1a6133fc7c411d2"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/ast/product-renderer.js",
+      "sha256": "e936c96fe667ff07ac853ac5985560f6584965c79864a59ce1909dbd50f424ec"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/bazi/product-renderer.js",
+      "sha256": "6cfe42ea4fa8552edabb6870679b323207c17e82cb56ba9c543a83763e870b0a"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/num/product-renderer.js",
+      "sha256": "c6d47a905d0e083cf8a38879aae3956099895a3fca789089a6a832aaf1529b99"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/ziwei/product-renderer.js",
+      "sha256": "00dfa871487908a364d39931a6ada9135fe979dc2c3a493f34938b3c89d0038b"
+    },
+    {
+      "path": "functions/personal-reality-product/adapters/product-envelope-core.js",
+      "sha256": "a08867acbc5d7bef8f4988f05a8b3bc940e41441ed9a4480cf6812c04fe8d743"
+    }
+  ],
+  "expectedEcrRenderer": {
+    "rendererId": "PPR_R3_ECR_PRODUCT_V1",
+    "module": "/assets/customer-ui/js/specialists/ecr/product-renderer.js",
+    "ownerMethod": "ECR",
+    "supportedProductContract": "PHI_CONFIGURATION_READING"
+  },
+  "expectedOtherMethodRenderers": [
+    "PPR_R3_AST_PRODUCT_V1",
+    "PPR_R3_BAZI_PRODUCT_V1",
+    "PPR_R3_NUM_PRODUCT_V1",
+    "PPR_R3_ZIWEI_PRODUCT_V1"
+  ],
+  "boundaries": {
+    "sharedHostOwnsMeaning": false,
+    "sharedHostRunsCalculation": false,
+    "sharedHostRunsProjection": false,
+    "sharedRendererLearnsEcrSemantics": false,
+    "otherMethodSpecialistsModifiedByEcrWork": false
+  },
+  "acceptanceEvidence": {
+    "machineGate": "scripts/check-ecr-mandala-w27-ppr-r3-boundary.mjs",
+    "machineGatePassed": true,
+    "aggregatePprR3GateState": "BLOCKED_BY_PRE_EXISTING_PPR_R4_SUCCESSOR_DIGEST_DRIFT",
+    "aggregatePprR3GateCreatesEcrBoundaryFailure": false
+  }
+}

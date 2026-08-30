@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+
+const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const acceptance=json('content/embodied-configuration/acceptance/ecr-mandala-w24-visual-acceptance-v1.json');
+const successor=json('content/embodied-configuration/ecr-mandala-w24-visual-css-successor-v1.json');
+const css=fs.readFileSync('assets/customer-ui/surfaces/ecr-specialist.css','utf8');
+const mandala=fs.readFileSync('assets/customer-ui/js/specialists/ecr/mandala-renderer.js','utf8');
+
+assert.equal(acceptance.status,'MACHINE_AND_RENDERED_VISUAL_ACCEPTED');
+assert.equal(acceptance.humanReviewerClaimed,false);
+assert.equal(acceptance.requiredViewports.length,7);
+assert.deepEqual(acceptance.requiredViewports.map(x=>x.viewport),['1440-desktop','1280-laptop','1024-tablet-landscape','768-tablet','430-mobile','390-mobile','print']);
+assert.equal(acceptance.englishRegressionViewports.length,7);
+assert.equal(acceptance.machineSummary.pageOverflowCases,0);
+assert.equal(acceptance.machineSummary.textOverflowCases,0);
+assert.equal(acceptance.machineSummary.dynamicSvgOnly,true);
+assert.equal(acceptance.machineSummary.technicalDisclosureDefaultCollapsed,true);
+assert.equal(acceptance.machineSummary.summaryPrecedesSvgOnScreen,true);
+for(const [key,value] of Object.entries(acceptance.manualVisualChecklist))assert.equal(value,true,`W24 visual checklist failed: ${key}`);
+assert.equal(successor.predecessorSha256,'702f748db3960b2e26caab382961b74dc467efb69887ef4a53bd2ffd90e5744b');
+assert.equal(successor.successorSha256,sha('assets/customer-ui/surfaces/ecr-specialist.css'));
+assert.match(css,/\.cx-ecr-mandala\{/);
+assert.match(css,/@media \(max-width:1179px\)/);
+assert.match(css,/@media \(max-width:767px\)/);
+assert.match(css,/@media \(max-width:620px\)/);
+assert.match(css,/@media \(max-width:390px\)/);
+assert.match(css,/@media print/);
+assert.doesNotMatch(mandala,/<img[^>]+mandala/i);
+assert.doesNotMatch(mandala,/<canvas/i);
+assert.match(mandala,/<svg class="cx-ecr-mandala__svg"/);
+console.log('✓ ECR PHI Mandala W24 visual acceptance passed.');
+console.log('  1440/1280/1024/768/430/390 + print are recorded with zero page/text overflow and manual rendered visual acceptance.');
