@@ -47,5 +47,6 @@ console.log('✓ ZIWEI-PRO-R2 W13–W16 professional customer product gate passe
 console.log('  W13: customer IA is reading-only; technical governance is collapsed under About this reading.');
 console.log('  W14: calculated chart density includes birth frame, bureau, 12 palace stems, 12 Da Xian age ranges, 28-star hierarchy and transformation layers; Life Master / Body Master remain omitted because no admitted calculation authority exists.');
 console.log('  W15: professional-quality machine campaign passed 96/96 with 1152/1152 meaningful palace units, 768/768 meaningful topic readings, zero duplicate palace compositions, zero structure-only composition findings and six interpretive timing years per case.');
-console.log('  W16: 24-case usefulness review is review-ready and remains 0/24 Human accepted; machine results did not substitute for Human review.');
-console.log('  W17 cutover remains blocked.');
+console.log('  W16 historical checkpoint: the original review-ready artifact remains 0/24 and is preserved unchanged.');
+console.log('  Successor W16 Human admission + W17 cutover gate follows.');
+await import('./check-ziwei-pro-r2-w16-w17.mjs');
