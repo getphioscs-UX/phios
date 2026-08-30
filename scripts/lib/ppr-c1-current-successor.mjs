@@ -12,6 +12,8 @@ const R4_PATH='content/professional/personal-reality/r4/authority/ppr-r4-method-
 const CURRENT_PATH='content/professional/personal-reality/r4/authority/ppr-r4-current-main-successor-reconciliation-v1.json';
 const W10A_PATH='content/professional/personal-reality/r3/authority/ppr-r3-w10a-ast-target-context-shared-input-successor-v1.json';
 const R5_PATH='content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json';
+const R4V2_PATH='content/professional/personal-reality/r4/authority/ppr-r4-ast-target-context-input-successor-v2.json';
+const R5_PROTECTED_RECON_PATH='content/professional/personal-reality/r5/authority/ppr-r5-protected-method-input-successor-reconciliation-v1.json';
 
 function assertPostR4SharedSuccessor(r4,current,path){
  const proof=current?.sharedFileSuccessorProof?.[path];
@@ -41,6 +43,8 @@ export function assertPprC1CurrentSuccessor(){
  const current=readJson(CURRENT_PATH);
  const w10a=readJson(W10A_PATH);
  const r5=fs.existsSync(R5_PATH)?readJson(R5_PATH):null;
+ const r4v2=fs.existsSync(R4V2_PATH)?readJson(R4V2_PATH):null;
+ const r5ProtectedRecon=fs.existsSync(R5_PROTECTED_RECON_PATH)?readJson(R5_PROTECTED_RECON_PATH):null;
  assert.equal(recon.baselineCommit,BASELINE);
  assert.equal(recon.status,'RECONCILED_TO_CURRENT_SUCCESSOR_AUTHORITY');
  assert.equal(recon.canonical.route,'/perspectives/personal/');
@@ -93,7 +97,22 @@ export function assertPprC1CurrentSuccessor(){
  for(const [path,proof] of Object.entries(current.unchangedR4SuccessorProof||{})){
   assert.equal(proof.remainsExactPprR4Successor,true);
   assert.equal(proof.sha256,r4.sharedFileSuccessorProof?.[path]?.successorSha256,`PPR-R4 unchanged successor record mismatch: ${path}`);
-  assert.equal(proof.sha256,sha(path),`PPR-R4 unchanged successor drift: ${path}`);
+  const liveSha=sha(path);
+  if(liveSha===proof.sha256)continue;
+  const v2Proof=r4v2?.sharedFileSuccessorProof?.[path]||null;
+  assert(v2Proof,`PPR-R4 unchanged historical witness requires a governed later successor: ${path}`);
+  assert.equal(r4v2.status,'ACTIVE_SUCCESSOR_RECONCILING_PPR_R4_WITH_AST_W10A');
+  assert.equal(v2Proof.predecessorSha256,proof.sha256,`PPR-R4 v2 predecessor mismatch: ${path}`);
+  assert.equal(v2Proof.successorSha256,liveSha,`PPR-R4 v2 successor digest drift: ${path}`);
+  assert.equal(v2Proof.changeClass,'PPR_R4_METHOD_INPUT_EXTENSION_ONLY',`PPR-R4 v2 successor class mismatch: ${path}`);
+  const reconciliation=r5ProtectedRecon?.protectedFileReconciliation?.[path]||null;
+  assert(reconciliation,`PPR-R5 protected witness reconciliation missing: ${path}`);
+  assert.equal(r5ProtectedRecon.status,'HISTORICAL_STALE_PROTECTED_WITNESS_RECONCILED_TO_PREEXISTING_R4V2');
+  assert.equal(reconciliation.historicalPprR5ProtectedSha256,proof.sha256,`PPR-R5 historical protected witness mismatch: ${path}`);
+  assert.equal(reconciliation.r4v2PredecessorSha256,v2Proof.predecessorSha256,`PPR-R5/R4v2 predecessor reconciliation mismatch: ${path}`);
+  assert.equal(reconciliation.r4v2SuccessorSha256,v2Proof.successorSha256,`PPR-R5/R4v2 successor reconciliation mismatch: ${path}`);
+  assert.equal(reconciliation.currentMainSha256,liveSha,`PPR-R5 current protected successor drift: ${path}`);
+  assert.equal(reconciliation.newRuntimeMutationByThisReconciliation,false,`PPR-R5 reconciliation must not create a runtime mutation: ${path}`);
  }
  if(r5){
   for(const [path,proof] of Object.entries(r5.addedFiles||{})){
@@ -103,8 +122,17 @@ export function assertPprC1CurrentSuccessor(){
   }
   for(const [path,proof] of Object.entries(r5.protectedFiles||{})){
    assert.equal(proof.mustRemainUnchanged,true,`PPR-R5 protected file contract missing: ${path}`);
-   assert.equal(proof.sha256,sha(path),`PPR-R5 protected file drift: ${path}`);
+   const liveSha=sha(path);
+   if(liveSha===proof.sha256)continue;
+   const reconciliation=r5ProtectedRecon?.protectedFileReconciliation?.[path]||null;
+   const v2Proof=r4v2?.sharedFileSuccessorProof?.[path]||null;
+   assert(reconciliation&&v2Proof,`PPR-R5 protected file drift lacks governed reconciliation: ${path}`);
+   assert.equal(proof.owner,'PPR-R4_METHOD_INPUT_SUCCESSOR',`PPR-R5 protected owner changed: ${path}`);
+   assert.equal(reconciliation.historicalPprR5ProtectedSha256,proof.sha256,`PPR-R5 protected predecessor mismatch: ${path}`);
+   assert.equal(v2Proof.predecessorSha256,proof.sha256,`PPR-R4 v2 must descend from the PPR-R5 protected witness: ${path}`);
+   assert.equal(v2Proof.successorSha256,liveSha,`PPR-R4 v2 current protected successor drift: ${path}`);
+   assert.equal(reconciliation.currentMainSha256,liveSha,`PPR-R5 protected reconciliation current digest drift: ${path}`);
   }
  }
- return Object.freeze({recon,r4,w10a,current,r5,postR4Proof:path=>{const r5Proof=r5?.sharedFileSuccessorProof?.[path]||null;if(!r5Proof)return current.sharedFileSuccessorProof?.[path]||null;const r4Proof=r4?.sharedFileSuccessorProof?.[path]||null;return Object.freeze({...r5Proof,predecessorSha256:r4Proof?.successorSha256||r5Proof.predecessorSha256,successorSha256:r5Proof.successorSha256,successorChain:[current.sharedFileSuccessorProof?.[path]||null,r5Proof].filter(Boolean)});},historicalPostR4Proof:path=>current.sharedFileSuccessorProof?.[path]||null,w10aProof:path=>w10a.authorizedFiles?.[path]||null});
+ return Object.freeze({recon,r4,w10a,current,r5,r4v2,r5ProtectedRecon,postR4Proof:path=>{const r5Proof=r5?.sharedFileSuccessorProof?.[path]||null;if(!r5Proof)return current.sharedFileSuccessorProof?.[path]||null;const r4Proof=r4?.sharedFileSuccessorProof?.[path]||null;return Object.freeze({...r5Proof,predecessorSha256:r4Proof?.successorSha256||r5Proof.predecessorSha256,successorSha256:r5Proof.successorSha256,successorChain:[current.sharedFileSuccessorProof?.[path]||null,r5Proof].filter(Boolean)});},historicalPostR4Proof:path=>current.sharedFileSuccessorProof?.[path]||null,w10aProof:path=>w10a.authorizedFiles?.[path]||null});
 }

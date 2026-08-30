@@ -8,6 +8,7 @@ import {renderZiweiProduct} from '../assets/customer-ui/js/specialists/ziwei/pro
 import {isZiweiCustomerSurfaceActivated,isZiweiFinalCustomerSurfaceActivated} from '../functions/personal-reality-product/adapters/ziwei-customer-surface-activation.js';
 import {isZiweiCustomerSurfaceActivatedClient,isZiweiFinalCustomerSurfaceActivatedClient} from '../assets/customer-ui/js/specialists/ziwei/ziwei-surface-activation-client.js';
 import {auditZiweiDom} from './lib/ziwei-cx-r1-w14-dom-harness.mjs';
+import {assertPprR3GovernedPath} from './ppr-r3-governed-successor-support.mjs';
 
 const BASE='content/customer-experience-rebuild/ziwei-cx-r1';
 const BASELINE='7c6126404fe8e257b44937a0149bf23c837c538f';
@@ -29,7 +30,13 @@ assert.equal(fixture.regression.failedBoundary,'BROWSER_MODULE_REACHABILITY');as
 assert.equal(acceptance.status,'BROWSER_DELIVERY_RECOVERED_CUSTOMER_SURFACE_REACHABLE');assert.equal(Object.values(acceptance.gates).every(Boolean),true);assert.equal(acceptance.result.fullProductionVisibleToCustomer,true);assert.equal(acceptance.blockers.length,0);
 
 // Current PPR shared bytes are inherited, not rewritten by this Zi Wei recovery.
-for(const row of shared.files){assert.ok(fs.existsSync(row.path),`shared current path missing ${row.path}`);assert.equal(sha(row.path),row.sha256,`W17R shared baseline drift: ${row.path}`);assert.equal(fs.statSync(row.path).size,row.sizeBytes,`W17R shared size drift: ${row.path}`);}for(const p of shared.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
+for(const row of shared.files){
+ assert.ok(fs.existsSync(row.path),`shared current path missing ${row.path}`);
+ const governed=assertPprR3GovernedPath(row.path,row.sha256,'ZIWEI-CX-R1 W17R shared baseline');
+ if(governed.state==='UNCHANGED')assert.equal(fs.statSync(row.path).size,row.sizeBytes,`W17R shared size drift: ${row.path}`);
+ else assert.equal(governed.state,'GOVERNED_SUCCESSOR',`W17R shared path is not a governed PPR successor: ${row.path}`);
+}
+for(const p of shared.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
 
 // Browser module closure: every static import reachable from the Zi Wei specialist renderer must stay inside public /assets.
 const entry='assets/customer-ui/js/specialists/ziwei/product-renderer.js';

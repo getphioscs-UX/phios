@@ -6,6 +6,7 @@ import {onRequestPost as customerPersonalReality} from '../functions/api/custome
 import {renderZiweiProduct} from '../assets/customer-ui/js/specialists/ziwei/product-renderer.js';
 import {ZIWEI_CX_R1_W16_SURFACE_ACTIVATION,isZiweiCustomerSurfaceActivated} from '../functions/personal-reality-product/adapters/ziwei-customer-surface-activation.js';
 import {auditZiweiDom,exerciseZiweiInteractionPlan,parseAuditDom,queryAll} from './lib/ziwei-cx-r1-w14-dom-harness.mjs';
+import {assertPprR3GovernedPath} from './ppr-r3-governed-successor-support.mjs';
 
 const BASE='content/customer-experience-rebuild/ziwei-cx-r1';
 const BASELINE='492ecdddc1f84e5a915f416c60c61ed23e4fcb7f';
@@ -46,7 +47,13 @@ assert.equal(replay.status,'ACTIVATION_REPLAY_ACCEPTED_96_OF_96');assert.equal(r
 assert.equal(acceptance.status,'ACTUAL_CUSTOMER_SURFACE_ACTIVE');assert.equal(acceptance.gates.W15_HUMAN_VISUAL_12_OF_12,true);assert.equal(acceptance.gates.CURRENT_BASELINE_ROUTE_REPLAY_96_OF_96,true);assert.equal(acceptance.gates.PPR_SHARED_LAYER_MUTATION_REQUIRED,false);assert.equal(acceptance.result.fullProductionVisibleToCustomer,true);assert.equal(acceptance.blockers.length,0);
 assert.equal(roadmap.status,'W0_W16_COMPLETE_ACTUAL_CUSTOMER_SURFACE_ACTIVE');assert.equal(roadmap.customerSurface.visualHumanAcceptance,'12/12');assert.equal(roadmap.customerSurface.currentBaselineActivationReplay,'96/96');assert.equal(roadmap.customerSurface.customerSurfaceActivationAllowed,true);assert.equal(roadmap.customerSurface.fullProductionVisibleToCustomer,true);
 // Current shared baseline is frozen as-is; Zi Wei activation must not mutate it.
-for(const row of freeze.files){assert.ok(fs.existsSync(row.path),`shared frozen path missing ${row.path}`);const current=sha(row.path);if(current===row.sha256){assert.equal(fs.statSync(row.path).size,row.sizeBytes,`PPR shared size drift: ${row.path}`);continue;}assert.ok(w17Shared,'W16 historical shared baseline drift requires a governed current shared successor');const successor=w17Shared.files.find(x=>x.path===row.path);assert.ok(successor,`current shared successor missing ${row.path}`);assert.equal(current,successor.sha256,`PPR shared drift not governed by current Zi Wei successor: ${row.path}`);assert.equal(fs.statSync(row.path).size,successor.sizeBytes,`PPR current successor size drift: ${row.path}`);}for(const p of freeze.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
+for(const row of freeze.files){
+ assert.ok(fs.existsSync(row.path),`shared frozen path missing ${row.path}`);
+ const governed=assertPprR3GovernedPath(row.path,row.sha256,'ZIWEI-CX-R1 W16 shared freeze');
+ if(governed.state==='UNCHANGED')assert.equal(fs.statSync(row.path).size,row.sizeBytes,`PPR shared size drift: ${row.path}`);
+ else assert.equal(governed.state,'GOVERNED_SUCCESSOR',`PPR shared path is neither frozen nor governed successor: ${row.path}`);
+}
+for(const p of freeze.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
 // One real current canonical API -> activated product -> specialist DOM witness.
 function mockExternalFetch(){return async input=>{const url=String(input?.url||input);if(url.includes('nominatim.openstreetmap.org/lookup'))return new Response(JSON.stringify([{name:'Hong Kong',lat:'22.3193',lon:'114.1694',display_name:'Hong Kong',address:{city:'Hong Kong',country:'Hong Kong',country_code:'hk'},namedetails:{'name:en':'Hong Kong','name:zh':'香港'}}]),{status:200,headers:{'content-type':'application/json'}});if(url.includes('timeapi.io/api/TimeZone/coordinate'))return new Response(JSON.stringify({timeZone:'Asia/Hong_Kong'}),{status:200,headers:{'content-type':'application/json'}});throw new Error(`ZIWEI_CX_R1_W16_UNEXPECTED_FETCH:${url}`);};}
 const oldFetch=globalThis.fetch;globalThis.fetch=mockExternalFetch();try{

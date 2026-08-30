@@ -8,6 +8,7 @@ const W10B='content/professional/personal-reality/r3/authority/ppr-r3-w10b-produ
 const R4V1='content/professional/personal-reality/r4/authority/ppr-r4-method-input-successor-freeze-v1.json';
 const R4V2='content/professional/personal-reality/r4/authority/ppr-r4-ast-target-context-input-successor-v2.json';
 const CURRENT='content/professional/personal-reality/r4/authority/ppr-r4-current-main-shared-successor-reconciliation-7c61264-v1.json';
+const R5='content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json';
 
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const optional=p=>fs.existsSync(p)?j(p):null;
@@ -34,7 +35,7 @@ export function assertPprR3RetiredPath(path,label='PPR-R3'){
 function edge(path,from,to,kind,validate){return from&&to?{path,from,to,kind,validate}:null}
 function edgesFor(path){
  const edges=[];
- const ecr=optional(ECR),w10a=optional(W10A),w10b=optional(W10B),r4v1=optional(R4V1),r4v2=optional(R4V2),current=optional(CURRENT);
+ const ecr=optional(ECR),w10a=optional(W10A),w10b=optional(W10B),r4v1=optional(R4V1),r4v2=optional(R4V2),current=optional(CURRENT),r5=optional(R5);
  const ep=ecr?.protectedSuccessors?.[path];if(ep)edges.push(edge(path,ep.predecessorSha256,ep.successorSha256,'ECR',()=>{
   const allowed={
    'perspectives/personal/index.html':'ECR_BRAND_ASSET_CORRECTION_ONLY',
@@ -58,6 +59,13 @@ function edgesFor(path){
   if(path==='perspectives/personal/index.html'){
    const html=fs.readFileSync(path,'utf8');assert.match(html,/rel="canonical" href="\/perspectives\/personal\/"/);assert.match(html,/data-cx-personal-form/);assert.match(html,/data-ppr-r4-method-input-mount/);
   }
+ }));
+ const r5p=r5?.sharedFileSuccessorProof?.[path];if(r5p)edges.push(edge(path,r5p.predecessorSha256,r5p.successorSha256,'PPR-R5',()=>{
+  assert.equal(r5.status,'EDITORIAL_SUCCESSOR_IMPLEMENTED','PPR-R5 successor status changed');
+  assert.equal(r5.canonicalRoute,'/perspectives/personal/','PPR-R5 canonical route changed');
+  assert.equal(r5p.changeClass,'PPR_R5_EDITORIAL_SURFACE_SUCCESSOR',`PPR-R5 successor class mismatch: ${path}`);
+  for(const k of ['createsMeaning','createsCalculation','createsProjection','replacesPprR3RendererAuthority','changesMethodInputSemantics','changesApiContract'])assert.equal(r5p[k],false,`PPR-R5 ${k} must stay false: ${path}`);
+  assert.equal(allFalse(r5.boundaries),true,'PPR-R5 boundary changed');
  }));
  const rv2=r4v2?.sharedFileSuccessorProof?.[path];if(rv2)edges.push(edge(path,rv2.predecessorSha256,rv2.successorSha256,'PPR-R4-v2',()=>{
   assert.equal(r4v2.status,'ACTIVE_SUCCESSOR_RECONCILING_PPR_R4_WITH_AST_W10A');assert.equal(rv2.changeClass,'PPR_R4_METHOD_INPUT_EXTENSION_ONLY');assert.equal(allFalse(r4v2.boundaries),true,'PPR-R4 v2 boundary changed');

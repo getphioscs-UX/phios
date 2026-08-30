@@ -7,6 +7,7 @@ import {renderZiweiProduct} from '../assets/customer-ui/js/specialists/ziwei/pro
 import {ZIWEI_CX_R1_PRINT_CONTRACT,buildZiweiPrintCoverHtml} from '../assets/customer-ui/js/specialists/ziwei/ziwei-print-product.js';
 import {ZIWEI_CX_R1_W17_FINAL_SURFACE_ACTIVATION,isZiweiCustomerSurfaceActivated,isZiweiFinalCustomerSurfaceActivated} from '../functions/personal-reality-product/adapters/ziwei-customer-surface-activation.js';
 import {auditZiweiDom,exerciseZiweiInteractionPlan,parseAuditDom,queryAll} from './lib/ziwei-cx-r1-w14-dom-harness.mjs';
+import {assertPprR3GovernedPath} from './ppr-r3-governed-successor-support.mjs';
 
 const BASE='content/customer-experience-rebuild/ziwei-cx-r1';
 const BASELINE='402735ec373fba021235187312e4f526ba919807';
@@ -66,7 +67,13 @@ assert.doesNotMatch(printSource,/buildZiWei|calculateZiwei|resolveZiwei|window\.
 for(const token of ['@media print','@page{margin:14mm 13mm 16mm','data-ziwei-print-cover','break-after:page','[data-ziwei-inspector-index][hidden]{display:grid!important}','[data-ziwei-topic-panel-index][hidden]{display:grid!important}','details:not([open])>*:not(summary)','orphans:3','widows:3'])assert.ok((css+printSource).includes(token),`print token missing ${token}`);
 
 // W17 inherits the current 402735e shared PPR baseline without changing it.
-for(const row of currentShared.files){assert.ok(fs.existsSync(row.path),`shared current path missing ${row.path}`);assert.equal(sha(row.path),row.sha256,`current governed shared baseline drift: ${row.path}`);assert.equal(fs.statSync(row.path).size,row.sizeBytes,`current governed shared size drift: ${row.path}`);}for(const p of currentShared.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
+for(const row of currentShared.files){
+ assert.ok(fs.existsSync(row.path),`shared current path missing ${row.path}`);
+ const governed=assertPprR3GovernedPath(row.path,row.sha256,'ZIWEI-CX-R1 W17 shared baseline');
+ if(governed.state==='UNCHANGED')assert.equal(fs.statSync(row.path).size,row.sizeBytes,`current governed shared size drift: ${row.path}`);
+ else assert.equal(governed.state,'GOVERNED_SUCCESSOR',`current shared path is not a governed PPR successor: ${row.path}`);
+}
+for(const p of currentShared.requiredAbsent)assert.equal(fs.existsSync(p),false,`retired shared file resurrected: ${p}`);
 
 // One current live API -> full product -> specialist DOM + print witness.
 function mockExternalFetch(){return async input=>{const url=String(input?.url||input);if(url.includes('nominatim.openstreetmap.org/lookup'))return new Response(JSON.stringify([{name:'Hong Kong',lat:'22.3193',lon:'114.1694',display_name:'Hong Kong',address:{city:'Hong Kong',country:'Hong Kong',country_code:'hk'},namedetails:{'name:en':'Hong Kong','name:zh':'香港'}}]),{status:200,headers:{'content-type':'application/json'}});if(url.includes('timeapi.io/api/TimeZone/coordinate'))return new Response(JSON.stringify({timeZone:'Asia/Hong_Kong'}),{status:200,headers:{'content-type':'application/json'}});throw new Error(`ZIWEI_CX_R1_W17_UNEXPECTED_FETCH:${url}`);};}
