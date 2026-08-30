@@ -4,6 +4,48 @@ const list=value=>Array.isArray(value)?value:[];
 const ownerFor=(readingIR,type,schoolCode=null)=>list(readingIR?.renderOwners).find(x=>x.compositionType===type&&(!schoolCode||x.schoolCode===schoolCode))||null;
 const reportBlock=(report,schoolCode)=>list(list(report?.sections).find(x=>x.code==='SCHOOLS')?.blocks).find(x=>x.schoolCode===schoolCode)||null;
 
+const ELEMENT_ORDER=Object.freeze(['WOOD','FIRE','EARTH','METAL','WATER']);
+const GENERATES=Object.freeze({WOOD:'FIRE',FIRE:'EARTH',EARTH:'METAL',METAL:'WATER',WATER:'WOOD'});
+const CONTROLS=Object.freeze({WOOD:'EARTH',EARTH:'WATER',WATER:'FIRE',FIRE:'METAL',METAL:'WOOD'});
+const addInventory=(out,src)=>{for(const key of ELEMENT_ORDER)out[key]+=(Number(src?.[key])||0);return out};
+function monthCommandRelation(element,monthElement){
+ if(!element||!monthElement)return 'MONTH_COMMAND_RELATION_UNAVAILABLE';
+ if(element===monthElement)return 'SAME_AS_MONTH_COMMAND';
+ if(GENERATES[monthElement]===element)return 'GENERATED_BY_MONTH_COMMAND';
+ if(GENERATES[element]===monthElement)return 'GENERATES_MONTH_COMMAND';
+ if(CONTROLS[monthElement]===element)return 'CONTROLLED_BY_MONTH_COMMAND';
+ if(CONTROLS[element]===monthElement)return 'CONTROLS_MONTH_COMMAND';
+ return 'MONTH_COMMAND_RELATION_UNAVAILABLE';
+}
+function dayMasterFunction(element,dayElement){
+ if(!element||!dayElement)return 'UNAVAILABLE';
+ if(element===dayElement)return 'PEER';
+ if(GENERATES[element]===dayElement)return 'RESOURCE';
+ if(GENERATES[dayElement]===element)return 'OUTPUT';
+ if(CONTROLS[dayElement]===element)return 'WEALTH';
+ if(CONTROLS[element]===dayElement)return 'OFFICER';
+ return 'UNAVAILABLE';
+}
+function fiveElementModule(readingIR){
+ const foundation=readingIR?.sections?.foundation||{},inventory=foundation.fiveElementInventory||{};
+ const combined=addInventory(addInventory(addInventory(Object.fromEntries(ELEMENT_ORDER.map(x=>[x,0])),inventory.visibleStems),inventory.visibleBranches),inventory.hiddenStemsUnweighted);
+ const total=ELEMENT_ORDER.reduce((sum,key)=>sum+combined[key],0),month=foundation.monthCommand||{},day=foundation.dayMaster||{};
+ const items=ELEMENT_ORDER.map(element=>freeze({
+  element,rawCount:combined[element],rawRatio:total?Math.round((combined[element]/total)*1000)/10:0,
+  breakdown:freeze({visibleStems:Number(inventory.visibleStems?.[element])||0,visibleBranches:Number(inventory.visibleBranches?.[element])||0,hiddenStemsUnweighted:Number(inventory.hiddenStemsUnweighted?.[element])||0}),
+  monthCommandRelation:monthCommandRelation(element,month?.branch?.element),dayMasterFunction:dayMasterFunction(element,day?.element)
+ }));
+ return freeze({
+  schemaVersion:'PHI-OS-BAZI-CX-PRO-FIVE-ELEMENT-VISUAL-PROJECTION-v1.0.0',work:'BAZI-CX-PRO-W2',
+  rawInventory:freeze({visibleStems:freeze({...inventory.visibleStems}),visibleBranches:freeze({...inventory.visibleBranches}),hiddenStemsUnweighted:freeze({...inventory.hiddenStemsUnweighted}),combined:freeze(combined),total}),
+  monthCommand:freeze({branchCode:month?.branch?.code||null,branchZh:month?.branch?.zh||null,element:month?.branch?.element||null,season:month?.season||null}),
+  dayMaster:freeze({code:day?.code||null,zh:day?.zh||null,element:day?.element||null,polarity:day?.polarity||null}),
+  tenGodPreview:freeze({...foundation.tenGodDistribution?.visiblePlusHiddenUnweighted}),items:freeze(items),
+  correction:freeze({mode:'QUALITATIVE_MONTH_COMMAND_RELATION_ONLY',numericWeightedStrengthAvailable:false,weightedHiddenStemScoringApplied:inventory.weightedHiddenStemScoringApplied===true}),
+  boundaries:freeze({rawRatioIsStrengthScore:false,seasonRelationIsFinalStrongWeakVerdict:false,hiddenStemWeightsInvented:false,goodBadScoreCreated:false,fortunePredictionCreated:false})
+ });
+}
+
 function patternModule(readingIR){
  const section=readingIR?.sections?.patterns||{},owner=ownerFor(readingIR,'PATTERN_CANDIDATE_SET');
  return freeze({
@@ -69,8 +111,8 @@ function realityComparisonModule(readingIR,temporalState){
 export function buildBaziProfessionalSurfaceModules({readingIR,report,temporalState='UNAVAILABLE'}={}){
  if(readingIR?.schemaVersion!=='PHI-OS-BAZI-FULL-READING-IR-v1.0.0')throw Object.assign(new Error('PPR_C1_W7_W12_BAZI_READING_IR_REQUIRED'),{code:'PPR_C1_W7_W12_BAZI_READING_IR_REQUIRED'});
  return freeze({
-  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'PPR-C1-W12-v1.0.0',
-  pattern:patternModule(readingIR),schools:schoolModules(readingIR,report),timing:timingModule(readingIR,temporalState),
+  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W2-v1.0.0',
+  fiveElements:fiveElementModule(readingIR),pattern:patternModule(readingIR),schools:schoolModules(readingIR,report),timing:timingModule(readingIR,temporalState),
   customerSafeGraph:buildBaziCustomerSafeStructureGraph({readingIR,temporalState}),
   realityComparison:realityComparisonModule(readingIR,temporalState),
   boundaries:freeze({createsMeaning:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false,recalculatesEvidenceGraph:false,exposesRawEvidenceGraphIds:false,usesPprR3SpecialistPort:true,modifiesSharedPersonalRealitySurface:false})

@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+
+const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const map=readJson('content/customer-experience-rebuild/hd-pro-r3/audit/HD-PRO-R3-W0-current-owner-map.json');
+const protectedFiles=readJson('content/customer-experience-rebuild/hd-pro-r3/audit/HD-PRO-R3-W0-protected-files.json');
+const publish=readJson('content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json');
+const r2Cutover=readJson('content/customer-experience-rebuild/hd-pro-r2/hd-w10-production-cutover-v1.json');
+const hdrFreeze=readJson('content/professional/core-method-runtime/hdr-production-freeze-v1.json');
+const hdrBoundary=readJson('content/professional/method-production-activation/registries/mpa-hdr-boundary-readiness-v1.json');
+
+assert.equal(map.schemaVersion,'PHI-OS-HD-PRO-R3-W0-CURRENT-OWNER-MAP-v1.0.0');
+assert.equal(map.baselineCommit,'dae24c1dd8de49a6c238ddffb8d52b388e8da10d');
+assert.equal(map.status,'OWNER_FROZEN_R3_SHADOW');
+assert.deepEqual(map.freezeRules,['NO_SECOND_HD_REGISTRY','NO_SECOND_CUSTOMER_RENDERER','NO_SECOND_READING_ENGINE','NO_PARALLEL_HUMAN_DESIGN_TREE']);
+assert.equal(map.hardBoundaries.phiosHumanDesignBirthCalculationAuthority,false);
+assert.equal(map.hardBoundaries.externalConfirmedChartAuthority,true);
+assert.equal(map.hardBoundaries.importedReportEqualsPhiosCalculatedChart,false);
+assert.equal(map.hardBoundaries.atomicMeaningEqualsCustomerReading,false);
+assert.equal(map.hardBoundaries.automaticVariableOrPHSCalculationAllowed,false);
+assert.equal(map.hardBoundaries.r2HumanReviewMayAutoAdmitR3Semantics,false);
+
+for(const [role,record] of Object.entries(map.owners)){
+  assert.equal(fs.existsSync(record.path),true,`${role} owner missing: ${record.path}`);
+  assert.equal(record.sha256,sha(record.path),`${role} owner drifted during W0/W1`);
+}
+for(const item of protectedFiles.protectedFiles){
+  assert.equal(fs.existsSync(item.path),true,`protected HD file missing: ${item.path}`);
+  assert.equal(item.sha256,sha(item.path),`protected HD file mutated: ${item.path}`);
+}
+assert.equal(protectedFiles.mutationPolicy,'SUCCESSOR_ONLY_NO_HISTORICAL_REWRITE');
+assert.equal(publish.status,'HD_PRO_R2_CUSTOMER_PUBLISHED_SUCCESSOR_ACTIVE');
+assert.equal(publish.cutover.customerPublicationState,'CUSTOMER_PUBLISHED');
+assert.equal(publish.humanAdmission.status,'HUMAN_ACCEPTED_24_OF_24');
+assert.equal(r2Cutover.cutover.customerInterpretiveReading,'CUSTOMER_PUBLISHED');
+assert.equal(r2Cutover.cutover.realityComposition,'CUSTOMER_PUBLISHED');
+assert.equal(hdrFreeze.productionStatus,'blocked');
+assert.equal(hdrFreeze.executionMode,'validation_only');
+assert.equal(hdrBoundary.productionExecutionAllowed,false);
+assert.equal(hdrBoundary.publicMethodExecutionAllowed,false);
+assert.equal(map.r3SuccessorPolicy.r2RuntimeMustRemainDefaultUntilR3HumanAccepted,true);
+assert.equal(map.r3SuccessorPolicy.r3DefaultPublicationState,'SHADOW_CANDIDATE');
+
+const pkg=readJson('package.json');
+assert.equal(pkg.scripts['check:hd-pro-r3:w0'],'node scripts/check-hd-pro-r3-w0-current-authority.mjs');
+assert.equal(pkg.scripts['check:hd-pro-r3'],'node scripts/check-hd-pro-r3-w0-current-authority.mjs && node scripts/check-hd-pro-r3-w1-semantic-coverage.mjs');
+
+console.log('✓ HD-PRO-R3-W0 Current Authority & Owner Freeze passed.');
+console.log('  R2 remains CUSTOMER_PUBLISHED; R3 is SHADOW_CANDIDATE; no Human Design calculation authority was created.');
