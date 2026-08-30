@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "PHI-OS-ECR-R3-W4-CONFIRMED-HD-CONTEXT-TRANSPORT-v1.0.0",
+  "baselineCommit": "90ddc484ffb603a1f3a10e50dc638a0526eac717",
+  "status": "ENGINEERING_COMPLETE",
+  "scope": [
+    "ECR-R3-W4 Confirmed Human Design Context Transport"
+  ],
+  "predecessors": {
+    "ecrCustomerCoherenceRepair": "content/embodied-configuration/product-r3/acceptance/ecr-r3-w0-w3-customer-coherence-repair-v1.json",
+    "externalProfileAuthority": "content/customer-experience-rebuild/r12r4b/external-profile-authority-v1.json",
+    "externalProfileProvenance": "content/customer-experience-rebuild/r12r4b/external-profile-provenance-contract-v1.json",
+    "humanDesignCustomerPublication": "content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json",
+    "crossPerspectiveInputAuthority": "functions/runtime-reading/cross-perspective-input-ir.js"
+  },
+  "transport": {
+    "schemaVersion": "PHI-OS-ECR-R3-CONFIRMED-HD-CONTEXT-TRANSPORT-v1.0.0",
+    "authorityClass": "CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT",
+    "customerConfirmationRequired": true,
+    "profileDigestIntegrityRequired": true,
+    "serverRebuildsCanonicalChart": true,
+    "serverRebuildsAdmittedExternalReading": true,
+    "serverRebuildsRealityComposition": true,
+    "rawUploadTransported": false,
+    "unconfirmedExtractionAccepted": false,
+    "clientDerivedChartTrusted": false,
+    "confirmedProfileEchoedInCustomerView": false
+  },
+  "canonicalCustomerRoute": {
+    "route": "/perspectives/personal/",
+    "requestFields": [
+      "confirmedExternalProfile",
+      "externalProfileContextConsent"
+    ],
+    "responseField": "view.humanDesignContext",
+    "clientRequiresReadStep": true,
+    "clientRequiresConfirmationStep": true,
+    "clientUsesServerRebuiltContextAfterMainRequest": true,
+    "clientLocalReadingOverlayRemoved": true
+  },
+  "crossPerspective": {
+    "confirmedXpfTransportEnabled": true,
+    "xpfCountsTowardMethodAgreement": false,
+    "xpfCreatesCalculatedMethodVote": false,
+    "hdrInternalReadingTransported": false
+  },
+  "successorBoundary": {
+    "ecrHumanDesignComparisonComposed": false,
+    "comparisonIrCreated": false,
+    "customerComparisonRendererCreated": false,
+    "reservedFor": [
+      "ECR-R3-W5 ECR x Human Design Comparison IR",
+      "ECR-R3-W6 Customer Comparison Renderer"
+    ]
+  },
+  "runtimeSuccessorProof": {
+    "assets/customer-ui/js/surfaces/personal-reality.js": {
+      "predecessorSha256": "37428794e618dc6952dc52f624d222d6596d00e0ba26587330ec2b3d47762bd1",
+      "successorSha256": "2a7a3e262da0c1972a63bcd6fc66623e540b1f89087a288789394e682fffda67",
+      "changeClass": "CONFIRMED_HD_CONTEXT_CLIENT_TRANSPORT"
+    },
+    "functions/api/customer-personal-reality.js": {
+      "predecessorSha256": "774377f95849e3ada48e84f33ece1e5ade8545a679fcf269809136edde0c8fc1",
+      "successorSha256": "bd7a98b4a22eaafb4f2718993ab3cfbf3f173b95a69acab0076568526a49f2ce",
+      "changeClass": "CONFIRMED_HD_CONTEXT_SERVER_TRANSPORT"
+    },
+    "functions/external-profile/human-design-context-transport.js": {
+      "added": true,
+      "sha256": "b669fb29414ee5214f213dbc9f238add795e42a4afb204f7a177b4262fb95d80",
+      "changeClass": "GOVERNED_CONTEXT_TRANSPORT_AUTHORITY"
+    },
+    "content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json": {
+      "predecessorSha256": "689db9a60afea6ec64b9f154f688e22955d7fa82a3071ca82d6a40b3a903dafb",
+      "successorSha256": "1e2c61cc313c73761db983bb14d92e8cf4773a5e9616ce8c68aa2c0d1847514f",
+      "changeClass": "CURRENT_SHARED_OWNER_SUCCESSOR_REGISTRATION"
+    }
+  },
+  "boundaries": {
+    "ecrRemainsPhiOsNative": true,
+    "humanDesignRemainsCustomerSuppliedExternalContext": true,
+    "phiosHumanDesignCalculationAuthorityCreated": false,
+    "automaticHumanDesignCalculationUsed": false,
+    "hdrPublicExecutionUsed": false,
+    "humanDesignCountsTowardCrossMethodAgreement": false,
+    "rendererCreatesMeaning": false,
+    "currentRealityEvidenceCreated": false,
+    "automaticPersistence": false,
+    "runtimeMemoryWritten": false,
+    "historicalHdProR3W0ArtifactsMutated": false,
+    "sharedOwnerRegistryUpdated": true,
+    "historicalEcrW0W3AcceptanceMutated": false
+  },
+  "validation": {
+    "checker": "scripts/check-ecr-product-r3-w4.mjs",
+    "checkerSha256": "78cf31befe859125d3ab1721a82dab7e3435ddf38165a87c9b8bd9eb214c1903",
+    "directTransportRegression": true,
+    "canonicalApiTransportRegression": true,
+    "crossPerspectiveNonVotingContextRegression": true
+  },
+  "checkerReconciliation": {
+    "scripts/check-hd-pro-r3-w0-current-authority.mjs": {
+      "predecessorSha256": "7b49b1233b012e35732f6992ef220296c7cf7b098c2bfd1a8626c745ee4e9576",
+      "successorSha256": "2494513cd64055a33aa717eba189f3dbe06b67090214c2b4f6c96c5841388b42",
+      "changeClass": "SUCCESSOR_CHAIN_RECONCILIATION_ONLY",
+      "changesRuntimeBehavior": false,
+      "historicalW0ArtifactsMutated": false
+    },
+    "scripts/check-ecr-product-r3-w0-w3.mjs": {
+      "predecessorSha256": "414191f46c0cf2445a5f408a0957aa49b2f81ca8bdf9bfed781d7f958a9ef11f",
+      "successorSha256": "bb37e47e72a4167caf13eb67f5b5cfc163ccd85f78f9cf830d7dc87ee4b65e9b",
+      "changeClass": "SUCCESSOR_CHAIN_RECONCILIATION_ONLY",
+      "changesRuntimeBehavior": false,
+      "historicalW0W3AcceptanceMutated": false
+    }
+  }
+}

@@ -17,7 +17,8 @@ const p=buildFixtureProjection(),visual={title:'你的 PHI 构型',payload:p},pr
 const parts=[renderPhiMandalaVisual(visual),renderCalculationStoryVisual(visual),renderCoordinateStoryVisual(visual),renderDriverProfileVisual(visual),renderMotionConfigurationVisual(visual),renderActivationTimelineVisual(visual)];
 for(let i=1;i<=6;i++)assert.match(parts.join(''),new RegExp(`id="ecr-section-0${i}"`));
 const reading=renderEcrReadingReport(product,{payload:{cards:[{title:'Fixture',subtitle:'Visual summary',oneLineInsight:'Machine-only fixture card',asset:{objectKey:''}}]}});
-for(let i=7;i<=11;i++)assert.match(reading,new RegExp(`id="ecr-section-${String(i).padStart(2,'0')}"`));
+for(const i of [7,8,9,11])assert.match(reading,new RegExp(`id="ecr-section-${String(i).padStart(2,'0')}"`));
+assert.doesNotMatch(reading,/id="ecr-section-10"/);
 assert.match(renderTechnicalDisclosure(product),/id="ecr-section-12"/);
 assert.match(parts[0],/data-ecr-mandala-explore/);assert.match(parts[0],/data-ecr-mandala-scroll-region/);assert.match(parts[3],/role="meter"/);assert.match(parts[4],/ENVIRONMENT PRIORITY|环境优先/);assert.match(parts[5],/阶段 ≠ 吉凶/);
-console.log('✓ ECR Mandala renderer gate passed: 01–12 product IA is reachable, scoped CSS owns styling, and browser renderers remain presentation-only.');
+console.log('✓ ECR Mandala renderer gate passed: the current 11-section product IA is reachable, section 10 remains deferred to Current Reality, scoped CSS owns styling, and browser renderers remain presentation-only.');

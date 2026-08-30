@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
 
 const ROOT='content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3';
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
@@ -23,9 +24,12 @@ assert.equal(map.hardBoundaries.atomicMeaningEqualsCustomerReading,false);
 assert.equal(map.hardBoundaries.automaticVariableOrPHSCalculationAllowed,false);
 assert.equal(map.hardBoundaries.r2HumanReviewMayAutoAdmitR3Semantics,false);
 
+const successorEligibleSharedOwners=new Set(['assets/customer-ui/js/surfaces/personal-reality.js','perspectives/personal/index.html']);
 for(const [role,record] of Object.entries(map.owners)){
   assert.equal(fs.existsSync(record.path),true,`${role} owner missing: ${record.path}`);
-  assert.equal(record.sha256,sha(record.path),`${role} owner drifted after W0 freeze`);
+  const currentDigest=sha(record.path);
+  if(record.sha256!==currentDigest&&successorEligibleSharedOwners.has(record.path))assertPprCurrentSharedOwner(record.path,{historicalDigest:record.sha256,label:`HD-PRO-R3-W0 ${role}`});
+  else assert.equal(record.sha256,currentDigest,`${role} owner drifted after W0 freeze without a registered successor`);
 }
 for(const item of protectedFiles.protectedFiles){
   assert.equal(fs.existsSync(item.path),true,`protected HD file missing: ${item.path}`);

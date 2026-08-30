@@ -18,6 +18,7 @@ import {buildZiweiFullProductionCustomerRuntime} from '../zi-wei-full-production
 import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-live-target-context-runtime.js';
 import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
 import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-reading-production.js';
+import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignContextProfile} from '../external-profile/human-design-context-transport.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -288,6 +289,15 @@ export async function onRequestPost(context){
   const locale=body?.locale==='zh-Hans'?'zh-Hans':'en';
   context.locale=locale;
   context.customerIntent=body?.intent||null;
+  let confirmedXpf=null;
+  let humanDesignContext=null;
+  if(body?.confirmedExternalProfile!=null){
+    if(body?.externalProfileContextConsent!==true)return json({ok:false,error:'EXTERNAL_PROFILE_CONTEXT_CONSENT_REQUIRED'},403);
+    try{
+      confirmedXpf=normalizeConfirmedHumanDesignContextProfile(body.confirmedExternalProfile);
+      humanDesignContext=buildConfirmedHumanDesignContextTransport(confirmedXpf,{locale,intent:body?.intent||''});
+    }catch(error){return json({ok:false,error:error?.code||error?.message||'HD_CONTEXT_CONFIRMED_PROFILE_INVALID'},422)}
+  }
   let location=null;
   if(needsPlace){
     const snapshot=body?.birthLocationSnapshot||null;
@@ -339,7 +349,7 @@ export async function onRequestPost(context){
   let combinedReading=null;
   if(selected.length>=2&&selected.length<=5){
     const crossInputs=results.map(result=>result?.crossReadingMethod||result?.readingMethod).filter(method=>method?.state==='READY_TO_READ'&&method?.technical?.acceptanceBasis==='ADMITTED_COMPOSITION_RULESET');
-    if(crossInputs.length>=2){try{combinedReading=await maybeBuildProductionCombinedReading({acceptedMethodReadings:crossInputs,customerIntent:body?.intent||null,confirmedXpf:null,hdrInternalReading:null})}catch{combinedReading=null}}
+    if(crossInputs.length>=2){try{combinedReading=await maybeBuildProductionCombinedReading({acceptedMethodReadings:crossInputs,customerIntent:body?.intent||null,confirmedXpf,hdrInternalReading:null})}catch{combinedReading=null}}
   }
   // Cross production compatibility witness: buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading})
   const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading,ziweiFullProduction,singleZiwei,hasPublishableNativeReport,hasExplicitBaziTiming});
@@ -356,7 +366,7 @@ export async function onRequestPost(context){
   const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
   const crossPerspectiveReading=combinedReading;
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,humanDesignContext});
   return json({
     ok:true,
     view,
