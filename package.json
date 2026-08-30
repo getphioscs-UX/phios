@@ -2022,13 +2022,14 @@
     "check:mfp-r:w0-gap-harvest": "node scripts/check-mfp-r-w0-gap-harvest.mjs",
     "check:mfp-r:w1-gap-owner-map": "node scripts/check-mfp-r-w1-gap-owner-map.mjs",
     "check:mfp-r:w2-selective-fp-closure": "node scripts/check-mfp-r-w2-selective-fp-closure.mjs",
-    "check:mfp-r:w3-r2-regeneration": "node scripts/check-mfp-r-w3-r2-regeneration.mjs",
+    "check:mfp-r:w3-r2-regeneration": "node scripts/build-mfp-r-w3-r2-regeneration.mjs && node scripts/check-mfp-r-w3-r2-regeneration.mjs",
     "check:mfp-r:pre-current-reality-freeze": "node scripts/check-mfp-r-w4-pre-current-reality-freeze.mjs",
     "check:mfp-r": "npm run check:mfp-r:w0-gap-harvest && npm run check:mfp-r:w1-gap-owner-map && npm run check:mfp-r:ast-001-machine && npm run check:mfp-r:w2-selective-fp-closure && npm run check:mfp-r:w3-r2-regeneration && npm run check:mfp-r:pre-current-reality-freeze",
     "build:mfp-r:ast-001": "node scripts/build-mfp-r-ast-001-machine-review.mjs",
     "check:mfp-r:ast-001-machine": "node scripts/build-mfp-r-ast-001-machine-review.mjs && node scripts/check-mfp-r-ast-001-machine.mjs",
     "check:ziwei-cx-r1-w17": "node scripts/check-ziwei-cx-r1-w17.mjs",
-    "check:ziwei-cx-r1-w17r": "node scripts/check-ziwei-cx-r1-w17r-browser-delivery-recovery.mjs"
+    "check:ziwei-cx-r1-w17r": "node scripts/check-ziwei-cx-r1-w17r-browser-delivery-recovery.mjs",
+    "build:mfp-r:w3-r2-regeneration": "node scripts/build-mfp-r-w3-r2-regeneration.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

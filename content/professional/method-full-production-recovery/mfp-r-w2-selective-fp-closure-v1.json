@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-MFP-R-W2-SELECTIVE-FP-CLOSURE-v1.0.0",
   "workCode": "MFP-R-W2",
   "baselineCommit": "402735ec373fba021235187312e4f526ba919807",
-  "status": "SELECTIVE_CLOSURE_MACHINE_VERIFIED_HUMAN_PENDING",
+  "status": "SELECTIVE_CLOSURE_COMPLETE",
   "registryRef": "content/professional/method-full-production-recovery/method-full-production-gap-registry-v1.json",
   "closures": [
     {
@@ -12,13 +12,15 @@
       "oldAuthorityRef": "content/professional/ast-full-production/admission/ast-fp-r4a-professional-semantic-human-admission-v1.json",
       "successorAuthorityRef": "content/professional/ast-full-production/recovery/ast-mfp-r-planet-sign-composition-rule-v1.json",
       "machineEvidence": "content/professional/ast-full-production/recovery/ast-mfp-r-planet-sign-machine-campaign-v1.json",
-      "productionAdmissionRef": null,
-      "regressionRefs": [],
-      "closedAt": null,
-      "status": "MACHINE_VERIFIED",
-      "blocker": "240/240 deterministic machine compositions are verified. Human review remains 0/24 accepted and production admission is absent; customer runtime use stays blocked.",
+      "productionAdmissionRef": "content/professional/ast-full-production/recovery/ast-mfp-r-planet-sign-production-admission-v1.json",
+      "regressionRefs": [
+        "content/professional/method-full-production-recovery/mfp-r-r2-regeneration-regression-v1.json"
+      ],
+      "closedAt": "2026-08-30",
+      "status": "CLOSED",
+      "blocker": null,
       "humanReviewRef": "content/professional/ast-full-production/recovery/ast-mfp-r-planet-sign-human-review-v1.json",
-      "humanEvidence": null
+      "humanEvidence": "content/professional/ast-full-production/recovery/ast-mfp-r-planet-sign-human-review-v1.json"
     }
   ],
   "closedNotProductBlocking": [
@@ -188,5 +190,6 @@
     "closedRequiresProductionAdmission": true,
     "machineMaySubstituteHuman": false,
     "fullMethodProgramRerunRequired": false
-  }
+  },
+  "closureBaselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f"
 }

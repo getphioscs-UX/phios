@@ -1,13 +1,132 @@
 {
   "schemaVersion": "PHI-OS-MFP-R-W3-R2-REGENERATION-REGRESSION-v1.0.0",
   "workCode": "MFP-R-W3",
-  "baselineCommit": "402735ec373fba021235187312e4f526ba919807",
-  "status": "WAITING_FOR_SELECTIVE_FP_CLOSURE",
+  "baselineCommit": "7c6126404fe8e257b44937a0149bf23c837c538f",
+  "status": "R2_REGENERATION_COMPLETE",
   "closureRef": "content/professional/method-full-production-recovery/mfp-r-w2-selective-fp-closure-v1.json",
-  "regressions": [],
-  "pendingGapIds": [
-    "MFP-R-AST-001"
+  "regressions": [
+    {
+      "gapId": "MFP-R-AST-001",
+      "methodId": "AST",
+      "beforeReadingRef": "content/professional/method-full-production-recovery/regression/ast-mfp-r-r2-before-reading-v1.json",
+      "afterReadingRef": "content/professional/method-full-production-recovery/regression/ast-mfp-r-r2-after-reading-v1.json",
+      "knowledgeDelta": {
+        "admittedPlanetSignEvidenceUnits": 10,
+        "selectedForCustomerInformationGain": 3,
+        "machineCases": 240,
+        "humanAcceptedCases": 24,
+        "productionAdmissionRef": "content/professional/ast-full-production/recovery/ast-mfp-r-planet-sign-production-admission-v1.json"
+      },
+      "semanticDelta": {
+        "beforeClaimCount": 3,
+        "afterClaimCount": 6,
+        "beforeUniqueSemanticOwnerCount": 2,
+        "afterUniqueSemanticOwnerCount": 5,
+        "beforeThemeCount": 3,
+        "afterThemeCount": 3,
+        "visibleRecoveryClaimRefs": [
+          "SMR2-CLAIM-AST-AST-MFP-R-PS-SUN-LEO",
+          "SMR2-CLAIM-AST-AST-MFP-R-PS-MERCURY-LIBRA",
+          "SMR2-CLAIM-AST-AST-MFP-R-PS-MOON-VIRGO"
+        ]
+      },
+      "customerValueDelta": {
+        "newSignSpecificExplanationsVisible": 3,
+        "firstScreenPriorityStable": true,
+        "eligibleSectionSetStable": true,
+        "paragraphRepetitionDelta": 0,
+        "informationGainDelta": 3,
+        "customerReadabilityPassed": true
+      },
+      "dimensions": {
+        "claimCount": {
+          "before": 3,
+          "after": 6
+        },
+        "uniqueSemanticOwnerCount": {
+          "before": 2,
+          "after": 5
+        },
+        "evidenceCoverage": {
+          "before": {
+            "coveredClaims": 3,
+            "totalClaims": 3,
+            "ratio": 1
+          },
+          "after": {
+            "coveredClaims": 6,
+            "totalClaims": 6,
+            "ratio": 1
+          }
+        },
+        "counterEvidencePreservation": {
+          "preserved": true,
+          "before": [],
+          "after": []
+        },
+        "tensionPreservation": {
+          "preserved": true
+        },
+        "priorityStability": {
+          "stable": true,
+          "beforeFirstScreenClaimRefs": [
+            "SMR2-CLAIM-AST-CXI-AST-C13B9C3DC48D-01",
+            "SMR2-CLAIM-AST-CXI-AST-C13B9C3DC48D-02",
+            "SMR2-CLAIM-AST-CXI-AST-C13B9C3DC48D-03"
+          ],
+          "afterFirstScreenClaimRefs": [
+            "SMR2-CLAIM-AST-CXI-AST-C13B9C3DC48D-01",
+            "SMR2-CLAIM-AST-CXI-AST-C13B9C3DC48D-02",
+            "SMR2-CLAIM-AST-CXI-AST-C13B9C3DC48D-03"
+          ]
+        },
+        "dedupRate": {
+          "beforeClusters": 2,
+          "afterClusters": 5,
+          "fullExplanationMaxPerCluster": 1
+        },
+        "paragraphRepetition": {
+          "before": 0,
+          "after": 0
+        },
+        "informationGain": {
+          "before": 11,
+          "after": 14,
+          "newVisibleRecoveryClaims": 3
+        },
+        "sourceLineage": {
+          "before": 18,
+          "after": 24
+        },
+        "ruleLineage": {
+          "before": 2,
+          "after": 3
+        },
+        "timingBoundaries": {
+          "stable": true,
+          "beforeTemporalClaims": 0,
+          "afterTemporalClaims": 0
+        },
+        "customerReadability": {
+          "passed": true,
+          "after": {
+            "firstScreenBlocks": 7,
+            "firstScreenThemes": 3,
+            "mobileNoHorizontalOverflow": true,
+            "mobileNoNestedScroll": true,
+            "printClippedChartAllowed": false,
+            "technicalDefaultCollapsed": true,
+            "internalTokenLeakCount": 0
+          }
+        }
+      },
+      "dedupRegression": false,
+      "lineageRegression": false,
+      "rendererMeaningRegression": false,
+      "decision": "IMPROVED"
+    }
   ],
+  "pendingGapIds": [],
   "requiredPipeline": [
     "Full Production Result",
     "AcceptedMethodReadingEnvelope",
@@ -38,5 +157,6 @@
     "regressedDecisionAllowed": false,
     "backendOnlyImprovementSufficient": false,
     "moreClaimsAloneMeansImprovement": false
-  }
+  },
+  "generatedDeterministically": true
 }
