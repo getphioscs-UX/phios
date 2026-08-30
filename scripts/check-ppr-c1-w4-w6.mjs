@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import path from 'node:path';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
+import {assertPprC1CurrentSuccessor} from './lib/ppr-c1-current-successor.mjs';
 
 const BASE='content/customer-experience-rebuild/ppr-c1';
 const baseline='343773fd6fb61fbf1b37aa861537d7e8f091ec24';
@@ -38,19 +38,16 @@ assert.doesNotMatch(api,/CX-COMP-BZR-PILLAR-DAY-SEASON-v1/);
 const legacyRuntime=read('functions/interpretation-runtime/cx-r12r3b-shared-runtime-v2.js');
 assert.match(legacyRuntime,/function composeBzr/,'historical compatibility implementation is expected to remain without canonical ownership');
 
-// W5: exactly one live single-method renderer and a BZR-native professional structure renderer.
-const renderers=[];
-for(const entry of fs.readdirSync('assets/customer-ui/js',{recursive:true})){
-  const p=path.join('assets/customer-ui/js',String(entry));
-  if(p.endsWith('single-method-reading.js')&&fs.existsSync(p)&&fs.statSync(p).isFile())renderers.push(p.replaceAll('\\','/'));
-}
-assert.deepEqual(renderers,['assets/customer-ui/js/surfaces/single-method-reading.js']);
-const liveRenderer=read(renderers[0]);
+// W5 current successor: the live generic renderer was retired by PPR-R3.
+// BaZi is owned by the specialist renderer registered through the shared specialist host.
+const successor=assertPprC1CurrentSuccessor();
 const baziRenderer=read('assets/customer-ui/js/surfaces/bazi-professional-reading.js');
 const personalClient=read('assets/customer-ui/js/surfaces/personal-reality.js');
-const css=read('assets/customer-ui/surfaces/single-method-reading.css');
-assert.match(liveRenderer,/renderBaziWholeChartFirst/);
-assert.match(liveRenderer,/isBaziNativeProduct/);
+const specialistRenderer=read('assets/customer-ui/js/specialists/bazi/product-renderer.js');
+const css=read('assets/customer-ui/surfaces/bazi-professional-reading.css');
+assert.match(specialistRenderer,/renderBaziProduct/);
+assert.match(specialistRenderer,/renderBaziProfessionalStructure/);
+assert.equal(successor.recon.historicalCheckerResolution.fileNamePresenceDoesNotDefineLiveRendererAuthority,true);
 assert.match(baziRenderer,/data-ppr-bazi-professional-structure/);
 assert.match(baziRenderer,/data-ppr-whole-chart-first/);
 assert.match(baziRenderer,/hiddenStems/);
@@ -61,9 +58,9 @@ assert.doesNotMatch(baziRenderer,/'结构项'/);
 assert.doesNotMatch(baziRenderer,/\.stem\.code|\.branch\.code/);
 assert.match(personalClient,/renderBaziProfessionalStructure/);
 assert.match(personalClient,/m\.methodId==='BZR'&&isBaziNativeProduct\(baziNative\)/);
-assert.match(css,/\.cx-bazi-pillar-grid\{display:grid;grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
-assert.match(css,/@media\(max-width:900px\)/);
-assert.match(css,/@media\(max-width:620px\)/);
+assert.match(css,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+assert.match(css,/@media\(max-width:1050px\)/);
+assert.match(css,/@media\(max-width:767px\)/);
 assert.match(css,/writing-mode:horizontal-tb/);
 
 const structureContract=json(`${BASE}/contracts/bazi-professional-structure-surface-contract-v1.json`);

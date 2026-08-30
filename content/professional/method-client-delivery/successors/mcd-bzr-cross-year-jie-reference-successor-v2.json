@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-MCD-BZR-CROSS-YEAR-JIE-REFERENCE-SUCCESSOR-v2.0.0",
+  "work": "MCD-BZR-CROSS-YEAR-JIE-REFERENCE-SUCCESSOR",
+  "baselineCommit": "492ecdddc1f84e5a915f416c60c61ed23e4fcb7f",
+  "status": "ACTIVE_BZR_CROSS_YEAR_JIE_REFERENCE_SUCCESSOR",
+  "predecessor": {
+    "path": "content/professional/method-client-delivery/successors/mcd-ast-bzr-production-adapter-successor-v1.json",
+    "sha256": "1b97b6df4b358ddcf0adff895d7e16e15a5b8989ef34d8fbc0e326ced243ce6f",
+    "runtimePath": "functions/method-client-delivery/production-adapters/bzr-governed-production-adapters.js",
+    "runtimeSha256": "038e16ecafc84b4c028191a9b1d971951452610a21521c9dcf196e6296f875bb"
+  },
+  "successor": {
+    "runtimePath": "functions/method-client-delivery/production-adapters/bzr-governed-production-adapters.js",
+    "runtimeSha256": "f09a93dda5f9cad55431eadc3451210a1163a9ee1ca6fc4adaa7dd0e066a0040",
+    "changeClass": "BZR_LUCK_CYCLE_REFERENCE_JIE_ADJACENT_YEAR_LOOKUP_ONLY"
+  },
+  "problem": {
+    "code": "BZR_LUCK_REFERENCE_JIE_OUTSIDE_CONTEXT",
+    "observedBy": "PPR-C1-W13 canonical 96-case campaign",
+    "edge": "December birth + FORWARD direction can require next January Jie; January-before-Xiao-Han + BACKWARD direction can require previous December Jie."
+  },
+  "authority": {
+    "solarTermEngine": "ASTRONOMY_ENGINE_JS",
+    "engineVersion": "2.1.19",
+    "sameSolarTermAdapterReused": true,
+    "secondEphemerisAuthorityCreated": false,
+    "solarCalendarTwelveJieContractChanged": false,
+    "luckCycleDirectionRuleChanged": false,
+    "traditionalCalculationSexUseScopeChanged": false,
+    "fourPillarsCalculationChanged": false,
+    "projectionAuthorityChanged": false,
+    "interpretationAuthorityChanged": false,
+    "mpaDispatchAuthorityChanged": false
+  },
+  "runtimeRule": {
+    "primarySearch": "Use the already-governed 12 Jie boundaries for the birth Gregorian year.",
+    "fallbackTrigger": "Only when no previous/next governed Jie exists for the required BACKWARD/FORWARD direction.",
+    "fallback": "Resolve exactly one adjacent Gregorian year through the same Astronomy Engine solarTermAdapter, merge boundaries, and select nearest governed Jie in the required direction.",
+    "silentCurrentTimeInference": false,
+    "hostTimezoneInference": false
+  },
+  "regression": {
+    "forwardDecemberCaseRequired": true,
+    "backwardEarlyJanuaryCaseRequired": true,
+    "pprC1W13Campaign": "content/customer-experience-rebuild/ppr-c1/campaign/ppr-c1-w13-canonical-route-96-v1.json",
+    "pprC1W13Expected": "MACHINE_ACCEPTED_96_OF_96"
+  }
+}

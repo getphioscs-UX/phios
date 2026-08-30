@@ -1,15 +1,16 @@
-import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import {buildMethodProductEnvelope,section,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from '../functions/personal-reality-product/adapters/product-envelope-core.js';
 import {PPR_R3_SPECIALIST_RENDERER_REGISTRY,PPR_R3_SPECIALIST_RENDERER_ROOT,resolveSpecialistRendererDescriptor,isApprovedSpecialistModulePath} from '../assets/customer-ui/js/personal-products/specialist-renderer-registry.js';
+import {assertPprC1CurrentSuccessor} from './lib/ppr-c1-current-successor.mjs';
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8')),t=p=>fs.readFileSync(p,'utf8'),sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const commit='9b0eaeff8f88a1a78f5bc9395a88f28c4ceecb9c';
 const base='content/professional/personal-reality/r3';
 const w0=j(`${base}/audit/ppr-r3-w0-authority-reconciliation-v1.json`);assert.equal(w0.baselineCommit,commit);assert.equal(w0.status,'RECONCILED');assert(w0.cxR12R4bOwns.includes('Personal Reading Report IR'));assert(w0.cxR12R4bOwns.includes('Report cutover'));assert(w0.pprR3Owns.includes('specialist renderer port'));assert(!w0.pprR3Owns.includes('Personal Reading Report IR'));
 const ecrMandalaSuccessor=j('content/embodied-configuration/ecr-customer-mandala-authority-audit-v1.json');
+const {r4}=assertPprC1CurrentSuccessor();
 function assertRetiredBaselineFile(p,label){
  const retired=ecrMandalaSuccessor?.baselineRetiredFiles?.[p];
  assert(retired,`${label} missing without baseline-retirement reconciliation: ${p}`);
@@ -21,8 +22,24 @@ function assertRetiredBaselineFile(p,label){
  assert(fs.existsSync(retired.canonicalSurfaceWitness),`${label} canonical surface witness missing: ${retired.canonicalSurfaceWitness}`);
  const surface=t(retired.canonicalSurfaceWitness);assert.doesNotMatch(surface,/single-method-reading\.js/,`${label} canonical surface still references retired renderer: ${p}`);assert.match(surface,/renderProductRoute/,`${label} canonical surface does not witness the PPR product route: ${p}`);
 }
-assertPprR3AstInputSuccessorIntegrity();
-for(const [p,d] of Object.entries(w0.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'PPR-R3 W0 protected convergence');
+for(const [p,d] of Object.entries(w0.protectedConvergenceFiles)){
+ if(!fs.existsSync(p)){assertRetiredBaselineFile(p,'PPR-R3 W0 protected convergence');continue;}
+ const current=sha(p);if(current===d)continue;
+ const r4Proof=r4?.sharedFileSuccessorProof?.[p];
+ const successor=ecrMandalaSuccessor?.protectedSuccessors?.[p];
+ if(r4Proof){
+  assert(successor,`PPR-R3 W0 missing predecessor successor chain before PPR-R4: ${p}`);
+  assert.equal(successor.predecessorSha256,d,`PPR-R3 W0 predecessor-chain mismatch: ${p}`);
+  assert.equal(successor.successorSha256,r4Proof.predecessorSha256,`PPR-R3 W0 PPR-R4 predecessor is not the admitted current-main predecessor: ${p}`);
+  assert.equal(r4Proof.successorSha256,current,`PPR-R3 W0 PPR-R4 successor digest drift: ${p}`);
+  assert.equal(r4Proof.changeClass,'PPR_R4_METHOD_INPUT_EXTENSION_ONLY',`PPR-R3 W0 PPR-R4 successor class not admitted: ${p}`);
+  continue;
+ }
+ assert(successor,`PPR-R3 W0 protected convergence drift without governed successor: ${p}`);
+ assert.equal(successor.predecessorSha256,d,`PPR-R3 W0 successor predecessor mismatch: ${p}`);
+ assert.equal(successor.successorSha256,current,`PPR-R3 W0 successor digest drift: ${p}`);
+ const admittedClass=p==='perspectives/personal/index.html'?'ECR_BRAND_ASSET_CORRECTION_ONLY':p==='assets/customer-ui/js/surfaces/personal-reality.js'?'BASELINE_RETIRED_RENDERER_DANGLING_IMPORT_REMOVAL_ONLY':null;assert.equal(successor.changeClass,admittedClass,`PPR-R3 W0 unapproved successor class: ${p}`);
+}
 for(const [p,d] of Object.entries(w0.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`PPR-R3 W0 SMR drift: ${p}`);
 const port=j(`${base}/contracts/ppr-r3-w1-specialist-renderer-port-contract-v1.json`);assert.equal(port.baselineCommit,commit);assert.equal(port.callerContract,'renderProductRoute(route,node)');assert.equal(port.callerContractStable,true);assert.equal(port.boundaries.createsMeaning,false);assert.equal(port.boundaries.arbitraryRemoteModuleAllowed,false);
 const registry=j(`${base}/registries/ppr-r3-w2-specialist-renderer-registry-v1.json`);assert.equal(registry.approvedModuleRoot,PPR_R3_SPECIALIST_RENDERER_ROOT);assert.equal(registry.entries.length,5);assert.equal(registry.remoteModulesAllowed,false);assert.equal(registry.envelopeSuppliedExecutablePathAllowed,false);

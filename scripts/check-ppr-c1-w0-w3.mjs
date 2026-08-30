@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import path from 'node:path';
 import {buildBaziMethodNativeReading,normalizeBaziTargetContext} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
+import {assertPprC1CurrentSuccessor} from './lib/ppr-c1-current-successor.mjs';
 
 const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
@@ -17,13 +17,16 @@ for(const x of authority.redirectedLegacyRoutes){assert.equal(x.target,'/perspec
 assert.equal(authority.canonicalCustomerSurface.route,'/perspectives/personal/');assert.doesNotMatch(JSON.stringify(authority.canonicalCustomerSurface),/personal-runtime|professional\/personal-runtime/);
 const orphan=json(`${BASE}/audit/orphaned-production-runtime-registry-v1.json`);assert.deepEqual(orphan.summary.productionPublishableButCanonicalUnconsumedBeforePprC1,['BZR','NUM']);assert.deepEqual(orphan.summary.releaseGatedNotYetEligible,['ZWR','AST']);assert.equal(orphan.entries.find(x=>x.methodId==='BZR').pprC1State,'CLOSED_BY_W3_METHOD_NATIVE_ADAPTER');assert.equal(orphan.entries.find(x=>x.methodId==='NUM').pprC1State,'OPEN_FOR_FUTURE_NUM_METHOD_NATIVE_ADAPTER');
 
-// W1 only one live JS renderer authority and it knows SMR V2 + method-native products.
-const canonicalRenderer='assets/customer-ui/js/surfaces/single-method-reading.js';
-const duplicateRenderer='assets/customer-ui/surfaces/single-method-reading.js';
-assert.equal(fs.existsSync(canonicalRenderer),true);assert.equal(fs.existsSync(duplicateRenderer),false,'duplicate single-method-reading JS authority must remain absent');
-const renderer=read(canonicalRenderer),personalClient=read('assets/customer-ui/js/surfaces/personal-reality.js');assert.match(personalClient,/from '\.\/single-method-reading\.js'/);assert.match(renderer,/PHI-OS-SINGLE-METHOD-READING-PRODUCTION-v2\.0\.0/);assert.match(renderer,/readingIA\?\.sections|readingIA\.sections/);assert.match(renderer,/PHI-OS-METHOD-NATIVE-CUSTOMER-READING-v1\.0\.0/);assert.match(renderer,/nativeReportHtml/);
-const liveRendererMatches=[];for(const base of ['assets/customer-ui/js','assets/customer-ui']){if(!fs.existsSync(base))continue;for(const entry of fs.readdirSync(base,{recursive:true})){const p=path.join(base,String(entry));if(p.endsWith('single-method-reading.js')&&fs.existsSync(p)&&fs.statSync(p).isFile())liveRendererMatches.push(p.replaceAll('\\','/'));}}
-assert.deepEqual([...new Set(liveRendererMatches)].filter(x=>!x.includes('/history/')), [canonicalRenderer]);
+// W1 current successor authority: the retired generic JS renderer stays absent.
+// PPR-R3 specialist host is the live product renderer; the old non-js-path copy is compatibility-only.
+const successor=assertPprC1CurrentSuccessor();
+const personalClient=read('assets/customer-ui/js/surfaces/personal-reality.js');
+const productRenderers=read('assets/customer-ui/js/personal-products/personal-product-renderers.js');
+const specialistRegistry=read('assets/customer-ui/js/personal-products/specialist-renderer-registry.js');
+assert.match(personalClient,/renderProductRoute/);
+assert.match(productRenderers,/mountApprovedSpecialistRenderer/);
+assert.match(specialistRegistry,/PPR_R3_BAZI_PRODUCT_V1/);
+assert.equal(successor.recon.historicalCheckerResolution.fileNamePresenceDoesNotDefineLiveRendererAuthority,true);
 
 // W2 method-native envelope is a wrapper, not a second interpretation runtime.
 const contract=json(`${BASE}/contracts/method-native-customer-reading-contract-v1.json`);assert.equal(contract.baselineCommit,baseline);assert.equal(contract.status,'FROZEN_PRODUCT_ENVELOPE_CONTRACT');for(const field of ['methodId','productVersion','summary','structuralModel','readingSections','temporalContext','openVerdicts','evidence','publicationDecision'])assert(contract.requiredFields.includes(field));assert.equal(contract.boundaries.createsSecondInterpretationRuntime,false);assert.equal(contract.boundaries.recalculatesMethod,false);assert.equal(contract.methodEligibility.BZR.allowed,true);assert.equal(contract.methodEligibility.NUM.allowed,true);assert.equal(contract.methodEligibility.ZWR.allowed,false);assert.equal(contract.methodEligibility.AST.allowed,false);
@@ -42,6 +45,6 @@ const baziAdapter=read('functions/personal-professional-reading/bazi-method-nati
 const acceptance=json(`${BASE}/acceptance/ppr-c1-w0-w3-engineering-acceptance-v1.json`);assert.equal(acceptance.status,'ENGINEERING_COMPLETE');assert.equal(acceptance.gates.baziNatalRecalculatedForTemporal,false);assert.equal(acceptance.nextWork,'PPR-C1-W4｜Retire Legacy BZR Customer Composer');
 console.log('✓ PPR-C1 W0–W3 canonical route + renderer authority + method-native contract + BaZi canonical adapter passed.');
 console.log('  Canonical customer route: /perspectives/personal/');
-console.log('  Live single-method renderer authority: 1');
+console.log('  Live customer renderer authority: PPR-R3 specialist host; retired generic JS renderer remains absent.');
 console.log(`  BaZi no-target: ${noTarget.readingSections.length} W15 sections; timing ${noTarget.temporalContext.state}; ${noTarget.structuralModel.pillars.length} pillars.`);
 console.log('  BaZi explicit target path consumes BZR Temporal using the same retained natal execution; no second natal calculation is owned by PPR-C1.');

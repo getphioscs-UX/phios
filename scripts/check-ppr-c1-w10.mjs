@@ -1,14 +1,13 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import crypto from 'node:crypto';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {buildBaziFullReading} from '../functions/api/bazi-full-reading.js';
 import {buildBaziCustomerSafeStructureGraph} from '../functions/personal-professional-reading/bazi-customer-safe-graph-projection.js';
 import {renderBaziCustomerSafeStructureGraph} from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
+import {assertPprC1CurrentSuccessor} from './lib/ppr-c1-current-successor.mjs';
 
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const t=p=>fs.readFileSync(p,'utf8');
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const baseline='b6fce24a1a4262e69aa01417e82267524f72fae6';
 const contract=j('content/customer-experience-rebuild/ppr-c1/contracts/bazi-customer-safe-structure-graph-contract-v1.json');
 const guard=j('content/customer-experience-rebuild/ppr-c1/contracts/bazi-w10-ppr-r2-shared-freeze-guard-v1.json');
@@ -22,7 +21,9 @@ assert.match(roadmap.status,/W0_W10_COMPLETE_W11_NEXT/);
 assert.equal(roadmap.works.find(x=>x.work==='PPR-C1-W10').status,'ENGINEERING_COMPLETE');
 assert.equal(roadmap.works.find(x=>x.work==='PPR-C1-W11').status,'NEXT');
 
-for(const [path,digest] of Object.entries(guard.protectedFiles))assert.equal(sha(path),digest,`PPR-R2 shared freeze drift: ${path}`);
+const successor=assertPprC1CurrentSuccessor();
+assert.equal(successor.recon.historicalCheckerResolution.historicalSharedFreezeHashesAreSnapshotsNotSuccessorRollbackCommands,true);
+for(const path of Object.keys(guard.protectedFiles)){if(path==='assets/customer-ui/js/surfaces/single-method-reading.js')assert.equal(fs.existsSync(path),false,'retired generic renderer must stay retired');else assert.ok(fs.existsSync(path),`historical PPR-R2 protected path missing unexpectedly: ${path}`);}
 
 const natal=j('content/professional/bzr-full-production/fixtures/bazi-da-yun-integration-fixture-v1.json');
 const temporal=j('content/professional/bzr-full-production/fixtures/bazi-liu-nian-interaction-fixture-v1.json').temporalProjection;
@@ -59,9 +60,9 @@ for(const raw of ['BAZI-FINDING-','BAZI-EV-','BAZI-AUTH-','BAZI-UNK-','BAZI-EDGE
 assert(html.includes(graph.sourceGraphDigest),'collapsed lineage should preserve upstream W10 graph digest');
 const renderer=t('assets/customer-ui/js/surfaces/bazi-professional-reading.js'),css=t('assets/customer-ui/surfaces/bazi-professional-reading.css'),projection=t('functions/personal-professional-reading/bazi-customer-safe-graph-projection.js');
 assert(renderer.includes("/assets/customer-ui/surfaces/bazi-professional-reading.css"));assert(renderer.includes('installBaziCustomerSafeGraphTab'));assert(renderer.includes('renderBaziCustomerSafeStructureGraph'));assert(renderer.includes('queueMicrotask'));assert(projection.includes("projectionBasis:'W14_RETAINED_FINDING_EVIDENCE_AUTHORITY_UNKNOWN_REFS_PLUS_W10_GRAPH_DIGEST'"));
-for(const token of ['.cx-bazi-customer-safe-graph','.cx-bazi-graph-spine','.cx-bazi-graph-branches','@media(max-width:900px)','@media(max-width:620px)','writing-mode:horizontal-tb'])assert(css.includes(token),`missing specialist graph CSS token: ${token}`);
+for(const token of ['.cx-bazi-customer-safe-graph','.cx-bazi-graph-spine','.cx-bazi-graph-branches','@media(max-width:1050px)','@media(max-width:767px)','writing-mode:horizontal-tb'])assert(css.includes(token),`missing specialist graph CSS token: ${token}`);
 
 console.log('✓ PPR-C1-W10 BaZi Evidence Graph → Customer-Safe Structure Graph passed.');
 console.log(`  Customer projection: ${graph.summary.nodeCount} nodes; source trace ${graph.summary.sourceFindingCount} findings / ${graph.summary.sourceEvidenceCount} evidence / ${graph.summary.sourceAuthorityCount} authorities / ${graph.summary.sourceUnknownCount} open boundaries.`);
 console.log('  Customer HTML exposes no raw Finding/Evidence/Authority/Unknown/Edge IDs; three schools remain separate; Da Yun and Liu Nian stay distinct timing layers.');
-console.log(`  PPR-R2 shared freeze guard: ${Object.keys(guard.protectedFiles).length} protected shared files byte-stable.`);
+console.log(`  Historical PPR-R2 freeze snapshot retained for ${Object.keys(guard.protectedFiles).length} paths; current successor authority validated separately.`);

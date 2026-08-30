@@ -1,15 +1,14 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import crypto from 'node:crypto';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 import {adaptBaziPersonalRealityProduct} from '../functions/personal-reality-product/adapters/bazi-production-adapter.js';
 import {buildPersonalRealityProductRoute} from '../functions/personal-reality-product/product-assembly.js';
 import {renderBaziProduct} from '../assets/customer-ui/js/specialists/bazi/product-renderer.js';
 import {renderBaziRealityComparisonSurface} from '../assets/customer-ui/js/surfaces/bazi-professional-reading.js';
+import {assertPprC1CurrentSuccessor} from './lib/ppr-c1-current-successor.mjs';
 
 const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const t=p=>fs.readFileSync(p,'utf8');
-const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const baseline='86854ae467ff7da836f45c424f3f6f0ce97b64ef';
 const BASE='content/customer-experience-rebuild/ppr-c1/contracts';
 const w11=j(`${BASE}/bazi-reality-comparison-contract-v1.json`);
@@ -25,7 +24,9 @@ assert.deepEqual(acceptance.customerInformationArchitecture,fixture.expectedNavi
 assert.equal(w11.status,'ENGINEERING_COMPLETE');
 assert.equal(w12.status,'ENGINEERING_COMPLETE_USING_PPR_R3_SPECIALIST_PORT');
 assert.equal(guard.status,'FROZEN_SHARED_SURFACE_UNCHANGED');
-for(const [path,digest] of Object.entries(guard.protectedFiles))assert.equal(sha(path),digest,`PPR-R3 shared freeze drift: ${path}`);
+const successor=assertPprC1CurrentSuccessor();
+assert.equal(successor.recon.historicalCheckerResolution.historicalSharedFreezeHashesAreSnapshotsNotSuccessorRollbackCommands,true);
+for(const path of Object.keys(guard.protectedFiles)){if(path==='assets/customer-ui/js/surfaces/single-method-reading.js')assert.equal(fs.existsSync(path),false,'retired generic renderer must stay retired');else assert.ok(fs.existsSync(path),`historical PPR-R3 protected path missing unexpectedly: ${path}`);}
 
 const natal=j('content/professional/bzr-full-production/fixtures/bazi-da-yun-integration-fixture-v1.json');
 const temporal=j('content/professional/bzr-full-production/fixtures/bazi-liu-nian-interaction-fixture-v1.json').temporalProjection;
@@ -98,4 +99,4 @@ for(const token of ['.cx-bazi-w12-workspace','.cx-bazi-run-status','.cx-bazi-pil
 console.log('✓ PPR-C1-W11/W12 BaZi Reality Comparison + PPR-R3 specialist Overview/Navigation passed.');
 console.log(`  W11: ${rc.questionCount} deduplicated semantic owners → ${rc.questionCount} chart-level primary questions; repeated support, context specificity and counter-evidence preserved.`);
 console.log('  W12: 8-section method-owned IA rendered through the committed PPR-R3 specialist port.');
-console.log(`  Shared freeze: ${Object.keys(guard.protectedFiles).length} PPR-R3 shared files byte-stable; no shared Personal Reality file modified.`);
+console.log(`  Historical PPR-R3 freeze snapshot retained; PPR-R4 input successor is validated as a narrow, versioned successor rather than a rollback.`);
