@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "PHI-OS-AST-CX-R3-W22-RESPONSIVE-PROFESSIONAL-LAYOUT-CONTRACT-v1.0.0",
+  "workCode": "AST-CX-R3-W22",
+  "baselineCommit": "492ecdddc1f84e5a915f416c60c61ed23e4fcb7f",
+  "status": "RESPONSIVE_CONTRACT_ACTIVE",
+  "requiredViewports": [
+    375,
+    390,
+    430,
+    768,
+    1024,
+    1280,
+    1440,
+    1920
+  ],
+  "layoutRules": {
+    "desktop1180Plus": [
+      "shared PPR host rail remains the outer navigation owner",
+      "AST method navigation renders as one vertical method-owned rail",
+      "natal chart keeps chart + inspector two-column composition",
+      "reading line length remains bounded"
+    ],
+    "tablet768To1179": [
+      "method navigation remains horizontally scrollable/sticky through the shared host slot",
+      "AST content remains bounded inside one specialist stage",
+      "chart uses two columns while space allows and collapses before mobile"
+    ],
+    "mobileBelow768": [
+      "single-column specialist content",
+      "no page-level sideways overflow",
+      "chart/network/matrix may use bounded internal horizontal scroll",
+      "technical details use single-column facts",
+      "minimum interactive target 44px"
+    ]
+  },
+  "geometryOwnership": {
+    "natalWheel": "AST",
+    "rulershipNetwork": "AST",
+    "elementModalityMatrix": "AST",
+    "sharedHostRail": "PPR-R3"
+  },
+  "requirements": [
+    "horizontal writing mode",
+    "no one-character vertical prose",
+    "no fixed page-width overflow",
+    "touch targets at least 44px",
+    "long Chinese and English copy wraps safely",
+    "SVG and matrix remain usable on 375px screens"
+  ],
+  "boundaries": {
+    "sharedHostResponsiveContractRewritten": false,
+    "methodSemanticsChanged": false
+  }
+}

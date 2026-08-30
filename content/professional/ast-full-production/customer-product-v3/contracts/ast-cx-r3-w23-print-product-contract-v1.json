@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "PHI-OS-AST-CX-R3-W23-PRINT-PRODUCT-CONTRACT-v1.0.0",
+  "workCode": "AST-CX-R3-W23",
+  "baselineCommit": "492ecdddc1f84e5a915f416c60c61ed23e4fcb7f",
+  "status": "PRINT_PRODUCT_READY",
+  "printContract": "PHI-OS-AST-CX-R3-PRINT-PRODUCT-v1.0.0",
+  "printOrder": [
+    "PRINT_COVER",
+    "OVERVIEW",
+    "MY_READING",
+    "NATAL_CHART",
+    "CORE_CONFIGURATION",
+    "PLANETS_HOUSES",
+    "ASPECTS_PATTERNS",
+    "RULERSHIP",
+    "ELEMENTS_MODES",
+    "TIMING_ACTIVATION",
+    "REALITY_COMPARISON",
+    "SOURCES_TECHNICAL_APPENDIX"
+  ],
+  "requirements": [
+    "print-only cover uses already-projected title, summary, house system and theme count",
+    "interactive navigator and interaction-only controls are hidden",
+    "chart and rulership SVG print at bounded professional width",
+    "both planet and house directories are printable without toggle dependency",
+    "aspect filtering does not hide evidence rows in print",
+    "closed governed detail blocks are expanded in print",
+    "technical lineage is printed as a final appendix",
+    "no new interpretation is generated for print"
+  ],
+  "pageBehavior": {
+    "pageMargin": "14mm 13mm 16mm",
+    "majorSectionPageBreaks": [
+      "NATAL_CHART",
+      "ASPECTS_PATTERNS",
+      "RULERSHIP",
+      "TIMING_ACTIVATION",
+      "TECHNICAL_APPENDIX"
+    ],
+    "orphans": 3,
+    "widows": 3
+  },
+  "boundaries": {
+    "printCreatesMeaning": false,
+    "printRunsCalculation": false,
+    "printChangesCustomerProductProjection": false,
+    "sharedPrintSemanticsRewritten": false
+  }
+}

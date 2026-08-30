@@ -1,6 +1,8 @@
 import {arr,esc,tr} from '../../surfaces/runtime-ui.js';
 
 export const AST_CX_R3_SURFACE_SCHEMA='PHI-OS-AST-CX-R3-SPECIALIST-SURFACE-v1.0.0';
+export const AST_CX_R3_STYLE_OWNER='AST_CX_R3_SPECIALIST_V3';
+export const AST_CX_R3_PRINT_CONTRACT='PHI-OS-AST-CX-R3-PRINT-PRODUCT-v1.0.0';
 export const AST_CX_R3_IA=Object.freeze([
   ['overview','Overview','总览'],
   ['my-reading','My Reading','我的读取'],
@@ -88,7 +90,7 @@ function bodyLayout(positions,asc){
   return placed;
 }
 function visibleTextList(items,empty){return items.length?items.map(x=>`<li>${x}</li>`).join(''):`<li>${esc(empty)}</li>`}
-function navHtml(){return AST_CX_R3_IA.map(([id,en,zh],i)=>`<button type="button" data-ppr-r3-nav-target="[data-astcx-section='${id}']" aria-current="${i===0?'true':'false'}">${esc(tr(en,zh))}</button>`).join('')}
+function navHtml(){return `<nav class="ast-cx-r3-nav" data-astcx-nav aria-label="${esc(tr('Astrology reading navigation','占星读取导航'))}">${AST_CX_R3_IA.map(([id,en,zh],i)=>`<button type="button" data-ppr-r3-nav-target="[data-astcx-section='${id}']" aria-current="${i===0?'true':'false'}">${esc(tr(en,zh))}</button>`).join('')}</nav>`}
 
 export function buildNatalChartV2(p){
   const chart=p?.chart||{},positions=arr(chart.positions),angles=arr(chart.angles),houses=arr(chart.houses),aspects=arr(chart.aspects);
@@ -105,7 +107,7 @@ export function buildNatalChartV2(p){
   const aspectLines=aspects.map(a=>{const x=bodyPoints.get(a.fromCode),y=bodyPoints.get(a.toCode);if(!x||!y)return '';return `<line class="ast-cx-r3-aspect ast-cx-r3-aspect--${esc(String(a.type||'').toLowerCase())}" data-astcx-select-kind="aspect" data-astcx-ref="${esc(a.aspectRef)}" data-astcx-aspect="${esc(a.aspectRef)}" data-from="${esc(a.fromCode)}" data-to="${esc(a.toCode)}" tabindex="0" role="button" x1="${x.x.toFixed(2)}" y1="${x.y.toFixed(2)}" x2="${y.x.toFixed(2)}" y2="${y.y.toFixed(2)}"><title>${esc(`${bodyName(p,a.fromCode)} ${aspectLabel(a.type)} ${bodyName(p,a.toCode)} · ${fmt(a.orbDegrees)}° · ${dynamicLabel(a.dynamicState)}`)}</title></line>`}).join('');
   const bodies=layout.map(b=>{const planet=polar(b.longitude,214,asc),label=polar(b.longitude,242+b.lane*24,asc),anchor=label.x<342?'end':label.x>378?'start':'middle';return `<g class="ast-cx-r3-body" tabindex="0" role="button" data-astcx-select-kind="planet" data-astcx-ref="${esc(b.bodyCode)}" data-astcx-body="${esc(b.bodyCode)}" aria-label="${esc(`${b.bodyLabel} · ${placement(b)}`)}"><line x1="${planet.x.toFixed(2)}" y1="${planet.y.toFixed(2)}" x2="${label.x.toFixed(2)}" y2="${label.y.toFixed(2)}"/><circle cx="${planet.x.toFixed(2)}" cy="${planet.y.toFixed(2)}" r="12"/><text class="ast-cx-r3-body-glyph" x="${planet.x.toFixed(2)}" y="${planet.y.toFixed(2)}">${esc(BODY_GLYPH[b.bodyCode]||'•')}</text><text class="ast-cx-r3-body-label" x="${label.x.toFixed(2)}" y="${label.y.toFixed(2)}" text-anchor="${anchor}">${esc(`${b.bodyLabel} ${fmt(b.degreeWithinSign)}°${b.retrograde?' ℞':''}`)}</text></g>`}).join('');
   const angleMarks=angles.map(a=>{const q=polar(a.longitude,300,asc);return `<g class="ast-cx-r3-angle" data-astcx-angle="${esc(a.angleCode)}"><circle cx="${q.x.toFixed(2)}" cy="${q.y.toFixed(2)}" r="18"/><text x="${q.x.toFixed(2)}" y="${q.y.toFixed(2)}">${esc(a.angleCode)}</text></g>`}).join('');
-  return `<section class="ast-cx-r3-panel ast-cx-r3-chart-panel" data-astcx-section="natal-chart" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('NATAL CHART','出生星盘'))}</p><h2>${esc(tr('Your calculated chart, with the real house geometry preserved','你的出生星盘：保留实际宫位几何'))}</h2><p>${esc(tr('Select a planet, house or aspect to inspect the governed structure. The wheel only lays out calculated data; it does not create interpretation.','点击行星、宫位或相位查看受治理结构。星盘图只负责呈现计算结果，不创造新的解释。'))}</p><div class="ast-cx-r3-meta"><span>${esc(houseSystemLabel(p.houseSystemId))}</span><span>${esc(tr(`${positions.length} planets · ${aspects.length} major aspects`,`${positions.length} 颗行星 · ${aspects.length} 个主要相位`))}</span></div></header><div class="ast-cx-r3-chart-grid"><figure class="ast-cx-r3-wheel"><svg viewBox="0 0 720 720" role="img" aria-label="${esc(tr('Interactive natal chart','可互动出生星盘'))}"><circle class="ast-cx-r3-ring ast-cx-r3-ring--outer" cx="360" cy="360" r="326"/><circle class="ast-cx-r3-ring" cx="360" cy="360" r="282"/><circle class="ast-cx-r3-ring ast-cx-r3-ring--inner" cx="360" cy="360" r="176"/>${zodiac}${signLines}${houseLines}<g class="ast-cx-r3-aspect-layer">${aspectLines}</g>${houseNumbers}${bodies}${angleMarks}</svg><figcaption>${esc(tr('Chart rotation is anchored to the calculated Ascendant when available; house cusps come directly from the customer product projection.','星盘方向在可用时以计算所得上升点为锚；宫头直接来自客户产品投射。'))}</figcaption></figure><aside class="ast-cx-r3-inspector" data-astcx-inspector aria-live="polite">${buildAstExplorerInspectorHtml(p,'overview','overview')}</aside></div></section>`;
+  return `<section class="ast-cx-r3-panel ast-cx-r3-chart-panel" data-astcx-section="natal-chart" tabindex="-1"><header class="ast-cx-r3-section-head"><p class="ast-cx-r3-kicker">${esc(tr('NATAL CHART','出生星盘'))}</p><h2>${esc(tr('Your calculated chart, with the real house geometry preserved','你的出生星盘：保留实际宫位几何'))}</h2><p class="ast-cx-r3-screen-only">${esc(tr('Select a planet, house or aspect to inspect the governed structure. The wheel only lays out calculated data; it does not create interpretation.','点击行星、宫位或相位查看受治理结构。星盘图只负责呈现计算结果，不创造新的解释。'))}</p><div class="ast-cx-r3-meta"><span>${esc(houseSystemLabel(p.houseSystemId))}</span><span>${esc(tr(`${positions.length} planets · ${aspects.length} major aspects`,`${positions.length} 颗行星 · ${aspects.length} 个主要相位`))}</span></div></header><div class="ast-cx-r3-chart-grid"><figure class="ast-cx-r3-wheel"><svg viewBox="0 0 720 720" role="img" aria-label="${esc(tr('Interactive natal chart','可互动出生星盘'))}"><circle class="ast-cx-r3-ring ast-cx-r3-ring--outer" cx="360" cy="360" r="326"/><circle class="ast-cx-r3-ring" cx="360" cy="360" r="282"/><circle class="ast-cx-r3-ring ast-cx-r3-ring--inner" cx="360" cy="360" r="176"/>${zodiac}${signLines}${houseLines}<g class="ast-cx-r3-aspect-layer">${aspectLines}</g>${houseNumbers}${bodies}${angleMarks}</svg><figcaption>${esc(tr('Chart rotation is anchored to the calculated Ascendant when available; house cusps come directly from the customer product projection.','星盘方向在可用时以计算所得上升点为锚；宫头直接来自客户产品投射。'))}</figcaption></figure><aside class="ast-cx-r3-inspector" data-astcx-inspector aria-live="polite">${buildAstExplorerInspectorHtml(p,'overview','overview')}</aside></div></section>`;
 }
 
 function relatedThemeLinks(themes){return arr(themes).length?`<div class="ast-cx-r3-related"><span>${esc(tr('Related whole-chart themes','关联整盘主题'))}</span>${arr(themes).map(t=>`<button type="button" data-astcx-select-kind="theme" data-astcx-ref="${esc(t.themeRef)}">${esc(t.readerTitle)}</button>`).join('')}</div>`:''}
@@ -238,12 +240,19 @@ export function buildTechnicalDisclosureHtml(p){
   return customer+details;
 }
 
+export function buildAstPrintCoverHtml(p){
+  const title=p?.overview?.readerTitle||tr('Your astrology reading','你的占星读取');
+  const summary=p?.overview?.readerSummary||'';
+  const themes=arr(p?.keyConfigurations).length;
+  return `<header class="ast-cx-r3-print-cover ast-cx-r3-print-only" data-astcx-print-cover aria-hidden="true"><div><p class="ast-cx-r3-kicker">${esc(tr('PHI OS · ASTROLOGY','PHI OS · 占星'))}</p><h1>${esc(title)}</h1>${summary?`<p>${esc(summary)}</p>`:''}<dl><div><dt>${esc(tr('House system','宫制'))}</dt><dd>${esc(houseSystemLabel(p?.houseSystemId))}</dd></div><div><dt>${esc(tr('Reading model','读取方式'))}</dt><dd>${esc(tr('Whole-chart synthesis first','整盘综合优先'))}</dd></div><div><dt>${esc(tr('Whole-chart themes','整盘主题'))}</dt><dd>${esc(String(themes))}</dd></div></dl></div><footer>${esc(tr('Professional specialist print view · technical lineage follows in the appendix','专业占星打印版 · 技术来源链列于附录'))}</footer></header>`;
+}
+
 export function buildAstrologySpecialistSurfaceV3(p,x=null){
   if(p?.schemaVersion!=='PHI-OS-AST-CUSTOMER-PRODUCT-PROJECTION-v3.0.0'||p?.methodId!=='AST')return Object.freeze({status:'NOT_HANDLED',reason:'AST_CUSTOMER_PRODUCT_V3_REQUIRED'});
   const exp=experienceOk(x)?x:null;
-  const visualHtml=`<article class="ast-cx-r3" data-ast-cx-r3-surface="${AST_CX_R3_SURFACE_SCHEMA}">${overviewHtml(p)}${myReadingHtml(p,exp)}${buildNatalChartV2(p)}`;
+  const visualHtml=`<article class="ast-cx-r3" data-ast-cx-r3-surface="${AST_CX_R3_SURFACE_SCHEMA}" data-astcx-style-owner="${AST_CX_R3_STYLE_OWNER}" data-astcx-print-contract="${AST_CX_R3_PRINT_CONTRACT}">${buildAstPrintCoverHtml(p)}${overviewHtml(p)}${myReadingHtml(p,exp)}${buildNatalChartV2(p)}`;
   const readingHtml=`${buildCoreConfigurationHtml(p)}${buildPlanetsHousesExplorerHtml(p)}${buildAspectsPatternsHtml(p)}${buildRulershipNetworkHtml(p)}${buildElementModalityMatrixHtml(p)}${buildTimingActivationHtml(p)}${realityPreview(p,exp)}</article>`;
-  return Object.freeze({status:'RENDERED',navigationHtml:navHtml(),visualHtml,readingHtml,technicalHtml:buildTechnicalDisclosureHtml(p)});
+  return Object.freeze({status:'RENDERED',navigationHtml:navHtml(),visualHtml,readingHtml,technicalHtml:buildTechnicalDisclosureHtml(p),styleOwner:AST_CX_R3_STYLE_OWNER,printContract:AST_CX_R3_PRINT_CONTRACT});
 }
 
 function setSelectionState(root,p,kind,ref){
@@ -305,4 +314,4 @@ export function installAstrologySpecialistInteractions(root,p,x=null){
   root.dataset.astCxR3Interactions='true';
 }
 
-export default Object.freeze({AST_CX_R3_SURFACE_SCHEMA,AST_CX_R3_IA,buildNatalChartV2,buildAstExplorerInspectorHtml,buildCoreConfigurationHtml,buildPlanetsHousesExplorerHtml,buildAspectsPatternsHtml,buildRulershipNetworkSvg,buildRulershipNetworkHtml,buildElementModalityMatrixHtml,orderedThemeRefsForIntent,buildAstrologySpecialistSurfaceV3,installAstrologySpecialistInteractions});
+export default Object.freeze({AST_CX_R3_SURFACE_SCHEMA,AST_CX_R3_STYLE_OWNER,AST_CX_R3_PRINT_CONTRACT,AST_CX_R3_IA,buildNatalChartV2,buildAstExplorerInspectorHtml,buildCoreConfigurationHtml,buildPlanetsHousesExplorerHtml,buildAspectsPatternsHtml,buildRulershipNetworkSvg,buildRulershipNetworkHtml,buildElementModalityMatrixHtml,orderedThemeRefsForIntent,buildAstPrintCoverHtml,buildAstrologySpecialistSurfaceV3,installAstrologySpecialistInteractions});

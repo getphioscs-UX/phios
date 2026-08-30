@@ -1,4 +1,3 @@
-import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -7,6 +6,7 @@ import {AST_CUSTOMER_PRODUCT_PROJECTION_V3_SCHEMA,AST_CX_R3_BASELINE_COMMIT} fro
 import {adaptAstPersonalRealityProduct} from '../functions/personal-reality-product/adapters/ast-production-adapter.js';
 import {buildPersonalRealityProductRoute} from '../functions/personal-reality-product/product-assembly.js';
 import {resolveSpecialistRendererDescriptor} from '../assets/customer-ui/js/personal-products/specialist-renderer-registry.js';
+import {assertAstCxR3CurrentSharedBoundary} from './lib/ast-cx-r3-shared-boundary.mjs';
 
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const text=p=>fs.readFileSync(p,'utf8');
@@ -20,11 +20,8 @@ assert.equal(w0.status,'AUTHORITY_RECONCILED_FOR_CUSTOMER_PRODUCT_PROJECTION');
 for(const v of Object.values(w0.boundaries))assert.equal(v===false?false:Number(v),v===false?false:0);
 assert.equal(w0.protectedPprR3.sharedHostMutationAuthorized,false);
 
-const pprFreeze=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
-assertPprR3AstInputSuccessorIntegrity();
-for(const [p,d] of Object.entries(pprFreeze.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'AST-CX-R3 protected PPR convergence');
-for(const [p,d] of Object.entries(pprFreeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`AST-CX-R3 shared SMR drift: ${p}`);
-for(const p of ['assets/customer-ui/js/personal-products/personal-product-renderers.js','assets/customer-ui/js/personal-products/specialist-renderer-host.js','assets/customer-ui/js/personal-products/specialist-renderer-registry.js','assets/customer-ui/surfaces/ppr-r3-specialist-host.css'])assert.equal(sha(p),pprFreeze.successorFiles[p],`AST-CX-R3 shared PPR-R3 host drift: ${p}`);
+// Current-main shared successor boundary: AST does not own or mutate these bytes.
+assertAstCxR3CurrentSharedBoundary('AST-CX-R3-W0-W4');
 
 const w1=json(`${base}/registries/ast-cx-r3-w1-capability-surface-map-v1.json`);
 assert.equal(w1.workCode,'AST-CX-R3-W1');

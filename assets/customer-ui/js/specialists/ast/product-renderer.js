@@ -1,12 +1,13 @@
 import {buildAstrologySpecialistSurfaceV3,installAstrologySpecialistInteractions} from './ast-specialist-surface-v3.js';
 import {buildAstrologyWorkspaceHtml,installAstrologyWorkspaceInteractions} from '../../surfaces/astrology-workspace.js';
 
-const CSS_HREF='/assets/customer-ui/surfaces/astrology-specialist-v3.css';
+export const AST_CX_R3_CSS_HREF='/assets/customer-ui/surfaces/astrology-specialist-v3.css';
+export const AST_CX_R3_CSS_CONTRACT='PHI-OS-AST-CX-R3-SPECIALIST-CSS-v1.0.0';
 function ensureCss(doc=globalThis.document){
   if(!doc?.head)return null;
   let link=doc.querySelector?.('link[data-ast-cx-r3-css="true"]');
   if(link)return link;
-  link=doc.createElement('link');link.rel='stylesheet';link.href=CSS_HREF;link.dataset.astCxR3Css='true';doc.head.appendChild(link);return link;
+  link=doc.createElement('link');link.rel='stylesheet';link.href=AST_CX_R3_CSS_HREF;link.dataset.astCxR3Css='true';link.dataset.astCxR3CssContract=AST_CX_R3_CSS_CONTRACT;doc.head.appendChild(link);return link;
 }
 function v3Of(product){
   const p=product?.sourceProduct?.customerProductProjection;
@@ -31,4 +32,4 @@ export function renderAstrologyProduct({product,mount}={}){
   if(plan.status!=='RENDERED')return plan;
   return Object.freeze({...plan,compatibilityOnly:false,afterMount:slots=>installAstrologySpecialistInteractions(slots?.host,projection,experience)});
 }
-export default Object.freeze({renderAstrologyProduct});
+export default Object.freeze({AST_CX_R3_CSS_HREF,AST_CX_R3_CSS_CONTRACT,renderAstrologyProduct});

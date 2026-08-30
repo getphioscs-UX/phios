@@ -1,4 +1,3 @@
-import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -15,6 +14,7 @@ import {
   installAstrologySpecialistInteractions
 } from '../assets/customer-ui/js/specialists/ast/ast-specialist-surface-v3.js';
 import {renderAstrologyProduct} from '../assets/customer-ui/js/specialists/ast/product-renderer.js';
+import {assertAstCxR3CurrentSharedBoundary} from './lib/ast-cx-r3-shared-boundary.mjs';
 
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const text=p=>fs.readFileSync(p,'utf8');
@@ -24,11 +24,8 @@ const baseline='76c70e1fca0d69171959c77b46566235012ab615';
 globalThis.document={documentElement:{lang:'zh-Hans'}};
 
 // Shared-host and SMR freeze remain byte-stable.
-const pprFreeze=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
-assertPprR3AstInputSuccessorIntegrity();
-for(const [p,d] of Object.entries(pprFreeze.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'AST-CX-R3 protected PPR convergence');
-for(const [p,d] of Object.entries(pprFreeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`AST-CX-R3 W9-W12 shared SMR drift: ${p}`);
-for(const p of ['assets/customer-ui/js/personal-products/personal-product-renderers.js','assets/customer-ui/js/personal-products/specialist-renderer-host.js','assets/customer-ui/js/personal-products/specialist-renderer-registry.js','assets/customer-ui/surfaces/ppr-r3-specialist-host.css'])assert.equal(sha(p),pprFreeze.successorFiles[p],`AST-CX-R3 W9-W12 shared PPR-R3 host drift: ${p}`);
+// Current-main shared successor boundary: AST does not own or mutate these bytes.
+assertAstCxR3CurrentSharedBoundary('AST-CX-R3-W9-W12');
 
 const docs=[
   json(`${base}/contracts/ast-cx-r3-w9-planets-houses-explorer-contract-v1.json`),

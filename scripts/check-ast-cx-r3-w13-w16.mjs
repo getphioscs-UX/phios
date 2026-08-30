@@ -1,4 +1,3 @@
-import {assertPprR3GovernedPath,assertPprR3AstInputSuccessorIntegrity} from './ppr-r3-governed-successor-support.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -9,6 +8,7 @@ import {resolveSpecialistRendererDescriptor} from '../assets/customer-ui/js/pers
 import {buildAstExplorerInspectorHtml,buildAstrologySpecialistSurfaceV3,orderedThemeRefsForIntent} from '../assets/customer-ui/js/specialists/ast/ast-specialist-surface-v3.js';
 import {renderAstrologyProduct} from '../assets/customer-ui/js/specialists/ast/product-renderer.js';
 import {AST_CX_R3_CUSTOMER_EXPERIENCE_SCHEMA,AST_CX_R3_W13_W16_BASELINE} from '../functions/ast-full-production/ast-customer-experience-projection-v1.js';
+import {assertAstCxR3CurrentSharedBoundary} from './lib/ast-cx-r3-shared-boundary.mjs';
 
 const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const text=p=>fs.readFileSync(p,'utf8');
@@ -20,11 +20,8 @@ const occurrences=(haystack,needle)=>{if(!needle)return 0;let n=0,i=0;while((i=h
 globalThis.document={documentElement:{lang:'zh-Hans'}};
 
 // PPR-R3 shared host + shared single-method-reading remain frozen.
-const pprFreeze=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
-assertPprR3AstInputSuccessorIntegrity();
-for(const [p,d] of Object.entries(pprFreeze.protectedConvergenceFiles))assertPprR3GovernedPath(p,d,'AST-CX-R3 protected PPR convergence');
-for(const [p,d] of Object.entries(pprFreeze.sharedSingleMethodReadingFiles))assert.equal(sha(p),d,`AST-CX-R3 W13-W16 shared SMR drift: ${p}`);
-for(const p of ['assets/customer-ui/js/personal-products/personal-product-renderers.js','assets/customer-ui/js/personal-products/specialist-renderer-host.js','assets/customer-ui/js/personal-products/specialist-renderer-registry.js','assets/customer-ui/surfaces/ppr-r3-specialist-host.css'])assert.equal(sha(p),pprFreeze.successorFiles[p],`AST-CX-R3 W13-W16 shared PPR-R3 host drift: ${p}`);
+// Current-main shared successor boundary: AST does not own or mutate these bytes.
+assertAstCxR3CurrentSharedBoundary('AST-CX-R3-W13-W16');
 
 const docs=[
   json(`${base}/contracts/ast-cx-r3-w13-whole-chart-reading-contract-v1.json`),
