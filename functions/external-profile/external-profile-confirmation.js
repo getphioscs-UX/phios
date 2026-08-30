@@ -1,9 +1,10 @@
 import crypto from 'node:crypto';
 import {cleanExternalProfileText,EXTERNAL_PROFILE_MANUAL_FIELDS} from './external-profile-contract.js';
+import {parseHumanDesignProfileText} from './hd-profile-parser.js';
 
 export const EXTERNAL_PROFILE_CONFIRMATION_DRAFT_VERSION='PHI-OS-EXTERNAL-PROFILE-CONFIRMATION-DRAFT-v1.0.0';
 export const EXTERNAL_PROFILE_CONFIRMED_VERSION='PHI-OS-CONFIRMED-EXTERNAL-PROFILE-v1.0.0';
-export const EXTERNAL_PROFILE_CORE_FIELDS=Object.freeze(['type','authority','profile','definition','incarnationCross']);
+export const EXTERNAL_PROFILE_CORE_FIELDS=Object.freeze(['type','strategy','authority','profile','definition','incarnationCross','signature','notSelfTheme']);
 export const EXTERNAL_PROFILE_STRUCTURAL_FIELDS=Object.freeze(['activations','channels','definedCenters','openCenters']);
 
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const child of Object.values(value))freeze(child)}return value};
@@ -41,7 +42,14 @@ export function buildExternalProfileConfirmationDraft(extractionIr){
 }
 
 function cleanEdit(value){return cleanExternalProfileText(value,600)||null}
-function recordsFromDraft(draft,edits={}){
+function normalizeStructureEdit(field,value){
+  const text=cleanExternalProfileText(value,4000);if(!text)return null;
+  const labels={channels:'Channels',definedCenters:'Defined Centers',openCenters:'Open Centers'};
+  const label=labels[field];if(!label)return null;
+  const parsed=parseHumanDesignProfileText(`${label}: ${text}`,{sourceType:'CUSTOMER_CORRECTED',sourceRegionPrefix:`CUSTOMER_CORRECTED:${field}`});
+  return parsed.structuralCandidates?.find(item=>item.field===field)?.normalizedValue||null;
+}
+function recordsFromDraft(draft,edits={},structureEdits={}){
   const records=[];
   for(const field of [...EXTERNAL_PROFILE_CORE_FIELDS,...EXTERNAL_PROFILE_MANUAL_FIELDS]){
     const original=draft.fields?.[field]||{};
@@ -52,16 +60,22 @@ function recordsFromDraft(draft,edits={}){
   }
   for(const field of EXTERNAL_PROFILE_STRUCTURAL_FIELDS){
     const original=draft.structure?.[field]||{};
+    if(Object.prototype.hasOwnProperty.call(structureEdits,field)&&field!=='activations'){
+      const edited=normalizeStructureEdit(field,structureEdits[field]);
+      if(!edited||!edited.length)continue;
+      records.push(freeze({field,value:edited,sourceType:'CUSTOMER_CORRECTED',sourceRegion:`CUSTOMER_CORRECTED:${field}`,sourceValue:original.value??null,customerConfirmed:true,phiosCalculated:false}));
+      continue;
+    }
     if(original.value==null)continue;
     records.push(freeze({field,value:original.value,sourceType:original.sourceType||'CUSTOMER_CONFIRMED_UPLOAD',sourceRegion:original.sourceRegion||null,sourceValue:original.value,customerConfirmed:true,phiosCalculated:false}));
   }
   return records;
 }
 
-export function confirmExternalProfile({confirmationDraft,edits={},confirmedAt=new Date().toISOString()}={}){
+export function confirmExternalProfile({confirmationDraft,edits={},structureEdits={},confirmedAt=new Date().toISOString()}={}){
   if(!confirmationDraft||confirmationDraft.schemaVersion!==EXTERNAL_PROFILE_CONFIRMATION_DRAFT_VERSION)throw new TypeError('EXTERNAL_PROFILE_CONFIRMATION_DRAFT_INVALID');
   if(typeof confirmationDraft.intakeId!=='string'||!confirmationDraft.intakeId)throw new TypeError('EXTERNAL_PROFILE_CONFIRMATION_INTAKE_ID_REQUIRED');
-  const records=recordsFromDraft(confirmationDraft,edits);
+  const records=recordsFromDraft(confirmationDraft,edits,structureEdits);
   if(!records.length)throw new TypeError('EXTERNAL_PROFILE_CONFIRMATION_VALUE_REQUIRED');
   const profile={
     schemaVersion:EXTERNAL_PROFILE_CONFIRMED_VERSION,

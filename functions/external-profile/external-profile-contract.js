@@ -10,6 +10,16 @@ export const EXTERNAL_PROFILE_MANUAL_FIELDS=Object.freeze([
   'motivation',
   'trajectory'
 ]);
+export const EXTERNAL_PROFILE_MANUAL_CORE_FIELDS=Object.freeze([
+  'type',
+  'strategy',
+  'authority',
+  'profile',
+  'definition',
+  'incarnationCross',
+  'signature',
+  'notSelfTheme'
+]);
 
 const EXTENSION_TO_MIME=Object.freeze({
   png:'image/png',
@@ -51,6 +61,23 @@ export function normalizeManualAdvancedFields(input={}){
       rawValue:value,
       normalizedValue:value,
       sourceType:'CUSTOMER_MANUAL_ENTRY',
+      customerConfirmed:true,
+      phiosCalculated:false
+    })]:[];
+  }));
+}
+
+export function normalizeManualCoreFields(input={}){
+  return Object.freeze(EXTERNAL_PROFILE_MANUAL_CORE_FIELDS.flatMap(field=>{
+    const value=cleanExternalProfileText(input[field],600);
+    return value?[Object.freeze({
+      field,
+      rawValue:value,
+      normalizedValue:value,
+      sourceType:'CUSTOMER_MANUAL_STRUCTURED_ENTRY',
+      sourceRegion:`MANUAL_STRUCTURED:${field}`,
+      extractionConfidence:'CUSTOMER_ENTERED',
+      extractionRule:'MANUAL_STRUCTURED_ENTRY',
       customerConfirmed:true,
       phiosCalculated:false
     })]:[];

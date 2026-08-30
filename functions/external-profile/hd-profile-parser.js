@@ -2,10 +2,13 @@ import {cleanExternalProfileText} from './external-profile-contract.js';
 
 const FIELD_SPECS=Object.freeze([
   ['type',['type','类型','類型']],
+  ['strategy',['strategy','策略']],
   ['authority',['authority','inner authority','内在权威','內在權威','权威','權威']],
   ['profile',['profile','人生角色','角色']],
   ['definition',['definition','定义','定義']],
   ['incarnationCross',['incarnation cross','cross','轮回交叉','輪迴交叉','人生主题','人生主題']],
+  ['signature',['signature','签名','簽名']],
+  ['notSelfTheme',['not-self theme','not self theme','not-self','非自己主题','非自己主題','非自己']],
   ['cognition',['cognition','认知','認知','内视','內視']],
   ['determination',['determination','digestion','摄取','攝取','饮食','飲食']],
   ['environment',['environment','环境','環境']],

@@ -1,7 +1,8 @@
 import {
   EXTERNAL_PROFILE_FAMILY,
   EXTERNAL_PROFILE_IR_VERSION,
-  normalizeManualAdvancedFields
+  normalizeManualAdvancedFields,
+  normalizeManualCoreFields
 } from './external-profile-contract.js';
 import {parseHumanDesignProfileText} from './hd-profile-parser.js';
 
@@ -13,10 +14,14 @@ function mergeCandidateSets(...sets){
   return out;
 }
 
-export function buildExternalProfileExtractionIr({intakeId,sources=[],pastedText='',manualFields={},documentExtraction=null}={}){
+export function buildExternalProfileExtractionIr({intakeId,sources=[],pastedText='',manualFields={},manualCoreFields={},manualStructureText='',documentExtraction=null}={}){
   if(typeof intakeId!=='string'||!intakeId.trim())throw new TypeError('EXTERNAL_PROFILE_INTAKE_ID_REQUIRED');
   const parsed=parseHumanDesignProfileText(pastedText);
-  const manual=normalizeManualAdvancedFields(manualFields);
+  const manualAdvanced=normalizeManualAdvancedFields(manualFields);
+  const manualCore=normalizeManualCoreFields(manualCoreFields);
+  const manualStructureParsed=manualStructureText?parseHumanDesignProfileText(manualStructureText,{sourceType:'CUSTOMER_MANUAL_STRUCTURED_ENTRY',sourceRegionPrefix:'MANUAL_STRUCTURED'}):{candidates:[],structuralCandidates:[]};
+  const manualStructure=[...(manualStructureParsed.candidates||[]),...(manualStructureParsed.structuralCandidates||[])].map(item=>freeze({...item,sourceType:'CUSTOMER_MANUAL_STRUCTURED_ENTRY',customerConfirmed:true,extractionConfidence:'CUSTOMER_ENTERED',extractionRule:'MANUAL_STRUCTURED_ENTRY',phiosCalculated:false}));
+  const manual=freeze([...manualCore,...manualAdvanced,...manualStructure]);
   const documentText=documentExtraction?.status==='EXTRACTED'&&documentExtraction.text?documentExtraction.text:'';
   const documentSource=sources.find(source=>['CUSTOMER_UPLOADED_DOCUMENT','CUSTOMER_UPLOADED_IMAGE'].includes(source.sourceType));
   const documentParsed=documentText?parseHumanDesignProfileText(documentText,{sourceType:documentSource?.sourceType||'CUSTOMER_UPLOADED_DOCUMENT',sourceRegionPrefix:'UPLOADED_MATERIAL'}):{candidates:[],structuralCandidates:[],unresolved:[],conflicts:[]};

@@ -4,6 +4,7 @@ import {
   EXTERNAL_PROFILE_FAMILY,
   EXTERNAL_PROFILE_INTAKE_VERSION,
   EXTERNAL_PROFILE_MANUAL_FIELDS,
+  EXTERNAL_PROFILE_MANUAL_CORE_FIELDS,
   validateExternalProfileFile
 } from '../external-profile/external-profile-contract.js';
 import {buildExternalProfileExtractionIr} from '../external-profile/external-profile-extraction-ir.js';
@@ -25,9 +26,18 @@ export async function onRequestPost(context){
   if(family!==EXTERNAL_PROFILE_FAMILY)return json({ok:false,error:'EXTERNAL_PROFILE_FAMILY_UNSUPPORTED'},422);
   const pastedText=cleanExternalProfileText(form.get('pastedText'),12000);
   const manualFields=Object.fromEntries(EXTERNAL_PROFILE_MANUAL_FIELDS.map(field=>[field,cleanExternalProfileText(form.get(field),240)]));
+  const manualCoreFields=Object.fromEntries(EXTERNAL_PROFILE_MANUAL_CORE_FIELDS.map(field=>[field,cleanExternalProfileText(form.get(`manual${field[0].toUpperCase()}${field.slice(1)}`),600)]));
+  const manualStructureParts=[
+    ['Channels','manualChannels'],
+    ['Defined Centers','manualDefinedCenters'],
+    ['Open Centers','manualOpenCenters'],
+    ['Design activated Gates','manualDesignActivations'],
+    ['Personality activated Gates','manualPersonalityActivations']
+  ].map(([label,key])=>[label,cleanExternalProfileText(form.get(key),4000)]).filter(([,value])=>value);
+  const manualStructureText=manualStructureParts.map(([label,value])=>`${label}: ${value}`).join('\n');
   const file=form.get('file');
   const hasFile=typeof File!=='undefined'&&file instanceof File&&file.size>0;
-  const hasManual=Object.values(manualFields).some(Boolean);
+  const hasManual=Object.values(manualFields).some(Boolean)||Object.values(manualCoreFields).some(Boolean)||Boolean(manualStructureText);
   if(!hasFile&&!pastedText&&!hasManual)return json({ok:false,error:'EXTERNAL_PROFILE_INPUT_REQUIRED'},422);
   const sources=[];let documentExtraction=null;
   if(hasFile){
@@ -38,8 +48,9 @@ export async function onRequestPost(context){
     documentExtraction=await extractUploadedExternalProfileDocument({file,env:context.env});
   }
   if(pastedText)sources.push(freeze({sourceType:'CUSTOMER_PASTED_TEXT',characterCount:pastedText.length,sourceAuthority:'CUSTOMER'}));
+  if(hasManual)sources.push(freeze({sourceType:'CUSTOMER_MANUAL_STRUCTURED_ENTRY',fieldCount:Object.values(manualFields).filter(Boolean).length+Object.values(manualCoreFields).filter(Boolean).length+manualStructureParts.length,sourceAuthority:'CUSTOMER'}));
   const intakeId=`XPF-${crypto.randomUUID()}`;
-  const extractionIr=buildExternalProfileExtractionIr({intakeId,sources,pastedText,manualFields,documentExtraction});
+  const extractionIr=buildExternalProfileExtractionIr({intakeId,sources,pastedText,manualFields,manualCoreFields,manualStructureText,documentExtraction});
   const hasConfirmable=extractionIr.candidates.length||extractionIr.manualFields.length;
   const confirmationDraft=hasConfirmable?buildExternalProfileConfirmationDraft(extractionIr):null;
   return json({
@@ -52,6 +63,7 @@ export async function onRequestPost(context){
       authorityClass:'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT',
       extractionIr,
       confirmationDraft,
+      intakeState:confirmationDraft?'NEEDS_CONFIRMATION':documentExtraction?.status==='FAILED'?'EXTRACTION_FAILED':'EXTRACTION_INCOMPLETE',
       nextAction:confirmationDraft?'CUSTOMER_CONFIRMATION_REQUIRED':documentExtraction?.status==='FAILED'?'DOCUMENT_EXTRACTION_FAILED':'DOCUMENT_EXTRACTION_REQUIRED',
       privacy:{saved:false,fileContentPersisted:false,runtimeMemoryWritten:false},
       boundary:{phiosCalculated:false,hdrShadowUsed:false,customerReportAuthorityCreated:false,workersAiUsedForDocumentConversion:documentExtraction?.aiServiceUsed===true,workersAiCreatesMeaning:false}
