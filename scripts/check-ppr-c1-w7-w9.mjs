@@ -1,8 +1,10 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import {buildBaziMethodNativeReading} from '../functions/personal-professional-reading/bazi-method-native-reading-adapter.js';
 const read=p=>fs.readFileSync(p,'utf8');
 const json=p=>JSON.parse(read(p));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const BASE='content/customer-experience-rebuild/ppr-c1';
 const baseline='a06506cbbc9bf0bdd11ff1c740f7be65276d84d9';
 
@@ -26,7 +28,16 @@ const nt=noTarget.professionalModules.timing,et=explicit.professionalModules.tim
 const renderer=read('assets/customer-ui/js/surfaces/bazi-professional-reading.js');for(const name of ['renderBaziPatternSurface','renderBaziSchoolSurface','renderBaziTimingSurface'])assert.match(renderer,new RegExp(`export function ${name}`));for(const label of ['Support','支持','Defeat','败格','Rescue','救应','Unresolved','未决','THREE SCHOOLS','三套学派','NATAL × DA YUN × LIU NIAN','原局 × 大运 × 流年'])assert(renderer.includes(label),`missing renderer label ${label}`);assert.match(renderer,/Structure present ≠ transformation established|组合出现 ≠ 已经化成/);assert.doesNotMatch(renderer,/大吉|大凶|必发财|必结婚/);
 const liveRenderer=read('assets/customer-ui/js/surfaces/single-method-reading.js');assert.match(liveRenderer,/renderBaziWholeChartFirst/);
 const client=read('assets/customer-ui/js/surfaces/personal-reality.js');assert.match(client,/renderBaziPatternSurface/);assert.match(client,/renderBaziSchoolSurface/);assert.match(client,/renderBaziTimingSurface/);assert.match(client,/baziTemporalContext/);assert.match(client,/baziTargetSupplied>0&&baziTargetSupplied<4/);assert.doesNotMatch(client,/seedBaziTargetContext/);
-const page=read('perspectives/personal/index.html');for(const field of ['baziTargetDate','baziTargetTime','baziTargetTimezoneIana','baziTargetUtcOffset'])assert(page.includes(`name="${field}"`));assert.match(page,/Leave all four fields blank|四项全部留空/);assert.doesNotMatch(page,/name="baziTargetDate"[^>]+value=/);
+// W9 established the four-field runtime boundary. The later frozen PPR-R3
+// shared host intentionally does not expose that historical static form; a
+// specialist successor is required before it can be presented again. Preserve
+// both truths: the explicit runtime path above works, and this checker must not
+// mutate or make a UI-cutover claim about the protected host.
+const pagePath='perspectives/personal/index.html',page=read(pagePath);
+const sharedFreeze=json(`${BASE}/contracts/bazi-ppr-r3-shared-freeze-guard-v1.json`);
+assert.equal(sharedFreeze.status,'FROZEN_SHARED_SURFACE_UNCHANGED');
+assert.equal(sha(pagePath),sharedFreeze.protectedFiles[pagePath]);
+for(const field of ['baziTargetDate','baziTargetTime','baziTargetTimezoneIana','baziTargetUtcOffset'])assert.doesNotMatch(page,new RegExp(`name="${field}"`));
 const api=read('functions/api/customer-personal-reality.js');assert.match(api,/methodNativeReading\.BZR=await buildBaziMethodNativeReading/);assert.match(api,/targetContext:body\?\.baziTemporalContext\|\|null/);assert.match(api,/buildZiweiFullProductionCustomerRuntime/,'current Zi Wei runtime must remain present');
 
 const fixture=json(`${BASE}/fixtures/bazi-professional-w7-w9-fixture-v1.json`);assert.equal(fixture.expected.patternCandidateCount,pattern.candidates.length);assert.equal(fixture.expected.schoolViewCount,schools.length);assert.equal(fixture.expected.daYunCount,et.allDaYun.length);assert.equal(fixture.expected.currentDaYunCycleNumber,et.currentDaYun.cycleNumber);assert.equal(fixture.expected.annualYear,et.annual.year);

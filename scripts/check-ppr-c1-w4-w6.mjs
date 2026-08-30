@@ -25,7 +25,12 @@ assert.match(api,/if\(spec\.methodCode==='BAZI'\)/);
 const baziBranch=api.slice(api.indexOf("if(spec.methodCode==='BAZI')"),api.indexOf("const request=new Request",api.indexOf("if(spec.methodCode==='BAZI')")));
 assert.match(baziBranch,/executeAndProjectMcd5CurrentRequest/);
 assert.match(baziBranch,/nativeBackedReadingMethod/);
-assert.doesNotMatch(baziBranch,/buildAcceptedMethodCustomerResult/);
+// The canonical BaZi product remains method-native. The separately named
+// crossReadingMethod may reuse the admitted SMR composer for W21-W26 cross-method
+// composition, but it must never become the primary BaZi readingMethod.
+assert.match(baziBranch,/crossReadingMethod=await buildAcceptedMethodCustomerResult/);
+assert.match(baziBranch,/readingMethod:nativeBackedReadingMethod\([^)]*\),crossReadingMethod/);
+assert.doesNotMatch(baziBranch,/readingMethod\s*:\s*(?:await\s*)?buildAcceptedMethodCustomerResult/);
 assert.match(api,/legacyComposerUsed:false/);
 assert.match(api,/methodNativeReading\.BZR=await buildBaziMethodNativeReading/);
 assert.match(api,/hasSingleNativeReport/);
@@ -78,7 +83,10 @@ assert.equal(ia.prohibitions.pillarByPillarEssaySequence,true);
 const natal=json('content/professional/bzr-full-production/fixtures/bazi-da-yun-integration-fixture-v1.json');
 const product=await buildBaziMethodNativeReading({canonicalProjection:natal,canonicalInput:{birthDate:'1989-11-15'},locale:'zh-Hans',targetContext:null});
 assert.equal(product.methodId,'BZR');
-assert.equal(product.productVersion,'BAZI-FP-v1.0.0@PPR-C1-W6');
+// W12 is the additive specialist-surface successor of the W6 method-native
+// product. Re-running the historical W4-W6 gate must accept that current
+// envelope while continuing to validate every frozen W6 capability below.
+assert.equal(product.productVersion,'BAZI-FP-v1.0.0@PPR-C1-W12');
 assert.equal(product.publicationDecision.customerPublishable,true);
 assert.equal(product.structuralModel.pillars.length,4);
 assert.equal(product.structuralModel.pillars.find(x=>x.position==='DAY').stem.zh,'庚');

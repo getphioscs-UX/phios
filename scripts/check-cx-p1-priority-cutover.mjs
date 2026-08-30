@@ -39,7 +39,11 @@ for (const surface of cutover.surfaces) {
   assert.equal(html.includes('/assets/js/public-shell-v2.js'), false, `${surface.surfaceId}: legacy shell`);
   assert.equal(html.includes('data-px2-surface'), false, `${surface.surfaceId}: legacy PX2 surface`);
   assert.equal(html.includes('puxr-'), false, `${surface.surfaceId}: legacy selector`);
-  assert.equal(html.includes('>Φ<'), false, `${surface.surfaceId}: hard-coded brand mark`);
+  // Φ is also the governed ECR/PHI Configuration method monogram. Permit only
+  // that exact method-card use; any remaining raw glyph is still treated as a
+  // hard-coded global brand mark because the page chrome must use the CX shell.
+  const withoutEcrMethodMonogram=html.replaceAll('<span class="cx-method-monogram" aria-hidden="true">Φ</span>','');
+  assert.equal(withoutEcrMethodMonogram.includes('>Φ<'), false, `${surface.surfaceId}: hard-coded brand mark`);
   for (const legacy of surface.legacyRoutes) assert.ok(redirects.includes(`${legacy} ${surface.canonicalPath} 308`), `missing redirect ${legacy}`);
 }
 

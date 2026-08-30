@@ -29,6 +29,18 @@ export const digest=value=>crypto.createHash('sha256').update(typeof value==='st
 export const fileDigest=path=>crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
 export const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const x of Object.values(value))freeze(x)}return value};
 
+// W18's founder decisions are bound to the R2-W16 workspace that was actually
+// reviewed. AST-CX-R3 later attached its separately governed v3 product
+// projection to that workspace as an additive successor payload. Keep the
+// historical W18 digest scoped to the reviewed R2-W16 fields so an additive
+// product projection cannot silently invalidate or inherit Human acceptance.
+export function projectW18ReviewedWorkspace(workspace={}){
+  const {customerProductProjection:_customerProductProjection,...reviewedWorkspace}=workspace;
+  return reviewedWorkspace;
+}
+
+export const digestW18ReviewedWorkspace=workspace=>digest(projectW18ReviewedWorkspace(workspace));
+
 export function projectionFromReference(referenceCase,houseSystem,{partialSpeed=false}={}){
   const h=referenceCase?.houseSystems?.[houseSystem];
   if(!h?.available){const reason=h?.expectedReasonCode||'AST_W17_HOUSE_SYSTEM_UNAVAILABLE';throw Object.assign(new Error(reason),{code:reason});}
@@ -85,7 +97,7 @@ export async function buildSurfaceCase({referenceCase,houseSystem,intent,locale,
     professionalSemanticDigest:digest(bundle.professionalSemanticProjection),
     synthesisDigest:digest(bundle.synthesis),
     customerReadingDigest:digest(reading),
-    workspaceDigest:digest(workspace),
+    workspaceDigest:digestW18ReviewedWorkspace(workspace),
     resolvedIntentId:bundle.intentResolution.intentId,
     themeCount:workspace.themes?.length||0,
     supportTensionCount:workspace.supportTension?.length||0,
