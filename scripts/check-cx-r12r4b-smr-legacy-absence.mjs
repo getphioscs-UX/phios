@@ -39,7 +39,14 @@ const allowedGovernance=new Set([
   `${canonicalContent}/acceptance/smr-w20d-legacy-absence-acceptance-v1.json`
 ]);
 const allowedHistory=`${canonicalContent}/history/v1`;
-function walk(dir){if(!exists(dir))return[];return fs.readdirSync(path.join(root,dir),{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);}
+const portablePath=p=>p.replace(/\\/g,'/');
+function walk(dir){
+  if(!exists(dir))return[];
+  return fs.readdirSync(path.join(root,dir),{withFileTypes:true}).flatMap(e=>{
+    const child=portablePath(path.join(dir,e.name));
+    return e.isDirectory()?walk(child):[child];
+  });
+}
 const productionFiles=[...walk('functions'),...walk('assets/customer-ui'),...walk('perspectives'),...walk(canonicalContent),'package.json']
   .filter(p=>typeof p==='string'&&exists(p))
   .filter(p=>!p.startsWith(allowedHistory)&&!allowedGovernance.has(p))
