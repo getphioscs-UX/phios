@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-ECR-R3-W0-W3-CUSTOMER-COHERENCE-REPAIR-v1.0.0",
+  "baselineCommit": "dae24c1dd8de49a6c238ddffb8d52b388e8da10d",
+  "status": "ENGINEERING_COMPLETE",
+  "scope": [
+    "ECR-R3-W0 Reading Payload Integrity Regression",
+    "ECR-R3-W1 PHI OS Reading Scalar Renderer Repair",
+    "ECR-R3-W2 Reading to PHI Card Semantic Lineage",
+    "ECR-R3-W3 PHI Card Contrast and CSS Authority Repair"
+  ],
+  "w0": {
+    "finding": "The governed full-report product emits scalar strings for plainLanguageExplanation, flowingExpression and strainedExpression, while the specialist renderer previously accepted mapper output only when it was already an array.",
+    "humanDesignBoundaryFinding": "The generic Human Design boundary copy existed in calculation-story-renderer.js, but the previous checker only searched source text and did not prove customer-rendered visibility.",
+    "requiredRegression": [
+      "scalar accepted interpretation survives full-report to product to renderer",
+      "scalar flowing and strained expressions survive rendering",
+      "generic Human Design boundary explainer is rendered outside collapsed technical detail",
+      "personal Human Design comparison remains a separate later governed layer"
+    ]
+  },
+  "w1": {
+    "change": "Normalize mapper output as zero, one or many values without changing array-only product section traversal.",
+    "meaningAuthorityChanged": false,
+    "calculationAuthorityChanged": false
+  },
+  "w2": {
+    "change": "Expose deterministic presentation lineage between each full-report section and its PHI Card using the existing cardId and interpretationUnitId; add reciprocal in-page links without creating new meaning.",
+    "newSemanticMappingCreated": false,
+    "cardSelectionChanged": false
+  },
+  "w3": {
+    "change": "Give the ECR specialist stylesheet explicit final authority for the dark PHI Card spread header while retaining light card interiors and readable print output.",
+    "sharedPersonalRealityCssModified": false,
+    "cardAssetsModified": false
+  },
+  "boundaries": {
+    "ecrRemainsPhiOsNative": true,
+    "phiCardsRemainDeterministicVisualSummary": true,
+    "phiCardsDoNotReplaceReading": true,
+    "rendererCreatesMeaning": false,
+    "rendererRecalculates": false,
+    "genericHumanDesignExplainerIsPersonalComparison": false,
+    "personalEcrHumanDesignComparisonImplementedByW0W3": false
+  },
+  "authorityLineage": {
+    "predecessorVisualSuccessorRef": "content/embodied-configuration/ecr-mandala-w24-visual-css-successor-v1.json",
+    "predecessorEcrStylesheetSha256": "4673ae91e3ccd5651ea7798d0b4f2206dac480d9ff6b9d7cb10aaa52cab6183b",
+    "baselineReadingRendererSha256": "b184953e0193f7e0ee1168c1376e8f5c87842630e9266e658aed57880d832792",
+    "baselineCalculationStoryRendererSha256": "f46bedd25e2da6adadfb3f25baab074816df3616a4a7c504f7a0cebbaaaab301"
+  },
+  "currentMain": {
+    "personalSurfaceSha256": "880ccf69ce172dbd615c47f70507f02351c66083ed4e6ebe9ae25cefeae897a9",
+    "ecrStylesheetSha256": "0a5f3b32a6b64dd8872e0ed832a51ce5d694964c5fbeb7d1414afb2ff567a208",
+    "readingRendererSha256": "af4f91322348e5a9e5b02e6616b6534049665bcc0da2db7ce52554331c691177",
+    "calculationStoryRendererSha256": "ddcb91cfda9a454279959615370410dbe09d2ce46186d91f4a913e0423f41535"
+  }
+}

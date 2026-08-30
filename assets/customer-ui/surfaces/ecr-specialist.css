@@ -234,3 +234,34 @@
 @media(max-width:767px){.cx-ecr-system-explainer{grid-template-columns:1fr}.cx-ecr-spread__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.cx-ecr-spread__grid{display:grid;grid-auto-flow:row;grid-template-columns:1fr;overflow:visible;scroll-snap-type:none;padding-bottom:0}.cx-ecr-spread__grid article{scroll-snap-align:none}}
 @media(max-width:390px){.cx-ecr-spread__grid{grid-template-columns:1fr}}
+
+/* ECR-R3 W0–W3 | customer coherence repair.
+   Keeps interpretation, deterministic PHI Card visuals and system-boundary copy
+   readable without changing ECR calculation or meaning authority. */
+.cx-ecr-hd-boundary{display:grid;gap:.3rem;margin:.95rem 0 1rem;padding:.9rem 1rem;border:1px solid color-mix(in srgb,var(--cx-accent,#9b6a16) 34%,var(--cx-line,#d8d3c7));border-left:4px solid var(--cx-accent,#9b6a16);border-radius:14px;background:color-mix(in srgb,var(--cx-accent,#9b6a16) 7%,var(--cx-surface,#fff));color:var(--cx-ink,#111)}
+.cx-ecr-hd-boundary>span{font-size:.7rem;font-weight:800;letter-spacing:.1em;color:var(--cx-accent,#9b6a16)}
+.cx-ecr-hd-boundary>strong{font:600 1.04rem/1.35 var(--cx-font-serif,Georgia,serif);color:var(--cx-ink,#111)}
+.cx-ecr-hd-boundary>p{margin:.1rem 0;line-height:1.65;color:var(--cx-ink,#111)}
+.cx-ecr-hd-boundary>small{line-height:1.55;color:var(--cx-muted,#6b675f)}
+
+.cx-ecr-reading-grid article[id],.cx-ecr-spread__grid article[id]{scroll-margin-top:6rem}
+.cx-ecr-reading-card-link,.cx-ecr-card-reading-link{display:flex;align-items:center;gap:.4rem;width:fit-content;max-width:100%;margin-top:.7rem;padding:.42rem .62rem;border:1px solid color-mix(in srgb,var(--cx-accent,#9b6a16) 35%,var(--cx-line,#d8d3c7));border-radius:999px;text-decoration:none;font-size:.75rem;line-height:1.25}
+.cx-ecr-reading-card-link{flex-wrap:wrap;background:color-mix(in srgb,var(--cx-accent,#9b6a16) 6%,var(--cx-surface,#fff));color:var(--cx-ink,#111)}
+.cx-ecr-reading-card-link>span:first-child{color:var(--cx-muted,#6b675f)}
+.cx-ecr-reading-card-link>b{overflow-wrap:anywhere;color:var(--cx-ink,#111)}
+.cx-ecr-card-reading-link{color:var(--cx-ink,#111);background:var(--cx-surface-soft,#f5f3ee)}
+.cx-ecr-reading-card-link:hover,.cx-ecr-card-reading-link:hover{text-decoration:underline}
+.cx-ecr-reading-card-link:focus-visible,.cx-ecr-card-reading-link:focus-visible{outline:3px solid var(--cx-accent,#9b6a16);outline-offset:2px}
+
+/* W3 contrast authority: ecr-specialist.css is loaded after personal-reality.css,
+   so the spread itself must explicitly win over the generic white section rule. */
+.cx-ecr-specialist-reading>section.cx-ecr-spread{background:linear-gradient(145deg,#07162c,#102847);color:#f7f2e5;border-color:color-mix(in srgb,#d9b45a 32%,#102847);box-shadow:0 1rem 3rem color-mix(in srgb,#07162c 20%,transparent)}
+.cx-ecr-specialist-reading>section.cx-ecr-spread>.cx-eyebrow{color:#d9b45a}
+.cx-ecr-specialist-reading>section.cx-ecr-spread>h3{color:#fff}
+.cx-ecr-specialist-reading>section.cx-ecr-spread>p{color:color-mix(in srgb,#fff 84%,transparent)}
+
+@media print{
+  .cx-ecr-specialist-reading>section.cx-ecr-spread{background:#fff!important;color:#000!important;border-color:#999;box-shadow:none!important}
+  .cx-ecr-specialist-reading>section.cx-ecr-spread>.cx-eyebrow,.cx-ecr-specialist-reading>section.cx-ecr-spread>h3,.cx-ecr-specialist-reading>section.cx-ecr-spread>p{color:#000!important}
+  .cx-ecr-reading-card-link,.cx-ecr-card-reading-link{border-color:#999;color:#000;background:#fff}
+}
