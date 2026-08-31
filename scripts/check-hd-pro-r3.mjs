@@ -6,7 +6,8 @@ const steps=[
   'scripts/check-hd-pro-r3-w2-source-authority.mjs',
   'scripts/check-hd-pro-r3-w3-claim-ir.mjs',
   'scripts/check-hd-pro-r3-w3r-report-blueprint.mjs',
-  'scripts/check-hd-pro-r3-w4-type-semantic-corpus.mjs'
+  'scripts/check-hd-pro-r3-w4-type-semantic-corpus.mjs',
+  'scripts/check-hd-pro-r3-w5-authority-semantic-corpus.mjs'
 ];
 
 for(const script of steps){
@@ -14,5 +15,5 @@ for(const script of steps){
   if(result.status!==0) process.exit(result.status??1);
 }
 
-console.log('✓ HD-PRO-R3 W0-W4 aggregate passed.');
-console.log('  R3 remains SHADOW_CANDIDATE; Type semantic production is admitted at W4; composition and customer publication remain gated without changing R2 CUSTOMER_PUBLISHED authority.');
+console.log('✓ HD-PRO-R3 W0-W5 aggregate passed.');
+console.log('  R3 remains SHADOW_CANDIDATE; Type and Authority semantic production are admitted through W5; composition and customer publication remain gated without changing R2 CUSTOMER_PUBLISHED authority.');
