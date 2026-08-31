@@ -29,7 +29,7 @@
       ]
     },
     "assets/customer-ui/js/surfaces/personal-reality.js": {
-      "currentSha256": "f437180f22bbd530b8cc16098f614e14dd574c949a694ef6d329536f0f83f1d5",
+      "currentSha256": "9bb24dc5c5912fbc854767302ddcfbc3294e11f6c43707f84761effc05ba0d3c",
       "recognizedPredecessors": [
         "3fe7a5269609e3923df48f5d934aa2b7437ccff7cdd51f3339cf69a832975e30",
         "286e58401cf84885f805b330d33377dd7b10313c6e520233fc67e066436b9f51",
@@ -42,7 +42,8 @@
         "efa88dcefa9a0c7d63f986108f25d55731b50fa4a0f7a82e0af0ae1b2cd36da9",
         "9ac09f7c5f7d85a318a56a614139197e5f2f3c8ae0c3050090c40b7c6b3eb8bb",
         "098a424fb828a6fbc0c068548f3cde9568ef6e866c4035822ea3fd0c339937de",
-        "ab91c64dfe56cd46bd496402fb7dc70432c3098268229fd5fc033ba7c2e97f41"
+        "ab91c64dfe56cd46bd496402fb7dc70432c3098268229fd5fc033ba7c2e97f41",
+        "f437180f22bbd530b8cc16098f614e14dd574c949a694ef6d329536f0f83f1d5"
       ],
       "requiredTokens": [
         "collectMethodInputExtensions",
@@ -53,7 +54,9 @@
         "renderProductRoute",
         "birthLocationSnapshot",
         "confirmedExternalProfile:externalEnabled?confirmedExternalProfile:null",
-        "payload.view?.humanDesignContext"
+        "payload.view?.humanDesignContext",
+        "mountEcrHumanDesignRealityBridge",
+        "collectEcrHumanDesignRealityBridgeResponse"
       ],
       "forbiddenTokens": [
         "single-method-reading.js",
@@ -80,14 +83,16 @@
       ]
     },
     "assets/customer-ui/surfaces/ecr-specialist.css": {
-      "currentSha256": "2a2b08e7940283fad184a936bc6ad6278b40b88210d4f2af12db8922e6efcec1",
+      "currentSha256": "e0ec1ff58eac8c18bc4b9c48a17e4b0976010929038d0ab8020077eff1968fce",
       "recognizedPredecessors": [
         "702f748db3960b2e26caab382961b74dc467efb69887ef4a53bd2ffd90e5744b",
         "4673ae91e3ccd5651ea7798d0b4f2206dac480d9ff6b9d7cb10aaa52cab6183b",
-        "0a5f3b32a6b64dd8872e0ed832a51ce5d694964c5fbeb7d1414afb2ff567a208"
+        "0a5f3b32a6b64dd8872e0ed832a51ce5d694964c5fbeb7d1414afb2ff567a208",
+        "2a2b08e7940283fad184a936bc6ad6278b40b88210d4f2af12db8922e6efcec1"
       ],
       "requiredTokens": [
-        "cx-ecr"
+        "cx-ecr",
+        "cx-ecr-reality-bridge"
       ],
       "forbiddenTokens": []
     },
@@ -106,19 +111,22 @@
       "forbiddenTokens": []
     },
     "functions/api/customer-personal-reality.js": {
-      "currentSha256": "74d287fa995a1dd62dcdcb22e96ddabd53a8cf55aba13c5c7a0e511ea7148490",
+      "currentSha256": "ad5a0a6284258e9c234c2a9bff982cd1863391a1874c867efdb6f4e1b0b93217",
       "recognizedPredecessors": [
         "12ad48f7cdea156b86f3b75f682d3ffc09cc80a270633af0b798089bb43a292a",
         "eedd72ed2fa5129f64b19788ba42da6bfd2141b8cb5c5da390db8378fb0a6822",
         "774377f95849e3ada48e84f33ece1e5ade8545a679fcf269809136edde0c8fc1",
-        "bd7a98b4a22eaafb4f2718993ab3cfbf3f173b95a69acab0076568526a49f2ce"
+        "bd7a98b4a22eaafb4f2718993ab3cfbf3f173b95a69acab0076568526a49f2ce",
+        "74d287fa995a1dd62dcdcb22e96ddabd53a8cf55aba13c5c7a0e511ea7148490"
       ],
       "requiredTokens": [
         "consumeConfirmedBirthLocationSnapshot",
         "buildPersonalRealityProduct",
         "buildConfirmedHumanDesignContextTransport",
         "buildEcrHumanDesignComparisonIR",
-        "ecrHumanDesignComparison"
+        "ecrHumanDesignComparison",
+        "buildEcrHumanDesignRealityBridgeIR",
+        "ecrHumanDesignRealityBridge"
       ],
       "forbiddenTokens": []
     }

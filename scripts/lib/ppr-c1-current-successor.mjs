@@ -13,6 +13,7 @@ const R4_PATH='content/professional/personal-reality/r4/authority/ppr-r4-method-
 const CURRENT_PATH='content/professional/personal-reality/r4/authority/ppr-r4-current-main-successor-reconciliation-v1.json';
 const W10A_PATH='content/professional/personal-reality/r3/authority/ppr-r3-w10a-ast-target-context-shared-input-successor-v1.json';
 const R5_PATH='content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json';
+const R5_W17C_PATH='content/professional/personal-reality/r5/authority/ppr-r5-w17c-governance-visual-successor-v1.json';
 const HD_PATH='content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-successor-v1.json';
 const HD_PUBLISH_PATH='content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json';
 const R4V2_PATH='content/professional/personal-reality/r4/authority/ppr-r4-ast-target-context-input-successor-v2.json';
@@ -67,6 +68,7 @@ export function assertPprC1CurrentSuccessor(){
  const current=readJson(CURRENT_PATH);
  const w10a=readJson(W10A_PATH);
  const r5=fs.existsSync(R5_PATH)?readJson(R5_PATH):null;
+ const r5W17c=fs.existsSync(R5_W17C_PATH)?readJson(R5_W17C_PATH):null;
  const hd=fs.existsSync(HD_PATH)?readJson(HD_PATH):null;
  const hdPublish=fs.existsSync(HD_PUBLISH_PATH)?readJson(HD_PUBLISH_PATH):null;
  const r4v2=fs.existsSync(R4V2_PATH)?readJson(R4V2_PATH):null;
@@ -146,7 +148,15 @@ export function assertPprC1CurrentSuccessor(){
  if(r5){
   for(const [path,proof] of Object.entries(r5.addedFiles||{})){
    assert(fs.existsSync(path),`PPR-R5 added file missing: ${path}`);
-   assert.equal(proof.sha256,sha(path),`PPR-R5 added file digest drift: ${path}`);
+   const visualSuccessor=r5W17c?.successorProof?.[path]||null;
+   if(visualSuccessor){
+    assert.equal(r5W17c.status,'VISUAL_SUCCESSOR_ACTIVE',`PPR-R5 visual successor status drift: ${path}`);
+    assert.equal(r5W17c.scope,'PERSONAL_REALITY_GOVERNANCE_PRESENTATION_ONLY',`PPR-R5 visual successor scope drift: ${path}`);
+    assert.equal(visualSuccessor.predecessorSha256,proof.sha256,`PPR-R5 visual successor predecessor mismatch: ${path}`);
+    assert.equal(visualSuccessor.successorSha256,sha(path),`PPR-R5 visual successor digest drift: ${path}`);
+    assert.equal(visualSuccessor.changeClass,'PPR_R5_SCOPED_VISUAL_LAYOUT_SUCCESSOR',`PPR-R5 visual successor class drift: ${path}`);
+    assert.equal(Object.values(r5W17c.boundaries||{}).every(value=>value===false),true,`PPR-R5 visual successor boundary drift: ${path}`);
+   }else assert.equal(proof.sha256,sha(path),`PPR-R5 added file digest drift: ${path}`);
    assert.equal(proof.changesRuntimeBehavior,false,`PPR-R5 editorial file must not change runtime behavior: ${path}`);
   }
   for(const [path,proof] of Object.entries(r5.protectedFiles||{})){

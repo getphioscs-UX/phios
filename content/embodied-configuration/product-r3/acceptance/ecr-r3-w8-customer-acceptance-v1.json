@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "PHI-OS-ECR-R3-W8-CUSTOMER-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "8c44a0e023a15a2e6f786306a83bd792b90bdb65",
+  "status": "CUSTOMER_ACCEPTANCE_PASSED",
+  "acceptanceClass": "MACHINE_VERIFIED_CUSTOMER_ROUTE",
+  "scope": [
+    "ECR-R3-W0 through W7 regression",
+    "ECR-R3-W8 Checker + Customer Acceptance"
+  ],
+  "canonicalRoute": "/perspectives/personal/",
+  "checker": "scripts/check-ecr-product-r3-w8.mjs",
+  "aggregateScript": "npm run check:ecr-r3",
+  "campaign": {
+    "caseCount": 12,
+    "passed": 12,
+    "failed": 0,
+    "cases": [
+      {"caseId":"ECR-R3-W8-C01","locale":"zh-Hans","scenario":"rich confirmed Human Design comparison + Reality Bridge render","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C02","locale":"en","scenario":"rich confirmed Human Design comparison + Reality Bridge render","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C03","locale":"zh-Hans","scenario":"partial confirmed Human Design stays partial without inferred fields","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C04","locale":"en","scenario":"partial confirmed Human Design stays partial without inferred fields","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C05","locale":"en","scenario":"unsafe comparison boundary fails closed before Reality Bridge","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C06","locale":"zh-Hans","scenario":"no explicit Reality Bridge response creates no reported context","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C07","locale":"zh-Hans","scenario":"repeats reliably response enters My Reality only as user-reported context","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C08","locale":"zh-Hans","scenario":"context-dependent response enters My Reality only as user-reported context","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C09","locale":"en","scenario":"not-clear-yet response remains unresolved user-reported context","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C10","locale":"en","scenario":"contradiction remains visible and is not resolved automatically","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C11","locale":"en","scenario":"My Reality handoff still requires explicit consent","expected":"PASS","result":"PASS"},
+      {"caseId":"ECR-R3-W8-C12","locale":"zh-Hans","scenario":"customer handoff creates no external evidence, finding, fact or automatic persistence","expected":"PASS","result":"PASS"}
+    ]
+  },
+  "customerAcceptanceCriteria": {
+    "phiOsReadingRemainsPrimaryEcrAuthority": true,
+    "humanDesignRemainsConfirmedExternalContext": true,
+    "comparisonVisibleBeforeRealityBridge": true,
+    "realityBridgeVisibleBeforePhiCards": true,
+    "allFiveComparisonDimensionsHaveObservationPrompts": true,
+    "fourCustomerObservationStatesAvailable": true,
+    "contradictionCanBeSelected": true,
+    "partialHumanDesignNeverBackfilled": true,
+    "selectedResponsesOnlyCrossHandoff": true,
+    "explicitHandoffConsentStillRequired": true,
+    "responsesRemainUserReportedContext": true,
+    "currentRealityEvidenceNotCreated": true,
+    "currentRealityConclusionNotCreated": true,
+    "automaticPersistenceNotCreated": true
+  },
+  "boundaries": {
+    "humanReviewClaimed": false,
+    "customerIdentityClaimCreated": false,
+    "methodAgreementClaimed": false,
+    "compatibilityScoreCreated": false,
+    "directFieldEquivalenceCreated": false,
+    "currentRealityEvidenceCreated": false,
+    "currentRealityConclusionCreated": false,
+    "automaticPersistence": false,
+    "runtimeMemoryWritten": false
+  },
+  "releaseDecision": {
+    "w7RealityBridge": "CUSTOMER_ROUTE_ACCEPTED",
+    "w8Checker": "ACTIVE_REGRESSION_GATE",
+    "nextWork": "ECR-R3 may proceed to post-W8 product hardening without reopening W0-W7 authority"
+  }
+}
