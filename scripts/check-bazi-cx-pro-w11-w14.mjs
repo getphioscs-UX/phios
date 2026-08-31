@@ -20,6 +20,8 @@ const relocationContract=readJson('../content/customer-experience-rebuild/bazi-c
 const benchmarkContract=readJson('../content/customer-experience-rebuild/bazi-cx-pro/contracts/bazi-professional-benchmark-v1.json');
 const cutoverContract=readJson('../content/customer-experience-rebuild/bazi-cx-pro/contracts/bazi-market-grade-customer-cutover-v1.json');
 const acceptance=readJson('../content/customer-experience-rebuild/bazi-cx-pro/acceptance/bazi-cx-pro-w11-w14-engineering-acceptance-v1.json');
+const humanAcceptance=readJson('../content/customer-experience-rebuild/bazi-cx-pro/acceptance/bazi-cx-pro-w13-w14-human-cutover-acceptance-v1.json');
+const marketFreeze=readJson('../content/customer-experience-rebuild/bazi-cx-pro/acceptance/bazi-cx-pro-w14-market-grade-freeze-v1.json');
 const reviewCases=readJson('../content/customer-experience-rebuild/bazi-cx-pro/benchmark/bazi-cx-pro-w13-review-cases-v1.json');
 const reviewResults=readJson('../content/customer-experience-rebuild/bazi-cx-pro/benchmark/bazi-cx-pro-w13-review-results-v1.json');
 const reviewHtml=readText('../review/bazi-cx-pro-w13-24-chart-professional-benchmark.html');
@@ -37,7 +39,9 @@ const noTarget=await buildBaziMethodNativeReading({canonicalProjection:fixture,l
 assert.equal(noTarget.governance.realityBridgeAuthorized,true);
 assert.equal(noTarget.governance.sourcesTechnicalRelocationAuthorized,true);
 assert.equal(noTarget.governance.marketGradeCustomerCutoverCandidateAuthorized,true);
-assert.equal(noTarget.governance.marketGradeCustomerCutoverActive,false);
+assert.equal(noTarget.governance.w13HumanAccepted24Of24,true);
+assert.equal(noTarget.governance.marketGradeCustomerCutoverActive,true);
+assert.equal(noTarget.governance.marketGradeCustomerCutoverFrozen,true);
 assert.equal(noTarget.governance.customerDefaultSurface,'BAZI_PROFESSIONAL_READING');
 assert.equal(noTarget.governance.governanceSurfaceDefault,false);
 assert.equal(noTarget.governance.technicalSurfaceOnDemand,true);
@@ -88,8 +92,9 @@ assert.equal(rendered.status,'RENDERED');
 assert.equal(rendered.customerDefaultSurface,'BAZI_PROFESSIONAL_READING');
 assert.equal(rendered.governanceSurfaceDefault,false);
 assert.equal(rendered.technicalSurfaceMode,'ON_DEMAND');
-assert.equal(rendered.marketGradeCutoverState,'CANDIDATE_PENDING_W13_HUMAN_ACCEPTANCE');
-assert.match(rendered.readingHtml,/data-bazi-market-grade-reading="candidate"/);
+assert.equal(rendered.marketGradeCutoverState,'ACTIVE_FROZEN');
+assert.equal(rendered.marketGradeCutoverFrozen,true);
+assert.match(rendered.readingHtml,/data-bazi-market-grade-reading="active"/);
 assert.match(rendered.readingHtml,/data-bazi-cx-pro-pattern-main="true"/);
 assert.match(rendered.readingHtml,/data-bazi-cx-pro-reality-bridge-summary="true"/);
 assert.doesNotMatch(rendered.readingHtml,/data-ppr-bazi-school-professional="true"/);
@@ -104,7 +109,7 @@ assert.match(rendered.technicalHtml,/证据记录/);
 assert.match(rendered.technicalHtml,/权威记录（来源依据）/);
 assert.match(rendered.technicalHtml,/读取溯源/);
 
-// W13 review pack: machine preparation only; human acceptance must remain pending.
+// W13 review pack and human acceptance successor.
 assert.equal(reviewCases.work,'BAZI-CX-PRO-W13');
 assert.equal(reviewCases.baselineCommit,'78ac0ae651133131d162e53c07cbccd793a55672');
 assert.equal(reviewCases.caseCount,24);
@@ -112,15 +117,31 @@ assert.equal(reviewCases.cases.length,24);
 assert.deepEqual(reviewCases.criteria.map(x=>x.code),RUBRIC);
 assert.equal(reviewCases.acceptanceRule.minimumPerCriterion,4);
 assert.equal(reviewCases.acceptanceRule.cutoverRequiresAcceptedCases,24);
-assert.equal(reviewResults.status,'HUMAN_REVIEW_PENDING');
+assert.equal(benchmarkContract.status,'HUMAN_ACCEPTED_24_OF_24');
+assert.equal(benchmarkContract.currentHumanStatus,'HUMAN_ACCEPTED_24_OF_24');
+assert.equal(reviewResults.status,'HUMAN_ACCEPTED_24_OF_24');
 assert.equal(reviewResults.entries.length,24);
 assert.deepEqual(reviewResults.criteria,RUBRIC);
-assert.equal(reviewResults.summary.accepted,0);
-assert.equal(reviewResults.summary.pending,24);
-assert.equal(reviewResults.summary.marketGradeCutoverAllowed,false);
-for(const e of reviewResults.entries){assert.equal(e.decision,'PENDING');assert.equal(e.criticalIssue,false);for(const k of RUBRIC)assert.equal(e.scores[k],null);}
+assert.equal(reviewResults.summary.accepted,24);
+assert.equal(reviewResults.summary.changesRequired,0);
+assert.equal(reviewResults.summary.pending,0);
+assert.equal(reviewResults.summary.criticalIssues,0);
+assert.equal(reviewResults.summary.rubricThresholdAttestedCases,24);
+assert.equal(reviewResults.summary.numericScoreExportAvailable,false);
+assert.equal(reviewResults.summary.marketGradeCutoverAllowed,true);
+assert.equal(reviewResults.reviewDeclaration,'USER_CONFIRMED_ALL_24_ACCEPTED');
+assert.equal(reviewResults.reviewEvidence.scoreEvidenceMode,'THRESHOLD_ATTESTATION_NO_NUMERIC_SCORE_FABRICATION');
+assert.equal(reviewResults.reviewEvidence.allSixCriteriaMeetOrExceedMinimumByHumanAcceptanceDeclaration,true);
+for(const e of reviewResults.entries){assert.equal(e.decision,'ACCEPT');assert.equal(e.criticalIssue,false);assert.equal(e.rubricThresholdAttested,true);for(const k of RUBRIC)assert.equal(e.scores[k],null);}
 for(const c of reviewCases.cases){assert.match(reviewHtml,new RegExp(c.caseId));assert.equal(c.machinePreflight.exactRealityPromptDuplicates,0);assert(c.reading.priorityChapters.length>=3&&c.reading.priorityChapters.length<=5);assert.equal(c.reading.topics.length,7);}
 for(const label of ['具体性','八字解释深度','组合能力','非重复','可理解','Reality relevance','Export results JSON'])assert(reviewHtml.includes(label),`W13 HTML missing ${label}`);
+assert.equal(humanAcceptance.baselineCommit,'d0465d1b6abab7098ab202927b9c859391e60635');
+assert.equal(humanAcceptance.status,'HUMAN_ACCEPTED_24_OF_24_MARKET_GRADE_CUTOVER_ACTIVE');
+assert.deepEqual(humanAcceptance.actual,{accepted:24,changesRequired:0,pending:0,criticalIssues:0,required:24});
+assert.equal(humanAcceptance.gates.ALL_24_DECISIONS_ACCEPT,true);
+assert.equal(humanAcceptance.gates.ALL_SIX_RUBRIC_THRESHOLDS_ATTESTED_BY_HUMAN,true);
+assert.equal(humanAcceptance.gates.NUMERIC_SCORES_NOT_FABRICATED,true);
+assert.equal(humanAcceptance.gates.MARKET_GRADE_CUTOVER_ALLOWED,true);
 
 // 24-case W11 deterministic regression.
 let checked=0;let timingPromptCases=0;
@@ -139,21 +160,38 @@ for(const spec of generateCampaignCases().slice(0,24)){
 assert.equal(checked,24);
 assert.equal(timingPromptCases,24);
 
-// W14 is prepared but intentionally fail-closed until W13 human acceptance.
+// W14 active successor: W13 human gate satisfied and customer authority frozen.
+assert.equal(cutoverContract.status,'MARKET_GRADE_ACTIVE_FROZEN');
+assert.equal(cutoverContract.activationBaselineCommit,'d0465d1b6abab7098ab202927b9c859391e60635');
 assert.equal(cutoverContract.current.candidateAuthorized,true);
 assert.equal(cutoverContract.current.customerDefaultProfessionalSurfacePrepared,true);
 assert.equal(cutoverContract.current.governanceDefaultDisabled,true);
-assert.equal(cutoverContract.current.marketGradeCustomerCutoverActive,false);
-assert.equal(cutoverContract.current.blockedBy,'W13_HUMAN_REVIEW_PENDING');
+assert.equal(cutoverContract.current.marketGradeCustomerCutoverActive,true);
+assert.equal(cutoverContract.current.marketGradeCustomerCutoverFrozen,true);
+assert.equal(cutoverContract.current.blockedBy,null);
 assert.equal(cutoverContract.activationGate.w13HumanAccepted24Of24Required,true);
+assert.equal(cutoverContract.activationEvidence.w13HumanAccepted24Of24,true);
+assert.equal(cutoverContract.activationEvidence.numericScoreExportFabricated,false);
+// Historical engineering acceptance remains a truthful record of the candidate gate before human admission.
 assert.equal(acceptance.w13.humanAcceptanceClaimed,false);
 assert.equal(acceptance.w14.marketGradeCustomerCutoverActive,false);
+assert.equal(humanAcceptance.w14.marketGradeCustomerCutoverActive,true);
+assert.equal(humanAcceptance.w14.marketGradeCustomerCutoverFrozen,true);
+assert.equal(marketFreeze.status,'MARKET_GRADE_ACTIVE_FROZEN');
+assert.equal(marketFreeze.customerAuthority.defaultSurface,'BAZI_PROFESSIONAL_READING');
+assert.equal(marketFreeze.customerAuthority.governanceSurfaceDefault,false);
+assert.equal(marketFreeze.customerAuthority.sourcesTechnicalMode,'ON_DEMAND');
+assert.equal(marketFreeze.freezeGuards.mayOverwriteAcceptedW13ResultsWithPendingTemplate,false);
+assert.equal(marketFreeze.freezeGuards.mayInventNumericRubricScores,false);
+const generatorSource=readText('./generate-bazi-cx-pro-w13-review-pack.mjs');
+assert.match(generatorSource,/HUMAN_ACCEPTED_24_OF_24/);
+assert.match(generatorSource,/preserveAcceptedHumanResults/);
 
 const css=readText('../assets/customer-ui/surfaces/bazi-professional-reading.css');
 for(const token of ['.cx-bazi-reality-bridge','.cx-bazi-reality-bridge-summary','.cx-bazi-pattern-main','.cx-bazi-pattern-main-grid','.cx-bazi-technical-summary','.cx-bazi-w12-technical details'])assert(css.includes(token),`W11-W12 CSS missing ${token}`);
 
-console.log('✓ BAZI-CX-PRO W11–W14 engineering gate passed.');
+console.log('✓ BAZI-CX-PRO W11–W14 market-grade human cutover gate passed.');
 console.log(`  W11: ${bridge.summary.totalPromptCount} no-target prompts, exact duplicates 0; 24/24 timing cases preserve distinct chapter prompts.`);
 console.log('  W12: customer main reading is interpretation-first; school/source/open technical detail is on-demand in Sources & Technical.');
-console.log('  W13: 24-chart / 6-dimension human benchmark pack ready; human result remains PENDING.');
-console.log('  W14: professional reading is prepared as customer default; market-grade activation remains blocked until W13 is human accepted 24/24.');
+console.log('  W13: 24/24 human accepted under the six-dimension gate; numeric scores were not fabricated.');
+console.log('  W14: market-grade professional reading is ACTIVE_FROZEN; governance is not the customer default and Sources & Technical remains on-demand.');

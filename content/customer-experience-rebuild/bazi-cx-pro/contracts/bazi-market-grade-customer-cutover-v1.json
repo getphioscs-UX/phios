@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BAZI-CX-PRO-MARKET-GRADE-CUTOVER-CONTRACT-v1.0.0",
   "workId": "BAZI-CX-PRO-W14",
   "title": "Market-Grade Customer Cutover",
-  "status": "CANDIDATE_READY_HUMAN_GATE_PENDING",
+  "status": "MARKET_GRADE_ACTIVE_FROZEN",
   "baselineCommit": "78ac0ae651133131d162e53c07cbccd793a55672",
   "customerDefault": {
     "surface": "BAZI_PROFESSIONAL_READING",
@@ -20,13 +20,28 @@
     "candidateAuthorized": true,
     "customerDefaultProfessionalSurfacePrepared": true,
     "governanceDefaultDisabled": true,
-    "marketGradeCustomerCutoverActive": false,
-    "blockedBy": "W13_HUMAN_REVIEW_PENDING"
+    "marketGradeCustomerCutoverActive": true,
+    "marketGradeCustomerCutoverFrozen": true,
+    "activatedBy": "W13_HUMAN_ACCEPTED_24_OF_24",
+    "blockedBy": null
   },
   "boundaries": {
     "mayActivateWithoutHumanAcceptance": false,
     "historicalHumanAcceptanceInvented": false,
     "calculationAuthorityChanged": false,
-    "meaningAuthorityReplaced": false
+    "meaningAuthorityReplaced": false,
+    "numericRubricScoresInvented": false
+  },
+  "activationBaselineCommit": "d0465d1b6abab7098ab202927b9c859391e60635",
+  "humanAcceptanceRef": "content/customer-experience-rebuild/bazi-cx-pro/acceptance/bazi-cx-pro-w13-w14-human-cutover-acceptance-v1.json",
+  "freezeRef": "content/customer-experience-rebuild/bazi-cx-pro/acceptance/bazi-cx-pro-w14-market-grade-freeze-v1.json",
+  "activationEvidence": {
+    "w11EngineeringPassed": true,
+    "w12EngineeringPassed": true,
+    "w13HumanAccepted24Of24": true,
+    "w13RubricThresholdSatisfiedByAuthorizedHumanDeclaration": true,
+    "w13CriticalIssues": 0,
+    "numericScoreExportFabricated": false,
+    "activatedAt": "2026-08-31T16:19:00+08:00"
   }
 }
