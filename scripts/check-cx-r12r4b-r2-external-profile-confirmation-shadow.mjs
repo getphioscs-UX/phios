@@ -14,6 +14,7 @@ const provenance=readJson('content/customer-experience-rebuild/r12r4b/external-p
 const shadowContract=readJson('content/customer-experience-rebuild/r12r4b/hdr-shadow-validation-contract-v1.json');
 const acceptance=readJson('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r2-acceptance-v1.json');
 const r1=readJson('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r1-acceptance-v1.json');
+const hdW11=readJson('content/customer-experience-rebuild/hd-pro-r2/hd-w11-official-chart-pdf-intake-adapter-successor-v1.json');
 
 assert.equal(extractionAuthority.work,'CX-R12R4B-R2-W16R-W17R');
 assert.equal(extractionAuthority.predecessor,'content/customer-experience-rebuild/r12r4b/human-design-external-profile-contract-v1.json');
@@ -104,7 +105,10 @@ const confirmResponse=await externalProfileConfirm({request:new Request('https:/
 assert.equal(confirmResponse.status,200);const confirmPayload=await confirmResponse.json();assert.equal(confirmPayload.confirmedExternalProfile.provenance.customerConfirmed,true);assert.equal(confirmPayload.privacy.saved,false);
 
 const html=fs.readFileSync('perspectives/personal/index.html','utf8'),client=fs.readFileSync('assets/customer-ui/js/surfaces/personal-reality.js','utf8');
-for(const token of ['data-cx-external-profile-confirmation','data-cx-external-profile-confirm','externalProfileShadowCheck','Cloudflare document-conversion service'])assert(html.includes(token),`R2 customer confirmation surface missing ${token}`);
+for(const token of ['data-cx-external-profile-confirmation','data-cx-external-profile-confirm','externalProfileShadowCheck'])assert(html.includes(token),`R2 customer confirmation surface missing ${token}`);
+const historicalConversionCopy=html.includes('Cloudflare document-conversion service');
+const w11ConfirmationCopy=hdW11.status==='OFFICIAL_CHART_PDF_INTAKE_ADAPTER_SUCCESSOR_ACTIVE'&&html.includes('Automatic extraction creates candidates only.')&&html.includes('Only the values you verify here are used in this session.');
+assert(historicalConversionCopy||w11ConfirmationCopy,'R2/W11 customer confirmation surface must disclose candidate-only extraction and customer verification');
 for(const token of ['/api/customer-external-profile-confirm','/api/customer-external-profile-shadow-check','renderExternalProfileConfirmation','confirmPreparedExternalProfile','runExternalProfileShadowCheck'])assert(client.includes(token),`R2 client binding missing ${token}`);
 for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"','name="externalDefinedCenters"','name="externalOpenCenters"'])assert.equal(html.includes(forbidden),false,`Structural detail must not become normal manual input: ${forbidden}`);
 

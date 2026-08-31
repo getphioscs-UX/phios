@@ -12,6 +12,8 @@ const shadow=readJson('content/customer-experience-rebuild/r12r4b/hdr-shadow-bou
 const acceptance=readJson('content/customer-experience-rebuild/r12r4b/cx-r12r4b-r1-acceptance-v1.json');
 const hdrFreeze=readJson('content/professional/core-method-runtime/hdr-production-freeze-v1.json');
 const hdrReadiness=readJson('content/professional/method-production-activation/registries/mpa-hdr-boundary-readiness-v1.json');
+const hdW11=readJson('content/customer-experience-rebuild/hd-pro-r2/hd-w11-official-chart-pdf-intake-adapter-successor-v1.json');
+const R1_MANUAL_ADVANCED_FIELDS=['cognition','determination','environment','perspective','motivation','trajectory'];
 
 assert.equal(authority.work,'CX-R12R4B-W11R');
 assert.equal(authority.methodId,'XPF');
@@ -21,7 +23,7 @@ assert.equal(authority.authority.phiosCalculated,false);
 assert.equal(authority.authority.canonicalMethodProjection,false);
 assert.equal(authority.authority.calculatedMethodConsensusEligible,false);
 assert.equal(authority.boundaries.hdrShadowMayValidateButMayNotOverwriteCustomerInput,true);
-assert.deepEqual(authority.manualAdvancedFields,EXTERNAL_PROFILE_MANUAL_FIELDS);
+assert.deepEqual(authority.manualAdvancedFields,R1_MANUAL_ADVANCED_FIELDS);
 
 assert.equal(shadow.methodId,'HDR');
 assert.equal(shadow.authorityClass,'INTERNAL_VALIDATION_ONLY');
@@ -34,7 +36,11 @@ assert.equal(hdrFreeze.executionMode,'validation_only');
 assert.equal(hdrReadiness.productionExecutionAllowed,false);
 assert.equal(hdrReadiness.publicMethodExecutionAllowed,false);
 
-assert.deepEqual(contract.manualAdvancedFields,EXTERNAL_PROFILE_MANUAL_FIELDS);
+assert.deepEqual(contract.manualAdvancedFields,R1_MANUAL_ADVANCED_FIELDS);
+assert.deepEqual(EXTERNAL_PROFILE_MANUAL_FIELDS,['variable',...R1_MANUAL_ADVANCED_FIELDS]);
+assert(hdW11.basicConfirmationFields.includes('variable'));
+assert.deepEqual(hdW11.advancedOptionalFields,R1_MANUAL_ADVANCED_FIELDS);
+assert.equal(hdW11.boundaries.historicalFreezeRewritten,false);
 assert.deepEqual(contract.supportedFileTypes,['png','jpg','jpeg','webp','pdf']);
 assert.equal(contract.r1Capabilities.binaryDocumentExtraction,false);
 assert.equal(contract.r1Capabilities.customerConfirmation,false);
@@ -102,6 +108,7 @@ assert.equal((await badResponse.json()).error,'EXTERNAL_PROFILE_FILE_TYPE_UNSUPP
 
 const html=fs.readFileSync('perspectives/personal/index.html','utf8');
 for(const name of ['externalCognition','externalDetermination','externalEnvironment','externalPerspective','externalMotivation','externalTrajectory'])assert(html.includes(`name="${name}"`),`Missing six-field input ${name}`);
+assert(html.includes('name="externalVariable"'),'HD W11 Variable successor input is missing');
 for(const forbidden of ['externalType','externalAuthority','externalProfile','externalDefinition','externalIncarnationCross','externalActivatedGates','externalChannels','externalDefinedCenters','externalOpenCenters'])assert.equal(html.includes(`name="${forbidden}"`),false,`Core/structural field must not be normal manual input: ${forbidden}`);
 assert.match(html,/accept="image\/png,image\/jpeg,image\/webp,application\/pdf"/);
 assert.match(html,/customer-supplied external context/i);
@@ -114,10 +121,10 @@ const customerApi=fs.readFileSync('functions/api/customer-personal-reality.js','
 assert.equal(/HUMAN_DESIGN_PROJECTION|methodCode:\s*'HUMAN_DESIGN'/.test(customerApi),false,'R1 must not promote HDR into calculated customer methods.');
 
 assert.equal(acceptance.status,'R4B_R1_ACCEPTED_BY_EXECUTABLE_CHECKS');
-assert.deepEqual(acceptance.manualAdvancedFields,EXTERNAL_PROFILE_MANUAL_FIELDS);
+assert.deepEqual(acceptance.manualAdvancedFields,R1_MANUAL_ADVANCED_FIELDS);
 assert.equal(acceptance.claims.humanDesignCustomerCalculationPromoted,false);
 assert.equal(acceptance.claims.binaryDocumentExtractionClaimed,false);
 assert.equal(acceptance.nextSequentialWork,'CX-R12R4B-R2-W16R_UPLOAD_DERIVED_CORE_PROFILE');
 
 console.log('✓ CX-R12R4B R1 W11R–W15R External Profile Authority + Upload Intake passed.');
-console.log('  XPF is customer-supplied context, HDR remains validation-only, PNG/JPG/WEBP/PDF intake is ephemeral, pasted labelled text produces unconfirmed extraction candidates, and manual entry is limited to Cognition / Determination / Environment / Perspective / Motivation / Trajectory.');
+console.log('  Historical R1 keeps its six manual advanced fields; HD W11 admits customer-supplied Variable as an explicit successor without rewriting the R1 freeze.');

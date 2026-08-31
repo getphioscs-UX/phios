@@ -25,7 +25,17 @@ assert.equal(authority.hardBoundaries.externalConfirmedChartAuthority,true);
 assert.equal(authority.hardBoundaries.sourceAdmissionEqualsSemanticAdmission,false);
 assert.equal(authority.hardBoundaries.aiMayFillSourceGap,false);
 assert.equal(authority.reusedOwners.semanticRegistry,semanticRegistry);
-assert.equal(ownerMap.owners.semanticRegistryOwner.sha256,sha(semanticRegistry),'W2 created or mutated a second semantic registry owner');
+const frozenSemanticOwner=ownerMap.owners.semanticRegistryOwner;
+const currentSemanticSha=sha(semanticRegistry);
+if(currentSemanticSha!==frozenSemanticOwner.sha256){
+  const ownerReconciliation=read(`${ROOT}/audit/HD-PRO-R3-W4-current-owner-reconciliation-v1.json`);
+  const semanticSuccessor=ownerReconciliation.reconciledOwners.find(x=>x.role==='semanticRegistryOwner');
+  assert(semanticSuccessor,'later semantic-registry drift requires an explicit same-owner successor reconciliation');
+  assert.equal(semanticSuccessor.path,semanticRegistry,'semantic successor must keep the canonical W2 registry path');
+  assert.equal(semanticSuccessor.w0FrozenSha256,frozenSemanticOwner.sha256,'semantic successor must preserve the W0 digest as lineage');
+  assert.equal(semanticSuccessor.currentMainSha256,currentSemanticSha,'semantic successor digest must match the current canonical registry');
+  assert.equal(semanticSuccessor.ownerPathChanged,false,'W4 must extend the existing semantic registry rather than create a second owner');
+}else assert.equal(frozenSemanticOwner.path,semanticRegistry,'W2 must reuse the canonical semantic registry owner');
 
 assert.equal(admission.status,'USER_AUTHORED_PRIMARY_SOURCES_ADMITTED_AS_SOURCE_NOT_SEMANTIC_TRUTH');
 assert.equal(admission.admittedSources.length,2);

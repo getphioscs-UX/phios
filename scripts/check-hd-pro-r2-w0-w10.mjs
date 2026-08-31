@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-import {assertPprCurrentSharedOwner} from './lib/ppr-current-shared-owner.mjs';
+import {assertPprCurrentSharedOwner,assertPprCurrentSharedOwnerRegistry} from './lib/ppr-current-shared-owner.mjs';
 import {parseHumanDesignProfileText} from '../functions/external-profile/hd-profile-parser.js';
 import {buildExternalProfileExtractionIr} from '../functions/external-profile/external-profile-extraction-ir.js';
 import {buildExternalProfileConfirmationDraft,confirmExternalProfile} from '../functions/external-profile/external-profile-confirmation.js';
@@ -73,7 +73,7 @@ assert.equal(w11.status,'OFFICIAL_CHART_PDF_INTAKE_ADAPTER_SUCCESSOR_ACTIVE');
 assert.equal(w11.baselineCommit,'ccac579a7e81dc27f7f6403df1c6446fba38bc25');
 assert.equal(w11.boundaries.phiosHumanDesignCalculationAuthorityCreated,false);
 assert.equal(w11.boundaries.missingAdvancedFieldsInferred,false);
-for(const [path,proof] of Object.entries(w11.runtimeSuccessorProof)){assert.equal(sha(path),proof.successorSha256,`HD W11 successor digest drift: ${path}`);assert.notEqual(proof.predecessorSha256,proof.successorSha256,`HD W11 successor must record a real delta: ${path}`)}
+for(const [path,proof] of Object.entries(w11.runtimeSuccessorProof)){const currentSha=sha(path);if(currentSha!==proof.successorSha256){if(path==='content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json')assertPprCurrentSharedOwnerRegistry();else assertPprCurrentSharedOwner(path,{historicalDigest:proof.successorSha256,label:'HD W11 runtime'});}assert.notEqual(proof.predecessorSha256,proof.successorSha256,`HD W11 successor must record a real delta: ${path}`)}
 assert.deepEqual(reviewResults.summary,{accepted:24,rejected:0,pending:0});
 assert.deepEqual(reviewResults.cases.map(item=>item.caseId),reviewCases.cases.map(item=>item.caseId));
 assert(reviewResults.cases.every(item=>item.decision==='ACCEPT'));
