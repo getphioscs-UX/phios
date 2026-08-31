@@ -33,6 +33,7 @@ const sharedSuccessor=readJson('content/professional/personal-reality/r5/authori
 const publishSuccessor=readJson('content/professional/personal-reality/r5/authority/ppr-r5-hd-pro-r2-customer-published-successor-v1.json');
 const reviewCases=readJson(`${root}/review/hd-w9-human-review-cases-v1.json`);
 const reviewResults=readJson(`${root}/review/hd-w9-human-review-results-v1.json`);
+const w11=readJson(`${root}/hd-w11-official-chart-pdf-intake-adapter-successor-v1.json`);
 
 assert.equal(w0.baselineCommit,'3d66a5037a0c184ba2059c958a5f7e580696b786');
 assert.equal(w0.methodBoundary.authorityClass,'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT');
@@ -68,6 +69,11 @@ assert.equal(HD_EXTERNAL_PRODUCTION.humanReviewAccepted,true);
 assert.equal(HD_EXTERNAL_PRODUCTION.customerReadingPublicationAllowed,true);
 assert.equal(reviewCases.cases.length,24);
 assert.equal(reviewResults.status,'HUMAN_ACCEPTED_24_OF_24');
+assert.equal(w11.status,'OFFICIAL_CHART_PDF_INTAKE_ADAPTER_SUCCESSOR_ACTIVE');
+assert.equal(w11.baselineCommit,'ccac579a7e81dc27f7f6403df1c6446fba38bc25');
+assert.equal(w11.boundaries.phiosHumanDesignCalculationAuthorityCreated,false);
+assert.equal(w11.boundaries.missingAdvancedFieldsInferred,false);
+for(const [path,proof] of Object.entries(w11.runtimeSuccessorProof)){assert.equal(sha(path),proof.successorSha256,`HD W11 successor digest drift: ${path}`);assert.notEqual(proof.predecessorSha256,proof.successorSha256,`HD W11 successor must record a real delta: ${path}`)}
 assert.deepEqual(reviewResults.summary,{accepted:24,rejected:0,pending:0});
 assert.deepEqual(reviewResults.cases.map(item=>item.caseId),reviewCases.cases.map(item=>item.caseId));
 assert(reviewResults.cases.every(item=>item.decision==='ACCEPT'));
@@ -80,13 +86,13 @@ assert.equal(publishSuccessor.cutover.customerPublicationState,'CUSTOMER_PUBLISH
 for(const [path,proof] of Object.entries(sharedSuccessor.sharedFileSuccessorProof)){
   const successor=publishSuccessor.runtimeSuccessorProof[path];
   if(successor){assert.equal(successor.predecessorSha256,proof.successorSha256,`HD publish predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish'})}
-  else assert.equal(proof.successorSha256,sha(path),`HD shared successor digest drift without declared publication successor: ${path}`);
+  else if(w11.runtimeSuccessorProof[path])assert.equal(w11.runtimeSuccessorProof[path].predecessorSha256,proof.successorSha256,`HD W11 predecessor mismatch: ${path}`);else assert.equal(proof.successorSha256,sha(path),`HD shared successor digest drift without declared publication successor: ${path}`);
   assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false);
 }
 for(const [path,proof] of Object.entries(sharedSuccessor.addedRuntimeFiles)){
   const successor=publishSuccessor.runtimeSuccessorProof[path];
   if(successor){assert.equal(successor.predecessorSha256,proof.sha256,`HD publish runtime predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish runtime'})}
-  else assert.equal(proof.sha256,sha(path),`HD added runtime digest drift without declared publication successor: ${path}`);
+  else if(w11.runtimeSuccessorProof[path])assert.equal(w11.runtimeSuccessorProof[path].predecessorSha256,proof.sha256,`HD W11 added-runtime predecessor mismatch: ${path}`);else assert.equal(proof.sha256,sha(path),`HD added runtime digest drift without declared publication successor: ${path}`);
 }
 for(const [path,proof] of Object.entries(publishSuccessor.runtimeSuccessorProof)){if(proof.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:proof.successorSha256,label:'HD publication runtime'});assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false)}
 for(const [path,proof] of Object.entries(publishSuccessor.admissionArtifacts))assert.equal(proof.sha256,sha(path),`HD admission artifact digest drift: ${path}`);
@@ -100,6 +106,89 @@ for(const field of ['type','strategy','authority','profile','definition','incarn
 assert(parsed.structuralCandidates.some(item=>item.field==='channels'));
 assert(parsed.structuralCandidates.some(item=>item.field==='definedCenters'));
 assert(parsed.candidates.every(item=>item.customerConfirmed===false&&item.phiosCalculated===false));
+
+
+// Jovian Archive / Maia Mechanics official PDFs can present labels and values in columns or stacked blocks.
+const maiaStackedText=`tt
+Projector · 1/3 · Self Projected
+birth data
+Name
+tt
+Date and Time (Local)
+November 11, 2000, 10:10
+Date and Time (UTC)
+November 11, 2000, 02:10
+Location
+Beijing, China
+properties
+Type
+Projector
+Strategy
+Wait for Recognition and the
+Invitation
+Signature
+Success
+Not-Self Theme
+Bitterness
+Authority
+Self Projected
+Definition
+Single
+Incarnation Cross
+Right Angle Cross of
+Explanation (43/23 | 4/49)
+Profile
+1/3
+Variable
+PRL DRL
+Generated by Maia Mechanics | Powered by Jovian Archive`;
+const maiaStacked=parseHumanDesignProfileText(maiaStackedText,{sourceType:'CUSTOMER_UPLOADED_DOCUMENT',sourceRegionPrefix:'DOCUMENT'});
+const maiaStackedMap=Object.fromEntries(maiaStacked.candidates.map(item=>[item.field,item.normalizedValue]));
+assert.deepEqual(Object.fromEntries(['type','strategy','signature','notSelfTheme','authority','definition','incarnationCross','profile','variable'].map(field=>[field,maiaStackedMap[field]])),{
+  type:'Projector',strategy:'Wait for Recognition and the Invitation',signature:'Success',notSelfTheme:'Bitterness',authority:'Self Projected',definition:'Single',incarnationCross:'Right Angle Cross of Explanation (43/23 | 4/49)',profile:'1/3',variable:'PRL DRL'
+});
+assert.equal(maiaStacked.conflicts.length,0);
+
+const maiaColumnText=`properties
+
+     Type                                     Strategy                                     Signature
+\uE943 Projector                             \uE955 Wait for Recognition and the         \uE97B Success
+                                              Invitation
+
+     Not-Self Theme                           Authority                                    Definition
+\uE97A Bitterness                            \uE909 Self Projected                         \uE932 Single
+
+     Incarnation Cross                        Profile                                      Variable
+\uE90C Right Angle Cross of                  \uE90B 1/3                                    \uE958 PRL DRL
+     Explanation (43/23 | 4/49)`;
+const maiaColumn=parseHumanDesignProfileText(maiaColumnText,{sourceType:'CUSTOMER_UPLOADED_DOCUMENT',sourceRegionPrefix:'DOCUMENT'});
+const maiaColumnMap=Object.fromEntries(maiaColumn.candidates.map(item=>[item.field,item.normalizedValue]));
+for(const [field,value] of Object.entries({type:'Projector',strategy:'Wait for Recognition and the Invitation',signature:'Success',notSelfTheme:'Bitterness',authority:'Self Projected',definition:'Single',incarnationCross:'Right Angle Cross of Explanation (43/23 | 4/49)',profile:'1/3',variable:'PRL DRL'}))assert.equal(maiaColumnMap[field],value,`Maia column adapter mismatch: ${field}`);
+assert.equal(maiaColumn.conflicts.length,0);
+
+const jovianTwoColumn=parseHumanDesignProfileText(`Type: Generator                                                     Determination: Low
+Profile: 5 / 1                                                      Cognition: Inner Vision
+Definition: Triple Split Definition                                 Environment: Kitchens
+Inner authority: Emotional - Solar Plexus                           Motivation: Need
+Strategy: To Respond                                                Sense: Judgment
+Not Self theme: Frustration                                         Transference: Fear
+Variable: PRL - DRL                                                 View: Survival
+Birth date (Local): 1989/11/15, 22:50                               Design date (UT): 1989/8/18, 04:38:04
+Incarnation Cross: Left Angle Cross of Dedication (43/23 | 29/30)`,{sourceType:'CUSTOMER_UPLOADED_DOCUMENT',sourceRegionPrefix:'DOCUMENT'});
+const jovianMap=Object.fromEntries(jovianTwoColumn.candidates.map(item=>[item.field,item.normalizedValue]));
+for(const [field,value] of Object.entries({type:'Generator',determination:'Low',profile:'5 / 1',cognition:'Inner Vision',definition:'Triple Split Definition',environment:'Kitchens',authority:'Emotional - Solar Plexus',motivation:'Need',strategy:'To Respond',notSelfTheme:'Frustration',variable:'PRL - DRL',perspective:'Survival',incarnationCross:'Left Angle Cross of Dedication (43/23 | 29/30)'}))assert.equal(jovianMap[field],value,`Jovian two-column adapter mismatch: ${field}`);
+assert.equal(jovianTwoColumn.conflicts.length,0);
+
+// End-to-end uploaded PDF conversion keeps upload success separate from field-recognition state.
+const uploadedPdfForm=new FormData();uploadedPdfForm.set('profileFamily','HUMAN_DESIGN');uploadedPdfForm.set('consent','true');uploadedPdfForm.set('file',new File([Buffer.from('%PDF-1.7\n% HD fixture')],'tt.pdf',{type:'application/pdf'}));
+const uploadedPdfResponse=await intakeApi({request:new Request('https://example.test/api/customer-external-profile-intake',{method:'POST',body:uploadedPdfForm}),env:{AI:{toMarkdown:async()=>[{format:'markdown',data:maiaStackedText,mimetype:'application/pdf'}]}}});
+assert.equal(uploadedPdfResponse.status,200);const uploadedPdfPayload=await uploadedPdfResponse.json();
+assert.equal(uploadedPdfPayload.externalProfileIntake.intakeState,'NEEDS_CONFIRMATION');
+assert.equal(uploadedPdfPayload.externalProfileIntake.recognitionSummary.recognizedCount,9);
+assert.equal(uploadedPdfPayload.externalProfileIntake.recognitionSummary.pendingCount,0);
+assert.equal(uploadedPdfPayload.externalProfileIntake.confirmationDraft.fields.type.value,'Projector');
+assert.equal(uploadedPdfPayload.externalProfileIntake.confirmationDraft.fields.variable.value,'PRL DRL');
+assert.equal(uploadedPdfPayload.externalProfileIntake.boundary.workersAiUsedForDocumentConversion,true);
 
 const coreVariants=[
   {type:'Generator',strategy:'Wait to Respond',authority:'Sacral',profile:'5/1',definition:'Single Definition',signature:'Satisfaction',notSelfTheme:'Frustration'},
@@ -159,7 +248,7 @@ const form=new FormData();
 form.set('profileFamily','HUMAN_DESIGN');form.set('consent','true');
 form.set('manualType','Generator');form.set('manualStrategy','Wait to Respond');form.set('manualAuthority','Sacral');form.set('manualProfile','5/1');form.set('manualDefinition','Single Definition');form.set('manualSignature','Satisfaction');form.set('manualNotSelfTheme','Frustration');
 form.set('manualChannels','43-23, 29-46');form.set('manualDefinedCenters','Ajna, Throat, G Center, Sacral');form.set('manualOpenCenters','Head, Spleen, Root');form.set('manualDesignActivations','29.1 46.2');form.set('manualPersonalityActivations','43.5 23.5');
-form.set('environment','Markets');
+form.set('variable','PRL DRL');form.set('environment','Markets');
 const intakeResponse=await intakeApi({request:new Request('https://example.test/api/customer-external-profile-intake',{method:'POST',body:form}),env:{}});
 assert.equal(intakeResponse.status,200);const intakePayload=await intakeResponse.json();
 assert.equal(intakePayload.ok,true);assert.equal(intakePayload.externalProfileIntake.intakeState,'NEEDS_CONFIRMATION');
@@ -175,9 +264,9 @@ for(const category of w6.authorityCategories)assert(HD_EXTERNAL_CATEGORY_AUTHORI
 const html=fs.readFileSync('perspectives/personal/index.html','utf8');
 const client=fs.readFileSync('assets/customer-ui/js/surfaces/personal-reality.js','utf8');
 const css=fs.readFileSync('assets/customer-ui/surfaces/personal-reality.css','utf8');
-for(const token of ['data-cx-external-profile-process','data-cx-external-profile-processing-consent','name="manualType"','name="manualStrategy"','name="manualChannels"','data-cx-hd-canonical-chart','data-cx-hd-published-reading','data-cx-hd-reading-sections','data-cx-hd-reality-bridge','Read this chart'])assert(html.includes(token),`HD W3 surface missing ${token}`);
-for(const token of ['prepareExternalProfileIntake','collectExternalProfileEdits','renderCanonicalHumanDesignChart','renderPublishedHumanDesignReading','EXTERNAL_PROFILE_PROCESS_FIRST','canonicalHumanDesignChart','humanDesignReading','humanDesignRealityComposition','externalProfileProcessingConsent','data-cx-external-profile-edit','data-cx-external-profile-structure-edit','collectExternalProfileStructureEdits'])assert(client.includes(token),`HD W3 client binding missing ${token}`);
-for(const token of ['.cx-hd-intake-steps','.cx-hd-process-row','.cx-hd-canonical-chart','.cx-hd-confirm-field','.cx-hd-published-reading','.cx-hd-reading-section','.cx-hd-reality-prompts'])assert(css.includes(token),`HD W3 style missing ${token}`);
+for(const token of ['data-cx-external-profile-process','data-cx-external-profile-processing-consent','name="manualType"','name="manualStrategy"','name="manualChannels"','data-cx-hd-canonical-chart','data-cx-hd-published-reading','data-cx-hd-reading-sections','data-cx-hd-reality-bridge','name="externalVariable"','name="externalProfileChartVerified"','data-cx-external-profile-recognition-status','data-cx-external-profile-advanced-confirmation-fields','name="externalAdvancedAvailability"','https://jovianarchive.com/pages/get-your-human-design-chart','Read this chart'])assert(html.includes(token),`HD W3 surface missing ${token}`);
+for(const token of ['prepareExternalProfileIntake','collectExternalProfileEdits','renderCanonicalHumanDesignChart','renderPublishedHumanDesignReading','EXTERNAL_PROFILE_PROCESS_FIRST','canonicalHumanDesignChart','humanDesignReading','humanDesignRealityComposition','externalProfileProcessingConsent','data-cx-external-profile-edit','data-cx-external-profile-structure-edit','collectExternalProfileStructureEdits','recognitionSummary','externalAdvancedAvailability','externalProfileChartVerified','externalVariable'])assert(client.includes(token),`HD W3 client binding missing ${token}`);
+for(const token of ['.cx-hd-intake-steps','.cx-hd-process-row','.cx-hd-canonical-chart','.cx-hd-confirm-field','.cx-hd-published-reading','.cx-hd-reading-section','.cx-hd-reality-prompts','.cx-hd-official-source','.cx-hd-recognition-status','.cx-hd-advanced-confirmation','.cx-hd-final-confirm'])assert(css.includes(token),`HD W3 style missing ${token}`);
 for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"','name="externalDefinedCenters"','name="externalOpenCenters"'])assert.equal(html.includes(forbidden),false,`Legacy normal structural field must remain absent: ${forbidden}`);
 
 const pkg=readJson('package.json');

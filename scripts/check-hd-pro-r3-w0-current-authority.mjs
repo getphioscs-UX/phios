@@ -23,15 +23,16 @@ assert.equal(map.hardBoundaries.atomicMeaningEqualsCustomerReading,false);
 assert.equal(map.hardBoundaries.automaticVariableOrPHSCalculationAllowed,false);
 assert.equal(map.hardBoundaries.r2HumanReviewMayAutoAdmitR3Semantics,false);
 
-const reconciliationPath=`${ROOT}/audit/HD-PRO-R3-W4-current-owner-reconciliation-v1.json`;
-const reconciliation=fs.existsSync(reconciliationPath)?readJson(reconciliationPath):null;
-const reconciledByRole=new Map((reconciliation?.reconciledOwners||[]).map(x=>[x.role,x]));
-if(reconciliation){
-  assert.equal(reconciliation.schemaVersion,'PHI-OS-HD-PRO-R3-W4-CURRENT-OWNER-RECONCILIATION-v1.0.0');
+const reconciliationPaths=[`${ROOT}/audit/HD-PRO-R3-W4-current-owner-reconciliation-v1.json`,`${ROOT}/audit/HD-PRO-R3-W11-current-owner-reconciliation-v1.json`];
+const reconciliations=reconciliationPaths.filter(path=>fs.existsSync(path)).map(readJson);
+const reconciledByRole=new Map();
+for(const reconciliation of reconciliations){
+  assert(['PHI-OS-HD-PRO-R3-W4-CURRENT-OWNER-RECONCILIATION-v1.0.0','PHI-OS-HD-PRO-R3-W11-CURRENT-OWNER-RECONCILIATION-v1.0.0'].includes(reconciliation.schemaVersion),'Unknown HD owner-reconciliation schema');
   assert.equal(reconciliation.status,'SAME_OWNER_PATH_DRIFT_RECONCILED_NO_HD_OWNER_FORK');
   assert.equal(reconciliation.policy.historicalW0FreezeRewritten,false);
   assert.equal(reconciliation.policy.secondCustomerRendererCreated,false);
   assert.equal(reconciliation.policy.secondCustomerRouteCreated,false);
+  for(const record of reconciliation.reconciledOwners||[])reconciledByRole.set(record.role,record);
 }
 for(const [role,record] of Object.entries(map.owners)){
   assert.equal(fs.existsSync(record.path),true,`${role} owner missing: ${record.path}`);

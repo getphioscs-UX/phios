@@ -3,6 +3,7 @@ export const EXTERNAL_PROFILE_IR_VERSION='PHI-OS-EXTERNAL-PROFILE-EXTRACTION-IR-
 export const EXTERNAL_PROFILE_INTAKE_VERSION='PHI-OS-CX-R12R4B-EXTERNAL-PROFILE-INTAKE-v1.0.0';
 export const EXTERNAL_PROFILE_MAX_UPLOAD_BYTES=10_000_000;
 export const EXTERNAL_PROFILE_MANUAL_FIELDS=Object.freeze([
+  'variable',
   'cognition',
   'determination',
   'environment',

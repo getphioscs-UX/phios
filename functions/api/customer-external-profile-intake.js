@@ -14,6 +14,15 @@ import {buildExternalProfileConfirmationDraft} from '../external-profile/externa
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const child of Object.values(value))freeze(child)}return value};
+const BASIC_CONFIRMATION_FIELDS=Object.freeze(['type','strategy','authority','profile','definition','signature','notSelfTheme','incarnationCross','variable']);
+function buildRecognitionSummary(confirmationDraft){
+  const recognizedFields=BASIC_CONFIRMATION_FIELDS.filter(field=>Boolean(confirmationDraft?.fields?.[field]?.value));
+  const pendingFields=BASIC_CONFIRMATION_FIELDS.filter(field=>!confirmationDraft?.fields?.[field]?.value);
+  const advancedFields=EXTERNAL_PROFILE_MANUAL_FIELDS.filter(field=>field!=='variable');
+  const advancedRecognizedFields=advancedFields.filter(field=>Boolean(confirmationDraft?.fields?.[field]?.value));
+  const structuralFields=['activations','channels','definedCenters','openCenters'].filter(field=>{const value=confirmationDraft?.structure?.[field]?.value;return Array.isArray(value)?value.length:Boolean(value)});
+  return freeze({basicExpectedCount:BASIC_CONFIRMATION_FIELDS.length,recognizedCount:recognizedFields.length,pendingCount:pendingFields.length,recognizedFields,pendingFields,advancedRecognizedCount:advancedRecognizedFields.length,advancedRecognizedFields,structuralRecognizedFields:structuralFields});
+}
 
 async function sha256File(file){const bytes=await file.arrayBuffer();return crypto.createHash('sha256').update(Buffer.from(bytes)).digest('hex')}
 function sourceTypeForFile(meta){return meta.extension==='pdf'?'CUSTOMER_UPLOADED_DOCUMENT':'CUSTOMER_UPLOADED_IMAGE'}
@@ -53,6 +62,7 @@ export async function onRequestPost(context){
   const extractionIr=buildExternalProfileExtractionIr({intakeId,sources,pastedText,manualFields,manualCoreFields,manualStructureText,documentExtraction});
   const hasConfirmable=extractionIr.candidates.length||extractionIr.manualFields.length;
   const confirmationDraft=hasConfirmable?buildExternalProfileConfirmationDraft(extractionIr):null;
+  const recognitionSummary=confirmationDraft?buildRecognitionSummary(confirmationDraft):freeze({basicExpectedCount:BASIC_CONFIRMATION_FIELDS.length,recognizedCount:0,pendingCount:BASIC_CONFIRMATION_FIELDS.length,recognizedFields:[],pendingFields:[...BASIC_CONFIRMATION_FIELDS],advancedRecognizedCount:0,advancedRecognizedFields:[],structuralRecognizedFields:[]});
   return json({
     ok:true,
     externalProfileIntake:freeze({
@@ -63,6 +73,7 @@ export async function onRequestPost(context){
       authorityClass:'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT',
       extractionIr,
       confirmationDraft,
+      recognitionSummary,
       intakeState:confirmationDraft?'NEEDS_CONFIRMATION':documentExtraction?.status==='FAILED'?'EXTRACTION_FAILED':'EXTRACTION_INCOMPLETE',
       nextAction:confirmationDraft?'CUSTOMER_CONFIRMATION_REQUIRED':documentExtraction?.status==='FAILED'?'DOCUMENT_EXTRACTION_FAILED':'DOCUMENT_EXTRACTION_REQUIRED',
       privacy:{saved:false,fileContentPersisted:false,runtimeMemoryWritten:false},

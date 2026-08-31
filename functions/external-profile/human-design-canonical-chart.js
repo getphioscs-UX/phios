@@ -4,7 +4,7 @@ import {cleanExternalProfileText} from './external-profile-contract.js';
 export const HD_CANONICAL_EXTERNAL_CHART_VERSION='PHI-OS-HD-PRO-R2-CANONICAL-EXTERNAL-CHART-v1.0.0';
 export const HD_CENTER_CODES=Object.freeze(['HEAD','AJNA','THROAT','G','EGO','SPLEEN','SOLAR_PLEXUS','SACRAL','ROOT']);
 export const HD_CORE_FIELDS=Object.freeze(['type','strategy','authority','profile','definition','incarnationCross','signature','notSelfTheme']);
-export const HD_ADVANCED_FIELDS=Object.freeze(['cognition','determination','environment','perspective','motivation','trajectory']);
+export const HD_ADVANCED_FIELDS=Object.freeze(['variable','cognition','determination','environment','perspective','motivation','trajectory']);
 export const HD_STRUCTURE_FIELDS=Object.freeze(['activations','channels','definedCenters','openCenters']);
 
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const child of Object.values(value))freeze(child)}return value};
