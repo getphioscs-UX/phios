@@ -1,6 +1,7 @@
 import {STEMS} from '../bzr-full-production/bazi-structural-registry.js';
 import {buildBaziCustomerSafeStructureGraph} from './bazi-customer-safe-graph-projection.js';
 import {buildBaziCustomerNarrative} from './bazi-customer-narrative-composer.js';
+import {buildBaziRealityBridge} from './bazi-reality-bridge-composer.js';
 const freeze=value=>{if(value&&typeof value==='object'&&!Object.isFrozen(value)){Object.freeze(value);for(const x of Object.values(value))freeze(x)}return value};
 const list=value=>Array.isArray(value)?value:[];
 const uniq=value=>[...new Set(list(value).filter(Boolean))];
@@ -442,9 +443,10 @@ export function buildBaziProfessionalSurfaceModules({readingIR,report,temporalSt
  const professionalTopics=topicProfessionalModule({tenGods,strength:dayMasterStrength,relationships,pattern,priority:wholeChartPriority});
  const professionalTimeline=professionalTimelineModule({timing,priority:wholeChartPriority,topics:professionalTopics,temporalState});
  const customerNarrative=buildBaziCustomerNarrative({fiveElements,wholeChartPriority,professionalTopics,professionalTimeline});
+ const realityBridge=buildBaziRealityBridge({customerNarrative,wholeChartPriority,professionalTopics,professionalTimeline});
  return freeze({
-  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W6-v1.0.0',extensionVersion:'BAZI-CX-PRO-W8-v1.0.0',timelineExtensionVersion:'BAZI-CX-PRO-W9-v1.0.0',narrativeExtensionVersion:'BAZI-CX-PRO-W10-v1.0.0',
-  fiveElements,tenGods,dayMasterStrength,relationships,pattern,wholeChartPriority,professionalTopics,professionalTimeline,customerNarrative,schools:schoolModules(readingIR,report),timing,
+  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W6-v1.0.0',extensionVersion:'BAZI-CX-PRO-W8-v1.0.0',timelineExtensionVersion:'BAZI-CX-PRO-W9-v1.0.0',narrativeExtensionVersion:'BAZI-CX-PRO-W10-v1.0.0',realityBridgeExtensionVersion:'BAZI-CX-PRO-W11-v1.0.0',technicalRelocationVersion:'BAZI-CX-PRO-W12-v1.0.0',
+  fiveElements,tenGods,dayMasterStrength,relationships,pattern,wholeChartPriority,professionalTopics,professionalTimeline,customerNarrative,realityBridge,schools:schoolModules(readingIR,report),timing,
   customerSafeGraph:buildBaziCustomerSafeStructureGraph({readingIR,temporalState}),
   realityComparison:realityComparisonModule(readingIR,temporalState),
   boundaries:freeze({createsMeaning:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false,recalculatesEvidenceGraph:false,exposesRawEvidenceGraphIds:false,usesPprR3SpecialistPort:true,modifiesSharedPersonalRealitySurface:false})
