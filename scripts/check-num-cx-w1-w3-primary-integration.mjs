@@ -30,8 +30,9 @@ assert.match(envelope,/PHI-OS-NUM-CX-CHART-MODEL-v1\.0\.0/);
 assert.match(envelope,/NUM_D8_FULL_PRODUCTION_ACTIVE/);
 
 // W3: the primary form can progressively unlock NUM depth without making these fields global requirements.
-for(const token of ['data-cx-numerology-details','name="numerologyTargetDate"','name="numerologyFullBirthName"','name="numerologyNameConfirmed"','name="numerologyComparisonBirthDate"'])assert(html.includes(token),token);
-for(const token of ['numerologyTargetDate','numerologyFullBirthName','numerologyNameConfirmed','numerologyComparisonBirthDate'])assert(client.includes(token),token);
+for(const token of ['data-cx-numerology-details','data-cx-shared-target-context','name="sharedTargetDate"','data-cx-num-name-details','name="numerologyFullBirthName"','name="numerologyNameConfirmed"','data-cx-num-relationship-details','name="numerologyComparisonBirthDate"'])assert(html.includes(token),token);
+assert.equal(html.includes('name="numerologyTargetDate"'),false,'Numerology timing must use the shared target-date owner.');
+for(const token of ['collectSharedTargetContext','numerologyTargetDate','numerologyFullBirthName','numerologyNameConfirmed','numerologyComparisonBirthDate'])assert(client.includes(token),token);
 assert.match(client,/methods\.includes\('numeric'\)/);
 assert.match(client,/view\?\.numerology/);
 assert.match(client,/renderNumerologyPrimaryBridge/);
@@ -89,4 +90,4 @@ assert.equal(Object.hasOwn(num,'canonicalProjection'),false);
 const publicNum=JSON.stringify(num);
 assert.doesNotMatch(publicNum,/\b(?:AVAILABLE|PARTIAL|DETERMINISTIC|STRUCTURE_ONLY|HUMAN_REVIEW_REQUIRED|COMPOSITION_SUPPORTED|SOURCE_ADMITTED)\b|projectionId|projectionDigest|reasonCode/,'Internal lifecycle/projection state leaked into public NUM envelope.');
 console.log('✓ NUM-CX-W1–W3 primary NUM integration passed.');
-console.log('  /api/customer-personal-reality returns a public NUM-D8 integrated reading plus canonical chartModel; progressive target/name/relationship inputs reach the production runtime without raw projection leakage.');
+console.log('  /api/customer-personal-reality returns the same governed NUM-D8 runtime; timing now projects from the shared target date while birth-name and relationship inputs remain separate collapsed extensions.');

@@ -19,7 +19,9 @@ assert.doesNotMatch(client,/resolvedOptions\(\)\.timeZone/,'canonical Personal R
 assert.doesNotMatch(client,/DEVICE_DEFAULT/,'canonical Personal Reality surface must not use device-default Zi Wei target context');
 assert.match(api,/consumeConfirmedBirthLocationSnapshot\(snapshot/);
 assert.match(api,/if\(snapshot\)location=consumeConfirmedBirthLocationSnapshot/);
-assert.match(html,/name="ziweiTargetContextSource" value="EXPLICIT_REQUEST"/);
+assert.match(html,/name="sharedTargetContextSource" value="EXPLICIT_REQUEST"/);
+assert.doesNotMatch(html,/name="ziweiTargetContextSource"/);
+assert.match(client,/collectSharedTargetContext/);
 assert.doesNotMatch(html,/start with this device's current context/);
 const ast=j('content/professional/ast-full-production/customer-product-v3/acceptance/ast-cx-r3-w24-machine-acceptance-v1.json');
 assert.equal(ast.status,'MACHINE_ACCEPTED_240_OF_240');assert.equal(ast.summary.deterministicReplayPassed,ast.summary.deterministicReplayCases);assert.ok(ast.summary.deterministicReplayCases>=12);
@@ -33,4 +35,4 @@ const ecrPhi=t('scripts/check-ecr-phi-card-r1-s1-s3.mjs');assert.match(ecrPhi,/d
 console.log('✓ PPR-R6 canonical-input determinism passed.');
 console.log('  Confirmed birth location is frozen once and reused; provider resolvedAt is excluded; birth date/time/provider mismatches fail closed.');
 console.log(`  Method evidence: AST ${ast.summary.deterministicReplayPassed}/${ast.summary.deterministicReplayCases} replay; BZR ${bzr.counts.passed}/${bzr.counts.total} incl. DETERMINISM; NUM same-input projection acceptance; ZWR ${zwr.summary.deterministicReplayPassed}/${zwr.summary.deterministicReplayCases} replay; ECR deterministic PHI Card mapping.`);
-console.log('  Zi Wei current timing now requires explicit visible fields; browser/device current time and timezone are not auto-seeded.');
+console.log('  Zi Wei timing now consumes the explicit shared target owner; customer date/time/place remain explicit and browser/device current time or timezone are never auto-seeded.');

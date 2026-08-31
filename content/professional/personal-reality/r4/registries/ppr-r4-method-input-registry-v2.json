@@ -17,9 +17,19 @@
       "methodId": "BZR",
       "extensionId": "PPR_R4_BAZI_INPUT_EXTENSION_V1",
       "module": "/assets/customer-ui/js/specialists/bazi/input-extension.js",
-      "owner": "BZR"
+      "owner": "BZR",
+      "ownedFields": ["baziTraditionalCalculationSex"],
+      "sharedTargetContextOwner": "assets/customer-ui/js/personal-inputs/shared-target-context.js",
+      "sharedTargetFieldsConsumed": ["sharedTargetDate", "sharedTargetTime", "sharedTargetTimezoneIana", "sharedTargetUtcOffset"]
     }
   ],
+  "sharedTargetContext": {
+    "owner": "assets/customer-ui/js/personal-inputs/shared-target-context.js",
+    "customerFields": ["sharedTargetDate", "sharedTargetTime", "sharedTargetPlaceRef"],
+    "technicalTransport": ["sharedTargetTimezoneIana", "sharedTargetUtcOffset"],
+    "consumers": ["BZR", "NUM", "ZWR"],
+    "singleCustomerOwner": true
+  },
   "remoteModulesAllowed": false,
   "genericHostOwnsMethodSemantics": false
 }

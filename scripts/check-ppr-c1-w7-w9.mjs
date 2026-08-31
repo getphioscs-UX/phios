@@ -31,8 +31,12 @@ const client=read('assets/customer-ui/js/surfaces/personal-reality.js');assert.m
 const pagePath='perspectives/personal/index.html',page=read(pagePath);
 assert.match(page,/data-ppr-r4-method-input-mount/);
 const baziInput=read('assets/customer-ui/js/specialists/bazi/input-extension.js');
-for(const field of ['baziTargetDate','baziTargetTime','baziTargetTimezoneIana','baziTargetUtcOffset'])assert.match(baziInput,new RegExp(`name=\"${field}\"`));
+const sharedTarget=read('assets/customer-ui/js/personal-inputs/shared-target-context.js');
 assert.match(baziInput,/baziTraditionalCalculationSex/);
+for(const field of ['baziTargetDate','baziTargetTime','baziTargetTimezoneIana','baziTargetUtcOffset'])assert.doesNotMatch(baziInput,new RegExp(`name="${field}"`));
+for(const field of ['sharedTargetDate','sharedTargetTime','sharedTargetTimezoneIana','sharedTargetUtcOffset'])assert.match(sharedTarget,new RegExp(field));
+assert.match(client,/collectSharedTargetContext/);
+assert.match(client,/baziTemporalContext:methods\.includes\('bazi'\)/);
 assert.doesNotMatch(baziInput,/Date\.now\(|new Date\(|Intl\.DateTimeFormat/);
 assert.equal(successor.r4.boundaries.baziTargetDefaultsFromBrowserNow,false);
 const api=read('functions/api/customer-personal-reality.js');assert.match(api,/methodNativeReading\.BZR=await buildBaziMethodNativeReading/);assert.match(api,/targetContext:body\?\.baziTemporalContext\|\|null/);assert.match(api,/buildZiweiFullProductionCustomerRuntime/,'current Zi Wei runtime must remain present');

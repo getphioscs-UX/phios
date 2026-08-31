@@ -9,17 +9,19 @@ const page=read('perspectives/personal/index.html');
 const client=read('assets/customer-ui/js/surfaces/personal-reality.js');
 const host=read('assets/customer-ui/js/personal-inputs/method-input-extension-host.js');
 const control=read('assets/customer-ui/js/personal-inputs/target-moment-place-control.js');
+const shared=read('assets/customer-ui/js/personal-inputs/shared-target-context.js');
 const astSurface=read('assets/customer-ui/js/specialists/ast/ast-specialist-surface-v3.js');
 
+assert.match(page,/data-cx-shared-target-context/);
 assert.match(page,/data-cx-target-use-now/);
-assert.match(page,/name="ziweiTargetPlaceQuery"/);
-assert.match(page,/name="ziweiTargetPlaceRef"/);
-assert.match(page,/type="hidden" name="ziweiTargetTimezoneIana"/);
-assert.match(page,/type="hidden" name="ziweiTargetUtcOffset"/);
+for(const name of ['sharedTargetDate','sharedTargetTime','sharedTargetPlaceQuery','sharedTargetPlaceRef','sharedTargetTimezoneIana','sharedTargetUtcOffset'])assert.match(page,new RegExp(`name="${name}"`));
+for(const legacy of ['baziTargetDate','ziweiTargetDate','numerologyTargetDate'])assert.doesNotMatch(page,new RegExp(`name="${legacy}"`));
 assert.doesNotMatch(page,/<span[^>]*>目标时刻 UTC 偏移<\/span>/);
 assert.match(client,/upgradeAndInstallTargetMomentControls/);
-assert.match(client,/ziweiTargetPlaceRef/);
+assert.match(client,/collectSharedTargetContext/);
+assert.match(client,/sharedTarget\?\.targetPlaceRef/);
 assert.doesNotMatch(client,/function seedZiweiTargetContext|DEVICE_DEFAULT|resolvedOptions\(\)\.timeZone|new Date\s*\(/);
+for(const token of ['sharedTargetDate','sharedTargetTime','sharedTargetPlaceRef','PPR_SHARED_TARGET_CONTEXT_REQUIRED'])assert.match(shared,new RegExp(token));
 assert.match(host,/upgradeAndInstallTargetMomentControls/);
 assert.match(control,/\/api\/location-search/);
 assert.match(control,/\/api\/target-location-resolve/);
@@ -53,4 +55,4 @@ try{
 }finally{globalThis.fetch=originalFetch}
 
 console.log('✓ Target moment address resolution passed.');
-console.log('  Today/now is explicit opt-in; target address is confirmed; IANA timezone and date-specific UTC offset are automatic hidden transport; AST/Zi Wei calculations remain upstream of their renderers.');
+console.log('  BaZi / Zi Wei / Numerology share one explicit target owner; target address confirmation keeps IANA timezone and date-specific UTC offset as hidden transport while each method retains its own calculation.');

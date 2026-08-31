@@ -236,34 +236,37 @@ Profile: ..."></textarea></label>
                 <p class="cx-place-attribution"><span data-cx-en="Place search:" data-cx-zh="地点资料：">Place search:</span> <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a></p>
               </div>
 
+              <section class="cx-personal-conditional cx-shared-target-context" data-cx-shared-target-context hidden>
+                <p class="cx-eyebrow" data-cx-en="SHARED TIMING INPUT · ONE ENTRY" data-cx-zh="共同时间资料 · 只填一次">SHARED TIMING INPUT · ONE ENTRY</p>
+                <h3 class="cx-heading" data-cx-shared-target-heading data-cx-en="Choose one target moment for the selected timing methods." data-cx-zh="为所选时间方法填写一次目标时刻。">Choose one target moment for the selected timing methods.</h3>
+                <p class="cx-body cx-muted" data-cx-shared-target-copy data-cx-en="The selected methods reuse the same target information instead of asking you to enter the same date again." data-cx-zh="所选方法会共用同一份目标资料，不会再要求你重复填写相同日期。">The selected methods reuse the same target information instead of asking you to enter the same date again.</p>
+                <div class="cx-shared-target-used-by"><span data-cx-en="Used by" data-cx-zh="用于">Used by</span><strong data-cx-shared-target-methods></strong></div>
+                <div class="cx-target-moment" data-cx-target-moment="shared">
+                  <label class="cx-target-use-now"><input type="checkbox" name="sharedTargetUseNow" data-cx-target-use-now><span data-cx-en="Use today and now" data-cx-zh="使用今天和现在">Use today and now</span></label>
+                  <div class="cx-p1-grid cx-p1-grid--2 cx-target-moment-date-time">
+                    <label class="cx-p1-field"><span data-cx-en="Target date" data-cx-zh="目标日期">Target date</span><input type="date" name="sharedTargetDate" data-cx-target-date><small data-cx-shared-target-date-help data-cx-en="Shared by the selected timing methods." data-cx-zh="由所选时间方法共同使用。">Shared by the selected timing methods.</small></label>
+                    <label class="cx-p1-field" data-cx-shared-target-local><span data-cx-en="Target time" data-cx-zh="目标时间">Target time</span><input type="time" name="sharedTargetTime" step="60" data-cx-target-time><small data-cx-en="Required together with a confirmed place when BaZi or Zi Wei uses the timing layer." data-cx-zh="八字或紫微使用时间层时，与已确认地点一起填写。">Required together with a confirmed place when BaZi or Zi Wei uses the timing layer.</small></label>
+                  </div>
+                  <div data-cx-shared-target-local>
+                    <div class="cx-target-place-field" data-cx-target-place-field>
+                      <label><span data-cx-en="Target place" data-cx-zh="目标地点">Target place</span><div class="cx-place-input-wrap"><input type="search" name="sharedTargetPlaceQuery" data-cx-target-place-input autocomplete="off" aria-autocomplete="list" aria-controls="cx-shared-target-place-results" aria-expanded="false" placeholder="Start typing a city or area" data-cx-en-placeholder="Start typing a city or area" data-cx-zh-placeholder="输入城市或地区"><span class="cx-place-spinner" data-cx-target-spinner hidden aria-hidden="true"></span></div></label>
+                      <div id="cx-shared-target-place-results" class="cx-place-results" data-cx-target-place-results role="listbox" hidden></div>
+                      <div class="cx-place-confirmed" data-cx-target-place-confirmed hidden><span aria-hidden="true">✓</span><div><small data-cx-en="Target place and timezone confirmed" data-cx-zh="目标地点与时区已确认">Target place and timezone confirmed</small><strong data-cx-target-place-confirmed-label></strong></div><button type="button" data-cx-target-place-change data-cx-en="Change" data-cx-zh="更改">Change</button></div>
+                      <input type="hidden" name="sharedTargetPlaceRef" data-cx-target-place-ref>
+                      <p class="cx-place-help" data-cx-en="Choose a suggestion so the address, timezone and date-specific offset can be checked automatically." data-cx-zh="请从建议中选择地点；系统会自动校对地址、时区与该日期对应的时间偏移。">Choose a suggestion so the address, timezone and date-specific offset can be checked automatically.</p>
+                      <p class="cx-target-status" data-cx-target-status role="status" aria-live="polite"></p>
+                    </div>
+                  </div>
+                  <input type="hidden" name="sharedTargetTimezoneIana" data-cx-target-timezone>
+                  <input type="hidden" name="sharedTargetUtcOffset" data-cx-target-offset>
+                  <input type="hidden" name="sharedTargetContextSource" value="EXPLICIT_REQUEST">
+                </div>
+                <p class="cx-p1-note" data-cx-en="One input, separate calculations: each method receives only the part of this target context that its governed runtime supports." data-cx-zh="资料只填一次，计算仍然分开：每个方法只会接收其受治理运行时真正支持的目标资料。">One input, separate calculations: each method receives only the part of this target context that its governed runtime supports.</p>
+              </section>
+
               <div class="cx-method-input-extension-mount" data-ppr-r4-method-input-mount hidden></div>
 
               <section class="cx-personal-conditional" data-cx-traditional-sex hidden><p class="cx-eyebrow" data-cx-en="ONE EXTRA DETAIL" data-cx-zh="还需要一个资料">ONE EXTRA DETAIL</p><h3 class="cx-heading" data-cx-en="Zi Wei uses a traditional calculation rule for some time-based readings." data-cx-zh="紫微在部分时间周期计算中，会使用一个传统的顺逆规则。">Zi Wei uses a traditional calculation rule for some time-based readings.</h3><p class="cx-body cx-muted" data-cx-en="Choose the rule used for the calculation. This choice is used only for that calculation." data-cx-zh="请选择计算时使用的规则。这个选择只用于相应计算。">Choose the rule used for the calculation. This choice is used only for that calculation.</p><div class="cx-personal-choice-row"><label><input type="radio" name="traditionalCalculationSex" value="MALE"><span data-cx-en="Male rule" data-cx-zh="男性规则">Male rule</span></label><label><input type="radio" name="traditionalCalculationSex" value="FEMALE"><span data-cx-en="Female rule" data-cx-zh="女性规则">Female rule</span></label></div></section>
-
-              <section class="cx-personal-conditional" data-cx-ziwei-target-context hidden>
-                <p class="cx-eyebrow" data-cx-en="CURRENT TIMING CONTEXT" data-cx-zh="当前时间层">CURRENT TIMING CONTEXT</p>
-                <h3 class="cx-heading" data-cx-en="Choose the target moment and place for this Zi Wei timing layer." data-cx-zh="选择这次紫微大限与流年读取所使用的目标时刻与地点。">Choose the target moment and place for this Zi Wei timing layer.</h3>
-                <p class="cx-body cx-muted" data-cx-en="Enter the target date, time and timezone explicitly. Choose the place from address suggestions and PHI OS will confirm its timezone automatically; no UTC offset needs to be entered." data-cx-zh="请填写目标日期与时间，并从地址建议中确认目标地点。系统会自动解析该地点在目标日期的时区；你不需要填写 UTC 偏移。">Enter the target date, time and timezone explicitly. Choose the place from address suggestions and PHI OS will confirm its timezone automatically; no UTC offset needs to be entered.</p>
-                <div class="cx-target-moment" data-cx-target-moment="ziwei">
-                  <label class="cx-target-use-now"><input type="checkbox" name="ziweiTargetUseNow" data-cx-target-use-now><span data-cx-en="Use today and now" data-cx-zh="使用今天和现在">Use today and now</span></label>
-                  <div class="cx-p1-grid cx-p1-grid--2 cx-target-moment-date-time">
-                  <label class="cx-p1-field"><span data-cx-en="Target date" data-cx-zh="目标日期">Target date</span><input type="date" name="ziweiTargetDate" data-cx-ziwei-target-field="date" data-cx-target-date><small data-cx-en="Used for the current Da Xian / Liu Nian layer." data-cx-zh="用于当前大限／流年时间层。">Used for the current Da Xian / Liu Nian layer.</small></label>
-                  <label class="cx-p1-field"><span data-cx-en="Target time" data-cx-zh="目标时间">Target time</span><input type="time" name="ziweiTargetTime" step="60" data-cx-ziwei-target-field="time" data-cx-target-time><small data-cx-en="Visible and editable; it is never copied from birth time." data-cx-zh="保持可见且可修改；不会从出生时间复制。">Visible and editable; it is never copied from birth time.</small></label>
-                  </div>
-                  <div class="cx-target-place-field" data-cx-target-place-field>
-                    <label><span data-cx-en="Target place" data-cx-zh="目标地点">Target place</span><div class="cx-place-input-wrap"><input type="search" name="ziweiTargetPlaceQuery" data-cx-target-place-input autocomplete="off" aria-autocomplete="list" aria-controls="cx-ziwei-target-place-results" aria-expanded="false" placeholder="Start typing a city or area" data-cx-en-placeholder="Start typing a city or area" data-cx-zh-placeholder="输入城市或地区"><span class="cx-place-spinner" data-cx-target-spinner hidden aria-hidden="true"></span></div></label>
-                    <div id="cx-ziwei-target-place-results" class="cx-place-results" data-cx-target-place-results role="listbox" hidden></div>
-                    <div class="cx-place-confirmed" data-cx-target-place-confirmed hidden><span aria-hidden="true">✓</span><div><small data-cx-en="Target place and timezone confirmed" data-cx-zh="目标地点与时区已确认">Target place and timezone confirmed</small><strong data-cx-target-place-confirmed-label></strong></div><button type="button" data-cx-target-place-change data-cx-en="Change" data-cx-zh="更改">Change</button></div>
-                    <input type="hidden" name="ziweiTargetPlaceRef" data-cx-target-place-ref>
-                    <p class="cx-place-help" data-cx-en="Choose a suggestion so the address, timezone and date-specific offset can be checked automatically." data-cx-zh="请从建议中选择地点；系统会自动校对地址、时区与该日期对应的时间偏移。">Choose a suggestion so the address, timezone and date-specific offset can be checked automatically.</p>
-                    <p class="cx-target-status" data-cx-target-status role="status" aria-live="polite"></p>
-                  </div>
-                  <input type="hidden" name="ziweiTargetTimezoneIana" data-cx-ziwei-target-field="timezone" data-cx-target-timezone>
-                  <input type="hidden" name="ziweiTargetUtcOffset" data-cx-ziwei-target-field="offset" data-cx-target-offset>
-                </div>
-                <input type="hidden" name="ziweiTargetContextSource" value="EXPLICIT_REQUEST" data-cx-ziwei-target-source>
-                <p class="cx-p1-note" data-cx-en="After the place is confirmed, the canonical route sends this target to the Zi Wei timing calculation. The result remains symbolic method context, not proof of a lived event." data-cx-zh="地点确认后，canonical route 会把这个目标时刻送入紫微时间计算。计算结果属于方法的象征性时间情境，不是现实事件证据。">After the place is confirmed, the canonical route sends this target to the Zi Wei timing calculation. The result remains symbolic method context, not proof of a lived event.</p>
-              </section>
 
               <details class="cx-ast-target-input" data-cx-ast-target-input hidden>
                 <summary data-cx-en="Current activation (optional)" data-cx-zh="当前激活（可选）">Current activation (optional)</summary>
@@ -279,13 +282,22 @@ Profile: ..."></textarea></label>
 
               <section class="cx-personal-conditional cx-num-primary-input" data-cx-numerology-details hidden>
                 <p class="cx-eyebrow" data-cx-en="NUMEROLOGY DETAILS · OPTIONAL" data-cx-zh="数字学详细资料 · 可选">NUMEROLOGY DETAILS · OPTIONAL</p>
-                <h3 class="cx-heading" data-cx-en="Add only the layers you want to unlock." data-cx-zh="只补充你想解锁的数字学层次。">Add only the layers you want to unlock.</h3>
-                <p class="cx-body cx-muted" data-cx-en="Your birth date is enough for the core chart. A target date adds timing context, a confirmed birth name unlocks the name layer, and a comparison birth date unlocks a structural relationship view." data-cx-zh="出生日期已经足够建立核心数字图。目标日期可加入时间层；确认后的出生姓名可解锁姓名图；比较生日可解锁关系结构图。">Your birth date is enough for the core chart. A target date adds timing context, a confirmed birth name unlocks the name layer, and a comparison birth date unlocks a structural relationship view.</p>
-                <div class="cx-p1-grid cx-p1-grid--2 cx-num-primary-input__grid">
-                  <label class="cx-p1-field"><span data-cx-en="Target date" data-cx-zh="目标日期">Target date</span><input type="date" name="numerologyTargetDate"><small data-cx-en="Unlocks current timing where the governed calculation has enough context." data-cx-zh="在受治理计算资料足够时，解锁当前时间层。">Unlocks current timing where the governed calculation has enough context.</small></label>
-                  <label class="cx-p1-field"><span data-cx-en="Comparison birth date" data-cx-zh="关系比较生日">Comparison birth date</span><input type="date" name="numerologyComparisonBirthDate"><small data-cx-en="Unlocks structural relationship comparison; it never creates a compatibility score." data-cx-zh="解锁关系结构比较；不会生成配对分数。">Unlocks structural relationship comparison; it never creates a compatibility score.</small></label>
-                  <label class="cx-p1-field cx-num-primary-input__name"><span data-cx-en="Full birth name" data-cx-zh="出生姓名">Full birth name</span><input type="text" name="numerologyFullBirthName" autocomplete="name" spellcheck="false" placeholder="Name recorded at birth"><small data-cx-en="Used only when you confirm it below." data-cx-zh="只有你在下方确认后才会用于姓名数字计算。">Used only when you confirm it below.</small></label>
-                  <label class="cx-p1-consent cx-num-primary-input__confirm"><input type="checkbox" name="numerologyNameConfirmed" value="true"><span data-cx-en="Use this confirmed birth name for Expression, Soul Urge, Personality and Maturity calculations." data-cx-zh="确认使用这个出生姓名计算表达数、灵魂驱动数、人格数与成熟数。">Use this confirmed birth name for Expression, Soul Urge, Personality and Maturity calculations.</span></label>
+                <h3 class="cx-heading" data-cx-en="Open only the extra layer you want to use." data-cx-zh="只展开你真正想使用的数字学层次。">Open only the extra layer you want to use.</h3>
+                <p class="cx-body cx-muted" data-cx-en="Your birth date is enough for the core number chart. Timing now uses the shared target above; birth name and relationship comparison stay separate so they do not crowd the main form." data-cx-zh="出生日期已经足够建立核心数字图。时间层改用上方共同目标资料；出生姓名与关系比较则分别展开，不再一次挤在主表单里。">Your birth date is enough for the core number chart. Timing now uses the shared target above; birth name and relationship comparison stay separate so they do not crowd the main form.</p>
+                <div class="cx-num-extra-disclosures">
+                  <details class="cx-num-extra-disclosure" data-cx-num-name-details>
+                    <summary><span><strong data-cx-en="Add birth-name numbers" data-cx-zh="添加姓名数字">Add birth-name numbers</strong><small data-cx-en="Expression · Soul Urge · Personality · Maturity" data-cx-zh="表达数 · 灵魂驱动数 · 人格数 · 成熟数">Expression · Soul Urge · Personality · Maturity</small></span></summary>
+                    <div class="cx-num-extra-disclosure__body">
+                      <label class="cx-p1-field cx-num-primary-input__name"><span data-cx-en="Full birth name" data-cx-zh="出生姓名">Full birth name</span><input type="text" name="numerologyFullBirthName" autocomplete="name" spellcheck="false" placeholder="Name recorded at birth"><small data-cx-en="Use the name recorded at birth. Leave this section closed if you do not want a name-number layer." data-cx-zh="请填写出生时记录的姓名；如果不需要姓名数字层，可以保持此区关闭。">Use the name recorded at birth. Leave this section closed if you do not want a name-number layer.</small></label>
+                      <label class="cx-p1-consent cx-num-primary-input__confirm"><input type="checkbox" name="numerologyNameConfirmed" value="true"><span data-cx-en="I confirm this is the birth name to use for this request." data-cx-zh="我确认这是本次请求用于姓名数字计算的出生姓名。">I confirm this is the birth name to use for this request.</span></label>
+                    </div>
+                  </details>
+                  <details class="cx-num-extra-disclosure" data-cx-num-relationship-details>
+                    <summary><span><strong data-cx-en="Add relationship comparison" data-cx-zh="添加关系比较">Add relationship comparison</strong><small data-cx-en="Compare structures without a compatibility score" data-cx-zh="比较双方结构，不生成配对分数">Compare structures without a compatibility score</small></span></summary>
+                    <div class="cx-num-extra-disclosure__body">
+                      <label class="cx-p1-field"><span data-cx-en="Comparison birth date" data-cx-zh="关系比较生日">Comparison birth date</span><input type="date" name="numerologyComparisonBirthDate"><small data-cx-en="Unlocks structural relationship comparison; it never creates a compatibility score." data-cx-zh="解锁关系结构比较；不会生成配对分数。">Unlocks structural relationship comparison; it never creates a compatibility score.</small></label>
+                    </div>
+                  </details>
                 </div>
                 <p class="cx-p1-note" data-cx-en="These optional values are processed only for this request and do not change the calculation rules of other selected methods." data-cx-zh="这些可选资料只用于本次请求，也不会改变其他所选方法的计算规则。">These optional values are processed only for this request and do not change the calculation rules of other selected methods.</p>
               </section>

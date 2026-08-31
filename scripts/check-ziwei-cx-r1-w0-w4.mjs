@@ -127,12 +127,14 @@ assert.equal(product.governance.genericSmrOwnsCompleteZiweiReport,false);
 // W2 customer surface — fields are visible/editable when Zi Wei is selected and sent to canonical API.
 const html=txt('perspectives/personal/index.html');
 const client=txt('assets/customer-ui/js/surfaces/personal-reality.js');
-assert.match(html,/data-cx-ziwei-target-context/);
-for(const name of ['ziweiTargetDate','ziweiTargetTime','ziweiTargetTimezoneIana','ziweiTargetUtcOffset','ziweiTargetContextSource'])assert.match(html,new RegExp(`name="${name}"`));
-assert.match(html,/data-cx-en="Enter the target date, time and timezone explicitly\./);
+assert.match(html,/data-cx-shared-target-context/);
+for(const name of ['sharedTargetDate','sharedTargetTime','sharedTargetTimezoneIana','sharedTargetUtcOffset','sharedTargetContextSource'])assert.match(html,new RegExp(`name="${name}"`));
+for(const legacy of ['ziweiTargetDate','ziweiTargetTime','ziweiTargetTimezoneIana','ziweiTargetUtcOffset','ziweiTargetContextSource'])assert.doesNotMatch(html,new RegExp(`name="${legacy}"`));
+const sharedTarget=txt('assets/customer-ui/js/personal-inputs/shared-target-context.js');
+assert.match(sharedTarget,/紫微需要完整的目标日期、时间与已确认地点/);
 assert.doesNotMatch(html,/DEVICE_DEFAULT|device's current context/);
 assert.doesNotMatch(client,/function seedZiweiTargetContext|new Date\s*\(|resolvedOptions\(\)\.timeZone|DEVICE_DEFAULT/);
-assert.match(client,/source\.value='CUSTOMER_EDITED'/);
+assert.match(client,/collectSharedTargetContext/);
 for(const name of ['ziweiTargetDate','ziweiTargetTime','ziweiTargetTimezoneIana','ziweiTargetUtcOffset','ziweiTargetContextSource'])assert.ok(client.includes(name));
 
 // W4 — actual canonical API call returns the governed full-production payload.
@@ -189,7 +191,7 @@ assert.equal(roadmap.nextWork,'ZIWEI-CX-R1-W5｜Zi Wei Professional Information 
 console.log('✓ ZIWEI-CX-R1-W0–W4 Full Production customer binding passed.');
 console.log('  W0: d16d757 is the frozen Zi Wei FP semantic baseline; 343773f is the current descendant integration checkout; /perspectives/personal/ has one page owner.');
 console.log('  W1: one sourceCalculationIR -> the same canonical projection -> W3–W20 full-production chain; no second natal calculation.');
-console.log('  W2: target date/time/IANA timezone/UTC offset are visible, editable and explicit; birth-timezone fallback is forbidden.');
+console.log('  W2: Zi Wei consumes the shared customer target; date/time/place are customer-visible while IANA timezone/UTC offset remain confirmed hidden transport; birth-timezone fallback is forbidden.');
 console.log('  W3: current successor envelope is CUSTOMER_PUBLISHABLE from W23 96/96 machine + 24/24 Human, while historical W18/W19/W20 boundaries remain unchanged.');
 console.log('  W4: /api/customer-personal-reality returns report + 12-palace surface + 8 topics + current authority + source digests and makes Full Production the primary single-Zi-Wei product.');
 console.log('  Professional Zi Wei page IA/renderer is intentionally still W5+; W0–W4 bind the live governed payload rather than pretending the visual cutover is complete.');
