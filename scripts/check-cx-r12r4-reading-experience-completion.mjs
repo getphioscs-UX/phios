@@ -26,7 +26,29 @@ if(pprR3SpecialistHost){
  assert.match(html,/data-cx-pattern-comparison/);assert.match(html,/data-cx-personal-sources/);assert.match(html,/SOURCES &amp; BOUNDARIES/);assert.match(html,/Resonates is not evidence by itself/);assert.match(html,/data-cx-authority-layer="NAVIGATION_THRESHOLD"/);
  for(const panel of claims.resultPanels){const re=new RegExp(`data-cx-panel="${panel.panel}"[^>]*data-cx-authority-layer="([^"]+)"`);const match=html.match(re);assert(match,`untyped R12R4 result panel ${panel.panel}`);for(const layer of panel.authorityLayers)assert(match[1].split(/\s+/).includes(layer),`${panel.panel} missing authority layer ${layer}`)}
 }
-assert.match(read('functions/api/customer-reality-handoff.js'),/reportedContext:\[clean\(view\.realityResponse\),clean\(view\.realityNote\)\]/);assert.match(read('functions/reality-orchestration/reality-orchestrator.js'),/authorityClass:'USER_REPORTED_CONTEXT',realityFact:false/);
+const handoffSource=read('functions/api/customer-reality-handoff.js');
+const ecrBridgeAcceptancePath='content/embodied-configuration/product-r3/acceptance/ecr-r3-w7-reality-bridge-v1.json';
+if(fs.existsSync(ecrBridgeAcceptancePath)){
+ const ecrBridge=json(ecrBridgeAcceptancePath);
+ assert.equal(ecrBridge.status,'ENGINEERING_COMPLETE');
+ assert.equal(ecrBridge.runtimeAuthority?.outputAuthority,'OBSERVATION_BRIDGE_ONLY');
+ assert.equal(ecrBridge.handoff?.route,'/api/customer-reality-handoff');
+ assert.equal(ecrBridge.handoff?.requiresExistingExplicitConsent,true);
+ assert.equal(ecrBridge.handoff?.selectedResponsesOnly,true);
+ assert.equal(ecrBridge.handoff?.responseAuthorityAfterHandoff,'USER_REPORTED_CONTEXT');
+ assert.equal(ecrBridge.handoff?.currentRealityEvidenceCreated,false);
+ assert.equal(ecrBridge.handoff?.currentRealityConclusionCreated,false);
+ assert.equal(ecrBridge.handoff?.automaticPersistence,false);
+ assert.equal(ecrBridge.boundaries?.userResponseRequiredBeforeReportedContext,true);
+ assert.equal(ecrBridge.boundaries?.userResponseIsReportedContextNotEvidence,true);
+ assert.equal(ecrBridge.boundaries?.currentRealityFactPromoted,false);
+ assert.match(handoffSource,/validateEcrHumanDesignRealityBridgeResponse/);
+ assert.match(handoffSource,/bridgeContext=buildEcrHumanDesignRealityBridgeReportedContext\(view,locale\)/);
+ assert.match(handoffSource,/reportedContext:\[clean\(view\.realityResponse\),clean\(view\.realityNote\),\.\.\.bridgeContext\]\.filter\(Boolean\)/);
+ assert.match(handoffSource,/ecrHumanDesignBridgeResponsesRemainUserReportedContext:true/);
+ assert.match(handoffSource,/currentRealityEvidenceCreated:false,currentRealityConclusionCreated:false/);
+}else assert.match(handoffSource,/reportedContext:\[clean\(view\.realityResponse\),clean\(view\.realityNote\)\]/);
+assert.match(read('functions/reality-orchestration/reality-orchestrator.js'),/authorityClass:'USER_REPORTED_CONTEXT',realityFact:false/);
 assert.match(css,/cx-graph-boundary/);assert.match(css,/cx-cross-perspective-compare/);assert.match(css,/cx-source-boundary-list/);assert.match(css,/@media\(max-width:620px\)/);
 assert.equal(iconRecon.authorityBoundary.pagePrivateIconAuthorityForbidden,true);assert.equal(iconRecon.forbiddenNewIdentities.includes('PERSPECTIVE_NOT_FACT'),true);assert.equal(html.includes('PHIOS-ICON-PERSPECTIVE-NOT-FACT'),false);
 assert.equal(campaign.status,'PENDING_REAL_BROWSER_AND_HUMAN_REVIEW');assert.equal(campaign.claims.realBrowserAccepted,false);assert.equal(campaign.claims.humanVisualAccepted,false);
