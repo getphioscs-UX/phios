@@ -14,7 +14,7 @@ global.document={documentElement:{lang:'zh-Hans'},querySelector:()=>null,createE
 global.queueMicrotask=global.queueMicrotask||((fn)=>fn());
 
 assert.equal(product.governance.relationshipPillarInteractionProfessionalCompositionAuthorized,true);
-assert.equal(product.professionalModules.moduleVersion,'BAZI-CX-PRO-W5-v1.0.0');
+assert.ok(['BAZI-CX-PRO-W5-v1.0.0','BAZI-CX-PRO-W6-v1.0.0'].includes(product.professionalModules.moduleVersion));
 const rel=product.professionalModules.relationships;
 assert.equal(rel.schemaVersion,'PHI-OS-BAZI-CX-PRO-RELATIONSHIP-PILLAR-INTERACTION-v1.0.0');
 assert.equal(rel.work,'BAZI-CX-PRO-W5');

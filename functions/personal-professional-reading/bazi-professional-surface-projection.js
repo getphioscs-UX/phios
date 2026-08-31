@@ -162,19 +162,107 @@ function relationshipModule(readingIR,{tenGods,strength}={}){
  return freeze({schemaVersion:'PHI-OS-BAZI-CX-PRO-RELATIONSHIP-PILLAR-INTERACTION-v1.0.0',work:'BAZI-CX-PRO-W5',sourceRelationshipOwnerRefs:freeze(list(section.ownerRefs)),pillarContexts,items:freeze(items),pairCards,themes,summary:freeze({relationCount:items.length,pairCardCount:pairCards.length,themeCount:themes.length,directToDayMasterCount:items.filter(x=>x.dayMasterDirect).length,directToMonthCommandCount:items.filter(x=>x.monthCommandDirect).length,relationFamilyCounts:freeze(familyCounts),relationTypeCounts:freeze(typeCounts)}),boundaries:freeze({structuralRelationshipOnly:true,relationPresenceDoesNotPredictEvent:true,combinationDoesNotEstablishTransformation:true,pillarThemeDoesNotEqualLifeEvent:true,goodBadScoreCreated:false,fortunePredictionCreated:false})});
 }
 
-function patternModule(readingIR){
- const section=readingIR?.sections?.patterns||{},owner=ownerFor(readingIR,'PATTERN_CANDIDATE_SET');
+const PATTERN_PROFESSIONAL_RULES=Object.freeze({
+ ZHENG_GUAN:Object.freeze({formationClaimRef:'BZR-CLM-ZPZQ-09-ZHENGGUAN-FORMATION-013',formationPaths:Object.freeze([
+  Object.freeze({pathCode:'OFFICER_WITH_WEALTH_OR_RESOURCE',requiredAll:['OFFICER'],requiredAny:['WEALTH','RESOURCE'],requiresNoMonthTension:true}),
+ ]),defeatWatch:Object.freeze(['SHANG_GUAN','MONTH_COMMAND_TENSION']),rescueFocus:Object.freeze(['RESOURCE'])}),
+ CAI:Object.freeze({formationClaimRef:'BZR-CLM-ZPZQ-09-CAI-FORMATION-014',formationPaths:Object.freeze([
+  Object.freeze({pathCode:'WEALTH_GENERATES_OFFICER',requiredAll:['WEALTH','OFFICER']}),
+  Object.freeze({pathCode:'WEALTH_RECEIVES_OUTPUT_WITH_CARRYING_SUPPORT',requiredAll:['WEALTH','OUTPUT'],requiresCarryingSupport:true}),
+  Object.freeze({pathCode:'WEALTH_RESOURCE_POSITIONAL_ORDER',requiredAll:['WEALTH','RESOURCE'],requiresPositionalReview:true}),
+ ]),defeatWatch:Object.freeze(['PEER','QI_SHA_VISIBLE']),rescueFocus:Object.freeze(['OUTPUT'])}),
+ YIN:Object.freeze({formationClaimRef:'BZR-CLM-ZPZQ-09-YIN-FORMATION-015',formationPaths:Object.freeze([
+  Object.freeze({pathCode:'RESOURCE_WITH_OFFICER_OR_SEVEN_KILLINGS',requiredAll:['RESOURCE','OFFICER']}),
+  Object.freeze({pathCode:'RESOURCE_WITH_OUTPUT',requiredAll:['RESOURCE','OUTPUT']}),
+  Object.freeze({pathCode:'RESOURCE_WEALTH_CONTROLLED_USE',requiredAll:['RESOURCE','WEALTH'],requiresPositionalReview:true}),
+ ]),defeatWatch:Object.freeze(['WEALTH']),rescueFocus:Object.freeze(['PEER'])}),
+ SHI_SHEN:Object.freeze({formationClaimRef:'BZR-CLM-ZPZQ-09-SHISHEN-FORMATION-016',formationPaths:Object.freeze([
+  Object.freeze({pathCode:'EATING_GOD_GENERATES_WEALTH',requiredAll:['OUTPUT','WEALTH']}),
+  Object.freeze({pathCode:'OUTPUT_SEVEN_KILLINGS_RESOURCE_PATH',requiredAll:['OUTPUT','OFFICER','RESOURCE'],requiresPositionalReview:true}),
+ ]),defeatWatch:Object.freeze(['PIAN_YIN']),rescueFocus:Object.freeze(['WEALTH','RESOURCE'])}),
+ QI_SHA:Object.freeze({formationClaimRef:'BZR-CLM-ZPZQ-09-QISHA-FORMATION-017',formationPaths:Object.freeze([
+  Object.freeze({pathCode:'SEVEN_KILLINGS_WITH_CONTROL_AND_CARRYING',requiredAll:['OFFICER','OUTPUT'],requiresCarryingSupport:true}),
+ ]),defeatWatch:Object.freeze(['WEALTH','CONTROL_PATH']),rescueFocus:Object.freeze(['OUTPUT','RESOURCE'])}),
+ SHANG_GUAN:Object.freeze({formationClaimRef:'BZR-CLM-ZPZQ-09-SHANGGUAN-FORMATION-018',formationPaths:Object.freeze([
+  Object.freeze({pathCode:'HURTING_OFFICER_GENERATES_WEALTH',requiredAll:['OUTPUT','WEALTH']}),
+  Object.freeze({pathCode:'HURTING_OFFICER_WITH_RESOURCE',requiredAll:['OUTPUT','RESOURCE'],requiresCarryingSupport:true}),
+ ]),defeatWatch:Object.freeze(['OFFICER']),rescueFocus:Object.freeze(['WEALTH','RESOURCE'])}),
+ PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE:Object.freeze({formationClaimRef:'BZR-CLM-ZPZQ-09-JIANLU-YUEJIE-FORMATION-019',formationPaths:Object.freeze([
+  Object.freeze({pathCode:'JIANLU_YUEJIE_SELECT_EXTERNAL_OPERATIVE_FACTOR',requiredAny:['WEALTH','OFFICER','OUTPUT'],requiresPositionalReview:true}),
+ ]),defeatWatch:Object.freeze(['PEER']),rescueFocus:Object.freeze(['WEALTH','OFFICER','OUTPUT'])})
+});
+const PATTERN_SOURCE_FRAMEWORK=Object.freeze({rulesetRef:'content/interpretation/bazi/rulesets/bazi-pattern-ruleset-v2.json',claimBatchRef:'content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.1.json',defeatClaimRef:'BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020',counterEvidenceClaimRef:'BZR-CLM-ZPZQ-09-TABOO-WITHIN-FORMATION-021',rescueClaimRef:'BZR-CLM-ZPZQ-09-RESCUE-TABLE-022',specialPathClaimRef:'BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-DETAIL-023'});
+const tenGodItem=(tenGods,code)=>list(tenGods?.items).find(x=>x.tenGodCode===code)||null;
+const groupItem=(tenGods,groupCode)=>list(tenGods?.functionGroups).find(x=>x.groupCode===groupCode)||null;
+const groupVisible=(tenGods,groupCode)=>(Number(groupItem(tenGods,groupCode)?.count)||0)>0;
+const carryingSupportVisible=strength=>Boolean(strength?.carriers?.rooted)||(Number(strength?.supportBalance?.supportVisible)||0)>0;
+function patternPathEvaluation(path,{tenGods,strength,relationships,upstreamPrimary=false}={}){
+ const requiredAll=list(path?.requiredAll),requiredAny=list(path?.requiredAny),missingAll=requiredAll.filter(group=>!groupVisible(tenGods,group)),anyPresent=!requiredAny.length||requiredAny.some(group=>groupVisible(tenGods,group));
+ const monthTensions=list(relationships?.items).filter(item=>item.monthCommandDirect===true&&item.relationFamily==='TENSION');
+ let state='VISIBLE_SUPPORT_PATH';
+ if(missingAll.length||!anyPresent)state='REQUIRED_FACTOR_NOT_VISIBLE';
+ else if(path?.requiresCarryingSupport&&!carryingSupportVisible(strength))state='CARRYING_CONDITION_OPEN';
+ else if(path?.requiresNoMonthTension&&monthTensions.length)state='RELATIONSHIP_CONDITION_REQUIRES_REVIEW';
+ else if(path?.requiresPositionalReview)state='POSITIONAL_CONDITION_REQUIRES_REVIEW';
+ if(upstreamPrimary)state='UPSTREAM_PRIMARY_ESTABLISHED';
+ return freeze({pathCode:path.pathCode,state,requiredAll:freeze(requiredAll),requiredAny:freeze(requiredAny),visibleRequiredGroups:freeze(uniq([...requiredAll,...requiredAny].filter(group=>groupVisible(tenGods,group)))),missingRequiredGroups:freeze(uniq([...missingAll,...(requiredAny.length&&!anyPresent?requiredAny:[])])),carryingSupportVisible:carryingSupportVisible(strength),monthTensionRelationIds:freeze(monthTensions.map(x=>x.relationId)),positionalReviewRequired:path?.requiresPositionalReview===true});
+}
+function patternDefeatChecks(family,{tenGods,relationships}={}){
+ const monthTensions=list(relationships?.items).filter(item=>item.monthCommandDirect===true&&item.relationFamily==='TENSION');
+ const checks=[];
+ const add=(code,visible,detail={})=>checks.push(freeze({checkCode:code,state:visible?'VISIBLE_REQUIRES_REVIEW':'NOT_FOREGROUNDED',...detail}));
+ if(family==='ZHENG_GUAN'){add('HURTING_OFFICER_REVIEW',(Number(tenGodItem(tenGods,'SHANG_GUAN')?.count)||0)>0,{tenGodCode:'SHANG_GUAN'});add('MONTH_COMMAND_TENSION_REVIEW',monthTensions.length>0,{relationIds:freeze(monthTensions.map(x=>x.relationId))});}
+ else if(family==='CAI'){add('PEER_COMPETITION_REVIEW',(Number(groupItem(tenGods,'PEER')?.count)||0)>0,{groupCode:'PEER'});add('EXPOSED_SEVEN_KILLINGS_REVIEW',(Number(tenGodItem(tenGods,'QI_SHA')?.visibleCount)||0)>0,{tenGodCode:'QI_SHA'});}
+ else if(family==='YIN')add('WEALTH_RESOURCE_RELATION_REVIEW',(Number(groupItem(tenGods,'WEALTH')?.count)||0)>0,{groupCode:'WEALTH'});
+ else if(family==='SHI_SHEN')add('INDIRECT_RESOURCE_REVIEW',(Number(tenGodItem(tenGods,'PIAN_YIN')?.count)||0)>0,{tenGodCode:'PIAN_YIN'});
+ else if(family==='QI_SHA'){add('WEALTH_WITH_SEVEN_KILLINGS_REVIEW',(Number(groupItem(tenGods,'WEALTH')?.count)||0)>0,{groupCode:'WEALTH'});if((Number(groupItem(tenGods,'OUTPUT')?.count)||0)===0)add('CONTROL_PATH_REVIEW',true,{groupCode:'OUTPUT'});}
+ else if(family==='SHANG_GUAN')add('OFFICER_RELATION_REVIEW',(Number(groupItem(tenGods,'OFFICER')?.count)||0)>0,{groupCode:'OFFICER'});
+ else add('SPECIAL_PATH_REVIEW',true,{family});
+ return freeze(checks);
+}
+function patternRescueFramework(family,{tenGods}={}){
+ const rule=PATTERN_PROFESSIONAL_RULES[family]||PATTERN_PROFESSIONAL_RULES.PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE,groups=list(rule.rescueFocus);
+ return freeze({state:'FRAMEWORK_ONLY_CASE_MATCH_NOT_DECLARED',focusGroups:freeze(groups),visibleFocusGroups:freeze(groups.filter(group=>groupVisible(tenGods,group))),claimRef:PATTERN_SOURCE_FRAMEWORK.rescueClaimRef});
+}
+function patternCandidateProfessionalReading(candidate,{tenGods,strength,relationships,section}={}){
+ const family=candidate.patternFamily,rule=PATTERN_PROFESSIONAL_RULES[family]||PATTERN_PROFESSIONAL_RULES.PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE,tg=tenGodItem(tenGods,candidate.tenGodCode),upstreamPrimary=Boolean(section?.verdict?.primaryPattern&&(section.verdict.primaryPattern===family||section.verdict.primaryPattern===candidate.candidateId||section.verdict.primaryPattern===candidate.tenGodCode));
+ const relationModifiers=list(relationships?.items).filter(item=>item.monthCommandDirect===true||list(candidate.visiblePillars).some(p=>list(item.positions).includes(p))).map(item=>freeze({relationId:item.relationId,type:item.type,relationFamily:item.relationFamily,positionThemeCode:item.positionThemeCode,positions:freeze(list(item.positions)),dayMasterDirect:item.dayMasterDirect,monthCommandDirect:item.monthCommandDirect}));
+ const formationPaths=freeze(list(rule.formationPaths).map(path=>patternPathEvaluation(path,{tenGods,strength,relationships,upstreamPrimary})));
+ const visiblePaths=formationPaths.filter(x=>x.state!=='REQUIRED_FACTOR_NOT_VISIBLE'),readingPriority=upstreamPrimary?'UPSTREAM_PRIMARY':candidate.visibleStemMatch?'VISIBLE_MONTH_COMMAND_CANDIDATE':candidate.hiddenOrder===1?'PRIMARY_HIDDEN_MONTH_COMMAND_CANDIDATE':'HIDDEN_MONTH_COMMAND_CANDIDATE';
  return freeze({
-  schemaVersion:'PHI-OS-PPR-C1-BAZI-PATTERN-PROFESSIONAL-SURFACE-v1.0.0',
-  state:owner?.resolutionState||'ALTERNATIVES_OPEN',qualifierCodes:list(owner?.qualifierCodes),unknownRefs:list(owner?.unknownRefs),counterEvidenceRefs:list(owner?.counterEvidenceRefs),evidenceRefs:list(owner?.evidenceRefs),authorityRefs:list(owner?.authorityRefs),
-  candidates:list(section.candidates).map(c=>freeze({...c,
+  readingPriority,
+  candidateBasis:freeze({monthCommandHiddenOrder:candidate.hiddenOrder,hiddenStemZh:candidate.hiddenStemZh,tenGodCode:candidate.tenGodCode,tenGodZh:candidate.tenGodZh,patternFamily:family,treatmentClass:candidate.treatmentClass,visibleStemMatch:candidate.visibleStemMatch===true,visiblePillars:freeze(list(candidate.visiblePillars))}),
+  tenGodContext:freeze({count:Number(tg?.count)||0,ratio:Number(tg?.ratio)||0,visibleCount:Number(tg?.visibleCount)||0,hiddenCount:Number(tg?.hiddenCount)||0,repeatState:tg?.repeatState||'ABSENT',functionGroup:tg?.functionGroup||TEN_GOD_GROUP[candidate.tenGodCode]||'UNAVAILABLE'}),
+  carryingContext:freeze({overallTendency:strength?.carriers?.overallTendency||'MIXED_CARRY',rootCount:Number(strength?.roots?.total)||0,supportVisible:Number(strength?.supportBalance?.supportVisible)||0,outwardVisible:Number(strength?.supportBalance?.outwardVisible)||0,pressureVisible:Number(strength?.supportBalance?.pressureVisible)||0}),
+  formation:freeze({claimRef:rule.formationClaimRef,paths:formationPaths,visiblePathCount:visiblePaths.length,formedPatternDeclared:upstreamPrimary}),
+  relationshipModifiers:freeze(relationModifiers),
+  defeatChecks:patternDefeatChecks(family,{tenGods,relationships}),
+  rescueFramework:patternRescueFramework(family,{tenGods}),
+  conclusionState:upstreamPrimary?'PRIMARY_ESTABLISHED_BY_UPSTREAM':visiblePaths.length&&candidate.visibleStemMatch?'OPEN_WITH_VISIBLE_FORMATION_SUPPORT':visiblePaths.length?'OPEN_WITH_PARTIAL_FORMATION_SUPPORT':'OPEN_REQUIRES_MORE_FORMATION_SUPPORT',
+  sourceClaimRefs:freeze(uniq([rule.formationClaimRef,PATTERN_SOURCE_FRAMEWORK.defeatClaimRef,PATTERN_SOURCE_FRAMEWORK.counterEvidenceClaimRef,PATTERN_SOURCE_FRAMEWORK.rescueClaimRef,...(family==='PEER_MONTH_COMMAND_REQUIRES_SPECIAL_RULE'?[PATTERN_SOURCE_FRAMEWORK.specialPathClaimRef]:[])])),
+  boundaries:freeze({formationPathVisibleDoesNotEqualPatternFormed:true,defeatCheckVisibleDoesNotEqualPatternDefeated:true,rescueFrameworkDoesNotEqualRescueMatched:true,readingPriorityIsNotQualityRank:true,lifeOutcomeCreated:false})
+ });
+}
+function patternModule(readingIR,{tenGods,strength,relationships}={}){
+ const section=readingIR?.sections?.patterns||{},owner=ownerFor(readingIR,'PATTERN_CANDIDATE_SET');
+ const candidates=list(section.candidates).map(c=>freeze({...c,
    supportEvidence:freeze({monthCommandCandidate:true,visibleStemMatch:c.visibleStemMatch===true,visiblePillars:list(c.visiblePillars),treatmentClass:c.treatmentClass||null}),
    defeatEvaluation:freeze({state:'NOT_CASE_SPECIFICALLY_ESTABLISHED',reasonCode:'PPR_C1_W7_DEFEAT_CONDITION_NOT_EXPOSED_BY_CURRENT_READING_IR'}),
    rescueEvaluation:freeze({state:'NOT_CASE_SPECIFICALLY_ESTABLISHED',reasonCode:'PPR_C1_W7_RESCUE_CONDITION_NOT_EXPOSED_BY_CURRENT_READING_IR'}),
-   unresolved:freeze({primaryPatternAssigned:Boolean(section.verdict?.primaryPattern),priorityVerdict:c.priorityVerdict??null})
-  })),
+   unresolved:freeze({primaryPatternAssigned:Boolean(section.verdict?.primaryPattern),priorityVerdict:c.priorityVerdict??null}),
+   professionalReading:patternCandidateProfessionalReading(c,{tenGods,strength,relationships,section})
+  }));
+ const priorityRank={UPSTREAM_PRIMARY:0,VISIBLE_MONTH_COMMAND_CANDIDATE:1,PRIMARY_HIDDEN_MONTH_COMMAND_CANDIDATE:2,HIDDEN_MONTH_COMMAND_CANDIDATE:3};
+ const readingOrder=freeze(candidates.slice().sort((a,b)=>(priorityRank[a.professionalReading.readingPriority]??9)-(priorityRank[b.professionalReading.readingPriority]??9)||a.hiddenOrder-b.hiddenOrder).map(x=>x.candidateId));
+ const visibleFormationSupportCount=candidates.filter(x=>x.professionalReading.formation.visiblePathCount>0).length;
+ return freeze({
+  schemaVersion:'PHI-OS-PPR-C1-BAZI-PATTERN-PROFESSIONAL-SURFACE-v1.0.0',work:'BAZI-CX-PRO-W6',professionalReadingVersion:'PHI-OS-BAZI-CX-PRO-PATTERN-PROFESSIONAL-READING-v1.0.0',
+  state:owner?.resolutionState||'ALTERNATIVES_OPEN',qualifierCodes:list(owner?.qualifierCodes),unknownRefs:list(owner?.unknownRefs),counterEvidenceRefs:list(owner?.counterEvidenceRefs),evidenceRefs:list(owner?.evidenceRefs),authorityRefs:list(owner?.authorityRefs),
+  sourceFramework:freeze({...PATTERN_SOURCE_FRAMEWORK}),
+  summary:freeze({candidateCount:candidates.length,visibleStemCandidateCount:candidates.filter(x=>x.visibleStemMatch).length,visibleFormationSupportCount,primaryPatternEstablished:Boolean(section.verdict?.primaryPattern),readingOrder}),
+  candidates:freeze(candidates),
   verdict:freeze({...section.verdict}),
-  boundaries:freeze({rulesetPresenceIsNotCaseMatch:true,defeatInvented:false,rescueInvented:false,primaryPatternInvented:false})
+  boundaries:freeze({rulesetPresenceIsNotCaseMatch:true,defeatInvented:false,rescueInvented:false,primaryPatternInvented:false,formationSupportIsNotFormationVerdict:true,readingOrderIsNotQualityRank:true,sourceAdmittedFrameworkComposed:true})
  });
 }
 
@@ -228,8 +316,8 @@ export function buildBaziProfessionalSurfaceModules({readingIR,report,temporalSt
  if(readingIR?.schemaVersion!=='PHI-OS-BAZI-FULL-READING-IR-v1.0.0')throw Object.assign(new Error('PPR_C1_W7_W12_BAZI_READING_IR_REQUIRED'),{code:'PPR_C1_W7_W12_BAZI_READING_IR_REQUIRED'});
  const fiveElements=fiveElementModule(readingIR),tenGods=tenGodModule(readingIR),dayMasterStrength=dayMasterStrengthModule(readingIR),relationships=relationshipModule(readingIR,{tenGods,strength:dayMasterStrength});
  return freeze({
-  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W5-v1.0.0',
-  fiveElements,tenGods,dayMasterStrength,relationships,pattern:patternModule(readingIR),schools:schoolModules(readingIR,report),timing:timingModule(readingIR,temporalState),
+  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W6-v1.0.0',
+  fiveElements,tenGods,dayMasterStrength,relationships,pattern:patternModule(readingIR,{tenGods,strength:dayMasterStrength,relationships}),schools:schoolModules(readingIR,report),timing:timingModule(readingIR,temporalState),
   customerSafeGraph:buildBaziCustomerSafeStructureGraph({readingIR,temporalState}),
   realityComparison:realityComparisonModule(readingIR,temporalState),
   boundaries:freeze({createsMeaning:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false,recalculatesEvidenceGraph:false,exposesRawEvidenceGraphIds:false,usesPprR3SpecialistPort:true,modifiesSharedPersonalRealitySurface:false})

@@ -16,7 +16,7 @@ assert.equal(product.governance.tenGodProfessionalCompositionAuthorized,true);
 assert.equal(product.governance.dayMasterStrengthProfessionalCompositionAuthorized,true);
 
 const modules=product.professionalModules;
-assert.equal(modules.moduleVersion,'BAZI-CX-PRO-W5-v1.0.0');
+assert.ok(['BAZI-CX-PRO-W5-v1.0.0','BAZI-CX-PRO-W6-v1.0.0'].includes(modules.moduleVersion));
 assert.equal(modules.fiveElements.schemaVersion,'PHI-OS-BAZI-CX-PRO-FIVE-ELEMENT-VISUAL-PROJECTION-v1.0.0');
 assert.equal(modules.tenGods.schemaVersion,'PHI-OS-BAZI-CX-PRO-TEN-GOD-PROFESSIONAL-COMPOSITION-v1.0.0');
 assert.equal(modules.dayMasterStrength.schemaVersion,'PHI-OS-BAZI-CX-PRO-DAY-MASTER-STRENGTH-PROFESSIONAL-COMPOSITION-v1.0.0');

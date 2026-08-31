@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "PHI-OS-BAZI-CX-PRO-PATTERN-PROFESSIONAL-READING-CONTRACT-v1.0.0",
+  "workId": "BAZI-CX-PRO-W6",
+  "title": "Pattern Professional Reading",
+  "status": "ADMITTED",
+  "objective": "Turn month-command pattern candidates into complete customer-readable pattern explanations without inventing a primary pattern, a quality rank or an unsupported formed/defeated/rescued verdict.",
+  "sourceFramework": {
+    "rulesetRef": "content/interpretation/bazi/rulesets/bazi-pattern-ruleset-v2.json",
+    "claimBatchRef": "content/interpretation/bazi/claims/bazi-source-claim-batch-bzr-r1-v2.1.json",
+    "requiredClaimRefs": [
+      "BZR-CLM-ZPZQ-09-ZHENGGUAN-FORMATION-013",
+      "BZR-CLM-ZPZQ-09-CAI-FORMATION-014",
+      "BZR-CLM-ZPZQ-09-YIN-FORMATION-015",
+      "BZR-CLM-ZPZQ-09-SHISHEN-FORMATION-016",
+      "BZR-CLM-ZPZQ-09-QISHA-FORMATION-017",
+      "BZR-CLM-ZPZQ-09-SHANGGUAN-FORMATION-018",
+      "BZR-CLM-ZPZQ-09-JIANLU-YUEJIE-FORMATION-019",
+      "BZR-CLM-ZPZQ-09-DEFEAT-TABLE-020",
+      "BZR-CLM-ZPZQ-09-TABOO-WITHIN-FORMATION-021",
+      "BZR-CLM-ZPZQ-09-RESCUE-TABLE-022",
+      "BZR-CLM-ZPZQ-45-JIANLU-YUEJIE-DETAIL-023"
+    ]
+  },
+  "inputModules": [
+    "BAZI-CX-PRO-W3 Ten-God Professional Composition",
+    "BAZI-CX-PRO-W4 Day-Master Carrying Structure",
+    "BAZI-CX-PRO-W5 Relationship / Pillar Interaction",
+    "PPR-C1 pattern owner and current upstream pattern verdict"
+  ],
+  "candidateReading": {
+    "requiredSections": [
+      "candidateBasis",
+      "tenGodContext",
+      "carryingContext",
+      "formation.paths",
+      "relationshipModifiers",
+      "defeatChecks",
+      "rescueFramework",
+      "conclusionState",
+      "sourceClaimRefs"
+    ],
+    "readingPriority": "NAVIGATION_ORDER_ONLY_NOT_QUALITY_RANK",
+    "formationPathStates": [
+      "UPSTREAM_PRIMARY_ESTABLISHED",
+      "VISIBLE_SUPPORT_PATH",
+      "POSITIONAL_CONDITION_REQUIRES_REVIEW",
+      "RELATIONSHIP_CONDITION_REQUIRES_REVIEW",
+      "CARRYING_CONDITION_OPEN",
+      "REQUIRED_FACTOR_NOT_VISIBLE"
+    ]
+  },
+  "customerSurface": {
+    "mustExplain": [
+      "why the pattern enters the reading",
+      "what is actually visible in this chart",
+      "what formation paths are relevant",
+      "which pillar relations modify the path",
+      "which defeat conditions still require checking",
+      "what rescue framework is relevant",
+      "how the path relates to Day-Master carrying structure",
+      "why the current conclusion is primary or still open"
+    ],
+    "mustNotExpose": [
+      "raw claim IDs",
+      "authority IDs",
+      "internal unknown IDs",
+      "work-number engineering language"
+    ]
+  },
+  "boundaries": {
+    "formationSupportIsNotFormationVerdict": true,
+    "defeatCheckIsNotDefeatVerdict": true,
+    "rescueFrameworkIsNotRescueMatch": true,
+    "readingPriorityIsNotPatternQualityRank": true,
+    "primaryPatternMayNotBeInvented": true,
+    "goodBadScoreCreated": false,
+    "lifeOutcomeCreated": false,
+    "fortunePredictionCreated": false
+  }
+}
