@@ -20,7 +20,11 @@ const checks=[
   'scripts/check-hd-pro-r3-w15-professional-reading-ir-v2.mjs',
   'scripts/check-hd-pro-r3-w16-customer-editorial.mjs',
   'scripts/check-hd-pro-r3-w17-reality-composition-v2.mjs',
-  'scripts/check-hd-pro-r3-w18-relationship-composition.mjs'
+  'scripts/check-hd-pro-r3-w18-relationship-composition.mjs',
+  'scripts/check-hd-pro-r3-w19-epistemic-boundary.mjs',
+  'scripts/check-hd-pro-r3-w20-machine-campaign.mjs',
+  'scripts/check-hd-pro-r3-w21-benchmark.mjs',
+  'scripts/check-hd-pro-r3-w22-human-review.mjs'
 ];
 
 for(const check of checks){
@@ -28,5 +32,5 @@ for(const check of checks){
   if(r.status!==0) process.exit(r.status??1);
 }
 
-console.log('✓ HD-PRO-R3 W0-W18 aggregate passed.');
-console.log('  R2 remains CUSTOMER_PUBLISHED; R3 now has Whole-Chart Priority, Professional Reading IR v2, customer editorial, semantic-specific Reality Composition and single-chart relationship composition, while machine campaign, new R3 human acceptance and customer cutover remain pending.');
+console.log('✓ HD-PRO-R3 W0-W22 aggregate passed.');
+console.log('  R2 remains CUSTOMER_PUBLISHED; R3 now has epistemic/sensitive-domain boundaries, 96/96 machine verification, a 12/12 R2-vs-R3 professional benchmark, and a new 24-case human review pack; R3 human acceptance and customer cutover remain pending.');
