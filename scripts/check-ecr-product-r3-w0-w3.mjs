@@ -22,7 +22,10 @@ const personalSurfacePath='perspectives/personal/index.html';
 const personalSurfaceCurrentSha=sha(personalSurfacePath);
 if(acceptance.currentMain.personalSurfaceSha256!==personalSurfaceCurrentSha)assertPprCurrentSharedOwner(personalSurfacePath,{historicalDigest:acceptance.currentMain.personalSurfaceSha256,label:'ECR-R3 W0-W3 personal surface successor'});
 else assert.equal(acceptance.currentMain.personalSurfaceSha256,personalSurfaceCurrentSha);
-assert.equal(acceptance.currentMain.ecrStylesheetSha256,sha('assets/customer-ui/surfaces/ecr-specialist.css'));
+const ecrStylesheetPath='assets/customer-ui/surfaces/ecr-specialist.css';
+const ecrStylesheetCurrentSha=sha(ecrStylesheetPath);
+if(acceptance.currentMain.ecrStylesheetSha256!==ecrStylesheetCurrentSha)assertPprCurrentSharedOwner(ecrStylesheetPath,{historicalDigest:acceptance.currentMain.ecrStylesheetSha256,label:'ECR-R3 W0-W3 stylesheet successor'});
+else assert.equal(acceptance.currentMain.ecrStylesheetSha256,ecrStylesheetCurrentSha);
 assert.equal(acceptance.currentMain.readingRendererSha256,sha('assets/customer-ui/js/specialists/ecr/reading-report-renderer.js'));
 assert.equal(acceptance.currentMain.calculationStoryRendererSha256,sha('assets/customer-ui/js/specialists/ecr/calculation-story-renderer.js'));
 
