@@ -11,6 +11,7 @@ assert.deepEqual(workspace.tabs,['Overview','Graph','Structure','Patterns','Cont
 assert.equal(workspace.graph.rendererCreatesMeaning,false);assert.equal(workspace.structure.atomicMeaningDirectPublicationForbidden,true);assert.equal(workspace.patterns.rawSymbolConsensusForbidden,true);assert.equal(workspace.realityComparison.resonatesIsEvidence,false);assert.equal(workspace.handoff.realityFactPromotion,false);
 for(const token of ['graphBoundaryBlock','WHAT THIS GRAPH SHOWS','WHAT IT DOES NOT ESTABLISH','renderCrossPerspectiveComparison','renderSourcesAndBoundaries','CALCULATED STRUCTURE','WHAT REMAINS OPEN'])assert(js.includes(token),`R12R4 result workspace missing ${token}`);
 const pprR3SpecialistHost=html.includes('data-cx-specialist-products')&&fs.existsSync('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
+const pprR5Editorial=fs.existsSync('content/professional/personal-reality/r5/authority/ppr-r5-editorial-successor-v1.json')&&html.includes('data-ppr-r5-editorial="true"');
 const p2Assets=['PHIOS-FIGURE-CROSS-PERSPECTIVE-PATTERN-MAP-v1.svg','PHIOS-FIGURE-CROSS-PERSPECTIVE-PATTERN-MAP-v1-mobile.svg','PHIOS-FIGURE-PERSPECTIVE-TO-REALITY-CONTINUITY-v1.svg','PHIOS-FIGURE-PERSPECTIVE-TO-REALITY-CONTINUITY-v1-mobile.svg'];
 if(pprR3SpecialistHost){
  const pprR3=json('content/professional/personal-reality/r3/authority/ppr-r3-w10-successor-freeze-v1.json');
@@ -18,7 +19,7 @@ if(pprR3SpecialistHost){
  const specialistHost=read('assets/customer-ui/js/personal-products/specialist-renderer-host.js');
  assert.equal(pprR3.status,'FROZEN_PPR_R3_SPECIALIST_HOST');
  for(const asset of p2Assets)assert.equal(fs.existsSync(`assets/customer-ui/media/personal/figures/${asset}`),true,`historical R12R4 P2 source asset missing ${asset}`);
- assert.match(html,/data-cx-specialist-products/);assert.match(html,/Resonance is not evidence by itself/);assert.match(html,/data-cx-authority-layer="NAVIGATION_THRESHOLD"/);
+ assert.match(html,/data-cx-specialist-products/);if(pprR5Editorial){assert.match(html,/cannot silently promote symbolic material into objective evidence/);assert.match(html,/Similarity → observation/);}else assert.match(html,/Resonance is not evidence by itself/);assert.match(html,/data-cx-authority-layer="NAVIGATION_THRESHOLD"/);
  assert.match(productRenderers,/mountApprovedSpecialistRenderer/);assert.match(specialistHost,/mountApprovedSpecialistRenderer/);
  for(const panel of claims.resultPanels){assert(panel.panel&&Array.isArray(panel.authorityLayers)&&panel.authorityLayers.length,`invalid historical R12R4 claim panel contract ${panel.panel||'UNKNOWN'}`)}
 }else{

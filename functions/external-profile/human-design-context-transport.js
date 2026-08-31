@@ -4,6 +4,8 @@ import {buildCanonicalHumanDesignExternalChart} from './human-design-canonical-c
 import {buildHumanDesignExternalReadingIr} from './human-design-reading-runtime.js';
 import {composeHumanDesignRealityBridge} from './human-design-reality-composition.js';
 import {HD_EXTERNAL_PRODUCTION} from './human-design-external-authority.js';
+import {buildHumanDesignR3ProfessionalProduct} from './human-design-r3-professional-runtime.js';
+import {HD_R3_PRODUCTION_AUTHORITY} from './human-design-r3-production-authority.js';
 
 export const HD_CONFIRMED_CONTEXT_TRANSPORT_VERSION='PHI-OS-ECR-R3-CONFIRMED-HD-CONTEXT-TRANSPORT-v1.0.0';
 
@@ -37,14 +39,18 @@ export function normalizeConfirmedHumanDesignContextProfile(profile){
   return freeze(profile);
 }
 
-function readingAvailability(customerPublishable){
+function readingAvailability(customerPublishable,r3Publishable){
   return freeze({
-    state:customerPublishable?'CUSTOMER_PUBLISHED':'HUMAN_REVIEW_PENDING',
-    machineCandidateAvailable:HD_EXTERNAL_PRODUCTION.readingCandidateMachineExecutable===true,
-    humanReviewRequired:HD_EXTERNAL_PRODUCTION.humanReviewRequired===true,
-    humanReviewAccepted:HD_EXTERNAL_PRODUCTION.humanReviewAccepted===true,
-    customerPublishable,
-    publicationClass:customerPublishable?'HUMAN_ACCEPTED_EXTERNAL_CHART_READING':'NOT_PUBLISHED',
+    state:r3Publishable?'CUSTOMER_PUBLISHED':customerPublishable?'CUSTOMER_PUBLISHED':'HUMAN_REVIEW_PENDING',
+    activeCustomerReadingVersion:r3Publishable?'HD_PRO_R3':customerPublishable?'HD_PRO_R2':null,
+    machineCandidateAvailable:true,
+    humanReviewRequired:true,
+    humanReviewAccepted:r3Publishable?HD_R3_PRODUCTION_AUTHORITY.humanAccepted:HD_EXTERNAL_PRODUCTION.humanReviewAccepted===true,
+    r3HumanReviewAccepted:HD_R3_PRODUCTION_AUTHORITY.humanAccepted,
+    r3MachineVerified:HD_R3_PRODUCTION_AUTHORITY.machineVerified,
+    r2FallbackAvailable:HD_R3_PRODUCTION_AUTHORITY.r2FallbackAvailable,
+    customerPublishable:r3Publishable||customerPublishable,
+    publicationClass:r3Publishable?'HD_PRO_R3_HUMAN_ACCEPTED_PROFESSIONAL_READING':customerPublishable?'HUMAN_ACCEPTED_EXTERNAL_CHART_READING':'NOT_PUBLISHED',
     authorityClass:'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT'
   });
 }
@@ -57,11 +63,14 @@ export function buildConfirmedHumanDesignContextTransport(confirmedExternalProfi
   const customerPublishable=HD_EXTERNAL_PRODUCTION.customerReadingPublicationAllowed===true&&HD_EXTERNAL_PRODUCTION.humanReviewAccepted===true;
   const humanDesignReading=customerPublishable?buildHumanDesignExternalReadingIr(canonicalHumanDesignChart,{locale:normalizedLocale,intent}):null;
   const humanDesignRealityComposition=humanDesignReading?composeHumanDesignRealityBridge(humanDesignReading,{locale:normalizedLocale}):null;
+  const r3Publishable=HD_R3_PRODUCTION_AUTHORITY.customerPublicationAllowed===true&&HD_R3_PRODUCTION_AUTHORITY.humanAccepted===true;
+  const humanDesignProfessionalReading=r3Publishable?buildHumanDesignR3ProfessionalProduct(canonicalHumanDesignChart,{locale:normalizedLocale,intent}):null;
   const lineage=freeze({
     profileDigest:profile.profileDigest,
     chartDigest:canonicalHumanDesignChart.chartDigest,
     readingDigest:humanDesignReading?.readingDigest||null,
-    compositionDigest:humanDesignRealityComposition?.compositionDigest||null
+    compositionDigest:humanDesignRealityComposition?.compositionDigest||null,
+    professionalProductDigest:humanDesignProfessionalReading?.professionalProductDigest||null
   });
   const boundary=freeze({
     customerConfirmedProfileRequired:true,
@@ -90,9 +99,10 @@ export function buildConfirmedHumanDesignContextTransport(confirmedExternalProfi
     transportedAt,
     locale:normalizedLocale,
     canonicalHumanDesignChart,
-    readingAvailability:readingAvailability(customerPublishable),
+    readingAvailability:readingAvailability(customerPublishable,r3Publishable),
     humanDesignReading,
     humanDesignRealityComposition,
+    humanDesignProfessionalReading,
     lineage,
     boundary
   };

@@ -24,7 +24,13 @@ const checks=[
   'scripts/check-hd-pro-r3-w19-epistemic-boundary.mjs',
   'scripts/check-hd-pro-r3-w20-machine-campaign.mjs',
   'scripts/check-hd-pro-r3-w21-benchmark.mjs',
-  'scripts/check-hd-pro-r3-w22-human-review.mjs'
+  'scripts/check-hd-pro-r3-w22-human-review.mjs',
+  'scripts/check-hd-pro-r3-w23-customer-renderer.mjs',
+  'scripts/check-hd-pro-r3-w24-visual-reading.mjs',
+  'scripts/check-hd-pro-r3-w25-production-cutover.mjs',
+  'scripts/check-hd-pro-r3-w26-regression.mjs',
+  'scripts/check-hd-pro-r3-w27-checker-architecture.mjs',
+  'scripts/check-hd-pro-r3-w28-closure.mjs'
 ];
 
 for(const check of checks){
@@ -32,5 +38,5 @@ for(const check of checks){
   if(r.status!==0) process.exit(r.status??1);
 }
 
-console.log('✓ HD-PRO-R3 W0-W22 aggregate passed.');
-console.log('  R2 remains CUSTOMER_PUBLISHED; R3 now has epistemic/sensitive-domain boundaries, 96/96 machine verification, a 12/12 R2-vs-R3 professional benchmark, and a new 24-case human review pack; R3 human acceptance and customer cutover remain pending.');
+console.log('✓ HD-PRO-R3 W0-W28 aggregate passed.');
+console.log('  R3 is CUSTOMER_PUBLISHED after 96/96 machine verification, 12/12 professional benchmark, fresh 24/24 R3 human acceptance, shared-host renderer/visual cutover and clean-overlay regression; R2 remains available as compatibility fallback.');

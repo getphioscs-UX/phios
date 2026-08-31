@@ -35,6 +35,7 @@ function walk(root){
 function relevant(file){
   // HD-PRO-R2/R3 external-profile successor runtimes are customer-supplied-chart interpretation, not the historical internal HDR calculation authority audited by CX-R12R4B-W09. Keep them out of this frozen legacy audit so successor product work cannot create audit drift.
   if(file.startsWith('functions/external-profile/human-design-r3-')&&!['functions/external-profile/human-design-r3-composition-runtime.js','functions/external-profile/human-design-r3-semantic-dedup.js'].includes(file))return false;
+  if(file==='assets/customer-ui/js/specialists/human-design/professional-reading-renderer.js')return false;
   if(EXCLUDED.has(file)||!TEXT_EXTENSIONS.has(path.extname(file).toLowerCase()))return false;
   if(DOMAIN_PATH.test(file))return true;
   if(!file.startsWith('content/professional/')&&!file.startsWith('content/governance/production-capability-matrix/')&&!file.startsWith('content/interpretation/integration/')&&!file.startsWith('functions/'))return false;

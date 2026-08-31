@@ -146,9 +146,12 @@ for(const token of [
   'EXTERNAL_PROFILE_CONTEXT_CONSENT_REQUIRED',
   'normalizeConfirmedHumanDesignContextProfile(body.confirmedExternalProfile)',
   'buildConfirmedHumanDesignContextTransport(confirmedXpf',
-  'confirmedXpf,hdrInternalReading:null',
-  'crossPerspectiveReading,humanDesignContext'
+  'confirmedXpf,hdrInternalReading:null'
 ])assert(api.includes(token),`W4 server transport binding missing: ${token}`);
+const viewProjection=api.match(/const view=freeze\(\{([^;]+)\}\);/)?.[1]?.replace(/\s+/g,'')||'';
+for(const field of ['crossPerspectiveReading','humanDesignContext']){
+  assert(new RegExp(`(?:^|,)${field}(?:,|$)`).test(viewProjection),`W4 server transport view binding missing: ${field}`);
+}
 assert.equal(api.includes('confirmedXpf:null'),false,'Confirmed Human Design context must no longer be hard-coded out of cross input');
 assert(routeHtml.includes('<script type="module" src="/assets/customer-ui/js/surfaces/personal-reality.js"></script>'),'W4 must patch the canonical loaded personal surface, not the retired duplicate');
 

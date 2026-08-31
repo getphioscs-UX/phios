@@ -19,6 +19,7 @@ const list=v=>Array.isArray(v)?v:[];
 const freeze=v=>{if(v&&typeof v==='object'&&!Object.isFrozen(v)){Object.freeze(v);for(const x of Object.values(v))freeze(x)}return v};
 function fail(code,status=422){const e=new Error(code);e.code=code;e.status=status;throw e}
 function clipped(v,max){const s=clean(v);if(s.length>max)fail('CURRENT_REALITY_TEXT_TOO_LONG');return s}
+function bounded(v,max){const s=clean(v);return s.length>max?`${s.slice(0,Math.max(0,max-1))}…`:s}
 function normalizeObservation(raw,index,{sensitive=false}={}){
   const domain=clean(raw?.domain).toUpperCase();
   const allowed=sensitive?SENSITIVE:GENERAL;
@@ -71,8 +72,8 @@ export function canonicalizeCurrentRealityObservations(input){
 function candidateFromInsight(method,item,index){
   const methodId=clean(method?.methodId).toUpperCase();
   const claimRef=clean(item?.claimId||item?.insightId||item?.readingUnitId||item?.findingId||`${methodId}:INSIGHT:${index+1}`);
-  const title=clipped(item?.title||method?.methodLabel||methodId,180);
-  const summary=clipped(item?.plainLanguageExplanation||item?.summary||item?.body||method?.summary||'',700);
+  const title=bounded(item?.title||method?.methodLabel||methodId,180);
+  const summary=bounded(item?.plainLanguageExplanation||item?.summary||item?.body||method?.summary||'',700);
   return freeze({candidateId:`CRC-${methodId}-${index+1}`,methodId,claimRef,title,summary,candidateClass:'ACCEPTED_METHOD_INSIGHT'});
 }
 export function buildRealityComparisonCandidates(readingMethods=[]){
@@ -83,7 +84,7 @@ export function buildRealityComparisonCandidates(readingMethods=[]){
     const insights=list(method?.insights).slice(0,2);
     if(insights.length){for(let i=0;i<insights.length;i++)out.push(candidateFromInsight(method,insights[i],i));continue;}
     const projectionId=clean(method?.technical?.projectionId);
-    out.push(freeze({candidateId:`CRC-${methodId}-1`,methodId,claimRef:`${methodId}:READING:${projectionId||'ACTIVE'}`,title:clipped(method?.methodLabel||methodId,180),summary:clipped(method?.summary||'',700),candidateClass:'ACCEPTED_METHOD_READING_SUMMARY'}));
+    out.push(freeze({candidateId:`CRC-${methodId}-1`,methodId,claimRef:`${methodId}:READING:${projectionId||'ACTIVE'}`,title:bounded(method?.methodLabel||methodId,180),summary:bounded(method?.summary||'',700),candidateClass:'ACCEPTED_METHOD_READING_SUMMARY'}));
   }
   return freeze(out.slice(0,10));
 }

@@ -34,6 +34,18 @@ const publishSuccessor=readJson('content/professional/personal-reality/r5/author
 const reviewCases=readJson(`${root}/review/hd-w9-human-review-cases-v1.json`);
 const reviewResults=readJson(`${root}/review/hd-w9-human-review-results-v1.json`);
 const w11=readJson(`${root}/hd-w11-official-chart-pdf-intake-adapter-successor-v1.json`);
+const currentSharedOwnerRegistry=readJson('content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json');
+const r3W25OwnerReconciliation=readJson('content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/audit/HD-PRO-R3-W25-current-owner-reconciliation-v1.json');
+const r3W25OwnerByPath=new Map((r3W25OwnerReconciliation.reconciledOwners||[]).map(item=>[item.path,item]));
+const assertCurrentPublishedOwner=(path,{historicalDigest=null,label='HD current owner'}={})=>{
+  if(currentSharedOwnerRegistry.files[path])return assertPprCurrentSharedOwner(path,{historicalDigest,label});
+  const record=r3W25OwnerByPath.get(path);
+  assert(record,`${label}: unregistered current successor owner: ${path}`);
+  assert.equal(record.ownerPathChanged,false,`${label}: current successor owner path changed: ${path}`);
+  assert.equal(record.currentMainSha256,sha(path),`${label}: reconciled current digest drift: ${path}`);
+  if(historicalDigest)assert((record.recognizedPredecessors||[]).includes(historicalDigest),`${label}: historical predecessor not recognized: ${path}`);
+  return record;
+};
 
 assert.equal(w0.baselineCommit,'3d66a5037a0c184ba2059c958a5f7e580696b786');
 assert.equal(w0.methodBoundary.authorityClass,'CUSTOMER_SUPPLIED_EXTERNAL_CONTEXT');
@@ -85,16 +97,16 @@ assert.equal(publishSuccessor.humanAdmission.status,'HUMAN_ACCEPTED_24_OF_24');
 assert.equal(publishSuccessor.cutover.customerPublicationState,'CUSTOMER_PUBLISHED');
 for(const [path,proof] of Object.entries(sharedSuccessor.sharedFileSuccessorProof)){
   const successor=publishSuccessor.runtimeSuccessorProof[path];
-  if(successor){assert.equal(successor.predecessorSha256,proof.successorSha256,`HD publish predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish'})}
+  if(successor){assert.equal(successor.predecessorSha256,proof.successorSha256,`HD publish predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertCurrentPublishedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish'})}
   else if(w11.runtimeSuccessorProof[path])assert.equal(w11.runtimeSuccessorProof[path].predecessorSha256,proof.successorSha256,`HD W11 predecessor mismatch: ${path}`);else assert.equal(proof.successorSha256,sha(path),`HD shared successor digest drift without declared publication successor: ${path}`);
   assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false);
 }
 for(const [path,proof] of Object.entries(sharedSuccessor.addedRuntimeFiles)){
   const successor=publishSuccessor.runtimeSuccessorProof[path];
-  if(successor){assert.equal(successor.predecessorSha256,proof.sha256,`HD publish runtime predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish runtime'})}
+  if(successor){assert.equal(successor.predecessorSha256,proof.sha256,`HD publish runtime predecessor digest mismatch: ${path}`);if(successor.successorSha256!==sha(path))assertCurrentPublishedOwner(path,{historicalDigest:successor.successorSha256,label:'HD publish runtime'})}
   else if(w11.runtimeSuccessorProof[path])assert.equal(w11.runtimeSuccessorProof[path].predecessorSha256,proof.sha256,`HD W11 added-runtime predecessor mismatch: ${path}`);else assert.equal(proof.sha256,sha(path),`HD added runtime digest drift without declared publication successor: ${path}`);
 }
-for(const [path,proof] of Object.entries(publishSuccessor.runtimeSuccessorProof)){if(proof.successorSha256!==sha(path))assertPprCurrentSharedOwner(path,{historicalDigest:proof.successorSha256,label:'HD publication runtime'});assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false)}
+for(const [path,proof] of Object.entries(publishSuccessor.runtimeSuccessorProof)){if(proof.successorSha256!==sha(path))assertCurrentPublishedOwner(path,{historicalDigest:proof.successorSha256,label:'HD publication runtime'});assert.equal(proof.createsPHIOSHumanDesignCalculationAuthority,false);assert.equal(proof.createsHdrPublicExecutionAuthority,false);assert.equal(proof.createsAutomaticVariableCalculationAuthority,false)}
 for(const [path,proof] of Object.entries(publishSuccessor.admissionArtifacts))assert.equal(proof.sha256,sha(path),`HD admission artifact digest drift: ${path}`);
 assert.equal(fs.existsSync('tools/review/HD-PRO-R2-W9-HUMAN-REVIEW.html'),true);
 assert.equal(fs.existsSync(`${root}/review/hd-w9-human-review-cases-v1.json`),true);

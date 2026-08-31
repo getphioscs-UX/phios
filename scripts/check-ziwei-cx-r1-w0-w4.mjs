@@ -163,8 +163,12 @@ try{
   assert.equal(payload.view.primaryCustomerProduct.genericSmrCompleteReportOwner,false);
   assert.equal(payload.view.singleMethodReading,null);
   const stages=new Map(payload.view.reading.map.map(x=>[x.stageId,x]));
-  assert.equal(stages.get('CURRENT_REALITY').state,'READABLE');
-  assert.match(stages.get('CURRENT_REALITY').detail,/象征性时间上下文/);
+  // W42–W46 Current Reality successor: a governed Zi Wei reading makes lived-reality
+  // comparison available, but the stage must remain fail-closed until the customer
+  // explicitly supplies or confirms their own observations. Historical W0–W4 used
+  // READABLE here; the successor state is intentionally WAITING_FOR_CONFIRMATION.
+  assert.equal(stages.get('CURRENT_REALITY').state,'WAITING_FOR_CONFIRMATION');
+  assert.match(stages.get('CURRENT_REALITY').detail,/读取已经可以进入可选的现实对照/);
   assert.equal(stages.get('FULL_REPORT').state,'READABLE');
   assert.match(stages.get('FULL_REPORT').detail,/紫微完整报告/);
   assert.equal(payload.view.reading.governance.currentRealityAssumed,false);
