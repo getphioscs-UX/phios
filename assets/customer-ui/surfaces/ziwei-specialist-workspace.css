@@ -152,3 +152,22 @@
 
 @media(max-width:900px){.cx-ziwei-pro-r2-unit{grid-template-columns:1fr}.cx-ziwei-specialist-inspector dd ul{grid-template-columns:1fr}}
 @media(max-width:767px){.cx-ziwei-specialist-chart__grid{grid-template-rows:repeat(4,minmax(5.55rem,auto));gap:.28rem}.cx-ziwei-specialist-palace{padding:.44rem .42rem .46rem}.cx-ziwei-specialist-palace>strong{font-size:.82rem}.cx-ziwei-specialist-palace p{font-size:.58rem;min-height:1.9em}.cx-ziwei-palace-coordinate{font-size:.56rem}.cx-ziwei-specialist-palace em{font-size:.54rem;padding:.06rem .22rem}.cx-ziwei-star-chip{font-size:.56rem;padding:.08rem .22rem}.cx-ziwei-transform-chip{font-size:.54rem;padding:.08rem .2rem}.cx-ziwei-chart-center-facts{gap:.25rem}.cx-ziwei-chart-center-facts span{padding:.28rem .32rem}.cx-ziwei-chart-center-facts small{font-size:.5rem}.cx-ziwei-chart-center-facts b{font-size:.58rem}}
+
+
+/* ZIWEI-PRO-R2 W17C reading-flow reordering: keep long interpretation out of a narrow side rail */
+.cx-ziwei-specialist-chart__layout{grid-template-columns:1fr!important;gap:1.15rem}
+.cx-ziwei-specialist-chart__inspectors{position:static!important;top:auto!important;width:100%;max-width:none}
+.cx-ziwei-specialist-inspector{width:100%}
+.cx-ziwei-pro-r2-unit{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:.8rem;margin-top:.25rem}
+.cx-ziwei-pro-r2-unit>section{grid-column:span 6;padding:1rem 1.05rem}
+.cx-ziwei-pro-r2-unit>section[data-field="composition"],
+.cx-ziwei-pro-r2-unit>section[data-field="network"],
+.cx-ziwei-pro-r2-unit>section[data-field="transformation"],
+.cx-ziwei-pro-r2-unit>section[data-field="timing"]{grid-column:1 / -1}
+.cx-ziwei-pro-r2-unit>section[data-field="alternative"],
+.cx-ziwei-pro-r2-unit>section[data-field="reality"]{grid-column:span 6}
+.cx-ziwei-pro-r2-unit>section[data-field="composition"]{background:color-mix(in srgb,var(--cx-accent) 6%,var(--cx-surface))}
+.cx-ziwei-pro-r2-unit>section[data-field="network"],
+.cx-ziwei-pro-r2-unit>section[data-field="transformation"],
+.cx-ziwei-pro-r2-unit>section[data-field="timing"]{padding-block:1.05rem}
+@media(max-width:900px){.cx-ziwei-pro-r2-unit{grid-template-columns:1fr}.cx-ziwei-pro-r2-unit>section,.cx-ziwei-pro-r2-unit>section[data-field]{grid-column:1!important}}
