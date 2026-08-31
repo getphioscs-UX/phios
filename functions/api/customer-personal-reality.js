@@ -19,6 +19,7 @@ import {resolveZiweiLiveTargetContext} from '../zi-wei-full-production/ziwei-liv
 import {buildPersonalRealityProductRoute} from '../personal-reality-product/product-assembly.js';
 import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-reading-production.js';
 import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignContextProfile} from '../external-profile/human-design-context-transport.js';
+import {buildEcrHumanDesignComparisonIR} from '../external-profile/ecr-human-design-comparison-ir.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -364,9 +365,14 @@ export async function onRequestPost(context){
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
   const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
+  let ecrHumanDesignComparison=null;
+  if(humanDesignContext){
+    const ecrAcceptedReading=results.find(result=>result.ok&&result.spec?.methodCode==='EMBODIED_CONFIGURATION')?.readingMethod||null;
+    if(ecrAcceptedReading){try{ecrHumanDesignComparison=buildEcrHumanDesignComparisonIR({acceptedEcrReading:ecrAcceptedReading,humanDesignContext,locale})}catch{ecrHumanDesignComparison=null}}
+  }
   const crossPerspectiveReading=combinedReading;
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,humanDesignContext});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,humanDesignContext,ecrHumanDesignComparison});
   return json({
     ok:true,
     view,
