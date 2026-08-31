@@ -21,6 +21,7 @@ import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-read
 import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignContextProfile} from '../external-profile/human-design-context-transport.js';
 import {buildEcrHumanDesignComparisonIR} from '../external-profile/ecr-human-design-comparison-ir.js';
 import {buildEcrHumanDesignRealityBridgeIR} from '../external-profile/ecr-human-design-reality-bridge.js';
+import {buildProgressiveCurrentRealityIntake,buildRealityComparisonCandidates} from '../current-reality/personal-current-reality-runtime.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -219,7 +220,7 @@ function stage(locale,stageId,state,enLabel,zhLabel,enDetail,zhDetail){
   return freeze({stageId,state,label:locale==='zh-Hans'?zhLabel:enLabel,detail:locale==='zh-Hans'?zhDetail:enDetail});
 }
 
-function buildReadingView({methods,selectedCount,calculationCount,locale,combinedReading=null,ziweiFullProduction=null,singleZiwei=false,hasPublishableNativeReport=false,hasExplicitBaziTiming=false}){
+function buildReadingView({methods,selectedCount,calculationCount,locale,combinedReading=null,ziweiFullProduction=null,singleZiwei=false,hasPublishableNativeReport=false,currentRealityCandidateCount=0}){
   const readable=methods.filter(item=>item.state==='READY_TO_READ');
   const fullZiweiReady=singleZiwei&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
   const allCalculated=calculationCount===selectedCount;
@@ -241,7 +242,7 @@ function buildReadingView({methods,selectedCount,calculationCount,locale,combine
       stage(locale,'METHOD_CALCULATION',allCalculated?'PREPARED':'NEEDS_INFORMATION','Method calculation','方法计算',allCalculated?'All selected calculations completed.':'Some selected calculations still need attention.',allCalculated?'所选方法都已完成计算。':'部分所选方法仍需要补充资料。'),
       stage(locale,'METHOD_INTERPRETATION',allReadable?'READABLE':readable.length?'READABLE':'NEEDS_INFORMATION','Method interpretation','方法解释',allReadable?'All selected method readings are ready.':readable.length?'Some method readings are ready; the remaining methods stay open.':'No customer-readable method interpretation is ready yet.',allReadable?'所选方法的解释都可以阅读。':readable.length?'部分方法解释可以阅读，其余部分继续保持开放。':'目前还没有可面向客户阅读的方法解释。'),
       stage(locale,'COMBINED_READING',combinedReady?'READABLE':'NOT_STARTED','Cross-perspective reading','跨视角读取',combinedReady?'A governed cross-perspective reading is available after the distinct method readings.':'A governed cross-perspective reading appears only when at least two accepted method readings are eligible.',combinedReady?'各方法完整读取之后，已经形成受治理的跨视角读取。':'只有至少两个已获准的方法读取符合条件时，才会形成受治理的跨视角读取。'),
-      stage(locale,'CURRENT_REALITY',(fullZiweiReady||hasExplicitBaziTiming)?'READABLE':'NOT_STARTED','Current timing context','当前时间层',fullZiweiReady?'An explicit, editable target date/time/timezone was used for the current Da Xian and annual layers. This is symbolic timing context, not lived-reality evidence.':hasExplicitBaziTiming?'An explicit target date, time and timezone were used for the BaZi Da Yun / Liu Nian timing layer. This is symbolic timing context, not lived-reality evidence.':'No current method timing context has been established here.',fullZiweiReady?'已使用明确且可修改的目标日期、时间与时区建立当前大限及流年层；这是象征性时间上下文，不是现实经历证据。':hasExplicitBaziTiming?'已使用明确的目标日期、时间与时区建立八字大运／流年时间层；这是象征性时间上下文，不是现实经历证据。':'目前尚未建立当前方法的时间上下文。'),
+      stage(locale,'CURRENT_REALITY',currentRealityCandidateCount>0?'WAITING_FOR_CONFIRMATION':'NOT_STARTED','Current Reality','当前现实',currentRealityCandidateCount>0?'Your reading is ready for optional lived-reality comparison. Nothing is inferred until you add or confirm your own observations.':'Current Reality becomes available after at least one governed method reading is ready.',currentRealityCandidateCount>0?'读取已经可以进入可选的现实对照；在你亲自填写或确认以前，系统不会推断你的现实状态。':'至少一个受治理的方法读取准备好之后，才会进入 Current Reality。'),
       stage(locale,'FULL_REPORT',(fullZiweiReady||hasPublishableNativeReport)?'READABLE':'NOT_STARTED','Full report','完整报告',fullZiweiReady?'The governed Zi Wei Full Production report, interactive twelve-palace surface and topic readings are available in this result.':hasPublishableNativeReport?'A governed method-native Full Production report is available in this result.':'The full Personal Reading Report has not been composed yet.',fullZiweiReady?'本次结果已经包含受治理的紫微完整报告、十二宫互动结构与主题读取。':hasPublishableNativeReport?'本次结果已经包含受治理的方法原生 Full Production 完整报告。':'完整 Personal Reading Report 尚未生成。')
     ],
     governance:{
@@ -345,8 +346,7 @@ export async function onRequestPost(context){
     }
   }
   const hasPublishableNativeReport=Object.values(methodNativeReading).some(product=>product?.publicationDecision?.customerPublishable===true);
-  const hasExplicitBaziTiming=methodNativeReading.BZR?.temporalContext?.state==='EXPLICIT';
-  const ziweiFullProduction=results.find(result=>result.ok&&result.ziweiFullProduction)?.ziweiFullProduction||null;
+    const ziweiFullProduction=results.find(result=>result.ok&&result.ziweiFullProduction)?.ziweiFullProduction||null;
   const singleZiwei=selected.length===1&&selected[0]==='ziwei'&&ziweiFullProduction?.state==='CUSTOMER_PUBLISHABLE';
   let combinedReading=null;
   if(selected.length>=2&&selected.length<=5){
@@ -354,7 +354,9 @@ export async function onRequestPost(context){
     if(crossInputs.length>=2){try{combinedReading=await maybeBuildProductionCombinedReading({acceptedMethodReadings:crossInputs,customerIntent:body?.intent||null,confirmedXpf,hdrInternalReading:null})}catch{combinedReading=null}}
   }
   // Cross production compatibility witness: buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading})
-  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading,ziweiFullProduction,singleZiwei,hasPublishableNativeReport,hasExplicitBaziTiming});
+  const currentRealityComparisonCandidates=buildRealityComparisonCandidates(readingMethods);
+  const currentRealityIntake=buildProgressiveCurrentRealityIntake(locale);
+  const reading=buildReadingView({methods:readingMethods,selectedCount:selected.length,calculationCount:projections.length,locale,combinedReading,ziweiFullProduction,singleZiwei,hasPublishableNativeReport,currentRealityCandidateCount:currentRealityComparisonCandidates.length});
   const nativeFullReportStage=reading.map.find(item=>item.stageId==='FULL_REPORT'); void nativeFullReportStage;
   let singleMethodReading=null;
   const hasSingleNativeReport=selected.length===1&&hasPublishableNativeReport;
@@ -379,7 +381,8 @@ export async function onRequestPost(context){
   }
   const crossPerspectiveReading=combinedReading;
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge});
+  const currentReality=freeze({schemaVersion:'PHI-OS-PPR-R2-CURRENT-REALITY-ENTRY-v1.0.0',state:currentRealityComparisonCandidates.length?'OPTIONAL_INPUT_AVAILABLE':'NOT_AVAILABLE',intake:currentRealityIntake,comparisonCandidates:currentRealityComparisonCandidates,observations:null,realityComparison:null,methodCurrentRealityCorrelation:null,governance:freeze({customerInputRequiredForRealityEvidence:true,methodTimingIsCurrentReality:false,automaticPersistence:false})});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,currentReality,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge});
   return json({
     ok:true,
     view,

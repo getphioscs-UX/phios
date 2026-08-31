@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "PHI-OS-PPR-CURRENT-REALITY-W42-W46-MACHINE-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "ba3ac00864644f7ac7861df59ce8c35db7ebad97",
+  "status": "MACHINE_VERIFIED",
+  "checker": "scripts/check-ppr-current-reality-w42-w46.mjs",
+  "humanAcceptanceRequiredHere": false,
+  "required": [
+    "MFP-R current-main replay has no new BLOCKING/MATERIAL method gap",
+    "W42 explicit opt-in/purpose/minimal collection enforced",
+    "W43 progressive 8-prompt intake and independent sensitive consent",
+    "W44 CUSTOMER + SELF_REPORTED canonical observations without diagnosis promotion",
+    "W45 only four admitted correlation states and no truth conversion",
+    "W46 explicit customer control with unanswered claims remaining OPEN",
+    "Current Reality is not inferred from method timing",
+    "No automatic persistence"
+  ],
+  "machineVerified": true,
+  "results": {
+    "mfpCurrentMainReplay": "PASS",
+    "mfpSuccessorReconciliation": "PASS",
+    "w42InputContract": "PASS",
+    "w43ProgressiveIntake": "PASS",
+    "w44CanonicalObservation": "PASS",
+    "w45MethodRealityCorrelation": "PASS",
+    "w46RealityComparison": "PASS",
+    "apiRoundTrip": "PASS",
+    "sharedOwnerRegistry": "PASS",
+    "currentSystemBaseline": "PASS",
+    "cloudflareImportCompatibility": "PASS",
+    "packageAliases": "PASS",
+    "hdProR3CurrentAuthority": "PASS"
+  },
+  "knownBaselineDrift": [
+    {
+      "checker": "check:ppr-r2-w8-w12",
+      "cause": "Historical ECR renderer token assertion expects PHI Card visual summary in product-renderer.js after the current ECR successor moved the visual companion copy into its dedicated report renderer.",
+      "reproducedOnUntouchedAccountZip": true,
+      "introducedByThisWork": false
+    },
+    {
+      "checker": "check:ppr-r2-w13-w17",
+      "cause": "Historical ECR renderer token assertion expects VISUAL COMPANION · NOT A RANDOM DRAW in product-renderer.js after the current ECR successor moved that copy out of the orchestrator.",
+      "reproducedOnUntouchedAccountZip": true,
+      "introducedByThisWork": false
+    }
+  ]
+}
