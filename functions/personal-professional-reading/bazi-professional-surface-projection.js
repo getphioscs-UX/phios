@@ -318,6 +318,76 @@ function topicProfessionalModule({tenGods,strength,relationships,pattern,priorit
  return freeze({schemaVersion:'PHI-OS-BAZI-CX-PRO-PROFESSIONAL-TOPIC-READING-v1.0.0',work:'BAZI-CX-PRO-W8',topicCount:topics.length,topics:freeze(topics),boundaries:freeze({requiredTopics:freeze(TOPIC_SPECS.map(x=>x.topicCode)),singleSymbolVerdictAllowed:false,fortunePredictionCreated:false,goodBadScoreCreated:false,identityLabelCreated:false})});
 }
 
+
+const TOPIC_BY_CODE=Object.freeze(Object.fromEntries(TOPIC_SPECS.map(x=>[x.topicCode,x])));
+function temporalTenGodGroups(actor){
+ const stemTenGodCode=actor?.stemTenGod?.code||null,stemGroup=stemTenGodCode?TEN_GOD_GROUP[stemTenGodCode]||'UNAVAILABLE':null,hiddenTenGodCodes=uniq(list(actor?.branchHiddenTenGods).map(x=>x?.tenGodCode)),hiddenGroups=uniq(hiddenTenGodCodes.map(code=>TEN_GOD_GROUP[code]||'UNAVAILABLE').filter(x=>x!=='UNAVAILABLE')),codes=uniq([stemTenGodCode,...hiddenTenGodCodes]);
+ return freeze({stemTenGodCode,stemGroup:stemTenGodCode&&stemGroup&&stemGroup!=='UNAVAILABLE'?stemGroup:null,hiddenTenGodCodes:freeze(hiddenTenGodCodes),hiddenGroups:freeze(hiddenGroups),tenGodCodes:freeze(codes),functionGroups:freeze(uniq([stemGroup,...hiddenGroups].filter(x=>x&&x!=='UNAVAILABLE')))});
+}
+function temporalInteractionFacts(items){
+ return freeze(list(items).map((x,index)=>freeze({interactionId:`TEMP-${index+1}-${x?.type||'RELATION'}`,type:x?.type||null,members:freeze(list(x?.members)),natalPosition:x?.natalPosition||null,natalPositions:freeze(list(x?.natalPositions)),leftActor:x?.leftActor||null,rightActor:x?.rightActor||null,leftPosition:x?.leftPosition||null,rightPosition:x?.rightPosition||null,transformationEstablished:x?.transformationEstablished===true})));
+}
+function priorityRefsForTemporalActor(actor,{priority,interactions=[]}={}){
+ const groups=new Set(temporalTenGodGroups(actor).functionGroups),tenGodCodes=new Set(temporalTenGodGroups(actor).tenGodCodes),interactionPositions=new Set(list(interactions).flatMap(x=>[x?.natalPosition,...list(x?.natalPositions)]).filter(Boolean));
+ return freeze(list(priority?.themes).filter(theme=>{
+  if(theme?.themeType==='CARRYING')return true;
+  if(theme?.themeType==='TEN_GOD_GROUP')return groups.has(theme.themeKey);
+  if(theme?.themeType==='PATTERN')return tenGodCodes.has(theme?.facts?.tenGodCode);
+  if(theme?.themeType==='RELATIONSHIP')return list(theme?.facts?.positions).some(x=>interactionPositions.has(x));
+  if(theme?.themeType==='TIMING')return true;
+  return false;
+ }).map(x=>x.priorityId));
+}
+function topicActivationForActor(topic,actor,{interactions=[]}={}){
+ const actorMeta=temporalTenGodGroups(actor),groups=new Set(actorMeta.functionGroups),spec=TOPIC_BY_CODE[topic?.topicCode]||{primaryGroups:[],secondaryGroups:[]};
+ const relevantGroupCodes=uniq([...list(spec.primaryGroups),...list(spec.secondaryGroups)]),matchedGroups=relevantGroupCodes.filter(code=>groups.has(code));
+ const topicPositions=new Set(list(topic?.relationshipInterfaces).flatMap(x=>list(x.positions)).filter(Boolean));
+ const matchingInteractions=list(interactions).filter(x=>{const positions=[x?.natalPosition,...list(x?.natalPositions)].filter(Boolean);return positions.some(pos=>topicPositions.has(pos));});
+ const stemPrimary=actorMeta.stemGroup&&list(spec.primaryGroups).includes(actorMeta.stemGroup),stemSecondary=actorMeta.stemGroup&&list(spec.secondaryGroups).includes(actorMeta.stemGroup),hiddenPrimary=actorMeta.hiddenGroups.some(g=>list(spec.primaryGroups).includes(g)),hiddenSecondary=actorMeta.hiddenGroups.some(g=>list(spec.secondaryGroups).includes(g));
+ const activationBand=stemPrimary?'PRIMARY':(hiddenPrimary||stemSecondary)?'SUPPORTING':(hiddenSecondary||matchingInteractions.length)?'CONTEXT':'NONE',active=activationBand!=='NONE';
+ return freeze({active,activationBand,stemGroup:actorMeta.stemGroup,hiddenGroups:actorMeta.hiddenGroups,matchedGroups:freeze(matchedGroups),matchedTenGodCodes:freeze(actorMeta.tenGodCodes.filter(code=>matchedGroups.includes(TEN_GOD_GROUP[code]))),interactionCount:matchingInteractions.length,interactionTypes:freeze(uniq(matchingInteractions.map(x=>x.type)))});
+}
+function daYunTimelineEntry(cycle,{priority,topics,currentCycleNumber=null}={}){
+ const interactions=temporalInteractionFacts(cycle?.natalInteractions),actor=freeze({stemTenGod:cycle?.stemTenGod||null,branchHiddenTenGods:freeze(list(cycle?.branchHiddenTenGods))});
+ const topicActivations=freeze(list(topics?.topics).map(topic=>freeze({topicCode:topic.topicCode,...topicActivationForActor(topic,actor,{interactions})})).filter(x=>x.active));
+ return freeze({
+  cycleNumber:cycle?.cycleNumber??null,startAge:cycle?.startAge??null,endAge:cycle?.endAge??null,certainty:cycle?.certainty||null,isSelected:currentCycleNumber!=null&&cycle?.cycleNumber===currentCycleNumber,
+  pillar:freeze({stem:freeze({...cycle?.pillar?.stem}),branch:freeze({...cycle?.pillar?.branch})}),stemTenGod:cycle?.stemTenGod?freeze({...cycle.stemTenGod}):null,branchHiddenTenGods:freeze(list(cycle?.branchHiddenTenGods).map(x=>freeze({...x}))),
+  functionGroups:temporalTenGodGroups(actor).functionGroups,priorityRefs:priorityRefsForTemporalActor(actor,{priority,interactions}),topicActivations,interactions,
+  activationEvidence:freeze({interactionCount:Number(cycle?.activationEvidence?.interactionCount)||interactions.length,natalPositions:freeze(list(cycle?.activationEvidence?.natalPositions))}),
+  boundaries:freeze({cycleThemeIsNotEventPrediction:true,priorityRefDoesNotMeanGuaranteedOutcome:true,topicActivationMeansStructuralRelevanceOnly:true})
+ });
+}
+function currentTopicTimeline(topics,{currentDaYun,annual,priority,timing}={}){
+ const dyInteractions=temporalInteractionFacts(timing?.interactions?.currentDaYunToNatal),lnInteractions=temporalInteractionFacts(timing?.interactions?.liuNianToNatal),cross=temporalInteractionFacts([...(list(timing?.interactions?.liuNianToCurrentDaYun)),...(list(timing?.interactions?.crossLayerGroups))]);
+ return freeze(list(topics?.topics).map(topic=>{
+  const dy=topicActivationForActor(topic,currentDaYun||{}, {interactions:dyInteractions}),ln=topicActivationForActor(topic,annual||{}, {interactions:lnInteractions});
+  const relatedGroupSet=new Set(list(topic?.relevantGroups).map(x=>x.groupCode)),crossRelevant=cross.filter(x=>{
+   if(!x)return false;
+   if(!dy.active&&!ln.active)return false;
+   const dyGroups=new Set(temporalTenGodGroups(currentDaYun||{}).functionGroups),lnGroups=new Set(temporalTenGodGroups(annual||{}).functionGroups);
+   return [...relatedGroupSet].some(g=>dyGroups.has(g)||lnGroups.has(g));
+  });
+  const activationState=dy.active&&ln.active?'DA_YUN_LIU_NIAN_CONVERGENCE':dy.active?'DA_YUN_ACTIVE':ln.active?'LIU_NIAN_ACTIVE':'NATAL_BASELINE_ONLY';
+  return freeze({topicCode:topic.topicCode,activationState,natalState:topic.state,priorityRefs:freeze(list(topic.priorityRefs)),daYun:dy,liuNian:ln,crossLayerInteractionCount:crossRelevant.length,crossLayerInteractionTypes:freeze(uniq(crossRelevant.map(x=>x.type))),boundaries:freeze({activationIsNotPrediction:true,convergenceIsNotCertainty:true,natalTopicRemainsPrimaryContext:true})});
+ }));
+}
+function professionalTimelineModule({timing,priority,topics,temporalState='UNAVAILABLE'}={}){
+ const currentCycleNumber=timing?.currentDaYun?.cycleNumber??null;
+ const daYunTimeline=freeze(list(timing?.allDaYun).map(cycle=>daYunTimelineEntry(cycle,{priority,topics,currentCycleNumber})));
+ const currentDaYun=timing?.currentDaYun?freeze({...timing.currentDaYun}):null,annual=timing?.annual?freeze({...timing.annual}):null;
+ const topicTimeline=currentTopicTimeline(topics,{currentDaYun,annual,priority,timing});
+ const currentDaYunMeta=temporalTenGodGroups(currentDaYun||{}),annualMeta=temporalTenGodGroups(annual||{});
+ const currentInteractions=freeze({daYunToNatal:temporalInteractionFacts(timing?.interactions?.currentDaYunToNatal),liuNianToNatal:temporalInteractionFacts(timing?.interactions?.liuNianToNatal),daYunToLiuNian:temporalInteractionFacts(timing?.interactions?.liuNianToCurrentDaYun),crossLayerGroups:temporalInteractionFacts(timing?.interactions?.crossLayerGroups)});
+ return freeze({
+  schemaVersion:'PHI-OS-BAZI-CX-PRO-DA-YUN-LIU-NIAN-PROFESSIONAL-TIMELINE-v1.0.0',work:'BAZI-CX-PRO-W9',state:temporalState,targetContext:timing?.targetContext||null,
+  natalPriorityRefs:freeze(list(priority?.themes).map(x=>x.priorityId)),natalPriorityCount:Number(priority?.themeCount)||0,
+  daYunTimeline,currentWindow:freeze({available:temporalState==='EXPLICIT'&&Boolean(currentDaYun||annual),completeness:temporalState!=='EXPLICIT'?'NO_TARGET':currentDaYun&&annual?'FULL':currentDaYun?'DA_YUN_ONLY':annual?'LIU_NIAN_ONLY':'TARGET_ONLY',currentDaYun,annual,currentDaYunFunctionGroups:currentDaYunMeta.functionGroups,annualFunctionGroups:annualMeta.functionGroups,currentDaYunPriorityRefs:priorityRefsForTemporalActor(currentDaYun||{},{priority,interactions:currentInteractions.daYunToNatal}),annualPriorityRefs:priorityRefsForTemporalActor(annual||{},{priority,interactions:currentInteractions.liuNianToNatal}),interactions:currentInteractions,topicTimeline}),
+  topicCodes:freeze(list(topics?.topics).map(x=>x.topicCode)),
+  boundaries:freeze({natalPriorityRemainsBaseline:true,daYunDoesNotOverwriteNatal:true,liuNianDoesNotOverwriteDaYun:true,topicActivationIsStructuralRelevanceNotEventPrediction:true,convergenceIsNotCertainty:true,currentDateInferred:false,browserTimezoneInferred:false,goodBadScoreCreated:false,fortunePredictionCreated:false,eventPredictionCreated:false})
+ });
+}
+
 function schoolModules(readingIR,report){
  const views=list(readingIR?.sections?.schoolViews?.views);
  return freeze(views.map(view=>{const owner=ownerFor(readingIR,'SCHOOL_QUALIFIED_VIEW',view.schoolCode),block=reportBlock(report,view.schoolCode);return freeze({
@@ -369,9 +439,10 @@ export function buildBaziProfessionalSurfaceModules({readingIR,report,temporalSt
  const fiveElements=fiveElementModule(readingIR),tenGods=tenGodModule(readingIR),dayMasterStrength=dayMasterStrengthModule(readingIR),relationships=relationshipModule(readingIR,{tenGods,strength:dayMasterStrength}),pattern=patternModule(readingIR,{tenGods,strength:dayMasterStrength,relationships}),timing=timingModule(readingIR,temporalState);
  const wholeChartPriority=wholeChartPriorityModule({tenGods,strength:dayMasterStrength,relationships,pattern,timing,temporalState});
  const professionalTopics=topicProfessionalModule({tenGods,strength:dayMasterStrength,relationships,pattern,priority:wholeChartPriority});
+ const professionalTimeline=professionalTimelineModule({timing,priority:wholeChartPriority,topics:professionalTopics,temporalState});
  return freeze({
-  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W6-v1.0.0',extensionVersion:'BAZI-CX-PRO-W8-v1.0.0',
-  fiveElements,tenGods,dayMasterStrength,relationships,pattern,wholeChartPriority,professionalTopics,schools:schoolModules(readingIR,report),timing,
+  schemaVersion:'PHI-OS-PPR-C1-BAZI-PROFESSIONAL-SURFACE-MODULES-v1.0.0',moduleVersion:'BAZI-CX-PRO-W6-v1.0.0',extensionVersion:'BAZI-CX-PRO-W8-v1.0.0',timelineExtensionVersion:'BAZI-CX-PRO-W9-v1.0.0',
+  fiveElements,tenGods,dayMasterStrength,relationships,pattern,wholeChartPriority,professionalTopics,professionalTimeline,schools:schoolModules(readingIR,report),timing,
   customerSafeGraph:buildBaziCustomerSafeStructureGraph({readingIR,temporalState}),
   realityComparison:realityComparisonModule(readingIR,temporalState),
   boundaries:freeze({createsMeaning:false,recalculatesBazi:false,mergesSchools:false,resolvesUnresolvedPattern:false,infersTemporalContext:false,recalculatesEvidenceGraph:false,exposesRawEvidenceGraphIds:false,usesPprR3SpecialistPort:true,modifiesSharedPersonalRealitySurface:false})
