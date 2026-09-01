@@ -17,10 +17,12 @@ export async function invokeOpenAIStructured({env={},fetcher=globalThis.fetch,sy
   const model=clean(env.OPENAI_NARRATIVE_MODEL)||clean(env.OPENAI_MODEL);
   if(!model)fail('OPENAI_NARRATIVE_MODEL_NOT_CONFIGURED');
   if(typeof fetcher!=='function')fail('NARRATIVE_PROVIDER_FETCH_UNAVAILABLE');
-  const response=await fetcher(RESPONSES_URL,{method:'POST',headers:{'content-type':'application/json',authorization:`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify({
+  let response;
+  try{response=await fetcher(RESPONSES_URL,{method:'POST',headers:{'content-type':'application/json',authorization:`Bearer ${env.OPENAI_API_KEY}`},body:JSON.stringify({
     model,store:false,input:[{role:'system',content:String(systemPrompt||'')},{role:'user',content:typeof userPayload==='string'?userPayload:JSON.stringify(userPayload)}],
     text:{format:{type:'json_schema',name:schemaName,strict:true,schema}},max_output_tokens:maxOutputTokens
-  })});
+  })});}
+  catch(error){const name=String(error?.name||'').toLowerCase(),code=String(error?.code||'').toUpperCase();if(name==='aborterror'||code==='ETIMEDOUT'||code==='UND_ERR_CONNECT_TIMEOUT')fail('NARRATIVE_PROVIDER_TIMEOUT');fail('NARRATIVE_PROVIDER_NETWORK_FAILED',{message:clean(error?.message)});}
   const raw=await response.text();let data;
   try{data=JSON.parse(raw)}catch{fail('NARRATIVE_PROVIDER_UNREADABLE_RESPONSE');}
   if(!response.ok)fail('NARRATIVE_PROVIDER_REQUEST_FAILED',{status:response.status,message:data?.error?.message||null});

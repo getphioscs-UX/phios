@@ -156,7 +156,7 @@ export async function compileNarrativeBrief(input={}){
     sensitiveBoundaries:sensitiveBoundaries(report,w54),
     styleIntent:stylePolicy(input.styleIntent),
     customerContext:customerContextPolicy(input.customerContext),
-    narrativeFreedom:{...DEFAULT_FREEDOM},
+    narrativeFreedom:{...DEFAULT_FREEDOM,...(input.precisionBoundary?{precisionBoundary:input.precisionBoundary}:{})},
     prohibitedClaimClasses:prohibitedClasses(w53,w54)
   };
   const briefSemanticDigest=await sha256Stable(seed);
