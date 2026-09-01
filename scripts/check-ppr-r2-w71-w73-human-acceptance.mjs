@@ -1,0 +1,3 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+for(const work of ['W71','W72','W73']){const k=work.toLowerCase(),r=JSON.parse(fs.readFileSync(`content/personal-reading/human-acceptance/review/${k}-human-review-results-v1.json`,'utf8'));assert.equal(r.status,'HUMAN_ACCEPTED_24_OF_24',`${work} human acceptance is not complete`);assert.deepEqual({accepted:r.accepted,revised:r.revised,rejected:r.rejected,pending:r.pending},{accepted:24,revised:0,rejected:0,pending:0});assert.equal(r.results.every(x=>x.decision==='ACCEPT'),true);}
+console.log('✓ W71-W73 Human acceptance passed: all three campaigns are 24/24 accepted with 0 revised/rejected/pending.');
