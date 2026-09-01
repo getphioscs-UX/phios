@@ -5,7 +5,7 @@
   "principle": "Historical freezes are immutable lineage evidence and are not current runtime byte requirements.",
   "files": {
     "perspectives/personal/index.html": {
-      "currentSha256": "4ebe1cfcf3edcadbe8cfe04f3acebd2ea33984db1aba8586dfd3be5503550571",
+      "currentSha256": "db168dadb03c873122b938d8fde7793134e6e27f7cfbc92bddd18e92d66894c7",
       "recognizedPredecessors": [
         "881a45a6b9c730ed1d61ba2ca30355b21548fddb6e645c873cd5e407662d400b",
         "81a46efab60d5337fc4802ac5ffff26dab3fdf7ec388de5298de2c38e60c3d3c",
@@ -20,7 +20,8 @@
         "5865689fc8c9d332762584141058aea0a5d1da53448ea3d7e739857ec71b1b36",
         "fba83495e1bc6899485cb6b58eb24b28213fe34320a1786318cf63885036d08e",
         "766b690397b0263150f9355391f7816bab3f57252c0947b5f5d79185f90eff02",
-        "df9d9c402c9a1a9e6f2de79a68f98d78865d80af6a9e10cacfc7e0eb54882b09"
+        "df9d9c402c9a1a9e6f2de79a68f98d78865d80af6a9e10cacfc7e0eb54882b09",
+        "4ebe1cfcf3edcadbe8cfe04f3acebd2ea33984db1aba8586dfd3be5503550571"
       ],
       "requiredTokens": [
         "rel=\"canonical\" href=\"/perspectives/personal/\"",
@@ -33,7 +34,9 @@
         "共同时间资料 · 只填一次",
         "traditionalCalculationSex",
         "data-cx-external-profile-confirmation",
-        "data-cx-hd-target-reference"
+        "data-cx-hd-target-reference",
+        "Human Design transit overlay",
+        "Human Design 流日叠加"
       ],
       "forbiddenTokens": [
         ">Φ<",
@@ -42,7 +45,7 @@
       ]
     },
     "assets/customer-ui/js/surfaces/personal-reality.js": {
-      "currentSha256": "88992d976b112663e3928722c70b5f90c4f0a79ca79196eed9d1eabd77dbaf60",
+      "currentSha256": "c6bb48ac75d3dae671b3f7792d6269574f2a04950c0dce20a27153bdadfbaa94",
       "recognizedPredecessors": [
         "3fe7a5269609e3923df48f5d934aa2b7437ccff7cdd51f3339cf69a832975e30",
         "286e58401cf84885f805b330d33377dd7b10313c6e520233fc67e066436b9f51",
@@ -59,7 +62,8 @@
         "f437180f22bbd530b8cc16098f614e14dd574c949a694ef6d329536f0f83f1d5",
         "9bb24dc5c5912fbc854767302ddcfbc3294e11f6c43707f84761effc05ba0d3c",
         "f4533680a9e8f851e530d947cc6580e9931aa81256962b0da93a435bac90d987",
-        "dd7bf9ef6beafdcf773bc3dcd6145008570d9d9fd42917ed50dacf6b6dc8f514"
+        "dd7bf9ef6beafdcf773bc3dcd6145008570d9d9fd42917ed50dacf6b6dc8f514",
+        "88992d976b112663e3928722c70b5f90c4f0a79ca79196eed9d1eabd77dbaf60"
       ],
       "requiredTokens": [
         "collectMethodInputExtensions",
@@ -70,7 +74,10 @@
         "baziTemporalContext",
         "ecrTargetContext",
         "hdrTargetContext",
-        "mountHdrTargetActivationReference",
+        "mountHdrTransitOverlay",
+        "hdrTransitOverlay",
+        "TRANSIT_OVERLAY_ONLY",
+        "Design + Personality",
         "renderProductRoute",
         "birthLocationSnapshot",
         "confirmedExternalProfile:externalEnabled?confirmedExternalProfile:null",
@@ -145,7 +152,7 @@
       "forbiddenTokens": []
     },
     "functions/api/customer-personal-reality.js": {
-      "currentSha256": "936667c172c148f1d46f7ca0b264ab74bbfff59961b694fa2f2ff1e74cce5337",
+      "currentSha256": "f0fef9455d31fd4b8ce0fd7bfb189061ca6c50f899b7ab3f49e62b66a30af199",
       "recognizedPredecessors": [
         "12ad48f7cdea156b86f3b75f682d3ffc09cc80a270633af0b798089bb43a292a",
         "eedd72ed2fa5129f64b19788ba42da6bfd2141b8cb5c5da390db8378fb0a6822",
@@ -153,7 +160,8 @@
         "bd7a98b4a22eaafb4f2718993ab3cfbf3f173b95a69acab0076568526a49f2ce",
         "74d287fa995a1dd62dcdcb22e96ddabd53a8cf55aba13c5c7a0e511ea7148490",
         "ad5a0a6284258e9c234c2a9bff982cd1863391a1874c867efdb6f4e1b0b93217",
-        "bb9001110505b60be01cff32424b941bd44173038972c66f6946c02c5762a8cb"
+        "bb9001110505b60be01cff32424b941bd44173038972c66f6946c02c5762a8cb",
+        "936667c172c148f1d46f7ca0b264ab74bbfff59961b694fa2f2ff1e74cce5337"
       ],
       "requiredTokens": [
         "consumeConfirmedBirthLocationSnapshot",
@@ -167,8 +175,9 @@
         "buildProgressiveCurrentRealityIntake",
         "methodTimingIsCurrentReality:false",
         "buildEcrTargetContextSnapshot",
-        "buildHdrTargetActivationReference",
-        "hdrTargetActivationReference"
+        "buildHdrTransitOverlay",
+        "hdrTransitOverlay",
+        "hdrTargetActivationReference:hdrTransitOverlay"
       ],
       "forbiddenTokens": []
     },
@@ -218,26 +227,38 @@
       "forbiddenTokens": []
     },
     "functions/api/customer-external-profile-shadow-check.js": {
-      "currentSha256": "ee24d6da4e0c3aec8782ccc2effac7489600a8da446f32dd2feeaf1642144ab3",
+      "currentSha256": "5f98fee0198ab84038c140a5687c73dac75a2fc2218066fa48b5fe74010c97b3",
       "recognizedPredecessors": [
         "32e20568427c57632e7ca57886f60ea29072c22089f1da88308b69002d3f2e40",
-        "99733adb331e8ce0c7b6645f12756f8e3ea47eac8fbbaf2e55c729a40009841a"
+        "99733adb331e8ce0c7b6645f12756f8e3ea47eac8fbbaf2e55c729a40009841a",
+        "ee24d6da4e0c3aec8782ccc2effac7489600a8da446f32dd2feeaf1642144ab3"
       ],
       "requiredTokens": [
-        "buildHdrTargetActivationReference",
-        "targetActivationReference",
+        "buildHdrTransitOverlay",
+        "transitOverlay",
+        "targetActivationReference:transitOverlay",
         "birthCrossCheckRequested",
-        "TARGET_REFERENCE_ONLY"
+        "TRANSIT_OVERLAY_ONLY",
+        "transitOverlaySeparateFromBirthCrossCheck:true"
       ],
       "forbiddenTokens": []
     },
     "functions/external-profile/hdr-target-activation-reference.js": {
-      "currentSha256": "038568cdb46f014f77ce043bd26b5f0af3cc0b8a44f6f3c5c774849b0bc628fa",
-      "recognizedPredecessors": [],
+      "currentSha256": "7355eaab31ad1be41b9b1b190726eabaa974afc63e902ba94240c915c76381e3",
+      "recognizedPredecessors": [
+        "038568cdb46f014f77ce043bd26b5f0af3cc0b8a44f6f3c5c774849b0bc628fa"
+      ],
       "requiredTokens": [
+        "HDR_TRANSIT_OVERLAY_VERSION",
         "HDR_TARGET_ACTIVATION_REFERENCE_VERSION",
+        "buildHdrTransitOverlay",
         "buildHdrTargetActivationReference",
-        "targetMomentReferenceOnly",
+        "createTransitOverlay",
+        "usesConfirmedNatalChart:true",
+        "natalBaselineImmutable:true",
+        "transitLayer:'TRANSIT_PERSONALITY'",
+        "transitDesignLayerCalculated:false",
+        "temporaryStructureDerived:true",
         "confirmedChartChanged:false"
       ],
       "forbiddenTokens": []

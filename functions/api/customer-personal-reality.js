@@ -22,7 +22,7 @@ import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignC
 import {buildEcrHumanDesignComparisonIR} from '../external-profile/ecr-human-design-comparison-ir.js';
 import {buildEcrHumanDesignRealityBridgeIR} from '../external-profile/ecr-human-design-reality-bridge.js';
 import {buildEcrTargetContextSnapshot} from '../embodied-configuration/ecr-target-context-runtime.js';
-import {buildHdrTargetActivationReference} from '../external-profile/hdr-target-activation-reference.js';
+import {buildHdrTransitOverlay} from '../external-profile/hdr-target-activation-reference.js';
 import {buildProgressiveCurrentRealityIntake,buildRealityComparisonCandidates} from '../current-reality/personal-current-reality-runtime.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
@@ -390,8 +390,8 @@ export async function onRequestPost(context){
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
   let ecrTargetContextSnapshot=null;const ecrResult=results.find(result=>result.ok&&result.spec?.methodCode==='EMBODIED_CONFIGURATION');
   if(ecrTargetContext&&ecrResult?.canonicalProjection){try{ecrTargetContextSnapshot=await buildEcrTargetContextSnapshot({canonicalProjection:ecrResult.canonicalProjection,targetContext:ecrTargetContext,locale})}catch(error){ecrTargetContextSnapshot=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'ECR_TARGET_CONTEXT_RUNTIME_UNAVAILABLE'})}}
-  let hdrTargetActivationReference=null;
-  if(hdrTargetContext&&confirmedXpf){try{hdrTargetActivationReference=await buildHdrTargetActivationReference({targetContext:hdrTargetContext,confirmedProfile:confirmedXpf})}catch(error){hdrTargetActivationReference=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'HDR_TARGET_REFERENCE_UNAVAILABLE',boundary:freeze({confirmedChartChanged:false,interpretationCreated:false,persisted:false})})}}
+  let hdrTransitOverlay=null;
+  if(hdrTargetContext&&confirmedXpf){try{hdrTransitOverlay=await buildHdrTransitOverlay({targetContext:hdrTargetContext,confirmedProfile:confirmedXpf})}catch(error){hdrTransitOverlay=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'HDR_TRANSIT_OVERLAY_UNAVAILABLE',boundary:freeze({usesConfirmedNatalChart:true,natalBaselineImmutable:true,transitDesignLayerCalculated:false,confirmedChartChanged:false,interpretationCreated:false,persisted:false})})}}
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
   const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
   let ecrHumanDesignComparison=null;
@@ -408,7 +408,7 @@ export async function onRequestPost(context){
   const crossPerspectiveReading=combinedReading;
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
   const currentReality=freeze({schemaVersion:'PHI-OS-PPR-R2-CURRENT-REALITY-ENTRY-v1.0.0',state:currentRealityComparisonCandidates.length?'OPTIONAL_INPUT_AVAILABLE':'NOT_AVAILABLE',intake:currentRealityIntake,comparisonCandidates:currentRealityComparisonCandidates,observations:null,realityComparison:null,methodCurrentRealityCorrelation:null,governance:freeze({customerInputRequiredForRealityEvidence:true,methodTimingIsCurrentReality:false,automaticPersistence:false})});
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,currentReality,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge,ecrTargetContext:ecrTargetContextSnapshot,hdrTargetActivationReference});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,currentReality,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge,ecrTargetContext:ecrTargetContextSnapshot,hdrTransitOverlay,hdrTargetActivationReference:hdrTransitOverlay});
   return json({
     ok:true,
     view,

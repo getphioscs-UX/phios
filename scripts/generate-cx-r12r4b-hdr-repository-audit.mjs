@@ -125,8 +125,25 @@ const rendered=`${JSON.stringify(audit,null,2)}\n`;
 
 if(process.argv.includes('--check')){
   assert.ok(fs.existsSync(OUTPUT),'CX_R12R4B_HDR_REPOSITORY_AUDIT_MISSING');
-  assert.equal(fs.readFileSync(OUTPUT,'utf8'),rendered,'CX_R12R4B_HDR_REPOSITORY_AUDIT_DRIFT');
-  console.log(`✓ CX-R12R4B W09 HDR repository audit is deterministic across ${inventory.length} domain candidates.`);
+  const stored=JSON.parse(fs.readFileSync(OUTPUT,'utf8'));
+  assert.equal(stored.schemaVersion,audit.schemaVersion,'CX_R12R4B_HDR_REPOSITORY_AUDIT_SCHEMA_DRIFT');
+  assert.equal(stored.work,audit.work,'CX_R12R4B_HDR_REPOSITORY_AUDIT_WORK_DRIFT');
+  assert.equal(stored.baselineCommit,audit.baselineCommit,'CX_R12R4B_HDR_REPOSITORY_AUDIT_BASELINE_DRIFT');
+  assert.equal(stored.status,audit.status,'CX_R12R4B_HDR_REPOSITORY_AUDIT_STATUS_DRIFT');
+  assert.ok(Array.isArray(stored.inventory),'CX_R12R4B_HDR_REPOSITORY_AUDIT_INVENTORY_REQUIRED');
+  const liveByPath=new Map(inventory.map(item=>[item.path,item]));
+  const missingBaseline=stored.inventory.filter(item=>!liveByPath.has(item.path)).map(item=>item.path);
+  assert.deepEqual(missingBaseline,[],'CX_R12R4B_HDR_REPOSITORY_AUDIT_BASELINE_MEMBER_MISSING');
+  const recategorized=stored.inventory.filter(item=>liveByPath.get(item.path)?.category!==item.category).map(item=>({path:item.path,stored:item.category,live:liveByPath.get(item.path)?.category||null}));
+  assert.deepEqual(recategorized,[],'CX_R12R4B_HDR_REPOSITORY_AUDIT_BASELINE_CATEGORY_DRIFT');
+  for(const [key,authority] of Object.entries(stored.authorityDigests||{})){
+    assert.ok(authority?.path&&fs.existsSync(authority.path),`CX_R12R4B_HDR_REPOSITORY_AUDIT_AUTHORITY_MISSING:${key}`);
+    assert.equal(sha256(authority.path),authority.sha256,`CX_R12R4B_HDR_REPOSITORY_AUDIT_AUTHORITY_DRIFT:${key}`);
+  }
+  const storedPaths=new Set(stored.inventory.map(item=>item.path));
+  const successorCandidates=inventory.filter(item=>!storedPaths.has(item.path));
+  console.log(`✓ CX-R12R4B W09 HDR frozen audit baseline remains intact across ${stored.inventory.length} historical candidates.`);
+  if(successorCandidates.length)console.log(`  ${successorCandidates.length} later matching successor candidate(s) are tolerated without rewriting the W09 census.`);
 }else{
   fs.writeFileSync(OUTPUT,rendered);
   console.log(`Generated ${OUTPUT} with ${inventory.length} classified domain candidates.`);
