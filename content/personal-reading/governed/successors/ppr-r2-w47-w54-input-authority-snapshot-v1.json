@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-PPR-R2-W47-W54-INPUT-AUTHORITY-SNAPSHOT-v1.0.0",
+  "baselineCommit": "22904e2f6db4c980ea86083b963c722c69f2fe7e",
+  "status": "CURRENT_INPUT_AUTHORITY_RECONCILED",
+  "methods": {
+    "acceptedMethodReadingEnvelopeRequired": true,
+    "methodIds": ["ECR", "AST", "BZR", "ZWR", "HD", "NUM"],
+    "rawCalculationInputAllowed": false
+  },
+  "profile": {
+    "optional": true,
+    "productionAdmissionRef": "content/profile/acceptance/profile-prf-w12-production-admission-v1.json",
+    "requiredStatusWhenPresent": "PRODUCTION_ADMITTED_CUTOVER_ELIGIBLE",
+    "profileSignalEnvelopeOnly": true,
+    "sourceClassPreservationRequired": true
+  },
+  "crossPerspective": {
+    "upstreamOwned": true,
+    "newAutomaticSemanticMatchingAllowed": false
+  },
+  "currentReality": {
+    "sharedOwnerPreserved": true,
+    "customerControlled": true,
+    "methodProofAllowed": false,
+    "methodDisproofAllowed": false
+  },
+  "relationship": {
+    "relW0W6UpstreamComplete": true,
+    "relationshipNarrativeCreatedByW47W54": false,
+    "nextRelationshipConsumer": "REL-W7_AFTER_W54N0"
+  }
+}

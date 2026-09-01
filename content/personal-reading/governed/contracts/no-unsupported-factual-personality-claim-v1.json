@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "PHI-OS-NO-UNSUPPORTED-FACTUAL-PERSONALITY-CLAIM-v1.0.0",
+  "work": "W54",
+  "baselineCommit": "22904e2f6db4c980ea86083b963c722c69f2fe7e",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "classes": {
+    "STYLE_ONLY": {
+      "allowed": true,
+      "evidenceRequired": false
+    },
+    "METAPHOR": {
+      "allowed": true,
+      "evidenceRequired": false
+    },
+    "NARRATIVE_TRANSITION": {
+      "allowed": true,
+      "evidenceRequired": false
+    },
+    "SUPPORTED_SYNTHESIS": {
+      "allowed": true,
+      "evidenceRequired": true
+    },
+    "NEW_FACTUAL_PERSONALITY_ASSERTION": {
+      "allowed": "ONLY_WITH_W53_EVIDENCE",
+      "evidenceRequired": true
+    },
+    "NEW_LIFE_EVENT": {
+      "allowed": "ONLY_WHEN_SOURCE_SUPPORTED",
+      "evidenceRequired": true
+    },
+    "DIAGNOSIS": {
+      "allowed": false
+    },
+    "GUARANTEED_FUTURE_EVENT": {
+      "allowed": false
+    },
+    "OBJECTIVE_RELATIONSHIP_FACT": {
+      "allowed": "ONLY_WHEN_SOURCE_SUPPORTED_AND_NOT_HIDDEN_STATE",
+      "evidenceRequired": true
+    }
+  },
+  "forbiddenAlways": [
+    "DIAGNOSIS",
+    "GUARANTEED_FUTURE_EVENT",
+    "PARTNER_HIDDEN_STATE_INFERENCE",
+    "SCIENTIFIC_VALIDATION_TRANSFER",
+    "COMPATIBILITY_PERCENTAGE",
+    "DESTINY_OR_SOULMATE_VERDICT"
+  ],
+  "gate": "check:ppr-r2:w54-no-unsupported-factual-claim"
+}

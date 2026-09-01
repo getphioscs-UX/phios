@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-PERSONAL-READING-REPORT-IR-v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "reportId",
+    "generatedAt",
+    "locale",
+    "inputSummary",
+    "executiveReading",
+    "methodReadingRefs",
+    "profileSignalRefs",
+    "profileSummary",
+    "crossPerspective",
+    "crossSourcePerspective",
+    "currentReality",
+    "sections",
+    "openQuestions",
+    "sourceIndex",
+    "technicalAppendix",
+    "governance",
+    "lineage",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-PERSONAL-READING-REPORT-IR-v2.0.0"
+    },
+    "reportId": {
+      "type": "string"
+    },
+    "generatedAt": {
+      "type": "string"
+    },
+    "locale": {
+      "enum": [
+        "en",
+        "zh-Hans"
+      ]
+    },
+    "inputSummary": {
+      "type": "object"
+    },
+    "executiveReading": {
+      "type": "object"
+    },
+    "methodReadingRefs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "profileSignalRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "profileSummary": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "crossPerspective": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "crossSourcePerspective": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "currentReality": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "$ref": "PHI-OS-PERSONAL-READING-SECTION-EVIDENCE-v2"
+      }
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceIndex": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "technicalAppendix": {
+      "type": "object"
+    },
+    "governance": {
+      "type": "object"
+    },
+    "lineage": {
+      "type": "object"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}
