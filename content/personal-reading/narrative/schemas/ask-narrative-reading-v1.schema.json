@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-ASK-NARRATIVE-READING-v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "narrativeId",
+    "sourceBriefDigest",
+    "contextDigest",
+    "answer",
+    "supportRefs",
+    "openRefs",
+    "currentRealityAdditionRefs",
+    "quotaConsumption",
+    "storedNarrativeMutated",
+    "sourceBriefMutated",
+    "recurringQuotaCreated",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-ASK-NARRATIVE-READING-v1.0.0"
+    },
+    "narrativeId": {
+      "type": "string"
+    },
+    "sourceBriefDigest": {
+      "type": "string"
+    },
+    "contextDigest": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "string"
+    },
+    "supportRefs": {
+      "type": "array"
+    },
+    "openRefs": {
+      "type": "array"
+    },
+    "currentRealityAdditionRefs": {
+      "type": "array"
+    },
+    "quotaConsumption": {
+      "type": "object"
+    },
+    "storedNarrativeMutated": {
+      "const": false
+    },
+    "sourceBriefMutated": {
+      "const": false
+    },
+    "recurringQuotaCreated": {
+      "const": false
+    },
+    "semanticDigest": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-NARRATIVE-READING-IR-v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "narrativeId",
+    "narrativeType",
+    "sourceSemanticDigest",
+    "narrativeBriefDigest",
+    "productId",
+    "purchaseId",
+    "entitlementRef",
+    "opening",
+    "chapters",
+    "closing",
+    "verifiedClaimRefs",
+    "repairLog",
+    "verificationSummary",
+    "generationState",
+    "webProjection",
+    "printProjection",
+    "pdfProjection",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-NARRATIVE-READING-IR-v1.0.0"
+    },
+    "narrativeId": {
+      "type": "string"
+    },
+    "narrativeType": {
+      "enum": [
+        "PERSONAL",
+        "RELATIONSHIP"
+      ]
+    },
+    "sourceSemanticDigest": {
+      "type": "string"
+    },
+    "narrativeBriefDigest": {
+      "type": "string"
+    },
+    "productId": {
+      "const": "PAID_NARRATIVE_READING_V1"
+    },
+    "purchaseId": {
+      "type": "string"
+    },
+    "entitlementRef": {
+      "type": "string"
+    },
+    "opening": {
+      "type": "object"
+    },
+    "chapters": {
+      "type": "array"
+    },
+    "closing": {
+      "type": "object"
+    },
+    "verifiedClaimRefs": {
+      "type": "array"
+    },
+    "repairLog": {
+      "type": "array"
+    },
+    "verificationSummary": {
+      "type": "object"
+    },
+    "generationState": {
+      "const": "READY"
+    },
+    "webProjection": {
+      "type": "object"
+    },
+    "printProjection": {
+      "type": "object"
+    },
+    "pdfProjection": {
+      "type": "object"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relationshipProductAuthorityId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relationshipProductVersion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relationshipIntentId": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "participantARef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "participantBRef": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "participantASourceDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "participantBSourceDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relationshipBriefDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relationshipGenerationIdentityDigest": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "narrativeType": {
+            "const": "RELATIONSHIP"
+          }
+        },
+        "required": [
+          "narrativeType"
+        ]
+      },
+      "then": {
+        "properties": {
+          "relationshipProductAuthorityId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "relationshipProductVersion": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "relationshipIntentId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "participantARef": {
+            "type": "string",
+            "minLength": 1
+          },
+          "relationshipBriefDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "relationshipGenerationIdentityDigest": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "relationshipIntentId",
+          "participantARef",
+          "relationshipBriefDigest"
+        ]
+      }
+    }
+  ]
+}

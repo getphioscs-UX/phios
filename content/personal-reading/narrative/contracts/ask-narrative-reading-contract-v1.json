@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PHI-OS-ASK-NARRATIVE-READING-CONTRACT-v1.0.0",
+  "work": "W54N8",
+  "baselineCommit": "8331a81358531a1a80c077ac65dc5e3bd588ae15",
+  "status": "ACTIVE_MACHINE_VERIFIED",
+  "outputSchema": "PHI-OS-ASK-NARRATIVE-READING-v1.0.0",
+  "mayConsume": [
+    "stored NarrativeReadingIR",
+    "source NarrativeBrief",
+    "selected governed claim refs",
+    "customer question",
+    "explicit current-reality additions"
+  ],
+  "rules": {
+    "storedNarrativeMayBeMutated": false,
+    "sourceBriefMayBeMutated": false,
+    "selectedRefsMustExistInBrief": true,
+    "newRealityIsCustomerReportedOnly": true,
+    "quotaAuthority": "ENTITLEMENT_POLICY",
+    "recurringQuotaCreatedHere": false
+  },
+  "gate": "check:ppr-narrative:w54n8-ask-this-reading"
+}

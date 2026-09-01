@@ -2121,7 +2121,18 @@
     "check:ppr-r2:w47-w54": "node scripts/check-ppr-r2-w47-w54.mjs",
     "check:profile:final": "npm run check:profile:w0-w10f && npm run check:profile:w11-progressive-profile-ux && npm run check:profile:w12-machine && npm run check:profile:w12-human-review && npm run check:profile:w12-production-admission && node scripts/check-profile-prf-final.mjs",
     "check:ppr-narrative:w54n0-brief-contract": "node scripts/check-ppr-narrative-w54n0-brief-contract.mjs",
-    "check:relationship:w7-narrative-brief": "node scripts/check-rel-w7-relationship-narrative-brief.mjs"
+    "check:relationship:w7-narrative-brief": "node scripts/check-rel-w7-relationship-narrative-brief.mjs",
+    "check:ppr-narrative:w54n1-writer": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N1",
+    "check:ppr-narrative:w54n2-verifier": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N2",
+    "check:ppr-narrative:w54n3-targeted-repair": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N3",
+    "check:ppr-narrative:w54n4-narrative-ir": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N4",
+    "check:ppr-narrative:w54n5-preview": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N5",
+    "check:ppr-narrative:w54n6-commerce-entitlement": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N6",
+    "check:ppr-narrative:w54n7-idempotent-generation": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N7",
+    "check:ppr-narrative:w54n8-ask-this-reading": "node scripts/check-ppr-narrative-w54n1-n8.mjs W54N8",
+    "check:ppr-narrative:w54n1-w54n8": "node scripts/check-ppr-narrative-w54n1-n8.mjs ALL",
+    "check:relationship:w8-paid-narrative": "node scripts/check-rel-w8-paid-relationship-narrative.mjs",
+    "check:relationship:w0-w8": "npm run check:relationship:w0-w6 && npm run check:relationship:w7-narrative-brief && npm run check:ppr-narrative:w54n1-w54n8 && npm run check:relationship:w8-paid-narrative"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

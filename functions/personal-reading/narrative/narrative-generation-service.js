@@ -1,0 +1,12 @@
+import {writeNarrative,NARRATIVE_PROMPT_VERSION} from './narrative-writer.js';
+import {verifyNarrativeClaims} from './narrative-claim-verifier.js';
+import {applyTargetedRepair} from './narrative-targeted-repair.js';
+import {buildNarrativeReadingIR} from './narrative-reading-ir.js';
+import {buildNarrativeGenerationKey} from './narrative-generation-cache.js';
+function fail(code,details={}){const e=new Error(code);e.code=code;e.details=details;throw e;}
+export async function generatePaidNarrative({brief,evidenceWritingRules,factualGuard,purchase,entitlement,product,cache,writer=writeNarrative,writerOptions={},generatedAt='2026-09-01T10:00:00.000Z',generationKeyOverride=null,relationshipProductAuthority=null,relationshipGenerationIdentity=null}={}){
+  if(!cache?.get||!cache?.put)fail('W54N1_N8_CACHE_REQUIRED');if(entitlement?.generationAllowed!==true||entitlement?.state!=='ACTIVE')fail('W54N6_GENERATION_ENTITLEMENT_REQUIRED');const key=generationKeyOverride?.generationKey?generationKeyOverride:await buildNarrativeGenerationKey({purchaseId:purchase.purchaseId,sourceSemanticDigest:brief.sourceSemanticDigest,narrativeBriefDigest:brief.briefSemanticDigest,promptVersion:NARRATIVE_PROMPT_VERSION,narrativeProductVersion:product.productVersion});const cached=await cache.get(key);if(cached)return {cacheHit:true,generationKey:key,narrative:cached,writerInvoked:false};
+  const initialDraft=await writer({brief,...writerOptions});const firstVerification=await verifyNarrativeClaims({brief,draft:initialDraft,evidenceWritingRules,factualGuard});const repaired=await applyTargetedRepair({draft:initialDraft,verification:firstVerification});const finalVerification=await verifyNarrativeClaims({brief,draft:repaired.draft,evidenceWritingRules,factualGuard});if(finalVerification.summary.passed!==true)fail('W54N2_N3_FINAL_VERIFICATION_FAILED');const narrative=await buildNarrativeReadingIR({brief,draft:repaired.draft,verification:finalVerification,repairLog:repaired.repairLog,purchase,entitlement,product,generatedAt,relationshipProductAuthority,relationshipGenerationIdentity});await cache.put(key,narrative);return {cacheHit:false,generationKey:key,narrative,writerInvoked:true,firstVerification,finalVerification,repairLog:repaired.repairLog};
+}
+export async function reopenNarrative({cache,generationKey,reason='REOPEN'}={}){return cache.resolve(generationKey,{reason});}
+export default Object.freeze({generatePaidNarrative,reopenNarrative});
