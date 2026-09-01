@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-RELATIONSHIP-METHOD-CAPABILITY-MATRIX-v1.0.0",
   "work": "REL-W2",
   "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
-  "status": "CURRENT_BASELINE_RECONCILED_FAIL_CLOSED_REL_W4_NUM_PROMOTION",
+  "status": "CURRENT_BASELINE_RECONCILED_HD_REL_R1_MACHINE_CANDIDATE_HUMAN_PENDING",
   "capabilityStates": [
     "SUPPORTED",
     "PARTIAL",
@@ -130,18 +130,20 @@
       "exactBirthTimeRequired": false,
       "unknownBirthTimePartialSupported": true,
       "birthPlaceRequired": false,
-      "relationshipCompositionSupported": "NOT_SUPPORTED",
-      "relationshipCompositionAuthorityRef": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/relationship/HD-PRO-R3-W18-single-chart-relationship-contract-v1.json",
+      "relationshipCompositionSupported": "PARTIAL",
+      "relationshipCompositionAuthorityRef": "content/personal-reading/relationship/hd-r1/acceptance/HD-REL-R1-W8-production-admission-v1.json",
       "relationshipTimingSupported": "NOT_SUPPORTED",
       "relationshipTimingAuthorityRef": null,
       "customerPublishable": true,
       "missingRequirements": [
-        "CONFIRMED_EXTERNAL_HD_CHART_FOR_PERSON_B",
-        "SEPARATELY_ADMITTED_DUAL_CHART_HD_RELATIONSHIP_AUTHORITY"
+        "HD_REL_R1_W7_HUMAN_ACCEPTED_24_OF_24",
+        "HD_REL_R1_W8_PRODUCTION_ADMISSION"
       ],
       "sourcePending": [],
       "boundaryNotes": [
-        "Current customer HD authority is confirmed imported external chart; PHI OS birth calculation authority is not created. R3 W18 explicitly rejects second-chart relationship composition."
+        "Individual HD remains confirmed imported external-chart authority; PHI OS birth calculation authority is not created.",
+        "HD-REL-R1 W0-W6 establishes source-reconciled dual-chart structural/semantic candidate authority, but W7 Human acceptance is still mandatory before REL-W4-HD becomes SUPPORTED.",
+        "Penta, BG5 and transit connection are separate successor scopes and are not inferred by this dyadic engine."
       ]
     }
   ],

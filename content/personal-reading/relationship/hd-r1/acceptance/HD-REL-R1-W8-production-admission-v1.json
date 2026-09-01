@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-HD-REL-R1-W8-PRODUCTION-ADMISSION-v1.0.0",
+  "work": "HD-REL-R1-W8",
+  "baselineCommit": "2b660066669190eee55de54a2bb87b10be0eb3c4",
+  "status": "BLOCKED_HUMAN_REVIEW_PENDING",
+  "gates": {
+    "w0SourceOntology": "PASS",
+    "w1CompositeStructure": "PASS",
+    "w2FourClassAdmission": "PASS",
+    "w3SemanticClaimCorpus": "PASS",
+    "w4OwnershipDedup": "PASS",
+    "w5RealityComposition": "PASS",
+    "w6MachineCampaign": "PASS_24_OF_24",
+    "w7HumanReview": "PENDING_24_OF_24"
+  },
+  "machine": {
+    "requiredCases": 24,
+    "passed": 24,
+    "atomicChannelClassProbes": "144/144",
+    "atomicGateCompanionshipProbes": "64/64"
+  },
+  "human": {
+    "requiredCases": 24,
+    "accepted": 0,
+    "rejected": 0,
+    "pending": 24,
+    "inheritedFromHdProR3": false
+  },
+  "authorityEffect": {
+    "relW4HdProductionAdmitted": false,
+    "relationshipMethodCapabilityPromotionAllowed": false,
+    "relationshipMethodCompositionExecutable": false,
+    "customerPublicationAllowed": false,
+    "individualHdR3CustomerPublishedUnaffected": true
+  },
+  "boundaries": {
+    "phiosHumanDesignBirthCalculationAllowed": false,
+    "dualChartCompatibilityScoreAllowed": false,
+    "partnerHiddenStateInferenceAllowed": false,
+    "soulmateVerdictAllowed": false,
+    "compositeAuthorityMayReplaceIndividualAuthority": false,
+    "pentaIncluded": false,
+    "bg5Included": false
+  },
+  "next": "W7 new Human review 24/24 is mandatory before REL-W4-HD can be promoted to SUPPORTED."
+}

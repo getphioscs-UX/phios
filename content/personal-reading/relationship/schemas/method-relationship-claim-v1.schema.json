@@ -3,26 +3,130 @@
   "$id": "PHI-OS-METHOD-RELATIONSHIP-CLAIM-v1",
   "title": "PHI OS Method Relationship Claim v1",
   "type": "object",
-  "required": ["relationshipClaimId", "methodId", "participantARefs", "participantBRefs", "compositionRuleId", "semanticOwnerId", "claimClass", "headline", "summary", "supportRefs", "tensionRefs", "conditionRefs", "counterRefs", "timingRefs", "precisionBoundaryRefs", "sourceRefs", "customerPublishable", "governance"],
+  "required": [
+    "relationshipClaimId",
+    "methodId",
+    "participantARefs",
+    "participantBRefs",
+    "compositionRuleId",
+    "semanticOwnerId",
+    "claimClass",
+    "headline",
+    "summary",
+    "supportRefs",
+    "tensionRefs",
+    "conditionRefs",
+    "counterRefs",
+    "timingRefs",
+    "precisionBoundaryRefs",
+    "sourceRefs",
+    "customerPublishable",
+    "governance"
+  ],
   "properties": {
-    "relationshipClaimId": {"type": "string", "minLength": 1},
-    "methodId": {"enum": ["AST", "BZR", "ZWR", "NUM", "ECR"]},
-    "participantARefs": {"type": "array", "items": {"type": "string"}},
-    "participantBRefs": {"type": "array", "items": {"type": "string"}},
-    "compositionRuleId": {"type": "string", "minLength": 1},
-    "semanticOwnerId": {"type": "string", "minLength": 1},
-    "claimClass": {"enum": ["CONNECTION", "COMPLEMENT", "TENSION", "ASYMMETRY", "MISREAD_RISK", "RESOURCE_DYNAMIC", "DECISION_DYNAMIC", "TIMING_CONTEXT", "OPEN"]},
-    "headline": {"type": "string", "minLength": 1},
-    "summary": {"type": "string", "minLength": 1},
-    "supportRefs": {"type": "array", "items": {"type": "string"}},
-    "tensionRefs": {"type": "array", "items": {"type": "string"}},
-    "conditionRefs": {"type": "array", "items": {"type": "string"}},
-    "counterRefs": {"type": "array", "items": {"type": "string"}},
-    "timingRefs": {"type": "array", "items": {"type": "string"}},
-    "precisionBoundaryRefs": {"type": "array", "items": {"type": "string"}},
-    "sourceRefs": {"type": "array", "items": {"type": "string"}},
-    "customerPublishable": {"type": "boolean"},
-    "governance": {"type": "object"}
+    "relationshipClaimId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "methodId": {
+      "enum": [
+        "AST",
+        "BZR",
+        "ZWR",
+        "NUM",
+        "ECR",
+        "HD"
+      ]
+    },
+    "participantARefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "participantBRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compositionRuleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semanticOwnerId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claimClass": {
+      "enum": [
+        "CONNECTION",
+        "COMPLEMENT",
+        "TENSION",
+        "ASYMMETRY",
+        "MISREAD_RISK",
+        "RESOURCE_DYNAMIC",
+        "DECISION_DYNAMIC",
+        "TIMING_CONTEXT",
+        "OPEN"
+      ]
+    },
+    "headline": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supportRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tensionRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conditionRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "counterRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timingRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "precisionBoundaryRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sourceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "customerPublishable": {
+      "type": "boolean"
+    },
+    "governance": {
+      "type": "object"
+    }
   },
   "additionalProperties": false
 }

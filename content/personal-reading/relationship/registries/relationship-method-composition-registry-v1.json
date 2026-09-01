@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-RELATIONSHIP-METHOD-COMPOSITION-REGISTRY-v1.0.0",
   "work": "REL-W4",
   "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
-  "status": "CURRENT_AST_NUM_HUMAN_ADMITTED_OTHER_METHOD_SUCCESSORS_PENDING",
+  "status": "CURRENT_AST_NUM_HUMAN_ADMITTED_BZR_ZWR_ECR_SUCCESSORS_PENDING_HD_REL_R1_MACHINE_CANDIDATE",
   "methods": [
     {
       "methodId": "AST",
@@ -101,6 +101,35 @@
         "Independent A/B ECR readings may exist; REL-W4 ECR relationship claims fail closed until separately admitted authority exists."
       ],
       "humanAdmissionStatus": "NOT_APPLICABLE_OR_SUCCESSOR_PENDING"
+    },
+    {
+      "methodId": "HD",
+      "executionState": "MACHINE_VERIFIED_HUMAN_ADMISSION_PENDING",
+      "w4Executable": false,
+      "evidenceSchema": "PHI-OS-HD-REL-R1-DUAL-CHART-RELATIONSHIP-RESULT-v1.0.0",
+      "allowedClaimClasses": [
+        "CONNECTION",
+        "ASYMMETRY"
+      ],
+      "authorityRefs": [
+        "content/personal-reading/relationship/hd-r1/source/HD-REL-R1-W0-source-school-ontology-reconciliation-v1.json",
+        "content/personal-reading/relationship/hd-r1/registries/HD-REL-R1-W2-interaction-class-registry-v1.json",
+        "content/personal-reading/relationship/hd-r1/semantics/HD-REL-R1-W3-relationship-semantic-claim-corpus-v1.json",
+        "content/personal-reading/relationship/hd-r1/acceptance/HD-REL-R1-W8-production-admission-v1.json"
+      ],
+      "ruleFamilies": [
+        "ELECTROMAGNETIC",
+        "DOMINANCE",
+        "COMPROMISE",
+        "COMPANIONSHIP"
+      ],
+      "boundaryNotes": [
+        "Consumes two confirmed customer-supplied external Human Design charts; no PHI OS birth-data Human Design calculation is created.",
+        "Channel interaction owns the primary relationship theme; component Gates are supporting evidence and Centers are contextual support.",
+        "Human review 24/24 is pending, therefore REL-W4-HD remains fail-closed for customer composition."
+      ],
+      "humanAdmissionStatus": "PENDING_24_OF_24",
+      "humanAdmissionRef": "content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-review-results-v1.json"
     }
   ],
   "globalBoundaries": {
