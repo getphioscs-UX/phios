@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-REL-W6-CROSS-EVIDENCE-RELATIONSHIP-CONTRACT-v1.0.0",
+  "work": "REL-W6",
+  "baselineCommit": "cbf21d3660142f1fe585c0c6cbf933b65c318f15",
+  "status": "ENGINEERING_ACTIVE_MACHINE_VERIFIED",
+  "outputSchema": "PHI-OS-CROSS-METHOD-RELATIONSHIP-IR-v1.0.0",
+  "lanes": [
+    "SYMBOLIC_METHOD_LANE",
+    "PROFILE_ASSESSMENT_LANE",
+    "CURRENT_REALITY_LANE"
+  ],
+  "inputs": [
+    "RelationshipIntent",
+    "REL-W5 Human-admitted MethodRelationshipClaim snapshot",
+    "ProfileSignalEnvelope(A/B) optional",
+    "PRF-W9 RelationshipProfileEvidence optional",
+    "RelationshipCurrentRealityIR",
+    "RelationshipRealityComparison[]",
+    "Admitted REL-W6 explicit synthesis rule registry"
+  ],
+  "outputGroups": [
+    "COMMON_EMPHASIS",
+    "COMPLEMENTARY_VIEW",
+    "TENSION",
+    "NON_CONVERGENCE",
+    "PROFILE_ALIGNMENT",
+    "PROFILE_DIFFERENCE",
+    "SOURCE_TENSION",
+    "REALITY_SUPPORTED",
+    "REALITY_CONTRADICTED",
+    "OPEN"
+  ],
+  "rules": {
+    "sharedSymbolicThemeRequiresAtLeastTwoCustomerPublishableMethodRefs": true,
+    "sharedSymbolicThemeRequiresAtLeastTwoDistinctMethods": true,
+    "profileOnlyThemeRemainsProfileEvidence": true,
+    "profileLaneRequiresPrfW12ProductionAdmission": true,
+    "mixedSourceSynthesisPreservesEverySourceClass": true,
+    "mixedSourceConsensusCreatesTruth": false,
+    "symbolicConvergenceCreatesScientificValidation": false,
+    "twoIndependentNatalClaimsMayBecomeRelationshipClaim": false,
+    "automaticSemanticMatching": false,
+    "methodVoting": false,
+    "trueDisagreementRemainsNonConvergence": true,
+    "currentRealityMaySupportPartiallySupportContradictOrLeaveOpen": true,
+    "currentRealityProvesMethod": false,
+    "currentRealityDisprovesMethod": false,
+    "compatibilityScoreAllowed": false,
+    "partnerHiddenStateInferenceAllowed": false,
+    "relationshipOutcomeGuaranteeAllowed": false,
+    "customerPublicationAllowedBeforeRelW8": false
+  },
+  "predecessorRefs": [
+    "content/personal-reading/relationship/freeze/rel-w4-all-method-current-freeze-v1.json",
+    "content/profile/acceptance/profile-prf-w12-production-admission-v1.json",
+    "content/personal-reading/relationship/current-reality/contracts/relationship-current-reality-contract-v1.json"
+  ],
+  "gate": "check:relationship:w6-cross-method-synthesis"
+}

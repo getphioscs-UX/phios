@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "PHI-OS-REL-W6-CROSS-EVIDENCE-RULE-REGISTRY-v1.0.0",
+  "work": "REL-W6",
+  "baselineCommit": "cbf21d3660142f1fe585c0c6cbf933b65c318f15",
+  "status": "REL_W6_EXPLICIT_SYNTHESIS_RULES_ADMITTED_MACHINE_CURRENT",
+  "customerPublicationEffect": "NONE_UNTIL_REL_W8",
+  "rules": [
+    {
+      "ruleId": "REL-W6-XM-EXPLICIT-MULTI-METHOD-v1",
+      "kind": "SYMBOLIC_METHOD",
+      "status": "ADMITTED_FOR_REL_W6_EXPLICIT_SYNTHESIS",
+      "allowedGroups": [
+        "COMMON_EMPHASIS",
+        "COMPLEMENTARY_VIEW",
+        "TENSION",
+        "NON_CONVERGENCE",
+        "OPEN"
+      ],
+      "minimumClaims": 2,
+      "minimumDistinctMethods": 2,
+      "requiresExplicitComparison": true,
+      "automaticSemanticMatching": false,
+      "methodVotingAllowed": false,
+      "truthConversionAllowed": false,
+      "sourceRefs": [
+        "REL-W4 Human-admitted method claims",
+        "REL-W6 governing master work"
+      ]
+    },
+    {
+      "ruleId": "REL-W6-XP-ADMITTED-PROFILE-EVIDENCE-v1",
+      "kind": "PROFILE_EVIDENCE",
+      "status": "ADMITTED_FOR_REL_W6_EXPLICIT_SYNTHESIS",
+      "allowedGroups": [
+        "PROFILE_ALIGNMENT",
+        "PROFILE_DIFFERENCE",
+        "OPEN"
+      ],
+      "minimumEvidence": 1,
+      "requiresPrfW12ProductionAdmission": true,
+      "requiresPrfW9RelationshipProfileEvidence": true,
+      "profileEvidenceMayBecomeSymbolicConvergence": false,
+      "sourceRefs": [
+        "content/profile/relationship/contracts/relationship-profile-evidence-contract-v1.json",
+        "content/profile/acceptance/profile-prf-w12-production-admission-v1.json"
+      ]
+    },
+    {
+      "ruleId": "REL-W6-XS-SYMBOLIC-PROFILE-TENSION-v1",
+      "kind": "MIXED_SOURCE",
+      "status": "ADMITTED_FOR_REL_W6_EXPLICIT_SYNTHESIS",
+      "allowedGroups": [
+        "SOURCE_TENSION",
+        "OPEN"
+      ],
+      "minimumSymbolicClaims": 1,
+      "minimumProfileEvidence": 1,
+      "minimumDistinctSourceClasses": 2,
+      "requiresExplicitComparison": true,
+      "truthConversionAllowed": false,
+      "scientificValidationTransferAllowed": false,
+      "sourceRefs": [
+        "content/profile/cross-source/contracts/cross-source-perspective-contract-v1.json",
+        "content/profile/freeze/cross-source-perspective-freeze-v1.json"
+      ]
+    },
+    {
+      "ruleId": "REL-W6-XR-CURRENT-REALITY-v1",
+      "kind": "CURRENT_REALITY",
+      "status": "ADMITTED_FOR_REL_W6_EXPLICIT_SYNTHESIS",
+      "allowedGroups": [
+        "REALITY_SUPPORTED",
+        "REALITY_CONTRADICTED",
+        "OPEN"
+      ],
+      "stateMap": {
+        "CURRENTLY_RESONANT": "REALITY_SUPPORTED",
+        "PARTIALLY_RESONANT": "REALITY_SUPPORTED",
+        "CURRENTLY_NOT_RESONANT": "REALITY_CONTRADICTED",
+        "OPEN": "OPEN"
+      },
+      "methodProofAllowed": false,
+      "methodDisproofAllowed": false,
+      "sourceRefs": [
+        "content/personal-reading/relationship/current-reality/contracts/relationship-current-reality-contract-v1.json"
+      ]
+    }
+  ],
+  "governance": {
+    "proceduralSynthesisRulesOnly": true,
+    "newMethodMeaningAuthorityCreated": false,
+    "newProfileScienceAuthorityCreated": false,
+    "customerNarrativeAuthorityCreated": false,
+    "futureRuleMeaningChangeRequiresVersionedSuccessor": true
+  }
+}

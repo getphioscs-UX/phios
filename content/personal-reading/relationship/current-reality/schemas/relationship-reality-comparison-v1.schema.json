@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-RELATIONSHIP-REALITY-COMPARISON-v1",
+  "title": "PHI OS Relationship Reality Comparison v1",
+  "type": "object",
+  "required": ["schemaVersion","comparisonId","candidateId","relationshipIntentId","relationshipClaimId","methodId","semanticOwnerId","responseState","observationRefs","basis","source","sourceClass","customerControlled","governance"],
+  "properties": {
+    "schemaVersion": {"const":"PHI-OS-RELATIONSHIP-REALITY-COMPARISON-v1.0.0"},
+    "comparisonId": {"type":"string","minLength":1},
+    "candidateId": {"type":"string","minLength":1},
+    "relationshipIntentId": {"type":"string","minLength":1},
+    "relationshipClaimId": {"type":"string","minLength":1},
+    "methodId": {"enum":["AST","BZR","ZWR","NUM","ECR","HD"]},
+    "semanticOwnerId": {"type":"string","minLength":1},
+    "responseState": {"enum":["CURRENTLY_RESONANT","PARTIALLY_RESONANT","CURRENTLY_NOT_RESONANT","OPEN"]},
+    "observationRefs": {"type":"array","items":{"type":"string"}},
+    "customerNote": {"type":["string","null"],"maxLength":500},
+    "basis": {"const":"EXPLICIT_CUSTOMER_COMPARISON"},
+    "source": {"const":"CUSTOMER"},
+    "sourceClass": {"const":"CURRENT_REALITY_OBSERVATION"},
+    "customerControlled": {"const":true},
+    "governance": {"type":"object"}
+  },
+  "additionalProperties": false
+}

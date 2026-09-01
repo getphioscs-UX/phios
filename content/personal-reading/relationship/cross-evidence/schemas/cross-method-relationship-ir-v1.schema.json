@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-CROSS-METHOD-RELATIONSHIP-IR-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "relationshipIntentId",
+    "lanes",
+    "items",
+    "groupIndex",
+    "methodContext",
+    "governance",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CROSS-METHOD-RELATIONSHIP-IR-v1.0.0"
+    },
+    "relationshipIntentId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lanes": {
+      "type": "object"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "PHI-OS-CROSS-EVIDENCE-RELATIONSHIP-ITEM-v1"
+      }
+    },
+    "groupIndex": {
+      "type": "object"
+    },
+    "methodContext": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "governance": {
+      "type": "object"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

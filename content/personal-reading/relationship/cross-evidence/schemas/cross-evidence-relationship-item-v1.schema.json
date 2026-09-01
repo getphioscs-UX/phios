@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-CROSS-EVIDENCE-RELATIONSHIP-ITEM-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "synthesisItemId",
+    "group",
+    "customerLabelZhHans",
+    "topicId",
+    "statement",
+    "ruleId",
+    "laneRefs",
+    "methods",
+    "sourceClasses",
+    "qualifier",
+    "governance",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-CROSS-EVIDENCE-RELATIONSHIP-ITEM-v1.0.0"
+    },
+    "synthesisItemId": {
+      "type": "string",
+      "pattern": "^REL-XE-[A-F0-9]{24}$"
+    },
+    "group": {
+      "enum": [
+        "COMMON_EMPHASIS",
+        "COMPLEMENTARY_VIEW",
+        "TENSION",
+        "NON_CONVERGENCE",
+        "PROFILE_ALIGNMENT",
+        "PROFILE_DIFFERENCE",
+        "SOURCE_TENSION",
+        "REALITY_SUPPORTED",
+        "REALITY_CONTRADICTED",
+        "OPEN"
+      ]
+    },
+    "customerLabelZhHans": {
+      "type": "string",
+      "minLength": 1
+    },
+    "topicId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ruleId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "laneRefs": {
+      "type": "object",
+      "required": [
+        "symbolicClaimRefs",
+        "profileEvidenceRefs",
+        "realityComparisonRefs"
+      ],
+      "properties": {
+        "symbolicClaimRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "profileEvidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "realityComparisonRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "methods": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "AST",
+          "BZR",
+          "ZWR",
+          "NUM",
+          "ECR",
+          "HD"
+        ]
+      }
+    },
+    "sourceClasses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "qualifier": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "governance": {
+      "type": "object"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

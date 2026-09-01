@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "PHI-OS-REL-W5-INPUT-AUTHORITY-SNAPSHOT-v1.0.0",
+  "work": "REL-W5",
+  "baselineCommit": "cbf21d3660142f1fe585c0c6cbf933b65c318f15",
+  "status": "SIX_METHOD_REL_W4_HUMAN_ADMITTED_CURRENT",
+  "admittedAtBaseline": {
+    "AST": "REL-W4 24/24 Human admitted",
+    "NUM": "REL-W4 24/24 Human admitted",
+    "BZR": "BZR-REL successor 24/24 Human admitted",
+    "ZWR": "ZWR-REL successor 24/24 Human admitted",
+    "ECR": "ECR-REL successor 24/24 Human admitted",
+    "HD": "HD-REL-R1 W7 24/24 Human accepted + W8 PRODUCTION_ADMITTED_CUSTOMER_PUBLISHABLE"
+  },
+  "totalRelationshipHumanAcceptance": {
+    "required": 144,
+    "accepted": 144,
+    "pending": 0,
+    "rejected": 0
+  },
+  "authorityRefs": [
+    "content/personal-reading/relationship/acceptance/rel-w4-human-admission-v1.json",
+    "content/personal-reading/relationship/acceptance/rel-method-authority-successor-human-admission-v1.json",
+    "content/personal-reading/relationship/hd-r1/acceptance/HD-REL-R1-W8-production-admission-v1.json",
+    "content/personal-reading/relationship/freeze/rel-w4-all-method-current-freeze-v1.json",
+    "content/personal-reading/relationship/successors/rel-method-authority-current-successor-v3.json"
+  ],
+  "executionDecision": "REL-W5 consumes only the exact Human-admitted relationship claims available for the current A/B case. Six methods are authority-eligible, but an unavailable or precision-blocked method may contribute zero claims without being imputed.",
+  "governance": {
+    "historicalOwnersMutated": false,
+    "unavailableMethodImputed": false,
+    "methodAuthorityMayChangeObservationMeaning": false,
+    "customerRealityMayProveMethod": false,
+    "customerRealityMayDisproveMethod": false,
+    "customerPublicationAllowed": false
+  }
+}

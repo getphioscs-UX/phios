@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-REL-W6-INPUT-AUTHORITY-SNAPSHOT-v1.0.0",
+  "work": "REL-W6",
+  "baselineCommit": "cbf21d3660142f1fe585c0c6cbf933b65c318f15",
+  "status": "REL_W6_INPUTS_CURRENT_AND_ADMITTED",
+  "relationshipMethodAuthority": {
+    "status": "SIX_METHOD_REL_W4_HUMAN_ADMITTED",
+    "accepted": 144,
+    "methods": [
+      "AST",
+      "BZR",
+      "ZWR",
+      "NUM",
+      "ECR",
+      "HD"
+    ],
+    "freezeRef": "content/personal-reading/relationship/freeze/rel-w4-all-method-current-freeze-v1.json"
+  },
+  "profileAuthority": {
+    "status": "PRF_W12_PRODUCTION_ADMITTED",
+    "humanAccepted": 24,
+    "activeFreezes": 8,
+    "optional": true,
+    "productionAdmissionRef": "content/profile/acceptance/profile-prf-w12-production-admission-v1.json",
+    "freezeIndexRef": "content/profile/freeze/profile-production-freeze-index-v1.json"
+  },
+  "currentRealityAuthority": {
+    "status": "REL_W5_MACHINE_VERIFIED_CUSTOMER_CONTROLLED",
+    "contractRef": "content/personal-reading/relationship/current-reality/contracts/relationship-current-reality-contract-v1.json",
+    "sourceClass": "CURRENT_REALITY_OBSERVATION"
+  },
+  "rules": {
+    "symbolicMethodLaneMayOperateWithoutProfile": true,
+    "profileLaneMayBeAbsent": true,
+    "noRealityComparisonMayRemainOpen": true,
+    "methodUnavailableMayContributeZeroClaims": true,
+    "profileUnavailableMayNotBeImputed": true
+  },
+  "customerPublicationAllowed": false,
+  "next": "W47–W54 Governed Personal Reading after REL-W6 machine verification; Relationship narrative/customer publication remains later-gated."
+}
