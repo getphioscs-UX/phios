@@ -1,0 +1,4 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));const audit=j('content/personal-reading/relationship/audit/relationship-product-completeness-audit-v1.json');const successor=j('content/personal-reading/relationship/successors/rel-w4-method-coverage-successor-v1.json');
+assert.equal(audit.summary.fullRelationshipProductReady,false);for(const id of ['BZR','ZWR','ECR'])assert.ok(audit.methodCoverage.find(x=>x.methodId===id)?.gap);assert.equal(successor.status,'PROPOSED_GAP_CLOSURE_NOT_AUTHORITY');assert.ok(successor.tracks.BZR.length>=5);assert.ok(successor.tracks.ZWR.length>=5);assert.ok(successor.tracks.ECR.length>=7);assert.ok(successor.forbidden.includes('compatibility percentage'));
+console.log('✓ REL-W4 method coverage audit passed: BZR/ZWR/ECR gaps are explicit and successor proposals do not grant authority.');
