@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v1.0.0",
+  "work": "PRF-W11",
+  "baselineCommit": "3a8e0658e26fa931257b491204a6ed2dcb345725",
+  "customerFlow": [
+    "CURRENT_REALITY_CORE_INTAKE",
+    "OPTIONAL_DEEPEN_MY_PROFILE",
+    "CHOOSE_ONE_OR_MORE_PROFILE_MODES",
+    "PROFILE_RESULT_WITH_SOURCE_CLASS",
+    "OPTIONAL_CURRENT_REALITY_COMPARISON"
+  ],
+  "personalReading": {
+    "profileRequiredBeforeReading": false,
+    "skipAllowed": true,
+    "skipDestination": "/perspectives/personal/",
+    "profileFailureMayBlockSupportedSymbolicProduct": false,
+    "profileFailureMayBlockCurrentRealityProduct": false
+  },
+  "modes": [
+    {
+      "mode": "QUICK_PROFILE",
+      "label": {"en": "Quick Profile", "zh-Hans": "快速 Profile"},
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "estimatedMinutes": 2,
+      "description": {"en": "Six optional prompts, one from each PHI Self-Assessment domain.", "zh-Hans": "6 个可选问题，每个 PHI 自我评估领域各 1 个。"},
+      "mayContainSensitiveItems": true,
+      "separateSensitiveConsentRequiredWhenAnswered": true
+    },
+    {
+      "mode": "FULL_SELF_ASSESSMENT",
+      "label": {"en": "Full Self-Assessment", "zh-Hans": "完整自我评估"},
+      "sourceClass": "CUSTOMER_SELF_REPORT",
+      "estimatedMinutes": 8,
+      "description": {"en": "Thirty facets across six domains. Self-report only; not a diagnosis or quotient test.", "zh-Hans": "6 个领域、30 个面向。仅为自我报告，不是诊断或商数测验。"},
+      "mayContainSensitiveItems": true,
+      "separateSensitiveConsentRequiredWhenAnswered": true
+    },
+    {
+      "mode": "REASONING_TASKS",
+      "label": {"en": "Reasoning Tasks", "zh-Hans": "推理任务"},
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "estimatedMinutes": 5,
+      "description": {"en": "A short original PHI OS task sample reported as raw task performance only.", "zh-Hans": "PHI OS 原创短题组，只报告本次任务的原始表现。"},
+      "iqAuthority": false,
+      "percentileAuthority": false
+    },
+    {
+      "mode": "IMPORT_EXTERNAL_RESULT",
+      "label": {"en": "Import an external result", "zh-Hans": "导入外部结果"},
+      "sourceClass": "EXTERNAL_PROFILE_RESULT",
+      "estimatedMinutes": 2,
+      "description": {"en": "Bring a result you already have. The provider remains explicit and PHI OS does not rescore proprietary tests.", "zh-Hans": "导入你已经拥有的结果；提供方会被明确保留，PHI OS 不会重算专有测试。"},
+      "manualResultImportOnly": true
+    }
+  ],
+  "resultUx": {
+    "sourceClassLegendRequired": true,
+    "assessmentDateVisible": true,
+    "oldResultWarningRequired": true,
+    "radarAllowedForPhiSelfAssessment": true,
+    "radarMasterScoreAllowed": false,
+    "provenanceVisibleOnDemand": true,
+    "currentRealityComparisonOptional": true
+  },
+  "boundaries": {
+    "quotientLabelsAllowed": false,
+    "diagnosticLanguageAllowed": false,
+    "universalMasterScoreAllowed": false,
+    "symbolicScientificValidationTransferAllowed": false,
+    "compatibilityPercentageAllowed": false,
+    "partnerMindReadingAllowed": false,
+    "automaticPersistenceAllowed": false
+  },
+  "publication": {
+    "route": "/perspectives/profile/",
+    "candidateRouteMayExistBeforeHumanAcceptance": true,
+    "primaryNavigationCutoverBeforePrfW12HumanAcceptance": false,
+    "customerPublicationBeforePrfW12HumanAcceptance": false
+  },
+  "gate": "check:profile:w11-progressive-profile-ux"
+}

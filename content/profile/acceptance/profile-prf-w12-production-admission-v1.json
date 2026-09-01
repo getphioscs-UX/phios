@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "PHI-OS-PRF-W12-PRODUCTION-ADMISSION-v1.0.0",
+  "work": "PRF-W12",
+  "baselineCommit": "3a8e0658e26fa931257b491204a6ed2dcb345725",
+  "status": "BLOCKED_HUMAN_REVIEW_PENDING",
+  "gates": {
+    "prfW0W10f": "PASS_MACHINE_VERIFIED",
+    "prfW11ProgressiveUx": "PASS_MACHINE_VERIFIED",
+    "prfW12MachineCampaign": "PASS_24_OF_24",
+    "prfW12HumanReview": "PENDING_24_OF_24"
+  },
+  "machine": {
+    "required": 24,
+    "passed": 24,
+    "failed": 0
+  },
+  "human": {
+    "required": 24,
+    "accepted": 0,
+    "rejected": 0,
+    "pending": 24,
+    "inheritedAcceptance": false
+  },
+  "authorityEffect": {
+    "profileProductionAdmitted": false,
+    "customerPublicationAllowed": false,
+    "profileSurfaceCutoverAllowed": false,
+    "primaryPerspectivesNavigationAllowed": false,
+    "reviewPreviewAllowed": true
+  },
+  "freezeArtifacts": [
+    "profile-source-class-freeze-v1.json",
+    "external-profile-provider-freeze-v1.json",
+    "self-assessment-instrument-freeze-v2.json",
+    "self-assessment-scoring-freeze-v1.json",
+    "reasoning-task-performance-freeze-v1.json",
+    "profile-signal-envelope-freeze-v1.json",
+    "cross-source-perspective-freeze-v1.json",
+    "profile-human-acceptance-v1.json"
+  ],
+  "boundaries": {
+    "profileRequiredBeforePersonalReading": false,
+    "universalMasterScoreAllowed": false,
+    "quotientLabelsAllowed": false,
+    "reasoningIqOrPercentileAllowed": false,
+    "diagnosticClaimsAllowed": false,
+    "compatibilityScoreAllowed": false,
+    "partnerHiddenStateInferenceAllowed": false,
+    "crossSourceScientificValidationTransferAllowed": false
+  },
+  "next": "New PRF-W12 human review 24/24 accepted is mandatory before Profile customer publication or primary navigation cutover."
+}
