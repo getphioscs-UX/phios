@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-REL-W4-MACHINE-ACCEPTANCE-v1.0.0",
+  "work": "REL-W4",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "status": "MACHINE_VERIFIED_HUMAN_ADMISSION_PENDING",
+  "campaign": {
+    "AST": {
+      "pairedCases": 24,
+      "machineAcceptedOutcomes": 24,
+      "composedExactPrecisionCases": 16,
+      "precisionFailClosedCases": 7,
+      "noRuleHitCases": 1,
+      "generatedStructuralClaims": 1056,
+      "allowedClaimClasses": ["OPEN"]
+    },
+    "NUM": {
+      "pairedCases": 24,
+      "machineAcceptedOutcomes": 24,
+      "composedCases": 24,
+      "generatedClaims": 91,
+      "connectionClaims": 19,
+      "openStructuralClaims": 72,
+      "allowedClaimClasses": ["CONNECTION", "OPEN"]
+    },
+    "BZR": {"expectedState": "SUPPRESSED_FAIL_CLOSED", "claims": 0},
+    "ZWR": {"expectedState": "SUPPRESSED_FAIL_CLOSED", "claims": 0},
+    "ECR": {"expectedState": "SUPPRESSED_FAIL_CLOSED", "claims": 0}
+  },
+  "boundaries": {
+    "genericCompatibilityEngineCreated": false,
+    "crossMethodMeaningCreated": false,
+    "astSynastryMeaningInvented": false,
+    "baziCrossPersonMeaningInvented": false,
+    "ziWeiCrossChartMeaningInvented": false,
+    "numRelationshipNumberMeaningInvented": false,
+    "ecrRelationshipAuthorityInvented": false,
+    "compatibilityScoreCreated": false,
+    "partnerHiddenStateInferred": false,
+    "guaranteedRelationshipOutcomeCreated": false,
+    "customerPublicationAllowed": false
+  },
+  "humanAdmission": {
+    "required": true,
+    "status": "PENDING",
+    "machinePassDoesNotSubstituteForHumanAdmission": true
+  },
+  "gate": "check:relationship:w4-method-composition"
+}
