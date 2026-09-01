@@ -20,6 +20,10 @@ assert.doesNotMatch(page,/<span[^>]*>目标时刻 UTC 偏移<\/span>/);
 assert.match(client,/upgradeAndInstallTargetMomentControls/);
 assert.match(client,/collectSharedTargetContext/);
 assert.match(client,/sharedTarget\?\.targetPlaceRef/);
+assert.match(client,/sharedTarget\?\.astTargetContext/);
+assert.match(client,/sharedTarget\?\.ecrTargetContext/);
+assert.match(client,/sharedTarget\?\.hdrTargetContext/);
+assert.match(shared,/PPR-SHARED-TARGET-CONTEXT-v2\.0\.0/);
 assert.doesNotMatch(client,/function seedZiweiTargetContext|DEVICE_DEFAULT|resolvedOptions\(\)\.timeZone|new Date\s*\(/);
 for(const token of ['sharedTargetDate','sharedTargetTime','sharedTargetPlaceRef','PPR_SHARED_TARGET_CONTEXT_REQUIRED'])assert.match(shared,new RegExp(token));
 assert.match(host,/upgradeAndInstallTargetMomentControls/);
@@ -55,4 +59,4 @@ try{
 }finally{globalThis.fetch=originalFetch}
 
 console.log('✓ Target moment address resolution passed.');
-console.log('  BaZi / Zi Wei / Numerology share one explicit target owner; target address confirmation keeps IANA timezone and date-specific UTC offset as hidden transport while each method retains its own calculation.');
+console.log('  Astrology / BaZi / Zi Wei / Numerology / ECR / Human Design share one explicit target owner; target address confirmation keeps IANA timezone and date-specific UTC offset as hidden transport while each method retains its own calculation.');

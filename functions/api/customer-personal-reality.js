@@ -21,6 +21,8 @@ import {maybeBuildProductionCombinedReading} from '../runtime-reading/cross-read
 import {buildConfirmedHumanDesignContextTransport,normalizeConfirmedHumanDesignContextProfile} from '../external-profile/human-design-context-transport.js';
 import {buildEcrHumanDesignComparisonIR} from '../external-profile/ecr-human-design-comparison-ir.js';
 import {buildEcrHumanDesignRealityBridgeIR} from '../external-profile/ecr-human-design-reality-bridge.js';
+import {buildEcrTargetContextSnapshot} from '../embodied-configuration/ecr-target-context-runtime.js';
+import {buildHdrTargetActivationReference} from '../external-profile/hdr-target-activation-reference.js';
 import {buildProgressiveCurrentRealityIntake,buildRealityComparisonCandidates} from '../current-reality/personal-current-reality-runtime.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
@@ -99,6 +101,23 @@ export function resolveAstTargetContextInput(body,selected=[]){
   if(!validUtcOffset(utcOffsetAtTarget)){const e=new Error('AST_CX_R3_TARGET_UTC_OFFSET_INVALID');e.code='AST_CX_R3_TARGET_UTC_OFFSET_INVALID';e.status=422;throw e}
   const targetTime=rawTime.length===5?`${rawTime}:00`:rawTime;
   return freeze({targetDate,targetTime,targetTimezone:freeze({iana,utcOffsetAtTarget})});
+}
+function resolveEcrTargetContextInput(body,selected=[]){
+  if(!selected.includes('ecr'))return null;
+  const raw=body?.ecrTargetContext;if(raw==null)return null;
+  const targetDate=clean(raw?.targetDate),rawTime=clean(raw?.targetTime),iana=clean(raw?.targetTimezone?.iana),utcOffsetAtTarget=clean(raw?.targetTimezone?.utcOffsetAtTarget),source=clean(raw?.source).toUpperCase()||'EXPLICIT_REQUEST';
+  const supplied=[targetDate,rawTime,iana,utcOffsetAtTarget].filter(Boolean).length;if(supplied===0)return null;
+  const fail=(code)=>{const e=new Error(code);e.code=code;e.status=422;throw e};
+  if(supplied!==4)fail('ECR_TARGET_CONTEXT_INCOMPLETE');if(!isoDate(targetDate))fail('ECR_TARGET_DATE_INVALID');if(!validClockTime(rawTime))fail('ECR_TARGET_TIME_INVALID');if(!validIanaTimezone(iana))fail('ECR_TARGET_TIMEZONE_INVALID');if(!validUtcOffset(utcOffsetAtTarget))fail('ECR_TARGET_UTC_OFFSET_INVALID');
+  return freeze({targetDate,targetTime:rawTime.length===5?`${rawTime}:00`:rawTime,targetTimezone:freeze({iana,utcOffsetAtTarget}),source});
+}
+export function resolveHdrTargetContextInput(body){
+  const raw=body?.hdrTargetContext;if(raw==null)return null;
+  const targetDate=clean(raw?.targetDate),rawTime=clean(raw?.targetTime),iana=clean(raw?.targetTimezone?.iana),utcOffsetAtTarget=clean(raw?.targetTimezone?.utcOffsetAtTarget),source=clean(raw?.source).toUpperCase()||'EXPLICIT_REQUEST';
+  const supplied=[targetDate,rawTime,iana,utcOffsetAtTarget].filter(Boolean).length;if(supplied===0)return null;
+  const fail=(code)=>{const e=new Error(code);e.code=code;e.status=422;throw e};
+  if(supplied!==4)fail('HDR_TARGET_CONTEXT_INCOMPLETE');if(!isoDate(targetDate))fail('HDR_TARGET_DATE_INVALID');if(!validClockTime(rawTime))fail('HDR_TARGET_TIME_INVALID');if(!validIanaTimezone(iana))fail('HDR_TARGET_TIMEZONE_INVALID');if(!validUtcOffset(utcOffsetAtTarget))fail('HDR_TARGET_UTC_OFFSET_INVALID');
+  return freeze({targetDate,targetTime:rawTime.length===5?`${rawTime}:00`:rawTime,targetTimezone:freeze({iana,utcOffsetAtTarget}),source});
 }
 function ziweiTargetContextInput(body,selected){
   if(!selected.includes('ziwei'))return null;
@@ -321,6 +340,9 @@ export async function onRequestPost(context){
   const ziweiTargetContextRaw=ziweiTargetContextInput(body,selected);
   let ziweiTargetContext=null;
   if(ziweiTargetContextRaw){try{ziweiTargetContext=resolveZiweiLiveTargetContext(ziweiTargetContextRaw)}catch(error){return json({ok:false,error:error?.code||'ZIWEI_CX_R1_TARGET_CONTEXT_INVALID'},error?.status||422)}}
+  let ecrTargetContext=null;try{ecrTargetContext=resolveEcrTargetContextInput(body,selected)}catch(error){return json({ok:false,error:error?.code||'ECR_TARGET_CONTEXT_INVALID'},error?.status||422)}
+  let hdrTargetContext=null;try{hdrTargetContext=resolveHdrTargetContextInput(body)}catch(error){return json({ok:false,error:error?.code||'HDR_TARGET_CONTEXT_INVALID'},error?.status||422)}
+  if(hdrTargetContext&&!confirmedXpf)return json({ok:false,error:'HDR_TARGET_CONFIRMED_PROFILE_REQUIRED'},422);
   const results=await Promise.all(selected.map(key=>executeOne(context,input,key,consentRecordId,parameters,numExpansionInput,ziweiTargetContext)));
   const projections=results.filter(result=>result.ok).map(result=>result.canonicalProjection);
   const blocked=results.filter(result=>!result.ok);
@@ -366,6 +388,10 @@ export async function onRequestPost(context){
   }
   const astrology=stripAstrologyTechnicalProjection(results.find(result=>result.ok&&result.customerProjection)?.customerProjection||null);
   const numerology=projectNumerologyEnvelopeForCustomer(results.find(result=>result.ok&&result.numerologyEnvelope)?.numerologyEnvelope||null);
+  let ecrTargetContextSnapshot=null;const ecrResult=results.find(result=>result.ok&&result.spec?.methodCode==='EMBODIED_CONFIGURATION');
+  if(ecrTargetContext&&ecrResult?.canonicalProjection){try{ecrTargetContextSnapshot=await buildEcrTargetContextSnapshot({canonicalProjection:ecrResult.canonicalProjection,targetContext:ecrTargetContext,locale})}catch(error){ecrTargetContextSnapshot=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'ECR_TARGET_CONTEXT_RUNTIME_UNAVAILABLE'})}}
+  let hdrTargetActivationReference=null;
+  if(hdrTargetContext&&confirmedXpf){try{hdrTargetActivationReference=await buildHdrTargetActivationReference({targetContext:hdrTargetContext,confirmedProfile:confirmedXpf})}catch(error){hdrTargetActivationReference=freeze({state:'UNAVAILABLE',reasonCode:error?.code||error?.message||'HDR_TARGET_REFERENCE_UNAVAILABLE',boundary:freeze({confirmedChartChanged:false,interpretationCreated:false,persisted:false})})}}
   const primaryCustomerProduct=singleZiwei?freeze({type:'ZIWEI_FULL_PRODUCTION',owner:'ZIWEI_CX_R1_FULL_PRODUCTION_PRODUCT',payloadRef:'view.ziweiFullProduction',genericSmrCompleteReportOwner:false}):null;
   const productRoute=await buildPersonalRealityProductRoute({selectedKeys:selected,results,methodNativeReading,locale,intent:body?.intent||'',astTargetContext,consentRecordId});
   let ecrHumanDesignComparison=null;
@@ -382,7 +408,7 @@ export async function onRequestPost(context){
   const crossPerspectiveReading=combinedReading;
   // Historical CX-R12R4A successor shape witness for compatibility checker only: view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading}) · methods:readingMethods
   const currentReality=freeze({schemaVersion:'PHI-OS-PPR-R2-CURRENT-REALITY-ENTRY-v1.0.0',state:currentRealityComparisonCandidates.length?'OPTIONAL_INPUT_AVAILABLE':'NOT_AVAILABLE',intake:currentRealityIntake,comparisonCandidates:currentRealityComparisonCandidates,observations:null,realityComparison:null,methodCurrentRealityCorrelation:null,governance:freeze({customerInputRequiredForRealityEvidence:true,methodTimingIsCurrentReality:false,automaticPersistence:false})});
-  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,currentReality,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge});
+  const view=freeze({...stripLegacyInterpretation(baseView),astrology,numerology,reading,singleMethodReading,methodNativeReading:freeze(methodNativeReading),ziweiFullProduction,primaryCustomerProduct,productRoute,crossPerspectiveReading,currentReality,humanDesignContext,ecrHumanDesignComparison,ecrHumanDesignRealityBridge,ecrTargetContext:ecrTargetContextSnapshot,hdrTargetActivationReference});
   return json({
     ok:true,
     view,

@@ -49,6 +49,22 @@ function normalizeStructureEdit(field,value){
   const parsed=parseHumanDesignProfileText(`${label}: ${text}`,{sourceType:'CUSTOMER_CORRECTED',sourceRegionPrefix:`CUSTOMER_CORRECTED:${field}`});
   return parsed.structuralCandidates?.find(item=>item.field===field)?.normalizedValue||null;
 }
+function parseActivationEditList(value,layer){
+  const text=cleanExternalProfileText(value,4000);if(!text)return [];
+  const bodyCodes='SUN|EARTH|MOON|NORTH_NODE|SOUTH_NODE|MERCURY|VENUS|MARS|JUPITER|SATURN|URANUS|NEPTUNE|PLUTO';
+  const re=new RegExp(`(?:\\b(${bodyCodes})\\s*[:：]?\\s*)?\\b([1-9]|[1-5]\\d|6[0-4])\\s*[.]\\s*([1-6])\\b`,'gi');
+  const out=[],seen=new Set();
+  for(const match of text.matchAll(re)){const item=Object.freeze({layer,bodyCode:match[1]?match[1].toUpperCase():null,gateLine:`${Number(match[2])}.${Number(match[3])}`});const key=`${item.layer}:${item.bodyCode||''}:${item.gateLine}`;if(!seen.has(key)){seen.add(key);out.push(item)}}
+  return out;
+}
+function normalizeActivationEdits(structureEdits={}){
+  const ownsDesign=Object.prototype.hasOwnProperty.call(structureEdits,'designActivations');
+  const ownsPersonality=Object.prototype.hasOwnProperty.call(structureEdits,'personalityActivations');
+  if(!ownsDesign&&!ownsPersonality)return undefined;
+  const activations=[...parseActivationEditList(structureEdits.designActivations,'DESIGN'),...parseActivationEditList(structureEdits.personalityActivations,'PERSONALITY')];
+  return activations.length?Object.freeze(activations):null;
+}
+
 function recordsFromDraft(draft,edits={},structureEdits={}){
   const records=[];
   for(const field of [...EXTERNAL_PROFILE_CORE_FIELDS,...EXTERNAL_PROFILE_MANUAL_FIELDS]){
@@ -58,8 +74,14 @@ function recordsFromDraft(draft,edits={},structureEdits={}){
     const corrected=edited!==original.value;
     records.push(freeze({field,value:edited,sourceType:corrected?'CUSTOMER_CORRECTED':(original.sourceType||'CUSTOMER_CONFIRMED'),sourceRegion:original.sourceRegion||null,sourceValue:original.value||null,customerConfirmed:true,phiosCalculated:false}));
   }
+  const activationEdits=normalizeActivationEdits(structureEdits);
   for(const field of EXTERNAL_PROFILE_STRUCTURAL_FIELDS){
     const original=draft.structure?.[field]||{};
+    if(field==='activations'&&activationEdits!==undefined){
+      if(!activationEdits||!activationEdits.length)continue;
+      records.push(freeze({field,value:activationEdits,sourceType:'CUSTOMER_CORRECTED',sourceRegion:'CUSTOMER_CORRECTED:activations',sourceValue:original.value??null,customerConfirmed:true,phiosCalculated:false}));
+      continue;
+    }
     if(Object.prototype.hasOwnProperty.call(structureEdits,field)&&field!=='activations'){
       const edited=normalizeStructureEdit(field,structureEdits[field]);
       if(!edited||!edited.length)continue;

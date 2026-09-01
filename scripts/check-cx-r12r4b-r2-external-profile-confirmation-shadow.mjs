@@ -108,7 +108,8 @@ const html=fs.readFileSync('perspectives/personal/index.html','utf8'),client=fs.
 for(const token of ['data-cx-external-profile-confirmation','data-cx-external-profile-confirm','externalProfileShadowCheck'])assert(html.includes(token),`R2 customer confirmation surface missing ${token}`);
 const historicalConversionCopy=html.includes('Cloudflare document-conversion service');
 const w11ConfirmationCopy=hdW11.status==='OFFICIAL_CHART_PDF_INTAKE_ADAPTER_SUCCESSOR_ACTIVE'&&html.includes('Automatic extraction creates candidates only.')&&html.includes('Only the values you verify here are used in this session.');
-assert(historicalConversionCopy||w11ConfirmationCopy,'R2/W11 customer confirmation surface must disclose candidate-only extraction and customer verification');
+const currentConfirmationCopy=html.includes('CHART DETAILS — REVIEW BEFORE USE')&&html.includes('Review the chart details below.')&&html.includes('only use the values you confirm');
+assert(historicalConversionCopy||w11ConfirmationCopy||currentConfirmationCopy,'R2/W11/current customer confirmation surface must disclose review-before-use and customer verification');
 for(const token of ['/api/customer-external-profile-confirm','/api/customer-external-profile-shadow-check','renderExternalProfileConfirmation','confirmPreparedExternalProfile','runExternalProfileShadowCheck'])assert(client.includes(token),`R2 client binding missing ${token}`);
 for(const forbidden of ['name="externalActivatedGates"','name="externalChannels"','name="externalDefinedCenters"','name="externalOpenCenters"'])assert.equal(html.includes(forbidden),false,`Structural detail must not become normal manual input: ${forbidden}`);
 

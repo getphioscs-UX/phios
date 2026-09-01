@@ -60,9 +60,11 @@ export async function onRequestPost(context){
   if(hasManual)sources.push(freeze({sourceType:'CUSTOMER_MANUAL_STRUCTURED_ENTRY',fieldCount:Object.values(manualFields).filter(Boolean).length+Object.values(manualCoreFields).filter(Boolean).length+manualStructureParts.length,sourceAuthority:'CUSTOMER'}));
   const intakeId=`XPF-${crypto.randomUUID()}`;
   const extractionIr=buildExternalProfileExtractionIr({intakeId,sources,pastedText,manualFields,manualCoreFields,manualStructureText,documentExtraction});
-  const hasConfirmable=extractionIr.candidates.length||extractionIr.manualFields.length;
-  const confirmationDraft=hasConfirmable?buildExternalProfileConfirmationDraft(extractionIr):null;
-  const recognitionSummary=confirmationDraft?buildRecognitionSummary(confirmationDraft):freeze({basicExpectedCount:BASIC_CONFIRMATION_FIELDS.length,recognizedCount:0,pendingCount:BASIC_CONFIRMATION_FIELDS.length,recognizedFields:[],pendingFields:[...BASIC_CONFIRMATION_FIELDS],advancedRecognizedCount:0,advancedRecognizedFields:[],structuralRecognizedFields:[]});
+  // A customer always gets a confirmation surface after a valid upload/manual intake,
+  // even when document extraction returned zero candidates. This keeps recognition
+  // failure recoverable in-place instead of hiding the editable chart form.
+  const confirmationDraft=buildExternalProfileConfirmationDraft(extractionIr);
+  const recognitionSummary=buildRecognitionSummary(confirmationDraft);
   return json({
     ok:true,
     externalProfileIntake:freeze({
@@ -74,8 +76,9 @@ export async function onRequestPost(context){
       extractionIr,
       confirmationDraft,
       recognitionSummary,
-      intakeState:confirmationDraft?'NEEDS_CONFIRMATION':documentExtraction?.status==='FAILED'?'EXTRACTION_FAILED':'EXTRACTION_INCOMPLETE',
-      nextAction:confirmationDraft?'CUSTOMER_CONFIRMATION_REQUIRED':documentExtraction?.status==='FAILED'?'DOCUMENT_EXTRACTION_FAILED':'DOCUMENT_EXTRACTION_REQUIRED',
+      intakeState:'NEEDS_CONFIRMATION',
+      extractionState:documentExtraction?.status||'NOT_APPLICABLE',
+      nextAction:'CUSTOMER_CONFIRMATION_REQUIRED',
       privacy:{saved:false,fileContentPersisted:false,runtimeMemoryWritten:false},
       boundary:{phiosCalculated:false,hdrShadowUsed:false,customerReportAuthorityCreated:false,workersAiUsedForDocumentConversion:documentExtraction?.aiServiceUsed===true,workersAiCreatesMeaning:false}
     })
