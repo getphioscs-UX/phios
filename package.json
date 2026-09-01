@@ -2076,7 +2076,12 @@
     "check:relationship:w0-w4": "node scripts/check-rel-w0-w4-foundation-composition.mjs",
     "build:relationship:w4-human-review": "node scripts/build-rel-w4-human-review.mjs",
     "check:relationship:w4-human-review-readiness": "node scripts/check-rel-w4-human-review-readiness.mjs",
-    "check:relationship:w4-method-coverage-audit": "node scripts/check-rel-w4-method-coverage-audit.mjs"
+    "check:relationship:w4-method-coverage-audit": "node scripts/check-rel-w4-method-coverage-audit.mjs",
+    "check:relationship:w4-human-admission": "node scripts/check-rel-w4-human-admission.mjs",
+    "check:relationship:method-authority-successors": "node scripts/check-rel-method-authority-successors.mjs",
+    "build:relationship:method-authority-human-review": "node scripts/build-rel-method-authority-successor-human-review.mjs",
+    "check:relationship:method-authority-human-review": "node scripts/check-rel-method-authority-successor-human-review.mjs",
+    "check:relationship:authority-successor": "npm run check:relationship:w4-human-admission && npm run check:relationship:method-authority-successors && npm run build:relationship:method-authority-human-review && npm run check:relationship:method-authority-human-review"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

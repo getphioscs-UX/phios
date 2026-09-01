@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "PHI-OS-BZR-REL-CROSS-PERSON-STRUCTURAL-CONTRACT-v1.0.0",
+  "work": "BZR-REL-W0-W5",
+  "baselineCommit": "c259917fbc55b57d35402a591f0db2e7e7b7e8c3",
+  "status": "MACHINE_CANDIDATE_HUMAN_ADMISSION_REQUIRED",
+  "objective": "Detect only A×B stem/branch structural relations using existing BaZi structural identity tables, then project neutral relationship observations without reusing natal-only W5 meaning as pair meaning.",
+  "inputs": [
+    "AcceptedMethodReadingEnvelope(A:BZR)",
+    "AcceptedMethodReadingEnvelope(B:BZR)",
+    "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0(A)",
+    "PHI-OS-BAZI-CANONICAL-CHART-IR-v1.0.0(B)",
+    "actual precision"
+  ],
+  "crossPersonRule": "Every emitted relation must contain at least one A member and one B member. A-only or B-only natal relations are excluded.",
+  "relationTypes": [
+    "STEM_COMBINATION",
+    "BRANCH_SIX_COMBINATION",
+    "BRANCH_CLASH",
+    "BRANCH_HARM",
+    "BRANCH_BREAK",
+    "BRANCH_PUNISHMENT_PAIR",
+    "BRANCH_SELF_PUNISHMENT",
+    "BRANCH_THREE_HARMONY",
+    "BRANCH_THREE_MEETING",
+    "BRANCH_PUNISHMENT_GROUP"
+  ],
+  "allowedClaimClasses": [
+    "OPEN"
+  ],
+  "authorityRefs": [
+    "content/professional/bzr-full-production/contracts/bazi-stem-branch-relationship-contract-v1.json",
+    "functions/bzr-full-production/bazi-structural-registry.js"
+  ],
+  "boundaries": {
+    "natalRelationMeaningReusedAsPairMeaning": false,
+    "transformationEstablished": false,
+    "goodBadConclusion": false,
+    "marriageOutcomePrediction": false,
+    "fertilityClaim": false,
+    "eventPrediction": false,
+    "compatibilityScore": false,
+    "humanAdmissionRequired": true
+  }
+}
