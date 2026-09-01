@@ -1,3 +1,12 @@
-import assert from 'node:assert/strict';import fs from 'node:fs';import {execFileSync} from 'node:child_process';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
 execFileSync(process.execPath,['scripts/build-hd-rel-r1-w7-human-review.mjs','--check'],{stdio:'inherit'});
-const c=JSON.parse(fs.readFileSync('content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-review-cases-v1.json','utf8'));const r=JSON.parse(fs.readFileSync('content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-review-results-v1.json','utf8'));assert.equal(c.requiredCases,24);assert.equal(c.cases.length,24);assert.equal(c.r3IndividualHumanAcceptanceInherited,false);assert.equal(r.requiredCases,24);assert.equal(r.accepted,0);assert.equal(r.rejected,0);assert.equal(r.pending,24);assert.equal(r.r3IndividualHumanAcceptanceInherited,false);assert.ok(c.cases.some(x=>x.group==='ELECTROMAGNETIC'));assert.ok(c.cases.some(x=>x.group==='DOMINANCE'));assert.ok(c.cases.some(x=>x.group==='COMPROMISE'));assert.ok(c.cases.some(x=>x.group==='COMPANIONSHIP'));assert.ok(c.cases.some(x=>x.group==='GATE_COMPANIONSHIP'));assert.ok(c.cases.some(x=>x.group==='NO_RULE_HIT'));console.log('✓ HD-REL-R1 W7 new Human review is ready: 24 cases, 0 accepted, 24 pending; no inheritance from individual HD R3 review.');
+const c=JSON.parse(fs.readFileSync('content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-review-cases-v1.json','utf8'));
+const r=JSON.parse(fs.readFileSync('content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-review-results-v1.json','utf8'));
+const a=JSON.parse(fs.readFileSync('content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-admission-v1.json','utf8'));
+assert.equal(c.requiredCases,24);assert.equal(c.cases.length,24);assert.equal(c.r3IndividualHumanAcceptanceInherited,false);
+assert.equal(r.status,'HUMAN_ACCEPTED_24_OF_24');assert.equal(r.requiredCases,24);assert.equal(r.accepted,24);assert.equal(r.revised,0);assert.equal(r.rejected,0);assert.equal(r.pending,0);assert.equal(r.r3IndividualHumanAcceptanceInherited,false);assert.equal(r.results.every(x=>x.decision==='ACCEPT'),true);
+assert.equal(a.status,'HUMAN_ACCEPTED_24_OF_24');assert.equal(a.declarationSource,'USER_CONFIRMED_ALL_24_ACCEPTED_IN_CHAT');assert.deepEqual(a.summary,{required:24,accepted:24,revised:0,rejected:0,pending:0});assert.equal(a.individualHdR3AcceptanceInherited,false);assert.equal(a.reviewEvidence.caseBundleDigest,r.caseBundleDigest);assert.equal(a.admissionEffect.w8ProductionAdmissionEligible,true);
+for(const group of ['ELECTROMAGNETIC','DOMINANCE','COMPROMISE','COMPANIONSHIP','GATE_COMPANIONSHIP','NO_RULE_HIT'])assert.ok(c.cases.some(x=>x.group===group));
+console.log('✓ HD-REL-R1 W7 Human admission passed: 24/24 accepted; no inheritance from individual HD R3 review.');

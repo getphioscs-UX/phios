@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-HD-REL-R1-W8-PRODUCTION-ADMISSION-v1.0.0",
   "work": "HD-REL-R1-W8",
   "baselineCommit": "2b660066669190eee55de54a2bb87b10be0eb3c4",
-  "status": "BLOCKED_HUMAN_REVIEW_PENDING",
+  "status": "PRODUCTION_ADMITTED_CUSTOMER_PUBLISHABLE",
   "gates": {
     "w0SourceOntology": "PASS",
     "w1CompositeStructure": "PASS",
@@ -11,7 +11,7 @@
     "w4OwnershipDedup": "PASS",
     "w5RealityComposition": "PASS",
     "w6MachineCampaign": "PASS_24_OF_24",
-    "w7HumanReview": "PENDING_24_OF_24"
+    "w7HumanReview": "PASS_24_OF_24"
   },
   "machine": {
     "requiredCases": 24,
@@ -21,16 +21,20 @@
   },
   "human": {
     "requiredCases": 24,
-    "accepted": 0,
+    "accepted": 24,
+    "revised": 0,
     "rejected": 0,
-    "pending": 24,
-    "inheritedFromHdProR3": false
+    "pending": 0,
+    "inheritedFromHdProR3": false,
+    "admissionRef": "content/personal-reading/relationship/hd-r1/review/HD-REL-R1-W7-human-admission-v1.json"
   },
   "authorityEffect": {
-    "relW4HdProductionAdmitted": false,
-    "relationshipMethodCapabilityPromotionAllowed": false,
-    "relationshipMethodCompositionExecutable": false,
-    "customerPublicationAllowed": false,
+    "relW4HdProductionAdmitted": true,
+    "relationshipMethodCapabilityPromotionAllowed": true,
+    "relationshipMethodCompositionExecutable": true,
+    "methodSpecificClaimsCustomerPublishable": true,
+    "wholeRelationshipProductCustomerPublished": false,
+    "relW5Eligible": true,
     "individualHdR3CustomerPublishedUnaffected": true
   },
   "boundaries": {
@@ -42,5 +46,6 @@
     "pentaIncluded": false,
     "bg5Included": false
   },
-  "next": "W7 new Human review 24/24 is mandatory before REL-W4-HD can be promoted to SUPPORTED."
+  "next": "Create one all-method REL-W4 current reconciliation/freeze, then REL-W5 Relationship Current Reality may begin.",
+  "admissionCommitContext": "3a8e0658e26fa931257b491204a6ed2dcb345725"
 }

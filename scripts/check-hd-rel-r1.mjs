@@ -11,4 +11,4 @@ const checks=[
  'scripts/check-hd-rel-r1-w8-production-admission.mjs'
 ];
 for(const file of checks)execFileSync(process.execPath,[file],{stdio:'inherit'});
-console.log('✓ HD-REL-R1 W0-W8 aggregate passed; production remains fail-closed until the new W7 24-case Human review is accepted.');
+console.log('✓ HD-REL-R1 W0-W8 aggregate passed: 24/24 Human accepted, REL-W4-HD production-admitted, and the six-method REL-W4 current authority is reconciled for REL-W5.');
