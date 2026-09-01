@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.cross-source-perspective.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "perspectives", "groupIndex", "governance", "semanticDigest"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-CROSS-SOURCE-PERSPECTIVE-IR-v1"},
+    "perspectives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["crossSourcePerspectiveId", "ruleId", "group", "topicId", "statement", "signalRefs", "sourceClasses", "realityCorrelationRefs", "provenance", "governance", "semanticDigest"],
+        "properties": {
+          "crossSourcePerspectiveId": {"type": "string"},
+          "ruleId": {"type": "string"},
+          "group": {"enum": ["SOURCE_ALIGNED", "SOURCE_COMPLEMENTARY", "SOURCE_TENSION", "SOURCE_CONTRADICTION", "CURRENTLY_SUPPORTED", "CURRENTLY_CONTRADICTED", "OPEN"]},
+          "topicId": {"type": "string"},
+          "statement": {"type": "string"},
+          "signalRefs": {"type": "array", "items": {"type": "string"}},
+          "sourceClasses": {"type": "array", "items": {"type": "string"}},
+          "realityCorrelationRefs": {"type": "array", "items": {"type": "string"}},
+          "provenance": {"type": "object"},
+          "governance": {"type": "object"},
+          "semanticDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "groupIndex": {"type": "object"},
+    "governance": {"type": "object"},
+    "semanticDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+  }
+}

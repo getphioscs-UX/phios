@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.current-reality-correlation.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "participantRef",
+    "asOfDate",
+    "allowedStates",
+    "correlations",
+    "governance",
+    "semanticDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-PROFILE-CURRENT-REALITY-CORRELATION-v1"
+    },
+    "asOfDate": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "allowedStates": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "CURRENTLY_RESONANT",
+          "PARTIALLY_RESONANT",
+          "CURRENTLY_NOT_RESONANT",
+          "OPEN"
+        ]
+      }
+    },
+    "correlations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "correlationId",
+          "profileSignalRef",
+          "participantRef",
+          "sourceClass",
+          "state",
+          "observationRefs",
+          "basis",
+          "freshness",
+          "governance",
+          "semanticDigest"
+        ],
+        "properties": {
+          "correlationId": {
+            "type": "string",
+            "pattern": "^PRF-RC-[A-F0-9]{24}$"
+          },
+          "profileSignalRef": {
+            "type": "string"
+          },
+          "participantRef": {
+            "type": "string"
+          },
+          "sourceClass": {
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "CURRENTLY_RESONANT",
+              "PARTIALLY_RESONANT",
+              "CURRENTLY_NOT_RESONANT",
+              "OPEN"
+            ]
+          },
+          "observationRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "customerNote": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "basis": {
+            "const": "EXPLICIT_CUSTOMER_COMPARISON"
+          },
+          "freshness": {
+            "type": "object"
+          },
+          "governance": {
+            "type": "object"
+          },
+          "semanticDigest": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "governance": {
+      "type": "object"
+    },
+    "semanticDigest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "participantRef": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-PRF-W7-W10-MACHINE-ACCEPTANCE-v1.0.0",
+  "baselineCommit": "fc9616b9f63ed4099e008a9395ad4d167bfa597e",
+  "scope": ["PRF-W7", "PRF-W8", "PRF-W9", "PRF-W10"],
+  "status": "PROFILE_CONTEXT_TRANSLATION_MACHINE_VERIFIED",
+  "runtimeOwner": "functions/profile/profile-context-runtime.js",
+  "gates": [
+    "check:profile:w7-current-reality-correlation",
+    "check:profile:w8-cross-source-translation",
+    "check:profile:w9-relationship-profile-lane",
+    "check:profile:w10-academic-bridge-registry",
+    "check:profile:w7-w10"
+  ],
+  "verifiedBoundaries": {
+    "currentRealityDoesNotProveProfile": true,
+    "oldProfileDateCannotSilentlyPresentAsCurrent": true,
+    "sourceClassesPreserved": true,
+    "crossSourceConvergenceDoesNotCreateProof": true,
+    "symbolicConvergenceDoesNotCreateScientificValidation": true,
+    "relationshipProfileLaneSeparateFromRelW4": true,
+    "relationshipComparisonUsesAdmittedRulesOnly": true,
+    "compatibilityPercentageForbidden": true,
+    "partnerHiddenStateInferenceForbidden": true,
+    "academicBridgeInstrumentSpecificAdmissionRequired": true,
+    "p3P4OptionalAndNonBlocking": true
+  },
+  "customerPublication": {
+    "allowed": false,
+    "reason": "PRF-W11 progressive UX and PRF-W12 machine/human admission + freeze remain required.",
+    "nextRequiredGate": "PRF-W12"
+  }
+}
