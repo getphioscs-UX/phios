@@ -5,6 +5,7 @@ import {buildExternalProfileExtractionIr} from '../functions/external-profile/ex
 import {extractUploadedExternalProfileDocument} from '../functions/external-profile/upload-document-extractor.js';
 import {buildExternalProfileConfirmationDraft,confirmExternalProfile} from '../functions/external-profile/external-profile-confirmation.js';
 import {compareConfirmedExternalProfileToHdrShadow,runHdrShadowValidation} from '../functions/external-profile/hdr-shadow-validation.js';
+import {HDR_INTAKE_CALCULATION_SOURCE,buildHdrIntakeCalculationReference} from '../functions/external-profile/hdr-intake-calculation-reference.js';
 import {onRequestPost as externalProfileIntake} from '../functions/api/customer-external-profile-intake.js';
 import {onRequestPost as externalProfileConfirm} from '../functions/api/customer-external-profile-confirm.js';
 
@@ -93,6 +94,25 @@ assert.equal(shadowRun.comparison.state,'REFERENCE_MATCH');
 assert.equal(shadowRun.governance.productionDispatchAuthorityCreated,false);
 assert.equal(shadowRun.governance.clientDeliveryAllowed,false);
 
+const intakeReference=await buildHdrIntakeCalculationReference({canonicalBirthInput:{birthDate:'1989-11-15',birthTime:'22:50:00',birthPlace:{displayName:'Taiping',countryCode:'MY',latitude:4.85,longitude:100.74},timezone:{iana:'Asia/Kuala_Lumpur',utcOffsetAtBirth:'+08:00'},timeAccuracy:'EXACT',locale:'zh-Hans',consent:{recordId:'CONSENT',granted:true},inputVersion:'MCD-3-CANONICAL-BIRTH-INPUT-v1.0.0'},runtimeFactory:fakeRuntimeFactory,requestId:'HDR-INTAKE-REFERENCE-TEST'});
+assert.equal(intakeReference.status,'AVAILABLE');
+assert.equal(intakeReference.sourceType,HDR_INTAKE_CALCULATION_SOURCE);
+assert.deepEqual(intakeReference.calculatedBasicFields,['type','authority','profile','definition']);
+assert(intakeReference.calculatedStructuralFields.includes('channels'));
+assert(intakeReference.calculatedStructuralFields.includes('definedCenters'));
+assert.equal(intakeReference.boundary.customerConfirmationRequired,true);
+assert.equal(intakeReference.boundary.officialBodyGraphNotGenerated,true);
+const fallbackIr=buildExternalProfileExtractionIr({intakeId:'XPF-HDR-FALLBACK',sources:[{sourceType:'CUSTOMER_UPLOADED_DOCUMENT',fileName:'chart.pdf'}],documentExtraction:{status:'UNAVAILABLE',reasonCode:'WORKERS_AI_MARKDOWN_CONVERSION_UNAVAILABLE',schemaVersion:'TEST',extractionMethod:'CLOUDFLARE_AI_MARKDOWN_CONVERSION',aiServiceUsed:false},calculationReference:intakeReference});
+const fallbackDraft=buildExternalProfileConfirmationDraft(fallbackIr);
+assert.equal(fallbackDraft.fields.type.value,'Generator');
+assert.equal(fallbackDraft.fields.type.sourceType,HDR_INTAKE_CALCULATION_SOURCE);
+assert.deepEqual(fallbackDraft.structure.channels.value,shadowProfile.channels);
+assert.equal(fallbackIr.boundary.phiosCalculationReferencePresent,true);
+const uploadWinsIr=buildExternalProfileExtractionIr({intakeId:'XPF-HDR-UPLOAD-WINS',sources:[{sourceType:'CUSTOMER_UPLOADED_IMAGE',fileName:'chart.png'}],documentExtraction:converted,calculationReference:intakeReference});
+const uploadWinsDraft=buildExternalProfileConfirmationDraft(uploadWinsIr);
+assert.equal(uploadWinsDraft.fields.type.value,'生产者');
+assert.equal(uploadWinsDraft.fields.type.sourceType,'CUSTOMER_UPLOADED_IMAGE');
+
 const form=new FormData();form.set('profileFamily','HUMAN_DESIGN');form.set('consent','true');form.set('file',file);
 const intakeResponse=await externalProfileIntake({request:new Request('https://example.test/api/customer-external-profile-intake',{method:'POST',body:form}),env:{AI:fakeAi}});
 assert.equal(intakeResponse.status,200);const intakePayload=await intakeResponse.json();
@@ -106,6 +126,11 @@ assert.equal(confirmResponse.status,200);const confirmPayload=await confirmRespo
 
 const html=fs.readFileSync('perspectives/personal/index.html','utf8'),client=fs.readFileSync('assets/customer-ui/js/surfaces/personal-reality.js','utf8');
 for(const token of ['data-cx-external-profile-confirmation','data-cx-external-profile-confirm','externalProfileShadowCheck'])assert(html.includes(token),`R2 customer confirmation surface missing ${token}`);
+assert(client.includes('useBirthDataFallback'));
+assert(client.includes('PHIOS_HDR_INTERNAL_CALCULATION_REFERENCE'));
+assert(client.includes('internal calculation reference'));
+assert(html.includes('calculate a structural reference'));
+assert(html.includes('计算结构参考'));
 const historicalConversionCopy=html.includes('Cloudflare document-conversion service');
 const w11ConfirmationCopy=hdW11.status==='OFFICIAL_CHART_PDF_INTAKE_ADAPTER_SUCCESSOR_ACTIVE'&&html.includes('Automatic extraction creates candidates only.')&&html.includes('Only the values you verify here are used in this session.');
 const currentConfirmationCopy=html.includes('CHART DETAILS — REVIEW BEFORE USE')&&html.includes('Review the chart details below.')&&html.includes('only use the values you confirm');

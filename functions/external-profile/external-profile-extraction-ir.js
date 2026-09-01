@@ -14,7 +14,7 @@ function mergeCandidateSets(...sets){
   return out;
 }
 
-export function buildExternalProfileExtractionIr({intakeId,sources=[],pastedText='',manualFields={},manualCoreFields={},manualStructureText='',documentExtraction=null}={}){
+export function buildExternalProfileExtractionIr({intakeId,sources=[],pastedText='',manualFields={},manualCoreFields={},manualStructureText='',documentExtraction=null,calculationReference=null}={}){
   if(typeof intakeId!=='string'||!intakeId.trim())throw new TypeError('EXTERNAL_PROFILE_INTAKE_ID_REQUIRED');
   const parsed=parseHumanDesignProfileText(pastedText);
   const manualAdvanced=normalizeManualAdvancedFields(manualFields);
@@ -26,7 +26,8 @@ export function buildExternalProfileExtractionIr({intakeId,sources=[],pastedText
   const documentSource=sources.find(source=>['CUSTOMER_UPLOADED_DOCUMENT','CUSTOMER_UPLOADED_IMAGE'].includes(source.sourceType));
   const documentParsed=documentText?parseHumanDesignProfileText(documentText,{sourceType:documentSource?.sourceType||'CUSTOMER_UPLOADED_DOCUMENT',sourceRegionPrefix:'UPLOADED_MATERIAL'}):{candidates:[],structuralCandidates:[],unresolved:[],conflicts:[]};
   const hasDocument=Boolean(documentSource);
-  const candidates=mergeCandidateSets(documentParsed.candidates,documentParsed.structuralCandidates,parsed.candidates,parsed.structuralCandidates);
+  const calculatedCandidates=calculationReference?.status==='AVAILABLE'?(calculationReference.candidates||[]):[];
+  const candidates=mergeCandidateSets(documentParsed.candidates,documentParsed.structuralCandidates,parsed.candidates,parsed.structuralCandidates,calculatedCandidates);
   const unresolved=[...parsed.unresolved];
   if(hasDocument&&documentExtraction?.status!=='EXTRACTED')unresolved.push(documentExtraction?documentExtraction.reasonCode||'BINARY_DOCUMENT_EXTRACTION_UNAVAILABLE':'BINARY_DOCUMENT_EXTRACTION_PENDING_SUCCESSOR');
   if(hasDocument&&documentExtraction?.status==='EXTRACTED'&&!documentParsed.candidates.length&&!documentParsed.structuralCandidates.length)unresolved.push('DOCUMENT_TEXT_EXTRACTED_NO_PROFILE_FIELDS');
@@ -43,6 +44,7 @@ export function buildExternalProfileExtractionIr({intakeId,sources=[],pastedText
     status,
     sources:[...sources],
     documentExtraction:documentExtraction?freeze({schemaVersion:documentExtraction.schemaVersion,status:documentExtraction.status,extractionMethod:documentExtraction.extractionMethod,reasonCode:documentExtraction.reasonCode||null,format:documentExtraction.format||null,mimeType:documentExtraction.mimeType||null,characterCount:documentExtraction.characterCount||0,tokens:documentExtraction.tokens??null,conversionId:documentExtraction.conversionId||null,aiServiceUsed:documentExtraction.aiServiceUsed===true,meaningCreated:false,interpretationCreated:false}):null,
+    calculationReference:calculationReference?freeze({schemaVersion:calculationReference.schemaVersion,status:calculationReference.status,sourceType:calculationReference.sourceType||null,calculatedBasicFields:freeze([...(calculationReference.calculatedBasicFields||[])]),calculatedStructuralFields:freeze([...(calculationReference.calculatedStructuralFields||[])]),incarnationConfiguration:calculationReference.incarnationConfiguration||null,calculationReference:calculationReference.calculationReference||null,boundary:calculationReference.boundary||null}):null,
     candidates:freeze(candidates),
     manualFields:[...manual],
     unresolved:[...new Set(unresolved)],
@@ -50,6 +52,8 @@ export function buildExternalProfileExtractionIr({intakeId,sources=[],pastedText
     boundary:{
       customerSuppliedExternalContext:true,
       phiosCalculated:false,
+      phiosCalculationReferencePresent:calculationReference?.status==='AVAILABLE',
+      calculatedReferenceRequiresCustomerConfirmation:true,
       canonicalMethodProjection:false,
       machineExtractedCandidatesRequireCustomerConfirmation:true,
       manualFieldsAreCustomerConfirmed:true,

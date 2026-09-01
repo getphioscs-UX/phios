@@ -5,7 +5,7 @@
   "principle": "Historical freezes are immutable lineage evidence and are not current runtime byte requirements.",
   "files": {
     "perspectives/personal/index.html": {
-      "currentSha256": "db168dadb03c873122b938d8fde7793134e6e27f7cfbc92bddd18e92d66894c7",
+      "currentSha256": "4798281abddc0aa2ec77863ae4f80c854fb6c8e431f2c17b0c6e51c7b78bd59b",
       "recognizedPredecessors": [
         "881a45a6b9c730ed1d61ba2ca30355b21548fddb6e645c873cd5e407662d400b",
         "81a46efab60d5337fc4802ac5ffff26dab3fdf7ec388de5298de2c38e60c3d3c",
@@ -21,7 +21,8 @@
         "fba83495e1bc6899485cb6b58eb24b28213fe34320a1786318cf63885036d08e",
         "766b690397b0263150f9355391f7816bab3f57252c0947b5f5d79185f90eff02",
         "df9d9c402c9a1a9e6f2de79a68f98d78865d80af6a9e10cacfc7e0eb54882b09",
-        "4ebe1cfcf3edcadbe8cfe04f3acebd2ea33984db1aba8586dfd3be5503550571"
+        "4ebe1cfcf3edcadbe8cfe04f3acebd2ea33984db1aba8586dfd3be5503550571",
+        "db168dadb03c873122b938d8fde7793134e6e27f7cfbc92bddd18e92d66894c7"
       ],
       "requiredTokens": [
         "rel=\"canonical\" href=\"/perspectives/personal/\"",
@@ -36,7 +37,9 @@
         "data-cx-external-profile-confirmation",
         "data-cx-hd-target-reference",
         "Human Design transit overlay",
-        "Human Design 流日叠加"
+        "Human Design 流日叠加",
+        "calculate a structural reference",
+        "计算结构参考"
       ],
       "forbiddenTokens": [
         ">Φ<",
@@ -45,7 +48,7 @@
       ]
     },
     "assets/customer-ui/js/surfaces/personal-reality.js": {
-      "currentSha256": "c6bb48ac75d3dae671b3f7792d6269574f2a04950c0dce20a27153bdadfbaa94",
+      "currentSha256": "fcc864d0937e341553c14b5056732bf0543d75bf12f189389075593ce144d8a1",
       "recognizedPredecessors": [
         "3fe7a5269609e3923df48f5d934aa2b7437ccff7cdd51f3339cf69a832975e30",
         "286e58401cf84885f805b330d33377dd7b10313c6e520233fc67e066436b9f51",
@@ -63,7 +66,8 @@
         "9bb24dc5c5912fbc854767302ddcfbc3294e11f6c43707f84761effc05ba0d3c",
         "f4533680a9e8f851e530d947cc6580e9931aa81256962b0da93a435bac90d987",
         "dd7bf9ef6beafdcf773bc3dcd6145008570d9d9fd42917ed50dacf6b6dc8f514",
-        "88992d976b112663e3928722c70b5f90c4f0a79ca79196eed9d1eabd77dbaf60"
+        "88992d976b112663e3928722c70b5f90c4f0a79ca79196eed9d1eabd77dbaf60",
+        "c6bb48ac75d3dae671b3f7792d6269574f2a04950c0dce20a27153bdadfbaa94"
       ],
       "requiredTokens": [
         "collectMethodInputExtensions",
@@ -86,7 +90,10 @@
         "collectEcrHumanDesignRealityBridgeResponse",
         "installCurrentRealityExperience",
         "/api/customer-current-reality",
-        "PERSONAL_READING_REALITY_COMPARISON"
+        "PERSONAL_READING_REALITY_COMPARISON",
+        "useBirthDataFallback",
+        "PHIOS_HDR_INTERNAL_CALCULATION_REFERENCE",
+        "internal calculation reference"
       ],
       "forbiddenTokens": [
         "single-method-reading.js",
@@ -196,33 +203,53 @@
       "forbiddenTokens": []
     },
     "functions/api/customer-external-profile-intake.js": {
-      "currentSha256": "97da71b9fe71b1e33aae1833e051bf0522e95a087ab55e6d8c41758bb16f911f",
+      "currentSha256": "f5b69af63af09bc437df65aa858c941604aa350dc548ca27fc61ba45552cf974",
       "recognizedPredecessors": [
         "f8c921dc7f5c0b27db000ecadb526a15c25237d05634d5dbcecabd2a2afaa134",
         "98675fb3757c5c84940d451020de2c7c02d43cffd1575c415193c74b497b4033",
-        "a645a84893a21ec390db4996dfa9b51c298712c40a89a5cd4ae71fa23aac6b2f"
+        "a645a84893a21ec390db4996dfa9b51c298712c40a89a5cd4ae71fa23aac6b2f",
+        "97da71b9fe71b1e33aae1833e051bf0522e95a087ab55e6d8c41758bb16f911f"
       ],
       "requiredTokens": [
         "buildExternalProfileConfirmationDraft",
         "intakeState:'NEEDS_CONFIRMATION'",
         "extractionState",
-        "CUSTOMER_CONFIRMATION_REQUIRED"
+        "CUSTOMER_CONFIRMATION_REQUIRED",
+        "buildHdrIntakeCalculationReference",
+        "calculationReferenceState",
+        "hdrCalculationReferenceRequiresCustomerConfirmation"
       ],
       "forbiddenTokens": [
         "intakeState:confirmationDraft?'NEEDS_CONFIRMATION':'EXTRACTION_FAILED'"
       ]
     },
+    "functions/external-profile/external-profile-extraction-ir.js": {
+      "currentSha256": "4ccbedfcb61e1af842107e634537861a1a81b3812ce4775ed1ab0f0bfefe4c82",
+      "recognizedPredecessors": [
+        "5ad43f87a2540300b97cd13e8dbfd1e9ca95ed8dbd411f915bdeaa8cc6b3f7e4"
+      ],
+      "requiredTokens": [
+        "calculationReference=null",
+        "calculatedCandidates",
+        "phiosCalculationReferencePresent",
+        "machineExtractedCandidatesRequireCustomerConfirmation:true"
+      ],
+      "forbiddenTokens": []
+    },
     "functions/external-profile/external-profile-confirmation.js": {
-      "currentSha256": "7fde93960d373a970c32cd68205529770adad963f80c17541ed38a7547dadcec",
+      "currentSha256": "8a627383f417993dc92981c4032023cdc026c38314c9c7a4ce9192e3dbfbed73",
       "recognizedPredecessors": [
         "5411e4b141f4a63e572db7e0c562aec43f4bbec797fca541e47ae13aa8b5c6c8",
-        "8116512ed3277f7907c8d621d8441b5d6b7bbdcdbf95ffb801bff02020871f8f"
+        "8116512ed3277f7907c8d621d8441b5d6b7bbdcdbf95ffb801bff02020871f8f",
+        "7fde93960d373a970c32cd68205529770adad963f80c17541ed38a7547dadcec"
       ],
       "requiredTokens": [
         "normalizeActivationEdits",
         "designActivations",
         "personalityActivations",
-        "CUSTOMER_CORRECTED:activations"
+        "CUSTOMER_CORRECTED:activations",
+        "PHIOS_HDR_INTERNAL_CALCULATION_REFERENCE",
+        "calculatedReferenceDoesNotBecomeAuthorityUntilCustomerConfirmation"
       ],
       "forbiddenTokens": []
     },

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "phi-os.profile.self-assessment-result.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assessmentResultId",
+    "participantRef",
+    "instrumentCode",
+    "instrumentVersion",
+    "assessmentDate",
+    "sourceClass",
+    "purpose",
+    "consent",
+    "sensitiveConsent",
+    "sensitiveResponseCount",
+    "domainRawScore",
+    "facetRawScore",
+    "normalizedSelfReportIndex",
+    "responseCompleteness",
+    "uncertaintyFlags",
+    "customerConfirmed",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "PHI-OS-SELF-ASSESSMENT-RESULT-IR-v1"
+    },
+    "assessmentResultId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "participantRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instrumentCode": {
+      "const": "PHI-OS-SELF-ASSESSMENT-INSTRUMENT-v2"
+    },
+    "instrumentVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assessmentDate": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceClass": {
+      "const": "CUSTOMER_SELF_REPORT"
+    },
+    "purpose": {
+      "const": "PROFILE_SELF_REFLECTION"
+    },
+    "consent": {
+      "const": true
+    },
+    "sensitiveConsent": {
+      "type": "boolean"
+    },
+    "sensitiveResponseCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "domainRawScore": {
+      "type": "object"
+    },
+    "facetRawScore": {
+      "type": "object"
+    },
+    "normalizedSelfReportIndex": {
+      "type": "object"
+    },
+    "responseCompleteness": {
+      "type": "object"
+    },
+    "uncertaintyFlags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "customerConfirmed": {
+      "type": "boolean"
+    },
+    "governance": {
+      "type": "object"
+    }
+  }
+}

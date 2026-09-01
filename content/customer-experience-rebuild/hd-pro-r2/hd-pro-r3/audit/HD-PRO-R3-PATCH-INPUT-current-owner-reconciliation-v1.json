@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-HD-PRO-R3-PATCH-INPUT-CURRENT-OWNER-RECONCILIATION-v1.0.0",
   "work": "HD-PRO-R3-PATCH-INPUT",
-  "baselineCommit": "cccc55fe2f13d9b976acba2e8d561ca8dbd3ae12",
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
   "status": "SAME_OWNER_PATH_DRIFT_RECONCILED_NO_HD_OWNER_FORK",
   "w0FreezeBaselineCommit": "dae24c1dd8de49a6c238ddffb8d52b388e8da10d",
   "policy": {
@@ -20,11 +20,12 @@
       "role": "chartConfirmationOwner",
       "path": "functions/external-profile/external-profile-confirmation.js",
       "w0FrozenSha256": "5411e4b141f4a63e572db7e0c562aec43f4bbec797fca541e47ae13aa8b5c6c8",
-      "currentMainSha256": "7fde93960d373a970c32cd68205529770adad963f80c17541ed38a7547dadcec",
+      "currentMainSha256": "8a627383f417993dc92981c4032023cdc026c38314c9c7a4ce9192e3dbfbed73",
       "ownerPathChanged": false,
-      "reason": "W27 extends the existing chart-confirmation owner so customers can correct or complete channels, centers and Design/Personality gate activations in the same confirmation form after upload. The canonical owner path remains unchanged and no second parser, route, renderer or Human Design birth-chart calculation authority is created.",
+      "reason": "Current intake successor keeps the same chart-confirmation owner while allowing a lower-priority PHI OS HDR birth-data calculation reference to prefill missing chart fields. Uploaded/manual values still outrank the calculation reference, every calculated value remains editable, and customer confirmation is still required before it becomes external-context input. No second parser, customer route, renderer, reading engine or official BodyGraph service is created.",
       "recognizedPredecessors": [
-        "5411e4b141f4a63e572db7e0c562aec43f4bbec797fca541e47ae13aa8b5c6c8"
+        "5411e4b141f4a63e572db7e0c562aec43f4bbec797fca541e47ae13aa8b5c6c8",
+        "7fde93960d373a970c32cd68205529770adad963f80c17541ed38a7547dadcec"
       ]
     }
   ],
@@ -32,6 +33,9 @@
     "confirmationFallbackOnExtractionFailure": true,
     "structureCorrectionSupported": true,
     "activationCorrectionSupported": true,
-    "sharedTargetReferenceSupported": true
+    "sharedTargetReferenceSupported": true,
+    "birthDataCalculationReferenceFallback": true,
+    "uploadedChartRemainsPrimary": true,
+    "calculatedReferenceRequiresCustomerConfirmation": true
   }
 }

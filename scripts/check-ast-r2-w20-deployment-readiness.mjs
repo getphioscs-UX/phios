@@ -3,6 +3,7 @@ import {readJson} from './lib/ast-full-production/ast-r2-w17-w20-support.mjs';
 const contract=readJson('content/professional/ast-full-production/customer-reading-v2/contracts/ast-r2-w20-deployment-live-smoke-freeze-contract-v1.json'),freeze=readJson('content/professional/ast-full-production/customer-reading-v2/freeze/ast-r2-w20-full-production-freeze-v1.json'),rollback=readJson('content/professional/ast-full-production/customer-reading-v2/freeze/ast-r2-w20-rollback-plan-v1.json'),w17=readJson('content/professional/ast-full-production/customer-reading-v2/acceptance/ast-r2-w17-production-machine-acceptance-v1.json'),w18=readJson('content/professional/ast-full-production/customer-reading-v2/review/ast-r2-w18-final-customer-human-review-results-v1.json'),w19=readJson('content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w19-method-scoped-production-admission-v1.json'),r3=readJson('content/professional/ast-full-production/acceptance/ast-fp-r3-independent-calculation-certification-v1.json');
 const html=fs.readFileSync('perspectives/personal/index.html','utf8');
 const client=fs.readFileSync('assets/customer-ui/js/surfaces/personal-reality.js','utf8');
+const sharedTarget=fs.readFileSync('assets/customer-ui/js/personal-inputs/shared-target-context.js','utf8');
 const productHost=fs.readFileSync('assets/customer-ui/js/personal-products/personal-product-renderers.js','utf8');
 const specialistHost=fs.readFileSync('assets/customer-ui/js/personal-products/specialist-renderer-host.js','utf8');
 const specialistRegistry=fs.readFileSync('assets/customer-ui/js/personal-products/specialist-renderer-registry.js','utf8');
@@ -16,11 +17,17 @@ const smoke=fs.readFileSync('scripts/smoke-ast-r2-w20-live.mjs','utf8');
 const astCxR3=readJson('content/professional/ast-full-production/customer-product-v3/acceptance/ast-cx-r3-w5-w8-specialist-surface-acceptance-v1.json');
 
 // R2-W20's release gates remain authoritative, but the current customer route
-// mounts AST through the frozen PPR-R3 specialist host. The retired static
-// data-cx-astrology-workspace mount is compatibility-only and must not be
-// required as the current production surface.
+// mounts AST through the frozen PPR-R3 specialist host and PPR shared-target
+// successor. The retired AST-only target owner must stay retired: requiring it
+// here would directly contradict the current one-target-for-many-methods contract.
 assert.match(html,/data-cx-specialist-products/);
-assert.match(html,/data-cx-ast-target-input/);
+assert.match(html,/data-cx-shared-target-context/);
+for(const field of ['sharedTargetDate','sharedTargetTime','sharedTargetPlaceRef','sharedTargetTimezoneIana','sharedTargetUtcOffset'])assert.match(html,new RegExp(`name=\"${field}\"`));
+assert.doesNotMatch(html,/data-cx-ast-target-input/);
+assert.match(sharedTarget,/PPR-SHARED-TARGET-CONTEXT-v2\.0\.0/);
+assert.match(sharedTarget,/astTargetContext:selected\.includes\('astrology'\)\?base:null/);
+assert.match(client,/collectSharedTargetContext\(form,timingMethods\)/);
+assert.match(client,/astTargetContext:methods\.includes\('astrology'\)\?\(sharedTarget\?\.astTargetContext\|\|null\)/);
 assert.match(client,/renderProductRoute\(view\.productRoute/);
 assert.match(client,/data-cx-specialist-products/);
 assert.match(productHost,/mountApprovedSpecialistRenderer/);
@@ -42,6 +49,9 @@ assert.match(statusApi,/CF_PAGES_COMMIT_SHA/);
 assert.match(statusApi,/AST_R2_METHOD_SCOPED_ADMISSION/);
 assert.match(smoke,/ast-full-production-status/);
 assert.match(smoke,/deployed commit does not match expected/);
+assert.match(smoke,/data-cx-shared-target-context/);
+assert.match(smoke,/PPR_R3_AST_PRODUCT_V1/);
+assert.match(smoke,/doesNotMatch\(html,\/data-cx-ast-target-input\//);
 assert.equal(rollback.status,'FROZEN_ROLLBACK_PROCEDURE');
 assert.equal(rollback.otherMethodsRolledBack,false);
 assert.equal(rollback.legacyPersonalRuntimeBecomesCanonical,false);

@@ -15,6 +15,7 @@ function candidateRank(item){
   if(item.customerConfirmed===true)return 100;
   if(item.sourceType==='CUSTOMER_UPLOADED_DOCUMENT'||item.sourceType==='CUSTOMER_UPLOADED_IMAGE')return 80;
   if(item.sourceType==='CUSTOMER_PASTED_TEXT')return 70;
+  if(item.sourceType==='PHIOS_HDR_INTERNAL_CALCULATION_REFERENCE')return 20;
   return 10;
 }
 function bestCandidate(items){return [...items].sort((a,b)=>candidateRank(b)-candidateRank(a))[0]||null}
@@ -36,7 +37,7 @@ export function buildExternalProfileConfirmationDraft(extractionIr){
     structure:freeze(structure),
     sourceRefs:freeze((extractionIr.sources||[]).map(source=>({sourceType:source.sourceType,fileName:source.fileName||null,sha256:source.sha256||null}))),
     conflicts:freeze(extractionIr.conflicts||[]),
-    boundary:freeze({customerConfirmationRequired:true,phiosCalculated:false,canonicalMethodProjection:false,meaningCreated:false,interpretationCreated:false})
+    boundary:freeze({customerConfirmationRequired:true,phiosCalculated:false,phiosCalculationReferenceMayPrefill:true,calculatedReferenceDoesNotBecomeAuthorityUntilCustomerConfirmation:true,canonicalMethodProjection:false,meaningCreated:false,interpretationCreated:false})
   };
   return freeze({...body,draftDigest:digest(body)});
 }
