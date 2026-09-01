@@ -29,14 +29,14 @@ const run = label => MODE === 'ALL' || MODE === label;
 const read = path => JSON.parse(fs.readFileSync(path, 'utf8'));
 const text = path => fs.readFileSync(path, 'utf8');
 
-const w7Contract = read('content/professional/profile/current-reality/contracts/profile-current-reality-correlation-contract-v1.json');
-const w8Contract = read('content/professional/profile/cross-source/contracts/cross-source-perspective-contract-v1.json');
-const crossSourceRegistry = read('content/professional/profile/cross-source/registries/cross-source-translation-rule-registry-v1.json');
-const w9Contract = read('content/professional/profile/relationship/contracts/relationship-profile-evidence-contract-v1.json');
-const relationshipRuleRegistry = read('content/professional/profile/relationship/registries/relationship-profile-comparison-rule-registry-v1.json');
-const academicRegistry = read('content/professional/profile/academic/registries/academic-bridge-registry-v1.json');
-const fixture = read('content/professional/profile/fixtures/profile-prf-w7-w10-fixture-v1.json');
-const acceptance = read('content/professional/profile/acceptance/profile-prf-w7-w10-machine-acceptance-v1.json');
+const w7Contract = read('content/profile/current-reality/contracts/profile-current-reality-correlation-contract-v1.json');
+const w8Contract = read('content/profile/cross-source/contracts/cross-source-perspective-contract-v1.json');
+const crossSourceRegistry = read('content/profile/cross-source/registries/cross-source-translation-rule-registry-v1.json');
+const w9Contract = read('content/profile/relationship/contracts/relationship-profile-evidence-contract-v1.json');
+const relationshipRuleRegistry = read('content/profile/relationship/registries/relationship-profile-comparison-rule-registry-v1.json');
+const academicRegistry = read('content/profile/academic/registries/academic-bridge-registry-v1.json');
+const fixture = read('content/profile/fixtures/profile-prf-w7-w10-fixture-v1.json');
+const acceptance = read('content/profile/acceptance/profile-prf-w7-w10-machine-acceptance-v1.json');
 
 function mustThrow(fn, code) {
   let caught = null;

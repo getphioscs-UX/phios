@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "PHI-OS-ONET-INTEREST-PROFILER-ADAPTER-v1.0.0",
+  "work": "PRF-W10D",
+  "baselineCommit": "c259917fbc55b57d35402a591f0db2e7e7b7e8c3",
+  "provider": "O_NET_WEB_SERVICES_V2",
+  "apiBase": "https://api-v2.onetcenter.org",
+  "authentication": {
+    "header": "X-API-Key",
+    "environmentVariable": "ONET_WEB_SERVICES_API_KEY",
+    "clientExposureAllowed": false
+  },
+  "forms": {
+    "MINI_30": {
+      "questionEndpoint": "/mnm/interestprofiler/questions_30",
+      "itemCount": 30
+    },
+    "SHORT_60": {
+      "questionEndpoint": "/mnm/interestprofiler/questions",
+      "itemCount": 60
+    }
+  },
+  "resultsEndpoint": "/mnm/interestprofiler/results",
+  "careersEndpoint": "/mnm/interestprofiler/careers",
+  "interestEndpoint": "/mnm/interestprofiler/interests/",
+  "resultSchema": "PHI-OS-ONET-INTEREST-PROFILER-RESULT-v1",
+  "scoringState": "EXTERNALLY_SCORED",
+  "availabilityState": "AVAILABLE_WHEN_CONFIGURED",
+  "normingState": "NOT_NORMED",
+  "sourceClass": "STANDARDIZED_SELF_REPORT",
+  "rules": {
+    "providerQuestionTextMayBeFetchedAtRuntime": true,
+    "providerScoringMustRemainExternal": true,
+    "careerFitIsExplorationNotGuarantee": true,
+    "jobFitGuaranteeAllowed": false,
+    "employmentDecisionAuthority": false,
+    "customerPublishableBeforePrfW12": false
+  },
+  "gate": "check:profile:w10d-onet"
+}

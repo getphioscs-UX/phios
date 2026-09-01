@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "PHI-OS-FINANCIAL-CAPABILITY-SCORING-CONTRACT-v1.0.0",
+  "work": "PRF-W10E",
+  "baselineCommit": "c259917fbc55b57d35402a591f0db2e7e7b7e8c3",
+  "resultSchema": "PHI-OS-FINANCIAL-CAPABILITY-RESULT-v1",
+  "scoringState": "ADAPTED_SCORED",
+  "normingState": "NOT_NORMED",
+  "sections": {
+    "FINANCIAL_KNOWLEDGE": {
+      "sourceClass": "MEASURED_TASK_PERFORMANCE",
+      "metric": "rawCorrect/rawAttempted"
+    },
+    "FINANCIAL_BEHAVIOUR": {
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "metric": "adaptedPositiveIndex"
+    },
+    "FINANCIAL_ATTITUDE": {
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "metric": "adaptedPositiveIndex"
+    },
+    "DIGITAL_FINANCE_SAFETY": {
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "metric": "adaptedPositiveIndex"
+    },
+    "FINANCIAL_RESILIENCE_SELF_VIEW": {
+      "sourceClass": "STANDARDIZED_SELF_REPORT",
+      "metric": "adaptedPositiveIndex"
+    }
+  },
+  "boundaries": {
+    "officialOecdComposite": false,
+    "financialAdvice": false,
+    "diagnosis": false,
+    "customerPublishableBeforePrfW12": false
+  },
+  "gate": "check:profile:w10e-financial-capability"
+}
