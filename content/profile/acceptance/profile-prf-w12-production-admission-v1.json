@@ -2,12 +2,13 @@
   "schemaVersion": "PHI-OS-PRF-W12-PRODUCTION-ADMISSION-v1.0.0",
   "work": "PRF-W12",
   "baselineCommit": "3a8e0658e26fa931257b491204a6ed2dcb345725",
-  "status": "BLOCKED_HUMAN_REVIEW_PENDING",
+  "status": "PRODUCTION_ADMITTED_CUTOVER_ELIGIBLE",
   "gates": {
     "prfW0W10f": "PASS_MACHINE_VERIFIED",
     "prfW11ProgressiveUx": "PASS_MACHINE_VERIFIED",
     "prfW12MachineCampaign": "PASS_24_OF_24",
-    "prfW12HumanReview": "PENDING_24_OF_24"
+    "prfW12HumanReview": "PASS_24_OF_24",
+    "requiredFreezePromotion": "PASS_8_OF_8"
   },
   "machine": {
     "required": 24,
@@ -16,17 +17,23 @@
   },
   "human": {
     "required": 24,
-    "accepted": 0,
+    "accepted": 24,
     "rejected": 0,
-    "pending": 24,
-    "inheritedAcceptance": false
+    "pending": 0,
+    "inheritedAcceptance": false,
+    "admissionRef": "content/profile/review/profile-prf-w12-human-admission-v1.json"
   },
   "authorityEffect": {
-    "profileProductionAdmitted": false,
-    "customerPublicationAllowed": false,
-    "profileSurfaceCutoverAllowed": false,
-    "primaryPerspectivesNavigationAllowed": false,
-    "reviewPreviewAllowed": true
+    "profileProductionAdmitted": true,
+    "customerPublicationAllowed": true,
+    "profileSurfaceCutoverAllowed": true,
+    "profileSurfaceCutoverExecuted": false,
+    "primaryPerspectivesNavigationAllowed": true,
+    "primaryPerspectivesNavigationCutoverExecuted": false,
+    "customerCutoverEligible": true,
+    "reviewPreviewAllowed": true,
+    "pprW47ProfileIntegrationEligibleWhenGlobalSequenceReachesW47": true,
+    "pprW47MayStartNow": false
   },
   "freezeArtifacts": [
     "profile-source-class-freeze-v1.json",
@@ -46,7 +53,12 @@
     "diagnosticClaimsAllowed": false,
     "compatibilityScoreAllowed": false,
     "partnerHiddenStateInferenceAllowed": false,
-    "crossSourceScientificValidationTransferAllowed": false
+    "crossSourceScientificValidationTransferAllowed": false,
+    "onetRiaSecMayClaimAvailableWithoutDeploymentConfiguration": false
   },
-  "next": "New PRF-W12 human review 24/24 accepted is mandatory before Profile customer publication or primary navigation cutover."
+  "next": "Profile production authority is admitted and customer cutover is eligible. Global Master Work still requires REL-W5 -> REL-W6 before W47+ integration. Execute customer navigation/indexing cutover only in its governed PPR/CX step; do not rewrite the eight freezes.",
+  "campaignBaselineCommit": "3a8e0658e26fa931257b491204a6ed2dcb345725",
+  "admissionCommitContext": "dcd325143f119d5817f2abf03f79f9a8ba5b789c",
+  "humanAdmissionRef": "content/profile/review/profile-prf-w12-human-admission-v1.json",
+  "freezeIndexRef": "content/profile/freeze/profile-production-freeze-index-v1.json"
 }

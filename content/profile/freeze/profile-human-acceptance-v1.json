@@ -2,22 +2,28 @@
   "schemaVersion": "PHI-OS-PROFILE-HUMAN-ACCEPTANCE-FREEZE-v1.0.0",
   "work": "PRF-W12",
   "baselineCommit": "3a8e0658e26fa931257b491204a6ed2dcb345725",
-  "status": "CANDIDATE_FREEZE_PENDING_HUMAN_ACCEPTANCE",
-  "active": false,
+  "status": "PRODUCTION_FROZEN_HUMAN_ACCEPTED_24_OF_24",
+  "active": true,
   "sourceRef": "content/profile/review/profile-prf-w12-human-review-results-v1.json",
   "machineGate": "PASS_24_OF_24",
-  "humanGate": "PENDING_24_OF_24",
-  "customerPublishable": false,
-  "productionFreezeEffective": false,
+  "humanGate": "PASS_24_OF_24",
+  "customerPublishable": true,
+  "productionFreezeEffective": true,
   "governance": {
     "machinePassDoesNotEqualHumanAcceptance": true,
-    "mustRemainFailClosedUntil24Of24Accepted": true
+    "humanAcceptanceRequiredForThisPromotion": true,
+    "historicalOwnerRewritten": false,
+    "futureSemanticOrScoringChangeRequiresVersionedSuccessor": true,
+    "futureMeaningChangeRequiresFreshHumanReview": true
   },
   "humanAcceptance": {
     "required": 24,
-    "accepted": 0,
+    "accepted": 24,
     "rejected": 0,
-    "pending": 24,
-    "inheritedAcceptance": false
-  }
+    "pending": 0,
+    "inheritedAcceptance": false,
+    "admissionRef": "content/profile/review/profile-prf-w12-human-admission-v1.json"
+  },
+  "promotionCommitContext": "dcd325143f119d5817f2abf03f79f9a8ba5b789c",
+  "sourceSha256": "011c91af83a6a9cc89bcbdd1200ea44368f0ed19f7dd17076e3b12844975dbbc"
 }
