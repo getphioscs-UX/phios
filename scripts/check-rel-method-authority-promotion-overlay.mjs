@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const p=read('content/personal-reading/relationship/successors/rel-method-capability-promotion-overlay-v1.json');
+const c=read('content/personal-reading/relationship/successors/rel-method-authority-current-successor-v2.json');
+const a=read('content/personal-reading/relationship/audit/relationship-product-completeness-audit-v2.json');
+assert.equal(p.status,'BZR_ZWR_ECR_HUMAN_ADMITTED_OVERLAY_ACTIVE');
+for(const m of ['BZR','ZWR','ECR'])assert.equal(p.methods[m].relationshipCompositionSupported,'SUPPORTED');
+assert.equal(p.methods.ZWR.crossChartStarInteractionAllowed,false);assert.equal(p.methods.ECR.activationContextIsNotTimingForecastAuthority,true);
+assert.equal(p.parallelLane.HD,'NOT_MODIFIED_BY_THIS_OVERLAY__HD_REL_R1_W0_W8_PROCEEDS_SEPARATELY');
+assert.equal(c.status,'FIVE_METHOD_REL_W4_AUTHORITY_HUMAN_ADMITTED__HD_PARALLEL_PENDING');
+assert.equal(Object.keys(c.admittedMethods).length,5);assert.equal(c.customerPublicationAllowed,false);
+assert.equal(a.summary.relW4HumanAcceptedAcrossAdmittedMethods,120);assert.equal(a.summary.fullRelationshipProductReady,false);assert.equal(a.productBoundary.relW5StartedByThisWork,false);
+console.log('✓ REL method capability promotion overlay passed: AST/NUM/BZR/ZWR/ECR admitted; HD remains parallel and REL-W5 stays intentionally unopened.');

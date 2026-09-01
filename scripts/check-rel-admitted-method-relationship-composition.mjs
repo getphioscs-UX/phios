@@ -1,0 +1,9 @@
+import assert from 'node:assert/strict';
+import {promoteAdmittedMethodRelationshipComposition,ADMITTED_METHOD_RELATIONSHIP_COMPOSITION_SCHEMA} from '../functions/personal-reading/relationship/admitted-method-relationship-composition.js';
+const schema={BZR:'PHI-OS-BZR-REL-CROSS-PERSON-STRUCTURE-v1.0.0',ZWR:'PHI-OS-ZWR-REL-DUAL-READING-COMPOSITION-v1.0.0',ECR:'PHI-OS-ECR-REL-DIRECTED-RELATION-GRAPH-v1.0.0'};
+for(const methodId of Object.keys(schema)){
+ const candidate={schemaVersion:schema[methodId],claims:[{relationshipClaimId:`${methodId}-1`,methodId,customerPublishable:false,headline:'reviewed',summary:'reviewed',governance:{humanAdmissionState:'PENDING'}}],boundaries:{compatibilityScoreCreated:false,crossChartStarInteractionCreated:false,starRelocationCreated:false,relationshipOutcomePredicted:false,goodBadConclusionCreated:false,eventPredictionCreated:false,partnerHiddenStateInferred:false,guaranteedOutcomeCreated:false,currentRealityProofCreated:false}};
+ const out=promoteAdmittedMethodRelationshipComposition({methodId,candidate});assert.equal(out.schemaVersion,ADMITTED_METHOD_RELATIONSHIP_COMPOSITION_SCHEMA);assert.equal(out.state,'HUMAN_ADMITTED_REL_W4_METHOD_COMPOSITION');assert.equal(out.claims[0].customerPublishable,true);assert.equal(out.claims[0].governance.humanAdmissionState,'HUMAN_ADMITTED');assert.equal(out.claims[0].governance.semanticContentChangedByAdmission,false);assert.equal(out.boundaries.productCustomerPublicationAllowed,false);assert.equal(out.boundaries.relW5Eligible,true);
+}
+assert.throws(()=>promoteAdmittedMethodRelationshipComposition({methodId:'HD',candidate:{}}),/REL_ADMISSION_METHOD_NOT_SUPPORTED/);
+console.log('✓ REL admitted method-composition projection passed: BZR/ZWR/ECR reviewed claims become REL-W5-eligible without semantic mutation or product cutover.');
