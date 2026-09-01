@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-RELATIONSHIP-PARTICIPANT-READING-SET-v1.schema.json",
+  "type": "object",
+  "required": ["schemaVersion", "relationshipIntentId", "participants", "methodPairs", "participantPrecision", "suppressedCapabilities", "semanticDigest", "governance"],
+  "properties": {
+    "schemaVersion": {"const": "PHI-OS-RELATIONSHIP-PARTICIPANT-READING-SET-v1.0.0"},
+    "relationshipIntentId": {"type": "string", "minLength": 1},
+    "participants": {"type": "object", "required": ["A", "B"]},
+    "methodPairs": {"type": "array"},
+    "participantPrecision": {"type": "object"},
+    "suppressedCapabilities": {"type": "array"},
+    "semanticDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "governance": {"type": "object"}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "PHI-OS-RELATIONSHIP-METHOD-CAPABILITY-MATRIX-v1.0.0",
+  "work": "REL-W2",
+  "baselineCommit": "4b2688665e0875f6a628c2b81d1991a14ea62a49",
+  "status": "CURRENT_BASELINE_RECONCILED_FAIL_CLOSED",
+  "capabilityStates": ["SUPPORTED", "PARTIAL", "NOT_APPLICABLE", "SOURCE_PENDING", "AUTHORITY_PENDING", "NOT_SUPPORTED"],
+  "rule": "Person-B input existence never grants relationship composition authority. Exact values are reconciled from current production/readout authorities and existing RLR freeze, not market assumptions.",
+  "methods": [
+    {
+      "methodId": "AST", "personBInputSupported": "SUPPORTED", "personBIndependentCalculationSupported": "SUPPORTED", "personBIndependentReadingSupported": "SUPPORTED",
+      "exactBirthTimeRequired": true, "unknownBirthTimePartialSupported": false, "birthPlaceRequired": true,
+      "relationshipCompositionSupported": "SUPPORTED",
+      "relationshipCompositionAuthorityRef": "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json",
+      "relationshipTimingSupported": "NOT_SUPPORTED", "relationshipTimingAuthorityRef": null, "customerPublishable": true,
+      "missingRequirements": ["REL_W4_AST_SUCCESSOR_MUST_PRESERVE_RLR_STRUCTURAL_BOUNDARY"], "sourcePending": [],
+      "boundaryNotes": ["Current admitted relation is AST function-to-function structural projection; it is not a predictive synastry verdict."]
+    },
+    {
+      "methodId": "BZR", "personBInputSupported": "SUPPORTED", "personBIndependentCalculationSupported": "SUPPORTED", "personBIndependentReadingSupported": "SUPPORTED",
+      "exactBirthTimeRequired": false, "unknownBirthTimePartialSupported": true, "birthPlaceRequired": true,
+      "relationshipCompositionSupported": "PARTIAL",
+      "relationshipCompositionAuthorityRef": "content/professional/bzr-full-production/contracts/bazi-stem-branch-relationship-contract-v1.json",
+      "relationshipTimingSupported": "PARTIAL", "relationshipTimingAuthorityRef": "content/governance/relational/contracts/bzr-temporal-relationship-context-contract-v1.json", "customerPublishable": true,
+      "missingRequirements": ["REL_W4_BZR_HUMAN_ADMITTED_RELATIONSHIP_COMPOSITION"], "sourcePending": [],
+      "boundaryNotes": ["Current RLR authority is temporal coexistence/contextual; structural relation presence is not yet a full customer relationship meaning authority."]
+    },
+    {
+      "methodId": "ZWR", "personBInputSupported": "SUPPORTED", "personBIndependentCalculationSupported": "SUPPORTED", "personBIndependentReadingSupported": "SUPPORTED",
+      "exactBirthTimeRequired": true, "unknownBirthTimePartialSupported": false, "birthPlaceRequired": true,
+      "relationshipCompositionSupported": "PARTIAL",
+      "relationshipCompositionAuthorityRef": "content/governance/relational/contracts/zi-wei-relationship-domain-context-contract-v1.json",
+      "relationshipTimingSupported": "PARTIAL", "relationshipTimingAuthorityRef": "content/governance/relational/contracts/zi-wei-relationship-domain-context-contract-v1.json", "customerPublishable": true,
+      "missingRequirements": ["REL_W4_ZWR_HUMAN_ADMITTED_RELATIONSHIP_COMPOSITION"], "sourcePending": [],
+      "boundaryNotes": ["Current two-person authority preserves independent partnership-domain contexts; it is contextual, not compatibility composition."]
+    },
+    {
+      "methodId": "NUM", "personBInputSupported": "SUPPORTED", "personBIndependentCalculationSupported": "SUPPORTED", "personBIndependentReadingSupported": "SUPPORTED",
+      "exactBirthTimeRequired": false, "unknownBirthTimePartialSupported": true, "birthPlaceRequired": false,
+      "relationshipCompositionSupported": "PARTIAL",
+      "relationshipCompositionAuthorityRef": "content/professional/num-production/expansion-r9-r18/authority/num-r16-relationship-authority-v1.json",
+      "relationshipTimingSupported": "NOT_SUPPORTED", "relationshipTimingAuthorityRef": null, "customerPublishable": true,
+      "missingRequirements": ["REL_W4_NUM_MULTI_FACTOR_HUMAN_ADMISSION"], "sourcePending": [],
+      "boundaryNotes": ["R16 admits structural relationship runtime and a relationship-number formula without compatibility judgment; D7 multi-factor meaning remains pending D8 admission in its original contract."]
+    },
+    {
+      "methodId": "ECR", "personBInputSupported": "SUPPORTED", "personBIndependentCalculationSupported": "SUPPORTED", "personBIndependentReadingSupported": "SUPPORTED",
+      "exactBirthTimeRequired": true, "unknownBirthTimePartialSupported": false, "birthPlaceRequired": true,
+      "relationshipCompositionSupported": "AUTHORITY_PENDING", "relationshipCompositionAuthorityRef": null,
+      "relationshipTimingSupported": "AUTHORITY_PENDING", "relationshipTimingAuthorityRef": null, "customerPublishable": true,
+      "missingRequirements": ["ADMITTED_ECR_RELATIONSHIP_AUTHORITY"], "sourcePending": ["ECR_RELATIONSHIP_COMPOSITION_SOURCE_AND_HUMAN_ADMISSION"],
+      "boundaryNotes": ["A and B independent ECR readings may exist; relationship conclusions fail closed until separately admitted."]
+    },
+    {
+      "methodId": "HD", "personBInputSupported": "SUPPORTED", "personBIndependentCalculationSupported": "NOT_SUPPORTED", "personBIndependentReadingSupported": "SUPPORTED",
+      "exactBirthTimeRequired": false, "unknownBirthTimePartialSupported": true, "birthPlaceRequired": false,
+      "relationshipCompositionSupported": "NOT_SUPPORTED",
+      "relationshipCompositionAuthorityRef": "content/customer-experience-rebuild/hd-pro-r2/hd-pro-r3/relationship/HD-PRO-R3-W18-single-chart-relationship-contract-v1.json",
+      "relationshipTimingSupported": "NOT_SUPPORTED", "relationshipTimingAuthorityRef": null, "customerPublishable": true,
+      "missingRequirements": ["CONFIRMED_EXTERNAL_HD_CHART_FOR_PERSON_B", "SEPARATELY_ADMITTED_DUAL_CHART_HD_RELATIONSHIP_AUTHORITY"], "sourcePending": [],
+      "boundaryNotes": ["Current customer HD authority is confirmed imported external chart; PHI OS birth calculation authority is not created. R3 W18 explicitly rejects second-chart relationship composition."]
+    }
+  ],
+  "predecessorRefs": [
+    "content/governance/relational/acceptance/rlr-w0-w6-relational-runtime-acceptance-v1.json",
+    "content/governance/relational/freeze/relational-runtime-freeze-v1.json",
+    "content/governance/multi-lens/successors/multi-lens-capability-state-registry-v6.json",
+    "content/governance/production-capability-matrix/reconciliation/production-capability-current-successor-v9.json"
+  ]
+}

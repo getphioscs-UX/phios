@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "PHI-OS-RELATIONSHIP-PARTICIPANT-READING-SET-CONTRACT-v1.0.0",
+  "work": "REL-W3",
+  "productObject": "PHI-OS-RELATIONSHIP-PARTICIPANT-READING-SET-v1",
+  "acceptedReadingEnvelope": "PHI-OS-ACCEPTED-METHOD-READING-ENVELOPE-v1.0.0",
+  "executionRule": "Each selected method reading for A and B must be produced independently by its existing accepted single-method authority before entering this freeze.",
+  "relationshipMeaningAllowed": false,
+  "relationshipEligibilityRule": "Both A and B accepted envelopes exist AND REL-W2 relationshipCompositionSupported=SUPPORTED AND method customerPublishable=true.",
+  "forbidden": ["A reading uses B facts", "B reading uses A facts", "rewrite A/B summaries to manufacture relationship story", "cross-fill uncertainty", "relationship meaning in W3"],
+  "predecessorRefs": ["functions/single-method-reading/method-production-adapter-core.js", "functions/single-method-reading/single-method-reading-production.js"]
+}
