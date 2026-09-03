@@ -8,12 +8,16 @@ const txt=p=>fs.readFileSync(path.join(root,p),'utf8');
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
 const walk=dir=>fs.existsSync(dir)?fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]):[];
 const rel=p=>path.relative(root,p).replaceAll('\\','/');
-const freeze=readJson('content/personal-reading/final-acceptance/ownership/w68-shared-file-ownership-freeze-v1.json');
+const historicalFreeze=readJson('content/personal-reading/final-acceptance/ownership/w68-shared-file-ownership-freeze-v1.json');
+const successorFreezePath='content/personal-reading/final-acceptance/ownership/w68-shared-file-ownership-freeze-v2.json';
+const freeze=fs.existsSync(path.join(root,successorFreezePath))?readJson(successorFreezePath):historicalFreeze;
 const contract=readJson('content/personal-reading/final-acceptance/contracts/w68-no-legacy-leak-contract-v1.json');
 const current=readJson('content/professional/personal-reality/current/ppr-current-shared-owner-registry-v1.json');
 const historical=readJson('content/professional/personal-reality/r2/authority/ppr-r2-w1-shared-file-ownership-v1.json');
+assert.equal(historicalFreeze.owner,'PERSONAL_REALITY_PRODUCT_ORCHESTRATION');
 assert.equal(freeze.owner,'PERSONAL_REALITY_PRODUCT_ORCHESTRATION');
 assert.equal(historical.owner,'PERSONAL_REALITY_PRODUCT_ORCHESTRATION');
+if(freeze.schemaVersion==='PHI-OS-W68-SHARED-FILE-OWNERSHIP-FREEZE-v2.0.0'){assert.equal(freeze.predecessor,'content/personal-reading/final-acceptance/ownership/w68-shared-file-ownership-freeze-v1.json');assert.equal(freeze.predecessorMutated,false);assert.equal(freeze.lineage.historicalFreezeRewritten,false);assert.equal(freeze.lineage.ziweiW16HistoricalDigestRemainsRecognizedPredecessor,true);}
 assert.equal(current.owner,'PPR_CURRENT_SHARED_RUNTIME');
 for(const [file,proof] of Object.entries(freeze.sharedFiles)){
   assert.ok(fs.existsSync(path.join(root,file)),`missing ${file}`);
@@ -43,5 +47,5 @@ for(const mr of methodRoots)for(const f of walk(path.join(root,mr)).filter(x=>/\
 const aliases=contract.duplicatePersonBAliasesToScan;const productRoots=['functions','assets/customer-ui','assets/js/pages','perspectives'];
 for(const alias of aliases){const allowed=new Set(freeze.allowedAdapterAliases?.[alias]||[]);const re=new RegExp(`\\b${alias}\\b`);for(const pr of productRoots)for(const f of walk(path.join(root,pr)).filter(x=>/\.(?:js|mjs|html)$/.test(x))){const r=rel(f);if(!re.test(fs.readFileSync(f,'utf8')))continue;assert.ok(allowed.has(r),`W68 duplicate Person-B alias outside registered adapter: ${alias} @ ${r}`);}}
 console.log('✓ W68 Shared-file Ownership + No Legacy Leak passed.');
-console.log(`  ${Object.keys(freeze.sharedFiles).length}/3 convergence files frozen to PERSONAL_REALITY_PRODUCT_ORCHESTRATION; current byte registry matches.`);
+console.log(`  ${Object.keys(freeze.sharedFiles).length}/3 convergence files frozen to PERSONAL_REALITY_PRODUCT_ORCHESTRATION; current byte registry matches the active successor.`);
 console.log('  Narrative provider/raw-method/customer-authority/payment-success leaks rejected; Profile and shared Person-B alternate owners rejected.');

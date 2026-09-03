@@ -9,6 +9,8 @@ export const PROFILE_PROGRESSIVE_MODES = Object.freeze([
   'FULL_SELF_ASSESSMENT',
   'REASONING_TASKS',
   'IMPORT_EXTERNAL_RESULT',
+  'BIG_FIVE',
+  'FINANCIAL_CAPABILITY',
   'CAREER_INTERESTS'
 ]);
 
@@ -318,7 +320,7 @@ export async function buildProgressiveProfileView({
 }
 
 export function assertProgressiveProfileUxContract(contract) {
-  if (!['PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v1.0.0','PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v2.0.0'].includes(contract?.schemaVersion)) fail('PRF_W11_UX_CONTRACT_REQUIRED');
+  if (!['PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v1.0.0','PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v2.0.0','PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v3.0.0'].includes(contract?.schemaVersion)) fail('PRF_W11_UX_CONTRACT_REQUIRED');
   if (contract.personalReading?.profileRequiredBeforeReading !== false) fail('PRF_W11_PROFILE_MUST_REMAIN_OPTIONAL');
   if (contract.personalReading?.skipAllowed !== true) fail('PRF_W11_PROFILE_SKIP_REQUIRED');
   const modes = list(contract.modes).map(item => item.mode);

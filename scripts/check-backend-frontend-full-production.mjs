@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+const root=process.cwd();
+const j=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
+const t=p=>fs.readFileSync(path.join(root,p),'utf8');
+const exists=p=>fs.existsSync(path.join(root,p));
+const matrix=j('content/web-production/backend-frontend-parity/registries/backend-frontend-capability-matrix-v1.json');
+assert.equal(matrix.status,'CURRENT_CUSTOMER_PRODUCTION_PARITY');
+assert.equal(matrix.rules.productionAdmittedCapabilityWithoutConsumerAllowed,false);
+assert.equal(matrix.rules.conditionalAuthorityMayBeRenderedAsUnconditionalLive,false);
+assert.equal(matrix.rules.externalSecretsMayAppearInClient,false);
+assert.ok(matrix.capabilities.length>=23);
+const ids=new Set();
+for(const c of matrix.capabilities){
+  assert.ok(c.id&&!ids.has(c.id),`duplicate capability ${c.id}`);ids.add(c.id);
+  assert.ok(c.surface&&c.consumer&&c.customerState,`incomplete frontend mapping ${c.id}`);
+  assert.ok(exists(c.consumer),`frontend consumer missing ${c.id}: ${c.consumer}`);
+  assert.notEqual(c.customerState,'MISSING',`production capability has no frontend consumer: ${c.id}`);
+}
+const personal=t('perspectives/personal/index.html');
+for(const token of ['data-method="ecr"','data-method="astrology"','data-method="bazi"','data-method="ziwei"','data-method="numeric"','data-cx-external-profile-confirmation'])assert.ok(personal.includes(token),`personal customer control missing ${token}`);
+const profilePage=t('perspectives/profile/index.html'),profileClient=t('assets/customer-ui/js/surfaces/profile-progressive.js'),profileApi=t('functions/api/profile-progressive.js');
+for(const mode of ['QUICK_PROFILE','FULL_SELF_ASSESSMENT','REASONING_TASKS','IMPORT_EXTERNAL_RESULT','BIG_FIVE','CAREER_INTERESTS','FINANCIAL_CAPABILITY'])assert.ok(profilePage.includes(`data-prf-mode="${mode}"`),`Profile mode not visible: ${mode}`);
+for(const token of ['IPIP_BIG_FIVE_50','IPIP_NEO_120','MINI_30','SHORT_60','FINANCIAL CAPABILITY · ADAPTED','O*NET® RIASEC'])assert.ok(profileClient.includes(token),`Profile live consumer token missing: ${token}`);
+for(const token of ['scoreIpipAssessment','scoreFinancialCapabilityAssessment','fetchOnetInterestProfilerQuestionSet','buildAcademicProfileSignalBundle'])assert.ok(profileApi.includes(token),`Profile API backend consumer missing: ${token}`);
+assert.ok(!profileClient.includes('ONET_WEB_SERVICES_API_KEY'),'O*NET secret name must stay server-side');
+const perspectives=t('perspectives/index.html');assert.ok(perspectives.includes('/perspectives/profile/'));assert.ok(perspectives.includes('IPIP Big Five'));assert.ok(perspectives.includes('O*NET'));assert.ok(perspectives.includes('Financial Capability'));
+const readings=t('assets/js/pages/readings-v3.js'),catalog=j('content/web-production/px2/successors/public-method-catalog-v6.json');
+assert.ok(readings.includes('public-method-catalog-v6.json'));for(const code of ['ECR','ASTROLOGY','BAZI','ZI_WEI_DOU_SHU','NUMEROLOGY','HUMAN_DESIGN','I_CHING','TAROT'])assert.ok(catalog.methods.some(m=>m.methodCode===code),`method catalog missing ${code}`);
+const finalExperience=t('assets/customer-ui/js/personal-products/final-personal-reading-experience.js');for(const token of ['renderProfile','renderRelationship','renderNarrative','renderCrossGroups'])assert.ok(finalExperience.includes(token),`governed frontend projection missing ${token}`);
+assert.ok(exists('perspectives/iching/index.html'));assert.ok(exists('perspectives/tarot/index.html'));
+const continuity=t('my-reality.html');assert.ok(continuity.includes('id="continuity"'));const subscription=j('content/personal-reading/continuity/registries/continuity-subscription-product-registry-v1.json');assert.equal(subscription.customerCheckoutEnabled,false,'W88-blocked Continuity subscription must not be advertised as live');
+const productionMissing=matrix.capabilities.filter(c=>/(PRODUCTION|LIVE_PROVIDER_ADMITTED|SERVER_RELEASE_AUTHORITY)/.test(c.backendState)&&c.customerState==='MISSING');assert.equal(productionMissing.length,0);
+console.log(`✓ Backend → Frontend current production parity passed: ${matrix.capabilities.length}/${matrix.capabilities.length} governed capabilities have explicit customer consumers or explicit conditional gates.`);
+console.log('  Personal methods, seven Profile modes, Cross/Reality, paid/relationship narrative, I Ching/Tarot and Continuity boundaries are visible without flattening authority.');

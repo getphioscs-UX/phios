@@ -1,0 +1,21 @@
+{
+  "registryCode": "PX2-PUBLIC-METHOD-CATALOG",
+  "version": "2.0.0",
+  "baselineCommit": "f6d31dafdc37dcf3d8f2ebd1236bfa500b7dc64c",
+  "schemaVersion": "PHI-OS-PX2-PUBLIC-METHOD-CATALOG-v6.0.0",
+  "status": "CURRENT_CUSTOMER_PRODUCTION_SURFACE_RECONCILED",
+  "work": "FRONTEND-FULL-PRODUCTION-CUTOVER",
+  "authorityNote": "Customer visibility follows current method authority. The catalog routes customers to governed runtime surfaces and never creates method meaning or execution authority.",
+  "methods": [
+    {"methodCode":"ECR","label":"PHI Configuration","labelZh":"PHI 构型","category":"STRUCTURAL_READING","route":"/perspectives/personal/","publicState":"AVAILABLE_IN_PERSONAL_READING","runAllowed":true,"executionMode":"GOVERNED_PERSONAL_READING"},
+    {"methodCode":"ASTROLOGY","label":"Astrology","labelZh":"占星","category":"STRUCTURAL_READING","route":"/perspectives/personal/","publicState":"AVAILABLE_IN_PERSONAL_READING","runAllowed":true,"executionMode":"GOVERNED_PERSONAL_READING"},
+    {"methodCode":"BAZI","label":"BaZi","labelZh":"八字","category":"STRUCTURAL_READING","route":"/perspectives/personal/","publicState":"AVAILABLE_IN_PERSONAL_READING","runAllowed":true,"executionMode":"GOVERNED_PERSONAL_READING"},
+    {"methodCode":"ZI_WEI_DOU_SHU","label":"Zi Wei Dou Shu","labelZh":"紫微斗数","category":"STRUCTURAL_READING","route":"/perspectives/personal/","publicState":"AVAILABLE_IN_PERSONAL_READING","runAllowed":true,"executionMode":"GOVERNED_PERSONAL_READING"},
+    {"methodCode":"NUMEROLOGY","label":"Numerology","labelZh":"数字学","category":"STRUCTURAL_READING","route":"/perspectives/personal/","publicState":"AVAILABLE_IN_PERSONAL_READING","runAllowed":true,"executionMode":"GOVERNED_PERSONAL_READING"},
+    {"methodCode":"HUMAN_DESIGN","label":"Human Design","labelZh":"人类图","category":"EXTERNAL_CHART_READING","route":"/perspectives/personal/","publicState":"AVAILABLE_WITH_CONFIRMED_EXTERNAL_CHART","runAllowed":true,"executionMode":"CUSTOMER_SUPPLIED_EXTERNAL_CHART","boundary":"PHI OS does not claim official BodyGraph birth-calculation authority."},
+    {"methodCode":"I_CHING","label":"I Ching","labelZh":"易经","category":"QUESTION_READING","route":"/perspectives/iching/","publicState":"FULL_PRODUCTION","runAllowed":true,"executionMode":"CURRENT_RELEASE_AUTHORITY"},
+    {"methodCode":"TAROT","label":"Tarot","labelZh":"塔罗","category":"QUESTION_READING","route":"/perspectives/tarot/","publicState":"SERVER_AUTHORITY_REQUIRED","runAllowed":false,"runtimeAuthorityEndpoint":"/api/tarot-production-status","runtimeAuthorityRequired":true,"staticCatalogMayGrantRunAllowed":false,"canonicalRuntimeSurface":true}
+  ],
+  "predecessor": "content/web-production/px2/successors/public-method-catalog-v5.json",
+  "predecessorMutated": false
+}
