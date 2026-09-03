@@ -1,3 +1,25 @@
 @layer cx.base {
-*{box-sizing:border-box}html{background:var(--cx-bg);color:var(--cx-ink);font-family:var(--cx-font-sans);text-rendering:optimizeLegibility}body{margin:0;min-height:100vh;background:var(--cx-bg);color:var(--cx-ink)}img,svg{max-width:100%;height:auto}a{color:inherit}button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}:focus-visible{outline:3px solid color-mix(in srgb,var(--cx-accent) 70%,white);outline-offset:3px}.cx-skip{position:fixed;left:1rem;top:-5rem;z-index:1000;background:var(--cx-ink);color:white;padding:.7rem 1rem;border-radius:.65rem}.cx-skip:focus{top:1rem}[hidden]{display:none!important}
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: var(--cx-color-canvas); color: var(--cx-color-ink); font-family: var(--cx-font-body); text-rendering: optimizeLegibility; }
+  body { margin: 0; min-height: 100vh; background: var(--cx-color-canvas); color: var(--cx-color-ink); }
+  img, svg, video, canvas { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  button, a, input, select, textarea { touch-action: manipulation; }
+  button, input, select, textarea { min-height: var(--cx-size-control-min); }
+  :focus-visible { outline: var(--cx-focus-width) solid var(--cx-color-focus); outline-offset: var(--cx-focus-offset); }
+  ::selection { background: var(--cx-color-accent-soft); color: var(--cx-color-ink); }
+  [hidden] { display: none; }
+
+  .cx-skip {
+    position: fixed;
+    left: var(--cx-space-4);
+    top: -6rem;
+    z-index: 1000;
+    background: var(--cx-color-ink);
+    color: var(--cx-color-surface);
+    padding: var(--cx-space-3) var(--cx-space-4);
+    border-radius: var(--cx-radius-sm);
+  }
+  .cx-skip:focus { top: var(--cx-space-4); }
 }

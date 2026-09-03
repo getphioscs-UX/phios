@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "PHI-OS-CX-R3-COMPONENT-REGISTRY-v1.0.0",
+  "work": "CX-R3-W6-W12",
+  "baselineCommit": "2cffbc97f9a72c3103780e78c3930f9233a41da0",
+  "status": "SHARED_CUSTOMER_COMPONENT_PRIMITIVES_FROZEN",
+  "groups": {
+    "buttons": {
+      "base": "cx-button",
+      "variants": [
+        "cx-button--primary",
+        "cx-button--secondary",
+        "cx-button--quiet",
+        "cx-button--text",
+        "cx-button--critical",
+        "cx-button--icon"
+      ],
+      "states": [
+        "hover",
+        "focus-visible",
+        "disabled",
+        "aria-disabled",
+        "aria-busy"
+      ]
+    },
+    "cards": {
+      "base": "cx-card",
+      "variants": [
+        "cx-card--content",
+        "cx-card--perspective",
+        "cx-card--reality",
+        "cx-card--navigation-option",
+        "cx-card--evidence",
+        "cx-card--unknown",
+        "cx-card--book",
+        "cx-card--professional",
+        "cx-card--report"
+      ]
+    },
+    "forms": [
+      "cx-field",
+      "cx-input",
+      "cx-textarea",
+      "cx-select",
+      "cx-date",
+      "cx-time",
+      "cx-segmented",
+      "cx-radio",
+      "cx-checkbox",
+      "cx-consent",
+      "cx-field-error",
+      "cx-field-helper"
+    ],
+    "statuses": [
+      "cx-status--available",
+      "cx-status--limited",
+      "cx-status--unavailable",
+      "cx-status--in-review",
+      "cx-status--unknown",
+      "cx-status--needs-attention",
+      "cx-status--professional-required"
+    ],
+    "evidence": [
+      "cx-evidence",
+      "cx-source",
+      "cx-unknown",
+      "cx-confidence",
+      "cx-assumption",
+      "cx-limitation",
+      "cx-professional-note"
+    ],
+    "results": [
+      "cx-result-section",
+      "cx-result-finding",
+      "cx-result-context",
+      "cx-result-evidence",
+      "cx-result-unknown",
+      "cx-result-perspective",
+      "cx-result-action"
+    ],
+    "workspace": [
+      "cx-workspace-header",
+      "cx-context-summary",
+      "cx-stage-rail",
+      "cx-progress",
+      "cx-tab-navigation",
+      "cx-side-context",
+      "cx-main-content",
+      "cx-continuation-cta"
+    ]
+  },
+  "rules": {
+    "allNewCustomerComponentsUseCxNamespace": true,
+    "methodMayConsumePrimitives": true,
+    "methodMayCreateOwnGlobalUiArchitecture": false,
+    "semanticVariantsMustNotCollapseIntoOneGenericCard": true,
+    "availabilityStateIsPresentedNotCalculatedByCss": true
+  }
+}

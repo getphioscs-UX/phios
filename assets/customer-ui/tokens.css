@@ -1,11 +1,113 @@
+@layer cx.tokens, cx.base, cx.typography, cx.layout, cx.components, cx.motion, cx.utilities, cx.preview;
+
 @layer cx.tokens {
-:root{
-  --cx-bg:#f7f5ef;--cx-surface:#fff;--cx-surface-soft:#f1eee6;--cx-ink:#171914;--cx-muted:#676a61;--cx-line:rgba(23,25,20,.12);
-  --cx-accent:#8d6a1f;--cx-accent-soft:#eee4cc;--cx-positive:#2f6a4f;--cx-warning:#8a5b19;--cx-danger:#8d3e35;
-  --cx-font-sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --cx-font-serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
-  --cx-space-1:.375rem;--cx-space-2:.625rem;--cx-space-3:.875rem;--cx-space-4:1.25rem;--cx-space-5:1.75rem;--cx-space-6:2.5rem;--cx-space-7:3.75rem;--cx-space-8:5.5rem;
-  --cx-radius-sm:.65rem;--cx-radius-md:1.05rem;--cx-radius-lg:1.65rem;--cx-shadow:0 18px 50px rgba(31,28,18,.08);
-  --cx-container:76rem;--cx-reading:49rem;--cx-header:4.75rem;
-}
+  :root {
+    /* CX-R3 W1 — semantic color roles. */
+    --cx-color-canvas: #f7f5ef;
+    --cx-color-surface: #ffffff;
+    --cx-color-surface-raised: #fffefa;
+    --cx-color-ink: #171914;
+    --cx-color-ink-muted: #676a61;
+    --cx-color-border: rgba(23, 25, 20, 0.14);
+    --cx-color-border-strong: rgba(23, 25, 20, 0.24);
+    --cx-color-accent: #8d6a1f;
+    --cx-color-accent-soft: #eee4cc;
+    --cx-color-success: #2f6a4f;
+    --cx-color-warning: #8a5b19;
+    --cx-color-critical: #8d3e35;
+    --cx-color-unknown: #666a70;
+    --cx-color-professional: #4d537a;
+    --cx-color-focus: #7a5b18;
+
+    /* Domain accents may decorate a bounded domain without changing UI architecture. */
+    --cx-domain-personal: #6e5b82;
+    --cx-domain-financial: #4f6857;
+    --cx-domain-knowledge: #7a6331;
+    --cx-domain-professional: var(--cx-color-professional);
+
+    /* CX-R3 W2 — two primary font roles plus optional data role. */
+    --cx-font-display: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --cx-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --cx-font-data: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+    --cx-type-display-xl: clamp(3.25rem, 7vw, 6.75rem);
+    --cx-type-display-lg: clamp(2.5rem, 5vw, 4.75rem);
+    --cx-type-heading-1: clamp(2rem, 3.4vw, 3.25rem);
+    --cx-type-heading-2: clamp(1.55rem, 2.4vw, 2.25rem);
+    --cx-type-heading-3: clamp(1.2rem, 1.6vw, 1.55rem);
+    --cx-type-body-lg: 1.125rem;
+    --cx-type-body: 1rem;
+    --cx-type-body-sm: 0.875rem;
+    --cx-type-label: 0.8125rem;
+    --cx-type-caption: 0.75rem;
+
+    --cx-leading-display: 0.98;
+    --cx-leading-heading: 1.15;
+    --cx-leading-body: 1.7;
+    --cx-leading-compact: 1.4;
+
+    /* CX-R3 W3 — one spacing scale. */
+    --cx-space-1: 0.25rem;
+    --cx-space-2: 0.5rem;
+    --cx-space-3: 0.75rem;
+    --cx-space-4: 1rem;
+    --cx-space-5: 1.25rem;
+    --cx-space-6: 1.5rem;
+    --cx-space-7: 2rem;
+    --cx-space-8: 2.5rem;
+    --cx-space-9: 3rem;
+    --cx-space-10: 4rem;
+    --cx-space-11: 5.5rem;
+    --cx-space-12: 7rem;
+
+    /* CX-R3 W4/W5 — layout, shape and elevation. */
+    --cx-size-container: 76rem;
+    --cx-size-container-wide: 90rem;
+    --cx-size-reading: 49rem;
+    --cx-size-sidebar: 17rem;
+    --cx-size-control-min: 2.75rem;
+    --cx-size-header: 4.75rem;
+    --cx-gutter: clamp(1rem, 3vw, 2rem);
+
+    --cx-radius-sm: 0.625rem;
+    --cx-radius-md: 1rem;
+    --cx-radius-lg: 1.5rem;
+    --cx-radius-full: 999px;
+    --cx-border-width: 1px;
+    --cx-shadow-1: 0 10px 30px rgba(31, 28, 18, 0.07);
+    --cx-shadow-2: 0 24px 70px rgba(31, 28, 18, 0.12);
+
+    /* CX-R3 W13/W14 — interaction and focus. */
+    --cx-motion-fast: 160ms;
+    --cx-motion-medium: 240ms;
+    --cx-motion-slow: 360ms;
+    --cx-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --cx-focus-width: 3px;
+    --cx-focus-offset: 3px;
+
+    /* Compatibility aliases for already-shipped CX surfaces. Values resolve to R3 roles. */
+    --cx-bg: var(--cx-color-canvas);
+    --cx-surface: var(--cx-color-surface);
+    --cx-surface-soft: var(--cx-color-surface-raised);
+    --cx-ink: var(--cx-color-ink);
+    --cx-muted: var(--cx-color-ink-muted);
+    --cx-line: var(--cx-color-border);
+    --cx-line-strong: var(--cx-color-border-strong);
+    --cx-border: var(--cx-color-border);
+    --cx-accent: var(--cx-color-accent);
+    --cx-accent-soft: var(--cx-color-accent-soft);
+    --cx-positive: var(--cx-color-success);
+    --cx-warning: var(--cx-color-warning);
+    --cx-danger: var(--cx-color-critical);
+    --cx-text: var(--cx-color-ink);
+    --cx-text-muted: var(--cx-color-ink-muted);
+    --cx-font-sans: var(--cx-font-body);
+    --cx-font-serif: var(--cx-font-display);
+    --cx-container: var(--cx-size-container);
+    --cx-reading: var(--cx-size-reading);
+    --cx-container-pad: var(--cx-gutter);
+    --cx-header: var(--cx-size-header);
+    --cx-shadow: var(--cx-shadow-1);
+    --cx-fast: var(--cx-motion-fast);
+  }
 }

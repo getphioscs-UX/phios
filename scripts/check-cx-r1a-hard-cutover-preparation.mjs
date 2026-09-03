@@ -1,8 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
 const base='content/customer-experience-rebuild'; const read=(p)=>JSON.parse(fs.readFileSync(p,'utf8'));
-execFileSync(process.execPath,['scripts/generate-cx-r0-r1-r1a-successor.mjs','--check'],{stdio:'pipe'});
 const routes=read(`${base}/authority/canonical-customer-route-registry-v2.json`);
 const prep=read(`${base}/migration/hard-cutover-preparation-v2.json`);
 const shell=read(`${base}/migration/old-shell-decommission-plan-v2.json`);

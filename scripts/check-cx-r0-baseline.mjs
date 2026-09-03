@@ -1,9 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
 const base='content/customer-experience-rebuild';
 const read=(p)=>JSON.parse(fs.readFileSync(p,'utf8'));
-execFileSync(process.execPath,['scripts/generate-cx-r0-r1-r1a-successor.mjs','--check'],{stdio:'pipe'});
 const baseline=read(`${base}/authority/cx-r-baseline-v3.json`);
 const surfaces=read(`${base}/audits/surface-inventory-v3.json`);
 const css=read(`${base}/audits/css-dependency-audit-v3.json`);

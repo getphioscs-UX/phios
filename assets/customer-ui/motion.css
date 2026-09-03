@@ -1,3 +1,23 @@
 @layer cx.motion {
-@media(prefers-reduced-motion:no-preference){.cx-button,.cx-nav-link,.cx-utility-link,.cx-card{transition:transform .18s ease,background-color .18s ease,border-color .18s ease}.cx-button:hover{transform:translateY(-1px)}.cx-card:hover{transform:translateY(-2px)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;transition-duration:.001ms!important}}
+  @media (prefers-reduced-motion: no-preference) {
+    .cx-motion-fade { animation: cx-fade var(--cx-motion-medium) var(--cx-ease-standard) both; }
+    .cx-motion-reveal { animation: cx-reveal var(--cx-motion-medium) var(--cx-ease-standard) both; }
+    .cx-motion-expand { transition: grid-template-rows var(--cx-motion-medium) var(--cx-ease-standard); }
+    .cx-motion-drawer { transition: transform var(--cx-motion-medium) var(--cx-ease-standard), visibility var(--cx-motion-medium) step-end; }
+    .cx-motion-modal { transition: opacity var(--cx-motion-fast) var(--cx-ease-standard), transform var(--cx-motion-fast) var(--cx-ease-standard); }
+    .cx-motion-stage-transition { animation: cx-stage var(--cx-motion-slow) var(--cx-ease-standard) both; }
+    .cx-button,
+    .cx-card,
+    .cx-nav-link,
+    .cx-utility-link { transition: transform var(--cx-motion-fast) var(--cx-ease-standard), border-color var(--cx-motion-fast) var(--cx-ease-standard), background-color var(--cx-motion-fast) var(--cx-ease-standard); }
+    .cx-button:hover { transform: translateY(-1px); }
+  }
+
+  @keyframes cx-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes cx-reveal { from { opacity: 0; transform: translateY(0.5rem); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes cx-stage { from { opacity: 0; transform: translateX(0.5rem); } to { opacity: 1; transform: translateX(0); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto; animation-duration: 0.001ms; animation-iteration-count: 1; transition-duration: 0.001ms; }
+  }
 }
