@@ -6,13 +6,13 @@ import { PROFILE_PRODUCTION_AUTHORITY, resolveProfileExecution } from '../functi
 import { SELF_ASSESSMENT_PURPOSE, scoreSelfAssessment, buildSelfAssessmentProfileSignals } from '../functions/profile/profile-foundation-runtime.js';
 import { buildProgressiveProfileView } from '../functions/profile/profile-progressive-ux-runtime.js';
 const ROOT=process.cwd(); const json=rel=>JSON.parse(fs.readFileSync(path.join(ROOT,rel),'utf8')); const text=rel=>fs.readFileSync(path.join(ROOT,rel),'utf8');
-const contract=json('content/profile/ux/profile-progressive-ux-contract-v1.json'); const acceptance=json('content/profile/acceptance/profile-prf-w11-machine-acceptance-v1.json');
+const contract=json('content/profile/ux/profile-progressive-ux-contract-v2.json'); const acceptance=json('content/profile/acceptance/profile-prf-w11-machine-acceptance-v1.json');
 assert.equal(assertProgressiveProfileUxContract(contract),true);
 assert.deepEqual(contract.modes.map(x=>x.mode),[...PROFILE_PROGRESSIVE_MODES]);
 assert.equal(contract.personalReading.profileRequiredBeforeReading,false);assert.equal(contract.personalReading.skipAllowed,true);assert.equal(contract.boundaries.universalMasterScoreAllowed,false);assert.equal(contract.boundaries.quotientLabelsAllowed,false);assert.equal(contract.boundaries.diagnosticLanguageAllowed,false);
 const page=text('perspectives/profile/index.html'),js=text('assets/customer-ui/js/surfaces/profile-progressive.js'),css=text('assets/customer-ui/surfaces/profile-progressive.css'),perspectives=text('perspectives/index.html'),personal=text('perspectives/personal/index.html');
 for(const mode of PROFILE_PROGRESSIVE_MODES)assert.match(page,new RegExp(`data-prf-mode="${mode}"`));
-assert.match(page,/data-prf-skip/);assert.match(page,/href="\/perspectives\/personal\/"/);assert.match(page,/noindex,nofollow/);assert.match(page,/Production admitted/);assert.match(js,/\/api\/profile-progressive\?preview=1/);assert.match(js,/Six-domain self-assessment radar/);assert.match(css,/\.prf-radar/);
+assert.match(page,/data-prf-skip/);assert.match(page,/href="\/perspectives\/personal\/"/);assert.match(page,/noindex,nofollow/);assert.match(page,/Production admitted/);assert.match(js,/\/api\/profile-progressive\?preview=1/);assert.match(js,/Six-domain self-assessment radar/);assert.match(js,/CAREER_INTERESTS/);assert.match(js,/O\*NET® INTEREST PROFILER/);assert.match(css,/\.prf-radar/);assert.match(css,/\.prf-interest-bars/);
 assert.doesNotMatch(perspectives,/href="\/perspectives\/profile\//,'Primary Perspectives navigation must remain closed before W12 human acceptance');
 assert.doesNotMatch(personal,/profileRequiredBeforeReading|data-profile-required|name="profileRequired"/i,'Personal Reading must not acquire a Profile prerequisite');
 const instrument=json('content/professional/profile/assessment/self-assessment-instrument-v2.json'); const quick=json('content/profile/ux/profile-quick-profile-selection-v1.json');
@@ -22,5 +22,5 @@ assert.equal(view.selfAssessmentRadar.axes.length,6);assert.equal(view.selfAsses
 const api=text('functions/api/profile-progressive.js'); assert.match(api,/scoreSelfAssessment/);assert.match(api,/scoreOriginalReasoningTaskBank/);assert.match(api,/normalizeExternalProfileInput/);assert.doesNotMatch(api,/with \{ type: ['"]json['"] \}/);
 assert.equal(PROFILE_PRODUCTION_AUTHORITY.status,'PRODUCTION_ADMITTED_CUTOVER_ELIGIBLE');assert.equal(PROFILE_PRODUCTION_AUTHORITY.profileSurfaceCutoverAllowed,true);assert.equal(PROFILE_PRODUCTION_AUTHORITY.profileSurfaceCutoverExecuted,false);
 assert.equal(acceptance.status,'PROGRESSIVE_PROFILE_UX_MACHINE_VERIFIED');assert.equal(acceptance.customerPublication.allowed,false);
-console.log('✓ PRF-W11 Progressive Profile UX passed: four optional modes, canonical runtime preview, six-domain radar, skip path and source-aware boundaries are present.');
+console.log('✓ PRF-W11 Progressive Profile UX successor passed: five optional modes including live O*NET Career Interests, source-aware results, skip path and boundaries are present.');
 console.log('  PRF-W12 is production-admitted; primary navigation/indexing cutover remains intentionally unexecuted.');

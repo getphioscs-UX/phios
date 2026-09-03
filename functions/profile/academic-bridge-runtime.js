@@ -10,6 +10,8 @@ export const IPIP_RESULT_SCHEMA = 'PHI-OS-IPIP-RESULT-v1';
 export const REASONING_SESSION_SCHEMA = 'PHI-OS-ORIGINAL-REASONING-SESSION-v1';
 export const REASONING_RENDERER_SCHEMA = 'PHI-OS-REASONING-PERFORMANCE-RENDERER-v1';
 export const ONET_RESULT_SCHEMA = 'PHI-OS-ONET-INTEREST-PROFILER-RESULT-v1';
+export const ONET_CAREER_DETAIL_SCHEMA = 'PHI-OS-ONET-CAREER-DETAIL-v1';
+export const ONET_JOB_ZONE_SCHEMA = 'PHI-OS-ONET-JOB-ZONE-SET-v1';
 export const FINANCIAL_CAPABILITY_RESULT_SCHEMA = 'PHI-OS-FINANCIAL-CAPABILITY-RESULT-v1';
 
 const fail = (code, details = null) => {
@@ -202,6 +204,15 @@ export function renderReasoningPerformance(session, { locale = 'en' } = {}) {
 
 const ONET_BASE = 'https://api-v2.onetcenter.org';
 const ONET_RIASEC = ['realistic','investigative','artistic','social','enterprising','conventional'];
+const ONET_FORMS = Object.freeze({
+  MINI_30: { path: '/mnm/interestprofiler/questions_30', itemCount: 30, perInterestCount: 5, rawRange: [5,25] },
+  SHORT_60: { path: '/mnm/interestprofiler/questions', itemCount: 60, perInterestCount: 10, rawRange: [10,50] }
+});
+const ONET_FIT_LABELS = Object.freeze({
+  Best: 'STRONG_INTEREST_MATCH',
+  Great: 'MODERATE_INTEREST_MATCH',
+  Good: 'EXPLORATORY_INTEREST_MATCH'
+});
 
 function onetKey(apiKey) {
   return text(apiKey, 'PRF_W10D_ONET_API_KEY_REQUIRED', 240);
@@ -210,19 +221,64 @@ function onetKey(apiKey) {
 async function onetGet(path, { apiKey, fetchImpl = globalThis.fetch } = {}) {
   if (typeof fetchImpl !== 'function') fail('PRF_W10D_ONET_FETCH_REQUIRED');
   const key = onetKey(apiKey);
-  const response = await fetchImpl(`${ONET_BASE}${path}`, { headers: { 'X-API-Key': key } });
+  let response;
+  try {
+    response = await fetchImpl(`${ONET_BASE}${path}`, { headers: { 'X-API-Key': key, accept: 'application/json' } });
+  } catch (error) {
+    fail('PRF_ONET_PROVIDER_NETWORK_FAILED', { path, message: String(error?.message || error) });
+  }
   if (!response || response.ok !== true) fail('PRF_W10D_ONET_PROVIDER_REQUEST_FAILED', { status: response?.status ?? null, path });
-  const data = await response.json();
-  return data;
+  try { return await response.json(); }
+  catch { fail('PRF_ONET_PROVIDER_JSON_INVALID', { path }); }
+}
+
+function onetForm(form) {
+  const normalized = text(form, 'PRF_ONET_FORM_REQUIRED', 40).toUpperCase();
+  const config = ONET_FORMS[normalized];
+  if (!config) fail('PRF_W10D_ONET_FORM_NOT_ADMITTED');
+  return [normalized, config];
 }
 
 export async function fetchOnetInterestProfilerQuestions({ apiKey, form = 'MINI_30', start = 1, end = null, fetchImpl } = {}) {
-  const formPath = form === 'SHORT_60' ? '/mnm/interestprofiler/questions' : form === 'MINI_30' ? '/mnm/interestprofiler/questions_30' : null;
-  if (!formPath) fail('PRF_W10D_ONET_FORM_NOT_ADMITTED');
+  const [, config] = onetForm(form);
   const params = new URLSearchParams();
   params.set('start', String(start));
   if (end !== null) params.set('end', String(end));
-  return onetGet(`${formPath}?${params.toString()}`, { apiKey, fetchImpl });
+  return onetGet(`${config.path}?${params.toString()}`, { apiKey, fetchImpl });
+}
+
+function normalizeOnetAnswerOptions(value) {
+  return list(value).map(row => ({ value: Number(row.value), name: text(row.name, 'PRF_ONET_ANSWER_OPTION_NAME_REQUIRED', 100) }))
+    .filter(row => Number.isInteger(row.value) && row.value >= 1 && row.value <= 5);
+}
+
+function normalizeOnetQuestions(value) {
+  return list(value).map(row => ({
+    index: Number(row.index),
+    area: text(row.area, 'PRF_ONET_QUESTION_AREA_REQUIRED', 40).toLowerCase(),
+    text: text(row.text, 'PRF_ONET_QUESTION_TEXT_REQUIRED', 400)
+  })).filter(row => Number.isInteger(row.index) && row.index > 0 && ONET_RIASEC.includes(row.area));
+}
+
+export async function fetchOnetInterestProfilerQuestionSet({ apiKey, form = 'MINI_30', fetchImpl } = {}) {
+  const [normalizedForm, config] = onetForm(form);
+  const questions = [];
+  let answerOptions = [];
+  for (let start = 1; start <= config.itemCount; start += 12) {
+    const end = Math.min(config.itemCount, start + 11);
+    const page = await fetchOnetInterestProfilerQuestions({ apiKey, form: normalizedForm, start, end, fetchImpl });
+    if (!answerOptions.length) answerOptions = normalizeOnetAnswerOptions(page.answer_option);
+    questions.push(...normalizeOnetQuestions(page.question));
+  }
+  questions.sort((a,b)=>a.index-b.index);
+  if (questions.length !== config.itemCount || new Set(questions.map(row=>row.index)).size !== config.itemCount) fail('PRF_ONET_QUESTION_SET_INCOMPLETE', { form: normalizedForm, expected: config.itemCount, actual: questions.length });
+  if (answerOptions.length !== 5) fail('PRF_ONET_ANSWER_OPTIONS_INCOMPLETE');
+  return deepFreeze({
+    schemaVersion: 'PHI-OS-ONET-INTEREST-PROFILER-QUESTION-SET-v1',
+    provider: 'O_NET_WEB_SERVICES_V2', form: normalizedForm, itemCount: config.itemCount,
+    answerOptions, questions,
+    governance: { providerQuestionTextAltered: false, apiKeyExposed: false, automaticPersistence: false }
+  });
 }
 
 function answersString(answers) {
@@ -246,7 +302,7 @@ export async function fetchOnetMatchingCareers({ apiKey, answers = null, scores 
     if (!scores || ONET_RIASEC.some(code => !Number.isInteger(Number(scores[code])))) fail('PRF_W10D_ONET_RIASEC_SCORES_REQUIRED');
     for (const code of ONET_RIASEC) params.set(code, String(Number(scores[code])));
   }
-  if (zone !== null) {
+  if (zone !== null && zone !== '') {
     const z = Number(zone);
     if (!Number.isInteger(z) || z < 1 || z > 5) fail('PRF_W10D_ONET_JOB_ZONE_INVALID');
     params.set('zone', String(z));
@@ -256,9 +312,53 @@ export async function fetchOnetMatchingCareers({ apiKey, answers = null, scores 
   return onetGet(`/mnm/interestprofiler/careers?${params.toString()}`, { apiKey, fetchImpl });
 }
 
-export async function normalizeOnetInterestProfilerResult({ participantRef, assessmentDate, form = 'MINI_30', providerResult, careers = [], customerConfirmed = true } = {}) {
+export async function fetchOnetJobZones({ apiKey, fetchImpl } = {}) {
+  return onetGet('/mnm/interestprofiler/job_zones', { apiKey, fetchImpl });
+}
+
+export function normalizeOnetJobZones(providerZones) {
+  const raw = list(providerZones?.job_zone ?? providerZones?.job_zones ?? providerZones);
+  const zones = raw.map(row => ({ code: Number(row.code), title: text(row.title, 'PRF_ONET_JOB_ZONE_TITLE_REQUIRED', 180) }))
+    .filter(row => Number.isInteger(row.code) && row.code >= 1 && row.code <= 5);
+  if (!zones.length) fail('PRF_ONET_JOB_ZONES_REQUIRED');
+  return deepFreeze({ schemaVersion: ONET_JOB_ZONE_SCHEMA, zones, governance: { providerLabelsPreserved: true, preparationContextNotAbilityRank: true } });
+}
+
+export async function fetchOnetCareerDetail({ apiKey, code, fetchImpl } = {}) {
+  const careerCode = text(code, 'PRF_ONET_CAREER_CODE_REQUIRED', 40);
+  if (!/^\d{2}-\d{4}\.\d{2}$/.test(careerCode)) fail('PRF_ONET_CAREER_CODE_INVALID');
+  return onetGet(`/mnm/careers/${encodeURIComponent(careerCode)}/`, { apiKey, fetchImpl });
+}
+
+export function normalizeOnetCareerDetail(providerCareer) {
+  const code = text(providerCareer?.code, 'PRF_ONET_CAREER_CODE_REQUIRED', 40);
+  const title = text(providerCareer?.title, 'PRF_ONET_CAREER_TITLE_REQUIRED', 220);
+  const whatTheyDo = text(providerCareer?.what_they_do, 'PRF_ONET_CAREER_SUMMARY_REQUIRED', 1600);
+  const onTheJob = list(providerCareer?.on_the_job).map(item => typeof item === 'string' ? text(item, 'PRF_ONET_CAREER_TASK_INVALID', 800) : text(item?.text, 'PRF_ONET_CAREER_TASK_INVALID', 800)).slice(0,12);
+  return deepFreeze({
+    schemaVersion: ONET_CAREER_DETAIL_SCHEMA, provider: 'O_NET_WEB_SERVICES_V2', code, title, whatTheyDo, onTheJob,
+    governance: { providerDataAltered: false, explorationOnly: true, jobFitGuaranteeCreated: false, employmentDecisionAuthorityCreated: false }
+  });
+}
+
+function normalizeOnetCareerMatches(careers) {
+  return list(careers?.career ?? careers).slice(0, 100).map(row => {
+    const providerFit = typeof row.fit === 'string' ? row.fit : null;
+    return {
+      code: text(row.code, 'PRF_W10D_ONET_CAREER_CODE_REQUIRED', 40),
+      title: text(row.title, 'PRF_W10D_ONET_CAREER_TITLE_REQUIRED', 200),
+      providerFit,
+      interestMatchClass: ONET_FIT_LABELS[providerFit] || 'PROVIDER_MATCH_UNCLASSIFIED',
+      brightOutlook: row.tags?.bright_outlook === true,
+      href: typeof row.href === 'string' ? row.href : null
+    };
+  });
+}
+
+export async function normalizeOnetInterestProfilerResult({ participantRef, assessmentDate, form = 'MINI_30', providerResult, careers = [], jobZones = null, selectedJobZone = null, customerConfirmed = true } = {}) {
   const person = text(participantRef, 'PRF_W10D_ONET_PARTICIPANT_REQUIRED', 160);
   const date = isoDate(assessmentDate, 'PRF_W10D_ONET_ASSESSMENT_DATE_REQUIRED');
+  const [normalizedForm, config] = onetForm(form);
   const rows = list(providerResult?.result);
   if (rows.length !== 6) fail('PRF_W10D_ONET_SIX_RIASEC_RESULTS_REQUIRED');
   const interests = {};
@@ -266,35 +366,69 @@ export async function normalizeOnetInterestProfilerResult({ participantRef, asse
     const code = text(row.code, 'PRF_W10D_ONET_RIASEC_CODE_REQUIRED', 40).toLowerCase();
     if (!ONET_RIASEC.includes(code) || interests[code]) fail('PRF_W10D_ONET_RIASEC_CODE_INVALID');
     const score = Number(row.score);
-    if (!Number.isInteger(score) || score < 0) fail('PRF_W10D_ONET_RIASEC_SCORE_INVALID', { code, score });
-    interests[code] = { code, score, title: typeof row.title === 'string' ? row.title : code, description: typeof row.description === 'string' ? row.description : null, href: typeof row.href === 'string' ? row.href : null };
+    if (!Number.isInteger(score) || score < config.rawRange[0] || score > config.rawRange[1]) fail('PRF_W10D_ONET_RIASEC_SCORE_INVALID', { code, score, rawRange: config.rawRange });
+    interests[code] = { code, score, title: typeof row.title === 'string' ? row.title : code, description: typeof row.description === 'string' ? row.description : null, href: typeof row.href === 'string' ? row.href : null, rawRange: [...config.rawRange] };
   }
   if (ONET_RIASEC.some(code => !(code in interests))) fail('PRF_W10D_ONET_RIASEC_COVERAGE_REQUIRED');
-  const normalizedCareers = list(careers?.career ?? careers).slice(0, 100).map(row => ({ code: text(row.code, 'PRF_W10D_ONET_CAREER_CODE_REQUIRED', 40), title: text(row.title, 'PRF_W10D_ONET_CAREER_TITLE_REQUIRED', 200), fit: typeof row.fit === 'string' ? row.fit : null, brightOutlook: row.tags?.bright_outlook === true, href: typeof row.href === 'string' ? row.href : null }));
-  const digest = await sha256Stable({ person, date, form, scores: ONET_RIASEC.map(code => [code, interests[code].score]), careers: normalizedCareers.map(row => [row.code,row.fit]) });
+  const normalizedCareers = normalizeOnetCareerMatches(careers);
+  const normalizedZones = jobZones ? normalizeOnetJobZones(jobZones) : null;
+  const selectedZone = selectedJobZone === null || selectedJobZone === '' ? null : Number(selectedJobZone);
+  if (selectedZone !== null && (!Number.isInteger(selectedZone) || selectedZone < 1 || selectedZone > 5)) fail('PRF_W10D_ONET_JOB_ZONE_INVALID');
+  const ranking = ONET_RIASEC.map(code => interests[code]).sort((a,b)=>b.score-a.score || a.code.localeCompare(b.code)).map(row=>row.code);
+  const digest = await sha256Stable({ person, date, form:normalizedForm, scores: ONET_RIASEC.map(code => [code, interests[code].score]), careers: normalizedCareers.map(row => [row.code,row.providerFit]), selectedZone });
   return deepFreeze({
     schemaVersion: ONET_RESULT_SCHEMA,
     resultId: `PRF-ONET-${digest.slice(0, 24).toUpperCase()}`,
     participantRef: person,
     assessmentDate: date,
-    form,
+    form: normalizedForm,
+    itemCount: config.itemCount,
     sourceClass: 'STANDARDIZED_SELF_REPORT',
     scoringState: 'EXTERNALLY_SCORED',
+    normingState: 'NOT_NORMED',
     provider: 'O_NET_WEB_SERVICES_V2',
     interests,
+    interestRanking: ranking,
     careers: normalizedCareers,
+    jobZones: normalizedZones?.zones || [],
+    selectedJobZone: selectedZone,
     customerConfirmed: customerConfirmed === true,
-    attribution: 'O*NET Web Services / U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). O*NET® is a trademark of USDOL/ETA.',
+    attribution: 'This application incorporates information from O*NET Web Services by the U.S. Department of Labor, Employment and Training Administration (USDOL/ETA). O*NET® is a trademark of USDOL/ETA.',
     governance: {
       providerScoringPreserved: true,
       providerDataAltered: false,
+      providerFitLabelPreserved: true,
+      phiosFitLabelIsExplorationLanguageOnly: true,
       careerFitGuaranteeCreated: false,
       employmentDecisionAuthorityCreated: false,
       destinyClaimCreated: false,
+      automaticPersistence: false,
       customerPublishableBeforePrfW12: false
     },
     semanticDigest: digest
   });
+}
+
+export async function buildOnetProfileSignals(onetResult) {
+  if (onetResult?.schemaVersion !== ONET_RESULT_SCHEMA) fail('PRF_W10F_ONET_RESULT_REQUIRED');
+  const signals = [];
+  for (const code of ONET_RIASEC) {
+    const row = onetResult.interests[code];
+    signals.push(await buildProfileSignalEnvelope({
+      participantRef: onetResult.participantRef,
+      sourceClass:'STANDARDIZED_SELF_REPORT',
+      sourceRef:onetResult.resultId,
+      domainId:`RIASEC::${code.toUpperCase()}`,
+      value:{ score:row.score, title:row.title, form:onetResult.form, rawRange:row.rawRange },
+      valueType:'OBJECT',
+      confidence:onetResult.customerConfirmed?'CUSTOMER_CONFIRMED':'SELF_REPORTED',
+      assessmentDate:onetResult.assessmentDate,
+      customerConfirmed:onetResult.customerConfirmed,
+      precisionBoundary:['EXTERNALLY_SCORED_BY_ONET_WEB_SERVICES','STANDARDIZED_SELF_REPORT_INTEREST_NOT_OBJECTIVE_PERSONALITY_FACT','CAREER_INTEREST_NOT_JOB_FIT_GUARANTEE','NO_EMPLOYMENT_DECISION_AUTHORITY'],
+      provenance:[{source:onetResult.resultId,provider:onetResult.provider,form:onetResult.form,attribution:onetResult.attribution}]
+    }));
+  }
+  return deepFreeze(signals);
 }
 
 export async function scoreFinancialCapabilityAssessment({ instrument, responses = {}, participantRef, assessmentDate, consent, customerConfirmed = true } = {}) {
@@ -390,11 +524,7 @@ export async function buildAcademicProfileSignalBundle({ ipipResult = null, reas
   }
 
   if (onetResult !== null) {
-    if (onetResult?.schemaVersion !== ONET_RESULT_SCHEMA) fail('PRF_W10F_ONET_RESULT_REQUIRED');
-    for (const code of ONET_RIASEC) {
-      const row = onetResult.interests[code];
-      signals.push(await buildProfileSignalEnvelope({ participantRef: onetResult.participantRef, sourceClass:'STANDARDIZED_SELF_REPORT', sourceRef:onetResult.resultId, domainId:`RIASEC::${code.toUpperCase()}`, value:{ score:row.score, title:row.title }, valueType:'OBJECT', confidence:onetResult.customerConfirmed?'CUSTOMER_CONFIRMED':'SELF_REPORTED', assessmentDate:onetResult.assessmentDate, customerConfirmed:onetResult.customerConfirmed, precisionBoundary:['EXTERNALLY_SCORED_BY_ONET_WEB_SERVICES','CAREER_INTEREST_NOT_JOB_FIT_GUARANTEE','NO_EMPLOYMENT_DECISION_AUTHORITY'], provenance:[{source:onetResult.resultId,provider:onetResult.provider,attribution:onetResult.attribution}] }));
-    }
+    signals.push(...await buildOnetProfileSignals(onetResult));
   }
 
   if (financialResult !== null) {

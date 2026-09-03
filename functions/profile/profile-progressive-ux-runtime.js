@@ -8,7 +8,8 @@ export const PROFILE_PROGRESSIVE_MODES = Object.freeze([
   'QUICK_PROFILE',
   'FULL_SELF_ASSESSMENT',
   'REASONING_TASKS',
-  'IMPORT_EXTERNAL_RESULT'
+  'IMPORT_EXTERNAL_RESULT',
+  'CAREER_INTERESTS'
 ]);
 
 export const PROFILE_SELF_ASSESSMENT_DOMAINS = Object.freeze([
@@ -51,6 +52,15 @@ const DOMAIN_META = Object.freeze({
   BODY_LIFESTYLE_STEWARDSHIP: ['Body & Lifestyle Stewardship','身体与生活管理'],
   FINANCIAL_CAPABILITY: ['Financial Capability','财务能力'],
   MEANING_VALUES: ['Meaning & Values','意义与价值']
+});
+
+const RIASEC_META = Object.freeze({
+  REALISTIC: ['Realistic','现实型'],
+  INVESTIGATIVE: ['Investigative','研究型'],
+  ARTISTIC: ['Artistic','艺术型'],
+  SOCIAL: ['Social','社会型'],
+  ENTERPRISING: ['Enterprising','企业型'],
+  CONVENTIONAL: ['Conventional','常规型']
 });
 
 const fail = (code, details = null) => {
@@ -147,6 +157,43 @@ function signalCard(signal, asOfDate, locale) {
   });
 }
 
+function careerInterestSummary(signals, locale) {
+  const zh = locale === 'zh-Hans';
+  const rows = signals.filter(signal => signal.sourceClass === 'STANDARDIZED_SELF_REPORT' && /^RIASEC::/.test(signal.domainId) && signal.value && typeof signal.value === 'object' && Number.isFinite(Number(signal.value.score))).map(signal => {
+    const code = signal.domainId.split('::')[1];
+    const meta = RIASEC_META[code] || [code,code];
+    return {
+      signalRef: signal.profileSignalId,
+      code,
+      label: zh ? meta[1] : meta[0],
+      score: Number(signal.value.score),
+      rawRange: Array.isArray(signal.value.rawRange) ? clone(signal.value.rawRange) : null,
+      form: signal.value.form || null,
+      sourceClass: signal.sourceClass,
+      assessmentDate: signal.assessmentDate || null
+    };
+  }).sort((a,b)=>b.score-a.score || a.code.localeCompare(b.code));
+  if (!rows.length) return null;
+  const max = Math.max(...rows.map(row=>row.score));
+  const top = rows.filter(row=>row.score===max).map(row=>row.code);
+  return deepFreeze({
+    kind: 'ONET_RIASEC_RAW_SCORE_PROFILE',
+    axes: rows,
+    topInterestCodes: top,
+    interpretation: zh ? '这些是 O*NET Interest Profiler 的原始 RIASEC 分数。它们描述本次标准化自陈中的兴趣方向，不是能力、人格真理或职业命定。' : 'These are raw RIASEC scores from the O*NET Interest Profiler. They describe interests reported in this standardized self-report; they are not ability scores, objective personality facts or career destiny.',
+    currentRealityPrompts: zh ? [
+      '这些兴趣目前在哪里真实出现？',
+      '哪些工作活动让你更投入，哪些让你明显耗竭？',
+      '当前现实是支持、部分支持、反驳，还是仍未验证这些兴趣信号？'
+    ] : [
+      'Where are these interests actually showing up now?',
+      'Which work activities feel engaging, and which feel draining?',
+      'Does Current Reality support, partly support, contradict, or leave these interest signals open?'
+    ],
+    governance: { providerRawScoresPreserved:true, masterScoreCreated:false, jobFitGuaranteeCreated:false, automaticRealityMatching:false }
+  });
+}
+
 function realitySummary(profileRealityCorrelation, locale) {
   if (profileRealityCorrelation === null || profileRealityCorrelation === undefined) return null;
   if (profileRealityCorrelation?.schemaVersion !== PROFILE_REALITY_CORRELATION_SCHEMA) fail('PRF_W11_REALITY_CORRELATION_SCHEMA_REQUIRED');
@@ -231,6 +278,7 @@ export async function buildProgressiveProfileView({
     sourceLegend: sourceLegend(signals, locale),
     signalCards: cards,
     selfAssessmentRadar: selfAssessmentRadar(signals, locale),
+    careerInterest: careerInterestSummary(signals, locale),
     currentReality: realitySummary(profileRealityCorrelation, locale),
     crossSource: crossSourceSummary(crossSourcePerspective, locale),
     relationshipProfile: relationshipSummary(relationshipProfileEvidence, locale),
@@ -270,7 +318,7 @@ export async function buildProgressiveProfileView({
 }
 
 export function assertProgressiveProfileUxContract(contract) {
-  if (contract?.schemaVersion !== 'PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v1.0.0') fail('PRF_W11_UX_CONTRACT_REQUIRED');
+  if (!['PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v1.0.0','PHI-OS-PROGRESSIVE-PROFILE-UX-CONTRACT-v2.0.0'].includes(contract?.schemaVersion)) fail('PRF_W11_UX_CONTRACT_REQUIRED');
   if (contract.personalReading?.profileRequiredBeforeReading !== false) fail('PRF_W11_PROFILE_MUST_REMAIN_OPTIONAL');
   if (contract.personalReading?.skipAllowed !== true) fail('PRF_W11_PROFILE_SKIP_REQUIRED');
   const modes = list(contract.modes).map(item => item.mode);

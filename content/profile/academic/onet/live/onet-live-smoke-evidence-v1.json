@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-ONET-LIVE-SMOKE-EVIDENCE-v1.0.0",
+  "work": "PRF-ONET-LIVE-ACTIVATION-W0-W4",
+  "baselineCommit": "92b30b95cf2f70af4ed2ee8e41401764b06fa8b5",
+  "observedAt": "2026-09-03",
+  "evidenceAuthority": "USER_EXECUTED_LIVE_PROVIDER_SMOKE_IN_LOCAL_POWERSHELL",
+  "credential": {
+    "organizationApproved": true,
+    "apiKeyValid": true,
+    "apiKeyRecordedInEvidence": false,
+    "apiKeyMayEnterRepository": false,
+    "serverSecretName": "ONET_WEB_SERVICES_API_KEY"
+  },
+  "checks": {
+    "mini30Questions": {"status": "PASS_LIVE", "total": 30, "firstIndex": 1, "lastIndex": 30},
+    "riaSecResults": {"status": "PASS_LIVE", "syntheticAnswerSet": true, "scores": {"realistic":10,"investigative":10,"artistic":10,"social":10,"enterprising":10,"conventional":10}, "interpretationAllowed": false},
+    "careerMatching": {"status": "PASS_LIVE", "firstObservedCareer": {"code":"13-2011.00","title":"Accountants & Auditors","fit":"Good"}},
+    "jobZones": {"status": "PASS_LIVE", "observedCodes": [2,3,4,5], "zone4FilteredCareerMatching": true},
+    "careerDetail": {"status": "PASS_LIVE", "code":"13-2011.00", "title":"Accountants & Auditors", "whatTheyDoPresent": true, "onTheJobPresent": true}
+  },
+  "limitations": {
+    "liveShort60Observed": false,
+    "automatedCiLiveProviderSmoke": false,
+    "providerCredentialAvailableToRepositoryChecks": false,
+    "syntheticBalancedScoresAreCustomerInterpretationEvidence": false
+  }
+}
