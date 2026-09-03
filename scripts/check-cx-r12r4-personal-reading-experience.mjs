@@ -66,7 +66,19 @@ assert.match(html,/data-cx-asset="ICON-027"/);assert.match(html,/data-cx-asset="
 assert.match(html,/Perspective ≠ Fact/);assert.match(html,/Unknown stays unknown/);assert.match(html,/Nothing is saved automatically/);
 if(pprR5Editorial){assert.match(html,/cannot silently promote symbolic material into objective evidence/);assert.match(html,/Similarity → observation/);}else if(pprR3ReadingSurface)assert.match(html,/Resonance is not evidence by itself/);else assert.match(html,/Resonates is not evidence by itself/);
 assert.match(css,/cx-personal-method-cards/);if(pprR3ReadingSurface)assert.match(css,/cx-specialist-products/);else assert.match(css,/cx-reading-map-live/);assert.match(css,/@media\(max-width:620px\)/);
-if(pprR5Editorial){for(const successor of ['现实原本复杂到无法被直接完整读取。','不同体系，保存的是同一份复杂现实里的不同部分。','Birth-based perspectives','I Ching and Tarot begin from a question'])assert(html.includes(successor),`PPR-R5 CX editorial successor contract lost: ${successor}`);}else for(const historical of ['一个人，从来不只有一种读法。','不同传统，从一开始就在问不同的问题。','Birth-based perspectives','I Ching and Tarot begin from a question'])assert(html.includes(historical),`historical CX customer contract lost: ${historical}`);
+const cxR12Successor=fs.existsSync('content/customer-experience-rebuild/acceptance/cx-r12-acceptance-v2.json')&&html.includes('data-cx-r12-input-stage');
+if(pprR5Editorial){
+  for(const successor of ['现实原本复杂到无法被直接完整读取。','不同体系，保存的是同一份复杂现实里的不同部分。'])assert(html.includes(successor),`PPR-R5 CX editorial successor contract lost: ${successor}`);
+  if(cxR12Successor){
+    const r12=json('content/customer-experience-rebuild/acceptance/cx-r12-acceptance-v2.json');
+    assert.equal(r12.status,'ACCEPTED_PERSONAL_REALITY_CURRENT_MAIN_SUCCESSOR');
+    for(const successor of ['Birth information','What you want to explore','Optional: Deepen my profile'])assert(html.includes(successor),`CX-R12 customer input successor lost: ${successor}`);
+    assert.match(html,/birth-based profile/i,'CX-R12 must preserve the birth-based versus question-based editorial distinction');
+    assert.match(html,/I Ching and Tarot begin (?:with|from) a question/,'CX-R12 must preserve the question-based I Ching/Tarot editorial distinction');
+  }else{
+    for(const successor of ['Birth-based perspectives','I Ching and Tarot begin from a question'])assert(html.includes(successor),`PPR-R5 CX editorial successor contract lost: ${successor}`);
+  }
+}else for(const historical of ['一个人，从来不只有一种读法。','不同传统，从一开始就在问不同的问题。','Birth-based perspectives','I Ching and Tarot begin from a question'])assert(html.includes(historical),`historical CX customer contract lost: ${historical}`);
 if(pprR3ReadingSurface)assert(js.includes('Technical Details')||js.includes('技术详情'),'PPR-R3 dynamic technical disclosure missing');else assert(html.includes('Technical Details'),'historical CX customer contract lost: Technical Details');
 assert.equal(acceptance.work,'CX-R12R4-W0-W9');assert.equal(acceptance.claims.browserAccepted,false);assert.equal(acceptance.claims.productionHumanAccepted,false);assert.equal(acceptance.claims.fullProduction,false);
 console.log('✓ CX-R12R4 W0–W9 Personal Reality Reading Experience passed.');

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-CX-R13-CURRENT-MAIN-RECONCILIATION-v1.0.0",
+  "work": "CX-R13",
+  "executionBaselineCommit": "5c6594b197be80dbf40da97e15486e8450d39830",
+  "status": "RECONCILED",
+  "findings": [
+    {
+      "id": "R12R4_CHECKER_DRIFT",
+      "finding": "Historical R12R4 checker required exact PPR-R5 wording after CX-R12 legitimately replaced the input IA.",
+      "resolution": "Preserve PPR-R5 editorial distinction semantically while validating CX-R12 successor input labels and current acceptance."
+    },
+    {
+      "id": "STAGE14_ROUTE_CHECKER_DRIFT",
+      "finding": "Historical Stage14 checker required the current /professional/financial/ surface to link back to the legacy /financial-reality route after CX had already made /professional/financial/ canonical.",
+      "resolution": "Keep Stage14 FDR/FCR/FAR product assertions, but validate current Financial Reality against the CX canonical route registry and 308 compatibility redirect instead of reintroducing a legacy customer link."
+    },
+    {
+      "id": "FINANCIAL_INTAKE_FLAT",
+      "finding": "Canonical Financial Reality exposed one long form rather than the governed nine-stage intake.",
+      "resolution": "Customer intake is staged Household through Unknowns without changing financial runtime semantics."
+    },
+    {
+      "id": "OVERVIEW_CALCULATOR_FIRST",
+      "finding": "Results began with financial tables rather than the four-question customer overview.",
+      "resolution": "Overview now precedes calculation drilldown and groups only explicit upstream findings/unknowns."
+    },
+    {
+      "id": "CALCULATION_ADVICE_BOUNDARY",
+      "finding": "FCR metrics were visible but not exposed as a dedicated drilldown boundary.",
+      "resolution": "Calculated metrics now carry FCR lineage and explicit no-recommendation copy."
+    },
+    {
+      "id": "PLANNING_NOT_SURFACED",
+      "finding": "HFP planning slots were absent from the customer surface.",
+      "resolution": "Planning slots are present but remain NOT_ESTABLISHED until explicit governed planning output is supplied."
+    },
+    {
+      "id": "REPORT_LIFECYCLE_NOT_SURFACED",
+      "finding": "Financial page did not distinguish released report lifecycle from visible snapshot content.",
+      "resolution": "Only explicitly RELEASED RR output can be projected; CX does not compose a report."
+    },
+    {
+      "id": "AUTHORITY_LAYERS_PRESERVED",
+      "finding": "System analysis / professional review / professional recommendation boundary remains required.",
+      "resolution": "Three layers remain distinct; current page creates neither professional review nor recommendation."
+    }
+  ],
+  "boundaries": {
+    "backendAuthorityChanged": false,
+    "fdrChanged": false,
+    "fcrChanged": false,
+    "farChanged": false,
+    "hfpChanged": false,
+    "pfrChanged": false,
+    "rrChanged": false,
+    "routeCutoverPerformed": false,
+    "physicalLegacyDeletePerformed": false
+  },
+  "next": "CX-R9-R2_CONTEXTUAL_ASK_CURRENT_MAIN_RECONCILIATION"
+}

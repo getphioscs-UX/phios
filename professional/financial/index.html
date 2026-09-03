@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Financial Reality organizes current financial facts, calculations, findings, evidence states and professional review boundaries.">
+  <meta name="description" content="Financial Reality organizes current financial facts, calculations, findings, planning boundaries and professional review without turning numbers into advice.">
   <title>Financial Reality — PHI OS</title>
   <link rel="canonical" href="/professional/financial/">
   <link rel="stylesheet" href="/assets/customer-ui/tokens.css">
@@ -14,35 +14,170 @@
   <link rel="stylesheet" href="/assets/customer-ui/motion.css">
   <link rel="stylesheet" href="/assets/customer-ui/utilities.css">
   <link rel="stylesheet" href="/assets/customer-ui/surfaces/p1.css">
+  <link rel="stylesheet" href="/assets/customer-ui/surfaces/financial-reality-r13.css">
 </head>
-<body data-cx-surface="FINANCIAL_REALITY" data-cx-nav="PROFESSIONAL">
-  <a class="cx-skip" href="#main">Skip to content</a><div data-cx-header></div>
+<body data-cx-surface="FINANCIAL_REALITY" data-cx-nav="PROFESSIONAL" data-cx-r13="CURRENT_MAIN_SUCCESSOR">
+  <a class="cx-skip" href="#main">Skip to content</a>
+  <div data-cx-header></div>
   <main id="main" class="cx-p1-main">
-    <section class="cx-p1-hero"><div class="cx-container cx-p1-hero__grid"><div class="cx-stack"><p class="cx-eyebrow">FINANCIAL REALITY</p><h1 class="cx-display" data-cx-en="See the financial position before deciding what to do." data-cx-zh="先看清财务位置，再决定要做什么。">See the financial position before deciding what to do.</h1><p class="cx-lead" data-cx-en="Bring household scope, cashflow, assets, liabilities, protection, goals, documents and unknowns into one dated view. Calculations, system findings and professional judgment remain separate." data-cx-zh="把家庭范围、现金流、资产、负债、保障、目标、文件与未知项放进同一个有日期的视图。计算、系统发现与专业判断始终分层。">Bring household scope, cashflow, assets, liabilities, protection, goals, documents and unknowns into one dated view. Calculations, system findings and professional judgment remain separate.</p><p class="cx-p1-note" data-cx-en="This page does not create a financial recommendation. A professional recommendation requires a separate professional review." data-cx-zh="本页不会产生财务建议。专业建议必须经过独立的专业复核。">This page does not create a financial recommendation. A professional recommendation requires a separate professional review.</p></div><figure class="cx-visual"><img data-cx-asset-role="ILL-006" alt="Financial Reality scene"><figcaption class="cx-meta" style="padding:.85rem 1rem" data-cx-en="Facts · calculations · findings · review" data-cx-zh="事实 · 计算 · 发现 · 复核">Facts · calculations · findings · review</figcaption></figure></div></section>
-    <section class="cx-section--tight"><div class="cx-container cx-stack"><aside class="cx-card cx-card--soft"><p class="cx-eyebrow" data-cx-en="EVIDENCE STATE" data-cx-zh="证据状态">EVIDENCE STATE</p><div class="cx-p1-inline" aria-label="Evidence states"><span class="cx-p1-evidence-badge">Reported</span><span class="cx-p1-evidence-badge">Verified</span><span class="cx-p1-evidence-badge">Assumed</span><span class="cx-p1-evidence-badge">Missing</span><span class="cx-p1-evidence-badge">Outdated</span></div><p class="cx-meta" data-cx-en="Each item keeps its evidence state; the page does not promote reported or assumed values into verified facts." data-cx-zh="每个项目保留自己的证据状态；页面不会把申报或假设值提升为已验证事实。">Each item keeps its evidence state; the page does not promote reported or assumed values into verified facts.</p></aside><section class="cx-card"><div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="FINANCIAL INTAKE" data-cx-zh="财务资料">FINANCIAL INTAKE</p><h2 class="cx-title" data-cx-en="Build a dated current position" data-cx-zh="建立一个有日期的当前财务位置">Build a dated current position</h2><p class="cx-body cx-muted" data-cx-en="Start with what you know. Missing information stays missing and is shown as such." data-cx-zh="从你已经知道的资料开始。缺失资料会继续保持缺失，并清楚标示。">Start with what you know. Missing information stays missing and is shown as such.</p></div>
-      <form class="cx-p1-form" data-cx-financial-form>
-        <div class="cx-p1-fields cx-p1-fields--3"><label class="cx-p1-field"><span data-cx-en="As of date" data-cx-zh="资料日期">As of date</span><input type="date" name="asOfDate" required></label><label class="cx-p1-field"><span data-cx-en="Base currency" data-cx-zh="基础币种">Base currency</span><select name="baseCurrency"><option value="MYR">MYR</option><option value="USD">USD</option><option value="SGD">SGD</option><option value="CNY">CNY</option></select></label><label class="cx-p1-field"><span data-cx-en="Household" data-cx-zh="家庭范围">Household</span><input name="household" maxlength="160" placeholder="e.g. two adults, two children"></label></div>
-        <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Monthly income" data-cx-zh="每月收入">Monthly income</span><input type="number" min="0" step="0.01" name="monthlyIncome"></label><label class="cx-p1-field"><span data-cx-en="Monthly expenses" data-cx-zh="每月支出">Monthly expenses</span><input type="number" min="0" step="0.01" name="monthlyExpenses"></label></div>
-        <div class="cx-p1-fields cx-p1-fields--3"><label class="cx-p1-field"><span data-cx-en="Liquid assets" data-cx-zh="流动资产">Liquid assets</span><input type="number" min="0" step="0.01" name="liquidAssets"></label><label class="cx-p1-field"><span data-cx-en="Investments" data-cx-zh="投资资产">Investments</span><input type="number" min="0" step="0.01" name="investments"></label><label class="cx-p1-field"><span data-cx-en="Property" data-cx-zh="房地产">Property</span><input type="number" min="0" step="0.01" name="property"></label></div>
-        <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Liabilities" data-cx-zh="负债">Liabilities</span><input type="number" min="0" step="0.01" name="liabilities"></label><label class="cx-p1-field"><span data-cx-en="Monthly debt repayment" data-cx-zh="每月债务偿还">Monthly debt repayment</span><input type="number" min="0" step="0.01" name="monthlyDebtRepayment"></label></div>
-        <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Protection" data-cx-zh="保障">Protection</span><textarea name="protection" maxlength="1200" placeholder="Insurance or protection information you want included"></textarea></label><label class="cx-p1-field"><span data-cx-en="Goals" data-cx-zh="目标">Goals</span><textarea name="goals" maxlength="1200" placeholder="What are you trying to fund or protect?"></textarea></label></div>
-        <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Constraints" data-cx-zh="限制">Constraints</span><textarea name="constraints" maxlength="1200"></textarea></label><label class="cx-p1-field"><span data-cx-en="Documents / evidence notes" data-cx-zh="文件／证据说明">Documents / evidence notes</span><textarea name="documents" maxlength="1200" placeholder="What documents exist or are still missing?"></textarea></label></div>
-        <label class="cx-p1-field"><span data-cx-en="Unknowns" data-cx-zh="未知项">Unknowns</span><textarea name="unknowns" maxlength="1200" placeholder="What are you not sure about yet?"></textarea></label>
-        <label class="cx-p1-consent"><input type="checkbox" name="consent" required><span data-cx-en="I agree to process this information for a temporary Financial Reality view. Nothing is saved automatically." data-cx-zh="我同意为临时 Financial Reality 视图处理这些资料。任何内容都不会自动保存。">I agree to process this information for a temporary Financial Reality view. Nothing is saved automatically.</span></label>
-        <div class="cx-p1-inline"><button class="cx-button cx-button--primary" type="submit" data-cx-en="Build Financial Reality" data-cx-zh="建立 Financial Reality">Build Financial Reality</button><button class="cx-button" type="reset" data-cx-en="Clear" data-cx-zh="清除">Clear</button></div><p class="cx-p1-status" data-cx-financial-status role="status"></p>
-      </form>
-    </section></div></section>
-    <section class="cx-section--tight" data-cx-financial-results hidden><div class="cx-container"><div class="cx-p1-workspace" data-cx-workspace><aside class="cx-p1-rail"><nav data-cx-tablist aria-label="Financial Reality sections"><button class="cx-p1-tab" type="button" data-cx-tab="position" aria-selected="true" data-cx-en="Current position" data-cx-zh="当前位置">Current position</button><button class="cx-p1-tab" type="button" data-cx-tab="cashflow" data-cx-en="Cashflow" data-cx-zh="现金流">Cashflow</button><button class="cx-p1-tab" type="button" data-cx-tab="assets" data-cx-en="Assets" data-cx-zh="资产">Assets</button><button class="cx-p1-tab" type="button" data-cx-tab="liabilities" data-cx-en="Liabilities" data-cx-zh="负债">Liabilities</button><button class="cx-p1-tab" type="button" data-cx-tab="protection" data-cx-en="Protection" data-cx-zh="保障">Protection</button><button class="cx-p1-tab" type="button" data-cx-tab="goals" data-cx-en="Goals & constraints" data-cx-zh="目标与限制">Goals & constraints</button><button class="cx-p1-tab" type="button" data-cx-tab="findings" data-cx-en="Findings" data-cx-zh="发现">Findings</button><button class="cx-p1-tab" type="button" data-cx-tab="review" data-cx-en="Professional Review" data-cx-zh="专业复核">Professional Review</button></nav></aside><div>
-      <section class="cx-p1-panel" data-cx-panel="position"><div class="cx-p1-section-head"><p class="cx-eyebrow">CURRENT POSITION</p><div class="cx-p1-surface-title"><h2 class="cx-title" data-cx-en="A dated financial snapshot" data-cx-zh="有日期的财务快照">A dated financial snapshot</h2><span class="cx-status" data-cx-financial-snapshot-state>—</span></div></div><div data-cx-financial-position></div><div class="cx-p1-actions"><button class="cx-button cx-button--primary" type="button" data-cx-financial-handoff disabled data-cx-en="Add this Financial Reality to My Reality" data-cx-zh="把这个 Financial Reality 加入 My Reality">Add this Financial Reality to My Reality</button></div></section>
-      <section class="cx-p1-panel" data-cx-panel="cashflow" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">CASHFLOW</p><h2 class="cx-title" data-cx-en="Income, expenses and liquidity" data-cx-zh="收入、支出与流动性">Income, expenses and liquidity</h2></div><div data-cx-financial-cashflow></div></section>
-      <section class="cx-p1-panel" data-cx-panel="assets" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">ASSETS</p><h2 class="cx-title" data-cx-en="Assets reported in this view" data-cx-zh="这个视图中申报的资产">Assets reported in this view</h2></div><div data-cx-financial-assets></div></section>
-      <section class="cx-p1-panel" data-cx-panel="liabilities" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">LIABILITIES</p><h2 class="cx-title" data-cx-en="Liabilities reported in this view" data-cx-zh="这个视图中申报的负债">Liabilities reported in this view</h2></div><div data-cx-financial-liabilities></div></section>
-      <section class="cx-p1-panel" data-cx-panel="protection" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">PROTECTION</p><h2 class="cx-title" data-cx-en="Protection information" data-cx-zh="保障资料">Protection information</h2></div><div data-cx-financial-protection></div></section>
-      <section class="cx-p1-panel" data-cx-panel="goals" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">GOALS & CONSTRAINTS</p><h2 class="cx-title" data-cx-en="Goals, constraints, documents and unknowns" data-cx-zh="目标、限制、文件与未知项">Goals, constraints, documents and unknowns</h2></div><div data-cx-financial-goals></div></section>
-      <section class="cx-p1-panel" data-cx-panel="findings" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">SYSTEM ANALYSIS</p><h2 class="cx-title" data-cx-en="Bounded findings from the current data" data-cx-zh="基于当前资料的边界化发现">Bounded findings from the current data</h2></div><div data-cx-financial-findings></div></section>
-      <section class="cx-p1-panel" data-cx-panel="review" hidden><div class="cx-p1-section-head"><p class="cx-eyebrow">PROFESSIONAL REVIEW</p><h2 class="cx-title" data-cx-en="System analysis is not professional recommendation" data-cx-zh="系统分析不等于专业建议">System analysis is not professional recommendation</h2></div><div class="cx-p1-layer-grid" data-cx-financial-layers></div><div class="cx-p1-actions"><a class="cx-button" href="/professional/appointments/" data-cx-en="Explore professional review" data-cx-zh="了解专业复核">Explore professional review</a></div></section>
-    </div></div></div></section>
+    <section class="cx-p1-hero">
+      <div class="cx-container cx-p1-hero__grid">
+        <div class="cx-stack">
+          <p class="cx-eyebrow">FINANCIAL REALITY</p>
+          <h1 class="cx-display" data-cx-en="See where you are before deciding what to do." data-cx-zh="先看清你在哪里，再决定要做什么。">See where you are before deciding what to do.</h1>
+          <p class="cx-lead" data-cx-en="Bring household scope, income, expenses, assets, liabilities, protection, goals, documents and unknowns into one dated view. Calculations, findings, planning and professional judgment stay visibly separate." data-cx-zh="把家庭范围、收入、支出、资产、负债、保障、目标、文件与未知项放进同一个有日期的视图。计算、发现、规划与专业判断始终清楚分层。">Bring household scope, income, expenses, assets, liabilities, protection, goals, documents and unknowns into one dated view. Calculations, findings, planning and professional judgment stay visibly separate.</p>
+          <p class="cx-p1-note" data-cx-en="Financial Reality can organize and calculate. It does not turn a number or system finding into a recommendation." data-cx-zh="Financial Reality 可以整理与计算，但不会把数字或系统发现自动变成建议。">Financial Reality can organize and calculate. It does not turn a number or system finding into a recommendation.</p>
+        </div>
+        <figure class="cx-visual"><img data-cx-asset-role="ILL-006" alt="Financial Reality scene"><figcaption class="cx-meta" data-cx-en="Facts · calculations · findings · planning · professional review" data-cx-zh="事实 · 计算 · 发现 · 规划 · 专业复核">Facts · calculations · findings · planning · professional review</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="cx-section--tight">
+      <div class="cx-container cx-r13-financial-intro">
+        <div class="cx-stack">
+          <p class="cx-eyebrow" data-cx-en="BUILD THE CURRENT PICTURE" data-cx-zh="建立当前图景">BUILD THE CURRENT PICTURE</p>
+          <h2 class="cx-title" data-cx-en="Start with what you know. Leave the rest open." data-cx-zh="从你已经知道的开始，其余部分保持开放。">Start with what you know. Leave the rest open.</h2>
+          <p class="cx-body cx-muted" data-cx-en="The intake is divided into nine short stages so you can see what kind of information is being used. Missing information is not silently estimated." data-cx-zh="资料输入分成九个简短阶段，让你清楚知道正在使用哪一类信息。缺失资料不会被系统静默估算。">The intake is divided into nine short stages so you can see what kind of information is being used. Missing information is not silently estimated.</p>
+        </div>
+        <aside class="cx-card cx-card--soft cx-r13-evidence-legend">
+          <p class="cx-eyebrow" data-cx-en="VERIFICATION STATUS" data-cx-zh="验证状态">VERIFICATION STATUS</p>
+          <div class="cx-r13-evidence-list" aria-label="Evidence states"><span class="cx-p1-evidence-badge">Reported</span><span class="cx-p1-evidence-badge">Verified</span><span class="cx-p1-evidence-badge">Assumed</span><span class="cx-p1-evidence-badge">Missing</span><span class="cx-p1-evidence-badge">Outdated</span></div>
+          <p class="cx-meta" data-cx-en="Each item keeps the state supplied by its source. This page never upgrades reported or assumed information to verified." data-cx-zh="每一项都会保留来源提供的状态。本页不会把申报或假设资料提升为已验证。">Each item keeps the state supplied by its source. This page never upgrades reported or assumed information to verified.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="cx-section--tight">
+      <div class="cx-container cx-r13-intake-shell">
+        <nav class="cx-r13-stage-nav" aria-label="Financial intake stages" data-cx-financial-stage-nav>
+          <button type="button" data-cx-financial-stage-go="0" aria-current="step"><span>01</span><strong data-cx-en="Household" data-cx-zh="家庭">Household</strong></button>
+          <button type="button" data-cx-financial-stage-go="1"><span>02</span><strong data-cx-en="Income" data-cx-zh="收入">Income</strong></button>
+          <button type="button" data-cx-financial-stage-go="2"><span>03</span><strong data-cx-en="Expenses" data-cx-zh="支出">Expenses</strong></button>
+          <button type="button" data-cx-financial-stage-go="3"><span>04</span><strong data-cx-en="Assets" data-cx-zh="资产">Assets</strong></button>
+          <button type="button" data-cx-financial-stage-go="4"><span>05</span><strong data-cx-en="Liabilities" data-cx-zh="负债">Liabilities</strong></button>
+          <button type="button" data-cx-financial-stage-go="5"><span>06</span><strong data-cx-en="Protection" data-cx-zh="保障">Protection</strong></button>
+          <button type="button" data-cx-financial-stage-go="6"><span>07</span><strong data-cx-en="Goals" data-cx-zh="目标">Goals</strong></button>
+          <button type="button" data-cx-financial-stage-go="7"><span>08</span><strong data-cx-en="Documents" data-cx-zh="文件">Documents</strong></button>
+          <button type="button" data-cx-financial-stage-go="8"><span>09</span><strong data-cx-en="Unknowns" data-cx-zh="未知项">Unknowns</strong></button>
+        </nav>
+
+        <section class="cx-card">
+          <form class="cx-p1-form" data-cx-financial-form>
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="household" data-cx-financial-stage-index="0">
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">01</span><div><p class="cx-eyebrow" data-cx-en="HOUSEHOLD" data-cx-zh="家庭">HOUSEHOLD</p><h2 class="cx-heading" data-cx-en="Define the scope and date of this view" data-cx-zh="先确定这次视图的范围与日期">Define the scope and date of this view</h2><p class="cx-meta" data-cx-en="Use a scope that makes sense for the question you are examining." data-cx-zh="请使用与你现在要观察的问题相符的家庭范围。">Use a scope that makes sense for the question you are examining.</p></div></div>
+              <div class="cx-p1-fields cx-p1-fields--3"><label class="cx-p1-field"><span data-cx-en="As of date" data-cx-zh="资料日期">As of date</span><input type="date" name="asOfDate" required></label><label class="cx-p1-field"><span data-cx-en="Base currency" data-cx-zh="基础币种">Base currency</span><select name="baseCurrency" required><option value="">Choose currency</option><option value="MYR">MYR</option><option value="USD">USD</option><option value="SGD">SGD</option><option value="CNY">CNY</option></select></label><label class="cx-p1-field"><span data-cx-en="Household" data-cx-zh="家庭范围">Household</span><input name="household" maxlength="160" placeholder="e.g. two adults, two children"></label></div>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="income" data-cx-financial-stage-index="1" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">02</span><div><p class="cx-eyebrow" data-cx-en="INCOME" data-cx-zh="收入">INCOME</p><h2 class="cx-heading" data-cx-en="What currently comes in?" data-cx-zh="目前有哪些收入进入？">What currently comes in?</h2></div></div>
+              <label class="cx-p1-field"><span data-cx-en="Monthly income" data-cx-zh="每月收入">Monthly income</span><input type="number" min="0" step="0.01" name="monthlyIncome"></label>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="expenses" data-cx-financial-stage-index="2" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">03</span><div><p class="cx-eyebrow" data-cx-en="EXPENSES" data-cx-zh="支出">EXPENSES</p><h2 class="cx-heading" data-cx-en="What currently goes out?" data-cx-zh="目前有哪些支出流出？">What currently goes out?</h2></div></div>
+              <label class="cx-p1-field"><span data-cx-en="Monthly expenses" data-cx-zh="每月支出">Monthly expenses</span><input type="number" min="0" step="0.01" name="monthlyExpenses"></label>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="assets" data-cx-financial-stage-index="3" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">04</span><div><p class="cx-eyebrow" data-cx-en="ASSETS" data-cx-zh="资产">ASSETS</p><h2 class="cx-heading" data-cx-en="What resources are in the current picture?" data-cx-zh="当前图景里有哪些资源？">What resources are in the current picture?</h2></div></div>
+              <div class="cx-p1-fields cx-p1-fields--3"><label class="cx-p1-field"><span data-cx-en="Liquid assets" data-cx-zh="流动资产">Liquid assets</span><input type="number" min="0" step="0.01" name="liquidAssets"></label><label class="cx-p1-field"><span data-cx-en="Investments" data-cx-zh="投资资产">Investments</span><input type="number" min="0" step="0.01" name="investments"></label><label class="cx-p1-field"><span data-cx-en="Property" data-cx-zh="房地产">Property</span><input type="number" min="0" step="0.01" name="property"></label></div>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="liabilities" data-cx-financial-stage-index="4" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">05</span><div><p class="cx-eyebrow" data-cx-en="LIABILITIES" data-cx-zh="负债">LIABILITIES</p><h2 class="cx-heading" data-cx-en="What obligations are already present?" data-cx-zh="目前已经有哪些债务义务？">What obligations are already present?</h2></div></div>
+              <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Liabilities" data-cx-zh="负债">Liabilities</span><input type="number" min="0" step="0.01" name="liabilities"></label><label class="cx-p1-field"><span data-cx-en="Monthly debt repayment" data-cx-zh="每月债务偿还">Monthly debt repayment</span><input type="number" min="0" step="0.01" name="monthlyDebtRepayment"></label></div>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="protection" data-cx-financial-stage-index="5" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">06</span><div><p class="cx-eyebrow" data-cx-en="PROTECTION" data-cx-zh="保障">PROTECTION</p><h2 class="cx-heading" data-cx-en="What protection should be visible in this view?" data-cx-zh="这次视图需要看到哪些保障资料？">What protection should be visible in this view?</h2></div></div>
+              <label class="cx-p1-field"><span data-cx-en="Protection" data-cx-zh="保障">Protection</span><textarea name="protection" maxlength="1200" placeholder="Insurance or protection information you want included"></textarea></label>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="goals" data-cx-financial-stage-index="6" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">07</span><div><p class="cx-eyebrow" data-cx-en="GOALS" data-cx-zh="目标">GOALS</p><h2 class="cx-heading" data-cx-en="What are you trying to fund, protect or change?" data-cx-zh="你想为哪些目标准备、保护或改变现状？">What are you trying to fund, protect or change?</h2></div></div>
+              <div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="Goals" data-cx-zh="目标">Goals</span><textarea name="goals" maxlength="1200" placeholder="What are you trying to fund or protect?"></textarea></label><label class="cx-p1-field"><span data-cx-en="Constraints" data-cx-zh="限制">Constraints</span><textarea name="constraints" maxlength="1200"></textarea></label></div>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="documents" data-cx-financial-stage-index="7" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">08</span><div><p class="cx-eyebrow" data-cx-en="DOCUMENTS" data-cx-zh="文件">DOCUMENTS</p><h2 class="cx-heading" data-cx-en="What evidence exists, and what is still missing?" data-cx-zh="目前有哪些文件证据，还有哪些尚未取得？">What evidence exists, and what is still missing?</h2></div></div>
+              <label class="cx-p1-field"><span data-cx-en="Documents / evidence notes" data-cx-zh="文件／证据说明">Documents / evidence notes</span><textarea name="documents" maxlength="1200" placeholder="What documents exist or are still missing?"></textarea></label>
+            </fieldset>
+
+            <fieldset class="cx-r13-intake-stage" data-cx-financial-intake-stage="unknowns" data-cx-financial-stage-index="8" hidden>
+              <div class="cx-r13-stage-head"><span class="cx-r13-stage-number">09</span><div><p class="cx-eyebrow" data-cx-en="UNKNOWNS" data-cx-zh="未知项">UNKNOWNS</p><h2 class="cx-heading" data-cx-en="Keep uncertainty visible" data-cx-zh="把不确定的部分保留下来">Keep uncertainty visible</h2><p class="cx-meta" data-cx-en="Write down what is not established. The system will not turn a blank into a guessed fact." data-cx-zh="请记录尚未确定的部分。系统不会把空白自动变成猜测事实。">Write down what is not established. The system will not turn a blank into a guessed fact.</p></div></div>
+              <label class="cx-p1-field"><span data-cx-en="Unknowns" data-cx-zh="未知项">Unknowns</span><textarea name="unknowns" maxlength="1200" placeholder="What are you not sure about yet?"></textarea></label>
+              <label class="cx-p1-consent"><input type="checkbox" name="consent" required><span data-cx-en="I agree to process this information for a temporary Financial Reality view. Nothing is saved automatically." data-cx-zh="我同意为临时 Financial Reality 视图处理这些资料。任何内容都不会自动保存。">I agree to process this information for a temporary Financial Reality view. Nothing is saved automatically.</span></label>
+            </fieldset>
+
+            <div class="cx-r13-stage-controls"><button class="cx-button" type="button" data-cx-financial-stage-prev disabled data-cx-en="Back" data-cx-zh="上一步">Back</button><span class="cx-meta" data-cx-financial-stage-status>Step 1 of 9</span><div class="cx-r13-stage-controls__right"><button class="cx-button cx-button--primary" type="button" data-cx-financial-stage-next data-cx-en="Next" data-cx-zh="下一步">Next</button><button class="cx-button cx-button--primary" type="submit" data-cx-financial-submit hidden data-cx-en="Build Financial Reality" data-cx-zh="建立 Financial Reality">Build Financial Reality</button><button class="cx-button" type="reset" data-cx-en="Clear" data-cx-zh="清除">Clear</button></div></div>
+            <p class="cx-p1-status" data-cx-financial-status role="status" aria-live="polite"></p>
+          </form>
+        </section>
+      </div>
+    </section>
+
+    <section class="cx-section--tight" data-cx-financial-results hidden>
+      <div class="cx-container">
+        <header class="cx-r13-results-head">
+          <div><p class="cx-eyebrow" data-cx-en="YOUR FINANCIAL REALITY" data-cx-zh="你的 FINANCIAL REALITY">YOUR FINANCIAL REALITY</p><h2 class="cx-title" data-cx-en="Start with the picture, then drill into the numbers." data-cx-zh="先看整体图景，再深入数字。">Start with the picture, then drill into the numbers.</h2><p class="cx-body cx-muted" data-cx-en="The overview groups only what upstream financial authorities returned. It does not infer a strength, concern, priority or recommendation from a number alone." data-cx-zh="总览只整理上游财务权威已经返回的内容，不会仅凭一个数字自行推断优势、问题、优先级或建议。">The overview groups only what upstream financial authorities returned. It does not infer a strength, concern, priority or recommendation from a number alone.</p></div>
+          <div class="cx-r13-overview-grid" data-cx-financial-overview></div>
+          <div class="cx-p1-actions"><button class="cx-button cx-button--primary" type="button" data-cx-financial-handoff disabled data-cx-en="Add this Financial Reality to My Reality" data-cx-zh="把这个 Financial Reality 加入 My Reality">Add this Financial Reality to My Reality</button></div>
+        </header>
+
+        <nav class="cx-r13-result-tabs" role="tablist" aria-label="Financial Reality result sections" data-cx-financial-result-tabs>
+          <button type="button" role="tab" data-cx-financial-result-tab="overview" aria-selected="true" data-cx-en="Overview" data-cx-zh="总览">Overview</button>
+          <button type="button" role="tab" data-cx-financial-result-tab="calculations" aria-selected="false" data-cx-en="Calculations" data-cx-zh="计算">Calculations</button>
+          <button type="button" role="tab" data-cx-financial-result-tab="findings" aria-selected="false" data-cx-en="Findings" data-cx-zh="发现">Findings</button>
+          <button type="button" role="tab" data-cx-financial-result-tab="planning" aria-selected="false" data-cx-en="Planning" data-cx-zh="规划">Planning</button>
+          <button type="button" role="tab" data-cx-financial-result-tab="review" aria-selected="false" data-cx-en="Professional Review" data-cx-zh="专业复核">Professional Review</button>
+          <button type="button" role="tab" data-cx-financial-result-tab="report" aria-selected="false" data-cx-en="Report" data-cx-zh="报告">Report</button>
+          <button type="button" role="tab" data-cx-financial-result-tab="details" aria-selected="false" data-cx-en="Details" data-cx-zh="细节">Details</button>
+        </nav>
+
+        <section class="cx-r13-result-panel" data-cx-financial-result-panel="overview">
+          <div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="FINANCIAL OVERVIEW" data-cx-zh="财务总览">FINANCIAL OVERVIEW</p><h2 class="cx-title" data-cx-en="Where you are now" data-cx-zh="你现在在哪里">Where you are now</h2></div>
+          <div data-cx-financial-position></div>
+          <div class="cx-p1-divider"></div>
+          <div data-cx-financial-cashflow></div>
+        </section>
+
+        <section class="cx-r13-result-panel" data-cx-financial-result-panel="calculations" hidden>
+          <div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="CALCULATIONS" data-cx-zh="计算">CALCULATIONS</p><h2 class="cx-title" data-cx-en="Drill into calculated values without turning them into advice" data-cx-zh="深入查看计算值，但不把它们自动变成建议">Drill into calculated values without turning them into advice</h2></div>
+          <div data-cx-financial-calculations></div>
+        </section>
+
+        <section class="cx-r13-result-panel" data-cx-financial-result-panel="findings" hidden>
+          <div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="SYSTEM FINDINGS" data-cx-zh="系统发现">SYSTEM FINDINGS</p><h2 class="cx-title" data-cx-en="What the governed analysis found in the current structure" data-cx-zh="受治理分析在当前结构中发现了什么">What the governed analysis found in the current structure</h2></div>
+          <div data-cx-financial-findings></div>
+        </section>
+
+        <section class="cx-r13-result-panel" data-cx-financial-result-panel="planning" hidden>
+          <div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="PLANNING" data-cx-zh="规划">PLANNING</p><h2 class="cx-title" data-cx-en="Priorities and options only appear when a governed planning product supplies them" data-cx-zh="只有受治理规划产品真正提供时，才会出现优先级与选项">Priorities and options only appear when a governed planning product supplies them</h2></div>
+          <div data-cx-financial-planning></div>
+        </section>
+
+        <section class="cx-r13-result-panel" data-cx-financial-result-panel="review" hidden>
+          <div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="PROFESSIONAL REVIEW" data-cx-zh="专业复核">PROFESSIONAL REVIEW</p><h2 class="cx-title" data-cx-en="System analysis, professional review and professional recommendation are different layers" data-cx-zh="系统分析、专业复核与专业建议属于不同层级">System analysis, professional review and professional recommendation are different layers</h2></div>
+          <div class="cx-p1-layer-grid" data-cx-financial-layers></div>
+          <div class="cx-p1-actions"><a class="cx-button" href="/professional/appointments/" data-cx-en="Explore professional review" data-cx-zh="了解专业复核">Explore professional review</a></div>
+        </section>
+
+        <section class="cx-r13-result-panel" data-cx-financial-result-panel="report" hidden>
+          <div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="FINANCIAL REPORT" data-cx-zh="财务报告">FINANCIAL REPORT</p><h2 class="cx-title" data-cx-en="Only a released governed report can appear here" data-cx-zh="这里只有已发布的受治理报告才会出现">Only a released governed report can appear here</h2></div>
+          <div class="cx-r13-report-state" data-cx-financial-report></div>
+        </section>
+
+        <section class="cx-r13-result-panel" data-cx-financial-result-panel="details" hidden>
+          <div class="cx-p1-section-head"><p class="cx-eyebrow" data-cx-en="DETAILS" data-cx-zh="细节">DETAILS</p><h2 class="cx-title" data-cx-en="Source details and evidence states" data-cx-zh="来源细节与证据状态">Source details and evidence states</h2></div>
+          <div class="cx-r13-detail-grid"><section class="cx-r13-boundary-card"><h3 data-cx-en="Household" data-cx-zh="家庭">Household</h3><div data-cx-financial-household></div></section><section class="cx-r13-boundary-card"><h3 data-cx-en="Assets" data-cx-zh="资产">Assets</h3><div data-cx-financial-assets></div></section><section class="cx-r13-boundary-card"><h3 data-cx-en="Liabilities" data-cx-zh="负债">Liabilities</h3><div data-cx-financial-liabilities></div></section><section class="cx-r13-boundary-card"><h3 data-cx-en="Protection" data-cx-zh="保障">Protection</h3><div data-cx-financial-protection></div></section><section class="cx-r13-boundary-card"><h3 data-cx-en="Goals & constraints" data-cx-zh="目标与限制">Goals & constraints</h3><div data-cx-financial-goals></div></section><section class="cx-r13-boundary-card"><h3 data-cx-en="Documents & unknowns" data-cx-zh="文件与未知项">Documents & unknowns</h3><div data-cx-financial-documents></div></section></div>
+        </section>
+      </div>
+    </section>
   </main>
-  <dialog class="cx-dialog" id="cx-financial-handoff-dialog"><div class="cx-dialog__body"><h2 class="cx-heading" data-cx-en="Add this Financial Reality to My Reality?" data-cx-zh="把这个 Financial Reality 加入 My Reality？">Add this Financial Reality to My Reality?</h2><p class="cx-body cx-muted" data-cx-en="The financial snapshot, deterministic calculations and bounded findings remain labeled as such. They do not become professional advice." data-cx-zh="财务快照、确定性计算与边界化发现会继续保持原有标签，不会变成专业建议。">The financial snapshot, deterministic calculations and bounded findings remain labeled as such. They do not become professional advice.</p><label class="cx-p1-consent"><input type="checkbox" data-cx-financial-handoff-consent><span data-cx-en="I choose to bring this Financial Reality into My Reality." data-cx-zh="我选择把这个 Financial Reality 带入 My Reality。">I choose to bring this Financial Reality into My Reality.</span></label><p class="cx-p1-status" data-cx-financial-handoff-status></p><div class="cx-p1-dialog-actions"><button class="cx-button" type="button" data-cx-dialog-close data-cx-en="Cancel" data-cx-zh="取消">Cancel</button><button class="cx-button cx-button--primary" type="button" data-cx-financial-handoff-confirm data-cx-en="Continue" data-cx-zh="继续">Continue</button></div></div></dialog>
-  <div data-cx-footer></div><script type="module" src="/assets/customer-ui/js/shell.js"></script><script type="module" src="/assets/customer-ui/js/surfaces/financial-reality.js"></script>
-</body></html>
+
+  <dialog class="cx-dialog" id="cx-financial-handoff-dialog"><div class="cx-dialog__body"><h2 class="cx-heading" data-cx-en="Add this Financial Reality to My Reality?" data-cx-zh="把这个 Financial Reality 加入 My Reality？">Add this Financial Reality to My Reality?</h2><p class="cx-body cx-muted" data-cx-en="The financial snapshot, deterministic calculations and bounded findings keep their original labels. Planning and professional recommendations are not invented during this handoff." data-cx-zh="财务快照、确定性计算与边界化发现会保留原有标签；带入过程中不会凭空产生规划或专业建议。">The financial snapshot, deterministic calculations and bounded findings keep their original labels. Planning and professional recommendations are not invented during this handoff.</p><label class="cx-p1-consent"><input type="checkbox" data-cx-financial-handoff-consent><span data-cx-en="I choose to bring this Financial Reality into My Reality." data-cx-zh="我选择把这个 Financial Reality 带入 My Reality。">I choose to bring this Financial Reality into My Reality.</span></label><p class="cx-p1-status" data-cx-financial-handoff-status></p><div class="cx-p1-dialog-actions"><button class="cx-button" type="button" data-cx-dialog-close data-cx-en="Cancel" data-cx-zh="取消">Cancel</button><button class="cx-button cx-button--primary" type="button" data-cx-financial-handoff-confirm data-cx-en="Continue" data-cx-zh="继续">Continue</button></div></div></dialog>
+  <div data-cx-footer></div>
+  <script type="module" src="/assets/customer-ui/js/shell.js"></script>
+  <script type="module" src="/assets/customer-ui/js/surfaces/financial-reality.js"></script>
+</body>
+</html>
