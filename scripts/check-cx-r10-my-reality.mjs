@@ -1,79 +1,105 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { onRequestGet, onRequestPost } from '../functions/api/customer-my-reality.js';
-import { onRequestPost as onHandoffPost } from '../functions/api/customer-reality-handoff.js';
-import { projectRealityForCustomer } from '../functions/customer-projection/reality-customer-projection.js';
+import {onRequestGet,onRequestPost} from '../functions/api/customer-my-reality.js';
+import {onRequestPost as onHandoffPost} from '../functions/api/customer-reality-handoff.js';
+import {projectRealityForCustomer} from '../functions/customer-projection/reality-customer-projection.js';
+import {projectReadoutForCustomer} from '../functions/customer-projection/readout-customer-projection.js';
+import {projectNavigationForCustomer} from '../functions/customer-projection/navigation-customer-projection.js';
+import {projectContinuityForCustomer} from '../functions/customer-projection/continuity-customer-projection.js';
+import {projectReportForCustomer} from '../functions/customer-projection/report-customer-projection.js';
+import {projectMyRealityWorkspace} from '../functions/customer-projection/my-reality-workspace-projection.js';
 
-const read = relativePath => fs.readFileSync(relativePath, 'utf8');
-const json = relativePath => JSON.parse(read(relativePath));
-const acceptance = json('content/customer-experience-rebuild/acceptance/cx-r10-acceptance-v1.json');
-const cutover = json('content/customer-experience-rebuild/migration/priority-route-cutover-registry-v1.json');
-const surface = cutover.surfaces.find(entry => entry.surfaceId === 'MY_REALITY');
+const read=path=>fs.readFileSync(path,'utf8');
+const json=path=>JSON.parse(read(path));
+const base='content/customer-experience-rebuild';
+const r20=json(`${base}/acceptance/cx-r20-acceptance-v2.json`);
+const contract=json(`${base}/contracts/my-reality-workspace-contract-v1.json`);
+const authority=json(`${base}/authority/my-reality-workspace-authority-v1.json`);
+const sections=json(`${base}/registries/my-reality-workspace-section-registry-v1.json`);
+const acceptance=json(`${base}/acceptance/cx-r10-acceptance-v2.json`);
+const retirement=json(`${base}/migration/reality-dashboard-retirement-candidate-v1.json`);
+const routeRegistry=json(`${base}/authority/canonical-customer-route-registry-v3.json`);
 
-assert.equal(acceptance.status, 'MY_REALITY_CX_CODE_ACTIVE_BROWSER_PENDING');
-assert.equal(acceptance.exit, 'MY_REALITY_CX_READY');
-assert.equal(acceptance.productionBrowserAcceptance, 'PENDING_DEPLOYMENT');
-assert.equal(acceptance.backendAuthorityRebuilt, false);
-assert.equal(surface.canonicalPath, '/reality/');
-assert.equal(surface.htmlPath, 'reality/index.html');
-assert.deepEqual(surface.legacyRoutes, ['/my-reality', '/reality-dashboard']);
+assert.equal(r20.exit,'CUSTOMER_RUNTIME_PROJECTION_BOUNDARY_FROZEN');
+assert.equal(r20.rules.priorityProductTrancheReady,true);
+assert.equal(contract.executionBaselineCommit,'9840757ac42b061feb08bc8bf56afa93a62ac2ca');
+assert.equal(contract.upstreamProjectionAuthority,`${base}/acceptance/cx-r20-acceptance-v2.json`);
+assert.deepEqual(contract.backendAuthorities,['ICR','RDG','RMO','RRE','JR','RNE','RR']);
+assert.equal(contract.rules.consumeR20CustomerProjectionsOnly,true);
+for(const key of ['rawRuntimeMayNotRenderDirectly','perspectiveMayNotBecomeRealityFact','findingMayNotBecomeRealityFact','possibleDirectionMayNotBecomeAction','actionRequiresUpstreamCustomerOrProfessionalConfirmation','dashboardLegacyFileMayNotBePhysicallyDeletedBeforeP1BrowserAcceptance'])assert.equal(contract.rules[key],true,key);
+assert.equal(contract.rules.routeCutoverPerformedByR10,false);
+assert.equal(contract.sections.length,11);
+assert.deepEqual(contract.currentRealityLanguage,['CURRENT_SITUATION','IMPORTANT_FACTS','CONSTRAINTS','OPEN_QUESTIONS','EVIDENCE','UNKNOWNS']);
+assert.deepEqual(contract.readingLanguage,['WHAT_STANDS_OUT','PATTERNS','TENSIONS','DEPENDENCIES','UNKNOWNS']);
+assert.deepEqual(contract.navigationLanguage,['CURRENT_POSITION','POSSIBLE_DIRECTIONS','TRADE_OFFS','RISKS','DEPENDENCIES','REVERSIBILITY','OBSERVATION_POINTS']);
+assert.equal(authority.status,'MY_REALITY_REPLACEMENT_PRESENTATION_AUTHORITY_READY');
+assert.deepEqual(authority.projectionInputs,['REALITY','READOUT','NAVIGATION','CONTINUITY','REPORT']);
+assert.equal(sections.sections.length,11);
+assert.equal(sections.sections.find(x=>x.id==='OBSERVE').sessionUserInputOnly,true);
+assert.equal(sections.sections.find(x=>x.id==='ACTIONS').requiresConfirmation,true);
+assert.equal(acceptance.status,'MY_REALITY_WORKSPACE_REPLACEMENT_ACCEPTED_BROWSER_PENDING');
+assert.equal(acceptance.exit,'ONE_MY_REALITY_WORKSPACE_READY');
+assert.equal(acceptance.nextPriorityProductPhase,'CX-R12_PERSONAL_REALITY');
+assert.equal(acceptance.rules.routeCutoverPerformedByThisWork,false);
+assert.equal(acceptance.rules.physicalLegacyDeletePerformed,false);
 
-const html = read(surface.htmlPath);
-for (const marker of [
-  'data-cx-surface="MY_REALITY"', 'href="/reality/"', 'data-cx-start-reality',
-  'data-cx-reality-form', 'data-cx-workspace', 'data-cx-panel="overview"',
-  'data-cx-panel="current"', 'data-cx-panel="perspectives"', 'data-cx-panel="reading"',
-  'data-cx-panel="navigation"', 'data-cx-panel="actions"', 'data-cx-panel="review"',
-  'data-cx-panel="history"', 'data-cx-panel="reports"', 'ILL-010',
-  '/assets/customer-ui/js/shell.js', '/assets/customer-ui/js/surfaces/my-reality.js'
-]) assert.ok(html.includes(marker), `My Reality surface missing: ${marker}`);
-assert.equal(html.includes('/assets/css/phios-public-v2.css'), false);
-assert.equal(html.includes('/assets/js/public-shell-v2.js'), false);
+const route=routeRegistry.routes.find(item=>item.routeId==='MY_REALITY');
+assert.equal(route.canonicalPath,'/reality/');
+const html=read('reality/index.html');
+for(const marker of ['data-cx-surface="MY_REALITY"','data-cx-context-summary','data-cx-stage','data-cx-progress','data-cx-main-content','data-cx-side-context','data-cx-continuation-cta','data-cx-observe-form','ILL-010','/assets/customer-ui/surfaces/my-reality.css','/assets/customer-ui/js/shell.js','/assets/customer-ui/js/surfaces/my-reality.js'])assert.ok(html.includes(marker),`My Reality replacement missing ${marker}`);
+for(const panel of ['overview','current','perspectives','reading','navigation','actions','observe','review','history','reports','continuity'])assert.ok(html.includes(`data-cx-panel="${panel}"`),`My Reality panel missing ${panel}`);
+for(const forbidden of ['/assets/css/phios-public-v2.css','/assets/js/public-shell-v2.js','data-public-header-placeholder'])assert.equal(html.includes(forbidden),false,`legacy presentation leaked: ${forbidden}`);
 
-const controller = read('assets/customer-ui/js/surfaces/my-reality.js');
-for (const marker of ['/api/customer-my-reality', 'credentials:\'same-origin\'', 'PHIOS_CX_REALITY_HANDOFF', 'event.origin!==location.origin']) {
-  assert.ok(controller.includes(marker), `My Reality controller missing: ${marker}`);
-}
-const api = read('functions/api/customer-my-reality.js');
-for (const marker of ['buildCurrentRealityBundle', 'projectRealityForCustomer', 'REALITY_PROCESSING_CONSENT_REQUIRED', 'persisted:false', 'canonicalRealityCreated:false', 'rawRuntimeExposed:false']) {
-  assert.ok(api.includes(marker), `My Reality API missing: ${marker}`);
-}
-assert.equal(api.includes('localStorage'), false);
-assert.equal(api.includes('sessionStorage'), false);
+const controller=read('assets/customer-ui/js/surfaces/my-reality.js');
+for(const marker of ['/api/customer-my-reality',"credentials:'same-origin'",'payload.workspace||payload.view','PHIOS_CX_REALITY_HANDOFF','event.origin!==location.origin','sessionObservations','data-cx-observe-form'])assert.ok(controller.includes(marker),`My Reality controller missing ${marker}`);
+for(const forbidden of ['localStorage','sessionStorage','indexedDB'])assert.equal(controller.includes(forbidden),false,`session observation may not silently persist via ${forbidden}`);
+const css=read('assets/customer-ui/surfaces/my-reality.css');
+for(const marker of ['grid-template-columns:12.5rem minmax(0,1fr) 18rem','data-state="current"','@media(max-width:900px)','@media(max-width:620px)'])assert.ok(css.includes(marker),`My Reality layout CSS missing ${marker}`);
 
-const fixture = projectRealityForCustomer({
-  bundle: {
-    schemaVersion: 'fixture', bundleId: 'bundle-1', sourceType: 'ASK', createdAt: '2026-08-25T00:00:00Z',
-    lanes: { userQuestion: 'What is changing?', reportedContext: ['Reported context'], unknown: ['Unknown point'], perspectiveReferences: [{ projectionId: 'projection-1', methodLabel: 'Perspective', realityFact: false }], calculations: [{ code: 'value', value: 7, professionalJudgment: false }], findings: [{ findingCode: 'finding', summary: 'Finding', recommendation: false }] },
-    classification: { perspectivesRemainPerspectives: true, calculationsRemainCalculations: true, findingsRemainFindings: true },
-    governance: { persisted: false, canonicalRealityCreated: false },
-    continuation: { currentStage: 'REALITY', nextAvailableStages: ['READING'], deepWorkflowAutomatic: false, persistentContinuationRequiresExplicitConsent: true }
-  }
-});
-assert.equal(fixture.state, 'READY');
-assert.deepEqual(fixture.currentReality.unknown, ['Unknown point']);
-assert.equal(fixture.perspectives.items[0].realityFact, false);
-assert.equal(fixture.currentReality.calculations[0].professionalJudgment, false);
-assert.equal(fixture.currentReality.findings[0].recommendation, false);
-assert.equal(fixture.continuation.deepWorkflowAutomatic, false);
-assert.equal(fixture.governance.persisted, false);
-assert.equal(fixture.governance.canonicalRealityCreated, false);
-assert.ok(Object.isFrozen(fixture));
+const reality=projectRealityForCustomer({locale:'zh-Hans',bundle:{schemaVersion:'fixture',bundleId:'bundle-1',sourceType:'ASK',createdAt:'2026-09-03T00:00:00Z',lanes:{userQuestion:'现在发生什么？',reportedContext:['已申报处境'],realityFacts:['明确事实'],constraints:['时间有限'],openQuestions:['哪一点还不清楚？'],externalEvidence:[{sourceId:'src-1',statement:'外部证据',sourceUrl:'https://example.com/evidence',authorityClass:'PRIMARY'}],perspectiveReferences:[{projectionId:'p1',methodLabel:'视角',realityFact:false}],knowledgeReferences:[{refId:'k1',title:'知识',href:'/knowledge/x',realityFact:false}],calculations:[{code:'VALUE',value:7,professionalJudgment:false}],findings:[{findingCode:'F1',summary:'结构发现',recommendation:false}],unknown:['仍未知']},classification:{perspectivesRemainPerspectives:true,calculationsRemainCalculations:true,findingsRemainFindings:true},governance:{persisted:false,canonicalRealityCreated:false},continuation:{currentStage:'REALITY',nextAvailableStages:['READING'],deepWorkflowAutomatic:false,persistentContinuationRequiresExplicitConsent:true}}});
+const readout=projectReadoutForCustomer({status:'AVAILABLE',summary:'最值得注意',sections:[{id:'PATTERN-1',label:'模式',content:'重复模式'},{id:'TENSION-1',label:'张力',content:'明显张力'},{id:'DEPENDENCY-1',label:'依赖',content:'依赖条件'}],unknown:['读取未知'],sources:[{title:'Source',href:'https://example.com/source'}]},{locale:'zh-Hans'});
+const navigation=projectNavigationForCustomer({status:'AVAILABLE',currentPosition:'当前位置',options:[{id:'A',label:'方向 A',tradeOff:'需要取舍',risks:['风险 A'],dependencies:['条件 A'],reversibility:'可逆',observationPoints:['观察 A']}],actions:[{id:'x',label:'未确认行动'},{id:'y',label:'客户确认行动',customerConfirmed:true}]},{locale:'zh-Hans'});
+const continuity=projectContinuityForCustomer({status:'AVAILABLE',currentStage:'REVIEW',nextAvailableStages:['CONTINUITY'],review:{state:'AVAILABLE',previous:'之前',current:'现在',whatChanged:'已经变化',whatRemains:'仍然保留'},events:[{eventId:'e1',title:'一次变化',createdAt:'2026-09-03'}],continuationAvailable:true,continueHref:'/reality/continue',nextReviewAt:'2026-10-01',persistentContinuationRequiresExplicitConsent:true},{locale:'zh-Hans'});
+const report=projectReportForCustomer({reportId:'r1',title:'报告',state:'AVAILABLE',href:'/reports/r1'},{locale:'zh-Hans'});
+const workspace=projectMyRealityWorkspace({reality,readout,navigation,continuity,reports:[report],locale:'zh-Hans'});
+assert.ok(Object.isFrozen(workspace));
+assert.equal(workspace.schemaVersion,'PHI-OS-CX-R10-MY-REALITY-WORKSPACE-v2.0.0');
+assert.deepEqual(workspace.currentReality.importantFacts,['明确事实']);
+assert.deepEqual(workspace.currentReality.constraints,['时间有限']);
+assert.deepEqual(workspace.currentReality.openQuestions,['哪一点还不清楚?']);
+assert.deepEqual(workspace.reading.patterns,['重复模式']);
+assert.deepEqual(workspace.reading.tensions,['明显张力']);
+assert.deepEqual(workspace.reading.dependencies,['依赖条件']);
+assert.equal(workspace.navigation.systemSelected,false);
+assert.equal(workspace.navigation.possibleDirections[0].tradeOff,'需要取舍');
+assert.deepEqual(workspace.navigation.possibleDirections[0].risks,['风险 A']);
+assert.deepEqual(workspace.actions.items.map(x=>x.id),['y']);
+assert.equal(workspace.observe.sessionOnly,true);
+assert.equal(workspace.observe.persisted,false);
+assert.equal(workspace.review.whatChanged,'已经变化');
+assert.equal(workspace.continuity.href,'/reality/continue');
+assert.equal(workspace.continuity.requiresExplicitConsent,true);
+assert.equal(workspace.governance.runtimeAuthorityCreated,false);
+assert.equal(workspace.governance.navigationChoiceCreated,false);
+assert.equal(workspace.governance.actionChoiceCreated,false);
 
-const getResponse = await onRequestGet({ request: new Request('https://phios.test/api/customer-my-reality?locale=zh-Hans'), data: {} });
-const getBody = await getResponse.json();
-assert.equal(getResponse.status, 200);
-assert.equal(getResponse.headers.get('cache-control'), 'no-store');
-assert.equal(getBody.view.locale, 'zh-Hans');
-assert.equal(getBody.governance.persisted, false);
-assert.equal(getBody.governance.rawRuntimeExposed, false);
-const denied = await onRequestPost({ request: new Request('https://phios.test/api/customer-my-reality', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ whatIsHappening: 'Context' }) }) });
-assert.equal(denied.status, 403);
-assert.equal((await denied.json()).error, 'REALITY_PROCESSING_CONSENT_REQUIRED');
-const handoffDenied = await onHandoffPost({ request: new Request('https://phios.test/api/customer-reality-handoff', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ sourceType: 'ASK' }) }) });
-assert.equal(handoffDenied.status, 403);
-assert.equal((await handoffDenied.json()).error, 'MY_REALITY_HANDOFF_CONSENT_REQUIRED');
+const getResponse=await onRequestGet({request:new Request('https://phios.test/api/customer-my-reality?locale=zh-Hans'),data:{cxRealitySources:{bundle:{schemaVersion:'fixture',bundleId:'bundle-get',sourceType:'ASK',lanes:{userQuestion:'GET view',reportedContext:[],externalEvidence:[],perspectiveReferences:[],knowledgeReferences:[],calculations:[],findings:[],unknown:['open']},classification:{perspectivesRemainPerspectives:true,calculationsRemainCalculations:true,findingsRemainFindings:true},governance:{persisted:false,canonicalRealityCreated:false}},reading:{status:'AVAILABLE',summary:'Reading'},navigation:{status:'AVAILABLE',options:[{id:'n1',label:'Direction'}]},journey:{status:'AVAILABLE',currentStage:'REALITY',nextAvailableStages:['READING']},reports:[{reportId:'r2',title:'R2'}]}}});
+const getBody=await getResponse.json();
+assert.equal(getResponse.status,200);assert.equal(getResponse.headers.get('cache-control'),'no-store');assert.equal(getBody.view.locale,'zh-Hans');assert.equal(getBody.workspace.schemaVersion,'PHI-OS-CX-R10-MY-REALITY-WORKSPACE-v2.0.0');assert.equal(getBody.workspace.reading.whatStandsOut[0],'Reading');assert.equal(getBody.governance.rawRuntimeExposed,false);assert.equal(getBody.governance.workspaceConsumesCustomerProjections,true);
+const denied=await onRequestPost({request:new Request('https://phios.test/api/customer-my-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({whatIsHappening:'Context'})})});
+assert.equal(denied.status,403);assert.equal((await denied.json()).error,'REALITY_PROCESSING_CONSENT_REQUIRED');
+const allowed=await onRequestPost({request:new Request('https://phios.test/api/customer-my-reality',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({whatIsHappening:'Context',consent:true,locale:'en'})})});
+const allowedBody=await allowed.json();assert.equal(allowed.status,200);assert.equal(allowedBody.workspace.observe.persisted,false);assert.equal(allowedBody.governance.canonicalRealityCreated,false);
+const handoffDenied=await onHandoffPost({request:new Request('https://phios.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({sourceType:'ASK'})})});
+assert.equal(handoffDenied.status,403);assert.equal((await handoffDenied.json()).error,'MY_REALITY_HANDOFF_CONSENT_REQUIRED');
 
-const redirects = read('_redirects');
-for (const legacy of surface.legacyRoutes) assert.ok(redirects.includes(`${legacy} /reality/ 308`), legacy);
-console.log('✓ CX-R10 My Reality passed: temporary customer projection, nine-section workspace, explicit consent and same-origin handoff remain authority-separated.');
+assert.equal(retirement.status,'LEGACY_UI_AUTHORITY_RETIRED_FILE_PRESERVED_UNTIL_P1_BROWSER_ACCEPTANCE');
+assert.equal(retirement.rules.physicalDeletePerformedByR10,false);
+assert.equal(retirement.rules.physicalDeleteBlockedUntilP1ProductionBrowserAcceptance,true);
+assert.ok(fs.existsSync('reality-dashboard.html'),'legacy dashboard file must remain until P1 browser acceptance');
+const redirects=read('_redirects');
+for(const legacy of ['/my-reality','/reality-dashboard'])assert.ok(redirects.includes(`${legacy} /reality/ 308`),`pre-existing compatibility redirect missing ${legacy}`);
+
+console.log('✓ CX-R10 My Reality successor passed at 9840757: one R20-projected workspace now covers overview, canonical Reality, perspectives, reading, directions, confirmed actions, session observation, review, history, reports and continuity.');
+console.log('  Possible directions are never promoted to actions; unconfirmed actions are hidden; observation stays session-only; Journey remains progression; no backend, Reality, Navigation, Report or persistence authority is created.');
+console.log('  Legacy Reality Dashboard UI authority is retired but its physical file remains preserved until P1 production browser acceptance.');

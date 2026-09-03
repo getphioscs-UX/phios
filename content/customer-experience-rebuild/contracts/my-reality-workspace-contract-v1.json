@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "PHI-OS-CX-R10-MY-REALITY-WORKSPACE-CONTRACT-v1.0.0",
+  "work": "CX-R10",
+  "executionBaselineCommit": "9840757ac42b061feb08bc8bf56afa93a62ac2ca",
+  "status": "ACTIVE_REPLACEMENT_CONTRACT",
+  "upstreamProjectionAuthority": "content/customer-experience-rebuild/acceptance/cx-r20-acceptance-v2.json",
+  "routeAuthority": "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v3.json",
+  "canonicalPath": "/reality/",
+  "backendAuthorities": ["ICR", "RDG", "RMO", "RRE", "JR", "RNE", "RR"],
+  "futureAuthorities": ["LRM"],
+  "layout": {
+    "desktop": ["GLOBAL_HEADER", "CONTEXT_SUMMARY", "STAGE_PROGRESS", "SECTION_NAVIGATION", "MAIN_CONTENT", "SIDE_CONTEXT", "CONTINUATION"],
+    "mobile": "STACKED_SINGLE_WORKSPACE",
+    "globalShell": "CX-R5",
+    "designSystem": "CX-R3",
+    "visualAuthority": "CX-R4"
+  },
+  "sections": [
+    "OVERVIEW",
+    "CURRENT_REALITY",
+    "PERSPECTIVES",
+    "READING",
+    "NAVIGATION",
+    "ACTIONS",
+    "OBSERVE",
+    "REVIEW",
+    "HISTORY",
+    "REPORTS",
+    "CONTINUITY"
+  ],
+  "currentRealityLanguage": ["CURRENT_SITUATION", "IMPORTANT_FACTS", "CONSTRAINTS", "OPEN_QUESTIONS", "EVIDENCE", "UNKNOWNS"],
+  "readingLanguage": ["WHAT_STANDS_OUT", "PATTERNS", "TENSIONS", "DEPENDENCIES", "UNKNOWNS"],
+  "navigationLanguage": ["CURRENT_POSITION", "POSSIBLE_DIRECTIONS", "TRADE_OFFS", "RISKS", "DEPENDENCIES", "REVERSIBILITY", "OBSERVATION_POINTS"],
+  "rules": {
+    "consumeR20CustomerProjectionsOnly": true,
+    "rawRuntimeMayNotRenderDirectly": true,
+    "perspectiveMayNotBecomeRealityFact": true,
+    "findingMayNotBecomeRealityFact": true,
+    "calculationMayNotBecomeProfessionalJudgment": true,
+    "possibleDirectionMayNotBecomeAction": true,
+    "actionRequiresUpstreamCustomerOrProfessionalConfirmation": true,
+    "observeCandidateIsSessionOnly": true,
+    "observeCandidateCreatesCanonicalHistory": false,
+    "journeyIsProgressionNotFirstLevelProduct": true,
+    "persistentContinuationRequiresExplicitConsent": true,
+    "dashboardLegacyFileMayNotBePhysicallyDeletedBeforeP1BrowserAcceptance": true,
+    "routeCutoverPerformedByR10": false,
+    "backendAuthorityCreatedByR10": false
+  }
+}

@@ -132,7 +132,7 @@ initializeCustomerShell().then(async () => {
   if (document.body.dataset.cxSurface === 'SYMBOLIC_ICHING') {
     await import('./surfaces/iching-customer-entry.js');
   }
-  if (document.body.dataset.cxSurface === 'ICHING_FULL_PRODUCTION') {
+  if(document.body.dataset.cxSurface==='ICHING_FULL_PRODUCTION') {
     await import('./surfaces/iching-run-cutover.js');
     if (document.body.dataset.ichingRunCutover === 'redirecting') return;
     return import('./surfaces/iching-casting.js');
