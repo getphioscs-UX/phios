@@ -98,6 +98,24 @@ assert.equal(handoffPayload.view.governance.canonicalRealityCreated,false);
 assert.equal(handoffPayload.governance.currentRealityEvidenceCreated,false);
 assert.equal(handoffPayload.governance.currentRealityConclusionCreated,false);
 
+const successorHandoffRequest=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({
+  sourceType:'PERSONAL_REALITY',locale:'zh-Hans',consent:{explicit:true,accepted:true},viewModel:{
+    schemaVersion:'PHI-OS-MY-REALITY-HANDOFF-SELECTION-v1.0.0',customerSelected:true,automaticPersistence:false,
+    ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response
+  }
+})});
+const successorHandoffResponse=await handoffPost({request:successorHandoffRequest});
+assert.equal(successorHandoffResponse.status,200,'W7 bridge response must survive the successor My Reality handoff-selection schema');
+const successorHandoffPayload=await successorHandoffResponse.json();
+assert.equal(successorHandoffPayload.ok,true);
+assert.equal(successorHandoffPayload.view.currentReality.reportedContext.length,2);
+assert(successorHandoffPayload.view.currentReality.reportedContext.some(item=>item.includes('现实经验与这份读取不符合')));
+assert.equal(successorHandoffPayload.view.currentReality.externalEvidence.length,0);
+assert.equal(successorHandoffPayload.view.currentReality.findings.length,0);
+assert.equal(successorHandoffPayload.view.governance.persisted,false);
+assert.equal(successorHandoffPayload.governance.currentRealityEvidenceCreated,false);
+assert.equal(successorHandoffPayload.governance.currentRealityConclusionCreated,false);
+
 const noConsent=new Request('https://example.test/api/customer-reality-handoff',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({sourceType:'PERSONAL_REALITY',locale:'zh-Hans',consent:{explicit:false,accepted:false},viewModel:{ecrHumanDesignRealityBridge:bridge,ecrHumanDesignRealityBridgeResponse:response}})});
 const noConsentResponse=await handoffPost({request:noConsent});
 assert.equal(noConsentResponse.status,403,'W7 must preserve explicit handoff consent');
