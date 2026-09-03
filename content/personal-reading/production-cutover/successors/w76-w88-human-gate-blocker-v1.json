@@ -1,17 +1,16 @@
 {
   "schemaVersion": "PHI-OS-W76-W88-HUMAN-GATE-BLOCKER-v1.0.0",
-  "baselineCommit": "3ea7c5dd336b0cc1310a04bac2dd8d739978c3e9",
-  "status": "BLOCKED_BY_W71_W73_HUMAN_ACCEPTANCE",
+  "baselineCommit": "38f53227d0ce8a0d6980091f84a9511930194c58",
+  "status": "CLEARED_BY_W71_W73_HUMAN_ACCEPTANCE",
   "requiredBeforeW76": [
     "W71 HUMAN_ACCEPTED_24_OF_24",
     "W72 HUMAN_ACCEPTED_24_OF_24",
     "W73 HUMAN_ACCEPTED_24_OF_24"
   ],
-  "blockedWorks": ["W76","W77","W78","W79","W80","W81","W82","W83","W84","W85","W86","W87","W88"],
-  "reason": "Hard cutover, production retirement/freeze and Continuity product authority may not be activated before new Human acceptance. Continuity also waits for W78 production freeze.",
-  "currentAllowedEvidence": ["W71-W73 review readiness","W74 pre-cutover shadow evidence","W75 production-like machine smoke evidence"],
-  "customerCutoverAllowed": false,
-  "productionFreezeAllowed": false,
-  "continuityProductAuthorityAllowed": false,
-  "continuityActivationAllowed": false
+  "allRequiredHumanGatesSatisfied": true,
+  "blockedWorks": [],
+  "customerCutoverAllowed": true,
+  "productionFreezeAllowed": true,
+  "continuityProductAuthorityAllowedAfterW78": true,
+  "historicalPurpose": "This successor preserves the fact that W76-W88 were previously blocked until Human acceptance."
 }

@@ -2149,7 +2149,15 @@
     "run:ppr-r2:w75-production-like-smoke": "node scripts/run-ppr-r2-w75-production-like-smoke.mjs",
     "check:ppr-r2:w75-production-like-smoke": "node scripts/check-ppr-r2-w75-production-like-smoke.mjs",
     "check:ppr-r2:w76-w88-human-gate": "node scripts/check-ppr-r2-w76-w88-human-gate.mjs",
-    "check:ppr-r2:post-machine-human-gate": "npm run check:ppr-r2:w71-w73-review-readiness && npm run check:ppr-r2:w74-shadow-precutover && npm run check:ppr-r2:w75-production-like-smoke && npm run check:ppr-r2:w76-w88-human-gate"
+    "check:ppr-r2:post-machine-human-gate": "npm run check:ppr-r2:w71-w73-human-acceptance && npm run check:ppr-r2:w74-shadow-precutover && npm run check:ppr-r2:w75-production-like-smoke && npm run check:ppr-r2:w76-w78-production-cutover && npm run check:continuity:w79-w85 && npm run check:continuity:w86-machine && npm run check:continuity:w87-review-readiness && npm run check:continuity:w88-cutover-gate",
+    "check:ppr-r2:w76-w78-production-cutover": "node scripts/check-ppr-r2-w76-w78-production-cutover.mjs",
+    "check:continuity:w79-w85": "node scripts/check-continuity-w79-w85.mjs",
+    "check:continuity:w86-machine": "node scripts/check-continuity-w86-machine.mjs",
+    "build:continuity:w87-human-review": "node scripts/build-continuity-w87-human-review.mjs",
+    "check:continuity:w87-review-readiness": "node scripts/check-continuity-w87-review-readiness.mjs",
+    "check:continuity:w88-cutover-gate": "node scripts/check-continuity-w88-cutover-gate.mjs",
+    "check:ppr-r2:w71-w88-engineering": "node scripts/check-ppr-r2-w71-w88-engineering.mjs",
+    "check:continuity:d1-persistence": "node scripts/check-continuity-d1-persistence.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
