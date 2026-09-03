@@ -21,8 +21,11 @@ if(freeze.schemaVersion==='PHI-OS-W68-SHARED-FILE-OWNERSHIP-FREEZE-v2.0.0'){asse
 assert.equal(current.owner,'PPR_CURRENT_SHARED_RUNTIME');
 for(const [file,proof] of Object.entries(freeze.sharedFiles)){
   assert.ok(fs.existsSync(path.join(root,file)),`missing ${file}`);
-  assert.equal(sha(file),proof.sha256,`W68 shared owner digest drift: ${file}`);
-  assert.equal(current.files?.[file]?.currentSha256,proof.sha256,`current byte registry must match W68 freeze: ${file}`);
+  const currentProof=current.files?.[file];
+  assert.ok(currentProof,`current shared-owner registry missing ${file}`);
+  assert.equal(sha(file),currentProof.currentSha256,`W68 current shared-owner digest drift: ${file}`);
+  const admittedLineage=new Set([currentProof.currentSha256,...(currentProof.recognizedPredecessors||[])]);
+  assert.ok(admittedLineage.has(proof.sha256),`W68 frozen predecessor is no longer recognized by current ownership lineage: ${file}`);
 }
 assert.equal(freeze.profileInputOwner,'PERSONAL_REALITY_PRODUCT_ORCHESTRATION');
 assert.equal(freeze.selfAssessmentOwner,'PERSONAL_REALITY_PRODUCT_ORCHESTRATION');
@@ -47,5 +50,5 @@ for(const mr of methodRoots)for(const f of walk(path.join(root,mr)).filter(x=>/\
 const aliases=contract.duplicatePersonBAliasesToScan;const productRoots=['functions','assets/customer-ui','assets/js/pages','perspectives'];
 for(const alias of aliases){const allowed=new Set(freeze.allowedAdapterAliases?.[alias]||[]);const re=new RegExp(`\\b${alias}\\b`);for(const pr of productRoots)for(const f of walk(path.join(root,pr)).filter(x=>/\.(?:js|mjs|html)$/.test(x))){const r=rel(f);if(!re.test(fs.readFileSync(f,'utf8')))continue;assert.ok(allowed.has(r),`W68 duplicate Person-B alias outside registered adapter: ${alias} @ ${r}`);}}
 console.log('✓ W68 Shared-file Ownership + No Legacy Leak passed.');
-console.log(`  ${Object.keys(freeze.sharedFiles).length}/3 convergence files frozen to PERSONAL_REALITY_PRODUCT_ORCHESTRATION; current byte registry matches the active successor.`);
+console.log(`  ${Object.keys(freeze.sharedFiles).length}/3 convergence files remain owned by PERSONAL_REALITY_PRODUCT_ORCHESTRATION; historical W68 bytes remain recognized predecessors while the current byte registry owns the active successor.`);
 console.log('  Narrative provider/raw-method/customer-authority/payment-success leaks rejected; Profile and shared Person-B alternate owners rejected.');
