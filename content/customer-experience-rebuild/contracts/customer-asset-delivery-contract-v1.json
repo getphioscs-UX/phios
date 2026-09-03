@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "PHI-OS-CX-R4-ASSET-DELIVERY-CONTRACT-v1.0.0",
+  "work": "CX-R4-W4-W5",
+  "baselineCommit": "d35486b9dfc077020c50bb232ac29e233c01ce92",
+  "recordedAt": "2026-09-03T05:20:00Z",
+  "status": "CANONICAL_CUSTOMER_ASSET_DELIVERY_FROZEN",
+  "registry": "content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json",
+  "resolver": "assets/customer-ui/js/assets.js",
+  "resolverFunction": "resolveCustomerAsset",
+  "deliveryFields": [
+    "publicUrl",
+    "contentType",
+    "format",
+    "width",
+    "height",
+    "loading",
+    "decoding",
+    "fetchPriority",
+    "available"
+  ],
+  "failureContract": {
+    "unknownAsset": "CX_ASSET_UNKNOWN",
+    "unavailableAsset": "CX_ASSET_UNAVAILABLE",
+    "imageLoadFailure": "CX_ASSET_IMAGE_LOAD_FAILED",
+    "silentBlankAllowed": false,
+    "visibleFallbackRequiredAtRuntime": true,
+    "machineGateRequiredForExpectedCustomerAssets": true
+  },
+  "boundaries": {
+    "browserMayScrapeOrProbeArbitraryAssetUrls": false,
+    "resolverCreatesAssetIdentity": false,
+    "routeCutoverPerformed": false,
+    "r5ShellAuthorityPerformed": false
+  },
+  "roleResolverFunction": "resolveCustomerAssetRole",
+  "bindingAttributes": [
+    "data-cx-asset",
+    "data-cx-asset-role"
+  ]
+}
