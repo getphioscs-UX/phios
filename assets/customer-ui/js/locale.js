@@ -1,5 +1,13 @@
 const KEY='phios-cx-locale';
 
+function readStorage(key){
+  try{return localStorage.getItem(key)}catch{return null}
+}
+
+function writeStorage(key,value){
+  try{localStorage.setItem(key,value)}catch{/* Locale still applies for this page. */}
+}
+
 const CROSS_DIMENSION_ZH=Object.freeze({
   'Operating posture':'运行姿态',
   Decision:'决策',
@@ -100,7 +108,7 @@ function installDynamicLocaleProjection(scope=document){
 }
 
 export function preferredCustomerLocale(){
-  const stored=localStorage.getItem(KEY)||localStorage.getItem('phiOSLocale');
+  const stored=readStorage(KEY)||readStorage('phiOSLocale');
   if(stored==='en'||stored==='zh-Hans')return stored;
   return navigator.language?.toLowerCase().startsWith('zh')?'zh-Hans':'en';
 }
@@ -109,7 +117,8 @@ export function applyCustomerLocale(locale,scope=document){
   const next=locale==='zh-Hans'?'zh-Hans':'en';
   document.documentElement.lang=next;
   document.documentElement.dataset.cxLocale=next;
-  localStorage.setItem(KEY,next);
+  writeStorage(KEY,next);
+  writeStorage('phiOSLocale',next);
   localizeCrossPerspectiveClaims(scope,next);
   scope.querySelectorAll('[data-cx-en][data-cx-zh]').forEach(node=>applyLocalizedNodeText(node,next));
   scope.querySelectorAll('[data-cx-en-placeholder][data-cx-zh-placeholder]').forEach(node=>{node.setAttribute('placeholder',next==='zh-Hans'?node.dataset.cxZhPlaceholder:node.dataset.cxEnPlaceholder)});

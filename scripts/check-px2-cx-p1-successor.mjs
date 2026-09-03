@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {spawnSync} from 'node:child_process';
 
 const read=path=>JSON.parse(fs.readFileSync(path,'utf8'));
@@ -16,7 +18,11 @@ const spine=read(successor.currentAuthority.customerSpine);
 const cutover=read(successor.currentAuthority.priorityCutover);
 const redirects=text('_redirects');
 const navigation=text(successor.currentAuthority.navigationRuntime);
+const navigationModule=await import(pathToFileURL(path.resolve(successor.currentAuthority.navigationRuntime)).href);
+const navigationAuthority=navigationModule.CX_NAVIGATION;
 const shell=text(successor.currentAuthority.shellRuntime);
+const locale=text('assets/customer-ui/js/locale.js');
+const personalCss=text('assets/customer-ui/surfaces/personal-reality.css');
 
 assert.equal(successor.status,'ACTIVE_CX_P1_PUBLIC_IA_SUCCESSOR');
 assert.equal(predecessor.status,successor.predecessor.status);
@@ -47,18 +53,32 @@ for(const surface of cutover.surfaces){
     assert.ok(redirects.includes(`${legacy} ${surface.canonicalPath} 308`),`missing redirect ${legacy}`);
   }
 }
+assert.ok(navigationAuthority&&Array.isArray(navigationAuthority.primary)&&Array.isArray(navigationAuthority.utilities),'current CX navigation module does not export the expected semantic authority');
 for(const item of routes.primaryNavigation){
   const route=routes.routes.find(candidate=>candidate.routeId===item);
   assert.ok(route);
-  assert.ok(navigation.includes(`id:'${item}'`));
-  assert.ok(navigation.includes(`href:'${route.canonicalPath}'`));
+  const navItem=navigationAuthority.primary.find(candidate=>candidate.id===item);
+  assert.ok(navItem,`current navigation authority missing primary item ${item}`);
+  assert.equal(navItem.href,route.canonicalPath,`current navigation authority route mismatch for ${item}`);
 }
-for(const item of routes.utilities.filter(value=>value!=='LOCALE')) assert.ok(navigation.includes(`id:'${item}'`));
+for(const item of routes.utilities.filter(value=>value!=='LOCALE')){
+  assert.ok(navigationAuthority.utilities.some(candidate=>candidate.id===item),`current navigation authority missing utility ${item}`);
+}
 assert.equal(navigation.includes('/personal-runtime'),false);
 assert.equal(navigation.includes('/financial-reality'),false);
 assert.equal(navigation.includes('/my-reality'),false);
 assert.equal(shell.includes('public-shell-v2'),false);
 assert.equal(shell.includes('Φ'),false);
+
+// PRE-R20 shared-file reconciliation: preserve both the R5 shell locale contract and the later cross-perspective projection.
+for(const token of ['localizeCrossPerspectiveClaims','MutationObserver','readStorage','writeStorage']){
+  assert.ok(locale.includes(token),`PRE-R20 locale reconciliation missing ${token}`);
+}
+assert.match(locale,/writeStorage\(KEY,next\)/,'PRE-R20 locale reconciliation lost the CX locale storage write');
+assert.match(locale,/writeStorage\('phiOSLocale',next\)/,'PRE-R20 locale reconciliation lost the predecessor locale compatibility write');
+assert.match(personalCss,/\.cx-personal \.cx-place-confirmed\[hidden\][^{]*\{display:none!important\}/s,'PRE-R20 Personal Reality hidden-state hotfix missing');
+assert.match(personalCss,/\.cx-personal \[data-cx-asset-fallback\]\[hidden\][^{]*\{display:none!important\}/s,'PRE-R20 Personal Reality asset fallback hotfix missing');
+assert.match(personalCss,/\.cx-personal \.cx-bazi-school-surface[\s\S]*?display:none!important/,'PRE-R20 Personal Reality BaZi customer-surface suppression missing');
 
 const home=text('index.html');
 for(const compatibilityHref of ['/personal-runtime','/financial-reality','/my-reality']){
@@ -68,4 +88,6 @@ assert.equal(cutover.productionHumanAcceptance.status,'PENDING_DEPLOYMENT');
 assert.equal(cutover.physicalDelete.status,'BLOCKED_UNTIL_PRODUCTION_BROWSER_ACCEPTANCE');
 
 console.log('✓ PX2 → Stage16 → CX-P1 current public IA successor passed.');
+console.log('  Current navigation is validated from the exported semantic CX_NAVIGATION authority, not whitespace-sensitive source formatting.');
+console.log('  PRE-R20 shared-file reconciliation passed: locale keeps safe dual-key persistence plus dynamic cross-perspective localization; Personal Reality keeps the parallel customer-surface hotfix.');
 console.log('  Stage16 homepage compatibility routes resolve through server redirects to four CX-cutover surfaces; production browser acceptance remains pending.');
