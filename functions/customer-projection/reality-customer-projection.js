@@ -1,4 +1,4 @@
-import {CX_PROJECTION_VERSION,boundary,clean,customerEmpty,deepFreeze,list,localeOf,object,safeUrl,text} from './projection-common.js';
+import {CX_PROJECTION_VERSION,boundary,clean,customerEmpty,deepFreeze,list,localeOf,object,safeUrl,sourceLineage,text,upstreamState} from './projection-common.js';
 const statements=items=>list(items).map(item=>typeof item==='string'?clean(item):clean(item?.statement||item?.summary||item?.label)).filter(Boolean);
 export function projectRealityForCustomer({bundle=null,reading=null,navigation=null,journey=null,reports=null,account=null,locale='en'}={}){
   const lang=localeOf(locale), b=object(bundle), lanes=object(b.lanes), nav=object(navigation), j=object(journey), a=object(account);
@@ -10,7 +10,7 @@ export function projectRealityForCustomer({bundle=null,reading=null,navigation=n
   const reportItems=list(reports?.items||reports).map(item=>deepFreeze({id:clean(item?.reportId||item?.id)||null,label:clean(item?.title||item?.label)||text(lang,'Report','报告'),href:safeUrl(item?.href),state:clean(item?.state)||null}));
   const actions=list(nav?.actions||nav?.options).map(item=>deepFreeze({id:clean(item?.id||item?.actionId)||null,label:clean(item?.label||item?.title||item?.statement),state:clean(item?.state)||null})).filter(x=>x.label);
   const history=list(j?.history||j?.events||a?.history).map(item=>deepFreeze({label:clean(item?.label||item?.title||item?.type),occurredAt:clean(item?.occurredAt||item?.createdAt)||null,state:clean(item?.state)||null})).filter(x=>x.label);
-  const readingProjection=reading&&typeof reading==='object'?deepFreeze({state:clean(reading.state||reading.status)||'AVAILABLE',summary:clean(reading.summary||reading.directAnswer||reading.title)||null,unknown:statements(reading.unknown||reading.unknowns),sourceCount:list(reading.sources).length}):customerEmpty(lang);
+  const readingProjection=reading&&typeof reading==='object'?deepFreeze({state:upstreamState(reading.state||reading.status),summary:clean(reading.summary||reading.directAnswer||reading.title)||null,unknown:statements(reading.unknown||reading.unknowns),sourceCount:list(reading.sources).length}):customerEmpty(lang);
   return deepFreeze({
     schemaVersion:`${CX_PROJECTION_VERSION}:MY_REALITY`,surface:'MY_REALITY',locale:lang,state:b.schemaVersion?'READY':'EMPTY',
     overview:{bundleId:clean(b.bundleId)||null,sourceType:clean(b.sourceType)||null,createdAt:clean(b.createdAt)||null,summary:clean(lanes.userQuestion)||text(lang,'No current Reality has been added to this view.','当前尚未把任何 Reality 加入这个视图。')},
@@ -24,6 +24,6 @@ export function projectRealityForCustomer({bundle=null,reading=null,navigation=n
     reports:{items:reportItems},
     knowledge:{items:knowledgeReferences},
     continuation:{stage:clean(b.continuation?.currentStage)||'REALITY',nextStages:list(b.continuation?.nextAvailableStages).map(clean).filter(Boolean),deepWorkflowAutomatic:b.continuation?.deepWorkflowAutomatic===true,persistenceRequiresConsent:b.continuation?.persistentContinuationRequiresExplicitConsent!==false},
-    governance:{persisted:b.governance?.persisted===true,canonicalRealityCreated:b.governance?.canonicalRealityCreated===true,perspectivesRemainPerspectives:b.classification?.perspectivesRemainPerspectives!==false,calculationsRemainCalculations:b.classification?.calculationsRemainCalculations!==false,findingsRemainFindings:b.classification?.findingsRemainFindings!==false,...boundary()}
+    governance:{persisted:b.governance?.persisted===true,canonicalRealityCreated:b.governance?.canonicalRealityCreated===true,perspectivesRemainPerspectives:b.classification?.perspectivesRemainPerspectives!==false,calculationsRemainCalculations:b.classification?.calculationsRemainCalculations!==false,findingsRemainFindings:b.classification?.findingsRemainFindings!==false,...sourceLineage(['ICR','RDG','RMO','RRE','JR','RNE','RR']),...boundary()}
   });
 }

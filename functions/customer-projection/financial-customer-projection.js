@@ -1,8 +1,8 @@
-import {CX_PROJECTION_VERSION,boundary,clean,deepFreeze,finite,list,localeOf,object,text} from './projection-common.js';
+import {CX_PROJECTION_VERSION,boundary,clean,deepFreeze,finite,list,localeOf,object,sourceLineage,text} from './projection-common.js';
 const metric=(metrics,code)=>finite(metrics?.[code]);
 const evidenceLabel=state=>{const s=clean(state).toUpperCase();if(s.includes('VERIFIED'))return 'VERIFIED';if(s.includes('ASSUM'))return 'ASSUMED';if(s.includes('OUTDATED'))return 'OUTDATED';if(s.includes('MISSING'))return 'MISSING';if(s)return 'REPORTED';return 'MISSING'};
 export function projectFinancialForCustomer(result={}, {intake={},locale='en'}={}){
- const lang=localeOf(locale), r=object(result), snap=object(r.snapshot), metrics=object(r.calculation?.metrics), currency=clean(snap.baseCurrency||intake.baseCurrency)||'MYR';
+ const lang=localeOf(locale), r=object(result), snap=object(r.snapshot), metrics=object(r.calculation?.metrics), currency=clean(snap.baseCurrency||intake.baseCurrency)||null;
  const input=(key)=>intake[key]===undefined||intake[key]===''?null:intake[key];
  const item=(label,value,state='REPORTED')=>deepFreeze({label,value:value??null,evidenceState:value===null?'MISSING':state});
  const findings=list(r.findings).map(f=>deepFreeze({findingCode:clean(f?.findingCode),findingType:clean(f?.findingType)||null,domain:clean(f?.domain)||null,summary:clean(f?.summary),confidence:clean(f?.confidence)||null,evidenceState:evidenceLabel(f?.evidenceState),limitations:list(f?.limitations).map(clean).filter(Boolean)})).filter(x=>x.findingCode||x.summary);
@@ -16,5 +16,5 @@ export function projectFinancialForCustomer(result={}, {intake={},locale='en'}={
  professionalReview:{available:r.professionalHandoff?.available===true,performed:false,route:clean(r.professionalHandoff?.route)||'/professional/financial/',productNeutral:r.professionalHandoff?.productNeutral===true},
  authorityLayers:{systemAnalysis:{present:findings.length>0,label:text(lang,'System analysis','系统分析')},professionalReview:{present:false,label:text(lang,'Professional review','专业复核')},professionalRecommendation:{present:false,label:text(lang,'Professional recommendation','专业建议')}},
  handoff:{available:Boolean(snap.snapshotId),snapshot:{snapshotId:clean(snap.snapshotId)||null,asOfDate:clean(snap.asOfDate)||null,baseCurrency:currency},calculations:Object.entries(metrics).filter(([,v])=>Number.isFinite(v)).map(([code,value])=>deepFreeze({code,value,unit:code==='debtServiceRatio'?'ratio':code==='liquidityMonths'?'months':currency})),findings:findings.map(f=>deepFreeze({findingCode:f.findingCode,summary:f.summary}))},
- governance:{scenarioHiddenDefaultsUsed:r.scenario?.hiddenDefaultsUsed===true,adviceCreated:r.boundaries?.adviceCreated===true,recommendationCreated:r.boundaries?.recommendationCreated===true,professionalJudgmentCreated:r.boundaries?.professionalJudgmentCreated===true,persisted:snap.persisted===true,...boundary()}});
+ governance:{scenarioHiddenDefaultsUsed:r.scenario?.hiddenDefaultsUsed===true,adviceCreated:r.boundaries?.adviceCreated===true,recommendationCreated:r.boundaries?.recommendationCreated===true,professionalJudgmentCreated:r.boundaries?.professionalJudgmentCreated===true,persisted:snap.persisted===true,...sourceLineage(['FDR','FCR','FAR','HFP','PFR']),...boundary()}});
 }
