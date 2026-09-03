@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { root, base, readJson, cxImplementationFiles, signatureHits } from './lib/customer-experience-rebuild/cx-r1-guards.mjs';
 
-const registry = readJson(`${base}/legacy/legacy-component-signature-registry-v1.json`);
+const registry = readJson(`${base}/legacy/legacy-component-signature-registry-v2.json`);
 const signatures = registry.signatures;
 const safe = '<main data-cx-surface><section class="cx-hero"><div class="cx-container"></div></section></main>';
 assert.deepEqual(signatureHits(safe, signatures), []);

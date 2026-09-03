@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "PHI-OS-CX-CANONICAL-CUSTOMER-ROUTE-REGISTRY-v2.0.0",
+  "work": [
+    "CX-R1A",
+    "CX-R2_SUCCESSOR_INPUT"
+  ],
+  "baselineCommit": "92b30b95cf2f70af4ed2ee8e41401764b06fa8b5",
+  "recordedAt": "2026-09-03T02:42:00Z",
+  "status": "HARD_CUTOVER_TARGETS_PREPARED_NOT_EXECUTED",
+  "authorityBoundary": {
+    "createsBackendAuthority": false,
+    "presentationRoutingOnly": true,
+    "oneCanonicalDestinationPerPublicIntent": true,
+    "compatibilityAuthority": "_redirects_at_cutover",
+    "physicalLegacyDeleteAfterBrowserAcceptance": true
+  },
+  "routes": [
+    {
+      "routeId": "HOME",
+      "canonicalPath": "/",
+      "currentOperationalPath": "/",
+      "cutoverState": "ALREADY_AT_TARGET_PATH"
+    },
+    {
+      "routeId": "MY_REALITY",
+      "canonicalPath": "/reality/",
+      "currentOperationalPath": "/reality/",
+      "cutoverState": "ALREADY_AT_TARGET_PATH"
+    },
+    {
+      "routeId": "PERSONAL_REALITY",
+      "canonicalPath": "/perspectives/personal/",
+      "currentOperationalPath": "/perspectives/personal/",
+      "cutoverState": "ALREADY_AT_TARGET_PATH"
+    },
+    {
+      "routeId": "FINANCIAL_REALITY",
+      "canonicalPath": "/professional/financial/",
+      "currentOperationalPath": "/professional/financial/",
+      "cutoverState": "ALREADY_AT_TARGET_PATH"
+    },
+    {
+      "routeId": "ASK",
+      "canonicalPath": "/knowledge/ask/",
+      "currentOperationalPath": "/ask",
+      "cutoverState": "PREPARED_NOT_CUT_OVER"
+    },
+    {
+      "routeId": "PERSPECTIVES",
+      "canonicalPath": "/perspectives/",
+      "currentOperationalPath": "/perspectives/",
+      "cutoverState": "ALREADY_AT_TARGET_PATH"
+    },
+    {
+      "routeId": "PROFILE",
+      "canonicalPath": "/perspectives/profile/",
+      "currentOperationalPath": "/perspectives/profile/",
+      "cutoverState": "ALREADY_AT_TARGET_PATH"
+    },
+    {
+      "routeId": "KNOWLEDGE",
+      "canonicalPath": "/knowledge/",
+      "currentOperationalPath": "/library",
+      "cutoverState": "PREPARED_NOT_CUT_OVER"
+    },
+    {
+      "routeId": "PROFESSIONAL",
+      "canonicalPath": "/professional/",
+      "currentOperationalPath": "/professional/",
+      "cutoverState": "ALREADY_AT_TARGET_PATH"
+    },
+    {
+      "routeId": "ACCOUNT",
+      "canonicalPath": "/account/",
+      "currentOperationalPath": "/account",
+      "cutoverState": "PREPARED_NOT_CUT_OVER"
+    }
+  ],
+  "legacyAliases": [
+    {
+      "path": "/ask",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/ask.html",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/knowledge-search",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/knowledge-search.html",
+      "canonicalRouteId": "ASK",
+      "destination": "/knowledge/ask/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/my-reality",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/my-reality.html",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/reality-dashboard",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/reality-dashboard.html",
+      "canonicalRouteId": "MY_REALITY",
+      "destination": "/reality/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/personal-runtime",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/personal-runtime.html",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/professional/personal-runtime",
+      "canonicalRouteId": "PERSONAL_REALITY",
+      "destination": "/perspectives/personal/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/financial",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/financial-reality",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    },
+    {
+      "path": "/financial-reality.html",
+      "canonicalRouteId": "FINANCIAL_REALITY",
+      "destination": "/professional/financial/",
+      "redirectStatus": 308,
+      "activation": "PLANNED_OR_EXISTING_COMPATIBILITY_REDIRECT"
+    }
+  ],
+  "rules": {
+    "canonicalAsk": "/knowledge/ask/",
+    "askCompatibilityOnly": [
+      "/ask",
+      "/ask.html",
+      "/knowledge-search",
+      "/knowledge-search.html"
+    ],
+    "doNotCutOverBeforeReplacementAcceptance": true,
+    "doNotDeleteLegacyBeforeBrowserAcceptance": true
+  }
+}

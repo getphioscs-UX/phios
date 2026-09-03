@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { root, base, readJson, cxImplementationFiles, cxHtmlSurfaces, normalizedLocalAsset, stylesheetRefs } from './lib/customer-experience-rebuild/cx-r1-guards.mjs';
 
-const freeze = readJson(`${base}/legacy/legacy-css-freeze-v1.json`);
+const freeze = readJson(`${base}/legacy/legacy-css-freeze-v2.json`);
 const frozen = new Set(freeze.entries.map((x) => x.stylesheet));
 
 function inspect(rel, text) {

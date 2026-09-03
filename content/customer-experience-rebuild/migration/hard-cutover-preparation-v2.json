@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "PHI-OS-CX-R1A-HARD-CUTOVER-PREPARATION-v2.0.0",
+  "work": "CX-R1A",
+  "baselineCommit": "92b30b95cf2f70af4ed2ee8e41401764b06fa8b5",
+  "status": "HARD_CUTOVER_PREPARED_NOT_EXECUTED",
+  "canonicalRouteRegistry": "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v2.json",
+  "priorityTargets": [
+    "/reality/",
+    "/perspectives/personal/",
+    "/professional/financial/",
+    "/knowledge/ask/"
+  ],
+  "currentBlockers": [
+    {
+      "id": "ASK_SUCCESSOR_SURFACE_MISSING",
+      "current": "/ask",
+      "target": "/knowledge/ask/",
+      "resolutionPhase": "CX-R9-R2 + P1 CUTOVER"
+    },
+    {
+      "id": "ASK_REDIRECT_STILL_PREDECESSOR",
+      "current": "/knowledge-search -> /ask",
+      "target": "/knowledge-search -> /knowledge/ask/",
+      "resolutionPhase": "P1 CUTOVER"
+    },
+    {
+      "id": "ASK_COMPATIBILITY_FILE_STILL_ACTIVE_PRESENTATION",
+      "current": "ask.html present",
+      "target": "redirect/compatibility only after cutover",
+      "resolutionPhase": "P1 CUTOVER THEN PHYSICAL DELETE AFTER BROWSER ACCEPTANCE"
+    }
+  ],
+  "oldShells": [
+    {
+      "path": "assets/js/public-shell-v2.js",
+      "classification": "DELETE_PRESENTATION_WHEN_ZERO_CONSUMER",
+      "deleteNow": false,
+      "protectedBackendAuthority": false
+    },
+    {
+      "path": "assets/js/public-shell.js",
+      "classification": "DELETE_PRESENTATION_WHEN_ZERO_CONSUMER",
+      "deleteNow": false,
+      "protectedBackendAuthority": false
+    },
+    {
+      "path": "assets/js/journey-shell.js",
+      "classification": "DELETE_PRESENTATION_WHEN_ZERO_CONSUMER",
+      "deleteNow": false,
+      "protectedBackendAuthority": false
+    }
+  ],
+  "rules": {
+    "routeCutoverPerformed": false,
+    "physicalLegacyDeletePerformed": false,
+    "browserAcceptanceRequiredBeforeDelete": true,
+    "backendRuntimeDeleteForbidden": true
+  }
+}
