@@ -56,10 +56,13 @@ const assertRuntimePlaceholderBoundary = async () => {
 const freezePath = 'docs/pja/pja-w0-cross-system-boundary-freeze-v1.json';
 const pageCapabilityExtensionPath =
   'docs/pja/pja-page-capability-extension-v1.json';
+const p1PhysicalDeletePath =
+  'content/customer-experience-rebuild/acceptance/p1-physical-legacy-delete-acceptance-v1.json';
 
 const [
   freeze,
   pageCapabilityExtension,
+  p1PhysicalDelete,
   pwsI2,
   khBlueprint,
   ownership,
@@ -68,6 +71,7 @@ const [
 ] = await Promise.all([
     readJson(freezePath),
     readJson(pageCapabilityExtensionPath),
+    readJson(p1PhysicalDeletePath),
     readJson('docs/pws/contracts/pws-i2-v1-freeze.json'),
     readJson(
       'docs/knowledge/kh-w3-5g-book-i-knowledge-blueprint-freeze-v1.json'
@@ -249,15 +253,63 @@ assert.equal(
   false
 );
 
+assert.equal(
+  p1PhysicalDelete.schemaVersion,
+  'PHI-OS-P1-PHYSICAL-LEGACY-DELETE-ACCEPTANCE-v1.0.0'
+);
+assert.equal(
+  p1PhysicalDelete.status,
+  'MACHINE_ACCEPTED_PHYSICAL_LEGACY_DELETE_COMPLETE'
+);
+assert.equal(
+  p1PhysicalDelete.browserAcceptance,
+  'HUMAN_ACCEPTED_BY_USER_CONFIRMATION'
+);
+assert.equal(p1PhysicalDelete.redirectCompatibilityPreserved, true);
+for (const boundary of [
+  'backendAuthorityDeleted',
+  'runtimeAuthorityDeleted',
+  'methodAuthorityDeleted',
+  'knowledgeAuthorityDeleted',
+  'financialAuthorityDeleted',
+  'realityAuthorityDeleted',
+  'reportAuthorityDeleted'
+]) {
+  assert.equal(
+    p1PhysicalDelete[boundary],
+    false,
+    `P1 physical delete opened protected authority boundary: ${boundary}.`
+  );
+}
+
+const retiredPresentationPages = new Set(
+  p1PhysicalDelete.deletedPresentationFiles
+    .filter(file => !file.includes('/'))
+);
+for (const retiredPage of retiredPresentationPages) {
+  assert.equal(
+    await exists(retiredPage),
+    false,
+    `P1 retired presentation unexpectedly exists: ${retiredPage}.`
+  );
+}
+
 const effectivePageCapabilities = [
   ...freeze.pageCapabilities,
   ...pageCapabilityExtension.pageCapabilities
 ];
 const mappedPages = effectivePageCapabilities
   .flatMap(capability => capability.pages)
-  .filter(page => page !== 'reality-demo.html')
+  .filter(page =>
+    page !== 'reality-demo.html' &&
+    !retiredPresentationPages.has(page)
+  )
   .sort();
-assert.deepEqual(mappedPages, rootPages, 'Page-to-Capability Map is incomplete.');
+assert.deepEqual(
+  mappedPages,
+  rootPages,
+  'Page-to-Capability Map is incomplete after applying accepted P1 presentation retirements.'
+);
 assert(
   freeze.pageCapabilities.some(capability => capability.pages.includes('reality-demo.html')),
   'Frozen PJA-W0 history must retain the retired Demo record.'

@@ -187,8 +187,8 @@ const compatibleHistoricalChecks = [
   'scripts/check-wpr-w17-figure-diagram-production.mjs',
   'scripts/check-wpr-w18-books-production.mjs',
   'scripts/check-wpr-w19-academy-production.mjs',
-  'scripts/check-wpr-w20-reality-journey-production.mjs',
-  'scripts/check-wpr-w21-mcd7-successor.mjs',
+  'scripts/check-wpr-w20-reality-journey-production-current.mjs',
+  'scripts/check-wpr-w21-mcd7-successor-current.mjs',
   'scripts/check-wpr-w23-report-workspace-production.mjs',
   'scripts/check-wpr-w24-hydration-runtime.mjs',
   'scripts/check-wpr-w26-privacy-security-production.mjs',
@@ -200,9 +200,9 @@ for (const checker of compatibleHistoricalChecks) {
 }
 
 for (const checker of [
-  currentSuccessor.presentationSuccessor.checkerPath,
+  'scripts/check-px2-cx-p1-physical-delete-current.mjs',
   currentSuccessor.presentationSuccessor.financialCheckerPath,
-  currentSuccessor.presentationSuccessor.pdsCheckerPath
+  'scripts/check-wpr-cx-p1-pds-responsive-accessibility-post-delete-current.mjs'
 ]) {
   const result = spawnSync(process.execPath, [checker], { stdio: 'inherit' });
   assert.equal(result.status, 0, `Current WPR presentation successor failed: ${checker}`);

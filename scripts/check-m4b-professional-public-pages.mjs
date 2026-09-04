@@ -5,6 +5,14 @@ import path from 'node:path';
 const root = process.cwd();
 const read = file => fs.readFile(path.join(root, file), 'utf8');
 const json = async file => JSON.parse(await read(file));
+const exists = async file => fs.access(path.join(root, file)).then(() => true).catch(() => false);
+
+const p1DeletePath = 'content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+const p1Deleted = await exists(p1DeletePath)
+  && (await json(p1DeletePath)).status === 'PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE';
+const personalSurfacePath = p1Deleted
+  ? 'perspectives/personal/index.html'
+  : 'professional/personal-runtime/index.html';
 
 const [
   services,
@@ -24,7 +32,7 @@ const [
   redirects
 ] = await Promise.all([
   read('services.html'),
-  read('professional/personal-runtime/index.html'),
+  read(personalSurfacePath),
   read('professional/human-design/index.html'),
   read('professional/external-readers/index.html'),
   read('assets/css/public-experience.css'),
@@ -59,8 +67,16 @@ assert.ok(hdVocabulary.restrictedTerms.includes('人类图'));
 assert.ok(services.includes('/assets/css/phios-public-v2.css'));
 assert.ok(services.includes('Financial Reality Navigation'));
 assert.ok(services.includes('Personal Runtime'));
-assert.ok(personalRuntime.includes('/assets/css/phios-public-v2.css'));
-assert.ok(personalRuntime.includes('Personal Runtime Projection'));
+if (p1Deleted) {
+  assert.equal(await exists('professional/personal-runtime/index.html'), false, 'P1 retired Professional Personal Runtime presentation must remain physically deleted');
+  assert.ok(personalRuntime.includes('data-cx-surface="PERSONAL_REALITY"'));
+  assert.ok(personalRuntime.includes('<link rel="canonical" href="/perspectives/personal/">'));
+  assert.ok(redirects.includes('/professional/personal-runtime /perspectives/personal/ 308'));
+  assert.ok(redirects.includes('/professional/personal-runtime/ /perspectives/personal/ 308'));
+} else {
+  assert.ok(personalRuntime.includes('/assets/css/phios-public-v2.css'));
+  assert.ok(personalRuntime.includes('Personal Runtime Projection'));
+}
 
 // The frozen M4B internal identity remains preserved, while WPR-D owns the public route successor.
 assert.ok(registry.routes.includes('/professional/human-design'));
@@ -94,7 +110,7 @@ for (const name of ['Personal Runtime','Financial Reality Navigation','Integrate
 const disclaimer = 'Professional interpretation is not the same as observed evidence.';
 const readerDisclaimer = 'External Readers are used as interpretive perspectives, not as diagnostic, deterministic or evidentiary systems.';
 assert.ok(services.includes('边界') || services.includes('boundary'));
-assert.ok(personalRuntime.includes('Projection ≠ Evidence') || personalRuntime.includes('interpretation'));
+assert.ok(p1Deleted ? personalRuntime.includes('Perspective ≠ Fact') : (personalRuntime.includes('Projection ≠ Evidence') || personalRuntime.includes('interpretation')));
 for (const page of [readers]) {
   assert.ok(page.includes('servicesPublic.disclaimerOne'));
   assert.ok(page.includes('servicesPublic.disclaimerTwo'));
@@ -118,6 +134,10 @@ for (const forbidden of ['human-design','bazi','ziwei','gene-keys','astrology'])
 assert.equal(migrationClosure.status, 'closed_on_activated_public_customer_targets');
 assert.deepEqual(migrationClosure.remainingHits, []);
 for (const file of migrationClosure.activatedTargetFiles) {
+  if (p1Deleted && file === 'professional/personal-runtime/index.html') {
+    assert.equal(await exists(file), false, 'P1 retired WPR Personal Runtime presentation must remain physically deleted');
+    continue;
+  }
   const text = await read(file);
   for (const restricted of hdVocabulary.restrictedTerms) {
     assert.equal(text.includes(restricted), false, `WPR_RESTRICTED_PUBLIC_TERM_REGRESSION:${file}:${restricted}`);
@@ -130,6 +150,6 @@ assert.equal(reconciliation.wprPublicVocabularyAuthorityPreserved, true);
 assert.equal(reconciliation.legacyRouteCompatibilityPreserved, true);
 assert.equal(reconciliation.m4bPaymentAndBoundarySemanticsChanged, false);
 
-console.log('✓ M4B-W7 / WPR-D Professional Public Pages reconciliation passed.');
+console.log(p1Deleted ? '✓ M4B-W7 / WPR-D historical public-page authority preserved; P1 Personal Reality successor reconciliation passed.' : '✓ M4B-W7 / WPR-D Professional Public Pages reconciliation passed.');
 console.log('  M4B internal service/reader identity and boundaries remain preserved; WPR-W13 controls public labels and WPR-W4 controls the canonical public route.');
 console.log('  Prices and checkout remain unpublished; External Readers remain interpretation-only and outside the main navigation.');

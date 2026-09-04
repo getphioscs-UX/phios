@@ -24,6 +24,8 @@ const methodRegistry=readJson(`${root}/registries/method-registry-v2.json`);
 const capabilityMatrix=readJson(`${root}/registries/mpa-method-capability-matrix-v1.json`);
 const mpaVocab=readJson(`${root}/registries/mpa-public-method-vocabulary-boundary-v1.json`);
 const wprVocab=readJson('content/web-production/registries/wpr-public-vocabulary-registry-v2.json');
+const publicMethodCatalog=readJson('content/web-production/px2/successors/public-method-catalog-v6.json');
+const p1Delete=readJson('content/customer-experience-rebuild/acceptance/p1-physical-legacy-delete-acceptance-v1.json');
 const hdrFreeze=readJson('content/professional/core-method-runtime/hdr-production-freeze-v1.json');
 const hdrManifest=readJson('content/professional/core-method-runtime/hdr-runtime-manifest-v1.json');
 const cmr=readJson('content/professional/canonical-meaning-runtime/acceptance/cmr-w7-hdr-mapping-acceptance-v1.json');
@@ -57,7 +59,8 @@ assert.equal(hdrFreeze.productionStatus,'blocked'); assert.equal(hdrFreeze.execu
 assert.equal(hdrFreeze.productionGates.productionExecutionAllowed,false); assert.equal(hdrFreeze.productionGates.professionalReleaseAllowed,false);
 assert.equal(hdrManifest.activation.productionEligible,false); assert.equal(hdrManifest.activation.professionalReleaseActivated,false);
 
-// W4 historical MPA public vocabulary stays unresolved; WPR v2 owns current PUBLIC/CUSTOMER presentation.
+// W4/MPA-W24 vocabulary is frozen predecessor evidence. Later customer presentation may supersede the label
+// without creating HDR birth-calculation, mapping, rights/license or Production authority.
 const oldPublic=mpaVocab.internalTracks.find(x=>x.internalCode==='HDR');
 assert.equal(oldPublic.publicLabel,null); assert.equal(oldPublic.directInternalNameExposureAllowed,false);
 const publicEntry=wprVocab.entries.find(x=>x.vocabularyCode==='METHOD_HUMAN_DESIGN');
@@ -67,10 +70,33 @@ assert.deepEqual(vocab.presentationAuthority.publicLabels,publicEntry.publicLabe
 assert.equal(vocab.publicCustomerRules.directInternalNameExposureAllowed,false);
 assert.equal(vocab.publicCustomerRules.rawHdrProjectionVocabularyExposureAllowed,false);
 
-// Audited public/customer pages must not render the restricted internal brand terms.
+// P1 legitimately retired the two W24-era Personal Runtime presentation files. Keep the frozen audit list
+// unchanged, but do not require physically deleted presentation files to reappear.
+assert.equal(p1Delete.status,'MACHINE_ACCEPTED_PHYSICAL_LEGACY_DELETE_COMPLETE');
+assert.equal(p1Delete.browserAcceptance,'HUMAN_ACCEPTED_BY_USER_CONFIRMATION');
+assert.equal(p1Delete.redirectCompatibilityPreserved,true);
+assert.equal(p1Delete.runtimeAuthorityDeleted,false);
+assert.equal(p1Delete.methodAuthorityDeleted,false);
+for(const retired of ['personal-runtime.html','professional/personal-runtime/index.html']){
+  assert.ok(vocab.surfaceAudit.files.includes(retired),`W24_FROZEN_AUDIT_TARGET_MISSING:${retired}`);
+  assert.ok(p1Delete.deletedPresentationFiles.includes(retired),`P1_RETIREMENT_EVIDENCE_MISSING:${retired}`);
+}
+const retiredPresentation=new Set(p1Delete.deletedPresentationFiles);
 for(const file of vocab.surfaceAudit.files){
+  if(retiredPresentation.has(file)) continue;
   const source=read(file); assert.equal(assertPublicHdrVocabulary({text:source,restrictedTerms:vocab.restrictedTerms}),true,`PUBLIC_TERM_LEAK:${file}`);
 }
+
+// Current customer presentation is owned by the later PX2/CX successor. Human Design is exposed only as
+// a customer-supplied external-chart reading; this successor does not promote the blocked MPA HDR calculator.
+assert.equal(publicMethodCatalog.status,'CURRENT_CUSTOMER_PRODUCTION_SURFACE_RECONCILED');
+const currentHdrPublic=publicMethodCatalog.methods.find(x=>x.methodCode==='HUMAN_DESIGN');
+assert.ok(currentHdrPublic);
+assert.equal(currentHdrPublic.label,'Human Design'); assert.equal(currentHdrPublic.labelZh,'人类图');
+assert.equal(currentHdrPublic.route,'/perspectives/personal/');
+assert.equal(currentHdrPublic.publicState,'AVAILABLE_WITH_CONFIRMED_EXTERNAL_CHART');
+assert.equal(currentHdrPublic.executionMode,'CUSTOMER_SUPPLIED_EXTERNAL_CHART');
+assert.match(currentHdrPublic.boundary,/does not claim official BodyGraph birth-calculation authority/i);
 const compat=read('professional/human-design/index.html');
 assert.ok(compat.includes('name="robots" content="noindex"'));
 assert.ok(compat.includes('url=/professional/personal-runtime'));
@@ -134,4 +160,4 @@ assert.equal(acceptance.nextWork,'MPA-W25_FUTURE_METHOD_HOLDING');
 // Current checker intentionally omits historical package.json wiring assertions.
 console.log('✓ MPA-W24 HDR Boundary passed.');
 console.log('  HDR remains BLOCKED: no rights/license, mapping, Production, Professional or raw public-method authority is created.');
-console.log('  PUBLIC/CUSTOMER presentation is constrained to Personal Runtime Projection / 个人运行投射; MPA-W26 excludes HDR while blocked.');
+console.log('  Frozen W24 vocabulary remains historical; current Human Design presentation is external-chart only and does not activate the blocked HDR birth-calculation path.');
