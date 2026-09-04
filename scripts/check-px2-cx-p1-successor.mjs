@@ -11,7 +11,7 @@ const historicalResult=spawnSync(process.execPath,['--no-warnings',historical],{
 assert.equal(historicalResult.status,0,`${historical}\n${historicalResult.stdout}\n${historicalResult.stderr}`);
 process.stdout.write(historicalResult.stdout);
 
-const successor=read('content/customer-experience-rebuild/migration/px2-cx-p1-public-ia-successor-v1.json');
+const successor=read('content/customer-experience-rebuild/migration/px2-cx-p1-public-ia-successor-v2.json');
 const predecessor=read(successor.predecessor.path);
 const routes=read(successor.currentAuthority.routeRegistry);
 const spine=read(successor.currentAuthority.customerSpine);
@@ -24,13 +24,13 @@ const shell=text(successor.currentAuthority.shellRuntime);
 const locale=text('assets/customer-ui/js/locale.js');
 const personalCss=text('assets/customer-ui/surfaces/personal-reality.css');
 
-assert.equal(successor.status,'ACTIVE_CX_P1_PUBLIC_IA_SUCCESSOR');
+assert.equal(successor.status,'ACTIVE_P1_ROUTE_CUTOVER_SUCCESSOR_BROWSER_ACCEPTANCE_PENDING');
 assert.equal(predecessor.status,successor.predecessor.status);
 assert.equal(successor.predecessor.mutated,false);
 assert.deepEqual(successor.currentPrimaryNavigation,routes.primaryNavigation);
 assert.deepEqual(successor.currentUtilities,routes.utilities);
 assert.deepEqual(spine.sequence,['UNDERSTAND','READ','CHOOSE','ACT','OBSERVE','REVIEW','CONTINUE']);
-assert.equal(cutover.status,'CODE_CUTOVER_COMPLETE_PRODUCTION_BROWSER_ACCEPTANCE_PENDING');
+assert.equal(cutover.status,'P1_ROUTE_CUTOVER_COMPLETE_PRODUCTION_BROWSER_ACCEPTANCE_PENDING');
 assert.equal(successor.legacyRoutePolicy.stage16SemanticsPreserved,true);
 assert.equal(successor.legacyRoutePolicy.legacyRoutesMayRemainInCurrentCxNavigation,false);
 assert.equal(successor.authorityBoundary.backendAuthorityCreated,false);
@@ -84,10 +84,10 @@ const home=text('index.html');
 for(const compatibilityHref of ['/personal-runtime','/financial-reality','/my-reality']){
   assert.ok(home.includes(`href="${compatibilityHref}"`),`Stage16 home compatibility route missing ${compatibilityHref}`);
 }
-assert.equal(cutover.productionHumanAcceptance.status,'PENDING_DEPLOYMENT');
+assert.equal(cutover.productionBrowserAcceptance.status,'PENDING_PRODUCTION_BROWSER_ACCEPTANCE');
 assert.equal(cutover.physicalDelete.status,'BLOCKED_UNTIL_PRODUCTION_BROWSER_ACCEPTANCE');
 
 console.log('✓ PX2 → Stage16 → CX-P1 current public IA successor passed.');
 console.log('  Current navigation is validated from the exported semantic CX_NAVIGATION authority, not whitespace-sensitive source formatting.');
 console.log('  PRE-R20 shared-file reconciliation passed: locale keeps safe dual-key persistence plus dynamic cross-perspective localization; Personal Reality keeps the parallel customer-surface hotfix.');
-console.log('  Stage16 homepage compatibility routes resolve through server redirects to four CX-cutover surfaces; production browser acceptance remains pending.');
+console.log('  P1 current route authority is active for four priority surfaces; Ask is canonical at /knowledge/ask/ while compatibility aliases remain 308 redirects; browser acceptance remains pending.');

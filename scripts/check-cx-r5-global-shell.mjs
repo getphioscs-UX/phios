@@ -29,6 +29,9 @@ const allShellSources = [shell, navigation, locale, assets, dialog, components].
 const authority = readJson(`${BASE}/authority/customer-shell-authority-v1.json`);
 const contract = readJson(`${BASE}/contracts/customer-shell-interaction-contract-v1.json`);
 const acceptance = readJson(`${BASE}/acceptance/cx-r5-acceptance-v2.json`);
+const p1CutoverPath = `${BASE}/migration/priority-route-cutover-registry-v2.json`;
+const p1Cutover = exists(p1CutoverPath) ? readJson(p1CutoverPath) : null;
+const currentAskPath = p1Cutover?.status === 'P1_ROUTE_CUTOVER_COMPLETE_PRODUCTION_BROWSER_ACCEPTANCE_PENDING' ? '/knowledge/ask/' : '/ask';
 const ia = readJson(`${BASE}/authority/customer-information-architecture-v1.json`);
 const visual = readJson(`${BASE}/authority/customer-visual-asset-registry-v3.json`);
 
@@ -80,7 +83,7 @@ assert.equal(contract.rules.shellMayExecuteSearchRuntime, false);
 
 // W4 — Ask is global but hands off to the existing Ask surface/runtime.
 assert.match(shell, /id=\"cx-shell-ask\"/);
-assert.match(shell, /action=\"\/ask\" method=\"get\"/);
+assert.ok(shell.includes(`action="${currentAskPath}" method="get"`), `shared shell Ask action must use current route ${currentAskPath}`);
 assert.match(shell, /textarea[^>]+name=\"q\"/);
 assert.equal(shell.includes('/api/customer-ask'), false, 'shell must not execute Ask runtime');
 assert.equal(authority.ask.secondAskAuthorityCreated, false);
@@ -94,7 +97,7 @@ assert.equal(contract.rules.accountStateIsPresentationOnly, true);
 
 // W6 — one meaningful footer uses the R4 footer logo and continuation destinations.
 assert.match(shell, /data-cx-shell-region=\"footer\"/);
-for (const href of ['/explore/', '/reality/', '/perspectives/', '/knowledge/', '/search/', '/ask', '/professional/', '/account/']) {
+for (const href of ['/explore/', '/reality/', '/perspectives/', '/knowledge/', '/search/', currentAskPath, '/professional/', '/account/']) {
   const literalHref = `href=\"${href}\"`;
   const footerBinding = `footerLink('${href}'`;
   assert.ok(shell.includes(literalHref) || shell.includes(footerBinding), `shared footer/shell missing continuation destination ${href}`);
@@ -146,5 +149,5 @@ assert.equal(authority.boundaries.legacyPhysicalDeletePerformed, false);
 assert.equal(acceptance.rules.secondAuthorityCreated, false);
 
 console.log(`✓ CX-R5 Single Customer Shell passed at e7a0e05: ${consumers.length} clean-room shell consumers share one header, primary navigation authority, mobile drawer, Search entry, Ask entry, account presentation, locale implementation and footer.`);
-console.log('✓ Search and Ask remain handoffs to existing governed surfaces; account state is presentation-only; no backend, route-cutover, professional-capability or legacy-delete authority moved into the shell.');
+console.log(`✓ Search and Ask remain handoffs to governed surfaces; current Ask destination is ${currentAskPath}; account state is presentation-only and shell still creates no backend or answer authority.`);
 console.log('✓ CX-R5 ACCEPTED: ONE_GLOBAL_CUSTOMER_SHELL · READY_FOR_CX_R6_HOMEPAGE');
