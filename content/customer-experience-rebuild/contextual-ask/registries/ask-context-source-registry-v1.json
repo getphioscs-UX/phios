@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "PHI-OS-CX-R9-R2-ASK-CONTEXT-SOURCE-REGISTRY-v1.0.0",
+  "work": "CX-R9R2-W1",
+  "status": "ACTIVE_SUCCESSOR_REGISTRY",
+  "sources": [
+    {
+      "contextType": "KNOWLEDGE",
+      "sourceAuthority": "CKA_KAP_KNOWLEDGE",
+      "sourceClass": "GOVERNED_KNOWLEDGE",
+      "participantScope": "SELF",
+      "caseScope": "NONE",
+      "consentRequired": false,
+      "entitlementRequired": false,
+      "freshnessPolicy": "VERSIONED_KNOWLEDGE",
+      "answerUseBoundary": "ANSWER_GROUNDING",
+      "customerDisclosureLabel": {
+        "en": "Knowledge",
+        "zh": "知识"
+      }
+    },
+    {
+      "contextType": "CURRENT_FACTS",
+      "sourceAuthority": "CURRENT_FACTS_GATEWAY",
+      "sourceClass": "CURRENT_PUBLIC_FACT",
+      "participantScope": "PUBLIC",
+      "caseScope": "QUESTION",
+      "consentRequired": false,
+      "entitlementRequired": false,
+      "freshnessPolicy": "RETRIEVED_AT_REQUIRED",
+      "answerUseBoundary": "CURRENT_FACT_ONLY_NOT_CANONICAL_KNOWLEDGE",
+      "customerDisclosureLabel": {
+        "en": "Current public facts",
+        "zh": "当前公共事实"
+      }
+    },
+    {
+      "contextType": "CURRENT_REALITY",
+      "sourceAuthority": "CURRENT_REALITY_CUSTOMER_VIEW_OR_EXPLICIT_USER_REPORT",
+      "sourceClass": "CURRENT_REALITY",
+      "participantScope": "SELF",
+      "caseScope": "QUESTION",
+      "consentRequired": true,
+      "entitlementRequired": false,
+      "freshnessPolicy": "OBSERVED_AT_WHEN_KNOWN",
+      "answerUseBoundary": "CONTEXT_ONLY_NO_TRUTH_ELEVATION",
+      "customerDisclosureLabel": {
+        "en": "My current reality",
+        "zh": "我的当前现实"
+      }
+    },
+    {
+      "contextType": "PERSONAL_GOVERNED_READING",
+      "sourceAuthority": "PERSONAL_READING_PRODUCT_AUTHORITY",
+      "sourceClass": "SYMBOLIC_INTERPRETIVE",
+      "participantScope": "SELF",
+      "caseScope": "READING",
+      "consentRequired": true,
+      "entitlementRequired": false,
+      "freshnessPolicy": "READING_GENERATED_AT",
+      "answerUseBoundary": "SELECTED_REFS_ONLY",
+      "customerDisclosureLabel": {
+        "en": "My reading",
+        "zh": "我的读取"
+      }
+    },
+    {
+      "contextType": "PERSONAL_PAID_NARRATIVE",
+      "sourceAuthority": "NARRATIVE_READING_IR",
+      "sourceClass": "SYMBOLIC_INTERPRETIVE",
+      "participantScope": "SELF",
+      "caseScope": "READING",
+      "consentRequired": true,
+      "entitlementRequired": true,
+      "freshnessPolicy": "STORED_ARTIFACT_VERSION",
+      "answerUseBoundary": "STORED_NARRATIVE_NO_REGENERATION",
+      "customerDisclosureLabel": {
+        "en": "My narrative",
+        "zh": "我的叙事"
+      }
+    },
+    {
+      "contextType": "RELATIONSHIP_GOVERNED_READING",
+      "sourceAuthority": "RELATIONSHIP_PRODUCT_AUTHORITY",
+      "sourceClass": "SYMBOLIC_INTERPRETIVE",
+      "participantScope": "A_AND_B",
+      "caseScope": "RELATIONSHIP",
+      "consentRequired": true,
+      "entitlementRequired": false,
+      "freshnessPolicy": "READING_GENERATED_AT",
+      "answerUseBoundary": "SELECTED_REFS_AND_EXPLICIT_PARTICIPANT_SCOPE_ONLY",
+      "customerDisclosureLabel": {
+        "en": "This relationship",
+        "zh": "这段关系"
+      }
+    },
+    {
+      "contextType": "RELATIONSHIP_PAID_NARRATIVE",
+      "sourceAuthority": "RELATIONSHIP_NARRATIVE_IR",
+      "sourceClass": "SYMBOLIC_INTERPRETIVE",
+      "participantScope": "A_AND_B",
+      "caseScope": "RELATIONSHIP",
+      "consentRequired": true,
+      "entitlementRequired": true,
+      "freshnessPolicy": "STORED_ARTIFACT_VERSION",
+      "answerUseBoundary": "STORED_NARRATIVE_NO_REGENERATION",
+      "customerDisclosureLabel": {
+        "en": "Relationship narrative",
+        "zh": "关系叙事"
+      }
+    },
+    {
+      "contextType": "EXTERNAL_PROFILE",
+      "sourceAuthority": "PROFILE_SIGNAL_ENVELOPE",
+      "sourceClass": "EXTERNAL_PROFILE",
+      "participantScope": "SELF",
+      "caseScope": "PROFILE",
+      "consentRequired": true,
+      "entitlementRequired": false,
+      "freshnessPolicy": "ASSESSMENT_DATE_WHEN_KNOWN",
+      "answerUseBoundary": "SIGNALS_ONLY_NO_OBJECTIVE_PERSONALITY_FACT",
+      "customerDisclosureLabel": {
+        "en": "External profile",
+        "zh": "外部 Profile"
+      }
+    },
+    {
+      "contextType": "PHI_SELF_ASSESSMENT",
+      "sourceAuthority": "SELF_ASSESSMENT_RESULT_IR",
+      "sourceClass": "SELF_REPORTED",
+      "participantScope": "SELF",
+      "caseScope": "PROFILE",
+      "consentRequired": true,
+      "entitlementRequired": false,
+      "freshnessPolicy": "ASSESSMENT_DATE_REQUIRED",
+      "answerUseBoundary": "SELF_REPORTED_SIGNALS_ONLY",
+      "customerDisclosureLabel": {
+        "en": "PHI self-assessment",
+        "zh": "PHI 自我评估"
+      }
+    },
+    {
+      "contextType": "REASONING_TASK_PERFORMANCE",
+      "sourceAuthority": "REASONING_TASK_PERFORMANCE_IR",
+      "sourceClass": "MEASURED_TASK_BASED",
+      "participantScope": "SELF",
+      "caseScope": "PROFILE",
+      "consentRequired": true,
+      "entitlementRequired": false,
+      "freshnessPolicy": "ASSESSMENT_DATE_REQUIRED",
+      "answerUseBoundary": "TASK_PERFORMANCE_ONLY_NO_IQ_INFERENCE",
+      "customerDisclosureLabel": {
+        "en": "Reasoning task performance",
+        "zh": "推理任务表现"
+      }
+    },
+    {
+      "contextType": "CONTINUITY_CONTEXT",
+      "sourceAuthority": "JR_LRM_CONTINUITY_AUTHORITY",
+      "sourceClass": "CONTINUITY",
+      "participantScope": "SELF",
+      "caseScope": "REALITY",
+      "consentRequired": true,
+      "entitlementRequired": true,
+      "freshnessPolicy": "CURRENT_ENTITLEMENT_REQUIRED",
+      "answerUseBoundary": "ENTITLED_SELECTED_CONTEXT_ONLY",
+      "customerDisclosureLabel": {
+        "en": "Continuity context",
+        "zh": "连续性情境"
+      }
+    },
+    {
+      "contextType": "PROFESSIONAL_CASE_CONTEXT",
+      "sourceAuthority": "PROFESSIONAL_CASE_AUTHORITY",
+      "sourceClass": "PROFESSIONAL_EVIDENCE",
+      "participantScope": "CASE_PARTICIPANTS",
+      "caseScope": "PROFESSIONAL_CASE",
+      "consentRequired": true,
+      "entitlementRequired": true,
+      "freshnessPolicy": "CASE_DATE_AND_REVIEW_STATE",
+      "answerUseBoundary": "ATTRIBUTABLE_PROFESSIONAL_CONTEXT_ONLY",
+      "customerDisclosureLabel": {
+        "en": "Professional case context",
+        "zh": "专业个案情境"
+      }
+    }
+  ],
+  "boundaries": {
+    "noSilentAccountWideContextSweep": true,
+    "availabilityRequiresUpstreamAuthority": true,
+    "clientCannotSelfAuthorizeEntitledContext": true
+  }
+}
