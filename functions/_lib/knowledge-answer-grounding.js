@@ -13,6 +13,25 @@ const canonicalText = value => String(value ?? '').normalize('NFKC').trim().repl
 const searchText = value => canonicalText(value).toLocaleLowerCase();
 const unique = values => [...new Set(values.filter(Boolean))];
 
+const RELEVANCE_STOP_LATIN = new Set(['what','why','how','who','when','where','which','is','are','was','were','be','been','being','do','does','did','can','could','would','should','the','a','an','my','me','i','we','our','you','your','it','this','that','these','those','so','very','please','explain','tell','about']);
+const RELEVANCE_STOP_CJK = new Set(['为什','什么','为何','怎么','怎样','如何','是否','是不是','这个','那个','这些','那些','我的','我们','自己','可以','能够','需要','没有','那么','一下','请问','告诉','解释']);
+function relevanceTerms(tokens = []) {
+  return unique(tokens.map(searchText).filter(term => {
+    if (!term) return false;
+    if (/^[a-z0-9-]+$/i.test(term)) return term.length >= 3 && !RELEVANCE_STOP_LATIN.has(term);
+    return term.length >= 2 && !RELEVANCE_STOP_CJK.has(term);
+  }));
+}
+export function evaluateKapQuestionSourceRelevance(bundle = {}) {
+  const sources = Array.isArray(bundle?.sources) ? bundle.sources : [];
+  const terms = relevanceTerms(bundle?.normalization?.tokens || []);
+  if (!sources.length) return Object.freeze({state:'NO_SOURCES',established:false,informativeTerms:terms,matchedTerms:[]});
+  if (!terms.length) return Object.freeze({state:'NOT_ENOUGH_QUERY_TERMS_TO_GATE',established:true,informativeTerms:[],matchedTerms:[]});
+  const corpus = sources.map(source => searchText(source?.text || '')).join('\n');
+  const matched = terms.filter(term => corpus.includes(term));
+  return Object.freeze({state:matched.length?'QUESTION_SOURCE_RELEVANCE_ESTABLISHED':'QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED',established:matched.length>0,informativeTerms:terms,matchedTerms:matched});
+}
+
 function compactObject(value = {}, allowed = []) {
   const output = {};
   for (const key of allowed) {
@@ -405,6 +424,7 @@ export function evaluateKapCoverage({ bundle, retrieval, scopeDisposition = 'KNO
   const sourceCount = bundle?.sources?.length || 0;
   const publishedLevel = retrieval?.published?.coverage?.level || retrieval?.coverage?.published || 'none';
   const manuscriptCount = (retrieval?.manuscript?.records || []).length;
+  const questionSourceRelevance = evaluateKapQuestionSourceRelevance(bundle);
   let status;
   const reasonCodes = [];
   if (scopeDisposition === 'OUT_OF_SCOPE') {
@@ -413,6 +433,9 @@ export function evaluateKapCoverage({ bundle, retrieval, scopeDisposition = 'KNO
   } else if (!sourceCount) {
     status = 'INSUFFICIENT_COVERAGE';
     reasonCodes.push('NO_GROUNDED_SOURCE_MATCH');
+  } else if (!questionSourceRelevance.established) {
+    status = 'INSUFFICIENT_COVERAGE';
+    reasonCodes.push('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED');
   } else if (['exact', 'strong'].includes(publishedLevel)) {
     status = 'STRONG_COVERAGE';
     reasonCodes.push('PUBLISHED_MATCH_STRONG_OR_EXACT');

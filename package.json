@@ -632,7 +632,7 @@
     "check:cx-no-legacy-route-reference": "node scripts/check-cx-no-legacy-route-reference.mjs",
     "check:cx-no-legacy-selectors": "node scripts/check-cx-no-legacy-selectors.mjs",
     "check:cx-no-old-component-copy": "node scripts/check-cx-no-old-component-copy.mjs",
-    "check:cx-p1": "npm run check:cx-r9-r2 && npm run check:cx-no-legacy-route-reference && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy && node scripts/check-cx-p1-priority-cutover-v2.mjs",
+    "check:cx-p1": "npm run check:cx-r9-r2 && npm run check:cx-no-legacy-route-reference && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy && node scripts/check-cx-p1-priority-cutover-v2.mjs && npm run check:cx-p1-browser-r1",
     "check:cx-priority": "npm run check:cx-p1",
     "check:cx-r0": "node scripts/check-cx-r0-baseline.mjs",
     "check:cx-r1": "npm run check:cx-r0 && npm run check:cx-r1-quarantine && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy",
@@ -2186,7 +2186,8 @@
     "check:cx-r9-r2:w12-scope-consent": "node scripts/check-cx-r9-r2-contextual-ask.mjs W12",
     "check:cx-r9-r2:w13-entitlement": "node scripts/check-cx-r9-r2-contextual-ask.mjs W13",
     "check:cx-r9-r2:w14-provenance": "node scripts/check-cx-r9-r2-contextual-ask.mjs W14",
-    "check:cx-r9-r2:w15-acceptance": "node scripts/check-cx-r9-r2-contextual-ask.mjs W15"
+    "check:cx-r9-r2:w15-acceptance": "node scripts/check-cx-r9-r2-contextual-ask.mjs W15",
+    "check:cx-p1-browser-r1": "node scripts/check-p1-browser-r1-blocker-repair.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

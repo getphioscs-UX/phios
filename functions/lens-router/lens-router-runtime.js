@@ -5,7 +5,7 @@ const PRECEDENCE=Object.freeze(['PROFESSIONAL','REALITY_FACT','RELATIONSHIP','DE
 const SIGNALS=Object.freeze({
  PROFESSIONAL:['diagnose','diagnosis','treatment','dosage','prescription','legal advice','法律意见','诊断','治疗','剂量','处方','医生应该','律师应该','税务意见'],
  REALITY_FACT:['weather','price today','latest news','current law','current regulation','who is the current','what actually happened','天气','今天价格','最新新闻','现行法律','现行法规','实际发生了什么','事实是什么'],
- RELATIONSHIP:['between us','me and my partner','my partner and i','our relationship','with this person','我和他','我和她','我和伴侣','我们之间','这段关系','两个人之间'],
+ RELATIONSHIP:['between us','me and my partner','my partner and i','our relationship','with this person','my husband','my wife','my spouse','my boyfriend','my girlfriend','husband','wife','spouse','partner','boyfriend','girlfriend','我和他','我和她','我和伴侣','我们之间','这段关系','两个人之间','我丈夫','我的丈夫','丈夫','老公','我妻子','我的妻子','妻子','老婆','配偶','伴侣','男朋友','女朋友','对象'],
  DECISION:['should i','should we','should i accept','should i leave','which should i choose','decision','decide','该不该','是否应该','要不要','应该选择','怎么决定','这个决定','应该接受','应该离开','应该继续'],
  CURRENT:['right now','currently','at the moment','recently',"today's activation",'current activation','现在','当下','目前','最近','此刻','当前激活'],
  RHYTHM:['rhythm','personal year','personal month','personal day','cycle number','numerology cycle','节奏','个人年','个人月','个人日','数字周期','数秘周期'],

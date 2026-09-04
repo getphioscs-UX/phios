@@ -220,6 +220,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
   const boundaries = [copy.questionScopedBoundary];
   if (bundle?.normalization?.hints?.containsPersonalContextHint) boundaries.push(copy.personalBoundary);
   const eligible = coverageDecision?.answerCompositionEligible === true;
+  const relevanceRejected = (coverageDecision?.reasonCodes || []).includes('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED');
   const directAnswer = eligible
     ? direct.map(item => item.text).join(locale === 'zh-Hans' ? '' : ' ')
     : coverageDecision?.status === 'OUT_OF_SCOPE' ? copy.outOfScope : copy.insufficient;
@@ -256,7 +257,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
       whatToObserve,
       boundaries: unique(boundaries),
       unknowns,
-      relatedKnowledge: relatedKnowledge(bundle, profile.relatedItems)
+      relatedKnowledge: relevanceRejected ? [] : relatedKnowledge(bundle, profile.relatedItems)
     },
     generation: {
       generationMode: 'DETERMINISTIC',
@@ -281,7 +282,8 @@ export function composeKapAnswerProjection({ bundle, coverageDecision, depth = D
   const aiEligibility = evaluateKapAiEligibility({ bundle, coverageDecision, depth: normalizedDepth });
   const aiRouting = routeKapAiCost({ eligibility: aiEligibility });
   const answer = composeDeterministicKapAnswer({ bundle, coverageDecision, depth: normalizedDepth, now });
-  const sources = projectKapSources(bundle, normalizedDepth);
+  const relevanceRejected = (coverageDecision?.reasonCodes || []).includes('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED');
+  const sources = relevanceRejected ? [] : projectKapSources(bundle, normalizedDepth);
   const boundary = projectKapUnknownBoundary({ bundle, coverageDecision, locale: answer.locale });
   return {
     schemaVersion: 'PHI-OS-ASK-PHIOS-RESPONSE-v1.0.0',

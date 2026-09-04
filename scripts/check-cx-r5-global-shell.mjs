@@ -34,6 +34,9 @@ const p1Cutover = exists(p1CutoverPath) ? readJson(p1CutoverPath) : null;
 const currentAskPath = p1Cutover?.status === 'P1_ROUTE_CUTOVER_COMPLETE_PRODUCTION_BROWSER_ACCEPTANCE_PENDING' ? '/knowledge/ask/' : '/ask';
 const ia = readJson(`${BASE}/authority/customer-information-architecture-v1.json`);
 const visual = readJson(`${BASE}/authority/customer-visual-asset-registry-v3.json`);
+const currentBrandPath = `${BASE}/authority/customer-brand-asset-authority-v4.json`;
+const currentBrand = exists(currentBrandPath) ? readJson(currentBrandPath) : null;
+const currentHeaderLogo = currentBrand?.status === 'ACTIVE_SURFACE_AWARE_CUSTOMER_BRAND_BINDING' ? currentBrand.currentConsumers.publicHeaderLight : 'LOGO-003';
 
 assert.equal(authority.baselineCommit, BASELINE);
 assert.equal(contract.baselineCommit, BASELINE);
@@ -53,11 +56,11 @@ for (const forbidden of ['REALITY_JOURNEY', 'READINGS', 'SERVICES', 'ACADEMY', '
   assert.equal(new RegExp(`id:\\s*['\"]${forbidden}['\"]`).test(navigation), false, `forbidden top-level navigation returned: ${forbidden}`);
 }
 
-// Canonical brand assets from R4, not a text/legacy brand authority.
-for (const assetId of ['LOGO-003', 'LOGO-010']) {
-  assert.ok(visual.entries.some(entry => entry.assetId === assetId && entry.available === true), `R4 visual registry missing ${assetId}`);
-  assert.ok(shell.includes(`data-cx-asset=\"${assetId}\"`), `shell missing canonical ${assetId}`);
-}
+// Historical R4/R5 evidence keeps LOGO-003; the current light CX header may consume the surface-appropriate canonical mono-dark successor.
+for (const assetId of ['LOGO-003', currentHeaderLogo, 'LOGO-010']) assert.ok(visual.entries.some(entry => entry.assetId === assetId && entry.available === true), `R4 visual registry missing ${assetId}`);
+assert.ok(shell.includes(`data-cx-asset=\"${currentHeaderLogo}\"`), `shell missing current canonical header ${currentHeaderLogo}`);
+assert.ok(shell.includes('data-cx-asset=\"LOGO-010\"'), 'shell missing canonical footer LOGO-010');
+if(currentBrand){assert.equal(currentBrand.predecessor,`${BASE}/authority/customer-brand-asset-authority-v3.json`);assert.equal(currentBrand.authorityBoundary.newLogoIdentityCreated,false);assert.equal(currentBrand.authorityBoundary.upstreamLogoRegistryMutated,false);}
 assert.equal(allShellSources.includes('public-shell-v2'), false, 'R5 shell references public-shell-v2');
 assert.equal(allShellSources.includes('data-puxr-header'), false, 'R5 shell references legacy header injection');
 assert.equal(allShellSources.includes('data-puxr-footer'), false, 'R5 shell references legacy footer injection');

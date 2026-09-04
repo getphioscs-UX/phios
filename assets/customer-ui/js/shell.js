@@ -46,7 +46,7 @@ function localeControl(compact = false) {
 function headerMarkup(active, state) {
   return `<header class="cx-shell-header" data-open="false" data-cx-shell-region="header">
     <div class="cx-container cx-shell-header__inner">
-      <a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-003" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a>
+      <a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-009" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a>
       <nav class="cx-primary-nav" aria-label="Primary">${navLinks(active)}</nav>
       <div class="cx-utilities">${utilityControls(state)}${localeControl()}</div>
       <button class="cx-menu-button" type="button" data-cx-menu data-cx-dialog-open="cx-shell-navigation" aria-controls="cx-shell-navigation" aria-expanded="false" ${aria('Open menu', '打开菜单')}><span ${t('Menu', '菜单')}>Menu</span></button>
@@ -93,6 +93,33 @@ function askDrawerMarkup() {
   </dialog>`;
 }
 
+
+function installAskDrawerNavigation(scope = document) {
+  const form = scope.querySelector('#cx-shell-ask form[action="/knowledge/ask/"]');
+  if (!form || form.dataset.cxAskNavigationInstalled === 'true') return;
+  form.dataset.cxAskNavigationInstalled = 'true';
+  const textarea = form.querySelector('textarea[name="q"]');
+  const openLink = scope.querySelector('#cx-shell-ask a[href="/knowledge/ask/"]');
+  const destination = value => {
+    const q = String(value || '').trim();
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    const suffix = params.toString();
+    return `/knowledge/ask/${suffix ? `?${suffix}` : ''}`;
+  };
+  const syncOpenLink = () => { if (openLink) openLink.href = destination(textarea?.value); };
+  textarea?.addEventListener('input', syncOpenLink);
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const q = String(textarea?.value || '').trim();
+    if (!q) { textarea?.focus(); return; }
+    const dialog = form.closest('dialog');
+    if (dialog?.open) dialog.close('navigate');
+    location.assign(destination(q));
+  });
+  syncOpenLink();
+}
+
 function footerLink(href, en, zh) {
   return `<a href="${href}" ${t(en, zh)}>${en}</a>`;
 }
@@ -121,6 +148,7 @@ export async function initializeCustomerShell(scope = document) {
   installCustomerDialogs(scope);
   installNavigationToggle(scope.querySelector('.cx-shell-header'), scope);
   installLocaleControls(scope);
+  installAskDrawerNavigation(scope);
   installExpandableFigures(scope);
   await hydrateCustomerAssets(scope);
 

@@ -8,15 +8,21 @@ for(const alias of aliases) assert.ok(pkg.scripts[alias],`MISSING_SCRIPT:${alias
 const acceptance=readJson(`${ROOT}/acceptance/kap-w4-w10-knowledge-grounding-acceptance-v1.json`);
 const freeze=readJson(`${ROOT}/freeze/kap-w4-w10-knowledge-grounding-freeze-v1.json`);
 const currentSuccessor=readJson(`${ROOT}/reconciliation/kap-w4-w10-current-grounding-successor-v1.json`);
+const relevanceSuccessor=readJson(`${ROOT}/reconciliation/kap-p1-question-source-relevance-successor-v1.json`);
+const relevanceRuntime=new Map(relevanceSuccessor.runtimeSuccessors.map(item=>[item.path,item]));
 assert.equal(acceptance.baselineCommit,BASELINE); assert.equal(acceptance.status,'ACCEPTED_QUESTION_TO_GROUNDING_PIPELINE_NO_ANSWER_COMPOSITION'); assert.equal(acceptance.nextPermittedWork,'KAP-W11_DETERMINISTIC_ANSWER_FIRST');
 assert.equal(freeze.baselineCommit,BASELINE); assert.equal(freeze.status,'FROZEN_KNOWLEDGE_GROUNDING_RUNTIME_NO_ANSWER_COMPOSITION');
 assert.equal(currentSuccessor.status,'ACTIVE_ADDITIVE_PUBLISHED_COVERAGE_SUCCESSOR');
+assert.equal(relevanceSuccessor.status,'ACTIVE_ADDITIVE_QUESTION_SOURCE_RELEVANCE_SUCCESSOR');
+assert.equal(relevanceSuccessor.authorityBoundary.questionSourceRelevancePolicyChanged,true);
+for(const key of ['knowledgeAuthorityChanged','retrievalAuthorityChanged','answerAuthorityChanged','meaningAdmissionChanged','canonicalKnowledgeMutationAllowed','modelGapFillAllowed','historicalFreezeMutationAllowed']) assert.equal(relevanceSuccessor.authorityBoundary[key],false,`KAP_RELEVANCE_AUTHORITY_DRIFT:${key}`);
+for(const item of relevanceSuccessor.runtimeSuccessors){ assertFile(item.path); assert.equal(sha256(item.path),item.currentSha256,`KAP_RELEVANCE_CURRENT_RUNTIME_DRIFT:${item.path}`); }
 assert.equal(currentSuccessor.predecessor.sha256,freeze.predecessorEvidence.find(item=>item.path===currentSuccessor.predecessor.artifactPath).sha256);
 assertFile(currentSuccessor.current.artifactPath); assert.equal(sha256(currentSuccessor.current.artifactPath),currentSuccessor.current.sha256);
 const currentRelationships=readJson(currentSuccessor.current.artifactPath); assert.equal(currentRelationships.recordCount,currentSuccessor.current.recordCount); assert.equal(currentRelationships.records.length,currentSuccessor.current.recordCount);
 for(const code of currentSuccessor.preservedRelationshipCodes){ const relationship=currentRelationships.records.find(item=>item.relationshipCode===code); assert.ok(relationship,`MISSING_PREDECESSOR_RELATIONSHIP:${code}`); assert.equal(relationship.targetPublished,true); }
 for(const value of Object.values(currentSuccessor.authorityBoundary)) assert.equal(value,false);
-const assertFrozenOrCurrentEvidence=item=>{ if(item.path===currentSuccessor.current.artifactPath){ assert.equal(item.sha256,currentSuccessor.predecessor.sha256); return; } assertEvidence(item); };
+const assertFrozenOrCurrentEvidence=item=>{ if(item.path===currentSuccessor.current.artifactPath){ assert.equal(item.sha256,currentSuccessor.predecessor.sha256); return; } const runtime=relevanceRuntime.get(item.path); if(runtime){ assert.equal(item.sha256,runtime.predecessorSha256,`KAP_RELEVANCE_PREDECESSOR_MISMATCH:${item.path}`); assert.equal(sha256(item.path),runtime.currentSha256,`KAP_RELEVANCE_CURRENT_RUNTIME_DRIFT:${item.path}`); return; } assertEvidence(item); };
 for(const item of freeze.frozenOutputs) assertFrozenOrCurrentEvidence(item); for(const item of freeze.predecessorEvidence) assertFrozenOrCurrentEvidence(item);
 for(const [key,value] of Object.entries(freeze.nonActivation)) assert.equal(value,false,`UNEXPECTED_ACTIVATION:${key}`);
 for(const alias of aliases){ const cmd=pkg.scripts[alias]; const [exe,...args]=cmd.split(' '); assert.equal(exe,'node'); const run=spawnSync(process.execPath,args,{cwd:process.cwd(),encoding:'utf8'}); assert.equal(run.status,0,`${alias} failed\n${run.stdout}\n${run.stderr}`); process.stdout.write(run.stdout); }
