@@ -25,6 +25,21 @@ async function exists(relativePath) {
   }
 }
 
+const P1_DELETE='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+if(await exists(P1_DELETE)){
+  const p1=await readJson(P1_DELETE);
+  if(p1.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){
+    for(const retired of ['reality-dashboard.html'])assert.equal(await exists(retired),false,`P1 retired presentation still exists: ${retired}`);
+    assert.equal(await exists('reality/index.html'),true,'P1 canonical My Reality missing');
+    const currentReality=await read('reality/index.html');
+    assert.ok(currentReality.includes('data-cx-surface="MY_REALITY"'));
+    assert.ok(currentReality.includes('data-cx-panel="continuity"'));
+    assert.equal(await exists('content/registry/m3c-journey-dashboard.json'),true,'historical M3C registry missing');
+    console.log('✓ M3C-W2 Journey Dashboard historical presentation is preserved as governance evidence; P1 browser-accepted canonical My Reality now owns the customer surface and retired HTML is physically deleted.');
+    process.exit(0);
+  }
+}
+
 const requiredFiles = [
   'reality-dashboard.html',
   'assets/css/reality-dashboard.css',

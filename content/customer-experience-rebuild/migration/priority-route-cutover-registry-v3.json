@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "PHI-OS-CX-P1-PRIORITY-ROUTE-CUTOVER-v3.0.0",
+  "work": "P1_PHYSICAL_LEGACY_DELETE",
+  "baselineCommit": "931bf68fd5fa8e8de2b05c72d80cdae55f205ecd",
+  "predecessor": "content/customer-experience-rebuild/migration/priority-route-cutover-registry-v2.json",
+  "status": "P1_ROUTE_CUTOVER_BROWSER_ACCEPTED_PHYSICAL_LEGACY_DELETE_COMPLETE",
+  "currentRouteAuthority": "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json",
+  "surfaces": [
+    {
+      "surfaceId": "MY_REALITY",
+      "canonicalPath": "/reality/",
+      "htmlPath": "reality/index.html",
+      "dataCxSurface": "MY_REALITY",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "replacementAcceptance": "content/customer-experience-rebuild/acceptance/cx-r10-acceptance-v2.json",
+      "legacyRoutes": [
+        "/my-reality",
+        "/my-reality.html",
+        "/reality-dashboard",
+        "/reality-dashboard.html"
+      ]
+    },
+    {
+      "surfaceId": "PERSONAL_REALITY",
+      "canonicalPath": "/perspectives/personal/",
+      "htmlPath": "perspectives/personal/index.html",
+      "dataCxSurface": "PERSONAL_REALITY",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "replacementAcceptance": "content/customer-experience-rebuild/acceptance/cx-r12-acceptance-v2.json",
+      "legacyRoutes": [
+        "/personal-runtime",
+        "/personal-runtime.html",
+        "/professional/personal-runtime",
+        "/professional/personal-runtime/"
+      ]
+    },
+    {
+      "surfaceId": "FINANCIAL_REALITY",
+      "canonicalPath": "/professional/financial/",
+      "htmlPath": "professional/financial/index.html",
+      "dataCxSurface": "FINANCIAL_REALITY",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "replacementAcceptance": "content/customer-experience-rebuild/acceptance/cx-r13-acceptance-v2.json",
+      "legacyRoutes": [
+        "/financial",
+        "/financial-reality",
+        "/financial-reality.html"
+      ]
+    },
+    {
+      "surfaceId": "ASK",
+      "canonicalPath": "/knowledge/ask/",
+      "htmlPath": "knowledge/ask/index.html",
+      "dataCxSurface": "CONTEXTUAL_ASK",
+      "shell": "ONE_GLOBAL_CUSTOMER_SHELL",
+      "replacementAcceptance": "content/customer-experience-rebuild/contextual-ask/acceptance/cx-r9-r2-machine-acceptance-v1.json",
+      "legacyRoutes": [
+        "/ask",
+        "/ask.html",
+        "/knowledge-search",
+        "/knowledge-search.html"
+      ]
+    }
+  ],
+  "codeAcceptance": {
+    "replacementSurfaceCount": 4,
+    "legacyStylesheetsOnP1": 0,
+    "legacyShellImportsOnP1": 0,
+    "oldHeaderMountsOnP1": 0,
+    "oldLogoAuthorityOnP1": 0,
+    "legacyAskUiAuthorityAtCompatibilityPath": 0,
+    "canonicalRedirectsInstalled": true,
+    "shellAskDestination": "/knowledge/ask/"
+  },
+  "askCutover": {
+    "canonicalPath": "/knowledge/ask/",
+    "compatibilityAliases": [
+      "/ask",
+      "/ask.html",
+      "/knowledge-search",
+      "/knowledge-search.html"
+    ],
+    "redirectStatus": 308,
+    "askHtmlState": "COMPATIBILITY_ONLY_NO_ACTIVE_ASK_RUNTIME"
+  },
+  "productionBrowserAcceptance": {
+    "required": true,
+    "status": "HUMAN_ACCEPTED",
+    "evidence": "content/customer-experience-rebuild/acceptance/p1-production-browser-acceptance-v1.json",
+    "matrix": [
+      "DESKTOP_EN_GUEST",
+      "DESKTOP_ZH_GUEST",
+      "DESKTOP_EN_ACCOUNT",
+      "DESKTOP_ZH_ACCOUNT",
+      "MOBILE_EN_GUEST",
+      "MOBILE_ZH_GUEST",
+      "MOBILE_EN_ACCOUNT",
+      "MOBILE_ZH_ACCOUNT"
+    ]
+  },
+  "physicalDelete": {
+    "status": "COMPLETE",
+    "mandatoryAfterAcceptance": true,
+    "performed": true,
+    "plan": "content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json",
+    "deletedPresentationCount": 7
+  },
+  "authorityBoundary": {
+    "backendAuthorityCreated": false,
+    "methodAuthorityCreated": false,
+    "knowledgeAuthorityCreated": false,
+    "currentRealityAuthorityCreated": false,
+    "professionalAuthorityCreated": false,
+    "entitlementAuthorityCreated": false,
+    "routeAuthorityChangedByP1": true,
+    "physicalLegacyDeletePerformed": true
+  },
+  "exit": [
+    "FOUR_PRIORITY_ROUTES_CANONICAL_ACTIVE",
+    "ASK_CANONICAL_IS_KNOWLEDGE_ASK",
+    "ASK_COMPATIBILITY_ALIASES_308",
+    "PRODUCTION_BROWSER_ACCEPTED",
+    "P1_LEGACY_PRESENTATION_PHYSICALLY_DELETED",
+    "ZERO_BACKEND_AUTHORITY_DELETE"
+  ]
+}

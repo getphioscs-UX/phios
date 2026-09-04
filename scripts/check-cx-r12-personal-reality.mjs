@@ -16,7 +16,8 @@ const client=read('assets/customer-ui/js/surfaces/personal-reality.js');
 const finalClient=read('assets/customer-ui/js/personal-products/final-personal-reading-experience.js');
 const api=read('functions/api/customer-personal-reality.js');
 const redirects=read('_redirects');
-const legacyDelete=json(`${base}/migration/p1-legacy-delete-plan-v1.json`);
+const p1DeleteV2Path=`${base}/migration/p1-legacy-delete-plan-v2.json`;
+const legacyDelete=fs.existsSync(path.join(root,p1DeleteV2Path))?json(p1DeleteV2Path):json(`${base}/migration/p1-legacy-delete-plan-v1.json`);
 const contract=json(`${base}/contracts/personal-reality-customer-workspace-contract-v1.json`);
 const authority=json(`${base}/authority/personal-reality-customer-surface-v2.json`);
 const acceptanceV1=json(`${base}/acceptance/cx-r12-acceptance-v1.json`);
@@ -99,8 +100,8 @@ assert.match(client,/customerSelected:true/);
 // W8 / P1 boundary: legacy route is compatibility-only; canonical route has zero legacy CSS.
 for(const route of ['/personal-runtime','/personal-runtime.html','/professional/personal-runtime','/professional/personal-runtime/'])assert.ok(redirects.includes(`${route} /perspectives/personal/ 308`),`missing Personal compatibility redirect ${route}`);
 for(const bad of ['public-shell-v2','wpr-personal-runtime.css','runtime-spine.css','ast-production-meaning.css','bzr-production-meaning.css','num-production-meaning.css','zi-wei-dynamic-runtime.css','/assets/css/'])assert.equal(html.includes(bad),false,`canonical Personal route has legacy presentation dependency: ${bad}`);
-assert.ok(legacyDelete.candidates.some(item=>item.path==='personal-runtime.html'&&item.deleteAfter==='P1_BROWSER_ACCEPTED'));
-assert.equal(fs.existsSync(path.join(root,'personal-runtime.html')),true,'physical legacy file remains until P1 browser acceptance');
+assert.ok(legacyDelete.candidates.some(item=>item.path==='personal-runtime.html'));
+if(legacyDelete.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){assert.equal(fs.existsSync(path.join(root,'personal-runtime.html')),false,'P1 physical delete must remove Personal legacy presentation');assert.equal(fs.existsSync(path.join(root,'professional/personal-runtime/index.html')),false,'P1 physical delete must remove PX2 Personal legacy presentation');}else{assert.equal(fs.existsSync(path.join(root,'personal-runtime.html')),true,'physical legacy file remains until P1 browser acceptance');}
 
 assert.equal(acceptance.status,'ACCEPTED_PERSONAL_REALITY_CURRENT_MAIN_SUCCESSOR');
 assert.equal(acceptance.exit,'PERSONAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE');
@@ -113,5 +114,5 @@ assert.equal(acceptance.readyForCxR13,true);
 
 console.log('✓ CX-R12 Personal Reality current-main successor passed at 74fba1c: five-stage customer input, customer-first overview, five method-hidden result tabs, returned-perspective disclosure and explicit My Reality handoff are active.');
 console.log('  PPR/method meaning remains upstream; profile scoring is not recreated; method availability is not hard-coded; missing overview areas remain open rather than inferred.');
-console.log('  Legacy personal-runtime routes remain redirected compatibility only; canonical Personal Reality loads zero legacy CSS; physical legacy deletion stays deferred to P1 production browser acceptance.');
+console.log(legacyDelete.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'?'  Legacy Personal Runtime presentation files are physically deleted after browser acceptance; compatibility routes remain redirects to canonical Personal Reality.':'  Legacy personal-runtime routes remain redirected compatibility only; canonical Personal Reality loads zero legacy CSS; physical legacy deletion stays deferred to P1 production browser acceptance.');
 console.log('✓ CX-R12 ACCEPTED: PERSONAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R13 · NO_NEW_P1_ROUTE_CUTOVER');

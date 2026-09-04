@@ -28,7 +28,12 @@ const paths = Object.freeze({
   homepageRuntime: 'assets/js/pages/home-production.js'
 });
 
+const p1DeletePath = 'content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+const p1PresentationSuccessorPath = 'content/knowledge/answer-projection/reconciliation/kap-p1-physical-delete-presentation-successor-v1.json';
+const p1Deleted = fs.existsSync(p1DeletePath) && read(p1DeletePath).status === 'PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE';
+
 for (const path of Object.values(paths)) assert.ok(fs.existsSync(path), `MISSING:${path}`);
+if (p1Deleted) assert.ok(fs.existsSync(p1PresentationSuccessorPath), `MISSING:${p1PresentationSuccessorPath}`);
 
 const pkg = read(paths.package);
 for (const step of ['11', '12', '13', '14', '15', '16', '17']) {
@@ -82,8 +87,18 @@ for (const boundary of Object.values(presentationSuccessor.boundaries)) assert.e
 
 const presentationRecords = new Map(presentationSuccessor.presentationSurfaces.map(item => [item.path, item]));
 for (const record of presentationSuccessor.presentationSurfaces) {
-  assert.ok(fs.existsSync(record.path), `KAP_CURRENT_PRESENTATION_MISSING:${record.path}`);
   assert.equal(record.wholeFileSha256Required, false, `KAP_PRESENTATION_SHA_POLICY_DRIFT:${record.path}`);
+  if (p1Deleted && record.path === 'knowledge-search.html') {
+    assert.equal(fs.existsSync(record.path), false, 'P1 physical delete must remove the retired Knowledge Search presentation');
+    const p1 = read(p1PresentationSuccessorPath);
+    assert.equal(p1.status, 'ACTIVE_KAP_RUNTIME_PRESERVED_CONTEXTUAL_ASK_PRESENTATION_CURRENT');
+    assert.ok(p1.deletedPresentations.includes('knowledge-search.html'));
+    assert.equal(fs.existsSync(p1.canonicalCustomerSurface), true);
+    const source = text(p1.canonicalCustomerSurface);
+    for (const marker of ['data-cx-surface="CONTEXTUAL_ASK"','data-cx-contextual-ask-form','data-cx-answer-limits','data-cx-basis-groups']) assert.ok(source.includes(marker), `KAP_P1_PRESENTATION_MARKER_MISSING:${marker}`);
+    continue;
+  }
+  assert.ok(fs.existsSync(record.path), `KAP_CURRENT_PRESENTATION_MISSING:${record.path}`);
   if (Array.isArray(record.requiredMarkers)) {
     const source = text(record.path);
     for (const marker of record.requiredMarkers) assert.ok(source.includes(marker), `KAP_CURRENT_PRESENTATION_MARKER_MISSING:${record.path}:${marker}`);

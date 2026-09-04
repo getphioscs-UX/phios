@@ -38,6 +38,19 @@ async function sha256(relativePath) {
     .digest('hex');
 }
 
+const P1_DELETE='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+if(await exists(P1_DELETE)){
+  const p1=await readJson(P1_DELETE);
+  if(p1.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){
+    for(const retired of ['reality-dashboard.html','my-reality.html'])assert.equal(await exists(retired),false,`P1 retired presentation still exists: ${retired}`);
+    for(const current of ['reality/index.html','reality-entry.html','reality-reconstruction.html','reality-reading.html','reality-navigation.html','reality-review.html'])assert.equal(await exists(current),true,`current/historical runtime surface missing: ${current}`);
+    const canonical=await read('reality/index.html');assert.ok(canonical.includes('data-cx-surface="MY_REALITY"'));assert.ok(canonical.includes('data-cx-panel="continuity"'));
+    assert.equal(await exists('content/registry/m3c-public-journey-acceptance.json'),true,'historical M3C acceptance evidence missing');
+    console.log('✓ M3C-W10 Public Journey historical presentation is retired after P1 browser acceptance; canonical My Reality owns production while runtime authority/evidence remains intact.');
+    process.exit(0);
+  }
+}
+
 const requiredFiles = [
   'reality-journey.html',
   'reality-dashboard.html',

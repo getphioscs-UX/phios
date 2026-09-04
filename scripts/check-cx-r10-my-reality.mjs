@@ -96,10 +96,12 @@ assert.equal(handoffDenied.status,403);assert.equal((await handoffDenied.json())
 assert.equal(retirement.status,'LEGACY_UI_AUTHORITY_RETIRED_FILE_PRESERVED_UNTIL_P1_BROWSER_ACCEPTANCE');
 assert.equal(retirement.rules.physicalDeletePerformedByR10,false);
 assert.equal(retirement.rules.physicalDeleteBlockedUntilP1ProductionBrowserAcceptance,true);
-assert.ok(fs.existsSync('reality-dashboard.html'),'legacy dashboard file must remain until P1 browser acceptance');
+const p1DeletePath='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+const p1Delete=fs.existsSync(p1DeletePath)?json(p1DeletePath):null;
+if(p1Delete?.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){assert.equal(fs.existsSync('reality-dashboard.html'),false,'P1 physical delete must remove legacy dashboard after browser acceptance');}else{assert.ok(fs.existsSync('reality-dashboard.html'),'legacy dashboard file must remain until P1 browser acceptance');}
 const redirects=read('_redirects');
 for(const legacy of ['/my-reality','/reality-dashboard'])assert.ok(redirects.includes(`${legacy} /reality/ 308`),`pre-existing compatibility redirect missing ${legacy}`);
 
 console.log('✓ CX-R10 My Reality successor passed at 9840757: one R20-projected workspace now covers overview, canonical Reality, perspectives, reading, directions, confirmed actions, session observation, review, history, reports and continuity.');
 console.log('  Possible directions are never promoted to actions; unconfirmed actions are hidden; observation stays session-only; Journey remains progression; no backend, Reality, Navigation, Report or persistence authority is created.');
-console.log('  Legacy Reality Dashboard UI authority is retired but its physical file remains preserved until P1 production browser acceptance.');
+console.log(p1Delete?.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'?'  Legacy Reality Dashboard UI authority is retired and the physical presentation has been deleted after P1 browser acceptance.':'  Legacy Reality Dashboard UI authority is retired but its physical file remains preserved until P1 production browser acceptance.');

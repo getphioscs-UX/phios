@@ -11,6 +11,8 @@ import { buildRealityContinuityFromMemory } from '../functions/runtime/continuit
 import { validateRealityContinuityContract } from '../functions/runtime/continuity/reality-continuity-contract.js';
 
 const root = process.cwd();
+const p1DeletePath=path.join(root,'content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json');
+const p1Deleted=fs.existsSync(p1DeletePath)&&JSON.parse(fs.readFileSync(p1DeletePath,'utf8')).status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE';
 const readJson = file => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
 const acceptance = readJson('content/registry/runtime-v1-acceptance.json');
 const fixtureDir = path.join(root, 'tests/fixtures/runtime-journeys');
@@ -33,6 +35,7 @@ const pageFiles = [
   'my-reality.html'
 ];
 for (const file of pageFiles) {
+  if(p1Deleted&&file==='my-reality.html')continue;
   assert.equal(fs.existsSync(path.join(root, file)), true, `Journey page missing: ${file}`);
   assert.match(fs.readFileSync(path.join(root, file), 'utf8'), /viewport/i, `Responsive viewport metadata missing: ${file}`);
 }

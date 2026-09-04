@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "PHI-OS-P1-PHYSICAL-LEGACY-DELETE-AUDIT-v1.0.0",
+  "work": "P1_PHYSICAL_LEGACY_DELETE",
+  "baselineCommit": "931bf68fd5fa8e8de2b05c72d80cdae55f205ecd",
+  "status": "RECONCILED",
+  "deleted": [
+    {
+      "path": "my-reality.html",
+      "surface": "MY_REALITY",
+      "redirects": [
+        "/my-reality",
+        "/my-reality.html"
+      ]
+    },
+    {
+      "path": "reality-dashboard.html",
+      "surface": "MY_REALITY",
+      "redirects": [
+        "/reality-dashboard",
+        "/reality-dashboard.html"
+      ]
+    },
+    {
+      "path": "personal-runtime.html",
+      "surface": "PERSONAL_REALITY",
+      "redirects": [
+        "/personal-runtime",
+        "/personal-runtime.html"
+      ]
+    },
+    {
+      "path": "professional/personal-runtime/index.html",
+      "surface": "PERSONAL_REALITY",
+      "redirects": [
+        "/professional/personal-runtime",
+        "/professional/personal-runtime/"
+      ]
+    },
+    {
+      "path": "financial-reality.html",
+      "surface": "FINANCIAL_REALITY",
+      "redirects": [
+        "/financial-reality",
+        "/financial-reality.html"
+      ]
+    },
+    {
+      "path": "ask.html",
+      "surface": "ASK",
+      "redirects": [
+        "/ask",
+        "/ask.html"
+      ]
+    },
+    {
+      "path": "knowledge-search.html",
+      "surface": "ASK",
+      "redirects": [
+        "/knowledge-search",
+        "/knowledge-search.html"
+      ]
+    }
+  ],
+  "addedBeyondV1Plan": [
+    "professional/personal-runtime/index.html",
+    "ask.html"
+  ],
+  "reasonForAddedCandidates": {
+    "professional/personal-runtime/index.html": "P1 v2 route registry already redirects both professional Personal Runtime aliases to canonical Personal Reality and the physical page still consumed the retired PX2 shell.",
+    "ask.html": "P1 route cutover reduced this file to compatibility-only; after browser acceptance the direct 308 /ask.html route makes the physical shim unnecessary."
+  },
+  "notDeleted": [
+    "functions/",
+    "runtime/",
+    "content/professional/",
+    "content/financial/",
+    "content/knowledge/",
+    "content/reality/",
+    "report/runtime authorities"
+  ],
+  "next": "P1_POST_CUTOVER_HUMAN_PRODUCTION_TEST"
+}

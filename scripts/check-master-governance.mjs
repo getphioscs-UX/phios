@@ -88,7 +88,21 @@ for (const mapping of contract.canonicalJourneyMapping) {
     );
   }
   for (const surface of mapping.technicalSurfaces) {
-    await fs.access(path.join(root, surface));
+    try {
+      await fs.access(path.join(root, surface));
+    } catch (error) {
+      const p1Path = 'content/customer-experience-rebuild/reconciliation/p1-master-governance-presentation-successor-v1.json';
+      let replacement = null;
+      try {
+        const p1 = await readJson(p1Path);
+        const acceptance = await readJson(p1.physicalDeleteAcceptance);
+        if (p1.status === 'ACTIVE_PRESENTATION_SUCCESSOR_FROZEN_GOVERNANCE_PRESERVED' && acceptance.status === 'MACHINE_ACCEPTED_PHYSICAL_LEGACY_DELETE_COMPLETE') {
+          replacement = p1.presentationReplacements.find(item => item.historicalSurface === surface);
+        }
+      } catch {}
+      assert(replacement, `Missing governed journey surface without P1 presentation successor: ${surface}`);
+      await fs.access(path.join(root, replacement.currentSurface));
+    }
   }
 }
 

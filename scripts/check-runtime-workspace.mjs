@@ -1,5 +1,8 @@
 import fs from 'node:fs';
 
+const p1DeletePath='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+const p1Deleted=fs.existsSync(p1DeletePath)&&JSON.parse(fs.readFileSync(p1DeletePath,'utf8')).status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE';
+
 const required = [
   'assets/js/modules/runtime-workspace.js',
   'assets/js/modules/runtime-workspace-state.js',
@@ -13,9 +16,11 @@ const required = [
   'assets/js/locales/en/thesis.js',
   'assets/js/locales/zh-Hans/thesis.js'
 ];
-for (const file of required) if (!fs.existsSync(file)) throw new Error(`Missing ${file}`);
+for (const file of required) if (!(p1Deleted&&file==='my-reality.html')&&!fs.existsSync(file)) throw new Error(`Missing ${file}`);
+if(p1Deleted&&!fs.existsSync('reality/index.html'))throw new Error('P1 canonical My Reality missing after legacy delete');
 
 for (const file of ['reality-entry.html','reality-reconstruction.html','reality-reading.html','reality-navigation.html','reality-review.html','my-reality.html']) {
+  if(p1Deleted&&file==='my-reality.html')continue;
   const html = fs.readFileSync(file, 'utf8');
   if (!html.includes('data-runtime-workspace')) throw new Error(`${file} missing Runtime Workspace`);
 }
@@ -50,4 +55,4 @@ for (const token of [
   'appendRuntimeHistory'
 ]) if (!engine.includes(token)) throw new Error(`Runtime Transition Engine missing ${token}`);
 
-console.log('Runtime Workspace and Transition Engine: passed.');
+console.log(p1Deleted?'Runtime Workspace and Transition Engine: passed; retired my-reality.html presentation is physically deleted and canonical /reality/ owns the customer workspace.':'Runtime Workspace and Transition Engine: passed.');

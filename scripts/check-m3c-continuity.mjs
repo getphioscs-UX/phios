@@ -16,6 +16,21 @@ const sha256 = async relative => crypto.createHash('sha256')
   .update(await read(relative), 'utf8')
   .digest('hex');
 
+const P1_DELETE='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+if(await exists(P1_DELETE)){
+  const p1=await json(P1_DELETE);
+  if(p1.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){
+    for(const retired of ['my-reality.html'])assert.equal(await exists(retired),false,`P1 retired presentation still exists: ${retired}`);
+    assert.equal(await exists('reality/index.html'),true,'P1 canonical My Reality missing');
+    const currentReality=await read('reality/index.html');
+    assert.ok(currentReality.includes('data-cx-surface="MY_REALITY"'));
+    assert.ok(currentReality.includes('data-cx-panel="continuity"'));
+    assert.equal(await exists('assets/js/pages/my-reality.js'),true,'historical runtime controller missing');
+    console.log('✓ M3C-W9 Continuity historical customer presentation retired after P1 browser acceptance; runtime evidence remains and canonical My Reality now owns the customer surface.');
+    process.exit(0);
+  }
+}
+
 const required = [
   'my-reality.html',
   'assets/css/review-memory-continuity.css',

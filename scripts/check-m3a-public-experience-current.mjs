@@ -22,6 +22,16 @@ const HPC2_SCENES = 'content/web/homepage/hpc2/homepage-scene-registry-v2.json';
 const HPC2_CSS = 'assets/css/hpc2-pre-home-visuals.css';
 const STAGE16_SUCCESSOR = 'content/web-production/px2/successors/px2-stage16-public-ia-successor-v2.json';
 
+const P1_DELETE='content/customer-experience-rebuild/migration/p1-legacy-delete-plan-v2.json';
+if(fs.existsSync(P1_DELETE)&&read(P1_DELETE).status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'){
+  const current=read('content/customer-experience-rebuild/migration/px2-cx-p1-public-ia-successor-v3.json');
+  assert.equal(current.status,'ACTIVE_P1_BROWSER_ACCEPTED_PHYSICAL_LEGACY_DELETE_COMPLETE');
+  for(const page of ['reality/index.html','perspectives/personal/index.html','professional/financial/index.html','knowledge/ask/index.html']){assert.ok(fs.existsSync(page),`P1 current surface missing: ${page}`);assert.ok(text(page).includes('/assets/customer-ui/js/shell.js'),`${page} missing current CX shell`);}
+  for(const retired of ['my-reality.html','reality-dashboard.html','personal-runtime.html','professional/personal-runtime/index.html','financial-reality.html','knowledge-search.html','ask.html'])assert.equal(fs.existsSync(retired),false,`P1 retired presentation still exists: ${retired}`);
+  console.log('✓ M3A current public experience successor: Stage16 presentation evidence is preserved while P1 canonical surfaces own production and retired physical pages are deleted.');
+  process.exit(0);
+}
+
 for (const path of [HISTORICAL_CHECKER, RECONCILIATION, HPC2_ACCEPTANCE, HPC2_SCENES, HPC2_CSS, STAGE16_SUCCESSOR]) {
   assert.ok(fs.existsSync(path), `Missing M3A successor dependency: ${path}`);
 }
