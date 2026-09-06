@@ -77,9 +77,22 @@ for (const behavior of [
 
 const px2Successor = await readJson('content/web-production/px2/successors/px2-w11-checker-successor-v1.json');
 assert.equal(px2Successor.status, 'ACTIVE');
-const px2Pages = new Set(['index.html','library.html','articles.html','services.html','knowledge-search.html','books/index.html','professional/personal-runtime/index.html','professional/financial/index.html','reality/index.html']);
+const cxHome = await readJson('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
+assert.equal(cxHome.route, '/');
+assert.equal(cxHome.status, 'HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED');
+assert.equal(cxHome.invariants.legacyStylesheetDependency, false);
+assert.equal(cxHome.invariants.legacyShellDependency, false);
+const px2Pages = new Set(['library.html','articles.html','services.html','knowledge-search.html','books/index.html','professional/personal-runtime/index.html','professional/financial/index.html','reality/index.html']);
 for (const page of fixture.publicPages) {
   const source = await read(page);
+  if (page === 'index.html') {
+    assert.ok(source.includes('/assets/customer-ui/tokens.css'), 'index.html must consume the CX shared design tokens');
+    assert.ok(source.includes('/assets/customer-ui/base.css'), 'index.html must consume the CX shared base stylesheet');
+    assert.ok(source.includes('/assets/customer-ui/js/shell.js'), 'index.html must consume the CX shared shell successor');
+    assert.ok(!source.includes('/assets/css/phios-public-v2.css'), 'index.html must not reintroduce the superseded PX2 stylesheet');
+    assert.ok(!source.includes('/assets/js/public-shell-v2.js'), 'index.html must not reintroduce the superseded PX2 shell');
+    continue;
+  }
   if (px2Pages.has(page)) {
     assert.ok(source.includes('/assets/css/phios-public-v2.css'), `${page} must consume the PX2 shared shell stylesheet`);
     assert.ok(source.includes('/assets/js/public-shell-v2.js'), `${page} must consume the PX2 shared shell script`);

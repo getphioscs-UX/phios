@@ -320,3 +320,14 @@
 @media(prefers-reduced-motion:reduce){.cx-ecr-mandala__node.is-unlocked path,.cx-ecr-mandala__capability.is-unlocked circle,.cx-ecr-mandala__driver.is-unlocked line{animation:none!important}.cx-ecr-mandala__selected-path path{filter:none}.cx-ecr-mandala.is-mandala-fullscreen{scroll-behavior:auto}}
 @media(forced-colors:active){.cx-ecr-mandala__selected-path path,.cx-ecr-mandala__selected-path circle{stroke:Highlight}.cx-ecr-mandala__node[data-visual-state="PRIMARY_ACTIVE"] path,.cx-ecr-mandala__capability.is-primary circle{stroke:Highlight}.cx-ecr-mandala__node[data-visual-state="LOCKED_DEPTH"] path{stroke:GrayText}.cx-ecr-mandala__value-ladder .is-current{border-color:Highlight}}
 @media print{.cx-ecr-mandala__fullscreen-controls,.cx-ecr-mandala__topic-lens,.cx-ecr-mandala__value-ladder{display:none!important}.cx-ecr-mandala__cross-evidence-slot,.cx-ecr-mandala__reality-slot{grid-column:auto}.cx-ecr-mandala__node.is-unlocked path,.cx-ecr-mandala__capability.is-unlocked circle,.cx-ecr-mandala__driver.is-unlocked line{animation:none!important}.cx-ecr-mandala__node[data-visual-state="LOCKED_DEPTH"]{display:none}.cx-ecr-mandala.is-mandala-fullscreen{position:static;display:block!important;box-shadow:none}}
+
+/* ECR-TOPIC-R1 governed topic projection */
+.cx-ecr-mandala__topic-lens{align-items:stretch}
+.cx-ecr-mandala__topic-lens-head{flex:1 1 100%;display:grid;gap:.2rem}
+.cx-ecr-mandala__topic-buttons{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.cx-ecr-mandala__topic-lens button{display:inline-grid;grid-template-columns:auto auto;gap:.4rem;align-items:center}
+.cx-ecr-mandala__topic-lens button small{font-size:.62rem;letter-spacing:.06em;color:var(--cx-muted,#6b675f)}
+.cx-ecr-mandala__topic-lens button[data-topic-classification="PRIMARY"] small{font-weight:800;color:var(--ecr-primary)}
+.cx-ecr-mandala__topic-lens button[data-topic-classification="LIMITED"]{border-style:dashed;opacity:.72}
+.cx-ecr-mandala__topic-detail{flex:1 1 100%;padding:.55rem .65rem;border-radius:10px;background:var(--cx-surface,#fff);font-size:.78rem;line-height:1.5;color:var(--cx-muted,#6b675f)}
+@media(max-width:620px){.cx-ecr-mandala__topic-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.cx-ecr-mandala__topic-lens button{justify-content:space-between}.cx-ecr-mandala__topic-detail{font-size:.82rem}}
