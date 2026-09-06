@@ -1,3 +1,4 @@
+import {mountPhiMandalaCrossEvidenceRail} from './mandala-renderer.js';
 import {esc} from '../../surfaces/runtime-ui.js';
 
 export const ECR_HD_CUSTOMER_COMPARISON_RENDERER_VERSION='PHI-OS-ECR-R3-ECR-HD-CUSTOMER-COMPARISON-RENDERER-v1.0.0';
@@ -104,7 +105,7 @@ function installSection(host,comparison){
   const reading=host?.querySelector?.('[data-ppr-r3-specialist-reading-mount]');
   if(!reading)return false;
   const existing=reading.querySelector('[data-ecr-hd-comparison="true"]');
-  if(existing){installNavButton(host,comparison);return true}
+  if(existing){installNavButton(host,comparison);mountPhiMandalaCrossEvidenceRail(comparison,host);return true}
   const html=renderEcrHumanDesignComparison(comparison);
   if(!html)return false;
   const cards=reading.querySelector('#ecr-section-11');
@@ -112,6 +113,7 @@ function installSection(host,comparison){
   else if(host.dataset.pprR3RendererState==='SPECIALIST_RENDERED')reading.insertAdjacentHTML('beforeend',html);
   else return false;
   installNavButton(host,comparison);
+  mountPhiMandalaCrossEvidenceRail(comparison,host);
   return true;
 }
 

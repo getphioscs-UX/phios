@@ -1,3 +1,4 @@
+import {mountPhiMandalaRealityBridgeVisual} from './mandala-renderer.js';
 import {esc} from '../../surfaces/runtime-ui.js';
 
 export const ECR_HD_REALITY_BRIDGE_RENDERER_VERSION='PHI-OS-ECR-R3-ECR-HD-REALITY-BRIDGE-RENDERER-v1.0.0';
@@ -65,7 +66,7 @@ function installSection(host,bridge){
   const reading=host?.querySelector?.('[data-ppr-r3-specialist-reading-mount]');
   if(!reading)return false;
   const existing=reading.querySelector('[data-ecr-reality-bridge="true"]');
-  if(existing){installNavButton(host,bridge);installInteractions(existing);return true}
+  if(existing){installNavButton(host,bridge);installInteractions(existing);mountPhiMandalaRealityBridgeVisual(bridge,host);return true}
   const html=renderEcrHumanDesignRealityBridge(bridge);
   if(!html)return false;
   const comparison=reading.querySelector('[data-ecr-hd-comparison="true"]');
@@ -77,6 +78,7 @@ function installSection(host,bridge){
   const section=reading.querySelector('[data-ecr-reality-bridge="true"]');
   installInteractions(section);
   installNavButton(host,bridge);
+  mountPhiMandalaRealityBridgeVisual(bridge,host);
   return true;
 }
 export function collectEcrHumanDesignRealityBridgeResponse(productsRoot){

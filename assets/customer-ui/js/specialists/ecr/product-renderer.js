@@ -16,7 +16,7 @@ export function renderEcrProduct({product}={}){
   if(product?.methodId!=='ECR'||product?.productType!=='PHI_CONFIGURATION_READING')return Object.freeze({status:'NOT_HANDLED',reason:'ECR_PRODUCT_REQUIRED'});
   const mandala=arr(product.visuals).find(item=>item.type==='ECR_PHI_MANDALA_V1');
   const cards=arr(product.visuals).find(item=>item.type==='ECR_SIX_CARD_SPREAD');
-  const visualHtml=mandala?[renderPhiMandalaVisual(mandala),renderCalculationStoryVisual(mandala),renderCoordinateStoryVisual(mandala),renderDriverProfileVisual(mandala),renderMotionConfigurationVisual(mandala),renderActivationTimelineVisual(mandala)].join(''):'';
+  const visualHtml=mandala?[renderPhiMandalaVisual(mandala,{experienceState:product?.publication?.mandalaExperienceState||'PAID_DEPTH',topicProjection:product?.publication?.mandalaTopicProjection||null}),renderCalculationStoryVisual(mandala),renderCoordinateStoryVisual(mandala),renderDriverProfileVisual(mandala),renderMotionConfigurationVisual(mandala),renderActivationTimelineVisual(mandala)].join(''):'';
   return Object.freeze({
     status:'RENDERED',
     navigationHtml:mandala?renderEcrNavigation(product):'',
