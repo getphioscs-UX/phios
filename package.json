@@ -695,6 +695,8 @@
     "check:cx-r3": "npm run check:cx-r2 && node scripts/check-cx-r3-customer-design-system.mjs && npm run check:cx-no-legacy-css && npm run check:cx-no-legacy-selectors && npm run check:cx-no-old-component-copy",
     "check:cx-r4": "npm run check:cx-r3 && node scripts/check-cx-r4-visual-assets.mjs",
     "check:cx-r5": "npm run check:cx-r4 && node scripts/check-cx-r5-global-shell.mjs",
+    "check:cx-home": "node scripts/check-cx-r6-homepage.mjs",
+    "check:cx-r6": "npm run check:cx-r5 && npm run check:cx-home",
     "check:cx-r9": "npm run check:cx-r13 && node scripts/check-cx-r9-ask.mjs",
     "check:cx-symbolic-figure": "node scripts/check-cx-symbolic-figure-presentation.mjs",
     "check:dar": "npm run check:dar-w0-w14 && npm run check:dar-w15-w24",

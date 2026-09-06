@@ -1,139 +1,260 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="PHI OS 是一个把五册知识、现实导航、专业边界与持续性连接起来的 Reality Navigation Platform。">
-  <title>PHI OS — Reality Navigation Platform</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="PHI OS brings questions, perspectives, knowledge and real-life context into one place for reality navigation.">
+  <title>PHI OS — Reality Navigation</title>
   <link rel="canonical" href="/">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/phios-public-v2.css">
-  <link rel="stylesheet" href="/assets/css/client-intent-router.css">
+  <link rel="stylesheet" href="/assets/customer-ui/tokens.css">
+  <link rel="stylesheet" href="/assets/customer-ui/base.css">
+  <link rel="stylesheet" href="/assets/customer-ui/typography.css">
+  <link rel="stylesheet" href="/assets/customer-ui/layout.css">
+  <link rel="stylesheet" href="/assets/customer-ui/components.css">
+  <link rel="stylesheet" href="/assets/customer-ui/motion.css">
+  <link rel="stylesheet" href="/assets/customer-ui/utilities.css">
+  <link rel="stylesheet" href="/assets/customer-ui/surfaces/home.css">
 </head>
-<body data-puxr-nav="" data-px2-surface="HOME">
-  <a class="puxr-skip" href="#main">Skip to content</a>
-  <div data-puxr-header></div>
-  <main id="main" class="puxr-main">
-    <section class="puxr-hero">
-      <div class="puxr-wrap puxr-hero__grid">
-        <div>
-          <p class="puxr-eyebrow">
-            <span class="puxr-lang-zh">Reality Navigation Platform</span>
-            <span class="puxr-lang-en">Reality Navigation Platform</span>
-          </p>
-          <h1 class="puxr-title">
-            <span class="puxr-lang-block puxr-lang-zh">今天，你想看清什么？</span>
-            <span class="puxr-lang-block puxr-lang-en">What do you want to understand today?</span>
-          </h1>
-          <p class="puxr-lead">
-            <span class="puxr-lang-block puxr-lang-zh">搜索资料、询问 AI、从个人读取看见另一种视角、重建财务现实，或把这些线索带回同一个 My Reality。PHI OS 的价值不是再给你一个答案，而是把分散的答案重新连接。</span>
-            <span class="puxr-lang-block puxr-lang-en">Search what exists, ask AI, use personal readings as bounded lenses, reconstruct financial reality, or bring these signals back into one My Reality. PHI OS reconnects fragmented answers instead of adding another disconnected answer.</span>
-          </p>
-          <div data-cir-root>
-            <form class="px2-intent" data-cir-form><input name="q" data-cir-question maxlength="500" placeholder="事业、关系、金钱、自己、一个正在发生的问题…" aria-label="What are you trying to understand?"><button type="submit">Ask PHI OS →</button></form>
-            <div class="cir-intents" aria-label="Question intent">
-              <button class="cir-intent" type="button" data-cir-intent="CURRENT" aria-pressed="false"><strong>我的当前处境</strong><span>My current situation</span></button>
-              <button class="cir-intent" type="button" data-cir-intent="DECISION" aria-pressed="false"><strong>一个决定</strong><span>A decision</span></button>
-              <button class="cir-intent" type="button" data-cir-intent="RELATIONSHIP" aria-pressed="false"><strong>一段关系</strong><span>A relationship</span></button>
-              <button class="cir-intent" type="button" data-cir-intent="TIME" aria-pressed="false"><strong>我的长期方向</strong><span>My longer-term direction</span></button>
-              <button class="cir-intent" type="button" data-cir-intent="DOMAIN" aria-pressed="false"><strong>某个生活领域</strong><span>A life area</span></button>
-              <button class="cir-intent" type="button" data-cir-intent="STRUCTURE" aria-pressed="false"><strong>我的运行模式</strong><span>My operating pattern</span></button>
-            </div>
-            <p class="cir-method-boundary"><span class="puxr-lang-zh">你不需要先选择 Astrology、BaZi、Zi Wei 或 Numerology。需要 Method 时，由 Lens Router 在 capability gate 后决定。</span><span class="puxr-lang-en">You do not need to choose Astrology, BaZi, Zi Wei or Numerology first. When a method is useful, the Lens Router decides after the capability gate.</span></p>
-            <p class="cir-status" data-cir-status aria-live="polite"></p>
+<body class="cx-home" data-cx-surface="HOME" data-cx-nav="">
+  <a class="cx-skip" href="#main">Skip to content</a>
+  <div data-cx-header></div>
+
+  <main id="main" class="cx-home__main">
+    <section class="cx-home-hero" data-cx-home-section="H01" aria-labelledby="cx-home-title">
+      <div class="cx-container--wide cx-home-hero__grid">
+        <div class="cx-home-hero__copy cx-stack cx-stack--loose">
+          <div class="cx-stack">
+            <p class="cx-eyebrow" data-cx-en="REALITY NAVIGATION" data-cx-zh="现实导航">REALITY NAVIGATION</p>
+            <p class="cx-home-hero__opening cx-body-lg" data-cx-en="Reality keeps changing." data-cx-zh="现实一直在变化。">Reality keeps changing.</p>
+            <h1 id="cx-home-title" class="cx-display-xl cx-home-hero__title">
+              <span data-cx-en="Understand where you are." data-cx-zh="看清你在哪里。">Understand where you are.</span>
+              <span data-cx-en="See what matters." data-cx-zh="理解什么正在发生。">See what matters.</span>
+              <span data-cx-en="Choose what comes next." data-cx-zh="决定下一步怎样走。">Choose what comes next.</span>
+            </h1>
+          </div>
+          <p class="cx-lead" data-cx-en="Bring a real situation, a question, or another perspective into one clearer place—without turning every source into the same kind of answer." data-cx-zh="把正在发生的事、一个问题，或另一种视角带到同一个更清楚的位置，同时保留不同来源原本的性质。">Bring a real situation, a question, or another perspective into one clearer place—without turning every source into the same kind of answer.</p>
+          <div class="cx-cluster cx-home__actions">
+            <a class="cx-button cx-button--primary" href="/reality/" data-cx-en="Start with my reality" data-cx-zh="从我的现实开始">Start with my reality</a>
+            <a class="cx-button cx-button--secondary" href="/knowledge/ask/">Ask PHI OS</a>
           </div>
         </div>
-        <aside class="puxr-hero__card">
-          <h3><span class="puxr-lang-zh">从问题开始，不从工具开始</span><span class="puxr-lang-en">Start with the question, not the tool</span></h3>
-          <p class="big"><span class="puxr-lang-block puxr-lang-zh">PHI OS 会先区分当前现实、决定、关系、长期方向、生活领域与运行模式，再决定是否需要知识、Reality context 或某个受治理 Lens。</span><span class="puxr-lang-block puxr-lang-en">PHI OS first distinguishes current reality, decisions, relationships, longer-term direction, life areas and operating patterns, then decides whether knowledge, Reality context or a governed Lens is useful.</span></p>
-          <p class="puxr-micro"><span class="puxr-lang-zh">Reality Journey 是复杂与持续性个案的深层 workflow，不是第一次访问必须进入的大系统。</span><span class="puxr-lang-en">Reality Journey is a deeper workflow for complex or continuing cases—not a mandatory first-visit system.</span></p>
-        </aside>
+        <figure class="cx-home-hero__visual cx-visual">
+          <img data-cx-asset="HERO-001" alt="" aria-hidden="true">
+          <span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden data-cx-en="The visual is temporarily unavailable." data-cx-zh="视觉资源暂时无法显示。">The visual is temporarily unavailable.</span>
+        </figure>
       </div>
     </section>
 
-    <section class="puxr-band">
-      <div class="puxr-wrap puxr-band__grid">
-        <div><small>01</small><strong><span class="puxr-lang-zh">五册系统</span><span class="puxr-lang-en">Five books</span></strong></div>
-        <div><small>02</small><strong><span class="puxr-lang-zh">已发布文章</span><span class="puxr-lang-en">Published articles</span></strong></div>
-        <div><small>03</small><strong><span class="puxr-lang-zh">Personal Runtime</span><span class="puxr-lang-en">Personal Runtime</span></strong></div>
-        <div><small>04</small><strong><span class="puxr-lang-zh">Financial Reality</span><span class="puxr-lang-en">Financial Reality</span></strong></div>
-      </div>
-    </section>
-
-    <section class="puxr-section">
-      <div class="puxr-wrap">
-        <p class="puxr-eyebrow"><span class="puxr-lang-zh">五册系统</span><span class="puxr-lang-en">Five-volume system</span></p>
-        <h2 class="puxr-title">
-          <span class="puxr-lang-block puxr-lang-zh">现在应该一眼就能看见五册，而不是被重复 hero 挡住。</span>
-          <span class="puxr-lang-block puxr-lang-en">The five books should be visible immediately—not hidden behind duplicated hero sections.</span>
-        </h2>
-        <div class="puxr-grid-4" style="margin-top:34px">
-          <article class="puxr-card puxr-book puxr-book--gold"><div><div class="puxr-card__kicker">Book I</div><h3>Reality Formation</h3><p>现实如何形成</p></div><p class="puxr-micro">Difference · constraint · structure · field · activation · carrier · runtime</p></article>
-          <article class="puxr-card puxr-book puxr-book--purple"><div><div class="puxr-card__kicker">Book II</div><h3>Reality Runtime</h3><p>世界如何运行</p></div><p class="puxr-micro">Conscious runtime · relational runtime · collective runtime · maintenance</p></article>
-          <article class="puxr-card puxr-book puxr-book--green"><div><div class="puxr-card__kicker">Book III</div><h3>Reality Continuity</h3><p>世界如何继续</p></div><p class="puxr-micro">Life continuity · relational continuity · structural continuity · civilization continuity</p></article>
-          <article class="puxr-card puxr-book puxr-book--blue"><div><div class="puxr-card__kicker">Book IV</div><h3>Reality Civilization</h3><p>世界如何扩展</p></div><p class="puxr-micro">City · civilization · map · knowledge network · civilization轨道</p></article>
+    <section class="cx-section cx-home-one-reality" data-cx-home-section="H02" aria-labelledby="cx-home-one-reality-title">
+      <div class="cx-container--wide cx-home-one-reality__grid">
+        <div class="cx-stack cx-stack--loose">
+          <p class="cx-eyebrow" data-cx-en="ONE REALITY" data-cx-zh="同一个现实">ONE REALITY</p>
+          <h2 id="cx-home-one-reality-title" class="cx-title">
+            <span class="cx-home__line" data-cx-en="One life." data-cx-zh="同一个生活。">One life.</span>
+            <span class="cx-home__line" data-cx-en="Many kinds of information." data-cx-zh="许多不同种类的信息。">Many kinds of information.</span>
+            <span class="cx-home__line" data-cx-en="One place to bring them together." data-cx-zh="在一个地方重新把它们连接起来。">One place to bring them together.</span>
+          </h2>
+          <p class="cx-body-lg" data-cx-en="Work, money, relationships, family, health context, decisions, recurring patterns and timing often affect one another. My Reality keeps the situation together while still showing what is known, what is uncertain and what needs attention next." data-cx-zh="工作、金钱、关系、家庭、健康情境、决定、重复模式与时间往往彼此牵动。My Reality 把同一件现实保留在一起，同时让你看见哪些已经明确、哪些仍不确定，以及下一步值得注意什么。">Work, money, relationships, family, health context, decisions, recurring patterns and timing often affect one another. My Reality keeps the situation together while still showing what is known, what is uncertain and what needs attention next.</p>
+          <div><a class="cx-button cx-button--text" href="/reality/" data-cx-en="Open My Reality →" data-cx-zh="打开 My Reality →">Open My Reality →</a></div>
         </div>
-        <div class="puxr-grid-2" style="margin-top:16px">
-          <article class="puxr-card puxr-book puxr-book--gold2"><div><div class="puxr-card__kicker">Book V</div><h3>Reality Navigation</h3><p>世界将如何继续</p></div><p class="puxr-micro">Reading · evidence · navigation · continuity · AI · future</p></article>
-          <article class="puxr-card">
-            <div class="puxr-card__kicker"><span class="puxr-lang-zh">进入方式</span><span class="puxr-lang-en">Entry path</span></div>
-            <h3><span class="puxr-lang-zh">从五册，到文章，到 Ask，再到 Reality 与 Professional Surface。</span><span class="puxr-lang-en">Move from books to articles, from Ask to Reality and professional surfaces.</span></h3>
-            <p><span class="puxr-lang-zh">读书负责解释架构；文章负责公开入口；Ask 负责单问题检索；Professional runtime 负责高价值个案层的解释与导航。</span><span class="puxr-lang-en">Books explain the architecture, articles provide public entry points, Ask handles one knowledge question, and professional runtime surfaces support higher-value interpretation and navigation.</span></p>
-            <div class="puxr-actions"><a class="puxr-btn" href="/books/"><span class="puxr-lang-zh">查看五册</span><span class="puxr-lang-en">View the books</span></a></div>
+        <div class="cx-home-one-reality__map" aria-label="Life information converging into My Reality" data-cx-en-aria-label="Life information converging into My Reality" data-cx-zh-aria-label="生活中的不同信息汇入 My Reality">
+          <div class="cx-home-one-reality__signals" aria-hidden="true">
+            <span data-cx-en="Work" data-cx-zh="工作">Work</span>
+            <span data-cx-en="Money" data-cx-zh="金钱">Money</span>
+            <span data-cx-en="Relationships" data-cx-zh="关系">Relationships</span>
+            <span data-cx-en="Family" data-cx-zh="家庭">Family</span>
+            <span data-cx-en="Health context" data-cx-zh="健康情境">Health context</span>
+            <span data-cx-en="Decisions" data-cx-zh="决定">Decisions</span>
+            <span data-cx-en="Patterns" data-cx-zh="模式">Patterns</span>
+            <span data-cx-en="Time" data-cx-zh="时间">Time</span>
+          </div>
+          <div class="cx-home-one-reality__center">
+            <span class="cx-meta" data-cx-en="BRING IT BACK TO" data-cx-zh="重新带回">BRING IT BACK TO</span>
+            <strong>My Reality</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cx-section cx-home-beginnings" data-cx-home-section="H03" aria-labelledby="cx-home-beginnings-title">
+      <div class="cx-container--wide cx-stack cx-stack--loose">
+        <div class="cx-stack">
+          <p class="cx-eyebrow" data-cx-en="THREE WAYS TO BEGIN" data-cx-zh="三种开始方式">THREE WAYS TO BEGIN</p>
+          <h2 id="cx-home-beginnings-title" class="cx-heading-1" data-cx-en="Start from what you actually need." data-cx-zh="从你真正需要的地方开始。">Start from what you actually need.</h2>
+        </div>
+        <div class="cx-home-beginnings__grid">
+          <article class="cx-home-beginning">
+            <p class="cx-meta">01</p>
+            <h3 class="cx-heading-2" data-cx-en="I have a question" data-cx-zh="我有一个问题">I have a question</h3>
+            <p class="cx-body" data-cx-en="Ask directly, then decide whether more context would actually help." data-cx-zh="直接提问，再决定是否真的需要加入更多情境。">Ask directly, then decide whether more context would actually help.</p>
+            <a class="cx-button cx-button--text" href="/knowledge/ask/">Ask PHI OS →</a>
+          </article>
+          <article class="cx-home-beginning">
+            <p class="cx-meta">02</p>
+            <h3 class="cx-heading-2" data-cx-en="I want another perspective" data-cx-zh="我想换一个角度看">I want another perspective</h3>
+            <p class="cx-body" data-cx-en="Use a clearly labelled lens without treating every perspective as the same kind of evidence." data-cx-zh="使用标示清楚的不同视角，同时不把所有视角当成同一种证据。">Use a clearly labelled lens without treating every perspective as the same kind of evidence.</p>
+            <a class="cx-button cx-button--text" href="/perspectives/" data-cx-en="Explore Perspectives →" data-cx-zh="探索不同视角 →">Explore Perspectives →</a>
+          </article>
+          <article class="cx-home-beginning">
+            <p class="cx-meta">03</p>
+            <h3 class="cx-heading-2" data-cx-en="I need to work through something real" data-cx-zh="我需要处理一件真实发生的事">I need to work through something real</h3>
+            <p class="cx-body" data-cx-en="Keep facts, constraints, unknowns, perspectives and next steps connected in one continuing workspace." data-cx-zh="把事实、限制、未知、不同视角与下一步留在同一个持续工作区。">Keep facts, constraints, unknowns, perspectives and next steps connected in one continuing workspace.</p>
+            <a class="cx-button cx-button--text" href="/reality/" data-cx-en="Start My Reality →" data-cx-zh="开始 My Reality →">Start My Reality →</a>
           </article>
         </div>
       </div>
     </section>
 
-        <section class="puxr-section puxr-section--soft">
-      <div class="puxr-wrap">
-        <p class="puxr-eyebrow"><span class="puxr-lang-zh">七个客户入口</span><span class="puxr-lang-en">Seven client entry points</span></p>
-        <h2 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">前台保持简单，后台继续复杂。</span><span class="puxr-lang-block puxr-lang-en">Keep the client experience simple while the runtime system stays deep.</span></h2>
-        <div class="cir-destinations">
-          <a class="cir-destination" href="/ask"><small>Question</small><div><h3>Ask PHI OS</h3><p><span class="puxr-lang-zh">从一个现实问题开始，由系统判断需要什么。</span><span class="puxr-lang-en">Start with one reality question and let PHI OS determine what is needed.</span></p></div><em>Ask →</em></a>
-          <a class="cir-destination" href="/library"><small>Knowledge</small><div><h3>Explore Knowledge</h3><p><span class="puxr-lang-zh">浏览五册、文章、figure 与已发布知识。</span><span class="puxr-lang-en">Browse the five volumes, articles, figures and published knowledge.</span></p></div><em>Explore →</em></a>
-          <a class="cir-destination" href="/personal-runtime"><small>Personal</small><div><h3>Personal Runtime</h3><p><span class="puxr-lang-zh">一次输入，进入受治理的个人结构与动态视角。</span><span class="puxr-lang-en">Enter once, then explore governed structural and dynamic personal perspectives.</span></p></div><em>Open →</em></a>
-          <a class="cir-destination" href="/financial-reality"><small>Financial</small><div><h3>Financial Reality</h3><p><span class="puxr-lang-zh">从当前财务事实、计算、snapshot 与 finding 开始。</span><span class="puxr-lang-en">Start from current financial facts, calculations, snapshots and bounded findings.</span></p></div><em>Build →</em></a>
-          <a class="cir-destination" href="/my-reality"><small>Reality</small><div><h3>My Reality</h3><p><span class="puxr-lang-zh">把问题、观察、证据与已接受的 perspective 带回当前现实。</span><span class="puxr-lang-en">Bring questions, observations, evidence and accepted perspectives back into current Reality.</span></p></div><em>Continue →</em></a>
-          <a class="cir-destination cir-deep" href="/reality-journey"><small>Continuity</small><div><h3>Reality Journey</h3><p><span class="puxr-lang-zh">只有复杂、长期或需要持续 review 的情况才进入深层 workflow。</span><span class="puxr-lang-en">Use the deeper workflow only for complex, long-running or continuity-heavy situations.</span></p></div><em>Enter deeper →</em></a>
+    <section class="cx-section cx-home-flagships" data-cx-home-section="H04" aria-labelledby="cx-home-flagships-title">
+      <div class="cx-container--wide cx-stack cx-stack--loose">
+        <div class="cx-stack">
+          <p class="cx-eyebrow" data-cx-en="TWO FLAGSHIP EXPERIENCES" data-cx-zh="两个核心体验">TWO FLAGSHIP EXPERIENCES</p>
+          <h2 id="cx-home-flagships-title" class="cx-heading-1" data-cx-en="Go deeper when the situation needs structure." data-cx-zh="当现实需要更完整的结构时，再深入一步。">Go deeper when the situation needs structure.</h2>
         </div>
-        <div class="cir-learnwork"><a class="puxr-btn" href="/academy"><span class="puxr-lang-zh">学习 PHI OS</span><span class="puxr-lang-en">Learn PHI OS</span></a><a class="puxr-btn" href="/services"><span class="puxr-lang-zh">与 PHI OS 合作</span><span class="puxr-lang-en">Work with PHI OS</span></a></div>
+        <div class="cx-home-flagships__grid">
+          <article class="cx-home-feature cx-home-feature--personal">
+            <figure class="cx-home-feature__visual cx-visual">
+              <img data-cx-asset="HERO-012" alt="" aria-hidden="true">
+              <span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden data-cx-en="The visual is temporarily unavailable." data-cx-zh="视觉资源暂时无法显示。">The visual is temporarily unavailable.</span>
+            </figure>
+            <div class="cx-home-feature__copy cx-stack">
+              <p class="cx-eyebrow" data-cx-en="PERSONAL REALITY" data-cx-zh="个人现实">PERSONAL REALITY</p>
+              <h3 class="cx-heading-1" data-cx-en="See yourself through more than one lens." data-cx-zh="用不止一种视角理解自己。">See yourself through more than one lens.</h3>
+              <p class="cx-body-lg" data-cx-en="Bring governed personal readings, profile signals and your current context into a clearer comparison—without flattening them into one personality label." data-cx-zh="把受治理的个人读取、画像讯号与当前情境放进同一个清楚的比较中，同时不把它们压缩成单一人格标签。">Bring governed personal readings, profile signals and your current context into a clearer comparison—without flattening them into one personality label.</p>
+              <div><a class="cx-button cx-button--primary" href="/perspectives/personal/" data-cx-en="Open Personal Reality" data-cx-zh="打开 Personal Reality">Open Personal Reality</a></div>
+            </div>
+          </article>
+
+          <article class="cx-home-feature cx-home-feature--financial">
+            <figure class="cx-home-feature__visual cx-visual">
+              <img data-cx-asset="HERO-015" alt="" aria-hidden="true">
+              <span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden data-cx-en="The visual is temporarily unavailable." data-cx-zh="视觉资源暂时无法显示。">The visual is temporarily unavailable.</span>
+            </figure>
+            <div class="cx-home-feature__copy cx-stack">
+              <p class="cx-eyebrow" data-cx-en="FINANCIAL REALITY" data-cx-zh="财务现实">FINANCIAL REALITY</p>
+              <h3 class="cx-heading-1" data-cx-en="Turn financial fragments into a working picture." data-cx-zh="把零散的财务资料整理成可以行动的全貌。">Turn financial fragments into a working picture.</h3>
+              <p class="cx-body-lg" data-cx-en="Organize cash flow, obligations, priorities, constraints and professional review around the reality you are actually managing." data-cx-zh="围绕你真正正在管理的现实，整理现金流、责任、优先顺序、限制与专业复核。">Organize cash flow, obligations, priorities, constraints and professional review around the reality you are actually managing.</p>
+              <div><a class="cx-button cx-button--primary" href="/professional/financial/" data-cx-en="Open Financial Reality" data-cx-zh="打开 Financial Reality">Open Financial Reality</a></div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-<section class="puxr-section">
-      <div class="puxr-wrap">
-        <p class="puxr-eyebrow"><span class="puxr-lang-zh">已发布文章</span><span class="puxr-lang-en">Published articles</span></p>
-        <div class="puxr-split">
-          <div>
-            <h2 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">辛苦准备的 article 应该被看见，而不是继续藏在后台。</span><span class="puxr-lang-block puxr-lang-en">Published articles should be visible instead of remaining buried behind the interface.</span></h2>
-            <p class="puxr-body"><span class="puxr-lang-block puxr-lang-zh">这里直接读取已发布 authority，显示可进入的公开文章入口。它们是五册架构与 Ask PHI OS 之间的重要桥梁。</span><span class="puxr-lang-block puxr-lang-en">This surface reads the published authority directly and exposes public article entry points. They form the bridge between the five-volume architecture and Ask PHI OS.</span></p>
-            <div class="puxr-actions"><a class="puxr-btn" href="/articles"><span class="puxr-lang-zh">浏览文章</span><span class="puxr-lang-en">Browse articles</span></a><a class="puxr-btn" href="/ask"><span class="puxr-lang-zh">从问题进入</span><span class="puxr-lang-en">Enter through a question</span></a></div>
+    <section class="cx-section cx-home-perspectives" data-cx-home-section="H05" aria-labelledby="cx-home-perspectives-title">
+      <div class="cx-container--wide cx-stack cx-stack--loose">
+        <div class="cx-home-section-heading">
+          <div class="cx-stack">
+            <p class="cx-eyebrow" data-cx-en="PERSPECTIVES" data-cx-zh="不同视角">PERSPECTIVES</p>
+            <h2 id="cx-home-perspectives-title" class="cx-heading-1" data-cx-en="Use another lens when it is genuinely available." data-cx-zh="当某个视角真正可用时，再把它带进来。">Use another lens when it is genuinely available.</h2>
+            <p class="cx-body-lg" data-cx-en="Only perspectives that are currently ready for public use appear here. A symbolic or interpretive perspective can help you notice structure or questions; it is not presented as a guaranteed prediction or objective fact." data-cx-zh="这里只会出现当前已经可以公开使用的视角。象征性或解释性视角可以帮助你看见结构与问题，但不会被呈现为保证发生的预测或客观事实。">Only perspectives that are currently ready for public use appear here. A symbolic or interpretive perspective can help you notice structure or questions; it is not presented as a guaranteed prediction or objective fact.</p>
           </div>
-          <div class="puxr-callout"><span class="puxr-lang-block puxr-lang-zh">Published Article 不是 generic content dump，而是 PHI OS knowledge architecture 的公开投影。</span><span class="puxr-lang-block puxr-lang-en">A published article is not a generic content dump. It is a public projection of the PHI OS knowledge architecture.</span></div>
+          <a class="cx-button cx-button--secondary" href="/perspectives/" data-cx-en="Explore all Perspectives" data-cx-zh="探索全部视角">Explore all Perspectives</a>
         </div>
-        <div class="puxr-article-grid" data-puxr-publications data-puxr-publications-limit="6" style="margin-top:30px"></div>
+        <div class="cx-home-perspectives__grid" data-cx-home-perspectives aria-live="polite">
+          <article class="cx-card cx-card--perspective cx-home-perspective cx-home-perspective--loading">
+            <span class="cx-status cx-status--in-review" data-cx-en="Checking availability" data-cx-zh="正在确认可用状态">Checking availability</span>
+            <h3 class="cx-heading-2" data-cx-en="Loading current perspectives…" data-cx-zh="正在读取当前可用视角……">Loading current perspectives…</h3>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="puxr-section puxr-section--soft">
-      <div class="puxr-wrap">
-        <p class="puxr-eyebrow"><span class="puxr-lang-zh">专业边界</span><span class="puxr-lang-en">Professional boundary</span></p>
-        <h2 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">解释、投影、导航与专业介入必须继续分层，而不是被同一组旧 CSS 和旧模块压成一页。</span><span class="puxr-lang-block puxr-lang-en">Interpretation, projection, navigation and professional intervention must remain distinct instead of being flattened into one page by a heavy stack of legacy CSS and modules.</span></h2>
-        <div class="puxr-grid-3" style="margin-top:34px">
-          <article class="puxr-card"><div class="puxr-card__kicker">Knowledge</div><h3><span class="puxr-lang-zh">书与文章解释模型</span><span class="puxr-lang-en">Books and articles explain the model</span></h3><p><span class="puxr-lang-zh">公开知识 surface 的职责是帮助理解，不是直接替代现实判断。</span><span class="puxr-lang-en">Public knowledge helps people understand; it does not replace reality judgment.</span></p></article>
-          <article class="puxr-card"><div class="puxr-card__kicker">Ask</div><h3><span class="puxr-lang-zh">Ask 回答一个问题</span><span class="puxr-lang-en">Ask handles one question</span></h3><p><span class="puxr-lang-zh">它应该 fail-closed：资料不够，就说明资料不够。</span><span class="puxr-lang-en">It should fail closed: if grounding is insufficient, it should say so.</span></p></article>
-          <article class="puxr-card"><div class="puxr-card__kicker">Professional</div><h3><span class="puxr-lang-zh">专业服务开始于边界清楚之后</span><span class="puxr-lang-en">Professional services start after boundaries are visible</span></h3><p><span class="puxr-lang-zh">真正需要专业判断时，PHI OS 必须知道自己何时该解释、何时该 handoff。</span><span class="puxr-lang-en">PHI OS must know when to interpret and when to hand off to licensed or responsible professionals.</span></p></article>
+    <section class="cx-section cx-home-books" data-cx-home-section="H06" aria-labelledby="cx-home-books-title">
+      <div class="cx-container--wide cx-stack cx-stack--loose">
+        <div class="cx-home-section-heading">
+          <div class="cx-stack">
+            <p class="cx-eyebrow" data-cx-en="FIVE BOOKS" data-cx-zh="五册系统">FIVE BOOKS</p>
+            <h2 id="cx-home-books-title" class="cx-heading-1" data-cx-en="A knowledge system built to be read, not hidden behind the interface." data-cx-zh="这套知识系统本身就应该可以被阅读，而不是藏在界面背后。">A knowledge system built to be read, not hidden behind the interface.</h2>
+          </div>
+          <a class="cx-button cx-button--secondary" href="/books/" data-cx-en="View all books" data-cx-zh="查看全部书籍">View all books</a>
+        </div>
+        <div class="cx-home-books__grid">
+          <article class="cx-home-book">
+            <a class="cx-home-book__cover" href="/books/reality-formation/" aria-label="Open Book I — Reality Formation" data-cx-en-aria-label="Open Book I — Reality Formation" data-cx-zh-aria-label="打开第一册 Reality Formation"><img data-cx-asset="BOOK-1-HARDCOVER" alt="Book I cover"><span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden>Book I</span></a>
+            <div class="cx-stack cx-stack--tight"><p class="cx-meta">BOOK I</p><h3 class="cx-heading-3">Reality Formation</h3><p class="cx-body-sm" data-cx-en="How reality begins to take form through difference, constraint, structure and activation." data-cx-zh="现实如何从差异、限制、结构与激活中逐渐形成。">How reality begins to take form through difference, constraint, structure and activation.</p><a class="cx-button cx-button--text" href="/books/reality-formation/" data-cx-en="Open Book I →" data-cx-zh="打开第一册 →">Open Book I →</a></div>
+          </article>
+          <article class="cx-home-book">
+            <a class="cx-home-book__cover" href="/books/reality-runtime/" aria-label="Open Book II — Reality Runtime" data-cx-en-aria-label="Open Book II — Reality Runtime" data-cx-zh-aria-label="打开第二册 Reality Runtime"><img data-cx-asset="BOOK-2-HARDCOVER" alt="Book II cover"><span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden>Book II</span></a>
+            <div class="cx-stack cx-stack--tight"><p class="cx-meta">BOOK II</p><h3 class="cx-heading-3">Reality Runtime</h3><p class="cx-body-sm" data-cx-en="How living, relational and collective realities keep operating through changing conditions." data-cx-zh="生命、关系与群体的现实如何在不断变化的条件中持续运行。">How living, relational and collective realities keep operating through changing conditions.</p><a class="cx-button cx-button--text" href="/books/reality-runtime/" data-cx-en="Open Book II →" data-cx-zh="打开第二册 →">Open Book II →</a></div>
+          </article>
+          <article class="cx-home-book">
+            <a class="cx-home-book__cover" href="/books/reality-continuity/" aria-label="Open Book III — Reality Continuity" data-cx-en-aria-label="Open Book III — Reality Continuity" data-cx-zh-aria-label="打开第三册 Reality Continuity"><img data-cx-asset="BOOK-3-HARDCOVER" alt="Book III cover"><span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden>Book III</span></a>
+            <div class="cx-stack cx-stack--tight"><p class="cx-meta">BOOK III</p><h3 class="cx-heading-3">Reality Continuity</h3><p class="cx-body-sm" data-cx-en="How systems maintain, recover, adapt and preserve continuity across change." data-cx-zh="系统如何在变化中维持、恢复、适应，并保有连续性。">How systems maintain, recover, adapt and preserve continuity across change.</p><a class="cx-button cx-button--text" href="/books/reality-continuity/" data-cx-en="Open Book III →" data-cx-zh="打开第三册 →">Open Book III →</a></div>
+          </article>
+          <article class="cx-home-book">
+            <a class="cx-home-book__cover" href="/books/reality-civilization/" aria-label="Open Book IV — Reality Civilization" data-cx-en-aria-label="Open Book IV — Reality Civilization" data-cx-zh-aria-label="打开第四册 Reality Civilization"><img data-cx-asset="BOOK-4-HARDCOVER" alt="Book IV cover"><span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden>Book IV</span></a>
+            <div class="cx-stack cx-stack--tight"><p class="cx-meta">BOOK IV</p><h3 class="cx-heading-3">Reality Civilization</h3><p class="cx-body-sm" data-cx-en="How larger shared realities scale through networks, knowledge, institutions and civilization." data-cx-zh="更大尺度的共同现实如何透过网络、知识、制度与文明扩展。">How larger shared realities scale through networks, knowledge, institutions and civilization.</p><a class="cx-button cx-button--text" href="/books/reality-civilization/" data-cx-en="Open Book IV →" data-cx-zh="打开第四册 →">Open Book IV →</a></div>
+          </article>
+          <article class="cx-home-book">
+            <a class="cx-home-book__cover" href="/books/reality-navigation/" aria-label="Open Book V — Reality Navigation" data-cx-en-aria-label="Open Book V — Reality Navigation" data-cx-zh-aria-label="打开第五册 Reality Navigation"><img data-cx-asset="BOOK-5-HARDCOVER" alt="Book V cover"><span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden>Book V</span></a>
+            <div class="cx-stack cx-stack--tight"><p class="cx-meta">BOOK V</p><h3 class="cx-heading-3">Reality Navigation</h3><p class="cx-body-sm" data-cx-en="How understanding becomes navigation when reality keeps changing." data-cx-zh="当现实持续变化时，理解如何进一步转化为导航。">How understanding becomes navigation when reality keeps changing.</p><a class="cx-button cx-button--text" href="/books/reality-navigation/" data-cx-en="Open Book V →" data-cx-zh="打开第五册 →">Open Book V →</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cx-section cx-home-knowledge" data-cx-home-section="H07" aria-labelledby="cx-home-knowledge-title">
+      <div class="cx-container--wide cx-home-knowledge__grid">
+        <figure class="cx-home-knowledge__visual cx-visual">
+          <img data-cx-asset="ILL-001" alt="" aria-hidden="true">
+          <span class="cx-home__asset-fallback cx-meta" data-cx-asset-fallback hidden data-cx-en="The visual is temporarily unavailable." data-cx-zh="视觉资源暂时无法显示。">The visual is temporarily unavailable.</span>
+        </figure>
+        <div class="cx-stack cx-stack--loose">
+          <div class="cx-stack">
+            <p class="cx-eyebrow" data-cx-en="KNOWLEDGE LANDSCAPE" data-cx-zh="知识地图">KNOWLEDGE LANDSCAPE</p>
+            <h2 id="cx-home-knowledge-title" class="cx-heading-1" data-cx-en="Ask is an entry into a knowledge system, not an empty chat box." data-cx-zh="Ask 是进入知识系统的入口，不是一个空白聊天框。">Ask is an entry into a knowledge system, not an empty chat box.</h2>
+            <p class="cx-body-lg" data-cx-en="Move between books, published articles, figures and concepts; then ask a focused question from the context you choose." data-cx-zh="你可以在书籍、已发布文章、图示与概念之间移动，再从自己明确选择的情境提出更聚焦的问题。">Move between books, published articles, figures and concepts; then ask a focused question from the context you choose.</p>
+          </div>
+          <nav class="cx-home-knowledge__links" aria-label="Knowledge areas" data-cx-en-aria-label="Knowledge areas" data-cx-zh-aria-label="知识区域">
+            <a href="/books/"><span data-cx-en="Books" data-cx-zh="书籍">Books</span><strong>01</strong></a>
+            <a href="/articles/"><span data-cx-en="Articles" data-cx-zh="文章">Articles</span><strong>02</strong></a>
+            <a href="/figures.html"><span data-cx-en="Figures" data-cx-zh="图示">Figures</span><strong>03</strong></a>
+            <a href="/glossary.html"><span data-cx-en="Concepts" data-cx-zh="概念">Concepts</span><strong>04</strong></a>
+            <a href="/knowledge/ask/"><span>Ask PHI OS</span><strong>05</strong></a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="cx-section cx-home-how" data-cx-home-section="H08" aria-labelledby="cx-home-how-title">
+      <div class="cx-container--wide cx-stack cx-stack--loose">
+        <div class="cx-home-section-heading">
+          <div class="cx-stack">
+            <p class="cx-eyebrow" data-cx-en="HOW PHI OS WORKS" data-cx-zh="PHI OS 如何运作">HOW PHI OS WORKS</p>
+            <h2 id="cx-home-how-title" class="cx-heading-1" data-cx-en="Understanding is useful when it can keep moving with reality." data-cx-zh="理解真正有用，是因为它可以跟着现实继续移动。">Understanding is useful when it can keep moving with reality.</h2>
+          </div>
+        </div>
+        <ol class="cx-home-how__flow" aria-label="PHI OS reality navigation cycle" data-cx-en-aria-label="PHI OS reality navigation cycle" data-cx-zh-aria-label="PHI OS 现实导航循环">
+          <li><span>01</span><strong data-cx-en="Understand" data-cx-zh="理解">Understand</strong></li>
+          <li><span>02</span><strong data-cx-en="Read" data-cx-zh="读取">Read</strong></li>
+          <li><span>03</span><strong data-cx-en="Choose" data-cx-zh="选择">Choose</strong></li>
+          <li><span>04</span><strong data-cx-en="Act" data-cx-zh="行动">Act</strong></li>
+          <li><span>05</span><strong data-cx-en="Observe" data-cx-zh="观察">Observe</strong></li>
+          <li><span>06</span><strong data-cx-en="Review" data-cx-zh="复核">Review</strong></li>
+          <li class="cx-home-how__continue"><span>07</span><strong data-cx-en="Continue" data-cx-zh="继续">Continue</strong><i aria-hidden="true">↺</i></li>
+        </ol>
+        <p class="cx-body-lg cx-home-how__note" data-cx-en="The point is not to force a final answer. It is to keep your understanding connected to what changes, what becomes clearer and what still remains open." data-cx-zh="重点不是逼出一个最终答案，而是让你的理解持续连接正在变化的部分、逐渐清楚的部分，以及仍然开放的问题。">The point is not to force a final answer. It is to keep your understanding connected to what changes, what becomes clearer and what still remains open.</p>
+      </div>
+    </section>
+
+    <section class="cx-home-continuity" data-cx-home-section="H09" aria-labelledby="cx-home-continuity-title">
+      <div class="cx-container cx-home-continuity__inner cx-stack cx-stack--loose">
+        <p class="cx-eyebrow" data-cx-en="CONTINUITY" data-cx-zh="持续">CONTINUITY</p>
+        <h2 id="cx-home-continuity-title" class="cx-display-lg">
+          <span class="cx-home__line" data-cx-en="Reality will keep changing." data-cx-zh="现实还会继续变化。">Reality will keep changing.</span>
+          <span class="cx-home__line" data-cx-en="Your understanding should be able to change with it." data-cx-zh="你的理解，也应该能够跟着它一起变化。">Your understanding should be able to change with it.</span>
+        </h2>
+        <div class="cx-cluster cx-home__actions">
+          <a class="cx-button cx-button--primary" href="/reality/" data-cx-en="Start with my reality" data-cx-zh="从我的现实开始">Start with my reality</a>
+          <a class="cx-button cx-button--secondary" href="/knowledge/ask/">Ask PHI OS</a>
         </div>
       </div>
     </section>
   </main>
-  <div data-puxr-footer></div>
-  <script type="module" src="/assets/js/public-shell-v2.js"></script>
-  <script type="module" src="/assets/js/components/publications-v2.js"></script>
-  <script type="module" src="/assets/js/pages/home-v2.js"></script>
-  <script type="module" src="/assets/js/pages/client-intent-router.js"></script>
+
+  <div data-cx-footer></div>
+  <script type="module" src="/assets/customer-ui/js/shell.js"></script>
+  <script type="module" src="/assets/customer-ui/js/surfaces/home.js"></script>
 </body>
 </html>

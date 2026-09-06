@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-CX-R6-HOMEPAGE-CUSTOMER-COMPOSITION-v1.0.0",
+  "work": "CX-R6-W0-W10",
+  "baselineCommit": "543998ca51acad9a57eb9098a7aadafee2caf0f8",
+  "route": "/",
+  "surfaceId": "HOME",
+  "status": "HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED",
+  "compositionAuthority": "CX_R6_H01_H09_ONLY",
+  "shellAuthority": "assets/customer-ui/js/shell.js",
+  "visualAuthority": "content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json",
+  "methodAvailabilityAuthority": "content/professional/method-production-activation/registries/method-registry-v5.json",
+  "sections": [
+    {"id":"H01","role":"HERO","primaryAction":{"label":"Start with my reality","route":"/reality/"},"secondaryAction":{"label":"Ask PHI OS","route":"/knowledge/ask/"},"assetId":"HERO-001"},
+    {"id":"H02","role":"ONE_REALITY","destination":"/reality/"},
+    {"id":"H03","role":"THREE_WAYS_TO_BEGIN","destinations":["/knowledge/ask/","/perspectives/","/reality/"]},
+    {"id":"H04","role":"FLAGSHIP_RUNTIME_EXPERIENCES","surfaces":[{"surfaceId":"PERSONAL_REALITY","route":"/perspectives/personal/","assetId":"HERO-012"},{"surfaceId":"FINANCIAL_REALITY","route":"/professional/financial/","assetId":"HERO-015"}]},
+    {"id":"H05","role":"PERSPECTIVES","availability":"RUNTIME_DERIVED_FROM_METHOD_AUTHORITY","hardCodedAvailability":false},
+    {"id":"H06","role":"FIVE_BOOKS","assetIds":["BOOK-1-HARDCOVER","BOOK-2-HARDCOVER","BOOK-3-HARDCOVER","BOOK-4-HARDCOVER","BOOK-5-HARDCOVER"]},
+    {"id":"H07","role":"KNOWLEDGE_LANDSCAPE","assetId":"ILL-001","areas":["BOOKS","ARTICLES","FIGURES","CONCEPTS","ASK"]},
+    {"id":"H08","role":"HOW_PHI_OS_WORKS","cycle":["UNDERSTAND","READ","CHOOSE","ACT","OBSERVE","REVIEW","CONTINUE"]},
+    {"id":"H09","role":"CONTINUITY","primaryAction":{"label":"Start with my reality","route":"/reality/"},"secondaryAction":{"label":"Ask PHI OS","route":"/knowledge/ask/"}}
+  ],
+  "invariants": {
+    "newComposition": true,
+    "allowedSectionIds": ["H01","H02","H03","H04","H05","H06","H07","H08","H09"],
+    "legacyStylesheetDependency": false,
+    "legacyShellDependency": false,
+    "legacyClassNamespace": false,
+    "oldHeroCompositionCopied": false,
+    "developerRepairCopyVisible": false,
+    "methodAvailabilityHardCoded": false,
+    "backendAuthorityCreatedByHomepage": false
+  }
+}
