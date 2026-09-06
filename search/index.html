@@ -1,7 +1,29 @@
-<!doctype html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Search PHI OS books, published articles and governed public knowledge."><title>Search — PHI OS</title><link rel="canonical" href="/search/"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/phios-public-v2.css"></head>
-<body class="puxr-page--soft" data-puxr-nav="search" data-px2-surface="SEARCH"><div data-puxr-header></div><main class="puxr-main">
-<section class="puxr-hero"><div class="puxr-wrap"><p class="puxr-eyebrow">SEARCH · FIND</p><h1 class="puxr-title"><span class="puxr-lang-block puxr-lang-zh">先找到资料，再决定要不要问、读取或进入现实。</span><span class="puxr-lang-block puxr-lang-en">Find the knowledge first. Then decide whether to ask, read or bring it into Reality.</span></h1><p class="puxr-lead"><span class="puxr-lang-block puxr-lang-zh">Search 负责 FIND。它与 Ask PHI OS 不同：这里优先返回已经发布的文章与五册入口，不把检索结果伪装成一个新答案。</span><span class="puxr-lang-block puxr-lang-en">Search is the FIND layer. It returns governed published knowledge and book entry points instead of turning retrieval into a new synthetic answer.</span></p>
-<form class="px2-intent" data-px2-search-form><input name="q" maxlength="300" placeholder="Search PHI OS knowledge…" aria-label="Search PHI OS knowledge"><button type="submit">Search</button></form></div></section>
-<section class="puxr-section"><div class="puxr-wrap"><div class="px2-search-results" data-px2-search-results></div></div></section>
-<section class="puxr-section"><div class="puxr-wrap puxr-grid-3"><article class="puxr-card"><div class="puxr-card__kicker">ASK</div><h3>Need an explanation?</h3><p>Ask one bounded question and keep grounding, unknowns and handoff visible.</p><div class="puxr-actions"><a class="puxr-btn puxr-btn--dark" href="/knowledge-search">Ask PHI OS</a></div></article><article class="puxr-card"><div class="puxr-card__kicker">READ</div><h3>Need a personal lens?</h3><p>See which reading methods exist and which are currently gated, restricted or available.</p><div class="puxr-actions"><a class="puxr-btn puxr-btn--dark" href="/readings/">Readings</a></div></article><article class="puxr-card"><div class="puxr-card__kicker">REALITY</div><h3>Need the fragments connected?</h3><p>Move from isolated answers toward a current Reality representation.</p><div class="puxr-actions"><a class="puxr-btn puxr-btn--dark" href="/reality/">My Reality</a></div></article></div></section>
-</main><div data-puxr-footer></div><script type="module" src="/assets/js/public-shell-v2.js"></script><script type="module" src="/assets/js/pages/search-v2.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Search across PHI OS published articles, five books, figures and concepts.">
+  <title>Search Knowledge — PHI OS</title>
+  <link rel="canonical" href="/search/">
+  <link rel="stylesheet" href="/assets/customer-ui/tokens.css">
+  <link rel="stylesheet" href="/assets/customer-ui/base.css">
+  <link rel="stylesheet" href="/assets/customer-ui/typography.css">
+  <link rel="stylesheet" href="/assets/customer-ui/layout.css">
+  <link rel="stylesheet" href="/assets/customer-ui/components.css">
+  <link rel="stylesheet" href="/assets/customer-ui/motion.css">
+  <link rel="stylesheet" href="/assets/customer-ui/utilities.css">
+  <link rel="stylesheet" href="/assets/customer-ui/surfaces/knowledge.css">
+</head>
+<body class="cx-knowledge" data-cx-surface="KNOWLEDGE_SEARCH" data-cx-nav="KNOWLEDGE" data-cx-knowledge-view="search">
+  <a class="cx-skip" href="#main">Skip to content</a>
+  <div data-cx-header></div>
+  <main id="main" class="cx-knowledge__main">
+    <section class="cx-knowledge-subhero"><div class="cx-container--wide cx-knowledge-subhero__grid"><div class="cx-stack cx-stack--loose"><div class="cx-stack"><p class="cx-eyebrow" data-cx-en="SEARCH" data-cx-zh="搜索">SEARCH</p><h1 class="cx-display-lg" data-cx-en="Search across the PHI OS knowledge landscape." data-cx-zh="在 PHI OS 的知识地图中统一搜索。">Search across the PHI OS knowledge landscape.</h1><p class="cx-lead" data-cx-en="Results keep their type, source and relationship to the wider knowledge system visible instead of turning retrieval into a new answer." data-cx-zh="搜索结果会保留内容类型、来源及与整体知识系统的关系，不会把检索结果包装成另一个新答案。">Results keep their type, source and relationship to the wider knowledge system visible instead of turning retrieval into a new answer.</p></div></div><figure class="cx-knowledge-subhero__visual cx-visual"><img data-cx-asset="ILL-003" alt="" aria-hidden="true"><span class="cx-knowledge__asset-fallback cx-meta" data-cx-asset-fallback hidden data-cx-en="The visual is temporarily unavailable." data-cx-zh="视觉资源暂时无法显示。">The visual is temporarily unavailable.</span></figure></div></section>
+    <section class="cx-section--tight"><div class="cx-container--wide cx-stack cx-stack--loose"><form class="cx-knowledge-search-form" data-cx-knowledge-search-form role="search"><label for="cx-knowledge-query" data-cx-en="Search articles, books, figures and concepts" data-cx-zh="搜索文章、书籍、图示与概念">Search articles, books, figures and concepts</label><div class="cx-knowledge-search-form__row"><input id="cx-knowledge-query" name="q" type="search" maxlength="200" autocomplete="off" data-cx-en-placeholder="Try: reality, coordination, continuity…" data-cx-zh-placeholder="例如：现实、协调、连续性……" placeholder="Try: reality, coordination, continuity…"><button class="cx-button cx-button--primary" type="submit" data-cx-en="Search" data-cx-zh="搜索">Search</button></div></form><div class="cx-knowledge-search-summary cx-meta" data-cx-knowledge-search-summary></div><div class="cx-knowledge-result-list" data-cx-knowledge-search-results aria-live="polite"></div></div></section>
+  </main>
+  <div data-cx-footer></div>
+  <script type="module" src="/assets/customer-ui/js/shell.js"></script>
+  <script type="module" src="/assets/customer-ui/js/surfaces/knowledge.js"></script>
+</body>
+</html>

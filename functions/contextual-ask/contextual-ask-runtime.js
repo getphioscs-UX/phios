@@ -4,15 +4,21 @@ const clean=v=>String(v??'').trim();
 const list=v=>Array.isArray(v)?v:[];
 const fail=(code,status=422)=>{const e=new Error(code);e.code=code;e.status=status;throw e};
 const hasGuidedContext=value=>Boolean(value&&typeof value==='object'&&Object.values(value).some(x=>clean(x)));
+const PUBLIC_KNOWLEDGE_REF=/^(?:ARTICLE:[a-z0-9][a-z0-9-]{0,119}|BOOK:BOOK-[1-5]|FIGURE:figure-[a-z0-9-]{1,79}|CONCEPT:[a-z0-9][a-z0-9-]{0,79})$/;
+export function isPublicKnowledgeContextRef(value){return PUBLIC_KNOWLEDGE_REF.test(clean(value))}
 function publicDefinition(row,locale='en'){return freeze({contextType:row.contextType,label:row.customerDisclosureLabel[locale==='zh-Hans'?'zh':'en'],sourceClass:row.sourceClass,participantScope:row.participantScope,caseScope:row.caseScope,consentRequired:row.consentRequired,entitlementRequired:row.entitlementRequired,freshnessPolicy:row.freshnessPolicy})}
 export function buildAskContextAvailability({locale='en',requestedContextSeed=null}={}){
  const base=[
   {...publicDefinition(contextDefinition('KNOWLEDGE'),locale),availability:'AVAILABLE',reason:'PUBLIC_GOVERNED_SOURCE'},
   {...publicDefinition(contextDefinition('CURRENT_REALITY'),locale),availability:'AVAILABLE_WITH_EXPLICIT_INPUT',reason:'CUSTOMER_MAY_SUPPLY_QUESTION_SCOPED_CURRENT_CONTEXT'}
  ];
- const seedType=clean(requestedContextSeed?.contextType).toUpperCase();
+ const seedType=clean(requestedContextSeed?.contextType).toUpperCase(),seedRef=clean(requestedContextSeed?.contextRef);
+ if(seedType==='KNOWLEDGE'&&seedRef&&isPublicKnowledgeContextRef(seedRef)){
+  const knowledge=base.find(item=>item.contextType==='KNOWLEDGE');
+  knowledge.requestedContextRef=seedRef;knowledge.reason='CUSTOMER_SELECTED_PUBLISHED_KNOWLEDGE_REF';
+ }
  if(seedType&&seedType!=='KNOWLEDGE'&&seedType!=='CURRENT_REALITY'){
-  const row=contextDefinition(seedType);if(row)base.push({...publicDefinition(row,locale),availability:'REQUIRES_SERVER_AUTHORIZED_CONTEXT',reason:'NO_SILENT_ACCOUNT_SWEEP',requestedContextRef:clean(requestedContextSeed?.contextRef)||null});
+  const row=contextDefinition(seedType);if(row)base.push({...publicDefinition(row,locale),availability:'REQUIRES_SERVER_AUTHORIZED_CONTEXT',reason:'NO_SILENT_ACCOUNT_SWEEP',requestedContextRef:seedRef||null});
  }
  return freeze(base);
 }
@@ -32,7 +38,9 @@ export function resolveExplicitAskContexts({requested=[],guidedContext={},contex
   if(seen.has(`${request.contextType}:${request.contextRef||''}`))continue;seen.add(`${request.contextType}:${request.contextRef||''}`);
   const row=contextDefinition(request.contextType);if(!row)fail('ASK_CONTEXT_TYPE_NOT_REGISTERED',400);
   if(request.contextType==='KNOWLEDGE'){
-   accepted.push(freeze({contextType:'KNOWLEDGE',contextRef:'PHIOS_GOVERNED_KNOWLEDGE',label:row.customerDisclosureLabel[locale==='zh-Hans'?'zh':'en'],sourceAuthority:row.sourceAuthority,sourceClass:row.sourceClass,participant:'SELF',caseScope:'QUESTION',whyUsed:'DEFAULT_OR_CUSTOMER_SELECTED_GOVERNED_KNOWLEDGE',saved:false,generatedAt:null,freshness:'VERSIONED',limitations:[],selectedRefs:[],summary:null,entitlementState:'NOT_REQUIRED',consentAccepted:'NOT_REQUIRED',answerUseBoundary:row.answerUseBoundary}));continue;
+   if(request.contextRef&&!isPublicKnowledgeContextRef(request.contextRef))fail('ASK_PUBLIC_KNOWLEDGE_REF_INVALID',400);
+   const specific=request.contextRef||null;
+   accepted.push(freeze({contextType:'KNOWLEDGE',contextRef:specific||'PHIOS_GOVERNED_KNOWLEDGE',label:row.customerDisclosureLabel[locale==='zh-Hans'?'zh':'en'],sourceAuthority:row.sourceAuthority,sourceClass:row.sourceClass,participant:'PUBLIC',caseScope:specific?'SOURCE':'QUESTION',whyUsed:specific?'CUSTOMER_SELECTED_PUBLISHED_KNOWLEDGE_REF':'DEFAULT_OR_CUSTOMER_SELECTED_GOVERNED_KNOWLEDGE',saved:false,generatedAt:null,freshness:'VERSIONED',limitations:[],selectedRefs:specific?[specific]:[],summary:null,entitlementState:'NOT_REQUIRED',consentAccepted:'NOT_REQUIRED',answerUseBoundary:row.answerUseBoundary}));continue;
   }
   if(request.contextType==='CURRENT_REALITY'&&!request.contextRef){
    if(!hasGuidedContext(guidedContext))fail('ASK_CURRENT_REALITY_CONTEXT_INPUT_REQUIRED',400);

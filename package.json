@@ -2193,7 +2193,11 @@
     "check:cx-p1-physical-delete": "node scripts/check-cx-p1-physical-legacy-delete.mjs",
     "check:cx-p1-browser-current": "node scripts/check-p1-browser-acceptance-current.mjs",
     "apply:cx-p1-physical-delete": "node scripts/apply-p1-physical-legacy-delete.mjs",
-    "check:ecr-topic-r1": "node scripts/check-ecr-topic-r1-w0-w19.mjs"
+    "check:ecr-topic-r1": "node scripts/check-ecr-topic-r1-w0-w19.mjs",
+    "check:cx-explore": "node scripts/check-cx-r7-explore.mjs",
+    "check:cx-r7": "npm run check:cx-r6 && npm run check:cx-explore && npm run check:exp-w4a",
+    "check:cx-knowledge": "node scripts/check-cx-r8-knowledge.mjs && node scripts/check-cx-r9-r2-contextual-ask.mjs",
+    "check:cx-r8": "npm run check:cx-r7 && npm run check:cx-knowledge"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
