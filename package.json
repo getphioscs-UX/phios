@@ -2192,7 +2192,9 @@
     "check:cx-p1-browser-r1": "node scripts/check-p1-browser-r1-blocker-repair.mjs",
     "check:cx-p1-physical-delete": "node scripts/check-cx-p1-physical-legacy-delete.mjs",
     "check:cx-p1-browser-current": "node scripts/check-p1-browser-acceptance-current.mjs",
-    "apply:cx-p1-physical-delete": "node scripts/apply-p1-physical-legacy-delete.mjs"
+    "apply:cx-p1-physical-delete": "node scripts/apply-p1-physical-legacy-delete.mjs",
+    "check:cx-explore": "node scripts/check-cx-r7-explore.mjs",
+    "check:cx-r7": "npm run check:cx-r6 && npm run check:cx-explore && npm run check:exp-w4a"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

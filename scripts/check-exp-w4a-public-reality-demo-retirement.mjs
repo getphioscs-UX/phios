@@ -18,6 +18,9 @@ const px2Successor = JSON.parse(await read(
 const realityRouteSuccessor = JSON.parse(await read(
   'content/web-production/successors/pds-w3-current-reality-route-successor-v2.json'
 ));
+const cxShellSuccessor = JSON.parse(await read(
+  'content/customer-experience-rebuild/successors/exp-w4a-cx-shell-successor-v1.json'
+));
 assert.equal(contract.freezeId, 'EXP-W4A-Public-Reality-Demo-Retired');
 assert.equal(contract.baselineCommit, 'b34ac06692a375515d3df05a78687b6ed105e327');
 assert.equal(contract.status, 'retired');
@@ -33,6 +36,11 @@ assert.equal(px2Successor.status, 'ACTIVE');
 assert.equal(realityRouteSuccessor.status, 'CURRENT');
 assert.equal(realityRouteSuccessor.predecessor.realityFooterHref, '/reality-journey');
 assert.equal(realityRouteSuccessor.successor.realityNavigationHref, '/reality/');
+assert.equal(cxShellSuccessor.successorCode, 'EXP-W4A-CX-SHELL-SUCCESSOR');
+assert.equal(cxShellSuccessor.status, 'ACTIVE');
+assert.equal(cxShellSuccessor.successorRecognition.cxHeaderMount, 'data-cx-header');
+assert.equal(cxShellSuccessor.successorRecognition.cxFooterMount, 'data-cx-footer');
+assert.equal(cxShellSuccessor.successorRecognition.cxShellScript, '/assets/customer-ui/js/shell.js');
 
 for (const retired of [
   'reality-demo.html',
@@ -72,8 +80,11 @@ for (const page of activePages) {
   const hasPx2PublicShell = /data-puxr-header/.test(source) &&
     /\/assets\/css\/phios-public-v2\.css/.test(source) &&
     /\/assets\/js\/public-shell-v2\.js/.test(source);
+  const hasCxPublicShell = source.includes(cxShellSuccessor.successorRecognition.cxHeaderMount) &&
+    source.includes(cxShellSuccessor.successorRecognition.cxFooterMount) &&
+    source.includes(cxShellSuccessor.successorRecognition.cxShellScript);
   assert.equal(
-    hasLegacyPublicShell || hasPx2PublicShell,
+    hasLegacyPublicShell || hasPx2PublicShell || hasCxPublicShell,
     true,
     `${page} has no accessible public shell`
   );
