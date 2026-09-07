@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "PHI-OS-PWS-ENTRY-PUBLIC-NAVIGATION-CX-RETIREMENT-SUCCESSOR-v1.0.0",
+  "work": "PWS-ENTRY-W1-CX-RETIREMENT-RECONCILIATION",
+  "baselineCommit": "ad5e3df2f437ff40b72055af289b99880d13d8b6",
+  "status": "CURRENT_CX_RETIREMENT_RECONCILED",
+  "predecessorContract": "docs/pws/architecture/pws-entry-public-navigation-boundary-v1.json",
+  "rule": "A historical public surface may be physically absent only when an exact 308 compatibility redirect resolves to an existing current customer successor.",
+  "currentRetirements": [
+    {
+      "legacySurface": "figures.html",
+      "redirect": "/figures.html /figures/ 308",
+      "successorSurface": "figures/index.html",
+      "reason": "CX-R8 canonical figures customer surface active; legacy HTML physically retired by ad5e3df"
+    },
+    {
+      "legacySurface": "articles.html",
+      "redirect": "/articles.html /articles/ 308",
+      "successorSurface": "articles/index.html",
+      "reason": "CX-R8 canonical article landing active; legacy HTML physically retired by ad5e3df"
+    }
+  ],
+  "boundaries": {
+    "historicalPwsContractRewritten": false,
+    "publicKnowledgePaymentBoundaryChanged": false,
+    "professionalResponsibilityBoundaryChanged": false,
+    "missingSurfaceAcceptedWithoutRedirect": false,
+    "successorExistenceRequired": true
+  }
+}

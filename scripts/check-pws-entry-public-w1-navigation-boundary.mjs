@@ -10,6 +10,34 @@ const contract = JSON.parse(await read(
 const w0 = JSON.parse(await read(
   'docs/pws/architecture/pws-entry-payment-boundary-v1.json'
 ));
+const retirementSuccessor = JSON.parse(await read(
+  'docs/pws/architecture/pws-entry-public-navigation-cx-retirement-successor-v1.json'
+));
+const redirects = await read('_redirects');
+const redirectMap = new Map(redirects.split(/\r?\n/).map(line=>line.trim()).filter(line=>line && !line.startsWith('#')).map(line=>line.split(/\s+/)).filter(parts=>parts.length>=3).map(([source,destination,status])=>[source,{destination,status}]));
+const fileExists = async rel => fs.access(path.join(root,rel)).then(()=>true).catch(()=>false);
+const successorCandidates = destination => {
+  const clean=String(destination||'').split(/[?#]/,1)[0].replace(/^\//,'');
+  if(!clean)return ['index.html'];
+  if(clean.endsWith('/'))return [`${clean}index.html`];
+  if(/\.[A-Za-z0-9]+$/.test(clean))return [clean];
+  return [clean,`${clean}.html`,`${clean}/index.html`];
+};
+async function requireHistoricalOrRedirectedSurface(surface){
+  if(await fileExists(surface))return 'PRESENT';
+  const route=`/${surface}`;
+  const redirect=redirectMap.get(route);
+  assert(redirect,`Missing historical PWS surface ${surface} requires an explicit compatibility redirect`);
+  assert.equal(redirect.status,'308',`Retired PWS surface ${surface} must use permanent 308 redirect`);
+  const resolved=[];
+  for(const candidate of successorCandidates(redirect.destination))if(await fileExists(candidate))resolved.push(candidate);
+  assert(resolved.length>0,`Retired PWS surface ${surface} redirect target ${redirect.destination} has no existing successor file`);
+  const declared=(retirementSuccessor.currentRetirements||[]).find(x=>x.legacySurface===surface);
+  assert(declared,`Retired PWS surface ${surface} must be registered in the current CX retirement successor`);
+  assert.equal(declared.redirect,`${route} ${redirect.destination} 308`);
+  assert(resolved.includes(declared.successorSurface),`Registered successor for ${surface} must resolve from redirect target`);
+  return 'REDIRECTED_RETIRED';
+}
 
 assert.equal(contract.contractId, 'phi-os.pws-entry.public-navigation-boundary.v1');
 assert.equal(contract.contractVersion, '1.0.0');
@@ -85,12 +113,15 @@ for (const surfaces of Object.values(contract.surfaceReferences)) {
   for (const surface of surfaces) {
     if (surface === 'reality-demo.html') {
       await assert.rejects(fs.access(path.join(root, surface)), { code: 'ENOENT' });
-      assert.match(await read('_redirects'), /^\/reality-demo \/reality-journey 308$/m);
+      assert.match(redirects, /^\/reality-demo \/reality-journey 308$/m);
       continue;
     }
-    await fs.access(path.join(root, surface));
+    await requireHistoricalOrRedirectedSurface(surface);
   }
 }
+assert.equal(retirementSuccessor.status,'CURRENT_CX_RETIREMENT_RECONCILED');
+assert.equal(retirementSuccessor.boundaries.historicalPwsContractRewritten,false);
+assert.equal(retirementSuccessor.boundaries.missingSurfaceAcceptedWithoutRedirect,false);
 
 assert.equal(contract.namingCompatibility.replacementAllowed, false);
 assert.equal(contract.namingCompatibility.uniqueSequenceKeyRequired, true);
