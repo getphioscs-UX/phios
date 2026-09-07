@@ -76,7 +76,7 @@ for(const token of ['production runtime','canonical registry','frozen','authorit
 assert(count(html,/data-cx-en=/g)>40&&count(html,/data-cx-zh=/g)>40,'BILINGUAL_COPY_COVERAGE_TOO_LOW');
 assert(css.includes('@media (max-width: 72rem)')&&css.includes('@media (max-width: 52rem)')&&css.includes('@media (max-width: 30rem)'),'RESPONSIVE_BREAKPOINTS_MISSING');
 assert(css.includes('@media (prefers-reduced-motion: reduce)'),'REDUCED_MOTION_MISSING');
-assert(html.includes('href="/articles/"')&&html.includes('href="/figures.html"')&&html.includes('href="/glossary.html"'),'KNOWLEDGE_LANDSCAPE_LINKS_MISSING');
+assert(html.includes('href="/articles/"')&&html.includes('href="/figures/"')&&html.includes('href="/knowledge/concepts/"'),'KNOWLEDGE_LANDSCAPE_LINKS_MISSING');
 for(const step of ['Understand','Read','Choose','Act','Observe','Review','Continue'])assert(html.includes(`data-cx-en="${step}"`),`H08_STEP_MISSING:${step}`);
 for(const phrase of ['Reality will keep changing.','Your understanding should be able to change with it.'])assert(html.includes(phrase),`H09_COPY_MISSING:${phrase}`);
 

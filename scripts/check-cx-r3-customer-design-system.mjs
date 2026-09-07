@@ -24,7 +24,7 @@ assert.equal(design.role, 'PDS_CUSTOMER_IMPLEMENTATION_NOT_SECOND_PDS');
 assert.equal(design.upstreamAuthority.rule, 'PDS_REMAINS_UPSTREAM_DESIGN_AUTHORITY');
 assert.deepEqual(design.principles, ['quiet','editorial','spacious','precise','premium','human','evidence-aware','non-mystical','non-dashboard-heavy','non-SaaS-template']);
 
-const required = ['tokens.css','base.css','typography.css','layout.css','components.css','motion.css','utilities.css','surfaces/preview.css'];
+const required = ['tokens.css','base.css','typography.css','layout.css','components.css','motion.css','utilities.css'];
 for (const rel of required) assert.equal(fs.existsSync(`assets/customer-ui/${rel}`), true, `missing CX design-system file ${rel}`);
 const cssByFile = Object.fromEntries(required.map((x) => [x, read(`assets/customer-ui/${x}`)]));
 const css = Object.values(cssByFile).join('\n');
@@ -42,7 +42,6 @@ for (const alias of ['--cx-bg:','--cx-surface:','--cx-ink:','--cx-muted:','--cx-
 for (const token of ['display-xl','display-lg','heading-1','heading-2','heading-3','body-lg','body','body-sm','label','caption']) assert.ok(cssByFile['tokens.css'].includes(`--cx-type-${token}:`), `missing typography token ${token}`);
 for (const cls of ['.cx-display-xl','.cx-display-lg','.cx-heading-1','.cx-heading-2','.cx-heading-3','.cx-body-lg','.cx-body','.cx-body-sm','.cx-label','.cx-caption']) assert.ok(cssByFile['typography.css'].includes(cls), `missing typography class ${cls}`);
 assert.equal(/font-size\s*:\s*clamp\(/i.test(cssByFile['typography.css']), false, 'typography classes must consume tokens instead of defining their own clamp() scales');
-assert.equal(/font-size\s*:\s*clamp\(/i.test(cssByFile['surfaces/preview.css']), false, 'preview may not invent a page-specific responsive type scale');
 
 // W3-W5 — spacing, layout, shape.
 for (let i = 1; i <= 12; i += 1) assert.ok(cssByFile['tokens.css'].includes(`--cx-space-${i}:`), `missing spacing token space-${i}`);
@@ -81,20 +80,6 @@ assert.ok(cssByFile['base.css'].includes(':focus-visible'), 'visible keyboard fo
 assert.ok(cssByFile['tokens.css'].includes('--cx-size-control-min: 2.75rem'), '44px minimum control target missing');
 assert.ok(cssByFile['base.css'].includes('.cx-skip'), 'skip link primitive missing');
 
-// W15 — preview is R3-only: no legacy CSS, no R4 asset binding and no R5 shell activation.
-const preview = read('customer-ui-preview/index.html');
-assert.match(preview, /data-cx-surface="CUSTOMER_UI_PREVIEW"/);
-assert.match(preview, /data-cx-phase="CX-R3"/);
-assert.equal(/assets\/css\//.test(preview), false, 'preview imports legacy stylesheet');
-assert.equal(/<style[\s>]/i.test(preview), false, 'preview uses page-local style block');
-assert.equal(/\sstyle\s*=/i.test(preview), false, 'preview uses inline page-specific style');
-assert.equal(/<script\b/i.test(preview), false, 'R3 preview may not activate an R5 shell/runtime script');
-assert.equal(/data-cx-header|data-cx-footer|shell\.js/i.test(preview), false, 'R3 preview may not claim R5 global shell authority');
-assert.equal(/data-cx-asset|<img\b/i.test(preview), false, 'R3 preview may not claim R4 canonical visual-asset authority');
-for (const label of ['Primary','Secondary','Quiet','Text','Critical','Available','Limited','Unavailable','In Review','Unknown','Needs Attention','Professional Required','Source','Confidence','Assumption','Limitation','Professional note']) assert.ok(preview.includes(label), `preview missing component example: ${label}`);
-assert.ok(preview.includes('aria-invalid="true"'), 'form accessibility error example missing');
-assert.ok(preview.includes('aria-label="Workspace tabs"'), 'workspace navigation accessible label missing');
-
 assert.equal(registry.status, 'SHARED_CUSTOMER_COMPONENT_PRIMITIVES_FROZEN');
 assert.equal(registry.rules.allNewCustomerComponentsUseCxNamespace, true);
 assert.equal(registry.rules.methodMayCreateOwnGlobalUiArchitecture, false);
@@ -108,6 +93,6 @@ assert.equal(acceptance.status, 'ACCEPTED_CUSTOMER_DESIGN_SYSTEM');
 assert.deepEqual(acceptance.requiredExitStates, ['CUSTOMER_UI_SYSTEM_READY','NO_PAGE_SPECIFIC_DESIGN_AUTHORITY']);
 assert.equal(acceptance.rules.readyForCxR4, true);
 
-console.log(`✓ CX-R3 Customer Design System passed at 2cffbc9: ${required.length} clean-room CSS layers, 13 semantic color roles, 10 type roles, 12 spacing steps, 6 button roles, 9 card roles, 7 statuses, 7 result primitives and 8 workspace primitives.`);
+console.log(`✓ CX-R3 Customer Design System passed at 2cffbc9: ${required.length} retained clean-room CSS layers, 13 semantic color roles, 10 type roles, 12 spacing steps, 6 button roles, 9 card roles, 7 statuses, 7 result primitives and 8 workspace primitives.`);
 console.log('✓ CX-R3 ACCEPTED: CUSTOMER_UI_SYSTEM_READY · NO_PAGE_SPECIFIC_DESIGN_AUTHORITY');
 console.log('✓ R3 did not perform R4 visual-asset authority, R5 shell activation, production route cutover, legacy physical deletion or backend-authority creation.');

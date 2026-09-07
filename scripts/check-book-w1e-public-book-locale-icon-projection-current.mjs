@@ -293,9 +293,6 @@ for (const [path, bookId] of Object.entries(routePages)) {
   assert(html.includes(`data-book-id="${bookId}"`), `${path} must project ${bookId}.`);
   assert(!/four[- ]volume/i.test(html), `${path} contains an active four-volume assumption.`);
 }
-const aliasPage = await read('books/reality-maintenance/index.html');
-assert(aliasPage.includes('<link rel="canonical" href="/books/reality-continuity/">'));
-assert(aliasPage.includes("window.location.replace('/books/reality-continuity/')"));
 assert(redirects.includes('/books/reality-maintenance/ /books/reality-continuity/ 308'));
 const continuityRoute = routeRegistry.entries.find(record => record.routeCode === 'BOOK_REALITY_CONTINUITY');
 assert.equal(continuityRoute?.path, '/books/reality-continuity');
@@ -366,9 +363,13 @@ const activePublicPaths = [
   ...active.activatedSources.map(record => record.path),
   'books/index.html',
   ...Object.keys(routePages),
-  'explore.html',
+  'explore/index.html',
+  'knowledge/index.html',
+  'figures/index.html',
+  'knowledge/concepts/index.html',
   'thesis.html',
-  'assets/css/atlas.css',
+  'assets/customer-ui/surfaces/explore.css',
+  'assets/customer-ui/surfaces/knowledge.css',
   'assets/js/knowledge/catalog.js',
   'assets/js/locales/en/thesis.js',
   'assets/js/locales/zh-Hans/thesis.js',

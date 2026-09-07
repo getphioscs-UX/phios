@@ -82,15 +82,16 @@ assert.equal(cxHome.route, '/');
 assert.equal(cxHome.status, 'HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED');
 assert.equal(cxHome.invariants.legacyStylesheetDependency, false);
 assert.equal(cxHome.invariants.legacyShellDependency, false);
-const px2Pages = new Set(['library.html','articles.html','services.html','knowledge-search.html','books/index.html','professional/personal-runtime/index.html','professional/financial/index.html','reality/index.html']);
+const cxPages = new Set(['index.html', 'about/index.html', 'explore/index.html']);
+const px2Pages = new Set(['library.html', 'services.html', 'books/index.html', 'professional/financial/index.html', 'reality/index.html']);
 for (const page of fixture.publicPages) {
   const source = await read(page);
-  if (page === 'index.html') {
-    assert.ok(source.includes('/assets/customer-ui/tokens.css'), 'index.html must consume the CX shared design tokens');
-    assert.ok(source.includes('/assets/customer-ui/base.css'), 'index.html must consume the CX shared base stylesheet');
-    assert.ok(source.includes('/assets/customer-ui/js/shell.js'), 'index.html must consume the CX shared shell successor');
-    assert.ok(!source.includes('/assets/css/phios-public-v2.css'), 'index.html must not reintroduce the superseded PX2 stylesheet');
-    assert.ok(!source.includes('/assets/js/public-shell-v2.js'), 'index.html must not reintroduce the superseded PX2 shell');
+  if (cxPages.has(page)) {
+    assert.ok(source.includes('/assets/customer-ui/tokens.css'), `${page} must consume the CX shared design tokens`);
+    assert.ok(source.includes('/assets/customer-ui/base.css'), `${page} must consume the CX shared base stylesheet`);
+    assert.ok(source.includes('/assets/customer-ui/js/shell.js'), `${page} must consume the CX shared shell successor`);
+    assert.ok(!source.includes('/assets/css/phios-public-v2.css'), `${page} must not reintroduce the superseded PX2 stylesheet`);
+    assert.ok(!source.includes('/assets/js/public-shell-v2.js'), `${page} must not reintroduce the superseded PX2 shell`);
     continue;
   }
   if (px2Pages.has(page)) {

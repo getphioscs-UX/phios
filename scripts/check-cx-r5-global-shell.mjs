@@ -137,15 +137,6 @@ for (const rel of consumers) {
   assert.equal(html.includes('data-cx-locale='), false, `${rel} contains page-local locale controls`);
 }
 
-const preview = readText('customer-shell-preview/index.html');
-assert.match(preview, /data-cx-surface=\"CUSTOMER_SHELL_PREVIEW\"/);
-assert.match(preview, /data-cx-phase=\"CX-R5\"/);
-assert.match(preview, /data-cx-header/);
-assert.match(preview, /data-cx-footer/);
-assert.match(preview, /\/assets\/customer-ui\/js\/shell\.js/);
-assert.equal(preview.includes('data-puxr-header'), false);
-assert.equal(preview.includes('public-shell-v2'), false);
-
 assert.equal(authority.boundaries.backendAuthorityTouched, false);
 assert.equal(authority.boundaries.routeCutoverPerformed, false);
 assert.equal(authority.boundaries.legacyPhysicalDeletePerformed, false);

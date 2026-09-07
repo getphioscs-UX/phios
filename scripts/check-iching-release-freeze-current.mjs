@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const text=p=>fs.readFileSync(p,'utf8');
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const current=read('content/production/symbolic-method/authority/iching-current-authority.json');
+const release=read(current.releaseManifest);
+const successor=read('content/production/symbolic-method/reconciliation/iching-release-1.0.1-cx-presentation-successor-v1.json');
+const route=read('content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json');
+assert.equal(current.releaseId,'ICHING-1.0.1');
+assert.equal(release.releaseId,current.releaseId);
+assert.equal(successor.status,'ACTIVE_ICHING_RELEASE_RUNTIME_FROZEN_CX_PRESENTATION_SUCCESSOR');
+assert.equal(successor.releaseId,release.releaseId);
+assert.equal(successor.historicalReleaseManifest.path,current.releaseManifest);
+assert.equal(successor.historicalReleaseManifest.mutated,false);
+const presentation=successor.presentationSuccessor;
+const historical=release.artifacts.find(item=>item.path===presentation.path);
+assert.ok(historical,'ICHING_PRESENTATION_NOT_IN_RELEASE_MANIFEST');
+assert.equal(historical.sha256,successor.historicalReleaseManifest.historicalArtifactSha256);
+for(const item of release.artifacts){
+  assert.ok(fs.existsSync(item.path),`release artifact missing: ${item.path}`);
+  if(item.path===presentation.path) continue;
+  assert.equal(sha(item.path),item.sha256,`ICHING-1.0.1 non-presentation artifact drift: ${item.path}`);
+}
+assert.equal(sha(presentation.path),presentation.currentSha256,'ICHING_CURRENT_PRESENTATION_DRIFT');
+const html=text(presentation.path);
+for(const marker of presentation.requiredMarkers) assert.ok(html.includes(marker),`ICHING_CURRENT_PRESENTATION_MARKER_MISSING:${marker}`);
+for(const marker of presentation.forbiddenMarkers) assert.ok(!html.includes(marker),`ICHING_CURRENT_PRESENTATION_FORBIDDEN_MARKER:${marker}`);
+const askRoute=route.routes.find(item=>item.routeId==='ASK');
+assert.ok(askRoute,'CX_ASK_ROUTE_MISSING');
+assert.equal(askRoute.canonicalPath,successor.canonicalAskRoute);
+assert.equal(askRoute.productionBrowserAccepted,true);
+for(const value of Object.values(successor.authorityBoundary)) assert.equal(value,false,'ICHING_PRESENTATION_SUCCESSOR_AUTHORITY_BOUNDARY_DRIFT');
+for(const preserved of ['content/interpretation/iching/corpus/iching-depth-admitted-editorial-corpus-v2.json','functions/interpretation-runtime/iching-depth-editorial-runtime-v2.js','functions/iching-product-runtime/iching-product-runtime-v2.js'])assert.ok(release.artifacts.some(x=>x.path===preserved),`core freeze missing: ${preserved}`);
+console.log(`✓ ${release.releaseId} current release freeze successor passed.`);
+console.log('  All non-presentation release artifacts remain SHA-exact; the I Ching customer surface may use the accepted CX canonical Ask route without reopening I Ching semantics.');

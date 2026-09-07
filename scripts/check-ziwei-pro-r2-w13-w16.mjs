@@ -15,7 +15,7 @@ const w16c=j(`${base}/review/ziwei-pro-r2-w16-human-review-cases-v1.json`);
 const w16t=j(`${base}/review/ziwei-pro-r2-w16-human-review-results-template-v1.json`);
 const w16s=j(`${base}/acceptance/ziwei-pro-r2-w16-human-review-status-v1.json`);
 const manifest=j(`${base}/manifest/ziwei-pro-r2-w13-w16-manifest-v1.json`);
-const reviewHtml=fs.readFileSync('tools/review/ZIWEI-PRO-R2-W16-HUMAN-REVIEW.html','utf8');
+const reviewHtml=fs.readFileSync(`${base}/review/ziwei-pro-r2-w16-human-review.html`,'utf8');
 
 assert.equal(manifest.stages.W15,'MACHINE_VERIFIED_96_OF_96');assert.equal(manifest.stages.W16,'PENDING_0_OF_24');assert.equal(manifest.stages.W17,'BLOCKED_PENDING_W16_HUMAN_ACCEPTANCE');assert.equal(manifest.customerProduct.ziweiProfessionalReadingV2Active,false);
 assert.equal(w13.status,'ENGINEERING_ACTIVE');assert.equal(w13.customerMainNavigation.length,7);assert.equal(w13.customerRules.evidenceBoundaryMainNavAllowed,false);assert.equal(w13.customerRules.campaignCountersMainSurfaceAllowed,false);

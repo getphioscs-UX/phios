@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "PHI-OS-KAP-W11-W17-CX-HOME-PRESENTATION-SUCCESSOR-v1.0.0",
+  "work": "INTEGRATED-PHASE0-KAP-CURRENT-HOME-CHECKER-RECONCILIATION",
+  "status": "ACTIVE_KAP_CX_HOME_PRESENTATION_SUCCESSOR_P1_AUTHORITY_PRESERVED",
+  "baselineCommit": "552f6d973dcaa32aa72f7f1d676ec2bc74434729",
+  "historicalPredecessor": {
+    "path": "content/web-production/px2/successors/px2-stage16-public-ia-successor-v2.json",
+    "status": "ACTIVE_STAGE16_CLIENT_INTENT_SUCCESSOR",
+    "mutated": false,
+    "role": "HISTORICAL_PREDECESSOR_NOT_CURRENT_CUSTOMER_PRESENTATION"
+  },
+  "currentCustomerPresentation": {
+    "home": "index.html",
+    "homeAuthority": "content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json",
+    "homeAuthorityStatus": "HOMEPAGE_TOTAL_REBUILD_IMPLEMENTED",
+    "routeAuthority": "content/customer-experience-rebuild/authority/canonical-customer-route-registry-v5.json",
+    "routeAuthorityStatus": "P1_PRIORITY_ROUTES_ACTIVE_BROWSER_ACCEPTED_LEGACY_PRESENTATION_DELETED",
+    "p1Successor": "content/customer-experience-rebuild/migration/px2-cx-p1-public-ia-successor-v3.json",
+    "p1SuccessorStatus": "ACTIVE_P1_BROWSER_ACCEPTED_PHYSICAL_LEGACY_DELETE_COMPLETE",
+    "canonicalAskRoute": "/knowledge/ask/"
+  },
+  "homeSemanticContract": {
+    "requiredMarkers": [
+      "data-cx-surface=\"HOME\"",
+      "data-cx-home-section=\"H01\"",
+      "data-cx-home-section=\"H09\"",
+      "data-cx-header",
+      "data-cx-footer",
+      "/assets/customer-ui/js/shell.js",
+      "/assets/customer-ui/js/surfaces/home.js",
+      "href=\"/knowledge/ask/\"",
+      "href=\"/reality/\"",
+      "href=\"/perspectives/personal/\"",
+      "href=\"/professional/financial/\""
+    ],
+    "forbiddenMarkers": [
+      "data-cir-root",
+      "data-px2-intent-form",
+      "/assets/js/client-intent-router.js",
+      "/assets/css/client-intent-router.css",
+      "href=\"/ask\"",
+      "href=\"/personal-runtime\"",
+      "href=\"/financial-reality\"",
+      "href=\"/my-reality\""
+    ]
+  },
+  "askSemanticContract": {
+    "path": "knowledge/ask/index.html",
+    "requiredMarkers": [
+      "data-cx-surface=\"CONTEXTUAL_ASK\"",
+      "data-cx-contextual-ask-form",
+      "/assets/customer-ui/js/surfaces/contextual-ask.js"
+    ]
+  },
+  "authorityBoundary": {
+    "kapAnswerSemanticsChanged": false,
+    "knowledgeAuthorityChanged": false,
+    "retrievalAuthorityChanged": false,
+    "homepageAuthorityCreatedByKAP": false,
+    "stage16HistoricalEvidenceRewritten": false,
+    "legacyCIRPresentationRestored": false,
+    "p1RouteAuthorityChanged": false
+  },
+  "reason": "Current KAP checker must follow the accepted CX/P1 customer presentation successor instead of requiring retired Stage16 CIR homepage DOM."
+}

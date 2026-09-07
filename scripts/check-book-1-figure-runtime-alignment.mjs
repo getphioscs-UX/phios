@@ -76,38 +76,20 @@ for (const figureNumber of ['3A', '3B', '4D']) {
   );
 }
 
-const atlasSource = fs.readFileSync('explore.html', 'utf8');
-const atlasScript = fs.readFileSync('assets/js/pages/atlas.js', 'utf8');
-for (const figureNumber of ['3A', '3B', '4D']) {
-  assert.ok(
-    atlasScript.includes(`${figureNumber}.webp`),
-    `Atlas must retain the public WebP mapping for Figure ${figureNumber}`
-  );
-  assert.ok(
-    atlasScript.includes('/assets/images/figures/book-1/web/') ||
-      atlasScript.includes('images/figures/book-1/'),
-    'Atlas Figure configuration must retain a governed Book I Figure root until the public asset base URL is verified'
-  );
+const figuresPage = fs.readFileSync('figures/index.html', 'utf8');
+const knowledgeSurface = fs.readFileSync('assets/customer-ui/js/surfaces/knowledge.js', 'utf8');
+const knowledgeAdapter = fs.readFileSync('assets/js/cx-knowledge-source-adapter.js', 'utf8');
+const publicSurfaceData = fs.readFileSync('assets/js/web-production/public-surface-data.js', 'utf8');
+assert.match(figuresPage, /data-cx-surface="KNOWLEDGE_FIGURES"/);
+assert.match(figuresPage, /data-cx-figure-grid/);
+assert.match(figuresPage, /\/assets\/customer-ui\/js\/surfaces\/knowledge\.js/);
+for (const contract of ['loadFigureRegistry', 'figureHasCanonicalBookOwnership', 'renderFigures']) {
+  assert.ok(knowledgeSurface.includes(contract), `Current Figure surface is missing ${contract}`);
 }
-for (const part of [1, 2, 3, 4, 5]) {
-  assert.match(
-    atlasSource,
-    new RegExp(`data-atlas-figures=["']${part}["']`),
-    `Atlas Part ${part} must expose its Figure container`
-  );
-}
-for (const key of ['figure3a', 'figure3b', 'figure4d']) {
-  assert.match(
-    atlasScript,
-    new RegExp(`["']${key}["']`),
-    `Atlas Figure configuration must include ${key}`
-  );
-}
-assert.ok(
-  atlasScript.indexOf('const atlasFigureConfig') <
-    atlasScript.indexOf('renderAtlasFigures();'),
-  'Atlas Figure configuration must be initialized before the first render'
-);
+assert.ok(knowledgeAdapter.includes('loadFigureRegistry'));
+assert.ok(knowledgeAdapter.includes('loadCanonicalParts'));
+assert.ok(publicSurfaceData.includes('/content/registry/figures.json'));
+assert.ok(publicSurfaceData.includes('/content/registry/parts.json'));
 assert.deepEqual(RUNTIME_COORDINATES.map(item => item.id), registry.contracts.runtimeCoordinates);
 assert.deepEqual(CARRIER_ORGANIZATION_LAYERS.map(item => item.id), registry.contracts.carrierOrganization);
 assert.deepEqual(CARRIER_CONFIGURATION_LAYERS.map(item => item.id), registry.contracts.carrierConfiguration);

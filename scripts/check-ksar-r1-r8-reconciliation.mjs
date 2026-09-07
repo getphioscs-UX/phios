@@ -76,7 +76,7 @@ assert.equal(answer.generativeModelUsed,false);
 assert(answer.sourceReferences.includes('MANUSCRIPT:FIX-1'));
 
 const knowledgeSearch=fs.readFileSync('assets/js/pages/knowledge-search.js','utf8');
-const freeExplore=fs.readFileSync('assets/js/pages/free-explore.js','utf8');
+const currentKnowledge=fs.readFileSync('assets/customer-ui/js/surfaces/knowledge.js','utf8');
 const library=fs.readFileSync('assets/js/pages/library.js','utf8');
 const kapAnswerAcceptance=json('content/knowledge/answer-projection/acceptance/kap-w11-w17-answer-composition-acceptance-v1.json');
 const kapGuidedSuccessor=json('content/knowledge/answer-projection/reconciliation/kap-w17-w18-guided-reading-surface-successor-v1.json');
@@ -108,7 +108,8 @@ assert(
   'Ask PHI OS response must be rendered directly or through an accepted KAP/HPC2 CKA client successor.'
 );
 assert(knowledgeSearch.includes("new URLSearchParams(location.search).get('q')"));
-assert(freeExplore.includes('/knowledge-search'));
+assert(currentKnowledge.includes('/knowledge/ask/'));
+assert(currentKnowledge.includes('loadPublishedArticles'));
 assert(library.includes("id: 'knowledge-access'"));
 
 const freeze=json('content/knowledge/source-access/freeze/ksar-r1-r8-reconciliation-v1.json');

@@ -33,19 +33,20 @@ const requiredFiles = [
   'book-one.html',
   'book-one-preview.html',
   'read/book-one/index.html',
-  'figures.html',
+  'figures/index.html',
   'figure.html',
-  'glossary.html',
+  'knowledge/concepts/index.html',
+  'knowledge/index.html',
+  'explore/index.html',
   'checkout.html',
   'assets/css/knowledge-release.css',
   'assets/js/pages/library.js',
   'assets/js/pages/book-one.js',
   'assets/js/pages/book-one-preview.js',
   'assets/js/pages/book-one-reader.js',
-  'assets/js/pages/atlas-knowledge-upgrade.js',
-  'assets/js/pages/figures.js',
+  'assets/customer-ui/js/surfaces/knowledge.js',
+  'assets/js/cx-knowledge-source-adapter.js',
   'assets/js/pages/figure-detail.js',
-  'assets/js/pages/glossary.js',
   'assets/js/knowledge/purchase-state.js',
   'assets/js/knowledge/reading-progress.js',
   'content/registry/m3b-knowledge-release.json',
@@ -218,8 +219,18 @@ assert.doesNotMatch(readerHtml, /localStorage/);
 const readerScript = await read('assets/js/pages/book-one-reader.js');
 assert.doesNotMatch(readerScript, /setItem|purchaseState\s*=\s*['"]purchased/);
 
-const atlasHtml = await read('explore.html');
-assert.match(atlasHtml, /atlas-knowledge-upgrade\.js/);
+const knowledgeHtml = await read('knowledge/index.html');
+const figuresHtml = await read('figures/index.html');
+const conceptsHtml = await read('knowledge/concepts/index.html');
+const knowledgeRuntime = await read('assets/customer-ui/js/surfaces/knowledge.js');
+for (const html of [knowledgeHtml, figuresHtml, conceptsHtml]) {
+  assert.match(html, /\/assets\/customer-ui\/js\/shell\.js/);
+  assert.match(html, /\/assets\/customer-ui\/js\/surfaces\/knowledge\.js/);
+}
+assert.match(figuresHtml, /data-cx-figure-grid/);
+assert.match(conceptsHtml, /data-cx-concept-grid/);
+assert.match(knowledgeRuntime, /loadFigureRegistry/);
+assert.match(knowledgeRuntime, /renderConcepts/);
 
-console.log('✓ M3B Knowledge Release passed: Library → Book I → R2 Preview → Access → Atlas → R2 Figures → Glossary.');
+console.log('✓ M3B Knowledge Release passed: historical commerce authority is preserved and current Knowledge, Figures and Concepts surfaces are canonical.');
 console.log('  Stripe/R2 commerce is implemented and remains production-gated until external acceptance passes.');

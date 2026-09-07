@@ -273,14 +273,20 @@ const requiredPages = [
 ];
 const homepageComposition = await readJson('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
 assert.equal(homepageComposition.invariants.legacyShellDependency, false);
-const px2MigratedPjaPages = new Set(['library.html','articles.html']);
-for (const page of requiredPages) {
-  assert.equal(await exists(page), true, `Missing PJA-W1 page: ${page}`);
+const currentPageByHistoricalPage = new Map([
+  ['articles.html', 'articles/index.html'],
+  ['explore.html', 'explore/index.html']
+]);
+const cxMigratedPjaPages = new Set(['index.html', 'articles/index.html', 'explore/index.html']);
+const px2MigratedPjaPages = new Set(['library.html']);
+for (const historicalPage of requiredPages) {
+  const page = currentPageByHistoricalPage.get(historicalPage) || historicalPage;
+  assert.equal(await exists(page), true, `Missing current PJA-W1 page: ${page}`);
   const html = await read(page);
-  if (page === 'index.html') {
+  if (cxMigratedPjaPages.has(page)) {
     assert(
       html.includes('/assets/customer-ui/js/shell.js'),
-      'PJA-W1 homepage must consume the CX-R6+ governed customer shell successor'
+      `PJA-W1 current page must consume the governed customer shell successor: ${page}`
     );
     assert.equal(html.includes('/assets/js/public-shell-v2.js'), false);
     assert.equal(html.includes('/assets/js/public-shell.js'), false);
@@ -309,7 +315,7 @@ for (const page of evidence.publicInformationArchitecture.articlePages) {
 const expW2 = await readJson('docs/experience/EXP-W2-home-discover-about-contract.json');
 assert.equal(expW2.freezeId, 'EXP-W2-v1.0.0-Frozen');
 assert.equal((await read('index.html')).includes('data-knowledge-article-grid'), false);
-for (const page of ['library.html', 'book-one.html', 'thesis.html', 'explore.html']) {
+for (const page of ['library.html', 'book-one.html', 'thesis.html']) {
   const html = await read(page);
   if (page === 'library.html') {
     const px2Publications = await read('assets/js/components/publications-v2.js');
@@ -322,10 +328,29 @@ for (const page of ['library.html', 'book-one.html', 'thesis.html', 'explore.htm
     assert(html.includes('/assets/js/pages/knowledge-connections.js'));
   }
 }
+const currentKnowledgeHome = await read('knowledge/index.html');
+const currentExplore = await read('explore/index.html');
+for (const [page, html] of [['knowledge/index.html', currentKnowledgeHome], ['explore/index.html', currentExplore]]) {
+  assert(html.includes('/assets/customer-ui/js/shell.js'), `${page} must consume the current CX shell`);
+}
+assert(currentKnowledgeHome.includes('/assets/customer-ui/js/surfaces/knowledge.js'));
+assert(currentKnowledgeHome.includes('href="/articles/"'));
 
 function publicTargetToFile(href) {
   const clean = href.split('#')[0].split('?')[0];
   if (!clean || clean === '/') return 'index.html';
+  const canonicalRouteFiles = new Map([
+    ['/about', 'about/index.html'],
+    ['/explore', 'explore/index.html'],
+    ['/articles', 'articles/index.html'],
+    ['/figures', 'figures/index.html'],
+    ['/glossary', 'knowledge/concepts/index.html'],
+    ['/books/reality-maintenance', 'books/reality-continuity/index.html'],
+    ['/readings/symbolic', 'perspectives/index.html'],
+    ['/professional/human-design', 'perspectives/personal/index.html']
+  ]);
+  const normalized = clean.length > 1 ? clean.replace(/\/$/, '') : clean;
+  if (canonicalRouteFiles.has(normalized)) return canonicalRouteFiles.get(normalized);
   const relative = clean.replace(/^\//, '');
   if (path.extname(relative)) return relative;
   return `${relative}.html`;

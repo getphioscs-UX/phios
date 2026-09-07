@@ -17,7 +17,6 @@ const personalSurfacePath = p1Deleted
 const [
   services,
   personalRuntime,
-  legacyHumanDesign,
   readers,
   css,
   en,
@@ -33,7 +32,6 @@ const [
 ] = await Promise.all([
   read('services.html'),
   read(personalSurfacePath),
-  read('professional/human-design/index.html'),
   read('professional/external-readers/index.html'),
   read('assets/css/public-experience.css'),
   read('assets/js/locales/en/public.js'),
@@ -92,9 +90,7 @@ const legacyRoute = wprRouteRegistry.legacyCompatibility.find(entry => entry.leg
 assert.ok(legacyRoute, 'WPR_LEGACY_HUMAN_DESIGN_ROUTE_MISSING');
 assert.equal(legacyRoute.targetRouteCode, 'PROFESSIONAL_PERSONAL_RUNTIME');
 assert.equal(legacyRoute.status, 'LEGACY_INTERNAL_TERM_ROUTE_COMPATIBILITY_REDIRECT');
-assert.ok(legacyHumanDesign.includes('/professional/personal-runtime'));
-assert.ok(legacyHumanDesign.includes("location.replace('/professional/personal-runtime')"));
-assert.ok(redirects.includes('/professional/human-design /professional/personal-runtime 308'));
+assert.ok(redirects.includes('/professional/human-design /perspectives/personal/ 308'));
 
 // Reader availability remains structurally identical, but the available reader uses the controlled public label.
 for (const reader of [hdVocabulary.publicLabels.en, 'BaZi', 'Zi Wei', 'Gene Keys', 'Astrology']) {
@@ -134,8 +130,8 @@ for (const forbidden of ['human-design','bazi','ziwei','gene-keys','astrology'])
 assert.equal(migrationClosure.status, 'closed_on_activated_public_customer_targets');
 assert.deepEqual(migrationClosure.remainingHits, []);
 for (const file of migrationClosure.activatedTargetFiles) {
-  if (p1Deleted && file === 'professional/personal-runtime/index.html') {
-    assert.equal(await exists(file), false, 'P1 retired WPR Personal Runtime presentation must remain physically deleted');
+  if (p1Deleted && ['professional/personal-runtime/index.html', 'professional/human-design/index.html'].includes(file)) {
+    assert.equal(await exists(file), false, `Retired professional presentation must remain physically deleted: ${file}`);
     continue;
   }
   const text = await read(file);

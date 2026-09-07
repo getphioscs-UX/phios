@@ -69,7 +69,7 @@ assert.equal(
 );
 
 const activePages = [
-  'index.html', 'about.html', 'ai-disclosure.html', 'free-observation.html',
+  'index.html', 'about/index.html', 'ai-disclosure.html', 'free-observation.html',
   'privacy.html', 'terms.html', 'reality-journey.html'
 ];
 for (const page of activePages) {

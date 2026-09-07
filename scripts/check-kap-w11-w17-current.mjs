@@ -199,10 +199,12 @@ const px2Successor = read('content/web-production/px2/successors/px2-w11-checker
 assert.equal(px2Successor.status, 'ACTIVE');
 if (stage16Successor.status === 'ACTIVE_STAGE16_CLIENT_INTENT_SUCCESSOR') {
   assert.equal(stage16Successor.predecessorMutated, false);
-  assert.match(homepage, /data-cir-root/);
-  assert.match(homepage, /href="\/ask"/);
-  assert.match(homepage, /href="\/library"/);
-  assert.match(homepage, /href="\/personal-runtime"/);
+  assert.match(homepage, /data-cx-surface="HOME"/);
+  assert.match(homepage, /href="\/knowledge\/ask\/"/);
+  assert.match(homepage, /href="\/books\/"/);
+  assert.match(homepage, /href="\/perspectives\/personal\/"/);
+  assert.match(homepage, /href="\/reality\/"/);
+  assert.doesNotMatch(homepage, /data-cir-root/);
   assert.doesNotMatch(homepage, /data-px2-intent-form/);
 } else {
   assert.match(homepage, /data-px2-intent-form/);
