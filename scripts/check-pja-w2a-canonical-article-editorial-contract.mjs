@@ -335,6 +335,7 @@ const articleBodyAlternatives = await Promise.all([
   filesIn('content/knowledge').then(files => files.filter(file => (
     !file.startsWith('content/knowledge/production/') &&
     !file.startsWith('content/knowledge/governance/prompt-templates/') &&
+    !file.startsWith('content/knowledge/knowledge-intelligence-r2/review/') &&
     !approvedKnowledgePlaceholderMarkdown.has(file) &&
     (file.endsWith('.md') || file.endsWith('.html'))
   ))),

@@ -1,3 +1,4 @@
+import {normalizeKirGroundingSources,rerankKirContentFragments,deduplicateKirContentEvidence,buildKirContentEvidencePack,composeKirContentGroundedAnswer,guardKirSemanticAnswer,projectKirMaterialSourceUsage} from './kir-r2-answer-intelligence.js';
 const clean=v=>String(v??'').normalize('NFKC').trim().replace(/\s+/g,' ');
 const low=v=>clean(v).toLocaleLowerCase();
 const uniq=a=>[...new Set((a||[]).filter(Boolean))];
@@ -86,6 +87,27 @@ export function guardKirAnswer({understanding,evidencePack,answer}){
   return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-ANSWER-RELEVANCE-GUARD-v1.0.0',DIRECTLY_ANSWERS_USER_QUESTION:direct,SOURCE_SUPPORTED:supported,NO_UNGROUNDED_PHI_CONCEPT:supported,NO_INTERNAL_JARGON_DUMP:!jargonDump,NO_METHOD_HIJACK:!methodHijack,passed:direct&&supported&&!jargonDump&&!methodHijack});
 }
 export function projectKirBookUsage(evidencePack){const items=[...(evidencePack.primaryEvidence||[]),...(evidencePack.supportingEvidence||[])];return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-BOOK-USAGE-EVIDENCE-v1.0.0',whichBookUsed:uniq(items.map(x=>x.bookCode)),whichNodesUsed:uniq(items.map(x=>x.nodeCode)),whichArticlesUsed:uniq(items.filter(x=>x.sourceType==='PUBLISHED_ARTICLE').map(x=>x.sourceId)),customerDefaultVisible:false});}
-export async function runKirR2Pipeline({question,locale='zh-Hans',profiles,provider=null,allowedContext=null,upstreamGroundedAnswer=null}){
-  const understanding=understandKirQuestion({question,locale}); const expansion=expandKirQuery(understanding,profiles); const retrieval=hybridKirRetrieve({understanding,expansion,profiles}); const reranked=rerankKirEvidence({understanding,retrieval}); const dedup=deduplicateKirEvidence(reranked); const evidencePack=buildKirEvidencePack({understanding,deduplicated:dedup}); const model=evaluateKirModel({understanding,evidencePack}); const answer=await composeKirGroundedAnswer({understanding,evidencePack,modelDecision:model,allowedContext,provider,upstreamGroundedAnswer}); const guard=guardKirAnswer({understanding,evidencePack,answer}); const usage=projectKirBookUsage(evidencePack); return {schemaVersion:'PHI-OS-KIR-R2-PIPELINE-v1.0.0',understanding,expansion,retrieval,reranked,dedup,evidencePack,model,answer,guard,usage};
+export async function runKirR2Pipeline({question,locale='zh-Hans',profiles,provider=null,allowedContext=null,upstreamGroundedAnswer=null,groundingBundle=null,articleSources=[]}){
+  const understanding=understandKirQuestion({question,locale});
+  const expansion=expandKirQuery(understanding,profiles);
+  const retrieval=hybridKirRetrieve({understanding,expansion,profiles});
+  const canonicalReranked=rerankKirEvidence({understanding,retrieval});
+  const canonicalDedup=deduplicateKirEvidence(canonicalReranked);
+  const contentSources=normalizeKirGroundingSources({groundingBundle,articleSources});
+  if(contentSources.length){
+    const reranked=rerankKirContentFragments({understanding,expansion,contentSources});
+    const dedup=deduplicateKirContentEvidence(reranked);
+    const evidencePack=buildKirContentEvidencePack({understanding,deduplicated:dedup,canonicalFallback:canonicalDedup.results});
+    const model=evaluateKirModel({understanding,evidencePack});
+    const answer=await composeKirContentGroundedAnswer({understanding,evidencePack,modelDecision:model,allowedContext,provider,upstreamGroundedAnswer});
+    const guard=guardKirSemanticAnswer({understanding,evidencePack,answer});
+    const usage=projectKirMaterialSourceUsage({evidencePack,answer});
+    return {schemaVersion:'PHI-OS-KIR-R2-ANSWER-INTELLIGENCE-PIPELINE-v2.0.0',understanding,expansion,retrieval,canonicalReranked,canonicalDedup,reranked,dedup,evidencePack,model,answer,guard,usage};
+  }
+  const evidencePack=buildKirEvidencePack({understanding,deduplicated:canonicalDedup});
+  const model=evaluateKirModel({understanding,evidencePack});
+  const answer=await composeKirGroundedAnswer({understanding,evidencePack,modelDecision:model,allowedContext,provider,upstreamGroundedAnswer});
+  const guard=guardKirAnswer({understanding,evidencePack,answer});
+  const usage=projectKirBookUsage(evidencePack);
+  return {schemaVersion:'PHI-OS-KIR-R2-PIPELINE-v1.0.0',understanding,expansion,retrieval,reranked:canonicalReranked,dedup:canonicalDedup,evidencePack,model,answer,guard,usage};
 }

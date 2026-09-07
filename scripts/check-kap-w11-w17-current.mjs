@@ -61,8 +61,9 @@ const ask2Freeze = read(paths.ask2Freeze);
 const stage16Successor = read(paths.stage16Successor);
 const relevanceSuccessor = read(paths.relevanceSuccessor);
 const kirSuccessor = read('content/knowledge/answer-projection/reconciliation/kap-kir-r2-production-bridge-successor-v1.json');
+const kirContentSuccessor = read('content/knowledge/answer-projection/reconciliation/kap-kir-r2-content-grounding-successor-v2.json');
 const relevanceRuntime = new Map(relevanceSuccessor.runtimeSuccessors.map(item => [item.path, item]));
-const currentRuntimeSha = item => item.path === kirSuccessor.runtimeSuccessor.path ? kirSuccessor.runtimeSuccessor.currentSha256 : item.currentSha256;
+const currentRuntimeSha = item => item.path === kirContentSuccessor.runtimeSuccessor.path ? kirContentSuccessor.runtimeSuccessor.currentSha256 : (item.path === kirSuccessor.runtimeSuccessor.path ? kirSuccessor.runtimeSuccessor.currentSha256 : item.currentSha256);
 const homepage = text(paths.homepage);
 const homepageRuntime = text(paths.homepageRuntime);
 const ckaCurrent = new Map(historicalCka.clientSurfaceTransition.artifacts.map(item => [item.path, item]));
@@ -84,6 +85,11 @@ assert.equal(kirSuccessor.status, 'ACTIVE_ADDITIVE_KIR_R2_GROUNDED_COMPOSITION_S
 assert.equal(kirSuccessor.runtimeSuccessor.predecessorSha256, relevanceRuntime.get(kirSuccessor.runtimeSuccessor.path).currentSha256);
 assert.equal(kirSuccessor.authorityBoundary.historicalKapContractRewritten, false);
 assert.equal(kirSuccessor.authorityBoundary.kapFallbackPreserved, true);
+assert.equal(kirContentSuccessor.status, 'ACTIVE_ADDITIVE_KIR_R2_CONTENT_GROUNDING_SUCCESSOR');
+assert.equal(kirContentSuccessor.runtimeSuccessor.predecessorSha256, kirSuccessor.runtimeSuccessor.currentSha256);
+assert.equal(kirContentSuccessor.authorityBoundary.historicalKapContractRewritten, false);
+assert.equal(kirContentSuccessor.authorityBoundary.existingGroundingBundleReused, true);
+assert.equal(kirContentSuccessor.authorityBoundary.kapFallbackPreserved, true);
 for (const key of ['knowledgeAuthorityChanged','retrievalAuthorityChanged','answerAuthorityChanged','meaningAdmissionChanged','canonicalKnowledgeMutationAllowed','modelGapFillAllowed','historicalFreezeMutationAllowed']) assert.equal(relevanceSuccessor.authorityBoundary[key], false, `KAP_RELEVANCE_AUTHORITY_DRIFT:${key}`);
 for (const item of relevanceSuccessor.runtimeSuccessors) {
   assert.ok(fs.existsSync(item.path), `KAP_RELEVANCE_RUNTIME_MISSING:${item.path}`);

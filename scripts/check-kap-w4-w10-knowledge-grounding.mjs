@@ -10,8 +10,9 @@ const freeze=readJson(`${ROOT}/freeze/kap-w4-w10-knowledge-grounding-freeze-v1.j
 const currentSuccessor=readJson(`${ROOT}/reconciliation/kap-w4-w10-current-grounding-successor-v1.json`);
 const relevanceSuccessor=readJson(`${ROOT}/reconciliation/kap-p1-question-source-relevance-successor-v1.json`);
 const kirSuccessor=readJson(`${ROOT}/reconciliation/kap-kir-r2-production-bridge-successor-v1.json`);
+const kirContentSuccessor=readJson(`${ROOT}/reconciliation/kap-kir-r2-content-grounding-successor-v2.json`);
 const relevanceRuntime=new Map(relevanceSuccessor.runtimeSuccessors.map(item=>[item.path,item]));
-const currentRuntimeSha=item=>item.path===kirSuccessor.runtimeSuccessor.path?kirSuccessor.runtimeSuccessor.currentSha256:item.currentSha256;
+const currentRuntimeSha=item=>item.path===kirContentSuccessor.runtimeSuccessor.path?kirContentSuccessor.runtimeSuccessor.currentSha256:(item.path===kirSuccessor.runtimeSuccessor.path?kirSuccessor.runtimeSuccessor.currentSha256:item.currentSha256);
 assert.equal(acceptance.baselineCommit,BASELINE); assert.equal(acceptance.status,'ACCEPTED_QUESTION_TO_GROUNDING_PIPELINE_NO_ANSWER_COMPOSITION'); assert.equal(acceptance.nextPermittedWork,'KAP-W11_DETERMINISTIC_ANSWER_FIRST');
 assert.equal(freeze.baselineCommit,BASELINE); assert.equal(freeze.status,'FROZEN_KNOWLEDGE_GROUNDING_RUNTIME_NO_ANSWER_COMPOSITION');
 assert.equal(currentSuccessor.status,'ACTIVE_ADDITIVE_PUBLISHED_COVERAGE_SUCCESSOR');
@@ -21,6 +22,11 @@ assert.equal(kirSuccessor.status,'ACTIVE_ADDITIVE_KIR_R2_GROUNDED_COMPOSITION_SU
 assert.equal(kirSuccessor.runtimeSuccessor.predecessorSha256,relevanceRuntime.get(kirSuccessor.runtimeSuccessor.path).currentSha256);
 assert.equal(kirSuccessor.authorityBoundary.historicalKapContractRewritten,false);
 assert.equal(kirSuccessor.authorityBoundary.kapFallbackPreserved,true);
+assert.equal(kirContentSuccessor.status,'ACTIVE_ADDITIVE_KIR_R2_CONTENT_GROUNDING_SUCCESSOR');
+assert.equal(kirContentSuccessor.runtimeSuccessor.predecessorSha256,kirSuccessor.runtimeSuccessor.currentSha256);
+assert.equal(kirContentSuccessor.authorityBoundary.historicalKapContractRewritten,false);
+assert.equal(kirContentSuccessor.authorityBoundary.existingGroundingBundleReused,true);
+assert.equal(kirContentSuccessor.authorityBoundary.kapFallbackPreserved,true);
 for(const key of ['knowledgeAuthorityChanged','retrievalAuthorityChanged','answerAuthorityChanged','meaningAdmissionChanged','canonicalKnowledgeMutationAllowed','modelGapFillAllowed','historicalFreezeMutationAllowed']) assert.equal(relevanceSuccessor.authorityBoundary[key],false,`KAP_RELEVANCE_AUTHORITY_DRIFT:${key}`);
 for(const item of relevanceSuccessor.runtimeSuccessors){ assertFile(item.path); assert.equal(sha256(item.path),currentRuntimeSha(item),`KAP_RELEVANCE_CURRENT_RUNTIME_DRIFT:${item.path}`); }
 assert.equal(currentSuccessor.predecessor.sha256,freeze.predecessorEvidence.find(item=>item.path===currentSuccessor.predecessor.artifactPath).sha256);

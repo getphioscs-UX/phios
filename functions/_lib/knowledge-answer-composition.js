@@ -329,7 +329,8 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     question: input?.question || grounding.groundingBundle?.question?.text || '',
     locale: input?.locale || grounding.groundingBundle?.question?.locale || 'zh-Hans',
     env,
-    upstreamGroundedAnswer: projection?.answer?.content?.directAnswer || null
+    upstreamGroundedAnswer: projection?.answer?.content?.directAnswer || null,
+    upstreamGroundingBundle: grounding.groundingBundle
   });
   const kirApplied = kir?.applied === true;
   const kirAnswer = kirApplied ? kir.result.answer.text : null;
