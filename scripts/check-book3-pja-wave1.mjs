@@ -3,16 +3,15 @@ import fs from 'node:fs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const manifest=read('content/knowledge/production-planning/production/book3-wave1/manifest-v1.json');
 const inv=read('content/knowledge/manuscripts/extraction/book-3-full-section-inventory-v1.json');
+const readability=read('content/knowledge/manuscripts/review/kau-r6d-book3-readability-human-acceptance-v1.json');
 const acc=read('content/knowledge/production-planning/acceptance/book3-pja-wave1-acceptance-v1.json');
 const sections=new Map(inv.sections.filter(x=>x.segmentType==='SECTION').map(x=>[x.sectionCode,x]));
-assert.equal(manifest.articleConceptCount,8); assert.equal(manifest.localeCandidateCount,16); assert.equal(manifest.records.length,16);
-for(const r of manifest.records){
-  assert.ok(['zh-Hans','en'].includes(r.locale)); assert.equal(r.status,'SOURCE_BOUND_EDITORIAL_CANDIDATE'); assert.ok(fs.existsSync(r.path),r.path);
-  const a=read(r.path); assert.equal(a.review.humanEditorialApproved,false); assert.equal(a.review.customerPublishable,false); assert.equal(a.review.publicationStatus,'not_published');
-  assert.equal(a.canonicalNodeBinding.status,'PENDING_KAU_R6D_HUMAN_RECONCILIATION'); assert.equal(a.canonicalNodeBinding.nodeCode,null); assert.ok(a.sourceBindings.length>=1);
-  for(const b of a.sourceBindings){const s=sections.get(b.sourceSectionCode); assert.ok(s,b.sourceSectionCode); assert.equal(s.textSha256,b.sourceTextSha256); assert.deepEqual([s.startPage,s.endPage],b.sourcePages);}
-  assert.ok(a.blocks.length>=6); assert.equal(a.authorityBoundary.mayCreateBookClaimBeyondSource,false); assert.equal(a.authorityBoundary.mayMarkPublished,false);
-}
-assert.equal(acc.machine.articleConcepts,8); assert.equal(acc.machine.localeCandidates,16); assert.equal(acc.human.zhHansEditorialAccepted,false); assert.equal(acc.publication.published,false);
-console.log('✓ BOOK-3 PJA Wave 1 passed: 8 article concepts / 16 locale candidates are source-section-bound.');
-console.log('✓ Human editorial, English semantic parity, exact R2 figure binding, canonical-node binding and publication remain fail-closed.');
+assert.equal(readability.status,'HUMAN_READABILITY_ACCEPTED');assert.equal(readability.allRecordsHumanAccepted,true);assert.equal(readability.recordCount,106);
+assert.equal(manifest.baselineCommit,'ad5e3df2f437ff40b72055af289b99880d13d8b6');assert.equal(manifest.articleConceptCount,8);assert.equal(manifest.localeCandidateCount,16);assert.equal(manifest.records.length,16);assert.equal(manifest.readabilityGate.acceptedRecords,106);
+const concepts=new Set();const locales=new Map();
+for(const r of manifest.records){assert.ok(['zh-Hans','en'].includes(r.locale));assert.equal(r.status,'SOURCE_BOUND_EDITORIAL_CANDIDATE');assert.ok(fs.existsSync(r.path),r.path);const a=read(r.path);concepts.add(a.candidateId);if(!locales.has(a.candidateId))locales.set(a.candidateId,new Set());locales.get(a.candidateId).add(a.locale);assert.equal(a.productionRole,'ARTICLE');assert.equal(a.dispatchTarget,'PJA');assert.equal(a.review.humanEditorialApproved,false);assert.equal(a.review.customerPublishable,false);assert.equal(a.review.publicationStatus,'not_published');assert.equal(a.sourceAuthority.readabilityStatus,'HUMAN_READABILITY_ACCEPTED');assert.equal(a.canonicalNodeBinding.status,'PENDING_CANONICAL_NODE_ASSET_RECONCILIATION');assert.equal(a.canonicalNodeBinding.nodeCode,null);assert.deepEqual(a.canonicalNodeBinding.nodeCodes,[]);assert.ok(a.sourceBindings.length>=1);for(const b of a.sourceBindings){const s=sections.get(b.sourceSectionCode);assert.ok(s,b.sourceSectionCode);assert.equal(s.textSha256,b.sourceTextSha256);assert.deepEqual([s.startPage,s.endPage],b.sourcePages);assert.equal(s.heading,b.sourceHeading);}assert.ok(a.blocks.length>=7);assert.equal(a.authorityBoundary.mayCreateBookClaimBeyondSource,false);assert.equal(a.authorityBoundary.mayCreateCanonicalNode,false);assert.equal(a.authorityBoundary.mayMarkPublished,false);assert.equal(a.authorityBoundary.manuscriptReadabilityApprovalIsArticleEditorialApproval,false);}
+assert.equal(concepts.size,8);for(const [id,set] of locales)assert.deepEqual([...set].sort(),['en','zh-Hans'],`${id} must have both locale candidates`);
+assert.equal(acc.machine.articleConcepts,8);assert.equal(acc.machine.localeCandidates,16);assert.equal(acc.machine.manuscriptReadabilityHumanAccepted,true);assert.equal(acc.human.zhHansEditorialAccepted,false);assert.equal(acc.human.englishSemanticParityAccepted,false);assert.equal(acc.human.canonicalAssetReconciliationAccepted,false);assert.equal(acc.publication.published,false);
+const builder=fs.readFileSync('scripts/build-book3-pja-wave1-human-review.mjs','utf8');for(const required of ['全部 ACCEPT','book3-pja-wave1-human-decisions-v1.json','Publication 仍关闭'])assert.ok(builder.includes(required),`review builder missing ${required}`);
+console.log('✓ BOOK-3 PJA Wave 1 passed: 8 article concepts / 16 locale candidates are source-section-bound to the human-accepted manuscript.');
+console.log('✓ Article editorial approval, canonical/KPP asset reconciliation, English semantic parity and publication remain fail-closed.');
