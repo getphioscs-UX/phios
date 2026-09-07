@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 import {buildEcrTopicProjection} from '../functions/embodied-configuration/ecr-topic-projection-runtime.js';
+import {ECR_TOPIC_DEPLOYMENT_AUTHORITY_META,TOPICS as DEPLOY_TOPICS,MATRIX as DEPLOY_MATRIX,ACCESS as DEPLOY_ACCESS,ATOMIC as DEPLOY_ATOMIC} from '../functions/embodied-configuration/ecr-topic-deployment-authority.js';
 
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha256=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const taxonomy=readJson('content/embodied-configuration/ecr-topic-r1/contracts/ecr-topic-taxonomy-contract-v1.json');
 const boundary=readJson('content/embodied-configuration/ecr-topic-r1/contracts/ecr-topic-boundary-contract-v1.json');
 const narrative=readJson('content/embodied-configuration/ecr-topic-r1/contracts/ecr-topic-narrative-contract-v1.json');
@@ -14,6 +17,17 @@ const human=readJson('content/embodied-configuration/ecr-topic-r1/acceptance/ecr
 const admission=readJson('content/embodied-configuration/ecr-topic-r1/acceptance/ecr-topic-r1-w19-production-admission-v1.json');
 const renderer=fs.readFileSync('assets/customer-ui/js/specialists/ecr/mandala-renderer.js','utf8');
 const css=fs.readFileSync('assets/customer-ui/surfaces/ecr-specialist.css','utf8');
+const runtimeSource=fs.readFileSync('functions/embodied-configuration/ecr-topic-projection-runtime.js','utf8');
+const atomic=readJson('content/embodied-configuration/meaning/ecr-atomic-meaning-registry-v1.json');
+
+assert.equal(runtimeSource.includes("from 'node:fs'"),false,'ECR Topic runtime must not import node:fs in Cloudflare Pages Functions');
+assert.equal(runtimeSource.includes("from 'node:path'"),false,'ECR Topic runtime must not import node:path in Cloudflare Pages Functions');
+assert.equal(runtimeSource.includes('fileURLToPath(import.meta.url)'),false,'ECR Topic runtime must not derive filesystem paths from import.meta.url in Cloudflare Pages Functions');
+assert.deepEqual(DEPLOY_TOPICS,registry);
+assert.deepEqual(DEPLOY_MATRIX,matrix);
+assert.deepEqual(DEPLOY_ACCESS,access);
+assert.deepEqual(DEPLOY_ATOMIC,atomic);
+for(const source of ECR_TOPIC_DEPLOYMENT_AUTHORITY_META.generatedFrom){assert.equal(sha256(source.path),source.sha256,`deployment authority source drift: ${source.path}`);}
 
 const topicIds=['CAREER','RELATIONSHIP','RESOURCES','FAMILY','SELF_DIRECTION','TIMING_CHANGE'];
 assert.deepEqual(taxonomy.topics.map(x=>x.topicId),topicIds);

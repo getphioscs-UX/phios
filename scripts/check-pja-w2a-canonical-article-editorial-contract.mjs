@@ -357,7 +357,19 @@ for (const placeholder of approvedKnowledgePlaceholderMarkdown) {
   assert.match(placeholderText, /## Notes/);
 }
 
-for (const shell of await filesIn('articles')) {
+const articleIndexPath = 'articles/index.html';
+const articleIndexHtml = await read(articleIndexPath);
+assert.match(articleIndexHtml, /data-cx-knowledge-view="articles"/);
+assert.match(articleIndexHtml, /data-cx-article-grid/);
+assert(articleIndexHtml.includes('/assets/customer-ui/js/surfaces/knowledge.js'));
+assert.equal(articleIndexHtml.includes('data-article-slug='), false);
+assert.equal(articleIndexHtml.includes('/assets/js/pages/article.js'), false);
+
+const articleShells = (await filesIn('articles')).filter(shell => (
+  shell.endsWith('.html') && shell !== articleIndexPath
+));
+assert(articleShells.length > 0, 'PJA-W2A requires at least one governed single-article shell');
+for (const shell of articleShells) {
   const html = await read(shell);
   assert.match(
     html,

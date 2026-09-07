@@ -1,14 +1,4 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
-
-const __dirname=path.dirname(fileURLToPath(import.meta.url));
-const root=path.resolve(__dirname,'../..');
-const readJson=rel=>JSON.parse(fs.readFileSync(path.join(root,rel),'utf8'));
-const TOPICS=readJson('content/embodied-configuration/ecr-topic-r1/registries/ecr-topic-registry-v1.json');
-const MATRIX=readJson('content/embodied-configuration/ecr-topic-r1/registries/ecr-topic-semantic-owner-matrix-v1.json');
-const ACCESS=readJson('content/embodied-configuration/ecr-topic-r1/contracts/ecr-topic-access-contract-v1.json');
-const ATOMIC=readJson('content/embodied-configuration/meaning/ecr-atomic-meaning-registry-v1.json');
+import {TOPICS,MATRIX,ACCESS,ATOMIC} from './ecr-topic-deployment-authority.js';
 
 export const ECR_TOPIC_PROJECTION_SCHEMA='PHI-OS-ECR-TOPIC-PROJECTION-v1.0.0';
 const list=v=>Array.isArray(v)?v:[];
