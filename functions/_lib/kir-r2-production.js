@@ -5,7 +5,7 @@ async function loadProfiles(env){
   const r=await env.ASSETS.fetch(new Request(`https://assets.local/${PROFILE_PATH}`));
   if(!r.ok) return null;
   const doc=await r.json();
-  return Array.isArray(doc?.profiles)&&doc.profiles.length===350?doc.profiles:null;
+  return Array.isArray(doc?.profiles)&&doc.profiles.length===348?doc.profiles:null;
 }
 export async function runKirR2ProductionProjection({question,locale='zh-Hans',env={},allowedContext=null,upstreamGroundedAnswer=null,provider=null}={}){
   try{

@@ -7,7 +7,8 @@ const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
 const write=(p,v)=>{fs.mkdirSync(path.dirname(path.join(root,p)),{recursive:true});fs.writeFileSync(path.join(root,p),JSON.stringify(v,null,2)+'\n')};
 const profilesDoc=read('content/knowledge/knowledge-intelligence-r2/semantic-profiles/kir-r2-book-i-iii-semantic-retrieval-profiles-v1.json');
 const profiles=profilesDoc.profiles;
-const baseline='544fd809fea1b1dc559ef0a10432103b8a2ada09';
+const baseline='f3811673588eef38814c26fbbd1c52cbf2405f6a';
+const contractBaseline='544fd809fea1b1dc559ef0a10432103b8a2ada09';
 const contracts=[
  ['w4-question-understanding','KIR-R2-W4','question-understanding-runtime-v1',{inputs:['question','locale'],outputs:['intent','questionType','domains','tokens','personalizationNeed','professionalDepth','ambiguity'],createsMeaning:false}],
  ['w5-query-expansion','KIR-R2-W5','query-expansion-runtime-v1',{languages:['zh-Hans','en','mixed'],outputs:['canonicalCandidates','expandedTerms'],canonicalCandidateIsTruth:false}],
@@ -23,7 +24,7 @@ const contracts=[
  ['w15-machine-benchmark','KIR-R2-W15','100-real-language-question-machine-benchmark-v1',{caseCount:100}],
  ['w16-human-acceptance','KIR-R2-W16','100-question-human-acceptance-v1',{caseCount:100,threshold:{minimumAccepted:85,criticalFailuresAllowed:0},machineCannotSelfAcceptHumanGate:true}]
 ];
-for(const [slug,work,name,rules] of contracts)write(`content/knowledge/knowledge-intelligence-r2/contracts/kir-r2-${slug}-contract-v1.json`,{schemaVersion:`PHI-OS-${work}-${name}`.toUpperCase(),work,status:'ACTIVE',baselineCommit:baseline,runtimeModule:'functions/_lib/kir-r2-intelligence.js',rules});
+for(const [slug,work,name,rules] of contracts)write(`content/knowledge/knowledge-intelligence-r2/contracts/kir-r2-${slug}-contract-v1.json`,{schemaVersion:`PHI-OS-${work}-${name}`.toUpperCase(),work,status:'ACTIVE',baselineCommit:contractBaseline,runtimeModule:'functions/_lib/kir-r2-intelligence.js',rules});
 function sample(arr,n){if(n>=arr.length)return arr; const out=[]; for(let i=0;i<n;i++)out.push(arr[Math.floor(i*(arr.length-1)/(n-1))]); return out;}
 const b1=profiles.filter(p=>p.bookCode==='BOOK-1'),b2=profiles.filter(p=>p.bookCode==='BOOK-2'),b3=profiles.filter(p=>p.bookCode==='BOOK-3');
 const selected=[...sample(b1,34),...sample(b2,36),...sample(b3,30)];
@@ -37,7 +38,7 @@ for(let i=0;i<selected.length;i++){
 const count=k=>cases.filter(c=>c.metrics[k]).length;
 const latency=cases.map(c=>c.metrics.latencyMs).sort((a,b)=>a-b); const pct=p=>latency[Math.min(latency.length-1,Math.floor((latency.length-1)*p))];
 const summary={caseCount:cases.length,bookDistribution:{'BOOK-1':cases.filter(c=>c.expected.bookCode==='BOOK-1').length,'BOOK-2':cases.filter(c=>c.expected.bookCode==='BOOK-2').length,'BOOK-3':cases.filter(c=>c.expected.bookCode==='BOOK-3').length},top1Precision:count('top1Correct')/cases.length,top5Recall:count('top5Recall')/cases.length,bookUsageRate:count('bookUsed')/cases.length,directAnswerRate:count('directAnswer')/cases.length,sourceSupportedRate:count('sourceSupported')/cases.length,wrongRouteRate:cases.filter(c=>c.metrics.wrongRoute).length/cases.length,providerCostUsd:0,latencyMs:{p50:pct(.5),p95:pct(.95),max:latency.at(-1)},totalBenchmarkMs:Number((performance.now()-starts).toFixed(3))};
-const benchmark={schemaVersion:'PHI-OS-KIR-R2-W15-100-REAL-LANGUAGE-QUESTION-MACHINE-BENCHMARK-v1.0.0',work:'KIR-R2-W15',status:'MACHINE_BENCHMARK_COMPLETE',baselineCommit:baseline,fixtureProvenance:'100 natural-language questions sampled across the 350 admitted Book I–III semantic retrieval profiles; production-user observation is not claimed.',summary,acceptanceThresholds:{top5Recall:0.95,bookUsageRate:0.95,directAnswerRate:0.95,sourceSupportedRate:1,maximumWrongRouteRate:0.05},cases};
+const benchmark={schemaVersion:'PHI-OS-KIR-R2-W15-100-REAL-LANGUAGE-QUESTION-MACHINE-BENCHMARK-v1.0.0',work:'KIR-R2-W15',status:'MACHINE_BENCHMARK_COMPLETE',baselineCommit:baseline,fixtureProvenance:'100 natural-language questions sampled across the 348 admitted Book I–III semantic retrieval profiles; production-user observation is not claimed.',summary,acceptanceThresholds:{top5Recall:0.95,bookUsageRate:0.95,directAnswerRate:0.95,sourceSupportedRate:1,maximumWrongRouteRate:0.05},cases};
 benchmark.machineAccepted=summary.top5Recall>=.95&&summary.bookUsageRate>=.95&&summary.directAnswerRate>=.95&&summary.sourceSupportedRate>=1&&summary.wrongRouteRate<=.05;
 write('content/knowledge/knowledge-intelligence-r2/benchmarks/kir-r2-w15-100-question-machine-benchmark-v1.json',benchmark);
 const reviewCases=cases.map(c=>({caseId:c.caseId,question:c.question,expectedNodeCode:c.expected.nodeCode,bookCode:c.expected.bookCode,answerPreview:c.answerPreview,machine:{top5Recall:c.metrics.top5Recall,bookUsed:c.metrics.bookUsed,directAnswer:c.metrics.directAnswer,sourceSupported:c.metrics.sourceSupported},humanReview:{status:'PENDING',answersQuestion:null,relevance:null,explanationDepth:null,naturalness:null,phiOsDistinctValue:null,terminologyBurden:null,bookMateriallyUsed:null,methodHijack:null,criticalFailure:null,notes:''}}));

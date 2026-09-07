@@ -4,7 +4,7 @@ const phase1=read('content/knowledge/knowledge-intelligence-r2/acceptance/kir-r2
 const phase2=read('content/knowledge/knowledge-intelligence-r2/acceptance/kir-r2-phase2-w4-w16-acceptance-v1.json');
 const freeze=read('content/knowledge/knowledge-intelligence-r2/freeze/kir-r2-phase2-machine-freeze-v1.json');
 const pja=read('content/governance/integrated-successor/reconciliation/pja-w0-cx-r26-page-map-successor-v1.json');
-assert.equal(phase1.counts.profiles,350);assert.equal(phase2.status,'MACHINE_ACCEPTED_HUMAN_PENDING');assert.equal(phase2.works.W15,'100_CASE_MACHINE_ACCEPTED');assert.equal(phase2.works.W16,'HUMAN_REVIEW_PENDING');assert.equal(freeze.status,'MACHINE_FROZEN_HUMAN_GATE_OPEN');assert.equal(freeze.productionAdmitted,false);assert.equal(pja.restoreRetiredPresentation,false);
+assert.equal(phase1.counts.profiles,348);assert.equal(phase2.status,'MACHINE_ACCEPTED_HUMAN_PENDING');assert.equal(phase2.works.W15,'100_CASE_MACHINE_ACCEPTED');assert.equal(phase2.works.W16,'HUMAN_REVIEW_PENDING');assert.equal(freeze.status,'MACHINE_FROZEN_HUMAN_GATE_OPEN');assert.equal(freeze.productionAdmitted,false);assert.equal(pja.restoreRetiredPresentation,false);
 console.log('✓ Integrated Successor PHASE 2 engineering + machine gate passed.');
 console.log('  KIR-R2 W0–W15 are machine accepted on current main.');
 console.log('  W16 remains correctly human-gated; PHASE 2 is not production-admitted until >=85/100 human accepted with 0 critical failures.');
