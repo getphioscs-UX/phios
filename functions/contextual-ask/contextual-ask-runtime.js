@@ -53,10 +53,10 @@ export function resolveExplicitAskContexts({requested=[],guidedContext={},contex
  }
  return freeze(accepted);
 }
-export function contextualAskDisclosure(contexts=[],currentFacts=null){
+export function contextualAskDisclosure(contexts=[],currentFacts=null,locale='en'){
  const used=list(contexts);const groups={};for(const item of used){const key=item.sourceClass||'OTHER';(groups[key]??=[]).push(item)}
  const current=[];const stable=[];for(const item of used){if(['CURRENT_REALITY','CONTINUITY_CONTEXT'].includes(item.contextType))current.push(item);else stable.push(item)}
- if(currentFacts?.state==='AVAILABLE')current.push(freeze({contextType:'CURRENT_FACTS',contextRef:'CURRENT_FACTS_GATEWAY',label:'Current public facts',sourceAuthority:'CURRENT_FACTS_GATEWAY',sourceClass:'CURRENT_PUBLIC_FACT',participant:'PUBLIC',caseScope:'QUESTION',whyUsed:'QUESTION_REQUIRES_CURRENT_FACT',saved:false,generatedAt:currentFacts.retrievedAt||null,freshness:currentFacts.freshness||null,limitations:list(currentFacts.limitations),selectedRefs:[],summary:null,entitlementState:'NOT_REQUIRED',consentAccepted:'NOT_REQUIRED',answerUseBoundary:'CURRENT_FACT_ONLY_NOT_CANONICAL_KNOWLEDGE'}));
+ if(currentFacts?.state==='AVAILABLE'){const currentFactsDefinition=contextDefinition('CURRENT_FACTS');current.push(freeze({contextType:'CURRENT_FACTS',contextRef:'CURRENT_FACTS_GATEWAY',label:currentFactsDefinition.customerDisclosureLabel[locale==='zh-Hans'?'zh':'en'],sourceAuthority:'CURRENT_FACTS_GATEWAY',sourceClass:'CURRENT_PUBLIC_FACT',participant:'PUBLIC',caseScope:'QUESTION',whyUsed:'QUESTION_REQUIRES_CURRENT_FACT',saved:false,generatedAt:currentFacts.retrievedAt||null,freshness:currentFacts.freshness||null,limitations:list(currentFacts.limitations),selectedRefs:[],summary:null,entitlementState:'NOT_REQUIRED',consentAccepted:'NOT_REQUIRED',answerUseBoundary:'CURRENT_FACT_ONLY_NOT_CANONICAL_KNOWLEDGE'}));}
  return freeze({schemaVersion:'PHI-OS-CX-R9-R2-CONTEXT-DISCLOSURE-v1.0.0',contexts:used,groups:Object.entries(groups).map(([sourceClass,items])=>freeze({sourceClass,items})),currentVsStable:{current,stable},noSilentAccountSweep:true,sourceClassesEqualScientificStatus:false});
 }
 export function contextRegistryForAudit(){return ASK_CONTEXT_SOURCE_REGISTRY}

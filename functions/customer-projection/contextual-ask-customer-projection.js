@@ -12,7 +12,7 @@ function contextSourceCards(contexts,answerPayload){
  }));
 }
 export function projectContextualAskForCustomer(baseView={}, {contexts=[],currentFacts=null,answerPayload=null,locale='en'}={}){
- const disclosure=contextualAskDisclosure(contexts,currentFacts);
+ const disclosure=contextualAskDisclosure(contexts,currentFacts,locale);
  const runtimeSources=list(baseView?.basedOn?.sources).map(s=>freeze({label:clean(s?.label)||'Source',sourceClass:clean(s?.sourceClass)||'GOVERNED_SOURCE',sourceAuthority:clean(s?.sourceAuthority)||null,participant:clean(s?.participant)||null,caseScope:clean(s?.caseScope)||null,excerpt:clean(s?.excerpt)||null,href:safeHref(s?.href),retrievedAt:clean(s?.retrievedAt)||null,freshness:clean(s?.freshness)||null,limitations:list(s?.limitations),answerUseState:'RUNTIME_GROUNDING',contextRef:null}));
  const contextCards=contextSourceCards(contexts,answerPayload);
  const allSources=[...runtimeSources,...contextCards];

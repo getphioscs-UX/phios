@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Ask PHI OS one bounded question with explicit context selection, source-class disclosure, current-fact freshness and clear limits.">
-  <title>Ask PHI OS — Contextual Ask</title>
+  <meta name="description" content="Ask PHI OS one question and choose which knowledge, current situation or authorized source may be considered.">
+  <title>Ask PHI OS — Contextual Answers</title>
   <link rel="canonical" href="/knowledge/ask/">
   <link rel="stylesheet" href="/assets/customer-ui/tokens.css">
   <link rel="stylesheet" href="/assets/customer-ui/base.css">
@@ -16,40 +16,117 @@
   <link rel="stylesheet" href="/assets/customer-ui/surfaces/p1.css">
   <link rel="stylesheet" href="/assets/customer-ui/surfaces/contextual-ask.css">
 </head>
-<body data-cx-surface="CONTEXTUAL_ASK" data-cx-nav="KNOWLEDGE" data-cx-r9-r2="W0-W15-P1-CUTOVER-ACTIVE">
-  <a class="cx-skip" href="#main">Skip to content</a><div data-cx-header></div>
+<body data-cx-surface="CONTEXTUAL_ASK" data-cx-nav="KNOWLEDGE" data-cx-r9-r2="CURRENT-CUTOVER-ACTIVE">
+  <a class="cx-skip" href="#main">Skip to content</a>
+  <div data-cx-header></div>
   <main id="main" class="cx-p1-main cx-contextual-ask">
-    <section class="cx-p1-hero cx-contextual-ask__hero"><div class="cx-container cx-p1-hero__grid">
-      <div class="cx-stack"><p class="cx-eyebrow" data-cx-en="ASK PHI OS · CONTEXTUAL ANSWER" data-cx-zh="ASK PHI OS · 情境化回答">ASK PHI OS · CONTEXTUAL ANSWER</p><h1 class="cx-display" data-cx-en="Ask one question. Choose what the answer may use." data-cx-zh="问一个问题，也由你决定答案可以使用什么。">Ask one question. Choose what the answer may use.</h1><p class="cx-lead" data-cx-en="Ask PHI OS is not a generic chatbot. It uses governed knowledge by default and only adds personal, relationship, profile or continuity context when that context is explicitly selected and authorized." data-cx-zh="Ask PHI OS 不是通用聊天机器人。默认只使用受治理知识；个人、关系、Profile 或连续性情境，只有在你明确选择且权限允许时才会加入。">Ask PHI OS is not a generic chatbot. It uses governed knowledge by default and only adds personal, relationship, profile or continuity context when that context is explicitly selected and authorized.</p><div class="cx-contextual-ask__principles"><span data-cx-en="No silent account context" data-cx-zh="不会静默读取账户情境">No silent account context</span><span data-cx-en="Source classes stay distinct" data-cx-zh="不同来源类别保持区分">Source classes stay distinct</span><span data-cx-en="Unknown stays unknown" data-cx-zh="未知保持未知">Unknown stays unknown</span></div></div>
-      <figure class="cx-visual"><img data-cx-asset="HERO-001" alt="PHI OS knowledge and reality"><figcaption class="cx-meta" data-cx-en="Question → explicit context → bounded answer → provenance → next step" data-cx-zh="问题 → 明确情境 → 有边界回答 → 来源 → 下一步">Question → explicit context → bounded answer → provenance → next step</figcaption></figure>
-    </div></section>
+    <section class="cx-p1-hero cx-contextual-ask__hero">
+      <div class="cx-container cx-p1-hero__grid">
+        <div class="cx-stack">
+          <p class="cx-eyebrow" data-cx-en="ASK PHI OS · ONE QUESTION" data-cx-zh="ASK PHI OS · 一个问题">ASK PHI OS · ONE QUESTION</p>
+          <h1 class="cx-display" data-cx-en="Ask one question. Choose what should be considered." data-cx-zh="问一个问题，也由你决定需要参考什么。">Ask one question. Choose what should be considered.</h1>
+          <p class="cx-lead" data-cx-en="Start with PHI OS knowledge. You can also add the page you came from, describe what is happening now, or use a reading or profile when Ask is opened from that original source." data-cx-zh="默认从 PHI OS 知识开始。你也可以加入刚才阅读的页面、描述现在正在发生什么；如果 Ask 是从原本的读取或 Profile 打开，也可以使用那份资料。">Start with PHI OS knowledge. You can also add the page you came from, describe what is happening now, or use a reading or profile when Ask is opened from that original source.</p>
+          <div class="cx-contextual-ask__principles">
+            <span data-cx-en="You choose the context" data-cx-zh="由你选择情境">You choose the context</span>
+            <span data-cx-en="Sources stay visible" data-cx-zh="来源保持可见">Sources stay visible</span>
+            <span data-cx-en="Unknowns stay open" data-cx-zh="未知保持开放">Unknowns stay open</span>
+          </div>
+        </div>
+        <figure class="cx-visual">
+          <img data-cx-asset="HERO-001" alt="PHI OS knowledge and reality">
+          <figcaption class="cx-meta" data-cx-en="Question → chosen context → answer → sources → next step" data-cx-zh="问题 → 选择情境 → 回答 → 来源 → 下一步">Question → chosen context → answer → sources → next step</figcaption>
+        </figure>
+      </div>
+    </section>
 
-    <section class="cx-section--tight"><div class="cx-container cx-contextual-ask__layout">
-      <form class="cx-card cx-p1-form cx-contextual-ask__form" data-cx-contextual-ask-form>
-        <div><p class="cx-eyebrow" data-cx-en="YOUR QUESTION" data-cx-zh="你的问题">YOUR QUESTION</p><label class="cx-p1-field"><span data-cx-en="What are you trying to understand?" data-cx-zh="你正在试图理解什么？">What are you trying to understand?</span><textarea name="question" maxlength="500" required placeholder="What feels uncertain, current, or important?"></textarea></label></div>
-        <fieldset class="cx-contextual-ask__selector" data-cx-ask-context-selector><legend data-cx-en="Using" data-cx-zh="本次允许使用">Using</legend><p class="cx-meta" data-cx-en="You can see and change the context before anything is sent." data-cx-zh="在送出问题前，你可以看见并更改本次使用的情境。">You can see and change the context before anything is sent.</p>
-          <label class="cx-context-choice"><input type="checkbox" name="contextKnowledge" checked><span><strong data-cx-en="Knowledge" data-cx-zh="知识">Knowledge</strong><small data-cx-en="Governed PHI OS knowledge. This is the default." data-cx-zh="受治理的 PHI OS 知识，这是默认来源。">Governed PHI OS knowledge. This is the default.</small></span></label>
-          <label class="cx-context-choice"><input type="checkbox" name="contextReality"><span><strong data-cx-en="My current reality" data-cx-zh="我的当前现实">My current reality</strong><small data-cx-en="Only the current situation you explicitly enter for this question." data-cx-zh="只使用你为这个问题明确填写的当前处境。">Only the current situation you explicitly enter for this question.</small></span></label>
-          <div data-cx-seeded-contexts></div>
-          <label class="cx-context-choice cx-context-choice--none"><input type="checkbox" name="questionOnly"><span><strong data-cx-en="None / question only" data-cx-zh="不使用额外情境／只问问题">None / question only</strong><small data-cx-en="No personal or account context will be added. If no governed source can answer, PHI OS will leave the gap open." data-cx-zh="不会加入个人或账户情境；如果没有可用的受治理来源，PHI OS 会把缺口保持开放。">No personal or account context will be added. If no governed source can answer, PHI OS will leave the gap open.</small></span></label>
-        </fieldset>
-        <section class="cx-contextual-ask__current" data-cx-current-reality-fields hidden><p class="cx-eyebrow" data-cx-en="CURRENT SITUATION · SELF-REPORTED" data-cx-zh="当前处境 · 由你申报">CURRENT SITUATION · SELF-REPORTED</p><div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="What is happening now?" data-cx-zh="现在正在发生什么？">What is happening now?</span><textarea name="whatIsHappening"></textarea></label><label class="cx-p1-field"><span data-cx-en="What changed recently?" data-cx-zh="最近什么发生了变化？">What changed recently?</span><textarea name="whatChanged"></textarea></label></div><div class="cx-p1-fields"><label class="cx-p1-field"><span data-cx-en="How long?" data-cx-zh="持续多久了？">How long?</span><input name="howLong"></label><label class="cx-p1-field"><span data-cx-en="What matters most now?" data-cx-zh="现在最重要的是什么？">What matters most now?</span><input name="whatMattersMostNow"></label></div><label class="cx-p1-consent"><input type="checkbox" name="currentRealityConsent"><span data-cx-en="Use only this self-reported current context for this question. Do not save it automatically." data-cx-zh="只为这个问题使用这些由我申报的当前情境，不自动保存。">Use only this self-reported current context for this question. Do not save it automatically.</span></label></section>
-        <aside class="cx-contextual-ask__scope" data-cx-context-disclosure><strong data-cx-en="Context disclosure" data-cx-zh="情境说明">Context disclosure</strong><p data-cx-en="Knowledge is selected. No personal context is selected. Nothing is saved by this Ask surface." data-cx-zh="当前选择知识，没有选择个人情境。本 Ask 页面不会自动保存内容。">Knowledge is selected. No personal context is selected. Nothing is saved by this Ask surface.</p></aside>
-        <button class="cx-button cx-button--primary" type="submit" data-cx-en="Ask PHI OS" data-cx-zh="Ask PHI OS">Ask PHI OS</button><p class="cx-p1-status" data-cx-contextual-ask-status role="status"></p>
-      </form>
-      <aside class="cx-contextual-ask__aside"><p class="cx-eyebrow" data-cx-en="WHAT ASK DOES NOT DO" data-cx-zh="ASK 不会做什么">WHAT ASK DOES NOT DO</p><ul class="cx-p1-list"><li data-cx-en="It does not calculate a new reading." data-cx-zh="不会重新计算一份读取。">It does not calculate a new reading.</li><li data-cx-en="It does not turn a profile into objective personality fact." data-cx-zh="不会把 Profile 变成客观人格事实。">It does not turn a profile into objective personality fact.</li><li data-cx-en="It does not infer a partner's hidden feelings or intentions." data-cx-zh="不会推断伴侣隐藏的感受或意图。">It does not infer a partner's hidden feelings or intentions.</li><li data-cx-en="It does not create professional recommendations or entitlement." data-cx-zh="不会自行创造专业建议或权益。">It does not create professional recommendations or entitlement.</li></ul></aside>
-    </div></section>
+    <section class="cx-section--tight">
+      <div class="cx-container cx-contextual-ask__layout">
+        <form class="cx-card cx-p1-form cx-contextual-ask__form" data-cx-contextual-ask-form>
+          <div class="cx-stack">
+            <p class="cx-eyebrow" data-cx-en="YOUR QUESTION" data-cx-zh="你的问题">YOUR QUESTION</p>
+            <label class="cx-p1-field">
+              <span data-cx-en="What are you trying to understand?" data-cx-zh="你现在想理解什么？">What are you trying to understand?</span>
+              <textarea name="question" maxlength="500" required placeholder="What feels uncertain, current, or important?" aria-describedby="cx-ask-question-help"></textarea>
+            </label>
+            <p class="cx-meta" id="cx-ask-question-help" data-cx-en="A specific question usually produces a clearer answer." data-cx-zh="问题越具体，通常越容易得到清楚的回答。">A specific question usually produces a clearer answer.</p>
+          </div>
 
-    <section class="cx-section--tight" data-cx-contextual-ask-result hidden><div class="cx-container cx-reading cx-stack">
-      <section class="cx-card"><p class="cx-eyebrow" data-cx-en="ANSWER" data-cx-zh="回答">ANSWER</p><h2 class="cx-p1-answer" data-cx-answer-text></h2><div data-cx-answer-supporting></div></section>
-      <section class="cx-card"><p class="cx-eyebrow" data-cx-en="WHAT THIS IS BASED ON" data-cx-zh="这个回答基于什么">WHAT THIS IS BASED ON</p><p class="cx-body" data-cx-basis-statement></p><div data-cx-basis-groups></div></section>
-      <section class="cx-card"><p class="cx-eyebrow" data-cx-en="WHAT IS CURRENT VS STABLE" data-cx-zh="哪些是当前信息，哪些较稳定">WHAT IS CURRENT VS STABLE</p><div class="cx-contextual-ask__temporal" data-cx-current-vs-stable></div><div data-cx-current-facts-disclosure></div></section>
-      <section class="cx-card"><p class="cx-eyebrow" data-cx-en="UNKNOWN / LIMITS" data-cx-zh="未知／限制">UNKNOWN / LIMITS</p><div data-cx-answer-limits></div></section>
-      <section class="cx-card"><p class="cx-eyebrow" data-cx-en="RELATED KNOWLEDGE OR READING" data-cx-zh="相关知识或读取">RELATED KNOWLEDGE OR READING</p><div data-cx-related-knowledge></div></section>
-      <section class="cx-card"><p class="cx-eyebrow" data-cx-en="POSSIBLE NEXT STEP" data-cx-zh="可能的下一步">POSSIBLE NEXT STEP</p><div data-cx-next-step></div></section>
-      <details class="cx-card cx-contextual-ask__provenance"><summary data-cx-en="Sources and context used" data-cx-zh="查看来源与情境">Sources and context used</summary><div data-cx-ask-provenance></div></details>
-    </div></section>
+          <fieldset class="cx-contextual-ask__selector" data-cx-ask-context-selector>
+            <legend data-cx-en="What should this answer use?" data-cx-zh="这次回答可以参考什么？">What should this answer use?</legend>
+            <p class="cx-meta" data-cx-en="You can review and change these choices before you ask." data-cx-zh="送出问题前，你可以检查并更改这些选择。">You can review and change these choices before you ask.</p>
+            <label class="cx-context-choice">
+              <input type="checkbox" name="contextKnowledge" checked>
+              <span><strong data-cx-en="Knowledge" data-cx-zh="知识">Knowledge</strong><small data-cx-en="PHI OS books, articles, figures and concepts." data-cx-zh="PHI OS 的书籍、文章、图示与概念。">PHI OS books, articles, figures and concepts.</small></span>
+            </label>
+            <label class="cx-context-choice">
+              <input type="checkbox" name="contextReality">
+              <span><strong data-cx-en="My current reality" data-cx-zh="我的当前现实">My current reality</strong><small data-cx-en="A situation you enter for this question only." data-cx-zh="只使用你为这个问题填写的当前处境。">A situation you enter for this question only.</small></span>
+            </label>
+            <div data-cx-seeded-contexts></div>
+            <label class="cx-context-choice cx-context-choice--none">
+              <input type="checkbox" name="questionOnly">
+              <span><strong data-cx-en="None / question only" data-cx-zh="不使用额外情境／只问问题">None / question only</strong><small data-cx-en="Ask without personal context. If the available sources do not support an answer, PHI OS will say so." data-cx-zh="不加入个人情境。如果现有来源不足以支持回答，PHI OS 会直接说明。">Ask without personal context. If the available sources do not support an answer, PHI OS will say so.</small></span>
+            </label>
+          </fieldset>
+
+          <section class="cx-contextual-ask__current" data-cx-current-reality-fields hidden>
+            <p class="cx-eyebrow" data-cx-en="YOUR SITUATION · PROVIDED BY YOU" data-cx-zh="你的处境 · 由你提供">YOUR SITUATION · PROVIDED BY YOU</p>
+            <div class="cx-p1-fields">
+              <label class="cx-p1-field"><span data-cx-en="What is happening now?" data-cx-zh="现在正在发生什么？">What is happening now?</span><textarea name="whatIsHappening"></textarea></label>
+              <label class="cx-p1-field"><span data-cx-en="What changed recently?" data-cx-zh="最近什么发生了变化？">What changed recently?</span><textarea name="whatChanged"></textarea></label>
+            </div>
+            <div class="cx-p1-fields">
+              <label class="cx-p1-field"><span data-cx-en="How long has this been happening?" data-cx-zh="这样的情况持续多久了？">How long has this been happening?</span><input name="howLong"></label>
+              <label class="cx-p1-field"><span data-cx-en="What matters most right now?" data-cx-zh="现在最重要的是什么？">What matters most right now?</span><input name="whatMattersMostNow"></label>
+            </div>
+            <label class="cx-p1-consent"><input type="checkbox" name="currentRealityConsent"><span data-cx-en="Use what I entered here for this question only. Do not save it automatically." data-cx-zh="只为这个问题使用我在这里填写的内容，不自动保存。">Use what I entered here for this question only. Do not save it automatically.</span></label>
+          </section>
+
+          <aside class="cx-contextual-ask__scope" data-cx-context-disclosure>
+            <strong data-cx-en="Using for this answer" data-cx-zh="这次回答会参考">Using for this answer</strong>
+            <p data-cx-en="Knowledge is selected. No personal information will be added automatically." data-cx-zh="当前选择知识，不会自动加入任何个人资料。">Knowledge is selected. No personal information will be added automatically.</p>
+          </aside>
+
+          <button class="cx-button cx-button--primary" type="submit" data-cx-en="Ask PHI OS" data-cx-zh="Ask PHI OS">Ask PHI OS</button>
+          <p class="cx-p1-status" data-cx-contextual-ask-status role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="cx-contextual-ask__aside">
+          <p class="cx-eyebrow" data-cx-en="CLEAR BOUNDARIES" data-cx-zh="清楚边界">CLEAR BOUNDARIES</p>
+          <ul class="cx-p1-list">
+            <li data-cx-en="A question does not create a new reading." data-cx-zh="提问不会重新生成一份读取。">A question does not create a new reading.</li>
+            <li data-cx-en="Profile results keep the meaning and limits of their original source." data-cx-zh="Profile 结果会保留原始来源的意义与限制。">Profile results keep the meaning and limits of their original source.</li>
+            <li data-cx-en="Relationship answers do not guess another person's hidden thoughts or feelings." data-cx-zh="关系回答不会猜测另一个人隐藏的想法或感受。">Relationship answers do not guess another person's hidden thoughts or feelings.</li>
+            <li data-cx-en="Professional decisions remain in the appropriate professional process." data-cx-zh="专业判断仍留在相应的专业流程中。">Professional decisions remain in the appropriate professional process.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="cx-section--tight" data-cx-contextual-ask-result hidden>
+      <div class="cx-container cx-reading cx-stack">
+        <section class="cx-card"><p class="cx-eyebrow" data-cx-en="ANSWER" data-cx-zh="回答">ANSWER</p><h2 class="cx-p1-answer" data-cx-answer-text></h2><div data-cx-answer-supporting></div></section>
+        <section class="cx-card"><p class="cx-eyebrow" data-cx-en="WHAT I USED" data-cx-zh="我参考了什么">WHAT I USED</p><p class="cx-body" data-cx-basis-statement></p><div data-cx-basis-groups></div></section>
+        <section class="cx-card"><p class="cx-eyebrow" data-cx-en="WHAT MAY CHANGE" data-cx-zh="哪些内容可能随时间变化">WHAT MAY CHANGE</p><div class="cx-contextual-ask__temporal" data-cx-current-vs-stable></div><div data-cx-current-facts-disclosure></div></section>
+        <section class="cx-card"><p class="cx-eyebrow" data-cx-en="WHAT REMAINS OPEN" data-cx-zh="仍未确定的部分">WHAT REMAINS OPEN</p><div data-cx-answer-limits></div></section>
+        <section class="cx-card"><p class="cx-eyebrow" data-cx-en="RELATED" data-cx-zh="相关内容">RELATED</p><div data-cx-related-knowledge></div></section>
+        <section class="cx-card"><p class="cx-eyebrow" data-cx-en="NEXT STEP" data-cx-zh="下一步">NEXT STEP</p><div data-cx-next-step></div></section>
+        <details class="cx-card cx-contextual-ask__provenance"><summary data-cx-en="Sources and context" data-cx-zh="来源与情境">Sources and context</summary><div data-cx-ask-provenance></div></details>
+      </div>
+    </section>
   </main>
-  <dialog class="cx-dialog" id="cx-ask-handoff-dialog"><div class="cx-dialog__body"><h2 class="cx-heading" data-cx-en="Continue this question in My Reality?" data-cx-zh="把这个问题带到 My Reality 继续？">Continue this question in My Reality?</h2><p class="cx-body cx-muted" data-cx-en="Only the question, admitted current-source references and declared unknowns are carried forward. The Ask answer itself does not become Reality evidence." data-cx-zh="只会带入问题、已准入的当前来源引用与已声明未知项。Ask 回答本身不会变成 Reality 证据。">Only the question, admitted current-source references and declared unknowns are carried forward. The Ask answer itself does not become Reality evidence.</p><label class="cx-p1-consent"><input type="checkbox" data-cx-ask-handoff-consent><span data-cx-en="I choose to continue this question in My Reality." data-cx-zh="我选择把这个问题带到 My Reality 继续。">I choose to continue this question in My Reality.</span></label><p class="cx-p1-status" data-cx-ask-handoff-status></p><div class="cx-p1-dialog-actions"><button class="cx-button" type="button" data-cx-dialog-close data-cx-en="Cancel" data-cx-zh="取消">Cancel</button><button class="cx-button cx-button--primary" type="button" data-cx-ask-handoff-confirm data-cx-en="Continue" data-cx-zh="继续">Continue</button></div></div></dialog>
-  <div data-cx-footer></div><script type="module" src="/assets/customer-ui/js/shell.js"></script><script type="module" src="/assets/customer-ui/js/surfaces/contextual-ask.js"></script>
-</body></html>
+
+  <dialog class="cx-dialog" id="cx-ask-handoff-dialog">
+    <div class="cx-dialog__body">
+      <h2 class="cx-heading" data-cx-en="Continue this question in My Reality?" data-cx-zh="把这个问题带到 My Reality 继续？">Continue this question in My Reality?</h2>
+      <p class="cx-body cx-muted" data-cx-en="Only the question, any current public sources and the uncertainties shown here are carried forward. This answer does not become a verified fact in My Reality." data-cx-zh="只会带入问题、这次使用的当前公共来源，以及这里已经说明的不确定项。这个回答本身不会自动变成 My Reality 里的已确认事实。">Only the question, any current public sources and the uncertainties shown here are carried forward. This answer does not become a verified fact in My Reality.</p>
+      <label class="cx-p1-consent"><input type="checkbox" data-cx-ask-handoff-consent><span data-cx-en="I choose to continue this question in My Reality." data-cx-zh="我选择把这个问题带到 My Reality 继续。">I choose to continue this question in My Reality.</span></label>
+      <p class="cx-p1-status" data-cx-ask-handoff-status aria-live="polite"></p>
+      <div class="cx-p1-dialog-actions"><button class="cx-button" type="button" data-cx-dialog-close data-cx-en="Cancel" data-cx-zh="取消">Cancel</button><button class="cx-button cx-button--primary" type="button" data-cx-ask-handoff-confirm data-cx-en="Continue" data-cx-zh="继续">Continue</button></div>
+    </div>
+  </dialog>
+  <div data-cx-footer></div>
+  <script type="module" src="/assets/customer-ui/js/shell.js"></script>
+  <script type="module" src="/assets/customer-ui/js/surfaces/contextual-ask.js"></script>
+</body>
+</html>
