@@ -77,6 +77,8 @@ export function buildEcrTopicProjection(mandala,{locale='en',accessState='FREE_P
     schemaVersion:ECR_TOPIC_PROJECTION_SCHEMA,
     work:'ECR-TOPIC-R1-W10-W16',
     status:accessState==='PAID'?'PAID_TOPIC_READING_READY':'FREE_TOPIC_PREVIEW_READY',
+    authorityRef:'ECR-TOPIC-R1-W19:PRODUCTION_ADMITTED',
+    productionAdmissionRef:'content/embodied-configuration/ecr-topic-r1/acceptance/ecr-topic-r1-w19-production-admission-v1.json',
     projectionRule:'INTERSECTION_ONLY',
     accessState,
     sourceMandalaProjectionId:mandala.projectionId||null,

@@ -70,7 +70,7 @@ assert.deepEqual(buildEcrCustomerMandalaProjection(readingIR),projection,'W3 cus
 
 const product=adaptEcrPersonalRealityProduct({readingIR,mandalaProjection:projection,locale:'zh-Hans'});
 assert.equal(product.methodId,'ECR');assert.equal(product.visuals[0].visualId,'ECR_PHI_MANDALA');assert.equal(product.visuals[0].type,'ECR_PHI_MANDALA_V1');assert.equal(product.visuals[0].payload.projectionId,projection.projectionId);assert.equal(product.lineage.mandalaProjectionId,projection.projectionId);assert.equal(product.boundaries.mandalaProjectionCreatesMeaning,false);assert.equal(product.boundaries.mandalaRendererRecalculates,false);assert(product.specialistRenderer.capabilities.includes('PHI_MANDALA_PROJECTION'));
-const assembly=read('functions/personal-reality-product/product-assembly.js');assert.match(assembly,/buildEcrCustomerMandalaProjection/);assert.match(assembly,/mandalaProjection=buildEcrCustomerMandalaProjection\(readingIR\)/);assert.match(assembly,/mandalaProjection,phiCardSpread/);
+const assembly=read('functions/personal-reality-product/product-assembly.js');assert.match(assembly,/buildEcrCustomerMandalaProjection/);assert.match(assembly,/mandalaProjection=buildEcrCustomerMandalaProjection\(readingIR\)/);assert.match(assembly,/mandalaProjection,(?:mandalaTopicProjection,)?phiCardSpread/);
 
 console.log('✓ ECR PHI Mandala W0–W3 passed.');
 console.log('  Baseline 1189c05 critical ECR authorities reconcile 11/11; legacy Mandala remains topology-only.');

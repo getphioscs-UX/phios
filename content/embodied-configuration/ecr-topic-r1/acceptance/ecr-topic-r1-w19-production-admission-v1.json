@@ -1,10 +1,16 @@
 {
-  "schemaVersion":"PHI-OS-ECR-TOPIC-R1-W19-PRODUCTION-ADMISSION-v1.0.0",
-  "work":"ECR-TOPIC-R1-W19",
-  "status":"PENDING_HUMAN_ACCEPTANCE",
-  "machineBenchmarkRequired":72,
-  "humanReviewRequired":72,
-  "productionAdmitted":false,
-  "productionWiringAllowed":false,
-  "gate":"W18 human acceptance must be explicitly recorded before production wiring may be enabled."
+  "schemaVersion": "PHI-OS-ECR-TOPIC-R1-W19-PRODUCTION-ADMISSION-v1.0.0",
+  "work": "ECR-TOPIC-R1-W19",
+  "status": "PRODUCTION_ADMITTED",
+  "machineBenchmarkRequired": 72,
+  "humanReviewRequired": 72,
+  "productionAdmitted": true,
+  "productionWiringAllowed": true,
+  "gate": "W18 human acceptance recorded 72/72; production wiring may expose FREE_PREVIEW by default. PAID remains entitlement-gated.",
+  "humanAcceptanceRef": "content/embodied-configuration/ecr-topic-r1/acceptance/ecr-topic-r1-w18-human-review-v1.json",
+  "humanAcceptedCases": 72,
+  "productionDefaultAccessState": "FREE_PREVIEW",
+  "paidAccessRequiresExplicitEntitlement": true,
+  "baselineCommit": "429ec91ec8529b45d8c789aae48779344fe2e789",
+  "recordedAt": "2026-09-06"
 }

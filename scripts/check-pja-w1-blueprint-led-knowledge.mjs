@@ -271,14 +271,21 @@ const requiredPages = [
   ...evidence.publicInformationArchitecture.requiredPages,
   ...evidence.publicInformationArchitecture.articlePages
 ];
-const px2MigratedPjaPages = new Set([
-  'index.html',
-  'library.html',
-  'articles.html'
-]);
+const homepageComposition = await readJson('content/customer-experience-rebuild/authority/homepage-customer-composition-v1.json');
+assert.equal(homepageComposition.invariants.legacyShellDependency, false);
+const px2MigratedPjaPages = new Set(['library.html','articles.html']);
 for (const page of requiredPages) {
   assert.equal(await exists(page), true, `Missing PJA-W1 page: ${page}`);
   const html = await read(page);
+  if (page === 'index.html') {
+    assert(
+      html.includes('/assets/customer-ui/js/shell.js'),
+      'PJA-W1 homepage must consume the CX-R6+ governed customer shell successor'
+    );
+    assert.equal(html.includes('/assets/js/public-shell-v2.js'), false);
+    assert.equal(html.includes('/assets/js/public-shell.js'), false);
+    continue;
+  }
   const expectedShell = px2MigratedPjaPages.has(page)
     ? '/assets/js/public-shell-v2.js'
     : '/assets/js/public-shell.js';

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W2-CANONICAL-KNOWLEDGE-COVERAGE-AUDIT-v1.0.0",
+  "work": "KIR-R2-W2",
+  "status": "COVERAGE_AUDITED",
+  "books": [
+    {
+      "bookCode": "BOOK-1",
+      "blueprintPath": "content/knowledge/blueprints/book-1-knowledge-blueprint.json",
+      "partCodes": 4,
+      "canonicalNodeCount": 65,
+      "sourceAdmitted": true,
+      "semanticProfileRequired": 65
+    },
+    {
+      "bookCode": "BOOK-2",
+      "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-2-knowledge-blueprint-v4.json",
+      "partCodes": 3,
+      "canonicalNodeCount": 180,
+      "sourceAdmitted": true,
+      "semanticProfileRequired": 180
+    },
+    {
+      "bookCode": "BOOK-3",
+      "blueprintPath": "content/knowledge/blueprints/successors/book-w1d/book-3-knowledge-blueprint-v2.json",
+      "partCodes": 2,
+      "canonicalNodeCount": 105,
+      "sourceAdmitted": true,
+      "semanticProfileRequired": 105
+    }
+  ],
+  "totals": {
+    "books": 3,
+    "canonicalNodes": 350,
+    "semanticProfilesRequired": 350
+  },
+  "policy": {
+    "productionScopeOnly": [
+      "BOOK-1",
+      "BOOK-2",
+      "BOOK-3"
+    ],
+    "book4Book5Excluded": true,
+    "profileMustReferenceCanonicalNode": true,
+    "profileDoesNotCreateCanonicalMeaning": true
+  }
+}
