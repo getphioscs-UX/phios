@@ -60,7 +60,9 @@ const ask2Acceptance = read(paths.ask2Acceptance);
 const ask2Freeze = read(paths.ask2Freeze);
 const stage16Successor = read(paths.stage16Successor);
 const relevanceSuccessor = read(paths.relevanceSuccessor);
+const kirSuccessor = read('content/knowledge/answer-projection/reconciliation/kap-kir-r2-production-bridge-successor-v1.json');
 const relevanceRuntime = new Map(relevanceSuccessor.runtimeSuccessors.map(item => [item.path, item]));
+const currentRuntimeSha = item => item.path === kirSuccessor.runtimeSuccessor.path ? kirSuccessor.runtimeSuccessor.currentSha256 : item.currentSha256;
 const homepage = text(paths.homepage);
 const homepageRuntime = text(paths.homepageRuntime);
 const ckaCurrent = new Map(historicalCka.clientSurfaceTransition.artifacts.map(item => [item.path, item]));
@@ -78,10 +80,14 @@ assert.equal(presentationSuccessor.runtimeFingerprintPolicy.apiExactFingerprintP
 assert.equal(presentationSuccessor.runtimeFingerprintPolicy.historicalFreezeEvidencePreserved, true);
 assert.equal(relevanceSuccessor.status, 'ACTIVE_ADDITIVE_QUESTION_SOURCE_RELEVANCE_SUCCESSOR');
 assert.equal(relevanceSuccessor.authorityBoundary.questionSourceRelevancePolicyChanged, true);
+assert.equal(kirSuccessor.status, 'ACTIVE_ADDITIVE_KIR_R2_GROUNDED_COMPOSITION_SUCCESSOR');
+assert.equal(kirSuccessor.runtimeSuccessor.predecessorSha256, relevanceRuntime.get(kirSuccessor.runtimeSuccessor.path).currentSha256);
+assert.equal(kirSuccessor.authorityBoundary.historicalKapContractRewritten, false);
+assert.equal(kirSuccessor.authorityBoundary.kapFallbackPreserved, true);
 for (const key of ['knowledgeAuthorityChanged','retrievalAuthorityChanged','answerAuthorityChanged','meaningAdmissionChanged','canonicalKnowledgeMutationAllowed','modelGapFillAllowed','historicalFreezeMutationAllowed']) assert.equal(relevanceSuccessor.authorityBoundary[key], false, `KAP_RELEVANCE_AUTHORITY_DRIFT:${key}`);
 for (const item of relevanceSuccessor.runtimeSuccessors) {
   assert.ok(fs.existsSync(item.path), `KAP_RELEVANCE_RUNTIME_MISSING:${item.path}`);
-  assert.equal(sha256(item.path), item.currentSha256, `KAP_RELEVANCE_CURRENT_RUNTIME_DRIFT:${item.path}`);
+  assert.equal(sha256(item.path), currentRuntimeSha(item), `KAP_RELEVANCE_CURRENT_RUNTIME_DRIFT:${item.path}`);
 }
 for (const boundary of Object.values(presentationSuccessor.boundaries)) assert.equal(boundary, false);
 
@@ -124,7 +130,7 @@ for (const item of [...freeze.predecessorEvidence, ...freeze.frozenOutputs]) {
   const relevanceTransition = relevanceRuntime.get(item.path);
   if (relevanceTransition) {
     assert.equal(item.sha256, relevanceTransition.predecessorSha256, `KAP_RELEVANCE_PREDECESSOR_MISMATCH:${item.path}`);
-    assert.equal(sha256(item.path), relevanceTransition.currentSha256, `KAP_RELEVANCE_CURRENT_RUNTIME_DRIFT:${item.path}`);
+    assert.equal(sha256(item.path), currentRuntimeSha(relevanceTransition), `KAP_RELEVANCE_CURRENT_RUNTIME_DRIFT:${item.path}`);
     continue;
   }
   assert.equal(sha256(item.path), item.sha256, `KAP_W11_W17_FROZEN_RUNTIME_DRIFT:${item.path}`);

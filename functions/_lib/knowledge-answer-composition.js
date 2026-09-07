@@ -1,3 +1,4 @@
+import {runKirR2ProductionProjection} from './kir-r2-production.js';
 import { runKapGroundingPipeline } from './knowledge-answer-grounding.js';
 
 const DEPTHS = Object.freeze({
@@ -324,14 +325,49 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     depth,
     now
   });
+  const kir = await runKirR2ProductionProjection({
+    question: input?.question || grounding.groundingBundle?.question?.text || '',
+    locale: input?.locale || grounding.groundingBundle?.question?.locale || 'zh-Hans',
+    env,
+    upstreamGroundedAnswer: projection?.answer?.content?.directAnswer || null
+  });
+  const kirApplied = kir?.applied === true;
+  const kirAnswer = kirApplied ? kir.result.answer.text : null;
+  const answer = kirApplied ? {
+    ...projection.answer,
+    content: {...projection.answer.content,directAnswer:kirAnswer},
+    generation: {...projection.answer.generation,generationMode:kir.result.answer.providerInvoked?'KIR_R2_GROUNDED_AI':'KIR_R2_GROUNDED_DETERMINISTIC',generativeModelUsed:kir.result.answer.providerInvoked,modelRef:kir.result.answer.providerInvoked?kir.result.answer.model:null}
+  } : projection.answer;
   return {
     ...projection,
+    answer,
+    kirR2: kirApplied ? {
+      status: kir.status,
+      schemaVersion: kir.result.schemaVersion,
+      evidencePack: kir.result.evidencePack,
+      model: kir.result.model,
+      guard: kir.result.guard,
+      usage: kir.result.usage,
+      governance: {
+        knowledgeEvidencePackConsumed: kir.result.answer.knowledgeEvidencePackConsumed,
+        upstreamGroundedAnswerPresent: kir.result.answer.upstreamGroundedAnswerPresent,
+        upstreamGroundedAnswerConsumed: kir.result.answer.upstreamGroundedAnswerConsumed,
+        createsKnowledgeAuthority: false
+      }
+    } : {status:kir?.status||'KIR_R2_NOT_APPLIED',applied:false},
     grounding: {
       bundleId: grounding.groundingBundle.bundleId,
       retrievalAuthority: grounding.retrieval?.authority || 'KSAR_KNOWLEDGE_ACCESS',
       sourceCount: grounding.groundingBundle.sources.length,
       upstreamGroundedAnswerPresent: grounding.groundingBundle.retrieval.upstreamGroundedAnswerPresent,
-      upstreamGroundedAnswerConsumed: false
+      upstreamGroundedAnswerConsumed: kirApplied ? kir.result.answer.upstreamGroundedAnswerConsumed : false,
+      groundedEvidencePackConsumed: kirApplied ? kir.result.answer.knowledgeEvidencePackConsumed : false
+    },
+    governance: {
+      ...projection.governance,
+      upstreamGroundedAnswerConsumed: kirApplied ? kir.result.answer.upstreamGroundedAnswerConsumed : false,
+      groundedEvidencePackConsumed: kirApplied ? kir.result.answer.knowledgeEvidencePackConsumed : false,
+      kirR2Applied: kirApplied
     }
   };
 }

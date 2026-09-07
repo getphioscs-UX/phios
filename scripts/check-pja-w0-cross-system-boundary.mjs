@@ -58,11 +58,14 @@ const pageCapabilityExtensionPath =
   'docs/pja/pja-page-capability-extension-v1.json';
 const p1PhysicalDeletePath =
   'content/customer-experience-rebuild/acceptance/p1-physical-legacy-delete-acceptance-v1.json';
+const cxR26RetirementPath =
+  'content/customer-experience-rebuild/migration/cx-r26-legacy-presentation-retirement-successor-v1.json';
 
 const [
   freeze,
   pageCapabilityExtension,
   p1PhysicalDelete,
+  cxR26Retirement,
   pwsI2,
   khBlueprint,
   ownership,
@@ -72,6 +75,7 @@ const [
     readJson(freezePath),
     readJson(pageCapabilityExtensionPath),
     readJson(p1PhysicalDeletePath),
+    readJson(cxR26RetirementPath),
     readJson('docs/pws/contracts/pws-i2-v1-freeze.json'),
     readJson(
       'docs/knowledge/kh-w3-5g-book-i-knowledge-blueprint-freeze-v1.json'
@@ -282,10 +286,15 @@ for (const boundary of [
   );
 }
 
-const retiredPresentationPages = new Set(
-  p1PhysicalDelete.deletedPresentationFiles
-    .filter(file => !file.includes('/'))
+assert.equal(
+  cxR26Retirement.schemaVersion,
+  'PHI-OS-CX-R26-LEGACY-PRESENTATION-RETIREMENT-SUCCESSOR-v1.0.0'
 );
+assert.equal(cxR26Retirement.status, 'CURRENT_RETIREMENT_RECONCILED');
+const retiredPresentationPages = new Set([
+  ...p1PhysicalDelete.deletedPresentationFiles.filter(file => !file.includes('/')),
+  ...cxR26Retirement.physicallyDeletedInBaseline.filter(file => !file.includes('/'))
+]);
 for (const retiredPage of retiredPresentationPages) {
   assert.equal(
     await exists(retiredPage),

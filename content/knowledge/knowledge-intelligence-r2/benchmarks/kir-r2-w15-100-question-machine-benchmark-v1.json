@@ -1,0 +1,4107 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W15-100-REAL-LANGUAGE-QUESTION-MACHINE-BENCHMARK-v1.0.0",
+  "work": "KIR-R2-W15",
+  "status": "MACHINE_BENCHMARK_COMPLETE",
+  "baselineCommit": "544fd809fea1b1dc559ef0a10432103b8a2ada09",
+  "fixtureProvenance": "100 natural-language questions sampled across the 350 admitted Book I–III semantic retrieval profiles; production-user observation is not claimed.",
+  "summary": {
+    "caseCount": 100,
+    "bookDistribution": {
+      "BOOK-1": 34,
+      "BOOK-2": 36,
+      "BOOK-3": 30
+    },
+    "top1Precision": 0.98,
+    "top5Recall": 1,
+    "bookUsageRate": 1,
+    "directAnswerRate": 1,
+    "sourceSupportedRate": 1,
+    "wrongRouteRate": 0,
+    "providerCostUsd": 0,
+    "latencyMs": {
+      "p50": 4.042,
+      "p95": 10.315,
+      "max": 30.373
+    },
+    "totalBenchmarkMs": 538.315
+  },
+  "acceptanceThresholds": {
+    "top5Recall": 0.95,
+    "bookUsageRate": 0.95,
+    "directAnswerRate": 0.95,
+    "sourceSupportedRate": 1,
+    "maximumWrongRouteRate": 0.05
+  },
+  "cases": [
+    {
+      "caseId": "KIR-R2-BM-001",
+      "question": "为什么人工智能是文明能力长期累积的结果是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-PREFACE-001",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-PREFACE-001",
+        "top5": [
+          "KN-PREFACE-001",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 30.373,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么人工智能是文明能力长期累积的结果」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-002",
+      "question": "为什么会出现“为什么计算能力不能自动产生方向”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-PREFACE-002",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-PREFACE-002",
+        "top5": [
+          "KN-PREFACE-002",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 7.123,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么计算能力不能自动产生方向」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-003",
+      "question": "“为什么需要 PHI OS”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-PREFACE-004",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-PREFACE-004",
+        "top5": [
+          "KN-PREFACE-004",
+          "KN-B2-P6-013",
+          "KN-B2-P6-025",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.053,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么需要 PHI OS」，同时与「共同 Reality 为什么需要形成边界」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-004",
+      "question": "为什么连接与放大也会传播失稳是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-PREFACE-006",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-PREFACE-006",
+        "top5": [
+          "KN-PREFACE-006",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.453,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么连接与放大也会传播失稳」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-005",
+      "question": "为什么会出现“为什么系统速度失配会形成现实压力”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-PREFACE-008",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-PREFACE-008",
+        "top5": [
+          "KN-PREFACE-008",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 10.315,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么系统速度失配会形成现实压力」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-006",
+      "question": "“为什么解释结果不等于理解现实”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-PREFACE-010",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-PREFACE-010",
+        "top5": [
+          "KN-PREFACE-010",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 16.164,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么解释结果不等于理解现实」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-007",
+      "question": "现实语法如何描述现实形成是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-PREFACE-012",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-PREFACE-012",
+        "top5": [
+          "KN-PREFACE-012",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.311,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「现实语法如何描述现实形成」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-008",
+      "question": "为什么会出现“为什么差异是一切现实形成的起点”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P1-001",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P1-001",
+        "top5": [
+          "KN-B1-P1-001",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.007,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么差异是一切现实形成的起点」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-009",
+      "question": "“为什么现实需要结构”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P1-003",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P1-003",
+        "top5": [
+          "KN-B1-P1-003",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.543,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么现实需要结构」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-010",
+      "question": "结构差异如何形成区域与网络是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P1-005",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P1-005",
+        "top5": [
+          "KN-B1-P1-005",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 7.471,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「结构差异如何形成区域与网络」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-011",
+      "question": "为什么会出现“为什么结构分辨率决定导航精度”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P1-007",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P1-007",
+        "top5": [
+          "KN-B1-P1-007",
+          "KN-B1-P2-008",
+          "KN-B1-P3-008",
+          "KN-B1-P2-003",
+          "KN-B1-P3-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.701,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么结构分辨率决定导航精度」，同时与「位置、感知、行为、角色与方向如何塑造现实版本」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-012",
+      "question": "“多个场如何传播、重叠并共同塑造现实”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P1-009",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P1-009",
+        "top5": [
+          "KN-B1-P1-009",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 7.077,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「多个场如何传播、重叠并共同塑造现实」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-013",
+      "question": "为什么算法与合成场会重组现代现实是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P1-011",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P1-011",
+        "top5": [
+          "KN-B1-P1-011",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.983,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么算法与合成场会重组现代现实」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-014",
+      "question": "为什么会出现“为什么现实必须经过投影才能成为世界”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P2-001",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P2-001",
+        "top5": [
+          "KN-B1-P2-001",
+          "KN-B1-P2-009",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005",
+          "KN-B1-P2-012"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.873,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么现实必须经过投影才能成为世界」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-015",
+      "question": "“投影压缩与分辨率如何选择可经验的现实”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P2-003",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P2-003",
+        "top5": [
+          "KN-B1-P2-003",
+          "KN-B1-P2-008",
+          "KN-B1-P3-008",
+          "KN-B1-P3-007",
+          "KN-B1-P1-006"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.03,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「投影压缩与分辨率如何选择可经验的现实」，同时与「位置、感知、行为、角色与方向如何塑造现实版本」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-016",
+      "question": "意义如何组织叙事、解释、信念与身份是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P2-005",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P2-005",
+        "top5": [
+          "KN-B1-P2-005",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.739,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「意义如何组织叙事、解释、信念与身份」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-017",
+      "question": "为什么会出现“为什么结构、功能、关系与网络会产生不同投影”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P2-007",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P2-007",
+        "top5": [
+          "KN-B1-P2-007",
+          "KN-B1-P1-007",
+          "KN-B1-P1-004",
+          "KN-B1-P4-005",
+          "KN-B1-P3-009"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.544,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么结构、功能、关系与网络会产生不同投影」，同时与「为什么结构分辨率决定导航精度」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-018",
+      "question": "“位置、感知、行为、角色与方向如何塑造现实版本”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P2-008",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P2-008",
+        "top5": [
+          "KN-B1-P2-008",
+          "KN-B1-P1-006",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.292,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「位置、感知、行为、角色与方向如何塑造现实版本」，同时与「为什么导航需要方向、位置与坐标」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-019",
+      "question": "多个投影如何协调并形成共同现实是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P2-010",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P2-010",
+        "top5": [
+          "KN-B1-P2-010",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.368,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「多个投影如何协调并形成共同现实」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-020",
+      "question": "为什么会出现“人工智能如何参与合成投影与意义生产”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P2-012",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P2-012",
+        "top5": [
+          "KN-B1-P2-012",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.487,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「人工智能如何参与合成投影与意义生产」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-021",
+      "question": "“为什么时间会成为运行媒介与激活窗口”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-001",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P3-001",
+        "top5": [
+          "KN-B1-P3-001",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.504,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么时间会成为运行媒介与激活窗口」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-022",
+      "question": "长期方向与发展重心如何形成是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-003",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P3-003",
+        "top5": [
+          "KN-B1-P3-003",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.493,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「长期方向与发展重心如何形成」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-023",
+      "question": "为什么会出现“无限现实如何压缩为有限问题”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-005",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P3-005",
+        "top5": [
+          "KN-B1-P3-005",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.488,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「无限现实如何压缩为有限问题」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-024",
+      "question": "“为什么运行需求会选择九种基础能力”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-007",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P3-007",
+        "top5": [
+          "KN-B1-P3-007",
+          "KN-B1-P2-008",
+          "KN-B1-P3-008",
+          "KN-B1-P2-003",
+          "KN-B1-P1-006"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.624,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么运行需求会选择九种基础能力」，同时与「位置、感知、行为、角色与方向如何塑造现实版本」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-025",
+      "question": "执行、关系、生存与驱动能力如何协同运行是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-009",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P3-009",
+        "top5": [
+          "KN-B1-P3-009",
+          "KN-B1-P3-008",
+          "KN-B1-P2-007",
+          "KN-B2-P6-050",
+          "KN-B2-P6-026"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.737,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「执行、关系、生存与驱动能力如何协同运行」，同时与「方向、理解、表达、位置与资源能力如何协同运行」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-026",
+      "question": "为什么会出现“坐标与运动语法如何组织现实变化”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-011",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P3-011",
+        "top5": [
+          "KN-B1-P3-011",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.698,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「坐标与运动语法如何组织现实变化」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-027",
+      "question": "“运动如何形成回路、网络与不同运行尺度”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-013",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P3-013",
+        "top5": [
+          "KN-B1-P3-013",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.325,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「运动如何形成回路、网络与不同运行尺度」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-028",
+      "question": "运行网络如何形成状态、反馈、重组与连续性是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P3-015",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P3-015",
+        "top5": [
+          "KN-B1-P3-015",
+          "KN-B1-P4-009",
+          "KN-B1-P5-019",
+          "KN-B1-P4-003",
+          "KN-B2-P8-020"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1",
+          "BOOK-2",
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.782,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「运行网络如何形成状态、反馈、重组与连续性」，同时与「神经、激素、节律与代谢如何把现实转化为身体状态」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-029",
+      "question": "为什么会出现“生物压缩如何形成稳定的运行配置”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P4-002",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P4-002",
+        "top5": [
+          "KN-B1-P4-002",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.042,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「生物压缩如何形成稳定的运行配置」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-030",
+      "question": "“为什么身体是分层且有限的现实载体”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P4-004",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P4-004",
+        "top5": [
+          "KN-B1-P4-004",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.454,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么身体是分层且有限的现实载体」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-031",
+      "question": "运行成本、恢复与内部连接如何维持身体稳定是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P4-006",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P4-006",
+        "top5": [
+          "KN-B1-P4-006",
+          "KN-B2-P6-011",
+          "KN-B2-P8-021",
+          "KN-B1-P1-001",
+          "KN-B1-P1-002"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1",
+          "BOOK-2",
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.512,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「运行成本、恢复与内部连接如何维持身体稳定」，同时与「为什么共同 Runtime 必须开始分配运行成本」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-032",
+      "question": "为什么会出现“过滤、注意、优先级与解析度如何形成认知入口”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P4-008",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P4-008",
+        "top5": [
+          "KN-B1-P4-008",
+          "KN-B2-P7-038",
+          "KN-B2-P7-034",
+          "KN-B2-P7-032",
+          "KN-B2-P7-035"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.258,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「过滤、注意、优先级与解析度如何形成认知入口」，同时与「AI 如何重构注意力架构」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-033",
+      "question": "“生物噪声、缓冲与适应如何改变载体运行”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P4-010",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P4-010",
+        "top5": [
+          "KN-B1-P4-010",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.823,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「生物噪声、缓冲与适应如何改变载体运行」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-034",
+      "question": "载体如何在维护、漂移、失败与恢复之间维持组织是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P4-012",
+        "bookCode": "BOOK-1"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P4-012",
+        "top5": [
+          "KN-B1-P4-012",
+          "KN-B2-P9-023"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-1",
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T0",
+        "requestedModel": "DETERMINISTIC",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.512,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「载体如何在维护、漂移、失败与恢复之间维持组织」，同时与「治理如何发生漂移」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-035",
+      "question": "“为什么某些 Reality 会进入意识”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-001",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P5-001",
+        "top5": [
+          "KN-B1-P5-001",
+          "KN-B1-P5-046",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.793,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么某些 Reality 会进入意识」，同时与「为什么某些 Reality 无法被表达」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-036",
+      "question": "What does Subjective Reality mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B1-P5-016",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-016",
+        "top5": [
+          "KN-B1-P5-016",
+          "KN-B1-P5-004",
+          "KN-B1-P5-002",
+          "KN-B1-P5-010",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.074,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “为什么不同人体验不同 Reality”, with supporting relevance from “为什么意识误以为自己创造 Reality”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-037",
+      "question": "为什么同一个生命会形成彼此冲突的多个自我状态是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-019",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P5-019",
+        "top5": [
+          "KN-B1-P5-019",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T2",
+        "requestedModel": "TERRA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.964,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么同一个生命会形成彼此冲突的多个自我状态」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-038",
+      "question": "为什么会出现“情绪如何被调节”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-023",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-023",
+        "top5": [
+          "KN-B1-P5-023",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.643,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「情绪如何被调节」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-039",
+      "question": "“体验配置系统如何形成”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-008",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P5-008",
+        "top5": [
+          "KN-B1-P5-008",
+          "KN-B1-P4-008",
+          "KN-B1-P3-004",
+          "KN-B1-P3-012",
+          "KN-B1-P4-003"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.846,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「体验配置系统如何形成」，同时与「过滤、注意、优先级与解析度如何形成认知入口」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-040",
+      "question": "What does Experience Integration mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B1-P5-030",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-030",
+        "top5": [
+          "KN-B1-P5-030",
+          "KN-B1-P5-010",
+          "KN-B1-P5-033",
+          "KN-B1-P5-032",
+          "KN-B1-P5-002"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.563,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “不同 Experience 如何被组织为整体”, with supporting relevance from “复杂 Experience 如何被压缩”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-041",
+      "question": "Runtime 如何在内部预演 Reality是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-035",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-035",
+        "top5": [
+          "KN-B1-P5-035",
+          "KN-B2-P6-056",
+          "KN-B1-P5-001",
+          "KN-B2-P6-001",
+          "KN-B2-P8-002"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.702,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Runtime 如何在内部预演 Reality」，同时与「Runtime 如何离开共同 Reality」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-042",
+      "question": "为什么会出现“Reality 如何形成不同表达路径”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-039",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-039",
+        "top5": [
+          "KN-B1-P5-039",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.873,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Reality 如何形成不同表达路径」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-043",
+      "question": "“表达如何改变其他 Runtime”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-044",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P5-044",
+        "top5": [
+          "KN-B1-P5-044",
+          "KN-B1-P3-015",
+          "KN-B1-P3-010",
+          "KN-B1-P3-001",
+          "KN-B1-P3-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.502,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「表达如何改变其他 Runtime」，同时与「运行网络如何形成状态、反馈、重组与连续性」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-044",
+      "question": "What does Decision Formation mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B1-P5-049",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-049",
+        "top5": [
+          "KN-B1-P5-049",
+          "KN-B2-P6-048",
+          "KN-B1-P5-048",
+          "KN-B1-P5-047",
+          "KN-B1-P5-058"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.174,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “现实如何形成选择”, with supporting relevance from “为什么共同运行会逐渐限制生命的运行方向”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-045",
+      "question": "身份如何被维持是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-012",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-012",
+        "top5": [
+          "KN-B1-P5-012",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 2.969,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「身份如何被维持」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-046",
+      "question": "为什么会出现“行动结果如何重新进入 Experience”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-058",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B1-P5-058",
+        "top5": [
+          "KN-B1-P5-058",
+          "KN-B1-P5-027",
+          "KN-B1-P5-030",
+          "KN-B1-P5-010",
+          "KN-B1-P5-033"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.673,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「行动结果如何重新进入 Experience」，同时与「为什么进入系统的 Reality 只有部分形成体验」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-047",
+      "question": "“意义为何留下残留”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B1-P5-063",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B1-P5-063",
+        "top5": [
+          "KN-B1-P5-063",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.493,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「意义为何留下残留」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-048",
+      "question": "What does Runtime Synchronization mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P6-002",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-005",
+        "top5": [
+          "KN-B2-P6-005",
+          "KN-B2-P6-002",
+          "KN-B1-P5-035",
+          "KN-B1-P5-042",
+          "KN-B1-P5-001"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": false,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.482,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “多个 Runtime 如何同步同一个 Field”, with supporting relevance from “多个 Runtime 如何开始同步”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-049",
+      "question": "为什么开始互相干扰是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-007",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-007",
+        "top5": [
+          "KN-B2-P6-007",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.09,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么开始互相干扰」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-050",
+      "question": "为什么会出现“为什么长期系统一定开始出现结构冲突”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-012",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-012",
+        "top5": [
+          "KN-B2-P6-012",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.515,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么长期系统一定开始出现结构冲突」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-051",
+      "question": "“为什么 Runtime 会开始固定连接”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-017",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P6-017",
+        "top5": [
+          "KN-B2-P6-017",
+          "KN-B1-P3-015",
+          "KN-B1-P3-010",
+          "KN-B1-P3-001",
+          "KN-B1-P3-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.226,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么 Runtime 会开始固定连接」，同时与「运行网络如何形成状态、反馈、重组与连续性」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-052",
+      "question": "What does System Load Distribution mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P6-022",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-022",
+        "top5": [
+          "KN-B2-P6-022",
+          "KN-B2-P6-011",
+          "KN-B2-P8-001",
+          "KN-B1-P5-005",
+          "KN-B1-P5-001"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.168,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “为什么运行负荷开始跨共同现实重新分配”, with supporting relevance from “为什么共同 Runtime 必须开始分配运行成本”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-053",
+      "question": "为什么孩子会成为新的 Runtime是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-028",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-028",
+        "top5": [
+          "KN-B2-P6-028",
+          "KN-B2-P6-027",
+          "KN-B1-P3-015",
+          "KN-B1-P3-010",
+          "KN-B1-P3-001"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.464,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么孩子会成为新的 Runtime」，同时与「为什么共同养育会形成新的 Runtime」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-054",
+      "question": "为什么会出现“情绪如何在家庭 Runtime 中流动”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-033",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-033",
+        "top5": [
+          "KN-B2-P6-033",
+          "KN-B1-P3-015",
+          "KN-B1-P3-010",
+          "KN-B1-P3-001",
+          "KN-B1-P3-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.913,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「情绪如何在家庭 Runtime 中流动」，同时与「运行网络如何形成状态、反馈、重组与连续性」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-055",
+      "question": "“群体如何形成社区运行”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-038",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P6-038",
+        "top5": [
+          "KN-B2-P6-038",
+          "KN-B1-P1-012",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.378,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「群体如何形成社区运行」，同时与「为什么现实运行需要可观察的接口」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-056",
+      "question": "What does Attention Coupling mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P6-043",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-043",
+        "top5": [
+          "KN-B2-P6-043",
+          "KN-B2-P7-038",
+          "KN-B2-P7-034",
+          "KN-B2-P7-032",
+          "KN-B2-P7-035"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.486,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “注意力如何在多个 Runtime 之间耦合”, with supporting relevance from “AI 如何重构注意力架构”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-057",
+      "question": "为什么共同运行会逐渐限制生命的运行方向是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-048",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-048",
+        "top5": [
+          "KN-B2-P6-048",
+          "KN-B2-P6-045",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.483,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么共同运行会逐渐限制生命的运行方向」，同时与「为什么共同运行会不断重复同一个故事」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-058",
+      "question": "为什么会出现“人工系统如何成为指导者”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-053",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P6-053",
+        "top5": [
+          "KN-B2-P6-053",
+          "KN-B2-P6-052",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.288,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「人工系统如何成为指导者」，同时与「人工系统如何成为陪伴者」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-059",
+      "question": "“共同 Reality 如何完成一次运行”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P6-058",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P6-058",
+        "top5": [
+          "KN-B2-P6-058",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.327,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「共同 Reality 如何完成一次运行」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-060",
+      "question": "What does Collective Identity mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P7-005",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-005",
+        "top5": [
+          "KN-B2-P7-005",
+          "KN-B1-P2-005",
+          "KN-B2-P6-039",
+          "KN-B2-P6-041",
+          "KN-B1-P5-054"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.404,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “群体如何形成我们”, with supporting relevance from “意义如何组织叙事、解释、信念与身份”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-061",
+      "question": "稀缺性如何形成是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-010",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-010",
+        "top5": [
+          "KN-B2-P7-010",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.07,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「稀缺性如何形成」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-062",
+      "question": "为什么会出现“价值如何储存”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-016",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-016",
+        "top5": [
+          "KN-B2-P7-016",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.423,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「价值如何储存」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-063",
+      "question": "“投机周期如何形成”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-021",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P7-021",
+        "top5": [
+          "KN-B2-P7-021",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.67,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「投机周期如何形成」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-064",
+      "question": "What does Media Runtime mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P7-026",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-026",
+        "top5": [
+          "KN-B2-P7-026",
+          "KN-B1-P5-035",
+          "KN-B1-P5-042",
+          "KN-B1-P4-011",
+          "KN-B1-P5-001"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 7.542,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “媒体如何组织集体现实”, with supporting relevance from “Runtime 如何在内部预演 Reality”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-065",
+      "question": "注意力如何成为经济资源是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-031",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-031",
+        "top5": [
+          "KN-B2-P7-031",
+          "KN-B2-P6-011",
+          "KN-B1-P3-008",
+          "KN-B1-P4-006",
+          "KN-B2-P8-015"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1",
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.605,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「注意力如何成为经济资源」，同时与「为什么共同 Runtime 必须开始分配运行成本」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-066",
+      "question": "为什么会出现“算法如何放大集体现实”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-036",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P7-036",
+        "top5": [
+          "KN-B2-P7-036",
+          "KN-B1-P2-001",
+          "KN-B1-P1-011",
+          "KN-B1-P1-001",
+          "KN-B1-P2-009"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.709,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「算法如何放大集体现实」，同时与「为什么现实必须经过投影才能成为世界」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-067",
+      "question": "“生产力如何组织时间”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-041",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P7-041",
+        "top5": [
+          "KN-B2-P7-041",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.804,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「生产力如何组织时间」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-068",
+      "question": "What does Time Debt mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P7-046",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-046",
+        "top5": [
+          "KN-B2-P7-046",
+          "KN-B1-P5-035",
+          "KN-B2-P7-043",
+          "KN-B2-P7-018",
+          "KN-B1-P5-001"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.408,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “时间债务如何形成”, with supporting relevance from “Runtime 如何在内部预演 Reality”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-069",
+      "question": "AI 如何形成协调机制是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-051",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-051",
+        "top5": [
+          "KN-B2-P7-051",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T3",
+        "requestedModel": "SOL",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.48,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「AI 如何形成协调机制」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-070",
+      "question": "为什么会出现“为什么集体运行达到一定规模之后必须开始维护自身”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P7-059",
+        "bookCode": "BOOK-2"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-059",
+        "top5": [
+          "KN-B2-P7-059",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 11.802,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为什么集体运行达到一定规模之后必须开始维护自身」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-071",
+      "question": "“运行为何留下残留”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-001",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P8-001",
+        "top5": [
+          "KN-B2-P8-001",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.213,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「运行为何留下残留」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-072",
+      "question": "What does Drift Formation mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P8-004",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-004",
+        "top5": [
+          "KN-B2-P8-004",
+          "KN-B1-P5-058",
+          "KN-B2-P6-037",
+          "KN-B1-P5-014",
+          "KN-B2-P6-042"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.844,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “Reality 如何偏离原有轨道”, with supporting relevance from “行动结果如何重新进入 Experience”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-073",
+      "question": "Reality 如何失去整体性是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-007",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-007",
+        "top5": [
+          "KN-B2-P8-007",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.961,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Reality 如何失去整体性」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-074",
+      "question": "为什么会出现“重复模式如何成为警告”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-010",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-010",
+        "top5": [
+          "KN-B2-P8-010",
+          "KN-B2-P8-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.378,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「重复模式如何成为警告」，同时与「摩擦如何成为警告信号」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-075",
+      "question": "“为何系统持续警告却无人察觉”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-014",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P8-014",
+        "top5": [
+          "KN-B2-P8-014",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 7.177,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为何系统持续警告却无人察觉」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-076",
+      "question": "What does Structural Cost Transfer mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P8-017",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-017",
+        "top5": [
+          "KN-B2-P8-017",
+          "KN-B2-P6-023",
+          "KN-B2-P8-032",
+          "KN-B1-P5-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 8.016,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “为何成本最终进入载体”, with supporting relevance from “为什么现实生态必须承担整体成本”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-077",
+      "question": "慢性运行状态如何形成是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-020",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-020",
+        "top5": [
+          "KN-B2-P8-020",
+          "KN-B2-P7-034",
+          "KN-B2-P6-042",
+          "KN-B2-P7-020",
+          "KN-B2-P7-021"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 17.456,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「慢性运行状态如何形成」，同时与「集体注意力回路如何形成」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-078",
+      "question": "为什么会出现“Medical OS 如何成为 Runtime Maintenance Layer”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-023",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-023",
+        "top5": [
+          "KN-B2-P8-023",
+          "KN-B2-P6-050",
+          "KN-B2-P7-025",
+          "KN-B2-P7-040",
+          "KN-B1-P4-006"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 9.867,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Medical OS 如何成为 Runtime Maintenance Layer」，同时与「Runtime 如何从关系影响中恢复」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-079",
+      "question": "“为何系统拒绝恢复”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-026",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P8-026",
+        "top5": [
+          "KN-B2-P8-026",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 10.023,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「为何系统拒绝恢复」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-080",
+      "question": "What does Recovery Scheduling mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P8-030",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-030",
+        "top5": [
+          "KN-B2-P8-030",
+          "KN-B2-P6-050",
+          "KN-B2-P8-025",
+          "KN-B2-P8-026",
+          "KN-B2-P8-027"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 13.531,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “恢复如何被排程”, with supporting relevance from “Runtime 如何从关系影响中恢复”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-081",
+      "question": "运行如何重新平衡是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-033",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-033",
+        "top5": [
+          "KN-B2-P8-033",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.785,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「运行如何重新平衡」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-082",
+      "question": "为什么会出现“免疫系统如何恢复”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-037",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-037",
+        "top5": [
+          "KN-B2-P8-037",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.163,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「免疫系统如何恢复」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-083",
+      "question": "“可持续运行如何形成”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-041",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P8-041",
+        "top5": [
+          "KN-B2-P8-041",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.896,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「可持续运行如何形成」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-084",
+      "question": "What does Long-Term Continuity mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P8-044",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-044",
+        "top5": [
+          "KN-B2-P8-044",
+          "KN-B1-P5-036",
+          "KN-B1-P3-006",
+          "KN-B1-P2-006",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.792,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “Reality 如何形成长期连续性”, with supporting relevance from “内部世界如何保持连续”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-085",
+      "question": "维护如何升级为治理是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P8-047",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P8-047",
+        "top5": [
+          "KN-B2-P8-047",
+          "KN-B2-P9-006",
+          "KN-B2-P9-018",
+          "KN-B2-P9-004",
+          "KN-B2-P9-016"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.207,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「维护如何升级为治理」，同时与「为什么人们接受治理」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-086",
+      "question": "为什么会出现“治理为何出现”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P9-001",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P9-001",
+        "top5": [
+          "KN-B2-P9-001",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.753,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「治理为何出现」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-087",
+      "question": "“Shared Constraints”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B3-P9-041",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B3-P9-041",
+        "top5": [
+          "KN-B3-P9-041",
+          "KN-B3-P9-043",
+          "KN-B3-P9-042",
+          "KN-B2-P7-002",
+          "KN-B2-P6-039"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.386,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Shared Constraints」，同时与「Shared Responsibilities」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-088",
+      "question": "Shared Objectives是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B3-P9-042",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B3-P9-042",
+        "top5": [
+          "KN-B3-P9-042",
+          "KN-B3-P9-043",
+          "KN-B3-P9-041",
+          "KN-B2-P7-002",
+          "KN-B2-P6-039"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.893,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Shared Objectives」，同时与「Shared Responsibilities」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-089",
+      "question": "为什么会出现“Coordination Legitimacy”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B3-P9-044",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B3-P9-044",
+        "top5": [
+          "KN-B3-P9-044",
+          "KN-B3-P9-045",
+          "KN-B3-P9-040",
+          "KN-B3-P9-046",
+          "KN-B2-P9-006"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.006,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Coordination Legitimacy」，同时与「Coordination Compliance」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-090",
+      "question": "为什么会出现“宗教治理如何运行”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P9-010",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P9-010",
+        "top5": [
+          "KN-B2-P9-010",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.478,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「宗教治理如何运行」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-091",
+      "question": "Cultural Coordination是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B3-P9-046",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B3-P9-046",
+        "top5": [
+          "KN-B3-P9-046",
+          "KN-B3-P9-044",
+          "KN-B3-P9-045",
+          "KN-B3-P9-040",
+          "KN-B2-P7-051"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 5.386,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「Cultural Coordination」，同时与「Coordination Legitimacy」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-092",
+      "question": "What does Meaning Governance mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P9-016",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P9-016",
+        "top5": [
+          "KN-B2-P9-016",
+          "KN-B1-P2-005",
+          "KN-B1-P2-012",
+          "KN-B2-P9-005",
+          "KN-B1-P5-063"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1",
+          "BOOK-2"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 4.642,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “意义如何被治理”, with supporting relevance from “意义如何组织叙事、解释、信念与身份”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-093",
+      "question": "权力如何被治理是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P9-019",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P9-019",
+        "top5": [
+          "KN-B2-P9-019",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 6.468,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「权力如何被治理」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-094",
+      "question": "为什么会出现“治理如何发生漂移”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P9-023",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P9-023",
+        "top5": [
+          "KN-B2-P9-023",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.35,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「治理如何发生漂移」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-095",
+      "question": "“治理如何被利益结构俘获”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P9-027",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B2-P9-027",
+        "top5": [
+          "KN-B2-P9-027",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.387,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「治理如何被利益结构俘获」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-096",
+      "question": "What does Synthetic Coordination mean?",
+      "locale": "en",
+      "expected": {
+        "nodeCode": "KN-B2-P9-030",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P7-051",
+        "top5": [
+          "KN-B2-P7-051",
+          "KN-B2-P9-030",
+          "KN-B1-P2-012",
+          "KN-B1-P5-013",
+          "KN-B2-P7-049"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-2",
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": false,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.238,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "The strongest grounded match is “AI 如何形成协调机制”, with supporting relevance from “人工协调如何运行”. This answer uses only admitted Book I–III / canonical evidence; personal facts must be supplied separately rather than inferred from knowledge."
+    },
+    {
+      "caseId": "KIR-R2-BM-097",
+      "question": "没有人类的治理是否可能是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P9-034",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P9-034",
+        "top5": [
+          "KN-B2-P9-034",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.252,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「没有人类的治理是否可能」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-098",
+      "question": "为什么会出现“治理如何演化”？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B2-P9-037",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B2-P9-037",
+        "top5": [
+          "KN-B2-P9-037",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 2.958,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「治理如何演化」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-099",
+      "question": "“协调连续”在现实中如何观察？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B3-P9-048",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "REALITY",
+        "topNode": "KN-B3-P9-048",
+        "top5": [
+          "KN-B3-P9-048",
+          "KN-B1-P1-001",
+          "KN-B1-P1-006",
+          "KN-B1-P1-002",
+          "KN-B1-P1-007"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.298,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「协调连续」，同时与「为什么差异是一切现实形成的起点」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    },
+    {
+      "caseId": "KIR-R2-BM-100",
+      "question": "扩展阈值是什么意思？",
+      "locale": "zh-Hans",
+      "expected": {
+        "nodeCode": "KN-B3-P9-052",
+        "bookCode": "BOOK-3"
+      },
+      "actual": {
+        "intent": "KNOWLEDGE",
+        "topNode": "KN-B3-P9-052",
+        "top5": [
+          "KN-B3-P9-052",
+          "KN-B1-P2-009",
+          "KN-B1-P2-001",
+          "KN-B1-P2-004",
+          "KN-B1-P2-005"
+        ],
+        "coverage": "STRONG",
+        "booksUsed": [
+          "BOOK-3",
+          "BOOK-1"
+        ],
+        "guardPassed": true,
+        "modelTier": "T1",
+        "requestedModel": "LUNA",
+        "providerInvoked": false,
+        "groundedEvidencePackConsumed": true
+      },
+      "metrics": {
+        "top1Correct": true,
+        "top5Recall": true,
+        "bookUsed": true,
+        "directAnswer": true,
+        "sourceSupported": true,
+        "wrongRoute": false,
+        "latencyMs": 3.226,
+        "providerCostUsd": 0
+      },
+      "answerPreview": "这个问题首先指向「扩展阈值」，同时与「为什么投影会产生偏向、失真、稳定与更新」有关。 这些判断只来自当前获准的 Book I–III / canonical evidence；如果你的问题包含个人情境，还需要把实际事实与限制另外带入，不能从知识材料直接推断你的现实。"
+    }
+  ],
+  "machineAccepted": true
+}

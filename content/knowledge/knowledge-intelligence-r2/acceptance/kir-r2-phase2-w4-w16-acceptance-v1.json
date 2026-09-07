@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-PHASE2-W4-W16-ACCEPTANCE-v1.0.0",
+  "status": "MACHINE_ACCEPTED_HUMAN_PENDING",
+  "baselineCommit": "544fd809fea1b1dc559ef0a10432103b8a2ada09",
+  "works": {
+    "W4": "QUESTION_UNDERSTANDING_READY",
+    "W5": "QUERY_EXPANSION_READY",
+    "W6": "HYBRID_RETRIEVAL_READY",
+    "W7": "SEMANTIC_RERANKER_READY",
+    "W8": "EVIDENCE_DEDUP_READY",
+    "W9": "EVIDENCE_PACK_READY",
+    "W10": "GROUNDED_CONSUMPTION_SUCCESSOR_READY",
+    "W11": "AI_ELIGIBILITY_MODEL_COMPLEXITY_READY",
+    "W12": "GROUNDED_COMPOSER_READY",
+    "W13": "ANSWER_RELEVANCE_GUARD_READY",
+    "W14": "BOOK_USAGE_EVIDENCE_READY",
+    "W15": "100_CASE_MACHINE_ACCEPTED",
+    "W16": "HUMAN_REVIEW_PENDING"
+  },
+  "boundaries": {
+    "historicalKapMutated": false,
+    "book4Retrieval": false,
+    "book5Retrieval": false,
+    "modelBecomesKnowledgeAuthority": false,
+    "humanAcceptanceClaimed": false
+  },
+  "machineSummary": {
+    "caseCount": 100,
+    "bookDistribution": {
+      "BOOK-1": 34,
+      "BOOK-2": 36,
+      "BOOK-3": 30
+    },
+    "top1Precision": 0.98,
+    "top5Recall": 1,
+    "bookUsageRate": 1,
+    "directAnswerRate": 1,
+    "sourceSupportedRate": 1,
+    "wrongRouteRate": 0,
+    "providerCostUsd": 0,
+    "latencyMs": {
+      "p50": 4.042,
+      "p95": 10.315,
+      "max": 30.373
+    },
+    "totalBenchmarkMs": 538.315
+  },
+  "humanGate": {
+    "status": "PENDING",
+    "threshold": {
+      "minimumAccepted": 85,
+      "totalCases": 100,
+      "criticalFailuresAllowed": 0,
+      "acceptedDefinition": "answersQuestion && relevance && explanationDepth && naturalness && phiOsDistinctValue && bookMateriallyUsed && !methodHijack && !criticalFailure"
+    }
+  }
+}
