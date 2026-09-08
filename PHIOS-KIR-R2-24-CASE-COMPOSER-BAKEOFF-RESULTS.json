@@ -1,0 +1,1806 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-COMPOSER-BAKEOFF-RESULT-v1.0.0",
+  "startedAt": "2026-09-08T03:48:19.924Z",
+  "updatedAt": "2026-09-08T03:50:07.084Z",
+  "packPath": "C:\\Users\\Guest Account\\OneDrive\\Desktop\\PHIOS\\phios\\PHIOS-KIR-R2-24-CASE-COMPOSER-BAKEOFF-PACK.json",
+  "modelPolicy": {
+    "reasoningMode": "NONE_OR_DISABLED_FOR_LOW_COST_T1_COMPOSER_COMPARISON",
+    "sameEvidence": true,
+    "sameCompositionContract": true
+  },
+  "providerPricing": {
+    "OPENAI_LUNA": {
+      "input": 0.2,
+      "cachedInput": 0.02,
+      "output": 1.2,
+      "unit": "USD_PER_1M_TOKENS"
+    },
+    "MISTRAL_SMALL_4": {
+      "input": 0.15,
+      "cachedInput": 0.015,
+      "output": 0.6,
+      "unit": "USD_PER_1M_TOKENS"
+    },
+    "GEMINI_25_FLASH_LITE": {
+      "input": 0.1,
+      "cachedInput": 0.01,
+      "output": 0.4,
+      "unit": "USD_PER_1M_TOKENS"
+    },
+    "DEEPSEEK_V4_FLASH": {
+      "offPeak": {
+        "inputMiss": 0.22,
+        "inputHit": 0.007,
+        "output": 0.66
+      },
+      "peak": {
+        "inputMiss": 0.44,
+        "inputHit": 0.014,
+        "output": 1.32
+      },
+      "unit": "USD_PER_1M_TOKENS",
+      "peakUtc": "Mon–Fri 01:00–04:00 and 06:00–10:00 UTC"
+    }
+  },
+  "results": [
+    {
+      "caseId": "KIR-R2-W15R-001",
+      "question": "现实如何从差异走向可导航的结构？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P1-001",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "现实并非先有完整对象，再为它附加方向和位置；更像是由差异逐层稳定出来的可读结构。\n\n首先，必须存在可区分的状态，例如强与弱、近与远、内与外、先与后。差异使比较、关系和边界成为可能，也让“这里”和“那里”不再等价。随后，约束从众多理论可能中筛选出少数可发生、可重复、可维持的路径：边界限制流向，规则限制行为，材料性质限制形态，时间与位置限制可达范围。这样，短暂差异才不会立即消散，而能留下持续轨迹。\n\n当这些关系被反复保存，结构便形成；结构之间的差异进一步组织出区域、边界与网络。此时，稳定关系开始提供位置、方向和路径参考，现实也就从单纯“有差别”变成“可以判断在哪里、往哪里走、哪些路可行”。因此，导航不是后来附加的功能，而是差异经约束筛选并由结构保存后自然获得的可读性。",
+          "usage": {
+            "input": 980,
+            "cachedInput": 0,
+            "output": 252,
+            "total": 1232
+          },
+          "costUsd": 0.0004984,
+          "pricingTier": "standard",
+          "latencyMs": 6026.026,
+          "requestStartedAt": "2026-09-08T03:48:19.937Z",
+          "rawId": "resp_0c3b0a89b932ef5f006a9f8584839c87d0810344f669e51554"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 354.019,
+          "requestStartedAt": "2026-09-08T03:48:20.026Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 286.87,
+          "requestStartedAt": "2026-09-08T03:48:20.027Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "现实不是从完整对象开始的，而是从可区分的差异起步。两个状态只要不再完全等价，“这里与那里不同”“这个状态先于另一个”这类关系就有了附着点；若一切不可区分，比较就失去基础，方向与边界也无从谈起。对象本身可以在后续结构中逐渐稳定，但差异让这种稳定成为可能。\n\n但差异并不会自动变成结构——一个短暂差异若无法维持，很快会消散。下一步是约束的介入。约束并非单纯的禁止，而是对可能空间的选择：系统理论上有很多可能，真正能发生、能重复、能长期维持的路径往往更少。边界限制资源流向，规则限制行为范围，材料性质限制形态，时间与位置限制可达路径。正是这些限制，让部分差异被保存下来，现实不再是无限可能同时展开，而开始拥有经过选择的轨迹。\n\n随后，被保存的关系会沉淀为结构。结构不是对象的堆积，而是关系模式的延续：哪些变化被允许、哪些路径受限、哪些关系能重复，都在这一层被固定下来。结构之间彼此的差异又进一步分化出区域与网络——稳定关系形成内与外、中心与边缘、连通与隔离。\n\n直至此处，位置、方向和可行路径才变得可读取。导航并不是附加在现实末端的独立功能，它从差异开始，经过约束筛选、结构保存、区域与网络扩展，逐层叠加可读性才得以成立。换句话说，导航的精度建立在每一层已形成的结构累积之上，而不是凭空加在现实表面的最后一步。",
+          "usage": {
+            "input": 860,
+            "cachedInput": 0,
+            "output": 315,
+            "total": 1175
+          },
+          "costUsd": 0.0007942,
+          "pricingTier": "peak",
+          "latencyMs": 3446.605,
+          "requestStartedAt": "2026-09-08T03:48:20.028Z",
+          "rawId": "ff6451f7-aa79-4058-b65c-57274689821a"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-002",
+      "question": "为什么现实需要结构？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P1-003",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "现实需要结构，是因为差异本身只能产生变化的可能，不能保证某种关系持续存在。差异在约束下被筛选，一些关系会反复出现；反馈又会强化、修正或削弱它们。能够在一定边界内重复、传递并保持一致性的关系，才逐渐形成可维持的组织。\n\n结构因此不是预先存在的固定外形，而是现实获得持续性的方式。它使事件不再只是彼此无关的瞬间，而呈现出可辨认的边界、先后、层级和连接，使系统能够继续作用，也使变化能够被读取。这里的“稳定”并非永远不变：当约束或反馈改变，结构也会重组。可以说，结构让现实既能保持连续，又能回应新的条件。",
+          "usage": {
+            "input": 903,
+            "cachedInput": 0,
+            "output": 185,
+            "total": 1088
+          },
+          "costUsd": 0.0004026,
+          "pricingTier": "standard",
+          "latencyMs": 3722.054,
+          "requestStartedAt": "2026-09-08T03:48:25.966Z",
+          "rawId": "resp_02a7dfe555218fa7006a9f858957f487d0800182d99f2d212a"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 290.068,
+          "requestStartedAt": "2026-09-08T03:48:25.966Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 208.927,
+          "requestStartedAt": "2026-09-08T03:48:25.967Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "现实需要结构，不是因为结构是预先画好的固定形状，而是因为差异本身不会自动形成能持续运行的组织。各种差异不断涌现，让不同状态和关系成为可能，但只有一部分关系能在现实里继续存在。约束会筛选这些关系——哪些能重复发生，哪些会中断，哪些能保留下来；随着重复，反馈又进一步强化、修正或削弱它们。所以结构不是单一原因直接导致的，而是差异、约束与反馈共同作用下，那些受约束且可维持的关系逐步沉淀出来的结果。\n\n要做到这一点，必须区分“短暂模式”和“可维持组织”。一个模式可能闪现一下就没了，因为它缺少继续维持自己的条件。只有当关系在某种边界内能够重复、传递并保持足够的一致，它才成为真正的结构。\n\n结构带来的价值是持续性、边界、层级和可读取性：现实不再是一堆互不相关的瞬间，而有了可辨认的内外、先后和连接方式，能跨越时间被识别。同时，结构与外观形状是两回事——形状只是结构的一种表现，真正要紧的是哪些关系被维持、边界如何形成、系统怎样通过这些关系继续作用。而且结构并不静止，约束变了或反馈变了，它就能重组，所以稳定与变化同时存在：持续让现实可读，变化让结构能回应新条件。",
+          "usage": {
+            "input": 811,
+            "cachedInput": 0,
+            "output": 271,
+            "total": 1082
+          },
+          "costUsd": 0.00071456,
+          "pricingTier": "peak",
+          "latencyMs": 3923.227,
+          "requestStartedAt": "2026-09-08T03:48:25.967Z",
+          "rawId": "276ce570-0702-482f-9655-3f5c8168506c"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-003",
+      "question": "为什么导航需要方向、位置与坐标？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P1-006",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "导航需要方向、位置与坐标，因为行动必须能够被持续判断和修正。\n\n“位置”说明系统当前处在什么状态、相对于什么参照；没有位置，就无法确定起点，也无法比较自己与目标之间的差异。“方向”说明状态正在朝哪里变化：是在接近目标、远离目标，还是转向别处；只有位置而没有方向，便无法判断行动是否有效。\n\n“坐标”则提供共同且可重复的参照结构，使不同时间、不同观察结果中的位置和方向能够相互比较。这样，导航就不是选定路线后机械前进，而是不断读取当前位置、比较与目标的差异、确认方向并采取行动，再根据新的位置修正下一步。其关键不在于始终不偏离，而在于偏离后仍能重新定位并调整。",
+          "usage": {
+            "input": 884,
+            "cachedInput": 0,
+            "output": 187,
+            "total": 1071
+          },
+          "costUsd": 0.0004012,
+          "pricingTier": "standard",
+          "latencyMs": 3429.359,
+          "requestStartedAt": "2026-09-08T03:48:29.892Z",
+          "rawId": "resp_0a3e612e684ffc81006a9f858d389087d0a7ce0a7d979625a8"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 262.829,
+          "requestStartedAt": "2026-09-08T03:48:29.893Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 179.641,
+          "requestStartedAt": "2026-09-08T03:48:29.894Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "导航之所以必须同时包含方向、位置与坐标，是因为真正的导航不是“知道目标然后一直向前走”，而是一个需要持续校正的过程。\n\n首先，导航必须从回答“现在在哪里”开始。位置的作用不是给现实贴一个静态标签，而是建立“当前状态相对于什么”的描述——如果连起点都无从辨认，后续的移动、偏离或接近就没有可比较的基础。\n\n但知道位置仍不够。两个系统可能处在相似的位置，却朝着完全不同的方向变化。方向回答的不是“在哪里”，而是“正在往哪里变化”，即当前运动如果继续下去，会接近什么、远离什么或转向什么。缺少位置就没有起点，缺少方向就无法判断变化是否与目标一致，因此二者必须分开。\n\n坐标则把位置与方向放入一个可以重复比较的共同参照结构。没有它，每一次观察若使用不同参照，即使位置和方向都被描述，也难以形成连续的导航。\n\n由于现实、条件和系统自身都在变化，导航必须不断重新读取位置、重新比较差异、确认方向并修正下一步。真正的导航能力不在于从不偏离，而在于偏离之后仍能通过这套结构重新定位。",
+          "usage": {
+            "input": 805,
+            "cachedInput": 0,
+            "output": 233,
+            "total": 1038
+          },
+          "costUsd": 0.00066176,
+          "pricingTier": "peak",
+          "latencyMs": 2629.176,
+          "requestStartedAt": "2026-09-08T03:48:29.894Z",
+          "rawId": "5e975781-05e9-486f-9da5-03e6afd8b2fa"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-005",
+      "question": "为什么现实必须经过投影才能成为世界？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P2-001",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "现实之所以必须经过投影才能成为“世界”，是因为现实本身开放而复杂，而任何系统的接收能力、处理范围、时间窗口和分辨率都有限。系统不可能同时拥有全部差异，只能在现实已有的差异中建立访问边界：放大某些变化，保留某些关系，压缩或暂时忽略其他细节。\n\n这种选择并非凭空创造现实，而是把开放的复杂性压缩成可辨认、可记忆、可比较和可行动的结构。经过压缩，系统才知道有什么对象、哪些关系发生变化、当前需要回应什么，从而形成能够持续参与的现实界面。因而，“世界”不是现实的完整复制，也不是虚构，而是开放现实受载体能力、环境条件和既有结构共同限制后形成的可访问版本。不同条件会产生不同投影，但投影始终与更大的现实保持关系。",
+          "usage": {
+            "input": 895,
+            "cachedInput": 0,
+            "output": 210,
+            "total": 1105
+          },
+          "costUsd": 0.000431,
+          "pricingTier": "standard",
+          "latencyMs": 4388.318,
+          "requestStartedAt": "2026-09-08T03:48:33.322Z",
+          "rawId": "resp_0edd62035c5c3b62006a9f8590ace487d0a52df83aa53ddfa4"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 361.87,
+          "requestStartedAt": "2026-09-08T03:48:33.323Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 189.799,
+          "requestStartedAt": "2026-09-08T03:48:33.323Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "现实之所以必须经过投影才能成为“世界”，是因为任何系统都是有限的：接收能力有限、处理范围有限、时间窗口有限，分辨差异的分辨率也有限。面对无限开放的现实，系统无法同时处理所有可能差异，否则就无法形成稳定经验，也难以产生具体行动。\n\n投影正是有限系统面对开放现实时建立访问边界的方式。它不是凭空制造内容，而是在现实已存在的差异中做选择：某些差异被放大、某些被压缩，某些暂时留在边界之外。通过这种压缩，开放的复杂性被转化为有限结构——哪些对象被辨认、哪些关系被连接、什么发生了变化、当前需要回应什么。\n\n这一过程会舍弃信息，却也创造了可操作性。被压缩后的世界能够被记忆、比较和更新，系统因此不再只是被动暴露在无限变化中，而是形成可以持续运行的现实界面。所以，投影并非把现实变成虚构，它仍受现实、载体能力、环境条件和已有结构的共同限制，是有限系统与开放现实之间形成的映射。未经投影的现实虽然存在，但无法被系统访问和参与；只有经过投影，现实才能成为一个系统能够持续辨认差异、形成记忆、比较状态并采取行动的“世界”。",
+          "usage": {
+            "input": 783,
+            "cachedInput": 0,
+            "output": 245,
+            "total": 1028
+          },
+          "costUsd": 0.00066792,
+          "pricingTier": "peak",
+          "latencyMs": 2868.741,
+          "requestStartedAt": "2026-09-08T03:48:33.323Z",
+          "rawId": "29d41d9f-d42d-4110-9db5-ea6d2639be72"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-008",
+      "question": "为什么投影会产生偏向、失真、稳定与更新？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P2-009",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "投影之所以会产生偏向、失真、稳定与更新，是因为它不可能把现实的全部信息原样保留，而必须持续筛选、组织并回应变化。\n\n筛选会让某些信息进入前景、某些信息留在背景，并赋予不同关系不同权重，因此必然形成偏向。偏向本身不等于错误，它只是表明投影具有有限的观察位置和处理范围；当这种选择方式不再适合当前现实，就会出现失真，例如长期忽略某些信号、过度放大某些关系，或在条件变化后仍维持原有边界。\n\n如果同样的选择和解释被反复使用，投影便会形成稳定模式，使系统能够保留经验、维持连续行动，而不必每次都从零开始。但稳定只说明模式能够持续运行，并不证明它准确。现实条件变化后，原有模式可能逐渐失配，于是投影需要调整关注重点、关系权重和解释方式，这就表现为更新。",
+          "usage": {
+            "input": 853,
+            "cachedInput": 0,
+            "output": 231,
+            "total": 1084
+          },
+          "costUsd": 0.0004478,
+          "pricingTier": "standard",
+          "latencyMs": 4139.21,
+          "requestStartedAt": "2026-09-08T03:48:37.712Z",
+          "rawId": "resp_024d7270ca7c2909006a9f85950dd087d0ac5a7188ed27b322"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 272.495,
+          "requestStartedAt": "2026-09-08T03:48:37.713Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 183.701,
+          "requestStartedAt": "2026-09-08T03:48:37.714Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "投影之所以会产生偏向、失真、稳定与更新，根源在于投影不是对现实的静止“显示”，而是一个必须持续选择信息、维持结构并回应变化的有限过程。这四个现象不是彼此独立的问题，而是这个有限过程持续运行下分别出现的结果。\n\n先说偏向。任何投影都不可能同时保留全部现实，所以它必须进行选择：什么进入前景、什么留在背景、哪些差异权重更高。只要有选择，就必然形成偏向。但这不等于错误——偏向首先表示投影有自己有限的观察位置和处理范围。系统能形成可操作世界，恰恰因为它没有平均处理所有差异，而是依据当前条件保留某些关系、忽略另一些。真正的问题不是“有没有偏向”，而是当前偏向是否仍适合正在面对的现实。\n\n当偏向与现实条件逐渐失配时，就表现为失真：某些信号长期被忽略、某些关系被过度放大，或原本有效的边界在条件变化后仍然被维持。投影仍能运行，却越来越难以对应对现实变化。\n\n再说稳定。当某种选择方式被反复使用，投影会逐渐形成稳定模式：同样的差异被注意，同样的关系被强化，同样的解释被带回下一轮判断。稳定让世界不必每刻从零开始，使经验得以保留、长期行动成为可能。但稳定本身并不证明投影准确——一个模式可以很稳定，却仍与新现实逐渐失配。所以稳定只是一种运行特征，不是真实性证明。\n\n最后是更新。正因为稳定不等于正确，投影需要在偏向与稳定形成的运行框架内持续回应现实变化，修正失配的部分。偏向提供了选择基础，稳定保留了连续经验，而更新则让投影不至于因固守旧模式而彻底脱离现实。这四者共同构成一个有限投影维持自身、应对世界的完整循环。",
+          "usage": {
+            "input": 743,
+            "cachedInput": 0,
+            "output": 360,
+            "total": 1103
+          },
+          "costUsd": 0.00080212,
+          "pricingTier": "peak",
+          "latencyMs": 3429.267,
+          "requestStartedAt": "2026-09-08T03:48:37.714Z",
+          "rawId": "870cf71f-8c21-463c-8246-424067be4117"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-010",
+      "question": "无限现实如何压缩为有限问题？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P3-005",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "无限现实之所以能被压缩为有限问题，是因为系统主动建立了边界，并进行取舍。\n\n首先，边界规定本轮处理从哪里开始、到哪里停止，哪些内容暂时不纳入。否则，任何原因都能继续追溯，任何结果都能继续延伸，问题会不断扩大，系统也会失去明确的输入、判断范围和行动方向。\n\n在边界之内，系统还要进一步选择：关注哪些变量和关系，比较多长的时间窗口，投入多少资源，以及希望达成什么目的。提出问题本身，就是一次结构选择：决定此刻看什么、暂时忽略什么，哪些差异属于问题内部，哪些留在外部。\n\n因此，问题不是现实的完整缩小版，也不必是唯一正确的切分，而是一种可操作结构。它把开放的复杂现实转化为当前能够持续分析和处理的范围；不同的边界与选择，也会使同一现实形成不同的问题。",
+          "usage": {
+            "input": 790,
+            "cachedInput": 0,
+            "output": 220,
+            "total": 1010
+          },
+          "costUsd": 0.000422,
+          "pricingTier": "standard",
+          "latencyMs": 3883.25,
+          "requestStartedAt": "2026-09-08T03:48:41.853Z",
+          "rawId": "resp_0daa277f680524af006a9f85992dd087d0a3b71c4e61a1a296"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 251.768,
+          "requestStartedAt": "2026-09-08T03:48:41.853Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 194.336,
+          "requestStartedAt": "2026-09-08T03:48:41.853Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "现实本身并不会自动以一个明确的问题呈现，任何时刻都同时存在大量差异、关系、历史和可能性。若试图一次处理全部，系统会失去输入、判断边界与行动范围。因此压缩的第一步是建立边界：决定讨论从哪里开始、在哪里停止，以及什么不属于本轮处理。边界不是宣称外部现实不重要，而是承认当前运行能力有限，必须形成可持续处理的范围。\n\n边界划定后，还需进一步压缩：选择哪些变量值得比较、使用多长的时间窗口、拥有多少资源、以及这一轮想达成什么目的。提出问题时，其实已完成一次结构选择——决定此刻关注什么、暂时忽略什么，哪些差异属于问题内部，哪些留在边界之外。\n\n正因为如此，同一现实可以产生多个不同问题：问题改变，进入视野的变量、关系与时间范围也随之改变。问题并非现实的缩小版或唯一正确切法，而是一种可操作结构，让系统能从开放复杂性中建立当前可处理的入口。后续还可让一组基础问题彼此分工、互相连接，共同帮助辨认现实如何形成、共存与变化。",
+          "usage": {
+            "input": 716,
+            "cachedInput": 0,
+            "output": 219,
+            "total": 935
+          },
+          "costUsd": 0.00060412,
+          "pricingTier": "peak",
+          "latencyMs": 2346.006,
+          "requestStartedAt": "2026-09-08T03:48:41.854Z",
+          "rawId": "54d8ac32-e5a2-4be5-aef7-9ee1dbb44523"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-014",
+      "question": "现实如何进入生命：载体、感官与认知入口的形成？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P4-001",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "现实进入生命，并不是外界被原样复制到身体和心智中，而是经过一连串转换。有限载体先要压缩复杂度，把过多变化整合为能够维持的模式；边界、交换、调节和修复则使这种组织得以持续。这样，身体才能保存过去、回应当前，并为未来保留一定能力。\n\n环境进一步决定哪些讯号能够到达载体，感官则只对特定形式的变化敏感。光、声音、温度、空气、水和食物等，并非单纯背景，而是以不同方式进入身体运行。之后，容量、身体状态、过去经验、当前需求和所处位置继续过滤与重组输入，注意也参与决定什么被优先处理。\n\n因此，生命经验到的不是“世界本身”，而是载体能够承受、感知、读取并持续组织的现实。不同生命面对同一环境，会因入口和承载条件不同而形成不同的可经验世界。",
+          "usage": {
+            "input": 981,
+            "cachedInput": 0,
+            "output": 223,
+            "total": 1204
+          },
+          "costUsd": 0.0004638,
+          "pricingTier": "standard",
+          "latencyMs": 3897.056,
+          "requestStartedAt": "2026-09-08T03:48:45.738Z",
+          "rawId": "resp_0bad9101ef3158a5006a9f859d126087d08ba49feba86d88d8"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 254.039,
+          "requestStartedAt": "2026-09-08T03:48:45.738Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 179.378,
+          "requestStartedAt": "2026-09-08T03:48:45.738Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "现实不是以完整面目直接灌入生命的，而是通过有限载体逐步“建成入口”的过程。生命首先必须压缩复杂度——把无限变化的现实重新组织成有限系统能维持的模式，整合过量讯号、收敛可能性、形成稳定关系网络，才不至于被变化规模淹没。\n\n真正承载现实进入的，是生物组织本身。边界维持内外差异，交换让资源继续进入，调节与修复维持内部状态，复制与长期信息保存则让组织跨时间延续。所以感知不是最后才附加的“功能”，从载体形成起，现实就已经在被选择、压缩与重组。\n\n具体入口由三层共同决定：感官只对某些形式的变化敏感；环境决定哪些讯号能实际到达载体；而同一环境对不同载体也不会产生相同输入——感官范围、身体状态、过去经验、当下需求与位置都会改变可读取的范围。容量则始终设限：它决定系统在多大负荷、多长持续、多少并发变化下仍能保持整体组织。\n\n所以，“世界存在什么”与“生命此刻能读到什么”是两个不同问题。我们经验到的现实，永远是有限载体能够承受、读取并持续组织的那部分现实。",
+          "usage": {
+            "input": 855,
+            "cachedInput": 0,
+            "output": 243,
+            "total": 1098
+          },
+          "costUsd": 0.00069696,
+          "pricingTier": "peak",
+          "latencyMs": 2789.335,
+          "requestStartedAt": "2026-09-08T03:48:45.738Z",
+          "rawId": "e6de9e9b-a115-4038-8d46-0f44702d1f62"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-018",
+      "question": "身体如何把世界变成可运行的现实：调节、介质与恢复？",
+      "bookCode": "BOOK-1",
+      "nodeCode": "KN-B1-P4-009",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "身体把世界变成“可运行的现实”，并不是把外界原样接收，而是持续进行转换与协调。光、声音、温度、空气、水、食物、空间位置和社会压力等，先被转成讯号、能量分配、激活程度与行动准备，进而成为身体的内部状态。\n\n这种转换依靠多层调节共同完成：神经系统快速传递变化并组织回应；激素等较慢过程延长影响；节律把活动安排进周期；代谢则把资源转成维持、行动和修复所需的能量。身体状态不是某一个系统单独决定的，而是睡眠、资源、既有负荷、节律位置和过去累积等因素共同形成的配置。\n\n调节并不意味着永远稳定。重复环境会塑造新的节律与响应模式，长期任务会改变资源分配，持续关系会形成新的预期。恢复则依赖这些介质持续、合适地进入：光暗、空气交换、水与食物补充，以及声音、温度和空间条件的调整。改变环境，实际上是在改变身体接收的输入结构，也就可能重新影响注意、节律、代谢与行动准备。",
+          "usage": {
+            "input": 1076,
+            "cachedInput": 0,
+            "output": 276,
+            "total": 1352
+          },
+          "costUsd": 0.0005464,
+          "pricingTier": "standard",
+          "latencyMs": 4031.488,
+          "requestStartedAt": "2026-09-08T03:48:49.635Z",
+          "rawId": "resp_004903024d8c309c006a9f85a1009487d08ba64b0aac75eeca"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 232.628,
+          "requestStartedAt": "2026-09-08T03:48:49.636Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 195.105,
+          "requestStartedAt": "2026-09-08T03:48:49.636Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "把世界变成可运行的现实，靠的不是某一套单一系统，而是多层调节、外部介质与恢复过程共同维持的连续组织。现实中进入身体的光线、声音、温度、资源与压力，会被转成讯号、能量分配和行动准备，外部世界于是逐步成为内部运行状态。\n\n具体来说，神经系统让各区域快速交换讯号，以便短时间内组织回应；激素等较慢的过程把局部变化拉长到更久的时间尺度；节律把运行放进重复周期；代谢则持续处理资源如何转成维持、行动和修复所需的能量。这四者没有一个能单独代表“真正的身体状态”——同样的事件，会因睡眠、资源、既有负荷和节律位置不同，形成不同反应。\n\n身体也不是离开环境独立运转的机器。光、空气、水、食物、声音、温度和空间持续构成运行条件，各自影响时间讯号、交换、资源供给与位置关系，又通过内部网络互相牵动，且都不是一次性输入，而必须不断接收和补充。\n\n过程中身体依靠适应来维持：重复环境会形成新节律与响应模式，长期任务改变资源分配，持续关系建立新预期，使生命不用每次从零开始。同时，所有系统都有维护、漂移和失效边界，恢复正是让运行在偏离后重新回到可行范围的关键。身体因此不是固定结构，而是许多调节过程在某个时刻形成的整体配置，环境也因此不是背景，而是身体状态的一部分。",
+          "usage": {
+            "input": 934,
+            "cachedInput": 0,
+            "output": 305,
+            "total": 1239
+          },
+          "costUsd": 0.00081356,
+          "pricingTier": "peak",
+          "latencyMs": 3621.584,
+          "requestStartedAt": "2026-09-08T03:48:49.636Z",
+          "rawId": "9c28052a-643d-4406-bfab-587331839bcb"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-044",
+      "question": "集体优先级如何变成行动：价值排序、稀缺、奖励与激励如何运行？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-008",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "集体优先级转化为行动，靠的是一套连续的选择机制。首先，当多个目标争夺有限的注意力和资源时，价值排序把多元偏好变成实际的先后次序；真正被优先配置的对象，往往比口头宣称更能显示集体的实际价值。\n\n接着，资源压缩把复杂现实转成可分配单位，稀缺由此出现。但稀缺不只意味着总量不足，也可能来自时间、资格、位置、进入条件和预期规则：资源很多，对特定人群或用途仍可能稀缺。稀缺迫使系统取舍，改变谁能获得机会、何时获得，以及哪些回应更容易被复制。\n\n最后，奖励机制把被选择的行为与金钱、认可、进入权、地位或归属等结果连接起来。只要某种回报提高行为再次出现的概率，它就构成激励。于是，当前选择被连接到预期未来，个人会调整行动，群体也会逐渐稳定某些策略，同时让其他策略变得更昂贵。这个过程并非固定单向链条，奖励和稀缺形成的结果也可能反过来改变后续排序。",
+          "usage": {
+            "input": 1213,
+            "cachedInput": 0,
+            "output": 277,
+            "total": 1490
+          },
+          "costUsd": 0.000575,
+          "pricingTier": "standard",
+          "latencyMs": 6207.654,
+          "requestStartedAt": "2026-09-08T03:48:53.669Z",
+          "rawId": "resp_0df46b6fe88d0024006a9f85a5afdc87d08a6387b1a3ec0668"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 235.2,
+          "requestStartedAt": "2026-09-08T03:48:53.669Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 207.637,
+          "requestStartedAt": "2026-09-08T03:48:53.669Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "集体优先级变成行动，并不是靠“大家都觉得重要”自动实现的。核心机制是：先把多种被重视的结果按某种次序排好，再通过资源压缩和稀缺来强制取舍，最后由奖励与激励把这一次的选择固化下来，并指向未来。\n\n当多个重要目标同时争夺有限的注意力与资源时，排序才会真正出现。平时口头宣称的价值顺序可能不明显，直到冲突迫使系统比较：真正被优先分配资源的对象，往往才反映实际运行中的价值次序。\n\n稀缺在这一链条中起“强制筛选”作用。它不只是供给不足，也可能是由进入条件、时间、位置、资格或期待被组织出来的关系性状态——资源总量充足，仍可能对特定人群或用途构成稀缺。正因如此，稀缺迫使系统在排序后的选项里做出取舍。\n\n奖励机制则把可见优势——金钱、认可、进入权、地位或归属——连接到某些行为上，只要它能提高该行为再次出现的概率。长期看，奖励不只是在推动个人行动，它更会改变群体中哪些行为能持续存在：某些策略越来越容易维持，另一些则越来越昂贵。而激励负责把现在的选择连接到预期未来，让当次取舍获得延续的动力。\n\n最终，抽象的“重要性”就通过“排序—压缩—稀缺取舍—奖励强化—未来预期”这一连串过程，变成可重复的分配与行动模式。环节之间会互相反馈，并非单向固定公式，但正是这种连续的传递，让集体优先级得以落地并稳定运行。",
+          "usage": {
+            "input": 1026,
+            "cachedInput": 0,
+            "output": 311,
+            "total": 1337
+          },
+          "costUsd": 0.00086196,
+          "pricingTier": "peak",
+          "latencyMs": 3683.444,
+          "requestStartedAt": "2026-09-08T03:48:53.669Z",
+          "rawId": "1e68c008-83d8-452f-9f58-bad540bc52be"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-049",
+      "question": "集体注意力如何加速：叙事市场、反馈回路、算法与病毒传播如何互相放大？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-033",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "集体注意力的加速，来自几个环节彼此强化，而不是单一因素推动。\n\n不同叙事先争夺稀缺的注意力与支持。某个故事一旦胜出，便会提供新的词汇、类别和期待，使相似解释更容易被接受。人们的回应又会增加它的曝光，形成反馈回路：越多人讨论，越显得重要；越显得重要，越容易获得更多回应。\n\n注意力捕获进一步把时间从其他活动转移过来。新奇、情绪、社会压力、错失恐惧和个性化相关性，会让特定讯号持续打断专注。算法随后把互动、反应和可见度转化为更大范围的分发，优先放大已经显示出吸引力的内容。\n\n病毒式传播则让复制速度超过慢速验证：内容先被大量转发和模仿，之后才可能接受检验。于是“已经很可见”会被误读为“值得关注”甚至“更可信”，进一步推动叙事竞争、注意力捕获和算法分发。PHI OS 将其理解为一种可自我增强、但也可能扭曲现实的集体注意力回路。",
+          "usage": {
+            "input": 1270,
+            "cachedInput": 0,
+            "output": 281,
+            "total": 1551
+          },
+          "costUsd": 0.0005912,
+          "pricingTier": "standard",
+          "latencyMs": 5924.806,
+          "requestStartedAt": "2026-09-08T03:48:59.879Z",
+          "rawId": "resp_0090c041c9f9406d006a9f85ab334087d0b5d7af6d1fbb2b91"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 725.94,
+          "requestStartedAt": "2026-09-08T03:48:59.879Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 191.577,
+          "requestStartedAt": "2026-09-08T03:48:59.880Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "在PHI OS的框架里，这种加速不是单一环节推动的，而是一组互相咬合的机制在循环中把信号放大，直到某套解释短时间占据不成比例的主导位置。\n\n关键链条是这样转起来的：**叙事市场先争夺解释权**。不同叙事竞争稀缺的集体注意力，被选中的不一定最准确，而可能因为更贴合身份、情绪或既有激励。一旦某种叙事拿下较大份额，它就会改变之后的竞争场地——为后续解释提供词汇和期待，让“同类故事”更容易被接受。\n\n接着，**集体注意回路把反应转成更多曝光**。当可见性本身能制造更多可见性，注意力就进入不稳定状态：每一条回应都被回收到系统里，变成新一轮的分发素材。\n\n这时**注意力捕获介入**，用新奇、变动奖励、社会压力和错失恐惧持续打断其他目标，把人拉向特定信号。代价是机会成本：被占用的时间排挤了思考、建设与恢复，长期改变的不只是“看见什么”，还有“不再有时间做什么”。\n\n最后，**算法放大胜出的信号**，把优势叙事推得更高；**病毒传播又让复制跑在慢速验证之前**，情绪和身份认同的快速转发往往先于事实核查完成扩散。\n\n这四层循环往复，且会反向作用：算法放大的结果又反过来改变下一轮叙事市场的竞争环境。真正造成“加速”的，正是这种闭环——一个看似微小的变化，经过反复筛选与放大，可能重新分配进入权与可见性，让某些现实在极短时间内变得不成比例地主导。",
+          "usage": {
+            "input": 1060,
+            "cachedInput": 0,
+            "output": 336,
+            "total": 1396
+          },
+          "costUsd": 0.00090992,
+          "pricingTier": "peak",
+          "latencyMs": 4350.604,
+          "requestStartedAt": "2026-09-08T03:48:59.880Z",
+          "rawId": "1d7f355d-bd1c-4458-b244-9f6f3323d269"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-050",
+      "question": "文明为什么持续加速：AI 注意、时间压缩、生产力与未来导向如何连接？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-038",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "文明持续加速，并非某项技术单独推动，而是几个机制彼此强化的结果。\n\nAI先改变注意力的入口：它大规模筛选、摘要、排序、生成并预先组织信息，使人们面对的不是原始讯号，而是机器加工后的注意场。这样，信息选择和协调被移到更上游，哪些内容可见、哪些回应容易被复制，也随之改变。\n\n这些变化进入时间压缩：同样的钟表时间里，决策、交换、反馈和下一轮行动被塞得更密，结果是反应更快，但反思、恢复和慢速验证的空间减少。当速度从暂时优势变成竞争与协调的长期要求，参与者就必须不断适应更高的基准速度。\n\n生产力指标会进一步奖励更密集的产出，而未来导向则把当前行动持续绑定到下一个目标。于是，速度不再只是手段，而成为日常运行的默认条件。PHI OS将其理解为一种自我强化回路：AI重组注意，时间压缩提高反馈频率，加速重塑生产方式，未来目标又持续为下一轮加速提供正当性。",
+          "usage": {
+            "input": 1202,
+            "cachedInput": 0,
+            "output": 265,
+            "total": 1467
+          },
+          "costUsd": 0.0005584,
+          "pricingTier": "standard",
+          "latencyMs": 4402.138,
+          "requestStartedAt": "2026-09-08T03:49:05.805Z",
+          "rawId": "resp_0572cd6ad7257155006a9f85b11d8487d09f9b9518fc7f87c7"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 278.362,
+          "requestStartedAt": "2026-09-08T03:49:05.805Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 225.541,
+          "requestStartedAt": "2026-09-08T03:49:05.805Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "文明持续加速，并不是单一技术推动的线性结果，而是一组机制互相咬合后形成的默认状态。\n\nPHI OS 把这个过程理解为一条连续的作用链：当 AI 重构注意力架构时，信息在到达人之前就开始被选择、排序和生成。也就是说，注意力的形成位置被移到了更上游——人们面对的不再是原始讯号，而是已经被机器组织过的选择场域。这改变了共同信号的形成方式。\n\n这种改变进而为时间压缩创造条件。压缩不是把钟表调快，而是在同一段钟表时间内塞入更多决策与反馈循环，让讯号与结果之间的间隔持续缩短。这提升了反应速度，却也挤压了反思和慢速验证的空间，文明因此在更快的同时变得脆弱。\n\n时间压缩之后，加速逐渐从暂时优势转变为长期运行要求。因为参与者——无论是个人还是机构——都围绕更高基准速度重组，一旦参考速度本身不断移动，即使有人想慢下来也会被系统性地迫着跟上。\n\n最后，生产力指标奖励更密集的产出，未来导向又让现在始终绑定下一个目标。于是速度被嵌入日常期待，成为文明的默认运行方式。这一组合并非单向固定公式：反馈仍可能反向作用，但整体上，四者相互放大，使加速成为自我强化的常态。",
+          "usage": {
+            "input": 1050,
+            "cachedInput": 0,
+            "output": 268,
+            "total": 1318
+          },
+          "costUsd": 0.00081576,
+          "pricingTier": "peak",
+          "latencyMs": 3997.189,
+          "requestStartedAt": "2026-09-08T03:49:05.806Z",
+          "rawId": "d07420f6-a3f9-49ca-80e7-5bd9b1b5e597"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-053",
+      "question": "集体走到边界之后会发生什么：碎裂、崩塌、重构、AI 阈值与维护？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-054",
+      "selectionBucket": "CONTROL_ACCEPTED",
+      "priorHumanStatus": "ACCEPTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "集体走到边界后，不会只有一种结局，而取决于“连续性还能否被承载”。\n\n当子群体无法继续共享足够的参照、接口与信任时，整体会先出现碎裂：局部内部可能更一致，但彼此之间的翻译和协商路径减少，差异逐渐变成相互隔离的现实模型。若连接局部活动的接口失效速度超过修复速度，就会发生崩塌。此时单个组件未必停止，失效的是交接、信任、正当性、资源供给和跨时间维持共同期待的能力。\n\n崩塌之后不一定回到旧结构。只要某些功能仍需继续，参与者就会围绕这些功能重新建立连接、边界、角色与接口，形成重构；它可能保留原有目的，却放弃原有载体。人工系统也可能在此过程中从工具集合跨入集体架构。规模扩大后，维护不再是附属工作，而成为维持协调、接口和共同参照的一级运行需求。ೈನ್",
+          "usage": {
+            "input": 1330,
+            "cachedInput": 0,
+            "output": 250,
+            "total": 1580
+          },
+          "costUsd": 0.000566,
+          "pricingTier": "standard",
+          "latencyMs": 4867.925,
+          "requestStartedAt": "2026-09-08T03:49:10.209Z",
+          "rawId": "resp_042760e5b95cb459006a9f85b5871087d099ae7bc6699f8b97"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 289.562,
+          "requestStartedAt": "2026-09-08T03:49:10.210Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 187.2,
+          "requestStartedAt": "2026-09-08T03:49:10.211Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "“集体走到边界之后”描述的不是单一路径，而是多条不同的失效与重组方式，它们共同指向同一个问题：连续性还能不能继续被承载。\n\n碎裂是整体的协调能力先于组件失效。不同子群体不再共享足够的共同参照、接口和信任，局部一致性上升，但整体一致性下降。碎裂不等于多样性，关键在于差异之间是否还存在可翻译、可协商的路径。\n\n崩塌则是把局部活动连接成整体的接口，失效速度快于修复速度。个别部分仍在运行，但更大范围的协调模式已经无法可靠复制自己，表现为交接断裂、信任缺失、正当性下降。\n\n重构从失效结构被放下开始：参与者围绕仍需继续的功能，构建新的连接、边界与接口，可以保留某些目的，同时舍弃另一些。关键不在恢复旧结构，而在改变后的条件下重建协调能力。\n\n人工系统还会经历从工具集合跨入集体架构的阈值；而规模一旦足够大，维护会变成一级运行需求，而不是附属任务。这些节点性质不同，但都在回答同一个问题：集体现实是否还被承载得住，以及由谁来承载。",
+          "usage": {
+            "input": 1078,
+            "cachedInput": 0,
+            "output": 225,
+            "total": 1303
+          },
+          "costUsd": 0.00077132,
+          "pricingTier": "peak",
+          "latencyMs": 2910.717,
+          "requestStartedAt": "2026-09-08T03:49:10.214Z",
+          "rawId": "6ebf14ff-0a35-4679-80a3-e66e3fd0b5cf"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-019",
+      "question": "意识不是现实的全部：可见性、体验与自我模型如何形成？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B1-P5-001",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "意识并不是把现实完整“拍摄”下来，而是在有限注意、记忆和行动能力下，形成一个可运行的版本。系统持续处理的内容远多于能进入觉察的部分；某些状态只有在被选择、稳定，并与既有表征连接后，才更可能成为可描述的体验。于是，可见性会改变什么值得注意、什么能够被表达，以及接下来如何行动。\n\n体验形成后，现实仍在觉察之外继续运行，因此意识所见并不等于现实本身。由于意识经常把被看见、被组织的结果当作世界的全部，它可能误以为自己创造了 Reality；实际上，它更像是在既有运行中筛选和重组可体验的部分。若某些状态被反复处理，它们会影响预测与选择；若长期保持稳定，就可能形成新的惯性。\n\n持续运行的中心还会把分散的记忆、角色、责任和预期压缩成“我是谁、我通常如何行动、什么与我有关”的连续模型，这就是自我与身份的形成。它有助于协调行动，但现实改变后也可能继续维持旧模式。整个过程并非固定直线，环节可以并行、反馈也可能倒流。",
+          "usage": {
+            "input": 1184,
+            "cachedInput": 0,
+            "output": 279,
+            "total": 1463
+          },
+          "costUsd": 0.0005716,
+          "pricingTier": "standard",
+          "latencyMs": 4167.903,
+          "requestStartedAt": "2026-09-08T03:49:15.082Z",
+          "rawId": "resp_0b1938ea98ee4c9e006a9f85ba744487d0b03d2814284fae45"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 286.697,
+          "requestStartedAt": "2026-09-08T03:49:15.082Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 212.206,
+          "requestStartedAt": "2026-09-08T03:49:15.084Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "根据PHI OS的框架，这一过程不是把意识当作独立对象，而是把它理解为运行中逐步形成的可见层。具体机制如下：\n\n**可见性如何形成**：系统持续处理的内容远超当前能进入觉察的部分。只有当某些状态被**选择**并与既有表征**连接**时，它们才更可能成为可描述的体验。也就是说，觉察不是复制全部现实，而是一种筛选后的结果。\n\n**体验如何形成**：体验并非现实的完整副本，而是系统在有限注意、记忆与行动能力下形成的“可运行版本”。某个状态被看见后，会改变接下来什么值得注意；被重复后，会影响预测与选择。\n\n**自我模型如何形成**：持续的运行中心会逐渐把分散的记忆、角色、责任与预期压缩成“我是谁、我通常如何行动、什么与我有关”的连续结构。这种稳定既有助于协调行动，也可能在现实变化后变成惯性。\n\n**整体关系**：这些环节并非固定顺序，可能并行、反馈倒流，或长期停留在一层。关键是理解机制之间如何传递条件——某个状态从被看见、被稳定到成为新的惯性，每一步都重新设定了下一步可形成的条件。这也帮助区分短暂波动与已进入持续运行的结构性变化。意识并不会单独决定全部现实，但它会改变什么更容易被看见、维持、表达或行动。",
+          "usage": {
+            "input": 1040,
+            "cachedInput": 0,
+            "output": 282,
+            "total": 1322
+          },
+          "costUsd": 0.00082984,
+          "pricingTier": "peak",
+          "latencyMs": 3464.228,
+          "requestStartedAt": "2026-09-08T03:49:15.084Z",
+          "rawId": "0578904e-0b6e-4a71-8da4-93f731b46e5b"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-020",
+      "question": "情绪如何进入体验：从适应痕迹到观察与压缩？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B1-P5-006",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "在 PHI OS 的框架中，情绪进入体验，并不是现实被完整复制进意识，而是现实先改变系统的运行倾向。\n\n重复的压力、奖励、关系和环境条件，会留下可调用的适应痕迹，使系统更快进入熟悉的反应路径，但也可能降低对新条件的开放度。随着这些倾向被选择、稳定，并与已有表征连接，它们就从尚未被觉察的运行状态，进入可描述的体验，形成一种当前可运行的现实版本。\n\n当系统开始观察自身运行时，状态、变化及其后果可以被放在一起比较。观察不保证立即消除偏差，却为修正和重新配置提供了条件。之后，复杂的情绪与体验会被压缩成较稳定、可继承的模式，影响下一轮什么更容易被看见、维持、表达或采取行动。 તેથી，情绪既是适应的结果，也会成为后续体验组织和行为选择的条件。",
+          "usage": {
+            "input": 1114,
+            "cachedInput": 0,
+            "output": 224,
+            "total": 1338
+          },
+          "costUsd": 0.0004916,
+          "pricingTier": "standard",
+          "latencyMs": 3719.316,
+          "requestStartedAt": "2026-09-08T03:49:19.254Z",
+          "rawId": "resp_0b81d74faab7c7f4006a9f85be959c87d080a778ed7418822f"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 297.674,
+          "requestStartedAt": "2026-09-08T03:49:19.255Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 154.019,
+          "requestStartedAt": "2026-09-08T03:49:19.255Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "这个问题问的是情绪如何一步步变成我们能够体验到的内容。按照PHI OS的框架来看，这其实是一条从环境到内在的连续加工链，而不是某个单一时刻发生的事。\n\n整个过程的起点是“情绪为何出现”：现实环境中的压力、奖励或关系变化并不会凭空消失，而是在系统上留下“适应痕迹”——这不是对过去的完整备份，而是改变下一次运行的起点，让系统更快进入熟悉的反应路径。\n\n接下来，这些痕迹会参与“体验配置系统的形成”。体验并不是现实的完整副本，而是系统在有限注意和记忆下形成的可运行版本。换句话说，配置系统决定哪些痕迹被选中、被稳定下来，成为可以调用的倾向。\n\n再往后是“Reality如何被观察”这一层。系统持续处理的内容远多于能进入觉察的部分，只有当某些状态被选择并和既有表征连接起来，它们才成为可描述的体验。观察不等于自动纠偏，但它让状态和后果进入比较，为修正提供了可能。\n\n最后是“复杂体验如何被压缩”。被观察和稳定后的内容不会以原始形态留存，而会被压缩成可以继承的条件，成为下一轮运行的输入。这样，一次完整的情绪体验就完成了从环境痕迹到可运行经验的转折。",
+          "usage": {
+            "input": 978,
+            "cachedInput": 0,
+            "output": 255,
+            "total": 1233
+          },
+          "costUsd": 0.00076692,
+          "pricingTier": "peak",
+          "latencyMs": 3658.208,
+          "requestStartedAt": "2026-09-08T03:49:19.256Z",
+          "rawId": "50f7edb7-aec2-4ea6-bb5a-66545ecf8097"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-023",
+      "question": "情绪如何模拟未来：预测、调节、扭曲与适应？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B1-P5-021",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "情绪模拟未来，是因为它会把当前状态转化为对“接下来可能发生什么”的预期，并据此改变注意、记忆、选择和行动。面对压力、奖励或关系线索，情绪会提高某些信息的显著性，使系统更容易看见与既有状态相符的结果；同时，调节过程会重新组织这种状态，使它被维持、减弱或转向。\n\n这种模拟也可能扭曲现实：被反复激活的情绪会放大某些线索、压缩另一些可能性，让预测逐渐像事实一样影响体验。若同一压力或奖励路径持续出现，系统会形成更快进入熟悉反应的倾向，这就是适应；但它也可能降低对新条件的开放度。\n\n因此，情绪不是单纯反映未来，而是在预测、调节和反馈中参与塑造当前现实。这个过程并非固定的线性步骤，环节可能并行或相互倒流；关键在于观察哪些输入被放大、哪些状态被稳定，以及反馈是否仍留下重新配置的空间。",
+          "usage": {
+            "input": 1207,
+            "cachedInput": 0,
+            "output": 249,
+            "total": 1456
+          },
+          "costUsd": 0.0005402,
+          "pricingTier": "standard",
+          "latencyMs": 4088.934,
+          "requestStartedAt": "2026-09-08T03:49:22.977Z",
+          "rawId": "resp_005c5d69f3c8825f006a9f85c2528887d09267969634f05445"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 261.346,
+          "requestStartedAt": "2026-09-08T03:49:22.978Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 183.639,
+          "requestStartedAt": "2026-09-08T03:49:22.978Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "情绪并不是对未来做一次“准确预演”，而是系统在有限资源下，先形成一个可运行的未来版本，再用这个版本来调整当下的状态。简单说，它先“猜”接下来可能发生什么，这个猜测本身就会改变你现在注意什么、准备做什么。\n\n这套模拟大致沿着一条连续链运转：情绪先预测未来，改变当前状态；接着，这个预测进入模拟过程，情绪的参与让状态获得新的组织方式；随后通过调节，状态被稳定或改写；再往下，情绪会扭曲对现实的感知——放大某些信息、压缩另一些；最后，适应让整个过程沉淀下来，改变下一次运行的起点。也就是说，每一次适应都不是原样保存过去，而是让重复出现的压力、奖励或关系条件变成更快的熟悉路径，同时也可能降低对新条件的开放度。\n\n需要强调的是，这不是固定五步。环节可能并行，反馈可能倒流，系统也可能长期停在某一层。真正值得追踪的是：当前系统正在哪个环节失去连续、过度固定，或者还有重新配置的空间。这样看，情绪模拟未来就不是一个孤立事件，而是前后状态之间持续传递条件、又通过反馈自我修正的运行过程。",
+          "usage": {
+            "input": 1040,
+            "cachedInput": 0,
+            "output": 240,
+            "total": 1280
+          },
+          "costUsd": 0.0007744,
+          "pricingTier": "peak",
+          "latencyMs": 3834.239,
+          "requestStartedAt": "2026-09-08T03:49:22.979Z",
+          "rawId": "0cff121f-d809-4a17-84b7-ce06da7f75c8"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-028",
+      "question": "从不可表达走向选择：决策、路径与内部冲突？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B1-P5-046",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "PHI OS 将这条转变理解为：某些 Reality 之所以“不可表达”，并不一定是它不存在，而是当前的注意、记忆、语言或行动能力无法把它完整转换为可读取形式。表达本身会进行压缩、筛选和组织，因此被表达出来的只是内部状态的一个可运行版本。\n\n当多个可能路径都要求有限资源时，决策便出现了。系统必须在信息不完整、后果不确定的情况下，压缩可能性，确定优先级与行动方向。不同的当前配置、限制和反馈，会使同一现实形成不同路径；选择也因此不只是偏好，而是对责任、约束和可承受范围的回应。\n\n内部冲突则产生于不同路径、优先级或承担方式无法同时满足：某部分状态要求行动，另一部分需要保护、延迟或阻断。若某种表达和选择被反复维持，它会影响后续注意、预测与行动，逐渐形成惯性；但反馈也可能促使系统重新组织。因而，从不可表达走向选择，不是一次性的决定，而是内部状态经过表达、压缩、路径竞争与反馈后，形成下一轮运行条件的过程。",
+          "usage": {
+            "input": 1088,
+            "cachedInput": 0,
+            "output": 273,
+            "total": 1361
+          },
+          "costUsd": 0.0005452,
+          "pricingTier": "standard",
+          "latencyMs": 4593.194,
+          "requestStartedAt": "2026-09-08T03:49:27.070Z",
+          "rawId": "resp_07093231298af262006a9f85c6638887d0bca224e88bd4e383"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 237.038,
+          "requestStartedAt": "2026-09-08T03:49:27.071Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 184.598,
+          "requestStartedAt": "2026-09-08T03:49:27.072Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "这个标题概括了一条从“说不清”到“不得不选”的运行线索，PHI OS 是这样理解它的：\n\n**为什么某些体验无法被表达。** 体验并不是现实的完整副本，而是系统在有限注意、记忆与行动能力下形成的可运行版本。表达是把内部状态转成外部可读取形式的过程，不是透明复制，而是一次再次选择、压缩和组织。所以有些内在现实确实会超出表达的分辨率与可达范围，暂时说不清。\n\n**决策为什么会出现。** 当多个可能路径需要被压缩成一个行动方向时，系统必须在资源有限、信息不完整、后果不确定的情况下决定什么优先。此时选择不只是偏好，也暴露当前的约束、责任与可承受范围。不同现实因此会形成不同的决策路径。\n\n**现实如何形成选择，以及内部冲突为何出现。** 选择会改变什么更容易被看见、维持或行动；边界也由此出现——时间、注意、资源不可能无限共享，必须划定谁承担什么、什么可进入、什么被阻断。内部冲突往往就发生在这类边界变化处：被压缩掉的路径并未消失，而是成为与已选路径竞争的条件。\n\n把这些连起来看：不可表达设定初始条件，决策给出组织方式，选择把变化推入下一层，冲突则形成了可继续运行的结果。它们不是并列标签，而是一环一环传递条件的连续关系。",
+          "usage": {
+            "input": 979,
+            "cachedInput": 0,
+            "output": 287,
+            "total": 1266
+          },
+          "costUsd": 0.0008096,
+          "pricingTier": "peak",
+          "latencyMs": 3490.911,
+          "requestStartedAt": "2026-09-08T03:49:27.073Z",
+          "rawId": "db92b4f4-c116-42aa-a3ff-9f894ce4c3f4"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-032",
+      "question": "共同现实如何形成：同步、连接、共同场与多人运行？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P6-001",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "共同现实并不是多人状态的简单相加，而是在持续相互影响中形成的共享运行过程。\n\n多个运行系统先通过重复回应，逐渐对某些节奏、讯号、规则和反馈产生耦合，由此形成同步；同步若能持续，彼此之间的连接就会变得稳定，使一个人的局部变化能够传播给其他人，并进一步改变互动环境。随着这种影响不断累积，参与者不只是在交换信息，还共同形成了边界、反馈方式和可预期的行动条件，这就是共同场的出现。\n\n当多个运行系统持续同步同一个场域时，共同现实便获得了相对稳定的形态：它会影响什么更容易被看见、表达、维持或采取行动。不过，这不是固定不变的五步公式。同步、连接、共同场和多人运行可能并行、倒流或停留在某一层；新的反馈也会反过来改变原有节奏和选择。 PHI OS 将其理解为一条可追踪的形成链，而非静态定义。",
+          "usage": {
+            "input": 1096,
+            "cachedInput": 0,
+            "output": 238,
+            "total": 1334
+          },
+          "costUsd": 0.0005048,
+          "pricingTier": "standard",
+          "latencyMs": 4147.556,
+          "requestStartedAt": "2026-09-08T03:49:31.665Z",
+          "rawId": "resp_0d06175f36620067006a9f85caff6487d0b58f44708cdb4817"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 353.299,
+          "requestStartedAt": "2026-09-08T03:49:31.665Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 233.063,
+          "requestStartedAt": "2026-09-08T03:49:31.666Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "共同现实并不是多个个体状态的简单相加，而是在多人持续互相影响中逐渐生成的过程。它的形成大致按这样的机制推进：\n\n先有多个运行系统开始同步。这里说的同步并不是要求大家完全一致，而是某些节奏、信号、规则与反馈开始相互耦合。比如当两三个人开始对话或协作，彼此的语速、回应方式、注意力节奏会不知不觉地靠近。\n\n同步持续下去，系统之间便形成连接。连接越稳定，某一边的局部变化就越可能跨过边界传播到另一边，进而改变共同环境。也就是说，连接让“你的变化”开始成为“我的条件”。\n\n多个运行系统同步到同一个场域后，共同场便浮现出来。共同场不是某个人单独设定的，而是由参与者共同维持的共享状态——它决定了什么更容易被看见、被表达、被维持或采取行动，同时也通过反馈不断重新影响每个人下一步的选择。\n\n需要强调的是，这条链并非固定顺序：各环节可能并行，反馈也可能倒流，系统也可能长期停留在某一层。阅读它的价值不在记住五个步骤，而在于辨认当前正处在哪个环节——是失去连续、过度固定，还是仍有重新配置的空间。这样才能追踪共同现实真正如何形成。",
+          "usage": {
+            "input": 1000,
+            "cachedInput": 0,
+            "output": 250,
+            "total": 1250
+          },
+          "costUsd": 0.00077,
+          "pricingTier": "peak",
+          "latencyMs": 3580.989,
+          "requestStartedAt": "2026-09-08T03:49:31.666Z",
+          "rawId": "0425a312-49ec-4bd9-a884-0bafdfd5935f"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-035",
+      "question": "连接为何会降低独立性：依赖、固定连接与共同现实生态？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P6-016",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "连接会降低独立性，是因为持续互动不只是增加关系数量，而是在改变参与者各自运行所依赖的条件。\n\n当双方长期交换资源、信息、节奏或情绪调节时，彼此会逐渐形成共同节奏、固定回应方式与共享规则。原本可以独立完成的判断、行动或调节，开始部分依赖对方；一旦退出，既要失去现有资源，也要承担关系中断、节奏失配和适应新环境的成本，因此退出成本上升，独立回旋空间就会缩小。\n\n这种影响还会通过反馈扩散到共同现实：一个人的变化可能改变对方的反应，进而改变双方共同的环境；连接越稳定，局部变化越容易跨成员传播。于是，关系不仅维持协作，也会固定哪些讯号更容易被看见、哪些行为更容易被回应。PHI OS 将其理解为一种动态权衡：稳定连接提升协作能力，却可能牺牲部分弹性与自主性，因而需要持续重新配置依赖、边界与参与程度。",
+          "usage": {
+            "input": 1177,
+            "cachedInput": 0,
+            "output": 249,
+            "total": 1426
+          },
+          "costUsd": 0.0005342,
+          "pricingTier": "standard",
+          "latencyMs": 4049.179,
+          "requestStartedAt": "2026-09-08T03:49:35.816Z",
+          "rawId": "resp_050c07cee8c9e34f006a9f85cf3bc087d0b92387512970a3f8"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 262.399,
+          "requestStartedAt": "2026-09-08T03:49:35.817Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 179.521,
+          "requestStartedAt": "2026-09-08T03:49:35.817Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "连接之所以会降低独立性，根源不在于“多了几个人”这个表面现象，而在于连接改变了每个参与者能感知、回应与承担的条件。\n\n一旦多个运行系统持续互相影响，就会形成共享状态。同步并不要求大家完全一致，而是节奏、信号、规则与反馈开始相互耦合。连接越稳定，局部变化就越容易跨成员传播，每个人原本“自己说了算”的范围也随之被压缩。\n\n更实际的原因是**依赖与退出成本**。稳定连接能带来协作能力，但也意味着系统开始依赖对方提供资源、节奏、信息或情绪调节。这种依赖一旦形成，退出成本就会上升——你不再能轻易离开而不付出代价，独立性因此下降。\n\n同时，连接会逐步形成共同节奏、边界与反馈，这些会改变什么更容易被看见、维持、表达或行动。它不会单独决定你的全部现实，却会改变你可选择的空间。一个环节的变化可能重新分配注意、责任与资源，也可能改变之后更容易出现的反应。\n\n所以长期连接需要在效率、弹性与自主之间不断重新平衡。同一段关系不是一成不变的，而是随着条件改变出现不同版本——独立性降低不是连接的全部结果，而是需要持续调控的一个维度。",
+          "usage": {
+            "input": 1033,
+            "cachedInput": 0,
+            "output": 246,
+            "total": 1279
+          },
+          "costUsd": 0.00077924,
+          "pricingTier": "peak",
+          "latencyMs": 3046.754,
+          "requestStartedAt": "2026-09-08T03:49:35.817Z",
+          "rawId": "2bc92943-2411-473a-99ab-126ba4a83a67"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-040",
+      "question": "群体为何走向极化：注意力、信念与重复叙事？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P6-041",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "群体极化可被理解为注意力、信念与叙事彼此循环强化的结果。成员反复接触相似信息，并奖励符合群体期待的表达，注意力就会越来越集中于同一批线索；新事件也被不断套入同一个故事，既有信念因此获得确认，反过来又影响下一轮信息选择与回应。\n\n当多个个体持续相互影响，某些节奏、信号、规则和反馈会形成共享状态。共同身份能降低协作成本，但也会强化“我们”与“他们”的边界，使群体更容易奖励内部一致、排斥异议。随着共同现实逐渐收窄，不同群体之间能够相互校正、共同理解的接口减少，局部变化便更容易在群体内放大并跨成员传播，最终使对立持续升级。񎟙",
+          "usage": {
+            "input": 1066,
+            "cachedInput": 0,
+            "output": 201,
+            "total": 1267
+          },
+          "costUsd": 0.0004544,
+          "pricingTier": "standard",
+          "latencyMs": 3825.841,
+          "requestStartedAt": "2026-09-08T03:49:39.866Z",
+          "rawId": "resp_078b15c7c04f4346006a9f85d32e2487d089e9b73e90a37094"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 243.546,
+          "requestStartedAt": "2026-09-08T03:49:39.867Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 168.514,
+          "requestStartedAt": "2026-09-08T03:49:39.867Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "群体极化并非某个人或某次事件单独造成，而是一个在互动中逐步收紧的动态过程。关键在于注意力与信念在不同成员之间形成持续的相互耦合：当大家反复投入精力去看相似的信息、奖励那些符合群体口味的表达，并用同一套叙事去解释新发生的事件，成员的眼光会越来越集中到相近的内容上，信念也随之朝同一方向加固。\n\n这形成了一种循环强化的机制：共同现实不是个体状态的简单相加，而是在持续互动中不断收窄的产物。随着互动节奏、信号与规则逐渐同步，共同的边界和身份会被建立起来。共享身份能降低协作成本，却也同时强化了“我们”与“他们”的区分，使排他与对立更容易被触发。\n\n更重要的是，这种共同运行会不断重复同一个故事。每一轮互动都在承接前一轮留下的状态，并重新设定下一轮可能出现的反应。一个叙事一旦占据主导，它就更容易被看见、维持和表达，而那些可以校正群体判断的不同声音，则因缺乏接触接口而逐渐减少。群体因而走向更极端的位置，而不仅是走向分歧。",
+          "usage": {
+            "input": 897,
+            "cachedInput": 0,
+            "output": 225,
+            "total": 1122
+          },
+          "costUsd": 0.00069168,
+          "pricingTier": "peak",
+          "latencyMs": 3394.26,
+          "requestStartedAt": "2026-09-08T03:49:39.867Z",
+          "rawId": "5b5f789e-ead3-432d-b13c-5c0cba98f18a"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-042",
+      "question": "共同现实如何结束并留下记忆：离开、共享记忆、集体场与共同信念？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P6-056",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "共同现实结束时，并不等于所有参与者的状态同时归零。只要多个运行系统曾持续互相影响，就会形成共享状态：某些节奏、讯号、规则和反馈彼此耦合，使局部变化能够传播到共同环境中。\n\n离开共同现实，首先改变的是参与条件——谁还能感知、回应并承担哪些内容。随后，已经形成的互动痕迹可能作为共享记忆保留下来，继续影响下一轮互动。一次运行完成后，这些状态又可能扩展为集体场：它改变什么更容易被看见、维持、表达或采取行动。当相同讯号、规则和反馈被多人反复接收并相互确认时，就可能形成对“同一个现实”的共同信念。\n\n这不是固定的线性步骤；环节可以并行，反馈也可能倒流。因而共同现实留下的不是一份完全相同的记忆，而是一组仍能调节关系、注意力与行动的共享条件。",
+          "usage": {
+            "input": 1199,
+            "cachedInput": 0,
+            "output": 227,
+            "total": 1426
+          },
+          "costUsd": 0.0005122,
+          "pricingTier": "standard",
+          "latencyMs": 4204.414,
+          "requestStartedAt": "2026-09-08T03:49:43.695Z",
+          "rawId": "resp_0786eb4a65774093006a9f85d7021c87d0bfdac151cd680af3"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 256.944,
+          "requestStartedAt": "2026-09-08T03:49:43.696Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 170.888,
+          "requestStartedAt": "2026-09-08T03:49:43.697Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "共同现实的结束不是一瞬间的事，而是一个连续变化的过程。它先从一个或多个参与者“离开”开始——这个离开不是单纯的不在场，而是退出了共同节奏、边界和反馈的维持；一旦这种耦合松动，其他人还能感受到的，往往只剩“这里曾经有一个共同现实”的残留。\n\n这份残留就是共享记忆：它保留了共同环境下形成的规则、信号和情绪痕迹，让已经解散的关系仍能在后续互动中被调用。当多个参与者分别带着各自的记忆再与其他人互动，这些局部记忆会重新组织和传播，逐渐汇成一个“集体场”——即不再属于任何单一个体，但又能影响在场者的共同氛围与行动倾向。\n\n最后，若这个集体场被足够多的人承认并持续回应，它就会固化为共同的信念：人们相信某个现实“确实如此”，并愿意据此继续行动。此时，原先那个共同现实并未真正消失，而是转化为一种可以影响下一轮互动的状态，以记忆和信念的形式继续存在。\n\n这五步不是严格顺序，反馈可能倒流，也可能并行，但其核心始终是：共同现实的终结会留下“可继续运行”的遗产。",
+          "usage": {
+            "input": 1046,
+            "cachedInput": 0,
+            "output": 237,
+            "total": 1283
+          },
+          "costUsd": 0.00077308,
+          "pricingTier": "peak",
+          "latencyMs": 3590.162,
+          "requestStartedAt": "2026-09-08T03:49:43.698Z",
+          "rawId": "911960e4-2cd5-4daf-aec7-959ab11c8f7c"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-043",
+      "question": "共同现实如何形成：故事、情绪、身份、压力与价值如何连成一体？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-003",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "共同现实并不是大家一开始就拥有同一个看法，而是许多局部经验逐渐获得了足够的可理解性与协调性。\n\n故事先把分散事件组织成相近的因果、角色和结果，使人们能用类似框架解释后来发生的事。情绪则通过紧迫、威胁、希望或庆祝等可见反应，改变群体认为什么值得注意、记住和立即行动，于是不同私人经验的人进入相近的准备状态。\n\n在此基础上，身份把关系稳定为“我们”：它界定谁属于群体、成员彼此承担什么，并影响信任、资源和保护如何分配。压力进一步缩小可接受的行为范围，使个体更倾向遵循群体已经形成的期待。价值则在持续选择中显现：它表达群体愿意保护什么、牺牲什么，以及哪些结果被视为值得追求。\n\n这些因素不是固定的单向链条，而会相互反馈：故事塑造情绪，情绪强化身份，身份与压力筛选行动，反复行动又使某些价值看起来理所当然。PHI OS 将其理解为一种集体协调机制：它能降低协作成本，也可能遮蔽不符合主流故事的经验。",
+          "usage": {
+            "input": 1261,
+            "cachedInput": 0,
+            "output": 289,
+            "total": 1550
+          },
+          "costUsd": 0.000599,
+          "pricingTier": "standard",
+          "latencyMs": 4918.72,
+          "requestStartedAt": "2026-09-08T03:49:47.902Z",
+          "rawId": "resp_018b732d555cfdbc006a9f85db38d487d088b49b9cf0fdd3b0"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 283.876,
+          "requestStartedAt": "2026-09-08T03:49:47.902Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 198.964,
+          "requestStartedAt": "2026-09-08T03:49:47.903Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "共同现实不是一开始就整齐划一的。群体最初只是许多局部经验，要让行动协调，这些经验必须先变得彼此可理解。整个形成过程是一环接一环的连续机制：\n\n先有故事把分散的注意力压到相近的因果、角色和结果上。它不需要所有人完全同意，只要让差异变得可理解，后续事件就能被放进既有框架解释。接着，情绪通过可见反应跨个体传播——别人的紧张或兴奋会改变你认为什么值得注意，让不同私人经验的人进入相近的准备状态。然后身份出现，把“谁属于这里、彼此承担什么”压缩成稳定边界，开始分配信任与责任。压力进一步缩小行为范围，价值则决定这个群体愿意保护什么、不肯放弃什么。\n\n这几层并非单向流水线，而是层层改写前一层的场域：故事重设情绪传播的条件，情绪筛选后的状态又定义身份如何成形，身份再交给压力和价值去约束。共同现实就是在这些机制交错中，获得足够连贯性但不必然完全一致的集体版本。",
+          "usage": {
+            "input": 1093,
+            "cachedInput": 0,
+            "output": 213,
+            "total": 1306
+          },
+          "costUsd": 0.00076208,
+          "pricingTier": "peak",
+          "latencyMs": 2650.771,
+          "requestStartedAt": "2026-09-08T03:49:47.903Z",
+          "rawId": "ae92f473-635a-4df2-8fc3-2183eeab71d1"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-046",
+      "question": "金融如何把未来拉进现在：债务、资本、叙事与投机周期如何形成？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-018",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "金融把未来拉进现在，核心是把尚未实现的收入、增长或价值，先转化为今天可以使用的信用、资本和价格。\n\n首先，债务扩张让未来收益提前成为当前支出和投资的依据，也因此新增偿还义务与约束。随后，资本配置把这些信用集中到某些项目、产业、基础设施和能力上，使一部分未来获得更多资源、更高可见性，更容易产生结果；未获支持的可能性，则可能在证明价值前消失。\n\n金融叙事进一步把数字连接到“它们意味着什么”：价格、预测、风险指标和成长故事共同塑造哪些未来值得相信。当参与者共享同一解释，期待会改变资金流向和行动，并部分创造预期中的现实。\n\n投机周期由此形成：上涨期待吸引资源，更多参与强化价格等讯号，强化后的讯号又被当作叙事正确的证明，继续吸引参与。只要流动性与信心相互支撑，未来就被持续折算进当前价格和决策；一旦反转，价格下跌会同时削弱信心、杠杆和继续承担同一未来假设的意愿。这样，金融既能协调集体行动，也可能只是把成本和风险延后。",
+          "usage": {
+            "input": 1218,
+            "cachedInput": 0,
+            "output": 290,
+            "total": 1508
+          },
+          "costUsd": 0.0005916,
+          "pricingTier": "standard",
+          "latencyMs": 5475.631,
+          "requestStartedAt": "2026-09-08T03:49:52.824Z",
+          "rawId": "resp_08d2e58ea6f7b0f2006a9f85e0513c87d0af582cde8b9503eb"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 451.718,
+          "requestStartedAt": "2026-09-08T03:49:52.824Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 199.634,
+          "requestStartedAt": "2026-09-08T03:49:52.825Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "金融压缩未来的起点是债务。债务本质上是“用现在的承诺换取未来的偿付”，它让一个尚未存在的产出提前获得当下的购买力，这是未来进入现在的第一道入口。\n\n第二步是资本配置。债务扩张产生的流动性并不会平均分配，而是被投放到特定的项目、产业和基础设施上。资本配置决定哪些可能的未来值得投入资源，且这种选择有自我强化性：获得资金的方向会变得更可见、更容易产出结果，从而吸引更多支持；未被选中的可能性，可能在证明价值前就消失。所以资本配置是一种对未来的“筛选”。\n\n第三步，金融叙事登场。价格、预测和成长故事会连接成一套共同解释，把抽象数字转化为“这些数字意味着什么”的集体期待。叙事不取代计算，但它塑造计算被理解的框架；当足够多人共享同一框架，期待会反过来改变行为，部分创造出叙事原本预期的现实——未来在此被“说”成了现在。\n\n最后是投机周期。上涨期待吸引资源，参与增加强化可见讯号，强化后的讯号又吸引更多人参与，形成自我循环。一旦讯号本身被当成证明叙事正确的证据，周期便失去稳定锚点，变得脆弱。反转不仅冲击价格，还会同步击穿信心、杠杆和人们继续承担同一种未来假设的意愿。\n\n这四个环节并非单向链条，而是层层转译的集体现实建构：债务把未来带入当下，资本把未来筛选成结构，叙事把结构包装成共识，投机把共识推向自我证明——直到下一个循环重新定义一切。",
+          "usage": {
+            "input": 1052,
+            "cachedInput": 0,
+            "output": 315,
+            "total": 1367
+          },
+          "costUsd": 0.00087868,
+          "pricingTier": "peak",
+          "latencyMs": 3916.391,
+          "requestStartedAt": "2026-09-08T03:49:52.825Z",
+          "rawId": "cc62b655-0ca8-4ce3-a681-9f47b57c9816"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-048",
+      "question": "文明如何建立注意力基础设施：网络、承载系统与集体感知如何形成？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-028",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "文明建立注意力基础设施，并不是先造出某种统一的大脑，而是逐步把分散的感知、通信、记忆和行动连接起来。\n\n首先，网络使共同讯号能够跨越个人、组织与地域传播，形成文明连接，并改变后续协调的入口与优先级。随后，能源、运输、计算、通信、水和金融等基础设施，为大规模、重复性的集体活动提供持续承载；它们通过容量、维护和冗余，把抽象协调转化为可运行的系统。\n\n在此基础上，文明形成一种“集体神经网络”：讯号可以在一处被发现、在另一处处理，并在远处触发行动。路径越密集，集体反应越快，但系统也越依赖讯号质量和路由完整性；若感知不可靠，速度反而会高效放大错误。\n\n当参与者争夺的注意力超过可用注意时，注意力便成为经济资源，信息环境会围绕获取、维持、测量和转化注意力而被重新设计。于是，网络与承载系统不仅支持集体感知，也逐渐塑造什么更可见、什么更易传播，以及哪些回应更容易被复制。",
+          "usage": {
+            "input": 1222,
+            "cachedInput": 0,
+            "output": 279,
+            "total": 1501
+          },
+          "costUsd": 0.0005792,
+          "pricingTier": "standard",
+          "latencyMs": 4442.603,
+          "requestStartedAt": "2026-09-08T03:49:58.303Z",
+          "rawId": "resp_01740ac09921c5f8006a9f85e5a95887d0a49091046c5eebdb"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 288.752,
+          "requestStartedAt": "2026-09-08T03:49:58.304Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 201.17,
+          "requestStartedAt": "2026-09-08T03:49:58.305Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "按PHI OS的理解，文明建立注意力基础设施并非单一工程，而是一条连续的运行链：网络先形成连接，再由承载系统把连接固化为可重复的结构，接着在人与机器之间形成分布式的“集体神经网络”，最终注意力被卷入经济竞争。\n\n首先，网络通过共同信号建立文明连接。这些信号会改变后续协调的位置，为下一步运行设定新的依赖和约束。随后，基础设施作为物质与技术承载层——能源、运输、计算、通信等——将抽象协调转成持续运行。它运行良好时最不显眼，直到容量或冗余低于依赖活动所需时才暴露重要性。基础设施会筛选上一层传来的条件，把集体状态转成更有结构的状态，重新分配进入权、可见性与可复制的回应。\n\n在此场域里，“集体神经网络”指的是感知、通信、记忆与反应分布在人、制度与机器之间：信号在一处被发现，在另一处被处理，在远处触发行动。路径越密集，集体反应越快，但也越依赖信号质量与路由完整——无可信感知的速度会高效放大错误。\n\n最后，当争夺专注的参与者多于可用注意时，注意力成为经济资源。组织投资获取、维持与转化注意力，信息环境也随之改变，内容可能为停留与行为而优化。整个链条存在反馈，并非单向公式；但接口位置能显示集体现实被重新组织的节点，而竞争阶段也最容易出现协调维持、成本后延的分叉。",
+          "usage": {
+            "input": 1027,
+            "cachedInput": 0,
+            "output": 299,
+            "total": 1326
+          },
+          "costUsd": 0.00084656,
+          "pricingTier": "peak",
+          "latencyMs": 3655.001,
+          "requestStartedAt": "2026-09-08T03:49:58.305Z",
+          "rawId": "7311bb9b-ae89-460e-a24b-4c33ea1e7bc6"
+        }
+      ]
+    },
+    {
+      "caseId": "KIR-R2-W15R-051",
+      "question": "集体时间如何变成治理问题：世代、历史记忆、期限、时间债务与人工集体？",
+      "bookCode": "BOOK-2",
+      "nodeCode": "KN-B2-P7-043",
+      "selectionBucket": "CHALLENGE_REJECTED",
+      "priorHumanStatus": "REJECTED",
+      "providers": [
+        {
+          "providerId": "OPENAI_LUNA",
+          "providerLabel": "OpenAI GPT-5.6 Luna",
+          "model": "gpt-5.6-luna",
+          "status": "OK",
+          "answer": "集体时间之所以变成治理问题，是因为不同世代带着不同的历史起点进入同一集体：他们对风险、技术、制度和“何时算太迟”的判断并不相同。历史记忆随后会筛选这些差异，决定哪些经验被保留、哪些声音获得可见性，以及哪些回应更容易被复制。\n\n当集体意识到某些选择存在有限窗口，时间就不再只是背景，而成为治理约束：延迟会让部分选项失去可行性，并重新排列优先级。若维护、适应或纠正持续推迟，系统便会借用未来的时间维持当前运作，形成时间债务。债务初期可能不明显，但旧问题会逐渐占据排程，压缩集体应对新条件的自由度。\n\n因此，人工集体的运行并不只是协调当下行动，还要处理世代差异、记忆筛选、期限压力和延期成本之间的反馈。某些机制虽然暂时维持了秩序，却可能把代价转移给未来，使治理从“现在做什么”转变为“哪些未来仍然能够被保留”。",
+          "usage": {
+            "input": 1221,
+            "cachedInput": 0,
+            "output": 266,
+            "total": 1487
+          },
+          "costUsd": 0.0005634,
+          "pricingTier": "standard",
+          "latencyMs": 4333.451,
+          "requestStartedAt": "2026-09-08T03:50:02.750Z",
+          "rawId": "resp_08bdb3ae664e6db9006a9f85ea142487d091e422793644351d"
+        },
+        {
+          "providerId": "MISTRAL_SMALL_4",
+          "providerLabel": "Mistral Small 4",
+          "model": "mistral-small-2603",
+          "status": "ERROR",
+          "error": "429 Too Many Requests: {\"object\":\"error\",\"message\":\"Rate limit exceeded\",\"type\":\"rate_limited\",\"param\":null,\"code\":\"1300\",\"raw_status_code\":429}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 297.126,
+          "requestStartedAt": "2026-09-08T03:50:02.751Z"
+        },
+        {
+          "providerId": "GEMINI_25_FLASH_LITE",
+          "providerLabel": "Gemini 2.5 Flash-Lite",
+          "model": "gemini-2.5-flash-lite",
+          "status": "ERROR",
+          "error": "404 Not Found: {\"error\":{\"code\":404,\"message\":\"This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite for the latest features and improvements. We recommend you to use the Interactions API.\",\"status\":\"NOT_FOUND\"}}",
+          "answer": "",
+          "usage": null,
+          "costUsd": null,
+          "pricingTier": null,
+          "latencyMs": 213.617,
+          "requestStartedAt": "2026-09-08T03:50:02.752Z"
+        },
+        {
+          "providerId": "DEEPSEEK_V4_FLASH",
+          "providerLabel": "DeepSeek V4 Flash",
+          "model": "deepseek-v4-flash",
+          "status": "OK",
+          "answer": "集体时间之所以会变成治理问题，是因为时间本身构成了集体协调的约束条件，而不只是背景刻度。不同世代在不同历史时点进入同一个集体，他们面对的风险、技术和制度起点不同，因此对哪些变化算正常、哪些算太迟，天然存在分歧。这种分歧不是人格差异，而是历史起点差异，它首先改变了集体内部的协调位置。\n\n随后，历史通过集体记忆被结构化，筛选并放大了某些世代经验，重新分配了谁能被看见、谁的行动更易被复制。当文明意识到某些决策超过时间点后就会失去可行性时，期限便形成——延迟本身开始产生成本，治理的优先级因此被改写。\n\n更关键的是时间债务：当维护、修复或适应被反复延后，系统实际上在借用未来的时间以维持当前运转。这在短期内不易察觉，直到旧任务持续占据排程，系统对新条件的响应自由度下降。此时集体已进入人工集体的运行层面，需要通过人为机制来压缩和协调不同时间尺度。治理问题的本质，就是如何在世代差异、记忆筛选、期限压力和累积债务之间维持协调，同时避免把成本无限延后。",
+          "usage": {
+            "input": 1044,
+            "cachedInput": 0,
+            "output": 235,
+            "total": 1279
+          },
+          "costUsd": 0.00076956,
+          "pricingTier": "peak",
+          "latencyMs": 2894.643,
+          "requestStartedAt": "2026-09-08T03:50:02.753Z",
+          "rawId": "ffdce67e-e00e-40f3-8519-75a79f183981"
+        }
+      ]
+    }
+  ],
+  "completedAt": "2026-09-08T03:50:07.089Z",
+  "totals": {
+    "OPENAI_LUNA": {
+      "cases": 24,
+      "totalCostUsd": 0.0123912,
+      "avgLatencyMs": 4454,
+      "totalInputTokens": 26430,
+      "totalOutputTokens": 5921
+    },
+    "MISTRAL_SMALL_4": {
+      "cases": 0,
+      "totalCostUsd": 0,
+      "avgLatencyMs": null,
+      "totalInputTokens": 0,
+      "totalOutputTokens": 0
+    },
+    "GEMINI_25_FLASH_LITE": {
+      "cases": 0,
+      "totalCostUsd": 0,
+      "avgLatencyMs": null,
+      "totalInputTokens": 0,
+      "totalOutputTokens": 0
+    },
+    "DEEPSEEK_V4_FLASH": {
+      "cases": 24,
+      "totalCostUsd": 0.0185658,
+      "avgLatencyMs": 3382,
+      "totalInputTokens": 22950,
+      "totalOutputTokens": 6415
+    }
+  }
+}
