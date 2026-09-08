@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-BOOK3-B02-A13-CAPACITY-MAP-PRODUCTION-v1.0.0",
   "stage": "BOOK3-B02-W10-REQUIRED-FIGURE-PRODUCTION",
-  "status": "ASSET_PRODUCED_MACHINE_BOUND_HUMAN_VISUAL_REVIEW_PENDING",
+  "status": "ASSET_PRODUCED_MACHINE_BOUND_HUMAN_VISUAL_ACCEPTED_PUBLICATION_REQUIREMENT_RESOLVED",
   "baselineCommit": "d49dd16b38d7f858c9bad861b788919d0dec4c33",
   "articlePlanId": "B3-ART-013",
   "candidateId": "B3-B02-A13",
@@ -54,11 +54,12 @@
     "englishVisualLocalizationRequiredBeforeEnglishCustomerPublication": true
   },
   "reviewGate": {
-    "humanVisualApproval": "PENDING",
+    "humanVisualApproval": "ACCEPTED",
     "machineAssetBinding": "ACCEPTED",
     "publicationBlockingRequirementProduced": true,
-    "publicationBlockingRequirementResolved": false,
-    "reason": "The required Capacity Map now exists, but a human visual acceptance is still required before the figure can satisfy publication admission."
+    "publicationBlockingRequirementResolved": true,
+    "reason": "The required Capacity Map exists, is machine-bound to the approved Article/Nodes, and has explicit TL human visual acceptance. Article publication remains governed by separate editorial/publication gates.",
+    "humanVisualDecisionAuthority": "TL_EXPLICIT_CAPACITY_MAP_CONFIRMATION"
   },
   "authorityBoundary": {
     "assetMayOverrideArticleMeaning": false,
@@ -66,5 +67,7 @@
     "assetMayCreatePublicationAuthority": false,
     "machineBindingMaySelfApproveVisual": false,
     "publicationAuthorityCreated": false
-  }
+  },
+  "successorBaselineCommit": "415f73c258454c23d1569c9e2c2f381dcfb6a715",
+  "visualHumanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b02-a13-visual-human-decision-v1.json"
 }
