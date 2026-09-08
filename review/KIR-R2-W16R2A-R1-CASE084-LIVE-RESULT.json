@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2A-R1-CASE084-LIVE-REGRESSION-v1.0.0",
+  "baselineCommit": "d49dd16b38d7f858c9bad861b788919d0dec4c33",
+  "sourceHumanSpotReview": "review/KIR-R2-W16R2A-7-CASE-HUMAN-SPOT-REVIEW-v1.json",
+  "startedAt": "2026-09-08T08:23:46.472Z",
+  "completedAt": "2026-09-08T08:23:50.267Z",
+  "status": "CASE084_LIVE_COMPLETED_HUMAN_SPOT_REVIEW_REQUIRED",
+  "case": {
+    "caseId": "KIR-R2-W15R-084",
+    "question": "从不可表达走向选择：决策、路径与内部冲突，背后的机制是什么？",
+    "locale": "zh-Hans",
+    "expected": {
+      "nodeCode": "KN-B1-P5-046",
+      "bookCode": "BOOK-2",
+      "articleCode": "KA-B1-P5-046-ZH-HANS-ARTICLE",
+      "articleTitle": "从不可表达走向选择：决策、路径与内部冲突",
+      "authorityPath": "content/knowledge/public/authority/articles/zh-Hans/KN-B1-P5-046.json"
+    },
+    "status": "KIR_R2_W16R2_APPLIED",
+    "applied": true,
+    "answer": "人可以表达的东西,永远少于他所经历和感受到的东西。表达本身是一种压缩:把内部状态转成语言或动作时,必然有选择、有丢失,不是原样复制。当某些现实一直找不到出口,它们就会在内部堆积成未被处理的张力。\n\n决策之所以出现,是因为多个可能的行动方向同时存在,而现实条件不允许全部执行。资源有限、信息不全、后果不明,系统必须把多条路径压成一条实际走的路。这个压缩过程会暴露优先级和承受边界。\n\n不同现实会生成不同路径,路径之间相互竞争。选择一旦做出,就等于把某些可能性正式推开,把另一些变成后续行动的基础。而被推开的部分并未消失,它们会以迟疑、后悔或反复权衡的形式重新冒出来。\n\n内部冲突不是决策失败,而是选择留下的“未走之路”仍然在场。它标志着一轮运行的收尾并不干净,带着未表达的余量进入下一轮,成为下一轮需要面对的初始条件。这就是从不可表达到冲突、再继续往前走的连续动力。",
+    "providerMeta": {
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "providerModel": "deepseek-v4-flash",
+      "route": {
+        "schemaVersion": "PHI-OS-KIR-R2-W16R2-MODEL-ROUTE-v1.0.0",
+        "tier": "T2_COMPLEX",
+        "providerId": "DEEPSEEK_V4_FLASH",
+        "reasonCodes": [
+          "PROFESSIONAL_DEPTH"
+        ],
+        "knowledgeAuthorityOwnedByProvider": false
+      },
+      "usage": {
+        "input": 925,
+        "cachedInput": 896,
+        "output": 215,
+        "total": 1140
+      },
+      "rawId": "d332e2f1-d681-4612-962c-5a802f174944"
+    },
+    "baseGuard": {
+      "schemaVersion": "PHI-OS-KIR-R2-SEMANTIC-ANSWER-QUALITY-GUARD-v2.0.0",
+      "DIRECTLY_ANSWERS_USER_QUESTION": true,
+      "SOURCE_SUPPORTED": true,
+      "MATERIAL_GROUNDED_CONTENT_CONSUMED": true,
+      "QUESTION_TYPE_SATISFIED": true,
+      "MECHANISM_EXPLAINED": true,
+      "NO_EMPTY_REPHRASE": true,
+      "NO_REPETITIVE_LEGACY_TEMPLATE": true,
+      "NO_INTERNAL_JARGON_DUMP": true,
+      "NO_METHOD_HIJACK": true,
+      "passed": true
+    },
+    "successorGuard": {
+      "schemaVersion": "PHI-OS-KIR-R2-W16R2A-MODEL-BACKED-ANSWER-GUARD-v1.0.0",
+      "BASE_SEMANTIC_GUARD_PASSED": true,
+      "CUSTOMER_LANGUAGE_LENGTH_OK": true,
+      "NO_INTERNAL_TERMINOLOGY_LEAK": true,
+      "NO_KNOWLEDGE_CHAIN_META_TEMPLATE": true,
+      "NO_UNEXPECTED_SCRIPT_CONTAMINATION": true,
+      "NO_UNEXPECTED_LATIN_LEAK": true,
+      "NO_MODEL_ARTIFACT_LEAK": true,
+      "NO_UNSUPPORTED_HIGH_RISK_EXPANSION": true,
+      "NO_UNSUPPORTED_NOVEL_CAUSAL_TERM": true,
+      "NO_EXCESSIVE_NODE_STYLE_HEADINGS": true,
+      "passed": true
+    },
+    "escalated": false,
+    "attempts": 1,
+    "latencyMs": 3786.85
+  }
+}

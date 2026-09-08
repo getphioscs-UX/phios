@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2A-7-CASE-HUMAN-SPOT-REVIEW-v1.0.0",
+  "baselineCommit": "d49dd16b38d7f858c9bad861b788919d0dec4c33",
+  "sourceLiveResult": "review/KIR-R2-W16R2A-7-CASE-TARGETED-LIVE-RESULTS.json",
+  "summary": {
+    "caseCount": 7,
+    "accepted": 6,
+    "rejected": 1,
+    "criticalFailures": 0,
+    "spotReviewPassed": false
+  },
+  "productionDecision": {
+    "productionAdmissionAllowed": false,
+    "reason": "Targeted machine regression passed 7/7, but human spot review remains 6/7 because case 084 still overstates a causal mechanism not supported by the admitted article authority."
+  },
+  "cases": [
+    {
+      "caseId": "KIR-R2-W15R-024",
+      "providerId": "OPENAI_LUNA",
+      "status": "ACCEPTED",
+      "reason": "输出污染已清除；回答直接、自然，并保持在已发布文章支持的适应—筛选—稳定—整体经验关系内。"
+    },
+    {
+      "caseId": "KIR-R2-W15R-035",
+      "providerId": "OPENAI_LUNA",
+      "status": "ACCEPTED",
+      "reason": "异常字符已清除；依赖、固定连接、共同现实与自主/弹性权衡均保持客户语言。"
+    },
+    {
+      "caseId": "KIR-R2-W15R-077",
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "status": "ACCEPTED",
+      "reason": "此前英文 Consciousness 泄漏已消失；身份、自我模型、觉察与反馈关系保持全中文且无内部术语。"
+    },
+    {
+      "caseId": "KIR-R2-W15R-079",
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "status": "ACCEPTED",
+      "reason": "此前灾难化/压抑等证据外心理示例已移除；回答回到情绪作为优先级/方向信号、调节、扭曲与适应的已获准机制。"
+    },
+    {
+      "caseId": "KIR-R2-W15R-081",
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "status": "ACCEPTED",
+      "reason": "此前“大脑”和自我诊断式建议已移除；回答仅组织时间、感觉、表征、记忆与模拟的机制关系。"
+    },
+    {
+      "caseId": "KIR-R2-W15R-084",
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "status": "REJECTED",
+      "reason": "仍存在 source-boundary overreach：回答把内部冲突解释为“多个组织方向彼此竞争”或“新的惯性尚未取代旧模式”，但当前文章对内部冲突的明确机制是共同运行中的成本分配与边界（时间、注意、资源、照顾、风险、修复由谁承担/进入/阻断）。新回答再次用证据未明确载明的原因替代了已获准机制。"
+    },
+    {
+      "caseId": "KIR-R2-W15R-098",
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "status": "ACCEPTED",
+      "reason": "此前“反而更清晰/最终只留在个人层面”等外推已消失；共享记忆、活跃耦合停止、集体场与后续参照保持在文章可支持范围。"
+    }
+  ]
+}
