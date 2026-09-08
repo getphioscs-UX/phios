@@ -15,6 +15,7 @@ const paths = Object.freeze({
   freeze: 'content/knowledge/answer-projection/freeze/kap-w11-w17-answer-composition-freeze-v1.json',
   guidedSuccessor: 'content/knowledge/answer-projection/reconciliation/kap-w17-w18-guided-reading-surface-successor-v1.json',
   presentationSuccessor: 'content/knowledge/answer-projection/reconciliation/kap-w11-w17-current-presentation-successor-v3.json',
+  cxHomePresentationSuccessor: 'content/knowledge/answer-projection/reconciliation/kap-w11-w17-cx-home-presentation-successor-v1.json',
   historicalCkaSuccessor: 'content/web-production/reconciliation/hpc2-w5-cka-w0-w4-current-successor-v1.json',
   currentCkaSuccessor: 'content/web-production/reconciliation/hpc2-w6-cka-client-surface-successor-v1.json',
   ckaBSuccessor: 'content/web-production/reconciliation/client-surface-global-invariants-cka-b-successor-v1.json',
@@ -50,6 +51,7 @@ for (const step of ['11', '12', '13', '14', '15', '16', '17']) {
 const freeze = read(paths.freeze);
 const guidedSuccessor = read(paths.guidedSuccessor);
 const presentationSuccessor = read(paths.presentationSuccessor);
+const cxHomePresentationSuccessor = read(paths.cxHomePresentationSuccessor);
 const historicalCka = read(paths.historicalCkaSuccessor);
 const currentCka = read(paths.currentCkaSuccessor);
 const ckaB = read(paths.ckaBSuccessor);
@@ -79,6 +81,13 @@ assert.equal(presentationSuccessor.runtimeFingerprintPolicy.presentationWholeFil
 assert.equal(presentationSuccessor.runtimeFingerprintPolicy.runtimeJavascriptExactFingerprintPreserved, true);
 assert.equal(presentationSuccessor.runtimeFingerprintPolicy.apiExactFingerprintPreserved, true);
 assert.equal(presentationSuccessor.runtimeFingerprintPolicy.historicalFreezeEvidencePreserved, true);
+assert.equal(cxHomePresentationSuccessor.status, 'ACTIVE_KAP_CX_HOME_PRESENTATION_SUCCESSOR_P1_AUTHORITY_PRESERVED');
+assert.equal(cxHomePresentationSuccessor.historicalPredecessor.mutated, false);
+for (const boundary of Object.values(cxHomePresentationSuccessor.authorityBoundary)) assert.equal(boundary, false, 'KAP_CX_SUCCESSOR_AUTHORITY_BOUNDARY_DRIFT');
+for (const marker of cxHomePresentationSuccessor.homeSemanticContract.requiredMarkers) assert.ok(homepage.includes(marker), `KAP_CURRENT_HOME_MARKER_MISSING:${marker}`);
+for (const marker of cxHomePresentationSuccessor.homeSemanticContract.forbiddenMarkers) assert.ok(!homepage.includes(marker), `KAP_RETIRED_HOME_MARKER_RESTORED:${marker}`);
+const currentAskSurface = text(cxHomePresentationSuccessor.askSemanticContract.path);
+for (const marker of cxHomePresentationSuccessor.askSemanticContract.requiredMarkers) assert.ok(currentAskSurface.includes(marker), `KAP_CURRENT_ASK_MARKER_MISSING:${marker}`);
 assert.equal(relevanceSuccessor.status, 'ACTIVE_ADDITIVE_QUESTION_SOURCE_RELEVANCE_SUCCESSOR');
 assert.equal(relevanceSuccessor.authorityBoundary.questionSourceRelevancePolicyChanged, true);
 assert.equal(kirSuccessor.status, 'ACTIVE_ADDITIVE_KIR_R2_GROUNDED_COMPOSITION_SUCCESSOR');

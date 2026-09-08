@@ -118,16 +118,20 @@ function makeDeterministicAnswer({understanding,evidencePack}){
 
 export async function composeKirContentGroundedAnswer({understanding,evidencePack,modelDecision,allowedContext=null,provider=null,upstreamGroundedAnswer=null}){
   const hasContent=(evidencePack.contentMateriality?.contentBearingEvidenceCount||0)>0; let text=''; let providerInvoked=false; let selected=[];
+  let providerMeta=null;
   if(hasContent&&provider&&modelDecision?.requestedModel!=='DETERMINISTIC'){
-    const payload={question:understanding.question,evidencePack,allowedContext,answerContract:{directFirst:true,questionType:understanding.questionType,useContentNotTitles:true,explainMechanism:true,noNewPhiMeaning:true,noMethodHijack:true,noInternalJargonDump:true,doNotRepeatGovernanceBoilerplate:true}};
-    text=clean(await provider({model:modelDecision.requestedModel,payload})); providerInvoked=true;
+    const payload={question:understanding.question,locale:understanding.locale,evidencePack,allowedContext,routingContext:{professionalDepth:understanding.professionalDepth,personalizationNeed:understanding.personalizationNeed,ambiguity:understanding.ambiguity},answerContract:{directFirst:true,questionType:understanding.questionType,useContentNotTitles:true,explainMechanism:true,noNewPhiMeaning:true,noMethodHijack:true,noInternalJargonDump:true,doNotRepeatGovernanceBoilerplate:true}};
+    const response=await provider({model:modelDecision.requestedModel,payload});
+    if(response&&typeof response==='object'){text=clean(response.text);providerMeta={providerId:response.providerId||null,providerModel:response.providerModel||null,route:response.route||null,usage:response.usage||null,rawId:response.rawId||null};}
+    else text=clean(response);
+    providerInvoked=Boolean(text);
   }
   if(!text&&hasContent){const deterministic=makeDeterministicAnswer({understanding,evidencePack});if(deterministic){text=deterministic.text;selected=deterministic.selected}}
   if(!text) text=understanding.locale==='zh-Hans'?'目前找到的受治理知识只有概念定位，还缺少足够的正文证据来可靠解释这个问题。':'The governed knowledge currently identifies the concept, but there is not enough content-bearing evidence to explain it reliably.';
   const usedEvidenceIds=uniq((providerInvoked?[...(evidencePack.primaryEvidence||[])]:selected.map(x=>x.source)).map(x=>x.sourceId));
   const usedItems=[...(evidencePack.primaryEvidence||[]),...(evidencePack.supportingEvidence||[])].filter(x=>usedEvidenceIds.includes(x.sourceId));
   const chars=usedItems.reduce((n,x)=>n+clean(x.text).length,0);
-  return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-CONTENT-GROUNDED-COMPOSER-v2.0.0',text,providerInvoked,model:modelDecision?.requestedModel||'DETERMINISTIC',knowledgeEvidencePackConsumed:hasContent,materialGroundedContentConsumed:usedItems.length>0,upstreamGroundedAnswerPresent:Boolean(upstreamGroundedAnswer),upstreamGroundedAnswerConsumed:false,usedEvidenceIds,consumedContentChars:chars,articleContentConsumed:usedItems.some(x=>x.sourceType==='PUBLISHED_CANONICAL_ARTICLE'),bookContentConsumed:usedItems.some(x=>x.sourceType==='COMPLETED_MANUSCRIPT'),allowedContextConsumed:Boolean(allowedContext),authority:{createsPhiMeaning:false,createsMethodMeaning:false,createsRealityTruth:false}});
+  return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-CONTENT-GROUNDED-COMPOSER-v2.1.0',text,providerInvoked,model:modelDecision?.requestedModel||'DETERMINISTIC',providerMeta,knowledgeEvidencePackConsumed:hasContent,materialGroundedContentConsumed:usedItems.length>0,upstreamGroundedAnswerPresent:Boolean(upstreamGroundedAnswer),upstreamGroundedAnswerConsumed:false,usedEvidenceIds,consumedContentChars:chars,articleContentConsumed:usedItems.some(x=>x.sourceType==='PUBLISHED_CANONICAL_ARTICLE'),bookContentConsumed:usedItems.some(x=>x.sourceType==='COMPLETED_MANUSCRIPT'),allowedContextConsumed:Boolean(allowedContext),authority:{createsPhiMeaning:false,createsMethodMeaning:false,createsRealityTruth:false}});
 }
 
 export function guardKirSemanticAnswer({understanding,evidencePack,answer}){

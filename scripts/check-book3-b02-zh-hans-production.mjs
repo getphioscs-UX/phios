@@ -169,5 +169,6 @@ console.log('✓ BOOK-3 B02 human editorial successor passed: explicit TL decisi
 console.log('✓ BOOK-3 B02 English semantic parity passed: 5/5 English candidates preserve source sections, Final Canonical Nodes, block functions and authority boundaries.');
 console.log('✓ B02 publication and customer projection remain closed; English editorial quality is not auto-inferred from zh-Hans acceptance.');
 
-// Existing package alias check:book3-b02 is intentionally upgraded to cover the parallel B03 line as well.
+// Existing package alias check:book3-b02 covers B02 media disposition plus the parallel B03/B04 successor lines.
+await import('./check-book3-b02-w10-figure-media-requirement.mjs');
 await import('./check-book3-b03-zh-hans-production.mjs');
