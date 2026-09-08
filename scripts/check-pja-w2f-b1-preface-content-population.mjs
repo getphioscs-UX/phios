@@ -11,8 +11,10 @@ import {
   validateReadinessRecord
 } from './lib/knowledge-production/readiness-system.mjs';
 import { sha256 } from './lib/knowledge-production/checksum.mjs';
+import { resolveGitExecutable } from './lib/git-executable.mjs';
 
 const execFileAsync = promisify(execFile);
+const gitExecutable = resolveGitExecutable();
 const root = process.cwd();
 const textSha256 = value => sha256(Buffer.from(value).toString('utf8').replace(/\r\n?/g, '\n'));
 const stageTitle = 'PJA-W2F-B1｜Universal Contract and Preface Pilot';
@@ -434,7 +436,7 @@ async function readJson(relative) {
 }
 
 async function gitFile(relative) {
-  const { stdout } = await execFileAsync('git', ['show', `HEAD:${relative}`], {
+  const { stdout } = await execFileAsync(gitExecutable, ['show', `HEAD:${relative}`], {
     cwd: root,
     encoding: 'buffer',
     maxBuffer: 20 * 1024 * 1024

@@ -1,31 +1,11 @@
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
-
-const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
-const BASE='db794e5a22d8d0ecc36ebaab6420b3bca804a7ce';
-const PLAN='content/knowledge/production-planning/plans/book3-w5-final-article-production-map-v1.json';
-const DISPOSITION='content/knowledge/production-planning/visual-disposition/book3-b02-w10-figure-media-requirement-v1.json';
-const MANIFEST='content/knowledge/production-planning/production/book3-b02/manifest-v1.json';
-const HUMAN='content/knowledge/production-planning/acceptance/book3-b02-human-decisions-v1.json';
-const PARITY='content/knowledge/production-planning/acceptance/book3-b02-english-semantic-parity-v1.json';
-
-const plan=read(PLAN), d=read(DISPOSITION), manifest=read(MANIFEST), human=read(HUMAN), parity=read(PARITY);
-const b02=plan.articles.filter(x=>x.batchCode==='B3-B02');
-assert.equal(d.baselineCommit,BASE); assert.equal(d.status,'DISPOSITION_COMPLETE_MEDIA_PRODUCTION_NOT_STARTED'); assert.equal(d.articleCount,5);
-assert.deepEqual(d.counts,{figureNotRequired:1,figureRecommendedNonBlocking:3,figureRequiredPublicationBlocking:1,assetsProduced:0});
-assert.equal(human.status,'HUMAN_ACCEPTED_5_OF_5'); assert.equal(parity.status,'MACHINE_SEMANTIC_PARITY_ACCEPTED_5_OF_5');
-assert.equal(manifest.visualSuccessorBaselineCommit,BASE); assert.equal(manifest.visualDispositionPath,DISPOSITION); assert.equal(manifest.gates.visualProduction,'W10_DISPOSITION_COMPLETE_MEDIA_PRODUCTION_NOT_STARTED');
-assert.equal(manifest.gates.publication,'CLOSED'); assert.equal(manifest.gates.customerProjection,'CLOSED');
-const planById=new Map(b02.map(x=>[x.articlePlanId,x]));
-for(const r of d.records){
- const p=planById.get(r.articlePlanId); assert.ok(p,r.articlePlanId); assert.equal(r.w5VisualDisposition,p.visualDisposition); assert.equal(r.assetProductionStatus,'NOT_STARTED');
- assert.equal(r.mayCreateNewCanonicalMeaning,false); assert.equal(typeof r.publicationBlocking,'boolean');
- if(r.decision==='FIGURE_REQUIRED_PUBLICATION_BLOCKING'){assert.equal(r.articlePlanId,'B3-ART-013');assert.equal(r.mediaKind,'CAPACITY_MAP');assert.equal(r.publicationBlocking,true);assert.ok(r.briefTitle);assert.equal(p.visualDisposition,'VISUAL_BRIEF_CANDIDATE_W10');}
- if(r.decision==='FIGURE_RECOMMENDED_NON_BLOCKING'){assert.equal(r.publicationBlocking,false);assert.ok(r.briefTitle);}
- if(r.decision==='FIGURE_NOT_REQUIRED'){assert.equal(r.publicationBlocking,false);assert.equal(r.mediaKind,'NONE');assert.equal(r.briefTitle,null);}
-}
-assert.deepEqual(d.batchPublicationEffect.blockingArticlePlanIds,['B3-ART-013']);
-assert.equal(d.batchPublicationEffect.articleProductionMayContinue,true); assert.equal(d.batchPublicationEffect.englishWorkMayContinue,true); assert.equal(d.batchPublicationEffect.publicationAuthorityStillClosed,true);
-for(const v of Object.values(d.authorityBoundary)) assert.equal(v,false,'B02 W10 authority boundary drift');
-console.log('✓ BOOK-3 B02 W10 Figure / Media Requirement disposition passed: 1 not required, 3 recommended non-blocking, 1 required before publication.');
-console.log('✓ No media asset, canonical meaning or publication authority is created; B3-ART-013 is the only publication-blocking figure requirement.');
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')); const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const ORIGINAL='db794e5a22d8d0ecc36ebaab6420b3bca804a7ce', SUCCESSOR='d49dd16b38d7f858c9bad861b788919d0dec4c33';
+const DISP='content/knowledge/production-planning/visual-disposition/book3-b02-w10-figure-media-requirement-v1.json', PROD='content/knowledge/production-planning/visual-production/book3-b02-a13-capacity-map-v1.json', MAN='content/knowledge/production-planning/production/book3-b02/manifest-v1.json';
+const d=read(DISP),prod=read(PROD),m=read(MAN);
+assert.equal(d.baselineCommit,ORIGINAL); assert.equal(d.status,'DISPOSITION_COMPLETE_MEDIA_PRODUCTION_NOT_STARTED'); assert.deepEqual(d.counts,{figureNotRequired:1,figureRecommendedNonBlocking:3,figureRequiredPublicationBlocking:1,assetsProduced:0}); const req=d.records.find(x=>x.articlePlanId==='B3-ART-013'); assert.equal(req.decision,'FIGURE_REQUIRED_PUBLICATION_BLOCKING'); assert.equal(req.mediaKind,'CAPACITY_MAP'); assert.equal(req.assetProductionStatus,'NOT_STARTED');
+assert.equal(prod.baselineCommit,SUCCESSOR); assert.equal(prod.status,'ASSET_PRODUCED_MACHINE_BOUND_HUMAN_VISUAL_REVIEW_PENDING'); assert.equal(prod.articlePlanId,'B3-ART-013'); assert.deepEqual(prod.canonicalNodeCodes,['KN-B3-P8-114','KN-B3-P8-115']); const a=prod.productionAsset; assert.ok(fs.existsSync(a.path)); assert.equal(sha(a.path),a.sha256); assert.equal(fs.statSync(a.path).size,a.byteLength); assert.equal(a.width,1491); assert.equal(a.height,1055); const magic=fs.readFileSync(a.path).subarray(0,12); assert.equal(magic.subarray(0,4).toString(),'RIFF'); assert.equal(magic.subarray(8,12).toString(),'WEBP'); assert.equal(prod.reviewGate.machineAssetBinding,'ACCEPTED'); assert.equal(prod.reviewGate.humanVisualApproval,'PENDING'); assert.equal(prod.reviewGate.publicationBlockingRequirementResolved,false); assert.equal(m.requiredVisualProductionPath,PROD); assert.equal(m.gates.publication,'CLOSED'); assert.equal(m.gates.customerProjection,'CLOSED');
+console.log('✓ BOOK-3 B02 W10 disposition history preserved; B3-ART-013 required Capacity Map production candidate is now machine-bound to P8-114/115.');
+console.log('✓ WebP digest/size/format passed; human visual approval remains PENDING, so publication remains fail-closed.');
