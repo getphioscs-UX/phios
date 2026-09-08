@@ -2230,11 +2230,12 @@
     "check:kir-r2:w16-human": "node scripts/check-kir-r2-w16r-human-review.mjs",
     "build:kir-r2:phase2": "node scripts/build-kir-r2-answer-intelligence-correction.mjs",
     "check:kir-r2": "npm run check:kir-r2:phase1 && npm run check:kir-r2:phase2",
-    "check:integrated-phase2": "npm run check:kir-r2 && node scripts/check-integrated-successor-phase2.mjs",
+    "check:integrated-phase2": "npm run check:kir-r2 && npm run check:book3-w4-w5 && node scripts/check-integrated-successor-phase2.mjs",
     "check:kau-r6e-book3-final": "node scripts/check-kau-r6e-book3-final-canonical.mjs",
-    "check:book3-final": "npm run check:kau-r6d-human && npm run check:kau-r6e-book3-final && npm run check:book3-pja-wave1 && npm run check:kir-r2",
+    "check:book3-final": "npm run check:kau-r6d-human && npm run check:book3-w4-w5 && npm run check:kir-r2",
     "build:kir-r2:answer-intelligence": "node scripts/build-kir-r2-answer-intelligence-correction.mjs",
-    "check:kir-r2:answer-intelligence": "node scripts/check-kir-r2-answer-intelligence-correction.mjs"
+    "check:kir-r2:answer-intelligence": "node scripts/check-kir-r2-answer-intelligence-correction.mjs",
+    "check:book3-w4-w5": "npm run check:kau-r6e-book3-final && npm run check:book3-pja-wave1 && node scripts/check-book3-w4-w5-article-coverage-production-map.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

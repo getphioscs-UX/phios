@@ -8,7 +8,7 @@ const acceptance=read('content/knowledge/knowledge-intelligence-r2/acceptance/ki
 const benchmark=read('content/knowledge/knowledge-intelligence-r2/benchmarks/kir-r2-w15-100-question-machine-benchmark-v1.json');
 const human=read('content/knowledge/knowledge-intelligence-r2/review/kir-r2-w16-100-question-human-review-v1.json');
 const articleBindings=read('content/knowledge/knowledge-intelligence-r2/registries/kir-r2-published-article-binding-registry-v2.json');
-assert.equal(profilesDoc.profileCount,350); assert.equal(benchmark.cases.length,100); assert.equal(benchmark.machineAccepted,true);
+assert.equal(profilesDoc.profileCount,348); assert.equal(benchmark.cases.length,100); assert.equal(benchmark.machineAccepted,true);
 assert.equal(benchmark.summary.top5Recall,1); assert.equal(benchmark.summary.bookUsageRate,1); assert.equal(benchmark.summary.directAnswerRate,1); assert.equal(benchmark.summary.sourceSupportedRate,1); assert.equal(benchmark.summary.wrongRouteRate,0);
 assert.equal(human.status,'HUMAN_REVIEW_PENDING'); assert.deepEqual(human.counts,{accepted:0,rejected:0,pending:100}); assert.equal(human.threshold.minimumAccepted,85); assert.equal(human.threshold.criticalFailuresAllowed,0);
 assert.equal(acceptance.status,'MACHINE_ACCEPTED_HUMAN_PENDING'); assert.equal(acceptance.boundaries.humanAcceptanceClaimed,false);

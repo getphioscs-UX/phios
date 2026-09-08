@@ -8,7 +8,7 @@ function enrichProfiles(profiles,bindings=[]){
 }
 async function loadProfiles(env){
   const [doc,binding]=await Promise.all([readAsset(env,PROFILE_PATH),readAsset(env,ARTICLE_BINDING_PATH)]);
-  if(!Array.isArray(doc?.profiles)||doc.profiles.length!==350)return null;
+  if(!Array.isArray(doc?.profiles)||doc.profiles.length!==348)return null;
   return enrichProfiles(doc.profiles,binding?.records||[]);
 }
 export async function runKirR2ProductionProjection({question,locale='zh-Hans',env={},allowedContext=null,upstreamGroundedAnswer=null,upstreamGroundingBundle=null,provider=null}={}){

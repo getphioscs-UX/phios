@@ -3,7 +3,7 @@
   "stage": "BOOK3-PJA-WAVE1",
   "candidateId": "B3-W1-A02",
   "locale": "en",
-  "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE",
+  "status": "FINAL_CANONICAL_RECONCILED_ENGLISH_PARITY_PENDING",
   "productionRole": "ARTICLE",
   "dispatchTarget": "PJA",
   "publicationBookCode": "BOOK-3",
@@ -51,7 +51,9 @@
     "sourceSha256": "75a6b798a09c3e50467d3bb09421b8d6593869f795af79e6a8ff851f41d32f4b",
     "corpusSha256": "c430ce84acdbacf4323710f771ceb1b49e879bb20e198a88de3bdf297bf44eb5",
     "readabilityHumanAcceptancePath": "content/knowledge/manuscripts/review/kau-r6d-book3-readability-human-acceptance-v1.json",
-    "readabilityStatus": "HUMAN_READABILITY_ACCEPTED"
+    "readabilityStatus": "HUMAN_READABILITY_ACCEPTED",
+    "finalCanonicalAuthorityPath": "content/knowledge/contracts/book-3-final-canonical-authority-v1.json",
+    "finalCanonicalRegistryPath": "content/knowledge/registry/successors/kau-r6e-book3-final/canonical-nodes-v1.json"
   },
   "sourceBindings": [
     {
@@ -66,11 +68,16 @@
     }
   ],
   "canonicalNodeBinding": {
-    "status": "PENDING_CANONICAL_NODE_ASSET_RECONCILIATION",
-    "nodeCode": null,
-    "nodeCodes": [],
+    "status": "FINAL_COMPLETED_MANUSCRIPT_CANONICAL_RECONCILED",
+    "authorityPath": "content/knowledge/contracts/book-3-final-canonical-authority-v1.json",
+    "registryPath": "content/knowledge/registry/successors/kau-r6e-book3-final/canonical-nodes-v1.json",
+    "nodeCode": "KN-B3-P8-102",
+    "nodeCodes": [
+      "KN-B3-P8-102"
+    ],
     "crossNodeAssemblyAllowed": true,
-    "mutationPerformed": false
+    "mutationPerformed": false,
+    "bindingBasis": "sourceSectionCode -> one-final-section-one-canonical-node"
   },
   "review": {
     "humanEditorialApproved": false,

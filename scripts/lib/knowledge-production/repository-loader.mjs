@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { resolveGitExecutable } from '../git-executable.mjs';
 import {
   DEFAULT_LOCALE,
   SCHEMA_PATHS
@@ -12,6 +13,7 @@ import { resolvePublicationContext, resolveSourceLineage } from './publication-c
 import { resolveProductionState } from './production-resolver.mjs';
 
 const execFileAsync = promisify(execFile);
+const gitExecutable = resolveGitExecutable();
 const NODE_PATTERN = /^KN-[A-Z0-9]+(?:-[A-Z0-9]+)*$/;
 
 export async function readJson(root, relativePath, errorCode = 'SCHEMA_NOT_FOUND') {
@@ -29,7 +31,7 @@ export async function readJson(root, relativePath, errorCode = 'SCHEMA_NOT_FOUND
 
 export async function repositoryCommit(root) {
   try {
-    const { stdout } = await execFileAsync('git', ['rev-parse', 'HEAD'], {
+    const { stdout } = await execFileAsync(gitExecutable, ['rev-parse', 'HEAD'], {
       cwd: root,
       windowsHide: true
     });

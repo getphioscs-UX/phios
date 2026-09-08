@@ -5,7 +5,7 @@ const legacyPhase2=read('content/knowledge/knowledge-intelligence-r2/acceptance/
 const correction=read('content/knowledge/knowledge-intelligence-r2/acceptance/kir-r2-answer-intelligence-correction-w3r-w16r-acceptance-v2.json');
 const freeze=read('content/knowledge/knowledge-intelligence-r2/freeze/kir-r2-answer-intelligence-machine-freeze-v2.json');
 const pja=read('content/governance/integrated-successor/reconciliation/pja-w0-cx-r26-page-map-successor-v1.json');
-assert.equal(phase1.counts.profiles,350);
+assert.equal(phase1.counts.profiles,348);
 assert.equal(legacyPhase2.status,'MACHINE_ACCEPTED_HUMAN_PENDING');
 assert.equal(correction.status,'MACHINE_ACCEPTED_HUMAN_PENDING');
 assert.equal(correction.machineSummary.caseCount,100);
