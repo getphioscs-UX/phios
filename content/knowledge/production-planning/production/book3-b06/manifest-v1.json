@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-BOOK3-B06-ZH-HANS-PRODUCTION-MANIFEST-v1.0.0",
   "stage": "BOOK3-B06",
-  "status": "ZH_HANS_SOURCE_BOUND_EDITORIAL_CANDIDATES_READY_HUMAN_REVIEW_PENDING",
+  "status": "ZH_HANS_HUMAN_ACCEPTED_ENGLISH_SEMANTIC_PARITY_MACHINE_ACCEPTED_PUBLICATION_CLOSED",
   "baselineCommit": "415f73c258454c23d1569c9e2c2f381dcfb6a715",
   "bookCode": "BOOK-3",
   "batchCode": "B3-B06",
@@ -16,9 +16,9 @@
     "articleCandidates": 3,
     "canonicalNodeCoverage": 6,
     "sourceSectionBindings": 6,
-    "localesProduced": 1,
-    "englishCandidates": 0,
-    "humanAcceptedArticles": 0,
+    "localesProduced": 2,
+    "englishCandidates": 3,
+    "humanAcceptedArticles": 3,
     "publishedArticles": 0
   },
   "records": [
@@ -37,7 +37,12 @@
       "canonicalNodeCodes": [
         "KN-B3-P8-143",
         "KN-B3-P8-144"
-      ]
+      ],
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b06-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book3-b06/candidates/en/b3-b06-a27.en.v1.json",
+      "englishCandidateSha256": "cd738c4c5998d256a3d5c1cf12d0bcb3e033d7c5bf1605fbd0cbcc3e225dd795",
+      "englishSemanticParityStatus": "MACHINE_SEMANTIC_PARITY_ACCEPTED"
     },
     {
       "articlePlanId": "B3-ART-028",
@@ -54,7 +59,12 @@
       "canonicalNodeCodes": [
         "KN-B3-P8-145",
         "KN-B3-P8-146"
-      ]
+      ],
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b06-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book3-b06/candidates/en/b3-b06-a28.en.v1.json",
+      "englishCandidateSha256": "fb29f190b7d56ebcb198d7be653192ae1be01c8a008a7db3351e80aeaf584b18",
+      "englishSemanticParityStatus": "MACHINE_SEMANTIC_PARITY_ACCEPTED"
     },
     {
       "articlePlanId": "B3-ART-029",
@@ -71,15 +81,20 @@
       "canonicalNodeCodes": [
         "KN-B3-P8-147",
         "KN-B3-P8-148"
-      ]
+      ],
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b06-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book3-b06/candidates/en/b3-b06-a29.en.v1.json",
+      "englishCandidateSha256": "c006bae8d9044ca9e668f61e2438ea380222ed4cc932fd9b1b06d429cff50981",
+      "englishSemanticParityStatus": "MACHINE_SEMANTIC_PARITY_ACCEPTED"
     }
   ],
   "gates": {
     "sourceBinding": "MACHINE_ACCEPTED",
-    "zhHansHumanEditorial": "PENDING",
-    "englishProduction": "CLOSED_UNTIL_EACH_ZH_HANS_ARTICLE_ACCEPTED",
-    "englishSemanticParity": "NOT_STARTED",
-    "visualProduction": "W10_SEPARATE_DECISION",
+    "zhHansHumanEditorial": "HUMAN_ACCEPTED_3_OF_3",
+    "englishProduction": "COMPLETE_3_OF_3_AFTER_ZH_ACCEPTANCE",
+    "englishSemanticParity": "MACHINE_ACCEPTED_3_OF_3",
+    "visualProduction": "W10_DISPOSITION_COMPLETE_NO_REQUIRED_ASSET_RECOMMENDED_VISUALS_NON_BLOCKING",
     "publication": "CLOSED",
     "customerProjection": "CLOSED"
   },
@@ -88,9 +103,15 @@
     "exactly6FinalNodesCoveredOnce": true,
     "noCanonicalMutation": true,
     "noEnglishAutoProduction": true,
-    "noPublicationAuthorityCreated": true
+    "noPublicationAuthorityCreated": true,
+    "englishProductionTriggeredOnlyAfterHumanAcceptance": true,
+    "englishSemanticParityDoesNotCreatePublicationAuthority": true
   },
   "reviewPackagePath": "content/knowledge/production-planning/review/book3-b06-zh-hans-editorial-review-v1.json",
   "machineAcceptancePath": "content/knowledge/production-planning/acceptance/book3-b06-machine-acceptance-v1.json",
-  "nextGate": "3/3 zh-Hans Article human editorial review and explicit acceptance."
+  "nextGate": "B06 recommended visual production may proceed asynchronously; English editorial/publication admission remains separate and publication stays closed.",
+  "successorBaselineCommit": "80bae71675ef8b196cd10402ea0ccbf9b833ee57",
+  "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b06-human-decisions-v1.json",
+  "englishSemanticParityPath": "content/knowledge/production-planning/acceptance/book3-b06-english-semantic-parity-v1.json",
+  "visualDispositionPath": "content/knowledge/production-planning/visual-disposition/book3-b03-b06-w10-figure-media-requirement-v1.json"
 }
