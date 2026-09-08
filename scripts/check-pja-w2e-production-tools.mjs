@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { resolveGitExecutable } from './lib/git-executable.mjs';
 import { sha256 } from './lib/knowledge-production/checksum.mjs';
 import {
   DEFAULT_BRIEF_OUTPUT,
@@ -14,6 +15,7 @@ import { ERROR_CODES } from './lib/knowledge-production/production-errors.mjs';
 import { validatePackage } from './lib/knowledge-production/package-validator.mjs';
 
 const execFileAsync = promisify(execFile);
+const gitExecutable = resolveGitExecutable();
 const root = process.cwd();
 const temporaryParent = path.join(root, '.tmp');
 await fs.mkdir(temporaryParent, { recursive: true });
@@ -256,12 +258,12 @@ async function normalizeTextTree(directory) {
 }
 
 async function gitHead() {
-  const { stdout } = await execFileAsync('git', ['rev-parse', 'HEAD'], { cwd: root });
+  const { stdout } = await execFileAsync(gitExecutable, ['rev-parse', 'HEAD'], { cwd: root });
   return stdout.trim();
 }
 
 async function gitFile(file) {
-  const { stdout } = await execFileAsync('git', ['show', `HEAD:${file}`], {
+  const { stdout } = await execFileAsync(gitExecutable, ['show', `HEAD:${file}`], {
     cwd: root,
     encoding: 'buffer',
     maxBuffer: 20 * 1024 * 1024

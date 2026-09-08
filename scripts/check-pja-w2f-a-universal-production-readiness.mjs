@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import { resolveGitExecutable } from './lib/git-executable.mjs';
 import {
   compileReadinessSchema,
   initializeReadinessRecord,
@@ -18,6 +19,7 @@ import { sha256 } from './lib/knowledge-production/checksum.mjs';
 import { loadPjaBlueprintContext } from './lib/knowledge-production/blueprint-context.mjs';
 
 const execFileAsync = promisify(execFile);
+const gitExecutable = resolveGitExecutable();
 const root = process.cwd();
 const textSha256 = value => sha256(Buffer.from(value).toString('utf8').replace(/\r\n?/g, '\n'));
 const read = file => fs.readFile(path.join(root, file), 'utf8');
@@ -490,7 +492,7 @@ function testCheckDependencyContract(scripts) {
 }
 
 async function gitFile(file) {
-  const { stdout } = await execFileAsync('git', ['show', `HEAD:${file}`], {
+  const { stdout } = await execFileAsync(gitExecutable, ['show', `HEAD:${file}`], {
     cwd: root,
     encoding: 'buffer',
     maxBuffer: 20 * 1024 * 1024

@@ -3,10 +3,12 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { resolveGitExecutable } from './lib/git-executable.mjs';
 
 import './check-master-governance.mjs';
 
 const root = process.cwd();
+const gitExecutable = resolveGitExecutable();
 const text = relativePath => fs.readFileSync(path.join(root, relativePath), 'utf8').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
 const read = relativePath => JSON.parse(text(relativePath));
 const canonicalTextSha256 = relativePath => crypto.createHash('sha256').update(text(relativePath), 'utf8').digest('hex');
@@ -15,14 +17,14 @@ const canonicalTextGitBlobSha = relativePath => {
   return crypto.createHash('sha1').update(`blob ${source.length}\0`).update(source).digest('hex');
 };
 const exists = relativePath => fs.existsSync(path.join(root, relativePath));
-const git = args => execFileSync('git', args, {
+const git = args => execFileSync(gitExecutable, args, {
   cwd: root,
   encoding: 'utf8',
   stdio: ['ignore', 'pipe', 'pipe']
 }).trim();
 const gitObjectExists = spec => {
   try {
-    execFileSync('git', ['cat-file', '-e', spec], { cwd: root, stdio: 'ignore' });
+    execFileSync(gitExecutable, ['cat-file', '-e', spec], { cwd: root, stdio: 'ignore' });
     return true;
   } catch {
     return false;
