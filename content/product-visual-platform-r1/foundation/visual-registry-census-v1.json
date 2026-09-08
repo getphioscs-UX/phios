@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W0-VISUAL-REGISTRY-CENSUS-v1.0.0",
+  "baselineCommit": "80bae71675ef8b196cd10402ea0ccbf9b833ee57",
+  "status": "CURRENT_VISUAL_CENSUS_COMPLETE",
+  "authorityBoundary": {
+    "createsNewAssetAuthority": false,
+    "censusOnly": true,
+    "upstreamIdentityPreserved": true
+  },
+  "sources": [
+    {
+      "surface": "MFIG",
+      "evidence": "repository filename census",
+      "count": 399,
+      "role": "existing method-figure evidence; no new figure authority"
+    },
+    {
+      "surface": "current client asset registry",
+      "path": "content/web-production/registries/client-visual-asset-registry-v1.7.json",
+      "count": 152
+    },
+    {
+      "surface": "public asset registry",
+      "path": "content/registry/public-assets.json",
+      "count": 149
+    },
+    {
+      "surface": "PHI OS logo registry",
+      "path": "content/web-production/registries/phios-logo-registry-v1.json",
+      "count": 12
+    },
+    {
+      "surface": "CX visual projection",
+      "path": "content/customer-experience-rebuild/authority/customer-visual-asset-registry-v3.json",
+      "count": 168
+    },
+    {
+      "surface": "customer-ui media",
+      "path": "assets/customer-ui/media",
+      "count": 17
+    },
+    {
+      "surface": "customer-ui JS",
+      "path": "assets/customer-ui/js",
+      "count": 71
+    },
+    {
+      "surface": "customer-ui surfaces",
+      "path": "assets/customer-ui/surfaces",
+      "count": 31
+    }
+  ],
+  "requiredRuntimePaths": {
+    "ecrMandala": [
+      "functions/embodied-configuration/ecr-customer-mandala-projection.js",
+      "assets/customer-ui/js/specialists/ecr/mandala-geometry.js",
+      "assets/customer-ui/js/specialists/ecr/mandala-renderer.js",
+      "assets/customer-ui/surfaces/ecr-specialist.css"
+    ],
+    "renderers": {
+      "profile": "assets/customer-ui/js/surfaces/profile-progressive.js",
+      "ziWei": "assets/customer-ui/js/specialists/ziwei/product-renderer.js",
+      "baZi": "assets/customer-ui/js/specialists/bazi/product-renderer.js",
+      "astrology": "assets/customer-ui/js/specialists/ast/product-renderer.js",
+      "numerology": "assets/customer-ui/js/numerology/chart-renderer.js"
+    }
+  },
+  "exit": [
+    "VISUAL_REGISTRY_CENSUS_READY",
+    "NO_SECOND_ASSET_AUTHORITY"
+  ]
+}

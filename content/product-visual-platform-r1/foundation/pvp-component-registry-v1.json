@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W5-COMPONENT-REGISTRY-v1.0.0",
+  "baselineCommit": "80bae71675ef8b196cd10402ea0ccbf9b833ee57",
+  "status": "FOUNDATION_COMPONENTS_IMPLEMENTED",
+  "implemented": [
+    "PVP-VIS-001",
+    "PVP-VIS-002",
+    "PVP-VIS-003",
+    "PVP-VIS-004",
+    "PVP-VIS-006",
+    "PVP-VIS-007"
+  ],
+  "deferred": [
+    "PVP-VIS-005",
+    "PVP-VIS-008"
+  ],
+  "records": [
+    {
+      "id": "PVP-VIS-001",
+      "name": "READING-DEPTH-MAP",
+      "truthInputs": [
+        "levels",
+        "currentLevel",
+        "locked"
+      ]
+    },
+    {
+      "id": "PVP-VIS-002",
+      "name": "EXPLORATION-PROGRESS",
+      "truthInputs": [
+        "explored",
+        "total"
+      ],
+      "prohibited": [
+        "destiny discovered",
+        "life completion",
+        "compatibility score"
+      ]
+    },
+    {
+      "id": "PVP-VIS-003",
+      "name": "LOCKED-INSIGHT-PREVIEW",
+      "truthInputs": [
+        "title",
+        "preview",
+        "cta"
+      ],
+      "fullBlurAllowed": false
+    },
+    {
+      "id": "PVP-VIS-004",
+      "name": "TOPIC-UNLOCK-CARD",
+      "truthInputs": [
+        "topic",
+        "supported",
+        "locked",
+        "preview",
+        "cta"
+      ],
+      "hardcodeAllTopicsSupported": false
+    },
+    {
+      "id": "PVP-VIS-006",
+      "name": "CROSS-PERSPECTIVE-PREVIEW",
+      "truthInputs": [
+        "perspectives"
+      ],
+      "equivalenceClaimAllowed": false
+    },
+    {
+      "id": "PVP-VIS-007",
+      "name": "WHAT-PAID-ADDS",
+      "truthInputs": [
+        "items"
+      ],
+      "commerceTruthCreatedByComponent": false
+    }
+  ],
+  "authorityBoundary": {
+    "uiComponentsOnly": true,
+    "methodFigureAuthorityCreated": false,
+    "commerceAuthorityCreated": false,
+    "profileTruthAuthorityCreated": false
+  }
+}

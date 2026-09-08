@@ -26,4 +26,4 @@ console.log('✓ KIR-R2 Answer Intelligence Correction W3R/W6R–W16R machine ga
 console.log(`  Published article bindings: ${bindings.recordCount} locale records / ${bindings.nodeCount} nodes.`);
 console.log(`  W15R v2: 100 cases, article-content consumed ${(benchmark.summary.articleContentConsumptionRate*100).toFixed(0)}%, semantic guard ${(benchmark.summary.semanticGuardPassRate*100).toFixed(0)}%, no-empty-rephrase ${(benchmark.summary.noEmptyRephraseRate*100).toFixed(0)}%.`);
 console.log('  Book III production content path remains KSAR private-R2 → KAP grounding → KIR; local private corpus execution is not claimed.');
-console.log('  W16R remains correctly PENDING: 0/100 accepted, threshold >=85/100 and 0 critical failures.');
+console.log('  Historical W16R correction record remains PENDING by design; final human acceptance is recorded only in the W16R2B successor lineage.');

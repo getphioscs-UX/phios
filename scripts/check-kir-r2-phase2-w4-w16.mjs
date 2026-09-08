@@ -24,4 +24,4 @@ const composer=fs.readFileSync('functions/_lib/knowledge-answer-composition.js',
 console.log('✓ KIR-R2 Phase 2 W4–W16 machine acceptance passed.');
 console.log(`  100-case benchmark: top5 recall ${(benchmark.summary.top5Recall*100).toFixed(0)}%, direct answer ${(benchmark.summary.directAnswerRate*100).toFixed(0)}%, source-supported ${(benchmark.summary.sourceSupportedRate*100).toFixed(0)}%, wrong-route ${(benchmark.summary.wrongRouteRate*100).toFixed(0)}%.`);
 console.log(`  Book usage: ${(benchmark.summary.bookUsageRate*100).toFixed(0)}%; top1 precision ${(benchmark.summary.top1Precision*100).toFixed(0)}%.`);
-console.log('  W16 human gate remains correctly PENDING: 0/100 accepted; threshold is >=85/100 with 0 critical failures.');
+console.log('  Historical W16 machine record remains PENDING by design; current human authority is carried by the later W16R/W16R2 successor acceptance.');

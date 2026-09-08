@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {PVP_FOUNDATION_COMPONENT_IDS,renderExplorationProgress,renderTopicUnlockCard} from '../assets/customer-ui/js/visuals/pvp-components.js';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const census=read('content/product-visual-platform-r1/foundation/visual-registry-census-v1.json');
+const cls=read('content/product-visual-platform-r1/foundation/asset-classification-freeze-v1.json');
+const logo=read('content/product-visual-platform-r1/foundation/logo-compliance-v1.json');
+const refs=read('content/product-visual-platform-r1/foundation/design-reference-registry-v1.json');
+const tokens=read('content/product-visual-platform-r1/foundation/design-token-extraction-v1.json');
+const comps=read('content/product-visual-platform-r1/foundation/pvp-component-registry-v1.json');
+assert.equal(census.baselineCommit,'80bae71675ef8b196cd10402ea0ccbf9b833ee57');assert.equal(census.status,'CURRENT_VISUAL_CENSUS_COMPLETE');
+assert.deepEqual(Object.keys(cls.classes),['BRAND_REFERENCE','STATIC_PRODUCTION_ASSET','DYNAMIC_PRODUCT_VISUAL','UI_GENERATED_VISUAL']);
+assert.equal(refs.records.length,6);for(const r of refs.records){assert.equal(r.productionStatus,'NOT_PRODUCTION_CUSTOMER_ASSET');assert.equal(r.directCustomerRenderingAllowed,false)}
+assert.equal(logo.canonicalRegistry,'content/web-production/registries/phios-logo-registry-v1.json');assert.equal(logo.canonicalRecordCount,12);assert.equal(logo.rules.manualPhiMarkAsLogoAllowed,false);
+assert.equal(tokens.authorityBoundary.existingCxTokensRemainBaseAuthority,true);assert.equal(tokens.authorityBoundary.exampleNumbersImported,false);
+assert.deepEqual(PVP_FOUNDATION_COMPONENT_IDS,comps.implemented);assert.deepEqual(comps.deferred,['PVP-VIS-005','PVP-VIS-008']);
+for(const p of census.requiredRuntimePaths.ecrMandala)assert.equal(fs.existsSync(p),true,`missing ${p}`);
+for(const [k,p] of Object.entries(census.requiredRuntimePaths.renderers))assert.ok(p&&fs.existsSync(p),`missing ${k} renderer ${p}`);
+for(const p of ['assets/customer-ui/visuals/tokens.css','assets/customer-ui/visuals/pvp-components.css'])assert.equal(fs.existsSync(p),true);
+const componentSource=fs.readFileSync('assets/customer-ui/js/visuals/pvp-components.js','utf8');assert.doesNotMatch(componentSource,/ASSET-BRAND-00[2-6]|ASSET-COMMERCE-001|<img/i);assert.doesNotMatch(componentSource,/Φ/);
+assert.match(renderExplorationProgress({explored:4,total:12}),/4<\/strong> of <strong>12/);
+assert.match(renderTopicUnlockCard({topic:'Career',supported:false}),/data-supported="false"/);
+console.log('✓ PVP-R1-VIS W0–W5 foundation passed.');
+console.log('  Census, classification, logo compliance, design-token extraction, shared visual tokens and six foundation UI components are reconciled.');
+console.log('  W6+ product truth/projection work remains closed; PVP creates no method, Profile or commerce truth authority.');

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const final=read('content/knowledge/knowledge-intelligence-r2/acceptance/kir-r2-w16r-final-human-acceptance-v1.json');
+const census=read('content/product-visual-platform-r1/foundation/visual-registry-census-v1.json');
+const comps=read('content/product-visual-platform-r1/foundation/pvp-component-registry-v1.json');
+assert.equal(final.productionGate.productionAdmissionAllowed,true);
+assert.equal(final.effectiveSuccessorAcceptance.effectiveAccepted,100);
+assert.equal(census.status,'CURRENT_VISUAL_CENSUS_COMPLETE');
+assert.deepEqual(comps.implemented,['PVP-VIS-001','PVP-VIS-002','PVP-VIS-003','PVP-VIS-004','PVP-VIS-006','PVP-VIS-007']);
+assert.deepEqual(comps.deferred,['PVP-VIS-005','PVP-VIS-008']);
+assert.equal(comps.authorityBoundary.profileTruthAuthorityCreated,false);
+console.log('✓ Integrated Successor PHASE 3 foundation gate passed.');
+console.log('  KIR-R2 W16R final admission is closed; PVP-R1-VIS W0–W5 foundation only is ready.');
+console.log('  W6 Profile output authority remains the next blocker; no dynamic Profile visual truth has been invented.');

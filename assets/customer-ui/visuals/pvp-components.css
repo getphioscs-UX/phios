@@ -1,0 +1,17 @@
+@layer pvp.visual.components {
+  .pvp-vis{font-family:var(--cx-font-body,system-ui);color:var(--cx-color-ink,#171914)}
+  .pvp-vis__eyebrow{font-size:var(--cx-type-label,.8125rem);letter-spacing:.12em;text-transform:uppercase;color:var(--pvp-supporting)}
+  .pvp-depth-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:var(--cx-space-3,.75rem)}
+  .pvp-depth-map__step,.pvp-topic-card,.pvp-locked-preview,.pvp-cross-preview,.pvp-paid-adds{border:1px solid var(--cx-color-border,rgba(23,25,20,.14));border-radius:var(--cx-radius-md,1rem);background:var(--pvp-visual-surface);padding:var(--cx-space-5,1.25rem)}
+  .pvp-depth-map__step[aria-current="step"]{border-color:var(--pvp-selected);box-shadow:inset 0 0 0 1px var(--pvp-selected)}
+  .pvp-depth-map__step[data-locked="true"],.pvp-topic-card[data-locked="true"]{background:var(--pvp-surface-locked)}
+  .pvp-progress__track{height:.5rem;border-radius:999px;background:var(--cx-color-border,rgba(23,25,20,.14));overflow:hidden}
+  .pvp-progress__fill{height:100%;background:var(--pvp-selected);width:var(--pvp-progress,0%)}
+  .pvp-locked-preview{background:var(--pvp-surface-premium);position:relative;overflow:hidden}
+  .pvp-locked-preview__text{max-width:42rem}.pvp-vis__cta{display:inline-flex;align-items:center;min-height:2.75rem;margin-top:var(--cx-space-4,1rem);font-weight:650;color:inherit}
+  .pvp-topic-card[data-supported="false"]{display:none}
+  .pvp-cross-preview__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:var(--cx-space-3,.75rem)}
+  .pvp-cross-preview__item{padding:var(--cx-space-3,.75rem);border-inline-start:3px solid var(--pvp-topic)}
+  .pvp-paid-adds ul{margin:var(--cx-space-3,.75rem) 0 0;padding-inline-start:1.25rem}
+  @media (prefers-reduced-motion:no-preference){.pvp-vis__cta{transition:opacity var(--cx-motion-fast,160ms)}.pvp-vis__cta:hover{opacity:.72}}
+}

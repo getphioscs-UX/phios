@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W1-ASSET-CLASSIFICATION-FREEZE-v1.0.0",
+  "baselineCommit": "80bae71675ef8b196cd10402ea0ccbf9b833ee57",
+  "status": "CLASSIFICATION_FROZEN",
+  "classes": {
+    "BRAND_REFERENCE": {
+      "customerRenderable": false,
+      "examples": [
+        "ASSET-BRAND-002",
+        "ASSET-BRAND-003",
+        "ASSET-BRAND-004",
+        "ASSET-BRAND-005",
+        "ASSET-BRAND-006",
+        "ASSET-COMMERCE-001"
+      ]
+    },
+    "STATIC_PRODUCTION_ASSET": {
+      "customerRenderable": true,
+      "authority": "canonical/public asset registries",
+      "identityMayBeCreatedByPvp": false
+    },
+    "DYNAMIC_PRODUCT_VISUAL": {
+      "customerRenderable": true,
+      "authority": "method/product truth owner + projection IR",
+      "pvpMayInventTruth": false
+    },
+    "UI_GENERATED_VISUAL": {
+      "customerRenderable": true,
+      "authority": "UI state only",
+      "mayRepresentSemanticTruthWithoutOwner": false
+    }
+  },
+  "typeProjection": {
+    "BRAND": "STATIC_PRODUCTION_ASSET",
+    "HERO": "STATIC_PRODUCTION_ASSET",
+    "BOOK_COVER": "STATIC_PRODUCTION_ASSET",
+    "FIGURE": "STATIC_PRODUCTION_ASSET",
+    "ILLUSTRATION": "STATIC_PRODUCTION_ASSET",
+    "ICON": "STATIC_PRODUCTION_ASSET",
+    "ARTICLE": "STATIC_PRODUCTION_ASSET",
+    "PROFESSIONAL": "STATIC_PRODUCTION_ASSET"
+  },
+  "rules": {
+    "randomAssetUrlAllowed": false,
+    "brandBoardDirectRenderingAllowed": false,
+    "dynamicVisualRequiresTruthOwner": true
+  }
+}

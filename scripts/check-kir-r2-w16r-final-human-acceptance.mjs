@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const f=read('content/knowledge/knowledge-intelligence-r2/acceptance/kir-r2-w16r-final-human-acceptance-v1.json');
+assert.equal(f.status,'HUMAN_ACCEPTED_PRODUCTION_ADMITTED');
+assert.equal(f.historicalEvidence.w16rV2.accepted,48);assert.equal(f.historicalEvidence.w16rV2.preserved,true);
+assert.equal(f.historicalEvidence.w16r2Initial100.accepted,93);
+assert.equal(f.historicalEvidence.w16r2aHumanSpot.accepted,6);
+assert.equal(f.historicalEvidence.case084R2.decision,'ACCEPT');
+assert.equal(f.effectiveSuccessorAcceptance.effectiveAccepted,100);assert.equal(f.effectiveSuccessorAcceptance.effectiveTotal,100);
+assert.equal(f.effectiveSuccessorAcceptance.criticalFailures,0);assert.equal(f.productionGate.productionAdmissionAllowed,true);
+console.log('✓ KIR-R2 W16R successor lineage final human acceptance passed: effective 100/100, 0 critical failures.');
+console.log('  Historical 48/100 and 93/100 evidence remains immutable; seven successor remediations close the current output cohort.');

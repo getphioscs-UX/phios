@@ -1,8 +1,8 @@
 const clean=v=>String(v??'').normalize('NFKC').trim();
 const yes=v=>['1','true','yes','on','enabled'].includes(clean(v).toLowerCase());
 
-// W16R2B is intentionally fail-closed in this build. Human acceptance of case 084 is still missing.
-export const KIR_R2_W16R2B_BUILD_ADMITTED=false;
+// W16R2B final human acceptance is complete. Runtime still requires both explicit environment flags.
+export const KIR_R2_W16R2B_BUILD_ADMITTED=true;
 export const KIR_R2_W16R2B_ADMISSION_SCHEMA='PHI-OS-KIR-R2-W16R2B-PRODUCTION-ADMISSION-v1.0.0';
 
 export function getKirR2W16R2BProductionAdmission(env={}){
@@ -15,7 +15,7 @@ export function getKirR2W16R2BProductionAdmission(env={}){
     requested,
     gatewayRequested,
     allowed,
-    status:allowed?'PRODUCTION_ADMITTED':'PRODUCTION_BLOCKED_CASE084_HUMAN_ACCEPTANCE_REQUIRED'
+    status:allowed?'PRODUCTION_ADMITTED':'PRODUCTION_ADMITTED_RUNTIME_FLAG_OFF'
   });
 }
 
