@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2B-CASE084-R2-LIVE-REGRESSION-v1.0.0",
+  "baselineCommit": "415f73c258454c23d1569c9e2c2f381dcfb6a715",
+  "startedAt": "2026-09-08T09:13:49.274Z",
+  "completedAt": "2026-09-08T09:13:53.066Z",
+  "status": "CASE084_R2_LIVE_COMPLETED_HUMAN_REVIEW_REQUIRED",
+  "case": {
+    "caseId": "KIR-R2-W15R-084",
+    "question": "从不可表达走向选择：决策、路径与内部冲突，背后的机制是什么？",
+    "locale": "zh-Hans",
+    "expected": {
+      "nodeCode": "KN-B1-P5-046",
+      "bookCode": "BOOK-2",
+      "articleCode": "KA-B1-P5-046-ZH-HANS-ARTICLE",
+      "articleTitle": "从不可表达走向选择：决策、路径与内部冲突",
+      "authorityPath": "content/knowledge/public/authority/articles/zh-Hans/KN-B1-P5-046.json"
+    },
+    "status": "KIR_R2_W16R2_APPLIED",
+    "applied": true,
+    "answer": "从不可表达到选择,核心在于表达本身就是一种压缩与组织。语言、动作等媒介不会完整复制内在状态,而会重新选择、简化,因此某些现实可能始终无法被转成外部可读的形式。当多个可能方向需要收拢成一个行动时,决策就出现了——因为资源、信息和后果都有限,选择必须暴露哪些优先、哪些可承受。\n\n这条链不是直线五步,而是一环压一环:先有“无法表达”设定当前面对的条件,再进入“决策为何出现”和“路径如何分化”,随后现实形成具体选择,最后在“内部冲突为何出现”处留下可被下一轮运行继承的余地。冲突不是终点,而是状态被看见、稳固后形成的惯性条件,它会反过来改变接下来什么更值得注意、什么更容易被维持或表达。机制之间靠条件传递,而不是并列标签;反馈出现时,系统仍有重新配置的可能,所以需要区分短暂波动与已经持续的结构变化。",
+    "providerMeta": {
+      "providerId": "DEEPSEEK_V4_FLASH",
+      "providerModel": "deepseek-v4-flash",
+      "route": {
+        "schemaVersion": "PHI-OS-KIR-R2-W16R2-MODEL-ROUTE-v1.0.0",
+        "tier": "T2_COMPLEX",
+        "providerId": "DEEPSEEK_V4_FLASH",
+        "reasonCodes": [
+          "PROFESSIONAL_DEPTH"
+        ],
+        "knowledgeAuthorityOwnedByProvider": false
+      },
+      "usage": {
+        "input": 1026,
+        "cachedInput": 0,
+        "output": 204,
+        "total": 1230
+      },
+      "rawId": "83e506e0-76fe-4d7d-bde9-b1294094df0a"
+    },
+    "baseGuard": {
+      "schemaVersion": "PHI-OS-KIR-R2-SEMANTIC-ANSWER-QUALITY-GUARD-v2.0.0",
+      "DIRECTLY_ANSWERS_USER_QUESTION": true,
+      "SOURCE_SUPPORTED": true,
+      "MATERIAL_GROUNDED_CONTENT_CONSUMED": true,
+      "QUESTION_TYPE_SATISFIED": true,
+      "MECHANISM_EXPLAINED": true,
+      "NO_EMPTY_REPHRASE": true,
+      "NO_REPETITIVE_LEGACY_TEMPLATE": true,
+      "NO_INTERNAL_JARGON_DUMP": true,
+      "NO_METHOD_HIJACK": true,
+      "passed": true
+    },
+    "successorGuard": {
+      "schemaVersion": "PHI-OS-KIR-R2-W16R2A-MODEL-BACKED-ANSWER-GUARD-v1.0.0",
+      "BASE_SEMANTIC_GUARD_PASSED": true,
+      "CUSTOMER_LANGUAGE_LENGTH_OK": true,
+      "NO_INTERNAL_TERMINOLOGY_LEAK": true,
+      "NO_KNOWLEDGE_CHAIN_META_TEMPLATE": true,
+      "NO_UNEXPECTED_SCRIPT_CONTAMINATION": true,
+      "NO_UNEXPECTED_LATIN_LEAK": true,
+      "NO_MODEL_ARTIFACT_LEAK": true,
+      "NO_UNSUPPORTED_HIGH_RISK_EXPANSION": true,
+      "NO_UNSUPPORTED_NOVEL_CAUSAL_TERM": true,
+      "NO_EXCESSIVE_NODE_STYLE_HEADINGS": true,
+      "passed": true
+    },
+    "escalated": false,
+    "attempts": 1,
+    "latencyMs": 3791.66
+  }
+}

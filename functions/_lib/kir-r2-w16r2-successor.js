@@ -29,13 +29,8 @@ function hasUnsupportedHighRiskExpansion(text,{question='',evidencePack=null}={}
 
 function hasUnsupportedNovelCausalTerm(text,{question='',evidencePack=null}={}){
   const t=clean(text);const corpus=evidenceCorpus(question,evidencePack);
-  const novelTerms=['彼此竞争','方向竞争','组织方向','新的惯性','旧模式','尚未取代','重组尚未完成','可见形态'];
-  if(novelTerms.some(term=>t.includes(term)&&!corpus.includes(term)))return true;
-  const causalNovel=[
-    /(?:冲突|矛盾).{0,36}(?:竞争|惯性|旧模式|尚未取代|重组尚未完成)/u,
-    /(?:本质上|标志着|意味着|原因(?:是|在于)|是因为).{0,52}(?:竞争|旧模式|新的惯性)/u
-  ];
-  return causalNovel.some(r=>r.test(t)&&!r.test(corpus));
+  const riskyTerms=['未被处理的张力','张力','相互竞争','彼此竞争','迟疑','后悔','未走之路','收尾不干净','未表达的余量','连续动力','被推开的部分','重新冒出来'];
+  return riskyTerms.some(term=>t.includes(term)&&!corpus.includes(term));
 }
 export function guardKirR2ModelBackedAnswer({understanding,answer,baseGuard,question='',evidencePack=null}={}){
   const text=clean(answer?.text);
@@ -45,11 +40,11 @@ export function guardKirR2ModelBackedAnswer({understanding,answer,baseGuard,ques
   const unexpectedLatin=hasUnexpectedLatin(text,{locale:understanding?.locale,question,evidencePack});
   const modelArtifact=hasModelArtifact(text);
   const unsupportedExpansion=hasUnsupportedHighRiskExpansion(text,{question,evidencePack});
-  const unsupportedNovelCausalTerm=hasUnsupportedNovelCausalTerm(text,{question,evidencePack});
+  const unsupportedNovelCausal=hasUnsupportedNovelCausalTerm(text,{question,evidencePack});
   const excessiveHeading=(text.match(/(?:^|\n)\s*(?:\d+[.、]|第[一二三四五六七八九十]+[、：:]|\*\*[^*]+\*\*)/g)||[]).length>=5;
   const lengthOk=understanding?.locale==='zh-Hans'?text.length>=80:text.length>=120;
-  const passed=baseGuard?.passed===true&&lengthOk&&!internal&&!metaTemplate&&!wrongScript&&!unexpectedLatin&&!modelArtifact&&!unsupportedExpansion&&!unsupportedNovelCausalTerm&&!excessiveHeading;
-  return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-W16R2A-MODEL-BACKED-ANSWER-GUARD-v1.0.0',BASE_SEMANTIC_GUARD_PASSED:baseGuard?.passed===true,CUSTOMER_LANGUAGE_LENGTH_OK:lengthOk,NO_INTERNAL_TERMINOLOGY_LEAK:!internal,NO_KNOWLEDGE_CHAIN_META_TEMPLATE:!metaTemplate,NO_UNEXPECTED_SCRIPT_CONTAMINATION:!wrongScript,NO_UNEXPECTED_LATIN_LEAK:!unexpectedLatin,NO_MODEL_ARTIFACT_LEAK:!modelArtifact,NO_UNSUPPORTED_HIGH_RISK_EXPANSION:!unsupportedExpansion,NO_UNSUPPORTED_NOVEL_CAUSAL_TERM:!unsupportedNovelCausalTerm,NO_EXCESSIVE_NODE_STYLE_HEADINGS:!excessiveHeading,passed});
+  const passed=baseGuard?.passed===true&&lengthOk&&!internal&&!metaTemplate&&!wrongScript&&!unexpectedLatin&&!modelArtifact&&!unsupportedExpansion&&!unsupportedNovelCausal&&!excessiveHeading;
+  return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-W16R2A-MODEL-BACKED-ANSWER-GUARD-v1.0.0',BASE_SEMANTIC_GUARD_PASSED:baseGuard?.passed===true,CUSTOMER_LANGUAGE_LENGTH_OK:lengthOk,NO_INTERNAL_TERMINOLOGY_LEAK:!internal,NO_KNOWLEDGE_CHAIN_META_TEMPLATE:!metaTemplate,NO_UNEXPECTED_SCRIPT_CONTAMINATION:!wrongScript,NO_UNEXPECTED_LATIN_LEAK:!unexpectedLatin,NO_MODEL_ARTIFACT_LEAK:!modelArtifact,NO_UNSUPPORTED_HIGH_RISK_EXPANSION:!unsupportedExpansion,NO_UNSUPPORTED_NOVEL_CAUSAL_TERM:!unsupportedNovelCausal,NO_EXCESSIVE_NODE_STYLE_HEADINGS:!excessiveHeading,passed});
 }
 export async function runKirR2W16R2Successor({question,locale='zh-Hans',profiles,groundingBundle=null,articleSources=[],allowedContext=null,upstreamGroundedAnswer=null,env={},fetcher=globalThis.fetch,provider=null}={}){
   if(!kirR2ModelGatewayEnabled(env)&&!provider)return {status:'KIR_R2_W16R2_GATEWAY_DISABLED',applied:false};

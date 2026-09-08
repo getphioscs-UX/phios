@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "PHI-OS-KIR-R2-W16R2B-PRODUCTION-ADMISSION-RUNTIME-CUTOVER-v1.0.0",
+  "baselineCommit": "415f73c258454c23d1569c9e2c2f381dcfb6a715",
+  "predecessor": "PHI-OS-KIR-R2-W16R2A-GUARD-REMEDIATION-PRODUCTION-ADMISSION-v1.0.0",
+  "status": "BLOCKED_CASE084_HUMAN_ACCEPTANCE_REQUIRED",
+  "evidence": {
+    "full100HumanReview": {
+      "path": "review/KIR-R2-W16R2-100-CASE-HUMAN-REVIEW-v1.json",
+      "accepted": 93,
+      "rejected": 7,
+      "criticalFailures": 0,
+      "gatePassed": true
+    },
+    "targeted7Machine": {
+      "path": "review/KIR-R2-W16R2A-7-CASE-TARGETED-LIVE-RESULTS.json",
+      "applied": 7,
+      "guardPassed": 7
+    },
+    "targeted7Human": {
+      "path": "review/KIR-R2-W16R2A-7-CASE-HUMAN-SPOT-REVIEW-v1.json",
+      "accepted": 6,
+      "rejected": 1,
+      "gatePassed": false
+    },
+    "case084R1Live": {
+      "path": "review/KIR-R2-W16R2A-R1-CASE084-LIVE-RESULT.json",
+      "machineGuardPassed": true
+    },
+    "case084R1Human": {
+      "path": "review/KIR-R2-W16R2A-R1-CASE084-HUMAN-SPOT-REVIEW-v1.json",
+      "decision": "REJECT",
+      "gatePassed": false
+    }
+  },
+  "cutover": {
+    "module": "functions/_lib/kir-r2-production-admission.js",
+    "buildAdmitted": false,
+    "runtimeFlag": "PHIOS_KIR_R2_W16R2B_PRODUCTION_ADMITTED",
+    "gatewayFlag": "PHIOS_KIR_R2_MODEL_GATEWAY_ENABLED",
+    "bothFlagsCannotOverrideBuildGate": true,
+    "productionCutoverAllowedNow": false,
+    "fallback": "existing deterministic KIR-R2 path remains customer runtime authority while admission is blocked"
+  },
+  "authorityBoundary": {
+    "knowledgeAuthorityOwnedByProvider": false,
+    "historicalEvidenceRewritten": false,
+    "articleAuthorityChanged": false,
+    "bookAuthorityChanged": false
+  },
+  "nextGate": {
+    "required": "CASE084_R2_LIVE_AND_HUMAN_ACCEPTED",
+    "full100HumanReviewMustBeRepeated": false,
+    "afterPass": "flip KIR_R2_W16R2B_BUILD_ADMITTED to true in a production-admission successor, keep runtime flag explicit, run wider KIR/integrated regression, then cut over."
+  }
+}

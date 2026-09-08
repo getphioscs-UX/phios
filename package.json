@@ -2226,7 +2226,7 @@
     "check:cx-r30": "node scripts/check-cx-r10-r30-current.mjs R30",
     "check:cx-rebuild": "npm run check:cx-r9-r2 && node scripts/check-cx-r10-r30-current.mjs ALL",
     "check:integrated-phase1": "npm run check:cx-rebuild && node scripts/check-integrated-successor-phase1.mjs",
-    "check:kir-r2:phase2": "node scripts/check-kir-r2-phase2-w4-w16.mjs && node scripts/check-kir-r2-answer-intelligence-correction.mjs && npm run check:kir-r2:w16r2",
+    "check:kir-r2:phase2": "node scripts/check-kir-r2-phase2-w4-w16.mjs && node scripts/check-kir-r2-answer-intelligence-correction.mjs && npm run check:kir-r2:w16r2 && npm run check:kir-r2:w16r2b",
     "check:kir-r2:w16-human": "node scripts/check-kir-r2-w16r-human-review.mjs",
     "build:kir-r2:phase2": "node scripts/build-kir-r2-answer-intelligence-correction.mjs",
     "check:kir-r2": "npm run check:kir-r2:phase1 && npm run check:kir-r2:phase2",
@@ -2239,7 +2239,9 @@
     "check:book3-b02": "node scripts/check-book3-b02-zh-hans-production.mjs",
     "check:kir-r2:w16r2": "node scripts/check-kir-r2-w16r2-model-backed-successor.mjs",
     "run:kir-r2:w16r2-live": "node scripts/run-kir-r2-w16r2-live-campaign.mjs",
-    "build:kir-r2:w16r2-review": "node scripts/build-kir-r2-w16r2-human-review.mjs"
+    "build:kir-r2:w16r2-review": "node scripts/build-kir-r2-w16r2-human-review.mjs",
+    "check:kir-r2:w16r2b": "node scripts/check-kir-r2-w16r2b-production-admission.mjs",
+    "run:kir-r2:w16r2b-case084-r2": "node scripts/run-kir-r2-w16r2b-case084-r2.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
