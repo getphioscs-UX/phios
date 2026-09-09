@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { resolveGitExecutable } from '../git-executable.mjs';
 
 export const VAP_W3_BASELINE = 'bdd9adf0dd28a6de47488089507228eb165e72db';
 export const VAP_W3_CONTRACT = 'content/production/visual-article/contracts/vap-w3-visual-production-authority-v1.json';
@@ -53,7 +54,8 @@ function hasGit(root) {
 export function readBaselineText(root, relative, baseline = VAP_W3_BASELINE) {
   if (hasGit(root)) {
     try {
-      return normalize(execFileSync('git', ['show', `${baseline}:${relative}`], { cwd: root, encoding: 'utf8', windowsHide: true }));
+      const git = resolveGitExecutable();
+      return normalize(execFileSync(git, ['show', `${baseline}:${relative}`], { cwd: root, encoding: 'utf8', windowsHide: true }));
     } catch (error) {
       throw new Error(`VAP_W3_BASELINE_SOURCE_UNAVAILABLE:${relative}:${error.message}`);
     }

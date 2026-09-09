@@ -20,7 +20,7 @@ assert.equal(pub.status,'PUBLICATION_CUSTOMER_PROJECTED_48_OF_48_ZH_HANS_COMPLET
 assert.deepEqual(pub.counts,{plannedArticles:48,zhHansHumanAccepted:48,publicationAdmitted:48,customerProjected:48,blockedByVisualHumanGate:0,englishPublications:0});
 assert.equal(pub.records.length,48);
 assert.ok(pub.records.every(x=>x.publicationStatus==='PUBLISHED_CUSTOMER_PROJECTED'));
-const releaseRows=release.records.filter(x=>x.source==='BOOK3-FINAL-ARTICLE-PRODUCTION');
+const releaseRows=release.records.filter(x=>x.source==='BOOK3-FINAL-ARTICLE-PRODUCTION'&&x.locale==='zh-Hans');
 assert.equal(releaseRows.length,48);
 assert.equal(new Set(releaseRows.map(x=>x.articlePlanId)).size,48);
 assert.equal(new Set(releaseRows.map(x=>x.slug)).size,48);
@@ -74,4 +74,6 @@ assert.equal(pub.boundaries.allZhHansPublicationCustomerProjectionComplete,true)
 console.log('✓ BOOK-3 zh-Hans publication/customer projection closure passed: 48/48 human-accepted Articles are publication-admitted and customer-projected.');
 console.log('✓ All 48 public payloads, 48 release rows and 48 /articles/ route shells are present; the prior 0/47 partial-commit drift is repaired.');
 console.log('✓ B3-ART-044 required visual is explicitly human accepted and projected; all three required Book III visual blockers are closed.');
-console.log('✓ English publication remains 0 by design: semantic parity does not auto-create English editorial/publication authority.');
+console.log('✓ The zh-Hans publication authority remains a frozen 48/48 locale snapshot with English=0; the English publication successor is validated separately below.');
+
+await import('./check-book3-english-publication-freeze.mjs');

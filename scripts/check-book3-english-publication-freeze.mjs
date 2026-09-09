@@ -1,0 +1,43 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const aggregate=items=>crypto.createHash('sha256').update(items.sort((a,b)=>a[0].localeCompare(b[0])).map(([p,d])=>`${p}:${d}`).join('\n')).digest('hex');
+const BASE='0b130813c6b599b48b1d76fe326c44691990b4b5';
+const PLAN='content/knowledge/production-planning/plans/book3-w5-final-article-production-map-v1.json';
+const ZH='content/knowledge/production-planning/publication/book3-zh-hans-publication-customer-integration-v1.json';
+const EN='content/knowledge/production-planning/publication/book3-en-publication-customer-integration-v1.json';
+const BI='content/knowledge/production-planning/publication/book3-bilingual-publication-customer-integration-v1.json';
+const ED='content/knowledge/production-planning/acceptance/book3-en-editorial-publication-admission-v1.json';
+const B01='content/knowledge/production-planning/acceptance/book3-b01-english-semantic-parity-v1.json';
+const VR='content/knowledge/production-planning/visual-disposition/book3-en-required-visual-reuse-v1.json';
+const FR='content/knowledge/production-planning/freeze/book3-final-publication-freeze-v1.json';
+const CT='content/knowledge/production-planning/continuity/book3-publication-continuity-maintenance-v1.json';
+const RELEASE='content/knowledge/public/visual-article-release.json';
+const plan=read(PLAN),zh=read(ZH),en=read(EN),bi=read(BI),ed=read(ED),b01=read(B01),vr=read(VR),freeze=read(FR),continuity=read(CT),release=read(RELEASE);
+assert.equal(plan.articles.length,48);
+assert.equal(b01.status,'MACHINE_SEMANTIC_PARITY_ACCEPTED_8_OF_8');
+assert.equal(b01.records.length,8);
+assert.equal(ed.baselineCommit,BASE);
+assert.equal(ed.status,'EDITORIAL_ADMISSION_COMPLETE_48_OF_48');
+assert.equal(ed.reviewMode,'ASSISTED_EDITORIAL_AUDIT_UNDER_EXPLICIT_TL_PUBLICATION_MANDATE');
+assert.equal(ed.counts.semanticParityReady,48); assert.equal(ed.counts.editoriallyAudited,48); assert.equal(ed.counts.admittedForPublication,48); assert.equal(ed.counts.cjkContaminated,0);
+assert.equal(ed.authorityBoundary.doesNotClaimTLReadEveryEnglishSentence,true);
+assert.ok(ed.records.every(x=>x.editorialDecision==='ADMIT_FOR_ENGLISH_PUBLICATION'&&x.cjkCodepointCount===0&&x.wordCount>=250));
+assert.equal(vr.status,'REQUIRED_VISUALS_ENGLISH_REUSE_ACCEPTED_3_OF_3'); assert.equal(vr.records.length,3); assert.equal(vr.counts.newBinaryAssetsCreated,0);
+for(const r of vr.records){assert.ok(fs.existsSync(r.assetPath));assert.equal(sha(r.assetPath),r.assetSha256);assert.equal(r.existingHumanVisualAcceptance,'ACCEPTED');assert.equal(r.englishReuseDecision,'BILINGUAL_ASSET_REUSE_ACCEPTED_FOR_ENGLISH_PUBLICATION');}
+assert.equal(en.baselineCommit,BASE); assert.equal(en.status,'PUBLICATION_CUSTOMER_PROJECTED_48_OF_48_EN_COMPLETE'); assert.equal(en.records.length,48); assert.deepEqual(en.counts,{plannedArticles:48,semanticParityReady:48,editoriallyAdmitted:48,publicationAdmitted:48,customerProjected:48,requiredVisualReuseAccepted:3});
+const planBy=new Map(plan.articles.map(x=>[x.articlePlanId,x])); const enDig=[];
+for(const r of en.records){const p=planBy.get(r.articlePlanId);assert.ok(p);assert.deepEqual(r.coveredNodeCodes,p.nodeCodes);assert.equal(r.primaryNodeCode,p.primaryNodeCode);assert.ok(fs.existsSync(r.candidatePath));assert.equal(sha(r.candidatePath),r.candidateSha256);assert.ok(fs.existsSync(r.publicArticlePath));assert.equal(sha(r.publicArticlePath),r.publicArticleSha256); const a=read(r.publicArticlePath);enDig.push([r.publicArticlePath,r.publicArticleSha256]);assert.equal(a.locale,'en');assert.equal(a.nodeCode,p.primaryNodeCode);assert.deepEqual(a.coveredNodeCodes,p.nodeCodes);assert.equal(a.publicationStatus,'published');assert.equal(a.publicHref,r.href);assert.equal(a.slug,r.slug);assert.equal(a.provenance.lineage.publicationAuthorityCode,'BOOK3-EN-PUBLICATION-CUSTOMER-INTEGRATION-v1');const englishSurface=JSON.stringify({title:a.title,summary:a.summary,shortAnswer:a.shortAnswer,displayQuestion:a.displayQuestion,sections:a.sections,hero:a.hero,keyConcepts:a.keyConcepts,knowledgeBoundary:a.knowledgeBoundary,taxonomy:a.taxonomy,seo:a.seo,relatedBooks:a.connections?.relatedBooks});assert.equal(/[\u3400-\u9fff]/.test(englishSurface),false,`${r.articlePlanId} public EN customer surface contains CJK`);const blocks=a.sections.flatMap(x=>x.blocks||[]);assert.ok(blocks.filter(x=>x.type==='paragraph').length>=5);assert.ok(blocks.some(x=>x.type==='insight'));assert.ok(blocks.some(x=>x.type==='question'));}
+for(const id of ['B3-ART-013','B3-ART-017','B3-ART-044']){const r=en.records.find(x=>x.articlePlanId===id);const a=read(r.publicArticlePath);assert.equal(a.visualAssets.length,1);assert.equal(a.sections.flatMap(x=>x.blocks||[]).filter(x=>x.type==='figure').length,1);}
+const rows=release.records.filter(x=>x.source==='BOOK3-FINAL-ARTICLE-PRODUCTION'); const zhRows=rows.filter(x=>x.locale==='zh-Hans'),enRows=rows.filter(x=>x.locale==='en');assert.equal(zhRows.length,48);assert.equal(enRows.length,48);assert.equal(new Set(enRows.map(x=>x.articlePlanId)).size,48);assert.ok(enRows.every(x=>x.status==='published'));
+assert.equal(bi.status,'BOOK3_ZH_HANS_AND_EN_PUBLICATION_COMPLETE_96_PUBLIC_PROJECTIONS');assert.deepEqual(bi.counts,{articlePlans:48,locales:2,publicProjections:96,zhHansPublished:48,enPublished:48,requiredVisualsHumanAccepted:3,requiredVisualEnglishReuseAccepted:3});assert.equal(bi.customerRuntime.parallelBook3RuntimeCreated,false);
+assert.equal(freeze.status,'FROZEN_BILINGUAL_PUBLICATION_COMPLETE');assert.equal(freeze.baselineCommit,BASE);assert.deepEqual(freeze.counts,{finalCanonicalNodes:103,articlePlans:48,zhHansPublished:48,enPublished:48,publicPayloads:96,requiredVisuals:3,requiredVisualsHumanAccepted:3});assert.equal(freeze.digests.releaseManifestSha256,sha(RELEASE));const zhDig=zh.records.map(r=>[r.publicArticlePath,r.publicArticleSha256]);assert.equal(freeze.digests.publicPayloadAggregateSha256,aggregate([...zhDig,...enDig]));assert.equal(freeze.freezeBoundary.noNewBook3ArticleIdentityWithoutSuccessor,true);assert.equal(freeze.freezeBoundary.continuityMaintenanceAllowed,true);
+assert.equal(continuity.status,'ACTIVE_POST_FREEZE_MAINTENANCE_POLICY');assert.equal(continuity.nextMaintenanceMode,'SUCCESSOR_ONLY_NO_PARALLEL_RUNTIME');assert.equal(continuity.continuityChecks.verify96PublicPayloads,true);
+const loader=fs.readFileSync('assets/js/knowledge/published-content.js','utf8');assert.ok(loader.includes("record.locale === normalizedLocale"));assert.ok(loader.includes('visual-article-release.json'));assert.ok(loader.includes('loadPublishedArticleBySlug')); const page=fs.readFileSync('assets/js/pages/article.js','utf8');assert.ok(page.includes('getLocale()'));assert.ok(page.includes('Ask helps you understand this published article'));
+console.log('✓ BOOK-3 English editorial/publication admission passed: 48/48 English candidates are parity-ready, editorially audited, published and customer-projected.');
+console.log('✓ B01 English parity successor passed 8/8; B02–B10 existing parity authorities are preserved. No claim is made that TL read every English sentence.');
+console.log('✓ Book III bilingual publication freeze passed: 48 zh-Hans + 48 en public payloads = 96 projections through the existing locale-aware Article runtime.');
+console.log('✓ Required visual English reuse passed 3/3 using the already human-accepted bilingual binaries with locale-specific English alt/captions; no new visual binary authority was created.');
+console.log('✓ Post-freeze continuity maintenance is successor-only; Article identities, Final Canonical Nodes and source bindings cannot be silently repurposed.');
