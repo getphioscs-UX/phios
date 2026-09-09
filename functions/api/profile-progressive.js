@@ -21,6 +21,8 @@ import {
 } from '../profile/academic-bridge-runtime.js';
 import { buildProgressiveProfileView } from '../profile/profile-progressive-ux-runtime.js';
 import { PROFILE_PRODUCTION_AUTHORITY, resolveProfileExecution } from '../profile/profile-production-authority.js';
+import { buildProfileCustomerOutputSuccessor } from '../profile/profile-customer-output-successor.js';
+import { buildProfileCustomerVisualProjection } from '../profile/profile-customer-visual-projection.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -98,6 +100,8 @@ export async function onRequestPost(context){
       careerExploration={provider:rawResult.provider,form:rawResult.form,itemCount:rawResult.itemCount,interests:rawResult.interests,interestRanking:rawResult.interestRanking,careers:rawResult.careers,jobZones:rawResult.jobZones,selectedJobZone:rawResult.selectedJobZone,attribution:rawResult.attribution,boundaries:['INTEREST_EXPLORATION_ONLY','PROVIDER_RAW_FIT_PRESERVED','NOT_JOB_FIT_GUARANTEE','NO_EMPLOYMENT_DECISION_AUTHORITY']};
     } else return json({ok:false,error:'PROFILE_MODE_NOT_ADMITTED'},400);
     const view=await buildProgressiveProfileView({mode,profileSignals:signals,participantRef,asOfDate:body.asOfDate||assessmentDate||null,locale:lang,customerPublishable:exec.customerPublishable,preview:exec.preview});
-    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview}});
+    const customerOutput=buildProfileCustomerOutputSuccessor(view);
+    const visualProjection=buildProfileCustomerVisualProjection({progressiveView:view,customerOutput,confirmations:Array.isArray(body.patternConfirmations)?body.patternConfirmations:[],participantRef,asOfDate:body.asOfDate||assessmentDate||null});
+    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,visualProjection,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview,profileVisualProjectionOwner:'PVP_R1',profileTruthOwner:'PROFILE_PPR'}});
   }catch(error){return errorResponse(error)}
 }

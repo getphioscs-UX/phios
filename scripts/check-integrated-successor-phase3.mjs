@@ -8,6 +8,7 @@ const profile=read('content/governance/integrated-successor/acceptance/integrate
 const pfig=read('content/product-visual-platform-r1/profile/pfig-authority-admission-v1.json');
 const projection=read('content/product-visual-platform-r1/profile/ir/profile-customer-visual-projection-v1.json');
 const w7=read('content/product-visual-platform-r1/acceptance/pvp-r1-vis-w7-profile-projection-ir-v1.json');
+const w8=read('content/product-visual-platform-r1/acceptance/pvp-r1-vis-w8-profile-visual-mvp-v1.json');
 assert.equal(final.productionGate.productionAdmissionAllowed,true);
 assert.equal(final.effectiveSuccessorAcceptance.effectiveAccepted,100);
 assert.equal(census.status,'CURRENT_VISUAL_CENSUS_COMPLETE');
@@ -26,6 +27,8 @@ assert.deepEqual(projection.pfigOrder,['PFIG-001','PFIG-002','PFIG-003','PFIG-00
 assert.equal(projection.globalBoundaries.renderingImplementedByThisWork,false);
 assert.equal(w7.counts.irReady,9);
 assert.equal(w7.counts.blocked,0);
+assert.equal(w8.status,'MACHINE_ACCEPTED_MVP_4_OF_4');
+assert.equal(w8.implementedCount,4);
 console.log('✓ Integrated Successor PHASE 3 Profile projection gate passed.');
-console.log('  PVP W0–W5 foundation + Profile/PPR 9/9 authority + W7 9/9 visual IR are accepted.');
-console.log('  PVP remains projection-only; W8 Profile Visual MVP is the next gate and renderer cutover is not yet claimed complete.');
+console.log('  PVP W0–W5 foundation + Profile/PPR 9/9 authority + W7 9/9 visual IR + W8 4/4 MVP renderers are accepted.');
+console.log('  PVP remains projection-only; W9 Profile Free/Paid is the next gate.');

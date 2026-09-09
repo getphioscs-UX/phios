@@ -1,3 +1,4 @@
+import { mountProfileVisualMvp } from '../visuals/profile-visual-mvp.js';
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const state={mode:null,config:null,onetForm:'MINI_30',ipipForm:'IPIP_BIG_FIVE_50'};
@@ -70,6 +71,8 @@ async function loadCareerDetail(button){const card=button.closest('.prf-career-c
 function valueHtml(value){if(value==null)return '<span>—</span>';if(typeof value!=='object')return `<strong>${esc(value)}</strong>`;return `<dl class="prf-value-list">${Object.entries(value).filter(([,v])=>v!==null&&typeof v!=='object').map(([k,v])=>`<div><dt>${esc(humanize(k))}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`}
 function render(data){
   const view=data.view;results.hidden=false;
+  const visualMvp=$('[data-prf-visual-mvp]');
+  mountProfileVisualMvp(visualMvp,data.visualProjection,{locale:locale()});
   let visual='';
   if(view.careerInterest)visual=interestBars(view.careerInterest);
   else if(data.profileSummary)visual=bigFiveBars(data.profileSummary);
