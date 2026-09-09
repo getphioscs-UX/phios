@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-PATTERN-CONFIRMATION-CONTRACT-v1.0.0",
+  "work": "PROFILE-PPR-ALL-PFIG-AUTHORITY",
+  "baselineCommit": "3eea58913bb7188089a2912ba6de1a0a5bf91bf0",
+  "status": "OWNER_CONTRACT_ADMITTED",
+  "owner": "PROFILE_PPR",
+  "purpose": "Create a safe basis for customer-facing strength/cost, work-expression, relationship-expression and context visuals by recording explicit customer confirmation instead of inferring generic strengths, weaknesses or fit from heterogeneous scores.",
+  "inputSchema": {
+    "participantRef": "required opaque participant reference",
+    "signalRef": "required governed Profile signal or perspective reference",
+    "lensId": "required admitted visual lens",
+    "contextType": "optional WORK | RELATIONSHIP | CURRENT_REALITY | GENERAL",
+    "contextRef": "optional governed context reference",
+    "confirmation": "HELPS_ME | COSTS_ME | BOTH | NEUTRAL | UNSURE",
+    "note": "optional customer-authored observation",
+    "observedAt": "required ISO date/time"
+  },
+  "derivedCustomerOutputs": {
+    "strengthEvidence": "Only HELPS_ME or BOTH confirmations may appear on the strength side; label as an observed resource, not an objective strength.",
+    "costEvidence": "Only COSTS_ME or BOTH confirmations, or already admitted SOURCE_TENSION/POTENTIAL_FRICTION_TARGET evidence, may appear on the cost side; never relabel a low score as weakness.",
+    "workExpression": "Requires WORK context confirmation or native O*NET interest evidence; no job-fit conclusion.",
+    "relationshipExpression": "Requires RELATIONSHIP context confirmation or existing relationship-profile evidence; no compatibility score.",
+    "decisionEvidence": "May display source-scoped decision/planning/risk signals plus explicit Current Reality confirmation; no fixed decision type.",
+    "environmentEvidence": "May display ENVIRONMENT_FIT self-report plus explicit Current Reality context; no objective environment-fit conclusion."
+  },
+  "rules": {
+    "customerConfirmationCreatesObjectiveTraitTruth": false,
+    "lowScoreMayBecomeWeaknessWithoutConfirmation": false,
+    "highScoreMayBecomeStrengthWithoutConfirmation": false,
+    "sourceNativePositiveNegativeSemanticsMayBePreserved": true,
+    "automaticPersistenceAllowed": false,
+    "explicitConsentRequired": true
+  }
+}

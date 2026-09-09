@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-PPR-VISUAL-OUTPUT-AUTHORITY-v2.0.0",
+  "work": "PROFILE-PPR-ALL-PFIG-AUTHORITY",
+  "baselineCommit": "3eea58913bb7188089a2912ba6de1a0a5bf91bf0",
+  "predecessor": "content/profile/customer-output/profile-ppr-customer-output-successor-v1.json",
+  "status": "ALL_PFIG_SEMANTIC_AUTHORITY_ADMITTED",
+  "truthOwner": "PROFILE_PPR",
+  "consumer": "PVP_R1",
+  "authorityModel": "VISUAL-SAFE DERIVED CUSTOMER OUTPUTS WITH SOURCE/CONTEXT PROVENANCE",
+  "keyDecision": "All PFIG IDs may be produced, but visual permission does not create a universal personality scale. Each PFIG consumes an explicitly governed source-scoped, customer-confirmed, context-scoped or owner-mapped output.",
+  "requiredContracts": [
+    "content/profile/customer-output/profile-visual-synthesis-lens-registry-v1.json",
+    "content/profile/customer-output/profile-pattern-confirmation-contract-v1.json",
+    "content/profile/customer-output/profile-cross-source-visual-state-mapping-v1.json"
+  ],
+  "pfigAuthority": [
+    {
+      "pfig": "PFIG-001",
+      "name": "PROFILE-DIMENSION-MAP",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Profile evidence by admitted visual lens and original source lane.",
+      "dataBasis": [
+        "sourceScopedDimensions",
+        "profile-visual-synthesis-lens-registry-v1"
+      ],
+      "rules": [
+        "render source lane separately",
+        "show missing axes as missing",
+        "never aggregate heterogeneous instruments into one master dimension score"
+      ]
+    },
+    {
+      "pfig": "PFIG-002",
+      "name": "PROFILE-PATTERN-RADAR",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Source-aware pattern radar. Each series belongs to one admitted source/instrument; axes are owner-defined navigation lenses or the native self-assessment domains.",
+      "dataBasis": [
+        "selfAssessmentRadar",
+        "sourceScopedDimensions",
+        "profile-visual-synthesis-lens-registry-v1"
+      ],
+      "rules": [
+        "multiple source series allowed",
+        "no cross-instrument score equivalence",
+        "no synthetic master polygon",
+        "null axes remain blank",
+        "native raw range/provenance available on demand"
+      ]
+    },
+    {
+      "pfig": "PFIG-003",
+      "name": "PROFILE-STRENGTH-COST-MAP",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Observed resources and costs, not fixed strengths/weaknesses.",
+      "dataBasis": [
+        "profile-pattern-confirmation-contract-v1",
+        "tensionSignals"
+      ],
+      "rules": [
+        "strength side requires HELPS_ME/BOTH or source-native explicitly positive resource semantics",
+        "cost side requires COSTS_ME/BOTH or admitted tension/friction evidence",
+        "never infer strength from high score or weakness from low score"
+      ]
+    },
+    {
+      "pfig": "PFIG-004",
+      "name": "PROFILE-CONTEXT-VARIATION",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "How the same Profile evidence appears across explicitly recorded contexts.",
+      "dataBasis": [
+        "currentReality",
+        "contextEvidence",
+        "profile-pattern-confirmation-contract-v1"
+      ],
+      "rules": [
+        "context labels must come from customer/reality evidence",
+        "no stable context-dependent personality type inferred",
+        "single-context data renders one context plus UNKNOWN for unobserved contexts"
+      ]
+    },
+    {
+      "pfig": "PFIG-005",
+      "name": "PROFILE-CONVERGENCE-DIVERGENCE",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Owner-governed projection of cross-source agreement, divergence, context dependence or unknown.",
+      "dataBasis": [
+        "crossSource",
+        "profile-cross-source-visual-state-mapping-v1"
+      ],
+      "rules": [
+        "native group remains visible",
+        "CONTEXT_DEPENDENT follows owner mapping only",
+        "complementary is not automatically convergence",
+        "fallback UNKNOWN"
+      ]
+    },
+    {
+      "pfig": "PFIG-006",
+      "name": "PROFILE-WORK-MAP",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Work interest and observed work expression.",
+      "dataBasis": [
+        "careerInterest",
+        "WORK confirmations from profile-pattern-confirmation-contract-v1",
+        "sourceScopedDimensions where explicitly mapped to WORK_INTEREST_EXPRESSION"
+      ],
+      "rules": [
+        "O*NET remains interest evidence",
+        "customer work observations may add expression evidence",
+        "no ability/job-fit/employment recommendation/guarantee"
+      ]
+    },
+    {
+      "pfig": "PFIG-007",
+      "name": "PROFILE-RELATIONSHIP-MAP",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Relationship interaction evidence and observation targets.",
+      "dataBasis": [
+        "relationshipEvidence",
+        "RELATIONSHIP confirmations from profile-pattern-confirmation-contract-v1",
+        "RELATIONSHIP_REGULATION self-report facet"
+      ],
+      "rules": [
+        "participant identity remains distinct",
+        "no compatibility percentage",
+        "no partner hidden-state inference",
+        "no outcome prediction"
+      ]
+    },
+    {
+      "pfig": "PFIG-008",
+      "name": "PROFILE-DECISION-MAP",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Current decision evidence across planning, risk awareness, decision discipline, relevant task evidence and Current Reality observations.",
+      "dataBasis": [
+        "sourceScopedDimensions mapped to DECISION_STEWARDSHIP",
+        "currentReality",
+        "GENERAL/CURRENT_REALITY confirmations"
+      ],
+      "rules": [
+        "customer label must use decision evidence/current decision pattern rather than fixed decision type",
+        "no universal decision-style identity",
+        "no financial advice"
+      ]
+    },
+    {
+      "pfig": "PFIG-009",
+      "name": "PROFILE-REALITY-BRIDGE",
+      "authorityState": "ALLOWED",
+      "customerMeaning": "Bridge from Profile evidence to Current Reality and admitted observation questions.",
+      "dataBasis": [
+        "currentReality",
+        "contextEvidence",
+        "realityQuestions",
+        "contradictions"
+      ],
+      "rules": [
+        "questions remain observation prompts",
+        "Current Reality may contextualize but not prove/disprove source model",
+        "no automatic directive"
+      ]
+    }
+  ],
+  "globalBoundaries": {
+    "universalMasterScoreAllowed": false,
+    "crossInstrumentScoreEquivalenceAllowed": false,
+    "diagnosisAllowed": false,
+    "objectivePersonalityTruthCreated": false,
+    "jobFitGuaranteeAllowed": false,
+    "compatibilityPercentageAllowed": false,
+    "partnerMindReadingAllowed": false,
+    "pvpMayInventMeaning": false,
+    "emptyOrUnknownStateRequiredWhenEvidenceInsufficient": true
+  },
+  "exitAssertions": {
+    "PROFILE_TRUTH_OWNER_UNCHANGED": true,
+    "PROFILE_PPR_VISUAL_OUTPUT_AUTHORITY_READY": true,
+    "ALL_PFIGS_AUTHORITY_ALLOWED": true,
+    "NO_PVP_PROFILE_MEANING_AUTHORITY": true,
+    "PVP_R1_VIS_W7_ALLOWED_NOW": true,
+    "PVP_R1_VIS_W8_RENDERING_ALLOWED_AFTER_W7_IR": true
+  }
+}
