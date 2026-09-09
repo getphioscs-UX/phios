@@ -1,6 +1,7 @@
 import {esc} from '../../surfaces/runtime-ui.js';
 import {PHI_MANDALA_VIEWBOX_SIZE,PHI_MANDALA_CENTER,PHI_MANDALA_LAYER_GEOMETRY,ringSegmentGeometry,circularNodeGeometry,connectorGeometry,radialBarGeometry,textRotation,polarPoint} from './mandala-geometry.js';
 import {customerLayerLabel,customerLayerExplanation,selectedCatalog,authorityLabel} from './customer-language.js';
+import {resolveMandalaVisualState,resolveMandalaDriverRelation} from './mandala-hierarchy.js';
 
 const SCHEMA='PHI-OS-ECR-CUSTOMER-MANDALA-PROJECTION-v1.0.0';
 const EXPERIENCE_STATES=new Set(['FREE_SNAPSHOT','PAID_DEPTH']);
@@ -18,14 +19,7 @@ const compact=(value,max=18)=>{const s=String(value||'').replace(/\s+/g,' ').tri
 const experience=value=>EXPERIENCE_STATES.has(value)?value:'PAID_DEPTH';
 const isFree=value=>experience(value)==='FREE_SNAPSHOT';
 
-function stateFor({layer,selected=false,relation='',driverRank=null,experienceState='PAID_DEPTH'}){
-  if(!selected)return 'BACKGROUND';
-  if(relation==='SUPPORTING')return isFree(experienceState)?'LOCKED_DEPTH':'SUPPORTING_ACTIVE';
-  if(layer==='R9'&&relation==='PRIMARY')return 'PRIMARY_ACTIVE';
-  if(layer==='D12')return Number(driverRank)===1?'PRIMARY_ACTIVE':isFree(experienceState)?'LOCKED_DEPTH':'SUPPORTING_ACTIVE';
-  if(isFree(experienceState)&&['M8','H64','A8'].includes(layer))return 'LOCKED_DEPTH';
-  return ['CC12','G16','Q16','R9'].includes(layer)?'PRIMARY_ACTIVE':'SUPPORTING_ACTIVE';
-}
+function stateFor(args){return resolveMandalaVisualState(args);}
 function accessibleCopy(projection,state,copy){return state==='LOCKED_DEPTH'?local(projection,'A deeper governed layer is available after access is granted.','这是尚未展开的受治理深层结构；获得相应访问权限后才会呈现其个人化细节。'):copy;}
 function nodeAttrs({projection,layer,id,title,copy,meta='',selected=false,relation='',visualState='BACKGROUND'}){
   const safeCopy=accessibleCopy(projection,visualState,copy),safeTitle=visualState==='LOCKED_DEPTH'?local(projection,'Deeper layer','更深层结构'):title,safeMeta=visualState==='LOCKED_DEPTH'?'':meta;
@@ -53,8 +47,8 @@ function capabilityNetwork(projection,experienceState){
 }
 function driverProfile(projection,experienceState){
   const catalog=arr(projection.catalogs?.drivers),stack=arr(projection.selected?.driverPriority),index=new Map(stack.map(item=>[item.driverId,item])),max=Math.max(...stack.map(item=>n(item.baselineAffinity)||0),0.000001);
-  return catalog.map(item=>{const d=index.get(item.driverId)||{},g=radialBarGeometry(item.ordinal,catalog.length,d.baselineAffinity,max),selected=d.rank===1,title=isZh(projection)?item.labelZhHans:item.label,copy=local(projection,'Birth-baseline affinity. This is not a claim about current Reality priority.','出生基线亲和度；这不是对当前现实优先级的判断。'),classLabel=d.rank===1?local(projection,'Primary baseline driver','首位基线驱动'):Number(d.rank)<=3?local(projection,'Supporting baseline driver','辅助基线驱动'):local(projection,'Background baseline driver','背景基线驱动'),technicalMeta=local(projection,`Rank ${d.rank??'—'} · distance ${deg(d.angularDistanceDegrees)}`,`第 ${d.rank??'—'} 位 · 距离 ${deg(d.angularDistanceDegrees)}`),visualState=stateFor({layer:'D12',selected,driverRank:d.rank,experienceState});
-    return `<g class="cx-ecr-mandala__driver${selected?' is-selected':''}${visualState==='LOCKED_DEPTH'?' is-locked-depth':''}${visualState!=='BACKGROUND'?' is-unlocked':''}" ${nodeAttrs({projection,layer:'D12',id:item.driverId,title,copy,meta:classLabel,selected,visualState})} data-technical-meta="${data(technicalMeta)}"><line x1="${g.start.x.toFixed(2)}" y1="${g.start.y.toFixed(2)}" x2="${g.end.x.toFixed(2)}" y2="${g.end.y.toFixed(2)}"/><circle cx="${g.end.x.toFixed(2)}" cy="${g.end.y.toFixed(2)}" r="${selected?4:2.5}"/><title>${esc(`${selected?local(projection,'Top baseline driver','首位基线驱动'):'Driver'} · ${item.driverId} · ${title} · ${classLabel}`)}</title></g>`;}).join('');
+  return catalog.map(item=>{const d=index.get(item.driverId)||{},g=radialBarGeometry(item.ordinal,catalog.length,d.baselineAffinity,max),selected=d.rank===1,relation=resolveMandalaDriverRelation(d.rank),supporting=relation==='SUPPORTING',title=isZh(projection)?item.labelZhHans:item.label,copy=local(projection,'Birth-baseline affinity. This is not a claim about current Reality priority.','出生基线亲和度；这不是对当前现实优先级的判断。'),classLabel=d.rank===1?local(projection,'Primary baseline driver','首位基线驱动'):Number(d.rank)<=3?local(projection,'Supporting baseline driver','辅助基线驱动'):local(projection,'Background baseline driver','背景基线驱动'),technicalMeta=local(projection,`Rank ${d.rank??'—'} · distance ${deg(d.angularDistanceDegrees)}`,`第 ${d.rank??'—'} 位 · 距离 ${deg(d.angularDistanceDegrees)}`),visualState=stateFor({layer:'D12',selected,relation,driverRank:d.rank,experienceState});
+    return `<g class="cx-ecr-mandala__driver${selected?' is-selected':''}${supporting?' is-supporting':''}${visualState==='LOCKED_DEPTH'?' is-locked-depth':''}${visualState!=='BACKGROUND'?' is-unlocked':''}" ${nodeAttrs({projection,layer:'D12',id:item.driverId,title,copy,meta:classLabel,selected,relation,visualState})} data-technical-meta="${data(technicalMeta)}"><line x1="${g.start.x.toFixed(2)}" y1="${g.start.y.toFixed(2)}" x2="${g.end.x.toFixed(2)}" y2="${g.end.y.toFixed(2)}"/><circle cx="${g.end.x.toFixed(2)}" cy="${g.end.y.toFixed(2)}" r="${selected?4:supporting?3.25:2.5}"/><title>${esc(`${selected?local(projection,'Top baseline driver','首位基线驱动'):supporting?local(projection,'Supporting baseline driver','辅助基线驱动'):'Driver'} · ${item.driverId} · ${title} · ${classLabel}`)}</title></g>`;}).join('');
 }
 function configurationRing(projection,experienceState){
   const xs=arr(projection.catalogs?.configurations),selectedId=projection.selected?.configurationId,layer=PHI_MANDALA_LAYER_GEOMETRY.H64;
