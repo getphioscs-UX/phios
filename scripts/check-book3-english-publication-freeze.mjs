@@ -41,3 +41,5 @@ console.log('✓ B01 English parity successor passed 8/8; B02–B10 existing par
 console.log('✓ Book III bilingual publication freeze passed: 48 zh-Hans + 48 en public payloads = 96 projections through the existing locale-aware Article runtime.');
 console.log('✓ Required visual English reuse passed 3/3 using the already human-accepted bilingual binaries with locale-specific English alt/captions; no new visual binary authority was created.');
 console.log('✓ Post-freeze continuity maintenance is successor-only; Article identities, Final Canonical Nodes and source bindings cannot be silently repurposed.');
+
+await import('./check-book3-post-freeze-continuity-maintenance.mjs');

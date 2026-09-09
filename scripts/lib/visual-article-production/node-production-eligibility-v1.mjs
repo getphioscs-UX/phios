@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { resolveGitExecutable } from '../git-executable.mjs';
 
 export const VAP_W4_BASELINE = 'cdcb11be3e2db494fa1c40c7814604e2de31f34e';
 export const VAP_W4_CONTRACT = 'content/production/visual-article/contracts/vap-w4-node-production-eligibility-v1.json';
@@ -53,13 +54,8 @@ export const stableValue = value => Array.isArray(value)
     : value;
 export const stableJson = value => `${JSON.stringify(stableValue(value), null, 2)}\n`;
 
-function gitAvailable(root) {
-  try {
-    execFileSync('git', ['rev-parse', '--git-dir'], { cwd: root, stdio: 'ignore', windowsHide: true });
-    return true;
-  } catch {
-    return false;
-  }
+function hasGit(root) {
+  return fs.existsSync(path.join(root, '.git'));
 }
 
 function readBaselineText(root, relative) {
@@ -67,9 +63,10 @@ function readBaselineText(root, relative) {
   if (baselineTextCache.has(cacheKey)) return baselineTextCache.get(cacheKey);
 
   let source;
-  if (gitAvailable(root)) {
+  if (hasGit(root)) {
     try {
-      source = execFileSync('git', ['show', `${VAP_W4_BASELINE}:${relative}`], {
+      const git = resolveGitExecutable();
+      source = execFileSync(git, ['show', `${VAP_W4_BASELINE}:${relative}`], {
         cwd: root,
         encoding: 'utf8',
         windowsHide: true,
@@ -77,7 +74,7 @@ function readBaselineText(root, relative) {
         maxBuffer: GIT_SHOW_MAX_BUFFER
       });
     } catch (error) {
-      throw new Error(`VAP_W4_BASELINE_SOURCE_UNAVAILABLE: ${relative}: ${error.message}`);
+      throw new Error(`VAP_W4_BASELINE_SOURCE_UNAVAILABLE:${relative}:${error.message}`);
     }
   } else {
     source = fs.readFileSync(path.join(root, relative), 'utf8');
