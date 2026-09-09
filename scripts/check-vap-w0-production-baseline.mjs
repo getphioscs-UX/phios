@@ -3,8 +3,10 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
+import { resolveGitExecutable } from './lib/git-executable.mjs';
 
 const root = process.cwd();
+const gitExecutable = resolveGitExecutable();
 const baselinePath = 'content/production/visual-article/baseline/vap-production-baseline-v1.json';
 const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const readJson = relative => JSON.parse(read(relative));
@@ -39,12 +41,12 @@ assert.equal(actualBaselineDigest, expectedDigest, 'VAP-W0 baseline self-digest 
 
 const gitAvailable = hasGitRepository();
 if (gitAvailable) {
-  execFileSync('git', ['cat-file', '-e', `${baseline.baselineCommit}^{commit}`], { cwd: root, stdio: 'pipe' });
+  execFileSync(gitExecutable, ['cat-file', '-e', `${baseline.baselineCommit}^{commit}`], { cwd: root, stdio: 'pipe' });
 }
 
 for (const [relative, expected] of Object.entries(baseline.sourceDigests)) {
   const source = gitAvailable
-    ? execFileSync('git', ['show', `${baseline.baselineCommit}:${relative}`], { cwd: root })
+    ? execFileSync(gitExecutable, ['show', `${baseline.baselineCommit}:${relative}`], { cwd: root })
     : normalizeTextBytes(fs.readFileSync(path.join(root, relative)));
   assert.equal('sha256:' + sha256(source), expected, `Baseline source digest mismatch: ${relative}`);
 }
@@ -117,7 +119,7 @@ console.log('  Cloudflare deployment SHA alignment remains explicitly deferred t
 
 function hasGitRepository() {
   try {
-    execFileSync('git', ['rev-parse', '--is-inside-work-tree'], { cwd: root, stdio: 'pipe' });
+    execFileSync(gitExecutable, ['rev-parse', '--is-inside-work-tree'], { cwd: root, stdio: 'pipe' });
     return true;
   } catch {
     return false;

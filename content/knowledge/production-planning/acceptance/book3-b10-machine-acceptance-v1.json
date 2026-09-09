@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "PHI-OS-BOOK3-B10-MACHINE-ACCEPTANCE-v1.0.0",
+  "stage": "BOOK3-B10-MACHINE-ACCEPTANCE",
+  "status": "MACHINE_ACCEPTED_ZH_HANS_EDITORIAL_CANDIDATES_HUMAN_PENDING",
+  "baselineCommit": "6933bc29dba65d0f7744b24d8fdd68ff754290b4",
+  "batchCode": "B3-B10",
+  "manifestPath": "content/knowledge/production-planning/production/book3-b10/manifest-v1.json",
+  "checkerPath": "scripts/check-book3-b10-zh-hans-production.mjs",
+  "counts": {
+    "articleCandidates": 3,
+    "finalCanonicalNodes": 8,
+    "sourceSections": 8,
+    "humanAcceptedArticles": 0
+  },
+  "machineGates": {
+    "frozenW5ArticleGroupingExact": true,
+    "sourceSectionDigestAndPageBindingsExact": true,
+    "finalCanonicalNodeBindingsExact": true,
+    "articleBlockContractValid": true,
+    "coordinationContinuityAndExpansionBoundaryPreserved": true,
+    "canonicalMutationDetected": false,
+    "englishCandidateCreated": false,
+    "publicationAuthorityCreated": false
+  },
+  "candidateDigests": [
+    {
+      "candidateId": "B3-B10-A46",
+      "path": "content/knowledge/production-planning/production/book3-b10/candidates/zh-Hans/b3-b10-a46.zh-Hans.v1.json",
+      "sha256": "88a38a39b9c22dc7de03c3cb2bdd669ffc0397b42c08782b114405c9bb457368"
+    },
+    {
+      "candidateId": "B3-B10-A47",
+      "path": "content/knowledge/production-planning/production/book3-b10/candidates/zh-Hans/b3-b10-a47.zh-Hans.v1.json",
+      "sha256": "a37ce3bda794a8ef32ff427cd8a2b98656f6cd0981c5431653f09f99d187ac06"
+    },
+    {
+      "candidateId": "B3-B10-A48",
+      "path": "content/knowledge/production-planning/production/book3-b10/candidates/zh-Hans/b3-b10-a48.zh-Hans.v1.json",
+      "sha256": "530f20f8af57c89957b7496baab159ad556f77e53a70aad1fa296a337ae9d04d"
+    }
+  ],
+  "humanGate": {
+    "status": "PENDING_0_OF_3",
+    "machineAcceptanceCannotSelfAcceptHumanGate": true,
+    "requiredExplicitAcceptCount": 3
+  },
+  "nextGate": "Human editorial review of the three zh-Hans B10 Articles."
+}
