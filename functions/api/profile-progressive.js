@@ -23,6 +23,7 @@ import { buildProgressiveProfileView } from '../profile/profile-progressive-ux-r
 import { PROFILE_PRODUCTION_AUTHORITY, resolveProfileExecution } from '../profile/profile-production-authority.js';
 import { buildProfileCustomerOutputSuccessor } from '../profile/profile-customer-output-successor.js';
 import { buildProfileCustomerVisualProjection } from '../profile/profile-customer-visual-projection.js';
+import { buildProfileVisualDepthProjection } from '../profile/profile-visual-depth-projection.js';
 
 const H={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:H});
@@ -102,6 +103,7 @@ export async function onRequestPost(context){
     const view=await buildProgressiveProfileView({mode,profileSignals:signals,participantRef,asOfDate:body.asOfDate||assessmentDate||null,locale:lang,customerPublishable:exec.customerPublishable,preview:exec.preview});
     const customerOutput=buildProfileCustomerOutputSuccessor(view);
     const visualProjection=buildProfileCustomerVisualProjection({progressiveView:view,customerOutput,confirmations:Array.isArray(body.patternConfirmations)?body.patternConfirmations:[],participantRef,asOfDate:body.asOfDate||assessmentDate||null});
-    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,visualProjection,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview,profileVisualProjectionOwner:'PVP_R1',profileTruthOwner:'PROFILE_PPR'}});
+    const visualDepthProjection=buildProfileVisualDepthProjection({visualProjection});
+    return json({ok:true,mode,view,reasoningView,careerExploration,profileSummary,financialSummary,visualProjection:visualDepthProjection.freeSnapshot,visualDepthProjection,governance:{automaticPersistence:false,rawResultStored:false,rawAnswersReturned:false,sourceClassPreserved:true,customerPublishable:exec.customerPublishable,preview:exec.preview,profileVisualProjectionOwner:'PVP_R1',profileTruthOwner:'PROFILE_PPR',profileVisualDepth:'FREE_SNAPSHOT',clientPaidSelfUpgradeAllowed:false}});
   }catch(error){return errorResponse(error)}
 }

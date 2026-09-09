@@ -1,4 +1,4 @@
-import { mountProfileVisualMvp } from '../visuals/profile-visual-mvp.js';
+import { mountProfileFreePaid } from '../visuals/profile-free-paid.js';
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const state={mode:null,config:null,onetForm:'MINI_30',ipipForm:'IPIP_BIG_FIVE_50'};
@@ -72,7 +72,7 @@ function valueHtml(value){if(value==null)return '<span>—</span>';if(typeof val
 function render(data){
   const view=data.view;results.hidden=false;
   const visualMvp=$('[data-prf-visual-mvp]');
-  mountProfileVisualMvp(visualMvp,data.visualProjection,{locale:locale()});
+  mountProfileFreePaid(visualMvp,data.visualDepthProjection,{locale:locale()});
   let visual='';
   if(view.careerInterest)visual=interestBars(view.careerInterest);
   else if(data.profileSummary)visual=bigFiveBars(data.profileSummary);
