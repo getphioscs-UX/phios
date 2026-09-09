@@ -2245,9 +2245,10 @@
     "check:kir-r2:w16r-final": "node scripts/check-kir-r2-w16r-final-human-acceptance.mjs",
     "check:pvp-r1:foundation": "node scripts/check-pvp-r1-vis-w0-w5-foundation.mjs",
     "check:pvp-r1:profile-output-contract": "node scripts/check-pvp-r1-vis-w6-profile-customer-output-contract.mjs",
-    "check:integrated-phase3": "npm run check:kir-r2:w16r-final && npm run check:kir-r2:w16r2b && npm run check:pvp-r1:foundation && node scripts/check-integrated-successor-phase3.mjs",
+    "check:integrated-phase3": "npm run check:kir-r2:w16r-final && npm run check:kir-r2:w16r2b && npm run check:pvp-r1:foundation && npm run check:pvp-r1:profile-projection-ir && node scripts/check-integrated-successor-phase3.mjs",
     "check:profile:customer-output-successor": "node scripts/check-profile-ppr-customer-output-successor.mjs",
-    "check:profile:pfig-authority": "node scripts/check-profile-ppr-all-pfig-visual-authority.mjs"
+    "check:profile:pfig-authority": "node scripts/check-profile-ppr-all-pfig-visual-authority.mjs",
+    "check:pvp-r1:profile-projection-ir": "node scripts/check-pvp-r1-vis-w7-profile-projection-ir.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
