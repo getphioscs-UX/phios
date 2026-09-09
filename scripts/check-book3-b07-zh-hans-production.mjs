@@ -1,13 +1,85 @@
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
-const read=p=>JSON.parse(fs.readFileSync(p,'utf8')); const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'); const exists=p=>fs.existsSync(p);
-const BASE='80bae71675ef8b196cd10402ea0ccbf9b833ee57'; const PLAN='content/knowledge/production-planning/plans/book3-w5-final-article-production-map-v1.json', MAN='content/knowledge/production-planning/production/book3-b07/manifest-v1.json', REV='content/knowledge/production-planning/review/book3-b07-zh-hans-editorial-review-v1.json', MACH='content/knowledge/production-planning/acceptance/book3-b07-machine-acceptance-v1.json', REG='content/knowledge/registry/successors/kau-r6e-book3-final/canonical-nodes-v1.json', INV='content/knowledge/manuscripts/extraction/book-3-full-section-inventory-v1.json';
-const plan=read(PLAN),m=read(MAN),review=read(REV),machine=read(MACH),registry=read(REG),inventory=read(INV); const sections=new Map(inventory.sections.filter(x=>x.segmentType==='SECTION').map(x=>[x.sectionCode,x])); const nodes=new Map(registry.nodes.map(x=>[x.nodeCode,x])); const bp=plan.articles.filter(x=>x.batchCode==='B3-B07'), batch=plan.batches.find(x=>x.batchCode==='B3-B07');
-assert.equal(bp.length,6); assert.equal(batch.articleCount,6); assert.equal(batch.nodeCoverageCount,10); assert.equal(batch.status,'planned'); assert.deepEqual(bp.map(x=>x.articlePlanId),['B3-ART-030','B3-ART-031','B3-ART-032','B3-ART-033','B3-ART-034','B3-ART-035']); assert.equal(m.baselineCommit,BASE); assert.equal(m.status,'ZH_HANS_SOURCE_BOUND_EDITORIAL_CANDIDATES_READY_HUMAN_REVIEW_PENDING'); assert.deepEqual(m.counts,{articleCandidates:6,canonicalNodeCoverage:10,sourceSectionBindings:10,localesProduced:1,englishCandidates:0,humanAcceptedArticles:0,publishedArticles:0}); assert.equal(review.status,'PENDING_HUMAN_EDITORIAL_REVIEW'); assert.equal(review.requiredAcceptCount,6); assert.ok(review.records.every(x=>x.decision==='PENDING')); assert.equal(machine.status,'MACHINE_ACCEPTED_ZH_HANS_EDITORIAL_CANDIDATES_HUMAN_PENDING'); assert.equal(machine.humanGate.status,'PENDING_0_OF_6');
-const planBy=new Map(bp.map(x=>[x.articlePlanId,x])), revBy=new Map(review.records.map(x=>[x.articlePlanId,x])); const coveredN=new Set(),coveredS=new Set(); const anchors=new Map([['B3-ART-030',['神经恢复','内分泌恢复','可调节','节律']],['B3-ART-031',['免疫恢复','代谢恢复','维护条件','补充']],['B3-ART-032',['心理恢复','意义','注意','专业']],['B3-ART-033',['关系恢复','组织恢复','信任','责任']],['B3-ART-034',['人工智能','人工运行','监测','治理']],['B3-ART-035',['可持续连续','余量','退出','维护学习']]]);
-for(const r of m.records){const p=planBy.get(r.articlePlanId); assert.ok(p); assert.ok(exists(r.path)); assert.equal(r.sha256,sha(r.path)); const a=read(r.path); assert.equal(a.stage,'BOOK3-B07-ZH-HANS-PRODUCTION'); assert.equal(a.locale,'zh-Hans'); assert.equal(a.article.title,p.workingTitleZhHans); assert.deepEqual(a.blocks.map(x=>x.type),['summary','paragraph','paragraph','paragraph','paragraph','paragraph','paragraph','paragraph','key_judgment','reality_question']); const t=a.blocks.map(x=>x.text||'').join('\n'); assert.ok(t.length>=1150,`${p.articlePlanId} unexpectedly thin`); for(const k of anchors.get(p.articlePlanId)) assert.ok(t.includes(k),`${p.articlePlanId} missing ${k}`); assert.ok(!/诊断为|确诊|治疗建议|医学结论/.test(t),`${p.articlePlanId} must not create medical authority`); assert.deepEqual(a.sourceBindings.map(x=>x.sourceSectionCode),p.sourceSectionCodes); assert.deepEqual(a.canonicalNodeBinding.nodeCodes,p.nodeCodes); assert.equal(a.canonicalNodeBinding.mutationPerformed,false); assert.equal(a.canonicalNodeBinding.nodeCode,p.nodeCodes.length===1?p.nodeCodes[0]:null); assert.equal(a.canonicalNodeBinding.crossNodeAssemblyAllowed,p.nodeCodes.length>1); for(let i=0;i<p.nodeCodes.length;i++){const n=nodes.get(p.nodeCodes[i]),s=sections.get(p.sourceSectionCodes[i]),b=a.sourceBindings[i]; assert.ok(n&&s); assert.ok(!coveredN.has(p.nodeCodes[i])&&!coveredS.has(p.sourceSectionCodes[i])); coveredN.add(p.nodeCodes[i]); coveredS.add(p.sourceSectionCodes[i]); assert.equal(n.canonicalSourceBinding.sectionCode,p.sourceSectionCodes[i]); assert.equal(b.sourceTextSha256,s.textSha256); assert.deepEqual(b.sourcePages,[s.startPage,s.endPage]); assert.equal(b.sourceHeading,s.heading);} assert.equal(a.review.humanEditorialApproved,false); assert.equal(a.review.customerPublishable,false); assert.equal(revBy.get(p.articlePlanId).decision,'PENDING');}
-assert.equal(coveredN.size,10); assert.equal(coveredS.size,10); const enDir='content/knowledge/production-planning/production/book3-b07/candidates/en'; assert.ok(!exists(enDir)||fs.readdirSync(enDir).filter(x=>x.endsWith('.json')).length===0); assert.equal(m.gates.zhHansHumanEditorial,'PENDING'); assert.equal(m.gates.publication,'CLOSED'); assert.equal(m.gates.customerProjection,'CLOSED');
-console.log('✓ BOOK-3 B07 zh-Hans production passed: 6/6 Articles cover exactly 10/10 frozen W5 Final Canonical Nodes P8-150..159.');
-console.log('✓ B07 manuscript section digests/pages, standalone/grouped bindings, professional boundaries and article-depth gates passed.');
-console.log('✓ B07 human editorial remains 0/6 pending; English, publication and customer projection remain fail-closed.');
+
+const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
+const sha = p => crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const contentSha = a => crypto.createHash('sha256').update(JSON.stringify({ article: a.article, blocks: a.blocks })).digest('hex');
+
+const ORIGINAL = '80bae71675ef8b196cd10402ea0ccbf9b833ee57';
+const BASE = 'f8f32b49b3b9f2ef721dcbd34a4a4316b110117b';
+const PLAN = 'content/knowledge/production-planning/plans/book3-w5-final-article-production-map-v1.json';
+const MAN = 'content/knowledge/production-planning/production/book3-b07/manifest-v1.json';
+const REV = 'content/knowledge/production-planning/review/book3-b07-zh-hans-editorial-review-v1.json';
+const MACH = 'content/knowledge/production-planning/acceptance/book3-b07-machine-acceptance-v1.json';
+const HUMAN = 'content/knowledge/production-planning/acceptance/book3-b07-human-decisions-v1.json';
+const PAR = 'content/knowledge/production-planning/acceptance/book3-b07-english-semantic-parity-v1.json';
+
+const plan = read(PLAN), m = read(MAN), review = read(REV), machine = read(MACH), human = read(HUMAN), parity = read(PAR);
+const bp = plan.articles.filter(x => x.batchCode === 'B3-B07');
+
+assert.equal(bp.length, 6);
+assert.equal(machine.baselineCommit, ORIGINAL);
+assert.equal(machine.status, 'MACHINE_ACCEPTED_ZH_HANS_EDITORIAL_CANDIDATES_HUMAN_PENDING');
+assert.equal(human.baselineCommit, BASE);
+assert.equal(human.status, 'HUMAN_ACCEPTED_6_OF_6');
+assert.equal(human.decisionAuthority, 'TL_EXPLICIT_6_OF_6_ARTICLE_ACCEPTANCE');
+assert.ok(human.records.every(x => x.decision === 'ACCEPT'));
+assert.equal(review.status, 'HUMAN_EDITORIAL_ACCEPTED_6_OF_6');
+assert.equal(review.acceptedCount, 6);
+assert.equal(m.baselineCommit, ORIGINAL);
+assert.equal(m.successorBaselineCommit, BASE);
+assert.equal(m.status, 'ZH_HANS_HUMAN_ACCEPTED_ENGLISH_SEMANTIC_PARITY_MACHINE_ACCEPTED_PUBLICATION_CLOSED');
+assert.equal(parity.status, 'MACHINE_SEMANTIC_PARITY_ACCEPTED_6_OF_6');
+assert.equal(parity.records.length, 6);
+
+const planBy = new Map(bp.map(x => [x.articlePlanId, x]));
+const hBy = new Map(human.records.map(x => [x.articlePlanId, x]));
+const pBy = new Map(parity.records.map(x => [x.articlePlanId, x]));
+const anchors = new Map([
+  ['B3-ART-030', ['neural recovery', 'endocrine recovery', 'alertness', 'rhythm']],
+  ['B3-ART-031', ['immune recovery', 'metabolic recovery', 'repair', 'rhythm']],
+  ['B3-ART-032', ['psychological recovery', 'meaning', 'attention', 'experience']],
+  ['B3-ART-033', ['relationships', 'organizations', 'shared operation', 'trust']],
+  ['B3-ART-034', ['ai', 'recovery', 'artificial runtimes', 'governance']],
+  ['B3-ART-035', ['sustainable continuity', 'change', 'margin', 'memory']]
+]);
+
+for (const r of m.records) {
+  const p = planBy.get(r.articlePlanId);
+  assert.ok(p);
+  assert.equal(r.sha256, sha(r.path));
+  const zh = read(r.path), hh = hBy.get(r.articlePlanId), pp = pBy.get(r.articlePlanId);
+  assert.equal(hh.reviewedCandidateSha256, r.sha256);
+  assert.equal(hh.reviewedArticleContentSha256, contentSha(zh));
+  assert.equal(hh.decision, 'ACCEPT');
+  assert.equal(r.humanEditorialDecision, 'ACCEPT');
+  assert.equal(r.humanDecisionPath, HUMAN);
+  assert.equal(r.englishCandidateSha256, sha(r.englishCandidatePath));
+  assert.equal(r.englishCandidateSha256, pp.enSha256);
+  assert.equal(pp.zhHansSha256, r.sha256);
+  const en = read(r.englishCandidatePath);
+  assert.equal(en.locale, 'en');
+  assert.equal(en.stage, 'BOOK3-B07-ENGLISH-SEMANTIC-PARITY');
+  assert.deepEqual(en.sourceBindings, zh.sourceBindings);
+  assert.deepEqual(en.canonicalNodeBinding, zh.canonicalNodeBinding);
+  assert.deepEqual(en.blocks.map(x => x.type), zh.blocks.map(x => x.type));
+  const t = en.blocks.map(x => x.text || '').join('\n').toLowerCase();
+  for (const k of anchors.get(p.articlePlanId)) assert.ok(t.includes(k), `${p.articlePlanId} missing ${k}`);
+  assert.ok(t.split(/\s+/).length >= 500, `${p.articlePlanId} English article unexpectedly thin`);
+  assert.ok(!/diagnosed as/.test(t));
+  assert.equal(en.review.semanticParityStatus, 'MACHINE_SEMANTIC_PARITY_ACCEPTED');
+  assert.equal(en.review.customerPublishable, false);
+  assert.equal(en.authorityBoundary.zhHansAcceptanceDoesNotAutoAcceptEnglishEditorialQuality, true);
+}
+
+assert.equal(m.gates.zhHansHumanEditorial, 'HUMAN_ACCEPTED_6_OF_6');
+assert.equal(m.gates.englishProduction, 'COMPLETE_6_OF_6_AFTER_ZH_ACCEPTANCE');
+assert.equal(m.gates.englishSemanticParity, 'MACHINE_ACCEPTED_6_OF_6');
+assert.equal(m.gates.publication, 'CLOSED');
+assert.equal(m.gates.customerProjection, 'CLOSED');
+
+console.log('✓ BOOK-3 B07 human editorial successor passed: explicit TL decision records 6/6 accepted without mutating reviewed zh-Hans candidate bytes.');
+console.log('✓ BOOK-3 B07 English semantic parity passed: 6/6 English candidates preserve source sections, 10/10 Final Canonical Nodes, block functions and professional boundaries.');
+console.log('✓ B07 publication/customer projection remain closed; English editorial quality is not auto-inferred.');
+await import('./check-book3-b08-zh-hans-production.mjs');
