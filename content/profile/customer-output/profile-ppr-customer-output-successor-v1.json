@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "PHI-OS-PROFILE-PPR-CUSTOMER-OUTPUT-SUCCESSOR-v1.0.0",
+  "work": "PROFILE-PPR-CUSTOMER-OUTPUT-SUCCESSOR",
+  "baselineCommit": "d0e312329077944340d88cf57be883457217e0f2",
+  "predecessorReconciliation": "content/product-visual-platform-r1/profile/profile-customer-output-contract-reconciliation-v1.json",
+  "status": "OWNER_DECISIONS_FROZEN_PROJECTION_SAFE_SUBSET_ADMITTED",
+  "truthOwner": "PROFILE_PPR",
+  "consumer": "PVP_R1",
+  "purpose": "Resolve every W6 generic Profile output request at the Profile/PPR authority layer. An owner decision may admit a provenance-preserving customer field, admit only a narrower evidence view, or explicitly decline a generic semantic field. PVP does not create meaning.",
+  "sourceAuthority": [
+    "content/profile/current/profile-current-v3.json",
+    "content/profile/ux/profile-progressive-ux-contract-v3.json",
+    "content/professional/profile/assessment/self-assessment-scoring-contract-v1.json",
+    "content/profile/academic/ipip/ipip-scoring-contract-v1.json",
+    "content/profile/academic/financial/financial-capability-scoring-contract-v1.json",
+    "content/profile/academic/onet/contracts/onet-career-exploration-normalization-contract-v1.json",
+    "content/profile/current-reality/contracts/profile-current-reality-correlation-contract-v1.json",
+    "content/profile/cross-source/contracts/cross-source-perspective-contract-v1.json",
+    "content/profile/relationship/contracts/relationship-profile-evidence-contract-v1.json"
+  ],
+  "fieldDecisions": [
+    {
+      "field": "PROFILE_OVERVIEW",
+      "decision": "ADMITTED_CONTAINER_ONLY",
+      "customerField": "profileOverview",
+      "construction": "Summarize which governed source lanes and customer sections are present, plus freshness/provenance. Do not synthesize a universal personality statement.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true
+    },
+    {
+      "field": "CORE_DIMENSIONS",
+      "decision": "ADMITTED_SOURCE_SCOPED_ONLY",
+      "customerField": "sourceScopedDimensions",
+      "construction": "Group existing signalCards by sourceClass/providerFamily and preserve domainId/facetId/value/provenance. No universal dimension set, no cross-instrument normalization, no master score.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true
+    },
+    {
+      "field": "STRENGTH_PATTERNS",
+      "decision": "NOT_ADMITTED_GENERIC",
+      "customerField": null,
+      "construction": "A high, top, or ranked source score is not automatically a generic strength. A future Profile/PPR successor would need explicit interpretation rules before this field can exist.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": false
+    },
+    {
+      "field": "COST_TENSION_PATTERNS",
+      "decision": "ADMITTED_TENSION_SIGNALS_ONLY",
+      "customerField": "tensionSignals",
+      "construction": "Expose only already admitted SOURCE_TENSION and POTENTIAL_FRICTION_TARGET evidence with original provenance. Do not create cost scores, weakness labels, or strength-cost pairings.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true
+    },
+    {
+      "field": "DECISION_STYLE",
+      "decision": "NOT_ADMITTED_GENERIC",
+      "customerField": null,
+      "construction": "No current Profile authority defines a general decision-style output. Isolated source facets may remain source-scoped but cannot be promoted.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": false
+    },
+    {
+      "field": "RELATIONSHIP_STYLE",
+      "decision": "NOT_ADMITTED_INDIVIDUAL_STYLE",
+      "customerField": "relationshipEvidence",
+      "construction": "Retain existing specific-person relationship evidence only. Do not derive an individual relationship-style label from it.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true,
+      "projectionBoundary": "EVIDENCE_ONLY"
+    },
+    {
+      "field": "WORK_STYLE",
+      "decision": "NOT_ADMITTED_GENERIC",
+      "customerField": "careerInterest",
+      "construction": "Retain O*NET RIASEC interest/exploration output as interest evidence. Do not relabel it as work style, ability, suitability, or job fit.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true,
+      "projectionBoundary": "INTEREST_ONLY"
+    },
+    {
+      "field": "STRESS_PATTERN",
+      "decision": "NOT_ADMITTED_GENERIC",
+      "customerField": null,
+      "construction": "Source-scoped pressure/recovery/self-regulation facets may remain visible with source labels; no generic stress-pattern interpretation is authorized.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": false
+    },
+    {
+      "field": "ENVIRONMENT_FIT",
+      "decision": "NOT_ADMITTED_FIT_CONCLUSION",
+      "customerField": null,
+      "construction": "Any ENVIRONMENT_FIT self-report facet remains a self-report signal only. No objective or cross-source environment-fit conclusion is authorized.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": false
+    },
+    {
+      "field": "CONTEXT_VARIATION",
+      "decision": "ADMITTED_EVIDENCE_SUMMARY_ONLY",
+      "customerField": "contextEvidence",
+      "construction": "Expose admitted Current Reality counts/states and cross-source evidence as context evidence. Do not infer a new context-dependent personality type or score.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true
+    },
+    {
+      "field": "CONTRADICTIONS",
+      "decision": "ADMITTED_SOURCE_SCOPED",
+      "customerField": "contradictions",
+      "construction": "Expose SOURCE_CONTRADICTION perspectives and Current Reality not-resonant evidence when present, keeping source/context provenance. Do not collapse disagreement into a universal truth verdict.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true
+    },
+    {
+      "field": "REALITY_QUESTIONS",
+      "decision": "ADMITTED_EXISTING_PROMPTS_ONLY",
+      "customerField": "realityQuestions",
+      "construction": "Collect only prompts already emitted by an admitted source lane, currently including career-interest Current Reality prompts. No generic question generation is authorized by this successor.",
+      "semanticAuthorityCreated": false,
+      "pvpProjectionAllowed": true
+    }
+  ],
+  "crossSourceProjectionDecision": {
+    "purpose": "Resolve the PFIG-005 label mismatch without letting PVP invent semantic equivalence.",
+    "mapping": {
+      "SOURCE_ALIGNED": "CONVERGES",
+      "SOURCE_CONTRADICTION": "DIVERGES",
+      "OPEN": "UNKNOWN"
+    },
+    "noDirectMapping": [
+      "SOURCE_COMPLEMENTARY",
+      "SOURCE_TENSION",
+      "CURRENTLY_SUPPORTED",
+      "CURRENTLY_CONTRADICTED"
+    ],
+    "contextDependentRule": "CONTEXT_DEPENDENT is not inferable from a group label alone. It requires explicit governed Current Reality/context evidence tied to the compared perspective; until W7 IR can prove that input, retain the native Profile group or UNKNOWN.",
+    "pvpMayInventAdditionalMapping": false
+  },
+  "visualAdmissionImpact": {
+    "PFIG-001": "ADMITTED_SOURCE_SCOPED_DIMENSION_MAP_ONLY",
+    "PFIG-002": "BLOCKED_NO_UNIVERSAL_RADAR_AXES",
+    "PFIG-003": "BLOCKED_NO_GENERIC_STRENGTH_COST_AUTHORITY",
+    "PFIG-004": "ADMITTED_CONTEXT_EVIDENCE_MAP_NO_NEW_CLASSIFICATION",
+    "PFIG-005": "PARTIAL_ADMISSION_OWNER_MAPPING_AVAILABLE_FOR_ALIGNED_CONTRADICTION_OPEN",
+    "PFIG-006": "ADMITTED_CAREER_INTEREST_MAP_ONLY_NOT_WORK_STYLE",
+    "PFIG-007": "ADMITTED_RELATIONSHIP_EVIDENCE_MAP_ONLY_NOT_RELATIONSHIP_STYLE",
+    "PFIG-008": "BLOCKED_NO_DECISION_STYLE_AUTHORITY",
+    "PFIG-009": "ADMITTED_REALITY_BRIDGE_FROM_CURRENT_REALITY_AND_EXISTING_PROMPTS"
+  },
+  "authorityBoundary": {
+    "universalProfileDimensionsCreated": false,
+    "universalMasterScoreCreated": false,
+    "genericStrengthInferenceAllowed": false,
+    "genericWeaknessInferenceAllowed": false,
+    "diagnosisAllowed": false,
+    "jobFitGuaranteeAllowed": false,
+    "objectiveEnvironmentFitAllowed": false,
+    "relationshipCompatibilityScoreAllowed": false,
+    "pvpProfileMeaningAuthorityCreated": false,
+    "existingSourceClassSemanticsPreserved": true
+  },
+  "exitAssertions": {
+    "PROFILE_PPR_OWNER_DECISIONS_COMPLETE": true,
+    "PROFILE_TRUTH_OWNER_UNCHANGED": true,
+    "PROFILE_CUSTOMER_OUTPUT_SUCCESSOR_READY": true,
+    "NO_PVP_PROFILE_MEANING_AUTHORITY": true,
+    "W6_AUTHORITY_AMBIGUITY_CLOSED": true,
+    "PVP_R1_VIS_W7_ALLOWED_NOW": true,
+    "ALL_PFIGS_PRODUCTION_ALLOWED": false
+  }
+}
