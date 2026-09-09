@@ -1,16 +1,16 @@
 {
   "schemaVersion": "PHI-OS-BOOK3-ZH-HANS-PUBLICATION-CUSTOMER-INTEGRATION-v1.0.0",
   "stage": "BOOK3-ZH-HANS-PUBLICATION-CUSTOMER-INTEGRATION",
-  "status": "PUBLICATION_CUSTOMER_PROJECTED_47_OF_48_A44_VISUAL_HUMAN_PENDING",
+  "status": "PUBLICATION_CUSTOMER_PROJECTED_48_OF_48_ZH_HANS_COMPLETE",
   "baselineCommit": "02d6313ddc365c1eb2ad7ce33d920ddcbf8028c3",
   "publicationLocale": "zh-Hans",
   "bookCode": "BOOK-3",
   "counts": {
     "plannedArticles": 48,
     "zhHansHumanAccepted": 48,
-    "publicationAdmitted": 47,
-    "customerProjected": 47,
-    "blockedByVisualHumanGate": 1,
+    "publicationAdmitted": 48,
+    "customerProjected": 48,
+    "blockedByVisualHumanGate": 0,
     "englishPublications": 0
   },
   "visualClosurePath": "content/knowledge/production-planning/visual-disposition/book3-all-w10-visual-closure-v1.json",
@@ -1122,9 +1122,12 @@
       "locale": "zh-Hans",
       "slug": "book3-article-044",
       "href": "/articles/book3-article-044",
-      "visualGate": "BLOCKED_HUMAN_VISUAL_PENDING",
-      "publicationStatus": "BLOCKED_VISUAL_HUMAN_PENDING",
-      "publishedAt": null
+      "visualGate": "SATISFIED_REQUIRED_VISUAL_HUMAN_ACCEPTED",
+      "publicationStatus": "PUBLISHED_CUSTOMER_PROJECTED",
+      "publishedAt": "2026-09-09T08:30:00.000Z",
+      "publicArticlePath": "content/knowledge/public/visual-articles/zh-Hans/book3-article-044.json",
+      "publicArticleSha256": "3cf96e8d5ea81f64d98b039efa0243a15af3ed86ea993ea46cb2900277a3cfbf",
+      "visualHumanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b09-a44-visual-human-decision-v1.json"
     },
     {
       "publicationRecordCode": "BOOK3-PUB-B3-ART-045-ZH-HANS-v1",
@@ -1235,7 +1238,9 @@
     "recommendedVisualsDoNotBlockPublication": true,
     "A44CannotPublishBeforeExplicitVisualHumanAcceptance": true,
     "legacyPublicationRegistryMutated": false,
-    "canonicalAuthorityMutated": false
+    "canonicalAuthorityMutated": false,
+    "allZhHansPublicationCustomerProjectionComplete": true
   },
-  "nextGate": "Explicit A44 visual acceptance -> admit final 48th zh-Hans Article. English publication remains a separate human editorial gate."
+  "nextGate": "Book III zh-Hans publication/customer projection closed 48/48. English publication remains independently gated.",
+  "successorBaselineCommit": "82cc93f83c8eab1604b9fec02a6a1b86bfc56dd6"
 }
