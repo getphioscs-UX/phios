@@ -1,7 +1,7 @@
 {
   "schemaVersion": "PHI-OS-BOOK3-B10-ZH-HANS-PRODUCTION-MANIFEST-v1.0.0",
   "stage": "BOOK3-B10",
-  "status": "ZH_HANS_SOURCE_BOUND_EDITORIAL_CANDIDATES_READY_HUMAN_REVIEW_PENDING",
+  "status": "ZH_HANS_HUMAN_ACCEPTED_ENGLISH_SEMANTIC_PARITY_MACHINE_ACCEPTED_PUBLICATION_SUCCESSOR_ACTIVE",
   "baselineCommit": "6933bc29dba65d0f7744b24d8fdd68ff754290b4",
   "bookCode": "BOOK-3",
   "batchCode": "B3-B10",
@@ -16,9 +16,9 @@
     "articleCandidates": 3,
     "canonicalNodeCoverage": 8,
     "sourceSectionBindings": 8,
-    "localesProduced": 1,
-    "englishCandidates": 0,
-    "humanAcceptedArticles": 0,
+    "localesProduced": 2,
+    "englishCandidates": 3,
+    "humanAcceptedArticles": 3,
     "publishedArticles": 0
   },
   "records": [
@@ -39,7 +39,12 @@
         "KN-B3-P9-136",
         "KN-B3-P9-137",
         "KN-B3-P9-138"
-      ]
+      ],
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b10-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book3-b10/candidates/en/b3-b10-a46.en.v1.json",
+      "englishCandidateSha256": "4dbd1e5d3e7b670490d258cd15416cc7d8224e433943bb13cb3ef34dfd7ff29f",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     },
     {
       "articlePlanId": "B3-ART-047",
@@ -58,7 +63,12 @@
         "KN-B3-P9-139",
         "KN-B3-P9-140",
         "KN-B3-P9-141"
-      ]
+      ],
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b10-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book3-b10/candidates/en/b3-b10-a47.en.v1.json",
+      "englishCandidateSha256": "5c1300c211eef06c603f8264aead2bd3c44152142aa1dd4cfeb2e96e6ab51c2e",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     },
     {
       "articlePlanId": "B3-ART-048",
@@ -75,17 +85,22 @@
       "canonicalNodeCodes": [
         "KN-B3-P9-142",
         "KN-B3-P9-143"
-      ]
+      ],
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b10-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book3-b10/candidates/en/b3-b10-a48.en.v1.json",
+      "englishCandidateSha256": "ffcf07407284b1440fc5030487806b6703d0878a509577772af7185c6b2ff76d",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     }
   ],
   "gates": {
     "sourceBinding": "MACHINE_ACCEPTED",
-    "zhHansHumanEditorial": "PENDING",
-    "englishProduction": "CLOSED_UNTIL_EACH_ZH_HANS_ARTICLE_ACCEPTED",
-    "englishSemanticParity": "NOT_STARTED",
-    "visualProduction": "NO_W10_DECISION_YET",
-    "publication": "CLOSED",
-    "customerProjection": "CLOSED"
+    "zhHansHumanEditorial": "HUMAN_ACCEPTED_3_OF_3",
+    "englishProduction": "COMPLETE_3_OF_3_AFTER_ZH_ACCEPTANCE",
+    "englishSemanticParity": "MACHINE_ACCEPTED_3_OF_3",
+    "visualProduction": "BOOK3_W10_CLOSURE_SUCCESSOR",
+    "publication": "HANDOFF_TO_BOOK3_PUBLICATION_SUCCESSOR",
+    "customerProjection": "HANDOFF_TO_BOOK3_PUBLICATION_SUCCESSOR"
   },
   "invariants": {
     "frozenW5GroupingPreserved": true,
@@ -96,5 +111,8 @@
   },
   "reviewPackagePath": "content/knowledge/production-planning/review/book3-b10-zh-hans-editorial-review-v1.json",
   "machineAcceptancePath": "content/knowledge/production-planning/acceptance/book3-b10-machine-acceptance-v1.json",
-  "nextGate": "3/3 zh-Hans Article human editorial review and explicit acceptance."
+  "nextGate": "Book III zh-Hans publication/customer integration successor; English publication remains independent.",
+  "successorBaselineCommit": "02d6313ddc365c1eb2ad7ce33d920ddcbf8028c3",
+  "humanDecisionPath": "content/knowledge/production-planning/acceptance/book3-b10-human-decisions-v1.json",
+  "englishSemanticParityPath": "content/knowledge/production-planning/acceptance/book3-b10-english-semantic-parity-v1.json"
 }
