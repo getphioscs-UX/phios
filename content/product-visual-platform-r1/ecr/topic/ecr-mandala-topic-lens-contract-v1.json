@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W15-ECR-MANDALA-TOPIC-LENS-CONTRACT-v1.0.0",
+  "work": "PVP-R1-VIS-W15",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "status": "TOPIC_LENS_FROZEN_EXISTING_ECR_TOPIC_AUTHORITY_REUSED",
+  "topicAuthority": {
+    "owner": "ECR_TOPIC_R1",
+    "productionAdmission": "content/embodied-configuration/ecr-topic-r1/acceptance/ecr-topic-r1-w19-production-admission-v1.json",
+    "requiredStatus": "PRODUCTION_ADMITTED",
+    "projectionRuntime": "functions/embodied-configuration/ecr-topic-projection-runtime.js",
+    "rule": "INTERSECTION_ONLY"
+  },
+  "productionDefault": {
+    "accessState": "FREE_PREVIEW",
+    "overviewAlwaysAvailable": true,
+    "topicCount": 6,
+    "maxFreeNodeIdsPerTopic": 4
+  },
+  "paidBoundary": {
+    "accessState": "PAID",
+    "paidAccessRequiresExplicitEntitlement": true,
+    "pvpDoesNotActivatePaidTopicAccess": true
+  },
+  "rendererRules": {
+    "noProjection": "OVERVIEW_ONLY",
+    "projectionReady": "READY",
+    "rendererConsumesOnlyGovernedNodeIds": true,
+    "rendererMayMuteUnmatchedNodes": true,
+    "rendererMayNotCreateNodeIds": true,
+    "rendererMayNotGuessTopicMapping": true,
+    "overviewRestoresFullConfiguration": true
+  },
+  "provenanceResolution": {
+    "gapFound": true,
+    "gap": "The product adapter retained topic authority/topics but dropped accessState, so the customer renderer could not disclose whether the supplied governed projection was FREE_PREVIEW or PAID.",
+    "resolution": "Preserve accessState in the publication projection without changing topic meaning or access authority."
+  },
+  "boundaries": {
+    "topicLensCreatesMeaning": false,
+    "topicLensCreatesRealityEvidence": false,
+    "topicLensPredictsOutcome": false,
+    "topicLensCreatesCompatibilityScore": false,
+    "topicLensRecalculatesEcr": false
+  },
+  "nextGate": "PVP-R1-VIS-W16 MOBILE FULLSCREEN"
+}

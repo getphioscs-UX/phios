@@ -8,7 +8,7 @@ import {customerLayerExplanation,customerLayerLabel,selectedCatalog} from '../as
 const policy=JSON.parse(fs.readFileSync('content/embodied-configuration/acceptance/ecr-mandala-w25-customer-language-acceptance-v1.json','utf8'));
 const projection=buildFixtureProjection();
 const visual={title:'你的 PHI 构型',payload:projection};
-const html=renderPhiMandalaVisual(visual);
+const html=renderPhiMandalaVisual(visual,{experienceState:'PAID_DEPTH'}); // Phase 8 makes default fail-closed Free; W25 language-order checks personalized disclosed detail explicitly.
 const selected=selectedCatalog(projection);
 const sequence=[
  ['CC12',selected.context,'CC08'],['G16',selected.grammar,'G11'],['Q16',selected.question,'Q11'],['R9',selected.primaryCapability,'R7'],['D12',selected.topDriver,'D8'],['H64',selected.configuration,'ECR-H41'],['A8',selected.activation,'A1']

@@ -1,10 +1,9 @@
 import {esc} from '../../surfaces/runtime-ui.js';
 import {PHI_MANDALA_VIEWBOX_SIZE,PHI_MANDALA_CENTER,PHI_MANDALA_LAYER_GEOMETRY,ringSegmentGeometry,circularNodeGeometry,connectorGeometry,radialBarGeometry,textRotation,polarPoint} from './mandala-geometry.js';
 import {customerLayerLabel,customerLayerExplanation,selectedCatalog,authorityLabel} from './customer-language.js';
-import {resolveMandalaVisualState,resolveMandalaDriverRelation} from './mandala-hierarchy.js';
+import {resolveMandalaVisualState,resolveMandalaDriverRelation,normalizeMandalaExperienceState,ECR_MANDALA_DEFAULT_EXPERIENCE_STATE} from './mandala-hierarchy.js';
 
 const SCHEMA='PHI-OS-ECR-CUSTOMER-MANDALA-PROJECTION-v1.0.0';
-const EXPERIENCE_STATES=new Set(['FREE_SNAPSHOT','PAID_DEPTH']);
 const zodiacGlyph=Object.freeze({ARIES:'♈',TAURUS:'♉',GEMINI:'♊',CANCER:'♋',LEO:'♌',VIRGO:'♍',LIBRA:'♎',SCORPIO:'♏',SAGITTARIUS:'♐',CAPRICORN:'♑',AQUARIUS:'♒',PISCES:'♓'});
 const trigramGlyph=Object.freeze({KUN:'☷',ZHEN:'☳',KAN:'☵',XUN:'☴',LI:'☲',GEN:'☶',QIAN:'☰',DUI:'☱'});
 const arr=value=>Array.isArray(value)?value:[];
@@ -16,7 +15,7 @@ const deg=value=>{const x=n(value);return x===null?'—':`${x.toFixed(3)}°`;};
 const data=value=>esc(String(value??'').replace(/\s+/g,' ').trim());
 const safeToken=value=>String(value||'ecr-mandala').replace(/[^A-Za-z0-9_-]/g,'-');
 const compact=(value,max=18)=>{const s=String(value||'').replace(/\s+/g,' ').trim();return s.length>max?`${s.slice(0,Math.max(1,max-1))}…`:s;};
-const experience=value=>EXPERIENCE_STATES.has(value)?value:'PAID_DEPTH';
+const experience=value=>normalizeMandalaExperienceState(value);
 const isFree=value=>experience(value)==='FREE_SNAPSHOT';
 
 function stateFor(args){return resolveMandalaVisualState(args);}
@@ -33,7 +32,7 @@ function selectedLabel(projection,g,label,code,visualState){
   const p=polarPoint(Math.max(82,(g.label?Math.hypot(g.label.x-PHI_MANDALA_CENTER.x,g.label.y-PHI_MANDALA_CENTER.y):200)-17),g.mid);
   return `<text class="cx-ecr-mandala__selected-label" x="${p.x.toFixed(2)}" y="${p.y.toFixed(2)}" text-anchor="middle" dominant-baseline="middle"><tspan>${esc(compact(label,isZh(projection)?11:17))}</tspan><tspan class="cx-ecr-mandala__selected-code" x="${p.x.toFixed(2)}" dy="11">${esc(code)}</tspan></text>`;
 }
-function ring(projection,{catalog,idKey,layerId,selectedId,labelFor,detailFor,metaFor,glyphFor=null,experienceState='PAID_DEPTH'}){
+function ring(projection,{catalog,idKey,layerId,selectedId,labelFor,detailFor,metaFor,glyphFor=null,experienceState=ECR_MANDALA_DEFAULT_EXPERIENCE_STATE}){
   const xs=arr(catalog),layer=PHI_MANDALA_LAYER_GEOMETRY[layerId];
   return xs.map(item=>{const id=item[idKey],selected=id===selectedId,g=ringSegmentGeometry(item.ordinal,xs.length,layer),title=labelFor(item),copy=detailFor(item),meta=metaFor?.(item)||'',baseGlyph=glyphFor?.(item)||id,visualState=stateFor({layer:layerId,selected,experienceState}),glyph=selected&&visualState!=='LOCKED_DEPTH'?`● ${baseGlyph}`:baseGlyph,titleText=`${selected?`${local(projection,'Selected','当前')} · `:''}${id} · ${title}`;
     return `<g class="cx-ecr-mandala__node cx-ecr-mandala__node--${layerId.toLowerCase()}${selected?' is-selected':''}${visualState==='LOCKED_DEPTH'?' is-locked-depth':''}${visualState!=='BACKGROUND'?' is-unlocked':''}" ${nodeAttrs({projection,layer:layerId,id,title,copy,meta,selected,visualState})}><path d="${g.path}"/><title>${esc(titleText)}</title>${textAt(g.label,glyph,{rotate:textRotation(g.mid),className:'cx-ecr-mandala__code'})}${selected?selectedLabel(projection,g,title,id,visualState):''}</g>`;}).join('');
@@ -89,7 +88,7 @@ function topicLens(projection,topicProjection){
 function valueLadder(projection,experienceState){return `<div class="cx-ecr-mandala__value-ladder" data-ecr-mandala-value-ladder><span class="is-current">${esc(local(projection,'Snapshot','快照'))}</span><span${isFree(experienceState)?' class="is-locked"':''}>${esc(local(projection,'Deep structure','深层结构'))}</span><span class="is-reality">${esc(local(projection,'Reality','现实对照'))}</span></div>`;}
 function fullscreenControls(projection){return `<div class="cx-ecr-mandala__fullscreen-controls"><button type="button" data-ecr-mandala-fullscreen-open aria-expanded="false">${esc(local(projection,'Explore full screen','全屏探索 Mandala'))}</button><button type="button" data-ecr-mandala-fullscreen-close hidden>${esc(local(projection,'Close full screen','退出全屏'))}</button></div>`;}
 
-export function renderPhiMandalaVisual(visual,{experienceState='PAID_DEPTH',topicProjection=null}={}){
+export function renderPhiMandalaVisual(visual,{experienceState=ECR_MANDALA_DEFAULT_EXPERIENCE_STATE,topicProjection=null}={}){
   const projection=visual?.payload;if(projection?.schemaVersion!==SCHEMA)return '';
   const access=experience(experienceState),selected=projection.selected||{},contexts=arr(projection.catalogs?.contexts),grammars=arr(projection.catalogs?.grammars),questions=arr(projection.catalogs?.questions),motions=arr(projection.catalogs?.motions),activations=arr(projection.catalogs?.activations),context=by(contexts,'contextId',selected.contextId),question=by(questions,'questionId',selected.questionId),title=visual?.title||local(projection,'Your PHI Configuration','你的 PHI 构型'),defaultDetailTitle=context?(isZh(projection)?`${context.labelZhHans} · ${context.contextId}`:`${context.label} · ${context.contextId}`):title,defaultDetailCopy=question?(isZh(projection)?question.questionZhHans:question.question):local(projection,'Explore a layer to see how the selected coordinate is organized.','聚焦任一层，查看这次构型如何被组织。');
   const contextRing=ring(projection,{catalog:contexts,idKey:'contextId',layerId:'CC12',selectedId:selected.contextId,labelFor:item=>isZh(projection)?item.labelZhHans:item.label,detailFor:item=>local(projection,`Longitude interval ${item.startLongitudeInclusive}° to <${item.endLongitudeExclusive}°. Position label only; no zodiac personality meaning is imported.`,`黄经区间 ${item.startLongitudeInclusive}° 至 <${item.endLongitudeExclusive}°。这里只是位置名称，不导入星座人格意义。`),metaFor:item=>item.contextId,glyphFor:item=>`${zodiacGlyph[item.zodiacCode]||''} ${item.contextId}`.trim(),experienceState:access});

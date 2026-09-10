@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "PHI-OS-INTEGRATED-PHASE8-ECR-CURRENT-RECONCILIATION-v1.0.0",
+  "work": "PHASE8-ECR-W10-W16",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "status": "CURRENT_ECR_SUCCESSOR_RECONCILED_W10_W16_VERIFIED",
+  "phase7Prerequisite": {
+    "freeze": "content/product-visual-platform-r1/freeze/pvp-r1-vis-profile-w6-w9-phase7-freeze-v1.json",
+    "requiredStatus": "PVP_R1_VIS_PROFILE_W6_W9_PHASE7_FROZEN",
+    "phase8AuthorizedRequired": true
+  },
+  "masterRule": "ONE_EXISTING_ECR_MANDALA_REUSE_VERIFY_CURRENT_DO_NOT_REBUILD",
+  "truthOwner": "ECR_EXISTING_AUTHORITY",
+  "projectionOwner": "PVP_R1",
+  "historicalSuccessorsConsumed": {
+    "w10Acceptance": "content/product-visual-platform-r1/acceptance/pvp-r1-vis-w10-ecr-mandala-visual-census-v1.json",
+    "w11Acceptance": "content/product-visual-platform-r1/acceptance/pvp-r1-vis-w11-ecr-mandala-hierarchy-v1.json",
+    "ecrMandalaR2": "content/embodied-configuration/ecr-mandala-r2/contracts/ecr-mandala-r2-customer-visual-intelligence-contract-v1.json",
+    "topicProductionAdmission": "content/embodied-configuration/ecr-topic-r1/acceptance/ecr-topic-r1-w19-production-admission-v1.json"
+  },
+  "workSteps": {
+    "PVP-R1-VIS-W10": {
+      "status": "CURRENT_CENSUS_VERIFIED",
+      "result": "ONE_EXISTING_MANDALA_8_LAYERS_145_ADDRESSABLE_NODES"
+    },
+    "PVP-R1-VIS-W11": {
+      "status": "CURRENT_HIERARCHY_VERIFIED",
+      "result": "PRIMARY_SUPPORTING_BACKGROUND_LOCKED_DEPTH_CURRENT"
+    },
+    "PVP-R1-VIS-W12": {
+      "status": "MACHINE_ACCEPTED",
+      "result": "SELECTED_CONFIGURATION_PATH_FROZEN"
+    },
+    "PVP-R1-VIS-W13": {
+      "status": "MACHINE_ACCEPTED",
+      "result": "SEMANTIC_ZOOM_FROZEN"
+    },
+    "PVP-R1-VIS-W14": {
+      "status": "MACHINE_ACCEPTED",
+      "result": "FREE_DEFAULT_PAID_EXPLICIT_FAIL_CLOSED"
+    },
+    "PVP-R1-VIS-W15": {
+      "status": "MACHINE_ACCEPTED",
+      "result": "GOVERNED_TOPIC_LENS_REUSES_ECR_TOPIC_R1"
+    },
+    "PVP-R1-VIS-W16": {
+      "status": "MACHINE_ACCEPTED",
+      "result": "MOBILE_FULLSCREEN_FROZEN"
+    }
+  },
+  "actualGapsResolved": [
+    {
+      "work": "W14",
+      "class": "FAIL_CLOSED_PRESENTATION_DEFAULT",
+      "predecessorFiles": {
+        "assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js": "67a4cccd916dd7d0f031e6da0e3d3290d96540fa3ceab1b90575b3f8d665f46a",
+        "assets/customer-ui/js/specialists/ecr/mandala-renderer.js": "0e2c33caead4afa377a947e340d8b18899c9bb9e9e45be377857d8d55c06c8b1",
+        "assets/customer-ui/js/specialists/ecr/product-renderer.js": "138b0ceca23da1b7ccd94dcc49c08e274d91e12669e4f6fde58df26025199753",
+        "functions/personal-reality-product/adapters/ecr-production-adapter.js": "fc918bd4f2ea7793c9a668d284a5290798aefbe689fc29c178a032281f4d168c"
+      },
+      "resolution": "Default/unknown Mandala experience now resolves to FREE_SNAPSHOT in hierarchy, renderer, product renderer and server-side ECR product adapter."
+    },
+    {
+      "work": "W15",
+      "class": "TOPIC_ACCESS_PROVENANCE",
+      "resolution": "ECR product adapter now preserves governed topicProjection.accessState for customer disclosure; default production topic state remains FREE_PREVIEW."
+    }
+  ],
+  "authoritySnapshot": [
+    {
+      "path": "functions/embodied-configuration/ecr-customer-mandala-projection.js",
+      "sha256": "0c18fe88eb02836a118cce59568c074c805500c8e741f22db83e8ce733fb46da"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/ecr/mandala-geometry.js",
+      "sha256": "0080131f4006ce911c37b22152be0ff868625ca5a092f8f4a67134cb6e8c4d5c"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js",
+      "sha256": "8c076fe792f65193c5f704f98c74e3f8e32dd4f771f3b5a26bfd51aba86f2f7f"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/ecr/mandala-renderer.js",
+      "sha256": "e0a8a777b67d17b5482352b217c15439d6a767ed49ac74f2b16e9079f6e521e4"
+    },
+    {
+      "path": "assets/customer-ui/js/specialists/ecr/product-renderer.js",
+      "sha256": "07289adfbf45cf1b69f4bb3358bdc17d4a0b77bd972fe763cb991c7a921886a6"
+    },
+    {
+      "path": "assets/customer-ui/surfaces/ecr-specialist.css",
+      "sha256": "396bbea3ffc613cbad14808e692014d5b76c4aa6376eca4fbcb9171593f57b59"
+    },
+    {
+      "path": "functions/embodied-configuration/ecr-topic-projection-runtime.js",
+      "sha256": "261e3bb2b9174b4a6114557adb33fbb1c8b1bb82144d43ad111f9d75df8cc83d"
+    },
+    {
+      "path": "functions/personal-reality-product/adapters/ecr-production-adapter.js",
+      "sha256": "4b25364aa86e537d1d292fccd0f105e5b05f9b8f4d8a2c25051129f376ccb7f1"
+    },
+    {
+      "path": "content/embodied-configuration/ecr-topic-r1/acceptance/ecr-topic-r1-w19-production-admission-v1.json",
+      "sha256": "034fb6cb478ec5dd792ea9f5b1d03a53fce577b0e60c698105b8c1bc9ba715c3"
+    }
+  ],
+  "boundaries": {
+    "newEcrTruthCreated": false,
+    "ecrCalculationChanged": false,
+    "ecrMeaningChanged": false,
+    "coordinateSelectionChanged": false,
+    "duplicateMandalaCreated": false,
+    "topicMappingInventedByPvp": false,
+    "paidCommerceActivatedByPvp": false,
+    "productionPriceCreatedByPvp": false,
+    "phase9WorkExecutedByThisReconciliation": false
+  },
+  "phase8ExitComplete": true,
+  "phase9Authorized": true,
+  "nextWorkStep": "PHASE9_ZV_R3_PVP_W17_W24"
+}

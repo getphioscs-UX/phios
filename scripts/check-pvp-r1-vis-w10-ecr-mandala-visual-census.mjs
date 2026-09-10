@@ -13,6 +13,9 @@ const w11ContractPath='content/product-visual-platform-r1/ecr/hierarchy/ecr-mand
 const w11AcceptancePath='content/product-visual-platform-r1/acceptance/pvp-r1-vis-w11-ecr-mandala-hierarchy-v1.json';
 const w11=fs.existsSync(w11ContractPath)?read(w11ContractPath):null;
 const w11Acceptance=fs.existsSync(w11AcceptancePath)?read(w11AcceptancePath):null;
+const p8Path='content/integrated-master-work/phase8/p8-current-reconciliation-v1.json';
+const p8=fs.existsSync(p8Path)?read(p8Path):null;
+const p8Snapshots=new Map((p8?.authoritySnapshot||[]).map(x=>[x.path,x.sha256]));
 assert.equal(census.status,'CENSUS_COMPLETE_EXISTING_RENDERER_REUSED');
 assert.deepEqual(census.canonicalLayerOrder,['CC12','G16','Q16','R9','D12','M8','H64','A8']);
 assert.equal(census.layerCensus.reduce((n,x)=>n+x.count,0),145);
@@ -33,7 +36,13 @@ for(const [p,digest] of Object.entries(census.sourceDigests)){
     && w11?.rendererReconciliation?.calculationAuthorityChanged===false
     && w11?.rendererReconciliation?.meaningAuthorityChanged===false
     && w11Acceptance?.status==='MACHINE_ACCEPTED_MANDALA_HIERARCHY';
-  assert.equal(governedRendererSuccessor,true,`W10 source drift without governed successor: ${p}`);
+  const governedPhase8CurrentSuccessor=p8?.status==='CURRENT_ECR_SUCCESSOR_RECONCILED_W10_W16_VERIFIED'
+    && p8?.baselineCommit==='ffc05bc07345011bc24e68884cc1d569c8d96418'
+    && p8Snapshots.get(p)===current
+    && p8?.boundaries?.ecrCalculationChanged===false
+    && p8?.boundaries?.ecrMeaningChanged===false
+    && p8?.boundaries?.duplicateMandalaCreated===false;
+  assert.equal(governedRendererSuccessor||governedPhase8CurrentSuccessor,true,`W10 source drift without governed successor: ${p}`);
 }
 const renderer=text(census.existingProductionPath.renderer),hierarchy=fs.existsSync('assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js')?text('assets/customer-ui/js/specialists/ecr/mandala-hierarchy.js'):'',css=text(census.existingProductionPath.stylesheet),geometry=text(census.existingProductionPath.geometry),projection=text(census.existingProductionPath.projection);
 for(const token of ['PRIMARY_ACTIVE','SUPPORTING_ACTIVE','BACKGROUND','LOCKED_DEPTH','FREE_SNAPSHOT','PAID_DEPTH'])assert.ok((renderer+hierarchy).includes(token),`Mandala visual-state witness missing: ${token}`);
