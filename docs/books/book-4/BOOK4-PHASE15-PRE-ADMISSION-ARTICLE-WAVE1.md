@@ -84,3 +84,17 @@ Baseline: `90d4a7ce304a3a2fe5a0f6547ff911565144faee` (`PHASE 4 PAI-R1-W0–W10`)
 - No active KIR source registry, canonical node meaning, PAI authority, or website publication authority is mutated by A2.
 
 Next governed Book IV step: `BOOK-IV-A3 | Article Mapping`.
+
+## BOOK-IV-A3 · Article Mapping
+
+Baseline: `340d9850779d41e1cd4185a77659207daca71c48` (`BOOK-IV-A2`).
+
+- A3 consumes the frozen A2 capacity without changing it: **11 batches / 53 Article identities / 106 planned locale versions**.
+- **125 / 125** A1 Final Canonical Nodes are explicitly mapped exactly once to one Article identity; no node is unmapped or multiply mapped.
+- B01 preserves the accepted Wave 1 identities (**8 zh-Hans accepted; English semantic parity pending**).
+- B02–B11 contain **45 mapped Article identities**. A3 creates mapping authority only; it does not generate their article prose.
+- Cross-node articles are allowed only where the A3 map explicitly groups nodes inside the same frozen A2 batch scope.
+- Every mapping carries the A2 semantic-profile id plus the final manuscript section code, page range and source-text SHA-256.
+- A3 does not mutate Canonical Node meaning, does not admit Book IV to active KIR, and does not open website publication.
+
+Next governed Book IV step: `BOOK-IV-A4 | Machine Benchmark`.
