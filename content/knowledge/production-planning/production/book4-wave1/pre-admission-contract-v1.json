@@ -2,31 +2,32 @@
   "schemaVersion": "PHI-OS-BOOK4-PHASE15-PRE-ADMISSION-CONTRACT-v1.0.0",
   "stage": "BOOK-IV-PRE-ADMISSION",
   "status": "PREPARATION_ONLY_NO_PHASE_CUTOVER",
-  "baselineCommit": "489eb817fde8bc34f2faefe395eca128ef997220",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
   "governingMasterPath": "content/governance/integrated-successor/master-work/phi-os-integrated-successor-master-work-v3.0.0.md",
   "formalAdmissionSequence": [
     {
       "workStep": "BOOK-IV-A0",
       "name": "Manuscript Complete",
-      "status": "EVIDENCE_READY",
+      "status": "COMPLETE",
       "evidencePath": "content/knowledge/manuscripts/completed/book-4-completed-manuscript-v1.json"
     },
     {
       "workStep": "BOOK-IV-A1",
       "name": "Canonical Coverage",
-      "status": "RECONCILIATION_REQUIRED_NOT_COMPLETE",
-      "evidencePath": "content/knowledge/manuscripts/review/book4-a1-canonical-coverage-audit-v1.json"
+      "status": "COMPLETE",
+      "evidencePath": "content/knowledge/contracts/book-4-final-canonical-authority-v1.json"
     },
     {
       "workStep": "BOOK-IV-A2",
       "name": "Retrieval Semantic Profile",
-      "status": "NOT_STARTED"
+      "status": "READY_NOT_STARTED",
+      "evidencePath": "content/knowledge/manuscripts/extraction/book-4-final-section-identities-v1.json"
     },
     {
       "workStep": "BOOK-IV-A3",
       "name": "Article Mapping",
       "status": "NOT_COMPLETE",
-      "note": "Wave 1 source-bound editorial candidates are preparatory only."
+      "note": "Wave 1 is A1-canonical-reconciled and 8/8 zh-Hans editorial accepted; formal A3 waits for A2."
     },
     {
       "workStep": "BOOK-IV-A4",
@@ -57,7 +58,10 @@
       "en"
     ],
     "humanReviewHtmlBuilder": true,
-    "failClosedPublication": true
+    "failClosedPublication": true,
+    "completedManuscriptFinalCanonicalSuccessor": true,
+    "oneFinalSectionOneCanonicalNode": true,
+    "humanArticleAcceptance8of8": true
   },
-  "nextActionAfterHumanArticleReview": "Resolve BOOK-IV-A1 canonical coverage and duplicate source disposition before A2/A3 completion."
+  "nextActionAfterHumanArticleReview": "BOOK-IV-A2 Retrieval Semantic Profile over 125 final Canonical Nodes; A3 remains gated until A2 is complete."
 }

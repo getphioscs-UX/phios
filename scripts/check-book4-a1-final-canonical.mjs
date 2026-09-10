@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const BASE='454a7d1771feec5e2f6ab00bffdde46a5aa661f0';
+const raw=read('content/knowledge/manuscripts/extraction/book-4-full-section-inventory-v1.json');
+const inv=read('content/knowledge/manuscripts/extraction/book-4-final-section-inventory-v1.json');
+const ids=read('content/knowledge/manuscripts/extraction/book-4-final-section-identities-v1.json');
+const reg=read('content/knowledge/registry/successors/book4-a1-final/canonical-nodes-v1.json');
+const bp=read('content/knowledge/blueprints/successors/book4-a1-final/book-4-knowledge-blueprint-v5.json');
+const auth=read('content/knowledge/contracts/book-4-final-canonical-authority-v1.json');
+const mig=read('content/knowledge/migrations/book4-a1-final-canonical-migration-v1.json');
+const dedup=read('content/knowledge/manuscripts/review/book4-source-dedup-human-acceptance-v1.json');
+const audit=read('content/knowledge/manuscripts/review/book4-a1-canonical-coverage-audit-v1.json');
+const manifest=read('content/knowledge/production-planning/production/book4-wave1/manifest-v1.json');
+const accept=read('content/knowledge/production-planning/acceptance/book4-pja-wave1-acceptance-v1.json');
+assert.equal(inv.baselineCommit,BASE); assert.equal(reg.baselineCommit,BASE); assert.equal(auth.baselineCommit,BASE);
+assert.equal(raw.rawSectionOccurrenceCount,127); assert.equal(raw.activeFinalSectionCount,125);
+const excluded=raw.sections.filter(x=>x.canonicalCoverageStatus==='EXCLUDED_HUMAN_CONFIRMED_DUPLICATE').map(x=>x.sectionCode).sort();
+assert.deepEqual(excluded,['CM-B4V1-P10-S050','CM-B4V1-P10-S051']);
+assert.equal(dedup.status,'TL_ACCEPTED_APPLIED'); assert.equal(dedup.result.finalAuthoritativeSections,125);
+const sections=inv.sections.filter(x=>x.segmentType==='SECTION');
+assert.equal(sections.length,125); assert.equal(sections.filter(x=>x.partCode==='P10').length,79); assert.equal(sections.filter(x=>x.partCode==='P11').length,46);
+assert.equal(new Set(sections.map(x=>x.sectionCode)).size,125); assert.ok(!sections.some(x=>excluded.includes(x.sectionCode)));
+assert.equal(ids.records.length,125); assert.equal(reg.nodes.length,125); assert.equal(bp.plannedCanonicalNodes,125); assert.equal(auth.finalAuthority.canonicalNodeCount,125);
+assert.equal(new Set(reg.nodes.map(x=>x.nodeCode)).size,125); assert.equal(new Set(reg.nodes.map(x=>x.canonicalQuestionKey)).size,125); assert.equal(new Set(reg.nodes.map(x=>x.retrievalIdentity.key)).size,125);
+const secByCode=new Map(sections.map(x=>[x.sectionCode,x]));
+for(const n of reg.nodes){ const b=n.canonicalSourceBinding; const s=secByCode.get(b.sectionCode); assert.ok(s,b.sectionCode); assert.equal(s.textSha256,b.textSha256); assert.deepEqual([s.startPage,s.endPage],b.pages); assert.ok(n.canonicalQuestion); assert.ok(n.titleZhHans); assert.equal(n.publicationBookCode,'BOOK-4'); assert.equal(n.canonicalReconciliation.predecessorIdentityMutationPerformed,false); assert.equal(n.retrievalIdentity.status,'A1_IDENTITY_BOUND_A2_SEMANTIC_PROFILE_PENDING'); }
+const old=read('content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json'); const oldB4=old.nodes.filter(x=>x.publicationBookCode==='BOOK-4'&&['P10','P11'].includes(x.publicationPartCode));
+assert.equal(oldB4.length,181); assert.equal(mig.counts.oldBook4P10P11Nodes,181); assert.equal(mig.counts.finalBook4Nodes,125); assert.equal(mig.counts.silentDeletion,0); assert.equal(mig.counts.oldMeaningMutation,0);
+assert.equal(audit.status,'COMPLETE_TL_AUTHORIZED_FINAL_CANONICAL_COVERAGE'); assert.equal(audit.finalCanonicalCoverage.unmappedSectionCount,0); assert.equal(audit.blockingReasons.length,0);
+assert.equal(accept.human.zhHansEditorialAccepted,true); assert.equal(accept.human.zhHansAcceptedArticleCount,8); assert.equal(accept.human.englishSemanticParityAccepted,false);
+assert.equal(manifest.masterWork.a1Status,'COMPLETE'); assert.equal(manifest.masterWork.a2Status,'READY_NOT_STARTED'); assert.equal(manifest.publication.bookIVAdmitted,false);
+for(const r of manifest.records){ const a=read(r.path); assert.ok(a.canonicalNodeBinding.nodeCodes.length>=1); assert.equal(a.canonicalNodeBinding.status,'BOOK_IV_A1_FINAL_CANONICAL_RECONCILED'); for(const c of a.canonicalNodeBinding.nodeCodes) assert.ok(reg.nodes.some(n=>n.nodeCode===c),c); if(a.locale==='zh-Hans') assert.equal(a.review.humanEditorialApproved,true); else assert.equal(a.review.humanEditorialApproved,false); assert.equal(a.review.customerPublishable,false); }
+assert.equal(auth.invariants.completedManuscriptIsSourceTruth,true); assert.equal(auth.invariants.duplicateSourceOccurrencesExcluded,2); assert.equal(auth.invariants.old181Book4P10P11NodesRemainHistorical,true); assert.equal(auth.invariants.otherBooksUnaffected,true);
+console.log('✓ BOOK-IV-A1 final canonical coverage passed: 127 raw occurrences - 2 TL-confirmed duplicates = 125 final sections.');
+console.log('✓ 125 final sections -> 125 fresh final Canonical Nodes -> 125 retrieval identities (P10 79 / P11 46); predecessor 181 Book-IV P10/P11 records remain historical.');
+console.log('✓ Book IV PJA Wave 1: 8/8 zh-Hans editorial accepted; 16 locale candidates rebound to A1 final canonical nodes; English parity and BOOK-IV-A2–A6 remain gated.');

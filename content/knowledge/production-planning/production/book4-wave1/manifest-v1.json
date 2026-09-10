@@ -1,9 +1,9 @@
 {
   "schemaVersion": "PHI-OS-BOOK4-PJA-WAVE1-PRE-ADMISSION-MANIFEST-v1.0.0",
   "stage": "BOOK4-PJA-WAVE1-PRE_ADMISSION",
-  "status": "SOURCE_BOUND_EDITORIAL_REVIEW_READY_A1_CANONICAL_RECONCILIATION_PENDING",
-  "baselineCommit": "489eb817fde8bc34f2faefe395eca128ef997220",
-  "baselineAuthority": "user-supplied terms.zip stated aligned to current main; archive contains no .git authority and this delta does not infer a different SHA",
+  "status": "ZH_HANS_8_OF_8_ACCEPTED_BOOK_IV_A1_COMPLETE_A2_READY_PUBLICATION_CLOSED",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "baselineAuthority": "user supplied read(1).zip stated aligned to main 454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
   "bookCode": "BOOK-4",
   "bookTitleZhHans": "世界如何扩展",
   "bookTitleEn": "Reality Expansion",
@@ -21,27 +21,32 @@
       "BOOK-IV-A5",
       "BOOK-IV-A6"
     ],
-    "a0Status": "EVIDENCE_READY",
-    "a1Status": "RECONCILIATION_REQUIRED_NOT_COMPLETE",
-    "a2Status": "NOT_STARTED",
-    "a3Status": "NOT_COMPLETE_SOURCE_BOUND_PREVIEW_ONLY",
+    "a0Status": "COMPLETE",
+    "a1Status": "COMPLETE",
+    "a2Status": "READY_NOT_STARTED",
+    "a3Status": "NOT_COMPLETE_A1_RECONCILED_WAITING_A2",
     "a4Status": "NOT_STARTED",
     "a5Status": "NOT_STARTED",
     "a6Status": "NOT_ADMITTED"
   },
   "sourceInventory": {
-    "path": "content/knowledge/manuscripts/extraction/book-4-full-section-inventory-v1.json",
-    "sectionCount": 127,
+    "path": "content/knowledge/manuscripts/extraction/book-4-final-section-inventory-v1.json",
+    "rawExtractionPath": "content/knowledge/manuscripts/extraction/book-4-full-section-inventory-v1.json",
+    "sectionCount": 125,
+    "rawSectionOccurrenceCount": 127,
+    "excludedDuplicateOccurrenceCount": 2,
     "partCounts": {
-      "P10": 81,
+      "P10": 79,
       "P11": 46
     }
   },
   "canonicalCoverageAudit": {
     "path": "content/knowledge/manuscripts/review/book4-a1-canonical-coverage-audit-v1.json",
-    "exactHeadingMatchCount": 29,
-    "semanticOrHumanResolutionRequiredCount": 98,
-    "duplicatePairCount": 2
+    "status": "COMPLETE",
+    "finalCanonicalNodeCount": 125,
+    "retrievalIdentityCount": 125,
+    "unmappedSectionCount": 0,
+    "excludedDuplicateOccurrenceCount": 2
   },
   "articleConceptCount": 8,
   "localeCandidateCount": 16,
@@ -50,137 +55,212 @@
     {
       "candidateId": "B4-W1-A01",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a01.zh-Hans.v1.json",
       "sourceBindingCount": 2,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-201",
+        "KN-B4-P10-202"
+      ]
     },
     {
       "candidateId": "B4-W1-A01",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a01.en.v1.json",
       "sourceBindingCount": 2,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-201",
+        "KN-B4-P10-202"
+      ]
     },
     {
       "candidateId": "B4-W1-A02",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a02.zh-Hans.v1.json",
       "sourceBindingCount": 3,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-203",
+        "KN-B4-P10-204",
+        "KN-B4-P10-205"
+      ]
     },
     {
       "candidateId": "B4-W1-A02",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a02.en.v1.json",
       "sourceBindingCount": 3,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-203",
+        "KN-B4-P10-204",
+        "KN-B4-P10-205"
+      ]
     },
     {
       "candidateId": "B4-W1-A03",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a03.zh-Hans.v1.json",
       "sourceBindingCount": 3,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-212",
+        "KN-B4-P10-213",
+        "KN-B4-P10-214"
+      ]
     },
     {
       "candidateId": "B4-W1-A03",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a03.en.v1.json",
       "sourceBindingCount": 3,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-212",
+        "KN-B4-P10-213",
+        "KN-B4-P10-214"
+      ]
     },
     {
       "candidateId": "B4-W1-A04",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a04.zh-Hans.v1.json",
       "sourceBindingCount": 4,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-217",
+        "KN-B4-P10-218",
+        "KN-B4-P10-219",
+        "KN-B4-P10-220"
+      ]
     },
     {
       "candidateId": "B4-W1-A04",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a04.en.v1.json",
       "sourceBindingCount": 4,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-217",
+        "KN-B4-P10-218",
+        "KN-B4-P10-219",
+        "KN-B4-P10-220"
+      ]
     },
     {
       "candidateId": "B4-W1-A05",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a05.zh-Hans.v1.json",
       "sourceBindingCount": 4,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-247",
+        "KN-B4-P10-248",
+        "KN-B4-P10-249",
+        "KN-B4-P10-250"
+      ]
     },
     {
       "candidateId": "B4-W1-A05",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a05.en.v1.json",
       "sourceBindingCount": 4,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-247",
+        "KN-B4-P10-248",
+        "KN-B4-P10-249",
+        "KN-B4-P10-250"
+      ]
     },
     {
       "candidateId": "B4-W1-A06",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a06.zh-Hans.v1.json",
       "sourceBindingCount": 5,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-266",
+        "KN-B4-P10-267",
+        "KN-B4-P10-268",
+        "KN-B4-P10-269",
+        "KN-B4-P10-271"
+      ]
     },
     {
       "candidateId": "B4-W1-A06",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a06.en.v1.json",
       "sourceBindingCount": 5,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P10-266",
+        "KN-B4-P10-267",
+        "KN-B4-P10-268",
+        "KN-B4-P10-269",
+        "KN-B4-P10-271"
+      ]
     },
     {
       "candidateId": "B4-W1-A07",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a07.zh-Hans.v1.json",
       "sourceBindingCount": 3,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P11-201",
+        "KN-B4-P11-202",
+        "KN-B4-P11-203"
+      ]
     },
     {
       "candidateId": "B4-W1-A07",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a07.en.v1.json",
       "sourceBindingCount": 3,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P11-201",
+        "KN-B4-P11-202",
+        "KN-B4-P11-203"
+      ]
     },
     {
       "candidateId": "B4-W1-A08",
       "locale": "zh-Hans",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/zh-Hans/b4-w1-a08.zh-Hans.v1.json",
       "sourceBindingCount": 5,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P11-204",
+        "KN-B4-P11-205",
+        "KN-B4-P11-206",
+        "KN-B4-P11-207",
+        "KN-B4-P11-208"
+      ]
     },
     {
       "candidateId": "B4-W1-A08",
       "locale": "en",
-      "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+      "status": "SOURCE_BOUND_A1_CANONICAL_RECONCILED_EN_PARITY_PENDING",
       "path": "content/knowledge/production-planning/production/book4-wave1/candidates/en/b4-w1-a08.en.v1.json",
       "sourceBindingCount": 5,
-      "canonicalNodeCodes": []
+      "canonicalNodeCodes": [
+        "KN-B4-P11-204",
+        "KN-B4-P11-205",
+        "KN-B4-P11-206",
+        "KN-B4-P11-207",
+        "KN-B4-P11-208"
+      ]
     }
   ],
   "humanEditorialReview": {
     "locale": "zh-Hans",
-    "status": "PENDING",
-    "reviewBuildCommand": "npm run book4:pja:wave1:review",
-    "decisionExportFile": "book4-pja-wave1-human-decisions-v1.json"
+    "status": "ACCEPTED_8_OF_8",
+    "acceptedArticleCount": 8,
+    "decisionFile": "content/knowledge/production-planning/acceptance/book4-pja-wave1-human-decisions-v1.json",
+    "acceptanceFile": "content/knowledge/production-planning/acceptance/book4-pja-wave1-human-acceptance-v1.json"
   },
   "englishSemanticParity": {
     "status": "PENDING_HUMAN_REVIEW"
@@ -194,6 +274,8 @@
     "articleCandidatesArePreAdmission": true,
     "articleMappingA3Completed": false,
     "canonicalNodeMutationPerformed": false,
-    "activeKIRSourceRegistryMutated": false
+    "activeKIRSourceRegistryMutated": false,
+    "finalCanonicalSuccessorCreated": true,
+    "predecessorCanonicalNodeMutationPerformed": false
   }
 }

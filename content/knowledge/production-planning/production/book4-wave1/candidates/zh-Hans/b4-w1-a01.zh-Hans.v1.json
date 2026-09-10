@@ -3,7 +3,7 @@
   "stage": "BOOK4-PJA-WAVE1-PRE_ADMISSION",
   "candidateId": "B4-W1-A01",
   "locale": "zh-Hans",
-  "status": "SOURCE_BOUND_EDITORIAL_CANDIDATE_CANONICAL_RECONCILIATION_PENDING",
+  "status": "HUMAN_EDITORIAL_ACCEPTED_A1_CANONICAL_RECONCILED_A2_PENDING",
   "productionRole": "ARTICLE",
   "dispatchTarget": "PJA",
   "publicationBookCode": "BOOK-4",
@@ -51,9 +51,10 @@
     "sourceSha256": "181cb98e54d0f2a2b5ad9dc00ab1d146f4ad41492e36b258e340f2104d29bd8e",
     "corpusSha256": "f430398eaea61cc73a6dd0afc92263359068d2b744554f1fc3e809b68cd215a6",
     "completedManuscriptPath": "content/knowledge/manuscripts/completed/book-4-completed-manuscript-v1.json",
-    "sectionInventoryPath": "content/knowledge/manuscripts/extraction/book-4-full-section-inventory-v1.json",
+    "sectionInventoryPath": "content/knowledge/manuscripts/extraction/book-4-final-section-inventory-v1.json",
     "canonicalCoverageAuditPath": "content/knowledge/manuscripts/review/book4-a1-canonical-coverage-audit-v1.json",
-    "readabilityStatus": "NOT_SEPARATELY_ASSERTED; USER_CONFIRMED_MANUSCRIPT_COMPLETE"
+    "readabilityStatus": "NOT_SEPARATELY_ASSERTED; USER_CONFIRMED_MANUSCRIPT_COMPLETE",
+    "rawSectionInventoryPath": "content/knowledge/manuscripts/extraction/book-4-full-section-inventory-v1.json"
   },
   "sourceBindings": [
     {
@@ -80,23 +81,27 @@
     }
   ],
   "canonicalNodeBinding": {
-    "status": "PENDING_BOOK_IV_A1_CANONICAL_RECONCILIATION",
-    "activeRegistryPath": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "status": "BOOK_IV_A1_FINAL_CANONICAL_RECONCILED",
+    "activeRegistryPath": "content/knowledge/registry/successors/book4-a1-final/canonical-nodes-v1.json",
     "nodeCode": null,
-    "nodeCodes": [],
-    "crossNodeAssemblyAllowed": "PENDING_AFTER_A1",
+    "nodeCodes": [
+      "KN-B4-P10-201",
+      "KN-B4-P10-202"
+    ],
+    "crossNodeAssemblyAllowed": true,
+    "reconciliationPath": "content/knowledge/production-planning/reconciliation/book4-wave1-final-canonical-reconciliation-v1.json",
     "mutationPerformed": false
   },
   "review": {
-    "humanEditorialApproved": false,
+    "humanEditorialApproved": true,
     "customerPublishable": false,
     "publicationStatus": "not_published",
-    "semanticParityStatus": "PENDING_HUMAN_EDITORIAL_REVIEW",
+    "semanticParityStatus": "SOURCE_LANGUAGE_ACCEPTED",
     "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-pja-wave1-human-decisions-v1.json"
   },
   "masterWorkBoundary": {
     "formalPhase": "PHASE 15",
-    "currentFormalStep": "BOOK-IV-A1_PENDING",
+    "currentFormalStep": "BOOK-IV-A2_READY",
     "bookIVA3Complete": false,
     "bookIVA6ProductionAdmission": false,
     "currentIntegratedExecutionOrderAdvanced": false

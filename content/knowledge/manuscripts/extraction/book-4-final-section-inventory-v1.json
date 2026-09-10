@@ -1,8 +1,9 @@
 {
-  "schemaVersion": "PHI-OS-BOOK4-FULL-SECTION-INVENTORY-v1.0.0",
-  "stage": "BOOK-IV-A0-PREPARATION",
-  "status": "RAW_EXTRACTION_VERIFIED_FINAL_DEDUP_DISPOSITION_APPLIED",
+  "schemaVersion": "PHI-OS-BOOK4-FINAL-SECTION-INVENTORY-v1.0.0",
+  "stage": "BOOK-IV-A1",
+  "status": "TL_CONFIRMED_DEDUPED_COMPLETED_MANUSCRIPT_FINAL_SECTION_AUTHORITY",
   "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "recordedAt": "2026-09-10",
   "bookCode": "BOOK-4",
   "sourceFileName": "PHI-OS-Book-4-v1.pdf",
   "sourceSha256": "181cb98e54d0f2a2b5ad9dc00ab1d146f4ad41492e36b258e340f2104d29bd8e",
@@ -10,49 +11,56 @@
   "pageCount": 433,
   "corpusSha256": "f430398eaea61cc73a6dd0afc92263359068d2b744554f1fc3e809b68cd215a6",
   "canonicalLanguage": "zh-Hans",
-  "segmentationMethod": "pdf_text_layer_marker_anchored_section_segmentation",
-  "markerSet": [
-    "📙 第10部｜运行扩展",
-    "✦",
-    "P10-S081 → P11-S001 boundary"
-  ],
-  "ocrUsed": false,
-  "semanticRewrite": false,
-  "visualVerification": {
-    "performed": true,
-    "pagesRendered": [
-      2,
-      3,
-      129,
-      135,
-      237,
-      424
-    ],
-    "purpose": "verify volume/part identity, section presentation, duplicate-heading evidence and P10→P11 transition"
-  },
-  "totalSegments": 129,
-  "sectionSegments": 127,
+  "rawExtractionInventoryPath": "content/knowledge/manuscripts/extraction/book-4-full-section-inventory-v1.json",
+  "dedupHumanAcceptancePath": "content/knowledge/manuscripts/review/book4-source-dedup-human-acceptance-v1.json",
+  "rawSectionOccurrenceCount": 127,
+  "finalSectionCount": 125,
+  "sectionSegments": 125,
   "frontMatterSegments": 1,
   "explicitTextPartIntroSegments": 1,
   "partCounts": {
     "FRONT": 1,
-    "P10": 81,
+    "P10": 79,
     "P11": 46
   },
-  "partBoundaryEvidence": {
-    "P10": {
-      "titleZhHans": "运行扩展",
-      "titleEn": "Runtime Expansion",
-      "firstSectionPage": 3,
-      "lastSectionPage": 236
+  "excludedDuplicateOccurrences": [
+    {
+      "sectionCode": "CM-B4V1-P10-S050",
+      "heading": "成本递延",
+      "duplicateOfSectionCode": "CM-B4V1-P10-S048",
+      "sourcePages": [
+        135,
+        137
+      ],
+      "disposition": "EXCLUDED_FROM_FINAL_MANUSCRIPT_AUTHORITY"
     },
-    "P11": {
-      "titleZhHans": "文明运行",
-      "titleEn": "Civilization Runtime",
-      "firstSectionPage": 237,
-      "lastSectionPage": 431,
-      "note": "Part title is visually present in the volume architecture/index; the text layer transitions directly from P10-S081 to P11-S001."
+    {
+      "sectionCode": "CM-B4V1-P10-S051",
+      "heading": "资源压缩",
+      "duplicateOfSectionCode": "CM-B4V1-P10-S049",
+      "sourcePages": [
+        137,
+        140
+      ],
+      "disposition": "EXCLUDED_FROM_FINAL_MANUSCRIPT_AUTHORITY"
     }
+  ],
+  "knownOutlineOnlyP10ChaptersNotPresentInFinalPdf": [
+    {
+      "chapterCode": "10.69",
+      "titleZhHans": "机器分发"
+    },
+    {
+      "chapterCode": "10.70",
+      "titleZhHans": "人工智能运行扩展"
+    }
+  ],
+  "policy": {
+    "rawPdfEvidenceMutated": false,
+    "duplicateOccurrencesRemovedFromFinalAuthority": true,
+    "completedManuscriptOverridesPreCompletionOutlineForBook4FinalCanonicalStructure": true,
+    "oneFinalSectionOneCanonicalNode": true,
+    "publicationAutomaticallyGranted": false
   },
   "sections": [
     {
@@ -96,8 +104,10 @@
       "charCount": 4561,
       "textSha256": "9d3473f0889673f18f463c71a2f97eda162e2be3f79c5b16ba5a87e38170f367",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 1,
+      "chapterCode": "10.1"
     },
     {
       "sectionCode": "CM-B4V1-P10-S002",
@@ -112,8 +122,10 @@
       "charCount": 3802,
       "textSha256": "8a380bb73083c7d5b39db96f255803695e8731d026f70676bfb6ab867f0893d6",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 2,
+      "chapterCode": "10.2"
     },
     {
       "sectionCode": "CM-B4V1-P10-S003",
@@ -128,8 +140,10 @@
       "charCount": 3185,
       "textSha256": "c3cb5527d124a0128ca6cac2931a55a36a77f792fd8b0c6ae97591fe851ab15e",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 3,
+      "chapterCode": "10.3"
     },
     {
       "sectionCode": "CM-B4V1-P10-S004",
@@ -144,8 +158,10 @@
       "charCount": 2946,
       "textSha256": "0809648a47859bd10b752cde60a0ff82c13154a6f8e96f37454ec8ea1943e718",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 4,
+      "chapterCode": "10.4"
     },
     {
       "sectionCode": "CM-B4V1-P10-S005",
@@ -160,8 +176,10 @@
       "charCount": 2836,
       "textSha256": "b84ad46c1e5d517afc1de104872de41e2e04adf47eb6086a9f7dbe67b8ae6f00",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 5,
+      "chapterCode": "10.5"
     },
     {
       "sectionCode": "CM-B4V1-P10-S006",
@@ -176,8 +194,10 @@
       "charCount": 2942,
       "textSha256": "ecf4ff2f46ef5716317bdc8002e68a41b5b3ccab94a281537c18a7e7b39d1407",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 6,
+      "chapterCode": "10.6"
     },
     {
       "sectionCode": "CM-B4V1-P10-S007",
@@ -192,8 +212,10 @@
       "charCount": 2955,
       "textSha256": "a6766b75cb66fbf16311d796096cca5d260aae20fa24c29daee29deba4970819",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 7,
+      "chapterCode": "10.7"
     },
     {
       "sectionCode": "CM-B4V1-P10-S008",
@@ -208,8 +230,10 @@
       "charCount": 2582,
       "textSha256": "319df1405be41589e316b4be04bde5cc02f6c35e32780399b0284e8adb509625",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 8,
+      "chapterCode": "10.8"
     },
     {
       "sectionCode": "CM-B4V1-P10-S009",
@@ -224,8 +248,10 @@
       "charCount": 2903,
       "textSha256": "8fd920426ba63d3fce663dcbeb1bb3c322bbfac2b15986d23eddff7c7881e74d",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 9,
+      "chapterCode": "10.9"
     },
     {
       "sectionCode": "CM-B4V1-P10-S010",
@@ -240,8 +266,10 @@
       "charCount": 2378,
       "textSha256": "aa65dfa27920a47a8f5d27c99425ed7c874c577f70471c72f301bfa1a7eb6ab7",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 10,
+      "chapterCode": "10.10"
     },
     {
       "sectionCode": "CM-B4V1-P10-S011",
@@ -256,8 +284,10 @@
       "charCount": 2316,
       "textSha256": "bfa0a4f7cfdbfcbe80e8a4b29a27e8012063ed69cb1d25d5ddbd3a59ddc0d9bc",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 11,
+      "chapterCode": "10.11"
     },
     {
       "sectionCode": "CM-B4V1-P10-S012",
@@ -272,8 +302,10 @@
       "charCount": 2483,
       "textSha256": "04b6db93203db1856e13edef8069bebd651467afe583ec20fabcadbf8fb7f132",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 12,
+      "chapterCode": "10.12"
     },
     {
       "sectionCode": "CM-B4V1-P10-S013",
@@ -288,8 +320,10 @@
       "charCount": 2243,
       "textSha256": "828d431f09bec75fff36be2af9c0d5003c0e6e4c357f3c4e99c3cfe5240770a1",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 13,
+      "chapterCode": "10.13"
     },
     {
       "sectionCode": "CM-B4V1-P10-S014",
@@ -304,8 +338,10 @@
       "charCount": 3012,
       "textSha256": "e5455d43a580b66f43976ac73a69de8ee94acc0c1da4aef6ddd8de2eaaa7d63d",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 14,
+      "chapterCode": "10.14"
     },
     {
       "sectionCode": "CM-B4V1-P10-S015",
@@ -320,8 +356,10 @@
       "charCount": 2921,
       "textSha256": "70d613b33a9709581aa49af6a84ceacf94f394730483244d3519cb336126ead2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 15,
+      "chapterCode": "10.15"
     },
     {
       "sectionCode": "CM-B4V1-P10-S016",
@@ -336,8 +374,10 @@
       "charCount": 2543,
       "textSha256": "e19e59abf4ee6f87b52ddeb4c291ad1bd8f76fe569362935fa024044db1bbb03",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 16,
+      "chapterCode": "10.16"
     },
     {
       "sectionCode": "CM-B4V1-P10-S017",
@@ -352,8 +392,10 @@
       "charCount": 2908,
       "textSha256": "1f3ca72cad72d9cff8858e1484136df57c28b8b30d2b22638a0020a32e438ece",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 17,
+      "chapterCode": "10.17"
     },
     {
       "sectionCode": "CM-B4V1-P10-S018",
@@ -368,8 +410,10 @@
       "charCount": 2630,
       "textSha256": "e767860d4430bfcc86b474321e086bf4c6c9e1b0d8fd478dee553269117b66b2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 18,
+      "chapterCode": "10.18"
     },
     {
       "sectionCode": "CM-B4V1-P10-S019",
@@ -384,8 +428,10 @@
       "charCount": 2704,
       "textSha256": "9141b3e51d4c216b9bfd1afcdd097717214e9f7408c79c67994566e3237097f3",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 19,
+      "chapterCode": "10.19"
     },
     {
       "sectionCode": "CM-B4V1-P10-S020",
@@ -400,8 +446,10 @@
       "charCount": 2267,
       "textSha256": "1c66f48a03bf9f92b3a52e79c934e49a7dd0474d54e4b9daa65ae1d43096d3c1",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 20,
+      "chapterCode": "10.20"
     },
     {
       "sectionCode": "CM-B4V1-P10-S021",
@@ -416,8 +464,10 @@
       "charCount": 1697,
       "textSha256": "e75a330462e9da828af1e596fb740c3b0d54a71cae1c7656b9a4ca88cab140a2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 21,
+      "chapterCode": "10.21"
     },
     {
       "sectionCode": "CM-B4V1-P10-S022",
@@ -432,8 +482,10 @@
       "charCount": 2252,
       "textSha256": "d0858f11a56fbd5a9503e1ad98fb2afc238e7358b5380c8594ddab1ccd52acbc",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 22,
+      "chapterCode": "10.22"
     },
     {
       "sectionCode": "CM-B4V1-P10-S023",
@@ -448,8 +500,10 @@
       "charCount": 2492,
       "textSha256": "cee6e6f21cb3506b29b33832ef6b793487dbd3b7ae9f986256d190c6658749b3",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 23,
+      "chapterCode": "10.23"
     },
     {
       "sectionCode": "CM-B4V1-P10-S024",
@@ -464,8 +518,10 @@
       "charCount": 2334,
       "textSha256": "cb4acdd054ea2bc7de0f7b6250899eb3ff70b438e096ac6ec737c016ea23d399",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 24,
+      "chapterCode": "10.24"
     },
     {
       "sectionCode": "CM-B4V1-P10-S025",
@@ -480,8 +536,10 @@
       "charCount": 2531,
       "textSha256": "97d7d23aecb3ad2f2dcf9cf7912ac39e931cc85a6d167fea2a6678a25bf9c08d",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 25,
+      "chapterCode": "10.25"
     },
     {
       "sectionCode": "CM-B4V1-P10-S026",
@@ -496,8 +554,10 @@
       "charCount": 2280,
       "textSha256": "f30b1f10efb5da666afb9a36c45e18e081ff5a74b01028fccd4269851ac9a53f",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 26,
+      "chapterCode": "10.26"
     },
     {
       "sectionCode": "CM-B4V1-P10-S027",
@@ -512,8 +572,10 @@
       "charCount": 2426,
       "textSha256": "698223e6ea3d1da275ea70d6b1e7c63ab4e8c79630746d3c84a0da702347c78f",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 27,
+      "chapterCode": "10.27"
     },
     {
       "sectionCode": "CM-B4V1-P10-S028",
@@ -528,8 +590,10 @@
       "charCount": 2878,
       "textSha256": "7b01d5cd37598506f8eb79dd5a7471f607745fdba29beb96768d6a880a71fbf8",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 28,
+      "chapterCode": "10.28"
     },
     {
       "sectionCode": "CM-B4V1-P10-S029",
@@ -544,8 +608,10 @@
       "charCount": 2707,
       "textSha256": "ac430fe7783a72a1c293a515e60c3801d255bc6145f606b789f3dd89b08888cf",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 29,
+      "chapterCode": "10.29"
     },
     {
       "sectionCode": "CM-B4V1-P10-S030",
@@ -560,8 +626,10 @@
       "charCount": 2699,
       "textSha256": "a6a2552071d4e1f3bf8a4d514582e0285847ef25760dddf8d30ef0312487fdeb",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 30,
+      "chapterCode": "10.30"
     },
     {
       "sectionCode": "CM-B4V1-P10-S031",
@@ -576,8 +644,10 @@
       "charCount": 2331,
       "textSha256": "d2a856bdca66eb6ead1fea76624c4cd409f179ca10bf1a92cc6b5b3170474306",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 31,
+      "chapterCode": "10.31"
     },
     {
       "sectionCode": "CM-B4V1-P10-S032",
@@ -592,8 +662,10 @@
       "charCount": 2648,
       "textSha256": "8e32d47b620238b47a19923723fd18c981ad3cf3ef0530e40a90d0ef7ef9ff86",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 32,
+      "chapterCode": "10.32"
     },
     {
       "sectionCode": "CM-B4V1-P10-S033",
@@ -608,8 +680,10 @@
       "charCount": 3237,
       "textSha256": "cb444a3b3cd98c1e3be634c6a961983ff5ced5bfea93a89bb78d04999dc6add2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 33,
+      "chapterCode": "10.33"
     },
     {
       "sectionCode": "CM-B4V1-P10-S034",
@@ -624,8 +698,10 @@
       "charCount": 2782,
       "textSha256": "8eeddb3dac39e2cfd8ff6d249b6eeaf8b5a87e0eaa5310463ff7088f5d372f23",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 34,
+      "chapterCode": "10.34"
     },
     {
       "sectionCode": "CM-B4V1-P10-S035",
@@ -640,8 +716,10 @@
       "charCount": 2786,
       "textSha256": "797b1fe7232c65246a5c544b0f84bc01f4645246a820f32f3fb37a4db1049a1b",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 35,
+      "chapterCode": "10.35"
     },
     {
       "sectionCode": "CM-B4V1-P10-S036",
@@ -656,8 +734,10 @@
       "charCount": 2575,
       "textSha256": "f9204810164c5294edb7878ac29bbad47d963cb9e4ae72a72446ce03b221629d",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 36,
+      "chapterCode": "10.36"
     },
     {
       "sectionCode": "CM-B4V1-P10-S037",
@@ -672,8 +752,10 @@
       "charCount": 2810,
       "textSha256": "665c7843cb32fcb16ba947ac7dc27bff4fec5bc1ef243f5b1e4fc18700b6baf9",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 37,
+      "chapterCode": "10.37"
     },
     {
       "sectionCode": "CM-B4V1-P10-S038",
@@ -688,8 +770,10 @@
       "charCount": 2812,
       "textSha256": "77d80256e0e6cb96f15b89938f50ee656fcc3b079cab2be2cde8571a04b90d85",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 38,
+      "chapterCode": "10.38"
     },
     {
       "sectionCode": "CM-B4V1-P10-S039",
@@ -704,8 +788,10 @@
       "charCount": 2632,
       "textSha256": "8d88201196bbbf1fe20dcfcfa62570fe31e121a02764f8d38c5a9289e49efb34",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 39,
+      "chapterCode": "10.39"
     },
     {
       "sectionCode": "CM-B4V1-P10-S040",
@@ -720,8 +806,10 @@
       "charCount": 2424,
       "textSha256": "9548b8545b8693c4c78426ed99ae822b7940c2e6309bbbbc379a112959e51dbe",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 40,
+      "chapterCode": "10.40"
     },
     {
       "sectionCode": "CM-B4V1-P10-S041",
@@ -736,8 +824,10 @@
       "charCount": 2513,
       "textSha256": "923f139f801df91abcd3d7bbf8542cf511f609f81256e768bc4045f733803154",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 41,
+      "chapterCode": "10.41"
     },
     {
       "sectionCode": "CM-B4V1-P10-S042",
@@ -752,8 +842,10 @@
       "charCount": 2604,
       "textSha256": "9b5c842e547c9e2a562301743da0108605e5905add3c7b008b6f745a1374c223",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 42,
+      "chapterCode": "10.42"
     },
     {
       "sectionCode": "CM-B4V1-P10-S043",
@@ -768,8 +860,10 @@
       "charCount": 2829,
       "textSha256": "7bfa2cbf124926029bc0a6e26a70070b0a2b484df1ae8414d6bce3368f29d3a5",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 43,
+      "chapterCode": "10.43"
     },
     {
       "sectionCode": "CM-B4V1-P10-S044",
@@ -784,8 +878,10 @@
       "charCount": 2387,
       "textSha256": "af1bcb6fea2ea8f87cb1eb4a782e1f018b93537a3f53821c4b4ce31348662083",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 44,
+      "chapterCode": "10.44"
     },
     {
       "sectionCode": "CM-B4V1-P10-S045",
@@ -800,8 +896,10 @@
       "charCount": 2536,
       "textSha256": "cf3b3ea541067e28a82d7fa7a46e5907e1dfc79aa16c7423e107aa7571bd7b19",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 45,
+      "chapterCode": "10.45"
     },
     {
       "sectionCode": "CM-B4V1-P10-S046",
@@ -816,8 +914,10 @@
       "charCount": 2763,
       "textSha256": "d0ac2c9e223d13ee85b75fbad873e26c54364d76749609136e2a79c50d6ec8f4",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 46,
+      "chapterCode": "10.46"
     },
     {
       "sectionCode": "CM-B4V1-P10-S047",
@@ -832,8 +932,10 @@
       "charCount": 2641,
       "textSha256": "0bbbdf9b2a7cc84be9b0790bf487d84fc40c9d781457ea4c9d6c12345ba8b3be",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 47,
+      "chapterCode": "10.47"
     },
     {
       "sectionCode": "CM-B4V1-P10-S048",
@@ -848,8 +950,10 @@
       "charCount": 2752,
       "textSha256": "b2941fc46c32dcba23aa7a736425e4d23cee16af1c1201daba0ffdb0fdb1b90e",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 48,
+      "chapterCode": "10.48"
     },
     {
       "sectionCode": "CM-B4V1-P10-S049",
@@ -864,42 +968,10 @@
       "charCount": 2874,
       "textSha256": "a34652933a1d823b81a5308ee805b64f948a2b7158dd4c65747a4701c5c3736e",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
-    },
-    {
-      "sectionCode": "CM-B4V1-P10-S050",
-      "segmentType": "SECTION",
-      "partCode": "P10",
-      "sequence": 50,
-      "heading": "成本递延",
-      "headingRaw": "✦ 成本递延 | 为什么系统会把当前扩展成本推迟到以后处理",
-      "naturalQuestion": "为什么系统会把当前扩展成本推迟到以后处理",
-      "startPage": 135,
-      "endPage": 137,
-      "charCount": 2751,
-      "textSha256": "6bb70cd407a6985a4d5fcda8de389b660dec1035af9c6b0fbc56775c251af79d",
-      "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "EXCLUDED_HUMAN_CONFIRMED_DUPLICATE",
-      "activeFinalManuscriptSection": false,
-      "duplicateOfSectionCode": "CM-B4V1-P10-S048"
-    },
-    {
-      "sectionCode": "CM-B4V1-P10-S051",
-      "segmentType": "SECTION",
-      "partCode": "P10",
-      "sequence": 51,
-      "heading": "资源压缩",
-      "headingRaw": "✦ 资源压缩 | 为什么扩展会提高对于有限资源的竞争与集中",
-      "naturalQuestion": "为什么扩展会提高对于有限资源的竞争与集中",
-      "startPage": 137,
-      "endPage": 140,
-      "charCount": 2874,
-      "textSha256": "d496a71978987e316335ae2d3fc69543951ec08362a5c18c6bb00ace062b7255",
-      "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "EXCLUDED_HUMAN_CONFIRMED_DUPLICATE",
-      "activeFinalManuscriptSection": false,
-      "duplicateOfSectionCode": "CM-B4V1-P10-S049"
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 49,
+      "chapterCode": "10.49"
     },
     {
       "sectionCode": "CM-B4V1-P10-S052",
@@ -914,8 +986,10 @@
       "charCount": 2385,
       "textSha256": "33a12f0c4c72cc4e35a336658b78159e7c6b1ad381c8ebf54a3ac28659027714",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 50,
+      "chapterCode": "10.50"
     },
     {
       "sectionCode": "CM-B4V1-P10-S053",
@@ -930,8 +1004,10 @@
       "charCount": 2622,
       "textSha256": "c013dfc62cf1cc25e7374ef5e4ff5ee02aff73151fe130625bd6fa1921548c3a",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 51,
+      "chapterCode": "10.51"
     },
     {
       "sectionCode": "CM-B4V1-P10-S054",
@@ -946,8 +1022,10 @@
       "charCount": 2790,
       "textSha256": "be78f429bb4b4eb1e5ef28566547b378d29fb7febf27988acbd4c8f83c9747ca",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 52,
+      "chapterCode": "10.52"
     },
     {
       "sectionCode": "CM-B4V1-P10-S055",
@@ -962,8 +1040,10 @@
       "charCount": 3082,
       "textSha256": "ae0166392fa31aa501e7a4e0d2f7a9d1edb48853c16a94825861029ca57d7ce1",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 53,
+      "chapterCode": "10.53"
     },
     {
       "sectionCode": "CM-B4V1-P10-S056",
@@ -978,8 +1058,10 @@
       "charCount": 3674,
       "textSha256": "070ae5713481ddd03f93cb7ce9a34e8132511915cadeab60853335a409f9f3a2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 54,
+      "chapterCode": "10.54"
     },
     {
       "sectionCode": "CM-B4V1-P10-S057",
@@ -994,8 +1076,10 @@
       "charCount": 2706,
       "textSha256": "2d127e51c68a37689cea3c5945e2f23b9b52b3b664c1ac51206737c7cb7f96af",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 55,
+      "chapterCode": "10.55"
     },
     {
       "sectionCode": "CM-B4V1-P10-S058",
@@ -1010,8 +1094,10 @@
       "charCount": 2840,
       "textSha256": "e342dffec7a4e0669f033fe567b402a6058f8ee06d2f641309d45cca26018c30",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 56,
+      "chapterCode": "10.56"
     },
     {
       "sectionCode": "CM-B4V1-P10-S059",
@@ -1026,8 +1112,10 @@
       "charCount": 2501,
       "textSha256": "ed974d5e0f2b5eafe2d18afd986484a0e4c0a64466e9f3697ca90a60069bbead",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 57,
+      "chapterCode": "10.57"
     },
     {
       "sectionCode": "CM-B4V1-P10-S060",
@@ -1042,8 +1130,10 @@
       "charCount": 3401,
       "textSha256": "1b276a12f283b0bf501127a1574568e6fcc04e669f76219584a333819def17d3",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 58,
+      "chapterCode": "10.58"
     },
     {
       "sectionCode": "CM-B4V1-P10-S061",
@@ -1058,8 +1148,10 @@
       "charCount": 3173,
       "textSha256": "a3e93201106853daf55fbf9e197b4d13bf7764311bc52c69e209a0cf85e40755",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 59,
+      "chapterCode": "10.59"
     },
     {
       "sectionCode": "CM-B4V1-P10-S062",
@@ -1074,8 +1166,10 @@
       "charCount": 3225,
       "textSha256": "efeecea6a590cfd172f652087441a9e93780c3b7ad09eddf60089bad35ff0fc2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 60,
+      "chapterCode": "10.60"
     },
     {
       "sectionCode": "CM-B4V1-P10-S063",
@@ -1090,8 +1184,10 @@
       "charCount": 3582,
       "textSha256": "1a3693abf7828222437ae7e15d80a11885a3e4cc555e9a84622bdcec472d0902",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 61,
+      "chapterCode": "10.61"
     },
     {
       "sectionCode": "CM-B4V1-P10-S064",
@@ -1106,8 +1202,10 @@
       "charCount": 3727,
       "textSha256": "ad59c9a7ec8dd5269782bc29a335b47b5bb7cce27ce4f6d9636a262d1838e9ef",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 62,
+      "chapterCode": "10.62"
     },
     {
       "sectionCode": "CM-B4V1-P10-S065",
@@ -1122,8 +1220,10 @@
       "charCount": 2924,
       "textSha256": "b15bd324bbdfcb69565c704184a72e8e6a27bc60c0d531165b1e2b9927c88bc7",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 63,
+      "chapterCode": "10.63"
     },
     {
       "sectionCode": "CM-B4V1-P10-S066",
@@ -1138,8 +1238,10 @@
       "charCount": 2973,
       "textSha256": "6740ff3d8b66a9a1a201a6602e3ae2786c3618afc07e38be7e69af0dd9b9b9bc",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 64,
+      "chapterCode": "10.64"
     },
     {
       "sectionCode": "CM-B4V1-P10-S067",
@@ -1154,8 +1256,10 @@
       "charCount": 3097,
       "textSha256": "6cfda26af488dd03454545d85cbfb77c74d7029dd826a90851f9a34ff3071a0f",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 65,
+      "chapterCode": "10.65"
     },
     {
       "sectionCode": "CM-B4V1-P10-S068",
@@ -1170,8 +1274,10 @@
       "charCount": 3359,
       "textSha256": "b08ce00f082594fe8304f04f1c41646ea46e8f1de5c1b794017abfe9c15ecc92",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 66,
+      "chapterCode": "10.66"
     },
     {
       "sectionCode": "CM-B4V1-P10-S069",
@@ -1186,8 +1292,10 @@
       "charCount": 2996,
       "textSha256": "49461711082deb56bc5b69bd158f07b9f7aad37a82da5fc69f298ffc94590ea2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 67,
+      "chapterCode": "10.67"
     },
     {
       "sectionCode": "CM-B4V1-P10-S070",
@@ -1202,8 +1310,10 @@
       "charCount": 3657,
       "textSha256": "82094d281d8c81cc14096d6ca0eca4508efe22284fcb5435119e693eaacc1e75",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 68,
+      "chapterCode": "10.68"
     },
     {
       "sectionCode": "CM-B4V1-P10-S071",
@@ -1218,8 +1328,10 @@
       "charCount": 2820,
       "textSha256": "e4fc81a3e7b9ec5f933c15c907dfe9db9bf92d823af63a77503174a9242ad2f3",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 69,
+      "chapterCode": "10.71"
     },
     {
       "sectionCode": "CM-B4V1-P10-S072",
@@ -1234,8 +1346,10 @@
       "charCount": 3050,
       "textSha256": "accc6d2e842ab7cfa3ce107fc2bf7e9e24aa028a26f54da85b78469d17cc7730",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 70,
+      "chapterCode": "10.72"
     },
     {
       "sectionCode": "CM-B4V1-P10-S073",
@@ -1250,8 +1364,10 @@
       "charCount": 3421,
       "textSha256": "dbc780e4e38ebb8665875f756e8560da60e743a3e7ff5d4760d08209536b2b41",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 71,
+      "chapterCode": "10.73"
     },
     {
       "sectionCode": "CM-B4V1-P10-S074",
@@ -1266,8 +1382,10 @@
       "charCount": 3654,
       "textSha256": "0c18069514c149bc9071c7e71be74013a41e96cdbefb0e3a8be5583e671f6ea2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 72,
+      "chapterCode": "10.74"
     },
     {
       "sectionCode": "CM-B4V1-P10-S075",
@@ -1282,8 +1400,10 @@
       "charCount": 3628,
       "textSha256": "aa47ce5546523a4c9ac15911ecaeec136aa9048edcf6ab481bdeaa9860770d3d",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 73,
+      "chapterCode": "10.75"
     },
     {
       "sectionCode": "CM-B4V1-P10-S076",
@@ -1298,8 +1418,10 @@
       "charCount": 3325,
       "textSha256": "c6d981f72c4eddefa1288e39933dda2b2fbe8100b6aa224dc5299c527d58c1ea",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 74,
+      "chapterCode": "10.76"
     },
     {
       "sectionCode": "CM-B4V1-P10-S077",
@@ -1314,8 +1436,10 @@
       "charCount": 3162,
       "textSha256": "bbba89732f660e26b91ba9f54e88470e0c5384808c0e50d634bb5837f4f06a01",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 75,
+      "chapterCode": "10.77"
     },
     {
       "sectionCode": "CM-B4V1-P10-S078",
@@ -1330,8 +1454,10 @@
       "charCount": 3137,
       "textSha256": "f4a749e297779bc7b200fea2b766b923b4e339ef51e983d403c277bd463d316c",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 76,
+      "chapterCode": "10.78"
     },
     {
       "sectionCode": "CM-B4V1-P10-S079",
@@ -1346,8 +1472,10 @@
       "charCount": 3031,
       "textSha256": "a850b23e19da9fdee24a3a1a12bd59c3e9bcc8ea9e3a6a46e57cbb89fa2f96ca",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 77,
+      "chapterCode": "10.79"
     },
     {
       "sectionCode": "CM-B4V1-P10-S080",
@@ -1362,8 +1490,10 @@
       "charCount": 3480,
       "textSha256": "3a067d1d99f011b4fe77124acdff0c3470c34455455f4c0878ea8c6ddf49feb6",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 78,
+      "chapterCode": "10.80"
     },
     {
       "sectionCode": "CM-B4V1-P10-S081",
@@ -1378,8 +1508,10 @@
       "charCount": 5207,
       "textSha256": "e086cb178bc17e99d1c5c43930a42574866c53129647cee5c9a757211f68905e",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 79,
+      "chapterCode": "10.81"
     },
     {
       "sectionCode": "CM-B4V1-P11-S001",
@@ -1394,8 +1526,10 @@
       "charCount": 3981,
       "textSha256": "11d5e5ac8879cd2857dd7a9d21540e30f2ddc3615791ef395f1004b4b92e32d6",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 1,
+      "chapterCode": "11.1"
     },
     {
       "sectionCode": "CM-B4V1-P11-S002",
@@ -1410,8 +1544,10 @@
       "charCount": 4329,
       "textSha256": "df32fa958e652a637c7d126c63951a857ce2bfbd9119ebf19aa074738ed74082",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 2,
+      "chapterCode": "11.2"
     },
     {
       "sectionCode": "CM-B4V1-P11-S003",
@@ -1426,8 +1562,10 @@
       "charCount": 4017,
       "textSha256": "391f8363ebd5454c65339e025bc1ebc6b0dbe963379a4bbaa066226e2d210dc9",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 3,
+      "chapterCode": "11.3"
     },
     {
       "sectionCode": "CM-B4V1-P11-S004",
@@ -1442,8 +1580,10 @@
       "charCount": 3887,
       "textSha256": "40d2cccd947923b7104d44c7fa63812f9ac417b4a6c249cc559e99d630739140",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 4,
+      "chapterCode": "11.4"
     },
     {
       "sectionCode": "CM-B4V1-P11-S005",
@@ -1458,8 +1598,10 @@
       "charCount": 3841,
       "textSha256": "7a25aeceded009994444be53e27da8fd77d5155a1047c9bec735f8d4d51e9a6c",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 5,
+      "chapterCode": "11.5"
     },
     {
       "sectionCode": "CM-B4V1-P11-S006",
@@ -1474,8 +1616,10 @@
       "charCount": 4107,
       "textSha256": "3e0dab09dd5616fd475d8ba2bc3f51352fb6946eea017628e98d178e175edc72",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 6,
+      "chapterCode": "11.6"
     },
     {
       "sectionCode": "CM-B4V1-P11-S007",
@@ -1490,8 +1634,10 @@
       "charCount": 3694,
       "textSha256": "33285535189eaef6a877cd5ba7e2dfc74134cb60eb6c75b808b6e85d2c52ddcd",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 7,
+      "chapterCode": "11.7"
     },
     {
       "sectionCode": "CM-B4V1-P11-S008",
@@ -1506,8 +1652,10 @@
       "charCount": 4114,
       "textSha256": "c1ca8d2405312188c930fdd443b570f9166e32cc117fbf46d64c692e40d23222",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 8,
+      "chapterCode": "11.8"
     },
     {
       "sectionCode": "CM-B4V1-P11-S009",
@@ -1522,8 +1670,10 @@
       "charCount": 4121,
       "textSha256": "6505d887c0fc5bdc65e910227d1f190ce78a2613f1ffd3336e11d235d5c37a54",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 9,
+      "chapterCode": "11.9"
     },
     {
       "sectionCode": "CM-B4V1-P11-S010",
@@ -1538,8 +1688,10 @@
       "charCount": 3553,
       "textSha256": "06621af57f86a9bd0d149935db9bcbafa0e3c5bace7c1fc8edd781a945bc0fc1",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 10,
+      "chapterCode": "11.10"
     },
     {
       "sectionCode": "CM-B4V1-P11-S011",
@@ -1554,8 +1706,10 @@
       "charCount": 3695,
       "textSha256": "d38816efa1619060ae1a951b0dc732398f0ff80b47952eac16f6c8d8be43c1fb",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 11,
+      "chapterCode": "11.11"
     },
     {
       "sectionCode": "CM-B4V1-P11-S012",
@@ -1570,8 +1724,10 @@
       "charCount": 4480,
       "textSha256": "2ef1d50ae3d14dcf74798dde0731aba225588799b943d40a3198bdcdb54179ad",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 12,
+      "chapterCode": "11.12"
     },
     {
       "sectionCode": "CM-B4V1-P11-S013",
@@ -1586,8 +1742,10 @@
       "charCount": 3985,
       "textSha256": "6427dc28f825eff171ae07f32bc37e7bdbd1aacd741e8dce6a3e85c0ffc27824",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 13,
+      "chapterCode": "11.13"
     },
     {
       "sectionCode": "CM-B4V1-P11-S014",
@@ -1602,8 +1760,10 @@
       "charCount": 4711,
       "textSha256": "319dcc15b00ef19fa51f6761cd27d88af2d4cec2a42cb95fb138e69fafbf50f0",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 14,
+      "chapterCode": "11.14"
     },
     {
       "sectionCode": "CM-B4V1-P11-S015",
@@ -1618,8 +1778,10 @@
       "charCount": 3559,
       "textSha256": "92563e3b09ed076ab2def3d8dc21cc1a4b29121269b872f85e965b9abc2fe8fb",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 15,
+      "chapterCode": "11.15"
     },
     {
       "sectionCode": "CM-B4V1-P11-S016",
@@ -1634,8 +1796,10 @@
       "charCount": 3703,
       "textSha256": "525967e1d60116c3fbe71ac946e3174e6735443be34d0f761db6ad459a3e5f33",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 16,
+      "chapterCode": "11.16"
     },
     {
       "sectionCode": "CM-B4V1-P11-S017",
@@ -1650,8 +1814,10 @@
       "charCount": 3649,
       "textSha256": "035463573d9bd1d8bd0f0dc6548b25db19ac283ad357a91f620a067dbcd13f37",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 17,
+      "chapterCode": "11.17"
     },
     {
       "sectionCode": "CM-B4V1-P11-S018",
@@ -1666,8 +1832,10 @@
       "charCount": 4085,
       "textSha256": "6bd751c6fcc23f010fc860f99177f3c659c90cd4312cc87eace06659b9289e96",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 18,
+      "chapterCode": "11.18"
     },
     {
       "sectionCode": "CM-B4V1-P11-S019",
@@ -1682,8 +1850,10 @@
       "charCount": 6736,
       "textSha256": "7942b9968dc0ef99c5569edcd167eac5381e43c196c6abebabc3cc0cff78b8b7",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 19,
+      "chapterCode": "11.19"
     },
     {
       "sectionCode": "CM-B4V1-P11-S020",
@@ -1698,8 +1868,10 @@
       "charCount": 3779,
       "textSha256": "55afe0890fc4c12917a0ed2f5fc25d7f52942be61b54a7556450562cafe58b90",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 20,
+      "chapterCode": "11.20"
     },
     {
       "sectionCode": "CM-B4V1-P11-S021",
@@ -1714,8 +1886,10 @@
       "charCount": 3843,
       "textSha256": "514aa2f417f56d34974132f3fe2bee2003b17a69412debd7bd5389fc535c74bf",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 21,
+      "chapterCode": "11.21"
     },
     {
       "sectionCode": "CM-B4V1-P11-S022",
@@ -1730,8 +1904,10 @@
       "charCount": 3199,
       "textSha256": "072be126c68ec893dbf07de358ac86fe2fef18c7175dc35da6119d49267b3842",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 22,
+      "chapterCode": "11.22"
     },
     {
       "sectionCode": "CM-B4V1-P11-S023",
@@ -1746,8 +1922,10 @@
       "charCount": 3574,
       "textSha256": "72b8527201338ab7d8aed93b52b99a594685368ae5869edf4922d1fcd8170608",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 23,
+      "chapterCode": "11.23"
     },
     {
       "sectionCode": "CM-B4V1-P11-S024",
@@ -1762,8 +1940,10 @@
       "charCount": 3418,
       "textSha256": "abd74cbefed2276445d44954f76bdf4fea363196608bdea6d56060dacf2c4015",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 24,
+      "chapterCode": "11.24"
     },
     {
       "sectionCode": "CM-B4V1-P11-S025",
@@ -1778,8 +1958,10 @@
       "charCount": 4133,
       "textSha256": "3e96bb594961877604f4a5727e802f1af10d39f4de7d7af7669754566b99d9b9",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 25,
+      "chapterCode": "11.25"
     },
     {
       "sectionCode": "CM-B4V1-P11-S026",
@@ -1794,8 +1976,10 @@
       "charCount": 4724,
       "textSha256": "42906fce488047bee5e993e02a97f72fc35285a78638ffa7027805d0b96a4bb5",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 26,
+      "chapterCode": "11.26"
     },
     {
       "sectionCode": "CM-B4V1-P11-S027",
@@ -1810,8 +1994,10 @@
       "charCount": 3544,
       "textSha256": "22358ef4f241872b1a08d095e391757782c1d7798fc324d5961e3e0ef4e955c4",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 27,
+      "chapterCode": "11.27"
     },
     {
       "sectionCode": "CM-B4V1-P11-S028",
@@ -1826,8 +2012,10 @@
       "charCount": 3796,
       "textSha256": "00b76c8f9b99607b6b3e45e8975e813423e186f64b78f6d15b94249692915aa6",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 28,
+      "chapterCode": "11.28"
     },
     {
       "sectionCode": "CM-B4V1-P11-S029",
@@ -1842,8 +2030,10 @@
       "charCount": 3808,
       "textSha256": "0f0d84594487dcf4991731f351629c5ef43ae04079a34df20cc69ea4f3601abf",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 29,
+      "chapterCode": "11.29"
     },
     {
       "sectionCode": "CM-B4V1-P11-S030",
@@ -1858,8 +2048,10 @@
       "charCount": 3995,
       "textSha256": "be30ea7c3ebb1ccef28caeffa9bb09bd394fc5f02a3fc69843997ced8edf93f9",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 30,
+      "chapterCode": "11.30"
     },
     {
       "sectionCode": "CM-B4V1-P11-S031",
@@ -1874,8 +2066,10 @@
       "charCount": 4094,
       "textSha256": "28d004896ded4a1dcfeafba5ef14d19c45cff1001f22244b32288ebd713c3bd0",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 31,
+      "chapterCode": "11.31"
     },
     {
       "sectionCode": "CM-B4V1-P11-S032",
@@ -1890,8 +2084,10 @@
       "charCount": 3888,
       "textSha256": "da1fbe0412fff44192906b581d9af32d3f31592ae00a6045633eeda9b16f4e5a",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 32,
+      "chapterCode": "11.32"
     },
     {
       "sectionCode": "CM-B4V1-P11-S033",
@@ -1906,8 +2102,10 @@
       "charCount": 3972,
       "textSha256": "371addf830abe1e029b96e973879c5f96d147346d365a9345af6ba968084c146",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 33,
+      "chapterCode": "11.33"
     },
     {
       "sectionCode": "CM-B4V1-P11-S034",
@@ -1922,8 +2120,10 @@
       "charCount": 3139,
       "textSha256": "a945901181087d2c3c386d92c5cc918b2e7870c65cf02cfc9ceb644f3d331011",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 34,
+      "chapterCode": "11.34"
     },
     {
       "sectionCode": "CM-B4V1-P11-S035",
@@ -1938,8 +2138,10 @@
       "charCount": 4731,
       "textSha256": "b54a223f04e06a1f5332d16fdb47f8d8ee53c1ca67d8e23e1b46bb192942793f",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 35,
+      "chapterCode": "11.35"
     },
     {
       "sectionCode": "CM-B4V1-P11-S036",
@@ -1954,8 +2156,10 @@
       "charCount": 4554,
       "textSha256": "690944feccf864b79c26dbbce71433b90f3dae8b7dc8f5b6f1bdb7fe87b77967",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 36,
+      "chapterCode": "11.36"
     },
     {
       "sectionCode": "CM-B4V1-P11-S037",
@@ -1970,8 +2174,10 @@
       "charCount": 5071,
       "textSha256": "d5dd06bb7084da53a6a9622e2436e7a5143b5736e6082e49a827ae39308ed47a",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 37,
+      "chapterCode": "11.37"
     },
     {
       "sectionCode": "CM-B4V1-P11-S038",
@@ -1986,8 +2192,10 @@
       "charCount": 4360,
       "textSha256": "4cf67550348f411fb213a7624923259cc2b5088e32fcb74d929066a63974847b",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 38,
+      "chapterCode": "11.38"
     },
     {
       "sectionCode": "CM-B4V1-P11-S039",
@@ -2002,8 +2210,10 @@
       "charCount": 5520,
       "textSha256": "3e4893c3beaa5ed2e8a66c84e3d0115cc8a4eb6ffff2c85b13ce91f17a90c3e5",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 39,
+      "chapterCode": "11.39"
     },
     {
       "sectionCode": "CM-B4V1-P11-S040",
@@ -2018,8 +2228,10 @@
       "charCount": 5220,
       "textSha256": "03026fe9ff12b462f01a63f7ee8275787b0c4ea85580464dd5dad2a41d36851a",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 40,
+      "chapterCode": "11.40"
     },
     {
       "sectionCode": "CM-B4V1-P11-S041",
@@ -2034,8 +2246,10 @@
       "charCount": 4394,
       "textSha256": "f72338ac18ed654a2d3b6688f91ca5d1ee3d8641fa9590e09e9c4ae5622062f7",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 41,
+      "chapterCode": "11.41"
     },
     {
       "sectionCode": "CM-B4V1-P11-S042",
@@ -2050,8 +2264,10 @@
       "charCount": 4330,
       "textSha256": "cadc65f9dc6781f25206d4c0e7e57e5dd9648771cf38e2c2cbb8dc25c45392f2",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 42,
+      "chapterCode": "11.42"
     },
     {
       "sectionCode": "CM-B4V1-P11-S043",
@@ -2066,8 +2282,10 @@
       "charCount": 4310,
       "textSha256": "b3e3e8887d976e71624ab0f0d1b44dabb915bf08d5c5c7764a6e6a25c0e5b08d",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 43,
+      "chapterCode": "11.43"
     },
     {
       "sectionCode": "CM-B4V1-P11-S044",
@@ -2082,8 +2300,10 @@
       "charCount": 4802,
       "textSha256": "068d1fa1200327459c069efa4b622a8a9574410aa80daa3dcc19d41749ee4162",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 44,
+      "chapterCode": "11.44"
     },
     {
       "sectionCode": "CM-B4V1-P11-S045",
@@ -2098,8 +2318,10 @@
       "charCount": 4865,
       "textSha256": "b246a61fc7e4d17c970e7ad27da1d639d3fb746f93ddb1499f8bd22f17428480",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 45,
+      "chapterCode": "11.45"
     },
     {
       "sectionCode": "CM-B4V1-P11-S046",
@@ -2114,19 +2336,11 @@
       "charCount": 7032,
       "textSha256": "853141cad52bf6642897cd7aed3469bef2f3ebb6ed3cd4925695cc592bc1d1ef",
       "integrityStatus": "VERIFIED_FROM_PDF_TEXT_LAYER",
-      "canonicalCoverageStatus": "PENDING_BOOK_IV_A1",
-      "activeFinalManuscriptSection": true
+      "canonicalCoverageStatus": "BOOK_IV_A1_FINAL_CANONICAL_BOUND",
+      "activeFinalManuscriptSection": true,
+      "finalSequence": 46,
+      "chapterCode": "11.46"
     }
   ],
-  "authorityBoundary": {
-    "isSourceSectionInventory": true,
-    "isCanonicalNodeAuthority": false,
-    "isRetrievalAdmission": false,
-    "isPublicationAuthority": false,
-    "mayMutateCanonicalNodes": false
-  },
-  "rawSectionOccurrenceCount": 127,
-  "activeFinalSectionCount": 125,
-  "excludedDuplicateOccurrenceCount": 2,
-  "finalInventoryPath": "content/knowledge/manuscripts/extraction/book-4-final-section-inventory-v1.json"
+  "finalSectionSetSha256": "1f4cbcdb759be9a8f44cbca9841b009713d6d86ebb44c2936eb06dda90016d92"
 }

@@ -1,6 +1,6 @@
 # BOOK IV · PHASE 15 Pre-Admission Article Wave 1
 
-Baseline: `489eb817fde8bc34f2faefe395eca128ef997220` (`7 volume`), using the user-supplied `terms.zip` as the current-main-aligned working tree.
+Baseline: `454a7d1771feec5e2f6ab00bffdde46a5aa661f0` (`7 volume`), using the user-supplied `terms.zip` as the current-main-aligned working tree.
 
 ## Source
 
@@ -58,3 +58,14 @@ Review output:
 The review page stores decisions locally and exports:
 
 `book4-pja-wave1-human-decisions-v1.json`
+
+
+## BOOK-IV-A1 successor · 2026-09-10
+
+- TL confirmed `成本递延` and `资源压缩` are repeated source occurrences. The second copies `CM-B4V1-P10-S050` and `CM-B4V1-P10-S051` are excluded from final manuscript authority; raw PDF/extraction evidence remains preserved.
+- Final authoritative manuscript sections: **125** (`P10 79 + P11 46`).
+- BOOK-IV-A1 final canonical coverage: **125 sections → 125 fresh final Canonical Nodes → 125 retrieval identities**.
+- Predecessor `book-w1d` BOOK-4 P10/P11 records (**181**) remain historical compatibility evidence and are not reinterpreted.
+- TL Article review: **8/8 zh-Hans ACCEPTED**. English semantic parity remains pending.
+- Publication remains closed; BOOK-IV-A6 is not admitted.
+- Next Master Work Step: **BOOK-IV-A2｜Retrieval Semantic Profile**.
