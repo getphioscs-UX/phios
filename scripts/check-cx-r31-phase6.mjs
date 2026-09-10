@@ -12,4 +12,5 @@ const checks=[
   'scripts/check-cx-r31-w9-human-first-use-gate.mjs'
 ];
 for(const checker of checks){const r=spawnSync(process.execPath,[checker],{cwd:process.cwd(),stdio:'inherit'});assert.equal(r.status,0,checker);}
-console.log('✓ PHASE 6 CX-R31 machine package passed: W0–W8 accepted, W9 ready for human first-use review, Phase 7 still blocked.');
+console.log('✓ PHASE 6 CX-R31 package passed: W0–W8 machine accepted and W9 human accepted.');
+console.log('  Phase 6 is complete and frozen; Phase 7 Profile is the only newly authorized next phase.');

@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const p6=read('content/customer-experience-rebuild/cx-r31/freeze/cx-r31-phase6-freeze-v1.json');
+const p7=read('content/integrated-master-work/phase7/p7-current-reconciliation-v1.json');
+const freeze=read('content/product-visual-platform-r1/freeze/pvp-r1-vis-profile-w6-w9-phase7-freeze-v1.json');
+assert.equal(p6.status,'CX_R31_PHASE6_ACCEPTED');
+assert.equal(p6.invariants.phase7ProfileAuthorized,true);
+assert.equal(p7.status,'CURRENT_PROFILE_SUCCESSOR_RECONCILED_W6_W9_VERIFIED');
+assert.equal(p7.phase7ExitComplete,true);
+assert.equal(p7.phase8Authorized,true);
+assert.equal(p7.nextWorkStep,'PHASE8_ECR_W10_W16_VERIFY_CURRENT_AND_CONTINUE');
+assert.equal(freeze.status,'PVP_R1_VIS_PROFILE_W6_W9_PHASE7_FROZEN');
+assert.equal(freeze.frozenExit.phase8Authorized,true);
+assert.equal(freeze.preservedBoundaries.phase8ExecutedByThisFreeze,false);
+console.log('✓ Integrated Successor PHASE 7 passed.');
+console.log('  CX-R31 human acceptance unlocks Profile only; Profile W6–W9 are current-verified and frozen; PHASE 8 ECR is next.');
