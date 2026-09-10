@@ -1,9 +1,9 @@
 {
   "schemaVersion": "PHI-OS-BOOK4-PJA-WAVE1-PRE-ADMISSION-MANIFEST-v1.0.0",
   "stage": "BOOK4-PJA-WAVE1-PRE_ADMISSION",
-  "status": "ZH_HANS_8_OF_8_ACCEPTED_BOOK_IV_A1_A2_A3_A4_MACHINE_ACCEPTED_A5_READY_PUBLICATION_CLOSED",
-  "baselineCommit": "1f81638d214bd946778e4ac721a0f7b265eac116",
-  "baselineAuthority": "user-supplied Library db(1).zip stated aligned to main 1f81638d214bd946778e4ac721a0f7b265eac116",
+  "status": "ZH_HANS_8_OF_8_ACCEPTED_BOOK_IV_A1_A2_A3_A4_MACHINE_ACCEPTED_A5_REVIEW_READY_PUBLICATION_CLOSED",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "baselineAuthority": "user-supplied test.zip stated aligned to main ffc05bc07345011bc24e68884cc1d569c8d96418",
   "bookCode": "BOOK-4",
   "bookTitleZhHans": "世界如何扩展",
   "bookTitleEn": "Reality Expansion",
@@ -26,7 +26,7 @@
     "a2Status": "COMPLETE",
     "a3Status": "COMPLETE",
     "a4Status": "COMPLETE_MACHINE_ACCEPTED",
-    "a5Status": "READY_NOT_STARTED",
+    "a5Status": "REVIEW_READY_HUMAN_PENDING",
     "a6Status": "NOT_ADMITTED"
   },
   "sourceInventory": {
@@ -322,5 +322,16 @@
     "directAnswerPotentialRate": 0.988,
     "residualTop5MissCount": 3,
     "residualWrongBookTop1Count": 1
+  },
+  "humanAcceptance": {
+    "authorityPath": "content/knowledge/contracts/book-4-human-acceptance-authority-v1.json",
+    "reviewCasesPath": "content/knowledge/production-planning/review/book4-a5-human-review-cases-v1.json",
+    "resultsPath": "content/knowledge/production-planning/review/book4-a5-human-review-results-v1.json",
+    "status": "REVIEW_READY_HUMAN_PENDING",
+    "requiredCases": 26,
+    "accepted": 0,
+    "pending": 26,
+    "a4ResidualDiagnosticsIncluded": 4,
+    "bookIVAdmitted": false
   }
 }

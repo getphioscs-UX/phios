@@ -115,3 +115,14 @@ Baseline: `1f81638d214bd946778e4ac721a0f7b265eac116` (`phase 6`), using the user
 - Active KIR source admission, publication and BOOK-IV-A6 remain closed.
 
 Next governed Book IV step: `BOOK-IV-A5 | Human Acceptance`.
+
+
+## BOOK-IV-A5 · Human Acceptance Review Ready
+
+Baseline: `ffc05bc07345011bc24e68884cc1d569c8d96418` (`BOOK-IV-A4`).
+
+A5 does not repeat the 250-case machine benchmark. It opens a governed 26-case human review: 22 bilingual sentinels (one zh-Hans + one en primary-node case for every one of the 11 A3 article batches) plus all four A4 residual diagnostics.
+
+Human rubric: correct source, relevance, Book IV meaning preserved, customer readability, no generic answer, and no method hijack. Every criterion is critical. A machine PASS cannot grant Human acceptance.
+
+Current state: `REVIEW_READY_HUMAN_PENDING`. Book IV active KIR admission, production eligibility and publication remain closed; `BOOK-IV-A6` is not ready until all 26 cases are human accepted.

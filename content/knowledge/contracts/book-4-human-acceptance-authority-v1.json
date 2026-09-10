@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "PHI-OS-BOOK4-A5-HUMAN-ACCEPTANCE-AUTHORITY-v1.0.0",
+  "work": "BOOK-IV-A5",
+  "status": "REVIEW_READY_HUMAN_DECISION_PENDING",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "recordedAt": "2026-09-10",
+  "bookCode": "BOOK-4",
+  "predecessorA4AuthorityPath": "content/knowledge/contracts/book-4-machine-benchmark-authority-v1.json",
+  "reviewCasesPath": "content/knowledge/production-planning/review/book4-a5-human-review-cases-v1.json",
+  "reviewResultsPath": "content/knowledge/production-planning/review/book4-a5-human-review-results-v1.json",
+  "readinessAuditPath": "content/knowledge/production-planning/audits/book4-a5-human-review-readiness-audit-v1.json",
+  "requiredHumanCaseCount": 26,
+  "rubricIds": [
+    "correctSource",
+    "relevant",
+    "bookIVMeaningPreserved",
+    "customerReadable",
+    "noGenericAnswer",
+    "noMethodHijack"
+  ],
+  "acceptanceRule": "All 26 cases must be ACCEPT and all six critical criteria must be true for every case; residual A4 diagnostics cannot be omitted. REVISE or REJECT keeps A5 open.",
+  "currentHumanState": {
+    "accepted": 0,
+    "revised": 0,
+    "rejected": 0,
+    "pending": 26,
+    "humanAcceptanceGranted": false
+  },
+  "invariants": {
+    "machineCannotSelfGrantHumanAcceptance": true,
+    "a4ResidualDiagnosticsVisible": true,
+    "activeKIRBookSourceRegistryMutationPerformed": false,
+    "bookIVProductionEligible": false,
+    "bookIVAdmitted": false,
+    "publicationOpened": false,
+    "canonicalMeaningMutationPerformed": false,
+    "articleTextGeneratedByA5": false,
+    "a6Ready": false
+  },
+  "nextWorkStep": "BOOK-IV-A5_HUMAN_DECISION"
+}

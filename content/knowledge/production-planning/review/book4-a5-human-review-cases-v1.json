@@ -1,0 +1,2330 @@
+{
+  "schemaVersion": "PHI-OS-BOOK4-A5-HUMAN-REVIEW-CASES-v1.0.0",
+  "work": "BOOK-IV-A5",
+  "status": "REVIEW_READY_HUMAN_DECISION_PENDING",
+  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "recordedAt": "2026-09-10",
+  "bookCode": "BOOK-4",
+  "selectionPolicy": {
+    "strategy": "11_BATCH_BILINGUAL_SENTINELS_PLUS_ALL_A4_RESIDUALS",
+    "batchSentinelCount": 22,
+    "sentinelRule": "For every A3 batch, review the first mapped article primary node in zh-Hans and en.",
+    "a4ResidualDiagnosticCount": 4,
+    "residualRule": "All A4 top-5 misses and wrong-book top-1 diagnostics are mandatory and cannot be sampled away.",
+    "totalHumanReviewCases": 26,
+    "fullMachinePopulationAlreadyCoveredByA4": 250,
+    "legacyNoHijackMachineControlsAlreadyCoveredByA4": 100,
+    "samplingDoesNotReplaceA4": true
+  },
+  "rubric": [
+    {
+      "id": "correctSource",
+      "question": "检索结果是否落在正确的 Book IV 来源与对应 section / node？",
+      "critical": true
+    },
+    {
+      "id": "relevant",
+      "question": "结果是否真正回应用户问题，而不是只共享少量关键词？",
+      "critical": true
+    },
+    {
+      "id": "bookIVMeaningPreserved",
+      "question": "是否保留《世界如何扩展》的原始意义，没有把概念改写成另一个理论？",
+      "critical": true
+    },
+    {
+      "id": "customerReadable",
+      "question": "客户是否能够理解这里为何命中该 node / article，而不是只看到内部编码？",
+      "critical": true
+    },
+    {
+      "id": "noGenericAnswer",
+      "question": "结果是否足够具体，不是任何问题都可套用的泛化答案？",
+      "critical": true
+    },
+    {
+      "id": "noMethodHijack",
+      "question": "是否没有被占星、八字、紫微、人类图等 method meaning 抢走 Book IV 的知识语义？",
+      "critical": true
+    }
+  ],
+  "a4AuthorityPath": "content/knowledge/contracts/book-4-machine-benchmark-authority-v1.json",
+  "a4BenchmarkPath": "content/knowledge/knowledge-intelligence-r2/benchmarks/book4-a4-machine-retrieval-benchmark-v1.json",
+  "a2ProfilesPath": "content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a2/book4-retrieval-semantic-profiles-v1.json",
+  "a3ArticleMapPath": "content/knowledge/production-planning/plans/book4-a3-final-article-map-v1.json",
+  "cases": [
+    {
+      "reviewCaseId": "BOOK4-A5-S-01-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-001",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B01",
+      "articlePlanId": "B4-ART-001",
+      "question": "为什么能够持续的运行会产生跨越当前边界的可能",
+      "expected": {
+        "nodeCode": "KN-B4-P10-201",
+        "canonicalName": {
+          "zh-Hans": "运行扩展",
+          "en": "Runtime Expansion"
+        },
+        "canonicalQuestion": "为什么能够持续的运行会产生跨越当前边界的可能",
+        "sectionCode": "CM-B4V1-P10-S001",
+        "sourcePages": [
+          3,
+          7
+        ],
+        "sourceTextSha256": "9d3473f0889673f18f463c71a2f97eda162e2be3f79c5b16ba5a87e38170f367",
+        "articleTitleZhHans": "为什么能够持续，不代表已经能够扩展",
+        "articleTitleEn": "Why Continuity Does Not Automatically Mean Expansion"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-201",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-201",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行扩展",
+            "en": "Runtime Expansion"
+          }
+        ],
+        "candidateCount": 1,
+        "evidenceCoverage": "PARTIAL",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-001"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-01-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-002",
+      "locale": "en",
+      "batchCode": "B4-B01",
+      "articlePlanId": "B4-ART-001",
+      "question": "What does “Runtime Expansion” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-201",
+        "canonicalName": {
+          "zh-Hans": "运行扩展",
+          "en": "Runtime Expansion"
+        },
+        "canonicalQuestion": "为什么能够持续的运行会产生跨越当前边界的可能",
+        "sectionCode": "CM-B4V1-P10-S001",
+        "sourcePages": [
+          3,
+          7
+        ],
+        "sourceTextSha256": "9d3473f0889673f18f463c71a2f97eda162e2be3f79c5b16ba5a87e38170f367",
+        "articleTitleZhHans": "为什么能够持续，不代表已经能够扩展",
+        "articleTitleEn": "Why Continuity Does Not Automatically Mean Expansion"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-207",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-207",
+            "bookCode": "BOOK-4",
+            "zhHans": "复杂度梯度",
+            "en": "Complexity Gradient"
+          },
+          {
+            "nodeCode": "KN-B4-P10-201",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行扩展",
+            "en": "Runtime Expansion"
+          },
+          {
+            "nodeCode": "KN-B4-P10-202",
+            "bookCode": "BOOK-4",
+            "zhHans": "尺度边界",
+            "en": "Scale Boundary"
+          },
+          {
+            "nodeCode": "KN-B4-P10-204",
+            "bookCode": "BOOK-4",
+            "zhHans": "载体延伸",
+            "en": "Carrier Extension"
+          },
+          {
+            "nodeCode": "KN-B4-P10-205",
+            "bookCode": "BOOK-4",
+            "zhHans": "载体替代",
+            "en": "Carrier Replacement"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": false,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-001"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-02-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-011",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B02",
+      "articlePlanId": "B4-ART-009",
+      "question": "为什么当前尺度会逐渐变得不足",
+      "expected": {
+        "nodeCode": "KN-B4-P10-206",
+        "canonicalName": {
+          "zh-Hans": "扩展压力",
+          "en": "Expansion Pressure"
+        },
+        "canonicalQuestion": "为什么当前尺度会逐渐变得不足",
+        "sectionCode": "CM-B4V1-P10-S006",
+        "sourcePages": [
+          21,
+          23
+        ],
+        "sourceTextSha256": "ecf4ff2f46ef5716317bdc8002e68a41b5b3ccab94a281537c18a7e7b39d1407",
+        "articleTitleZhHans": "为什么当前尺度会逼迫运行寻找更大的组织方式",
+        "articleTitleEn": "Why the Current Scale Pushes a Runtime Toward a Larger Organizational Form"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-206",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-206",
+            "bookCode": "BOOK-4",
+            "zhHans": "扩展压力",
+            "en": "Expansion Pressure"
+          },
+          {
+            "nodeCode": "KN-B1-P2-009",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影偏向、失真、稳定与更新如何发生",
+            "en": "投影偏向、失真、稳定与更新如何发生"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-004",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影如何形成个人、组织与文明世界",
+            "en": "投影如何形成个人、组织与文明世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-005",
+            "bookCode": "BOOK-1",
+            "zhHans": "意义如何形成叙事、解释、信念与身份",
+            "en": "意义如何形成叙事、解释、信念与身份"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-009"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-02-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-012",
+      "locale": "en",
+      "batchCode": "B4-B02",
+      "articlePlanId": "B4-ART-009",
+      "question": "What does “Expansion Pressure” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-206",
+        "canonicalName": {
+          "zh-Hans": "扩展压力",
+          "en": "Expansion Pressure"
+        },
+        "canonicalQuestion": "为什么当前尺度会逐渐变得不足",
+        "sectionCode": "CM-B4V1-P10-S006",
+        "sourcePages": [
+          21,
+          23
+        ],
+        "sourceTextSha256": "ecf4ff2f46ef5716317bdc8002e68a41b5b3ccab94a281537c18a7e7b39d1407",
+        "articleTitleZhHans": "为什么当前尺度会逼迫运行寻找更大的组织方式",
+        "articleTitleEn": "Why the Current Scale Pushes a Runtime Toward a Larger Organizational Form"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-206",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-206",
+            "bookCode": "BOOK-4",
+            "zhHans": "扩展压力",
+            "en": "Expansion Pressure"
+          },
+          {
+            "nodeCode": "KN-B2-P7-006",
+            "bookCode": "BOOK-2",
+            "zhHans": "集体为什么开始约束个体",
+            "en": "集体为什么开始约束个体"
+          },
+          {
+            "nodeCode": "KN-B2-P7-018",
+            "bookCode": "BOOK-2",
+            "zhHans": "债务如何扩张",
+            "en": "债务如何扩张"
+          },
+          {
+            "nodeCode": "KN-B4-P10-260",
+            "bookCode": "BOOK-4",
+            "zhHans": "替代能力",
+            "en": "Replacement Capacity"
+          },
+          {
+            "nodeCode": "KN-B4-P10-201",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行扩展",
+            "en": "Runtime Expansion"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-009"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-03-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-041",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B03",
+      "articlePlanId": "B4-ART-013",
+      "question": "为什么跨越边界之后仍然需要形成新的稳定尺度",
+      "expected": {
+        "nodeCode": "KN-B4-P10-221",
+        "canonicalName": {
+          "zh-Hans": "扩展稳定",
+          "en": "Expansion Stability"
+        },
+        "canonicalQuestion": "为什么跨越边界之后仍然需要形成新的稳定尺度",
+        "sectionCode": "CM-B4V1-P10-S021",
+        "sourcePages": [
+          59,
+          61
+        ],
+        "sourceTextSha256": "e75a330462e9da828af1e596fb740c3b0d54a71cae1c7656b9a4ca88cab140a2",
+        "articleTitleZhHans": "跨越边界以后，为什么还必须形成下一尺度",
+        "articleTitleEn": "Why Crossing a Boundary Still Requires a New Stable Scale"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-221",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-221",
+            "bookCode": "BOOK-4",
+            "zhHans": "扩展稳定",
+            "en": "Expansion Stability"
+          },
+          {
+            "nodeCode": "KN-B1-P2-009",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影偏向、失真、稳定与更新如何发生",
+            "en": "投影偏向、失真、稳定与更新如何发生"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-004",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影如何形成个人、组织与文明世界",
+            "en": "投影如何形成个人、组织与文明世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-005",
+            "bookCode": "BOOK-1",
+            "zhHans": "意义如何形成叙事、解释、信念与身份",
+            "en": "意义如何形成叙事、解释、信念与身份"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-013"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-03-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-042",
+      "locale": "en",
+      "batchCode": "B4-B03",
+      "articlePlanId": "B4-ART-013",
+      "question": "What does “Expansion Stability” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-221",
+        "canonicalName": {
+          "zh-Hans": "扩展稳定",
+          "en": "Expansion Stability"
+        },
+        "canonicalQuestion": "为什么跨越边界之后仍然需要形成新的稳定尺度",
+        "sectionCode": "CM-B4V1-P10-S021",
+        "sourcePages": [
+          59,
+          61
+        ],
+        "sourceTextSha256": "e75a330462e9da828af1e596fb740c3b0d54a71cae1c7656b9a4ca88cab140a2",
+        "articleTitleZhHans": "跨越边界以后，为什么还必须形成下一尺度",
+        "articleTitleEn": "Why Crossing a Boundary Still Requires a New Stable Scale"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-208",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-208",
+            "bookCode": "BOOK-4",
+            "zhHans": "稳定梯度",
+            "en": "Stability Gradient"
+          },
+          {
+            "nodeCode": "KN-B4-P10-221",
+            "bookCode": "BOOK-4",
+            "zhHans": "扩展稳定",
+            "en": "Expansion Stability"
+          },
+          {
+            "nodeCode": "KN-B4-P10-232",
+            "bookCode": "BOOK-4",
+            "zhHans": "制度节点",
+            "en": "Institutional Node"
+          },
+          {
+            "nodeCode": "KN-B4-P11-241",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明连续",
+            "en": "Civilization Continuity"
+          },
+          {
+            "nodeCode": "KN-B1-P5-052",
+            "bookCode": "BOOK-2",
+            "zhHans": "承诺为何能够持续",
+            "en": "承诺为何能够持续"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": false,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-013"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-04-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-061",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B04",
+      "articlePlanId": "B4-ART-018",
+      "question": "为什么扩展必须先取得新的现实入口",
+      "expected": {
+        "nodeCode": "KN-B4-P10-231",
+        "canonicalName": {
+          "zh-Hans": "注意节点",
+          "en": "Attention Node"
+        },
+        "canonicalQuestion": "为什么扩展必须先取得新的现实入口",
+        "sectionCode": "CM-B4V1-P10-S031",
+        "sourcePages": [
+          84,
+          86
+        ],
+        "sourceTextSha256": "d2a856bdca66eb6ead1fea76624c4cd409f179ca10bf1a92cc6b5b3170474306",
+        "articleTitleZhHans": "注意与制度为什么分别决定扩展能否进入与持续",
+        "articleTitleEn": "Why Attention Enables Entry While Institutions Enable Continuity"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-231",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-231",
+            "bookCode": "BOOK-4",
+            "zhHans": "注意节点",
+            "en": "Attention Node"
+          },
+          {
+            "nodeCode": "KN-B1-P2-009",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影偏向、失真、稳定与更新如何发生",
+            "en": "投影偏向、失真、稳定与更新如何发生"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-004",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影如何形成个人、组织与文明世界",
+            "en": "投影如何形成个人、组织与文明世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-005",
+            "bookCode": "BOOK-1",
+            "zhHans": "意义如何形成叙事、解释、信念与身份",
+            "en": "意义如何形成叙事、解释、信念与身份"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-018"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-04-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-062",
+      "locale": "en",
+      "batchCode": "B4-B04",
+      "articlePlanId": "B4-ART-018",
+      "question": "What does “Attention Node” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-231",
+        "canonicalName": {
+          "zh-Hans": "注意节点",
+          "en": "Attention Node"
+        },
+        "canonicalQuestion": "为什么扩展必须先取得新的现实入口",
+        "sectionCode": "CM-B4V1-P10-S031",
+        "sourcePages": [
+          84,
+          86
+        ],
+        "sourceTextSha256": "d2a856bdca66eb6ead1fea76624c4cd409f179ca10bf1a92cc6b5b3170474306",
+        "articleTitleZhHans": "注意与制度为什么分别决定扩展能否进入与持续",
+        "articleTitleEn": "Why Attention Enables Entry While Institutions Enable Continuity"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-231",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-231",
+            "bookCode": "BOOK-4",
+            "zhHans": "注意节点",
+            "en": "Attention Node"
+          },
+          {
+            "nodeCode": "KN-B4-P10-224",
+            "bookCode": "BOOK-4",
+            "zhHans": "承载节点",
+            "en": "Carrier Node"
+          },
+          {
+            "nodeCode": "KN-B4-P10-225",
+            "bookCode": "BOOK-4",
+            "zhHans": "协调节点",
+            "en": "Coordination Node"
+          },
+          {
+            "nodeCode": "KN-B4-P10-226",
+            "bookCode": "BOOK-4",
+            "zhHans": "资源节点",
+            "en": "Resource Node"
+          },
+          {
+            "nodeCode": "KN-B4-P10-227",
+            "bookCode": "BOOK-4",
+            "zhHans": "资本节点",
+            "en": "Capital Node"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-018"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-05-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-081",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B05",
+      "articlePlanId": "B4-ART-023",
+      "question": "为什么原有协调方式无法支持更大的运行",
+      "expected": {
+        "nodeCode": "KN-B4-P10-241",
+        "canonicalName": {
+          "zh-Hans": "协调尺度极限",
+          "en": "Coordination Scale Limit"
+        },
+        "canonicalQuestion": "为什么原有协调方式无法支持更大的运行",
+        "sectionCode": "CM-B4V1-P10-S041",
+        "sourcePages": [
+          112,
+          114
+        ],
+        "sourceTextSha256": "923f139f801df91abcd3d7bbf8542cf511f609f81256e768bc4045f733803154",
+        "articleTitleZhHans": "协调极限与基础设施瓶颈为什么会共同封住尺度",
+        "articleTitleEn": "How Coordination Limits and Infrastructure Bottlenecks Cap Scale"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-241",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-241",
+            "bookCode": "BOOK-4",
+            "zhHans": "协调尺度极限",
+            "en": "Coordination Scale Limit"
+          },
+          {
+            "nodeCode": "KN-B3-P8-110",
+            "bookCode": "UNKNOWN",
+            "zhHans": "KN-B3-P8-110",
+            "en": "KN-B3-P8-110"
+          },
+          {
+            "nodeCode": "KN-B3-P8-111",
+            "bookCode": "UNKNOWN",
+            "zhHans": "KN-B3-P8-111",
+            "en": "KN-B3-P8-111"
+          },
+          {
+            "nodeCode": "KN-B3-P8-112",
+            "bookCode": "UNKNOWN",
+            "zhHans": "KN-B3-P8-112",
+            "en": "KN-B3-P8-112"
+          },
+          {
+            "nodeCode": "KN-B3-P8-113",
+            "bookCode": "UNKNOWN",
+            "zhHans": "KN-B3-P8-113",
+            "en": "KN-B3-P8-113"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-023"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-05-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-082",
+      "locale": "en",
+      "batchCode": "B4-B05",
+      "articlePlanId": "B4-ART-023",
+      "question": "What does “Coordination Scale Limit” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-241",
+        "canonicalName": {
+          "zh-Hans": "协调尺度极限",
+          "en": "Coordination Scale Limit"
+        },
+        "canonicalQuestion": "为什么原有协调方式无法支持更大的运行",
+        "sectionCode": "CM-B4V1-P10-S041",
+        "sourcePages": [
+          112,
+          114
+        ],
+        "sourceTextSha256": "923f139f801df91abcd3d7bbf8542cf511f609f81256e768bc4045f733803154",
+        "articleTitleZhHans": "协调极限与基础设施瓶颈为什么会共同封住尺度",
+        "articleTitleEn": "How Coordination Limits and Infrastructure Bottlenecks Cap Scale"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-241",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-241",
+            "bookCode": "BOOK-4",
+            "zhHans": "协调尺度极限",
+            "en": "Coordination Scale Limit"
+          },
+          {
+            "nodeCode": "KN-B4-P10-225",
+            "bookCode": "BOOK-4",
+            "zhHans": "协调节点",
+            "en": "Coordination Node"
+          },
+          {
+            "nodeCode": "KN-B4-P11-215",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明协调",
+            "en": "Civilization Coordination"
+          },
+          {
+            "nodeCode": "KN-B4-P10-201",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行扩展",
+            "en": "Runtime Expansion"
+          },
+          {
+            "nodeCode": "KN-B4-P10-202",
+            "bookCode": "BOOK-4",
+            "zhHans": "尺度边界",
+            "en": "Scale Boundary"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-023"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-06-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-101",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B06",
+      "articlePlanId": "B4-ART-026",
+      "question": "为什么今天的扩展会改变下一代的现实起点",
+      "expected": {
+        "nodeCode": "KN-B4-P10-251",
+        "canonicalName": {
+          "zh-Hans": "代际转移",
+          "en": "Intergenerational Transfer"
+        },
+        "canonicalQuestion": "为什么今天的扩展会改变下一代的现实起点",
+        "sectionCode": "CM-B4V1-P10-S053",
+        "sourcePages": [
+          143,
+          145
+        ],
+        "sourceTextSha256": "c013dfc62cf1cc25e7374ef5e4ff5ee02aff73151fe130625bd6fa1921548c3a",
+        "articleTitleZhHans": "为什么今天的扩展会把更高成本交给下一代",
+        "articleTitleEn": "Why Today’s Expansion Can Pass Higher Costs to the Next Generation"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-251",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-251",
+            "bookCode": "BOOK-4",
+            "zhHans": "代际转移",
+            "en": "Intergenerational Transfer"
+          },
+          {
+            "nodeCode": "KN-B1-P2-009",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影偏向、失真、稳定与更新如何发生",
+            "en": "投影偏向、失真、稳定与更新如何发生"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-004",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影如何形成个人、组织与文明世界",
+            "en": "投影如何形成个人、组织与文明世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-005",
+            "bookCode": "BOOK-1",
+            "zhHans": "意义如何形成叙事、解释、信念与身份",
+            "en": "意义如何形成叙事、解释、信念与身份"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-026"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-06-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-102",
+      "locale": "en",
+      "batchCode": "B4-B06",
+      "articlePlanId": "B4-ART-026",
+      "question": "What does “Intergenerational Transfer” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-251",
+        "canonicalName": {
+          "zh-Hans": "代际转移",
+          "en": "Intergenerational Transfer"
+        },
+        "canonicalQuestion": "为什么今天的扩展会改变下一代的现实起点",
+        "sectionCode": "CM-B4V1-P10-S053",
+        "sourcePages": [
+          143,
+          145
+        ],
+        "sourceTextSha256": "c013dfc62cf1cc25e7374ef5e4ff5ee02aff73151fe130625bd6fa1921548c3a",
+        "articleTitleZhHans": "为什么今天的扩展会把更高成本交给下一代",
+        "articleTitleEn": "Why Today’s Expansion Can Pass Higher Costs to the Next Generation"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-251",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-251",
+            "bookCode": "BOOK-4",
+            "zhHans": "代际转移",
+            "en": "Intergenerational Transfer"
+          },
+          {
+            "nodeCode": "KN-B4-P10-250",
+            "bookCode": "BOOK-4",
+            "zhHans": "跨尺度成本转移",
+            "en": "Cross-Scale Cost Transfer"
+          },
+          {
+            "nodeCode": "KN-B4-P11-204",
+            "bookCode": "BOOK-4",
+            "zhHans": "跨世代运行",
+            "en": "Intergenerational Runtime"
+          },
+          {
+            "nodeCode": "KN-B2-P7-018",
+            "bookCode": "BOOK-2",
+            "zhHans": "债务如何扩张",
+            "en": "债务如何扩张"
+          },
+          {
+            "nodeCode": "KN-B4-P10-260",
+            "bookCode": "BOOK-4",
+            "zhHans": "替代能力",
+            "en": "Replacement Capacity"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-026"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-07-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-117",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B07",
+      "articlePlanId": "B4-ART-030",
+      "question": "人口结构改变如何影响扩展能力",
+      "expected": {
+        "nodeCode": "KN-B4-P10-259",
+        "canonicalName": {
+          "zh-Hans": "人口压缩",
+          "en": "Population Compression"
+        },
+        "canonicalQuestion": "人口结构改变如何影响扩展能力",
+        "sectionCode": "CM-B4V1-P10-S061",
+        "sourcePages": [
+          167,
+          170
+        ],
+        "sourceTextSha256": "a3e93201106853daf55fbf9e197b4d13bf7764311bc52c69e209a0cf85e40755",
+        "articleTitleZhHans": "人口压缩为什么会首先变成关键节点的替代问题",
+        "articleTitleEn": "Why Population Compression First Becomes a Problem of Replacing Critical Nodes"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-259",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-259",
+            "bookCode": "BOOK-4",
+            "zhHans": "人口压缩",
+            "en": "Population Compression"
+          },
+          {
+            "nodeCode": "KN-B1-P2-009",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影偏向、失真、稳定与更新如何发生",
+            "en": "投影偏向、失真、稳定与更新如何发生"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-004",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影如何形成个人、组织与文明世界",
+            "en": "投影如何形成个人、组织与文明世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-005",
+            "bookCode": "BOOK-1",
+            "zhHans": "意义如何形成叙事、解释、信念与身份",
+            "en": "意义如何形成叙事、解释、信念与身份"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-030"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-07-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-118",
+      "locale": "en",
+      "batchCode": "B4-B07",
+      "articlePlanId": "B4-ART-030",
+      "question": "What does “Population Compression” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-259",
+        "canonicalName": {
+          "zh-Hans": "人口压缩",
+          "en": "Population Compression"
+        },
+        "canonicalQuestion": "人口结构改变如何影响扩展能力",
+        "sectionCode": "CM-B4V1-P10-S061",
+        "sourcePages": [
+          167,
+          170
+        ],
+        "sourceTextSha256": "a3e93201106853daf55fbf9e197b4d13bf7764311bc52c69e209a0cf85e40755",
+        "articleTitleZhHans": "人口压缩为什么会首先变成关键节点的替代问题",
+        "articleTitleEn": "Why Population Compression First Becomes a Problem of Replacing Critical Nodes"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-259",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-259",
+            "bookCode": "BOOK-4",
+            "zhHans": "人口压缩",
+            "en": "Population Compression"
+          },
+          {
+            "nodeCode": "KN-B4-P10-257",
+            "bookCode": "BOOK-4",
+            "zhHans": "繁衍不等于扩展",
+            "en": "Reproduction Is Not Expansion"
+          },
+          {
+            "nodeCode": "KN-B4-P10-266",
+            "bookCode": "BOOK-4",
+            "zhHans": "技术作为压缩器",
+            "en": "Technology as a Compressor"
+          },
+          {
+            "nodeCode": "KN-B4-P10-234",
+            "bookCode": "BOOK-4",
+            "zhHans": "压缩基础设施",
+            "en": "Compression Infrastructure"
+          },
+          {
+            "nodeCode": "KN-B4-P10-249",
+            "bookCode": "BOOK-4",
+            "zhHans": "资源压缩",
+            "en": "Resource Compression"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-030"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-08-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-139",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B08",
+      "articlePlanId": "B4-ART-034",
+      "question": "为什么扩展会改变人类与人工系统分别承担什么位置",
+      "expected": {
+        "nodeCode": "KN-B4-P10-270",
+        "canonicalName": {
+          "zh-Hans": "运行接口迁移",
+          "en": "Runtime Interface Migration"
+        },
+        "canonicalQuestion": "为什么扩展会改变人类与人工系统分别承担什么位置",
+        "sectionCode": "CM-B4V1-P10-S072",
+        "sourcePages": [
+          201,
+          204
+        ],
+        "sourceTextSha256": "accc6d2e842ab7cfa3ce107fc2bf7e9e24aa028a26f54da85b78469d17cc7730",
+        "articleTitleZhHans": "当运行跨越人类与人工载体，接口为什么必须迁移",
+        "articleTitleEn": "Why Interfaces Must Migrate When Runtime Crosses Human and Artificial Carriers"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-270",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-270",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行接口迁移",
+            "en": "Runtime Interface Migration"
+          },
+          {
+            "nodeCode": "KN-B1-P2-009",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影偏向、失真、稳定与更新如何发生",
+            "en": "投影偏向、失真、稳定与更新如何发生"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-004",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影如何形成个人、组织与文明世界",
+            "en": "投影如何形成个人、组织与文明世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-005",
+            "bookCode": "BOOK-1",
+            "zhHans": "意义如何形成叙事、解释、信念与身份",
+            "en": "意义如何形成叙事、解释、信念与身份"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-034"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-08-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-140",
+      "locale": "en",
+      "batchCode": "B4-B08",
+      "articlePlanId": "B4-ART-034",
+      "question": "What does “Runtime Interface Migration” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-270",
+        "canonicalName": {
+          "zh-Hans": "运行接口迁移",
+          "en": "Runtime Interface Migration"
+        },
+        "canonicalQuestion": "为什么扩展会改变人类与人工系统分别承担什么位置",
+        "sectionCode": "CM-B4V1-P10-S072",
+        "sourcePages": [
+          201,
+          204
+        ],
+        "sourceTextSha256": "accc6d2e842ab7cfa3ce107fc2bf7e9e24aa028a26f54da85b78469d17cc7730",
+        "articleTitleZhHans": "当运行跨越人类与人工载体，接口为什么必须迁移",
+        "articleTitleEn": "Why Interfaces Must Migrate When Runtime Crosses Human and Artificial Carriers"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-270",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-270",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行接口迁移",
+            "en": "Runtime Interface Migration"
+          },
+          {
+            "nodeCode": "KN-B4-P10-235",
+            "bookCode": "BOOK-4",
+            "zhHans": "节点迁移",
+            "en": "Node Migration"
+          },
+          {
+            "nodeCode": "KN-B4-P10-207",
+            "bookCode": "BOOK-4",
+            "zhHans": "复杂度梯度",
+            "en": "Complexity Gradient"
+          },
+          {
+            "nodeCode": "KN-B4-P10-201",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行扩展",
+            "en": "Runtime Expansion"
+          },
+          {
+            "nodeCode": "KN-B4-P10-202",
+            "bookCode": "BOOK-4",
+            "zhHans": "尺度边界",
+            "en": "Scale Boundary"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-034"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-09-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-175",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B09",
+      "articlePlanId": "B4-ART-038",
+      "question": "家庭、组织、制度、知识与基础设施如何共同形成文明载体",
+      "expected": {
+        "nodeCode": "KN-B4-P11-209",
+        "canonicalName": {
+          "zh-Hans": "文明承载架构",
+          "en": "Civilization Carrier Architecture"
+        },
+        "canonicalQuestion": "家庭、组织、制度、知识与基础设施如何共同形成文明载体",
+        "sectionCode": "CM-B4V1-P11-S009",
+        "sourcePages": [
+          269,
+          272
+        ],
+        "sourceTextSha256": "6505d887c0fc5bdc65e910227d1f190ce78a2613f1ffd3336e11d235d5c37a54",
+        "articleTitleZhHans": "文明为什么需要复合载体与跨参与者制度连续",
+        "articleTitleEn": "Why Civilization Requires Composite Carriers and Institutional Continuity Across Participants"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-209",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-209",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明承载架构",
+            "en": "Civilization Carrier Architecture"
+          },
+          {
+            "nodeCode": "KN-B4-P11-214",
+            "bookCode": "BOOK-4",
+            "zhHans": "组织层级与嵌套",
+            "en": "Organizational Hierarchy and Nesting"
+          },
+          {
+            "nodeCode": "KN-B4-P11-238",
+            "bookCode": "BOOK-4",
+            "zhHans": "人机文明协作",
+            "en": "Human–AI Civilization Collaboration"
+          },
+          {
+            "nodeCode": "KN-B1-P2-011",
+            "bookCode": "BOOK-1",
+            "zhHans": "社会、制度、经济、历史与文明如何稳定投影",
+            "en": "社会、制度、经济、历史与文明如何稳定投影"
+          },
+          {
+            "nodeCode": "KN-B1-P2-013",
+            "bookCode": "BOOK-1",
+            "zhHans": "人机共投影如何加速、整合并暴露投影边界",
+            "en": "人机共投影如何加速、整合并暴露投影边界"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-038"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-09-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-176",
+      "locale": "en",
+      "batchCode": "B4-B09",
+      "articlePlanId": "B4-ART-038",
+      "question": "What does “Civilization Carrier Architecture” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P11-209",
+        "canonicalName": {
+          "zh-Hans": "文明承载架构",
+          "en": "Civilization Carrier Architecture"
+        },
+        "canonicalQuestion": "家庭、组织、制度、知识与基础设施如何共同形成文明载体",
+        "sectionCode": "CM-B4V1-P11-S009",
+        "sourcePages": [
+          269,
+          272
+        ],
+        "sourceTextSha256": "6505d887c0fc5bdc65e910227d1f190ce78a2613f1ffd3336e11d235d5c37a54",
+        "articleTitleZhHans": "文明为什么需要复合载体与跨参与者制度连续",
+        "articleTitleEn": "Why Civilization Requires Composite Carriers and Institutional Continuity Across Participants"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-209",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-209",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明承载架构",
+            "en": "Civilization Carrier Architecture"
+          },
+          {
+            "nodeCode": "KN-B4-P11-233",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明尺度收缩",
+            "en": "Civilization Scale Contraction"
+          },
+          {
+            "nodeCode": "KN-B4-P11-236",
+            "bookCode": "BOOK-4",
+            "zhHans": "人工文明载体",
+            "en": "Artificial Civilization Carrier"
+          },
+          {
+            "nodeCode": "KN-B4-P11-238",
+            "bookCode": "BOOK-4",
+            "zhHans": "人机文明协作",
+            "en": "Human–AI Civilization Collaboration"
+          },
+          {
+            "nodeCode": "KN-B4-P11-243",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明运行继任",
+            "en": "Civilization Runtime Succession"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-038"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-10-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-199",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B10",
+      "articlePlanId": "B4-ART-043",
+      "question": "为什么跨世代知识会形成能力复利",
+      "expected": {
+        "nodeCode": "KN-B4-P11-221",
+        "canonicalName": {
+          "zh-Hans": "知识累积",
+          "en": "Knowledge Accumulation"
+        },
+        "canonicalQuestion": "为什么跨世代知识会形成能力复利",
+        "sectionCode": "CM-B4V1-P11-S021",
+        "sourcePages": [
+          319,
+          323
+        ],
+        "sourceTextSha256": "514aa2f417f56d34974132f3fe2bee2003b17a69412debd7bd5389fc535c74bf",
+        "articleTitleZhHans": "文明如何把知识、制度与文化压缩成可继承能力",
+        "articleTitleEn": "How Civilization Compresses Knowledge, Institutions, and Culture Into Inheritable Capacity"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-221",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-221",
+            "bookCode": "BOOK-4",
+            "zhHans": "知识累积",
+            "en": "Knowledge Accumulation"
+          },
+          {
+            "nodeCode": "KN-B1-P2-009",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影偏向、失真、稳定与更新如何发生",
+            "en": "投影偏向、失真、稳定与更新如何发生"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-004",
+            "bookCode": "BOOK-1",
+            "zhHans": "投影如何形成个人、组织与文明世界",
+            "en": "投影如何形成个人、组织与文明世界"
+          },
+          {
+            "nodeCode": "KN-B1-P2-005",
+            "bookCode": "BOOK-1",
+            "zhHans": "意义如何形成叙事、解释、信念与身份",
+            "en": "意义如何形成叙事、解释、信念与身份"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-043"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-10-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-200",
+      "locale": "en",
+      "batchCode": "B4-B10",
+      "articlePlanId": "B4-ART-043",
+      "question": "What does “Knowledge Accumulation” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P11-221",
+        "canonicalName": {
+          "zh-Hans": "知识累积",
+          "en": "Knowledge Accumulation"
+        },
+        "canonicalQuestion": "为什么跨世代知识会形成能力复利",
+        "sectionCode": "CM-B4V1-P11-S021",
+        "sourcePages": [
+          319,
+          323
+        ],
+        "sourceTextSha256": "514aa2f417f56d34974132f3fe2bee2003b17a69412debd7bd5389fc535c74bf",
+        "articleTitleZhHans": "文明如何把知识、制度与文化压缩成可继承能力",
+        "articleTitleEn": "How Civilization Compresses Knowledge, Institutions, and Culture Into Inheritable Capacity"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-221",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-221",
+            "bookCode": "BOOK-4",
+            "zhHans": "知识累积",
+            "en": "Knowledge Accumulation"
+          },
+          {
+            "nodeCode": "KN-B4-P11-205",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明记忆与知识",
+            "en": "Civilizational Memory and Knowledge"
+          },
+          {
+            "nodeCode": "KN-B4-P11-209",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明承载架构",
+            "en": "Civilization Carrier Architecture"
+          },
+          {
+            "nodeCode": "KN-B4-P11-206",
+            "bookCode": "BOOK-4",
+            "zhHans": "意义与语言",
+            "en": "Meaning and Language"
+          },
+          {
+            "nodeCode": "KN-B4-P10-210",
+            "bookCode": "BOOK-4",
+            "zhHans": "意义梯度",
+            "en": "Meaning Gradient"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-043"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-11-ZH",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-227",
+      "locale": "zh-Hans",
+      "batchCode": "B4-B11",
+      "articlePlanId": "B4-ART-049",
+      "question": "为什么整体终止之后，部分能力仍然继续存在",
+      "expected": {
+        "nodeCode": "KN-B4-P11-235",
+        "canonicalName": {
+          "zh-Hans": "文明遗产",
+          "en": "Civilization Legacy"
+        },
+        "canonicalQuestion": "为什么整体终止之后，部分能力仍然继续存在",
+        "sectionCode": "CM-B4V1-P11-S035",
+        "sourcePages": [
+          372,
+          376
+        ],
+        "sourceTextSha256": "b54a223f04e06a1f5332d16fdb47f8d8ee53c1ca67d8e23e1b46bb192942793f",
+        "articleTitleZhHans": "文明结束之后，遗产如何进入人工载体继续存在",
+        "articleTitleEn": "How Civilizational Legacy Can Continue Through Artificial Carriers After an Order Ends"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-235",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-235",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明遗产",
+            "en": "Civilization Legacy"
+          },
+          {
+            "nodeCode": "KN-B3-P9-141",
+            "bookCode": "UNKNOWN",
+            "zhHans": "KN-B3-P9-141",
+            "en": "KN-B3-P9-141"
+          },
+          {
+            "nodeCode": "KN-B3-P8-159",
+            "bookCode": "UNKNOWN",
+            "zhHans": "KN-B3-P8-159",
+            "en": "KN-B3-P8-159"
+          },
+          {
+            "nodeCode": "KN-B3-P8-122",
+            "bookCode": "UNKNOWN",
+            "zhHans": "KN-B3-P8-122",
+            "en": "KN-B3-P8-122"
+          },
+          {
+            "nodeCode": "KN-B1-P2-001",
+            "bookCode": "BOOK-1",
+            "zhHans": "为什么现实必须经过投影才能成为世界",
+            "en": "为什么现实必须经过投影才能成为世界"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-049"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-S-11-EN",
+      "caseType": "BATCH_SENTINEL",
+      "riskType": null,
+      "riskNote": null,
+      "sourceA4CaseId": "BOOK4-A4-228",
+      "locale": "en",
+      "batchCode": "B4-B11",
+      "articlePlanId": "B4-ART-049",
+      "question": "What does “Civilization Legacy” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P11-235",
+        "canonicalName": {
+          "zh-Hans": "文明遗产",
+          "en": "Civilization Legacy"
+        },
+        "canonicalQuestion": "为什么整体终止之后，部分能力仍然继续存在",
+        "sectionCode": "CM-B4V1-P11-S035",
+        "sourcePages": [
+          372,
+          376
+        ],
+        "sourceTextSha256": "b54a223f04e06a1f5332d16fdb47f8d8ee53c1ca67d8e23e1b46bb192942793f",
+        "articleTitleZhHans": "文明结束之后，遗产如何进入人工载体继续存在",
+        "articleTitleEn": "How Civilizational Legacy Can Continue Through Artificial Carriers After an Order Ends"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-235",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-235",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明遗产",
+            "en": "Civilization Legacy"
+          },
+          {
+            "nodeCode": "KN-B4-P11-202",
+            "bookCode": "BOOK-4",
+            "zhHans": "集体与文明边界",
+            "en": "Collective and Civilization Boundary"
+          },
+          {
+            "nodeCode": "KN-B4-P11-205",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明记忆与知识",
+            "en": "Civilizational Memory and Knowledge"
+          },
+          {
+            "nodeCode": "KN-B4-P11-204",
+            "bookCode": "BOOK-4",
+            "zhHans": "跨世代运行",
+            "en": "Intergenerational Runtime"
+          },
+          {
+            "nodeCode": "KN-B4-P11-206",
+            "bookCode": "BOOK-4",
+            "zhHans": "意义与语言",
+            "en": "Meaning and Language"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": true,
+          "top5Recall": true,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-049"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-R-01",
+      "caseType": "A4_RESIDUAL_DIAGNOSTIC",
+      "riskType": "TOP5_MISS",
+      "riskNote": "A4 top-5 miss; human review must judge whether the retrieved neighborhood remains semantically safe and whether A5 can accept without hiding this residual.",
+      "sourceA4CaseId": "BOOK4-A4-044",
+      "locale": "en",
+      "batchCode": "B4-B03",
+      "articlePlanId": "B4-ART-013",
+      "question": "What does “Expansion Boundary” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-222",
+        "canonicalName": {
+          "zh-Hans": "扩展边界",
+          "en": "Expansion Boundary"
+        },
+        "canonicalQuestion": "什么决定运行最终能够扩展到哪里",
+        "sectionCode": "CM-B4V1-P10-S022",
+        "sourcePages": [
+          61,
+          63
+        ],
+        "sourceTextSha256": "d0858f11a56fbd5a9503e1ad98fb2afc238e7358b5380c8594ddab1ccd52acbc",
+        "articleTitleZhHans": "跨越边界以后，为什么还必须形成下一尺度",
+        "articleTitleEn": "Why Crossing a Boundary Still Requires a New Stable Scale"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P10-201",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P10-201",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行扩展",
+            "en": "Runtime Expansion"
+          },
+          {
+            "nodeCode": "KN-B4-P10-202",
+            "bookCode": "BOOK-4",
+            "zhHans": "尺度边界",
+            "en": "Scale Boundary"
+          },
+          {
+            "nodeCode": "KN-B4-P10-210",
+            "bookCode": "BOOK-4",
+            "zhHans": "意义梯度",
+            "en": "Meaning Gradient"
+          },
+          {
+            "nodeCode": "KN-B4-P10-212",
+            "bookCode": "BOOK-4",
+            "zhHans": "扩展阈值",
+            "en": "Expansion Threshold"
+          },
+          {
+            "nodeCode": "KN-B4-P10-215",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行传播",
+            "en": "Runtime Propagation"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": false,
+          "top5Recall": false,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": false
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-013"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-R-02",
+      "caseType": "A4_RESIDUAL_DIAGNOSTIC",
+      "riskType": "TOP5_MISS",
+      "riskNote": "A4 top-5 miss; human review must judge whether the retrieved neighborhood remains semantically safe and whether A5 can accept without hiding this residual.",
+      "sourceA4CaseId": "BOOK4-A4-164",
+      "locale": "en",
+      "batchCode": "B4-B01",
+      "articlePlanId": "B4-ART-007",
+      "question": "What does “Civilization Scale” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P11-203",
+        "canonicalName": {
+          "zh-Hans": "文明尺度",
+          "en": "Civilization Scale"
+        },
+        "canonicalQuestion": "什么使运行进入文明级尺度",
+        "sectionCode": "CM-B4V1-P11-S003",
+        "sourcePages": [
+          245,
+          248
+        ],
+        "sourceTextSha256": "391f8363ebd5454c65339e025bc1ebc6b0dbe963379a4bbaa066226e2d210dc9",
+        "articleTitleZhHans": "文明什么时候不再只是一个更大的集体",
+        "articleTitleEn": "When Civilization Becomes More Than a Larger Collective"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-202",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-202",
+            "bookCode": "BOOK-4",
+            "zhHans": "集体与文明边界",
+            "en": "Collective and Civilization Boundary"
+          },
+          {
+            "nodeCode": "KN-B4-P11-208",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明边界与身份",
+            "en": "Civilization Boundary and Identity"
+          },
+          {
+            "nodeCode": "KN-B4-P11-204",
+            "bookCode": "BOOK-4",
+            "zhHans": "跨世代运行",
+            "en": "Intergenerational Runtime"
+          },
+          {
+            "nodeCode": "KN-B4-P11-217",
+            "bookCode": "BOOK-4",
+            "zhHans": "权威与责任",
+            "en": "Authority and Responsibility"
+          },
+          {
+            "nodeCode": "KN-B4-P10-279",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明阈值",
+            "en": "Civilization Threshold"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": false,
+          "top5Recall": false,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": false
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-007"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-R-03",
+      "caseType": "A4_RESIDUAL_DIAGNOSTIC",
+      "riskType": "TOP5_MISS",
+      "riskNote": "A4 top-5 miss; human review must judge whether the retrieved neighborhood remains semantically safe and whether A5 can accept without hiding this residual.",
+      "sourceA4CaseId": "BOOK4-A4-248",
+      "locale": "en",
+      "batchCode": "B4-B11",
+      "articlePlanId": "B4-ART-053",
+      "question": "What does “Civilization Runtime” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P11-245",
+        "canonicalName": {
+          "zh-Hans": "文明运行",
+          "en": "Civilization Runtime"
+        },
+        "canonicalQuestion": "什么时候制度、记忆、知识、意义、基础设施、人口与载体真正共同构成文明运行",
+        "sectionCode": "CM-B4V1-P11-S045",
+        "sourcePages": [
+          419,
+          424
+        ],
+        "sourceTextSha256": "b246a61fc7e4d17c970e7ad27da1d639d3fb746f93ddb1499f8bd22f17428480",
+        "articleTitleZhHans": "什么时候我们真正面对的是文明运行，而不仅是文明名称",
+        "articleTitleEn": "When We Are Truly Looking at Civilizational Runtime Rather Than a Civilization Label"
+      },
+      "retrieval": {
+        "topNode": "KN-B4-P11-202",
+        "topBook": "BOOK-4",
+        "top5": [
+          {
+            "nodeCode": "KN-B4-P11-202",
+            "bookCode": "BOOK-4",
+            "zhHans": "集体与文明边界",
+            "en": "Collective and Civilization Boundary"
+          },
+          {
+            "nodeCode": "KN-B4-P11-208",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明边界与身份",
+            "en": "Civilization Boundary and Identity"
+          },
+          {
+            "nodeCode": "KN-B4-P11-204",
+            "bookCode": "BOOK-4",
+            "zhHans": "跨世代运行",
+            "en": "Intergenerational Runtime"
+          },
+          {
+            "nodeCode": "KN-B4-P11-217",
+            "bookCode": "BOOK-4",
+            "zhHans": "权威与责任",
+            "en": "Authority and Responsibility"
+          },
+          {
+            "nodeCode": "KN-B4-P10-279",
+            "bookCode": "BOOK-4",
+            "zhHans": "文明阈值",
+            "en": "Civilization Threshold"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": false,
+          "top5Recall": false,
+          "book4Top1": true,
+          "wrongBookTop1": false,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": false
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-053"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    },
+    {
+      "reviewCaseId": "BOOK4-A5-R-04",
+      "caseType": "A4_RESIDUAL_DIAGNOSTIC",
+      "riskType": "WRONG_BOOK_TOP1",
+      "riskNote": "A4 wrong-book top-1; expected Book IV node remained in top-5. Human review must explicitly judge source/relevance risk.",
+      "sourceA4CaseId": "BOOK4-A4-094",
+      "locale": "en",
+      "batchCode": "B4-B01",
+      "articlePlanId": "B4-ART-005",
+      "question": "What does “Expansion Debt” mean in Reality Expansion?",
+      "expected": {
+        "nodeCode": "KN-B4-P10-247",
+        "canonicalName": {
+          "zh-Hans": "扩展债务",
+          "en": "Expansion Debt"
+        },
+        "canonicalQuestion": "今天的扩展如何形成未来必须承担的义务",
+        "sectionCode": "CM-B4V1-P10-S047",
+        "sourcePages": [
+          127,
+          129
+        ],
+        "sourceTextSha256": "0bbbdf9b2a7cc84be9b0790bf487d84fc40c9d781457ea4c9d6c12345ba8b3be",
+        "articleTitleZhHans": "为什么今天的扩展会成为明天的债务",
+        "articleTitleEn": "Why Today's Expansion Can Become Tomorrow's Debt"
+      },
+      "retrieval": {
+        "topNode": "KN-B2-P7-018",
+        "topBook": "BOOK-2",
+        "top5": [
+          {
+            "nodeCode": "KN-B2-P7-018",
+            "bookCode": "BOOK-2",
+            "zhHans": "债务如何扩张",
+            "en": "债务如何扩张"
+          },
+          {
+            "nodeCode": "KN-B4-P10-247",
+            "bookCode": "BOOK-4",
+            "zhHans": "扩展债务",
+            "en": "Expansion Debt"
+          },
+          {
+            "nodeCode": "KN-B2-P7-046",
+            "bookCode": "BOOK-2",
+            "zhHans": "时间债务如何形成",
+            "en": "时间债务如何形成"
+          },
+          {
+            "nodeCode": "KN-B4-P10-260",
+            "bookCode": "BOOK-4",
+            "zhHans": "替代能力",
+            "en": "Replacement Capacity"
+          },
+          {
+            "nodeCode": "KN-B4-P10-201",
+            "bookCode": "BOOK-4",
+            "zhHans": "运行扩展",
+            "en": "Runtime Expansion"
+          }
+        ],
+        "candidateCount": 8,
+        "evidenceCoverage": "STRONG",
+        "metrics": {
+          "top1NodeCorrect": false,
+          "top5Recall": true,
+          "book4Top1": false,
+          "wrongBookTop1": true,
+          "sourceGrounded": true,
+          "dedupUnique": true,
+          "directAnswerPotential": true
+        }
+      },
+      "sourceGrounding": {
+        "passed": true,
+        "articlePlanId": "B4-ART-005"
+      },
+      "reviewRubric": [
+        "correctSource",
+        "relevant",
+        "bookIVMeaningPreserved",
+        "customerReadable",
+        "noGenericAnswer",
+        "noMethodHijack"
+      ],
+      "decision": "PENDING",
+      "reviewerNotes": ""
+    }
+  ],
+  "boundaries": {
+    "humanAcceptanceGranted": false,
+    "bookIVAdmitted": false,
+    "productionEligible": false,
+    "publicationOpened": false,
+    "activeKIRSourceRegistryMutationPerformed": false,
+    "a6MayRunBeforeAllHumanCasesAccepted": false
+  },
+  "caseSetSha256": "ba9287a2fe582f66ffe4a939999078c2588213308a9385eef56e7a74f34d8098"
+}
