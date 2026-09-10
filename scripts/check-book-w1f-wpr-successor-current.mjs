@@ -184,7 +184,7 @@ const compatibleHistoricalChecks = [
   'scripts/check-wpr-w12-locale-projection.mjs',
   'scripts/check-wpr-w13-public-vocabulary.mjs',
   'scripts/check-wpr-w16-article-production.mjs',
-  'scripts/check-wpr-w17-figure-diagram-production.mjs',
+  'scripts/check-wpr-w17-figure-diagram-production-current.mjs',
   'scripts/check-wpr-w18-books-production.mjs',
   'scripts/check-wpr-w19-academy-production.mjs',
   'scripts/check-wpr-w20-reality-journey-production-current.mjs',
@@ -199,10 +199,15 @@ for (const checker of compatibleHistoricalChecks) {
   assert.equal(result.status, 0, `Successor-compatible WPR checker failed: ${checker}`);
 }
 
+// Seven-volume current presentation successor: the PX2/PDS current wrappers above are
+// baseline-stale against the already-active CX customer shell. Preserve those files as
+// historical evidence, but validate the current customer projection through the explicit
+// seven-volume successor checkers instead.
 for (const checker of [
-  'scripts/check-px2-cx-p1-physical-delete-current.mjs',
+  'scripts/check-cx-r6-homepage-seven-volume-current.mjs',
   currentSuccessor.presentationSuccessor.financialCheckerPath,
-  'scripts/check-wpr-cx-p1-pds-responsive-accessibility-post-delete-current.mjs'
+  'scripts/check-cx-r8-knowledge-seven-volume-current.mjs',
+  'scripts/check-seven-volume-responsive-accessibility-current.mjs'
 ]) {
   const result = spawnSync(process.execPath, [checker], { stdio: 'inherit' });
   assert.equal(result.status, 0, `Current WPR presentation successor failed: ${checker}`);

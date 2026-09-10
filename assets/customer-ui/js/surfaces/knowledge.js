@@ -1,5 +1,7 @@
-import {BOOK_ROUTE_BY_ID,articleHref,figureHasCanonicalBookOwnership,loadCanonicalParts,loadFigureRegistry,loadPublishedArticles} from '../../../js/cx-knowledge-source-adapter.js';
-import {hydrateCustomerAssets} from '../assets.js';
+import {articleHref,loadPublishedArticles} from '../../../js/knowledge/published-content.js';
+import {BOOK_ROUTE_BY_ID,loadSevenVolumeBooks,loadSevenVolumeParts} from '../../../js/web-production/public-surface-data-seven.js';
+import {hydrateSevenVolumeAssets} from '../seven-volume-assets.js';
+import {loadFigureRegistry} from '../../../js/web-production/public-surface-data.js';
 
 const $=(selector,scope=document)=>scope.querySelector(selector);
 const $$=(selector,scope=document)=>[...scope.querySelectorAll(selector)];
@@ -15,11 +17,13 @@ const BOOK_ROLE={
  'BOOK-1':{en:'How reality forms',zh:'现实如何形成'},
  'BOOK-2':{en:'How reality runs',zh:'现实如何运行'},
  'BOOK-3':{en:'How reality maintains continuity',zh:'现实如何维持与延续'},
- 'BOOK-4':{en:'How reality scales into civilization',zh:'现实如何扩展到文明尺度'},
- 'BOOK-5':{en:'How reality is navigated and reviewed',zh:'现实如何被导航与复核'}
+ 'BOOK-4':{en:'How reality expands across scale',zh:'现实如何跨越尺度扩展'},
+ 'BOOK-5':{en:'How civilizations occupy different reality positions',zh:'文明如何占据不同现实位置'},
+ 'BOOK-6':{en:'How reality becomes observable and readable',zh:'现实如何被观察与读取'},
+ 'BOOK-7':{en:'How reading becomes navigation and continuation',zh:'读取如何进入导航与延续'}
 };
-const BOOK_ASSET={'BOOK-1':'BOOK-1-HARDCOVER','BOOK-2':'BOOK-2-HARDCOVER','BOOK-3':'BOOK-3-HARDCOVER','BOOK-4':'BOOK-4-HARDCOVER','BOOK-5':'BOOK-5-HARDCOVER'};
-const BOOK_ROUTE={'BOOK-1':'/books/reality-formation/','BOOK-2':'/books/reality-runtime/','BOOK-3':'/books/reality-continuity/','BOOK-4':'/books/reality-civilization/','BOOK-5':'/books/reality-navigation/'};
+const BOOK_ASSET=Object.fromEntries(Array.from({length:7},(_,i)=>[`BOOK-${i+1}`,`BOOK-${i+1}-HARDCOVER`]));
+const BOOK_ROUTE={'BOOK-1':'/books/reality-formation/','BOOK-2':'/books/reality-runtime/','BOOK-3':'/books/reality-continuity/','BOOK-4':'/books/reality-expansion/','BOOK-5':'/books/reality-differentiation/','BOOK-6':'/books/reality-observation/','BOOK-7':'/books/reality-navigation/'};
 
 function askHref(kind,ref,labelText,route){
  const params=new URLSearchParams({contextType:'KNOWLEDGE',contextRef:`${kind}:${ref}`,contextLabel:clean(labelText).slice(0,160),contextRoute:clean(route).slice(0,240)});
@@ -43,10 +47,11 @@ async function articlesForLocale(){
  if(!state.articles.has(key))state.articles.set(key,loadPublishedArticles(key));
  return state.articles.get(key);
 }
-async function books(){if(!state.books)state.books=fetchJson('/content/registry/books.json');return state.books}
+async function books(){if(!state.books)state.books=loadSevenVolumeBooks();return state.books}
 async function concepts(){if(!state.concepts)state.concepts=fetchJson('/content/registry/concepts.json');return state.concepts}
 async function figures(){if(!state.figures)state.figures=loadFigureRegistry();return state.figures}
-async function parts(){if(!state.parts)state.parts=loadCanonicalParts();return state.parts}
+async function parts(){if(!state.parts)state.parts=loadSevenVolumeParts();return state.parts}
+function figureHasCanonicalBookOwnership(figure,partsRegistry){if(!figure||!partsRegistry)return false;if(Number(figure.part)===0)return Number(figure.book)===1;const part=partsRegistry.parts?.find(p=>Number(p.number)===Number(figure.part));return part?.book===`book-${Number(figure.book)}`}
 function loading(node){if(node)node.innerHTML=`<div class="cx-knowledge-state">${esc(tr('Loading published knowledge…','正在读取已发布知识……'))}</div>`}
 function unavailable(node){if(node)node.innerHTML=`<div class="cx-knowledge-state">${esc(tr('This knowledge view is temporarily unavailable.','这个知识视图暂时无法读取。'))}</div>`}
 
@@ -57,9 +62,9 @@ async function renderHome(){
 
 function bookCard(book){
  const code=book.bookCode;const title=label(book.title);const subtitle=label(book.subtitle);const role=BOOK_ROLE[code]?.[locale()==='zh-Hans'?'zh':'en']||subtitle;const href=BOOK_ROUTE[code]||BOOK_ROUTE_BY_ID[book.book_id]||'/books/';
- return `<article class="cx-knowledge-book-card"><figure class="cx-knowledge-book-card__cover cx-visual"><img data-cx-asset="${esc(BOOK_ASSET[code])}" alt="${esc(title)}"><span class="cx-knowledge__asset-fallback cx-meta" data-cx-asset-fallback hidden>${esc(tr('Cover temporarily unavailable','封面暂时无法显示'))}</span></figure><div class="cx-knowledge-book-card__body"><div class="cx-knowledge-meta-row"><span>${esc(tr(`Volume ${book.volume}`,`第 ${book.volume} 册`))}</span><span>${esc(clean(book.content_status).replaceAll('-',' '))}</span></div><h2 class="cx-heading-2">${esc(title)}</h2><p class="cx-knowledge-book-card__role">${esc(role)}</p>${subtitle&&subtitle!==role?`<p class="cx-meta">${esc(subtitle)}</p>`:''}<div class="cx-cluster"><a class="cx-button cx-button--secondary" href="${esc(href)}">${esc(tr('Open volume','打开本册'))}</a><a class="cx-button cx-button--quiet" href="${esc(askHref('BOOK',code,title,href))}">${esc(tr('Ask about this','针对这册提问'))}</a></div></div></article>`;
+ return `<article class="cx-knowledge-book-card"><figure class="cx-knowledge-book-card__cover cx-visual"><img data-cx-seven-volume-asset="${esc(BOOK_ASSET[code])}" alt="${esc(title)}"><span class="cx-knowledge__asset-fallback cx-meta" data-cx-asset-fallback hidden>${esc(tr('Cover temporarily unavailable','封面暂时无法显示'))}</span></figure><div class="cx-knowledge-book-card__body"><div class="cx-knowledge-meta-row"><span>${esc(tr(`Volume ${book.volume}`,`第 ${book.volume} 册`))}</span><span>${esc(clean(book.content_status).replaceAll('-',' '))}</span></div><h2 class="cx-heading-2">${esc(title)}</h2><p class="cx-knowledge-book-card__role">${esc(role)}</p>${subtitle&&subtitle!==role?`<p class="cx-meta">${esc(subtitle)}</p>`:''}<div class="cx-cluster"><a class="cx-button cx-button--secondary" href="${esc(href)}">${esc(tr('Open volume','打开本册'))}</a><a class="cx-button cx-button--quiet" href="${esc(askHref('BOOK',code,title,href))}">${esc(tr('Ask about this','针对这册提问'))}</a></div></div></article>`;
 }
-async function renderBooks(){const node=$('[data-cx-book-grid]');if(!node)return;loading(node);try{const registry=await books();node.innerHTML=(registry.books||[]).sort((a,b)=>Number(a.volume)-Number(b.volume)).map(bookCard).join('');await hydrateCustomerAssets(node)}catch{unavailable(node)}}
+async function renderBooks(){const node=$('[data-cx-book-grid]');if(!node)return;loading(node);try{const registry=await books();node.innerHTML=(registry.books||[]).sort((a,b)=>Number(a.volume)-Number(b.volume)).map(bookCard).join('');await hydrateSevenVolumeAssets(document)}catch{unavailable(node)}}
 
 function articleVolume(article){const context=article?.publicationContext||{};if(Number.isInteger(context.publicationVolume))return String(context.publicationVolume);const code=clean(context.publicationBookCode||context.bookCode);const match=code.match(/BOOK-(\d+)/);return match?match[1]:'unknown'}
 function articleTopics(article){const tags=article?.taxonomy?.tags||[];const theme=clean(article?.taxonomy?.themeCode);return [...new Set([theme,...tags].map(clean).filter(Boolean))]}

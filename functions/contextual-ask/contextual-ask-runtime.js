@@ -4,7 +4,7 @@ const clean=v=>String(v??'').trim();
 const list=v=>Array.isArray(v)?v:[];
 const fail=(code,status=422)=>{const e=new Error(code);e.code=code;e.status=status;throw e};
 const hasGuidedContext=value=>Boolean(value&&typeof value==='object'&&Object.values(value).some(x=>clean(x)));
-const PUBLIC_KNOWLEDGE_REF=/^(?:ARTICLE:[a-z0-9][a-z0-9-]{0,119}|BOOK:BOOK-[1-5]|FIGURE:figure-[a-z0-9-]{1,79}|CONCEPT:[a-z0-9][a-z0-9-]{0,79})$/;
+const PUBLIC_KNOWLEDGE_REF=/^(?:ARTICLE:[a-z0-9][a-z0-9-]{0,119}|BOOK:BOOK-[1-7]|FIGURE:figure-[a-z0-9-]{1,79}|CONCEPT:[a-z0-9][a-z0-9-]{0,79})$/;
 export function isPublicKnowledgeContextRef(value){return PUBLIC_KNOWLEDGE_REF.test(clean(value))}
 function publicDefinition(row,locale='en'){return freeze({contextType:row.contextType,label:row.customerDisclosureLabel[locale==='zh-Hans'?'zh':'en'],sourceClass:row.sourceClass,participantScope:row.participantScope,caseScope:row.caseScope,consentRequired:row.consentRequired,entitlementRequired:row.entitlementRequired,freshnessPolicy:row.freshnessPolicy})}
 export function buildAskContextAvailability({locale='en',requestedContextSeed=null}={}){

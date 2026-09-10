@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const composition=json('content/web-production/composition/public/figure-diagram-composition-v1.json');
+assert.equal(composition.work,'WPR-W17');
+const detail=read('assets/js/pages/figure-detail.js');assert.ok(detail.includes('figurePublicSrc'));assert.equal(detail.includes('/assets/images/figures/book-1/web/'),false);
+const html=read('figures/index.html');assert.ok(html.includes('data-cx-surface="KNOWLEDGE_FIGURES"'));assert.ok(html.includes('/assets/customer-ui/js/surfaces/knowledge.js'));
+const client=read('assets/customer-ui/js/surfaces/knowledge.js');assert.ok(client.includes('loadFigureRegistry'));assert.ok(client.includes('figureHasCanonicalBookOwnership'));assert.ok(client.includes('loadSevenVolumeParts'));
+const figs=json('content/registry/figures.json'),parts=json('content/registry/successors/seven-volume-v1/parts.json'),audit=json('content/web-production/audits/wpr-figure-ownership-drift-audit-v1.json');
+const owner=new Map(parts.parts.map(p=>[p.number,p.book]));const actual=figs.figures.filter(f=>{const expected=f.part===0?'book-1':owner.get(f.part);return expected&&`book-${f.book}`!==expected;});
+assert.equal(actual.length,5);assert.equal(audit.mismatchCount,5);assert.ok(actual.every(f=>f.part===5));
+console.log('✓ WPR-W17 current Figure / Diagram successor passed with 5 inherited upstream ownership mismatches still excluded.');
+console.log('  Current /figures/ uses CX Knowledge + seven-volume ownership; historical W17 evidence remains unchanged.');

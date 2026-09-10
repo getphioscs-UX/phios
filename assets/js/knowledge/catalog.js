@@ -73,29 +73,30 @@ export const LIBRARY_RESOURCES = Object.freeze([
     id: 'book-four',
     category: 'books',
     status: 'later',
-    href: '/books/reality-civilization/',
+    href: '/books/reality-expansion/',
     title: {
-      en: 'Book IV · Reality Civilization',
+      en: 'Book IV · Reality Expansion',
       'zh-Hans': '第四册 · 世界如何扩展'
     },
     description: {
-      en: 'Runtime Expansion, Civilization Runtime and Civilization Atlas.',
-      'zh-Hans': '运行扩展、文明运行与文明图谱。'
+      en: 'Runtime Expansion and Civilization Runtime.',
+      'zh-Hans': '运行扩展与文明运行。'
     }
   },
   {
-    id: 'book-five',
-    category: 'books',
-    status: 'later',
-    href: '/books/reality-navigation/',
-    title: {
-      en: 'Book V · Reality Navigation',
-      'zh-Hans': '第五册 · 世界将如何继续'
-    },
-    description: {
-      en: 'Reading Science, Navigation Science and Reality Continuation.',
-      'zh-Hans': '读取科学、导航科学与现实延续。'
-    }
+    id: 'book-five', category: 'books', status: 'later', href: '/books/reality-differentiation/',
+    title: { en: 'Book V · Reality Differentiation', 'zh-Hans': '第五册 · 世界如何分化' },
+    description: { en: 'Civilization Atlas.', 'zh-Hans': '文明图谱。' }
+  },
+  {
+    id: 'book-six', category: 'books', status: 'later', href: '/books/reality-observation/',
+    title: { en: 'Book VI · Reality Observation', 'zh-Hans': '第六册 · 世界如何被观察' },
+    description: { en: 'Reading Science.', 'zh-Hans': '读取科学。' }
+  },
+  {
+    id: 'book-seven', category: 'books', status: 'later', href: '/books/reality-navigation/',
+    title: { en: 'Book VII · Reality Navigation', 'zh-Hans': '第七册 · 世界将如何继续' },
+    description: { en: 'Navigation Science and Reality Continuation.', 'zh-Hans': '导航科学与现实延续。' }
   },
   {
     id: 'reality-atlas',
@@ -107,8 +108,8 @@ export const LIBRARY_RESOURCES = Object.freeze([
       'zh-Hans': '现实 Atlas'
     },
     description: {
-      en: 'A free structural route across fifteen Parts and five Books.',
-      'zh-Hans': '贯穿十五部与五册书的免费结构路径。'
+      en: 'A free structural route across fifteen Parts and seven Books.',
+      'zh-Hans': '贯穿十五部与七册书的免费结构路径。'
     }
   },
   {
