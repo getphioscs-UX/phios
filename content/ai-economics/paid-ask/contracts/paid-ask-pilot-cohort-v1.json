@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "PHI-OS-PAID-ASK-PILOT-COHORT-v1.0.0",
+  "baselineCommit": "90d4a7ce304a3a2fe5a0f6547ff911565144faee",
+  "work": "PASK-W0",
+  "status": "REAL_COHORT_CONTRACT_READY",
+  "requiredCohorts": ["FREE", "CREDIT", "PLUS", "REALITY"],
+  "minimumRealRequests": 100,
+  "minimumPerCohort": 20,
+  "minimumPerExecutionClass": 1,
+  "minimumDirectAnswerRate": 0.85,
+  "minimumClaimGuardPassRate": 0.98,
+  "minimumHumanAcceptanceRate": 0.85,
+  "criticalFailuresAllowed": 0,
+  "requiredEvidenceClass": "REAL_PRODUCTION_EVENT",
+  "excludedFromAcceptance": ["SYNTHETIC", "CONTROLLED_REPLAY", "REAL_PROVIDER_CALIBRATION"],
+  "privacy": {"storeQuestionTextInEconomicsEvent":false,"storeAnswerTextInEconomicsEvent":false,"storeRawAccountContext":false,"participantIdentifier":"OPAQUE_OR_HASHED","explicitContextAuthorizationRequired":true},
+  "authorityBoundary": {"knowledgeAndRelevanceOwner":"KIR_R2","providerEconomicsOwner":"PAI_R1","productionPriceOwner":"COMMERCE","contextAndUpgradeUxOwner":"CX_R31_FUTURE","pilotCreatesPriceAuthority":false}
+}
