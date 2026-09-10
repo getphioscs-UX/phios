@@ -10,6 +10,8 @@ const shell=read('assets/customer-ui/js/shell.js');
 const brand=json('content/customer-experience-rebuild/authority/customer-brand-asset-authority-v4.json');
 const acceptance=json('content/customer-experience-rebuild/acceptance/p1-browser-r1-blocker-repair-acceptance-v1.json');
 const kapRelevance=json('content/knowledge/answer-projection/reconciliation/kap-p1-question-source-relevance-successor-v1.json');
+const kapKirBridge=json('content/knowledge/answer-projection/reconciliation/kap-kir-r2-production-bridge-successor-v1.json');
+const kapKirContent=json('content/knowledge/answer-projection/reconciliation/kap-kir-r2-content-grounding-successor-v2.json');
 const cutover=json('content/customer-experience-rebuild/migration/priority-route-cutover-registry-v2.json');
 assert.equal(brand.status,'ACTIVE_SURFACE_AWARE_CUSTOMER_BRAND_BINDING');assert.equal(brand.currentConsumers.publicHeaderLight,'LOGO-009');assert.match(shell,/headerMarkup[\s\S]*data-cx-asset="LOGO-009"/);assert.match(shell,/data-cx-asset="LOGO-010"/);
 assert.match(shell,/function installAskDrawerNavigation/);assert.match(shell,/form\.addEventListener\('submit'/);assert.match(shell,/location\.assign\(destination\(q\)\)/);assert.match(shell,/openLink\.href = destination/);
@@ -19,7 +21,13 @@ const unrelated={normalization:normalized,sources:[{text:'为什么需要 PHI OS
 const related={normalization:normalized,sources:[{text:'伴侣互动中，丈夫的脾气与具体触发情境需要分开观察。'}]};
 assert.equal(evaluateKapQuestionSourceRelevance(unrelated).established,false);assert.equal(evaluateKapQuestionSourceRelevance(related).established,true);
 const cov=evaluateKapCoverage({bundle:unrelated,retrieval:{published:{coverage:{level:'strong'}},manuscript:{records:[]}},scopeDisposition:'KNOWLEDGE_QUERY'});assert.equal(cov.status,'INSUFFICIENT_COVERAGE');assert.ok(cov.reasonCodes.includes('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED'));
-assert.equal(kapRelevance.status,'ACTIVE_ADDITIVE_QUESTION_SOURCE_RELEVANCE_SUCCESSOR');for(const item of kapRelevance.runtimeSuccessors)assert.equal(sha(item.path),item.currentSha256,`KAP_RELEVANCE_RUNTIME_DRIFT:${item.path}`);
+assert.equal(kapRelevance.status,'ACTIVE_ADDITIVE_QUESTION_SOURCE_RELEVANCE_SUCCESSOR');
+assert.equal(kapKirBridge.runtimeSuccessor.predecessorSha256,kapRelevance.runtimeSuccessors.find(item=>item.path===kapKirBridge.runtimeSuccessor.path).currentSha256);
+assert.equal(kapKirContent.runtimeSuccessor.predecessorSha256,kapKirBridge.runtimeSuccessor.currentSha256);
+for(const item of kapRelevance.runtimeSuccessors){
+  const currentSha=item.path===kapKirContent.runtimeSuccessor.path?kapKirContent.runtimeSuccessor.currentSha256:item.currentSha256;
+  assert.equal(sha(item.path),currentSha,`KAP_RELEVANCE_RUNTIME_DRIFT:${item.path}`);
+}
 const askRequest=new Request('https://phios.test/api/customer-contextual-ask',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:'为什么我丈夫脾气那么坏',locale:'zh-Hans',contexts:[{contextType:'KNOWLEDGE'}],questionOnly:false})});const askResponse=await runContextualAsk({request:askRequest,env:{},data:{}});assert.equal(askResponse.status,200);const askPayload=await askResponse.json();assert.equal(askPayload.ok,true);assert.equal(askPayload.view.state,'NEEDS_CONTEXT');assert.match(askPayload.view.answer.text,/脾气坏/);assert.doesNotMatch(askPayload.view.answer.text,/为什么需要 PHI OS/);assert.deepEqual(askPayload.view.relatedKnowledge,[]);assert.ok(askPayload.view.answer.supporting.every(item=>!/I am using the Relational Runtime/.test(item)));assert.ok(askPayload.view.answer.supporting.some(item=>/关系情境/.test(item))); 
 const z=json('content/customer-experience-rebuild/ziwei-cx-r1/authority/ziwei-cx-r1-w16-current-shared-owner-reconciliation-v3.json');const owner=json(z.currentOwnerRegistryRef);assert.equal(z.currentOwnerSha256,owner.files[z.sharedFile].currentSha256);assert.equal(sha(z.sharedFile),z.currentOwnerSha256);assert.equal(z.ziweiSharedSurfaceMutationByThisWork,false);
 assert.equal(acceptance.productionBrowserAcceptance,false);assert.equal(acceptance.physicalLegacyDeleteAllowed,false);assert.equal(cutover.productionBrowserAcceptance.status,'PENDING_PRODUCTION_BROWSER_ACCEPTANCE');assert.equal(cutover.physicalDelete.performed,false);

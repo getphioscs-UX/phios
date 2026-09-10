@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { BASELINE, read, readJson, sha256File } from './lib/method-production-activation/mpa-hdr-boundary-v1.mjs';
 import {
@@ -26,6 +28,7 @@ const mpaVocab=readJson(`${root}/registries/mpa-public-method-vocabulary-boundar
 const wprVocab=readJson('content/web-production/registries/wpr-public-vocabulary-registry-v2.json');
 const publicMethodCatalog=readJson('content/web-production/px2/successors/public-method-catalog-v6.json');
 const p1Delete=readJson('content/customer-experience-rebuild/acceptance/p1-physical-legacy-delete-acceptance-v1.json');
+const cxR26Retirement=readJson('content/customer-experience-rebuild/migration/cx-r26-legacy-presentation-retirement-successor-v1.json');
 const hdrFreeze=readJson('content/professional/core-method-runtime/hdr-production-freeze-v1.json');
 const hdrManifest=readJson('content/professional/core-method-runtime/hdr-runtime-manifest-v1.json');
 const cmr=readJson('content/professional/canonical-meaning-runtime/acceptance/cmr-w7-hdr-mapping-acceptance-v1.json');
@@ -81,7 +84,9 @@ for(const retired of ['personal-runtime.html','professional/personal-runtime/ind
   assert.ok(vocab.surfaceAudit.files.includes(retired),`W24_FROZEN_AUDIT_TARGET_MISSING:${retired}`);
   assert.ok(p1Delete.deletedPresentationFiles.includes(retired),`P1_RETIREMENT_EVIDENCE_MISSING:${retired}`);
 }
-const retiredPresentation=new Set(p1Delete.deletedPresentationFiles);
+assert.equal(cxR26Retirement.status,'CURRENT_RETIREMENT_RECONCILED');
+assert.ok(cxR26Retirement.physicallyDeletedInBaseline.includes('professional/human-design/index.html'));
+const retiredPresentation=new Set([...p1Delete.deletedPresentationFiles,...cxR26Retirement.physicallyDeletedInBaseline]);
 for(const file of vocab.surfaceAudit.files){
   if(retiredPresentation.has(file)) continue;
   const source=read(file); assert.equal(assertPublicHdrVocabulary({text:source,restrictedTerms:vocab.restrictedTerms}),true,`PUBLIC_TERM_LEAK:${file}`);
@@ -97,10 +102,12 @@ assert.equal(currentHdrPublic.route,'/perspectives/personal/');
 assert.equal(currentHdrPublic.publicState,'AVAILABLE_WITH_CONFIRMED_EXTERNAL_CHART');
 assert.equal(currentHdrPublic.executionMode,'CUSTOMER_SUPPLIED_EXTERNAL_CHART');
 assert.match(currentHdrPublic.boundary,/does not claim official BodyGraph birth-calculation authority/i);
-const compat=read('professional/human-design/index.html');
-assert.ok(compat.includes('name="robots" content="noindex"'));
-assert.ok(compat.includes('url=/professional/personal-runtime'));
-assert.ok(compat.includes("location.replace('/professional/personal-runtime')"));
+assert.equal(fs.existsSync(path.join(process.cwd(),'professional/human-design/index.html')),false);
+const redirects=read('_redirects');
+assert.ok(redirects.includes('/professional/human-design /perspectives/personal/ 308'));
+assert.ok(redirects.includes('/professional/human-design/ /perspectives/personal/ 308'));
+const currentSurface=read('perspectives/personal/index.html');
+assert.match(currentSurface,/Human Design can be added as customer-supplied external context/i);
 
 // Rights/licensing evidence is fail-closed and expressly does not create a legal opinion or a PHI license.
 assert.equal(rights.repositoryEvidence.explicitCommercialLicenseArtifactPresent,false);

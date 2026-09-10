@@ -17,11 +17,12 @@ import {
 const root = process.cwd();
 const read = file => fs.readFile(path.join(root, file), 'utf8');
 const readJson = async file => JSON.parse(await read(file));
-const [authority, knowledge, governance, controller] = await Promise.all([
+const [authority, knowledge, governance, controller, legacyAdapter] = await Promise.all([
   loadKnowledgeRegistryAuthorities(root),
   loadKnowledgeBlueprintRegistry(root),
   readJson('content/registry/master-governance.json'),
-  read('assets/customer-ui/js/surfaces/knowledge.js')
+  read('assets/customer-ui/js/surfaces/knowledge.js'),
+  read('assets/js/cx-knowledge-source-adapter.js')
 ]);
 assert.equal(authority.contract.contract, KNOWLEDGE_REGISTRY_AUTHORITY_VERSION);
 const expectedAuthorityTotals = {
@@ -44,8 +45,11 @@ assert.equal(knowledge.registry.authorityContract,
   'content/knowledge/contracts/knowledge-registry-authority-book-w1d-v1.json');
 assert.equal(authority.contract.supersedes.path,
   'content/knowledge/contracts/knowledge-registry-authority-v2.json');
-assert(controller.includes('cx-knowledge-source-adapter.js'));
+assert(controller.includes("../../../js/knowledge/published-content.js"));
+assert(controller.includes("../../../js/web-production/public-surface-data-seven.js"));
 assert(controller.includes('loadPublishedArticles'));
+assert(legacyAdapter.includes("./knowledge/published-content.js"));
+assert(legacyAdapter.includes("./web-production/public-surface-data.js"));
 const governanceEntry = governance.writeSourceRule.writeSourceMap.find(entry => entry.owner === 'KH-W4B Canonical Registry Authority');
 assert(governanceEntry);
 assert(governanceEntry.canonicalPaths.includes('content/knowledge/contracts/knowledge-registry-authority-v2.json'));

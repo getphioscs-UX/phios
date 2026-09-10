@@ -8,7 +8,9 @@ const logo=read('content/product-visual-platform-r1/foundation/logo-compliance-v
 const refs=read('content/product-visual-platform-r1/foundation/design-reference-registry-v1.json');
 const tokens=read('content/product-visual-platform-r1/foundation/design-token-extraction-v1.json');
 const comps=read('content/product-visual-platform-r1/foundation/pvp-component-registry-v1.json');
-assert.equal(census.baselineCommit,'80bae71675ef8b196cd10402ea0ccbf9b833ee57');assert.equal(census.status,'CURRENT_VISUAL_CENSUS_COMPLETE');
+const BASELINE='489eb817fde8bc34f2faefe395eca128ef997220';
+for(const artifact of [census,cls,logo,refs,tokens,comps])assert.equal(artifact.baselineCommit,BASELINE);
+assert.equal(census.status,'CURRENT_VISUAL_CENSUS_COMPLETE');
 assert.deepEqual(Object.keys(cls.classes),['BRAND_REFERENCE','STATIC_PRODUCTION_ASSET','DYNAMIC_PRODUCT_VISUAL','UI_GENERATED_VISUAL']);
 assert.equal(refs.records.length,6);for(const r of refs.records){assert.equal(r.productionStatus,'NOT_PRODUCTION_CUSTOMER_ASSET');assert.equal(r.directCustomerRenderingAllowed,false)}
 assert.equal(logo.canonicalRegistry,'content/web-production/registries/phios-logo-registry-v1.json');assert.equal(logo.canonicalRecordCount,12);assert.equal(logo.rules.manualPhiMarkAsLogoAllowed,false);
