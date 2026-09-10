@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const c=json('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w3-intent-recommendation-v1.json');
+const client=read('assets/customer-ui/js/surfaces/contextual-ask.js');
+assert.equal(c.maxNextSteps,2);
+assert.equal(c.genericProductCarouselAllowed,false);
+assert.ok(client.includes("arr(view?.nextSteps)"),'nextSteps input missing');
+assert.ok(client.includes('.slice(0,2)'),'client does not clamp next steps to two');
+assert.equal(client.includes('product carousel'),false);
+console.log('✓ CX-R31-W3 Intent Recommendation passed: answer renderer allows at most two governed next steps.');

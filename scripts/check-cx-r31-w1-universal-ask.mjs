@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const c=json('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w1-universal-ask-composer-v1.json');
+const home=read('index.html'),ask=read('knowledge/ask/index.html'),client=read('assets/customer-ui/js/surfaces/contextual-ask.js');
+assert.equal(c.status,'COMPLETE');
+assert.equal(c.homeQuestionInput.oneClearInput,true);
+assert.equal(c.askQuestionInput.primaryEntryMechanism,true);
+assert.equal(c.authorityBoundary.mandatoryFunnel,false);
+for(const marker of ['data-cx-r31-home-ask','action="/knowledge/ask/"','name="q"','data-cx-r31-direct-starts','href="/reality/"','href="/perspectives/"'])assert.ok(home.includes(marker),`home missing ${marker}`);
+for(const marker of ['data-cx-r31="W0-W8-MACHINE-ACTIVE"','data-cx-contextual-ask-form','name="question"','Ask a question. Start with Knowledge.'])assert.ok(ask.includes(marker),`Ask missing ${marker}`);
+assert.ok(client.includes("new URLSearchParams(location.search).get('q')"),'Ask does not consume homepage q');
+console.log('✓ CX-R31-W1 Universal Ask Composer passed: one clear question input on / and /knowledge/ask/.');

@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const c=json('content/customer-experience-rebuild/cx-r31/contracts/cx-r31-w7-reality-return-v1.json');
+const html=read('knowledge/ask/index.html'),client=read('assets/customer-ui/js/surfaces/contextual-ask.js');
+assert.equal(c.returnToRealityAvailable,true);
+assert.equal(c.mandatoryForEveryCustomer,false);
+assert.equal(c.answerDoesNotBecomeVerifiedRealityFactAutomatically,true);
+assert.ok(html.includes('Continue this question in My Reality?'));
+assert.ok(html.includes('This answer does not become a verified fact in My Reality.'));
+assert.ok(client.includes('handoffToMyReality'));
+console.log('✓ CX-R31-W7 Reality Return passed: governed return exists and remains optional.');

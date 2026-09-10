@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/assets/customer-ui/surfaces/p1.css">
   <link rel="stylesheet" href="/assets/customer-ui/surfaces/contextual-ask.css">
 </head>
-<body data-cx-surface="CONTEXTUAL_ASK" data-cx-nav="KNOWLEDGE" data-cx-r9-r2="CURRENT-CUTOVER-ACTIVE">
+<body data-cx-surface="CONTEXTUAL_ASK" data-cx-nav="KNOWLEDGE" data-cx-r9-r2="CURRENT-CUTOVER-ACTIVE" data-cx-r31="W0-W8-MACHINE-ACTIVE">
   <a class="cx-skip" href="#main">Skip to content</a>
   <div data-cx-header></div>
   <main id="main" class="cx-p1-main cx-contextual-ask">
@@ -24,8 +24,8 @@
       <div class="cx-container cx-p1-hero__grid">
         <div class="cx-stack">
           <p class="cx-eyebrow" data-cx-en="ASK PHI OS · ONE QUESTION" data-cx-zh="ASK PHI OS · 一个问题">ASK PHI OS · ONE QUESTION</p>
-          <h1 class="cx-display" data-cx-en="Ask one question. Choose what should be considered." data-cx-zh="问一个问题，也由你决定需要参考什么。">Ask one question. Choose what should be considered.</h1>
-          <p class="cx-lead" data-cx-en="Start with PHI OS knowledge. You can also add the page you came from, describe what is happening now, or use a reading or profile when Ask is opened from that original source." data-cx-zh="默认从 PHI OS 知识开始。你也可以加入刚才阅读的页面、描述现在正在发生什么；如果 Ask 是从原本的读取或 Profile 打开，也可以使用那份资料。">Start with PHI OS knowledge. You can also add the page you came from, describe what is happening now, or use a reading or profile when Ask is opened from that original source.</p>
+          <h1 class="cx-display" data-cx-en="Ask a question. Start with Knowledge." data-cx-zh="先问问题，从知识开始。">Ask a question. Start with Knowledge.</h1>
+          <p class="cx-lead" data-cx-en="You do not need to choose a system first. Ask directly. If more context would genuinely help, you can add it explicitly; PHI OS does not silently sweep your account." data-cx-zh="你不需要先选择任何体系，直接提问即可。只有当更多情境确实有帮助时，你才需要主动加入；PHI OS 不会静默读取你的账户资料。">You do not need to choose a system first. Ask directly. If more context would genuinely help, you can add it explicitly; PHI OS does not silently sweep your account.</p>
           <div class="cx-contextual-ask__principles">
             <span data-cx-en="You choose the context" data-cx-zh="由你选择情境">You choose the context</span>
             <span data-cx-en="Sources stay visible" data-cx-zh="来源保持可见">Sources stay visible</span>
@@ -51,6 +51,8 @@
             <p class="cx-meta" id="cx-ask-question-help" data-cx-en="A specific question usually produces a clearer answer." data-cx-zh="问题越具体，通常越容易得到清楚的回答。">A specific question usually produces a clearer answer.</p>
           </div>
 
+          <details class="cx-contextual-ask__context-panel" data-cx-add-context>
+            <summary><span data-cx-en="Add context" data-cx-zh="加入情境">Add context</span><small data-cx-en="Optional · nothing personal is used automatically" data-cx-zh="可选 · 不会自动使用个人资料">Optional · nothing personal is used automatically</small></summary>
           <fieldset class="cx-contextual-ask__selector" data-cx-ask-context-selector>
             <legend data-cx-en="What should this answer use?" data-cx-zh="这次回答可以参考什么？">What should this answer use?</legend>
             <p class="cx-meta" data-cx-en="You can review and change these choices before you ask." data-cx-zh="送出问题前，你可以检查并更改这些选择。">You can review and change these choices before you ask.</p>
@@ -68,6 +70,7 @@
               <span><strong data-cx-en="None / question only" data-cx-zh="不使用额外情境／只问问题">None / question only</strong><small data-cx-en="Ask without personal context. If the available sources do not support an answer, PHI OS will say so." data-cx-zh="不加入个人情境。如果现有来源不足以支持回答，PHI OS 会直接说明。">Ask without personal context. If the available sources do not support an answer, PHI OS will say so.</small></span>
             </label>
           </fieldset>
+          </details>
 
           <section class="cx-contextual-ask__current" data-cx-current-reality-fields hidden>
             <p class="cx-eyebrow" data-cx-en="YOUR SITUATION · PROVIDED BY YOU" data-cx-zh="你的处境 · 由你提供">YOUR SITUATION · PROVIDED BY YOU</p>
@@ -83,7 +86,7 @@
           </section>
 
           <aside class="cx-contextual-ask__scope" data-cx-context-disclosure>
-            <strong data-cx-en="Using for this answer" data-cx-zh="这次回答会参考">Using for this answer</strong>
+            <strong data-cx-context-disclosure-title data-cx-en="Using: Knowledge" data-cx-zh="使用：知识">Using: Knowledge</strong><span class="cx-visually-hidden">Using for this answer</span>
             <p data-cx-en="Knowledge is selected. No personal information will be added automatically." data-cx-zh="当前选择知识，不会自动加入任何个人资料。">Knowledge is selected. No personal information will be added automatically.</p>
           </aside>
 
@@ -99,6 +102,15 @@
             <li data-cx-en="Relationship answers do not guess another person's hidden thoughts or feelings." data-cx-zh="关系回答不会猜测另一个人隐藏的想法或感受。">Relationship answers do not guess another person's hidden thoughts or feelings.</li>
             <li data-cx-en="Professional decisions remain in the appropriate professional process." data-cx-zh="专业判断仍留在相应的专业流程中。">Professional decisions remain in the appropriate professional process.</li>
           </ul>
+          <div class="cx-contextual-ask__direct" data-cx-r31-direct-specialists>
+            <strong data-cx-en="Prefer a direct specialist?" data-cx-zh="想直接进入专项读取？">Prefer a direct specialist?</strong>
+            <p class="cx-meta" data-cx-en="Ask is a primary entry, not a mandatory funnel." data-cx-zh="Ask 是主要入口，但不是强制路径。">Ask is a primary entry, not a mandatory funnel.</p>
+            <div class="cx-cluster">
+              <a href="/perspectives/iching/">I Ching</a>
+              <a href="/perspectives/tarot/">Tarot</a>
+              <a href="/perspectives/personal/" data-cx-en="Personal methods" data-cx-zh="个人方法">Personal methods</a>
+            </div>
+          </div>
         </aside>
       </div>
     </section>
@@ -112,6 +124,21 @@
         <section class="cx-card"><p class="cx-eyebrow" data-cx-en="RELATED" data-cx-zh="相关内容">RELATED</p><div data-cx-related-knowledge></div></section>
         <section class="cx-card"><p class="cx-eyebrow" data-cx-en="NEXT STEP" data-cx-zh="下一步">NEXT STEP</p><div data-cx-next-step></div></section>
         <details class="cx-card cx-contextual-ask__provenance"><summary data-cx-en="Sources and context" data-cx-zh="来源与情境">Sources and context</summary><div data-cx-ask-provenance></div></details>
+      </div>
+    </section>
+
+    <section class="cx-section--tight" data-cx-paid-upgrade hidden>
+      <div class="cx-container">
+        <section class="cx-card cx-contextual-ask__upgrade" aria-labelledby="cx-paid-upgrade-title">
+          <p class="cx-eyebrow" data-cx-en="GO DEEPER · OPTIONAL" data-cx-zh="进一步深入 · 可选">GO DEEPER · OPTIONAL</p>
+          <h2 id="cx-paid-upgrade-title" class="cx-heading-1" data-cx-en="A deeper layer should add something specific." data-cx-zh="更深一层必须带来具体新增价值。">A deeper layer should add something specific.</h2>
+          <p data-cx-paid-upgrade-value data-cx-en="Depending on the question, a deeper layer may add new structure, combination, timing, context, or continuity — not a different truth." data-cx-zh="根据问题，更深一层可以新增结构、组合、时间、情境或连续性，而不是制造另一套真相。">Depending on the question, a deeper layer may add new structure, combination, timing, context, or continuity — not a different truth.</p>
+          <p class="cx-meta" data-cx-paid-upgrade-cost data-cx-en="Credit or plan requirements are shown only when the current entitlement response provides them." data-cx-zh="只有当前权限响应提供相关信息时，才显示所需点数或方案。">Credit or plan requirements are shown only when the current entitlement response provides them.</p>
+          <div class="cx-cluster">
+            <button class="cx-button cx-button--secondary" type="button" data-cx-paid-continue-knowledge data-cx-en="Continue with Knowledge" data-cx-zh="继续使用知识">Continue with Knowledge</button>
+            <a class="cx-button cx-button--primary" href="/account/" data-cx-paid-account-options data-cx-en="Account options" data-cx-zh="账户选项">Account options</a>
+          </div>
+        </section>
       </div>
     </section>
   </main>

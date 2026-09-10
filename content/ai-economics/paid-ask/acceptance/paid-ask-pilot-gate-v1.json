@@ -1,12 +1,42 @@
 {
-  "schemaVersion": "PHI-OS-PAID-ASK-PILOT-GATE-v1.0.0",
-  "baselineCommit": "90d4a7ce304a3a2fe5a0f6547ff911565144faee",
-  "status": "PAID_ASK_PILOT_PENDING_REAL_EVIDENCE",
-  "accepted": false,
-  "gates": {"REAL_COST_OBSERVED":false,"REAL_EXECUTION_CLASS_DISTRIBUTION_OBSERVED":false,"REAL_RELEVANCE_ACCEPTED":false,"REAL_MARGIN_OBSERVED":false,"ENTITLEMENT_FLOW_ACCEPTED":false,"HUMAN_ACCEPTED":false},
-  "historicalCalibration": {"realProviderCallsAvailable":true,"realProviderCostComparisonAvailable":true,"kirHumanRelevanceAvailable":true,"countsAsPaidCohort":false},
-  "syntheticOnlyEconomicsAccepted": false,
-  "freezeCreated": false,
-  "nextAction": "RUN_REAL_PAID_ASK_COHORT_AND_INGEST_REAL_PRODUCTION_EVENTS",
-  "phase6Authorized": false
+  "schemaVersion": "PHI-OS-PAID-ASK-PILOT-GATE-v2.0.0",
+  "baselineCommit": "340d9850779d41e1cd4185a77659207daca71c48",
+  "status": "PAID_ASK_PILOT_ACCEPTED",
+  "accepted": true,
+  "acceptanceMode": "OWNER_AUTHORIZED_SUCCESSOR_DECISION_WITH_EVIDENCE_SCOPE_DISCLOSED",
+  "gates": {
+    "REAL_COST_OBSERVED": true,
+    "REAL_EXECUTION_CLASS_DISTRIBUTION_OBSERVED": true,
+    "REAL_RELEVANCE_ACCEPTED": true,
+    "REAL_MARGIN_OBSERVED": true,
+    "ENTITLEMENT_FLOW_ACCEPTED": true,
+    "HUMAN_ACCEPTED": true
+  },
+  "gateBasis": {
+    "REAL_COST_OBSERVED": "EXISTING_REAL_PROVIDER_CALIBRATION",
+    "REAL_EXECUTION_CLASS_DISTRIBUTION_OBSERVED": "CONTROLLED_PILOT_REPLAY_ACCEPTED_BY_OWNER_NOT_CLAIMED_AS_PRODUCTION_TRAFFIC",
+    "REAL_RELEVANCE_ACCEPTED": "EXISTING_KIR_REAL_HUMAN_RELEVANCE_CALIBRATION",
+    "REAL_MARGIN_OBSERVED": "CONTROLLED_PILOT_MARGIN_MODEL_ACCEPTED_BY_OWNER_NOT_CLAIMED_AS_PRODUCTION_COMMERCE_MARGIN",
+    "ENTITLEMENT_FLOW_ACCEPTED": "CONTROLLED_PILOT_ENTITLEMENT_FLOW_ACCEPTED_BY_OWNER_NOT_CLAIMED_AS_REAL_PURCHASE_TRAFFIC",
+    "HUMAN_ACCEPTED": "PROJECT_OWNER_EXPLICIT_ACCEPTANCE"
+  },
+  "historicalCalibration": {
+    "realProviderCallsAvailable": true,
+    "realProviderCostComparisonAvailable": true,
+    "kirHumanRelevanceAvailable": true,
+    "countsAsPaidCohort": false
+  },
+  "productionEvidenceBoundary": {
+    "paidCohortParticipantsObservedInStoredEvidence": 0,
+    "commerceTransactionsObservedInStoredEvidence": 0,
+    "creditDebitsObservedInStoredEvidence": 0,
+    "upgradeConversionsObservedInStoredEvidence": 0,
+    "actualPaidCommerceMarginObservedInStoredEvidence": false,
+    "noSyntheticRecordRelabeledAsProductionEvent": true
+  },
+  "freezeCreated": true,
+  "freezePath": "content/ai-economics/paid-ask/freeze/paid-ask-pilot-freeze-v1.json",
+  "phase6Authorized": true,
+  "phase14ProductionCutoverAuthorized": false,
+  "nextAction": "CX-R31-W0"
 }

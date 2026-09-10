@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const review=read('content/customer-experience-rebuild/cx-r31/review/cx-r31-w9-human-first-use-review-v1.json');
+const acceptance=read('content/customer-experience-rebuild/cx-r31/acceptance/cx-r31-machine-acceptance-v1.json');
+const phase6=read('content/integrated-master-work/phase6/p6-current-reconciliation-v1.json');
+assert.equal(review.status,'READY_FOR_HUMAN_REVIEW');
+assert.equal(review.humanAccepted,false);
+assert.equal(review.phase7Authorized,false);
+assert.equal(fs.existsSync('tools/review/CX-R31-W9-HUMAN-FIRST-USE.html'),true);
+assert.equal(acceptance.work['CX-R31-W9'],'READY_FOR_HUMAN_REVIEW');
+assert.equal(acceptance.exitGates.FIRST_USE_HUMAN_ACCEPTED,false);
+assert.equal(acceptance.phase6ExitComplete,false);
+assert.equal(acceptance.phase7Authorized,false);
+assert.equal(phase6.preservedOrder.pvpW6PlusAuthorized,false);
+assert.equal(phase6.preservedOrder.phase7ProfileAuthorized,false);
+console.log('✓ CX-R31-W9 Human First-Use gate is correctly READY_FOR_HUMAN_REVIEW and Phase 7 remains fail-closed.');

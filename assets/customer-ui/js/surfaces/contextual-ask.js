@@ -3,6 +3,8 @@ import {handoffToMyReality} from '../handoff.js';
 
 let view=null;
 const empty=message=>`<div class="cx-p1-empty">${esc(message)}</div>`;
+const CX_R31_HANDOFF_ROUTES=Object.freeze({RELATIONSHIP:'/perspectives/relationship/',PROFILE:'/perspectives/profile/',FINANCIAL:'/professional/financial/',SPECIALIST:'/perspectives/',PROFESSIONAL:'/professional/'});
+const emitCxR31=(name,detail={})=>document.dispatchEvent(new CustomEvent('phi:cx-r31',{detail:{name,...detail}}));
 
 const sourceClassLabel=value=>({
   GOVERNED_KNOWLEDGE:tr('PHI OS knowledge','PHI OS 知识'),
@@ -82,6 +84,8 @@ function syncSelection(form){
   if(knowledge.checked)selected.push(tr('PHI OS knowledge','PHI OS 知识'));
   if(reality.checked)selected.push(tr('My current situation','我的当前处境'));
   form.querySelectorAll('[data-cx-seeded-context]:checked').forEach(x=>selected.push(x.dataset.contextLabel||x.dataset.contextType));
+  const title=document.querySelector('[data-cx-context-disclosure-title]');
+  if(title)title.textContent=none.checked?tr('Using: Question only','使用：仅问题'):selected.length?tr(`Using: ${selected.join(' · ')}`,`使用：${selected.join(' · ')}`):tr('Using: Nothing selected','使用：尚未选择');
   const p=document.querySelector('[data-cx-context-disclosure] p');
   if(p){
     p.textContent=none.checked
@@ -144,11 +148,40 @@ function renderProvenance(){
   }).join('')}</section>`).join(''):empty(tr('No source details are available.','没有可显示的来源细节。'));
 }
 
-function renderNext(){
-  const next=document.querySelector('[data-cx-next-step]'),kind=view?.possibleNextStep?.kind;
-  next.innerHTML=`<p class="cx-body">${esc(view?.possibleNextStep?.label||'')}</p>${kind==='REALITY_ESCALATION'?`<button class="cx-button cx-button--primary" type="button" data-cx-ask-reality>${esc(tr('Continue with My Reality','在 My Reality 继续'))}</button>`:kind==='RELATED_KNOWLEDGE'&&view?.relatedKnowledge?.[0]?.href?`<a class="cx-button" href="${esc(view.relatedKnowledge[0].href)}">${esc(tr('Explore related knowledge','查看相关知识'))}</a>`:''}`;
-  next.querySelector('[data-cx-ask-reality]')?.addEventListener('click',()=>document.getElementById('cx-ask-handoff-dialog')?.showModal());
+function nextStepCandidates(){
+  const supplied=arr(view?.nextSteps).map(item=>({kind:String(item?.kind||item?.destination||'').toUpperCase(),label:item?.label||'',href:item?.href||null}));
+  if(supplied.length)return supplied.slice(0,2);
+  const legacy=view?.possibleNextStep;
+  return legacy?[{kind:String(legacy.kind||'').toUpperCase(),label:legacy.label||'',href:null}]:[];
 }
+
+function renderNext(){
+  const next=document.querySelector('[data-cx-next-step]');
+  if(!next)return;
+  const steps=nextStepCandidates().slice(0,2);
+  next.innerHTML=steps.length?`<div class="cx-contextual-ask__next-list">${steps.map((step,index)=>{
+    if(step.kind==='REALITY_ESCALATION'||step.kind==='REALITY')return `<button class="cx-button ${index===0?'cx-button--primary':''}" type="button" data-cx-ask-reality>${esc(step.label||tr('Continue with My Reality','在 My Reality 继续'))}</button>`;
+    if(step.kind==='RELATED_KNOWLEDGE'&&view?.relatedKnowledge?.[0]?.href)return `<a class="cx-button" href="${esc(view.relatedKnowledge[0].href)}" data-cx-r31-handoff="RELATED_KNOWLEDGE">${esc(step.label||tr('Explore related knowledge','查看相关知识'))}</a>`;
+    const destination=step.kind.replace('_HANDOFF','');
+    const route=CX_R31_HANDOFF_ROUTES[destination];
+    return route?`<a class="cx-button" href="${route}" data-cx-r31-handoff="${esc(destination)}">${esc(step.label||tr('Continue','继续'))}</a>`:`<span class="cx-meta">${esc(step.label||'')}</span>`;
+  }).join('')}</div>`:empty(tr('No additional next step is required.','目前不需要额外下一步。'));
+  next.querySelector('[data-cx-ask-reality]')?.addEventListener('click',()=>{emitCxR31('handoffAccepted',{destination:'REALITY'});document.getElementById('cx-ask-handoff-dialog')?.showModal();});
+  next.querySelectorAll('[data-cx-r31-handoff]').forEach(link=>link.addEventListener('click',()=>emitCxR31('handoffAccepted',{destination:link.dataset.cxR31Handoff})));
+  emitCxR31('handoffOffered',{count:steps.length,destinations:steps.map(x=>x.kind).slice(0,2)});
+}
+
+function paidUpgradeNode(){return document.querySelector('[data-cx-paid-upgrade]')}
+function hidePaidUpgrade(){const node=paidUpgradeNode();if(node)node.hidden=true}
+function showPaidUpgrade(detail={}){
+  const node=paidUpgradeNode();if(!node)return;
+  const value=node.querySelector('[data-cx-paid-upgrade-value]'),cost=node.querySelector('[data-cx-paid-upgrade-cost]');
+  const additions=arr(detail.adds).slice(0,5).map(String).filter(Boolean);
+  if(value&&additions.length)value.textContent=tr(`A deeper layer adds: ${additions.join(' · ')}. It does not change the underlying truth.`,`更深一层新增：${additions.join(' · ')}。它不会改变底层事实。`);
+  if(cost&&detail.creditRequirement!=null)cost.textContent=tr(`Credit requirement: ${detail.creditRequirement}. You can also review eligible plan or one-off options.`,`所需点数：${detail.creditRequirement}。你也可以查看符合条件的方案或单次选项。`);
+  node.hidden=false;emitCxR31('paidUpgradeViewed',{reason:detail.reason||'ENTITLEMENT_BOUNDARY'});
+}
+
 
 function render(){
   if(!view)return;
@@ -161,6 +194,7 @@ function render(){
   document.querySelector('[data-cx-related-knowledge]').innerHTML=arr(view?.relatedKnowledge).length?view.relatedKnowledge.map(k=>`<article class="cx-p1-source"><strong>${esc(k.title)}</strong>${k.description?`<p>${esc(k.description)}</p>`:''}${k.href?`<a href="${esc(k.href)}">${esc(tr('Explore','查看'))}</a>`:''}</article>`).join(''):empty(tr('No related knowledge or reading is available yet.','目前没有相关知识或读取。'));
   renderNext();
   renderProvenance();
+  if(view?.paidUpgrade?.available===true)showPaidUpgrade(view.paidUpgrade);else hidePaidUpgrade();
 }
 
 function availabilityHelp(item,specificKnowledge){
@@ -204,6 +238,8 @@ function errorMessage(code){
   return tr('This question could not be completed with the selected context. Try removing one source or asking with Knowledge only.','目前无法使用所选情境完成这个问题。你可以移除一个来源，或只使用知识再试一次。');
 }
 
+function isPaidBoundary(code){return /(ENTITLEMENT|CREDIT|ALLOWANCE|QUOTA|PAID|UPGRADE)/i.test(String(code||''))}
+
 function boot(){
   const form=document.querySelector('[data-cx-contextual-ask-form]'),status=document.querySelector('[data-cx-contextual-ask-status]');
   if(!form)return;
@@ -229,7 +265,10 @@ function boot(){
       render();
       setStatus(status,'','success');
       document.querySelector('[data-cx-contextual-ask-result]').scrollIntoView({behavior:'smooth',block:'start'});
-    }catch(error){setStatus(status,errorMessage(error?.code),'error');}
+    }catch(error){
+      setStatus(status,errorMessage(error?.code),'error');
+      if(isPaidBoundary(error?.code))showPaidUpgrade({reason:String(error?.code||'ENTITLEMENT_BOUNDARY'),adds:['new structure','new combination','new timing','new context','new continuity']});
+    }
   });
   document.querySelector('[data-cx-ask-handoff-confirm]')?.addEventListener('click',async()=>{
     const consent=document.querySelector('[data-cx-ask-handoff-consent]'),s=document.querySelector('[data-cx-ask-handoff-status]');
@@ -239,6 +278,15 @@ function boot(){
       await handoffToMyReality({sourceType:'ASK',viewModel:view,statusNode:s});
       setStatus(s,tr('My Reality opened.','My Reality 已打开。'),'success');
     }catch{setStatus(s,tr('The handoff could not be completed right now.','目前无法完成带入。'),'error');}
+  });
+  document.querySelector('[data-cx-paid-continue-knowledge]')?.addEventListener('click',()=>{
+    form.elements.contextKnowledge.checked=true;
+    form.elements.contextReality.checked=false;
+    form.elements.questionOnly.checked=false;
+    form.querySelectorAll('[data-cx-seeded-context]').forEach(x=>x.checked=false);
+    const panel=document.querySelector('[data-cx-add-context]');if(panel)panel.open=false;
+    hidePaidUpgrade();syncSelection(form);form.elements.question.focus();
+    emitCxR31('paidUpgradeContinueKnowledge');
   });
   const initial=new URLSearchParams(location.search).get('q');
   if(initial)form.elements.question.value=initial.slice(0,500);

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const p5=read('content/ai-economics/paid-ask/freeze/paid-ask-pilot-freeze-v1.json');
+const p6=read('content/integrated-master-work/phase6/p6-current-reconciliation-v1.json');
+const acceptance=read('content/customer-experience-rebuild/cx-r31/acceptance/cx-r31-machine-acceptance-v1.json');
+assert.equal(p5.status,'PAID_ASK_PILOT_ACCEPTED');
+assert.equal(p5.frozenExit.phase6Authorized,true);
+assert.equal(p6.status,'CX_R31_W0_W8_MACHINE_ACCEPTED_W9_HUMAN_PENDING');
+assert.equal(p6.phase6.w0ToW8MachineAccepted,true);
+assert.equal(p6.phase6.w9HumanAccepted,false);
+assert.equal(acceptance.phase6ExitComplete,false);
+assert.equal(p6.preservedOrder.pvpW6PlusAuthorized,false);
+console.log('✓ Integrated Successor PHASE 6 boundary passed.');
+console.log('  Paid Ask W10 authorizes CX-R31; CX-R31 W0–W8 are machine-accepted; W9 human first-use is the only remaining Phase 6 exit gate.');

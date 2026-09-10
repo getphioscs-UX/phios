@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/assets/customer-ui/utilities.css">
   <link rel="stylesheet" href="/assets/customer-ui/surfaces/home.css">
 </head>
-<body class="cx-home" data-cx-surface="HOME" data-cx-nav="">
+<body class="cx-home" data-cx-surface="HOME" data-cx-nav="" data-cx-r31="UNIVERSAL-ASK-ACTIVE">
   <a class="cx-skip" href="#main">Skip to content</a>
   <div data-cx-header></div>
 
@@ -33,9 +33,17 @@
             </h1>
           </div>
           <p class="cx-lead" data-cx-en="Bring a real situation, a question, or another perspective into one clearer place—without turning every source into the same kind of answer." data-cx-zh="把正在发生的事、一个问题，或另一种视角带到同一个更清楚的位置，同时保留不同来源原本的性质。">Bring a real situation, a question, or another perspective into one clearer place—without turning every source into the same kind of answer.</p>
-          <div class="cx-cluster cx-home__actions">
-            <a class="cx-button cx-button--primary" href="/reality/" data-cx-en="Start with my reality" data-cx-zh="从我的现实开始">Start with my reality</a>
-            <a class="cx-button cx-button--secondary" href="/knowledge/ask/">Ask PHI OS</a>
+          <form class="cx-home-ask" action="/knowledge/ask/" method="get" data-cx-r31-home-ask>
+            <label for="cx-home-ask-q" class="cx-home-ask__label" data-cx-en="Ask PHI OS" data-cx-zh="问 PHI OS">Ask PHI OS</label>
+            <div class="cx-home-ask__row">
+              <input id="cx-home-ask-q" name="q" maxlength="500" autocomplete="off" required placeholder="What do you want to understand?" data-cx-en-placeholder="What do you want to understand?" data-cx-zh-placeholder="你现在想理解什么？">
+              <button class="cx-button cx-button--primary" type="submit" data-cx-en="Ask" data-cx-zh="提问">Ask</button>
+            </div>
+            <p class="cx-meta" data-cx-en="Start with Knowledge. Personal context is only used when you choose to add it." data-cx-zh="默认从知识开始。只有你主动选择加入时，才会使用个人情境。">Start with Knowledge. Personal context is only used when you choose to add it.</p>
+          </form>
+          <div class="cx-cluster cx-home__actions" data-cx-r31-direct-starts>
+            <a class="cx-button cx-button--secondary" href="/reality/" data-cx-en="Open My Reality" data-cx-zh="打开 My Reality">Open My Reality</a>
+            <a class="cx-button cx-button--text" href="/perspectives/" data-cx-en="Choose a perspective" data-cx-zh="选择一个视角">Choose a perspective</a>
           </div>
         </div>
         <figure class="cx-home-hero__visual cx-visual">
