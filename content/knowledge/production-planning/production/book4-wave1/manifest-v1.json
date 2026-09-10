@@ -1,9 +1,9 @@
 {
   "schemaVersion": "PHI-OS-BOOK4-PJA-WAVE1-PRE-ADMISSION-MANIFEST-v1.0.0",
   "stage": "BOOK4-PJA-WAVE1-PRE_ADMISSION",
-  "status": "ZH_HANS_8_OF_8_ACCEPTED_BOOK_IV_A1_A2_A3_COMPLETE_A4_READY_PUBLICATION_CLOSED",
-  "baselineCommit": "340d9850779d41e1cd4185a77659207daca71c48",
-  "baselineAuthority": "user-supplied data.zip stated aligned to main 340d9850779d41e1cd4185a77659207daca71c48",
+  "status": "ZH_HANS_8_OF_8_ACCEPTED_BOOK_IV_A1_A2_A3_A4_MACHINE_ACCEPTED_A5_READY_PUBLICATION_CLOSED",
+  "baselineCommit": "1f81638d214bd946778e4ac721a0f7b265eac116",
+  "baselineAuthority": "user-supplied Library db(1).zip stated aligned to main 1f81638d214bd946778e4ac721a0f7b265eac116",
   "bookCode": "BOOK-4",
   "bookTitleZhHans": "世界如何扩展",
   "bookTitleEn": "Reality Expansion",
@@ -25,8 +25,8 @@
     "a1Status": "COMPLETE",
     "a2Status": "COMPLETE",
     "a3Status": "COMPLETE",
-    "a4Status": "READY_NOT_STARTED",
-    "a5Status": "NOT_STARTED",
+    "a4Status": "COMPLETE_MACHINE_ACCEPTED",
+    "a5Status": "READY_NOT_STARTED",
     "a6Status": "NOT_ADMITTED"
   },
   "sourceInventory": {
@@ -276,7 +276,9 @@
     "canonicalNodeMutationPerformed": false,
     "activeKIRSourceRegistryMutated": false,
     "finalCanonicalSuccessorCreated": true,
-    "predecessorCanonicalNodeMutationPerformed": false
+    "predecessorCanonicalNodeMutationPerformed": false,
+    "machineBenchmarkA4Completed": true,
+    "humanAcceptanceA5Claimed": false
   },
   "semanticProfile": {
     "path": "content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a2/book4-retrieval-semantic-profiles-v1.json",
@@ -302,5 +304,23 @@
     "canonicalNodeCoverageCount": 125,
     "plannedLocaleVersionCount": 106,
     "textGeneratedByA3": false
+  },
+  "machineBenchmark": {
+    "path": "content/knowledge/knowledge-intelligence-r2/benchmarks/book4-a4-machine-retrieval-benchmark-v1.json",
+    "authorityPath": "content/knowledge/contracts/book-4-machine-benchmark-authority-v1.json",
+    "acceptancePath": "content/knowledge/production-planning/acceptance/book4-a4-machine-acceptance-v1.json",
+    "auditPath": "content/knowledge/production-planning/audits/book4-a4-machine-retrieval-audit-v1.json",
+    "status": "MACHINE_ACCEPTED_A5_READY_PUBLICATION_CLOSED",
+    "positiveCaseCount": 250,
+    "legacyControlCaseCount": 100,
+    "top5Recall": 0.988,
+    "top1NodePrecision": 0.912,
+    "book4Top1Precision": 0.996,
+    "wrongBookTop1Rate": 0.004,
+    "sourceGroundingRate": 1,
+    "dedupIntegrityRate": 1,
+    "directAnswerPotentialRate": 0.988,
+    "residualTop5MissCount": 3,
+    "residualWrongBookTop1Count": 1
   }
 }

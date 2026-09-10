@@ -34,4 +34,4 @@ for(const r of manifest.records){ const a=read(r.path); assert.ok(a.canonicalNod
 assert.equal(auth.invariants.completedManuscriptIsSourceTruth,true); assert.equal(auth.invariants.duplicateSourceOccurrencesExcluded,2); assert.equal(auth.invariants.old181Book4P10P11NodesRemainHistorical,true); assert.equal(auth.invariants.otherBooksUnaffected,true);
 console.log('✓ BOOK-IV-A1 final canonical coverage passed: 127 raw occurrences - 2 TL-confirmed duplicates = 125 final sections.');
 console.log('✓ 125 final sections -> 125 fresh final Canonical Nodes -> 125 retrieval identities (P10 79 / P11 46); predecessor 181 Book-IV P10/P11 records remain historical.');
-console.log('✓ Book IV PJA Wave 1: 8/8 zh-Hans editorial accepted; 16 locale candidates rebound to A1 final canonical nodes; English parity and BOOK-IV-A3–A6 remain gated after A2 completion.');
+console.log('✓ Book IV PJA Wave 1: 8/8 zh-Hans editorial accepted; 16 locale candidates rebound to A1 final canonical nodes; English parity and final BOOK-IV-A5/A6 admission gates remain closed.');

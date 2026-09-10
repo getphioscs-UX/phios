@@ -98,3 +98,20 @@ Baseline: `340d9850779d41e1cd4185a77659207daca71c48` (`BOOK-IV-A2`).
 - A3 does not mutate Canonical Node meaning, does not admit Book IV to active KIR, and does not open website publication.
 
 Next governed Book IV step: `BOOK-IV-A4 | Machine Benchmark`.
+
+## BOOK-IV-A4 · Machine Retrieval Benchmark
+
+Baseline: `1f81638d214bd946778e4ac721a0f7b265eac116` (`phase 6`), using the user-supplied Library `db(1).zip` as the current-main-aligned tree.
+
+- Existing KIR-R2 retrieval runtime is reused; A4 does **not** create a parallel retriever.
+- Benchmark: **250** Book IV bilingual node-level cases (`125 zh-Hans + 125 en`) plus **100** existing Book I–III regression/no-hijack controls.
+- Top-1 node precision: **91.2%**; top-5 recall: **98.8%**.
+- Book IV top-1 book precision: **99.6%**; wrong-book top-1 rate: **0.4%**.
+- Source grounding: **100%** across the A1 final canonical binding, A2 profile, A3 article mapping and final manuscript inventory.
+- Dedup integrity: **100%**. Direct-answer potential: **98.8%**.
+- Book I–III control top-5 recall remains **100%**, with **0%** Book IV top-1 hijack.
+- A4 preserves **3** top-5 misses and **1** wrong-book top-1 diagnostic for A5 instead of hiding them.
+- Pre-admission Book IV article sources are suppressed during this benchmark so unpublished candidates cannot masquerade as `PUBLISHED_ARTICLE` evidence.
+- Active KIR source admission, publication and BOOK-IV-A6 remain closed.
+
+Next governed Book IV step: `BOOK-IV-A5 | Human Acceptance`.

@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BOOK4-PHASE15-PRE-ADMISSION-CONTRACT-v1.0.0",
   "stage": "BOOK-IV-PRE-ADMISSION",
   "status": "PREPARATION_ONLY_NO_PHASE_CUTOVER",
-  "baselineCommit": "90d4a7ce304a3a2fe5a0f6547ff911565144faee",
+  "baselineCommit": "1f81638d214bd946778e4ac721a0f7b265eac116",
   "governingMasterPath": "content/governance/integrated-successor/master-work/phi-os-integrated-successor-master-work-v3.0.0.md",
   "formalAdmissionSequence": [
     {
@@ -26,18 +26,20 @@
     {
       "workStep": "BOOK-IV-A3",
       "name": "Article Mapping",
-      "status": "READY_NOT_STARTED",
-      "note": "A2 semantic coverage is complete for 125 final nodes. Wave 1 is A2-profile-linked; formal A3 must map the frozen 53-article / 11-batch capacity plan to canonical nodes."
+      "status": "COMPLETE",
+      "evidencePath": "content/knowledge/contracts/book-4-article-mapping-authority-v1.json"
     },
     {
       "workStep": "BOOK-IV-A4",
       "name": "Machine Benchmark",
-      "status": "NOT_STARTED"
+      "status": "COMPLETE_MACHINE_ACCEPTED",
+      "evidencePath": "content/knowledge/contracts/book-4-machine-benchmark-authority-v1.json"
     },
     {
       "workStep": "BOOK-IV-A5",
       "name": "Human Acceptance",
-      "status": "NOT_STARTED"
+      "status": "READY_NOT_STARTED",
+      "note": "A4 machine acceptance is complete; human acceptance is still required and cannot be self-granted by machine results."
     },
     {
       "workStep": "BOOK-IV-A6",
@@ -63,12 +65,25 @@
     "oneFinalSectionOneCanonicalNode": true,
     "humanArticleAcceptance8of8": true
   },
-  "nextActionAfterHumanArticleReview": "BOOK-IV-A3 Article Mapping across the frozen 11-batch / 53-article identity capacity plan; publication remains closed through A6.",
+  "nextActionAfterHumanArticleReview": "BOOK-IV-A5 Human Acceptance; A4 residual retrieval diagnostics must remain visible; publication stays closed through A6.",
   "articleCapacityPlan": {
     "path": "content/knowledge/production-planning/production/book4-a2-article-batch-plan-v1.json",
     "totalBatchCount": 11,
     "totalArticleIdentityCount": 53,
     "totalLocaleVersionCount": 106,
-    "status": "A2_CAPACITY_PLAN_FROZEN_A3_MAPPING_PENDING"
+    "status": "A2_CAPACITY_PLAN_CONSUMED_BY_A3_EXACT_MAPPING"
+  },
+  "articleMapping": {
+    "path": "content/knowledge/production-planning/plans/book4-a3-final-article-map-v1.json",
+    "status": "COMPLETE",
+    "articleIdentityCount": 53,
+    "canonicalNodeCoverageCount": 125
+  },
+  "machineBenchmark": {
+    "path": "content/knowledge/knowledge-intelligence-r2/benchmarks/book4-a4-machine-retrieval-benchmark-v1.json",
+    "status": "MACHINE_ACCEPTED",
+    "positiveCaseCount": 250,
+    "legacyControlCaseCount": 100,
+    "residualDiagnosticsCarriedToA5": true
   }
 }
