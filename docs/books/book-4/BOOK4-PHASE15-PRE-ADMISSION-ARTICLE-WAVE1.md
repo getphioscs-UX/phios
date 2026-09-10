@@ -69,3 +69,18 @@ The review page stores decisions locally and exports:
 - TL Article review: **8/8 zh-Hans ACCEPTED**. English semantic parity remains pending.
 - Publication remains closed; BOOK-IV-A6 is not admitted.
 - Next Master Work Step: **BOOK-IV-A2｜Retrieval Semantic Profile**.
+
+
+## BOOK-IV-A2 · Retrieval Semantic Profile
+
+Baseline: `90d4a7ce304a3a2fe5a0f6547ff911565144faee` (`PHASE 4 PAI-R1-W0–W10`).
+
+- A1 final Canonical Nodes: **125** (P10 79 / P11 46).
+- A2 retrieval semantic profiles: **125 / 125**; required semantic fields are present for every node.
+- Profiles support `zh-Hans` and `en` retrieval language but remain `productionEligible: false` until BOOK-IV-A6.
+- Wave 1 remains 8/8 Chinese editorial accepted; English semantic parity is still pending.
+- A2 freezes the downstream article capacity at **11 batches / 53 article identities / 106 locale versions**. Wave 1 accounts for 8 identities; **45** identities remain across B02–B11.
+- A2 does **not** complete Article Mapping. Exact article-to-node composition belongs to BOOK-IV-A3.
+- No active KIR source registry, canonical node meaning, PAI authority, or website publication authority is mutated by A2.
+
+Next governed Book IV step: `BOOK-IV-A3 | Article Mapping`.

@@ -2,7 +2,7 @@
   "schemaVersion": "PHI-OS-BOOK4-PHASE15-PRE-ADMISSION-CONTRACT-v1.0.0",
   "stage": "BOOK-IV-PRE-ADMISSION",
   "status": "PREPARATION_ONLY_NO_PHASE_CUTOVER",
-  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "baselineCommit": "90d4a7ce304a3a2fe5a0f6547ff911565144faee",
   "governingMasterPath": "content/governance/integrated-successor/master-work/phi-os-integrated-successor-master-work-v3.0.0.md",
   "formalAdmissionSequence": [
     {
@@ -20,14 +20,14 @@
     {
       "workStep": "BOOK-IV-A2",
       "name": "Retrieval Semantic Profile",
-      "status": "READY_NOT_STARTED",
-      "evidencePath": "content/knowledge/manuscripts/extraction/book-4-final-section-identities-v1.json"
+      "status": "COMPLETE",
+      "evidencePath": "content/knowledge/contracts/book-4-retrieval-semantic-profile-authority-v1.json"
     },
     {
       "workStep": "BOOK-IV-A3",
       "name": "Article Mapping",
-      "status": "NOT_COMPLETE",
-      "note": "Wave 1 is A1-canonical-reconciled and 8/8 zh-Hans editorial accepted; formal A3 waits for A2."
+      "status": "READY_NOT_STARTED",
+      "note": "A2 semantic coverage is complete for 125 final nodes. Wave 1 is A2-profile-linked; formal A3 must map the frozen 53-article / 11-batch capacity plan to canonical nodes."
     },
     {
       "workStep": "BOOK-IV-A4",
@@ -63,5 +63,12 @@
     "oneFinalSectionOneCanonicalNode": true,
     "humanArticleAcceptance8of8": true
   },
-  "nextActionAfterHumanArticleReview": "BOOK-IV-A2 Retrieval Semantic Profile over 125 final Canonical Nodes; A3 remains gated until A2 is complete."
+  "nextActionAfterHumanArticleReview": "BOOK-IV-A3 Article Mapping across the frozen 11-batch / 53-article identity capacity plan; publication remains closed through A6.",
+  "articleCapacityPlan": {
+    "path": "content/knowledge/production-planning/production/book4-a2-article-batch-plan-v1.json",
+    "totalBatchCount": 11,
+    "totalArticleIdentityCount": 53,
+    "totalLocaleVersionCount": 106,
+    "status": "A2_CAPACITY_PLAN_FROZEN_A3_MAPPING_PENDING"
+  }
 }
