@@ -1,3 +1,5 @@
+import {selectPaiRoute} from './pai-r1-economics.js';
+
 const OPENAI_RESPONSES_URL='https://api.openai.com/v1/responses';
 const DEEPSEEK_CHAT_URL='https://api.deepseek.com/chat/completions';
 const DEFAULT_OPENAI_MODEL='gpt-5.6-luna';
@@ -33,7 +35,12 @@ export function evaluateKirR2ModelBackedRoute({understanding,evidencePack,env={}
   if(personalized&&multiNode)reasons.push('MULTI_NODE_PERSONALIZED_SYNTHESIS');
   if(ambiguity&&multiNode)reasons.push('AMBIGUOUS_MULTI_NODE_SYNTHESIS');
   const escalate=deepSeekAvailable&&reasons.length>0;
-  return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-W16R2-MODEL-ROUTE-v1.0.0',tier:escalate?'T2_COMPLEX':'T1_DEFAULT',providerId:escalate?'DEEPSEEK_V4_FLASH':'OPENAI_LUNA',reasonCodes:reasons.length?reasons:['DEFAULT_CUSTOMER_COMPOSER'],knowledgeAuthorityOwnedByProvider:false});
+  const aiExecutionClass=escalate?'T3_DEEP_COMPOSITION':'T2_LIGHT_COMPOSITION';
+  const paiRoute=selectPaiRoute({aiExecutionClass},{models:[
+    {providerId:'OPENAI_LUNA',modelId:DEFAULT_OPENAI_MODEL,capabilityClass:'LIGHT',status:'AVAILABLE',planningCostRank:1},
+    {providerId:'DEEPSEEK_V4_FLASH',modelId:DEFAULT_DEEPSEEK_MODEL,capabilityClass:'DEEP',status:deepSeekAvailable?'AVAILABLE':'UNAVAILABLE',planningCostRank:1}
+  ]});
+  return Object.freeze({schemaVersion:'PHI-OS-KIR-R2-W16R2-MODEL-ROUTE-v1.0.0',tier:escalate?'T2_COMPLEX':'T1_DEFAULT',aiExecutionClass,providerId:paiRoute.selectedProvider,selectedModel:paiRoute.selectedModel,providerSelectionOwner:'PAI_R1',reasonCodes:reasons.length?reasons:['DEFAULT_CUSTOMER_COMPOSER'],knowledgeAuthorityOwnedByProvider:false});
 }
 export function createKirR2ModelGateway({env={},fetcher=globalThis.fetch,forceProvider=null}={}){
   if(typeof fetcher!=='function')fail('KIR_R2_MODEL_FETCH_UNAVAILABLE');

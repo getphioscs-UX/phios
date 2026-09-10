@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "PHI-OS-PAI-R1-ABUSE-PROTECTION-v1.0.0",
+  "baselineCommit": "454a7d1771feec5e2f6ab00bffdde46a5aa661f0",
+  "status": "ABUSE_PROTECTION_READY_FOR_PILOT",
+  "dailySoftLimit": 30,
+  "monthlyHardLimit": 500,
+  "rapidRepeatLimit": 3,
+  "maxDeepRequestsPerDay": 3,
+  "maxProviderAttempts": 2,
+  "protections": ["RAPID_REPEAT","DUPLICATE_PROMPT","PROVIDER_RETRY","IDENTICAL_DEEP_REPLAY","CREDIT_RACE","PARALLEL_REQUEST"],
+  "duplicateDisposition": "REUSE_ELIGIBLE_CACHED_GROUNDED_RESULT_FIRST"
+}
