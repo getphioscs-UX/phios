@@ -1,0 +1,397 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Civilization Atlas case registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "version",
+    "status",
+    "cases"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "PHI-OS-BOOK-V-CIV-ATLAS-CASES-v1.0.0"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION",
+        "ACTIVE",
+        "FROZEN"
+      ]
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/case"
+      }
+    }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "caseId",
+        "title",
+        "aliases",
+        "runtimeFamily",
+        "timeWindow",
+        "region",
+        "geographicReach",
+        "populationBase",
+        "settlementPattern",
+        "politicalArchitecture",
+        "economicRuntime",
+        "resourceBase",
+        "energyBase",
+        "knowledgeSystem",
+        "beliefSystem",
+        "technology",
+        "militaryStructure",
+        "infrastructure",
+        "externalNetwork",
+        "civilizationDensity",
+        "capacity",
+        "load",
+        "alignment",
+        "expansionPattern",
+        "transitionWindows",
+        "successorStructure",
+        "legacy",
+        "evidence",
+        "unknown",
+        "relatedCanonicalNodes",
+        "relatedCases",
+        "comparisonFamilies",
+        "snapshots"
+      ],
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "pattern": "^CA-T(?:0[0-9]|1[0-9])-[0-9]{2}$"
+        },
+        "title": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "runtimeFamily": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timeWindow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "startYear",
+            "endYear",
+            "approximate"
+          ],
+          "properties": {
+            "startYear": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "endYear": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "approximate": {
+              "type": "boolean"
+            }
+          }
+        },
+        "region": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "regionIds",
+            "label"
+          ],
+          "properties": {
+            "regionIds": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "label": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "zh-Hans",
+                "en"
+              ],
+              "properties": {
+                "zh-Hans": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "en": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "geographicReach": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "populationBase": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "settlementPattern": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "politicalArchitecture": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "economicRuntime": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "resourceBase": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "energyBase": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "knowledgeSystem": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "beliefSystem": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "technology": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "militaryStructure": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "infrastructure": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "externalNetwork": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "civilizationDensity": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "capacity": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "load": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "alignment": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "expansionPattern": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "transitionWindows": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^TW-[0-9]{2}$"
+          },
+          "uniqueItems": true
+        },
+        "successorStructure": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "legacy": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^EV-[A-Z0-9-]+$"
+          },
+          "uniqueItems": true
+        },
+        "unknown": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "state"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "UNKNOWN",
+                "CONTESTED",
+                "PARTIAL",
+                "RECONSTRUCTED",
+                "OBSERVED"
+              ]
+            },
+            "fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "note": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "zh-Hans",
+                    "en"
+                  ],
+                  "properties": {
+                    "zh-Hans": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "en": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        },
+        "relatedCanonicalNodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^KN-"
+          },
+          "uniqueItems": true
+        },
+        "relatedCases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^CA-T"
+          },
+          "uniqueItems": true
+        },
+        "comparisonFamilies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "snapshots": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^WS-"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}

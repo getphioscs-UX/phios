@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Civilization Atlas long-duration trajectory registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "version",
+    "status",
+    "trajectories"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "PHI-OS-BOOK-V-CIV-ATLAS-TRAJECTORIES-v1.0.0"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "FOUNDATION",
+        "ACTIVE",
+        "FROZEN"
+      ]
+    },
+    "trajectories": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/trajectory"
+      }
+    }
+  },
+  "$defs": {
+    "trajectory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trajectoryId",
+        "title",
+        "description",
+        "authorityClass",
+        "unitMode",
+        "timeDomain",
+        "series",
+        "bands",
+        "milestones",
+        "evidenceRefs",
+        "methodNote",
+        "uncertaintyNote",
+        "relatedCases",
+        "relatedTransitions",
+        "unknown"
+      ],
+      "properties": {
+        "trajectoryId": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]+$"
+        },
+        "title": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "description": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "authorityClass": {
+          "enum": [
+            "EVIDENCE_SERIES",
+            "HISTORICAL_RECONSTRUCTION",
+            "CONCEPTUAL_TRAJECTORY"
+          ]
+        },
+        "unitMode": {
+          "enum": [
+            "ABSOLUTE_MEASURED",
+            "ESTIMATED_RANGE",
+            "NORMALIZED_INDEX",
+            "CONCEPTUAL_ONLY"
+          ]
+        },
+        "timeDomain": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "startYear",
+            "endYear"
+          ],
+          "properties": {
+            "startYear": {
+              "type": "integer"
+            },
+            "endYear": {
+              "type": "integer"
+            }
+          }
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "bands": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^EV-[A-Z0-9-]+$"
+          },
+          "uniqueItems": true
+        },
+        "methodNote": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "uncertaintyNote": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "zh-Hans",
+            "en"
+          ],
+          "properties": {
+            "zh-Hans": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "relatedCases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^CA-T"
+          },
+          "uniqueItems": true
+        },
+        "relatedTransitions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^TW-"
+          },
+          "uniqueItems": true
+        },
+        "unknown": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "state"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "UNKNOWN",
+                "CONTESTED",
+                "PARTIAL",
+                "RECONSTRUCTED",
+                "OBSERVED"
+              ]
+            },
+            "fields": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            },
+            "note": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "zh-Hans",
+                    "en"
+                  ],
+                  "properties": {
+                    "zh-Hans": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "en": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

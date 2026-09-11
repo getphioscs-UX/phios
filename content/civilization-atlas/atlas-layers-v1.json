@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-V-CIV-ATLAS-LAYERS-v1.0.0",
+  "version": "1.0.0",
+  "status": "FOUNDATION",
+  "bookId": "book-5",
+  "partId": "part-12",
+  "canonicalTheoryLayer": {
+    "layer": "L1",
+    "owner": "existing-part-12-authority",
+    "publicEntry": "READ_THE_BOOK"
+  },
+  "explorerLayers": [
+    {
+      "layerId": "timeline",
+      "architectureLayer": "L2",
+      "order": 2,
+      "title": {
+        "zh-Hans": "历史脊柱",
+        "en": "Timeline"
+      },
+      "registryPath": "content/civilization-atlas/timeline/timeline-periods-v1.json",
+      "schemaPath": "content/civilization-atlas/schemas/timeline-period.schema.json",
+      "defaultAuthority": "HISTORICAL_RECONSTRUCTION",
+      "customerEnabled": false,
+      "activationWave": "W5"
+    },
+    {
+      "layerId": "cases",
+      "architectureLayer": "L3",
+      "order": 3,
+      "title": {
+        "zh-Hans": "文明案例",
+        "en": "Cases"
+      },
+      "registryPath": "content/civilization-atlas/cases/civilization-case-registry-v1.json",
+      "schemaPath": "content/civilization-atlas/schemas/civilization-case.schema.json",
+      "defaultAuthority": "HISTORICAL_RECONSTRUCTION",
+      "customerEnabled": false,
+      "activationWave": "W6"
+    },
+    {
+      "layerId": "comparison",
+      "architectureLayer": "L4",
+      "order": 4,
+      "title": {
+        "zh-Hans": "比较家族",
+        "en": "Comparison"
+      },
+      "registryPath": "content/civilization-atlas/comparison/comparison-families-v1.json",
+      "schemaPath": "content/civilization-atlas/schemas/comparison-family.schema.json",
+      "defaultAuthority": "CONCEPTUAL_TRAJECTORY",
+      "customerEnabled": false,
+      "activationWave": "W7"
+    },
+    {
+      "layerId": "world",
+      "architectureLayer": "L5",
+      "order": 5,
+      "title": {
+        "zh-Hans": "世界横切面",
+        "en": "World Slices"
+      },
+      "registryPath": "content/civilization-atlas/snapshots/world-snapshots-v1.json",
+      "schemaPath": "content/civilization-atlas/schemas/world-snapshot.schema.json",
+      "defaultAuthority": "HISTORICAL_RECONSTRUCTION",
+      "customerEnabled": false,
+      "activationWave": "W8"
+    },
+    {
+      "layerId": "trajectories",
+      "architectureLayer": "L6",
+      "order": 6,
+      "title": {
+        "zh-Hans": "长时段轨迹",
+        "en": "Long Trends"
+      },
+      "registryPath": "content/civilization-atlas/trajectories/long-duration-trajectories-v1.json",
+      "schemaPath": "content/civilization-atlas/schemas/trajectory.schema.json",
+      "defaultAuthority": "MIXED_EXPLICIT_PER_ITEM",
+      "customerEnabled": false,
+      "activationWave": "W9"
+    },
+    {
+      "layerId": "transitions",
+      "architectureLayer": "L7",
+      "order": 7,
+      "title": {
+        "zh-Hans": "转型窗口",
+        "en": "Transitions"
+      },
+      "registryPath": "content/civilization-atlas/transitions/transition-windows-v1.json",
+      "schemaPath": "content/civilization-atlas/schemas/transition-window.schema.json",
+      "defaultAuthority": "MIXED_EXPLICIT_PER_ITEM",
+      "customerEnabled": false,
+      "activationWave": "W10"
+    },
+    {
+      "layerId": "loss",
+      "architectureLayer": "L8",
+      "order": 8,
+      "title": {
+        "zh-Hans": "逆转与损失",
+        "en": "Reversal & Loss"
+      },
+      "registryPath": "content/civilization-atlas/loss/reversal-loss-atlas-v1.json",
+      "schemaPath": "content/civilization-atlas/schemas/loss-atlas.schema.json",
+      "defaultAuthority": "HISTORICAL_RECONSTRUCTION",
+      "customerEnabled": false,
+      "activationWave": "W11"
+    }
+  ],
+  "sharedContracts": {
+    "stateOwner": "CivilizationAtlasState (W3)",
+    "inspectorOwner": "Atlas Inspector (W4+)",
+    "askOwner": "existing Contextual Ask (W13 binding)",
+    "visualOwner": "existing seven-volume visual authority"
+  },
+  "invariants": {
+    "registryLed": true,
+    "singleCustomerState": true,
+    "urlAddressableFromW3": true,
+    "noLayerSpecificParallelRuntime": true,
+    "noUnifiedCivilizationScore": true,
+    "noCustomerGovernanceLanguage": true
+  }
+}
