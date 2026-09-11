@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const p8=read('content/product-visual-platform-r1/freeze/pvp-r1-vis-ecr-w10-w16-phase8-freeze-v1.json');
+const rec=read('content/integrated-master-work/phase9/p9-current-reconciliation-v1.json');
+const acc=read('content/product-visual-platform-r1/acceptance/successors/phase9/pvp-r1-vis-ziwei-w17-w24-current-acceptance-v1.json');
+const freeze=read('content/product-visual-platform-r1/freeze/pvp-r1-vis-ziwei-w17-w24-phase9-freeze-v1.json');
+assert.equal(p8.status,'PVP_R1_VIS_ECR_W10_W16_PHASE8_FROZEN');assert.equal(p8.frozenExit.phase9Authorized,true);assert.equal(p8.preservedBoundaries.phase9ExecutedByThisFreeze,false);
+assert.equal(rec.status,'CURRENT_ZIWEI_SUCCESSOR_RECONCILED_W17_W24_VERIFIED');assert.equal(rec.masterRule,'ZV_R3_CUSTOMER_VISUAL_SUCCESSOR_REUSES_EXISTING_ZIWEI_TRUTH_DO_NOT_REBUILD_RUNTIME');assert.equal(rec.phase9ExitComplete,true);assert.equal(rec.phase10Authorized,true);assert.equal(rec.nextWorkStep,'PHASE10_AST_BZR_NUM_PVP_W25_W28');
+assert.equal(acc.status,'MACHINE_ACCEPTED_CURRENT_ZIWEI_W17_W24');assert.equal(freeze.status,'PVP_R1_VIS_ZIWEI_W17_W24_PHASE9_FROZEN');assert.equal(freeze.frozenExit.phase10Authorized,true);assert.equal(freeze.preservedBoundaries.phase10ExecutedByThisFreeze,false);
+console.log('✓ Integrated Successor PHASE 9 passed.');
+console.log('  Phase 8 authorizes Zi Wei only; ZV-R3/PVP W17–W24 is verified and frozen; PHASE 10 AST/BZR/NUM W25–W28 is next.');
