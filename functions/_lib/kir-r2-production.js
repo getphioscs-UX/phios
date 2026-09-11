@@ -2,7 +2,7 @@ import {runKirR2Pipeline} from './kir-r2-intelligence.js';
 import {kirR2ModelGatewayEnabled} from './kir-r2-model-gateway.js';
 import {kirR2W16R2BProductionCutoverEnabled,getKirR2W16R2BProductionAdmission} from './kir-r2-production-admission.js';
 import {runKirR2W16R2Successor} from './kir-r2-w16r2-successor.js';
-const PROFILE_PATH='content/knowledge/knowledge-intelligence-r2/semantic-profiles/kir-r2-book-i-iii-semantic-retrieval-profiles-v1.json';
+const PROFILE_PATH='content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a6/kir-r2-book-i-iv-semantic-retrieval-profiles-v2.json';
 const ARTICLE_BINDING_PATH='content/knowledge/knowledge-intelligence-r2/registries/kir-r2-published-article-binding-registry-v2.json';
 async function readAsset(env,path){if(!env?.ASSETS?.fetch)return null;const r=await env.ASSETS.fetch(new Request(`https://assets.local/${path}`));return r.ok?r.json():null}
 function enrichProfiles(profiles,bindings=[]){
@@ -11,7 +11,8 @@ function enrichProfiles(profiles,bindings=[]){
 }
 async function loadProfiles(env){
   const [doc,binding]=await Promise.all([readAsset(env,PROFILE_PATH),readAsset(env,ARTICLE_BINDING_PATH)]);
-  if(!Array.isArray(doc?.profiles)||doc.profiles.length!==348)return null;
+  if(!Array.isArray(doc?.profiles)||doc.profiles.length<348)return null;
+  if(Number.isInteger(doc.profileCount)&&doc.profileCount!==doc.profiles.length)return null;
   return enrichProfiles(doc.profiles,binding?.records||[]);
 }
 export async function runKirR2ProductionProjection({question,locale='zh-Hans',env={},allowedContext=null,upstreamGroundedAnswer=null,upstreamGroundingBundle=null,provider=null}={}){

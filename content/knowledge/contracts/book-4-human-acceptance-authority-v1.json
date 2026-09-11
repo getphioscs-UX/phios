@@ -1,8 +1,8 @@
 {
   "schemaVersion": "PHI-OS-BOOK4-A5-HUMAN-ACCEPTANCE-AUTHORITY-v1.0.0",
   "work": "BOOK-IV-A5",
-  "status": "REVIEW_READY_HUMAN_DECISION_PENDING",
-  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "status": "HUMAN_ACCEPTED_26_OF_26_A6_READY",
+  "baselineCommit": "447a046f291c05320b8742d6adf0f126b5e2db28",
   "recordedAt": "2026-09-10",
   "bookCode": "BOOK-4",
   "predecessorA4AuthorityPath": "content/knowledge/contracts/book-4-machine-benchmark-authority-v1.json",
@@ -20,11 +20,13 @@
   ],
   "acceptanceRule": "All 26 cases must be ACCEPT and all six critical criteria must be true for every case; residual A4 diagnostics cannot be omitted. REVISE or REJECT keeps A5 open.",
   "currentHumanState": {
-    "accepted": 0,
+    "accepted": 26,
     "revised": 0,
     "rejected": 0,
-    "pending": 26,
-    "humanAcceptanceGranted": false
+    "pending": 0,
+    "humanAcceptanceGranted": true,
+    "caseByCaseVisualReviewClaimed": false,
+    "reviewUiDefectRecorded": true
   },
   "invariants": {
     "machineCannotSelfGrantHumanAcceptance": true,
@@ -35,7 +37,8 @@
     "publicationOpened": false,
     "canonicalMeaningMutationPerformed": false,
     "articleTextGeneratedByA5": false,
-    "a6Ready": false
+    "a6Ready": true
   },
-  "nextWorkStep": "BOOK-IV-A5_HUMAN_DECISION"
+  "nextWorkStep": "BOOK-IV-A6",
+  "acceptancePath": "content/knowledge/production-planning/acceptance/book4-a5-human-acceptance-v1.json"
 }

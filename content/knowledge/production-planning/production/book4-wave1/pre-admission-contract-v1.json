@@ -1,8 +1,8 @@
 {
   "schemaVersion": "PHI-OS-BOOK4-PHASE15-PRE-ADMISSION-CONTRACT-v1.0.0",
   "stage": "BOOK-IV-PRE-ADMISSION",
-  "status": "PREPARATION_ONLY_NO_PHASE_CUTOVER",
-  "baselineCommit": "ffc05bc07345011bc24e68884cc1d569c8d96418",
+  "status": "BOOK_IV_A6_PRODUCTION_ADMITTED_ARTICLE_BATCH_PRODUCTION_OPEN",
+  "baselineCommit": "447a046f291c05320b8742d6adf0f126b5e2db28",
   "governingMasterPath": "content/governance/integrated-successor/master-work/phi-os-integrated-successor-master-work-v3.0.0.md",
   "formalAdmissionSequence": [
     {
@@ -38,20 +38,21 @@
     {
       "workStep": "BOOK-IV-A5",
       "name": "Human Acceptance",
-      "status": "REVIEW_READY_HUMAN_PENDING",
-      "note": "A5 review pack is ready: 22 bilingual batch sentinels + all 4 A4 residual diagnostics. Human acceptance has not been granted.",
-      "evidencePath": "content/knowledge/contracts/book-4-human-acceptance-authority-v1.json"
+      "status": "HUMAN_ACCEPTED_26_OF_26",
+      "note": "Explicit owner acceptance recorded with A5 HTML visibility defect disclosed.",
+      "evidencePath": "content/knowledge/production-planning/acceptance/book4-a5-human-acceptance-v1.json"
     },
     {
       "workStep": "BOOK-IV-A6",
       "name": "Production Admission",
-      "status": "NOT_ADMITTED"
+      "status": "PRODUCTION_ADMITTED",
+      "evidencePath": "content/knowledge/contracts/book-4-production-admission-authority-v1.json"
     }
   ],
   "integratedExecutionBoundary": {
     "formalCurrentProgramPhaseIsNotAdvancedByThisDelta": true,
-    "phase15ProductionCutoverPerformed": false,
-    "activeBookIVRetrievalEnabled": false
+    "phase15ProductionCutoverPerformed": true,
+    "activeBookIVRetrievalEnabled": true
   },
   "thirdBookPatternReused": {
     "sourceBoundWave1": true,
@@ -66,7 +67,7 @@
     "oneFinalSectionOneCanonicalNode": true,
     "humanArticleAcceptance8of8": true
   },
-  "nextActionAfterHumanArticleReview": "Complete BOOK-IV-A5 26-case Human Acceptance; publication remains closed and A6 remains NOT_ADMITTED until all cases pass.",
+  "nextActionAfterHumanArticleReview": "A6 complete. Continue mapped Article production batch-by-batch: B02 zh-Hans review -> English parity -> publication candidate, then B03–B11.",
   "articleCapacityPlan": {
     "path": "content/knowledge/production-planning/production/book4-a2-article-batch-plan-v1.json",
     "totalBatchCount": 11,
@@ -88,11 +89,20 @@
     "residualDiagnosticsCarriedToA5": true
   },
   "humanAcceptance": {
-    "status": "REVIEW_READY_HUMAN_PENDING",
+    "status": "HUMAN_ACCEPTED_26_OF_26",
     "requiredCases": 26,
     "batchSentinels": 22,
     "a4ResidualDiagnostics": 4,
     "authorityPath": "content/knowledge/contracts/book-4-human-acceptance-authority-v1.json",
-    "resultsPath": "content/knowledge/production-planning/review/book4-a5-human-review-results-v1.json"
+    "resultsPath": "content/knowledge/production-planning/review/book4-a5-human-review-results-v1.json",
+    "acceptedCases": 26,
+    "caseByCaseVisualReviewClaimed": false,
+    "reviewUiDefectRecorded": true
+  },
+  "productionAdmission": {
+    "status": "PRODUCTION_ADMITTED",
+    "authorityPath": "content/knowledge/contracts/book-4-production-admission-authority-v1.json",
+    "sourceRegistryPath": "content/knowledge/knowledge-intelligence-r2/registries/successors/book4-a6/kir-r2-book-i-iv-source-admission-v2.json",
+    "productionProfilesPath": "content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a6/kir-r2-book-i-iv-semantic-retrieval-profiles-v2.json"
   }
 }

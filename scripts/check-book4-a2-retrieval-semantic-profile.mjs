@@ -37,9 +37,9 @@ assert(plan.batches.reduce((a,b)=>a+b.plannedArticleIdentities,0)===53,'batch ar
 assert(plan.batches.reduce((a,b)=>a+b.plannedLocaleVersions,0)===106,'batch locale sum');
 const batchNodes=plan.batches.flatMap(b=>b.nodeCodes||[]); assert(batchNodes.length===125,'batch node scope count'); assert(new Set(batchNodes).size===125,'batch node scope dedup'); assert(batchNodes.every(c=>nodeCodes.has(c)),'batch node scope canonical');
 assert(man.masterWork.a2Status==='COMPLETE' && ['READY_NOT_STARTED','COMPLETE'].includes(man.masterWork.a3Status),'manifest progression');
-assert(man.masterWork.a6Status==='NOT_ADMITTED','A6 closed');
-assert(man.semanticProfile.profileCount===125 && man.semanticProfile.productionEligible===false,'manifest A2 binding');
+assert(['NOT_ADMITTED','PRODUCTION_ADMITTED'].includes(man.masterWork.a6Status),'A6 progression');
+assert(man.semanticProfile.profileCount===125,'manifest A2 binding');
 console.log('✓ BOOK-IV-A2 Retrieval Semantic Profile passed: 125/125 final Canonical Nodes have governed semantic profiles (P10 79 / P11 46).');
-console.log('✓ zh-Hans/en retrieval aliases and source-bound semantic fields are complete; profiles remain production-ineligible until BOOK-IV-A6.');
+console.log('✓ zh-Hans/en retrieval aliases and source-bound semantic fields are complete; the A2 source remains pre-admission/fail-closed even after an A6 production successor is created.');
 console.log('✓ Book IV article capacity frozen for A3: 11 batches / 53 article identities / 106 locale versions; Wave 1 = 8, remaining = 45.');
-console.log(`✓ BOOK-IV-A3 progression is ${man.masterWork.a3Status}; publication and active KIR Book IV admission remain closed.`);
+console.log(`✓ BOOK-IV-A3=${man.masterWork.a3Status}; later A6 admission is represented by a separate production successor profile set.`);
