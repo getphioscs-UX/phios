@@ -1,16 +1,18 @@
 import fs from 'node:fs';
 const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const assert=(v,m)=>{if(!v)throw new Error(m)};
-
 const layers=readJson('content/civilization-atlas/atlas-layers-v1.json');
 const reg=readJson('content/civilization-atlas/transitions/transition-windows-v1.json');
 assert(layers.explorerLayers.find(x=>x.layerId==='transitions')?.customerEnabled===true,'W10_TRANSITIONS_NOT_ENABLED');
 assert(reg.status==='ACTIVE','W10_REGISTRY_NOT_ACTIVE');
-assert(reg.transitionWindows.length===8,'W10_VERTICAL_SLICE_MUST_HAVE_8');
+assert(reg.transitionWindows.length>=8,'W10_VERTICAL_SLICE_SUCCESSOR_MUST_RETAIN_AT_LEAST_8');
 assert(reg.scaleShifts.length===7,'W10_SCALE_SHIFTS_MUST_HAVE_7');
+for(const id of ['TW-01','TW-05','TW-10','TW-14','TW-19','TW-23','TW-31','TW-32']) assert(reg.transitionWindows.some(x=>x.transitionWindowId===id),'W10_ORIGINAL_WINDOW_MISSING:'+id);
 const tw32=reg.transitionWindows.find(x=>x.transitionWindowId==='TW-32');
 assert(tw32,'W10_TW32_MISSING');
 assert(tw32.authorityClass==='CONCEPTUAL_TRAJECTORY','W10_TW32_AUTHORITY_MUST_REMAIN_CONCEPTUAL');
+assert(tw32.unknown?.state==='PARTIAL','W10_TW32_MUST_REMAIN_PARTIAL');
 assert(reg.scaleShifts.some(x=>x.status==='OPEN'&&x.transitionWindowIds.includes('TW-32')),'W10_TW32_OPEN_STATUS_MISSING');
 for(const w of reg.transitionWindows) for(const key of ['beforeState','pressure','threshold','transition','newCapacity','newLoad','successorReality']) assert(w[key],'W10_FLOW_FIELD_MISSING:'+w.transitionWindowId+':'+key);
 console.log('✓ BOOK-V-CIV-ATLAS-R1-W10 Transition Windows passed.');
+console.log(`  Original eight W10 windows remain present inside the successor registry (${reg.transitionWindows.length} windows total).`);
