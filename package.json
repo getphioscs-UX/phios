@@ -2398,12 +2398,15 @@
     "check:pvp-r1:phase13:w35": "node scripts/check-pvp-r1-vis-w35-visual-human-gate.mjs",
     "check:pvp-r1:phase13:w36": "node scripts/check-pvp-r1-vis-w36-purchase-intent-gate.mjs",
     "check:pvp-r1:phase13:w37": "node scripts/check-pvp-r1-vis-w37-conversion-pilot.mjs",
+    "check:pvp-r1:phase13:w37-collection": "node scripts/check-pvp-r1-vis-w37-evidence-collection-readiness.mjs",
     "check:pvp-r1:phase13:readiness": "node scripts/check-pvp-r1-vis-phase13-readiness.mjs",
+   "check:book4:b09": "node scripts/check-book4-b09-zh-hans-production.mjs",
+    "book4:b09:review": "node scripts/build-book4-b09-zh-hans-human-review.mjs",
     "record:pvp-r1:phase13:human": "node scripts/pvp-r1-vis-phase13-record-human-review.mjs",
-    "check:integrated-phase13:prepare": "npm run check:integrated-phase12 && npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:readiness && node scripts/check-integrated-successor-phase13-preflight.mjs",
-    "check:pvp-r1:phase13:final": "npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:w35 && npm run check:pvp-r1:phase13:w36 && npm run check:pvp-r1:phase13:w37",
-    "check:book4:b09": "node scripts/check-book4-b09-zh-hans-production.mjs",
-    "book4:b09:review": "node scripts/build-book4-b09-zh-hans-human-review.mjs"
+    "record:pvp-r1:phase13:w37": "node scripts/pvp-r1-vis-w37-record-real-evidence.mjs",
+    "check:integrated-phase13:prepare": "npm run check:integrated-phase12 && npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:w35 && npm run check:pvp-r1:phase13:w36 && npm run check:pvp-r1:phase13:w37-collection && npm run check:pvp-r1:phase13:readiness && node scripts/check-integrated-successor-phase13-preflight.mjs",
+    "check:pvp-r1:phase13:final": "npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:w35 && npm run check:pvp-r1:phase13:w36 && npm run check:pvp-r1:phase13:w37"
+  
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
