@@ -2407,12 +2407,15 @@
     "check:integrated-phase13:prepare": "npm run check:integrated-phase12 && npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:w35 && npm run check:pvp-r1:phase13:w36 && npm run check:pvp-r1:phase13:w37-collection && npm run check:pvp-r1:phase13:readiness && node scripts/check-integrated-successor-phase13-preflight.mjs",
     "check:pvp-r1:phase13:final": "npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:w35 && npm run check:pvp-r1:phase13:w36 && npm run check:pvp-r1:phase13:w37",
     "check:book4:b09-en": "node scripts/check-book4-b09-english-semantic-parity.mjs",
-    "check:book4:b10": "node scripts/check-book4-b10-zh-hans-production.mjs",
+    "check:book4:b10": "node scripts/check-book4-b10-zh-hans-production.mjs && node scripts/check-book4-b10-english-semantic-parity.mjs",
     "book4:b10:review": "node scripts/build-book4-b10-zh-hans-human-review.mjs",
     "check:book-v-atlas:r1:m1:w0": "node scripts/check-book-v-civ-atlas-r1-m1-w0-baseline.mjs",
     "check:book-v-atlas:r1:m1:favicon": "node scripts/check-phios-global-favicon-r1.mjs",
     "check:book-v-atlas:r1:m1:entry": "node scripts/check-book-v-civ-atlas-r1-m1-w2-entry.mjs",
-    "check:book-v-atlas:r1:m1:w0-w2": "node scripts/check-book-v-civ-atlas-r1-m1-w0-w2.mjs"
+    "check:book-v-atlas:r1:m1:w0-w2": "node scripts/check-book-v-civ-atlas-r1-m1-w0-w2.mjs",
+    "check:book4:b10-en": "node scripts/check-book4-b10-english-semantic-parity.mjs",
+    "check:book4:b11": "node scripts/check-book4-b11-zh-hans-production.mjs",
+    "book4:b11:review": "node scripts/build-book4-b11-zh-hans-human-review.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
