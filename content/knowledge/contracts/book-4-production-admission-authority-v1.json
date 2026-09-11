@@ -33,7 +33,11 @@
     "articlePublicationAutomatic": false,
     "articleBatchProductionMayStartAfterAdmission": true,
     "englishGeneratedOnlyAfterCorrespondingZhHansHumanAcceptance": true,
-    "remainingMappedArticleIdentitiesAfterB02ZhGeneration": 41
+    "remainingMappedArticleIdentitiesAfterB02ZhGeneration": 41,
+    "b02ZhHansHumanAccepted": 4,
+    "b02EnglishSemanticParityProduced": 4,
+    "b03ZhHansGenerated": 5,
+    "remainingMappedArticleIdentitiesAfterB03ZhGeneration": 36
   },
   "a5DecisionCaveat": {
     "caseByCaseVisualReviewClaimed": false,
@@ -46,13 +50,19 @@
     "publishedBook4ArticleCountAtAdmission": 0,
     "publishedArticleBindingRegistryMutatedByA6": false
   },
-  "nextWork": "BOOK-IV-ARTICLE-PRODUCTION-B02",
+  "nextWork": "BOOK-IV-B03-ZH-HANS-HUMAN-EDITORIAL-REVIEW",
   "postAdmissionExecution": {
-    "started": true,
-    "work": "BOOK-IV-B02-ZH-HANS-ARTICLE-PRODUCTION",
-    "articleCandidatesGenerated": 4,
-    "reviewStatus": "HUMAN_PENDING_0_OF_4",
-    "englishStillBlocked": true,
-    "reviewPath": "content/knowledge/production-planning/review/book4-b02-zh-hans-editorial-review-v1.json"
-  }
+    "b02": {
+      "zhHans": "HUMAN_ACCEPTED_4_OF_4",
+      "english": "MACHINE_SEMANTIC_PARITY_ACCEPTED_4_OF_4",
+      "publication": "CLOSED"
+    },
+    "b03": {
+      "zhHans": "HUMAN_PENDING_0_OF_5",
+      "english": "BLOCKED_UNTIL_ZH_HANS_5_OF_5_ACCEPTED",
+      "publication": "CLOSED",
+      "reviewPath": "content/knowledge/production-planning/review/book4-b03-zh-hans-editorial-review-v1.json"
+    }
+  },
+  "successorBaselineCommit": "e8d9c5c0b222fabfae9bae0ed9abb6e098705c1f"
 }

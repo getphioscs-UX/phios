@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "PHI-OS-BOOK4-B02-ZH-HANS-PRODUCTION-MANIFEST-v1.0.0",
+  "schemaVersion": "PHI-OS-BOOK4-B02-BILINGUAL-PRODUCTION-MANIFEST-v1.1.0",
   "stage": "BOOK4-B02-ZH-HANS-PRODUCTION",
-  "status": "ZH_HANS_4_ARTICLES_GENERATED_HUMAN_EDITORIAL_PENDING",
+  "status": "ZH_HANS_HUMAN_ACCEPTED_ENGLISH_SEMANTIC_PARITY_MACHINE_ACCEPTED_PUBLICATION_CLOSED",
   "baselineCommit": "447a046f291c05320b8742d6adf0f126b5e2db28",
   "recordedAt": "2026-09-10",
   "bookCode": "BOOK-4",
@@ -11,9 +11,10 @@
     "articleCandidates": 4,
     "canonicalNodeCoverage": 8,
     "sourceSectionBindings": 8,
-    "humanAcceptedArticles": 0,
-    "englishCandidates": 0,
-    "publishedArticles": 0
+    "humanAcceptedArticles": 4,
+    "englishCandidates": 4,
+    "publishedArticles": 0,
+    "localesProduced": 2
   },
   "records": [
     {
@@ -30,7 +31,12 @@
         "CM-B4V1-P10-S006",
         "CM-B4V1-P10-S007"
       ],
-      "decision": "PENDING"
+      "decision": "PENDING",
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b02-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book4-b02/candidates/en/b4-b02-a09.en.v1.json",
+      "englishCandidateSha256": "be6164ef90c3bae83e828c1496b4c6c715776707c1f1bc2020082739e8e4becd",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     },
     {
       "articlePlanId": "B4-ART-010",
@@ -46,7 +52,12 @@
         "CM-B4V1-P10-S008",
         "CM-B4V1-P10-S009"
       ],
-      "decision": "PENDING"
+      "decision": "PENDING",
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b02-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book4-b02/candidates/en/b4-b02-a10.en.v1.json",
+      "englishCandidateSha256": "837bee7cb808f8e27ef32e219f8ab875d2597c5194e0c9aa724996e085f496a8",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     },
     {
       "articlePlanId": "B4-ART-011",
@@ -62,7 +73,12 @@
         "CM-B4V1-P10-S010",
         "CM-B4V1-P10-S011"
       ],
-      "decision": "PENDING"
+      "decision": "PENDING",
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b02-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book4-b02/candidates/en/b4-b02-a11.en.v1.json",
+      "englishCandidateSha256": "0d779e62e62a6942484e65a2153683a2cddec2d5f312ffe834b7bcdc023028e3",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     },
     {
       "articlePlanId": "B4-ART-012",
@@ -78,18 +94,30 @@
         "CM-B4V1-P10-S015",
         "CM-B4V1-P10-S016"
       ],
-      "decision": "PENDING"
+      "decision": "PENDING",
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b02-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book4-b02/candidates/en/b4-b02-a12.en.v1.json",
+      "englishCandidateSha256": "f3ec59eb1472d32bec9212b1e0ece37b5d477833b99ea7faf1a7d5d34da5b9bc",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     }
   ],
   "gates": {
-    "zhHansHumanEditorial": "PENDING_0_OF_4",
-    "englishProduction": "BLOCKED_UNTIL_ZH_HANS_4_OF_4_ACCEPTED",
-    "publication": "CLOSED_PENDING_ARTICLE_GATES"
+    "zhHansHumanEditorial": "HUMAN_ACCEPTED_4_OF_4",
+    "englishProduction": "COMPLETE_4_OF_4_AFTER_ZH_ACCEPTANCE",
+    "englishSemanticParity": "MACHINE_ACCEPTED_4_OF_4",
+    "publication": "CLOSED",
+    "customerProjection": "CLOSED"
   },
   "authorityBoundary": {
     "a6DoesNotAutoAcceptArticleText": true,
     "a3FrozenGroupingPreserved": true,
     "canonicalMutationPerformed": false,
-    "publishedBindingRegistryMutationPerformed": false
-  }
+    "publishedBindingRegistryMutationPerformed": false,
+    "englishProductionTriggeredOnlyAfterZhAcceptance": true,
+    "englishSemanticParityDoesNotCreatePublicationAuthority": true
+  },
+  "successorBaselineCommit": "e8d9c5c0b222fabfae9bae0ed9abb6e098705c1f",
+  "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b02-human-decisions-v1.json",
+  "englishSemanticParityPath": "content/knowledge/production-planning/acceptance/book4-b02-english-semantic-parity-v1.json"
 }
