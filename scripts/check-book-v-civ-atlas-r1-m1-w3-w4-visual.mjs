@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const json=p=>JSON.parse(read(p));
+const proj=json('content/civilization-atlas/visuals/atlas-visual-projection-v1.json');
+assert.equal(proj.status,'ACTIVE_PROJECTION_ONLY');
+assert.equal(proj.bookId,'book-5');
+assert.equal(proj.partId,'part-12');
+assert.equal(proj.authority.posterIsSourceOfTruth,false);
+assert.equal(proj.authority.ocrMayWriteRegistry,false);
+assert.equal(proj.authority.registryRemainsSourceOfTruth,true);
+assert.equal(proj.authority.createsSecondVisualResolver,false);
+assert.equal(proj.rules.brokenImageFailsToStructuredFallback,true);
+assert.equal(proj.layers.length,7);
+const ids=proj.layers.map(x=>x.layerId);
+assert.deepEqual(ids.sort(),['cases','comparison','loss','timeline','trajectories','transitions','world'].sort());
+const world=proj.layers.find(x=>x.layerId==='world');
+assert.equal(world.posters.length,15);
+for(const p of world.posters){assert.match(p.assetRef,/^VIS-B5-ATLAS-L5-WS-/);assert.equal(p.availability,'UNVERIFIED_ATLAS_POSTER');}
+for(const l of proj.layers){assert.equal(l.fallback,'STRUCTURED_RENDERER');assert.equal(l.interactiveRegions,'STATE_DRIVEN_HTML_NOT_IMAGE_GEOMETRY');}
+const main=read('assets/js/pages/civilization-atlas.js');
+assert.match(main,/loadAtlasVisualProjection/);
+const data=read('assets/js/pages/civilization-atlas/atlas-data.js');
+assert.match(data,/loadAtlasVisualProjection/);
+const shell=read('assets/js/pages/civilization-atlas/atlas-shell.js');
+assert.match(shell,/renderAtlasVisualProjection/);
+assert.match(shell,/data-atlas-visual-projection/);
+assert.match(shell,/civ-atlas-context-strip/);
+const visual=read('assets/js/pages/civilization-atlas/atlas-visual-projection.js');
+for(const token of ['loading="lazy"','decoding="async"','data-visual-fallback','openPosterViewer','dialog','STRUCTURED']){}
+assert.match(visual,/loading="lazy"/);
+assert.match(visual,/decoding="async"/);
+assert.match(visual,/data-visual-fallback/);
+assert.match(visual,/openPosterViewer/);
+assert.match(visual,/showModal/);
+assert.match(visual,/poster is orientation only|Poster is for orientation/i);
+const css=read('assets/css/civilization-atlas.css');
+assert.match(css,/civ-atlas-poster-dialog/);
+assert.match(css,/@media\(max-width:768px\)/);
+assert.match(css,/prefers-reduced-motion/);
+const manifest=json('content/civilization-atlas/atlas-manifest-v1.json');
+for(const key of ['posterAsSourceOfTruth','ocrWritesRegistry']) assert.equal(manifest.boundaries[key],false);
+console.log('✓ BOOK-V-CIV-ATLAS-R1-M1-W3–W4 Dynamic Visual Projection passed.');
+console.log('  7 Atlas layers bound; 15 World Snapshot poster slots; structured fallback remains authoritative.');

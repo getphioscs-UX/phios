@@ -48,3 +48,31 @@
 @media(max-width:360px){.civ-atlas-layers{margin-inline:-1rem;padding-inline:1rem}.civ-atlas-canvas,.civ-atlas-inspector{padding:1rem}.civ-timeline__period,.civ-world__time,.civ-transition-selector button{min-width:8rem}.civ-case-card__actions{display:grid;grid-template-columns:1fr}.civ-case-card__actions>*{width:100%}.civ-atlas-meta{grid-template-columns:1fr}.civ-world__map{padding:1rem}.civ-world__globe{font-size:4rem}.civ-atlas-table{min-width:34rem}}
 @media(prefers-reduced-motion:reduce){.civ-atlas-skip{transition:none}.civ-atlas-shell *{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
 @media(forced-colors:active){.civ-atlas-layer.is-active,.civ-family-node.is-active,.civ-world__time.is-active,.civ-transition-selector button.is-active,.civ-loss-families button.is-active,.civ-loss-types button.is-active{outline:2px solid CanvasText}.civ-trajectory-card[data-authority="CONCEPTUAL_TRAJECTORY"] .civ-trajectory-spark{border:2px dashed CanvasText}}
+
+
+/* BOOK-V-CIV-ATLAS-R1-M1-W3-W4 dynamic visual projection */
+.civ-atlas-context-strip{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0 1rem}
+.civ-atlas-context-strip:empty{display:none}
+.civ-atlas-context-strip span{display:inline-flex;gap:.35rem;align-items:center;padding:.35rem .65rem;border:1px solid var(--phi-border-subtle);border-radius:999px;background:var(--phi-surface-subtle);font-size:var(--phi-text-xs)}
+.civ-atlas-visual{display:grid;gap:var(--phi-space-3);margin:var(--phi-space-5) 0 var(--phi-space-6)}
+.civ-atlas-visual__heading{display:flex;justify-content:space-between;align-items:end;gap:var(--phi-space-4)}
+.civ-atlas-visual__heading h4{margin:0}
+.civ-atlas-visual__frame{position:relative;overflow:hidden;border:1px solid var(--phi-border-strong);border-radius:var(--phi-radius-lg);background:var(--phi-surface-subtle);min-height:14rem}
+.civ-atlas-visual__frame img{display:block;width:100%;height:auto;max-height:42rem;object-fit:contain;background:#061829}
+.civ-atlas-visual__fallback{display:grid;place-items:center;align-content:center;gap:.5rem;min-height:16rem;padding:var(--phi-space-6);text-align:center}
+.civ-atlas-visual__fallback[hidden]{display:none}
+.civ-atlas-poster-dialog{width:min(96vw,96rem);max-width:none;height:min(94vh,64rem);padding:0;border:0;border-radius:1rem;background:#061829;color:#fff}
+.civ-atlas-poster-dialog::backdrop{background:rgb(0 0 0 / .82)}
+.civ-atlas-poster-dialog__bar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 1rem;background:rgb(6 24 41 / .94);border-bottom:1px solid rgb(255 255 255 / .2)}
+.civ-atlas-poster-dialog__bar button{min-height:44px;padding:.45rem .9rem;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit}
+.civ-atlas-poster-dialog__viewport{height:calc(100% - 4rem);overflow:auto}
+.civ-atlas-poster-dialog__viewport img{display:block;max-width:none;width:max(100%,80rem);height:auto;margin:auto}
+@media(max-width:768px){
+  .civ-atlas-visual__heading{align-items:start;flex-direction:column}
+  .civ-atlas-visual__actions{width:100%}
+  .civ-atlas-visual__actions .knowledge-action{width:100%;justify-content:center}
+  .civ-atlas-visual__frame{min-height:10rem}
+  .civ-atlas-visual__frame img{max-height:24rem}
+  .civ-atlas-poster-dialog{width:100vw;height:100dvh;border-radius:0}
+}
+@media(prefers-reduced-motion:reduce){.civ-atlas-visual__frame img{transition:none}}

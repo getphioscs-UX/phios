@@ -1,17 +1,21 @@
 {
   "schemaVersion": "PHI-OS-BOOK-V-CIV-ATLAS-R1-M1-MAINTENANCE-v1.0.0",
   "work": "BOOK-V-CIV-ATLAS-R1-M1",
-  "baselineCommit": "42324d1a3492f801d7de19758ea4c88f2f1ede42",
-  "status": "IN_PROGRESS_W0_W2_COMPLETE",
+  "baselineCommit": "058bad17580a3a2494ade2268104c5cab2428782",
+  "status": "IN_PROGRESS_W0_W4_COMPLETE",
   "previousFreeze": "content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json",
   "completedWaves": [
     "M1-W0",
     "M1-W1",
-    "M1-W2"
+    "M1-W2",
+    "M1-W3",
+    "M1-W4"
   ],
   "defects": [
     "LEGACY_FAVICON_BROWSER_CHROME",
-    "ATLAS_DISCOVERABILITY_DEFECT"
+    "ATLAS_DISCOVERABILITY_DEFECT",
+    "ATLAS_DYNAMIC_VISUAL_PROJECTION_MISSING",
+    "ATLAS_POSTERS_UNBOUND_TO_CUSTOMER_STATE"
   ],
   "faviconRecovery": {
     "assetCode": "LOGO-011",
@@ -35,12 +39,58 @@
       "previousSha256": "dead54f95ffae15b87d26b70130b77f6ce1839c5ef234af75ecaeeadf3b3437f",
       "successorSha256": "6f803eb1e8112f9f9992acddfc212e5e52be13d878dd61a44476034de46f4f4a",
       "changeClass": "BUG_FIX_WITH_FREEZE_SUCCESSOR"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas.js",
+      "previousSha256": "c16c0600add4238391a2c049412dc8940526edcddbefca6ee345225451d3afa4",
+      "successorSha256": "e631f8affc532e0ad95a3f3408855bb66b326dc95f04a1a459f236d587e5e9d4",
+      "changeClass": "BUG_FIX_WITH_FREEZE_SUCCESSOR"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-data.js",
+      "previousSha256": "69c2ddf9cfaa18a385160ee23749ff9224c93d31e6df41554062a20d373f6b85",
+      "successorSha256": "096552d7f56538072150fb30ef8c9a53cf1ff19a227042ccb3cd825987720d20",
+      "changeClass": "BUG_FIX_WITH_FREEZE_SUCCESSOR"
+    },
+    {
+      "path": "assets/js/pages/civilization-atlas/atlas-shell.js",
+      "previousSha256": "9c7c93c845d66b9c1d817593f1455373f0f55f5719d50f55baaac70dd2dae59c",
+      "successorSha256": "0951d966659f89abde42129199ba651bd591ce6aac1171ce00d4d962f219b76d",
+      "changeClass": "BUG_FIX_WITH_FREEZE_SUCCESSOR"
+    },
+    {
+      "path": "assets/css/civilization-atlas.css",
+      "previousSha256": "b12bdb844af056f76523d479a7e13924f071822776884ce27a2f48fa5abefc96",
+      "successorSha256": "d2c5dcf84c6083e2e5774dbb160816fcfd682b5e13322639259f1c96fac8a95e",
+      "changeClass": "BUG_FIX_WITH_FREEZE_SUCCESSOR"
     }
   ],
   "boundaries": {
     "r1CanonicalTheoryUnchanged": true,
     "registriesUnchanged": true,
     "noNewRuntime": true,
-    "noNewAskRuntime": true
+    "noNewAskRuntime": true,
+    "posterIsNotSourceOfTruth": true,
+    "noOcrRegistryWrite": true,
+    "noSecondVisualResolver": true,
+    "askRecoveryStillDeferredToM1W5W6": true
+  },
+  "dynamicVisualRecovery": {
+    "projectionManifest": "content/civilization-atlas/visuals/atlas-visual-projection-v1.json",
+    "renderer": "assets/js/pages/civilization-atlas/atlas-visual-projection.js",
+    "layersBound": [
+      "timeline",
+      "cases",
+      "comparison",
+      "world",
+      "trajectories",
+      "transitions",
+      "loss"
+    ],
+    "worldSnapshotPosterBindings": 15,
+    "posterAuthority": "ORIENTATION_ONLY",
+    "registryAuthorityPreserved": true,
+    "missingPosterBehavior": "STRUCTURED_RENDERER_FALLBACK",
+    "remotePosterState": "UNVERIFIED_ATLAS_POSTER"
   }
 }
