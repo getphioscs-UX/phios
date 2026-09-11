@@ -3,6 +3,7 @@ import { installLocaleControls } from './locale.js';
 import { hydrateCustomerAssets } from './assets.js';
 import { installCustomerDialogs } from './dialog.js';
 import { installExpandableFigures } from './figure-viewer.js';
+import { installStaticAtmosphere } from './static-atmosphere.js';
 
 const ACCOUNT_PRESENTATION = Object.freeze({
   GUEST: Object.freeze({ en: 'Guest', zh: '访客' }),
@@ -151,6 +152,7 @@ export async function initializeCustomerShell(scope = document) {
   installAskDrawerNavigation(scope);
   installExpandableFigures(scope);
   await hydrateCustomerAssets(scope);
+  await installStaticAtmosphere(scope);
 
   document.documentElement.dataset.cxShell = 'ready';
   document.documentElement.dataset.cxAccountPresentation = state;

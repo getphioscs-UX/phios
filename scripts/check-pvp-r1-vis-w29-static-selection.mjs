@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const p='content/product-visual-platform-r1/static-assets/pvp-r1-vis-w29-static-production-asset-selection-v1.json';
+const x=j(p);
+assert.equal(x.work,'PVP-R1-VIS-W29');
+assert.equal(x.status,'MACHINE_ACCEPTED_SELECTION_AWAITING_W31_REMOTE_PROOF');
+assert.ok(x.selectedAssets.length>=8&&x.selectedAssets.length<=12,`W29 static asset budget exceeded: ${x.selectedAssets.length}`);
+assert.equal(x.selectedAssets.length,12);
+assert.equal(new Set(x.selectedAssets.map(a=>a.assetId)).size,x.selectedAssets.length,'duplicate static asset selection');
+for(const k of ['HERO','LOGO','ILLUSTRATION','ICON','BACKGROUND'])assert.equal(x.categoryCoverage[k],true,`missing W29 category ${k}`);
+for(const id of ['VIS-TEX-001','VIS-TEX-002','VIS-TEX-003','VIS-TEX-004','VIS-DEC-001','VIS-DEC-002','VIS-DEC-003','VIS-DEC-004'])assert.ok(x.selectedAssets.some(a=>a.assetId===id),`missing master static asset ${id}`);
+assert.equal(x.selectionPolicy.productSpecificPaidBackgroundsCreated,false);
+assert.equal(x.boundaries.upstreamAssetIdentityMutated,false);
+assert.equal(x.boundaries.ownerUploadClaimTreatedAsRemoteVerification,false);
+console.log('✓ PVP W29 passed: 12/12 static production assets selected within the 8–12 budget with hero/logo/illustration/icon/background coverage.');

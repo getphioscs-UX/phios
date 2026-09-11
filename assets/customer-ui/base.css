@@ -23,3 +23,52 @@
   }
   .cx-skip:focus { top: var(--cx-space-4); }
 }
+
+@layer cx.base {
+  /* PVP-R1-VIS Phase 12: these overlays remain inert until W31 remote evidence is present. */
+  html[data-pvp-static-atmosphere="remote-verified"] body {
+    background-color: var(--cx-color-canvas);
+    background-image: var(--pvp-vis-tex-001, none);
+    background-size: 640px 640px;
+    background-attachment: fixed;
+  }
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="HOME"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="KNOWLEDGE_HOME"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="KNOWLEDGE_ASK"] {
+    --pvp-surface-atmosphere: var(--pvp-vis-tex-002, none);
+  }
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="MY_REALITY"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="REALITY_HOME"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="REALITY_READING"] {
+    --pvp-surface-atmosphere: var(--pvp-vis-dec-001, var(--pvp-vis-tex-003, none));
+  }
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="PERSPECTIVES"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="PERSONAL"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-method="astrology"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-method="ziwei"] {
+    --pvp-surface-atmosphere: var(--pvp-vis-dec-002, var(--pvp-vis-dec-004, none));
+  }
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-method="bazi"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-method="numerology"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-method="human-design"] {
+    --pvp-surface-atmosphere: var(--pvp-vis-dec-004, none);
+  }
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="PROFESSIONAL"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="FINANCIAL"],
+  html[data-pvp-static-atmosphere="remote-verified"] body[data-cx-surface="ACCOUNT"] {
+    --pvp-surface-atmosphere: var(--pvp-vis-dec-003, none);
+  }
+  html[data-pvp-static-atmosphere="remote-verified"] [data-cx-shell-region="header"],
+  html[data-pvp-static-atmosphere="remote-verified"] main > :first-child {
+    background-image: var(--pvp-surface-atmosphere, none);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: min(58rem, 86vw) auto;
+  }
+  html[data-pvp-static-atmosphere="remote-verified"] [data-pvp-paid-depth="true"] {
+    background-image: var(--pvp-vis-tex-004, none);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
