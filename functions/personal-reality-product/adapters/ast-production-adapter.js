@@ -1,6 +1,7 @@
 import {AST_R2_METHOD_SCOPED_ADMISSION} from '../../ast-full-production/ast-r2-production-admission-authority.js';
 import {AST_CUSTOMER_PRODUCT_PROJECTION_V3_SCHEMA} from '../../ast-full-production/ast-customer-product-projection-v3.js';
 import {buildMethodProductEnvelope,section,visual,list,text,localeOf,fail,PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT} from './product-envelope-core.js';
+import {attachPvpPhase10MethodVisualSet} from './pvp-phase10-method-visual-projection.js';
 
 function v3Of(workspace){
  const v3=workspace?.customerProductProjection;
@@ -32,7 +33,7 @@ export function adaptAstPersonalRealityProduct({workspace,locale=workspace?.loca
  const specialistRenderer={rendererId:'PPR_R3_AST_PRODUCT_V1',surfaceContract:PPR_R3_SPECIALIST_RENDERER_REFERENCE_CONTRACT,capabilities:['METHOD_NAVIGATION_SLOT','NATAL_CHART_VISUAL','WHOLE_CHART_READING','TIMING','AST_CUSTOMER_PRODUCT_PROJECTION_V3','AST_PROFESSIONAL_IA','AST_NATAL_CHART_V2','AST_CHART_EXPLORER','AST_CORE_CONFIGURATION','AST_PLANETS_HOUSES_EXPLORER','AST_ASPECT_PATTERN_NETWORK','AST_RULERSHIP_NETWORK','AST_ELEMENT_MODALITY_MATRIX','AST_WHOLE_CHART_READING_V3','AST_SINGLE_NARRATIVE_OWNER','AST_INTENT_LENS','AST_REALITY_COMPARISON_BINDING','AST_TIMING_REACHABILITY_GATE','AST_TIMING_ACTIVATION_PRESENTATION','AST_TECHNICAL_DISCLOSURE','AST_RAW_CODE_ELIMINATION']};
  const summary=v3?.overview?.readerSummary||workspace.overview?.readerSummary||workspace.overview?.summary||null;
  const chart=v3?.chart||workspace.chartModel||null;
- return buildMethodProductEnvelope({
+ const base=buildMethodProductEnvelope({
   methodId:'AST',productType:'ASTROLOGY_PROFESSIONAL_READING',locale:l,state:allowed?'CUSTOMER_PUBLISHABLE':'UPSTREAM_CUTOVER_BLOCKED',
   publication:{customerPublishable:allowed,authorityRef:'functions/ast-full-production/ast-r2-production-admission-authority.js',status:AST_R2_METHOD_SCOPED_ADMISSION.status,blockers:allowed?[]:['R3_INDEPENDENT_EPHEMERIS_CERTIFICATION_REQUIRED']},
   hero:{eyebrow:text(l,'ASTROLOGY · WHOLE-CHART READING','占星 · 整盘读取'),title:v3?.overview?.readerTitle||workspace.overview?.readerTitle||text(l,'Start with the chart as a whole','先从整张盘开始'),summary,highlights:themes.slice(0,3).map(x=>x.readerTitle).filter(Boolean)},
@@ -45,5 +46,6 @@ export function adaptAstPersonalRealityProduct({workspace,locale=workspace?.loca
   // AST-CX-R3 W5+ will move the specialist renderer to the v3 projection directly.
   sourceProduct:workspace
  });
+ return attachPvpPhase10MethodVisualSet(base);
 }
 export default Object.freeze({adaptAstPersonalRealityProduct});

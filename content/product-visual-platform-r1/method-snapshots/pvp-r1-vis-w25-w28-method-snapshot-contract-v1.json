@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "PHI-OS-PVP-R1-VIS-W25-W28-METHOD-SNAPSHOT-CONTRACT-v1.0.0",
+  "work": "PHASE10_AST_BZR_NUM_PVP_W25_W28",
+  "baselineCommit": "e8d9c5c0b222fabfae9bae0ed9abb6e098705c1f",
+  "status": "FROZEN_PHASE10_PRESENTATION_CONTRACT",
+  "upstreamRequirements": {
+    "AST": {
+      "productionAdmission": "content/professional/ast-full-production/customer-reading-v2/admission/ast-r2-w19-method-scoped-production-admission-v1.json",
+      "requiredPublicationState": "CUSTOMER_PUBLISHABLE",
+      "mfigIds": ["MFIG-018", "MFIG-019", "MFIG-020", "MFIG-021", "MFIG-022", "MFIG-023", "MFIG-024"]
+    },
+    "BZR": {
+      "productionGate": "functions/bzr-full-production/bazi-production-gate-runtime.js",
+      "requiredPublicationState": "CUSTOMER_PUBLISHABLE",
+      "mfigIds": ["MFIG-026", "MFIG-027", "MFIG-028", "MFIG-029", "MFIG-030", "MFIG-031", "MFIG-032", "MFIG-033"]
+    },
+    "NUM": {
+      "productionAdmission": "content/professional/num-production/full-production/admission/num-fp-w18-full-production-gate-v1.json",
+      "depthAdmission": "content/professional/num-production/depth-d1-d8/admission/num-d8-full-production-cutover-v1.json",
+      "requiredPublicationState": "CUSTOMER_PUBLISHABLE",
+      "mfigIds": ["MFIG-035", "MFIG-036", "MFIG-037", "MFIG-038", "MFIG-039", "MFIG-040"]
+    }
+  },
+  "snapshotRules": {
+    "sourceOnly": true,
+    "noCalculation": true,
+    "noMeaningCreation": true,
+    "noMethodTruthMutation": true,
+    "existingProfessionalReadingPreserved": true,
+    "order": "METHOD_SNAPSHOT_BEFORE_EXISTING_SPECIALIST_READING"
+  },
+  "paidDepthPolicy": {
+    "scope": "PVP_VISUAL_DEPTH_ONLY",
+    "defaultState": "FREE",
+    "freeSnapshotUseful": true,
+    "serverEntitlementRequired": true,
+    "clientMaySelfUnlock": false,
+    "existingProfessionalReadingRetroactivelyLocked": false
+  },
+  "commerceBoundary": {
+    "pvpOwnsPrice": false,
+    "pvpOwnsPurchaseAuthority": false,
+    "pvpOwnsSubscriptionAuthority": false,
+    "pvpOwnsEntitlementTruth": false,
+    "hardcodedPriceAllowed": false,
+    "hardcodedCreditsAllowed": false
+  },
+  "authorityBoundary": {
+    "newMethodRuntimeCreated": false,
+    "newAstCalculationRuntimeCreated": false,
+    "newBzrCalculationRuntimeCreated": false,
+    "newNumCalculationRuntimeCreated": false,
+    "newMfigScopeRequired": false,
+    "existingMfigV2AndMcdV3Consumed": true,
+    "phase11NotExecuted": true
+  }
+}

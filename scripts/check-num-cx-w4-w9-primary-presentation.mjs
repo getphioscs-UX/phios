@@ -7,7 +7,7 @@ const labels=j('content/professional/num-production/customer/numerology-public-l
 const ia=j('content/professional/num-production/customer/numerology-reading-ia-v1.json');
 const spec=j('content/professional/num-production/customer/numerology-chart-spec-v1.json');
 const contract=j('content/professional/num-production/customer/numerology-customer-reading-envelope-contract-v1.json');const status=j('content/professional/num-production/customer/num-cx-w4-w9-status-v1.json');const successor=j('content/professional/num-production/customer/manifest/num-cx-w0-w9-primary-surface-successor-manifest-v1.json');
-const html=t('perspectives/personal/index.html');const client=t('assets/customer-ui/js/surfaces/personal-reality.js');const smrClient=t('assets/customer-ui/js/surfaces/single-method-reading.js');const css=t('assets/customer-ui/surfaces/numerology-reading.css');
+const html=t('perspectives/personal/index.html');const client=t('assets/customer-ui/js/surfaces/personal-reality.js');const smrPath='assets/customer-ui/js/surfaces/single-method-reading.js';const smrClient=fs.existsSync(smrPath)?t(smrPath):'';const css=t('assets/customer-ui/surfaces/numerology-reading.css');
 
 assert.equal(status.status,'CHART_FIRST_PRIMARY_PRESENTATION_IMPLEMENTED_PRE_W18');assert.equal(status.boundaries.fullCustomerProductionCutoverClaimed,false);assert.equal(successor.status,'PRIMARY_SURFACE_SUCCESSOR_ACTIVE_PRE_W18');assert.equal(successor.fullCustomerProductionCutoverClaimed,false);
 

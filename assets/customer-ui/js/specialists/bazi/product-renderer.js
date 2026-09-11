@@ -16,6 +16,7 @@ import {
  renderBaziRealityBridgeSummarySurface,
  renderBaziRealityComparisonSurface
 } from '../../surfaces/bazi-professional-reading.js';
+import {renderPvpPhase10MethodSnapshot,ensurePvpPhase10SnapshotCss} from '../phase10/method-snapshot.js';
 
 const NAV=Object.freeze([
  ['overview','Overview','总览'],
@@ -72,10 +73,11 @@ function renderTechnical(native,product){
 
 function readingHtml(native){return `<article class="cx-bazi-w12-workspace" data-ppr-c1-w12-bazi-workspace="true" data-bazi-cx-pro-w0-w2="true" data-ppr-whole-chart-first="true" data-bazi-market-grade-reading="active">${renderOverview(native)}${renderChart(native)}${renderElements(native)}${renderCore(native)}${renderPattern(native)}${renderRelationships(native)}${renderTiming(native)}${renderThemes(native)}${renderReality(native)}</article>`;}
 
-export function renderBaziProduct({product}={}){
+export function renderBaziProduct({product,mount}={}){
  const native=product?.sourceProduct;
  if(!isBaziNativeProduct(native))return Object.freeze({status:'NOT_HANDLED',reason:'BAZI_METHOD_NATIVE_PRODUCT_REQUIRED'});
  const html=readingHtml(native);if(!html)return Object.freeze({status:'NOT_HANDLED',reason:'BAZI_SPECIALIST_HTML_EMPTY'});
- return Object.freeze({status:'RENDERED',navigationHtml:navigationHtml(),visualHtml:'',readingHtml:html,technicalHtml:renderTechnical(native,product),customerDefaultSurface:'BAZI_PROFESSIONAL_READING',governanceSurfaceDefault:false,technicalSurfaceMode:'ON_DEMAND',marketGradeCutoverState:native.governance?.marketGradeCustomerCutoverActive===true?(native.governance?.marketGradeCustomerCutoverFrozen===true?'ACTIVE_FROZEN':'ACTIVE'):'CANDIDATE_PENDING_W13_HUMAN_ACCEPTANCE',marketGradeCutoverFrozen:native.governance?.marketGradeCustomerCutoverFrozen===true});
+ ensurePvpPhase10SnapshotCss(mount?.host?.ownerDocument||globalThis.document);const phase10Snapshot=renderPvpPhase10MethodSnapshot(product);
+ return Object.freeze({status:'RENDERED',navigationHtml:navigationHtml(),visualHtml:phase10Snapshot,readingHtml:html,technicalHtml:renderTechnical(native,product),customerDefaultSurface:'BAZI_PROFESSIONAL_READING',governanceSurfaceDefault:false,technicalSurfaceMode:'ON_DEMAND',marketGradeCutoverState:native.governance?.marketGradeCustomerCutoverActive===true?(native.governance?.marketGradeCustomerCutoverFrozen===true?'ACTIVE_FROZEN':'ACTIVE'):'CANDIDATE_PENDING_W13_HUMAN_ACCEPTANCE',marketGradeCutoverFrozen:native.governance?.marketGradeCustomerCutoverFrozen===true});
 }
 export default Object.freeze({renderBaziProduct});

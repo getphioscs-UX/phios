@@ -1,5 +1,6 @@
 import {buildAstrologySpecialistSurfaceV3,installAstrologySpecialistInteractions} from './ast-specialist-surface-v3.js';
 import {buildAstrologyWorkspaceHtml,installAstrologyWorkspaceInteractions} from '../../surfaces/astrology-workspace.js';
+import {renderPvpPhase10MethodSnapshot,ensurePvpPhase10SnapshotCss} from '../phase10/method-snapshot.js';
 
 export const AST_CX_R3_CSS_HREF='/assets/customer-ui/surfaces/astrology-specialist-v3.css';
 export const AST_CX_R3_CSS_CONTRACT='PHI-OS-AST-CX-R3-SPECIALIST-CSS-v1.0.0';
@@ -27,9 +28,11 @@ export function renderAstrologyProduct({product,mount}={}){
   const projection=v3Of(product);
   if(!projection)return legacyCompatibilityPlan(product?.sourceProduct);
   ensureCss(mount?.host?.ownerDocument||globalThis.document);
+  ensurePvpPhase10SnapshotCss(mount?.host?.ownerDocument||globalThis.document);
   const experience=experienceOf(product);
   const plan=buildAstrologySpecialistSurfaceV3(projection,experience);
   if(plan.status!=='RENDERED')return plan;
-  return Object.freeze({...plan,compatibilityOnly:false,afterMount:slots=>installAstrologySpecialistInteractions(slots?.host,projection,experience)});
+  const phase10Snapshot=renderPvpPhase10MethodSnapshot(product);
+  return Object.freeze({...plan,visualHtml:`${phase10Snapshot}${plan.visualHtml||''}`,compatibilityOnly:false,afterMount:slots=>installAstrologySpecialistInteractions(slots?.host,projection,experience)});
 }
 export default Object.freeze({AST_CX_R3_CSS_HREF,AST_CX_R3_CSS_CONTRACT,renderAstrologyProduct});
