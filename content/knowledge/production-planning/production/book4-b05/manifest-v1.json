@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "PHI-OS-BOOK4-B05-ZH-HANS-PRODUCTION-MANIFEST-v1.0.0",
+  "schemaVersion": "PHI-OS-BOOK4-B05-BILINGUAL-PRODUCTION-MANIFEST-v1.1.0",
   "stage": "BOOK4-B05-ZH-HANS-PRODUCTION",
-  "status": "ZH_HANS_3_ARTICLES_GENERATED_HUMAN_EDITORIAL_PENDING",
-  "baselineCommit": "f7377b736910e0845dc8a8bf3bfee708f4840c9e",
+  "status": "ZH_HANS_HUMAN_ACCEPTED_ENGLISH_SEMANTIC_PARITY_MACHINE_ACCEPTED_PUBLICATION_CLOSED",
+  "baselineCommit": "6b99fab0997781bca0335a45d7e69f6c6cc32081",
   "recordedAt": "2026-09-11",
   "bookCode": "BOOK-4",
   "batchCode": "B4-B05",
@@ -11,9 +11,10 @@
     "articleCandidates": 3,
     "canonicalNodeCoverage": 6,
     "sourceSectionBindings": 6,
-    "humanAcceptedArticles": 0,
-    "englishCandidates": 0,
-    "publishedArticles": 0
+    "humanAcceptedArticles": 3,
+    "englishCandidates": 3,
+    "publishedArticles": 0,
+    "localesProduced": 2
   },
   "records": [
     {
@@ -21,7 +22,7 @@
       "candidateId": "B4-B05-A23",
       "titleZhHans": "协调极限与基础设施瓶颈为什么会共同封住尺度",
       "path": "content/knowledge/production-planning/production/book4-b05/candidates/zh-Hans/b4-b05-a23.zh-Hans.v1.json",
-      "sha256": "3c820fd9fb3a35ee3f03acde0e24e28bb901aec4acf3b5ca705cb414e7d7bd81",
+      "sha256": "e795b45162bfc4d81ba1198bbec85d8effb806e8513c1963a1917daa8e51ab77",
       "nodeCodes": [
         "KN-B4-P10-241",
         "KN-B4-P10-242"
@@ -30,14 +31,19 @@
         "CM-B4V1-P10-S041",
         "CM-B4V1-P10-S042"
       ],
-      "decision": "PENDING"
+      "decision": "ACCEPT",
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b05-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book4-b05/candidates/en/b4-b05-a23.en.v1.json",
+      "englishCandidateSha256": "f5244730b65892f18d53a3fc7cd3ef29b8c3b1971e96c7f7440124ba9c6fc8d3",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     },
     {
       "articlePlanId": "B4-ART-024",
       "candidateId": "B4-B05-A24",
       "titleZhHans": "扩展为什么会从路径锁定走向饱和",
       "path": "content/knowledge/production-planning/production/book4-b05/candidates/zh-Hans/b4-b05-a24.zh-Hans.v1.json",
-      "sha256": "adf17ae6afceb3e4a4132a66892405dd4318bb667ef91a76a33ce532f11c1b6b",
+      "sha256": "451342e11b9705103e8063b6abf85cd6ae01dacda0a7ba9f7228f4f5517f6e4e",
       "nodeCodes": [
         "KN-B4-P10-243",
         "KN-B4-P10-244"
@@ -46,14 +52,19 @@
         "CM-B4V1-P10-S043",
         "CM-B4V1-P10-S044"
       ],
-      "decision": "PENDING"
+      "decision": "ACCEPT",
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b05-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book4-b05/candidates/en/b4-b05-a24.en.v1.json",
+      "englishCandidateSha256": "83f8e58ab701d82c66f43288d235a2c3fbb5eece80e279192d83ec3b0e9cef3d",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     },
     {
       "articlePlanId": "B4-ART-025",
       "candidateId": "B4-B05-A25",
       "titleZhHans": "真正的扩展能力为什么取决于适应与结构投入",
       "path": "content/knowledge/production-planning/production/book4-b05/candidates/zh-Hans/b4-b05-a25.zh-Hans.v1.json",
-      "sha256": "2d83f883d6a242be8b5e74512aa96d6bb13f4d8e5075b594c76ef98a97422982",
+      "sha256": "9f39f9f57cbc54c95d4cb636c15969c9daed99a488328a875407f1fcb6d71390",
       "nodeCodes": [
         "KN-B4-P10-245",
         "KN-B4-P10-246"
@@ -62,18 +73,27 @@
         "CM-B4V1-P10-S045",
         "CM-B4V1-P10-S046"
       ],
-      "decision": "PENDING"
+      "decision": "ACCEPT",
+      "humanEditorialDecision": "ACCEPT",
+      "humanDecisionPath": "content/knowledge/production-planning/acceptance/book4-b05-human-decisions-v1.json",
+      "englishCandidatePath": "content/knowledge/production-planning/production/book4-b05/candidates/en/b4-b05-a25.en.v1.json",
+      "englishCandidateSha256": "c7e3cdc2f6bc090ac1407452a823ce1833ec83588c3e320738fda555867bfeea",
+      "englishSemanticParityStatus": "MACHINE_ACCEPTED"
     }
   ],
   "gates": {
-    "zhHansHumanEditorial": "PENDING_0_OF_3",
-    "englishProduction": "BLOCKED_UNTIL_ZH_HANS_3_OF_3_ACCEPTED",
-    "publication": "CLOSED_PENDING_ARTICLE_GATES"
+    "zhHansHumanEditorial": "HUMAN_ACCEPTED_3_OF_3",
+    "englishProduction": "COMPLETE_3_OF_3_AFTER_ZH_ACCEPTANCE",
+    "englishSemanticParity": "MACHINE_ACCEPTED_3_OF_3",
+    "publication": "CLOSED",
+    "customerProjection": "CLOSED"
   },
   "authorityBoundary": {
     "a6DoesNotAutoAcceptArticleText": true,
     "a3FrozenGroupingPreserved": true,
     "canonicalMutationPerformed": false,
-    "publishedBindingRegistryMutationPerformed": false
+    "publishedBindingRegistryMutationPerformed": false,
+    "englishProductionTriggeredOnlyAfterZhAcceptance": true,
+    "englishSemanticParityDoesNotCreatePublicationAuthority": true
   }
 }
