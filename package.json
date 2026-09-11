@@ -2365,8 +2365,11 @@
     "check:book4:b04-en": "node scripts/check-book4-b04-english-semantic-parity.mjs",
     "check:book4:b05": "node scripts/check-book4-b05-zh-hans-production.mjs && node scripts/check-book4-b05-english-semantic-parity.mjs",
     "check:book4:b05-en": "node scripts/check-book4-b05-english-semantic-parity.mjs",
-    "check:book4:b06": "node scripts/check-book4-b06-zh-hans-production.mjs",
+    "check:book4:b06": "node scripts/check-book4-b06-zh-hans-production.mjs && node scripts/check-book4-b06-english-semantic-parity.mjs",
     "book4:b06:review": "node scripts/build-book4-b06-zh-hans-human-review.mjs",
+    "check:book4:b06-en": "node scripts/check-book4-b06-english-semantic-parity.mjs",
+    "check:book4:b07": "node scripts/check-book4-b07-zh-hans-production.mjs",
+    "book4:b07:review": "node scripts/build-book4-b07-zh-hans-human-review.mjs",
     "check:pvp-r1:relationship-visual": "node scripts/check-pvp-r1-vis-phase11-relationship-visual.mjs",
     "check:pvp-r1:relationship-phase11": "node scripts/check-pvp-r1-vis-phase11-relationship.mjs",
     "check:integrated-phase11": "npm run check:integrated-phase10 && npm run check:pvp-r1:relationship-phase11 && node scripts/check-integrated-successor-phase11.mjs",
@@ -2376,11 +2379,12 @@
     "check:pvp-r1:static-assets:w31": "node scripts/check-pvp-r1-vis-w31-remote.mjs",
     "check:pvp-r1:static-assets:prepare": "npm run check:pvp-r1:static-assets:w29 && npm run check:pvp-r1:static-assets:w30 && node scripts/check-integrated-successor-phase12-preflight.mjs",
     "check:pvp-r1:static-assets": "node scripts/check-pvp-r1-vis-phase12-static-assets.mjs",
-    "check:integrated-phase12": "npm run check:integrated-phase11 && npm run check:pvp-r1:static-assets && node scripts/check-integrated-successor-phase12.mjs",
+       "check:integrated-phase12": "npm run check:integrated-phase11 && npm run check:pvp-r1:static-assets && node scripts/check-integrated-successor-phase12.mjs",
     "check:book-v-atlas:r1:w12": "node scripts/check-book-v-civ-atlas-r1-w12-cross-layer.mjs",
     "check:book-v-atlas:r1:w13": "node scripts/check-book-v-civ-atlas-r1-w13-contextual-ask.mjs",
     "check:book-v-atlas:r1:w12-w13": "npm run check:book-v-atlas:r1:w12 && npm run check:book-v-atlas:r1:w13"
   },
+    
   "dependencies": {
     "astronomy-engine": "2.1.19"
   },
