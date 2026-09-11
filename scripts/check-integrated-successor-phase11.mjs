@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import crypto from 'node:crypto';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const p10=j('content/product-visual-platform-r1/freeze/pvp-r1-vis-ast-bzr-num-w25-w28-phase10-freeze-v1.json');
+const rec=j('content/integrated-master-work/phase11/p11-current-reconciliation-v1.json');
+const acc=j('content/product-visual-platform-r1/acceptance/successors/phase11/pvp-r1-vis-relationship-current-acceptance-v1.json');
+const freeze=j('content/product-visual-platform-r1/freeze/pvp-r1-vis-relationship-phase11-freeze-v1.json');
+assert.equal(p10.status,'PVP_R1_VIS_AST_BZR_NUM_W25_W28_PHASE10_FROZEN');assert.equal(p10.frozenExit.phase11Authorized,true);
+assert.equal(rec.status,'CURRENT_RELATIONSHIP_AUTHORITY_RECONCILED_VISUAL_PROJECTION_VERIFIED');assert.equal(rec.phase11ExitComplete,true);assert.equal(rec.phase12Authorized,true);assert.equal(rec.boundaries.visualProjectionOnly,true);assert.equal(rec.boundaries.compatibilityScoreCreated,false);assert.equal(rec.boundaries.phase12StaticAssetWorkExecuted,false);
+for(const x of rec.authoritySnapshot)assert.equal(sha(x.path),x.sha256,`relationship authority drift ${x.path}`);
+assert.equal(acc.status,'MACHINE_ACCEPTED_CURRENT_RELATIONSHIP_VISUAL_PROJECTION');assert.equal(acc.campaign.projected,24);assert.equal(acc.campaign.failed,0);for(const v of Object.values(acc.checks))assert.equal(v,true,'relationship visual acceptance false');assert.equal(acc.phase12Authorized,true);assert.equal(acc.phase12Executed,false);assert.equal(acc.customerActivation.conditionalRendererBound,true);assert.equal(acc.customerActivation.relationshipLandingRouteCutoverPerformed,false);assert.equal(acc.customerActivation.liveBrowserAcceptanceClaimed,false);assert.equal(acc.customerActivation.phase13BrowserAcceptanceStillRequired,true);
+assert.equal(freeze.status,'PVP_R1_VIS_RELATIONSHIP_PHASE11_FROZEN');assert.equal(freeze.frozenExit.relationshipVisualProjectionAccepted,true);assert.equal(freeze.frozenExit.phase12Authorized,true);assert.equal(freeze.preservedBoundaries.compatibilityScoreAuthorityCreated,false);assert.equal(freeze.preservedBoundaries.phase12ExecutedByThisFreeze,false);assert.equal(freeze.nextWork,'PHASE12_PVP_R1_VIS_W29_W31_STATIC_PRODUCTION_ASSETS');
+console.log('✓ Integrated Phase 11 passed: existing REL authority is preserved, RFIG-001–005 Relationship visuals are projection-only, and Phase 12 static production assets are authorized but not executed.');
