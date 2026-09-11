@@ -74,6 +74,9 @@ async function render() {
       relatedKnowledgeRef: parts.map(part => `P${part.number}`).join(',')
     });
     const askLabel = ckaEntryLabel('BOOK', locale);
+    const atlasAction = bookId === 'book-5'
+      ? `<a class="knowledge-action knowledge-action--primary" href="#atlas">${escapeHtml(locale==='zh-Hans'?'探索文明图谱':'Explore the Atlas')}</a>`
+      : '';
 
     root.innerHTML = `
       <section class="knowledge-hero wpr-book-hero wpr-volume-${escapeHtml(book.volume)}">
@@ -83,7 +86,7 @@ async function render() {
             <h1>${escapeHtml(title)}</h1>
             <p class="knowledge-hero__lead">${escapeHtml(subtitle)}</p>
             <p>${escapeHtml(t('knowledge.production.registryLed'))}</p>
-            <div class="knowledge-actions">${bookOneActions}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部七册':'All seven volumes')}</a></div>
+            <div class="knowledge-actions">${bookOneActions}${atlasAction}<a class="knowledge-action" href="${escapeHtml(askHref)}" data-cka-contextual-entry="BOOK">${escapeHtml(askLabel)}</a><a class="knowledge-action" href="/books/">${escapeHtml(locale==='zh-Hans'?'查看全部七册':'All seven volumes')}</a></div>
           </div>
           <figure class="wpr-book-cover"><div>${heroVisual}</div><figcaption>${escapeHtml(t('knowledge.production.coverBoundary'))}</figcaption></figure>
         </div>

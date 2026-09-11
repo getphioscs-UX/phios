@@ -19,8 +19,8 @@ for(const [schemaPath,dataPath] of pairs){ const validate=ajv.compile(json(schem
 const seeds={
  timeline:json(pairs[2][1]).periods,cases:json(pairs[3][1]).cases,comparison:json(pairs[4][1]).families,world:json(pairs[5][1]).snapshots,trajectories:json(pairs[6][1]).trajectories,transitions:json(pairs[7][1]).transitionWindows,scaleShifts:json(pairs[7][1]).scaleShifts,lossFamilies:json(pairs[8][1]).families,lossTypes:json(pairs[8][1]).lossTypes,lossProfiles:json(pairs[8][1]).caseProfiles
 };
-for(const [name,items] of Object.entries(seeds)) assert.equal(items.length,0,`W2 foundation must not pre-execute later data population: ${name}`);
-const manifest=json('content/civilization-atlas/atlas-manifest-v1.json'); for(const p of Object.values(manifest.registryRefs)) assert.ok(fs.existsSync(path.join(root,p)),`missing manifest registry ref: ${p}`);
+const manifest=json('content/civilization-atlas/atlas-manifest-v1.json'); if(manifest.status==='FOUNDATION'){for(const [name,items] of Object.entries(seeds)) assert.equal(items.length,0,`W2 foundation must not pre-execute later data population: ${name}`);}
+for(const p of Object.values(manifest.registryRefs)) assert.ok(fs.existsSync(path.join(root,p)),`missing manifest registry ref: ${p}`);
 const schemaFiles=pairs.map(x=>x[0]); assert.equal(new Set(schemaFiles).size,9);
 const raw=schemaFiles.concat(pairs.map(x=>x[1])).map(p=>fs.readFileSync(path.join(root,p),'utf8')).join('\n');
 for(const forbidden of ['"collapseScore"','"civilizationDeclineScore"','"totalLossScore"','"overallCivilizationScore"','"superiorityScore"']) assert.ok(!raw.includes(forbidden),`unsupported ranking/score property found: ${forbidden}`);

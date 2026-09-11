@@ -1,0 +1,19 @@
+[data-civilization-atlas-root]{border-top:1px solid var(--phi-border-subtle);background:linear-gradient(180deg,var(--phi-surface-subtle),var(--phi-surface-solid));}
+.civ-atlas-shell{padding-block:clamp(3rem,7vw,6rem);}
+.civ-atlas-shell__intro{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--phi-space-6);align-items:end;margin-bottom:var(--phi-space-8);}
+.civ-atlas-shell__intro h2{max-width:18ch;margin-bottom:var(--phi-space-3);}
+.civ-atlas-layout{display:grid;grid-template-columns:minmax(11rem,.22fr) minmax(0,1fr) minmax(13rem,.28fr);gap:var(--phi-space-4);align-items:start;}
+.civ-atlas-layers{display:grid;gap:var(--phi-space-2);position:sticky;top:var(--phi-space-4);}
+.civ-atlas-layer{display:flex;justify-content:space-between;gap:var(--phi-space-3);align-items:center;width:100%;padding:var(--phi-space-3) var(--phi-space-4);border:1px solid var(--phi-border-strong);border-radius:var(--phi-radius-md);background:var(--phi-surface-solid);color:var(--phi-text-primary);text-align:left;cursor:pointer;}
+.civ-atlas-layer small{font-family:var(--phi-font-mono);color:var(--phi-text-secondary);}
+.civ-atlas-layer:hover,.civ-atlas-layer:focus-visible{border-color:var(--phi-action-knowledge);}
+.civ-atlas-layer.is-active{box-shadow:inset 4px 0 0 var(--phi-action-knowledge);background:var(--phi-surface-subtle);}
+.civ-atlas-canvas,.civ-atlas-inspector{border:1px solid var(--phi-border-strong);border-radius:var(--phi-radius-lg);background:var(--phi-surface-solid);padding:clamp(var(--phi-space-5),4vw,var(--phi-space-8));}
+.civ-atlas-canvas{min-height:24rem;}
+.civ-atlas-empty{min-height:15rem;display:grid;place-items:center;align-content:center;text-align:center;gap:var(--phi-space-3);border:1px dashed var(--phi-border-strong);border-radius:var(--phi-radius-md);margin-top:var(--phi-space-6);padding:var(--phi-space-6);}
+.civ-atlas-empty>span{font-family:var(--phi-font-display);font-size:clamp(3rem,8vw,6rem);line-height:1;color:var(--phi-text-secondary);}
+.civ-atlas-empty p{max-width:42rem;margin:0;}.civ-atlas-empty small{max-width:38rem;color:var(--phi-text-secondary);}
+.civ-atlas-inspector dl{display:grid;gap:var(--phi-space-3);margin-bottom:0;}.civ-atlas-inspector dl>div{display:grid;gap:var(--phi-space-1);padding-block:var(--phi-space-2);border-bottom:1px solid var(--phi-border-subtle);}.civ-atlas-inspector dt{font-size:var(--phi-text-xs);text-transform:uppercase;letter-spacing:var(--phi-tracking-label);color:var(--phi-text-secondary);}.civ-atlas-inspector dd{margin:0;overflow-wrap:anywhere;}
+@media(max-width:1024px){.civ-atlas-layout{grid-template-columns:1fr}.civ-atlas-layers{position:static;display:flex;overflow-x:auto;padding-bottom:var(--phi-space-2);scroll-snap-type:x proximity}.civ-atlas-layer{min-width:10rem;scroll-snap-align:start}.civ-atlas-inspector{order:3}}
+@media(max-width:768px){.civ-atlas-shell__intro{grid-template-columns:1fr;align-items:start}.civ-atlas-canvas{min-height:20rem}.civ-atlas-inspector,.civ-atlas-canvas{padding:var(--phi-space-5)}}
+@media(prefers-reduced-motion:reduce){.civ-atlas-layers{scroll-behavior:auto}}

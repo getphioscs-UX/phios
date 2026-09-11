@@ -2343,7 +2343,11 @@
     "check:integrated-phase10": "npm run check:integrated-phase9 && npm run check:pvp-r1:method-phase10 && node scripts/check-integrated-successor-phase10.mjs",
     "check:book-v-atlas:r1:w1": "node scripts/check-book-v-civ-atlas-r1-w1-authority.mjs",
     "check:book-v-atlas:r1:w2": "node scripts/check-book-v-civ-atlas-r1-w2-schemas.mjs",
-    "check:book-v-atlas:r1:w0-w2": "npm run check:book-v-atlas:r1:w1 && npm run check:book-v-atlas:r1:w2"
+    "check:book-v-atlas:r1:w0-w2": "npm run check:book-v-atlas:r1:w1 && npm run check:book-v-atlas:r1:w2",
+    "check:book-v-atlas:r1:w3": "node scripts/check-book-v-civ-atlas-r1-w3-state.mjs",
+    "check:book-v-atlas:r1:w4": "node scripts/check-book-v-civ-atlas-r1-w4-shell.mjs",
+    "check:book-v-atlas:r1:w3-w4": "npm run check:book-v-atlas:r1:w3 && npm run check:book-v-atlas:r1:w4",
+    "check:book-v-atlas:r1:w0-w4": "npm run check:book-v-atlas:r1:w0-w2 && npm run check:book-v-atlas:r1:w3-w4"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
