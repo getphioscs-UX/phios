@@ -5,9 +5,10 @@ import {renderWorldSlice,renderWorldInspector} from './world-slice-renderer.js';
 import {renderTrajectories,renderTrajectoryInspector} from './trajectory-renderer.js';
 import {renderTransitions,renderTransitionInspector} from './transition-renderer.js';
 import {renderLossAtlas,renderLossInspector} from './loss-renderer.js';
+import {buildAtlasAskUrl} from './atlas-ask-context.js';
 const COPY={
-  en:{eyebrow:'Civilization Atlas Explorer',title:'Explore the world through seven lenses.',lead:'Move across time, cases, comparison, world slices, long trends, transitions, and reversal without losing your current context.',read:'Read the book',layers:'Atlas layers',inspector:'Current context',empty:'This layer shell is ready. Historical content is activated in its assigned Atlas wave.',evidence:'Evidence and unknown states stay explicit as each layer is activated.',open:'Open layer'},
-  'zh-Hans':{eyebrow:'文明图谱探索器',title:'用七种视角探索同一个文明现实。',lead:'在历史脊柱、文明案例、比较家族、世界横切面、长时段轨迹、转型窗口与逆转损失之间切换，同时保留当前 Context。',read:'阅读《世界如何分化》',layers:'图谱层',inspector:'当前 Context',empty:'这一层的探索外壳已经就绪；历史内容将在对应 Atlas 阶段正式激活。',evidence:'每一层正式激活时，证据状态与未知边界都会明确保留。',open:'打开图谱层'}
+  en:{ask:'Ask PHI OS about this',eyebrow:'Civilization Atlas Explorer',title:'Explore the world through seven lenses.',lead:'Move across time, cases, comparison, world slices, long trends, transitions, and reversal without losing your current context.',read:'Read the book',layers:'Atlas layers',inspector:'Current context',empty:'This layer shell is ready. Historical content is activated in its assigned Atlas wave.',evidence:'Evidence and unknown states stay explicit as each layer is activated.',open:'Open layer'},
+  'zh-Hans':{ask:'问 PHI OS 当前图谱',eyebrow:'文明图谱探索器',title:'用七种视角探索同一个文明现实。',lead:'在历史脊柱、文明案例、比较家族、世界横切面、长时段轨迹、转型窗口与逆转损失之间切换，同时保留当前 Context。',read:'阅读《世界如何分化》',layers:'图谱层',inspector:'当前 Context',empty:'这一层的探索外壳已经就绪；历史内容将在对应 Atlas 阶段正式激活。',evidence:'每一层正式激活时，证据状态与未知边界都会明确保留。',open:'打开图谱层'}
 };
 const LAYERS={timeline:{en:'Timeline','zh-Hans':'历史脊柱'},cases:{en:'Cases','zh-Hans':'文明案例'},comparison:{en:'Comparison','zh-Hans':'比较家族'},world:{en:'World Slices','zh-Hans':'世界横切面'},trajectories:{en:'Long Trends','zh-Hans':'长时段轨迹'},transitions:{en:'Transitions','zh-Hans':'转型窗口'},loss:{en:'Reversal & Loss','zh-Hans':'逆转与损失'}};
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
@@ -39,4 +40,6 @@ export function renderAtlasShell(root,state,{locale='en',data={},onLayerChange=(
   }else{
     content.innerHTML=`<div class="civ-atlas-empty"><span aria-hidden="true">Φ</span><p>${esc(c.empty)}</p><small>${esc(c.evidence)}</small></div>`;
   }
+  const askUrl=buildAtlasAskUrl(state,data,lang,globalThis.location?.href||'https://example.invalid/books/reality-differentiation/');
+  inspector.insertAdjacentHTML('beforeend',`<div class="civ-atlas-ask"><a class="knowledge-action" href="${esc(askUrl)}">${esc(c.ask)}</a><small>${esc(lang==='zh-Hans'?'只带入你当前选择的公开文明图谱 Context；它不会替答案预设结论。':'Only your current public Atlas context is carried forward; it does not pre-decide the answer.')}</small></div>`);
 }

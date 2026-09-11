@@ -22,10 +22,14 @@ const seeds={
 const manifest=json('content/civilization-atlas/atlas-manifest-v1.json'); if(manifest.status==='FOUNDATION'){for(const [name,items] of Object.entries(seeds)) assert.equal(items.length,0,`W2 foundation must not pre-execute later data population: ${name}`);}
 for(const p of Object.values(manifest.registryRefs)) assert.ok(fs.existsSync(path.join(root,p)),`missing manifest registry ref: ${p}`);
 const schemaFiles=pairs.map(x=>x[0]); assert.equal(new Set(schemaFiles).size,9);
-const raw=schemaFiles.concat(pairs.map(x=>x[1])).map(p=>fs.readFileSync(path.join(root,p),'utf8')).join('\n');
-for(const forbidden of ['"collapseScore"','"civilizationDeclineScore"','"totalLossScore"','"overallCivilizationScore"','"superiorityScore"']) assert.ok(!raw.includes(forbidden),`unsupported ranking/score property found: ${forbidden}`);
+const collectKeys=(value,out=new Set())=>{if(Array.isArray(value)){for(const item of value)collectKeys(item,out);return out;}if(value&&typeof value==='object'){for(const [key,item] of Object.entries(value)){out.add(key);collectKeys(item,out);}}return out;};
+const rankingForbidden=['collapseScore','civilizationDeclineScore','totalLossScore','overallCivilizationScore','superiorityScore'];
+const rankingScanPaths=schemaFiles.slice(1).concat(pairs.slice(1).map(x=>x[1]));
+const actualKeys=new Set();for(const p of rankingScanPaths)for(const key of collectKeys(json(p)))actualKeys.add(key);
+for(const forbidden of rankingForbidden) assert.ok(!actualKeys.has(forbidden),`unsupported ranking/score property found outside manifest boundary declaration: ${forbidden}`);
+assert.equal(manifest.boundaries.civilizationRankingScore,false,'manifest must keep civilization ranking disabled');assert.equal(manifest.boundaries.collapseScore,false,'manifest must keep collapse score disabled');assert.equal(manifest.boundaries.superiorityScore,false,'manifest must keep superiority score disabled');
 // Prove key negative boundaries are enforced by schemas, not comments only.
 const caseSchema=json(pairs[3][0]); const caseValidate=ajv.compile(caseSchema); const invalidCase={schemaVersion:'PHI-OS-BOOK-V-CIV-ATLAS-CASES-v1.0.0',version:'1.0.0',status:'FOUNDATION',cases:[{caseId:'CA-T09-01',title:{'zh-Hans':'示例',en:'Example'},collapseScore:87}]}; assert.equal(caseValidate(invalidCase),false,'case schema must reject score shortcut/underspecified case');
 const trajSchema=json(pairs[6][0]); const trajValidate=ajv.compile(trajSchema); const invalidTrajectory={schemaVersion:'PHI-OS-BOOK-V-CIV-ATLAS-TRAJECTORIES-v1.0.0',version:'1.0.0',status:'FOUNDATION',trajectories:[{trajectoryId:'TEST',title:{'zh-Hans':'测试',en:'Test'},description:{'zh-Hans':'测试',en:'Test'},authorityClass:'CONCEPTUAL_TRAJECTORY',unitMode:'ABSOLUTE_MEASURED'}]}; assert.equal(trajValidate(invalidTrajectory),false,'trajectory schema must reject incomplete authority presentation');
 console.log('✓ BOOK-V-CIV-ATLAS-R1-W2 Schemas & Registry Foundation passed.');
-console.log(`  ${pairs.length} schemas/registries validate; later layer registries remain intentionally empty until their assigned execution waves.`);
+console.log(`  ${pairs.length} schemas/registries validate; ranking/score shortcuts remain rejected while executed successor registries are allowed.`);

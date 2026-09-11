@@ -2376,7 +2376,10 @@
     "check:pvp-r1:static-assets:w31": "node scripts/check-pvp-r1-vis-w31-remote.mjs",
     "check:pvp-r1:static-assets:prepare": "npm run check:pvp-r1:static-assets:w29 && npm run check:pvp-r1:static-assets:w30 && node scripts/check-integrated-successor-phase12-preflight.mjs",
     "check:pvp-r1:static-assets": "node scripts/check-pvp-r1-vis-phase12-static-assets.mjs",
-    "check:integrated-phase12": "npm run check:integrated-phase11 && npm run check:pvp-r1:static-assets && node scripts/check-integrated-successor-phase12.mjs"
+    "check:integrated-phase12": "npm run check:integrated-phase11 && npm run check:pvp-r1:static-assets && node scripts/check-integrated-successor-phase12.mjs",
+    "check:book-v-atlas:r1:w12": "node scripts/check-book-v-civ-atlas-r1-w12-cross-layer.mjs",
+    "check:book-v-atlas:r1:w13": "node scripts/check-book-v-civ-atlas-r1-w13-contextual-ask.mjs",
+    "check:book-v-atlas:r1:w12-w13": "npm run check:book-v-atlas:r1:w12 && npm run check:book-v-atlas:r1:w13"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

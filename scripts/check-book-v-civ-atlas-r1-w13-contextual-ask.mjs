@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildAtlasAskContext,buildAtlasAskUrl} from '../assets/js/pages/civilization-atlas/atlas-ask-context.js';
+const json=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const read=p=>fs.readFileSync(p,'utf8');
+const data={cases:json('content/civilization-atlas/cases/civilization-case-registry-v1.json'),comparison:json('content/civilization-atlas/comparison/comparison-families-v1.json'),world:json('content/civilization-atlas/snapshots/world-snapshots-v1.json'),transitions:json('content/civilization-atlas/transitions/transition-windows-v1.json'),loss:json('content/civilization-atlas/loss/reversal-loss-atlas-v1.json')};
+const state={activeLayer:'comparison',primaryCaseId:'CA-T09-01',caseIds:['CA-T09-01'],snapshotId:'WS-1000',comparisonFamilyId:'COMMERCIAL_NETWORK',trajectoryIds:['URBAN_DENSITY'],transitionWindowId:null,lossTypeId:null,time:1000,regionIds:[],timeWindowId:null,lossFamilyId:null,evidenceClasses:[],compareBasket:[],caseSearch:'',locale:'en'};
+const ctx=buildAtlasAskContext(state,data,'en','https://getphios.com/books/reality-differentiation/?atlas=comparison#atlas');
+assert.equal(ctx.contextType,'KNOWLEDGE');assert.equal(ctx.contextRef,'BOOK:BOOK-5');assert.match(ctx.contextSummary,/CA-T09-01/);assert.match(ctx.contextSummary,/COMMERCIAL_NETWORK/);assert.match(ctx.readingPath,/BOOK-5 > PART-12 > ATLAS > comparison/);
+const href=buildAtlasAskUrl(state,data,'en','https://getphios.com/books/reality-differentiation/?atlas=comparison#atlas');
+const url=new URL(href,'https://getphios.com');assert.equal(url.pathname,'/knowledge/ask/');assert.equal(url.searchParams.get('contextType'),'KNOWLEDGE');assert.equal(url.searchParams.get('contextRef'),'BOOK:BOOK-5');assert.match(url.searchParams.get('contextSummary'),/Layer=comparison/);
+const client=read('assets/customer-ui/js/surfaces/contextual-ask.js');for(const marker of ['data-context-summary','data-reading-path','data-related-knowledge-ref','contextSummary:input.dataset.contextSummary','readingPath:input.dataset.readingPath'])assert.ok(client.includes(marker),`contextual Ask client missing Atlas seed marker ${marker}`);
+const api=read('functions/api/customer-contextual-ask.js');for(const marker of ['contextSummary:safePublicText','readingPath:safePublicText','relatedKnowledgeRef:isPublicKnowledgeContextRef'])assert.ok(api.includes(marker),`contextual Ask API missing bounded Atlas context field ${marker}`);
+const shell=read('assets/js/pages/civilization-atlas/atlas-shell.js');assert.match(shell,/buildAtlasAskUrl/);assert.match(shell,/Ask PHI OS about this/);assert.match(shell,/does not pre-decide the answer/);
+assert.equal(api.includes('BOOK_ATLAS'),false,'W13 must not create a second Ask entry surface/runtime');
+console.log('✓ BOOK-V-CIV-ATLAS-R1-W13 Contextual Ask Binding passed.');
+console.log('  Atlas context is carried as bounded public BOOK-5 knowledge context into the existing /knowledge/ask/ runtime; Context ≠ Answer.');
