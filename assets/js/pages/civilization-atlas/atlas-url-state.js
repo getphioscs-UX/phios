@@ -4,7 +4,7 @@ const PARAMS=Object.freeze({
   activeLayer:'atlas',time:'time',timeWindowId:'period',snapshotId:'snapshot',
   regionIds:'regions',caseIds:'cases',primaryCaseId:'case',comparisonFamilyId:'family',
   trajectoryIds:'trajectories',transitionWindowId:'tw',lossFamilyId:'lossFamily',
-  lossTypeId:'lossType',evidenceClasses:'evidence',compareBasket:'compare'
+  lossTypeId:'lossType',evidenceClasses:'evidence',compareBasket:'compare',caseSearch:'q'
 });
 const ARRAY_KEYS=new Set(['regionIds','caseIds','trajectoryIds','evidenceClasses','compareBasket']);
 const split=value=>value?value.split(',').map(v=>v.trim()).filter(Boolean):[];
@@ -40,6 +40,7 @@ export function atlasUrlFromState(urlLike,state,{includeHash=true}={}){
   set(PARAMS.lossTypeId,normalized.lossTypeId);
   set(PARAMS.evidenceClasses,normalized.evidenceClasses);
   set(PARAMS.compareBasket,normalized.compareBasket);
+  set(PARAMS.caseSearch,normalized.caseSearch);
   if(includeHash) url.hash='atlas';
   return url;
 }

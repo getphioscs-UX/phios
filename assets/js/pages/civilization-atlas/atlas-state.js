@@ -18,6 +18,7 @@ export const DEFAULT_ATLAS_STATE = Object.freeze({
   lossTypeId:null,
   evidenceClasses:[],
   compareBasket:[],
+  caseSearch:'',
   locale:'en'
 });
 
@@ -54,6 +55,7 @@ export function normalizeAtlasState(input={}){
     lossTypeId:asString(input.lossTypeId),
     evidenceClasses:asArray(input.evidenceClasses).filter(v=>EVIDENCE_CLASSES.has(v)),
     compareBasket,
+    caseSearch:typeof input.caseSearch==='string'?input.caseSearch.slice(0,120):'',
     locale
   };
 }
