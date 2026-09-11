@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const j=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const a=j('content/civilization-atlas/maintenance/book-v-civ-atlas-r1-m1-w0-baseline-reconciliation-v1.json');
+assert.equal(a.status,'RECONCILED');
+assert.equal(a.baselineCommit,'42324d1a3492f801d7de19758ea4c88f2f1ede42');
+assert.equal(a.findings.favicon.canonicalAssetCode,'LOGO-011');
+assert.equal(a.findings.favicon.canonicalFilename,'PHIOS-FAVICON-v1.svg');
+assert.equal(a.findings.bookVProjection.defect,'DISCOVERABILITY_DEFECT');
+assert.equal(a.findings.askChain.status,'IDENTIFIED_FOR_M1_W5_W6_NOT_MODIFIED_IN_W0_W2');
+console.log('✓ BOOK-V-CIV-ATLAS-R1-M1-W0 Baseline + Frozen R1 reconciliation passed.');

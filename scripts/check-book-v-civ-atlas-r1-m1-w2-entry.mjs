@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(p,'utf8');
+const page=read('books/reality-differentiation/index.html');
+const book=read('assets/js/pages/book-volume-seven.js');
+const atlas=read('assets/js/pages/civilization-atlas/atlas-shell.js');
+assert.match(page,/data-civilization-atlas-root/); assert.match(page,/id="atlas"/);
+assert.match(book,/阅读《世界如何分化》/); assert.match(book,/Read World Differentiation/); assert.match(book,/探索文明图谱/); assert.match(book,/Explore Civilization Atlas/);
+assert.match(book,/persistentAtlas/); assert.match(book,/hero\.insertAdjacentElement\('afterend', persistentAtlas\)/);
+for(const label of ['历史脊柱','文明案例','比较家族','世界横切面','长时段轨迹','转型窗口','逆转与损失']) assert.ok(atlas.includes(label),`missing public Atlas layer ${label}`);
+for(const forbidden of ['PRODUCTION_ADMITTED_FROZEN','Registry binding','runtime authority']) assert.ok(!page.includes(forbidden));
+console.log('✓ BOOK-V-CIV-ATLAS-R1-M1-W2 Book V Explorer Entry Recovery passed.');

@@ -54,9 +54,22 @@ assert.match(ask,/BOOK:BOOK-5|contextSummary|readingPath/);
 assert.ok(!fs.existsSync(path.join(root,'assets/js/pages/civilization-atlas/atlas-ask-runtime.js')),'parallel Atlas Ask runtime is prohibited');
 
 assert.equal(freeze.freezePolicy.silentInPlaceRewrite,false); assert.equal(freeze.freezePolicy.requiresSuccessorRecord,true); assert.equal(freeze.freezePolicy.mayCreateParallelAskRuntime,false); assert.equal(freeze.freezePolicy.mayCreateCivilizationRankingScore,false); assert.equal(freeze.freezePolicy.mayPromoteConceptualTrajectoryToMeasuredFact,false);
-for(const f of freeze.frozenFiles){assert.ok(fs.existsSync(path.join(root,f.path)),`frozen file missing: ${f.path}`);assert.equal(digest(f.path),f.sha256,`W16 frozen digest drift: ${f.path}`);}
+const maintenancePath='content/civilization-atlas/maintenance/book-v-civ-atlas-r1-m1-customer-projection-recovery-v1.json';
+const maintenance=fs.existsSync(path.join(root,maintenancePath))?json(maintenancePath):null;
+const authorizedMaintenance=new Map((maintenance?.authorizedFrozenPathChanges||[]).map(item=>[item.path,item]));
+for(const f of freeze.frozenFiles){
+  assert.ok(fs.existsSync(path.join(root,f.path)),`frozen file missing: ${f.path}`);
+  const current=digest(f.path);
+  if(current===f.sha256) continue;
+  const successor=authorizedMaintenance.get(f.path);
+  assert.ok(successor,`W16 frozen digest drift without maintenance successor: ${f.path}`);
+  assert.equal(successor.previousSha256,f.sha256,`maintenance predecessor digest mismatch: ${f.path}`);
+  assert.equal(successor.successorSha256,current,`maintenance successor digest mismatch: ${f.path}`);
+  assert.ok(freeze.freezePolicy.allowedChangeClasses.includes(successor.changeClass),`maintenance change class not allowed: ${f.path}`);
+}
 
 console.log('✓ BOOK-V-CIV-ATLAS-R1-W16 Production Admission + Freeze passed.');
 console.log('  W15 human acceptance is explicit; 20/120/6/15/16/32/24 registry surface admitted.');
 console.log(`  ${freeze.frozenFiles.length} authority/runtime/customer files are digest-frozen.`);
+if(maintenance) console.log(`  Authorized maintenance successor: ${maintenance.work} · ${maintenance.status}.`);
 console.log('  Future substantive changes require a versioned successor / maintenance record.');

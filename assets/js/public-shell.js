@@ -1,4 +1,5 @@
 import { resolvePublicAssetForWeb } from './runtime/web-production/asset-resolver.js';
+import { ensureCanonicalPhiosFavicon } from './branding/favicon-authority.js';
 
 import {
   initializeI18n,
@@ -313,6 +314,8 @@ function bindMobileNavigation(header) {
 
 
 async function hydratePublicBranding() {
+  // Seed the verified canonical favicon before async registry hydration so browser chrome never falls back to the legacy generic phi mark.
+  ensureCanonicalPhiosFavicon();
   const logoTargets = [...document.querySelectorAll('[data-public-brand-asset]')];
 
   await Promise.all(logoTargets.map(async image => {
@@ -333,17 +336,10 @@ async function hydratePublicBranding() {
   try {
     const favicon = await resolvePublicAssetForWeb('LOGO-011', { surface: 'BROWSER_CHROME' });
     if (!favicon?.renderable) return;
-    let link = document.querySelector('link[rel="icon"][data-phios-branding]');
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      link.dataset.phiosBranding = 'true';
-      document.head.append(link);
-    }
-    link.type = favicon.contentType || 'image/svg+xml';
-    link.href = favicon.src;
+    const link = ensureCanonicalPhiosFavicon(favicon.src);
+    if (link) link.type = favicon.contentType || 'image/svg+xml';
   } catch {
-    // Browser keeps its existing/default favicon until LOGO-011 is verified.
+    // The verified canonical fallback remains in place if runtime resolution is temporarily unavailable.
   }
 
   try {
@@ -363,6 +359,8 @@ async function hydratePublicBranding() {
     // App-install chrome remains fail-closed until LOGO-012 is verified.
   }
 }
+
+ensureCanonicalPhiosFavicon();
 
 export function initializePublicShell() {
   const header = replaceOrInsert(

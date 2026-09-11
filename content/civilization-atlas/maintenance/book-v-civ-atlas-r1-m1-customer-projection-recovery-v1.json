@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "PHI-OS-BOOK-V-CIV-ATLAS-R1-M1-MAINTENANCE-v1.0.0",
+  "work": "BOOK-V-CIV-ATLAS-R1-M1",
+  "baselineCommit": "42324d1a3492f801d7de19758ea4c88f2f1ede42",
+  "status": "IN_PROGRESS_W0_W2_COMPLETE",
+  "previousFreeze": "content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json",
+  "completedWaves": [
+    "M1-W0",
+    "M1-W1",
+    "M1-W2"
+  ],
+  "defects": [
+    "LEGACY_FAVICON_BROWSER_CHROME",
+    "ATLAS_DISCOVERABILITY_DEFECT"
+  ],
+  "faviconRecovery": {
+    "assetCode": "LOGO-011",
+    "filename": "PHIOS-FAVICON-v1.svg",
+    "sharedAuthorityModule": "assets/js/branding/favicon-authority.js",
+    "criticalFirstPaintConsumers": [
+      "knowledge/ask/index.html",
+      "books/reality-differentiation/index.html"
+    ]
+  },
+  "explorerEntryRecovery": {
+    "route": "/books/reality-differentiation/",
+    "readEntry": "#book-parts",
+    "exploreEntry": "#atlas",
+    "atlasPlacement": "DIRECTLY_AFTER_BOOK_HERO_BEFORE_PARTS_AFTER_RENDER"
+  },
+  "askRecovery": "DEFERRED_TO_M1_W5_W6",
+  "authorizedFrozenPathChanges": [
+    {
+      "path": "books/reality-differentiation/index.html",
+      "previousSha256": "dead54f95ffae15b87d26b70130b77f6ce1839c5ef234af75ecaeeadf3b3437f",
+      "successorSha256": "6f803eb1e8112f9f9992acddfc212e5e52be13d878dd61a44476034de46f4f4a",
+      "changeClass": "BUG_FIX_WITH_FREEZE_SUCCESSOR"
+    }
+  ],
+  "boundaries": {
+    "r1CanonicalTheoryUnchanged": true,
+    "registriesUnchanged": true,
+    "noNewRuntime": true,
+    "noNewAskRuntime": true
+  }
+}

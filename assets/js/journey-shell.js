@@ -1,4 +1,5 @@
 import { resolvePublicAssetForWeb } from './runtime/web-production/asset-resolver.js';
+import { ensureCanonicalPhiosFavicon } from './branding/favicon-authority.js';
 
 import {
   initializeI18n,
@@ -208,23 +209,17 @@ async function hydrateJourneyBrandImage(image) {
 }
 
 async function hydrateJourneyFavicon() {
+  ensureCanonicalPhiosFavicon(undefined, { marker: 'data-phios-journey-branding' });
   try {
     const favicon = await resolvePublicAssetForWeb(JOURNEY_FAVICON_ASSET_CODE, {
       surface: 'REALITY_JOURNEY_BROWSER_CHROME'
     });
     if (!favicon?.renderable) return;
 
-    let link = document.querySelector('link[rel="icon"][data-phios-journey-branding]');
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      link.dataset.phiosJourneyBranding = 'true';
-      document.head.append(link);
-    }
-    link.type = favicon.contentType || 'image/svg+xml';
-    link.href = favicon.src;
+    const link = ensureCanonicalPhiosFavicon(favicon.src, { marker: 'data-phios-journey-branding' });
+    if (link) link.type = favicon.contentType || 'image/svg+xml';
   } catch {
-    // Fail closed to browser default / existing icon.
+    // Keep the verified canonical fallback if runtime resolution is temporarily unavailable.
   }
 }
 

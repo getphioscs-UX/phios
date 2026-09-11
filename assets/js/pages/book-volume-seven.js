@@ -62,7 +62,9 @@ async function render() {
     const bookOneActions = bookId === 'book-1'
       ? `<a class="knowledge-action knowledge-action--primary" href="/checkout">${escapeHtml(t('knowledge.production.bookOnePurchase'))}</a>
          <a class="knowledge-action" href="/book-one-preview">${escapeHtml(t('knowledge.production.bookOnePreview'))}</a>`
-      : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
+      : bookId === 'book-5'
+        ? `<a class="knowledge-action knowledge-action--primary" href="#book-parts">${escapeHtml(locale==='zh-Hans'?'阅读《世界如何分化》':'Read World Differentiation')}</a>`
+        : `<span class="wpr-status">${escapeHtml(t('knowledge.production.futureVolumeBoundary'))}</span>`;
     const askHref = buildCkaEntryHref({
       entrySurface: 'BOOK',
       contextType: 'CANONICAL_VOLUME',
@@ -75,8 +77,11 @@ async function render() {
     });
     const askLabel = ckaEntryLabel('BOOK', locale);
     const atlasAction = bookId === 'book-5'
-      ? `<a class="knowledge-action knowledge-action--primary" href="#atlas">${escapeHtml(locale==='zh-Hans'?'探索文明图谱':'Explore the Atlas')}</a>`
+      ? `<a class="knowledge-action knowledge-action--primary" href="#atlas">${escapeHtml(locale==='zh-Hans'?'探索文明图谱':'Explore Civilization Atlas')}</a>`
       : '';
+
+    const persistentAtlas = bookId === 'book-5' ? document.querySelector('[data-civilization-atlas-root]') : null;
+    if (persistentAtlas && root.contains(persistentAtlas)) root.insertAdjacentElement('afterend', persistentAtlas);
 
     root.innerHTML = `
       <section class="knowledge-hero wpr-book-hero wpr-volume-${escapeHtml(book.volume)}">
@@ -101,6 +106,11 @@ async function render() {
         </div>
       </section>
     `;
+
+    if (persistentAtlas) {
+      const hero = root.querySelector('.wpr-book-hero');
+      if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);
+    }
   } catch {
     root.innerHTML = `<section class="knowledge-section"><div class="knowledge-shell"><p>${escapeHtml(t('knowledge.production.sourceUnavailable'))}</p></div></section>`;
   }
