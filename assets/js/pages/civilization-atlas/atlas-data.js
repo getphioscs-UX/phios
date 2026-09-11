@@ -13,5 +13,3 @@ export async function loadTransitionRegistry(){return getJson('/content/civiliza
 export async function loadLossRegistry(){return getJson('/content/civilization-atlas/loss/reversal-loss-atlas-v1.json');}
 export async function loadAtlasLayers(){return getJson('/content/civilization-atlas/atlas-layers-v1.json');}
 export function clearAtlasDataCache(){CACHE.clear();}
-
-export async function loadAtlasVisualProjection(){return getJson('/content/civilization-atlas/visuals/atlas-visual-projection-v1.json');}

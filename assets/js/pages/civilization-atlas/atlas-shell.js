@@ -7,10 +7,10 @@ import {renderTransitions,renderTransitionInspector} from './transition-renderer
 import {renderLossAtlas,renderLossInspector} from './loss-renderer.js';
 import {buildAtlasAskUrl} from './atlas-ask-context.js';
 import {wireAtlasKeyboardNavigation,ensureAtlasInteractiveNames} from './atlas-accessibility.js';
-import {renderAtlasVisualProjection} from './atlas-visual-projection.js';
+import {renderStructuredAtlasVisual} from './atlas-structured-visual.js';
 const COPY={
-  en:{context:'Current Atlas context',clear:'Clear context',skip:'Skip to Atlas content',ask:'Ask PHI OS about this',eyebrow:'Civilization Atlas Explorer',title:'Explore the world through seven lenses.',lead:'Move across time, cases, comparison, world slices, long trends, transitions, and reversal without losing your current context.',read:'Read the book',layers:'Atlas layers',inspector:'Current context',empty:'This layer shell is ready. Historical content is activated in its assigned Atlas wave.',evidence:'Evidence and unknown states stay explicit as each layer is activated.',open:'Open layer'},
-  'zh-Hans':{context:'当前图谱情境',clear:'清除情境',skip:'跳到图谱内容',ask:'问 PHI OS 当前图谱',eyebrow:'文明图谱探索器',title:'用七种视角探索同一个文明现实。',lead:'在历史脊柱、文明案例、比较家族、世界横切面、长时段轨迹、转型窗口与逆转损失之间切换，同时保留当前 Context。',read:'阅读《世界如何分化》',layers:'图谱层',inspector:'当前 Context',empty:'这一层的探索外壳已经就绪；历史内容将在对应 Atlas 阶段正式激活。',evidence:'每一层正式激活时，证据状态与未知边界都会明确保留。',open:'打开图谱层'}
+  en:{context:'Current Atlas context',skip:'Skip to Atlas content',ask:'Ask PHI OS about this',eyebrow:'Civilization Atlas Explorer',title:'Explore the world through seven lenses.',lead:'Move across time, cases, comparison, world slices, long trends, transitions, and reversal without losing your current context.',read:'Read the book',layers:'Atlas layers',inspector:'Current context',empty:'This layer shell is ready. Historical content is activated in its assigned Atlas wave.',evidence:'Evidence and unknown states stay explicit as each layer is activated.',open:'Open layer'},
+  'zh-Hans':{context:'当前图谱情境',skip:'跳到图谱内容',ask:'问 PHI OS 当前图谱',eyebrow:'文明图谱探索器',title:'用七种视角探索同一个文明现实。',lead:'在历史脊柱、文明案例、比较家族、世界横切面、长时段轨迹、转型窗口与逆转损失之间切换，同时保留当前 Context。',read:'阅读《世界如何分化》',layers:'图谱层',inspector:'当前 Context',empty:'这一层的探索外壳已经就绪；历史内容将在对应 Atlas 阶段正式激活。',evidence:'每一层正式激活时，证据状态与未知边界都会明确保留。',open:'打开图谱层'}
 };
 const LAYERS={timeline:{en:'Timeline','zh-Hans':'历史脊柱'},cases:{en:'Cases','zh-Hans':'文明案例'},comparison:{en:'Comparison','zh-Hans':'比较家族'},world:{en:'World Slices','zh-Hans':'世界横切面'},trajectories:{en:'Long Trends','zh-Hans':'长时段轨迹'},transitions:{en:'Transitions','zh-Hans':'转型窗口'},loss:{en:'Reversal & Loss','zh-Hans':'逆转与损失'}};
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
@@ -24,12 +24,12 @@ export function renderAtlasShell(root,state,{locale='en',data={},onLayerChange=(
   ${state.transitionWindowId?`<span><strong>${lang==='zh-Hans'?'转型':'Transition'}</strong> ${esc(state.transitionWindowId)}</span>`:''}
   ${state.lossTypeId?`<span><strong>${lang==='zh-Hans'?'损失':'Loss'}</strong> ${esc(state.lossTypeId)}</span>`:''}
 </div>
-<div data-atlas-visual-projection></div>
+<div data-atlas-structured-visual></div>
 <div data-atlas-layer-content></div></section><aside class="civ-atlas-inspector" aria-labelledby="civ-atlas-inspector-title" data-atlas-inspector><h3 id="civ-atlas-inspector-title">${esc(c.inspector)}</h3><dl><div><dt>Layer</dt><dd>${esc(LAYERS[state.activeLayer]?.[lang]||state.activeLayer)}</dd></div>${state.time!==null?`<div><dt>Time</dt><dd>${esc(state.time)}</dd></div>`:''}${state.primaryCaseId?`<div><dt>Case</dt><dd>${esc(state.primaryCaseId)}</dd></div>`:''}</dl></aside></div></div>`;
   root.querySelectorAll('[data-atlas-layer]').forEach(button=>button.addEventListener('click',()=>onLayerChange(button.dataset.atlasLayer)));
   wireAtlasKeyboardNavigation(root,{onLayerActivate:id=>{if(id&&id!==state.activeLayer)onLayerChange(id);}});
   const content=root.querySelector('[data-atlas-layer-content]'); const inspector=root.querySelector('[data-atlas-inspector]');
-  renderAtlasVisualProjection(root.querySelector('[data-atlas-visual-projection]'),{projection:data.visuals,state,locale:lang});
+  renderStructuredAtlasVisual(root.querySelector('[data-atlas-structured-visual]'),{data,state,locale:lang,onStateChange});
   if(state.activeLayer==='timeline'&&data.timeline){
     renderTimeline(content,{registry:data.timeline,state,locale:lang,onPeriodSelect:p=>onStateChange({timeWindowId:p.periodId,time:p.startYear,caseIds:p.caseIds||[],primaryCaseId:p.caseIds?.[0]||null},{source:'timeline-period'}),onCaseSelect:id=>onStateChange({activeLayer:'cases',primaryCaseId:id,caseIds:[id]},{source:'timeline-case'})});
   }else if(state.activeLayer==='cases'&&data.cases){
