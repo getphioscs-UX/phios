@@ -10,6 +10,10 @@ assert.equal(x.selectedAssets.length,12);
 assert.equal(new Set(x.selectedAssets.map(a=>a.assetId)).size,x.selectedAssets.length,'duplicate static asset selection');
 for(const k of ['HERO','LOGO','ILLUSTRATION','ICON','BACKGROUND'])assert.equal(x.categoryCoverage[k],true,`missing W29 category ${k}`);
 for(const id of ['VIS-TEX-001','VIS-TEX-002','VIS-TEX-003','VIS-TEX-004','VIS-DEC-001','VIS-DEC-002','VIS-DEC-003','VIS-DEC-004'])assert.ok(x.selectedAssets.some(a=>a.assetId===id),`missing master static asset ${id}`);
+const ill=x.selectedAssets.find(a=>a.assetId==='ILL-001');assert.equal(ill.objectKey,'images/illustrations/PHIOS-ILLUSTRATION-LIBRARY-KNOWLEDGE-LANDSCAPE-v1.webp');
+for(const id of ['VIS-TEX-001','VIS-TEX-002','VIS-TEX-003','VIS-TEX-004','VIS-DEC-001','VIS-DEC-002','VIS-DEC-003','VIS-DEC-004']){const a=x.selectedAssets.find(v=>v.assetId===id);assert.match(a.objectKey,/^images\/background\/PHI-OS-[A-Z0-9-]+\.webp$/);assert.ok(!a.objectKey.includes('-v1.webp'),`background path must use owner R2 filename ${id}`)}
+assert.equal(x.pathReconciliation?.status,'OWNER_R2_PATH_CONFIRMED_PENDING_W31_REVERIFY');
+assert.ok(fs.existsSync(x.pathReconciliation.ref),'W31 path reconciliation record missing');
 assert.equal(x.selectionPolicy.productSpecificPaidBackgroundsCreated,false);
 assert.equal(x.boundaries.upstreamAssetIdentityMutated,false);
 assert.equal(x.boundaries.ownerUploadClaimTreatedAsRemoteVerification,false);

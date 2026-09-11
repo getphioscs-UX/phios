@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+const readJson=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const assert=(v,m)=>{if(!v)throw new Error(m)};
+
+const layers=readJson('content/civilization-atlas/atlas-layers-v1.json');
+const reg=readJson('content/civilization-atlas/loss/reversal-loss-atlas-v1.json');
+assert(layers.explorerLayers.find(x=>x.layerId==='loss')?.customerEnabled===true,'W11_LOSS_NOT_ENABLED');
+assert(reg.status==='ACTIVE','W11_REGISTRY_NOT_ACTIVE');
+assert(reg.families.length===6,'W11_FAMILIES_MUST_HAVE_6');
+assert(reg.lossTypes.length===24,'W11_LOSS_TYPES_MUST_HAVE_24');
+assert(reg.caseProfiles.length===6,'W11_CASE_VERTICAL_SLICE_MUST_HAVE_6');
+assert(new Set(reg.lossTypes.map(x=>x.lossTypeId)).size===24,'W11_DUPLICATE_LOSS_TYPE');
+const txt=JSON.stringify(reg);
+assert(!/collapseScore|declineScore|civilizationScore|overallScore|superiorityRank/i.test(txt),'W11_FORBIDDEN_TOTAL_SCORE');
+assert(reg.lossTypes.some(x=>x.lossTypeId==='LOSS-PARTIAL-CONTINUATION'),'W11_CONTINUATION_TYPE_MISSING');
+assert(reg.lossTypes.some(x=>x.lossTypeId==='LOSS-LEGACY-IN-NEW-SYSTEMS'),'W11_SUCCESSOR_LEGACY_TYPE_MISSING');
+console.log('✓ BOOK-V-CIV-ATLAS-R1-W11 Reversal & Loss Atlas passed.');

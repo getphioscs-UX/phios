@@ -1,8 +1,647 @@
 {
   "schemaVersion": "PHI-OS-BOOK-V-CIV-ATLAS-LOSS-v1.0.0",
   "version": "1.0.0",
-  "status": "FOUNDATION",
-  "families": [],
-  "lossTypes": [],
-  "caseProfiles": []
+  "status": "ACTIVE",
+  "families": [
+    {
+      "familyId": "POLITICAL_BOUNDARY",
+      "title": {
+        "zh-Hans": "政治与边界",
+        "en": "Political & Boundary"
+      },
+      "description": {
+        "zh-Hans": "政权、主权、领土与边界位置的变化。",
+        "en": "Changes in regime, sovereignty, territory, and boundary position."
+      }
+    },
+    {
+      "familyId": "POPULATION_URBAN",
+      "title": {
+        "zh-Hans": "人口与城市",
+        "en": "Population & Urban"
+      },
+      "description": {
+        "zh-Hans": "人口基础、城市密度与聚落网络的收缩或重组。",
+        "en": "Contraction or reorganization of population, urban density, and settlement networks."
+      }
+    },
+    {
+      "familyId": "KNOWLEDGE_INSTITUTIONAL",
+      "title": {
+        "zh-Hans": "知识与制度",
+        "en": "Knowledge & Institutional"
+      },
+      "description": {
+        "zh-Hans": "制度、教育、知识复制与专业群体的损失。",
+        "en": "Loss in institutions, education, knowledge transmission, and professional groups."
+      }
+    },
+    {
+      "familyId": "NETWORK_INFRASTRUCTURE",
+      "title": {
+        "zh-Hans": "网络与基础设施",
+        "en": "Network & Infrastructure"
+      },
+      "description": {
+        "zh-Hans": "交通、贸易、通信与基础设施网络的中断或退化。",
+        "en": "Disruption or degradation of transport, trade, communication, and infrastructure."
+      }
+    },
+    {
+      "familyId": "MEANING_IDENTITY_CARRIER",
+      "title": {
+        "zh-Hans": "意义、身份与载体",
+        "en": "Meaning, Identity & Carrier"
+      },
+      "description": {
+        "zh-Hans": "宗教、文化、语言、身份与核心承载体的变化。",
+        "en": "Changes in religion, culture, language, identity, and key carriers."
+      }
+    },
+    {
+      "familyId": "SUCCESSION_ABSORPTION_FUTURE",
+      "title": {
+        "zh-Hans": "继任、吸收与未来",
+        "en": "Succession, Absorption & Future"
+      },
+      "description": {
+        "zh-Hans": "旧结构被吸收、转型、部分延续或压缩未来空间。",
+        "en": "Absorption, transformation, partial continuation, or compression of future option space."
+      }
+    }
+  ],
+  "lossTypes": [
+    {
+      "lossTypeId": "LOSS-REGIME-END",
+      "familyId": "POLITICAL_BOUNDARY",
+      "title": {
+        "zh-Hans": "政权终止",
+        "en": "Regime End"
+      },
+      "definition": {
+        "zh-Hans": "政权终止描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Regime End describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-TERRITORIAL-CONTRACTION",
+      "familyId": "POLITICAL_BOUNDARY",
+      "title": {
+        "zh-Hans": "领土收缩",
+        "en": "Territorial Contraction"
+      },
+      "definition": {
+        "zh-Hans": "领土收缩描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Territorial Contraction describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-SOVEREIGNTY-LOSS",
+      "familyId": "POLITICAL_BOUNDARY",
+      "title": {
+        "zh-Hans": "主权丧失",
+        "en": "Loss of Sovereignty"
+      },
+      "definition": {
+        "zh-Hans": "主权丧失描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Loss of Sovereignty describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-BOUNDARY-RECONFIGURATION",
+      "familyId": "POLITICAL_BOUNDARY",
+      "title": {
+        "zh-Hans": "边界重塑",
+        "en": "Boundary Reconfiguration"
+      },
+      "definition": {
+        "zh-Hans": "边界重塑描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Boundary Reconfiguration describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-POPULATION-DECLINE",
+      "familyId": "POPULATION_URBAN",
+      "title": {
+        "zh-Hans": "人口下降",
+        "en": "Population Decline"
+      },
+      "definition": {
+        "zh-Hans": "人口下降描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Population Decline describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-URBAN-DECLINE",
+      "familyId": "POPULATION_URBAN",
+      "title": {
+        "zh-Hans": "城市衰退",
+        "en": "Urban Decline"
+      },
+      "definition": {
+        "zh-Hans": "城市衰退描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Urban Decline describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-SETTLEMENT-NETWORK-BREAKDOWN",
+      "familyId": "POPULATION_URBAN",
+      "title": {
+        "zh-Hans": "聚落网络破碎",
+        "en": "Settlement Network Breakdown"
+      },
+      "definition": {
+        "zh-Hans": "聚落网络破碎描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Settlement Network Breakdown describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-DEMOGRAPHIC-TRANSFORMATION",
+      "familyId": "POPULATION_URBAN",
+      "title": {
+        "zh-Hans": "人口结构变迁",
+        "en": "Demographic Transformation"
+      },
+      "definition": {
+        "zh-Hans": "人口结构变迁描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Demographic Transformation describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-INSTITUTIONAL-BREAKDOWN",
+      "familyId": "KNOWLEDGE_INSTITUTIONAL",
+      "title": {
+        "zh-Hans": "制度瓦解",
+        "en": "Institutional Breakdown"
+      },
+      "definition": {
+        "zh-Hans": "制度瓦解描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Institutional Breakdown describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-KNOWLEDGE-TRANSMISSION-LOSS",
+      "familyId": "KNOWLEDGE_INSTITUTIONAL",
+      "title": {
+        "zh-Hans": "知识传承中断",
+        "en": "Knowledge Transmission Loss"
+      },
+      "definition": {
+        "zh-Hans": "知识传承中断描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Knowledge Transmission Loss describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-EDUCATION-DECLINE",
+      "familyId": "KNOWLEDGE_INSTITUTIONAL",
+      "title": {
+        "zh-Hans": "教育体系衰退",
+        "en": "Decline of Education System"
+      },
+      "definition": {
+        "zh-Hans": "教育体系衰退描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Decline of Education System describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-PROFESSIONAL-CLASS-LOSS",
+      "familyId": "KNOWLEDGE_INSTITUTIONAL",
+      "title": {
+        "zh-Hans": "专业阶层消失",
+        "en": "Loss of Professional Class"
+      },
+      "definition": {
+        "zh-Hans": "专业阶层消失描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Loss of Professional Class describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-TRANSPORT-NETWORK-LOSS",
+      "familyId": "NETWORK_INFRASTRUCTURE",
+      "title": {
+        "zh-Hans": "交通网络崩解",
+        "en": "Transport Network Loss"
+      },
+      "definition": {
+        "zh-Hans": "交通网络崩解描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Transport Network Loss describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-TRADE-SYSTEM-DISRUPTION",
+      "familyId": "NETWORK_INFRASTRUCTURE",
+      "title": {
+        "zh-Hans": "贸易体系中断",
+        "en": "Trade System Disruption"
+      },
+      "definition": {
+        "zh-Hans": "贸易体系中断描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Trade System Disruption describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-COMMUNICATION-BREAKDOWN",
+      "familyId": "NETWORK_INFRASTRUCTURE",
+      "title": {
+        "zh-Hans": "通信连接断裂",
+        "en": "Communication Breakdown"
+      },
+      "definition": {
+        "zh-Hans": "通信连接断裂描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Communication Breakdown describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-INFRASTRUCTURE-ABANDONMENT",
+      "familyId": "NETWORK_INFRASTRUCTURE",
+      "title": {
+        "zh-Hans": "基础设施废弃",
+        "en": "Infrastructure Abandonment"
+      },
+      "definition": {
+        "zh-Hans": "基础设施废弃描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Infrastructure Abandonment describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-RELIGIOUS-TRANSFORMATION",
+      "familyId": "MEANING_IDENTITY_CARRIER",
+      "title": {
+        "zh-Hans": "宗教体系变迁",
+        "en": "Religious Transformation"
+      },
+      "definition": {
+        "zh-Hans": "宗教体系变迁描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Religious Transformation describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-CULTURAL-DISCONTINUITY",
+      "familyId": "MEANING_IDENTITY_CARRIER",
+      "title": {
+        "zh-Hans": "文化传统中断",
+        "en": "Cultural Discontinuity"
+      },
+      "definition": {
+        "zh-Hans": "文化传统中断描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Cultural Discontinuity describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-LANGUAGE-DECLINE",
+      "familyId": "MEANING_IDENTITY_CARRIER",
+      "title": {
+        "zh-Hans": "语言使用衰退",
+        "en": "Language Decline"
+      },
+      "definition": {
+        "zh-Hans": "语言使用衰退描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Language Decline describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-IDENTITY-RECONFIGURATION",
+      "familyId": "MEANING_IDENTITY_CARRIER",
+      "title": {
+        "zh-Hans": "身份认同转化",
+        "en": "Identity Reconfiguration"
+      },
+      "definition": {
+        "zh-Hans": "身份认同转化描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Identity Reconfiguration describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-ABSORPTION-BY-OTHERS",
+      "familyId": "SUCCESSION_ABSORPTION_FUTURE",
+      "title": {
+        "zh-Hans": "被其他文明吸收",
+        "en": "Absorption by Others"
+      },
+      "definition": {
+        "zh-Hans": "被其他文明吸收描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Absorption by Others describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-PARTIAL-CONTINUATION",
+      "familyId": "SUCCESSION_ABSORPTION_FUTURE",
+      "title": {
+        "zh-Hans": "部分延续存在",
+        "en": "Partial Continuation"
+      },
+      "definition": {
+        "zh-Hans": "部分延续存在描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Partial Continuation describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-FORM-TRANSFORMATION",
+      "familyId": "SUCCESSION_ABSORPTION_FUTURE",
+      "title": {
+        "zh-Hans": "形态转化",
+        "en": "Transformation of Form"
+      },
+      "definition": {
+        "zh-Hans": "形态转化描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Transformation of Form describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    },
+    {
+      "lossTypeId": "LOSS-LEGACY-IN-NEW-SYSTEMS",
+      "familyId": "SUCCESSION_ABSORPTION_FUTURE",
+      "title": {
+        "zh-Hans": "遗产进入新系统",
+        "en": "Legacy in New Systems"
+      },
+      "definition": {
+        "zh-Hans": "遗产进入新系统描述文明在该维度上的位置变化，不等同于整体文明崩塌。",
+        "en": "Legacy in New Systems describes a positional change in this dimension, not total civilizational collapse."
+      },
+      "positionShift": {
+        "zh-Hans": "从原有能力、范围或承载位置向较低、不同或继任位置移动。",
+        "en": "Movement from the former capacity, reach, or carrier position toward a reduced, altered, or successor position."
+      },
+      "evidenceRequirements": [],
+      "exampleCaseIds": [],
+      "relatedCanonicalNodes": []
+    }
+  ],
+  "caseProfiles": [
+    {
+      "caseId": "CA-T06-02",
+      "lossTypeId": "LOSS-REGIME-END",
+      "status": "OBSERVED",
+      "strengthLabel": "EXTENSIVE",
+      "evidenceRefs": [],
+      "interpretation": {
+        "zh-Hans": "西罗马中央政治载体终止，但罗马法律、宗教与城市遗产并未同时消失。",
+        "en": "The western Roman central political carrier ended while legal, religious, and urban legacies continued."
+      },
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "caseId": "CA-T02-01",
+      "lossTypeId": "LOSS-FORM-TRANSFORMATION",
+      "status": "RECONSTRUCTED",
+      "strengthLabel": "MATERIAL",
+      "evidenceRefs": [],
+      "interpretation": {
+        "zh-Hans": "苏美尔多城市政治形态被后续两河体系重组，但文字、城市与制度传统继续进入继任结构。",
+        "en": "Sumerian polycentric political forms were reorganized by later Mesopotamian systems while writing, urban, and institutional traditions continued."
+      },
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "caseId": "CA-T09-01",
+      "lossTypeId": "LOSS-PARTIAL-CONTINUATION",
+      "status": "RECONSTRUCTED",
+      "strengthLabel": "MATERIAL",
+      "evidenceRefs": [],
+      "interpretation": {
+        "zh-Hans": "宋代政治形式结束后，商业、知识、制度与技术能力并未全部归零，而进入后续中国 Runtime。",
+        "en": "After the Song political form ended, commercial, knowledge, institutional, and technical capacities continued into successor Chinese runtimes."
+      },
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "caseId": "CA-T08-06",
+      "lossTypeId": "LOSS-LEGACY-IN-NEW-SYSTEMS",
+      "status": "RECONSTRUCTED",
+      "strengthLabel": "MATERIAL",
+      "evidenceRefs": [],
+      "interpretation": {
+        "zh-Hans": "阿拔斯中央政治权力衰退后，伊斯兰知识、宗教与商业网络继续跨政治载体存在。",
+        "en": "After Abbasid central political power declined, Islamic knowledge, religious, and commercial networks continued across political carriers."
+      },
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "caseId": "CA-T10-06",
+      "lossTypeId": "LOSS-TERRITORIAL-CONTRACTION",
+      "status": "RECONSTRUCTED",
+      "strengthLabel": "MATERIAL",
+      "evidenceRefs": [],
+      "interpretation": {
+        "zh-Hans": "马里政治控制与贸易中心地位发生收缩与迁移，但区域文化与伊斯兰知识网络继续。",
+        "en": "Mali's political reach and trade-center position contracted and shifted while regional culture and Islamic knowledge networks continued."
+      },
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "caseId": "CA-T13-01",
+      "lossTypeId": "LOSS-FORM-TRANSFORMATION",
+      "status": "OBSERVED",
+      "strengthLabel": "MATERIAL",
+      "evidenceRefs": [],
+      "interpretation": {
+        "zh-Hans": "英国工业—帝国形态后来发生大规模转型，部分制度、金融、语言与网络能力进入新的国际结构。",
+        "en": "Britain's industrial-imperial form later transformed substantially while institutional, financial, linguistic, and network capacities entered new international structures."
+      },
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    }
+  ]
 }

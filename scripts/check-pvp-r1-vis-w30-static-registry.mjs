@@ -14,8 +14,12 @@ assert.equal(x.backgroundBindings.length,8);
 assert.equal(x.coverage.selectedCount,12);
 assert.equal(x.coverage.allRequestedCategoriesBound,true);
 assert.equal(x.coverage.allEightMasterBackgroundsBound,true);
+const ill=x.existingRepresentativeBindings.find(a=>a.assetId==='ILL-001');assert.equal(ill.objectKey,'images/illustrations/PHIOS-ILLUSTRATION-LIBRARY-KNOWLEDGE-LANDSCAPE-v1.webp');
+assert.equal(x.pathReconciliation?.status,'OWNER_R2_PATH_CONFIRMED_PENDING_W31_REVERIFY');
+assert.ok(fs.existsSync(x.pathReconciliation.ref),'W31 path reconciliation record missing');
 for(const b of x.backgroundBindings){
-  assert.match(b.objectKey,/^images\/backgrounds\/.+\.webp$/);
+  assert.match(b.objectKey,/^images\/background\/PHI-OS-[A-Z0-9-]+\.webp$/);
+  assert.ok(!b.objectKey.includes('-v1.webp'),`background path must match owner R2 object ${b.assetId}`);
   assert.equal(b.contentType,'image/webp');
   assert.equal(b.ownerReportedUploaded,true);
   assert.equal(b.activationState,'PENDING_W31_REMOTE_VERIFICATION');

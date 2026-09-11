@@ -1,6 +1,617 @@
 {
   "schemaVersion": "PHI-OS-BOOK-V-CIV-ATLAS-TRAJECTORIES-v1.0.0",
   "version": "1.0.0",
-  "status": "FOUNDATION",
-  "trajectories": []
+  "status": "ACTIVE",
+  "trajectories": [
+    {
+      "trajectoryId": "POPULATION",
+      "title": {
+        "zh-Hans": "人口承载",
+        "en": "Population Carrying Capacity"
+      },
+      "description": {
+        "zh-Hans": "观察人类社会能够长期承载的人口规模如何随农业、贸易、卫生与工业系统变化。",
+        "en": "Tracks how long-run population support changes with agriculture, exchange, sanitation, and industrial systems."
+      },
+      "authorityClass": "HISTORICAL_RECONSTRUCTION",
+      "unitMode": "ESTIMATED_RANGE",
+      "timeDomain": {
+        "startYear": -10000,
+        "endYear": 2026
+      },
+      "series": [
+        {
+          "year": -10000,
+          "index": 2
+        },
+        {
+          "year": -3000,
+          "index": 8
+        },
+        {
+          "year": 1,
+          "index": 18
+        },
+        {
+          "year": 1000,
+          "index": 22
+        },
+        {
+          "year": 1750,
+          "index": 31
+        },
+        {
+          "year": 1850,
+          "index": 42
+        },
+        {
+          "year": 1950,
+          "index": 66
+        },
+        {
+          "year": 2026,
+          "index": 100
+        }
+      ],
+      "bands": [
+        {
+          "startYear": -10000,
+          "endYear": 1750,
+          "confidence": "LOW_TO_MEDIUM"
+        },
+        {
+          "startYear": 1750,
+          "endYear": 2026,
+          "confidence": "MEDIUM_TO_HIGH"
+        }
+      ],
+      "milestones": [
+        {
+          "year": -8000,
+          "label": {
+            "zh-Hans": "农业扩散",
+            "en": "Agricultural expansion"
+          }
+        },
+        {
+          "year": 1800,
+          "label": {
+            "zh-Hans": "工业—公共卫生加速",
+            "en": "Industrial and public-health acceleration"
+          }
+        }
+      ],
+      "evidenceRefs": [],
+      "methodNote": {
+        "zh-Hans": "用于比较长期承载趋势；古代数值以重建范围表达，不作为精确人口统计。",
+        "en": "Used for long-run carrying-capacity comparison; ancient values are reconstructed ranges, not exact counts."
+      },
+      "uncertaintyNote": {
+        "zh-Hans": "越往古代，人口估计范围越大。",
+        "en": "Population ranges widen substantially toward deep history."
+      },
+      "relatedCases": [
+        "CA-T02-01",
+        "CA-T02-03",
+        "CA-T13-01"
+      ],
+      "relatedTransitions": [
+        "TW-02",
+        "TW-23"
+      ],
+      "unknown": {
+        "state": "RECONSTRUCTED",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "trajectoryId": "URBAN_DENSITY",
+      "title": {
+        "zh-Hans": "城市密度",
+        "en": "Urban Runtime Density"
+      },
+      "description": {
+        "zh-Hans": "观察越来越多人口、功能与基础设施如何被压缩进城市节点。",
+        "en": "Tracks how population, functions, and infrastructure become concentrated in urban nodes."
+      },
+      "authorityClass": "HISTORICAL_RECONSTRUCTION",
+      "unitMode": "NORMALIZED_INDEX",
+      "timeDomain": {
+        "startYear": -4000,
+        "endYear": 2026
+      },
+      "series": [
+        {
+          "year": -4000,
+          "index": 3
+        },
+        {
+          "year": -3000,
+          "index": 10
+        },
+        {
+          "year": 1,
+          "index": 22
+        },
+        {
+          "year": 1000,
+          "index": 28
+        },
+        {
+          "year": 1500,
+          "index": 34
+        },
+        {
+          "year": 1850,
+          "index": 47
+        },
+        {
+          "year": 1950,
+          "index": 66
+        },
+        {
+          "year": 2026,
+          "index": 100
+        }
+      ],
+      "bands": [
+        {
+          "startYear": -4000,
+          "endYear": 1800,
+          "confidence": "LOW_TO_MEDIUM"
+        },
+        {
+          "startYear": 1800,
+          "endYear": 2026,
+          "confidence": "MEDIUM_TO_HIGH"
+        }
+      ],
+      "milestones": [
+        {
+          "year": -3200,
+          "label": {
+            "zh-Hans": "城市阈值",
+            "en": "Urban threshold"
+          }
+        },
+        {
+          "year": 1850,
+          "label": {
+            "zh-Hans": "工业城市扩张",
+            "en": "Industrial urban expansion"
+          }
+        }
+      ],
+      "evidenceRefs": [],
+      "methodNote": {
+        "zh-Hans": "标准化趋势用于展示城市化与功能密度，不代表单一统计单位。",
+        "en": "Normalized trend visualizes urbanization and functional density; it is not a single measured unit."
+      },
+      "uncertaintyNote": {
+        "zh-Hans": "早期城市人口、面积与功能范围多依赖考古重建。",
+        "en": "Early city population, area, and functional reach rely on archaeological reconstruction."
+      },
+      "relatedCases": [
+        "CA-T02-01",
+        "CA-T06-02",
+        "CA-T09-01",
+        "CA-T13-01"
+      ],
+      "relatedTransitions": [
+        "TW-04",
+        "TW-24"
+      ],
+      "unknown": {
+        "state": "RECONSTRUCTED",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "trajectoryId": "ENERGY",
+      "title": {
+        "zh-Hans": "文明可用能源",
+        "en": "Civilization Energy Capacity"
+      },
+      "description": {
+        "zh-Hans": "观察文明从人力、畜力与生物能进入化石、电力及多元能源系统。",
+        "en": "Tracks the shift from human, animal, and biomass energy toward fossil, electrical, and diversified systems."
+      },
+      "authorityClass": "HISTORICAL_RECONSTRUCTION",
+      "unitMode": "NORMALIZED_INDEX",
+      "timeDomain": {
+        "startYear": -10000,
+        "endYear": 2026
+      },
+      "series": [
+        {
+          "year": -10000,
+          "index": 3
+        },
+        {
+          "year": 1,
+          "index": 7
+        },
+        {
+          "year": 1500,
+          "index": 10
+        },
+        {
+          "year": 1750,
+          "index": 14
+        },
+        {
+          "year": 1850,
+          "index": 31
+        },
+        {
+          "year": 1914,
+          "index": 51
+        },
+        {
+          "year": 1950,
+          "index": 67
+        },
+        {
+          "year": 2026,
+          "index": 100
+        }
+      ],
+      "bands": [
+        {
+          "startYear": -10000,
+          "endYear": 1700,
+          "confidence": "LOW_TO_MEDIUM"
+        },
+        {
+          "startYear": 1700,
+          "endYear": 2026,
+          "confidence": "MEDIUM_TO_HIGH"
+        }
+      ],
+      "milestones": [
+        {
+          "year": 1750,
+          "label": {
+            "zh-Hans": "化石能源阈值",
+            "en": "Fossil-energy threshold"
+          }
+        },
+        {
+          "year": 1900,
+          "label": {
+            "zh-Hans": "电气化扩张",
+            "en": "Electrification"
+          }
+        }
+      ],
+      "evidenceRefs": [],
+      "methodNote": {
+        "zh-Hans": "展示可调用能源规模的长期结构变化，不把不同能源直接压成历史精确值。",
+        "en": "Shows structural change in usable energy scale without treating unlike energy regimes as one exact historical series."
+      },
+      "uncertaintyNote": {
+        "zh-Hans": "前工业时期比较为结构性重建。",
+        "en": "Pre-industrial comparison is structural reconstruction."
+      },
+      "relatedCases": [
+        "CA-T13-01"
+      ],
+      "relatedTransitions": [
+        "TW-23",
+        "TW-25"
+      ],
+      "unknown": {
+        "state": "RECONSTRUCTED",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "trajectoryId": "KNOWLEDGE_PARTICIPATION",
+      "title": {
+        "zh-Hans": "知识参与人口",
+        "en": "Knowledge Participation Capacity"
+      },
+      "description": {
+        "zh-Hans": "观察能读取、复制、生产与传播复杂知识的人口范围如何扩大。",
+        "en": "Tracks the widening share of people able to read, reproduce, produce, and circulate complex knowledge."
+      },
+      "authorityClass": "CONCEPTUAL_TRAJECTORY",
+      "unitMode": "CONCEPTUAL_ONLY",
+      "timeDomain": {
+        "startYear": -3500,
+        "endYear": 2026
+      },
+      "series": [
+        {
+          "year": -3500,
+          "index": 2
+        },
+        {
+          "year": 1,
+          "index": 6
+        },
+        {
+          "year": 1000,
+          "index": 10
+        },
+        {
+          "year": 1500,
+          "index": 16
+        },
+        {
+          "year": 1850,
+          "index": 38
+        },
+        {
+          "year": 1950,
+          "index": 66
+        },
+        {
+          "year": 2000,
+          "index": 85
+        },
+        {
+          "year": 2026,
+          "index": 100
+        }
+      ],
+      "bands": [],
+      "milestones": [
+        {
+          "year": -3200,
+          "label": {
+            "zh-Hans": "书写与书吏",
+            "en": "Writing and scribal systems"
+          }
+        },
+        {
+          "year": 1450,
+          "label": {
+            "zh-Hans": "印刷扩展",
+            "en": "Print expansion"
+          }
+        },
+        {
+          "year": 1900,
+          "label": {
+            "zh-Hans": "大众教育",
+            "en": "Mass education"
+          }
+        }
+      ],
+      "evidenceRefs": [],
+      "methodNote": {
+        "zh-Hans": "这是概念轨迹，用于解释知识参与面的扩展，不构成统一统计量。",
+        "en": "This is a conceptual trajectory for expanding knowledge participation, not a unified statistical measure."
+      },
+      "uncertaintyNote": {
+        "zh-Hans": "跨文明教育与识字资料不可直接等值比较。",
+        "en": "Education and literacy evidence across civilizations is not directly equivalent."
+      },
+      "relatedCases": [
+        "CA-T02-01",
+        "CA-T08-06",
+        "CA-T09-01"
+      ],
+      "relatedTransitions": [
+        "TW-05",
+        "TW-16",
+        "TW-26"
+      ],
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "trajectoryId": "COMPUTATIONAL_CAPACITY",
+      "title": {
+        "zh-Hans": "计算能力",
+        "en": "Computational Capacity"
+      },
+      "description": {
+        "zh-Hans": "观察文明在有限时间内处理数量、模型与复杂关系的能力如何迁移到机器基础设施。",
+        "en": "Tracks the migration of calculation and model-processing capacity into machine infrastructure."
+      },
+      "authorityClass": "EVIDENCE_SERIES",
+      "unitMode": "NORMALIZED_INDEX",
+      "timeDomain": {
+        "startYear": -3000,
+        "endYear": 2026
+      },
+      "series": [
+        {
+          "year": -3000,
+          "index": 1
+        },
+        {
+          "year": 1500,
+          "index": 2
+        },
+        {
+          "year": 1850,
+          "index": 5
+        },
+        {
+          "year": 1950,
+          "index": 15
+        },
+        {
+          "year": 1980,
+          "index": 32
+        },
+        {
+          "year": 2000,
+          "index": 58
+        },
+        {
+          "year": 2020,
+          "index": 82
+        },
+        {
+          "year": 2026,
+          "index": 100
+        }
+      ],
+      "bands": [],
+      "milestones": [
+        {
+          "year": 1945,
+          "label": {
+            "zh-Hans": "电子计算",
+            "en": "Electronic computing"
+          }
+        },
+        {
+          "year": 2000,
+          "label": {
+            "zh-Hans": "互联网规模计算",
+            "en": "Internet-scale computing"
+          }
+        },
+        {
+          "year": 2020,
+          "label": {
+            "zh-Hans": "基础模型扩张",
+            "en": "Foundation-model expansion"
+          }
+        }
+      ],
+      "evidenceRefs": [],
+      "methodNote": {
+        "zh-Hans": "现代计算阶段可由技术资料支持；早期阶段仅作为前史节点，不使用同一物理单位比较。",
+        "en": "Modern computing is evidence-rich; earlier milestones are historical precursors and are not compared in one physical unit."
+      },
+      "uncertaintyNote": {
+        "zh-Hans": "标准化曲线用于网页趋势展示，不代表跨时代统一算力测量。",
+        "en": "The normalized web trend is not a single cross-era compute measurement."
+      },
+      "relatedCases": [
+        "CA-T13-01"
+      ],
+      "relatedTransitions": [
+        "TW-31",
+        "TW-32"
+      ],
+      "unknown": {
+        "state": "PARTIAL",
+        "fields": [],
+        "note": {
+          "zh-Hans": "2020–2026 属开放历史窗口，长期文明意义尚未关闭。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    },
+    {
+      "trajectoryId": "LOAD_FUTURE_CAPACITY",
+      "title": {
+        "zh-Hans": "负载 × 未来容量",
+        "en": "Load × Future Capacity"
+      },
+      "description": {
+        "zh-Hans": "观察能力增长同时如何制造维护成本、锁定承诺与未来选择压力。",
+        "en": "Tracks how rising capacity can also create maintenance load, locked commitments, and pressure on future option space."
+      },
+      "authorityClass": "CONCEPTUAL_TRAJECTORY",
+      "unitMode": "CONCEPTUAL_ONLY",
+      "timeDomain": {
+        "startYear": -3000,
+        "endYear": 2026
+      },
+      "series": [
+        {
+          "year": -3000,
+          "index": 8
+        },
+        {
+          "year": 1,
+          "index": 14
+        },
+        {
+          "year": 1000,
+          "index": 19
+        },
+        {
+          "year": 1500,
+          "index": 26
+        },
+        {
+          "year": 1850,
+          "index": 45
+        },
+        {
+          "year": 1950,
+          "index": 63
+        },
+        {
+          "year": 2000,
+          "index": 82
+        },
+        {
+          "year": 2026,
+          "index": 92
+        }
+      ],
+      "bands": [],
+      "milestones": [
+        {
+          "year": 1850,
+          "label": {
+            "zh-Hans": "基础设施与制度密度加速",
+            "en": "Infrastructure and institutional density accelerate"
+          }
+        },
+        {
+          "year": 2000,
+          "label": {
+            "zh-Hans": "数字依赖扩大",
+            "en": "Digital dependency expands"
+          }
+        }
+      ],
+      "evidenceRefs": [],
+      "methodNote": {
+        "zh-Hans": "这是 PHI OS 结构解释轨迹，不是经验总分。",
+        "en": "This is a PHI OS structural interpretation, not an empirical total score."
+      },
+      "uncertaintyNote": {
+        "zh-Hans": "不同文明的负载来源不同，不应直接压缩成排名。",
+        "en": "Civilizations carry different forms of load and must not be collapsed into a ranking."
+      },
+      "relatedCases": [
+        "CA-T06-02",
+        "CA-T09-01",
+        "CA-T13-01"
+      ],
+      "relatedTransitions": [
+        "TW-13",
+        "TW-23",
+        "TW-32"
+      ],
+      "unknown": {
+        "state": "CONTESTED",
+        "fields": [],
+        "note": {
+          "zh-Hans": "早期与长时段资料存在不确定性，图谱保留范围与未知。",
+          "en": "Early and long-duration evidence remains uncertain; the Atlas preserves ranges and unknowns."
+        }
+      }
+    }
+  ]
 }

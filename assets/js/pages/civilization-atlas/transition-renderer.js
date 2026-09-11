@@ -1,0 +1,13 @@
+const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
+const loc=(v,l)=>v?.[l]??v?.en??'';
+const fmt=y=>y<0?`${Math.abs(y)} BCE`:y===1?'1 CE':String(y);
+export function renderTransitions(root,{registry,state,locale='en',onSelect=()=>{}}={}){
+ const l=locale==='zh-Hans'?'zh-Hans':'en',items=registry?.transitionWindows||[],active=items.find(x=>x.transitionWindowId===state.transitionWindowId)||items[0];
+ root.innerHTML=`<div class="civ-transitions"><div class="civ-transition-selector">${items.map(w=>`<button type="button" class="${active?.transitionWindowId===w.transitionWindowId?'is-active':''}" data-tw="${esc(w.transitionWindowId)}"><small>${esc(w.transitionWindowId)}</small><span>${esc(loc(w.title,l))}</span></button>`).join('')}</div>${active?`<article class="civ-transition-flow"><header><p class="knowledge-eyebrow">${esc(active.transitionWindowId)} · ${esc(fmt(active.timeRange.startYear))}–${esc(fmt(active.timeRange.endYear))}</p><h4>${esc(loc(active.title,l))}</h4>${active.transitionWindowId==='TW-32'?`<strong class="civ-open-badge">${esc(l==='zh-Hans'?'开放历史窗口':'OPEN HISTORICAL WINDOW')}</strong>`:''}</header>${[['beforeState','BEFORE','转型前'],['pressure','PRESSURE','压力'],['threshold','THRESHOLD','触发门槛'],['transition','TRANSITION','转型过程'],['newCapacity','NEW CAPACITY','新能力'],['newLoad','NEW LOAD','新负荷'],['successorReality','SUCCESSOR REALITY','后继现实']].map(([key,en,zh])=>`<section><small>${esc(l==='zh-Hans'?zh:en)}</small><p>${esc(loc(active[key],l))}</p></section>`).join('')}</article>`:''}<div class="civ-scale-shifts"><h4>${esc(l==='zh-Hans'?'七次文明尺度跃迁':'Seven Civilization Scale Shifts')}</h4>${(registry.scaleShifts||[]).map(s=>`<span class="${s.status==='OPEN'?'is-open':''}">${esc(loc(s.title,l))}${s.status==='OPEN'?' · OPEN':''}</span>`).join('')}</div></div>`;
+ root.querySelectorAll('[data-tw]').forEach(b=>b.addEventListener('click',()=>onSelect(b.dataset.tw)));
+ return active;
+}
+export function renderTransitionInspector(root,{windowRecord,locale='en'}={}){
+ const l=locale==='zh-Hans'?'zh-Hans':'en'; if(!root||!windowRecord)return;
+ root.innerHTML=`<h3>${esc(loc(windowRecord.title,l))}</h3><p>${esc(loc(windowRecord.irreversibility,l))}</p><dl><div><dt>${esc(l==='zh-Hans'?'权威':'Authority')}</dt><dd>${esc(windowRecord.authorityClass)}</dd></div><div><dt>${esc(l==='zh-Hans'?'未知状态':'Unknown')}</dt><dd>${esc(windowRecord.unknown?.state||'UNKNOWN')}</dd></div></dl>`;
+}

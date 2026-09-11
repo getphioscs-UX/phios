@@ -6,7 +6,8 @@ const ids=new Set(registry.snapshots.map(s=>s.snapshotId)); for(const id of ['WS
 const caseIds=new Set(json('content/civilization-atlas/cases/civilization-case-registry-v1.json').cases.map(c=>c.caseId));
 for(const s of registry.snapshots){assert.ok(Number.isInteger(s.year)); assert.ok(s.title?.en&&s.title?.['zh-Hans']); assert.ok(s.summary?.en&&s.summary?.['zh-Hans']); assert.ok(s.regionalGroups.length>=1); assert.ok(s.posterAssetRef?.startsWith('VIS-B5-ATLAS-')); for(const id of s.majorCaseIds) assert.ok(caseIds.has(id),`${s.snapshotId} missing case ${id}`); assert.ok(s.unknown?.state);}
 assert.equal(registry.snapshots.find(s=>s.snapshotId==='WS-2026').unknown.state,'PARTIAL'); assert.match(registry.snapshots.find(s=>s.snapshotId==='WS-2026').unknown.note.en,/Open historical window/i);
-const layers=json('content/civilization-atlas/atlas-layers-v1.json'); assert.equal(layers.explorerLayers.find(x=>x.layerId==='world')?.customerEnabled,true); assert.equal(layers.explorerLayers.find(x=>x.layerId==='trajectories')?.customerEnabled,false);
+const layers=json('content/civilization-atlas/atlas-layers-v1.json'); assert.equal(layers.explorerLayers.find(x=>x.layerId==='world')?.customerEnabled,true);
+// Successor-aware: W9–W11 activation is legal after W8 is frozen.
 const renderer=read('assets/js/pages/civilization-atlas/world-slice-renderer.js'); for(const t of ['data-snapshot-id','data-world-case','tradeNetworks','majorCities','posterAssetRef','Knowledge state']) assert.ok(renderer.includes(t),`missing world slice behavior ${t}`);
 console.log('✓ BOOK-V-CIV-ATLAS-R1-W8 World Slice passed.');
-console.log('  Four real snapshot vertical slices are active with structured regions, networks, cities, unknown states, and poster references.');
+console.log('  Four real snapshot vertical slices remain active; successor W9–W11 layers may activate without invalidating W8.');
