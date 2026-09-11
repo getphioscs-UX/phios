@@ -17,9 +17,9 @@ if(root){
     loadTimelineRegistry(),loadCaseRegistry(),loadComparisonRegistry(),loadWorldSnapshotRegistry(),
     loadTrajectoryRegistry(),loadTransitionRegistry(),loadLossRegistry()
   ]).then(([timeline,cases,comparison,world,trajectories,transitions,loss])=>{
-    Object.assign(data,{timeline,cases,comparison,world,trajectories,transitions,loss}); render();
+    Object.assign(data,{timeline,cases,comparison,world,trajectories,transitions,loss}); root.dataset.atlasReady='true'; root.dataset.atlasRegistryCounts='20/120/6/15/16/32/24'; render();
   }).catch(error=>{
-    console.error(error);
+    root.dataset.atlasReady='error'; console.error(error);
     const target=root.querySelector('[data-atlas-layer-content]');
     if(target) target.innerHTML=`<p role="alert">${getLocale()==='zh-Hans'?'文明图谱资料暂时无法载入。':'Civilization Atlas data could not be loaded.'}</p>`;
   });

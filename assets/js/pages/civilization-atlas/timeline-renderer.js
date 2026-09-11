@@ -21,7 +21,7 @@ export function renderTimeline(container,{registry,state,locale='en',onPeriodSel
       ${selected.caseIds?.length?`<div class="civ-atlas-related"><h5>${lang==='zh-Hans'?'代表案例':'Representative cases'}</h5>${selected.caseIds.map(id=>`<button type="button" class="knowledge-action knowledge-action--quiet" data-case-id="${esc(id)}">${esc(id)}</button>`).join('')}</div>`:''}
       ${selected.unknown?.note?`<p class="civ-atlas-note">${esc(loc(selected.unknown.note,lang))}</p>`:''}
     </article>
-    <div class="civ-atlas-table-wrap"><table class="civ-atlas-table"><thead><tr><th>${lang==='zh-Hans'?'时期':'Period'}</th><th>${lang==='zh-Hans'?'时间范围':'Range'}</th><th>${lang==='zh-Hans'?'历史主线':'Historical line'}</th><th>${lang==='zh-Hans'?'代表案例':'Cases'}</th></tr></thead><tbody>
+    <div class="civ-atlas-table-wrap"><table class="civ-atlas-table"><caption class="civ-sr-only">${lang==='zh-Hans'?'文明历史时期完整表格':'Complete civilization timeline table'}</caption><thead><tr><th scope="col">${lang==='zh-Hans'?'时期':'Period'}</th><th scope="col">${lang==='zh-Hans'?'时间范围':'Range'}</th><th scope="col">${lang==='zh-Hans'?'历史主线':'Historical line'}</th><th scope="col">${lang==='zh-Hans'?'代表案例':'Cases'}</th></tr></thead><tbody>
       ${periods.map(p=>`<tr><td><button type="button" class="civ-atlas-link" data-period-id="${esc(p.periodId)}">${esc(p.periodId)} · ${esc(loc(p.title,lang))}</button></td><td>${esc(formatHistoricalRange(p.startYear,p.endYear,lang))}</td><td>${esc(loc(p.summary,lang))}</td><td>${esc((p.caseIds||[]).join(', ')||'—')}</td></tr>`).join('')}
     </tbody></table></div>
   </div>`;
