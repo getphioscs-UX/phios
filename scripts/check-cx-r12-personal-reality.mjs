@@ -24,6 +24,8 @@ const acceptanceV1=json(`${base}/acceptance/cx-r12-acceptance-v1.json`);
 const acceptance=json(`${base}/acceptance/cx-r12-acceptance-v2.json`);
 const audit=json(`${base}/audits/cx-r12-current-main-reconciliation-v1.json`);
 const finalModule=await import(pathToFileURL(path.join(root,'assets/customer-ui/js/personal-products/final-personal-reading-experience.js')).href);
+const cxRefinementPath='content/professional/personal-reality/r3/authority/ppr-r3-personal-reality-cx-refinement-shared-surface-successor-v1.json';
+const cxRefinement=fs.existsSync(path.join(root,cxRefinementPath))?json(cxRefinementPath):null;
 
 // Historical CX-R12 evidence remains historical; the successor is additive.
 assert.equal(sha(`${base}/acceptance/cx-r12-acceptance-v1.json`),'af3aadc853b122a22b5a2c289e15f3c8a757c68989a84596ef4e7c14f6ea65b3');
@@ -73,7 +75,19 @@ assert.doesNotMatch(html,/Preparing your perspectives[^<]*(?:MPA|projection runt
 
 // W3-W6: customer-first overview + five top-level tabs; method detail is behind Details.
 assert.deepEqual(finalModule.CX_R12_RESULT_TAB_IDS,['overview','structure','current-context','patterns','details']);
-for(const label of ['How you tend to operate','Decision context','Patterns','Environment','Current timing / context'])assert.ok(finalClient.includes(label),`missing results overview label ${label}`);
+if(cxRefinement){
+  assert.equal(cxRefinement.status,'CURRENT_SHARED_SURFACE_CX_REFINEMENT_SUCCESSOR_ACTIVE');
+  assert.equal(cxRefinement.baselineCommit,'41782cebbbec8a70ce04d3327379c85ca71ab24d');
+  for(const token of ['THREE THINGS TO SEE FIRST','data-cx-method-disclosure','data-cx-reality-return','Technical provenance'])assert.ok(finalClient.includes(token),`missing Personal Reality CX refinement token ${token}`);
+  assert.equal(cxRefinement.customerExperience.overviewPriorityMaximum,3);
+  assert.equal(cxRefinement.customerExperience.multiMethodDefaultCollapsed,true);
+  assert.equal(cxRefinement.customerExperience.oneMethodExpandedAtATime,true);
+  assert.equal(cxRefinement.boundaries.methodMeaningChanged,false);
+  assert.equal(cxRefinement.boundaries.commerceAuthorityChanged,false);
+  assert.equal(cxRefinement.boundaries.w37AutoAccepted,false);
+}else{
+  for(const label of ['How you tend to operate','Decision context','Patterns','Environment','Current timing / context'])assert.ok(finalClient.includes(label),`missing results overview label ${label}`);
+}
 for(const token of ['data-cx-r12-perspectives-used','PERSPECTIVES USED','data-cx-r12-result-tab','data-cx-r12-result-panel'])assert.ok(finalClient.includes(token),`missing R12 results token ${token}`);
 assert.match(finalClient,/externalPanelState/);
 assert.match(finalClient,/active==='details'/);
@@ -115,4 +129,5 @@ assert.equal(acceptance.readyForCxR13,true);
 console.log('✓ CX-R12 Personal Reality current-main successor passed at 74fba1c: five-stage customer input, customer-first overview, five method-hidden result tabs, returned-perspective disclosure and explicit My Reality handoff are active.');
 console.log('  PPR/method meaning remains upstream; profile scoring is not recreated; method availability is not hard-coded; missing overview areas remain open rather than inferred.');
 console.log(legacyDelete.status==='PHYSICAL_LEGACY_PRESENTATION_DELETE_COMPLETE'?'  Legacy Personal Runtime presentation files are physically deleted after browser acceptance; compatibility routes remain redirects to canonical Personal Reality.':'  Legacy personal-runtime routes remain redirected compatibility only; canonical Personal Reality loads zero legacy CSS; physical legacy deletion stays deferred to P1 production browser acceptance.');
+if(cxRefinement)console.log('✓ CX-R12 shared-surface successor: Personal Reality now uses a 3-priority customer overview, one-method-at-a-time detail, nested technical provenance and explicit Reality return without changing method/commerce truth.');
 console.log('✓ CX-R12 ACCEPTED: PERSONAL_REALITY_REPLACEMENT_READY_FOR_PRIORITY_TRANCHE · READY_FOR_CX_R13 · NO_NEW_P1_ROUTE_CUTOVER');

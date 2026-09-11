@@ -1,0 +1,24 @@
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+const r=p=>fs.readFileSync(p,'utf8');
+const j=p=>JSON.parse(r(p));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const authorityPath='content/professional/personal-reality/r3/authority/ppr-r3-personal-reality-cx-refinement-shared-surface-successor-v1.json';
+const reacceptPath='content/product-visual-platform-r1/phase13/acceptance/pvp-r1-vis-w35-personal-reality-cx-successor-reacceptance-v1.json';
+const a=j(authorityPath),reaccept=j(reacceptPath);
+assert.equal(a.status,'CURRENT_SHARED_SURFACE_CX_REFINEMENT_SUCCESSOR_ACTIVE');
+assert.equal(a.baselineCommit,'41782cebbbec8a70ce04d3327379c85ca71ab24d');
+for(const [path,proof] of Object.entries(a.fileProof)){assert.equal(sha(path),proof.successorSha256,`${path} successor hash drift`);assert.match(proof.predecessorSha256,/^[a-f0-9]{64}$/)}
+assert.equal(a.customerExperience.overviewPriorityMaximum,3);assert.equal(a.customerExperience.multiMethodDefaultCollapsed,true);assert.equal(a.customerExperience.oneMethodExpandedAtATime,true);assert.equal(a.customerExperience.technicalProvenanceNestedBehindAboutReading,true);assert.equal(a.customerExperience.realityReturnRoute,'/reality/');assert.equal(a.customerExperience.purchaseUnlockUpgradeButtonsCreatedByThisSuccessor,false);
+for(const key of ['historicalFreezeRewritten','methodCalculationChanged','methodMeaningChanged','crossMethodTruthChanged','relationshipTruthChanged','commerceAuthorityChanged','entitlementAuthorityChanged','priceCreated','purchaseEventCreated','w37AutoAccepted','phase14Authorized'])assert.equal(a.boundaries[key],false,`${key} must remain false`);
+const client=r('assets/customer-ui/js/personal-products/final-personal-reading-experience.js');
+for(const token of ['THREE THINGS TO SEE FIRST','cx-r12-constellation','data-cx-reading-action="current-context"','data-cx-reading-action="details"','data-cx-reality-return','data-cx-method-disclosure','Technical provenance'])assert.ok(client.includes(token),`missing refined customer token: ${token}`);
+for(const forbidden of ['data-cx-purchase','data-cx-unlock','data-cx-upgrade','compatibility 83%'])assert.equal(client.includes(forbidden),false,`forbidden invented customer action/value: ${forbidden}`);
+assert.ok(client.includes('INTERNAL_COPY_RE'));assert.ok(client.includes("other.open=false"),'one-method-at-a-time accordion missing');
+const css=r('assets/customer-ui/surfaces/final-personal-reading-experience.css'),r12=r('assets/customer-ui/surfaces/personal-reality-r12.css');
+for(const token of ['.cx-r12-priority-grid','.cx-r12-constellation','.cx-r12-next-actions','.cx-method-disclosure','.cx-final-about'])assert.ok(css.includes(token),`missing refined visual selector ${token}`);
+assert.match(r12,/data-cx-r12-result-panel="overview"/);assert.match(r12,/data-cx-r12-external-panel\]\[hidden\]\{display:none!important\}/);assert.equal(/data-cx-r12-external-panel\]\[hidden\]\{display:block!important\}/.test(r12),false,'print must not force all specialist panels open');
+assert.equal(reaccept.status,'PENDING_HUMAN_REACCEPTANCE');assert.equal(reaccept.humanReaccepted,false);assert.equal(reaccept.predecessorAcceptanceRemainsHistorical,true);assert.equal(reaccept.boundaries.w37Satisfied,false);assert.equal(reaccept.boundaries.phase14Authorized,false);
+console.log('✓ PPR shared-surface CX refinement passed: top-three overview, Reality-centered constellation, one-method-at-a-time detail, customer-safe copy and concise print are active without method/commerce authority mutation.');
+console.log('  Historical W35 remains historical; the changed Personal Reality successor correctly requires fresh human visual reacceptance. W37 remains real-evidence-only.');
