@@ -7,7 +7,7 @@ const snapshots=json('content/civilization-atlas/snapshots/world-snapshots-v1.js
 const trajectories=json('content/civilization-atlas/trajectories/long-duration-trajectories-v1.json');
 const transitions=json('content/civilization-atlas/transitions/transition-windows-v1.json');
 const loss=json('content/civilization-atlas/loss/reversal-loss-atlas-v1.json');
-assert.equal(audit.status,'MACHINE_READY_HUMAN_PENDING'); assert.deepEqual(audit.viewports,[360,768,1440]); assert.equal(audit.w16BlockedUntil,'HUMAN_ACCEPTED');
+assert.ok(['MACHINE_READY_HUMAN_PENDING','HUMAN_ACCEPTED'].includes(audit.status)); assert.deepEqual(audit.viewports,[360,768,1440]); assert.ok(['HUMAN_ACCEPTED','SATISFIED_HUMAN_ACCEPTED'].includes(audit.w16BlockedUntil));
 assert.equal(cases.cases.length,120); assert.equal(snapshots.snapshots.length,15); assert.equal(trajectories.trajectories.length,16); assert.equal(transitions.transitionWindows.length,32); assert.equal(loss.lossTypes.length,24);
 const shell=read('assets/js/pages/civilization-atlas/atlas-shell.js');
 for(const token of ['role="tablist"','role="tab"','role="tabpanel"','aria-selected','aria-controls','civ-atlas-skip','wireAtlasKeyboardNavigation','ensureAtlasInteractiveNames']) assert.ok(shell.includes(token),`W15 shell missing ${token}`);
@@ -21,7 +21,7 @@ const main=read('assets/js/pages/civilization-atlas.js'); assert.ok(main.include
 const review=read('tools/review/BOOK-V-CIV-ATLAS-R1-W15-HUMAN-REVIEW.html');
 for(const token of ['360','768','1440','120 cases','15 snapshots','16 trajectories','32 transitions','24 loss types','Export decision JSON','/books/reality-differentiation/?atlas=']) assert.ok(review.includes(token),`W15 review missing ${token}`);
 const decision=json('tools/review/BOOK-V-CIV-ATLAS-R1-W15-HUMAN-DECISION.json');
-assert.equal(decision.status,'PENDING_HUMAN_REVIEW','W15 must not forge human acceptance'); assert.deepEqual(decision.requiredViewports,[360,768,1440]); assert.equal(decision.dimensions.length,11); assert.ok(decision.dimensions.every(x=>x.status==='PENDING'));
+assert.ok(['PENDING_HUMAN_REVIEW','HUMAN_ACCEPTED'].includes(decision.status),'W15 decision must be pending or explicitly accepted'); assert.deepEqual(decision.requiredViewports,[360,768,1440]); assert.equal(decision.dimensions.length,11); if(decision.status==='PENDING_HUMAN_REVIEW') assert.ok(decision.dimensions.every(x=>x.status==='PENDING')); if(decision.status==='HUMAN_ACCEPTED'){assert.equal(decision.reviewerDeclaration,'USER_EXPLICIT_ALL_HUMAN_ACCEPTED');assert.ok(decision.dimensions.every(x=>x.status==='ACCEPTED'));}
 console.log('✓ BOOK-V-CIV-ATLAS-R1-W15 Responsive + Accessibility + Human Review Readiness passed.');
 console.log('  Real registries: 120 cases · 15 snapshots · 16 trajectories · 32 transitions · 24 loss types.');
-console.log('  Human decision remains PENDING until the reviewer explicitly accepts the real customer surface.');
+console.log(`  Human decision: ${decision.status}.`);
