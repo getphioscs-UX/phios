@@ -3,7 +3,7 @@ import {kirR2ModelGatewayEnabled} from './kir-r2-model-gateway.js';
 import {kirR2W16R2BProductionCutoverEnabled,getKirR2W16R2BProductionAdmission} from './kir-r2-production-admission.js';
 import {runKirR2W16R2Successor} from './kir-r2-w16r2-successor.js';
 const PROFILE_PATH='content/knowledge/knowledge-intelligence-r2/semantic-profiles/successors/book4-a6/kir-r2-book-i-iv-semantic-retrieval-profiles-v2.json';
-const ARTICLE_BINDING_PATH='content/knowledge/knowledge-intelligence-r2/registries/kir-r2-published-article-binding-registry-v2.json';
+const ARTICLE_BINDING_PATH='content/knowledge/knowledge-intelligence-r2/registries/successors/book4-publication-v1/kir-r2-book-i-iv-published-article-binding-registry-v3.json';
 async function readAsset(env,path){if(!env?.ASSETS?.fetch)return null;const r=await env.ASSETS.fetch(new Request(`https://assets.local/${path}`));return r.ok?r.json():null}
 function enrichProfiles(profiles,bindings=[]){
  const byNode=new Map();for(const b of bindings){if(!byNode.has(b.nodeCode))byNode.set(b.nodeCode,[]);byNode.get(b.nodeCode).push(b)}

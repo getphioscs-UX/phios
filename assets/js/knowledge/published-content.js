@@ -32,6 +32,8 @@ const VISUAL_RELEASE_MANIFEST =
   '/content/knowledge/public/visual-article-release.json';
 const ABL_BILINGUAL_RELEASE_MANIFEST =
   '/content/knowledge/public/abl-bilingual-release.json';
+const BOOK4_PUBLICATION_SUCCESSOR_MANIFEST =
+  '/content/knowledge/public/successors/book4-publication-v1/visual-article-release.json';
 
 async function fetchJson(path) {
   const response = await fetch(path, {
@@ -161,6 +163,7 @@ async function loadLocale(locale) {
     fetchJson(ABL_BILINGUAL_RELEASE_MANIFEST).catch(() => ({ records: [] })),
     loadCanonicalBooks(),
     loadCanonicalParts(),
+    fetchJson(BOOK4_PUBLICATION_SUCCESSOR_MANIFEST).catch(() => ({ records: [] })),
     loadFiveVolumePublicationContextRegistry()
   ]).then(async ([
     nodeRegistry,
@@ -171,6 +174,7 @@ async function loadLocale(locale) {
     ablBilingualReleaseManifest,
     booksRegistry,
     partsRegistry,
+    book4PublicationSuccessorManifest,
     publicationContextRegistry
   ]) => {
     const localizedByNode = new Map(
@@ -231,7 +235,8 @@ async function loadLocale(locale) {
     const visualArticles = await Promise.all(
       [
         ...(visualReleaseManifest.records || []),
-        ...(ablBilingualReleaseManifest.records || [])
+        ...(ablBilingualReleaseManifest.records || []),
+        ...(book4PublicationSuccessorManifest.records || [])
       ]
         .filter(record => (
           record.locale === normalizedLocale &&

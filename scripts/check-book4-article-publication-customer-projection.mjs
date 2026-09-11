@@ -1,0 +1,46 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
+const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const a3=read('content/knowledge/production-planning/plans/book4-a3-final-article-map-v1.json');
+const completion=read('content/knowledge/production-planning/audits/book4-article-production-completion-audit-v1.json');
+const release=read('content/knowledge/public/successors/book4-publication-v1/visual-article-release.json');
+const oldRelease='content/knowledge/public/visual-article-release.json';
+const oldBinding='content/knowledge/knowledge-intelligence-r2/registries/kir-r2-published-article-binding-registry-v2.json';
+const binding=read('content/knowledge/knowledge-intelligence-r2/registries/successors/book4-publication-v1/kir-r2-book-i-iv-published-article-binding-registry-v3.json');
+const zh=read('content/knowledge/production-planning/publication/book4-zh-hans-publication-customer-integration-v1.json');
+const en=read('content/knowledge/production-planning/publication/book4-en-assisted-publication-customer-integration-v1.json');
+const bi=read('content/knowledge/production-planning/publication/book4-bilingual-publication-customer-integration-v1.json');
+const freeze=read('content/knowledge/production-planning/publication/book4-article-publication-freeze-v1.json');
+assert.equal(a3.articles.length,53); assert.equal(completion.status,'BOOK_IV_BILINGUAL_ARTICLE_PRODUCTION_COMPLETE_53_OF_53_PUBLICATION_CLOSED');
+assert.equal(zh.status,'ZH_HANS_PUBLICATION_ADMITTED_53_OF_53');
+assert.equal(en.status,'EN_PUBLICATION_ADMITTED_53_OF_53_WITH_ASSISTED_EDITORIAL_AUDIT');
+assert.equal(en.disclosure.doesNotClaimTLReadEveryEnglishSentence,true);
+assert.equal(bi.status,'BOOK4_BILINGUAL_PUBLICATION_ADMITTED_106_PUBLIC_PROJECTIONS');
+assert.equal(release.recordCount,106); assert.equal(release.articlePlanCount,53); assert.equal(release.nodeCount,125);
+assert.equal(freeze.status,'FROZEN_53_ARTICLES_106_PUBLIC_PROJECTIONS');
+const plans=new Map(a3.articles.map(x=>[x.articlePlanId,x]));
+const byPlan=new Map();
+for(const r of release.records){
+ assert.equal(r.status,'published'); assert.equal(r.source,'BOOK4-FINAL-ARTICLE-PRODUCTION');
+ const p=plans.get(r.articlePlanId); assert.ok(p); assert.deepEqual(r.coveredNodeCodes,p.nodeCodes);
+ const path=r.path.replace(/^\//,''); assert.ok(fs.existsSync(path)); const doc=read(path);
+ assert.equal(doc.publicationStatus,'published'); assert.equal(doc.reviewStatus,'approved'); assert.equal(doc.contentStatus,'content_reviewed');
+ assert.equal(doc.publicationContext.bookCode,'BOOK-4'); assert.equal(doc.publicationContext.bookRoute,'/books/reality-expansion/');
+ assert.deepEqual(doc.coveredNodeCodes,p.nodeCodes); assert.equal(doc.provenance.lineage.articlePlanId,p.articlePlanId);
+ assert.ok(doc.sections[0].blocks.filter(x=>x.type==='paragraph').length>=5);
+ if(r.locale==='en'){ const text=JSON.stringify({title:doc.title,summary:doc.summary,sections:doc.sections}); assert.equal(/[\u3400-\u9fff]/u.test(text),false); }
+ const route=`articles/${r.slug}.html`; assert.ok(fs.existsSync(route));
+ if(!byPlan.has(r.articlePlanId))byPlan.set(r.articlePlanId,new Set()); byPlan.get(r.articlePlanId).add(r.locale);
+}
+assert.equal(byPlan.size,53); for(const locales of byPlan.values())assert.deepEqual([...locales].sort(),['en','zh-Hans']);
+const b4=binding.records.filter(x=>x.bookCode==='BOOK-4'); assert.equal(b4.length,250); assert.equal(new Set(b4.map(x=>x.nodeCode)).size,125); assert.deepEqual([...new Set(b4.map(x=>x.locale))].sort(),['en','zh-Hans']); assert.ok(b4.every(x=>x.published&&x.approved&&x.contentReviewed));
+const old=read(oldBinding); assert.equal(old.records.some(x=>x.bookCode==='BOOK-4'),false); assert.equal(release.predecessor.path,oldRelease); assert.equal(release.predecessor.mutated,false);
+const loader=fs.readFileSync('assets/js/knowledge/published-content.js','utf8'); assert.ok(loader.includes('BOOK4_PUBLICATION_SUCCESSOR_MANIFEST')); assert.ok(loader.includes('book4-publication-v1/visual-article-release.json'));
+const kir=fs.readFileSync('functions/_lib/kir-r2-production.js','utf8'); assert.ok(kir.includes('book4-publication-v1/kir-r2-book-i-iv-published-article-binding-registry-v3.json'));
+assert.equal(fs.existsSync('content/knowledge/production-planning/plans/book4-a3-final-article-map-v1.json'),true); assert.equal(fs.existsSync('content/knowledge/contracts/book-4-production-admission-authority-v1.json'),true);
+console.log('✓ BOOK IV publication/customer projection admitted: 53 article plans × 2 locales = 106 published customer projections.');
+console.log('✓ KIR successor adds 250 BOOK-4 node-locale published bindings across all 125 canonical nodes; predecessor registry remains untouched.');
+console.log('✓ Existing locale-aware Article runtime reused; 53 shared /articles/book4-article-### routes active with no parallel runtime.');
+console.log('✓ English admission records assisted editorial audit under explicit publication mandate and does not claim sentence-by-sentence owner review.');

@@ -2421,7 +2421,9 @@
     "check:book4:b11-en": "node scripts/check-book4-b11-english-semantic-parity.mjs",
     "check:book4:b01": "node scripts/check-book4-b01-english-semantic-parity.mjs",
     "check:book4:b01-en": "node scripts/check-book4-b01-english-semantic-parity.mjs",
-    "check:book4:article-production-completion": "node scripts/check-book4-b01-english-semantic-parity.mjs && node scripts/check-book4-b11-zh-hans-production.mjs && node scripts/check-book4-b11-english-semantic-parity.mjs && node scripts/check-book4-article-production-completion.mjs"
+    "check:book4:article-production-completion": "node scripts/check-book4-b01-english-semantic-parity.mjs && node scripts/check-book4-b11-zh-hans-production.mjs && node scripts/check-book4-b11-english-semantic-parity.mjs && node scripts/check-book4-article-production-completion.mjs",
+    "check:book4:article-publication": "node scripts/check-book4-article-publication-customer-projection.mjs",
+    "check:book4:publication": "npm run check:book4:article-production-completion && npm run check:book4:article-publication"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

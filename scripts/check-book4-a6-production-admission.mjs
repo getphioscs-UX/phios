@@ -20,7 +20,10 @@ assert.equal(production.profileCount,473);assert.deepEqual(production.bookCounts
 const b4=production.profiles.filter(x=>x.bookCode==='BOOK-4');assert.equal(b4.length,125);assert.ok(b4.every(x=>x.productionEligible===true));assert.ok(b4.every(x=>Array.isArray(x.articleSources)&&x.articleSources.length===0),'pre-admission Book IV article refs must not masquerade as published');
 assert.equal(oldProfiles.profiles.length,125);assert.ok(oldProfiles.profiles.every(x=>x.productionEligible===false),'A2 pre-admission source must remain fail-closed');
 assert.equal(bindings.records.some(x=>x.bookCode==='BOOK-4'),false,'A6 must not auto-publish Book IV articles');
-assert.equal(KIR_R2_PRODUCTION_PROFILE_PATH,authority.admission.productionProfilePath);assert.equal(KIR_R2_PRODUCTION_ARTICLE_BINDING_PATH,'content/knowledge/knowledge-intelligence-r2/registries/kir-r2-published-article-binding-registry-v2.json');
+assert.equal(KIR_R2_PRODUCTION_PROFILE_PATH,authority.admission.productionProfilePath);
+const historicalBindingPath='content/knowledge/knowledge-intelligence-r2/registries/kir-r2-published-article-binding-registry-v2.json';
+const book4PublicationSuccessorPath='content/knowledge/knowledge-intelligence-r2/registries/successors/book4-publication-v1/kir-r2-book-i-iv-published-article-binding-registry-v3.json';
+assert.ok([historicalBindingPath,book4PublicationSuccessorPath].includes(KIR_R2_PRODUCTION_ARTICLE_BINDING_PATH),'A6 regression allows the later governed Book IV publication successor without rewriting A6 admission history');
 const env={ASSETS:{fetch:async req=>{const p=new URL(req.url).pathname.slice(1);if(p===KIR_R2_PRODUCTION_PROFILE_PATH)return Response.json(production);if(p===KIR_R2_PRODUCTION_ARTICLE_BINDING_PATH)return Response.json(bindings);return new Response('not found',{status:404});}}};
 const projected=await runKirR2ProductionProjection({question:'为什么当前尺度会逐渐变得不足',locale:'zh-Hans',env});
 assert.equal(projected.applied,true,`Book IV production projection must apply: ${projected.status}`);assert.equal(projected.result.guard.passed,true);assert.ok(projected.result.usage.whichBookUsed.includes('BOOK-4'));assert.equal(projected.result.evidencePack.primaryEvidence[0].bookCode,'BOOK-4');
@@ -29,4 +32,4 @@ assert.equal(b02.counts.articleCandidates,4);assert.equal(b02.counts.humanAccept
 console.log('✓ BOOK-IV-A6 Production Admission regression passed: Book IV remains production-eligible in KIR through the Book I–IV successor authority.');
 console.log('✓ Production semantic profiles remain 473 (65 + 180 + 103 + 125); all 125 Book IV profiles remain admitted in the live projection path.');
 console.log('✓ Historical Book I–III registry and A2 pre-admission profiles remain immutable/fail-closed; Article production progression does not rewrite A6 admission authority.');
-console.log('✓ Post-A6 B02 has progressed to zh-Hans 4/4 human acceptance and English machine parity 4/4, with publication still closed.');
+console.log('✓ A6 admission history remains unchanged; a later Book IV publication successor may activate published bindings without retroactively changing A6.');
