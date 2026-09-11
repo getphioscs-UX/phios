@@ -2348,15 +2348,18 @@
     "check:book-v-atlas:r1:w4": "node scripts/check-book-v-civ-atlas-r1-w4-shell.mjs",
     "check:book-v-atlas:r1:w3-w4": "npm run check:book-v-atlas:r1:w3 && npm run check:book-v-atlas:r1:w4",
     "check:book-v-atlas:r1:w0-w4": "npm run check:book-v-atlas:r1:w0-w2 && npm run check:book-v-atlas:r1:w3-w4",
+    "check:book-v-atlas:r1:w5": "node scripts/check-book-v-civ-atlas-r1-w5-timeline.mjs",
+    "check:book-v-atlas:r1:w6": "node scripts/check-book-v-civ-atlas-r1-w6-cases.mjs",
+    "check:book-v-atlas:r1:w5-w6": "npm run check:book-v-atlas:r1:w5 && npm run check:book-v-atlas:r1:w6",
     "check:book4:b03-en": "node scripts/check-book4-b03-english-semantic-parity.mjs",
-    "check:book4:b04": "node scripts/check-book4-b04-zh-hans-production.mjs",
+    "check:book4:b04": "node scripts/check-book4-b04-zh-hans-production.mjs && node scripts/check-book4-b04-english-semantic-parity.mjs",
     "book4:b04:review": "node scripts/build-book4-b04-zh-hans-human-review.mjs",
     "check:pvp-r1:relationship-visual": "node scripts/check-pvp-r1-vis-phase11-relationship-visual.mjs",
     "check:pvp-r1:relationship-phase11": "node scripts/check-pvp-r1-vis-phase11-relationship.mjs",
     "check:integrated-phase11": "npm run check:integrated-phase10 && npm run check:pvp-r1:relationship-phase11 && node scripts/check-integrated-successor-phase11.mjs",
-    "check:book-v-atlas:r1:w5": "node scripts/check-book-v-civ-atlas-r1-w5-timeline.mjs",
-    "check:book-v-atlas:r1:w6": "node scripts/check-book-v-civ-atlas-r1-w6-cases.mjs",
-    "check:book-v-atlas:r1:w5-w6": "npm run check:book-v-atlas:r1:w5 && npm run check:book-v-atlas:r1:w6"
+    "book4:b05:review": "node scripts/build-book4-b05-zh-hans-human-review.mjs",
+    "check:book4:b04-en": "node scripts/check-book4-b04-english-semantic-parity.mjs",
+    "check:book4:b05": "node scripts/check-book4-b05-zh-hans-production.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
