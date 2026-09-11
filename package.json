@@ -2323,7 +2323,7 @@
     "check:book4:b02": "node scripts/check-book4-b02-english-semantic-parity.mjs",
     "check:book4:b02-en": "node scripts/check-book4-b02-english-semantic-parity.mjs",
     "book4:b02:review": "node scripts/build-book4-b02-zh-hans-human-review.mjs",
-    "check:book4:b03": "node scripts/check-book4-b03-zh-hans-production.mjs",
+    "check:book4:b03": "node scripts/check-book4-b03-zh-hans-production.mjs && node scripts/check-book4-b03-english-semantic-parity.mjs",
     "book4:b03:review": "node scripts/build-book4-b03-zh-hans-human-review.mjs",
     "check:pvp-r1:ziwei-w17": "node scripts/check-pvp-r1-vis-w17-ziwei-customer-density.mjs",
     "check:pvp-r1:ziwei-w18": "node scripts/check-pvp-r1-vis-w18-ziwei-authority-scope.mjs",
@@ -2347,7 +2347,10 @@
     "check:book-v-atlas:r1:w3": "node scripts/check-book-v-civ-atlas-r1-w3-state.mjs",
     "check:book-v-atlas:r1:w4": "node scripts/check-book-v-civ-atlas-r1-w4-shell.mjs",
     "check:book-v-atlas:r1:w3-w4": "npm run check:book-v-atlas:r1:w3 && npm run check:book-v-atlas:r1:w4",
-    "check:book-v-atlas:r1:w0-w4": "npm run check:book-v-atlas:r1:w0-w2 && npm run check:book-v-atlas:r1:w3-w4"
+    "check:book-v-atlas:r1:w0-w4": "npm run check:book-v-atlas:r1:w0-w2 && npm run check:book-v-atlas:r1:w3-w4",
+    "check:book4:b03-en": "node scripts/check-book4-b03-english-semantic-parity.mjs",
+    "check:book4:b04": "node scripts/check-book4-b04-zh-hans-production.mjs",
+    "book4:b04:review": "node scripts/build-book4-b04-zh-hans-human-review.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"
