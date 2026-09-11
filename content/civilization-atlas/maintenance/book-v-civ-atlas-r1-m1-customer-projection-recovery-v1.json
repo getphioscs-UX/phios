@@ -1,8 +1,8 @@
 {
   "schemaVersion": "PHI-OS-BOOK-V-CIV-ATLAS-R1-M1-MAINTENANCE-v1.0.0",
   "work": "BOOK-V-CIV-ATLAS-R1-M1",
-  "baselineCommit": "41782cebbbec8a70ce04d3327379c85ca71ab24d",
-  "status": "IN_PROGRESS_W0_W4B_COMPLETE",
+  "baselineCommit": "1e1d0363c4170fa751c93ac4d8111e76bbae95b8",
+  "status": "IN_PROGRESS_W0_W6_COMPLETE",
   "previousFreeze": "content/civilization-atlas/freeze/book-v-civ-atlas-r1-production-freeze-v1.json",
   "completedWaves": [
     "M1-W0",
@@ -11,31 +11,44 @@
     "M1-W3",
     "M1-W4",
     "M1-W4A",
-    "M1-W4B"
+    "M1-W4B",
+    "M1-W5",
+    "M1-W6"
   ],
   "defects": [
     "LEGACY_FAVICON_BROWSER_CHROME",
     "ATLAS_DISCOVERABILITY_DEFECT",
     "ATLAS_DYNAMIC_VISUAL_PROJECTION_MISSING",
     "ATLAS_POSTERS_UNBOUND_TO_CUSTOMER_STATE",
-    "TEXT_HEAVY_POSTER_READABILITY_DEPENDENCY"
+    "TEXT_HEAVY_POSTER_READABILITY_DEPENDENCY",
+    "ATLAS_CONTEXT_RETRIEVAL_PRIORITY_MISSING",
+    "ATLAS_ANSWER_GENERIC_DIFFERENTIATION_DRIFT",
+    "ATLAS_DEEP_LINK_STATE_LOSS"
   ],
-  "faviconRecovery": {
-    "assetCode": "LOGO-011",
-    "filename": "PHIOS-FAVICON-v1.svg",
-    "sharedAuthorityModule": "assets/js/branding/favicon-authority.js",
-    "criticalFirstPaintConsumers": [
-      "knowledge/ask/index.html",
-      "books/reality-differentiation/index.html"
-    ]
+  "askRecovery": {
+    "status": "W5_W6_MACHINE_COMPLETE",
+    "owner": "EXISTING_CKA_KAP_RUNTIME",
+    "adapter": "functions/_lib/civilization-atlas-ask.js",
+    "retrievalPriority": [
+      "SELECTED_ATLAS_ENTITY",
+      "RELATED_ATLAS_REGISTRY_EVIDENCE",
+      "PART_12_CANONICAL_NODES",
+      "BOOK_5_PUBLISHED_OR_REVIEWED_KNOWLEDGE",
+      "BROADER_PHI_OS_KNOWLEDGE"
+    ],
+    "answerShape": [
+      "DIRECT_ANSWER",
+      "WHAT_CHANGED",
+      "LOSS_DIMENSIONS",
+      "EXAMPLES",
+      "WHAT_CONTINUED",
+      "EVIDENCE_UNKNOWN",
+      "EXPLORE_IN_ATLAS"
+    ],
+    "criticalFixture": "为什么某些国家落寞？",
+    "criticalFixtureIntent": "CIVILIZATION_DECLINE",
+    "deepLink": "RECONSTRUCTED_FROM_AUTHORIZED_ATLAS_CONTEXT_STATE"
   },
-  "explorerEntryRecovery": {
-    "route": "/books/reality-differentiation/",
-    "readEntry": "#book-parts",
-    "exploreEntry": "#atlas",
-    "atlasPlacement": "DIRECTLY_AFTER_BOOK_HERO_BEFORE_PARTS_AFTER_RENDER"
-  },
-  "askRecovery": "DEFERRED_TO_M1_W5_W6",
   "authorizedFrozenPathChanges": [
     {
       "path": "books/reality-differentiation/index.html",
@@ -73,35 +86,17 @@
     "registriesUnchanged": true,
     "noNewRuntime": true,
     "noNewAskRuntime": true,
+    "noSecondRetrievalRuntime": true,
+    "noSecondAnswerRuntime": true,
     "posterIsNotSourceOfTruth": true,
     "posterIsNotRuntimeDependency": true,
     "noOcrRegistryWrite": true,
-    "noSecondVisualResolver": true,
-    "askRecoveryStillDeferredToM1W5W6": true
+    "noCivilizationRankingScore": true
   },
   "dynamicVisualRecovery": {
     "activeProjection": "STRUCTURED_HTML_SVG_PRIMARY",
     "renderer": "assets/js/pages/civilization-atlas/atlas-structured-visual.js",
-    "layersBound": [
-      "timeline",
-      "cases",
-      "comparison",
-      "world",
-      "trajectories",
-      "transitions",
-      "loss"
-    ],
-    "worldSnapshotCount": 15,
-    "registryAuthorityPreserved": true,
-    "posterRuntimeDependency": false,
-    "legacyPosterProjection": "RETIRED_FROM_ACTIVE_RUNTIME",
-    "r2AtlasObjects": "SAFE_TO_DELETE_AFTER_PRODUCTION_VERIFICATION",
-    "newBackgroundHeroRequired": false,
     "premiumVisualLanguage": "WEBP_VISUAL_LANGUAGE_TRANSLATED_TO_HTML_SVG_CSS",
-    "palette": "DEEP_NAVY_CHAMPAGNE_GOLD_IVORY",
-    "luminousNodes": true,
-    "radialNetworks": true,
-    "premiumEditorialCards": true,
-    "worldProjection": "SCHEMATIC_NETWORK_NOT_GEOGRAPHIC_BORDERS"
+    "posterRuntimeDependency": false
   }
 }

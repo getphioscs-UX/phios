@@ -19,6 +19,10 @@ import {
   normalizeTrustedCkaAccess,
   projectCkaW18W33Consumption
 } from '../_lib/client-knowledge-ask-c.js';
+import {
+  composeCivilizationAtlasRetrievalQuestion,
+  resolveCivilizationAtlasAsk
+} from '../_lib/civilization-atlas-ask.js';
 
 const JSON_HEADERS = Object.freeze({
   'content-type': 'application/json; charset=utf-8',
@@ -109,7 +113,15 @@ function buildInput(payload, context) {
 
 async function execute(context, payload) {
   const input = buildInput(payload, context);
-  const retrievalQuestion = composeCkaRealityAwareRetrievalQuestion(
+  const atlas = await resolveCivilizationAtlasAsk({
+    question: input.q,
+    locale: input.locale,
+    entryContext: input.entryContext,
+    knowledgeContext: input.knowledgeContext,
+    requestUrl: context.request.url,
+    fetcher: context?.data?.atlasFetch || fetch
+  });
+  const baseRetrievalQuestion = composeCkaRealityAwareRetrievalQuestion(
     composeCkaContextualRetrievalQuestion(
       composeCkaGuidedRetrievalQuestion(
         composeCkaRetrievalQuestion(input.followUpContext),
@@ -119,6 +131,7 @@ async function execute(context, payload) {
     ),
     input.realityAuthorization
   );
+  const retrievalQuestion = composeCivilizationAtlasRetrievalQuestion(baseRetrievalQuestion, atlas);
   const result = await runAskPhiosPipeline({
     input: {
       question: retrievalQuestion,
@@ -126,7 +139,9 @@ async function execute(context, payload) {
       surfaceContext: {
         surfaceType: 'ASK_PHIOS',
         articleSlug: input.entryContext.articleCode || undefined,
-        bookCode: input.entryContext.bookCode || undefined
+        bookCode: input.entryContext.bookCode || undefined,
+        partCode: atlas ? 'PART-12' : (input.entryContext.partCode || undefined),
+        atlasIntent: atlas?.intent || undefined
       }
     },
     request: context.request,
@@ -154,7 +169,7 @@ async function execute(context, payload) {
     ok: true,
     ...result,
     cka: {
-      schemaVersion: 'PHI-OS-CKA-RESPONSE-v1.1.0',
+      schemaVersion: 'PHI-OS-CKA-RESPONSE-v1.2.0',
       entryContext: input.entryContext,
       followUp: {
         ...input.followUpContext,
@@ -164,10 +179,13 @@ async function execute(context, payload) {
       clientAnswer,
       w5w17,
       w18w33,
+      atlas,
       governance: {
         clientSurfaceOnly: true,
         upstreamAnswerRuntimeReused: true,
         secondAnswerRuntimeCreated: false,
+        secondRetrievalRuntimeCreated: false,
+        atlasAwareRetrievalUsesExistingKap: true,
         persistentHistoryCreated: false,
         shadowAccountCreated: false,
         requestTransport: 'POST_JSON_NO_STORE',
