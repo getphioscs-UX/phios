@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';
+const r=p=>fs.readFileSync(p,'utf8'),j=p=>JSON.parse(r(p));
+const freeze=j('content/product-visual-platform-r1/freeze/pvp-r1-vis-static-assets-w29-w31-phase12-freeze-v1.json');assert.equal(freeze.frozenExit.phase13Authorized,true);
+const files={base:r('assets/customer-ui/base.css'),profile:r('assets/customer-ui/visuals/profile-visual-mvp.css'),profileDepth:r('assets/customer-ui/visuals/profile-free-paid.css'),common:r('assets/customer-ui/visuals/pvp-components.css'),ecr:r('assets/customer-ui/surfaces/ecr-specialist.css'),ziwei:r('assets/customer-ui/surfaces/ziwei-specialist-workspace.css'),method:r('assets/customer-ui/surfaces/pvp-phase10-method-snapshots.css'),rel:r('assets/customer-ui/surfaces/final-personal-reading-experience.css')};
+assert.match(files.base,/img, svg, video, canvas \{[^}]*max-width: 100%/);assert.match(files.base,/background-size: min\(58rem, 86vw\)/);
+assert.match(files.profile,/@media\(max-width:900px\)/);assert.match(files.profile,/@media\(max-width:600px\)/);assert.match(files.profileDepth,/auto-fit,minmax\(16rem,1fr\)/);
+assert.match(files.common,/auto-fit,minmax\(8rem,1fr\)/);assert.match(files.ecr,/@media \(max-width:767px\)/);assert.match(files.ecr,/@media \(max-width:620px\)/);assert.match(files.ecr,/overscroll-behavior:contain/);
+assert.match(files.ziwei,/@media\(min-width:1440px\)/);assert.match(files.ziwei,/@media\(max-width:767px\)/);assert.match(files.ziwei,/@media\(max-width:560px\)/);assert.match(files.method,/@media\(max-width:767px\)/);assert.match(files.method,/auto-fit,minmax\(8\.5rem,1fr\)/);
+assert.match(files.rel,/@media\(max-width:900px\)/);assert.match(files.rel,/@media\(max-width:620px\)/);assert.match(files.rel,/@media\(max-width:52rem\)/);
+const a=j('content/product-visual-platform-r1/phase13/acceptance/pvp-r1-vis-w32-responsive-machine-acceptance-v1.json');assert.equal(a.status,'MACHINE_ACCEPTED_RESPONSIVE');assert.equal(a.accepted,true);assert.equal(a.liveBrowserClaimed,false);for(const w of ['360','768','1440'])assert.ok(a.viewports[w]);
+console.log('✓ PVP W32 Responsive Acceptance passed for 360 / 768 / 1440 structural contracts; live production-browser acceptance remains Phase 14.');

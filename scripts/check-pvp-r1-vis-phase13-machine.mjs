@@ -1,0 +1,1 @@
+import './check-pvp-r1-vis-w32-responsive-acceptance.mjs';import './check-pvp-r1-vis-w33-print-acceptance.mjs';import './check-pvp-r1-vis-w34-accessibility-acceptance.mjs';console.log('✓ PVP Phase 13 machine acceptance W32–W34 passed.');

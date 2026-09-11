@@ -2387,7 +2387,18 @@
     "check:book-v-atlas:r1:w13": "node scripts/check-book-v-civ-atlas-r1-w13-contextual-ask.mjs",
     "check:book-v-atlas:r1:w12-w13": "npm run check:book-v-atlas:r1:w12 && npm run check:book-v-atlas:r1:w13",
     "check:book-v-atlas:r1:w15": "node scripts/check-book-v-civ-atlas-r1-w15-human-acceptance.mjs",
-    "book-v-atlas:r1:w15:review": "node -e \"console.log(\\\"Open tools/review/BOOK-V-CIV-ATLAS-R1-W15-HUMAN-REVIEW.html through your local/site server.\\\")\""
+    "book-v-atlas:r1:w15:review": "node -e \"console.log(\\\"Open tools/review/BOOK-V-CIV-ATLAS-R1-W15-HUMAN-REVIEW.html through your local/site server.\\\")\"",
+    "check:pvp-r1:phase13:w32": "node scripts/check-pvp-r1-vis-w32-responsive-acceptance.mjs",
+    "check:pvp-r1:phase13:w33": "node scripts/check-pvp-r1-vis-w33-print-acceptance.mjs",
+    "check:pvp-r1:phase13:w34": "node scripts/check-pvp-r1-vis-w34-accessibility-acceptance.mjs",
+    "check:pvp-r1:phase13:machine": "node scripts/check-pvp-r1-vis-phase13-machine.mjs",
+    "check:pvp-r1:phase13:w35": "node scripts/check-pvp-r1-vis-w35-visual-human-gate.mjs",
+    "check:pvp-r1:phase13:w36": "node scripts/check-pvp-r1-vis-w36-purchase-intent-gate.mjs",
+    "check:pvp-r1:phase13:w37": "node scripts/check-pvp-r1-vis-w37-conversion-pilot.mjs",
+    "check:pvp-r1:phase13:readiness": "node scripts/check-pvp-r1-vis-phase13-readiness.mjs",
+    "record:pvp-r1:phase13:human": "node scripts/pvp-r1-vis-phase13-record-human-review.mjs",
+    "check:integrated-phase13:prepare": "npm run check:integrated-phase12 && npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:readiness && node scripts/check-integrated-successor-phase13-preflight.mjs",
+    "check:pvp-r1:phase13:final": "npm run check:pvp-r1:phase13:machine && npm run check:pvp-r1:phase13:w35 && npm run check:pvp-r1:phase13:w36 && npm run check:pvp-r1:phase13:w37"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

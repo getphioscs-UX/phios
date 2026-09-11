@@ -72,3 +72,16 @@
     background-size: cover;
   }
 }
+
+@layer cx.base {
+  /* PVP-R1-VIS W33: decorative R2 atmosphere never consumes ink or obscures print output. */
+  @media print {
+    html[data-pvp-static-atmosphere="remote-verified"] body,
+    html[data-pvp-static-atmosphere="remote-verified"] [data-cx-shell-region="header"],
+    html[data-pvp-static-atmosphere="remote-verified"] main > :first-child,
+    html[data-pvp-static-atmosphere="remote-verified"] [data-pvp-paid-depth="true"] {
+      background-image: none;
+      background-color: #fff;
+    }
+  }
+}
