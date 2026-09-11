@@ -12,10 +12,11 @@ for(const [i,p] of timeline.periods.entries()){
 }
 const layers=json('content/civilization-atlas/atlas-layers-v1.json');
 assert.equal(layers.explorerLayers.find(x=>x.layerId==='timeline')?.customerEnabled,true);
-for(const id of ['comparison','world','trajectories','transitions','loss']) assert.equal(layers.explorerLayers.find(x=>x.layerId===id)?.customerEnabled,false,`${id} activated before its wave`);
+for(const id of ['trajectories','transitions','loss']) assert.equal(layers.explorerLayers.find(x=>x.layerId===id)?.customerEnabled,false,`${id} activated before its wave`);
+// Successor-aware: W7/W8 may activate comparison/world after W5 is frozen.
 const data=read('assets/js/pages/civilization-atlas/atlas-data.js'); assert.match(data,/loadTimelineRegistry/);
 const renderer=read('assets/js/pages/civilization-atlas/timeline-renderer.js');
 for(const token of ['data-atlas-timeline','data-period-id','civ-atlas-table','formatHistoricalRange','onPeriodSelect','onCaseSelect']) assert.ok(renderer.includes(token),`missing timeline behavior: ${token}`);
 const shell=read('assets/js/pages/civilization-atlas/atlas-shell.js'); assert.match(shell,/renderTimeline/); assert.match(shell,/timeline-period/); assert.match(shell,/timeline-case/);
 console.log('✓ BOOK-V-CIV-ATLAS-R1-W5 Timeline Vertical Slice passed.');
-console.log('  T00–T19 are active, bilingual and URL-state connected; later Atlas layers remain inactive.');
+console.log('  T00–T19 are active, bilingual and URL-state connected; successor W7/W8 activation is allowed while W9+ remains gated.');

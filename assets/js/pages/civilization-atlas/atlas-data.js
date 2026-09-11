@@ -6,5 +6,7 @@ async function getJson(path){
 }
 export async function loadTimelineRegistry(){return getJson('/content/civilization-atlas/timeline/timeline-periods-v1.json');}
 export async function loadCaseRegistry(){return getJson('/content/civilization-atlas/cases/civilization-case-registry-v1.json');}
+export async function loadComparisonRegistry(){return getJson('/content/civilization-atlas/comparison/comparison-families-v1.json');}
+export async function loadWorldSnapshotRegistry(){return getJson('/content/civilization-atlas/snapshots/world-snapshots-v1.json');}
 export async function loadAtlasLayers(){return getJson('/content/civilization-atlas/atlas-layers-v1.json');}
 export function clearAtlasDataCache(){CACHE.clear();}
