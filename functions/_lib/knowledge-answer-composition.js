@@ -55,9 +55,11 @@ function localeCopy(locale) {
 }
 
 function sourcePriority(source) {
+  if (source?.sourceType === 'CIVILIZATION_ATLAS_ENTITY') return 0;
+  if (source?.sourceType === 'CIVILIZATION_ATLAS_EVIDENCE') return 1;
   if (source?.sourceType === 'PUBLISHED_CANONICAL_ARTICLE') return 0;
-  if (source?.sourceType === 'COMPLETED_MANUSCRIPT') return 1;
-  return 2;
+  if (source?.sourceType === 'COMPLETED_MANUSCRIPT') return 2;
+  return 3;
 }
 
 function groundedSentences(bundle) {
@@ -161,14 +163,16 @@ export function projectKapSources(bundle, depth = DEFAULT_DEPTH) {
     sourceType: source.sourceType,
     authorityLabel: source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE'
       ? 'PUBLISHED_CANONICAL_KNOWLEDGE'
-      : 'REVIEWED_MANUSCRIPT_KNOWLEDGE',
+      : source.sourceType?.startsWith('CIVILIZATION_ATLAS_')
+        ? 'STRUCTURED_ATLAS_KNOWLEDGE'
+        : 'REVIEWED_MANUSCRIPT_KNOWLEDGE',
     nodeCode: source.nodeCode || null,
     fragmentCode: source.fragmentCode || null,
     sectionCode: source.sectionCode || null,
     bookCode: source.bookCode || null,
     partCode: source.partCode || null,
     pageRange: source.pageRange || null,
-    href: source.nodeCode ? (hrefByNode.get(source.nodeCode) || null) : null,
+    href: source.href || (source.nodeCode ? (hrefByNode.get(source.nodeCode) || null) : null),
     questionScopedExcerpt: canonicalText(source.text),
     rawFullSourceExposed: false
   }));
@@ -325,13 +329,14 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     depth,
     now
   });
-  const kir = await runKirR2ProductionProjection({
+  const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true;
+  const kir = relevanceEstablished ? await runKirR2ProductionProjection({
     question: input?.question || grounding.groundingBundle?.question?.text || '',
     locale: input?.locale || grounding.groundingBundle?.question?.locale || 'zh-Hans',
     env,
     upstreamGroundedAnswer: projection?.answer?.content?.directAnswer || null,
     upstreamGroundingBundle: grounding.groundingBundle
-  });
+  }) : {status:'KIR_R2_BLOCKED_BY_RELEVANCE_GATE',applied:false};
   const kirApplied = kir?.applied === true;
   const kirAnswer = kirApplied ? kir.result.answer.text : null;
   const answer = kirApplied ? {

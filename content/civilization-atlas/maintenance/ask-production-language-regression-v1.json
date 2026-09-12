@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "PHI-OS-ASK-PRODUCTION-LANGUAGE-REGRESSION-v1.0.0",
+  "status": "ACTIVE_SOURCE_REGRESSION",
+  "provenance": "User-observed production wording plus representative bilingual customer questions; this fixture is not evidence of deployed production execution.",
+  "cases": [
+    {"id":"ASK-R001","locale":"zh-Hans","question":"为什么我最近总觉得工作没有方向？","expectedRoute":"ASK2"},
+    {"id":"ASK-R002","locale":"zh-Hans","question":"我现在应该怎样调整工作节奏？","expectedRoute":"ASK2"},
+    {"id":"ASK-R003","locale":"zh-Hans","question":"我的现金流为什么一直不稳定？","expectedRoute":"ASK2"},
+    {"id":"ASK-R004","locale":"en","question":"How should I change my work rhythm now?","expectedRoute":"ASK2"},
+    {"id":"ASK-R005","locale":"en","question":"Why does my relationship keep repeating the same conflict?","expectedRoute":"ASK2"},
+    {"id":"ASK-R006","locale":"zh-Hans","question":"什么是路径依赖，为什么它会影响文明？","expectedRoute":"CKA"},
+    {"id":"ASK-R007","locale":"zh-Hans","question":"现代文明为什么会分化？","expectedRoute":"CKA"},
+    {"id":"ASK-R008","locale":"zh-Hans","question":"关系是什么？","expectedRoute":"CKA"},
+    {"id":"ASK-R009","locale":"en","question":"What is civilizational path dependence?","expectedRoute":"CKA"},
+    {"id":"ASK-R010","locale":"en","question":"Explain the mechanism of institutional load.","expectedRoute":"CKA"},
+    {"id":"ASK-R011","locale":"zh-Hans","question":"纳图夫聚落如何形成更高密度？","expectedRoute":"CKA","scope":{"bookCode":"BOOK-5","partCode":"PART-12","activeLayer":"cases","primaryCaseId":"CA-T00-01"}},
+    {"id":"ASK-R012","locale":"en","question":"What changed at the settlement threshold?","expectedRoute":"CKA","scope":{"bookCode":"BOOK-5","partCode":"PART-12","activeLayer":"timeline","timeWindowId":"T00"}},
+    {"id":"ASK-R013","locale":"zh-Hans","question":"大陆帝国要协调什么核心问题？","expectedRoute":"CKA","scope":{"bookCode":"BOOK-5","partCode":"PART-12","activeLayer":"comparison","comparisonFamilyId":"CONTINENTAL_EMPIRE"}},
+    {"id":"ASK-R014","locale":"en","question":"What did the world around 3000 BCE contain?","expectedRoute":"CKA","scope":{"bookCode":"BOOK-5","partCode":"PART-12","activeLayer":"world","snapshotId":"WS-M3000"}},
+    {"id":"ASK-R015","locale":"zh-Hans","question":"人口承载的长时段轨迹描述什么？","expectedRoute":"CKA","scope":{"bookCode":"BOOK-5","partCode":"PART-12","activeLayer":"trajectories","trajectoryIds":["POPULATION"]}},
+    {"id":"ASK-R016","locale":"en","question":"What new load followed the settlement transition?","expectedRoute":"CKA","scope":{"bookCode":"BOOK-5","partCode":"PART-12","activeLayer":"transitions","transitionWindowId":"TW-01"}},
+    {"id":"ASK-R017","locale":"zh-Hans","question":"政权终止为什么不等于文明整体灭亡？","expectedRoute":"CKA","scope":{"bookCode":"BOOK-5","partCode":"PART-12","activeLayer":"loss","lossTypeId":"LOSS-REGIME-END"}},
+    {"id":"ASK-R018","locale":"zh-Hans","question":"火星城市的第七种量子礼制如何运作？","expectedRoute":"CKA","expectedCoverage":"INSUFFICIENT_COVERAGE"},
+    {"id":"ASK-R019","locale":"en","question":"How does the seventh Martian quantum ritual work?","expectedRoute":"CKA","expectedCoverage":"INSUFFICIENT_COVERAGE"},
+    {"id":"ASK-R020","locale":"zh-Hans","question":"今天的利率是多少？","expectedRoute":"ASK2","currentEvidence":true}
+  ]
+}

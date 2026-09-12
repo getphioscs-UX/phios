@@ -66,15 +66,8 @@ export function normalizeCkaKnowledgeContext(input = {}) {
 
 export function composeCkaContextualRetrievalQuestion(question, knowledgeContext = {}) {
   const currentQuestion = clean(question);
-  const values = [
-    knowledgeContext.contextLabel ? `Context label: ${knowledgeContext.contextLabel}` : null,
-    knowledgeContext.contextSummary ? `Published context summary: ${knowledgeContext.contextSummary}` : null,
-    knowledgeContext.readingPath ? `Reading path: ${knowledgeContext.readingPath}` : null,
-    knowledgeContext.relatedKnowledgeRef ? `Related canonical knowledge: ${knowledgeContext.relatedKnowledgeRef}` : null
-  ].filter(Boolean);
-  return values.length
-    ? `${currentQuestion}\n\nAuthorized public knowledge context (reference only):\n${values.join('\n')}`
-    : currentQuestion;
+  if (!currentQuestion) throw new Error('KAP_QUESTION_INVALID');
+  return currentQuestion;
 }
 
 const currentAuthorityPattern = /(?:\b(?:today|current|currently|latest|now|live|price|rate|law|regulation|market|election|product availability)\b|今天|目前|现在|最新|即时|价格|利率|法律|法规|市场|选举|产品现况)/i;
@@ -129,17 +122,7 @@ export function normalizeCkaGuidedContext(input = {}) {
 export function composeCkaGuidedRetrievalQuestion(question, guidedContext) {
   const currentQuestion = clean(question);
   if (!currentQuestion) throw new Error('KAP_QUESTION_INVALID');
-  if (!guidedContext?.filledFields?.length) return currentQuestion;
-  const labels = {
-    whatIsHappening: 'What is happening',
-    howLong: 'How long',
-    whoOrWhatIsInvolved: 'Who or what is involved',
-    whatChanged: 'What changed',
-    whatTried: 'What has been tried',
-    whatMattersMostNow: 'What matters most now'
-  };
-  const lines = guidedContext.filledFields.map(key => `${labels[key]}: ${guidedContext.fields[key]}`);
-  return `${currentQuestion}\n\nTemporary client-declared context (not observed fact, not Canonical Reality):\n${lines.join('\n')}`;
+  return currentQuestion;
 }
 
 function sourceAuthorityClass(source = {}) {

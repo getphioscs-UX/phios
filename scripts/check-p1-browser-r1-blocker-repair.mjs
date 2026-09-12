@@ -5,6 +5,7 @@ import {classifyAsk2Consumption} from '../functions/ask2/ask2-consumption-runtim
 import {classifyLensQuestion} from '../functions/lens-router/lens-router-runtime.js';
 import {createKapQuestionIntake,normalizeKapQuestion,evaluateKapQuestionSourceRelevance,evaluateKapCoverage} from '../functions/_lib/knowledge-answer-grounding.js';
 import {onRequestPost as runContextualAsk} from '../functions/api/customer-contextual-ask.js';
+import {kapMaintenanceSuccessorSha} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
 const read=p=>fs.readFileSync(p,'utf8');const json=p=>JSON.parse(read(p));const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const shell=read('assets/customer-ui/js/shell.js');
 const brand=json('content/customer-experience-rebuild/authority/customer-brand-asset-authority-v4.json');
@@ -25,7 +26,8 @@ assert.equal(kapRelevance.status,'ACTIVE_ADDITIVE_QUESTION_SOURCE_RELEVANCE_SUCC
 assert.equal(kapKirBridge.runtimeSuccessor.predecessorSha256,kapRelevance.runtimeSuccessors.find(item=>item.path===kapKirBridge.runtimeSuccessor.path).currentSha256);
 assert.equal(kapKirContent.runtimeSuccessor.predecessorSha256,kapKirBridge.runtimeSuccessor.currentSha256);
 for(const item of kapRelevance.runtimeSuccessors){
-  const currentSha=item.path===kapKirContent.runtimeSuccessor.path?kapKirContent.runtimeSuccessor.currentSha256:item.currentSha256;
+  const frozenSuccessorSha=item.path===kapKirContent.runtimeSuccessor.path?kapKirContent.runtimeSuccessor.currentSha256:item.currentSha256;
+  const currentSha=kapMaintenanceSuccessorSha(item.path,frozenSuccessorSha);
   assert.equal(sha(item.path),currentSha,`KAP_RELEVANCE_RUNTIME_DRIFT:${item.path}`);
 }
 const askRequest=new Request('https://phios.test/api/customer-contextual-ask',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({question:'为什么我丈夫脾气那么坏',locale:'zh-Hans',contexts:[{contextType:'KNOWLEDGE'}],questionOnly:false})});const askResponse=await runContextualAsk({request:askRequest,env:{},data:{}});assert.equal(askResponse.status,200);const askPayload=await askResponse.json();assert.equal(askPayload.ok,true);assert.equal(askPayload.view.state,'NEEDS_CONTEXT');assert.match(askPayload.view.answer.text,/脾气坏/);assert.doesNotMatch(askPayload.view.answer.text,/为什么需要 PHI OS/);assert.deepEqual(askPayload.view.relatedKnowledge,[]);assert.ok(askPayload.view.answer.supporting.every(item=>!/I am using the Relational Runtime/.test(item)));assert.ok(askPayload.view.answer.supporting.some(item=>/关系情境/.test(item))); 

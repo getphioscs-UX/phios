@@ -50,7 +50,9 @@ const list=items=>arr(items).length
 
 function selectedKnowledgeContext(form){
   const input=form.querySelector('[data-cx-seeded-context][data-context-type="KNOWLEDGE"]:checked');
-  return input?{contextRef:input.dataset.contextRef,contextLabel:input.dataset.contextLabel||tr('Selected knowledge source','已选择知识来源'),contextRoute:input.dataset.contextRoute||'/knowledge/',contextSummary:input.dataset.contextSummary||null,readingPath:input.dataset.readingPath||null,relatedKnowledgeRef:input.dataset.relatedKnowledgeRef||null}:null;
+  if(!input)return null;
+  let retrievalScope=null;try{retrievalScope=JSON.parse(input.dataset.retrievalScope||'null')}catch{}
+  return {contextRef:input.dataset.contextRef,contextLabel:input.dataset.contextLabel||tr('Selected knowledge source','已选择知识来源'),contextRoute:input.dataset.contextRoute||'/knowledge/',contextSummary:input.dataset.contextSummary||null,readingPath:input.dataset.readingPath||null,relatedKnowledgeRef:input.dataset.relatedKnowledgeRef||null,retrievalScope};
 }
 
 function selectedRequest(form){
@@ -208,7 +210,7 @@ function availabilityHelp(item,specificKnowledge){
 }
 
 async function loadSeededContexts(){
-  const params=new URLSearchParams(location.search),contextType=params.get('contextType'),contextRef=params.get('contextRef'),contextLabel=params.get('contextLabel'),contextRoute=params.get('contextRoute'),contextSummary=params.get('contextSummary'),readingPath=params.get('readingPath'),relatedKnowledgeRef=params.get('relatedKnowledgeRef');
+  const params=new URLSearchParams(location.search),contextType=params.get('contextType'),contextRef=params.get('contextRef'),contextLabel=params.get('contextLabel'),contextRoute=params.get('contextRoute'),contextSummary=params.get('contextSummary'),readingPath=params.get('readingPath'),relatedKnowledgeRef=params.get('relatedKnowledgeRef'),retrievalScope=params.get('retrievalScope');
   const node=document.querySelector('[data-cx-seeded-contexts]');
   if(!node)return;
   if(!contextType){node.innerHTML='';return;}
@@ -221,7 +223,7 @@ async function loadSeededContexts(){
       const label=specificKnowledge?(contextLabel||tr('Selected knowledge source','已选择知识来源')):x.label;
       const available=x.availability==='AVAILABLE'||x.availability==='AVAILABLE_FROM_SOURCE';
       const checked=available&&(specificKnowledge||x.availability==='AVAILABLE_FROM_SOURCE');
-      return `<label class="cx-context-choice" data-availability="${esc(x.availability)}"><input type="checkbox" data-cx-seeded-context data-context-type="${esc(x.contextType)}" data-context-ref="${esc(x.requestedContextRef||'')}" data-context-label="${esc(label)}" data-context-route="${esc(contextRoute||'/knowledge/')}" data-context-summary="${esc(contextSummary||'')}" data-reading-path="${esc(readingPath||'')}" data-related-knowledge-ref="${esc(relatedKnowledgeRef||'')}" ${checked?'checked':''} ${available?'':'disabled'}><span><strong>${esc(label)}</strong><small>${esc(availabilityHelp(x,specificKnowledge))}</small></span></label>`;
+      return `<label class="cx-context-choice" data-availability="${esc(x.availability)}"><input type="checkbox" data-cx-seeded-context data-context-type="${esc(x.contextType)}" data-context-ref="${esc(x.requestedContextRef||'')}" data-context-label="${esc(label)}" data-context-route="${esc(contextRoute||'/knowledge/')}" data-context-summary="${esc(contextSummary||'')}" data-reading-path="${esc(readingPath||'')}" data-related-knowledge-ref="${esc(relatedKnowledgeRef||'')}" data-retrieval-scope="${esc(retrievalScope||'')}" ${checked?'checked':''} ${available?'':'disabled'}><span><strong>${esc(label)}</strong><small>${esc(availabilityHelp(x,specificKnowledge))}</small></span></label>`;
     }).join('');
     if(node.querySelector('[data-context-type="KNOWLEDGE"]:checked')&&document.querySelector('[name="contextKnowledge"]'))document.querySelector('[name="contextKnowledge"]').checked=false;
   }catch{

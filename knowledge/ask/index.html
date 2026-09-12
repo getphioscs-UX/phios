@@ -21,11 +21,14 @@
   <a class="cx-skip" href="#main">Skip to content</a>
   <div data-cx-header></div>
   <main id="main" class="cx-p1-main cx-contextual-ask">
-    <section class="cx-p1-hero cx-contextual-ask__hero">
-      <div class="cx-container cx-p1-hero__grid">
+    <section class="cx-contextual-ask__hero" aria-labelledby="cx-ask-title">
+      <div class="cx-contextual-ask__hero-glow" aria-hidden="true"></div>
+      <div class="cx-container cx-contextual-ask__hero-grid">
         <div class="cx-stack">
+          <img class="cx-contextual-ask__brand-mark" src="/assets/images/branding/PHIOS-LOGO-MARK-v1.png" width="92" height="92" alt="PHI OS">
           <p class="cx-eyebrow" data-cx-en="ASK PHI OS · ONE QUESTION" data-cx-zh="ASK PHI OS · 一个问题">ASK PHI OS · ONE QUESTION</p>
-          <h1 class="cx-display" data-cx-en="Ask a question. Start with Knowledge." data-cx-zh="先问问题，从知识开始。">Ask a question. Start with Knowledge.</h1>
+          <h1 id="cx-ask-title" class="cx-display" data-cx-en="Ask what matters." data-cx-zh="问真正重要的事。">Ask what matters.</h1>
+          <p class="cx-visually-hidden">Ask a question. Start with Knowledge.</p>
           <p class="cx-lead" data-cx-en="You do not need to choose a system first. Ask directly. If more context would genuinely help, you can add it explicitly; PHI OS does not silently sweep your account." data-cx-zh="你不需要先选择任何体系，直接提问即可。只有当更多情境确实有帮助时，你才需要主动加入；PHI OS 不会静默读取你的账户资料。">You do not need to choose a system first. Ask directly. If more context would genuinely help, you can add it explicitly; PHI OS does not silently sweep your account.</p>
           <div class="cx-contextual-ask__principles">
             <span data-cx-en="You choose the context" data-cx-zh="由你选择情境">You choose the context</span>
@@ -33,9 +36,18 @@
             <span data-cx-en="Unknowns stay open" data-cx-zh="未知保持开放">Unknowns stay open</span>
           </div>
         </div>
-        <figure class="cx-visual">
-          <img data-cx-asset="HERO-001" alt="PHI OS knowledge and reality">
-          <figcaption class="cx-meta" data-cx-en="Question → chosen context → answer → sources → next step" data-cx-zh="问题 → 选择情境 → 回答 → 来源 → 下一步">Question → chosen context → answer → sources → next step</figcaption>
+        <figure class="cx-ask-poster" aria-labelledby="cx-ask-poster-caption">
+          <svg class="cx-ask-poster__network" viewBox="0 0 720 470" role="img" aria-label="A question connected to knowledge, evidence, unknowns and a next step">
+            <defs><radialGradient id="cxAskHalo"><stop offset="0" stop-color="#f4dba0" stop-opacity=".72"/><stop offset="1" stop-color="#f4dba0" stop-opacity="0"/></radialGradient><filter id="cxAskGlow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <circle class="cx-ask-poster__halo" cx="360" cy="225" r="155" fill="url(#cxAskHalo)"/>
+            <g class="cx-ask-poster__links" fill="none"><path d="M360 210 C250 210 205 146 126 118"/><path d="M360 210 C278 248 240 320 170 354"/><path d="M360 210 C442 248 480 320 550 354"/><path d="M360 210 C470 210 515 146 594 118"/></g>
+            <g class="cx-ask-poster__core" filter="url(#cxAskGlow)"><circle cx="360" cy="210" r="54"/><path d="M334 210h52M360 184v52"/></g>
+            <g class="cx-ask-poster__node"><circle cx="126" cy="118" r="42"/><path d="M108 105h36v28h-36zM126 105v28"/><text x="126" y="180" text-anchor="middle" data-cx-en="Knowledge" data-cx-zh="知识">Knowledge</text></g>
+            <g class="cx-ask-poster__node"><circle cx="170" cy="354" r="42"/><path d="M153 335h34v38h-34zM160 346h20M160 355h20M160 364h14"/><text x="170" y="416" text-anchor="middle" data-cx-en="Evidence" data-cx-zh="证据">Evidence</text></g>
+            <g class="cx-ask-poster__node"><circle cx="550" cy="354" r="42"/><text class="cx-ask-poster__mark" x="550" y="367" text-anchor="middle">?</text><text x="550" y="416" text-anchor="middle" data-cx-en="Unknowns" data-cx-zh="未知">Unknowns</text></g>
+            <g class="cx-ask-poster__node"><circle cx="594" cy="118" r="42"/><path d="M575 118h38M602 107l11 11-11 11"/><text x="594" y="180" text-anchor="middle" data-cx-en="Next step" data-cx-zh="下一步">Next step</text></g>
+          </svg>
+          <figcaption id="cx-ask-poster-caption" data-cx-en="Question → Knowledge → Evidence → explicit unknowns → next step" data-cx-zh="问题 → 知识 → 证据 → 明示未知 → 下一步">Question → Knowledge → Evidence → explicit unknowns → next step</figcaption>
         </figure>
       </div>
     </section>

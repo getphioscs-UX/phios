@@ -5,6 +5,7 @@ import {
   queryTerms,
   searchManuscriptCorpus
 } from '../knowledge-runtime/manuscript-source-runtime.js';
+import {retrieveAtlasScope} from './atlas-retrieval-scope.js';
 
 const MODES = new Set(['auto', 'overview', 'focused', 'full_article', 'continuity']);
 const SOURCES = new Set(['auto', 'hybrid', 'published', 'manuscript']);
@@ -152,7 +153,7 @@ export function deterministicGroundedAnswer(query, grounding, locale) {
   };
 }
 
-export async function handleKnowledgeAccessRequest(request, env = {}) {
+export async function handleKnowledgeAccessRequest(request, env = {}, options = {}) {
   if (request.method !== 'GET') return response({ ok: false, error: { code: 'METHOD_NOT_ALLOWED' } }, 405);
   const url = new URL(request.url);
   const query = (url.searchParams.get('q') || '').trim();
@@ -183,7 +184,10 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
     return response({ ok: false, error: { code: 'MANUSCRIPT_SOURCE_STORAGE_UNAVAILABLE' } }, 503);
   }
 
+  const atlas = await retrieveAtlasScope({env, scope:options.retrievalScope, locale, question:query});
   const answerGrounding = groundingFrom(published, manuscript);
+  answerGrounding.sources = [...atlas.sources, ...answerGrounding.sources];
+  answerGrounding.allowed = answerGrounding.sources.length > 0;
   const groundedAnswer = deterministicGroundedAnswer(query, answerGrounding, locale);
   answerGrounding.generatedAnswerPresent = Boolean(groundedAnswer);
 
@@ -209,6 +213,8 @@ export async function handleKnowledgeAccessRequest(request, env = {}) {
         maximumTotalExcerptChars: MANUSCRIPT_SOURCE_LIMITS.maximumTotalExcerptChars
       }
     },
+    retrievalScope: atlas.scope,
+    retrievalChain: atlas.chain,
     answerGrounding,
     authorityBoundary: {
       publishedArticleAuthorityUnchanged: true,

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {BASELINE,ROOT,readJson,sha256,assertFile,assertEvidence,fakeAssetsEnv} from './lib/knowledge-answer-projection/kap-grounding-v1.mjs';
 import {runKapGroundingPipeline} from '../functions/_lib/knowledge-answer-grounding.js';
+import {kapMaintenanceSuccessorSha} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
 const pkg=readJson('package.json');
 const aliases=['check:kap-w4','check:kap-w5','check:kap-w6','check:kap-w7','check:kap-w8','check:kap-w9','check:kap-w10'];
 for(const alias of aliases) assert.ok(pkg.scripts[alias],`MISSING_SCRIPT:${alias}`);
@@ -12,7 +13,7 @@ const relevanceSuccessor=readJson(`${ROOT}/reconciliation/kap-p1-question-source
 const kirSuccessor=readJson(`${ROOT}/reconciliation/kap-kir-r2-production-bridge-successor-v1.json`);
 const kirContentSuccessor=readJson(`${ROOT}/reconciliation/kap-kir-r2-content-grounding-successor-v2.json`);
 const relevanceRuntime=new Map(relevanceSuccessor.runtimeSuccessors.map(item=>[item.path,item]));
-const currentRuntimeSha=item=>item.path===kirContentSuccessor.runtimeSuccessor.path?kirContentSuccessor.runtimeSuccessor.currentSha256:(item.path===kirSuccessor.runtimeSuccessor.path?kirSuccessor.runtimeSuccessor.currentSha256:item.currentSha256);
+const currentRuntimeSha=item=>kapMaintenanceSuccessorSha(item.path,item.path===kirContentSuccessor.runtimeSuccessor.path?kirContentSuccessor.runtimeSuccessor.currentSha256:(item.path===kirSuccessor.runtimeSuccessor.path?kirSuccessor.runtimeSuccessor.currentSha256:item.currentSha256));
 assert.equal(acceptance.baselineCommit,BASELINE); assert.equal(acceptance.status,'ACCEPTED_QUESTION_TO_GROUNDING_PIPELINE_NO_ANSWER_COMPOSITION'); assert.equal(acceptance.nextPermittedWork,'KAP-W11_DETERMINISTIC_ANSWER_FIRST');
 assert.equal(freeze.baselineCommit,BASELINE); assert.equal(freeze.status,'FROZEN_KNOWLEDGE_GROUNDING_RUNTIME_NO_ANSWER_COMPOSITION');
 assert.equal(currentSuccessor.status,'ACTIVE_ADDITIVE_PUBLISHED_COVERAGE_SUCCESSOR');

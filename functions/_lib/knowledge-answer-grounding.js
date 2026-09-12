@@ -1,5 +1,6 @@
 import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
+import {normalizeAtlasRetrievalScope} from './atlas-retrieval-scope.js';
 
 const SUPPORTED_LOCALES = new Set(['zh-Hans', 'en']);
 const MAX_QUERY_LENGTH = 500;
@@ -26,10 +27,16 @@ export function evaluateKapQuestionSourceRelevance(bundle = {}) {
   const sources = Array.isArray(bundle?.sources) ? bundle.sources : [];
   const terms = relevanceTerms(bundle?.normalization?.tokens || []);
   if (!sources.length) return Object.freeze({state:'NO_SOURCES',established:false,informativeTerms:terms,matchedTerms:[]});
-  if (!terms.length) return Object.freeze({state:'NOT_ENOUGH_QUERY_TERMS_TO_GATE',established:true,informativeTerms:[],matchedTerms:[]});
+  if (!terms.length) return Object.freeze({state:'NOT_ENOUGH_QUERY_TERMS_TO_GATE',established:false,informativeTerms:[],matchedTerms:[],matchRatio:0});
   const corpus = sources.map(source => searchText(source?.text || '')).join('\n');
   const matched = terms.filter(term => corpus.includes(term));
-  return Object.freeze({state:matched.length?'QUESTION_SOURCE_RELEVANCE_ESTABLISHED':'QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED',established:matched.length>0,informativeTerms:terms,matchedTerms:matched});
+  const scoped = sources.some(source=>source?.scopeMatch===true);
+  // Two independent lexical anchors are required outside an explicit retrieval scope.
+  // CJK tokenization emits overlapping bigrams, so percentage thresholds otherwise
+  // reject a directly relevant sentence simply because the question is longer.
+  const required = terms.length === 1 ? 1 : 2;
+  const established = scoped ? matched.length >= 1 : matched.length >= required;
+  return Object.freeze({state:established?'QUESTION_SOURCE_RELEVANCE_ESTABLISHED':'QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED',established,informativeTerms:terms,matchedTerms:matched,matchRatio:Number((matched.length/terms.length).toFixed(3)),requiredMatches:scoped?1:required,structuredScopeMatch:scoped});
 }
 
 function compactObject(value = {}, allowed = []) {
@@ -60,6 +67,7 @@ export function createKapQuestionIntake(input = {}) {
     'surfaceType', 'articleSlug', 'bookCode', 'nodeCode'
   ]);
   const sessionRef = canonicalText(typeof input === 'string' ? '' : input.sessionRef).slice(0, 128) || null;
+  const retrievalScope = normalizeAtlasRetrievalScope(typeof input === 'string' ? null : input.retrievalScope);
   return {
     schemaVersion: 'PHI-OS-KAP-QUESTION-INTAKE-v1.0.0',
     capability: 'ASK_PHIOS',
@@ -70,6 +78,7 @@ export function createKapQuestionIntake(input = {}) {
     locale,
     sessionRef,
     surfaceContext,
+    ...(retrievalScope?{retrievalScope}:{}),
     governance: {
       createsCanonicalKnowledge: false,
       createsPublication: false,
@@ -178,7 +187,7 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
   const baseUrl = request?.url || 'https://kap.local/';
   const url = new URL('/api/knowledge-access', baseUrl);
   url.search = new URLSearchParams(retrievalRequest.params).toString();
-  const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env);
+  const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env, {retrievalScope:options.retrievalScope});
   const payload = await response.json();
   if (!response.ok || !payload?.ok) {
     return {
@@ -205,6 +214,8 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
     } : null,
     manuscript: payload.manuscript || { status: 'not_requested', records: [], errors: [] },
     groundingSources: payload.answerGrounding?.sources || [],
+    retrievalScope: payload.retrievalScope || null,
+    retrievalChain: payload.retrievalChain || [],
     authorityBoundary: payload.authorityBoundary || {},
     upstreamGroundedAnswerPresent: Boolean(payload.groundedAnswer),
     upstreamGroundedAnswerConsumed: false,
@@ -343,6 +354,7 @@ export async function loadKapRelationshipAuthority(env = {}) {
 }
 
 function groundingSourceId(source) {
+  if (source.sourceId) return source.sourceId;
   if (source.sourceType === 'PUBLISHED_CANONICAL_ARTICLE') return `PUBLISHED:${source.nodeCode}:${source.fragmentCode}`;
   return `MANUSCRIPT:${source.sectionCode}`;
 }
@@ -385,6 +397,9 @@ export function buildKnowledgeGroundingBundle({ intake, normalized, retrieval, n
       upstreamGroundedAnswerPresent: Boolean(retrieval?.upstreamGroundedAnswerPresent),
       upstreamGroundedAnswerConsumed: false
     },
+    ...(intake.retrievalScope?{retrievalScope:intake.retrievalScope}:{}),
+    retrievalScope: intake.retrievalScope || null,
+    retrievalChain: retrieval?.retrievalChain || [],
     nodeMatches: {
       primaryNodes: nodeMatches?.primaryNodes || [],
       supportingNodes: nodeMatches?.supportingNodes || [],
@@ -465,7 +480,7 @@ export function evaluateKapCoverage({ bundle, retrieval, scopeDisposition = 'KNO
 export async function runKapGroundingPipeline({ input, request, env = {}, retrievalOptions = {}, scopeDisposition = 'KNOWLEDGE_QUERY' }) {
   const intake = createKapQuestionIntake(input);
   const normalized = normalizeKapQuestion(intake);
-  const retrieval = await retrieveKapKnowledge({ request, env, normalized, options: retrievalOptions });
+  const retrieval = await retrieveKapKnowledge({ request, env, normalized, options: {...retrievalOptions,retrievalScope:intake.retrievalScope} });
   const nodeMatches = deriveKapNodeMatches(retrieval);
   const relationshipAuthority = await loadKapRelationshipAuthority(env);
   const expansion = expandKapRelationships({ nodeMatches, locale: normalized.locale, ...relationshipAuthority });

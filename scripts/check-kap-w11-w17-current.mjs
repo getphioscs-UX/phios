@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { onRequestGet } from '../functions/api/ask-phios.js';
+import {kapMaintenanceSuccessorSha} from './lib/knowledge-answer-projection/kap-maintenance-successor-v1.mjs';
 
 const text = path => fs.readFileSync(path, 'utf8');
 const read = path => JSON.parse(text(path));
@@ -65,7 +66,7 @@ const relevanceSuccessor = read(paths.relevanceSuccessor);
 const kirSuccessor = read('content/knowledge/answer-projection/reconciliation/kap-kir-r2-production-bridge-successor-v1.json');
 const kirContentSuccessor = read('content/knowledge/answer-projection/reconciliation/kap-kir-r2-content-grounding-successor-v2.json');
 const relevanceRuntime = new Map(relevanceSuccessor.runtimeSuccessors.map(item => [item.path, item]));
-const currentRuntimeSha = item => item.path === kirContentSuccessor.runtimeSuccessor.path ? kirContentSuccessor.runtimeSuccessor.currentSha256 : (item.path === kirSuccessor.runtimeSuccessor.path ? kirSuccessor.runtimeSuccessor.currentSha256 : item.currentSha256);
+const currentRuntimeSha = item => kapMaintenanceSuccessorSha(item.path,item.path === kirContentSuccessor.runtimeSuccessor.path ? kirContentSuccessor.runtimeSuccessor.currentSha256 : (item.path === kirSuccessor.runtimeSuccessor.path ? kirSuccessor.runtimeSuccessor.currentSha256 : item.currentSha256));
 const homepage = text(paths.homepage);
 const homepageRuntime = text(paths.homepageRuntime);
 const ckaCurrent = new Map(historicalCka.clientSurfaceTransition.artifacts.map(item => [item.path, item]));

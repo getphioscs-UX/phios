@@ -384,12 +384,16 @@ const visualArticleRelease = await readJson(
 const ablBilingualRelease = await readJson(
   'content/knowledge/public/abl-bilingual-release.json'
 );
+const book4BilingualRelease = await readJson(
+  'content/knowledge/public/successors/book4-publication-v1/visual-article-release.json'
+);
 const publishedArticleIndex = await readJson(
   'content/knowledge/public/published-articles.json'
 );
 const successorReleaseRecords = [
   ...(visualArticleRelease.records || []),
-  ...(ablBilingualRelease.records || [])
+  ...(ablBilingualRelease.records || []),
+  ...(book4BilingualRelease.records || [])
 ].filter(record => record.status === 'published');
 const expectedPublishedKeys = locale => new Set([
   ...(publishedArticleIndex.records || [])
