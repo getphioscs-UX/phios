@@ -1,0 +1,343 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Governed structured knowledge projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "objectId",
+    "bookCode",
+    "partCode",
+    "nodeCode",
+    "sourceRefs",
+    "objectType",
+    "title",
+    "summary",
+    "canonicalMeaning",
+    "relationships",
+    "evidenceState",
+    "unknownState",
+    "projectionState",
+    "localeState",
+    "status",
+    "version"
+  ],
+  "properties": {
+    "objectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bookCode": {
+      "enum": [
+        "BOOK-1",
+        "BOOK-2",
+        "BOOK-3",
+        "BOOK-4"
+      ]
+    },
+    "partCode": {
+      "type": "string",
+      "pattern": "^P(?:[0-9]|1[01])$"
+    },
+    "nodeCode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalNodeCodes",
+        "manuscriptSectionRefs",
+        "publishedArticleRefs",
+        "figureRefs",
+        "relatedStructuredObjectIds"
+      ],
+      "properties": {
+        "canonicalNodeCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "manuscriptSectionRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "publishedArticleRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "figureRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "relatedStructuredObjectIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "objectType": {
+      "enum": [
+        "MECHANISM",
+        "STATE",
+        "SIGNAL",
+        "CONDITION",
+        "BOUNDARY",
+        "CONSTRAINT",
+        "PRESSURE",
+        "CAPACITY",
+        "LOAD",
+        "PATTERN",
+        "RELATIONSHIP",
+        "DEPENDENCY",
+        "FEEDBACK",
+        "TRANSITION",
+        "THRESHOLD",
+        "FAILURE_MODE",
+        "RECOVERY_MODE",
+        "EXPANSION_MODE",
+        "SCALE_SHIFT",
+        "CARRIER",
+        "RESOURCE",
+        "COORDINATION_MODE",
+        "CONTINUITY_MODE",
+        "OBSERVATION_CUE"
+      ]
+    },
+    "subtype": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonicalMeaning": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "relationshipId",
+          "sourceObjectId",
+          "targetObjectId",
+          "relationshipType",
+          "claimStrength",
+          "sourceRefs",
+          "evidenceState"
+        ],
+        "properties": {
+          "relationshipId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceObjectId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "targetObjectId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "relationshipType": {
+            "enum": [
+              "REQUIRES",
+              "ENABLES",
+              "INCREASES",
+              "REDUCES",
+              "CONSTRAINS",
+              "AMPLIFIES",
+              "STABILIZES",
+              "DESTABILIZES",
+              "PRECEDES",
+              "FOLLOWS",
+              "TRANSITIONS_TO",
+              "DEPENDS_ON",
+              "OBSERVED_BY",
+              "SUPPORTED_BY",
+              "OPPOSES",
+              "CO_OCCURS_WITH",
+              "HAS_COMPONENT",
+              "PART_OF",
+              "SCALES_TO",
+              "RECOVERS_TO",
+              "FAILS_INTO"
+            ]
+          },
+          "claimStrength": {
+            "enum": [
+              "CANONICAL",
+              "SUPPORTED",
+              "CONCEPTUAL",
+              "ILLUSTRATIVE"
+            ]
+          },
+          "sourceRefs": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "canonicalNodeCodes",
+              "manuscriptSectionRefs",
+              "publishedArticleRefs",
+              "figureRefs",
+              "relatedStructuredObjectIds"
+            ],
+            "properties": {
+              "canonicalNodeCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "manuscriptSectionRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "publishedArticleRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "figureRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "relatedStructuredObjectIds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              }
+            }
+          },
+          "evidenceState": {
+            "enum": [
+              "CANONICAL_SOURCE",
+              "SUPPORTED_SOURCE",
+              "UNREVIEWED",
+              "UNKNOWN"
+            ]
+          }
+        }
+      }
+    },
+    "evidenceState": {
+      "enum": [
+        "CANONICAL_SOURCE",
+        "SUPPORTED_SOURCE",
+        "UNREVIEWED",
+        "UNKNOWN"
+      ]
+    },
+    "unknownState": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "projectionState": {
+      "enum": [
+        "CANDIDATE",
+        "REVIEWED",
+        "ACTIVE",
+        "WITHHELD"
+      ]
+    },
+    "localeState": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "enum": [
+          "SOURCE",
+          "REVIEWED",
+          "MISSING"
+        ]
+      }
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "IN_REVIEW",
+        "ACCEPTED",
+        "ACTIVE",
+        "RETIRED"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "ACTIVE",
+              "ACCEPTED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidenceState": {
+            "enum": [
+              "CANONICAL_SOURCE",
+              "SUPPORTED_SOURCE"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

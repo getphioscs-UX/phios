@@ -81,7 +81,9 @@ function applyImageDelivery(node, asset) {
 }
 
 async function loadImage(node, asset) {
-  node.hidden = true;
+  // Native lazy loading needs a layout box to intersect the viewport.
+  // Hiding the image until load creates a deadlock for lazy R2 assets.
+  node.hidden = false;
   node.removeAttribute('src');
   applyImageDelivery(node, asset);
   return new Promise((resolve, reject) => {

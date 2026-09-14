@@ -179,7 +179,9 @@ export async function initializeCustomerShell(scope = document) {
   installSearchDrawerNavigation(scope);
   installAskDrawerNavigation(scope);
   installExpandableFigures(scope);
-  await hydrateCustomerAssets(scope);
+  // Offscreen lazy images may load only after scrolling. Shell readiness and
+  // method controls must not wait for every image on the page.
+  void hydrateCustomerAssets(scope).catch(error => console.error('CX_ASSET_HYDRATION_FAILED', error));
   await installStaticAtmosphere(scope);
 
   document.documentElement.dataset.cxShell = 'ready';

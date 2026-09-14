@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "relationshipId",
+    "sourceObjectId",
+    "targetObjectId",
+    "relationshipType",
+    "claimStrength",
+    "sourceRefs",
+    "evidenceState"
+  ],
+  "properties": {
+    "relationshipId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceObjectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetObjectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relationshipType": {
+      "enum": [
+        "REQUIRES",
+        "ENABLES",
+        "INCREASES",
+        "REDUCES",
+        "CONSTRAINS",
+        "AMPLIFIES",
+        "STABILIZES",
+        "DESTABILIZES",
+        "PRECEDES",
+        "FOLLOWS",
+        "TRANSITIONS_TO",
+        "DEPENDS_ON",
+        "OBSERVED_BY",
+        "SUPPORTED_BY",
+        "OPPOSES",
+        "CO_OCCURS_WITH",
+        "HAS_COMPONENT",
+        "PART_OF",
+        "SCALES_TO",
+        "RECOVERS_TO",
+        "FAILS_INTO"
+      ]
+    },
+    "claimStrength": {
+      "enum": [
+        "CANONICAL",
+        "SUPPORTED",
+        "CONCEPTUAL",
+        "ILLUSTRATIVE"
+      ]
+    },
+    "sourceRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalNodeCodes",
+        "manuscriptSectionRefs",
+        "publishedArticleRefs",
+        "figureRefs",
+        "relatedStructuredObjectIds"
+      ],
+      "properties": {
+        "canonicalNodeCodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "manuscriptSectionRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "publishedArticleRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "figureRefs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "relatedStructuredObjectIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "evidenceState": {
+      "enum": [
+        "CANONICAL_SOURCE",
+        "SUPPORTED_SOURCE",
+        "UNREVIEWED",
+        "UNKNOWN"
+      ]
+    }
+  }
+}

@@ -7,5 +7,8 @@ const api=T('functions/api/symbolic-method-execute.js');assert.match(api,/tarot-
 const auth=T('functions/tarot-product-runtime/tarot-production-authority.js');assert.match(auth,/TAROT-1\.1\.0/);assert.match(auth,/4762f2df7ae7bc950ae8e62a6a101c1dd49c18b89b9e664358b16ca67ef6b204/);
 const runtime=T('functions/tarot-product-runtime/tarot-product-runtime.js');assert.match(runtime,/tarot-product-runtime-v3\.js/);
 const html=T('perspectives/tarot/index.html');assert.match(html,/data-question-intents/);assert.doesNotMatch(html,/data-view-sources|See interpretation sources|查看解释来源/);
-const js=T('assets/customer-ui/js/surfaces/tarot.js');assert.match(js,/QUESTION_GUIDE_URL/);assert.match(js,/questionIssues/);assert.match(js,/recommendedSpreadId/);assert.match(js,/NARROW|TOO_MANY_LIFE_AREAS/);
+const entry=T('assets/customer-ui/js/surfaces/tarot.js');
+assert.match(entry,/import\s*\{\s*initTarotSurface\s*\}\s*from\s*['"]\.\/tarot-surface-core\.js['"]/);
+assert.match(entry,/initTarotSurface\(\{\s*questionGuideUrl:\s*['"]\/content\/interpretation\/tarot\/registries\/tarot-question-guidance-registry-v1\.json['"]/);
+const js=T('assets/customer-ui/js/surfaces/tarot-surface-core.js');assert.match(js,/questionIssues/);assert.match(js,/recommendedSpreadId/);assert.match(js,/NARROW|TOO_MANY_LIFE_AREAS/);
 console.log('✓ TSCP-W8/W9 + question guidance passed: 8/8 human accepted; TAROT-1.1.0 FULL_PRODUCTION; deterministic focus guidance, broad-question narrowing and explainable spread recommendation are current.');

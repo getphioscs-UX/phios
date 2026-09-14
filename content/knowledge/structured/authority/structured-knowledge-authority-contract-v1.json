@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "status": "DRAFT_PENDING_BASELINE_COMPLETION",
+  "projectionOnly": true,
+  "authorities": {
+    "canonicalKnowledge": "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json",
+    "authorityContract": "content/knowledge/contracts/knowledge-registry-authority-book-w1d-v1.json",
+    "blueprintDiscovery": "content/knowledge/blueprints/blueprint-registry.json",
+    "publication": "content/knowledge/contracts/published-knowledge-authority-v1.json",
+    "publicationBindings": "content/knowledge/knowledge-intelligence-r2/registries/successors/book4-publication-v1/kir-r2-book-i-iv-published-article-binding-registry-v3.json",
+    "review": "content/knowledge/production/registry/review-registry.json",
+    "manuscriptSources": "content/knowledge/source-access/registries/manuscript-knowledge-source-registry-v1.json",
+    "manuscriptBindings": "content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json",
+    "books": "content/registry/books.json",
+    "parts": "content/registry/parts.json"
+  },
+  "authorityChain": [
+    "SOURCE_MANUSCRIPT",
+    "CANONICAL_NODE",
+    "STRUCTURED_EXTRACTION",
+    "BOOK_REGISTRY",
+    "SHARED_CONTRACT",
+    "INTERACTIVE_PROJECTION",
+    "EXISTING_CONSUMERS"
+  ],
+  "forbidden": [
+    "SECOND_CANONICAL_NODE_REGISTRY",
+    "SECOND_ARTICLE_RUNTIME",
+    "SECOND_CONTEXT_RESOLVER",
+    "SECOND_ASK_RUNTIME",
+    "SECOND_KNOWLEDGE_MASTER",
+    "ARTICLE_ONLY_EXTRACTION_AUTHORITY",
+    "LLM_AUTHORITY",
+    "AUTOMATIC_THEORY_PROMOTION",
+    "AUTOMATIC_PERSONAL_DIAGNOSIS"
+  ],
+  "publicationPolicy": {
+    "rewriteExistingArticles": false,
+    "republishExistingArticles": false,
+    "changeArticleUrls": false
+  },
+  "activationRequires": [
+    "CANONICAL_SOURCE_VALIDATION",
+    "MANUSCRIPT_SEMANTIC_REVIEW",
+    "HUMAN_ACCEPTANCE",
+    "CUSTOMER_ACCEPTANCE"
+  ],
+  "currentRealityRemainsSeparatelyGated": true
+}
