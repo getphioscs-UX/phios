@@ -152,3 +152,7 @@ The foundation builder resets W0–W4 to pending check; rerun the checker with `
 ## W60 dedup engine on 7c57546
 
 Machine implementation and targeted checks complete: 71 objects, 2,485 pairs, 465 pairs with both meanings, five Book IV article-summary reuse findings. Forty meanings remain unavailable. Exact text and lexical overlap are review evidence, not confirmed semantic duplication. See dedup/B14-SKS-W60-DEDUP.md. No merge or authority writeback; human review deferred. Next: W61.
+
+## W61 conflict registry on 2151998
+
+Four-state conflict validation and a source-bound registry are implemented. Five W60 clues remain UNRESOLVED and unconfirmed; there are zero confirmed conflicts. Forty missing meanings still prevent full semantic coverage. Explicit reviewer, rationale, evidence and direction/context are required for resolution records; validation does not apply authority changes. Builder refuses to overwrite modified records. VAP-W20/W21 now checks one body figure separately from the current fallback hero. Targeted checks passed. Human review deferred; next W62.

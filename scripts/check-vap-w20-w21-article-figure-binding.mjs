@@ -173,15 +173,19 @@ try {
   const { parseHTML } = await import('linkedom');
   const { document } = parseHTML('<!doctype html><html><body></body></html>');
   const rendered = renderArticleDocument(document, projected, { publishedArticles: [], translate: key => key });
-  assert.equal(rendered.querySelectorAll('figure').length, 1);
+  // The current renderer also owns a fallback hero; this gate targets the bound body figure.
+  assert.equal(rendered.querySelectorAll('.knowledge-article__hero-visual').length, 1);
+  const bodyFigures = [...rendered.querySelectorAll('figure')].filter(node => !node.classList.contains('knowledge-article__hero-visual'));
+  assert.equal(bodyFigures.length, 1);
   assert.equal(rendered.querySelectorAll('picture').length, 1);
-  assert.equal(rendered.querySelectorAll('img').length, 1);
-  const image = rendered.querySelector('img');
+  assert.equal(rendered.querySelectorAll('img').length, 2);
+  assert.equal(bodyFigures[0].querySelectorAll('img').length, 1);
+  const image = bodyFigures[0].querySelector('img');
   assert.equal(image.getAttribute('src'), publishedVisualAssets[0].publicSrc);
   assert.equal(image.getAttribute('alt'), publishedVisualAssets[0].altText);
   assert.equal(image.getAttribute('width'), '1200');
   assert.equal(image.getAttribute('height'), '800');
-  assert.equal(rendered.querySelector('figcaption').textContent, publishedVisualAssets[0].caption);
+  assert.equal(bodyFigures[0].querySelector('figcaption').textContent, publishedVisualAssets[0].caption);
   domRendered = true;
 } catch (error) {
   if (error?.code !== 'ERR_MODULE_NOT_FOUND') throw error;
