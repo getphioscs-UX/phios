@@ -74,6 +74,16 @@ Public copy and legacy book entry points use seven-volume terminology and curren
 
 ## Checks
 
+## W56–W59 consolidated review preparation on 1bc2650
+
+`human-review/B14-SKS-W56-W59-HUMAN-REVIEW.html` is an offline review workspace for all 71 candidates, with book filters, search, per-book criteria, source page/digest references, reviewer names, decisions and notes. It exports drafts and restores only matching-source drafts. No external service, automatic save, source-registry mutation or decision application is involved.
+
+Book I checks manuscript/node fidelity, abstraction, causality, duplication and Explorer value. Book II checks interaction distinctions, psychological overreach and collective boundaries. Book III checks diagnosis/advice/scoring boundaries; Book IV checks growth/superiority/ranking boundaries. Forty records with missing meanings cannot be approved. Book IV approval is explicitly limited to summary assembly, not node definitions. Historical manuscript page references require version verification.
+
+`check:b14-sks-human-review` validates the packet against the extraction digest, pending review defaults, blocked approvals, required reviewers/reasons/criteria and stale or malformed drafts. `--browser` additionally verifies the offline mobile layout, filters, prevented premature approval, export and import recovery. No test decisions are stored in the review packet.
+
+W56–W59 human review remains deferred under the user's consolidated-review instruction; only preparation and machine checks are complete. Forty missing meanings still need extraction, not merely a signature. Next executable batch: W60 onward, with these human gates open.
+
 ## W53–W55 deterministic extraction tooling on d856622
 
 The strict draft-07 `structured-extraction-candidate-v1.schema.json` records identity, explicit book/Part ownership, manuscript references, proposed meaning/relationships, exact quote pointers, confidence and review state. Confidence means source-bound versus unresolved, not a fabricated probability. All candidates remain pending human review and cannot assert canonical authority.
