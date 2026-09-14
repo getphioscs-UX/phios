@@ -74,6 +74,18 @@ Public copy and legacy book entry points use seven-volume terminology and curren
 
 ## Checks
 
+## W45–W49 article / figure reconciliation on 01d942d
+
+`article-figure-reconciliation-v1.json` adds 218 approved article projections, 471 current Book I–IV node decisions and 16 existing figure contexts. Article role defaults are explanation with discovery/search-entry roles pending consolidated review; the full role vocabulary is retained. Published article bytes and URLs are protected by checksums. The builder creates only the additive registry. Article pages add source-bound Explorer links without republishing their body.
+
+Figure bindings use explicit book/Part ownership as reading context, not inferred mechanism or causal relationships. Explorer reuses the existing figure registry, ownership check and public source resolver. Available, correctly owned figures may appear as Part illustrations; unresolved/unavailable figures retain the reading map/text. No separate SVG or visual authority was introduced.
+
+The reported article bug came from a second decorator inserting a generic hero outside the article renderer's layout. The renderer now owns one hero, using the existing generic asset only when no specific hero is provided. Local real-browser article pages at 360/1440px pass single-hero, readable-heading and overflow checks; external asset delivery remains outside that local test.
+
+Ask recognizes explicit article/book/figure navigation before retrieval. Asking “文章” returns a brief article link, with no manuscript retrieval or personal-context consumption. Long answers are expandable; source excerpts are bounded and collapsed. Insufficient evidence requests clarification and offers a reading entry without asserting an unsupported answer. The request has a 25-second timeout, duplicate-submit lock and restored retry state. Seed loading also has a timeout. The CSS namespace checker distinguishes import URLs from selector namespaces; the separate legacy-import guard remains active.
+
+Checks: `check:b14-sks-article-figure`, `check:b14-sks-article-ask-browser`, PJA-W2D's 23 renderer fixtures, both CX legacy guards, existing Book I–IV checks and Contextual Ask regression. The browser test uses local pages/API and does not establish paid or deployed production acceptance. Next: W50–W52; human review remains consolidated.
+
 ## W39 customer presentation and W41–W44 public component pass on 28a7cbb
 
 The supported seven-part answer now passes through CKA and customer projection to the Contextual Ask renderer. Direct answer remains the existing primary answer; mechanism/state, conditions, related factors, possible transition, unknown boundary and Book link follow. Missing evidence is visibly unknown. Fourteen real bilingual grounding cases now test the complete projection/HTML path, including abstention and escaping. KAP M6 records the optional CKA field successor; original frozen evidence is preserved.

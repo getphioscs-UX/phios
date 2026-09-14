@@ -11,7 +11,8 @@ assert.ok(legacyNamespaceHits('<div class="puxr-card">', prefixes).includes('pux
 const violations = [];
 for (const rel of cxImplementationFiles()) {
   const text = fs.readFileSync(path.join(root, rel), 'utf8');
-  const selectorBearingText = rel.endsWith('.css') ? text : [
+  // Stylesheet URLs are checked by the import guard, not the selector namespace guard.
+  const selectorBearingText = rel.endsWith('.css') ? text.replace(/@import\s+(?:url\([^)]*\)|["'][^"']*["'])[^;]*;/giu,'') : [
     ...(text.match(/\b(?:class|id)\s*=\s*["'`][^"'`]*/giu) || []),
     ...(text.match(/\b(?:querySelectorAll|querySelector|matches|closest)\s*\([^)]*\)/gu) || []),
     ...(text.match(/\bclassList\.(?:add|remove|toggle|replace)\s*\([^)]*\)/gu) || []),

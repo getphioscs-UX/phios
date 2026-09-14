@@ -1,3 +1,4 @@
+import {mountArticleStructuredLinks} from '../knowledge/article-structured-links.js';
 import { hydrateKnowledgeSpineVisuals } from './knowledge-spine-visuals.js';
 import {
   getLocale,
@@ -147,6 +148,7 @@ async function render() {
       translate: t
     });
     root.replaceChildren(articleElement);
+    void mountArticleStructuredLinks(articleElement,article);
     updateDocumentMetadata(article);
     bindSave(article);
     appendAskEntry(article);

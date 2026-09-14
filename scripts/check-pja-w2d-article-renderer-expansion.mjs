@@ -795,8 +795,8 @@ for (const fixtureName of actualFixtures) {
     }
     case 'without_hero':
       assert.equal(
-        rendered.querySelectorAll('.knowledge-article__hero-visual').length,
-        0
+        rendered.querySelectorAll('.knowledge-article__hero-visual img[data-ks-asset="HERO-004"]').length,
+        1
       );
       break;
     case 'optional_related_figure_missing':
@@ -804,7 +804,8 @@ for (const fixtureName of actualFixtures) {
         rendered.querySelectorAll('.knowledge-block--figure').length,
         0
       );
-      assert.equal(rendered.querySelectorAll('img').length, 0);
+      assert.equal(rendered.querySelectorAll('img:not([data-ks-asset])').length, 0);
+      assert.equal(rendered.querySelectorAll('img[data-ks-asset="HERO-004"]').length, 1);
       break;
     case 'public_source_projection':
       assert.equal(

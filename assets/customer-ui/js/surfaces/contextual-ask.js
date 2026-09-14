@@ -116,14 +116,14 @@ function sourceLink(s){
 
 function sourceCard(s){
   const limits=arr(s.limitations).map(systemLabel).filter(Boolean);
-  return `<article class="cx-contextual-ask__source"><strong>${esc(s.label||tr('Source','来源'))}</strong><div class="cx-meta">${esc(sourceMeta(s))}</div>${s.excerpt?`<p>${esc(s.excerpt)}</p>`:''}${sourceLink(s)}${s.retrievedAt?`<div class="cx-meta">${esc(tr('Date','日期'))}: ${esc(s.retrievedAt)}${s.freshness?` · ${esc(systemLabel(s.freshness))}`:''}</div>`:''}${limits.length?`<div class="cx-meta">${esc(tr('Keep in mind','需要注意'))}: ${esc(limits.join(' · '))}</div>`:''}</article>`;
+  return `<article class="cx-contextual-ask__source"><strong>${esc(s.label||tr('Source','来源'))}</strong><div class="cx-meta">${esc(sourceMeta(s))}</div>${s.excerpt?`<p>${esc(String(s.excerpt).length>180?String(s.excerpt).slice(0,180)+'…':s.excerpt)}</p>`:''}${sourceLink(s)}${s.retrievedAt?`<div class="cx-meta">${esc(tr('Date','日期'))}: ${esc(s.retrievedAt)}${s.freshness?` · ${esc(systemLabel(s.freshness))}`:''}</div>`:''}${limits.length?`<div class="cx-meta">${esc(tr('Keep in mind','需要注意'))}: ${esc(limits.join(' · '))}</div>`:''}</article>`;
 }
 
 function renderBasis(){
   const groups=arr(view?.answerStructure?.basedOnGroups);
   document.querySelector('[data-cx-basis-statement]').textContent=view?.basedOn?.statement||'';
   document.querySelector('[data-cx-basis-groups]').innerHTML=groups.length
-    ?`<div class="cx-contextual-ask__source-groups">${groups.map(g=>`<section class="cx-contextual-ask__source-group"><h3>${esc(sourceClassLabel(g.sourceClass))}</h3>${arr(g.sources).map(sourceCard).join('')}</section>`).join('')}</div>`
+    ?`<details><summary>${esc(tr('View sources','查看来源'))}</summary><div class="cx-contextual-ask__source-groups">${groups.map(g=>`<section class="cx-contextual-ask__source-group"><h3>${esc(sourceClassLabel(g.sourceClass))}</h3>${arr(g.sources).slice(0,5).map(sourceCard).join('')}</section>`).join('')}</div></details>`
     :empty(tr('No selected source supported this answer.','没有所选来源支持这个回答。'));
 }
 
@@ -189,7 +189,10 @@ function showPaidUpgrade(detail={}){
 function render(){
   if(!view)return;
   document.querySelector('[data-cx-contextual-ask-result]').hidden=false;
-  document.querySelector('[data-cx-answer-text]').textContent=view?.answer?.text||'';
+  const answerNode=document.querySelector('[data-cx-answer-text]'),answerText=view?.answer?.text||'';
+  answerNode.textContent=answerText.length>240?answerText.slice(0,240)+'…':answerText;
+  document.querySelector('[data-cx-answer-full]')?.remove();
+  if(answerText.length>240){const more=document.createElement('details');more.dataset.cxAnswerFull='';const summary=document.createElement('summary');summary.textContent=tr('Read the full answer','展开完整回答');const body=document.createElement('p');body.textContent=answerText;more.append(summary,body);answerNode.after(more);}
   document.querySelector('[data-cx-answer-supporting]').innerHTML=view?.answer?.structuredAnswer?renderStructuredAnswer(view.answer.structuredAnswer,document.documentElement.lang):arr(view?.answer?.supporting).length?list(view.answer.supporting):'';
   renderBasis();
   renderTemporal();
@@ -197,6 +200,7 @@ function render(){
   document.querySelector('[data-cx-related-knowledge]').innerHTML=arr(view?.relatedKnowledge).length?view.relatedKnowledge.map(k=>`<article class="cx-p1-source"><strong>${esc(k.title)}</strong>${k.description?`<p>${esc(k.description)}</p>`:''}${k.href?`<a href="${esc(k.href)}">${esc(tr('Explore','查看'))}</a>`:''}</article>`).join(''):empty(tr('No related knowledge or reading is available yet.','目前没有相关知识或读取。'));
   renderNext();
   renderProvenance();
+  for(const selector of ['[data-cx-basis-groups]','[data-cx-current-vs-stable]','[data-cx-answer-limits]']){const card=document.querySelector(selector)?.closest('.cx-card');if(card)card.hidden=view.state==='NAVIGATION';}
   if(view?.paidUpgrade?.available===true)showPaidUpgrade(view.paidUpgrade);else hidePaidUpgrade();
 }
 
@@ -216,7 +220,7 @@ async function loadSeededContexts(){
   if(!node)return;
   if(!contextType){node.innerHTML='';return;}
   try{
-    const response=await fetch(`/api/customer-contextual-ask?locale=${encodeURIComponent(locale())}&contextType=${encodeURIComponent(contextType)}&contextRef=${encodeURIComponent(contextRef||'')}`,{cache:'no-store',credentials:'same-origin'});
+    const response=await fetch(`/api/customer-contextual-ask?locale=${encodeURIComponent(locale())}&contextType=${encodeURIComponent(contextType)}&contextRef=${encodeURIComponent(contextRef||'')}`,{cache:'no-store',credentials:'same-origin',signal:AbortSignal.timeout(12000)});
     const payload=await response.json();
     const seeded=arr(payload?.availability).filter(x=>x.requestedContextRef||x.contextType===contextType).filter(x=>x.contextType!=='CURRENT_REALITY');
     node.innerHTML=seeded.map(x=>{
@@ -258,20 +262,21 @@ function boot(){
   form.addEventListener('submit',async event=>{
     event.preventDefault();
     const question=String(form.elements.question.value||'').trim();
-    if(!question)return;
+    if(!question||form.getAttribute('aria-busy')==='true')return;
     const selection=selectedRequest(form),guided=guidedContext(form);
     if(form.elements.contextReality.checked&&!form.elements.currentRealityConsent.checked){setStatus(status,tr('Confirm that the situation you entered may be used for this question.','请确认你填写的当前处境可以用于这个问题。'),'error');return;}
     setStatus(status,tr('Connecting your question to the selected sources…','正在把你的问题与所选来源连接起来…'));
+    form.setAttribute('aria-busy','true');const submit=form.querySelector('[type=submit]');if(submit)submit.disabled=true;
     try{
-      const payload=await postJson('/api/customer-contextual-ask',{question,locale:locale(),...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}});
+      const payload=await postJson('/api/customer-contextual-ask',{question,locale:locale(),...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
       view=payload.view;
       render();
       setStatus(status,'','success');
       document.querySelector('[data-cx-contextual-ask-result]').scrollIntoView({behavior:'smooth',block:'start'});
     }catch(error){
-      setStatus(status,errorMessage(error?.code),'error');
+      setStatus(status,error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code),'error');
       if(isPaidBoundary(error?.code))showPaidUpgrade({reason:String(error?.code||'ENTITLEMENT_BOUNDARY'),adds:['new structure','new combination','new timing','new context','new continuity']});
-    }
+    }finally{form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;}
   });
   document.querySelector('[data-cx-ask-handoff-confirm]')?.addEventListener('click',async()=>{
     const consent=document.querySelector('[data-cx-ask-handoff-consent]'),s=document.querySelector('[data-cx-ask-handoff-status]');

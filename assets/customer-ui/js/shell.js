@@ -1,3 +1,4 @@
+import {knowledgeNavigationIntent} from './navigation-intent.js';
 import { CX_NAVIGATION, installNavigationToggle } from './navigation.js';
 import { installLocaleControls } from './locale.js';
 import { hydrateCustomerAssets } from './assets.js';
@@ -71,7 +72,7 @@ function navigationDrawerMarkup(active, state) {
 function searchDrawerMarkup() {
   return `<dialog class="cx-shell-drawer cx-shell-drawer--utility" id="cx-shell-search" aria-labelledby="cx-shell-search-title">
     <div class="cx-shell-drawer__body">
-      <div class="cx-shell-drawer__bar"><div><p class="cx-eyebrow" ${t('SEARCH', '搜索')}>SEARCH</p><h2 class="cx-heading-2" id="cx-shell-search-title" ${t('Find governed PHI OS knowledge.', '查找 PHI OS 已治理知识。')}>Find governed PHI OS knowledge.</h2></div><button class="cx-button cx-button--icon cx-button--quiet" type="button" data-cx-dialog-close ${aria('Close search', '关闭搜索')}>×</button></div>
+      <div class="cx-shell-drawer__bar"><div><p class="cx-eyebrow" ${t('SEARCH', '搜索')}>SEARCH</p><h2 class="cx-heading-2" id="cx-shell-search-title" ${t('Find articles, books and figures.', '查找文章、书籍与图示。')}>Find articles, books and figures.</h2></div><button class="cx-button cx-button--icon cx-button--quiet" type="button" data-cx-dialog-close ${aria('Close search', '关闭搜索')}>×</button></div>
       <p class="cx-body cx-muted" ${t('Search PHI OS books, articles, figures and concepts. Open a result to read it, or carry that source into Ask.', '搜索 PHI OS 的书籍、文章、图示与概念；打开结果继续阅读，也可以把这个来源带入 Ask。')}>Search PHI OS books, articles, figures and concepts. Open a result to read it, or carry that source into Ask.</p>
       <form class="cx-shell-utility-form" action="/search/" method="get" role="search">
         <label class="cx-field"><span ${t('What are you looking for?', '你想查找什么？')}>What are you looking for?</span><input class="cx-input" type="search" name="q" maxlength="300" autocomplete="off" ${aria('Search PHI OS knowledge', '搜索 PHI OS 知识')} data-cx-en-placeholder="Search books, articles and concepts…" data-cx-zh-placeholder="搜索书籍、文章与概念……" placeholder="Search books, articles and concepts…"></label>
@@ -105,6 +106,7 @@ function installSearchDrawerNavigation(scope = document) {
   const openLink = scope.querySelector('#cx-shell-search a[href="/search/"]');
   const destination = value => {
     const q = String(value || '').trim();
+    const navigation=knowledgeNavigationIntent(q,document.documentElement.lang);if(navigation)return navigation.href;
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     const suffix = params.toString();

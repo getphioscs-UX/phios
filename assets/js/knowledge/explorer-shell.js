@@ -1,3 +1,4 @@
+import {renderStructuredFigure} from './structured-figure.js';
 // Shared presentation and keyboard behavior; book adapters retain source authority.
 export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
  const tr=(en,zh)=>locale==='zh-Hans'?zh:en;
@@ -21,9 +22,11 @@ export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
  const filter=host.ownerDocument.createElement('label');filter.className='structured-explorer-filter';filter.append(tr('Topic list view ','主题列表视图 '));
  const choice=host.ownerDocument.createElement('select');for(const [value,en,zh] of [['all','All matching topics','全部匹配主题'],['selected','Selected topic only','仅选定主题']]){const option=host.ownerDocument.createElement('option');option.value=value;option.textContent=tr(en,zh);choice.append(option);}filter.append(choice);grid?.before(filter);
  const filterChange=()=>navigation?.classList.toggle('structured-selected-only',choice.value==='selected');choice.addEventListener('change',filterChange);
+ const figureHost=host.ownerDocument.createElement('div');(map||grid?.children[1]||host).append(figureHost);let figureObject;
  const update=()=>{
   const selected=navigation?.querySelector('[aria-pressed=true],details[open]');
   const id=selected?.dataset.object||selected?.dataset.runtimeObject||selected?.dataset.expansionObject||selected?.dataset.topic;
+  if(id!==figureObject){figureObject=id;void renderStructuredFigure(figureHost,id,locale);}
   if(map)map.querySelector('[data-selected-topic]').textContent=selected?.querySelector('summary')?.textContent||selected?.textContent||tr('Choose a topic from the list.','请从列表选择主题。');
   action.hidden=!/^SK-B[1-4]-[A-Z0-9-]+$/.test(id||'');
   if(!action.hidden)action.setAttribute('href','/knowledge/ask/?'+new URLSearchParams({contextType:'KNOWLEDGE',contextRef:'CONCEPT:'+id.toLowerCase(),contextLabel:selected.querySelector('summary')?.textContent||selected.textContent}));else action.removeAttribute('href');

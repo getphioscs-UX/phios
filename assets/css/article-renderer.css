@@ -1,5 +1,16 @@
 /* PJA-W2D public Article Renderer. Safe DOM structure only. */
 
+/* One renderer owns the article hero; all content remains in normal flow. */
+.knowledge-article-shell{width:100%;max-width:none;margin-inline:auto}
+.knowledge-article .knowledge-article__header{padding:0;min-height:75svh}
+.knowledge-article .knowledge-article__header-layout{width:100%;max-width:none;grid-template-columns:minmax(0,1fr)}
+.knowledge-article .knowledge-article__header-content{width:min(72rem,calc(100% - 3rem));margin:2rem auto;box-sizing:border-box}
+.knowledge-article .knowledge-article__header h1{font-size:clamp(2rem,4vw,4.5rem);line-height:1.15;overflow-wrap:anywhere}
+.knowledge-article .knowledge-article__hero-visual{order:-1;width:100%;margin:0;max-width:none;display:block}
+.knowledge-article .knowledge-article__hero-visual img{width:100%;height:clamp(18rem,55svh,42rem);object-fit:cover;border-radius:0;display:block}
+.knowledge-article .knowledge-article__hero-visual figcaption{padding-inline:1.5rem}
+@media print{.knowledge-article .knowledge-article__header{min-height:0}.knowledge-article .knowledge-article__hero-visual img{height:12rem}}
+
 .knowledge-article,
 .knowledge-article * {
   min-width: 0;
