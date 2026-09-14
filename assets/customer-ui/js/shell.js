@@ -50,7 +50,7 @@ function localeControl(compact = false) {
 function headerMarkup(active, state) {
   return `<header class="cx-shell-header" data-open="false" data-cx-shell-region="header">
     <div class="cx-container cx-shell-header__inner">
-      <a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-003" data-cx-asset-auto="contrast" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a>
+      <a class="cx-brand" href="/" aria-label="PHI OS home"><img data-cx-asset="LOGO-009" data-cx-asset-auto="contrast" alt="PHI OS"><span class="cx-visually-hidden" data-cx-asset-fallback>PHI OS</span></a>
       <nav class="cx-primary-nav" aria-label="Primary">${navLinks(active)}</nav>
       <div class="cx-utilities">${utilityControls(state)}${localeControl()}</div>
       <button class="cx-menu-button" type="button" data-cx-menu data-cx-dialog-open="cx-shell-navigation" aria-controls="cx-shell-navigation" aria-expanded="false" ${aria('Open menu', '打开菜单')}><span ${t('Menu', '菜单')}>Menu</span></button>

@@ -74,6 +74,16 @@ Public copy and legacy book entry points use seven-volume terminology and curren
 
 ## Checks
 
+## W50–W52 boundary preview on 30ab6b4
+
+`knowledge-reality-boundary-v1.json` fixes the distinction between a knowledge framework and a current personal fact. The existing customer Reality handoff accepts optional `structuredCandidates`; each requires an allowlisted role, explicit user confirmation and a server-resolved source with text. Client-supplied fact/diagnosis flags are ignored. Observations remain user-reported, and candidates enter only the workspace's knowledge side context. This creates no facts, prescriptions or persistence. Source-index-only Book II/III records are rejected until semantic extraction is complete.
+
+The five supported roles are interpretation candidate, observation prompt, comparison frame, recovery option frame and navigation frame. These are reference frames, not computed comparisons or recovery advice. W51 is an API/runtime preview: a dedicated customer candidate-selection/confirmation interface and its paid end-to-end acceptance remain future implementation work, not completed human approval.
+
+Explorer navigation now links Book II to Relationships, Book III to current-situation review and Book IV to Professional, with Book I also linking to current-situation review. These are existing route entries; following them creates no personal evidence or method execution.
+
+The header now declares LOGO-009 as required by current brand authority, retaining automatic dark-surface contrast selection and the LOGO-010 footer. `check-cx-r5-global-shell.mjs` passes without weakening the assertion. Fifteen candidate cases plus unavailable-source, real handoff consent and workspace tests pass, as do existing Book I–IV checks and current CX-R31 handoff routes. The older `check-stage15-reality-orchestration.mjs` still asserts the retired `reality-entry-stage15-handoff.js` inclusion in a compatibility redirect; that separate legacy assertion is not a production failure introduced by this batch. Full `npm run check` is not claimed. Next: W53–W55.
+
 ## W45–W49 article / figure reconciliation on 01d942d
 
 `article-figure-reconciliation-v1.json` adds 218 approved article projections, 471 current Book I–IV node decisions and 16 existing figure contexts. Article role defaults are explanation with discovery/search-entry roles pending consolidated review; the full role vocabulary is retained. Published article bytes and URLs are protected by checksums. The builder creates only the additive registry. Article pages add source-bound Explorer links without republishing their body.

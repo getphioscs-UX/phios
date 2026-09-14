@@ -12,6 +12,8 @@ The user requested continuing batches and reviewing human decisions together at 
 
 Domain III uses Coexistence as explicitly confirmed by the user. Prior editorial findings belong to historical PDF revisions and must not be used to reopen the corrected wording.
 
+W50–W52: review the candidate-role vocabulary and reference prompts together. The API requires explicit confirmation and source text; no personal fact or diagnosis is created. A dedicated customer candidate-selection UI and full paid-flow acceptance remain implementation/acceptance gaps. Book II/III source-index records remain unavailable as semantic candidates. Existing route links are navigation only.
+
 W45–W49 adds `content/knowledge/structured/article-figure-reconciliation-v1.json`: review article role defaults and Part-level figure context together. Part co-location is not an admitted mechanism relationship. No article body or URL is rewritten, and no new publication or visual authority is created. Local article/Ask browser checks do not replace deployed R2 or paid-flow acceptance. Next batch: W50–W52.
 
 W34–W36 adds two candidate reading relationships in `content/knowledge/structured/structured-knowledge-relationships-v1.json`. Review their semantic relevance together later; they remain excluded from retrieval. Missing Book I Pressure/Threshold objects are extraction gaps, not approval-only tasks. W36 source navigation has component coverage, with full browser acceptance pending.

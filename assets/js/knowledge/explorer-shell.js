@@ -11,6 +11,7 @@ export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
  if(detail){detail.setAttribute('aria-label',tr('Selected topic details','所选主题详情'));detail.setAttribute('aria-live','polite');detail.setAttribute('aria-atomic','true');}
  const action=host.ownerDocument.createElement('a');action.className='knowledge-action';action.dataset.explorerAsk='';action.textContent=tr('Ask about the selected topic','就选定主题提问');host.append(action);
  const reading=host.ownerDocument.createElement('a');reading.className='knowledge-action';reading.href='#structured-sources';reading.textContent=tr('Browse source readings','浏览来源阅读');host.append(reading);
+ const contextEntry=host.ownerDocument.createElement('a');contextEntry.className='knowledge-action';contextEntry.hidden=true;host.append(contextEntry);
  let map;
  if(grid&&detail&&grid.children.length===2){
   map=host.ownerDocument.createElement('section');map.className='structured-reading-map';
@@ -26,6 +27,8 @@ export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
  const update=()=>{
   const selected=navigation?.querySelector('[aria-pressed=true],details[open]');
   const id=selected?.dataset.object||selected?.dataset.runtimeObject||selected?.dataset.expansionObject||selected?.dataset.topic;
+  const destination={'1':['/reality/','Review your situation','回看当前处境'],'2':['/perspectives/relationship/','Explore relationships','探索关系视角'],'3':['/reality/','Review your situation','回看当前处境'],'4':['/professional/','Explore professional support','了解专业支持']}[id?.match(/^SK-B([1-4])-/)?.[1]];
+  contextEntry.hidden=!destination;if(destination){contextEntry.href=destination[0];contextEntry.textContent=tr(destination[1],destination[2]);}
   if(id!==figureObject){figureObject=id;void renderStructuredFigure(figureHost,id,locale);}
   if(map)map.querySelector('[data-selected-topic]').textContent=selected?.querySelector('summary')?.textContent||selected?.textContent||tr('Choose a topic from the list.','请从列表选择主题。');
   action.hidden=!/^SK-B[1-4]-[A-Z0-9-]+$/.test(id||'');
@@ -42,5 +45,5 @@ export function enhanceExplorerShell(host,{layout,nav,inspector,locale='en'}){
   if(next!==null){e.preventDefault();items[next]?.focus();}
  };
  host.addEventListener('keydown',keydown);
- return ()=>{observer?.disconnect();action.remove();reading.remove();choice.removeEventListener('change',filterChange);filter.remove();host.removeEventListener('keydown',keydown);};
+ return ()=>{observer?.disconnect();action.remove();reading.remove();contextEntry.remove();choice.removeEventListener('change',filterChange);filter.remove();host.removeEventListener('keydown',keydown);};
 }
