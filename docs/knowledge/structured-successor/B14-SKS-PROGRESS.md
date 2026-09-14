@@ -74,6 +74,16 @@ Public copy and legacy book entry points use seven-volume terminology and curren
 
 ## Checks
 
+## W53–W55 deterministic extraction tooling on d856622
+
+The strict draft-07 `structured-extraction-candidate-v1.schema.json` records identity, explicit book/Part ownership, manuscript references, proposed meaning/relationships, exact quote pointers, confidence and review state. Confidence means source-bound versus unresolved, not a fabricated probability. All candidates remain pending human review and cannot assert canonical authority.
+
+`npm run build:b14-sks-extraction` reproducibly assembles 71 candidates into `docs/knowledge/structured-successor/extraction/b14-sks-extraction-candidates-v1.json`: 11 existing source definitions, 20 published article summaries and 40 unresolved meanings. It verifies upstream registry digests before assembling and records available/missing node metadata, blueprint, approved mapping, heading and figure metadata paths in the frozen priority order. It does not turn headings into definitions or summaries into node-level authority. No raw full-book delivery, semantic relationship synthesis, source registry writeback or publication occurs.
+
+W55 reuses `selectPaiRoute` and its existing execution classes: identity/mapping T0, object assembly T1, short summaries T2, relationship synthesis T3. Only deterministic assembly is executed here. T2/T3 route plans have no admitted model and remain controlled-unavailable; no provider is invoked, no cost is incurred by these tools, and AI output cannot approve itself.
+
+`npm run check:b14-sks-extraction` verifies schemas, exact source pointers, manuscript page order, stable IDs, byte-equivalent repeated assembly, stored-output freshness, source digest tampering rejection, prohibited authority/review flags and all four execution classes. Actual new paragraph extraction for the 40 unresolved meanings, semantic relationship synthesis and consolidated human review remain open. W53–W55 tooling completion is not their acceptance. Next: W56.
+
 ## W50–W52 boundary preview on 30ab6b4
 
 `knowledge-reality-boundary-v1.json` fixes the distinction between a knowledge framework and a current personal fact. The existing customer Reality handoff accepts optional `structuredCandidates`; each requires an allowlisted role, explicit user confirmation and a server-resolved source with text. Client-supplied fact/diagnosis flags are ignored. Observations remain user-reported, and candidates enter only the workspace's knowledge side context. This creates no facts, prescriptions or persistence. Source-index-only Book II/III records are rejected until semantic extraction is complete.

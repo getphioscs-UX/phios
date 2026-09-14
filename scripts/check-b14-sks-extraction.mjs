@@ -1,0 +1,14 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';import Ajv from 'ajv';
+import {assembleExtractionCandidates,extractionClasses,planExtraction} from './lib/structured-extraction.mjs';
+const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),base='content/knowledge/structured/';
+const schema=read(base+'schema/structured-extraction-candidate-v1.schema.json'),validate=new Ajv({allErrors:true,strict:false}).compile(schema);
+const input={discovery:read(base+'structured-knowledge-registry-v1.json'),backlinks:read(base+'structured-knowledge-backlinks-v1.json'),readBytes:p=>fs.readFileSync(p)};
+const actual=assembleExtractionCandidates(input),again=assembleExtractionCandidates(input);assert.deepEqual(actual,again);
+const stored=read('docs/knowledge/structured-successor/extraction/b14-sks-extraction-candidates-v1.json');assert.deepEqual(stored,{...actual,executionPlans:Object.fromEntries(Object.keys(extractionClasses).map(op=>[op,planExtraction(op)]))});
+assert.equal(new Set(actual.candidates.map(c=>c.candidateId)).size,actual.candidates.length);
+for(const c of actual.candidates){assert.ok(validate(c),JSON.stringify(validate.errors));assert.equal(c.aiInvoked,false);assert.equal(c.proposedRelationships.length,0);for(const ref of c.manuscriptRef)assert.ok(ref.startPage<=ref.endPage);for(const q of c.sourceQuoteRefs){const bytes=fs.readFileSync(q.path);assert.equal(createHash('sha256').update(bytes).digest('hex'),q.sha256);const text=q.pointer.slice(1).split('/').reduce((v,k)=>v[k],JSON.parse(bytes));assert.equal(text,c.proposedMeaning);}if(['BOOK-2','BOOK-3'].includes(c.bookCode))assert.equal(c.proposedMeaning,null);if(c.bookCode==='BOOK-4')assert.equal(c.meaningKind,'PUBLISHED_ARTICLE_SUMMARY');}
+for(const patch of [{reviewState:'APPROVED'},{canonicalAuthority:true},{candidateId:''},{confidence:'CERTAIN'},{proposedMeaning:null},{sourceQuoteRefs:[]},{extraAuthority:true}])assert.equal(validate({...actual.candidates[0],...patch}),false,JSON.stringify(patch));
+assert.throws(()=>assembleExtractionCandidates({...input,readBytes:p=>p==='content/registry/concepts.json'?Buffer.from(fs.readFileSync(p,'utf8')+' '):fs.readFileSync(p)}),/EXTRACTION_SOURCE_DRIFT/);
+for(const [op,tier] of Object.entries(extractionClasses)){const plan=planExtraction(op);assert.equal(plan.aiExecutionClass,tier);assert.equal(plan.authorityCreated,false);assert.equal(plan.automaticApproval,false);assert.equal(plan.providerAttemptLimit,0);assert.equal(plan.providerRequired,['SHORT_SUMMARY','RELATIONSHIP_SYNTHESIS'].includes(op));}
+assert.throws(()=>planExtraction('FREEFORM_BOOK_REWRITE'),/UNKNOWN_EXTRACTION_OPERATION/);
+console.log(`✓ W53–W55: ${actual.candidates.length} schema-valid reproducible candidates, exact source pointers, digest drift rejection, no authority promotion, and existing T0–T3 routing passed.`);
