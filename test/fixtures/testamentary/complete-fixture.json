@@ -1,0 +1,25 @@
+{
+  "caseId": "PTRC-W9-COMPLETE-001",
+  "clientId": "CLIENT-001",
+  "jurisdiction": "MY",
+  "currency": "MYR",
+  "dataDate": "2026-09-14",
+  "dataVersion": 1,
+  "sections": {
+    "identity": {"status":"KNOWN","items":[{"display_name":"A. Client","residence_region":"Selangor"}],"sourceReferences":["client-confirmation:identity"]},
+    "family": {"status":"KNOWN","items":[{"relation":"spouse","display_name":"Spouse"},{"relation":"child","display_name":"Child A"}],"sourceReferences":["client-confirmation:family"]},
+    "executors": {"status":"KNOWN","items":[{"display_name":"Executor A","priority":1}],"sourceReferences":["client-confirmation:executor"]},
+    "guardians": {"status":"KNOWN","items":[{"display_name":"Guardian A","applies_to":"minor children"}],"sourceReferences":["client-confirmation:guardian"]},
+    "beneficiaries": {"status":"KNOWN","items":[{"display_name":"Spouse","share_note":"review allocation with professional"}],"sourceReferences":["client-confirmation:beneficiaries"]},
+    "assets": {"status":"KNOWN","items":[{"asset_type":"property","label":"Home","value":500000},{"asset_type":"cash","label":"Cash summary","value":80000}],"sourceReferences":["financial-intake:assets:v1"]},
+    "liabilities": {"status":"KNOWN","items":[{"liability_type":"mortgage","label":"Home financing","value":180000}],"sourceReferences":["financial-intake:liabilities:v1"]},
+    "trusts": {"status":"NOT_APPLICABLE","items":[],"sourceReferences":[]},
+    "gifts": {"status":"KNOWN","items":[{"description":"Personal effects allocation to be reviewed"}],"sourceReferences":["client-confirmation:gifts"]},
+    "exclusions": {"status":"NOT_APPLICABLE","items":[],"sourceReferences":[]},
+    "digital_assets": {"status":"KNOWN","items":[{"category":"online accounts","instruction":"inventory held separately"}],"sourceReferences":["client-confirmation:digital-assets"]},
+    "funeral_wishes": {"status":"KNOWN","items":[{"preference":"family to decide after professional review"}],"sourceReferences":["client-confirmation:funeral"]},
+    "advisors": {"status":"KNOWN","items":[{"role":"financial planner","display_name":"Advisor A"}],"sourceReferences":["client-confirmation:advisor"]},
+    "documents": {"status":"KNOWN","items":[{"document_type":"existing estate notes","reference":"DOC-META-001"}],"sourceReferences":["document-metadata:DOC-META-001"]},
+    "review_consent": {"status":"KNOWN","items":[{"consent_id":"CONSENT-001","scope":"draft assembly and professional review"}],"sourceReferences":["consent:CONSENT-001"]}
+  }
+}

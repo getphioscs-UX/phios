@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PHI-OS-PTRC-W9-TESTAMENTARY-REPORT-v1.0.0",
+  "title": "PTRC-W9 Reviewable Testamentary Draft Report",
+  "type": "object",
+  "required": ["schemaVersion", "reportId", "snapshotId", "rawUserInput", "normalizedFacts", "derivedCalculations", "warnings", "generatedNarrative", "outline", "professionalReviewRequired", "executedInstrument", "legalValidityDetermined"],
+  "properties": {
+    "schemaVersion": {"const": "ptrc-testamentary-report.v1"},
+    "professionalReviewRequired": {"const": true},
+    "jurisdictionReviewRequired": {"const": true},
+    "executedInstrument": {"const": false},
+    "automaticExecution": {"const": false},
+    "legalValidityDetermined": {"const": false},
+    "fieldsInvented": {"const": false},
+    "modelGeneratedFacts": {"const": false},
+    "modelMayOverrideCalculations": {"const": false}
+  }
+}
