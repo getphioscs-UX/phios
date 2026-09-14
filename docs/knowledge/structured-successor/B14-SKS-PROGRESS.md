@@ -1,5 +1,15 @@
 # B14-SKS execution progress
 
+## Latest batch: W27–W33 on 75599e46
+
+Generated Book IV taxonomy, expansion modes, reading chain, scale-transition structure, constraints and a separate Book IV → V navigation bridge. Twenty topic projections bind to the final 125-node Book IV authority and approved bilingual published-article records. Article summaries are copied exactly, explicitly labelled as article scope rather than a new single-node definition. Historical article-production completion notes are superseded for publication availability by the existing book4-publication-v1 registry.
+
+The `/books/reality-expansion/#expansion` Explorer provides search, selection, source summaries, article links, source boundaries and a six-topic reading sequence; query selection survives browser history and preserves other parameters. The bridge points to `/books/reality-differentiation/#atlas` without copying or writing Book V data.
+
+W27/W28/W31/W32/W33 are machine-accepted previews. W29 is a source-backed reading order pending causal/condition extraction; W30 has no asserted concrete sourceScale/targetScale or irreversible transition until supported. Human review remains grouped at the end. Full browser visual acceptance is not claimed by DOM tests.
+
+Reproduce with `node scripts/build-b14-sks-book4.mjs` and `node scripts/check-b14-sks-book4.mjs --record`. The latter verifies source digests, exact published summary/href parity, canonical manuscript binding, type vocabulary, bilingual search/selection/history and the Book V boundary. Seven-volume public-consumer regression also passes. Next implementation batch: W34–W36.
+
 ## Latest batch: W19–W26 on d8a489d
 
 Generated seven Book III artifacts from the 103-node final manuscript authority, with 28 selected topic entries and exact canonical/section digest checks. Added `/books/reality-continuity/#maintenance` search and source-topic inspector. Unknown observable signals, failure mechanisms, thresholds, recovery windows and transitions remain empty pending extraction; no automatic Reality state write or recovery recommendation is enabled. W26 currently supplies a read-only binding contract, not an activated Reality consumer.

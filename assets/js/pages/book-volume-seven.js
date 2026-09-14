@@ -133,6 +133,13 @@ async function render() {
       const dispose=await mountMaintenanceExplorer(explorer,locale);
       if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
     }
+    if (bookId === 'book-4') {
+      const action=document.createElement('a');action.className='knowledge-action';action.href='#expansion';action.textContent=locale==='zh-Hans'?'探索扩展与尺度':'Explore expansion and scale';root.querySelector('.knowledge-actions')?.append(action);
+      const explorer=document.createElement('section');explorer.id='expansion';explorer.className='expansion-explorer';root.querySelector('.knowledge-hero')?.after(explorer);
+      const {mountExpansionExplorer}=await import('../knowledge/expansion-explorer.js');
+      const dispose=await mountExpansionExplorer(explorer,locale);
+      if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
+    }
     if (persistentAtlas) {
       const hero = root.querySelector('.wpr-book-hero');
       if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);
