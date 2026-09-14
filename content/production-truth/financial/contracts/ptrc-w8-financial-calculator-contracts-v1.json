@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "PHI-OS-PTRC-W8-FINANCIAL-CALCULATOR-CONTRACTS-v1.0.0",
+  "formulaVersion": "ptrc-financial-formulas.v1",
+  "global": {
+    "currency": "ISO-4217 caller supplied; engine performs no FX conversion",
+    "asOfDate": "ISO-8601 calendar date; required",
+    "rounding": {"currencyDecimals": 2, "ratioDecimals": 6},
+    "missingValueRule": "Return NEEDS_INPUT for missing top-level required metadata or required calculator field; never impute numeric values.",
+    "jurisdictionRule": "Jurisdiction is required only where the calculation enters jurisdiction-sensitive estate context; tax rules are not activated.",
+    "taxRule": "No tax value is calculated without a separately governed jurisdiction-specific ruleset.",
+    "modelBoundary": "LLM prose may explain engine output but cannot create numeric inputs, replace formulas, or override engine values."
+  },
+  "calculators": {
+    "CASH_FLOW": {
+      "inputs": {"monthlyIncome":"currency/month","monthlyExpenses":"currency/month"},
+      "outputs": {"monthlySurplusDeficit":"currency/month","annualizedSurplusDeficit":"currency/year","savingsRatio":"ratio"},
+      "formula": "surplus = income - expenses; savingsRatio = surplus / income"
+    },
+    "NET_WORTH": {
+      "inputs": {"assets":"array<currency>","liabilities":"array<currency>"},
+      "outputs": {"totalAssets":"currency","totalLiabilities":"currency","netWorth":"currency"},
+      "formula": "netWorth = sum(assets) - sum(liabilities)"
+    },
+    "DEBT": {
+      "inputs": {"principal":"currency","annualInterestRate":"percent/year","monthlyPayment":"currency/month"},
+      "outputs": {"monthsToPayoff":"months","totalPayments":"currency","totalInterest":"currency","endingBalance":"currency"},
+      "formula": "fixed-rate monthly amortization; payment must exceed monthly interest when rate > 0"
+    },
+    "SAVINGS": {
+      "inputs": {"targetAmount":"currency","currentSavings":"currency","horizonMonths":"integer months","annualReturnRate":"optional percent/year"},
+      "outputs": {"fundingGapToday":"currency","requiredMonthlyContribution":"currency/month"},
+      "formula": "required periodic contribution to reach caller-defined target over caller-defined horizon"
+    },
+    "RETIREMENT_SCENARIO": {
+      "inputs": {"currentAssets":"currency","monthlyContribution":"currency/month","years":"years","annualReturnRate":"percent/year","targetAmountAtRetirement":"currency","annualInflationRate":"optional percent/year"},
+      "outputs": {"projectedAssets":"currency","projectedFundingGap":"currency","realValueInTodayMoney":"currency"},
+      "formula": "monthly compounding with end-of-period contributions; optional inflation deflation to today's money",
+      "boundary": "scenario projection only; no guarantee or recommendation"
+    },
+    "COMPOUNDING": {
+      "inputs": {"principal":"currency","annualRate":"percent/year","years":"years","monthlyContribution":"optional currency/month"},
+      "outputs": {"futureValue":"currency","totalContributed":"currency","growth":"currency"},
+      "formula": "monthly compounding with end-of-period contributions"
+    },
+    "INFLATION": {
+      "inputs": {"amount":"currency","annualInflationRate":"percent/year","years":"years"},
+      "outputs": {"futureEquivalentCost":"currency","futurePurchasingPowerOfSameNominalAmount":"currency","inflationFactor":"factor"},
+      "formula": "factor=(1+inflationRate)^years"
+    },
+    "DRAWDOWN": {
+      "inputs": {"openingBalance":"currency","monthlyWithdrawal":"currency/month","annualReturnRate":"percent/year","months":"integer months"},
+      "outputs": {"endingBalance":"currency","totalWithdrawn":"currency","monthsUntilDepletion":"months|null"},
+      "formula": "monthly return then withdrawal, stopping at zero balance"
+    },
+    "AFFORDABILITY": {
+      "inputs": {"monthlyIncome":"currency/month","monthlyFixedExpenses":"currency/month","monthlyDebtPayments":"currency/month","proposedMonthlyCost":"currency/month","maxExpenseRatio":"optional caller-defined ratio 0..1"},
+      "outputs": {"monthlySurplusAfterProposedCost":"currency/month","expenseRatioAfterProposedCost":"ratio","withinUserSuppliedRatio":"boolean when threshold supplied"},
+      "formula": "cash capacity and ratio arithmetic only; no PHI OS affordability threshold is invented",
+      "boundary": "not a lending decision or recommendation"
+    },
+    "ESTATE_SUMMARY": {
+      "inputs": {"assets":"array<currency>","liabilities":"array<currency>","jurisdiction":"required jurisdiction code/context"},
+      "outputs": {"grossEstate":"currency","totalLiabilities":"currency","netEstateBeforeTaxFeesAndDistribution":"currency"},
+      "formula": "gross assets - liabilities before tax, fees, probate, trusts, or distribution",
+      "boundary": "no tax, legal validity, probate, beneficiary distribution, or executed-instrument conclusion"
+    },
+    "FINANCIAL_POSITION": {
+      "inputs": {"income":"array<currency/month>","expenses":"array<currency/month>","assets":"array<currency>","liquid_assets":"array<currency>","liabilities":"array<currency>","current_liabilities":"array<currency>","other":"existing M4A-W2C v2 optional gap/ratio inputs"},
+      "outputs": {"metrics":"existing 16 M4A-W2C financial metrics"},
+      "formula": "delegates to governed financial-calculation-layer.js without answer-prose composition"
+    }
+  }
+}
