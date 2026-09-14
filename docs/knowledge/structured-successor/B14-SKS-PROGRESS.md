@@ -74,6 +74,16 @@ Public copy and legacy book entry points use seven-volume terminology and curren
 
 ## Checks
 
+## W39 customer presentation and W41–W44 public component pass on 28a7cbb
+
+The supported seven-part answer now passes through CKA and customer projection to the Contextual Ask renderer. Direct answer remains the existing primary answer; mechanism/state, conditions, related factors, possible transition, unknown boundary and Book link follow. Missing evidence is visibly unknown. Fourteen real bilingual grounding cases now test the complete projection/HTML path, including abstention and escaping. KAP M6 records the optional CKA field successor; original frozen evidence is preserved.
+
+All four Explorer adapters share responsive CSS, keyboard navigation, visible focus, reduced motion, forced colors and a selected-topic Ask action. Book III adds selection URLs and popstate synchronization; `degradation` and `scale` are accepted aliases for existing `topic` and `expansion` links. Search preserves browser selection. Existing URLs remain valid.
+
+`scripts/check-b14-sks-public-browser.mjs` runs 32 real Edge component cases across four books, two languages and 360/390/768/1440px. It checks overflow, arrow-key focus, URL selection/history, no-match search, forced-color focus and selected Ask links. Set `PHIOS_PLAYWRIGHT_MODULE` to an installed Playwright module and `PHIOS_BROWSER_CHANNEL=msedge` when using the desktop bundled runtime.
+
+W41 now shares navigation, central reading map, right source inspector, all-matching/selected-only filter and source reading entry. Book I retains its source-supported formation visualization; the other central maps show reading navigation without inventing causal relationships. Book III details retain the source-index boundary. W43/W44 acceptance covers isolated real-browser components, not full-page or paid journeys. Those acceptance tasks remain consolidated; continue with W45–W49.
+
 ## W37–W40 Ask integration preview on 7bbd7d7
 
 Book I–IV source navigation now supplies a registry-validated selected object to the existing Contextual Ask runtime. Retrieval prioritizes selected structured evidence and rejects unrelated recovery, scale-transition and relationship questions. Ten intent families are recognized; comparison intentionally abstains until multiple supported objects are available. Book II/III chapter indexes supply no answer prose. No unreviewed cross-book edges are admitted.

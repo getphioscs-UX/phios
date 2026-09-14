@@ -168,6 +168,7 @@ export function projectCkaClientAnswer(payload, { entryContext, followUpContext,
     schemaVersion: 'PHI-OS-CKA-CLIENT-ANSWER-v1.0.0',
     question: canonicalText(displayQuestion || followUpContext?.currentQuestion || payload?.answer?.question),
     directAnswer: canonicalText(content.directAnswer),
+    ...(content.structuredAnswer ? {structuredAnswer: content.structuredAnswer} : {}),
     whyThisMayHappen: Object.freeze(whyThisMayHappen),
     whatToObserve: Object.freeze((content.whatToObserve || []).map(canonicalText).filter(Boolean)),
     unknown: Object.freeze({

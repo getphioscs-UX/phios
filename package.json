@@ -2438,7 +2438,9 @@
     "check:ptrc:w9-testamentary-report": "node scripts/check-ptrc-w9-testamentary-report.mjs",
     "check:ptrc:w10-consolidation": "node scripts/check-ptrc-w10-consolidation.mjs",
     "check:ptrc:machine": "node scripts/check-ptrc-w0-production-truth-baseline.mjs && npm run check:ptrc:w1-w7-readiness && npm run check:ptrc:w8-financial-runtime && npm run check:ptrc:w9-testamentary-report && npm run check:ptrc:w10-consolidation",
-    "check:ptrc:release": "npm run check:ptrc:machine && npm run check:ptrc:w7-human && node scripts/check-ptrc-w10-consolidation.mjs --release"
+    "check:ptrc:release": "npm run check:ptrc:machine && npm run check:ptrc:w7-human && node scripts/check-ptrc-w10-consolidation.mjs --release",
+    "check:b14-sks-ask": "node scripts/check-b14-sks-ask.mjs",
+    "check:b14-sks-public-browser": "node scripts/check-b14-sks-public-browser.mjs"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

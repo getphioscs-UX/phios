@@ -1,3 +1,4 @@
+import {enhanceExplorerShell} from './explorer-shell.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const BASE='/content/knowledge/structured/book-1/';
 export function formationAskHref(object,detail,locale='en'){
@@ -25,7 +26,8 @@ export function renderFormationExplorer(host,{registry,chains,comparisons,locale
  const sync=()=>select(new URL(locationRef.href).searchParams.get('mechanism')||objects[0]?.objectId);
  const click=e=>{const button=e.target.closest('[data-object]');if(button&&host.contains(button)){const id=button.dataset.object;select(id,true);host.querySelector(`[data-object="${id}"]`)?.focus();}};
  host.addEventListener('click',click);input.addEventListener('input',renderList);filter.addEventListener('change',renderList);eventTarget.addEventListener('popstate',sync);sync();
- return ()=>{host.removeEventListener('click',click);eventTarget.removeEventListener('popstate',sync);};
+ const disposeShell=enhanceExplorerShell(host,{layout:'.formation-layout',nav:'nav',inspector:'[data-formation-inspector]',locale});
+ return ()=>{disposeShell();host.removeEventListener('click',click);input.removeEventListener('input',renderList);filter.removeEventListener('change',renderList);eventTarget.removeEventListener('popstate',sync);};
 }
 export async function mountFormationExplorer(host,locale){
  host.textContent=locale==='zh-Hans'?'正在加载形成探索器…':'Loading Formation Explorer…';

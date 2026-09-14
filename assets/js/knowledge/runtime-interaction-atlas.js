@@ -1,3 +1,4 @@
+import {enhanceExplorerShell} from './explorer-shell.js';
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export function renderRuntimeAtlas(host,{patterns,locale='en',locationRef=window.location,historyRef=window.history,eventTarget=window}){
  const zh=locale==='zh-Hans',tr=(en,cn)=>zh?cn:en;
@@ -13,7 +14,8 @@ export function renderRuntimeAtlas(host,{patterns,locale='en',locationRef=window
  const sync=()=>select(new URL(locationRef.href).searchParams.get('pattern')||patterns[0]?.objectId);
  const click=e=>{const b=e.target.closest('[data-runtime-object]');if(b&&host.contains(b)){select(b.dataset.runtimeObject,true);q(`[data-runtime-object="${b.dataset.runtimeObject}"]`)?.focus();}};
  host.addEventListener('click',click);search.addEventListener('input',renderList);level.addEventListener('change',renderList);compare.addEventListener('change',renderComparison);eventTarget.addEventListener('popstate',sync);sync();
- return ()=>{host.removeEventListener('click',click);search.removeEventListener('input',renderList);level.removeEventListener('change',renderList);compare.removeEventListener('change',renderComparison);eventTarget.removeEventListener('popstate',sync);};
+ const disposeShell=enhanceExplorerShell(host,{layout:'.runtime-atlas-layout',nav:'[data-runtime-list]',inspector:'[data-runtime-inspector]',locale});
+ return ()=>{disposeShell();host.removeEventListener('click',click);search.removeEventListener('input',renderList);level.removeEventListener('change',renderList);compare.removeEventListener('change',renderComparison);eventTarget.removeEventListener('popstate',sync);};
 }
 export async function mountRuntimeAtlas(host,locale){
  try{const response=await fetch('/content/knowledge/structured/book-2/book-2-runtime-pattern-registry-v1.json');if(!response.ok)throw new Error('unavailable');const {patterns}=await response.json();if(!host.isConnected)return ()=>{};return renderRuntimeAtlas(host,{patterns,locale});}

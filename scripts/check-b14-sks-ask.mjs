@@ -4,6 +4,9 @@ import {classifyStructuredIntent,normalizeStructuredScope,resolveStructuredEntry
 import {createPtrcAskRequestContract} from '../functions/_lib/ptrc-ask-contract.js';
 import {runKapGroundingPipeline} from '../functions/_lib/knowledge-answer-grounding.js';
 import {composeDeterministicKapAnswer} from '../functions/_lib/knowledge-answer-composition.js';
+import {projectCkaClientAnswer} from '../functions/_lib/client-knowledge-ask.js';
+import {projectKnowledgeAnswerForCustomer} from '../functions/customer-projection/knowledge-customer-projection.js';
+import {renderStructuredAnswer} from '../assets/customer-ui/js/surfaces/structured-answer.js';
 const env={ASSETS:{fetch:async request=>{const p='.'+new URL(request.url).pathname;return fs.existsSync(p)?new Response(fs.readFileSync(p)):new Response('',{status:404});}}};
 assert.equal(normalizeStructuredScope({scopeType:'STRUCTURED_KNOWLEDGE',bookCode:'BOOK-4',objectId:'SK-B1-CONSTRAINT'}),null);
 assert.equal(await resolveStructuredEntry('CONCEPT:sk-b4-missing',env),null);
@@ -26,5 +29,10 @@ for(const locale of ['en','zh-Hans'])for(const [ref,q,blocked] of [
  else {assert.equal(sources[0]?.sourceType,'STRUCTURED_KNOWLEDGE_OBJECT',ref+q);const shape=structuredAnswerShape(result.groundingBundle,'supported');assert.ok(shape.exploreInBook.startsWith('/books/'));assert.equal(shape.possibleTransition,null);}
  const answer=composeDeterministicKapAnswer({bundle:result.groundingBundle,coverageDecision:result.coverageDecision});if(blocked)assert.equal(answer.content.structuredAnswer,undefined);
  else {assert.equal(result.coverageDecision.shortSupportedAnswerEligible,true);assert.ok(answer.content.structuredAnswer?.exploreInBook);}
+ const clientAnswer=projectCkaClientAnswer({answer,sources:[]});
+ const view=projectKnowledgeAnswerForCustomer({clientAnswer},{locale});
+ const html=renderStructuredAnswer(view.answer.structuredAnswer,locale);
+ if(blocked)assert.equal(html,'');else {assert.ok(html.includes('data-structured-answer'));assert.equal((html.match(/<h3>/g)||[]).length,6);assert.ok(html.includes('href="/books/'));assert.ok(view.answer.text);}
 }
+assert.ok(!renderStructuredAnswer({exploreInBook:'javascript:alert(1)',mechanismOrState:'<script>bad</script>'}).includes('<script>'));
 console.log('✓ W37–W40: 10 intents and 14 bilingual real KAP pipeline cases passed, including source-index abstention and unrelated recovery/scale/relationship rejection.');

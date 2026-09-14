@@ -200,7 +200,7 @@ for (const item of historicalCka.clientSurfaceTransition.artifacts) {
     assert.equal(sha256(item.path), bRecord.sha256, `CKA_B_CURRENT_RUNTIME_DRIFT:${item.path}`);
     continue;
   }
-  assert.equal(sha256(item.path), item.currentSuccessorSha256, `CKA_A_CURRENT_RUNTIME_DRIFT:${item.path}`);
+  assert.equal(sha256(item.path), kapMaintenanceSuccessorSha(item.path,item.currentSuccessorSha256), `CKA_A_CURRENT_RUNTIME_DRIFT:${item.path}`);
 }
 assert.equal(historicalCka.clientSurfaceTransition.guidedReadingActivatedByCkaW0W4, false);
 

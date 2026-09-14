@@ -141,7 +141,7 @@ async function render() {
       if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
     }
     if (['book-1','book-2','book-3','book-4'].includes(bookId)) {
-      const sources=document.createElement('section');sources.className='knowledge-section';
+      const sources=document.createElement('section');sources.className='knowledge-section';sources.id='structured-sources';
       const shell=document.createElement('div');shell.className='knowledge-shell';sources.append(shell);root.append(sources);
       const {mountStructuredBacklinks}=await import('../knowledge/structured-backlinks.js');
       const dispose=await mountStructuredBacklinks(shell,bookId.toUpperCase(),locale);

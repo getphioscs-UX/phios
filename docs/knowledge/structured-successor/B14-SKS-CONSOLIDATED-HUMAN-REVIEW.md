@@ -16,4 +16,4 @@ W34–W36 adds two candidate reading relationships in `content/knowledge/structu
 
 W37–W40 adds selected-object Ask scope, ten intent classifications, relevance rejection and a seven-part composition preview. Review the classifications and answer boundaries together later. Comparison evidence, Book II/III semantic extraction and W39 customer presentation are implementation gaps, not approval-only tasks. Full browser and paid journeys remain pending.
 
-Continue next with W41–W44 while retaining those gaps. No W56–W59 or W71–W80 completion is inferred.
+W39 customer presentation is now implemented and tested through the customer projection and renderer. W41–W44 share navigation, central reading maps, source inspectors, filters and reading entry, with a 32-case browser component matrix. Central reading maps create no causal authority. Consolidated review should cover wording and reading usability; full-page/paid journeys remain pending. Next: W45–W49. No W56–W59 or W71–W80 completion is inferred.

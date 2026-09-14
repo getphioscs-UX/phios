@@ -1,3 +1,4 @@
+import {renderStructuredAnswer} from './structured-answer.js';
 import {arr,esc,locale,postJson,reRenderOnLocale,setStatus,tr} from './runtime-ui.js';
 import {handoffToMyReality} from '../handoff.js';
 
@@ -189,7 +190,7 @@ function render(){
   if(!view)return;
   document.querySelector('[data-cx-contextual-ask-result]').hidden=false;
   document.querySelector('[data-cx-answer-text]').textContent=view?.answer?.text||'';
-  document.querySelector('[data-cx-answer-supporting]').innerHTML=arr(view?.answer?.supporting).length?list(view.answer.supporting):'';
+  document.querySelector('[data-cx-answer-supporting]').innerHTML=view?.answer?.structuredAnswer?renderStructuredAnswer(view.answer.structuredAnswer,document.documentElement.lang):arr(view?.answer?.supporting).length?list(view.answer.supporting):'';
   renderBasis();
   renderTemporal();
   document.querySelector('[data-cx-answer-limits]').innerHTML=list(view?.limits?.items);
