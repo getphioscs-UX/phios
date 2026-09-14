@@ -14,6 +14,12 @@ try{browser=await chromium.launch({channel:process.env.PHIOS_BROWSER_CHANNEL||'m
  if(process.env.PHIOS_SCREENSHOT_DIR)await page.screenshot({path:path.join(process.env.PHIOS_SCREENSHOT_DIR,`phios-article-repair-${width}.png`),fullPage:true});
  }
  await page.goto(origin+'/knowledge/ask/');await page.locator('[name=question]').fill('文章');await page.locator('[data-cx-contextual-ask-form] [type=submit]').click();await page.waitForFunction(()=>document.querySelector('[data-cx-related-knowledge] a')?.getAttribute('href')==='/articles');assert.equal(await page.locator('[data-cx-answer-text]').innerText().then(s=>s.length<100),true);assert.equal(await page.locator('form[aria-busy=true]').count(),0);
+ await page.context().setOffline(true);
+ await page.waitForFunction(()=>document.querySelector('[data-cx-contextual-ask-form]').dataset.askState==='OFFLINE');
+ await page.context().setOffline(false);
+ await page.waitForFunction(()=>document.querySelector('[data-cx-contextual-ask-form]').dataset.askState==='IDLE');
+ await page.locator('[name=question]').fill('test question');
+ assert.equal(await page.locator('[data-cx-contextual-ask-form]').getAttribute('data-ask-state'),'COMPOSING');
  const result=await page.evaluate(async()=>{const {postJson}=await import('/assets/customer-ui/js/surfaces/runtime-ui.js');try{await postJson('/api/timeout',{}, {timeoutMs:50});return 'unexpected';}catch(e){return e.code;}});assert.equal(result,'REQUEST_TIMEOUT');
  console.log('✓ Full local article pages at 360/1440px: single hero, readable title, no overflow. Ask article navigation and bounded request timeout passed. External media and paid journeys were not tested.');
 }finally{await browser?.close();await new Promise(r=>server.close(r));}

@@ -33,7 +33,11 @@ assert.match(askHtml,/PHIOS-FAVICON-v1\.svg\?v=ptrc-w1-20260914/);
 const publicShell=text('assets/js/public-shell.js');
 assert.doesNotMatch(publicShell,/>Φ</);
 const customerShell=text('assets/customer-ui/js/shell.js');
-assert.match(customerShell,/data-cx-asset="LOGO-003"/);
+// The W1 registry above remains historical; the live shell follows its active successor.
+const currentBrand=json('content/customer-experience-rebuild/authority/customer-brand-asset-authority-v4.json');
+assert.equal(currentBrand.status,'ACTIVE_SURFACE_AWARE_CUSTOMER_BRAND_BINDING');
+assert.equal(currentBrand.authorityBoundary.upstreamLogoRegistryMutated,false);
+assert.ok(customerShell.includes(`data-cx-asset="${currentBrand.currentConsumers.publicHeaderLight}"`),'shell missing current canonical header');
 assert.match(customerShell,/data-cx-asset="LOGO-010"/);
 const manifest=json('site.webmanifest');
 assert.equal(manifest.icons[0].type,'image/svg+xml');
@@ -90,7 +94,11 @@ assert.equal(regression.liveCanary.status,'PENDING_POST_DEPLOY');
 const ux=json('content/production-truth/ux/ptrc-w6-responsive-experience-v1.json');
 assert.deepEqual(ux.viewports,['360x800','390x844','768x1024','1440x900','1920x1080']);
 const css=text('assets/customer-ui/surfaces/contextual-ask.css');
-assert.match(css,/full-bleed reconstruction/);assert.match(css,/100svh/);assert.match(css,/clamp\(/);assert.match(css,/min-height:44px/);assert.match(css,/prefers-reduced-motion:reduce/);
+assert.match(css,/full-bleed reconstruction/);assert.match(css,/100svh/);assert.match(css,/clamp\(/);
+assert.match(text('assets/customer-ui/components.css'),/\.cx-button\s*\{[^}]*min-height:\s*var\(--cx-size-control-min\)/);
+assert.match(text('assets/customer-ui/tokens.css'),/--cx-size-control-min:\s*2\.75rem/);
+// The poster opts into animation only when reduced motion is not requested.
+assert.match(css,/@media\(prefers-reduced-motion:no-preference\)\{\.cx-ask-poster__core\{animation:/);
 const client=text('assets/customer-ui/js/surfaces/contextual-ask.js');
 for(const state of ux.askStates)assert.match(client,new RegExp(`['\"]${state}['\"]`));
 assert.match(client,/window\.addEventListener\('offline'/);assert.match(client,/aria-busy/);

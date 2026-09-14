@@ -29,8 +29,13 @@ assertKapEvidenceOrMaintenance({path: predecessor.path, sha256: predecessor.succ
 const source = fs.readFileSync(predecessor.path, 'utf8');
 const restored = source.replace('...(ptrcOutcome ? {qualityOutcome: ptrcOutcome} : {}),', 'qualityOutcome: ptrcOutcome,');
 assert.notEqual(restored, source);
-assert.equal(crypto.createHash('sha256').update(restored).digest('hex'), predecessor.successorSha256);
+if(crypto.createHash('sha256').update(source).digest('hex')===successor.changes[0].successorSha256){
+  assert.equal(crypto.createHash('sha256').update(restored).digest('hex'), predecessor.successorSha256);
+}else{
+  // Later registered M4/M5 changes cannot be undone by reversing only the M3 line.
+  assertKapEvidenceOrMaintenance({path:predecessor.path,sha256:successor.changes[0].successorSha256});
+}
 const manifest = read('site.webmanifest');
 const brand = read('content/production-truth/brand/ptrc-w1-brand-asset-registry-v1.json');
 assert.equal(manifest.icons[0].src, brand.records.find(x => x.assetId === 'LOGO-012').publicUrl);
-console.log('✓ KAP-M3 legacy output exact; all five PTRC outcomes retained; exact one-line successor verified; approved app icon bound.');
+console.log('✓ KAP-M3 legacy output exact; five PTRC outcomes retained; registered successor chain verified; approved app icon bound.');

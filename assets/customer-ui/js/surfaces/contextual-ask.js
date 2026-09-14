@@ -250,6 +250,10 @@ function isPaidBoundary(code){return /(ENTITLEMENT|CREDIT|ALLOWANCE|QUOTA|PAID|U
 function boot(){
   const form=document.querySelector('[data-cx-contextual-ask-form]'),status=document.querySelector('[data-cx-contextual-ask-status]');
   if(!form)return;
+  form.dataset.askState=navigator.onLine===false?'OFFLINE':'IDLE';
+  form.elements.question.addEventListener('input',()=>{if(form.getAttribute('aria-busy')!=='true')form.dataset.askState=navigator.onLine===false?'OFFLINE':form.elements.question.value.trim()?'COMPOSING':'IDLE';});
+  window.addEventListener('offline',()=>{form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');});
+  window.addEventListener('online',()=>{if(form.getAttribute('aria-busy')!=='true'){form.dataset.askState='IDLE';setStatus(status,'');}});
   form.addEventListener('change',event=>{
     const target=event.target;
     if(target?.matches?.('[data-cx-seeded-context][data-context-type="KNOWLEDGE"]')&&target.checked){form.elements.contextKnowledge.checked=false;form.elements.questionOnly.checked=false;}
@@ -263,17 +267,21 @@ function boot(){
     event.preventDefault();
     const question=String(form.elements.question.value||'').trim();
     if(!question||form.getAttribute('aria-busy')==='true')return;
+    if(navigator.onLine===false){form.dataset.askState='OFFLINE';setStatus(status,tr('You are offline. Reconnect and try again.','目前离线，请联网后重试。'),'error');return;}
     const selection=selectedRequest(form),guided=guidedContext(form);
     if(form.elements.contextReality.checked&&!form.elements.currentRealityConsent.checked){setStatus(status,tr('Confirm that the situation you entered may be used for this question.','请确认你填写的当前处境可以用于这个问题。'),'error');return;}
     setStatus(status,tr('Connecting your question to the selected sources…','正在把你的问题与所选来源连接起来…'));
     form.setAttribute('aria-busy','true');const submit=form.querySelector('[type=submit]');if(submit)submit.disabled=true;
+    form.dataset.askState='RETRIEVING';
     try{
       const payload=await postJson('/api/customer-contextual-ask',{question,locale:locale(),...selection,guidedContext:guided,contextConsent:{CURRENT_REALITY:form.elements.currentRealityConsent.checked===true}},{timeoutMs:25000});
       view=payload.view;
+      form.dataset.askState=['SUFFICIENT','PARTIAL','INSUFFICIENT','AMBIGUOUS','CONTRADICTORY'].includes(view?.qualityOutcome)?view.qualityOutcome:(view?.state||'IDLE');
       render();
       setStatus(status,'','success');
       document.querySelector('[data-cx-contextual-ask-result]').scrollIntoView({behavior:'smooth',block:'start'});
     }catch(error){
+      form.dataset.askState=navigator.onLine===false?'OFFLINE':'ERROR';
       setStatus(status,error?.code==='REQUEST_TIMEOUT'?tr('This is taking longer than expected. Please try again, or browse articles.','这次等待较久，请重试，或先浏览文章。'):errorMessage(error?.code),'error');
       if(isPaidBoundary(error?.code))showPaidUpgrade({reason:String(error?.code||'ENTITLEMENT_BOUNDARY'),adds:['new structure','new combination','new timing','new context','new continuity']});
     }finally{form.setAttribute('aria-busy','false');if(submit)submit.disabled=false;}
