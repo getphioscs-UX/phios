@@ -148,3 +148,7 @@ git diff --check
 ```
 
 The foundation builder resets W0–W4 to pending check; rerun the checker with `--record` to record machine acceptance. No deployment or full repository regression is claimed by this stage.
+
+## W60 dedup engine on 7c57546
+
+Machine implementation and targeted checks complete: 71 objects, 2,485 pairs, 465 pairs with both meanings, five Book IV article-summary reuse findings. Forty meanings remain unavailable. Exact text and lexical overlap are review evidence, not confirmed semantic duplication. See dedup/B14-SKS-W60-DEDUP.md. No merge or authority writeback; human review deferred. Next: W61.

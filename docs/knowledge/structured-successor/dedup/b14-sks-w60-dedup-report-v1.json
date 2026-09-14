@@ -1,0 +1,450 @@
+{
+  "version": "1.0.0",
+  "stage": "B14-SKS-W60",
+  "policy": {
+    "normalization": "NFKC_CASE_WHITESPACE_ONLY",
+    "lexicalMetric": "CHARACTER_BIGRAM_JACCARD",
+    "lexicalThreshold": 0.65,
+    "semanticParaphraseDetection": "NOT_IMPLEMENTED_HUMAN_REVIEW_REQUIRED",
+    "sharedArticleAloneIsDuplicate": false
+  },
+  "coverage": {
+    "objects": 71,
+    "totalPairs": 2485,
+    "supportedMeaningPairs": 465,
+    "meaningUnavailable": [
+      "EXTRACT-SK-B2-B1-P5-002-V1",
+      "EXTRACT-SK-B2-B1-P5-016-V1",
+      "EXTRACT-SK-B2-B1-P5-058-V1",
+      "EXTRACT-SK-B2-B2-P6-002-V1",
+      "EXTRACT-SK-B2-B2-P6-007-V1",
+      "EXTRACT-SK-B2-B2-P6-011-V1",
+      "EXTRACT-SK-B2-B2-P6-013-V1",
+      "EXTRACT-SK-B2-B2-P6-016-V1",
+      "EXTRACT-SK-B2-B2-P6-037-V1",
+      "EXTRACT-SK-B2-B2-P7-024-V1",
+      "EXTRACT-SK-B2-B2-P7-034-V1",
+      "EXTRACT-SK-B2-B2-P7-036-V1",
+      "EXTRACT-SK-B3-B3-P8-103-V1",
+      "EXTRACT-SK-B3-B3-P8-105-V1",
+      "EXTRACT-SK-B3-B3-P8-106-V1",
+      "EXTRACT-SK-B3-B3-P8-107-V1",
+      "EXTRACT-SK-B3-B3-P8-108-V1",
+      "EXTRACT-SK-B3-B3-P8-109-V1",
+      "EXTRACT-SK-B3-B3-P8-111-V1",
+      "EXTRACT-SK-B3-B3-P8-112-V1",
+      "EXTRACT-SK-B3-B3-P8-114-V1",
+      "EXTRACT-SK-B3-B3-P8-116-V1",
+      "EXTRACT-SK-B3-B3-P8-117-V1",
+      "EXTRACT-SK-B3-B3-P8-118-V1",
+      "EXTRACT-SK-B3-B3-P8-121-V1",
+      "EXTRACT-SK-B3-B3-P8-126-V1",
+      "EXTRACT-SK-B3-B3-P8-137-V1",
+      "EXTRACT-SK-B3-B3-P8-138-V1",
+      "EXTRACT-SK-B3-B3-P8-140-V1",
+      "EXTRACT-SK-B3-B3-P8-143-V1",
+      "EXTRACT-SK-B3-B3-P8-144-V1",
+      "EXTRACT-SK-B3-B3-P8-145-V1",
+      "EXTRACT-SK-B3-B3-P8-147-V1",
+      "EXTRACT-SK-B3-B3-P8-159-V1",
+      "EXTRACT-SK-B3-B3-P9-124-V1",
+      "EXTRACT-SK-B3-B3-P9-126-V1",
+      "EXTRACT-SK-B3-B3-P9-129-V1",
+      "EXTRACT-SK-B3-B3-P9-137-V1",
+      "EXTRACT-SK-B3-B3-P9-139-V1",
+      "EXTRACT-SK-B3-B3-P9-141-V1"
+    ]
+  },
+  "findings": [
+    {
+      "findingId": "DEDUP-d87fdea034854227af9b",
+      "candidateIds": [
+        "EXTRACT-SK-B4-B4-P10-212-V1",
+        "EXTRACT-SK-B4-B4-P10-214-V1"
+      ],
+      "objectIds": [
+        "SK-B4-B4-P10-212",
+        "SK-B4-B4-P10-214"
+      ],
+      "bookCodes": [
+        "BOOK-4",
+        "BOOK-4"
+      ],
+      "reasons": [
+        "EXACT_TEXT_DIFFERENT_IDS",
+        "ARTICLE_DERIVED_DUPLICATION_CANDIDATE"
+      ],
+      "lexicalSimilarity": 1,
+      "sharedArticleCodes": [
+        "BOOK4-B4-ART-003-EN-ARTICLE",
+        "BOOK4-B4-ART-003-ZH-HANS-ARTICLE"
+      ],
+      "evidence": [
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-212-V1",
+          "title": "扩展阈值",
+          "meaning": "扩展需要跨过阈值、受到触发，并把关键运行关系复制到新节点。机会本身不够；新位置必须能够重新承载运行。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/6/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S012",
+              "startPage": 36,
+              "endPage": 39,
+              "textSha256": "04b6db93203db1856e13edef8069bebd651467afe583ec20fabcadbf8fb7f132",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        },
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-214-V1",
+          "title": "运行复制",
+          "meaning": "扩展需要跨过阈值、受到触发，并把关键运行关系复制到新节点。机会本身不够；新位置必须能够重新承载运行。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/2/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S014",
+              "startPage": 41,
+              "endPage": 44,
+              "textSha256": "e5455d43a580b66f43976ac73a69de8ee94acc0c1da4aef6ddd8de2eaaa7d63d",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        }
+      ],
+      "reviewState": "PENDING_HUMAN_REVIEW",
+      "semanticEquivalenceConfirmed": false,
+      "mergeAllowed": false
+    },
+    {
+      "findingId": "DEDUP-b9e601acb5936571695d",
+      "candidateIds": [
+        "EXTRACT-SK-B4-B4-P10-215-V1",
+        "EXTRACT-SK-B4-B4-P10-216-V1"
+      ],
+      "objectIds": [
+        "SK-B4-B4-P10-215",
+        "SK-B4-B4-P10-216"
+      ],
+      "bookCodes": [
+        "BOOK-4",
+        "BOOK-4"
+      ],
+      "reasons": [
+        "EXACT_TEXT_DIFFERENT_IDS",
+        "ARTICLE_DERIVED_DUPLICATION_CANDIDATE"
+      ],
+      "lexicalSimilarity": 1,
+      "sharedArticleCodes": [
+        "BOOK4-B4-ART-012-EN-ARTICLE",
+        "BOOK4-B4-ART-012-ZH-HANS-ARTICLE"
+      ],
+      "evidence": [
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-215-V1",
+          "title": "运行传播",
+          "meaning": "复制让运行能在新节点重建，传播让它跨越边界，放大则来自节点之间形成分工、网络效应、反馈与可重复调用。规模因此既会放大能力，也会放大错误与路径依赖。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/3/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S015",
+              "startPage": 44,
+              "endPage": 47,
+              "textSha256": "70d613b33a9709581aa49af6a84ceacf94f394730483244d3519cb336126ead2",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        },
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-216-V1",
+          "title": "运行放大",
+          "meaning": "复制让运行能在新节点重建，传播让它跨越边界，放大则来自节点之间形成分工、网络效应、反馈与可重复调用。规模因此既会放大能力，也会放大错误与路径依赖。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/4/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S016",
+              "startPage": 47,
+              "endPage": 49,
+              "textSha256": "e19e59abf4ee6f87b52ddeb4c291ad1bd8f76fe569362935fa024044db1bbb03",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        }
+      ],
+      "reviewState": "PENDING_HUMAN_REVIEW",
+      "semanticEquivalenceConfirmed": false,
+      "mergeAllowed": false
+    },
+    {
+      "findingId": "DEDUP-0e27afcd8f51f2eda395",
+      "candidateIds": [
+        "EXTRACT-SK-B4-B4-P10-217-V1",
+        "EXTRACT-SK-B4-B4-P10-219-V1"
+      ],
+      "objectIds": [
+        "SK-B4-B4-P10-217",
+        "SK-B4-B4-P10-219"
+      ],
+      "bookCodes": [
+        "BOOK-4",
+        "BOOK-4"
+      ],
+      "reasons": [
+        "EXACT_TEXT_DIFFERENT_IDS",
+        "ARTICLE_DERIVED_DUPLICATION_CANDIDATE"
+      ],
+      "lexicalSimilarity": 1,
+      "sharedArticleCodes": [
+        "BOOK4-B4-ART-004-EN-ARTICLE",
+        "BOOK4-B4-ART-004-ZH-HANS-ARTICLE"
+      ],
+      "evidence": [
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-217-V1",
+          "title": "网络扩展",
+          "meaning": "横向复制增加覆盖，纵向组织改变尺度。只有节点之间形成持续交换、跨尺度影响与新的协调层级，许多局部运行才开始成为一个更大的共同现实。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/5/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S017",
+              "startPage": 49,
+              "endPage": 52,
+              "textSha256": "1f3ca72cad72d9cff8858e1484136df57c28b8b30d2b22638a0020a32e438ece",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        },
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-219-V1",
+          "title": "尺度转换",
+          "meaning": "横向复制增加覆盖，纵向组织改变尺度。只有节点之间形成持续交换、跨尺度影响与新的协调层级，许多局部运行才开始成为一个更大的共同现实。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/7/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S019",
+              "startPage": 54,
+              "endPage": 57,
+              "textSha256": "9141b3e51d4c216b9bfd1afcdd097717214e9f7408c79c67994566e3237097f3",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        }
+      ],
+      "reviewState": "PENDING_HUMAN_REVIEW",
+      "semanticEquivalenceConfirmed": false,
+      "mergeAllowed": false
+    },
+    {
+      "findingId": "DEDUP-b302a8bdf4d76966dfb4",
+      "candidateIds": [
+        "EXTRACT-SK-B4-B4-P10-222-V1",
+        "EXTRACT-SK-B4-B4-P10-223-V1"
+      ],
+      "objectIds": [
+        "SK-B4-B4-P10-222",
+        "SK-B4-B4-P10-223"
+      ],
+      "bookCodes": [
+        "BOOK-4",
+        "BOOK-4"
+      ],
+      "reasons": [
+        "EXACT_TEXT_DIFFERENT_IDS",
+        "ARTICLE_DERIVED_DUPLICATION_CANDIDATE"
+      ],
+      "lexicalSimilarity": 1,
+      "sharedArticleCodes": [
+        "BOOK4-B4-ART-013-EN-ARTICLE",
+        "BOOK4-B4-ART-013-ZH-HANS-ARTICLE"
+      ],
+      "evidence": [
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-222-V1",
+          "title": "扩展边界",
+          "meaning": "跨越旧边界只是扩展的开始。新节点必须形成可重复的资源循环、局部能力、制度化与修复机制，扩展才会稳定成新的正常尺度；而成熟运行最终还可能从“更大的自己”转变为更高尺度中的稳定节点。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/12/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S022",
+              "startPage": 61,
+              "endPage": 63,
+              "textSha256": "d0858f11a56fbd5a9503e1ad98fb2afc238e7358b5380c8594ddab1ccd52acbc",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        },
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-223-V1",
+          "title": "下一尺度",
+          "meaning": "跨越旧边界只是扩展的开始。新节点必须形成可重复的资源循环、局部能力、制度化与修复机制，扩展才会稳定成新的正常尺度；而成熟运行最终还可能从“更大的自己”转变为更高尺度中的稳定节点。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/8/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S023",
+              "startPage": 63,
+              "endPage": 65,
+              "textSha256": "cee6e6f21cb3506b29b33832ef6b793487dbd3b7ae9f986256d190c6658749b3",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        }
+      ],
+      "reviewState": "PENDING_HUMAN_REVIEW",
+      "semanticEquivalenceConfirmed": false,
+      "mergeAllowed": false
+    },
+    {
+      "findingId": "DEDUP-972ba1a50e9526561b3d",
+      "candidateIds": [
+        "EXTRACT-SK-B4-B4-P10-241-V1",
+        "EXTRACT-SK-B4-B4-P10-242-V1"
+      ],
+      "objectIds": [
+        "SK-B4-B4-P10-241",
+        "SK-B4-B4-P10-242"
+      ],
+      "bookCodes": [
+        "BOOK-4",
+        "BOOK-4"
+      ],
+      "reasons": [
+        "EXACT_TEXT_DIFFERENT_IDS",
+        "ARTICLE_DERIVED_DUPLICATION_CANDIDATE"
+      ],
+      "lexicalSimilarity": 1,
+      "sharedArticleCodes": [
+        "BOOK4-B4-ART-023-EN-ARTICLE",
+        "BOOK4-B4-ART-023-ZH-HANS-ARTICLE"
+      ],
+      "evidence": [
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-241-V1",
+          "title": "协调尺度极限",
+          "meaning": "协调尺度极限来自现有协调方式无法再以合理成本处理更大的节点数量、关系密度与时间跨度，基础设施瓶颈则来自能源、交通、通信、计算、设备与维护等底层承载跟不上上层扩展。一个系统即使仍有需求、资本与技术，如果协调位置和底层承载没有同步重构，尺度最终仍会被共同封住。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/14/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S041",
+              "startPage": 112,
+              "endPage": 114,
+              "textSha256": "923f139f801df91abcd3d7bbf8542cf511f609f81256e768bc4045f733803154",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        },
+        {
+          "candidateId": "EXTRACT-SK-B4-B4-P10-242-V1",
+          "title": "基础设施瓶颈",
+          "meaning": "协调尺度极限来自现有协调方式无法再以合理成本处理更大的节点数量、关系密度与时间跨度，基础设施瓶颈则来自能源、交通、通信、计算、设备与维护等底层承载跟不上上层扩展。一个系统即使仍有需求、资本与技术，如果协调位置和底层承载没有同步重构，尺度最终仍会被共同封住。",
+          "meaningKind": "PUBLISHED_ARTICLE_SUMMARY",
+          "sourceQuoteRefs": [
+            {
+              "path": "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json",
+              "pointer": "/objects/15/articles/0/summary",
+              "sha256": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874"
+            }
+          ],
+          "manuscriptRef": [
+            {
+              "sectionCode": "CM-B4V1-P10-S042",
+              "startPage": 114,
+              "endPage": 116,
+              "textSha256": "9b5c842e547c9e2a562301743da0108605e5905add3c7b008b6f745a1374c223",
+              "rawDeliveryAllowed": false
+            }
+          ]
+        }
+      ],
+      "reviewState": "PENDING_HUMAN_REVIEW",
+      "semanticEquivalenceConfirmed": false,
+      "mergeAllowed": false
+    }
+  ],
+  "automaticMerge": false,
+  "automaticRegistryWriteback": false,
+  "humanAcceptanceComplete": false,
+  "input": {
+    "path": "docs/knowledge/structured-successor/extraction/b14-sks-extraction-candidates-v1.json",
+    "sha256": "2ae7cde9d860522c1774f434b2213f6250aec7a1ecc2446821d03e303ceb3c17",
+    "sourceDigests": {
+      "content/knowledge/knowledge-intelligence-r2/registries/successors/book4-publication-v1/kir-r2-book-i-iv-published-article-binding-registry-v3.json": "916f75a76f9e71ee0883855bd337a5371eacf250f0f85dd5b8cc472884fd78c0",
+      "content/knowledge/manuscripts/extraction/book-1-full-section-inventory-v1.json": "a96b7d057b5070342ff04ebf0ba73b77d5c87702f9cc14c29806f58a6540e9b2",
+      "content/knowledge/manuscripts/extraction/book-2-full-section-inventory-v1.json": "40ab179ecf1f71b074311a3f601baf1d343ee84e699a9604439c28566fedc2ef",
+      "content/knowledge/manuscripts/extraction/book-3-final-section-semantics-v1.json": "8110e202c9ebf2caa50846a91b4ff61dc44c563200c8fd9fa6647088253c8cbd",
+      "content/knowledge/registry/successors/book-w1d/canonical-nodes-v1.json": "5156bf1a591754ce31efabd8648dacb1e4b5f61b2cd47674fa3055b0cb402932",
+      "content/knowledge/registry/successors/book4-a1-final/canonical-nodes-v1.json": "0768beafe14ec062691459cd919c4e019d7fabd1286796412b639068da65d0c8",
+      "content/knowledge/registry/successors/kau-r6e-book3-final/canonical-nodes-v1.json": "6f68df880015455ec095e8af04d5d29e0fe958e823f39673b98e63268f93e0e7",
+      "content/knowledge/source-access/registries/manuscript-section-canonical-binding-v1.json": "9a06ef1cab9740508a732ed74976dd022e62a9c0ff7f53c1304969fc76d116b6",
+      "content/knowledge/structured/book-1/book-1-mechanism-registry-v1.json": "ac29ad4a0e79cb3fc269dd3937bbdec67f4e22e85540d74cb466ec4b8b0d67b8",
+      "content/knowledge/structured/book-2/book-2-runtime-pattern-registry-v1.json": "18b0231f5a776fff414cd9e159a6e7e620f8c89f39c39a4bd8e0b119831ca53e",
+      "content/knowledge/structured/book-3/book-3-maintenance-signal-registry-v1.json": "f433805e97f447b3c1e85997e59bbb0ce86ac6967ecc7e146a1209d5d11c397a",
+      "content/knowledge/structured/book-4/book-4-expansion-mode-registry-v1.json": "d676bebe96333463110ce2046be533b2037517e018750b0ffc0e6b31203a2874",
+      "content/knowledge/structured/structured-knowledge-backlinks-v1.json": "0284b3c56d83f16187cc9638babfbafe610c8d75edc881e3b673d81d20f43b52",
+      "content/knowledge/structured/structured-knowledge-registry-v1.json": "f7977d8001f7338bc962a2924002df64811d167b973d5f3cf4bd0fe1df64ea3f",
+      "content/registry/concepts.json": "35214b6a5d30db747569e7b7623f30907b7fd61613b66f9198ba093a128fdb5b",
+      "content/registry/figures.json": "2c664dc993f3b10243850dc765ef6e185aa3f14e59b92631ea66b1f2484ee023"
+    }
+  }
+}

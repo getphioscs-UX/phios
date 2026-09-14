@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {buildDedupReport} from './lib/structured-dedup.mjs';
+import {currentDedupReport,output} from './build-b14-sks-dedup.mjs';
+const row=(id,title,meaning,book='BOOK-1',kind='SOURCE_DEFINITION')=>({candidateId:id,sourceObjectId:id,bookCode:book,proposedTitle:title,proposedMeaning:meaning,meaningKind:kind,sourceQuoteRefs:[],manuscriptRef:[]});
+const run=candidates=>buildDedupReport({candidates,backlinks:candidates.map(c=>({objectId:c.sourceObjectId,bookCode:c.bookCode,publishedArticles:[{articleCode:'shared'}]}))});
+const has=(r,reason)=>r.findings.some(f=>f.reasons.includes(reason));
+assert.ok(has(run([row('a','A','Same meaning'),row('b','B','same   meaning')]),'EXACT_TEXT_DIFFERENT_IDS'));
+assert.ok(has(run([row('a',{en:'Scale',zh:'尺度'},'large'),row('b',{en:'scale'},'small')]),'SAME_TITLE_DIFFERENT_TEXT'));
+assert.ok(has(run([row('a','同名','甲'),row('b','同名','乙','BOOK-3')]),'CROSS_BOOK_OVERLAP'));
+assert.ok(has(run([row('a','A','article summary'),row('b','B','article summary','BOOK-4','PUBLISHED_ARTICLE_SUMMARY')]),'ARTICLE_DERIVED_DUPLICATION_CANDIDATE'));
+assert.equal(run([row('a','A',null),row('b','B',null)]).findings.length,0);
+assert.equal(run([row('a','A','甲'),row('b','B','乙')]).findings.length,0,'shared article is not a duplicate');
+assert.equal(has(run([row('a','A','not good'),row('b','B','good')]),'EXACT_TEXT_DIFFERENT_IDS'),false);
+const fixture=[row('a','甲','现实结构与约束形成持续关系。'),row('b','乙','现实结构与约束形成持续关系！')];
+assert.ok(has(run(fixture),'LEXICAL_OVERLAP'));assert.deepEqual(run(fixture),run([...fixture].reverse()));
+assert.throws(()=>run([fixture[0],fixture[0]]),/DUPLICATE_CANDIDATE_ID/);
+const actual=JSON.parse(fs.readFileSync(output));assert.deepEqual(actual,currentDedupReport());
+assert.equal(actual.coverage.objects,71);assert.equal(actual.coverage.meaningUnavailable.length,40);
+for(const f of actual.findings){assert.equal(f.mergeAllowed,false);assert.equal(f.semanticEquivalenceConfirmed,false);assert.equal(f.reviewState,'PENDING_HUMAN_REVIEW');}
+console.log(`✓ W60 deterministic dedup: ${actual.coverage.totalPairs} pairs, ${actual.findings.length} review findings; missing meanings and semantic review remain explicit.`);
