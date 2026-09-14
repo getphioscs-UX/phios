@@ -14,11 +14,17 @@ Implemented and machine checked. This is foundation acceptance, not human accept
 
 Book III's 103 final nodes and Book IV's 125 final nodes supersede the corresponding book-w1d records. The current seven-volume Book/Part registry owns public book identity and part assignment. Manuscript bytes and remote R2 delivery were not reverified in this local audit.
 
-## Next stage: W5–W11
+## Stage 2: W5–W11 (baseline f72f4094)
 
-Implement Book I taxonomy, mechanisms, states, formation chains and comparisons from the approved manuscript-to-node bindings. Build the Formation Explorer through the existing book renderer and bind its selected context to existing Ask. Preserve explicit source gaps; do not treat article publication as structured-object review approval.
+Implemented a source-grounded preview: 11 structured objects, mechanism and state projections, a partial G1–G4 reading sequence, and Structure / Carrier definition comparison. Definitions come from the stable concept registry with approved manuscript-to-node bindings. New classifications and draft English translations await human review. Unsupported conditions, transitions and examples remain empty.
 
-Subsequent stages follow the frozen order in `b14-sks-execution-ledger-v1.json`. W5–W80 remain not started. Human review W56–W59, customer acceptance W71–W74 and freeze W78–W80 are not satisfied by these machine checks.
+Formation Explorer is integrated into `/books/reality-formation/` with search, type filters, comparison, source inspector, URL selection/history and existing contextual Ask links. The server resolves the concept into its trusted structured object; KAP retrieves the selected object, related objects, canonical nodes and broader sources in that order. Existing Atlas scope and health routing retain their owners.
+
+W5–W7 and W10–W11 are machine-accepted previews. W8–W9 remain PARTIAL_SOURCE_GAPS: the exact Condition → Signal → Interaction → Pattern → Structure → Runtime → Reality sequence and five requested comparison pairs lack admitted supporting content. The generator records these as withheld. W12–W80 remain not started; W56–W59 human review and production freeze are not satisfied.
+
+Validation: structured schema/provenance, actual KAP retrieval, bilingual DOM interaction/history, Book I runtime/figure alignment, existing Atlas Ask regression (20 cases), contextual Ask regression (32 scenarios). The standalone component was visually checked at desktop and 390px mobile widths. Full paid Ask and deployed R2 delivery were not exercised.
+
+Rebuild with `node scripts/build-b14-sks-book1.mjs`; verify and record with `node scripts/check-b14-sks-book1.mjs --record`. The fixture is `tools/review/book-1-formation-explorer.html`.
 
 ## Seven-volume public cleanup
 

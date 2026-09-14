@@ -31,6 +31,7 @@ export function classifyAsk2Consumption({ question, body = {}, env = {} } = {}) 
   const explicitRuntime=Boolean(body?.taxonomyHint||Object.keys(body?.runtimeInputs||{}).length||Object.keys(body?.runtimeResults||{}).length||body?.currentContextSnapshot);
   const atlasScope=body?.entryContext?.retrievalScope?.scopeType==='CIVILIZATION_ATLAS'||body?.entryContext?.bookCode==='BOOK-5';
   if(atlasScope)return Object.freeze({mode:'CKA',reasonCode:'STRUCTURED_ATLAS_KNOWLEDGE_SCOPE'});
+  if(body?.entryContext?.retrievalScope?.scopeType==='STRUCTURED_KNOWLEDGE')return Object.freeze({mode:'CKA',reasonCode:'STRUCTURED_BOOK_KNOWLEDGE_SCOPE'});
   if(explicitRuntime)return Object.freeze({mode:'ASK2',reasonCode:'EXPLICIT_RUNTIME_INPUT'});
   if(EVERGREEN_KNOWLEDGE.test(q)||GENERAL_KNOWLEDGE_SIGNAL.test(q))return Object.freeze({mode:'CKA',reasonCode:'GENERAL_KNOWLEDGE_INTENT'});
   if(PERSONAL_ACTION_SIGNAL.test(q)||PERSONAL_RELATIONSHIP_SIGNAL.test(q))return Object.freeze({mode:'ASK2',reasonCode:'PERSONAL_CURRENT_ACTION_INTENT'});

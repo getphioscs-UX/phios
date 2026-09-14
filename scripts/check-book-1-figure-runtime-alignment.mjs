@@ -89,7 +89,13 @@ for (const contract of ['loadFigureRegistry', 'figureHasCanonicalBookOwnership',
 assert.ok(knowledgeAdapter.includes('loadFigureRegistry'));
 assert.ok(knowledgeAdapter.includes('loadCanonicalParts'));
 assert.ok(publicSurfaceData.includes('/content/registry/figures.json'));
-assert.ok(publicSurfaceData.includes('/content/registry/parts.json'));
+assert.match(publicSurfaceData,/export async function loadCanonicalParts\(\)\s*\{\s*return loadSevenVolumeParts\(\)/);
+const sevenVolumeData = fs.readFileSync('assets/js/web-production/public-surface-data-seven.js','utf8');
+assert.ok(sevenVolumeData.includes('/content/registry/successors/seven-volume-v1/parts.json'));
+const currentParts = JSON.parse(fs.readFileSync('content/registry/successors/seven-volume-v1/parts.json','utf8'));
+assert.equal(currentParts.architecture,'seven-volume-15-part');
+assert.equal(currentParts.parts.length,15);
+assert.deepEqual(currentParts.parts.filter(part=>part.book==='book-1').map(part=>part.number),[1,2,3,4]);
 assert.deepEqual(RUNTIME_COORDINATES.map(item => item.id), registry.contracts.runtimeCoordinates);
 assert.deepEqual(CARRIER_ORGANIZATION_LAYERS.map(item => item.id), registry.contracts.carrierOrganization);
 assert.deepEqual(CARRIER_CONFIGURATION_LAYERS.map(item => item.id), registry.contracts.carrierConfiguration);

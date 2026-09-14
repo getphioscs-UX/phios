@@ -103,9 +103,11 @@ write(base+'schema/structured-knowledge-object-v1.schema.json',{
   allOf:[{if:{properties:{status:{enum:['ACTIVE','ACCEPTED']}}},then:{properties:{evidenceState:{enum:['CANONICAL_SOURCE','SUPPORTED_SOURCE']}}}}]
 });
 write(base+'schema/structured-knowledge-relationship-v1.schema.json',{$schema:'http://json-schema.org/draft-07/schema#',...relation});
-write('docs/knowledge/structured-successor/b14-sks-execution-ledger-v1.json',{
+const ledgerPath='docs/knowledge/structured-successor/b14-sks-execution-ledger-v1.json';
+const priorLedger=fs.existsSync(path.join(root,ledgerPath))?read(ledgerPath):null;
+write(ledgerPath,{
   version:'1.0.0',frozenOrder:[ [0,4],[5,11],[12,18],[19,26],[27,33],[34,36],[37,40],[41,44],[45,49],[50,52],[53,55],[56,61],[62,70],[71,77],[78,80] ],
-  stages:Array.from({length:81},(_,w)=>({stage:`B14-SKS-W${w}`,status:w<=4?'IMPLEMENTED_PENDING_CHECK':'NOT_STARTED'})),
-  humanReviewComplete:false,customerAcceptanceComplete:false,productionFreezeComplete:false,nextStage:'B14-SKS-W5'
+  stages:Array.from({length:81},(_,w)=>w>4&&priorLedger?.stages?.find(s=>s.stage===`B14-SKS-W${w}`)||({stage:`B14-SKS-W${w}`,status:w<=4?'IMPLEMENTED_PENDING_CHECK':'NOT_STARTED'})),
+  humanReviewComplete:priorLedger?.humanReviewComplete||false,customerAcceptanceComplete:priorLedger?.customerAcceptanceComplete||false,productionFreezeComplete:priorLedger?.productionFreezeComplete||false,nextStage:priorLedger?.nextStage||'B14-SKS-W5'
 });
-console.log('B14-SKS W0 baseline and W1–W4 foundation generated; W5–W80 remain explicitly uncompleted.');
+console.log('B14-SKS W0 baseline and W1–W4 foundation generated; later stage evidence preserved.');

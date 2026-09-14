@@ -1,6 +1,7 @@
 import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
 import {normalizeAtlasRetrievalScope} from './atlas-retrieval-scope.js';
+import {normalizeFormationScope,retrieveFormationScope} from './formation-retrieval-scope.js';
 import { applyPtrcQualityToCoverage, evaluatePtrcKnowledgeQuality, filterPtrcSourcesByPolicy } from './ptrc-knowledge-quality.js';
 
 const SUPPORTED_LOCALES = new Set(['zh-Hans', 'en']);
@@ -69,7 +70,7 @@ export function createKapQuestionIntake(input = {}) {
   ]);
   const sessionRef = canonicalText(typeof input === 'string' ? '' : input.sessionRef).slice(0, 128) || null;
   const requestContract = typeof input === 'string' ? null : (input.requestContract || null);
-  const retrievalScope = normalizeAtlasRetrievalScope(requestContract?.retrievalScope?.atlasScope || (typeof input === 'string' ? null : input.retrievalScope));
+  const retrievalScope = normalizeAtlasRetrievalScope(requestContract?.retrievalScope?.atlasScope || (typeof input === 'string' ? null : input.retrievalScope)) || normalizeFormationScope(requestContract?.retrievalScope?.structuredScope);
   return {
     schemaVersion: 'PHI-OS-KAP-QUESTION-INTAKE-v1.0.0',
     capability: 'ASK_PHIOS',
@@ -192,6 +193,14 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
   url.search = new URLSearchParams(retrievalRequest.params).toString();
   const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env, {retrievalScope:options.retrievalScope});
   const payload = await response.json();
+  const formation = await retrieveFormationScope({env,scope:options.retrievalScope,locale:normalized.locale});
+  if(formation.sources.length){
+    const existing=payload.answerGrounding?.sources||[];
+    const scoped=existing.filter(s=>formation.nodeCodes.includes(s.nodeCode));
+    const broader=existing.filter(s=>!formation.nodeCodes.includes(s.nodeCode));
+    payload.answerGrounding={...(payload.answerGrounding||{}),sources:[...formation.sources,...scoped,...broader]};
+    payload.retrievalChain=[...formation.chain,...(payload.retrievalChain||[])];
+  }
   if (!response.ok || !payload?.ok) {
     return {
       ok: false,

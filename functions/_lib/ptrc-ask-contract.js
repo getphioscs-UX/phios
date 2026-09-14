@@ -1,3 +1,4 @@
+import {normalizeFormationScope} from './formation-retrieval-scope.js';
 const CONTRACT_SCHEMA='PHI-OS-PTRC-ASK-REQUEST-v1.0.0';
 const TRACE_SCHEMA='PHI-OS-PTRC-ASK-TRACE-v1.0.0';
 const INTENTS=new Set(['DEFINE','EXPLAIN','COMPARE','TRACE','CALCULATE','NAVIGATE','REPORT','CLARIFY']);
@@ -90,7 +91,8 @@ export function normalizePtrcRetrievalScope(input={},entryContext={}){
     timeScope:raw.timeScope??(atlas.timeWindowId||atlas.time||null),
     jurisdiction:scalar(raw.jurisdiction,80),
     allowedCollections,
-    atlasScope:atlasActive?freeze({...atlas}):null
+    atlasScope:atlasActive?freeze({...atlas}):null,
+    structuredScope:normalizeFormationScope(raw.structuredScope||entry.retrievalScope)
   });
 }
 

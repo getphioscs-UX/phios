@@ -4,6 +4,8 @@ import { buildCkaEntryHref, ckaEntryLabel } from '../knowledge/cka-entry-links.j
 
 const root = document.querySelector('[data-wpr-book-volume]');
 const bookId = document.body.dataset.bookId || root?.dataset.bookId || 'book-7';
+let disposeFormation = () => {};
+let renderGeneration = 0;
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -26,6 +28,8 @@ function partMarkup(part, locale) {
 
 async function render() {
   if (!root) return;
+  const generation = ++renderGeneration;
+  disposeFormation();
   const locale = getLocale();
   try {
     const [booksRegistry, partsRegistry] = await Promise.all([
@@ -48,6 +52,7 @@ async function render() {
     const subtitle = book.subtitle?.[locale] || book.subtitle?.en || '';
     const parts = canonicalPartsForBook(book, partsRegistry);
     const cover = await resolveSevenVolumeBookCover(bookId);
+    if(generation !== renderGeneration)return;
     document.title = `${title} — PHI OS`;
     document.documentElement.lang = locale;
 
@@ -107,6 +112,13 @@ async function render() {
       </section>
     `;
 
+    if (bookId === 'book-1') {
+      const action=document.createElement('a');action.className='knowledge-action';action.href='#explorer';action.textContent=locale==='zh-Hans'?'探索形成机制':'Explore formation';root.querySelector('.knowledge-actions')?.append(action);
+      const explorer=document.createElement('section');explorer.id='explorer';explorer.className='formation-explorer';root.querySelector('.knowledge-hero')?.after(explorer);
+      const {mountFormationExplorer}=await import('../knowledge/formation-explorer.js');
+      const dispose=await mountFormationExplorer(explorer,locale);
+      if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
+    }
     if (persistentAtlas) {
       const hero = root.querySelector('.wpr-book-hero');
       if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);

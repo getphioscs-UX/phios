@@ -57,6 +57,7 @@ export function buildPtrcRetrievalStages(bundle={},contract={}){
 export function filterPtrcSourcesByPolicy(sources=[],contract={}){
   const list=Array.isArray(sources)?sources:[];
   if(contract?.answerPolicy?.allowBroaderKnowledge!==false)return list;
+  if(contract?.retrievalScope?.structuredScope)return list.filter(source=>source?.sourceType==='STRUCTURED_KNOWLEDGE_OBJECT'&&source?.bookCode==='BOOK-1'&&source?.scopeMatch===true);
   if(!contract?.retrievalScope?.atlasScope)return list.filter(source=>source?.sourceType==='PUBLISHED_CANONICAL_ARTICLE');
   return list.filter(source=>source?.sourceType?.startsWith?.('CIVILIZATION_ATLAS_')||(source?.bookCode==='BOOK-5'&&source?.partCode==='PART-12'));
 }
