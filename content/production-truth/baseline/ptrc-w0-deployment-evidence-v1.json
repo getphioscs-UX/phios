@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "PTRC-W0.deployment-evidence.v1",
+  "capturedAt": "2026-09-13T00:00:00Z",
+  "baselineCommit": "f9ba2940fd80553686833e068e03a74e72a825d3",
+  "origins": [
+    {
+      "id": "CUSTOM_DOMAIN",
+      "url": "https://getphios.com/",
+      "observedState": "REQUIRES_REVERIFICATION",
+      "deploymentCommit": "UNVERIFIED",
+      "deploymentId": "UNVERIFIED"
+    },
+    {
+      "id": "CLOUDFLARE_PAGES_PREVIEW",
+      "url": "https://phios-github.pages.dev/",
+      "observedState": "REQUIRES_REVERIFICATION",
+      "deploymentCommit": "UNVERIFIED",
+      "deploymentId": "UNVERIFIED"
+    }
+  ],
+  "requiredEvidence": ["HTTP_STATUS", "RESPONSE_HEADERS", "FAVICON_LINKS", "VISIBLE_LOGO_ID", "ASK_CANARY_RESULT", "DEPLOYMENT_ID", "COMMIT_SHA"],
+  "promotionRule": "PROMOTE_THE_ACCEPTED_IMMUTABLE_PREVIEW_ARTIFACT"
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "PTRC-W0.environment-binding-audit.v1",
+  "baselineCommit": "f9ba2940fd80553686833e068e03a74e72a825d3",
+  "bindings": [
+    {"name":"AI","type":"CLOUDFLARE_AI","declared":true,"productionVerified":"UNVERIFIED"},
+    {"name":"RUNTIME_DB","type":"D1_DATABASE","declared":true,"productionVerified":"UNVERIFIED"},
+    {"name":"MANUSCRIPTS","type":"CONTENT_BINDING","declared":true,"productionVerified":"UNVERIFIED"}
+  ],
+  "secretsPolicy": {
+    "valuesRecorded": false,
+    "unknownValueState": "UNVERIFIED",
+    "requiredChecks": ["NAME_PRESENT", "TARGET_ENVIRONMENT", "LAST_ROTATED_METADATA", "RUNTIME_READINESS"]
+  },
+  "modelFeatureFlags": {
+    "sourceOfTruth": "UNVERIFIED",
+    "productionValues": "UNVERIFIED",
+    "rule": "NO_COMPLETION_CLAIM_WITHOUT_DEPLOYED_BINDING_EVIDENCE"
+  }
+}
