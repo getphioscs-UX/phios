@@ -77,3 +77,4 @@ assert.equal(campaign.passedCases,24);assert.ok(campaign.profilePresent>0&&campa
 console.log(`✓ W55–W66 Customer Experience / Boundary / Precision passed ${campaign.passedCases}/${campaign.requiredCases}.`);
 console.log(`  Profile ${campaign.profilePresent}; Relationship ${campaign.relationshipPresent}; Cross ${campaign.crossPresent}; HD ${campaign.humanDesignPresent}; low-precision cases ${campaign.lowPrecision}.`);
 console.log('  One semantic IR across Web/Print/PDF, explicit My Reality handoff, sensitive consent and narrative precision boundaries are fail-closed.');
+
