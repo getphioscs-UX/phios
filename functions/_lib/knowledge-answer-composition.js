@@ -259,7 +259,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
     answerMode: 'KNOWLEDGE_ANSWER',
     authorityClass: 'QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION',
     coverageStatus: coverageDecision?.status || 'INSUFFICIENT_COVERAGE',
-    qualityOutcome: ptrcOutcome,
+    ...(ptrcOutcome ? {qualityOutcome: ptrcOutcome} : {}),
     groundingBundleId: bundle.bundleId,
     knowledgeRefs: {
       primaryNodeCodes,
