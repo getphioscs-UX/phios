@@ -6,7 +6,8 @@ const PATHS = Object.freeze([
   'content/knowledge/answer-projection/maintenance/kap-m1-ask-retrieval-successor-v1.json',
   'content/knowledge/answer-projection/maintenance/kap-m2-ptrc-ask-quality-successor-v1.json',
   'content/knowledge/answer-projection/maintenance/kap-m3-optional-quality-outcome-successor-v1.json',
-  'content/knowledge/answer-projection/maintenance/kap-m4-formation-grounding-successor-v1.json'
+  'content/knowledge/answer-projection/maintenance/kap-m4-formation-grounding-successor-v1.json',
+  'content/knowledge/answer-projection/maintenance/kap-m5-structured-ask-successor-v1.json'
 ]);
 const digest = path => crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex');
 const maintenanceDocs = () => PATHS.filter(path => fs.existsSync(path)).map(path => JSON.parse(fs.readFileSync(path, 'utf8')));

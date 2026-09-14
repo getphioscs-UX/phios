@@ -2,6 +2,7 @@ import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
 import {normalizeAtlasRetrievalScope} from './atlas-retrieval-scope.js';
 import {normalizeFormationScope,retrieveFormationScope} from './formation-retrieval-scope.js';
+import {classifyStructuredIntent,structuredIntentRelevant} from './structured-ask-policy.js';
 import { applyPtrcQualityToCoverage, evaluatePtrcKnowledgeQuality, filterPtrcSourcesByPolicy } from './ptrc-knowledge-quality.js';
 
 const SUPPORTED_LOCALES = new Set(['zh-Hans', 'en']);
@@ -194,6 +195,11 @@ export async function retrieveKapKnowledge({ request, env = {}, normalized, opti
   const response = await handleKnowledgeAccessRequest(new Request(url, { method: 'GET' }), env, {retrievalScope:options.retrievalScope});
   const payload = await response.json();
   const formation = await retrieveFormationScope({env,scope:options.retrievalScope,locale:normalized.locale});
+  if(options.retrievalScope?.scopeType==='STRUCTURED_KNOWLEDGE'){
+    const intent=classifyStructuredIntent(normalized.searchText||normalized.originalQuestion||normalized.question);
+    formation.sources=formation.sources.filter(s=>structuredIntentRelevant(intent,{...s,structuredTags:s.structuredTags||s.text}));
+    payload.answerGrounding={...(payload.answerGrounding||{}),sources:(payload.answerGrounding?.sources||[]).filter(s=>formation.sources.length&&formation.nodeCodes.includes(s.nodeCode))};
+  }
   if(formation.sources.length){
     const existing=payload.answerGrounding?.sources||[];
     const scoped=existing.filter(s=>formation.nodeCodes.includes(s.nodeCode));

@@ -14,4 +14,6 @@ Domain III uses Coexistence as explicitly confirmed by the user. Prior editorial
 
 W34–W36 adds two candidate reading relationships in `content/knowledge/structured/structured-knowledge-relationships-v1.json`. Review their semantic relevance together later; they remain excluded from retrieval. Missing Book I Pressure/Threshold objects are extraction gaps, not approval-only tasks. W36 source navigation has component coverage, with full browser acceptance pending.
 
-Continue next with W37–W40. Semantic extraction work remains visible in the execution ledger; no W56–W59 or W71–W80 completion is inferred.
+W37–W40 adds selected-object Ask scope, ten intent classifications, relevance rejection and a seven-part composition preview. Review the classifications and answer boundaries together later. Comparison evidence, Book II/III semantic extraction and W39 customer presentation are implementation gaps, not approval-only tasks. Full browser and paid journeys remain pending.
+
+Continue next with W41–W44 while retaining those gaps. No W56–W59 or W71–W80 completion is inferred.

@@ -74,6 +74,16 @@ Public copy and legacy book entry points use seven-volume terminology and curren
 
 ## Checks
 
+## W37–W40 Ask integration preview on 7bbd7d7
+
+Book I–IV source navigation now supplies a registry-validated selected object to the existing Contextual Ask runtime. Retrieval prioritizes selected structured evidence and rejects unrelated recovery, scale-transition and relationship questions. Ten intent families are recognized; comparison intentionally abstains until multiple supported objects are available. Book II/III chapter indexes supply no answer prose. No unreviewed cross-book edges are admitted.
+
+The deterministic composition layer emits the seven-part structured answer for supported short answers. Missing conditions, factors and transitions remain empty with an explicit boundary. W39 customer presentation of all seven fields and full paid browser journeys remain implementation/acceptance work; this batch does not claim complete W37–W40 production acceptance.
+
+`node scripts/check-b14-sks-ask.mjs` verifies ten intents and fourteen bilingual real KAP pipeline cases, including supported short-answer composition, unrelated questions, missing objects and unavailable assets. KAP grounding, current W11–W17 composition, Contextual Ask and PPR W47–W66 targeted regressions passed. The obsolete PPR method-heading assertion now checks the current expandable method-reading structure. Full `npm run check` is not claimed: the separate POC live check encounters DNS `ENOTFOUND www.getphios.com` in this environment. The attachment's `.mjsnode` module error comes from concatenated commands.
+
+KAP M5 records the additive runtime hash successor without rewriting the historical freeze. Human review remains consolidated. W41–W44 is next, with the W39 presentation gap still open.
+
 ```text
 node scripts/check-b14-sks-foundation.mjs --record
 node scripts/check-seven-volume-public-consumers.mjs

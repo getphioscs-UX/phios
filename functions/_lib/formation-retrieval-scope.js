@@ -1,5 +1,7 @@
+import {normalizeStructuredScope,resolveStructuredEntry,retrieveStructuredObject} from './structured-ask-policy.js';
 const REGISTRY='content/knowledge/structured/book-1/book-1-mechanism-registry-v1.json';
 export function normalizeFormationScope(value){
+ if(value?.bookCode!=='BOOK-1')return normalizeStructuredScope(value);
  if(value?.scopeType!=='STRUCTURED_KNOWLEDGE'||value?.bookCode!=='BOOK-1'||!/^SK-B1-[A-Z-]{1,70}$/.test(value?.objectId||''))return null;
  return {scopeType:'STRUCTURED_KNOWLEDGE',bookCode:'BOOK-1',objectId:value.objectId};
 }
@@ -9,6 +11,7 @@ async function registry(env){
 }
 function eligible(object){return object?.bookCode==='BOOK-1'&&['IN_REVIEW','ACCEPTED','ACTIVE'].includes(object.status)&&['CANDIDATE','REVIEWED','ACTIVE'].includes(object.projectionState)&&['SUPPORTED_SOURCE','CANONICAL_SOURCE'].includes(object.evidenceState)&&object.sourceRefs?.canonicalNodeCodes?.includes(object.nodeCode)&&object.sourceRefs?.manuscriptSectionRefs?.length>0;}
 export async function resolveFormationEntry(ref,env={}){
+ if(/^CONCEPT:sk-b[1-4]-/.test(String(ref)))return resolveStructuredEntry(ref,env);
  if(!String(ref).startsWith('CONCEPT:'))return null;
  const data=await registry(env);if(!data)return null;
  const object=data.objects?.find(o=>`CONCEPT:${data.details?.[o.objectId]?.conceptId?.replaceAll('_','-')}`===ref);
@@ -16,6 +19,7 @@ export async function resolveFormationEntry(ref,env={}){
  return {bookCode:'BOOK-1',partCode:object.partCode,retrievalScope:{scopeType:'STRUCTURED_KNOWLEDGE',bookCode:'BOOK-1',objectId:object.objectId}};
 }
 export async function retrieveFormationScope({env={},scope,locale='zh-Hans'}={}){
+ if(scope?.bookCode!=='BOOK-1')return retrieveStructuredObject({env,scope,locale});
  const normalized=normalizeFormationScope(scope);if(!normalized)return {sources:[],nodeCodes:[],chain:[]};
  const data=await registry(env);const selected=data?.objects?.find(o=>o.objectId===normalized.objectId);
  if(!eligible(selected))return {sources:[],nodeCodes:[],chain:[{stage:'SELECTED_STRUCTURED_OBJECT',status:'UNAVAILABLE'}]};

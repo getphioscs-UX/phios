@@ -1,4 +1,5 @@
 import {runKirR2ProductionProjection} from './kir-r2-production.js';
+import {structuredAnswerShape} from './structured-ask-policy.js';
 import { runKapGroundingPipeline } from './knowledge-answer-grounding.js';
 import { buildPtrcRetrievalStages } from './ptrc-knowledge-quality.js';
 import { createPtrcAskTrace } from './ptrc-ask-contract.js';
@@ -270,6 +271,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
     },
     content: {
       directAnswer,
+      ...((eligible || partialSupported) && structuredAnswerShape(bundle,directAnswer) ? {structuredAnswer:structuredAnswerShape(bundle,directAnswer)} : {}),
       mechanism: eligible ? mechanisms : [],
       whyItMatters: eligible ? whyItMatters : [],
       whatToObserve,
@@ -342,7 +344,7 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
     depth,
     now
   });
-  const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true;
+  const relevanceEstablished=grounding.coverageDecision?.answerCompositionEligible===true && !grounding.groundingBundle?.sources?.some(s=>s.sourceType==='STRUCTURED_KNOWLEDGE_OBJECT');
   const kir = relevanceEstablished ? await runKirR2ProductionProjection({
     question: input?.question || grounding.groundingBundle?.question?.text || '',
     locale: input?.locale || grounding.groundingBundle?.question?.locale || 'zh-Hans',
