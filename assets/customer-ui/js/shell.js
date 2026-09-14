@@ -1,6 +1,7 @@
 import { CX_NAVIGATION, installNavigationToggle } from './navigation.js';
 import { installLocaleControls } from './locale.js';
 import { hydrateCustomerAssets } from './assets.js';
+import { hydrateSevenVolumeAssets } from './seven-volume-assets.js';
 import { installCustomerDialogs } from './dialog.js';
 import { installExpandableFigures } from './figure-viewer.js';
 import { installStaticAtmosphere } from './static-atmosphere.js';
@@ -182,6 +183,7 @@ export async function initializeCustomerShell(scope = document) {
   // Offscreen lazy images may load only after scrolling. Shell readiness and
   // method controls must not wait for every image on the page.
   void hydrateCustomerAssets(scope).catch(error => console.error('CX_ASSET_HYDRATION_FAILED', error));
+  void hydrateSevenVolumeAssets(scope).catch(error => console.error('CX_SEVEN_VOLUME_ASSET_HYDRATION_FAILED', error));
   await installStaticAtmosphere(scope);
 
   document.documentElement.dataset.cxShell = 'ready';

@@ -1,4 +1,5 @@
 import { resolvePublicAssetForWeb } from '../runtime/web-production/asset-resolver.js';
+import { loadSevenVolumeBooks, loadSevenVolumeParts, resolveSevenVolumeBookCover, resolveSevenVolumeBookBranding } from './public-surface-data-seven.js';
 
 const JSON_HEADERS = Object.freeze({ Accept: 'application/json' });
 
@@ -6,8 +7,10 @@ export const BOOK_ROUTE_BY_ID = Object.freeze({
   'book-1': '/books/reality-formation/',
   'book-2': '/books/reality-runtime/',
   'book-3': '/books/reality-continuity/',
-  'book-4': '/books/reality-civilization/',
-  'book-5': '/books/reality-navigation/'
+  'book-4': '/books/reality-expansion/',
+  'book-5': '/books/reality-differentiation/',
+  'book-6': '/books/reality-observation/',
+  'book-7': '/books/reality-navigation/'
 });
 
 export const BOOK_COMPATIBILITY_ROUTES = Object.freeze({
@@ -45,19 +48,11 @@ async function fetchJson(path) {
 }
 
 export async function loadCanonicalBooks() {
-  const registry = await fetchJson('/content/registry/books.json');
-  if (!Array.isArray(registry.books) || registry.books.length !== 5 || registry.architecture !== 'five-volume-15-part') {
-    throw new Error('WPR_BOOK_REGISTRY_INVALID');
-  }
-  return registry;
+  return loadSevenVolumeBooks();
 }
 
 export async function loadCanonicalParts() {
-  const registry = await fetchJson('/content/registry/parts.json');
-  if (!Array.isArray(registry.parts) || registry.parts.length !== 15 || registry.architecture !== 'five-volume-15-part') {
-    throw new Error('WPR_PART_REGISTRY_INVALID');
-  }
-  return registry;
+  return loadSevenVolumeParts();
 }
 
 export async function loadFigureRegistry() {
@@ -136,34 +131,12 @@ export function figurePublicSrc(figure) {
 }
 
 
-export async function resolveBookBranding(bookId, options = {}) {
-  const assetCode = BOOK_BRANDING_ASSET_CODE_BY_ID[bookId];
-  if (!assetCode) return null;
-  try {
-    const resolved = await resolvePublicAssetForWeb(assetCode, {
-      surface: options.surface || 'BOOKS',
-      locale: options.locale || null,
-      variant: options.variant || 'ORIGINAL'
-    });
-    return resolved.renderable ? resolved : null;
-  } catch {
-    return null;
-  }
+export async function resolveBookBranding(bookId) {
+  return resolveSevenVolumeBookBranding(bookId);
 }
 
-export async function resolveBookCover(bookId, options = {}) {
-  const assetCode = BOOK_ASSET_CODE_BY_ID[bookId];
-  if (!assetCode) return null;
-  try {
-    const resolved = await resolvePublicAssetForWeb(assetCode, {
-      surface: options.surface || 'BOOK',
-      locale: options.locale || null,
-      variant: options.variant || 'ORIGINAL'
-    });
-    return resolved.renderable ? resolved : null;
-  } catch {
-    return null;
-  }
+export async function resolveBookCover(bookId) {
+  return resolveSevenVolumeBookCover(bookId);
 }
 
 export const PUBLICATION_CONTEXT_RUNTIME_POLICY = Object.freeze({
@@ -185,7 +158,18 @@ export async function loadFiveVolumePublicationContextRegistry() {
   ) {
     throw new Error('WPR_PUBLICATION_CONTEXT_REGISTRY_INVALID');
   }
-  return registry;
+  const [books, parts] = await Promise.all([loadSevenVolumeBooks(), loadSevenVolumeParts()]);
+  return {
+    ...registry,
+    architecture: 'seven-volume-15-part',
+    partOwnership: parts.parts.map(part => {
+      const book = books.books.find(item => item.book_id === part.book);
+      if (!book) throw new Error('WPR_PUBLICATION_OWNER_MISSING');
+      return { partCode: `P${part.number}`, partNumber: part.number,
+        publicationBookCode: book.bookCode, publicationBookId: book.book_id,
+        publicationVolume: book.volume, bookTitle: book.title, bookRoute: bookRoute(book.book_id) };
+    })
+  };
 }
 
 function publicationContextForPartCode(

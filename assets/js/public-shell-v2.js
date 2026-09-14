@@ -9,7 +9,7 @@ const NAV = [
   { id: 'journey', href: '/reality-journey', zh: 'Reality Journey', en: 'Journey' }
 ];
 const FOOTER = [
-  { href: '/books/', zh: '五册系统', en: 'Five volumes' },
+  { href: '/books/', zh: '七册系统', en: 'Seven volumes' },
   { href: '/articles', zh: '文章', en: 'Articles' },
   { href: '/library', zh: '知识入口', en: 'Knowledge entry' },
   { href: '/ask', zh: 'Ask PHI OS', en: 'Ask PHI OS' },

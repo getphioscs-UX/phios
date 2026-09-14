@@ -69,13 +69,13 @@ const thesis = Object.freeze({
     },
     "books": {
       "eyebrow": "Human Reading Route",
-      "title": "Five books. One architecture.",
-      "copy": "The five books form the human-readable route through the fifteen-part PHI OS architecture.",
-      "b1": {"no":"BOOK I · PARTS 1–4","title":"Reality Formation","copy":"From Reality physics, projection and dynamics to the carrier and continuous Human Runtime.","status":"Foundation completed · Formal assets migrating"},
-      "b2": {"no":"BOOK II · PARTS 5–7","title":"Reality Runtime","copy":"From conscious experience through relationships into collective operation.","status":"Architecture and manuscript in development"},
-      "b3": {"no":"BOOK III · PARTS 8–9","title":"Reality Continuity","copy":"From Runtime maintenance and recovery into coordination and continuity.","status":"Structural route established"},
-      "b4": {"no":"BOOK IV · PARTS 10–12","title":"Reality Civilization","copy":"From Runtime expansion and civilization operation into a civilization atlas.","status":"Structural route established"},
-      "b5": {"no":"BOOK V · PARTS 13–15","title":"Reality Navigation","copy":"From Reading Science and Navigation Science into Reality Continuation.","status":"Structural route established"}
+      "title": "Seven books. One architecture.",
+      "copy": "The seven books form the human-readable route through the fifteen-part PHI OS architecture.",
+      "b1": {"no":"BOOK I · PARTS 1–4","title":"Reality Formation","copy":"Foundations of Reality Formation and Runtime","status":"Seven-volume architecture"},
+      "b2": {"no":"BOOK II · PARTS 5–7","title":"Reality Runtime","copy":"How Humans and the World Run Together","status":"Seven-volume architecture"},
+      "b3": {"no":"BOOK III · PARTS 8–9","title":"Reality Continuity","copy":"How Runtime Is Maintained, Recovered and Coordinated","status":"Seven-volume architecture"},
+      "b4": {"no":"BOOK IV · PARTS 10–11","title":"Reality Expansion","copy":"Runtime Expansion and Civilization Runtime","status":"Seven-volume architecture"},
+      "b5": {"no":"BOOK V · PART 12","title":"Reality Differentiation","copy":"Civilization Atlas","status":"Seven-volume architecture"}
     },
     "implementation": {
       "eyebrow": "04 · Reference Implementation",

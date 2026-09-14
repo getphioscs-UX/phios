@@ -264,7 +264,44 @@
               "UNKNOWN"
             ]
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "claimStrength": {
+                  "const": "CANONICAL"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "evidenceState": {
+                  "const": "CANONICAL_SOURCE"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "claimStrength": {
+                  "const": "SUPPORTED"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "evidenceState": {
+                  "enum": [
+                    "CANONICAL_SOURCE",
+                    "SUPPORTED_SOURCE"
+                  ]
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "evidenceState": {

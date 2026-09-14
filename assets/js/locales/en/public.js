@@ -231,8 +231,8 @@ const publicExperience = Object.freeze({
       boundary: 'These anchors disclose existing surfaces. They create no account, case, Method execution, professional judgment or automatic Reality Journey.'
     },
     fiveVolumeKnowledge: {
-      eyebrow: 'Five-volume knowledge',
-      title: 'Five volumes. One architecture for understanding Reality.',
+      eyebrow: 'Seven-volume knowledge',
+      title: 'Seven volumes. One architecture for understanding Reality.',
       lead: 'The books move from formation to runtime, continuity, civilization and navigation. Each volume keeps its own scope while contributing to one connected model.',
       progression: {
         formation: 'How Reality Forms',
@@ -241,7 +241,7 @@ const publicExperience = Object.freeze({
         civilization: 'How Reality Expands',
         navigation: 'How Reality Is Read & Navigated'
       },
-      figureCaption: 'The canonical Five-Volume Architecture figure connects the sequence without collapsing the volumes into one undifferentiated answer.',
+      figureCaption: 'The canonical Seven-Volume Architecture figure connects the sequence without collapsing the volumes into one undifferentiated answer.',
       coverUnavailable: 'Governed cover unavailable',
       actions: {
         read: 'Published Knowledge',
@@ -321,7 +321,7 @@ const publicExperience = Object.freeze({
       eyebrow: 'Three ways to enter',
       title: 'Begin with knowledge, experience or the system itself.',
       knowledgeTitle: 'Explore Knowledge',
-      knowledgeCopy: 'Enter the Thesis, five books, fifteen-part architecture and Reality Atlas.',
+      knowledgeCopy: 'Enter the Thesis, seven books, fifteen-part architecture and Reality Atlas.',
       knowledgeAction: 'Open the Atlas',
       realityTitle: 'Experience Reality Journey',
       realityCopy: 'Understand the six-stage path, its information boundaries and what happens before you choose to begin.',
@@ -361,8 +361,8 @@ const publicExperience = Object.freeze({
       action: 'Explore the ecosystem'
     },
     production: {
-      booksEyebrow: 'Canonical Knowledge · Five Volumes',
-      booksTitle: 'Five volumes now share one governed public architecture.',
+      booksEyebrow: 'Canonical Knowledge · Seven Volumes',
+      booksTitle: 'Seven volumes now share one governed public architecture.',
       booksLead: 'Book identity, Part ownership and public status are projected from canonical registries rather than a separate frontend catalogue.',
       knowledgePulse: '{articles} published article records · {figures} aligned Book I figures · {parts} canonical Parts',
       volumeLabel: 'Volume {volume}',
@@ -505,7 +505,7 @@ const publicExperience = Object.freeze({
       "skip": "Skip to Professional Authority",
       "eyebrow": "External Reality Grounding",
       "title": "PHI OS does not need to own every domain of truth. It needs to know what authority it is using.",
-      "lead": "The five-volume framework stays connected to a changing world through source, authority, date, jurisdiction, evidence type, confidence and case fit.",
+      "lead": "The seven-volume framework stays connected to a changing world through source, authority, date, jurisdiction, evidence type, confidence and case fit.",
       "groundTitle": "External Reality Grounding",
       "groundCopy": "Changing facts enter through governed sources rather than being silently absorbed into a permanent interpretation.",
       "chainTitle": "Authority chain",
@@ -531,7 +531,7 @@ const publicExperience = Object.freeze({
       "originCopy": "Her work moved across financial planning, resource allocation, organizational restructuring and systems analysis while also studying historical frameworks used to read human patterns and timing. Across them, the same limitation appeared: each system could reveal something, but no single Reading preserved the whole situation, evidence, uncertainty and change across time.",
       "quote": "“The question was never which framework is right. The deeper question was: what does this framework actually observe, what can it legitimately infer, and how does that interpretation survive contact with reality?”",
       "factsTitle": "Facts & research orientation",
-      "factsCopy": "Founder & Principal Architect · Author of The Reality Navigation Thesis and the PHI OS five-volume knowledge architecture · Practical background in financial planning, organizational restructuring, resource and system analysis · Research focus: Reality formation, human runtime, interpretation, continuity, AI and civilization.",
+      "factsCopy": "Founder & Principal Architect · Author of The Reality Navigation Thesis and the PHI OS seven-volume knowledge architecture · Practical background in financial planning, organizational restructuring, resource and system analysis · Research focus: Reality formation, human runtime, interpretation, continuity, AI and civilization.",
       "researchTitle": "Why the work continues",
       "researchCopy": "AI expands language and synthesis capability. PHI OS asks what infrastructure must come after AI so intelligence can remain grounded in evidence, continuity and accountable navigation."
     },
@@ -559,7 +559,7 @@ const publicExperience = Object.freeze({
       limits: 'What PHI OS does not do',
       trust: 'Builder and trust',
       research: 'Research Foundation',
-      books: 'Five Books',
+      books: 'Seven Books',
       architecture: 'Fifteen-Part Architecture',
       platform: 'Platform',
       ecosystem: 'Future Ecosystem'
@@ -611,19 +611,19 @@ const publicExperience = Object.freeze({
       ecosystem: 'Ecosystem'
     },
     books: {
-      eyebrow: '03 · Five Books',
-      title: 'Five reading volumes of one architecture.',
-      lead: 'The five books are not separate architectures. Together they form the human-readable route through fifteen connected Parts.',
-      b1Title: 'Book I · Reality Formation',
-      b1Copy: 'Structure, projection, time, activation, carrier and continuous Runtime.',
-      b2Title: 'Book II · Reality Runtime',
-      b2Copy: 'Consciousness, relationships and collective Runtime.',
-      b3Title: 'Book III · Reality Continuity',
-      b3Copy: 'Maintenance, reconfiguration, recovery, coordination, emergence and continuity.',
-      b4Title: 'Book IV · Reality Civilization',
-      b4Copy: 'Scale, replication, distribution, infrastructure, civilization and atlas.',
-      b5Title: 'Book V · Reality Navigation',
-      b5Copy: 'Reading, evidence, navigation, action, outcome, continuation and formation.'
+      eyebrow: '03 · Seven Books',
+      title: 'Seven reading volumes of one architecture.',
+      lead: 'The seven books are not separate architectures. Together they form the human-readable route through fifteen connected Parts.',
+      b1Title: "Book I · Reality Formation",
+      b1Copy: "Foundations of Reality Formation and Runtime",
+      b2Title: "Book II · Reality Runtime",
+      b2Copy: "How Humans and the World Run Together",
+      b3Title: "Book III · Reality Continuity",
+      b3Copy: "How Runtime Is Maintained, Recovered and Coordinated",
+      b4Title: "Book IV · Reality Expansion",
+      b4Copy: "Runtime Expansion and Civilization Runtime",
+      b5Title: "Book V · Reality Differentiation",
+      b5Copy: "Civilization Atlas"
     },
     architecture: {
       eyebrow: '04 · Fifteen-Part Architecture',

@@ -10,12 +10,29 @@ const audit = read('docs/knowledge/structured-successor/b14-sks-w0-baseline-audi
 for (const entry of audit.authorityInventory) assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root,entry.path))).digest('hex'),entry.sha256,entry.path);
 assert.deepEqual(audit.books.map(b=>b.bookCode),['BOOK-1','BOOK-2','BOOK-3','BOOK-4']);
 for (const book of audit.books) assert.ok(book.canonicalNodeCodes.length>0,book.bookCode);
+assert.equal(audit.books.find(b=>b.bookCode==='BOOK-3').canonicalNodeCodes.length,103);
+assert.equal(audit.books.find(b=>b.bookCode==='BOOK-4').canonicalNodeCodes.length,125);
+for (const book of audit.books) assert.equal(createHash('sha256').update(fs.readFileSync(path.join(root,book.canonicalRegistryPath))).digest('hex'),book.canonicalRegistrySha256);
+assert.equal(audit.consumerInventory.length,11);
+assert.ok(audit.reviewCampaignInventory.length>0);
+assert.ok(audit.articleOutputCheckerInventory.length>0);
 assert.equal(audit.productionCutover,false);
 assert.equal(audit.humanAcceptanceComplete,false);
 const ajv = new Ajv({allErrors:true});
 const validate = ajv.compile(read(base+'schema/structured-knowledge-object-v1.schema.json'));
-ajv.compile(read(base+'schema/structured-knowledge-relationship-v1.schema.json'));
+const validateRelationship=ajv.compile(read(base+'schema/structured-knowledge-relationship-v1.schema.json'));
 const object = {objectId:'SK-TEST',bookCode:'BOOK-1',partCode:'P1',nodeCode:'KN-TEST',sourceRefs:{canonicalNodeCodes:['KN-TEST'],manuscriptSectionRefs:['SECTION-TEST'],publishedArticleRefs:[],figureRefs:[],relatedStructuredObjectIds:[]},objectType:'MECHANISM',title:'Test',summary:'Test',canonicalMeaning:'Test',relationships:[],evidenceState:'UNREVIEWED',unknownState:[],projectionState:'CANDIDATE',localeState:{'zh-Hans':'SOURCE'},status:'DRAFT',version:'1.0.0'};
 assert.ok(validate(object),JSON.stringify(validate.errors));
 for (const change of [ {sourceRefs:{...object.sourceRefs,canonicalNodeCodes:[]}}, {sourceRefs:{...object.sourceRefs,manuscriptSectionRefs:[]}}, {objectType:'INVENTED_THEORY'}, {status:'ACTIVE'}, {bookCode:'BOOK-9'} ]) assert.equal(validate({...object,...change}),false,JSON.stringify(change));
-console.log('✓ B14-SKS draft foundation: source digests, four-book inventory and schema negative cases verified. W0 remains in progress.');
+const relationship={relationshipId:'R-TEST',sourceObjectId:'SK-A',targetObjectId:'SK-B',relationshipType:'REQUIRES',claimStrength:'CONCEPTUAL',sourceRefs:object.sourceRefs,evidenceState:'UNREVIEWED'};
+assert.ok(validateRelationship(relationship));
+assert.equal(validateRelationship({...relationship,claimStrength:'CANONICAL'}),false);
+assert.equal(validateRelationship({...relationship,claimStrength:'SUPPORTED'}),false);
+assert.equal(validateRelationship({...relationship,relationshipType:'PROVES_WITH_CERTAINTY'}),false);
+if(process.argv.includes('--record')){
+  const p=path.join(root,'docs/knowledge/structured-successor/b14-sks-execution-ledger-v1.json');
+  const ledger=JSON.parse(fs.readFileSync(p,'utf8'));
+  ledger.stages=ledger.stages.map((entry,index)=>index<=4?{...entry,status:'MACHINE_ACCEPTED',evidence:'scripts/check-b14-sks-foundation.mjs'}:entry);
+  fs.writeFileSync(p,JSON.stringify(ledger,null,2)+'\n');
+}
+console.log('✓ B14-SKS W0–W4 foundation: scoped current authorities, consumer/review/checker inventories and schema negative cases verified. No production promotion.');
