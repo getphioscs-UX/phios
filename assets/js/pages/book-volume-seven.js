@@ -119,6 +119,13 @@ async function render() {
       const dispose=await mountFormationExplorer(explorer,locale);
       if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
     }
+    if (bookId === 'book-2') {
+      const action=document.createElement('a');action.className='knowledge-action';action.href='#runtime-atlas';action.textContent=locale==='zh-Hans'?'探索运行互动':'Explore runtime interactions';root.querySelector('.knowledge-actions')?.append(action);
+      const atlas=document.createElement('section');atlas.id='runtime-atlas';atlas.className='runtime-interaction-atlas';root.querySelector('.knowledge-hero')?.after(atlas);
+      const {mountRuntimeAtlas}=await import('../knowledge/runtime-interaction-atlas.js');
+      const dispose=await mountRuntimeAtlas(atlas,locale);
+      if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
+    }
     if (persistentAtlas) {
       const hero = root.querySelector('.wpr-book-hero');
       if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);

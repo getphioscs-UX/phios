@@ -28,6 +28,18 @@ Rebuild with `node scripts/build-b14-sks-book1.mjs`; verify and record with `nod
 
 ## Seven-volume public cleanup
 
+## Stage 3 implementation on e49e5ff8: W12–W18
+
+Book II now has taxonomy mappings into the shared universal vocabulary, 12 approved chapter-source index entries, interaction/relationship/collective registry structures and explicit missing semantic fields. Publication ownership comes from `publicationBookCode`, including Book II P5 nodes whose historical IDs begin KN-B1. One proposed conflict entry was excluded because the active binding registry supplied no approved source.
+
+The book page mounts a bilingual Runtime Interaction Atlas at `/books/reality-runtime/#runtime-atlas`: search, runtime-level filter, source chapter inspector, chapter-scope comparison and URL/history selection. Both Perspectives entry pages link to it as a knowledge framework, with explicit limits against substituting for user facts, relationship readings or professional judgment. It does not compute feedback direction from chapter titles.
+
+`node scripts/build-b14-sks-book2.mjs` regenerates the six registries. `node scripts/check-b14-sks-book2.mjs --record` verifies provenance, universal type mappings, bilingual interaction and consumer links. W12/W18 are machine-accepted previews; W13–W17 remain source-index implementations pending paragraph extraction, feedback modelling and full-page visual acceptance. No production or human acceptance is claimed.
+
+Book I was re-audited against the user's latest 406-page PDF, not the historical 404-page review. W8/W9 source admission and W10/W11 full production acceptance remain open. This stage does not silently promote the new manuscript or replace the 448-section governed access freeze.
+
+## Earlier public cleanup notes
+
 Revision follow-up on baseline `6455ef39`: the user-designated 404-page Book I PDF differs from the registered 402-page binary. See `B14-SKS-W8-W11-REVISION-REVIEW.md`, the source verification report, 275 heading candidates and proposed editorial decisions. Source-native W8 chains and Capacity / Load evidence were located, but revised section bindings are not yet admitted. Page 9 of the private revision still contains five-volume prose; do not propagate it into public projections. W11 now filters retired, withheld, unsupported and wrong-book objects and handles unavailable or malformed asset responses, with negative regression coverage.
 
 Public copy and legacy book entry points use seven-volume terminology and current Book IV/V identities. Public-data compatibility loaders resolve all seven books and current Part ownership. `/book-one` and `/book-one.html` redirect to `/books/reality-formation/`. The figures landing page no longer features retired FIG-001/FIG-007 five-volume diagrams. Explore uses HERO-7V-SYSTEM; the obsolete academy figure was removed. Historical registries and asset records remain intact.

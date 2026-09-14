@@ -1,5 +1,7 @@
 # Book I revision reconciliation and W8–W11 review
 
+Historical review of the 404-page revision. On baseline e49e5ff8, the local PDF is a newer 406-page revision (SHA-256 e36929bf896148b37c6719e6c8542ceeebb02dc35416fbb25a417ba3ec59eb53). The current reconciliation JSON was regenerated against that file: 269 unique heading candidates, four ambiguous headings and two unmatched labels. Page numbers and proposed decisions below belong only to the historical 404-page source and MUST NOT be applied to the 406-page file. The user has confirmed correction of the five-volume prose and Domain III = Coexistence; no canonical identity is renamed from old findings.
+
 Baseline: `6455ef394c88a3affb9f20a6aed352bc476ec906`.
 
 The user confirmed the desktop PDF as the revision to reconcile. This does not approve each new claim, translation, or canonical mapping.

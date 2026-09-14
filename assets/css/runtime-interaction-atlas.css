@@ -1,0 +1,10 @@
+.runtime-interaction-atlas { padding:clamp(1rem,4vw,4rem); background:#eeece3; color:#20261f; }
+.runtime-atlas-layout { display:grid; grid-template-columns: minmax(12rem,1fr) minmax(0,2fr); gap:2rem; margin:1.5rem 0; }
+.runtime-interaction-atlas label { display:inline-flex; flex-wrap:wrap; gap:.5rem; margin:.5rem 1rem .5rem 0; }
+.runtime-interaction-atlas input,.runtime-interaction-atlas select,.runtime-interaction-atlas button { font:inherit; padding:.75rem; max-width:100%; }
+.runtime-interaction-atlas nav { display:grid; align-content:start; gap:.5rem; }
+.runtime-interaction-atlas button { text-align:left; cursor:pointer; border:1px solid #777; background:#fff; border-radius:.4rem; }
+.runtime-interaction-atlas button[aria-pressed=true] { border-color:#403359; background:#e8e0f5; }
+.runtime-interaction-atlas :focus-visible { outline:3px solid #6e508d; outline-offset:3px; }
+.runtime-interaction-atlas article { padding:1rem; background:#fff; overflow-wrap:anywhere; }
+@media(max-width:42rem){.runtime-atlas-layout{grid-template-columns:1fr}.runtime-interaction-atlas label{display:flex}}
