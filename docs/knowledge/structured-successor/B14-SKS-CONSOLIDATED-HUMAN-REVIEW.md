@@ -12,4 +12,6 @@ The user requested continuing batches and reviewing human decisions together at 
 
 Domain III uses Coexistence as explicitly confirmed by the user. Prior editorial findings belong to historical PDF revisions and must not be used to reopen the corrected wording.
 
-Continue next with W34–W36. Semantic extraction work remains visible in the execution ledger; no W56–W59 or W71–W80 completion is inferred.
+W34–W36 adds two candidate reading relationships in `content/knowledge/structured/structured-knowledge-relationships-v1.json`. Review their semantic relevance together later; they remain excluded from retrieval. Missing Book I Pressure/Threshold objects are extraction gaps, not approval-only tasks. W36 source navigation has component coverage, with full browser acceptance pending.
+
+Continue next with W37–W40. Semantic extraction work remains visible in the execution ledger; no W56–W59 or W71–W80 completion is inferred.

@@ -1,5 +1,15 @@
 # B14-SKS execution progress
 
+## Latest batch: W34–W36 on e00e914
+
+Added the 71-object cross-book discovery registry, a separate relationship graph and full provenance backlinks. Book identities are taken from explicit publication metadata or approved manuscript bindings, never inferred from legacy KN-B1/KN-B2 prefixes. The index references each owning registry without creating a new Knowledge Master.
+
+W35 includes two proposed reading links (Book II coordination → Book III coordination continuity; Book III continuity → Book IV expansion), both UNREVIEWED and excluded from retrieval. The existing Book IV → V bridge is referenced with a digest; Book V data is not copied. Pressure and Threshold links remain explicitly withheld because their Book I source objects are missing. No causal relationships are admitted by the builder.
+
+W36 adds a source-backlink panel to each of the four book pages. Every indexed object resolves to its canonical registry record, manuscript section/page/digest, published articles where available and book section. Private text delivery remains blocked; missing locale publication is stated explicitly. Book III topic URLs open the corresponding source topic.
+
+Run `node scripts/build-b14-sks-cross-book.mjs` followed by `node scripts/check-b14-sks-cross-book.mjs --record`. Provenance digests, all 71 source identities, bilingual source selection, graph exclusion and external bridge checks pass; Book III and seven-volume consumer regressions also pass. Browser visual acceptance remains deferred. Human review stays consolidated; next batch W37–W40.
+
 ## Latest batch: W27–W33 on 75599e46
 
 Generated Book IV taxonomy, expansion modes, reading chain, scale-transition structure, constraints and a separate Book IV → V navigation bridge. Twenty topic projections bind to the final 125-node Book IV authority and approved bilingual published-article records. Article summaries are copied exactly, explicitly labelled as article scope rather than a new single-node definition. Historical article-production completion notes are superseded for publication availability by the existing book4-publication-v1 registry.

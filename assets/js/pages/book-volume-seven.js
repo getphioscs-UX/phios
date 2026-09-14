@@ -140,6 +140,13 @@ async function render() {
       const dispose=await mountExpansionExplorer(explorer,locale);
       if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
     }
+    if (['book-1','book-2','book-3','book-4'].includes(bookId)) {
+      const sources=document.createElement('section');sources.className='knowledge-section';
+      const shell=document.createElement('div');shell.className='knowledge-shell';sources.append(shell);root.append(sources);
+      const {mountStructuredBacklinks}=await import('../knowledge/structured-backlinks.js');
+      const dispose=await mountStructuredBacklinks(shell,bookId.toUpperCase(),locale);
+      if(generation !== renderGeneration)dispose();else {const previous=disposeFormation;disposeFormation=()=>{previous?.();dispose();};}
+    }
     if (persistentAtlas) {
       const hero = root.querySelector('.wpr-book-hero');
       if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);
