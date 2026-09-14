@@ -9,11 +9,12 @@ const PERSONAL_RELATIONSHIP_SIGNAL = /(?:我(?:的)?(?:丈夫|老公|妻子|老�
 const CURRENT_SIGNAL = /(current|today|latest|recent|now|opr|interest rate|market|economy|policy|news|weather|outbreak|cases|今天|目前|现在|最新|利率|市场|经济|政策|新闻|天气|病例|疫情)/i;
 const EVERGREEN_KNOWLEDGE = /^(what is|what are|define|explain|什么是|何谓|解释一下)/i;
 const GENERAL_KNOWLEDGE_SIGNAL=/(文明|历史|知识|机制|概念|理论|atlas|civilization|history|knowledge|mechanism|concept|theory)/i;
+const STRONG_FINANCIAL_SIGNAL = /(?:现金流|储蓄|存款|收入|支出|预算|负债|净值|退休金|rm\s*[\d,]+|cash flow|savings?|income|expense|budget|debt|net worth|retirement|rm\s*[\d,]+)/i;
 const HEALTH_K1_SIGNAL = /(rash|redness|itch|itching|hives|swelling|blister|eczema|allerg|numbness|nausea|vomit|diarrhea|constipation|headache|cough|palpitation|skin sensitivity|sensitive skin|skin irritation|skin reaction|皮肤敏感|敏感肌|皮肤刺激|皮肤反应|泛红|干燥|脱皮|皮疹|红疹|红斑|红点|瘙痒|痒|荨麻疹|红肿|肿胀|水泡|湿疹|过敏|麻木|恶心|呕吐|腹泻|便秘|头痛|咳嗽)/i;
 
 export function classifyAsk2Consumption({ question, body = {}, env = {} } = {}) {
   const q = String(question || '').trim();
-  let health = planAskHealthBridge({ question: q }, env);
+  let health = STRONG_FINANCIAL_SIGNAL.test(q) ? { route: 'CKA_STANDARD', healthIntent: false } : planAskHealthBridge({ question: q }, env);
   if (!health.healthIntent && HEALTH_K1_SIGNAL.test(q)) {
     const safety = routeHealthSafety({ question: q });
     health = {
@@ -57,8 +58,9 @@ function deriveEphemeralCurrentContextSnapshot(body = {}) {
 
 export async function runAsk2Consumption({ body, env = {}, requestUrl, fetcher = fetch } = {}) {
   const question = String(body?.q || body?.question || '').trim();
+  const requestContract = body?.ptrcRequestContract || null;
   const classification = classifyAsk2Consumption({ question, body, env });
-  if (classification.mode !== 'ASK2') return Object.freeze({ classification });
+  if (classification.mode !== 'ASK2') return Object.freeze({ classification, requestContract });
   const plan = buildAsk2OrchestrationPlan({
     question,
     taxonomyHint: body?.taxonomyHint || null,
@@ -70,7 +72,7 @@ export async function runAsk2Consumption({ body, env = {}, requestUrl, fetcher =
     externalCurrentRequired: body?.externalCurrentRequired ?? null
   });
   if (plan.orchestrationState !== 'READY_FOR_RUNTIME_EXECUTION') {
-    return Object.freeze({ classification, plan, execution: null, composition: null, client: buildAsk2ClientProjection({ plan, locale: body?.locale }) });
+    return Object.freeze({ classification, requestContract, plan, execution: null, composition: null, client: buildAsk2ClientProjection({ plan, locale: body?.locale }) });
   }
   const execution = await executeAsk2RuntimeRequests(plan, {
     runtimeInputs: body?.runtimeInputs || {},
@@ -83,5 +85,5 @@ export async function runAsk2Consumption({ body, env = {}, requestUrl, fetcher =
     composition = composeAsk2BoundedState({ plan, runtimeResults: execution.governedResults.map(item => ({ ...item, requestId: item.requestId })) });
   }
   const client = buildAsk2ClientProjection({ plan, composition, execution, locale: body?.locale });
-  return Object.freeze({ classification, plan, execution, composition, client });
+  return Object.freeze({ classification, requestContract, plan, execution, composition, client });
 }

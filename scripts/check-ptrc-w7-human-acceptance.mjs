@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const decision=JSON.parse(fs.readFileSync('tools/review/PTRC-W7-HUMAN-DECISION.json','utf8'));
+assert.equal(decision.schemaVersion,'PHI-OS-PTRC-W7-HUMAN-DECISION-v1.0.0');
+assert.equal(decision.status,'ACCEPTED','PTRC-W7 requires explicit ACCEPTED status from two human reviewers.');
+assert.ok(decision.deployment?.hostname&&decision.deployment?.deploymentId&&decision.deployment?.commitSha&&decision.deployment?.verifiedAt,'Deployment identity is incomplete.');
+assert.ok(Array.isArray(decision.reviewers)&&decision.reviewers.length>=2,'Two reviewers are required.');
+const accepted=decision.reviewers.filter(x=>x?.reviewer&&x?.decision==='ACCEPTED');
+assert.ok(accepted.length>=2,'Two accepted reviewer decisions are required.');
+assert.ok(new Set(accepted.map(x=>x.reviewer.trim().toLowerCase())).size>=2,'Reviewers must be distinct.');
+assert.ok(Array.isArray(decision.criticalCases)&&decision.criticalCases.length>=6,'At least six deployed canary cases are required.');
+assert.ok(decision.criticalCases.every(x=>x.decision==='ACCEPTED'),'Every recorded critical canary must be accepted.');
+assert.ok(Object.values(decision.browserChecks||{}).length>=10&&Object.values(decision.browserChecks||{}).every(Boolean),'Every browser acceptance check must pass.');
+console.log('✓ PTRC-W7 final human acceptance passed.');

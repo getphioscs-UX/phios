@@ -1,5 +1,6 @@
 import { onRequestPost as runCkaConsumption } from './ask-phios-consumption.js';
 import { runAsk2Consumption } from '../ask2/ask2-consumption-runtime.js';
+import { createPtrcAskRequestContract } from '../_lib/ptrc-ask-contract.js';
 
 const headers = Object.freeze({
   'content-type': 'application/json; charset=utf-8',
@@ -81,19 +82,24 @@ export async function onRequestPost(context) {
   const question = String(body?.q || body?.question || '').trim();
   if (!question) return json({ ok: false, error: { code: 'ASK2_QUESTION_REQUIRED' } }, 400);
   try {
-    const result = await runAsk2Consumption({ body, env: context.env || {}, requestUrl: context.request.url, fetcher: fetch });
+    const requestContract = createPtrcAskRequestContract(body);
+    const governedBody = {...body, q: requestContract.question, locale: requestContract.locale, ptrcRequestContract: requestContract};
+    const result = await runAsk2Consumption({ body: governedBody, env: context.env || {}, requestUrl: context.request.url, fetcher: fetch });
     if (result.classification.mode === 'HEALTH') {
-      return json(healthCompat(question, result.classification.health, body.locale || 'zh-Hans'));
+      const response = healthCompat(question, result.classification.health, requestContract.locale);
+      return json({...response, requestContract});
     }
     if (result.classification.mode === 'CKA') {
-      const forwarded = new Request(context.request.url, { method: 'POST', headers: context.request.headers, body: JSON.stringify(body) });
+      const forwarded = new Request(context.request.url, { method: 'POST', headers: context.request.headers, body: JSON.stringify(governedBody) });
       return runCkaConsumption({ ...context, request: forwarded });
     }
     return json({
       ok: true,
       mode: 'ASK2',
+      requestContract,
       ask2: {
         schemaVersion: 'PHI-OS-ASK2-PUBLIC-CONSUMPTION-v1.0.0',
+        requestContract,
         plan: result.plan,
         execution: result.execution,
         composition: result.composition,

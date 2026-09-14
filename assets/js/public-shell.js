@@ -1,5 +1,5 @@
 import { resolvePublicAssetForWeb } from './runtime/web-production/asset-resolver.js';
-import { ensureCanonicalPhiosFavicon } from './branding/favicon-authority.js';
+import { ensureCanonicalPhiosFavicon, ensurePhiosWebManifest } from './branding/favicon-authority.js';
 
 import {
   initializeI18n,
@@ -89,7 +89,6 @@ function headerMarkup(activeSection) {
           aria-label="PHI OS home"
         >
           <span class="public-brand__fallback">
-            <span class="public-brand__mark" aria-hidden="true">Φ</span>
             <span>PHI OS</span>
           </span>
           <img class="public-brand__logo" data-public-brand-asset="LOGO-003" alt="" hidden />
@@ -132,7 +131,6 @@ function footerMarkup() {
         <div>
           <a class="public-brand public-brand--footer" href="/" aria-label="PHI OS home">
             <span class="public-brand__fallback">
-              <span class="public-brand__mark" aria-hidden="true">Φ</span>
               <span>PHI OS</span>
             </span>
             <img class="public-brand__logo" data-public-brand-asset="LOGO-010" alt="" hidden />

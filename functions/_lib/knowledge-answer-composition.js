@@ -1,5 +1,7 @@
 import {runKirR2ProductionProjection} from './kir-r2-production.js';
 import { runKapGroundingPipeline } from './knowledge-answer-grounding.js';
+import { buildPtrcRetrievalStages } from './ptrc-knowledge-quality.js';
+import { createPtrcAskTrace } from './ptrc-ask-contract.js';
 
 const DEPTHS = Object.freeze({
   QUICK: Object.freeze({ directSentences: 1, mechanismItems: 1, whyItems: 0, relatedItems: 2, sourceItems: 3 }),
@@ -38,6 +40,8 @@ function localeCopy(locale) {
       pendingBinding: '有相关手稿内容仍在等待 Canonical binding，因此没有被提升为 Canonical Node 结论。',
       unpublishedRelated: '存在相关知识关系，但目标知识尚未在当前语言发布，因此没有被注入本次回答。',
       sourceUnavailable: '当前没有可用于回答的受治理来源。',
+      bookVManuscriptUnavailable: '当前基线没有可供检索的第五册正文手稿来源；本次回答不会伪造第五册段落或引文。',
+      bookVArticleUnavailable: '当前基线没有第五册 Production Article 正文；本次回答只使用已注册的文明图谱证据与其他获准的受治理知识。',
       partial: '现有知识可以回答一部分，但仍有重要边界或未知需要保留。'
     });
   }
@@ -50,6 +54,8 @@ function localeCopy(locale) {
     pendingBinding: 'Relevant manuscript material still has a pending Canonical binding, so it was not promoted into a Canonical Node claim.',
     unpublishedRelated: 'A governed knowledge relationship exists, but the target is not published in this locale and was not injected into this answer.',
     sourceUnavailable: 'No governed source is currently available for this answer.',
+    bookVManuscriptUnavailable: 'This baseline has no retrievable Book V manuscript source; this answer will not fabricate Book V passages or quotations.',
+    bookVArticleUnavailable: 'This baseline has no Book V Production Article body; the answer uses only registered Civilization Atlas evidence and other permitted governed knowledge.',
     partial: 'The available knowledge can answer part of the question, but important boundaries or unknowns remain.'
   });
 }
@@ -86,6 +92,8 @@ function mapUnknowns(bundle, locale) {
       case 'CANONICAL_BINDING_PENDING': return copy.pendingBinding;
       case 'RELATED_TARGET_NOT_PUBLISHED': return copy.unpublishedRelated;
       case 'NO_GROUNDED_SOURCE_MATCH': return copy.sourceUnavailable;
+      case 'BOOK_V_MANUSCRIPT_SOURCE_UNAVAILABLE': return copy.bookVManuscriptUnavailable;
+      case 'BOOK_V_PRODUCTION_ARTICLE_BODY_UNAVAILABLE': return copy.bookVArticleUnavailable;
       default: return canonicalText(item.code).replaceAll('_', ' ').toLowerCase();
     }
   }));
@@ -225,10 +233,14 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
   const boundaries = [copy.questionScopedBoundary];
   if (bundle?.normalization?.hints?.containsPersonalContextHint) boundaries.push(copy.personalBoundary);
   const eligible = coverageDecision?.answerCompositionEligible === true;
+  const ptrcOutcome = coverageDecision?.ptrcQuality?.outcome || null;
+  const partialSupported = ptrcOutcome === 'PARTIAL' && coverageDecision?.shortSupportedAnswerEligible === true && direct.length > 0;
   const relevanceRejected = (coverageDecision?.reasonCodes || []).includes('QUESTION_SOURCE_RELEVANCE_NOT_ESTABLISHED');
   const directAnswer = eligible
     ? direct.map(item => item.text).join(locale === 'zh-Hans' ? '' : ' ')
-    : coverageDecision?.status === 'OUT_OF_SCOPE' ? copy.outOfScope : copy.insufficient;
+    : partialSupported
+      ? `${direct[0].text}${locale === 'zh-Hans' ? '' : ' '}${copy.partial}`
+      : coverageDecision?.status === 'OUT_OF_SCOPE' ? copy.outOfScope : copy.insufficient;
   const whatToObserve = eligible && bundle?.normalization?.hints?.containsPersonalContextHint && normalizedDepth !== 'QUICK'
     ? [copy.observe]
     : [];
@@ -247,6 +259,7 @@ export function composeDeterministicKapAnswer({ bundle, coverageDecision, depth 
     answerMode: 'KNOWLEDGE_ANSWER',
     authorityClass: 'QUESTION_SCOPED_NON_AUTHORITATIVE_PROJECTION',
     coverageStatus: coverageDecision?.status || 'INSUFFICIENT_COVERAGE',
+    qualityOutcome: ptrcOutcome,
     groundingBundleId: bundle.bundleId,
     knowledgeRefs: {
       primaryNodeCodes,
@@ -339,6 +352,15 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
   }) : {status:'KIR_R2_BLOCKED_BY_RELEVANCE_GATE',applied:false};
   const kirApplied = kir?.applied === true;
   const kirAnswer = kirApplied ? kir.result.answer.text : null;
+  const ptrcContract = grounding.intake?.requestContract || null;
+  const ptrcStages = ptrcContract ? buildPtrcRetrievalStages(grounding.groundingBundle, ptrcContract) : [];
+  const ptrcTrace = ptrcContract ? createPtrcAskTrace({
+    contract: ptrcContract,
+    route: 'CKA',
+    retrievalStages: ptrcStages,
+    gateResult: grounding.ptrcQuality,
+    answerMode: grounding.ptrcQuality?.outcome === 'SUFFICIENT' ? 'LONG_FORM_ALLOWED' : grounding.ptrcQuality?.outcome === 'PARTIAL' ? 'SHORT_SUPPORTED_ONLY' : 'ABSTAIN_OR_CLARIFY'
+  }) : null;
   const answer = kirApplied ? {
     ...projection.answer,
     content: {...projection.answer.content,directAnswer:kirAnswer},
@@ -347,6 +369,7 @@ export async function runAskPhiosPipeline({ input, request, env = {}, depth = DE
   return {
     ...projection,
     answer,
+    ...(ptrcContract ? {ptrc: {requestContract: ptrcContract, quality: grounding.ptrcQuality, retrievalStages: ptrcStages, trace: ptrcTrace}} : {}),
     kirR2: kirApplied ? {
       status: kir.status,
       schemaVersion: kir.result.schemaVersion,

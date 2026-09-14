@@ -1,25 +1,22 @@
 import { runAskPhiosPipeline, normalizeAnswerDepth } from '../_lib/knowledge-answer-composition.js';
 import {
   classifyCkaFollowUpBoundary,
-  composeCkaRetrievalQuestion,
   createCkaFollowUpContext,
   normalizeCkaEntryContext,
   projectCkaClientAnswer
 } from '../_lib/client-knowledge-ask.js';
 import {
-  composeCkaContextualRetrievalQuestion,
-  composeCkaGuidedRetrievalQuestion,
   normalizeCkaGuidedContext,
   normalizeCkaKnowledgeContext,
   projectCkaW5W17Envelope
 } from '../_lib/client-knowledge-ask-b.js';
 import {
   assertCkaRealityContextAuthorization,
-  composeCkaRealityAwareRetrievalQuestion,
   normalizeTrustedCkaAccess,
   projectCkaW18W33Consumption
 } from '../_lib/client-knowledge-ask-c.js';
 import {normalizeAtlasRetrievalScope} from '../_lib/atlas-retrieval-scope.js';
+import {createPtrcAskRequestContract, PTRC_ASK_CONTRACT_SCHEMA} from '../_lib/ptrc-ask-contract.js';
 
 const JSON_HEADERS = Object.freeze({
   'content-type': 'application/json; charset=utf-8',
@@ -93,7 +90,10 @@ function buildInput(payload, context) {
     readingPath: rawEntry.readingPath,
     relatedKnowledgeRef: rawEntry.relatedKnowledgeRef
   });
-  const retrievalScope=normalizeAtlasRetrievalScope(rawEntry.retrievalScope);
+  const requestContract=body.ptrcRequestContract?.schemaVersion===PTRC_ASK_CONTRACT_SCHEMA
+    ? body.ptrcRequestContract
+    : createPtrcAskRequestContract({...body,q,locale,entryContext:rawEntry,retrievalScope:body.retrievalScope||rawEntry.retrievalScope});
+  const retrievalScope=normalizeAtlasRetrievalScope(requestContract.retrievalScope?.atlasScope||rawEntry.retrievalScope);
   return {
     q,
     locale,
@@ -105,6 +105,7 @@ function buildInput(payload, context) {
     guidedContext,
     knowledgeContext,
     retrievalScope,
+    requestContract,
     trustedAccess,
     realityAuthorization
   };
@@ -112,16 +113,9 @@ function buildInput(payload, context) {
 
 async function execute(context, payload) {
   const input = buildInput(payload, context);
-  const retrievalQuestion = composeCkaRealityAwareRetrievalQuestion(
-    composeCkaContextualRetrievalQuestion(
-      composeCkaGuidedRetrievalQuestion(
-        composeCkaRetrievalQuestion(input.followUpContext),
-        input.guidedContext
-      ),
-      input.knowledgeContext
-    ),
-    input.realityAuthorization
-  );
+  // PTRC-W2: the raw user question is the retrieval question. Navigation labels,
+  // selected chips, guided context and prior answers remain structured context only.
+  const retrievalQuestion = input.requestContract.question;
   const result = await runAskPhiosPipeline({
     input: {
       question: retrievalQuestion,
@@ -131,7 +125,8 @@ async function execute(context, payload) {
         articleSlug: input.entryContext.articleCode || undefined,
         bookCode: input.entryContext.bookCode || undefined
       },
-      retrievalScope:input.retrievalScope
+      retrievalScope:input.retrievalScope,
+      requestContract:input.requestContract
     },
     request: context.request,
     env: context.env || {},
@@ -159,6 +154,8 @@ async function execute(context, payload) {
     ...result,
     cka: {
       schemaVersion: 'PHI-OS-CKA-RESPONSE-v1.1.0',
+      requestContract: input.requestContract,
+      trace: result.ptrc?.trace || null,
       entryContext: input.entryContext,
       followUp: {
         ...input.followUpContext,
@@ -176,7 +173,10 @@ async function execute(context, payload) {
         shadowAccountCreated: false,
         requestTransport: 'POST_JSON_NO_STORE',
         privateContextInQueryString: false,
-        privateContextInAnalyticsPayload: false
+        privateContextInAnalyticsPayload: false,
+        entryContextProseAppendedToQuestion: false,
+        guidedContextAppendedToQuestion: false,
+        priorAnswerTextAppendedToQuestion: false
       }
     }
   });

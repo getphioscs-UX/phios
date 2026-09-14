@@ -1,6 +1,7 @@
 import { handleKnowledgeAccessRequest } from './knowledge-access-api.js';
 import { queryTerms } from '../knowledge-runtime/manuscript-source-runtime.js';
 import {normalizeAtlasRetrievalScope} from './atlas-retrieval-scope.js';
+import { applyPtrcQualityToCoverage, evaluatePtrcKnowledgeQuality, filterPtrcSourcesByPolicy } from './ptrc-knowledge-quality.js';
 
 const SUPPORTED_LOCALES = new Set(['zh-Hans', 'en']);
 const MAX_QUERY_LENGTH = 500;
@@ -67,7 +68,8 @@ export function createKapQuestionIntake(input = {}) {
     'surfaceType', 'articleSlug', 'bookCode', 'nodeCode'
   ]);
   const sessionRef = canonicalText(typeof input === 'string' ? '' : input.sessionRef).slice(0, 128) || null;
-  const retrievalScope = normalizeAtlasRetrievalScope(typeof input === 'string' ? null : input.retrievalScope);
+  const requestContract = typeof input === 'string' ? null : (input.requestContract || null);
+  const retrievalScope = normalizeAtlasRetrievalScope(requestContract?.retrievalScope?.atlasScope || (typeof input === 'string' ? null : input.retrievalScope));
   return {
     schemaVersion: 'PHI-OS-KAP-QUESTION-INTAKE-v1.0.0',
     capability: 'ASK_PHIOS',
@@ -79,6 +81,7 @@ export function createKapQuestionIntake(input = {}) {
     sessionRef,
     surfaceContext,
     ...(retrievalScope?{retrievalScope}:{}),
+    ...(requestContract?{requestContract}:{}),
     governance: {
       createsCanonicalKnowledge: false,
       createsPublication: false,
@@ -360,11 +363,16 @@ function groundingSourceId(source) {
 }
 
 export function buildKnowledgeGroundingBundle({ intake, normalized, retrieval, nodeMatches, expansion }) {
-  const sources = (retrieval?.groundingSources || []).map(source => ({
+  const rawSources = (retrieval?.groundingSources || []).map(source => ({
     sourceId: groundingSourceId(source),
     ...source
   }));
+  const sources = filterPtrcSourcesByPolicy(rawSources, intake?.requestContract || null).filter(source => !(intake?.retrievalScope?.bookCode === 'BOOK-5' && source?.sourceType === 'COMPLETED_MANUSCRIPT' && source?.bookCode === 'BOOK-5'));
   const unknowns = [];
+  if (intake?.retrievalScope?.bookCode === 'BOOK-5') {
+    unknowns.push({ code: 'BOOK_V_MANUSCRIPT_SOURCE_UNAVAILABLE' });
+    unknowns.push({ code: 'BOOK_V_PRODUCTION_ARTICLE_BODY_UNAVAILABLE' });
+  }
   for (const item of nodeMatches?.pendingManuscriptSections || []) unknowns.push({ code: 'CANONICAL_BINDING_PENDING', ...item });
   for (const item of expansion?.blockedContinuations || []) unknowns.push({
     code: 'RELATED_TARGET_NOT_PUBLISHED',
@@ -399,6 +407,7 @@ export function buildKnowledgeGroundingBundle({ intake, normalized, retrieval, n
     },
     ...(intake.retrievalScope?{retrievalScope:intake.retrievalScope}:{}),
     retrievalScope: intake.retrievalScope || null,
+    requestContract: intake.requestContract || null,
     retrievalChain: retrieval?.retrievalChain || [],
     nodeMatches: {
       primaryNodes: nodeMatches?.primaryNodes || [],
@@ -485,7 +494,9 @@ export async function runKapGroundingPipeline({ input, request, env = {}, retrie
   const relationshipAuthority = await loadKapRelationshipAuthority(env);
   const expansion = expandKapRelationships({ nodeMatches, locale: normalized.locale, ...relationshipAuthority });
   const groundingBundle = buildKnowledgeGroundingBundle({ intake, normalized, retrieval, nodeMatches, expansion });
-  const coverageDecision = evaluateKapCoverage({ bundle: groundingBundle, retrieval, scopeDisposition });
+  const legacyCoverageDecision = evaluateKapCoverage({ bundle: groundingBundle, retrieval, scopeDisposition });
+  const ptrcQuality = intake.requestContract ? evaluatePtrcKnowledgeQuality({ bundle: groundingBundle, contract: intake.requestContract }) : null;
+  const coverageDecision = ptrcQuality ? applyPtrcQualityToCoverage(legacyCoverageDecision, ptrcQuality) : legacyCoverageDecision;
   return {
     phase: 'KAP-W4-W10',
     answerCompositionPerformed: false,
@@ -495,6 +506,7 @@ export async function runKapGroundingPipeline({ input, request, env = {}, retrie
     nodeMatches,
     relationshipExpansion: expansion,
     groundingBundle,
+    ptrcQuality,
     coverageDecision
   };
 }
