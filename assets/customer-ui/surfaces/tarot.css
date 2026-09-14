@@ -172,6 +172,43 @@
     z-index: 4;
   }
 
+  /* Every card owns its complete hit target; neighbouring cards never cover it. */
+  .cx-tarot-deck.cx-tarot-deck--accessible {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(3.5rem, 1fr));
+    gap: 0.75rem;
+    padding: 1rem;
+    min-height: 0;
+  }
+  .cx-tarot-deck--accessible::before,
+  .cx-tarot-deck--accessible::after { display: none; }
+  .cx-tarot-deck--accessible .cx-tarot-card-back {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    min-width: 44px;
+    transform: none;
+  }
+  .cx-tarot-deck--accessible .cx-tarot-card-back:hover,
+  .cx-tarot-deck--accessible .cx-tarot-card-back:focus-visible,
+  .cx-tarot-deck--accessible .cx-tarot-card-back.is-selected {
+    transform: translateY(-3px);
+    outline: 2px solid #ecdcae;
+    outline-offset: 2px;
+  }
+  .cx-tarot-sound-control { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem; }
+  .cx-tarot-deck--accessible.is-shuffling .cx-tarot-card-back {
+    animation: tarot-riffle .3s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  .cx-tarot-deck--accessible.is-shuffling .cx-tarot-card-back:nth-child(even) { animation-direction: alternate-reverse; }
+  @keyframes tarot-riffle { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(-6px) rotate(3deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .cx-tarot-deck--accessible.is-shuffling .cx-tarot-card-back { animation: none; }
+    .cx-tarot-deck--accessible .cx-tarot-card-back { transition: none; }
+  }
+
   .cx-tarot-card-back__art {
     position: absolute;
     inset: 0;

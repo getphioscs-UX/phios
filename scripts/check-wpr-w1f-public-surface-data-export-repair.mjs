@@ -5,7 +5,12 @@ const r=j('content/web-production/reconciliation/wpr-w1f-public-surface-data-exp
 assert.equal(r.status,'SUCCESSOR_EXPORT_REPAIR_NO_AUTHORITY_CHANGE');
 const source=read('assets/js/web-production/public-surface-data.js');
 for(const name of r.problem.missingExports) assert.match(source,new RegExp(`export\\s+(?:async\\s+)?function\\s+${name}\\b`),`MISSING_EXPORT:${name}`);
-assert.ok(source.includes("'book-3': '/books/reality-continuity/'")); assert.ok(source.includes("'book-5': '/books/reality-navigation/'"));
+const {BOOK_ROUTE_BY_ID}=await import('../assets/js/web-production/public-surface-data.js');
+assert.equal(Object.keys(BOOK_ROUTE_BY_ID).length,7);
+assert.equal(BOOK_ROUTE_BY_ID['book-3'],'/books/reality-continuity/');
+assert.equal(BOOK_ROUTE_BY_ID['book-5'],'/books/reality-differentiation/');
+assert.equal(BOOK_ROUTE_BY_ID['book-6'],'/books/reality-observation/');
+assert.equal(BOOK_ROUTE_BY_ID['book-7'],'/books/reality-navigation/');
 assert.ok(source.includes("'/books/reality-maintenance/'")); assert.ok(source.includes('nodeCodePrefixUsedForBookInference: false'));
 assert.equal(/nodeCode.*split|nodeCode.*match.*B|KN-B.*infer/i.test(source),false);
 await import('../assets/js/knowledge/published-content.js');
