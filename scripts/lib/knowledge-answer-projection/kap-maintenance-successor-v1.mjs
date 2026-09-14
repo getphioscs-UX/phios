@@ -14,6 +14,7 @@ const changesFor = path => maintenanceDocs().flatMap(doc => (doc.changes || []).
 
 export function kapMaintenanceSuccessorSha(path, fallback = null) {
   const changes = changesFor(path);
+  if(changes.length && fallback) assertKapEvidenceOrMaintenance({path,sha256:fallback});
   return changes.length ? changes.at(-1).item.successorSha256 : fallback;
 }
 

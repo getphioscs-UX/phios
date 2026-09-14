@@ -126,6 +126,13 @@ async function render() {
       const dispose=await mountRuntimeAtlas(atlas,locale);
       if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
     }
+    if (bookId === 'book-3') {
+      const action=document.createElement('a');action.className='knowledge-action';action.href='#maintenance';action.textContent=locale==='zh-Hans'?'探索维持与恢复':'Explore maintenance and recovery';root.querySelector('.knowledge-actions')?.append(action);
+      const explorer=document.createElement('section');explorer.id='maintenance';explorer.className='maintenance-explorer';root.querySelector('.knowledge-hero')?.after(explorer);
+      const {mountMaintenanceExplorer}=await import('../knowledge/maintenance-explorer.js');
+      const dispose=await mountMaintenanceExplorer(explorer,locale);
+      if(generation !== renderGeneration)dispose();else disposeFormation=dispose;
+    }
     if (persistentAtlas) {
       const hero = root.querySelector('.wpr-book-hero');
       if (hero) hero.insertAdjacentElement('afterend', persistentAtlas);

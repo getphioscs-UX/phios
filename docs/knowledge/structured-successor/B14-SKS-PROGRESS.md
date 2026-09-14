@@ -1,5 +1,13 @@
 # B14-SKS execution progress
 
+## Latest batch: W19–W26 on d8a489d
+
+Generated seven Book III artifacts from the 103-node final manuscript authority, with 28 selected topic entries and exact canonical/section digest checks. Added `/books/reality-continuity/#maintenance` search and source-topic inspector. Unknown observable signals, failure mechanisms, thresholds, recovery windows and transitions remain empty pending extraction; no automatic Reality state write or recovery recommendation is enabled. W26 currently supplies a read-only binding contract, not an activated Reality consumer.
+
+Run `node scripts/build-b14-sks-book3.mjs` then `node scripts/check-b14-sks-book3.mjs --record`. Human decisions are deferred together as requested in `B14-SKS-CONSOLIDATED-HUMAN-REVIEW.md`; unfinished extraction is tracked separately and is not claimed as acceptance. The next implementation batch is W27–W33.
+
+KAP grounding's Book I scope change is registered in the additive M4 maintenance successor, chained to the existing M2 grounding digest. Historical freezes remain unchanged. The digest resolver now validates the predecessor chain before returning its successor. `check:kap-grounding`, Book I/II/III component/provenance checks and Atlas scope regression pass.
+
 Baseline: `ca1a38b150740ce74ef83b24c421c08e22cb79e7`
 
 ## Stage 1: W0–W4
