@@ -38,6 +38,24 @@ assert.equal(intake.retrievalScope.objectId,'SK-B1-CONSTRAINT');
 const retrieval=await retrieveKapKnowledge({env,normalized:normalizeKapQuestion(intake),options:{retrievalScope:intake.retrievalScope},request:new Request('https://phios.test/api/knowledge-access')});
 assert.equal(retrieval.ok,true,JSON.stringify(retrieval.error));
 assert.equal(retrieval.groundingSources[0].sourceId,'STRUCTURED:SK-B1-CONSTRAINT');
+const fixtureEnv=data=>({ASSETS:{fetch:async()=>Response.json(data)}});
+for(const patch of [{status:'RETIRED'},{projectionState:'WITHHELD'},{evidenceState:'UNKNOWN'},{bookCode:'BOOK-2'},{sourceRefs:{canonicalNodeCodes:[],manuscriptSectionRefs:[]}}]){
+ const data=structuredClone(registry);Object.assign(data.objects.find(o=>o.objectId===entry.retrievalScope.objectId),patch);
+ assert.equal(await resolveFormationEntry('CONCEPT:constraint',fixtureEnv(data)),null);
+ assert.equal((await retrieveFormationScope({env:fixtureEnv(data),scope:entry.retrievalScope})).sources.length,0);
+}
+for(const unavailable of [{ASSETS:{fetch:async()=>{throw new Error('offline');}}},{ASSETS:{fetch:async()=>new Response('invalid json')}},fixtureEnv({objects:{}})]){
+ assert.equal(await resolveFormationEntry('CONCEPT:constraint',unavailable),null);
+ assert.equal((await retrieveFormationScope({env:unavailable,scope:entry.retrievalScope})).sources.length,0);
+}
+for(const o of registry.objects){
+ const ref=new URL(formationAskHref(o,registry.details[o.objectId]),'https://phios.test').searchParams.get('contextRef');
+ const resolved=await resolveFormationEntry(ref,env);
+ assert.equal(resolved.retrievalScope.objectId,o.objectId);
+ const result=await retrieveFormationScope({env,scope:resolved.retrievalScope});
+ assert.equal(result.sources[0].sourceId,`STRUCTURED:${o.objectId}`);
+ assert.equal(new Set(result.sources.map(s=>s.sourceId)).size,result.sources.length);
+}
 for(const locale of ['en','zh-Hans']){
  const {document,window}=parseHTML('<html><body><section id="explorer"></section></body></html>');
  const host=document.querySelector('section'),locationRef={href:'https://phios.test/books/reality-formation/?lang=en&mechanism=SK-B1-CONSTRAINT#explorer'};

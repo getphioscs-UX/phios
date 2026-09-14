@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createHash} from 'node:crypto';
+const root=path.resolve(import.meta.dirname,'..');
+const input=process.argv[2];
+if(!input)throw new Error('Usage: node scripts/check-b14-sks-book1-source.mjs <private-pdf-path> [--record]');
+const registered=JSON.parse(fs.readFileSync(path.join(root,'content/knowledge/manuscripts/completed/book-1-completed-manuscript-v2.json'),'utf8'));
+const hash=createHash('sha256');for await(const chunk of fs.createReadStream(input))hash.update(chunk);
+const actual={fileName:path.basename(input),byteSize:fs.statSync(input).size,sha256:hash.digest('hex')};
+const matches=actual.sha256===registered.sourceBinary.sha256&&actual.byteSize===registered.sourceBinary.byteSize;
+const result={version:'1.0.0',bookCode:'BOOK-1',status:matches?'REGISTERED_BINARY_MATCH':'SOURCE_VERSION_MISMATCH',registered:registered.sourceBinary,observed:actual,mayReuseRegisteredSectionBindings:matches,humanAcceptanceComplete:false,nextAction:matches?'Verify extraction and section digests before claim review.':'Reconcile source version and section bindings before admitting W8/W9 claims. Do not overwrite the registered source.',privateBodyIncluded:false};
+if(process.argv.includes('--record'))fs.writeFileSync(path.join(root,'docs/knowledge/structured-successor/book-1-source-verification-v1.json'),JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));
+if(!matches)process.exitCode=1;
