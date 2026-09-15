@@ -528,19 +528,26 @@
     },
     {
       "stage": "B14-SKS-W78",
-      "status": "NOT_STARTED"
+      "status": "REGISTRY_SNAPSHOT_COMPLETE_SEMANTIC_GATES_OPEN",
+      "evidence": "scripts/check-b14-sks-freeze.mjs",
+      "humanAcceptanceComplete": false
     },
     {
       "stage": "B14-SKS-W79",
-      "status": "NOT_STARTED"
+      "status": "EXISTING_RUNTIME_GRAPH_SNAPSHOT_COMPLETE",
+      "evidence": "scripts/check-b14-sks-freeze.mjs",
+      "humanAcceptanceComplete": false
     },
     {
       "stage": "B14-SKS-W80",
-      "status": "NOT_STARTED"
+      "status": "PRODUCTION_FREEZE_RECORD_PREPARED_GATES_OPEN",
+      "evidence": "scripts/check-b14-sks-freeze.mjs",
+      "humanAcceptanceComplete": false
     }
   ],
   "humanReviewComplete": false,
   "customerAcceptanceComplete": false,
   "productionFreezeComplete": false,
-  "nextStage": "B14-SKS-W78"
+  "nextStage": "B14-SKS-W80",
+  "nextAction": "Close semantic review, successor import, customer task evidence and deployed production/rollback verification before production activation."
 }

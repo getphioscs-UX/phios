@@ -1,16 +1,17 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-const root=process.argv[2]||'.runtime-evidence/meaning-proposals';
+const root=process.argv[2]||'functions/_source-material/meaning-proposals';
 const read=p=>JSON.parse(fs.readFileSync(p)),hash=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const base='docs/knowledge/structured-successor/meaning-extraction/';
 const tasks=read(base+'meaning-extraction-tasks-v1.json').tasks;
 const batches=Array.from({length:5},(_,i)=>`${root}/meaning-proposals-batch-0${i+1}.json`);
 const proposals=batches.flatMap(p=>read(p).proposals);
-const corpusPath=process.argv[3]||'../KSAR-reviewed/books/book-2/materialized/v1/reviewed/retrieval-corpus.json';
-const corpus=read(corpusPath),book3=read(root+'/book3-source-pages.json');
-const reviewPath='tools/review/KAU-R6D-Book-III-Manuscript-Readability-Review.html';
-let reviewedSections=null;
-if(fs.existsSync(reviewPath)){
+const corpusPath=process.argv[3]||'functions/_source-material/books/book-2-registered-reviewed-corpus.json';
+const corpus=read(corpusPath),book3=fs.existsSync(root+'/book3-source-pages.json')?read(root+'/book3-source-pages.json'):{sha256:fs.existsSync('functions/_source-material/books/book-3-desktop-text-v1.json')?read('functions/_source-material/books/book-3-desktop-text-v1.json').sourcePdfSha256:null,pages:{}};
+const archivedReview='functions/_source-material/books/book-3-registered-sections-v1.json';
+const reviewPath=fs.existsSync(archivedReview)?archivedReview:'tools/review/KAU-R6D-Book-III-Manuscript-Readability-Review.html';
+let reviewedSections=reviewPath===archivedReview?read(archivedReview).sections:null;
+if(!reviewedSections&&fs.existsSync(reviewPath)){
  const html=fs.readFileSync(reviewPath,'utf8'),marker='const DATA=';
  const offset=html.indexOf(marker);if(offset<0)throw new Error('REVIEW_DATA_MISSING');
  const start=offset+marker.length;let end=start,depth=0,inString=false,escaped=false;

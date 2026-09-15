@@ -2477,7 +2477,12 @@
     "check:b14-sks:book2-acceptance": "node scripts/check-b14-sks-book2-acceptance.mjs",
     "build:b14-sks:w73-w77": "node scripts/build-b14-sks-w73-w77.mjs",
     "check:b14-sks:w73-w77": "node scripts/check-b14-sks-w73-w77.mjs",
-    "check:b14-sks:w73-w77:browser": "node scripts/check-b14-sks-w73-w77-browser.mjs"
+    "check:b14-sks:w73-w77:browser": "node scripts/check-b14-sks-w73-w77-browser.mjs",
+    "build:b14-sks:source-review": "node scripts/audit-b14-sks-meaning-proposals.mjs && node scripts/build-b14-sks-source-review.mjs",
+    "check:b14-sks:source-material": "node scripts/check-b14-sks-source-material.mjs",
+    "build:b14-sks:freeze": "node scripts/build-b14-sks-freeze.mjs",
+    "check:b14-sks:freeze": "node scripts/check-b14-sks-freeze.mjs",
+    "check:b14-sks:production-freeze": "node scripts/check-b14-sks-freeze.mjs --require-production"
   },
   "dependencies": {
     "astronomy-engine": "2.1.19"

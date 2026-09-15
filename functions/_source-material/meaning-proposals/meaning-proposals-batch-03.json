@@ -1,0 +1,516 @@
+{
+  "batchId": "meaning-proposals-batch-03",
+  "sourceFiles": [
+    {
+      "file": "Pasted text(20260915-023100).txt",
+      "logicalName": "meaning-extraction-tasks-v1.json",
+      "role": "EXTRACTION_TASK_LIST"
+    },
+    {
+      "file": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+      "role": "EXACT_SOURCE_PDF_TEXT_LAYER_REVIEW_EXTRACT",
+      "bookCode": "BOOK-3",
+      "registeredSourcePdf": "PHI-OS-Book-3-v1.pdf"
+    }
+  ],
+  "proposals": [
+    {
+      "objectId": "SK-B3-B3-P8-140",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-140-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-140",
+      "title": "运行监测",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "运行监测是持续读取当前运行中少数关键讯号的能力，使负荷、节律、摩擦、恢复速度、接口占用或可用容量的变化能在成为严重问题以前被看见。它强调与历史基准和趋势比较，而不是无限增加记录或监控所有事情。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "监测用于持续读取变化，不等于建立单一通用评分或固定阈值。",
+        "主观讯号、单次异常或单一指标不能自动证明具体因果关系。",
+        "监测本身应避免制造过多额外负荷，不构成个人处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S040",
+          "quote": "运行监测所\n要建立的，是一种持续读取能力。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S040 登记 PDF 页序范围 148–151。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "9aca633ba611419c4899919541c05a75004a889c6f903597346d2926f1447f27",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S040",
+          "quote": "它的目标是让变化在成为严重问题之前变\n得可见。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S040 登记 PDF 页序范围 148–151。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "9aca633ba611419c4899919541c05a75004a889c6f903597346d2926f1447f27",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S040",
+          "quote": "真正有效的监测恰恰应该降低额外负担。它不是增加更\n多记录，而是选择少数真正能够反映运行变化的讯号。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S040 登记 PDF 页序范围 148–151。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "9aca633ba611419c4899919541c05a75004a889c6f903597346d2926f1447f27",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "运行监测的核心是持续读取当前运行变化。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "监测目标是让变化在严重问题前可见。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        },
+        {
+          "claim": "有效监测强调少数关键讯号，而非无限增加记录。",
+          "evidenceQuoteIndexes": [
+            2
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-108",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-108-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-108",
+      "title": "残余负荷",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "残余负荷是外部事件已经结束或当前行动必要性已经消失后，仍保持开放、警觉、责任、准备或未完成状态的运行部分继续占据当前载体容量。它不是单纯保留记忆，而是过去的运行尚未真正退出。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "事件结束不等于运行已经退出，必须区分事件边界与运行边界。",
+        "记忆或情绪仍然存在并不自动等于残余负荷，关键是是否继续占据当前运行容量。",
+        "不把残余负荷转化为个人病理判断或恢复处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S008",
+          "quote": "真正构成负荷的是那些虽然已经失去当前行动必要性，却仍然\n保持开放、警觉、责任或准备状态的部分。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S008 登记 PDF 页序范围 26–29。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "bcaf2d9635839b08a47e7f771d0647c9fac8d0801397c9c69437436345dfaae5",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S008",
+          "quote": "因此，事件边界与运行边界并不相同。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S008 登记 PDF 页序范围 26–29。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "bcaf2d9635839b08a47e7f771d0647c9fac8d0801397c9c69437436345dfaae5",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "残余负荷来自已经失去当前行动必要性却仍保持开放的运行部分。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "外部事件结束与内部运行退出并不是同一边界。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-126",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-126-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-126",
+      "title": "责任负荷",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "责任负荷是责任逐渐失去清楚边界后，由持续可调用、长期记忆、待命、预判、响应和承担后果形成的背景运行成本。它不能只按显性行动时间衡量，还取决于可调用性、替代安排、权限和退出条件。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "责任本身不等于负荷；有清楚边界、资源与替代条件的责任也可能降低整体运行成本。",
+        "责任负荷不只表现为可见工作时间，还包括长期待命和可调用性。",
+        "不据此进行道德判断、个人责任评分或具体分配处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S026",
+          "quote": "真正的问题并不来自责任存在，而来自责任逐渐失去边界。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S026 登记 PDF 页序范围 94–99。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "9cf97620d803af169cc61f178988283b7d58e696c33e9af7ac01fc0713e0e274",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S026",
+          "quote": "因此，责任负荷不能只通过显性行动时间\n衡量。真正长期的成本经常存在于可调用性。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S026 登记 PDF 页序范围 94–99。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "9cf97620d803af169cc61f178988283b7d58e696c33e9af7ac01fc0713e0e274",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "责任负荷的关键问题是责任边界逐渐消失，而非责任本身。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "责任负荷包含超出显性行动时间的持续可调用成本。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-109",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-109-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-109",
+      "title": "运行累积",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "运行累积是上一轮尚未退出或释放的残余继续进入下一轮，使后续运行不再从相同起点开始、历史负荷逐渐占据载体的过程。它不是简单把许多事项相加，而是长期出现进入量大于退出量的流量失衡。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "事项数量本身不足以判断运行累积，关键是进入与退出的长期关系。",
+        "累积会改变下一轮运行的起点，但不等于已经发生失效或崩塌。",
+        "只描述运行负荷机制，不生成个人诊断或处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S009",
+          "quote": "这便形成运行累积。累积并不是简单地把很多事情加在一起。它真正\n改变的是后续运行的起点。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S009 登记 PDF 页序范围 29–32。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "96542182b58624514eafc76f4c8728e606d2dad78c7bd8dd79d36c850c3333df",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S009",
+          "quote": "只要进入长期大于退\n出，承载位置就会逐渐被填满。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S009 登记 PDF 页序范围 29–32。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "96542182b58624514eafc76f4c8728e606d2dad78c7bd8dd79d36c850c3333df",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "运行累积会使历史残余改变后续运行的起点，而不只是事项数量增加。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "长期进入量大于退出量会使承载位置逐渐被占据。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-106",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-106-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-106",
+      "title": "维持容量",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "维持容量是当前载体在当前资源、时间、接口、恢复与环境条件下，与当前现实之间真正能够长期承受的承载空间。它不是固定储存在载体内部的能力值，也不同于短时间内可以达到的峰值能力。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "维持容量随载体状态和现实条件改变，不是固定人格或能力标签。",
+        "短期完成高负荷任务不证明同样负荷可以长期重复。",
+        "不得据此建立跨个人、组织或系统的统一评分。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S006",
+          "quote": "因此，维\n持容量并不是一种固定储存在载体内部、等待被调用的总量。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S006 登记 PDF 页序范围 17–21。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "abd841311066fb7ebb987a7ead1e104636ce489e5d36f501b21cfe1fa4e92c21",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S006",
+          "quote": "容量更接近一种关系。它发生在当前载体与当前现实之间。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S006 登记 PDF 页序范围 17–21。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "abd841311066fb7ebb987a7ead1e104636ce489e5d36f501b21cfe1fa4e92c21",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S006",
+          "quote": "短期能力回答的是，在特定条件\n下，载体最多能够把什么事情推过去；维持容量回答的则是，在不持续破\n坏恢复、接口与未来能力的情况下，这种运行能够重复多久。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S006 登记 PDF 页序范围 17–21。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "abd841311066fb7ebb987a7ead1e104636ce489e5d36f501b21cfe1fa4e92c21",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "维持容量不是固定储存在载体内部的总量。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "维持容量取决于当前载体与当前现实之间的关系。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        },
+        {
+          "claim": "维持容量不同于短期峰值能力，关注的是运行能否在不破坏未来条件下重复。",
+          "evidenceQuoteIndexes": [
+            2
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-107",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-107-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-107",
+      "title": "维持边界",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "维持边界是判断一般维护何时已经不足、问题需要转入结构修复、专业判断或更高层协调的分界。它区分的是处理对象和问题层级，而不是仅按问题是否严重来划线。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "一般维护用于恢复仍基本有效的运行条件，不适用于所有结构性、专业性或安全性问题。",
+        "身体、心理、安全、权利或高风险问题可能需要相应专业或更高层处理，本概念不替代专业判断。",
+        "不生成个人处方，也不把所有困难都升级为结构修复。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S007",
+          "quote": "真正成熟的维护恰恰相反。它\n必须知道什么时候不应该继续只做维护。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S007 登记 PDF 页序范围 21–26。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "6d22c8652446670543a58d6db2e67642be1747239982c196f86addf5aaa2dcfd",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S007",
+          "quote": "结构修复与一般维护最大的区别，\n不在于问题是否严重，而在于处理对象不同。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S007 登记 PDF 页序范围 21–26。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "6d22c8652446670543a58d6db2e67642be1747239982c196f86addf5aaa2dcfd",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "维持边界要求识别何时不能继续只做一般维护。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "一般维护与结构修复的区别主要在处理对象与层级，而非单纯严重程度。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-111",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-111-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-111",
+      "title": "运行漂移",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "运行漂移是活动、流程与产出仍然持续时，行动和最初目的之间的关系逐渐改变，使运行在表面仍然运作的情况下慢慢离开原有方向。因而活动持续并不能单独证明方向仍然保持。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "运行漂移可在系统仍产出结果时发生，不等于立即失效。",
+        "指标、工具或流程可能逐渐替代原目的，但不能据单一现象确定唯一原因。",
+        "只描述运行方向变化，不作个人或组织价值判断。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S011",
+          "quote": "真正改变的是行动与目的之间的关系。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S011 登记 PDF 页序范围 37–40。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "6d1312f31c923c5b0d0a0082e87c810183deee1fff172c379d7f2700a6c1849c",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S011",
+          "quote": "因此，运行漂移首先需要区分“活动还在”与“方向还在”。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S011 登记 PDF 页序范围 37–40。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "6d1312f31c923c5b0d0a0082e87c810183deee1fff172c379d7f2700a6c1849c",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "运行漂移的核心是行动与目的之间的关系发生变化。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "活动持续存在并不能证明运行方向仍然存在。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-112",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-112-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-112",
+      "title": "运行扭曲",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "运行扭曲是长期偏移过程中，原本用来判断现实的语言、标准与解释框架也被当前运行重新塑造，使已经出现的失配不再被读取为需要调整的讯号，而被吸收成新的“正常”。它比漂移更进一步，因为参照标准本身也发生了变化。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "运行扭曲不等于参与者故意欺骗自己，也不等于所有当前标准都无效。",
+        "它与运行漂移不同：漂移是方向偏离，扭曲还会改变判断偏离的参照。",
+        "不作为临床诊断、道德评价或个人处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S012",
+          "quote": "所谓扭曲，并不是现实完全失去逻辑，也不是\n参与者开始故意欺骗自己，而是原本应该帮助判断现实的语言、标准与解\n释方式，逐渐被当前运行重新塑造，使已经出现的失配不再被读取成需要\n调整的讯号，而被吸收成新的正常。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S012 登记 PDF 页序范围 40–44。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "5ceedb0de6af2e6d6d6c6a48399848a5cb9ce9ab693b3e5399b61996248d3127",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S012",
+          "quote": "扭曲则进一步改变参照本身，使\n“偏离”越来越难被确认。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S012 登记 PDF 页序范围 40–44。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "5ceedb0de6af2e6d6d6c6a48399848a5cb9ce9ab693b3e5399b61996248d3127",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "运行扭曲会使判断现实的语言、标准和解释框架被当前运行重新塑造。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "扭曲与漂移的区别在于参照标准本身也发生改变，使偏离更难被确认。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    }
+  ],
+  "remainingObjectIds": [
+    "SK-B3-B3-P8-114",
+    "SK-B3-B3-P9-124",
+    "SK-B3-B3-P9-126",
+    "SK-B3-B3-P8-103",
+    "SK-B3-B3-P8-105",
+    "SK-B3-B3-P9-129",
+    "SK-B3-B3-P8-137",
+    "SK-B3-B3-P8-138",
+    "SK-B3-B3-P8-143",
+    "SK-B3-B3-P8-144",
+    "SK-B3-B3-P8-145",
+    "SK-B3-B3-P8-147",
+    "SK-B3-B3-P9-137",
+    "SK-B3-B3-P8-159",
+    "SK-B3-B3-P9-139",
+    "SK-B3-B3-P9-141"
+  ]
+}

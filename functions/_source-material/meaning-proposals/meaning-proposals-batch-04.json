@@ -1,0 +1,477 @@
+{
+  "batchId": "meaning-proposals-batch-04",
+  "sourceFiles": [
+    {
+      "file": "Pasted text(20260915-023100).txt",
+      "logicalName": "meaning-extraction-tasks-v1.json",
+      "role": "EXTRACTION_TASK_LIST"
+    },
+    {
+      "file": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+      "role": "EXACT_SOURCE_PDF_TEXT_LAYER_REVIEW_EXTRACT",
+      "bookCode": "BOOK-3",
+      "registeredSourcePdf": "PHI-OS-Book-3-v1.pdf"
+    }
+  ],
+  "proposals": [
+    {
+      "objectId": "SK-B3-B3-P8-114",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-114-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-114",
+      "title": "运行碎裂",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "运行碎裂是系统不同部分仍能各自运作，但彼此交换讯号和相互修正的连接下降，导致整体同步能力减弱、局部开始按照不同时间或现实版本继续运行的状态。它不是完全崩溃，也不要求每个局部都失效。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "不同角色、差异或更新速度不一致本身不等于碎裂，关键是共同接口与相互修正能力是否持续下降。",
+        "局部运行仍可能表现良好，因此不能把局部正常直接等同于整体连续。",
+        "只描述结构状态，不生成个体病理或组织评分。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S014",
+          "quote": "碎裂并不是完全崩溃，而是整体同步能\n力下降。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S014 登记 PDF 页序范围 49–53。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "8b9a0a4b294d45a430bb6f073f01b110e5c104d52fbd2ffc1d0ca1dff943112c",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S014",
+          "quote": "不同部分不再生活在同一个现实版本里。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S014 登记 PDF 页序范围 49–53。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "8b9a0a4b294d45a430bb6f073f01b110e5c104d52fbd2ffc1d0ca1dff943112c",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "运行碎裂的核心是整体同步能力下降，而不是所有局部完全崩溃。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "碎裂会使不同部分逐渐运行在不同现实版本中。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P9-124",
+      "candidateId": "EXTRACT-SK-B3-B3-P9-124-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P9",
+      "nodeCode": "KN-B3-P9-124",
+      "title": "协调漂移",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "协调漂移是现实条件持续改变，而协调规则、资源分配、责任边界、意义解释或权力关系更新得更慢时形成的逐渐距离。结构可能仍能运作，却需要越来越多例外、补偿或临时处理才能继续跟上当前现实。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "协调漂移通常是缓慢形成的结构—现实距离，不等于某一次决策错误。",
+        "即使参与者正确执行旧规则，协调结构仍可能因现实变化而漂移。",
+        "不把协调漂移归咎于单一参与者，也不直接生成调整处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P9-S024",
+          "quote": "协调漂移并不是某一天突然做错了一个决定。更常是一种缓慢发生的\n距离。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P9-S024 登记 PDF 页序范围 321–324。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "3aafb696da4c2cdeda380c8d2b6a19148bd4b34e6ebbae36d6a34754bb02c332",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P9-S024",
+          "quote": "现实持续改变，而协调结构更新得更慢，于是原本与现实相对吻合\n的资源分配、责任边界、意义解释与权力关系，逐渐不再适合当前条件。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P9-S024 登记 PDF 页序范围 321–324。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "3aafb696da4c2cdeda380c8d2b6a19148bd4b34e6ebbae36d6a34754bb02c332",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "协调漂移是协调结构与现实之间逐渐形成的距离，而非单次错误。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "漂移源于现实变化速度与协调结构更新速度不匹配。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P9-126",
+      "candidateId": "EXTRACT-SK-B3-B3-P9-126-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P9",
+      "nodeCode": "KN-B3-P9-126",
+      "title": "协调碎裂",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "协调碎裂是更大共同运行中的不同位置逐渐失去足够共同接口，以至于虽然仍属于同一整体，却开始依据不同信息、目标、规则与意义独立行动的状态。局部协调仍可能有效，但跨边界转换与整体协调会越来越困难。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "分歧、不同角色或分布式结构本身不等于协调碎裂。",
+        "局部运行有效并不能证明整体协调仍完整，需观察共同接口与跨边界转换。",
+        "不把碎裂直接等同于任何特定成员的失败或过错。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P9-S026",
+          "quote": "所谓协调碎裂，并不是参与\n者之间出现分歧，也不是存在不同角色。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P9-S026 登记 PDF 页序范围 328–331。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "9a13cc93bfca3c7eacc8a9bbfd7e7e7413c830047e8edd8454513127905c3a45",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P9-S026",
+          "quote": "真正\n碎裂指的是，不同位置逐渐失去足够共同接口，以至于它们虽然仍然属于\n同一更大运行，却开始根据不同信息、不同目标、不同规则与不同意义独\n立行动。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P9-S026 登记 PDF 页序范围 328–331。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "9a13cc93bfca3c7eacc8a9bbfd7e7e7413c830047e8edd8454513127905c3a45",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "协调碎裂不同于正常分歧或角色差异。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "其核心是不同位置失去共同接口并逐渐依据不同现实独立行动。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-103",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-103-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-103",
+      "title": "载体失效架构",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "载体失效是载体逐渐失去承接某类现实所需要的能力、资源、连接或权限，从而失去相应承载资格的过程。它可以在载体仍然存在、部分功能仍然运行时发生，因此判断重点不是载体是否消失，而是它现在还能承接什么。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "载体失效可以是局部、渐进或条件性的，不等于载体整体消失。",
+        "概念可用于身体、关系、组织、制度或人工载体，但具体领域仍需相应证据与专业判断。",
+        "不把一般载体失效模型直接转化为医学、心理或个人诊断。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S003",
+          "quote": "因此，载体失效并不是一个只发生在终点的事件。它更像一段逐\n渐失去承载资格的过程。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S003 登记 PDF 页序范围 9–12。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "83a38b772d00b38e1c8a3efd2cb52cad0340fe3ca6421a4d9adfb1ec6ed465dd",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S003",
+          "quote": "真正重要的问题\n不是载体有没有消失，而是它现在还能承接什么。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S003 登记 PDF 页序范围 9–12。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "83a38b772d00b38e1c8a3efd2cb52cad0340fe3ca6421a4d9adfb1ec6ed465dd",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "载体失效是逐渐失去承载资格的过程，而非只发生在终点。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "判断载体失效的重点是剩余承接能力，而非是否仍存在。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-105",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-105-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-105",
+      "title": "人工载体失效",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "人工载体失效是机器、代理或网络即使仍能执行或保持在线，其能源、硬件、软件、数据、接口、权限、依赖、维护或治理条件已经不足以让它正确、合法或安全承接原任务的状态。它因此不等同于简单的“机器坏了”。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "人工载体的可执行性与继续承载任务的资格是不同判断。",
+        "单一依赖变化或一次异常不足以自动证明人工载体已经失效，需要结合实际承载条件。",
+        "只适用于人工运行载体，不外推为个人或生物诊断。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S005",
+          "quote": "因此，人工失效不应该只被理解成“机器坏了”。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S005 登记 PDF 页序范围 14–17。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "5d1210e6d94cb2e9db9c0e4ca964b8d398e0263a9fe2cc672a5ecc7445dd03e2",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S005",
+          "quote": "人工载体的连续不能只用“还能不能运行”判断。还要问\n“还能不能正确、合法、安全地运行”。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S005 登记 PDF 页序范围 14–17。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "5d1210e6d94cb2e9db9c0e4ca964b8d398e0263a9fe2cc672a5ecc7445dd03e2",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "人工载体失效不能只按机器是否还能运行来判断。",
+          "evidenceQuoteIndexes": [
+            0,
+            1
+          ]
+        },
+        {
+          "claim": "继续承载人工运行还要求正确、合法与安全等条件。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P9-129",
+      "candidateId": "EXTRACT-SK-B3-B3-P9-129-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P9",
+      "nodeCode": "KN-B3-P9-129",
+      "title": "协调崩塌",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "协调崩塌是共同协调已经无法继续完成资源重新分配、共享现实形成、责任与权力关系维持或共同预期等基本功能的状态。它不要求所有局部活动同时停止；局部仍可继续行动，但形成和维持“共同”的能力已经消失。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "协调崩塌不同于单一流程、节点或成员失效，判断对象是共同协调功能。",
+        "局部活动仍然存在时也可能发生协调崩塌，因此不能只以活动是否继续判断。",
+        "不据此进行文明、组织或群体优劣判断。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P9-S029",
+          "quote": "协调崩塌并不是所有活动同时停止。它真正意味着，共同协调已经无\n法继续完成自己最基本的功能。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P9-S029 登记 PDF 页序范围 339–342。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "f8e40814b03ae4f946e6b8fbc88b0a4f78e33f463b7454a93d96d73fd1e70506",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P9-S029",
+          "quote": "真正消失的是“共同”。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P9-S029 登记 PDF 页序范围 339–342。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "f8e40814b03ae4f946e6b8fbc88b0a4f78e33f463b7454a93d96d73fd1e70506",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "协调崩塌指共同协调基本功能失效，而不是所有活动同时停止。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "协调崩塌的关键损失是形成和维持共同运行的能力。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-137",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-137-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-137",
+      "title": "负荷释放",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "负荷释放是让过去仍保持开放的运行通过完成、转移、整合或结束逐渐退出当前载体，使历史不再有必要继续占据现在的过程。它不是单纯压低不舒服的讯号，也不以快速“感觉好”作为定义。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "不同残余负荷可能需要不同的完成、转移或结束路径，不能从一般机制直接推出个人方法。",
+        "负荷释放不等于抹去历史、否认记忆或压制情绪。",
+        "只描述恢复模式，不构成个人治疗、健康或行为处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S037",
+          "quote": "因此，负荷释放并不是让所\n有不舒服的讯号尽快消失，而是让过去仍然保持开放的运行逐渐完成、转\n移、整合或结束。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S037 登记 PDF 页序范围 139–142。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "8f0177991b2360752037882dc34d704aed805f66dfdac739efc931d315571d18",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S037",
+          "quote": "它是让历史失去继续占据现在的必\n要。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S037 登记 PDF 页序范围 139–142。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "8f0177991b2360752037882dc34d704aed805f66dfdac739efc931d315571d18",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "负荷释放是让仍开放的过去运行逐渐完成、转移、整合或结束。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "释放的目标是使历史不再必须持续占据现在。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    },
+    {
+      "objectId": "SK-B3-B3-P8-138",
+      "candidateId": "EXTRACT-SK-B3-B3-P8-138-V1",
+      "bookCode": "BOOK-3",
+      "partCode": "P8",
+      "nodeCode": "KN-B3-P8-138",
+      "title": "重新整合",
+      "status": "SOURCE_SUPPORTED_CANDIDATE",
+      "definitionZh": "重新整合是让长期失稳后彼此分离的运行部分重新进入共同判断，并恢复相互连接与修正的过程。它不是消灭差异或把系统还原到旧状态，而是在保留变化之后重新形成能够共同承接现实的整体。",
+      "extractionMethod": "GROUNDED_PARAPHRASE",
+      "scopeAndLimits": [
+        "重新整合允许差异、冲突或不同节奏继续存在，重点是恢复共同判断与连接。",
+        "它不是恢复原样，也不能保证所有旧关系或功能都重新出现。",
+        "只描述运行恢复模式，不构成个人心理或治疗处方。"
+      ],
+      "evidenceQuotes": [
+        {
+          "sectionCode": "CM-B3V1-P8-S038",
+          "quote": "真正的整合不是消灭这些差异，而是让它们重新进入共同判断。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S038 登记 PDF 页序范围 142–146。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "0ecc1c000a1200de1968ef97da3bd0d14de5fd8d3d1f5d84b6dc38a1401884b2",
+          "hashVerified": false
+        },
+        {
+          "sectionCode": "CM-B3V1-P8-S038",
+          "quote": "因此，重新整合不是还原。它是一种更新。",
+          "sourceFile": "KAU-R6D-Book-III-Manuscript-Readability-Review.html",
+          "pdfPageIndex": null,
+          "printedPage": null,
+          "contextNote": "Book III 精确源 PDF 文本层生成的章节审查提取；section CM-B3V1-P8-S038 登记 PDF 页序范围 142–146。该嵌入章节文本未保留足以可靠定位每条引句的分页符，因此 pdfPageIndex 留 null；未在本批重算 PDF 文件或章节 SHA256。",
+          "expectedSectionTextSha256": "0ecc1c000a1200de1968ef97da3bd0d14de5fd8d3d1f5d84b6dc38a1401884b2",
+          "hashVerified": false
+        }
+      ],
+      "claimEvidenceMap": [
+        {
+          "claim": "重新整合的核心是让分离部分重新进入共同判断，而非消灭差异。",
+          "evidenceQuoteIndexes": [
+            0
+          ]
+        },
+        {
+          "claim": "重新整合是更新而不是还原旧状态。",
+          "evidenceQuoteIndexes": [
+            1
+          ]
+        }
+      ],
+      "missingEvidence": [],
+      "aiAssisted": true,
+      "canonicalAuthority": false,
+      "reviewState": "PENDING_HUMAN_REVIEW"
+    }
+  ],
+  "remainingObjectIds": [
+    "SK-B3-B3-P8-143",
+    "SK-B3-B3-P8-144",
+    "SK-B3-B3-P8-145",
+    "SK-B3-B3-P8-147",
+    "SK-B3-B3-P9-137",
+    "SK-B3-B3-P8-159",
+    "SK-B3-B3-P9-139",
+    "SK-B3-B3-P9-141"
+  ]
+}

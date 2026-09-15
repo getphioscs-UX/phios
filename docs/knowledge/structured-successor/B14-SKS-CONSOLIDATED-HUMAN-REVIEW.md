@@ -55,3 +55,5 @@ W71: run customer-acceptance/W71-BOOK1-READER-REVIEW.html with a first-time read
 W72: use customer-acceptance/W72-BOOK2-READER-REVIEW.html for the three actual-reader tasks. Record missing feedback honestly; do not substitute the 12 undelivered definition proposals or observer explanation for page content. Human acceptance remains deferred.
 
 W73–W77: Book III/IV reader packets prepared; four-book Read/Explore/Ask, structured-object/Atlas discovery and typed Ask return actions implemented. Human and deployed acceptance remain open. See B14-SKS-W73-W77.md and customer-acceptance/CUSTOMER-REVIEW-GUIDE.md.
+
+W78–W80: registry/runtime snapshots and a gated production freeze record prepared at ee07ca1. User explicitly clarified that understanding refers to pages and the review method, not approval of the 40 meanings. Four desktop manuscript texts and registered source evidence are now archived under functions/_source-material/. All 88 quotes reverified; AI comparison adds 8 evidence passages and proposes 2 wording revisions. No live meaning import, human approval or production freeze claimed. See B14-SKS-W78-W80.md.
