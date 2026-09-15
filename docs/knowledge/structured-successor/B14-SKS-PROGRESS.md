@@ -206,3 +206,6 @@ Three reader tasks cover interaction selection, feedback and relationship/collec
 W73–W77: Book III/IV reader packets prepared; four-book Read/Explore/Ask, structured-object/Atlas discovery and typed Ask return actions implemented. Human and deployed acceptance remain open. See B14-SKS-W73-W77.md and customer-acceptance/CUSTOMER-REVIEW-GUIDE.md.
 
 W78–W80: registry/runtime snapshots and a gated production freeze record prepared at ee07ca1. User explicitly clarified that understanding refers to pages and the review method, not approval of the 40 meanings. Four desktop manuscript texts and registered source evidence are now archived under functions/_source-material/. All 88 quotes reverified; AI comparison adds 8 evidence passages and proposes 2 wording revisions. No live meaning import, human approval or production freeze claimed. See B14-SKS-W78-W80.md.
+
+## M1–M4 review preparation
+Prepared 128 unified review decisions: four-book source mapping, 40 meaning candidates, 71 object field packets and cross-book dispositions. See M1-M4-REVIEW-PREPARATION.md and m1-m4-review-status-v1.json. Human review remains M8; 51 field slots and generic Book I Pressure/Threshold remain explicitly unestablished. No formal import or W80 activation.
