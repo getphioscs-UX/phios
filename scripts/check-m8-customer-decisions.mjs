@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-const c=JSON.parse(fs.readFileSync('docs/qa/customer-activation-r1/customer-review-contract-v1.json'));
+const c=JSON.parse(fs.readFileSync('docs/customer-activation-r1/customer-review-contract-v1.json'));
 function validate(d){
  assert.equal(d.sourceDigest,c.sourceDigest,'STALE_REVIEW');assert.equal(d.automaticWriteback,false);assert.ok(d.reviewer?.trim());
  assert.equal(d.decisions.length,c.items.length);assert.equal(new Set(d.decisions.map(x=>x.id)).size,c.items.length);

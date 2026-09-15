@@ -7,7 +7,7 @@
     "wranglerSha256": "fd7d7e06f14509bc13216f3999bb4e21efb2cdcdb6efd14f7724153b15808ae0"
   },
   "successor": {
-    "authorizedCommit": "3599c1af0818d5bbba10c8255983dab8e6c8d127",
+    "authorizedCommit": "5c149d93730c3e5306b2d0266d4d2df3dc43d66a",
     "authorizedLineage": [
       {
         "commit": "e69f22bc6a192ea02776abf05db78540c5556d4c",
@@ -18,17 +18,25 @@
         "commit": "3599c1af0818d5bbba10c8255983dab8e6c8d127",
         "change": "ADD_CLOUDFLARE_NODE_COMPATIBILITY_FLAG",
         "wranglerSha256": "fa9cbedec4530f24af6b104de8f6457ad5f86200c37c04489a09ebeb250c6669"
+      },
+      {
+        "commit": "5c149d93730c3e5306b2d0266d4d2df3dc43d66a",
+        "change": "ADD_QA_PREVIEW_COMMERCE_SANDBOX_CONFIGURATION",
+        "wranglerSha256": "fb6d7855170d050bca39abaf4850f890e26a99fbabf120baa7815257a4972c6e"
       }
     ],
-    "reason": "knowledge-runtime authorized the private manuscript R2 binding and the later Cloudflare Node compatibility gate without changing M3C-W3 entry presentation artifacts.",
-    "wranglerSha256": "fa9cbedec4530f24af6b104de8f6457ad5f86200c37c04489a09ebeb250c6669"
+    "reason": "knowledge-runtime authorized the private manuscript R2 binding, Cloudflare Node compatibility gate, and isolated QA preview commerce sandbox configuration without changing M3C-W3 entry presentation artifacts.",
+    "wranglerSha256": "fb6d7855170d050bca39abaf4850f890e26a99fbabf120baa7815257a4972c6e"
   },
   "allowedDelta": {
     "r2Binding": "MANUSCRIPTS",
     "bucketName": "phios-private-manuscripts",
     "compatibilityFlags": [
       "nodejs_compat"
-    ]
+    ],
+    "previewEnvironment": "qa",
+    "previewBookOneSourceKey": "books/book-one/PHI-OS-Book-I-v2",
+    "previewBookOneSalesEnabled": false
   },
   "preserved": {
     "m3cEntryArtifacts": true,

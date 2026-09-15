@@ -12,4 +12,4 @@ try{await Promise.all(Array.from({length:3},async()=>{let task;while(task=tasks.
  }catch(error){results.push({...task,status:'NOT_RUN',error:error.message});}finally{await page.close();}
  console.log('page sweep',results.length,'/50');
 }}));}finally{await browser.close();}
-fs.writeFileSync('docs/qa/customer-activation-r1/public-browser-coverage-v1.json',JSON.stringify({at:new Date().toISOString(),environment:'PRODUCTION',authentication:'GUEST',routeCount:routes.length,tested:results.length,sampling:'25 listed routes × 390/1440; dynamic article collection sampled at book3-article-008. No authenticated, payment or audible acceptance.',results},null,2)+'\n');
+fs.writeFileSync('docs/customer-activation-r1/public-browser-coverage-v1.json',JSON.stringify({at:new Date().toISOString(),environment:'PRODUCTION',authentication:'GUEST',routeCount:routes.length,tested:results.length,sampling:'25 listed routes × 390/1440; dynamic article collection sampled at book3-article-008. No authenticated, payment or audible acceptance.',results},null,2)+'\n');

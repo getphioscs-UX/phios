@@ -1,3 +1,4 @@
+import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -312,7 +313,7 @@ for (const shellFile of [
   const shell = await read(shellFile);
   assert(shell.includes('/assets/css/article-renderer.css'));
   assert(shell.includes('data-article-slug='));
-  assert(shell.includes('/assets/js/pages/article.js'));
+  assert(usesGovernedArticleEntry(shell));
   const mount = shell.match(
     /<main[^>]+data-article-slug="[^"]+"[^>]*>([\s\S]*?)<\/main>/
   );

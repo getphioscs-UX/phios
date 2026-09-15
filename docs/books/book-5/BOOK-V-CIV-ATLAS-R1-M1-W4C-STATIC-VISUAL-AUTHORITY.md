@@ -1,3 +1,5 @@
+> 当前实施版本：用户已将 CASE_SECONDARY 改为 64 REQUIRED。现行总量 380、43 批，详见 [W4C 当前完成记录](static-visual-authority/W4C-COMPLETION.md)。以下 436／48 数字保留为历史基线。
+
 # BOOK-V-CIV-ATLAS-R1-M1-W4C
 ## Civilization Static Visual Asset Authority
 

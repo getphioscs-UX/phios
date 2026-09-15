@@ -112,3 +112,5 @@ console.log(`  Prompt templates: ${templates.length}`);
 console.log(`  Batches: ${batches.length}`);
 console.log('  Second Case ID system: ZERO');
 console.log('  Image/OCR historical write authority: ZERO');
+
+await import('./check-civilization-static-visual-authority-v2.mjs');

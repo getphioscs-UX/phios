@@ -1,3 +1,4 @@
+import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import fs from 'node:fs/promises';
@@ -376,7 +377,7 @@ for (const shell of articleShells) {
     html,
     /<main id="article-main"[^>]+data-article-slug="[^"]+"[^>]*><\/main>/
   );
-  assert(html.includes('/assets/js/pages/article.js'));
+  assert(usesGovernedArticleEntry(html));
 }
 const vapW27Path = 'content/production/visual-article/release/website/VAP-W27-KN-PREFACE-001-ZH-HANS.json';
 const vapW27Executed = await exists(vapW27Path) && (await readJson(vapW27Path)).status === 'EXECUTED';

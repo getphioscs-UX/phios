@@ -25,5 +25,5 @@ try{
   await page.reload();await page.locator('[data-cx-knowledge-search-results] button').waitFor();assert.equal(await page.locator('[data-cx-knowledge-search-results] article').count(),0);evidence.tests.push({width,locale,query:'total failure retry',status:'PASS'});
   await page.close();
  }
-}catch(error){evidence.tests.push({status:'FAIL',error:error.message});process.exitCode=1;}finally{await browser.close();await server.close();fs.writeFileSync('docs/qa/customer-activation-r1/search-failure-browser-v1.json',JSON.stringify(evidence,null,2)+'\n');}
+}catch(error){evidence.tests.push({status:'FAIL',error:error.message});process.exitCode=1;}finally{await browser.close();await server.close();fs.writeFileSync('docs/customer-activation-r1/search-failure-browser-v1.json',JSON.stringify(evidence,null,2)+'\n');}
 console.log(JSON.stringify(evidence.tests));

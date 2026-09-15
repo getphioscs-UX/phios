@@ -37,5 +37,5 @@ try{
   const sourceHrefs=await page.locator('[data-cx-basis-groups] a').evaluateAll(xs=>xs.map(x=>x.getAttribute('href')));assert.ok(sourceHrefs.some(s=>s.includes('book3-article-008')));
   return {answer,sourceHrefs,entry:href,locale:await page.locator('html').getAttribute('lang')};
  });
-}finally{await browser.close();await local?.close();fs.writeFileSync(`docs/qa/customer-activation-r1/${local?'local':'production'}-browser-retest-v1.json`,JSON.stringify(evidence,null,2)+'\n');}
+}finally{await browser.close();await local?.close();fs.writeFileSync(`docs/customer-activation-r1/${local?'local':'production'}-browser-retest-v1.json`,JSON.stringify(evidence,null,2)+'\n');}
 if(evidence.tests.some(t=>t.status==='FAIL'))process.exitCode=1;

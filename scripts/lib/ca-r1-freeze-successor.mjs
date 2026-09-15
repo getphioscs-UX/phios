@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-export const successorPath='docs/qa/customer-activation-r1/structured-freeze-successor-v1.json';
+export const successorPath='docs/customer-activation-r1/structured-freeze-successor-v1.json';
 export const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 export function assertFreezeSuccessor(current){
  if(!fs.existsSync(successorPath)){for(const [p,data] of Object.entries(current))assert.deepEqual(JSON.parse(fs.readFileSync(p)),data,'FREEZE_DRIFT:'+p);return;}

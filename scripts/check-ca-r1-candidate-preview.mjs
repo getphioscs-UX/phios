@@ -13,5 +13,5 @@ try{const page=await browser.newPage();await page.route('**/*',r=>new URL(r.requ
   await page.setViewportSize({width,height:900});
   for(const id of ids){await page.goto(`${server.origin}/books/${route}/?locale=zh-Hans&${param}=${id}`);await page.waitForSelector('[data-ca-candidate-fields]');const text=await page.locator('[data-detail]').innerText();const candidate=packet.meaning.find(m=>m.objectId===id)?.finalCandidate||packet.fieldCandidates.find(f=>f.objectId===id)?.definition?.proposedValue;assert.ok(text.includes(candidate));assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.ok(await page.locator('[data-detail] a[href*="/knowledge/ask/"]').count());evidence.tests.push({width,book,id,status:'PASS',scope:'candidate text, source disclosure, Ask link presence, no overflow; no semantic approval'});}
  }
-}finally{await browser.close();await server.close();fs.writeFileSync('docs/qa/customer-activation-r1/candidate-preview-evidence-v1.json',JSON.stringify(evidence,null,2)+'\n');}
+}finally{await browser.close();await server.close();fs.writeFileSync('docs/customer-activation-r1/candidate-preview-evidence-v1.json',JSON.stringify(evidence,null,2)+'\n');}
 console.log('✓ 16 Book III/IV existing-explorer candidate previews; live registry unchanged.');

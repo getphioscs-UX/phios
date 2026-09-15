@@ -4,7 +4,7 @@ import {publicationRoutes,sitemapXml} from './lib/customer-publication-sitemap.m
 const xml=fs.readFileSync('sitemap.xml','utf8');
 const expected=publicationRoutes().map(p=>'https://getphios.com'+p),actual=[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
 const report={scope:'LOCAL_PUBLICATION_AUTHORITY',publishedCanonicalUrls:expected,sitemapUrls:actual,missingFromSitemap:expected.filter(x=>!actual.includes(x)),unexpectedInSitemap:actual.filter(x=>!expected.includes(x)),duplicateCanonical:actual.filter((x,i)=>actual.indexOf(x)!==i),nonCanonicalHost:actual.filter(x=>new URL(x).origin!=='https://getphios.com'),privateOrRetiredRoute:actual.filter(x=>/\/account|checkout|token=|\/tools\/|\/review\/|\/library$|\/academy$|reality-journey/.test(x)),externalIndexVerified:false};
-fs.writeFileSync('docs/qa/customer-activation-r1/sitemap-diff.json',JSON.stringify(report,null,2)+'\n');
+fs.writeFileSync('docs/customer-activation-r1/sitemap-diff.json',JSON.stringify(report,null,2)+'\n');
 for(const key of ['missingFromSitemap','unexpectedInSitemap','duplicateCanonical','nonCanonicalHost','privateOrRetiredRoute'])assert.deepEqual(report[key],[],key);
 assert.equal(xml,sitemapXml());
 console.log(`PASS: ${actual.length} canonical public URLs; no missing published articles, duplicates, private routes or unexplained differences. External indexing remains unverified.`);

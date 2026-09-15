@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-const dir='docs/qa/customer-activation-r1/civilization-visuals/';
+const dir='docs/books/book-5/static-visual-authority/';
+if(fs.existsSync('content/civilization-atlas/visuals/civilization-visual-production-plan-v2.json')){console.log('SUPERSEDED: use reconciliation-v2.json and the 64 REQUIRED plan; do not regenerate the cancelled 120-secondary review.');process.exit(0);}
 const read=p=>JSON.parse(fs.readFileSync(p));
 const hash=b=>createHash('sha256').update(b).digest('hex');
 function csv(text){let rows=[],row=[],v='',q=false;for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'){if(q&&text[i+1]==='"'){v+='"';i++;}else q=!q;}else if(!q&&(c===','||c==='\n')){row.push(v.replace(/\r$/,''));v='';if(c==='\n'){rows.push(row);row=[];}}else v+=c;}if(v||row.length){row.push(v);rows.push(row);}const header=rows.shift().map(x=>x.replace(/^\uFEFF/,''));return rows.filter(r=>r.length>1).map(r=>Object.fromEntries(header.map((k,i)=>[k,r[i]])));}
@@ -10,7 +11,7 @@ const supplied=csv(source.toString('utf8'));
 const production=[...supplied];
 const registry=read('content/civilization-atlas/visuals/civilization-visual-asset-registry-v1.json');
 const batches=read('content/civilization-atlas/visuals/civilization-visual-batch-manifest-v1.json');
-const inventory=read('docs/qa/customer-activation-r1/r2-public-image-usage-v1.json');
+const inventory=read('docs/assets/r2-public/r2-public-image-usage-v1.json');
 assert.equal(new Set(supplied.map(r=>r.assetId)).size,supplied.length);
 const restored=registry.assets.filter(a=>!supplied.some(r=>r.assetId===a.assetId));
 for(const a of restored){const b=batches.batches.find(b=>b.assetIds.includes(a.assetId));production.push({assetId:a.assetId,filename:a.assetId+'.webp',family:a.family,subjectId:a.subjectId,subjectTitle:a.subjectTitle['zh-Hans'],aspectRatio:a.aspectRatio,batchId:b.batchId,simpleCommand:'继续 '+b.batchId+' '+a.family+'，按原 Registry 与 prompt canon 制作',origin:'RESTORED_FROM_CANONICAL_REGISTRY'});}

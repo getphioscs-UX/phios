@@ -1,3 +1,4 @@
+import {usesGovernedArticleEntry} from './lib/article-shell-entry-contract.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -309,7 +310,7 @@ for (const historicalPage of requiredPages) {
 for (const page of evidence.publicInformationArchitecture.articlePages) {
   const html = await read(page);
   assert(html.includes('data-article-slug='));
-  assert(html.includes('/assets/js/pages/article.js'));
+  assert(usesGovernedArticleEntry(html));
   assert(html.includes('/assets/css/knowledge-release.css'));
 }
 const expW2 = await readJson('docs/experience/EXP-W2-home-discover-about-contract.json');

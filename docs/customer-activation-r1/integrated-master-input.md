@@ -366,7 +366,7 @@ NOT_RUN
 ## Required output
 
 ```text
-docs/qa/customer-activation-r1/
+docs/customer-activation-r1/
   browser-baseline-2026-09-15.md
   baseline-environment-v1.json
 ```
@@ -445,7 +445,7 @@ PHIOS-QA-014 OPEN
 ## Output
 
 ```text
-data/qa/customer-activation-r1/
+data/customer-activation-r1/
   issue-registry-v1.json
 ```
 
