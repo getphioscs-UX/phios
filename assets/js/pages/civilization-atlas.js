@@ -1,3 +1,4 @@
+import {renderAtlasStaticVisuals} from './civilization-atlas/atlas-static-visual.js';
 import {getLocale,onLocaleChange} from '../i18n.js';
 import {createCivilizationAtlasState} from './civilization-atlas/atlas-state.js';
 import {bindAtlasUrlState} from './civilization-atlas/atlas-url-state.js';
@@ -9,11 +10,12 @@ if(root){
   const store=createCivilizationAtlasState({locale:getLocale()});
   const unbindUrl=bindAtlasUrlState(store,{locale:getLocale()});
   const data={timeline:null,cases:null,comparison:null,world:null,trajectories:null,transitions:null,loss:null};
-  const render=()=>renderAtlasShell(root,store.get(),{
+  const render=()=>{renderAtlasShell(root,store.get(),{
     locale:getLocale(),data,
     onLayerChange:activeLayer=>store.set(reconcileAtlasContextForLayer(activeLayer,store.get(),data),{source:'layer-nav'}),
     onStateChange:(patch,meta)=>store.set(patch,meta)
   });
+  renderAtlasStaticVisuals(root,{bindings:data.staticVisuals,state:store.get(),locale:getLocale()});};
   const unsubscribe=store.subscribe(render);
   const unbindLocale=onLocaleChange(()=>store.set({locale:getLocale()},{source:'locale'}));
   render();
@@ -31,5 +33,6 @@ if(root){
     const target=root.querySelector('[data-atlas-layer-content]');
     if(target) target.innerHTML=`<p role="alert">${getLocale()==='zh-Hans'?'文明图谱资料暂时无法载入。':'Civilization Atlas data could not be loaded.'}</p>`;
   });
+  fetch('/content/civilization-atlas/visuals/civilization-visual-approved-bindings-v1.json').then(r=>{if(!r.ok)throw new Error('STATIC_VISUAL_BINDINGS_UNAVAILABLE');return r.json();}).then(bindings=>{data.staticVisuals=bindings;render();}).catch(()=>{/* Optional imagery: structured Atlas remains available. */});
   window.addEventListener('pagehide',()=>{unsubscribe();unbindUrl();unbindLocale();},{once:true});
 }
