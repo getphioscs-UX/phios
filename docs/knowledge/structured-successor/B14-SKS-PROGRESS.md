@@ -194,3 +194,7 @@ The required check:b14-sks:cross-book command now composes existing source, dedu
 ## W70 Ask checker
 
 All six mandated questions have bilingual coverage: two missing-object cases, six missing-live-meaning cases, four bounded-source cases. Fixed a Book IV expansion relevance gap for structural costs and scale shifts, with negative scope tests. Existing 14 bilingual KAP cases still pass. This does not claim full answers for all six questions; see B14-SKS-W70-ASK.md. Next W71; human review remains deferred.
+
+## W71 Book I acceptance preparation
+
+Five-minute first-time reader test packet, offline timed observation form and draft-only exporter are ready. Eight invalid draft cases and mobile browser timer/export/layout checks passed. No reader acceptance was performed; source entry and actual Ask continuation must be observed. See customer-acceptance/W71-BOOK1-ACCEPTANCE.md. Next W72 preparation; W71 human gate remains open.

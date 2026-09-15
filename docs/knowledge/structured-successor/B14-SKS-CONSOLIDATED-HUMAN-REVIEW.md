@@ -49,3 +49,5 @@ W68: all four per-book checks passed against the current registries. This does n
 W69: cross-book machine consistency passed. Two suggested readings, five dedup/conflict clues and the 40 source-verified meaning proposals remain pending consolidated semantic review. No Atlas authority or registry definition was changed.
 
 W70: review the six-question campaign after meaning import. Three question families still lack live Book II/III definitions, and Book I Pressure is not registered. Book IV uses bounded article-summary evidence. Machine coverage does not grant customer or human acceptance.
+
+W71: run customer-acceptance/W71-BOOK1-READER-REVIEW.html with a first-time reader on the actual deployment, recording all five tasks within five minutes. Do not substitute machine checks for understanding, source access or actual Ask results. Test exports remain drafts.
